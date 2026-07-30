@@ -18,6 +18,11 @@
     "mobile_desktop_authority": "same_fields",
     "current_runtime_consumes_candidate_package": false
   },
+  "synthetic_slot_values": {
+    "source": "package-frozen private-safe non-user fixture",
+    "type_code": "INTJ-A",
+    "identity_variant": "Assertive"
+  },
   "runtime_payload_contract": {
     "payload_root": "mbti_pdf_payload",
     "builder_emitted_fields": ["type","axis_scores","highlights","sections","result_page_sections","document","recommended_reads"],
@@ -29,6 +34,7 @@
     "implementation_scope": "independent W9 fixture harness only",
     "runtime_or_cms_activation_allowed": false,
     "must_read_exact_frozen_package": true,
+    "must_use_exact_synthetic_slot_values": true,
     "must_project_candidate_assets": true,
     "must_project_preserved_controls_without_reauthoring": true,
     "must_preserve_sections_and_premium_teaser_buckets": true,

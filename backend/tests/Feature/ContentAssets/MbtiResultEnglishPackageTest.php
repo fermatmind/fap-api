@@ -14,7 +14,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
 
     private const INVENTORY_SHA = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
-    private const PACKAGE_SHA = '79f9d9f575f7c9fa54552276923cfac96e96981aab9ef7b30b3204fbe8ec27b2';
+    private const PACKAGE_SHA = '0f850c2d1f2fb9ea17076b48d13bfa16faa0d3471362811b9da70626d77434c4';
 
     private const EXPECTED_CANDIDATE_ROW_IDS = [
         'W1-RESULT-CORE-05-OFFER-CTA',
@@ -190,7 +190,15 @@ final class MbtiResultEnglishPackageTest extends TestCase
     public function it_provides_distinct_english_assets_for_all_21_content_targets(): void
     {
         $package = $this->readPackageJson('assets.json');
+        $pdfFixtureMapping = $this->readPackageJson('pdf_reader_fixture_mapping.json');
         $assets = $package['assets'];
+        $fixtureSlots = $pdfFixtureMapping['synthetic_slot_values'];
+        self::assertSame('package-frozen private-safe non-user fixture', $fixtureSlots['source']);
+        unset($fixtureSlots['source']);
+        self::assertSame([
+            'type_code' => 'INTJ-A',
+            'identity_variant' => 'Assertive',
+        ], $fixtureSlots);
 
         self::assertSame(21, $package['asset_count']);
         self::assertCount(21, $assets);
@@ -272,10 +280,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
                 self::assertContains($slot, $package['template_contract']['allowed_slots']);
             }
 
-            $renderedContent = $this->renderTemplateValue($asset['content'], [
-                'type_code' => 'INTJ-A',
-                'identity_variant' => 'Assertive',
-            ]);
+            $renderedContent = $this->renderTemplateValue($asset['content'], $fixtureSlots);
             self::assertIsArray($renderedContent);
             self::assertStringNotContainsString(
                 '{{',
@@ -507,7 +512,13 @@ final class MbtiResultEnglishPackageTest extends TestCase
             'exact_package_to_mbti_pdf_fixture_v1',
             $mapping['required_w9_adapter_contract']['adapter_id'],
         );
+        self::assertSame([
+            'source' => 'package-frozen private-safe non-user fixture',
+            'type_code' => 'INTJ-A',
+            'identity_variant' => 'Assertive',
+        ], $mapping['synthetic_slot_values']);
         self::assertTrue($mapping['required_w9_adapter_contract']['must_read_exact_frozen_package']);
+        self::assertTrue($mapping['required_w9_adapter_contract']['must_use_exact_synthetic_slot_values']);
         self::assertTrue(
             $mapping['required_w9_adapter_contract']['must_project_protected_premium_content_only_under_synthetic_entitled_state'],
         );
