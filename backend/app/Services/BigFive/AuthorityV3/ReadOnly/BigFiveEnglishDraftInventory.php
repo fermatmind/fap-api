@@ -642,7 +642,7 @@ final class BigFiveEnglishDraftInventory
         $newer = $working !== null && $published !== null
             && (int) $working->revision_no > (int) $published->revision_no;
         $independentWorkingCandidate = $working !== null
-            && ($published === null || (! $pointerEqual && $newer));
+            && ($published === null || ! $pointerEqual);
         $payload = json_encode($workingSnapshot ?? [], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
         $cjk = $this->containsCjk($payload);
         $private = $this->containsProhibitedPrivateField($workingSnapshot);

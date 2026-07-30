@@ -722,6 +722,37 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertFalse($result['ok']);
     }
 
+    public function test_distinct_stale_working_pointer_still_requires_candidate_validation(): void
+    {
+        $asset = $this->createAsset();
+        $published = $this->createRevision(
+            $asset,
+            2,
+            BigFiveEn52PackageCompiler::RELEASE_ID,
+            $this->completeSnapshot('Published'),
+        );
+        $working = $this->createRevision($asset, 1, 'working-one', [
+            ...$this->completeSnapshot('Working'),
+            'locale' => 'zh-CN',
+            'content_sections_json' => [],
+        ]);
+        $working->forceFill(['workflow_state' => 'pending_manual_review'])->saveQuietly();
+        $asset->forceFill([
+            'working_revision_id' => $working->id,
+            'published_revision_id' => $published->id,
+        ])->saveQuietly();
+
+        $result = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $row = collect($result['rows'])->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertFalse($row['draft_newer_than_published']);
+        $this->assertFalse($row['candidate_workflow_draft']);
+        $this->assertFalse($row['candidate_identity_matches']);
+        $this->assertFalse($row['sections_complete']);
+        $this->assertSame('translation_identity_mismatch', $row['recommended_disposition']);
+        $this->assertFalse($result['ok']);
+    }
+
     public function test_candidate_title_and_summary_must_be_non_empty_strings(): void
     {
         $asset = $this->createAsset();
