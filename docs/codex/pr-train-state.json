@@ -101263,8 +101263,8 @@
     "depends_on": [
       "EN-PARITY-W1-MBTI-INVENTORY-01"
     ],
-    "status": "github_checks_pending",
-    "commit_sha": "d2b9931dc509c900cbef5eef3fdcb586ed0faedc",
+    "status": "review_fix_local_verified",
+    "commit_sha": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3424",
     "checks": {
       "authorization": {
@@ -101281,11 +101281,11 @@
       },
       "package_contract": {
         "status": "passed",
-        "evidence": "The corrected candidate contains exactly the seven inventory slugs and row identities, binds six committed zh-CN source snapshot hashes plus the ISTJ/ISFJ backend revision hash, preserves body/group/nested-item/item cardinality across all seven assets, adds deterministic body/rows-compatible public projection rows, includes the required translation map and producer claim/editorial reports, and freezes replacement package SHA 2a745c06ca32e491f8e9ed20b0d9994b98d12c54a50fa1bc160969de12922029."
+        "evidence": "The corrected candidate contains exactly the seven inventory slugs and row identities, binds six committed zh-CN source snapshot hashes plus the ISTJ/ISFJ backend revision hash, preserves structure, adds public projection rows, discloses the INTJ/INTP source-evidence limitations, includes the required translation map and producer reports, and freezes replacement package SHA 2e2beb694b62ddff56b128b2b4a443fb5797b76bd5df160f8946b55a3368931a."
       },
       "focused_test": {
         "status": "passed",
-        "evidence": "After all review repairs, php artisan test --filter=MbtiComparisonEnglishPackageTest passed 6 tests and 1088 assertions, including source-shape comparison for all seven rows and exact nested-content-to-runtime-row projection."
+        "evidence": "After all review repairs, php artisan test --filter=MbtiComparisonEnglishPackageTest passed 6 tests and 1098 assertions, including exact INTJ/INTP evidence-limitation disclosure."
       },
       "focused_lint": {
         "status": "passed",
@@ -101312,12 +101312,12 @@
         "evidence": "PR #3424 head 37dcc8dcc4900f973d03c1985bc6bfcee316b27a passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. verify-staging-parity was policy-skipped and is not a deploy wait."
       },
       "final_head_checks": {
-        "status": "pending",
-        "evidence": "Third review-fix implementation head d2b9931dc509c900cbef5eef3fdcb586ed0faedc is pushed; required GitHub checks and refreshed exact-head review are pending."
+        "status": "superseded_by_fourth_review_fix",
+        "evidence": "Head f5dbc1c190275b09e0f3e9dc056db9d240e87859 passed every applicable GitHub check, but refreshed exact-head review found a missing source-evidence caveat. The corrected head must repeat required checks."
       },
       "codex_review": {
-        "status": "third_round_resolved_pushed_pending_rereview",
-        "evidence": "The refreshed review correctly found that public v1 reads only body/rows. Commit d2b9931dc509c900cbef5eef3fdcb586ed0faedc retains groups/items for source-structure evidence, adds exact deterministic rows containing every nested item, and records the resolution on the review thread."
+        "status": "fourth_round_resolved_locally_pending_rereview",
+        "evidence": "The refreshed review correctly found that the bound INTJ/INTP source notes disclose incomplete base-type source material and no dedicated competitor comparison page. Sanitized limitations now travel with the asset and producer editorial row, whose source-bound status and W9 disposition explicitly retain the caveat."
       }
     },
     "failure_reason": null,
@@ -101392,8 +101392,13 @@
         "at": "2026-07-30T17:24:15Z",
         "status": "github_checks_pending",
         "note": "Pushed third review-fix implementation commit d2b9931dc509c900cbef5eef3fdcb586ed0faedc and replied on the exact review thread. Fresh required checks and refreshed exact-head review are pending."
+      },
+      {
+        "at": "2026-07-30T17:33:30Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact head f5dbc1c190275b09e0f3e9dc056db9d240e87859 passed all applicable checks, then refreshed Codex review found the INTJ/INTP source-evidence limitation was not carried into the frozen package. Added sanitized asset and editorial caveats, set source_bound to pass_with_disclosed_limitations, and froze package SHA 2e2beb694b62ddff56b128b2b4a443fb5797b76bd5df160f8946b55a3368931a. Focused validation passes 6 tests/1098 assertions and Pint."
       }
     ],
-    "updated_at": "2026-07-30T17:24:15Z"
+    "updated_at": "2026-07-30T17:33:30Z"
   }
 }

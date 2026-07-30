@@ -80,7 +80,7 @@
       "target_stable_asset_identity": "mbti_cross_type_comparison_authorities:org0:en:intj-vs-intp",
       "checks": {
         "exact_inventory_identity": "pass",
-        "source_bound": "pass",
+        "source_bound": "pass_with_disclosed_limitations",
         "source_structure_preserved": "pass",
         "english_reader_copy_present": "pass",
         "chinese_leakage_scan": "pass",
@@ -88,7 +88,11 @@
         "private_field_scan": "pass",
         "publication_state_held": "pass"
       },
-      "disposition": "ready_for_independent_w9"
+      "evidence_limitations": [
+        "Complete FermatMind INTJ and INTP base-type page source material was unavailable for the bound source revision.",
+        "No dedicated competitor INTJ-versus-INTP comparison page was available; structure references did not supply copied wording."
+      ],
+      "disposition": "ready_for_independent_w9_with_disclosed_evidence_limitations"
     },
     {
       "row_id": "W1-COMP-06-ISFP-VS-INFP",

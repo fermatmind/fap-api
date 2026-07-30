@@ -81,7 +81,7 @@ final class MbtiComparisonEnglishPackageTest extends TestCase
         }
 
         self::assertSame($manifest['package_sha256'], hash('sha256', $packageHashInput));
-        self::assertSame('2a745c06ca32e491f8e9ed20b0d9994b98d12c54a50fa1bc160969de12922029', $manifest['package_sha256']);
+        self::assertSame('2e2beb694b62ddff56b128b2b4a443fb5797b76bd5df160f8946b55a3368931a', $manifest['package_sha256']);
     }
 
     #[Test]
@@ -291,9 +291,29 @@ final class MbtiComparisonEnglishPackageTest extends TestCase
             self::assertNotContains('fail', array_values($row['checks']));
         }
         foreach ($editorialReview['rows'] as $row) {
-            self::assertSame('ready_for_independent_w9', $row['disposition']);
             self::assertNotContains('fail', array_values($row['checks']));
+
+            if ($row['slug'] === 'intj-vs-intp') {
+                self::assertSame('pass_with_disclosed_limitations', $row['checks']['source_bound']);
+                self::assertSame(
+                    'ready_for_independent_w9_with_disclosed_evidence_limitations',
+                    $row['disposition'],
+                );
+                self::assertCount(2, $row['evidence_limitations']);
+
+                continue;
+            }
+
+            self::assertSame('pass', $row['checks']['source_bound']);
+            self::assertSame('ready_for_independent_w9', $row['disposition']);
         }
+
+        $intjVsIntp = array_values(array_filter(
+            $package['assets'],
+            static fn (array $asset): bool => $asset['payload']['comparison_slug'] === 'intj-vs-intp',
+        ));
+        self::assertCount(1, $intjVsIntp);
+        self::assertCount(3, $intjVsIntp[0]['source']['evidence_limitations']);
     }
 
     #[Test]
