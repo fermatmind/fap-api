@@ -23,6 +23,30 @@
     "type_code": "INTJ-A",
     "identity_variant": "Assertive"
   },
+  "card_shape_adapter": {
+    "adapter_id": "canonical_section_to_pdf_group_card_v1",
+    "grouping": {
+      "group_key_from": "first segment of asset.section_key",
+      "group_order": ["traits","career","growth","relationships"],
+      "group_titles": {
+        "traits": "Type and preference patterns",
+        "career": "Work and career reflection",
+        "growth": "Growth and recovery",
+        "relationships": "Communication and relationships"
+      },
+      "card_order": "frozen inventory row order"
+    },
+    "card_projection": {
+      "title_from": "rendered content.title",
+      "description_from": "rendered content.summary_template",
+      "bullets_from": "rendered content.body_template",
+      "tips_from": "rendered content.reflection_prompts",
+      "tags": []
+    },
+    "premium_source": "result_only_authority.premium_full under synthetic entitled state",
+    "reader_text_fields": ["section.title","cards[].title","cards[].description","cards[].bullets[]","cards[].tips[]"],
+    "fail_if_description_bullets_or_tips_are_empty": true
+  },
   "runtime_payload_contract": {
     "payload_root": "mbti_pdf_payload",
     "builder_emitted_fields": ["type","axis_scores","highlights","sections","result_page_sections","document","recommended_reads"],
@@ -64,6 +88,7 @@
     "the non-PDF offer CTA candidate is reviewed separately on the locked-upsell result-page surface through commercial_spec to offer_set.cta",
     "premium teaser assets remain in the premium_teaser bucket before PDF projection",
     "protected premium body and prompts project from result_only_authority.premium_full only under the synthetic entitled state",
+    "all candidate summary, body paragraphs, and reflection prompts reach the frozen PDF card description, bullets, and tips fields",
     "a legacy-only PDF render fails the exact-package coverage assertion",
     "locked or premium body is absent without the synthetic entitled state",
     "no private fixture value is serialized into a package or QA artifact",

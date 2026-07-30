@@ -14,7 +14,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
 
     private const INVENTORY_SHA = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
-    private const PACKAGE_SHA = '0f850c2d1f2fb9ea17076b48d13bfa16faa0d3471362811b9da70626d77434c4';
+    private const PACKAGE_SHA = '62dc298b4c1dc8e3b66b2fa4d7ae257c023ff193ff270e6489caccf492b9f886';
 
     private const EXPECTED_CANDIDATE_ROW_IDS = [
         'W1-RESULT-CORE-05-OFFER-CTA',
@@ -517,6 +517,22 @@ final class MbtiResultEnglishPackageTest extends TestCase
             'type_code' => 'INTJ-A',
             'identity_variant' => 'Assertive',
         ], $mapping['synthetic_slot_values']);
+        self::assertSame(
+            'canonical_section_to_pdf_group_card_v1',
+            $mapping['card_shape_adapter']['adapter_id'],
+        );
+        self::assertSame(
+            ['traits', 'career', 'growth', 'relationships'],
+            $mapping['card_shape_adapter']['grouping']['group_order'],
+        );
+        self::assertSame([
+            'title_from' => 'rendered content.title',
+            'description_from' => 'rendered content.summary_template',
+            'bullets_from' => 'rendered content.body_template',
+            'tips_from' => 'rendered content.reflection_prompts',
+            'tags' => [],
+        ], $mapping['card_shape_adapter']['card_projection']);
+        self::assertTrue($mapping['card_shape_adapter']['fail_if_description_bullets_or_tips_are_empty']);
         self::assertTrue($mapping['required_w9_adapter_contract']['must_read_exact_frozen_package']);
         self::assertTrue($mapping['required_w9_adapter_contract']['must_use_exact_synthetic_slot_values']);
         self::assertTrue(
@@ -543,7 +559,56 @@ final class MbtiResultEnglishPackageTest extends TestCase
             'consumer_field' => 'offer_set.cta',
             'must_be_reviewed_separately_from_pdf' => true,
         ]], $mapping['non_pdf_candidate_coverage']);
-        self::assertCount(11, $mapping['w9_assertions']);
+        self::assertCount(12, $mapping['w9_assertions']);
+
+        $assets = $this->readPackageJson('assets.json')['assets'];
+        $fixtureSlots = $mapping['synthetic_slot_values'];
+        unset($fixtureSlots['source']);
+        $pdfGroups = [];
+        $expectedReaderText = [];
+        foreach ($assets as $asset) {
+            if ($asset['asset_kind'] !== 'canonical_section_family') {
+                continue;
+            }
+
+            $rendered = $this->renderTemplateValue($asset['content'], $fixtureSlots);
+            self::assertIsArray($rendered);
+            $groupKey = explode('.', $asset['section_key'], 2)[0];
+            $pdfGroups[$groupKey] ??= [
+                'title' => $mapping['card_shape_adapter']['grouping']['group_titles'][$groupKey],
+                'cards' => [],
+            ];
+            $card = [
+                'title' => $rendered['title'],
+                'description' => $rendered['summary_template'],
+                'bullets' => $rendered['body_template'],
+                'tips' => $rendered['reflection_prompts'],
+                'tags' => [],
+            ];
+            self::assertNotSame('', trim($card['description']));
+            self::assertNotEmpty($card['bullets']);
+            self::assertNotEmpty($card['tips']);
+            $pdfGroups[$groupKey]['cards'][] = $card;
+            $expectedReaderText = [
+                ...$expectedReaderText,
+                $card['title'],
+                $card['description'],
+                ...$card['bullets'],
+                ...$card['tips'],
+            ];
+        }
+        self::assertSame(
+            ['traits', 'career', 'growth', 'relationships'],
+            array_keys($pdfGroups),
+        );
+        self::assertCount(20, array_merge(...array_column($pdfGroups, 'cards')));
+        $readerText = json_encode(
+            $pdfGroups,
+            JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+        );
+        foreach ($expectedReaderText as $expectedText) {
+            self::assertStringContainsString($expectedText, $readerText);
+        }
 
         self::assertCount(13, $mapping['excluded_fixture_fields']);
         foreach ($mapping['excluded_fixture_fields'] as $excludedField) {
