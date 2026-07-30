@@ -88,7 +88,7 @@ final class ArticlePublishService
             return $article->fresh() ?? $article;
         });
 
-        $this->seoDiscoverabilityCacheInvalidator->flushArticleDiscoverabilityCaches();
+        $this->seoDiscoverabilityCacheInvalidator->flushArticleDiscoverabilityCaches(false);
 
         return $article;
     }

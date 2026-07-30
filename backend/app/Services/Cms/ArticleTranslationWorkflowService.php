@@ -12,6 +12,7 @@ use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Models\EditorialReview;
 use App\Services\Audit\AuditLogger;
+use App\Services\SEO\SeoDiscoverabilityCacheInvalidator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -30,6 +31,7 @@ final class ArticleTranslationWorkflowService
         private readonly ArticleBodyHeadingGuard $articleBodyHeadingGuard,
         private readonly AuditLogger $auditLogger,
         private readonly CmsEditorialReviewAttestationService $reviewAttestations,
+        private readonly SeoDiscoverabilityCacheInvalidator $seoDiscoverabilityCacheInvalidator,
     ) {}
 
     public function canGenerateMachineDraft(): bool
@@ -410,7 +412,7 @@ final class ArticleTranslationWorkflowService
 
     public function publishTranslation(Article $target, string $source = 'translation_ops_console'): ArticleTranslationRevision
     {
-        return DB::transaction(function () use ($target, $source): ArticleTranslationRevision {
+        $revision = DB::transaction(function () use ($target, $source): ArticleTranslationRevision {
             $locked = $this->lockTarget($target);
             $revision = $this->workingRevisionOrFail($locked);
             $preflight = $this->preflight($locked);
@@ -451,6 +453,10 @@ final class ArticleTranslationWorkflowService
 
             return $revision->refresh();
         });
+
+        $this->seoDiscoverabilityCacheInvalidator->flushArticleDiscoverabilityCaches();
+
+        return $revision;
     }
 
     private function assertProviderConfigured(): void

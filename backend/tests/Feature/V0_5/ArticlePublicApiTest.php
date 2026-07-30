@@ -5,13 +5,17 @@ declare(strict_types=1);
 namespace Tests\Feature\V0_5;
 
 use App\Models\Article;
+use App\Models\ArticleCategory;
 use App\Models\ArticleSeoMeta;
+use App\Models\ArticleTag;
+use App\Models\ArticleTestEdge;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\SEO\SitemapGenerator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 final class ArticlePublicApiTest extends TestCase
@@ -147,6 +151,98 @@ final class ArticlePublicApiTest extends TestCase
         $this->assertNotSame('', trim((string) $response->json('items.0.excerpt')));
         $this->assertLessThanOrEqual(241, mb_strlen((string) $response->json('items.0.excerpt')));
         $this->assertLessThan(75 * 1024, strlen((string) $response->getContent()));
+    }
+
+    public function test_list_cold_path_has_four_bounded_queries_and_cache_hit_has_zero_queries(): void
+    {
+        $category = ArticleCategory::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'slug' => 'cache-category',
+            'name' => 'Cache Category',
+            'is_active' => true,
+        ]);
+        $tag = ArticleTag::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'slug' => 'cache-tag',
+            'name' => 'Cache Tag',
+            'is_active' => true,
+        ]);
+        $article = $this->createArticle([
+            'slug' => 'cache-query-budget',
+            'category_id' => (int) $category->id,
+        ]);
+        $article->tags()->attach((int) $tag->id, [
+            'org_id' => 0,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        ArticleTestEdge::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'article_id' => (int) $article->id,
+            'locale' => 'en',
+            'test_slug' => 'mbti-personality-test-16-personality-types',
+            'role' => ArticleTestEdge::ROLE_PRIMARY,
+            'sort_order' => 10,
+            'safety_level' => ArticleTestEdge::SAFETY_NORMAL,
+            'visibility' => ArticleTestEdge::VISIBILITY_PUBLIC,
+            'source' => 'test',
+        ]);
+
+        Cache::flush();
+        DB::enableQueryLog();
+        DB::flushQueryLog();
+
+        $first = $this->getJson('/api/v0.5/articles?locale=en&page=1&per_page=6&org_id=0');
+        $firstQueries = DB::getQueryLog();
+
+        $first->assertOk()
+            ->assertHeader('X-FM-Article-List-Cache', 'miss')
+            ->assertJsonPath('items.0.category.name', 'Cache Category')
+            ->assertJsonPath('items.0.tags.0.name', 'Cache Tag')
+            ->assertJsonPath('items.0.test_edges.0.test_slug', 'mbti-personality-test-16-personality-types');
+        $this->assertCount(4, $firstQueries);
+
+        DB::flushQueryLog();
+        $this->getJson('/api/v0.5/articles?locale=en&page=1&per_page=6&org_id=0')
+            ->assertOk()
+            ->assertHeader('X-FM-Article-List-Cache', 'hit')
+            ->assertJsonPath('items.0.slug', 'cache-query-budget');
+        $this->assertSame([], DB::getQueryLog());
+    }
+
+    public function test_list_cache_partitions_canonical_queries_and_bypasses_filtered_or_noncanonical_reads(): void
+    {
+        $this->createArticle(['slug' => 'cache-partition-en']);
+        $this->createArticle([
+            'slug' => 'cache-partition-zh',
+            'locale' => 'zh-CN',
+            'source_locale' => 'zh-CN',
+        ]);
+        Cache::flush();
+
+        $this->getJson('/api/v0.5/articles?locale=en&page=1&per_page=6')
+            ->assertOk()
+            ->assertHeader('X-FM-Article-List-Cache', 'miss');
+        $this->getJson('/api/v0.5/articles?locale=en&page=1&per_page=6')
+            ->assertOk()
+            ->assertHeader('X-FM-Article-List-Cache', 'hit');
+        $this->getJson('/api/v0.5/articles?locale=zh-CN&page=1&per_page=6')
+            ->assertOk()
+            ->assertHeader('X-FM-Article-List-Cache', 'miss');
+        $this->getJson('/api/v0.5/articles?locale=en&page=1&per_page=20')
+            ->assertOk()
+            ->assertHeader('X-FM-Article-List-Cache', 'miss');
+
+        foreach ([
+            '/api/v0.5/articles?locale=en&voice=editorial',
+            '/api/v0.5/articles?locale=en&related_test_slug=mbti-personality-test-16-personality-types',
+            '/api/v0.5/articles?locale=en&org_id=1',
+            '/api/v0.5/articles?locale=en&page=51',
+        ] as $path) {
+            $this->getJson($path)
+                ->assertOk()
+                ->assertHeader('X-FM-Article-List-Cache', 'bypass');
+        }
     }
 
     public function test_detail_keeps_full_article_payload_after_list_optimization(): void
