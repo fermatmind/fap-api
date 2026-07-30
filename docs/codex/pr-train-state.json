@@ -101177,9 +101177,9 @@
     "base": "main",
     "branch": "codex/api-unlock-01-report-entitlement",
     "title": "API-UNLOCK-01: unify attempt-scoped full-report entitlement contract",
-    "status": "review_fix_local_validation_passed",
+    "status": "ready_to_merge",
     "depends_on": [],
-    "commit_sha": "368f5d9f97128483a33e98ff1e374fd77b0aaa75",
+    "commit_sha": "831e2386f2cce99ac27904256b7b404916074b5c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3423",
     "checks": {
       "focused_phpunit": "passed: 38 tests, 573 assertions",
@@ -101187,12 +101187,12 @@
       "route_list": "passed: 24 attempt routes; no route changes",
       "composer_validate": "passed: strict",
       "yaml_json_diff_scope": "passed",
-      "github_required_checks": "rerun pending after same-scope fix"
+      "github_required_checks": "passed on 831e2386f2cce99ac27904256b7b404916074b5c"
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -101245,8 +101245,13 @@
         "at": "2026-07-30T16:30:08Z",
         "status": "review_fix_local_validation_passed",
         "note": "Addressed second actionable Codex P2 review: legacy invite summaries now explicitly render rewarded_ad, self_purchase, and gift_purchase full-unlock sources instead of mislabeling them as completed invite unlocks. Added rewarded-ad label assertions and included the exact presenter path in the runtime-freeze contract exception. Attempt report-access plus staged invite tests passed (20 tests / 263 assertions), the branch-diff runtime gate passed, and scoped Pint/diff checks passed."
+      },
+      {
+        "at": "2026-07-30T16:39:25Z",
+        "status": "ready_to_merge",
+        "note": "All required checks passed on 831e2386f2cce99ac27904256b7b404916074b5c: hygiene, supply-chain, content-pack build validation, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep OSS, blocking secret scan, and non-blocking SARIF upload. Staging parity was intentionally skipped by workflow. Latest Codex re-review found no major issues."
       }
     ],
-    "updated_at": "2026-07-30T16:30:08Z"
+    "updated_at": "2026-07-30T16:39:25Z"
   }
 }
