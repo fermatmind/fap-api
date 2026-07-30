@@ -14,7 +14,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
 
     private const INVENTORY_SHA = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
-    private const PACKAGE_SHA = 'dbb00e41019876fb43cb2c59ecff6d1aebe4faeac1d2f3eeaba28b22188c0e3f';
+    private const PACKAGE_SHA = '62f54bbd440c2adca15adb1867a977c1224c4fdc83f827111e8c763216b6acea';
 
     private const EXPECTED_CANDIDATE_ROW_IDS = [
         'W1-RESULT-CORE-05-OFFER-CTA',
@@ -375,7 +375,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
             $mapping['required_w9_adapter_contract']['adapter_id'],
         );
         self::assertTrue($mapping['required_w9_adapter_contract']['must_read_exact_frozen_package']);
-        self::assertTrue($mapping['required_w9_adapter_contract']['must_fail_if_any_candidate_asset_is_not_exercised']);
+        self::assertTrue($mapping['required_w9_adapter_contract']['must_fail_if_any_pdf_candidate_asset_is_not_exercised']);
         self::assertFalse($mapping['required_w9_adapter_contract']['runtime_or_cms_activation_allowed']);
         self::assertCount(4, $mapping['projection']);
         self::assertSame(
@@ -386,9 +386,17 @@ final class MbtiResultEnglishPackageTest extends TestCase
             ['sections', 'premium_teaser'],
             $mapping['projection'][2]['package_authority_buckets'],
         );
-        self::assertSame(21, $mapping['projection'][3]['required_candidate_row_count']);
+        self::assertSame(20, $mapping['projection'][3]['required_pdf_candidate_row_count']);
         self::assertFalse($mapping['projection'][3]['legacy_only_render_is_acceptable']);
-        self::assertCount(9, $mapping['w9_assertions']);
+        self::assertSame([[
+            'row_id' => 'W1-RESULT-CORE-05-OFFER-CTA',
+            'reason' => 'The PDF document contract does not consume commercial offer copy.',
+            'required_qa_surface' => 'result_page_locked_upsell',
+            'authority_field' => 'commercial_spec.variants[].cta_copy',
+            'consumer_field' => 'offer_set.cta',
+            'must_be_reviewed_separately_from_pdf' => true,
+        ]], $mapping['non_pdf_candidate_coverage']);
+        self::assertCount(10, $mapping['w9_assertions']);
 
         self::assertCount(13, $mapping['excluded_fixture_fields']);
         foreach ($mapping['excluded_fixture_fields'] as $excludedField) {
@@ -409,6 +417,12 @@ final class MbtiResultEnglishPackageTest extends TestCase
         self::assertSame(24, $review['coverage']['preserved_controls_reviewed_for_disposition']);
         self::assertSame(21, $review['coverage']['candidate_assets_reviewed']);
         self::assertSame(1, $review['coverage']['pdf_fixture_targets_reviewed']);
+        $offerCopyCheck = collect($review['checks'])->firstWhere('id', 'offer_copy');
+        self::assertIsArray($offerCopyCheck);
+        self::assertSame('pass', $offerCopyCheck['status']);
+        self::assertStringContainsString('commercial_spec.variants[].cta_copy', $offerCopyCheck['evidence']);
+        self::assertStringContainsString('offer_set.cta', $offerCopyCheck['evidence']);
+        self::assertStringContainsString('no preview variant', $offerCopyCheck['evidence']);
         self::assertNotEmpty($review['known_holds']);
         self::assertSame('pending', $manifest['quality_gates']['independent_w9']);
         self::assertSame('pending_future_pr', $manifest['quality_gates']['exact_package_dry_run']);
