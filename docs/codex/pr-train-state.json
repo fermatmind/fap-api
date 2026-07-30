@@ -101497,7 +101497,7 @@
       "EN-PARITY-W1-MBTI-RESULT-AGENT-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "d1993f1d25a6ba620d6e9063c4f2a35841c271d6",
+    "commit_sha": "ade807ebb6a82b00e33dc62c50c25cd8517706f4",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3429",
     "checks": {
       "authorization": {
@@ -101601,8 +101601,13 @@
         "at": "2026-07-30T19:47:11Z",
         "status": "review_fix_local_verified",
         "note": "Exact head 0396bf04a77cc1d2bd97d8eb6e991dabdfee6278 passed all nine required checks with staging parity skipped, then review found one valid P2: the entitlement matrix still placed offer_set on preview_result despite the sole CTA candidate being locked_upsell_only. The matrix now keeps preview as a preserved control, excludes offer_set and the package CTA from preview, and reserves package offer copy for locked-upsell surfaces. Focused validation passed 7 tests/927 assertions plus scoped Pint, JSON, hash, diff, and scope checks. Candidate package SHA is 0118a4ddd0c1ad75687492fa8d7e7d5055c4cbcadaa664a5890de445bc99903a."
+      },
+      {
+        "at": "2026-07-30T19:48:13Z",
+        "status": "github_checks_pending",
+        "note": "Committed the preview entitlement repair as exact implementation commit ade807ebb6a82b00e33dc62c50c25cd8517706f4. The following metadata-only commit records that immutable implementation pointer; exact-head GitHub checks and review are pending."
       }
     ],
-    "updated_at": "2026-07-30T19:47:11Z"
+    "updated_at": "2026-07-30T19:48:13Z"
   }
 }
