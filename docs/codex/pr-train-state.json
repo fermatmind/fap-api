@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "exact_head_retry_pending",
-        "evidence": "GitHub CI runs 30558811823, 30559823419, 30560724406, and 30562045318 passed all required jobs at their exact heads. The latest exact-head review added three in-scope contract findings; their fixes pass the 11-test inventory suite and the 405-test runtime-freeze suite and require a fresh exact-head CI/review cycle."
+        "evidence": "GitHub CI runs 30558811823, 30559823419, 30560724406, 30562045318, and 30562910486 passed all required jobs at their exact heads. The latest exact-head review added three in-scope fail-closed findings; their fixes pass the 12-test inventory suite and the 407-test runtime-freeze suite. Latest origin/main was integrated, so a fresh exact-head CI/review cycle is required."
       }
     },
     "scope_validation": {
@@ -101263,9 +101263,14 @@
         "at": "2026-07-30T16:44:50Z",
         "status": "review_fix_local_checks_passed",
         "note": "Inspected three new exact-head review findings after all required jobs in CI run 30562045318 passed. Locked EN52 facet lineage now maps every route key to its exact content identity, text-only validation rejects img/picture/source HTML elements, and the runtime command has a distinct schema version from the immutable production-evidence artifact. The 11-test inventory suite and 405-test runtime-freeze suite pass, as do scoped Pint, PHP syntax, state JSON parsing, and diff checks."
+      },
+      {
+        "at": "2026-07-30T16:59:13Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After all required jobs in CI run 30562910486 passed, exact-head review identified three further fail-closed gaps. The inventory now requires the exact 52-row canonical EN52 cohort, lets prohibited historical evidence block while preserving the current candidate classification separately, and reuses established result-page forbidden-field contracts plus private_path. Concurrent origin/main efa84b9a482193a6996453a6395ec060749c7b88 was merged; both train entries and both runtime-freeze exceptions were preserved exactly. The 12-test inventory suite and 407-test runtime-freeze suite pass, as do scoped Pint, PHP syntax, YAML/JSON parsing, and diff checks."
       }
     ],
-    "updated_at": "2026-07-30T16:44:50Z"
+    "updated_at": "2026-07-30T16:59:13Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",

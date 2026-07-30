@@ -39,6 +39,7 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             $result['cohort_definition'],
         );
         $this->assertSame(0, $result['counts']['observed_slot_assets']);
+        $this->assertFalse($result['canonical_cohort_complete']);
         $this->assertSame(50, $result['counts']['blocking_rows']);
         $this->assertSame(['blocked_authority_unknown' => 50], $result['disposition_totals']);
         $this->assertCount(50, $result['rows']);
@@ -235,6 +236,42 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertNull($row['blocker']);
     }
 
+    public function test_prohibited_history_blocks_without_erasing_current_candidate_classification(): void
+    {
+        $asset = $this->createAsset();
+        $published = $this->createRevision(
+            $asset,
+            1,
+            BigFiveEn52PackageCompiler::RELEASE_ID,
+            $this->completeSnapshot('Published'),
+        );
+        $working = $this->createRevision($asset, 2, 'working-two', $this->completeSnapshot('Working'));
+        $this->createRevision(
+            $asset,
+            3,
+            'big5-authority-v2-domains-08',
+            [
+                ...$this->completeSnapshot('Historical'),
+                'private_path' => 'private-history-must-not-appear',
+            ],
+        );
+        $asset->forceFill([
+            'working_revision_id' => $working->id,
+            'published_revision_id' => $published->id,
+        ])->saveQuietly();
+
+        $result = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $row = collect($result['rows'])->firstWhere('logical_identity', 'domain:openness');
+        $encoded = json_encode($result, JSON_THROW_ON_ERROR);
+
+        $this->assertSame('valid_unpublished_candidate', $row['current_revision_disposition']);
+        $this->assertSame('prohibited_content', $row['recommended_disposition']);
+        $this->assertSame('historical_draft_prohibited_content', $row['blocker']);
+        $this->assertTrue($row['historical_private_result_leakage']);
+        $this->assertFalse($result['ok']);
+        $this->assertStringNotContainsString('private-history-must-not-appear', $encoded);
+    }
+
     public function test_alias_count_excludes_unknown_authority_drift(): void
     {
         $this->createAsset([
@@ -302,6 +339,8 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
                 'user_id' => 'private-user-must-not-appear',
                 'raw_scores' => ['private-score-must-not-appear'],
                 'facet_vector' => ['private-facet-must-not-appear'],
+                'domain_vector' => ['private-domain-must-not-appear'],
+                'private_path' => 'private-path-must-not-appear',
                 'body' => '<picture><source srcset="https://private.invalid/image.webp"></picture>',
             ],
         );
@@ -333,6 +372,8 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertStringNotContainsString('private-user-must-not-appear', $encoded);
         $this->assertStringNotContainsString('private-score-must-not-appear', $encoded);
         $this->assertStringNotContainsString('private-facet-must-not-appear', $encoded);
+        $this->assertStringNotContainsString('private-domain-must-not-appear', $encoded);
+        $this->assertStringNotContainsString('private-path-must-not-appear', $encoded);
     }
 
     public function test_non_en52_published_pointer_and_wrong_slot_family_fail_closed(): void

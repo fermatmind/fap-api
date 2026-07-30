@@ -8,6 +8,8 @@ use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
 use App\Services\BigFive\AuthorityV3\Release\BigFiveEn52PackageCompiler;
 use App\Services\BigFive\AuthorityV3\Release\BigFiveEn52Publisher;
+use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2Contract;
+use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2SelectorAssetContract;
 use App\Services\SEO\BigFiveCanonicalRouteCatalog;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -225,6 +227,8 @@ final class BigFiveEnglishDraftInventory
                 'verify_only_no_action',
                 'stale_working_revision',
             ], true);
+            $historicalMayBlock = $mayClassifyHistoricalLineage
+                || $row['recommended_disposition'] === 'valid_unpublished_candidate';
 
             return array_replace($row, [
                 'historical_draft_revision_id' => (int) $revision->id,
@@ -242,12 +246,16 @@ final class BigFiveEnglishDraftInventory
                 'historical_private_result_leakage' => $historicalPrivate,
                 'historical_media_reference' => $historicalMedia,
                 'historical_chinese_leakage' => $historicalCjk,
-                'recommended_disposition' => $mayClassifyHistoricalLineage
-                    ? ($historicalProhibited ? 'prohibited_content' : 'stale_working_revision')
-                    : $row['recommended_disposition'],
-                'blocker' => $mayClassifyHistoricalLineage
-                    ? ($historicalProhibited ? 'historical_draft_prohibited_content' : null)
-                    : $row['blocker'],
+                'recommended_disposition' => match (true) {
+                    $historicalProhibited && $historicalMayBlock => 'prohibited_content',
+                    $mayClassifyHistoricalLineage => 'stale_working_revision',
+                    default => $row['recommended_disposition'],
+                },
+                'blocker' => match (true) {
+                    $historicalProhibited && $historicalMayBlock => 'historical_draft_prohibited_content',
+                    $mayClassifyHistoricalLineage => null,
+                    default => $row['blocker'],
+                },
             ]);
         }, $rows);
 
@@ -267,7 +275,10 @@ final class BigFiveEnglishDraftInventory
                 'valid_unpublished_candidate',
             ], true)
         ))->count();
-        $ok = $blockingRows === 0 && $unknownAuthorityRows->isEmpty();
+        $canonicalCohortComplete = $canonical->count() === BigFiveEn52PackageCompiler::ASSET_COUNT;
+        $ok = $blockingRows === 0
+            && $unknownAuthorityRows->isEmpty()
+            && $canonicalCohortComplete;
 
         return [
             'schema_version' => self::SCHEMA_VERSION,
@@ -279,8 +290,9 @@ final class BigFiveEnglishDraftInventory
             'authority' => 'personality_public_content_assets_and_immutable_revisions',
             'locale' => 'en',
             'cohort_definition' => '50 registered historical slot identities from the 52-page EN52 canonical catalog, excluding model hub and facet hub',
+            'canonical_cohort_complete' => $canonicalCohortComplete,
             'counts' => [
-                'expected_canonical_assets' => 52,
+                'expected_canonical_assets' => BigFiveEn52PackageCompiler::ASSET_COUNT,
                 'observed_canonical_assets' => $canonical->count(),
                 'historical_slots' => $expected->count(),
                 'observed_slot_assets' => collect($rows)->whereNotNull('backend_resource_id')->count(),
@@ -392,6 +404,7 @@ final class BigFiveEnglishDraftInventory
             'chinese_leakage' => $cjk,
             'private_result_leakage' => $private,
             'recommended_disposition' => $disposition,
+            'current_revision_disposition' => $disposition,
             'source_evidence' => [
                 'asset_table' => 'personality_public_content_assets',
                 'revision_table' => 'personality_public_content_asset_revisions',
@@ -430,14 +443,20 @@ final class BigFiveEnglishDraftInventory
             return false;
         }
         foreach ($value as $key => $item) {
-            if (is_string($key) && preg_match(
-                '/^(?:answers|attempt(?:_id|_uuid)?|draft_snapshot|facet_vector|generated_authority_package|'
-                    .'order(?:_id)?|payment(?:_id)?|private_url|raw_mean|raw_score(?:s)?|recovery_token|'
-                    .'report_(?:token|url)|review_snapshot|score_vector|selector_trace|snapshot_json|'
-                    .'standardized_scores|user_id|working_revision_payload|percentile(?:s)?)$/i',
-                $key,
-            ) === 1) {
-                return true;
+            if (is_string($key)) {
+                $normalizedKey = strtolower($key);
+                if (in_array($normalizedKey, BigFiveResultPageV2SelectorAssetContract::FORBIDDEN_PUBLIC_FIELDS, true)
+                    || in_array($normalizedKey, BigFiveResultPageV2Contract::FORBIDDEN_PUBLIC_FIELDS, true)
+                    || in_array($normalizedKey, BigFiveResultPageV2Contract::SHARE_FORBIDDEN_SCORE_FIELDS, true)
+                    || $normalizedKey === 'private_path'
+                    || preg_match(
+                        '/^(?:answers|attempt(?:_id|_uuid)?|draft_snapshot|generated_authority_package|'
+                            .'order(?:_id)?|payment(?:_id)?|private_url|recovery_token|report_(?:token|url)|'
+                            .'review_snapshot|selector_trace|snapshot_json|user_id|working_revision_payload)$/',
+                        $normalizedKey,
+                    ) === 1) {
+                    return true;
+                }
             }
             if ($this->containsProhibitedPrivateField($item)) {
                 return true;
