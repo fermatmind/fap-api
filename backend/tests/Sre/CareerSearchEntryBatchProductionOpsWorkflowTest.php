@@ -644,6 +644,89 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
         $this->assertStringNotContainsString('/var/www/fap-api', $workflow.$runner);
     }
 
+    public function test_cache_post_readback_diagnostic_is_partial_receipt_bound_and_read_only(): void
+    {
+        $workflow = $this->repoFile(
+            '.github/workflows/career-search-entry-cache-post-readback-diagnostic.yml'
+        );
+        $probe = $this->repoFile(
+            'backend/scripts/career/career_search_entry_cache_post_readback_diagnostic.php'
+        );
+
+        foreach ([
+            'expected_control_plane_sha:',
+            'expected_release_sha:',
+            'expected_release_name:',
+            'failed_execute_run_id:',
+            'failed_execute_run_attempt:',
+            'expected_failed_execute_receipt_sha256:',
+            'expected_failed_execute_artifact_digest:',
+            'expected_manifest_sha256:',
+            'expected_post_readback_state_sha256:',
+            'operator_approval_phrase:',
+            'Career Search Entry Batch Cache Refresh Permission-Repaired Resume',
+            'career-search-entry-batch-cache-refresh-resume-execute-${FAILED_EXECUTE_RUN_ID}-${FAILED_EXECUTE_RUN_ATTEMPT}',
+            '.status == "FAIL_PARTIAL"',
+            '.failed_stage == "post_refresh_public_readback"',
+            '.failure_category == "quality_incomplete"',
+            '.write_state == "committed_unverified"',
+            '.cache_refresh_target_count == 75',
+            '.completed_batch_count == 10',
+            '.build_ms_max <= 5000',
+            '.observed_bad_href_url_count == 65',
+            '.observed_low_module_url_count == 10',
+            'cache post-readback diagnostic for failed partial resume execute run',
+            'aggregate 100-target deploy-runner and www-data active cache quality',
+            'one fresh 100-URL public snapshot',
+            'CAREER_CACHE_POST_READBACK_PROBE_MODE=runtime_cache',
+            'CAREER_CACHE_POST_READBACK_PROBE_MODE=public_fresh',
+            'sudo -n -u www-data -- env',
+            'Cache-Control: no-cache',
+            'Pragma: no-cache',
+            'cache_readback=',
+            'PASS_DIAGNOSTIC_RUNTIME_IDENTITY_MISMATCH',
+            'PASS_DIAGNOSTIC_REFRESH_PAYLOAD_INEFFECTIVE',
+            'PASS_DIAGNOSTIC_FRESH_PUBLIC_MATCH',
+            'PASS_DIAGNOSTIC_PUBLIC_DELIVERY_STALE',
+            'HOLD_DIAGNOSTIC_INCOMPLETE',
+            'career.search_entry_batch.cache_post_readback_diagnostic.v1',
+            'server_write_count: 0',
+            'cache_write_count: 0',
+            'retry_execution_count: 0',
+            'group: deploy-${{ github.repository }}-production',
+            'secrets.PRODUCTION_DEPLOY_HOST',
+            'secrets.PRODUCTION_DEPLOY_PATH',
+            'secrets.SSH_PRIVATE_KEY',
+            'if: always()',
+        ] as $required) {
+            $this->assertStringContainsString($required, $workflow.$probe);
+        }
+        foreach ([
+            'career.search_entry_batch.cache_post_readback_diagnostic_probe.v1',
+            "'runtime_cache', 'public_fresh'",
+            'jobDetailCacheReadiness',
+            'DATABASE_QUERY_BLOCKED',
+            "'server_write_count' => 0",
+            "'cache_write_count' => 0",
+            "'database_write_count' => 0",
+            "'search_channel_action_count' => 0",
+            "'deploy_count' => 0",
+            "'rollback_count' => 0",
+        ] as $required) {
+            $this->assertStringContainsString($required, $probe);
+        }
+        $this->assertStringNotContainsString('warmJobDetailPayloadForOfflineBootstrap', $workflow.$probe);
+        $this->assertStringNotContainsString('Cache::forever', $workflow.$probe);
+        $this->assertStringNotContainsString('Cache::forget', $workflow.$probe);
+        $this->assertStringNotContainsString('php artisan migrate', $workflow.$probe);
+        $this->assertStringNotContainsString('queue:restart', $workflow.$probe);
+        $this->assertStringNotContainsString('deploy:symlink', $workflow.$probe);
+        $this->assertStringNotContainsString('indexnow', strtolower($workflow.$probe));
+        $this->assertStringNotContainsString('googleapis', strtolower($workflow.$probe));
+        $this->assertStringNotContainsString('139.224.', $workflow.$probe);
+        $this->assertStringNotContainsString('/var/www/fap-api', $workflow.$probe);
+    }
+
     public function test_resume_execute_failure_diagnostic_eligibility_recovery_is_run_bound_and_read_only(): void
     {
         $workflow = $this->repoFile(
