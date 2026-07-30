@@ -166,8 +166,12 @@ The permission-repair checkpoint is complete:
   llms, Search Channel, URL submission, deploy, rollback, and retry counts
   remained zero.
 
-There is one exact cache-only refresh operator checkpoint remaining: the
-permission-repaired resume authorization.
+The first permission-repaired execute authorization reached eligibility run
+`30587810948`, attempt `1`, but failed before `operate` because the control
+incorrectly compared historical preflight run `30556658048` with the current
+control-plane SHA. That run produced zero artifacts and performed zero
+production writes. There is one exact cache-only refresh operator checkpoint
+remaining: the lineage-repaired resume authorization.
 
 ## Permission-repaired cache-only resume
 
@@ -182,6 +186,9 @@ The permission-repaired resume control binds:
   `c03ba2dfba1817a76b31653824333b792db8f3802403f1c582da2ced466da82c`,
   and target set
   `da453a9b4ca2ed2c60a0b17ef383eb2879ff7f67fa5c94458dbfa2fedc1ac381`;
+- failed eligibility-only run `30587810948`, attempt `1`, with zero artifacts,
+  and the historical preflight control-plane SHA
+  `2284f5d9f0528722c7a58486f86c0716e526ed5c`;
 - exactly 75 residual cache targets in ten batches, with at most five slugs and
   ten URLs per batch, a 5,000ms offline-build budget, and zero per-target
   retry.
