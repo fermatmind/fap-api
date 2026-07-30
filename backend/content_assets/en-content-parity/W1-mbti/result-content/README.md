@@ -32,3 +32,9 @@ SHA cannot be reused with a different authorization envelope.
 
 Repository rule impact: this is an unpublished backend candidate package.
 Backend authority and all public/runtime behavior remain unchanged.
+
+The close-call and adjacent-type candidates declare result-specific template
+slots for independent W9 rendering only. The current result runtime does not
+substitute those package tokens inside canonical body or payload fields.
+Activation therefore requires a separately scoped runtime renderer with
+real-projection substitution and unresolved-token rejection tests.

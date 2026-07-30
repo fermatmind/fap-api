@@ -36,8 +36,11 @@
       "runtime_template_rendering_added_by_this_package": false
     },
     "result_runtime_binding": {
-      "owner": "App\\Services\\Mbti\\MbtiResultPersonalizationService",
-      "existing_runtime_contract": true,
+      "target_owner": "App\\Services\\Mbti\\MbtiResultPersonalizationService",
+      "existing_runtime_contract": false,
+      "current_runtime_behavior": "applyToProjection retains canonical body as type_skeleton and appends separately rendered dynamic blocks; it does not substitute package tokens in body_md or payload",
+      "implementation_required_before_activation": true,
+      "implementation_scope": "separate runtime-renderer prerequisite PR before activation; not this content-asset PR and not CMS import",
       "sections": [
         "traits.close_call_axes",
         "traits.adjacent_type_contrast"
@@ -49,7 +52,7 @@
         "delta": "close_call_axes[0].delta",
         "neighbor_type": "neighbor_type_keys[0]"
       },
-      "runtime_unresolved_token_policy": "reject result and PDF projection",
+      "required_runtime_unresolved_token_policy": "reject result and PDF projection after the separate renderer prerequisite is implemented",
       "cms_or_import_time_result_inference_allowed": false
     },
     "mobile_desktop_authority": "same_fields",
@@ -69,6 +72,7 @@
         "activation_prerequisites": [
           "independent W9 exact-package approval",
           "result entitlement projection gate",
+          "separate result-specific runtime renderer with real-projection substitution and unresolved-token rejection tests",
           "public share section allowlist or explicit package-section exclusion",
           "result-only authority isolation or explicit public-personality section exclusion"
         ]

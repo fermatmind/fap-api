@@ -16,7 +16,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
 
     private const INVENTORY_SHA = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
-    private const PACKAGE_SHA = 'bd509f2671b7a13916ebc1d2565c3eb6060bd7caf788998be6ce3326becf45b1';
+    private const PACKAGE_SHA = 'cfe6d3e02f1bb28104a0cff7e337c541148a3d034c7cb387def3ae63ec6aabfc';
 
     private const EXPECTED_CANDIDATE_ROW_IDS = [
         'W1-RESULT-CORE-05-OFFER-CTA',
@@ -238,9 +238,14 @@ final class MbtiResultEnglishPackageTest extends TestCase
         self::assertFalse($package['template_contract']['renderer_binding']['runtime_template_rendering_added_by_this_package']);
         self::assertSame(
             'App\\Services\\Mbti\\MbtiResultPersonalizationService',
-            $package['template_contract']['result_runtime_binding']['owner'],
+            $package['template_contract']['result_runtime_binding']['target_owner'],
         );
-        self::assertTrue($package['template_contract']['result_runtime_binding']['existing_runtime_contract']);
+        self::assertFalse($package['template_contract']['result_runtime_binding']['existing_runtime_contract']);
+        self::assertTrue($package['template_contract']['result_runtime_binding']['implementation_required_before_activation']);
+        self::assertSame(
+            'separate runtime-renderer prerequisite PR before activation; not this content-asset PR and not CMS import',
+            $package['template_contract']['result_runtime_binding']['implementation_scope'],
+        );
         self::assertSame([
             'traits.close_call_axes',
             'traits.adjacent_type_contrast',
@@ -263,6 +268,10 @@ final class MbtiResultEnglishPackageTest extends TestCase
         );
         self::assertContains(
             'result-only authority isolation or explicit public-personality section exclusion',
+            $sectionProjection['activation_prerequisites'],
+        );
+        self::assertContains(
+            'separate result-specific runtime renderer with real-projection substitution and unresolved-token rejection tests',
             $sectionProjection['activation_prerequisites'],
         );
         self::assertFalse(
