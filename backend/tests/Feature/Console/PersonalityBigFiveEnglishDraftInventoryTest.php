@@ -9,6 +9,8 @@ use App\Models\PersonalityPublicContentAssetRevision;
 use App\Services\BigFive\AuthorityV3\ReadOnly\BigFiveEnglishDraftInventory;
 use App\Services\BigFive\AuthorityV3\Release\BigFiveEn52PackageCompiler;
 use App\Services\BigFive\AuthorityV3\Release\BigFiveEn52Publisher;
+use App\Services\Cms\PersonalityPublicContentAssetContract;
+use App\Services\SEO\BigFiveCanonicalRouteCatalog;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
@@ -16,6 +18,9 @@ use Tests\TestCase;
 final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
 {
     use RefreshDatabase;
+
+    /** @var array<string,array{authority_asset_key:string,source_hash:string,attributes:array<string,mixed>,snapshot:array<string,mixed>}>|null */
+    private static ?array $en52Descriptors = null;
 
     public function test_empty_authority_emits_exact_historical_slots_fail_closed_without_writes(): void
     {
@@ -262,6 +267,74 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertSame('blocked_authority_unknown', $row['recommended_disposition']);
         $this->assertSame('live_asset_not_locked_en52_projection', $row['blocker']);
         $this->assertFalse($result['ok']);
+    }
+
+    public function test_revision_and_live_asset_cannot_self_attest_outside_compiled_en52_descriptor(): void
+    {
+        $asset = $this->createAsset();
+        $this->createRevision(
+            $asset,
+            1,
+            'big5-authority-v2-domains-08',
+            $this->completeSnapshot('Historical'),
+        );
+        $current = $this->createRevision(
+            $asset,
+            2,
+            BigFiveEn52PackageCompiler::RELEASE_ID,
+            $this->completeSnapshot(),
+        );
+        $substitutedHash = str_repeat('f', 64);
+        $substitutedSnapshot = $current->snapshot_json;
+        data_set($substitutedSnapshot, 'attributes.source_hash', $substitutedHash);
+        $current->forceFill([
+            'source_hash' => $substitutedHash,
+            'snapshot_json' => $substitutedSnapshot,
+        ])->saveQuietly();
+        $asset->forceFill([
+            'working_revision_id' => $current->id,
+            'published_revision_id' => $current->id,
+            'source_hash' => $substitutedHash,
+        ])->saveQuietly();
+
+        $result = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $row = collect($result['rows'])->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertFalse($row['published_en52_lineage_locked']);
+        $this->assertFalse($row['published_en52_projection_locked']);
+        $this->assertFalse($row['published_projection_exists']);
+        $this->assertSame('blocked_authority_unknown', $row['recommended_disposition']);
+        $this->assertSame('current_published_revision_not_locked_en52_authority', $row['blocker']);
+    }
+
+    public function test_historical_slot_requires_exact_draft_import_source_hash(): void
+    {
+        $asset = $this->createAsset();
+        $historical = $this->createRevision(
+            $asset,
+            1,
+            'big5-authority-v2-domains-08',
+            $this->completeSnapshot('Historical'),
+        );
+        $historical->forceFill(['source_hash' => str_repeat('e', 64)])->saveQuietly();
+        $current = $this->createRevision(
+            $asset,
+            2,
+            BigFiveEn52PackageCompiler::RELEASE_ID,
+            $this->completeSnapshot(),
+        );
+        $asset->forceFill([
+            'working_revision_id' => $current->id,
+            'published_revision_id' => $current->id,
+        ])->saveQuietly();
+
+        $result = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $row = collect($result['rows'])->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertSame('missing', $row['historical_slot_resolution']);
+        $this->assertNull($row['historical_draft_revision_id']);
+        $this->assertSame('blocked_authority_unknown', $row['recommended_disposition']);
+        $this->assertSame('registered_historical_slot_revision_missing', $row['blocker']);
     }
 
     public function test_registered_historical_revision_survives_later_unreferenced_revisions(): void
@@ -553,7 +626,10 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
     /** @param array<string,mixed> $overrides */
     private function createAsset(array $overrides = []): PersonalityPublicContentAsset
     {
-        return PersonalityPublicContentAsset::query()->create(array_replace([
+        $entityType = (string) ($overrides['entity_type'] ?? PersonalityPublicContentAsset::ENTITY_DOMAIN);
+        $entityKey = (string) ($overrides['entity_key'] ?? 'openness');
+        $descriptor = $this->en52Descriptor($entityType, $entityKey);
+        $attributes = $descriptor['attributes'] ?? [
             'org_id' => 0,
             'framework' => 'big_five',
             'entity_type' => 'domain',
@@ -584,7 +660,9 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             'source_hash' => hash('sha256', 'test-en52-openness'),
             'created_by_admin_user_id' => BigFiveEn52Publisher::OPERATOR_ADMIN_USER_ID,
             'updated_by_admin_user_id' => BigFiveEn52Publisher::OPERATOR_ADMIN_USER_ID,
-        ], $overrides));
+        ];
+
+        return PersonalityPublicContentAsset::query()->create(array_replace($attributes, $overrides));
     }
 
     /** @param array<string,mixed> $snapshot */
@@ -615,14 +693,11 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             default => (string) $asset->entity_key,
         };
         if ($en52) {
-            $snapshot = [
-                'schema_version' => BigFiveEn52PackageCompiler::SCHEMA_VERSION,
-                'release_id' => BigFiveEn52PackageCompiler::RELEASE_ID,
-                'authority_asset_key' => $en52AuthorityAssetKey,
-                'source_content_sha256' => BigFiveEn52PackageCompiler::SOURCE_CONTENT_SHA256,
-                'package_file_sha256' => BigFiveEn52Publisher::PACKAGE_FILE_SHA256,
-                'attributes' => $this->runtimeAttributes($asset),
-            ];
+            $descriptor = $this->en52Descriptor(
+                (string) $asset->entity_type,
+                (string) $asset->entity_key,
+            );
+            $snapshot = $descriptor['snapshot'] ?? [];
         }
 
         return PersonalityPublicContentAssetRevision::query()->create([
@@ -635,9 +710,11 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
                     default => (string) $asset->entity_key,
                 },
             'source_package' => $sourcePackage,
-            'source_hash' => $en52
-                ? (string) $asset->source_hash
-                : hash('sha256', $sourcePackage.':'.$revisionNo),
+            'source_hash' => match (true) {
+                $en52 => (string) ($descriptor['source_hash'] ?? ''),
+                $historical => $this->historicalSourceHash($asset),
+                default => hash('sha256', $sourcePackage.':'.$revisionNo),
+            },
             'authority_package_sha256' => $historical
                 ? 'fb67edc033e679da3f134b34db30901465c7b44e0585818b23613fab83bf9162'
                 : ($en52
@@ -660,23 +737,64 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         ];
     }
 
-    /** @return array<string,mixed> */
-    private function runtimeAttributes(PersonalityPublicContentAsset $asset): array
+    /**
+     * @return array{authority_asset_key:string,source_hash:string,attributes:array<string,mixed>,snapshot:array<string,mixed>}|null
+     */
+    private function en52Descriptor(string $entityType, string $entityKey): ?array
     {
-        $attributes = [];
-        foreach ([
-            'org_id', 'framework', 'entity_type', 'entity_key', 'slug', 'locale', 'title', 'summary',
-            'content_sections_json', 'seo_json', 'robots', 'canonical_json', 'hreflang_json',
-            'faq_json', 'schema_json', 'method_boundary_json', 'evidence_notes_json', 'authority_json',
-            'internal_links_json', 'is_public', 'index_eligible', 'sitemap_eligible', 'llms_eligible',
-            'launch_state', 'review_state', 'contract_version', 'source_package', 'source_hash',
-            'last_reviewed_at', 'created_by_admin_user_id', 'updated_by_admin_user_id',
-        ] as $key) {
-            $value = $asset->getAttribute($key);
-            $attributes[$key] = $value instanceof \DateTimeInterface ? $value->format('Y-m-d') : $value;
+        if (self::$en52Descriptors === null) {
+            $path = dirname(__DIR__, 4).'/generated/big-five-en52-release/release-package.json';
+            $package = json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
+            $wanted = [
+                PersonalityPublicContentAsset::ENTITY_HUB.':big-five' => true,
+                PersonalityPublicContentAsset::ENTITY_FACET_HUB.':facets' => true,
+                PersonalityPublicContentAsset::ENTITY_DOMAIN.':openness' => true,
+                PersonalityPublicContentAsset::ENTITY_FACET_DETAIL.':imagination' => true,
+            ];
+            $descriptors = [];
+            $contract = $this->app->make(PersonalityPublicContentAssetContract::class);
+            foreach ($package['assets'] as $entry) {
+                $identity = data_get($entry, 'asset.entity_type').':'.data_get($entry, 'asset.entity_key');
+                if (! isset($wanted[$identity])) {
+                    continue;
+                }
+                $data = $contract->validateAsset($entry['asset']);
+                $attributes = $data->toModelAttributes();
+                $attributes['hreflang_json'] = [
+                    'en' => BigFiveCanonicalRouteCatalog::expectedPath('en', $data->entityType, $data->entityKey),
+                    'zh-CN' => BigFiveCanonicalRouteCatalog::expectedPath('zh-CN', $data->entityType, $data->entityKey),
+                ];
+                $attributes['created_by_admin_user_id'] = BigFiveEn52Publisher::OPERATOR_ADMIN_USER_ID;
+                $attributes['updated_by_admin_user_id'] = BigFiveEn52Publisher::OPERATOR_ADMIN_USER_ID;
+                $descriptors[$identity] = [
+                    'authority_asset_key' => (string) $entry['authority_asset_key'],
+                    'source_hash' => (string) $entry['runtime_projection_sha256'],
+                    'attributes' => $attributes,
+                    'snapshot' => [
+                        'schema_version' => BigFiveEn52PackageCompiler::SCHEMA_VERSION,
+                        'release_id' => BigFiveEn52PackageCompiler::RELEASE_ID,
+                        'authority_asset_key' => (string) $entry['authority_asset_key'],
+                        'source_content_sha256' => BigFiveEn52PackageCompiler::SOURCE_CONTENT_SHA256,
+                        'package_file_sha256' => BigFiveEn52Publisher::PACKAGE_FILE_SHA256,
+                        'attributes' => $attributes,
+                        'evidence_claims' => array_values($entry['evidence_claims'] ?? []),
+                    ],
+                ];
+            }
+            unset($package);
+            self::$en52Descriptors = $descriptors;
         }
 
-        return $attributes;
+        return self::$en52Descriptors[$entityType.':'.$entityKey] ?? null;
+    }
+
+    private function historicalSourceHash(PersonalityPublicContentAsset $asset): string
+    {
+        return match ((string) $asset->entity_type.':'.(string) $asset->entity_key) {
+            'domain:openness' => 'ce30596ef26b1c630607b4a24cd3e953e6128406932573fd475e3df350b2d9f1',
+            'facet_detail:imagination' => '13c2d7135423a730f1a929f14f53b6e6e5443fbf154ec13d5aae11f0cc7f7365',
+            default => hash('sha256', 'historical-test:'.$asset->entity_type.':'.$asset->entity_key),
+        };
     }
 
     private function fingerprint(): string

@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "exact_head_retry_pending",
-        "evidence": "GitHub CI runs 30558811823, 30559823419, 30560724406, 30562045318, 30562910486, 30564012592, and 30565108964 passed all required jobs at their exact heads. The latest exact-head review added one in-scope runtime-projection readback finding; its fix passes the 15-test inventory suite and the 395-test runtime-freeze suite and requires a fresh exact-head CI/review cycle."
+        "evidence": "GitHub CI runs 30558811823, 30559823419, 30560724406, 30562045318, 30562910486, 30564012592, 30565108964, and 30567136115 passed all required jobs at their exact heads. The latest exact-head review added two in-scope deterministic-descriptor findings; their fixes pass the 17-test inventory suite and the 395-test runtime-freeze suite and require a fresh exact-head CI/review cycle."
       }
     },
     "scope_validation": {
@@ -101278,9 +101278,14 @@
         "at": "2026-07-30T17:41:14Z",
         "status": "review_fix_local_checks_passed",
         "note": "After every required job in CI run 30565108964 passed, exact-head review identified one remaining live-projection gap. The inventory now applies the publisher's exact field-by-field runtime readback against the locked published revision descriptor, validates its EN52 envelope and source hash, and fails closed when live title, content, SEO, hreflang, eligibility, source, review, or operator-owned fields drift. Snapshot content validation handles the locked descriptor envelope without exposing raw values. The 15-test inventory suite passes 100 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, JSON parsing, diff checks, and exact eight-path scope validation pass."
+      },
+      {
+        "at": "2026-07-30T17:57:53Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30567136115 passed, exact-head review found two remaining self-attestation gaps. The service now embeds deterministic locks generated from the exact EN52 release package for all 52 per-asset source hashes and complete stable descriptor snapshots, and exact per-slot source hashes verified against the Authority V2 draft-import package for all 50 historical identities. A mutually altered revision/live asset and a historical revision with a substituted source hash both fail closed. The 17-test inventory suite passes 109 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, YAML/JSON parsing, diff checks, and exact eight-path scope validation pass."
       }
     ],
-    "updated_at": "2026-07-30T17:41:14Z"
+    "updated_at": "2026-07-30T17:57:53Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
