@@ -124,7 +124,7 @@ read_public_batch() {
   local output_path="$1"
   local observations="$tmp_dir/observations.jsonl"
   local response="$tmp_dir/response.json"
-  local slug locale locale_path expected_canonical expected_prefix http_code
+  local slug locale locale_path expected_canonical expected_prefix http_code curl_attempt
   local canonical robots page_locale bad_href_count module_count payload_sha256
   : > "$observations"
 
@@ -137,15 +137,24 @@ read_public_batch() {
       fi
       expected_prefix="/${locale_path}/"
       expected_canonical="/${locale_path}/career/jobs/${slug}"
-      if ! http_code="$(
-        curl --silent --show-error --location \
-          --connect-timeout 5 --max-time 20 \
-          --header 'Accept: application/json' \
-          --output "$response" --write-out '%{http_code}' \
-          "https://api.fermatmind.com/api/v0.5/career/jobs/${slug}?locale=${locale}" \
-          2>/dev/null
-      )"; then
+      http_code="000"
+      for curl_attempt in 1 2; do
+        if http_code="$(
+          curl --silent --show-error --location \
+            --connect-timeout 5 --max-time 20 \
+            --header 'Accept: application/json' \
+            --output "$response" --write-out '%{http_code}' \
+            "https://api.fermatmind.com/api/v0.5/career/jobs/${slug}?locale=${locale}" \
+            2>/dev/null
+        )"; then
+          break
+        fi
         http_code="000"
+        if [[ "$curl_attempt" -lt 2 ]]; then
+          sleep 1
+        fi
+      done
+      if [[ "$http_code" == "000" ]]; then
         printf '{}' > "$response"
       fi
       if ! jq -e 'type == "object"' "$response" >/dev/null 2>&1; then

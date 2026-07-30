@@ -74,6 +74,11 @@ The workflow has two separately controlled modes:
    manifest slugs in `en` and `zh-CN`, and completes exact quality-package plus
    100-URL public readback in the same run.
 
+Each public detail request retries exactly once only after a transport-level
+`curl` failure, using a one-second delay and the same bounded timeouts. HTTP
+or semantic mismatches are not retried, and only the final successful response
+is included in the immutable payload-set and readback hashes.
+
 The refresh uses the existing atomic active/LKG detail publication path and
 does not forget prior pointers before replacement. It never changes database
 or CMS authority, publication, indexability, queues, sitemap, llms, Search
