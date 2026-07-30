@@ -664,6 +664,8 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
             'expected_manifest_sha256:',
             'expected_post_readback_state_sha256:',
             'operator_approval_phrase:',
+            'FAILED_SSH_PREFLIGHT_DIAGNOSTIC_RUN_ID: "30590027833"',
+            'FAILED_SSH_PREFLIGHT_DIAGNOSTIC_CONTROL_PLANE_SHA: b7ab619e5ca6c5fb8356fe4ae6ac569fb48b3f64',
             'Career Search Entry Batch Cache Refresh Permission-Repaired Resume',
             'career-search-entry-batch-cache-refresh-resume-execute-${FAILED_EXECUTE_RUN_ID}-${FAILED_EXECUTE_RUN_ATTEMPT}',
             '.status == "FAIL_PARTIAL"',
@@ -676,6 +678,9 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
             '.observed_bad_href_url_count == 65',
             '.observed_low_module_url_count == 10',
             'cache post-readback diagnostic for failed partial resume execute run',
+            'failed SSH-preflight diagnostic run',
+            'with inspect skipped and zero artifacts',
+            '.total_count == 0 and (.artifacts | length == 0)',
             'aggregate 100-target deploy-runner and www-data active cache quality',
             'one fresh 100-URL public snapshot',
             'CAREER_CACHE_POST_READBACK_PROBE_MODE=runtime_cache',
@@ -697,6 +702,8 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
             'secrets.PRODUCTION_DEPLOY_HOST',
             'secrets.PRODUCTION_DEPLOY_PATH',
             'secrets.SSH_PRIVATE_KEY',
+            'secrets.SSH_KNOWN_HOSTS',
+            'ssh-keygen -F "$DEPLOY_HOST"',
             'if: always()',
         ] as $required) {
             $this->assertStringContainsString($required, $workflow.$probe);

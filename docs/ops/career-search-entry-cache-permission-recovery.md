@@ -221,3 +221,10 @@ deploy runner and `www-data`, then performs one fresh public snapshot using
 `Cache-Control: no-cache`, `Pragma: no-cache`, and a receipt-bound readback
 query key. It emits no slugs or payloads and performs no cache, server, CMS,
 database, publication, discoverability, deploy, or rollback write.
+
+The first diagnostic dispatch, run `30590027833`, attempt `1`, passed
+eligibility but failed before server connection because the workflow referenced
+an unused known-hosts secret name. The aggregate inspection step was skipped,
+zero artifacts were produced, and no production read or write occurred. The
+recovery control binds that exact failed run and uses the repository-standard
+`SSH_KNOWN_HOSTS` secret plus pinned host-key lookup before allowing inspection.
