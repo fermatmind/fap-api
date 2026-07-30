@@ -59,13 +59,36 @@ exception text.
 | `PASS_PERMISSION_REPAIR_REQUIRED_BOUNDED_CACHE_TREE` | The fixed chain is usable, but an attested hash directory or exact stable-key file has capability or policy drift. | Request one exact production permission-write authorization bound to both identity-specific repair-set hashes and counts. |
 | `PASS_PERMISSION_STATE_COMPLETE_NO_REPAIR` | Both identities can use the bounded cache tree and stable files with the expected shared policy. | Do not change permissions; investigate the configured cache store/runtime failure as a new read-only scope. |
 
-## Future production permission repair
+## Observed production permission state
 
-No production write workflow is introduced by this repository change. A write
-control is designed only after the diagnostic identifies one exact repair
-class, and it requires a separate explicit production write authorization.
+The one authorized read-only diagnostic completed as run `30576928176`, attempt
+`1`:
 
-The future repair control must:
+- receipt SHA256:
+  `278757da6d99a43fe6d1e80ea4e29b3c12ea67273f7f0540a11592212a4d4218`;
+- GitHub artifact digest:
+  `1624052319798ad7b938ac50c000d546db6c1ac1fd13169beb8b6e640e1abd2b`;
+- status: `PASS_PERMISSION_REPAIR_REQUIRED_BOUNDED_CACHE_TREE`;
+- repair scope: `attested_hash_directories_and_exact_stable_key_files`;
+- fixed cache chain: four directories, zero capability/policy failures for both
+  identities;
+- hash tree: 256 first-level plus 9,176 second-level directories; all 9,432
+  have shared-policy drift and are not writable by the deploy runner;
+- stable Career files: 100 existing files; all 100 have owner/group drift and
+  are not writable by the deploy runner;
+- exact repair set: 9,532 nodes, with identical deploy-runner and `www-data`
+  set SHA
+  `d7d4911bdfaccdb26117e48c3608f87a2a96e66977fc8f1800c92ee7ff4edd54`;
+- every server/cache/database/CMS/publication/indexability/queue/sitemap/llms/
+  Search Channel/URL submission/deploy/rollback write counter remained zero.
+
+## Exact production permission repair
+
+`Career Search Entry Cache Permission Repair` is a separate, one-time,
+exact-authorized write control. Merging it does not authorize production
+execution.
+
+The control:
 
 1. bind the exact successful permission diagnostic run/attempt, receipt digest,
    active release, manifest, and both repair-candidate set hashes/counts;
@@ -74,12 +97,17 @@ The future repair control must:
 3. mutate only the attested directories/files:
    owner = deploy user, group = `www-data`, directory mode = `2775`, file mode =
    `0664`;
-4. use explicit individual targets, never recursive `chown`, recursive `chmod`,
+4. use individual PHP `chown`, `chgrp`, and `chmod` calls, never recursive
+   `chown`, recursive `chmod`,
    wildcard expansion, broad `find -exec`, deploy, symlink activation, cache
    publication, rollback, CMS/database write, queue, sitemap, llms, Search
    Channel, or URL submission;
-5. re-run both identity probes after mutation and require zero repair
-   candidates before emitting a success receipt.
+5. bind each target's device, inode, owner, group, and mode immediately before
+   its metadata write and fail closed on target drift;
+6. hash the 100 existing stable cache file payloads before and after metadata
+   mutation and require the aggregate to remain identical;
+7. re-run both identity probes after mutation and require zero repair
+   candidates before emitting `PASS_PERMISSION_REPAIR_VERIFIED`.
 
 If the fixed chain alone drifted, the write scope is exactly the four cache-chain
 directories. If the bounded tree drifted, the write scope is exactly the
@@ -88,13 +116,11 @@ raw paths.
 
 ## Authorization checkpoints
 
-There are three operator checkpoints from this point:
+The read-only checkpoint is complete. Two operator checkpoints remain:
 
-1. one read-only production permission diagnostic authorization after this
-   control is merged;
-2. only if the diagnostic proves a repair is required, one exact production
+1. one exact production
    permission-write authorization;
-3. only after permission verification passes, one exact cache-only refresh
+2. only after permission verification passes, one exact cache-only refresh
    authorization.
 
 Repository design, tests, PR fixes, and repair-control design within these

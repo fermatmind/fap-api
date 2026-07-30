@@ -797,10 +797,10 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
         }
 
         foreach ([
-            'one read-only production permission diagnostic authorization',
+            'The one authorized read-only diagnostic completed',
             'one exact production permission-write authorization',
             'one exact cache-only refresh',
-            'never recursive `chown`',
+            'individual PHP `chown`',
             'recursive `chmod`',
         ] as $required) {
             $this->assertStringContainsString($required, $runbook);
@@ -824,6 +824,120 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
         $this->assertStringNotContainsString('googleapis', strtolower($workflow.$probe));
         $this->assertStringNotContainsString('139.224.', $workflow.$probe);
         $this->assertStringNotContainsString('/var/www/fap-api', $workflow.$probe);
+    }
+
+    public function test_cache_permission_repair_is_exact_diagnostic_bound_non_recursive_and_payload_preserving(): void
+    {
+        $workflow = $this->repoFile(
+            '.github/workflows/career-search-entry-cache-permission-repair.yml'
+        );
+        $repair = $this->repoFile(
+            'backend/scripts/career/career_search_entry_cache_permission_repair.php'
+        );
+        $runbook = $this->repoFile(
+            'docs/ops/career-search-entry-cache-permission-recovery.md'
+        );
+
+        foreach ([
+            'expected_control_plane_sha:',
+            'permission_diagnostic_run_id:',
+            'expected_permission_diagnostic_receipt_sha256:',
+            'expected_permission_diagnostic_artifact_digest:',
+            'expected_repair_candidate_count:',
+            'expected_repair_candidate_set_sha256:',
+            '.status == "PASS_PERMISSION_REPAIR_REQUIRED_BOUNDED_CACHE_TREE"',
+            '.repair_scope == "attested_hash_directories_and_exact_stable_key_files"',
+            '.deploy_runner.hash_directory_policy_mismatch_count == 9432',
+            '.php_runtime.hash_directory_policy_mismatch_count == 9432',
+            '.deploy_runner.existing_target_file_count == 100',
+            '.php_runtime.existing_target_file_count == 100',
+            'change only owner/group/mode metadata for the attested 9432 hash directories and 100 exact stable-key files',
+            'dual-identity zero-candidate verification and unchanged cache payload aggregate',
+            'zero cache payload write, retry, rollback, deploy, CMS/DB write, or Search Channel operation',
+            'prior_repairs',
+            'select(.id != $current)',
+            'Re-attest exact dual-identity repair set',
+            'Apply exact non-recursive permission metadata repair',
+            'Verify dual-identity zero-candidate state',
+            'sudo -n -- env',
+            'PERMISSION_REPAIR_APPLY=true',
+            'PASS_PERMISSION_REPAIR_VERIFIED',
+            'permission_metadata_write_count == 9532',
+            'cache_payload_write_count == 0',
+            'group: deploy-${{ github.repository }}-production',
+            'secrets.PRODUCTION_DEPLOY_HOST',
+            'secrets.PRODUCTION_DEPLOY_PATH',
+            'secrets.SSH_PRIVATE_KEY',
+            'ServerAliveInterval=20',
+            'ServerAliveCountMax=30',
+            'if: always()',
+        ] as $required) {
+            $this->assertStringContainsString($required, $workflow);
+        }
+
+        foreach ([
+            'career.search_entry_batch.cache_permission_repair.v1',
+            'MAX_FIRST_LEVEL_DIRECTORIES = 256',
+            'MAX_SECOND_LEVEL_DIRECTORIES = 65536',
+            'DIRECTORY_MODE = 02775',
+            'FILE_MODE = 0664',
+            'EXPECTED_REPAIR_CANDIDATE_COUNT',
+            'EXPECTED_REPAIR_CANDIDATE_SET_SHA256',
+            'EXPECTED_STABLE_FILE_COUNT',
+            'ROOT_IDENTITY_REQUIRED',
+            'REPAIR_SET_DRIFT',
+            'REPAIR_TARGET_DRIFT',
+            'PERMISSION_METADATA_WRITE_FAILED',
+            'POST_REPAIR_VERIFY_FAILED',
+            'chown($candidate[\'path\'], $ids[\'uid\'])',
+            'chgrp($candidate[\'path\'], $ids[\'gid\'])',
+            'chmod($candidate[\'path\'], $candidate[\'directory\'] ? DIRECTORY_MODE : FILE_MODE)',
+            'pre_repair_payload_set_sha256',
+            'post_repair_payload_set_sha256',
+            'payload_unchanged',
+            'post_repair_candidate_count',
+            'cache_payload_write_count',
+            'rollback_count',
+        ] as $required) {
+            $this->assertStringContainsString($required, $repair);
+        }
+
+        foreach ([
+            'PASS_PERMISSION_REPAIR_REQUIRED_BOUNDED_CACHE_TREE',
+            '9,532 nodes',
+            'd7d4911bdfaccdb26117e48c3608f87a2a96e66977fc8f1800c92ee7ff4edd54',
+            'one exact production',
+            'one exact cache-only refresh',
+        ] as $required) {
+            $this->assertStringContainsString($required, $runbook);
+        }
+
+        foreach ([
+            ' -R ',
+            'find -exec',
+            'glob(',
+            'shell_exec',
+            'exec(',
+            'system(',
+            'passthru(',
+            'file_put_contents',
+            'Cache::',
+            'bootstrap/app.php',
+            'warmJobDetailPayloadForOfflineBootstrap',
+        ] as $forbidden) {
+            $this->assertStringNotContainsString($forbidden, $repair);
+        }
+        foreach ([
+            'php artisan migrate',
+            'queue:restart',
+            'deploy:symlink',
+            'indexnow',
+            'googleapis',
+            '139.224.',
+            '/var/www/fap-api',
+        ] as $forbidden) {
+            $this->assertStringNotContainsString($forbidden, strtolower($workflow.$repair));
+        }
     }
 
     private function repoFile(string $path): string
