@@ -624,6 +624,7 @@ final class BigFiveEnglishDraftInventory
         $payload = json_encode($workingSnapshot ?? [], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
         $cjk = $this->containsCjk($payload);
         $private = $this->containsProhibitedPrivateField($workingSnapshot);
+        $legacyAlias = $this->containsLegacyAliasReference($workingSnapshot);
         $titleComplete = is_string(data_get($workingContent, 'title'))
             && trim(data_get($workingContent, 'title')) !== '';
         $summaryComplete = is_string(data_get($workingContent, 'summary'))
@@ -668,7 +669,7 @@ final class BigFiveEnglishDraftInventory
 
         $disposition = match (true) {
             $asset === null || ! $workingActive || ($asset->published_revision_id && ! $publishedBound) => 'blocked_authority_unknown',
-            $cjk || $private || ! $textOnly => 'prohibited_content',
+            $cjk || $private || $legacyAlias || ! $textOnly => 'prohibited_content',
             ! $candidateIdentityMatches => 'translation_identity_mismatch',
             ! $schemaComplete => 'schema_repair_required',
             ! $candidateWorkflowDraft => 'schema_repair_required',
@@ -719,6 +720,7 @@ final class BigFiveEnglishDraftInventory
             'duplicate_template_risk' => $contentEqual ? 'published_equivalent' : 'not_established',
             'chinese_leakage' => $cjk,
             'private_result_leakage' => $private,
+            'legacy_alias_reference' => $legacyAlias,
             'recommended_disposition' => $disposition,
             'current_revision_disposition' => $disposition,
             'source_evidence' => [
@@ -937,6 +939,32 @@ final class BigFiveEnglishDraftInventory
                 return true;
             }
             if ($this->containsMediaReference($item)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function containsLegacyAliasReference(mixed $value): bool
+    {
+        if (is_string($value)) {
+            foreach (array_keys(BigFiveCanonicalRouteCatalog::EN_REDIRECT_ONLY_ALIAS_TARGETS) as $alias) {
+                if (preg_match(
+                    '~(?:^|[/\s"\'(])'.preg_quote($alias, '~').'(?=$|[/\s"\'?#)])~i',
+                    $value,
+                ) === 1) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        if (! is_array($value)) {
+            return false;
+        }
+        foreach ($value as $item) {
+            if ($this->containsLegacyAliasReference($item)) {
                 return true;
             }
         }

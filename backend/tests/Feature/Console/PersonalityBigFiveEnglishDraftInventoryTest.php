@@ -798,6 +798,22 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertFalse($result['ok']);
     }
 
+    public function test_candidate_snapshot_rejects_nested_legacy_alias_links(): void
+    {
+        $asset = $this->createAsset();
+        $snapshot = $this->completeSnapshot('Working');
+        $snapshot['content_sections_json'][0]['body'] .= ' [Legacy path](/en/personality/big-five/high-openness)';
+        $working = $this->createRevision($asset, 1, 'working-one', $snapshot);
+        $asset->forceFill(['working_revision_id' => $working->id])->saveQuietly();
+
+        $result = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $row = collect($result['rows'])->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertTrue($row['legacy_alias_reference']);
+        $this->assertSame('prohibited_content', $row['recommended_disposition']);
+        $this->assertFalse($result['ok']);
+    }
+
     public function test_prohibited_history_blocks_without_erasing_current_candidate_classification(): void
     {
         $asset = $this->createAsset();
