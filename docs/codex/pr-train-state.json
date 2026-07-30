@@ -6340,7 +6340,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2392",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "ready_to_merge",
+    "status": "github_checks_pending",
     "title": "BIG-FIVE-AGENT-APPROVAL-QUEUE-INTEGRATION-01: Add Big Five approval queue integration",
     "train_scope": "big_five_public_profile_agent_expansion",
     "transitions": [
@@ -101179,7 +101179,7 @@
     "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
     "status": "ready_to_merge",
     "depends_on": [],
-    "commit_sha": "2a11d6128a2010aecb93227dea100d3f06373375",
+    "commit_sha": "6fea47f2504b66d06f5686ad58a9d6909bf5889f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3421",
     "checks": {
       "production_read_only_inventory": {
@@ -101191,14 +101191,14 @@
         "evidence": "Focused PHPUnit, scoped Pint, PHP syntax, JSON/YAML parsing, deterministic artifact invariants, diff checks, and exact allowlist validation passed. Production historical revision QA SHA-256 109e995dd9c900b978d5ceaca1f7851607d4332c8bf9a734c705bd32982dd11e proves 50 rows, database fingerprint unchanged, and zero CJK/media/private-field leakage."
       },
       "github_required_checks": {
-        "status": "pass",
-        "evidence": "CI run 30587864941 and Code Scanning run 30587864845 passed all required jobs on exact metadata head ade80d52e44cbe452d539b54d993d17756ca50ff. Staging parity was skipped as expected and is not required. The only exact-head review finding concerned the already-completed pending-to-ready ledger transition and is resolved by this consistent metadata tail."
+        "status": "pending",
+        "evidence": "CI run 30588371315 and Code Scanning run 30588371243 passed all required jobs on metadata head 09b27498fe1eafde3b154e59f27ab0f919a6f802. Exact-head review then found that CSS-backed image embeds were not rejected. Implementation 6fea47f2504b66d06f5686ad58a9d6909bf5889f closes that same-scope text-only boundary; required checks must rerun."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -101413,9 +101413,14 @@
         "at": "2026-07-30T22:47:00Z",
         "status": "ready_to_merge",
         "note": "Exact implementation 2a11d6128a2010aecb93227dea100d3f06373375 is bound by metadata head ade80d52e44cbe452d539b54d993d17756ca50ff. CI run 30587864941 and Code Scanning run 30587864845 passed all required jobs, GitHub reports CLEAN/MERGEABLE, exact eight-path scope validation is clean, and the implementation review finding is resolved. Manifest, ledger status, check evidence, and scope flags now consistently record ready_to_merge. This metadata-only tail must repeat required checks before squash merge."
+      },
+      {
+        "at": "2026-07-30T22:58:35Z",
+        "status": "github_checks_pending",
+        "note": "After CI run 30588371315 passed all required jobs, exact-head review identified one remaining CSS media gap. Text-only scanning now rejects style and stylesheet link elements plus CSS image functions in background, border-image, content, cursor, list-style, and mask declarations, including url(), image-set(), cross-fade(), element(), and gradient functions. CSS url(), image-set(), and style-element regressions fail closed. The ledger binds implementation 6fea47f2504b66d06f5686ad58a9d6909bf5889f. The 30-test inventory suite passes 207 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, and diff checks pass."
       }
     ],
-    "updated_at": "2026-07-30T22:47:00Z"
+    "updated_at": "2026-07-30T22:58:35Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
