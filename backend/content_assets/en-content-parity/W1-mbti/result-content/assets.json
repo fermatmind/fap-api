@@ -72,7 +72,14 @@
             "full_result.result_page_sections",
             "mbti_pdf_payload.result_page_sections"
           ],
-          "required_access_state": "entitled_report",
+          "required_runtime_access": {
+            "mbti_access_hub_v1.access_state": "ready",
+            "access_level": "full",
+            "variant": "full",
+            "locked": false,
+            "mbti_access_hub_v1.report_access.can_view_report": true,
+            "mbti_access_hub_v1.pdf_access.can_download_pdf": true
+          },
           "public_projection_allowed": false,
           "storage_visibility": "inactive_or_draft_authority_only"
         },

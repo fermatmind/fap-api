@@ -14,7 +14,15 @@
       "MbtiPdfPayloadBuilder"
     ],
     "required_locale": "en",
-    "required_access_state": "entitled_report",
+    "fixture_state_label": "entitled_report",
+    "required_runtime_access": {
+      "mbti_access_hub_v1.access_state": "ready",
+      "access_level": "full",
+      "variant": "full",
+      "locked": false,
+      "mbti_access_hub_v1.report_access.can_view_report": true,
+      "mbti_access_hub_v1.pdf_access.can_download_pdf": true
+    },
     "mobile_desktop_authority": "same_fields",
     "current_runtime_consumes_candidate_package": false
   },
@@ -37,13 +45,14 @@
       "card_order": "frozen inventory row order"
     },
     "card_projection": {
+      "card_key_from": "asset.row_id",
       "title_from": "rendered content.title",
       "description_from": "rendered content.summary_template",
       "bullets_from": "rendered content.body_template",
       "tips_from": "rendered content.reflection_prompts",
       "tags": []
     },
-    "premium_source": "result_only_authority.premium_full under synthetic entitled state",
+    "premium_source": "result_only_authority.premium_full under the exact ready/full/full unlocked runtime state",
     "reader_text_fields": ["section.title","cards[].title","cards[].description","cards[].bullets[]","cards[].tips[]"],
     "fail_if_description_bullets_or_tips_are_empty": true
   },
@@ -63,6 +72,8 @@
     "must_project_preserved_controls_without_reauthoring": true,
     "must_preserve_sections_and_premium_teaser_buckets": true,
     "must_project_protected_premium_content_only_under_synthetic_entitled_state": true,
+    "must_match_exact_runtime_access_contract": true,
+    "must_preserve_candidate_row_id_as_card_key": true,
     "must_fail_if_any_pdf_candidate_asset_is_not_exercised": true
   },
   "projection": [
@@ -87,7 +98,8 @@
     "all 20 PDF-consumable candidate assets are exercised through the exact-package fixture adapter",
     "the non-PDF offer CTA candidate is reviewed separately on the locked-upsell result-page surface through commercial_spec to offer_set.cta",
     "premium teaser assets remain in the premium_teaser bucket before PDF projection",
-    "protected premium body and prompts project from result_only_authority.premium_full only under the synthetic entitled state",
+    "protected premium body and prompts project from result_only_authority.premium_full only when runtime access is ready/full/full, unlocked, report-viewable, and PDF-downloadable",
+    "every PDF card preserves its candidate inventory row_id as card_key and the emitted key set exactly equals the 20 candidate rows",
     "all candidate summary, body paragraphs, and reflection prompts reach the frozen PDF card description, bullets, and tips fields",
     "a legacy-only PDF render fails the exact-package coverage assertion",
     "locked or premium body is absent without the synthetic entitled state",

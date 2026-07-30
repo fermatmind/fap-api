@@ -14,7 +14,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
 
     private const INVENTORY_SHA = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
-    private const PACKAGE_SHA = '62dc298b4c1dc8e3b66b2fa4d7ae257c023ff193ff270e6489caccf492b9f886';
+    private const PACKAGE_SHA = '1483b439cc70d6e4d5273402c7c256128e8d7a3fd49feba7f56f1931665b51ba';
 
     private const EXPECTED_CANDIDATE_ROW_IDS = [
         'W1-RESULT-CORE-05-OFFER-CTA',
@@ -326,7 +326,14 @@ final class MbtiResultEnglishPackageTest extends TestCase
                     $protectedContract = $package['template_contract']['canonical_projection_contract']['premium_teaser']['protected_full_content'];
                     self::assertSame('result_only_authority.premium_full', $protectedContract['authority_bucket']);
                     self::assertSame('asset.section_key', $protectedContract['section_key_from']);
-                    self::assertSame('entitled_report', $protectedContract['required_access_state']);
+                    self::assertSame([
+                        'mbti_access_hub_v1.access_state' => 'ready',
+                        'access_level' => 'full',
+                        'variant' => 'full',
+                        'locked' => false,
+                        'mbti_access_hub_v1.report_access.can_view_report' => true,
+                        'mbti_access_hub_v1.pdf_access.can_download_pdf' => true,
+                    ], $protectedContract['required_runtime_access']);
                     self::assertSame([
                         'full_result.result_page_sections',
                         'mbti_pdf_payload.result_page_sections',
@@ -500,7 +507,15 @@ final class MbtiResultEnglishPackageTest extends TestCase
         self::assertFalse($mapping['fixture_contract']['live_private_url_allowed']);
         self::assertFalse($mapping['fixture_contract']['database_read_allowed']);
         self::assertSame('en', $mapping['fixture_contract']['required_locale']);
-        self::assertSame('entitled_report', $mapping['fixture_contract']['required_access_state']);
+        self::assertSame('entitled_report', $mapping['fixture_contract']['fixture_state_label']);
+        self::assertSame([
+            'mbti_access_hub_v1.access_state' => 'ready',
+            'access_level' => 'full',
+            'variant' => 'full',
+            'locked' => false,
+            'mbti_access_hub_v1.report_access.can_view_report' => true,
+            'mbti_access_hub_v1.pdf_access.can_download_pdf' => true,
+        ], $mapping['fixture_contract']['required_runtime_access']);
         self::assertSame('same_fields', $mapping['fixture_contract']['mobile_desktop_authority']);
         self::assertFalse($mapping['fixture_contract']['current_runtime_consumes_candidate_package']);
         self::assertSame('mbti_pdf_payload', $mapping['runtime_payload_contract']['payload_root']);
@@ -526,6 +541,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
             $mapping['card_shape_adapter']['grouping']['group_order'],
         );
         self::assertSame([
+            'card_key_from' => 'asset.row_id',
             'title_from' => 'rendered content.title',
             'description_from' => 'rendered content.summary_template',
             'bullets_from' => 'rendered content.body_template',
@@ -538,6 +554,8 @@ final class MbtiResultEnglishPackageTest extends TestCase
         self::assertTrue(
             $mapping['required_w9_adapter_contract']['must_project_protected_premium_content_only_under_synthetic_entitled_state'],
         );
+        self::assertTrue($mapping['required_w9_adapter_contract']['must_match_exact_runtime_access_contract']);
+        self::assertTrue($mapping['required_w9_adapter_contract']['must_preserve_candidate_row_id_as_card_key']);
         self::assertTrue($mapping['required_w9_adapter_contract']['must_fail_if_any_pdf_candidate_asset_is_not_exercised']);
         self::assertFalse($mapping['required_w9_adapter_contract']['runtime_or_cms_activation_allowed']);
         self::assertCount(4, $mapping['projection']);
@@ -559,13 +577,14 @@ final class MbtiResultEnglishPackageTest extends TestCase
             'consumer_field' => 'offer_set.cta',
             'must_be_reviewed_separately_from_pdf' => true,
         ]], $mapping['non_pdf_candidate_coverage']);
-        self::assertCount(12, $mapping['w9_assertions']);
+        self::assertCount(13, $mapping['w9_assertions']);
 
         $assets = $this->readPackageJson('assets.json')['assets'];
         $fixtureSlots = $mapping['synthetic_slot_values'];
         unset($fixtureSlots['source']);
         $pdfGroups = [];
         $expectedReaderText = [];
+        $expectedCardKeys = [];
         foreach ($assets as $asset) {
             if ($asset['asset_kind'] !== 'canonical_section_family') {
                 continue;
@@ -579,6 +598,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
                 'cards' => [],
             ];
             $card = [
+                'card_key' => $asset['row_id'],
                 'title' => $rendered['title'],
                 'description' => $rendered['summary_template'],
                 'bullets' => $rendered['body_template'],
@@ -589,6 +609,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
             self::assertNotEmpty($card['bullets']);
             self::assertNotEmpty($card['tips']);
             $pdfGroups[$groupKey]['cards'][] = $card;
+            $expectedCardKeys[] = $asset['row_id'];
             $expectedReaderText = [
                 ...$expectedReaderText,
                 $card['title'],
@@ -602,6 +623,9 @@ final class MbtiResultEnglishPackageTest extends TestCase
             array_keys($pdfGroups),
         );
         self::assertCount(20, array_merge(...array_column($pdfGroups, 'cards')));
+        $emittedCards = array_merge(...array_column($pdfGroups, 'cards'));
+        self::assertSame($expectedCardKeys, array_column($emittedCards, 'card_key'));
+        self::assertSame($expectedCardKeys, array_values(array_unique(array_column($emittedCards, 'card_key'))));
         $readerText = json_encode(
             $pdfGroups,
             JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
