@@ -81,6 +81,7 @@ prs:
       - backend/app/Services/Access/AttemptUnlockProjectionRepairService.php
       - backend/app/Services/Commerce/ReportUnlockOptionResolver.php
       - backend/app/Services/Report/ReportAccess.php
+      - backend/app/Services/Report/InviteUnlockSummaryBuilder.php
       - backend/config/report_unlock.php
       - backend/tests/Feature/Commerce/ReportUnlockOptionResolverTest.php
       - backend/tests/Feature/V0_3/AttemptReportAccessReadTest.php
@@ -96,7 +97,7 @@ prs:
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Commerce/ReportUnlockOptionResolverTest.php tests/Feature/V0_3/AttemptReportAccessReadTest.php tests/Feature/V0_3/AttemptReportPaymentUnlockFlowTest.php tests/Feature/V0_3/ReportPaywallTeaserTest.php tests/Feature/Access/UnifiedAccessProjectionDualWriteTest.php tests/Feature/V0_3/AttemptInviteUnlockStagedEntitlementTest.php tests/Feature/V0_3/AttemptInviteUnlockFoundationTest.php tests/Unit/Services/Report/AccessResolverTest.php --no-ansi --display-warnings
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=test_runtime_freeze_classifier_ignores_three_channel_report_unlock_contract_services --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Content/BigFiveCanonicalTruthFixturesTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_3/AttemptReadController.php app/Services/Access/AttemptUnlockProjectionRepairService.php app/Services/Commerce/EntitlementManager.php app/Services/Commerce/ReportUnlockOptionResolver.php app/Services/Report/ReportAccess.php config/report_unlock.php tests/Feature/Commerce/ReportUnlockOptionResolverTest.php tests/Feature/V0_3/AttemptReportAccessReadTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_3/AttemptReadController.php app/Services/Access/AttemptUnlockProjectionRepairService.php app/Services/Commerce/EntitlementManager.php app/Services/Commerce/ReportUnlockOptionResolver.php app/Services/Report/InviteUnlockSummaryBuilder.php app/Services/Report/ReportAccess.php config/report_unlock.php tests/Feature/Commerce/ReportUnlockOptionResolverTest.php tests/Feature/V0_3/AttemptReportAccessReadTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - cd backend && php artisan route:list --path=api/v0.3/attempts --except-vendor
       - cd backend && composer validate --strict
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"

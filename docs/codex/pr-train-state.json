@@ -101182,8 +101182,8 @@
     "commit_sha": "368f5d9f97128483a33e98ff1e374fd77b0aaa75",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3423",
     "checks": {
-      "focused_phpunit": "passed: 38 tests, 571 assertions",
-      "pint_scoped": "passed: 9 files",
+      "focused_phpunit": "passed: 38 tests, 573 assertions",
+      "pint_scoped": "passed: 10 files",
       "route_list": "passed: 24 attempt routes; no route changes",
       "composer_validate": "passed: strict",
       "yaml_json_diff_scope": "passed",
@@ -101240,8 +101240,13 @@
         "at": "2026-07-30T16:27:37Z",
         "status": "review_fix_local_validation_passed",
         "note": "Second GitHub run passed MBTI legacy, MBTI v2, canonical truth, content, hygiene, supply-chain, and security checks but the Big Five runtime-freeze classifier flagged the newly touched projection repair service. Added that exact service to the existing three-channel contract exception. The branch-diff runtime gate and exact exception test passed locally (2 tests / 6 assertions), plus scoped Pint and PHP syntax."
+      },
+      {
+        "at": "2026-07-30T16:30:08Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "Addressed second actionable Codex P2 review: legacy invite summaries now explicitly render rewarded_ad, self_purchase, and gift_purchase full-unlock sources instead of mislabeling them as completed invite unlocks. Added rewarded-ad label assertions and included the exact presenter path in the runtime-freeze contract exception. Attempt report-access plus staged invite tests passed (20 tests / 263 assertions), the branch-diff runtime gate passed, and scoped Pint/diff checks passed."
       }
     ],
-    "updated_at": "2026-07-30T16:27:37Z"
+    "updated_at": "2026-07-30T16:30:08Z"
   }
 }

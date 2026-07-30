@@ -1844,6 +1844,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $changed = [
             'backend/app/Services/Access/AttemptUnlockProjectionRepairService.php',
             'backend/app/Services/Commerce/ReportUnlockOptionResolver.php',
+            'backend/app/Services/Report/InviteUnlockSummaryBuilder.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -10854,6 +10855,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Services/Access/AttemptUnlockProjectionRepairService.php',
             'backend/app/Services/Commerce/ReportUnlockOptionResolver.php',
+            'backend/app/Services/Report/InviteUnlockSummaryBuilder.php',
         ], true);
     }
 

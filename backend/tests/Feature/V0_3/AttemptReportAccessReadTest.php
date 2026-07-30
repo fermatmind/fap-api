@@ -901,6 +901,8 @@ final class AttemptReportAccessReadTest extends TestCase
             ->assertJsonPath('unlock_source', 'rewarded_ad')
             ->assertJsonPath('full_report_entitlement_v1.access_level', 'full')
             ->assertJsonPath('full_report_entitlement_v1.unlock_source', 'rewarded_ad')
+            ->assertJsonPath('invite_unlock_v1.label', 'Rewarded ad unlock active')
+            ->assertJsonPath('invite_unlock_v1.short_label', 'Rewarded ad unlock')
             ->assertJsonPath('unlock_options.0.available', false)
             ->assertJsonPath('unlock_options.0.unavailable_reason', 'already_unlocked');
     }
