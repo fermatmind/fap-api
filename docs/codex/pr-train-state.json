@@ -101497,7 +101497,7 @@
       "EN-PARITY-W1-MBTI-RESULT-AGENT-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "455bd8a1562d89973832d7c22d4bf6b77eb93362",
+    "commit_sha": "b6150f61416d73b604f3d07b285b509a91802716",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3429",
     "checks": {
       "authorization": {
@@ -101621,8 +101621,13 @@
         "at": "2026-07-30T20:10:35Z",
         "status": "review_fix_local_verified",
         "note": "Exact head 2263f123b54f7b51a1e2ee6b01f66112be22f47b passed all nine required checks with staging parity skipped, then review identified one valid P2 share-boundary gap: published ordinary CMS sections can enter the current public share projection. This content-only package now requires all candidate sections to remain inactive/draft, forbids published CMS share-authority writes, and makes a share allowlist or explicit package-section exclusion an activation prerequisite. Focused validation passed 7 tests/1022 assertions plus scoped Pint, JSON, hash, diff, and scope checks. Candidate package SHA is 12eaa8b4b3fab6f2a51ac905341c7be0fd449e08341e0d281577c1e2be0b7d04."
+      },
+      {
+        "at": "2026-07-30T20:11:48Z",
+        "status": "github_checks_pending",
+        "note": "Committed the public-share authority boundary repair as implementation commit b6150f61416d73b604f3d07b285b509a91802716. The following metadata-only commit records that immutable implementation pointer; exact-head GitHub checks and review are pending."
       }
     ],
-    "updated_at": "2026-07-30T20:10:35Z"
+    "updated_at": "2026-07-30T20:11:48Z"
   }
 }
