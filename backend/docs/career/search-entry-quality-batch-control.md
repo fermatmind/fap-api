@@ -107,6 +107,38 @@ clean recovery receipt, Task 12 still requires a brand-new review preflight;
 the cache-repair receipt cannot substitute for Task 12 review or apply
 authorization.
 
+### Residual cache-only resume
+
+When the recovery receipt reports `PASS_RECOVERY_RESUME_REQUIRED`, use only
+`Career Search Entry Batch Cache Refresh Resume`. It has two independently
+authorized modes:
+
+1. `preflight` requires the exact read-only phrase bound to the failed execute
+   and recovery run. It reproduces the complete recovery payload-set and issue
+   counts, selects only URLs that still have unsafe locale hrefs or thin
+   modules, hashes that private target set, and plans batches containing no
+   more than five slugs or ten URLs. It performs no cache write.
+2. `execute` requires the workflow-generated exact preflight phrase. It
+   reproduces the same current payload-set and target plan immediately before
+   writing, precomputes each batch's conversion closure, and invokes only the
+   active release's offline 5,000ms atomic active/LKG publisher. It never
+   forgets prior pointers and performs zero per-target retries.
+
+The resume workflow installs a database write guard before any cache
+publication. A successful execute must refresh exactly the preflight-attested
+residual targets and prove the exact 50-candidate / 100-URL / 300-review-target
+quality package plus a clean complete 100-URL public readback. A target build,
+publish, post-readback, or quality failure stops immediately. If earlier
+targets in that separately authorized run were already published, the receipt
+is `FAIL_PARTIAL`; it records only safe stage/category, counts, timing, and
+hashes and requires another independently authorized read-only recovery
+inspection. There is no automatic continuation, retry, or rollback.
+
+This resume lane never changes database or CMS authority, publication,
+indexability, queues, sitemap, llms, Search Channel, URL submission,
+deployment, symlinks, migrations, workers, or non-target state. Merging the
+control does not authorize dispatching either mode.
+
 The apply phrase keeps CMS content, publication, indexability, cache warm,
 queue dispatch, sitemap/llms mutation or submission, Search Channel, URL
 submission, and deploy held. The operation does not release held slugs or
