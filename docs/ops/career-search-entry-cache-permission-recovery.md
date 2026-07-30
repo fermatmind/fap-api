@@ -149,11 +149,48 @@ control-plane SHA and failed-run evidence.
 
 ## Authorization checkpoints
 
-The read-only checkpoint is complete. Two operator checkpoints remain:
+The permission-repair checkpoint is complete:
 
-1. one exact drift-recovery production permission-write authorization;
-2. only after permission verification passes, one exact cache-only refresh
-   authorization.
+- successful repair: run `30586605927`, attempt `1`;
+- receipt SHA:
+  `346adeed33a71db9b82d2513a9728f45980c8a45724adf1df3f788a1e23dbc12`;
+- artifact digest:
+  `c2256ef80b6b69958747137b9ef2e46a476b792d81192772dd62577468c343c4`;
+- status: `PASS_PERMISSION_REPAIR_VERIFIED`;
+- 9,554 permission metadata targets changed, including 9,454 directories and
+  100 exact stable-key files;
+- pre/post stable-file payload aggregate:
+  `a243cb7990bf0441942125cd5937aa12e205a51cc10027530462d1c0bb707b56`;
+- deploy-runner and `www-data` post-probes both reported zero candidates;
+- cache payload, database, CMS, publication, indexability, queue, sitemap,
+  llms, Search Channel, URL submission, deploy, rollback, and retry counts
+  remained zero.
+
+There is one exact cache-only refresh operator checkpoint remaining: the
+permission-repaired resume authorization.
+
+## Permission-repaired cache-only resume
+
+The permission-repaired resume control binds:
+
+- failed zero-write execute run `30557073777`, attempt `1`, receipt
+  `42bf4d8ed96513b83603a8f8aa7d2e7619a811abb9fa7691c3f5390cf7a2b203`,
+  and artifact digest
+  `bc1ac3e250a1a248de072102089d2b00aacc348e43be7741f47ebb88f456f677`;
+- successful permission-repair run and immutable evidence above;
+- successful residual-target preflight run `30556658048`, attempt `1`, state
+  `c03ba2dfba1817a76b31653824333b792db8f3802403f1c582da2ced466da82c`,
+  and target set
+  `da453a9b4ca2ed2c60a0b17ef383eb2879ff7f67fa5c94458dbfa2fedc1ac381`;
+- exactly 75 residual cache targets in ten batches, with at most five slugs and
+  ten URLs per batch, a 5,000ms offline-build budget, and zero per-target
+  retry.
+
+The execute must reproduce the preflight state before writes, stop on the first
+failure, and finish with the exact quality package plus complete 100-URL public
+readback. It does not authorize database, CMS, publication, indexability,
+queue, sitemap, llms, Search Channel, URL submission, deploy, rollback, or
+non-target cache writes.
 
 Repository design, tests, PR fixes, and repair-control design within these
 boundaries do not require additional operator authorization.
