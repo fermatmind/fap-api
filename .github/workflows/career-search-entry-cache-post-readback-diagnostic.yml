@@ -88,6 +88,9 @@ jobs:
           EXPECTED_MANIFEST_SHA256: ${{ inputs.expected_manifest_sha256 }}
           EXPECTED_POST_READBACK_STATE_SHA256: ${{ inputs.expected_post_readback_state_sha256 }}
           OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+          FAILED_SSH_PREFLIGHT_DIAGNOSTIC_RUN_ID: "30590027833"
+          FAILED_SSH_PREFLIGHT_DIAGNOSTIC_RUN_ATTEMPT: "1"
+          FAILED_SSH_PREFLIGHT_DIAGNOSTIC_CONTROL_PLANE_SHA: b7ab619e5ca6c5fb8356fe4ae6ac569fb48b3f64
         run: |
           set -euo pipefail
           test "$GITHUB_REF" = "refs/heads/main"
@@ -100,6 +103,9 @@ jobs:
           [[ "$EXPECTED_FAILED_EXECUTE_ARTIFACT_DIGEST" =~ ^[0-9a-f]{64}$ ]]
           [[ "$EXPECTED_MANIFEST_SHA256" =~ ^[0-9a-f]{64}$ ]]
           [[ "$EXPECTED_POST_READBACK_STATE_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$FAILED_SSH_PREFLIGHT_DIAGNOSTIC_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$FAILED_SSH_PREFLIGHT_DIAGNOSTIC_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+          [[ "$FAILED_SSH_PREFLIGHT_DIAGNOSTIC_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
           git fetch --no-tags origin main:refs/remotes/origin/main
           test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
           test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
@@ -177,12 +183,42 @@ jobs:
             "repos/${GITHUB_REPOSITORY}/actions/workflows/career-search-entry-batch-cache-refresh-resume.yml/runs?event=workflow_dispatch&per_page=100")"
           jq -e --argjson failed "$FAILED_EXECUTE_RUN_ID" \
             '[.workflow_runs[] | select(.id > $failed)] | length == 0' <<<"$later_resume" >/dev/null
+          failed_diagnostic="$(gh api \
+            "repos/${GITHUB_REPOSITORY}/actions/runs/${FAILED_SSH_PREFLIGHT_DIAGNOSTIC_RUN_ID}")"
+          jq -e \
+            --arg control "$FAILED_SSH_PREFLIGHT_DIAGNOSTIC_CONTROL_PLANE_SHA" \
+            --argjson attempt "$FAILED_SSH_PREFLIGHT_DIAGNOSTIC_RUN_ATTEMPT" \
+            '.name == "Career Search Entry Cache Post-Readback Diagnostic"
+             and .path == ".github/workflows/career-search-entry-cache-post-readback-diagnostic.yml"
+             and .event == "workflow_dispatch"
+             and .status == "completed"
+             and .conclusion == "failure"
+             and .head_branch == "main"
+             and .head_sha == $control
+             and .run_attempt == $attempt' <<<"$failed_diagnostic" >/dev/null
+          failed_diagnostic_jobs="$(gh api \
+            "repos/${GITHUB_REPOSITORY}/actions/runs/${FAILED_SSH_PREFLIGHT_DIAGNOSTIC_RUN_ID}/jobs?per_page=100")"
+          jq -e \
+            '([.jobs[] | select(.name == "diagnose"
+               and .status == "completed"
+               and .conclusion == "failure")] | length == 1)
+             and ([.jobs[] | select(.name == "diagnose") | .steps[]
+               | select(.name == "Inspect aggregate runtime cache and fresh public state"
+                 and .status == "completed" and .conclusion == "skipped")] | length == 1)' \
+            <<<"$failed_diagnostic_jobs" >/dev/null
+          failed_diagnostic_artifacts="$(gh api \
+            "repos/${GITHUB_REPOSITORY}/actions/runs/${FAILED_SSH_PREFLIGHT_DIAGNOSTIC_RUN_ID}/artifacts?per_page=100")"
+          jq -e '.total_count == 0 and (.artifacts | length == 0)' \
+            <<<"$failed_diagnostic_artifacts" >/dev/null
           later_diagnostic="$(gh api \
             "repos/${GITHUB_REPOSITORY}/actions/workflows/career-search-entry-cache-post-readback-diagnostic.yml/runs?event=workflow_dispatch&per_page=100")"
-          jq -e --argjson current "$GITHUB_RUN_ID" \
-            '[.workflow_runs[] | select(.id != $current)] | length == 0' <<<"$later_diagnostic" >/dev/null
+          jq -e \
+            --argjson current "$GITHUB_RUN_ID" \
+            --argjson failed "$FAILED_SSH_PREFLIGHT_DIAGNOSTIC_RUN_ID" \
+            '[.workflow_runs[] | select(.id != $current) | .id] == [$failed]' \
+            <<<"$later_diagnostic" >/dev/null
 
-          expected_phrase="I explicitly approve one read-only Career search-entry cache post-readback diagnostic for failed partial resume execute run ${FAILED_EXECUTE_RUN_ID} attempt ${FAILED_EXECUTE_RUN_ATTEMPT} receipt ${EXPECTED_FAILED_EXECUTE_RECEIPT_SHA256} artifact ${EXPECTED_FAILED_EXECUTE_ARTIFACT_DIGEST}, control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA}, active SHA ${EXPECTED_RELEASE_SHA}, manifest ${EXPECTED_MANIFEST_SHA256}, post-readback state ${EXPECTED_POST_READBACK_STATE_SHA256}; compare only aggregate 100-target deploy-runner and www-data active cache quality with one fresh 100-URL public snapshot, with zero server write, cache write, retry, rollback, deploy, CMS/DB write, or Search Channel operation."
+          expected_phrase="I explicitly approve one read-only Career search-entry cache post-readback diagnostic for failed partial resume execute run ${FAILED_EXECUTE_RUN_ID} attempt ${FAILED_EXECUTE_RUN_ATTEMPT} receipt ${EXPECTED_FAILED_EXECUTE_RECEIPT_SHA256} artifact ${EXPECTED_FAILED_EXECUTE_ARTIFACT_DIGEST}, failed SSH-preflight diagnostic run ${FAILED_SSH_PREFLIGHT_DIAGNOSTIC_RUN_ID} attempt ${FAILED_SSH_PREFLIGHT_DIAGNOSTIC_RUN_ATTEMPT} with inspect skipped and zero artifacts, control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA}, active SHA ${EXPECTED_RELEASE_SHA}, manifest ${EXPECTED_MANIFEST_SHA256}, post-readback state ${EXPECTED_POST_READBACK_STATE_SHA256}; compare only aggregate 100-target deploy-runner and www-data active cache quality with one fresh 100-URL public snapshot, with zero server write, cache write, retry, rollback, deploy, CMS/DB write, or Search Channel operation."
           test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
           {
             echo "control_plane_sha=$EXPECTED_CONTROL_PLANE_SHA"
@@ -220,20 +256,22 @@ jobs:
           test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
 
       - name: Set up SSH
-        uses: webfactory/ssh-agent@dc588b651fe13675774614f8e6a936a468676387 # v0.9.0
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Install pinned SSH known hosts
         shell: bash
         env:
-          PRODUCTION_KNOWN_HOSTS: ${{ secrets.PRODUCTION_SSH_KNOWN_HOSTS }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
         run: |
           set -euo pipefail
-          test -n "$PRODUCTION_KNOWN_HOSTS"
-          install -d -m 700 "$HOME/.ssh"
-          printf '%s\n' "$PRODUCTION_KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
-          chmod 600 "$HOME/.ssh/known_hosts"
+          test -n "$SSH_KNOWN_HOSTS"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
 
       - name: Inspect aggregate runtime cache and fresh public state
         shell: bash
