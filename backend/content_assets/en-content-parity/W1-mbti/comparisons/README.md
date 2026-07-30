@@ -13,7 +13,10 @@ Input inventory:
 
 Files:
 
-- `assets.json`: seven source-bound English content assets.
+- `assets.json`: seven source-bound English content assets; the six committed JSON sources preserve body, group, nested-item, and item cardinality.
+- `translation_map.json`: source-to-target section pointers, source references, structure shapes, and section hashes.
+- `claim_boundary_report.json`: producer-scope claim-boundary checks for all seven rows.
+- `editorial_review.json`: producer editorial self-review for all seven rows; this is not independent W9 evidence.
 - `package_manifest.json`: package identity, counts, permissions, and asset hashes.
 
 Every asset is `unpublished_candidate`. All CMS, database, import, publication, activation, SEO runtime, indexability, search-submission, and deployment permissions remain false.

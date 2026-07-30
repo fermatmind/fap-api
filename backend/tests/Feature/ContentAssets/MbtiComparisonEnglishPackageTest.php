@@ -81,7 +81,7 @@ final class MbtiComparisonEnglishPackageTest extends TestCase
         }
 
         self::assertSame($manifest['package_sha256'], hash('sha256', $packageHashInput));
-        self::assertSame('8bf265c76d9a1cae3a6cb57a0edd94c4b14852a5c1e7b0606e17edb75d2c840e', $manifest['package_sha256']);
+        self::assertSame('a85c80023d7a5203d43ff16c67e06bec59b50b86bbfd9107850f3b97a266717f', $manifest['package_sha256']);
     }
 
     #[Test]
@@ -124,7 +124,13 @@ final class MbtiComparisonEnglishPackageTest extends TestCase
     #[Test]
     public function it_preserves_source_structure_and_public_payload_alignment(): void
     {
-        foreach ($this->readPackageJson('assets.json')['assets'] as $asset) {
+        $package = $this->readPackageJson('assets.json');
+        $translationMap = $this->readPackageJson('translation_map.json');
+
+        self::assertSame('source_structured_editorial_translation', $translationMap['relationship']);
+        self::assertCount(7, $translationMap['assets']);
+
+        foreach ($package['assets'] as $asset) {
             $payload = $asset['payload'];
             self::assertSame('mbti.cross_type_comparison.public.v1', $payload['comparison_contract_version']);
             self::assertSame('mbti_cross_type', $payload['comparison_type']);
@@ -143,9 +149,52 @@ final class MbtiComparisonEnglishPackageTest extends TestCase
             self::assertCount($asset['source']['section_count'], $payload['sections']);
             self::assertCount($asset['source']['faq_count'], $payload['faq']);
             self::assertGreaterThanOrEqual(4, count($payload['internal_links']));
+            self::assertSame('source_structured_editorial_translation', $asset['translation_contract']['mode']);
+            self::assertTrue($asset['translation_contract']['structure_preserved']);
 
             foreach ($payload['internal_links'] as $link) {
                 self::assertStringStartsWith('/en/', $link['href']);
+            }
+
+            $mapRows = array_values(array_filter(
+                $translationMap['assets'],
+                static fn (array $row): bool => $row['row_id'] === $asset['row_id'],
+            ));
+            self::assertCount(1, $mapRows);
+            self::assertTrue($mapRows[0]['structure_preserved']);
+
+            if ($payload['comparison_slug'] === 'istj-vs-isfj') {
+                self::assertSame('backend_revision_sha256', $mapRows[0]['source_ref_kind']);
+
+                continue;
+            }
+
+            $source = $this->readJsonFromRepository($asset['source']['path']);
+            self::assertCount(count($source['sections']), $payload['sections']);
+
+            foreach ($source['sections'] as $index => $sourceSection) {
+                $targetSection = $payload['sections'][$index];
+                self::assertSame($sourceSection['id'], $targetSection['id']);
+                self::assertSame(
+                    count($sourceSection['body'] ?? []),
+                    count($targetSection['body'] ?? []),
+                    $asset['row_id'].' '.$sourceSection['id'].' body cardinality drifted.',
+                );
+                self::assertSame(
+                    count($sourceSection['groups'] ?? []),
+                    count($targetSection['groups'] ?? []),
+                    $asset['row_id'].' '.$sourceSection['id'].' group cardinality drifted.',
+                );
+                self::assertSame(
+                    array_map(static fn (array $group): int => count($group['items']), $sourceSection['groups'] ?? []),
+                    array_map(static fn (array $group): int => count($group['items']), $targetSection['groups'] ?? []),
+                    $asset['row_id'].' '.$sourceSection['id'].' nested item cardinality drifted.',
+                );
+                self::assertSame(
+                    count($sourceSection['items'] ?? []),
+                    count($targetSection['items'] ?? []),
+                    $asset['row_id'].' '.$sourceSection['id'].' item cardinality drifted.',
+                );
             }
         }
     }
@@ -169,15 +218,50 @@ final class MbtiComparisonEnglishPackageTest extends TestCase
                 self::assertNotSame('', trim($section['id']));
                 self::assertNotSame('', trim($section['title']));
                 self::assertTrue(
-                    count($section['body']) > 0 || count($section['rows'] ?? []) > 0,
-                    $asset['row_id'].' section '.$section['id'].' must contain body text or rows.',
+                    count($section['body'] ?? []) > 0
+                    || count($section['rows'] ?? []) > 0
+                    || count($section['groups'] ?? []) > 0
+                    || count($section['items'] ?? []) > 0,
+                    $asset['row_id'].' section '.$section['id'].' must contain body text, rows, groups, or items.',
                 );
+
+                foreach ($section['groups'] ?? [] as $group) {
+                    self::assertNotSame('', trim($group['title']));
+                    self::assertNotEmpty($group['items']);
+                }
             }
 
             foreach ($payload['faq'] as $faq) {
                 self::assertGreaterThanOrEqual(20, strlen($faq['question']));
                 self::assertGreaterThanOrEqual(60, strlen($faq['answer']));
             }
+        }
+    }
+
+    #[Test]
+    public function it_includes_the_required_translation_and_producer_review_artifacts(): void
+    {
+        $package = $this->readPackageJson('assets.json');
+        $translationMap = $this->readPackageJson('translation_map.json');
+        $claimBoundaryReport = $this->readPackageJson('claim_boundary_report.json');
+        $editorialReview = $this->readPackageJson('editorial_review.json');
+
+        self::assertSame($package['package_id'], $translationMap['package_id']);
+        self::assertSame($package['package_id'], $claimBoundaryReport['package_id']);
+        self::assertSame($package['package_id'], $editorialReview['package_id']);
+        self::assertCount(7, $claimBoundaryReport['rows']);
+        self::assertCount(7, $editorialReview['rows']);
+        self::assertFalse($claimBoundaryReport['independent_w9']);
+        self::assertFalse($editorialReview['independent_w9']);
+        self::assertFalse($claimBoundaryReport['controlled_actions_authorized']);
+
+        foreach ($claimBoundaryReport['rows'] as $row) {
+            self::assertSame('pass_producer_self_check_only', $row['result']);
+            self::assertNotContains('fail', array_values($row['checks']));
+        }
+        foreach ($editorialReview['rows'] as $row) {
+            self::assertSame('ready_for_independent_w9', $row['disposition']);
+            self::assertNotContains('fail', array_values($row['checks']));
         }
     }
 
@@ -210,6 +294,23 @@ final class MbtiComparisonEnglishPackageTest extends TestCase
     {
         $decoded = json_decode(
             (string) file_get_contents(self::PACKAGE_DIRECTORY.'/'.$file),
+            true,
+            512,
+            JSON_THROW_ON_ERROR,
+        );
+
+        self::assertIsArray($decoded);
+
+        return $decoded;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function readJsonFromRepository(string $path): array
+    {
+        $decoded = json_decode(
+            (string) file_get_contents(dirname(__DIR__, 4).'/'.$path),
             true,
             512,
             JSON_THROW_ON_ERROR,

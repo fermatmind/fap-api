@@ -19,15 +19,27 @@
   "files": [
     {
       "path": "README.md",
-      "sha256": "ef535547d5cba890652893a9a729a650fc67b31f84773dccc7c72504f162ec21"
+      "sha256": "276baef693c7828aa712fd87736dd71a96ce7126a07f87f0ebd1ae9dcfc47aa2"
     },
     {
       "path": "assets.json",
-      "sha256": "7867a24e6f19d545f3e5800815050dec5d1012c9275baa0dad78182d345d20ce"
+      "sha256": "7ee3e1cbd285cff133e3e433b272e0a353fdcfeb7be615f73e2488cfea74c499"
+    },
+    {
+      "path": "translation_map.json",
+      "sha256": "580abd0b6b43c28ad971a26c06505e49f5fc00f06d0248eead703a685b69676c"
+    },
+    {
+      "path": "claim_boundary_report.json",
+      "sha256": "ea6c1959163fb8a530ad967d08277c41786a7fa30fa56eff2f24e6515e07efb6"
+    },
+    {
+      "path": "editorial_review.json",
+      "sha256": "2d91c7698140cd1c36e715e3520f650f3349d3515f57049e6b8ef4bed472c516"
     }
   ],
   "package_sha256_algorithm": "sha256 of the UTF-8 concatenation of each manifest file path, NUL, lowercase file SHA-256, and newline in files[] order",
-  "package_sha256": "8bf265c76d9a1cae3a6cb57a0edd94c4b14852a5c1e7b0606e17edb75d2c840e",
+  "package_sha256": "a85c80023d7a5203d43ff16c67e06bec59b50b86bbfd9107850f3b97a266717f",
   "quality_gates": {
     "exact_inventory_identity": "pass",
     "exact_asset_count": "pass",
@@ -36,7 +48,11 @@
     "english_only_reader_copy": "pass",
     "claim_boundary": "pass_producer_self_check_only",
     "independent_w9": "pending",
-    "exact_package_dry_run": "pending_future_pr"
+    "exact_package_dry_run": "pending_future_pr",
+    "source_nested_structure_aligned": "pass",
+    "translation_map_complete": "pass",
+    "claim_boundary_report_complete": "pass_producer_self_check_only",
+    "editorial_review_complete": "pass_producer_self_check_only"
   },
   "permissions": {
     "cms_write_authorized": false,
