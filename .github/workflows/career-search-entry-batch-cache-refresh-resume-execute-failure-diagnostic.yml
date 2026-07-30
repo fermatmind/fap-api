@@ -239,8 +239,7 @@ jobs:
             "EXPECTED_PREFLIGHT_STATE_SHA256: ${EXPECTED_PREFLIGHT_STATE_SHA256}" \
             "EXPECTED_RESUME_TARGET_SET_SHA256: ${EXPECTED_RESUME_TARGET_SET_SHA256}"; do
             awk -v binding="$binding" \
-              'length($0) >= length(binding)
-               && substr($0, length($0) - length(binding) + 1) == binding {
+              'length($0) >= length(binding) && substr($0, length($0) - length(binding) + 1) == binding {
                  found = 1
                }
                END { exit(found ? 0 : 1) }' \
