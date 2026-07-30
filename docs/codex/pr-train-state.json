@@ -101179,7 +101179,7 @@
     "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
     "status": "review_fix_local_checks_passed",
     "depends_on": [],
-    "commit_sha": "6e320344e698259cabc489d29c48570b7dfa6fd5",
+    "commit_sha": "ee590b81a1e3f7c760032daf32ac0acf94cc7bd7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3421",
     "checks": {
       "production_read_only_inventory": {
@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "exact_head_retry_pending",
-        "evidence": "GitHub CI runs 30558811823, 30559823419, 30560724406, 30562045318, 30562910486, 30564012592, 30565108964, 30567136115, 30568401101, 30569685735, 30570549188, 30571343057, 30572071351, 30572828400, 30573601659, 30574341370, and 30575064365 passed all required jobs at their exact heads. The latest exact-head review added one in-scope semantic-fingerprint finding; its fix passes the 26-test inventory suite and the 395-test runtime-freeze suite and requires a fresh exact-head CI/review cycle."
+        "evidence": "GitHub CI runs 30558811823, 30559823419, 30560724406, 30562045318, 30562910486, 30564012592, 30565108964, 30567136115, 30568401101, 30569685735, 30570549188, 30571343057, 30572071351, 30572828400, 30573601659, 30574341370, 30575064365, and 30575816571 passed all required jobs at their exact heads. The latest exact-head review added one in-scope complete-Han finding and required the ledger to bind a current implementation head; implementation ee590b81a1e3f7c760032daf32ac0acf94cc7bd7 passes the 26-test inventory suite and the 395-test runtime-freeze suite and requires a fresh exact-head CI/review cycle."
       }
     },
     "scope_validation": {
@@ -101328,9 +101328,14 @@
         "at": "2026-07-30T19:39:32Z",
         "status": "review_fix_local_checks_passed",
         "note": "After every required job in CI run 30575064365 passed, exact-head review identified one remaining semantic content-comparison gap. Working and published fingerprints now hash recursively key-sorted stable JSON, so associative insertion order cannot turn identical content into a false independent candidate. The reordered-key regression resolves as duplicate_of_published; the 26-test inventory suite passes 156 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint and PHP syntax pass."
+      },
+      {
+        "at": "2026-07-30T19:49:23Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30575816571 passed, exact-head review identified one remaining supplementary Han gap and stale implementation binding. The detector now uses the Unicode Han script property, including Extension H U+31350, and the ledger binds exact implementation commit ee590b81a1e3f7c760032daf32ac0acf94cc7bd7. The 26-test inventory suite passes 156 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint and PHP syntax pass."
       }
     ],
-    "updated_at": "2026-07-30T19:39:32Z"
+    "updated_at": "2026-07-30T19:49:23Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
