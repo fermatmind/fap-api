@@ -101179,7 +101179,7 @@
     "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
     "status": "ready_to_merge",
     "depends_on": [],
-    "commit_sha": "494d0b2489c59d89df57e4729ac27c83f55f43cc",
+    "commit_sha": "2a11d6128a2010aecb93227dea100d3f06373375",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3421",
     "checks": {
       "production_read_only_inventory": {
@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "Exact-head review of metadata head 253064f6fe62fbd7bff5122076b3a296f2e24bee found that inline SVG and other image-capable HTML embeds were not rejected. Implementation 494d0b2489c59d89df57e4729ac27c83f55f43cc closes that same-scope text-only boundary; required checks must rerun."
+        "evidence": "CI run 30587176185 passed all required jobs on metadata head f26a84be2b7a06bcbde91885d99b145f997beacf. Exact-head review then found that historical slots were not bound to the observed production revision ids. Implementation 2a11d6128a2010aecb93227dea100d3f06373375 closes that same-scope lineage boundary; required checks must rerun."
       }
     },
     "scope_validation": {
@@ -101403,9 +101403,14 @@
         "at": "2026-07-30T22:26:24Z",
         "status": "github_checks_pending",
         "note": "After CI run 30586522407 passed all required jobs, exact-head review identified one remaining text-only boundary gap. HTML media scanning now rejects inline SVG plus image-capable or audiovisual embed tags including image, canvas, object, embed, iframe, video, and audio. Inline SVG and object regressions fail closed. The ledger binds implementation 494d0b2489c59d89df57e4729ac27c83f55f43cc. The 29-test inventory suite passes 197 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, and diff checks pass."
+      },
+      {
+        "at": "2026-07-30T22:38:10Z",
+        "status": "github_checks_pending",
+        "note": "After CI run 30587176185 passed all required jobs, exact-head review identified one remaining immutable-lineage gap. Each of the 50 historical slots now requires the exact revision id recorded by the authorized production observation in addition to its package, asset key, source hash, package SHA, workflow state, and transformed snapshot hash. A deleted row recreated with otherwise identical attributes fails closed as missing. All 50 locks cross-check against the durable evidence artifact. The ledger binds implementation 2a11d6128a2010aecb93227dea100d3f06373375. The 30-test inventory suite passes 201 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, YAML/JSON parsing, and diff checks pass."
       }
     ],
-    "updated_at": "2026-07-30T22:26:24Z"
+    "updated_at": "2026-07-30T22:38:10Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
