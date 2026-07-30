@@ -101264,7 +101264,7 @@
       "EN-PARITY-W1-MBTI-INVENTORY-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "3bb46acfe8deafa36edf2c4ad47cc04731089814",
+    "commit_sha": "8b01ee28e38c892c219802f51ea9388b6c0e0541",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3424",
     "checks": {
       "authorization": {
@@ -101305,7 +101305,7 @@
       },
       "latest_main_integration": {
         "status": "passed",
-        "evidence": "Merged origin/main 9f1e51691c45e7f37ecfe53884f4dc438f622c52 into the task branch without scope conflicts, then reran the complete manifest validation successfully."
+        "evidence": "Integrated current origin/main efa84b9a482193a6996453a6395ec060749c7b88 after preserving the newly merged API-UNLOCK-01 ledger entry and this PR's state entry. The focused 6-test/987-assertion suite, Pint, package/state JSON, train YAML, diff check, and exact nine-file PR scope all pass."
       },
       "github_required_checks": {
         "status": "passed",
@@ -101313,7 +101313,7 @@
       },
       "final_head_checks": {
         "status": "pending",
-        "evidence": "Review-fix implementation head 3bb46acfe8deafa36edf2c4ad47cc04731089814 is pushed; its required GitHub checks and refreshed exact-head review are pending."
+        "evidence": "Review-fix implementation plus latest-main integration head 8b01ee28e38c892c219802f51ea9388b6c0e0541 is locally verified; its required GitHub checks and refreshed exact-head review are pending."
       },
       "codex_review": {
         "status": "resolved_pushed_pending_rereview",
@@ -101367,8 +101367,13 @@
         "at": "2026-07-30T16:53:15Z",
         "status": "github_checks_pending",
         "note": "Pushed review-fix implementation commit 3bb46acfe8deafa36edf2c4ad47cc04731089814, updated the PR body to the replacement package SHA and 6-test/987-assertion evidence, and replied on the exact P2 thread. Fresh GitHub checks and refreshed review are pending."
+      },
+      {
+        "at": "2026-07-30T17:00:15Z",
+        "status": "github_checks_pending",
+        "note": "GitHub reported DIRTY because API-UNLOCK-01 merged concurrently. Integrated current origin/main efa84b9a482193a6996453a6395ec060749c7b88, preserving both ledger entries, and reran focused tests 6/987, Pint, all JSON/YAML parsing, diff checks, and exact nine-file PR scope successfully. No controlled action or future scope was added."
       }
     ],
-    "updated_at": "2026-07-30T16:53:15Z"
+    "updated_at": "2026-07-30T17:00:15Z"
   }
 }
