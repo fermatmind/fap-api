@@ -1004,6 +1004,10 @@ final class BigFiveEnglishDraftInventory
             if (preg_match('/<(?:img|picture|source|svg|image|canvas|object|embed|iframe|video|audio|style|link)\b/i', $value) === 1) {
                 return true;
             }
+            if (preg_match('/<[^>]+\b(?:src|srcset|poster|background)\s*=/i', $value) === 1
+                || preg_match('/<input\b[^>]*\btype\s*=\s*(?:"image"|\x27image\x27|image\b)/i', $value) === 1) {
+                return true;
+            }
             if (preg_match(
                 '/(?:url|image(?:-set)?|cross-fade|element|(?:linear|radial|conic)-gradient)\s*\(/i',
                 $value,
