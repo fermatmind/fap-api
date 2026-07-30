@@ -101253,5 +101253,55 @@
       }
     ],
     "updated_at": "2026-07-30T16:39:25Z"
+  },
+  "API-GIFT-SCHEMA-01": {
+    "id": "API-GIFT-SCHEMA-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/api-gift-schema-01-report-gift-requests",
+    "title": "API-GIFT-SCHEMA-01: add report gift request schema",
+    "status": "local_validation_passed",
+    "depends_on": [
+      "API-UNLOCK-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "focused_phpunit": "passed: 1 test, 28 assertions",
+      "fresh_sqlite_migration": "passed: clean SQLite database",
+      "pint_scoped": "passed: 2 files",
+      "composer_validate": "passed: strict",
+      "yaml_json_diff_scope": "passed",
+      "github_required_checks": "pending"
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": true,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-30T17:20:19Z",
+        "status": "implementation_in_progress",
+        "note": "Started from exact origin/main 44b77fdba10eab3f287e4996b6c5c2fae245b354 in an isolated worktree after explicit authorization for the standalone schema PR. Fixed-order steps: routes N/A, migration implemented, FmTokenAuth N/A, controller/service/model/resource N/A, scripts/CI limited to train records. No production migration, data write, route, payment provider, entitlement grant, deploy, or mini-program action occurred."
+      },
+      {
+        "at": "2026-07-30T17:27:26Z",
+        "status": "local_validation_passed",
+        "note": "The dedicated report_gift_requests schema passed 1 focused test / 28 assertions. A fresh SQLite database completed the full migration chain including the new migration. Scoped Pint, PHP syntax, strict Composer validation, YAML/JSON parsing, diff checks, and exact four-path scope review passed. Routes, FmTokenAuth, runtime models/services/controllers, production migration/data, payment, deploy, and mini-program actions remain N/A or prohibited."
+      }
+    ],
+    "updated_at": "2026-07-30T17:27:26Z"
   }
 }

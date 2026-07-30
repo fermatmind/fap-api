@@ -115,6 +115,48 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: API-GIFT-SCHEMA-01
+    repo: fap-api
+    base: main
+    branch: codex/api-gift-schema-01-report-gift-requests
+    title: "API-GIFT-SCHEMA-01: add report gift request schema"
+    status: ready_for_review
+    depends_on:
+      - API-UNLOCK-01
+    train_scope: report_gift_request_schema
+    scope:
+      - Add the dedicated report_gift_requests table for one recipient attempt and one eventual purchasing order.
+      - Store only a SHA-256 public-token hash and keep gift state independent from legacy invite counters and order metadata.
+      - Enforce unique public tokens and a single gift request per purchased order while retaining explicit expiry, fulfillment, and cancellation timestamps.
+    allowed_paths:
+      - backend/database/migrations/2026_07_30_235900_create_report_gift_requests_table.php
+      - backend/tests/Feature/Storage/ReportGiftRequestSchemaMigrationTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add routes, middleware, models, controllers, resources, services, payment providers, Apple IAP, rewarded-ad sessions, or frontend code.
+      - Reuse invite counters or invite codes, use orders metadata as gift authority, store plaintext gift tokens, or grant entitlements.
+      - Run a production migration, write production data, deploy, publish, upload the mini-program, create an order, or perform a payment.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Storage/ReportGiftRequestSchemaMigrationTest.php --no-ansi
+      - cd backend && gift_db=$(mktemp /tmp/fap-api-gift-schema.XXXXXX) && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE="$gift_db" php artisan migrate --force --no-interaction --no-ansi
+      - cd backend && vendor/bin/pint --test database/migrations/2026_07_30_235900_create_report_gift_requests_table.php tests/Feature/Storage/ReportGiftRequestSchemaMigrationTest.php
+      - cd backend && composer validate --strict
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: true
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: CAREER-SEARCH-ENTRY-TIER-CONTRACT-01
     repo: fap-api
     base: main
