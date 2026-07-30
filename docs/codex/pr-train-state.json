@@ -101179,7 +101179,7 @@
     "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
     "status": "github_checks_pending",
     "depends_on": [],
-    "commit_sha": "04e25651849c5e1fd1e6114d8a8897f0da86c6cb",
+    "commit_sha": "164829a5e618b5489211e6ee2067438bf7c9ba49",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3421",
     "checks": {
       "production_read_only_inventory": {
@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "CI run 30589679599 and Code Scanning run 30589679597 passed all required jobs on metadata head 5b3cd5fa6a88d77a3ec8f1ebc85b0bd54f6a875d. Exact-head review then found that HTML image input controls were not rejected. Implementation 04e25651849c5e1fd1e6114d8a8897f0da86c6cb closes the generalized HTML media-attribute boundary; required checks must rerun."
+        "evidence": "CI run 30590176791 and Code Scanning run 30590176790 passed all required jobs on metadata head db863b63fda7253439e6b74e4c715394983358a9. Exact-head review then found that HTML image metadata declarations were not rejected. Implementation 164829a5e618b5489211e6ee2067438bf7c9ba49 closes that same-scope metadata boundary; required checks must rerun."
       }
     },
     "scope_validation": {
@@ -101428,9 +101428,14 @@
         "at": "2026-07-30T23:19:26Z",
         "status": "github_checks_pending",
         "note": "After CI run 30589679599 passed all required jobs, exact-head review identified HTML input type=image as a remaining media vector. The scanner now rejects any HTML src, srcset, poster, or background loading attribute and image-type input control in addition to the existing media-tag and CSS-function boundaries. Image input and legacy table background regressions fail closed. The ledger binds implementation 04e25651849c5e1fd1e6114d8a8897f0da86c6cb. The 30-test inventory suite passes 213 assertions, scoped Pint and PHP syntax pass, and the focused runtime-freeze classifier passes 1 test / 2 assertions. The complete runtime-freeze file was not duplicated while another repository Vitest validation held the heavy-process guard."
+      },
+      {
+        "at": "2026-07-30T23:28:52Z",
+        "status": "github_checks_pending",
+        "note": "After CI run 30590176791 passed all required jobs, exact-head review identified HTML image metadata as a remaining media vector. The scanner now rejects meta declarations, covering og:image, twitter:image, and itemprop=image alongside the existing tag, loading-attribute, CSS-function, and Markdown boundaries. The ledger binds implementation 164829a5e618b5489211e6ee2067438bf7c9ba49. The 30-test inventory suite passes 219 assertions, scoped Pint and PHP syntax pass, and the focused runtime-freeze classifier passes 1 test / 2 assertions."
       }
     ],
-    "updated_at": "2026-07-30T23:19:26Z"
+    "updated_at": "2026-07-30T23:28:52Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
