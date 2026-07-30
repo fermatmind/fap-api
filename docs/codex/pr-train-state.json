@@ -101179,7 +101179,7 @@
     "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
     "status": "review_fix_local_checks_passed",
     "depends_on": [],
-    "commit_sha": "7b890223ee014b30ea45e803aa36668b76ee3b60",
+    "commit_sha": "b6d6fbb8957e2002884346b1ef6f3abe30569f6c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3421",
     "checks": {
       "production_read_only_inventory": {
@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "exact_head_retry_pending",
-        "evidence": "GitHub CI runs through 30581831908 passed all required jobs at their exact heads. The latest exact-head review added one in-scope cross-locale alias-boundary finding; implementation 7b890223ee014b30ea45e803aa36668b76ee3b60 passes the 28-test inventory suite and the 395-test runtime-freeze suite and requires a fresh exact-head CI/review cycle."
+        "evidence": "GitHub CI runs through 30582615012 passed all required jobs at their exact heads. The latest exact-head review added one in-scope cross-organization alias-boundary finding; implementation b6d6fbb8957e2002884346b1ef6f3abe30569f6c passes the 28-test inventory suite and the 395-test runtime-freeze suite and requires a fresh exact-head CI/review cycle."
       }
     },
     "scope_validation": {
@@ -101373,9 +101373,14 @@
         "at": "2026-07-30T21:14:14Z",
         "status": "review_fix_local_checks_passed",
         "note": "After every required job in CI run 30581831908 passed, exact-head review identified one remaining cross-locale redirect-only alias gap. The database pass gate now inspects org-0 Big Five authority rows across en and zh-CN, applies the canonical ten-alias key set to entity key, slug, canonical path, and redirect_from, and keeps unknown-authority drift scoped to the English canonical inventory. A zh-CN high-openness regression proves the aggregate alias count blocks ok=true. The ledger binds implementation 7b890223ee014b30ea45e803aa36668b76ee3b60. The 28-test inventory suite passes 182 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, YAML/JSON parsing, and diff checks pass."
+      },
+      {
+        "at": "2026-07-30T21:25:16Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30582615012 passed, exact-head review identified one remaining cross-organization redirect-only alias gap. The alias database pass gate now matches BigFiveEn52Publisher::assertRedirectAliasesAbsent(): it has no organization or locale filter and checks all candidate rows by framework, polarity identity, alias slug, canonical path, and redirect_from, while the English canonical inventory remains org-0/en. A nonzero-org low-openness regression proves global alias reappearance blocks ok=true. Scoped Pint initially reported mechanical formatting, which was fixed and rerun before commit. The ledger binds implementation b6d6fbb8957e2002884346b1ef6f3abe30569f6c. The 28-test inventory suite passes 182 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, YAML/JSON parsing, and diff checks pass."
       }
     ],
-    "updated_at": "2026-07-30T21:14:14Z"
+    "updated_at": "2026-07-30T21:25:16Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
