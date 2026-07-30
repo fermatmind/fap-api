@@ -15,16 +15,37 @@
     ],
     "required_locale": "en",
     "required_access_state": "entitled_report",
-    "mobile_desktop_authority": "same_fields"
+    "mobile_desktop_authority": "same_fields",
+    "current_runtime_consumes_candidate_package": false
+  },
+  "runtime_payload_contract": {
+    "payload_root": "mbti_pdf_payload",
+    "builder_emitted_fields": ["type","axis_scores","highlights","sections","result_page_sections","document","recommended_reads"],
+    "document_service_consumed_fields": ["type","axis_scores","result_page_sections","document"],
+    "current_source_payload_key": "legacy_mbti_report_payload_v2"
+  },
+  "required_w9_adapter_contract": {
+    "adapter_id": "exact_package_to_mbti_pdf_fixture_v1",
+    "implementation_scope": "independent W9 fixture harness only",
+    "runtime_or_cms_activation_allowed": false,
+    "must_read_exact_frozen_package": true,
+    "must_project_candidate_assets": true,
+    "must_project_preserved_controls_without_reauthoring": true,
+    "must_preserve_sections_and_premium_teaser_buckets": true,
+    "must_fail_if_any_candidate_asset_is_not_exercised": true
   },
   "projection": [
-    {"pdf_block":"identity","authority_fields":["profile","summary_card"],"inventory_rows":["W1-RESULT-CORE-01-PROFILE","W1-RESULT-CORE-02-SUMMARY-CARD"]},
-    {"pdf_block":"dimensions","authority_fields":["dimensions"],"inventory_rows":["W1-RESULT-CORE-03-DIMENSIONS"]},
-    {"pdf_block":"interpretation_sections","authority_fields":["sections"],"inventory_rows":["W1-RESULT-SECTION-01-LETTERS_INTRO","W1-RESULT-SECTION-02-OVERVIEW","W1-RESULT-SECTION-03-TRAIT_OVERVIEW","W1-RESULT-SECTION-04-TRAITS-AT_DIFFERENCE","W1-RESULT-SECTION-05-FAQ","W1-RESULT-SECTION-06-TRAITS-WHY_THIS_TYPE","W1-RESULT-SECTION-07-TRAITS-CLOSE_CALL_AXES","W1-RESULT-SECTION-08-TRAITS-ADJACENT_TYPE_CONTRAST","W1-RESULT-SECTION-09-TRAITS-DECISION_STYLE","W1-RESULT-SECTION-10-CAREER-SUMMARY","W1-RESULT-SECTION-11-CAREER-COLLABORATION_FIT","W1-RESULT-SECTION-12-CAREER-WORK_ENVIRONMENT","W1-RESULT-SECTION-13-CAREER-WORK_EXPERIMENTS","W1-RESULT-SECTION-14-CAREER-ADVANTAGES","W1-RESULT-SECTION-15-CAREER-WEAKNESSES","W1-RESULT-SECTION-16-CAREER-PREFERRED_ROLES","W1-RESULT-SECTION-17-CAREER-NEXT_STEP","W1-RESULT-SECTION-18-CAREER-UPGRADE_SUGGESTIONS","W1-RESULT-SECTION-19-GROWTH-SUMMARY","W1-RESULT-SECTION-20-GROWTH-STABILITY_CONFIDENCE","W1-RESULT-SECTION-21-GROWTH-NEXT_ACTIONS","W1-RESULT-SECTION-22-GROWTH-WEEKLY_EXPERIMENTS","W1-RESULT-SECTION-23-GROWTH-STRENGTHS","W1-RESULT-SECTION-24-GROWTH-WEAKNESSES","W1-RESULT-SECTION-25-GROWTH-STRESS_RECOVERY","W1-RESULT-SECTION-26-GROWTH-WATCHOUTS","W1-RESULT-SECTION-27-GROWTH-MOTIVATORS","W1-RESULT-SECTION-28-GROWTH-DRAINERS","W1-RESULT-SECTION-29-RELATIONSHIPS-SUMMARY","W1-RESULT-SECTION-30-RELATIONSHIPS-STRENGTHS","W1-RESULT-SECTION-31-RELATIONSHIPS-WEAKNESSES","W1-RESULT-SECTION-32-RELATIONSHIPS-COMMUNICATION_STYLE","W1-RESULT-SECTION-33-RELATIONSHIPS-TRY_THIS_WEEK","W1-RESULT-SECTION-34-RELATIONSHIPS-REL_ADVANTAGES","W1-RESULT-SECTION-35-RELATIONSHIPS-REL_RISKS"]}
+    {"pdf_payload_field":"type","package_authority_fields":["profile","summary_card"],"inventory_rows":["W1-RESULT-CORE-01-PROFILE","W1-RESULT-CORE-02-SUMMARY-CARD"]},
+    {"pdf_payload_field":"axis_scores","package_authority_fields":["dimensions"],"inventory_rows":["W1-RESULT-CORE-03-DIMENSIONS"]},
+    {"pdf_payload_field":"result_page_sections","package_authority_buckets":["sections","premium_teaser"],"inventory_rows":["W1-RESULT-SECTION-01-LETTERS_INTRO","W1-RESULT-SECTION-02-OVERVIEW","W1-RESULT-SECTION-03-TRAIT_OVERVIEW","W1-RESULT-SECTION-04-TRAITS-AT_DIFFERENCE","W1-RESULT-SECTION-05-FAQ","W1-RESULT-SECTION-06-TRAITS-WHY_THIS_TYPE","W1-RESULT-SECTION-07-TRAITS-CLOSE_CALL_AXES","W1-RESULT-SECTION-08-TRAITS-ADJACENT_TYPE_CONTRAST","W1-RESULT-SECTION-09-TRAITS-DECISION_STYLE","W1-RESULT-SECTION-10-CAREER-SUMMARY","W1-RESULT-SECTION-11-CAREER-COLLABORATION_FIT","W1-RESULT-SECTION-12-CAREER-WORK_ENVIRONMENT","W1-RESULT-SECTION-13-CAREER-WORK_EXPERIMENTS","W1-RESULT-SECTION-14-CAREER-ADVANTAGES","W1-RESULT-SECTION-15-CAREER-WEAKNESSES","W1-RESULT-SECTION-16-CAREER-PREFERRED_ROLES","W1-RESULT-SECTION-17-CAREER-NEXT_STEP","W1-RESULT-SECTION-18-CAREER-UPGRADE_SUGGESTIONS","W1-RESULT-SECTION-19-GROWTH-SUMMARY","W1-RESULT-SECTION-20-GROWTH-STABILITY_CONFIDENCE","W1-RESULT-SECTION-21-GROWTH-NEXT_ACTIONS","W1-RESULT-SECTION-22-GROWTH-WEEKLY_EXPERIMENTS","W1-RESULT-SECTION-23-GROWTH-STRENGTHS","W1-RESULT-SECTION-24-GROWTH-WEAKNESSES","W1-RESULT-SECTION-25-GROWTH-STRESS_RECOVERY","W1-RESULT-SECTION-26-GROWTH-WATCHOUTS","W1-RESULT-SECTION-27-GROWTH-MOTIVATORS","W1-RESULT-SECTION-28-GROWTH-DRAINERS","W1-RESULT-SECTION-29-RELATIONSHIPS-SUMMARY","W1-RESULT-SECTION-30-RELATIONSHIPS-STRENGTHS","W1-RESULT-SECTION-31-RELATIONSHIPS-WEAKNESSES","W1-RESULT-SECTION-32-RELATIONSHIPS-COMMUNICATION_STYLE","W1-RESULT-SECTION-33-RELATIONSHIPS-TRY_THIS_WEEK","W1-RESULT-SECTION-34-RELATIONSHIPS-REL_ADVANTAGES","W1-RESULT-SECTION-35-RELATIONSHIPS-REL_RISKS"]},
+    {"pdf_payload_field":"document","document_projection":"chapters derived from the same adapted result_page_sections candidate set","required_candidate_row_count":21,"legacy_only_render_is_acceptable":false}
   ],
   "w9_assertions": [
     "rendered reader text contains no Han characters",
     "every rendered section maps to one registered inventory row",
+    "all 21 candidate assets are exercised through the exact-package fixture adapter",
+    "premium teaser assets remain in the premium_teaser bucket before PDF projection",
+    "a legacy-only PDF render fails the exact-package coverage assertion",
     "locked or premium body is absent without the synthetic entitled state",
     "no private fixture value is serialized into a package or QA artifact",
     "claim-boundary wording remains present and non-deterministic",

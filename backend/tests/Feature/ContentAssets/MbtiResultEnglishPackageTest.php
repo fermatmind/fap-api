@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\ContentAssets;
 
+use App\Support\Mbti\MbtiCanonicalSectionRegistry;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -13,7 +14,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
 
     private const INVENTORY_SHA = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
-    private const PACKAGE_SHA = 'da6cb2ee008d7c76503d0a60774a035810837a2cb68fb7ff23b668be0a5c5453';
+    private const PACKAGE_SHA = 'b0eabede7ab67f746631e709ac252ad7cc020201a88002d01fdc100d4c2af62a';
 
     private const EXPECTED_CANDIDATE_ROW_IDS = [
         'W1-RESULT-CORE-05-OFFER-CTA',
@@ -198,6 +199,15 @@ final class MbtiResultEnglishPackageTest extends TestCase
                 self::assertCount(2, $asset['content']['body_template']);
                 self::assertCount(2, $asset['content']['reflection_prompts']);
             }
+
+            if (isset($asset['section_key'])) {
+                $definition = MbtiCanonicalSectionRegistry::definition($asset['section_key']);
+                self::assertNotNull($definition);
+                self::assertSame(
+                    $definition['bucket'].'.'.$asset['section_key'],
+                    $asset['authority_field'],
+                );
+            }
         }
 
         self::assertCount(21, array_unique($stableIdentities));
@@ -287,8 +297,31 @@ final class MbtiResultEnglishPackageTest extends TestCase
         self::assertSame('en', $mapping['fixture_contract']['required_locale']);
         self::assertSame('entitled_report', $mapping['fixture_contract']['required_access_state']);
         self::assertSame('same_fields', $mapping['fixture_contract']['mobile_desktop_authority']);
-        self::assertCount(3, $mapping['projection']);
-        self::assertCount(6, $mapping['w9_assertions']);
+        self::assertFalse($mapping['fixture_contract']['current_runtime_consumes_candidate_package']);
+        self::assertSame('mbti_pdf_payload', $mapping['runtime_payload_contract']['payload_root']);
+        self::assertSame(
+            ['type', 'axis_scores', 'result_page_sections', 'document'],
+            $mapping['runtime_payload_contract']['document_service_consumed_fields'],
+        );
+        self::assertSame(
+            'exact_package_to_mbti_pdf_fixture_v1',
+            $mapping['required_w9_adapter_contract']['adapter_id'],
+        );
+        self::assertTrue($mapping['required_w9_adapter_contract']['must_read_exact_frozen_package']);
+        self::assertTrue($mapping['required_w9_adapter_contract']['must_fail_if_any_candidate_asset_is_not_exercised']);
+        self::assertFalse($mapping['required_w9_adapter_contract']['runtime_or_cms_activation_allowed']);
+        self::assertCount(4, $mapping['projection']);
+        self::assertSame(
+            ['type', 'axis_scores', 'result_page_sections', 'document'],
+            array_column($mapping['projection'], 'pdf_payload_field'),
+        );
+        self::assertSame(
+            ['sections', 'premium_teaser'],
+            $mapping['projection'][2]['package_authority_buckets'],
+        );
+        self::assertSame(21, $mapping['projection'][3]['required_candidate_row_count']);
+        self::assertFalse($mapping['projection'][3]['legacy_only_render_is_acceptable']);
+        self::assertCount(9, $mapping['w9_assertions']);
 
         self::assertCount(13, $mapping['excluded_fixture_fields']);
         foreach ($mapping['excluded_fixture_fields'] as $excludedField) {

@@ -101514,11 +101514,11 @@
       },
       "package_contract": {
         "status": "passed",
-        "evidence": "Frozen candidate package SHA da6cb2ee008d7c76503d0a60774a035810837a2cb68fb7ff23b668be0a5c5453 reconciles 46 unique rows as 24 preserved controls, 21 distinct English assets, and one synthetic private-safe PDF W9 target. It includes the entitlement/surface matrix, source-authority map, producer claim/editorial reports, and all-false controlled permissions."
+        "evidence": "Frozen candidate package SHA b0eabede7ab67f746631e709ac252ad7cc020201a88002d01fdc100d4c2af62a reconciles 46 unique rows as 24 preserved controls, 21 distinct English assets, and one synthetic private-safe PDF W9 target. Premium teaser assets follow the canonical registry bucket, and the PDF mapping truthfully requires an exact-package W9 fixture adapter because the current legacy builder does not consume candidate assets. The package retains all controlled permissions as false."
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "php artisan test --filter=MbtiResultEnglishPackageTest passed 7 tests and 744 assertions; scoped Pint passed; every package JSON and train state parsed; train YAML loaded; candidate Han scan, exact counts, deterministic hashes, and git diff --check passed. After the required process guard, the isolated SQLite ci_verify wrapper ran scripts/verify_mbti.sh successfully and completed the MBTI smoke/contract chain with exit 0."
+        "evidence": "After review repair, php artisan test --filter=MbtiResultEnglishPackageTest passed 7 tests and 795 assertions, including canonical registry bucket and real PDF payload/adapter assertions. Scoped Pint, package JSON parsing, deterministic package SHA b0eabede7ab67f746631e709ac252ad7cc020201a88002d01fdc100d4c2af62a, git diff, and exact scope checks passed. After the required process guard, the isolated SQLite ci_verify wrapper again ran scripts/verify_mbti.sh and the bounded MBTI regression chain with exit 0."
       },
       "changed_file_scope": {
         "status": "passed",
@@ -101555,14 +101555,19 @@
       {
         "at": "2026-07-30T18:26:22Z",
         "status": "local_verified",
-        "note": "Frozen package SHA da6cb2ee008d7c76503d0a60774a035810837a2cb68fb7ff23b668be0a5c5453 after exact 46 = 24 + 21 + 1 reconciliation. Focused validation passed 7 tests/744 assertions, Pint, JSON/YAML, Han/private/claim/entitlement checks, diff and exact scope checks. The first direct verify_mbti invocation correctly failed because no local HTTP server existed; after isolated SQLite CI setup started the server, the same verify_mbti chain and the bounded MBTI regression gates passed with exit 0. No production/CMS/database authority write occurred."
+        "note": "Initial package SHA da6cb2ee008d7c76503d0a60774a035810837a2cb68fb7ff23b668be0a5c5453 passed the first local and GitHub validation round. Exact-head review then identified current-scope registry/PDF fixture mismatches; that SHA was superseded before merge and is not an approved frozen package. No production/CMS/database authority write occurred."
       },
       {
         "at": "2026-07-30T18:28:38Z",
         "status": "github_checks_pending",
         "note": "Pushed the exact scoped branch and opened PR #3429 as a ready PR. GitHub reports the head mergeable; required checks are queued or running. No controlled write, import, activation, release, or deploy action was triggered."
+      },
+      {
+        "at": "2026-07-30T18:44:30Z",
+        "status": "review_fix_local_verified",
+        "note": "The first GitHub round passed all required checks, then exact-head review identified two valid current-scope P2 contract gaps. Four premium teaser assets now use the canonical premium_teaser bucket, and the PDF fixture mapping now names the actual mbti_pdf_payload fields, records that the legacy builder does not consume this package, and requires an exact-package W9 fixture adapter that fails on legacy-only coverage. Frozen package SHA is now b0eabede7ab67f746631e709ac252ad7cc020201a88002d01fdc100d4c2af62a. Focused validation passed 7 tests/795 assertions, and the full isolated SQLite ci_verify_mbti.sh chain exited 0. No runtime, CMS, database, import, activation, release, or deploy action occurred."
       }
     ],
-    "updated_at": "2026-07-30T18:28:38Z"
+    "updated_at": "2026-07-30T18:44:30Z"
   }
 }

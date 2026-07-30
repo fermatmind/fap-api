@@ -10,8 +10,9 @@ The package reconciles the frozen W1 inventory at package SHA
 - 24 existing controls preserved by reference and not regenerated
 - 21 English candidate assets for the missing or structurally incomplete
   offer/CTA and canonical-section families
-- 1 synthetic-fixture-ready PDF authority mapping reserved for independent W9
-  review
+- 1 synthetic, adapter-required PDF authority mapping reserved for independent
+  W9 review; the current legacy PDF builder does not consume this candidate
+  package directly
 
 The candidate is backend-owned source material only. It does not change a
 runtime content pack, CMS row, database row, attempt, report, entitlement,
