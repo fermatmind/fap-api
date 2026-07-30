@@ -101180,9 +101180,9 @@
     "depends_on": [
       "EN-PARITY-W1-MBTI-INVENTORY-01"
     ],
-    "status": "local_verified",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "471e23bb88b8c3904a12654165338183b4157984",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3424",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -101223,6 +101223,10 @@
       "latest_main_integration": {
         "status": "passed",
         "evidence": "Merged origin/main 9f1e51691c45e7f37ecfe53884f4dc438f622c52 into the task branch without scope conflicts, then reran the complete manifest validation successfully."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": "PR #3424 opened from the exact scoped branch; required GitHub checks are pending."
       }
     },
     "failure_reason": null,
@@ -101252,8 +101256,13 @@
         "at": "2026-07-30T16:29:30Z",
         "status": "local_verified",
         "note": "Integrated latest origin/main 9f1e51691c45e7f37ecfe53884f4dc438f622c52 after unrelated ops PR #3422, then reran focused tests 5/633, Pint, package JSON, ledger JSON, train YAML, diff check, and exact six-file scope successfully."
+      },
+      {
+        "at": "2026-07-30T16:31:15Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the scoped branch and opened PR #3424. GitHub required checks are pending; controlled content and production permissions remain false."
       }
     ],
-    "updated_at": "2026-07-30T16:29:30Z"
+    "updated_at": "2026-07-30T16:31:15Z"
   }
 }
