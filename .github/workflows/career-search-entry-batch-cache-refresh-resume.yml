@@ -47,11 +47,35 @@ on:
         required: true
         type: string
       expected_bad_href_url_count:
-        description: Exact locale-unsafe-href URL count from recovery
+        description: Exact locale-unsafe-href URL count from diagnostic
         required: true
         type: string
       expected_low_module_url_count:
-        description: Exact thin-module URL count from recovery
+        description: Exact thin-module URL count from diagnostic
+        required: true
+        type: string
+      failed_preflight_run_id:
+        description: Exact failed resume preflight diagnosed before rebase
+        required: true
+        type: string
+      failed_preflight_run_attempt:
+        description: Exact failed resume preflight attempt diagnosed before rebase
+        required: true
+        type: string
+      expected_failed_preflight_receipt_sha256:
+        description: Exact immutable failed resume preflight receipt SHA
+        required: true
+        type: string
+      diagnostic_run_id:
+        description: Exact successful resume-preflight failure diagnostic run
+        required: true
+        type: string
+      diagnostic_run_attempt:
+        description: Exact successful resume-preflight failure diagnostic attempt
+        required: true
+        type: string
+      expected_diagnostic_receipt_sha256:
+        description: Exact immutable diagnostic receipt SHA
         required: true
         type: string
       preflight_run_id:
@@ -112,11 +136,19 @@ jobs:
       recovery_run_id: ${{ steps.validate.outputs.recovery_run_id }}
       recovery_run_attempt: ${{ steps.validate.outputs.recovery_run_attempt }}
       recovery_receipt_sha256: ${{ steps.validate.outputs.recovery_receipt_sha256 }}
-      recovery_payload_set_sha256: ${{ steps.validate.outputs.recovery_payload_set_sha256 }}
+      baseline_payload_set_sha256: ${{ steps.validate.outputs.baseline_payload_set_sha256 }}
       manifest_sha256: ${{ steps.validate.outputs.manifest_sha256 }}
       recovery_readback_sha256: ${{ steps.validate.outputs.recovery_readback_sha256 }}
       bad_href_url_count: ${{ steps.validate.outputs.bad_href_url_count }}
       low_module_url_count: ${{ steps.validate.outputs.low_module_url_count }}
+      failed_preflight_run_id: ${{ steps.validate.outputs.failed_preflight_run_id }}
+      failed_preflight_run_attempt: ${{ steps.validate.outputs.failed_preflight_run_attempt }}
+      failed_preflight_receipt_sha256: ${{ steps.validate.outputs.failed_preflight_receipt_sha256 }}
+      diagnostic_run_id: ${{ steps.validate.outputs.diagnostic_run_id }}
+      diagnostic_run_attempt: ${{ steps.validate.outputs.diagnostic_run_attempt }}
+      diagnostic_receipt_sha256: ${{ steps.validate.outputs.diagnostic_receipt_sha256 }}
+      diagnostic_state_sha256: ${{ steps.validate.outputs.diagnostic_state_sha256 }}
+      diagnostic_payload_set_sha256: ${{ steps.validate.outputs.diagnostic_payload_set_sha256 }}
       preflight_state_sha256: ${{ steps.validate.outputs.preflight_state_sha256 }}
       resume_target_set_sha256: ${{ steps.validate.outputs.resume_target_set_sha256 }}
       resume_target_count: ${{ steps.validate.outputs.resume_target_count }}
@@ -145,6 +177,12 @@ jobs:
           EXPECTED_RECOVERY_READBACK_SHA256: ${{ inputs.expected_recovery_readback_sha256 }}
           EXPECTED_BAD_HREF_URL_COUNT: ${{ inputs.expected_bad_href_url_count }}
           EXPECTED_LOW_MODULE_URL_COUNT: ${{ inputs.expected_low_module_url_count }}
+          FAILED_PREFLIGHT_RUN_ID: ${{ inputs.failed_preflight_run_id }}
+          FAILED_PREFLIGHT_RUN_ATTEMPT: ${{ inputs.failed_preflight_run_attempt }}
+          EXPECTED_FAILED_PREFLIGHT_RECEIPT_SHA256: ${{ inputs.expected_failed_preflight_receipt_sha256 }}
+          DIAGNOSTIC_RUN_ID: ${{ inputs.diagnostic_run_id }}
+          DIAGNOSTIC_RUN_ATTEMPT: ${{ inputs.diagnostic_run_attempt }}
+          EXPECTED_DIAGNOSTIC_RECEIPT_SHA256: ${{ inputs.expected_diagnostic_receipt_sha256 }}
           PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
           PREFLIGHT_RUN_ATTEMPT: ${{ inputs.preflight_run_attempt }}
           EXPECTED_PREFLIGHT_STATE_SHA256: ${{ inputs.expected_preflight_state_sha256 }}
@@ -167,8 +205,16 @@ jobs:
           [[ "$EXPECTED_RECOVERY_READBACK_SHA256" =~ ^[0-9a-f]{64}$ ]]
           [[ "$EXPECTED_BAD_HREF_URL_COUNT" =~ ^[1-9][0-9]{0,2}$ ]]
           [[ "$EXPECTED_LOW_MODULE_URL_COUNT" =~ ^(0|[1-9][0-9]{0,2})$ ]]
+          [[ "$FAILED_PREFLIGHT_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$FAILED_PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+          [[ "$EXPECTED_FAILED_PREFLIGHT_RECEIPT_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$DIAGNOSTIC_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$DIAGNOSTIC_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+          [[ "$EXPECTED_DIAGNOSTIC_RECEIPT_SHA256" =~ ^[0-9a-f]{64}$ ]]
           test "$EXPECTED_BAD_HREF_URL_COUNT" -le 100
           test "$EXPECTED_LOW_MODULE_URL_COUNT" -le 100
+          test "$FAILED_PREFLIGHT_RUN_ID" -gt "$RECOVERY_RUN_ID"
+          test "$DIAGNOSTIC_RUN_ID" -gt "$FAILED_PREFLIGHT_RUN_ID"
 
           git fetch --no-tags origin main:refs/remotes/origin/main
           test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
@@ -195,7 +241,6 @@ jobs:
           recovery_receipt="$receipt_dir/career-search-entry-batch-cache-refresh-recovery-preflight.json"
           recovery_receipt_sha256="$(sha256sum "$recovery_receipt" | awk '{print $1}')"
           failed_receipt_sha256="$(jq -er '.failed_receipt_sha256' "$recovery_receipt")"
-          recovery_payload_set_sha256="$(jq -er '.current_payload_set_sha256' "$recovery_receipt")"
           jq -e \
             --arg release "$EXPECTED_RELEASE_SHA" \
             --arg release_name "$EXPECTED_RELEASE_NAME" \
@@ -241,6 +286,166 @@ jobs:
              and .deploy_count == 0
              and .rollback_count == 0' "$recovery_receipt" >/dev/null
 
+          failed_preflight_run="$(
+            gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${FAILED_PREFLIGHT_RUN_ID}"
+          )"
+          failed_preflight_control_sha="$(jq -er '.head_sha' <<<"$failed_preflight_run")"
+          jq -e \
+            --argjson attempt "$FAILED_PREFLIGHT_RUN_ATTEMPT" \
+            '.name == "Career Search Entry Batch Cache Refresh Resume"
+             and .path == ".github/workflows/career-search-entry-batch-cache-refresh-resume.yml"
+             and .event == "workflow_dispatch"
+             and .status == "completed"
+             and .conclusion == "failure"
+             and .head_branch == "main"
+             and .run_attempt == $attempt' <<<"$failed_preflight_run" >/dev/null
+          failed_preflight_dir="$(mktemp -d)"
+          gh run download "$FAILED_PREFLIGHT_RUN_ID" \
+            --name "career-search-entry-batch-cache-refresh-resume-preflight-${FAILED_PREFLIGHT_RUN_ID}-${FAILED_PREFLIGHT_RUN_ATTEMPT}" \
+            --dir "$failed_preflight_dir"
+          failed_preflight_receipt="$failed_preflight_dir/career-search-entry-batch-cache-refresh-resume.json"
+          test "$(sha256sum "$failed_preflight_receipt" | awk '{print $1}')" \
+            = "$EXPECTED_FAILED_PREFLIGHT_RECEIPT_SHA256"
+          jq -e \
+            --arg release "$EXPECTED_RELEASE_SHA" \
+            --arg release_name "$EXPECTED_RELEASE_NAME" \
+            --arg manifest "$EXPECTED_MANIFEST_SHA256" \
+            --arg recovery_receipt "$recovery_receipt_sha256" \
+            --arg control "$failed_preflight_control_sha" \
+            --argjson failed_run "$FAILED_RUN_ID" \
+            --argjson failed_attempt "$FAILED_RUN_ATTEMPT" \
+            --argjson recovery_run "$RECOVERY_RUN_ID" \
+            --argjson recovery_attempt "$RECOVERY_RUN_ATTEMPT" \
+            --argjson preflight_run "$FAILED_PREFLIGHT_RUN_ID" \
+            --argjson preflight_attempt "$FAILED_PREFLIGHT_RUN_ATTEMPT" \
+            '.contract_version == "career.search_entry_batch.cache_refresh.resume.v1"
+             and .mode == "preflight"
+             and .status == "FAIL_CLOSED"
+             and .release_sha == $release
+             and .release_name == $release_name
+             and .manifest_sha256 == $manifest
+             and .control_plane_sha == $control
+             and .failed_run_id == $failed_run
+             and .failed_run_attempt == $failed_attempt
+             and .recovery_run_id == $recovery_run
+             and .recovery_run_attempt == $recovery_attempt
+             and .recovery_receipt_sha256 == $recovery_receipt
+             and .workflow_run_id == $preflight_run
+             and .workflow_run_attempt == $preflight_attempt
+             and .failed_stage == "pre_write_validation"
+             and .failure_category == "PUBLIC_SNAPSHOT_INCOMPLETE"
+             and .write_state == "none"
+             and .production_write_execution == false
+             and .cache_refresh_target_count == 0
+             and .completed_batch_count == 0
+             and .database_write_count == 0
+             and .cms_write_count == 0
+             and .publication_write_count == 0
+             and .indexability_write_count == 0
+             and .queue_dispatch_count == 0
+             and .sitemap_write_count == 0
+             and .llms_write_count == 0
+             and .search_channel_action_count == 0
+             and .url_submission_count == 0
+             and .non_target_write_count == 0
+             and .deploy_count == 0
+             and .rollback_count == 0' "$failed_preflight_receipt" >/dev/null
+
+          diagnostic_run="$(
+            gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${DIAGNOSTIC_RUN_ID}"
+          )"
+          diagnostic_control_sha="$(jq -er '.head_sha' <<<"$diagnostic_run")"
+          jq -e \
+            --argjson attempt "$DIAGNOSTIC_RUN_ATTEMPT" \
+            '.name == "Career Search Entry Batch Cache Refresh Resume Preflight Diagnostic"
+             and .path == ".github/workflows/career-search-entry-batch-cache-refresh-resume-preflight-diagnostic.yml"
+             and .event == "workflow_dispatch"
+             and .status == "completed"
+             and .conclusion == "success"
+             and .head_branch == "main"
+             and .run_attempt == $attempt' <<<"$diagnostic_run" >/dev/null
+          diagnostic_dir="$(mktemp -d)"
+          gh run download "$DIAGNOSTIC_RUN_ID" \
+            --name "career-search-entry-batch-cache-refresh-resume-preflight-diagnostic-${DIAGNOSTIC_RUN_ID}-${DIAGNOSTIC_RUN_ATTEMPT}" \
+            --dir "$diagnostic_dir"
+          diagnostic_receipt="$diagnostic_dir/career-search-entry-batch-cache-refresh-resume-preflight-diagnostic.json"
+          diagnostic_receipt_sha256="$(sha256sum "$diagnostic_receipt" | awk '{print $1}')"
+          test "$diagnostic_receipt_sha256" = "$EXPECTED_DIAGNOSTIC_RECEIPT_SHA256"
+          diagnostic_state_sha256="$(jq -er '.diagnostic_state_sha256' "$diagnostic_receipt")"
+          diagnostic_payload_set_sha256="$(jq -er '.observed_payload_set_sha256' "$diagnostic_receipt")"
+          [[ "$diagnostic_state_sha256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$diagnostic_payload_set_sha256" =~ ^[0-9a-f]{64}$ ]]
+          jq -e \
+            --arg release "$EXPECTED_RELEASE_SHA" \
+            --arg release_name "$EXPECTED_RELEASE_NAME" \
+            --arg manifest "$EXPECTED_MANIFEST_SHA256" \
+            --arg control "$diagnostic_control_sha" \
+            --arg state "$diagnostic_state_sha256" \
+            --arg payload_set "$diagnostic_payload_set_sha256" \
+            --arg failed_preflight_receipt "$EXPECTED_FAILED_PREFLIGHT_RECEIPT_SHA256" \
+            --arg failed_receipt "$failed_receipt_sha256" \
+            --arg recovery_receipt "$recovery_receipt_sha256" \
+            --argjson failed_preflight_run "$FAILED_PREFLIGHT_RUN_ID" \
+            --argjson failed_preflight_attempt "$FAILED_PREFLIGHT_RUN_ATTEMPT" \
+            --argjson failed_run "$FAILED_RUN_ID" \
+            --argjson failed_attempt "$FAILED_RUN_ATTEMPT" \
+            --argjson recovery_run "$RECOVERY_RUN_ID" \
+            --argjson recovery_attempt "$RECOVERY_RUN_ATTEMPT" \
+            --argjson diagnostic_run "$DIAGNOSTIC_RUN_ID" \
+            --argjson diagnostic_attempt "$DIAGNOSTIC_RUN_ATTEMPT" \
+            --argjson bad_href "$EXPECTED_BAD_HREF_URL_COUNT" \
+            --argjson low_module "$EXPECTED_LOW_MODULE_URL_COUNT" \
+            '.contract_version == "career.search_entry_batch.cache_refresh.resume.v1"
+             and .mode == "diagnose"
+             and .status == "PASS_DIAGNOSTIC_COMPLETE_STATE_DRIFT"
+             and .release_sha == $release
+             and .release_name == $release_name
+             and .manifest_sha256 == $manifest
+             and .control_plane_sha == $control
+             and .diagnostic_state_sha256 == $state
+             and .observed_payload_set_sha256 == $payload_set
+             and .failed_preflight_run_id == $failed_preflight_run
+             and .failed_preflight_run_attempt == $failed_preflight_attempt
+             and .failed_preflight_receipt_sha256 == $failed_preflight_receipt
+             and .failed_run_id == $failed_run
+             and .failed_run_attempt == $failed_attempt
+             and .failed_receipt_sha256 == $failed_receipt
+             and .recovery_run_id == $recovery_run
+             and .recovery_run_attempt == $recovery_attempt
+             and .recovery_receipt_sha256 == $recovery_receipt
+             and .workflow_run_id == $diagnostic_run
+             and .workflow_run_attempt == $diagnostic_attempt
+             and .observed_slug_count == 50
+             and .observed_url_count == 100
+             and .observed_http_200_count == 100
+             and .observed_transport_failure_count == 0
+             and .observed_non_200_response_count == 0
+             and .observed_canonical_ok_count == 100
+             and .observed_robots_ok_count == 100
+             and .observed_locale_ok_count == 100
+             and .observed_bad_href_url_count == $bad_href
+             and .observed_low_module_url_count == $low_module
+             and .snapshot_complete == true
+             and .recovery_baseline_match == false
+             and .write_state == "none"
+             and .production_write_execution == false
+             and .cache_refresh_target_count == 0
+             and .completed_batch_count == 0
+             and .per_target_retry_limit == 0
+             and .database_write_count == 0
+             and .cms_write_count == 0
+             and .publication_write_count == 0
+             and .indexability_write_count == 0
+             and .queue_dispatch_count == 0
+             and .sitemap_write_count == 0
+             and .llms_write_count == 0
+             and .search_channel_action_count == 0
+             and .url_submission_count == 0
+             and .non_target_write_count == 0
+             and .deploy_count == 0
+             and .rollback_count == 0' "$diagnostic_receipt" >/dev/null
+          jq -e '.runner_sha256 | test("^[0-9a-f]{64}$")' "$diagnostic_receipt" >/dev/null
+
           later_refresh="$(
             gh api \
               "repos/${GITHUB_REPOSITORY}/actions/workflows/career-search-entry-batch-cache-refresh-production-ops.yml/runs?event=workflow_dispatch&per_page=100"
@@ -257,6 +462,25 @@ jobs:
             --argjson recovery_run "$RECOVERY_RUN_ID" \
             '[.workflow_runs[] | select(.id > $recovery_run)] | length == 0' \
             <<<"$later_recovery" >/dev/null
+          later_diagnostic="$(
+            gh api \
+              "repos/${GITHUB_REPOSITORY}/actions/workflows/career-search-entry-batch-cache-refresh-resume-preflight-diagnostic.yml/runs?event=workflow_dispatch&per_page=100"
+          )"
+          jq -e \
+            --argjson diagnostic_run "$DIAGNOSTIC_RUN_ID" \
+            '[.workflow_runs[] | select(.id > $diagnostic_run)] | length == 0' \
+            <<<"$later_diagnostic" >/dev/null
+          if [ "$MODE" = "preflight" ]; then
+            later_resume_after_diagnostic="$(
+              gh api \
+                "repos/${GITHUB_REPOSITORY}/actions/workflows/career-search-entry-batch-cache-refresh-resume.yml/runs?event=workflow_dispatch&per_page=100"
+            )"
+            jq -e \
+              --argjson diagnostic_run "$DIAGNOSTIC_RUN_ID" \
+              --argjson current_run "$GITHUB_RUN_ID" \
+              '[.workflow_runs[] | select(.id > $diagnostic_run and .id != $current_run)] | length == 0' \
+              <<<"$later_resume_after_diagnostic" >/dev/null
+          fi
 
           preflight_state=""
           target_set=""
@@ -269,7 +493,7 @@ jobs:
             test -z "$EXPECTED_RESUME_TARGET_SET_SHA256"
             test -z "$EXPECTED_RESUME_TARGET_COUNT"
             test -z "$EXPECTED_RESUME_BATCH_COUNT"
-            expected_phrase="I explicitly approve one fresh read-only Career search-entry cache-only resume preflight for failed run ${FAILED_RUN_ID} attempt ${FAILED_RUN_ATTEMPT}, recovery run ${RECOVERY_RUN_ID} attempt ${RECOVERY_RUN_ATTEMPT}, active SHA ${EXPECTED_RELEASE_SHA}, manifest ${EXPECTED_MANIFEST_SHA256}, current readback ${EXPECTED_RECOVERY_READBACK_SHA256}, with ${EXPECTED_BAD_HREF_URL_COUNT} locale-unsafe-href URLs and ${EXPECTED_LOW_MODULE_URL_COUNT} thin-module URLs; diagnose and plan only, with zero cache write, retry, rollback, deploy, or Search Channel operation."
+            expected_phrase="I explicitly approve one fresh read-only Career search-entry diagnostic-rebased cache-only resume preflight for failed run ${FAILED_RUN_ID} attempt ${FAILED_RUN_ATTEMPT}, recovery run ${RECOVERY_RUN_ID} attempt ${RECOVERY_RUN_ATTEMPT}, failed resume preflight run ${FAILED_PREFLIGHT_RUN_ID} attempt ${FAILED_PREFLIGHT_RUN_ATTEMPT} receipt ${EXPECTED_FAILED_PREFLIGHT_RECEIPT_SHA256}, diagnostic run ${DIAGNOSTIC_RUN_ID} attempt ${DIAGNOSTIC_RUN_ATTEMPT} receipt ${EXPECTED_DIAGNOSTIC_RECEIPT_SHA256}, control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA}, active SHA ${EXPECTED_RELEASE_SHA}, manifest ${EXPECTED_MANIFEST_SHA256}, diagnostic state ${diagnostic_state_sha256}, observed payload set ${diagnostic_payload_set_sha256}, with ${EXPECTED_BAD_HREF_URL_COUNT} locale-unsafe-href URLs and ${EXPECTED_LOW_MODULE_URL_COUNT} thin-module URLs; rebase, diagnose, and plan only, with zero cache write, retry, rollback, deploy, or Search Channel operation."
             test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
           else
             [[ "$PREFLIGHT_RUN_ID" =~ ^[1-9][0-9]*$ ]]
@@ -302,8 +526,16 @@ jobs:
               --arg release_name "$EXPECTED_RELEASE_NAME" \
               --arg manifest "$EXPECTED_MANIFEST_SHA256" \
               --arg recovery_receipt "$recovery_receipt_sha256" \
+              --arg failed_preflight_receipt "$EXPECTED_FAILED_PREFLIGHT_RECEIPT_SHA256" \
+              --arg diagnostic_receipt "$EXPECTED_DIAGNOSTIC_RECEIPT_SHA256" \
+              --arg diagnostic_state "$diagnostic_state_sha256" \
+              --arg diagnostic_payload_set "$diagnostic_payload_set_sha256" \
               --arg state "$EXPECTED_PREFLIGHT_STATE_SHA256" \
               --arg targets "$EXPECTED_RESUME_TARGET_SET_SHA256" \
+              --argjson failed_preflight_run "$FAILED_PREFLIGHT_RUN_ID" \
+              --argjson failed_preflight_attempt "$FAILED_PREFLIGHT_RUN_ATTEMPT" \
+              --argjson diagnostic_run "$DIAGNOSTIC_RUN_ID" \
+              --argjson diagnostic_attempt "$DIAGNOSTIC_RUN_ATTEMPT" \
               --argjson target_count "$EXPECTED_RESUME_TARGET_COUNT" \
               --argjson batch_count "$EXPECTED_RESUME_BATCH_COUNT" \
               '.contract_version == "career.search_entry_batch.cache_refresh.resume.v1"
@@ -313,6 +545,16 @@ jobs:
                and .release_name == $release_name
                and .manifest_sha256 == $manifest
                and .recovery_receipt_sha256 == $recovery_receipt
+               and .baseline_source == "diagnostic"
+               and .failed_preflight_run_id == $failed_preflight_run
+               and .failed_preflight_run_attempt == $failed_preflight_attempt
+               and .failed_preflight_receipt_sha256 == $failed_preflight_receipt
+               and .diagnostic_run_id == $diagnostic_run
+               and .diagnostic_run_attempt == $diagnostic_attempt
+               and .diagnostic_receipt_sha256 == $diagnostic_receipt
+               and .diagnostic_state_sha256 == $diagnostic_state
+               and .diagnostic_payload_set_sha256 == $diagnostic_payload_set
+               and .pre_refresh_payload_set_sha256 == $diagnostic_payload_set
                and .preflight_state_sha256 == $state
                and .resume_target_set_sha256 == $targets
                and .resume_target_count == $target_count
@@ -356,11 +598,19 @@ jobs:
             echo "recovery_run_id=$RECOVERY_RUN_ID"
             echo "recovery_run_attempt=$RECOVERY_RUN_ATTEMPT"
             echo "recovery_receipt_sha256=$recovery_receipt_sha256"
-            echo "recovery_payload_set_sha256=$recovery_payload_set_sha256"
+            echo "baseline_payload_set_sha256=$diagnostic_payload_set_sha256"
             echo "manifest_sha256=$EXPECTED_MANIFEST_SHA256"
             echo "recovery_readback_sha256=$EXPECTED_RECOVERY_READBACK_SHA256"
             echo "bad_href_url_count=$EXPECTED_BAD_HREF_URL_COUNT"
             echo "low_module_url_count=$EXPECTED_LOW_MODULE_URL_COUNT"
+            echo "failed_preflight_run_id=$FAILED_PREFLIGHT_RUN_ID"
+            echo "failed_preflight_run_attempt=$FAILED_PREFLIGHT_RUN_ATTEMPT"
+            echo "failed_preflight_receipt_sha256=$EXPECTED_FAILED_PREFLIGHT_RECEIPT_SHA256"
+            echo "diagnostic_run_id=$DIAGNOSTIC_RUN_ID"
+            echo "diagnostic_run_attempt=$DIAGNOSTIC_RUN_ATTEMPT"
+            echo "diagnostic_receipt_sha256=$EXPECTED_DIAGNOSTIC_RECEIPT_SHA256"
+            echo "diagnostic_state_sha256=$diagnostic_state_sha256"
+            echo "diagnostic_payload_set_sha256=$diagnostic_payload_set_sha256"
             echo "preflight_state_sha256=$preflight_state"
             echo "resume_target_set_sha256=$target_set"
             echo "resume_target_count=$target_count"
@@ -388,10 +638,18 @@ jobs:
       RECOVERY_RUN_ID: ${{ needs.eligibility.outputs.recovery_run_id }}
       RECOVERY_RUN_ATTEMPT: ${{ needs.eligibility.outputs.recovery_run_attempt }}
       RECOVERY_RECEIPT_SHA256: ${{ needs.eligibility.outputs.recovery_receipt_sha256 }}
-      EXPECTED_RECOVERY_PAYLOAD_SET_SHA256: ${{ needs.eligibility.outputs.recovery_payload_set_sha256 }}
+      EXPECTED_BASELINE_PAYLOAD_SET_SHA256: ${{ needs.eligibility.outputs.baseline_payload_set_sha256 }}
       EXPECTED_MANIFEST_SHA256: ${{ needs.eligibility.outputs.manifest_sha256 }}
       EXPECTED_BAD_HREF_URL_COUNT: ${{ needs.eligibility.outputs.bad_href_url_count }}
       EXPECTED_LOW_MODULE_URL_COUNT: ${{ needs.eligibility.outputs.low_module_url_count }}
+      FAILED_PREFLIGHT_RUN_ID: ${{ needs.eligibility.outputs.failed_preflight_run_id }}
+      FAILED_PREFLIGHT_RUN_ATTEMPT: ${{ needs.eligibility.outputs.failed_preflight_run_attempt }}
+      FAILED_PREFLIGHT_RECEIPT_SHA256: ${{ needs.eligibility.outputs.failed_preflight_receipt_sha256 }}
+      DIAGNOSTIC_RUN_ID: ${{ needs.eligibility.outputs.diagnostic_run_id }}
+      DIAGNOSTIC_RUN_ATTEMPT: ${{ needs.eligibility.outputs.diagnostic_run_attempt }}
+      DIAGNOSTIC_RECEIPT_SHA256: ${{ needs.eligibility.outputs.diagnostic_receipt_sha256 }}
+      DIAGNOSTIC_STATE_SHA256: ${{ needs.eligibility.outputs.diagnostic_state_sha256 }}
+      DIAGNOSTIC_PAYLOAD_SET_SHA256: ${{ needs.eligibility.outputs.diagnostic_payload_set_sha256 }}
       EXPECTED_PREFLIGHT_STATE_SHA256: ${{ needs.eligibility.outputs.preflight_state_sha256 }}
       EXPECTED_RESUME_TARGET_SET_SHA256: ${{ needs.eligibility.outputs.resume_target_set_sha256 }}
       EXPECTED_RESUME_TARGET_COUNT: ${{ needs.eligibility.outputs.resume_target_count }}
@@ -448,7 +706,7 @@ jobs:
           runner_sha256="$(sha256sum "$runner" | awk '{print $1}')"
           for variable in \
             MODE DEPLOY_PATH EXPECTED_RELEASE_SHA EXPECTED_RELEASE_NAME \
-            EXPECTED_MANIFEST_SHA256 EXPECTED_RECOVERY_PAYLOAD_SET_SHA256 \
+            EXPECTED_MANIFEST_SHA256 EXPECTED_BASELINE_PAYLOAD_SET_SHA256 \
             EXPECTED_BAD_HREF_URL_COUNT EXPECTED_LOW_MODULE_URL_COUNT \
             EXPECTED_PREFLIGHT_STATE_SHA256 EXPECTED_RESUME_TARGET_SET_SHA256 \
             EXPECTED_RESUME_TARGET_COUNT EXPECTED_RESUME_BATCH_COUNT; do
@@ -458,7 +716,7 @@ jobs:
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -o ServerAliveInterval=20 -o ServerAliveCountMax=30 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "CAREER_CACHE_RESUME_MODE=$q_MODE DEPLOY_PATH=$q_DEPLOY_PATH EXPECTED_RELEASE_SHA=$q_EXPECTED_RELEASE_SHA EXPECTED_RELEASE_NAME=$q_EXPECTED_RELEASE_NAME EXPECTED_MANIFEST_SHA256=$q_EXPECTED_MANIFEST_SHA256 EXPECTED_RECOVERY_PAYLOAD_SET_SHA256=$q_EXPECTED_RECOVERY_PAYLOAD_SET_SHA256 EXPECTED_BAD_HREF_URL_COUNT=$q_EXPECTED_BAD_HREF_URL_COUNT EXPECTED_LOW_MODULE_URL_COUNT=$q_EXPECTED_LOW_MODULE_URL_COUNT EXPECTED_PREFLIGHT_STATE_SHA256=$q_EXPECTED_PREFLIGHT_STATE_SHA256 EXPECTED_RESUME_TARGET_SET_SHA256=$q_EXPECTED_RESUME_TARGET_SET_SHA256 EXPECTED_RESUME_TARGET_COUNT=$q_EXPECTED_RESUME_TARGET_COUNT EXPECTED_RESUME_BATCH_COUNT=$q_EXPECTED_RESUME_BATCH_COUNT php" \
+            "CAREER_CACHE_RESUME_MODE=$q_MODE DEPLOY_PATH=$q_DEPLOY_PATH EXPECTED_RELEASE_SHA=$q_EXPECTED_RELEASE_SHA EXPECTED_RELEASE_NAME=$q_EXPECTED_RELEASE_NAME EXPECTED_MANIFEST_SHA256=$q_EXPECTED_MANIFEST_SHA256 EXPECTED_BASELINE_PAYLOAD_SET_SHA256=$q_EXPECTED_BASELINE_PAYLOAD_SET_SHA256 EXPECTED_BAD_HREF_URL_COUNT=$q_EXPECTED_BAD_HREF_URL_COUNT EXPECTED_LOW_MODULE_URL_COUNT=$q_EXPECTED_LOW_MODULE_URL_COUNT EXPECTED_PREFLIGHT_STATE_SHA256=$q_EXPECTED_PREFLIGHT_STATE_SHA256 EXPECTED_RESUME_TARGET_SET_SHA256=$q_EXPECTED_RESUME_TARGET_SET_SHA256 EXPECTED_RESUME_TARGET_COUNT=$q_EXPECTED_RESUME_TARGET_COUNT EXPECTED_RESUME_BATCH_COUNT=$q_EXPECTED_RESUME_BATCH_COUNT php" \
             < "$runner" > artifacts/remote-receipt.json
           remote_status=$?
           set -e
@@ -467,10 +725,18 @@ jobs:
             --arg runner "$runner_sha256" \
             --arg failed_receipt "$FAILED_RECEIPT_SHA256" \
             --arg recovery_receipt "$RECOVERY_RECEIPT_SHA256" \
+            --arg failed_preflight_receipt "$FAILED_PREFLIGHT_RECEIPT_SHA256" \
+            --arg diagnostic_receipt "$DIAGNOSTIC_RECEIPT_SHA256" \
+            --arg diagnostic_state "$DIAGNOSTIC_STATE_SHA256" \
+            --arg diagnostic_payload_set "$DIAGNOSTIC_PAYLOAD_SET_SHA256" \
             --argjson failed_run "$FAILED_RUN_ID" \
             --argjson failed_attempt "$FAILED_RUN_ATTEMPT" \
             --argjson recovery_run "$RECOVERY_RUN_ID" \
             --argjson recovery_attempt "$RECOVERY_RUN_ATTEMPT" \
+            --argjson failed_preflight_run "$FAILED_PREFLIGHT_RUN_ID" \
+            --argjson failed_preflight_attempt "$FAILED_PREFLIGHT_RUN_ATTEMPT" \
+            --argjson diagnostic_run "$DIAGNOSTIC_RUN_ID" \
+            --argjson diagnostic_attempt "$DIAGNOSTIC_RUN_ATTEMPT" \
             --argjson run_id "$GITHUB_RUN_ID" \
             --argjson run_attempt "$GITHUB_RUN_ATTEMPT" \
             '. + {
@@ -482,6 +748,15 @@ jobs:
               recovery_run_id: $recovery_run,
               recovery_run_attempt: $recovery_attempt,
               recovery_receipt_sha256: $recovery_receipt,
+              baseline_source: "diagnostic",
+              failed_preflight_run_id: $failed_preflight_run,
+              failed_preflight_run_attempt: $failed_preflight_attempt,
+              failed_preflight_receipt_sha256: $failed_preflight_receipt,
+              diagnostic_run_id: $diagnostic_run,
+              diagnostic_run_attempt: $diagnostic_attempt,
+              diagnostic_receipt_sha256: $diagnostic_receipt,
+              diagnostic_state_sha256: $diagnostic_state,
+              diagnostic_payload_set_sha256: $diagnostic_payload_set,
               workflow_run_id: $run_id,
               workflow_run_attempt: $run_attempt
             }' artifacts/remote-receipt.json \
@@ -492,7 +767,7 @@ jobs:
             targets="$(jq -er '.resume_target_set_sha256' artifacts/career-search-entry-batch-cache-refresh-resume.json)"
             target_count="$(jq -er '.resume_target_count' artifacts/career-search-entry-batch-cache-refresh-resume.json)"
             batch_count="$(jq -er '.resume_batch_count' artifacts/career-search-entry-batch-cache-refresh-resume.json)"
-            phrase="I explicitly approve one-time Career search-entry cache-only resume execute for failed run ${FAILED_RUN_ID} attempt ${FAILED_RUN_ATTEMPT}, recovery run ${RECOVERY_RUN_ID} attempt ${RECOVERY_RUN_ATTEMPT}, preflight run ${GITHUB_RUN_ID} attempt ${GITHUB_RUN_ATTEMPT}, active SHA ${EXPECTED_RELEASE_SHA}, manifest ${EXPECTED_MANIFEST_SHA256}, state ${state}, target set ${targets}; refresh exactly ${target_count} residual targets in ${batch_count} batches of at most 5 slugs and 10 URLs using the 5000ms offline build budget and zero per-target retry, then require exact quality-package and 100-URL readback, with no DB, CMS, publication, indexability, queue, sitemap, llms, Search Channel, URL submission, deploy, rollback, or non-target write."
+            phrase="I explicitly approve one-time Career search-entry diagnostic-rebased cache-only resume execute for failed run ${FAILED_RUN_ID} attempt ${FAILED_RUN_ATTEMPT}, recovery run ${RECOVERY_RUN_ID} attempt ${RECOVERY_RUN_ATTEMPT}, failed resume preflight run ${FAILED_PREFLIGHT_RUN_ID} attempt ${FAILED_PREFLIGHT_RUN_ATTEMPT} receipt ${FAILED_PREFLIGHT_RECEIPT_SHA256}, diagnostic run ${DIAGNOSTIC_RUN_ID} attempt ${DIAGNOSTIC_RUN_ATTEMPT} receipt ${DIAGNOSTIC_RECEIPT_SHA256}, rebase preflight run ${GITHUB_RUN_ID} attempt ${GITHUB_RUN_ATTEMPT}, active SHA ${EXPECTED_RELEASE_SHA}, manifest ${EXPECTED_MANIFEST_SHA256}, diagnostic state ${DIAGNOSTIC_STATE_SHA256}, state ${state}, target set ${targets}; refresh exactly ${target_count} residual targets in ${batch_count} batches of at most 5 slugs and 10 URLs using the 5000ms offline build budget and zero per-target retry, then require exact quality-package and 100-URL readback, with no DB, CMS, publication, indexability, queue, sitemap, llms, Search Channel, URL submission, deploy, rollback, or non-target write."
             jq --arg phrase "$phrase" \
               '. + {exact_resume_execute_approval_phrase: $phrase}' \
               artifacts/career-search-entry-batch-cache-refresh-resume.json \

@@ -352,7 +352,7 @@ $mode = optionalEnv('CAREER_CACHE_RESUME_MODE');
 $releaseSha = optionalEnv('EXPECTED_RELEASE_SHA');
 $releaseName = optionalEnv('EXPECTED_RELEASE_NAME');
 $manifestSha256 = optionalEnv('EXPECTED_MANIFEST_SHA256');
-$recoveryPayloadSetSha256 = optionalEnv('EXPECTED_RECOVERY_PAYLOAD_SET_SHA256');
+$baselinePayloadSetSha256 = optionalEnv('EXPECTED_BASELINE_PAYLOAD_SET_SHA256');
 $expectedBadHrefCount = 0;
 $expectedLowModuleCount = 0;
 $cacheRefreshTargetCount = 0;
@@ -380,8 +380,8 @@ try {
     $releaseSha = requiredEnv('EXPECTED_RELEASE_SHA', '/^[0-9a-f]{40}$/D');
     $releaseName = requiredEnv('EXPECTED_RELEASE_NAME', '/^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/D');
     $manifestSha256 = requiredEnv('EXPECTED_MANIFEST_SHA256', '/^[0-9a-f]{64}$/D');
-    $recoveryPayloadSetSha256 = requiredEnv(
-        'EXPECTED_RECOVERY_PAYLOAD_SET_SHA256',
+    $baselinePayloadSetSha256 = requiredEnv(
+        'EXPECTED_BASELINE_PAYLOAD_SET_SHA256',
         '/^[0-9a-f]{64}$/D',
     );
     $expectedBadHrefCount = integerEnv('EXPECTED_BAD_HREF_URL_COUNT', 1, EXPECTED_URLS);
@@ -431,7 +431,7 @@ try {
     if ($mode === 'diagnose') {
         $snapshotComplete = publicSnapshotIsComplete($preSummary);
         $baselineMatch = $snapshotComplete
-            && $preSummary['payload_set_sha256'] === $recoveryPayloadSetSha256
+            && $preSummary['payload_set_sha256'] === $baselinePayloadSetSha256
             && $preSummary['bad_href_url_count'] === $expectedBadHrefCount
             && $preSummary['low_module_url_count'] === $expectedLowModuleCount;
         $status = ! $snapshotComplete
@@ -474,7 +474,7 @@ try {
     }
     assertCompletePublicSnapshot($preSummary);
     if (
-        $preSummary['payload_set_sha256'] !== $recoveryPayloadSetSha256
+        $preSummary['payload_set_sha256'] !== $baselinePayloadSetSha256
         || $preSummary['bad_href_url_count'] !== $expectedBadHrefCount
         || $preSummary['low_module_url_count'] !== $expectedLowModuleCount
     ) {
