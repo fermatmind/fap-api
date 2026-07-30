@@ -14,7 +14,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
 
     private const INVENTORY_SHA = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
-    private const PACKAGE_SHA = '8662bc3cd22f3a00b0bb188e47fdb4247c87bca93ba355485155405af058358f';
+    private const PACKAGE_SHA = 'fef280947f179e55e3652bbfd7af4e32f217f52522c61b0b0298297bb6723314';
 
     private const EXPECTED_CANDIDATE_ROW_IDS = [
         'W1-RESULT-CORE-05-OFFER-CTA',
@@ -207,6 +207,12 @@ final class MbtiResultEnglishPackageTest extends TestCase
                     $definition['bucket'].'.'.$asset['section_key'],
                     $asset['authority_field'],
                 );
+
+                if ($definition['bucket'] === MbtiCanonicalSectionRegistry::BUCKET_PREMIUM_TEASER) {
+                    self::assertArrayHasKey('teaser', $asset['content']);
+                    self::assertNotSame('', trim($asset['content']['teaser']));
+                    self::assertSame($asset['content']['summary_template'], $asset['content']['teaser']);
+                }
             }
         }
 
