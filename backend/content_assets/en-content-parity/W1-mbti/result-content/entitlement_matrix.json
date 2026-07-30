@@ -1,0 +1,77 @@
+{
+  "schema_version": "fermatmind.en_parity.mbti_result_entitlement_matrix.v1",
+  "package_id": "EN-PARITY-W1-MBTI-RESULT-ASSETS-2026-07-31",
+  "mobile_desktop_authority": "same_fields",
+  "surfaces": [
+    {
+      "surface": "free_result",
+      "authority_fields": ["profile", "summary_card", "dimensions", "sections"],
+      "allowed_content": "sections allowed by the existing free access policy",
+      "blocked_content": "premium_full sections and full-report-only body",
+      "package_behavior": "no access-policy change"
+    },
+    {
+      "surface": "preview_result",
+      "authority_fields": ["profile", "summary_card", "dimensions", "sections", "offer_set"],
+      "allowed_content": "existing preview fields plus preview offer copy",
+      "blocked_content": "locked full-report body",
+      "package_behavior": "copy candidate only"
+    },
+    {
+      "surface": "locked_result",
+      "authority_fields": ["access_level", "locked", "entitlements", "offer_set"],
+      "allowed_content": "locked-state explanation and access CTA",
+      "blocked_content": "premium section body",
+      "package_behavior": "copy candidate only"
+    },
+    {
+      "surface": "full_result",
+      "authority_fields": ["profile", "summary_card", "dimensions", "sections", "premium_teaser"],
+      "allowed_content": "all sections authorized by existing full access policy",
+      "blocked_content": "none beyond existing authority policy",
+      "package_behavior": "no entitlement grant or policy change"
+    },
+    {
+      "surface": "entitlement_envelope",
+      "authority_fields": ["access_level", "locked", "entitlements"],
+      "allowed_content": "existing access state only",
+      "blocked_content": "ownership, order, payment, recovery, or authentication data",
+      "package_behavior": "preserved control"
+    },
+    {
+      "surface": "share_public_summary",
+      "authority_fields": ["public summary projection allowlist"],
+      "allowed_content": "existing share-safe summary only",
+      "blocked_content": "full report, premium sections, private identifiers, access data",
+      "package_behavior": "preserved control"
+    },
+    {
+      "surface": "pdf_reader",
+      "authority_fields": ["private report cards", "localized PDF payload"],
+      "allowed_content": "synthetic fixture projection after existing entitlement enforcement",
+      "blocked_content": "fixture identifiers and any private payload in package artifacts",
+      "package_behavior": "W9 fixture target only"
+    },
+    {
+      "surface": "history_account_reentry",
+      "authority_fields": ["report access action", "status"],
+      "allowed_content": "existing localized action and status labels",
+      "blocked_content": "report body in list/history responses",
+      "package_behavior": "preserved control"
+    },
+    {
+      "surface": "module_and_cta_labels",
+      "authority_fields": ["offer_set", "existing fap-web locale labels"],
+      "allowed_content": "package offer copy and preserved renderer labels",
+      "blocked_content": "frontend editorial fallback",
+      "package_behavior": "same authority fields on mobile and desktop"
+    },
+    {
+      "surface": "processing_empty_error_expired_access_denied",
+      "authority_fields": ["status", "error envelope", "access state"],
+      "allowed_content": "existing localized lifecycle labels",
+      "blocked_content": "result or report body when state denies access",
+      "package_behavior": "preserved control"
+    }
+  ]
+}

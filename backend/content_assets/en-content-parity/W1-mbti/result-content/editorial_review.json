@@ -1,0 +1,36 @@
+{
+  "schema_version": "fermatmind.en_parity.editorial_review.v1",
+  "package_id": "EN-PARITY-W1-MBTI-RESULT-ASSETS-2026-07-31",
+  "review_kind": "producer_self_review",
+  "reviewer": "codex_native_producer",
+  "human_editorial_approval": false,
+  "independent_w9": false,
+  "status": "producer_self_check_passed_w9_pending",
+  "coverage": {
+    "inventory_rows_reviewed": 46,
+    "preserved_controls_reviewed_for_disposition": 24,
+    "candidate_assets_reviewed": 21,
+    "pdf_fixture_targets_reviewed": 1
+  },
+  "checks": [
+    {"id":"row_identity","status":"pass","evidence":"All 46 frozen row ids occur exactly once in inventory_reconciliation.json."},
+    {"id":"control_preservation","status":"pass","evidence":"All 24 complete controls are references with content_in_package=false."},
+    {"id":"producer_target_coverage","status":"pass","evidence":"Twenty-one content targets have candidate assets and the PDF target has an explicit W9 synthetic-fixture mapping."},
+    {"id":"english_reader_copy","status":"pass","evidence":"Candidate reader copy contains no Han characters."},
+    {"id":"section_differentiation","status":"pass","evidence":"Each canonical family has a section-specific purpose, body, and reflection prompts rather than one repeated generic paragraph."},
+    {"id":"offer_copy","status":"pass","evidence":"Preview and locked variants explain access without claiming that purchase changes the result or guarantees an outcome."},
+    {"id":"at_difference","status":"pass","evidence":"Assertive and Turbulent are presented as context-sensitive expression patterns and neither is ranked."},
+    {"id":"entitlement","status":"pass","evidence":"The matrix covers free, preview, locked, full, entitlement, share, PDF, history/re-entry, CTA/module labels, and lifecycle states."},
+    {"id":"pdf_fixture","status":"pass_with_hold","evidence":"The mapping requires a synthetic entitled English fixture and forbids production payload, live private URL, and database reads; rendered QA remains W9 work."},
+    {"id":"mobile_desktop","status":"pass","evidence":"Every candidate and surface matrix declares the same authority fields for mobile and desktop."},
+    {"id":"private_payload","status":"pass","evidence":"Only field-name exclusions are documented; no private payload values are stored."},
+    {"id":"claim_boundary","status":"pass_producer_self_check_only","evidence":"claim_boundary_report.json records the non-diagnostic, non-deterministic, non-outcome boundary."},
+    {"id":"release_permissions","status":"pass","evidence":"Every controlled permission is false."}
+  ],
+  "known_holds": [
+    "Independent W9 has not reviewed the exact package.",
+    "No CMS or inactive/draft authority import has been planned or executed.",
+    "The PDF reader has not been rendered; only a private-safe synthetic fixture mapping is frozen.",
+    "Human editorial approval, activation approval, and production release approval do not exist."
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": "fermatmind.en_parity.claim_boundary_report.v1",
+  "package_id": "EN-PARITY-W1-MBTI-RESULT-ASSETS-2026-07-31",
+  "review_kind": "producer_self_check",
+  "independent_w9": false,
+  "result": "pass_producer_self_check_only",
+  "required_boundary": "MBTI preference patterns are structured references and working hypotheses, not diagnoses, fixed identities, ability judgments, or outcome predictions.",
+  "checks": [
+    {"id":"preference_language","status":"pass","evidence":"Candidate copy uses may, can, hypothesis, context, reflection, and experiment framing."},
+    {"id":"non_diagnostic","status":"pass","evidence":"No candidate diagnoses health, mental health, disorder, or clinical condition."},
+    {"id":"identity_boundary","status":"pass","evidence":"The copy explicitly rejects fixed-identity interpretation and makes room for context and development."},
+    {"id":"career_boundary","status":"pass","evidence":"Career sections discuss work conditions and low-risk experiments, not job suitability, hiring, salary, or success prediction."},
+    {"id":"relationship_boundary","status":"pass","evidence":"Relationship sections reject type-based compatibility and motive judgments."},
+    {"id":"measurement_boundary","status":"pass","evidence":"No reliability, validity, norm, percentile, official certification, or most-accurate claim appears."},
+    {"id":"entitlement_boundary","status":"pass","evidence":"Premium body remains mapped to premium_full and the package changes no access policy."},
+    {"id":"private_result_boundary","status":"pass","evidence":"No attempt, report, account, score, answer, order, payment, recovery, or private fixture value is present."},
+    {"id":"public_profile_boundary","status":"pass","evidence":"The package targets private result/report families and does not create or modify public personality copy."},
+    {"id":"release_boundary","status":"pass","evidence":"CMS, database, import, publish, activation, SEO runtime, indexability, search, and deploy permissions remain false."}
+  ],
+  "forbidden_claim_scan": {
+    "phrases": [
+      "guaranteed career",
+      "perfect job",
+      "hiring suitability",
+      "salary prediction",
+      "relationship compatibility guarantee",
+      "clinical diagnosis",
+      "officially certified",
+      "most accurate",
+      "fixed identity",
+      "predicts your future"
+    ],
+    "matches": []
+  },
+  "hold": "Independent W9 must review every one of the 46 registered families against the exact frozen package SHA before any import approval can be considered."
+}

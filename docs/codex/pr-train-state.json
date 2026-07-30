@@ -101485,5 +101485,79 @@
       }
     ],
     "updated_at": "2026-07-30T17:57:44Z"
+  },
+  "EN-PARITY-W1-MBTI-RESULT-ASSETS-01": {
+    "id": "EN-PARITY-W1-MBTI-RESULT-ASSETS-01",
+    "repo": "fap-api",
+    "title": "EN-PARITY-W1-MBTI-RESULT-ASSETS-01: produce MBTI English result content assets",
+    "base": "main",
+    "branch": "codex/en-parity-w1-mbti-result-assets-01",
+    "depends_on": [
+      "EN-PARITY-W1-MBTI-INVENTORY-01",
+      "EN-PARITY-W1-MBTI-RESULT-AGENT-01"
+    ],
+    "status": "local_verified",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The operator supplied a continuous execution /goal with this exact PR id, title, repository, dependency order, path scope, validations, merge gate, and controlled-action boundaries."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "Cross-repository dependencies are merged: fap-web PR #1847 at fc985df4ff5192b7e92b38cd2a0d11117f393968 froze inventory package SHA 8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85, and PR #1850 at 462983b41bdc35b0e167f8c9d694ec4a67388bf1 added the 46-row producer gate."
+      },
+      "preflight": {
+        "status": "passed",
+        "evidence": "Created a clean isolated worktree and branch from exact origin/main 12dff5f80161afa5b80151715171e037cdcdb2a3 because the primary fap-api worktree belongs to another active task. No matching local branch, remote branch, or open PR existed."
+      },
+      "package_contract": {
+        "status": "passed",
+        "evidence": "Frozen candidate package SHA da6cb2ee008d7c76503d0a60774a035810837a2cb68fb7ff23b668be0a5c5453 reconciles 46 unique rows as 24 preserved controls, 21 distinct English assets, and one synthetic private-safe PDF W9 target. It includes the entitlement/surface matrix, source-authority map, producer claim/editorial reports, and all-false controlled permissions."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "php artisan test --filter=MbtiResultEnglishPackageTest passed 7 tests and 744 assertions; scoped Pint passed; every package JSON and train state parsed; train YAML loaded; candidate Han scan, exact counts, deterministic hashes, and git diff --check passed. After the required process guard, the isolated SQLite ci_verify wrapper ran scripts/verify_mbti.sh successfully and completed the MBTI smoke/contract chain with exit 0."
+      },
+      "changed_file_scope": {
+        "status": "passed",
+        "evidence": "Changed paths are limited to backend/content_assets/en-content-parity/W1-mbti/result-content/**, backend/tests/Feature/ContentAssets/MbtiResultEnglishPackageTest.php, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json. No importer, runtime, CMS, DB, public personality, comparison, frontend, discoverability, search, or deploy file is changed."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "history": [
+      {
+        "at": "2026-07-31T00:00:00+08:00",
+        "status": "in_progress",
+        "note": "Started PR04 from clean origin/main in an isolated worktree after verifying both fap-web dependencies. The package is unpublished, reads no private payload, performs no write/import/activation/release action, and retains every controlled permission as false."
+      },
+      {
+        "at": "2026-07-30T18:26:22Z",
+        "status": "local_verified",
+        "note": "Frozen package SHA da6cb2ee008d7c76503d0a60774a035810837a2cb68fb7ff23b668be0a5c5453 after exact 46 = 24 + 21 + 1 reconciliation. Focused validation passed 7 tests/744 assertions, Pint, JSON/YAML, Han/private/claim/entitlement checks, diff and exact scope checks. The first direct verify_mbti invocation correctly failed because no local HTTP server existed; after isolated SQLite CI setup started the server, the same verify_mbti chain and the bounded MBTI regression gates passed with exit 0. No production/CMS/database authority write occurred."
+      }
+    ],
+    "updated_at": "2026-07-30T18:26:22Z"
   }
 }
