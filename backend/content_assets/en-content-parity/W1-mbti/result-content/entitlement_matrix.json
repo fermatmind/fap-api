@@ -42,8 +42,8 @@
       "surface": "share_public_summary",
       "authority_fields": ["public summary projection allowlist"],
       "allowed_content": "existing share-safe summary only",
-      "blocked_content": "full report, premium sections, private identifiers, access data",
-      "package_behavior": "preserved control"
+      "blocked_content": "all package candidate section body or payload, full report, premium sections, private identifiers, and access data",
+      "package_behavior": "preserved control; package sections remain inactive/draft and outside published CMS share authority until a separate share-safe projection gate exists"
     },
     {
       "surface": "pdf_reader",

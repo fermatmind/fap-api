@@ -15,16 +15,16 @@
   "producer_target_count": 22,
   "files": [
     {"path":"README.md","sha256":"1fce72ef259c6b7ced5eafae72fe649da2d8e3ac1cbe9fee3255ea2c28c85024"},
-    {"path":"assets.json","sha256":"ca072614c252df152b8dfc15c768e880dbe004c94a0103c5d5c0c499180f5dc7"},
+    {"path":"assets.json","sha256":"ea9682c5b4a6a3fc98c1a735eb1ec8127e7e19225ca9064f59bd507a0cfc434c"},
     {"path":"inventory_reconciliation.json","sha256":"20fb311db62ef5a5abf227d704dc9a006091574cfedcc49b517dcc701f350e29"},
     {"path":"translation_map.json","sha256":"a4834461779215c1606532b5bacd36b0b270ba565886890fa2f8e9b8e76d8d42"},
-    {"path":"entitlement_matrix.json","sha256":"ae8e048a591b463d95e0a18c19dc45831dff364b5fcd9d0343a0d501b4ad5636"},
+    {"path":"entitlement_matrix.json","sha256":"24c41ff08f013cd046ceeb6cee5d36db595b1f734124436058dbacacaac59dcc"},
     {"path":"pdf_reader_fixture_mapping.json","sha256":"bcde62e3c36af84bbfc8a135810c808d37f024ccd8b7633d6c139e5c3cec0547"},
     {"path":"claim_boundary_report.json","sha256":"b4d28cb040d2e11b21352d2f16cf34445903ee24aced3366b0b09669625c84fc"},
-    {"path":"editorial_review.json","sha256":"342bd8b9edb95ba58139fd1ebeb0f4eec494a26d45e8cccb7fc393c18f36e085"}
+    {"path":"editorial_review.json","sha256":"95517c781918d16065340995f997ff79cdf4428c99ce51ff66e205f23ccaa56a"}
   ],
   "package_sha256_algorithm": "sha256 of the UTF-8 concatenation of each manifest file path, NUL, lowercase file SHA-256, and newline in files[] order",
-  "package_sha256": "04d88c174252bc090fbce8b96294b86c7b274c5d0bed849fde3583a4b76e3f42",
+  "package_sha256": "12eaa8b4b3fab6f2a51ac905341c7be0fd449e08341e0d281577c1e2be0b7d04",
   "quality_gates": {
     "exact_inventory_identity": "pass",
     "exact_46_row_reconciliation": "pass",

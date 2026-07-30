@@ -14,7 +14,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
 
     private const INVENTORY_SHA = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
-    private const PACKAGE_SHA = '04d88c174252bc090fbce8b96294b86c7b274c5d0bed849fde3583a4b76e3f42';
+    private const PACKAGE_SHA = '12eaa8b4b3fab6f2a51ac905341c7be0fd449e08341e0d281577c1e2be0b7d04';
 
     private const EXPECTED_CANDIDATE_ROW_IDS = [
         'W1-RESULT-CORE-05-OFFER-CTA',
@@ -186,6 +186,16 @@ final class MbtiResultEnglishPackageTest extends TestCase
         );
         self::assertFalse($package['template_contract']['renderer_binding']['import_without_renderer_allowed']);
         self::assertFalse($package['template_contract']['renderer_binding']['runtime_template_rendering_added_by_this_package']);
+        $sectionProjection = $package['template_contract']['canonical_projection_contract']['sections'];
+        self::assertSame('inactive_or_draft_authority_only', $sectionProjection['storage_visibility']);
+        self::assertFalse($sectionProjection['public_share_projection_allowed']);
+        self::assertContains(
+            'public share section allowlist or explicit package-section exclusion',
+            $sectionProjection['activation_prerequisites'],
+        );
+        self::assertFalse(
+            $package['template_contract']['canonical_projection_contract']['published_cms_share_authority_write_allowed'],
+        );
         self::assertFalse(
             $package['template_contract']['canonical_projection_contract']['runtime_or_entitlement_policy_change_allowed'],
         );
@@ -340,6 +350,14 @@ final class MbtiResultEnglishPackageTest extends TestCase
         self::assertStringContainsString(
             'locked-upsell offer copy',
             $surfacesByName['module_and_cta_labels']['allowed_content'],
+        );
+        self::assertStringContainsString(
+            'all package candidate section body or payload',
+            $surfacesByName['share_public_summary']['blocked_content'],
+        );
+        self::assertStringContainsString(
+            'outside published CMS share authority',
+            $surfacesByName['share_public_summary']['package_behavior'],
         );
 
         $assets = $this->readPackageJson('assets.json')['assets'];
