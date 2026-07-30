@@ -543,6 +543,14 @@ class AttemptReadController extends Controller
             ]),
         ]);
 
+        if ($scaleCode === 'ENNEAGRAM' && (bool) ($gate['generating'] ?? false)) {
+            if (is_array($enneagramFormSummary)) {
+                $responsePayload['enneagram_form_v1'] = $enneagramFormSummary;
+            }
+
+            return $this->privateNoStoreJson($responsePayload, 202);
+        }
+
         if ($scaleCode === 'MBTI') {
             $responsePayload['mbti_public_summary_v1'] = $this->mbtiPublicSummaryV1Builder->buildFromReportEnvelope(
                 $result,

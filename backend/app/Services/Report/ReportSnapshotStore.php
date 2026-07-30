@@ -7,11 +7,11 @@ use App\Models\Result;
 use App\Repositories\Report\ReportAccessActor;
 use App\Repositories\Report\ReportSubject;
 use App\Repositories\Report\ReportSubjectRepository;
+use App\Services\Analytics\EventRecorder;
+use App\Services\Assessment\GenericReportBuilder;
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2AuditFields;
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2Contract;
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2RuntimeWrapper;
-use App\Services\Analytics\EventRecorder;
-use App\Services\Assessment\GenericReportBuilder;
 use App\Services\Scale\ScaleIdentityWriteProjector;
 use App\Support\OrgContext;
 use Illuminate\Support\Facades\DB;
@@ -43,16 +43,16 @@ class ReportSnapshotStore
     /**
      * @param  array  $meta  {scale_code?:string, scale_code_v2?:string, scale_uid?:string, pack_id?:string, dir_version?:string, scoring_spec_version?:string}
      */
-    public function seedPendingSnapshot(int $orgId, string $attemptId, ?string $orderNo, array $meta): void
-    {
+    public function seedPendingSnapshot(
+        int $orgId,
+        string $attemptId,
+        ?string $orderNo,
+        array $meta,
+        bool $forceRefresh = false
+    ): bool {
         $attemptId = trim($attemptId);
         if ($attemptId === '') {
-            return;
-        }
-
-        $existing = $this->findSnapshotRow($orgId, $attemptId);
-        if ($existing && $this->snapshotStatus($existing) === 'ready') {
-            return;
+            return false;
         }
 
         $now = now();
@@ -95,8 +95,6 @@ class ReportSnapshotStore
             $row['scale_uid'] = $scaleUid;
         }
 
-        DB::table('report_snapshots')->insertOrIgnore($row);
-
         $updates = [
             'report_json' => '{}',
             'report_free_json' => '{}',
@@ -129,7 +127,36 @@ class ReportSnapshotStore
             }
         }
 
-        $this->snapshotWriteQuery($orgId, $attemptId)->update($updates);
+        return DB::transaction(function () use (
+            $orgId,
+            $attemptId,
+            $row,
+            $updates,
+            $forceRefresh
+        ): bool {
+            $existing = $this->snapshotWriteQuery($orgId, $attemptId)
+                ->lockForUpdate()
+                ->first();
+            $existingStatus = $existing ? $this->snapshotStatus($existing) : '';
+
+            if (in_array($existingStatus, ['pending', 'running'], true)) {
+                return false;
+            }
+            if ($existingStatus === 'ready' && ! $forceRefresh) {
+                return false;
+            }
+
+            if (! $existing) {
+                $inserted = DB::table('report_snapshots')->insertOrIgnore($row);
+                if ($inserted === 0) {
+                    return false;
+                }
+            } else {
+                $this->snapshotWriteQuery($orgId, $attemptId)->update($updates);
+            }
+
+            return true;
+        }, 3);
     }
 
     /**

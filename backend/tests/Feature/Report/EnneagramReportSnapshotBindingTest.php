@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Report;
 
+use App\Jobs\GenerateReportSnapshotJob;
 use App\Models\Result;
+use App\Services\Report\ReportSnapshotStore;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -26,11 +28,20 @@ final class EnneagramReportSnapshotBindingTest extends TestCase
         $token = $this->issueAnonToken($anonId);
         $attemptId = $this->createSubmittedEnneagramAttempt($anonId, $token, $formCode);
 
+        $pending = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+            'X-Anon-Id' => $anonId,
+        ])->getJson('/api/v0.3/attempts/'.$attemptId.'/report');
+        $pending->assertStatus(202);
+        $pending->assertJsonPath('meta.snapshot_status', 'pending');
+
+        (new GenerateReportSnapshotJob(0, $attemptId, 'submit', null))
+            ->handle(app(ReportSnapshotStore::class));
+
         $first = $this->withHeaders([
             'Authorization' => 'Bearer '.$token,
             'X-Anon-Id' => $anonId,
         ])->getJson('/api/v0.3/attempts/'.$attemptId.'/report');
-
         $first->assertStatus(200);
         $first->assertJson([
             'ok' => true,
