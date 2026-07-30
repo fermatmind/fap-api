@@ -201,3 +201,23 @@ non-target cache writes.
 
 Repository design, tests, PR fixes, and repair-control design within these
 boundaries do not require additional operator authorization.
+
+## Post-readback partial execution
+
+Lineage-repaired resume run `30588614573`, attempt `1`, completed all 75
+bounded cache targets in all ten batches. Its maximum per-target build time was
+4,060.14ms, below the 5,000ms budget. The run then failed at
+`post_refresh_public_readback` with status `FAIL_PARTIAL` and write state
+`committed_unverified`: all 100 public URLs returned HTTP 200 with valid
+canonical, robots, and locale contracts, but the public snapshot still
+reported 65 locale-unsafe-href URLs and ten thin-module URLs. No exact quality
+package was issued. All database, CMS, publication, indexability, queue,
+sitemap, llms, Search Channel, URL submission, deploy, rollback, and
+non-target write counts remained zero.
+
+The next control is read-only and receipt-bound. It compares only aggregate
+quality and payload-set hashes for the exact 100 active cache targets as the
+deploy runner and `www-data`, then performs one fresh public snapshot using
+`Cache-Control: no-cache`, `Pragma: no-cache`, and a receipt-bound readback
+query key. It emits no slugs or payloads and performs no cache, server, CMS,
+database, publication, discoverability, deploy, or rollback write.
