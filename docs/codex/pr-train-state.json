@@ -101177,9 +101177,9 @@
     "base": "main",
     "branch": "codex/en-parity-w2-big5-draft-reconcile-01",
     "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
-    "status": "ready_to_merge",
+    "status": "github_checks_pending",
     "depends_on": [],
-    "commit_sha": "6fea47f2504b66d06f5686ad58a9d6909bf5889f",
+    "commit_sha": "b94952ada0f6795411e71ec50cafba49a337a242",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3421",
     "checks": {
       "production_read_only_inventory": {
@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "CI run 30588371315 and Code Scanning run 30588371243 passed all required jobs on metadata head 09b27498fe1eafde3b154e59f27ab0f919a6f802. Exact-head review then found that CSS-backed image embeds were not rejected. Implementation 6fea47f2504b66d06f5686ad58a9d6909bf5889f closes that same-scope text-only boundary; required checks must rerun."
+        "evidence": "CI run 30589025088 and Code Scanning run 30589025090 passed all required jobs on metadata head 89e00e8635376f4f63c9b588251fc1e3570bfa26. Exact-head review then found that a CSS property outside the earlier property allowlist could still use url(). Implementation b94952ada0f6795411e71ec50cafba49a337a242 replaces the property allowlist with a complete image-function boundary; required checks must rerun."
       }
     },
     "scope_validation": {
@@ -101418,9 +101418,14 @@
         "at": "2026-07-30T22:58:35Z",
         "status": "github_checks_pending",
         "note": "After CI run 30588371315 passed all required jobs, exact-head review identified one remaining CSS media gap. Text-only scanning now rejects style and stylesheet link elements plus CSS image functions in background, border-image, content, cursor, list-style, and mask declarations, including url(), image-set(), cross-fade(), element(), and gradient functions. CSS url(), image-set(), and style-element regressions fail closed. The ledger binds implementation 6fea47f2504b66d06f5686ad58a9d6909bf5889f. The 30-test inventory suite passes 207 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, and diff checks pass."
+      },
+      {
+        "at": "2026-07-30T23:10:02Z",
+        "status": "github_checks_pending",
+        "note": "After CI run 30589025088 passed all required jobs, exact-head review identified shape-outside:url() as a remaining property-allowlist bypass and confirmed the ledger top-level status had not matched its pending fields. The inventory now rejects CSS url(), image(), image-set(), cross-fade(), element(), and gradient functions independent of property name; shape-outside:url() fails closed. The exact task ledger status is pending. The ledger binds implementation b94952ada0f6795411e71ec50cafba49a337a242. The 30-test inventory suite passes 209 assertions, scoped Pint and PHP syntax pass, and the focused runtime-freeze classifier passes 1 test / 2 assertions. The complete runtime-freeze file was not duplicated while another repository validation held the heavy-process guard."
       }
     ],
-    "updated_at": "2026-07-30T22:58:35Z"
+    "updated_at": "2026-07-30T23:10:02Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
