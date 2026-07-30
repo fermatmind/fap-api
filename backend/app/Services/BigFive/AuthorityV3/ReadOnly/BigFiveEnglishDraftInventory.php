@@ -1001,7 +1001,14 @@ final class BigFiveEnglishDraftInventory
     private function containsMediaReference(mixed $value): bool
     {
         if (is_string($value)) {
-            if (preg_match('/<(?:img|picture|source|svg|image|canvas|object|embed|iframe|video|audio)\b/i', $value) === 1) {
+            if (preg_match('/<(?:img|picture|source|svg|image|canvas|object|embed|iframe|video|audio|style|link)\b/i', $value) === 1) {
+                return true;
+            }
+            if (preg_match(
+                '/(?:background(?:-image)?|border-image(?:-source)?|content|cursor|list-style(?:-image)?|mask(?:-image)?)'
+                    .'\s*:[^;{}\r\n]*(?:url|image(?:-set)?|cross-fade|element|(?:linear|radial|conic)-gradient)\s*\(/i',
+                $value,
+            ) === 1) {
                 return true;
             }
             preg_match_all('/!\[[^\]]*\]/', $value, $tokens, PREG_OFFSET_CAPTURE);
