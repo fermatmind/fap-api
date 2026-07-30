@@ -318,6 +318,103 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
         $this->assertStringNotContainsString('/var/www/fap-api', $workflow.$runner);
     }
 
+    public function test_cache_refresh_resume_requires_separate_preflight_and_bounded_offline_publication(): void
+    {
+        $workflow = $this->repoFile(
+            '.github/workflows/career-search-entry-batch-cache-refresh-resume.yml'
+        );
+        $runner = $this->repoFile(
+            'backend/scripts/career/career_search_entry_batch_cache_refresh_resume.php'
+        );
+
+        foreach ([
+            'mode:',
+            'expected_control_plane_sha:',
+            'expected_release_sha:',
+            'expected_release_name:',
+            'failed_run_id:',
+            'failed_run_attempt:',
+            'recovery_run_id:',
+            'recovery_run_attempt:',
+            'expected_manifest_sha256:',
+            'expected_recovery_readback_sha256:',
+            'expected_bad_href_url_count:',
+            'expected_low_module_url_count:',
+            'preflight_run_id:',
+            'preflight_run_attempt:',
+            'expected_preflight_state_sha256:',
+            'expected_resume_target_set_sha256:',
+            'expected_resume_target_count:',
+            'expected_resume_batch_count:',
+            'operator_approval_phrase:',
+            'Career Search Entry Batch Cache Refresh Recovery Preflight',
+            'career-search-entry-batch-cache-refresh-recovery-preflight-${RECOVERY_RUN_ID}-${RECOVERY_RUN_ATTEMPT}',
+            '.status == "PASS_RECOVERY_RESUME_REQUIRED"',
+            'career-search-entry-batch-cache-refresh-resume-preflight-${PREFLIGHT_RUN_ID}-${PREFLIGHT_RUN_ATTEMPT}',
+            '.status == "PASS_PREFLIGHT_RESUME_REQUIRED"',
+            'diagnose and plan only, with zero cache write, retry, rollback, deploy, or Search Channel operation',
+            'refresh exactly ${target_count} residual targets in ${batch_count} batches of at most 5 slugs and 10 URLs',
+            'using the 5000ms offline build budget and zero per-target retry',
+            'group: deploy-${{ github.repository }}-production',
+            'secrets.PRODUCTION_DEPLOY_HOST',
+            'secrets.PRODUCTION_DEPLOY_PATH',
+            'secrets.SSH_PRIVATE_KEY',
+            'ServerAliveInterval=20',
+            'ServerAliveCountMax=30',
+            'if: always()',
+        ] as $required) {
+            $this->assertStringContainsString($required, $workflow);
+        }
+        foreach ([
+            'career.search_entry_batch.cache_refresh.resume.v1',
+            'CAREER-SEARCH-ENTRY-QUALITY-BATCH-01/manifest.json',
+            'MAX_BATCH_TARGETS = 10',
+            'MAX_BATCH_SLUGS = 5',
+            'OFFLINE_BUILD_BUDGET_MS = 5000',
+            'PASS_PREFLIGHT_RESUME_REQUIRED',
+            'PASS_EXECUTE_AND_READBACK',
+            'FAIL_PARTIAL',
+            'per_target_retry_limit',
+            'warmJobDetailPayloadForOfflineBootstrap',
+            'buildForSubjectSlugs',
+            'installDatabaseWriteGuard',
+            'DATABASE_WRITE_BLOCKED',
+            'CareerSearchEntryQualityBatchPlanner',
+            'EXPECTED_REVIEW_TARGETS',
+            'sleep(1)',
+            'sleep(2)',
+            'CURLOPT_CONNECTTIMEOUT => 5',
+            'CURLOPT_TIMEOUT => 30',
+            'write_state',
+            'cache_refresh_target_count',
+            'completed_batch_count',
+            'database_write_count',
+            'cms_write_count',
+            'publication_write_count',
+            'indexability_write_count',
+            'queue_dispatch_count',
+            'sitemap_write_count',
+            'llms_write_count',
+            'search_channel_action_count',
+            'url_submission_count',
+            'non_target_write_count',
+            'deploy_count',
+            'rollback_count',
+        ] as $required) {
+            $this->assertStringContainsString($required, $runner);
+        }
+        $this->assertStringNotContainsString('warmJobDetailPayload(', $runner);
+        $this->assertStringNotContainsString('forgetJobDetailPayload', $runner);
+        $this->assertStringNotContainsString('dispatchJobDetailWarm', $runner);
+        $this->assertStringNotContainsString('php artisan migrate', $workflow.$runner);
+        $this->assertStringNotContainsString('queue:restart', $workflow.$runner);
+        $this->assertStringNotContainsString('deploy:symlink', $workflow.$runner);
+        $this->assertStringNotContainsString('indexnow', strtolower($workflow.$runner));
+        $this->assertStringNotContainsString('googleapis', strtolower($workflow.$runner));
+        $this->assertStringNotContainsString('139.224.', $workflow.$runner);
+        $this->assertStringNotContainsString('/var/www/fap-api', $workflow.$runner);
+    }
+
     private function repoFile(string $path): string
     {
         $contents = file_get_contents(dirname(__DIR__, 3).'/'.$path);
