@@ -101254,6 +101254,76 @@
     ],
     "updated_at": "2026-07-30T16:39:25Z"
   },
+  "API-GIFT-SCHEMA-01": {
+    "id": "API-GIFT-SCHEMA-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/api-gift-schema-01-report-gift-requests",
+    "title": "API-GIFT-SCHEMA-01: add report gift request schema",
+    "status": "ready_to_merge",
+    "depends_on": [
+      "API-UNLOCK-01"
+    ],
+    "commit_sha": "925c9794ad1937f6b3d65087aa13fae97e3ca76d",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3428",
+    "checks": {
+      "focused_phpunit": "passed: 1 test, 28 assertions",
+      "fresh_sqlite_migration": "passed: clean SQLite database",
+      "pint_scoped": "passed: 2 files",
+      "composer_validate": "passed: strict",
+      "yaml_json_diff_scope": "passed",
+      "github_required_checks": "passed on 3b3b867b248657ff1a749ef6307122815e87d99c"
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": true,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-30T17:20:19Z",
+        "status": "implementation_in_progress",
+        "note": "Started from exact origin/main 44b77fdba10eab3f287e4996b6c5c2fae245b354 in an isolated worktree after explicit authorization for the standalone schema PR. Fixed-order steps: routes N/A, migration implemented, FmTokenAuth N/A, controller/service/model/resource N/A, scripts/CI limited to train records. No production migration, data write, route, payment provider, entitlement grant, deploy, or mini-program action occurred."
+      },
+      {
+        "at": "2026-07-30T17:27:26Z",
+        "status": "local_validation_passed",
+        "note": "The dedicated report_gift_requests schema passed 1 focused test / 28 assertions. A fresh SQLite database completed the full migration chain including the new migration. Scoped Pint, PHP syntax, strict Composer validation, YAML/JSON parsing, diff checks, and exact four-path scope review passed. Routes, FmTokenAuth, runtime models/services/controllers, production migration/data, payment, deploy, and mini-program actions remain N/A or prohibited."
+      },
+      {
+        "at": "2026-07-30T17:31:06Z",
+        "status": "github_checks_pending",
+        "note": "Created PR #3428 from rebased implementation commit 925c9794ad1937f6b3d65087aa13fae97e3ca76d after revalidating the focused schema test, fresh SQLite migration, scoped Pint, strict Composer validation, YAML/JSON parsing, diff checks, and exact scope. Required GitHub checks are pending; no merge override is allowed."
+      },
+      {
+        "at": "2026-07-30T17:41:48Z",
+        "status": "review_fix_in_progress",
+        "note": "Required verify-bigfive ran 1,621 tests and failed only the branch-diff runtime-freeze classifier because the new schema migration was not registered as an isolated three-channel contract file. All other required checks passed. The same-scope repair adds only the exact migration path to the existing three-channel classifier and its regression fixture; no runtime behavior or database schema changed."
+      },
+      {
+        "at": "2026-07-30T17:42:27Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "The branch-diff runtime gate and exact three-channel classifier regression now pass together (2 tests / 5 assertions). The gift schema test still passes (1 test / 28 assertions), scoped Pint passes for all three PHP files, and YAML/JSON plus diff checks pass. The required GitHub checks must rerun on the repaired head."
+      },
+      {
+        "at": "2026-07-30T17:51:25Z",
+        "status": "ready_to_merge",
+        "note": "All required checks passed on repaired head 3b3b867b248657ff1a749ef6307122815e87d99c: hygiene, supply-chain, content-pack build validation, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep OSS, blocking secret scan, and non-blocking SARIF upload. Staging parity was intentionally skipped by workflow. The PR is mergeable with no review comments or requested changes."
+      }
+    ],
+    "updated_at": "2026-07-30T17:51:25Z"
+  },
   "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-01": {
     "id": "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-01",
     "repo": "fap-api",
