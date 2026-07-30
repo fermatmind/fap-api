@@ -733,6 +733,99 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
         $this->assertStringNotContainsString('/var/www/fap-api', $workflow.$runner);
     }
 
+    public function test_cache_permission_diagnostic_is_source_receipt_bound_bounded_and_read_only(): void
+    {
+        $workflow = $this->repoFile(
+            '.github/workflows/career-search-entry-cache-permission-diagnostic.yml'
+        );
+        $probe = $this->repoFile(
+            'backend/scripts/career/career_search_entry_cache_permission_probe.php'
+        );
+        $runbook = $this->repoFile(
+            'docs/ops/career-search-entry-cache-permission-recovery.md'
+        );
+
+        foreach ([
+            'expected_control_plane_sha:',
+            'source_diagnostic_run_id:',
+            'expected_source_receipt_sha256:',
+            'expected_source_artifact_digest:',
+            'expected_source_diagnostic_state_sha256:',
+            'expected_manifest_sha256:',
+            'expected_preflight_state_sha256:',
+            'expected_resume_target_set_sha256:',
+            'expected_observed_payload_set_sha256:',
+            '.status == "HOLD_DIAGNOSTIC_RUNTIME_CACHE_UNAVAILABLE"',
+            '.digest == $digest',
+            'inspect only bounded aggregate file-cache directory and exact stable-key permission state as deploy runner and www-data',
+            'zero server write, cache write, retry, rollback, deploy, CMS/DB write, or Search Channel operation',
+            'PROBE_IDENTITY_ROLE=deploy_runner php',
+            'PROBE_IDENTITY_ROLE=php_runtime php',
+            'sudo -n -u www-data',
+            '< "$probe"',
+            'PASS_PERMISSION_REPAIR_REQUIRED_FIXED_CACHE_CHAIN',
+            'PASS_PERMISSION_REPAIR_REQUIRED_BOUNDED_CACHE_TREE',
+            'PASS_PERMISSION_STATE_COMPLETE_NO_REPAIR',
+            'repair_scope:',
+            'group: deploy-${{ github.repository }}-production',
+            'secrets.PRODUCTION_DEPLOY_HOST',
+            'secrets.PRODUCTION_DEPLOY_PATH',
+            'secrets.SSH_PRIVATE_KEY',
+            'ServerAliveInterval=20',
+            'ServerAliveCountMax=30',
+            'if: always()',
+        ] as $required) {
+            $this->assertStringContainsString($required, $workflow);
+        }
+
+        foreach ([
+            'career.search_entry_batch.cache_permission_probe.v1',
+            'MAX_FIRST_LEVEL_DIRECTORIES = 256',
+            'MAX_SECOND_LEVEL_DIRECTORIES = 65536',
+            'career:public-authority:job-detail:v3:',
+            'career:public-authority:job-detail:v1:',
+            'exact_stable_cache_key_count',
+            'repair_candidate_count',
+            'repair_candidate_set_sha256',
+            'server_write_count',
+            'cache_write_count',
+            'database_write_count',
+            'deploy_count',
+            'rollback_count',
+        ] as $required) {
+            $this->assertStringContainsString($required, $probe);
+        }
+
+        foreach ([
+            'one read-only production permission diagnostic authorization',
+            'one exact production permission-write authorization',
+            'one exact cache-only refresh',
+            'never recursive `chown`',
+            'recursive `chmod`',
+        ] as $required) {
+            $this->assertStringContainsString($required, $runbook);
+        }
+
+        foreach ([
+            'file_put_contents',
+            'mkdir(',
+            'chmod(',
+            'chown(',
+            'Cache::',
+            'bootstrap/app.php',
+            'warmJobDetailPayloadForOfflineBootstrap',
+        ] as $forbidden) {
+            $this->assertStringNotContainsString($forbidden, $probe);
+        }
+        $this->assertStringNotContainsString('php artisan migrate', $workflow.$probe);
+        $this->assertStringNotContainsString('queue:restart', $workflow.$probe);
+        $this->assertStringNotContainsString('deploy:symlink', $workflow.$probe);
+        $this->assertStringNotContainsString('indexnow', strtolower($workflow.$probe));
+        $this->assertStringNotContainsString('googleapis', strtolower($workflow.$probe));
+        $this->assertStringNotContainsString('139.224.', $workflow.$probe);
+        $this->assertStringNotContainsString('/var/www/fap-api', $workflow.$probe);
+    }
+
     private function repoFile(string $path): string
     {
         $contents = file_get_contents(dirname(__DIR__, 3).'/'.$path);
