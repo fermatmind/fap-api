@@ -505,9 +505,11 @@ final class BigFiveEnglishDraftInventory
         $canonicalCohortComplete = $canonical->count() === BigFiveEn52PackageCompiler::ASSET_COUNT
             && $hubAuthorityComplete
             && $slotAuthorityComplete
-            && $en52PackageRevisionSetComplete;
+            && $en52PackageRevisionSetComplete
+            && $aliases->isEmpty();
         $ok = $blockingRows === 0
             && $unknownAuthorityRows->isEmpty()
+            && $aliases->isEmpty()
             && $canonicalCohortComplete;
 
         return [
@@ -521,6 +523,7 @@ final class BigFiveEnglishDraftInventory
             'locale' => 'en',
             'cohort_definition' => '50 registered historical slot identities from the 52-page EN52 canonical catalog, excluding model hub and facet hub',
             'canonical_cohort_complete' => $canonicalCohortComplete,
+            'redirect_only_aliases_absent' => $aliases->isEmpty(),
             'en52_package_revision_set_complete' => $en52PackageRevisionSetComplete,
             'excluded_hub_authority_complete' => $hubAuthorityComplete,
             'historical_slot_authority_complete' => $slotAuthorityComplete,

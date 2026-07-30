@@ -634,6 +634,7 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $result = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
 
         $this->assertSame(1, $result['counts']['redirect_only_alias_rows']);
+        $this->assertFalse($result['redirect_only_aliases_absent']);
         $this->assertSame(1, $result['counts']['unknown_authority_rows']);
         $this->assertFalse($result['ok']);
     }
