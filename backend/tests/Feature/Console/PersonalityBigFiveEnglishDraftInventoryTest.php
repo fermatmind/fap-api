@@ -313,6 +313,9 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             '<style>.hero { background-image: url(hero.webp); }</style>',
             '<input type="image" src="submit.webp" alt="Submit">',
             '<table background="texture.webp"><tr><td>Text</td></tr></table>',
+            '<meta property="og:image" content="hero.webp">',
+            '<meta name="twitter:image" content="hero.webp">',
+            '<meta itemprop="image" content="hero.webp">',
         ] as $embeddedMedia) {
             $working->forceFill(['snapshot_json' => [
                 'attributes' => $this->completeSnapshot('Candidate'),
