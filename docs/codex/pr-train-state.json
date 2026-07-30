@@ -101497,7 +101497,7 @@
       "EN-PARITY-W1-MBTI-RESULT-AGENT-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "ade807ebb6a82b00e33dc62c50c25cd8517706f4",
+    "commit_sha": "455bd8a1562d89973832d7c22d4bf6b77eb93362",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3429",
     "checks": {
       "authorization": {
@@ -101611,8 +101611,13 @@
         "at": "2026-07-30T19:59:41Z",
         "status": "review_fix_local_verified",
         "note": "Exact head dd4d0a8b31246bcb56732c88934b383a0c78cea7 passed all nine required checks with staging parity skipped, then review found two valid P2 contract gaps: template slots could survive canonical projection, and the CTA selector was descriptive rather than resolver-addressable. The package now binds the only two remaining slots to the future exact-package result importer, requires rendering before projection/write, rejects unresolved tokens, and freezes the exact default MBTI full-report variant id/anchor/effective SKU consumed by OfferResolver. Focused validation passed 7 tests/1012 assertions plus scoped Pint, JSON, hash, diff, and scope checks. Candidate package SHA is 04d88c174252bc090fbce8b96294b86c7b274c5d0bed849fde3583a4b76e3f42."
+      },
+      {
+        "at": "2026-07-30T20:00:53Z",
+        "status": "github_checks_pending",
+        "note": "Committed the renderer and exact variant-selector repairs as implementation commit 455bd8a1562d89973832d7c22d4bf6b77eb93362. The following metadata-only commit records that immutable implementation pointer; exact-head GitHub checks and review are pending."
       }
     ],
-    "updated_at": "2026-07-30T19:59:41Z"
+    "updated_at": "2026-07-30T20:00:53Z"
   }
 }
