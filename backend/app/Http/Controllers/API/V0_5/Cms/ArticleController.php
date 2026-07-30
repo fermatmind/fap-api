@@ -11,6 +11,8 @@ use App\Models\ArticleTag;
 use App\Models\ArticleTestEdge;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Cms\ArticleBodyHeadingGuard;
+use App\Services\Cms\ArticlePublicListQuery;
+use App\Services\Cms\ArticlePublicListReadCache;
 use App\Services\Cms\ArticlePublishService;
 use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\ArticleService;
@@ -33,6 +35,8 @@ class ArticleController extends Controller
     public function __construct(
         private readonly ArticleService $articleService,
         private readonly ArticlePublishService $articlePublishService,
+        private readonly ArticlePublicListQuery $articlePublicListQuery,
+        private readonly ArticlePublicListReadCache $articlePublicListReadCache,
         private readonly ArticleBodyHeadingGuard $articleBodyHeadingGuard,
         private readonly ArticleSeoService $articleSeoService,
         private readonly AnswerSurfaceContractService $answerSurfaceContractService,
@@ -51,74 +55,14 @@ class ArticleController extends Controller
             return $validated;
         }
 
-        $query = Article::query()
-            ->withoutGlobalScopes()
-            ->where('org_id', $validated['org_id'])
-            ->publiclyReadable()
-            ->with($this->articleListRelations());
+        $resolved = $this->articlePublicListReadCache->resolve(
+            $validated,
+            fn (): array => $this->buildArticleListResponse($validated),
+        );
 
-        if ($validated['locale'] !== null) {
-            $query->where('locale', $validated['locale']);
-        }
-        if ($validated['related_test_slug'] !== null) {
-            $relatedTestSlug = $validated['related_test_slug'];
-            $query->where(static function ($relatedQuery) use ($relatedTestSlug, $validated): void {
-                $relatedQuery
-                    ->where('related_test_slug', $relatedTestSlug)
-                    ->orWhereHas('testEdges', static function ($edgeQuery) use ($relatedTestSlug, $validated): void {
-                        $edgeQuery
-                            ->where('test_slug', $relatedTestSlug)
-                            ->where('visibility', ArticleTestEdge::VISIBILITY_PUBLIC);
-
-                        if ($validated['locale'] !== null) {
-                            $edgeQuery->where('locale', $validated['locale']);
-                        }
-                    });
-            });
-        }
-        if ($validated['voice'] !== null) {
-            $query->where('voice', $validated['voice']);
-        }
-
-        if ($validated['related_test_slug'] !== null) {
-            $query
-                ->orderByRaw('CASE WHEN related_test_slug = ? THEN 0 ELSE 1 END', [$validated['related_test_slug']])
-                ->orderByRaw(
-                    '(select min(sort_order) from article_test_edges where article_test_edges.article_id = articles.id and article_test_edges.test_slug = ? and article_test_edges.visibility = ?) asc',
-                    [$validated['related_test_slug'], ArticleTestEdge::VISIBILITY_PUBLIC]
-                );
-        }
-
-        $paginator = $query
-            ->orderByDesc('published_at')
-            ->orderByRaw('voice_order is null')
-            ->orderBy('voice_order')
-            ->orderByDesc('id')
-            ->paginate($validated['per_page'], ['*'], 'page', $validated['page']);
-
-        $items = [];
-        foreach ($paginator->items() as $article) {
-            if (! $article instanceof Article) {
-                continue;
-            }
-
-            $items[] = $this->publicArticleListPayload($article);
-        }
-
-        return response()->json([
-            'ok' => true,
-            'items' => $items,
-            'pagination' => [
-                'current_page' => (int) $paginator->currentPage(),
-                'per_page' => (int) $paginator->perPage(),
-                'total' => (int) $paginator->total(),
-                'last_page' => (int) $paginator->lastPage(),
-            ],
-            'landing_surface_v1' => $this->buildIndexLandingSurface(
-                $items,
-                $validated['locale'] ?? 'en'
-            ),
-        ]);
+        return response()
+            ->json($resolved['payload'])
+            ->header('X-FM-Article-List-Cache', $resolved['state']);
     }
 
     /**
@@ -1008,16 +952,34 @@ class ArticleController extends Controller
     }
 
     /**
-     * Public list responses only load relations required by article cards and filters.
-     *
-     * @return array<string, \Closure>
+     * @param  array{org_id:int,locale:?string,related_test_slug:?string,voice:?string,page:int,per_page:int}  $validated
+     * @return array<string,mixed>
      */
-    private function articleListRelations(): array
+    private function buildArticleListResponse(array $validated): array
     {
-        $relations = $this->articleRelations();
-        unset($relations['seoMeta']);
+        $paginator = $this->articlePublicListQuery->paginate($validated);
+        $items = [];
 
-        return $relations;
+        foreach ($paginator->items() as $article) {
+            if ($article instanceof Article) {
+                $items[] = $this->publicArticleListPayload($article);
+            }
+        }
+
+        return [
+            'ok' => true,
+            'items' => $items,
+            'pagination' => [
+                'current_page' => (int) $paginator->currentPage(),
+                'per_page' => (int) $paginator->perPage(),
+                'total' => (int) $paginator->total(),
+                'last_page' => (int) $paginator->lastPage(),
+            ],
+            'landing_surface_v1' => $this->buildIndexLandingSurface(
+                $items,
+                $validated['locale'] ?? 'en',
+            ),
+        ];
     }
 
     private function findPublicArticle(string $slug, string $locale, int $orgId): ?Article

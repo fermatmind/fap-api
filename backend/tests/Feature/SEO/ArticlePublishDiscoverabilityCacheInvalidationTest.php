@@ -8,7 +8,9 @@ use App\Http\Controllers\API\V0_5\SEO\SitemapSourceController;
 use App\Models\Article;
 use App\Models\ArticleCategory;
 use App\Models\ArticleTranslationRevision;
+use App\Services\Cms\ArticlePublicListReadCache;
 use App\Services\Cms\ArticlePublishService;
+use App\Services\Cms\ArticleService;
 use App\Services\SEO\SitemapCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
@@ -37,6 +39,24 @@ final class ArticlePublishDiscoverabilityCacheInvalidationTest extends TestCase
         $this->assertDiscoverabilityCachesFlushed();
     }
 
+    public function test_article_publish_rotates_public_list_generation_and_exposes_new_article(): void
+    {
+        $article = $this->createArticleWithRevision(ArticleTranslationRevision::STATUS_APPROVED);
+
+        $this->getJson('/api/v0.5/articles?locale=en&page=1&per_page=6')
+            ->assertOk()
+            ->assertHeader('X-FM-Article-List-Cache', 'miss')
+            ->assertJsonPath('pagination.total', 0);
+
+        app(ArticlePublishService::class)->publishArticle((int) $article->id, 'test_publish');
+
+        $this->getJson('/api/v0.5/articles?locale=en&page=1&per_page=6')
+            ->assertOk()
+            ->assertHeader('X-FM-Article-List-Cache', 'miss')
+            ->assertJsonPath('pagination.total', 1)
+            ->assertJsonPath('items.0.slug', 'riasec-cache-invalidation-test');
+    }
+
     public function test_article_unpublish_flushes_sitemap_source_and_backend_xml_sitemap_caches(): void
     {
         $article = $this->createArticleWithRevision(ArticleTranslationRevision::STATUS_PUBLISHED, published: true);
@@ -45,6 +65,54 @@ final class ArticlePublishDiscoverabilityCacheInvalidationTest extends TestCase
         app(ArticlePublishService::class)->unpublishArticle((int) $article->id);
 
         $this->assertDiscoverabilityCachesFlushed();
+    }
+
+    public function test_article_unpublish_hard_invalidates_public_list_active_and_lkg(): void
+    {
+        $article = $this->createArticleWithRevision(ArticleTranslationRevision::STATUS_PUBLISHED, published: true);
+
+        $this->getJson('/api/v0.5/articles?locale=en&page=1&per_page=6')
+            ->assertOk()
+            ->assertHeader('X-FM-Article-List-Cache', 'miss')
+            ->assertJsonPath('pagination.total', 1);
+
+        app(ArticlePublishService::class)->unpublishArticle((int) $article->id);
+
+        $this->getJson('/api/v0.5/articles?locale=en&page=1&per_page=6')
+            ->assertOk()
+            ->assertHeader('X-FM-Article-List-Cache', 'miss')
+            ->assertJsonPath('pagination.total', 0)
+            ->assertJsonCount(0, 'items');
+    }
+
+    public function test_public_article_card_update_invalidates_public_list_generation(): void
+    {
+        $article = $this->createArticleWithRevision(ArticleTranslationRevision::STATUS_PUBLISHED, published: true);
+        $cache = app(ArticlePublicListReadCache::class);
+        $filters = [
+            'org_id' => 0,
+            'locale' => 'en',
+            'related_test_slug' => null,
+            'voice' => null,
+            'page' => 1,
+            'per_page' => 6,
+        ];
+        $cache->resolve($filters, static fn (): array => [
+            'ok' => true,
+            'items' => [['author_name' => 'FermatMind']],
+        ]);
+
+        app(ArticleService::class)->updateArticle((int) $article->id, [
+            'author_name' => 'FermatMind Editorial',
+        ]);
+
+        $resolved = $cache->resolve($filters, static fn (): array => [
+            'ok' => true,
+            'items' => [['author_name' => 'FermatMind Editorial']],
+        ]);
+
+        $this->assertSame('miss', $resolved['state']);
+        $this->assertSame('FermatMind Editorial', $resolved['payload']['items'][0]['author_name']);
     }
 
     public function test_article_publish_rejects_body_h1_before_public_exposure(): void

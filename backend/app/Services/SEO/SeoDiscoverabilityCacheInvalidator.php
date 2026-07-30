@@ -5,10 +5,15 @@ declare(strict_types=1);
 namespace App\Services\SEO;
 
 use App\Http\Controllers\API\V0_5\SEO\SitemapSourceController;
+use App\Services\Cms\ArticlePublicListReadCache;
 use Illuminate\Support\Facades\Cache;
 
 final class SeoDiscoverabilityCacheInvalidator
 {
+    public function __construct(
+        private readonly ArticlePublicListReadCache $articlePublicListReadCache,
+    ) {}
+
     /**
      * Flush article discoverability caches.
      *
@@ -18,8 +23,10 @@ final class SeoDiscoverabilityCacheInvalidator
      *
      * @return list<string>
      */
-    public function flushArticleDiscoverabilityCaches(): array
+    public function flushArticleDiscoverabilityCaches(bool $preserveArticleListLkg = true): array
     {
+        $this->articlePublicListReadCache->invalidate($preserveArticleListLkg);
+
         return $this->flushSharedDiscoverabilityCaches();
     }
 

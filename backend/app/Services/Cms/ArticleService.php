@@ -18,6 +18,7 @@ final class ArticleService
 {
     public function __construct(
         private readonly ArticleBodyHeadingGuard $articleBodyHeadingGuard,
+        private readonly ArticlePublicListReadCache $articlePublicListReadCache,
     ) {}
 
     /**
@@ -93,7 +94,7 @@ final class ArticleService
             throw new InvalidArgumentException('article_id must be positive.');
         }
 
-        return DB::transaction(function () use ($articleId, $fields, $tags): Article {
+        $article = DB::transaction(function () use ($articleId, $fields, $tags): Article {
             $article = Article::query()
                 ->withoutGlobalScopes()
                 ->where('id', $articleId)
@@ -195,6 +196,12 @@ final class ArticleService
 
             return $article->fresh() ?? $article;
         });
+
+        if ((string) $article->status === 'published' && (bool) $article->is_public) {
+            $this->articlePublicListReadCache->invalidate();
+        }
+
+        return $article;
     }
 
     private function assertWritableInCurrentOrgContext(int $articleOrgId): void
