@@ -13,11 +13,26 @@ expected_low_module_url_count="${EXPECTED_LOW_MODULE_URL_COUNT:-}"
 stage="input_validation"
 write_state="none"
 tmp_dir=""
+heartbeat_pid=""
 
 cleanup() {
+  if [[ -n "$heartbeat_pid" ]]; then
+    kill "$heartbeat_pid" 2>/dev/null || true
+    wait "$heartbeat_pid" 2>/dev/null || true
+  fi
   test -z "$tmp_dir" || rm -rf "$tmp_dir"
 }
 trap cleanup EXIT
+
+start_sanitized_heartbeat() {
+  (
+    while true; do
+      sleep 20
+      printf '%s\n' "career_cache_refresh_status=running" >&2
+    done
+  ) &
+  heartbeat_pid="$!"
+}
 
 emit_failure() {
   local exit_code=$?
@@ -103,6 +118,7 @@ mapfile -t slugs < <(jq -r '.candidates[].canonical_slug' "$manifest_path")
 test "${#slugs[@]}" -eq 50
 
 tmp_dir="$(mktemp -d)"
+start_sanitized_heartbeat
 
 read_public_batch() {
   local output_path="$1"

@@ -271,6 +271,7 @@ jobs:
           printf -v q_low_module '%q' "$EXPECTED_LOW_MODULE_URL_COUNT"
           set +e
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -o ServerAliveInterval=20 -o ServerAliveCountMax=30 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
             "CAREER_CACHE_REFRESH_MODE=$q_mode DEPLOY_PATH=$q_path EXPECTED_RELEASE_SHA=$q_sha EXPECTED_RELEASE_NAME=$q_name EXPECTED_MANIFEST_SHA256=$q_manifest EXPECTED_PRE_REFRESH_READBACK_SHA256=$q_readback EXPECTED_BAD_HREF_URL_COUNT=$q_bad_href EXPECTED_LOW_MODULE_URL_COUNT=$q_low_module bash -s" \
             < backend/scripts/career/career_search_entry_batch_cache_refresh_production_ops.sh \
