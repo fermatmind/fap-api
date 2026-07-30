@@ -101333,8 +101333,8 @@
     "depends_on": [
       "EN-PARITY-W1-MBTI-INVENTORY-01"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "add52cbac20956d2819d617e33dfb4650a84469e",
+    "status": "github_checks_pending",
+    "commit_sha": "0c9eebbe8af44a50decf2270aec6611637faa4c1",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3424",
     "checks": {
       "authorization": {
@@ -101375,19 +101375,19 @@
       },
       "latest_main_integration": {
         "status": "passed",
-        "evidence": "Integrated current origin/main efa84b9a482193a6996453a6395ec060749c7b88 after preserving the newly merged API-UNLOCK-01 ledger entry and this PR's state entry. The focused 6-test/987-assertion suite, Pint, package/state JSON, train YAML, diff check, and exact nine-file PR scope all pass."
+        "evidence": "Integrated current origin/main fca264eac19ebc74f3b87a577fab13808fa603b4 after preserving every newly merged main ledger item and this PR's exact state entry. Focused tests 6/1098, Pint, JSON/YAML, diff checks, and exact nine-file PR scope all pass."
       },
       "github_required_checks": {
         "status": "passed",
         "evidence": "PR #3424 head 37dcc8dcc4900f973d03c1985bc6bfcee316b27a passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. verify-staging-parity was policy-skipped and is not a deploy wait."
       },
       "final_head_checks": {
-        "status": "passed",
-        "evidence": "Exact head add52cbac20956d2819d617e33dfb4650a84469e passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. verify-staging-parity was policy-skipped."
+        "status": "pending_after_latest_main_integration",
+        "evidence": "Readiness metadata head ca1b0fa1ae57b2bf196627f97e6fd2a9a981a714 passed all applicable checks, but concurrent main advancement caused a ledger conflict. Latest-main integration head 0c9eebbe8af44a50decf2270aec6611637faa4c1 is locally verified and must repeat required checks."
       },
       "codex_review": {
-        "status": "passed",
-        "evidence": "Codex exact-head review of add52cbac20956d2819d617e33dfb4650a84469e reported no major issues. All four actionable review rounds were repaired in scope and answered on their exact threads."
+        "status": "retry_pending_after_external_error",
+        "evidence": "Codex review of add52cbac20956d2819d617e33dfb4650a84469e reported no major issues. Review of the superseded readiness tail returned an external Unknown error; an exact-head review will be retried after latest-main integration."
       }
     },
     "failure_reason": null,
@@ -101397,7 +101397,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "production_write_execution": false,
@@ -101477,8 +101477,13 @@
         "at": "2026-07-30T17:47:40Z",
         "status": "ready_to_merge",
         "note": "Exact head add52cbac20956d2819d617e33dfb4650a84469e passed all applicable GitHub checks, exact-head Codex review reported no major issues, GitHub reports CLEAN/MERGEABLE, and the exact nine-file PR scope remains valid. This readiness metadata tail must independently repeat required checks and exact-head review before squash merge."
+      },
+      {
+        "at": "2026-07-30T17:57:44Z",
+        "status": "github_checks_pending",
+        "note": "Readiness metadata head ca1b0fa1ae57b2bf196627f97e6fd2a9a981a714 passed all applicable checks, but main advanced and GitHub became DIRTY. Integrated exact origin/main fca264eac19ebc74f3b87a577fab13808fa603b4, preserved both ledger authorities, and reran focused tests 6/1098, Pint, JSON/YAML, diff, and exact nine-file scope successfully. Fresh checks and exact-head review are required."
       }
     ],
-    "updated_at": "2026-07-30T17:47:40Z"
+    "updated_at": "2026-07-30T17:57:44Z"
   }
 }
