@@ -114,12 +114,44 @@ directories. If the bounded tree drifted, the write scope is exactly the
 pre-attested set reconstructed by the same probe; the receipt never exposes its
 raw paths.
 
+### Pre-write drift recovery
+
+Run `30585526098`, attempt `1`, passed eligibility but failed during the
+immediate dual-identity re-attestation. Its immutable receipt SHA is
+`c8eda9c16ac765642c2ca88961bdde5a121ccdb0dbd03cbc6be8a181e268d7c2` and
+artifact digest is
+`71b238b5db9e1e5293233196e72be4103909f6b5ddfb0606fd971d093512a006`.
+The apply step was skipped and every write counter, including
+`permission_metadata_write_count`, remained zero.
+
+The failure was a bounded runtime-growth event: the first-level count remained
+256, the second-level count increased from 9,176 to 9,198, the stable-key file
+count remained 100, and both identities reported the same 9,554-candidate set
+SHA `0ad0272441088dbf22516e5727fbb632c9d656c074e7ff58763196276a223e17`.
+
+The drift-recovery revision must bind that exact failed run, receipt, artifact,
+baseline count, and baseline set. Immediately before apply it may accept only:
+
+- the same healthy four-directory fixed chain;
+- exactly 256 first-level hash directories;
+- 9,198 through 9,454 well-formed second-level hash directories;
+- exactly the same 100 existing stable-key files;
+- one identical deploy-runner and `www-data` live repair set;
+- at most 256 additional hash-directory candidates and no additional
+  stable-key files.
+
+The live count and opaque set hash are passed directly from that dual-identity
+attestation into the root repair process. All per-target state checks, payload
+hash invariance, zero-candidate post-probes, zero retry, and prohibited-operation
+boundaries remain unchanged. The failed authorization cannot be retried or
+reused; production execution requires a new phrase bound to the drift-recovery
+control-plane SHA and failed-run evidence.
+
 ## Authorization checkpoints
 
 The read-only checkpoint is complete. Two operator checkpoints remain:
 
-1. one exact production
-   permission-write authorization;
+1. one exact drift-recovery production permission-write authorization;
 2. only after permission verification passes, one exact cache-only refresh
    authorization.
 

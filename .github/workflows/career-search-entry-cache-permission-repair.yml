@@ -1,4 +1,4 @@
-name: Career Search Entry Cache Permission Repair
+name: Career Search Entry Cache Permission Repair Drift Recovery
 
 on:
   workflow_dispatch:
@@ -29,6 +29,22 @@ on:
         type: string
       expected_permission_diagnostic_artifact_digest:
         description: GitHub permission diagnostic artifact digest without sha256 prefix
+        required: true
+        type: string
+      failed_repair_run_id:
+        description: Exact failed pre-write permission repair run used as the drift baseline
+        required: true
+        type: string
+      failed_repair_run_attempt:
+        description: Exact failed pre-write permission repair attempt
+        required: true
+        type: string
+      expected_failed_repair_receipt_sha256:
+        description: SHA256 of the immutable failed pre-write repair receipt
+        required: true
+        type: string
+      expected_failed_repair_artifact_digest:
+        description: GitHub failed repair artifact digest without sha256 prefix
         required: true
         type: string
       expected_manifest_sha256:
@@ -68,6 +84,10 @@ jobs:
       diagnostic_run_attempt: ${{ steps.validate.outputs.diagnostic_run_attempt }}
       diagnostic_receipt_sha256: ${{ steps.validate.outputs.diagnostic_receipt_sha256 }}
       diagnostic_artifact_digest: ${{ steps.validate.outputs.diagnostic_artifact_digest }}
+      failed_repair_run_id: ${{ steps.validate.outputs.failed_repair_run_id }}
+      failed_repair_run_attempt: ${{ steps.validate.outputs.failed_repair_run_attempt }}
+      failed_repair_receipt_sha256: ${{ steps.validate.outputs.failed_repair_receipt_sha256 }}
+      failed_repair_artifact_digest: ${{ steps.validate.outputs.failed_repair_artifact_digest }}
       manifest_sha256: ${{ steps.validate.outputs.manifest_sha256 }}
       repair_candidate_count: ${{ steps.validate.outputs.repair_candidate_count }}
       repair_candidate_set_sha256: ${{ steps.validate.outputs.repair_candidate_set_sha256 }}
@@ -90,6 +110,10 @@ jobs:
           DIAGNOSTIC_RUN_ATTEMPT: ${{ inputs.permission_diagnostic_run_attempt }}
           EXPECTED_DIAGNOSTIC_RECEIPT_SHA256: ${{ inputs.expected_permission_diagnostic_receipt_sha256 }}
           EXPECTED_DIAGNOSTIC_ARTIFACT_DIGEST: ${{ inputs.expected_permission_diagnostic_artifact_digest }}
+          FAILED_REPAIR_RUN_ID: ${{ inputs.failed_repair_run_id }}
+          FAILED_REPAIR_RUN_ATTEMPT: ${{ inputs.failed_repair_run_attempt }}
+          EXPECTED_FAILED_REPAIR_RECEIPT_SHA256: ${{ inputs.expected_failed_repair_receipt_sha256 }}
+          EXPECTED_FAILED_REPAIR_ARTIFACT_DIGEST: ${{ inputs.expected_failed_repair_artifact_digest }}
           EXPECTED_MANIFEST_SHA256: ${{ inputs.expected_manifest_sha256 }}
           EXPECTED_REPAIR_CANDIDATE_COUNT: ${{ inputs.expected_repair_candidate_count }}
           EXPECTED_REPAIR_CANDIDATE_SET_SHA256: ${{ inputs.expected_repair_candidate_set_sha256 }}
@@ -102,10 +126,14 @@ jobs:
           [[ "$EXPECTED_RELEASE_NAME" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]
           [[ "$DIAGNOSTIC_RUN_ID" =~ ^[1-9][0-9]*$ ]]
           [[ "$DIAGNOSTIC_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
-          test "$EXPECTED_REPAIR_CANDIDATE_COUNT" = "9532"
+          [[ "$FAILED_REPAIR_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$FAILED_REPAIR_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+          test "$EXPECTED_REPAIR_CANDIDATE_COUNT" = "9554"
           for hash in \
             "$EXPECTED_DIAGNOSTIC_RECEIPT_SHA256" \
             "$EXPECTED_DIAGNOSTIC_ARTIFACT_DIGEST" \
+            "$EXPECTED_FAILED_REPAIR_RECEIPT_SHA256" \
+            "$EXPECTED_FAILED_REPAIR_ARTIFACT_DIGEST" \
             "$EXPECTED_MANIFEST_SHA256" \
             "$EXPECTED_REPAIR_CANDIDATE_SET_SHA256"; do
             [[ "$hash" =~ ^[0-9a-f]{64}$ ]]
@@ -141,8 +169,8 @@ jobs:
             --arg release "$EXPECTED_RELEASE_SHA" \
             --arg release_name "$EXPECTED_RELEASE_NAME" \
             --arg manifest "$EXPECTED_MANIFEST_SHA256" \
-            --arg set_sha "$EXPECTED_REPAIR_CANDIDATE_SET_SHA256" \
-            --argjson count "$EXPECTED_REPAIR_CANDIDATE_COUNT" \
+            --arg set_sha "d7d4911bdfaccdb26117e48c3608f87a2a96e66977fc8f1800c92ee7ff4edd54" \
+            --argjson count "9532" \
             '.contract_version == "career.search_entry_batch.cache_permission_diagnostic.v1"
              and .status == "PASS_PERMISSION_REPAIR_REQUIRED_BOUNDED_CACHE_TREE"
              and .repair_scope == "attested_hash_directories_and_exact_stable_key_files"
@@ -192,16 +220,83 @@ jobs:
             --argjson diagnostic "$DIAGNOSTIC_RUN_ID" \
             '[.workflow_runs[] | select(.id > $diagnostic)] | length == 0' \
             <<<"$later_diagnostics" >/dev/null
+          failed_repair_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${FAILED_REPAIR_RUN_ID}")"
+          jq -e \
+            --arg control "75d28c49618ef7c46e3374575e8d9ea8ebcc7b50" \
+            --argjson attempt "$FAILED_REPAIR_RUN_ATTEMPT" \
+            '.name == "Career Search Entry Cache Permission Repair"
+             and .event == "workflow_dispatch"
+             and .head_branch == "main"
+             and .head_sha == $control
+             and .status == "completed"
+             and .conclusion == "failure"
+             and .run_attempt == $attempt' \
+            <<<"$failed_repair_run" >/dev/null
+          failed_repair_artifact_name="career-search-entry-cache-permission-repair-${FAILED_REPAIR_RUN_ID}-${FAILED_REPAIR_RUN_ATTEMPT}"
+          failed_repair_artifacts="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${FAILED_REPAIR_RUN_ID}/artifacts?per_page=100")"
+          jq -e \
+            --arg name "$failed_repair_artifact_name" \
+            --arg digest "sha256:${EXPECTED_FAILED_REPAIR_ARTIFACT_DIGEST}" \
+            '[.artifacts[] | select(.name == $name and .expired == false and .digest == $digest)] | length == 1' \
+            <<<"$failed_repair_artifacts" >/dev/null
+          mkdir -p failed-repair-artifact
+          gh run download "$FAILED_REPAIR_RUN_ID" \
+            --name "$failed_repair_artifact_name" \
+            --dir failed-repair-artifact
+          failed_repair_receipt="failed-repair-artifact/career-search-entry-cache-permission-repair.json"
+          test -f "$failed_repair_receipt"
+          test "$(sha256sum "$failed_repair_receipt" | awk '{print $1}')" = "$EXPECTED_FAILED_REPAIR_RECEIPT_SHA256"
+          jq -e \
+            --arg release "$EXPECTED_RELEASE_SHA" \
+            --arg release_name "$EXPECTED_RELEASE_NAME" \
+            --arg manifest "$EXPECTED_MANIFEST_SHA256" \
+            --arg set_sha "$EXPECTED_REPAIR_CANDIDATE_SET_SHA256" \
+            --argjson count "$EXPECTED_REPAIR_CANDIDATE_COUNT" \
+            --argjson run_id "$FAILED_REPAIR_RUN_ID" \
+            --argjson attempt "$FAILED_REPAIR_RUN_ATTEMPT" \
+            '.contract_version == "career.search_entry_batch.cache_permission_repair_control.v1"
+             and .status == "FAIL_PERMISSION_REPAIR"
+             and .release_sha == $release
+             and .release_name == $release_name
+             and .manifest_sha256 == $manifest
+             and .repair_candidate_count == 9532
+             and .repair_candidate_set_sha256 == "d7d4911bdfaccdb26117e48c3608f87a2a96e66977fc8f1800c92ee7ff4edd54"
+             and .pre_deploy_runner.status == "PASS_PERMISSION_PROBE_COMPLETE"
+             and .pre_php_runtime.status == "PASS_PERMISSION_PROBE_COMPLETE"
+             and .pre_deploy_runner.first_level_hash_directory_count == 256
+             and .pre_php_runtime.first_level_hash_directory_count == 256
+             and .pre_deploy_runner.second_level_hash_directory_count == 9198
+             and .pre_php_runtime.second_level_hash_directory_count == 9198
+             and .pre_deploy_runner.repair_candidate_count == $count
+             and .pre_php_runtime.repair_candidate_count == $count
+             and .pre_deploy_runner.repair_candidate_set_sha256 == $set_sha
+             and .pre_php_runtime.repair_candidate_set_sha256 == $set_sha
+             and .repair.status == "UNAVAILABLE"
+             and .post_deploy_runner.status == "UNAVAILABLE"
+             and .post_php_runtime.status == "UNAVAILABLE"
+             and .permission_metadata_write_count == 0
+             and .cache_payload_write_count == 0
+             and .retry_execution_count == 0
+             and .database_write_count == 0
+             and .cms_write_count == 0
+             and .search_channel_action_count == 0
+             and .deploy_count == 0
+             and .rollback_count == 0
+             and .run_id == $run_id
+             and .run_attempt == $attempt' \
+            "$failed_repair_receipt" >/dev/null
+
           prior_repairs="$(
             gh api \
               "repos/${GITHUB_REPOSITORY}/actions/workflows/career-search-entry-cache-permission-repair.yml/runs?event=workflow_dispatch&per_page=100"
           )"
           jq -e \
             --argjson current "$GITHUB_RUN_ID" \
-            '[.workflow_runs[] | select(.id != $current)] | length == 0' \
+            --argjson failed "$FAILED_REPAIR_RUN_ID" \
+            '[.workflow_runs[] | select(.id != $current) | .id] == [$failed]' \
             <<<"$prior_repairs" >/dev/null
 
-          expected_phrase="I explicitly approve one-time Career search-entry bounded cache permission repair for diagnostic run ${DIAGNOSTIC_RUN_ID} attempt ${DIAGNOSTIC_RUN_ATTEMPT} receipt ${EXPECTED_DIAGNOSTIC_RECEIPT_SHA256} artifact ${EXPECTED_DIAGNOSTIC_ARTIFACT_DIGEST}, control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA}, active SHA ${EXPECTED_RELEASE_SHA}, repair set ${EXPECTED_REPAIR_CANDIDATE_SET_SHA256} count ${EXPECTED_REPAIR_CANDIDATE_COUNT}; change only owner/group/mode metadata for the attested 9432 hash directories and 100 exact stable-key files, then require dual-identity zero-candidate verification and unchanged cache payload aggregate, with zero cache payload write, retry, rollback, deploy, CMS/DB write, or Search Channel operation."
+          expected_phrase="I explicitly approve one-time Career search-entry bounded cache permission drift recovery for failed pre-write repair run ${FAILED_REPAIR_RUN_ID} attempt ${FAILED_REPAIR_RUN_ATTEMPT} receipt ${EXPECTED_FAILED_REPAIR_RECEIPT_SHA256} artifact ${EXPECTED_FAILED_REPAIR_ARTIFACT_DIGEST}, control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA}, active SHA ${EXPECTED_RELEASE_SHA}, baseline repair set ${EXPECTED_REPAIR_CANDIDATE_SET_SHA256} count ${EXPECTED_REPAIR_CANDIDATE_COUNT}; at execution permit only up to 256 additional well-formed hash directories under the same bounded cache tree and no additional stable-key files, change only owner/group/mode metadata for the live dual-attested set, then require zero-candidate verification and unchanged cache payload aggregate, with zero retry, rollback, deploy, CMS/DB write, or Search Channel operation."
           test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
 
           {
@@ -212,6 +307,10 @@ jobs:
             echo "diagnostic_run_attempt=$DIAGNOSTIC_RUN_ATTEMPT"
             echo "diagnostic_receipt_sha256=$EXPECTED_DIAGNOSTIC_RECEIPT_SHA256"
             echo "diagnostic_artifact_digest=$EXPECTED_DIAGNOSTIC_ARTIFACT_DIGEST"
+            echo "failed_repair_run_id=$FAILED_REPAIR_RUN_ID"
+            echo "failed_repair_run_attempt=$FAILED_REPAIR_RUN_ATTEMPT"
+            echo "failed_repair_receipt_sha256=$EXPECTED_FAILED_REPAIR_RECEIPT_SHA256"
+            echo "failed_repair_artifact_digest=$EXPECTED_FAILED_REPAIR_ARTIFACT_DIGEST"
             echo "manifest_sha256=$EXPECTED_MANIFEST_SHA256"
             echo "repair_candidate_count=$EXPECTED_REPAIR_CANDIDATE_COUNT"
             echo "repair_candidate_set_sha256=$EXPECTED_REPAIR_CANDIDATE_SET_SHA256"
@@ -235,6 +334,10 @@ jobs:
       DIAGNOSTIC_RUN_ATTEMPT: ${{ needs.eligibility.outputs.diagnostic_run_attempt }}
       DIAGNOSTIC_RECEIPT_SHA256: ${{ needs.eligibility.outputs.diagnostic_receipt_sha256 }}
       DIAGNOSTIC_ARTIFACT_DIGEST: ${{ needs.eligibility.outputs.diagnostic_artifact_digest }}
+      FAILED_REPAIR_RUN_ID: ${{ needs.eligibility.outputs.failed_repair_run_id }}
+      FAILED_REPAIR_RUN_ATTEMPT: ${{ needs.eligibility.outputs.failed_repair_run_attempt }}
+      FAILED_REPAIR_RECEIPT_SHA256: ${{ needs.eligibility.outputs.failed_repair_receipt_sha256 }}
+      FAILED_REPAIR_ARTIFACT_DIGEST: ${{ needs.eligibility.outputs.failed_repair_artifact_digest }}
       EXPECTED_MANIFEST_SHA256: ${{ needs.eligibility.outputs.manifest_sha256 }}
       EXPECTED_REPAIR_CANDIDATE_COUNT: ${{ needs.eligibility.outputs.repair_candidate_count }}
       EXPECTED_REPAIR_CANDIDATE_SET_SHA256: ${{ needs.eligibility.outputs.repair_candidate_set_sha256 }}
@@ -307,25 +410,38 @@ jobs:
           ssh "${ssh_options[@]}" "$DEPLOY_USER@$DEPLOY_HOST" \
             "sudo -n -u www-data -- env ${remote_env} PROBE_IDENTITY_ROLE=php_runtime php" \
             < "$probe" > artifacts/pre-php-runtime-probe.json
+          baseline_count="$EXPECTED_REPAIR_CANDIDATE_COUNT"
+          maximum_count="$((baseline_count + 256))"
           for receipt in artifacts/pre-deploy-runner-probe.json artifacts/pre-php-runtime-probe.json; do
             jq -e \
-              --arg set_sha "$EXPECTED_REPAIR_CANDIDATE_SET_SHA256" \
-              --argjson count "$EXPECTED_REPAIR_CANDIDATE_COUNT" \
+              --argjson baseline_count "$baseline_count" \
+              --argjson maximum_count "$maximum_count" \
               '.status == "PASS_PERMISSION_PROBE_COMPLETE"
                and .fixed_cache_chain_capability_failure_count == 0
                and .fixed_cache_chain_policy_mismatch_count == 0
                and .first_level_hash_directory_count == 256
-               and .second_level_hash_directory_count == 9176
-               and .hash_directory_policy_mismatch_count == 9432
+               and .second_level_hash_directory_count >= 9198
+               and .second_level_hash_directory_count <= 9454
+               and .hash_directory_policy_mismatch_count == (256 + .second_level_hash_directory_count)
                and .existing_target_file_count == 100
                and .target_file_owner_group_mismatch_count == 100
-               and .repair_candidate_count == $count
-               and .repair_candidate_set_sha256 == $set_sha
+               and .repair_candidate_count >= $baseline_count
+               and .repair_candidate_count <= $maximum_count
+               and .repair_candidate_count == (.hash_directory_policy_mismatch_count + 100)
                and .server_write_count == 0
                and .cache_write_count == 0' \
               "$receipt" >/dev/null
           done
-          echo "REMOTE_ENV=$remote_env" >> "$GITHUB_ENV"
+          live_candidate_count="$(jq -r '.repair_candidate_count' artifacts/pre-deploy-runner-probe.json)"
+          live_candidate_set_sha256="$(jq -r '.repair_candidate_set_sha256' artifacts/pre-deploy-runner-probe.json)"
+          test "$(jq -r '.repair_candidate_count' artifacts/pre-php-runtime-probe.json)" = "$live_candidate_count"
+          test "$(jq -r '.repair_candidate_set_sha256' artifacts/pre-php-runtime-probe.json)" = "$live_candidate_set_sha256"
+          [[ "$live_candidate_set_sha256" =~ ^[0-9a-f]{64}$ ]]
+          {
+            echo "REMOTE_ENV=$remote_env"
+            echo "LIVE_REPAIR_CANDIDATE_COUNT=$live_candidate_count"
+            echo "LIVE_REPAIR_CANDIDATE_SET_SHA256=$live_candidate_set_sha256"
+          } >> "$GITHUB_ENV"
 
       - name: Apply exact non-recursive permission metadata repair
         id: apply
@@ -334,8 +450,8 @@ jobs:
           set -euo pipefail
           repair="backend/scripts/career/career_search_entry_cache_permission_repair.php"
           repair_sha256="$(sha256sum "$repair" | awk '{print $1}')"
-          printf -v q_EXPECTED_REPAIR_CANDIDATE_COUNT '%q' "$EXPECTED_REPAIR_CANDIDATE_COUNT"
-          printf -v q_EXPECTED_REPAIR_CANDIDATE_SET_SHA256 '%q' "$EXPECTED_REPAIR_CANDIDATE_SET_SHA256"
+          printf -v q_EXPECTED_REPAIR_CANDIDATE_COUNT '%q' "$LIVE_REPAIR_CANDIDATE_COUNT"
+          printf -v q_EXPECTED_REPAIR_CANDIDATE_SET_SHA256 '%q' "$LIVE_REPAIR_CANDIDATE_SET_SHA256"
           set +e
           # shellcheck disable=SC2029
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
@@ -405,11 +521,17 @@ jobs:
             --arg manifest "$EXPECTED_MANIFEST_SHA256" \
             --arg diagnostic_receipt "$DIAGNOSTIC_RECEIPT_SHA256" \
             --arg diagnostic_artifact "$DIAGNOSTIC_ARTIFACT_DIGEST" \
-            --arg set_sha "$EXPECTED_REPAIR_CANDIDATE_SET_SHA256" \
+            --arg failed_repair_receipt "$FAILED_REPAIR_RECEIPT_SHA256" \
+            --arg failed_repair_artifact "$FAILED_REPAIR_ARTIFACT_DIGEST" \
+            --arg baseline_set_sha "$EXPECTED_REPAIR_CANDIDATE_SET_SHA256" \
+            --arg live_set_sha "$LIVE_REPAIR_CANDIDATE_SET_SHA256" \
             --arg repair_sha "${REPAIR_SHA256:-unavailable}" \
-            --argjson candidate_count "$EXPECTED_REPAIR_CANDIDATE_COUNT" \
+            --argjson baseline_candidate_count "$EXPECTED_REPAIR_CANDIDATE_COUNT" \
+            --argjson live_candidate_count "$LIVE_REPAIR_CANDIDATE_COUNT" \
             --argjson diagnostic_run "$DIAGNOSTIC_RUN_ID" \
             --argjson diagnostic_attempt "$DIAGNOSTIC_RUN_ATTEMPT" \
+            --argjson failed_repair_run "$FAILED_REPAIR_RUN_ID" \
+            --argjson failed_repair_attempt "$FAILED_REPAIR_RUN_ATTEMPT" \
             --argjson remote_status "${REPAIR_REMOTE_STATUS:-255}" \
             --argjson run_id "$GITHUB_RUN_ID" \
             --argjson run_attempt "$GITHUB_RUN_ATTEMPT" \
@@ -424,8 +546,8 @@ jobs:
                    if $remote_status == 0
                      and $repair.status == "PASS_PERMISSION_REPAIR_COMMITTED"
                      and $repair.write_state == "committed"
-                     and $repair.permission_metadata_write_count == $candidate_count
-                     and $repair.permission_directory_write_count == 9432
+                     and $repair.permission_metadata_write_count == $live_candidate_count
+                     and $repair.permission_directory_write_count == ($live_candidate_count - 100)
                      and $repair.permission_file_write_count == 100
                      and $repair.payload_unchanged == true
                      and $repair.post_repair_candidate_count == 0
@@ -444,10 +566,16 @@ jobs:
                  diagnostic_run_attempt: $diagnostic_attempt,
                  diagnostic_receipt_sha256: $diagnostic_receipt,
                  diagnostic_artifact_digest: $diagnostic_artifact,
+                 failed_repair_run_id: $failed_repair_run,
+                 failed_repair_run_attempt: $failed_repair_attempt,
+                 failed_repair_receipt_sha256: $failed_repair_receipt,
+                 failed_repair_artifact_digest: $failed_repair_artifact,
                  control_plane_sha: $control,
                  repair_runner_sha256: $repair_sha,
-                 repair_candidate_count: $candidate_count,
-                 repair_candidate_set_sha256: $set_sha,
+                 baseline_repair_candidate_count: $baseline_candidate_count,
+                 baseline_repair_candidate_set_sha256: $baseline_set_sha,
+                 live_repair_candidate_count: $live_candidate_count,
+                 live_repair_candidate_set_sha256: $live_set_sha,
                  pre_deploy_runner: $pre_runner,
                  pre_php_runtime: $pre_runtime,
                  repair: $repair,
@@ -493,7 +621,9 @@ jobs:
           set -euo pipefail
           jq -e \
             '.status == "PASS_PERMISSION_REPAIR_VERIFIED"
-             and .permission_metadata_write_count == 9532
+             and .permission_metadata_write_count == .live_repair_candidate_count
+             and .live_repair_candidate_count >= .baseline_repair_candidate_count
+             and .live_repair_candidate_count <= (.baseline_repair_candidate_count + 256)
              and .cache_payload_write_count == 0
              and .retry_execution_count == 0
              and .database_write_count == 0
