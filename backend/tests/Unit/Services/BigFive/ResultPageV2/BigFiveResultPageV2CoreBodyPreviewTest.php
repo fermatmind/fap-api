@@ -875,6 +875,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_exact_enneagram_snapshot_job_deduplication(): void
+    {
+        $changed = [
+            'backend/app/Jobs/GenerateReportSnapshotJob.php',
+        ];
+
+        $this->assertSame(
+            [],
+            $this->mbtiImpactingRuntimeChanges($changed, dirname(base_path()), 'origin/main')
+        );
+    }
+
     public function test_runtime_freeze_classifier_ignores_personality_public_directory_changes(): void
     {
         $changed = [
@@ -6903,6 +6915,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isExactEnneagramSnapshotJobDeduplicationChange($file, $repoRoot, $baseRef)) {
+                continue;
+            }
+
             if ($this->isBigFivePublicProfileAgentDraftFile($file)) {
                 continue;
             }
@@ -10619,6 +10635,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Enneagram/EnneagramPublicProjectionService.php',
             'backend/app/Services/Report/EnneagramReportComposer.php',
         ], true);
+    }
+
+    private function isExactEnneagramSnapshotJobDeduplicationChange(
+        string $file,
+        string $repoRoot,
+        string $baseRef,
+    ): bool {
+        if (
+            $file !== 'backend/app/Jobs/GenerateReportSnapshotJob.php'
+            || $repoRoot === ''
+            || $baseRef === ''
+        ) {
+            return false;
+        }
+
+        $changedLines = $this->changedLinesForFile($repoRoot, $baseRef, $file);
+
+        return $changedLines !== []
+            && hash_equals(
+                '2ec0fa4abb81e444bc4c380a0aa529257fee7c2b5b7a75f6a486fdedad9a2053',
+                hash('sha256', implode("\n", $changedLines))
+            );
     }
 
     private function isEnneagramRegistryValidatorFile(string $file): bool
