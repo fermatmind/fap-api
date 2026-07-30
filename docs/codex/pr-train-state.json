@@ -101496,9 +101496,9 @@
       "EN-PARITY-W1-MBTI-INVENTORY-01",
       "EN-PARITY-W1-MBTI-RESULT-AGENT-01"
     ],
-    "status": "local_verified",
-    "commit_sha": "5aef817ea49ba91a1f3412b40eb64ef193e26066",
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "6eecd4503c477cfc093a51d124c8000ad3064dbc",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3429",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -101556,8 +101556,13 @@
         "at": "2026-07-30T18:26:22Z",
         "status": "local_verified",
         "note": "Frozen package SHA da6cb2ee008d7c76503d0a60774a035810837a2cb68fb7ff23b668be0a5c5453 after exact 46 = 24 + 21 + 1 reconciliation. Focused validation passed 7 tests/744 assertions, Pint, JSON/YAML, Han/private/claim/entitlement checks, diff and exact scope checks. The first direct verify_mbti invocation correctly failed because no local HTTP server existed; after isolated SQLite CI setup started the server, the same verify_mbti chain and the bounded MBTI regression gates passed with exit 0. No production/CMS/database authority write occurred."
+      },
+      {
+        "at": "2026-07-30T18:28:38Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact scoped branch and opened PR #3429 as a ready PR. GitHub reports the head mergeable; required checks are queued or running. No controlled write, import, activation, release, or deploy action was triggered."
       }
     ],
-    "updated_at": "2026-07-30T18:26:22Z"
+    "updated_at": "2026-07-30T18:28:38Z"
   }
 }
