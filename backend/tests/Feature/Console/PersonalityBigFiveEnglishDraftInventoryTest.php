@@ -345,6 +345,27 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             json_encode($camelCasePrivateField, JSON_THROW_ON_ERROR),
         );
 
+        foreach (['report_module', 'private_result', 'result_page_module', 'entitlement'] as $privateModule) {
+            $working->forceFill(['snapshot_json' => [
+                'attributes' => [
+                    ...$this->completeSnapshot('Candidate'),
+                    'content_sections_json' => [[
+                        'key' => 'overview',
+                        'kind' => 'rich_text',
+                        'heading' => 'Overview',
+                        'body' => "This references {$privateModule}.",
+                    ]],
+                ],
+            ]])->saveQuietly();
+            $privateModuleResult = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+            $privateModuleRow = collect($privateModuleResult['rows'])
+                ->firstWhere('logical_identity', 'domain:openness');
+
+            $this->assertTrue($privateModuleRow['private_result_leakage']);
+            $this->assertFalse($privateModuleRow['claim_boundary_compliant']);
+            $this->assertSame('prohibited_content', $privateModuleRow['recommended_disposition']);
+        }
+
         $working->forceFill(['snapshot_json' => [
             'attributes' => $this->completeSnapshot('Candidate'),
             'body' => '\![escaped image marker][hero]',

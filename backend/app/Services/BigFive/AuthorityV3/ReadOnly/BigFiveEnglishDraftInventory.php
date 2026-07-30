@@ -969,6 +969,12 @@ final class BigFiveEnglishDraftInventory
 
     private function containsProhibitedPrivateField(mixed $value): bool
     {
+        if (is_string($value)) {
+            return preg_match(
+                '/(?:private[_-]?result|result[_-]?page[_-]?module|report[_-]?module|entitlement)/i',
+                $value,
+            ) === 1;
+        }
         if (! is_array($value)) {
             return false;
         }
