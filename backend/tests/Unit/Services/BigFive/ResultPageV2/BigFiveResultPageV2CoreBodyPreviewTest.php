@@ -864,6 +864,22 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_article_public_list_read_optimization_services(): void
+    {
+        $allowed = [
+            'backend/app/Services/Cms/ArticlePublicListQuery.php',
+            'backend/app/Services/Cms/ArticlePublicListReadCache.php',
+        ];
+        $blocked = [
+            'backend/app/Services/Cms/ArticlePublicDetailReadCache.php',
+            'backend/app/Services/Cms/ArticlePublicListWriter.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_personality_enneagram_compatibility_changes(): void
     {
         $changed = [
@@ -6728,6 +6744,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isArticlePublicListReadOptimizationService($file)) {
+                continue;
+            }
+
             if ($this->isPersonalityEnneagramCompatibilityFile($file)) {
                 continue;
             }
@@ -9638,6 +9658,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php',
             'backend/app/Models/ArticleTestEdge.php',
             'backend/database/migrations/2026_05_15_000300_create_article_test_edges_table.php',
+        ], true);
+    }
+
+    private function isArticlePublicListReadOptimizationService(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/Cms/ArticlePublicListQuery.php',
+            'backend/app/Services/Cms/ArticlePublicListReadCache.php',
         ], true);
     }
 
