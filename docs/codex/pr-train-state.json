@@ -101263,8 +101263,8 @@
     "depends_on": [
       "EN-PARITY-W1-MBTI-INVENTORY-01"
     ],
-    "status": "review_fix_local_verified",
-    "commit_sha": null,
+    "status": "github_checks_pending",
+    "commit_sha": "d2b9931dc509c900cbef5eef3fdcb586ed0faedc",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3424",
     "checks": {
       "authorization": {
@@ -101312,12 +101312,12 @@
         "evidence": "PR #3424 head 37dcc8dcc4900f973d03c1985bc6bfcee316b27a passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. verify-staging-parity was policy-skipped and is not a deploy wait."
       },
       "final_head_checks": {
-        "status": "superseded_by_third_review_fix",
-        "evidence": "Head a4693d9c0cfbb890460f8aa73e8a51b7315a724a passed every applicable GitHub check, but refreshed exact-head review found that the current public v1 projection would omit groups/items. The corrected head must repeat required checks."
+        "status": "pending",
+        "evidence": "Third review-fix implementation head d2b9931dc509c900cbef5eef3fdcb586ed0faedc is pushed; required GitHub checks and refreshed exact-head review are pending."
       },
       "codex_review": {
-        "status": "third_round_resolved_locally_pending_rereview",
-        "evidence": "The refreshed review correctly found that public v1 reads only body/rows. The same-scope repair retains groups/items for source-structure evidence and adds exact deterministic rows containing every nested item, so a future importer can use the current public contract without dropping content or changing runtime."
+        "status": "third_round_resolved_pushed_pending_rereview",
+        "evidence": "The refreshed review correctly found that public v1 reads only body/rows. Commit d2b9931dc509c900cbef5eef3fdcb586ed0faedc retains groups/items for source-structure evidence, adds exact deterministic rows containing every nested item, and records the resolution on the review thread."
       }
     },
     "failure_reason": null,
@@ -101387,8 +101387,13 @@
         "at": "2026-07-30T17:21:30Z",
         "status": "review_fix_local_verified",
         "note": "Exact head a4693d9c0cfbb890460f8aa73e8a51b7315a724a passed all applicable checks, then refreshed Codex review found that public v1 reads only body/rows and would omit groups/items. Added deterministic projection rows for every nested group/item while retaining the source-structured fields and strengthened the contract to prove exact row content. Replacement package SHA is 2a745c06ca32e491f8e9ed20b0d9994b98d12c54a50fa1bc160969de12922029; focused validation passes 6 tests/1088 assertions and Pint."
+      },
+      {
+        "at": "2026-07-30T17:24:15Z",
+        "status": "github_checks_pending",
+        "note": "Pushed third review-fix implementation commit d2b9931dc509c900cbef5eef3fdcb586ed0faedc and replied on the exact review thread. Fresh required checks and refreshed exact-head review are pending."
       }
     ],
-    "updated_at": "2026-07-30T17:21:30Z"
+    "updated_at": "2026-07-30T17:24:15Z"
   }
 }
