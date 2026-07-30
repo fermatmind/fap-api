@@ -101180,8 +101180,8 @@
     "depends_on": [
       "EN-PARITY-W1-MBTI-INVENTORY-01"
     ],
-    "status": "review_fix_local_verified",
-    "commit_sha": null,
+    "status": "github_checks_pending",
+    "commit_sha": "3bb46acfe8deafa36edf2c4ad47cc04731089814",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3424",
     "checks": {
       "authorization": {
@@ -101229,12 +101229,12 @@
         "evidence": "PR #3424 head 37dcc8dcc4900f973d03c1985bc6bfcee316b27a passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. verify-staging-parity was policy-skipped and is not a deploy wait."
       },
       "final_head_checks": {
-        "status": "superseded_by_review_fix",
-        "evidence": "Head 0417c320e322f4231a20433319c3e4da05152208 passed all applicable checks but its exact-head Codex review identified lossy source-structure handling. The corrected head must repeat every required check."
+        "status": "pending",
+        "evidence": "Review-fix implementation head 3bb46acfe8deafa36edf2c4ad47cc04731089814 is pushed; its required GitHub checks and refreshed exact-head review are pending."
       },
       "codex_review": {
-        "status": "resolved_locally_pending_rereview",
-        "evidence": "The exact-head review correctly found that six JSON-backed assets compressed source bodies and flattened stress groups while claiming structural alignment. The same-scope repair now preserves body, group, nested-item, and item cardinality, adds an explicit translation map, and adds regression assertions against every committed source section."
+        "status": "resolved_pushed_pending_rereview",
+        "evidence": "The exact-head review correctly found that six JSON-backed assets compressed source bodies and flattened stress groups while claiming structural alignment. Commit 3bb46acfe8deafa36edf2c4ad47cc04731089814 preserves body, group, nested-item, and item cardinality, adds an explicit translation map, adds regression assertions against every committed source section, and records the response on the original review thread."
       }
     },
     "failure_reason": null,
@@ -101279,8 +101279,13 @@
         "at": "2026-07-30T16:49:30Z",
         "status": "review_fix_local_verified",
         "note": "Head 0417c320e322f4231a20433319c3e4da05152208 passed every applicable check, then exact-head Codex review found one valid P2: six committed JSON sources were structurally compressed while marked aligned. Preserved every source body/group/nested-item/item cardinality, added the required translation map plus producer claim-boundary/editorial reports, strengthened the focused test to compare every source section, and froze replacement package SHA a85c80023d7a5203d43ff16c67e06bec59b50b86bbfd9107850f3b97a266717f. Focused validation passes 6 tests/987 assertions and Pint; a fresh exact-head CI and review are required."
+      },
+      {
+        "at": "2026-07-30T16:53:15Z",
+        "status": "github_checks_pending",
+        "note": "Pushed review-fix implementation commit 3bb46acfe8deafa36edf2c4ad47cc04731089814, updated the PR body to the replacement package SHA and 6-test/987-assertion evidence, and replied on the exact P2 thread. Fresh GitHub checks and refreshed review are pending."
       }
     ],
-    "updated_at": "2026-07-30T16:49:30Z"
+    "updated_at": "2026-07-30T16:53:15Z"
   }
 }
