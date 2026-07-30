@@ -1005,8 +1005,7 @@ final class BigFiveEnglishDraftInventory
                 return true;
             }
             if (preg_match(
-                '/(?:background(?:-image)?|border-image(?:-source)?|content|cursor|list-style(?:-image)?|mask(?:-image)?)'
-                    .'\s*:[^;{}\r\n]*(?:url|image(?:-set)?|cross-fade|element|(?:linear|radial|conic)-gradient)\s*\(/i',
+                '/(?:url|image(?:-set)?|cross-fade|element|(?:linear|radial|conic)-gradient)\s*\(/i',
                 $value,
             ) === 1) {
                 return true;
