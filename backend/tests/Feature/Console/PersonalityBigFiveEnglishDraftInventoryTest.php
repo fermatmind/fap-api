@@ -271,6 +271,17 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
 
         $working->forceFill(['snapshot_json' => [
             'attributes' => $this->completeSnapshot('Candidate'),
+            'body' => "![alt text][hero]\n\n[hero]: https://private.invalid/reference.webp",
+        ]])->saveQuietly();
+        $referenceImage = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $referenceImageRow = collect($referenceImage['rows'])
+            ->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertFalse($referenceImageRow['text_only_compliant']);
+        $this->assertSame('prohibited_content', $referenceImageRow['recommended_disposition']);
+
+        $working->forceFill(['snapshot_json' => [
+            'attributes' => $this->completeSnapshot('Candidate'),
             'media' => null,
             'image' => '',
             'images' => [],

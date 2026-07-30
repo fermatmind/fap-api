@@ -910,7 +910,7 @@ final class BigFiveEnglishDraftInventory
     private function containsMediaReference(mixed $value): bool
     {
         if (is_string($value)) {
-            return preg_match('/!\[[^\]]*\]\s*\([^)]*\)|<(?:img|picture|source)\b/i', $value) === 1;
+            return preg_match('/!\[[^\]]*\]|<(?:img|picture|source)\b/i', $value) === 1;
         }
         if (! is_array($value)) {
             return false;
