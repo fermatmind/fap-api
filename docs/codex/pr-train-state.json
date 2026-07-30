@@ -101179,7 +101179,7 @@
     "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
     "status": "github_checks_pending",
     "depends_on": [],
-    "commit_sha": "164829a5e618b5489211e6ee2067438bf7c9ba49",
+    "commit_sha": "9daca2b4a0241f74d08e01d11d6c4d32d4b752c8",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3421",
     "checks": {
       "production_read_only_inventory": {
@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "CI run 30590176791 and Code Scanning run 30590176790 passed all required jobs on metadata head db863b63fda7253439e6b74e4c715394983358a9. Exact-head review then found that HTML image metadata declarations were not rejected. Implementation 164829a5e618b5489211e6ee2067438bf7c9ba49 closes that same-scope metadata boundary; required checks must rerun."
+        "evidence": "CI run 30590670744 and Code Scanning run 30590670767 passed all required jobs on metadata head d707a128019bcc10ca6b0e009e499c1faec27986. Exact-head review then found that scalar section text was not scanned for private result-module references. Implementation 9daca2b4a0241f74d08e01d11d6c4d32d4b752c8 closes that same-scope claim boundary; required checks must rerun."
       }
     },
     "scope_validation": {
@@ -101433,9 +101433,14 @@
         "at": "2026-07-30T23:28:52Z",
         "status": "github_checks_pending",
         "note": "After CI run 30590176791 passed all required jobs, exact-head review identified HTML image metadata as a remaining media vector. The scanner now rejects meta declarations, covering og:image, twitter:image, and itemprop=image alongside the existing tag, loading-attribute, CSS-function, and Markdown boundaries. The ledger binds implementation 164829a5e618b5489211e6ee2067438bf7c9ba49. The 30-test inventory suite passes 219 assertions, scoped Pint and PHP syntax pass, and the focused runtime-freeze classifier passes 1 test / 2 assertions."
+      },
+      {
+        "at": "2026-07-30T23:38:17Z",
+        "status": "github_checks_pending",
+        "note": "After CI run 30590670744 passed all required jobs, exact-head review identified scalar private result-module references as a remaining claim-boundary gap. Recursive scanning now applies the public content contract's private_result, result_page_module, report_module, and entitlement patterns to string values as well as keys. Section-body regressions for all four patterns fail closed. The ledger binds implementation 9daca2b4a0241f74d08e01d11d6c4d32d4b752c8. The 30-test inventory suite passes 231 assertions, scoped Pint and PHP syntax pass, and the focused runtime-freeze classifier passes 1 test / 2 assertions."
       }
     ],
-    "updated_at": "2026-07-30T23:28:52Z"
+    "updated_at": "2026-07-30T23:38:17Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
