@@ -1845,6 +1845,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Access/AttemptUnlockProjectionRepairService.php',
             'backend/app/Services/Commerce/ReportUnlockOptionResolver.php',
             'backend/app/Services/Report/InviteUnlockSummaryBuilder.php',
+            'backend/database/migrations/2026_07_30_235900_create_report_gift_requests_table.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -10856,6 +10857,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Access/AttemptUnlockProjectionRepairService.php',
             'backend/app/Services/Commerce/ReportUnlockOptionResolver.php',
             'backend/app/Services/Report/InviteUnlockSummaryBuilder.php',
+            'backend/database/migrations/2026_07_30_235900_create_report_gift_requests_table.php',
         ], true);
     }
 

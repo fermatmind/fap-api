@@ -131,6 +131,7 @@ prs:
     allowed_paths:
       - backend/database/migrations/2026_07_30_235900_create_report_gift_requests_table.php
       - backend/tests/Feature/Storage/ReportGiftRequestSchemaMigrationTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
@@ -139,8 +140,9 @@ prs:
       - Run a production migration, write production data, deploy, publish, upload the mini-program, create an order, or perform a payment.
     validation:
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Storage/ReportGiftRequestSchemaMigrationTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=test_runtime_freeze_classifier_ignores_three_channel_report_unlock_contract_services --no-ansi
       - cd backend && gift_db=$(mktemp /tmp/fap-api-gift-schema.XXXXXX) && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE="$gift_db" php artisan migrate --force --no-interaction --no-ansi
-      - cd backend && vendor/bin/pint --test database/migrations/2026_07_30_235900_create_report_gift_requests_table.php tests/Feature/Storage/ReportGiftRequestSchemaMigrationTest.php
+      - cd backend && vendor/bin/pint --test database/migrations/2026_07_30_235900_create_report_gift_requests_table.php tests/Feature/Storage/ReportGiftRequestSchemaMigrationTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - cd backend && composer validate --strict
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
