@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Feature\ContentAssets;
 
+use App\Services\Report\Pdf\Mbti\MbtiPdfPayloadBuilder;
 use App\Support\Mbti\MbtiCanonicalSectionRegistry;
 use PHPUnit\Framework\Attributes\Test;
+use ReflectionClass;
 use Tests\TestCase;
 
 final class MbtiResultEnglishPackageTest extends TestCase
@@ -14,7 +16,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
 
     private const INVENTORY_SHA = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
-    private const PACKAGE_SHA = '6d354a063422e2d9e5685abd2e07b1e4a12a6c9216c7a40779dc6b055397ed72';
+    private const PACKAGE_SHA = '53fe11db0ccd9a9216de4b91d33a8e5067231c1c2a9df523267fd9f3e8c3f1f5';
 
     private const EXPECTED_CANDIDATE_ROW_IDS = [
         'W1-RESULT-CORE-05-OFFER-CTA',
@@ -636,7 +638,17 @@ final class MbtiResultEnglishPackageTest extends TestCase
             self::assertStringContainsString($expectedText, $readerText);
         }
 
-        self::assertSame(self::FORBIDDEN_PAYLOAD_KEYS, $mapping['excluded_fixture_fields']);
+        $runtimeBuilderForbiddenKeys = (new ReflectionClass(MbtiPdfPayloadBuilder::class))
+            ->getReflectionConstant('FORBIDDEN_KEYS')
+            ?->getValue();
+        self::assertIsArray($runtimeBuilderForbiddenKeys);
+        self::assertSame(
+            array_values(array_unique([
+                ...self::FORBIDDEN_PAYLOAD_KEYS,
+                ...$runtimeBuilderForbiddenKeys,
+            ])),
+            $mapping['excluded_fixture_fields'],
+        );
     }
 
     #[Test]

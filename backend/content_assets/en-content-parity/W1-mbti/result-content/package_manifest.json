@@ -19,13 +19,13 @@
     {"path":"inventory_reconciliation.json","sha256":"20fb311db62ef5a5abf227d704dc9a006091574cfedcc49b517dcc701f350e29"},
     {"path":"translation_map.json","sha256":"a4834461779215c1606532b5bacd36b0b270ba565886890fa2f8e9b8e76d8d42"},
     {"path":"entitlement_matrix.json","sha256":"b893d8b0856d2e6b3b41108ea078e6222c0bc97229d06c5c1d8561ef82e5ad08"},
-    {"path":"pdf_reader_fixture_mapping.json","sha256":"a69929d17f4f1131e2e6eee0d8838301ae94c2358d0783e52914a39913b7e4f6"},
+    {"path":"pdf_reader_fixture_mapping.json","sha256":"033714b59b230cd542320ac23a1fdac73febb14baa74d0fae695b06635bb4650"},
     {"path":"claim_boundary_report.json","sha256":"b4d28cb040d2e11b21352d2f16cf34445903ee24aced3366b0b09669625c84fc"},
-    {"path":"editorial_review.json","sha256":"52d1b331008c4b940367eaa04a4a9bc2caca36a05201397e6c74c8087d2847df"},
+    {"path":"editorial_review.json","sha256":"9b0754336a285d08c78f8120e7357e94f36f8f9247a3c8bc48f56531dc99ce06"},
     {"path":"approval_envelope.json","sha256":"31fe907963817d310cca7ff0f0f7c0b1456a773ed4c546c2a1ef6528128c79d5"}
   ],
   "package_sha256_algorithm": "sha256 of the UTF-8 concatenation of each manifest file path, NUL, lowercase file SHA-256, and newline in files[] order; approval_envelope.json is mandatory and field-for-field binds the manifest authorization metadata",
-  "package_sha256": "6d354a063422e2d9e5685abd2e07b1e4a12a6c9216c7a40779dc6b055397ed72",
+  "package_sha256": "53fe11db0ccd9a9216de4b91d33a8e5067231c1c2a9df523267fd9f3e8c3f1f5",
   "quality_gates": {
     "exact_inventory_identity": "pass",
     "exact_46_row_reconciliation": "pass",
