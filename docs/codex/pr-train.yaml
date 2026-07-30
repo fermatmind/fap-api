@@ -76,6 +76,7 @@ prs:
       - backend/app/Console/Commands/PersonalityBigFiveEnglishDraftInventory.php
       - backend/app/Services/BigFive/AuthorityV3/ReadOnly/BigFiveEnglishDraftInventory.php
       - backend/tests/Feature/Console/PersonalityBigFiveEnglishDraftInventoryTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/docs/seo/generated/en-parity-w2-big-five-draft-inventory.v1.json
       - backend/docs/seo/en-parity-w2-big-five-draft-inventory.md
       - docs/codex/pr-train.yaml
@@ -90,6 +91,7 @@ prs:
       - php -l backend/app/Console/Commands/PersonalityBigFiveEnglishDraftInventory.php
       - php -l backend/app/Services/BigFive/AuthorityV3/ReadOnly/BigFiveEnglishDraftInventory.php
       - cd backend && php artisan test tests/Feature/Console/PersonalityBigFiveEnglishDraftInventoryTest.php --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=big_five_english_draft_inventory_files --no-ansi
       - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityBigFiveEnglishDraftInventory.php app/Services/BigFive/AuthorityV3/ReadOnly/BigFiveEnglishDraftInventory.php tests/Feature/Console/PersonalityBigFiveEnglishDraftInventoryTest.php
       - python3 -m json.tool backend/docs/seo/generated/en-parity-w2-big-five-draft-inventory.v1.json >/dev/null
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"

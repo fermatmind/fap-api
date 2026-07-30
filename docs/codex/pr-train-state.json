@@ -101177,10 +101177,10 @@
     "base": "main",
     "branch": "codex/en-parity-w2-big5-draft-reconcile-01",
     "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
-    "status": "committed",
+    "status": "github_retry_pending",
     "depends_on": [],
     "commit_sha": "6e320344e698259cabc489d29c48570b7dfa6fd5",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3421",
     "checks": {
       "production_read_only_inventory": {
         "status": "pass",
@@ -101191,13 +101191,13 @@
         "evidence": "Focused PHPUnit, scoped Pint, PHP syntax, JSON/YAML parsing, deterministic artifact invariants, diff checks, and exact allowlist validation passed. Production historical revision QA SHA-256 109e995dd9c900b978d5ceaca1f7851607d4332c8bf9a734c705bd32982dd11e proves 50 rows, database fingerprint unchanged, and zero CJK/media/private-field leakage."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": null
+        "status": "retry_pending",
+        "evidence": "GitHub CI run 30557953403 failed only BigFiveResultPageV2CoreBodyPreviewTest because the runtime-freeze classifier did not yet recognize the two new read-only inventory paths; all other jobs passed. The exact two-path same-scope classifier repair now passes its focused regression test locally."
       }
     },
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": false,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": false,
       "post_merge_revalidated": false
     },
@@ -101233,8 +101233,18 @@
         "at": "2026-07-30T15:46:00Z",
         "status": "committed",
         "note": "Committed the exact seven-path implementation and durable evidence as 6e320344e698259cabc489d29c48570b7dfa6fd5 after explicit path-limited staging."
+      },
+      {
+        "at": "2026-07-30T15:50:44Z",
+        "status": "github_checks_failed_in_scope_fix_in_progress",
+        "note": "Inspected GitHub CI run 30557953403 job 90923688642 before editing. The only failure was the branch-diff runtime-freeze classifier rejecting the two newly introduced read-only inventory classes; 1620 Big Five tests passed. Repair is constrained to the existing classifier test plus the exact two inventory paths."
+      },
+      {
+        "at": "2026-07-30T15:52:00Z",
+        "status": "github_retry_pending",
+        "note": "The exact classifier regression test passes with 2 assertions, scoped Pint passes, YAML/JSON parsing passes, and git diff --check passes. The manifest allowlist now explicitly includes the classifier test as the same-scope required-check repair."
       }
     ],
-    "updated_at": "2026-07-30T15:46:00Z"
+    "updated_at": "2026-07-30T15:52:00Z"
   }
 }

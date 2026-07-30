@@ -200,6 +200,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_big_five_english_draft_inventory_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/PersonalityBigFiveEnglishDraftInventory.php',
+            'backend/app/Services/BigFive/AuthorityV3/ReadOnly/BigFiveEnglishDraftInventory.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_eq60_form_catalog(): void
     {
         $allowed = [
@@ -7915,6 +7929,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveEnglishDraftInventoryFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveNormFoundationSchemaFile($file)) {
                 continue;
             }
@@ -11779,6 +11797,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isBigFiveV2EnParityDraftCatalogFile(string $file): bool
     {
         return $file === 'backend/content_packs/BIG5_OCEAN/v2/drafts/en_parity/result_page_v2_en_asset_catalog_draft.v1.json';
+    }
+
+    private function isBigFiveEnglishDraftInventoryFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityBigFiveEnglishDraftInventory.php',
+            'backend/app/Services/BigFive/AuthorityV3/ReadOnly/BigFiveEnglishDraftInventory.php',
+        ], true);
     }
 
     private function isBigFiveNormFoundationSchemaFile(string $file): bool
