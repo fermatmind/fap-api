@@ -20,6 +20,7 @@ use App\Services\BigFive\BigFivePublicProjectionService;
 use App\Services\BigFive\ReportEngine\Bridge\BigFiveLiveRuntimeBridge;
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2RuntimeWrapper;
 use App\Services\Commerce\MbtiAccessHubBuilder;
+use App\Services\Commerce\ReportUnlockOptionResolver;
 use App\Services\Content\EnneagramPackLoader;
 use App\Services\Enneagram\EnneagramObservationStateService;
 use App\Services\Enneagram\EnneagramPublicFormSummaryBuilder;
@@ -100,6 +101,7 @@ class AttemptReadController extends Controller
         private MbtiReadModelContractService $mbtiReadModelContractService,
         private MbtiWorkingLifeConsolidationService $mbtiWorkingLifeConsolidationService,
         private MbtiAccessHubBuilder $mbtiAccessHubBuilder,
+        private ReportUnlockOptionResolver $reportUnlockOptions,
         private MbtiPreviewContractBuilder $mbtiPreviewContractBuilder,
         private InviteUnlockSummaryBuilder $inviteUnlockSummaryBuilder,
         private EventRecorder $eventRecorder,
@@ -1160,8 +1162,37 @@ class AttemptReadController extends Controller
         $payloadJson['access_source'] = trim((string) data_get($payloadJson, 'access_source', 'none')) ?: 'none';
         $payloadJson['free_full_report_mode'] = (bool) data_get($payloadJson, 'free_full_report_mode', false);
         $payloadJson['paywall_suppressed'] = (bool) data_get($payloadJson, 'paywall_suppressed', false);
+        $modulesAllowed = ReportAccess::normalizeModules((array) data_get(
+            $payloadJson,
+            'modules_allowed',
+            ReportAccess::defaultModulesAllowedForLocked($scaleCode)
+        ));
+        $modulesOffered = ReportAccess::normalizeModules((array) data_get(
+            $payloadJson,
+            'modules_offered',
+            data_get($payloadJson, 'modules_preview', ReportAccess::allDefaultModulesOffered($scaleCode))
+        ));
+        $fullReportEntitlement = $this->reportUnlockOptions->resolve(
+            $scaleCode,
+            (string) ($attempt->locale ?? 'zh-CN'),
+            $orgId,
+            $unlockStage,
+            $unlockSource,
+            $modulesAllowed,
+            $modulesOffered,
+            (string) data_get($payloadJson, 'three_channel_unlock_source', $unlockSource)
+        );
         $responsePayload['unlock_stage'] = $unlockStage;
         $responsePayload['unlock_source'] = $unlockSource;
+        if (data_get($fullReportEntitlement, 'rollout.state') === 'enabled') {
+            $payloadJson['full_report_entitlement_v1'] = $fullReportEntitlement;
+            $responsePayload['access_level'] = $fullReportEntitlement['access_level'];
+            $responsePayload['modules_allowed'] = $fullReportEntitlement['modules_allowed'];
+            $responsePayload['modules_offered'] = $fullReportEntitlement['modules_offered'];
+            $responsePayload['unlock_options'] = $fullReportEntitlement['unlock_options'];
+            $responsePayload['rollout'] = $fullReportEntitlement['rollout'];
+            $responsePayload['full_report_entitlement_v1'] = $fullReportEntitlement;
+        }
         $responsePayload['access_source'] = $payloadJson['access_source'];
         $responsePayload['free_full_report_mode'] = $payloadJson['free_full_report_mode'];
         $responsePayload['paywall_suppressed'] = $payloadJson['paywall_suppressed'];

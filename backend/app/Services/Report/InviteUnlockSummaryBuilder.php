@@ -40,9 +40,18 @@ final class InviteUnlockSummaryBuilder
                 : "Invite unlock {$completed}/{$required} · Partial unlocked";
             $shortLabel = "Invite unlock {$completed}/{$required}";
         } elseif ($normalizedStage === ReportAccess::UNLOCK_STAGE_FULL) {
-            if ($normalizedSource === ReportAccess::UNLOCK_SOURCE_PAYMENT) {
+            if (in_array($normalizedSource, [
+                ReportAccess::UNLOCK_SOURCE_PAYMENT,
+                ReportAccess::UNLOCK_SOURCE_SELF_PURCHASE,
+            ], true)) {
                 $label = 'Paid unlock active';
                 $shortLabel = 'Paid unlock';
+            } elseif ($normalizedSource === ReportAccess::UNLOCK_SOURCE_REWARDED_AD) {
+                $label = 'Rewarded ad unlock active';
+                $shortLabel = 'Rewarded ad unlock';
+            } elseif ($normalizedSource === ReportAccess::UNLOCK_SOURCE_GIFT_PURCHASE) {
+                $label = 'Gift unlock active';
+                $shortLabel = 'Gift unlock';
             } elseif ($normalizedSource === ReportAccess::UNLOCK_SOURCE_MIXED) {
                 $label = 'Invite + payment unlock active';
                 $shortLabel = 'Invite + payment';
