@@ -865,11 +865,7 @@ final class BigFiveEnglishDraftInventory
 
     private function containsCjk(string $value): bool
     {
-        return preg_match(
-            '/[\x{3400}-\x{4DBF}\x{4E00}-\x{9FFF}\x{F900}-\x{FAFF}'
-                .'\x{20000}-\x{2EBEF}\x{2F800}-\x{2FA1F}\x{30000}-\x{3134F}]/u',
-            $value,
-        ) === 1;
+        return preg_match('/\p{Han}/u', $value) === 1;
     }
 
     /** @param array<string,mixed> $entry */

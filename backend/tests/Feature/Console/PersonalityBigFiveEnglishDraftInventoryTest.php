@@ -280,7 +280,7 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $working->forceFill(['snapshot_json' => [
             'attributes' => [
                 ...$this->completeSnapshot('Candidate'),
-                'summary' => "Supplementary CJK \u{20000}",
+                'summary' => "Supplementary CJK \u{20000} Extension H \u{31350}",
             ],
         ]])->saveQuietly();
         $supplementaryCjk = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
