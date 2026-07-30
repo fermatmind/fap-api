@@ -861,10 +861,17 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->createAsset([
             'canonical_json' => ['path' => '/en/personality/big-five/openness-drifted'],
         ]);
+        $this->createAsset([
+            'locale' => 'zh-CN',
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_POLARITY,
+            'entity_key' => 'high-openness',
+            'slug' => 'big-five/high-openness',
+            'canonical_json' => ['path' => '/zh/personality/big-five/high-openness'],
+        ]);
 
         $result = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
 
-        $this->assertSame(1, $result['counts']['redirect_only_alias_rows']);
+        $this->assertSame(2, $result['counts']['redirect_only_alias_rows']);
         $this->assertFalse($result['redirect_only_aliases_absent']);
         $this->assertSame(1, $result['counts']['unknown_authority_rows']);
         $this->assertFalse($result['ok']);
