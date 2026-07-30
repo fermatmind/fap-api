@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "exact_head_retry_pending",
-        "evidence": "GitHub CI runs 30558811823, 30559823419, 30560724406, 30562045318, 30562910486, 30564012592, 30565108964, 30567136115, 30568401101, 30569685735, 30570549188, and 30571343057 passed all required jobs at their exact heads. The latest exact-head review added one in-scope redirect-alias gate finding; its fix passes the 22-test inventory suite and the 395-test runtime-freeze suite and requires a fresh exact-head CI/review cycle."
+        "evidence": "GitHub CI runs 30558811823, 30559823419, 30560724406, 30562045318, 30562910486, 30564012592, 30565108964, 30567136115, 30568401101, 30569685735, 30570549188, 30571343057, and 30572071351 passed all required jobs at their exact heads. The latest exact-head review added two in-scope state/Unicode findings; their fixes pass the 23-test inventory suite and the 395-test runtime-freeze suite and require a fresh exact-head CI/review cycle."
       }
     },
     "scope_validation": {
@@ -101303,9 +101303,14 @@
         "at": "2026-07-30T18:47:42Z",
         "status": "review_fix_local_checks_passed",
         "note": "After every required job in CI run 30571343057 passed, exact-head review identified one remaining redirect-only alias gate gap. The canonical cohort and top-level pass condition now both require the legacy alias database set to be empty, while the sanitized output exposes only the absence boolean and aggregate count. The 22-test inventory suite passes 137 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint and PHP syntax pass."
+      },
+      {
+        "at": "2026-07-30T18:57:58Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30572071351 passed, exact-head review identified two remaining state and Unicode gaps. Registered Authority V2 historical slots now require the collision-safe writer's exact draft workflow state, and a shared complete CJK detector covers BMP plus supplementary unified-ideograph and compatibility ranges for both current and historical snapshots. The 23-test inventory suite passes 142 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint passes."
       }
     ],
-    "updated_at": "2026-07-30T18:47:42Z"
+    "updated_at": "2026-07-30T18:57:58Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",

@@ -262,6 +262,19 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
 
         $this->assertFalse($emptyDestinationRow['text_only_compliant']);
         $this->assertSame('prohibited_content', $emptyDestinationRow['recommended_disposition']);
+
+        $working->forceFill(['snapshot_json' => [
+            'attributes' => [
+                ...$this->completeSnapshot('Candidate'),
+                'summary' => "Supplementary CJK \u{20000}",
+            ],
+        ]])->saveQuietly();
+        $supplementaryCjk = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $supplementaryCjkRow = collect($supplementaryCjk['rows'])
+            ->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertTrue($supplementaryCjkRow['chinese_leakage']);
+        $this->assertSame('prohibited_content', $supplementaryCjkRow['recommended_disposition']);
     }
 
     public function test_future_scheduled_asset_is_not_counted_as_a_public_projection(): void
@@ -517,6 +530,35 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertSame('snapshot_mismatch', $row['historical_slot_resolution']);
         $this->assertSame('blocked_authority_unknown', $row['recommended_disposition']);
         $this->assertSame('registered_historical_slot_snapshot_mismatch', $row['blocker']);
+    }
+
+    public function test_historical_slot_requires_draft_workflow_state(): void
+    {
+        $asset = $this->createAsset();
+        $historical = $this->createRevision(
+            $asset,
+            1,
+            'big5-authority-v2-domains-08',
+            $this->completeSnapshot('Historical'),
+        );
+        $historical->forceFill(['workflow_state' => 'pending_manual_review'])->saveQuietly();
+        $current = $this->createRevision(
+            $asset,
+            2,
+            BigFiveEn52PackageCompiler::RELEASE_ID,
+            $this->completeSnapshot(),
+        );
+        $asset->forceFill([
+            'working_revision_id' => $current->id,
+            'published_revision_id' => $current->id,
+        ])->saveQuietly();
+
+        $result = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $row = collect($result['rows'])->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertSame('missing', $row['historical_slot_resolution']);
+        $this->assertNull($row['historical_draft_revision_id']);
+        $this->assertSame('registered_historical_slot_revision_missing', $row['blocker']);
     }
 
     public function test_registered_historical_revision_survives_later_unreferenced_revisions(): void

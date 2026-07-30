@@ -393,7 +393,7 @@ final class BigFiveEnglishDraftInventory
             );
             $historicalPrivate = $this->containsProhibitedPrivateField($revision->snapshot_json);
             $historicalMedia = $this->containsMediaReference($revision->snapshot_json);
-            $historicalCjk = preg_match('/[\x{3400}-\x{9FFF}\x{F900}-\x{FAFF}]/u', $historicalPayload) === 1;
+            $historicalCjk = $this->containsCjk($historicalPayload);
             $historicalProhibited = $historicalPrivate || $historicalMedia || $historicalCjk;
             $historicalWorkingPointerActive = (int) $revision->id === (int) ($row['working_revision_id'] ?? 0);
             $historicalPublishedPointerActive = (int) $revision->id === (int) ($row['published_revision_id'] ?? 0);
@@ -620,7 +620,7 @@ final class BigFiveEnglishDraftInventory
         $newer = $working !== null && $published !== null
             && (int) $working->revision_no > (int) $published->revision_no;
         $payload = json_encode($workingSnapshot ?? [], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
-        $cjk = preg_match('/[\x{3400}-\x{9FFF}\x{F900}-\x{FAFF}]/u', $payload) === 1;
+        $cjk = $this->containsCjk($payload);
         $private = $this->containsProhibitedPrivateField($workingSnapshot);
         $schemaComplete = $working !== null
             && filled(data_get($workingContent, 'title'))
@@ -811,6 +811,15 @@ final class BigFiveEnglishDraftInventory
         return false;
     }
 
+    private function containsCjk(string $value): bool
+    {
+        return preg_match(
+            '/[\x{3400}-\x{4DBF}\x{4E00}-\x{9FFF}\x{F900}-\x{FAFF}'
+                .'\x{20000}-\x{2EBEF}\x{2F800}-\x{2FA1F}\x{30000}-\x{3134F}]/u',
+            $value,
+        ) === 1;
+    }
+
     /** @param array<string,mixed> $entry */
     private function en52AuthorityAssetKey(array $entry): string
     {
@@ -836,6 +845,7 @@ final class BigFiveEnglishDraftInventory
 
         return $identity !== null
             && (string) $revision->source_package === $identity['source_package']
+            && (string) $revision->workflow_state === PersonalityPublicContentAssetRevision::STATE_DRAFT
             && (string) $revision->authority_asset_key === $identity['authority_asset_key']
             && isset(self::HISTORICAL_SOURCE_HASHES[$row['logical_identity']])
             && hash_equals(
