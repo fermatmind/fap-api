@@ -21,6 +21,60 @@ final class BigFiveEnglishDraftInventory
 
     private const HISTORICAL_AUTHORITY_PACKAGE_SHA256 = 'fb67edc033e679da3f134b34db30901465c7b44e0585818b23613fab83bf9162';
 
+    /** @var array<string,int> logical identity => exact revision id observed in the authorized production inventory */
+    private const HISTORICAL_REVISION_IDS = [
+        'domain:agreeableness' => 2,
+        'domain:conscientiousness' => 6,
+        'domain:extraversion' => 11,
+        'domain:neuroticism' => 55,
+        'domain:openness' => 59,
+        'polarity:agreeableness-high' => 3,
+        'polarity:agreeableness-mid' => 5,
+        'polarity:agreeableness-low' => 4,
+        'polarity:conscientiousness-high' => 7,
+        'polarity:conscientiousness-mid' => 9,
+        'polarity:conscientiousness-low' => 8,
+        'polarity:extraversion-high' => 12,
+        'polarity:extraversion-mid' => 14,
+        'polarity:extraversion-low' => 13,
+        'polarity:neuroticism-high' => 56,
+        'polarity:neuroticism-mid' => 58,
+        'polarity:neuroticism-low' => 57,
+        'polarity:openness-high' => 60,
+        'polarity:openness-mid' => 62,
+        'polarity:openness-low' => 61,
+        'facet_detail:achievement-striving' => 16,
+        'facet_detail:actions' => 17,
+        'facet_detail:activity' => 18,
+        'facet_detail:aesthetics' => 19,
+        'facet_detail:altruism' => 20,
+        'facet_detail:anger' => 21,
+        'facet_detail:anxiety' => 22,
+        'facet_detail:assertiveness' => 23,
+        'facet_detail:competence' => 24,
+        'facet_detail:compliance' => 25,
+        'facet_detail:deliberation' => 26,
+        'facet_detail:depression' => 27,
+        'facet_detail:dutifulness' => 28,
+        'facet_detail:excitement-seeking' => 29,
+        'facet_detail:feelings' => 30,
+        'facet_detail:gregariousness' => 31,
+        'facet_detail:ideas' => 32,
+        'facet_detail:imagination' => 33,
+        'facet_detail:impulsiveness' => 34,
+        'facet_detail:modesty' => 35,
+        'facet_detail:order' => 36,
+        'facet_detail:positive-emotions' => 37,
+        'facet_detail:self-consciousness' => 38,
+        'facet_detail:self-discipline' => 39,
+        'facet_detail:straightforwardness' => 40,
+        'facet_detail:tender-mindedness' => 41,
+        'facet_detail:trust' => 42,
+        'facet_detail:values' => 43,
+        'facet_detail:vulnerability' => 44,
+        'facet_detail:warmth' => 45,
+    ];
+
     /** @var array<string,array{0:string,1:string}> authority key => [source hash, stable snapshot hash] */
     private const EN52_DESCRIPTOR_LOCKS = [
         'big-five-hub' => ['1826e1756ee58c258ace2bc302430766fd179a303b3999c99da64a32d28be99f', '9e6bae88ab22dcbac03cac7ab3b4f572991d91f081da0dd701b182b481e00607'],
@@ -1034,6 +1088,8 @@ final class BigFiveEnglishDraftInventory
         );
 
         return $identity !== null
+            && isset(self::HISTORICAL_REVISION_IDS[$row['logical_identity']])
+            && (int) $revision->id === self::HISTORICAL_REVISION_IDS[$row['logical_identity']]
             && (string) $revision->source_package === $identity['source_package']
             && (string) $revision->workflow_state === PersonalityPublicContentAssetRevision::STATE_DRAFT
             && (string) $revision->authority_asset_key === $identity['authority_asset_key']

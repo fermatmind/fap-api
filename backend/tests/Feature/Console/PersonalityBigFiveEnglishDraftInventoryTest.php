@@ -582,6 +582,39 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertSame('registered_historical_slot_revision_missing', $row['blocker']);
     }
 
+    public function test_historical_slot_rejects_an_equal_recreated_revision(): void
+    {
+        $asset = $this->createAsset();
+        $historical = $this->createRevision(
+            $asset,
+            1,
+            'big5-authority-v2-domains-08',
+            $this->completeSnapshot('Historical'),
+        );
+        $replacementAttributes = $historical->getAttributes();
+        $historical->delete();
+        unset($replacementAttributes['id']);
+        $replacement = PersonalityPublicContentAssetRevision::query()->create($replacementAttributes);
+        $current = $this->createRevision(
+            $asset,
+            2,
+            BigFiveEn52PackageCompiler::RELEASE_ID,
+            $this->completeSnapshot(),
+        );
+        $asset->forceFill([
+            'working_revision_id' => $current->id,
+            'published_revision_id' => $current->id,
+        ])->saveQuietly();
+
+        $result = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $row = collect($result['rows'])->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertNotSame($historical->id, $replacement->id);
+        $this->assertSame('missing', $row['historical_slot_resolution']);
+        $this->assertNull($row['historical_draft_revision_id']);
+        $this->assertSame('registered_historical_slot_revision_missing', $row['blocker']);
+    }
+
     public function test_historical_slot_requires_exact_transformed_snapshot(): void
     {
         $asset = $this->createAsset();
@@ -1227,7 +1260,7 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             ) ?? $snapshot;
         }
 
-        return PersonalityPublicContentAssetRevision::query()->create([
+        $attributes = [
             'asset_id' => $asset->id,
             'revision_no' => $revisionNo,
             'authority_asset_key' => $historical
@@ -1251,7 +1284,20 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             'public_runtime_fingerprint_before' => str_repeat('c', 64),
             'snapshot_json' => $snapshot,
             'created_by_admin_user_id' => $en52 ? BigFiveEn52Publisher::OPERATOR_ADMIN_USER_ID : null,
-        ]);
+        ];
+        if ($historical) {
+            $revisionIds = (new \ReflectionClass(BigFiveEnglishDraftInventory::class))
+                ->getConstant('HISTORICAL_REVISION_IDS');
+            $logicalIdentity = $asset->entity_type.':'.$asset->entity_key;
+            if (isset($revisionIds[$logicalIdentity])) {
+                $attributes['id'] = $revisionIds[$logicalIdentity];
+            }
+        }
+
+        $revision = new PersonalityPublicContentAssetRevision;
+        $revision->forceFill($attributes)->save();
+
+        return $revision;
     }
 
     /** @return array<string,mixed> */
