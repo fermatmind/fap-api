@@ -109,9 +109,14 @@
   ],
   "excluded_fixture_fields": [
     "attempt_id",
+    "attempt_uuid",
     "report_token",
+    "result_lookup_token",
     "share_token",
+    "user_id",
     "account_id",
+    "email",
+    "phone",
     "user_scores",
     "raw_scores",
     "answers",
@@ -120,6 +125,9 @@
     "payments",
     "recovery_data",
     "internal_generation_rules",
-    "internal_asset_hashes"
+    "internal_asset_hashes",
+    "secret",
+    "cookie",
+    "authorization"
   ]
 }

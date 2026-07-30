@@ -14,7 +14,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
 
     private const INVENTORY_SHA = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
-    private const PACKAGE_SHA = '1483b439cc70d6e4d5273402c7c256128e8d7a3fd49feba7f56f1931665b51ba';
+    private const PACKAGE_SHA = '6d354a063422e2d9e5685abd2e07b1e4a12a6c9216c7a40779dc6b055397ed72';
 
     private const EXPECTED_CANDIDATE_ROW_IDS = [
         'W1-RESULT-CORE-05-OFFER-CTA',
@@ -203,6 +203,8 @@ final class MbtiResultEnglishPackageTest extends TestCase
         self::assertSame(21, $package['asset_count']);
         self::assertCount(21, $assets);
         self::assertSame(self::EXPECTED_CANDIDATE_ROW_IDS, array_column($assets, 'row_id'));
+        self::assertFalse($package['template_contract']['runtime_import_slot_values_stored_in_this_package']);
+        self::assertTrue($package['template_contract']['w9_synthetic_slot_values_stored_in_pdf_fixture_mapping']);
         self::assertSame('same_fields', $package['template_contract']['mobile_desktop_authority']);
         self::assertSame(['type_code', 'identity_variant'], $package['template_contract']['allowed_slots']);
         self::assertSame(
@@ -634,10 +636,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
             self::assertStringContainsString($expectedText, $readerText);
         }
 
-        self::assertCount(13, $mapping['excluded_fixture_fields']);
-        foreach ($mapping['excluded_fixture_fields'] as $excludedField) {
-            self::assertContains($excludedField, self::FORBIDDEN_PAYLOAD_KEYS);
-        }
+        self::assertSame(self::FORBIDDEN_PAYLOAD_KEYS, $mapping['excluded_fixture_fields']);
     }
 
     #[Test]
