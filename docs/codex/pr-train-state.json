@@ -101514,11 +101514,11 @@
       },
       "package_contract": {
         "status": "passed",
-        "evidence": "Frozen candidate package SHA 12eaa8b4b3fab6f2a51ac905341c7be0fd449e08341e0d281577c1e2be0b7d04 reconciles 46 unique rows as 24 preserved controls, 21 distinct English assets, and one synthetic private-safe PDF W9 target. The PDF adapter covers the 20 PDF-consumable candidates, while the single offer CTA is explicitly partitioned to locked-upsell result-page QA through an exact OfferResolver variant selector and commercial_spec to offer_set.cta. The preview surface is a preserved control and cannot consume that locked-upsell candidate. Canonical projection is gated on exact-package importer rendering of the two registered variant slots with unresolved tokens rejected. Every ordinary and premium candidate remains inactive/draft-only; candidate section body/payload is forbidden from published CMS share authority until a separate share allowlist or explicit exclusion gate exists. All controlled permissions remain false."
+        "evidence": "Frozen candidate package SHA 386c0176b581176c0c26e4736c5901eb69ad053712e127b8d2b089553a40899e reconciles 46 unique rows as 24 preserved controls, 21 distinct English assets, and one synthetic private-safe PDF W9 target. The digest covers an immutable approval envelope that must exactly equal the manifest locale, status, provenance, counts, gates, and permissions. The PDF adapter covers the 20 PDF-consumable candidates, while the single offer CTA is explicitly partitioned to locked-upsell result-page QA through an exact OfferResolver variant selector and commercial_spec to offer_set.cta. The preview surface is a preserved control and cannot consume that locked-upsell candidate. Canonical projection is gated on exact-package importer rendering of the two registered variant slots with unresolved tokens rejected. Every ordinary and premium candidate remains inactive/draft-only; candidate section body/payload is forbidden from published CMS share authority until a separate share allowlist or explicit exclusion gate exists. All controlled permissions remain false."
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After review repair, php artisan test --filter=MbtiResultEnglishPackageTest passed 7 tests/1022 assertions covering canonical registry buckets, pre-projection slot rendering with unresolved-token rejection, deterministic ordinary-section projection, inactive/draft-only storage, public-share exclusion, fail-closed premium teaser projection, exact commercial_spec cta_copy selector/shape, preview exclusion, explicit 20-PDF/1-result-page QA partitioning, real PDF payload/adapter assertions, and forbidden-claim scan reconciliation. Scoped Pint, package JSON parsing, deterministic package SHA 12eaa8b4b3fab6f2a51ac905341c7be0fd449e08341e0d281577c1e2be0b7d04, git diff, and exact scope checks pass. After the required process guard, the isolated SQLite ci_verify wrapper ran scripts/verify_mbti.sh and the bounded MBTI regression chain with exit 0."
+        "evidence": "After review repair, php artisan test --filter=MbtiResultEnglishPackageTest passed 7 tests/1056 assertions covering digest-bound approval-envelope equality, canonical registry buckets, pre-projection slot rendering with unresolved-token rejection, deterministic ordinary-section projection, inactive/draft-only storage, public-share exclusion, fail-closed premium teaser projection, exact commercial_spec cta_copy selector/shape, preview exclusion, explicit 20-PDF/1-result-page QA partitioning, real PDF payload/adapter assertions, and forbidden-claim scan reconciliation. Scoped Pint, package JSON parsing, deterministic package SHA 386c0176b581176c0c26e4736c5901eb69ad053712e127b8d2b089553a40899e, git diff, and exact scope checks pass. After the required process guard, the isolated SQLite ci_verify wrapper ran scripts/verify_mbti.sh and the bounded MBTI regression chain with exit 0."
       },
       "changed_file_scope": {
         "status": "passed",
@@ -101631,8 +101631,13 @@
         "at": "2026-07-30T20:20:04Z",
         "status": "github_checks_pending",
         "note": "Exact head f0bba955305c143d6b95605c239999854bb06593 passed all nine required checks, staging parity skipped, with zero unresolved review threads and CLEAN mergeability. Before merge, origin/main advanced by one unrelated Career cache permission control commit. Integrated exact origin/main 75d28c496 without conflict; focused validation remains 7 tests/1022 assertions, scoped Pint and exact changed-file scope pass. Fresh exact-head checks and review are required."
+      },
+      {
+        "at": "2026-07-30T20:29:40Z",
+        "status": "review_fix_local_verified",
+        "note": "Post-main-integration exact head a5bae4d7a2a3a7a0717103bdee7e7209ed4be89b passed all nine required checks with staging parity skipped, then review found one valid P2 digest-envelope gap. Added approval_envelope.json to the hashed files list and require field-for-field equality with the manifest's identity, locale, status, provenance, counts, quality gates, and permissions. Focused validation passed 7 tests/1056 assertions plus scoped Pint, JSON, hash, diff, and exact scope checks. Candidate package SHA is 386c0176b581176c0c26e4736c5901eb69ad053712e127b8d2b089553a40899e."
       }
     ],
-    "updated_at": "2026-07-30T20:20:04Z"
+    "updated_at": "2026-07-30T20:29:40Z"
   }
 }

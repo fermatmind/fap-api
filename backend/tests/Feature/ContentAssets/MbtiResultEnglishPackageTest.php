@@ -14,7 +14,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
 
     private const INVENTORY_SHA = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
-    private const PACKAGE_SHA = '12eaa8b4b3fab6f2a51ac905341c7be0fd449e08341e0d281577c1e2be0b7d04';
+    private const PACKAGE_SHA = '386c0176b581176c0c26e4736c5901eb69ad053712e127b8d2b089553a40899e';
 
     private const EXPECTED_CANDIDATE_ROW_IDS = [
         'W1-RESULT-CORE-05-OFFER-CTA',
@@ -95,6 +95,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
     public function it_freezes_the_exact_result_package_hash(): void
     {
         $manifest = $this->readPackageJson('package_manifest.json');
+        $approvalEnvelope = $this->readPackageJson('approval_envelope.json');
 
         self::assertSame('fermatmind.en_parity.immutable_content_package_manifest.v1', $manifest['schema_version']);
         self::assertSame('EN-PARITY-W1-MBTI-RESULT-ASSETS-2026-07-31', $manifest['package_id']);
@@ -116,6 +117,30 @@ final class MbtiResultEnglishPackageTest extends TestCase
 
         self::assertSame(self::PACKAGE_SHA, hash('sha256', $packageHashInput));
         self::assertSame(self::PACKAGE_SHA, $manifest['package_sha256']);
+        self::assertSame(
+            'fermatmind.en_parity.immutable_package_approval_envelope.v1',
+            $approvalEnvelope['schema_version'],
+        );
+        foreach ([
+            'package_id',
+            'lane_id',
+            'asset_id',
+            'inventory_package_id',
+            'inventory_package_sha256',
+            'source_ledger_sha256',
+            'status',
+            'locale',
+            'inventory_row_count',
+            'preserved_control_count',
+            'candidate_asset_count',
+            'w9_fixture_target_count',
+            'producer_target_count',
+            'quality_gates',
+            'permissions',
+        ] as $boundManifestField) {
+            self::assertArrayHasKey($boundManifestField, $manifest);
+            self::assertSame($manifest[$boundManifestField], $approvalEnvelope[$boundManifestField]);
+        }
 
         foreach ($manifest['permissions'] as $permission) {
             self::assertFalse($permission);

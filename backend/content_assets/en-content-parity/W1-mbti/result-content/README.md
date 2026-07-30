@@ -24,5 +24,11 @@ exact-package dry-run importer must bind the frozen package SHA before it may
 plan any inactive/draft authority transition. Independent W9 review and
 separately hashed operator approvals remain mandatory.
 
+The package digest also covers `approval_envelope.json`. That immutable
+envelope duplicates the manifest's locale, status, provenance, counts,
+quality gates, and permissions. Exact-package validation must require byte
+hash inclusion and field-for-field equality with the manifest, so a package
+SHA cannot be reused with a different authorization envelope.
+
 Repository rule impact: this is an unpublished backend candidate package.
 Backend authority and all public/runtime behavior remain unchanged.
