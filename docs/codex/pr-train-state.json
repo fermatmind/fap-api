@@ -101180,8 +101180,8 @@
     "depends_on": [
       "EN-PARITY-W1-MBTI-INVENTORY-01"
     ],
-    "status": "github_checks_pending",
-    "commit_sha": "471e23bb8040a428739ec21f90a8df6973041a89",
+    "status": "ready_to_merge",
+    "commit_sha": "bc7e788bc47ac520cda8bb7a6a34c6472b2e51f1",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3424",
     "checks": {
       "authorization": {
@@ -101225,8 +101225,12 @@
         "evidence": "Merged origin/main 9f1e51691c45e7f37ecfe53884f4dc438f622c52 into the task branch without scope conflicts, then reran the complete manifest validation successfully."
       },
       "github_required_checks": {
+        "status": "passed",
+        "evidence": "PR #3424 head 37dcc8dcc4900f973d03c1985bc6bfcee316b27a passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. verify-staging-parity was policy-skipped and is not a deploy wait."
+      },
+      "final_head_checks": {
         "status": "pending",
-        "evidence": "PR #3424 opened from the exact scoped branch; required GitHub checks are pending."
+        "evidence": "After integrating latest origin/main f7973b3e3b847d45bb5c9477f672c37492a34a04 and recording ready_to_merge, the exact metadata-tail head must repeat required checks before squash merge."
       }
     },
     "failure_reason": null,
@@ -101236,7 +101240,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "production_write_execution": false,
@@ -101261,8 +101265,13 @@
         "at": "2026-07-30T16:31:15Z",
         "status": "github_checks_pending",
         "note": "Pushed the scoped branch and opened PR #3424. GitHub required checks are pending; controlled content and production permissions remain false."
+      },
+      {
+        "at": "2026-07-30T16:37:30Z",
+        "status": "ready_to_merge",
+        "note": "Exact PR head 37dcc8dcc4900f973d03c1985bc6bfcee316b27a passed every applicable GitHub check with no review comments. Integrated newer origin/main f7973b3e3b847d45bb5c9477f672c37492a34a04, reran all manifest local checks and six-file scope validation successfully, and recorded ready_to_merge. The resulting metadata-tail head must independently repeat required checks before merge."
       }
     ],
-    "updated_at": "2026-07-30T16:31:15Z"
+    "updated_at": "2026-07-30T16:37:30Z"
   }
 }
