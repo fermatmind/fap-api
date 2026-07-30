@@ -681,6 +681,8 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
             'runner_cache_tree_permission_ok',
             'runtime_cache_tree_permission_ok',
             'runtime_identity_remediation_candidate',
+            'if [ \"\$runner_cache_tree_scan_complete\" = true ]',
+            'elif $permissions.runner_cache_tree_scan_complete != true',
             'HOLD_DIAGNOSTIC_RUNTIME_CACHE_UNAVAILABLE',
             'PASS_DIAGNOSTIC_RUNTIME_IDENTITY_MISMATCH',
             'PASS_DIAGNOSTIC_PERMISSION_STATE_COMPLETE',

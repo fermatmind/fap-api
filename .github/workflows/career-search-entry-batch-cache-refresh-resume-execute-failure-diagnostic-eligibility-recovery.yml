@@ -697,7 +697,8 @@ jobs:
                fi
              fi
              runtime_identity_remediation_candidate=false
-             if [ \"\$runner_cache_tree_permission_ok\" = false ] \
+             if [ \"\$runner_cache_tree_scan_complete\" = true ] \
+               && [ \"\$runner_cache_tree_permission_ok\" = false ] \
                && [ \"\$runtime_cache_tree_permission_ok\" = true ]; then
                runtime_identity_remediation_candidate=true
              fi
@@ -832,7 +833,8 @@ jobs:
                      "HOLD_DIAGNOSTIC_SNAPSHOT_INCOMPLETE"
                    elif $snapshot.recovery_baseline_match != true then
                      "HOLD_DIAGNOSTIC_PUBLIC_STATE_DRIFT"
-                   elif $permissions.runtime_identity_available != true
+                   elif $permissions.runner_cache_tree_scan_complete != true
+                     or $permissions.runtime_identity_available != true
                      or $permissions.runtime_cache_readable != true
                      or $permissions.runtime_cache_writable != true
                      or $permissions.runtime_cache_tree_scan_complete != true
