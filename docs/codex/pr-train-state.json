@@ -101497,7 +101497,7 @@
       "EN-PARITY-W1-MBTI-RESULT-AGENT-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "5c33db3aa103e26291274df753bc41a5e997d35d",
+    "commit_sha": "30627c9b51fc4b17a64ec79d18db9127dfcc7415",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3429",
     "checks": {
       "authorization": {
@@ -101696,8 +101696,13 @@
         "at": "2026-07-30T21:40:00Z",
         "status": "review_fix_local_verified",
         "note": "Exact head ac5e6d9d91255c5d4b393c7e643d172f727c47f1 passed all required checks with staging parity skipped, then review identified two valid P2 evidence gaps. The W9 fixture denylist now exactly equals all 21 forbidden private keys, and the package explicitly distinguishes unstored runtime-import slots from stored private-safe W9 fixture slots. Focused validation passed 7 tests/1318 assertions, scoped Pint, JSON parsing, deterministic hashing, git diff --check, and exact scope validation. Candidate package SHA is 6d354a063422e2d9e5685abd2e07b1e4a12a6c9216c7a40779dc6b055397ed72."
+      },
+      {
+        "at": "2026-07-30T21:41:00Z",
+        "status": "github_checks_pending",
+        "note": "Committed the complete private-field denylist and exact slot-storage semantics as implementation commit 30627c9b51fc4b17a64ec79d18db9127dfcc7415. This metadata-only commit records that immutable implementation pointer; exact-head GitHub checks and review are pending."
       }
     ],
-    "updated_at": "2026-07-30T21:40:00Z"
+    "updated_at": "2026-07-30T21:41:00Z"
   }
 }
