@@ -1,0 +1,69 @@
+{
+  "schema_version": "fermatmind.en_parity.immutable_content_package_manifest.v1",
+  "package_id": "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-2026-07-30",
+  "lane_id": "W1",
+  "asset_id": "ENPARITY-W1-MBTI-CROSS-COMPARISONS",
+  "inventory_package_id": "EN-PARITY-W1-MBTI-INVENTORY-2026-07-30",
+  "inventory_package_sha256": "8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85",
+  "status": "unpublished_candidate",
+  "asset_count": 7,
+  "exact_slugs": [
+    "enfp-vs-entp",
+    "entj-vs-intj",
+    "estj-vs-entj",
+    "infj-vs-infp",
+    "intj-vs-intp",
+    "isfp-vs-infp",
+    "istj-vs-isfj"
+  ],
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "276baef693c7828aa712fd87736dd71a96ce7126a07f87f0ebd1ae9dcfc47aa2"
+    },
+    {
+      "path": "assets.json",
+      "sha256": "9cf743529c90a6d9595c1136d89dbeac29a0af275089dd400f8302414f9d40b8"
+    },
+    {
+      "path": "translation_map.json",
+      "sha256": "7e2d53f23caf8989442e05518fc23735f5dcd4096466a1251d29dfb8bfd26a64"
+    },
+    {
+      "path": "claim_boundary_report.json",
+      "sha256": "ea6c1959163fb8a530ad967d08277c41786a7fa30fa56eff2f24e6515e07efb6"
+    },
+    {
+      "path": "editorial_review.json",
+      "sha256": "687e9aa9afed5757372d64574e15fc14cb086b29816861336f78941017848030"
+    }
+  ],
+  "package_sha256_algorithm": "sha256 of the UTF-8 concatenation of each manifest file path, NUL, lowercase file SHA-256, and newline in files[] order",
+  "package_sha256": "2e2beb694b62ddff56b128b2b4a443fb5797b76bd5df160f8946b55a3368931a",
+  "quality_gates": {
+    "exact_inventory_identity": "pass",
+    "exact_asset_count": "pass",
+    "source_hash_bound": "pass",
+    "structure_count_aligned": "pass",
+    "english_only_reader_copy": "pass",
+    "claim_boundary": "pass_producer_self_check_only",
+    "independent_w9": "pending",
+    "exact_package_dry_run": "pending_future_pr",
+    "source_nested_structure_aligned": "pass",
+    "translation_map_complete": "pass",
+    "claim_boundary_report_complete": "pass_producer_self_check_only",
+    "editorial_review_complete": "pass_producer_self_check_only"
+  },
+  "permissions": {
+    "cms_write_authorized": false,
+    "database_write_authorized": false,
+    "draft_import_authorized": false,
+    "production_import_authorized": false,
+    "publication_authorized": false,
+    "activation_authorized": false,
+    "seo_runtime_release_authorized": false,
+    "indexability_authorized": false,
+    "search_submission_authorized": false,
+    "deploy_authorized": false
+  }
+}

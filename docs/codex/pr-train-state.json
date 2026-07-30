@@ -101323,5 +101323,167 @@
       }
     ],
     "updated_at": "2026-07-30T17:51:25Z"
+  },
+  "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-01": {
+    "id": "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-01",
+    "repo": "fap-api",
+    "title": "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-01: produce seven English comparison assets",
+    "base": "main",
+    "branch": "codex/en-parity-w1-mbti-comparison-assets-01",
+    "depends_on": [
+      "EN-PARITY-W1-MBTI-INVENTORY-01"
+    ],
+    "status": "github_checks_pending",
+    "commit_sha": "0c9eebbe8af44a50decf2270aec6611637faa4c1",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3424",
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The operator supplied a continuous execution /goal with this exact PR id, title, repository, dependency, path scope, local checks, and controlled-action boundaries."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "Cross-repository dependency PR #1847 is MERGED as fap-web fc985df4ff5192b7e92b38cd2a0d11117f393968 and its frozen package SHA remains 8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85."
+      },
+      "preflight": {
+        "status": "passed",
+        "evidence": "Created an isolated fap-api worktree from exact origin/main 2284f5d9f0528722c7a58486f86c0716e526ed5c because the primary worktree belongs to another active Big Five task. No matching branch or open PR existed."
+      },
+      "package_contract": {
+        "status": "passed",
+        "evidence": "The corrected candidate contains exactly the seven inventory slugs and row identities, binds six committed zh-CN source snapshot hashes plus the ISTJ/ISFJ backend revision hash, preserves structure, adds public projection rows, discloses the INTJ/INTP source-evidence limitations, includes the required translation map and producer reports, and freezes replacement package SHA 2e2beb694b62ddff56b128b2b4a443fb5797b76bd5df160f8946b55a3368931a."
+      },
+      "focused_test": {
+        "status": "passed",
+        "evidence": "After all review repairs, php artisan test --filter=MbtiComparisonEnglishPackageTest passed 6 tests and 1098 assertions, including exact INTJ/INTP evidence-limitation disclosure."
+      },
+      "focused_lint": {
+        "status": "passed",
+        "evidence": "vendor/bin/pint --test tests/Feature/ContentAssets/MbtiComparisonEnglishPackageTest.php passed."
+      },
+      "manifest_state_syntax": {
+        "status": "passed",
+        "evidence": "All five package JSON artifacts and the train state parsed successfully; the train YAML loaded successfully."
+      },
+      "diff_check": {
+        "status": "passed",
+        "evidence": "git diff --check completed without errors."
+      },
+      "changed_file_scope": {
+        "status": "passed",
+        "evidence": "The exact nine changed files are six files under the comparison package directory, the focused package test, and the two fap-api train metadata files. No importer, runtime, result content, CMS, database, discoverability, search, frontend, or future-PR file is changed."
+      },
+      "latest_main_integration": {
+        "status": "passed",
+        "evidence": "Integrated current origin/main fca264eac19ebc74f3b87a577fab13808fa603b4 after preserving every newly merged main ledger item and this PR's exact state entry. Focused tests 6/1098, Pint, JSON/YAML, diff checks, and exact nine-file PR scope all pass."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "PR #3424 head 37dcc8dcc4900f973d03c1985bc6bfcee316b27a passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. verify-staging-parity was policy-skipped and is not a deploy wait."
+      },
+      "final_head_checks": {
+        "status": "pending_after_latest_main_integration",
+        "evidence": "Readiness metadata head ca1b0fa1ae57b2bf196627f97e6fd2a9a981a714 passed all applicable checks, but concurrent main advancement caused a ledger conflict. Latest-main integration head 0c9eebbe8af44a50decf2270aec6611637faa4c1 is locally verified and must repeat required checks."
+      },
+      "codex_review": {
+        "status": "retry_pending_after_external_error",
+        "evidence": "Codex review of add52cbac20956d2819d617e33dfb4650a84469e reported no major issues. Review of the superseded readiness tail returned an external Unknown error; an exact-head review will be retried after latest-main integration."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "history": [
+      {
+        "at": "2026-07-30T16:24:21Z",
+        "status": "local_verified",
+        "note": "Produced the exact seven unpublished English comparison candidates in the isolated worktree. Package/source hashes, 7-row identity, structure counts, English-only reader copy, private-field exclusions, all-false controlled permissions, 5 focused tests/633 assertions, and Pint passed. CMS/import/publish/runtime/discoverability remain untouched."
+      },
+      {
+        "at": "2026-07-30T16:29:30Z",
+        "status": "local_verified",
+        "note": "Integrated latest origin/main 9f1e51691c45e7f37ecfe53884f4dc438f622c52 after unrelated ops PR #3422, then reran focused tests 5/633, Pint, package JSON, ledger JSON, train YAML, diff check, and exact six-file scope successfully."
+      },
+      {
+        "at": "2026-07-30T16:31:15Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the scoped branch and opened PR #3424. GitHub required checks are pending; controlled content and production permissions remain false."
+      },
+      {
+        "at": "2026-07-30T16:37:30Z",
+        "status": "ready_to_merge",
+        "note": "Exact PR head 37dcc8dcc4900f973d03c1985bc6bfcee316b27a passed every applicable GitHub check with no review comments. Integrated newer origin/main f7973b3e3b847d45bb5c9477f672c37492a34a04, reran all manifest local checks and six-file scope validation successfully, and recorded ready_to_merge. The resulting metadata-tail head must independently repeat required checks before merge."
+      },
+      {
+        "at": "2026-07-30T16:49:30Z",
+        "status": "review_fix_local_verified",
+        "note": "Head 0417c320e322f4231a20433319c3e4da05152208 passed every applicable check, then exact-head Codex review found one valid P2: six committed JSON sources were structurally compressed while marked aligned. Preserved every source body/group/nested-item/item cardinality, added the required translation map plus producer claim-boundary/editorial reports, strengthened the focused test to compare every source section, and froze replacement package SHA a85c80023d7a5203d43ff16c67e06bec59b50b86bbfd9107850f3b97a266717f. Focused validation passes 6 tests/987 assertions and Pint; a fresh exact-head CI and review are required."
+      },
+      {
+        "at": "2026-07-30T16:53:15Z",
+        "status": "github_checks_pending",
+        "note": "Pushed review-fix implementation commit 3bb46acfe8deafa36edf2c4ad47cc04731089814, updated the PR body to the replacement package SHA and 6-test/987-assertion evidence, and replied on the exact P2 thread. Fresh GitHub checks and refreshed review are pending."
+      },
+      {
+        "at": "2026-07-30T17:00:15Z",
+        "status": "github_checks_pending",
+        "note": "GitHub reported DIRTY because API-UNLOCK-01 merged concurrently. Integrated current origin/main efa84b9a482193a6996453a6395ec060749c7b88, preserving both ledger entries, and reran focused tests 6/987, Pint, all JSON/YAML parsing, diff checks, and exact nine-file PR scope successfully. No controlled action or future scope was added."
+      },
+      {
+        "at": "2026-07-30T17:09:30Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact head e2e5d4ec7ea7ff0d6f6de5773b83196556c07b58 passed all applicable checks, then refreshed Codex review found two valid items: a stale unrelated Career YAML status and ISTJ/ISFJ narrative cardinality 1-to-2. Restored the Career status to origin/main, made all five ISTJ/ISFJ narrative sections 1-to-1, retained the exact four table rows, removed the test exemption, and froze replacement package SHA 6ceac9fca788a8e50bc1182b7c42a3fb79a887b554fd2240df5a4a2d871b73ba. Focused validation passes 6 tests/1076 assertions and Pint."
+      },
+      {
+        "at": "2026-07-30T17:12:15Z",
+        "status": "github_checks_pending",
+        "note": "Pushed second review-fix implementation commit f90759f0666c3c597f9548a1dcc6139a00c9484c and replied on both exact review threads. Fresh required checks and refreshed exact-head review are pending."
+      },
+      {
+        "at": "2026-07-30T17:21:30Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact head a4693d9c0cfbb890460f8aa73e8a51b7315a724a passed all applicable checks, then refreshed Codex review found that public v1 reads only body/rows and would omit groups/items. Added deterministic projection rows for every nested group/item while retaining the source-structured fields and strengthened the contract to prove exact row content. Replacement package SHA is 2a745c06ca32e491f8e9ed20b0d9994b98d12c54a50fa1bc160969de12922029; focused validation passes 6 tests/1088 assertions and Pint."
+      },
+      {
+        "at": "2026-07-30T17:24:15Z",
+        "status": "github_checks_pending",
+        "note": "Pushed third review-fix implementation commit d2b9931dc509c900cbef5eef3fdcb586ed0faedc and replied on the exact review thread. Fresh required checks and refreshed exact-head review are pending."
+      },
+      {
+        "at": "2026-07-30T17:33:30Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact head f5dbc1c190275b09e0f3e9dc056db9d240e87859 passed all applicable checks, then refreshed Codex review found the INTJ/INTP source-evidence limitation was not carried into the frozen package. Added sanitized asset and editorial caveats, set source_bound to pass_with_disclosed_limitations, and froze package SHA 2e2beb694b62ddff56b128b2b4a443fb5797b76bd5df160f8946b55a3368931a. Focused validation passes 6 tests/1098 assertions and Pint."
+      },
+      {
+        "at": "2026-07-30T17:35:15Z",
+        "status": "github_checks_pending",
+        "note": "Pushed fourth review-fix implementation commit 260ece0c06f25dd14911fd2171c743ead59fd5bf and replied on the exact review thread. Fresh required checks and refreshed exact-head review are pending."
+      },
+      {
+        "at": "2026-07-30T17:47:40Z",
+        "status": "ready_to_merge",
+        "note": "Exact head add52cbac20956d2819d617e33dfb4650a84469e passed all applicable GitHub checks, exact-head Codex review reported no major issues, GitHub reports CLEAN/MERGEABLE, and the exact nine-file PR scope remains valid. This readiness metadata tail must independently repeat required checks and exact-head review before squash merge."
+      },
+      {
+        "at": "2026-07-30T17:57:44Z",
+        "status": "github_checks_pending",
+        "note": "Readiness metadata head ca1b0fa1ae57b2bf196627f97e6fd2a9a981a714 passed all applicable checks, but main advanced and GitHub became DIRTY. Integrated exact origin/main fca264eac19ebc74f3b87a577fab13808fa603b4, preserved both ledger authorities, and reran focused tests 6/1098, Pint, JSON/YAML, diff, and exact nine-file scope successfully. Fresh checks and exact-head review are required."
+      }
+    ],
+    "updated_at": "2026-07-30T17:57:44Z"
   }
 }
