@@ -101497,7 +101497,7 @@
       "EN-PARITY-W1-MBTI-RESULT-AGENT-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "e553c99b5a6a8153578c7b91f2f4e24837f94bef",
+    "commit_sha": "a13cf1aff50c397ce5c2b45541dec8ba1d24ef01",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3429",
     "checks": {
       "authorization": {
@@ -101741,8 +101741,13 @@
         "at": "2026-07-30T22:50:00Z",
         "status": "review_fix_local_verified",
         "note": "Exact head 86a536ee294702fed3b31a8560d09b95b0b0d17e passed all required checks, then review proved current personalization appends dynamic blocks without substituting package tokens inside canonical body_md/payload. Corrected the contract to existing_runtime_contract=false and made a separate real-projection renderer with unresolved-token rejection an explicit activation prerequisite. W9 synthetic rendering remains valid; runtime/CMS/import behavior remains unchanged and all activation permissions remain false. Focused validation passed 7 tests/1372 assertions plus Pint, JSON, deterministic hash, diff, and scope checks. Candidate SHA is cfe6d3e02f1bb28104a0cff7e337c541148a3d034c7cb387def3ae63ec6aabfc."
+      },
+      {
+        "at": "2026-07-30T22:51:00Z",
+        "status": "github_checks_pending",
+        "note": "Committed the explicit runtime-renderer activation hold as implementation commit a13cf1aff50c397ce5c2b45541dec8ba1d24ef01. This metadata-only commit records that immutable pointer; exact-head checks remain pending."
       }
     ],
-    "updated_at": "2026-07-30T22:50:00Z"
+    "updated_at": "2026-07-30T22:51:00Z"
   }
 }
