@@ -85,10 +85,27 @@ The refresh uses the existing atomic active/LKG detail publication path and
 does not forget prior pointers before replacement. It never changes database
 or CMS authority, publication, indexability, queues, sitemap, llms, Search
 Channel, URL submission, deployment, or non-target state. A failed or
-indeterminate execute is not automatically retried or rolled back. After a
-successful refresh receipt, Task 12 still requires a brand-new review
-preflight; the cache-repair receipt cannot substitute for Task 12 review or
-apply authorization.
+indeterminate execute is not automatically retried or rolled back.
+
+An indeterminate execute is inspected only through
+`Career Search Entry Batch Cache Refresh Recovery Preflight`. This separate
+read-only workflow binds the exact failed run/attempt and failed receipt SHA,
+rejects any intervening cache-refresh production-ops run, revalidates latest
+`main` plus the unchanged active release, and records a fresh complete 100-URL
+payload-set/readback hash with aggregate HTTP, canonical, robots, locale,
+unsafe-href, and thin-module counts. It never invokes the warmer and has no
+retry, resume, rollback, deploy, queue, CMS/database, publication,
+indexability, sitemap, llms, URL submission, or Search Channel write path.
+
+If residual stale/thin targets remain, the receipt may emit only a phrase
+authorizing design of a separate cache-only resume control. That phrase does
+not authorize a production retry or write. If the current state is already
+clean, the workflow additionally verifies the exact read-only quality package
+and may emit only a recovery-closeout/fresh-Task-12-preflight phrase. In either
+case the operator must stop at the emitted gate. After a successful refresh or
+clean recovery receipt, Task 12 still requires a brand-new review preflight;
+the cache-repair receipt cannot substitute for Task 12 review or apply
+authorization.
 
 The apply phrase keeps CMS content, publication, indexability, cache warm,
 queue dispatch, sitemap/llms mutation or submission, Search Channel, URL
