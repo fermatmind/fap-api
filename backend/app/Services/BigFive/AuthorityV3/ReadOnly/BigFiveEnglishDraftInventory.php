@@ -810,7 +810,7 @@ final class BigFiveEnglishDraftInventory
 
     private function fingerprint(mixed $value): string
     {
-        return hash('sha256', json_encode($value, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        return hash('sha256', $this->stableJson($value));
     }
 
     private function containsProhibitedPrivateField(mixed $value): bool

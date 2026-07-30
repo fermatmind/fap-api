@@ -205,7 +205,7 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             $asset,
             2,
             'working-copy',
-            (array) data_get($published->snapshot_json, 'attributes'),
+            array_reverse((array) data_get($published->snapshot_json, 'attributes'), true),
         );
         $asset->forceFill([
             'working_revision_id' => $working->id,
@@ -217,6 +217,7 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
 
         $this->assertFalse($row['draft_equals_published']);
         $this->assertTrue($row['draft_content_equals_published']);
+        $this->assertSame('duplicate_of_published', $row['current_revision_disposition']);
         $this->assertSame(1, $result['counts']['independent_working_revisions']);
         $this->assertSame('blocked_authority_unknown', $row['recommended_disposition']);
         $this->assertSame('registered_historical_slot_revision_missing', $row['blocker']);

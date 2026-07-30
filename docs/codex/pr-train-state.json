@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "exact_head_retry_pending",
-        "evidence": "GitHub CI runs 30558811823, 30559823419, 30560724406, 30562045318, 30562910486, 30564012592, 30565108964, 30567136115, 30568401101, 30569685735, 30570549188, 30571343057, 30572071351, 30572828400, 30573601659, and 30574341370 passed all required jobs at their exact heads. The latest exact-head review added one in-scope candidate-identity finding; its fix passes the 26-test inventory suite and the 395-test runtime-freeze suite and requires a fresh exact-head CI/review cycle."
+        "evidence": "GitHub CI runs 30558811823, 30559823419, 30560724406, 30562045318, 30562910486, 30564012592, 30565108964, 30567136115, 30568401101, 30569685735, 30570549188, 30571343057, 30572071351, 30572828400, 30573601659, 30574341370, and 30575064365 passed all required jobs at their exact heads. The latest exact-head review added one in-scope semantic-fingerprint finding; its fix passes the 26-test inventory suite and the 395-test runtime-freeze suite and requires a fresh exact-head CI/review cycle."
       }
     },
     "scope_validation": {
@@ -101323,9 +101323,14 @@
         "at": "2026-07-30T19:29:05Z",
         "status": "review_fix_local_checks_passed",
         "note": "After every required job in CI run 30574341370 passed, exact-head review identified one remaining candidate authority-identity gap. Independent working candidates now compare every supplied org, framework, entity type/key, locale, slug, and canonical path against the org-0 backend asset and canonical catalog before translation_identity_mismatch can pass. The 26-test inventory suite passes 155 assertions and the complete runtime-freeze suite passes 395 tests / 808 assertions."
+      },
+      {
+        "at": "2026-07-30T19:39:32Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30575064365 passed, exact-head review identified one remaining semantic content-comparison gap. Working and published fingerprints now hash recursively key-sorted stable JSON, so associative insertion order cannot turn identical content into a false independent candidate. The reordered-key regression resolves as duplicate_of_published; the 26-test inventory suite passes 156 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint and PHP syntax pass."
       }
     ],
-    "updated_at": "2026-07-30T19:29:05Z"
+    "updated_at": "2026-07-30T19:39:32Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
