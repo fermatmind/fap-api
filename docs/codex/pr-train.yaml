@@ -60,6 +60,55 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01
+    repo: fap-api
+    base: main
+    branch: codex/en-parity-w2-big5-draft-reconcile-01
+    title: "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory"
+    status: local_checks_passed
+    depends_on: []
+    train_scope: en_parity_w2_big5_draft_reconcile
+    scope:
+      - Expose a backend-owned, read-only, sanitized inventory for the fifty registered English Big Five historical revision slots.
+      - Keep public projection, current working pointer, current published pointer, and historical immutable revision lineage distinct.
+      - Bind the durable report to the exact one-time production read-only evidence and deployed release identity.
+    allowed_paths:
+      - backend/app/Console/Commands/PersonalityBigFiveEnglishDraftInventory.php
+      - backend/app/Services/BigFive/AuthorityV3/ReadOnly/BigFiveEnglishDraftInventory.php
+      - backend/tests/Feature/Console/PersonalityBigFiveEnglishDraftInventoryTest.php
+      - backend/docs/seo/generated/en-parity-w2-big-five-draft-inventory.v1.json
+      - backend/docs/seo/en-parity-w2-big-five-draft-inventory.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/sidecar_issues.md
+      - generated/pr-train-sidecar-issues/sidecar_issues.json
+    do_not:
+      - Write CMS or database state, publish or promote revisions, import content, deploy, or change public API, routes, migrations, sitemap, llms, indexability, or Search Channel state.
+      - Output raw revision bodies, private user data, private URLs, credentials, environment values, or database topology.
+      - Treat public projections as drafts or fabricate revision identities to preserve a historical count.
+    validation:
+      - php -l backend/app/Console/Commands/PersonalityBigFiveEnglishDraftInventory.php
+      - php -l backend/app/Services/BigFive/AuthorityV3/ReadOnly/BigFiveEnglishDraftInventory.php
+      - cd backend && php artisan test tests/Feature/Console/PersonalityBigFiveEnglishDraftInventoryTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityBigFiveEnglishDraftInventory.php app/Services/BigFive/AuthorityV3/ReadOnly/BigFiveEnglishDraftInventory.php tests/Feature/Console/PersonalityBigFiveEnglishDraftInventoryTest.php
+      - python3 -m json.tool backend/docs/seo/generated/en-parity-w2-big-five-draft-inventory.v1.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_read_only_evidence: true
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: CAREER-SEARCH-ENTRY-TIER-CONTRACT-01
     repo: fap-api
     base: main

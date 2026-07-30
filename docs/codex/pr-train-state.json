@@ -101170,5 +101170,66 @@
       }
     ],
     "updated_at": "2026-07-27T09:33:00Z"
+  },
+  "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01": {
+    "id": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/en-parity-w2-big5-draft-reconcile-01",
+    "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
+    "status": "local_checks_passed",
+    "depends_on": [],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "production_read_only_inventory": {
+        "status": "pass",
+        "evidence": "One-time operator-authorized read-only observation of deployed release 20260730-6cca48a754a3-r3 at SHA 6cca48a754a3dc7ab52cf40851aeb1d6005e4ee8; source evidence SHA-256 29f62379ce1e36c59831862bef102b920c65cf3179bda0cfdea8d9a7cf1fa6e4; writes_committed=false."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "Focused PHPUnit, scoped Pint, PHP syntax, JSON/YAML parsing, deterministic artifact invariants, diff checks, and exact allowlist validation passed. Production historical revision QA SHA-256 109e995dd9c900b978d5ceaca1f7851607d4332c8bf9a734c705bd32982dd11e proves 50 rows, database fingerprint unchanged, and zero CJK/media/private-field leakage."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": false,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_read_only_evidence": true,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-30T15:20:00Z",
+        "status": "implementation_in_progress",
+        "note": "Started from exact main 2284f5d9f0528722c7a58486f86c0716e526ed5c. The operator separately authorized one read-only production inventory observation; no database/CMS/publication/deploy/search write occurred."
+      },
+      {
+        "at": "2026-07-30T15:36:00Z",
+        "status": "production_evidence_reconciled",
+        "note": "Exact production authority proves 52 canonical English assets, 50 registered historical revision rows, zero independent current drafts, 50 current working pointers equal to their published pointers, 50 public projections, and zero alias rows. Each historical revision is immutable and traceable but superseded, so disposition is stale_working_revision rather than an active draft."
+      },
+      {
+        "at": "2026-07-30T15:43:00Z",
+        "status": "local_checks_passed",
+        "note": "Corrected key-aware historical revision QA proves all exact 50 rows have zero private-field, media-reference, and Chinese leakage with unchanged production database fingerprint. Focused local checks and exact scope validation passed; no write, publish, promotion, deploy, or search action occurred."
+      }
+    ],
+    "updated_at": "2026-07-30T15:43:00Z"
   }
 }
