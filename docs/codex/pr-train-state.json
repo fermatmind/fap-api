@@ -101497,7 +101497,7 @@
       "EN-PARITY-W1-MBTI-RESULT-AGENT-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "7338e6240d53b5d9877e9f2ba1bfc19ab40260da",
+    "commit_sha": "5c33db3aaf1782a3a4178864491769e3cb53a6f0",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3429",
     "checks": {
       "authorization": {
@@ -101686,8 +101686,13 @@
         "at": "2026-07-30T21:24:00Z",
         "status": "review_fix_local_verified",
         "note": "Repaired the two exact-head P2s by freezing the real ready/full/full unlocked runtime access predicate for protected premium projection and preserving the exact candidate row_id as every emitted PDF cards[].card_key. Focused validation passed 7 tests/1328 assertions, scoped Pint, JSON parsing, deterministic package hashing, git diff --check, and exact changed-file scope validation. Candidate package SHA is 1483b439cc70d6e4d5273402c7c256128e8d7a3fd49feba7f56f1931665b51ba."
+      },
+      {
+        "at": "2026-07-30T21:25:00Z",
+        "status": "github_checks_pending",
+        "note": "Committed the runtime-access and row-identity repair as implementation commit 5c33db3aaf1782a3a4178864491769e3cb53a6f0. This metadata-only commit records that immutable implementation pointer; exact-head GitHub checks and review are pending."
       }
     ],
-    "updated_at": "2026-07-30T21:24:00Z"
+    "updated_at": "2026-07-30T21:25:00Z"
   }
 }
