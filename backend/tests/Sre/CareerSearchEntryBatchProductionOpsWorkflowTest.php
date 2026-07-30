@@ -239,6 +239,85 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
         $this->assertStringNotContainsString('/var/www/fap-api', $workflow.$runner);
     }
 
+    public function test_cache_refresh_recovery_preflight_binds_indeterminate_failure_and_has_no_write_path(): void
+    {
+        $workflow = $this->repoFile(
+            '.github/workflows/career-search-entry-batch-cache-refresh-recovery-preflight.yml'
+        );
+        $runner = $this->repoFile(
+            'backend/scripts/career/career_search_entry_batch_cache_refresh_recovery_preflight.sh'
+        );
+
+        foreach ([
+            'expected_control_plane_sha:',
+            'expected_release_sha:',
+            'expected_release_name:',
+            'failed_run_id:',
+            'failed_run_attempt:',
+            'Career Search Entry Batch Cache Refresh Production Ops',
+            'career-search-entry-batch-cache-refresh-execute-${FAILED_RUN_ID}-${FAILED_RUN_ATTEMPT}',
+            '.conclusion == "failure"',
+            '.failed_stage == "exact_cache_refresh"',
+            '.write_state == "indeterminate"',
+            '.production_write_execution == true',
+            '[.workflow_runs[] | select(.id > $failed_run)] | length == 0',
+            'group: deploy-${{ github.repository }}-production',
+            'secrets.PRODUCTION_DEPLOY_HOST',
+            'secrets.PRODUCTION_DEPLOY_PATH',
+            'secrets.SSH_PRIVATE_KEY',
+            'ServerAliveInterval=20',
+            'ServerAliveCountMax=30',
+            'this authorizes control-plane design only and does not authorize production retry, write, rollback, deploy, or Search Channel operation',
+            'if: always()',
+        ] as $required) {
+            $this->assertStringContainsString($required, $workflow);
+        }
+        foreach ([
+            'career.search_entry_batch.cache_refresh.recovery_preflight.v1',
+            'CAREER-SEARCH-ENTRY-QUALITY-BATCH-01/manifest.json',
+            '.expected_candidate_count == 50',
+            'https://api.fermatmind.com/api/v0.5/career/jobs/',
+            'current_public_readback',
+            'PASS_RECOVERY_RESUME_REQUIRED',
+            'PASS_RECOVERY_CURRENT_STATE_COMPLETE',
+            'HOLD_RECOVERY_STATE_UNCERTAIN',
+            'career:build-search-entry-quality-batch',
+            '--connect-timeout 5 --max-time 30',
+            'for curl_attempt in 1 2',
+            'if [[ "$curl_attempt" -lt 2 ]]',
+            'sleep 1',
+            'write_state: "none"',
+            'production_write_execution: false',
+            'recovery_action_authorized: false',
+            'retry_execution_count: 0',
+            'cache_refresh_target_count: 0',
+            'database_write_count: 0',
+            'cms_write_count: 0',
+            'publication_write_count: 0',
+            'indexability_write_count: 0',
+            'queue_dispatch_count: 0',
+            'sitemap_write_count: 0',
+            'llms_write_count: 0',
+            'search_channel_action_count: 0',
+            'url_submission_count: 0',
+            'non_target_write_count: 0',
+            'deploy_count: 0',
+            'rollback_count: 0',
+        ] as $required) {
+            $this->assertStringContainsString($required, $runner);
+        }
+        $this->assertStringNotContainsString('career:warm-public-authority-cache', $workflow.$runner);
+        $this->assertStringNotContainsString('--job-detail-only', $workflow.$runner);
+        $this->assertStringNotContainsString('--forget-job-detail', $workflow.$runner);
+        $this->assertStringNotContainsString('php artisan migrate', $workflow.$runner);
+        $this->assertStringNotContainsString('queue:restart', $workflow.$runner);
+        $this->assertStringNotContainsString('deploy:symlink', $workflow.$runner);
+        $this->assertStringNotContainsString('indexnow', strtolower($workflow.$runner));
+        $this->assertStringNotContainsString('googleapis', strtolower($workflow.$runner));
+        $this->assertStringNotContainsString('139.224.', $workflow.$runner);
+        $this->assertStringNotContainsString('/var/www/fap-api', $workflow.$runner);
+    }
+
     private function repoFile(string $path): string
     {
         $contents = file_get_contents(dirname(__DIR__, 3).'/'.$path);
