@@ -885,7 +885,9 @@ final class BigFiveEnglishDraftInventory
         }
         foreach ($value as $key => $item) {
             if (is_string($key)) {
-                $normalizedKey = strtolower($key);
+                $normalizedKey = preg_replace('/([A-Z]+)([A-Z][a-z])/', '$1_$2', $key);
+                $normalizedKey = preg_replace('/([a-z0-9])([A-Z])/', '$1_$2', (string) $normalizedKey);
+                $normalizedKey = strtolower((string) preg_replace('/[^a-zA-Z0-9]+/', '_', (string) $normalizedKey));
                 if (in_array($normalizedKey, BigFiveResultPageV2SelectorAssetContract::FORBIDDEN_PUBLIC_FIELDS, true)
                     || in_array($normalizedKey, BigFiveResultPageV2Contract::FORBIDDEN_PUBLIC_FIELDS, true)
                     || in_array($normalizedKey, BigFiveResultPageV2Contract::SHARE_FORBIDDEN_SCORE_FIELDS, true)
@@ -910,7 +912,21 @@ final class BigFiveEnglishDraftInventory
     private function containsMediaReference(mixed $value): bool
     {
         if (is_string($value)) {
-            return preg_match('/!\[[^\]]*\]|<(?:img|picture|source)\b/i', $value) === 1;
+            if (preg_match('/<(?:img|picture|source)\b/i', $value) === 1) {
+                return true;
+            }
+            preg_match_all('/!\[[^\]]*\]/', $value, $tokens, PREG_OFFSET_CAPTURE);
+            foreach ($tokens[0] as [, $offset]) {
+                $precedingBackslashes = 0;
+                for ($index = $offset - 1; $index >= 0 && $value[$index] === '\\'; $index--) {
+                    $precedingBackslashes++;
+                }
+                if ($precedingBackslashes % 2 === 0) {
+                    return true;
+                }
+            }
+
+            return false;
         }
         if (! is_array($value)) {
             return false;

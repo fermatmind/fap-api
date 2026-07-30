@@ -305,6 +305,32 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertSame('prohibited_content', $camelCaseMediaFieldRow['recommended_disposition']);
 
         $working->forceFill(['snapshot_json' => [
+            'attributes' => $this->completeSnapshot('Candidate'),
+            'attemptId' => 'private-camel-case-attempt',
+        ]])->saveQuietly();
+        $camelCasePrivateField = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $camelCasePrivateFieldRow = collect($camelCasePrivateField['rows'])
+            ->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertTrue($camelCasePrivateFieldRow['private_result_leakage']);
+        $this->assertFalse($camelCasePrivateFieldRow['claim_boundary_compliant']);
+        $this->assertSame('prohibited_content', $camelCasePrivateFieldRow['recommended_disposition']);
+        $this->assertStringNotContainsString(
+            'private-camel-case-attempt',
+            json_encode($camelCasePrivateField, JSON_THROW_ON_ERROR),
+        );
+
+        $working->forceFill(['snapshot_json' => [
+            'attributes' => $this->completeSnapshot('Candidate'),
+            'body' => '\![escaped image marker][hero]',
+        ]])->saveQuietly();
+        $escapedImageMarker = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $escapedImageMarkerRow = collect($escapedImageMarker['rows'])
+            ->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertTrue($escapedImageMarkerRow['text_only_compliant']);
+
+        $working->forceFill(['snapshot_json' => [
             'attributes' => [
                 ...$this->completeSnapshot('Candidate'),
                 'summary' => "Supplementary CJK \u{20000} Extension H \u{31350}",
