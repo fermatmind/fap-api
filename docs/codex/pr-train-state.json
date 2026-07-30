@@ -101263,8 +101263,8 @@
     "depends_on": [
       "EN-PARITY-W1-MBTI-INVENTORY-01"
     ],
-    "status": "github_checks_pending",
-    "commit_sha": "f90759f0666c3c597f9548a1dcc6139a00c9484c",
+    "status": "review_fix_local_verified",
+    "commit_sha": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3424",
     "checks": {
       "authorization": {
@@ -101281,11 +101281,11 @@
       },
       "package_contract": {
         "status": "passed",
-        "evidence": "The corrected candidate contains exactly the seven inventory slugs and row identities, binds six committed zh-CN source snapshot hashes plus the ISTJ/ISFJ backend revision hash, preserves body/group/nested-item/item/row cardinality across all seven assets, includes the required translation map and producer claim/editorial reports, and freezes replacement package SHA 6ceac9fca788a8e50bc1182b7c42a3fb79a887b554fd2240df5a4a2d871b73ba."
+        "evidence": "The corrected candidate contains exactly the seven inventory slugs and row identities, binds six committed zh-CN source snapshot hashes plus the ISTJ/ISFJ backend revision hash, preserves body/group/nested-item/item cardinality across all seven assets, adds deterministic body/rows-compatible public projection rows, includes the required translation map and producer claim/editorial reports, and freezes replacement package SHA 2a745c06ca32e491f8e9ed20b0d9994b98d12c54a50fa1bc160969de12922029."
       },
       "focused_test": {
         "status": "passed",
-        "evidence": "After both review rounds, php artisan test --filter=MbtiComparisonEnglishPackageTest passed 6 tests and 1076 assertions, including source-shape comparison for all seven rows."
+        "evidence": "After all review repairs, php artisan test --filter=MbtiComparisonEnglishPackageTest passed 6 tests and 1088 assertions, including source-shape comparison for all seven rows and exact nested-content-to-runtime-row projection."
       },
       "focused_lint": {
         "status": "passed",
@@ -101312,12 +101312,12 @@
         "evidence": "PR #3424 head 37dcc8dcc4900f973d03c1985bc6bfcee316b27a passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. verify-staging-parity was policy-skipped and is not a deploy wait."
       },
       "final_head_checks": {
-        "status": "pending",
-        "evidence": "Second review-fix implementation head f90759f0666c3c597f9548a1dcc6139a00c9484c is pushed; required GitHub checks and refreshed exact-head review are pending."
+        "status": "superseded_by_third_review_fix",
+        "evidence": "Head a4693d9c0cfbb890460f8aa73e8a51b7315a724a passed every applicable GitHub check, but refreshed exact-head review found that the current public v1 projection would omit groups/items. The corrected head must repeat required checks."
       },
       "codex_review": {
-        "status": "second_round_resolved_pushed_pending_rereview",
-        "evidence": "The refreshed review correctly found an unrelated Career manifest status regression and the skipped ISTJ/ISFJ revision shape. Commit f90759f0666c3c597f9548a1dcc6139a00c9484c restores the Career status to origin/main, preserves ISTJ/ISFJ 1-body narrative and 4-row table cardinality, removes the test exemption, and records responses on both review threads."
+        "status": "third_round_resolved_locally_pending_rereview",
+        "evidence": "The refreshed review correctly found that public v1 reads only body/rows. The same-scope repair retains groups/items for source-structure evidence and adds exact deterministic rows containing every nested item, so a future importer can use the current public contract without dropping content or changing runtime."
       }
     },
     "failure_reason": null,
@@ -101382,8 +101382,13 @@
         "at": "2026-07-30T17:12:15Z",
         "status": "github_checks_pending",
         "note": "Pushed second review-fix implementation commit f90759f0666c3c597f9548a1dcc6139a00c9484c and replied on both exact review threads. Fresh required checks and refreshed exact-head review are pending."
+      },
+      {
+        "at": "2026-07-30T17:21:30Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact head a4693d9c0cfbb890460f8aa73e8a51b7315a724a passed all applicable checks, then refreshed Codex review found that public v1 reads only body/rows and would omit groups/items. Added deterministic projection rows for every nested group/item while retaining the source-structured fields and strengthened the contract to prove exact row content. Replacement package SHA is 2a745c06ca32e491f8e9ed20b0d9994b98d12c54a50fa1bc160969de12922029; focused validation passes 6 tests/1088 assertions and Pint."
       }
     ],
-    "updated_at": "2026-07-30T17:12:15Z"
+    "updated_at": "2026-07-30T17:21:30Z"
   }
 }

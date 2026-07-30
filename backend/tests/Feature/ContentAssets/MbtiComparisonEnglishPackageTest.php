@@ -81,7 +81,7 @@ final class MbtiComparisonEnglishPackageTest extends TestCase
         }
 
         self::assertSame($manifest['package_sha256'], hash('sha256', $packageHashInput));
-        self::assertSame('6ceac9fca788a8e50bc1182b7c42a3fb79a887b554fd2240df5a4a2d871b73ba', $manifest['package_sha256']);
+        self::assertSame('2a745c06ca32e491f8e9ed20b0d9994b98d12c54a50fa1bc160969de12922029', $manifest['package_sha256']);
     }
 
     #[Test]
@@ -195,11 +195,37 @@ final class MbtiComparisonEnglishPackageTest extends TestCase
                     count($targetSection['items'] ?? []),
                     $asset['row_id'].' '.$sourceSection['id'].' item cardinality drifted.',
                 );
+                $sourceRows = count($sourceSection['rows'] ?? []);
+                $projectionRows = $sourceRows > 0
+                    ? $sourceRows
+                    : array_sum(array_map(
+                        static fn (array $group): int => count($group['items']),
+                        $sourceSection['groups'] ?? [],
+                    )) + count($sourceSection['items'] ?? []);
                 self::assertSame(
-                    count($sourceSection['rows'] ?? []),
+                    $projectionRows,
                     count($targetSection['rows'] ?? []),
-                    $asset['row_id'].' '.$sourceSection['id'].' row cardinality drifted.',
+                    $asset['row_id'].' '.$sourceSection['id'].' runtime projection row cardinality drifted.',
                 );
+
+                if (($targetSection['groups'] ?? []) !== []) {
+                    $expectedRows = [];
+                    foreach ($targetSection['groups'] as $group) {
+                        foreach ($group['items'] as $item) {
+                            $expectedRows[] = ['group' => $group['title'], 'item' => $item];
+                        }
+                    }
+                    self::assertSame($expectedRows, $targetSection['rows']);
+                } elseif (($targetSection['items'] ?? []) !== []) {
+                    self::assertSame(
+                        array_map(
+                            static fn (string $item): array => ['item' => $item],
+                            $targetSection['items'],
+                        ),
+                        $targetSection['rows'],
+                    );
+                }
+
             }
         }
     }
