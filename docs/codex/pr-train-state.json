@@ -101179,7 +101179,7 @@
     "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
     "status": "review_fix_local_checks_passed",
     "depends_on": [],
-    "commit_sha": "b2367e2be02a2807633ca9834b2648216ce67453",
+    "commit_sha": "124f0e030eeeca8dda2d7b73e313fe069046fbd4",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3421",
     "checks": {
       "production_read_only_inventory": {
@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "exact_head_retry_pending",
-        "evidence": "GitHub CI runs through 30579530405 passed all required jobs at their exact heads. The latest exact-head review added one in-scope camelCase media-key finding; implementation b2367e2be02a2807633ca9834b2648216ce67453 passes the 27-test inventory suite and the 395-test runtime-freeze suite and requires a fresh exact-head CI/review cycle."
+        "evidence": "GitHub CI runs through 30580307314 passed all required jobs at their exact heads. The latest exact-head review added two in-scope key-normalization and escaped-Markdown findings; implementation 124f0e030eeeca8dda2d7b73e313fe069046fbd4 passes the 27-test inventory suite and the 395-test runtime-freeze suite and requires a fresh exact-head CI/review cycle."
       }
     },
     "scope_validation": {
@@ -101358,9 +101358,14 @@
         "at": "2026-07-30T20:41:20Z",
         "status": "review_fix_local_checks_passed",
         "note": "After every required job in CI run 30579530405 passed, exact-head review identified one remaining camelCase media-key gap. Text-only scanning now uses the runtime verifier's broader media-key boundary, so heroImage, ogImage, twitterImage, inlineMedia, and imageUrl fail closed. The ledger binds implementation b2367e2be02a2807633ca9834b2648216ce67453. The 27-test inventory suite passes 174 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, YAML/JSON parsing, and diff checks pass."
+      },
+      {
+        "at": "2026-07-30T20:51:42Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30580307314 passed, exact-head review identified two remaining sanitization-accuracy gaps. Private-result keys are normalized from camelCase, acronym case, punctuation, and separators into the snake_case denylist boundary; Markdown image detection counts immediately preceding backslashes so odd escaped markers remain literal text while even/unescaped image tokens fail closed. The ledger binds implementation 124f0e030eeeca8dda2d7b73e313fe069046fbd4. The 27-test inventory suite passes 179 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, YAML/JSON parsing, and diff checks pass."
       }
     ],
-    "updated_at": "2026-07-30T20:41:20Z"
+    "updated_at": "2026-07-30T20:51:42Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
