@@ -101514,11 +101514,11 @@
       },
       "package_contract": {
         "status": "passed",
-        "evidence": "Frozen candidate package SHA 0118a4ddd0c1ad75687492fa8d7e7d5055c4cbcadaa664a5890de445bc99903a reconciles 46 unique rows as 24 preserved controls, 21 distinct English assets, and one synthetic private-safe PDF W9 target. The PDF adapter covers the 20 PDF-consumable candidates, while the single offer CTA is explicitly partitioned to locked-upsell result-page QA through commercial_spec to offer_set.cta. The preview surface is a preserved control and cannot consume that locked-upsell candidate. Ordinary sections have deterministic body/prompt projection; premium public projection is fail-closed to title/teaser with protected full templates retained only for inactive/draft authority. All controlled permissions remain false."
+        "evidence": "Frozen candidate package SHA 04d88c174252bc090fbce8b96294b86c7b274c5d0bed849fde3583a4b76e3f42 reconciles 46 unique rows as 24 preserved controls, 21 distinct English assets, and one synthetic private-safe PDF W9 target. The PDF adapter covers the 20 PDF-consumable candidates, while the single offer CTA is explicitly partitioned to locked-upsell result-page QA through an exact OfferResolver variant selector and commercial_spec to offer_set.cta. The preview surface is a preserved control and cannot consume that locked-upsell candidate. Canonical projection is gated on exact-package importer rendering of the two registered variant slots with unresolved tokens rejected. Ordinary sections have deterministic body/prompt projection; premium public projection is fail-closed to title/teaser with protected full templates retained only for inactive/draft authority. All controlled permissions remain false."
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After review repair, php artisan test --filter=MbtiResultEnglishPackageTest passed 7 tests/927 assertions covering canonical registry buckets, deterministic ordinary-section projection, fail-closed premium teaser projection, exact commercial_spec cta_copy shape, preview exclusion, explicit 20-PDF/1-result-page QA partitioning, real PDF payload/adapter assertions, and forbidden-claim scan reconciliation. Scoped Pint, package JSON parsing, deterministic package SHA 0118a4ddd0c1ad75687492fa8d7e7d5055c4cbcadaa664a5890de445bc99903a, git diff, and exact scope checks pass. After the required process guard, the isolated SQLite ci_verify wrapper ran scripts/verify_mbti.sh and the bounded MBTI regression chain with exit 0."
+        "evidence": "After review repair, php artisan test --filter=MbtiResultEnglishPackageTest passed 7 tests/1012 assertions covering canonical registry buckets, pre-projection slot rendering with unresolved-token rejection, deterministic ordinary-section projection, fail-closed premium teaser projection, exact commercial_spec cta_copy selector/shape, preview exclusion, explicit 20-PDF/1-result-page QA partitioning, real PDF payload/adapter assertions, and forbidden-claim scan reconciliation. Scoped Pint, package JSON parsing, deterministic package SHA 04d88c174252bc090fbce8b96294b86c7b274c5d0bed849fde3583a4b76e3f42, git diff, and exact scope checks pass. After the required process guard, the isolated SQLite ci_verify wrapper ran scripts/verify_mbti.sh and the bounded MBTI regression chain with exit 0."
       },
       "changed_file_scope": {
         "status": "passed",
@@ -101606,8 +101606,13 @@
         "at": "2026-07-30T19:48:13Z",
         "status": "github_checks_pending",
         "note": "Committed the preview entitlement repair as exact implementation commit ade807ebb6a82b00e33dc62c50c25cd8517706f4. The following metadata-only commit records that immutable implementation pointer; exact-head GitHub checks and review are pending."
+      },
+      {
+        "at": "2026-07-30T19:59:41Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact head dd4d0a8b31246bcb56732c88934b383a0c78cea7 passed all nine required checks with staging parity skipped, then review found two valid P2 contract gaps: template slots could survive canonical projection, and the CTA selector was descriptive rather than resolver-addressable. The package now binds the only two remaining slots to the future exact-package result importer, requires rendering before projection/write, rejects unresolved tokens, and freezes the exact default MBTI full-report variant id/anchor/effective SKU consumed by OfferResolver. Focused validation passed 7 tests/1012 assertions plus scoped Pint, JSON, hash, diff, and scope checks. Candidate package SHA is 04d88c174252bc090fbce8b96294b86c7b274c5d0bed849fde3583a4b76e3f42."
       }
     ],
-    "updated_at": "2026-07-30T19:48:13Z"
+    "updated_at": "2026-07-30T19:59:41Z"
   }
 }

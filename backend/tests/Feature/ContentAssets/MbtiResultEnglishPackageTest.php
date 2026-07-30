@@ -14,7 +14,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
 
     private const INVENTORY_SHA = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
-    private const PACKAGE_SHA = '0118a4ddd0c1ad75687492fa8d7e7d5055c4cbcadaa664a5890de445bc99903a';
+    private const PACKAGE_SHA = '04d88c174252bc090fbce8b96294b86c7b274c5d0bed849fde3583a4b76e3f42';
 
     private const EXPECTED_CANDIDATE_ROW_IDS = [
         'W1-RESULT-CORE-05-OFFER-CTA',
@@ -171,6 +171,21 @@ final class MbtiResultEnglishPackageTest extends TestCase
         self::assertCount(21, $assets);
         self::assertSame(self::EXPECTED_CANDIDATE_ROW_IDS, array_column($assets, 'row_id'));
         self::assertSame('same_fields', $package['template_contract']['mobile_desktop_authority']);
+        self::assertSame(['type_code', 'identity_variant'], $package['template_contract']['allowed_slots']);
+        self::assertSame(
+            'App\\Services\\ContentImport\\MbtiResultEnglishPackageImporter',
+            $package['template_contract']['renderer_binding']['owner'],
+        );
+        self::assertSame(
+            'EN-PARITY-W1-MBTI-RESULT-IMPORTER-01',
+            $package['template_contract']['renderer_binding']['implementation_pr'],
+        );
+        self::assertSame(
+            'reject dry-run and import',
+            $package['template_contract']['renderer_binding']['unresolved_token_policy'],
+        );
+        self::assertFalse($package['template_contract']['renderer_binding']['import_without_renderer_allowed']);
+        self::assertFalse($package['template_contract']['renderer_binding']['runtime_template_rendering_added_by_this_package']);
         self::assertFalse(
             $package['template_contract']['canonical_projection_contract']['runtime_or_entitlement_policy_change_allowed'],
         );
@@ -189,6 +204,13 @@ final class MbtiResultEnglishPackageTest extends TestCase
                 self::assertSame('commercial_spec.variants[].cta_copy', $asset['authority_field']);
                 self::assertSame('offer_set.cta', $asset['consumer_field']);
                 self::assertSame('locked_upsell_only', $asset['entitlement_level']);
+                self::assertSame([
+                    'variant_id' => 'mbti_report_paywall_default_v1',
+                    'default' => true,
+                    'upgrade_sku_anchor' => 'MBTI_REPORT_FULL',
+                    'upgrade_sku' => 'MBTI_REPORT_FULL_199',
+                    'resolver' => 'OfferResolver::resolveCtaCopy',
+                ], $asset['variant_selector']);
                 self::assertSame(
                     ['title', 'subtitle', 'primary_label', 'secondary_label', 'benefit_bullets', 'badge'],
                     array_keys($asset['content']),
@@ -206,6 +228,16 @@ final class MbtiResultEnglishPackageTest extends TestCase
             foreach ($matches[1] as $slot) {
                 self::assertContains($slot, $package['template_contract']['allowed_slots']);
             }
+
+            $renderedContent = $this->renderTemplateValue($asset['content'], [
+                'type_code' => 'INTJ-A',
+                'identity_variant' => 'Assertive',
+            ]);
+            self::assertIsArray($renderedContent);
+            self::assertStringNotContainsString(
+                '{{',
+                json_encode($renderedContent, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE),
+            );
 
             if ($asset['asset_kind'] === 'canonical_section_family') {
                 self::assertArrayHasKey('title', $asset['content']);
@@ -227,10 +259,11 @@ final class MbtiResultEnglishPackageTest extends TestCase
                     self::assertNotSame('', trim($asset['content']['teaser']));
                     self::assertSame($asset['content']['summary_template'], $asset['content']['teaser']);
                     $projected = [
-                        'title' => $asset['content']['title'],
-                        'teaser' => $asset['content']['teaser'],
+                        'title' => $renderedContent['title'],
+                        'teaser' => $renderedContent['teaser'],
                         'payload' => null,
                     ];
+                    self::assertStringNotContainsString('{{', $projected['teaser']);
                     self::assertNull($projected['payload']);
                     self::assertFalse(
                         $package['template_contract']['canonical_projection_contract']['premium_teaser']['protected_full_content']['public_projection_allowed'],
@@ -244,22 +277,23 @@ final class MbtiResultEnglishPackageTest extends TestCase
                     );
                 } else {
                     $projected = [
-                        'title' => $asset['content']['title'],
+                        'title' => $renderedContent['title'],
                         'body' => implode("\n\n", [
-                            $asset['content']['summary_template'],
-                            ...$asset['content']['body_template'],
+                            $renderedContent['summary_template'],
+                            ...$renderedContent['body_template'],
                         ]),
                         'payload' => [
-                            'summary_template' => $asset['content']['summary_template'],
-                            'reflection_prompts' => $asset['content']['reflection_prompts'],
+                            'summary_template' => $renderedContent['summary_template'],
+                            'reflection_prompts' => $renderedContent['reflection_prompts'],
                         ],
                     ];
-                    self::assertStringContainsString($asset['content']['summary_template'], $projected['body']);
-                    foreach ($asset['content']['body_template'] as $paragraph) {
+                    self::assertStringNotContainsString('{{', $projected['body']);
+                    self::assertStringContainsString($renderedContent['summary_template'], $projected['body']);
+                    foreach ($renderedContent['body_template'] as $paragraph) {
                         self::assertStringContainsString($paragraph, $projected['body']);
                     }
                     self::assertSame(
-                        $asset['content']['reflection_prompts'],
+                        $renderedContent['reflection_prompts'],
                         $projected['payload']['reflection_prompts'],
                     );
                 }
@@ -449,6 +483,30 @@ final class MbtiResultEnglishPackageTest extends TestCase
         self::assertIsString($json);
 
         return json_decode($json, true, 512, JSON_THROW_ON_ERROR);
+    }
+
+    /**
+     * @param  array<string, string>  $slots
+     */
+    private function renderTemplateValue(mixed $value, array $slots): mixed
+    {
+        if (is_string($value)) {
+            $replacements = [];
+            foreach ($slots as $slot => $replacement) {
+                $replacements['{{'.$slot.'}}'] = $replacement;
+            }
+
+            return strtr($value, $replacements);
+        }
+
+        if (! is_array($value)) {
+            return $value;
+        }
+
+        return array_map(
+            fn (mixed $nested): mixed => $this->renderTemplateValue($nested, $slots),
+            $value,
+        );
     }
 
     /**

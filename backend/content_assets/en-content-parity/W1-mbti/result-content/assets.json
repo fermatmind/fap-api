@@ -9,13 +9,26 @@
     "mode": "backend_authoritative_family_template",
     "allowed_slots": [
       "type_code",
-      "identity_variant",
-      "opposite_identity_variant",
-      "preferred_axis_labels",
-      "close_call_axis_label",
-      "adjacent_type_code"
+      "identity_variant"
     ],
     "slot_values_are_not_stored_in_this_package": true,
+    "renderer_binding": {
+      "owner": "App\\Services\\ContentImport\\MbtiResultEnglishPackageImporter",
+      "implementation_pr": "EN-PARITY-W1-MBTI-RESULT-IMPORTER-01",
+      "render_stage": "exact-package dry-run before canonical projection or inactive/draft write",
+      "slot_sources": {
+        "type_code": "registered English PersonalityProfileVariant.runtime_type_code",
+        "identity_variant": {
+          "source": "registered English PersonalityProfileVariant.variant_code",
+          "A": "Assertive",
+          "T": "Turbulent"
+        }
+      },
+      "substitution": "exact literal replacement of every registered {{slot_name}} token",
+      "unresolved_token_policy": "reject dry-run and import",
+      "import_without_renderer_allowed": false,
+      "runtime_template_rendering_added_by_this_package": false
+    },
     "mobile_desktop_authority": "same_fields",
     "claim_boundary": "MBTI preference patterns are structured references and working hypotheses, not diagnoses, fixed identities, ability judgments, or outcome predictions.",
     "canonical_projection_contract": {
@@ -50,7 +63,13 @@
       "asset_kind": "offer_copy_family",
       "authority_field": "commercial_spec.variants[].cta_copy",
       "consumer_field": "offer_set.cta",
-      "variant_selector": "existing MBTI full-report offer variant for locale en",
+      "variant_selector": {
+        "variant_id": "mbti_report_paywall_default_v1",
+        "default": true,
+        "upgrade_sku_anchor": "MBTI_REPORT_FULL",
+        "upgrade_sku": "MBTI_REPORT_FULL_199",
+        "resolver": "OfferResolver::resolveCtaCopy"
+      },
       "entitlement_level": "locked_upsell_only",
       "content": {
         "title": "Unlock the complete interpretation",
@@ -116,7 +135,7 @@
       "entitlement_level": "free_preview_or_full_by_access_policy",
       "content": {
         "title": "Understanding a close-call preference",
-        "summary_template": "A close call on {{close_call_axis_label}} suggests that both sides may be available and context may affect which one is easier to see.",
+        "summary_template": "A close call on one preference axis suggests that both sides may be available and context may affect which one is easier to see.",
         "body_template": [
           "A near-boundary result does not make the assessment invalid and does not require you to choose a permanent side. It means the current answers produced a smaller separation on this axis.",
           "Look for the process behind the behavior: where attention goes first, what information feels persuasive, how a decision is made, or how structure is used. Similar outward actions can come from different preferences."
@@ -137,7 +156,7 @@
       "entitlement_level": "free_preview_or_full_by_access_policy",
       "content": {
         "title": "Why a nearby type may also feel familiar",
-        "summary_template": "{{adjacent_type_code}} may resemble {{type_code}} because the two patterns share several preferences.",
+        "summary_template": "A nearby MBTI pattern may resemble {{type_code}} because the two patterns share several preferences.",
         "body_template": [
           "The useful contrast is the axis on which they differ. Notice the sequence you tend to use before a decision, not just a single habit or role requirement.",
           "Familiarity with a nearby type can reflect a close score, learned skill, current environment, or broad wording. It does not automatically replace the current result."
@@ -158,7 +177,7 @@
       "entitlement_level": "free_preview_or_full_by_access_policy",
       "content": {
         "title": "Decision style",
-        "summary_template": "{{type_code}} may narrow options by combining {{preferred_axis_labels}} in a recognizable but adaptable sequence.",
+        "summary_template": "{{type_code}} may narrow options by combining its preferred sides of the four axes in a recognizable but adaptable sequence.",
         "body_template": [
           "A preference describes what may feel easier to consult first; it does not prevent you from using the opposite approach. High-stakes decisions often benefit from deliberately adding the perspective that receives less attention.",
           "Before committing, separate reversible choices from expensive ones. For reversible choices, define a small test. For expensive choices, record the evidence, people affected, and the condition that would change your mind."

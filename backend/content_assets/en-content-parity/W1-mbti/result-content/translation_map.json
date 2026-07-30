@@ -14,7 +14,7 @@
     "MbtiPdfPayloadBuilder"
   ],
   "assets": [
-    {"row_id":"W1-RESULT-CORE-05-OFFER-CTA","target_pointer":"/assets/0","source_contract":["commercial_spec.variants[].cta_copy","offer_set.cta","locked_upsell_only"],"structure_preserved":true},
+    {"row_id":"W1-RESULT-CORE-05-OFFER-CTA","target_pointer":"/assets/0","source_contract":["commercial_spec.variants[variant_id=mbti_report_paywall_default_v1,upgrade_sku_anchor=MBTI_REPORT_FULL,upgrade_sku=MBTI_REPORT_FULL_199].cta_copy","offer_set.cta","locked_upsell_only"],"structure_preserved":true},
     {"row_id":"W1-RESULT-SECTION-04-TRAITS-AT_DIFFERENCE","target_pointer":"/assets/1","source_contract":["sections.traits.at_difference","rich_text"],"structure_preserved":true},
     {"row_id":"W1-RESULT-SECTION-06-TRAITS-WHY_THIS_TYPE","target_pointer":"/assets/2","source_contract":["sections.traits.why_this_type","rich_text"],"structure_preserved":true},
     {"row_id":"W1-RESULT-SECTION-07-TRAITS-CLOSE_CALL_AXES","target_pointer":"/assets/3","source_contract":["sections.traits.close_call_axes","rich_text"],"structure_preserved":true},
