@@ -101170,5 +101170,53 @@
       }
     ],
     "updated_at": "2026-07-27T09:33:00Z"
+  },
+  "API-UNLOCK-01": {
+    "id": "API-UNLOCK-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/api-unlock-01-report-entitlement",
+    "title": "API-UNLOCK-01: unify attempt-scoped full-report entitlement contract",
+    "status": "local_validation_passed",
+    "depends_on": [],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "focused_phpunit": "passed: 34 tests, 447 assertions",
+      "pint_scoped": "passed: 7 files",
+      "route_list": "passed: 24 attempt routes; no route changes",
+      "composer_validate": "passed: strict",
+      "yaml_json_diff_scope": "passed",
+      "github_required_checks": "pending"
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-30T15:55:42Z",
+        "status": "implementation_in_progress",
+        "note": "Started from exact origin/main 2284f5d9f0528722c7a58486f86c0716e526ed5c in an isolated worktree. Fixed-order steps: routes N/A, migrations N/A, FmTokenAuth N/A, controller/service implementation in progress, scripts/CI N/A. OPS account capabilities remain fail-closed; no platform identifiers, secrets, production SKU, database/CMS write, deploy, payment, or mini-program action occurred."
+      },
+      {
+        "at": "2026-07-30T15:57:14Z",
+        "status": "local_validation_passed",
+        "note": "The versioned report_unlock.v1 contract, exact CNY 499 SKU gate, provider capability gate, MBTI-only default rollout, IQ hard-disable, canonical source normalization, legacy source compatibility, locked module filtering, and idempotent rewarded_ad grant projection passed 34 focused tests / 447 assertions. Scoped Pint, route inventory, strict Composer validation, YAML/JSON parsing, diff checks, and exact changed-path scope validation passed. No migration, production SKU/config write, secret, deploy, or platform action occurred."
+      }
+    ],
+    "updated_at": "2026-07-30T15:57:14Z"
   }
 }

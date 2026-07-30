@@ -683,12 +683,21 @@ class EntitlementManager
         $hasPaymentSource = false;
         $hasInviteSource = false;
         foreach ($rows as $row) {
+            $meta = $this->decodeMeta($row->meta_json ?? null);
+            $explicitSource = ReportAccess::normalizeUnlockSource((string) ($meta['unlock_source'] ?? ''));
+            if (in_array($explicitSource, [
+                ReportAccess::UNLOCK_SOURCE_REWARDED_AD,
+                ReportAccess::UNLOCK_SOURCE_SELF_PURCHASE,
+                ReportAccess::UNLOCK_SOURCE_GIFT_PURCHASE,
+            ], true)) {
+                return $explicitSource;
+            }
+
             if (trim((string) ($row->order_no ?? '')) !== '') {
                 $hasPaymentSource = true;
             }
 
             $benefitCode = strtoupper(trim((string) ($row->benefit_code ?? '')));
-            $meta = $this->decodeMeta($row->meta_json ?? null);
             $grantedVia = strtolower(trim((string) ($meta['granted_via'] ?? '')));
             if ($grantedVia === 'invite_unlock' || $benefitCode === self::MBTI_PARTIAL_BENEFIT_CODE) {
                 $hasInviteSource = true;

@@ -70,6 +70,12 @@ final class ReportAccess
 
     public const UNLOCK_SOURCE_MIXED = 'mixed';
 
+    public const UNLOCK_SOURCE_REWARDED_AD = 'rewarded_ad';
+
+    public const UNLOCK_SOURCE_SELF_PURCHASE = 'self_purchase';
+
+    public const UNLOCK_SOURCE_GIFT_PURCHASE = 'gift_purchase';
+
     public const CARD_ACCESS_FREE = 'free';
 
     public const CARD_ACCESS_PREVIEW = 'preview';
@@ -368,6 +374,21 @@ final class ReportAccess
             self::UNLOCK_SOURCE_INVITE => self::UNLOCK_SOURCE_INVITE,
             self::UNLOCK_SOURCE_PAYMENT => self::UNLOCK_SOURCE_PAYMENT,
             self::UNLOCK_SOURCE_MIXED => self::UNLOCK_SOURCE_MIXED,
+            self::UNLOCK_SOURCE_REWARDED_AD => self::UNLOCK_SOURCE_REWARDED_AD,
+            self::UNLOCK_SOURCE_SELF_PURCHASE => self::UNLOCK_SOURCE_SELF_PURCHASE,
+            self::UNLOCK_SOURCE_GIFT_PURCHASE => self::UNLOCK_SOURCE_GIFT_PURCHASE,
+            default => self::UNLOCK_SOURCE_NONE,
+        };
+    }
+
+    public static function normalizeThreeChannelUnlockSource(?string $source): string
+    {
+        $source = self::normalizeUnlockSource($source);
+
+        return match ($source) {
+            self::UNLOCK_SOURCE_REWARDED_AD => self::UNLOCK_SOURCE_REWARDED_AD,
+            self::UNLOCK_SOURCE_SELF_PURCHASE, self::UNLOCK_SOURCE_PAYMENT => self::UNLOCK_SOURCE_SELF_PURCHASE,
+            self::UNLOCK_SOURCE_GIFT_PURCHASE => self::UNLOCK_SOURCE_GIFT_PURCHASE,
             default => self::UNLOCK_SOURCE_NONE,
         };
     }
