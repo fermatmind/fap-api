@@ -201,6 +201,10 @@ jobs:
           FAILED_RESUME_EXECUTE_RUN_ATTEMPT: "1"
           EXPECTED_FAILED_RESUME_EXECUTE_RECEIPT_SHA256: 42bf4d8ed96513b83603a8f8aa7d2e7619a811abb9fa7691c3f5390cf7a2b203
           EXPECTED_FAILED_RESUME_EXECUTE_ARTIFACT_DIGEST: bc1ac3e250a1a248de072102089d2b00aacc348e43be7741f47ebb88f456f677
+          FAILED_PERMISSION_REPAIRED_ELIGIBILITY_RUN_ID: "30587810948"
+          FAILED_PERMISSION_REPAIRED_ELIGIBILITY_RUN_ATTEMPT: "1"
+          FAILED_PERMISSION_REPAIRED_ELIGIBILITY_CONTROL_PLANE_SHA: 22b3d47c5d7956f215d9d1edf2ff63ddab818fb8
+          PREFLIGHT_CONTROL_PLANE_SHA: 2284f5d9f0528722c7a58486f86c0716e526ed5c
           PERMISSION_REPAIR_RUN_ID: "30586605927"
           PERMISSION_REPAIR_RUN_ATTEMPT: "1"
           EXPECTED_PERMISSION_REPAIR_RECEIPT_SHA256: 346adeed33a71db9b82d2513a9728f45980c8a45724adf1df3f788a1e23dbc12
@@ -231,6 +235,10 @@ jobs:
           [[ "$FAILED_RESUME_EXECUTE_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
           [[ "$EXPECTED_FAILED_RESUME_EXECUTE_RECEIPT_SHA256" =~ ^[0-9a-f]{64}$ ]]
           [[ "$EXPECTED_FAILED_RESUME_EXECUTE_ARTIFACT_DIGEST" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$FAILED_PERMISSION_REPAIRED_ELIGIBILITY_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$FAILED_PERMISSION_REPAIRED_ELIGIBILITY_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+          [[ "$FAILED_PERMISSION_REPAIRED_ELIGIBILITY_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$PREFLIGHT_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
           [[ "$PERMISSION_REPAIR_RUN_ID" =~ ^[1-9][0-9]*$ ]]
           [[ "$PERMISSION_REPAIR_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
           [[ "$EXPECTED_PERMISSION_REPAIR_RECEIPT_SHA256" =~ ^[0-9a-f]{64}$ ]]
@@ -248,7 +256,7 @@ jobs:
           recovery_run="$(
             gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${RECOVERY_RUN_ID}"
           )"
-          jq -e \
+            jq -e \
             --argjson attempt "$RECOVERY_RUN_ATTEMPT" \
             '.name == "Career Search Entry Batch Cache Refresh Recovery Preflight"
              and .path == ".github/workflows/career-search-entry-batch-cache-refresh-recovery-preflight.yml"
@@ -673,7 +681,7 @@ jobs:
               gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}"
             )"
             jq -e \
-              --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
+              --arg control "$PREFLIGHT_CONTROL_PLANE_SHA" \
               --argjson attempt "$PREFLIGHT_RUN_ATTEMPT" \
               '.name == "Career Search Entry Batch Cache Refresh Resume"
                and .path == ".github/workflows/career-search-entry-batch-cache-refresh-resume.yml"
@@ -683,6 +691,26 @@ jobs:
                and .head_branch == "main"
                and .head_sha == $control
                and .run_attempt == $attempt' <<<"$preflight_run" >/dev/null
+            failed_permission_repaired_eligibility_run="$(
+              gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${FAILED_PERMISSION_REPAIRED_ELIGIBILITY_RUN_ID}"
+            )"
+            jq -e \
+              --arg control "$FAILED_PERMISSION_REPAIRED_ELIGIBILITY_CONTROL_PLANE_SHA" \
+              --argjson attempt "$FAILED_PERMISSION_REPAIRED_ELIGIBILITY_RUN_ATTEMPT" \
+              '.name == "Career Search Entry Batch Cache Refresh Permission-Repaired Resume"
+               and .path == ".github/workflows/career-search-entry-batch-cache-refresh-resume.yml"
+               and .event == "workflow_dispatch"
+               and .status == "completed"
+               and .conclusion == "failure"
+               and .head_branch == "main"
+               and .head_sha == $control
+               and .run_attempt == $attempt' \
+              <<<"$failed_permission_repaired_eligibility_run" >/dev/null
+            failed_permission_repaired_eligibility_artifacts="$(
+              gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${FAILED_PERMISSION_REPAIRED_ELIGIBILITY_RUN_ID}/artifacts?per_page=100"
+            )"
+            jq -e '.total_count == 0 and (.artifacts | length == 0)' \
+              <<<"$failed_permission_repaired_eligibility_artifacts" >/dev/null
             preflight_dir="$(mktemp -d)"
             gh run download "$PREFLIGHT_RUN_ID" \
               --name "career-search-entry-batch-cache-refresh-resume-preflight-${PREFLIGHT_RUN_ID}-${PREFLIGHT_RUN_ATTEMPT}" \
@@ -737,7 +765,7 @@ jobs:
                and .queue_dispatch_count == 0
                and .deploy_count == 0
                and .rollback_count == 0' "$preflight_receipt" >/dev/null
-            expected_phrase="I explicitly approve one-time Career search-entry permission-repaired cache-only resume execute for failed resume execute run ${FAILED_RESUME_EXECUTE_RUN_ID} attempt ${FAILED_RESUME_EXECUTE_RUN_ATTEMPT} receipt ${EXPECTED_FAILED_RESUME_EXECUTE_RECEIPT_SHA256} artifact ${EXPECTED_FAILED_RESUME_EXECUTE_ARTIFACT_DIGEST}, permission repair run ${PERMISSION_REPAIR_RUN_ID} attempt ${PERMISSION_REPAIR_RUN_ATTEMPT} receipt ${EXPECTED_PERMISSION_REPAIR_RECEIPT_SHA256} artifact ${EXPECTED_PERMISSION_REPAIR_ARTIFACT_DIGEST}, control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA}, active SHA ${EXPECTED_RELEASE_SHA}, manifest ${EXPECTED_MANIFEST_SHA256}, preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} state ${EXPECTED_PREFLIGHT_STATE_SHA256} target set ${EXPECTED_RESUME_TARGET_SET_SHA256}; refresh exactly ${EXPECTED_RESUME_TARGET_COUNT} residual targets in ${EXPECTED_RESUME_BATCH_COUNT} batches of at most 5 slugs and 10 URLs using the 5000ms offline build budget and zero per-target retry, then require exact quality-package and 100-URL public readback, with no DB, CMS, publication, indexability, queue, sitemap, llms, Search Channel, URL submission, deploy, rollback, or non-target write."
+            expected_phrase="I explicitly approve one-time Career search-entry lineage-repaired cache-only resume execute for failed resume execute run ${FAILED_RESUME_EXECUTE_RUN_ID} attempt ${FAILED_RESUME_EXECUTE_RUN_ATTEMPT} receipt ${EXPECTED_FAILED_RESUME_EXECUTE_RECEIPT_SHA256} artifact ${EXPECTED_FAILED_RESUME_EXECUTE_ARTIFACT_DIGEST}, failed permission-repaired eligibility run ${FAILED_PERMISSION_REPAIRED_ELIGIBILITY_RUN_ID} attempt ${FAILED_PERMISSION_REPAIRED_ELIGIBILITY_RUN_ATTEMPT} with zero artifacts, permission repair run ${PERMISSION_REPAIR_RUN_ID} attempt ${PERMISSION_REPAIR_RUN_ATTEMPT} receipt ${EXPECTED_PERMISSION_REPAIR_RECEIPT_SHA256} artifact ${EXPECTED_PERMISSION_REPAIR_ARTIFACT_DIGEST}, control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA}, active SHA ${EXPECTED_RELEASE_SHA}, manifest ${EXPECTED_MANIFEST_SHA256}, preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} state ${EXPECTED_PREFLIGHT_STATE_SHA256} target set ${EXPECTED_RESUME_TARGET_SET_SHA256}; refresh exactly ${EXPECTED_RESUME_TARGET_COUNT} residual targets in ${EXPECTED_RESUME_BATCH_COUNT} batches of at most 5 slugs and 10 URLs using the 5000ms offline build budget and zero per-target retry, then require exact quality-package and 100-URL public readback, with no DB, CMS, publication, indexability, queue, sitemap, llms, Search Channel, URL submission, deploy, rollback, or non-target write."
             test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
             later_resume="$(
               gh api \
@@ -747,7 +775,9 @@ jobs:
               --argjson preflight_run "$PREFLIGHT_RUN_ID" \
               --argjson current_run "$GITHUB_RUN_ID" \
               --argjson failed_execute "$FAILED_RESUME_EXECUTE_RUN_ID" \
-              '[.workflow_runs[] | select(.id > $preflight_run and .id != $current_run) | .id] == [$failed_execute]' \
+              --argjson failed_eligibility "$FAILED_PERMISSION_REPAIRED_ELIGIBILITY_RUN_ID" \
+              '([.workflow_runs[] | select(.id > $preflight_run and .id != $current_run) | .id] | sort)
+               == ([$failed_execute, $failed_eligibility] | sort)' \
               <<<"$later_resume" >/dev/null
             preflight_state="$EXPECTED_PREFLIGHT_STATE_SHA256"
             target_set="$EXPECTED_RESUME_TARGET_SET_SHA256"
