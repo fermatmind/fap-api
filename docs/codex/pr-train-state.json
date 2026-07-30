@@ -101496,7 +101496,7 @@
       "EN-PARITY-W1-MBTI-INVENTORY-01",
       "EN-PARITY-W1-MBTI-RESULT-AGENT-01"
     ],
-    "status": "ready_to_merge",
+    "status": "github_checks_pending",
     "commit_sha": "b7621a332591b2aa1a7ba0e87b49314ccc068475",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3429",
     "checks": {
@@ -101525,8 +101525,8 @@
         "evidence": "Changed paths are limited to backend/content_assets/en-content-parity/W1-mbti/result-content/**, backend/tests/Feature/ContentAssets/MbtiResultEnglishPackageTest.php, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json. No importer, runtime, CMS, DB, public personality, comparison, frontend, discoverability, search, or deploy file is changed."
       },
       "github_required_checks": {
-        "status": "passed",
-        "evidence": "Exact head d75c2dc311e243714de0fcd372e7791c631dc3f9 passed all nine required checks: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep OSS, and non-blocking SARIF upload. verify-staging-parity was skipped and is not required."
+        "status": "pending",
+        "evidence": null
       }
     },
     "failure_reason": null,
@@ -101536,7 +101536,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "production_write_execution": false,
@@ -101721,8 +101721,13 @@
         "at": "2026-07-30T22:17:59Z",
         "status": "ready_to_merge",
         "note": "Exact head 12fbc465cd27e62371afd1c35e0b3096465f4539 passed all nine required checks with staging parity skipped and had zero unresolved review threads. Before merge, origin/main advanced to 75054d5ed with an unrelated Career cache-permission repair. Integrated that exact main commit without conflict; focused validation and fresh exact-head checks are required before merge."
+      },
+      {
+        "at": "2026-07-30T22:24:00Z",
+        "status": "github_checks_pending",
+        "note": "Corrected the post-main-integration ledger transition: readiness and github_checks_green must reset before the integrated head is treated as mergeable. Exact integrated head 72402bd33da9f58518990db7685b02ba1b126f05 subsequently passed all nine required checks with staging parity skipped, but this pending-state correction head must also pass before a separate ready_to_merge transition."
       }
     ],
-    "updated_at": "2026-07-30T22:17:59Z"
+    "updated_at": "2026-07-30T22:24:00Z"
   }
 }
