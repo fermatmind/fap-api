@@ -616,15 +616,15 @@ final class BigFiveEnglishDraftInventory
             && hash_equals($workingFingerprint, $publishedFingerprint);
         $newer = $working !== null && $published !== null
             && (int) $working->revision_no > (int) $published->revision_no;
-        $payload = json_encode($workingContent ?? [], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
+        $payload = json_encode($workingSnapshot ?? [], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
         $cjk = preg_match('/[\x{3400}-\x{9FFF}\x{F900}-\x{FAFF}]/u', $payload) === 1;
-        $private = $this->containsProhibitedPrivateField($workingContent);
+        $private = $this->containsProhibitedPrivateField($workingSnapshot);
         $schemaComplete = $working !== null
             && filled(data_get($workingContent, 'title'))
             && filled(data_get($workingContent, 'summary'))
             && is_array(data_get($workingContent, 'content_sections_json'))
             && is_array(data_get($workingContent, 'faq_json'));
-        $textOnly = ! $this->containsMediaReference($workingContent);
+        $textOnly = ! $this->containsMediaReference($workingSnapshot);
         $projection = $publishedProjectionLocked && $asset !== null && (bool) $asset->is_public
             && in_array($asset->launch_state, [
                 PersonalityPublicContentAsset::LAUNCH_CONTENT_READY,
@@ -789,7 +789,7 @@ final class BigFiveEnglishDraftInventory
     private function containsMediaReference(mixed $value): bool
     {
         if (is_string($value)) {
-            return preg_match('/!\[[^\]]*\]\([^)]+\)|<(?:img|picture|source)\b/i', $value) === 1;
+            return preg_match('/!\[[^\]]*\]\s*\([^)]*\)|<(?:img|picture|source)\b/i', $value) === 1;
         }
         if (! is_array($value)) {
             return false;

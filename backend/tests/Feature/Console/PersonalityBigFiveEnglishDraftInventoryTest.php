@@ -222,6 +222,48 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertSame('registered_historical_slot_revision_missing', $row['blocker']);
     }
 
+    public function test_working_envelope_private_fields_and_complete_markdown_image_syntax_fail_closed(): void
+    {
+        $asset = $this->createAsset();
+        $published = $this->createRevision(
+            $asset,
+            1,
+            BigFiveEn52PackageCompiler::RELEASE_ID,
+            $this->completeSnapshot(),
+        );
+        $working = $this->createRevision($asset, 2, 'working-copy', [
+            'attributes' => $this->completeSnapshot('Candidate'),
+            'attempt_id' => 'private-envelope-attempt',
+            'body' => '![alt text] (https://private.invalid/image.webp)',
+        ]);
+        $asset->forceFill([
+            'working_revision_id' => $working->id,
+            'published_revision_id' => $published->id,
+        ])->saveQuietly();
+
+        $prohibited = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $row = collect($prohibited['rows'])->firstWhere('logical_identity', 'domain:openness');
+        $encoded = json_encode($prohibited, JSON_THROW_ON_ERROR);
+
+        $this->assertTrue($row['private_result_leakage']);
+        $this->assertFalse($row['claim_boundary_compliant']);
+        $this->assertFalse($row['text_only_compliant']);
+        $this->assertSame('prohibited_content', $row['recommended_disposition']);
+        $this->assertStringNotContainsString('private-envelope-attempt', $encoded);
+        $this->assertStringNotContainsString('private.invalid', $encoded);
+
+        $working->forceFill(['snapshot_json' => [
+            'attributes' => $this->completeSnapshot('Candidate'),
+            'body' => '![]()',
+        ]])->saveQuietly();
+        $emptyDestination = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $emptyDestinationRow = collect($emptyDestination['rows'])
+            ->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertFalse($emptyDestinationRow['text_only_compliant']);
+        $this->assertSame('prohibited_content', $emptyDestinationRow['recommended_disposition']);
+    }
+
     public function test_future_scheduled_asset_is_not_counted_as_a_public_projection(): void
     {
         $asset = $this->createAsset(['published_at' => now()->addDay()]);

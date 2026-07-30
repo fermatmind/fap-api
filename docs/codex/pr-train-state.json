@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "exact_head_retry_pending",
-        "evidence": "GitHub CI runs 30558811823, 30559823419, 30560724406, 30562045318, 30562910486, 30564012592, 30565108964, 30567136115, 30568401101, and 30569685735 passed all required jobs at their exact heads. The latest exact-head review added two in-scope publisher-equivalence findings; their fixes pass the 21-test inventory suite and require a fresh exact-head CI/review cycle after the complete runtime-freeze rerun."
+        "evidence": "GitHub CI runs 30558811823, 30559823419, 30560724406, 30562045318, 30562910486, 30564012592, 30565108964, 30567136115, 30568401101, 30569685735, and 30570549188 passed all required jobs at their exact heads. The latest exact-head review added two in-scope snapshot-sanitization findings; their fixes pass the 22-test inventory suite and the 395-test runtime-freeze suite and require a fresh exact-head CI/review cycle."
       }
     },
     "scope_validation": {
@@ -101293,9 +101293,14 @@
         "at": "2026-07-30T18:26:09Z",
         "status": "review_fix_local_checks_passed",
         "note": "After every required job in CI run 30569685735 passed, exact-head review identified two remaining publisher-equivalence gaps. The inventory now requires the locked EN52 package to contain exactly the 52 expected authority keys with no extra or duplicate revision, and requires every published projection to retain a non-null effective published_at timestamp. The 21-test inventory suite passes 128 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions after the local heavy-validation guard released, and scoped Pint, PHP syntax, YAML/JSON parsing, diff checks, and exact scope validation pass."
+      },
+      {
+        "at": "2026-07-30T18:38:06Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30570549188 passed, exact-head review identified two remaining snapshot-sanitization gaps. Private-field, CJK, and media scans now cover the complete working revision envelope while content completeness still derives from attributes, and Markdown image detection mirrors the compiler boundary for optional whitespace and empty destinations. Envelope-level private values, spaced Markdown images, and empty-destination images all fail closed without exposing raw values. The 22-test inventory suite passes 136 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, and diff checks pass."
       }
     ],
-    "updated_at": "2026-07-30T18:26:09Z"
+    "updated_at": "2026-07-30T18:38:06Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
