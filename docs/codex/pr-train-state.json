@@ -101171,6 +101171,89 @@
     ],
     "updated_at": "2026-07-27T09:33:00Z"
   },
+  "API-UNLOCK-01": {
+    "id": "API-UNLOCK-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/api-unlock-01-report-entitlement",
+    "title": "API-UNLOCK-01: unify attempt-scoped full-report entitlement contract",
+    "status": "ready_to_merge",
+    "depends_on": [],
+    "commit_sha": "831e2386f2cce99ac27904256b7b404916074b5c",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3423",
+    "checks": {
+      "focused_phpunit": "passed: 38 tests, 573 assertions",
+      "pint_scoped": "passed: 10 files",
+      "route_list": "passed: 24 attempt routes; no route changes",
+      "composer_validate": "passed: strict",
+      "yaml_json_diff_scope": "passed",
+      "github_required_checks": "passed on 831e2386f2cce99ac27904256b7b404916074b5c"
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-30T15:55:42Z",
+        "status": "implementation_in_progress",
+        "note": "Started from exact origin/main 2284f5d9f0528722c7a58486f86c0716e526ed5c in an isolated worktree. Fixed-order steps: routes N/A, migrations N/A, FmTokenAuth N/A, controller/service implementation in progress, scripts/CI N/A. OPS account capabilities remain fail-closed; no platform identifiers, secrets, production SKU, database/CMS write, deploy, payment, or mini-program action occurred."
+      },
+      {
+        "at": "2026-07-30T15:57:14Z",
+        "status": "local_validation_passed",
+        "note": "The versioned report_unlock.v1 contract, exact CNY 499 SKU gate, provider capability gate, MBTI-only default rollout, IQ hard-disable, canonical source normalization, legacy source compatibility, locked module filtering, and idempotent rewarded_ad grant projection passed 34 focused tests / 447 assertions. Scoped Pint, route inventory, strict Composer validation, YAML/JSON parsing, diff checks, and exact changed-path scope validation passed. No migration, production SKU/config write, secret, deploy, or platform action occurred."
+      },
+      {
+        "at": "2026-07-30T16:00:10Z",
+        "status": "github_checks_pending",
+        "note": "Created PR #3423 from commit 189ff37b2d8e5e76afbee0dc663fc78b72997c14 after exact staged-path review. Required GitHub checks are pending."
+      },
+      {
+        "at": "2026-07-30T16:11:58Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "GitHub verify-bigfive exposed two same-scope regressions: the new resolver was not registered in the exact runtime-freeze classifier, and disabled non-MBTI rollouts changed canonical report-access response shape. The fix now projects the new contract only when rollout.state=enabled and adds a single-file classifier exception. MBTI legacy and v2 checks passed on the failed head. Focused resolver/report-access tests, the exact classifier test, Big Five canonical truth fixture test, scoped Pint, syntax, YAML/JSON, and diff checks passed locally. Generated Big Five compiled artifacts created by the canonical test were restored to HEAD and are not in scope."
+      },
+      {
+        "at": "2026-07-30T16:13:06Z",
+        "status": "github_checks_pending",
+        "note": "Pushed same-scope regression fix commit 368f5d9f97128483a33e98ff1e374fd77b0aaa75. Required GitHub checks are rerunning."
+      },
+      {
+        "at": "2026-07-30T16:17:26Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "Addressed actionable Codex P2 review feedback by aggregating all grant source evidence before deriving attribution. Unified projection now stores canonical three_channel_unlock_source separately from legacy unlock_source, explicit-source precedence is deterministic (gift_purchase, self_purchase, rewarded_ad), and mixed invite/commercial history retains legacy mixed attribution. Added a regression covering multiple explicit sources plus legacy mixed history. Focused entitlement/report-access/invite/projection tests passed, including 26 tests / 310 assertions in the affected group and 9 legacy compatibility tests / 121 assertions; scoped Pint, syntax, YAML scope, and diff checks passed."
+      },
+      {
+        "at": "2026-07-30T16:27:37Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "Second GitHub run passed MBTI legacy, MBTI v2, canonical truth, content, hygiene, supply-chain, and security checks but the Big Five runtime-freeze classifier flagged the newly touched projection repair service. Added that exact service to the existing three-channel contract exception. The branch-diff runtime gate and exact exception test passed locally (2 tests / 6 assertions), plus scoped Pint and PHP syntax."
+      },
+      {
+        "at": "2026-07-30T16:30:08Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "Addressed second actionable Codex P2 review: legacy invite summaries now explicitly render rewarded_ad, self_purchase, and gift_purchase full-unlock sources instead of mislabeling them as completed invite unlocks. Added rewarded-ad label assertions and included the exact presenter path in the runtime-freeze contract exception. Attempt report-access plus staged invite tests passed (20 tests / 263 assertions), the branch-diff runtime gate passed, and scoped Pint/diff checks passed."
+      },
+      {
+        "at": "2026-07-30T16:39:25Z",
+        "status": "ready_to_merge",
+        "note": "All required checks passed on 831e2386f2cce99ac27904256b7b404916074b5c: hygiene, supply-chain, content-pack build validation, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep OSS, blocking secret scan, and non-blocking SARIF upload. Staging parity was intentionally skipped by workflow. Latest Codex re-review found no major issues."
+      }
+    ],
+    "updated_at": "2026-07-30T16:39:25Z"
+  },
   "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-01": {
     "id": "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-01",
     "repo": "fap-api",
