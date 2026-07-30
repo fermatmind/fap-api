@@ -770,6 +770,33 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertFalse($row['schema_complete']);
         $this->assertSame('schema_repair_required', $row['recommended_disposition']);
         $this->assertFalse($result['ok']);
+
+        $invalidContract = $this->completeSnapshot('Working');
+        $invalidContract['content_sections_json'][0]['kind'] = 'gallery';
+        $invalidContract['faq_json'][] = [
+            'question' => 'What does this describe?',
+            'answer' => 'A duplicate normalized question.',
+        ];
+        $working->forceFill(['snapshot_json' => $invalidContract])->saveQuietly();
+
+        $invalidContractResult = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $invalidContractRow = collect($invalidContractResult['rows'])
+            ->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertFalse($invalidContractRow['sections_complete']);
+        $this->assertFalse($invalidContractRow['faq_complete']);
+        $this->assertSame('schema_repair_required', $invalidContractRow['recommended_disposition']);
+
+        $invalidQuestion = $this->completeSnapshot('Working');
+        $invalidQuestion['faq_json'][0]['question'] = 'What does this describe';
+        $working->forceFill(['snapshot_json' => $invalidQuestion])->saveQuietly();
+
+        $invalidQuestionResult = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $invalidQuestionRow = collect($invalidQuestionResult['rows'])
+            ->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertFalse($invalidQuestionRow['faq_complete']);
+        $this->assertSame('schema_repair_required', $invalidQuestionRow['recommended_disposition']);
     }
 
     public function test_candidate_snapshot_identity_must_match_asset_and_catalog(): void

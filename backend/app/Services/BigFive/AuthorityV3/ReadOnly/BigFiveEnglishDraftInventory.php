@@ -808,7 +808,7 @@ final class BigFiveEnglishDraftInventory
         foreach ($sections as $section) {
             if (! is_array($section)
                 || ! $this->nonEmptyString($section['key'] ?? null)
-                || ! $this->nonEmptyString($section['kind'] ?? null)
+                || ($section['kind'] ?? null) !== 'rich_text'
                 || ! $this->nonEmptyString($section['heading'] ?? null)
                 || ! $this->nonEmptyString($section['body'] ?? null)) {
                 return false;
@@ -824,12 +824,23 @@ final class BigFiveEnglishDraftInventory
             return false;
         }
 
+        $seen = [];
         foreach ($faq as $item) {
             if (! is_array($item)
                 || ! $this->nonEmptyString($item['question'] ?? null)
+                || ! str_ends_with(trim((string) $item['question']), '?')
                 || ! $this->nonEmptyString($item['answer'] ?? null)) {
                 return false;
             }
+            $normalized = strtolower((string) preg_replace(
+                '/[^a-z0-9]+/i',
+                '',
+                (string) $item['question'],
+            ));
+            if ($normalized === '' || isset($seen[$normalized])) {
+                return false;
+            }
+            $seen[$normalized] = true;
         }
 
         return true;
