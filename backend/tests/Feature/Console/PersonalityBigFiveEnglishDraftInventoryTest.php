@@ -21,13 +21,15 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
 
         $result = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
 
-        $this->assertTrue($result['ok']);
+        $this->assertFalse($result['ok']);
+        $this->assertSame('BLOCKED_BIG_FIVE_ENGLISH_DRAFT_INVENTORY_ZERO_WRITE', $result['status']);
         $this->assertSame(50, $result['counts']['historical_slots']);
         $this->assertSame(
             '50 registered historical slot identities from the 52-page EN52 canonical catalog, excluding model hub and facet hub',
             $result['cohort_definition'],
         );
         $this->assertSame(0, $result['counts']['observed_slot_assets']);
+        $this->assertSame(50, $result['counts']['blocking_rows']);
         $this->assertSame(['blocked_authority_unknown' => 50], $result['disposition_totals']);
         $this->assertCount(50, $result['rows']);
         $this->assertTrue($result['database_snapshot_unchanged']);
@@ -138,7 +140,8 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertFalse($row['draft_equals_published']);
         $this->assertTrue($row['draft_content_equals_published']);
         $this->assertSame(1, $result['counts']['independent_working_revisions']);
-        $this->assertSame('duplicate_of_published', $row['recommended_disposition']);
+        $this->assertSame('blocked_authority_unknown', $row['recommended_disposition']);
+        $this->assertSame('registered_historical_slot_revision_missing', $row['blocker']);
     }
 
     public function test_future_scheduled_asset_is_not_counted_as_a_public_projection(): void
@@ -202,7 +205,90 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $row = collect($result['rows'])->firstWhere('logical_identity', 'domain:openness');
 
         $this->assertTrue($row['draft_newer_than_published']);
-        $this->assertSame('verify_only_no_action', $row['recommended_disposition']);
+        $this->assertSame('blocked_authority_unknown', $row['recommended_disposition']);
+        $this->assertSame('registered_historical_slot_revision_missing', $row['blocker']);
+    }
+
+    public function test_alias_count_excludes_unknown_authority_drift(): void
+    {
+        $this->createAsset([
+            'entity_type' => PersonalityPublicContentAsset::ENTITY_POLARITY,
+            'entity_key' => 'high-openness',
+            'slug' => 'big-five/high-openness',
+            'canonical_json' => ['path' => '/en/personality/big-five/high-openness'],
+        ]);
+        $this->createAsset([
+            'canonical_json' => ['path' => '/en/personality/big-five/openness-drifted'],
+        ]);
+
+        $result = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+
+        $this->assertSame(1, $result['counts']['redirect_only_alias_rows']);
+        $this->assertSame(1, $result['counts']['unknown_authority_rows']);
+        $this->assertFalse($result['ok']);
+    }
+
+    public function test_missing_or_ambiguous_registered_historical_slot_fails_closed(): void
+    {
+        $asset = $this->createAsset();
+        $current = $this->createRevision($asset, 3, 'current-release', $this->completeSnapshot());
+        $asset->forceFill([
+            'working_revision_id' => $current->id,
+            'published_revision_id' => $current->id,
+        ])->saveQuietly();
+
+        $missing = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $missingRow = collect($missing['rows'])->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertSame('missing', $missingRow['historical_slot_resolution']);
+        $this->assertSame('blocked_authority_unknown', $missingRow['recommended_disposition']);
+        $this->assertSame('registered_historical_slot_revision_missing', $missingRow['blocker']);
+        $this->assertFalse($missing['ok']);
+
+        $this->createRevision($asset, 1, 'big5-authority-v2-domains-08', $this->completeSnapshot('Historical one'));
+        $this->createRevision($asset, 2, 'big5-authority-v2-domains-09', $this->completeSnapshot('Historical two'));
+
+        $ambiguous = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $ambiguousRow = collect($ambiguous['rows'])->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertSame('ambiguous', $ambiguousRow['historical_slot_resolution']);
+        $this->assertSame('blocked_authority_unknown', $ambiguousRow['recommended_disposition']);
+        $this->assertSame('registered_historical_slot_revision_ambiguous', $ambiguousRow['blocker']);
+        $this->assertFalse($ambiguous['ok']);
+    }
+
+    public function test_historical_snapshot_leakage_is_sanitized_and_blocks_stale_classification(): void
+    {
+        $asset = $this->createAsset();
+        $historical = $this->createRevision(
+            $asset,
+            1,
+            'big5-authority-v2-domains-08',
+            [
+                ...$this->completeSnapshot('历史'),
+                'attempt_id' => 'private-attempt-must-not-appear',
+                'body' => '![private](https://private.invalid/image.png)',
+            ],
+        );
+        $current = $this->createRevision($asset, 2, 'current-release', $this->completeSnapshot());
+        $asset->forceFill([
+            'working_revision_id' => $current->id,
+            'published_revision_id' => $current->id,
+        ])->saveQuietly();
+
+        $result = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $row = collect($result['rows'])->firstWhere('logical_identity', 'domain:openness');
+        $encoded = json_encode($result, JSON_THROW_ON_ERROR);
+
+        $this->assertSame($historical->id, $row['historical_draft_revision_id']);
+        $this->assertTrue($row['historical_private_result_leakage']);
+        $this->assertTrue($row['historical_media_reference']);
+        $this->assertTrue($row['historical_chinese_leakage']);
+        $this->assertSame('prohibited_content', $row['recommended_disposition']);
+        $this->assertSame('historical_draft_prohibited_content', $row['blocker']);
+        $this->assertFalse($result['ok']);
+        $this->assertStringNotContainsString('private-attempt-must-not-appear', $encoded);
+        $this->assertStringNotContainsString('private.invalid', $encoded);
     }
 
     /** @param array<string,mixed> $overrides */

@@ -50,7 +50,16 @@ final class BigFiveEnglishDraftInventory
                 && $entry['entity_key'] === $asset->entity_key
                 && $entry['path'] === (string) data_get($asset->canonical_json, 'path'),
         ))->values();
-        $aliases = $assets->reject(fn (PersonalityPublicContentAsset $asset): bool => $canonical->contains('id', $asset->id));
+        $redirectOnlyAliases = BigFiveCanonicalRouteCatalog::redirectOnlyAliasTargets('en');
+        $aliases = $assets->filter(fn (PersonalityPublicContentAsset $asset): bool => (
+            isset($redirectOnlyAliases[$asset->entity_key])
+            && $asset->entity_type === PersonalityPublicContentAsset::ENTITY_POLARITY
+            && (string) $asset->slug === 'big-five/'.$asset->entity_key
+            && (string) data_get($asset->canonical_json, 'path') === '/en/personality/big-five/'.$asset->entity_key
+        ))->values();
+        $unknownAuthorityRows = $assets->reject(fn (PersonalityPublicContentAsset $asset): bool => (
+            $canonical->contains('id', $asset->id) || $aliases->contains('id', $asset->id)
+        ))->values();
 
         $rows = $expected->map(function (array $entry) use ($canonical): array {
             /** @var PersonalityPublicContentAsset|null $asset */
@@ -87,21 +96,47 @@ final class BigFiveEnglishDraftInventory
                 ->sortBy('revision_no')
                 ->values();
             if ($registered->count() !== 1) {
-                return $row + [
+                $historicalBlocker = $registered->isEmpty()
+                    ? 'registered_historical_slot_revision_missing'
+                    : 'registered_historical_slot_revision_ambiguous';
+                $mayBlockHistoricalLineage = in_array($row['recommended_disposition'], [
+                    'duplicate_of_published',
+                    'verify_only_no_action',
+                    'stale_working_revision',
+                    'valid_unpublished_candidate',
+                ], true);
+
+                return array_replace($row, [
                     'historical_draft_revision_id' => null,
                     'historical_draft_revision_status' => null,
                     'historical_draft_fingerprint_sha256' => null,
                     'historical_draft_created_at' => null,
                     'historical_draft_updated_at' => null,
                     'historical_draft_pointer_active' => false,
+                    'historical_slot_resolution' => $registered->isEmpty() ? 'missing' : 'ambiguous',
                     'historical_source_package' => null,
                     'historical_source_hash' => null,
                     'historical_authority_package_sha256' => null,
-                ];
+                    'historical_private_result_leakage' => null,
+                    'historical_media_reference' => null,
+                    'historical_chinese_leakage' => null,
+                    'recommended_disposition' => $mayBlockHistoricalLineage
+                        ? 'blocked_authority_unknown'
+                        : $row['recommended_disposition'],
+                    'blocker' => $row['blocker'] ?? $historicalBlocker,
+                ]);
             }
             /** @var PersonalityPublicContentAssetRevision $revision */
             $revision = $registered->first();
             $historicalFingerprint = $this->fingerprint($revision->snapshot_json);
+            $historicalPayload = json_encode(
+                $revision->snapshot_json ?? [],
+                JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE,
+            );
+            $historicalPrivate = $this->containsProhibitedPrivateField($revision->snapshot_json);
+            $historicalMedia = $this->containsMediaReference($revision->snapshot_json);
+            $historicalCjk = preg_match('/[\x{3400}-\x{9FFF}\x{F900}-\x{FAFF}]/u', $historicalPayload) === 1;
+            $historicalProhibited = $historicalPrivate || $historicalMedia || $historicalCjk;
             $mayClassifyHistoricalLineage = in_array($row['recommended_disposition'], [
                 'duplicate_of_published',
                 'verify_only_no_action',
@@ -115,15 +150,21 @@ final class BigFiveEnglishDraftInventory
                 'historical_draft_created_at' => $revision->created_at?->toAtomString(),
                 'historical_draft_updated_at' => $revision->updated_at?->toAtomString(),
                 'historical_draft_pointer_active' => false,
+                'historical_slot_resolution' => 'resolved',
                 'historical_draft_equals_current_published' => $row['published_revision_fingerprint_sha256'] !== null
                     && hash_equals($row['published_revision_fingerprint_sha256'], $historicalFingerprint),
                 'historical_source_package' => (string) $revision->source_package,
                 'historical_source_hash' => (string) $revision->source_hash,
                 'historical_authority_package_sha256' => (string) $revision->authority_package_sha256,
+                'historical_private_result_leakage' => $historicalPrivate,
+                'historical_media_reference' => $historicalMedia,
+                'historical_chinese_leakage' => $historicalCjk,
                 'recommended_disposition' => $mayClassifyHistoricalLineage
-                    ? 'stale_working_revision'
+                    ? ($historicalProhibited ? 'prohibited_content' : 'stale_working_revision')
                     : $row['recommended_disposition'],
-                'blocker' => $mayClassifyHistoricalLineage ? null : $row['blocker'],
+                'blocker' => $mayClassifyHistoricalLineage
+                    ? ($historicalProhibited ? 'historical_draft_prohibited_content' : null)
+                    : $row['blocker'],
             ]);
         }, $rows);
 
@@ -135,10 +176,22 @@ final class BigFiveEnglishDraftInventory
         $dispositions = array_count_values(array_column($rows, 'recommended_disposition'));
         ksort($dispositions);
 
+        $blockingRows = collect($rows)->filter(fn (array $row): bool => (
+            ! in_array($row['recommended_disposition'], [
+                'verify_only_no_action',
+                'duplicate_of_published',
+                'stale_working_revision',
+                'valid_unpublished_candidate',
+            ], true)
+        ))->count();
+        $ok = $blockingRows === 0 && $unknownAuthorityRows->isEmpty();
+
         return [
             'schema_version' => self::SCHEMA_VERSION,
-            'ok' => true,
-            'status' => 'PASS_BIG_FIVE_ENGLISH_DRAFT_INVENTORY_ZERO_WRITE',
+            'ok' => $ok,
+            'status' => $ok
+                ? 'PASS_BIG_FIVE_ENGLISH_DRAFT_INVENTORY_ZERO_WRITE'
+                : 'BLOCKED_BIG_FIVE_ENGLISH_DRAFT_INVENTORY_ZERO_WRITE',
             'mode' => 'database_read_only_zero_write',
             'authority' => 'personality_public_content_assets_and_immutable_revisions',
             'locale' => 'en',
@@ -154,6 +207,8 @@ final class BigFiveEnglishDraftInventory
                 'published_revisions' => collect($rows)->whereNotNull('published_revision_id')->count(),
                 'public_projections' => collect($rows)->where('published_projection_exists', true)->count(),
                 'redirect_only_alias_rows' => $aliases->count(),
+                'unknown_authority_rows' => $unknownAuthorityRows->count(),
+                'blocking_rows' => $blockingRows,
             ],
             'disposition_totals' => $dispositions,
             'database_snapshot_before_sha256' => $before,

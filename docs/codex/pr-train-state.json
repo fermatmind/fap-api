@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "exact_head_retry_pending",
-        "evidence": "GitHub CI run 30558811823 passed all jobs at head 1b095a9309aa82a973abb14ce6823499de033cca. Exact-head Codex review then identified seven in-scope inventory correctness findings; the fixes pass 8 focused tests / 32 assertions and require a fresh exact-head CI/review cycle."
+        "evidence": "GitHub CI runs 30558811823 and 30559823419 passed all jobs at their exact heads. The latest exact-head review added three in-scope fail-closed findings; their fixes now pass 11 focused tests / 56 assertions and require a fresh exact-head CI/review cycle."
       }
     },
     "scope_validation": {
@@ -101248,8 +101248,13 @@
         "at": "2026-07-30T16:04:14Z",
         "status": "review_fix_local_checks_passed",
         "note": "Inspected all seven unresolved Codex review threads. Same-scope fixes now enforce org-0 authority, preserve higher-priority current-authority failures, separate revision-pointer equality from content equivalence, honor future publish scheduling, bind historical slots by registered Authority V2 source-package lineage, order revisions by revision_no, and report the 50-slot cohort accurately. Focused tests pass 8 tests / 32 assertions; scoped Pint, PHP syntax, JSON/YAML parsing, and diff checks pass."
+      },
+      {
+        "at": "2026-07-30T16:16:05Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Inspected the three new exact-head review findings after CI run 30559823419 passed. The inventory now counts only the exact registered redirect identities, reports unexpected org-0 rows separately as authority drift, fails closed for missing or ambiguous registered historical slots, and validates historical snapshots for private fields, media, and CJK before allowing stale classification. Focused tests pass 11 tests / 56 assertions; all 50 production-evidence source packages match the registered lineage classifier; scoped Pint and parsing/diff checks pass."
       }
     ],
-    "updated_at": "2026-07-30T16:04:14Z"
+    "updated_at": "2026-07-30T16:16:05Z"
   }
 }
