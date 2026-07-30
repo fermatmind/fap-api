@@ -619,6 +619,8 @@ final class BigFiveEnglishDraftInventory
             && hash_equals($workingFingerprint, $publishedFingerprint);
         $newer = $working !== null && $published !== null
             && (int) $working->revision_no > (int) $published->revision_no;
+        $independentWorkingCandidate = $working !== null
+            && ($published === null || (! $pointerEqual && $newer));
         $payload = json_encode($workingSnapshot ?? [], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
         $cjk = $this->containsCjk($payload);
         $private = $this->containsProhibitedPrivateField($workingSnapshot);
@@ -626,14 +628,18 @@ final class BigFiveEnglishDraftInventory
             && trim(data_get($workingContent, 'title')) !== '';
         $summaryComplete = is_string(data_get($workingContent, 'summary'))
             && trim(data_get($workingContent, 'summary')) !== '';
+        $sections = data_get($workingContent, 'content_sections_json');
+        $faq = data_get($workingContent, 'faq_json');
+        $sectionsComplete = is_array($sections)
+            && (! $independentWorkingCandidate || $this->sectionsComplete($sections));
+        $faqComplete = is_array($faq)
+            && (! $independentWorkingCandidate || $this->faqComplete($faq));
         $schemaComplete = $working !== null
             && $titleComplete
             && $summaryComplete
-            && is_array(data_get($workingContent, 'content_sections_json'))
-            && is_array(data_get($workingContent, 'faq_json'));
+            && $sectionsComplete
+            && $faqComplete;
         $textOnly = ! $this->containsMediaReference($workingSnapshot);
-        $independentWorkingCandidate = $working !== null
-            && ($published === null || (! $pointerEqual && $newer));
         $candidateWorkflowDraft = ! $independentWorkingCandidate
             || (string) $working->workflow_state === PersonalityPublicContentAssetRevision::STATE_DRAFT;
         $candidateIdentityMatches = ! $independentWorkingCandidate
@@ -693,8 +699,8 @@ final class BigFiveEnglishDraftInventory
             'summary_complete' => $summaryComplete,
             'candidate_workflow_draft' => $candidateWorkflowDraft,
             'candidate_identity_matches' => $candidateIdentityMatches,
-            'sections_complete' => is_array(data_get($workingContent, 'content_sections_json')),
-            'faq_complete' => is_array(data_get($workingContent, 'faq_json')),
+            'sections_complete' => $sectionsComplete,
+            'faq_complete' => $faqComplete,
             'text_only_compliant' => $textOnly,
             'claim_boundary_compliant' => ! $private,
             'duplicate_template_risk' => $contentEqual ? 'published_equivalent' : 'not_established',
@@ -749,6 +755,47 @@ final class BigFiveEnglishDraftInventory
         }
 
         return true;
+    }
+
+    private function sectionsComplete(mixed $sections): bool
+    {
+        if (! is_array($sections) || $sections === [] || ! array_is_list($sections)) {
+            return false;
+        }
+
+        foreach ($sections as $section) {
+            if (! is_array($section)
+                || ! $this->nonEmptyString($section['key'] ?? null)
+                || ! $this->nonEmptyString($section['kind'] ?? null)
+                || ! $this->nonEmptyString($section['heading'] ?? null)
+                || ! $this->nonEmptyString($section['body'] ?? null)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function faqComplete(mixed $faq): bool
+    {
+        if (! is_array($faq) || $faq === [] || ! array_is_list($faq)) {
+            return false;
+        }
+
+        foreach ($faq as $item) {
+            if (! is_array($item)
+                || ! $this->nonEmptyString($item['question'] ?? null)
+                || ! $this->nonEmptyString($item['answer'] ?? null)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function nonEmptyString(mixed $value): bool
+    {
+        return is_string($value) && trim($value) !== '';
     }
 
     /** @param array<string,mixed> $expected */

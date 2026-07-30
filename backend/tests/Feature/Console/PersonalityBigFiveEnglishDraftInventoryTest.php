@@ -705,6 +705,27 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertFalse($result['ok']);
     }
 
+    public function test_candidate_sections_and_faq_must_be_non_empty_structured_lists(): void
+    {
+        $asset = $this->createAsset();
+        $working = $this->createRevision($asset, 1, 'working-one', [
+            'title' => 'Working',
+            'summary' => 'A dimensional summary.',
+            'content_sections_json' => [],
+            'faq_json' => [],
+        ]);
+        $asset->forceFill(['working_revision_id' => $working->id])->saveQuietly();
+
+        $result = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $row = collect($result['rows'])->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertFalse($row['sections_complete']);
+        $this->assertFalse($row['faq_complete']);
+        $this->assertFalse($row['schema_complete']);
+        $this->assertSame('schema_repair_required', $row['recommended_disposition']);
+        $this->assertFalse($result['ok']);
+    }
+
     public function test_prohibited_history_blocks_without_erasing_current_candidate_classification(): void
     {
         $asset = $this->createAsset();
@@ -1049,8 +1070,16 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         return [
             'title' => $title,
             'summary' => 'A dimensional summary.',
-            'content_sections_json' => [],
-            'faq_json' => [],
+            'content_sections_json' => [[
+                'key' => 'section-01-overview',
+                'kind' => 'rich_text',
+                'heading' => 'Overview',
+                'body' => 'A complete English section.',
+            ]],
+            'faq_json' => [[
+                'question' => 'What does this describe?',
+                'answer' => 'It describes a dimensional tendency.',
+            ]],
         ];
     }
 
