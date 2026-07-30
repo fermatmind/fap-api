@@ -340,6 +340,12 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
             'expected_recovery_readback_sha256:',
             'expected_bad_href_url_count:',
             'expected_low_module_url_count:',
+            'failed_preflight_run_id:',
+            'failed_preflight_run_attempt:',
+            'expected_failed_preflight_receipt_sha256:',
+            'diagnostic_run_id:',
+            'diagnostic_run_attempt:',
+            'expected_diagnostic_receipt_sha256:',
             'preflight_run_id:',
             'preflight_run_attempt:',
             'expected_preflight_state_sha256:',
@@ -350,9 +356,23 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
             'Career Search Entry Batch Cache Refresh Recovery Preflight',
             'career-search-entry-batch-cache-refresh-recovery-preflight-${RECOVERY_RUN_ID}-${RECOVERY_RUN_ATTEMPT}',
             '.status == "PASS_RECOVERY_RESUME_REQUIRED"',
+            'career-search-entry-batch-cache-refresh-resume-preflight-${FAILED_PREFLIGHT_RUN_ID}-${FAILED_PREFLIGHT_RUN_ATTEMPT}',
+            '.failure_category == "PUBLIC_SNAPSHOT_INCOMPLETE"',
+            'Career Search Entry Batch Cache Refresh Resume Preflight Diagnostic',
+            'career-search-entry-batch-cache-refresh-resume-preflight-diagnostic-${DIAGNOSTIC_RUN_ID}-${DIAGNOSTIC_RUN_ATTEMPT}',
+            '.status == "PASS_DIAGNOSTIC_COMPLETE_STATE_DRIFT"',
+            '.observed_payload_set_sha256 == $payload_set',
+            '.recovery_baseline_match == false',
+            '[.workflow_runs[] | select(.id > $diagnostic_run)] | length == 0',
+            '[.workflow_runs[] | select(.id > $diagnostic_run and .id != $current_run)] | length == 0',
             'career-search-entry-batch-cache-refresh-resume-preflight-${PREFLIGHT_RUN_ID}-${PREFLIGHT_RUN_ATTEMPT}',
             '.status == "PASS_PREFLIGHT_RESUME_REQUIRED"',
-            'diagnose and plan only, with zero cache write, retry, rollback, deploy, or Search Channel operation',
+            'diagnostic-rebased cache-only resume preflight',
+            'rebase, diagnose, and plan only, with zero cache write, retry, rollback, deploy, or Search Channel operation',
+            'baseline_source: "diagnostic"',
+            'diagnostic_payload_set_sha256: $diagnostic_payload_set',
+            'EXPECTED_BASELINE_PAYLOAD_SET_SHA256',
+            'diagnostic-rebased cache-only resume execute',
             'refresh exactly ${target_count} residual targets in ${batch_count} batches of at most 5 slugs and 10 URLs',
             'using the 5000ms offline build budget and zero per-target retry',
             'group: deploy-${{ github.repository }}-production',
@@ -385,6 +405,7 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
             'sleep(2)',
             'CURLOPT_CONNECTTIMEOUT => 5',
             'CURLOPT_TIMEOUT => 30',
+            'EXPECTED_BASELINE_PAYLOAD_SET_SHA256',
             'write_state',
             'cache_refresh_target_count',
             'completed_batch_count',
@@ -406,6 +427,7 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
         $this->assertStringNotContainsString('warmJobDetailPayload(', $runner);
         $this->assertStringNotContainsString('forgetJobDetailPayload', $runner);
         $this->assertStringNotContainsString('dispatchJobDetailWarm', $runner);
+        $this->assertStringNotContainsString('EXPECTED_RECOVERY_PAYLOAD_SET_SHA256', $workflow.$runner);
         $this->assertStringNotContainsString('php artisan migrate', $workflow.$runner);
         $this->assertStringNotContainsString('queue:restart', $workflow.$runner);
         $this->assertStringNotContainsString('deploy:symlink', $workflow.$runner);
@@ -443,6 +465,7 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
             'inspect only safe aggregate 100-URL snapshot state',
             'zero cache write, preflight retry, execute, rollback, deploy, or Search Channel operation',
             'CAREER_CACHE_RESUME_MODE=diagnose',
+            'EXPECTED_BASELINE_PAYLOAD_SET_SHA256',
             'group: deploy-${{ github.repository }}-production',
             'secrets.PRODUCTION_DEPLOY_HOST',
             'secrets.PRODUCTION_DEPLOY_PATH',
