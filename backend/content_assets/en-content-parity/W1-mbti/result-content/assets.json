@@ -9,7 +9,12 @@
     "mode": "backend_authoritative_family_template",
     "allowed_slots": [
       "type_code",
-      "identity_variant"
+      "identity_variant",
+      "axis_label",
+      "side_label",
+      "opposite_side_label",
+      "delta",
+      "neighbor_type"
     ],
     "runtime_import_slot_values_stored_in_this_package": false,
     "w9_synthetic_slot_values_stored_in_pdf_fixture_mapping": true,
@@ -25,10 +30,27 @@
           "T": "Turbulent"
         }
       },
-      "substitution": "exact literal replacement of every registered {{slot_name}} token",
-      "unresolved_token_policy": "reject dry-run and import",
+      "substitution": "exact literal replacement of import-stage type_code and identity_variant tokens",
+      "unresolved_token_policy": "reject every unresolved token except the five registered result-runtime slots; preserve those slots for MbtiResultPersonalizationService",
       "import_without_renderer_allowed": false,
       "runtime_template_rendering_added_by_this_package": false
+    },
+    "result_runtime_binding": {
+      "owner": "App\\Services\\Mbti\\MbtiResultPersonalizationService",
+      "existing_runtime_contract": true,
+      "sections": [
+        "traits.close_call_axes",
+        "traits.adjacent_type_contrast"
+      ],
+      "slot_sources": {
+        "axis_label": "close_call_axes[0].axis_label with existing primary_axis.axis_label fallback",
+        "side_label": "close_call_axes[0].side_label with existing primary_axis.side_label fallback",
+        "opposite_side_label": "close_call_axes[0].opposite_side_label with existing primary_axis.opposite_side_label fallback",
+        "delta": "close_call_axes[0].delta",
+        "neighbor_type": "neighbor_type_keys[0]"
+      },
+      "runtime_unresolved_token_policy": "reject result and PDF projection",
+      "cms_or_import_time_result_inference_allowed": false
     },
     "mobile_desktop_authority": "same_fields",
     "claim_boundary": "MBTI preference patterns are structured references and working hypotheses, not diagnoses, fixed identities, ability judgments, or outcome predictions.",
@@ -170,15 +192,15 @@
       "entitlement_level": "free_preview_or_full_by_access_policy",
       "content": {
         "title": "Understanding a close-call preference",
-        "summary_template": "A close call on one preference axis suggests that both sides may be available and context may affect which one is easier to see.",
-        "body_template": [
-          "A near-boundary result does not make the assessment invalid and does not require you to choose a permanent side. It means the current answers produced a smaller separation on this axis.",
-          "Look for the process behind the behavior: where attention goes first, what information feels persuasive, how a decision is made, or how structure is used. Similar outward actions can come from different preferences."
-        ],
-        "reflection_prompts": [
-          "Which situations pull you toward the other side of this axis?",
-          "What remains consistent even when your visible behavior changes?"
-        ]
+      "summary_template": "For {{type_code}}, the closest call is {{axis_label}}: the result still leans toward {{side_label}}, with a {{delta}}-point margin.",
+      "body_template": [
+        "A near-boundary result does not make the assessment invalid and does not require you to choose a permanent side. It means the current answers produced a smaller separation on {{axis_label}}.",
+        "In familiar situations you may begin with {{side_label}}, while pressure, misunderstanding, or a role change can make {{opposite_side_label}} easier to see. Similar outward actions can still come from different preference processes."
+      ],
+      "reflection_prompts": [
+        "Which situations make {{opposite_side_label}} easier to see?",
+        "What remains consistent even when your visible behavior changes?"
+      ]
       },
       "mobile_desktop_consumption": "same_authority_fields"
     },
@@ -191,15 +213,15 @@
       "entitlement_level": "free_preview_or_full_by_access_policy",
       "content": {
         "title": "Why a nearby type may also feel familiar",
-        "summary_template": "A nearby MBTI pattern may resemble {{type_code}} because the two patterns share several preferences.",
-        "body_template": [
-          "The useful contrast is the axis on which they differ. Notice the sequence you tend to use before a decision, not just a single habit or role requirement.",
-          "Familiarity with a nearby type can reflect a close score, learned skill, current environment, or broad wording. It does not automatically replace the current result."
-        ],
-        "reflection_prompts": [
-          "Which different-axis description better explains your first impulse?",
-          "Which behavior is learned for a role rather than naturally preferred?"
-        ]
+      "summary_template": "The nearby pattern {{neighbor_type}} may resemble {{type_code}} because the two patterns share several preferences.",
+      "body_template": [
+        "The useful contrast is {{axis_label}}: {{type_code}} still returns to {{side_label}}, while {{neighbor_type}} represents the neighboring pattern reached by crossing toward {{opposite_side_label}}. Notice the sequence used before a decision, not just a single habit or role requirement.",
+        "Familiarity with a nearby type can reflect a close score, learned skill, current environment, or broad wording. It does not automatically replace the current result."
+      ],
+      "reflection_prompts": [
+        "Does {{side_label}} or {{opposite_side_label}} better explain your first impulse on {{axis_label}}?",
+        "Which behavior is learned for a role rather than naturally preferred?"
+      ]
       },
       "mobile_desktop_consumption": "same_authority_fields"
     },

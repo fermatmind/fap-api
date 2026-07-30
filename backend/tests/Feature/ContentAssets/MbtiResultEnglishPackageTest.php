@@ -16,7 +16,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
 
     private const INVENTORY_SHA = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
-    private const PACKAGE_SHA = '53fe11db0ccd9a9216de4b91d33a8e5067231c1c2a9df523267fd9f3e8c3f1f5';
+    private const PACKAGE_SHA = 'bd509f2671b7a13916ebc1d2565c3eb6060bd7caf788998be6ce3326becf45b1';
 
     private const EXPECTED_CANDIDATE_ROW_IDS = [
         'W1-RESULT-CORE-05-OFFER-CTA',
@@ -200,6 +200,11 @@ final class MbtiResultEnglishPackageTest extends TestCase
         self::assertSame([
             'type_code' => 'INTJ-A',
             'identity_variant' => 'Assertive',
+            'axis_label' => 'Judging–Perceiving (J/P)',
+            'side_label' => 'Judging (J)',
+            'opposite_side_label' => 'Perceiving (P)',
+            'delta' => '6',
+            'neighbor_type' => 'INTP',
         ], $fixtureSlots);
 
         self::assertSame(21, $package['asset_count']);
@@ -208,7 +213,15 @@ final class MbtiResultEnglishPackageTest extends TestCase
         self::assertFalse($package['template_contract']['runtime_import_slot_values_stored_in_this_package']);
         self::assertTrue($package['template_contract']['w9_synthetic_slot_values_stored_in_pdf_fixture_mapping']);
         self::assertSame('same_fields', $package['template_contract']['mobile_desktop_authority']);
-        self::assertSame(['type_code', 'identity_variant'], $package['template_contract']['allowed_slots']);
+        self::assertSame([
+            'type_code',
+            'identity_variant',
+            'axis_label',
+            'side_label',
+            'opposite_side_label',
+            'delta',
+            'neighbor_type',
+        ], $package['template_contract']['allowed_slots']);
         self::assertSame(
             'App\\Services\\ContentImport\\MbtiResultEnglishPackageImporter',
             $package['template_contract']['renderer_binding']['owner'],
@@ -218,11 +231,28 @@ final class MbtiResultEnglishPackageTest extends TestCase
             $package['template_contract']['renderer_binding']['implementation_pr'],
         );
         self::assertSame(
-            'reject dry-run and import',
+            'reject every unresolved token except the five registered result-runtime slots; preserve those slots for MbtiResultPersonalizationService',
             $package['template_contract']['renderer_binding']['unresolved_token_policy'],
         );
         self::assertFalse($package['template_contract']['renderer_binding']['import_without_renderer_allowed']);
         self::assertFalse($package['template_contract']['renderer_binding']['runtime_template_rendering_added_by_this_package']);
+        self::assertSame(
+            'App\\Services\\Mbti\\MbtiResultPersonalizationService',
+            $package['template_contract']['result_runtime_binding']['owner'],
+        );
+        self::assertTrue($package['template_contract']['result_runtime_binding']['existing_runtime_contract']);
+        self::assertSame([
+            'traits.close_call_axes',
+            'traits.adjacent_type_contrast',
+        ], $package['template_contract']['result_runtime_binding']['sections']);
+        self::assertSame([
+            'axis_label',
+            'side_label',
+            'opposite_side_label',
+            'delta',
+            'neighbor_type',
+        ], array_keys($package['template_contract']['result_runtime_binding']['slot_sources']));
+        self::assertFalse($package['template_contract']['result_runtime_binding']['cms_or_import_time_result_inference_allowed']);
         $sectionProjection = $package['template_contract']['canonical_projection_contract']['sections'];
         self::assertSame('inactive_or_draft_authority_only', $sectionProjection['storage_visibility']);
         self::assertFalse($sectionProjection['public_share_projection_allowed']);
@@ -290,6 +320,31 @@ final class MbtiResultEnglishPackageTest extends TestCase
                 '{{',
                 json_encode($renderedContent, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE),
             );
+            if (($asset['section_key'] ?? null) === 'traits.close_call_axes') {
+                self::assertStringContainsString('{{axis_label}}', $readerCopy);
+                self::assertStringContainsString('{{delta}}', $readerCopy);
+                self::assertStringContainsString('{{side_label}}', $readerCopy);
+                self::assertStringContainsString('{{opposite_side_label}}', $readerCopy);
+                $renderedReaderCopy = json_encode(
+                    $renderedContent,
+                    JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+                );
+                self::assertStringContainsString('Judging–Perceiving (J/P)', $renderedReaderCopy);
+                self::assertStringContainsString('6-point margin', $renderedReaderCopy);
+                self::assertStringContainsString('Judging (J)', $renderedReaderCopy);
+                self::assertStringContainsString('Perceiving (P)', $renderedReaderCopy);
+            }
+            if (($asset['section_key'] ?? null) === 'traits.adjacent_type_contrast') {
+                self::assertStringContainsString('{{neighbor_type}}', $readerCopy);
+                self::assertStringContainsString('{{axis_label}}', $readerCopy);
+                $renderedReaderCopy = json_encode(
+                    $renderedContent,
+                    JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+                );
+                self::assertStringContainsString('INTP', $renderedReaderCopy);
+                self::assertStringContainsString('INTJ-A', $renderedReaderCopy);
+                self::assertStringContainsString('Judging–Perceiving (J/P)', $renderedReaderCopy);
+            }
 
             if ($asset['asset_kind'] === 'canonical_section_family') {
                 self::assertArrayHasKey('title', $asset['content']);
@@ -535,6 +590,11 @@ final class MbtiResultEnglishPackageTest extends TestCase
             'source' => 'package-frozen private-safe non-user fixture',
             'type_code' => 'INTJ-A',
             'identity_variant' => 'Assertive',
+            'axis_label' => 'Judging–Perceiving (J/P)',
+            'side_label' => 'Judging (J)',
+            'opposite_side_label' => 'Perceiving (P)',
+            'delta' => '6',
+            'neighbor_type' => 'INTP',
         ], $mapping['synthetic_slot_values']);
         self::assertSame(
             'canonical_section_to_pdf_group_card_v1',

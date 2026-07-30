@@ -15,17 +15,17 @@
   "producer_target_count": 22,
   "files": [
     {"path":"README.md","sha256":"dba1811fd0018b59459fac2b12187e77029503d46a165f8a622d4caff5e35ebd"},
-    {"path":"assets.json","sha256":"7cbebe62c02ea56e6b2fca9992225f416ff87d1cbb5310067303479b82fbd890"},
+    {"path":"assets.json","sha256":"5167c23d212ddeafaf136aa13828e522636786b756022ab3d706b0ff7f52c141"},
     {"path":"inventory_reconciliation.json","sha256":"20fb311db62ef5a5abf227d704dc9a006091574cfedcc49b517dcc701f350e29"},
     {"path":"translation_map.json","sha256":"a4834461779215c1606532b5bacd36b0b270ba565886890fa2f8e9b8e76d8d42"},
     {"path":"entitlement_matrix.json","sha256":"b893d8b0856d2e6b3b41108ea078e6222c0bc97229d06c5c1d8561ef82e5ad08"},
-    {"path":"pdf_reader_fixture_mapping.json","sha256":"033714b59b230cd542320ac23a1fdac73febb14baa74d0fae695b06635bb4650"},
+    {"path":"pdf_reader_fixture_mapping.json","sha256":"8ee9364ef9e7da68b13cbe39bb9bfa2564ac5746c06cf7475ae881e2bcfaafa7"},
     {"path":"claim_boundary_report.json","sha256":"b4d28cb040d2e11b21352d2f16cf34445903ee24aced3366b0b09669625c84fc"},
-    {"path":"editorial_review.json","sha256":"9b0754336a285d08c78f8120e7357e94f36f8f9247a3c8bc48f56531dc99ce06"},
+    {"path":"editorial_review.json","sha256":"37b817923a6a507456f8f9c4bd91fd69453f9f7f8655c30a790b7c21bbf29e47"},
     {"path":"approval_envelope.json","sha256":"31fe907963817d310cca7ff0f0f7c0b1456a773ed4c546c2a1ef6528128c79d5"}
   ],
   "package_sha256_algorithm": "sha256 of the UTF-8 concatenation of each manifest file path, NUL, lowercase file SHA-256, and newline in files[] order; approval_envelope.json is mandatory and field-for-field binds the manifest authorization metadata",
-  "package_sha256": "53fe11db0ccd9a9216de4b91d33a8e5067231c1c2a9df523267fd9f3e8c3f1f5",
+  "package_sha256": "bd509f2671b7a13916ebc1d2565c3eb6060bd7caf788998be6ce3326becf45b1",
   "quality_gates": {
     "exact_inventory_identity": "pass",
     "exact_46_row_reconciliation": "pass",
