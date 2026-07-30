@@ -101497,7 +101497,7 @@
       "EN-PARITY-W1-MBTI-RESULT-AGENT-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "b6150f61416d73b604f3d07b285b509a91802716",
+    "commit_sha": "4491efe11785e1d2e84dbb098156a6a91463245c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3429",
     "checks": {
       "authorization": {
@@ -101636,8 +101636,13 @@
         "at": "2026-07-30T20:29:40Z",
         "status": "review_fix_local_verified",
         "note": "Post-main-integration exact head a5bae4d7a2a3a7a0717103bdee7e7209ed4be89b passed all nine required checks with staging parity skipped, then review found one valid P2 digest-envelope gap. Added approval_envelope.json to the hashed files list and require field-for-field equality with the manifest's identity, locale, status, provenance, counts, quality gates, and permissions. Focused validation passed 7 tests/1056 assertions plus scoped Pint, JSON, hash, diff, and exact scope checks. Candidate package SHA is 386c0176b581176c0c26e4736c5901eb69ad053712e127b8d2b089553a40899e."
+      },
+      {
+        "at": "2026-07-30T20:30:59Z",
+        "status": "github_checks_pending",
+        "note": "Committed the digest-bound approval envelope as implementation commit 4491efe11785e1d2e84dbb098156a6a91463245c. The following metadata-only commit records that immutable implementation pointer; exact-head GitHub checks and review are pending."
       }
     ],
-    "updated_at": "2026-07-30T20:29:40Z"
+    "updated_at": "2026-07-30T20:30:59Z"
   }
 }
