@@ -101497,7 +101497,7 @@
       "EN-PARITY-W1-MBTI-RESULT-AGENT-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "15dce5c72f31422fc3c6a4c97a00d57da161d69d",
+    "commit_sha": "7338e6240d53b5d9877e9f2ba1bfc19ab40260da",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3429",
     "checks": {
       "authorization": {
@@ -101676,8 +101676,13 @@
         "at": "2026-07-30T21:12:13Z",
         "status": "review_fix_local_verified",
         "note": "Exact head 915b2fb171d75ed103f8cf1c4763e015076841e4 passed all nine required checks with staging parity skipped, then review found one valid P2 PDF card-shape gap. The W9 mapping now groups assets by canonical family and deterministically maps rendered title/summary/body/prompts to the exact PDF card title/description/bullets/tips fields. The focused test builds all 20 cards and proves every candidate reader string reaches the consumed shape. Focused validation passed 7 tests/1317 assertions plus scoped Pint, JSON, hash, diff, and exact scope checks. Candidate package SHA is 62dc298b4c1dc8e3b66b2fa4d7ae257c023ff193ff270e6489caccf492b9f886."
+      },
+      {
+        "at": "2026-07-30T21:13:45Z",
+        "status": "github_checks_pending",
+        "note": "Committed the deterministic PDF group/card shape adapter as implementation commit 7338e6240d53b5d9877e9f2ba1bfc19ab40260da. The following metadata-only commit records that immutable implementation pointer; exact-head GitHub checks and review are pending."
       }
     ],
-    "updated_at": "2026-07-30T21:12:13Z"
+    "updated_at": "2026-07-30T21:13:45Z"
   }
 }
