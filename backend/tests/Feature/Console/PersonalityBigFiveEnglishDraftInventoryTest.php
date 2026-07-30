@@ -192,7 +192,12 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $asset = $this->createAsset();
         $snapshot = $this->completeSnapshot();
         $published = $this->createRevision($asset, 1, BigFiveEn52PackageCompiler::RELEASE_ID, $snapshot);
-        $working = $this->createRevision($asset, 2, 'working-copy', $snapshot);
+        $working = $this->createRevision(
+            $asset,
+            2,
+            'working-copy',
+            (array) data_get($published->snapshot_json, 'attributes'),
+        );
         $asset->forceFill([
             'working_revision_id' => $working->id,
             'published_revision_id' => $published->id,
@@ -223,6 +228,40 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertFalse($row['published_projection_exists']);
         $this->assertFalse($row['public_page_accessible']);
         $this->assertSame(0, $result['counts']['public_projections']);
+    }
+
+    public function test_live_asset_drift_from_locked_en52_projection_fails_closed(): void
+    {
+        $asset = $this->createAsset();
+        $historical = $this->createRevision(
+            $asset,
+            1,
+            'big5-authority-v2-domains-08',
+            $this->completeSnapshot('Historical'),
+        );
+        $current = $this->createRevision(
+            $asset,
+            2,
+            BigFiveEn52PackageCompiler::RELEASE_ID,
+            $this->completeSnapshot(),
+        );
+        $asset->forceFill([
+            'working_revision_id' => $current->id,
+            'published_revision_id' => $current->id,
+            'title' => 'Drifted live title',
+            'llms_eligible' => false,
+        ])->saveQuietly();
+
+        $result = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $row = collect($result['rows'])->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertSame($historical->id, $row['historical_draft_revision_id']);
+        $this->assertTrue($row['published_en52_lineage_locked']);
+        $this->assertFalse($row['published_en52_projection_locked']);
+        $this->assertFalse($row['published_projection_exists']);
+        $this->assertSame('blocked_authority_unknown', $row['recommended_disposition']);
+        $this->assertSame('live_asset_not_locked_en52_projection', $row['blocker']);
+        $this->assertFalse($result['ok']);
     }
 
     public function test_registered_historical_revision_survives_later_unreferenced_revisions(): void
@@ -541,6 +580,10 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             'launch_state' => 'published',
             'review_state' => 'published',
             'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V2,
+            'source_package' => BigFiveEn52PackageCompiler::RELEASE_ID,
+            'source_hash' => hash('sha256', 'test-en52-openness'),
+            'created_by_admin_user_id' => BigFiveEn52Publisher::OPERATOR_ADMIN_USER_ID,
+            'updated_by_admin_user_id' => BigFiveEn52Publisher::OPERATOR_ADMIN_USER_ID,
         ], $overrides));
     }
 
@@ -566,6 +609,21 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             PersonalityPublicContentAsset::ENTITY_FACET_DETAIL => 'facet:'.$domain.':'.$asset->entity_key,
             default => (string) $asset->entity_key,
         };
+        $en52AuthorityAssetKey = match (true) {
+            $asset->entity_type === PersonalityPublicContentAsset::ENTITY_HUB => 'big-five-hub',
+            $asset->entity_type === PersonalityPublicContentAsset::ENTITY_FACET_DETAIL => 'O1-imagination',
+            default => (string) $asset->entity_key,
+        };
+        if ($en52) {
+            $snapshot = [
+                'schema_version' => BigFiveEn52PackageCompiler::SCHEMA_VERSION,
+                'release_id' => BigFiveEn52PackageCompiler::RELEASE_ID,
+                'authority_asset_key' => $en52AuthorityAssetKey,
+                'source_content_sha256' => BigFiveEn52PackageCompiler::SOURCE_CONTENT_SHA256,
+                'package_file_sha256' => BigFiveEn52Publisher::PACKAGE_FILE_SHA256,
+                'attributes' => $this->runtimeAttributes($asset),
+            ];
+        }
 
         return PersonalityPublicContentAssetRevision::query()->create([
             'asset_id' => $asset->id,
@@ -573,12 +631,13 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             'authority_asset_key' => $historical
                 ? $authorityAssetKey
                 : match (true) {
-                    $en52 && $asset->entity_type === PersonalityPublicContentAsset::ENTITY_HUB => 'big-five-hub',
-                    $en52 && $asset->entity_type === PersonalityPublicContentAsset::ENTITY_FACET_DETAIL => 'O1-imagination',
+                    $en52 => $en52AuthorityAssetKey,
                     default => (string) $asset->entity_key,
                 },
             'source_package' => $sourcePackage,
-            'source_hash' => hash('sha256', $sourcePackage.':'.$revisionNo),
+            'source_hash' => $en52
+                ? (string) $asset->source_hash
+                : hash('sha256', $sourcePackage.':'.$revisionNo),
             'authority_package_sha256' => $historical
                 ? 'fb67edc033e679da3f134b34db30901465c7b44e0585818b23613fab83bf9162'
                 : ($en52
@@ -599,6 +658,25 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             'content_sections_json' => [],
             'faq_json' => [],
         ];
+    }
+
+    /** @return array<string,mixed> */
+    private function runtimeAttributes(PersonalityPublicContentAsset $asset): array
+    {
+        $attributes = [];
+        foreach ([
+            'org_id', 'framework', 'entity_type', 'entity_key', 'slug', 'locale', 'title', 'summary',
+            'content_sections_json', 'seo_json', 'robots', 'canonical_json', 'hreflang_json',
+            'faq_json', 'schema_json', 'method_boundary_json', 'evidence_notes_json', 'authority_json',
+            'internal_links_json', 'is_public', 'index_eligible', 'sitemap_eligible', 'llms_eligible',
+            'launch_state', 'review_state', 'contract_version', 'source_package', 'source_hash',
+            'last_reviewed_at', 'created_by_admin_user_id', 'updated_by_admin_user_id',
+        ] as $key) {
+            $value = $asset->getAttribute($key);
+            $attributes[$key] = $value instanceof \DateTimeInterface ? $value->format('Y-m-d') : $value;
+        }
+
+        return $attributes;
     }
 
     private function fingerprint(): string

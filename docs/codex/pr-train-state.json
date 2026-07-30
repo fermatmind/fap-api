@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "exact_head_retry_pending",
-        "evidence": "GitHub CI runs 30558811823, 30559823419, 30560724406, 30562045318, 30562910486, and 30564012592 passed all required jobs at their exact heads. The latest exact-head review added three in-scope authority findings; their fixes pass the 14-test inventory suite and the 409-test runtime-freeze suite and require a fresh exact-head CI/review cycle."
+        "evidence": "GitHub CI runs 30558811823, 30559823419, 30560724406, 30562045318, 30562910486, 30564012592, and 30565108964 passed all required jobs at their exact heads. The latest exact-head review added one in-scope runtime-projection readback finding; its fix passes the 15-test inventory suite and the 395-test runtime-freeze suite and requires a fresh exact-head CI/review cycle."
       }
     },
     "scope_validation": {
@@ -101273,9 +101273,14 @@
         "at": "2026-07-30T17:13:52Z",
         "status": "review_fix_local_checks_passed",
         "note": "After all required jobs in CI run 30564012592 passed, exact-head review identified three authority-state gaps. The two excluded hubs now have explicit locked-EN52, pointer-equality, schema, text-only, and public-projection validation; registered Authority V2 lineage is selected from all revisions and reports working/published pointer activity separately; and plural images fields are rejected. The complete 50-slot authority cohort is also required to satisfy locked published lineage and projection gates. The 14-test inventory suite and 409-test runtime-freeze suite pass, as do scoped Pint, PHP syntax, YAML/JSON parsing, and diff checks."
+      },
+      {
+        "at": "2026-07-30T17:41:14Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30565108964 passed, exact-head review identified one remaining live-projection gap. The inventory now applies the publisher's exact field-by-field runtime readback against the locked published revision descriptor, validates its EN52 envelope and source hash, and fails closed when live title, content, SEO, hreflang, eligibility, source, review, or operator-owned fields drift. Snapshot content validation handles the locked descriptor envelope without exposing raw values. The 15-test inventory suite passes 100 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, JSON parsing, diff checks, and exact eight-path scope validation pass."
       }
     ],
-    "updated_at": "2026-07-30T17:13:52Z"
+    "updated_at": "2026-07-30T17:41:14Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",

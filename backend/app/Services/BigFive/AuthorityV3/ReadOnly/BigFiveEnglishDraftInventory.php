@@ -287,6 +287,7 @@ final class BigFiveEnglishDraftInventory
             && collect($hubRows)->every(fn (array $row): bool => (
                 $row['backend_resource_id'] !== null
                 && $row['published_en52_lineage_locked'] === true
+                && $row['published_en52_projection_locked'] === true
                 && $row['published_projection_exists'] === true
                 && $row['draft_equals_published'] === true
                 && $row['schema_complete'] === true
@@ -304,6 +305,7 @@ final class BigFiveEnglishDraftInventory
             && collect($rows)->every(fn (array $row): bool => (
                 $row['backend_resource_id'] !== null
                 && $row['published_en52_lineage_locked'] === true
+                && $row['published_en52_projection_locked'] === true
                 && $row['published_projection_exists'] === true
                 && $row['schema_complete'] === true
                 && $row['text_only_compliant'] === true
@@ -342,6 +344,7 @@ final class BigFiveEnglishDraftInventory
                 'expected_excluded_hub_assets' => 2,
                 'validated_excluded_hub_assets' => collect($hubRows)->filter(fn (array $row): bool => (
                     $row['published_en52_lineage_locked'] === true
+                    && $row['published_en52_projection_locked'] === true
                     && $row['published_projection_exists'] === true
                     && $row['draft_equals_published'] === true
                     && $row['schema_complete'] === true
@@ -383,8 +386,16 @@ final class BigFiveEnglishDraftInventory
             : null;
         $workingSnapshot = $working?->snapshot_json;
         $publishedSnapshot = $published?->snapshot_json;
-        $workingFingerprint = $working ? $this->fingerprint($workingSnapshot) : null;
-        $publishedFingerprint = $published ? $this->fingerprint($publishedSnapshot) : null;
+        $workingContent = is_array(data_get($workingSnapshot, 'attributes'))
+            ? data_get($workingSnapshot, 'attributes')
+            : $workingSnapshot;
+        $publishedAttributes = is_array(data_get($publishedSnapshot, 'attributes'))
+            ? data_get($publishedSnapshot, 'attributes')
+            : null;
+        $workingFingerprint = $working ? $this->fingerprint($workingContent) : null;
+        $publishedFingerprint = $published ? $this->fingerprint(
+            $publishedAttributes ?? $publishedSnapshot,
+        ) : null;
         $workingActive = $asset !== null && $working !== null
             && (int) $working->asset_id === (int) $asset->id;
         $publishedBound = $asset !== null && $published !== null
@@ -393,23 +404,33 @@ final class BigFiveEnglishDraftInventory
             && (string) $published->source_package === BigFiveEn52PackageCompiler::RELEASE_ID
             && (string) $published->authority_package_sha256 === BigFiveEn52Publisher::PACKAGE_FILE_SHA256
             && (string) $published->workflow_state === BigFiveEn52Publisher::WORKFLOW_STATE
-            && (string) $published->authority_asset_key === $this->en52AuthorityAssetKey($entry);
+            && (string) $published->authority_asset_key === $this->en52AuthorityAssetKey($entry)
+            && data_get($publishedSnapshot, 'schema_version') === BigFiveEn52PackageCompiler::SCHEMA_VERSION
+            && data_get($publishedSnapshot, 'release_id') === BigFiveEn52PackageCompiler::RELEASE_ID
+            && data_get($publishedSnapshot, 'authority_asset_key') === $this->en52AuthorityAssetKey($entry)
+            && data_get($publishedSnapshot, 'source_content_sha256') === BigFiveEn52PackageCompiler::SOURCE_CONTENT_SHA256
+            && data_get($publishedSnapshot, 'package_file_sha256') === BigFiveEn52Publisher::PACKAGE_FILE_SHA256
+            && is_array($publishedAttributes)
+            && hash_equals((string) $published->source_hash, (string) ($publishedAttributes['source_hash'] ?? ''));
+        $publishedProjectionLocked = $publishedEn52Locked
+            && $asset !== null
+            && $this->runtimeProjectionMatches($asset, $publishedAttributes);
         $pointerEqual = $working !== null && $published !== null
             && (int) $working->id === (int) $published->id;
         $contentEqual = $workingFingerprint !== null && $publishedFingerprint !== null
             && hash_equals($workingFingerprint, $publishedFingerprint);
         $newer = $working !== null && $published !== null
             && (int) $working->revision_no > (int) $published->revision_no;
-        $payload = json_encode($workingSnapshot ?? [], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
+        $payload = json_encode($workingContent ?? [], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
         $cjk = preg_match('/[\x{3400}-\x{9FFF}\x{F900}-\x{FAFF}]/u', $payload) === 1;
-        $private = $this->containsProhibitedPrivateField($workingSnapshot);
+        $private = $this->containsProhibitedPrivateField($workingContent);
         $schemaComplete = $working !== null
-            && filled(data_get($workingSnapshot, 'title'))
-            && filled(data_get($workingSnapshot, 'summary'))
-            && is_array(data_get($workingSnapshot, 'content_sections_json'))
-            && is_array(data_get($workingSnapshot, 'faq_json'));
-        $textOnly = ! $this->containsMediaReference($workingSnapshot);
-        $projection = $asset !== null && (bool) $asset->is_public
+            && filled(data_get($workingContent, 'title'))
+            && filled(data_get($workingContent, 'summary'))
+            && is_array(data_get($workingContent, 'content_sections_json'))
+            && is_array(data_get($workingContent, 'faq_json'));
+        $textOnly = ! $this->containsMediaReference($workingContent);
+        $projection = $publishedProjectionLocked && $asset !== null && (bool) $asset->is_public
             && in_array($asset->launch_state, [
                 PersonalityPublicContentAsset::LAUNCH_CONTENT_READY,
                 PersonalityPublicContentAsset::LAUNCH_PUBLISHED,
@@ -421,6 +442,7 @@ final class BigFiveEnglishDraftInventory
             $cjk || $private || ! $textOnly => 'prohibited_content',
             ! $schemaComplete => 'schema_repair_required',
             $published !== null && ! $publishedEn52Locked => 'blocked_authority_unknown',
+            $published !== null && ! $publishedProjectionLocked => 'blocked_authority_unknown',
             $contentEqual => 'duplicate_of_published',
             $published !== null && ! $newer => 'stale_working_revision',
             $working !== null && $published === null => 'valid_unpublished_candidate',
@@ -441,6 +463,7 @@ final class BigFiveEnglishDraftInventory
             'published_revision_id' => $published?->id,
             'published_revision_fingerprint_sha256' => $publishedFingerprint,
             'published_en52_lineage_locked' => $publishedEn52Locked,
+            'published_en52_projection_locked' => $publishedProjectionLocked,
             'draft_created_at' => $working?->created_at?->toAtomString(),
             'draft_updated_at' => $working?->updated_at?->toAtomString(),
             'published_projection_exists' => $projection,
@@ -450,10 +473,10 @@ final class BigFiveEnglishDraftInventory
             'draft_content_equals_published' => $contentEqual,
             'draft_newer_than_published' => $newer,
             'schema_complete' => $schemaComplete,
-            'title_complete' => filled(data_get($workingSnapshot, 'title')),
-            'summary_complete' => filled(data_get($workingSnapshot, 'summary')),
-            'sections_complete' => is_array(data_get($workingSnapshot, 'content_sections_json')),
-            'faq_complete' => is_array(data_get($workingSnapshot, 'faq_json')),
+            'title_complete' => filled(data_get($workingContent, 'title')),
+            'summary_complete' => filled(data_get($workingContent, 'summary')),
+            'sections_complete' => is_array(data_get($workingContent, 'content_sections_json')),
+            'faq_complete' => is_array(data_get($workingContent, 'faq_json')),
             'text_only_compliant' => $textOnly,
             'claim_boundary_compliant' => ! $private,
             'duplicate_template_risk' => $contentEqual ? 'published_equivalent' : 'not_established',
@@ -469,9 +492,54 @@ final class BigFiveEnglishDraftInventory
             'blocker' => $disposition === 'blocked_authority_unknown'
                 ? ($published !== null && ! $publishedEn52Locked
                     ? 'current_published_revision_not_locked_en52_authority'
-                    : 'current_revision_authority_incomplete')
+                    : ($published !== null && ! $publishedProjectionLocked
+                        ? 'live_asset_not_locked_en52_projection'
+                        : 'current_revision_authority_incomplete'))
                 : null,
         ];
+    }
+
+    /** @param array<string,mixed> $expected */
+    private function runtimeProjectionMatches(
+        PersonalityPublicContentAsset $asset,
+        array $expected,
+    ): bool {
+        foreach ($expected as $key => $value) {
+            if ($this->stableJson($this->comparable($asset->getAttribute($key)))
+                !== $this->stableJson($this->comparable($value))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function comparable(mixed $value): mixed
+    {
+        return $value instanceof \DateTimeInterface ? $value->format('Y-m-d') : $value;
+    }
+
+    private function stableJson(mixed $value): string
+    {
+        $normalize = function (mixed $item) use (&$normalize): mixed {
+            if (! is_array($item)) {
+                return $item;
+            }
+            if (array_is_list($item)) {
+                return array_map($normalize, $item);
+            }
+            ksort($item);
+            foreach ($item as $key => $child) {
+                $item[$key] = $normalize($child);
+            }
+
+            return $item;
+        };
+
+        return json_encode(
+            $normalize($value),
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR,
+        );
     }
 
     private function databaseFingerprint(): string
