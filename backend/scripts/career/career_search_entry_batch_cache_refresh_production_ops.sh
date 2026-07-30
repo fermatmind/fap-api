@@ -14,6 +14,15 @@ stage="input_validation"
 write_state="none"
 tmp_dir=""
 heartbeat_pid=""
+observed_readback_url_count=0
+observed_http_200_count=0
+observed_transport_failure_count=0
+observed_non_200_response_count=0
+observed_canonical_ok_count=0
+observed_robots_ok_count=0
+observed_locale_ok_count=0
+observed_bad_href_url_count=0
+observed_low_module_url_count=0
 
 cleanup() {
   if [[ -n "$heartbeat_pid" ]]; then
@@ -44,6 +53,15 @@ emit_failure() {
     --arg release_name "$expected_release_name" \
     --arg stage "$stage" \
     --arg write_state "$write_state" \
+    --argjson observed_readback_url_count "$observed_readback_url_count" \
+    --argjson observed_http_200_count "$observed_http_200_count" \
+    --argjson observed_transport_failure_count "$observed_transport_failure_count" \
+    --argjson observed_non_200_response_count "$observed_non_200_response_count" \
+    --argjson observed_canonical_ok_count "$observed_canonical_ok_count" \
+    --argjson observed_robots_ok_count "$observed_robots_ok_count" \
+    --argjson observed_locale_ok_count "$observed_locale_ok_count" \
+    --argjson observed_bad_href_url_count "$observed_bad_href_url_count" \
+    --argjson observed_low_module_url_count "$observed_low_module_url_count" \
     '{
       contract_version: $contract,
       status: "FAIL_CLOSED",
@@ -52,6 +70,15 @@ emit_failure() {
       release_name: $release_name,
       failed_stage: $stage,
       write_state: $write_state,
+      observed_readback_url_count: $observed_readback_url_count,
+      observed_http_200_count: $observed_http_200_count,
+      observed_transport_failure_count: $observed_transport_failure_count,
+      observed_non_200_response_count: $observed_non_200_response_count,
+      observed_canonical_ok_count: $observed_canonical_ok_count,
+      observed_robots_ok_count: $observed_robots_ok_count,
+      observed_locale_ok_count: $observed_locale_ok_count,
+      observed_bad_href_url_count: $observed_bad_href_url_count,
+      observed_low_module_url_count: $observed_low_module_url_count,
       production_write_execution: ($write_state != "none"),
       cache_refresh_target_count: 0,
       database_write_count: 0,
@@ -141,7 +168,7 @@ read_public_batch() {
       for curl_attempt in 1 2; do
         if http_code="$(
           curl --silent --show-error --location \
-            --connect-timeout 5 --max-time 20 \
+            --connect-timeout 5 --max-time 30 \
             --header 'Accept: application/json' \
             --output "$response" --write-out '%{http_code}' \
             "https://api.fermatmind.com/api/v0.5/career/jobs/${slug}?locale=${locale}" \
@@ -208,6 +235,8 @@ read_public_batch() {
       slug_count: ([.[].slug] | unique | length),
       url_count: length,
       http_200_count: ([.[] | select(.http == "200")] | length),
+      transport_failure_count: ([.[] | select(.http == "000")] | length),
+      non_200_response_count: ([.[] | select(.http != "000" and .http != "200")] | length),
       canonical_ok_count: ([.[] | select(.canonical_ok)] | length),
       robots_ok_count: ([.[] | select(.robots_ok)] | length),
       locale_ok_count: ([.[] | select(.locale_ok)] | length),
@@ -225,9 +254,23 @@ read_public_batch() {
   mv "$tmp_dir/readback-final.json" "$output_path"
 }
 
+bind_observed_readback_counts() {
+  local readback_path="$1"
+  observed_readback_url_count="$(jq -r '.url_count' "$readback_path")"
+  observed_http_200_count="$(jq -r '.http_200_count' "$readback_path")"
+  observed_transport_failure_count="$(jq -r '.transport_failure_count' "$readback_path")"
+  observed_non_200_response_count="$(jq -r '.non_200_response_count' "$readback_path")"
+  observed_canonical_ok_count="$(jq -r '.canonical_ok_count' "$readback_path")"
+  observed_robots_ok_count="$(jq -r '.robots_ok_count' "$readback_path")"
+  observed_locale_ok_count="$(jq -r '.locale_ok_count' "$readback_path")"
+  observed_bad_href_url_count="$(jq -r '.bad_href_url_count' "$readback_path")"
+  observed_low_module_url_count="$(jq -r '.low_module_url_count' "$readback_path")"
+}
+
 stage="pre_refresh_public_readback"
 pre_readback="$tmp_dir/pre-readback.json"
 read_public_batch "$pre_readback"
+bind_observed_readback_counts "$pre_readback"
 pre_refresh_readback_sha256="$(
   jq -c . "$pre_readback" | sha256sum | awk '{print $1}'
 )"
@@ -344,6 +387,7 @@ jq -e \
 stage="post_refresh_public_readback"
 post_readback="$tmp_dir/post-readback.json"
 read_public_batch "$post_readback"
+bind_observed_readback_counts "$post_readback"
 post_refresh_readback_sha256="$(
   jq -c . "$post_readback" | sha256sum | awk '{print $1}'
 )"

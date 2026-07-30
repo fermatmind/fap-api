@@ -213,9 +213,20 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
             'for curl_attempt in 1 2',
             'if [[ "$curl_attempt" -lt 2 ]]',
             'sleep 1',
+            '--connect-timeout 5 --max-time 30',
+            'observed_readback_url_count',
+            'observed_http_200_count',
+            'observed_transport_failure_count',
+            'observed_non_200_response_count',
+            'observed_canonical_ok_count',
+            'observed_robots_ok_count',
+            'observed_locale_ok_count',
+            'observed_bad_href_url_count',
+            'observed_low_module_url_count',
         ] as $required) {
             $this->assertStringContainsString($required, $runner);
         }
+        $this->assertStringNotContainsString('--max-time 20', $runner);
         $this->assertStringNotContainsString('--retry', $runner);
         $this->assertStringNotContainsString('--fail', $runner);
         $this->assertStringNotContainsString('--forget-job-detail', $workflow.$runner);
