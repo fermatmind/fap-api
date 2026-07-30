@@ -101497,7 +101497,7 @@
       "EN-PARITY-W1-MBTI-RESULT-AGENT-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "a13cf1aff50c397ce5c2b45541dec8ba1d24ef01",
+    "commit_sha": "32dbc2a77f68ed117ef8989998864c142d7ca691",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3429",
     "checks": {
       "authorization": {
@@ -101751,8 +101751,13 @@
         "at": "2026-07-30T23:11:00Z",
         "status": "review_fix_local_verified",
         "note": "Exact head 14d01b2fa268582298fbe97e95b584acf6193eb3 passed all required checks, then review found adjacent labels could incorrectly reuse the closest A/T axis while neighbor_type_keys[0] is derived from the first ranked non-A/T axis. Added three adjacent-axis-specific slots and bound their source contract to the exact axis used for the neighbor. The W9 fixture deliberately uses A/T as closest and J/P as adjacent, and focused validation passed 7 tests/1377 assertions. The initial direct HTTP verifier call recorded a missing local service; the isolated SQLite ci_verify_mbti entrypoint subsequently passed verify_mbti 8/8, the 195830-assertion full gate, and all downstream gates. Candidate SHA is d15f823cd2c9959d34bf4a9e83327b1ead7519b206c82367fdb9a6b1039d23c2. Integrated unrelated origin/main 9c7925b1c without conflict; fresh exact-head checks remain pending."
+      },
+      {
+        "at": "2026-07-30T23:12:00Z",
+        "status": "github_checks_pending",
+        "note": "Committed the adjacent-axis binding repair and origin/main integration as exact implementation commit 32dbc2a77f68ed117ef8989998864c142d7ca691. This metadata-only commit records that immutable implementation pointer; exact-head GitHub checks and review remain pending."
       }
     ],
-    "updated_at": "2026-07-30T23:11:00Z"
+    "updated_at": "2026-07-30T23:12:00Z"
   }
 }
