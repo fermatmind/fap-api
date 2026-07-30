@@ -174,7 +174,7 @@ prs:
     base: main
     branch: codex/career-search-entry-quality-batch-01
     title: "CAREER-SEARCH-ENTRY-QUALITY-BATCH-01 prepare first fifty career entries"
-    status: github_checks_pending
+    status: ready_to_merge
     depends_on:
       - CAREER-SEARCH-ENTRY-TIER-CONTRACT-01
     train_scope: career_search_entry_quality_batch_01
@@ -47378,7 +47378,7 @@ prs:
     base: main
     branch: codex/en-parity-w1-mbti-comparison-assets-01
     title: "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-01: produce seven English comparison assets"
-    status: ready_to_merge
+    status: review_fix_local_verified
     depends_on:
       - EN-PARITY-W1-MBTI-INVENTORY-01
     train_scope: en_parity_w1_mbti_comparison_asset_package

@@ -101263,8 +101263,8 @@
     "depends_on": [
       "EN-PARITY-W1-MBTI-INVENTORY-01"
     ],
-    "status": "github_checks_pending",
-    "commit_sha": "8b01ee28e38c892c219802f51ea9388b6c0e0541",
+    "status": "review_fix_local_verified",
+    "commit_sha": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3424",
     "checks": {
       "authorization": {
@@ -101281,11 +101281,11 @@
       },
       "package_contract": {
         "status": "passed",
-        "evidence": "The corrected candidate contains exactly the seven inventory slugs and row identities, binds six committed zh-CN source snapshot hashes plus the ISTJ/ISFJ backend revision hash, preserves body/group/nested-item/item cardinality, includes the required translation map and producer claim/editorial reports, and freezes replacement package SHA a85c80023d7a5203d43ff16c67e06bec59b50b86bbfd9107850f3b97a266717f."
+        "evidence": "The corrected candidate contains exactly the seven inventory slugs and row identities, binds six committed zh-CN source snapshot hashes plus the ISTJ/ISFJ backend revision hash, preserves body/group/nested-item/item/row cardinality across all seven assets, includes the required translation map and producer claim/editorial reports, and freezes replacement package SHA 6ceac9fca788a8e50bc1182b7c42a3fb79a887b554fd2240df5a4a2d871b73ba."
       },
       "focused_test": {
         "status": "passed",
-        "evidence": "After the review repair, php artisan test --filter=MbtiComparisonEnglishPackageTest passed 6 tests and 987 assertions."
+        "evidence": "After both review rounds, php artisan test --filter=MbtiComparisonEnglishPackageTest passed 6 tests and 1076 assertions, including source-shape comparison for all seven rows."
       },
       "focused_lint": {
         "status": "passed",
@@ -101312,12 +101312,12 @@
         "evidence": "PR #3424 head 37dcc8dcc4900f973d03c1985bc6bfcee316b27a passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. verify-staging-parity was policy-skipped and is not a deploy wait."
       },
       "final_head_checks": {
-        "status": "pending",
-        "evidence": "Review-fix implementation plus latest-main integration head 8b01ee28e38c892c219802f51ea9388b6c0e0541 is locally verified; its required GitHub checks and refreshed exact-head review are pending."
+        "status": "superseded_by_second_review_fix",
+        "evidence": "Head e2e5d4ec7ea7ff0d6f6de5773b83196556c07b58 passed every applicable GitHub check, but refreshed exact-head review found two actionable issues. The corrected head must repeat required checks."
       },
       "codex_review": {
-        "status": "resolved_pushed_pending_rereview",
-        "evidence": "The exact-head review correctly found that six JSON-backed assets compressed source bodies and flattened stress groups while claiming structural alignment. Commit 3bb46acfe8deafa36edf2c4ad47cc04731089814 preserves body, group, nested-item, and item cardinality, adds an explicit translation map, adds regression assertions against every committed source section, and records the response on the original review thread."
+        "status": "second_round_resolved_locally_pending_rereview",
+        "evidence": "The refreshed review correctly found an unrelated Career manifest status regression and the skipped ISTJ/ISFJ revision shape. The Career status now exactly matches origin/main ready_to_merge, while ISTJ/ISFJ preserves 1-body narrative cardinality and 4-row table cardinality; the focused test no longer exempts that row."
       }
     },
     "failure_reason": null,
@@ -101372,8 +101372,13 @@
         "at": "2026-07-30T17:00:15Z",
         "status": "github_checks_pending",
         "note": "GitHub reported DIRTY because API-UNLOCK-01 merged concurrently. Integrated current origin/main efa84b9a482193a6996453a6395ec060749c7b88, preserving both ledger entries, and reran focused tests 6/987, Pint, all JSON/YAML parsing, diff checks, and exact nine-file PR scope successfully. No controlled action or future scope was added."
+      },
+      {
+        "at": "2026-07-30T17:09:30Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact head e2e5d4ec7ea7ff0d6f6de5773b83196556c07b58 passed all applicable checks, then refreshed Codex review found two valid items: a stale unrelated Career YAML status and ISTJ/ISFJ narrative cardinality 1-to-2. Restored the Career status to origin/main, made all five ISTJ/ISFJ narrative sections 1-to-1, retained the exact four table rows, removed the test exemption, and froze replacement package SHA 6ceac9fca788a8e50bc1182b7c42a3fb79a887b554fd2240df5a4a2d871b73ba. Focused validation passes 6 tests/1076 assertions and Pint."
       }
     ],
-    "updated_at": "2026-07-30T17:00:15Z"
+    "updated_at": "2026-07-30T17:09:30Z"
   }
 }

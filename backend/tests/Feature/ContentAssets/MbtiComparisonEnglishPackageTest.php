@@ -81,7 +81,7 @@ final class MbtiComparisonEnglishPackageTest extends TestCase
         }
 
         self::assertSame($manifest['package_sha256'], hash('sha256', $packageHashInput));
-        self::assertSame('a85c80023d7a5203d43ff16c67e06bec59b50b86bbfd9107850f3b97a266717f', $manifest['package_sha256']);
+        self::assertSame('6ceac9fca788a8e50bc1182b7c42a3fb79a887b554fd2240df5a4a2d871b73ba', $manifest['package_sha256']);
     }
 
     #[Test]
@@ -165,11 +165,11 @@ final class MbtiComparisonEnglishPackageTest extends TestCase
 
             if ($payload['comparison_slug'] === 'istj-vs-isfj') {
                 self::assertSame('backend_revision_sha256', $mapRows[0]['source_ref_kind']);
-
-                continue;
+                $source = $this->readIstjSourceRevision($asset['source']['sha256']);
+            } else {
+                $source = $this->readJsonFromRepository($asset['source']['path']);
             }
 
-            $source = $this->readJsonFromRepository($asset['source']['path']);
             self::assertCount(count($source['sections']), $payload['sections']);
 
             foreach ($source['sections'] as $index => $sourceSection) {
@@ -194,6 +194,11 @@ final class MbtiComparisonEnglishPackageTest extends TestCase
                     count($sourceSection['items'] ?? []),
                     count($targetSection['items'] ?? []),
                     $asset['row_id'].' '.$sourceSection['id'].' item cardinality drifted.',
+                );
+                self::assertSame(
+                    count($sourceSection['rows'] ?? []),
+                    count($targetSection['rows'] ?? []),
+                    $asset['row_id'].' '.$sourceSection['id'].' row cardinality drifted.',
                 );
             }
         }
@@ -323,15 +328,17 @@ final class MbtiComparisonEnglishPackageTest extends TestCase
 
     private function assertIstjSourceRevisionExists(string $sourceRevisionSha): void
     {
-        $source = json_decode(
-            (string) file_get_contents(
-                dirname(__DIR__, 4).'/backend/content_assets/personality_public/mbti-index52-comparison-projection-repair-2026-07-27.json',
-            ),
-            true,
-            512,
-            JSON_THROW_ON_ERROR,
-        );
+        $this->readIstjSourceRevision($sourceRevisionSha);
+    }
 
+    /**
+     * @return array{sections: list<array<string, mixed>>}
+     */
+    private function readIstjSourceRevision(string $sourceRevisionSha): array
+    {
+        $source = $this->readJsonFromRepository(
+            'backend/content_assets/personality_public/mbti-index52-comparison-projection-repair-2026-07-27.json',
+        );
         $records = array_values(array_filter(
             $source['records'],
             static fn (array $record): bool => ($record['slug'] ?? null) === 'istj-vs-isfj',
@@ -339,6 +346,8 @@ final class MbtiComparisonEnglishPackageTest extends TestCase
 
         self::assertCount(1, $records);
         self::assertSame($sourceRevisionSha, $records[0]['source_revision_sha256']);
+
+        return ['sections' => $records[0]['expected_runtime_sections']];
     }
 
     /**
