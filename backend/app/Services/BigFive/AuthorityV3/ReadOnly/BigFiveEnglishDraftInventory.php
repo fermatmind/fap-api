@@ -6,6 +6,8 @@ namespace App\Services\BigFive\AuthorityV3\ReadOnly;
 
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
+use App\Services\BigFive\AuthorityV3\Release\BigFiveEn52PackageCompiler;
+use App\Services\BigFive\AuthorityV3\Release\BigFiveEn52Publisher;
 use App\Services\SEO\BigFiveCanonicalRouteCatalog;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -14,6 +16,51 @@ use RuntimeException;
 final class BigFiveEnglishDraftInventory
 {
     public const SCHEMA_VERSION = 'en-parity-w2-big-five-draft-inventory.v1';
+
+    private const HISTORICAL_AUTHORITY_PACKAGE_SHA256 = 'fb67edc033e679da3f134b34db30901465c7b44e0585818b23613fab83bf9162';
+
+    /** @var array<string,string> */
+    private const HISTORICAL_PACKAGE_BY_DOMAIN = [
+        'agreeableness' => 'big5-authority-v2-range-agreeableness-13',
+        'conscientiousness' => 'big5-authority-v2-range-conscientiousness-11',
+        'extraversion' => 'big5-authority-v2-range-extraversion-12',
+        'neuroticism' => 'big5-authority-v2-range-neuroticism-14',
+        'openness' => 'big5-authority-v2-range-openness-10',
+    ];
+
+    /** @var array<string,string> */
+    private const FACET_DOMAIN = [
+        'achievement-striving' => 'conscientiousness',
+        'actions' => 'openness',
+        'activity' => 'extraversion',
+        'aesthetics' => 'openness',
+        'altruism' => 'agreeableness',
+        'anger' => 'neuroticism',
+        'anxiety' => 'neuroticism',
+        'assertiveness' => 'extraversion',
+        'competence' => 'conscientiousness',
+        'compliance' => 'agreeableness',
+        'deliberation' => 'conscientiousness',
+        'depression' => 'neuroticism',
+        'dutifulness' => 'conscientiousness',
+        'excitement-seeking' => 'extraversion',
+        'feelings' => 'openness',
+        'gregariousness' => 'extraversion',
+        'ideas' => 'openness',
+        'imagination' => 'openness',
+        'impulsiveness' => 'neuroticism',
+        'modesty' => 'agreeableness',
+        'order' => 'conscientiousness',
+        'positive-emotions' => 'extraversion',
+        'self-consciousness' => 'neuroticism',
+        'self-discipline' => 'conscientiousness',
+        'straightforwardness' => 'agreeableness',
+        'tender-mindedness' => 'agreeableness',
+        'trust' => 'agreeableness',
+        'values' => 'openness',
+        'vulnerability' => 'neuroticism',
+        'warmth' => 'extraversion',
+    ];
 
     /** @var list<string> */
     public const DISPOSITIONS = [
@@ -92,7 +139,9 @@ final class BigFiveEnglishDraftInventory
                 ? collect()
                 : $historicalByAsset->get((int) $row['backend_resource_id'], collect());
             $registered = $historical
-                ->filter(fn (PersonalityPublicContentAssetRevision $revision): bool => $this->isRegisteredHistoricalSlotRevision($revision))
+                ->filter(fn (PersonalityPublicContentAssetRevision $revision): bool => (
+                    $this->isRegisteredHistoricalSlotRevision($revision, $row)
+                ))
                 ->sortBy('revision_no')
                 ->values();
             if ($registered->count() !== 1) {
@@ -238,6 +287,11 @@ final class BigFiveEnglishDraftInventory
             && (int) $working->asset_id === (int) $asset->id;
         $publishedBound = $asset !== null && $published !== null
             && (int) $published->asset_id === (int) $asset->id;
+        $publishedEn52Locked = $publishedBound
+            && (string) $published->source_package === BigFiveEn52PackageCompiler::RELEASE_ID
+            && (string) $published->authority_package_sha256 === BigFiveEn52Publisher::PACKAGE_FILE_SHA256
+            && (string) $published->workflow_state === BigFiveEn52Publisher::WORKFLOW_STATE
+            && (string) $published->authority_asset_key === $entry['entity_key'];
         $pointerEqual = $working !== null && $published !== null
             && (int) $working->id === (int) $published->id;
         $contentEqual = $workingFingerprint !== null && $publishedFingerprint !== null
@@ -264,9 +318,11 @@ final class BigFiveEnglishDraftInventory
             $asset === null || ! $workingActive || ($asset->published_revision_id && ! $publishedBound) => 'blocked_authority_unknown',
             $cjk || $private || ! $textOnly => 'prohibited_content',
             ! $schemaComplete => 'schema_repair_required',
+            $published !== null && ! $publishedEn52Locked => 'blocked_authority_unknown',
             $contentEqual => 'duplicate_of_published',
             $published !== null && ! $newer => 'stale_working_revision',
             $working !== null && $published === null => 'valid_unpublished_candidate',
+            $working !== null && $published !== null && ! $pointerEqual && $newer => 'valid_unpublished_candidate',
             default => 'verify_only_no_action',
         };
 
@@ -274,6 +330,7 @@ final class BigFiveEnglishDraftInventory
             'backend_resource_id' => $asset?->id,
             'logical_identity' => $entry['entity_type'].':'.$entry['entity_key'],
             'entity_type' => $entry['entity_type'],
+            'entity_key' => $entry['entity_key'],
             'locale' => 'en',
             'translation_group_id' => data_get($asset?->authority_json, 'translation_group_id'),
             'working_revision_id' => $working?->id,
@@ -281,6 +338,7 @@ final class BigFiveEnglishDraftInventory
             'working_revision_fingerprint_sha256' => $workingFingerprint,
             'published_revision_id' => $published?->id,
             'published_revision_fingerprint_sha256' => $publishedFingerprint,
+            'published_en52_lineage_locked' => $publishedEn52Locked,
             'draft_created_at' => $working?->created_at?->toAtomString(),
             'draft_updated_at' => $working?->updated_at?->toAtomString(),
             'published_projection_exists' => $projection,
@@ -305,7 +363,11 @@ final class BigFiveEnglishDraftInventory
                 'revision_table' => 'personality_public_content_asset_revisions',
                 'canonical_path' => $entry['path'],
             ],
-            'blocker' => $disposition === 'blocked_authority_unknown' ? 'current_revision_authority_incomplete' : null,
+            'blocker' => $disposition === 'blocked_authority_unknown'
+                ? ($published !== null && ! $publishedEn52Locked
+                    ? 'current_published_revision_not_locked_en52_authority'
+                    : 'current_revision_authority_incomplete')
+                : null,
         ];
     }
 
@@ -335,7 +397,10 @@ final class BigFiveEnglishDraftInventory
         }
         foreach ($value as $key => $item) {
             if (is_string($key) && preg_match(
-                '/^(?:attempt(?:_id)?|report_token|order(?:_id)?|payment(?:_id)?|private_url|recovery_token|score_vector|raw_score|percentile)$/i',
+                '/^(?:answers|attempt(?:_id|_uuid)?|draft_snapshot|facet_vector|generated_authority_package|'
+                    .'order(?:_id)?|payment(?:_id)?|private_url|raw_mean|raw_score(?:s)?|recovery_token|'
+                    .'report_(?:token|url)|review_snapshot|score_vector|selector_trace|snapshot_json|'
+                    .'standardized_scores|user_id|working_revision_payload|percentile(?:s)?)$/i',
                 $key,
             ) === 1) {
                 return true;
@@ -370,11 +435,59 @@ final class BigFiveEnglishDraftInventory
         return false;
     }
 
-    private function isRegisteredHistoricalSlotRevision(PersonalityPublicContentAssetRevision $revision): bool
+    /** @param array<string,mixed> $row */
+    private function isRegisteredHistoricalSlotRevision(
+        PersonalityPublicContentAssetRevision $revision,
+        array $row,
+    ): bool {
+        $identity = $this->historicalSlotIdentity(
+            (string) $row['entity_type'],
+            (string) $row['entity_key'],
+        );
+
+        return $identity !== null
+            && (string) $revision->source_package === $identity['source_package']
+            && (string) $revision->authority_asset_key === $identity['authority_asset_key']
+            && (string) $revision->authority_package_sha256 === self::HISTORICAL_AUTHORITY_PACKAGE_SHA256;
+    }
+
+    /** @return array{source_package:string,authority_asset_key:string}|null */
+    private function historicalSlotIdentity(string $entityType, string $entityKey): ?array
     {
-        return preg_match(
-            '/^big5-authority-v2-(?:domains|range-(?:agreeableness|conscientiousness|extraversion|neuroticism|openness)|facets-(?:agreeableness|conscientiousness|extraversion|neuroticism|openness))-/',
-            (string) $revision->source_package,
-        ) === 1;
+        if ($entityType === PersonalityPublicContentAsset::ENTITY_DOMAIN
+            && in_array($entityKey, BigFiveCanonicalRouteCatalog::DOMAINS, true)) {
+            return [
+                'source_package' => 'big5-authority-v2-domains-08',
+                'authority_asset_key' => 'domain:'.$entityKey,
+            ];
+        }
+        if ($entityType === PersonalityPublicContentAsset::ENTITY_POLARITY) {
+            [$domain, $range] = array_pad(explode('-', $entityKey, 2), 2, null);
+            if (isset(self::HISTORICAL_PACKAGE_BY_DOMAIN[$domain])
+                && in_array($range, ['high', 'mid', 'low'], true)) {
+                return [
+                    'source_package' => self::HISTORICAL_PACKAGE_BY_DOMAIN[$domain],
+                    'authority_asset_key' => "range:{$domain}:{$range}",
+                ];
+            }
+        }
+        if ($entityType === PersonalityPublicContentAsset::ENTITY_FACET_DETAIL) {
+            $domain = self::FACET_DOMAIN[$entityKey] ?? null;
+            $batch = [
+                'openness' => 15,
+                'conscientiousness' => 16,
+                'extraversion' => 17,
+                'agreeableness' => 18,
+                'neuroticism' => 19,
+            ][$domain] ?? null;
+            if ($domain !== null && $batch !== null) {
+                return [
+                    'source_package' => "big5-authority-v2-facets-{$domain}-{$batch}",
+                    'authority_asset_key' => "facet:{$domain}:{$entityKey}",
+                ];
+            }
+        }
+
+        return null;
     }
 }
