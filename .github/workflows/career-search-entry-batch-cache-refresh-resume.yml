@@ -1,4 +1,4 @@
-name: Career Search Entry Batch Cache Refresh Resume
+name: Career Search Entry Batch Cache Refresh Permission-Repaired Resume
 
 on:
   workflow_dispatch:
@@ -153,6 +153,14 @@ jobs:
       resume_target_set_sha256: ${{ steps.validate.outputs.resume_target_set_sha256 }}
       resume_target_count: ${{ steps.validate.outputs.resume_target_count }}
       resume_batch_count: ${{ steps.validate.outputs.resume_batch_count }}
+      failed_resume_execute_run_id: ${{ steps.validate.outputs.failed_resume_execute_run_id }}
+      failed_resume_execute_run_attempt: ${{ steps.validate.outputs.failed_resume_execute_run_attempt }}
+      failed_resume_execute_receipt_sha256: ${{ steps.validate.outputs.failed_resume_execute_receipt_sha256 }}
+      failed_resume_execute_artifact_digest: ${{ steps.validate.outputs.failed_resume_execute_artifact_digest }}
+      permission_repair_run_id: ${{ steps.validate.outputs.permission_repair_run_id }}
+      permission_repair_run_attempt: ${{ steps.validate.outputs.permission_repair_run_attempt }}
+      permission_repair_receipt_sha256: ${{ steps.validate.outputs.permission_repair_receipt_sha256 }}
+      permission_repair_artifact_digest: ${{ steps.validate.outputs.permission_repair_artifact_digest }}
     steps:
       - name: Checkout exact resume control plane
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
@@ -189,6 +197,14 @@ jobs:
           EXPECTED_RESUME_TARGET_SET_SHA256: ${{ inputs.expected_resume_target_set_sha256 }}
           EXPECTED_RESUME_TARGET_COUNT: ${{ inputs.expected_resume_target_count }}
           EXPECTED_RESUME_BATCH_COUNT: ${{ inputs.expected_resume_batch_count }}
+          FAILED_RESUME_EXECUTE_RUN_ID: "30557073777"
+          FAILED_RESUME_EXECUTE_RUN_ATTEMPT: "1"
+          EXPECTED_FAILED_RESUME_EXECUTE_RECEIPT_SHA256: 42bf4d8ed96513b83603a8f8aa7d2e7619a811abb9fa7691c3f5390cf7a2b203
+          EXPECTED_FAILED_RESUME_EXECUTE_ARTIFACT_DIGEST: bc1ac3e250a1a248de072102089d2b00aacc348e43be7741f47ebb88f456f677
+          PERMISSION_REPAIR_RUN_ID: "30586605927"
+          PERMISSION_REPAIR_RUN_ATTEMPT: "1"
+          EXPECTED_PERMISSION_REPAIR_RECEIPT_SHA256: 346adeed33a71db9b82d2513a9728f45980c8a45724adf1df3f788a1e23dbc12
+          EXPECTED_PERMISSION_REPAIR_ARTIFACT_DIGEST: c2256ef80b6b69958747137b9ef2e46a476b792d81192772dd62577468c343c4
           OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
         run: |
           set -euo pipefail
@@ -211,6 +227,14 @@ jobs:
           [[ "$DIAGNOSTIC_RUN_ID" =~ ^[1-9][0-9]*$ ]]
           [[ "$DIAGNOSTIC_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
           [[ "$EXPECTED_DIAGNOSTIC_RECEIPT_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$FAILED_RESUME_EXECUTE_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$FAILED_RESUME_EXECUTE_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+          [[ "$EXPECTED_FAILED_RESUME_EXECUTE_RECEIPT_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$EXPECTED_FAILED_RESUME_EXECUTE_ARTIFACT_DIGEST" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$PERMISSION_REPAIR_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$PERMISSION_REPAIR_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+          [[ "$EXPECTED_PERMISSION_REPAIR_RECEIPT_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$EXPECTED_PERMISSION_REPAIR_ARTIFACT_DIGEST" =~ ^[0-9a-f]{64}$ ]]
           test "$EXPECTED_BAD_HREF_URL_COUNT" -le 100
           test "$EXPECTED_LOW_MODULE_URL_COUNT" -le 100
           test "$FAILED_PREFLIGHT_RUN_ID" -gt "$RECOVERY_RUN_ID"
@@ -446,6 +470,149 @@ jobs:
              and .rollback_count == 0' "$diagnostic_receipt" >/dev/null
           jq -e '.runner_sha256 | test("^[0-9a-f]{64}$")' "$diagnostic_receipt" >/dev/null
 
+          failed_resume_execute_run="$(
+            gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${FAILED_RESUME_EXECUTE_RUN_ID}"
+          )"
+          jq -e \
+            --argjson attempt "$FAILED_RESUME_EXECUTE_RUN_ATTEMPT" \
+            '.name == "Career Search Entry Batch Cache Refresh Resume"
+             and .path == ".github/workflows/career-search-entry-batch-cache-refresh-resume.yml"
+             and .event == "workflow_dispatch"
+             and .status == "completed"
+             and .conclusion == "failure"
+             and .head_branch == "main"
+             and .head_sha == "2284f5d9f0528722c7a58486f86c0716e526ed5c"
+             and .run_attempt == $attempt' \
+            <<<"$failed_resume_execute_run" >/dev/null
+          failed_resume_execute_artifact_name="career-search-entry-batch-cache-refresh-resume-execute-${FAILED_RESUME_EXECUTE_RUN_ID}-${FAILED_RESUME_EXECUTE_RUN_ATTEMPT}"
+          failed_resume_execute_artifacts="$(
+            gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${FAILED_RESUME_EXECUTE_RUN_ID}/artifacts?per_page=100"
+          )"
+          jq -e \
+            --arg name "$failed_resume_execute_artifact_name" \
+            --arg digest "sha256:${EXPECTED_FAILED_RESUME_EXECUTE_ARTIFACT_DIGEST}" \
+            '[.artifacts[] | select(.name == $name and .expired == false and .digest == $digest)] | length == 1' \
+            <<<"$failed_resume_execute_artifacts" >/dev/null
+          failed_resume_execute_dir="$(mktemp -d)"
+          gh run download "$FAILED_RESUME_EXECUTE_RUN_ID" \
+            --name "$failed_resume_execute_artifact_name" \
+            --dir "$failed_resume_execute_dir"
+          failed_resume_execute_receipt="$failed_resume_execute_dir/career-search-entry-batch-cache-refresh-resume.json"
+          test "$(sha256sum "$failed_resume_execute_receipt" | awk '{print $1}')" \
+            = "$EXPECTED_FAILED_RESUME_EXECUTE_RECEIPT_SHA256"
+          jq -e \
+            --arg release "$EXPECTED_RELEASE_SHA" \
+            --arg release_name "$EXPECTED_RELEASE_NAME" \
+            --arg manifest "$EXPECTED_MANIFEST_SHA256" \
+            --arg payload "$diagnostic_payload_set_sha256" \
+            --argjson run_id "$FAILED_RESUME_EXECUTE_RUN_ID" \
+            --argjson attempt "$FAILED_RESUME_EXECUTE_RUN_ATTEMPT" \
+            '.contract_version == "career.search_entry_batch.cache_refresh.resume.v1"
+             and .mode == "execute"
+             and .status == "FAIL_CLOSED"
+             and .release_sha == $release
+             and .release_name == $release_name
+             and .manifest_sha256 == $manifest
+             and .failed_stage == "publish_cache_payload"
+             and .failure_category == "cache_publish_failed"
+             and .failed_target_index_sha256 == "2d99511ba3981bdd3a63f2370d29d3b28d617bb1a68410159824684e7c493291"
+             and .observed_payload_set_sha256 == $payload
+             and .write_state == "none"
+             and .production_write_execution == false
+             and .cache_refresh_target_count == 0
+             and .completed_batch_count == 0
+             and .per_target_retry_limit == 0
+             and .database_write_count == 0
+             and .cms_write_count == 0
+             and .publication_write_count == 0
+             and .indexability_write_count == 0
+             and .queue_dispatch_count == 0
+             and .sitemap_write_count == 0
+             and .llms_write_count == 0
+             and .search_channel_action_count == 0
+             and .url_submission_count == 0
+             and .non_target_write_count == 0
+             and .deploy_count == 0
+             and .rollback_count == 0
+             and .workflow_run_id == $run_id
+             and .workflow_run_attempt == $attempt' \
+            "$failed_resume_execute_receipt" >/dev/null
+
+          permission_repair_run="$(
+            gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PERMISSION_REPAIR_RUN_ID}"
+          )"
+          jq -e \
+            --argjson attempt "$PERMISSION_REPAIR_RUN_ATTEMPT" \
+            '.name == "Career Search Entry Cache Permission Repair Drift Recovery"
+             and .path == ".github/workflows/career-search-entry-cache-permission-repair.yml"
+             and .event == "workflow_dispatch"
+             and .status == "completed"
+             and .conclusion == "success"
+             and .head_branch == "main"
+             and .head_sha == "75054d5ed17d8c5ace847916a5df0f8ef04b5153"
+             and .run_attempt == $attempt' \
+            <<<"$permission_repair_run" >/dev/null
+          permission_repair_artifact_name="career-search-entry-cache-permission-repair-${PERMISSION_REPAIR_RUN_ID}-${PERMISSION_REPAIR_RUN_ATTEMPT}"
+          permission_repair_artifacts="$(
+            gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PERMISSION_REPAIR_RUN_ID}/artifacts?per_page=100"
+          )"
+          jq -e \
+            --arg name "$permission_repair_artifact_name" \
+            --arg digest "sha256:${EXPECTED_PERMISSION_REPAIR_ARTIFACT_DIGEST}" \
+            '[.artifacts[] | select(.name == $name and .expired == false and .digest == $digest)] | length == 1' \
+            <<<"$permission_repair_artifacts" >/dev/null
+          permission_repair_dir="$(mktemp -d)"
+          gh run download "$PERMISSION_REPAIR_RUN_ID" \
+            --name "$permission_repair_artifact_name" \
+            --dir "$permission_repair_dir"
+          permission_repair_receipt="$permission_repair_dir/career-search-entry-cache-permission-repair.json"
+          test "$(sha256sum "$permission_repair_receipt" | awk '{print $1}')" \
+            = "$EXPECTED_PERMISSION_REPAIR_RECEIPT_SHA256"
+          jq -e \
+            --arg release "$EXPECTED_RELEASE_SHA" \
+            --arg release_name "$EXPECTED_RELEASE_NAME" \
+            --arg manifest "$EXPECTED_MANIFEST_SHA256" \
+            --argjson run_id "$PERMISSION_REPAIR_RUN_ID" \
+            --argjson attempt "$PERMISSION_REPAIR_RUN_ATTEMPT" \
+            '.contract_version == "career.search_entry_batch.cache_permission_repair_control.v1"
+             and .status == "PASS_PERMISSION_REPAIR_VERIFIED"
+             and .release_sha == $release
+             and .release_name == $release_name
+             and .manifest_sha256 == $manifest
+             and .repair.status == "PASS_PERMISSION_REPAIR_COMMITTED"
+             and .repair.write_state == "committed"
+             and .repair.payload_unchanged == true
+             and .repair.pre_repair_payload_set_sha256 == .repair.post_repair_payload_set_sha256
+             and .repair.post_repair_candidate_count == 0
+             and .post_deploy_runner.repair_candidate_count == 0
+             and .post_php_runtime.repair_candidate_count == 0
+             and .permission_metadata_write_count == 9554
+             and .cache_payload_write_count == 0
+             and .retry_execution_count == 0
+             and .database_write_count == 0
+             and .cms_write_count == 0
+             and .publication_write_count == 0
+             and .indexability_write_count == 0
+             and .queue_dispatch_count == 0
+             and .sitemap_write_count == 0
+             and .llms_write_count == 0
+             and .search_channel_action_count == 0
+             and .url_submission_count == 0
+             and .deploy_count == 0
+             and .rollback_count == 0
+             and .run_id == $run_id
+             and .run_attempt == $attempt' \
+            "$permission_repair_receipt" >/dev/null
+          test "$GITHUB_RUN_ID" -gt "$PERMISSION_REPAIR_RUN_ID"
+          later_permission_repair="$(
+            gh api \
+              "repos/${GITHUB_REPOSITORY}/actions/workflows/career-search-entry-cache-permission-repair.yml/runs?event=workflow_dispatch&per_page=100"
+          )"
+          jq -e \
+            --argjson repair_run "$PERMISSION_REPAIR_RUN_ID" \
+            '[.workflow_runs[] | select(.id > $repair_run)] | length == 0' \
+            <<<"$later_permission_repair" >/dev/null
+
           later_refresh="$(
             gh api \
               "repos/${GITHUB_REPOSITORY}/actions/workflows/career-search-entry-batch-cache-refresh-production-ops.yml/runs?event=workflow_dispatch&per_page=100"
@@ -570,7 +737,7 @@ jobs:
                and .queue_dispatch_count == 0
                and .deploy_count == 0
                and .rollback_count == 0' "$preflight_receipt" >/dev/null
-            expected_phrase="$(jq -er '.exact_resume_execute_approval_phrase' "$preflight_receipt")"
+            expected_phrase="I explicitly approve one-time Career search-entry permission-repaired cache-only resume execute for failed resume execute run ${FAILED_RESUME_EXECUTE_RUN_ID} attempt ${FAILED_RESUME_EXECUTE_RUN_ATTEMPT} receipt ${EXPECTED_FAILED_RESUME_EXECUTE_RECEIPT_SHA256} artifact ${EXPECTED_FAILED_RESUME_EXECUTE_ARTIFACT_DIGEST}, permission repair run ${PERMISSION_REPAIR_RUN_ID} attempt ${PERMISSION_REPAIR_RUN_ATTEMPT} receipt ${EXPECTED_PERMISSION_REPAIR_RECEIPT_SHA256} artifact ${EXPECTED_PERMISSION_REPAIR_ARTIFACT_DIGEST}, control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA}, active SHA ${EXPECTED_RELEASE_SHA}, manifest ${EXPECTED_MANIFEST_SHA256}, preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} state ${EXPECTED_PREFLIGHT_STATE_SHA256} target set ${EXPECTED_RESUME_TARGET_SET_SHA256}; refresh exactly ${EXPECTED_RESUME_TARGET_COUNT} residual targets in ${EXPECTED_RESUME_BATCH_COUNT} batches of at most 5 slugs and 10 URLs using the 5000ms offline build budget and zero per-target retry, then require exact quality-package and 100-URL public readback, with no DB, CMS, publication, indexability, queue, sitemap, llms, Search Channel, URL submission, deploy, rollback, or non-target write."
             test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
             later_resume="$(
               gh api \
@@ -579,7 +746,8 @@ jobs:
             jq -e \
               --argjson preflight_run "$PREFLIGHT_RUN_ID" \
               --argjson current_run "$GITHUB_RUN_ID" \
-              '[.workflow_runs[] | select(.id > $preflight_run and .id != $current_run)] | length == 0' \
+              --argjson failed_execute "$FAILED_RESUME_EXECUTE_RUN_ID" \
+              '[.workflow_runs[] | select(.id > $preflight_run and .id != $current_run) | .id] == [$failed_execute]' \
               <<<"$later_resume" >/dev/null
             preflight_state="$EXPECTED_PREFLIGHT_STATE_SHA256"
             target_set="$EXPECTED_RESUME_TARGET_SET_SHA256"
@@ -615,6 +783,14 @@ jobs:
             echo "resume_target_set_sha256=$target_set"
             echo "resume_target_count=$target_count"
             echo "resume_batch_count=$batch_count"
+            echo "failed_resume_execute_run_id=$FAILED_RESUME_EXECUTE_RUN_ID"
+            echo "failed_resume_execute_run_attempt=$FAILED_RESUME_EXECUTE_RUN_ATTEMPT"
+            echo "failed_resume_execute_receipt_sha256=$EXPECTED_FAILED_RESUME_EXECUTE_RECEIPT_SHA256"
+            echo "failed_resume_execute_artifact_digest=$EXPECTED_FAILED_RESUME_EXECUTE_ARTIFACT_DIGEST"
+            echo "permission_repair_run_id=$PERMISSION_REPAIR_RUN_ID"
+            echo "permission_repair_run_attempt=$PERMISSION_REPAIR_RUN_ATTEMPT"
+            echo "permission_repair_receipt_sha256=$EXPECTED_PERMISSION_REPAIR_RECEIPT_SHA256"
+            echo "permission_repair_artifact_digest=$EXPECTED_PERMISSION_REPAIR_ARTIFACT_DIGEST"
           } >> "$GITHUB_OUTPUT"
 
   operate:
@@ -654,6 +830,14 @@ jobs:
       EXPECTED_RESUME_TARGET_SET_SHA256: ${{ needs.eligibility.outputs.resume_target_set_sha256 }}
       EXPECTED_RESUME_TARGET_COUNT: ${{ needs.eligibility.outputs.resume_target_count }}
       EXPECTED_RESUME_BATCH_COUNT: ${{ needs.eligibility.outputs.resume_batch_count }}
+      FAILED_RESUME_EXECUTE_RUN_ID: ${{ needs.eligibility.outputs.failed_resume_execute_run_id }}
+      FAILED_RESUME_EXECUTE_RUN_ATTEMPT: ${{ needs.eligibility.outputs.failed_resume_execute_run_attempt }}
+      FAILED_RESUME_EXECUTE_RECEIPT_SHA256: ${{ needs.eligibility.outputs.failed_resume_execute_receipt_sha256 }}
+      FAILED_RESUME_EXECUTE_ARTIFACT_DIGEST: ${{ needs.eligibility.outputs.failed_resume_execute_artifact_digest }}
+      PERMISSION_REPAIR_RUN_ID: ${{ needs.eligibility.outputs.permission_repair_run_id }}
+      PERMISSION_REPAIR_RUN_ATTEMPT: ${{ needs.eligibility.outputs.permission_repair_run_attempt }}
+      PERMISSION_REPAIR_RECEIPT_SHA256: ${{ needs.eligibility.outputs.permission_repair_receipt_sha256 }}
+      PERMISSION_REPAIR_ARTIFACT_DIGEST: ${{ needs.eligibility.outputs.permission_repair_artifact_digest }}
     steps:
       - name: Checkout exact resume control plane
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
@@ -729,6 +913,10 @@ jobs:
             --arg diagnostic_receipt "$DIAGNOSTIC_RECEIPT_SHA256" \
             --arg diagnostic_state "$DIAGNOSTIC_STATE_SHA256" \
             --arg diagnostic_payload_set "$DIAGNOSTIC_PAYLOAD_SET_SHA256" \
+            --arg failed_resume_execute_receipt "$FAILED_RESUME_EXECUTE_RECEIPT_SHA256" \
+            --arg failed_resume_execute_artifact "$FAILED_RESUME_EXECUTE_ARTIFACT_DIGEST" \
+            --arg permission_repair_receipt "$PERMISSION_REPAIR_RECEIPT_SHA256" \
+            --arg permission_repair_artifact "$PERMISSION_REPAIR_ARTIFACT_DIGEST" \
             --argjson failed_run "$FAILED_RUN_ID" \
             --argjson failed_attempt "$FAILED_RUN_ATTEMPT" \
             --argjson recovery_run "$RECOVERY_RUN_ID" \
@@ -737,6 +925,10 @@ jobs:
             --argjson failed_preflight_attempt "$FAILED_PREFLIGHT_RUN_ATTEMPT" \
             --argjson diagnostic_run "$DIAGNOSTIC_RUN_ID" \
             --argjson diagnostic_attempt "$DIAGNOSTIC_RUN_ATTEMPT" \
+            --argjson failed_resume_execute_run "$FAILED_RESUME_EXECUTE_RUN_ID" \
+            --argjson failed_resume_execute_attempt "$FAILED_RESUME_EXECUTE_RUN_ATTEMPT" \
+            --argjson permission_repair_run "$PERMISSION_REPAIR_RUN_ID" \
+            --argjson permission_repair_attempt "$PERMISSION_REPAIR_RUN_ATTEMPT" \
             --argjson run_id "$GITHUB_RUN_ID" \
             --argjson run_attempt "$GITHUB_RUN_ATTEMPT" \
             '. + {
@@ -757,6 +949,14 @@ jobs:
               diagnostic_receipt_sha256: $diagnostic_receipt,
               diagnostic_state_sha256: $diagnostic_state,
               diagnostic_payload_set_sha256: $diagnostic_payload_set,
+              failed_resume_execute_run_id: $failed_resume_execute_run,
+              failed_resume_execute_run_attempt: $failed_resume_execute_attempt,
+              failed_resume_execute_receipt_sha256: $failed_resume_execute_receipt,
+              failed_resume_execute_artifact_digest: $failed_resume_execute_artifact,
+              permission_repair_run_id: $permission_repair_run,
+              permission_repair_run_attempt: $permission_repair_attempt,
+              permission_repair_receipt_sha256: $permission_repair_receipt,
+              permission_repair_artifact_digest: $permission_repair_artifact,
               workflow_run_id: $run_id,
               workflow_run_attempt: $run_attempt
             }' artifacts/remote-receipt.json \
