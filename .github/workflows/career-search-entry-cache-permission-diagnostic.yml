@@ -1,0 +1,418 @@
+name: Career Search Entry Cache Permission Diagnostic
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_control_plane_sha:
+        description: Exact latest main SHA containing this permission diagnostic
+        required: true
+        type: string
+      expected_release_sha:
+        description: Exact unchanged active production application SHA
+        required: true
+        type: string
+      expected_release_name:
+        description: Exact unchanged active production release name
+        required: true
+        type: string
+      source_diagnostic_run_id:
+        description: Exact successful execute-failure eligibility-recovery diagnostic run
+        required: true
+        type: string
+      source_diagnostic_run_attempt:
+        description: Exact source diagnostic attempt
+        required: true
+        type: string
+      expected_source_receipt_sha256:
+        description: SHA256 of the immutable source diagnostic receipt file
+        required: true
+        type: string
+      expected_source_artifact_digest:
+        description: GitHub artifact digest without the sha256 prefix
+        required: true
+        type: string
+      expected_source_diagnostic_state_sha256:
+        description: Exact source diagnostic state SHA
+        required: true
+        type: string
+      expected_manifest_sha256:
+        description: Exact bound 50-slug manifest SHA
+        required: true
+        type: string
+      expected_preflight_state_sha256:
+        description: Exact bound resume preflight state SHA
+        required: true
+        type: string
+      expected_resume_target_set_sha256:
+        description: Exact bound 75-target residual set SHA
+        required: true
+        type: string
+      expected_observed_payload_set_sha256:
+        description: Exact unchanged 100-URL payload-set SHA
+        required: true
+        type: string
+      operator_approval_phrase:
+        description: Exact one-time read-only production permission diagnostic phrase
+        required: true
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.repository }}-production
+  cancel-in-progress: false
+
+jobs:
+  eligibility:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      control_plane_sha: ${{ steps.validate.outputs.control_plane_sha }}
+      release_sha: ${{ steps.validate.outputs.release_sha }}
+      release_name: ${{ steps.validate.outputs.release_name }}
+      source_run_id: ${{ steps.validate.outputs.source_run_id }}
+      source_run_attempt: ${{ steps.validate.outputs.source_run_attempt }}
+      source_receipt_sha256: ${{ steps.validate.outputs.source_receipt_sha256 }}
+      source_artifact_digest: ${{ steps.validate.outputs.source_artifact_digest }}
+      source_diagnostic_state_sha256: ${{ steps.validate.outputs.source_diagnostic_state_sha256 }}
+      manifest_sha256: ${{ steps.validate.outputs.manifest_sha256 }}
+      preflight_state_sha256: ${{ steps.validate.outputs.preflight_state_sha256 }}
+      resume_target_set_sha256: ${{ steps.validate.outputs.resume_target_set_sha256 }}
+      observed_payload_set_sha256: ${{ steps.validate.outputs.observed_payload_set_sha256 }}
+    steps:
+      - name: Checkout exact permission diagnostic control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 0
+
+      - name: Bind immutable source diagnostic and exact read-only authorization
+        id: validate
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED_CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+          EXPECTED_RELEASE_SHA: ${{ inputs.expected_release_sha }}
+          EXPECTED_RELEASE_NAME: ${{ inputs.expected_release_name }}
+          SOURCE_RUN_ID: ${{ inputs.source_diagnostic_run_id }}
+          SOURCE_RUN_ATTEMPT: ${{ inputs.source_diagnostic_run_attempt }}
+          EXPECTED_SOURCE_RECEIPT_SHA256: ${{ inputs.expected_source_receipt_sha256 }}
+          EXPECTED_SOURCE_ARTIFACT_DIGEST: ${{ inputs.expected_source_artifact_digest }}
+          EXPECTED_SOURCE_DIAGNOSTIC_STATE_SHA256: ${{ inputs.expected_source_diagnostic_state_sha256 }}
+          EXPECTED_MANIFEST_SHA256: ${{ inputs.expected_manifest_sha256 }}
+          EXPECTED_PREFLIGHT_STATE_SHA256: ${{ inputs.expected_preflight_state_sha256 }}
+          EXPECTED_RESUME_TARGET_SET_SHA256: ${{ inputs.expected_resume_target_set_sha256 }}
+          EXPECTED_OBSERVED_PAYLOAD_SET_SHA256: ${{ inputs.expected_observed_payload_set_sha256 }}
+          OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = "refs/heads/main"
+          [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_RELEASE_NAME" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]
+          [[ "$SOURCE_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$SOURCE_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+          for hash in \
+            "$EXPECTED_SOURCE_RECEIPT_SHA256" \
+            "$EXPECTED_SOURCE_ARTIFACT_DIGEST" \
+            "$EXPECTED_SOURCE_DIAGNOSTIC_STATE_SHA256" \
+            "$EXPECTED_MANIFEST_SHA256" \
+            "$EXPECTED_PREFLIGHT_STATE_SHA256" \
+            "$EXPECTED_RESUME_TARGET_SET_SHA256" \
+            "$EXPECTED_OBSERVED_PAYLOAD_SET_SHA256"; do
+            [[ "$hash" =~ ^[0-9a-f]{64}$ ]]
+          done
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          git fetch --no-tags origin main
+          test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+
+          source_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${SOURCE_RUN_ID}")"
+          jq -e \
+            --argjson attempt "$SOURCE_RUN_ATTEMPT" \
+            '.name == "Career Search Entry Batch Cache Refresh Resume Execute Failure Diagnostic Eligibility Recovery"
+             and .event == "workflow_dispatch"
+             and .head_branch == "main"
+             and .status == "completed"
+             and .conclusion == "success"
+             and .run_attempt == $attempt' \
+            <<<"$source_run" >/dev/null
+
+          artifact_name="career-search-entry-batch-cache-refresh-resume-execute-failure-diagnostic-eligibility-recovery-${SOURCE_RUN_ID}-${SOURCE_RUN_ATTEMPT}"
+          artifact_api="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${SOURCE_RUN_ID}/artifacts?per_page=100")"
+          jq -e \
+            --arg name "$artifact_name" \
+            --arg digest "sha256:${EXPECTED_SOURCE_ARTIFACT_DIGEST}" \
+            '[.artifacts[] | select(.name == $name and .expired == false and .digest == $digest)] | length == 1' \
+            <<<"$artifact_api" >/dev/null
+
+          mkdir -p source-artifact
+          gh run download "$SOURCE_RUN_ID" --name "$artifact_name" --dir source-artifact
+          receipt="source-artifact/career-search-entry-batch-cache-refresh-resume-execute-failure-diagnostic-eligibility-recovery.json"
+          test -f "$receipt"
+          test "$(sha256sum "$receipt" | awk '{print $1}')" = "$EXPECTED_SOURCE_RECEIPT_SHA256"
+          jq -e \
+            --arg release "$EXPECTED_RELEASE_SHA" \
+            --arg release_name "$EXPECTED_RELEASE_NAME" \
+            --arg manifest "$EXPECTED_MANIFEST_SHA256" \
+            --arg diagnostic "$EXPECTED_SOURCE_DIAGNOSTIC_STATE_SHA256" \
+            --arg preflight "$EXPECTED_PREFLIGHT_STATE_SHA256" \
+            --arg targets "$EXPECTED_RESUME_TARGET_SET_SHA256" \
+            --arg payload "$EXPECTED_OBSERVED_PAYLOAD_SET_SHA256" \
+            '.contract_version == "career.search_entry_batch.cache_refresh.resume_execute_failure_diagnostic_eligibility_recovery.v1"
+             and .status == "HOLD_DIAGNOSTIC_RUNTIME_CACHE_UNAVAILABLE"
+             and .release_sha == $release
+             and .release_name == $release_name
+             and .manifest_sha256 == $manifest
+             and .diagnostic_state_sha256 == $diagnostic
+             and .preflight_state_sha256 == $preflight
+             and .resume_target_set_sha256 == $targets
+             and .observed_payload_set_sha256 == $payload
+             and .snapshot_complete == true
+             and .failed_execute_baseline_match == true
+             and .write_state == "none"
+             and .production_write_execution == false
+             and .cache_refresh_target_count == 0
+             and .completed_batch_count == 0
+             and .retry_execution_count == 0
+             and .database_write_count == 0
+             and .cms_write_count == 0
+             and .deploy_count == 0
+             and .rollback_count == 0' \
+            "$receipt" >/dev/null
+
+          expected_phrase="I explicitly approve one read-only Career search-entry cache permission diagnostic for source diagnostic run ${SOURCE_RUN_ID} attempt ${SOURCE_RUN_ATTEMPT} receipt ${EXPECTED_SOURCE_RECEIPT_SHA256} artifact ${EXPECTED_SOURCE_ARTIFACT_DIGEST} state ${EXPECTED_SOURCE_DIAGNOSTIC_STATE_SHA256}, control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA}, active SHA ${EXPECTED_RELEASE_SHA}; inspect only bounded aggregate file-cache directory and exact stable-key permission state as deploy runner and www-data, with zero server write, cache write, retry, rollback, deploy, CMS/DB write, or Search Channel operation."
+          test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
+
+          {
+            echo "control_plane_sha=$EXPECTED_CONTROL_PLANE_SHA"
+            echo "release_sha=$EXPECTED_RELEASE_SHA"
+            echo "release_name=$EXPECTED_RELEASE_NAME"
+            echo "source_run_id=$SOURCE_RUN_ID"
+            echo "source_run_attempt=$SOURCE_RUN_ATTEMPT"
+            echo "source_receipt_sha256=$EXPECTED_SOURCE_RECEIPT_SHA256"
+            echo "source_artifact_digest=$EXPECTED_SOURCE_ARTIFACT_DIGEST"
+            echo "source_diagnostic_state_sha256=$EXPECTED_SOURCE_DIAGNOSTIC_STATE_SHA256"
+            echo "manifest_sha256=$EXPECTED_MANIFEST_SHA256"
+            echo "preflight_state_sha256=$EXPECTED_PREFLIGHT_STATE_SHA256"
+            echo "resume_target_set_sha256=$EXPECTED_RESUME_TARGET_SET_SHA256"
+            echo "observed_payload_set_sha256=$EXPECTED_OBSERVED_PAYLOAD_SET_SHA256"
+          } >> "$GITHUB_OUTPUT"
+
+  diagnose:
+    needs: eligibility
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: production
+    env:
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+      EXPECTED_CONTROL_PLANE_SHA: ${{ needs.eligibility.outputs.control_plane_sha }}
+      EXPECTED_RELEASE_SHA: ${{ needs.eligibility.outputs.release_sha }}
+      EXPECTED_RELEASE_NAME: ${{ needs.eligibility.outputs.release_name }}
+      SOURCE_RUN_ID: ${{ needs.eligibility.outputs.source_run_id }}
+      SOURCE_RUN_ATTEMPT: ${{ needs.eligibility.outputs.source_run_attempt }}
+      SOURCE_RECEIPT_SHA256: ${{ needs.eligibility.outputs.source_receipt_sha256 }}
+      SOURCE_ARTIFACT_DIGEST: ${{ needs.eligibility.outputs.source_artifact_digest }}
+      SOURCE_DIAGNOSTIC_STATE_SHA256: ${{ needs.eligibility.outputs.source_diagnostic_state_sha256 }}
+      EXPECTED_MANIFEST_SHA256: ${{ needs.eligibility.outputs.manifest_sha256 }}
+      EXPECTED_PREFLIGHT_STATE_SHA256: ${{ needs.eligibility.outputs.preflight_state_sha256 }}
+      EXPECTED_RESUME_TARGET_SET_SHA256: ${{ needs.eligibility.outputs.resume_target_set_sha256 }}
+      EXPECTED_OBSERVED_PAYLOAD_SET_SHA256: ${{ needs.eligibility.outputs.observed_payload_set_sha256 }}
+    steps:
+      - name: Checkout exact permission diagnostic control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ needs.eligibility.outputs.control_plane_sha }}
+          fetch-depth: 1
+
+      - name: Validate protected production topology
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST RETIRED_DEPLOY_HOST DEPLOY_PATH; do
+            test -n "${!name:-}"
+          done
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          test "$DEPLOY_PORT" -ge 1
+          test "$DEPLOY_PORT" -le 65535
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$RETIRED_DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          [[ "$DEPLOY_PATH" != *".."* ]]
+          echo "Protected production topology validated without disclosing values."
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Run bounded dual-identity read-only permission probes
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          probe="backend/scripts/career/career_search_entry_cache_permission_probe.php"
+          probe_sha256="$(sha256sum "$probe" | awk '{print $1}')"
+          for variable in DEPLOY_PATH EXPECTED_RELEASE_SHA EXPECTED_RELEASE_NAME EXPECTED_MANIFEST_SHA256 DEPLOY_USER; do
+            printf -v "q_${variable}" '%q' "${!variable}"
+          done
+          remote_env="DEPLOY_PATH=${q_DEPLOY_PATH} EXPECTED_RELEASE_SHA=${q_EXPECTED_RELEASE_SHA} EXPECTED_RELEASE_NAME=${q_EXPECTED_RELEASE_NAME} EXPECTED_MANIFEST_SHA256=${q_EXPECTED_MANIFEST_SHA256} EXPECTED_SHARED_OWNER=${q_DEPLOY_USER} EXPECTED_SHARED_GROUP=www-data"
+          ssh_options=(
+            -o BatchMode=yes
+            -o StrictHostKeyChecking=yes
+            -o ConnectTimeout=10
+            -o ServerAliveInterval=20
+            -o ServerAliveCountMax=30
+            -p "$DEPLOY_PORT"
+          )
+          # shellcheck disable=SC2029
+          ssh "${ssh_options[@]}" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "env ${remote_env} PROBE_IDENTITY_ROLE=deploy_runner php" \
+            < "$probe" > artifacts/deploy-runner-permission-probe.json
+          # shellcheck disable=SC2029
+          ssh "${ssh_options[@]}" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "sudo -n -u www-data -- env ${remote_env} PROBE_IDENTITY_ROLE=php_runtime php" \
+            < "$probe" > artifacts/php-runtime-permission-probe.json
+          jq -e '.status == "PASS_PERMISSION_PROBE_COMPLETE" and .identity_role == "deploy_runner"' \
+            artifacts/deploy-runner-permission-probe.json >/dev/null
+          jq -e '.status == "PASS_PERMISSION_PROBE_COMPLETE" and .identity_role == "php_runtime"' \
+            artifacts/php-runtime-permission-probe.json >/dev/null
+          echo "PROBE_SHA256=$probe_sha256" >> "$GITHUB_ENV"
+
+      - name: Build sanitized permission decision receipt
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          if [ ! -s artifacts/deploy-runner-permission-probe.json ]; then
+            printf '%s\n' '{"status":"HOLD_PERMISSION_PROBE_INCOMPLETE","identity_role":"deploy_runner"}' \
+              > artifacts/deploy-runner-permission-probe.json
+          fi
+          if [ ! -s artifacts/php-runtime-permission-probe.json ]; then
+            printf '%s\n' '{"status":"HOLD_PERMISSION_PROBE_INCOMPLETE","identity_role":"php_runtime"}' \
+              > artifacts/php-runtime-permission-probe.json
+          fi
+          jq -s \
+            --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
+            --arg release "$EXPECTED_RELEASE_SHA" \
+            --arg release_name "$EXPECTED_RELEASE_NAME" \
+            --arg manifest "$EXPECTED_MANIFEST_SHA256" \
+            --arg preflight "$EXPECTED_PREFLIGHT_STATE_SHA256" \
+            --arg targets "$EXPECTED_RESUME_TARGET_SET_SHA256" \
+            --arg payload "$EXPECTED_OBSERVED_PAYLOAD_SET_SHA256" \
+            --arg source_receipt "$SOURCE_RECEIPT_SHA256" \
+            --arg source_artifact "$SOURCE_ARTIFACT_DIGEST" \
+            --arg source_state "$SOURCE_DIAGNOSTIC_STATE_SHA256" \
+            --arg probe "${PROBE_SHA256:-unavailable}" \
+            --argjson source_run "$SOURCE_RUN_ID" \
+            --argjson source_attempt "$SOURCE_RUN_ATTEMPT" \
+            --argjson run_id "$GITHUB_RUN_ID" \
+            --argjson run_attempt "$GITHUB_RUN_ATTEMPT" \
+            '.[0] as $runner
+             | .[1] as $runtime
+             | {
+                 contract_version: "career.search_entry_batch.cache_permission_diagnostic.v1",
+                 status: (
+                   if $runner.status != "PASS_PERMISSION_PROBE_COMPLETE"
+                     or $runtime.status != "PASS_PERMISSION_PROBE_COMPLETE"
+                     or $runner.unexpected_cache_entry_count != 0
+                     or $runtime.unexpected_cache_entry_count != 0 then
+                     "HOLD_PERMISSION_DIAGNOSTIC_INCOMPLETE"
+                   elif ($runner.fixed_cache_chain_capability_failure_count + $runtime.fixed_cache_chain_capability_failure_count) > 0
+                     or ($runner.fixed_cache_chain_policy_mismatch_count + $runtime.fixed_cache_chain_policy_mismatch_count) > 0 then
+                     "PASS_PERMISSION_REPAIR_REQUIRED_FIXED_CACHE_CHAIN"
+                   elif ($runner.hash_directory_capability_failure_count + $runtime.hash_directory_capability_failure_count) > 0
+                     or ($runner.hash_directory_policy_mismatch_count + $runtime.hash_directory_policy_mismatch_count) > 0
+                     or ($runner.target_file_capability_failure_count + $runtime.target_file_capability_failure_count) > 0
+                     or ($runner.target_file_owner_group_mismatch_count + $runtime.target_file_owner_group_mismatch_count) > 0
+                     or ($runner.target_file_group_write_missing_count + $runtime.target_file_group_write_missing_count) > 0 then
+                     "PASS_PERMISSION_REPAIR_REQUIRED_BOUNDED_CACHE_TREE"
+                   else
+                     "PASS_PERMISSION_STATE_COMPLETE_NO_REPAIR"
+                   end
+                 ),
+                 repair_scope: (
+                   if $runner.status != "PASS_PERMISSION_PROBE_COMPLETE"
+                     or $runtime.status != "PASS_PERMISSION_PROBE_COMPLETE"
+                     or $runner.unexpected_cache_entry_count != 0
+                     or $runtime.unexpected_cache_entry_count != 0 then
+                     "none_diagnostic_incomplete"
+                   elif ($runner.fixed_cache_chain_capability_failure_count + $runtime.fixed_cache_chain_capability_failure_count) > 0
+                     or ($runner.fixed_cache_chain_policy_mismatch_count + $runtime.fixed_cache_chain_policy_mismatch_count) > 0 then
+                     "fixed_cache_chain_only"
+                   elif ($runner.hash_directory_capability_failure_count + $runtime.hash_directory_capability_failure_count) > 0
+                     or ($runner.hash_directory_policy_mismatch_count + $runtime.hash_directory_policy_mismatch_count) > 0
+                     or ($runner.target_file_capability_failure_count + $runtime.target_file_capability_failure_count) > 0
+                     or ($runner.target_file_owner_group_mismatch_count + $runtime.target_file_owner_group_mismatch_count) > 0
+                     or ($runner.target_file_group_write_missing_count + $runtime.target_file_group_write_missing_count) > 0 then
+                     "attested_hash_directories_and_exact_stable_key_files"
+                   else
+                     "none_investigate_non_permission_cache_store_failure"
+                   end
+                 ),
+                 release_sha: $release,
+                 release_name: $release_name,
+                 manifest_sha256: $manifest,
+                 preflight_state_sha256: $preflight,
+                 resume_target_set_sha256: $targets,
+                 observed_payload_set_sha256: $payload,
+                 source_diagnostic_run_id: $source_run,
+                 source_diagnostic_run_attempt: $source_attempt,
+                 source_receipt_sha256: $source_receipt,
+                 source_artifact_digest: $source_artifact,
+                 source_diagnostic_state_sha256: $source_state,
+                 control_plane_sha: $control,
+                 probe_sha256: $probe,
+                 deploy_runner: $runner,
+                 php_runtime: $runtime,
+                 production_permission_read_executed: true,
+                 server_write_count: 0,
+                 cache_write_count: 0,
+                 retry_execution_count: 0,
+                 database_write_count: 0,
+                 cms_write_count: 0,
+                 publication_write_count: 0,
+                 indexability_write_count: 0,
+                 queue_dispatch_count: 0,
+                 sitemap_write_count: 0,
+                 llms_write_count: 0,
+                 search_channel_action_count: 0,
+                 url_submission_count: 0,
+                 deploy_count: 0,
+                 rollback_count: 0,
+                 run_id: $run_id,
+                 run_attempt: $run_attempt
+               }' \
+            artifacts/deploy-runner-permission-probe.json \
+            artifacts/php-runtime-permission-probe.json \
+            > artifacts/career-search-entry-cache-permission-diagnostic.json
+
+      - name: Upload sanitized immutable permission diagnostic receipt
+        if: always()
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4
+        with:
+          name: career-search-entry-cache-permission-diagnostic-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/career-search-entry-cache-permission-diagnostic.json
+          if-no-files-found: error
+          retention-days: 90
