@@ -101497,7 +101497,7 @@
       "EN-PARITY-W1-MBTI-RESULT-AGENT-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "82263bedac5b341ee013c65da82e11964b6f11ec",
+    "commit_sha": "c155b2e21202f6fbc86180b45497f653595b00e0",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3429",
     "checks": {
       "authorization": {
@@ -101656,8 +101656,13 @@
         "at": "2026-07-30T20:50:24Z",
         "status": "review_fix_local_verified",
         "note": "Exact head 8733c3381560bd4652357ffcf98402c6725b34ba passed all nine required checks with staging parity skipped, then review found one valid P2 protected-premium mapping gap. Public premium projection remains title/teaser with payload null, while protected body/prompts now have an exact result_only_authority.premium_full entitled projection consumed by full_result and the synthetic entitled PDF fixture. Focused validation passed 7 tests/1105 assertions plus scoped Pint, JSON, hash, diff, and exact scope checks. Candidate package SHA is 79f9d9f575f7c9fa54552276923cfac96e96981aab9ef7b30b3204fbe8ec27b2."
+      },
+      {
+        "at": "2026-07-30T20:51:36Z",
+        "status": "github_checks_pending",
+        "note": "Committed the protected premium entitled-projection repair as implementation commit c155b2e21202f6fbc86180b45497f653595b00e0. The following metadata-only commit records that immutable implementation pointer; exact-head GitHub checks and review are pending."
       }
     ],
-    "updated_at": "2026-07-30T20:50:24Z"
+    "updated_at": "2026-07-30T20:51:36Z"
   }
 }
