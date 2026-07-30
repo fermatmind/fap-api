@@ -659,6 +659,12 @@ final class BigFiveEnglishDraftInventory
         $translationGroupId = data_get($asset?->authority_json, 'translation_group_id');
         $translationGroupIdSafe = is_string($translationGroupId)
             && preg_match('/^big-five:[a-z0-9:_-]{1,128}$/', $translationGroupId) === 1;
+        $workingRevisionStatus = $working === null ? null : (string) $working->workflow_state;
+        $workingRevisionStatusSafe = $workingRevisionStatus === null || in_array($workingRevisionStatus, [
+            PersonalityPublicContentAssetRevision::STATE_DRAFT,
+            'pending_manual_review',
+            BigFiveEn52Publisher::WORKFLOW_STATE,
+        ], true);
 
         $disposition = match (true) {
             $asset === null || ! $workingActive || ($asset->published_revision_id && ! $publishedBound) => 'blocked_authority_unknown',
@@ -684,7 +690,10 @@ final class BigFiveEnglishDraftInventory
             'translation_group_id' => $translationGroupIdSafe ? $translationGroupId : null,
             'translation_group_id_safe' => $translationGroupIdSafe,
             'working_revision_id' => $working?->id,
-            'working_revision_status' => $working?->workflow_state,
+            'working_revision_status' => $workingRevisionStatusSafe
+                ? $workingRevisionStatus
+                : 'invalid_unrecognized',
+            'working_revision_status_safe' => $workingRevisionStatusSafe,
             'working_revision_fingerprint_sha256' => $workingFingerprint,
             'published_revision_id' => $published?->id,
             'published_revision_fingerprint_sha256' => $publishedFingerprint,

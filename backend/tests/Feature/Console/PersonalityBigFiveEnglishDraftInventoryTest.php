@@ -654,7 +654,9 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             $this->completeSnapshot('Published'),
         );
         $working = $this->createRevision($asset, 2, 'working-two', $this->completeSnapshot('Working'));
-        $working->forceFill(['workflow_state' => 'pending_manual_review'])->saveQuietly();
+        $working->forceFill([
+            'workflow_state' => 'https://private.invalid/credential-token-must-not-appear',
+        ])->saveQuietly();
         $asset->forceFill([
             'working_revision_id' => $working->id,
             'published_revision_id' => $published->id,
@@ -662,9 +664,13 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
 
         $result = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
         $row = collect($result['rows'])->firstWhere('logical_identity', 'domain:openness');
+        $encoded = json_encode($result, JSON_THROW_ON_ERROR);
 
         $this->assertFalse($row['candidate_workflow_draft']);
+        $this->assertFalse($row['working_revision_status_safe']);
+        $this->assertSame('invalid_unrecognized', $row['working_revision_status']);
         $this->assertSame('schema_repair_required', $row['recommended_disposition']);
+        $this->assertStringNotContainsString('credential-token-must-not-appear', $encoded);
         $this->assertFalse($result['ok']);
     }
 
