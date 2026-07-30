@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "exact_head_retry_pending",
-        "evidence": "GitHub CI runs 30558811823, 30559823419, and 30560724406 passed all jobs at their exact heads. The latest exact-head review added four in-scope fail-closed findings; their fixes now pass 12 focused tests / 68 assertions and require a fresh exact-head CI/review cycle."
+        "evidence": "GitHub CI runs 30558811823, 30559823419, 30560724406, and 30562045318 passed all required jobs at their exact heads. The latest exact-head review added three in-scope contract findings; their fixes pass the 11-test inventory suite and the 405-test runtime-freeze suite and require a fresh exact-head CI/review cycle."
       }
     },
     "scope_validation": {
@@ -101258,8 +101258,13 @@
         "at": "2026-07-30T16:30:28Z",
         "status": "review_fix_local_checks_passed",
         "note": "Inspected four new exact-head review findings after CI run 30560724406 passed. Current published pointers now require exact locked EN52 package, SHA, workflow, and asset-key lineage; a distinct newer working revision remains a valid unpublished candidate; historical slot identity is bound to the exact row family, authority key, and locked Authority V2 package SHA; and the private-result denylist covers the established attempt/report/user/raw-score/vector snapshot families. Focused inventory plus runtime-freeze regression checks pass 12 tests / 68 assertions; scoped Pint, JSON/YAML parsing, diff checks, and exact allowlist validation pass."
+      },
+      {
+        "at": "2026-07-30T16:44:50Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Inspected three new exact-head review findings after all required jobs in CI run 30562045318 passed. Locked EN52 facet lineage now maps every route key to its exact content identity, text-only validation rejects img/picture/source HTML elements, and the runtime command has a distinct schema version from the immutable production-evidence artifact. The 11-test inventory suite and 405-test runtime-freeze suite pass, as do scoped Pint, PHP syntax, state JSON parsing, and diff checks."
       }
     ],
-    "updated_at": "2026-07-30T16:30:28Z"
+    "updated_at": "2026-07-30T16:44:50Z"
   }
 }

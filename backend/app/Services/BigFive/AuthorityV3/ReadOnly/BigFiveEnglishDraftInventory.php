@@ -15,7 +15,7 @@ use RuntimeException;
 
 final class BigFiveEnglishDraftInventory
 {
-    public const SCHEMA_VERSION = 'en-parity-w2-big-five-draft-inventory.v1';
+    public const SCHEMA_VERSION = 'en-parity-w2-big-five-runtime-draft-inventory.v1';
 
     private const HISTORICAL_AUTHORITY_PACKAGE_SHA256 = 'fb67edc033e679da3f134b34db30901465c7b44e0585818b23613fab83bf9162';
 
@@ -60,6 +60,40 @@ final class BigFiveEnglishDraftInventory
         'values' => 'openness',
         'vulnerability' => 'neuroticism',
         'warmth' => 'extraversion',
+    ];
+
+    /** @var array<string,string> */
+    private const FACET_EN52_AUTHORITY_KEY = [
+        'achievement-striving' => 'C4-achievement-striving',
+        'actions' => 'O4-actions',
+        'activity' => 'E4-activity',
+        'aesthetics' => 'O2-aesthetics',
+        'altruism' => 'A3-altruism',
+        'anger' => 'N2-anger',
+        'anxiety' => 'N1-anxiety',
+        'assertiveness' => 'E3-assertiveness',
+        'competence' => 'C1-competence',
+        'compliance' => 'A4-compliance',
+        'deliberation' => 'C6-deliberation',
+        'depression' => 'N3-depression',
+        'dutifulness' => 'C3-dutifulness',
+        'excitement-seeking' => 'E5-excitement-seeking',
+        'feelings' => 'O3-feelings',
+        'gregariousness' => 'E2-gregariousness',
+        'ideas' => 'O5-ideas',
+        'imagination' => 'O1-imagination',
+        'impulsiveness' => 'N5-impulsiveness',
+        'modesty' => 'A5-modesty',
+        'order' => 'C2-order',
+        'positive-emotions' => 'E6-positive-emotions',
+        'self-consciousness' => 'N4-self-consciousness',
+        'self-discipline' => 'C5-self-discipline',
+        'straightforwardness' => 'A2-straightforwardness',
+        'tender-mindedness' => 'A6-tender-mindedness',
+        'trust' => 'A1-trust',
+        'values' => 'O6-values',
+        'vulnerability' => 'N6-vulnerability',
+        'warmth' => 'E1-warmth',
     ];
 
     /** @var list<string> */
@@ -291,7 +325,7 @@ final class BigFiveEnglishDraftInventory
             && (string) $published->source_package === BigFiveEn52PackageCompiler::RELEASE_ID
             && (string) $published->authority_package_sha256 === BigFiveEn52Publisher::PACKAGE_FILE_SHA256
             && (string) $published->workflow_state === BigFiveEn52Publisher::WORKFLOW_STATE
-            && (string) $published->authority_asset_key === $entry['entity_key'];
+            && (string) $published->authority_asset_key === $this->en52AuthorityAssetKey($entry);
         $pointerEqual = $working !== null && $published !== null
             && (int) $working->id === (int) $published->id;
         $contentEqual = $workingFingerprint !== null && $publishedFingerprint !== null
@@ -416,7 +450,7 @@ final class BigFiveEnglishDraftInventory
     private function containsMediaReference(mixed $value): bool
     {
         if (is_string($value)) {
-            return preg_match('/!\[[^\]]*\]\([^)]+\)|<img\b/i', $value) === 1;
+            return preg_match('/!\[[^\]]*\]\([^)]+\)|<(?:img|picture|source)\b/i', $value) === 1;
         }
         if (! is_array($value)) {
             return false;
@@ -433,6 +467,16 @@ final class BigFiveEnglishDraftInventory
         }
 
         return false;
+    }
+
+    /** @param array<string,mixed> $entry */
+    private function en52AuthorityAssetKey(array $entry): string
+    {
+        if ($entry['entity_type'] === PersonalityPublicContentAsset::ENTITY_FACET_DETAIL) {
+            return self::FACET_EN52_AUTHORITY_KEY[(string) $entry['entity_key']] ?? '';
+        }
+
+        return (string) $entry['entity_key'];
     }
 
     /** @param array<string,mixed> $row */

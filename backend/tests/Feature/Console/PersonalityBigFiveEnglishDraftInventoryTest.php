@@ -24,6 +24,14 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $result = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
 
         $this->assertFalse($result['ok']);
+        $this->assertSame(
+            'en-parity-w2-big-five-runtime-draft-inventory.v1',
+            $result['schema_version'],
+        );
+        $this->assertNotSame(
+            'en-parity-w2-big-five-draft-inventory.v1',
+            $result['schema_version'],
+        );
         $this->assertSame('BLOCKED_BIG_FIVE_ENGLISH_DRAFT_INVENTORY_ZERO_WRITE', $result['status']);
         $this->assertSame(50, $result['counts']['historical_slots']);
         $this->assertSame(
@@ -294,7 +302,7 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
                 'user_id' => 'private-user-must-not-appear',
                 'raw_scores' => ['private-score-must-not-appear'],
                 'facet_vector' => ['private-facet-must-not-appear'],
-                'body' => '![private](https://private.invalid/image.png)',
+                'body' => '<picture><source srcset="https://private.invalid/image.webp"></picture>',
             ],
         );
         $current = $this->createRevision(
@@ -441,7 +449,11 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         return PersonalityPublicContentAssetRevision::query()->create([
             'asset_id' => $asset->id,
             'revision_no' => $revisionNo,
-            'authority_asset_key' => $historical ? $authorityAssetKey : (string) $asset->entity_key,
+            'authority_asset_key' => $historical
+                ? $authorityAssetKey
+                : ($en52 && $asset->entity_type === PersonalityPublicContentAsset::ENTITY_FACET_DETAIL
+                    ? 'O1-imagination'
+                    : (string) $asset->entity_key),
             'source_package' => $sourcePackage,
             'source_hash' => hash('sha256', $sourcePackage.':'.$revisionNo),
             'authority_package_sha256' => $historical
