@@ -883,7 +883,47 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
         $this->assertSame(
             [],
-            $this->mbtiImpactingRuntimeChanges($changed, dirname(base_path()), 'origin/main')
+            $this->mbtiImpactingRuntimeChanges(
+                $changed,
+                '',
+                '',
+                generateReportSnapshotJobChangedLines: $this->enneagramSnapshotJobDeduplicationChangedLines(),
+            )
+        );
+    }
+
+    public function test_runtime_freeze_classifier_rejects_snapshot_job_deduplication_diff_drift(): void
+    {
+        $changed = [
+            'backend/app/Jobs/GenerateReportSnapshotJob.php',
+        ];
+        $extraChangedLines = [
+            ...$this->enneagramSnapshotJobDeduplicationChangedLines(),
+            '+    public int $tries = 99;',
+        ];
+        $missingChangedLines = array_slice(
+            $this->enneagramSnapshotJobDeduplicationChangedLines(),
+            0,
+            -1,
+        );
+
+        $this->assertSame(
+            $changed,
+            $this->mbtiImpactingRuntimeChanges(
+                $changed,
+                '',
+                '',
+                generateReportSnapshotJobChangedLines: $extraChangedLines,
+            )
+        );
+        $this->assertSame(
+            $changed,
+            $this->mbtiImpactingRuntimeChanges(
+                $changed,
+                '',
+                '',
+                generateReportSnapshotJobChangedLines: $missingChangedLines,
+            )
         );
     }
 
@@ -6596,6 +6636,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ?array $scaleLookupControllerChangedLines = null,
         ?array $soloOwnerReviewFoundationAddedFiles = null,
         ?array $llmsControllerChangedLines = null,
+        ?array $generateReportSnapshotJobChangedLines = null,
     ): array {
         $impacting = [];
         $soloOwnerReviewFoundationAddedFileSet = array_fill_keys(
@@ -6915,7 +6956,12 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
-            if ($this->isExactEnneagramSnapshotJobDeduplicationChange($file, $repoRoot, $baseRef)) {
+            if ($this->isExactEnneagramSnapshotJobDeduplicationChange(
+                $file,
+                $repoRoot,
+                $baseRef,
+                $generateReportSnapshotJobChangedLines,
+            )) {
                 continue;
             }
 
@@ -10641,22 +10687,59 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         string $file,
         string $repoRoot,
         string $baseRef,
+        ?array $changedLines = null,
     ): bool {
-        if (
-            $file !== 'backend/app/Jobs/GenerateReportSnapshotJob.php'
-            || $repoRoot === ''
-            || $baseRef === ''
-        ) {
+        if ($file !== 'backend/app/Jobs/GenerateReportSnapshotJob.php') {
             return false;
         }
 
-        $changedLines = $this->changedLinesForFile($repoRoot, $baseRef, $file);
+        if ($changedLines === null) {
+            if ($repoRoot === '' || $baseRef === '') {
+                return false;
+            }
+
+            $changedLines = $this->changedLinesForFile($repoRoot, $baseRef, $file);
+        }
 
         return $changedLines !== []
             && hash_equals(
                 '2ec0fa4abb81e444bc4c380a0aa529257fee7c2b5b7a75f6a486fdedad9a2053',
                 hash('sha256', implode("\n", $changedLines))
             );
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function enneagramSnapshotJobDeduplicationChangedLines(): array
+    {
+        return [
+            '+use Illuminate\Contracts\Queue\ShouldBeUnique;',
+            '-class GenerateReportSnapshotJob implements ShouldQueue',
+            '+class GenerateReportSnapshotJob implements ShouldBeUnique, ShouldQueue',
+            '+    public int $uniqueFor = 180;',
+            '+',
+            '-        $snapshot = $this->snapshotQuery($attemptId)->first();',
+            '-        if ($snapshot) {',
+            "-            \$status = strtolower(trim((string) (\$snapshot->status ?? '')));",
+            "-            if (\$status === 'ready') {",
+            '-                return;',
+            '-            }',
+            '+        $claimed = $this->snapshotQuery($attemptId)',
+            "+            ->whereIn('status', ['pending', 'failed'])",
+            '+            ->update([',
+            "+                'status' => 'running',",
+            "+                'last_error' => null,",
+            "+                'updated_at' => now(),",
+            '+            ]);',
+            '+        if ($claimed !== 1) {',
+            '+            return;',
+            '+    public function uniqueId(): string',
+            '+    {',
+            "+        return \$this->orgId.':'.trim(\$this->attemptId);",
+            '+    }',
+            '+',
+        ];
     }
 
     private function isEnneagramRegistryValidatorFile(string $file): bool
