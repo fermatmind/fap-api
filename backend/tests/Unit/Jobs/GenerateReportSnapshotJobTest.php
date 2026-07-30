@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Jobs;
 
 use App\Jobs\GenerateReportSnapshotJob;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Tests\TestCase;
 
 final class GenerateReportSnapshotJobTest extends TestCase
@@ -52,6 +53,15 @@ final class GenerateReportSnapshotJobTest extends TestCase
 
         $this->assertSame('redis', $job->connection);
         $this->assertSame('default', $job->queue);
+    }
+
+    public function test_generate_report_snapshot_job_is_unique_per_org_and_attempt(): void
+    {
+        $job = new GenerateReportSnapshotJob(7, 'attempt-unique', 'submit', null);
+
+        $this->assertInstanceOf(ShouldBeUnique::class, $job);
+        $this->assertSame('7:attempt-unique', $job->uniqueId());
+        $this->assertSame(180, $job->uniqueFor);
     }
 
     private function reloadReportQueueConfig(): void

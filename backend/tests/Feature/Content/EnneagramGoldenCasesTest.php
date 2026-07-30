@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Content;
 
+use App\Jobs\GenerateReportSnapshotJob;
 use App\Models\Result;
+use App\Services\Report\ReportSnapshotStore;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -79,6 +81,12 @@ final class EnneagramGoldenCasesTest extends TestCase
         $result = $this->withHeaders($headers)->getJson('/api/v0.3/attempts/'.$attemptId.'/result');
         $result->assertStatus(200);
         $resultPayload = (array) $result->json();
+
+        $pendingReport = $this->withHeaders($headers)->getJson('/api/v0.3/attempts/'.$attemptId.'/report');
+        $pendingReport->assertStatus(202);
+
+        (new GenerateReportSnapshotJob(0, $attemptId, 'submit', null))
+            ->handle(app(ReportSnapshotStore::class));
 
         $report = $this->withHeaders($headers)->getJson('/api/v0.3/attempts/'.$attemptId.'/report');
         $report->assertStatus(200);

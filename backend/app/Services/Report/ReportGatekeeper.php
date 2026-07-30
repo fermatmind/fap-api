@@ -8,13 +8,13 @@ use App\Models\Attempt;
 use App\Models\Result;
 use App\Repositories\Report\ReportAccessActor;
 use App\Repositories\Report\ReportSubjectRepository;
+use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2AuditFields;
+use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2Contract;
+use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2RuntimeWrapper;
 use App\Services\Commerce\FreemiumLocalePolicy;
 use App\Services\Content\ContentPack;
 use App\Services\Content\ContentStore;
 use App\Services\ContentPackResolver;
-use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2AuditFields;
-use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2Contract;
-use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2RuntimeWrapper;
 use App\Services\Report\Resolvers\AccessResolver;
 use App\Services\Report\Resolvers\CrisisPolicyResolver;
 use App\Services\Report\Resolvers\OfferResolver;
@@ -280,11 +280,11 @@ class ReportGatekeeper
         $requiresSnapshotBoundReport = $scaleCode === ReportAccess::SCALE_RIASEC
             && $unlockStage !== ReportAccess::UNLOCK_STAGE_PARTIAL
             && $shouldUseSnapshot;
-        $snapshotStrictMode = in_array($scaleCode, [ReportAccess::SCALE_ENNEAGRAM, ReportAccess::SCALE_RIASEC], true) ? false : $this->strictSnapshotModeEnabled();
+        $snapshotStrictMode = $scaleCode === ReportAccess::SCALE_ENNEAGRAM
+            || ($scaleCode !== ReportAccess::SCALE_RIASEC && $this->strictSnapshotModeEnabled());
         $shouldReadFromSnapshot = $unlockStage !== ReportAccess::UNLOCK_STAGE_PARTIAL
             && ($snapshotStrictMode || $shouldUseSnapshot);
-        $allowLiveBuildFallbackForSnapshot = $scaleCode === ReportAccess::SCALE_EQ_60
-            || ($scaleCode === ReportAccess::SCALE_ENNEAGRAM && ! $snapshotStrictMode);
+        $allowLiveBuildFallbackForSnapshot = $scaleCode === ReportAccess::SCALE_EQ_60;
         if ($requiresSnapshotBoundReport) {
             $snapshotResult = $this->snapshotStore->createSnapshotForAttempt([
                 'org_id' => $effectiveOrgId,
@@ -330,7 +330,7 @@ class ReportGatekeeper
                 ->first();
 
             if ($snapshotStrictMode && ($snapshotRow === null || $forceRefresh) && ! $allowLiveBuildFallbackForSnapshot) {
-                $this->enqueueSnapshotBuild($effectiveOrgId, $attempt, $result);
+                $this->enqueueSnapshotBuild($effectiveOrgId, $attempt, $result, $forceRefresh);
 
                 return $this->responsePayload(
                     $locked,
@@ -343,6 +343,7 @@ class ReportGatekeeper
                         'generating' => true,
                         'snapshot_error' => false,
                         'retry_after_seconds' => self::SNAPSHOT_RETRY_AFTER_SECONDS,
+                        'snapshot_status' => 'pending',
                     ],
                     $modulesAllowed,
                     $modulesOffered,
@@ -358,7 +359,7 @@ class ReportGatekeeper
 
             if ($snapshotRow) {
                 $snapshotStatus = strtolower(trim((string) ($snapshotRow->status ?? '')));
-                if ($snapshotStatus === 'pending') {
+                if (in_array($snapshotStatus, ['pending', 'running'], true)) {
                     if ($allowLiveBuildFallbackForSnapshot) {
                         $snapshotRow = null;
                     } else {
@@ -373,6 +374,7 @@ class ReportGatekeeper
                                 'generating' => true,
                                 'snapshot_error' => false,
                                 'retry_after_seconds' => self::SNAPSHOT_RETRY_AFTER_SECONDS,
+                                'snapshot_status' => $snapshotStatus,
                             ],
                             $modulesAllowed,
                             $modulesOffered,
@@ -391,27 +393,9 @@ class ReportGatekeeper
                     if ($allowLiveBuildFallbackForSnapshot) {
                         $snapshotRow = null;
                     } else {
-                        return $this->responsePayload(
-                            $locked,
-                            $reportAccessLevel,
-                            $variant,
-                            $viewPolicy,
-                            [],
-                            $paywall,
-                            [
-                                'generating' => false,
-                                'snapshot_error' => true,
-                                'retry_after_seconds' => self::SNAPSHOT_RETRY_AFTER_SECONDS,
-                            ],
-                            $modulesAllowed,
-                            $modulesOffered,
-                            $modulesPreview,
-                            $normsPayload,
-                            $qualityPayload,
-                            $isMbtiContract,
-                            accessSource: $accessSource,
-                            freeFullReportMode: $freeFullReportMode,
-                            paywallSuppressed: $paywallSuppressed
+                        return $this->serviceUnavailable(
+                            'REPORT_SNAPSHOT_FAILED',
+                            'report snapshot generation failed.'
                         );
                     }
                 }
@@ -499,6 +483,7 @@ class ReportGatekeeper
                                 'generating' => true,
                                 'snapshot_error' => false,
                                 'retry_after_seconds' => self::SNAPSHOT_RETRY_AFTER_SECONDS,
+                                'snapshot_status' => 'pending',
                             ],
                             $modulesAllowed,
                             $modulesOffered,
@@ -527,6 +512,7 @@ class ReportGatekeeper
                     'generating' => true,
                     'snapshot_error' => false,
                     'retry_after_seconds' => self::SNAPSHOT_RETRY_AFTER_SECONDS,
+                    'snapshot_status' => 'pending',
                 ],
                 $modulesAllowed,
                 $modulesOffered,
@@ -987,22 +973,30 @@ class ReportGatekeeper
             ));
     }
 
-    private function enqueueSnapshotBuild(int $orgId, Attempt $attempt, Result $result): void
-    {
+    private function enqueueSnapshotBuild(
+        int $orgId,
+        Attempt $attempt,
+        Result $result,
+        bool $forceRefresh = false
+    ): void {
         $attemptId = trim((string) ($attempt->id ?? ''));
         if ($attemptId === '') {
             return;
         }
 
         try {
-            $this->snapshotStore->seedPendingSnapshot($orgId, $attemptId, null, [
+            $queued = $this->snapshotStore->seedPendingSnapshot($orgId, $attemptId, null, [
                 'scale_code' => strtoupper(trim((string) ($attempt->scale_code ?? $result->scale_code ?? ''))),
                 'scale_code_v2' => strtoupper(trim((string) ($attempt->scale_code_v2 ?? $result->scale_code_v2 ?? ''))),
                 'scale_uid' => trim((string) ($attempt->scale_uid ?? $result->scale_uid ?? '')),
                 'pack_id' => (string) ($attempt->pack_id ?? $result->pack_id ?? ''),
                 'dir_version' => (string) ($attempt->dir_version ?? $result->dir_version ?? ''),
                 'scoring_spec_version' => (string) ($attempt->scoring_spec_version ?? $result->scoring_spec_version ?? ''),
-            ]);
+            ], $forceRefresh);
+
+            if (! $queued) {
+                return;
+            }
 
             GenerateReportSnapshotJob::dispatch(
                 $orgId,
@@ -1245,6 +1239,16 @@ class ReportGatekeeper
             'error' => $code,
             'message' => $message,
             'status' => 500,
+        ];
+    }
+
+    private function serviceUnavailable(string $code, string $message): array
+    {
+        return [
+            'ok' => false,
+            'error' => $code,
+            'message' => $message,
+            'status' => 503,
         ];
     }
 }

@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Services\Report\ReportSnapshotStore;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -12,7 +13,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class GenerateReportSnapshotJob implements ShouldQueue
+class GenerateReportSnapshotJob implements ShouldBeUnique, ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -21,6 +22,8 @@ class GenerateReportSnapshotJob implements ShouldQueue
     public int $timeout = 150;
 
     public bool $failOnTimeout = true;
+
+    public int $uniqueFor = 180;
 
     /** @var array<int, int> */
     public array $backoff = [5, 10, 20];
@@ -45,12 +48,15 @@ class GenerateReportSnapshotJob implements ShouldQueue
             return;
         }
 
-        $snapshot = $this->snapshotQuery($attemptId)->first();
-        if ($snapshot) {
-            $status = strtolower(trim((string) ($snapshot->status ?? '')));
-            if ($status === 'ready') {
-                return;
-            }
+        $claimed = $this->snapshotQuery($attemptId)
+            ->whereIn('status', ['pending', 'failed'])
+            ->update([
+                'status' => 'running',
+                'last_error' => null,
+                'updated_at' => now(),
+            ]);
+        if ($claimed !== 1) {
+            return;
         }
 
         try {
@@ -88,6 +94,11 @@ class GenerateReportSnapshotJob implements ShouldQueue
 
             throw $e;
         }
+    }
+
+    public function uniqueId(): string
+    {
+        return $this->orgId.':'.trim($this->attemptId);
     }
 
     private function updateSnapshotState(string $attemptId, array $fields): void
