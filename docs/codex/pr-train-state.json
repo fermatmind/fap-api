@@ -101260,7 +101260,7 @@
     "base": "main",
     "branch": "codex/api-gift-schema-01-report-gift-requests",
     "title": "API-GIFT-SCHEMA-01: add report gift request schema",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "depends_on": [
       "API-UNLOCK-01"
     ],
@@ -101272,12 +101272,12 @@
       "pint_scoped": "passed: 2 files",
       "composer_validate": "passed: strict",
       "yaml_json_diff_scope": "passed",
-      "github_required_checks": "pending rerun after same-scope classifier repair"
+      "github_required_checks": "passed on 3b3b867b248657ff1a749ef6307122815e87d99c"
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -101315,8 +101315,13 @@
         "at": "2026-07-30T17:42:27Z",
         "status": "review_fix_local_validation_passed",
         "note": "The branch-diff runtime gate and exact three-channel classifier regression now pass together (2 tests / 5 assertions). The gift schema test still passes (1 test / 28 assertions), scoped Pint passes for all three PHP files, and YAML/JSON plus diff checks pass. The required GitHub checks must rerun on the repaired head."
+      },
+      {
+        "at": "2026-07-30T17:51:25Z",
+        "status": "ready_to_merge",
+        "note": "All required checks passed on repaired head 3b3b867b248657ff1a749ef6307122815e87d99c: hygiene, supply-chain, content-pack build validation, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep OSS, blocking secret scan, and non-blocking SARIF upload. Staging parity was intentionally skipped by workflow. The PR is mergeable with no review comments or requested changes."
       }
     ],
-    "updated_at": "2026-07-30T17:42:27Z"
+    "updated_at": "2026-07-30T17:51:25Z"
   }
 }
