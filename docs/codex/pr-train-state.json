@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "exact_head_retry_pending",
-        "evidence": "GitHub CI runs 30558811823, 30559823419, 30560724406, 30562045318, 30562910486, 30564012592, 30565108964, 30567136115, 30568401101, 30569685735, 30570549188, 30571343057, and 30572071351 passed all required jobs at their exact heads. The latest exact-head review added two in-scope state/Unicode findings; their fixes pass the 23-test inventory suite and the 395-test runtime-freeze suite and require a fresh exact-head CI/review cycle."
+        "evidence": "GitHub CI runs 30558811823, 30559823419, 30560724406, 30562045318, 30562910486, 30564012592, 30565108964, 30567136115, 30568401101, 30569685735, 30570549188, 30571343057, 30572071351, and 30572828400 passed all required jobs at their exact heads. The latest exact-head review added two in-scope candidate-validation findings; their fixes pass the 25-test inventory suite and the 395-test runtime-freeze suite and require a fresh exact-head CI/review cycle."
       }
     },
     "scope_validation": {
@@ -101308,9 +101308,14 @@
         "at": "2026-07-30T18:57:58Z",
         "status": "review_fix_local_checks_passed",
         "note": "After every required job in CI run 30572071351 passed, exact-head review identified two remaining state and Unicode gaps. Registered Authority V2 historical slots now require the collision-safe writer's exact draft workflow state, and a shared complete CJK detector covers BMP plus supplementary unified-ideograph and compatibility ranges for both current and historical snapshots. The 23-test inventory suite passes 142 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint passes."
+      },
+      {
+        "at": "2026-07-30T19:08:30Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30572828400 passed, exact-head review identified two remaining candidate-validation gaps. Independent working candidates now require the revision model's exact draft workflow state, and title/summary completeness requires non-empty scalar strings rather than Laravel filled semantics. The 25-test inventory suite passes 150 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, YAML/JSON parsing, and diff checks pass."
       }
     ],
-    "updated_at": "2026-07-30T18:57:58Z"
+    "updated_at": "2026-07-30T19:08:30Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",

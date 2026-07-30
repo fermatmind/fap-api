@@ -625,6 +625,49 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertNull($row['blocker']);
     }
 
+    public function test_independent_working_candidate_requires_draft_workflow_state(): void
+    {
+        $asset = $this->createAsset();
+        $published = $this->createRevision(
+            $asset,
+            1,
+            BigFiveEn52PackageCompiler::RELEASE_ID,
+            $this->completeSnapshot('Published'),
+        );
+        $working = $this->createRevision($asset, 2, 'working-two', $this->completeSnapshot('Working'));
+        $working->forceFill(['workflow_state' => 'pending_manual_review'])->saveQuietly();
+        $asset->forceFill([
+            'working_revision_id' => $working->id,
+            'published_revision_id' => $published->id,
+        ])->saveQuietly();
+
+        $result = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $row = collect($result['rows'])->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertFalse($row['candidate_workflow_draft']);
+        $this->assertSame('schema_repair_required', $row['recommended_disposition']);
+        $this->assertFalse($result['ok']);
+    }
+
+    public function test_candidate_title_and_summary_must_be_non_empty_strings(): void
+    {
+        $asset = $this->createAsset();
+        $workingSnapshot = $this->completeSnapshot('Working');
+        $workingSnapshot['title'] = ['not-a-scalar'];
+        $workingSnapshot['summary'] = ['not-a-scalar'];
+        $working = $this->createRevision($asset, 1, 'working-one', $workingSnapshot);
+        $asset->forceFill(['working_revision_id' => $working->id])->saveQuietly();
+
+        $result = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $row = collect($result['rows'])->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertFalse($row['title_complete']);
+        $this->assertFalse($row['summary_complete']);
+        $this->assertFalse($row['schema_complete']);
+        $this->assertSame('schema_repair_required', $row['recommended_disposition']);
+        $this->assertFalse($result['ok']);
+    }
+
     public function test_prohibited_history_blocks_without_erasing_current_candidate_classification(): void
     {
         $asset = $this->createAsset();

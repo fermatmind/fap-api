@@ -622,12 +622,20 @@ final class BigFiveEnglishDraftInventory
         $payload = json_encode($workingSnapshot ?? [], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
         $cjk = $this->containsCjk($payload);
         $private = $this->containsProhibitedPrivateField($workingSnapshot);
+        $titleComplete = is_string(data_get($workingContent, 'title'))
+            && trim(data_get($workingContent, 'title')) !== '';
+        $summaryComplete = is_string(data_get($workingContent, 'summary'))
+            && trim(data_get($workingContent, 'summary')) !== '';
         $schemaComplete = $working !== null
-            && filled(data_get($workingContent, 'title'))
-            && filled(data_get($workingContent, 'summary'))
+            && $titleComplete
+            && $summaryComplete
             && is_array(data_get($workingContent, 'content_sections_json'))
             && is_array(data_get($workingContent, 'faq_json'));
         $textOnly = ! $this->containsMediaReference($workingSnapshot);
+        $independentWorkingCandidate = $working !== null
+            && ($published === null || (! $pointerEqual && $newer));
+        $candidateWorkflowDraft = ! $independentWorkingCandidate
+            || (string) $working->workflow_state === PersonalityPublicContentAssetRevision::STATE_DRAFT;
         $projection = $publishedProjectionLocked && $asset !== null && (bool) $asset->is_public
             && in_array($asset->launch_state, [
                 PersonalityPublicContentAsset::LAUNCH_CONTENT_READY,
@@ -640,6 +648,7 @@ final class BigFiveEnglishDraftInventory
             $asset === null || ! $workingActive || ($asset->published_revision_id && ! $publishedBound) => 'blocked_authority_unknown',
             $cjk || $private || ! $textOnly => 'prohibited_content',
             ! $schemaComplete => 'schema_repair_required',
+            ! $candidateWorkflowDraft => 'schema_repair_required',
             $published !== null && ! $publishedEn52Locked => 'blocked_authority_unknown',
             $published !== null && ! $publishedProjectionLocked => 'blocked_authority_unknown',
             $contentEqual => 'duplicate_of_published',
@@ -672,8 +681,9 @@ final class BigFiveEnglishDraftInventory
             'draft_content_equals_published' => $contentEqual,
             'draft_newer_than_published' => $newer,
             'schema_complete' => $schemaComplete,
-            'title_complete' => filled(data_get($workingContent, 'title')),
-            'summary_complete' => filled(data_get($workingContent, 'summary')),
+            'title_complete' => $titleComplete,
+            'summary_complete' => $summaryComplete,
+            'candidate_workflow_draft' => $candidateWorkflowDraft,
             'sections_complete' => is_array(data_get($workingContent, 'content_sections_json')),
             'faq_complete' => is_array(data_get($workingContent, 'faq_json')),
             'text_only_compliant' => $textOnly,
