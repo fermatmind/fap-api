@@ -238,7 +238,13 @@ jobs:
             "PREFLIGHT_RUN_ATTEMPT: ${PREFLIGHT_RUN_ATTEMPT}" \
             "EXPECTED_PREFLIGHT_STATE_SHA256: ${EXPECTED_PREFLIGHT_STATE_SHA256}" \
             "EXPECTED_RESUME_TARGET_SET_SHA256: ${EXPECTED_RESUME_TARGET_SET_SHA256}"; do
-            grep -F -- "$binding" <<<"$failed_execute_log" >/dev/null
+            awk -v binding="$binding" \
+              'length($0) >= length(binding)
+               && substr($0, length($0) - length(binding) + 1) == binding {
+                 found = 1
+               }
+               END { exit(found ? 0 : 1) }' \
+              <<<"$failed_execute_log"
           done
           unset failed_execute_log
           failed_execute_input_binding_sha256="$(
