@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "exact_head_retry_pending",
-        "evidence": "GitHub CI runs 30558811823, 30559823419, 30560724406, 30562045318, 30562910486, 30564012592, 30565108964, 30567136115, and 30568401101 passed all required jobs at their exact heads. The latest exact-head review added two in-scope lineage-integrity findings; their fixes pass the 19-test inventory suite and the 395-test runtime-freeze suite and require a fresh exact-head CI/review cycle."
+        "evidence": "GitHub CI runs 30558811823, 30559823419, 30560724406, 30562045318, 30562910486, 30564012592, 30565108964, 30567136115, 30568401101, and 30569685735 passed all required jobs at their exact heads. The latest exact-head review added two in-scope publisher-equivalence findings; their fixes pass the 21-test inventory suite and require a fresh exact-head CI/review cycle after the complete runtime-freeze rerun."
       }
     },
     "scope_validation": {
@@ -101288,9 +101288,14 @@
         "at": "2026-07-30T18:14:52Z",
         "status": "review_fix_local_checks_passed",
         "note": "After every required job in CI run 30568401101 passed, exact-head review identified two remaining lineage-integrity gaps. Published EN52 revisions now require the publisher's exact operator admin id, and each of the 50 registered Authority V2 historical slots is bound to its exact stable transformed snapshot hash in addition to package, asset key, package SHA, and source hash. A clean substituted historical snapshot is retained as sanitized evidence but resolves as snapshot_mismatch and blocks stale classification. The 19-test inventory suite passes 118 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, all 100 historical source/snapshot locks cross-validate against the frozen package, and scoped Pint, PHP syntax, and diff checks pass."
+      },
+      {
+        "at": "2026-07-30T18:26:09Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30569685735 passed, exact-head review identified two remaining publisher-equivalence gaps. The inventory now requires the locked EN52 package to contain exactly the 52 expected authority keys with no extra or duplicate revision, and requires every published projection to retain a non-null effective published_at timestamp. The 21-test inventory suite passes 128 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions after the local heavy-validation guard released, and scoped Pint, PHP syntax, YAML/JSON parsing, diff checks, and exact scope validation pass."
       }
     ],
-    "updated_at": "2026-07-30T18:14:52Z"
+    "updated_at": "2026-07-30T18:26:09Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",

@@ -239,6 +239,85 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertSame(0, $result['counts']['public_projections']);
     }
 
+    public function test_locked_en52_projection_requires_non_null_publication_timestamp(): void
+    {
+        $asset = $this->createAsset(['published_at' => null]);
+        $revision = $this->createRevision(
+            $asset,
+            1,
+            BigFiveEn52PackageCompiler::RELEASE_ID,
+            $this->completeSnapshot(),
+        );
+        $asset->forceFill([
+            'working_revision_id' => $revision->id,
+            'published_revision_id' => $revision->id,
+        ])->saveQuietly();
+
+        $result = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $row = collect($result['rows'])->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertTrue($row['published_en52_lineage_locked']);
+        $this->assertFalse($row['published_en52_projection_locked']);
+        $this->assertFalse($row['published_projection_exists']);
+        $this->assertSame('live_asset_not_locked_en52_projection', $row['blocker']);
+    }
+
+    public function test_locked_en52_package_revision_set_rejects_an_extra_revision(): void
+    {
+        $asset = $this->createAsset();
+        $current = $this->createRevision(
+            $asset,
+            1,
+            BigFiveEn52PackageCompiler::RELEASE_ID,
+            $this->completeSnapshot(),
+        );
+        $asset->forceFill([
+            'working_revision_id' => $current->id,
+            'published_revision_id' => $current->id,
+        ])->saveQuietly();
+
+        $keys = array_keys((new \ReflectionClass(BigFiveEnglishDraftInventory::class))
+            ->getConstant('EN52_DESCRIPTOR_LOCKS'));
+        $revisionNo = 2;
+        foreach (array_diff($keys, ['openness']) as $key) {
+            PersonalityPublicContentAssetRevision::query()->create([
+                'asset_id' => $asset->id,
+                'revision_no' => $revisionNo++,
+                'authority_asset_key' => $key,
+                'source_package' => BigFiveEn52PackageCompiler::RELEASE_ID,
+                'source_hash' => str_repeat('a', 64),
+                'authority_package_sha256' => BigFiveEn52Publisher::PACKAGE_FILE_SHA256,
+                'workflow_state' => BigFiveEn52Publisher::WORKFLOW_STATE,
+                'snapshot_json' => [],
+                'public_runtime_fingerprint_before' => str_repeat('b', 64),
+                'created_by_admin_user_id' => BigFiveEn52Publisher::OPERATOR_ADMIN_USER_ID,
+            ]);
+        }
+
+        $complete = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $this->assertTrue($complete['en52_package_revision_set_complete']);
+        $this->assertSame(52, $complete['counts']['observed_en52_package_revisions']);
+
+        PersonalityPublicContentAssetRevision::query()->create([
+            'asset_id' => $asset->id,
+            'revision_no' => $revisionNo,
+            'authority_asset_key' => 'unexpected-extra-en52-revision',
+            'source_package' => BigFiveEn52PackageCompiler::RELEASE_ID,
+            'source_hash' => str_repeat('c', 64),
+            'authority_package_sha256' => BigFiveEn52Publisher::PACKAGE_FILE_SHA256,
+            'workflow_state' => BigFiveEn52Publisher::WORKFLOW_STATE,
+            'snapshot_json' => [],
+            'public_runtime_fingerprint_before' => str_repeat('d', 64),
+            'created_by_admin_user_id' => BigFiveEn52Publisher::OPERATOR_ADMIN_USER_ID,
+        ]);
+
+        $extra = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $this->assertFalse($extra['en52_package_revision_set_complete']);
+        $this->assertFalse($extra['canonical_cohort_complete']);
+        $this->assertFalse($extra['ok']);
+        $this->assertSame(53, $extra['counts']['observed_en52_package_revisions']);
+    }
+
     public function test_live_asset_drift_from_locked_en52_projection_fails_closed(): void
     {
         $asset = $this->createAsset();
@@ -722,6 +801,7 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             'created_by_admin_user_id' => BigFiveEn52Publisher::OPERATOR_ADMIN_USER_ID,
             'updated_by_admin_user_id' => BigFiveEn52Publisher::OPERATOR_ADMIN_USER_ID,
         ];
+        $attributes['published_at'] ??= now()->subDay();
 
         return PersonalityPublicContentAsset::query()->create(array_replace($attributes, $overrides));
     }

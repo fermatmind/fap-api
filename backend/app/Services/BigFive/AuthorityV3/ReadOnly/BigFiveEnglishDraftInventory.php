@@ -491,9 +491,21 @@ final class BigFiveEnglishDraftInventory
                     'verify_only_no_action',
                 ], true)
             ));
+        $en52PackageRevisionKeys = PersonalityPublicContentAssetRevision::query()
+            ->where('authority_package_sha256', BigFiveEn52Publisher::PACKAGE_FILE_SHA256)
+            ->pluck('authority_asset_key')
+            ->map(static fn (mixed $key): string => (string) $key)
+            ->sort()
+            ->values()
+            ->all();
+        $expectedEn52PackageRevisionKeys = array_keys(self::EN52_DESCRIPTOR_LOCKS);
+        sort($expectedEn52PackageRevisionKeys);
+        $en52PackageRevisionSetComplete = count($en52PackageRevisionKeys) === BigFiveEn52PackageCompiler::ASSET_COUNT
+            && $en52PackageRevisionKeys === $expectedEn52PackageRevisionKeys;
         $canonicalCohortComplete = $canonical->count() === BigFiveEn52PackageCompiler::ASSET_COUNT
             && $hubAuthorityComplete
-            && $slotAuthorityComplete;
+            && $slotAuthorityComplete
+            && $en52PackageRevisionSetComplete;
         $ok = $blockingRows === 0
             && $unknownAuthorityRows->isEmpty()
             && $canonicalCohortComplete;
@@ -509,11 +521,14 @@ final class BigFiveEnglishDraftInventory
             'locale' => 'en',
             'cohort_definition' => '50 registered historical slot identities from the 52-page EN52 canonical catalog, excluding model hub and facet hub',
             'canonical_cohort_complete' => $canonicalCohortComplete,
+            'en52_package_revision_set_complete' => $en52PackageRevisionSetComplete,
             'excluded_hub_authority_complete' => $hubAuthorityComplete,
             'historical_slot_authority_complete' => $slotAuthorityComplete,
             'counts' => [
                 'expected_canonical_assets' => BigFiveEn52PackageCompiler::ASSET_COUNT,
                 'observed_canonical_assets' => $canonical->count(),
+                'expected_en52_package_revisions' => BigFiveEn52PackageCompiler::ASSET_COUNT,
+                'observed_en52_package_revisions' => count($en52PackageRevisionKeys),
                 'expected_excluded_hub_assets' => 2,
                 'validated_excluded_hub_assets' => collect($hubRows)->filter(fn (array $row): bool => (
                     $row['published_en52_lineage_locked'] === true
@@ -593,6 +608,7 @@ final class BigFiveEnglishDraftInventory
             && hash_equals((string) $published->source_hash, (string) ($publishedAttributes['source_hash'] ?? ''));
         $publishedProjectionLocked = $publishedEn52Locked
             && $asset !== null
+            && $asset->published_at !== null
             && $this->runtimeProjectionMatches($asset, $publishedAttributes);
         $pointerEqual = $working !== null && $published !== null
             && (int) $working->id === (int) $published->id;
@@ -614,7 +630,8 @@ final class BigFiveEnglishDraftInventory
                 PersonalityPublicContentAsset::LAUNCH_CONTENT_READY,
                 PersonalityPublicContentAsset::LAUNCH_PUBLISHED,
             ], true)
-            && ($asset->published_at === null || ! $asset->published_at->isFuture());
+            && $asset->published_at !== null
+            && ! $asset->published_at->isFuture();
 
         $disposition = match (true) {
             $asset === null || ! $workingActive || ($asset->published_revision_id && ! $publishedBound) => 'blocked_authority_unknown',
