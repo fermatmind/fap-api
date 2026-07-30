@@ -33,8 +33,8 @@
     },
     {
       "surface": "full_result",
-      "authority_fields": ["profile", "summary_card", "dimensions", "sections", "premium_teaser"],
-      "allowed_content": "all sections authorized by existing full access policy",
+      "authority_fields": ["profile", "summary_card", "dimensions", "sections", "premium_teaser", "result_only_authority.premium_full"],
+      "allowed_content": "all sections authorized by existing full access policy, with protected premium body projected only from result-only authority",
       "blocked_content": "none beyond existing authority policy",
       "package_behavior": "no entitlement grant or policy change"
     },

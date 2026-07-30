@@ -14,7 +14,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
 
     private const INVENTORY_SHA = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
-    private const PACKAGE_SHA = 'f51ce875910f22ce907482a7daff4205e11178a49a855f6ae533b05aef7d8ffc';
+    private const PACKAGE_SHA = '79f9d9f575f7c9fa54552276923cfac96e96981aab9ef7b30b3204fbe8ec27b2';
 
     private const EXPECTED_CANDIDATE_ROW_IDS = [
         'W1-RESULT-CORE-05-OFFER-CTA',
@@ -318,6 +318,28 @@ final class MbtiResultEnglishPackageTest extends TestCase
                     self::assertTrue(
                         $package['template_contract']['canonical_projection_contract']['premium_teaser']['entitlement_filter_is_not_implemented_by_this_package'],
                     );
+                    $protectedContract = $package['template_contract']['canonical_projection_contract']['premium_teaser']['protected_full_content'];
+                    self::assertSame('result_only_authority.premium_full', $protectedContract['authority_bucket']);
+                    self::assertSame('asset.section_key', $protectedContract['section_key_from']);
+                    self::assertSame('entitled_report', $protectedContract['required_access_state']);
+                    self::assertSame([
+                        'full_result.result_page_sections',
+                        'mbti_pdf_payload.result_page_sections',
+                    ], $protectedContract['consumer_fields']);
+                    $entitledProjection = [
+                        'title' => $renderedContent['title'],
+                        'body' => implode("\n\n", [
+                            $renderedContent['summary_template'],
+                            ...$renderedContent['body_template'],
+                        ]),
+                        'payload' => [
+                            'summary_template' => $renderedContent['summary_template'],
+                            'reflection_prompts' => $renderedContent['reflection_prompts'],
+                        ],
+                    ];
+                    self::assertStringNotContainsString('{{', $entitledProjection['body']);
+                    self::assertNotSame('', trim($entitledProjection['body']));
+                    self::assertNotEmpty($entitledProjection['payload']['reflection_prompts']);
                 } else {
                     $projected = [
                         'title' => $renderedContent['title'],
@@ -390,6 +412,10 @@ final class MbtiResultEnglishPackageTest extends TestCase
             $surfacesByName['preview_result']['package_behavior'],
         );
         self::assertContains('offer_set', $surfacesByName['locked_result']['authority_fields']);
+        self::assertContains(
+            'result_only_authority.premium_full',
+            $surfacesByName['full_result']['authority_fields'],
+        );
         self::assertStringContainsString(
             'locked-upsell offer copy',
             $surfacesByName['module_and_cta_labels']['allowed_content'],
@@ -482,6 +508,9 @@ final class MbtiResultEnglishPackageTest extends TestCase
             $mapping['required_w9_adapter_contract']['adapter_id'],
         );
         self::assertTrue($mapping['required_w9_adapter_contract']['must_read_exact_frozen_package']);
+        self::assertTrue(
+            $mapping['required_w9_adapter_contract']['must_project_protected_premium_content_only_under_synthetic_entitled_state'],
+        );
         self::assertTrue($mapping['required_w9_adapter_contract']['must_fail_if_any_pdf_candidate_asset_is_not_exercised']);
         self::assertFalse($mapping['required_w9_adapter_contract']['runtime_or_cms_activation_allowed']);
         self::assertCount(4, $mapping['projection']);
@@ -490,7 +519,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
             array_column($mapping['projection'], 'pdf_payload_field'),
         );
         self::assertSame(
-            ['sections', 'premium_teaser'],
+            ['sections', 'premium_teaser', 'result_only_authority.premium_full'],
             $mapping['projection'][2]['package_authority_buckets'],
         );
         self::assertSame(20, $mapping['projection'][3]['required_pdf_candidate_row_count']);
@@ -503,7 +532,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
             'consumer_field' => 'offer_set.cta',
             'must_be_reviewed_separately_from_pdf' => true,
         ]], $mapping['non_pdf_candidate_coverage']);
-        self::assertCount(10, $mapping['w9_assertions']);
+        self::assertCount(11, $mapping['w9_assertions']);
 
         self::assertCount(13, $mapping['excluded_fixture_fields']);
         foreach ($mapping['excluded_fixture_fields'] as $excludedField) {

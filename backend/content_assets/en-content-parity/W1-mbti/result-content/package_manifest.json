@@ -15,17 +15,17 @@
   "producer_target_count": 22,
   "files": [
     {"path":"README.md","sha256":"dba1811fd0018b59459fac2b12187e77029503d46a165f8a622d4caff5e35ebd"},
-    {"path":"assets.json","sha256":"1f1b36d821f2a7f041f371782bc032730cdf1f90103193bcb127ae368d43822c"},
+    {"path":"assets.json","sha256":"def68041df7161d522835f25e8dc11ea6fdda9f3ad18aa6e68efd3fb38a583b3"},
     {"path":"inventory_reconciliation.json","sha256":"20fb311db62ef5a5abf227d704dc9a006091574cfedcc49b517dcc701f350e29"},
     {"path":"translation_map.json","sha256":"a4834461779215c1606532b5bacd36b0b270ba565886890fa2f8e9b8e76d8d42"},
-    {"path":"entitlement_matrix.json","sha256":"052c6fb2fcdbb13217f4ab8fccd87a46eee97eb2da5137b586c6ed8496b05be7"},
-    {"path":"pdf_reader_fixture_mapping.json","sha256":"bcde62e3c36af84bbfc8a135810c808d37f024ccd8b7633d6c139e5c3cec0547"},
+    {"path":"entitlement_matrix.json","sha256":"b893d8b0856d2e6b3b41108ea078e6222c0bc97229d06c5c1d8561ef82e5ad08"},
+    {"path":"pdf_reader_fixture_mapping.json","sha256":"eb8ba043c1e3644b54e8ad3eeca9aae00796ab3bdec75c0e7ef8b156fa3d477d"},
     {"path":"claim_boundary_report.json","sha256":"b4d28cb040d2e11b21352d2f16cf34445903ee24aced3366b0b09669625c84fc"},
-    {"path":"editorial_review.json","sha256":"85870817d63972506a3831755a85cb8bfa6ac49ecb7464529510590d75818073"},
+    {"path":"editorial_review.json","sha256":"0073c06439246927c979c7438d277d48a8a1079f2efc37c523b52494b9c50f37"},
     {"path":"approval_envelope.json","sha256":"31fe907963817d310cca7ff0f0f7c0b1456a773ed4c546c2a1ef6528128c79d5"}
   ],
   "package_sha256_algorithm": "sha256 of the UTF-8 concatenation of each manifest file path, NUL, lowercase file SHA-256, and newline in files[] order; approval_envelope.json is mandatory and field-for-field binds the manifest authorization metadata",
-  "package_sha256": "f51ce875910f22ce907482a7daff4205e11178a49a855f6ae533b05aef7d8ffc",
+  "package_sha256": "79f9d9f575f7c9fa54552276923cfac96e96981aab9ef7b30b3204fbe8ec27b2",
   "quality_gates": {
     "exact_inventory_identity": "pass",
     "exact_46_row_reconciliation": "pass",

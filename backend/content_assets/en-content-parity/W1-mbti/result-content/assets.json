@@ -55,9 +55,24 @@
         "teaser_from": "content.teaser",
         "payload": null,
         "protected_full_content": {
+          "authority_bucket": "result_only_authority.premium_full",
+          "section_key_from": "asset.section_key",
           "summary_template_from": "content.summary_template",
           "body_template_from": "content.body_template",
           "reflection_prompts_from": "content.reflection_prompts",
+          "entitled_projection": {
+            "title_from": "content.title",
+            "body_from": "markdown_join(content.summary_template, content.body_template)",
+            "payload": {
+              "summary_template_from": "content.summary_template",
+              "reflection_prompts_from": "content.reflection_prompts"
+            }
+          },
+          "consumer_fields": [
+            "full_result.result_page_sections",
+            "mbti_pdf_payload.result_page_sections"
+          ],
+          "required_access_state": "entitled_report",
           "public_projection_allowed": false,
           "storage_visibility": "inactive_or_draft_authority_only"
         },
