@@ -101179,7 +101179,7 @@
     "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
     "status": "review_fix_local_checks_passed",
     "depends_on": [],
-    "commit_sha": "4f955e2447a74e27ef8f244d812f10015e30eb9a",
+    "commit_sha": "98008a55a63c2935033734d17b84f58048a3d8cb",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3421",
     "checks": {
       "production_read_only_inventory": {
@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "exact_head_retry_pending",
-        "evidence": "GitHub CI runs 30558811823, 30559823419, 30560724406, 30562045318, 30562910486, 30564012592, 30565108964, 30567136115, 30568401101, 30569685735, 30570549188, 30571343057, 30572071351, 30572828400, 30573601659, 30574341370, 30575064365, 30575816571, and 30576523438 passed all required jobs at their exact heads. The latest exact-head review added one in-scope candidate-collection finding; implementation 4f955e2447a74e27ef8f244d812f10015e30eb9a passes the 27-test inventory suite and the 395-test runtime-freeze suite and requires a fresh exact-head CI/review cycle."
+        "evidence": "GitHub CI runs 30558811823, 30559823419, 30560724406, 30562045318, 30562910486, 30564012592, 30565108964, 30567136115, 30568401101, 30569685735, 30570549188, 30571343057, 30572071351, 30572828400, 30573601659, 30574341370, 30575064365, 30575816571, 30576523438, and 30577312935 passed all required jobs at their exact heads. The latest exact-head review added two in-scope identity completeness/sanitization findings; implementation 98008a55a63c2935033734d17b84f58048a3d8cb passes the 27-test inventory suite and the 395-test runtime-freeze suite and requires a fresh exact-head CI/review cycle."
       }
     },
     "scope_validation": {
@@ -101338,9 +101338,14 @@
         "at": "2026-07-30T20:00:19Z",
         "status": "review_fix_local_checks_passed",
         "note": "After every required job in CI run 30576523438 passed, exact-head review identified one remaining candidate collection-completeness gap. Independent working candidates now require non-empty list-shaped sections with key/kind/heading/body and non-empty list-shaped FAQs with question/answer, while published or historical pointer classification retains its separate authority precedence. The ledger binds implementation 4f955e2447a74e27ef8f244d812f10015e30eb9a. The 27-test inventory suite passes 161 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint and PHP syntax pass."
+      },
+      {
+        "at": "2026-07-30T20:11:08Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30577312935 passed, exact-head review identified two remaining identity-boundary gaps. Independent candidates now require every org/framework/entity/locale/slug/canonical identity field to be present and equal, and emitted translation-group ids are restricted to a safe Big Five identity pattern with invalid arbitrary JSON reduced to null plus a boolean. The ledger binds implementation 98008a55a63c2935033734d17b84f58048a3d8cb. The 27-test inventory suite passes 167 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint and PHP syntax pass."
       }
     ],
-    "updated_at": "2026-07-30T20:00:19Z"
+    "updated_at": "2026-07-30T20:11:08Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
