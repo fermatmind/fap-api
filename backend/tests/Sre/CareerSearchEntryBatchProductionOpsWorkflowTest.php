@@ -172,6 +172,8 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
             'secrets.PRODUCTION_DEPLOY_HOST',
             'secrets.PRODUCTION_DEPLOY_PATH',
             'secrets.SSH_PRIVATE_KEY',
+            'ServerAliveInterval=20',
+            'ServerAliveCountMax=30',
             'if: always()',
         ] as $required) {
             $this->assertStringContainsString($required, $workflow);
@@ -206,6 +208,8 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
             'rollback_count: 0',
             'write_state="indeterminate"',
             'write_state="committed"',
+            'career_cache_refresh_status=running',
+            'sleep 20',
         ] as $required) {
             $this->assertStringContainsString($required, $runner);
         }
