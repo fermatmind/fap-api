@@ -101514,11 +101514,11 @@
       },
       "package_contract": {
         "status": "passed",
-        "evidence": "Frozen candidate package SHA fef280947f179e55e3652bbfd7af4e32f217f52522c61b0b0298297bb6723314 reconciles 46 unique rows as 24 preserved controls, 21 distinct English assets, and one synthetic private-safe PDF W9 target. Premium teaser assets follow the canonical registry bucket and freeze the direct teaser payload consumed by the canonical builder; the PDF mapping truthfully requires an exact-package W9 fixture adapter; and the claim scan records its one negated-boundary phrase. All controlled permissions remain false."
+        "evidence": "Frozen candidate package SHA 1688857a406274ec7b909d5c2f5ab1ffec17da703f0634ec2edafd2d502db1e4 reconciles 46 unique rows as 24 preserved controls, 21 distinct English assets, and one synthetic private-safe PDF W9 target. A deterministic canonical projection contract preserves section body/prompt content and premium teaser/full-access payload separation, the PDF mapping requires an exact-package W9 fixture adapter, and the claim scan records its negated-boundary phrase. All controlled permissions remain false."
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After review repair, php artisan test --filter=MbtiResultEnglishPackageTest passed 7 tests/818 assertions covering canonical registry buckets, direct premium teaser payloads, real PDF payload/adapter assertions, and exact forbidden-claim scan reconciliation. Scoped Pint, package JSON parsing, deterministic package SHA fef280947f179e55e3652bbfd7af4e32f217f52522c61b0b0298297bb6723314, git diff, and exact scope checks pass. After the required process guard, the isolated SQLite ci_verify wrapper ran scripts/verify_mbti.sh and the bounded MBTI regression chain with exit 0."
+        "evidence": "After review repair, php artisan test --filter=MbtiResultEnglishPackageTest passed 7 tests/911 assertions covering canonical registry buckets, deterministic builder-facing body/payload projection, premium teaser/full-access payload separation, real PDF payload/adapter assertions, and exact forbidden-claim scan reconciliation. Scoped Pint, package JSON parsing, deterministic package SHA 1688857a406274ec7b909d5c2f5ab1ffec17da703f0634ec2edafd2d502db1e4, git diff, and exact scope checks pass. After the required process guard, the isolated SQLite ci_verify wrapper ran scripts/verify_mbti.sh and the bounded MBTI regression chain with exit 0."
       },
       "changed_file_scope": {
         "status": "passed",
@@ -101575,9 +101575,14 @@
       {
         "at": "2026-07-30T19:03:30Z",
         "status": "review_fix_local_verified",
-        "note": "Addressed the fourth valid P2 by freezing teaser on all four premium_teaser assets. Tests now derive bucket identity from MbtiCanonicalSectionRegistry and require each premium asset's direct canonical teaser payload to be non-empty and equal to its summary template. Focused validation passed 7 tests/818 assertions, Pint, deterministic package hashing, and diff checks. No importer or runtime behavior was added."
+        "note": "Addressed the fourth valid P2 by freezing teaser on all four premium_teaser assets. That exact head passed all required checks; a fifth valid P2 then showed the package still lacked deterministic builder-facing body/payload mapping for its structured templates. The package now freezes sections body as a Markdown join plus summary/reflection payload, and premium teaser plus existing-full-access-only structured payload. Tests execute this mapping for every canonical asset. Package SHA is 1688857a406274ec7b909d5c2f5ab1ffec17da703f0634ec2edafd2d502db1e4; no importer, entitlement, or runtime behavior was added."
+      },
+      {
+        "at": "2026-07-30T19:14:30Z",
+        "status": "review_fix_local_verified",
+        "note": "Addressed the fifth valid P2 with a frozen canonical_projection_contract. The test executes the declared mapping across all canonical assets and proves ordinary section summaries/body paragraphs/prompts and premium teaser/full-access templates/prompts survive builder-facing projection. Focused validation passed 7 tests/911 assertions, Pint, deterministic package hashing, and diff checks."
       }
     ],
-    "updated_at": "2026-07-30T19:03:30Z"
+    "updated_at": "2026-07-30T19:14:30Z"
   }
 }

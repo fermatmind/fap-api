@@ -17,7 +17,28 @@
     ],
     "slot_values_are_not_stored_in_this_package": true,
     "mobile_desktop_authority": "same_fields",
-    "claim_boundary": "MBTI preference patterns are structured references and working hypotheses, not diagnoses, fixed identities, ability judgments, or outcome predictions."
+    "claim_boundary": "MBTI preference patterns are structured references and working hypotheses, not diagnoses, fixed identities, ability judgments, or outcome predictions.",
+    "canonical_projection_contract": {
+      "sections": {
+        "title_from": "content.title",
+        "body_from": "markdown_join(content.summary_template, content.body_template)",
+        "payload": {
+          "summary_template_from": "content.summary_template",
+          "reflection_prompts_from": "content.reflection_prompts"
+        }
+      },
+      "premium_teaser": {
+        "title_from": "content.title",
+        "teaser_from": "content.teaser",
+        "payload": {
+          "summary_template_from": "content.summary_template",
+          "body_template_from": "content.body_template",
+          "reflection_prompts_from": "content.reflection_prompts"
+        },
+        "payload_visibility": "existing_full_access_entitlement_only"
+      },
+      "runtime_or_entitlement_policy_change_allowed": false
+    }
   },
   "assets": [
     {

@@ -14,7 +14,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
 
     private const INVENTORY_SHA = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
-    private const PACKAGE_SHA = 'fef280947f179e55e3652bbfd7af4e32f217f52522c61b0b0298297bb6723314';
+    private const PACKAGE_SHA = '1688857a406274ec7b909d5c2f5ab1ffec17da703f0634ec2edafd2d502db1e4';
 
     private const EXPECTED_CANDIDATE_ROW_IDS = [
         'W1-RESULT-CORE-05-OFFER-CTA',
@@ -171,6 +171,9 @@ final class MbtiResultEnglishPackageTest extends TestCase
         self::assertCount(21, $assets);
         self::assertSame(self::EXPECTED_CANDIDATE_ROW_IDS, array_column($assets, 'row_id'));
         self::assertSame('same_fields', $package['template_contract']['mobile_desktop_authority']);
+        self::assertFalse(
+            $package['template_contract']['canonical_projection_contract']['runtime_or_entitlement_policy_change_allowed'],
+        );
 
         $stableIdentities = [];
         $readerCopyFingerprints = [];
@@ -212,6 +215,41 @@ final class MbtiResultEnglishPackageTest extends TestCase
                     self::assertArrayHasKey('teaser', $asset['content']);
                     self::assertNotSame('', trim($asset['content']['teaser']));
                     self::assertSame($asset['content']['summary_template'], $asset['content']['teaser']);
+                    $projected = [
+                        'title' => $asset['content']['title'],
+                        'teaser' => $asset['content']['teaser'],
+                        'payload' => [
+                            'summary_template' => $asset['content']['summary_template'],
+                            'body_template' => $asset['content']['body_template'],
+                            'reflection_prompts' => $asset['content']['reflection_prompts'],
+                        ],
+                    ];
+                    self::assertNotEmpty($projected['payload']['body_template']);
+                    self::assertNotEmpty($projected['payload']['reflection_prompts']);
+                    self::assertSame(
+                        'existing_full_access_entitlement_only',
+                        $package['template_contract']['canonical_projection_contract']['premium_teaser']['payload_visibility'],
+                    );
+                } else {
+                    $projected = [
+                        'title' => $asset['content']['title'],
+                        'body' => implode("\n\n", [
+                            $asset['content']['summary_template'],
+                            ...$asset['content']['body_template'],
+                        ]),
+                        'payload' => [
+                            'summary_template' => $asset['content']['summary_template'],
+                            'reflection_prompts' => $asset['content']['reflection_prompts'],
+                        ],
+                    ];
+                    self::assertStringContainsString($asset['content']['summary_template'], $projected['body']);
+                    foreach ($asset['content']['body_template'] as $paragraph) {
+                        self::assertStringContainsString($paragraph, $projected['body']);
+                    }
+                    self::assertSame(
+                        $asset['content']['reflection_prompts'],
+                        $projected['payload']['reflection_prompts'],
+                    );
                 }
             }
         }
