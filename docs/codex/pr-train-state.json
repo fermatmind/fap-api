@@ -101260,12 +101260,12 @@
     "base": "main",
     "branch": "codex/api-gift-schema-01-report-gift-requests",
     "title": "API-GIFT-SCHEMA-01: add report gift request schema",
-    "status": "local_validation_passed",
+    "status": "github_checks_pending",
     "depends_on": [
       "API-UNLOCK-01"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "925c9794ad1937f6b3d65087aa13fae97e3ca76d",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3428",
     "checks": {
       "focused_phpunit": "passed: 1 test, 28 assertions",
       "fresh_sqlite_migration": "passed: clean SQLite database",
@@ -101300,8 +101300,13 @@
         "at": "2026-07-30T17:27:26Z",
         "status": "local_validation_passed",
         "note": "The dedicated report_gift_requests schema passed 1 focused test / 28 assertions. A fresh SQLite database completed the full migration chain including the new migration. Scoped Pint, PHP syntax, strict Composer validation, YAML/JSON parsing, diff checks, and exact four-path scope review passed. Routes, FmTokenAuth, runtime models/services/controllers, production migration/data, payment, deploy, and mini-program actions remain N/A or prohibited."
+      },
+      {
+        "at": "2026-07-30T17:31:06Z",
+        "status": "github_checks_pending",
+        "note": "Created PR #3428 from rebased implementation commit 925c9794ad1937f6b3d65087aa13fae97e3ca76d after revalidating the focused schema test, fresh SQLite migration, scoped Pint, strict Composer validation, YAML/JSON parsing, diff checks, and exact scope. Required GitHub checks are pending; no merge override is allowed."
       }
     ],
-    "updated_at": "2026-07-30T17:27:26Z"
+    "updated_at": "2026-07-30T17:31:06Z"
   }
 }
