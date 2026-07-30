@@ -75,6 +75,9 @@ final class AttemptUnlockProjectionRepairService
         $accessLevel = ReportAccess::normalizeReportAccessLevel((string) ($unlockState['access_level'] ?? ReportAccess::REPORT_ACCESS_FREE));
         $variant = ReportAccess::normalizeVariant((string) ($unlockState['variant'] ?? ReportAccess::VARIANT_FREE));
         $unlockSource = ReportAccess::normalizeUnlockSource((string) ($unlockState['unlock_source'] ?? ReportAccess::UNLOCK_SOURCE_NONE));
+        $threeChannelUnlockSource = ReportAccess::normalizeThreeChannelUnlockSource(
+            (string) ($unlockState['three_channel_unlock_source'] ?? $unlockSource)
+        );
         $existingPayload = is_array($existing?->payload_json) ? $existing->payload_json : [];
         $existingActions = is_array($existing?->actions_json) ? $existing->actions_json : [];
         $patch = [
@@ -94,6 +97,7 @@ final class AttemptUnlockProjectionRepairService
                 'repair_source' => 'attempt_unlock_projection_repair',
                 'unlock_stage' => $unlockStage,
                 'unlock_source' => $unlockSource,
+                'three_channel_unlock_source' => $threeChannelUnlockSource,
                 'access_level' => $accessLevel,
                 'variant' => $variant,
                 'modules_allowed' => $modulesAllowed,
@@ -239,8 +243,15 @@ final class AttemptUnlockProjectionRepairService
 
         $existingSource = ReportAccess::normalizeUnlockSource((string) ($payload['unlock_source'] ?? ReportAccess::UNLOCK_SOURCE_NONE));
         $targetSource = ReportAccess::normalizeUnlockSource((string) ($unlockState['unlock_source'] ?? ReportAccess::UNLOCK_SOURCE_NONE));
+        $existingThreeChannelSource = ReportAccess::normalizeThreeChannelUnlockSource(
+            (string) ($payload['three_channel_unlock_source'] ?? $existingSource)
+        );
+        $targetThreeChannelSource = ReportAccess::normalizeThreeChannelUnlockSource(
+            (string) ($unlockState['three_channel_unlock_source'] ?? $targetSource)
+        );
 
-        return $existingSource === $targetSource;
+        return $existingSource === $targetSource
+            && $existingThreeChannelSource === $targetThreeChannelSource;
     }
 
     private function resultExists(int $orgId, string $attemptId): bool

@@ -378,7 +378,7 @@ class EntitlementManager
             $unlockStage = ReportAccess::UNLOCK_STAGE_PARTIAL;
         }
 
-        $unlockSource = $this->resolveUnlockSource($rows, $unlockStage);
+        $unlockSources = $this->resolveUnlockSources($rows, $unlockStage);
         $accessLevel = match ($unlockStage) {
             ReportAccess::UNLOCK_STAGE_PARTIAL => ReportAccess::REPORT_ACCESS_PARTIAL,
             ReportAccess::UNLOCK_STAGE_FULL => ReportAccess::REPORT_ACCESS_FULL,
@@ -392,7 +392,8 @@ class EntitlementManager
 
         return [
             'unlock_stage' => $unlockStage,
-            'unlock_source' => $unlockSource,
+            'unlock_source' => $unlockSources['legacy'],
+            'three_channel_unlock_source' => $unlockSources['canonical'],
             'modules_allowed' => $modulesAllowed,
             'access_level' => $accessLevel,
             'variant' => $variant,
@@ -673,15 +674,22 @@ class EntitlementManager
         return strtoupper(trim((string) $attemptScale));
     }
 
-    private function resolveUnlockSource(\Illuminate\Support\Collection $rows, string $unlockStage): string
+    /**
+     * @return array{legacy:string,canonical:string}
+     */
+    private function resolveUnlockSources(\Illuminate\Support\Collection $rows, string $unlockStage): array
     {
         $unlockStage = ReportAccess::normalizeUnlockStage($unlockStage);
         if ($unlockStage === ReportAccess::UNLOCK_STAGE_LOCKED) {
-            return ReportAccess::UNLOCK_SOURCE_NONE;
+            return [
+                'legacy' => ReportAccess::UNLOCK_SOURCE_NONE,
+                'canonical' => ReportAccess::UNLOCK_SOURCE_NONE,
+            ];
         }
 
         $hasPaymentSource = false;
         $hasInviteSource = false;
+        $explicitSources = [];
         foreach ($rows as $row) {
             $meta = $this->decodeMeta($row->meta_json ?? null);
             $explicitSource = ReportAccess::normalizeUnlockSource((string) ($meta['unlock_source'] ?? ''));
@@ -690,10 +698,16 @@ class EntitlementManager
                 ReportAccess::UNLOCK_SOURCE_SELF_PURCHASE,
                 ReportAccess::UNLOCK_SOURCE_GIFT_PURCHASE,
             ], true)) {
-                return $explicitSource;
+                $explicitSources[$explicitSource] = true;
             }
 
-            if (trim((string) ($row->order_no ?? '')) !== '') {
+            if (
+                trim((string) ($row->order_no ?? '')) !== ''
+                || in_array($explicitSource, [
+                    ReportAccess::UNLOCK_SOURCE_SELF_PURCHASE,
+                    ReportAccess::UNLOCK_SOURCE_GIFT_PURCHASE,
+                ], true)
+            ) {
                 $hasPaymentSource = true;
             }
 
@@ -704,17 +718,39 @@ class EntitlementManager
             }
         }
 
-        if ($hasInviteSource && $hasPaymentSource) {
-            return ReportAccess::UNLOCK_SOURCE_MIXED;
+        $hasCommercialSource = $hasPaymentSource || $explicitSources !== [];
+        $legacySource = match (true) {
+            $hasInviteSource && $hasCommercialSource => ReportAccess::UNLOCK_SOURCE_MIXED,
+            $hasInviteSource => ReportAccess::UNLOCK_SOURCE_INVITE,
+            $hasPaymentSource => ReportAccess::UNLOCK_SOURCE_PAYMENT,
+            $explicitSources !== [] => ReportAccess::UNLOCK_SOURCE_NONE,
+            default => ReportAccess::UNLOCK_SOURCE_MIXED,
+        };
+        $canonicalSource = ReportAccess::UNLOCK_SOURCE_NONE;
+        foreach ([
+            ReportAccess::UNLOCK_SOURCE_GIFT_PURCHASE,
+            ReportAccess::UNLOCK_SOURCE_SELF_PURCHASE,
+            ReportAccess::UNLOCK_SOURCE_REWARDED_AD,
+        ] as $source) {
+            if (isset($explicitSources[$source])) {
+                $canonicalSource = $source;
+                break;
+            }
         }
-        if ($hasInviteSource) {
-            return ReportAccess::UNLOCK_SOURCE_INVITE;
+        if ($canonicalSource === ReportAccess::UNLOCK_SOURCE_NONE) {
+            $canonicalSource = ReportAccess::normalizeThreeChannelUnlockSource($legacySource);
         }
-        if ($hasPaymentSource) {
-            return ReportAccess::UNLOCK_SOURCE_PAYMENT;
+        if (
+            $legacySource === ReportAccess::UNLOCK_SOURCE_NONE
+            && $canonicalSource !== ReportAccess::UNLOCK_SOURCE_NONE
+        ) {
+            $legacySource = $canonicalSource;
         }
 
-        return ReportAccess::UNLOCK_SOURCE_MIXED;
+        return [
+            'legacy' => $legacySource,
+            'canonical' => $canonicalSource,
+        ];
     }
 
     private function badRequest(string $code, string $message): array

@@ -904,4 +904,55 @@ final class AttemptReportAccessReadTest extends TestCase
             ->assertJsonPath('unlock_options.0.available', false)
             ->assertJsonPath('unlock_options.0.unavailable_reason', 'already_unlocked');
     }
+
+    public function test_multiple_explicit_unlock_sources_are_deterministic_while_legacy_mixed_attribution_is_preserved(): void
+    {
+        $this->seedScales();
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon_three_channel_mixed';
+        $token = $this->issueAnonToken($anonId);
+        $this->createAttempt($attemptId, $anonId);
+        $this->createResult($attemptId);
+
+        /** @var EntitlementManager $manager */
+        $manager = $this->app->make(EntitlementManager::class);
+        $manager->grantAttemptUnlock(
+            0,
+            null,
+            $anonId,
+            'MBTI_REPORT_PARTIAL',
+            $attemptId,
+            null,
+            'attempt',
+            null,
+            [ReportAccess::MODULE_CORE_FREE],
+            [
+                'granted_via' => 'invite_unlock',
+                'unlock_source' => ReportAccess::UNLOCK_SOURCE_REWARDED_AD,
+            ]
+        );
+        $manager->grantAttemptUnlock(
+            0,
+            null,
+            $anonId,
+            'MBTI_REPORT_FULL',
+            $attemptId,
+            null,
+            'attempt',
+            null,
+            [ReportAccess::MODULE_CORE_FULL],
+            ['unlock_source' => ReportAccess::UNLOCK_SOURCE_GIFT_PURCHASE]
+        );
+
+        $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report-access")
+            ->assertOk()
+            ->assertJsonPath('unlock_stage', 'full')
+            ->assertJsonPath('unlock_source', 'mixed')
+            ->assertJsonPath('full_report_entitlement_v1.unlock_source', 'gift_purchase')
+            ->assertJsonPath('full_report_entitlement_v1.legacy_unlock_source', 'mixed');
+    }
 }

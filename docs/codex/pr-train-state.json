@@ -101177,13 +101177,13 @@
     "base": "main",
     "branch": "codex/api-unlock-01-report-entitlement",
     "title": "API-UNLOCK-01: unify attempt-scoped full-report entitlement contract",
-    "status": "github_checks_pending",
+    "status": "review_fix_local_validation_passed",
     "depends_on": [],
     "commit_sha": "368f5d9f97128483a33e98ff1e374fd77b0aaa75",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3423",
     "checks": {
-      "focused_phpunit": "passed: 36 tests, 562 assertions",
-      "pint_scoped": "passed: 8 files",
+      "focused_phpunit": "passed: 37 tests, 566 assertions",
+      "pint_scoped": "passed: 9 files",
       "route_list": "passed: 24 attempt routes; no route changes",
       "composer_validate": "passed: strict",
       "yaml_json_diff_scope": "passed",
@@ -101230,8 +101230,13 @@
         "at": "2026-07-30T16:13:06Z",
         "status": "github_checks_pending",
         "note": "Pushed same-scope regression fix commit 368f5d9f97128483a33e98ff1e374fd77b0aaa75. Required GitHub checks are rerunning."
+      },
+      {
+        "at": "2026-07-30T16:17:26Z",
+        "status": "review_fix_local_validation_passed",
+        "note": "Addressed actionable Codex P2 review feedback by aggregating all grant source evidence before deriving attribution. Unified projection now stores canonical three_channel_unlock_source separately from legacy unlock_source, explicit-source precedence is deterministic (gift_purchase, self_purchase, rewarded_ad), and mixed invite/commercial history retains legacy mixed attribution. Added a regression covering multiple explicit sources plus legacy mixed history. Focused entitlement/report-access/invite/projection tests passed, including 26 tests / 310 assertions in the affected group and 9 legacy compatibility tests / 121 assertions; scoped Pint, syntax, YAML scope, and diff checks passed."
       }
     ],
-    "updated_at": "2026-07-30T16:13:06Z"
+    "updated_at": "2026-07-30T16:17:26Z"
   }
 }

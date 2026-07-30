@@ -65,7 +65,7 @@ prs:
     base: main
     branch: codex/api-unlock-01-report-entitlement
     title: "API-UNLOCK-01: unify attempt-scoped full-report entitlement contract"
-    status: github_checks_pending
+    status: review_fix_local_validation_passed
     depends_on: []
     train_scope: three_channel_report_entitlement_contract
     scope:
@@ -78,6 +78,7 @@ prs:
     allowed_paths:
       - backend/app/Http/Controllers/API/V0_3/AttemptReadController.php
       - backend/app/Services/Commerce/EntitlementManager.php
+      - backend/app/Services/Access/AttemptUnlockProjectionRepairService.php
       - backend/app/Services/Commerce/ReportUnlockOptionResolver.php
       - backend/app/Services/Report/ReportAccess.php
       - backend/config/report_unlock.php
@@ -93,7 +94,9 @@ prs:
       - Deploy, publish, upload the mini-program, create production orders, or perform real payments.
     validation:
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Commerce/ReportUnlockOptionResolverTest.php tests/Feature/V0_3/AttemptReportAccessReadTest.php tests/Feature/V0_3/AttemptReportPaymentUnlockFlowTest.php tests/Feature/V0_3/ReportPaywallTeaserTest.php tests/Feature/Access/UnifiedAccessProjectionDualWriteTest.php tests/Feature/V0_3/AttemptInviteUnlockStagedEntitlementTest.php tests/Feature/V0_3/AttemptInviteUnlockFoundationTest.php tests/Unit/Services/Report/AccessResolverTest.php --no-ansi --display-warnings
-      - cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_3/AttemptReadController.php app/Services/Commerce/EntitlementManager.php app/Services/Commerce/ReportUnlockOptionResolver.php app/Services/Report/ReportAccess.php config/report_unlock.php tests/Feature/Commerce/ReportUnlockOptionResolverTest.php tests/Feature/V0_3/AttemptReportAccessReadTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=test_runtime_freeze_classifier_ignores_three_channel_report_unlock_contract_service --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Content/BigFiveCanonicalTruthFixturesTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_3/AttemptReadController.php app/Services/Access/AttemptUnlockProjectionRepairService.php app/Services/Commerce/EntitlementManager.php app/Services/Commerce/ReportUnlockOptionResolver.php app/Services/Report/ReportAccess.php config/report_unlock.php tests/Feature/Commerce/ReportUnlockOptionResolverTest.php tests/Feature/V0_3/AttemptReportAccessReadTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - cd backend && php artisan route:list --path=api/v0.3/attempts --except-vendor
       - cd backend && composer validate --strict
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"

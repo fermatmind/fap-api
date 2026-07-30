@@ -24,7 +24,8 @@ final class ReportUnlockOptionResolver
         string $unlockStage,
         string $legacyUnlockSource,
         array $modulesAllowed,
-        array $modulesOffered
+        array $modulesOffered,
+        ?string $threeChannelUnlockSource = null
     ): array {
         $scaleCode = strtoupper(trim($scaleCode));
         $locale = trim($locale);
@@ -55,7 +56,9 @@ final class ReportUnlockOptionResolver
             'benefit' => (string) config('report_unlock.benefit', 'full_report'),
             'access_level' => $this->accessLevel($unlockStage),
             'unlock_stage' => $unlockStage,
-            'unlock_source' => ReportAccess::normalizeThreeChannelUnlockSource($legacyUnlockSource),
+            'unlock_source' => ReportAccess::normalizeThreeChannelUnlockSource(
+                $threeChannelUnlockSource ?? $legacyUnlockSource
+            ),
             'legacy_unlock_source' => ReportAccess::normalizeUnlockSource($legacyUnlockSource),
             'modules_allowed' => $modulesAllowed,
             'modules_offered' => $modulesOffered,
