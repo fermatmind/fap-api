@@ -111,6 +111,61 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: API-UNLOCK-01
+    repo: fap-api
+    base: main
+    branch: codex/api-unlock-01-report-entitlement
+    title: "API-UNLOCK-01: unify attempt-scoped full-report entitlement contract"
+    status: ready_to_merge
+    depends_on: []
+    train_scope: three_channel_report_entitlement_contract
+    scope:
+      - Add a versioned report-access contract for attempt-scoped full_report entitlements.
+      - Normalize new rewarded_ad, self_purchase, and gift_purchase sources while preserving legacy payment, invite, and mixed fields for read-only compatibility.
+      - Generate backend-authoritative unlock options from scale rollout, locale, provider capability, and an exact active SKU.
+      - Keep MBTI as the only default commercialization rollout and force IQ unavailable.
+      - Fail closed when the exact CNY 499 SKU or provider capability is absent.
+      - Reuse benefit_grants, EntitlementManager, ReportAccess, and unified access projection.
+    allowed_paths:
+      - backend/app/Http/Controllers/API/V0_3/AttemptReadController.php
+      - backend/app/Services/Commerce/EntitlementManager.php
+      - backend/app/Services/Access/AttemptUnlockProjectionRepairService.php
+      - backend/app/Services/Commerce/ReportUnlockOptionResolver.php
+      - backend/app/Services/Report/ReportAccess.php
+      - backend/app/Services/Report/InviteUnlockSummaryBuilder.php
+      - backend/config/report_unlock.php
+      - backend/tests/Feature/Commerce/ReportUnlockOptionResolverTest.php
+      - backend/tests/Feature/V0_3/AttemptReportAccessReadTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Add routes, migrations, advertisement sessions, payment providers, Apple IAP, gift requests, frontend code, CMS data, or production SKU writes.
+      - Change attempt ownership, enable arbitrary target-attempt purchasing, re-enable invite unlock for the mini-program, or modify IQ readiness.
+      - Deploy, publish, upload the mini-program, create production orders, or perform real payments.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Commerce/ReportUnlockOptionResolverTest.php tests/Feature/V0_3/AttemptReportAccessReadTest.php tests/Feature/V0_3/AttemptReportPaymentUnlockFlowTest.php tests/Feature/V0_3/ReportPaywallTeaserTest.php tests/Feature/Access/UnifiedAccessProjectionDualWriteTest.php tests/Feature/V0_3/AttemptInviteUnlockStagedEntitlementTest.php tests/Feature/V0_3/AttemptInviteUnlockFoundationTest.php tests/Unit/Services/Report/AccessResolverTest.php --no-ansi --display-warnings
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=test_runtime_freeze_classifier_ignores_three_channel_report_unlock_contract_services --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Content/BigFiveCanonicalTruthFixturesTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_3/AttemptReadController.php app/Services/Access/AttemptUnlockProjectionRepairService.php app/Services/Commerce/EntitlementManager.php app/Services/Commerce/ReportUnlockOptionResolver.php app/Services/Report/InviteUnlockSummaryBuilder.php app/Services/Report/ReportAccess.php config/report_unlock.php tests/Feature/Commerce/ReportUnlockOptionResolverTest.php tests/Feature/V0_3/AttemptReportAccessReadTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && php artisan route:list --path=api/v0.3/attempts --except-vendor
+      - cd backend && composer validate --strict
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: CAREER-SEARCH-ENTRY-TIER-CONTRACT-01
     repo: fap-api
     base: main

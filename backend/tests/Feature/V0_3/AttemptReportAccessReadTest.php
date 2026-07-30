@@ -7,6 +7,7 @@ namespace Tests\Feature\V0_3;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Commerce\EntitlementManager;
+use App\Services\Report\ReportAccess;
 use App\Support\SchemaBaseline;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -801,5 +802,159 @@ final class AttemptReportAccessReadTest extends TestCase
                     && is_string($context['attempt_fingerprint'] ?? null)
                     && (string) ($context['failure_code'] ?? '') === 'projection_table_missing';
             });
+    }
+
+    public function test_it_exposes_fail_closed_three_channel_contract_for_locked_mbti(): void
+    {
+        $this->seedScales();
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon_three_channel_locked';
+        $token = $this->issueAnonToken($anonId);
+        $this->createAttempt($attemptId, $anonId);
+        $this->createResult($attemptId);
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
+
+        $response->assertStatus(200)
+            ->assertJsonPath('access_state', 'locked')
+            ->assertJsonPath('access_level', 'free')
+            ->assertJsonPath('full_report_entitlement_v1.scope', 'attempt')
+            ->assertJsonPath('full_report_entitlement_v1.benefit', 'full_report')
+            ->assertJsonPath('full_report_entitlement_v1.unlock_stage', 'locked')
+            ->assertJsonPath('full_report_entitlement_v1.unlock_source', 'none')
+            ->assertJsonPath('full_report_entitlement_v1.rollout.state', 'enabled')
+            ->assertJsonPath('unlock_options.0.method', 'rewarded_ad')
+            ->assertJsonPath('unlock_options.0.available', false)
+            ->assertJsonPath('unlock_options.1.method', 'self_purchase')
+            ->assertJsonPath('unlock_options.1.available', false)
+            ->assertJsonPath('unlock_options.1.price_cents', null)
+            ->assertJsonPath('unlock_options.2.method', 'gift_purchase')
+            ->assertJsonPath('unlock_options.2.available', false);
+
+        $this->assertSame(['core_free'], $response->json('modules_allowed'));
+        $this->assertNotContains('core_full', $response->json('modules_allowed'));
+    }
+
+    public function test_rewarded_ad_grant_is_idempotent_and_projects_one_full_entitlement(): void
+    {
+        $this->seedScales();
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon_three_channel_rewarded';
+        $token = $this->issueAnonToken($anonId);
+        $this->createAttempt($attemptId, $anonId);
+        $this->createResult($attemptId);
+
+        /** @var EntitlementManager $manager */
+        $manager = $this->app->make(EntitlementManager::class);
+        $first = $manager->grantAttemptUnlock(
+            0,
+            null,
+            $anonId,
+            'MBTI_REPORT_FULL',
+            $attemptId,
+            null,
+            'attempt',
+            null,
+            [
+                ReportAccess::MODULE_CORE_FULL,
+                ReportAccess::MODULE_CAREER,
+                ReportAccess::MODULE_RELATIONSHIPS,
+            ],
+            ['unlock_source' => ReportAccess::UNLOCK_SOURCE_REWARDED_AD]
+        );
+        $second = $manager->grantAttemptUnlock(
+            0,
+            null,
+            $anonId,
+            'MBTI_REPORT_FULL',
+            $attemptId,
+            null,
+            'attempt',
+            null,
+            null,
+            ['unlock_source' => ReportAccess::UNLOCK_SOURCE_REWARDED_AD]
+        );
+
+        $this->assertTrue((bool) ($first['ok'] ?? false));
+        $this->assertFalse((bool) ($first['idempotent'] ?? true));
+        $this->assertTrue((bool) ($second['ok'] ?? false));
+        $this->assertTrue((bool) ($second['idempotent'] ?? false));
+        $this->assertSame(1, DB::table('benefit_grants')
+            ->where('attempt_id', $attemptId)
+            ->where('benefit_code', 'MBTI_REPORT_FULL')
+            ->where('status', 'active')
+            ->count());
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
+
+        $response->assertStatus(200)
+            ->assertJsonPath('access_state', 'ready')
+            ->assertJsonPath('unlock_stage', 'full')
+            ->assertJsonPath('unlock_source', 'rewarded_ad')
+            ->assertJsonPath('full_report_entitlement_v1.access_level', 'full')
+            ->assertJsonPath('full_report_entitlement_v1.unlock_source', 'rewarded_ad')
+            ->assertJsonPath('invite_unlock_v1.label', 'Rewarded ad unlock active')
+            ->assertJsonPath('invite_unlock_v1.short_label', 'Rewarded ad unlock')
+            ->assertJsonPath('unlock_options.0.available', false)
+            ->assertJsonPath('unlock_options.0.unavailable_reason', 'already_unlocked');
+    }
+
+    public function test_multiple_explicit_unlock_sources_are_deterministic_while_legacy_mixed_attribution_is_preserved(): void
+    {
+        $this->seedScales();
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon_three_channel_mixed';
+        $token = $this->issueAnonToken($anonId);
+        $this->createAttempt($attemptId, $anonId);
+        $this->createResult($attemptId);
+
+        /** @var EntitlementManager $manager */
+        $manager = $this->app->make(EntitlementManager::class);
+        $manager->grantAttemptUnlock(
+            0,
+            null,
+            $anonId,
+            'MBTI_REPORT_PARTIAL',
+            $attemptId,
+            null,
+            'attempt',
+            null,
+            [ReportAccess::MODULE_CORE_FREE],
+            [
+                'granted_via' => 'invite_unlock',
+                'unlock_source' => ReportAccess::UNLOCK_SOURCE_REWARDED_AD,
+            ]
+        );
+        $manager->grantAttemptUnlock(
+            0,
+            null,
+            $anonId,
+            'MBTI_REPORT_FULL',
+            $attemptId,
+            null,
+            'attempt',
+            null,
+            [ReportAccess::MODULE_CORE_FULL],
+            ['unlock_source' => ReportAccess::UNLOCK_SOURCE_GIFT_PURCHASE]
+        );
+
+        $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report-access")
+            ->assertOk()
+            ->assertJsonPath('unlock_stage', 'full')
+            ->assertJsonPath('unlock_source', 'mixed')
+            ->assertJsonPath('full_report_entitlement_v1.unlock_source', 'gift_purchase')
+            ->assertJsonPath('full_report_entitlement_v1.legacy_unlock_source', 'mixed');
     }
 }
