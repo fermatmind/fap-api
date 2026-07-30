@@ -40,6 +40,8 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         );
         $this->assertSame(0, $result['counts']['observed_slot_assets']);
         $this->assertFalse($result['canonical_cohort_complete']);
+        $this->assertFalse($result['excluded_hub_authority_complete']);
+        $this->assertCount(2, $result['excluded_hub_rows']);
         $this->assertSame(50, $result['counts']['blocking_rows']);
         $this->assertSame(['blocked_authority_unknown' => 50], $result['disposition_totals']);
         $this->assertCount(50, $result['rows']);
@@ -132,6 +134,57 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertSame($orgZero->id, $row['backend_resource_id']);
         $this->assertSame(1, $result['counts']['observed_canonical_assets']);
         $this->assertSame(0, $result['counts']['redirect_only_alias_rows']);
+    }
+
+    public function test_excluded_hubs_require_locked_en52_authority_and_public_projection(): void
+    {
+        $hubs = [
+            [
+                'entity_type' => PersonalityPublicContentAsset::ENTITY_HUB,
+                'entity_key' => 'big-five',
+                'slug' => 'big-five',
+                'canonical_json' => ['path' => '/en/personality/big-five'],
+            ],
+            [
+                'entity_type' => PersonalityPublicContentAsset::ENTITY_FACET_HUB,
+                'entity_key' => 'facets',
+                'slug' => 'big-five/facets',
+                'canonical_json' => ['path' => '/en/personality/big-five/facets'],
+            ],
+        ];
+        $revisions = [];
+        foreach ($hubs as $overrides) {
+            $asset = $this->createAsset($overrides);
+            $revision = $this->createRevision(
+                $asset,
+                1,
+                BigFiveEn52PackageCompiler::RELEASE_ID,
+                $this->completeSnapshot((string) $asset->entity_key),
+            );
+            $asset->forceFill([
+                'working_revision_id' => $revision->id,
+                'published_revision_id' => $revision->id,
+            ])->saveQuietly();
+            $revisions[] = $revision;
+        }
+
+        $valid = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+
+        $this->assertTrue($valid['excluded_hub_authority_complete']);
+        $this->assertSame(2, $valid['counts']['validated_excluded_hub_assets']);
+        $this->assertTrue(collect($valid['excluded_hub_rows'])->every(
+            fn (array $row): bool => $row['published_en52_lineage_locked'] === true
+                && $row['published_projection_exists'] === true,
+        ));
+
+        $revisions[0]->forceFill(['source_package' => 'unlocked-hub-release'])->saveQuietly();
+        $invalid = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $modelHub = collect($invalid['excluded_hub_rows'])->firstWhere('logical_identity', 'hub:big-five');
+
+        $this->assertFalse($invalid['excluded_hub_authority_complete']);
+        $this->assertFalse($invalid['canonical_cohort_complete']);
+        $this->assertSame('blocked_authority_unknown', $modelHub['recommended_disposition']);
+        $this->assertSame('current_published_revision_not_locked_en52_authority', $modelHub['blocker']);
     }
 
     public function test_pointer_equality_uses_revision_ids_while_content_equivalence_remains_separate(): void
@@ -324,6 +377,32 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertFalse($wrong['ok']);
     }
 
+    public function test_registered_historical_revision_is_preserved_when_pointer_active(): void
+    {
+        $asset = $this->createAsset();
+        $historical = $this->createRevision(
+            $asset,
+            1,
+            'big5-authority-v2-domains-08',
+            $this->completeSnapshot('Historical active'),
+        );
+        $asset->forceFill([
+            'working_revision_id' => $historical->id,
+            'published_revision_id' => $historical->id,
+        ])->saveQuietly();
+
+        $result = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $row = collect($result['rows'])->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertSame($historical->id, $row['historical_draft_revision_id']);
+        $this->assertSame('resolved', $row['historical_slot_resolution']);
+        $this->assertTrue($row['historical_draft_pointer_active']);
+        $this->assertTrue($row['historical_working_pointer_active']);
+        $this->assertTrue($row['historical_published_pointer_active']);
+        $this->assertSame('blocked_authority_unknown', $row['recommended_disposition']);
+        $this->assertSame('current_published_revision_not_locked_en52_authority', $row['blocker']);
+    }
+
     public function test_historical_snapshot_leakage_is_sanitized_and_blocks_stale_classification(): void
     {
         $asset = $this->createAsset();
@@ -341,6 +420,7 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
                 'facet_vector' => ['private-facet-must-not-appear'],
                 'domain_vector' => ['private-domain-must-not-appear'],
                 'private_path' => 'private-path-must-not-appear',
+                'images' => ['https://private.invalid/plural-image.webp'],
                 'body' => '<picture><source srcset="https://private.invalid/image.webp"></picture>',
             ],
         );
@@ -492,9 +572,11 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             'revision_no' => $revisionNo,
             'authority_asset_key' => $historical
                 ? $authorityAssetKey
-                : ($en52 && $asset->entity_type === PersonalityPublicContentAsset::ENTITY_FACET_DETAIL
-                    ? 'O1-imagination'
-                    : (string) $asset->entity_key),
+                : match (true) {
+                    $en52 && $asset->entity_type === PersonalityPublicContentAsset::ENTITY_HUB => 'big-five-hub',
+                    $en52 && $asset->entity_type === PersonalityPublicContentAsset::ENTITY_FACET_DETAIL => 'O1-imagination',
+                    default => (string) $asset->entity_key,
+                },
             'source_package' => $sourcePackage,
             'source_hash' => hash('sha256', $sourcePackage.':'.$revisionNo),
             'authority_package_sha256' => $historical

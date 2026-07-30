@@ -121,6 +121,10 @@ final class BigFiveEnglishDraftInventory
             PersonalityPublicContentAsset::ENTITY_HUB,
             PersonalityPublicContentAsset::ENTITY_FACET_HUB,
         ], true))->values();
+        $hubEntries = $entries->filter(fn (array $entry): bool => in_array($entry['entity_type'], [
+            PersonalityPublicContentAsset::ENTITY_HUB,
+            PersonalityPublicContentAsset::ENTITY_FACET_HUB,
+        ], true))->values();
 
         $assets = PersonalityPublicContentAsset::query()->withoutGlobalScopes()
             ->where('org_id', 0)
@@ -153,23 +157,20 @@ final class BigFiveEnglishDraftInventory
 
             return $this->row($entry, $asset);
         })->all();
+        $hubRows = $hubEntries->map(function (array $entry) use ($canonical): array {
+            /** @var PersonalityPublicContentAsset|null $asset */
+            $asset = $canonical->first(fn (PersonalityPublicContentAsset $candidate): bool => (
+                $candidate->entity_type === $entry['entity_type']
+                && $candidate->entity_key === $entry['entity_key']
+            ));
+
+            return $this->row($entry, $asset);
+        })->all();
         $revisions = PersonalityPublicContentAssetRevision::query()
             ->whereIn('asset_id', $canonical->pluck('id')->all())
             ->orderBy('id')
             ->get();
-        $referencedRevisionIds = collect($rows)
-            ->flatMap(fn (array $row): array => [$row['working_revision_id'], $row['published_revision_id']])
-            ->filter()
-            ->map(fn ($id): int => (int) $id)
-            ->unique()
-            ->all();
-        $historicalByAsset = $revisions
-            ->reject(fn (PersonalityPublicContentAssetRevision $revision): bool => in_array(
-                (int) $revision->id,
-                $referencedRevisionIds,
-                true,
-            ))
-            ->groupBy('asset_id');
+        $historicalByAsset = $revisions->groupBy('asset_id');
         $rows = array_map(function (array $row) use ($historicalByAsset): array {
             $historical = $row['backend_resource_id'] === null
                 ? collect()
@@ -198,6 +199,8 @@ final class BigFiveEnglishDraftInventory
                     'historical_draft_created_at' => null,
                     'historical_draft_updated_at' => null,
                     'historical_draft_pointer_active' => false,
+                    'historical_working_pointer_active' => false,
+                    'historical_published_pointer_active' => false,
                     'historical_slot_resolution' => $registered->isEmpty() ? 'missing' : 'ambiguous',
                     'historical_source_package' => null,
                     'historical_source_hash' => null,
@@ -222,6 +225,8 @@ final class BigFiveEnglishDraftInventory
             $historicalMedia = $this->containsMediaReference($revision->snapshot_json);
             $historicalCjk = preg_match('/[\x{3400}-\x{9FFF}\x{F900}-\x{FAFF}]/u', $historicalPayload) === 1;
             $historicalProhibited = $historicalPrivate || $historicalMedia || $historicalCjk;
+            $historicalWorkingPointerActive = (int) $revision->id === (int) ($row['working_revision_id'] ?? 0);
+            $historicalPublishedPointerActive = (int) $revision->id === (int) ($row['published_revision_id'] ?? 0);
             $mayClassifyHistoricalLineage = in_array($row['recommended_disposition'], [
                 'duplicate_of_published',
                 'verify_only_no_action',
@@ -236,7 +241,10 @@ final class BigFiveEnglishDraftInventory
                 'historical_draft_fingerprint_sha256' => $historicalFingerprint,
                 'historical_draft_created_at' => $revision->created_at?->toAtomString(),
                 'historical_draft_updated_at' => $revision->updated_at?->toAtomString(),
-                'historical_draft_pointer_active' => false,
+                'historical_draft_pointer_active' => $historicalWorkingPointerActive
+                    || $historicalPublishedPointerActive,
+                'historical_working_pointer_active' => $historicalWorkingPointerActive,
+                'historical_published_pointer_active' => $historicalPublishedPointerActive,
                 'historical_slot_resolution' => 'resolved',
                 'historical_draft_equals_current_published' => $row['published_revision_fingerprint_sha256'] !== null
                     && hash_equals($row['published_revision_fingerprint_sha256'], $historicalFingerprint),
@@ -275,7 +283,42 @@ final class BigFiveEnglishDraftInventory
                 'valid_unpublished_candidate',
             ], true)
         ))->count();
-        $canonicalCohortComplete = $canonical->count() === BigFiveEn52PackageCompiler::ASSET_COUNT;
+        $hubAuthorityComplete = count($hubRows) === 2
+            && collect($hubRows)->every(fn (array $row): bool => (
+                $row['backend_resource_id'] !== null
+                && $row['published_en52_lineage_locked'] === true
+                && $row['published_projection_exists'] === true
+                && $row['draft_equals_published'] === true
+                && $row['schema_complete'] === true
+                && $row['text_only_compliant'] === true
+                && $row['claim_boundary_compliant'] === true
+                && $row['chinese_leakage'] === false
+                && in_array($row['recommended_disposition'], [
+                    'duplicate_of_published',
+                    'stale_working_revision',
+                    'valid_unpublished_candidate',
+                    'verify_only_no_action',
+                ], true)
+            ));
+        $slotAuthorityComplete = count($rows) === 50
+            && collect($rows)->every(fn (array $row): bool => (
+                $row['backend_resource_id'] !== null
+                && $row['published_en52_lineage_locked'] === true
+                && $row['published_projection_exists'] === true
+                && $row['schema_complete'] === true
+                && $row['text_only_compliant'] === true
+                && $row['claim_boundary_compliant'] === true
+                && $row['chinese_leakage'] === false
+                && in_array($row['recommended_disposition'], [
+                    'duplicate_of_published',
+                    'stale_working_revision',
+                    'valid_unpublished_candidate',
+                    'verify_only_no_action',
+                ], true)
+            ));
+        $canonicalCohortComplete = $canonical->count() === BigFiveEn52PackageCompiler::ASSET_COUNT
+            && $hubAuthorityComplete
+            && $slotAuthorityComplete;
         $ok = $blockingRows === 0
             && $unknownAuthorityRows->isEmpty()
             && $canonicalCohortComplete;
@@ -291,9 +334,21 @@ final class BigFiveEnglishDraftInventory
             'locale' => 'en',
             'cohort_definition' => '50 registered historical slot identities from the 52-page EN52 canonical catalog, excluding model hub and facet hub',
             'canonical_cohort_complete' => $canonicalCohortComplete,
+            'excluded_hub_authority_complete' => $hubAuthorityComplete,
+            'historical_slot_authority_complete' => $slotAuthorityComplete,
             'counts' => [
                 'expected_canonical_assets' => BigFiveEn52PackageCompiler::ASSET_COUNT,
                 'observed_canonical_assets' => $canonical->count(),
+                'expected_excluded_hub_assets' => 2,
+                'validated_excluded_hub_assets' => collect($hubRows)->filter(fn (array $row): bool => (
+                    $row['published_en52_lineage_locked'] === true
+                    && $row['published_projection_exists'] === true
+                    && $row['draft_equals_published'] === true
+                    && $row['schema_complete'] === true
+                    && $row['text_only_compliant'] === true
+                    && $row['claim_boundary_compliant'] === true
+                    && $row['chinese_leakage'] === false
+                ))->count(),
                 'historical_slots' => $expected->count(),
                 'observed_slot_assets' => collect($rows)->whereNotNull('backend_resource_id')->count(),
                 'historical_revision_rows' => collect($rows)->whereNotNull('historical_draft_revision_id')->count(),
@@ -310,6 +365,7 @@ final class BigFiveEnglishDraftInventory
             'database_snapshot_after_sha256' => $after,
             'database_snapshot_unchanged' => true,
             'writes_committed' => false,
+            'excluded_hub_rows' => $hubRows,
             'rows' => $rows,
         ];
     }
@@ -476,7 +532,7 @@ final class BigFiveEnglishDraftInventory
         }
         foreach ($value as $key => $item) {
             if (is_string($key)
-                && preg_match('/(?:^|_)(?:hero|inline|og|media|image)(?:_|$)/i', $key) === 1
+                && preg_match('/(?:^|_)(?:hero|inline|og|media|images?)(?:_|$)/i', $key) === 1
                 && ! in_array($item, [null, false, '', []], true)) {
                 return true;
             }
@@ -493,6 +549,9 @@ final class BigFiveEnglishDraftInventory
     {
         if ($entry['entity_type'] === PersonalityPublicContentAsset::ENTITY_FACET_DETAIL) {
             return self::FACET_EN52_AUTHORITY_KEY[(string) $entry['entity_key']] ?? '';
+        }
+        if ($entry['entity_type'] === PersonalityPublicContentAsset::ENTITY_HUB) {
+            return $entry['entity_key'] === 'big-five' ? 'big-five-hub' : '';
         }
 
         return (string) $entry['entity_key'];
