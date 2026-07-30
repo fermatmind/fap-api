@@ -917,7 +917,7 @@ final class BigFiveEnglishDraftInventory
         }
         foreach ($value as $key => $item) {
             if (is_string($key)
-                && preg_match('/(?:^|_)(?:hero|inline|og|media|images?)(?:_|$)/i', $key) === 1) {
+                && preg_match('/(?:image|media|hero|og_image|twitter_image)/i', $key) === 1) {
                 return true;
             }
             if ($this->containsMediaReference($item)) {

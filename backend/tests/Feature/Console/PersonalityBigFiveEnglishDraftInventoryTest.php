@@ -294,6 +294,17 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertSame('prohibited_content', $emptyMediaFieldsRow['recommended_disposition']);
 
         $working->forceFill(['snapshot_json' => [
+            'attributes' => $this->completeSnapshot('Candidate'),
+            'heroImage' => 'https://private.invalid/camel-case.webp',
+        ]])->saveQuietly();
+        $camelCaseMediaField = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $camelCaseMediaFieldRow = collect($camelCaseMediaField['rows'])
+            ->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertFalse($camelCaseMediaFieldRow['text_only_compliant']);
+        $this->assertSame('prohibited_content', $camelCaseMediaFieldRow['recommended_disposition']);
+
+        $working->forceFill(['snapshot_json' => [
             'attributes' => [
                 ...$this->completeSnapshot('Candidate'),
                 'summary' => "Supplementary CJK \u{20000} Extension H \u{31350}",
