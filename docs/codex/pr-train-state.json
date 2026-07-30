@@ -101170,5 +101170,86 @@
       }
     ],
     "updated_at": "2026-07-27T09:33:00Z"
+  },
+  "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-01": {
+    "id": "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-01",
+    "repo": "fap-api",
+    "title": "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-01: produce seven English comparison assets",
+    "base": "main",
+    "branch": "codex/en-parity-w1-mbti-comparison-assets-01",
+    "depends_on": [
+      "EN-PARITY-W1-MBTI-INVENTORY-01"
+    ],
+    "status": "local_verified",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The operator supplied a continuous execution /goal with this exact PR id, title, repository, dependency, path scope, local checks, and controlled-action boundaries."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "Cross-repository dependency PR #1847 is MERGED as fap-web fc985df4ff5192b7e92b38cd2a0d11117f393968 and its frozen package SHA remains 8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85."
+      },
+      "preflight": {
+        "status": "passed",
+        "evidence": "Created an isolated fap-api worktree from exact origin/main 2284f5d9f0528722c7a58486f86c0716e526ed5c because the primary worktree belongs to another active Big Five task. No matching branch or open PR existed."
+      },
+      "package_contract": {
+        "status": "passed",
+        "evidence": "The candidate contains exactly the seven inventory slugs and row identities, binds six committed zh-CN source snapshot hashes plus the ISTJ/ISFJ backend revision hash, preserves source section/FAQ counts, and freezes package SHA 8bf265c76d9a1cae3a6cb57a0edd94c4b14852a5c1e7b0606e17edb75d2c840e."
+      },
+      "focused_test": {
+        "status": "passed",
+        "evidence": "php artisan test --filter=MbtiComparisonEnglishPackageTest passed 5 tests and 633 assertions."
+      },
+      "focused_lint": {
+        "status": "passed",
+        "evidence": "vendor/bin/pint --test tests/Feature/ContentAssets/MbtiComparisonEnglishPackageTest.php passed."
+      },
+      "manifest_state_syntax": {
+        "status": "passed",
+        "evidence": "Both package JSON files and the train state parsed successfully; the train YAML loaded successfully."
+      },
+      "diff_check": {
+        "status": "passed",
+        "evidence": "git diff --check completed without errors."
+      },
+      "changed_file_scope": {
+        "status": "passed",
+        "evidence": "The exact six changed files are three files under the comparison package directory, the focused package test, and the two fap-api train metadata files. No importer, runtime, result content, CMS, database, discoverability, search, frontend, or future-PR file is changed."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "history": [
+      {
+        "at": "2026-07-30T16:24:21Z",
+        "status": "local_verified",
+        "note": "Produced the exact seven unpublished English comparison candidates in the isolated worktree. Package/source hashes, 7-row identity, structure counts, English-only reader copy, private-field exclusions, all-false controlled permissions, 5 focused tests/633 assertions, and Pint passed. CMS/import/publish/runtime/discoverability remain untouched."
+      },
+      {
+        "at": "2026-07-30T16:25:32Z",
+        "status": "local_verified",
+        "note": "Reran the complete current-scope validation after registering train metadata: focused tests 5/633, Pint, package JSON, ledger JSON, train YAML, diff check, and exact six-file scope all pass. origin/main advanced by unrelated ops PR #3422 during production; latest-main integration remains required before opening this PR."
+      }
+    ],
+    "updated_at": "2026-07-30T16:25:32Z"
   }
 }

@@ -47317,3 +47317,48 @@ prs:
     search_channel_action: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: EN-PARITY-W1-MBTI-COMPARISON-ASSETS-01
+    repo: fap-api
+    base: main
+    branch: codex/en-parity-w1-mbti-comparison-assets-01
+    title: "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-01: produce seven English comparison assets"
+    status: local_verified
+    depends_on:
+      - EN-PARITY-W1-MBTI-INVENTORY-01
+    train_scope: en_parity_w1_mbti_comparison_asset_package
+    scope:
+      - Produce exactly seven unpublished English MBTI cross-type comparison assets bound to the accepted W1 inventory.
+      - Freeze a deterministic candidate package SHA without importing or publishing the package.
+      - Preserve source structure, translation identity, privacy boundaries, and MBTI preference claim boundaries.
+    allowed_paths:
+      - backend/content_assets/en-content-parity/W1-mbti/comparisons/**
+      - backend/tests/Feature/ContentAssets/MbtiComparisonEnglishPackageTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Write a CMS or database row, revision, review, approval, publication, activation, or public API runtime state.
+      - Change result/report content, sitemap, llms, canonical runtime, indexability, Search Channel state, or search submission.
+      - Add importer or publisher code, frontend fallback content, migration, route, controller, service, scheduler, queue, or deploy logic.
+      - Describe producer self-checks as independent W9 QA or the unpublished candidate as live content.
+    validation:
+      - cd backend && php artisan test --filter=MbtiComparisonEnglishPackageTest
+      - cd backend && vendor/bin/pint --test tests/Feature/ContentAssets/MbtiComparisonEnglishPackageTest.php
+      - python3 -m json.tool backend/content_assets/en-content-parity/W1-mbti/comparisons/assets.json >/dev/null
+      - python3 -m json.tool backend/content_assets/en-content-parity/W1-mbti/comparisons/package_manifest.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: backend candidate package; runtime authority unchanged
+    repository_rule_impact: baseline package only; backend authority remains unchanged and public exposure does not change
