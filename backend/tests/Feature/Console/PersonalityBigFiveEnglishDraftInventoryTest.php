@@ -264,6 +264,19 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertSame('prohibited_content', $emptyDestinationRow['recommended_disposition']);
 
         $working->forceFill(['snapshot_json' => [
+            'attributes' => $this->completeSnapshot('Candidate'),
+            'media' => null,
+            'image' => '',
+            'images' => [],
+        ]])->saveQuietly();
+        $emptyMediaFields = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $emptyMediaFieldsRow = collect($emptyMediaFields['rows'])
+            ->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertFalse($emptyMediaFieldsRow['text_only_compliant']);
+        $this->assertSame('prohibited_content', $emptyMediaFieldsRow['recommended_disposition']);
+
+        $working->forceFill(['snapshot_json' => [
             'attributes' => [
                 ...$this->completeSnapshot('Candidate'),
                 'summary' => "Supplementary CJK \u{20000}",
