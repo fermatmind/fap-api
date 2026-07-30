@@ -101177,9 +101177,9 @@
     "base": "main",
     "branch": "codex/en-parity-w2-big5-draft-reconcile-01",
     "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
-    "status": "local_checks_passed",
+    "status": "committed",
     "depends_on": [],
-    "commit_sha": null,
+    "commit_sha": "6e320344e698259cabc489d29c48570b7dfa6fd5",
     "pr_url": null,
     "checks": {
       "production_read_only_inventory": {
@@ -101228,8 +101228,13 @@
         "at": "2026-07-30T15:43:00Z",
         "status": "local_checks_passed",
         "note": "Corrected key-aware historical revision QA proves all exact 50 rows have zero private-field, media-reference, and Chinese leakage with unchanged production database fingerprint. Focused local checks and exact scope validation passed; no write, publish, promotion, deploy, or search action occurred."
+      },
+      {
+        "at": "2026-07-30T15:46:00Z",
+        "status": "committed",
+        "note": "Committed the exact seven-path implementation and durable evidence as 6e320344e698259cabc489d29c48570b7dfa6fd5 after explicit path-limited staging."
       }
     ],
-    "updated_at": "2026-07-30T15:43:00Z"
+    "updated_at": "2026-07-30T15:46:00Z"
   }
 }
