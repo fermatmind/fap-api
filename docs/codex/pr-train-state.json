@@ -101177,7 +101177,7 @@
     "base": "main",
     "branch": "codex/en-parity-w2-big5-draft-reconcile-01",
     "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
-    "status": "review_fix_local_checks_passed",
+    "status": "ready_to_merge",
     "depends_on": [],
     "commit_sha": "190b3e3edb3dd34ee8edda0cf351632f13b621df",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3421",
@@ -101191,14 +101191,14 @@
         "evidence": "Focused PHPUnit, scoped Pint, PHP syntax, JSON/YAML parsing, deterministic artifact invariants, diff checks, and exact allowlist validation passed. Production historical revision QA SHA-256 109e995dd9c900b978d5ceaca1f7851607d4332c8bf9a734c705bd32982dd11e proves 50 rows, database fingerprint unchanged, and zero CJK/media/private-field leakage."
       },
       "github_required_checks": {
-        "status": "exact_head_retry_pending",
-        "evidence": "GitHub CI runs through 30584737453 passed all required jobs at their exact heads. The latest exact-head review added two in-scope compiler content-shape findings; implementation 190b3e3edb3dd34ee8edda0cf351632f13b621df passes the 29-test inventory suite and the 395-test runtime-freeze suite and requires a fresh exact-head CI/review cycle."
+        "status": "pass",
+        "evidence": "GitHub CI run 30585553555 and Code Scanning run 30585553557 passed all required jobs on exact metadata head 8e014a11d81ff6ef5f85145271004436bb292d13. Staging parity was skipped as expected and is not required. All review findings are resolved and unresolved thread count is zero."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -101393,9 +101393,14 @@
         "at": "2026-07-30T21:57:00Z",
         "status": "review_fix_local_checks_passed",
         "note": "After every required job in CI run 30584737453 passed, exact-head review identified two remaining EN52 compiler content-shape gaps. Candidate sections now require the compiler's exact rich_text kind, and FAQ validation requires question-mark-terminated prompts plus compiler-equivalent normalized-question uniqueness and non-empty answers. Gallery sections, duplicate normalized questions, and missing question marks all fail closed as schema_repair_required. The ledger binds implementation 190b3e3edb3dd34ee8edda0cf351632f13b621df. The 29-test inventory suite passes 193 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, YAML/JSON parsing, and diff checks pass."
+      },
+      {
+        "at": "2026-07-30T22:15:17Z",
+        "status": "ready_to_merge",
+        "note": "Exact implementation 190b3e3edb3dd34ee8edda0cf351632f13b621df is bound by metadata head 8e014a11d81ff6ef5f85145271004436bb292d13. CI run 30585553555 and Code Scanning run 30585553557 passed all required jobs, GitHub reports MERGEABLE, exact eight-path scope validation is clean, and unresolved review thread count is zero. This metadata-only ready_to_merge tail must repeat required checks before squash merge."
       }
     ],
-    "updated_at": "2026-07-30T21:57:00Z"
+    "updated_at": "2026-07-30T22:15:17Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
