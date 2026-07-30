@@ -1181,15 +1181,17 @@ class AttemptReadController extends Controller
             $modulesAllowed,
             $modulesOffered
         );
-        $payloadJson['full_report_entitlement_v1'] = $fullReportEntitlement;
         $responsePayload['unlock_stage'] = $unlockStage;
         $responsePayload['unlock_source'] = $unlockSource;
-        $responsePayload['access_level'] = $fullReportEntitlement['access_level'];
-        $responsePayload['modules_allowed'] = $fullReportEntitlement['modules_allowed'];
-        $responsePayload['modules_offered'] = $fullReportEntitlement['modules_offered'];
-        $responsePayload['unlock_options'] = $fullReportEntitlement['unlock_options'];
-        $responsePayload['rollout'] = $fullReportEntitlement['rollout'];
-        $responsePayload['full_report_entitlement_v1'] = $fullReportEntitlement;
+        if (data_get($fullReportEntitlement, 'rollout.state') === 'enabled') {
+            $payloadJson['full_report_entitlement_v1'] = $fullReportEntitlement;
+            $responsePayload['access_level'] = $fullReportEntitlement['access_level'];
+            $responsePayload['modules_allowed'] = $fullReportEntitlement['modules_allowed'];
+            $responsePayload['modules_offered'] = $fullReportEntitlement['modules_offered'];
+            $responsePayload['unlock_options'] = $fullReportEntitlement['unlock_options'];
+            $responsePayload['rollout'] = $fullReportEntitlement['rollout'];
+            $responsePayload['full_report_entitlement_v1'] = $fullReportEntitlement;
+        }
         $responsePayload['access_source'] = $payloadJson['access_source'];
         $responsePayload['free_full_report_mode'] = $payloadJson['free_full_report_mode'];
         $responsePayload['paywall_suppressed'] = $payloadJson['paywall_suppressed'];

@@ -1839,6 +1839,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_three_channel_report_unlock_contract_service(): void
+    {
+        $changed = [
+            'backend/app/Services/Commerce/ReportUnlockOptionResolver.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_free_full_report_mode_feature_flag_files(): void
     {
         $changed = [
@@ -8309,6 +8318,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isThreeChannelReportUnlockContractFile($file)) {
+                continue;
+            }
+
             if ($this->isFreeFullReportModeFeatureFlagFile($file)) {
                 continue;
             }
@@ -10833,6 +10846,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Report/ReportAccess.php',
             'backend/app/Services/Report/Resolvers/AccessResolver.php',
         ], true);
+    }
+
+    private function isThreeChannelReportUnlockContractFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/Commerce/ReportUnlockOptionResolver.php';
     }
 
     private function isFreeFullReportModeFeatureFlagFile(string $file): bool
