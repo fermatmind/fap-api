@@ -285,7 +285,17 @@ function targetSetSha256(array $targets): string
  */
 function assertCompletePublicSnapshot(array $summary): void
 {
-    if (
+    if (! publicSnapshotIsComplete($summary)) {
+        throw new RuntimeException('PUBLIC_SNAPSHOT_INCOMPLETE');
+    }
+}
+
+/**
+ * @param  array<string, int|string>  $summary
+ */
+function publicSnapshotIsComplete(array $summary): bool
+{
+    return ! (
         $summary['slug_count'] !== EXPECTED_CANDIDATES
         || $summary['url_count'] !== EXPECTED_URLS
         || $summary['http_200_count'] !== EXPECTED_URLS
@@ -294,9 +304,7 @@ function assertCompletePublicSnapshot(array $summary): void
         || $summary['canonical_ok_count'] !== EXPECTED_URLS
         || $summary['robots_ok_count'] !== EXPECTED_URLS
         || $summary['locale_ok_count'] !== EXPECTED_URLS
-    ) {
-        throw new RuntimeException('PUBLIC_SNAPSHOT_INCOMPLETE');
-    }
+    );
 }
 
 function installDatabaseWriteGuard(object $app): void
@@ -359,9 +367,10 @@ $postReadbackStateSha256 = null;
 $qualityPackageSha256 = null;
 $reviewPackageSha256 = null;
 $reviewTargetSetSha256 = null;
+$preSummary = null;
 
 try {
-    if (! in_array($mode, ['preflight', 'execute'], true)) {
+    if (! in_array($mode, ['diagnose', 'preflight', 'execute'], true)) {
         throw new RuntimeException('INVALID_MODE');
     }
     $deployPath = requiredEnv('DEPLOY_PATH', '#^/[A-Za-z0-9._/-]+$#D');
@@ -419,6 +428,50 @@ try {
 
     $preSnapshot = publicSnapshot($slugs, $manifestSha256);
     $preSummary = $preSnapshot['summary'];
+    if ($mode === 'diagnose') {
+        $snapshotComplete = publicSnapshotIsComplete($preSummary);
+        $baselineMatch = $snapshotComplete
+            && $preSummary['payload_set_sha256'] === $recoveryPayloadSetSha256
+            && $preSummary['bad_href_url_count'] === $expectedBadHrefCount
+            && $preSummary['low_module_url_count'] === $expectedLowModuleCount;
+        $status = ! $snapshotComplete
+            ? 'HOLD_DIAGNOSTIC_SNAPSHOT_INCOMPLETE'
+            : ($baselineMatch
+                ? 'PASS_DIAGNOSTIC_COMPLETE_BASELINE_MATCH'
+                : 'PASS_DIAGNOSTIC_COMPLETE_STATE_DRIFT');
+        $diagnosticStateSha256 = hash('sha256', canonicalJson([
+            'manifest_sha256' => $manifestSha256,
+            'summary' => $preSummary,
+            'snapshot_complete' => $snapshotComplete,
+            'recovery_baseline_match' => $baselineMatch,
+        ]));
+        emit(receipt([
+            'mode' => 'diagnose',
+            'status' => $status,
+            'release_sha' => $releaseSha,
+            'release_name' => $releaseName,
+            'manifest_sha256' => $manifestSha256,
+            'diagnostic_state_sha256' => $diagnosticStateSha256,
+            'observed_payload_set_sha256' => $preSummary['payload_set_sha256'],
+            'observed_slug_count' => $preSummary['slug_count'],
+            'observed_url_count' => $preSummary['url_count'],
+            'observed_http_200_count' => $preSummary['http_200_count'],
+            'observed_transport_failure_count' => $preSummary['transport_failure_count'],
+            'observed_non_200_response_count' => $preSummary['non_200_response_count'],
+            'observed_canonical_ok_count' => $preSummary['canonical_ok_count'],
+            'observed_robots_ok_count' => $preSummary['robots_ok_count'],
+            'observed_locale_ok_count' => $preSummary['locale_ok_count'],
+            'observed_bad_href_url_count' => $preSummary['bad_href_url_count'],
+            'observed_low_module_url_count' => $preSummary['low_module_url_count'],
+            'snapshot_complete' => $snapshotComplete,
+            'recovery_baseline_match' => $baselineMatch,
+            'write_state' => 'none',
+            'production_write_execution' => false,
+            'cache_refresh_target_count' => 0,
+            'completed_batch_count' => 0,
+            'per_target_retry_limit' => 0,
+        ]));
+    }
     assertCompletePublicSnapshot($preSummary);
     if (
         $preSummary['payload_set_sha256'] !== $recoveryPayloadSetSha256
@@ -636,7 +689,7 @@ try {
         : ($postSummary === null ? 'partial' : 'committed_unverified');
 
     emit(receipt([
-        'mode' => in_array($mode, ['preflight', 'execute'], true) ? $mode : null,
+        'mode' => in_array($mode, ['diagnose', 'preflight', 'execute'], true) ? $mode : null,
         'status' => $cacheRefreshTargetCount === 0 ? 'FAIL_CLOSED' : 'FAIL_PARTIAL',
         'release_sha' => $releaseSha,
         'release_name' => $releaseName,
@@ -655,5 +708,27 @@ try {
         'review_package_sha256' => $reviewPackageSha256,
         'review_target_set_sha256' => $reviewTargetSetSha256,
         'per_target_retry_limit' => 0,
+        'observed_payload_set_sha256' => is_array($preSummary)
+            ? ($preSummary['payload_set_sha256'] ?? null)
+            : null,
+        'observed_url_count' => is_array($preSummary) ? ($preSummary['url_count'] ?? 0) : 0,
+        'observed_http_200_count' => is_array($preSummary) ? ($preSummary['http_200_count'] ?? 0) : 0,
+        'observed_transport_failure_count' => is_array($preSummary)
+            ? ($preSummary['transport_failure_count'] ?? 0)
+            : 0,
+        'observed_non_200_response_count' => is_array($preSummary)
+            ? ($preSummary['non_200_response_count'] ?? 0)
+            : 0,
+        'observed_canonical_ok_count' => is_array($preSummary)
+            ? ($preSummary['canonical_ok_count'] ?? 0)
+            : 0,
+        'observed_robots_ok_count' => is_array($preSummary) ? ($preSummary['robots_ok_count'] ?? 0) : 0,
+        'observed_locale_ok_count' => is_array($preSummary) ? ($preSummary['locale_ok_count'] ?? 0) : 0,
+        'observed_bad_href_url_count' => is_array($preSummary)
+            ? ($preSummary['bad_href_url_count'] ?? 0)
+            : 0,
+        'observed_low_module_url_count' => is_array($preSummary)
+            ? ($preSummary['low_module_url_count'] ?? 0)
+            : 0,
     ]), 1);
 }

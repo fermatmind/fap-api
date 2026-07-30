@@ -415,6 +415,83 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
         $this->assertStringNotContainsString('/var/www/fap-api', $workflow.$runner);
     }
 
+    public function test_resume_preflight_diagnostic_binds_failed_receipt_and_exposes_only_safe_aggregates(): void
+    {
+        $workflow = $this->repoFile(
+            '.github/workflows/career-search-entry-batch-cache-refresh-resume-preflight-diagnostic.yml'
+        );
+        $runner = $this->repoFile(
+            'backend/scripts/career/career_search_entry_batch_cache_refresh_resume.php'
+        );
+
+        foreach ([
+            'expected_control_plane_sha:',
+            'expected_release_sha:',
+            'expected_release_name:',
+            'failed_preflight_run_id:',
+            'failed_preflight_run_attempt:',
+            'expected_failed_preflight_receipt_sha256:',
+            'operator_approval_phrase:',
+            'Career Search Entry Batch Cache Refresh Resume',
+            'career-search-entry-batch-cache-refresh-resume-preflight-${FAILED_PREFLIGHT_RUN_ID}-${FAILED_PREFLIGHT_RUN_ATTEMPT}',
+            '.conclusion == "failure"',
+            '.failure_category == "PUBLIC_SNAPSHOT_INCOMPLETE"',
+            'actual_failed_receipt_sha256',
+            'Career Search Entry Batch Cache Refresh Recovery Preflight',
+            'career-search-entry-batch-cache-refresh-recovery-preflight-${recovery_run_id}-${recovery_run_attempt}',
+            '[.workflow_runs[] | select(.id > $failed_preflight)] | length == 0',
+            'inspect only safe aggregate 100-URL snapshot state',
+            'zero cache write, preflight retry, execute, rollback, deploy, or Search Channel operation',
+            'CAREER_CACHE_RESUME_MODE=diagnose',
+            'group: deploy-${{ github.repository }}-production',
+            'secrets.PRODUCTION_DEPLOY_HOST',
+            'secrets.PRODUCTION_DEPLOY_PATH',
+            'secrets.SSH_PRIVATE_KEY',
+            'ServerAliveInterval=20',
+            'ServerAliveCountMax=30',
+            'if: always()',
+        ] as $required) {
+            $this->assertStringContainsString($required, $workflow);
+        }
+        foreach ([
+            "'diagnose'",
+            'HOLD_DIAGNOSTIC_SNAPSHOT_INCOMPLETE',
+            'PASS_DIAGNOSTIC_COMPLETE_BASELINE_MATCH',
+            'PASS_DIAGNOSTIC_COMPLETE_STATE_DRIFT',
+            'diagnostic_state_sha256',
+            'observed_payload_set_sha256',
+            'observed_url_count',
+            'observed_http_200_count',
+            'observed_transport_failure_count',
+            'observed_non_200_response_count',
+            'observed_canonical_ok_count',
+            'observed_robots_ok_count',
+            'observed_locale_ok_count',
+            'observed_bad_href_url_count',
+            'observed_low_module_url_count',
+            'snapshot_complete',
+            'recovery_baseline_match',
+            "'write_state' => 'none'",
+            "'production_write_execution' => false",
+            "'cache_refresh_target_count' => 0",
+            "'database_write_count' => 0",
+            "'queue_dispatch_count' => 0",
+            "'deploy_count' => 0",
+            "'rollback_count' => 0",
+        ] as $required) {
+            $this->assertStringContainsString($required, $runner);
+        }
+        $this->assertStringNotContainsString('exact_resume_execute_approval_phrase', $workflow);
+        $this->assertStringNotContainsString('warmJobDetailPayloadForOfflineBootstrap', $workflow);
+        $this->assertStringNotContainsString('php artisan migrate', $workflow.$runner);
+        $this->assertStringNotContainsString('queue:restart', $workflow.$runner);
+        $this->assertStringNotContainsString('deploy:symlink', $workflow.$runner);
+        $this->assertStringNotContainsString('indexnow', strtolower($workflow.$runner));
+        $this->assertStringNotContainsString('googleapis', strtolower($workflow.$runner));
+        $this->assertStringNotContainsString('139.224.', $workflow.$runner);
+        $this->assertStringNotContainsString('/var/www/fap-api', $workflow.$runner);
+    }
+
     private function repoFile(string $path): string
     {
         $contents = file_get_contents(dirname(__DIR__, 3).'/'.$path);
