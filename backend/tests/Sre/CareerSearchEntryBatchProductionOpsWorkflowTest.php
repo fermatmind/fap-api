@@ -556,7 +556,7 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
             '"PREFLIGHT_RUN_ATTEMPT: ${PREFLIGHT_RUN_ATTEMPT}"',
             '"EXPECTED_PREFLIGHT_STATE_SHA256: ${EXPECTED_PREFLIGHT_STATE_SHA256}"',
             '"EXPECTED_RESUME_TARGET_SET_SHA256: ${EXPECTED_RESUME_TARGET_SET_SHA256}"',
-            'substr($0, length($0) - length(binding) + 1) == binding',
+            'length($0) >= length(binding) && substr($0, length($0) - length(binding) + 1) == binding {',
             'END { exit(found ? 0 : 1) }',
             'failed_execute_input_binding_sha256',
             'unset failed_execute_log',
@@ -595,6 +595,7 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
         ] as $required) {
             $this->assertStringContainsString($required, $workflow);
         }
+        $this->assertStringNotContainsString("length(binding)\n               &&", $workflow);
         foreach ([
             'database_write_count: 0',
             'cms_write_count: 0',
