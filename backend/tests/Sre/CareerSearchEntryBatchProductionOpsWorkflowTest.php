@@ -623,6 +623,116 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
         $this->assertStringNotContainsString('/var/www/fap-api', $workflow.$runner);
     }
 
+    public function test_resume_execute_failure_diagnostic_eligibility_recovery_is_run_bound_and_read_only(): void
+    {
+        $workflow = $this->repoFile(
+            '.github/workflows/career-search-entry-batch-cache-refresh-resume-execute-failure-diagnostic-eligibility-recovery.yml'
+        );
+        $runner = $this->repoFile(
+            'backend/scripts/career/career_search_entry_batch_cache_refresh_resume.php'
+        );
+
+        foreach ([
+            'expected_control_plane_sha:',
+            'expected_release_sha:',
+            'expected_release_name:',
+            'failed_diagnostic_run_id:',
+            'failed_diagnostic_run_attempt:',
+            'expected_failed_diagnostic_control_plane_sha:',
+            'failed_resume_execute_run_id:',
+            'failed_resume_execute_run_attempt:',
+            'expected_failed_resume_execute_receipt_sha256:',
+            'preflight_run_id:',
+            'preflight_run_attempt:',
+            'expected_preflight_receipt_sha256:',
+            'expected_manifest_sha256:',
+            'expected_preflight_state_sha256:',
+            'expected_resume_target_set_sha256:',
+            'expected_failed_target_index_sha256:',
+            'expected_observed_payload_set_sha256:',
+            'operator_approval_phrase:',
+            '.name == "Career Search Entry Batch Cache Refresh Resume Execute Failure Diagnostic"',
+            '.path == ".github/workflows/career-search-entry-batch-cache-refresh-resume-execute-failure-diagnostic.yml"',
+            '.conclusion == "failure"',
+            '.name == "eligibility"',
+            '.name == "Bind latest main, failed execute receipt, and exact diagnostic authorization"',
+            '.name == "diagnose"',
+            '.conclusion == "skipped"',
+            '(.steps | length == 0)',
+            '.total_count == 0 and (.artifacts | length == 0)',
+            '3e7049e6ce679ae60531bc93abd33b9c91644224298c73706e6537ac2fd1e746',
+            "grep -F 'awk: cmd. line:2:'",
+            "grep -F '^ syntax error'",
+            'unset failed_diagnostic_log',
+            'failed_diagnostic_failure_category=awk_portability_control_error',
+            'failed_diagnostic_diagnose_skipped=true',
+            'failed_diagnostic_artifact_count=0',
+            'failed_diagnostic_workflow_sha256',
+            'failed_diagnostic_eligibility_job_id',
+            'failed_diagnostic_eligibility_attestation_sha256',
+            '] == [$failed_diagnostic]',
+            'career-search-entry-batch-cache-refresh-resume-execute-failure-diagnostic-eligibility-recovery.yml/runs?event=workflow_dispatch',
+            'select(.id > $failed_diagnostic and .id != $current_run)',
+            'eligibility recovery for failed diagnostic run',
+            'with diagnose skipped and zero artifacts',
+            'inspect only safe aggregate cache runtime-identity and 100-URL snapshot state',
+            'zero cache write, retry, rollback, deploy, CMS/DB write, or Search Channel operation',
+            'CAREER_CACHE_RESUME_MODE=diagnose',
+            'runner_cache_tree_permission_ok',
+            'runtime_cache_tree_permission_ok',
+            'runtime_identity_remediation_candidate',
+            'if [ \"\$runner_cache_tree_scan_complete\" = true ]',
+            'elif $permissions.runner_cache_tree_scan_complete != true',
+            'HOLD_DIAGNOSTIC_RUNTIME_CACHE_UNAVAILABLE',
+            'PASS_DIAGNOSTIC_RUNTIME_IDENTITY_MISMATCH',
+            'PASS_DIAGNOSTIC_PERMISSION_STATE_COMPLETE',
+            'career.search_entry_batch.cache_refresh.resume_execute_failure_diagnostic_eligibility_recovery.v1',
+            'failed_diagnostic_run_id: $failed_diagnostic_run',
+            'failed_diagnostic_run_attempt: $failed_diagnostic_attempt',
+            'failed_diagnostic_control_plane_sha: $failed_diagnostic_control',
+            'failed_diagnostic_workflow_sha256: $failed_diagnostic_workflow',
+            'failed_diagnostic_eligibility_job_id: $failed_diagnostic_job',
+            'failed_diagnostic_failure_category: "awk_portability_control_error"',
+            'failed_diagnostic_diagnose_skipped: true',
+            'failed_diagnostic_artifact_count: 0',
+            'retry_execution_count: 0',
+            'group: deploy-${{ github.repository }}-production',
+            'secrets.PRODUCTION_DEPLOY_HOST',
+            'secrets.PRODUCTION_DEPLOY_PATH',
+            'secrets.SSH_PRIVATE_KEY',
+            'ServerAliveInterval=20',
+            'ServerAliveCountMax=30',
+            'if: always()',
+        ] as $required) {
+            $this->assertStringContainsString($required, $workflow);
+        }
+        foreach ([
+            'database_write_count: 0',
+            'cms_write_count: 0',
+            'publication_write_count: 0',
+            'indexability_write_count: 0',
+            'queue_dispatch_count: 0',
+            'sitemap_write_count: 0',
+            'llms_write_count: 0',
+            'search_channel_action_count: 0',
+            'url_submission_count: 0',
+            'non_target_write_count: 0',
+            'deploy_count: 0',
+            'rollback_count: 0',
+        ] as $required) {
+            $this->assertStringContainsString($required, $workflow);
+        }
+        $this->assertStringNotContainsString('warmJobDetailPayloadForOfflineBootstrap', $workflow);
+        $this->assertStringNotContainsString('exact_resume_execute_approval_phrase', $workflow);
+        $this->assertStringNotContainsString('php artisan migrate', $workflow.$runner);
+        $this->assertStringNotContainsString('queue:restart', $workflow.$runner);
+        $this->assertStringNotContainsString('deploy:symlink', $workflow.$runner);
+        $this->assertStringNotContainsString('indexnow', strtolower($workflow.$runner));
+        $this->assertStringNotContainsString('googleapis', strtolower($workflow.$runner));
+        $this->assertStringNotContainsString('139.224.', $workflow.$runner);
+        $this->assertStringNotContainsString('/var/www/fap-api', $workflow.$runner);
+    }
+
     private function repoFile(string $path): string
     {
         $contents = file_get_contents(dirname(__DIR__, 3).'/'.$path);
