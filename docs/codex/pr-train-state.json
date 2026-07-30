@@ -101514,11 +101514,11 @@
       },
       "package_contract": {
         "status": "passed",
-        "evidence": "Frozen candidate package SHA cfe6d3e02f1bb28104a0cff7e337c541148a3d034c7cb387def3ae63ec6aabfc reconciles 46 unique rows as 24 preserved controls, 21 distinct English assets, and one synthetic private-safe PDF W9 target. The PDF adapter covers all 20 PDF candidates with package-frozen INTJ-A/Assertive and explainability values, exact card keys, and a runtime-derived unsafe-field denylist. close_call_axes declares closest-axis, side, opposite-side, and margin slots; adjacent_type_contrast declares neighboring-type and differing-axis slots. W9 resolves them synthetically, but current runtime does not substitute package tokens inside canonical body_md/payload. The package therefore records existing_runtime_contract=false and makes a separately scoped real-projection renderer plus unresolved-token rejection an activation prerequisite. Importer values remain unstored, every candidate remains inactive/draft-only, and every controlled permission remains false."
+        "evidence": "Frozen candidate package SHA d15f823cd2c9959d34bf4a9e83327b1ead7519b206c82367fdb9a6b1039d23c2 reconciles 46 unique rows as 24 preserved controls, 21 distinct English assets, and one synthetic private-safe PDF W9 target. The PDF adapter covers all 20 PDF candidates with package-frozen INTJ-A/Assertive and explainability values, exact card keys, and a runtime-derived unsafe-field denylist. close_call_axes declares closest-axis, side, opposite-side, and margin slots; adjacent_type_contrast declares neighboring-type plus adjacent-axis-specific label slots bound to the same first ranked non-A/T axis used to derive neighbor_type_keys[0]. W9 deliberately exercises an A/T closest axis and a J/P adjacent axis to prove the contracts cannot cross-wire. W9 resolves the slots synthetically, but current runtime does not substitute package tokens inside canonical body_md/payload. The package therefore records existing_runtime_contract=false and makes a separately scoped real-projection renderer plus unresolved-token rejection an activation prerequisite. Importer values remain unstored, every candidate remains inactive/draft-only, and every controlled permission remains false."
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "php artisan test --filter=MbtiResultEnglishPackageTest passed 7 tests/1372 assertions proving package-frozen W9 explainability rendering while asserting current runtime substitution is false and a separate activation prerequisite is present, alongside digest binding, entitlement, deterministic PDF card identity, runtime-derived denylist, slot stages, canonical buckets, inactive/draft/public boundaries, CTA shape, QA partitioning, and claim reconciliation. Scoped Pint, JSON, deterministic package SHA cfe6d3e02f1bb28104a0cff7e337c541148a3d034c7cb387def3ae63ec6aabfc, diff, and scope checks pass. Earlier isolated SQLite ci_verify_mbti.sh exit-0 evidence remains applicable because no runtime code changed."
+        "evidence": "php artisan test --filter=MbtiResultEnglishPackageTest passed 7 tests/1377 assertions, including a deliberately different A/T closest axis and J/P adjacent axis that proves adjacent labels stay bound to the same non-A/T axis used for neighbor_type_keys[0]. Scoped Pint, all package JSON, train YAML/state JSON, deterministic package SHA d15f823cd2c9959d34bf4a9e83327b1ead7519b206c82367fdb9a6b1039d23c2, diff, and exact changed-file scope checks passed. A direct verify_mbti.sh call first failed only because its required local HTTP service was absent; the repository CI entrypoint then prepared isolated SQLite, started that service, passed verify_mbti 8/8, passed the 195830-assertion full gate and every downstream regression gate, and exited 0. Current runtime/CMS/import behavior remains unchanged."
       },
       "changed_file_scope": {
         "status": "passed",
@@ -101746,8 +101746,13 @@
         "at": "2026-07-30T22:51:00Z",
         "status": "github_checks_pending",
         "note": "Committed the explicit runtime-renderer activation hold as implementation commit a13cf1aff50c397ce5c2b45541dec8ba1d24ef01. This metadata-only commit records that immutable pointer; exact-head checks remain pending."
+      },
+      {
+        "at": "2026-07-30T23:11:00Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact head 14d01b2fa268582298fbe97e95b584acf6193eb3 passed all required checks, then review found adjacent labels could incorrectly reuse the closest A/T axis while neighbor_type_keys[0] is derived from the first ranked non-A/T axis. Added three adjacent-axis-specific slots and bound their source contract to the exact axis used for the neighbor. The W9 fixture deliberately uses A/T as closest and J/P as adjacent, and focused validation passed 7 tests/1377 assertions. The initial direct HTTP verifier call recorded a missing local service; the isolated SQLite ci_verify_mbti entrypoint subsequently passed verify_mbti 8/8, the 195830-assertion full gate, and all downstream gates. Candidate SHA is d15f823cd2c9959d34bf4a9e83327b1ead7519b206c82367fdb9a6b1039d23c2. Integrated unrelated origin/main 9c7925b1c without conflict; fresh exact-head checks remain pending."
       }
     ],
-    "updated_at": "2026-07-30T22:51:00Z"
+    "updated_at": "2026-07-30T23:11:00Z"
   }
 }

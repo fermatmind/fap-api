@@ -16,7 +16,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
 
     private const INVENTORY_SHA = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
-    private const PACKAGE_SHA = 'cfe6d3e02f1bb28104a0cff7e337c541148a3d034c7cb387def3ae63ec6aabfc';
+    private const PACKAGE_SHA = 'd15f823cd2c9959d34bf4a9e83327b1ead7519b206c82367fdb9a6b1039d23c2';
 
     private const EXPECTED_CANDIDATE_ROW_IDS = [
         'W1-RESULT-CORE-05-OFFER-CTA',
@@ -200,11 +200,14 @@ final class MbtiResultEnglishPackageTest extends TestCase
         self::assertSame([
             'type_code' => 'INTJ-A',
             'identity_variant' => 'Assertive',
-            'axis_label' => 'Judging–Perceiving (J/P)',
-            'side_label' => 'Judging (J)',
-            'opposite_side_label' => 'Perceiving (P)',
-            'delta' => '6',
+            'axis_label' => 'Assertive–Turbulent (A/T)',
+            'side_label' => 'Assertive (A)',
+            'opposite_side_label' => 'Turbulent (T)',
+            'delta' => '2',
             'neighbor_type' => 'INTP',
+            'adjacent_axis_label' => 'Judging–Perceiving (J/P)',
+            'adjacent_side_label' => 'Judging (J)',
+            'adjacent_opposite_side_label' => 'Perceiving (P)',
         ], $fixtureSlots);
 
         self::assertSame(21, $package['asset_count']);
@@ -221,6 +224,9 @@ final class MbtiResultEnglishPackageTest extends TestCase
             'opposite_side_label',
             'delta',
             'neighbor_type',
+            'adjacent_axis_label',
+            'adjacent_side_label',
+            'adjacent_opposite_side_label',
         ], $package['template_contract']['allowed_slots']);
         self::assertSame(
             'App\\Services\\ContentImport\\MbtiResultEnglishPackageImporter',
@@ -231,7 +237,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
             $package['template_contract']['renderer_binding']['implementation_pr'],
         );
         self::assertSame(
-            'reject every unresolved token except the five registered result-runtime slots; preserve those slots for MbtiResultPersonalizationService',
+            'reject every unresolved token except the eight registered result-runtime slots; preserve those slots for the separately gated result renderer',
             $package['template_contract']['renderer_binding']['unresolved_token_policy'],
         );
         self::assertFalse($package['template_contract']['renderer_binding']['import_without_renderer_allowed']);
@@ -256,6 +262,9 @@ final class MbtiResultEnglishPackageTest extends TestCase
             'opposite_side_label',
             'delta',
             'neighbor_type',
+            'adjacent_axis_label',
+            'adjacent_side_label',
+            'adjacent_opposite_side_label',
         ], array_keys($package['template_contract']['result_runtime_binding']['slot_sources']));
         self::assertFalse($package['template_contract']['result_runtime_binding']['cms_or_import_time_result_inference_allowed']);
         $sectionProjection = $package['template_contract']['canonical_projection_contract']['sections'];
@@ -338,14 +347,16 @@ final class MbtiResultEnglishPackageTest extends TestCase
                     $renderedContent,
                     JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
                 );
-                self::assertStringContainsString('Judging–Perceiving (J/P)', $renderedReaderCopy);
-                self::assertStringContainsString('6-point margin', $renderedReaderCopy);
-                self::assertStringContainsString('Judging (J)', $renderedReaderCopy);
-                self::assertStringContainsString('Perceiving (P)', $renderedReaderCopy);
+                self::assertStringContainsString('Assertive–Turbulent (A/T)', $renderedReaderCopy);
+                self::assertStringContainsString('2-point margin', $renderedReaderCopy);
+                self::assertStringContainsString('Assertive (A)', $renderedReaderCopy);
+                self::assertStringContainsString('Turbulent (T)', $renderedReaderCopy);
             }
             if (($asset['section_key'] ?? null) === 'traits.adjacent_type_contrast') {
                 self::assertStringContainsString('{{neighbor_type}}', $readerCopy);
-                self::assertStringContainsString('{{axis_label}}', $readerCopy);
+                self::assertStringContainsString('{{adjacent_axis_label}}', $readerCopy);
+                self::assertStringContainsString('{{adjacent_side_label}}', $readerCopy);
+                self::assertStringContainsString('{{adjacent_opposite_side_label}}', $readerCopy);
                 $renderedReaderCopy = json_encode(
                     $renderedContent,
                     JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
@@ -599,11 +610,14 @@ final class MbtiResultEnglishPackageTest extends TestCase
             'source' => 'package-frozen private-safe non-user fixture',
             'type_code' => 'INTJ-A',
             'identity_variant' => 'Assertive',
-            'axis_label' => 'Judging–Perceiving (J/P)',
-            'side_label' => 'Judging (J)',
-            'opposite_side_label' => 'Perceiving (P)',
-            'delta' => '6',
+            'axis_label' => 'Assertive–Turbulent (A/T)',
+            'side_label' => 'Assertive (A)',
+            'opposite_side_label' => 'Turbulent (T)',
+            'delta' => '2',
             'neighbor_type' => 'INTP',
+            'adjacent_axis_label' => 'Judging–Perceiving (J/P)',
+            'adjacent_side_label' => 'Judging (J)',
+            'adjacent_opposite_side_label' => 'Perceiving (P)',
         ], $mapping['synthetic_slot_values']);
         self::assertSame(
             'canonical_section_to_pdf_group_card_v1',

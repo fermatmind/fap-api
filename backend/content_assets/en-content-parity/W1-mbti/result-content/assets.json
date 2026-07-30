@@ -14,7 +14,10 @@
       "side_label",
       "opposite_side_label",
       "delta",
-      "neighbor_type"
+      "neighbor_type",
+      "adjacent_axis_label",
+      "adjacent_side_label",
+      "adjacent_opposite_side_label"
     ],
     "runtime_import_slot_values_stored_in_this_package": false,
     "w9_synthetic_slot_values_stored_in_pdf_fixture_mapping": true,
@@ -31,7 +34,7 @@
         }
       },
       "substitution": "exact literal replacement of import-stage type_code and identity_variant tokens",
-      "unresolved_token_policy": "reject every unresolved token except the five registered result-runtime slots; preserve those slots for MbtiResultPersonalizationService",
+      "unresolved_token_policy": "reject every unresolved token except the eight registered result-runtime slots; preserve those slots for the separately gated result renderer",
       "import_without_renderer_allowed": false,
       "runtime_template_rendering_added_by_this_package": false
     },
@@ -50,7 +53,10 @@
         "side_label": "close_call_axes[0].side_label with existing primary_axis.side_label fallback",
         "opposite_side_label": "close_call_axes[0].opposite_side_label with existing primary_axis.opposite_side_label fallback",
         "delta": "close_call_axes[0].delta",
-        "neighbor_type": "neighbor_type_keys[0]"
+        "neighbor_type": "neighbor_type_keys[0]",
+        "adjacent_axis_label": "axis_label from the first ranked explainability axis whose axis is not AT; the same axis flipped to produce neighbor_type_keys[0]",
+        "adjacent_side_label": "side_label from the first ranked explainability axis whose axis is not AT; the same axis flipped to produce neighbor_type_keys[0]",
+        "adjacent_opposite_side_label": "opposite_side_label from the first ranked explainability axis whose axis is not AT; the same axis flipped to produce neighbor_type_keys[0]"
       },
       "required_runtime_unresolved_token_policy": "reject result and PDF projection after the separate renderer prerequisite is implemented",
       "cms_or_import_time_result_inference_allowed": false
@@ -219,11 +225,11 @@
         "title": "Why a nearby type may also feel familiar",
       "summary_template": "The nearby pattern {{neighbor_type}} may resemble {{type_code}} because the two patterns share several preferences.",
       "body_template": [
-        "The useful contrast is {{axis_label}}: {{type_code}} still returns to {{side_label}}, while {{neighbor_type}} represents the neighboring pattern reached by crossing toward {{opposite_side_label}}. Notice the sequence used before a decision, not just a single habit or role requirement.",
+        "The useful contrast is {{adjacent_axis_label}}: {{type_code}} still returns to {{adjacent_side_label}}, while {{neighbor_type}} represents the neighboring pattern reached by crossing toward {{adjacent_opposite_side_label}}. Notice the sequence used before a decision, not just a single habit or role requirement.",
         "Familiarity with a nearby type can reflect a close score, learned skill, current environment, or broad wording. It does not automatically replace the current result."
       ],
       "reflection_prompts": [
-        "Does {{side_label}} or {{opposite_side_label}} better explain your first impulse on {{axis_label}}?",
+        "Does {{adjacent_side_label}} or {{adjacent_opposite_side_label}} better explain your first impulse on {{adjacent_axis_label}}?",
         "Which behavior is learned for a role rather than naturally preferred?"
       ]
       },
