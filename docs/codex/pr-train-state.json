@@ -6191,7 +6191,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2256",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "ready_to_merge",
+    "status": "github_checks_pending",
     "title": "B5-RESULT-WEEKLY-OPS-RUNNER-01: Schedule Big Five V2 weekly ops report",
     "train_scope": "big5_result_page_v2_asset_agent_automation",
     "transitions": [
@@ -101179,7 +101179,7 @@
     "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
     "status": "ready_to_merge",
     "depends_on": [],
-    "commit_sha": "190b3e3edb3dd34ee8edda0cf351632f13b621df",
+    "commit_sha": "494d0b2489c59d89df57e4729ac27c83f55f43cc",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3421",
     "checks": {
       "production_read_only_inventory": {
@@ -101191,14 +101191,14 @@
         "evidence": "Focused PHPUnit, scoped Pint, PHP syntax, JSON/YAML parsing, deterministic artifact invariants, diff checks, and exact allowlist validation passed. Production historical revision QA SHA-256 109e995dd9c900b978d5ceaca1f7851607d4332c8bf9a734c705bd32982dd11e proves 50 rows, database fingerprint unchanged, and zero CJK/media/private-field leakage."
       },
       "github_required_checks": {
-        "status": "pass",
-        "evidence": "GitHub CI run 30585553555 and Code Scanning run 30585553557 passed all required jobs on exact metadata head 8e014a11d81ff6ef5f85145271004436bb292d13. Staging parity was skipped as expected and is not required. All review findings are resolved and unresolved thread count is zero."
+        "status": "pending",
+        "evidence": "Exact-head review of metadata head 253064f6fe62fbd7bff5122076b3a296f2e24bee found that inline SVG and other image-capable HTML embeds were not rejected. Implementation 494d0b2489c59d89df57e4729ac27c83f55f43cc closes that same-scope text-only boundary; required checks must rerun."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -101398,9 +101398,14 @@
         "at": "2026-07-30T22:15:17Z",
         "status": "ready_to_merge",
         "note": "Exact implementation 190b3e3edb3dd34ee8edda0cf351632f13b621df is bound by metadata head 8e014a11d81ff6ef5f85145271004436bb292d13. CI run 30585553555 and Code Scanning run 30585553557 passed all required jobs, GitHub reports MERGEABLE, exact eight-path scope validation is clean, and unresolved review thread count is zero. This metadata-only ready_to_merge tail must repeat required checks before squash merge."
+      },
+      {
+        "at": "2026-07-30T22:26:24Z",
+        "status": "github_checks_pending",
+        "note": "After CI run 30586522407 passed all required jobs, exact-head review identified one remaining text-only boundary gap. HTML media scanning now rejects inline SVG plus image-capable or audiovisual embed tags including image, canvas, object, embed, iframe, video, and audio. Inline SVG and object regressions fail closed. The ledger binds implementation 494d0b2489c59d89df57e4729ac27c83f55f43cc. The 29-test inventory suite passes 197 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, and diff checks pass."
       }
     ],
-    "updated_at": "2026-07-30T22:15:17Z"
+    "updated_at": "2026-07-30T22:26:24Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
