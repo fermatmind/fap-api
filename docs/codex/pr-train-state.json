@@ -101179,7 +101179,7 @@
     "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
     "status": "ready_to_merge",
     "depends_on": [],
-    "commit_sha": "aa5f1e8e81045e78aaa17063e82cf51619378a86",
+    "commit_sha": "90fc19a71da2402d0afcf0ff75c3c457a6e3873d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3421",
     "checks": {
       "production_read_only_inventory": {
@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "CI run 30596691414 and Code Scanning run 30596691423 passed all required jobs on metadata head cfc0b25a9aa3dcea38870eff4b49e75420b781b2. Exact-head review then identified blanket rejection of harmless style elements. Implementation aa5f1e8e81045e78aaa17063e82cf51619378a86 lets the CSS image parser decide style content while preserving fail-closed image-function detection; required checks must rerun."
+        "evidence": "CI run 30597119403 and Code Scanning run 30597119249 passed all required jobs on metadata head 8fdbe8c7f18d63719722f2e7bb245160c2a976d9. Exact-head review then identified CSS custom-property image indirection. Implementation 90fc19a71da2402d0afcf0ff75c3c457a6e3873d inspects direct image functions throughout actual style contexts and rejects var/env on image-capable declarations; required checks must rerun."
       }
     },
     "scope_validation": {
@@ -101473,9 +101473,14 @@
         "at": "2026-07-31T01:43:17Z",
         "status": "github_checks_pending",
         "note": "CI run 30596691414 and Code Scanning run 30596691423 passed all required jobs on metadata head cfc0b25a9aa3dcea38870eff4b49e75420b781b2. Exact-head review then found harmless style elements were rejected before CSS content inspection. Implementation aa5f1e8e81045e78aaa17063e82cf51619378a86 removes style from the blanket media-tag list and delegates style content to the normalized CSS image detector. Focused PHPUnit remains 30 tests / 243 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
+      },
+      {
+        "at": "2026-07-31T01:53:37Z",
+        "status": "github_checks_pending",
+        "note": "CI run 30597119403 and Code Scanning run 30597119249 passed all required jobs on metadata head 8fdbe8c7f18d63719722f2e7bb245160c2a976d9. Exact-head review then found CSS custom-property image indirection could hide url() behind var(). Implementation 90fc19a71da2402d0afcf0ff75c3c457a6e3873d scans any direct image function inside actual style elements and style attributes, while image-capable properties also reject var()/env() indirection. Plain prose remains exempt. Focused PHPUnit passes 30 tests / 247 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
       }
     ],
-    "updated_at": "2026-07-31T01:43:17Z"
+    "updated_at": "2026-07-31T01:53:37Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
