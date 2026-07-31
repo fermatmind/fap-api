@@ -1006,13 +1006,17 @@ final class BigFiveEnglishDraftInventory
     private function containsMediaReference(mixed $value): bool
     {
         if (is_string($value)) {
-            if (preg_match('/<(?:img|picture|source|svg|image|canvas|object|embed|iframe|video|audio)\b/i', $value) === 1) {
+            $renderedValue = $this->stripHtmlComments($value);
+            if ($this->containsImageMetadataTag($renderedValue)) {
                 return true;
             }
-            if ($this->containsImageMetadataTag($value)) {
-                return true;
-            }
-            foreach ($this->htmlTags($value) as $tag) {
+            foreach ($this->htmlTags($renderedValue) as $tag) {
+                if (preg_match(
+                    '/^<(?:img|picture|source|svg|image|canvas|object|embed|iframe|video|audio)\b/i',
+                    $tag,
+                ) === 1) {
+                    return true;
+                }
                 foreach (['src', 'srcset', 'poster', 'background'] as $attribute) {
                     if ($this->htmlAttributeValue($tag, $attribute) !== null) {
                         return true;
@@ -1023,13 +1027,13 @@ final class BigFiveEnglishDraftInventory
                     return true;
                 }
             }
-            if ($this->containsCssImageReference($value)) {
+            if ($this->containsCssImageReference($renderedValue)) {
                 return true;
             }
-            preg_match_all('/!\[[^\]]*\]/', $value, $tokens, PREG_OFFSET_CAPTURE);
+            preg_match_all('/!\[[^\]]*\]/', $renderedValue, $tokens, PREG_OFFSET_CAPTURE);
             foreach ($tokens[0] as [, $offset]) {
                 $precedingBackslashes = 0;
-                for ($index = $offset - 1; $index >= 0 && $value[$index] === '\\'; $index--) {
+                for ($index = $offset - 1; $index >= 0 && $renderedValue[$index] === '\\'; $index--) {
                     $precedingBackslashes++;
                 }
                 if ($precedingBackslashes % 2 === 0) {
@@ -1061,6 +1065,52 @@ final class BigFiveEnglishDraftInventory
         }
 
         return false;
+    }
+
+    private function stripHtmlComments(string $value): string
+    {
+        $normalized = '';
+        $length = strlen($value);
+        $quote = null;
+        $insideTag = false;
+        for ($index = 0; $index < $length; $index++) {
+            $character = $value[$index];
+            if ($quote === null && substr($value, $index, 4) === '<!--') {
+                $commentEnd = strpos($value, '-->', $index + 4);
+                if ($commentEnd === false) {
+                    break;
+                }
+                $index = $commentEnd + 2;
+                $insideTag = false;
+
+                continue;
+            }
+            $normalized .= $character;
+            if (! $insideTag) {
+                if ($character === '<') {
+                    $insideTag = true;
+                }
+
+                continue;
+            }
+            if ($quote !== null) {
+                if ($character === $quote) {
+                    $quote = null;
+                }
+
+                continue;
+            }
+            if ($character === '"' || $character === "'") {
+                $quote = $character;
+
+                continue;
+            }
+            if ($character === '>') {
+                $insideTag = false;
+            }
+        }
+
+        return $normalized;
     }
 
     private function containsCssImageReference(string $value): bool
@@ -1224,6 +1274,12 @@ final class BigFiveEnglishDraftInventory
         $length = strlen($value);
         $offset = 0;
         while (($start = strpos($value, '<', $offset)) !== false) {
+            if (substr($value, $start, 4) === '<!--') {
+                $commentEnd = strpos($value, '-->', $start + 4);
+                $offset = $commentEnd === false ? $length : $commentEnd + 3;
+
+                continue;
+            }
             $quote = null;
             for ($index = $start + 1; $index < $length; $index++) {
                 $character = $value[$index];
@@ -1233,6 +1289,11 @@ final class BigFiveEnglishDraftInventory
                     }
 
                     continue;
+                }
+                if ($character === '<') {
+                    $offset = $index;
+
+                    continue 2;
                 }
                 if ($character === '"' || $character === "'") {
                     $quote = $character;

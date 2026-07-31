@@ -336,6 +336,7 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             '<object data="https://private.invalid/embedded-image.svg"></object>',
             '<div style="background-image:url(https://private.invalid/css-image.webp)">Text</div>',
             '<div data-note=">" style="background-image:url(hero.webp)">Text</div>',
+            '2 < 3 <div style="background-image:url(hero.webp)">Text</div>',
             '<div style="background-image:\75rl(hero.webp)">Text</div>',
             '<div style="background-\69mage:url(hero.webp)">Text</div>',
             '<div style="background-image:&#117;rl(hero.webp)">Text</div>',
@@ -380,6 +381,16 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             ->firstWhere('logical_identity', 'domain:openness');
 
         $this->assertTrue($nonImageMetadataRow['text_only_compliant']);
+
+        $working->forceFill(['snapshot_json' => [
+            'attributes' => $this->completeSnapshot('Candidate'),
+            'body' => '<!-- <img src="old.webp"> -->Text',
+        ]])->saveQuietly();
+        $commentedMedia = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $commentedMediaRow = collect($commentedMedia['rows'])
+            ->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertTrue($commentedMediaRow['text_only_compliant']);
 
         $working->forceFill(['snapshot_json' => [
             'attributes' => $this->completeSnapshot('Candidate'),
