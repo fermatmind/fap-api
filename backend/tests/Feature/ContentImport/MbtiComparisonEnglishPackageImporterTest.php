@@ -121,6 +121,28 @@ final class MbtiComparisonEnglishPackageImporterTest extends TestCase
         self::assertSame(0, MbtiCrossTypeComparisonAuthority::query()->withoutGlobalScopes()->count());
     }
 
+    public function test_assets_are_parsed_only_from_the_same_verified_byte_buffer(): void
+    {
+        $assetsPath = MbtiComparisonEnglishPackageImporter::defaultPackageDirectory().'/assets.json';
+        $rebuiltAssets = json_decode((string) File::get($assetsPath), true, 512, JSON_THROW_ON_ERROR);
+        $rebuiltAssets['assets'][0]['row_id'] = 'unverified-concurrent-replacement';
+        $rebuiltBytes = json_encode($rebuiltAssets, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES).PHP_EOL;
+
+        File::partialMock()
+            ->shouldReceive('get')
+            ->once()
+            ->with($assetsPath)
+            ->andReturn($rebuiltBytes);
+
+        $exitCode = $this->runDryRun();
+        $payload = $this->jsonOutput();
+
+        self::assertSame(1, $exitCode);
+        self::assertFalse($payload['ok']);
+        self::assertSame('manifest_file_sha256_mismatch', $payload['errors'][0]['code']);
+        self::assertSame(0, MbtiCrossTypeComparisonAuthority::query()->withoutGlobalScopes()->count());
+    }
+
     public function test_replay_is_byte_deterministic_and_preserves_existing_zh_cn_rows(): void
     {
         foreach (MbtiComparisonEnglishPackageImporter::EXACT_SLUGS as $slug) {

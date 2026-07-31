@@ -45,14 +45,20 @@ final class MbtiComparisonEnglishPackageImporter
             $this->fail('confirmed_package_sha256_mismatch', 'The confirmed package SHA-256 is not the frozen W1 comparison package.');
         }
 
-        $manifest = $this->loadJson($packageDirectory, 'package_manifest.json');
-        $assetsDocument = $this->loadJson($packageDirectory, 'assets.json');
-        $computedPackageSha256 = $this->validateManifestAndComputePackageSha($packageDirectory, $manifest);
+        $manifestBytes = $this->readPackageFile($packageDirectory, 'package_manifest.json');
+        $manifest = $this->decodeJson($manifestBytes);
+        $validatedPackage = $this->validateManifestAndReadPackageFiles($packageDirectory, $manifest, $manifestBytes);
+        $computedPackageSha256 = $validatedPackage['package_sha256'];
 
         if ($computedPackageSha256 !== self::PACKAGE_SHA256) {
             $this->fail('computed_package_sha256_mismatch', 'The package file chain does not reproduce the frozen W1 comparison package SHA-256.');
         }
 
+        $assetsBytes = $validatedPackage['files']['assets.json'] ?? null;
+        if (! is_string($assetsBytes)) {
+            $this->fail('assets_file_not_declared', 'The frozen package manifest must declare assets.json.');
+        }
+        $assetsDocument = $this->decodeJson($assetsBytes);
         $this->validateTopLevelContracts($manifest, $assetsDocument);
         $rowPlans = $this->buildRowPlans($assetsDocument);
 
@@ -109,7 +115,7 @@ final class MbtiComparisonEnglishPackageImporter
     /**
      * @param  array<string, mixed>  $manifest
      */
-    private function validateManifestAndComputePackageSha(string $packageDirectory, array $manifest): string
+    private function validateManifestAndReadPackageFiles(string $packageDirectory, array $manifest, string $manifestBytes): array
     {
         if (($manifest['package_sha256'] ?? null) !== self::PACKAGE_SHA256) {
             $this->fail('manifest_package_sha256_mismatch', 'The manifest does not name the frozen W1 comparison package SHA-256.');
@@ -122,6 +128,7 @@ final class MbtiComparisonEnglishPackageImporter
 
         $chain = '';
         $seen = [];
+        $verifiedFiles = [];
         foreach (array_values($files) as $position => $entry) {
             if (! is_array($entry)) {
                 $this->fail('manifest_file_entry_invalid', 'Every manifest file entry must be an object.');
@@ -139,27 +146,25 @@ final class MbtiComparisonEnglishPackageImporter
                 $this->fail('manifest_file_sha256_invalid', 'Manifest file SHA-256 values must be lowercase hexadecimal.');
             }
 
-            $absolutePath = rtrim($packageDirectory, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$path;
-            if (! File::isFile($absolutePath)) {
-                $this->fail('manifest_file_missing', 'A manifest-declared package file is missing.');
-            }
-
-            $actualSha256 = hash_file('sha256', $absolutePath);
-            if (! is_string($actualSha256) || ! hash_equals($expectedSha256, $actualSha256)) {
+            $fileBytes = $this->readPackageFile($packageDirectory, $path);
+            $actualSha256 = hash('sha256', $fileBytes);
+            if (! hash_equals($expectedSha256, $actualSha256)) {
                 $this->fail('manifest_file_sha256_mismatch', 'A manifest-declared package file no longer matches its frozen SHA-256.');
             }
 
             $seen[$path] = $position;
+            $verifiedFiles[$path] = $fileBytes;
             $chain .= $path."\0".$expectedSha256."\n";
         }
 
-        $manifestPath = rtrim($packageDirectory, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.'package_manifest.json';
-        $actualManifestSha256 = hash_file('sha256', $manifestPath);
-        if (! is_string($actualManifestSha256) || ! hash_equals(self::MANIFEST_SHA256, $actualManifestSha256)) {
+        if (! hash_equals(self::MANIFEST_SHA256, hash('sha256', $manifestBytes))) {
             $this->fail('manifest_sha256_mismatch', 'The package manifest bytes do not match the frozen W1 comparison manifest.');
         }
 
-        return hash('sha256', $chain);
+        return [
+            'package_sha256' => hash('sha256', $chain),
+            'files' => $verifiedFiles,
+        ];
     }
 
     /**
@@ -327,14 +332,22 @@ final class MbtiComparisonEnglishPackageImporter
     /**
      * @return array<string, mixed>
      */
-    private function loadJson(string $packageDirectory, string $filename): array
+    private function readPackageFile(string $packageDirectory, string $filename): string
     {
         $path = rtrim($packageDirectory, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$filename;
         if (! File::isFile($path)) {
             $this->fail('package_file_missing', 'A required exact-package file is missing.');
         }
 
-        $decoded = json_decode((string) File::get($path), true);
+        return (string) File::get($path);
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function decodeJson(string $bytes): array
+    {
+        $decoded = json_decode($bytes, true);
         if (! is_array($decoded)) {
             $this->fail('package_file_invalid_json', 'A required exact-package file is not a JSON object.');
         }
