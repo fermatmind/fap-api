@@ -6190,11 +6190,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     public function test_runtime_freeze_classifier_ignores_w2_en_parity_result_draft_package(): void
     {
         $allowed = [
-            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/package_manifest.json',
+            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/README.md',
+            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/claim_boundary_report.json',
             'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/content_assets.jsonl',
+            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/duplicate_report.json',
+            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/editorial_self_review.json',
+            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/inventory_row_reconciliation.json',
+            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/package_manifest.json',
+            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/sha256_manifest.json',
+            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/source_ledger.json',
+            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/surface_coverage.json',
+            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/translation_map.json',
             'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/validate_package.php',
         ];
         $blocked = [
+            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/unreviewed_runtime_payload.json',
             'backend/content_packs/BIG5_OCEAN/v2/registry/shared/trait_labels.json',
             'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
         ];
@@ -11917,10 +11927,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
     private function isBigFiveW2EnParityResultDraftPackageFile(string $file): bool
     {
-        return str_starts_with(
-            $file,
-            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/'
-        );
+        return in_array($file, [
+            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/README.md',
+            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/claim_boundary_report.json',
+            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/content_assets.jsonl',
+            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/duplicate_report.json',
+            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/editorial_self_review.json',
+            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/inventory_row_reconciliation.json',
+            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/package_manifest.json',
+            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/sha256_manifest.json',
+            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/source_ledger.json',
+            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/surface_coverage.json',
+            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/translation_map.json',
+            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/validate_package.php',
+        ], true);
     }
 
     private function isBigFiveEnglishDraftInventoryFile(string $file): bool

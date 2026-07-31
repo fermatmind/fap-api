@@ -12,7 +12,7 @@ It also reconciles every row in the immutable 118-row source inventory: 52 compl
 
 - Inventory merge SHA: `897490e4baa31fe197ee50c89f0c3fae6bac408d`
 - Inventory package SHA-256: `0f50f4108af14656442ef7d57d410b2e74f8dffced6ed3db372bf848ea051292`
-- Result content package SHA-256: `b6676eff4e63f257a7a460f5c79114f79ce23bc5cd54ccaf06ff835d5c635e6c`
+- Result content package SHA-256: `47d43575aea0c638a21b90c33e1f0c147e4f679986d76db182c0f28606cf4dd4`
 
 ## Boundaries
 

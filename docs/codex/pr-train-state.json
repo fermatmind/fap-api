@@ -102419,7 +102419,7 @@
       },
       "local_validation": {
         "status": "pass",
-        "evidence": "Package validator passes twice byte-identically with SHA b6676eff4e63f257a7a460f5c79114f79ce23bc5cd54ccaf06ff835d5c635e6c. Focused package PHPUnit passes 7 tests / 433 assertions with exact 118-row reconciliation and required-key coverage; runtime-freeze scope regression passes 2 tests / 6 assertions; composer test:content passes 4 tests / 62 assertions. Scoped Pint, PHP syntax, JSON/JSONL/YAML parsing, CJK/private-field/public-URL/fixed-type/forbidden-claim scans, deterministic SHA recomputation, diff checks, and exact allowlist validation pass."
+        "evidence": "Package validator passes twice byte-identically with SHA 47d43575aea0c638a21b90c33e1f0c147e4f679986d76db182c0f28606cf4dd4. Focused package PHPUnit passes 7 tests / 434 assertions with exact 118-row reconciliation, required-key coverage, and complete package-file binding; runtime-freeze explicit-file regression passes 2 tests / 6 assertions with unknown package paths blocked; composer test:content passes 4 tests / 62 assertions. Scoped Pint, PHP syntax, JSON/JSONL/YAML parsing, CJK/private-field/public-URL/fixed-type/forbidden-claim scans, deterministic SHA recomputation, diff checks, and exact allowlist validation pass."
       },
       "github_required_checks": {
         "status": "pending",
@@ -102489,8 +102489,13 @@
         "at": "2026-07-31T06:48:30Z",
         "status": "review_fix_local_checks_passed",
         "note": "Exact-head review on 675e96810e1c2359c67cf07edfdf9e5ce6b6fe81 identified three current-scope gaps. Added fail-closed reconciliation for all 118 immutable source rows, pinned the source-ledger and ordered row-id-set hashes, preserved the 52/50 completed-control and historical cohorts, and mapped every one of the 16 result rows to an exact asset ID, required top-level keys, and nested item identities. A4 now preserves conflict mediation and de-escalation; N2 preserves anger/resistance activation under obstruction, misunderstanding, or boundary violation. Package SHA is b6676eff4e63f257a7a460f5c79114f79ce23bc5cd54ccaf06ff835d5c635e6c. Validator passes twice; package suite passes 7 tests / 433 assertions, runtime-freeze regression and content suite pass, and Pint, syntax, parsers, scans, diff, and exact allowlist validation pass."
+      },
+      {
+        "at": "2026-07-31T06:57:44Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Exact-head review on cf28114bff98d84d71cb72dfbec3bb1c60723830 identified two package-integrity gaps. The validator and focused test now require the actual package directory file set to equal every SHA-manifest entry plus sha256_manifest.json, so unbound extra files fail closed. The runtime-freeze exception now allowlists only the twelve reviewed draft-package files and blocks unknown future files under the same directory. Package SHA is 47d43575aea0c638a21b90c33e1f0c147e4f679986d76db182c0f28606cf4dd4. Validator passes twice; package suite passes 7 tests / 434 assertions, explicit classifier regression passes 2 tests / 6 assertions, content suite passes, and Pint, parsers, diff, and scope checks pass."
       }
     ],
-    "updated_at": "2026-07-31T06:48:30Z"
+    "updated_at": "2026-07-31T06:57:44Z"
   }
 }

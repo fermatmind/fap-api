@@ -189,6 +189,18 @@ foreach (['cms_write', 'database_write', 'public_release', 'indexability_change'
 }
 
 $shaManifest = $decode($root.'/sha256_manifest.json');
+$manifestedPackageFiles = array_column($shaManifest['files'] ?? [], 'path');
+$expectedPackageFiles = [...$manifestedPackageFiles, 'sha256_manifest.json'];
+$actualPackageFiles = array_values(array_filter(
+    scandir($root) ?: [],
+    static fn (string $file): bool => $file !== '.' && $file !== '..' && is_file($root.'/'.$file)
+));
+sort($expectedPackageFiles);
+sort($actualPackageFiles);
+if ($actualPackageFiles !== $expectedPackageFiles) {
+    throw new RuntimeException('Package directory contains missing or unmanifested files.');
+}
+
 $canonical = [];
 foreach ($shaManifest['files'] ?? [] as $file) {
     $path = $root.'/'.$file['path'];
