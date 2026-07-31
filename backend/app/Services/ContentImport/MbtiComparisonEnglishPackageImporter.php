@@ -11,6 +11,8 @@ final class MbtiComparisonEnglishPackageImporter
 {
     public const PACKAGE_SHA256 = '2e2beb694b62ddff56b128b2b4a443fb5797b76bd5df160f8946b55a3368931a';
 
+    public const MANIFEST_SHA256 = '82eb45134ca4f596efc966a7da41cff17e43eea2ba4c0f35cf53d51e2913deec';
+
     public const PACKAGE_ID = 'EN-PARITY-W1-MBTI-COMPARISON-ASSETS-2026-07-30';
 
     public const INVENTORY_PACKAGE_SHA256 = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
@@ -126,7 +128,7 @@ final class MbtiComparisonEnglishPackageImporter
             }
 
             $path = trim((string) ($entry['path'] ?? ''));
-            $expectedSha256 = strtolower(trim((string) ($entry['sha256'] ?? '')));
+            $expectedSha256 = trim((string) ($entry['sha256'] ?? ''));
             if ($path === '' || str_contains($path, '..') || str_starts_with($path, '/') || basename($path) !== $path) {
                 $this->fail('manifest_file_path_invalid', 'Manifest file paths must be safe package-root filenames.');
             }
@@ -149,6 +151,12 @@ final class MbtiComparisonEnglishPackageImporter
 
             $seen[$path] = $position;
             $chain .= $path."\0".$expectedSha256."\n";
+        }
+
+        $manifestPath = rtrim($packageDirectory, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.'package_manifest.json';
+        $actualManifestSha256 = hash_file('sha256', $manifestPath);
+        if (! is_string($actualManifestSha256) || ! hash_equals(self::MANIFEST_SHA256, $actualManifestSha256)) {
+            $this->fail('manifest_sha256_mismatch', 'The package manifest bytes do not match the frozen W1 comparison manifest.');
         }
 
         return hash('sha256', $chain);

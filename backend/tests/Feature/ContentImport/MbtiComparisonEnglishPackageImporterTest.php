@@ -91,6 +91,36 @@ final class MbtiComparisonEnglishPackageImporterTest extends TestCase
         self::assertSame(0, MbtiCrossTypeComparisonAuthority::query()->withoutGlobalScopes()->count());
     }
 
+    public function test_rebuilt_manifest_is_rejected_before_its_file_chain_can_be_accepted(): void
+    {
+        $uppercaseDigestDirectory = $this->copyPackage();
+        $manifestPath = $uppercaseDigestDirectory.'/package_manifest.json';
+        $manifest = json_decode((string) File::get($manifestPath), true, 512, JSON_THROW_ON_ERROR);
+        $manifest['files'][0]['sha256'] = strtoupper($manifest['files'][0]['sha256']);
+        File::put($manifestPath, json_encode($manifest, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES).PHP_EOL);
+
+        $exitCode = $this->runDryRun(MbtiComparisonEnglishPackageImporter::PACKAGE_SHA256, $uppercaseDigestDirectory);
+        $payload = $this->jsonOutput();
+
+        self::assertSame(1, $exitCode);
+        self::assertFalse($payload['ok']);
+        self::assertSame('manifest_file_sha256_invalid', $payload['errors'][0]['code']);
+
+        $contractDriftDirectory = $this->copyPackage();
+        $manifestPath = $contractDriftDirectory.'/package_manifest.json';
+        $manifest = json_decode((string) File::get($manifestPath), true, 512, JSON_THROW_ON_ERROR);
+        $manifest['schema_version'] = 'unknown.rebuilt.manifest.v2';
+        File::put($manifestPath, json_encode($manifest, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES).PHP_EOL);
+
+        $exitCode = $this->runDryRun(MbtiComparisonEnglishPackageImporter::PACKAGE_SHA256, $contractDriftDirectory);
+        $payload = $this->jsonOutput();
+
+        self::assertSame(1, $exitCode);
+        self::assertFalse($payload['ok']);
+        self::assertSame('manifest_sha256_mismatch', $payload['errors'][0]['code']);
+        self::assertSame(0, MbtiCrossTypeComparisonAuthority::query()->withoutGlobalScopes()->count());
+    }
+
     public function test_replay_is_byte_deterministic_and_preserves_existing_zh_cn_rows(): void
     {
         foreach (MbtiComparisonEnglishPackageImporter::EXACT_SLUGS as $slug) {
