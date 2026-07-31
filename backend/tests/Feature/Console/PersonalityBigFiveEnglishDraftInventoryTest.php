@@ -332,7 +332,8 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $working->forceFill(['snapshot_json' => [
             'attributes' => $this->completeSnapshot('Candidate'),
             'body' => '<meta charset="utf-8"><meta name="description" content="Summary">'
-                .'<link rel="canonical" href="https://example.invalid/canonical">',
+                .'<link rel="canonical" href="https://example.invalid/canonical">'
+                .'<link rel="stylesheet" href="/styles/iconic.css">',
         ]])->saveQuietly();
         $nonImageMetadata = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
         $nonImageMetadataRow = collect($nonImageMetadata['rows'])

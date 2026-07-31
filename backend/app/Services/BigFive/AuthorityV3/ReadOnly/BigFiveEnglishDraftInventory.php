@@ -1010,16 +1010,7 @@ final class BigFiveEnglishDraftInventory
             if (preg_match('/<(?:img|picture|source|svg|image|canvas|object|embed|iframe|video|audio|style)\b/i', $value) === 1) {
                 return true;
             }
-            if (preg_match(
-                '/<meta\b(?=[^>]*(?:property|name|itemprop)\s*=\s*["\x27]?'
-                    .'(?:og:image(?:\:[^"\x27\s>]*)?|twitter:image(?:\:[^"\x27\s>]*)?|image)\b)[^>]*>/i',
-                $value,
-            ) === 1
-                || preg_match(
-                    '/<link\b(?=[^>]*(?:(?:rel\s*=\s*["\x27]?[^>]*'
-                        .'(?:icon|image_src))|(?:as\s*=\s*["\x27]?image\b)))[^>]*>/i',
-                    $value,
-                ) === 1) {
+            if ($this->containsImageMetadataTag($value)) {
                 return true;
             }
             if (preg_match('/<[^>]+\b(?:src|srcset|poster|background)\s*=/i', $value) === 1
@@ -1059,6 +1050,54 @@ final class BigFiveEnglishDraftInventory
         }
 
         return false;
+    }
+
+    private function containsImageMetadataTag(string $value): bool
+    {
+        preg_match_all('/<(?:meta|link)\b[^>]*>/i', $value, $tags);
+        foreach ($tags[0] as $tag) {
+            if (preg_match('/^<meta\b/i', $tag) === 1) {
+                foreach (['property', 'name', 'itemprop'] as $attribute) {
+                    $metadataKey = strtolower($this->htmlAttributeValue($tag, $attribute) ?? '');
+                    if ($metadataKey === 'image'
+                        || str_starts_with($metadataKey, 'og:image')
+                        || str_starts_with($metadataKey, 'twitter:image')) {
+                        return true;
+                    }
+                }
+
+                continue;
+            }
+
+            $relTokens = preg_split(
+                '/\s+/',
+                strtolower(trim($this->htmlAttributeValue($tag, 'rel') ?? '')),
+                flags: PREG_SPLIT_NO_EMPTY,
+            );
+            if (array_intersect(
+                $relTokens ?: [],
+                ['icon', 'apple-touch-icon', 'apple-touch-icon-precomposed', 'image_src'],
+            ) !== []
+                || strtolower($this->htmlAttributeValue($tag, 'as') ?? '') === 'image') {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function htmlAttributeValue(string $tag, string $attribute): ?string
+    {
+        if (preg_match(
+            '/\b'.preg_quote($attribute, '/').'\s*=\s*(?:"([^"]*)"|\x27([^\x27]*)\x27|([^\s>]+))/i',
+            $tag,
+            $match,
+            PREG_UNMATCHED_AS_NULL,
+        ) !== 1) {
+            return null;
+        }
+
+        return $match[1] ?? $match[2] ?? $match[3];
     }
 
     private function containsLegacyAliasReference(mixed $value): bool
