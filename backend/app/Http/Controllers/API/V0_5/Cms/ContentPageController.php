@@ -13,6 +13,7 @@ use App\Services\Cms\SiblingTranslationWorkflowService;
 use App\Services\ReviewGovernance\PublicReviewContract;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -35,15 +36,26 @@ final class ContentPageController extends Controller
             return $validated;
         }
 
-        $page = ContentPage::query()
-            ->withoutGlobalScopes()
-            ->where('org_id', $validated['org_id'])
-            ->where('slug', $this->normalizeSlug($slug))
-            ->where('locale', $validated['locale'])
-            ->publiclyReadable()
-            ->first();
+        $normalizedSlug = $this->normalizeSlug($slug);
+        $cacheKey = "content_page:v1:{$validated['org_id']}:{$normalizedSlug}:{$validated['locale']}";
 
-        if (! $page instanceof ContentPage) {
+        $pagePayload = Cache::store('redis')->remember($cacheKey, 300, function () use ($validated, $normalizedSlug) {
+            $page = ContentPage::query()
+                ->withoutGlobalScopes()
+                ->where('org_id', $validated['org_id'])
+                ->where('slug', $normalizedSlug)
+                ->where('locale', $validated['locale'])
+                ->publiclyReadable()
+                ->first();
+
+            if (! $page instanceof ContentPage) {
+                return null;
+            }
+
+            return $this->pagePayload($page, true);
+        });
+
+        if ($pagePayload === null) {
             return response()->json([
                 'ok' => false,
                 'error_code' => 'NOT_FOUND',
@@ -53,7 +65,7 @@ final class ContentPageController extends Controller
 
         return response()->json([
             'ok' => true,
-            'page' => $this->pagePayload($page, true),
+            'page' => $pagePayload,
         ]);
     }
 
