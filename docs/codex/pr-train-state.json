@@ -42961,7 +42961,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "d6adb6000d279863852acba13bac62e4f24573f8",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -101885,8 +101885,13 @@
         "at": "2026-07-31T01:48:53Z",
         "status": "local_verified",
         "note": "Implemented an exact-package no-write importer that recomputes the frozen manifest chain, rejects wrong or rebuilt SHA identities, freezes deterministic zh-CN-to-en pairing for all seven slugs, and emits a redacted inactive/draft plan. Focused tests passed 4 tests/190 assertions, including byte-identical replay and preservation of existing zh-CN rows. Pint, command-level dry run, 224-line API route inventory, YAML/JSON, diff, and exact scope checks passed. No database/CMS write or release action occurred."
+      },
+      {
+        "at": "2026-07-31T01:49:50Z",
+        "status": "local_verified",
+        "note": "Committed the exact-package dry-run importer as immutable implementation commit d6adb6000d279863852acba13bac62e4f24573f8. This metadata-only commit records that implementation pointer; push, PR creation, and exact-head GitHub checks remain pending."
       }
     ],
-    "updated_at": "2026-07-31T01:48:53Z"
+    "updated_at": "2026-07-31T01:49:50Z"
   }
 }
