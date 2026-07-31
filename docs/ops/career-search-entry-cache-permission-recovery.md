@@ -389,15 +389,35 @@ The repaired control uses the repository-standard
 run, failed topology step, skipped SSH/execute steps, and zero-artifact state
 before accepting a new exact authorization.
 
+The topology-repaired dispatch, run `30607466396` attempt `1`, reached the
+bounded runner but failed closed during pre-write validation. Its receipt
+SHA-256 is
+`7468d2a5db0744ee9c5fdb656b92629898897bebb9a550b59e57561381ff8688`
+and artifact digest is
+`19f9044b7a7c8ab003a7d169a932530c12ed67cd93becfd680271b23bd7e16ea`.
+The receipt proved 100 complete public URLs, payload-set SHA-256
+`02467d3f6363da0a1ff23ccc5c84223f4662ab14a23a0d22558ff972f89f3fd3`,
+ten thin URLs, zero cache writes, `write_state=none`, and zero database, CMS,
+publication, indexability, queue, sitemap, llms, Search Channel, URL
+submission, deploy, rollback, and non-target writes.
+
+The failure exposed a circular pre-write quality gate: the exact quality
+package rejects the ten thin cache payloads that this operation exists to
+replace. Recovery retains all identity, manifest, fixed-target, 100-URL
+transport/canonical/robots/locale, authority-repair, and offline-build guards.
+It moves the exact quality-package requirement to its intended post-refresh
+gate and binds the immutable zero-write failure receipt before accepting a new
+exact authorization.
+
 The cache write scope is derived only from manifest positions `30`, `33`, `34`,
 `40`, and `42`: exactly five slugs and ten bilingual detail-cache targets. Its
 stable target-set SHA-256 is
 `33c4418a4491c901dc35fd7ee3ddf739b7e6d2b62e32d97fe5e924d80dea1a6a`.
 Before any cache write, the runner verifies the active release identity,
 manifest contract, all 100 public URL transport/canonical/robots/locale gates,
-the fixed target set, the exact quality package, and the 5,000ms offline-build
-interface. Drift fails closed with zero cache writes. The post-write quality
-package must match the pre-write package exactly.
+the fixed target set, and the 5,000ms offline-build interface. Drift fails
+closed with zero cache writes. The exact quality package is required only after
+the ten stale thin cache payloads have been replaced.
 
 The ten targets run in one batch, with at most five slugs and ten URLs, and
 zero per-target retry. Success requires all ten cache publications, the exact

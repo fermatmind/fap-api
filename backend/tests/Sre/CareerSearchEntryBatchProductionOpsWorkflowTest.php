@@ -1348,16 +1348,23 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
             'FAILED_PREWRITE_RUN_ID: "30602511379"',
             'FAILED_PREWRITE_RUN_ATTEMPT: "1"',
             'FAILED_PREWRITE_CONTROL_SHA: 012392aaf0d83375414f8eb9ad010f6c7c577714',
+            'FAILED_QUALITY_RUN_ID: "30607466396"',
+            'FAILED_QUALITY_RUN_ATTEMPT: "1"',
+            'FAILED_QUALITY_CONTROL_SHA: d9f1a5554bb9831a1a9dd87d76b41daf8bcac353',
+            '7468d2a5db0744ee9c5fdb656b92629898897bebb9a550b59e57561381ff8688',
+            '19f9044b7a7c8ab003a7d169a932530c12ed67cd93becfd680271b23bd7e16ea',
+            '02467d3f6363da0a1ff23ccc5c84223f4662ab14a23a0d22558ff972f89f3fd3',
             'Validate protected production target shape',
             'Run exact post-authority cache-only refresh and full readback',
             '.total_count == 0 and (.artifacts | length) == 0',
-            'topology-repaired post-authority cache-only refresh',
+            'quality-recovered post-authority cache-only refresh',
+            'failed zero-write quality-prewrite run',
+            'exact post-refresh quality-package and complete 100-URL public readback',
             'PASS_AUTHORITY_REPAIR_COMPLETE',
             '.manifest_positions == [30, 33, 34, 40, 42]',
             '.database_write_count == 15',
             'post-authority cache-only refresh',
             'refresh exactly five manifest-position slugs and 10 bilingual cache targets in one batch',
-            'exact quality-package and complete 100-URL public readback',
             'CAREER_CACHE_RESUME_MODE=post_authority_execute',
             'PASS_POST_AUTHORITY_EXECUTE_AND_READBACK',
             '.resume_target_count == 10',
@@ -1387,7 +1394,6 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
             'PASS_POST_AUTHORITY_EXECUTE_AND_READBACK',
             'warmJobDetailPayloadForOfflineBootstrap',
             'CareerSearchEntryQualityBatchPlanner',
-            'POST_AUTHORITY_QUALITY_DRIFT',
             "'cache_write_count' => \$cacheRefreshTargetCount",
             "'database_write_count' => 0",
             "'cms_write_count' => 0",
@@ -1403,6 +1409,9 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
             '30602511379',
             'SSH setup and cache execution were',
             'skipped, no receipt artifact existed',
+            '30607466396',
+            'zero cache writes',
+            'circular pre-write quality gate',
             '30601380901',
             'afa5cac18c50722c8072c2ef184617e649621919570b34429d5e02207eb74ec5',
             '40a38665002e7012bddfc7555f18cbe3a07789af37774e2041439be71cd41cf1',
@@ -1423,6 +1432,12 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
             '/var/www/fap-api',
         ] as $forbidden) {
             $this->assertStringNotContainsString($forbidden, strtolower($workflow));
+        }
+        foreach ([
+            'preWriteQuality',
+            'POST_AUTHORITY_QUALITY_DRIFT',
+        ] as $forbidden) {
+            $this->assertStringNotContainsString($forbidden, $runner);
         }
     }
 
