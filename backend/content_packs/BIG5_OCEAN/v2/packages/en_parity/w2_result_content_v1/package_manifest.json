@@ -1,0 +1,65 @@
+{
+  "schema_version": "fermatmind.big5.en_parity.result_content_package.v1",
+  "package_id": "BIG5-OCEAN-EN-PARITY-W2-RESULT-CONTENT-V1",
+  "scale_code": "BIG5_OCEAN",
+  "locale": "en",
+  "source_locale": "zh-CN",
+  "status": "pending_manual_review",
+  "runtime_use": "draft_review_only",
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_use_allowed": false,
+  "human_reviewed": false,
+  "editorial_approved": false,
+  "qa_pass": false,
+  "package_frozen": false,
+  "source_inventory": {
+    "pr_id": "EN-PARITY-W2-BIG5-INVENTORY-01",
+    "pr_number": 1866,
+    "merge_sha": "897490e4baa31fe197ee50c89f0c3fae6bac408d",
+    "inventory_package_sha256": "0f50f4108af14656442ef7d57d410b2e74f8dffced6ed3db372bf848ea051292",
+    "candidate_status": "inventory_frozen"
+  },
+  "inventory_units": [
+    "free_preview",
+    "locked_result",
+    "paid_full_report",
+    "entitlement_levels",
+    "five_dimension_explanations",
+    "facet_subscale_explanations",
+    "score_range_boundary_copy",
+    "action_growth_advice",
+    "workplace_relationship_copy",
+    "share_public_summary",
+    "pdf_reader_content",
+    "history_account_reentry",
+    "result_report_cta",
+    "empty_error_expired_access_denied",
+    "mobile_desktop_consumption",
+    "analytics_reader_labels"
+  ],
+  "inventory_unit_count": 16,
+  "content_asset_count": 16,
+  "permissions": {
+    "cms_write": false,
+    "database_write": false,
+    "public_release": false,
+    "indexability_change": false,
+    "search_submission": false,
+    "deploy": false
+  },
+  "authority": {
+    "backend_package_is_draft_authority": true,
+    "frontend_fallback_is_authority": false,
+    "runtime_selector_changed": false,
+    "existing_zh_cn_registry_changed": false,
+    "importer_changed": false,
+    "schema_changed": false
+  },
+  "source_baselines": {
+    "fap_api_commit": "d9f1a5554bb9831a1a9dd87d76b41daf8bcac353",
+    "zh_cn_registry_content_tree_sha256": "870cc1dc68c19ef2660a4d086e86f0fd2181fbe2f85851c8962bc2402825aafc",
+    "result_page_v2_service_content_tree_sha256": "e74a6db65a5f7569f51bb8c0b59a02b6c428356536e16bd08fcf532b46ae814a"
+  },
+  "generated_at": "2026-07-31T05:21:44Z"
+}

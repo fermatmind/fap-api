@@ -111,6 +111,59 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: EN-PARITY-W2-BIG5-RESULT-ASSETS-01
+    repo: fap-api
+    base: main
+    branch: codex/en-parity-w2-big5-result-assets-01
+    title: "EN-PARITY-W2-BIG5-RESULT-ASSETS-01: produce reviewed Big Five English result assets"
+    status: local_verified
+    depends_on:
+      - EN-PARITY-W2-BIG5-INVENTORY-01
+    train_scope: en_parity_w2_big5_result_assets
+    scope:
+      - Produce a backend-authoritative English draft-review-only content package for the sixteen frozen Big Five result/report/share/PDF/history inventory units.
+      - Preserve continuous, contextual, probabilistic, value-neutral Big Five language and private-reader/share-safe boundaries.
+      - Record deterministic package evidence and focused contract coverage without activating any runtime consumer.
+    allowed_paths:
+      - backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/**
+      - backend/docs/seo/generated/en-parity-w2-big-five-result-assets.v1.json
+      - backend/docs/seo/en-parity-w2-big-five-result-assets.md
+      - backend/tests/Feature/Content/BigFiveEnglishResultAssetPackageTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/sidecar_issues.md
+      - generated/pr-train-sidecar-issues/sidecar_issues.json
+    do_not:
+      - Modify routes, migrations, auth middleware, ResultPageV2 runtime services, selectors, importers, publishers, schemas, production commands, public APIs, or fap-web.
+      - Write CMS or database state, import, publish, promote, change indexability, mutate sitemap or llms, submit search URLs, or deploy.
+      - Claim human review, editorial approval, W9 independent QA, qa_pass, package_frozen, runtime readiness, or production readiness.
+    validation:
+      - php -l backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/validate_package.php
+      - php -l backend/tests/Feature/Content/BigFiveEnglishResultAssetPackageTest.php
+      - php backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/validate_package.php
+      - cd backend && php artisan test tests/Feature/Content/BigFiveEnglishResultAssetPackageTest.php --no-ansi
+      - cd backend && composer test:content
+      - parse all package JSON and JSONL
+      - recompute every SHA manifest entry and aggregate package SHA
+      - scan for CJK, private fields, forbidden claims, fixed-type language, and public URLs
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_read_only_evidence: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: backend_draft_package
+    repository_rule_impact: draft-only backend content assets; existing authority, runtime, selector, importer, schema, and frontend no-fallback rules remain unchanged
+
   - id: API-UNLOCK-01
     repo: fap-api
     base: main

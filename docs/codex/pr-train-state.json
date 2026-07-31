@@ -102395,5 +102395,67 @@
       }
     ],
     "updated_at": "2026-07-31T04:52:07Z"
+  },
+  "EN-PARITY-W2-BIG5-RESULT-ASSETS-01": {
+    "id": "EN-PARITY-W2-BIG5-RESULT-ASSETS-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/en-parity-w2-big5-result-assets-01",
+    "title": "EN-PARITY-W2-BIG5-RESULT-ASSETS-01: produce reviewed Big Five English result assets",
+    "status": "local_verified",
+    "depends_on": [
+      "EN-PARITY-W2-BIG5-INVENTORY-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "fap-web PR 1866 merged as 897490e4baa31fe197ee50c89f0c3fae6bac408d. Its immutable 118-row inventory package SHA is 0f50f4108af14656442ef7d57d410b2e74f8dffced6ed3db372bf848ea051292; post-merge branch cleanup and local main synchronization passed."
+      },
+      "content_package_contract": {
+        "status": "pass",
+        "evidence": "The existing Big Five English draft catalog supports draft-only reader label groups. The operator-frozen analytics_reader_labels identity is represented as reader copy with empty internal_metric_ids and personal_result_fields; no selector, runtime, importer, or schema change is required."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "Package validator passes twice byte-identically with SHA cda743f52cebaf753b8d0f2f234dd893e88f5d630ea6cc4e7a5f5b32faefda06. Focused PHPUnit passes 6 tests / 233 assertions; composer test:content passes 4 tests / 62 assertions. Scoped Pint, PHP syntax, JSON/JSONL/YAML parsing, CJK/private-field/public-URL/fixed-type/forbidden-claim scans, deterministic SHA recomputation, diff checks, and exact allowlist validation pass."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": "PR not opened."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": false,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_read_only_evidence": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-31T05:21:44Z",
+        "status": "implementation_in_progress",
+        "note": "Started from clean fap-api main d9f1a5554bb9831a1a9dd87d76b41daf8bcac353 after dependency PR 1866 merged and post-merge revalidated. Contract preflight proved all sixteen identities, including analytics reader labels, can be represented in a draft-only package without schema, selector, runtime, or importer changes."
+      },
+      {
+        "at": "2026-07-31T05:34:22Z",
+        "status": "local_verified",
+        "note": "Produced exactly sixteen traceable English draft asset groups with 5 dimension and 30 facet explanations, value-neutral range copy, share/private-reader boundaries, fail-closed states, cross-device copy, and analytics reader labels separated from internal IDs. Deterministic package SHA is cda743f52cebaf753b8d0f2f234dd893e88f5d630ea6cc4e7a5f5b32faefda06. All required local package, focused, content-suite, formatting, parsing, scan, diff, and scope checks pass; no write or runtime authority changed."
+      }
+    ],
+    "updated_at": "2026-07-31T05:34:22Z"
   }
 }
