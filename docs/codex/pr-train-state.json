@@ -102285,7 +102285,7 @@
       "EN-PARITY-W1-MBTI-RESULT-ASSETS-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "b96f227786a074dca46de865615dc24ae3fe5191",
+    "commit_sha": "f8be7cb152ec3c425689bdb8d906f829faea4660",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3446",
     "checks": {
       "authorization": {
@@ -102366,7 +102366,7 @@
       {
         "at": "2026-07-31T04:08:49Z",
         "status": "review_fix_local_checks_passed",
-        "note": "Inspected the next exact-head P2 review before editing. Every exact-package file now rejects symbolic links before File::isFile/File::get and must resolve inside the selected package directory. An outside-target symlink regression fails before target bytes are read; importer suite passes 6 tests / 247 assertions, scoped Pint and exact dry-run pass."
+        "note": "Inspected the next exact-head P2 review before editing. Every exact-package file now rejects symbolic links before File::isFile/File::get and must resolve inside the selected package directory. An outside-target symlink regression fails before target bytes are read; importer suite passes 6 tests / 247 assertions, scoped Pint and exact dry-run pass. Rebased cleanly onto latest origin/main b115c29775e02064f6e8168a6b1545e239d10718; implementation head is f8be7cb152ec3c425689bdb8d906f829faea4660."
       }
     ],
     "updated_at": "2026-07-31T04:08:49Z"
