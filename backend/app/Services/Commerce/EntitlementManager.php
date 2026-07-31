@@ -570,6 +570,10 @@ class EntitlementManager
                     $query->whereNull('gift_orders.payment_state')
                         ->orWhereNotIn('gift_orders.payment_state', ['refunded', 'canceled', 'expired', 'failed']);
                 })
+                ->where(function ($query) {
+                    $query->whereNull('gift_orders.grant_state')
+                        ->orWhere('gift_orders.grant_state', '<>', 'revoked');
+                })
                 ->select([
                     'gifts.id as gift_request_id',
                     'gifts.recipient_user_id',

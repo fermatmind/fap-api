@@ -611,6 +611,7 @@ final class ReportGiftPurchaseContractTest extends TestCase
             ->where('attempt_id', $attemptId)
             ->where('status', 'active')
             ->count());
+
     }
 
     public function test_same_purchaser_retry_reuses_one_gift_payment_action(): void
@@ -933,6 +934,24 @@ final class ReportGiftPurchaseContractTest extends TestCase
             ->where('attempt_id', $attemptId)
             ->where('status', 'active')
             ->count());
+
+        DB::table('orders')->where('id', $selfOrderId)->update([
+            'status' => 'refunded',
+            'payment_state' => 'refunded',
+            'updated_at' => now(),
+        ]);
+        $selfRevoked = app(EntitlementManager::class)->revokeByOrderNo(0, $selfOrderNo);
+        $this->assertTrue((bool) ($selfRevoked['ok'] ?? false));
+        $this->assertSame(0, DB::table('benefit_grants')
+            ->where('attempt_id', $attemptId)
+            ->where('status', 'active')
+            ->count());
+        $this->assertSame('fulfilled', (string) DB::table('report_gift_requests')
+            ->where('id', $giftId)
+            ->value('status'));
+        $this->assertSame('revoked', (string) DB::table('orders')
+            ->where('order_no', $giftOrderNo)
+            ->value('grant_state'));
     }
 
     public function test_paid_order_repair_reloads_refunded_gift_inside_transaction(): void
