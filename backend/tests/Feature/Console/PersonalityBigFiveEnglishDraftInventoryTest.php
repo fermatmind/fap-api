@@ -332,6 +332,7 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             '<style>.hero { background-image: url(hero.webp); }</style>',
             '<style>:root{--hero:url(hero.webp)} .card{background-image:var(--hero)}</style>',
             '<style>.hero{background-image:u/**/rl(hero.webp)}</style>',
+            '<style>.x{content:"/*";background-image:url(hero.webp)}</style>',
             '<input type="image" src="submit.webp" alt="Submit">',
             '<table background="texture.webp"><tr><td>Text</td></tr></table>',
             '<meta property="og:image" content="hero.webp">',
@@ -346,7 +347,7 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             $embeddedMediaRow = collect($embeddedMediaResult['rows'])
                 ->firstWhere('logical_identity', 'domain:openness');
 
-            $this->assertFalse($embeddedMediaRow['text_only_compliant']);
+            $this->assertFalse($embeddedMediaRow['text_only_compliant'], $embeddedMedia);
             $this->assertSame('prohibited_content', $embeddedMediaRow['recommended_disposition']);
         }
 
@@ -357,6 +358,7 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
                 .'<link rel="stylesheet" href="/styles/iconic.css">'
                 .'<div data-style="background:url(hero.webp)" data-property="og:image" '
                 .'data-src="hero.webp" data-type="image">Text</div>'
+                ."<div data-note=' style=\"background-image:url(hero.webp)\"'>Text</div>"
                 .'<style>.note { color: red; } .note::after { content: "url(example)"; }</style>',
         ]])->saveQuietly();
         $nonImageMetadata = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();

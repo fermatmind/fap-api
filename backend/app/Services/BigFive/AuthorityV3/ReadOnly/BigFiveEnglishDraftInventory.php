@@ -1112,30 +1112,47 @@ final class BigFiveEnglishDraftInventory
 
     private function normalizeCssForMediaScan(string $value): string
     {
-        $withoutComments = preg_replace('~/\*.*?(?:\*/|$)~s', '', $value) ?? $value;
-
-        return $this->decodeCssEscapes($this->stripCssQuotedStrings($withoutComments));
+        return $this->decodeCssEscapes($this->stripCssStringsAndComments($value));
     }
 
-    private function stripCssQuotedStrings(string $value): string
+    private function stripCssStringsAndComments(string $value): string
     {
-        $normalized = $value;
-        $length = strlen($normalized);
+        $normalized = '';
+        $length = strlen($value);
         $quote = null;
+        $comment = false;
         for ($index = 0; $index < $length; $index++) {
-            $character = $normalized[$index];
-            if ($quote === null) {
-                if ($character === '"' || $character === "'") {
-                    $quote = $character;
-                    $normalized[$index] = ' ';
+            $character = $value[$index];
+            if ($comment) {
+                if ($character === '*' && ($value[$index + 1] ?? null) === '/') {
+                    $index++;
+                    $comment = false;
                 }
 
                 continue;
             }
+            if ($quote === null) {
+                if ($character === '"' || $character === "'") {
+                    $quote = $character;
+                    $normalized .= ' ';
 
-            $normalized[$index] = ' ';
+                    continue;
+                }
+                if ($character === '/' && ($value[$index + 1] ?? null) === '*') {
+                    $index++;
+                    $comment = true;
+
+                    continue;
+                }
+                $normalized .= $character;
+
+                continue;
+            }
+
+            $normalized .= ' ';
             if ($character === '\\' && $index + 1 < $length) {
-                $normalized[++$index] = ' ';
+                $index++;
+                $normalized .= ' ';
 
                 continue;
             }
@@ -1242,21 +1259,74 @@ final class BigFiveEnglishDraftInventory
 
     private function htmlAttributeValue(string $tag, string $attribute): ?string
     {
-        if (preg_match(
-            '/(?:^|[\x20\t\r\n\f])'.preg_quote($attribute, '/')
-                .'\s*=\s*(?:"([^"]*)"|\x27([^\x27]*)\x27|([^\s>]+))/i',
-            $tag,
-            $match,
-            PREG_UNMATCHED_AS_NULL,
-        ) !== 1) {
-            return null;
+        return $this->htmlAttributes($tag)[strtolower($attribute)] ?? null;
+    }
+
+    /** @return array<string,string> */
+    private function htmlAttributes(string $tag): array
+    {
+        if (preg_match('/^<\/?[a-z][a-z0-9:-]*/i', $tag, $tagName) !== 1) {
+            return [];
         }
 
-        return html_entity_decode(
-            $match[1] ?? $match[2] ?? $match[3],
-            ENT_QUOTES | ENT_HTML5,
-            'UTF-8',
-        );
+        $attributes = [];
+        $length = strlen($tag);
+        $index = strlen($tagName[0]);
+        while ($index < $length) {
+            while ($index < $length && str_contains(" \t\r\n\f", $tag[$index])) {
+                $index++;
+            }
+            if ($index >= $length || $tag[$index] === '>' || $tag[$index] === '/') {
+                break;
+            }
+
+            $nameStart = $index;
+            while ($index < $length
+                && ! str_contains(" \t\r\n\f=>/", $tag[$index])) {
+                $index++;
+            }
+            $name = strtolower(substr($tag, $nameStart, $index - $nameStart));
+            while ($index < $length && str_contains(" \t\r\n\f", $tag[$index])) {
+                $index++;
+            }
+            if ($name === '' || ($tag[$index] ?? null) !== '=') {
+                continue;
+            }
+            $index++;
+            while ($index < $length && str_contains(" \t\r\n\f", $tag[$index])) {
+                $index++;
+            }
+
+            $quote = $tag[$index] ?? null;
+            if ($quote === '"' || $quote === "'") {
+                $index++;
+                $valueStart = $index;
+                while ($index < $length && $tag[$index] !== $quote) {
+                    $index++;
+                }
+                $attributeValue = substr($tag, $valueStart, $index - $valueStart);
+                if ($index < $length) {
+                    $index++;
+                }
+            } else {
+                $valueStart = $index;
+                while ($index < $length
+                    && ! str_contains(" \t\r\n\f>", $tag[$index])) {
+                    $index++;
+                }
+                $attributeValue = substr($tag, $valueStart, $index - $valueStart);
+            }
+
+            if (! array_key_exists($name, $attributes)) {
+                $attributes[$name] = html_entity_decode(
+                    $attributeValue,
+                    ENT_QUOTES | ENT_HTML5,
+                    'UTF-8',
+                );
+            }
+        }
+
+        return $attributes;
     }
 
     private function containsLegacyAliasReference(mixed $value, ?string $parentKey = null): bool
