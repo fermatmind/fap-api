@@ -42961,7 +42961,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+  "commit_sha": "88ca01b13bd59dca62e002bc0edfa2624fded14c",
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -102342,8 +102342,13 @@
       "at": "2026-07-31T03:23:08Z",
       "status": "local_verified",
       "note": "All focused and full local gates passed. The exact-package importer planned 46 redacted rows with zero writes and zero private reads; the integrated MBTI verifier and full CI safety chain exited 0; exact scope validation passed for 7 allowlisted paths."
+    },
+    {
+      "at": "2026-07-31T03:24:05Z",
+      "status": "local_verified",
+      "note": "Rebased the scoped implementation cleanly onto latest origin/main efd7f2bd0acace0fd7463dbfb13897bd78a1cad5; implementation commit is 88ca01b13bd59dca62e002bc0edfa2624fded14c."
     }
   ],
-  "updated_at": "2026-07-31T03:23:08Z"
+  "updated_at": "2026-07-31T03:24:05Z"
 }
 }
