@@ -11,7 +11,7 @@
       "API-VPAY-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "af2bcccc94a15866677f12afb58a57d03387080f",
+    "commit_sha": "9cea63edd2bafd30fdafca69b166caea7dbec1ec",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3448",
     "checks": {
       "dependency": {
@@ -86,9 +86,14 @@
         "at": "2026-07-31T04:01:07Z",
         "status": "github_checks_pending",
         "note": "Exact head b9d98e85bb3aa1d0eb75ce4504db63e879e0e7af passed all nine required checks with staging parity skipped and had no main drift, but second exact-head review found three additional valid lifecycle issues. The repair makes a fulfilled gift request the durable fallback source when an unrelated paid grant is later refunded, releases purchasing reservations on terminal non-success payment states, and synchronizes gift status through shared EntitlementManager refund handling so queued refunds are covered. Focused validation now passes 51 tests / 606 assertions plus OpenAPI 2 / 6, classifier 3 / 9, and scoped Pint; fresh checks and review remain required."
+      },
+      {
+        "at": "2026-07-31T04:02:20Z",
+        "status": "github_checks_pending",
+        "note": "Integrated exact latest origin/main b115c29775e02064f6e8168a6b1545e239d10718 without conflict. Post-integration focused validation remains 51 tests / 606 assertions with OpenAPI 2 / 6, classifier 3 / 9, scoped Pint, Composer strict, YAML/JSON, diff, and exact scope passing. Repaired implementation head is 9cea63edd2bafd30fdafca69b166caea7dbec1ec; fresh exact-head checks and review remain mandatory."
       }
     ],
-    "updated_at": "2026-07-31T04:01:07Z"
+    "updated_at": "2026-07-31T04:02:20Z"
   },
   "MBTI-CROSS-PUBLISH-51": {
     "id": "MBTI-CROSS-PUBLISH-51",
