@@ -1048,7 +1048,7 @@ final class BigFiveEnglishDraftInventory
                 $normalizedKey = preg_replace('/([a-z0-9])([A-Z])/', '$1_$2', (string) $normalizedKey);
                 $normalizedKey = strtolower((string) preg_replace('/[^a-zA-Z0-9]+/', '_', (string) $normalizedKey));
                 if (preg_match(
-                    '/(?:^|_)(?:images?|media|hero|cover|thumbnail|avatar|logo|icon|banner|poster|'
+                    '/(?:^|_)(?:images?|media|src|srcset|hero|cover|thumbnail|avatar|logo|icon|banner|poster|'
                         .'background|og_image|twitter_image)(?:_|$)/',
                     $normalizedKey,
                 ) === 1) {
@@ -1289,7 +1289,12 @@ final class BigFiveEnglishDraftInventory
             while ($index < $length && str_contains(" \t\r\n\f", $tag[$index])) {
                 $index++;
             }
-            if ($name === '' || ($tag[$index] ?? null) !== '=') {
+            if ($name === '') {
+                $index++;
+
+                continue;
+            }
+            if (($tag[$index] ?? null) !== '=') {
                 continue;
             }
             $index++;
@@ -1413,7 +1418,10 @@ final class BigFiveEnglishDraftInventory
 
     private function containsCjk(string $value): bool
     {
-        return preg_match('/\p{Han}/u', $value) === 1;
+        return preg_match(
+            '/\p{Han}/u',
+            html_entity_decode($value, ENT_QUOTES | ENT_HTML5, 'UTF-8'),
+        ) === 1;
     }
 
     /** @param array<string,mixed> $entry */

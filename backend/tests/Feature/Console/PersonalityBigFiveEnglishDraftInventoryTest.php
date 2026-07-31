@@ -317,6 +317,20 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             $this->assertSame('prohibited_content', $mediaFieldRow['recommended_disposition']);
         }
 
+        foreach (['src', 'srcset'] as $mediaField) {
+            $snapshot = $this->completeSnapshot('Candidate');
+            $snapshot['content_sections_json'][0][$mediaField] = 'hero.webp';
+            $working->forceFill(['snapshot_json' => [
+                'attributes' => $snapshot,
+            ]])->saveQuietly();
+            $structuredMediaResult = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+            $structuredMediaRow = collect($structuredMediaResult['rows'])
+                ->firstWhere('logical_identity', 'domain:openness');
+
+            $this->assertFalse($structuredMediaRow['text_only_compliant']);
+            $this->assertSame('prohibited_content', $structuredMediaRow['recommended_disposition']);
+        }
+
         foreach ([
             '<svg viewBox="0 0 10 10"><path d="M0 0h10v10z"/></svg>',
             '<object data="https://private.invalid/embedded-image.svg"></object>',
@@ -366,6 +380,16 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             ->firstWhere('logical_identity', 'domain:openness');
 
         $this->assertTrue($nonImageMetadataRow['text_only_compliant']);
+
+        $working->forceFill(['snapshot_json' => [
+            'attributes' => $this->completeSnapshot('Candidate'),
+            'body' => '<div =x>Text</div>',
+        ]])->saveQuietly();
+        $malformedAttribute = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $malformedAttributeRow = collect($malformedAttribute['rows'])
+            ->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertTrue($malformedAttributeRow['text_only_compliant']);
 
         $working->forceFill(['snapshot_json' => [
             'attributes' => $this->completeSnapshot('Candidate'),
@@ -436,6 +460,19 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
 
         $this->assertTrue($supplementaryCjkRow['chinese_leakage']);
         $this->assertSame('prohibited_content', $supplementaryCjkRow['recommended_disposition']);
+
+        $working->forceFill(['snapshot_json' => [
+            'attributes' => [
+                ...$this->completeSnapshot('Candidate'),
+                'summary' => 'Entity-encoded Han &#20013;',
+            ],
+        ]])->saveQuietly();
+        $entityEncodedCjk = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $entityEncodedCjkRow = collect($entityEncodedCjk['rows'])
+            ->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertTrue($entityEncodedCjkRow['chinese_leakage']);
+        $this->assertSame('prohibited_content', $entityEncodedCjkRow['recommended_disposition']);
     }
 
     public function test_future_scheduled_asset_is_not_counted_as_a_public_projection(): void
