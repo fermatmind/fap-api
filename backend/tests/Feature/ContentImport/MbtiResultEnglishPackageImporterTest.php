@@ -202,6 +202,20 @@ final class MbtiResultEnglishPackageImporterTest extends TestCase
         self::assertSame('package_file_size_mismatch', $payload['errors'][0]['code']);
     }
 
+    public function test_descriptor_read_is_bounded_to_frozen_size_plus_one_and_requires_exact_length(): void
+    {
+        $source = (string) File::get((new \ReflectionClass(MbtiResultEnglishPackageImporter::class))->getFileName());
+
+        self::assertStringContainsString(
+            'stream_get_contents($handle, $expectedBytes + 1)',
+            $source,
+        );
+        self::assertStringContainsString(
+            'strlen($bytes) !== $expectedBytes',
+            $source,
+        );
+    }
+
     public function test_write_mode_fails_closed_without_private_or_database_access(): void
     {
         $exitCode = Artisan::call('content:import-mbti-result-english-package', [

@@ -480,9 +480,12 @@ final class MbtiResultEnglishPackageImporter
                 $this->fail('package_file_identity_changed', 'Exact-package file identity changed before the safe read.');
             }
 
-            $bytes = stream_get_contents($handle);
+            $bytes = stream_get_contents($handle, $expectedBytes + 1);
             if ($bytes === false) {
                 $this->fail('package_file_unreadable', 'A required exact-package file cannot be read safely.');
+            }
+            if (strlen($bytes) !== $expectedBytes) {
+                $this->fail('package_file_size_changed', 'Exact-package file size changed during the bounded read.');
             }
 
             return $bytes;
