@@ -116,7 +116,7 @@ final class MbtiResultEnglishPackageImporterTest extends TestCase
         $exitCode = $this->runDryRun(MbtiResultEnglishPackageImporter::PACKAGE_SHA256, $uppercaseDirectory);
         $payload = $this->jsonOutput();
         self::assertSame(1, $exitCode);
-        self::assertSame('manifest_file_sha256_invalid', $payload['errors'][0]['code']);
+        self::assertSame('manifest_sha256_mismatch', $payload['errors'][0]['code']);
 
         $manifestDriftDirectory = $this->copyPackage();
         $manifestPath = $manifestDriftDirectory.'/package_manifest.json';
@@ -126,6 +126,30 @@ final class MbtiResultEnglishPackageImporterTest extends TestCase
 
         $exitCode = $this->runDryRun(MbtiResultEnglishPackageImporter::PACKAGE_SHA256, $manifestDriftDirectory);
         $payload = $this->jsonOutput();
+        self::assertSame(1, $exitCode);
+        self::assertSame('manifest_sha256_mismatch', $payload['errors'][0]['code']);
+    }
+
+    public function test_untrusted_manifest_is_authenticated_before_any_declared_file_is_read(): void
+    {
+        $packageDirectory = $this->copyPackage();
+        $manifestPath = $packageDirectory.'/package_manifest.json';
+        $manifest = json_decode((string) File::get($manifestPath), true, 512, JSON_THROW_ON_ERROR);
+        $manifest['files'][0]['path'] = 'private-local-data.json';
+        $untrustedManifestBytes = json_encode(
+            $manifest,
+            JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR,
+        ).PHP_EOL;
+
+        File::partialMock()
+            ->shouldReceive('get')
+            ->once()
+            ->with($manifestPath)
+            ->andReturn($untrustedManifestBytes);
+
+        $exitCode = $this->runDryRun(MbtiResultEnglishPackageImporter::PACKAGE_SHA256, $packageDirectory);
+        $payload = $this->jsonOutput();
+
         self::assertSame(1, $exitCode);
         self::assertSame('manifest_sha256_mismatch', $payload['errors'][0]['code']);
     }

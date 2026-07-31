@@ -115,6 +115,10 @@ final class MbtiResultEnglishPackageImporter
      */
     private function validateManifestAndReadPackageFiles(string $packageDirectory, array $manifest, string $manifestBytes): array
     {
+        if (! hash_equals(self::MANIFEST_SHA256, hash('sha256', $manifestBytes))) {
+            $this->fail('manifest_sha256_mismatch', 'The package manifest bytes do not match the frozen W1 result manifest.');
+        }
+
         if (($manifest['package_sha256'] ?? null) !== self::PACKAGE_SHA256) {
             $this->fail('manifest_package_sha256_mismatch', 'The manifest does not name the frozen W1 result package SHA-256.');
         }
@@ -152,10 +156,6 @@ final class MbtiResultEnglishPackageImporter
             $seen[$path] = $position;
             $verifiedFiles[$path] = $fileBytes;
             $chain .= $path."\0".$expectedSha256."\n";
-        }
-
-        if (! hash_equals(self::MANIFEST_SHA256, hash('sha256', $manifestBytes))) {
-            $this->fail('manifest_sha256_mismatch', 'The package manifest bytes do not match the frozen W1 result manifest.');
         }
 
         return [

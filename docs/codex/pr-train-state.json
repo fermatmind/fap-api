@@ -102302,7 +102302,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "Importer feature suite passed 4 tests / 238 assertions; runtime-freeze classifier passed 1 test / 2 assertions; scoped Pint passed 4 files; exact-package command returned 46 redacted rows with zero writes/private reads; API route inventory returned 225 lines; YAML, JSON, and diff checks passed. After the process guard was clear, scripts/ci_verify_mbti.sh completed with exit 0, including integrated scripts/verify_mbti.sh, the complete Big Five gate (1623 tests / 195834 assertions), and all remaining safety gates."
+        "evidence": "Importer feature suite passed 5 tests / 242 assertions, including authenticate-before-declared-file-read coverage; runtime-freeze classifier passed 1 test / 2 assertions; scoped Pint passed; exact-package command returned 46 redacted rows with zero writes/private reads; API route inventory returned 225 lines; YAML, JSON, and diff checks passed. After the process guard was clear, scripts/ci_verify_mbti.sh completed with exit 0, including integrated scripts/verify_mbti.sh, the complete Big Five gate (1623 tests / 195834 assertions), and all remaining safety gates."
       },
       "changed_file_scope": {
         "status": "passed",
@@ -102357,8 +102357,13 @@
         "at": "2026-07-31T03:47:53Z",
         "status": "github_checks_pending",
         "note": "Rebased cleanly onto latest origin/main 012392aaf0d83375414f8eb9ad010f6c7c577714. Focused importer, classifier, Pint, exact dry-run, YAML/JSON, diff, and exact 7-path scope checks passed; corrected implementation commit is b96f227786a074dca46de865615dc24ae3fe5191."
+      },
+      {
+        "at": "2026-07-31T03:58:34Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Inspected the exact-head P2 review before editing. Manifest bytes are now authenticated against the frozen manifest SHA before any declared file path or symlink is followed. A malicious declared-path regression proves only package_manifest.json is read; importer suite passes 5 tests / 242 assertions, scoped Pint and exact 46-row dry-run pass, and scope remains exactly 7/7 paths."
       }
     ],
-    "updated_at": "2026-07-31T03:47:53Z"
+    "updated_at": "2026-07-31T03:58:34Z"
   }
 }
