@@ -79,7 +79,7 @@ on:
         required: true
         type: string
       preflight_run_id:
-        description: Repair mode only; exact successful preflight run
+        description: Repair mode only; exact successful diagnostic preflight run
         required: false
         type: string
       preflight_run_attempt:
@@ -95,7 +95,7 @@ on:
         required: false
         type: string
       expected_repair_set_sha256:
-        description: Repair mode only; exact five-row repair set SHA256
+        description: Repair mode only; exact combined authority repair set SHA256
         required: false
         type: string
       expected_repair_payload_set_sha256:
@@ -127,6 +127,7 @@ jobs:
       manifest_sha256: ${{ steps.validate.outputs.manifest_sha256 }}
       repair_set_sha256: ${{ steps.validate.outputs.repair_set_sha256 }}
       repair_payload_set_sha256: ${{ steps.validate.outputs.repair_payload_set_sha256 }}
+      crosswalk_diagnostic_state_sha256: ${{ steps.validate.outputs.crosswalk_diagnostic_state_sha256 }}
       source_workbook_release_tag: ${{ steps.validate.outputs.source_workbook_release_tag }}
     steps:
       - name: Checkout exact authority repair control plane
@@ -342,6 +343,7 @@ jobs:
 
           repair_set=""
           repair_payload_set=""
+          crosswalk_diagnostic_state=""
           if [ "$MODE" = "preflight" ]; then
             test -z "$PREFLIGHT_RUN_ID"
             test -z "$PREFLIGHT_RUN_ATTEMPT"
@@ -359,7 +361,7 @@ jobs:
             [[ "$EXPECTED_REPAIR_PAYLOAD_SET_SHA256" =~ ^[0-9a-f]{64}$ ]]
             preflight_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}")"
             jq -e \
-              --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
+              --arg control "71a75bf4e6951fd57116cd0c3f8bde5ee3f8d96f" \
               --argjson attempt "$PREFLIGHT_RUN_ATTEMPT" \
               '.name == "Career Search Entry Thin Authority Repair"
                and .path == ".github/workflows/career-search-entry-thin-authority-repair.yml"
@@ -383,21 +385,23 @@ jobs:
             jq -e \
               --arg release "$EXPECTED_RELEASE_SHA" \
               --arg manifest "$EXPECTED_MANIFEST_SHA256" \
-              --arg repair_set "$EXPECTED_REPAIR_SET_SHA256" \
-              --arg payload_set "$EXPECTED_REPAIR_PAYLOAD_SET_SHA256" \
               --arg source_receipt "$EXPECTED_SOURCE_RECEIPT_SHA256" \
+              --arg diagnostic_state "69d1b64c7d61467ab7a7470f69597d988dff3c70745f41ec30d0b1a43c731e08" \
               --argjson run_id "$PREFLIGHT_RUN_ID" \
               --argjson attempt "$PREFLIGHT_RUN_ATTEMPT" \
               '.contract_version == "career.search_entry_batch.thin_authority_repair.v1"
-               and .status == "PASS_AUTHORITY_REPAIR_PREFLIGHT"
+               and .status == "HOLD_CROSSWALK_AUTHORITY_REPAIR_REQUIRED"
                and .mode == "preflight"
                and .release_sha == $release
                and .manifest_sha256 == $manifest
                and .source_diagnostic_receipt_sha256 == $source_receipt
-               and .repair_count == 5
+               and .repair_count == 0
                and .manifest_positions == [30, 33, 34, 40, 42]
-               and .repair_set_sha256 == $repair_set
-               and .repair_payload_set_sha256 == $payload_set
+               and .crosswalk_diagnostic_state_sha256 == $diagnostic_state
+               and (.crosswalk_diagnostics | length) == 5
+               and ([.crosswalk_diagnostics[].classification] | all(. == "missing"))
+               and ([.crosswalk_diagnostics[] |
+                 .us_soc_total + .us_soc_match + .onet_soc_2019_total + .onet_soc_2019_match] | all(. == 0))
                and .write_state == "none"
                and .server_write_count == 1
                and .server_delete_count == 1
@@ -413,7 +417,8 @@ jobs:
               <<<"$later_runs" >/dev/null
             repair_set="$EXPECTED_REPAIR_SET_SHA256"
             repair_payload_set="$EXPECTED_REPAIR_PAYLOAD_SET_SHA256"
-            expected_phrase="I explicitly approve one-time Career search-entry thin-authority repair for preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} receipt ${EXPECTED_PREFLIGHT_RECEIPT_SHA256} artifact ${EXPECTED_PREFLIGHT_ARTIFACT_DIGEST}, source diagnostic run ${SOURCE_DIAGNOSTIC_RUN_ID} attempt ${SOURCE_DIAGNOSTIC_RUN_ATTEMPT} receipt ${EXPECTED_SOURCE_RECEIPT_SHA256}, control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA}, active SHA ${EXPECTED_RELEASE_SHA}, manifest ${EXPECTED_MANIFEST_SHA256}, private draft release ${SOURCE_WORKBOOK_RELEASE_TAG}, repair set ${EXPECTED_REPAIR_SET_SHA256}, repair payload set ${EXPECTED_REPAIR_PAYLOAD_SET_SHA256}; stage and remove exactly one ephemeral production /tmp workbook, atomically create exactly five missing reviewed-workbook career display-authority rows, verify 10 bilingual surfaces, and delete the private draft-release transport, with zero persistent server write, cache write, publication, indexability, queue, sitemap, llms, Search Channel, URL submission, deploy, rollback, or non-target write."
+            crosswalk_diagnostic_state="69d1b64c7d61467ab7a7470f69597d988dff3c70745f41ec30d0b1a43c731e08"
+            expected_phrase="I explicitly approve one-time Career search-entry combined crosswalk and thin-authority repair for diagnostic preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} receipt ${EXPECTED_PREFLIGHT_RECEIPT_SHA256} artifact ${EXPECTED_PREFLIGHT_ARTIFACT_DIGEST}, diagnostic state ${crosswalk_diagnostic_state}, source diagnostic run ${SOURCE_DIAGNOSTIC_RUN_ID} attempt ${SOURCE_DIAGNOSTIC_RUN_ATTEMPT} receipt ${EXPECTED_SOURCE_RECEIPT_SHA256}, control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA}, active SHA ${EXPECTED_RELEASE_SHA}, manifest ${EXPECTED_MANIFEST_SHA256}, private draft release ${SOURCE_WORKBOOK_RELEASE_TAG}, combined repair set ${EXPECTED_REPAIR_SET_SHA256}, repair payload set ${EXPECTED_REPAIR_PAYLOAD_SET_SHA256}; stage and remove exactly one ephemeral production /tmp workbook, atomically create exactly ten missing reviewed-workbook occupation crosswalk rows and five normalized career display-authority rows, verify exact crosswalk authority and 10 bilingual surfaces, and delete the private draft-release transport, with zero persistent server write, cache write, publication, indexability, queue, sitemap, llms, Search Channel, URL submission, deploy, rollback, or non-target write."
           else
             exit 2
           fi
@@ -426,6 +431,7 @@ jobs:
             echo "manifest_sha256=$EXPECTED_MANIFEST_SHA256"
             echo "repair_set_sha256=$repair_set"
             echo "repair_payload_set_sha256=$repair_payload_set"
+            echo "crosswalk_diagnostic_state_sha256=$crosswalk_diagnostic_state"
             echo "source_workbook_release_tag=$SOURCE_WORKBOOK_RELEASE_TAG"
           } >> "$GITHUB_OUTPUT"
 
@@ -530,6 +536,7 @@ jobs:
           EXPECTED_MANIFEST_SHA256: ${{ needs.eligibility.outputs.manifest_sha256 }}
           EXPECTED_REPAIR_SET_SHA256: ${{ needs.eligibility.outputs.repair_set_sha256 }}
           EXPECTED_REPAIR_PAYLOAD_SET_SHA256: ${{ needs.eligibility.outputs.repair_payload_set_sha256 }}
+          EXPECTED_CROSSWALK_DIAGNOSTIC_STATE_SHA256: ${{ needs.eligibility.outputs.crosswalk_diagnostic_state_sha256 }}
           SOURCE_DIAGNOSTIC_RUN_ID: ${{ inputs.source_diagnostic_run_id }}
           SOURCE_DIAGNOSTIC_RUN_ATTEMPT: ${{ inputs.source_diagnostic_run_attempt }}
           EXPECTED_SOURCE_RECEIPT_SHA256: ${{ inputs.expected_source_receipt_sha256 }}
@@ -548,12 +555,13 @@ jobs:
           probe="backend/scripts/career/career_search_entry_thin_authority_repair.php"
           probe_sha256="$(sha256sum "$probe" | awk '{print $1}')"
           for variable in DEPLOY_PATH MODE EXPECTED_RELEASE_SHA EXPECTED_RELEASE_NAME \
-            EXPECTED_MANIFEST_SHA256 EXPECTED_REPAIR_SET_SHA256 EXPECTED_REPAIR_PAYLOAD_SET_SHA256; do
+            EXPECTED_MANIFEST_SHA256 EXPECTED_REPAIR_SET_SHA256 EXPECTED_REPAIR_PAYLOAD_SET_SHA256 \
+            EXPECTED_CROSSWALK_DIAGNOSTIC_STATE_SHA256; do
             printf -v "q_${variable}" '%q' "${!variable}"
           done
           remote_env="DEPLOY_PATH=$q_DEPLOY_PATH CAREER_THIN_AUTHORITY_REPAIR_MODE=$q_MODE EXPECTED_RELEASE_SHA=$q_EXPECTED_RELEASE_SHA EXPECTED_RELEASE_NAME=$q_EXPECTED_RELEASE_NAME EXPECTED_MANIFEST_SHA256=$q_EXPECTED_MANIFEST_SHA256"
           if [ "$MODE" = "repair" ]; then
-            remote_env="$remote_env EXPECTED_REPAIR_SET_SHA256=$q_EXPECTED_REPAIR_SET_SHA256 EXPECTED_REPAIR_PAYLOAD_SET_SHA256=$q_EXPECTED_REPAIR_PAYLOAD_SET_SHA256"
+            remote_env="$remote_env EXPECTED_REPAIR_SET_SHA256=$q_EXPECTED_REPAIR_SET_SHA256 EXPECTED_REPAIR_PAYLOAD_SET_SHA256=$q_EXPECTED_REPAIR_PAYLOAD_SET_SHA256 EXPECTED_CROSSWALK_DIAGNOSTIC_STATE_SHA256=$q_EXPECTED_CROSSWALK_DIAGNOSTIC_STATE_SHA256"
           fi
           ssh_base=(
             ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10
@@ -637,7 +645,9 @@ jobs:
               and .server_write_count == 1
               and .server_delete_count == 1
               and .persistent_server_write_count == 0
-              and .database_write_count == 5
+              and .database_write_count == 15
+              and .crosswalk_write_count == 10
+              and .display_write_count == 5
               and .cache_write_count == 0
               and (.verification_rows | length) == 10' \
               artifacts/career-search-entry-thin-authority-repair.json >/dev/null

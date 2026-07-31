@@ -316,13 +316,45 @@ paths. Crosswalk drift returns
 receipt, so any authority repair can be designed from one bounded production
 read and must remain a separately authorized write.
 
-`repair` is separately authorized by the exact successful preflight receipt,
-repair-set SHA, and payload-set SHA. It revalidates the complete plan and
-atomically creates exactly five `career_job_display_assets` rows. The database
-guard permits inserts only into that table, and every target must be absent
-before the transaction starts. Before commit, both locales must resolve to the
+The successful recovery preflight, run `30600386710` attempt `1`, classified
+all five positions as `missing`: each has zero `us_soc` and zero
+`onet_soc_2019` rows. Its diagnostic-state SHA-256 is
+`69d1b64c7d61467ab7a7470f69597d988dff3c70745f41ec30d0b1a43c731e08`,
+receipt SHA-256 is
+`ef72a72228682ef8c119025036a127fb76e778f94c96b29d3b1ebd81ffa4c67d`,
+and artifact digest is
+`d0ab5f043b33bf37764fd6bf5030579d307e6b06ce18271d18b91b80eb0b565a`.
+The run recorded one ephemeral staging write, one deletion, and zero
+persistent, database, CMS, or cache writes.
+
+`repair` is separately authorized by that exact diagnostic receipt, the
+combined repair-set SHA, and payload-set SHA. It requires the five positions to
+remain in the exact all-missing diagnostic state, then atomically creates ten
+`occupation_crosswalks` rows and five `career_job_display_assets` rows. The
+crosswalk values and display payloads come only from the exact reviewed
+workbook. Three deterministic contract normalizations are limited to those
+five rows: `start_click` becomes `start_riasec_test`, prohibited Chinese
+job-posting-sample wording becomes `公开市场信号`, and an explicit FermatMind
+interpretation-boundary source label is added. These transformations do not
+change occupational facts.
+
+The offline exact-workbook plan produced combined repair-set SHA-256
+`314f00896acd2a2b0fb1b6e495ddf888ff069effec005fbefef5efacf00ef7f8`
+and display payload-set SHA-256
+`fbdc6fe42e2d9bc6b893ddf938d54e5a7d231b29cef0857950e57989ee61ead1`.
+Its component hashes are display repair set
+`35280ad42fc6f95ec1833f86eb0e74ebb46a587fb0be0330120ff6db2512fdc3`,
+crosswalk repair set
+`453e09187ea1281d591f962830d2c12f3fefa24e4dcdd4e2872f09f768a63117`,
+and normalization set
+`14b3f90c527c5776b85621f8f8fab0e844d4897ce238a6bf78e23af9b5294dc0`.
+All five normalized rows pass the mapper with 24 components and both locales.
+
+The database guard permits inserts only into those two tables, and every
+target must be absent before the transaction starts. Before commit, both
+crosswalk systems must be exact and both locales must resolve to the
 24-component display contract with locale-safe hrefs. A hash over all
-non-target display-asset identities must remain unchanged.
+non-target crosswalk and display-asset identities must remain unchanged.
 
 The repair does not warm or forget cache entries. It does not change CMS
 resources, publication, indexability, queues, sitemap, llms, Search Channel,
