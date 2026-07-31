@@ -1221,7 +1221,7 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
             'WORKBOOK_TRANSPORT_RELEASE_CARDINALITY',
             '.digest == $digest',
             'Download exact private reviewed-workbook transport',
-            'releases/assets/${SOURCE_WORKBOOK_ASSET_ID}',
+            'releases/assets/${source_workbook_asset_id}',
             'server_write_count: 1',
             'server_delete_count: 1',
             'persistent_server_write_count: 0',
