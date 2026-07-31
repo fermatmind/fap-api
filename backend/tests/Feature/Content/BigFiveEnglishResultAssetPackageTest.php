@@ -133,6 +133,13 @@ final class BigFiveEnglishResultAssetPackageTest extends TestCase
         $this->assertSame([], $byUnit['analytics_reader_labels']['personal_result_fields']);
         $this->assertCount(5, $byUnit['five_dimension_explanations']['dimensions']);
         $this->assertCount(30, $byUnit['facet_subscale_explanations']['facets']);
+        $o3 = array_values(array_filter(
+            $byUnit['facet_subscale_explanations']['facets'],
+            static fn (array $facet): bool => $facet['code'] === 'O3'
+        ))[0];
+        $this->assertSame('Emotional Receptivity', $o3['label']);
+        $this->assertStringContainsString('identify, approach, and express inner feelings', $o3['description']);
+        $this->assertStringContainsString('use them as information', $o3['description']);
         $n3 = array_values(array_filter(
             $byUnit['facet_subscale_explanations']['facets'],
             static fn (array $facet): bool => $facet['code'] === 'N3'
@@ -167,7 +174,7 @@ final class BigFiveEnglishResultAssetPackageTest extends TestCase
             hash('sha256', implode("\n", $canonical))
         );
         $this->assertSame(
-            '6543c9818a272330c55256a0359bce7ee0223591cb46d06436ac06245f6a2cc7',
+            'ca7a77819b74f0b0127b2f01fc626c28120903ac56cbfc77cdc60ea4af789b70',
             $shaManifest['package_sha256']
         );
     }

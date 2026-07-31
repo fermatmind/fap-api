@@ -10,7 +10,7 @@ The package contains natural English reader copy for previews, locked and full r
 
 - Inventory merge SHA: `897490e4baa31fe197ee50c89f0c3fae6bac408d`
 - Inventory package SHA-256: `0f50f4108af14656442ef7d57d410b2e74f8dffced6ed3db372bf848ea051292`
-- Result content package SHA-256: `6543c9818a272330c55256a0359bce7ee0223591cb46d06436ac06245f6a2cc7`
+- Result content package SHA-256: `ca7a77819b74f0b0127b2f01fc626c28120903ac56cbfc77cdc60ea4af789b70`
 
 ## Boundaries
 
