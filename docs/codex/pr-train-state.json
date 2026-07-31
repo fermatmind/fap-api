@@ -101179,7 +101179,7 @@
     "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
     "status": "github_checks_pending",
     "depends_on": [],
-    "commit_sha": "735f37e6f918eedaf331465f0615d4e4326676d2",
+    "commit_sha": "fb14e50244bddd653d06947432055201be099d35",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3421",
     "checks": {
       "production_read_only_inventory": {
@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "CI run 30591158059 and Code Scanning run 30591158069 passed all required jobs on metadata head 6635c4e9045c1da6ad5535f153860d7dcf465741. Exact-head review then found the image-metadata repair over-rejected non-image meta/link tags. Implementation 735f37e6f918eedaf331465f0615d4e4326676d2 narrows detection to image-bearing attributes; required checks must rerun."
+        "evidence": "CI run 30594279222 and Code Scanning run 30594279230 passed all required jobs on metadata head 56b83a3df780884dcd4881ba979fa96d4bc1bf82. Exact-head review then found the link relation matcher could cross into a later href value. Implementation fb14e50244bddd653d06947432055201be099d35 parses bounded HTML attribute values and rel tokens; required checks must rerun."
       }
     },
     "scope_validation": {
@@ -101443,9 +101443,14 @@
         "at": "2026-07-31T00:41:11Z",
         "status": "github_checks_pending",
         "note": "After CI run 30591158059 passed all required jobs, exact-head review identified that blanket meta/link rejection produced false positives. The media scanner now rejects only image-bearing metadata and link declarations: og:image, twitter:image, itemprop=image, icon/image_src relations, and as=image. Charset, description, and canonical metadata remain text-only compliant. The ledger binds implementation 735f37e6f918eedaf331465f0615d4e4326676d2. The 30-test inventory suite passes 232 assertions, scoped Pint and PHP syntax pass, and the focused runtime-freeze classifier passes 1 test / 2 assertions."
+      },
+      {
+        "at": "2026-07-31T00:51:15Z",
+        "status": "github_checks_pending",
+        "note": "After CI run 30594279222 passed all required jobs, exact-head review identified that the link relation regex could find icon in a later href such as /styles/iconic.css. Meta/link tags are now parsed one at a time with bounded quoted or unquoted attribute extraction; rel is tokenized before matching icon/image_src, and as=image is checked independently. The stylesheet iconic.css regression remains text-only compliant. The ledger binds implementation fb14e50244bddd653d06947432055201be099d35. The 30-test inventory suite passes 232 assertions, scoped Pint and PHP syntax pass, and the focused runtime-freeze classifier passes 1 test / 2 assertions."
       }
     ],
-    "updated_at": "2026-07-31T00:41:11Z"
+    "updated_at": "2026-07-31T00:51:15Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
