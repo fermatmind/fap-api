@@ -1325,6 +1325,96 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
         }
     }
 
+    public function test_post_authority_cache_refresh_is_repair_bound_and_exactly_ten_target_scoped(): void
+    {
+        $workflow = $this->repoFile(
+            '.github/workflows/career-search-entry-post-authority-cache-refresh.yml'
+        );
+        $runner = $this->repoFile(
+            'backend/scripts/career/career_search_entry_batch_cache_refresh_resume.php'
+        );
+        $runbook = $this->repoFile('docs/ops/career-search-entry-cache-permission-recovery.md');
+
+        foreach ([
+            'Career Search Entry Post-Authority Cache Refresh',
+            'expected_control_plane_sha:',
+            'authority_repair_run_id:',
+            'expected_authority_repair_receipt_sha256:',
+            'expected_authority_repair_artifact_digest:',
+            'expected_repair_set_sha256:',
+            'expected_repair_payload_set_sha256:',
+            'expected_target_set_sha256:',
+            'efd7f2bd0acace0fd7463dbfb13897bd78a1cad5',
+            'PASS_AUTHORITY_REPAIR_COMPLETE',
+            '.manifest_positions == [30, 33, 34, 40, 42]',
+            '.database_write_count == 15',
+            'post-authority cache-only refresh',
+            'refresh exactly five manifest-position slugs and 10 bilingual cache targets in one batch',
+            'exact quality-package and complete 100-URL public readback',
+            'CAREER_CACHE_RESUME_MODE=post_authority_execute',
+            'PASS_POST_AUTHORITY_EXECUTE_AND_READBACK',
+            '.resume_target_count == 10',
+            '.resume_batch_count == 1',
+            '.cache_refresh_target_count == 10',
+            '.cache_write_count == 10',
+            '.candidate_count == 50',
+            '.bilingual_url_count == 100',
+            '.review_target_count == 300',
+            'group: deploy-${{ github.repository }}-production',
+            'environment: production',
+            'secrets.PRODUCTION_DEPLOY_HOST',
+            'secrets.PRODUCTION_DEPLOY_PATH',
+            'if: always()',
+        ] as $required) {
+            $this->assertStringContainsString($required, $workflow);
+        }
+
+        foreach ([
+            'POST_AUTHORITY_MANIFEST_POSITIONS = [30, 33, 34, 40, 42]',
+            'post_authority_execute',
+            'postAuthorityTargets',
+            'postAuthorityTargetSetSha256',
+            'EXPECTED_AUTHORITY_REPAIR_RECEIPT_SHA256',
+            'POST_AUTHORITY_TARGET_DRIFT',
+            'PASS_POST_AUTHORITY_EXECUTE_AND_READBACK',
+            'warmJobDetailPayloadForOfflineBootstrap',
+            'CareerSearchEntryQualityBatchPlanner',
+            'POST_AUTHORITY_QUALITY_DRIFT',
+            "'cache_write_count' => \$cacheRefreshTargetCount",
+            "'database_write_count' => 0",
+            "'cms_write_count' => 0",
+            "'publication_write_count' => 0",
+            "'search_channel_action_count' => 0",
+            "'non_target_write_count' => 0",
+        ] as $required) {
+            $this->assertStringContainsString($required, $runner);
+        }
+
+        foreach ([
+            'Post-authority cache-only refresh',
+            '30601380901',
+            'afa5cac18c50722c8072c2ef184617e649621919570b34429d5e02207eb74ec5',
+            '40a38665002e7012bddfc7555f18cbe3a07789af37774e2041439be71cd41cf1',
+            '33c4418a4491c901dc35fd7ee3ddf739b7e6d2b62e32d97fe5e924d80dea1a6a',
+            'exactly five slugs and ten bilingual detail-cache targets',
+            'zero per-target retry',
+        ] as $required) {
+            $this->assertStringContainsString($required, $runbook);
+        }
+
+        foreach ([
+            'php artisan migrate',
+            'queue:restart',
+            'deploy:symlink',
+            'indexnow',
+            'googleapis',
+            '139.224.',
+            '/var/www/fap-api',
+        ] as $forbidden) {
+            $this->assertStringNotContainsString($forbidden, strtolower($workflow));
+        }
+    }
+
     private function repoFile(string $path): string
     {
         $contents = file_get_contents(dirname(__DIR__, 3).'/'.$path);

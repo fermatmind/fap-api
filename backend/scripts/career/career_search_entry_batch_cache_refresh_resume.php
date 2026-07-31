@@ -17,6 +17,7 @@ const EXPECTED_REVIEW_TARGETS = 300;
 const MAX_BATCH_TARGETS = 10;
 const MAX_BATCH_SLUGS = 5;
 const OFFLINE_BUILD_BUDGET_MS = 5000;
+const POST_AUTHORITY_MANIFEST_POSITIONS = [30, 33, 34, 40, 42];
 
 /**
  * @param  array<string, mixed>  $extra
@@ -25,6 +26,7 @@ function receipt(array $extra): array
 {
     return [
         'contract_version' => CONTRACT_VERSION,
+        'cache_write_count' => 0,
         ...$extra,
         'database_write_count' => 0,
         'cms_write_count' => 0,
@@ -281,6 +283,49 @@ function targetSetSha256(array $targets): string
 }
 
 /**
+ * @param  list<array<string, mixed>>  $candidates
+ * @return list<array{manifest_position: int, slug: string, locale: string}>
+ */
+function postAuthorityTargets(array $candidates): array
+{
+    $targets = [];
+    foreach (POST_AUTHORITY_MANIFEST_POSITIONS as $position) {
+        $candidate = $candidates[$position - 1] ?? null;
+        $slug = is_array($candidate) ? trim((string) ($candidate['canonical_slug'] ?? '')) : '';
+        if ($slug === '') {
+            throw new RuntimeException('POST_AUTHORITY_TARGET_DRIFT');
+        }
+        foreach (['en', 'zh-CN'] as $locale) {
+            $targets[] = [
+                'manifest_position' => $position,
+                'slug' => $slug,
+                'locale' => $locale,
+            ];
+        }
+    }
+
+    if (
+        count($targets) !== 10
+        || count(array_unique(array_column($targets, 'slug'))) !== 5
+    ) {
+        throw new RuntimeException('POST_AUTHORITY_TARGET_DRIFT');
+    }
+
+    return $targets;
+}
+
+/**
+ * @param  list<array{manifest_position: int, slug: string, locale: string}>  $targets
+ */
+function postAuthorityTargetSetSha256(array $targets): string
+{
+    return hash(
+        'sha256',
+        json_encode($targets, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR),
+    );
+}
+
+/**
  * @param  array<string, int|string>  $summary
  */
 function assertCompletePublicSnapshot(array $summary): void
@@ -367,10 +412,13 @@ $postReadbackStateSha256 = null;
 $qualityPackageSha256 = null;
 $reviewPackageSha256 = null;
 $reviewTargetSetSha256 = null;
+$preWriteQualityPackageSha256 = null;
+$preWriteReviewPackageSha256 = null;
+$preWriteReviewTargetSetSha256 = null;
 $preSummary = null;
 
 try {
-    if (! in_array($mode, ['diagnose', 'preflight', 'execute'], true)) {
+    if (! in_array($mode, ['diagnose', 'preflight', 'execute', 'post_authority_execute'], true)) {
         throw new RuntimeException('INVALID_MODE');
     }
     $deployPath = requiredEnv('DEPLOY_PATH', '#^/[A-Za-z0-9._/-]+$#D');
@@ -380,12 +428,14 @@ try {
     $releaseSha = requiredEnv('EXPECTED_RELEASE_SHA', '/^[0-9a-f]{40}$/D');
     $releaseName = requiredEnv('EXPECTED_RELEASE_NAME', '/^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/D');
     $manifestSha256 = requiredEnv('EXPECTED_MANIFEST_SHA256', '/^[0-9a-f]{64}$/D');
-    $baselinePayloadSetSha256 = requiredEnv(
-        'EXPECTED_BASELINE_PAYLOAD_SET_SHA256',
-        '/^[0-9a-f]{64}$/D',
-    );
-    $expectedBadHrefCount = integerEnv('EXPECTED_BAD_HREF_URL_COUNT', 1, EXPECTED_URLS);
-    $expectedLowModuleCount = integerEnv('EXPECTED_LOW_MODULE_URL_COUNT', 0, EXPECTED_URLS);
+    if ($mode !== 'post_authority_execute') {
+        $baselinePayloadSetSha256 = requiredEnv(
+            'EXPECTED_BASELINE_PAYLOAD_SET_SHA256',
+            '/^[0-9a-f]{64}$/D',
+        );
+        $expectedBadHrefCount = integerEnv('EXPECTED_BAD_HREF_URL_COUNT', 1, EXPECTED_URLS);
+        $expectedLowModuleCount = integerEnv('EXPECTED_LOW_MODULE_URL_COUNT', 0, EXPECTED_URLS);
+    }
 
     $currentRelease = realpath(rtrim($deployPath, '/').'/current');
     if (
@@ -405,9 +455,12 @@ try {
         throw new RuntimeException('MANIFEST_DRIFT');
     }
     $manifest = json_decode((string) file_get_contents($manifestPath), true, 512, JSON_THROW_ON_ERROR);
+    $candidates = array_values(
+        is_array($manifest['candidates'] ?? null) ? $manifest['candidates'] : [],
+    );
     $slugs = array_values(array_map(
         static fn (array $candidate): string => (string) ($candidate['canonical_slug'] ?? ''),
-        is_array($manifest['candidates'] ?? null) ? $manifest['candidates'] : [],
+        $candidates,
     ));
     if (
         ($manifest['schema_version'] ?? null) !== 'career.search_entry_quality_batch_manifest.v1'
@@ -428,7 +481,53 @@ try {
 
     $preSnapshot = publicSnapshot($slugs, $manifestSha256);
     $preSummary = $preSnapshot['summary'];
-    if ($mode === 'diagnose') {
+    if ($mode === 'post_authority_execute') {
+        assertCompletePublicSnapshot($preSummary);
+        $targets = postAuthorityTargets($candidates);
+        $targetSetSha256 = postAuthorityTargetSetSha256($targets);
+        $batches = targetBatches($targets);
+        $expectedTargetSet = requiredEnv(
+            'EXPECTED_RESUME_TARGET_SET_SHA256',
+            '/^[0-9a-f]{64}$/D',
+        );
+        if (
+            ! hash_equals($expectedTargetSet, $targetSetSha256)
+            || count($targets) !== 10
+            || count($batches) !== 1
+        ) {
+            throw new RuntimeException('POST_AUTHORITY_TARGET_DRIFT');
+        }
+        $preflightStateSha256 = hash('sha256', canonicalJson([
+            'authority_repair_receipt_sha256' => requiredEnv(
+                'EXPECTED_AUTHORITY_REPAIR_RECEIPT_SHA256',
+                '/^[0-9a-f]{64}$/D',
+            ),
+            'manifest_sha256' => $manifestSha256,
+            'manifest_positions' => POST_AUTHORITY_MANIFEST_POSITIONS,
+            'payload_set_sha256' => $preSummary['payload_set_sha256'],
+            'target_set_sha256' => $targetSetSha256,
+        ]));
+        $preWriteQuality = $app->make(CareerSearchEntryQualityBatchPlanner::class)->build();
+        if (
+            ($preWriteQuality['candidate_count'] ?? null) !== EXPECTED_CANDIDATES
+            || ($preWriteQuality['bilingual_url_count'] ?? null) !== EXPECTED_URLS
+            || ($preWriteQuality['target_count'] ?? null) !== EXPECTED_REVIEW_TARGETS
+        ) {
+            throw new RuntimeException('POST_AUTHORITY_QUALITY_DRIFT');
+        }
+        $preWriteQualityPackageSha256 = (string) ($preWriteQuality['quality_package_sha256'] ?? '');
+        $preWriteReviewPackageSha256 = (string) ($preWriteQuality['package_sha256'] ?? '');
+        $preWriteReviewTargetSetSha256 = (string) ($preWriteQuality['target_set_sha256'] ?? '');
+        foreach ([
+            $preWriteQualityPackageSha256,
+            $preWriteReviewPackageSha256,
+            $preWriteReviewTargetSetSha256,
+        ] as $hash) {
+            if (preg_match('/^[0-9a-f]{64}$/D', $hash) !== 1) {
+                throw new RuntimeException('POST_AUTHORITY_QUALITY_DRIFT');
+            }
+        }
+    } elseif ($mode === 'diagnose') {
         $snapshotComplete = publicSnapshotIsComplete($preSummary);
         $baselineMatch = $snapshotComplete
             && $preSummary['payload_set_sha256'] === $baselinePayloadSetSha256
@@ -471,69 +570,70 @@ try {
             'completed_batch_count' => 0,
             'per_target_retry_limit' => 0,
         ]));
-    }
-    assertCompletePublicSnapshot($preSummary);
-    if (
-        $preSummary['payload_set_sha256'] !== $baselinePayloadSetSha256
-        || $preSummary['bad_href_url_count'] !== $expectedBadHrefCount
-        || $preSummary['low_module_url_count'] !== $expectedLowModuleCount
-    ) {
-        throw new RuntimeException('RECOVERY_STATE_DRIFT');
-    }
-    $targets = $preSnapshot['affected'];
-    $targetSetSha256 = targetSetSha256($targets);
-    $batches = targetBatches($targets);
-    if ($targets === [] || $batches === []) {
-        throw new RuntimeException('RECOVERY_STATE_DRIFT');
-    }
-    $preflightStateSha256 = hash('sha256', canonicalJson([
-        'manifest_sha256' => $manifestSha256,
-        'payload_set_sha256' => $preSummary['payload_set_sha256'],
-        'bad_href_url_count' => $preSummary['bad_href_url_count'],
-        'low_module_url_count' => $preSummary['low_module_url_count'],
-        'resume_target_count' => count($targets),
-        'resume_batch_count' => count($batches),
-        'resume_target_set_sha256' => $targetSetSha256,
-    ]));
-
-    if ($mode === 'preflight') {
-        emit(receipt([
-            'mode' => 'preflight',
-            'status' => 'PASS_PREFLIGHT_RESUME_REQUIRED',
-            'release_sha' => $releaseSha,
-            'release_name' => $releaseName,
+    } else {
+        assertCompletePublicSnapshot($preSummary);
+        if (
+            $preSummary['payload_set_sha256'] !== $baselinePayloadSetSha256
+            || $preSummary['bad_href_url_count'] !== $expectedBadHrefCount
+            || $preSummary['low_module_url_count'] !== $expectedLowModuleCount
+        ) {
+            throw new RuntimeException('RECOVERY_STATE_DRIFT');
+        }
+        $targets = $preSnapshot['affected'];
+        $targetSetSha256 = targetSetSha256($targets);
+        $batches = targetBatches($targets);
+        if ($targets === [] || $batches === []) {
+            throw new RuntimeException('RECOVERY_STATE_DRIFT');
+        }
+        $preflightStateSha256 = hash('sha256', canonicalJson([
             'manifest_sha256' => $manifestSha256,
-            'preflight_state_sha256' => $preflightStateSha256,
-            'pre_refresh_payload_set_sha256' => $preSummary['payload_set_sha256'],
-            'resume_target_set_sha256' => $targetSetSha256,
-            'candidate_count' => EXPECTED_CANDIDATES,
-            'bilingual_url_count' => EXPECTED_URLS,
+            'payload_set_sha256' => $preSummary['payload_set_sha256'],
             'bad_href_url_count' => $preSummary['bad_href_url_count'],
             'low_module_url_count' => $preSummary['low_module_url_count'],
             'resume_target_count' => count($targets),
             'resume_batch_count' => count($batches),
-            'max_batch_target_count' => MAX_BATCH_TARGETS,
-            'max_batch_slug_count' => MAX_BATCH_SLUGS,
-            'offline_build_budget_ms' => OFFLINE_BUILD_BUDGET_MS,
-            'per_target_retry_limit' => 0,
-            'write_state' => 'none',
-            'production_write_execution' => false,
-            'cache_refresh_target_count' => 0,
-            'completed_batch_count' => 0,
+            'resume_target_set_sha256' => $targetSetSha256,
         ]));
-    }
 
-    $expectedPreflightState = requiredEnv('EXPECTED_PREFLIGHT_STATE_SHA256', '/^[0-9a-f]{64}$/D');
-    $expectedTargetSet = requiredEnv('EXPECTED_RESUME_TARGET_SET_SHA256', '/^[0-9a-f]{64}$/D');
-    $expectedTargetCount = integerEnv('EXPECTED_RESUME_TARGET_COUNT', 1, EXPECTED_URLS);
-    $expectedBatchCount = integerEnv('EXPECTED_RESUME_BATCH_COUNT', 1, EXPECTED_URLS);
-    if (
-        ! hash_equals($expectedPreflightState, $preflightStateSha256)
-        || ! hash_equals($expectedTargetSet, $targetSetSha256)
-        || $expectedTargetCount !== count($targets)
-        || $expectedBatchCount !== count($batches)
-    ) {
-        throw new RuntimeException('BOUND_PREFLIGHT_STATE_DRIFT');
+        if ($mode === 'preflight') {
+            emit(receipt([
+                'mode' => 'preflight',
+                'status' => 'PASS_PREFLIGHT_RESUME_REQUIRED',
+                'release_sha' => $releaseSha,
+                'release_name' => $releaseName,
+                'manifest_sha256' => $manifestSha256,
+                'preflight_state_sha256' => $preflightStateSha256,
+                'pre_refresh_payload_set_sha256' => $preSummary['payload_set_sha256'],
+                'resume_target_set_sha256' => $targetSetSha256,
+                'candidate_count' => EXPECTED_CANDIDATES,
+                'bilingual_url_count' => EXPECTED_URLS,
+                'bad_href_url_count' => $preSummary['bad_href_url_count'],
+                'low_module_url_count' => $preSummary['low_module_url_count'],
+                'resume_target_count' => count($targets),
+                'resume_batch_count' => count($batches),
+                'max_batch_target_count' => MAX_BATCH_TARGETS,
+                'max_batch_slug_count' => MAX_BATCH_SLUGS,
+                'offline_build_budget_ms' => OFFLINE_BUILD_BUDGET_MS,
+                'per_target_retry_limit' => 0,
+                'write_state' => 'none',
+                'production_write_execution' => false,
+                'cache_refresh_target_count' => 0,
+                'completed_batch_count' => 0,
+            ]));
+        }
+
+        $expectedPreflightState = requiredEnv('EXPECTED_PREFLIGHT_STATE_SHA256', '/^[0-9a-f]{64}$/D');
+        $expectedTargetSet = requiredEnv('EXPECTED_RESUME_TARGET_SET_SHA256', '/^[0-9a-f]{64}$/D');
+        $expectedTargetCount = integerEnv('EXPECTED_RESUME_TARGET_COUNT', 1, EXPECTED_URLS);
+        $expectedBatchCount = integerEnv('EXPECTED_RESUME_BATCH_COUNT', 1, EXPECTED_URLS);
+        if (
+            ! hash_equals($expectedPreflightState, $preflightStateSha256)
+            || ! hash_equals($expectedTargetSet, $targetSetSha256)
+            || $expectedTargetCount !== count($targets)
+            || $expectedBatchCount !== count($batches)
+        ) {
+            throw new RuntimeException('BOUND_PREFLIGHT_STATE_DRIFT');
+        }
     }
 
     $conversion = $app->make(CareerConversionClosureBuilder::class);
@@ -623,10 +723,24 @@ try {
             throw new RuntimeException('SAFE_EXECUTE_FAILURE');
         }
     }
+    if (
+        $mode === 'post_authority_execute'
+        && (
+            ! hash_equals((string) $preWriteQualityPackageSha256, $qualityPackageSha256)
+            || ! hash_equals((string) $preWriteReviewPackageSha256, $reviewPackageSha256)
+            || ! hash_equals((string) $preWriteReviewTargetSetSha256, $reviewTargetSetSha256)
+        )
+    ) {
+        $failedStage = 'post_refresh_exact_quality_package';
+        $failureCategory = 'quality_incomplete';
+        throw new RuntimeException('SAFE_EXECUTE_FAILURE');
+    }
 
     emit(receipt([
-        'mode' => 'execute',
-        'status' => 'PASS_EXECUTE_AND_READBACK',
+        'mode' => $mode,
+        'status' => $mode === 'post_authority_execute'
+            ? 'PASS_POST_AUTHORITY_EXECUTE_AND_READBACK'
+            : 'PASS_EXECUTE_AND_READBACK',
         'release_sha' => $releaseSha,
         'release_name' => $releaseName,
         'manifest_sha256' => $manifestSha256,
@@ -651,8 +765,9 @@ try {
         'max_batch_slug_count' => MAX_BATCH_SLUGS,
         'offline_build_budget_ms' => OFFLINE_BUILD_BUDGET_MS,
         'per_target_retry_limit' => 0,
-        'write_state' => 'committed',
+        'write_state' => $mode === 'post_authority_execute' ? 'committed_verified' : 'committed',
         'production_write_execution' => true,
+        'cache_write_count' => $cacheRefreshTargetCount,
         'cache_refresh_target_count' => $cacheRefreshTargetCount,
         'completed_batch_count' => $completedBatchCount,
         'build_ms_total' => $buildMsTotal,
@@ -679,6 +794,8 @@ try {
             'CURL_RUNTIME_UNAVAILABLE',
             'ACTIVE_RELEASE_INTERFACE_DRIFT',
             'BATCH_BOUNDARY_DRIFT',
+            'POST_AUTHORITY_TARGET_DRIFT',
+            'POST_AUTHORITY_QUALITY_DRIFT',
         ],
         true,
     ) ? $throwable->getMessage() : null;
@@ -689,7 +806,11 @@ try {
         : ($postSummary === null ? 'partial' : 'committed_unverified');
 
     emit(receipt([
-        'mode' => in_array($mode, ['diagnose', 'preflight', 'execute'], true) ? $mode : null,
+        'mode' => in_array(
+            $mode,
+            ['diagnose', 'preflight', 'execute', 'post_authority_execute'],
+            true,
+        ) ? $mode : null,
         'status' => $cacheRefreshTargetCount === 0 ? 'FAIL_CLOSED' : 'FAIL_PARTIAL',
         'release_sha' => $releaseSha,
         'release_name' => $releaseName,
@@ -699,6 +820,7 @@ try {
         'failed_target_index_sha256' => $failedTargetIndexSha256,
         'write_state' => $writeState,
         'production_write_execution' => $cacheRefreshTargetCount > 0,
+        'cache_write_count' => $cacheRefreshTargetCount,
         'cache_refresh_target_count' => $cacheRefreshTargetCount,
         'completed_batch_count' => $completedBatchCount,
         'build_ms_total' => $buildMsTotal,

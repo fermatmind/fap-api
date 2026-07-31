@@ -363,3 +363,36 @@ repair receipt has been uploaded, the workflow deletes the exact private draft
 release transport. Then use a separately authorized cache-only refresh and
 require the exact quality package plus complete 100-URL public readback before
 resuming Task 12.
+
+The combined repair succeeded in run `30601380901` attempt `1`. Its immutable
+receipt SHA-256 is
+`afa5cac18c50722c8072c2ef184617e649621919570b34429d5e02207eb74ec5`
+and artifact digest is
+`40a38665002e7012bddfc7555f18cbe3a07789af37774e2041439be71cd41cf1`.
+The transaction created exactly ten crosswalk rows and five display-authority
+rows, verified ten bilingual 26-module surfaces, preserved the non-target state,
+and deleted the private draft-release transport. It performed no cache write.
+
+## Post-authority cache-only refresh
+
+`Career Search Entry Post-Authority Cache Refresh` is the single write gate
+after the verified authority repair. It binds the successful authority-repair
+run, receipt and artifact digests, combined repair and payload sets, unchanged
+active release, exact manifest, and latest control-plane SHA.
+
+The cache write scope is derived only from manifest positions `30`, `33`, `34`,
+`40`, and `42`: exactly five slugs and ten bilingual detail-cache targets. Its
+stable target-set SHA-256 is
+`33c4418a4491c901dc35fd7ee3ddf739b7e6d2b62e32d97fe5e924d80dea1a6a`.
+Before any cache write, the runner verifies the active release identity,
+manifest contract, all 100 public URL transport/canonical/robots/locale gates,
+the fixed target set, the exact quality package, and the 5,000ms offline-build
+interface. Drift fails closed with zero cache writes. The post-write quality
+package must match the pre-write package exactly.
+
+The ten targets run in one batch, with at most five slugs and ten URLs, and
+zero per-target retry. Success requires all ten cache publications, the exact
+50-candidate/100-URL/300-review-target quality package, zero locale-unsafe
+hrefs, zero thin-module URLs, and one complete fresh 100-URL public readback.
+Database, CMS, publication, indexability, queue, sitemap, llms, Search Channel,
+URL submission, deploy, rollback, and non-target writes remain prohibited.
