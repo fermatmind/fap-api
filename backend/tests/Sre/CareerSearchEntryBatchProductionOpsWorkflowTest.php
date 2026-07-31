@@ -751,6 +751,107 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
         $this->assertStringNotContainsString('/var/www/fap-api', $workflow.$probe);
     }
 
+    public function test_cache_thin_source_diagnostic_is_source_receipt_bound_and_read_only(): void
+    {
+        $workflow = $this->repoFile(
+            '.github/workflows/career-search-entry-cache-thin-source-diagnostic.yml'
+        );
+        $probe = $this->repoFile(
+            'backend/scripts/career/career_search_entry_cache_thin_source_diagnostic.php'
+        );
+
+        foreach ([
+            'source_diagnostic_run_id:',
+            'source_diagnostic_run_attempt:',
+            'expected_source_receipt_sha256:',
+            'expected_source_artifact_digest:',
+            'expected_diagnostic_state_sha256:',
+            'expected_runtime_payload_set_sha256:',
+            'expected_thin_url_count:',
+            'SOURCE_CONTROL_PLANE_SHA: 276b6f8fda3e90b144b00b60e99cde4aad1a9295',
+            'Career Search Entry Cache Post-Readback Diagnostic',
+            'career-search-entry-cache-post-readback-diagnostic-${SOURCE_DIAGNOSTIC_RUN_ID}-${SOURCE_DIAGNOSTIC_RUN_ATTEMPT}',
+            '.status == "PASS_DIAGNOSTIC_REFRESH_PAYLOAD_INEFFECTIVE"',
+            '.deploy_runner_runtime_identity_sha256 == .php_runtime_identity_sha256',
+            '.deploy_runner_payload_set_sha256 == $runtime_payload',
+            '.php_runtime_payload_set_sha256 == $runtime_payload',
+            '.deploy_runner_ready_active_count == 100',
+            '.php_runtime_ready_active_count == 100',
+            '.deploy_runner_bad_href_url_count == 0',
+            '.php_runtime_bad_href_url_count == 0',
+            'read-only Career search-entry thin-source diagnostic',
+            'manifest-position and enumerated display-authority gates',
+            'CAREER_CACHE_THIN_SOURCE_PROBE_MODE=authority',
+            'CAREER_CACHE_THIN_SOURCE_PROBE_MODE=runtime_cache',
+            'sudo -n -u www-data -- env',
+            'PASS_THIN_SOURCE_BUNDLE_FALLBACK',
+            'PASS_THIN_SOURCE_AUTHORITY_REPAIR_REQUIRED',
+            'PASS_THIN_SOURCE_RUNTIME_REPAIR_REQUIRED',
+            'HOLD_THIN_SOURCE_RUNTIME_IDENTITY_MISMATCH',
+            'career.search_entry_batch.cache_thin_source_diagnostic.v1',
+            'thin_target_set_sha256',
+            'authority_state_sha256',
+            'server_write_count: 0',
+            'cache_write_count: 0',
+            'database_write_count: 0',
+            'cms_write_count: 0',
+            'search_channel_action_count: 0',
+            'deploy_count: 0',
+            'rollback_count: 0',
+            'group: deploy-${{ github.repository }}-production',
+            'secrets.PRODUCTION_DEPLOY_HOST',
+            'secrets.PRODUCTION_DEPLOY_PATH',
+            'secrets.SSH_PRIVATE_KEY',
+            'secrets.SSH_KNOWN_HOSTS',
+            'ssh-keygen -F "$DEPLOY_HOST"',
+            'if: always()',
+        ] as $required) {
+            $this->assertStringContainsString($required, $workflow.$probe);
+        }
+        foreach ([
+            'career.search_entry_batch.cache_thin_source_diagnostic_probe.v1',
+            "'authority', 'runtime_cache'",
+            'jobDetailCacheReadiness',
+            'installDatabaseWriteGuard',
+            'DATABASE_WRITE_BLOCKED',
+            'manifest_position',
+            'exact_display_asset_missing',
+            'exact_display_asset_duplicate',
+            'component_order_invalid',
+            'bilingual_pages_missing',
+            'crosswalk_authority_invalid',
+            'display_surface_gate_failed',
+            'bundle_resolution_fell_back_to_runtime_shell',
+            "'server_write_count' => 0",
+            "'cache_write_count' => 0",
+            "'database_write_count' => 0",
+            "'cms_write_count' => 0",
+            "'search_channel_action_count' => 0",
+            "'deploy_count' => 0",
+            "'rollback_count' => 0",
+        ] as $required) {
+            $this->assertStringContainsString($required, $probe);
+        }
+        $this->assertStringContainsString(
+            'path: artifacts/career-search-entry-cache-thin-source-diagnostic.json',
+            $workflow
+        );
+        $this->assertStringNotContainsString(
+            'path: artifacts/deploy-runner-authority.json',
+            $workflow
+        );
+        $this->assertStringNotContainsString('warmJobDetailPayloadForOfflineBootstrap', $workflow.$probe);
+        $this->assertStringNotContainsString('Cache::forever', $workflow.$probe);
+        $this->assertStringNotContainsString('Cache::forget', $workflow.$probe);
+        $this->assertStringNotContainsString('php artisan migrate', $workflow.$probe);
+        $this->assertStringNotContainsString('queue:restart', $workflow.$probe);
+        $this->assertStringNotContainsString('deploy:symlink', $workflow.$probe);
+        $this->assertStringNotContainsString('indexnow', strtolower($workflow.$probe));
+        $this->assertStringNotContainsString('googleapis', strtolower($workflow.$probe));
+        $this->assertStringNotContainsString('139.224.', $workflow.$probe);
+        $this->assertStringNotContainsString('/var/www/fap-api', $workflow.$probe);
+    }
+
     public function test_resume_execute_failure_diagnostic_eligibility_recovery_is_run_bound_and_read_only(): void
     {
         $workflow = $this->repoFile(
