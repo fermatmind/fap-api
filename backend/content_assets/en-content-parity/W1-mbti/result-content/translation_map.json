@@ -1,0 +1,44 @@
+{
+  "schema_version": "fermatmind.en_parity.translation_map.v1",
+  "package_id": "EN-PARITY-W1-MBTI-RESULT-ASSETS-2026-07-31",
+  "relationship": "source_authority_guided_independent_english_draft",
+  "source_locale": "zh-CN",
+  "target_locale": "en",
+  "source_authority": [
+    "frozen W1 result inventory",
+    "MbtiCanonicalSectionRegistry",
+    "MbtiResultPersonalizationService",
+    "MbtiPublicProjectionService",
+    "MbtiCanonicalPublicResultPayloadBuilder",
+    "ReportPdfDocumentService",
+    "MbtiPdfPayloadBuilder"
+  ],
+  "assets": [
+    {"row_id":"W1-RESULT-CORE-05-OFFER-CTA","target_pointer":"/assets/0","source_contract":["authority_targets.english_commercial_spec_v1=create_new_inactive_english_content_pack:MBTI.global.en.default","commercial_spec.variants[variant_id=mbti_report_paywall_default_v1,upgrade_sku_anchor=MBTI_REPORT_FULL,upgrade_sku=MBTI_REPORT_FULL_199].cta_copy","offer_set.cta","locked_upsell_only"],"structure_preserved":true},
+    {"row_id":"W1-RESULT-SECTION-04-TRAITS-AT_DIFFERENCE","target_pointer":"/assets/1","source_contract":["sections.traits.at_difference","rich_text"],"structure_preserved":true},
+    {"row_id":"W1-RESULT-SECTION-06-TRAITS-WHY_THIS_TYPE","target_pointer":"/assets/2","source_contract":["sections.traits.why_this_type","rich_text"],"structure_preserved":true},
+    {"row_id":"W1-RESULT-SECTION-07-TRAITS-CLOSE_CALL_AXES","target_pointer":"/assets/3","source_contract":["sections.traits.close_call_axes","rich_text"],"structure_preserved":true},
+    {"row_id":"W1-RESULT-SECTION-08-TRAITS-ADJACENT_TYPE_CONTRAST","target_pointer":"/assets/4","source_contract":["sections.traits.adjacent_type_contrast","rich_text"],"structure_preserved":true},
+    {"row_id":"W1-RESULT-SECTION-09-TRAITS-DECISION_STYLE","target_pointer":"/assets/5","source_contract":["sections.traits.decision_style","rich_text"],"structure_preserved":true},
+    {"row_id":"W1-RESULT-SECTION-11-CAREER-COLLABORATION_FIT","target_pointer":"/assets/6","source_contract":["sections.career.collaboration_fit","rich_text"],"structure_preserved":true},
+    {"row_id":"W1-RESULT-SECTION-12-CAREER-WORK_ENVIRONMENT","target_pointer":"/assets/7","source_contract":["sections.career.work_environment","rich_text"],"structure_preserved":true},
+    {"row_id":"W1-RESULT-SECTION-13-CAREER-WORK_EXPERIMENTS","target_pointer":"/assets/8","source_contract":["sections.career.work_experiments","rich_text"],"structure_preserved":true},
+    {"row_id":"W1-RESULT-SECTION-17-CAREER-NEXT_STEP","target_pointer":"/assets/9","source_contract":["sections.career.next_step","rich_text"],"structure_preserved":true},
+    {"row_id":"W1-RESULT-SECTION-20-GROWTH-STABILITY_CONFIDENCE","target_pointer":"/assets/10","source_contract":["sections.growth.stability_confidence","rich_text"],"structure_preserved":true},
+    {"row_id":"W1-RESULT-SECTION-21-GROWTH-NEXT_ACTIONS","target_pointer":"/assets/11","source_contract":["sections.growth.next_actions","rich_text"],"structure_preserved":true},
+    {"row_id":"W1-RESULT-SECTION-22-GROWTH-WEEKLY_EXPERIMENTS","target_pointer":"/assets/12","source_contract":["sections.growth.weekly_experiments","rich_text"],"structure_preserved":true},
+    {"row_id":"W1-RESULT-SECTION-25-GROWTH-STRESS_RECOVERY","target_pointer":"/assets/13","source_contract":["sections.growth.stress_recovery","rich_text"],"structure_preserved":true},
+    {"row_id":"W1-RESULT-SECTION-26-GROWTH-WATCHOUTS","target_pointer":"/assets/14","source_contract":["sections.growth.watchouts","rich_text"],"structure_preserved":true},
+    {"row_id":"W1-RESULT-SECTION-27-GROWTH-MOTIVATORS","target_pointer":"/assets/15","source_contract":["premium_teaser.growth.motivators"],"structure_preserved":true},
+    {"row_id":"W1-RESULT-SECTION-28-GROWTH-DRAINERS","target_pointer":"/assets/16","source_contract":["premium_teaser.growth.drainers"],"structure_preserved":true},
+    {"row_id":"W1-RESULT-SECTION-32-RELATIONSHIPS-COMMUNICATION_STYLE","target_pointer":"/assets/17","source_contract":["sections.relationships.communication_style","rich_text"],"structure_preserved":true},
+    {"row_id":"W1-RESULT-SECTION-33-RELATIONSHIPS-TRY_THIS_WEEK","target_pointer":"/assets/18","source_contract":["sections.relationships.try_this_week","rich_text"],"structure_preserved":true},
+    {"row_id":"W1-RESULT-SECTION-34-RELATIONSHIPS-REL_ADVANTAGES","target_pointer":"/assets/19","source_contract":["premium_teaser.relationships.rel_advantages"],"structure_preserved":true},
+    {"row_id":"W1-RESULT-SECTION-35-RELATIONSHIPS-REL_RISKS","target_pointer":"/assets/20","source_contract":["premium_teaser.relationships.rel_risks"],"structure_preserved":true}
+  ],
+  "notes": [
+    "The English copy is an independently drafted candidate constrained by the registered source authority, section purpose, entitlement level, and claim boundary.",
+    "The map does not claim sentence-level translation parity or human editorial approval.",
+    "The 24 complete controls are intentionally absent because they are preserved, not regenerated."
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "schema_version": "fermatmind.en_parity.mbti_result_pdf_fixture_mapping.v1",
+  "package_id": "EN-PARITY-W1-MBTI-RESULT-ASSETS-2026-07-31",
+  "row_id": "W1-RESULT-SURFACE-02-PDF",
+  "status": "w9_fixture_target",
+  "fixture_contract": {
+    "fixture_kind": "synthetic_private_safe",
+    "production_payload_read_allowed": false,
+    "live_private_url_allowed": false,
+    "database_read_allowed": false,
+    "content_source": "exact frozen candidate assets plus preserved inventory controls",
+    "authority_services": [
+      "ReportPdfDocumentService",
+      "MbtiPdfPayloadBuilder"
+    ],
+    "required_locale": "en",
+    "fixture_state_label": "entitled_report",
+    "required_runtime_access": {
+      "mbti_access_hub_v1.access_state": "ready",
+      "access_level": "full",
+      "variant": "full",
+      "locked": false,
+      "mbti_access_hub_v1.report_access.can_view_report": true,
+      "mbti_access_hub_v1.pdf_access.can_download_pdf": true
+    },
+    "mobile_desktop_authority": "same_fields",
+    "current_runtime_consumes_candidate_package": false
+  },
+  "synthetic_slot_values": {
+    "source": "package-frozen private-safe non-user fixture",
+    "type_code": "INTJ-A",
+    "identity_variant": "Assertive",
+    "axis_label": "Assertive–Turbulent (A/T)",
+    "side_label": "Assertive (A)",
+    "opposite_side_label": "Turbulent (T)",
+    "delta": "2",
+    "neighbor_type": "INTP",
+    "adjacent_axis_label": "Judging–Perceiving (J/P)",
+    "adjacent_side_label": "Judging (J)",
+    "adjacent_opposite_side_label": "Perceiving (P)"
+  },
+  "card_shape_adapter": {
+    "adapter_id": "canonical_section_to_pdf_group_card_v1",
+    "grouping": {
+      "group_key_from": "first segment of asset.section_key",
+      "group_order": ["traits","career","growth","relationships"],
+      "group_titles": {
+        "traits": "Type and preference patterns",
+        "career": "Work and career reflection",
+        "growth": "Growth and recovery",
+        "relationships": "Communication and relationships"
+      },
+      "card_order": "frozen inventory row order"
+    },
+    "card_projection": {
+      "card_key_from": "asset.row_id",
+      "title_from": "rendered content.title",
+      "description_from": "rendered content.summary_template",
+      "bullets_from": "rendered content.body_template",
+      "tips_from": "rendered content.reflection_prompts",
+      "tags": []
+    },
+    "premium_source": "result_only_authority.premium_full under the PDF consumer's exact ready/full/full unlocked, report-viewable, and PDF-downloadable runtime state",
+    "reader_text_fields": ["section.title","cards[].title","cards[].description","cards[].bullets[]","cards[].tips[]"],
+    "fail_if_description_bullets_or_tips_are_empty": true
+  },
+  "runtime_payload_contract": {
+    "payload_root": "mbti_pdf_payload",
+    "builder_emitted_fields": ["type","axis_scores","highlights","sections","result_page_sections","document","recommended_reads"],
+    "document_service_consumed_fields": ["type","axis_scores","result_page_sections","document"],
+    "current_source_payload_key": "legacy_mbti_report_payload_v2"
+  },
+  "required_w9_adapter_contract": {
+    "adapter_id": "exact_package_to_mbti_pdf_fixture_v1",
+    "implementation_scope": "independent W9 fixture harness only",
+    "runtime_or_cms_activation_allowed": false,
+    "must_read_exact_frozen_package": true,
+    "must_use_exact_synthetic_slot_values": true,
+    "must_project_candidate_assets": true,
+    "must_project_preserved_controls_without_reauthoring": true,
+    "must_preserve_sections_and_premium_teaser_buckets": true,
+    "must_project_protected_premium_content_only_under_synthetic_entitled_state": true,
+    "must_match_exact_pdf_runtime_access_contract": true,
+    "must_preserve_candidate_row_id_as_card_key": true,
+    "must_fail_if_any_pdf_candidate_asset_is_not_exercised": true
+  },
+  "projection": [
+    {"pdf_payload_field":"type","package_authority_fields":["profile","summary_card"],"inventory_rows":["W1-RESULT-CORE-01-PROFILE","W1-RESULT-CORE-02-SUMMARY-CARD"]},
+    {"pdf_payload_field":"axis_scores","package_authority_fields":["dimensions"],"inventory_rows":["W1-RESULT-CORE-03-DIMENSIONS"]},
+    {"pdf_payload_field":"result_page_sections","package_authority_buckets":["sections","premium_teaser","result_only_authority.premium_full"],"inventory_rows":["W1-RESULT-SECTION-01-LETTERS_INTRO","W1-RESULT-SECTION-02-OVERVIEW","W1-RESULT-SECTION-03-TRAIT_OVERVIEW","W1-RESULT-SECTION-04-TRAITS-AT_DIFFERENCE","W1-RESULT-SECTION-05-FAQ","W1-RESULT-SECTION-06-TRAITS-WHY_THIS_TYPE","W1-RESULT-SECTION-07-TRAITS-CLOSE_CALL_AXES","W1-RESULT-SECTION-08-TRAITS-ADJACENT_TYPE_CONTRAST","W1-RESULT-SECTION-09-TRAITS-DECISION_STYLE","W1-RESULT-SECTION-10-CAREER-SUMMARY","W1-RESULT-SECTION-11-CAREER-COLLABORATION_FIT","W1-RESULT-SECTION-12-CAREER-WORK_ENVIRONMENT","W1-RESULT-SECTION-13-CAREER-WORK_EXPERIMENTS","W1-RESULT-SECTION-14-CAREER-ADVANTAGES","W1-RESULT-SECTION-15-CAREER-WEAKNESSES","W1-RESULT-SECTION-16-CAREER-PREFERRED_ROLES","W1-RESULT-SECTION-17-CAREER-NEXT_STEP","W1-RESULT-SECTION-18-CAREER-UPGRADE_SUGGESTIONS","W1-RESULT-SECTION-19-GROWTH-SUMMARY","W1-RESULT-SECTION-20-GROWTH-STABILITY_CONFIDENCE","W1-RESULT-SECTION-21-GROWTH-NEXT_ACTIONS","W1-RESULT-SECTION-22-GROWTH-WEEKLY_EXPERIMENTS","W1-RESULT-SECTION-23-GROWTH-STRENGTHS","W1-RESULT-SECTION-24-GROWTH-WEAKNESSES","W1-RESULT-SECTION-25-GROWTH-STRESS_RECOVERY","W1-RESULT-SECTION-26-GROWTH-WATCHOUTS","W1-RESULT-SECTION-27-GROWTH-MOTIVATORS","W1-RESULT-SECTION-28-GROWTH-DRAINERS","W1-RESULT-SECTION-29-RELATIONSHIPS-SUMMARY","W1-RESULT-SECTION-30-RELATIONSHIPS-STRENGTHS","W1-RESULT-SECTION-31-RELATIONSHIPS-WEAKNESSES","W1-RESULT-SECTION-32-RELATIONSHIPS-COMMUNICATION_STYLE","W1-RESULT-SECTION-33-RELATIONSHIPS-TRY_THIS_WEEK","W1-RESULT-SECTION-34-RELATIONSHIPS-REL_ADVANTAGES","W1-RESULT-SECTION-35-RELATIONSHIPS-REL_RISKS"]},
+    {"pdf_payload_field":"document","document_projection":"chapters derived from the same adapted result_page_sections candidate set","required_pdf_candidate_row_count":20,"legacy_only_render_is_acceptable":false}
+  ],
+  "non_pdf_candidate_coverage": [
+    {
+      "row_id": "W1-RESULT-CORE-05-OFFER-CTA",
+      "reason": "The PDF document contract does not consume commercial offer copy.",
+      "required_qa_surface": "result_page_locked_upsell",
+      "authority_field": "commercial_spec.variants[].cta_copy",
+      "consumer_field": "offer_set.cta",
+      "must_be_reviewed_separately_from_pdf": true
+    }
+  ],
+  "w9_assertions": [
+    "rendered reader text contains no Han characters",
+    "every rendered section maps to one registered inventory row",
+    "all 20 PDF-consumable candidate assets are exercised through the exact-package fixture adapter",
+    "the non-PDF offer CTA candidate is reviewed separately on the locked-upsell result-page surface through commercial_spec to offer_set.cta",
+    "premium teaser assets remain in the premium_teaser bucket before PDF projection",
+    "protected premium body and prompts project from result_only_authority.premium_full only when runtime access is ready/full/full, unlocked, report-viewable, and PDF-downloadable",
+    "every PDF card preserves its candidate inventory row_id as card_key and the emitted key set exactly equals the 20 candidate rows",
+    "all candidate summary, body paragraphs, and reflection prompts reach the frozen PDF card description, bullets, and tips fields",
+    "a legacy-only PDF render fails the exact-package coverage assertion",
+    "locked or premium body is absent without the synthetic entitled state",
+    "no private fixture value is serialized into a package or QA artifact",
+    "claim-boundary wording remains present and non-deterministic",
+    "the exact frozen package SHA is named in the independent report"
+  ],
+  "excluded_fixture_fields": [
+    "attempt_id",
+    "attempt_uuid",
+    "report_token",
+    "result_lookup_token",
+    "share_token",
+    "user_id",
+    "account_id",
+    "email",
+    "phone",
+    "user_scores",
+    "raw_scores",
+    "answers",
+    "answer_key",
+    "orders",
+    "payments",
+    "recovery_data",
+    "internal_generation_rules",
+    "internal_asset_hashes",
+    "secret",
+    "cookie",
+    "authorization",
+    "attemptId",
+    "raw_answer",
+    "raw_answers",
+    "answers_json",
+    "raw_score",
+    "scores_json",
+    "raw_mean",
+    "z",
+    "t",
+    "debug",
+    "debug_info",
+    "qa_notes",
+    "editor_notes",
+    "internal_metadata",
+    "internal_path",
+    "storage_path",
+    "source_trace",
+    "source_reference",
+    "quality",
+    "quality_level"
+  ]
+}

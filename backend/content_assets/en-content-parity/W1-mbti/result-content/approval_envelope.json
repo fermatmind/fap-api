@@ -1,0 +1,43 @@
+{
+  "schema_version": "fermatmind.en_parity.immutable_package_approval_envelope.v1",
+  "package_id": "EN-PARITY-W1-MBTI-RESULT-ASSETS-2026-07-31",
+  "lane_id": "W1",
+  "asset_id": "ENPARITY-W1-MBTI-RESULT-CONTENT",
+  "inventory_package_id": "EN-PARITY-W1-MBTI-INVENTORY-2026-07-30",
+  "inventory_package_sha256": "8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85",
+  "source_ledger_sha256": "cf87d076bfdec941c636263bcbe937250a058d8fd566136293355d8c3a2a03c1",
+  "status": "unpublished_candidate",
+  "locale": "en",
+  "inventory_row_count": 46,
+  "preserved_control_count": 24,
+  "candidate_asset_count": 21,
+  "w9_fixture_target_count": 1,
+  "producer_target_count": 22,
+  "quality_gates": {
+    "exact_inventory_identity": "pass",
+    "exact_46_row_reconciliation": "pass",
+    "preserve_24_controls": "pass",
+    "cover_22_producer_targets": "pass",
+    "english_only_candidate_copy": "pass",
+    "entitlement_matrix": "pass",
+    "private_field_exclusion": "pass",
+    "claim_boundary": "pass_producer_self_check_only",
+    "mobile_desktop_same_authority": "pass",
+    "pdf_fixture_ready_mapping": "pass_mapping_only",
+    "independent_w9": "pending",
+    "exact_package_dry_run": "pending_future_pr"
+  },
+  "permissions": {
+    "private_payload_read_authorized": false,
+    "cms_write_authorized": false,
+    "database_write_authorized": false,
+    "draft_import_authorized": false,
+    "production_import_authorized": false,
+    "publication_authorized": false,
+    "activation_authorized": false,
+    "seo_runtime_release_authorized": false,
+    "indexability_authorized": false,
+    "search_submission_authorized": false,
+    "deploy_authorized": false
+  }
+}

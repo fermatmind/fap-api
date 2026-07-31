@@ -101485,5 +101485,339 @@
       }
     ],
     "updated_at": "2026-07-30T17:57:44Z"
+  },
+  "EN-PARITY-W1-MBTI-RESULT-ASSETS-01": {
+    "id": "EN-PARITY-W1-MBTI-RESULT-ASSETS-01",
+    "repo": "fap-api",
+    "title": "EN-PARITY-W1-MBTI-RESULT-ASSETS-01: produce MBTI English result content assets",
+    "base": "main",
+    "branch": "codex/en-parity-w1-mbti-result-assets-01",
+    "depends_on": [
+      "EN-PARITY-W1-MBTI-INVENTORY-01",
+      "EN-PARITY-W1-MBTI-RESULT-AGENT-01"
+    ],
+    "status": "ready_to_merge",
+    "commit_sha": "9dbf757ea39cb54757fbcd267132c4fa2f6fae15",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3429",
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The operator supplied a continuous execution /goal with this exact PR id, title, repository, dependency order, path scope, validations, merge gate, and controlled-action boundaries."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "Cross-repository dependencies are merged: fap-web PR #1847 at fc985df4ff5192b7e92b38cd2a0d11117f393968 froze inventory package SHA 8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85, and PR #1850 at 462983b41bdc35b0e167f8c9d694ec4a67388bf1 added the 46-row producer gate."
+      },
+      "preflight": {
+        "status": "passed",
+        "evidence": "Created a clean isolated worktree and branch from exact origin/main 12dff5f80161afa5b80151715171e037cdcdb2a3 because the primary fap-api worktree belongs to another active task. No matching local branch, remote branch, or open PR existed."
+      },
+      "package_contract": {
+        "status": "passed",
+        "evidence": "Frozen candidate package SHA 9325013b870fd2496efc0882656240f91ce28ff4faaf1da42fb3dde3577b0ed3 reconciles 46 unique rows as 24 preserved controls, 21 distinct English assets, and one synthetic private-safe PDF W9 target. The CTA selector binds to exact authority target english_commercial_spec_v1: a new inactive English content pack with pack_id MBTI.global.en.default, region GLOBAL, locale en, version v0.3, and planned path content_packages/default/GLOBAL/en/MBTI-GLOBAL-en-v0.3. The target is absent at freeze, this package does not materialize it, existing zh-CN pack reuse/mutation and runtime fallback registration are forbidden, and a separate English content-pack authority PR is required before draft import. The claim scan binds the canonical fixed identity rule to both singular and plural forms and records the package boundary's fixed identities occurrence as an allowed explicit rejection with exact source and JSON pointer. Protected premium content has separate consumer predicates: a ready/full/full unlocked, report-viewable result page does not depend on PDF state, while PDF projection additionally requires can_download_pdf=true. The PDF adapter covers all 20 PDF candidates with package-frozen INTJ-A/Assertive and explainability values, exact card keys, and a runtime-derived unsafe-field denylist. close_call_axes declares closest-axis, side, opposite-side, and margin slots; adjacent_type_contrast declares neighboring-type plus adjacent-axis-specific label slots bound to the same first ranked non-A/T axis used to derive neighbor_type_keys[0]. W9 deliberately exercises an A/T closest axis and a J/P adjacent axis to prove the contracts cannot cross-wire. W9 resolves the slots synthetically, but current runtime does not substitute package tokens inside canonical body_md/payload. The package therefore records existing_runtime_contract=false and makes a separately scoped real-projection renderer plus unresolved-token rejection an activation prerequisite. Importer values remain unstored, every candidate remains inactive/draft-only, and every controlled permission remains false."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "Exact-current validation passed after removing the future-checkout absence assertion: php artisan test --filter=MbtiResultEnglishPackageTest --no-ansi passed 7 tests/1412 assertions. bash scripts/ci_verify_mbti.sh completed exit 0 on isolated SQLite and executed the manifest-required scripts/verify_mbti.sh through all 8/8 HTTP gates with [DONE] verify_mbti OK; its remaining MBTI, Big Five, Enneagram, migration, security, and regression gates also passed. The immutable package metadata still records existing_at_package_freeze=false, but the test no longer requires the separately scoped English content pack to remain absent forever. Scoped Pint, JSON/YAML parsing, deterministic package SHA 9325013b870fd2496efc0882656240f91ce28ff4faaf1da42fb3dde3577b0ed3, diff, and exact scope checks pass."
+      },
+      "changed_file_scope": {
+        "status": "passed",
+        "evidence": "Changed paths are limited to backend/content_assets/en-content-parity/W1-mbti/result-content/**, backend/tests/Feature/ContentAssets/MbtiResultEnglishPackageTest.php, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json. No importer, runtime, CMS, DB, public personality, comparison, frontend, discoverability, search, or deploy file is changed."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "Exact PR head e69d0c1cdb806faaf8ec522a9287605fe7028396 passed all nine applicable required checks: CI hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Code Scanning Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. verify-staging-parity was skipped by workflow policy and is non-blocking."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "history": [
+      {
+        "at": "2026-07-31T00:00:00+08:00",
+        "status": "in_progress",
+        "note": "Started PR04 from clean origin/main in an isolated worktree after verifying both fap-web dependencies. The package is unpublished, reads no private payload, performs no write/import/activation/release action, and retains every controlled permission as false."
+      },
+      {
+        "at": "2026-07-30T18:26:22Z",
+        "status": "local_verified",
+        "note": "Initial package SHA da6cb2ee008d7c76503d0a60774a035810837a2cb68fb7ff23b668be0a5c5453 passed the first local and GitHub validation round. Exact-head review then identified current-scope registry/PDF fixture mismatches; that SHA was superseded before merge and is not an approved frozen package. No production/CMS/database authority write occurred."
+      },
+      {
+        "at": "2026-07-30T18:28:38Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the exact scoped branch and opened PR #3429 as a ready PR. GitHub reports the head mergeable; required checks are queued or running. No controlled write, import, activation, release, or deploy action was triggered."
+      },
+      {
+        "at": "2026-07-30T18:44:30Z",
+        "status": "review_fix_local_verified",
+        "note": "The first GitHub round passed all required checks, then exact-head review identified two valid current-scope P2 contract gaps. Four premium teaser assets now use the canonical premium_teaser bucket, and the PDF fixture mapping now names the actual mbti_pdf_payload fields, records that the legacy builder does not consume this package, and requires an exact-package W9 fixture adapter that fails on legacy-only coverage. That review-fix head passed all required checks; a third valid P2 then identified a suppressed negated-boundary phrase match, which is now explicitly recorded and test-reconciled. Frozen package SHA is now 8662bc3cd22f3a00b0bb188e47fdb4247c87bca93ba355485155405af058358f. No runtime, CMS, database, import, activation, release, or deploy action occurred."
+      },
+      {
+        "at": "2026-07-30T18:53:30Z",
+        "status": "review_fix_local_verified",
+        "note": "Addressed the third valid P2 without changing candidate copy: forbidden_claim_scan now records the actual fixed identity match as an allowed explicit rejection with row and JSON-pointer evidence. The test derives matches from assets.json and requires exact agreement with the report. That head passed all required checks; a fourth valid P2 then showed that bucket-correct premium assets still lacked the teaser field consumed by the canonical builder. Four explicit teaser payloads are now frozen and test-required. Package SHA is fef280947f179e55e3652bbfd7af4e32f217f52522c61b0b0298297bb6723314."
+      },
+      {
+        "at": "2026-07-30T19:03:30Z",
+        "status": "review_fix_local_verified",
+        "note": "Addressed the fourth valid P2 by freezing teaser on all four premium_teaser assets. That exact head passed all required checks; a fifth valid P2 then showed the package still lacked deterministic builder-facing body/payload mapping for its structured templates. The package now freezes sections body as a Markdown join plus summary/reflection payload, and premium teaser plus existing-full-access-only structured payload. Tests execute this mapping for every canonical asset. Package SHA is 1688857a406274ec7b909d5c2f5ab1ffec17da703f0634ec2edafd2d502db1e4; no importer, entitlement, or runtime behavior was added."
+      },
+      {
+        "at": "2026-07-30T19:14:30Z",
+        "status": "review_fix_local_verified",
+        "note": "Addressed the fifth valid P2 with a frozen canonical_projection_contract. That head passed all required checks; exact-head review then found a P1 public-payload leak risk and a P2 offer consumer mismatch. Premium builder-facing projection is now title/teaser with payload null; full templates remain protected inactive/draft source only, and the package explicitly says it implements no entitlement filter. Offer copy now uses the exact OfferResolver cta_copy keys under commercial_spec.variants[] and declares offer_set.cta as the consumer field. Package SHA is dbb00e41019876fb43cb2c59ecff6d1aebe4faeac1d2f3eeaba28b22188c0e3f."
+      },
+      {
+        "at": "2026-07-30T19:25:30Z",
+        "status": "review_fix_local_verified",
+        "note": "Addressed the P1/P2 pair: premium public projection now returns payload null and retains full templates only as non-public inactive/draft source, while offer copy freezes the exact OfferResolver cta_copy schema and offer_set.cta consumer lineage. Focused validation passed 7 tests/917 assertions, Pint, deterministic package hashing, and diff checks. No entitlement filter, commerce metadata, importer, or runtime behavior was changed."
+      },
+      {
+        "at": "2026-07-30T19:36:32Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact-head review found and this scope repaired two valid P2 evidence mismatches. The W9 mapping now partitions the 20 PDF-consumable candidates from the single non-PDF offer CTA and requires separate locked-upsell result-page QA for that CTA. Producer editorial evidence now describes the final single commercial_spec cta_copy object and explicitly records that this package produces no preview variant. Focused validation passed 7 tests/923 assertions, scoped Pint, JSON parsing, deterministic package SHA, diff, and exact changed-file scope checks. Candidate package SHA is 62f54bbd440c2adca15adb1867a977c1224c4fdc83f827111e8c763216b6acea."
+      },
+      {
+        "at": "2026-07-30T19:37:40Z",
+        "status": "github_checks_pending",
+        "note": "Committed the two review repairs as exact implementation commit d1993f1d25a6ba620d6e9063c4f2a35841c271d6. The following metadata-only commit records that immutable implementation pointer; exact-head GitHub checks and review are pending."
+      },
+      {
+        "at": "2026-07-30T19:47:11Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact head 0396bf04a77cc1d2bd97d8eb6e991dabdfee6278 passed all nine required checks with staging parity skipped, then review found one valid P2: the entitlement matrix still placed offer_set on preview_result despite the sole CTA candidate being locked_upsell_only. The matrix now keeps preview as a preserved control, excludes offer_set and the package CTA from preview, and reserves package offer copy for locked-upsell surfaces. Focused validation passed 7 tests/927 assertions plus scoped Pint, JSON, hash, diff, and scope checks. Candidate package SHA is 0118a4ddd0c1ad75687492fa8d7e7d5055c4cbcadaa664a5890de445bc99903a."
+      },
+      {
+        "at": "2026-07-30T19:48:13Z",
+        "status": "github_checks_pending",
+        "note": "Committed the preview entitlement repair as exact implementation commit ade807ebb6a82b00e33dc62c50c25cd8517706f4. The following metadata-only commit records that immutable implementation pointer; exact-head GitHub checks and review are pending."
+      },
+      {
+        "at": "2026-07-30T19:59:41Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact head dd4d0a8b31246bcb56732c88934b383a0c78cea7 passed all nine required checks with staging parity skipped, then review found two valid P2 contract gaps: template slots could survive canonical projection, and the CTA selector was descriptive rather than resolver-addressable. The package now binds the only two remaining slots to the future exact-package result importer, requires rendering before projection/write, rejects unresolved tokens, and freezes the exact default MBTI full-report variant id/anchor/effective SKU consumed by OfferResolver. Focused validation passed 7 tests/1012 assertions plus scoped Pint, JSON, hash, diff, and scope checks. Candidate package SHA is 04d88c174252bc090fbce8b96294b86c7b274c5d0bed849fde3583a4b76e3f42."
+      },
+      {
+        "at": "2026-07-30T20:00:53Z",
+        "status": "github_checks_pending",
+        "note": "Committed the renderer and exact variant-selector repairs as implementation commit 455bd8a1562d89973832d7c22d4bf6b77eb93362. The following metadata-only commit records that immutable implementation pointer; exact-head GitHub checks and review are pending."
+      },
+      {
+        "at": "2026-07-30T20:10:35Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact head 2263f123b54f7b51a1e2ee6b01f66112be22f47b passed all nine required checks with staging parity skipped, then review identified one valid P2 share-boundary gap: published ordinary CMS sections can enter the current public share projection. This content-only package now requires all candidate sections to remain inactive/draft, forbids published CMS share-authority writes, and makes a share allowlist or explicit package-section exclusion an activation prerequisite. Focused validation passed 7 tests/1022 assertions plus scoped Pint, JSON, hash, diff, and scope checks. Candidate package SHA is 12eaa8b4b3fab6f2a51ac905341c7be0fd449e08341e0d281577c1e2be0b7d04."
+      },
+      {
+        "at": "2026-07-30T20:11:48Z",
+        "status": "github_checks_pending",
+        "note": "Committed the public-share authority boundary repair as implementation commit b6150f61416d73b604f3d07b285b509a91802716. The following metadata-only commit records that immutable implementation pointer; exact-head GitHub checks and review are pending."
+      },
+      {
+        "at": "2026-07-30T20:20:04Z",
+        "status": "github_checks_pending",
+        "note": "Exact head f0bba955305c143d6b95605c239999854bb06593 passed all nine required checks, staging parity skipped, with zero unresolved review threads and CLEAN mergeability. Before merge, origin/main advanced by one unrelated Career cache permission control commit. Integrated exact origin/main 75d28c496 without conflict; focused validation remains 7 tests/1022 assertions, scoped Pint and exact changed-file scope pass. Fresh exact-head checks and review are required."
+      },
+      {
+        "at": "2026-07-30T20:29:40Z",
+        "status": "review_fix_local_verified",
+        "note": "Post-main-integration exact head a5bae4d7a2a3a7a0717103bdee7e7209ed4be89b passed all nine required checks with staging parity skipped, then review found one valid P2 digest-envelope gap. Added approval_envelope.json to the hashed files list and require field-for-field equality with the manifest's identity, locale, status, provenance, counts, quality gates, and permissions. Focused validation passed 7 tests/1056 assertions plus scoped Pint, JSON, hash, diff, and exact scope checks. Candidate package SHA is 386c0176b581176c0c26e4736c5901eb69ad053712e127b8d2b089553a40899e."
+      },
+      {
+        "at": "2026-07-30T20:30:59Z",
+        "status": "github_checks_pending",
+        "note": "Committed the digest-bound approval envelope as implementation commit 4491efe11785e1d2e84dbb098156a6a91463245c. The following metadata-only commit records that immutable implementation pointer; exact-head GitHub checks and review are pending."
+      },
+      {
+        "at": "2026-07-30T20:40:33Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact head e936231527cfb531c136db40ba40189b0e43e183 passed all nine required checks with staging parity skipped, then review found one valid P2 public-personality isolation gap. Candidate sections now forbid public personality projection and published PersonalityProfileVariantSection authority writes. Activation requires result-only authority isolation or an explicit public-personality section exclusion in addition to the share-safe gate. Focused validation passed 7 tests/1065 assertions plus scoped Pint, JSON, hash, diff, and exact scope checks. Candidate package SHA is f51ce875910f22ce907482a7daff4205e11178a49a855f6ae533b05aef7d8ffc."
+      },
+      {
+        "at": "2026-07-30T20:41:43Z",
+        "status": "github_checks_pending",
+        "note": "Committed the public-personality authority isolation repair as implementation commit 82263bedac5b341ee013c65da82e11964b6f11ec. The following metadata-only commit records that immutable implementation pointer; exact-head GitHub checks and review are pending."
+      },
+      {
+        "at": "2026-07-30T20:50:24Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact head 8733c3381560bd4652357ffcf98402c6725b34ba passed all nine required checks with staging parity skipped, then review found one valid P2 protected-premium mapping gap. Public premium projection remains title/teaser with payload null, while protected body/prompts now have an exact result_only_authority.premium_full entitled projection consumed by full_result and the synthetic entitled PDF fixture. Focused validation passed 7 tests/1105 assertions plus scoped Pint, JSON, hash, diff, and exact scope checks. Candidate package SHA is 79f9d9f575f7c9fa54552276923cfac96e96981aab9ef7b30b3204fbe8ec27b2."
+      },
+      {
+        "at": "2026-07-30T20:51:36Z",
+        "status": "github_checks_pending",
+        "note": "Committed the protected premium entitled-projection repair as implementation commit c155b2e21202f6fbc86180b45497f653595b00e0. The following metadata-only commit records that immutable implementation pointer; exact-head GitHub checks and review are pending."
+      },
+      {
+        "at": "2026-07-30T21:00:52Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact head 4d09a27842603665ea2858c464f2da9fef59476f passed all nine required checks with staging parity skipped, then review found one valid P2 W9 slot-source gap. The private-safe synthetic type_code INTJ-A and identity_variant Assertive are now frozen inside the package-hashed PDF mapping, and the focused renderer test reads only those values rather than inventing external inputs. Focused validation passed 7 tests/1110 assertions plus scoped Pint, JSON, hash, diff, and exact scope checks. Candidate package SHA is 0f850c2d1f2fb9ea17076b48d13bfa16faa0d3471362811b9da70626d77434c4."
+      },
+      {
+        "at": "2026-07-30T21:02:02Z",
+        "status": "github_checks_pending",
+        "note": "Committed the package-frozen W9 synthetic slot values as implementation commit 15dce5c72f31422fc3c6a4c97a00d57da161d69d. The following metadata-only commit records that immutable implementation pointer; exact-head GitHub checks and review are pending."
+      },
+      {
+        "at": "2026-07-30T21:12:13Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact head 6a8861cc1591084d830d0a030beaf44c0f436938 passed all required checks with staging parity skipped, then review identified two valid package-contract P2s. The repair binds protected premium content to the real ready/full/full unlocked report state and preserves each of the 20 candidate row identities as cards[].card_key. Candidate package SHA advances to 1483b439cc70d6e4d5273402c7c256128e8d7a3fd49feba7f56f1931665b51ba; focused validation and a new exact-head CI round are pending."
+      },
+      {
+        "at": "2026-07-30T21:13:45Z",
+        "status": "github_checks_pending",
+        "note": "Committed the deterministic PDF group/card shape adapter as implementation commit 7338e6240d53b5d9877e9f2ba1bfc19ab40260da. The following metadata-only commit records that immutable implementation pointer; exact-head GitHub checks and review are pending."
+      },
+      {
+        "at": "2026-07-30T21:24:00Z",
+        "status": "review_fix_local_verified",
+        "note": "Repaired the two exact-head P2s by freezing the real ready/full/full unlocked runtime access predicate for protected premium projection and preserving the exact candidate row_id as every emitted PDF cards[].card_key. Focused validation passed 7 tests/1328 assertions, scoped Pint, JSON parsing, deterministic package hashing, git diff --check, and exact changed-file scope validation. Candidate package SHA is 1483b439cc70d6e4d5273402c7c256128e8d7a3fd49feba7f56f1931665b51ba."
+      },
+      {
+        "at": "2026-07-30T21:25:00Z",
+        "status": "github_checks_pending",
+        "note": "Committed the runtime-access and row-identity repair as implementation commit 5c33db3aa103e26291274df753bc41a5e997d35d. This metadata-only commit records that immutable implementation pointer; exact-head GitHub checks and review are pending."
+      },
+      {
+        "at": "2026-07-30T21:40:00Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact head ac5e6d9d91255c5d4b393c7e643d172f727c47f1 passed all required checks with staging parity skipped, then review identified two valid P2 evidence gaps. The W9 fixture denylist now exactly equals all 21 forbidden private keys, and the package explicitly distinguishes unstored runtime-import slots from stored private-safe W9 fixture slots. Focused validation passed 7 tests/1318 assertions, scoped Pint, JSON parsing, deterministic hashing, git diff --check, and exact scope validation. Candidate package SHA is 6d354a063422e2d9e5685abd2e07b1e4a12a6c9216c7a40779dc6b055397ed72."
+      },
+      {
+        "at": "2026-07-30T21:41:00Z",
+        "status": "github_checks_pending",
+        "note": "Committed the complete private-field denylist and exact slot-storage semantics as implementation commit 30627c9b51fc4b17a64ec79d18db9127dfcc7415. This metadata-only commit records that immutable implementation pointer; exact-head GitHub checks and review are pending."
+      },
+      {
+        "at": "2026-07-30T21:55:00Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact head 8cc00296a53e35baddde2984a044f1cc31489f4c passed all required checks with staging parity skipped, then review found the fixture denylist did not bind the runtime PDF builder's unsafe keys. The mapping now freezes the deterministic union of package-private keys and MbtiPdfPayloadBuilder::FORBIDDEN_KEYS; the focused test reads the private runtime constant by reflection so future builder additions fail this contract. Focused validation passed 7 tests/1319 assertions, scoped Pint, JSON, deterministic hash, diff, and exact scope checks. Candidate package SHA is 53fe11db0ccd9a9216de4b91d33a8e5067231c1c2a9df523267fd9f3e8c3f1f5."
+      },
+      {
+        "at": "2026-07-30T21:56:00Z",
+        "status": "github_checks_pending",
+        "note": "Committed the runtime-derived fixture denylist as implementation commit b7621a332591b2aa1a7ba0e87b49314ccc068475. This metadata-only commit records that immutable implementation pointer; exact-head GitHub checks and review are pending."
+      },
+      {
+        "at": "2026-07-30T21:56:56Z",
+        "status": "ready_to_merge",
+        "note": "Exact head d75c2dc311e243714de0fcd372e7791c631dc3f9 passed all nine required checks with staging parity skipped, has zero unresolved review threads, is CLEAN/MERGEABLE, and origin/main has not advanced. Recording ready_to_merge before squash merge; this metadata-only transition requires its own exact-head checks."
+      },
+      {
+        "at": "2026-07-30T22:17:59Z",
+        "status": "ready_to_merge",
+        "note": "Exact head 12fbc465cd27e62371afd1c35e0b3096465f4539 passed all nine required checks with staging parity skipped and had zero unresolved review threads. Before merge, origin/main advanced to 75054d5ed with an unrelated Career cache-permission repair. Integrated that exact main commit without conflict; focused validation and fresh exact-head checks are required before merge."
+      },
+      {
+        "at": "2026-07-30T22:24:00Z",
+        "status": "github_checks_pending",
+        "note": "Corrected the post-main-integration ledger transition: readiness and github_checks_green must reset before the integrated head is treated as mergeable. Exact integrated head 72402bd33da9f58518990db7685b02ba1b126f05 subsequently passed all nine required checks with staging parity skipped, but this pending-state correction head must also pass before a separate ready_to_merge transition."
+      },
+      {
+        "at": "2026-07-30T22:36:00Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact pending-state head 1592aa3c76eb814751a0f837ffe8908931025a44 passed all required checks, then review found close-call and adjacent-type assets lacked result-specific axis/neighbor binding. Added five slots owned by the existing MbtiResultPersonalizationService contract, froze private-safe W9 values, and proved rendered axis, sides, margin, current type, and neighbor. The first focused run exposed two test-fixture mismatches; the scoped retry passed 7 tests/1366 assertions plus Pint, JSON, package hash, diff, and scope checks. Candidate SHA is bd509f2671b7a13916ebc1d2565c3eb6060bd7caf788998be6ce3326becf45b1. Integrated unrelated origin/main 22b3d47c5 without conflict; exact-head checks remain pending."
+      },
+      {
+        "at": "2026-07-30T22:37:00Z",
+        "status": "github_checks_pending",
+        "note": "Committed the result-derived explainability slots and origin/main integration as implementation commit e553c99b5a6a8153578c7b91f2f4e24837f94bef. This metadata-only commit records that immutable implementation pointer; exact-head checks remain pending."
+      },
+      {
+        "at": "2026-07-30T22:50:00Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact head 86a536ee294702fed3b31a8560d09b95b0b0d17e passed all required checks, then review proved current personalization appends dynamic blocks without substituting package tokens inside canonical body_md/payload. Corrected the contract to existing_runtime_contract=false and made a separate real-projection renderer with unresolved-token rejection an explicit activation prerequisite. W9 synthetic rendering remains valid; runtime/CMS/import behavior remains unchanged and all activation permissions remain false. Focused validation passed 7 tests/1372 assertions plus Pint, JSON, deterministic hash, diff, and scope checks. Candidate SHA is cfe6d3e02f1bb28104a0cff7e337c541148a3d034c7cb387def3ae63ec6aabfc."
+      },
+      {
+        "at": "2026-07-30T22:51:00Z",
+        "status": "github_checks_pending",
+        "note": "Committed the explicit runtime-renderer activation hold as implementation commit a13cf1aff50c397ce5c2b45541dec8ba1d24ef01. This metadata-only commit records that immutable pointer; exact-head checks remain pending."
+      },
+      {
+        "at": "2026-07-30T23:11:00Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact head 14d01b2fa268582298fbe97e95b584acf6193eb3 passed all required checks, then review found adjacent labels could incorrectly reuse the closest A/T axis while neighbor_type_keys[0] is derived from the first ranked non-A/T axis. Added three adjacent-axis-specific slots and bound their source contract to the exact axis used for the neighbor. The W9 fixture deliberately uses A/T as closest and J/P as adjacent, and focused validation passed 7 tests/1377 assertions. The initial direct HTTP verifier call recorded a missing local service; the isolated SQLite ci_verify_mbti entrypoint subsequently passed verify_mbti 8/8, the 195830-assertion full gate, and all downstream gates. Candidate SHA is d15f823cd2c9959d34bf4a9e83327b1ead7519b206c82367fdb9a6b1039d23c2. Integrated unrelated origin/main 9c7925b1c without conflict; fresh exact-head checks remain pending."
+      },
+      {
+        "at": "2026-07-30T23:12:00Z",
+        "status": "github_checks_pending",
+        "note": "Committed the adjacent-axis binding repair and origin/main integration as exact implementation commit 32dbc2a77f68ed117ef8989998864c142d7ca691. This metadata-only commit records that immutable implementation pointer; exact-head GitHub checks and review remain pending."
+      },
+      {
+        "at": "2026-07-30T23:20:00Z",
+        "status": "github_checks_pending",
+        "note": "Exact head ed08a928b929671bb75d0371ac8ba2abf490267f passed all nine required checks with staging parity skipped, had zero unresolved review threads, and was CLEAN/MERGEABLE. Before merge, origin/main advanced to b7ab619e5 with an unrelated Career cache post-readback diagnostic. Integrated that exact main commit without conflict and retained pending state; fresh exact-head validation, checks, and review are required."
+      },
+      {
+        "at": "2026-07-30T23:21:00Z",
+        "status": "github_checks_pending",
+        "note": "Committed the exact origin/main b7ab619e5 integration as implementation commit 047291fa24cb594477b52fa61e5981943177c5b4 after focused validation remained 7 tests/1377 assertions with Pint, package hash, diff, and exact scope checks passing. This metadata-only commit records that immutable implementation pointer; exact-head checks remain pending."
+      },
+      {
+        "at": "2026-07-30T23:30:00Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact head 2b9dc5439ae12ffc62b1806e598d5a86f002331a passed all nine required checks with staging parity skipped, then review found the shared protected-premium predicate incorrectly made full result-page content depend on PDF readiness. Split consumer predicates so full_result requires ready/full/full, unlocked, and can_view_report=true, while mbti_pdf_payload additionally requires can_download_pdf=true. A report-readable/PDF-pending fixture proves the split. Focused validation passed 7 tests/1387 assertions plus Pint, JSON, deterministic hash, diff, and scope checks. Candidate SHA is 21a6d77b6f3232a01aeb3c0ffc391c6fde15dfc6d40661506c1d4ebca561c536. Integrated unrelated origin/main 11262cb0a without conflict; exact-head checks remain pending."
+      },
+      {
+        "at": "2026-07-30T23:32:00Z",
+        "status": "github_checks_pending",
+        "note": "Committed the split result-page/PDF predicates, completed the prior b7ab619e5 merge, then integrated exact latest origin/main 11262cb0a. The resulting immutable implementation head is 3b22b1e12a6f96951464eff638c7500ca43781f1; focused validation remains 7 tests/1387 assertions with Pint, deterministic hash, diff, and exact scope checks passing. This metadata-only commit records that pointer; exact-head checks remain pending."
+      },
+      {
+        "at": "2026-07-30T23:42:00Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact head 9c4012056be4ee5a1b224c5eb24b3bac5d01a04b passed all nine required checks with staging parity skipped, had no main drift, then review found the canonical fixed identity scan missed the plural fixed identities boundary and falsely reported zero matches. Added frozen singular/plural forms, recursively derived exact JSON-pointer evidence, restored allowed_explicit_rejection, and aligned producer editorial evidence. The first focused run exposed an undefined local test variable; the scoped retry passed 7 tests/1388 assertions plus Pint, JSON, deterministic hash, diff, and scope checks. Candidate SHA is 129451a81fdbe5c4e9593324e7ad44985128a6f1eaf3996b63e1a1c0be2e982b; exact-head checks remain pending."
+      },
+      {
+        "at": "2026-07-30T23:44:00Z",
+        "status": "github_checks_pending",
+        "note": "During the plural-claim repair, scope validation detected origin/main had advanced to unrelated Career SSH env repair 276b6f8fd. Committed the isolated PR04 repair, integrated that exact main commit without conflict, and reran focused validation at 7 tests/1388 assertions with Pint, diff, and exact scope checks passing. Fresh exact-head checks remain pending."
+      },
+      {
+        "at": "2026-07-30T23:45:00Z",
+        "status": "github_checks_pending",
+        "note": "The exact plural-claim repair plus origin/main integration is immutable implementation commit fb0eee989da080f11d9cb4e7ed5a578937203ba6. This metadata-only commit records that pointer; exact-head checks and review remain pending."
+      },
+      {
+        "at": "2026-07-31T00:00:00Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact head 4514bf36ede286e990613dd41f5ea7f632137c44 passed all nine required checks with staging parity skipped and no main drift, then review found the CTA selector had no deterministic English pack target. Frozen authority target english_commercial_spec_v1 now explicitly requires creation of a new inactive MBTI.global.en.default pack at content_packages/default/GLOBAL/en/MBTI-GLOBAL-en-v0.3, forbids existing zh-CN pack reuse or mutation and runtime fallback registration, and fails closed until a separate English content-pack authority PR creates the target. This package does not materialize it. Focused validation passed 7 tests/1413 assertions plus Pint, JSON, deterministic hash, diff, and scope checks. Candidate SHA is 9325013b870fd2496efc0882656240f91ce28ff4faaf1da42fb3dde3577b0ed3; exact-head checks remain pending."
+      },
+      {
+        "at": "2026-07-31T00:01:00Z",
+        "status": "github_checks_pending",
+        "note": "Committed the exact inactive English commercial authority target as immutable implementation commit 5e381302a8620134423cb9310a3305bb7b0bf4ef. This metadata-only commit records that pointer; exact-head checks and review remain pending."
+      },
+      {
+        "at": "2026-07-31T01:16:30Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact head 1b9e635a0e51ccc077295864aa35df7151baa6eb passed all nine required checks with staging parity skipped, then review found two valid current-scope P2 issues. Removed the permanent future-checkout absence assertion while retaining immutable existing_at_package_freeze=false metadata. Reran exact-current validation: the focused package test passed 7 tests/1412 assertions, and isolated SQLite ci_verify_mbti completed exit 0 while invoking the manifest-required verify_mbti.sh through all 8/8 gates. Generated verifier artifacts were isolated and removed from PR scope. Candidate SHA remains 9325013b870fd2496efc0882656240f91ce28ff4faaf1da42fb3dde3577b0ed3; exact-head checks remain pending."
+      },
+      {
+        "at": "2026-07-31T01:19:20Z",
+        "status": "github_checks_pending",
+        "note": "Committed the future-safe absence assertion repair, then integrated unrelated latest origin/main b5370fde7 without conflict. The resulting immutable implementation head is 9dbf757ea39cb54757fbcd267132c4fa2f6fae15. Post-integration focused validation passed 7 tests/1412 assertions with Pint, JSON/YAML, diff, and exact PR04 scope checks passing. This metadata-only commit records that pointer; fresh exact-head checks and review remain pending."
+      },
+      {
+        "at": "2026-07-31T01:28:15Z",
+        "status": "ready_to_merge",
+        "note": "Exact head e69d0c1cdb806faaf8ec522a9287605fe7028396 passed all nine applicable required checks with staging parity skipped, has zero unresolved review threads, is CLEAN/MERGEABLE, and contains latest origin/main b5370fde7. The exact PR04 changed-file scope remains valid. This readiness metadata tail must independently repeat required checks and exact-head review before squash merge."
+      }
+    ],
+    "updated_at": "2026-07-31T01:28:15Z"
   }
 }

@@ -47461,3 +47461,55 @@ prs:
     deploy_allowed: false
     content_authority: backend candidate package; runtime authority unchanged
     repository_rule_impact: baseline package only; backend authority remains unchanged and public exposure does not change
+
+  - id: EN-PARITY-W1-MBTI-RESULT-ASSETS-01
+    repo: fap-api
+    base: main
+    branch: codex/en-parity-w1-mbti-result-assets-01
+    title: "EN-PARITY-W1-MBTI-RESULT-ASSETS-01: produce MBTI English result content assets"
+    status: ready_to_merge
+    depends_on:
+      - EN-PARITY-W1-MBTI-INVENTORY-01
+      - EN-PARITY-W1-MBTI-RESULT-AGENT-01
+    train_scope: en_parity_w1_mbti_result_asset_package
+    scope:
+      - Reconcile all 46 frozen result/report families while preserving the 24 complete controls without regeneration.
+      - Produce 21 unpublished English candidate assets for offer/CTA, traits.at_difference, and the 19 structurally incomplete canonical sections.
+      - Freeze one private-safe synthetic PDF reader fixture mapping as the explicit W9 target for the remaining producer row.
+      - Cover the free, preview, locked, full, entitlement, share, PDF, history/re-entry, renderer-label, and lifecycle surfaces with one mobile/desktop authority-field contract.
+      - Freeze a deterministic candidate package SHA without importing, activating, or publishing the package.
+    allowed_paths:
+      - backend/content_assets/en-content-parity/W1-mbti/result-content/**
+      - backend/tests/Feature/ContentAssets/MbtiResultEnglishPackageTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Read production attempts, reports, private URLs, orders, payments, accounts, scores, answers, recovery data, secrets, or private CMS records.
+      - Write a CMS or database row, revision, review, approval, import, publication, activation, entitlement, share response, PDF, or runtime content pack.
+      - Change public personality copy, comparison assets, fap-web, sitemap, llms, canonical, indexability, Search Channel state, or search submission.
+      - Add importer, publisher, migration, route, controller, service, scheduler, queue, or deploy logic.
+      - Describe producer self-checks as independent W9 QA or the unpublished candidate as live content.
+    validation:
+      - cd backend && php artisan test --filter=MbtiResultEnglishPackageTest
+      - cd backend && vendor/bin/pint --test tests/Feature/ContentAssets/MbtiResultEnglishPackageTest.php
+      - python3 -m json.tool backend/content_assets/en-content-parity/W1-mbti/result-content/package_manifest.json >/dev/null
+      - python3 -m json.tool backend/content_assets/en-content-parity/W1-mbti/result-content/inventory_reconciliation.json >/dev/null
+      - python3 -m json.tool backend/content_assets/en-content-parity/W1-mbti/result-content/entitlement_matrix.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - process guard before cd backend && bash scripts/verify_mbti.sh
+      - cd backend && bash scripts/verify_mbti.sh
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: backend candidate package; runtime authority unchanged
+    repository_rule_impact: unpublished baseline package only; backend authority remains unchanged and public exposure does not change
