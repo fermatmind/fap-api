@@ -643,6 +643,33 @@ final class PublicContentRuntimeMetricsService
         return $this->latestTimestamp($left, $right)?->toIso8601String();
     }
 
+    /**
+     * @return list<array{route_family:string,priority:string,locale:string,p95_ms:float,request_count:int}>
+     */
+    public function p95Exceedances(int $windowMinutes, float $thresholdMs): array
+    {
+        $result = $this->query($windowMinutes);
+        if (! $result['ok']) {
+            return [];
+        }
+
+        $exceedances = [];
+        foreach ($result['items'] as $item) {
+            $p95 = (float) ($item['p95_ms'] ?? 0);
+            if ($p95 > $thresholdMs && (int) ($item['request_count'] ?? 0) > 0) {
+                $exceedances[] = [
+                    'route_family' => (string) $item['route_family'],
+                    'priority' => (string) $item['priority'],
+                    'locale' => (string) $item['locale'],
+                    'p95_ms' => $p95,
+                    'request_count' => (int) $item['request_count'],
+                ];
+            }
+        }
+
+        return $exceedances;
+    }
+
     /** @param array<string, mixed> $group @return array<string, mixed> */
     private function presentGroup(array $group): array
     {
