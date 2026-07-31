@@ -101179,7 +101179,7 @@
     "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
     "status": "github_checks_pending",
     "depends_on": [],
-    "commit_sha": "93548b840fac9f786c29f53a751d5a7f06f1b159",
+    "commit_sha": "5de437e1579294b8232ad53d6e983271b4a2a93c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3421",
     "checks": {
       "production_read_only_inventory": {
@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "CI run 30598924082 and Code Scanning run 30598924307 passed all required jobs on metadata head 4fc675d446aec53a8a8212341ca54f701a902d5e. Exact-head review then identified camelCase identity-bearing alias keys and legacy vendor CSS gradients. Implementation 93548b840fac9f786c29f53a751d5a7f06f1b159 normalizes alias keys to snake_case and expands browser image-function coverage; required checks must rerun."
+        "evidence": "CI run 30599370188 and Code Scanning run 30599370190 passed all required jobs on metadata head 7042e109b60de8279b9b27a82b1a683ca51ba828. Exact-head review then identified encoded alias link targets and image-function text inside CSS strings. Implementation 5de437e1579294b8232ad53d6e983271b4a2a93c decodes HTML/percent URL forms and strips CSS quoted strings before media scanning; required checks must rerun."
       }
     },
     "scope_validation": {
@@ -101498,9 +101498,14 @@
         "at": "2026-07-31T02:34:38Z",
         "status": "github_checks_pending",
         "note": "CI run 30598924082 and Code Scanning run 30598924307 passed all required jobs on metadata head 4fc675d446aec53a8a8212341ca54f701a902d5e. Exact-head review then found camelCase identity-bearing keys could hide an alias and legacy WebKit gradients were not recognized as image functions. Implementation 93548b840fac9f786c29f53a751d5a7f06f1b159 applies the shared camelCase-to-snake_case normalization to alias keys and covers vendor image-set/gradient plus paint functions. Focused PHPUnit passes 30 tests / 257 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
+      },
+      {
+        "at": "2026-07-31T02:45:03Z",
+        "status": "github_checks_pending",
+        "note": "CI run 30599370188 and Code Scanning run 30599370190 passed all required jobs on metadata head 7042e109b60de8279b9b27a82b1a683ca51ba828. Exact-head review then found HTML-entity/percent-encoded alias URLs and harmless image-function text inside CSS strings. Implementation 5de437e1579294b8232ad53d6e983271b4a2a93c normalizes encoded link targets before alias matching and strips quoted CSS strings before comment/escape/function scanning while preserving functions outside strings. Focused PHPUnit passes 30 tests / 259 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
       }
     ],
-    "updated_at": "2026-07-31T02:34:38Z"
+    "updated_at": "2026-07-31T02:45:03Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
