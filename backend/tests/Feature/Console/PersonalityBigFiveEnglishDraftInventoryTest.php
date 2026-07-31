@@ -304,6 +304,19 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertFalse($camelCaseMediaFieldRow['text_only_compliant']);
         $this->assertSame('prohibited_content', $camelCaseMediaFieldRow['recommended_disposition']);
 
+        foreach (['coverUrl', 'thumbnailUrl'] as $mediaField) {
+            $working->forceFill(['snapshot_json' => [
+                'attributes' => $this->completeSnapshot('Candidate'),
+                $mediaField => 'https://private.invalid/media.webp',
+            ]])->saveQuietly();
+            $mediaFieldResult = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+            $mediaFieldRow = collect($mediaFieldResult['rows'])
+                ->firstWhere('logical_identity', 'domain:openness');
+
+            $this->assertFalse($mediaFieldRow['text_only_compliant']);
+            $this->assertSame('prohibited_content', $mediaFieldRow['recommended_disposition']);
+        }
+
         foreach ([
             '<svg viewBox="0 0 10 10"><path d="M0 0h10v10z"/></svg>',
             '<object data="https://private.invalid/embedded-image.svg"></object>',
@@ -340,6 +353,16 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             ->firstWhere('logical_identity', 'domain:openness');
 
         $this->assertTrue($nonImageMetadataRow['text_only_compliant']);
+
+        $working->forceFill(['snapshot_json' => [
+            'attributes' => $this->completeSnapshot('Candidate'),
+            'body' => 'The CSS function linear-gradient(red, blue) can be discussed as plain prose.',
+        ]])->saveQuietly();
+        $plainCssProse = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $plainCssProseRow = collect($plainCssProse['rows'])
+            ->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertTrue($plainCssProseRow['text_only_compliant']);
 
         $working->forceFill(['snapshot_json' => [
             'attributes' => $this->completeSnapshot('Candidate'),

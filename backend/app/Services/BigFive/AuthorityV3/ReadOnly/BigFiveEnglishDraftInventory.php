@@ -1017,10 +1017,7 @@ final class BigFiveEnglishDraftInventory
                 || preg_match('/<input\b[^>]*\btype\s*=\s*(?:"image"|\x27image\x27|image\b)/i', $value) === 1) {
                 return true;
             }
-            if (preg_match(
-                '/(?:url|image(?:-set)?|cross-fade|element|(?:linear|radial|conic)-gradient)\s*\(/i',
-                $value,
-            ) === 1) {
+            if ($this->containsCssImageReference($value)) {
                 return true;
             }
             preg_match_all('/!\[[^\]]*\]/', $value, $tokens, PREG_OFFSET_CAPTURE);
@@ -1040,11 +1037,43 @@ final class BigFiveEnglishDraftInventory
             return false;
         }
         foreach ($value as $key => $item) {
-            if (is_string($key)
-                && preg_match('/(?:image|media|hero|og_image|twitter_image)/i', $key) === 1) {
-                return true;
+            if (is_string($key)) {
+                $normalizedKey = preg_replace('/([A-Z]+)([A-Z][a-z])/', '$1_$2', $key);
+                $normalizedKey = preg_replace('/([a-z0-9])([A-Z])/', '$1_$2', (string) $normalizedKey);
+                $normalizedKey = strtolower((string) preg_replace('/[^a-zA-Z0-9]+/', '_', (string) $normalizedKey));
+                if (preg_match(
+                    '/(?:^|_)(?:images?|media|hero|cover|thumbnail|avatar|logo|icon|banner|poster|'
+                        .'background|og_image|twitter_image)(?:_|$)/',
+                    $normalizedKey,
+                ) === 1) {
+                    return true;
+                }
             }
             if ($this->containsMediaReference($item)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function containsCssImageReference(string $value): bool
+    {
+        $imageFunction = '(?:url|image(?:-set)?|cross-fade|element|(?:linear|radial|conic)-gradient)\s*\(';
+        $imageProperty = '(?:background(?:-image)?|border-image(?:-source)?|clip-path|content|cursor|'
+            .'filter|list-style(?:-image)?|mask(?:-image)?|offset-path|shape-outside)';
+
+        if (preg_match(
+            '/(?:^|[;{]\s*)'.$imageProperty.'\s*:\s*[^;}]*'.$imageFunction.'/i',
+            $value,
+        ) === 1) {
+            return true;
+        }
+
+        preg_match_all('/<[^>]+>/s', $value, $tags);
+        foreach ($tags[0] as $tag) {
+            $style = $this->htmlAttributeValue($tag, 'style');
+            if ($style !== null && preg_match('/'.$imageFunction.'/i', $style) === 1) {
                 return true;
             }
         }
