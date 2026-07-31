@@ -101781,8 +101781,13 @@
         "at": "2026-07-30T23:42:00Z",
         "status": "review_fix_local_verified",
         "note": "Exact head 9c4012056be4ee5a1b224c5eb24b3bac5d01a04b passed all nine required checks with staging parity skipped, had no main drift, then review found the canonical fixed identity scan missed the plural fixed identities boundary and falsely reported zero matches. Added frozen singular/plural forms, recursively derived exact JSON-pointer evidence, restored allowed_explicit_rejection, and aligned producer editorial evidence. The first focused run exposed an undefined local test variable; the scoped retry passed 7 tests/1388 assertions plus Pint, JSON, deterministic hash, diff, and scope checks. Candidate SHA is 129451a81fdbe5c4e9593324e7ad44985128a6f1eaf3996b63e1a1c0be2e982b; exact-head checks remain pending."
+      },
+      {
+        "at": "2026-07-30T23:44:00Z",
+        "status": "github_checks_pending",
+        "note": "During the plural-claim repair, scope validation detected origin/main had advanced to unrelated Career SSH env repair 276b6f8fd. Committed the isolated PR04 repair, integrated that exact main commit without conflict, and reran focused validation at 7 tests/1388 assertions with Pint, diff, and exact scope checks passing. Fresh exact-head checks remain pending."
       }
     ],
-    "updated_at": "2026-07-30T23:42:00Z"
+    "updated_at": "2026-07-30T23:44:00Z"
   }
 }

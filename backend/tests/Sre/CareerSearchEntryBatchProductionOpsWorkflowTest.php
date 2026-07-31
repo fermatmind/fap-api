@@ -708,6 +708,23 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
         ] as $required) {
             $this->assertStringContainsString($required, $workflow.$probe);
         }
+        $knownHostsStepStart = strpos($workflow, '- name: Install pinned SSH known hosts');
+        $inspectStepStart = strpos($workflow, '- name: Inspect aggregate runtime cache and fresh public state');
+        $this->assertNotFalse($knownHostsStepStart);
+        $this->assertNotFalse($inspectStepStart);
+        $knownHostsStep = substr(
+            $workflow,
+            $knownHostsStepStart,
+            $inspectStepStart - $knownHostsStepStart
+        );
+        $this->assertStringContainsString(
+            'DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}',
+            $knownHostsStep
+        );
+        $this->assertStringContainsString(
+            'DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}',
+            $knownHostsStep
+        );
         foreach ([
             'career.search_entry_batch.cache_post_readback_diagnostic_probe.v1',
             "'runtime_cache', 'public_fresh'",
