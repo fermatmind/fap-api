@@ -228,3 +228,34 @@ an unused known-hosts secret name. The aggregate inspection step was skipped,
 zero artifacts were produced, and no production read or write occurred. The
 recovery control binds that exact failed run and uses the repository-standard
 `SSH_KNOWN_HOSTS` secret plus pinned host-key lookup before allowing inspection.
+
+Successful post-readback diagnostic run `30594408300`, attempt `1`, proved the
+deploy runner and `www-data` resolve the same runtime identity and active
+payload set. All 100 cache targets were `ready_active`; locale-unsafe hrefs
+were zero in both runtime identities and the fresh public snapshot. Ten
+thin-module URLs remained in both active cache and fresh public delivery, so
+the receipt classified the state as
+`PASS_DIAGNOSTIC_REFRESH_PAYLOAD_INEFFECTIVE`. This means another blind refresh
+of the same generated payload cannot close the quality gate.
+
+`Career Search Entry Cache Thin-Source Diagnostic` is the only next diagnostic
+control. It binds the successful post-readback run, immutable receipt and
+artifact digests, diagnostic state, dual-identity runtime payload set, exact
+manifest, unchanged active release, and exact latest control plane. After a
+separate exact read-only authorization it may:
+
+- reproduce the same ten thin targets as both the deploy runner and
+  `www-data`;
+- emit only one-based manifest positions, locale, module counts, enumerated
+  surface-policy classes, and deterministic hashes;
+- perform guarded database reads only for the thin manifest positions and
+  report enumerated occupation, exact display-asset, 24-component, bilingual
+  page, crosswalk, and locale-surface gate results.
+
+The receipt never contains raw payloads, SQL, cache keys, server paths,
+topology, or exception text. It uploads only the final sanitized receipt, not
+the intermediate runtime or authority observations. The database guard rejects
+every non-read query. Cache/server/CMS/database writes, publication,
+indexability, queue, sitemap, llms, Search Channel, URL submission, deploy,
+rollback, retry, and non-target mutation remain prohibited. Merging this
+control does not authorize its production dispatch or any content/cache repair.

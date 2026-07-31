@@ -1,0 +1,401 @@
+name: Career Search Entry Cache Thin-Source Diagnostic
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_control_plane_sha:
+        description: Exact latest main SHA containing this diagnostic control
+        required: true
+        type: string
+      expected_release_sha:
+        description: Exact unchanged active production application SHA
+        required: true
+        type: string
+      expected_release_name:
+        description: Exact unchanged active production release name
+        required: true
+        type: string
+      source_diagnostic_run_id:
+        description: Exact successful post-readback diagnostic run
+        required: true
+        type: string
+      source_diagnostic_run_attempt:
+        description: Exact successful post-readback diagnostic attempt
+        required: true
+        type: string
+      expected_source_receipt_sha256:
+        description: Exact immutable post-readback diagnostic receipt SHA256
+        required: true
+        type: string
+      expected_source_artifact_digest:
+        description: Exact immutable post-readback diagnostic artifact digest
+        required: true
+        type: string
+      expected_manifest_sha256:
+        description: Exact 50-slug manifest SHA256
+        required: true
+        type: string
+      expected_diagnostic_state_sha256:
+        description: Exact source diagnostic state SHA256
+        required: true
+        type: string
+      expected_runtime_payload_set_sha256:
+        description: Exact dual-identity active runtime payload-set SHA256
+        required: true
+        type: string
+      expected_thin_url_count:
+        description: Exact source diagnostic thin-module URL count
+        required: true
+        type: string
+      operator_approval_phrase:
+        description: Exact read-only thin-source diagnostic operator phrase
+        required: true
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.repository }}-production
+  cancel-in-progress: false
+
+jobs:
+  eligibility:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      control_plane_sha: ${{ steps.validate.outputs.control_plane_sha }}
+      release_sha: ${{ steps.validate.outputs.release_sha }}
+      release_name: ${{ steps.validate.outputs.release_name }}
+      manifest_sha256: ${{ steps.validate.outputs.manifest_sha256 }}
+      source_diagnostic_run_id: ${{ steps.validate.outputs.source_diagnostic_run_id }}
+      source_diagnostic_run_attempt: ${{ steps.validate.outputs.source_diagnostic_run_attempt }}
+      source_receipt_sha256: ${{ steps.validate.outputs.source_receipt_sha256 }}
+      source_artifact_digest: ${{ steps.validate.outputs.source_artifact_digest }}
+      diagnostic_state_sha256: ${{ steps.validate.outputs.diagnostic_state_sha256 }}
+      runtime_payload_set_sha256: ${{ steps.validate.outputs.runtime_payload_set_sha256 }}
+      thin_url_count: ${{ steps.validate.outputs.thin_url_count }}
+    steps:
+      - name: Checkout exact thin-source diagnostic control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 0
+
+      - name: Bind latest main, successful aggregate diagnostic, and authorization
+        id: validate
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED_CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+          EXPECTED_RELEASE_SHA: ${{ inputs.expected_release_sha }}
+          EXPECTED_RELEASE_NAME: ${{ inputs.expected_release_name }}
+          SOURCE_DIAGNOSTIC_RUN_ID: ${{ inputs.source_diagnostic_run_id }}
+          SOURCE_DIAGNOSTIC_RUN_ATTEMPT: ${{ inputs.source_diagnostic_run_attempt }}
+          EXPECTED_SOURCE_RECEIPT_SHA256: ${{ inputs.expected_source_receipt_sha256 }}
+          EXPECTED_SOURCE_ARTIFACT_DIGEST: ${{ inputs.expected_source_artifact_digest }}
+          EXPECTED_MANIFEST_SHA256: ${{ inputs.expected_manifest_sha256 }}
+          EXPECTED_DIAGNOSTIC_STATE_SHA256: ${{ inputs.expected_diagnostic_state_sha256 }}
+          EXPECTED_RUNTIME_PAYLOAD_SET_SHA256: ${{ inputs.expected_runtime_payload_set_sha256 }}
+          EXPECTED_THIN_URL_COUNT: ${{ inputs.expected_thin_url_count }}
+          OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+          SOURCE_CONTROL_PLANE_SHA: 276b6f8fda3e90b144b00b60e99cde4aad1a9295
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = "refs/heads/main"
+          [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_RELEASE_NAME" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]
+          [[ "$SOURCE_DIAGNOSTIC_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$SOURCE_DIAGNOSTIC_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+          [[ "$EXPECTED_SOURCE_RECEIPT_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$EXPECTED_SOURCE_ARTIFACT_DIGEST" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$EXPECTED_MANIFEST_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$EXPECTED_DIAGNOSTIC_STATE_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$EXPECTED_RUNTIME_PAYLOAD_SET_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          test "$EXPECTED_THIN_URL_COUNT" = "10"
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          git merge-base --is-ancestor "$EXPECTED_RELEASE_SHA" origin/main
+
+          source_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${SOURCE_DIAGNOSTIC_RUN_ID}")"
+          jq -e \
+            --arg source_control "$SOURCE_CONTROL_PLANE_SHA" \
+            --argjson attempt "$SOURCE_DIAGNOSTIC_RUN_ATTEMPT" \
+            '.name == "Career Search Entry Cache Post-Readback Diagnostic"
+             and .path == ".github/workflows/career-search-entry-cache-post-readback-diagnostic.yml"
+             and .event == "workflow_dispatch"
+             and .status == "completed"
+             and .conclusion == "success"
+             and .head_branch == "main"
+             and .head_sha == $source_control
+             and .run_attempt == $attempt' <<<"$source_run" >/dev/null
+
+          artifact_name="career-search-entry-cache-post-readback-diagnostic-${SOURCE_DIAGNOSTIC_RUN_ID}-${SOURCE_DIAGNOSTIC_RUN_ATTEMPT}"
+          artifacts="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${SOURCE_DIAGNOSTIC_RUN_ID}/artifacts?per_page=100")"
+          jq -e \
+            --arg name "$artifact_name" \
+            --arg digest "sha256:${EXPECTED_SOURCE_ARTIFACT_DIGEST}" \
+            '[.artifacts[] | select(.name == $name and .expired == false and .digest == $digest)] | length == 1' \
+            <<<"$artifacts" >/dev/null
+          receipt_dir="$(mktemp -d)"
+          gh run download "$SOURCE_DIAGNOSTIC_RUN_ID" --name "$artifact_name" --dir "$receipt_dir"
+          receipt="$receipt_dir/career-search-entry-cache-post-readback-diagnostic.json"
+          test "$(sha256sum "$receipt" | awk '{print $1}')" = "$EXPECTED_SOURCE_RECEIPT_SHA256"
+          jq -e \
+            --arg release "$EXPECTED_RELEASE_SHA" \
+            --arg release_name "$EXPECTED_RELEASE_NAME" \
+            --arg manifest "$EXPECTED_MANIFEST_SHA256" \
+            --arg diagnostic_state "$EXPECTED_DIAGNOSTIC_STATE_SHA256" \
+            --arg runtime_payload "$EXPECTED_RUNTIME_PAYLOAD_SET_SHA256" \
+            --argjson run_id "$SOURCE_DIAGNOSTIC_RUN_ID" \
+            --argjson attempt "$SOURCE_DIAGNOSTIC_RUN_ATTEMPT" \
+            --argjson thin "$EXPECTED_THIN_URL_COUNT" \
+            '.contract_version == "career.search_entry_batch.cache_post_readback_diagnostic.v1"
+             and .status == "PASS_DIAGNOSTIC_REFRESH_PAYLOAD_INEFFECTIVE"
+             and .release_sha == $release
+             and .release_name == $release_name
+             and .manifest_sha256 == $manifest
+             and .diagnostic_state_sha256 == $diagnostic_state
+             and .deploy_runner_runtime_identity_sha256 == .php_runtime_identity_sha256
+             and .deploy_runner_payload_set_sha256 == $runtime_payload
+             and .php_runtime_payload_set_sha256 == $runtime_payload
+             and .deploy_runner_ready_active_count == 100
+             and .php_runtime_ready_active_count == 100
+             and .deploy_runner_bad_href_url_count == 0
+             and .php_runtime_bad_href_url_count == 0
+             and .deploy_runner_low_module_url_count == $thin
+             and .php_runtime_low_module_url_count == $thin
+             and .public_fresh_http_200_count == 100
+             and .public_fresh_transport_failure_count == 0
+             and .public_fresh_bad_href_url_count == 0
+             and .public_fresh_low_module_url_count == $thin
+             and .write_state == "none"
+             and .production_write_execution == false
+             and .server_write_count == 0
+             and .cache_write_count == 0
+             and .database_write_count == 0
+             and .cms_write_count == 0
+             and .search_channel_action_count == 0
+             and .deploy_count == 0
+             and .rollback_count == 0
+             and .workflow_run_id == $run_id
+             and .workflow_run_attempt == $attempt' "$receipt" >/dev/null
+
+          source_runs="$(gh api \
+            "repos/${GITHUB_REPOSITORY}/actions/workflows/career-search-entry-cache-post-readback-diagnostic.yml/runs?event=workflow_dispatch&per_page=100")"
+          jq -e \
+            --argjson source "$SOURCE_DIAGNOSTIC_RUN_ID" \
+            '[.workflow_runs[] | select(.id > $source)] | length == 0' <<<"$source_runs" >/dev/null
+          later_resume="$(gh api \
+            "repos/${GITHUB_REPOSITORY}/actions/workflows/career-search-entry-batch-cache-refresh-resume.yml/runs?event=workflow_dispatch&per_page=100")"
+          jq -e \
+            --argjson source "$SOURCE_DIAGNOSTIC_RUN_ID" \
+            '[.workflow_runs[] | select(.id > $source)] | length == 0' <<<"$later_resume" >/dev/null
+
+          expected_phrase="I explicitly approve one read-only Career search-entry thin-source diagnostic for post-readback diagnostic run ${SOURCE_DIAGNOSTIC_RUN_ID} attempt ${SOURCE_DIAGNOSTIC_RUN_ATTEMPT} receipt ${EXPECTED_SOURCE_RECEIPT_SHA256} artifact ${EXPECTED_SOURCE_ARTIFACT_DIGEST}, control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA}, active SHA ${EXPECTED_RELEASE_SHA}, manifest ${EXPECTED_MANIFEST_SHA256}, diagnostic state ${EXPECTED_DIAGNOSTIC_STATE_SHA256}, runtime payload set ${EXPECTED_RUNTIME_PAYLOAD_SET_SHA256} with ${EXPECTED_THIN_URL_COUNT} thin-module URLs; inspect only manifest-position and enumerated display-authority gates as deploy runner and www-data, with zero server write, cache write, CMS/DB write, retry, rollback, deploy, or Search Channel operation."
+          test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
+          {
+            echo "control_plane_sha=$EXPECTED_CONTROL_PLANE_SHA"
+            echo "release_sha=$EXPECTED_RELEASE_SHA"
+            echo "release_name=$EXPECTED_RELEASE_NAME"
+            echo "manifest_sha256=$EXPECTED_MANIFEST_SHA256"
+            echo "source_diagnostic_run_id=$SOURCE_DIAGNOSTIC_RUN_ID"
+            echo "source_diagnostic_run_attempt=$SOURCE_DIAGNOSTIC_RUN_ATTEMPT"
+            echo "source_receipt_sha256=$EXPECTED_SOURCE_RECEIPT_SHA256"
+            echo "source_artifact_digest=$EXPECTED_SOURCE_ARTIFACT_DIGEST"
+            echo "diagnostic_state_sha256=$EXPECTED_DIAGNOSTIC_STATE_SHA256"
+            echo "runtime_payload_set_sha256=$EXPECTED_RUNTIME_PAYLOAD_SET_SHA256"
+            echo "thin_url_count=$EXPECTED_THIN_URL_COUNT"
+          } >> "$GITHUB_OUTPUT"
+
+  diagnose:
+    needs: eligibility
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: production
+    steps:
+      - name: Checkout exact thin-source diagnostic control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ needs.eligibility.outputs.control_plane_sha }}
+          fetch-depth: 1
+
+      - name: Validate protected production topology
+        shell: bash
+        env:
+          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+          RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
+        run: |
+          set -euo pipefail
+          test -n "$DEPLOY_HOST"
+          test -n "$RETIRED_DEPLOY_HOST"
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        env:
+          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Inspect thin runtime positions and enumerated authority gates
+        shell: bash
+        env:
+          DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+          DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+          CONTROL_PLANE_SHA: ${{ needs.eligibility.outputs.control_plane_sha }}
+          EXPECTED_RELEASE_SHA: ${{ needs.eligibility.outputs.release_sha }}
+          EXPECTED_RELEASE_NAME: ${{ needs.eligibility.outputs.release_name }}
+          EXPECTED_MANIFEST_SHA256: ${{ needs.eligibility.outputs.manifest_sha256 }}
+          SOURCE_DIAGNOSTIC_RUN_ID: ${{ needs.eligibility.outputs.source_diagnostic_run_id }}
+          SOURCE_DIAGNOSTIC_RUN_ATTEMPT: ${{ needs.eligibility.outputs.source_diagnostic_run_attempt }}
+          EXPECTED_SOURCE_RECEIPT_SHA256: ${{ needs.eligibility.outputs.source_receipt_sha256 }}
+          EXPECTED_SOURCE_ARTIFACT_DIGEST: ${{ needs.eligibility.outputs.source_artifact_digest }}
+          EXPECTED_DIAGNOSTIC_STATE_SHA256: ${{ needs.eligibility.outputs.diagnostic_state_sha256 }}
+          EXPECTED_RUNTIME_PAYLOAD_SET_SHA256: ${{ needs.eligibility.outputs.runtime_payload_set_sha256 }}
+          EXPECTED_THIN_URL_COUNT: ${{ needs.eligibility.outputs.thin_url_count }}
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          probe="backend/scripts/career/career_search_entry_cache_thin_source_diagnostic.php"
+          probe_sha256="$(sha256sum "$probe" | awk '{print $1}')"
+          for variable in DEPLOY_PATH EXPECTED_RELEASE_SHA EXPECTED_RELEASE_NAME \
+            EXPECTED_MANIFEST_SHA256 EXPECTED_RUNTIME_PAYLOAD_SET_SHA256; do
+            printf -v "q_${variable}" '%q' "${!variable}"
+          done
+          base_env="DEPLOY_PATH=$q_DEPLOY_PATH EXPECTED_RELEASE_SHA=$q_EXPECTED_RELEASE_SHA EXPECTED_RELEASE_NAME=$q_EXPECTED_RELEASE_NAME EXPECTED_MANIFEST_SHA256=$q_EXPECTED_MANIFEST_SHA256 EXPECTED_RUNTIME_PAYLOAD_SET_SHA256=$q_EXPECTED_RUNTIME_PAYLOAD_SET_SHA256"
+          ssh_base=(
+            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10
+            -o ServerAliveInterval=20 -o ServerAliveCountMax=30
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST"
+          )
+          set +e
+          "${ssh_base[@]}" \
+            "$base_env CAREER_CACHE_THIN_SOURCE_PROBE_MODE=authority /usr/bin/php" \
+            < "$probe" > artifacts/deploy-runner-authority.json
+          deploy_status=$?
+          "${ssh_base[@]}" \
+            "sudo -n -u www-data -- env $base_env CAREER_CACHE_THIN_SOURCE_PROBE_MODE=runtime_cache /usr/bin/php" \
+            < "$probe" > artifacts/www-data-runtime.json
+          runtime_status=$?
+          set -e
+
+          diagnostic_state_sha256="$(
+            jq -S -c . artifacts/deploy-runner-authority.json artifacts/www-data-runtime.json \
+              | sha256sum | awk '{print $1}'
+          )"
+          jq -s \
+            --arg control "$CONTROL_PLANE_SHA" \
+            --arg probe "$probe_sha256" \
+            --arg source_receipt "$EXPECTED_SOURCE_RECEIPT_SHA256" \
+            --arg source_artifact "$EXPECTED_SOURCE_ARTIFACT_DIGEST" \
+            --arg source_state "$EXPECTED_DIAGNOSTIC_STATE_SHA256" \
+            --arg expected_payload "$EXPECTED_RUNTIME_PAYLOAD_SET_SHA256" \
+            --arg diagnostic_state "$diagnostic_state_sha256" \
+            --argjson source_run "$SOURCE_DIAGNOSTIC_RUN_ID" \
+            --argjson source_attempt "$SOURCE_DIAGNOSTIC_RUN_ATTEMPT" \
+            --argjson expected_thin "$EXPECTED_THIN_URL_COUNT" \
+            --argjson run_id "$GITHUB_RUN_ID" \
+            --argjson run_attempt "$GITHUB_RUN_ATTEMPT" \
+            '.[0] as $deploy
+             | .[1] as $runtime
+             | {
+                 contract_version: "career.search_entry_batch.cache_thin_source_diagnostic.v1",
+                 status: (
+                   if ($deploy.status != "PASS_PROBE_COMPLETE"
+                     or $runtime.status != "PASS_PROBE_COMPLETE") then
+                     "HOLD_THIN_SOURCE_DIAGNOSTIC_INCOMPLETE"
+                   elif ($deploy.runtime_identity_sha256 != $runtime.runtime_identity_sha256
+                     or $deploy.runtime_payload_set_sha256 != $runtime.runtime_payload_set_sha256
+                     or $deploy.runtime_payload_set_sha256 != $expected_payload
+                     or $deploy.thin_target_set_sha256 != $runtime.thin_target_set_sha256
+                     or $deploy.thin_url_count != $expected_thin
+                     or $runtime.thin_url_count != $expected_thin) then
+                     "HOLD_THIN_SOURCE_RUNTIME_IDENTITY_MISMATCH"
+                   elif ($deploy.authority_rows | length) != $deploy.thin_slug_count then
+                     "HOLD_THIN_SOURCE_AUTHORITY_INCOMPLETE"
+                   elif ([ $deploy.authority_rows[].classification ]
+                     | all(. == "bundle_resolution_fell_back_to_runtime_shell")) then
+                     "PASS_THIN_SOURCE_BUNDLE_FALLBACK"
+                   elif ([ $deploy.authority_rows[].classification ]
+                     | any(. == "exact_display_asset_missing"
+                       or . == "exact_display_asset_duplicate"
+                       or . == "component_order_invalid"
+                       or . == "bilingual_pages_missing"
+                       or . == "crosswalk_authority_invalid"
+                       or . == "display_surface_gate_failed"
+                       or . == "occupation_identity_invalid")) then
+                     "PASS_THIN_SOURCE_AUTHORITY_REPAIR_REQUIRED"
+                   else
+                     "PASS_THIN_SOURCE_RUNTIME_REPAIR_REQUIRED"
+                   end
+                 ),
+                 release_sha: $deploy.release_sha,
+                 release_name: $deploy.release_name,
+                 manifest_sha256: $deploy.manifest_sha256,
+                 runtime_identity_sha256: $deploy.runtime_identity_sha256,
+                 runtime_payload_set_sha256: $deploy.runtime_payload_set_sha256,
+                 ready_active_count: $deploy.ready_active_count,
+                 thin_url_count: $deploy.thin_url_count,
+                 thin_slug_count: $deploy.thin_slug_count,
+                 thin_target_set_sha256: $deploy.thin_target_set_sha256,
+                 thin_rows: $deploy.thin_rows,
+                 authority_rows: $deploy.authority_rows,
+                 authority_state_sha256: $deploy.authority_state_sha256,
+                 diagnostic_state_sha256: $diagnostic_state,
+                 source_diagnostic_run_id: $source_run,
+                 source_diagnostic_run_attempt: $source_attempt,
+                 source_diagnostic_receipt_sha256: $source_receipt,
+                 source_diagnostic_artifact_digest: $source_artifact,
+                 source_diagnostic_state_sha256: $source_state,
+                 control_plane_sha: $control,
+                 probe_sha256: $probe,
+                 workflow_run_id: $run_id,
+                 workflow_run_attempt: $run_attempt,
+                 write_state: "none",
+                 production_write_execution: false,
+                 server_write_count: 0,
+                 cache_write_count: 0,
+                 database_write_count: 0,
+                 cms_write_count: 0,
+                 publication_write_count: 0,
+                 indexability_write_count: 0,
+                 queue_dispatch_count: 0,
+                 sitemap_write_count: 0,
+                 llms_write_count: 0,
+                 search_channel_action_count: 0,
+                 url_submission_count: 0,
+                 deploy_count: 0,
+                 rollback_count: 0
+               }' \
+            artifacts/deploy-runner-authority.json artifacts/www-data-runtime.json \
+            > artifacts/career-search-entry-cache-thin-source-diagnostic.json
+          test "$deploy_status" -eq 0
+          test "$runtime_status" -eq 0
+
+      - name: Upload sanitized immutable thin-source diagnostic receipt
+        if: always()
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4
+        with:
+          name: career-search-entry-cache-thin-source-diagnostic-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/career-search-entry-cache-thin-source-diagnostic.json
+          if-no-files-found: error
+          retention-days: 90
