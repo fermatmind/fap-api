@@ -9,6 +9,7 @@ use App\Services\Commerce\PaymentGateway\AlipayGateway;
 use App\Services\Commerce\PaymentGateway\BillingGateway;
 use App\Services\Commerce\PaymentGateway\LemonSqueezyGateway;
 use App\Services\Commerce\PaymentGateway\StripeGateway;
+use App\Services\Commerce\PaymentGateway\WechatMiniVirtualGateway;
 use App\Services\Commerce\PaymentGateway\WechatPayGateway;
 use App\Services\Commerce\Webhook\PaymentWebhookHandler;
 use App\Services\Observability\BigFiveTelemetry;
@@ -148,6 +149,7 @@ class PaymentWebhookProcessor
             'billing' => (new BillingGateway)->normalizePayload($payload),
             'lemonsqueezy' => (new LemonSqueezyGateway)->normalizePayload($payload),
             'wechatpay' => (new WechatPayGateway)->normalizePayload($payload),
+            'wechat_mini_virtual' => (new WechatMiniVirtualGateway)->normalizePayload($payload),
             'alipay' => (new AlipayGateway)->normalizePayload($payload),
             default => $payload,
         };

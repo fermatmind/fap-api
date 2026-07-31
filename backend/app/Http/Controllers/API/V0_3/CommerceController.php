@@ -13,6 +13,7 @@ use App\Services\Commerce\FreemiumLocalePolicy;
 use App\Services\Commerce\MbtiAccessHubBuilder;
 use App\Services\Commerce\OrderManager;
 use App\Services\Commerce\SkuCatalog;
+use App\Services\Commerce\WechatMiniVirtualPaymentService;
 use App\Services\Email\EmailCaptureService;
 use App\Services\Mbti\MbtiPublicFormSummaryBuilder;
 use App\Services\Payments\PaymentProviderRegistry;
@@ -49,6 +50,7 @@ class CommerceController extends Controller
         private ResultAccessTokenService $resultAccessTokens,
         private PendingOrderCompensationService $pendingOrderCompensation,
         private FreemiumLocalePolicy $freemiumLocalePolicy,
+        private WechatMiniVirtualPaymentService $wechatMiniVirtual,
     ) {}
 
     /**
@@ -89,6 +91,10 @@ class CommerceController extends Controller
             'channel' => ['nullable', 'string', 'max:64'],
             'provider_app' => ['nullable', 'string', 'max:128'],
             'idempotency_key' => ['nullable', 'string', 'max:128'],
+            'wx_login_code' => ['nullable', 'string', 'max:128'],
+            'amount_cents' => ['prohibited'],
+            'currency' => ['prohibited'],
+            'goodsPrice' => ['prohibited'],
             'org_id' => ['prohibited'],
             'user_id' => ['prohibited'],
             'anon_id' => ['prohibited'],
@@ -117,12 +123,29 @@ class CommerceController extends Controller
             $userId !== null ? (string) $userId : null,
             $anonId !== null ? (string) $anonId : null
         );
-        $localePolicyViolation = $this->freemiumLocalePolicyOrderViolation(
-            $request,
-            $payload,
-            $targetAttemptId,
-            $orgId
-        );
+        if ($provider === 'wechat_mini_virtual') {
+            $eligibility = $this->wechatMiniVirtual->validateOrderEligibility(
+                $orgId,
+                $userId !== null ? (string) $userId : null,
+                $anonId !== null ? (string) $anonId : null,
+                $targetAttemptId,
+                (string) $payload['sku'],
+                (int) ($payload['quantity'] ?? 1)
+            );
+            if (($eligibility['ok'] ?? false) !== true) {
+                return response()->json($eligibility, (int) ($eligibility['status'] ?? 422));
+            }
+        }
+        // The three-channel MBTI contract is a distinct backend authority
+        // (fixed 499 CNY) from the legacy web-only zh-CN 199 offer.
+        $localePolicyViolation = $provider === 'wechat_mini_virtual'
+            ? null
+            : $this->freemiumLocalePolicyOrderViolation(
+                $request,
+                $payload,
+                $targetAttemptId,
+                $orgId
+            );
         if ($localePolicyViolation !== null) {
             return $localePolicyViolation;
         }
@@ -157,10 +180,59 @@ class CommerceController extends Controller
             abort($status, $message !== '' ? $message : 'request failed.');
         }
 
-        return response()->json([
+        $responsePayload = [
             'ok' => true,
             'order_no' => $result['order_no'] ?? null,
-        ]);
+        ];
+        if ($provider === 'wechat_mini_virtual') {
+            $order = is_object($result['order'] ?? null)
+                ? $result['order']
+                : $this->orders->findOrderByOrderNo((string) ($result['order_no'] ?? ''), $orgId);
+            if ($order === null) {
+                return response()->json([
+                    'ok' => false,
+                    'error_code' => 'ORDER_NOT_FOUND',
+                    'message' => 'order not found after creation.',
+                ], 500);
+            }
+            $paymentAction = $this->wechatMiniVirtual->createPaymentAction(
+                $order,
+                (string) ($payload['wx_login_code'] ?? '')
+            );
+            if (($paymentAction['ok'] ?? false) !== true) {
+                return response()->json($paymentAction, (int) ($paymentAction['status'] ?? 422));
+            }
+            $responsePayload['pay'] = $paymentAction['pay'] ?? null;
+        }
+
+        return response()->json($responsePayload);
+    }
+
+    /**
+     * POST /api/v0.3/orders/{order_no}/wechat-mini-virtual/reconcile
+     */
+    public function reconcileWechatMiniVirtual(Request $request, string $order_no): JsonResponse
+    {
+        $orgId = $this->orgContext->orgId();
+        $userId = $this->orgContext->userId();
+        $anonId = $this->resolveAnonId($request);
+        $owned = $this->orders->getOrder(
+            $orgId,
+            $userId !== null ? (string) $userId : null,
+            $anonId,
+            $order_no
+        );
+        if (($owned['ok'] ?? false) !== true || ! is_object($owned['order'] ?? null)) {
+            return response()->json([
+                'ok' => false,
+                'error_code' => (string) ($owned['error_code'] ?? 'ORDER_NOT_FOUND'),
+                'message' => (string) ($owned['message'] ?? 'order not found.'),
+            ], (int) (($owned['error_code'] ?? '') === 'ORDER_NOT_FOUND' ? 404 : 403));
+        }
+
+        $result = $this->wechatMiniVirtual->reconcile($owned['order']);
+
+        return response()->json($result, (int) (($result['ok'] ?? false) ? 200 : ($result['status'] ?? 502)));
     }
 
     /**
@@ -1829,6 +1901,9 @@ class CommerceController extends Controller
             $providerApp = match (strtolower(trim($provider))) {
                 'wechatpay' => $channel === 'wechat_miniapp'
                     ? $this->trimNullableString(config('pay.wechat.default.mini_app_id', config('pay.wechat.default.mp_app_id', config('pay.wechat.default.app_id', ''))))
+                    : null,
+                'wechat_mini_virtual' => $channel === 'wechat_miniapp'
+                    ? $this->trimNullableString(config('payments.wechat_mini_virtual.app_id', ''))
                     : null,
                 'alipay' => $channel === 'alipay_miniapp'
                     ? $this->trimNullableString(config('pay.alipay.default.app_id', ''))

@@ -8,6 +8,7 @@ use App\Services\Commerce\PaymentGateway\LemonSqueezyGateway;
 use App\Services\Commerce\PaymentGateway\PaymentGatewayInterface;
 use App\Services\Commerce\PaymentGateway\StripeGateway;
 use App\Services\Commerce\PaymentWebhookProcessor;
+use App\Services\Commerce\WechatMiniVirtualPaymentService;
 use App\Services\Payments\PaymentProviderRegistry;
 use App\Support\Logging\SensitiveDiagnosticRedactor;
 use Illuminate\Http\JsonResponse;
@@ -28,6 +29,7 @@ final class PaymentWebhookController extends Controller
     public function __construct(
         private PaymentWebhookProcessor $processor,
         private PaymentProviderRegistry $paymentProviders,
+        private WechatMiniVirtualPaymentService $wechatMiniVirtual,
     ) {}
 
     public function handle(Request $request, string $provider): Response
@@ -43,6 +45,10 @@ final class PaymentWebhookController extends Controller
         }
 
         $requestId = $this->resolveRequestId($request);
+
+        if ($provider === 'wechat_mini_virtual') {
+            return $this->handleWechatMiniVirtual($request);
+        }
 
         if ($provider === 'wechatpay') {
             return $this->handleWechatpay($request, $provider, $requestId);
@@ -62,6 +68,27 @@ final class PaymentWebhookController extends Controller
         }
 
         return $this->jsonResult($result);
+    }
+
+    private function handleWechatMiniVirtual(Request $request): Response
+    {
+        $result = $this->wechatMiniVirtual->handleCallback($request);
+        if (($result['ok'] ?? false) !== true) {
+            return $this->jsonResult($result);
+        }
+
+        if (($result['ack_format'] ?? '') === 'xml') {
+            return response(
+                '<xml><ErrCode>0</ErrCode><ErrMsg><![CDATA[success]]></ErrMsg></xml>',
+                200,
+                ['Content-Type' => 'application/xml; charset=UTF-8']
+            );
+        }
+
+        return response()->json([
+            'ErrCode' => 0,
+            'ErrMsg' => 'success',
+        ]);
     }
 
     private function handleWechatpay(Request $request, string $provider, string $requestId): Response
