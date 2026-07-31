@@ -102422,14 +102422,18 @@
         "evidence": "Package validator passes twice byte-identically with SHA aea87a8c0545d1be6cb1a32ff981576d62d077a8eab36834f34ec9d41c1bfc81. Focused package PHPUnit passes 7 tests / 517 assertions with exact 118-row reconciliation, all-30 facet semantic anchors, required-key coverage, and complete package-file binding; runtime-freeze explicit-file regression passes 2 tests / 6 assertions with unknown package paths blocked; composer test:content passes 4 tests / 62 assertions. Scoped Pint, PHP syntax, JSON/JSONL/YAML parsing, CJK/private-field/public-URL/fixed-type/forbidden-claim scans, deterministic SHA recomputation, diff checks, and exact allowlist validation pass."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "PR 3451 all-facet semantic repair head be8e157199b43d0431dde0d3ccf1c6cb084aa1bf requires fresh exact-head checks and review after E2, N4, and all-30 semantic anchor locking."
+        "status": "pass",
+        "evidence": "Exact head 37d6bb473d8a0f8072e4920fd4c8813fa3ea47c2 passed all nine applicable checks in CI run 30611920168 and Code Scanning run 30611920174: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep OSS, and semgrep SARIF upload. verify-staging-parity was skipped and is not required."
+      },
+      "optional_codex_review": {
+        "status": "external_nonblocking",
+        "evidence": "An exact-head review request returned the explicit Codex usage-limit comment at 2026-07-31T07:19:29Z without generating a new review. The external account/service quota is recorded in generated/pr-train-sidecar-issues; repo policy does not require this review, GitHub reports CLEAN/MERGEABLE, and all prior review threads are resolved."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -102499,8 +102503,13 @@
         "at": "2026-07-31T07:09:01Z",
         "status": "review_fix_local_checks_passed",
         "note": "Exact-head review on 65b8cd1f09d16b03153a5a1468bd2567ac6e32b4 identified E2 group-participation and N4 social-discomfort drift. Reconciled all 30 facet descriptions directly against the pinned glossary and added per-code semantic anchors enforced by both validator and focused tests, so future drift in any facet fails closed. E2 now covers multi-person settings, social density, and energy from groups; N4 covers discomfort, self-monitoring, and withdrawal under gaze, evaluation, or social exposure. Package SHA is aea87a8c0545d1be6cb1a32ff981576d62d077a8eab36834f34ec9d41c1bfc81. Validator passes twice; package suite passes 7 tests / 517 assertions, classifier and content suites pass, and Pint, parsers, diff, and scope checks pass."
+      },
+      {
+        "at": "2026-07-31T07:23:51Z",
+        "status": "ready_to_merge",
+        "note": "Exact head 37d6bb473d8a0f8072e4920fd4c8813fa3ea47c2, containing semantic implementation head be8e157199b43d0431dde0d3ccf1c6cb084aa1bf and immutable package SHA aea87a8c0545d1be6cb1a32ff981576d62d077a8eab36834f34ec9d41c1bfc81, passed all nine applicable required checks. All prior review threads are resolved. A new optional Codex review could not be generated because the external account review quota was exhausted; the non-required blocker is recorded in the sidecar, repo policy requires no review, and GitHub reports CLEAN/MERGEABLE."
       }
     ],
-    "updated_at": "2026-07-31T07:09:01Z"
+    "updated_at": "2026-07-31T07:23:51Z"
   }
 }
