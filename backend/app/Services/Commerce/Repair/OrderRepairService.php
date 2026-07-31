@@ -31,7 +31,20 @@ final class OrderRepairService
      */
     public function repairPaidOrder(object $order, array $context = []): array
     {
-        $freshOrder = $this->reloadOrder($order);
+        return DB::transaction(
+            fn (): array => $this->repairPaidOrderLocked($order, $context),
+            3
+        );
+    }
+
+    /**
+     * @param  Order|object  $order
+     * @param  array<string,mixed>  $context
+     * @return array<string,mixed>
+     */
+    private function repairPaidOrderLocked(object $order, array $context): array
+    {
+        $freshOrder = $this->reloadOrder($order, true);
         if ($freshOrder === null) {
             return $this->failure('ORDER_NOT_FOUND', 'order not found.', $order, $context);
         }
@@ -39,6 +52,14 @@ final class OrderRepairService
         $paymentState = strtolower(trim((string) ($freshOrder->payment_state ?? '')));
         if ($paymentState !== Order::PAYMENT_STATE_PAID) {
             return $this->skip('PAYMENT_NOT_PAID', 'order payment_state is not paid.', $freshOrder, $context);
+        }
+        if ($this->isIntentionallyRevoked($freshOrder)) {
+            return $this->skip(
+                'GRANT_INTENTIONALLY_REVOKED',
+                'order grant was intentionally revoked.',
+                $freshOrder,
+                $context
+            );
         }
 
         $skuRow = $this->resolveSkuRow($freshOrder);
@@ -126,7 +147,7 @@ final class OrderRepairService
             );
         }
 
-        $activeGrant = $this->resolveActiveGrantForOrder($freshOrder, $benefitCode);
+        $activeGrant = $this->resolveActiveGrantForOrder($freshOrder, $benefitCode, true);
         if ($activeGrant !== null && $giftRequest === null) {
             $this->orders->syncGrantState((string) $freshOrder->order_no, (int) $freshOrder->org_id, Order::GRANT_STATE_GRANTED);
             $transition = $this->ensureFulfilled($freshOrder);
@@ -244,8 +265,11 @@ final class OrderRepairService
     /**
      * @param  Order|object  $order
      */
-    public function resolveActiveGrantForOrder(object $order, ?string $benefitCode = null): ?object
-    {
+    public function resolveActiveGrantForOrder(
+        object $order,
+        ?string $benefitCode = null,
+        bool $lockForUpdate = false
+    ): ?object {
         $orgId = (int) ($order->org_id ?? 0);
         $orderNo = trim((string) ($order->order_no ?? ''));
         $attemptId = trim((string) ($order->target_attempt_id ?? ''));
@@ -281,6 +305,9 @@ final class OrderRepairService
         if ($benefitCode !== '') {
             $query->where('benefit_code', $benefitCode);
         }
+        if ($lockForUpdate) {
+            $query->lockForUpdate();
+        }
 
         return $query->first();
     }
@@ -296,6 +323,9 @@ final class OrderRepairService
         }
 
         if (! $this->isPaidReportUnlockOrder($freshOrder)) {
+            return false;
+        }
+        if ($this->isIntentionallyRevoked($freshOrder)) {
             return false;
         }
 
@@ -445,7 +475,7 @@ final class OrderRepairService
     /**
      * @param  Order|object  $order
      */
-    private function reloadOrder(object $order): ?object
+    private function reloadOrder(object $order, bool $lockForUpdate = false): ?object
     {
         $orgId = (int) ($order->org_id ?? 0);
         $orderNo = trim((string) ($order->order_no ?? ''));
@@ -456,16 +486,29 @@ final class OrderRepairService
                 return null;
             }
 
-            return DB::table('orders')
+            $query = DB::table('orders')
                 ->where('id', $id)
-                ->when($orgId > 0 || isset($order->org_id), fn ($query) => $query->where('org_id', $orgId))
-                ->first();
+                ->when($orgId > 0 || isset($order->org_id), fn ($query) => $query->where('org_id', $orgId));
+            if ($lockForUpdate) {
+                $query->lockForUpdate();
+            }
+
+            return $query->first();
         }
 
-        return DB::table('orders')
+        $query = DB::table('orders')
             ->where('order_no', $orderNo)
-            ->where('org_id', $orgId)
-            ->first();
+            ->where('org_id', $orgId);
+        if ($lockForUpdate) {
+            $query->lockForUpdate();
+        }
+
+        return $query->first();
+    }
+
+    private function isIntentionallyRevoked(object $order): bool
+    {
+        return strtolower(trim((string) ($order->grant_state ?? ''))) === Order::GRANT_STATE_REVOKED;
     }
 
     private function resolveSkuRow(object $order): ?object

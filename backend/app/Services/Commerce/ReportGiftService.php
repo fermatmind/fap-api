@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Commerce;
 
+use App\Models\PaymentAttempt;
 use App\Services\Payments\PaymentProviderRegistry;
 use App\Services\Report\ReportAccess;
 use Illuminate\Database\QueryException;
@@ -581,7 +582,22 @@ final class ReportGiftService
     public function releaseReservationForOrder(object $order, string $paymentState): void
     {
         $orderId = trim((string) ($order->id ?? ''));
-        if ($orderId === '') {
+        $orderNo = trim((string) ($order->order_no ?? ''));
+        $orgId = (int) ($order->org_id ?? 0);
+        if ($orderId === '' || $orderNo === '') {
+            return;
+        }
+
+        $paymentAttempt = $this->orders->latestPaymentAttemptForOrder($orderNo, $orgId);
+        if ($paymentAttempt !== null && ! in_array(
+            PaymentAttempt::normalizedState($paymentAttempt->state ?? null),
+            [
+                PaymentAttempt::STATE_FAILED,
+                PaymentAttempt::STATE_CANCELED,
+                PaymentAttempt::STATE_EXPIRED,
+            ],
+            true
+        )) {
             return;
         }
 

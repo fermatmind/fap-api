@@ -382,11 +382,6 @@ class WebhookEntitlementService
 
                             return $transition;
                         }
-                        app(ReportGiftService::class)->releaseReservationForOrder(
-                            $order,
-                            $nonSuccessPaymentState
-                        );
-
                         if ($boundPaymentAttempt !== null) {
                             $this->core->orderManager()->advancePaymentAttempt((string) ($boundPaymentAttempt->id ?? ''), [
                                 'state' => match ($nonSuccessPaymentState) {
@@ -399,6 +394,10 @@ class WebhookEntitlementService
                                 'verified_at' => $eventAt,
                             ]);
                         }
+                        app(ReportGiftService::class)->releaseReservationForOrder(
+                            $order,
+                            $nonSuccessPaymentState
+                        );
                         $this->core->markEventProcessed($provider, $providerEventId);
 
                         return [
