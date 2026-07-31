@@ -6191,7 +6191,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2256",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "ready_to_merge",
+    "status": "github_checks_pending",
     "title": "B5-RESULT-WEEKLY-OPS-RUNNER-01: Schedule Big Five V2 weekly ops report",
     "train_scope": "big5_result_page_v2_asset_agent_automation",
     "transitions": [
@@ -101179,7 +101179,7 @@
     "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
     "status": "ready_to_merge",
     "depends_on": [],
-    "commit_sha": "fb14e50244bddd653d06947432055201be099d35",
+    "commit_sha": "f0886e9acba8ab0a5acc08504e5bafc50afd9308",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3421",
     "checks": {
       "production_read_only_inventory": {
@@ -101191,14 +101191,14 @@
         "evidence": "Focused PHPUnit, scoped Pint, PHP syntax, JSON/YAML parsing, deterministic artifact invariants, diff checks, and exact allowlist validation passed. Production historical revision QA SHA-256 109e995dd9c900b978d5ceaca1f7851607d4332c8bf9a734c705bd32982dd11e proves 50 rows, database fingerprint unchanged, and zero CJK/media/private-field leakage."
       },
       "github_required_checks": {
-        "status": "pass",
-        "evidence": "CI run 30594758241 and Code Scanning run 30594758293 passed all required jobs on exact metadata head e887aa2316555b459f9578842db313c49e5f79c9. Staging parity was skipped as expected and is not required. Exact-head implementation review is resolved; the only remaining metadata finding identified and is resolved by restoring two unrelated train statuses to their origin/main values."
+        "status": "pending",
+        "evidence": "CI run 30595271594 and Code Scanning run 30595271629 passed all required jobs on metadata head c13e570466fc372029644752cdc7d0c57384df4d. Exact-head review then identified over-broad plain-prose CSS function matching and missing cover/thumbnail media key families. Implementation f0886e9acba8ab0a5acc08504e5bafc50afd9308 scopes CSS image functions to image-capable declarations or style attributes and rejects normalized cover/thumbnail keys; required checks must rerun."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -101453,9 +101453,14 @@
         "at": "2026-07-31T01:00:13Z",
         "status": "ready_to_merge",
         "note": "Exact implementation fb14e50244bddd653d06947432055201be099d35 is bound by metadata head e887aa2316555b459f9578842db313c49e5f79c9. CI run 30594758241 and Code Scanning run 30594758293 passed all required jobs, GitHub reports CLEAN/MERGEABLE, exact eight-path scope validation is clean, and all implementation review threads are resolved. The two unrelated train statuses accidentally changed by an earlier generic patch are restored exactly to origin/main ready_to_merge. This metadata-only tail must repeat required checks before squash merge."
+      },
+      {
+        "at": "2026-07-31T01:12:33Z",
+        "status": "github_checks_pending",
+        "note": "CI run 30595271594 and Code Scanning run 30595271629 passed all required jobs on metadata head c13e570466fc372029644752cdc7d0c57384df4d. Exact-head review then found that plain prose mentioning CSS image functions was rejected and normalized cover/thumbnail media keys were not rejected. Implementation f0886e9acba8ab0a5acc08504e5bafc50afd9308 confines CSS detection to image-capable declarations or actual style attributes and expands normalized media-key families. Focused PHPUnit passes 30 tests / 237 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
       }
     ],
-    "updated_at": "2026-07-31T01:00:13Z"
+    "updated_at": "2026-07-31T01:12:33Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
