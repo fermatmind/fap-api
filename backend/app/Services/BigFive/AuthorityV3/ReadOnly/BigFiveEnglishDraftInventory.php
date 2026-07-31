@@ -1065,7 +1065,9 @@ final class BigFiveEnglishDraftInventory
 
     private function containsCssImageReference(string $value): bool
     {
-        $imageFunction = '(?:url|image(?:-set)?|cross-fade|element|(?:linear|radial|conic)-gradient)\s*\(';
+        $imageFunction = '(?:url|image|cross-fade|element|paint|'
+            .'(?:-(?:webkit|moz)-)?image-set|'
+            .'(?:-(?:webkit|moz)-)?(?:linear|radial|conic)-gradient|-webkit-gradient)\s*\(';
         $imageValueFunction = '(?:'.$imageFunction.'|(?:var|env)\s*\()';
         $imageProperty = '(?:background(?:-image)?|border-image(?:-source)?|clip-path|content|cursor|'
             .'filter|list-style(?:-image)?|mask(?:-image)?|offset-path|shape-outside)';
@@ -1245,10 +1247,20 @@ final class BigFiveEnglishDraftInventory
                 'slug',
                 'url',
             ];
+            $normalizedParentKey = preg_replace(
+                '/([A-Z]+)([A-Z][a-z])/',
+                '$1_$2',
+                $parentKey ?? '',
+            );
+            $normalizedParentKey = preg_replace(
+                '/([a-z0-9])([A-Z])/',
+                '$1_$2',
+                (string) $normalizedParentKey,
+            );
             $normalizedParentKey = strtolower((string) preg_replace(
                 '/[^a-zA-Z0-9]+/',
                 '_',
-                $parentKey ?? '',
+                (string) $normalizedParentKey,
             ));
             foreach (array_keys(BigFiveCanonicalRouteCatalog::EN_REDIRECT_ONLY_ALIAS_TARGETS) as $alias) {
                 if ((in_array($normalizedParentKey, $identityBearingKeys, true)

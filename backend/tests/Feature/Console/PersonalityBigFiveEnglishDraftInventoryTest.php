@@ -325,6 +325,7 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             '<div style="background-image:\75rl(hero.webp)">Text</div>',
             '<div style="background-\69mage:url(hero.webp)">Text</div>',
             '<div style="background-image:&#117;rl(hero.webp)">Text</div>',
+            '<div style="background-image:-webkit-gradient(linear,left top,left bottom,from(red),to(blue))">Text</div>',
             '<div style="background: image-set(url(hero.webp) 1x, url(hero@2x.webp) 2x)">Text</div>',
             '<div style="background-image:var(--hero)">Text</div>',
             '<div style="shape-outside:url(hero.webp)">Text</div>',
@@ -1002,6 +1003,15 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
 
         $this->assertFalse($proseRow['legacy_alias_reference']);
         $this->assertSame('valid_unpublished_candidate', $proseRow['current_revision_disposition']);
+
+        $snapshot['canonicalUrl'] = 'high-openness';
+        $working->forceFill(['snapshot_json' => $snapshot])->saveQuietly();
+        $camelCaseIdentityResult = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $camelCaseIdentityRow = collect($camelCaseIdentityResult['rows'])
+            ->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertTrue($camelCaseIdentityRow['legacy_alias_reference']);
+        $this->assertSame('prohibited_content', $camelCaseIdentityRow['current_revision_disposition']);
     }
 
     public function test_prohibited_history_blocks_without_erasing_current_candidate_classification(): void
