@@ -9,6 +9,7 @@ use App\Services\Cms\ContentPagePublishGate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 final class ContentPage extends Model
@@ -217,6 +218,26 @@ final class ContentPage extends Model
             app(ContentPagePublishGate::class)->assertPasses($page);
 
             $page->source_version_hash = $page->computeSourceVersionHash();
+        });
+
+        static::saved(function (self $page): void {
+            try {
+                Cache::forget(
+                    "content_page:v1:{$page->org_id}:{$page->slug}:{$page->locale}"
+                );
+            } catch (\Exception) {
+                // Cache failure must never block a model save (Redis down, store not available, etc.)
+            }
+        });
+
+        static::deleted(function (self $page): void {
+            try {
+                Cache::forget(
+                    "content_page:v1:{$page->org_id}:{$page->slug}:{$page->locale}"
+                );
+            } catch (\Exception) {
+                // Cache failure must never block a model save (Redis down, store not available, etc.)
+            }
         });
     }
 
