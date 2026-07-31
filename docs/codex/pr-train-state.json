@@ -85849,7 +85849,7 @@
     },
     "scope_validation": {
       "allowed_paths_only": true,
-      "local_validation_passed": true,
+      "local_validation_passed": false,
       "github_checks_green": null,
       "post_merge_revalidated": false
     },
@@ -102419,7 +102419,7 @@
       },
       "local_validation": {
         "status": "pass",
-        "evidence": "Package validator passes twice byte-identically with SHA 42760c9d3b7ae3449e1eaacccbd7c1b3dbdf78cae42cfef44d0063f640a54dd7. Focused package PHPUnit passes 6 tests / 240 assertions; runtime-freeze scope regression passes 2 tests / 6 assertions; composer test:content passes 4 tests / 62 assertions. Scoped Pint, PHP syntax, JSON/JSONL/YAML parsing, CJK/private-field/public-URL/fixed-type/forbidden-claim scans, deterministic SHA recomputation, diff checks, and exact allowlist validation pass."
+        "evidence": "Package validator passes twice byte-identically with SHA 6543c9818a272330c55256a0359bce7ee0223591cb46d06436ac06245f6a2cc7. Focused package PHPUnit passes 6 tests / 244 assertions; runtime-freeze scope regression passes 2 tests / 6 assertions; composer test:content passes 4 tests / 62 assertions. Scoped Pint, PHP syntax, JSON/JSONL/YAML parsing, CJK/private-field/public-URL/fixed-type/forbidden-claim scans, deterministic SHA recomputation, diff checks, and exact allowlist validation pass."
       },
       "github_required_checks": {
         "status": "pending",
@@ -102428,7 +102428,7 @@
     },
     "scope_validation": {
       "allowed_paths_only": true,
-      "local_validation_passed": false,
+      "local_validation_passed": true,
       "github_checks_green": false,
       "post_merge_revalidated": false
     },
@@ -102464,8 +102464,13 @@
         "at": "2026-07-31T05:47:03Z",
         "status": "review_fix_local_checks_passed",
         "note": "Inspected CI run 30607268537 verify-bigfive before editing: 1658 tests passed and the only failure was the runtime-freeze classifier treating the new draft package directory as runtime-impacting. Added an exact package-prefix exception plus positive/negative regression and declared the classifier test in scope. Exact-head review findings are also repaired: local_validation_passed is true, baseline tree OIDs resolve from pinned commit d9f1a5554bb9831a1a9dd87d76b41daf8bcac353 rather than the live checkout, and N5 now preserves the source facet's overload-driven disconnect/withdraw/change-state meaning. Package SHA rebuilt as 42760c9d3b7ae3449e1eaacccbd7c1b3dbdf78cae42cfef44d0063f640a54dd7; all focused, content-suite, Pint, parser, scan, diff, and scope checks pass."
+      },
+      {
+        "at": "2026-07-31T05:58:55Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Inspected the two exact-head review findings before editing. Restored an unrelated existing task's local_validation_passed value and set the flag only on this train item. N3 now preserves the source facet's sustained-pressure depletion meaning, with focused label and semantic regression assertions. The byte-exact package was rebuilt as 6543c9818a272330c55256a0359bce7ee0223591cb46d06436ac06245f6a2cc7. Validator passes twice identically; the package suite passes 6 tests / 244 assertions, runtime-freeze regression passes, content suite passes, and Pint, syntax, parser, scan, diff, and exact 17-path scope validation pass."
       }
     ],
-    "updated_at": "2026-07-31T05:47:03Z"
+    "updated_at": "2026-07-31T05:58:55Z"
   }
 }

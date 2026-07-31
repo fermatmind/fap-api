@@ -133,6 +133,14 @@ final class BigFiveEnglishResultAssetPackageTest extends TestCase
         $this->assertSame([], $byUnit['analytics_reader_labels']['personal_result_fields']);
         $this->assertCount(5, $byUnit['five_dimension_explanations']['dimensions']);
         $this->assertCount(30, $byUnit['facet_subscale_explanations']['facets']);
+        $n3 = array_values(array_filter(
+            $byUnit['facet_subscale_explanations']['facets'],
+            static fn (array $facet): bool => $facet['code'] === 'N3'
+        ))[0];
+        $this->assertSame('Sustained-Stress Depletion', $n3['label']);
+        $this->assertStringContainsString('under sustained pressure', $n3['description']);
+        $this->assertStringContainsString('drained, fatigued', $n3['description']);
+        $this->assertStringContainsString('energy needed to keep responding', $n3['description']);
         $n5 = array_values(array_filter(
             $byUnit['facet_subscale_explanations']['facets'],
             static fn (array $facet): bool => $facet['code'] === 'N5'
@@ -159,7 +167,7 @@ final class BigFiveEnglishResultAssetPackageTest extends TestCase
             hash('sha256', implode("\n", $canonical))
         );
         $this->assertSame(
-            '42760c9d3b7ae3449e1eaacccbd7c1b3dbdf78cae42cfef44d0063f640a54dd7',
+            '6543c9818a272330c55256a0359bce7ee0223591cb46d06436ac06245f6a2cc7',
             $shaManifest['package_sha256']
         );
     }
