@@ -140,6 +140,13 @@ final class BigFiveEnglishResultAssetPackageTest extends TestCase
         $this->assertSame('Emotional Receptivity', $o3['label']);
         $this->assertStringContainsString('identify, approach, and express inner feelings', $o3['description']);
         $this->assertStringContainsString('use them as information', $o3['description']);
+        $c5 = array_values(array_filter(
+            $byUnit['facet_subscale_explanations']['facets'],
+            static fn (array $facet): bool => $facet['code'] === 'C5'
+        ))[0];
+        $this->assertSame('Delayed-Feedback Persistence', $c5['label']);
+        $this->assertStringContainsString('keep making progress', $c5['description']);
+        $this->assertStringContainsString('feedback or reward is not immediate', $c5['description']);
         $n3 = array_values(array_filter(
             $byUnit['facet_subscale_explanations']['facets'],
             static fn (array $facet): bool => $facet['code'] === 'N3'
@@ -181,7 +188,7 @@ final class BigFiveEnglishResultAssetPackageTest extends TestCase
             hash('sha256', implode("\n", $canonical))
         );
         $this->assertSame(
-            '479d071448e0b3385a3814d2256c4c084574746dcb2413dbf4ecb4107a221908',
+            '76c547083230ae57c7028037bfb50623bdfd7cf007335166ac01abde1cf66851',
             $shaManifest['package_sha256']
         );
     }
