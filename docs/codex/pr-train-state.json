@@ -102302,7 +102302,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "Importer feature suite passed 7 tests / 251 assertions, including authenticate-before-declared-file-read plus symlink and hard-link rejection coverage; runtime-freeze classifier passed 1 test / 2 assertions; scoped Pint passed; exact-package command returned 46 redacted rows with zero writes/private reads; API route inventory returned 225 lines; YAML, JSON, and diff checks passed. After the process guard was clear, scripts/ci_verify_mbti.sh completed with exit 0, including integrated scripts/verify_mbti.sh, the complete Big Five gate (1623 tests / 195834 assertions), and all remaining safety gates."
+        "evidence": "Importer feature suite passed 7 tests / 249 assertions, including manifest-first authentication, symlink/hard-link rejection, and descriptor-bound safe reads; runtime-freeze classifier passed 1 test / 2 assertions; scoped Pint passed; exact-package command returned 46 redacted rows with zero writes/private reads; API route inventory returned 225 lines; YAML, JSON, and diff checks passed. After the process guard was clear, scripts/ci_verify_mbti.sh completed with exit 0, including integrated scripts/verify_mbti.sh, the complete Big Five gate (1623 tests / 195834 assertions), and all remaining safety gates."
       },
       "changed_file_scope": {
         "status": "passed",
@@ -102372,8 +102372,13 @@
         "at": "2026-07-31T04:18:14Z",
         "status": "review_fix_local_checks_passed",
         "note": "Inspected the next exact-head P2 review before editing. Exact-package files must now have exactly one filesystem link before any bytes are read, closing the hard-link path to outside private data. The hard-link regression fails with package_file_hardlink_rejected; importer suite passes 7 tests / 251 assertions, scoped Pint and exact dry-run pass."
+      },
+      {
+        "at": "2026-07-31T04:20:20Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Proactive same-boundary follow-up removed the check/read race: each file is opened once, fstat identity and single-link state must match the pre-open lstat, and bytes are read from that verified descriptor. Rebuilt assets still fail before parsing; importer suite passes 7 tests / 249 assertions, scoped Pint and exact dry-run pass."
       }
     ],
-    "updated_at": "2026-07-31T04:18:14Z"
+    "updated_at": "2026-07-31T04:20:20Z"
   }
 }

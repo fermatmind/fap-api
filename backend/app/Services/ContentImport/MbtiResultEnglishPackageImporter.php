@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Services\ContentImport;
 
-use Illuminate\Support\Facades\File;
 use RuntimeException;
 
 final class MbtiResultEnglishPackageImporter
@@ -427,12 +426,12 @@ final class MbtiResultEnglishPackageImporter
         if (is_link($path)) {
             $this->fail('package_file_symlink_rejected', 'Exact-package files must not be symbolic links.');
         }
-        if (! File::isFile($path)) {
-            $this->fail('package_file_missing', 'A required exact-package file is missing.');
-        }
 
         $linkStat = @lstat($path);
-        if ($linkStat === false || ($linkStat['nlink'] ?? null) !== 1) {
+        if ($linkStat === false || (($linkStat['mode'] ?? 0) & 0170000) !== 0100000) {
+            $this->fail('package_file_missing', 'A required exact-package file is missing or is not a regular file.');
+        }
+        if (($linkStat['nlink'] ?? null) !== 1) {
             $this->fail('package_file_hardlink_rejected', 'Exact-package files must have exactly one filesystem link.');
         }
 
@@ -444,7 +443,30 @@ final class MbtiResultEnglishPackageImporter
             $this->fail('package_file_boundary_invalid', 'Exact-package files must resolve inside the selected package directory.');
         }
 
-        return (string) File::get($resolvedPath);
+        $handle = @fopen($resolvedPath, 'rb');
+        if ($handle === false) {
+            $this->fail('package_file_unreadable', 'A required exact-package file cannot be opened safely.');
+        }
+
+        try {
+            $openedStat = fstat($handle);
+            if ($openedStat === false
+                || (($openedStat['mode'] ?? 0) & 0170000) !== 0100000
+                || ($openedStat['nlink'] ?? null) !== 1
+                || ($openedStat['dev'] ?? null) !== ($linkStat['dev'] ?? null)
+                || ($openedStat['ino'] ?? null) !== ($linkStat['ino'] ?? null)) {
+                $this->fail('package_file_identity_changed', 'Exact-package file identity changed before the safe read.');
+            }
+
+            $bytes = stream_get_contents($handle);
+            if ($bytes === false) {
+                $this->fail('package_file_unreadable', 'A required exact-package file cannot be read safely.');
+            }
+
+            return $bytes;
+        } finally {
+            fclose($handle);
+        }
     }
 
     /**

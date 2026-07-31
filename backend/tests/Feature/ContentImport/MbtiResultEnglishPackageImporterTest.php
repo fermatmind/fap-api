@@ -140,14 +140,9 @@ final class MbtiResultEnglishPackageImporterTest extends TestCase
             $manifest,
             JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR,
         ).PHP_EOL;
-        $resolvedManifestPath = realpath($manifestPath);
-        self::assertIsString($resolvedManifestPath);
-
-        File::partialMock()
-            ->shouldReceive('get')
-            ->once()
-            ->with($resolvedManifestPath)
-            ->andReturn($untrustedManifestBytes);
+        File::put($manifestPath, $untrustedManifestBytes);
+        $privatePath = $packageDirectory.'/private-local-data.json';
+        self::assertTrue(symlink('/private/definitely-not-readable-by-this-test', $privatePath));
 
         $exitCode = $this->runDryRun(MbtiResultEnglishPackageImporter::PACKAGE_SHA256, $packageDirectory);
         $payload = $this->jsonOutput();
@@ -188,25 +183,21 @@ final class MbtiResultEnglishPackageImporterTest extends TestCase
         self::assertSame('package_file_hardlink_rejected', $payload['errors'][0]['code']);
     }
 
-    public function test_replay_is_byte_deterministic_and_assets_are_parsed_only_from_verified_bytes(): void
+    public function test_replay_is_byte_deterministic_and_rebuilt_assets_fail_before_parsing(): void
     {
         self::assertSame(0, $this->runDryRun());
         $firstOutput = Artisan::output();
         self::assertSame(0, $this->runDryRun());
         self::assertSame($firstOutput, Artisan::output());
 
-        $assetsPath = MbtiResultEnglishPackageImporter::defaultPackageDirectory().'/assets.json';
+        $rebuiltDirectory = $this->copyPackage();
+        $assetsPath = $rebuiltDirectory.'/assets.json';
         $rebuiltAssets = json_decode((string) File::get($assetsPath), true, 512, JSON_THROW_ON_ERROR);
         $rebuiltAssets['assets'][0]['row_id'] = 'unverified-concurrent-replacement';
         $rebuiltBytes = json_encode($rebuiltAssets, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES).PHP_EOL;
+        File::put($assetsPath, $rebuiltBytes);
 
-        File::partialMock()
-            ->shouldReceive('get')
-            ->once()
-            ->with($assetsPath)
-            ->andReturn($rebuiltBytes);
-
-        $exitCode = $this->runDryRun();
+        $exitCode = $this->runDryRun(MbtiResultEnglishPackageImporter::PACKAGE_SHA256, $rebuiltDirectory);
         $payload = $this->jsonOutput();
         self::assertSame(1, $exitCode);
         self::assertSame('manifest_file_sha256_mismatch', $payload['errors'][0]['code']);
