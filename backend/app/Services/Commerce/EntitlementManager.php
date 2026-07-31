@@ -8,6 +8,7 @@ use App\Services\Storage\UnifiedAccessProjectionWriter;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class EntitlementManager
@@ -536,7 +537,97 @@ class EntitlementManager
             ];
         }
 
+        $isActualRefund = strtolower(trim((string) ($order->payment_state ?? $order->status ?? ''))) === 'refunded';
+        $isGiftOrder = Schema::hasTable('report_gift_requests')
+            && DB::table('report_gift_requests')
+                ->where('purchased_order_id', (string) ($order->id ?? ''))
+                ->exists();
+        if ($isGiftOrder && $isActualRefund) {
+            DB::table('report_gift_requests')
+                ->where('purchased_order_id', (string) ($order->id ?? ''))
+                ->whereIn('status', ['purchasing', 'fulfilled'])
+                ->update([
+                    'status' => 'refunded',
+                    'updated_at' => now(),
+                ]);
+        }
+
         $now = now();
+        $directGrant = DB::table('benefit_grants')
+            ->where('org_id', $orderOrgId)
+            ->where('order_no', $orderNo)
+            ->where('status', 'active')
+            ->lockForUpdate()
+            ->first();
+        $fallbackGift = $directGrant !== null && Schema::hasTable('report_gift_requests')
+            ? DB::table('report_gift_requests as gifts')
+                ->join('orders as gift_orders', 'gift_orders.id', '=', 'gifts.purchased_order_id')
+                ->where('gifts.org_id', $orderOrgId)
+                ->where('gifts.target_attempt_id', $attemptId)
+                ->where('gifts.status', 'fulfilled')
+                ->where('gifts.purchased_order_id', '<>', (string) ($order->id ?? ''))
+                ->where(function ($query) {
+                    $query->whereNull('gift_orders.payment_state')
+                        ->orWhereNotIn('gift_orders.payment_state', ['refunded', 'canceled', 'expired', 'failed']);
+                })
+                ->where(function ($query) {
+                    $query->whereNull('gift_orders.grant_state')
+                        ->orWhere('gift_orders.grant_state', '<>', 'revoked');
+                })
+                ->select([
+                    'gifts.id as gift_request_id',
+                    'gifts.recipient_user_id',
+                    'gifts.recipient_anon_id',
+                    'gift_orders.id as order_id',
+                    'gift_orders.order_no',
+                ])
+                ->orderByDesc('gifts.fulfilled_at')
+                ->lockForUpdate()
+                ->first()
+            : null;
+        if ($directGrant !== null && $fallbackGift !== null) {
+            $meta = $this->decodeMeta($directGrant->meta_json ?? null);
+            $meta['unlock_source'] = ReportAccess::UNLOCK_SOURCE_GIFT_PURCHASE;
+            $meta['granted_via'] = ReportAccess::UNLOCK_SOURCE_GIFT_PURCHASE;
+            $meta['gift_request_id'] = (string) $fallbackGift->gift_request_id;
+
+            DB::table('benefit_grants')
+                ->where('id', (string) $directGrant->id)
+                ->update([
+                    'user_id' => trim((string) ($fallbackGift->recipient_user_id ?? ''))
+                        ?: trim((string) ($fallbackGift->recipient_anon_id ?? ''))
+                        ?: 'attempt:'.$attemptId,
+                    'benefit_ref' => trim((string) ($fallbackGift->recipient_anon_id ?? ''))
+                        ?: trim((string) ($fallbackGift->recipient_user_id ?? ''))
+                        ?: 'attempt:'.$attemptId,
+                    'order_no' => (string) $fallbackGift->order_no,
+                    'source_order_id' => (string) $fallbackGift->order_id,
+                    'expires_at' => null,
+                    'meta_json' => json_encode($meta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                    'updated_at' => $now,
+                    'revoked_at' => null,
+                ]);
+            $this->orders->syncGrantState($orderNo, $orderOrgId, 'revoked');
+            $this->orders->syncGrantState((string) $fallbackGift->order_no, $orderOrgId, 'granted');
+            $this->refreshAccessProjection($orderOrgId, $attemptId, [
+                'source_system' => 'entitlement_manager',
+                'source_ref' => (string) $fallbackGift->order_no,
+                'actor_type' => trim((string) ($fallbackGift->recipient_user_id ?? '')) !== '' ? 'user' : 'anon',
+                'actor_id' => trim((string) ($fallbackGift->recipient_user_id ?? ''))
+                    ?: trim((string) ($fallbackGift->recipient_anon_id ?? '')),
+                'reason_code' => 'entitlement_source_rebound',
+                'org_id' => $orderOrgId,
+            ]);
+
+            return [
+                'ok' => true,
+                'revoked' => 0,
+                'benefit_code' => $benefitCode,
+                'attempt_id' => $attemptId,
+                'rebound_to_gift_request_id' => (string) $fallbackGift->gift_request_id,
+            ];
+        }
+
         $byOrderNo = DB::table('benefit_grants')
             ->where('org_id', $orderOrgId)
             ->where('order_no', $orderNo)
@@ -555,6 +646,18 @@ class EntitlementManager
                 'revoked' => $byOrderNo,
                 'benefit_code' => $benefitCode,
                 'attempt_id' => $attemptId,
+            ];
+        }
+
+        if ($isGiftOrder) {
+            $this->orders->syncGrantState($orderNo, $orderOrgId, 'revoked');
+
+            return [
+                'ok' => true,
+                'revoked' => 0,
+                'benefit_code' => $benefitCode,
+                'attempt_id' => $attemptId,
+                'gift_order_without_direct_grant' => true,
             ];
         }
 

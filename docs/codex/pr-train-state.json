@@ -1,4 +1,150 @@
 {
+  "API-GIFT-01": {
+    "id": "API-GIFT-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/api-gift-01-paid-report-gifting",
+    "title": "API-GIFT-01: add paid report gifting contract",
+    "depends_on": [
+      "API-UNLOCK-01",
+      "API-GIFT-SCHEMA-01",
+      "API-VPAY-01"
+    ],
+    "status": "github_checks_pending",
+    "commit_sha": "472b256c42cf99c208414fe92b72aab0b124bc1f",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3448",
+    "checks": {
+      "dependency": {
+        "status": "passed",
+        "evidence": "GitHub reports API-GIFT-SCHEMA-01 PR #3428 merged as fca264eac19ebc74f3b87a577fab13808fa603b4 and API-VPAY-01 PR #3441 merged as 15eb6a2fbf55630f3d1e53fd3bf891930ebcb60b; the worktree starts from that exact current origin/main."
+      },
+      "authorization_boundary": {
+        "status": "passed",
+        "evidence": "The active FERMAT-WEAPP-THREE-CHANNEL-REPORT-UNLOCK-00-11 goal authorizes this independent backend PR. No migration, production configuration, provider secret, deployment, real order, payment, or mini-program upload is authorized."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "After the twelfth exact-head review repair, the declared focused contract suite passed 58 tests / 717 assertions; the gift contract alone passed 14 / 228; OpenAPI passed 2 / 6; the exact runtime classifier passed 3 / 13; scoped Pint passed all touched files; route:list exposed 98 v0.3 routes including the five gift routes; backend Composer strict validation, YAML/JSON parsing, git diff checks, and exact allowed-path scope passed. The complete backend/scripts/ci_verify_mbti.sh exited 0 before the final narrowly scoped privacy/retry repair with the repository test APP_KEY supplied only as process environment, including Big Five 1655 tests / 196111 assertions, Personality authority 95 / 5917, migration, auth, OpenAPI, order-security, dependency-security, webhook, attempt, and downstream gates. Regressions prove that a gift payer order response suppresses the recipient attempt id, raw order, report/PDF delivery, exact result entry, form summaries, and access hub; an unpayable released reservation can be retried by the same payer with the same client idempotency key without reusing the canceled order; a verified callback replay cannot reactivate an intentionally revoked paid gift; and shared OrderRepairService is exempted from the runtime freeze only when both exact changed lines and all zero-context hunk coordinates match. Earlier single-payable, late-payment, repair, refund, idempotency, revocation, and binding regressions remain green. Verifier-generated Big Five compiled artifacts were restored and no secret or production configuration was created."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": null
+      },
+      "merge_reconciliation": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-31T03:03:15Z",
+        "status": "implementation_in_progress",
+        "note": "Started in an isolated worktree from exact origin/main 15eb6a2fbf55630f3d1e53fd3bf891930ebcb60b after online dependency verification. Scope is the dedicated hash-token gift lifecycle, friend-owned virtual-payment order reservation, verified-paid recipient entitlement, payer isolation, concurrency/refund safety, tests, OpenAPI snapshot, and train metadata. Ordinary order ownership remains unchanged; no migration, production action, provider activation, secret access, or real payment is performed."
+      },
+      {
+        "at": "2026-07-31T03:30:02Z",
+        "status": "local_validation_passed",
+        "note": "Implemented the fail-closed MBTI-only gift lifecycle and passed all declared local validation. The first complete verifier attempt exposed only the isolated worktree's missing test APP_KEY; rerunning with the repository phpunit test key as process-only environment completed exit 0. No key was generated or persisted, and all verifier-generated compiled artifacts were restored."
+      },
+      {
+        "at": "2026-07-31T03:33:47Z",
+        "status": "local_validation_passed",
+        "note": "Integrated exact latest origin/main efd7f2bd0 without conflict. The committed branch diff then made the runtime-freeze classifier correctly expose four paid-gifting runtime paths that were invisible while uncommitted. Added an exact API-GIFT-only classifier predicate and route diff allowlist plus a negative control; the post-integration focused suite remains 48 / 564 and the classifier now passes 3 / 9. No broad runtime exception was added."
+      },
+      {
+        "at": "2026-07-31T03:35:13Z",
+        "status": "github_checks_pending",
+        "note": "Pushed immutable implementation commit 6c1328394f5efaf84f9b5419cc1c52fdb040cf97 and opened PR #3448. Required GitHub checks, exact-head review, clean mergeability, and main-drift reconciliation remain mandatory before squash merge."
+      },
+      {
+        "at": "2026-07-31T03:46:41Z",
+        "status": "github_checks_pending",
+        "note": "Exact head e73a18fd3dec8288524ebe705b3e860c148ffc04 passed all nine required checks with staging parity skipped, but review found three valid entitlement lifecycle issues and origin/main advanced by two commits. The repair keeps purchasing requests active beyond request TTL, reactivates and rebinds a revoked grant for a later paid gift, and preserves unrelated active entitlement provenance. Focused validation now passes 49 tests / 584 assertions plus the 3 / 9 classifier and scoped Pint; latest-main integration and fresh exact-head checks remain required."
+      },
+      {
+        "at": "2026-07-31T03:47:55Z",
+        "status": "github_checks_pending",
+        "note": "Rebased all API-GIFT commits onto exact origin/main 012392aaf0d83375414f8eb9ad010f6c7c577714 without conflict. Post-rebase validation passed 49 tests / 584 assertions, OpenAPI 2 / 6, exact classifier 3 / 9, scoped Pint, Composer strict, YAML/JSON, diff, and exact 13-path scope. Repaired implementation head is af2bcccc94a15866677f12afb58a57d03387080f; a metadata-only commit will record it before fresh GitHub checks."
+      },
+      {
+        "at": "2026-07-31T04:01:07Z",
+        "status": "github_checks_pending",
+        "note": "Exact head b9d98e85bb3aa1d0eb75ce4504db63e879e0e7af passed all nine required checks with staging parity skipped and had no main drift, but second exact-head review found three additional valid lifecycle issues. The repair makes a fulfilled gift request the durable fallback source when an unrelated paid grant is later refunded, releases purchasing reservations on terminal non-success payment states, and synchronizes gift status through shared EntitlementManager refund handling so queued refunds are covered. Focused validation now passes 51 tests / 606 assertions plus OpenAPI 2 / 6, classifier 3 / 9, and scoped Pint; fresh checks and review remain required."
+      },
+      {
+        "at": "2026-07-31T04:02:20Z",
+        "status": "github_checks_pending",
+        "note": "Integrated exact latest origin/main b115c29775e02064f6e8168a6b1545e239d10718 without conflict. Post-integration focused validation remains 51 tests / 606 assertions with OpenAPI 2 / 6, classifier 3 / 9, scoped Pint, Composer strict, YAML/JSON, diff, and exact scope passing. Repaired implementation head is 9cea63edd2bafd30fdafca69b166caea7dbec1ec; fresh exact-head checks and review remain mandatory."
+      },
+      {
+        "at": "2026-07-31T04:26:40Z",
+        "status": "github_checks_pending",
+        "note": "The third exact-head review found four additional valid paid-gift recovery issues. Implementation head 188ba73c4e25036a0b7efd8b08909169ed7c917c now restores a terminal gift before accepting a verified late payment while canceling only an unreserved replacement, releases reservations when payment-action creation fails before any payment attempt exists, rematerializes a fulfilled gift after a reused time-limited grant naturally expires, and marks gift status refunded only when the order is actually refunded. Declared focused validation is 54 tests / 637 assertions, the broader focused suite is 427 / 1150, OpenAPI is 2 / 6, and the complete verifier passed with Big Five 1654 / 196109 and Personality 95 / 5917. Fresh exact-head GitHub checks and review remain mandatory."
+      },
+      {
+        "at": "2026-07-31T04:49:11Z",
+        "status": "github_checks_pending",
+        "note": "The fourth exact-head review found five additional paid-gift boundary issues. Implementation head 3aea0b6b77dd01cd0e0d66536377f9e1a93db696 now honors every verified late payment despite a purchasing or fulfilled replacement, scopes released-order idempotency to the payer, locks a fulfilled fallback gift and resets rebound access to permanent, and excludes expired grants from normal paid-order repair detection. Declared focused validation passes 54 tests / 648 assertions, OpenAPI 2 / 6, classifier 3 / 9, scoped Pint, Composer strict, YAML/JSON, route, diff, and exact scope; the complete verifier passes Big Five 1654 / 196109 and Personality 95 / 5917. Fresh exact-head GitHub checks and review remain mandatory."
+      },
+      {
+        "at": "2026-07-31T05:33:55Z",
+        "status": "github_checks_pending",
+        "note": "The sixth exact-head review repair serializes payment-action creation under the exact gift order row lock. Same-payer retries now reuse one payment attempt and outTradeNo. Implementation head a38718e582961ed204d0f99d19ce7aa679c508c2 passes the declared suite at 57 tests / 671 assertions, gift contract at 13 / 182, OpenAPI 2 / 6, classifier 3 / 9, scoped Pint, Composer strict, YAML/JSON, 98-route, diff, and exact-scope checks; the complete verifier exits 0 with Big Five 1655 / 196111, Enneagram 10 / 375, and Personality 95 / 5917. Fresh exact-head GitHub checks and review remain mandatory."
+      },
+      {
+        "at": "2026-07-31T05:56:39Z",
+        "status": "github_checks_pending",
+        "note": "The seventh exact-head review repair moves payment-action creation into the gift service transaction, locks and revalidates the exact order-to-purchasing-gift binding before provider exchange, and closes a purchasing replacement's order plus payment attempt before canceling that gift when an older verified payment arrives. After clean rebase onto origin/main e1022c5db4268fbb9eaa5fb4037386b5c2305eb0, implementation head 43d250482f0d2028c28d3394a627f94b2989672f passes the declared suite at 57 tests / 681 assertions, gift contract at 13 / 192, OpenAPI 2 / 6, classifier 3 / 9, scoped Pint, Composer strict, YAML/JSON, 98-route, diff, and exact-scope checks; the complete verifier exits 0 with Big Five 1655 / 196121, Enneagram 10 / 375, and Personality 95 / 5917. Fresh exact-head GitHub checks and review remain mandatory."
+      },
+      {
+        "at": "2026-07-31T06:19:01Z",
+        "status": "github_checks_pending",
+        "note": "The eighth exact-head review repair rejects a canceled replacement's verified payment callback after another gift has fulfilled the same report, and recognizes gift ownership independently from refund state so manual gift revocation cannot revoke an unrelated attempt grant. After conflict-free rebase onto origin/main 193886e725a4a821accd70d5a5f9afb22f40bc97, implementation head 4e4d7d9c5e17736efa4c8e9b77dde26d5f45c82b retains the validated exact scope. The pre-rebase declared suite passed 58 tests / 699 assertions, gift contract 14 / 210, OpenAPI 2 / 6, classifier 3 / 9, scoped Pint, Composer strict, YAML/JSON, 98-route, diff, and exact-scope checks; the complete verifier exited 0 with Big Five 1655 / 196111 and Personality 95 / 5917. The intervening main-only change is confined to MBTI comparison content assets and its focused test; fresh post-rebase focused checks plus exact-head GitHub checks and review remain mandatory."
+      },
+      {
+        "at": "2026-07-31T06:30:39Z",
+        "status": "github_checks_pending",
+        "note": "The ninth exact-head review repair excludes orders with grant_state=revoked from fulfilled-gift fallback selection. The expanded manual-revocation regression then refunds the unrelated self-purchase source and proves no active grant survives and the gift order remains intentionally revoked. Implementation head adcf1727bc4f1afed4f90d0ba52fc7b748f164bb passes the declared suite at 58 / 703, gift contract 14 / 214, OpenAPI 2 / 6, classifier 3 / 9, scoped Pint, Composer strict, diff, and exact scope. Fresh exact-head GitHub checks and review remain mandatory."
+      },
+      {
+        "at": "2026-07-31T06:39:19Z",
+        "status": "github_checks_pending",
+        "note": "The tenth exact-head review repair removes shared OrderRepairService.php from the unconditional paid-gifting path exemption. It is now exempt only when its changed-lines list exactly matches this PR's gift repair diff; a negative control appends an ordinary runtime line and proves classification fails closed. Classifier head 0cc5ba7c2d8f198936f4ce51301fb8af1dbe9798 passes the declared three tests / 11 assertions and scoped Pint. Fresh exact-head GitHub checks and review remain mandatory."
+      },
+      {
+        "at": "2026-07-31T06:50:48Z",
+        "status": "github_checks_pending",
+        "note": "The eleventh exact-head review repair preserves intentional gift revocation on verified success callback replay and binds the shared OrderRepairService runtime-freeze exemption to both exact changed lines and all zero-context hunk coordinates. Implementation head 29ff1ad197391372e9f2c63ec4a7674d09193e41 passes the declared suite at 58 / 707, gift contract 14 / 218, OpenAPI 2 / 6, exact classifier 3 / 13, scoped Pint, Composer strict, YAML/JSON, diff, and exact 13-path scope. Fresh exact-head GitHub checks and review remain mandatory."
+      },
+      {
+        "at": "2026-07-31T07:03:58Z",
+        "status": "github_checks_pending",
+        "note": "The twelfth exact-head review repair routes owned order reads through a gift-aware privacy wrapper that delegates ordinary behavior unchanged and suppresses recipient delivery details only for gift orders. Released unpayable reservations now derive their server idempotency generation from prior same-actor gift-order count, so the same client key creates a fresh payable order instead of recovering the canceled one. Implementation head 96d36f64bda631590cdd3308b2b6272e51cfad49 passes the declared suite at 58 / 717, gift contract 14 / 228, OpenAPI 2 / 6, exact classifier 3 / 13, scoped Pint, Composer strict, YAML/JSON, route, diff, and exact 13-path scope. Fresh exact-head GitHub checks and review remain mandatory."
+      },
+      {
+        "at": "2026-07-31T07:05:40Z",
+        "status": "github_checks_pending",
+        "note": "Rebased conflict-free onto exact origin/main 340af47e61dac3ad773fb265700252eadad51653 after verifying the only intervening change is a disjoint MBTI English comparison content package plus its focused test. Rebased implementation head 472b256c42cf99c208414fe92b72aab0b124bc1f retains the exact 13-path scope and passes the declared suite 58 / 717, gift contract 14 / 228, OpenAPI 2 / 6, exact classifier 3 / 13, scoped Pint, Composer strict, YAML/JSON, diff, and scope checks. Fresh exact-head GitHub checks and review remain mandatory."
+      }
+    ],
+    "updated_at": "2026-07-31T07:05:40Z"
+  },
   "MBTI-CROSS-PUBLISH-51": {
     "id": "MBTI-CROSS-PUBLISH-51",
     "repo": "fap-api",

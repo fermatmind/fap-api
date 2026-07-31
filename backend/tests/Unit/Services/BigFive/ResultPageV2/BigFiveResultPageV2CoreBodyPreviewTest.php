@@ -3854,6 +3854,89 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_paid_report_gifting_only(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_3/ReportGiftController.php',
+            'backend/app/Services/Commerce/Repair/OrderRepairService.php',
+            'backend/app/Services/Commerce/ReportGiftService.php',
+            'backend/routes/api.php',
+        ];
+        $routeChangedLines = [
+            '+use App\Http\Controllers\API\V0_3\ReportGiftController;',
+            "+            Route::post('/attempts/{id}/gift-requests', [ReportGiftController::class, 'store'])",
+            "+                ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id'])",
+            "+                ->defaults('public_realm', true)",
+            "+                ->name('api.v0_3.attempts.gift_requests.store');",
+            "+            Route::get('/attempts/{id}/gift-requests/{gift_request_id}', [ReportGiftController::class, 'showOwner'])",
+            "+                ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id', 'uuid:gift_request_id'])",
+            "+                ->defaults('public_realm', true)",
+            "+                ->name('api.v0_3.attempts.gift_requests.show');",
+            "+            Route::post('/attempts/{id}/gift-requests/{gift_request_id}/cancel', [ReportGiftController::class, 'cancel'])",
+            "+                ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id', 'uuid:gift_request_id'])",
+            "+                ->defaults('public_realm', true)",
+            "+                ->name('api.v0_3.attempts.gift_requests.cancel');",
+            "+        Route::get('/report-gifts/{token}', [ReportGiftController::class, 'showPublic'])",
+            "+            ->where('token', '[A-Za-z0-9_-]{43}')",
+            "+            ->name('api.v0_3.report_gifts.show');",
+            '+        Route::post(',
+            "+            '/report-gifts/{token}/orders/wechat_mini_virtual',",
+            '+            [ReportGiftController::class, \'purchaseWechatMiniVirtual\']',
+            '+        )->middleware(\App\Http\Middleware\FmTokenAuth::class)',
+            "+            ->where('token', '[A-Za-z0-9_-]{43}')",
+            "+            ->name('api.v0_3.report_gifts.orders.wechat_mini_virtual.store');",
+            "-        Route::get('/orders/{order_no}', 'App\\\\Http\\\\Controllers\\\\API\\\\V0_3\\\\CommerceController@getOrder')",
+            "+        Route::get('/orders/{order_no}', [ReportGiftController::class, 'getOrder'])",
+        ];
+        $orderRepairServiceChangedLines = $this->paidReportGiftingOrderRepairChangedLines();
+        $orderRepairServiceHunkHeaders = $this->paidReportGiftingOrderRepairHunkHeaders();
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            routeChangedLines: $routeChangedLines,
+            orderRepairServiceChangedLines: $orderRepairServiceChangedLines,
+            orderRepairServiceHunkHeaders: $orderRepairServiceHunkHeaders,
+        ));
+        $this->assertSame(
+            ['backend/app/Services/Commerce/Repair/OrderRepairService.php'],
+            $this->mbtiImpactingRuntimeChanges(
+                $changed,
+                '',
+                '',
+                routeChangedLines: $routeChangedLines,
+                orderRepairServiceChangedLines: [
+                    ...$orderRepairServiceChangedLines,
+                    '+        return true;',
+                ],
+                orderRepairServiceHunkHeaders: $orderRepairServiceHunkHeaders,
+            ),
+        );
+        $this->assertSame(
+            ['backend/app/Services/Commerce/Repair/OrderRepairService.php'],
+            $this->mbtiImpactingRuntimeChanges(
+                $changed,
+                '',
+                '',
+                routeChangedLines: $routeChangedLines,
+                orderRepairServiceChangedLines: $orderRepairServiceChangedLines,
+                orderRepairServiceHunkHeaders: [
+                    '@@ -10,0 +11 @@',
+                    ...array_slice($orderRepairServiceHunkHeaders, 1),
+                ],
+            ),
+        );
+        $this->assertSame(
+            ['backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php'],
+            $this->mbtiImpactingRuntimeChanges(
+                ['backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php'],
+                '',
+                '',
+            ),
+        );
+    }
+
     public function test_runtime_freeze_classifier_ignores_freemium_locale_policy_files(): void
     {
         $changed = [
@@ -6748,6 +6831,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ?array $soloOwnerReviewFoundationAddedFiles = null,
         ?array $llmsControllerChangedLines = null,
         ?array $generateReportSnapshotJobChangedLines = null,
+        ?array $orderRepairServiceChangedLines = null,
+        ?array $orderRepairServiceHunkHeaders = null,
     ): array {
         $impacting = [];
         $soloOwnerReviewFoundationAddedFileSet = array_fill_keys(
@@ -7193,6 +7278,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isCommercePaymentActionFile($file)) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/app/Services/Commerce/Repair/OrderRepairService.php'
+                && $this->orderRepairServiceDiffIsPaidReportGiftingOnly(
+                    $orderRepairServiceChangedLines ?? (
+                        $repoRoot !== '' && $baseRef !== ''
+                            ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                            : []
+                    ),
+                    $orderRepairServiceHunkHeaders ?? (
+                        $repoRoot !== '' && $baseRef !== ''
+                            ? $this->hunkHeadersForFile($repoRoot, $baseRef, $file)
+                            : []
+                    ),
+                )
+            ) {
+                continue;
+            }
+
+            if ($this->isPaidReportGiftingFile($file)) {
                 continue;
             }
 
@@ -7859,6 +7966,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             if (
                 $file === 'backend/routes/api.php'
                 && $this->routeDiffIsWechatMiniVirtualPaymentOnly(
+                    $routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef)
+                )
+            ) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/routes/api.php'
+                && $this->routeDiffIsPaidReportGiftingOnly(
                     $routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef)
                 )
             ) {
@@ -9572,6 +9688,189 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Commerce/WechatMiniVirtualPaymentService.php',
             'backend/app/Jobs/Commerce/ReprocessPaymentEventJob.php',
         ], true);
+    }
+
+    private function isPaidReportGiftingFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_3/ReportGiftController.php',
+            'backend/app/Services/Commerce/ReportGiftService.php',
+        ], true);
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     * @param  list<string>  $hunkHeaders
+     */
+    private function orderRepairServiceDiffIsPaidReportGiftingOnly(
+        array $changedLines,
+        array $hunkHeaders
+    ): bool {
+        return $changedLines === $this->paidReportGiftingOrderRepairChangedLines()
+            && $hunkHeaders === $this->paidReportGiftingOrderRepairHunkHeaders();
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function paidReportGiftingOrderRepairHunkHeaders(): array
+    {
+        return [
+            '@@ -9,0 +10 @@',
+            '@@ -33 +34,14 @@ public function repairPaidOrder(object $order, array $context = []): array',
+            '@@ -41,0 +56,8 @@ public function repairPaidOrder(object $order, array $context = []): array',
+            '@@ -69,2 +91,18 @@ public function repairPaidOrder(object $order, array $context = []): array',
+            '@@ -72,2 +110,2 @@ public function repairPaidOrder(object $order, array $context = []): array',
+            '@@ -112,2 +150,2 @@ public function repairPaidOrder(object $order, array $context = []): array',
+            '@@ -149,11 +187,20 @@ public function repairPaidOrder(object $order, array $context = []): array',
+            '@@ -221,2 +268,5 @@ public function hasActiveGrantForOrder(object $order): bool',
+            '@@ -234,0 +285,4 @@ public function resolveActiveGrantForOrder(object $order, ?string $benefitCode =',
+            '@@ -253,0 +308,3 @@ public function resolveActiveGrantForOrder(object $order, ?string $benefitCode =',
+            '@@ -270,0 +328,3 @@ public function requiresPaidOrderRepair(object $order): bool',
+            '@@ -418 +478 @@ private function emptyAttemptMeta(): array',
+            '@@ -429 +489 @@ private function reloadOrder(object $order): ?object',
+            '@@ -431,2 +491,6 @@ private function reloadOrder(object $order): ?object',
+            '@@ -435 +499 @@ private function reloadOrder(object $order): ?object',
+            '@@ -437,2 +501,11 @@ private function reloadOrder(object $order): ?object',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function paidReportGiftingOrderRepairChangedLines(): array
+    {
+        $diff = <<<'DIFF'
++use App\Services\Commerce\ReportGiftService;
+-        $freshOrder = $this->reloadOrder($order);
++        return DB::transaction(
++            fn (): array => $this->repairPaidOrderLocked($order, $context),
++            3
++        );
++    }
++
++    /**
++     * @param  Order|object  $order
++     * @param  array<string,mixed>  $context
++     * @return array<string,mixed>
++     */
++    private function repairPaidOrderLocked(object $order, array $context): array
++    {
++        $freshOrder = $this->reloadOrder($order, true);
++        if ($this->isIntentionallyRevoked($freshOrder)) {
++            return $this->skip(
++                'GRANT_INTENTIONALLY_REVOKED',
++                'order grant was intentionally revoked.',
++                $freshOrder,
++                $context
++            );
++        }
+-        $ownerGuard = $this->validateAttemptOwnershipForOrder($freshOrder, $attemptMeta);
+-        if (! ($ownerGuard['ok'] ?? false)) {
++        $giftService = app(ReportGiftService::class);
++        $giftRequest = $giftService->findBoundGiftForOrder($freshOrder, true);
++        if ($giftRequest !== null) {
++            $restored = $giftService->restoreTerminalGiftForVerifiedPayment($giftRequest, $freshOrder);
++            if (! ($restored['ok'] ?? false)) {
++                return $this->failure(
++                    (string) ($restored['error'] ?? 'GIFT_REQUEST_NOT_PAYABLE'),
++                    (string) ($restored['message'] ?? 'gift request is not payable.'),
++                    $freshOrder,
++                    $context
++                );
++            }
++            $giftRequest = $giftService->findBoundGiftForOrder($freshOrder, true);
++        }
++        $ownershipGuard = $giftRequest !== null
++            ? $giftService->validateBoundGiftOrder($giftRequest, $freshOrder)
++            : $this->validateAttemptOwnershipForOrder($freshOrder, $attemptMeta);
++        if (! ($ownershipGuard['ok'] ?? false)) {
+-                (string) ($ownerGuard['error'] ?? 'ATTEMPT_OWNER_MISMATCH'),
+-                (string) ($ownerGuard['message'] ?? 'order owner mismatch.'),
++                (string) ($ownershipGuard['error'] ?? 'ATTEMPT_OWNER_MISMATCH'),
++                (string) ($ownershipGuard['message'] ?? 'order owner mismatch.'),
+-        $activeGrant = $this->resolveActiveGrantForOrder($freshOrder, $benefitCode);
+-        if ($activeGrant !== null) {
++        $activeGrant = $this->resolveActiveGrantForOrder($freshOrder, $benefitCode, true);
++        if ($activeGrant !== null && $giftRequest === null) {
+-        $grant = $this->entitlements->grantAttemptUnlock(
+-            (int) $freshOrder->org_id,
+-            $freshOrder->user_id ? (string) $freshOrder->user_id : null,
+-            $freshOrder->anon_id ? (string) $freshOrder->anon_id : null,
+-            $benefitCode,
+-            $attemptId,
+-            (string) $freshOrder->order_no,
+-            $scopeOverride,
+-            $expiresAt,
+-            $modulesIncluded
+-        );
++        $grant = $giftRequest !== null
++            ? $giftService->grantVerifiedPaidGift(
++                $giftRequest,
++                $freshOrder,
++                $benefitCode,
++                $scopeOverride,
++                $expiresAt,
++                $modulesIncluded ?? []
++            )
++            : $this->entitlements->grantAttemptUnlock(
++                (int) $freshOrder->org_id,
++                $freshOrder->user_id ? (string) $freshOrder->user_id : null,
++                $freshOrder->anon_id ? (string) $freshOrder->anon_id : null,
++                $benefitCode,
++                $attemptId,
++                (string) $freshOrder->order_no,
++                $scopeOverride,
++                $expiresAt,
++                $modulesIncluded
++            );
+-    public function resolveActiveGrantForOrder(object $order, ?string $benefitCode = null): ?object
+-    {
++    public function resolveActiveGrantForOrder(
++        object $order,
++        ?string $benefitCode = null,
++        bool $lockForUpdate = false
++    ): ?object {
++            ->where(function ($query): void {
++                $query->whereNull('expires_at')
++                    ->orWhere('expires_at', '>', now());
++            })
++        if ($lockForUpdate) {
++            $query->lockForUpdate();
++        }
++        if ($this->isIntentionallyRevoked($freshOrder)) {
++            return false;
++        }
+-    private function reloadOrder(object $order): ?object
++    private function reloadOrder(object $order, bool $lockForUpdate = false): ?object
+-            return DB::table('orders')
++            $query = DB::table('orders')
+-                ->when($orgId > 0 || isset($order->org_id), fn ($query) => $query->where('org_id', $orgId))
+-                ->first();
++                ->when($orgId > 0 || isset($order->org_id), fn ($query) => $query->where('org_id', $orgId));
++            if ($lockForUpdate) {
++                $query->lockForUpdate();
++            }
++
++            return $query->first();
+-        return DB::table('orders')
++        $query = DB::table('orders')
+-            ->where('org_id', $orgId)
+-            ->first();
++            ->where('org_id', $orgId);
++        if ($lockForUpdate) {
++            $query->lockForUpdate();
++        }
++
++        return $query->first();
++    }
++
++    private function isIntentionallyRevoked(object $order): bool
++    {
++        return strtolower(trim((string) ($order->grant_state ?? ''))) === Order::GRANT_STATE_REVOKED;
+DIFF;
+
+        return explode("\n", $diff);
     }
 
     private function isFreemiumLocalePolicyFile(string $file): bool
@@ -12388,6 +12687,39 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             "+            'App\\\\Http\\\\Controllers\\\\API\\\\V0_3\\\\CommerceController@reconcileWechatMiniVirtual'",
             '+        )->middleware(\\App\\Http\\Middleware\\FmTokenAuth::class)',
             "+            ->name('api.v0_3.orders.wechat_mini_virtual.reconcile');",
+        ];
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsPaidReportGiftingOnly(array $changedLines): bool
+    {
+        return array_values($changedLines) === [
+            '+use App\Http\Controllers\API\V0_3\ReportGiftController;',
+            "+            Route::post('/attempts/{id}/gift-requests', [ReportGiftController::class, 'store'])",
+            "+                ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id'])",
+            "+                ->defaults('public_realm', true)",
+            "+                ->name('api.v0_3.attempts.gift_requests.store');",
+            "+            Route::get('/attempts/{id}/gift-requests/{gift_request_id}', [ReportGiftController::class, 'showOwner'])",
+            "+                ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id', 'uuid:gift_request_id'])",
+            "+                ->defaults('public_realm', true)",
+            "+                ->name('api.v0_3.attempts.gift_requests.show');",
+            "+            Route::post('/attempts/{id}/gift-requests/{gift_request_id}/cancel', [ReportGiftController::class, 'cancel'])",
+            "+                ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id', 'uuid:gift_request_id'])",
+            "+                ->defaults('public_realm', true)",
+            "+                ->name('api.v0_3.attempts.gift_requests.cancel');",
+            "+        Route::get('/report-gifts/{token}', [ReportGiftController::class, 'showPublic'])",
+            "+            ->where('token', '[A-Za-z0-9_-]{43}')",
+            "+            ->name('api.v0_3.report_gifts.show');",
+            '+        Route::post(',
+            "+            '/report-gifts/{token}/orders/wechat_mini_virtual',",
+            '+            [ReportGiftController::class, \'purchaseWechatMiniVirtual\']',
+            '+        )->middleware(\App\Http\Middleware\FmTokenAuth::class)',
+            "+            ->where('token', '[A-Za-z0-9_-]{43}')",
+            "+            ->name('api.v0_3.report_gifts.orders.wechat_mini_virtual.store');",
+            "-        Route::get('/orders/{order_no}', 'App\\\\Http\\\\Controllers\\\\API\\\\V0_3\\\\CommerceController@getOrder')",
+            "+        Route::get('/orders/{order_no}', [ReportGiftController::class, 'getOrder'])",
         ];
     }
 
@@ -15401,6 +15733,30 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             },
             $output,
         )));
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function hunkHeadersForFile(string $repoRoot, string $baseRef, string $file): array
+    {
+        $command = [
+            'git',
+            '-C',
+            $repoRoot,
+            'diff',
+            '--unified=0',
+            "{$baseRef}...HEAD",
+            '--',
+            $file,
+        ];
+        exec(implode(' ', array_map('escapeshellarg', $command)), $output, $exitCode);
+        $this->assertSame(0, $exitCode);
+
+        return array_values(array_filter(
+            $output,
+            static fn (string $line): bool => str_starts_with($line, '@@ '),
+        ));
     }
 
     /**
