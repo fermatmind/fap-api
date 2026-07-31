@@ -511,7 +511,7 @@ final class ReportGiftPurchaseContractTest extends TestCase
 
         Http::fake([
             'https://api.weixin.qq.com/sns/jscode2session*' => Http::response([
-                'openid' => 'openid-gift-verified-terminal-payer',
+                'openid' => 'openid-gift-payer',
                 'session_key' => 'session-key-verified-terminal',
             ]),
         ]);
@@ -522,6 +522,11 @@ final class ReportGiftPurchaseContractTest extends TestCase
             ])
             ->assertOk();
         $orderNo = (string) $purchased->json('order_no');
+        $signData = json_decode(
+            (string) $purchased->json('pay.params.signData'),
+            true,
+            flags: JSON_THROW_ON_ERROR
+        );
         $order = DB::table('orders')->where('order_no', $orderNo)->first();
         $this->assertNotNull($order);
         $paymentAttempt = app(OrderManager::class)->latestPaymentAttemptForOrder($orderNo, 0);
@@ -540,9 +545,40 @@ final class ReportGiftPurchaseContractTest extends TestCase
         $this->assertSame('canceled', (string) DB::table('report_gift_requests')
             ->where('id', $giftId)
             ->value('status'));
-        $this->withHeaders($this->headersFor($recipientAnonId))
+        $replacementCreated = $this->withHeaders($this->headersFor($recipientAnonId))
             ->postJson('/api/v0.3/attempts/'.$attemptId.'/gift-requests')
             ->assertCreated();
+        $replacementGiftId = (string) $replacementCreated->json('gift_request.id');
+        $replacementToken = (string) $replacementCreated->json('gift_request.public_token');
+        $replacementPurchased = $this->withHeaders($this->headersFor('anon_gift_replacement_payer'))
+            ->postJson('/api/v0.3/report-gifts/'.$replacementToken.'/orders/wechat_mini_virtual', [
+                'idempotency_key' => 'gift-order-replacement',
+                'wx_login_code' => 'wx-login-replacement',
+            ])
+            ->assertOk();
+        $replacementOrderNo = (string) $replacementPurchased->json('order_no');
+
+        $handled = app(WechatMiniVirtualPaymentService::class)->handleCallback(
+            $this->signedCallbackRequest(
+                $this->paidCallbackPayload($orderNo, (string) $signData['outTradeNo'])
+            )
+        );
+        $this->assertTrue(
+            (bool) ($handled['ok'] ?? false),
+            json_encode($handled, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+        );
+        $this->assertSame('fulfilled', (string) DB::table('report_gift_requests')
+            ->where('id', $giftId)
+            ->value('status'));
+        $this->assertSame('canceled', (string) DB::table('report_gift_requests')
+            ->where('id', $replacementGiftId)
+            ->value('status'));
+        $this->assertSame('canceled', (string) DB::table('orders')
+            ->where('order_no', $replacementOrderNo)
+            ->value('payment_state'));
+        $this->assertSame(\App\Models\PaymentAttempt::STATE_CANCELED, (string) DB::table('payment_attempts')
+            ->where('order_no', $replacementOrderNo)
+            ->value('state'));
     }
 
     public function test_same_purchaser_retry_reuses_one_gift_payment_action(): void
@@ -634,6 +670,16 @@ final class ReportGiftPurchaseContractTest extends TestCase
         $this->assertSame('canceled', (string) DB::table('orders')
             ->where('target_attempt_id', $attemptId)
             ->value('payment_state'));
+        $this->assertSame(0, DB::table('payment_attempts')->count());
+
+        $staleOrder = DB::table('orders')
+            ->where('target_attempt_id', $attemptId)
+            ->first();
+        $this->assertNotNull($staleOrder);
+        $blocked = app(ReportGiftService::class)
+            ->createWechatMiniVirtualPaymentAction($staleOrder, 'valid-login-code');
+        $this->assertFalse((bool) ($blocked['ok'] ?? false));
+        $this->assertSame('GIFT_REQUEST_NOT_PAYABLE', (string) ($blocked['error_code'] ?? ''));
         $this->assertSame(0, DB::table('payment_attempts')->count());
 
         $retry = $this->withHeaders($this->headersFor('anon_gift_login_retry_payer'))

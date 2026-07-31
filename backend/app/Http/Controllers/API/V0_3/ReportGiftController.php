@@ -6,18 +6,15 @@ namespace App\Http\Controllers\API\V0_3;
 
 use App\Http\Controllers\Controller;
 use App\Services\Commerce\ReportGiftService;
-use App\Services\Commerce\WechatMiniVirtualPaymentService;
 use App\Support\OrgContext;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 final class ReportGiftController extends Controller
 {
     public function __construct(
         private readonly OrgContext $orgContext,
         private readonly ReportGiftService $gifts,
-        private readonly WechatMiniVirtualPaymentService $wechatMiniVirtual,
     ) {}
 
     public function store(Request $request, string $id): JsonResponse
@@ -88,7 +85,7 @@ final class ReportGiftController extends Controller
             return $this->respond($reserved);
         }
 
-        $payment = $this->createWechatMiniVirtualPaymentActionLocked(
+        $payment = $this->gifts->createWechatMiniVirtualPaymentAction(
             $reserved['order'],
             (string) $payload['wx_login_code']
         );
@@ -104,31 +101,6 @@ final class ReportGiftController extends Controller
             'pay' => $payment['pay'] ?? null,
             'idempotent' => (bool) ($reserved['idempotent'] ?? false),
         ]);
-    }
-
-    /**
-     * @return array<string,mixed>
-     */
-    private function createWechatMiniVirtualPaymentActionLocked(object $order, string $loginCode): array
-    {
-        return DB::transaction(function () use ($order, $loginCode): array {
-            $freshOrder = DB::table('orders')
-                ->where('id', (string) ($order->id ?? ''))
-                ->where('org_id', (int) ($order->org_id ?? 0))
-                ->where('order_no', (string) ($order->order_no ?? ''))
-                ->lockForUpdate()
-                ->first();
-            if ($freshOrder === null) {
-                return [
-                    'ok' => false,
-                    'error_code' => 'ORDER_NOT_FOUND',
-                    'message' => 'order not found.',
-                    'status' => 404,
-                ];
-            }
-
-            return $this->wechatMiniVirtual->createPaymentAction($freshOrder, $loginCode);
-        }, 3);
     }
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Commerce;
 
+use App\Models\Order;
 use App\Models\PaymentAttempt;
 use App\Services\Payments\PaymentProviderRegistry;
 use App\Services\Report\ReportAccess;
@@ -32,6 +33,7 @@ final class ReportGiftService
         private readonly SkuCatalog $skus,
         private readonly EntitlementManager $entitlements,
         private readonly PaymentProviderRegistry $paymentProviders,
+        private readonly WechatMiniVirtualPaymentService $wechatMiniVirtual,
     ) {}
 
     /**
@@ -317,7 +319,7 @@ final class ReportGiftService
                 ];
             }
 
-            $eligibility = app(WechatMiniVirtualPaymentService::class)->validateOrderEligibility(
+            $eligibility = $this->wechatMiniVirtual->validateOrderEligibility(
                 $orgId,
                 $this->normalizeActorId($gift->recipient_user_id ?? null),
                 $this->normalizeActorId($gift->recipient_anon_id ?? null),
@@ -378,6 +380,42 @@ final class ReportGiftService
         });
     }
 
+    /**
+     * @return array<string,mixed>
+     */
+    public function createWechatMiniVirtualPaymentAction(object $order, string $loginCode): array
+    {
+        return DB::transaction(function () use ($order, $loginCode): array {
+            $freshOrder = DB::table('orders')
+                ->where('id', (string) ($order->id ?? ''))
+                ->where('org_id', (int) ($order->org_id ?? 0))
+                ->where('order_no', (string) ($order->order_no ?? ''))
+                ->lockForUpdate()
+                ->first();
+            if ($freshOrder === null) {
+                return $this->error('ORDER_NOT_FOUND', 'order not found.', 404);
+            }
+
+            $gift = $this->findBoundGiftForOrder($freshOrder, true);
+            if ($gift === null) {
+                return $this->error('GIFT_REQUEST_NOT_PAYABLE', 'gift request is not payable.', 409);
+            }
+            $identityGuard = $this->validateGiftOrderIdentity($gift, $freshOrder);
+            if (($identityGuard['ok'] ?? false) !== true) {
+                return $identityGuard;
+            }
+            if ($this->effectiveStatus($gift) !== self::STATUS_PURCHASING
+                || ! in_array(Order::normalizePaymentState(
+                    $freshOrder->payment_state ?? null,
+                    $freshOrder->status ?? null
+                ), [Order::PAYMENT_STATE_CREATED, Order::PAYMENT_STATE_PENDING], true)) {
+                return $this->error('GIFT_REQUEST_NOT_PAYABLE', 'gift request is not payable.', 409);
+            }
+
+            return $this->wechatMiniVirtual->createPaymentAction($freshOrder, $loginCode);
+        }, 3);
+    }
+
     public function findBoundGiftForOrder(object $order, bool $lockForUpdate = false): ?object
     {
         $orderId = trim((string) ($order->id ?? ''));
@@ -433,6 +471,12 @@ final class ReportGiftService
         foreach ($competitors as $competitor) {
             $competitorStatus = $this->effectiveStatus($competitor);
             if (in_array($competitorStatus, [self::STATUS_PENDING, self::STATUS_PURCHASING], true)) {
+                if ($competitorStatus === self::STATUS_PURCHASING) {
+                    $closed = $this->closeCompetingPurchasingOrder($competitor);
+                    if (($closed['ok'] ?? false) !== true) {
+                        return $closed;
+                    }
+                }
                 DB::table('report_gift_requests')
                     ->where('id', (string) $competitor->id)
                     ->whereIn('status', [self::STATUS_PENDING, self::STATUS_PURCHASING])
@@ -456,6 +500,76 @@ final class ReportGiftService
         return $restored === 1
             ? ['ok' => true]
             : $this->error('GIFT_REQUEST_STATUS_CHANGED', 'gift request status changed.', 409);
+    }
+
+    /**
+     * @return array{ok:bool,error?:string,message?:string}
+     */
+    private function closeCompetingPurchasingOrder(object $gift): array
+    {
+        $orderId = trim((string) ($gift->purchased_order_id ?? ''));
+        if ($orderId === '') {
+            return $this->error(
+                'GIFT_COMPETING_ORDER_NOT_FOUND',
+                'competing gift order not found.',
+                409
+            );
+        }
+
+        $order = DB::table('orders')
+            ->where('id', $orderId)
+            ->where('org_id', (int) ($gift->org_id ?? 0))
+            ->lockForUpdate()
+            ->first();
+        if ($order === null) {
+            return $this->error(
+                'GIFT_COMPETING_ORDER_NOT_FOUND',
+                'competing gift order not found.',
+                409
+            );
+        }
+
+        $paymentState = Order::normalizePaymentState(
+            $order->payment_state ?? null,
+            $order->status ?? null
+        );
+        if (in_array($paymentState, [Order::PAYMENT_STATE_PAID, Order::PAYMENT_STATE_REFUNDED], true)) {
+            return $this->error(
+                'GIFT_COMPETING_ORDER_SETTLED',
+                'competing gift order is already settled.',
+                409
+            );
+        }
+
+        $transition = $this->orders->transition(
+            (string) $order->order_no,
+            Order::STATUS_CANCELED,
+            (int) $order->org_id,
+            [
+                'payment_state' => Order::PAYMENT_STATE_CANCELED,
+                'closed_at' => now(),
+            ]
+        );
+        if (($transition['ok'] ?? false) !== true) {
+            return $this->error(
+                (string) ($transition['error'] ?? 'GIFT_COMPETING_ORDER_CLOSE_FAILED'),
+                (string) ($transition['message'] ?? 'competing gift order could not be closed.'),
+                409
+            );
+        }
+
+        $attempt = $this->orders->latestPaymentAttemptForOrder(
+            (string) $order->order_no,
+            (int) $order->org_id
+        );
+        if ($attempt !== null && ! PaymentAttempt::isFinalState($attempt->state ?? null)) {
+            $this->orders->advancePaymentAttempt((string) $attempt->id, [
+                'state' => PaymentAttempt::STATE_CANCELED,
+                'verified_at' => now(),
+            ]);
+        }
+
+        return ['ok' => true];
     }
 
     /**
