@@ -3801,6 +3801,33 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_wechat_mini_virtual_payment_only(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_3/Webhooks/PaymentWebhookController.php',
+            'backend/app/Services/Commerce/PaymentGateway/WechatMiniVirtualGateway.php',
+            'backend/app/Services/Commerce/PaymentWebhookProcessor.php',
+            'backend/app/Services/Commerce/WechatMiniVirtualPaymentService.php',
+            'backend/routes/api.php',
+        ];
+        $routeChangedLines = [
+            "-    \$payProviders = ['stripe', 'billing', 'lemonsqueezy', 'wechatpay', 'alipay'];",
+            "+    \$payProviders = ['stripe', 'billing', 'lemonsqueezy', 'wechatpay', 'wechat_mini_virtual', 'alipay'];",
+            '+        Route::post(',
+            "+            '/orders/{order_no}/wechat-mini-virtual/reconcile',",
+            "+            'App\\\\Http\\\\Controllers\\\\API\\\\V0_3\\\\CommerceController@reconcileWechatMiniVirtual'",
+            '+        )->middleware(\\App\\Http\\Middleware\\FmTokenAuth::class)',
+            "+            ->name('api.v0_3.orders.wechat_mini_virtual.reconcile');",
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            routeChangedLines: $routeChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_freemium_locale_policy_files(): void
     {
         $changed = [
@@ -7775,6 +7802,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
             if (
                 $file === 'backend/routes/api.php'
+                && $this->routeDiffIsWechatMiniVirtualPaymentOnly(
+                    $routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef)
+                )
+            ) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/routes/api.php'
                 && $this->routeDiffIsPublicApiCacheHeadersOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
             ) {
                 continue;
@@ -9454,10 +9490,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Filament/Tenant/Resources/OrderResource.php',
             'backend/app/Http/Controllers/API/V0_3/CommerceController.php',
+            'backend/app/Http/Controllers/API/V0_3/Webhooks/PaymentWebhookController.php',
             'backend/app/Internal/Commerce/PaymentWebhookHandlerCore.php',
             'backend/app/Services/Commerce/Checkout/AlipayCheckoutService.php',
             'backend/app/Services/Commerce/OrderManager.php',
+            'backend/app/Services/Commerce/PaymentGateway/WechatMiniVirtualGateway.php',
+            'backend/app/Services/Commerce/PaymentWebhookProcessor.php',
             'backend/app/Services/Commerce/Webhook/WebhookEntitlementService.php',
+            'backend/app/Services/Commerce/WechatMiniVirtualPaymentService.php',
             'backend/app/Jobs/Commerce/ReprocessPaymentEventJob.php',
         ], true);
     }
@@ -12234,6 +12274,22 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return array_values($changedLines) === [
             "+        ->defaults('seo_privacy_ingest', true)",
+        ];
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsWechatMiniVirtualPaymentOnly(array $changedLines): bool
+    {
+        return array_values($changedLines) === [
+            "-    \$payProviders = ['stripe', 'billing', 'lemonsqueezy', 'wechatpay', 'alipay'];",
+            "+    \$payProviders = ['stripe', 'billing', 'lemonsqueezy', 'wechatpay', 'wechat_mini_virtual', 'alipay'];",
+            '+        Route::post(',
+            "+            '/orders/{order_no}/wechat-mini-virtual/reconcile',",
+            "+            'App\\\\Http\\\\Controllers\\\\API\\\\V0_3\\\\CommerceController@reconcileWechatMiniVirtual'",
+            '+        )->middleware(\\App\\Http\\Middleware\\FmTokenAuth::class)',
+            "+            ->name('api.v0_3.orders.wechat_mini_virtual.reconcile');",
         ];
     }
 

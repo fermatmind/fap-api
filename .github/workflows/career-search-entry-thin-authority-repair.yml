@@ -124,7 +124,6 @@ jobs:
       repair_set_sha256: ${{ steps.validate.outputs.repair_set_sha256 }}
       repair_payload_set_sha256: ${{ steps.validate.outputs.repair_payload_set_sha256 }}
       source_workbook_release_tag: ${{ steps.validate.outputs.source_workbook_release_tag }}
-      source_workbook_asset_id: ${{ steps.validate.outputs.source_workbook_asset_id }}
     steps:
       - name: Checkout exact authority repair control plane
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
@@ -165,7 +164,6 @@ jobs:
           WORKBOOK_ASSET_NAME: fermat_career_assets_v4_2_v9_d23b_schema_repaired.xlsx
           WORKBOOK_SHA256: c30f8743cfd0d8baa14ac931cc7270807425164952f6a44953b5b4ab448778ef
           WORKBOOK_SIZE: "29974136"
-          WORKBOOK_TRANSPORT_CONTROL_SHA: 0a354eb6397d13a4c6b3aa45734fc02342ece2d1
         run: |
           set -euo pipefail
           test "$GITHUB_REF" = "refs/heads/main"
@@ -286,29 +284,6 @@ jobs:
              and .workflow_run_id == $run_id
              and .workflow_run_attempt == $attempt' "$failed_preflight_receipt" >/dev/null
 
-          workbook_release_pages="$(gh api --paginate --slurp "repos/${GITHUB_REPOSITORY}/releases?per_page=100")"
-          workbook_release="$(jq -ce \
-            --arg tag "$SOURCE_WORKBOOK_RELEASE_TAG" \
-            '[.[][] | select(.tag_name == $tag)]
-             | if length == 1 then .[0] else error("WORKBOOK_TRANSPORT_RELEASE_CARDINALITY") end' \
-            <<<"$workbook_release_pages")"
-          jq -e \
-            --arg tag "$SOURCE_WORKBOOK_RELEASE_TAG" \
-            --arg target "$WORKBOOK_TRANSPORT_CONTROL_SHA" \
-            --arg asset "$WORKBOOK_ASSET_NAME" \
-            --arg digest "sha256:${WORKBOOK_SHA256}" \
-            --argjson size "$WORKBOOK_SIZE" \
-            '.tag_name == $tag
-             and .target_commitish == $target
-             and .draft == true
-             and .prerelease == false
-             and ([.assets[] | select(.name == $asset and .state == "uploaded" and .size == $size and .digest == $digest)] | length == 1)
-             and (.assets | length) == 1' <<<"$workbook_release" >/dev/null
-          workbook_asset_id="$(jq -er \
-            --arg asset "$WORKBOOK_ASSET_NAME" \
-            '.assets[] | select(.name == $asset) | .id' <<<"$workbook_release")"
-          [[ "$workbook_asset_id" =~ ^[1-9][0-9]*$ ]]
-
           repair_set=""
           repair_payload_set=""
           if [ "$MODE" = "preflight" ]; then
@@ -396,7 +371,6 @@ jobs:
             echo "repair_set_sha256=$repair_set"
             echo "repair_payload_set_sha256=$repair_payload_set"
             echo "source_workbook_release_tag=$SOURCE_WORKBOOK_RELEASE_TAG"
-            echo "source_workbook_asset_id=$workbook_asset_id"
           } >> "$GITHUB_OUTPUT"
 
   operate:
@@ -418,17 +392,40 @@ jobs:
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
-          SOURCE_WORKBOOK_ASSET_ID: ${{ needs.eligibility.outputs.source_workbook_asset_id }}
+          SOURCE_WORKBOOK_RELEASE_TAG: ${{ needs.eligibility.outputs.source_workbook_release_tag }}
           WORKBOOK_ASSET_NAME: fermat_career_assets_v4_2_v9_d23b_schema_repaired.xlsx
           WORKBOOK_SHA256: c30f8743cfd0d8baa14ac931cc7270807425164952f6a44953b5b4ab448778ef
           WORKBOOK_SIZE: "29974136"
+          WORKBOOK_TRANSPORT_CONTROL_SHA: 0a354eb6397d13a4c6b3aa45734fc02342ece2d1
         run: |
           set -euo pipefail
           mkdir -p transport
+          workbook_release_pages="$(gh api --paginate --slurp "repos/${GITHUB_REPOSITORY}/releases?per_page=100")"
+          workbook_release="$(jq -ce \
+            --arg tag "$SOURCE_WORKBOOK_RELEASE_TAG" \
+            '[.[][] | select(.tag_name == $tag)]
+             | if length == 1 then .[0] else error("WORKBOOK_TRANSPORT_RELEASE_CARDINALITY") end' \
+            <<<"$workbook_release_pages")"
+          jq -e \
+            --arg tag "$SOURCE_WORKBOOK_RELEASE_TAG" \
+            --arg target "$WORKBOOK_TRANSPORT_CONTROL_SHA" \
+            --arg asset "$WORKBOOK_ASSET_NAME" \
+            --arg digest "sha256:${WORKBOOK_SHA256}" \
+            --argjson size "$WORKBOOK_SIZE" \
+            '.tag_name == $tag
+             and .target_commitish == $target
+             and .draft == true
+             and .prerelease == false
+             and ([.assets[] | select(.name == $asset and .state == "uploaded" and .size == $size and .digest == $digest)] | length == 1)
+             and (.assets | length) == 1' <<<"$workbook_release" >/dev/null
+          source_workbook_asset_id="$(jq -er \
+            --arg asset "$WORKBOOK_ASSET_NAME" \
+            '.assets[] | select(.name == $asset) | .id' <<<"$workbook_release")"
+          [[ "$source_workbook_asset_id" =~ ^[1-9][0-9]*$ ]]
           workbook="transport/$WORKBOOK_ASSET_NAME"
           gh api \
             -H "Accept: application/octet-stream" \
-            "repos/${GITHUB_REPOSITORY}/releases/assets/${SOURCE_WORKBOOK_ASSET_ID}" > "$workbook"
+            "repos/${GITHUB_REPOSITORY}/releases/assets/${source_workbook_asset_id}" > "$workbook"
           test "$(sha256sum "$workbook" | awk '{print $1}')" = "$WORKBOOK_SHA256"
           test "$(stat -c '%s' "$workbook")" = "$WORKBOOK_SIZE"
 

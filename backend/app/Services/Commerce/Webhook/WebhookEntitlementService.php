@@ -307,8 +307,8 @@ class WebhookEntitlementService
                     ]);
                     $eventContext = $this->core->buildEventContext($orderMeta, $anonId);
 
-                    $providerTradeNo = is_scalar($normalized['external_trade_no'] ?? null)
-                        ? (string) $normalized['external_trade_no']
+                    $providerTradeNo = is_scalar($normalized['provider_trade_no'] ?? $normalized['external_trade_no'] ?? null)
+                        ? (string) ($normalized['provider_trade_no'] ?? $normalized['external_trade_no'])
                         : null;
                     $eventAt = is_scalar($normalized['paid_at'] ?? null)
                         ? (string) $normalized['paid_at']

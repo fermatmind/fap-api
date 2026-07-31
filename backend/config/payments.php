@@ -42,6 +42,10 @@ return [
             'enabled' => (bool) env('PAYMENTS_PROVIDER_WECHATPAY_ENABLED', false),
             'auto_enable_when_configured' => (bool) env('PAYMENTS_PROVIDER_WECHATPAY_AUTO_ENABLE_WHEN_CONFIGURED', true),
         ],
+        'wechat_mini_virtual' => [
+            'enabled' => (bool) env('PAYMENTS_PROVIDER_WECHAT_MINI_VIRTUAL_ENABLED', false),
+            'auto_enable_when_configured' => false,
+        ],
         'alipay' => [
             'enabled' => (bool) env('PAYMENTS_PROVIDER_ALIPAY_ENABLED', false),
             'auto_enable_when_configured' => (bool) env('PAYMENTS_PROVIDER_ALIPAY_AUTO_ENABLE_WHEN_CONFIGURED', true),
@@ -63,5 +67,18 @@ return [
     ],
     'lemonsqueezy' => [
         'webhook_secret' => env('LEMONSQUEEZY_WEBHOOK_SECRET', ''),
+    ],
+    'wechat_mini_virtual' => [
+        'app_id' => env('WECHAT_MINI_VIRTUAL_APP_ID', ''),
+        'app_secret' => env('WECHAT_MINI_VIRTUAL_APP_SECRET', ''),
+        'offer_id' => env('WECHAT_MINI_VIRTUAL_OFFER_ID', ''),
+        'app_key' => env('WECHAT_MINI_VIRTUAL_APP_KEY', ''),
+        'callback_token' => env('WECHAT_MINI_VIRTUAL_CALLBACK_TOKEN', ''),
+        'environment' => (int) env('WECHAT_MINI_VIRTUAL_ENVIRONMENT', 1),
+        'mode' => env('WECHAT_MINI_VIRTUAL_MODE', 'short_series_goods'),
+        'product_id' => env('WECHAT_MINI_VIRTUAL_PRODUCT_ID', ''),
+        'sku' => env('WECHAT_MINI_VIRTUAL_SKU', 'MBTI_REPORT_FULL'),
+        'price_cents' => (int) env('WECHAT_MINI_VIRTUAL_PRICE_CENTS', 499),
+        'http_timeout_seconds' => (int) env('WECHAT_MINI_VIRTUAL_HTTP_TIMEOUT_SECONDS', 8),
     ],
 ];
