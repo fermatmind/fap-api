@@ -297,6 +297,25 @@ and zero persistent server writes. It still records zero cache, CMS, database,
 publication, indexability, queue, sitemap, llms, Search Channel, URL
 submission, deploy, and rollback operations in preflight mode.
 
+The transport-backed preflight run `30599594878` attempt `1` proved the
+workbook staging/removal path and then failed closed with
+`CROSSWALK_AUTHORITY_DRIFT`. Its receipt SHA-256 is
+`adaea57e089ee506fd545af32fe33f3de7265adf0df20c24051fc7e3a054479d`,
+and its artifact digest is
+`a55ff51d1fc467175bff3ea304243597a55677640792115bd05777882446972c`.
+It recorded one ephemeral staging write, one deletion, zero persistent server
+writes, and zero database/cache/CMS writes.
+
+The recovery preflight binds that exact failed run and emits only a safe
+five-position crosswalk diagnostic: per-position row counts, expected-code
+match counts, an enumerated `exact`/`missing`/`duplicate`/`conflict`
+classification, and a deterministic diagnostic-state hash. It never emits
+slugs, occupation IDs, crosswalk codes, workbook payloads, SQL, or server
+paths. Crosswalk drift returns
+`HOLD_CROSSWALK_AUTHORITY_REPAIR_REQUIRED` with a successful read-only
+receipt, so any authority repair can be designed from one bounded production
+read and must remain a separately authorized write.
+
 `repair` is separately authorized by the exact successful preflight receipt,
 repair-set SHA, and payload-set SHA. It revalidates the complete plan and
 atomically creates exactly five `career_job_display_assets` rows. The database
