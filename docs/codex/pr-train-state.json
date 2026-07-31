@@ -101819,5 +101819,74 @@
       }
     ],
     "updated_at": "2026-07-31T01:28:15Z"
+  },
+  "EN-PARITY-W1-MBTI-COMPARISON-IMPORTER-01": {
+    "id": "EN-PARITY-W1-MBTI-COMPARISON-IMPORTER-01",
+    "repo": "fap-api",
+    "title": "EN-PARITY-W1-MBTI-COMPARISON-IMPORTER-01: add exact-package comparison dry-run importer",
+    "base": "main",
+    "branch": "codex/en-parity-w1-mbti-comparison-importer-01",
+    "depends_on": [
+      "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-01"
+    ],
+    "status": "local_verified",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The operator supplied a continuous execution /goal with this exact PR id, title, repository, dependency, scope, local checks, and controlled-action boundaries."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "PR #3424 is MERGED at 12dff5f80161afa5b80151715171e037cdcdb2a3 and its exact frozen comparison package SHA is 2e2beb694b62ddff56b128b2b4a443fb5797b76bd5df160f8946b55a3368931a."
+      },
+      "preflight": {
+        "status": "passed",
+        "evidence": "Created a clean isolated worktree and branch from exact origin/main cc111cc27aab9eba5d9232ef7a409f7374779eee. No matching local branch, remote branch, or open PR existed."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "php artisan test --filter=MbtiComparisonEnglishPackageImporterTest --no-ansi passed 4 tests/190 assertions. The exact repository package dry run returned seven ordered rows with zh-CN read-only sources, en inactive/draft targets, no reader copy, and every write/release flag false. Wrong SHA, rebuilt package, deterministic replay, protected zh-CN rows, and unsupported write mode passed. Scoped Pint passed for all three PHP files. php artisan route:list --path=api --except-vendor completed with 224 lines. YAML, JSON, and git diff checks passed."
+      },
+      "changed_file_scope": {
+        "status": "passed",
+        "evidence": "Changed paths are limited to the exact command, ContentImport service, focused importer test, backend/AGENTS.md, and this PR's docs/codex manifest/state entries. No frozen package, model, migration, route, controller, public API, result package, CMS/database data, publish, SEO runtime, Search Channel, deploy, or frontend file changed."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "history": [
+      {
+        "at": "2026-07-31T01:46:37Z",
+        "status": "in_progress",
+        "note": "Started PR05 from clean latest origin/main after verifying PR03 merged and the exact frozen seven-asset package SHA. Scope is a redacted no-write dry-run importer only; database/CMS import, W9, publication, activation, indexability, search, and deploy remain deferred."
+      },
+      {
+        "at": "2026-07-31T01:48:53Z",
+        "status": "local_verified",
+        "note": "Implemented an exact-package no-write importer that recomputes the frozen manifest chain, rejects wrong or rebuilt SHA identities, freezes deterministic zh-CN-to-en pairing for all seven slugs, and emits a redacted inactive/draft plan. Focused tests passed 4 tests/190 assertions, including byte-identical replay and preservation of existing zh-CN rows. Pint, command-level dry run, 224-line API route inventory, YAML/JSON, diff, and exact scope checks passed. No database/CMS write or release action occurred."
+      }
+    ],
+    "updated_at": "2026-07-31T01:48:53Z"
   }
 }

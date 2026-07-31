@@ -124,6 +124,12 @@
 - Big Five and Enneagram `PersonalityPublicContentAsset` pages are the explicit text-only exception: their database, CMS/import contract, public API, section content, and SEO projection must not support hero, inline, OG, Twitter, Markdown, or HTML images. Historical revision media keys are audit-only and never runtime authority.
 - Public APIs must not emit historical Tencent/COS media URLs or ad hoc raw media URLs for CMS-backed surfaces.
 
+## English parity exact-package importer rules
+- W1 MBTI English comparison dry-run import is bound to the immutable package SHA recorded by `EN-PARITY-W1-MBTI-COMPARISON-ASSETS-01`. The importer must recompute the manifest file chain and reject unknown, mismatched, or rebuilt packages.
+- Dry-run is the only mode supported by `EN-PARITY-W1-MBTI-COMPARISON-IMPORTER-01`. It may emit a redacted deterministic plan, but it must not write CMS/database rows, publish, activate, release indexability, update sitemap/llms, submit search URLs, or expose reader copy or local paths in its receipt.
+- Locale pairing is fixed as read-only `zh-CN` source authority to `en` target authority for the exact seven comparison slugs. A dry run must never overwrite or mutate the `zh-CN` authority row.
+- Actual inactive/draft import is a separate controlled PR and requires the exact frozen package SHA plus its own authorization. A successful dry run is not an import, W9 approval, editorial approval, publication, activation, or SEO release receipt.
+
 ## DailyGiving proof handling rules
 - Original charity donation receipt/proof images may be uploaded as the public proof media asset when the operator explicitly approves that original image for public use. A separate redacted derivative is not required for DailyGiving public proof.
 - Raw private storage paths, redaction notes, backend-only ledger fields, tokens, private URLs, secrets, and system credentials must never be exposed by public APIs, frontend rendering, sitemap, llms, social distribution, or search submission.

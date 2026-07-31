@@ -47513,3 +47513,52 @@ prs:
     deploy_allowed: false
     content_authority: backend candidate package; runtime authority unchanged
     repository_rule_impact: unpublished baseline package only; backend authority remains unchanged and public exposure does not change
+
+  - id: EN-PARITY-W1-MBTI-COMPARISON-IMPORTER-01
+    repo: fap-api
+    base: main
+    branch: codex/en-parity-w1-mbti-comparison-importer-01
+    title: "EN-PARITY-W1-MBTI-COMPARISON-IMPORTER-01: add exact-package comparison dry-run importer"
+    status: local_verified
+    depends_on:
+      - EN-PARITY-W1-MBTI-COMPARISON-ASSETS-01
+    train_scope: en_parity_w1_mbti_comparison_exact_package_dry_run_importer
+    scope:
+      - Add a no-write dry-run importer bound to the exact frozen seven-asset comparison package SHA.
+      - Recompute the package manifest file chain and fail closed on unknown, wrong, or rebuilt packages.
+      - Produce deterministic redacted zh-CN-to-en locale pairing and inactive/draft target plans.
+      - Prove deterministic replay while preserving all zh-CN authority rows.
+      - Update backend repository rules for the new exact-package import workflow boundary.
+    allowed_paths:
+      - backend/app/Console/Commands/ImportMbtiComparisonEnglishPackage.php
+      - backend/app/Services/ContentImport/MbtiComparisonEnglishPackageImporter.php
+      - backend/tests/Feature/ContentImport/MbtiComparisonEnglishPackageImporterTest.php
+      - backend/AGENTS.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Execute a CMS or database import, create or update authority rows, revisions, reviews, or approvals.
+      - Publish, activate, release indexability, change sitemap/llms/canonical, submit search URLs, or deploy.
+      - Change the frozen comparison package, result/report package, public API, model, migration, route, controller, scheduler, queue, or frontend.
+      - Emit reader copy, local filesystem paths, private data, production receipts, or an independent W9 claim in the dry-run receipt.
+    validation:
+      - cd backend && php artisan test --filter=MbtiComparisonEnglishPackageImporterTest --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/ImportMbtiComparisonEnglishPackage.php app/Services/ContentImport/MbtiComparisonEnglishPackageImporter.php tests/Feature/ContentImport/MbtiComparisonEnglishPackageImporterTest.php
+      - cd backend && php artisan content:import-mbti-comparison-english-package --package-sha=2e2beb694b62ddff56b128b2b4a443fb5797b76bd5df160f8946b55a3368931a --dry-run --json
+      - cd backend && php artisan route:list --path=api --except-vendor
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: exact package dry-run planner only; backend runtime authority unchanged
+    repository_rule_impact: adds exact-package validation and no-write locale-pair planning rules; real import remains separately controlled
