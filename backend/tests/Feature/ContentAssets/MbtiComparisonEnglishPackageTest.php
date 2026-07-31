@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class MbtiComparisonEnglishPackageTest extends TestCase
 {
-    private const PACKAGE_DIRECTORY = __DIR__.'/../../../content_assets/en-content-parity/W1-mbti/comparisons/w9-correction-3325d399';
+    private const PACKAGE_DIRECTORY = __DIR__.'/../../../content_assets/en-content-parity/W1-mbti/comparisons/w9-correction-6628be6d';
 
     private const INVENTORY_SHA = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
@@ -64,7 +64,7 @@ final class MbtiComparisonEnglishPackageTest extends TestCase
         $package = $this->readPackageJson('assets.json');
 
         self::assertSame('fermatmind.en_parity.immutable_content_package_manifest.v1', $manifest['schema_version']);
-        self::assertSame('EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-2026-07-31', $manifest['package_id']);
+        self::assertSame('EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-02-2026-07-31', $manifest['package_id']);
         self::assertSame(self::INVENTORY_SHA, $manifest['inventory_package_sha256']);
         self::assertSame('unpublished_candidate', $manifest['status']);
         self::assertSame(7, $manifest['asset_count']);
@@ -81,7 +81,7 @@ final class MbtiComparisonEnglishPackageTest extends TestCase
         }
 
         self::assertSame($manifest['package_sha256'], hash('sha256', $packageHashInput));
-        self::assertSame('3325d3999edda87e3c6e374136e0571308641f0006ffa447e15f946acabe9975', $manifest['package_sha256']);
+        self::assertSame('6628be6d0418d289a6f932297dfba8e9f103d26d9b5ec111cd84018a173c3db7', $manifest['package_sha256']);
     }
 
     #[Test]
