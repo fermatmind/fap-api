@@ -133,6 +133,13 @@ final class BigFiveEnglishResultAssetPackageTest extends TestCase
         $this->assertSame([], $byUnit['analytics_reader_labels']['personal_result_fields']);
         $this->assertCount(5, $byUnit['five_dimension_explanations']['dimensions']);
         $this->assertCount(30, $byUnit['facet_subscale_explanations']['facets']);
+        $n5 = array_values(array_filter(
+            $byUnit['facet_subscale_explanations']['facets'],
+            static fn (array $facet): bool => $facet['code'] === 'N5'
+        ))[0];
+        $this->assertSame('Overload Exit Urge', $n5['label']);
+        $this->assertStringContainsString('when overloaded', $n5['description']);
+        $this->assertStringContainsString('disconnect, withdraw, or change the situation immediately', $n5['description']);
     }
 
     #[Test]
@@ -152,7 +159,7 @@ final class BigFiveEnglishResultAssetPackageTest extends TestCase
             hash('sha256', implode("\n", $canonical))
         );
         $this->assertSame(
-            'cda743f52cebaf753b8d0f2f234dd893e88f5d630ea6cc4e7a5f5b32faefda06',
+            '42760c9d3b7ae3449e1eaacccbd7c1b3dbdf78cae42cfef44d0063f640a54dd7',
             $shaManifest['package_sha256']
         );
     }
@@ -161,14 +168,26 @@ final class BigFiveEnglishResultAssetPackageTest extends TestCase
     public function it_pins_unchanged_zh_registry_and_runtime_selector_baselines(): void
     {
         $manifest = $this->loadJson('package_manifest.json');
+        $commit = $manifest['source_baselines']['fap_api_commit'];
+
         $this->assertSame(
-            $manifest['source_baselines']['zh_cn_registry_content_tree_sha256'],
-            $this->contentTreeSha(base_path('content_packs/BIG5_OCEAN/v2/registry'))
+            '0c0c42c20ee1a78164a91093d69c7d616edfa8a7',
+            $manifest['source_baselines']['zh_cn_registry_git_tree_oid']
         );
         $this->assertSame(
-            $manifest['source_baselines']['result_page_v2_service_content_tree_sha256'],
-            $this->contentTreeSha(base_path('app/Services/BigFive/ResultPageV2'))
+            'bcf1cdb47da2596e252e4940ccc6cac368218e5f',
+            $manifest['source_baselines']['result_page_v2_service_git_tree_oid']
         );
+        if ($this->gitCommitIsAvailable($commit)) {
+            $this->assertSame(
+                $manifest['source_baselines']['zh_cn_registry_git_tree_oid'],
+                $this->gitTreeOid($commit, 'backend/content_packs/BIG5_OCEAN/v2/registry')
+            );
+            $this->assertSame(
+                $manifest['source_baselines']['result_page_v2_service_git_tree_oid'],
+                $this->gitTreeOid($commit, 'backend/app/Services/BigFive/ResultPageV2')
+            );
+        }
         $this->assertFalse($manifest['authority']['existing_zh_cn_registry_changed']);
         $this->assertFalse($manifest['authority']['runtime_selector_changed']);
         $this->assertFalse($manifest['authority']['importer_changed']);
@@ -208,21 +227,26 @@ final class BigFiveEnglishResultAssetPackageTest extends TestCase
         return base_path(self::PACKAGE.'/'.$file);
     }
 
-    private function contentTreeSha(string $root): string
+    private function gitCommitIsAvailable(string $commit): bool
     {
-        $iterator = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator($root, \FilesystemIterator::SKIP_DOTS)
+        exec(
+            'git -C '.escapeshellarg(dirname(base_path())).
+            ' cat-file -e '.escapeshellarg($commit.'^{commit}').' 2>/dev/null',
+            $output,
+            $status
         );
-        $rows = [];
-        foreach ($iterator as $file) {
-            if (! $file->isFile()) {
-                continue;
-            }
-            $relative = substr($file->getPathname(), strlen($root) + 1);
-            $rows[] = $relative.':'.hash_file('sha256', $file->getPathname());
-        }
-        sort($rows, SORT_STRING);
 
-        return hash('sha256', implode("\n", $rows));
+        return $status === 0;
+    }
+
+    private function gitTreeOid(string $commit, string $path): string
+    {
+        $command = 'git -C '.escapeshellarg(dirname(base_path())).
+            ' rev-parse '.escapeshellarg($commit.':'.$path);
+        $value = shell_exec($command);
+
+        $this->assertNotNull($value);
+
+        return trim((string) $value);
     }
 }

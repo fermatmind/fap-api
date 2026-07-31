@@ -6187,6 +6187,22 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_w2_en_parity_result_draft_package(): void
+    {
+        $allowed = [
+            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/package_manifest.json',
+            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/content_assets.jsonl',
+            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/validate_package.php',
+        ];
+        $blocked = [
+            'backend/content_packs/BIG5_OCEAN/v2/registry/shared/trait_labels.json',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_personality_public_asset_contract_changes(): void
     {
         $changed = [
@@ -7994,6 +8010,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isBigFiveV2EnParityDraftCatalogFile($file)) {
+                continue;
+            }
+
+            if ($this->isBigFiveW2EnParityResultDraftPackageFile($file)) {
                 continue;
             }
 
@@ -11893,6 +11913,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isBigFiveV2EnParityDraftCatalogFile(string $file): bool
     {
         return $file === 'backend/content_packs/BIG5_OCEAN/v2/drafts/en_parity/result_page_v2_en_asset_catalog_draft.v1.json';
+    }
+
+    private function isBigFiveW2EnParityResultDraftPackageFile(string $file): bool
+    {
+        return str_starts_with(
+            $file,
+            'backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1/'
+        );
     }
 
     private function isBigFiveEnglishDraftInventoryFile(string $file): bool
