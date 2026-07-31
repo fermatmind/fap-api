@@ -343,7 +343,8 @@ final class ReportGiftService
                     (string) $gift->id,
                     $idempotencyKey,
                     $this->normalizeActorId($payerUserId),
-                    $this->normalizeActorId($payerAnonId)
+                    $this->normalizeActorId($payerAnonId),
+                    $this->giftOrderReservationGeneration($gift, $payerUserId, $payerAnonId)
                 ),
                 null,
                 $requestId
@@ -784,6 +785,41 @@ final class ReportGiftService
     }
 
     /**
+     * @param  array<string,mixed>  $payload
+     * @return array<string,mixed>
+     */
+    public function presentOwnedOrderPayload(int $orgId, string $orderNo, array $payload): array
+    {
+        $giftOrderExists = DB::table('report_gift_requests as gifts')
+            ->join('orders', 'orders.id', '=', 'gifts.purchased_order_id')
+            ->where('orders.org_id', $orgId)
+            ->where('orders.order_no', trim($orderNo))
+            ->exists();
+        if (! $giftOrderExists) {
+            return $payload;
+        }
+
+        $payload['attempt_id'] = null;
+        $payload['result_url'] = null;
+        $payload['delivery'] = [
+            'can_view_report' => false,
+            'report_url' => null,
+            'can_download_pdf' => false,
+            'report_pdf_url' => null,
+            'can_resend' => false,
+            'contact_email_present' => false,
+            'last_delivery_email_sent_at' => null,
+            'can_request_claim_email' => false,
+        ];
+        $payload['exact_result_entry'] = null;
+        $payload['mbti_form_v1'] = null;
+        $payload['big5_form_v1'] = null;
+        unset($payload['order'], $payload[ReportAccess::ACCESS_HUB_KEY]);
+
+        return $payload;
+    }
+
+    /**
      * @return array{ok:bool,error?:string,message?:string}
      */
     private function validateGiftOrderIdentity(object $gift, object $order): array
@@ -940,13 +976,32 @@ final class ReportGiftService
         string $giftRequestId,
         string $key,
         ?string $payerUserId,
-        ?string $payerAnonId
+        ?string $payerAnonId,
+        string $reservationGeneration
     ): string {
         $payerIdentity = $payerUserId !== null
             ? 'user:'.$payerUserId
             : 'anon:'.(string) $payerAnonId;
 
-        return 'gift:'.$giftRequestId.':'.hash('sha256', $payerIdentity."\0".$key);
+        return 'gift:'.$giftRequestId.':'.hash(
+            'sha256',
+            $payerIdentity."\0".$key."\0".$reservationGeneration
+        );
+    }
+
+    private function giftOrderReservationGeneration(
+        object $gift,
+        ?string $payerUserId,
+        ?string $payerAnonId
+    ): string {
+        return (string) DB::table('orders')
+            ->where('org_id', (int) ($gift->org_id ?? 0))
+            ->where('target_attempt_id', (string) ($gift->target_attempt_id ?? ''))
+            ->where('sku', (string) ($gift->sku ?? ''))
+            ->where('provider', self::PROVIDER)
+            ->where('user_id', $this->normalizeActorId($payerUserId))
+            ->where('anon_id', $this->normalizeActorId($payerAnonId))
+            ->count();
     }
 
     private function normalizeActorId(mixed $value): ?string

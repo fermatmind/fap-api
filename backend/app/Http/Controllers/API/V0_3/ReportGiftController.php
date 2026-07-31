@@ -103,6 +103,28 @@ final class ReportGiftController extends Controller
         ]);
     }
 
+    public function getOrder(Request $request, string $order_no): JsonResponse
+    {
+        $response = app(CommerceController::class)->getOrder($request, $order_no);
+        if ($response->getStatusCode() !== 200) {
+            return $response;
+        }
+
+        $payload = $response->getData(true);
+        if (! is_array($payload)) {
+            return $response;
+        }
+
+        return response()->json(
+            $this->gifts->presentOwnedOrderPayload(
+                $this->orgContext->orgId(),
+                $order_no,
+                $payload
+            ),
+            $response->getStatusCode()
+        );
+    }
+
     /**
      * @param  array<string,mixed>  $result
      */

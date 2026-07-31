@@ -1438,7 +1438,7 @@
                         "description": "OK"
                     }
                 },
-                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\CommerceController@getOrder",
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\ReportGiftController@getOrder",
                 "x-laravel-middleware": [
                     "api",
                     "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",

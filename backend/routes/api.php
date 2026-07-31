@@ -421,7 +421,7 @@ Route::prefix('v0.3')->middleware([
             ->name('api.v0_3.orders.wechat_mini_virtual.reconcile');
         Route::get('/orders/{order_no}/pay/alipay', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@launchAlipay')
             ->middleware(\App\Http\Middleware\FmTokenOptional::class);
-        Route::get('/orders/{order_no}', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@getOrder')
+        Route::get('/orders/{order_no}', [ReportGiftController::class, 'getOrder'])
             ->middleware(\App\Http\Middleware\FmTokenOptional::class);
         Route::get('/shares/{id}', [ShareV03Controller::class, 'getShareView']);
         Route::post('/shares/{shareId}/click', [ShareV03Controller::class, 'click'])

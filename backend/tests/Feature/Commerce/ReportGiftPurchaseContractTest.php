@@ -206,6 +206,17 @@ final class ReportGiftPurchaseContractTest extends TestCase
             ->assertOk()
             ->assertJsonPath('access_level', 'full')
             ->assertJsonPath('full_report_entitlement_v1.unlock_source', 'gift_purchase');
+        $payerOrder = $this->withHeaders($this->headersFor($payerAnonId))
+            ->getJson('/api/v0.3/orders/'.$orderNo)
+            ->assertOk()
+            ->assertJsonPath('attempt_id', null)
+            ->assertJsonPath('delivery.can_view_report', false)
+            ->assertJsonPath('delivery.report_url', null)
+            ->assertJsonPath('delivery.can_download_pdf', false)
+            ->assertJsonPath('delivery.report_pdf_url', null)
+            ->assertJsonMissingPath('order')
+            ->assertJsonMissingPath('full_report_access_v1');
+        $this->assertStringNotContainsString($attemptId, $payerOrder->getContent());
 
         Http::fake([
             'https://api.weixin.qq.com/cgi-bin/token*' => Http::response([
@@ -704,6 +715,9 @@ final class ReportGiftPurchaseContractTest extends TestCase
             ->where('target_attempt_id', $attemptId)
             ->value('payment_state'));
         $this->assertSame(0, DB::table('payment_attempts')->count());
+        $failedOrderNo = (string) DB::table('orders')
+            ->where('target_attempt_id', $attemptId)
+            ->value('order_no');
 
         $staleOrder = DB::table('orders')
             ->where('target_attempt_id', $attemptId)
@@ -715,14 +729,15 @@ final class ReportGiftPurchaseContractTest extends TestCase
         $this->assertSame('GIFT_REQUEST_NOT_PAYABLE', (string) ($blocked['error_code'] ?? ''));
         $this->assertSame(0, DB::table('payment_attempts')->count());
 
-        $retry = $this->withHeaders($this->headersFor('anon_gift_login_retry_payer'))
+        $retry = $this->withHeaders($this->headersFor($payerAnonId))
             ->postJson('/api/v0.3/report-gifts/'.$token.'/orders/wechat_mini_virtual', [
                 'idempotency_key' => 'gift-login-failure',
                 'wx_login_code' => 'valid-login-code',
             ]);
         $this->assertTrue((bool) $retry->json('ok'), $retry->getContent());
         $retryOrderNo = (string) $retry->json('order_no');
-        $this->assertSame('anon_gift_login_retry_payer', (string) DB::table('orders')
+        $this->assertNotSame($failedOrderNo, $retryOrderNo);
+        $this->assertSame($payerAnonId, (string) DB::table('orders')
             ->where('order_no', $retryOrderNo)
             ->value('anon_id'));
         $retrySignData = json_decode(

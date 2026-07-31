@@ -3885,6 +3885,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             '+        )->middleware(\App\Http\Middleware\FmTokenAuth::class)',
             "+            ->where('token', '[A-Za-z0-9_-]{43}')",
             "+            ->name('api.v0_3.report_gifts.orders.wechat_mini_virtual.store');",
+            "-        Route::get('/orders/{order_no}', 'App\\\\Http\\\\Controllers\\\\API\\\\V0_3\\\\CommerceController@getOrder')",
+            "+        Route::get('/orders/{order_no}', [ReportGiftController::class, 'getOrder'])",
         ];
         $orderRepairServiceChangedLines = $this->paidReportGiftingOrderRepairChangedLines();
         $orderRepairServiceHunkHeaders = $this->paidReportGiftingOrderRepairHunkHeaders();
@@ -12668,6 +12670,8 @@ DIFF;
             '+        )->middleware(\App\Http\Middleware\FmTokenAuth::class)',
             "+            ->where('token', '[A-Za-z0-9_-]{43}')",
             "+            ->name('api.v0_3.report_gifts.orders.wechat_mini_virtual.store');",
+            "-        Route::get('/orders/{order_no}', 'App\\\\Http\\\\Controllers\\\\API\\\\V0_3\\\\CommerceController@getOrder')",
+            "+        Route::get('/orders/{order_no}', [ReportGiftController::class, 'getOrder'])",
         ];
     }
 
