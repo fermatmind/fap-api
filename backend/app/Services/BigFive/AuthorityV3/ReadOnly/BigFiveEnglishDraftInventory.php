@@ -1063,12 +1063,13 @@ final class BigFiveEnglishDraftInventory
     private function containsCssImageReference(string $value): bool
     {
         $imageFunction = '(?:url|image(?:-set)?|cross-fade|element|(?:linear|radial|conic)-gradient)\s*\(';
+        $imageValueFunction = '(?:'.$imageFunction.'|(?:var|env)\s*\()';
         $imageProperty = '(?:background(?:-image)?|border-image(?:-source)?|clip-path|content|cursor|'
             .'filter|list-style(?:-image)?|mask(?:-image)?|offset-path|shape-outside)';
         $decodedValue = $this->decodeCssEscapes($value);
 
         if (preg_match(
-            '/(?:^|[;{]\s*)'.$imageProperty.'\s*:\s*[^;}]*'.$imageFunction.'/i',
+            '/(?:^|[;{]\s*)'.$imageProperty.'\s*:\s*[^;}]*'.$imageValueFunction.'/i',
             $decodedValue,
         ) === 1) {
             return true;
@@ -1077,8 +1078,27 @@ final class BigFiveEnglishDraftInventory
         preg_match_all('/<[^>]+>/s', $value, $tags);
         foreach ($tags[0] as $tag) {
             $style = $this->htmlAttributeValue($tag, 'style');
-            if ($style !== null
-                && preg_match('/'.$imageFunction.'/i', $this->decodeCssEscapes($style)) === 1) {
+            if ($style === null) {
+                continue;
+            }
+            $decodedStyle = $this->decodeCssEscapes($style);
+            if (preg_match('/'.$imageFunction.'/i', $decodedStyle) === 1
+                || preg_match(
+                    '/(?:^|;\s*)'.$imageProperty.'\s*:\s*[^;]*'.$imageValueFunction.'/i',
+                    $decodedStyle,
+                ) === 1) {
+                return true;
+            }
+        }
+
+        preg_match_all('/<style\b[^>]*>(.*?)(?:<\/style\s*>|$)/is', $value, $styleElements);
+        foreach ($styleElements[1] as $styleElement) {
+            $decodedStyle = $this->decodeCssEscapes($styleElement);
+            if (preg_match('/'.$imageFunction.'/i', $decodedStyle) === 1
+                || preg_match(
+                    '/(?:^|[;{]\s*)'.$imageProperty.'\s*:\s*[^;}]*'.$imageValueFunction.'/i',
+                    $decodedStyle,
+                ) === 1) {
                 return true;
             }
         }
