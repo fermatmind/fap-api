@@ -11,7 +11,7 @@
       "API-VPAY-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "6c1328394f5efaf84f9b5419cc1c52fdb040cf97",
+    "commit_sha": "af2bcccc94a15866677f12afb58a57d03387080f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3448",
     "checks": {
       "dependency": {
@@ -76,9 +76,14 @@
         "at": "2026-07-31T03:46:41Z",
         "status": "github_checks_pending",
         "note": "Exact head e73a18fd3dec8288524ebe705b3e860c148ffc04 passed all nine required checks with staging parity skipped, but review found three valid entitlement lifecycle issues and origin/main advanced by two commits. The repair keeps purchasing requests active beyond request TTL, reactivates and rebinds a revoked grant for a later paid gift, and preserves unrelated active entitlement provenance. Focused validation now passes 49 tests / 584 assertions plus the 3 / 9 classifier and scoped Pint; latest-main integration and fresh exact-head checks remain required."
+      },
+      {
+        "at": "2026-07-31T03:47:55Z",
+        "status": "github_checks_pending",
+        "note": "Rebased all API-GIFT commits onto exact origin/main 012392aaf0d83375414f8eb9ad010f6c7c577714 without conflict. Post-rebase validation passed 49 tests / 584 assertions, OpenAPI 2 / 6, exact classifier 3 / 9, scoped Pint, Composer strict, YAML/JSON, diff, and exact 13-path scope. Repaired implementation head is af2bcccc94a15866677f12afb58a57d03387080f; a metadata-only commit will record it before fresh GitHub checks."
       }
     ],
-    "updated_at": "2026-07-31T03:46:41Z"
+    "updated_at": "2026-07-31T03:47:55Z"
   },
   "MBTI-CROSS-PUBLISH-51": {
     "id": "MBTI-CROSS-PUBLISH-51",
