@@ -16,7 +16,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
 
     private const INVENTORY_SHA = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
-    private const PACKAGE_SHA = '21a6d77b6f3232a01aeb3c0ffc391c6fde15dfc6d40661506c1d4ebca561c536';
+    private const PACKAGE_SHA = '129451a81fdbe5c4e9593324e7ad44985128a6f1eaf3996b63e1a1c0be2e982b';
 
     private const EXPECTED_CANDIDATE_ROW_IDS = [
         'W1-RESULT-CORE-05-OFFER-CTA',
@@ -576,16 +576,44 @@ final class MbtiResultEnglishPackageTest extends TestCase
         self::assertFalse($claimReport['independent_w9']);
 
         $actualMatches = [];
+        $stringLeaves = $this->collectStringLeaves($assets);
         foreach ($claimReport['forbidden_claim_scan']['phrases'] as $phrase) {
-            if (str_contains($serialized, strtolower($phrase))) {
-                $actualMatches[] = $phrase;
+            $forms = $claimReport['forbidden_claim_scan']['phrase_forms'][$phrase] ?? [$phrase];
+            foreach ($stringLeaves as $leaf) {
+                foreach ($forms as $form) {
+                    if (! str_contains(strtolower($leaf['value']), strtolower($form))) {
+                        continue;
+                    }
+
+                    $actualMatches[] = [
+                        'phrase' => $phrase,
+                        'matched_text' => $form,
+                        'source' => 'assets.json',
+                        'json_pointer' => $leaf['json_pointer'],
+                    ];
+                }
             }
         }
         self::assertSame(
             $actualMatches,
-            array_column($claimReport['forbidden_claim_scan']['matches'], 'phrase'),
+            array_map(
+                static fn (array $match): array => array_intersect_key(
+                    $match,
+                    array_flip(['phrase', 'matched_text', 'source', 'json_pointer']),
+                ),
+                $claimReport['forbidden_claim_scan']['matches'],
+            ),
         );
-        self::assertSame([], $actualMatches);
+        self::assertSame([[
+            'phrase' => 'fixed identity',
+            'matched_text' => 'fixed identities',
+            'source' => 'assets.json',
+            'json_pointer' => '/template_contract/claim_boundary',
+        ]], $actualMatches);
+        self::assertSame(
+            'allowed_explicit_rejection',
+            $claimReport['forbidden_claim_scan']['matches'][0]['disposition'],
+        );
     }
 
     #[Test]
@@ -805,6 +833,36 @@ final class MbtiResultEnglishPackageTest extends TestCase
             fn (mixed $nested): mixed => $this->renderTemplateValue($nested, $slots),
             $value,
         );
+    }
+
+    /**
+     * @param  array<mixed>  $value
+     * @return list<array{json_pointer: string, value: string}>
+     */
+    private function collectStringLeaves(array $value, string $pointer = ''): array
+    {
+        $leaves = [];
+        foreach ($value as $key => $nested) {
+            $escapedKey = str_replace(['~', '/'], ['~0', '~1'], (string) $key);
+            $nestedPointer = $pointer.'/'.$escapedKey;
+            if (is_string($nested)) {
+                $leaves[] = [
+                    'json_pointer' => $nestedPointer,
+                    'value' => $nested,
+                ];
+
+                continue;
+            }
+
+            if (is_array($nested)) {
+                $leaves = [
+                    ...$leaves,
+                    ...$this->collectStringLeaves($nested, $nestedPointer),
+                ];
+            }
+        }
+
+        return $leaves;
     }
 
     /**

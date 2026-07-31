@@ -30,7 +30,23 @@
       "fixed identity",
       "predicts your future"
     ],
-    "matches": []
+    "phrase_forms": {
+      "fixed identity": [
+        "fixed identity",
+        "fixed identities"
+      ]
+    },
+    "matches": [
+      {
+        "phrase": "fixed identity",
+        "matched_text": "fixed identities",
+        "source": "assets.json",
+        "json_pointer": "/template_contract/claim_boundary",
+        "context": "negated_boundary",
+        "disposition": "allowed_explicit_rejection",
+        "evidence": "The package boundary says MBTI preference patterns are working hypotheses, not fixed identities."
+      }
+    ]
   },
   "hold": "Independent W9 must review every one of the 46 registered families against the exact frozen package SHA before any import approval can be considered."
 }
