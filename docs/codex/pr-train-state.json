@@ -101177,9 +101177,9 @@
     "base": "main",
     "branch": "codex/en-parity-w2-big5-draft-reconcile-01",
     "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "depends_on": [],
-    "commit_sha": "306fe3e955b75ce58b94dbba9ba5d98683dea3eb",
+    "commit_sha": "f15e81992ab291a8b578fbe19f2e1846a19aa48c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3421",
     "checks": {
       "production_read_only_inventory": {
@@ -101191,14 +101191,14 @@
         "evidence": "Focused PHPUnit, scoped Pint, PHP syntax, JSON/YAML parsing, deterministic artifact invariants, diff checks, and exact allowlist validation passed. Production historical revision QA SHA-256 109e995dd9c900b978d5ceaca1f7851607d4332c8bf9a734c705bd32982dd11e proves 50 rows, database fingerprint unchanged, and zero CJK/media/private-field leakage."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "CI run 30599822055 and Code Scanning run 30599822064 passed all required jobs on metadata head 2855974c9dbde28847f2538db1a9d8ecc6d4606b. Exact-head review then identified CSS string/comment ordering and quoted HTML attribute false positives. Implementation 306fe3e955b75ce58b94dbba9ba5d98683dea3eb uses single-pass CSS string/comment tokenization and quote-aware HTML attribute parsing; required checks must rerun."
+        "status": "pass",
+        "evidence": "Exact implementation head f15e81992ab291a8b578fbe19f2e1846a19aa48c passed every required job in CI run 30601381477 and Code Scanning run 30601381442. verify-staging-parity was skipped as expected and is not a required check. All review threads are resolved and the PR is CLEAN/MERGEABLE."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -101508,9 +101508,14 @@
         "at": "2026-07-31T02:56:53Z",
         "status": "github_checks_pending",
         "note": "CI run 30599822055 and Code Scanning run 30599822064 passed all required jobs on metadata head 2855974c9dbde28847f2538db1a9d8ecc6d4606b. Exact-head review then found comment markers inside CSS strings could hide later image declarations and attribute-like text inside an HTML quoted value could be misparsed. Implementation 306fe3e955b75ce58b94dbba9ba5d98683dea3eb tokenizes CSS strings/comments in one pass and parses HTML attributes only outside quoted values. Focused PHPUnit passes 30 tests / 261 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
+      },
+      {
+        "at": "2026-07-31T03:30:14Z",
+        "status": "ready_to_merge",
+        "note": "Exact implementation head f15e81992ab291a8b578fbe19f2e1846a19aa48c passed every required job in CI run 30601381477 and Code Scanning run 30601381442. Final same-scope hardening makes malformed attributes terminate safely, rejects structured src/srcset media keys, decodes HTML entities before Han detection, restarts tag scanning at nested openers, and ignores non-rendering HTML-comment media. Focused validation passes 30 tests / 271 assertions plus the exact runtime-freeze regression; scoped Pint, PHP syntax, JSON/YAML, diff, eight-path scope, and unresolved-thread checks pass. This final metadata-only tail head must independently repeat exact-head CI/review before squash merge."
       }
     ],
-    "updated_at": "2026-07-31T02:56:53Z"
+    "updated_at": "2026-07-31T03:30:14Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
