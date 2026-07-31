@@ -47548,8 +47548,8 @@ prs:
       - python3 -m json.tool backend/content_assets/en-content-parity/W1-mbti/result-content/entitlement_matrix.json >/dev/null
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
-      - process guard before cd backend && bash scripts/ci_verify_mbti.sh
-      - cd backend && bash scripts/ci_verify_mbti.sh (runs scripts/verify_mbti.sh against its isolated local API)
+      - process guard before cd backend && bash scripts/verify_mbti.sh
+      - cd backend && bash scripts/verify_mbti.sh
       - git diff --check
       - git diff --cached --check
       - exact changed-file scope validation
@@ -47653,8 +47653,8 @@ prs:
       - cd backend && php artisan route:list --path=api --except-vendor
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
-      - process guard before cd backend && bash scripts/verify_mbti.sh
-      - cd backend && bash scripts/verify_mbti.sh
+      - process guard before cd backend && bash scripts/ci_verify_mbti.sh
+      - cd backend && bash scripts/ci_verify_mbti.sh (runs scripts/verify_mbti.sh against its isolated local API)
       - git diff --check
       - git diff --cached --check
       - exact changed-file scope validation

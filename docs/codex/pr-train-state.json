@@ -231,7 +231,7 @@
       },
       {
         "at": "2026-07-23T03:35:00Z",
-  "status": "github_checks_pending",
+        "status": "in_progress",
         "note": "Started from exact PR2 merge 65765dde98a9ac96bf6a67ae514a6730bc7fab71 in an isolated worktree. Implementing the backend-only resolver and explicit audited reconciliation record; no controlled production action has occurred."
       },
       {
@@ -42901,7 +42901,7 @@
     "id": "SECURITY-103-API-05",
     "local_cleanup_executed": false,
     "merged_at": null,
-  "pr_url": "https://github.com/fermatmind/fap-api/pull/3446",
+    "pr_url": null,
     "production_write_execution": false,
     "publish_allowed": false,
     "remote_branch_deleted": false,
@@ -42961,7 +42961,7 @@
       }
     },
     "cms_mutation": false,
-  "commit_sha": "88ca01b13bd59dca62e002bc0edfa2624fded14c",
+    "commit_sha": null,
     "content_authority": "backend",
     "database_mutation": false,
     "depends_on": [
@@ -102284,9 +102284,9 @@
     "depends_on": [
       "EN-PARITY-W1-MBTI-RESULT-ASSETS-01"
     ],
-    "status": "in_progress",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "88ca01b13bd59dca62e002bc0edfa2624fded14c",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3446",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -102298,28 +102298,28 @@
       },
       "preflight": {
         "status": "passed",
-        "evidence": "Created a clean isolated branch/worktree from exact origin/main 06286bfcaa3b5a60bfdee52ff19dcb92b5a1b240 after PR05 closeout. No matching local branch, remote branch, or open PR existed."
+        "evidence": "Created a clean isolated branch/worktree from origin/main 06286bfcaa3b5a60bfdee52ff19dcb92b5a1b240 after PR05 closeout, then rebased cleanly as main advanced. No matching local branch, remote branch, or open PR existed at start."
       },
-    "local_validation": {
-      "status": "passed",
-      "evidence": "Importer feature suite passed 4 tests / 238 assertions; runtime-freeze classifier passed 1 test / 2 assertions; scoped Pint passed 4 files; exact-package command returned 46 redacted rows with zero writes/private reads; API route inventory returned 225 lines; YAML, JSON, and diff checks passed. After the required process guard was clear, scripts/ci_verify_mbti.sh completed with exit 0, including the integrated scripts/verify_mbti.sh live smoke plus the complete Big Five gate (1623 tests / 195834 assertions) and all remaining safety gates."
-    },
-    "changed_file_scope": {
-      "status": "passed",
-      "evidence": "Exact changed-file validation matched all 7 changed paths to the manifest allowlist; verifier-generated BIG5_OCEAN compiled drift was restored before validation and is not part of this scope."
+      "local_validation": {
+        "status": "passed",
+        "evidence": "Importer feature suite passed 4 tests / 238 assertions; runtime-freeze classifier passed 1 test / 2 assertions; scoped Pint passed 4 files; exact-package command returned 46 redacted rows with zero writes/private reads; API route inventory returned 225 lines; YAML, JSON, and diff checks passed. After the process guard was clear, scripts/ci_verify_mbti.sh completed with exit 0, including integrated scripts/verify_mbti.sh, the complete Big Five gate (1623 tests / 195834 assertions), and all remaining safety gates."
       },
-    "github_required_checks": {
-      "status": "pending",
-      "evidence": "PR #3446 opened from exact scoped branch head 367540abb81939d45cb19244426f76332f55e037; required checks are being polled."
+      "changed_file_scope": {
+        "status": "passed",
+        "evidence": "Exact changed-file validation matches all 7 changed paths to the manifest allowlist. Verifier-generated BIG5_OCEAN compiled drift was restored. Review-found unrelated ledger drift was restored exactly from latest origin/main before the PR06 entry was uniquely reapplied."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": "The prior exact head ccecd210e570951d51d1edeb8d1231ceacd2afb4 passed every applicable required check. A same-scope ledger correction and latest-main reconciliation require the corrected exact head to repeat checks before merge."
       }
     },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-  "scope_validation": {
-    "allowed_paths_only": true,
-    "local_validation_passed": true,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": false,
       "post_merge_revalidated": false
     },
@@ -102333,27 +102333,27 @@
     "search_channel_action": false,
     "deploy_allowed": false,
     "history": [
-    {
-      "at": "2026-07-31T03:10:35Z",
-      "status": "in_progress",
-      "note": "Started PR06 from clean latest origin/main after verifying PR04 merged and binding the frozen result package SHA plus manifest-byte SHA. Scope is a redacted no-write 46-row importer plan only; attempts, reports, private payloads, inactive import, package activation, publication, indexability, search, and deploy remain excluded."
-    },
-    {
-      "at": "2026-07-31T03:23:08Z",
-      "status": "local_verified",
-      "note": "All focused and full local gates passed. The exact-package importer planned 46 redacted rows with zero writes and zero private reads; the integrated MBTI verifier and full CI safety chain exited 0; exact scope validation passed for 7 allowlisted paths."
-    },
-    {
-      "at": "2026-07-31T03:24:05Z",
-      "status": "local_verified",
-      "note": "Rebased the scoped implementation cleanly onto latest origin/main efd7f2bd0acace0fd7463dbfb13897bd78a1cad5; implementation commit is 88ca01b13bd59dca62e002bc0edfa2624fded14c."
-    },
-    {
-      "at": "2026-07-31T03:25:30Z",
-      "status": "github_checks_pending",
-      "note": "Pushed the exact scoped branch and opened PR #3446; required GitHub checks are pending."
-    }
-  ],
-  "updated_at": "2026-07-31T03:25:30Z"
-}
+      {
+        "at": "2026-07-31T03:10:35Z",
+        "status": "in_progress",
+        "note": "Started PR06 from a clean isolated origin/main after verifying PR04 merged and binding the frozen result package SHA plus manifest-byte SHA. Scope is a redacted no-write 46-row importer plan only."
+      },
+      {
+        "at": "2026-07-31T03:23:08Z",
+        "status": "local_verified",
+        "note": "All focused and full local gates passed. The importer planned 46 redacted rows with zero writes/private reads; the integrated MBTI verifier and full CI safety chain exited 0; exact scope validation passed for 7 allowlisted paths."
+      },
+      {
+        "at": "2026-07-31T03:25:30Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the scoped branch and opened PR #3446."
+      },
+      {
+        "at": "2026-07-31T03:45:13Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "All required checks on the prior head passed. Two automated review findings exposed non-unique ledger patching plus concurrent main ledger additions. Restored both train files exactly from latest origin/main and reapplied only the uniquely keyed PR06 entries; corrected head must repeat required checks."
+      }
+    ],
+    "updated_at": "2026-07-31T03:45:13Z"
+  }
 }
