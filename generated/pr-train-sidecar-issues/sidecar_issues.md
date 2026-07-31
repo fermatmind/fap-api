@@ -623,3 +623,22 @@
   - This PR was rebased on the merged repair and must rerun its complete declared local validation and required GitHub checks.
 - status: `repaired_by_independent_baseline_pr`
 - whether train continued: `true`
+
+## W2 Big Five result-assets optional Codex review quota
+
+- observed at: `2026-07-31T07:23:51Z`
+- repo: `fap-api`
+- PR id / branch: `EN-PARITY-W2-BIG5-RESULT-ASSETS-01` / PR #3451 / `codex/en-parity-w2-big5-result-assets-01`
+- blocker type: `external_codex_code_review_quota_exhausted`
+- evidence:
+  - The exact-head Codex review request for `37d6bb473d8a0f8072e4920fd4c8813fa3ea47c2` returned an explicit usage-limit comment at `2026-07-31T07:19:29Z` and did not generate a new code review.
+  - CI run `30611920168` and Code Scanning run `30611920174` completed with all nine applicable checks passing; `verify-staging-parity` was skipped and is not required.
+  - GitHub reports the PR CLEAN/MERGEABLE with no required review decision, and every previously generated review thread is resolved.
+- why not current PR scope:
+  - The exhausted Codex review allowance is an account/service quota outside the draft package, tests, and repository metadata changed by this PR.
+- whether required checks are affected: `false`
+- recommended follow-up:
+  - Replenish or enable Codex review credits before a future optional review request.
+  - No code change is required: the exact-head package already enforces all-30 facet semantic anchors and all earlier review findings are resolved.
+- status: `recorded_external_nonblocking`
+- whether train continued: `true`

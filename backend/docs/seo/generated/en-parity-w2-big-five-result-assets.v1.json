@@ -1,0 +1,68 @@
+{
+  "schema_version": "en-parity-w2-big-five-result-assets.v1",
+  "pr_id": "EN-PARITY-W2-BIG5-RESULT-ASSETS-01",
+  "title": "Big Five W2 English result assets",
+  "source_inventory": {
+    "pr_number": 1866,
+    "merge_sha": "897490e4baa31fe197ee50c89f0c3fae6bac408d",
+    "package_sha256": "0f50f4108af14656442ef7d57d410b2e74f8dffced6ed3db372bf848ea051292",
+    "source_ledger_sha256": "facbf57a362a430cdc8b5f6545db4a227e1268d285e2c27beed3c935ea9cf6e2",
+    "row_id_set_sha256": "347bd92a3db93d873b44e27c88327e860ee5915e9e7eafb9adb2227e75fef8b7",
+    "row_count": 118,
+    "cohort_counts": {
+      "public_profile_control": 52,
+      "english_historical_revision_verification": 50,
+      "result_content": 16
+    },
+    "status": "inventory_frozen"
+  },
+  "output_package": {
+    "path": "backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1",
+    "package_sha256": "aea87a8c0545d1be6cb1a32ff981576d62d077a8eab36834f34ec9d41c1bfc81",
+    "inventory_unit_count": 16,
+    "covered_unit_count": 16,
+    "asset_group_count": 16,
+    "locale": "en",
+    "status": "pending_manual_review",
+    "runtime_use": "draft_review_only"
+  },
+  "validation": {
+    "exact_units": "PASS",
+    "exact_118_source_rows": "PASS",
+    "result_row_required_keys": "PASS",
+    "all_30_facet_semantic_anchors": "PASS",
+    "unique_traceability": "PASS",
+    "english_complete": "PASS",
+    "cjk_leakage": 0,
+    "private_field_leakage": 0,
+    "forbidden_claim_findings": 0,
+    "fixed_type_findings": 0,
+    "share_safe": "PASS",
+    "entitlement_separated": "PASS",
+    "empty_error_expired_access_denied": "PASS",
+    "analytics_internal_ids_separated": "PASS",
+    "deterministic_sha": "PASS"
+  },
+  "permissions": {
+    "ready_for_runtime": false,
+    "ready_for_production": false,
+    "production_use_allowed": false,
+    "cms_write": false,
+    "database_write": false,
+    "public_release": false,
+    "indexability_change": false,
+    "search_submission": false,
+    "deploy": false
+  },
+  "review": {
+    "codex_skeptical_self_review": true,
+    "human_reviewed": false,
+    "editorial_approved": false,
+    "qa_pass": false,
+    "package_frozen": false,
+    "w9_independent_qa": "not_performed"
+  },
+  "repository_rule_impact": "Draft-only backend content package. Existing backend authority, zh-CN registry, runtime selector, importer, schema, public API, and frontend no-fallback rules are unchanged.",
+  "decision": "READY_FOR_MANUAL_REVIEW_NOT_RUNTIME",
+  "generated_at": "2026-07-31T05:21:44Z"
+}

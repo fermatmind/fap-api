@@ -102395,5 +102395,121 @@
       }
     ],
     "updated_at": "2026-07-31T04:52:07Z"
+  },
+  "EN-PARITY-W2-BIG5-RESULT-ASSETS-01": {
+    "id": "EN-PARITY-W2-BIG5-RESULT-ASSETS-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/en-parity-w2-big5-result-assets-01",
+    "title": "EN-PARITY-W2-BIG5-RESULT-ASSETS-01: produce reviewed Big Five English result assets",
+    "status": "github_checks_pending",
+    "depends_on": [
+      "EN-PARITY-W2-BIG5-INVENTORY-01"
+    ],
+    "commit_sha": "be8e157199b43d0431dde0d3ccf1c6cb084aa1bf",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3451",
+    "checks": {
+      "dependency": {
+        "status": "pass",
+        "evidence": "fap-web PR 1866 merged as 897490e4baa31fe197ee50c89f0c3fae6bac408d. Its immutable 118-row inventory package SHA is 0f50f4108af14656442ef7d57d410b2e74f8dffced6ed3db372bf848ea051292; post-merge branch cleanup and local main synchronization passed."
+      },
+      "content_package_contract": {
+        "status": "pass",
+        "evidence": "The existing Big Five English draft catalog supports draft-only reader label groups. The operator-frozen analytics_reader_labels identity is represented as reader copy with empty internal_metric_ids and personal_result_fields; no selector, runtime, importer, or schema change is required."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "Package validator passes twice byte-identically with SHA aea87a8c0545d1be6cb1a32ff981576d62d077a8eab36834f34ec9d41c1bfc81. Focused package PHPUnit passes 7 tests / 517 assertions with exact 118-row reconciliation, all-30 facet semantic anchors, required-key coverage, and complete package-file binding; runtime-freeze explicit-file regression passes 2 tests / 6 assertions with unknown package paths blocked; composer test:content passes 4 tests / 62 assertions. Scoped Pint, PHP syntax, JSON/JSONL/YAML parsing, CJK/private-field/public-URL/fixed-type/forbidden-claim scans, deterministic SHA recomputation, diff checks, and exact allowlist validation pass."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "Exact head 37d6bb473d8a0f8072e4920fd4c8813fa3ea47c2 passed all nine applicable checks in CI run 30611920168 and Code Scanning run 30611920174: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep OSS, and semgrep SARIF upload. verify-staging-parity was skipped and is not required."
+      },
+      "optional_codex_review": {
+        "status": "external_nonblocking",
+        "evidence": "An exact-head review request returned the explicit Codex usage-limit comment at 2026-07-31T07:19:29Z without generating a new review. The external account/service quota is recorded in generated/pr-train-sidecar-issues; repo policy does not require this review, GitHub reports CLEAN/MERGEABLE, and all prior review threads are resolved."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_read_only_evidence": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-31T05:21:44Z",
+        "status": "implementation_in_progress",
+        "note": "Started from clean fap-api main d9f1a5554bb9831a1a9dd87d76b41daf8bcac353 after dependency PR 1866 merged and post-merge revalidated. Contract preflight proved all sixteen identities, including analytics reader labels, can be represented in a draft-only package without schema, selector, runtime, or importer changes."
+      },
+      {
+        "at": "2026-07-31T05:34:22Z",
+        "status": "local_verified",
+        "note": "Produced exactly sixteen traceable English draft asset groups with 5 dimension and 30 facet explanations, value-neutral range copy, share/private-reader boundaries, fail-closed states, cross-device copy, and analytics reader labels separated from internal IDs. Deterministic package SHA is cda743f52cebaf753b8d0f2f234dd893e88f5d630ea6cc4e7a5f5b32faefda06. All required local package, focused, content-suite, formatting, parsing, scan, diff, and scope checks pass; no write or runtime authority changed."
+      },
+      {
+        "at": "2026-07-31T05:35:51Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed the exact sixteen-path scope as implementation head 6fc25b8a8247c660f969a1709dca4236276a9496, then opened PR 3451. Required GitHub checks and exact-head review are pending."
+      },
+      {
+        "at": "2026-07-31T05:47:03Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Inspected CI run 30607268537 verify-bigfive before editing: 1658 tests passed and the only failure was the runtime-freeze classifier treating the new draft package directory as runtime-impacting. Added an exact package-prefix exception plus positive/negative regression and declared the classifier test in scope. Exact-head review findings are also repaired: local_validation_passed is true, baseline tree OIDs resolve from pinned commit d9f1a5554bb9831a1a9dd87d76b41daf8bcac353 rather than the live checkout, and N5 now preserves the source facet's overload-driven disconnect/withdraw/change-state meaning. Package SHA rebuilt as 42760c9d3b7ae3449e1eaacccbd7c1b3dbdf78cae42cfef44d0063f640a54dd7; all focused, content-suite, Pint, parser, scan, diff, and scope checks pass."
+      },
+      {
+        "at": "2026-07-31T05:58:55Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Inspected the two exact-head review findings before editing. Restored an unrelated existing task's local_validation_passed value and set the flag only on this train item. N3 now preserves the source facet's sustained-pressure depletion meaning, with focused label and semantic regression assertions. The byte-exact package was rebuilt as 6543c9818a272330c55256a0359bce7ee0223591cb46d06436ac06245f6a2cc7. Validator passes twice identically; the package suite passes 6 tests / 244 assertions, runtime-freeze regression passes, content suite passes, and Pint, syntax, parser, scan, diff, and exact 17-path scope validation pass."
+      },
+      {
+        "at": "2026-07-31T06:12:00Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After all nine applicable required checks passed on exact head 5253de1d373ecb4c948ad6bd4e1d3d04aa099043, exact-head review identified one remaining O3 semantic drift. O3 now preserves the pinned source authority's willingness to identify, approach, express, and use inner feelings as information, with three focused semantic assertions. The byte-exact package was rebuilt as ca7a77819b74f0b0127b2f01fc626c28120903ac56cbfc77cdc60ea4af789b70. Validator passes twice identically; package suite passes 6 tests / 247 assertions, content suite passes 4 tests / 62 assertions, and Pint, parsers, diff, and exact 17-path scope validation pass."
+      },
+      {
+        "at": "2026-07-31T06:25:35Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After all nine applicable required checks passed on exact head 4798999c49381693d97e1be52f691d694c701bce, exact-head review identified one remaining N6 semantic drift. N6 now preserves the pinned source authority's visible coping-limit vulnerability under high pressure, loss of control, and complex demands, with three focused semantic assertions. The byte-exact package was rebuilt as 479d071448e0b3385a3814d2256c4c084574746dcb2413dbf4ecb4107a221908. Validator passes twice identically; package suite passes 6 tests / 250 assertions, content suite passes 4 tests / 62 assertions, and Pint, parsers, diff, and exact 17-path scope validation pass."
+      },
+      {
+        "at": "2026-07-31T06:33:53Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Exact-head review on f72ca150846d4d31072cc6866200c23c8764aa57 identified one remaining C5 semantic drift. C5 now preserves the pinned source authority's continued progress without immediate feedback or reward, with three focused semantic assertions. The byte-exact package was rebuilt as 76c547083230ae57c7028037bfb50623bdfd7cf007335166ac01abde1cf66851. Validator passes twice identically; package suite passes 6 tests / 253 assertions, content suite passes 4 tests / 62 assertions, and Pint, parsers, diff, and exact 17-path scope validation pass."
+      },
+      {
+        "at": "2026-07-31T06:48:30Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Exact-head review on 675e96810e1c2359c67cf07edfdf9e5ce6b6fe81 identified three current-scope gaps. Added fail-closed reconciliation for all 118 immutable source rows, pinned the source-ledger and ordered row-id-set hashes, preserved the 52/50 completed-control and historical cohorts, and mapped every one of the 16 result rows to an exact asset ID, required top-level keys, and nested item identities. A4 now preserves conflict mediation and de-escalation; N2 preserves anger/resistance activation under obstruction, misunderstanding, or boundary violation. Package SHA is b6676eff4e63f257a7a460f5c79114f79ce23bc5cd54ccaf06ff835d5c635e6c. Validator passes twice; package suite passes 7 tests / 433 assertions, runtime-freeze regression and content suite pass, and Pint, syntax, parsers, scans, diff, and exact allowlist validation pass."
+      },
+      {
+        "at": "2026-07-31T06:57:44Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Exact-head review on cf28114bff98d84d71cb72dfbec3bb1c60723830 identified two package-integrity gaps. The validator and focused test now require the actual package directory file set to equal every SHA-manifest entry plus sha256_manifest.json, so unbound extra files fail closed. The runtime-freeze exception now allowlists only the twelve reviewed draft-package files and blocks unknown future files under the same directory. Package SHA is 47d43575aea0c638a21b90c33e1f0c147e4f679986d76db182c0f28606cf4dd4. Validator passes twice; package suite passes 7 tests / 434 assertions, explicit classifier regression passes 2 tests / 6 assertions, content suite passes, and Pint, parsers, diff, and scope checks pass."
+      },
+      {
+        "at": "2026-07-31T07:09:01Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Exact-head review on 65b8cd1f09d16b03153a5a1468bd2567ac6e32b4 identified E2 group-participation and N4 social-discomfort drift. Reconciled all 30 facet descriptions directly against the pinned glossary and added per-code semantic anchors enforced by both validator and focused tests, so future drift in any facet fails closed. E2 now covers multi-person settings, social density, and energy from groups; N4 covers discomfort, self-monitoring, and withdrawal under gaze, evaluation, or social exposure. Package SHA is aea87a8c0545d1be6cb1a32ff981576d62d077a8eab36834f34ec9d41c1bfc81. Validator passes twice; package suite passes 7 tests / 517 assertions, classifier and content suites pass, and Pint, parsers, diff, and scope checks pass."
+      },
+      {
+        "at": "2026-07-31T07:23:51Z",
+        "status": "ready_to_merge",
+        "note": "Exact head 37d6bb473d8a0f8072e4920fd4c8813fa3ea47c2, containing semantic implementation head be8e157199b43d0431dde0d3ccf1c6cb084aa1bf and immutable package SHA aea87a8c0545d1be6cb1a32ff981576d62d077a8eab36834f34ec9d41c1bfc81, passed all nine applicable required checks. All prior review threads are resolved. A new optional Codex review could not be generated because the external account review quota was exhausted; the non-required blocker is recorded in the sidecar, repo policy requires no review, and GitHub reports CLEAN/MERGEABLE."
+      }
+    ],
+    "updated_at": "2026-07-31T07:23:51Z"
   }
 }

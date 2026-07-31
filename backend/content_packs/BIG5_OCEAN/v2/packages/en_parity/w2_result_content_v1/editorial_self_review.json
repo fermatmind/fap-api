@@ -1,0 +1,30 @@
+{
+  "schema_version": "fermatmind.big5.en_parity.editorial_self_review.v1",
+  "review_type": "codex_skeptical_self_review",
+  "status": "pending_manual_review",
+  "human_reviewed": false,
+  "editorial_approved": false,
+  "qa_pass": false,
+  "package_frozen": false,
+  "checks": {
+    "natural_independent_english": "PASS_FOR_SELF_REVIEW",
+    "continuous_dimension_language": "PASS_FOR_SELF_REVIEW",
+    "probabilistic_contextual_language": "PASS_FOR_SELF_REVIEW",
+    "high_low_value_neutrality": "PASS_FOR_SELF_REVIEW",
+    "fixed_identity_language_absent": "PASS_FOR_SELF_REVIEW",
+    "career_hiring_admission_claims_absent": "PASS_FOR_SELF_REVIEW",
+    "clinical_claims_absent": "PASS_FOR_SELF_REVIEW",
+    "unsupported_psychometric_numbers_absent": "PASS_FOR_SELF_REVIEW",
+    "share_private_fields_absent": "PASS_FOR_SELF_REVIEW",
+    "private_pdf_history_public_urls_absent": "PASS_FOR_SELF_REVIEW",
+    "analytics_internal_ids_separated": "PASS_FOR_SELF_REVIEW",
+    "manual_editorial_review": "PENDING"
+  },
+  "known_limits": [
+    "This producer review is not human editorial approval.",
+    "This producer review is not W9 independent QA.",
+    "No runtime selector or importer consumes this package.",
+    "The package has not been imported, published, promoted, or deployed."
+  ],
+  "decision": "READY_FOR_MANUAL_REVIEW_NOT_RUNTIME"
+}

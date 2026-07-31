@@ -1,0 +1,30 @@
+{
+  "schema_version": "fermatmind.big5.en_parity.result_content_translation_map.v1",
+  "source_locale": "zh-CN",
+  "target_locale": "en",
+  "claim_map": "big5-continuous-contextual-nondiagnostic-v1",
+  "mappings": [
+    {"unit":"free_preview","identity":"big5-result:free_preview:zh-CN:en"},
+    {"unit":"locked_result","identity":"big5-result:locked_result:zh-CN:en"},
+    {"unit":"paid_full_report","identity":"big5-result:paid_full_report:zh-CN:en"},
+    {"unit":"entitlement_levels","identity":"big5-result:entitlement_levels:zh-CN:en"},
+    {"unit":"five_dimension_explanations","identity":"big5-result:five_dimension_explanations:zh-CN:en"},
+    {"unit":"facet_subscale_explanations","identity":"big5-result:facet_subscale_explanations:zh-CN:en"},
+    {"unit":"score_range_boundary_copy","identity":"big5-result:score_range_boundary_copy:zh-CN:en"},
+    {"unit":"action_growth_advice","identity":"big5-result:action_growth_advice:zh-CN:en"},
+    {"unit":"workplace_relationship_copy","identity":"big5-result:workplace_relationship_copy:zh-CN:en"},
+    {"unit":"share_public_summary","identity":"big5-result:share_public_summary:zh-CN:en"},
+    {"unit":"pdf_reader_content","identity":"big5-result:pdf_reader_content:zh-CN:en"},
+    {"unit":"history_account_reentry","identity":"big5-result:history_account_reentry:zh-CN:en"},
+    {"unit":"result_report_cta","identity":"big5-result:result_report_cta:zh-CN:en"},
+    {"unit":"empty_error_expired_access_denied","identity":"big5-result:empty_error_expired_access_denied:zh-CN:en"},
+    {"unit":"mobile_desktop_consumption","identity":"big5-result:mobile_desktop_consumption:zh-CN:en"},
+    {"unit":"analytics_reader_labels","identity":"big5-result:analytics_reader_labels:zh-CN:en"}
+  ],
+  "translation_policy": {
+    "mechanical_translation": false,
+    "natural_independent_english": true,
+    "same_claim_boundary": true,
+    "human_review_required": true
+  }
+}
