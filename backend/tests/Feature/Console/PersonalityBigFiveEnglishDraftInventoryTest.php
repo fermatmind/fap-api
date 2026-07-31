@@ -351,7 +351,8 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
                 .'<link rel="canonical" href="https://example.invalid/canonical">'
                 .'<link rel="stylesheet" href="/styles/iconic.css">'
                 .'<div data-style="background:url(hero.webp)" data-property="og:image" '
-                .'data-src="hero.webp" data-type="image">Text</div>',
+                .'data-src="hero.webp" data-type="image">Text</div>'
+                .'<style>.note { color: red; }</style>',
         ]])->saveQuietly();
         $nonImageMetadata = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
         $nonImageMetadataRow = collect($nonImageMetadata['rows'])

@@ -1007,7 +1007,7 @@ final class BigFiveEnglishDraftInventory
     private function containsMediaReference(mixed $value): bool
     {
         if (is_string($value)) {
-            if (preg_match('/<(?:img|picture|source|svg|image|canvas|object|embed|iframe|video|audio|style)\b/i', $value) === 1) {
+            if (preg_match('/<(?:img|picture|source|svg|image|canvas|object|embed|iframe|video|audio)\b/i', $value) === 1) {
                 return true;
             }
             if ($this->containsImageMetadataTag($value)) {
