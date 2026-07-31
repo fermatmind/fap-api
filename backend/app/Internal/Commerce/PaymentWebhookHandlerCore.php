@@ -12,6 +12,7 @@ use App\Services\Commerce\PaymentGateway\BillingGateway;
 use App\Services\Commerce\PaymentGateway\LemonSqueezyGateway;
 use App\Services\Commerce\PaymentGateway\PaymentGatewayInterface;
 use App\Services\Commerce\PaymentGateway\StripeGateway;
+use App\Services\Commerce\PaymentGateway\WechatMiniVirtualGateway;
 use App\Services\Commerce\PaymentGateway\WechatPayGateway;
 use App\Services\Commerce\SkuCatalog;
 use App\Services\Commerce\Webhook\WebhookEntitlementService;
@@ -82,6 +83,10 @@ class PaymentWebhookHandlerCore
         $wechatpay = new WechatPayGateway;
         if ($this->isProviderEnabled($wechatpay->provider())) {
             $this->gateways[$wechatpay->provider()] = $wechatpay;
+        }
+        $wechatMiniVirtual = new WechatMiniVirtualGateway;
+        if ($this->isProviderEnabled($wechatMiniVirtual->provider())) {
+            $this->gateways[$wechatMiniVirtual->provider()] = $wechatMiniVirtual;
         }
 
         $alipay = new AlipayGateway;
@@ -1851,7 +1856,7 @@ class PaymentWebhookHandlerCore
         }
 
         $transition = $this->orders->transition($orderNo, 'refunded', $orgId, [
-            'provider_trade_no' => $normalized['external_trade_no'] ?? null,
+            'provider_trade_no' => $normalized['provider_trade_no'] ?? $normalized['external_trade_no'] ?? null,
             'last_payment_event_at' => $normalized['paid_at'] ?? null,
             'refunded_at' => $normalized['paid_at'] ?? $now,
         ]);
