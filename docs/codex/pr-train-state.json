@@ -10,9 +10,9 @@
       "API-GIFT-SCHEMA-01",
       "API-VPAY-01"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "6c1328394f5efaf84f9b5419cc1c52fdb040cf97",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3448",
     "checks": {
       "dependency": {
         "status": "passed",
@@ -66,9 +66,14 @@
         "at": "2026-07-31T03:33:47Z",
         "status": "local_validation_passed",
         "note": "Integrated exact latest origin/main efd7f2bd0 without conflict. The committed branch diff then made the runtime-freeze classifier correctly expose four paid-gifting runtime paths that were invisible while uncommitted. Added an exact API-GIFT-only classifier predicate and route diff allowlist plus a negative control; the post-integration focused suite remains 48 / 564 and the classifier now passes 3 / 9. No broad runtime exception was added."
+      },
+      {
+        "at": "2026-07-31T03:35:13Z",
+        "status": "github_checks_pending",
+        "note": "Pushed immutable implementation commit 6c1328394f5efaf84f9b5419cc1c52fdb040cf97 and opened PR #3448. Required GitHub checks, exact-head review, clean mergeability, and main-drift reconciliation remain mandatory before squash merge."
       }
     ],
-    "updated_at": "2026-07-31T03:33:47Z"
+    "updated_at": "2026-07-31T03:35:13Z"
   },
   "MBTI-CROSS-PUBLISH-51": {
     "id": "MBTI-CROSS-PUBLISH-51",
