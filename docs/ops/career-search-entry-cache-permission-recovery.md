@@ -278,6 +278,25 @@ reviewed workbook with SHA-256
 The receipt exposes manifest positions and hashes, not slugs or editorial
 payloads.
 
+The first production preflight, run `30597196453` attempt `1`, safely stopped
+with `HOLD_APPROVED_WORKBOOK_UNAVAILABLE`: the exact reviewed workbook was not
+present in any allowlisted production path. Its receipt SHA-256 is
+`f896d7c7eb1af5a602cfa1c02b2a71bfee7c1afae3379d12e4f96bfa43c33c80`,
+and its artifact digest is
+`80da38b7dc56662b08ac632e3fd16d71fc5a9aad53e3b25dfcd1b35c04f8b1b2`.
+All write counts were zero.
+
+Workbook-unavailable recovery uses one exact private draft release as a
+transport, never a repository content asset. Eligibility binds that failed
+preflight, the exact release tag, the single expected asset, its SHA-256, and
+its exact size of 29,974,136 bytes. The protected job downloads and verifies
+the asset, writes it once to an ephemeral `/tmp` path with mode `0600`, runs
+the bounded probe, deletes the temporary file, and verifies absence before
+accepting the receipt. The receipt records one staging write, one deletion,
+and zero persistent server writes. It still records zero cache, CMS, database,
+publication, indexability, queue, sitemap, llms, Search Channel, URL
+submission, deploy, and rollback operations in preflight mode.
+
 `repair` is separately authorized by the exact successful preflight receipt,
 repair-set SHA, and payload-set SHA. It revalidates the complete plan and
 atomically creates exactly five `career_job_display_assets` rows. The database
@@ -289,5 +308,7 @@ non-target display-asset identities must remain unchanged.
 The repair does not warm or forget cache entries. It does not change CMS
 resources, publication, indexability, queues, sitemap, llms, Search Channel,
 URL submission, deployment, rollback, or any non-target row. After a verified
-repair, use a separately authorized cache-only refresh and require the exact
-quality package plus complete 100-URL public readback before resuming Task 12.
+repair receipt has been uploaded, the workflow deletes the exact private draft
+release transport. Then use a separately authorized cache-only refresh and
+require the exact quality package plus complete 100-URL public readback before
+resuming Task 12.
