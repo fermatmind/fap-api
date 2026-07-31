@@ -470,6 +470,13 @@ final class ReportGiftService
             ->get();
         foreach ($competitors as $competitor) {
             $competitorStatus = $this->effectiveStatus($competitor);
+            if ($competitorStatus === self::STATUS_FULFILLED) {
+                return $this->error(
+                    'GIFT_COMPETING_ORDER_FULFILLED',
+                    'another gift payment already fulfilled this report.',
+                    409
+                );
+            }
             if (in_array($competitorStatus, [self::STATUS_PENDING, self::STATUS_PURCHASING], true)) {
                 if ($competitorStatus === self::STATUS_PURCHASING) {
                     $closed = $this->closeCompetingPurchasingOrder($competitor);
