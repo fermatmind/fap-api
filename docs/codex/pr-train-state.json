@@ -11,7 +11,7 @@
       "API-VPAY-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "a38718e582961ed204d0f99d19ce7aa679c508c2",
+    "commit_sha": "43d250482f0d2028c28d3394a627f94b2989672f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3448",
     "checks": {
       "dependency": {
@@ -24,7 +24,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After the sixth exact-head review repair, the declared focused contract suite passed 57 tests / 671 assertions; the gift contract alone passed 13 / 182; OpenAPI passed 2 / 6; the exact runtime classifier passed 3 / 9; scoped Pint passed all 8 files; route:list exposed 98 v0.3 routes including the five gift routes; backend Composer strict validation, YAML/JSON parsing, git diff checks, and exact allowed-path scope passed. The complete backend/scripts/ci_verify_mbti.sh exited 0 with the repository test APP_KEY supplied only as process environment, including Big Five 1655 tests / 196111 assertions, Enneagram 10 / 375, Personality authority 95 / 5917, migration, auth, OpenAPI, order-security, dependency-security, webhook, attempt, and downstream gates. Regressions prove an issued non-terminal payment action retains the sole payable gift slot, a verified terminal attempt releases the slot, paid-order repair transactionally reloads and skips a concurrently refunded gift, intentional manual revocation remains excluded from repair selection, and same-payer retries serialize payment-action creation and reuse one attempt and outTradeNo. Verifier-generated Big Five compiled artifacts were restored and no secret or production configuration was created."
+        "evidence": "After the seventh exact-head review repair, the declared focused contract suite passed 57 tests / 681 assertions; the gift contract alone passed 13 / 192; OpenAPI passed 2 / 6; the exact runtime classifier passed 3 / 9; scoped Pint passed all 8 files; route:list exposed 98 v0.3 routes including the five gift routes; backend Composer strict validation, YAML/JSON parsing, git diff checks, and exact allowed-path scope passed. The complete backend/scripts/ci_verify_mbti.sh exited 0 with the repository test APP_KEY supplied only as process environment, including Big Five 1655 tests / 196121 assertions, Enneagram 10 / 375, Personality authority 95 / 5917, migration, auth, OpenAPI, order-security, dependency-security, webhook, attempt, and downstream gates. Regressions prove an issued non-terminal payment action retains the sole payable gift slot, a verified terminal attempt releases the slot, paid-order repair transactionally reloads and skips a concurrently refunded gift, intentional manual revocation remains excluded from repair selection, same-payer retries reuse one attempt and outTradeNo, a late verified payment terminalizes the replacement order and attempt before canceling its gift, and an unbound canceled order cannot create a payment action. Verifier-generated Big Five compiled artifacts were restored and no secret or production configuration was created."
       },
       "github_required_checks": {
         "status": "pending",
@@ -106,9 +106,14 @@
         "at": "2026-07-31T05:33:55Z",
         "status": "github_checks_pending",
         "note": "The sixth exact-head review repair serializes payment-action creation under the exact gift order row lock. Same-payer retries now reuse one payment attempt and outTradeNo. Implementation head a38718e582961ed204d0f99d19ce7aa679c508c2 passes the declared suite at 57 tests / 671 assertions, gift contract at 13 / 182, OpenAPI 2 / 6, classifier 3 / 9, scoped Pint, Composer strict, YAML/JSON, 98-route, diff, and exact-scope checks; the complete verifier exits 0 with Big Five 1655 / 196111, Enneagram 10 / 375, and Personality 95 / 5917. Fresh exact-head GitHub checks and review remain mandatory."
+      },
+      {
+        "at": "2026-07-31T05:56:39Z",
+        "status": "github_checks_pending",
+        "note": "The seventh exact-head review repair moves payment-action creation into the gift service transaction, locks and revalidates the exact order-to-purchasing-gift binding before provider exchange, and closes a purchasing replacement's order plus payment attempt before canceling that gift when an older verified payment arrives. After clean rebase onto origin/main e1022c5db4268fbb9eaa5fb4037386b5c2305eb0, implementation head 43d250482f0d2028c28d3394a627f94b2989672f passes the declared suite at 57 tests / 681 assertions, gift contract at 13 / 192, OpenAPI 2 / 6, classifier 3 / 9, scoped Pint, Composer strict, YAML/JSON, 98-route, diff, and exact-scope checks; the complete verifier exits 0 with Big Five 1655 / 196121, Enneagram 10 / 375, and Personality 95 / 5917. Fresh exact-head GitHub checks and review remain mandatory."
       }
     ],
-    "updated_at": "2026-07-31T05:33:55Z"
+    "updated_at": "2026-07-31T05:56:39Z"
   },
   "MBTI-CROSS-PUBLISH-51": {
     "id": "MBTI-CROSS-PUBLISH-51",
