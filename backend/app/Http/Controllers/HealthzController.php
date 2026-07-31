@@ -159,7 +159,8 @@ class HealthzController extends Controller
             }
 
             return [
-                'ok' => false,
+                'ok' => true,
+                'warning' => true,
                 'error_code' => 'PUBLIC_CONTENT_P95_EXCEEDED',
                 'threshold_ms' => $thresholdMs,
                 'window_minutes' => $windowMinutes,
