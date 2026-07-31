@@ -101179,7 +101179,7 @@
     "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
     "status": "github_checks_pending",
     "depends_on": [],
-    "commit_sha": "14f5fb96a8b15b58e81ba319624ab8adbc54fb60",
+    "commit_sha": "6b142be732cdca673578a8c82cf3837656a48160",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3421",
     "checks": {
       "production_read_only_inventory": {
@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "CI run 30598001465 and Code Scanning run 30598001391 passed all required jobs on metadata head 07f897a3c7dff86fd27e8d75697474177cd981a2. Exact-head review then identified a final authority read after the database seal and over-broad prose alias matching. Implementation 14f5fb96a8b15b58e81ba319624ab8adbc54fb60 seals the fingerprint after the final query and limits alias rejection to identity-bearing fields or actual Big Five paths; required checks must rerun."
+        "evidence": "CI run 30598482165 and Code Scanning run 30598482162 passed all required jobs on metadata head 6be51309a4a49625bb340f9809ccb735938db8d7. Exact-head review then identified quoted greater-than signs truncating HTML tag regex scans. Implementation 6b142be732cdca673578a8c82cf3837656a48160 uses a quote-aware tag scanner shared by style, media attributes, and image metadata; required checks must rerun."
       }
     },
     "scope_validation": {
@@ -101488,9 +101488,14 @@
         "at": "2026-07-31T02:14:15Z",
         "status": "github_checks_pending",
         "note": "CI run 30598001465 and Code Scanning run 30598001391 passed all required jobs on metadata head 07f897a3c7dff86fd27e8d75697474177cd981a2. Exact-head review then found the package-revision query occurred after the database seal and plain prose alias terms were over-rejected. Implementation 14f5fb96a8b15b58e81ba319624ab8adbc54fb60 moves the after fingerprint behind the final authority query and constrains alias matching to identity-bearing fields, actual Big Five URL paths, or rendering attributes. Focused PHPUnit passes 30 tests / 251 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
+      },
+      {
+        "at": "2026-07-31T02:24:30Z",
+        "status": "github_checks_pending",
+        "note": "CI run 30598482165 and Code Scanning run 30598482162 passed all required jobs on metadata head 6be51309a4a49625bb340f9809ccb735938db8d7. Exact-head review then found that a greater-than sign inside a quoted HTML attribute could truncate tag scanning before a real media attribute. Implementation 6b142be732cdca673578a8c82cf3837656a48160 adds a quote-aware HTML tag scanner and reuses it for style attributes, src/srcset/poster/background/type, and meta/link image metadata. Focused PHPUnit passes 30 tests / 253 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
       }
     ],
-    "updated_at": "2026-07-31T02:14:15Z"
+    "updated_at": "2026-07-31T02:24:30Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
