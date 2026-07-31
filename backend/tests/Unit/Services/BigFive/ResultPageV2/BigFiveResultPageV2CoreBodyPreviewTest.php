@@ -1131,6 +1131,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_mbti_english_result_exact_package_dry_run_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/ImportMbtiResultEnglishPackage.php',
+            'backend/app/Services/ContentImport/MbtiResultEnglishPackageImporter.php',
+        ];
+        $blocked = ['backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php'];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_mbti_content15_mixed_import_preflight_files(): void
     {
         $changed = [
@@ -6861,6 +6873,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isMbtiEnglishResultExactPackageDryRunFile($file)) {
+                continue;
+            }
+
             if ($this->isMbtiContent15MixedImportPreflightFile($file)) {
                 continue;
             }
@@ -8924,6 +8940,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Cms/MbtiComparisonCmsImportDryRunPlanner.php',
             'backend/app/Console/Commands/ImportMbtiComparisonEnglishPackage.php',
             'backend/app/Services/ContentImport/MbtiComparisonEnglishPackageImporter.php',
+        ], true);
+    }
+
+    private function isMbtiEnglishResultExactPackageDryRunFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/ImportMbtiResultEnglishPackage.php',
+            'backend/app/Services/ContentImport/MbtiResultEnglishPackageImporter.php',
         ], true);
     }
 

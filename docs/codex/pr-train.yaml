@@ -47548,8 +47548,8 @@ prs:
       - python3 -m json.tool backend/content_assets/en-content-parity/W1-mbti/result-content/entitlement_matrix.json >/dev/null
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
-      - process guard before cd backend && bash scripts/verify_mbti.sh
-      - cd backend && bash scripts/verify_mbti.sh
+      - process guard before cd backend && bash scripts/ci_verify_mbti.sh
+      - cd backend && bash scripts/ci_verify_mbti.sh (runs scripts/verify_mbti.sh against its isolated local API)
       - git diff --check
       - git diff --cached --check
       - exact changed-file scope validation
@@ -47615,3 +47615,59 @@ prs:
     deploy_allowed: false
     content_authority: exact package dry-run planner only; backend runtime authority unchanged
     repository_rule_impact: adds exact-package validation and no-write locale-pair planning rules; real import remains separately controlled
+
+  - id: EN-PARITY-W1-MBTI-RESULT-IMPORTER-01
+    repo: fap-api
+    base: main
+    branch: codex/en-parity-w1-mbti-result-importer-01
+    title: "EN-PARITY-W1-MBTI-RESULT-IMPORTER-01: add exact-package result dry-run importer"
+    status: in_progress
+    depends_on:
+      - EN-PARITY-W1-MBTI-RESULT-ASSETS-01
+    train_scope: en_parity_w1_mbti_result_exact_package_dry_run_importer
+    scope:
+      - Add a no-write dry-run importer bound to the exact frozen MBTI English result/report package SHA.
+      - Validate the complete 46-row reconciliation, English canonical-section identities, entitlement buckets, and synthetic PDF access identity.
+      - Produce a deterministic redacted plan for 24 preserved controls, 21 inactive English candidates, and one W9 fixture-only PDF row.
+      - Prove exact-package replay without reading attempts, reports, private payloads, or production PDF data.
+      - Update backend repository rules for the result exact-package no-write workflow.
+    allowed_paths:
+      - backend/app/Console/Commands/ImportMbtiResultEnglishPackage.php
+      - backend/app/Services/ContentImport/MbtiResultEnglishPackageImporter.php
+      - backend/tests/Feature/ContentImport/MbtiResultEnglishPackageImporterTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/AGENTS.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Execute a CMS/database/inactive-content import or create the absent English content-pack authority.
+      - Read attempts, reports, private URLs, user scores, answers, entitlements, accounts, orders, payments, recovery data, or production PDF payloads.
+      - Activate a package, change an active pointer, render a production PDF, publish, release indexability, change sitemap/llms/canonical, submit search URLs, or deploy.
+      - Change the frozen result package, comparison package, public API, model, migration, route, controller, scheduler, queue, runtime renderer, entitlement policy, or frontend.
+      - Emit reader copy, local filesystem paths, private identifiers, production receipts, or an independent W9 claim in the dry-run receipt.
+    validation:
+      - cd backend && php artisan test --filter=MbtiResultEnglishPackageImporterTest --no-ansi
+      - cd backend && php artisan test --filter=test_runtime_freeze_classifier_ignores_mbti_english_result_exact_package_dry_run_files --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/ImportMbtiResultEnglishPackage.php app/Services/ContentImport/MbtiResultEnglishPackageImporter.php tests/Feature/ContentImport/MbtiResultEnglishPackageImporterTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && php artisan content:import-mbti-result-english-package --package-sha=9325013b870fd2496efc0882656240f91ce28ff4faaf1da42fb3dde3577b0ed3 --dry-run --json
+      - cd backend && php artisan route:list --path=api --except-vendor
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - process guard before cd backend && bash scripts/verify_mbti.sh
+      - cd backend && bash scripts/verify_mbti.sh
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    private_payload_read: false
+    api_runtime_change: false
+    activation_allowed: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: exact result package dry-run planner only; inactive and runtime authorities unchanged
+    repository_rule_impact: adds exact result-package validation and no-write reconciliation rules; inactive import and activation remain separately controlled
