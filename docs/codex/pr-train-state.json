@@ -102302,7 +102302,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "Importer feature suite passed 6 tests / 247 assertions, including authenticate-before-declared-file-read and symlink rejection coverage; runtime-freeze classifier passed 1 test / 2 assertions; scoped Pint passed; exact-package command returned 46 redacted rows with zero writes/private reads; API route inventory returned 225 lines; YAML, JSON, and diff checks passed. After the process guard was clear, scripts/ci_verify_mbti.sh completed with exit 0, including integrated scripts/verify_mbti.sh, the complete Big Five gate (1623 tests / 195834 assertions), and all remaining safety gates."
+        "evidence": "Importer feature suite passed 7 tests / 251 assertions, including authenticate-before-declared-file-read plus symlink and hard-link rejection coverage; runtime-freeze classifier passed 1 test / 2 assertions; scoped Pint passed; exact-package command returned 46 redacted rows with zero writes/private reads; API route inventory returned 225 lines; YAML, JSON, and diff checks passed. After the process guard was clear, scripts/ci_verify_mbti.sh completed with exit 0, including integrated scripts/verify_mbti.sh, the complete Big Five gate (1623 tests / 195834 assertions), and all remaining safety gates."
       },
       "changed_file_scope": {
         "status": "passed",
@@ -102367,8 +102367,13 @@
         "at": "2026-07-31T04:08:49Z",
         "status": "review_fix_local_checks_passed",
         "note": "Inspected the next exact-head P2 review before editing. Every exact-package file now rejects symbolic links before File::isFile/File::get and must resolve inside the selected package directory. An outside-target symlink regression fails before target bytes are read; importer suite passes 6 tests / 247 assertions, scoped Pint and exact dry-run pass. Rebased cleanly onto latest origin/main b115c29775e02064f6e8168a6b1545e239d10718; implementation head is f8be7cb152ec3c425689bdb8d906f829faea4660."
+      },
+      {
+        "at": "2026-07-31T04:18:14Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Inspected the next exact-head P2 review before editing. Exact-package files must now have exactly one filesystem link before any bytes are read, closing the hard-link path to outside private data. The hard-link regression fails with package_file_hardlink_rejected; importer suite passes 7 tests / 251 assertions, scoped Pint and exact dry-run pass."
       }
     ],
-    "updated_at": "2026-07-31T04:08:49Z"
+    "updated_at": "2026-07-31T04:18:14Z"
   }
 }

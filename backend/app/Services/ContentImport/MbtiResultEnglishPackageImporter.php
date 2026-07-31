@@ -431,6 +431,11 @@ final class MbtiResultEnglishPackageImporter
             $this->fail('package_file_missing', 'A required exact-package file is missing.');
         }
 
+        $linkStat = @lstat($path);
+        if ($linkStat === false || ($linkStat['nlink'] ?? null) !== 1) {
+            $this->fail('package_file_hardlink_rejected', 'Exact-package files must have exactly one filesystem link.');
+        }
+
         $resolvedDirectory = realpath($packageDirectory);
         $resolvedPath = realpath($path);
         if ($resolvedDirectory === false
