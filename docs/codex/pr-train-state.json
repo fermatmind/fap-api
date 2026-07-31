@@ -6191,7 +6191,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2256",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "title": "B5-RESULT-WEEKLY-OPS-RUNNER-01: Schedule Big Five V2 weekly ops report",
     "train_scope": "big5_result_page_v2_asset_agent_automation",
     "transitions": [
@@ -6340,7 +6340,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2392",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "title": "BIG-FIVE-AGENT-APPROVAL-QUEUE-INTEGRATION-01: Add Big Five approval queue integration",
     "train_scope": "big_five_public_profile_agent_expansion",
     "transitions": [
@@ -101177,7 +101177,7 @@
     "base": "main",
     "branch": "codex/en-parity-w2-big5-draft-reconcile-01",
     "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "depends_on": [],
     "commit_sha": "fb14e50244bddd653d06947432055201be099d35",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3421",
@@ -101191,14 +101191,14 @@
         "evidence": "Focused PHPUnit, scoped Pint, PHP syntax, JSON/YAML parsing, deterministic artifact invariants, diff checks, and exact allowlist validation passed. Production historical revision QA SHA-256 109e995dd9c900b978d5ceaca1f7851607d4332c8bf9a734c705bd32982dd11e proves 50 rows, database fingerprint unchanged, and zero CJK/media/private-field leakage."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "CI run 30594279222 and Code Scanning run 30594279230 passed all required jobs on metadata head 56b83a3df780884dcd4881ba979fa96d4bc1bf82. Exact-head review then found the link relation matcher could cross into a later href value. Implementation fb14e50244bddd653d06947432055201be099d35 parses bounded HTML attribute values and rel tokens; required checks must rerun."
+        "status": "pass",
+        "evidence": "CI run 30594758241 and Code Scanning run 30594758293 passed all required jobs on exact metadata head e887aa2316555b459f9578842db313c49e5f79c9. Staging parity was skipped as expected and is not required. Exact-head implementation review is resolved; the only remaining metadata finding identified and is resolved by restoring two unrelated train statuses to their origin/main values."
       }
     },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "failure_reason": null,
@@ -101448,9 +101448,14 @@
         "at": "2026-07-31T00:51:15Z",
         "status": "github_checks_pending",
         "note": "After CI run 30594279222 passed all required jobs, exact-head review identified that the link relation regex could find icon in a later href such as /styles/iconic.css. Meta/link tags are now parsed one at a time with bounded quoted or unquoted attribute extraction; rel is tokenized before matching icon/image_src, and as=image is checked independently. The stylesheet iconic.css regression remains text-only compliant. The ledger binds implementation fb14e50244bddd653d06947432055201be099d35. The 30-test inventory suite passes 232 assertions, scoped Pint and PHP syntax pass, and the focused runtime-freeze classifier passes 1 test / 2 assertions."
+      },
+      {
+        "at": "2026-07-31T01:00:13Z",
+        "status": "ready_to_merge",
+        "note": "Exact implementation fb14e50244bddd653d06947432055201be099d35 is bound by metadata head e887aa2316555b459f9578842db313c49e5f79c9. CI run 30594758241 and Code Scanning run 30594758293 passed all required jobs, GitHub reports CLEAN/MERGEABLE, exact eight-path scope validation is clean, and all implementation review threads are resolved. The two unrelated train statuses accidentally changed by an earlier generic patch are restored exactly to origin/main ready_to_merge. This metadata-only tail must repeat required checks before squash merge."
       }
     ],
-    "updated_at": "2026-07-31T00:51:15Z"
+    "updated_at": "2026-07-31T01:00:13Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
