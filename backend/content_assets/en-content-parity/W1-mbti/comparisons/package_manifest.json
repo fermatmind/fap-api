@@ -1,6 +1,6 @@
 {
   "schema_version": "fermatmind.en_parity.immutable_content_package_manifest.v1",
-  "package_id": "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-2026-07-30",
+  "package_id": "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-2026-07-31",
   "lane_id": "W1",
   "asset_id": "ENPARITY-W1-MBTI-CROSS-COMPARISONS",
   "inventory_package_id": "EN-PARITY-W1-MBTI-INVENTORY-2026-07-30",
@@ -19,37 +19,37 @@
   "files": [
     {
       "path": "README.md",
-      "sha256": "276baef693c7828aa712fd87736dd71a96ce7126a07f87f0ebd1ae9dcfc47aa2"
+      "sha256": "14eafc833f8da0e4bd24eee24f41cd95bbe9c4eeb63139e886a8a796d7375a7e"
     },
     {
       "path": "assets.json",
-      "sha256": "9cf743529c90a6d9595c1136d89dbeac29a0af275089dd400f8302414f9d40b8"
+      "sha256": "cf6d99b508bc308d1c7268ba5ef9e797a24442a41f6a8c326cacfacd47c62f6b"
     },
     {
       "path": "translation_map.json",
-      "sha256": "7e2d53f23caf8989442e05518fc23735f5dcd4096466a1251d29dfb8bfd26a64"
+      "sha256": "fb18eff7c68cdb3526d28733db1804348545e41e450c60188b445a40ef12537f"
     },
     {
       "path": "claim_boundary_report.json",
-      "sha256": "ea6c1959163fb8a530ad967d08277c41786a7fa30fa56eff2f24e6515e07efb6"
+      "sha256": "b62ee8ca353c68bb7d065520f7c1068de1de3aa7faf3f71dd80675be742f26c0"
     },
     {
       "path": "editorial_review.json",
-      "sha256": "687e9aa9afed5757372d64574e15fc14cb086b29816861336f78941017848030"
+      "sha256": "82b96d7edb792c753f51b9ab9afd0661456149e785b64de84270652b5f0abed4"
     }
   ],
   "package_sha256_algorithm": "sha256 of the UTF-8 concatenation of each manifest file path, NUL, lowercase file SHA-256, and newline in files[] order",
-  "package_sha256": "2e2beb694b62ddff56b128b2b4a443fb5797b76bd5df160f8946b55a3368931a",
+  "package_sha256": "3325d3999edda87e3c6e374136e0571308641f0006ffa447e15f946acabe9975",
   "quality_gates": {
     "exact_inventory_identity": "pass",
     "exact_asset_count": "pass",
     "source_hash_bound": "pass",
     "structure_count_aligned": "pass",
-    "english_only_reader_copy": "pass",
+    "english_only_reader_copy": "pass_corrected_after_w9_blocker",
     "claim_boundary": "pass_producer_self_check_only",
-    "independent_w9": "pending",
+    "independent_w9": "pending_full_rereview_after_prior_package_blocked",
     "exact_package_dry_run": "pending_future_pr",
-    "source_nested_structure_aligned": "pass",
+    "source_nested_structure_aligned": "pass_corrected_after_w9_blocker",
     "translation_map_complete": "pass",
     "claim_boundary_report_complete": "pass_producer_self_check_only",
     "editorial_review_complete": "pass_producer_self_check_only"

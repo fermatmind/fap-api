@@ -64,7 +64,7 @@ final class MbtiComparisonEnglishPackageTest extends TestCase
         $package = $this->readPackageJson('assets.json');
 
         self::assertSame('fermatmind.en_parity.immutable_content_package_manifest.v1', $manifest['schema_version']);
-        self::assertSame('EN-PARITY-W1-MBTI-COMPARISON-ASSETS-2026-07-30', $manifest['package_id']);
+        self::assertSame('EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-2026-07-31', $manifest['package_id']);
         self::assertSame(self::INVENTORY_SHA, $manifest['inventory_package_sha256']);
         self::assertSame('unpublished_candidate', $manifest['status']);
         self::assertSame(7, $manifest['asset_count']);
@@ -81,7 +81,7 @@ final class MbtiComparisonEnglishPackageTest extends TestCase
         }
 
         self::assertSame($manifest['package_sha256'], hash('sha256', $packageHashInput));
-        self::assertSame('2e2beb694b62ddff56b128b2b4a443fb5797b76bd5df160f8946b55a3368931a', $manifest['package_sha256']);
+        self::assertSame('3325d3999edda87e3c6e374136e0571308641f0006ffa447e15f946acabe9975', $manifest['package_sha256']);
     }
 
     #[Test]
@@ -111,8 +111,8 @@ final class MbtiComparisonEnglishPackageTest extends TestCase
             self::assertSame('MbtiCrossTypeComparisonAuthority', $asset['source']['authority']);
             self::assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $asset['source']['sha256']);
 
-            if ($slug === 'istj-vs-isfj') {
-                $this->assertIstjSourceRevisionExists($asset['source']['sha256']);
+            if ($asset['translation_contract']['source_binding'] === 'backend_revision') {
+                $this->assertBackendSourceRevisionExists($slug, $asset['source']['sha256']);
             } else {
                 $sourcePath = dirname(__DIR__, 4).'/'.$asset['source']['path'];
                 self::assertFileExists($sourcePath);
@@ -163,9 +163,12 @@ final class MbtiComparisonEnglishPackageTest extends TestCase
             self::assertCount(1, $mapRows);
             self::assertTrue($mapRows[0]['structure_preserved']);
 
-            if ($payload['comparison_slug'] === 'istj-vs-isfj') {
+            if ($mapRows[0]['source_ref_kind'] === 'backend_revision_sha256') {
                 self::assertSame('backend_revision_sha256', $mapRows[0]['source_ref_kind']);
-                $source = $this->readIstjSourceRevision($asset['source']['sha256']);
+                $source = $this->readBackendSourceRevision(
+                    $payload['comparison_slug'],
+                    $asset['source']['sha256'],
+                );
             } else {
                 $source = $this->readJsonFromRepository($asset['source']['path']);
             }
@@ -293,17 +296,6 @@ final class MbtiComparisonEnglishPackageTest extends TestCase
         foreach ($editorialReview['rows'] as $row) {
             self::assertNotContains('fail', array_values($row['checks']));
 
-            if ($row['slug'] === 'intj-vs-intp') {
-                self::assertSame('pass_with_disclosed_limitations', $row['checks']['source_bound']);
-                self::assertSame(
-                    'ready_for_independent_w9_with_disclosed_evidence_limitations',
-                    $row['disposition'],
-                );
-                self::assertCount(2, $row['evidence_limitations']);
-
-                continue;
-            }
-
             self::assertSame('pass', $row['checks']['source_bound']);
             self::assertSame('ready_for_independent_w9', $row['disposition']);
         }
@@ -313,7 +305,7 @@ final class MbtiComparisonEnglishPackageTest extends TestCase
             static fn (array $asset): bool => $asset['payload']['comparison_slug'] === 'intj-vs-intp',
         ));
         self::assertCount(1, $intjVsIntp);
-        self::assertCount(3, $intjVsIntp[0]['source']['evidence_limitations']);
+        self::assertArrayNotHasKey('evidence_limitations', $intjVsIntp[0]['source']);
     }
 
     #[Test]
@@ -372,22 +364,22 @@ final class MbtiComparisonEnglishPackageTest extends TestCase
         return $decoded;
     }
 
-    private function assertIstjSourceRevisionExists(string $sourceRevisionSha): void
+    private function assertBackendSourceRevisionExists(string $slug, string $sourceRevisionSha): void
     {
-        $this->readIstjSourceRevision($sourceRevisionSha);
+        $this->readBackendSourceRevision($slug, $sourceRevisionSha);
     }
 
     /**
      * @return array{sections: list<array<string, mixed>>}
      */
-    private function readIstjSourceRevision(string $sourceRevisionSha): array
+    private function readBackendSourceRevision(string $slug, string $sourceRevisionSha): array
     {
         $source = $this->readJsonFromRepository(
             'backend/content_assets/personality_public/mbti-index52-comparison-projection-repair-2026-07-27.json',
         );
         $records = array_values(array_filter(
             $source['records'],
-            static fn (array $record): bool => ($record['slug'] ?? null) === 'istj-vs-isfj',
+            static fn (array $record): bool => ($record['slug'] ?? null) === $slug,
         ));
 
         self::assertCount(1, $records);

@@ -167,23 +167,24 @@
     {
       "row_id": "W1-COMP-02-ENTJ-VS-INTJ",
       "slug": "entj-vs-intj",
-      "source_ref": "037ccb6dfd4d165d1b731844e8afb05b108a08e33d43794afade1e9d131795a1",
-      "source_ref_kind": "committed_file_sha256",
-      "source_sections_sha256": "b3c81386ac6e6dab927a959008a98423bdb67ccaef229bd0c33421f1b6ab91d5",
-      "target_sections_sha256": "2c417cb2aacbafeb3abb6905fdb6f3efe7d5dc18469340718ebcbd940f111a59",
+      "source_ref": "75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb",
+      "source_ref_kind": "backend_revision_sha256",
+      "source_sections_sha256": "cde62cdb162beb144cdbc2d7404df4cce2e4ab6bf79ef8f8eff6d78431d61686",
+      "target_sections_sha256": "280d89c82ec41130e6ade16c4665acef5a5e9d9d625518cc5af781891588ba58",
       "sections": [
         {
-          "source_pointer": "/sections/0",
+          "source_pointer": "/expected_runtime_sections/0",
           "target_pointer": "/assets/1/payload/sections/0",
-          "section_id": "quick_answer",
+          "section_id": "direct_answer",
           "source_shape": {
-            "body": 4,
+            "body": 1,
             "groups": 0,
             "group_items": [],
-            "items": 0
+            "items": 0,
+            "rows": 0
           },
           "target_shape": {
-            "body": 4,
+            "body": 1,
             "groups": 0,
             "group_items": [],
             "items": 0,
@@ -191,35 +192,37 @@
           }
         },
         {
-          "source_pointer": "/sections/1",
+          "source_pointer": "/expected_runtime_sections/1",
           "target_pointer": "/assets/1/payload/sections/1",
-          "section_id": "why_they_are_confused",
+          "section_id": "quick_judgment_table",
           "source_shape": {
-            "body": 4,
-            "groups": 0,
-            "group_items": [],
-            "items": 0
-          },
-          "target_shape": {
-            "body": 4,
+            "body": 0,
             "groups": 0,
             "group_items": [],
             "items": 0,
-            "rows": 0
+            "rows": 4
+          },
+          "target_shape": {
+            "body": 0,
+            "groups": 0,
+            "group_items": [],
+            "items": 0,
+            "rows": 4
           }
         },
         {
-          "source_pointer": "/sections/2",
+          "source_pointer": "/expected_runtime_sections/2",
           "target_pointer": "/assets/1/payload/sections/2",
-          "section_id": "shared_traits",
+          "section_id": "easy_misread",
           "source_shape": {
-            "body": 4,
+            "body": 1,
             "groups": 0,
             "group_items": [],
-            "items": 0
+            "items": 0,
+            "rows": 0
           },
           "target_shape": {
-            "body": 4,
+            "body": 1,
             "groups": 0,
             "group_items": [],
             "items": 0,
@@ -227,17 +230,18 @@
           }
         },
         {
-          "source_pointer": "/sections/3",
+          "source_pointer": "/expected_runtime_sections/3",
           "target_pointer": "/assets/1/payload/sections/3",
-          "section_id": "core_difference",
+          "section_id": "real_scenario_differences",
           "source_shape": {
-            "body": 4,
+            "body": 1,
             "groups": 0,
             "group_items": [],
-            "items": 0
+            "items": 0,
+            "rows": 0
           },
           "target_shape": {
-            "body": 4,
+            "body": 1,
             "groups": 0,
             "group_items": [],
             "items": 0,
@@ -245,17 +249,18 @@
           }
         },
         {
-          "source_pointer": "/sections/4",
+          "source_pointer": "/expected_runtime_sections/4",
           "target_pointer": "/assets/1/payload/sections/4",
-          "section_id": "work_and_learning",
+          "section_id": "do_not_misjudge",
           "source_shape": {
-            "body": 4,
+            "body": 1,
             "groups": 0,
             "group_items": [],
-            "items": 0
+            "items": 0,
+            "rows": 0
           },
           "target_shape": {
-            "body": 4,
+            "body": 1,
             "groups": 0,
             "group_items": [],
             "items": 0,
@@ -263,67 +268,26 @@
           }
         },
         {
-          "source_pointer": "/sections/5",
+          "source_pointer": "/expected_runtime_sections/5",
           "target_pointer": "/assets/1/payload/sections/5",
-          "section_id": "communication_and_relationships",
+          "section_id": "next_reading",
           "source_shape": {
-            "body": 4,
-            "groups": 0,
-            "group_items": [],
-            "items": 0
-          },
-          "target_shape": {
-            "body": 4,
+            "body": 1,
             "groups": 0,
             "group_items": [],
             "items": 0,
             "rows": 0
-          }
-        },
-        {
-          "source_pointer": "/sections/6",
-          "target_pointer": "/assets/1/payload/sections/6",
-          "section_id": "stress_and_growth",
-          "source_shape": {
-            "body": 0,
-            "groups": 2,
-            "group_items": [
-              4,
-              4
-            ],
-            "items": 0
           },
           "target_shape": {
-            "body": 0,
-            "groups": 2,
-            "group_items": [
-              4,
-              4
-            ],
+            "body": 1,
+            "groups": 0,
+            "group_items": [],
             "items": 0,
-            "rows": 8
-          }
-        },
-        {
-          "source_pointer": "/sections/7",
-          "target_pointer": "/assets/1/payload/sections/7",
-          "section_id": "misconceptions",
-          "source_shape": {
-            "body": 0,
-            "groups": 0,
-            "group_items": [],
-            "items": 6
-          },
-          "target_shape": {
-            "body": 0,
-            "groups": 0,
-            "group_items": [],
-            "items": 6,
-            "rows": 6
+            "rows": 0
           }
         }
       ],
-      "faq_count": 8,
+      "faq_count": 5,
       "structure_preserved": true
     },
     {
@@ -491,23 +455,24 @@
     {
       "row_id": "W1-COMP-04-INFJ-VS-INFP",
       "slug": "infj-vs-infp",
-      "source_ref": "2c7b30b1a64be8179d1af84d66a6344aee209e3a397f19c962b7f1c4b4b77d42",
-      "source_ref_kind": "committed_file_sha256",
-      "source_sections_sha256": "0a123cd001fe621eedaf5789a64cf8968e460563a23313539f4861b56a48944a",
-      "target_sections_sha256": "2fa09d806917ad6cae097b47750195fea69f948ff1f037f29b874d23ff997308",
+      "source_ref": "75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb",
+      "source_ref_kind": "backend_revision_sha256",
+      "source_sections_sha256": "a6f7528360303a4cbd2f59108e941ff0f1154fc343ddf3045389c6a3c149056e",
+      "target_sections_sha256": "f98b9acc6a09a2e695545c56492477d09ae1e47086d3256d314464ac21a719d6",
       "sections": [
         {
-          "source_pointer": "/sections/0",
+          "source_pointer": "/expected_runtime_sections/0",
           "target_pointer": "/assets/3/payload/sections/0",
-          "section_id": "quick_answer",
+          "section_id": "direct_answer",
           "source_shape": {
-            "body": 4,
+            "body": 1,
             "groups": 0,
             "group_items": [],
-            "items": 0
+            "items": 0,
+            "rows": 0
           },
           "target_shape": {
-            "body": 4,
+            "body": 1,
             "groups": 0,
             "group_items": [],
             "items": 0,
@@ -515,35 +480,37 @@
           }
         },
         {
-          "source_pointer": "/sections/1",
+          "source_pointer": "/expected_runtime_sections/1",
           "target_pointer": "/assets/3/payload/sections/1",
-          "section_id": "why_they_are_confused",
+          "section_id": "quick_judgment_table",
           "source_shape": {
-            "body": 4,
-            "groups": 0,
-            "group_items": [],
-            "items": 0
-          },
-          "target_shape": {
-            "body": 4,
+            "body": 0,
             "groups": 0,
             "group_items": [],
             "items": 0,
-            "rows": 0
+            "rows": 4
+          },
+          "target_shape": {
+            "body": 0,
+            "groups": 0,
+            "group_items": [],
+            "items": 0,
+            "rows": 4
           }
         },
         {
-          "source_pointer": "/sections/2",
+          "source_pointer": "/expected_runtime_sections/2",
           "target_pointer": "/assets/3/payload/sections/2",
-          "section_id": "shared_traits",
+          "section_id": "easy_misread",
           "source_shape": {
-            "body": 4,
+            "body": 1,
             "groups": 0,
             "group_items": [],
-            "items": 0
+            "items": 0,
+            "rows": 0
           },
           "target_shape": {
-            "body": 4,
+            "body": 1,
             "groups": 0,
             "group_items": [],
             "items": 0,
@@ -551,17 +518,18 @@
           }
         },
         {
-          "source_pointer": "/sections/3",
+          "source_pointer": "/expected_runtime_sections/3",
           "target_pointer": "/assets/3/payload/sections/3",
-          "section_id": "core_difference",
+          "section_id": "real_scenario_differences",
           "source_shape": {
-            "body": 4,
+            "body": 1,
             "groups": 0,
             "group_items": [],
-            "items": 0
+            "items": 0,
+            "rows": 0
           },
           "target_shape": {
-            "body": 4,
+            "body": 1,
             "groups": 0,
             "group_items": [],
             "items": 0,
@@ -569,17 +537,18 @@
           }
         },
         {
-          "source_pointer": "/sections/4",
+          "source_pointer": "/expected_runtime_sections/4",
           "target_pointer": "/assets/3/payload/sections/4",
-          "section_id": "work_and_learning",
+          "section_id": "do_not_misjudge",
           "source_shape": {
-            "body": 4,
+            "body": 1,
             "groups": 0,
             "group_items": [],
-            "items": 0
+            "items": 0,
+            "rows": 0
           },
           "target_shape": {
-            "body": 4,
+            "body": 1,
             "groups": 0,
             "group_items": [],
             "items": 0,
@@ -587,89 +556,49 @@
           }
         },
         {
-          "source_pointer": "/sections/5",
+          "source_pointer": "/expected_runtime_sections/5",
           "target_pointer": "/assets/3/payload/sections/5",
-          "section_id": "communication_and_relationships",
+          "section_id": "next_reading",
           "source_shape": {
-            "body": 4,
-            "groups": 0,
-            "group_items": [],
-            "items": 0
-          },
-          "target_shape": {
-            "body": 4,
+            "body": 1,
             "groups": 0,
             "group_items": [],
             "items": 0,
             "rows": 0
-          }
-        },
-        {
-          "source_pointer": "/sections/6",
-          "target_pointer": "/assets/3/payload/sections/6",
-          "section_id": "stress_and_growth",
-          "source_shape": {
-            "body": 0,
-            "groups": 2,
-            "group_items": [
-              4,
-              4
-            ],
-            "items": 0
           },
           "target_shape": {
-            "body": 0,
-            "groups": 2,
-            "group_items": [
-              4,
-              4
-            ],
+            "body": 1,
+            "groups": 0,
+            "group_items": [],
             "items": 0,
-            "rows": 8
-          }
-        },
-        {
-          "source_pointer": "/sections/7",
-          "target_pointer": "/assets/3/payload/sections/7",
-          "section_id": "misconceptions",
-          "source_shape": {
-            "body": 0,
-            "groups": 0,
-            "group_items": [],
-            "items": 6
-          },
-          "target_shape": {
-            "body": 0,
-            "groups": 0,
-            "group_items": [],
-            "items": 6,
-            "rows": 6
+            "rows": 0
           }
         }
       ],
-      "faq_count": 8,
+      "faq_count": 5,
       "structure_preserved": true
     },
     {
       "row_id": "W1-COMP-05-INTJ-VS-INTP",
       "slug": "intj-vs-intp",
-      "source_ref": "cc6220e1ac1b6a8f9619fac267429e9c2743689c40d35ac81098b697addf7e8a",
-      "source_ref_kind": "committed_file_sha256",
-      "source_sections_sha256": "f7b3e1b1e53acb6749608bf8af04cc4fb0ca6d8842aa3978ffe85493b1f5b2dd",
-      "target_sections_sha256": "f35757e76b7f6da920eb22fc7fb618b7ff626ca311bd272d7b0df977784a23f3",
+      "source_ref": "75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb",
+      "source_ref_kind": "backend_revision_sha256",
+      "source_sections_sha256": "ae8507ca425ba0d72f3426322249a9663dbc50ecd6f3fa545acc04068a28f436",
+      "target_sections_sha256": "499bec5c5570e3724b2f8c4a9a99d0caca552a99821f4eafc28ee185271afb0d",
       "sections": [
         {
-          "source_pointer": "/sections/0",
+          "source_pointer": "/expected_runtime_sections/0",
           "target_pointer": "/assets/4/payload/sections/0",
-          "section_id": "quick_answer",
+          "section_id": "direct_answer",
           "source_shape": {
-            "body": 4,
+            "body": 1,
             "groups": 0,
             "group_items": [],
-            "items": 0
+            "items": 0,
+            "rows": 0
           },
           "target_shape": {
-            "body": 4,
+            "body": 1,
             "groups": 0,
             "group_items": [],
             "items": 0,
@@ -677,35 +606,37 @@
           }
         },
         {
-          "source_pointer": "/sections/1",
+          "source_pointer": "/expected_runtime_sections/1",
           "target_pointer": "/assets/4/payload/sections/1",
-          "section_id": "why_they_are_confused",
+          "section_id": "quick_judgment_table",
           "source_shape": {
-            "body": 4,
-            "groups": 0,
-            "group_items": [],
-            "items": 0
-          },
-          "target_shape": {
-            "body": 4,
+            "body": 0,
             "groups": 0,
             "group_items": [],
             "items": 0,
-            "rows": 0
+            "rows": 4
+          },
+          "target_shape": {
+            "body": 0,
+            "groups": 0,
+            "group_items": [],
+            "items": 0,
+            "rows": 4
           }
         },
         {
-          "source_pointer": "/sections/2",
+          "source_pointer": "/expected_runtime_sections/2",
           "target_pointer": "/assets/4/payload/sections/2",
-          "section_id": "shared_traits",
+          "section_id": "easy_misread",
           "source_shape": {
-            "body": 4,
+            "body": 1,
             "groups": 0,
             "group_items": [],
-            "items": 0
+            "items": 0,
+            "rows": 0
           },
           "target_shape": {
-            "body": 4,
+            "body": 1,
             "groups": 0,
             "group_items": [],
             "items": 0,
@@ -713,17 +644,18 @@
           }
         },
         {
-          "source_pointer": "/sections/3",
+          "source_pointer": "/expected_runtime_sections/3",
           "target_pointer": "/assets/4/payload/sections/3",
-          "section_id": "core_difference",
+          "section_id": "real_scenario_differences",
           "source_shape": {
-            "body": 4,
+            "body": 1,
             "groups": 0,
             "group_items": [],
-            "items": 0
+            "items": 0,
+            "rows": 0
           },
           "target_shape": {
-            "body": 4,
+            "body": 1,
             "groups": 0,
             "group_items": [],
             "items": 0,
@@ -731,17 +663,18 @@
           }
         },
         {
-          "source_pointer": "/sections/4",
+          "source_pointer": "/expected_runtime_sections/4",
           "target_pointer": "/assets/4/payload/sections/4",
-          "section_id": "work_and_learning",
+          "section_id": "do_not_misjudge",
           "source_shape": {
-            "body": 4,
+            "body": 1,
             "groups": 0,
             "group_items": [],
-            "items": 0
+            "items": 0,
+            "rows": 0
           },
           "target_shape": {
-            "body": 4,
+            "body": 1,
             "groups": 0,
             "group_items": [],
             "items": 0,
@@ -749,67 +682,26 @@
           }
         },
         {
-          "source_pointer": "/sections/5",
+          "source_pointer": "/expected_runtime_sections/5",
           "target_pointer": "/assets/4/payload/sections/5",
-          "section_id": "communication_and_relationships",
+          "section_id": "next_reading",
           "source_shape": {
-            "body": 4,
-            "groups": 0,
-            "group_items": [],
-            "items": 0
-          },
-          "target_shape": {
-            "body": 4,
+            "body": 1,
             "groups": 0,
             "group_items": [],
             "items": 0,
             "rows": 0
-          }
-        },
-        {
-          "source_pointer": "/sections/6",
-          "target_pointer": "/assets/4/payload/sections/6",
-          "section_id": "stress_and_growth",
-          "source_shape": {
-            "body": 4,
-            "groups": 2,
-            "group_items": [
-              4,
-              4
-            ],
-            "items": 0
           },
           "target_shape": {
-            "body": 4,
-            "groups": 2,
-            "group_items": [
-              4,
-              4
-            ],
+            "body": 1,
+            "groups": 0,
+            "group_items": [],
             "items": 0,
-            "rows": 8
-          }
-        },
-        {
-          "source_pointer": "/sections/7",
-          "target_pointer": "/assets/4/payload/sections/7",
-          "section_id": "misconceptions",
-          "source_shape": {
-            "body": 4,
-            "groups": 0,
-            "group_items": [],
-            "items": 6
-          },
-          "target_shape": {
-            "body": 4,
-            "groups": 0,
-            "group_items": [],
-            "items": 6,
-            "rows": 6
+            "rows": 0
           }
         }
       ],
-      "faq_count": 8,
+      "faq_count": 5,
       "structure_preserved": true
     },
     {
@@ -818,7 +710,7 @@
       "source_ref": "3c25e03b72812921964b9efcb0391af96793c4081f54a02bbf0c33f08e591ac5",
       "source_ref_kind": "committed_file_sha256",
       "source_sections_sha256": "20f3ce96eae401d47240893b156872cc863a96273c9944d29f7b0cc25cc4c961",
-      "target_sections_sha256": "efd8cc68df5c637d749be9fd97c72cda8c804a0dae6fc76c952d60d959c93848",
+      "target_sections_sha256": "0c111ff3a22b9660e0e4d342199967605487d6c6f9fde465abe029e4d1d9f55a",
       "sections": [
         {
           "source_pointer": "/sections/0",
@@ -1101,6 +993,6 @@
       "target_sections_sha256": "e3e653b7ac4ca7d21325c5f44567376c9818330458a825c488292fc677df33d7"
     }
   ],
-  "package_id": "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-2026-07-30",
+  "package_id": "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-2026-07-31",
   "inventory_package_sha256": "8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85"
 }

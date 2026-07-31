@@ -2,7 +2,7 @@
 
 Status: unpublished candidate package.
 
-This package contains exactly seven English MBTI cross-type comparison assets registered by the frozen W1 inventory. It is baseline content evidence for later exact-package validation. It is not runtime authority and has not been imported into CMS, reviewed by W9, published, indexed, submitted to search providers, or deployed.
+This package contains exactly seven English MBTI cross-type comparison assets registered by the frozen W1 inventory. It replaces the W9-blocked prior package by rebinding three rows to the current 6-section/5-FAQ backend authority and repairing one reader-visible sentence fragment. It is baseline content evidence for later exact-package validation. It is not runtime authority and has not been imported into CMS, passed a fresh W9 review, published, indexed, submitted to search providers, or deployed.
 
 Input inventory:
 
@@ -13,7 +13,7 @@ Input inventory:
 
 Files:
 
-- `assets.json`: seven source-bound English content assets; the six committed JSON sources preserve body, group, nested-item, and item cardinality.
+- `assets.json`: seven source-bound English content assets; the committed JSON sources and exact backend revision bindings preserve body, group, nested-item, item, and row cardinality.
 - `translation_map.json`: source-to-target section pointers, source references, structure shapes, and section hashes.
 - `claim_boundary_report.json`: producer-scope claim-boundary checks for all seven rows.
 - `editorial_review.json`: producer editorial self-review for all seven rows; this is not independent W9 evidence.
