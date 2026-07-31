@@ -101497,7 +101497,7 @@
       "EN-PARITY-W1-MBTI-RESULT-AGENT-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "fb0eee989da080f11d9cb4e7ed5a578937203ba6",
+    "commit_sha": "5e381302a8620134423cb9310a3305bb7b0bf4ef",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3429",
     "checks": {
       "authorization": {
@@ -101796,8 +101796,13 @@
         "at": "2026-07-31T00:00:00Z",
         "status": "review_fix_local_verified",
         "note": "Exact head 4514bf36ede286e990613dd41f5ea7f632137c44 passed all nine required checks with staging parity skipped and no main drift, then review found the CTA selector had no deterministic English pack target. Frozen authority target english_commercial_spec_v1 now explicitly requires creation of a new inactive MBTI.global.en.default pack at content_packages/default/GLOBAL/en/MBTI-GLOBAL-en-v0.3, forbids existing zh-CN pack reuse or mutation and runtime fallback registration, and fails closed until a separate English content-pack authority PR creates the target. This package does not materialize it. Focused validation passed 7 tests/1413 assertions plus Pint, JSON, deterministic hash, diff, and scope checks. Candidate SHA is 9325013b870fd2496efc0882656240f91ce28ff4faaf1da42fb3dde3577b0ed3; exact-head checks remain pending."
+      },
+      {
+        "at": "2026-07-31T00:01:00Z",
+        "status": "github_checks_pending",
+        "note": "Committed the exact inactive English commercial authority target as immutable implementation commit 5e381302a8620134423cb9310a3305bb7b0bf4ef. This metadata-only commit records that pointer; exact-head checks and review remain pending."
       }
     ],
-    "updated_at": "2026-07-31T00:00:00Z"
+    "updated_at": "2026-07-31T00:01:00Z"
   }
 }
