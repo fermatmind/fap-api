@@ -1216,6 +1216,10 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
             'private draft release',
             'fermat_career_assets_v4_2_v9_d23b_schema_repaired.xlsx',
             'WORKBOOK_SIZE: "29974136"',
+            'WORKBOOK_TRANSPORT_CONTROL_SHA: 0a354eb6397d13a4c6b3aa45734fc02342ece2d1',
+            'gh api --paginate --slurp "repos/${GITHUB_REPOSITORY}/releases?per_page=100"',
+            'WORKBOOK_TRANSPORT_RELEASE_CARDINALITY',
+            '.digest == $digest',
             'Download exact private reviewed-workbook transport',
             'releases/assets/${SOURCE_WORKBOOK_ASSET_ID}',
             'server_write_count: 1',
@@ -1287,6 +1291,7 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
             'deploy:symlink',
             'indexnow',
             'googleapis',
+            '/releases/tags/',
             '139.224.',
             '/var/www/fap-api',
         ] as $forbidden) {

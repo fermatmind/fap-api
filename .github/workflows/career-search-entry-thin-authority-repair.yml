@@ -165,6 +165,7 @@ jobs:
           WORKBOOK_ASSET_NAME: fermat_career_assets_v4_2_v9_d23b_schema_repaired.xlsx
           WORKBOOK_SHA256: c30f8743cfd0d8baa14ac931cc7270807425164952f6a44953b5b4ab448778ef
           WORKBOOK_SIZE: "29974136"
+          WORKBOOK_TRANSPORT_CONTROL_SHA: 0a354eb6397d13a4c6b3aa45734fc02342ece2d1
         run: |
           set -euo pipefail
           test "$GITHUB_REF" = "refs/heads/main"
@@ -285,17 +286,23 @@ jobs:
              and .workflow_run_id == $run_id
              and .workflow_run_attempt == $attempt' "$failed_preflight_receipt" >/dev/null
 
-          workbook_release="$(gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${SOURCE_WORKBOOK_RELEASE_TAG}")"
+          workbook_release_pages="$(gh api --paginate --slurp "repos/${GITHUB_REPOSITORY}/releases?per_page=100")"
+          workbook_release="$(jq -ce \
+            --arg tag "$SOURCE_WORKBOOK_RELEASE_TAG" \
+            '[.[][] | select(.tag_name == $tag)]
+             | if length == 1 then .[0] else error("WORKBOOK_TRANSPORT_RELEASE_CARDINALITY") end' \
+            <<<"$workbook_release_pages")"
           jq -e \
             --arg tag "$SOURCE_WORKBOOK_RELEASE_TAG" \
-            --arg target "$EXPECTED_CONTROL_PLANE_SHA" \
+            --arg target "$WORKBOOK_TRANSPORT_CONTROL_SHA" \
             --arg asset "$WORKBOOK_ASSET_NAME" \
+            --arg digest "sha256:${WORKBOOK_SHA256}" \
             --argjson size "$WORKBOOK_SIZE" \
             '.tag_name == $tag
              and .target_commitish == $target
              and .draft == true
              and .prerelease == false
-             and ([.assets[] | select(.name == $asset and .state == "uploaded" and .size == $size)] | length == 1)
+             and ([.assets[] | select(.name == $asset and .state == "uploaded" and .size == $size and .digest == $digest)] | length == 1)
              and (.assets | length) == 1' <<<"$workbook_release" >/dev/null
           workbook_asset_id="$(jq -er \
             --arg asset "$WORKBOOK_ASSET_NAME" \
@@ -594,11 +601,18 @@ jobs:
           SOURCE_WORKBOOK_RELEASE_TAG: ${{ needs.eligibility.outputs.source_workbook_release_tag }}
         run: |
           set -euo pipefail
-          release="$(gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${SOURCE_WORKBOOK_RELEASE_TAG}")"
+          release_pages="$(gh api --paginate --slurp "repos/${GITHUB_REPOSITORY}/releases?per_page=100")"
+          release="$(jq -ce \
+            --arg tag "$SOURCE_WORKBOOK_RELEASE_TAG" \
+            '[.[][] | select(.tag_name == $tag)]
+             | if length == 1 then .[0] else error("WORKBOOK_TRANSPORT_RELEASE_CARDINALITY") end' \
+            <<<"$release_pages")"
           release_id="$(jq -er '.id' <<<"$release")"
           test "$(jq -r '.draft' <<<"$release")" = "true"
           test "$(jq -r '.assets | length' <<<"$release")" = "1"
           gh api --method DELETE "repos/${GITHUB_REPOSITORY}/releases/${release_id}"
-          if gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${SOURCE_WORKBOOK_RELEASE_TAG}" >/dev/null 2>&1; then
-            exit 1
-          fi
+          remaining_releases="$(gh api --paginate --slurp "repos/${GITHUB_REPOSITORY}/releases?per_page=100")"
+          jq -e \
+            --arg tag "$SOURCE_WORKBOOK_RELEASE_TAG" \
+            '[.[][] | select(.tag_name == $tag)] | length == 0' \
+            <<<"$remaining_releases" >/dev/null
