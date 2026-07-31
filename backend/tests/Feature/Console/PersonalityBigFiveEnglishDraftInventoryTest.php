@@ -329,6 +329,7 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             '<div style="shape-outside:url(hero.webp)">Text</div>',
             '<style>.hero { background-image: url(hero.webp); }</style>',
             '<style>:root{--hero:url(hero.webp)} .card{background-image:var(--hero)}</style>',
+            '<style>.hero{background-image:u/**/rl(hero.webp)}</style>',
             '<input type="image" src="submit.webp" alt="Submit">',
             '<table background="texture.webp"><tr><td>Text</td></tr></table>',
             '<meta property="og:image" content="hero.webp">',

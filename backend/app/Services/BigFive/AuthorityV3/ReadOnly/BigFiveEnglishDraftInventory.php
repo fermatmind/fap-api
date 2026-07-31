@@ -1066,7 +1066,7 @@ final class BigFiveEnglishDraftInventory
         $imageValueFunction = '(?:'.$imageFunction.'|(?:var|env)\s*\()';
         $imageProperty = '(?:background(?:-image)?|border-image(?:-source)?|clip-path|content|cursor|'
             .'filter|list-style(?:-image)?|mask(?:-image)?|offset-path|shape-outside)';
-        $decodedValue = $this->decodeCssEscapes($value);
+        $decodedValue = $this->normalizeCssForMediaScan($value);
 
         if (preg_match(
             '/(?:^|[;{]\s*)'.$imageProperty.'\s*:\s*[^;}]*'.$imageValueFunction.'/i',
@@ -1081,7 +1081,7 @@ final class BigFiveEnglishDraftInventory
             if ($style === null) {
                 continue;
             }
-            $decodedStyle = $this->decodeCssEscapes($style);
+            $decodedStyle = $this->normalizeCssForMediaScan($style);
             if (preg_match('/'.$imageFunction.'/i', $decodedStyle) === 1
                 || preg_match(
                     '/(?:^|;\s*)'.$imageProperty.'\s*:\s*[^;]*'.$imageValueFunction.'/i',
@@ -1093,7 +1093,7 @@ final class BigFiveEnglishDraftInventory
 
         preg_match_all('/<style\b[^>]*>(.*?)(?:<\/style\s*>|$)/is', $value, $styleElements);
         foreach ($styleElements[1] as $styleElement) {
-            $decodedStyle = $this->decodeCssEscapes($styleElement);
+            $decodedStyle = $this->normalizeCssForMediaScan($styleElement);
             if (preg_match('/'.$imageFunction.'/i', $decodedStyle) === 1
                 || preg_match(
                     '/(?:^|[;{]\s*)'.$imageProperty.'\s*:\s*[^;}]*'.$imageValueFunction.'/i',
@@ -1104,6 +1104,13 @@ final class BigFiveEnglishDraftInventory
         }
 
         return false;
+    }
+
+    private function normalizeCssForMediaScan(string $value): string
+    {
+        $withoutComments = preg_replace('~/\*.*?(?:\*/|$)~s', '', $value) ?? $value;
+
+        return $this->decodeCssEscapes($withoutComments);
     }
 
     private function decodeCssEscapes(string $value): string
