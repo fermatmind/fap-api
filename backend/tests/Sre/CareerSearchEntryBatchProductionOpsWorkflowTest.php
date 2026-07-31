@@ -1345,6 +1345,13 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
             'expected_repair_payload_set_sha256:',
             'expected_target_set_sha256:',
             'efd7f2bd0acace0fd7463dbfb13897bd78a1cad5',
+            'FAILED_PREWRITE_RUN_ID: "30602511379"',
+            'FAILED_PREWRITE_RUN_ATTEMPT: "1"',
+            'FAILED_PREWRITE_CONTROL_SHA: 012392aaf0d83375414f8eb9ad010f6c7c577714',
+            'Validate protected production target shape',
+            'Run exact post-authority cache-only refresh and full readback',
+            '.total_count == 0 and (.artifacts | length) == 0',
+            'topology-repaired post-authority cache-only refresh',
             'PASS_AUTHORITY_REPAIR_COMPLETE',
             '.manifest_positions == [30, 33, 34, 40, 42]',
             '.database_write_count == 15',
@@ -1363,6 +1370,7 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
             'group: deploy-${{ github.repository }}-production',
             'environment: production',
             'secrets.PRODUCTION_DEPLOY_HOST',
+            'secrets.PRODUCTION_RETIRED_DEPLOY_HOST',
             'secrets.PRODUCTION_DEPLOY_PATH',
             'if: always()',
         ] as $required) {
@@ -1392,6 +1400,9 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
 
         foreach ([
             'Post-authority cache-only refresh',
+            '30602511379',
+            'SSH setup and cache execution were',
+            'skipped, no receipt artifact existed',
             '30601380901',
             'afa5cac18c50722c8072c2ef184617e649621919570b34429d5e02207eb74ec5',
             '40a38665002e7012bddfc7555f18cbe3a07789af37774e2041439be71cd41cf1',

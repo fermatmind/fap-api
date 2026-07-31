@@ -380,6 +380,15 @@ after the verified authority repair. It binds the successful authority-repair
 run, receipt and artifact digests, combined repair and payload sets, unchanged
 active release, exact manifest, and latest control-plane SHA.
 
+The first dispatch, run `30602511379` attempt `1`, passed eligibility and then
+failed before production connection because the workflow referenced the
+retired-host secret with reversed words. SSH setup and cache execution were
+skipped, no receipt artifact existed, and no production read or write occurred.
+The repaired control uses the repository-standard
+`PRODUCTION_RETIRED_DEPLOY_HOST` secret and binds that exact failed pre-write
+run, failed topology step, skipped SSH/execute steps, and zero-artifact state
+before accepting a new exact authorization.
+
 The cache write scope is derived only from manifest positions `30`, `33`, `34`,
 `40`, and `42`: exactly five slugs and ten bilingual detail-cache targets. Its
 stable target-set SHA-256 is

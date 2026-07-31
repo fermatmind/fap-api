@@ -99,6 +99,9 @@ jobs:
           EXPECTED_TARGET_SET_SHA256: ${{ inputs.expected_target_set_sha256 }}
           OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
           AUTHORITY_REPAIR_CONTROL_SHA: efd7f2bd0acace0fd7463dbfb13897bd78a1cad5
+          FAILED_PREWRITE_RUN_ID: "30602511379"
+          FAILED_PREWRITE_RUN_ATTEMPT: "1"
+          FAILED_PREWRITE_CONTROL_SHA: 012392aaf0d83375414f8eb9ad010f6c7c577714
           EXPECTED_VERIFICATION_SHA256: a4b038b0c782aa33248f9d664a207d99cd475b040bf0ac0858fdb2de7a11616c
           EXPECTED_NON_TARGET_STATE_SHA256: a3fa4d66f8691760d6b04c630dbb500258a1111a6622753982bfeece17e9c1b5
         run: |
@@ -121,6 +124,42 @@ jobs:
           test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
           test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
           git merge-base --is-ancestor "$EXPECTED_RELEASE_SHA" origin/main
+
+          failed_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${FAILED_PREWRITE_RUN_ID}")"
+          jq -e \
+            --arg control "$FAILED_PREWRITE_CONTROL_SHA" \
+            --argjson attempt "$FAILED_PREWRITE_RUN_ATTEMPT" \
+            '.name == "Career Search Entry Post-Authority Cache Refresh"
+             and .path == ".github/workflows/career-search-entry-post-authority-cache-refresh.yml"
+             and .event == "workflow_dispatch"
+             and .status == "completed"
+             and .conclusion == "failure"
+             and .head_branch == "main"
+             and .head_sha == $control
+             and .run_attempt == $attempt' <<<"$failed_run" >/dev/null
+          failed_jobs="$(
+            gh api \
+              "repos/${GITHUB_REPOSITORY}/actions/runs/${FAILED_PREWRITE_RUN_ID}/jobs?filter=latest&per_page=100"
+          )"
+          jq -e \
+            '.total_count == 2
+             and ([.jobs[] | select(.name == "eligibility" and .conclusion == "success")] | length) == 1
+             and ([.jobs[] |
+               select(.name == "refresh"
+                 and .conclusion == "failure"
+                 and ([.steps[] |
+                   select(.name == "Validate protected production target shape"
+                     and .conclusion == "failure")] | length) == 1
+                 and ([.steps[] |
+                   select((.name == "Set up SSH"
+                     or .name == "Install pinned SSH known hosts"
+                     or .name == "Run exact post-authority cache-only refresh and full readback")
+                     and .conclusion == "skipped")] | length) == 3)] | length) == 1' \
+            <<<"$failed_jobs" >/dev/null
+          failed_artifacts="$(
+            gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${FAILED_PREWRITE_RUN_ID}/artifacts?per_page=100"
+          )"
+          jq -e '.total_count == 0 and (.artifacts | length) == 0' <<<"$failed_artifacts" >/dev/null
 
           repair_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${AUTHORITY_REPAIR_RUN_ID}")"
           jq -e \
@@ -175,7 +214,7 @@ jobs:
              and .workflow_run_id == $run_id
              and .workflow_run_attempt == $attempt' "$repair_receipt" >/dev/null
 
-          expected_phrase="I explicitly approve one-time Career search-entry post-authority cache-only refresh for authority repair run ${AUTHORITY_REPAIR_RUN_ID} attempt ${AUTHORITY_REPAIR_RUN_ATTEMPT} receipt ${EXPECTED_AUTHORITY_REPAIR_RECEIPT_SHA256} artifact ${EXPECTED_AUTHORITY_REPAIR_ARTIFACT_DIGEST}, control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA}, active SHA ${EXPECTED_RELEASE_SHA}, manifest ${EXPECTED_MANIFEST_SHA256}, combined repair set ${EXPECTED_REPAIR_SET_SHA256}, repair payload set ${EXPECTED_REPAIR_PAYLOAD_SET_SHA256}, target set ${EXPECTED_TARGET_SET_SHA256}; refresh exactly five manifest-position slugs and 10 bilingual cache targets in one batch using the 5000ms offline build budget and zero per-target retry, then require exact quality-package and complete 100-URL public readback, with no DB, CMS, publication, indexability, queue, sitemap, llms, Search Channel, URL submission, deploy, rollback, or non-target write."
+          expected_phrase="I explicitly approve one-time Career search-entry topology-repaired post-authority cache-only refresh for failed pre-write run ${FAILED_PREWRITE_RUN_ID} attempt ${FAILED_PREWRITE_RUN_ATTEMPT} with SSH and execute skipped and zero artifacts, authority repair run ${AUTHORITY_REPAIR_RUN_ID} attempt ${AUTHORITY_REPAIR_RUN_ATTEMPT} receipt ${EXPECTED_AUTHORITY_REPAIR_RECEIPT_SHA256} artifact ${EXPECTED_AUTHORITY_REPAIR_ARTIFACT_DIGEST}, control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA}, active SHA ${EXPECTED_RELEASE_SHA}, manifest ${EXPECTED_MANIFEST_SHA256}, combined repair set ${EXPECTED_REPAIR_SET_SHA256}, repair payload set ${EXPECTED_REPAIR_PAYLOAD_SET_SHA256}, target set ${EXPECTED_TARGET_SET_SHA256}; refresh exactly five manifest-position slugs and 10 bilingual cache targets in one batch using the 5000ms offline build budget and zero per-target retry, then require exact quality-package and complete 100-URL public readback, with no DB, CMS, publication, indexability, queue, sitemap, llms, Search Channel, URL submission, deploy, rollback, or non-target write."
           test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
 
           {
@@ -199,7 +238,7 @@ jobs:
       DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
       DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
       DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
-      RETIRED_DEPLOY_HOST: ${{ secrets.RETIRED_PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
       DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
       CONTROL_PLANE_SHA: ${{ needs.eligibility.outputs.control_plane_sha }}
       EXPECTED_RELEASE_SHA: ${{ needs.eligibility.outputs.release_sha }}
