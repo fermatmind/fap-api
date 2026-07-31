@@ -231,7 +231,7 @@
       },
       {
         "at": "2026-07-23T03:35:00Z",
-  "status": "local_verified",
+  "status": "github_checks_pending",
         "note": "Started from exact PR2 merge 65765dde98a9ac96bf6a67ae514a6730bc7fab71 in an isolated worktree. Implementing the backend-only resolver and explicit audited reconciliation record; no controlled production action has occurred."
       },
       {
@@ -42901,7 +42901,7 @@
     "id": "SECURITY-103-API-05",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+  "pr_url": "https://github.com/fermatmind/fap-api/pull/3446",
     "production_write_execution": false,
     "publish_allowed": false,
     "remote_branch_deleted": false,
@@ -102308,9 +102308,9 @@
       "status": "passed",
       "evidence": "Exact changed-file validation matched all 7 changed paths to the manifest allowlist; verifier-generated BIG5_OCEAN compiled drift was restored before validation and is not part of this scope."
       },
-      "github_required_checks": {
-        "status": "pending",
-        "evidence": null
+    "github_required_checks": {
+      "status": "pending",
+      "evidence": "PR #3446 opened from exact scoped branch head 367540abb81939d45cb19244426f76332f55e037; required checks are being polled."
       }
     },
     "failure_reason": null,
@@ -102347,8 +102347,13 @@
       "at": "2026-07-31T03:24:05Z",
       "status": "local_verified",
       "note": "Rebased the scoped implementation cleanly onto latest origin/main efd7f2bd0acace0fd7463dbfb13897bd78a1cad5; implementation commit is 88ca01b13bd59dca62e002bc0edfa2624fded14c."
+    },
+    {
+      "at": "2026-07-31T03:25:30Z",
+      "status": "github_checks_pending",
+      "note": "Pushed the exact scoped branch and opened PR #3446; required GitHub checks are pending."
     }
   ],
-  "updated_at": "2026-07-31T03:24:05Z"
+  "updated_at": "2026-07-31T03:25:30Z"
 }
 }
