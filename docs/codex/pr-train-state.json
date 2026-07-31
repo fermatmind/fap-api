@@ -101179,7 +101179,7 @@
     "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
     "status": "github_checks_pending",
     "depends_on": [],
-    "commit_sha": "9daca2b4a0241f74d08e01d11d6c4d32d4b752c8",
+    "commit_sha": "735f37e6f918eedaf331465f0615d4e4326676d2",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3421",
     "checks": {
       "production_read_only_inventory": {
@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "CI run 30590670744 and Code Scanning run 30590670767 passed all required jobs on metadata head d707a128019bcc10ca6b0e009e499c1faec27986. Exact-head review then found that scalar section text was not scanned for private result-module references. Implementation 9daca2b4a0241f74d08e01d11d6c4d32d4b752c8 closes that same-scope claim boundary; required checks must rerun."
+        "evidence": "CI run 30591158059 and Code Scanning run 30591158069 passed all required jobs on metadata head 6635c4e9045c1da6ad5535f153860d7dcf465741. Exact-head review then found the image-metadata repair over-rejected non-image meta/link tags. Implementation 735f37e6f918eedaf331465f0615d4e4326676d2 narrows detection to image-bearing attributes; required checks must rerun."
       }
     },
     "scope_validation": {
@@ -101438,9 +101438,14 @@
         "at": "2026-07-30T23:38:17Z",
         "status": "github_checks_pending",
         "note": "After CI run 30590670744 passed all required jobs, exact-head review identified scalar private result-module references as a remaining claim-boundary gap. Recursive scanning now applies the public content contract's private_result, result_page_module, report_module, and entitlement patterns to string values as well as keys. Section-body regressions for all four patterns fail closed. The ledger binds implementation 9daca2b4a0241f74d08e01d11d6c4d32d4b752c8. The 30-test inventory suite passes 231 assertions, scoped Pint and PHP syntax pass, and the focused runtime-freeze classifier passes 1 test / 2 assertions."
+      },
+      {
+        "at": "2026-07-31T00:41:11Z",
+        "status": "github_checks_pending",
+        "note": "After CI run 30591158059 passed all required jobs, exact-head review identified that blanket meta/link rejection produced false positives. The media scanner now rejects only image-bearing metadata and link declarations: og:image, twitter:image, itemprop=image, icon/image_src relations, and as=image. Charset, description, and canonical metadata remain text-only compliant. The ledger binds implementation 735f37e6f918eedaf331465f0615d4e4326676d2. The 30-test inventory suite passes 232 assertions, scoped Pint and PHP syntax pass, and the focused runtime-freeze classifier passes 1 test / 2 assertions."
       }
     ],
-    "updated_at": "2026-07-30T23:38:17Z"
+    "updated_at": "2026-07-31T00:41:11Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
