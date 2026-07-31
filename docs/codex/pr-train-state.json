@@ -102284,8 +102284,8 @@
     "depends_on": [
       "EN-PARITY-W1-MBTI-RESULT-ASSETS-01"
     ],
-    "status": "github_checks_pending",
-    "commit_sha": "f8be7cb152ec3c425689bdb8d906f829faea4660",
+    "status": "ready_to_merge",
+    "commit_sha": "a80741a186cf01975798e1969e247c72b48f9cbd",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3446",
     "checks": {
       "authorization": {
@@ -102309,8 +102309,8 @@
         "evidence": "Exact changed-file validation matches all 7 changed paths to the manifest allowlist. Verifier-generated BIG5_OCEAN compiled drift was restored. Review-found unrelated ledger drift was restored exactly from latest origin/main before the PR06 entry was uniquely reapplied."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "The prior exact head ccecd210e570951d51d1edeb8d1231ceacd2afb4 passed every applicable required check. A same-scope ledger correction and latest-main reconciliation require the corrected exact head to repeat checks before merge."
+        "status": "passed",
+        "evidence": "Exact implementation head a80741a186cf01975798e1969e247c72b48f9cbd passed hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep SARIF upload, and Semgrep OSS. Staging parity was skipped and is non-blocking."
       }
     },
     "failure_reason": null,
@@ -102320,7 +102320,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "production_write_execution": false,
@@ -102382,8 +102382,13 @@
         "at": "2026-07-31T04:31:35Z",
         "status": "review_fix_local_checks_passed",
         "note": "Inspected the exact-head P2 size-bound finding before editing. The importer now allowlists every frozen filename and requires its exact frozen byte length both before and after opening the verified descriptor, so oversized or sparse replacements fail before materialization. Importer suite passes 7 tests / 249 assertions, scoped Pint and exact dry-run pass."
+      },
+      {
+        "at": "2026-07-31T04:42:00Z",
+        "status": "ready_to_merge",
+        "note": "Exact implementation head a80741a186cf01975798e1969e247c72b48f9cbd passed all nine applicable required checks with staging parity skipped, has CLEAN/MERGEABLE status, and retains exact 7/7 remote scope. All five review findings were fixed and replied to; the latest head has no new actionable review. This readiness metadata tail must repeat required checks before squash merge."
       }
     ],
-    "updated_at": "2026-07-31T04:31:35Z"
+    "updated_at": "2026-07-31T04:42:00Z"
   }
 }
