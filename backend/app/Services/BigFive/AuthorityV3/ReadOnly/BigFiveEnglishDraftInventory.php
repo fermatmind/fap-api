@@ -1114,7 +1114,37 @@ final class BigFiveEnglishDraftInventory
     {
         $withoutComments = preg_replace('~/\*.*?(?:\*/|$)~s', '', $value) ?? $value;
 
-        return $this->decodeCssEscapes($withoutComments);
+        return $this->decodeCssEscapes($this->stripCssQuotedStrings($withoutComments));
+    }
+
+    private function stripCssQuotedStrings(string $value): string
+    {
+        $normalized = $value;
+        $length = strlen($normalized);
+        $quote = null;
+        for ($index = 0; $index < $length; $index++) {
+            $character = $normalized[$index];
+            if ($quote === null) {
+                if ($character === '"' || $character === "'") {
+                    $quote = $character;
+                    $normalized[$index] = ' ';
+                }
+
+                continue;
+            }
+
+            $normalized[$index] = ' ';
+            if ($character === '\\' && $index + 1 < $length) {
+                $normalized[++$index] = ' ';
+
+                continue;
+            }
+            if ($character === $quote) {
+                $quote = null;
+            }
+        }
+
+        return $normalized;
     }
 
     private function decodeCssEscapes(string $value): string
@@ -1232,6 +1262,14 @@ final class BigFiveEnglishDraftInventory
     private function containsLegacyAliasReference(mixed $value, ?string $parentKey = null): bool
     {
         if (is_string($value)) {
+            $decodedValue = html_entity_decode($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            for ($decodePass = 0; $decodePass < 2; $decodePass++) {
+                $nextValue = rawurldecode($decodedValue);
+                if ($nextValue === $decodedValue) {
+                    break;
+                }
+                $decodedValue = $nextValue;
+            }
             $identityBearingKeys = [
                 'authority_asset_key',
                 'canonical',
@@ -1264,25 +1302,26 @@ final class BigFiveEnglishDraftInventory
             ));
             foreach (array_keys(BigFiveCanonicalRouteCatalog::EN_REDIRECT_ONLY_ALIAS_TARGETS) as $alias) {
                 if ((in_array($normalizedParentKey, $identityBearingKeys, true)
-                        && ($value === $alias || basename(parse_url($value, PHP_URL_PATH) ?: $value) === $alias))
+                        && ($decodedValue === $alias
+                            || basename(parse_url($decodedValue, PHP_URL_PATH) ?: $decodedValue) === $alias))
                     || preg_match(
                         '~/(?:en/)?personality/big-five/(?:[^)\s"\'<>]+/)?'
                             .preg_quote($alias, '~').'(?=$|[/\s"\'?#)])~i',
-                        $value,
+                        $decodedValue,
                     ) === 1) {
                     return true;
                 }
                 if (in_array($normalizedParentKey, $identityBearingKeys, true)
                     && preg_match(
                         '~(?:^|[/:"\'])'.preg_quote($alias, '~').'(?=$|[/:"\'?#])~i',
-                        $value,
+                        $decodedValue,
                     ) === 1) {
                     return true;
                 }
                 if (preg_match(
                     '~(?:href|src)\s*=\s*(?:"|\')?[^>"\']*/personality/big-five/'
                         .'(?:[^)\s"\'<>]+/)?'.preg_quote($alias, '~').'(?=$|[/\s"\'?#)])~i',
-                    $value,
+                    $decodedValue,
                 ) === 1) {
                     return true;
                 }

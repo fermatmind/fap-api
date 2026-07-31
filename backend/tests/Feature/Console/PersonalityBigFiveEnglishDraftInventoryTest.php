@@ -357,7 +357,7 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
                 .'<link rel="stylesheet" href="/styles/iconic.css">'
                 .'<div data-style="background:url(hero.webp)" data-property="og:image" '
                 .'data-src="hero.webp" data-type="image">Text</div>'
-                .'<style>.note { color: red; }</style>',
+                .'<style>.note { color: red; } .note::after { content: "url(example)"; }</style>',
         ]])->saveQuietly();
         $nonImageMetadata = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
         $nonImageMetadataRow = collect($nonImageMetadata['rows'])
@@ -1012,6 +1012,17 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
 
         $this->assertTrue($camelCaseIdentityRow['legacy_alias_reference']);
         $this->assertSame('prohibited_content', $camelCaseIdentityRow['current_revision_disposition']);
+
+        unset($snapshot['canonicalUrl']);
+        $snapshot['content_sections_json'][0]['body'] =
+            '<a href="/en/personality/big-five/h&#105;gh-openness">Legacy</a>';
+        $working->forceFill(['snapshot_json' => $snapshot])->saveQuietly();
+        $encodedLinkResult = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $encodedLinkRow = collect($encodedLinkResult['rows'])
+            ->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertTrue($encodedLinkRow['legacy_alias_reference']);
+        $this->assertSame('prohibited_content', $encodedLinkRow['current_revision_disposition']);
     }
 
     public function test_prohibited_history_blocks_without_erasing_current_candidate_classification(): void
