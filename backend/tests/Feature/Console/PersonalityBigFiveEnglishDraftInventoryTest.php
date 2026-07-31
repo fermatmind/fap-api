@@ -331,6 +331,17 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
 
         $working->forceFill(['snapshot_json' => [
             'attributes' => $this->completeSnapshot('Candidate'),
+            'body' => '<meta charset="utf-8"><meta name="description" content="Summary">'
+                .'<link rel="canonical" href="https://example.invalid/canonical">',
+        ]])->saveQuietly();
+        $nonImageMetadata = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $nonImageMetadataRow = collect($nonImageMetadata['rows'])
+            ->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertTrue($nonImageMetadataRow['text_only_compliant']);
+
+        $working->forceFill(['snapshot_json' => [
+            'attributes' => $this->completeSnapshot('Candidate'),
             'attemptId' => 'private-camel-case-attempt',
         ]])->saveQuietly();
         $camelCasePrivateField = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
