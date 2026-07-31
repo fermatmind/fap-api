@@ -16,6 +16,19 @@ final class MbtiResultEnglishPackageImporter
 
     public const INVENTORY_PACKAGE_SHA256 = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
+    private const EXPECTED_FILE_BYTES = [
+        'package_manifest.json' => 3066,
+        'README.md' => 2115,
+        'assets.json' => 35524,
+        'inventory_reconciliation.json' => 7922,
+        'translation_map.json' => 5034,
+        'entitlement_matrix.json' => 4202,
+        'pdf_reader_fixture_mapping.json' => 8587,
+        'claim_boundary_report.json' => 3097,
+        'editorial_review.json' => 6192,
+        'approval_envelope.json' => 1681,
+    ];
+
     public static function defaultPackageDirectory(): string
     {
         return base_path('content_assets/en-content-parity/W1-mbti/result-content');
@@ -422,6 +435,11 @@ final class MbtiResultEnglishPackageImporter
 
     private function readPackageFile(string $packageDirectory, string $filename): string
     {
+        $expectedBytes = self::EXPECTED_FILE_BYTES[$filename] ?? null;
+        if (! is_int($expectedBytes)) {
+            $this->fail('package_file_not_allowlisted', 'Only frozen exact-package filenames may be read.');
+        }
+
         $path = rtrim($packageDirectory, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$filename;
         if (is_link($path)) {
             $this->fail('package_file_symlink_rejected', 'Exact-package files must not be symbolic links.');
@@ -433,6 +451,9 @@ final class MbtiResultEnglishPackageImporter
         }
         if (($linkStat['nlink'] ?? null) !== 1) {
             $this->fail('package_file_hardlink_rejected', 'Exact-package files must have exactly one filesystem link.');
+        }
+        if (($linkStat['size'] ?? null) !== $expectedBytes) {
+            $this->fail('package_file_size_mismatch', 'An exact-package file does not match its frozen byte length.');
         }
 
         $resolvedDirectory = realpath($packageDirectory);
@@ -453,6 +474,7 @@ final class MbtiResultEnglishPackageImporter
             if ($openedStat === false
                 || (($openedStat['mode'] ?? 0) & 0170000) !== 0100000
                 || ($openedStat['nlink'] ?? null) !== 1
+                || ($openedStat['size'] ?? null) !== $expectedBytes
                 || ($openedStat['dev'] ?? null) !== ($linkStat['dev'] ?? null)
                 || ($openedStat['ino'] ?? null) !== ($linkStat['ino'] ?? null)) {
                 $this->fail('package_file_identity_changed', 'Exact-package file identity changed before the safe read.');

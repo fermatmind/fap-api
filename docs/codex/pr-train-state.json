@@ -102377,8 +102377,13 @@
         "at": "2026-07-31T04:20:20Z",
         "status": "review_fix_local_checks_passed",
         "note": "Proactive same-boundary follow-up removed the check/read race: each file is opened once, fstat identity and single-link state must match the pre-open lstat, and bytes are read from that verified descriptor. Rebuilt assets still fail before parsing; importer suite passes 7 tests / 249 assertions, scoped Pint and exact dry-run pass."
+      },
+      {
+        "at": "2026-07-31T04:31:35Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Inspected the exact-head P2 size-bound finding before editing. The importer now allowlists every frozen filename and requires its exact frozen byte length both before and after opening the verified descriptor, so oversized or sparse replacements fail before materialization. Importer suite passes 7 tests / 249 assertions, scoped Pint and exact dry-run pass."
       }
     ],
-    "updated_at": "2026-07-31T04:20:20Z"
+    "updated_at": "2026-07-31T04:31:35Z"
   }
 }

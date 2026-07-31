@@ -105,7 +105,7 @@ final class MbtiResultEnglishPackageImporterTest extends TestCase
         $exitCode = $this->runDryRun(MbtiResultEnglishPackageImporter::PACKAGE_SHA256, $rebuiltDirectory);
         $payload = $this->jsonOutput();
         self::assertSame(1, $exitCode);
-        self::assertSame('manifest_file_sha256_mismatch', $payload['errors'][0]['code']);
+        self::assertSame('package_file_size_mismatch', $payload['errors'][0]['code']);
 
         $uppercaseDirectory = $this->copyPackage();
         $manifestPath = $uppercaseDirectory.'/package_manifest.json';
@@ -116,7 +116,7 @@ final class MbtiResultEnglishPackageImporterTest extends TestCase
         $exitCode = $this->runDryRun(MbtiResultEnglishPackageImporter::PACKAGE_SHA256, $uppercaseDirectory);
         $payload = $this->jsonOutput();
         self::assertSame(1, $exitCode);
-        self::assertSame('manifest_sha256_mismatch', $payload['errors'][0]['code']);
+        self::assertSame('package_file_size_mismatch', $payload['errors'][0]['code']);
 
         $manifestDriftDirectory = $this->copyPackage();
         $manifestPath = $manifestDriftDirectory.'/package_manifest.json';
@@ -127,21 +127,20 @@ final class MbtiResultEnglishPackageImporterTest extends TestCase
         $exitCode = $this->runDryRun(MbtiResultEnglishPackageImporter::PACKAGE_SHA256, $manifestDriftDirectory);
         $payload = $this->jsonOutput();
         self::assertSame(1, $exitCode);
-        self::assertSame('manifest_sha256_mismatch', $payload['errors'][0]['code']);
+        self::assertSame('package_file_size_mismatch', $payload['errors'][0]['code']);
     }
 
     public function test_untrusted_manifest_is_authenticated_before_any_declared_file_is_read(): void
     {
         $packageDirectory = $this->copyPackage();
         $manifestPath = $packageDirectory.'/package_manifest.json';
-        $manifest = json_decode((string) File::get($manifestPath), true, 512, JSON_THROW_ON_ERROR);
-        $manifest['files'][0]['path'] = 'private-local-data.json';
-        $untrustedManifestBytes = json_encode(
-            $manifest,
-            JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR,
-        ).PHP_EOL;
+        $untrustedManifestBytes = str_replace(
+            '"README.md"',
+            '"secret.js"',
+            (string) File::get($manifestPath),
+        );
         File::put($manifestPath, $untrustedManifestBytes);
-        $privatePath = $packageDirectory.'/private-local-data.json';
+        $privatePath = $packageDirectory.'/secret.js';
         self::assertTrue(symlink('/private/definitely-not-readable-by-this-test', $privatePath));
 
         $exitCode = $this->runDryRun(MbtiResultEnglishPackageImporter::PACKAGE_SHA256, $packageDirectory);
@@ -200,7 +199,7 @@ final class MbtiResultEnglishPackageImporterTest extends TestCase
         $exitCode = $this->runDryRun(MbtiResultEnglishPackageImporter::PACKAGE_SHA256, $rebuiltDirectory);
         $payload = $this->jsonOutput();
         self::assertSame(1, $exitCode);
-        self::assertSame('manifest_file_sha256_mismatch', $payload['errors'][0]['code']);
+        self::assertSame('package_file_size_mismatch', $payload['errors'][0]['code']);
     }
 
     public function test_write_mode_fails_closed_without_private_or_database_access(): void
