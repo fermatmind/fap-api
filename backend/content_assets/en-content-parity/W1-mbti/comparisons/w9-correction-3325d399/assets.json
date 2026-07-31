@@ -1,6 +1,6 @@
 {
   "schema_version": "fermatmind.en_parity.mbti_comparison_package.v1",
-  "package_id": "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-2026-07-30",
+  "package_id": "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-2026-07-31",
   "lane_id": "W1",
   "asset_id": "ENPARITY-W1-MBTI-CROSS-COMPARISONS",
   "inventory_package_id": "EN-PARITY-W1-MBTI-INVENTORY-2026-07-30",
@@ -274,10 +274,10 @@
       "source": {
         "locale": "zh-CN",
         "authority": "MbtiCrossTypeComparisonAuthority",
-        "path": "backend/docs/seo/import-packages/mbti-cross-type-comparison-content-assets-draft-20260702/comparisons/FermatMind_ENTJ_vs_INTJ_CMS_READY.json",
-        "sha256": "037ccb6dfd4d165d1b731844e8afb05b108a08e33d43794afade1e9d131795a1",
-        "section_count": 8,
-        "faq_count": 8
+        "path": "backend/content_assets/personality_public/mbti-index52-comparison-projection-repair-2026-07-27.json#records[slug=entj-vs-intj]",
+        "sha256": "75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb",
+        "section_count": 6,
+        "faq_count": 5
       },
       "publication": {
         "status": "unpublished_candidate",
@@ -301,192 +301,92 @@
         "description": "Compare possible ENTJ and INTJ preferences in strategy, decisions, organization, communication, stress, and growth.",
         "seo_title": "ENTJ vs INTJ: Strategy, Decisions, Communication, and Work",
         "seo_description": "A practical ENTJ vs INTJ comparison covering strategic focus, execution, communication, relationships, stress responses, and growth experiments.",
-        "summary": "ENTJ and INTJ preferences may both emphasize strategy, efficiency, and systems thinking. ENTJ may be quicker to externalize a judgment through coordination, resource allocation, and visible action. INTJ may prefer to refine an internal model, filter noise, and choose a lower-interruption route before acting. The contrast does not determine leadership, competence, or career outcomes.",
+        "summary": "ENTJ may move strategy into reality by organizing people, resources, and pace, while INTJ may first build an internal long-term model and filter noise. The contrast is about how strategy becomes action, not who is a stronger leader or more capable.",
         "canonical_url": "https://fermatmind.com/en/personality/entj-vs-intj",
         "sections": [
           {
-            "id": "quick_answer",
-            "title": "Quick answer: What is the main ENTJ–INTJ difference?",
+            "id": "direct_answer",
+            "title": "The main difference",
             "body": [
-              "ENTJ may turn strategy into external organization sooner: clarify the target, assign ownership, and move resources.",
-              "INTJ may spend longer building a coherent internal model and then act along a selected long-term path.",
-              "The difference is not simply outgoing versus quiet or leader versus specialist.",
-              "Look at how a person repeatedly handles ambiguity, feedback, coordination, and the transition from model to action."
+              "ENTJ may calibrate strategy through organized action, while INTJ may first build a long-term internal model. The key difference is not leadership strength, but how strategy enters reality."
             ]
           },
           {
-            "id": "why_they_are_confused",
-            "title": "Why ENTJ and INTJ can be easy to confuse",
-            "body": [
-              "Both may value competence, direct reasoning, long-range consequences, and work that improves a system rather than preserving inefficiency.",
-              "Their shared decisiveness can hide different processes.",
-              "ENTJ may think by organizing discussion and movement around a target.",
-              "INTJ may protect uninterrupted analysis until the underlying structure feels sufficiently clear."
-            ]
-          },
-          {
-            "id": "shared_traits",
-            "title": "Shared tendencies: strategy, standards, and efficiency",
-            "body": [
-              "Both types may notice weak systems, redundant work, and decisions that lack a long-term rationale.",
-              "They can bring focus, high standards, and willingness to challenge an ineffective default.",
-              "Either may become impatient when others do not explain constraints or ownership.",
-              "Asking for missing context before concluding that a person is careless can improve accuracy and preserve collaboration."
-            ]
-          },
-          {
-            "id": "core_difference",
-            "title": "Core contrast: organizing the outside world and refining the inner model",
-            "body": [
-              "ENTJ may gain clarity through active coordination: test the plan against people, deadlines, and resource limits.",
-              "INTJ may gain clarity through protected synthesis: connect patterns, simulate consequences, and reduce noise before exposure.",
-              "Healthy execution needs both.",
-              "External movement produces feedback that a model cannot anticipate, while internal modeling can prevent a fast team from scaling the wrong solution."
-            ]
-          },
-          {
-            "id": "work_and_learning",
-            "title": "Differences at work and while learning",
-            "body": [
-              "ENTJ may prefer visible milestones, decision rights, and a cadence that keeps a group moving. INTJ may prefer autonomy, a stable objective, and enough uninterrupted time to design the architecture.",
-              "ENTJ can grow by inviting dissent before the plan hardens.",
-              "INTJ can grow by sharing an early model and testing it before every uncertainty has been resolved.",
-              "Neither preference determines job fit or performance."
-            ]
-          },
-          {
-            "id": "communication_and_relationships",
-            "title": "Communication and relationship patterns",
-            "body": [
-              "ENTJ may express care by taking responsibility, solving an obstacle, or planning ahead.",
-              "INTJ may express care through consistency, careful advice, and making room for deep discussion.",
-              "Directness can create friction when practical help arrives before emotional recognition.",
-              "A brief check—do you want listening, options, or a decision?—can make both styles easier to receive."
-            ]
-          },
-          {
-            "id": "stress_and_growth",
-            "title": "Stress signals and growth experiments",
-            "groups": [
-              {
-                "title": "For ENTJ",
-                "items": [
-                  "Under stress, ENTJ may increase pressure, centralize decisions, and treat resistance as an execution problem.",
-                  "Separate the observable event from the interpretation you are making about it, and check that interpretation before acting from the ENTJ label.",
-                  "Try separating urgent facts from impatience and inviting one credible counterargument before committing.",
-                  "Treat this as a small growth experiment: define one action, one review date, and the real-world feedback that would support revising your approach."
-                ]
-              },
-              {
-                "title": "For INTJ",
-                "items": [
-                  "Under stress, INTJ may withdraw into further modeling, reduce contact, or delay feedback until the plan feels complete.",
-                  "Separate the observable event from the interpretation you are making about it, and check that interpretation before acting from the INTJ label.",
-                  "Try sharing a one-page working model, naming uncertainties, and setting a date for external review.",
-                  "Treat this as a small growth experiment: define one action, one review date, and the real-world feedback that would support revising your approach."
-                ]
-              }
-            ],
+            "id": "quick_judgment_table",
+            "title": "Quick comparison",
+            "body": [],
             "rows": [
               {
-                "group": "For ENTJ",
-                "item": "Under stress, ENTJ may increase pressure, centralize decisions, and treat resistance as an execution problem."
+                "ENTJ": "Mobilize resources, assign ownership, and set the pace",
+                "INTJ": "Build the model, filter noise, and choose a direction",
+                "dimension": "How they move forward"
               },
               {
-                "group": "For ENTJ",
-                "item": "Separate the observable event from the interpretation you are making about it, and check that interpretation before acting from the ENTJ label."
+                "ENTJ": "May push others to execute too quickly",
+                "INTJ": "May stay with an internal judgment for too long",
+                "dimension": "Under pressure"
               },
               {
-                "group": "For ENTJ",
-                "item": "Try separating urgent facts from impatience and inviting one credible counterargument before committing."
+                "ENTJ": "Put the issue directly on the table",
+                "INTJ": "Filter out irrelevant information before speaking",
+                "dimension": "Communication style"
               },
               {
-                "group": "For ENTJ",
-                "item": "Treat this as a small growth experiment: define one action, one review date, and the real-world feedback that would support revising your approach."
-              },
-              {
-                "group": "For INTJ",
-                "item": "Under stress, INTJ may withdraw into further modeling, reduce contact, or delay feedback until the plan feels complete."
-              },
-              {
-                "group": "For INTJ",
-                "item": "Separate the observable event from the interpretation you are making about it, and check that interpretation before acting from the INTJ label."
-              },
-              {
-                "group": "For INTJ",
-                "item": "Try sharing a one-page working model, naming uncertainties, and setting a date for external review."
-              },
-              {
-                "group": "For INTJ",
-                "item": "Treat this as a small growth experiment: define one action, one review date, and the real-world feedback that would support revising your approach."
+                "ENTJ": "Give the team room to understand the reasoning",
+                "INTJ": "Externalize key judgments in time for others to respond",
+                "dimension": "More mature expression"
               }
             ]
           },
           {
-            "id": "misconceptions",
-            "title": "Common misconceptions",
-            "items": [
-              "ENTJ is not automatically more capable, mature, intelligent, or suited to leadership than INTJ; type preferences do not rank people.",
-              "ENTJ should not be reduced to its most visible stereotype. Context, skills, responsibilities, and learned behavior can substantially change how the preference appears.",
-              "INTJ should not be reduced to its most visible stereotype. Quiet or indirect behavior does not by itself establish motive, competence, or relationship capacity.",
-              "A single letter difference is only a starting clue. Repeated decisions, communication patterns, stress responses, and feedback provide stronger evidence than surface behavior.",
-              "Neither type guarantees empathy, logic, creativity, reliability, execution, or social confidence. Those qualities require separate behavioral evidence.",
-              "A test result cannot decide compatibility, hiring, education, or career direction. Use it only as a hypothesis alongside interests, skills, values, constraints, and experience."
-            ],
-            "rows": [
-              {
-                "item": "ENTJ is not automatically more capable, mature, intelligent, or suited to leadership than INTJ; type preferences do not rank people."
-              },
-              {
-                "item": "ENTJ should not be reduced to its most visible stereotype. Context, skills, responsibilities, and learned behavior can substantially change how the preference appears."
-              },
-              {
-                "item": "INTJ should not be reduced to its most visible stereotype. Quiet or indirect behavior does not by itself establish motive, competence, or relationship capacity."
-              },
-              {
-                "item": "A single letter difference is only a starting clue. Repeated decisions, communication patterns, stress responses, and feedback provide stronger evidence than surface behavior."
-              },
-              {
-                "item": "Neither type guarantees empathy, logic, creativity, reliability, execution, or social confidence. Those qualities require separate behavioral evidence."
-              },
-              {
-                "item": "A test result cannot decide compatibility, hiring, education, or career direction. Use it only as a hypothesis alongside interests, skills, values, constraints, and experience."
-              }
+            "id": "easy_misread",
+            "title": "Why they are easy to confuse",
+            "body": [
+              "ENTJ and INTJ may both be goal-oriented and hold high standards. ENTJ may revise the route through organizational feedback, while INTJ may revise it through independent analysis."
+            ]
+          },
+          {
+            "id": "real_scenario_differences",
+            "title": "A real-world contrast",
+            "body": [
+              "In a project crisis, ENTJ may first reassign responsibilities and reset the pace, while INTJ may first confirm the root cause and long-term consequences. One helps prevent paralysis; the other helps prevent momentum in the wrong direction."
+            ]
+          },
+          {
+            "id": "do_not_misjudge",
+            "title": "Avoid this misjudgment",
+            "body": [
+              "Do not label someone ENTJ simply because they speak forcefully, or INTJ simply because they are quiet. Watch whether they respond to uncertainty by mobilizing people or by gathering structural evidence first."
+            ]
+          },
+          {
+            "id": "next_reading",
+            "title": "What to read next",
+            "body": [
+              "Continue with the individual ENTJ and INTJ profiles, their A/T pages, and the MBTI test page so that one comparison label does not become a fixed conclusion."
             ]
           }
         ],
         "faq": [
           {
-            "question": "What is the biggest difference between ENTJ and INTJ?",
-            "answer": "ENTJ may externalize strategy through coordination and action sooner, while INTJ may first refine an internal long-term model and then choose a focused route."
+            "question": "What is the main difference between ENTJ and INTJ?",
+            "answer": "ENTJ may calibrate strategy through organized action, while INTJ may first build a long-term internal model. The distinction concerns how strategy enters reality, not leadership strength."
           },
           {
-            "question": "Which type is better at leadership?",
-            "answer": "Neither type guarantees leadership. ENTJ may be comfortable coordinating action, while INTJ may contribute long-range architecture. Leadership requires trust, judgment, communication, accountability, and relevant experience."
+            "question": "Why are ENTJ and INTJ easy to confuse?",
+            "answer": "Both may be goal-oriented and hold high standards. ENTJ may revise a route through organizational feedback, while INTJ may revise it through independent analysis."
           },
           {
-            "question": "Does INTJ dislike teamwork?",
-            "answer": "Not necessarily. INTJ may dislike low-value interruption or unclear meetings, yet collaborate deeply when the objective, standards, and roles are credible."
+            "question": "How might ENTJ and INTJ differ at work?",
+            "answer": "In a project crisis, ENTJ may first reset responsibilities and pace, while INTJ may first confirm the root cause and long-term consequences. Both responses can be useful."
           },
           {
-            "question": "Is ENTJ always forceful?",
-            "answer": "No. Some ENTJs become forceful under pressure, but behavior varies. Explaining reasoning, inviting dissent, and checking resource constraints can make direction more effective."
+            "question": "What is a common mistake when comparing ENTJ and INTJ?",
+            "answer": "Do not infer ENTJ from forceful speech or INTJ from quiet behavior. Repeated responses to uncertainty provide more useful evidence than a single visible trait."
           },
           {
-            "question": "How may they differ under stress?",
-            "answer": "ENTJ may intensify coordination and pressure; INTJ may retreat into analysis and reduce interruption. Both can benefit from explicit feedback and a bounded decision process."
-          },
-          {
-            "question": "How can I use this comparison at work?",
-            "answer": "Observe whether you seek clarity by organizing external action or by refining an internal model. Then practice the complement: earlier feedback or more deliberate synthesis."
-          },
-          {
-            "question": "How may they differ in relationships?",
-            "answer": "ENTJ may show care through action and planning; INTJ may show it through consistency and considered advice. Both benefit from naming emotional needs instead of assuming practical help is self-explanatory."
-          },
-          {
-            "question": "Can this result determine a career?",
-            "answer": "No. Use skills, interests, values, constraints, and real work evidence for career decisions. MBTI offers only a limited preference lens."
+            "question": "Can this comparison decide a career or relationship choice?",
+            "answer": "No. It is a limited preference lens. Important decisions still require evidence about skills, experience, values, constraints, environment, and long-term feedback."
           }
         ],
         "internal_links": [
@@ -497,6 +397,10 @@
           {
             "label": "INTJ profile",
             "href": "/en/personality/intj-a"
+          },
+          {
+            "label": "INTJ vs INTP",
+            "href": "/en/personality/intj-vs-intp"
           },
           {
             "label": "MBTI personality profiles",
@@ -511,11 +415,11 @@
       },
       "translation_contract": {
         "mode": "source_structured_editorial_translation",
-        "source_binding": "committed_json_sha256",
-        "source_sections_sha256": "b3c81386ac6e6dab927a959008a98423bdb67ccaef229bd0c33421f1b6ab91d5",
-        "target_sections_sha256": "2c417cb2aacbafeb3abb6905fdb6f3efe7d5dc18469340718ebcbd940f111a59",
+        "source_binding": "backend_revision",
         "structure_preserved": true,
-        "producer_self_review_only": true
+        "producer_self_review_only": true,
+        "source_sections_sha256": "cde62cdb162beb144cdbc2d7404df4cce2e4ab6bf79ef8f8eff6d78431d61686",
+        "target_sections_sha256": "280d89c82ec41130e6ade16c4665acef5a5e9d9d625518cc5af781891588ba58"
       }
     },
     {
@@ -780,10 +684,10 @@
       "source": {
         "locale": "zh-CN",
         "authority": "MbtiCrossTypeComparisonAuthority",
-        "path": "backend/docs/seo/import-packages/mbti-cross-type-comparison-content-assets-draft-20260702/comparisons/FermatMind_INFJ_vs_INFP_CMS_READY.json",
-        "sha256": "2c7b30b1a64be8179d1af84d66a6344aee209e3a397f19c962b7f1c4b4b77d42",
-        "section_count": 8,
-        "faq_count": 8
+        "path": "backend/content_assets/personality_public/mbti-index52-comparison-projection-repair-2026-07-27.json#records[slug=infj-vs-infp]",
+        "sha256": "75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb",
+        "section_count": 6,
+        "faq_count": 5
       },
       "publication": {
         "status": "unpublished_candidate",
@@ -807,192 +711,92 @@
         "description": "Compare possible INFJ and INFP preferences in meaning, values, decisions, communication, work, stress, and growth.",
         "seo_title": "INFJ vs INFP: Values, Decisions, Relationships, and Work",
         "seo_description": "A practical INFJ vs INFP comparison covering vision, inner values, communication, relationships, work rhythms, stress, and growth.",
-        "summary": "INFJ and INFP preferences may both emphasize meaning, values, empathy, and a rich inner life. INFJ may be more inclined to organize an insight into a longer-term vision, relationship responsibility, or coordinated direction. INFP may be more inclined to check whether a choice remains true to personal values and leaves room for authentic expression. The comparison is not a diagnosis or a measure of kindness, sensitivity, or worth.",
+        "summary": "INFJ may organize a person's situation into a broader pattern and direction, while INFP may first check whether a response remains true to inner values. The contrast concerns what happens after empathy, not who is kinder, more sensitive, or more emotionally mature.",
         "canonical_url": "https://fermatmind.com/en/personality/infj-vs-infp",
         "sections": [
           {
-            "id": "quick_answer",
-            "title": "Quick answer: What is the main INFJ–INFP difference?",
+            "id": "direct_answer",
+            "title": "The main difference",
             "body": [
-              "INFJ may turn meaning into an organized direction for a person, relationship, or system.",
-              "INFP may begin by protecting inner value alignment and exploring the form that feels most authentic.",
-              "Both may care deeply and imagine better possibilities.",
-              "Look at the repeated path from feeling or insight to decision, boundary, and action rather than relying on stereotypes about being gentle or private."
+              "INFJ may organize a person's situation into a coherent pattern of meaning, while INFP may first check whether inner values feel authentic. The key difference is not who is gentler, but how judgment develops after empathy."
             ]
           },
           {
-            "id": "why_they_are_confused",
-            "title": "Why INFJ and INFP can be easy to confuse",
-            "body": [
-              "Both may listen carefully, seek depth, dislike shallow labels, and feel discouraged by environments that ignore values or human impact.",
-              "Their difference may emerge when values conflict.",
-              "INFJ may ask how the relationship or larger direction can be responsibly held together.",
-              "INFP may ask whether the choice remains honest to a deeply personal conviction."
-            ]
-          },
-          {
-            "id": "shared_traits",
-            "title": "Shared tendencies: meaning, empathy, and imagination",
-            "body": [
-              "Both types may notice emotional nuance and become invested in work or relationships that carry personal meaning.",
-              "They may prefer thoughtful conversation over purely transactional contact.",
-              "Both can overextend when a meaningful cause or person needs help.",
-              "Explicit capacity limits, a concrete request, and a review point can protect care from becoming silent exhaustion."
-            ]
-          },
-          {
-            "id": "core_difference",
-            "title": "Core contrast: organized vision and inner authenticity",
-            "body": [
-              "INFJ may integrate patterns into a directional story and consider how people or commitments fit over time.",
-              "INFP may return to the internal question of what is genuinely right and whether expression remains faithful to that value.",
-              "At their best, INFJ can give a value a coherent path, while INFP can keep the path from losing personal truth.",
-              "Neither tendency guarantees moral insight or emotional maturity."
-            ]
-          },
-          {
-            "id": "work_and_learning",
-            "title": "Differences at work and while learning",
-            "body": [
-              "INFJ may prefer a meaningful long-term objective, a coherent plan, and work that improves a human system.",
-              "INFP may prefer autonomy, value alignment, and room to explore language, interpretation, or creative form.",
-              "INFJ can test whether an elegant vision reflects current evidence and shared ownership.",
-              "INFP can turn an important value into a defined deliverable, boundary, or small experiment that others can understand."
-            ]
-          },
-          {
-            "id": "communication_and_relationships",
-            "title": "Communication and relationship patterns",
-            "body": [
-              "INFJ may anticipate needs, hold a relational pattern in mind, and offer guidance aimed at longer-term growth.",
-              "INFP may offer acceptance, sincere emotional presence, and respect for a person's inner experience.",
-              "INFJ can become burdened by unspoken responsibility; INFP can become hurt when intent or values feel misunderstood.",
-              "Both benefit from saying what they need directly instead of expecting care to be inferred."
-            ]
-          },
-          {
-            "id": "stress_and_growth",
-            "title": "Stress signals and growth experiments",
-            "groups": [
-              {
-                "title": "For INFJ",
-                "items": [
-                  "Under stress, INFJ may overinterpret patterns, take responsibility for everyone's direction, or withdraw after carrying too much.",
-                  "Separate the observable event from the interpretation you are making about it, and check that interpretation before acting from the INFJ label.",
-                  "Try separating observed facts from predictions and returning ownership to the people involved.",
-                  "Treat this as a small growth experiment: define one action, one review date, and the real-world feedback that would support revising your approach."
-                ]
-              },
-              {
-                "title": "For INFP",
-                "items": [
-                  "Under stress, INFP may loop on value conflict, delay expression until it feels perfect, or retreat after feeling misread.",
-                  "Separate the observable event from the interpretation you are making about it, and check that interpretation before acting from the INFP label.",
-                  "Try naming one value, one concrete event, and one request without requiring the whole inner experience to be resolved first.",
-                  "Treat this as a small growth experiment: define one action, one review date, and the real-world feedback that would support revising your approach."
-                ]
-              }
-            ],
+            "id": "quick_judgment_table",
+            "title": "Quick comparison",
+            "body": [],
             "rows": [
               {
-                "group": "For INFJ",
-                "item": "Under stress, INFJ may overinterpret patterns, take responsibility for everyone's direction, or withdraw after carrying too much."
+                "INFJ": "Notice relationship patterns and long-term effects",
+                "INFP": "Notice personal feelings and value alignment",
+                "dimension": "Entry point for empathy"
               },
               {
-                "group": "For INFJ",
-                "item": "Separate the observable event from the interpretation you are making about it, and check that interpretation before acting from the INFJ label."
+                "INFJ": "Guide, explain, and connect clues",
+                "INFP": "Write, listen, and protect a sense of authenticity",
+                "dimension": "Expression"
               },
               {
-                "group": "For INFJ",
-                "item": "Try separating observed facts from predictions and returning ownership to the people involved."
+                "INFJ": "May over-explain another person's meaning",
+                "INFP": "May retreat too far into personal feelings",
+                "dimension": "Conflict risk"
               },
               {
-                "group": "For INFJ",
-                "item": "Treat this as a small growth experiment: define one action, one review date, and the real-world feedback that would support revising your approach."
-              },
-              {
-                "group": "For INFP",
-                "item": "Under stress, INFP may loop on value conflict, delay expression until it feels perfect, or retreat after feeling misread."
-              },
-              {
-                "group": "For INFP",
-                "item": "Separate the observable event from the interpretation you are making about it, and check that interpretation before acting from the INFP label."
-              },
-              {
-                "group": "For INFP",
-                "item": "Try naming one value, one concrete event, and one request without requiring the whole inner experience to be resolved first."
-              },
-              {
-                "group": "For INFP",
-                "item": "Treat this as a small growth experiment: define one action, one review date, and the real-world feedback that would support revising your approach."
+                "INFJ": "Avoid defining another person's life for them",
+                "INFP": "Turn values into boundaries others can understand",
+                "dimension": "More mature expression"
               }
             ]
           },
           {
-            "id": "misconceptions",
-            "title": "Common misconceptions",
-            "items": [
-              "INFJ is not automatically more capable, mature, intelligent, or suited to leadership than INFP; type preferences do not rank people.",
-              "INFJ should not be reduced to its most visible stereotype. Context, skills, responsibilities, and learned behavior can substantially change how the preference appears.",
-              "INFP should not be reduced to its most visible stereotype. Quiet or indirect behavior does not by itself establish motive, competence, or relationship capacity.",
-              "A single letter difference is only a starting clue. Repeated decisions, communication patterns, stress responses, and feedback provide stronger evidence than surface behavior.",
-              "Neither type guarantees empathy, logic, creativity, reliability, execution, or social confidence. Those qualities require separate behavioral evidence.",
-              "A test result cannot decide compatibility, hiring, education, or career direction. Use it only as a hypothesis alongside interests, skills, values, constraints, and experience."
-            ],
-            "rows": [
-              {
-                "item": "INFJ is not automatically more capable, mature, intelligent, or suited to leadership than INFP; type preferences do not rank people."
-              },
-              {
-                "item": "INFJ should not be reduced to its most visible stereotype. Context, skills, responsibilities, and learned behavior can substantially change how the preference appears."
-              },
-              {
-                "item": "INFP should not be reduced to its most visible stereotype. Quiet or indirect behavior does not by itself establish motive, competence, or relationship capacity."
-              },
-              {
-                "item": "A single letter difference is only a starting clue. Repeated decisions, communication patterns, stress responses, and feedback provide stronger evidence than surface behavior."
-              },
-              {
-                "item": "Neither type guarantees empathy, logic, creativity, reliability, execution, or social confidence. Those qualities require separate behavioral evidence."
-              },
-              {
-                "item": "A test result cannot decide compatibility, hiring, education, or career direction. Use it only as a hypothesis alongside interests, skills, values, constraints, and experience."
-              }
+            "id": "easy_misread",
+            "title": "Why they are easy to confuse",
+            "body": [
+              "Both may be sensitive, idealistic, and concerned with meaning. INFJ may be more likely to organize the relationship pattern, while INFP may be more likely to protect personal authenticity."
+            ]
+          },
+          {
+            "id": "real_scenario_differences",
+            "title": "A real-world contrast",
+            "body": [
+              "When a friend is struggling, INFJ may help them see a pattern and a future path, while INFP may first make sure the person's real feelings are respected. Both forms of support can matter, but their pacing differs."
+            ]
+          },
+          {
+            "id": "do_not_misjudge",
+            "title": "Avoid this misjudgment",
+            "body": [
+              "Do not distinguish INFJ from INFP by sociability or by who seems more comforting. Observe whether value conflict leads first to a broader meaning structure or to a check of inner authenticity."
+            ]
+          },
+          {
+            "id": "next_reading",
+            "title": "What to read next",
+            "body": [
+              "Continue with the individual INFJ and INFP profiles, their A/T pages, and the MBTI test page so that one comparison label does not become a fixed conclusion."
             ]
           }
         ],
         "faq": [
           {
-            "question": "What is the biggest difference between INFJ and INFP?",
-            "answer": "INFJ may organize insight and meaning into a longer-term direction, while INFP may begin with inner value alignment and authentic expression."
+            "question": "What is the main difference between INFJ and INFP?",
+            "answer": "INFJ may organize a situation into a broader pattern of meaning, while INFP may first check whether a response remains true to inner values. Neither route measures kindness."
           },
           {
-            "question": "Which type is kinder?",
-            "answer": "Kindness cannot be ranked by MBTI. INFJ and INFP may express care differently, and actual kindness depends on choices, boundaries, skill, and context."
+            "question": "Why are INFJ and INFP easy to confuse?",
+            "answer": "Both may be sensitive, idealistic, and concerned with meaning. INFJ may organize a relationship pattern, while INFP may protect personal authenticity."
           },
           {
-            "question": "Which type is more anxious?",
-            "answer": "MBTI cannot diagnose or predict anxiety. Different people may feel strain around responsibility, misunderstanding, value conflict, or other factors, but mental health requires appropriate evidence and support."
+            "question": "How might INFJ and INFP offer support differently?",
+            "answer": "INFJ may help a person see patterns and a future path, while INFP may first ensure that the person's real feelings are respected. Both approaches can be helpful."
           },
           {
-            "question": "How can I distinguish them at work?",
-            "answer": "Notice whether you naturally organize meaning into a shared long-term direction or first protect value alignment and freedom of expression."
+            "question": "What is a common mistake when comparing INFJ and INFP?",
+            "answer": "Do not infer type from sociability or comforting behavior. Watch how a person handles value conflict and moves from empathy toward a judgment or boundary."
           },
           {
-            "question": "How can communication improve?",
-            "answer": "Use concrete observations and direct requests. With either type, avoid assuming that empathy means unlimited capacity or that silence means agreement."
-          },
-          {
-            "question": "Can INFJ or INFP change over time?",
-            "answer": "Behavior and self-understanding can change with experience, training, stress, and environment. A type result is not a permanent identity."
-          },
-          {
-            "question": "Can type determine a career?",
-            "answer": "No. Skills, interests, opportunities, constraints, values, and real experience should guide career decisions."
-          },
-          {
-            "question": "What if I relate to both?",
-            "answer": "Record how you make decisions in value conflicts, relationship strain, and ambiguous projects. Repeated behavior is more useful than forcing a label from one description."
+            "question": "Can this comparison decide a career or relationship choice?",
+            "answer": "No. It is a limited preference lens. Important decisions still require evidence about skills, experience, values, constraints, environment, and long-term feedback."
           }
         ],
         "internal_links": [
@@ -1003,6 +807,10 @@
           {
             "label": "INFP profile",
             "href": "/en/personality/infp-a"
+          },
+          {
+            "label": "ISFP profile",
+            "href": "/en/personality/isfp-a"
           },
           {
             "label": "MBTI personality profiles",
@@ -1017,11 +825,11 @@
       },
       "translation_contract": {
         "mode": "source_structured_editorial_translation",
-        "source_binding": "committed_json_sha256",
-        "source_sections_sha256": "0a123cd001fe621eedaf5789a64cf8968e460563a23313539f4861b56a48944a",
-        "target_sections_sha256": "2fa09d806917ad6cae097b47750195fea69f948ff1f037f29b874d23ff997308",
+        "source_binding": "backend_revision",
         "structure_preserved": true,
-        "producer_self_review_only": true
+        "producer_self_review_only": true,
+        "source_sections_sha256": "a6f7528360303a4cbd2f59108e941ff0f1154fc343ddf3045389c6a3c149056e",
+        "target_sections_sha256": "f98b9acc6a09a2e695545c56492477d09ae1e47086d3256d314464ac21a719d6"
       }
     },
     {
@@ -1031,15 +839,10 @@
       "source": {
         "locale": "zh-CN",
         "authority": "MbtiCrossTypeComparisonAuthority",
-        "path": "backend/docs/seo/import-packages/mbti-cross-type-comparison-content-assets-draft-20260702/comparisons/FermatMind_INTJ_vs_INTP_CMS_READY.json",
-        "sha256": "cc6220e1ac1b6a8f9619fac267429e9c2743689c40d35ac81098b697addf7e8a",
-        "section_count": 8,
-        "faq_count": 8,
-        "evidence_limitations": [
-          "Complete FermatMind INTJ and INTP base-type page source material was not available for this source revision; its documented basis used the available FermatMind A/T materials and task-provided structure.",
-          "A dedicated competitor INTJ-versus-INTP comparison page was not available; competitor material informed structure only and no competitor wording was copied.",
-          "Independent W9 must review this disclosed evidence gap and must not treat source binding as proof of complete or externally validated coverage."
-        ]
+        "path": "backend/content_assets/personality_public/mbti-index52-comparison-projection-repair-2026-07-27.json#records[slug=intj-vs-intp]",
+        "sha256": "75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb",
+        "section_count": 6,
+        "faq_count": 5
       },
       "publication": {
         "status": "unpublished_candidate",
@@ -1063,204 +866,92 @@
         "description": "Compare possible INTJ and INTP preferences in analysis, decisions, planning, communication, work, stress, and growth.",
         "seo_title": "INTJ vs INTP: Thinking, Decisions, Planning, and Work",
         "seo_description": "A practical INTJ vs INTP comparison covering strategic convergence, model exploration, communication, stress responses, and growth.",
-        "summary": "INTJ and INTP preferences may both involve independent thought, logical analysis, and interest in complex systems. INTJ may be more inclined to compress information into a long-term direction and execution path. INTP may be more inclined to keep examining premises, compare models, and preserve multiple explanations. The distinction is not a measure of intelligence, discipline, or career potential.",
+        "summary": "INTJ may converge on a roadmap and critical path sooner, while INTP may keep separating the problem into models, premises, and alternatives. The contrast is not about who is more rational or intelligent, but how quickly analysis moves toward an execution structure.",
         "canonical_url": "https://fermatmind.com/en/personality/intj-vs-intp",
         "sections": [
           {
-            "id": "quick_answer",
-            "title": "Quick answer: What is the main INTJ–INTP difference?",
+            "id": "direct_answer",
+            "title": "The main difference",
             "body": [
-              "INTJ may seek a coherent direction and decide when the model is good enough to guide action.",
-              "INTP may continue testing definitions, assumptions, and alternative explanations before closing the question.",
-              "This is better understood as strategic convergence versus model exploration, not simply planned versus unplanned.",
-              "Both types can plan, improvise, analyze, and deliver."
+              "INTJ may converge complex information into a roadmap, while INTP may separate the problem into models that can still be debated. The key difference is not who is more rational, but who moves toward an execution structure sooner."
             ]
           },
           {
-            "id": "why_they_are_confused",
-            "title": "Why INTJ and INTP can be easy to confuse",
-            "body": [
-              "Both may prefer depth over small talk, question conventional explanations, and need autonomy to think through difficult material.",
-              "Their difference often appears at the decision boundary.",
-              "INTJ may become impatient when analysis no longer changes the path.",
-              "INTP may become uneasy when a path closes before the underlying model has been adequately tested."
-            ]
-          },
-          {
-            "id": "shared_traits",
-            "title": "Shared tendencies: logic, independence, and complexity",
-            "body": [
-              "Both types may enjoy abstract problems and resist claims that rely only on status or convention.",
-              "They can contribute rigorous questioning and original system insight.",
-              "Both may undercommunicate the steps between an internal conclusion and an external statement.",
-              "Writing assumptions, evidence, and uncertainty in plain language can make their work easier to evaluate and use."
-            ]
-          },
-          {
-            "id": "core_difference",
-            "title": "Core contrast: strategic convergence and model exploration",
-            "body": [
-              "INTJ may organize information around a future objective, identify leverage points, and reduce options to a selected route.",
-              "INTP may refine concepts, search for contradictions, and reopen the problem when a definition is weak.",
-              "A strong team can use both patterns: exploratory analysis improves the model, while convergence creates a decision, owner, and feedback loop.",
-              "Neither pattern is inherently more rational."
-            ]
-          },
-          {
-            "id": "work_and_learning",
-            "title": "Differences at work and while learning",
-            "body": [
-              "INTJ may prefer a stable objective, architecture ownership, and work that compounds toward a longer-term plan.",
-              "INTP may prefer conceptual freedom, difficult questions, and time to investigate why a system behaves as it does.",
-              "INTJ can benefit from publishing assumptions before committing the architecture.",
-              "INTP can benefit from a stopping rule, a decision memo, and a small implementation that tests the model against reality."
-            ]
-          },
-          {
-            "id": "communication_and_relationships",
-            "title": "Communication and relationship patterns",
-            "body": [
-              "INTJ may show care through planning, consistency, and advice aimed at future stability.",
-              "INTP may show care through thoughtful discussion, respect for autonomy, and willingness to investigate a problem together.",
-              "Both may assume that a precise solution communicates concern.",
-              "Naming appreciation, impact, or uncertainty directly can prevent the other person from having to infer the emotional message."
-            ]
-          },
-          {
-            "id": "stress_and_growth",
-            "title": "Stress signals and growth experiments",
-            "body": [
-              "Under stress, INTJ may narrow prematurely, defend the architecture, or treat new information as distraction.",
-              "Try naming one disconfirming signal and scheduling an explicit model review.",
-              "Under stress, INTP may keep revising definitions, open too many branches, or delay a useful decision.",
-              "Try writing the current best explanation, the largest uncertainty, and the next action that would generate evidence."
-            ],
-            "groups": [
-              {
-                "title": "For INTJ",
-                "items": [
-                  "Under stress, INTJ may narrow prematurely, defend the architecture, or treat new information as distraction.",
-                  "Separate the observable event from the interpretation you are making about it, and check that interpretation before acting from the INTJ label.",
-                  "Try naming one disconfirming signal and scheduling an explicit model review.",
-                  "Treat this as a small growth experiment: define one action, one review date, and the real-world feedback that would support revising your approach."
-                ]
-              },
-              {
-                "title": "For INTP",
-                "items": [
-                  "Under stress, INTP may keep revising definitions, open too many branches, or delay a useful decision.",
-                  "Separate the observable event from the interpretation you are making about it, and check that interpretation before acting from the INTP label.",
-                  "Try writing the current best explanation, the largest uncertainty, and the next action that would generate evidence.",
-                  "Treat this as a small growth experiment: define one action, one review date, and the real-world feedback that would support revising your approach."
-                ]
-              }
-            ],
+            "id": "quick_judgment_table",
+            "title": "Quick comparison",
+            "body": [],
             "rows": [
               {
-                "group": "For INTJ",
-                "item": "Under stress, INTJ may narrow prematurely, defend the architecture, or treat new information as distraction."
+                "INTJ": "Ask first about long-term direction and the critical path",
+                "INTP": "Ask first whether the concept is internally coherent",
+                "dimension": "Starting question"
               },
               {
-                "group": "For INTJ",
-                "item": "Separate the observable event from the interpretation you are making about it, and check that interpretation before acting from the INTJ label."
+                "INTJ": "Roadmap, priorities, and decision criteria",
+                "INTP": "Models, assumptions, and room for counterexamples",
+                "dimension": "Typical output"
               },
               {
-                "group": "For INTJ",
-                "item": "Try naming one disconfirming signal and scheduling an explicit model review."
+                "INTJ": "May feel that discussion is not moving forward",
+                "INTP": "May feel that the conclusion closed too early",
+                "dimension": "Collaboration friction"
               },
               {
-                "group": "For INTJ",
-                "item": "Treat this as a small growth experiment: define one action, one review date, and the real-world feedback that would support revising your approach."
-              },
-              {
-                "group": "For INTP",
-                "item": "Under stress, INTP may keep revising definitions, open too many branches, or delay a useful decision."
-              },
-              {
-                "group": "For INTP",
-                "item": "Separate the observable event from the interpretation you are making about it, and check that interpretation before acting from the INTP label."
-              },
-              {
-                "group": "For INTP",
-                "item": "Try writing the current best explanation, the largest uncertainty, and the next action that would generate evidence."
-              },
-              {
-                "group": "For INTP",
-                "item": "Treat this as a small growth experiment: define one action, one review date, and the real-world feedback that would support revising your approach."
+                "INTJ": "Keep an explicit route for disconfirming evidence",
+                "INTP": "Turn the model into an executable experiment",
+                "dimension": "More mature expression"
               }
             ]
           },
           {
-            "id": "misconceptions",
-            "title": "Common misconceptions",
+            "id": "easy_misread",
+            "title": "Why they are easy to confuse",
             "body": [
-              "INTJ is not automatically more organized, and INTP is not automatically scattered.",
-              "Observable habits, commitments, health, workload, and environment all affect organization.",
-              "MBTI cannot establish intelligence, technical ability, leadership, or occupational fit.",
-              "Those claims require direct evidence."
-            ],
-            "items": [
-              "INTJ is not automatically more capable, mature, intelligent, or suited to leadership than INTP; type preferences do not rank people.",
-              "INTJ should not be reduced to its most visible stereotype. Context, skills, responsibilities, and learned behavior can substantially change how the preference appears.",
-              "INTP should not be reduced to its most visible stereotype. Quiet or indirect behavior does not by itself establish motive, competence, or relationship capacity.",
-              "A single letter difference is only a starting clue. Repeated decisions, communication patterns, stress responses, and feedback provide stronger evidence than surface behavior.",
-              "Neither type guarantees empathy, logic, creativity, reliability, execution, or social confidence. Those qualities require separate behavioral evidence.",
-              "A test result cannot decide compatibility, hiring, education, or career direction. Use it only as a hypothesis alongside interests, skills, values, constraints, and experience."
-            ],
-            "rows": [
-              {
-                "item": "INTJ is not automatically more capable, mature, intelligent, or suited to leadership than INTP; type preferences do not rank people."
-              },
-              {
-                "item": "INTJ should not be reduced to its most visible stereotype. Context, skills, responsibilities, and learned behavior can substantially change how the preference appears."
-              },
-              {
-                "item": "INTP should not be reduced to its most visible stereotype. Quiet or indirect behavior does not by itself establish motive, competence, or relationship capacity."
-              },
-              {
-                "item": "A single letter difference is only a starting clue. Repeated decisions, communication patterns, stress responses, and feedback provide stronger evidence than surface behavior."
-              },
-              {
-                "item": "Neither type guarantees empathy, logic, creativity, reliability, execution, or social confidence. Those qualities require separate behavioral evidence."
-              },
-              {
-                "item": "A test result cannot decide compatibility, hiring, education, or career direction. Use it only as a hypothesis alongside interests, skills, values, constraints, and experience."
-              }
+              "Both may be quiet, abstract, and logic-focused. A useful difference appears in how they end a discussion: INTJ may form a direction, while INTP may preserve more of the problem space."
+            ]
+          },
+          {
+            "id": "real_scenario_differences",
+            "title": "A real-world contrast",
+            "body": [
+              "When positioning a new product, INTJ may ask which path is most likely to work, while INTP may ask whether the definitions, categories, and assumptions hold. Good collaboration allows the model to expand before setting a decision deadline."
+            ]
+          },
+          {
+            "id": "do_not_misjudge",
+            "title": "Avoid this misjudgment",
+            "body": [
+              "Do not distinguish INTJ from INTP by whether someone likes solitude, and do not equate organization with INTJ or curiosity with INTP. Observe where their information processing naturally tends to land."
+            ]
+          },
+          {
+            "id": "next_reading",
+            "title": "What to read next",
+            "body": [
+              "Continue with the individual INTJ and INTP profiles, their A/T pages, and the MBTI test page so that one comparison label does not become a fixed conclusion."
             ]
           }
         ],
         "faq": [
           {
-            "question": "What is the biggest difference between INTJ and INTP?",
-            "answer": "INTJ may converge on a strategic direction sooner, while INTP may keep testing premises and alternative models. Both can analyze deeply and act effectively."
+            "question": "What is the main difference between INTJ and INTP?",
+            "answer": "INTJ may converge complex information into a roadmap, while INTP may separate the problem into models that remain open to debate. The distinction is not about intelligence."
           },
           {
-            "question": "Which type is smarter?",
-            "answer": "MBTI does not measure intelligence. No type can be ranked as smarter from a four-letter result."
+            "question": "Why are INTJ and INTP easy to confuse?",
+            "answer": "Both may be quiet, abstract, and logic-focused. INTJ may be more inclined to form a direction, while INTP may preserve more of the problem space."
           },
           {
-            "question": "Which type is a better leader?",
-            "answer": "Type cannot determine leadership. INTJ may contribute direction and architecture; INTP may contribute conceptual rigor and premise testing. Leadership requires many other skills and conditions."
+            "question": "How might INTJ and INTP differ at work?",
+            "answer": "INTJ may ask which route is most likely to work, while INTP may test definitions and assumptions. Collaboration improves when exploration has a clear decision deadline."
           },
           {
-            "question": "Is J versus P just planned versus unplanned?",
-            "answer": "No. In this comparison, strategic convergence versus continued model exploration is a more useful lens. Actual planning habits vary widely."
+            "question": "What is a common mistake when comparing INTJ and INTP?",
+            "answer": "Do not infer type from solitude, organization, or curiosity alone. Observe whether analysis naturally lands on a direction or remains open for further model testing."
           },
           {
-            "question": "How can I distinguish them at work?",
-            "answer": "Notice whether ambiguity makes you want to establish a path and milestones or keep redefining the problem and comparing explanations."
-          },
-          {
-            "question": "How may they differ in relationships?",
-            "answer": "INTJ may show care through planning and stability; INTP may show it through inquiry and respect for thought. Both benefit from expressing emotion and appreciation explicitly."
-          },
-          {
-            "question": "Can INTJ and INTP work well together?",
-            "answer": "Yes, but no pairing is guaranteed. They may complement each other if exploration has a stopping rule and convergence remains open to evidence."
-          },
-          {
-            "question": "Can this decide my career?",
-            "answer": "No. Use interests, skills, values, opportunities, and real performance evidence for career decisions."
+            "question": "Can this comparison decide a career or relationship choice?",
+            "answer": "No. It is a limited preference lens. Important decisions still require evidence about skills, experience, values, constraints, environment, and long-term feedback."
           }
         ],
         "internal_links": [
@@ -1271,6 +962,10 @@
           {
             "label": "INTP profile",
             "href": "/en/personality/intp-a"
+          },
+          {
+            "label": "ENTJ vs INTJ",
+            "href": "/en/personality/entj-vs-intj"
           },
           {
             "label": "MBTI personality profiles",
@@ -1285,11 +980,11 @@
       },
       "translation_contract": {
         "mode": "source_structured_editorial_translation",
-        "source_binding": "committed_json_sha256",
-        "source_sections_sha256": "f7b3e1b1e53acb6749608bf8af04cc4fb0ca6d8842aa3978ffe85493b1f5b2dd",
-        "target_sections_sha256": "f35757e76b7f6da920eb22fc7fb618b7ff626ca311bd272d7b0df977784a23f3",
+        "source_binding": "backend_revision",
         "structure_preserved": true,
-        "producer_self_review_only": true
+        "producer_self_review_only": true,
+        "source_sections_sha256": "ae8507ca425ba0d72f3426322249a9663dbc50ecd6f3fa545acc04068a28f436",
+        "target_sections_sha256": "499bec5c5570e3724b2f8c4a9a99d0caca552a99821f4eafc28ee185271afb0d"
       }
     },
     {
@@ -1374,8 +1069,8 @@
             "title": "Differences at work and while learning",
             "body": [
               "ISFP may prefer hands-on feedback, visible craft, adaptable pacing, and room to respond to the real situation.",
-              "INFP may prefer purpose, conceptual or creative freedom.",
-              "Time to develop an expression that fits the intended meaning.",
+              "INFP may prefer purpose and conceptual or creative freedom.",
+              "It may also need time to develop an expression that matches the intended meaning.",
               "ISFP can make tacit judgment easier to share by naming the observable detail and decision rule.",
               "INFP can make an ideal easier to execute by defining a first deliverable, audience, and deadline."
             ]
@@ -1539,7 +1234,7 @@
         "mode": "source_structured_editorial_translation",
         "source_binding": "committed_json_sha256",
         "source_sections_sha256": "20f3ce96eae401d47240893b156872cc863a96273c9944d29f7b0cc25cc4c961",
-        "target_sections_sha256": "efd8cc68df5c637d749be9fd97c72cda8c804a0dae6fc76c952d60d959c93848",
+        "target_sections_sha256": "0c111ff3a22b9660e0e4d342199967605487d6c6f9fde465abe029e4d1d9f55a",
         "structure_preserved": true,
         "producer_self_review_only": true
       }

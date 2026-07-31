@@ -1,6 +1,6 @@
 {
   "schema_version": "fermatmind.en_parity.producer_editorial_review.v1",
-  "package_id": "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-2026-07-30",
+  "package_id": "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-2026-07-31",
   "inventory_package_sha256": "8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85",
   "reviewer_role": "W1 producer self-review",
   "independent_w9": false,
@@ -25,7 +25,7 @@
     {
       "row_id": "W1-COMP-02-ENTJ-VS-INTJ",
       "slug": "entj-vs-intj",
-      "source_sha256": "037ccb6dfd4d165d1b731844e8afb05b108a08e33d43794afade1e9d131795a1",
+      "source_sha256": "75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb",
       "target_stable_asset_identity": "mbti_cross_type_comparison_authorities:org0:en:entj-vs-intj",
       "checks": {
         "exact_inventory_identity": "pass",
@@ -37,7 +37,8 @@
         "private_field_scan": "pass",
         "publication_state_held": "pass"
       },
-      "disposition": "ready_for_independent_w9"
+      "disposition": "ready_for_independent_w9",
+      "w9_blocker_correction": "Rebound to the frozen inventory's current 6-section/5-FAQ backend authority revision; a fresh full W9 review remains required."
     },
     {
       "row_id": "W1-COMP-03-ESTJ-VS-ENTJ",
@@ -59,7 +60,7 @@
     {
       "row_id": "W1-COMP-04-INFJ-VS-INFP",
       "slug": "infj-vs-infp",
-      "source_sha256": "2c7b30b1a64be8179d1af84d66a6344aee209e3a397f19c962b7f1c4b4b77d42",
+      "source_sha256": "75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb",
       "target_stable_asset_identity": "mbti_cross_type_comparison_authorities:org0:en:infj-vs-infp",
       "checks": {
         "exact_inventory_identity": "pass",
@@ -71,16 +72,17 @@
         "private_field_scan": "pass",
         "publication_state_held": "pass"
       },
-      "disposition": "ready_for_independent_w9"
+      "disposition": "ready_for_independent_w9",
+      "w9_blocker_correction": "Rebound to the frozen inventory's current 6-section/5-FAQ backend authority revision; a fresh full W9 review remains required."
     },
     {
       "row_id": "W1-COMP-05-INTJ-VS-INTP",
       "slug": "intj-vs-intp",
-      "source_sha256": "cc6220e1ac1b6a8f9619fac267429e9c2743689c40d35ac81098b697addf7e8a",
+      "source_sha256": "75244fa4af3c234851519eba5a426daf8766c13e7c4b2bc9e94d5a5855ce6ccb",
       "target_stable_asset_identity": "mbti_cross_type_comparison_authorities:org0:en:intj-vs-intp",
       "checks": {
         "exact_inventory_identity": "pass",
-        "source_bound": "pass_with_disclosed_limitations",
+        "source_bound": "pass",
         "source_structure_preserved": "pass",
         "english_reader_copy_present": "pass",
         "chinese_leakage_scan": "pass",
@@ -88,11 +90,8 @@
         "private_field_scan": "pass",
         "publication_state_held": "pass"
       },
-      "evidence_limitations": [
-        "Complete FermatMind INTJ and INTP base-type page source material was unavailable for the bound source revision.",
-        "No dedicated competitor INTJ-versus-INTP comparison page was available; structure references did not supply copied wording."
-      ],
-      "disposition": "ready_for_independent_w9_with_disclosed_evidence_limitations"
+      "disposition": "ready_for_independent_w9",
+      "w9_blocker_correction": "Rebound to the frozen inventory's current 6-section/5-FAQ backend authority revision; a fresh full W9 review remains required."
     },
     {
       "row_id": "W1-COMP-06-ISFP-VS-INFP",
@@ -109,7 +108,8 @@
         "private_field_scan": "pass",
         "publication_state_held": "pass"
       },
-      "disposition": "ready_for_independent_w9"
+      "disposition": "ready_for_independent_w9",
+      "w9_blocker_correction": "Repaired the split work_and_learning sentence while preserving the exact five-item source cardinality; a fresh full W9 review remains required."
     },
     {
       "row_id": "W1-COMP-07-ISTJ-VS-ISFJ",

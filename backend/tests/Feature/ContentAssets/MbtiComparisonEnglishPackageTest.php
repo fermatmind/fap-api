@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class MbtiComparisonEnglishPackageTest extends TestCase
 {
-    private const PACKAGE_DIRECTORY = __DIR__.'/../../../content_assets/en-content-parity/W1-mbti/comparisons';
+    private const PACKAGE_DIRECTORY = __DIR__.'/../../../content_assets/en-content-parity/W1-mbti/comparisons/w9-correction-3325d399';
 
     private const INVENTORY_SHA = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
