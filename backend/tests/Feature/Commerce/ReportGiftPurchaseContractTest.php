@@ -545,6 +545,56 @@ final class ReportGiftPurchaseContractTest extends TestCase
             ->assertCreated();
     }
 
+    public function test_same_purchaser_retry_reuses_one_gift_payment_action(): void
+    {
+        $recipientAnonId = 'anon_gift_payment_retry_recipient';
+        $payerAnonId = 'anon_gift_payment_retry_payer';
+        $attemptId = $this->createAttempt($recipientAnonId);
+        $created = $this->withHeaders($this->headersFor($recipientAnonId))
+            ->postJson('/api/v0.3/attempts/'.$attemptId.'/gift-requests')
+            ->assertCreated();
+        $token = (string) $created->json('gift_request.public_token');
+
+        Http::fake([
+            'https://api.weixin.qq.com/sns/jscode2session*' => Http::sequence()
+                ->push([
+                    'openid' => 'openid-gift-payment-retry-payer',
+                    'session_key' => 'session-key-payment-retry-one',
+                ])
+                ->push([
+                    'openid' => 'openid-gift-payment-retry-payer',
+                    'session_key' => 'session-key-payment-retry-two',
+                ]),
+        ]);
+        $payload = [
+            'idempotency_key' => 'gift-payment-action-retry',
+            'wx_login_code' => 'wx-login-payment-retry',
+        ];
+        $first = $this->withHeaders($this->headersFor($payerAnonId))
+            ->postJson('/api/v0.3/report-gifts/'.$token.'/orders/wechat_mini_virtual', $payload)
+            ->assertOk();
+        $second = $this->withHeaders($this->headersFor($payerAnonId))
+            ->postJson('/api/v0.3/report-gifts/'.$token.'/orders/wechat_mini_virtual', $payload)
+            ->assertOk()
+            ->assertJsonPath('idempotent', true);
+
+        $firstSignData = json_decode(
+            (string) $first->json('pay.params.signData'),
+            true,
+            flags: JSON_THROW_ON_ERROR
+        );
+        $secondSignData = json_decode(
+            (string) $second->json('pay.params.signData'),
+            true,
+            flags: JSON_THROW_ON_ERROR
+        );
+        $this->assertSame((string) $first->json('order_no'), (string) $second->json('order_no'));
+        $this->assertSame((string) $firstSignData['outTradeNo'], (string) $secondSignData['outTradeNo']);
+        $this->assertSame(1, DB::table('payment_attempts')
+            ->where('order_no', (string) $first->json('order_no'))
+            ->count());
+    }
+
     public function test_login_exchange_failure_releases_unpayable_order_and_allows_retry(): void
     {
         $recipientAnonId = 'anon_gift_login_failure_recipient';
