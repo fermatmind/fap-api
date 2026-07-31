@@ -4,6 +4,7 @@ namespace App\Services\Commerce\Webhook;
 
 use App\Internal\Commerce\PaymentWebhookHandlerCore;
 use App\Services\Commerce\Repair\OrderRepairService;
+use App\Services\Commerce\ReportGiftService;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -344,6 +345,7 @@ class WebhookEntitlementService
 
                             return $refund;
                         }
+                        app(ReportGiftService::class)->markRefundedForOrder($order);
                         if ($boundPaymentAttempt !== null) {
                             $this->core->orderManager()->advancePaymentAttempt((string) ($boundPaymentAttempt->id ?? ''), [
                                 'state' => \App\Models\PaymentAttempt::STATE_VERIFIED,
@@ -572,10 +574,14 @@ class WebhookEntitlementService
                             return $this->core->semanticReject('ATTEMPT_REQUIRED', 'target_attempt_id is required for report_unlock.');
                         }
 
-                        $ownerGuard = $this->core->validateAttemptOwnershipForOrder($order, $attemptMeta);
-                        if (! ($ownerGuard['ok'] ?? false)) {
-                            $code = (string) ($ownerGuard['error'] ?? 'ATTEMPT_OWNER_MISMATCH');
-                            $message = (string) ($ownerGuard['message'] ?? 'order owner mismatch.');
+                        $giftService = app(ReportGiftService::class);
+                        $giftRequest = $giftService->findBoundGiftForOrder($order, true);
+                        $ownershipGuard = $giftRequest !== null
+                            ? $giftService->validateBoundGiftOrder($giftRequest, $order)
+                            : $this->core->validateAttemptOwnershipForOrder($order, $attemptMeta);
+                        if (! ($ownershipGuard['ok'] ?? false)) {
+                            $code = (string) ($ownershipGuard['error'] ?? 'ATTEMPT_OWNER_MISMATCH');
+                            $message = (string) ($ownershipGuard['message'] ?? 'order owner mismatch.');
                             $this->core->markEventError($provider, $providerEventId, 'rejected', $code, $message);
 
                             return $this->core->semanticReject($code, $message);
@@ -606,17 +612,26 @@ class WebhookEntitlementService
                                 }
                             }
 
-                            $grant = $this->core->entitlementManager()->grantAttemptUnlock(
-                                (int) $order->org_id,
-                                $order->user_id ? (string) $order->user_id : $userId,
-                                $order->anon_id ? (string) $order->anon_id : $anonId,
-                                $benefitCode,
-                                $attemptId,
-                                $orderNo,
-                                $scopeOverride,
-                                $expiresAt,
-                                $modulesIncluded
-                            );
+                            $grant = $giftRequest !== null
+                                ? $giftService->grantVerifiedPaidGift(
+                                    $giftRequest,
+                                    $order,
+                                    $benefitCode,
+                                    $scopeOverride,
+                                    $expiresAt,
+                                    $modulesIncluded
+                                )
+                                : $this->core->entitlementManager()->grantAttemptUnlock(
+                                    (int) $order->org_id,
+                                    $order->user_id ? (string) $order->user_id : $userId,
+                                    $order->anon_id ? (string) $order->anon_id : $anonId,
+                                    $benefitCode,
+                                    $attemptId,
+                                    $orderNo,
+                                    $scopeOverride,
+                                    $expiresAt,
+                                    $modulesIncluded
+                                );
 
                             if (! ($grant['ok'] ?? false)) {
                                 $this->core->orderManager()->syncGrantState($orderNo, $orgId, \App\Models\Order::GRANT_STATE_GRANT_FAILED);

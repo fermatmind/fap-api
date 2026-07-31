@@ -210,6 +210,64 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: API-GIFT-01
+    repo: fap-api
+    base: main
+    branch: codex/api-gift-01-paid-report-gifting
+    title: "API-GIFT-01: add paid report gifting contract"
+    status: local_validation_passed
+    depends_on:
+      - API-UNLOCK-01
+      - API-GIFT-SCHEMA-01
+      - API-VPAY-01
+    train_scope: paid_report_gifting
+    scope:
+      - Add owner-created, high-entropy, hash-only report gift requests for the MBTI commercialization rollout.
+      - Expose a public token summary that contains no attempt id, recipient identity, or private result.
+      - Create friend-owned WeChat mini virtual-payment orders through a dedicated gift service without weakening ordinary order attempt ownership.
+      - Fulfil one recipient attempt entitlement only after a verified paid order, with one purchaser winner and idempotent webhook/repair handling.
+      - Keep the payer unable to read the recipient report and make refund handling revoke only a direct gift grant, never a concurrent non-gift entitlement.
+    allowed_paths:
+      - backend/routes/api.php
+      - backend/app/Http/Controllers/API/V0_3/ReportGiftController.php
+      - backend/app/Services/Commerce/ReportGiftService.php
+      - backend/app/Services/Commerce/EntitlementManager.php
+      - backend/app/Services/Commerce/Repair/OrderRepairService.php
+      - backend/app/Services/Commerce/Webhook/WebhookEntitlementService.php
+      - backend/config/report_unlock.php
+      - backend/docs/contracts/openapi.snapshot.json
+      - backend/tests/Feature/Commerce/PaymentRepairEngineTest.php
+      - backend/tests/Feature/Commerce/ReportGiftPurchaseContractTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add or modify migrations, invite-unlock tables, invite completion counters, frontend code, CMS data, SKU rows, provider secrets, or production configuration.
+      - Loosen ordinary order target-attempt ownership, expose attempt ids or recipient results through public tokens, or grant access from share/open/register events.
+      - Enable IQ gifting, deploy, publish, upload the mini-program, create production orders, or perform real payments.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Commerce/ReportGiftPurchaseContractTest.php tests/Feature/Commerce/WechatMiniVirtualPaymentContractTest.php tests/Feature/Commerce/PaymentWebhookIdempotencyTest.php tests/Feature/Commerce/PaymentRepairEngineTest.php tests/Feature/V0_3/AttemptReportAccessReadTest.php tests/Feature/Storage/ReportGiftRequestSchemaMigrationTest.php --no-ansi --display-warnings
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/OpenApiDiffTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='test_runtime_paths_have_no_uncommitted_diff|test_runtime_freeze_classifier_ignores_wechat_mini_virtual_payment_only|test_runtime_freeze_classifier_ignores_paid_report_gifting_only' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_3/ReportGiftController.php app/Services/Commerce/ReportGiftService.php app/Services/Commerce/EntitlementManager.php app/Services/Commerce/Repair/OrderRepairService.php app/Services/Commerce/Webhook/WebhookEntitlementService.php config/report_unlock.php tests/Feature/Commerce/PaymentRepairEngineTest.php tests/Feature/Commerce/ReportGiftPurchaseContractTest.php
+      - cd backend && php artisan route:list --path=api/v0.3 --except-vendor
+      - cd backend && composer validate --strict
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: CAREER-SEARCH-ENTRY-TIER-CONTRACT-01
     repo: fap-api
     base: main

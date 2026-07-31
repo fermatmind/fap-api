@@ -8,6 +8,7 @@ use App\Services\Storage\UnifiedAccessProjectionWriter;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class EntitlementManager
@@ -555,6 +556,22 @@ class EntitlementManager
                 'revoked' => $byOrderNo,
                 'benefit_code' => $benefitCode,
                 'attempt_id' => $attemptId,
+            ];
+        }
+
+        $isGiftOrder = Schema::hasTable('report_gift_requests')
+            && DB::table('report_gift_requests')
+                ->where('purchased_order_id', (string) ($order->id ?? ''))
+                ->exists();
+        if ($isGiftOrder) {
+            $this->orders->syncGrantState($orderNo, $orderOrgId, 'revoked');
+
+            return [
+                'ok' => true,
+                'revoked' => 0,
+                'benefit_code' => $benefitCode,
+                'attempt_id' => $attemptId,
+                'gift_order_without_direct_grant' => true,
             ];
         }
 

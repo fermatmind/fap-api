@@ -23,6 +23,7 @@ use App\Http\Controllers\API\V0_3\OrgInvitesController;
 use App\Http\Controllers\API\V0_3\OrgsController;
 use App\Http\Controllers\API\V0_3\PublicGatewaySurfaceController;
 use App\Http\Controllers\API\V0_3\PublicTestMetricsSummaryController;
+use App\Http\Controllers\API\V0_3\ReportGiftController;
 use App\Http\Controllers\API\V0_3\ResultEmailLookupController;
 use App\Http\Controllers\API\V0_3\ScalesController;
 use App\Http\Controllers\API\V0_3\ScalesLookupController;
@@ -345,6 +346,18 @@ Route::prefix('v0.3')->middleware([
                 ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id'])
                 ->defaults('public_realm', true)
                 ->name('api.v0_3.attempts.invite_unlocks.show');
+            Route::post('/attempts/{id}/gift-requests', [ReportGiftController::class, 'store'])
+                ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id'])
+                ->defaults('public_realm', true)
+                ->name('api.v0_3.attempts.gift_requests.store');
+            Route::get('/attempts/{id}/gift-requests/{gift_request_id}', [ReportGiftController::class, 'showOwner'])
+                ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id', 'uuid:gift_request_id'])
+                ->defaults('public_realm', true)
+                ->name('api.v0_3.attempts.gift_requests.show');
+            Route::post('/attempts/{id}/gift-requests/{gift_request_id}/cancel', [ReportGiftController::class, 'cancel'])
+                ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id', 'uuid:gift_request_id'])
+                ->defaults('public_realm', true)
+                ->name('api.v0_3.attempts.gift_requests.cancel');
         });
         // Share contract routes stay fixed; summary/click semantics are implemented in ShareController/services.
         Route::match(['GET', 'POST'], '/attempts/{id}/share', [ShareV03Controller::class, 'getShare'])
@@ -392,6 +405,15 @@ Route::prefix('v0.3')->middleware([
         Route::post('/orders/{provider}', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@createOrder')
             ->middleware(\App\Http\Middleware\FmTokenAuth::class)
             ->whereIn('provider', $payProviders);
+        Route::get('/report-gifts/{token}', [ReportGiftController::class, 'showPublic'])
+            ->where('token', '[A-Za-z0-9_-]{43}')
+            ->name('api.v0_3.report_gifts.show');
+        Route::post(
+            '/report-gifts/{token}/orders/wechat_mini_virtual',
+            [ReportGiftController::class, 'purchaseWechatMiniVirtual']
+        )->middleware(\App\Http\Middleware\FmTokenAuth::class)
+            ->where('token', '[A-Za-z0-9_-]{43}')
+            ->name('api.v0_3.report_gifts.orders.wechat_mini_virtual.store');
         Route::post(
             '/orders/{order_no}/wechat-mini-virtual/reconcile',
             'App\\Http\\Controllers\\API\\V0_3\\CommerceController@reconcileWechatMiniVirtual'

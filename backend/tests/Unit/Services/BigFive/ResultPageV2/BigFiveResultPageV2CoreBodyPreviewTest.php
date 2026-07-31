@@ -3854,6 +3854,55 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_paid_report_gifting_only(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_3/ReportGiftController.php',
+            'backend/app/Services/Commerce/Repair/OrderRepairService.php',
+            'backend/app/Services/Commerce/ReportGiftService.php',
+            'backend/routes/api.php',
+        ];
+        $routeChangedLines = [
+            '+use App\Http\Controllers\API\V0_3\ReportGiftController;',
+            "+            Route::post('/attempts/{id}/gift-requests', [ReportGiftController::class, 'store'])",
+            "+                ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id'])",
+            "+                ->defaults('public_realm', true)",
+            "+                ->name('api.v0_3.attempts.gift_requests.store');",
+            "+            Route::get('/attempts/{id}/gift-requests/{gift_request_id}', [ReportGiftController::class, 'showOwner'])",
+            "+                ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id', 'uuid:gift_request_id'])",
+            "+                ->defaults('public_realm', true)",
+            "+                ->name('api.v0_3.attempts.gift_requests.show');",
+            "+            Route::post('/attempts/{id}/gift-requests/{gift_request_id}/cancel', [ReportGiftController::class, 'cancel'])",
+            "+                ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id', 'uuid:gift_request_id'])",
+            "+                ->defaults('public_realm', true)",
+            "+                ->name('api.v0_3.attempts.gift_requests.cancel');",
+            "+        Route::get('/report-gifts/{token}', [ReportGiftController::class, 'showPublic'])",
+            "+            ->where('token', '[A-Za-z0-9_-]{43}')",
+            "+            ->name('api.v0_3.report_gifts.show');",
+            '+        Route::post(',
+            "+            '/report-gifts/{token}/orders/wechat_mini_virtual',",
+            '+            [ReportGiftController::class, \'purchaseWechatMiniVirtual\']',
+            '+        )->middleware(\App\Http\Middleware\FmTokenAuth::class)',
+            "+            ->where('token', '[A-Za-z0-9_-]{43}')",
+            "+            ->name('api.v0_3.report_gifts.orders.wechat_mini_virtual.store');",
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            routeChangedLines: $routeChangedLines,
+        ));
+        $this->assertSame(
+            ['backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php'],
+            $this->mbtiImpactingRuntimeChanges(
+                ['backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php'],
+                '',
+                '',
+            ),
+        );
+    }
+
     public function test_runtime_freeze_classifier_ignores_freemium_locale_policy_files(): void
     {
         $changed = [
@@ -7170,6 +7219,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isPaidReportGiftingFile($file)) {
+                continue;
+            }
+
             if ($this->isCmsLifecycleTenantScopeFile($file)) {
                 continue;
             }
@@ -7833,6 +7886,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             if (
                 $file === 'backend/routes/api.php'
                 && $this->routeDiffIsWechatMiniVirtualPaymentOnly(
+                    $routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef)
+                )
+            ) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/routes/api.php'
+                && $this->routeDiffIsPaidReportGiftingOnly(
                     $routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef)
                 )
             ) {
@@ -9541,6 +9603,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Commerce/Webhook/WebhookEntitlementService.php',
             'backend/app/Services/Commerce/WechatMiniVirtualPaymentService.php',
             'backend/app/Jobs/Commerce/ReprocessPaymentEventJob.php',
+        ], true);
+    }
+
+    private function isPaidReportGiftingFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_3/ReportGiftController.php',
+            'backend/app/Services/Commerce/Repair/OrderRepairService.php',
+            'backend/app/Services/Commerce/ReportGiftService.php',
         ], true);
     }
 
@@ -12340,6 +12411,37 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             "+            'App\\\\Http\\\\Controllers\\\\API\\\\V0_3\\\\CommerceController@reconcileWechatMiniVirtual'",
             '+        )->middleware(\\App\\Http\\Middleware\\FmTokenAuth::class)',
             "+            ->name('api.v0_3.orders.wechat_mini_virtual.reconcile');",
+        ];
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsPaidReportGiftingOnly(array $changedLines): bool
+    {
+        return array_values($changedLines) === [
+            '+use App\Http\Controllers\API\V0_3\ReportGiftController;',
+            "+            Route::post('/attempts/{id}/gift-requests', [ReportGiftController::class, 'store'])",
+            "+                ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id'])",
+            "+                ->defaults('public_realm', true)",
+            "+                ->name('api.v0_3.attempts.gift_requests.store');",
+            "+            Route::get('/attempts/{id}/gift-requests/{gift_request_id}', [ReportGiftController::class, 'showOwner'])",
+            "+                ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id', 'uuid:gift_request_id'])",
+            "+                ->defaults('public_realm', true)",
+            "+                ->name('api.v0_3.attempts.gift_requests.show');",
+            "+            Route::post('/attempts/{id}/gift-requests/{gift_request_id}/cancel', [ReportGiftController::class, 'cancel'])",
+            "+                ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id', 'uuid:gift_request_id'])",
+            "+                ->defaults('public_realm', true)",
+            "+                ->name('api.v0_3.attempts.gift_requests.cancel');",
+            "+        Route::get('/report-gifts/{token}', [ReportGiftController::class, 'showPublic'])",
+            "+            ->where('token', '[A-Za-z0-9_-]{43}')",
+            "+            ->name('api.v0_3.report_gifts.show');",
+            '+        Route::post(',
+            "+            '/report-gifts/{token}/orders/wechat_mini_virtual',",
+            '+            [ReportGiftController::class, \'purchaseWechatMiniVirtual\']',
+            '+        )->middleware(\App\Http\Middleware\FmTokenAuth::class)',
+            "+            ->where('token', '[A-Za-z0-9_-]{43}')",
+            "+            ->name('api.v0_3.report_gifts.orders.wechat_mini_virtual.store');",
         ];
     }
 

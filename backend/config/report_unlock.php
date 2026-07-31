@@ -16,6 +16,7 @@ return [
         static fn (mixed $value): string => trim((string) $value),
         explode(',', (string) env('REPORT_UNLOCK_SUPPORTED_LOCALES', 'zh-CN'))
     ))),
+    'gift_request_ttl_hours' => (int) env('REPORT_UNLOCK_GIFT_REQUEST_TTL_HOURS', 72),
     'sku_by_scale' => [
         'MBTI' => env('REPORT_UNLOCK_MBTI_SKU', 'MBTI_REPORT_FULL'),
     ],

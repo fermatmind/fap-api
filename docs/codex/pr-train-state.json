@@ -1,4 +1,75 @@
 {
+  "API-GIFT-01": {
+    "id": "API-GIFT-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/api-gift-01-paid-report-gifting",
+    "title": "API-GIFT-01: add paid report gifting contract",
+    "depends_on": [
+      "API-UNLOCK-01",
+      "API-GIFT-SCHEMA-01",
+      "API-VPAY-01"
+    ],
+    "status": "local_validation_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "dependency": {
+        "status": "passed",
+        "evidence": "GitHub reports API-GIFT-SCHEMA-01 PR #3428 merged as fca264eac19ebc74f3b87a577fab13808fa603b4 and API-VPAY-01 PR #3441 merged as 15eb6a2fbf55630f3d1e53fd3bf891930ebcb60b; the worktree starts from that exact current origin/main."
+      },
+      "authorization_boundary": {
+        "status": "passed",
+        "evidence": "The active FERMAT-WEAPP-THREE-CHANNEL-REPORT-UNLOCK-00-11 goal authorizes this independent backend PR. No migration, production configuration, provider secret, deployment, real order, payment, or mini-program upload is authorized."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "The final focused contract suite passed 48 tests / 564 assertions; OpenAPI passed 2 / 6; the exact runtime-freeze classifier passed 3 / 9 after committing and integrating latest main; scoped Pint passed all 9 files; route:list exposed 98 v0.3 routes including the five gift routes; backend Composer strict validation, YAML/JSON parsing, git diff checks, and exact allowed-path scope passed. The complete backend/scripts/ci_verify_mbti.sh exited 0 with the repository test APP_KEY supplied only as process environment, including Big Five 1622 tests / 195831 assertions, Personality authority 95 / 5917, migration, auth, OpenAPI, order-security, dependency-security, webhook, attempt, and downstream gates. Verifier-generated Big Five compiled artifacts were restored and no secret or production configuration was created."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": null
+      },
+      "merge_reconciliation": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-31T03:03:15Z",
+        "status": "implementation_in_progress",
+        "note": "Started in an isolated worktree from exact origin/main 15eb6a2fbf55630f3d1e53fd3bf891930ebcb60b after online dependency verification. Scope is the dedicated hash-token gift lifecycle, friend-owned virtual-payment order reservation, verified-paid recipient entitlement, payer isolation, concurrency/refund safety, tests, OpenAPI snapshot, and train metadata. Ordinary order ownership remains unchanged; no migration, production action, provider activation, secret access, or real payment is performed."
+      },
+      {
+        "at": "2026-07-31T03:30:02Z",
+        "status": "local_validation_passed",
+        "note": "Implemented the fail-closed MBTI-only gift lifecycle and passed all declared local validation. The first complete verifier attempt exposed only the isolated worktree's missing test APP_KEY; rerunning with the repository phpunit test key as process-only environment completed exit 0. No key was generated or persisted, and all verifier-generated compiled artifacts were restored."
+      },
+      {
+        "at": "2026-07-31T03:33:47Z",
+        "status": "local_validation_passed",
+        "note": "Integrated exact latest origin/main efd7f2bd0 without conflict. The committed branch diff then made the runtime-freeze classifier correctly expose four paid-gifting runtime paths that were invisible while uncommitted. Added an exact API-GIFT-only classifier predicate and route diff allowlist plus a negative control; the post-integration focused suite remains 48 / 564 and the classifier now passes 3 / 9. No broad runtime exception was added."
+      }
+    ],
+    "updated_at": "2026-07-31T03:33:47Z"
+  },
   "MBTI-CROSS-PUBLISH-51": {
     "id": "MBTI-CROSS-PUBLISH-51",
     "repo": "fap-api",

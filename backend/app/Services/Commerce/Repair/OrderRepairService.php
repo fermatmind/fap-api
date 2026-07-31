@@ -7,6 +7,7 @@ namespace App\Services\Commerce\Repair;
 use App\Models\Order;
 use App\Services\Commerce\EntitlementManager;
 use App\Services\Commerce\OrderManager;
+use App\Services\Commerce\ReportGiftService;
 use App\Services\Commerce\SkuCatalog;
 use Illuminate\Support\Facades\DB;
 
@@ -66,11 +67,15 @@ final class OrderRepairService
         }
 
         $attemptMeta = $this->resolveAttemptMeta((int) $freshOrder->org_id, $attemptId);
-        $ownerGuard = $this->validateAttemptOwnershipForOrder($freshOrder, $attemptMeta);
-        if (! ($ownerGuard['ok'] ?? false)) {
+        $giftService = app(ReportGiftService::class);
+        $giftRequest = $giftService->findBoundGiftForOrder($freshOrder, true);
+        $ownershipGuard = $giftRequest !== null
+            ? $giftService->validateBoundGiftOrder($giftRequest, $freshOrder)
+            : $this->validateAttemptOwnershipForOrder($freshOrder, $attemptMeta);
+        if (! ($ownershipGuard['ok'] ?? false)) {
             return $this->failure(
-                (string) ($ownerGuard['error'] ?? 'ATTEMPT_OWNER_MISMATCH'),
-                (string) ($ownerGuard['message'] ?? 'order owner mismatch.'),
+                (string) ($ownershipGuard['error'] ?? 'ATTEMPT_OWNER_MISMATCH'),
+                (string) ($ownershipGuard['message'] ?? 'order owner mismatch.'),
                 $freshOrder,
                 $context,
                 [
@@ -110,7 +115,7 @@ final class OrderRepairService
         }
 
         $activeGrant = $this->resolveActiveGrantForOrder($freshOrder, $benefitCode);
-        if ($activeGrant !== null) {
+        if ($activeGrant !== null && $giftRequest === null) {
             $this->orders->syncGrantState((string) $freshOrder->order_no, (int) $freshOrder->org_id, Order::GRANT_STATE_GRANTED);
             $transition = $this->ensureFulfilled($freshOrder);
             if (! ($transition['ok'] ?? false)) {
@@ -146,17 +151,26 @@ final class OrderRepairService
         }
 
         [$scopeOverride, $expiresAt, $modulesIncluded] = $this->resolveGrantOptions($skuRow);
-        $grant = $this->entitlements->grantAttemptUnlock(
-            (int) $freshOrder->org_id,
-            $freshOrder->user_id ? (string) $freshOrder->user_id : null,
-            $freshOrder->anon_id ? (string) $freshOrder->anon_id : null,
-            $benefitCode,
-            $attemptId,
-            (string) $freshOrder->order_no,
-            $scopeOverride,
-            $expiresAt,
-            $modulesIncluded
-        );
+        $grant = $giftRequest !== null
+            ? $giftService->grantVerifiedPaidGift(
+                $giftRequest,
+                $freshOrder,
+                $benefitCode,
+                $scopeOverride,
+                $expiresAt,
+                $modulesIncluded
+            )
+            : $this->entitlements->grantAttemptUnlock(
+                (int) $freshOrder->org_id,
+                $freshOrder->user_id ? (string) $freshOrder->user_id : null,
+                $freshOrder->anon_id ? (string) $freshOrder->anon_id : null,
+                $benefitCode,
+                $attemptId,
+                (string) $freshOrder->order_no,
+                $scopeOverride,
+                $expiresAt,
+                $modulesIncluded
+            );
 
         if (! ($grant['ok'] ?? false)) {
             $this->orders->syncGrantState((string) $freshOrder->order_no, (int) $freshOrder->org_id, Order::GRANT_STATE_GRANT_FAILED);

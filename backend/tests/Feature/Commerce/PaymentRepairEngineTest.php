@@ -140,13 +140,13 @@ final class PaymentRepairEngineTest extends TestCase
         $seedCalls = 0;
         $snapshotStore->shouldReceive('seedPendingSnapshot')
             ->twice()
-            ->andReturnUsing(function (int $orgId, string $attemptIdArg, ?string $orderNoArg, array $meta) use (&$seedCalls, $realSnapshotStore): void {
+            ->andReturnUsing(function (int $orgId, string $attemptIdArg, ?string $orderNoArg, array $meta) use (&$seedCalls, $realSnapshotStore): bool {
                 $seedCalls++;
                 if ($seedCalls === 1) {
                     throw new \RuntimeException('simulated_post_commit_failure');
                 }
 
-                $realSnapshotStore->seedPendingSnapshot($orgId, $attemptIdArg, $orderNoArg, $meta);
+                return $realSnapshotStore->seedPendingSnapshot($orgId, $attemptIdArg, $orderNoArg, $meta);
             });
         $this->app->instance(ReportSnapshotStore::class, $snapshotStore);
 
@@ -199,13 +199,13 @@ final class PaymentRepairEngineTest extends TestCase
         $seedCalls = 0;
         $snapshotStore->shouldReceive('seedPendingSnapshot')
             ->twice()
-            ->andReturnUsing(function (int $orgId, string $attemptIdArg, ?string $orderNoArg, array $meta) use (&$seedCalls, $realSnapshotStore): void {
+            ->andReturnUsing(function (int $orgId, string $attemptIdArg, ?string $orderNoArg, array $meta) use (&$seedCalls, $realSnapshotStore): bool {
                 $seedCalls++;
                 if ($seedCalls === 1) {
                     throw new \RuntimeException('simulated_tenant_post_commit_failure');
                 }
 
-                $realSnapshotStore->seedPendingSnapshot($orgId, $attemptIdArg, $orderNoArg, $meta);
+                return $realSnapshotStore->seedPendingSnapshot($orgId, $attemptIdArg, $orderNoArg, $meta);
             });
         $this->app->instance(ReportSnapshotStore::class, $snapshotStore);
 

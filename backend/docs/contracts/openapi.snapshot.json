@@ -557,6 +557,83 @@
                 "x-laravel-name": "api.v0_3.attempts.eq.journey.submit"
             }
         },
+        "/api/v0.3/attempts/{id}/gift-requests": {
+            "post": {
+                "operationId": "api.v0_3.attempts.gift_requests.store",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\ReportGiftController@store",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
+                ],
+                "x-laravel-name": "api.v0_3.attempts.gift_requests.store"
+            }
+        },
+        "/api/v0.3/attempts/{id}/gift-requests/{gift_request_id}": {
+            "get": {
+                "operationId": "api.v0_3.attempts.gift_requests.show",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\ReportGiftController@showOwner",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:id",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:gift_request_id"
+                ],
+                "x-laravel-name": "api.v0_3.attempts.gift_requests.show"
+            }
+        },
+        "/api/v0.3/attempts/{id}/gift-requests/{gift_request_id}/cancel": {
+            "post": {
+                "operationId": "api.v0_3.attempts.gift_requests.cancel",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\ReportGiftController@cancel",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:id",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:gift_request_id"
+                ],
+                "x-laravel-name": "api.v0_3.attempts.gift_requests.cancel"
+            }
+        },
         "/api/v0.3/attempts/{id}/invite-unlocks": {
             "get": {
                 "operationId": "api.v0_3.attempts.invite_unlocks.show",
@@ -1968,6 +2045,51 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext"
                 ]
+            }
+        },
+        "/api/v0.3/report-gifts/{token}": {
+            "get": {
+                "operationId": "api.v0_3.report_gifts.show",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\ReportGiftController@showPublic",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ],
+                "x-laravel-name": "api.v0_3.report_gifts.show"
+            }
+        },
+        "/api/v0.3/report-gifts/{token}/orders/wechat_mini_virtual": {
+            "post": {
+                "operationId": "api.v0_3.report_gifts.orders.wechat_mini_virtual.store",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\ReportGiftController@purchaseWechatMiniVirtual",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\FmTokenAuth"
+                ],
+                "x-laravel-name": "api.v0_3.report_gifts.orders.wechat_mini_virtual.store"
             }
         },
         "/api/v0.3/results/lookup-by-email": {
