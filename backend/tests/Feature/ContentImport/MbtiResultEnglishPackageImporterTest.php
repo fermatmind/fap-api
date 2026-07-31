@@ -140,11 +140,13 @@ final class MbtiResultEnglishPackageImporterTest extends TestCase
             $manifest,
             JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR,
         ).PHP_EOL;
+        $resolvedManifestPath = realpath($manifestPath);
+        self::assertIsString($resolvedManifestPath);
 
         File::partialMock()
             ->shouldReceive('get')
             ->once()
-            ->with($manifestPath)
+            ->with($resolvedManifestPath)
             ->andReturn($untrustedManifestBytes);
 
         $exitCode = $this->runDryRun(MbtiResultEnglishPackageImporter::PACKAGE_SHA256, $packageDirectory);
@@ -152,6 +154,22 @@ final class MbtiResultEnglishPackageImporterTest extends TestCase
 
         self::assertSame(1, $exitCode);
         self::assertSame('manifest_sha256_mismatch', $payload['errors'][0]['code']);
+    }
+
+    public function test_symlinked_declared_file_is_rejected_before_target_bytes_are_read(): void
+    {
+        $packageDirectory = $this->copyPackage();
+        $assetsPath = $packageDirectory.'/assets.json';
+        $outsidePath = sys_get_temp_dir().'/w1-mbti-result-private-'.bin2hex(random_bytes(6)).'.json';
+        File::put($outsidePath, '{"private_local_data":"must-not-be-read"}');
+        File::delete($assetsPath);
+        self::assertTrue(symlink($outsidePath, $assetsPath));
+
+        $exitCode = $this->runDryRun(MbtiResultEnglishPackageImporter::PACKAGE_SHA256, $packageDirectory);
+        $payload = $this->jsonOutput();
+
+        self::assertSame(1, $exitCode);
+        self::assertSame('package_file_symlink_rejected', $payload['errors'][0]['code']);
     }
 
     public function test_replay_is_byte_deterministic_and_assets_are_parsed_only_from_verified_bytes(): void

@@ -102302,7 +102302,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "Importer feature suite passed 5 tests / 242 assertions, including authenticate-before-declared-file-read coverage; runtime-freeze classifier passed 1 test / 2 assertions; scoped Pint passed; exact-package command returned 46 redacted rows with zero writes/private reads; API route inventory returned 225 lines; YAML, JSON, and diff checks passed. After the process guard was clear, scripts/ci_verify_mbti.sh completed with exit 0, including integrated scripts/verify_mbti.sh, the complete Big Five gate (1623 tests / 195834 assertions), and all remaining safety gates."
+        "evidence": "Importer feature suite passed 6 tests / 247 assertions, including authenticate-before-declared-file-read and symlink rejection coverage; runtime-freeze classifier passed 1 test / 2 assertions; scoped Pint passed; exact-package command returned 46 redacted rows with zero writes/private reads; API route inventory returned 225 lines; YAML, JSON, and diff checks passed. After the process guard was clear, scripts/ci_verify_mbti.sh completed with exit 0, including integrated scripts/verify_mbti.sh, the complete Big Five gate (1623 tests / 195834 assertions), and all remaining safety gates."
       },
       "changed_file_scope": {
         "status": "passed",
@@ -102362,8 +102362,13 @@
         "at": "2026-07-31T03:58:34Z",
         "status": "review_fix_local_checks_passed",
         "note": "Inspected the exact-head P2 review before editing. Manifest bytes are now authenticated against the frozen manifest SHA before any declared file path or symlink is followed. A malicious declared-path regression proves only package_manifest.json is read; importer suite passes 5 tests / 242 assertions, scoped Pint and exact 46-row dry-run pass, and scope remains exactly 7/7 paths."
+      },
+      {
+        "at": "2026-07-31T04:08:49Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Inspected the next exact-head P2 review before editing. Every exact-package file now rejects symbolic links before File::isFile/File::get and must resolve inside the selected package directory. An outside-target symlink regression fails before target bytes are read; importer suite passes 6 tests / 247 assertions, scoped Pint and exact dry-run pass."
       }
     ],
-    "updated_at": "2026-07-31T03:58:34Z"
+    "updated_at": "2026-07-31T04:08:49Z"
   }
 }

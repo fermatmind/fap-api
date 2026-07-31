@@ -424,11 +424,22 @@ final class MbtiResultEnglishPackageImporter
     private function readPackageFile(string $packageDirectory, string $filename): string
     {
         $path = rtrim($packageDirectory, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$filename;
+        if (is_link($path)) {
+            $this->fail('package_file_symlink_rejected', 'Exact-package files must not be symbolic links.');
+        }
         if (! File::isFile($path)) {
             $this->fail('package_file_missing', 'A required exact-package file is missing.');
         }
 
-        return (string) File::get($path);
+        $resolvedDirectory = realpath($packageDirectory);
+        $resolvedPath = realpath($path);
+        if ($resolvedDirectory === false
+            || $resolvedPath === false
+            || ! str_starts_with($resolvedPath, rtrim($resolvedDirectory, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR)) {
+            $this->fail('package_file_boundary_invalid', 'Exact-package files must resolve inside the selected package directory.');
+        }
+
+        return (string) File::get($resolvedPath);
     }
 
     /**
