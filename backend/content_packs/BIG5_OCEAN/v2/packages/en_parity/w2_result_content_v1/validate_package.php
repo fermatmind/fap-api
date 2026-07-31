@@ -129,6 +129,27 @@ foreach ($resultRows as $index => $row) {
     }
 }
 
+$facetAnchors = $reconciliation['facet_semantic_anchors'] ?? [];
+$facetsByCode = array_column(
+    $assetsByUnit['facet_subscale_explanations']['content']['facets'] ?? [],
+    null,
+    'code'
+);
+if (array_keys($facetAnchors) !== array_keys($facetsByCode) || count($facetAnchors) !== 30) {
+    throw new RuntimeException('Facet semantic anchor cohort does not match all 30 facets.');
+}
+foreach ($facetAnchors as $code => $anchors) {
+    $semanticText = strtolower(
+        (string) ($facetsByCode[$code]['label'] ?? '').' '.
+        (string) ($facetsByCode[$code]['description'] ?? '')
+    );
+    foreach ($anchors as $anchor) {
+        if (! str_contains($semanticText, strtolower((string) $anchor))) {
+            throw new RuntimeException("Facet source semantic anchor is missing for {$code}: {$anchor}");
+        }
+    }
+}
+
 $encodedAssets = json_encode($assets, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
 if (preg_match('/[\x{3400}-\x{9FFF}\x{F900}-\x{FAFF}]/u', $encodedAssets) === 1) {
     throw new RuntimeException('CJK leakage detected.');

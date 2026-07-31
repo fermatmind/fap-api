@@ -110,6 +110,20 @@ final class BigFiveEnglishResultAssetPackageTest extends TestCase
                 $this->assertSame($expectedIdentities, $actualIdentities, "{$unit}.{$path}");
             }
         }
+
+        $facetsByCode = array_column(
+            $assetsByUnit['facet_subscale_explanations']['content']['facets'],
+            null,
+            'code'
+        );
+        $this->assertCount(30, $reconciliation['facet_semantic_anchors']);
+        $this->assertSame(array_keys($facetsByCode), array_keys($reconciliation['facet_semantic_anchors']));
+        foreach ($reconciliation['facet_semantic_anchors'] as $code => $anchors) {
+            $semanticText = strtolower($facetsByCode[$code]['label'].' '.$facetsByCode[$code]['description']);
+            foreach ($anchors as $anchor) {
+                $this->assertStringContainsString(strtolower($anchor), $semanticText, "{$code}: {$anchor}");
+            }
+        }
     }
 
     #[Test]
@@ -207,6 +221,14 @@ final class BigFiveEnglishResultAssetPackageTest extends TestCase
         $this->assertSame('Delayed-Feedback Persistence', $c5['label']);
         $this->assertStringContainsString('keep making progress', $c5['description']);
         $this->assertStringContainsString('feedback or reward is not immediate', $c5['description']);
+        $e2 = array_values(array_filter(
+            $byUnit['facet_subscale_explanations']['facets'],
+            static fn (array $facet): bool => $facet['code'] === 'E2'
+        ))[0];
+        $this->assertSame('Group Participation', $e2['label']);
+        $this->assertStringContainsString('multi-person settings', $e2['description']);
+        $this->assertStringContainsString('social density', $e2['description']);
+        $this->assertStringContainsString('energy from groups', $e2['description']);
         $a4 = array_values(array_filter(
             $byUnit['facet_subscale_explanations']['facets'],
             static fn (array $facet): bool => $facet['code'] === 'A4'
@@ -231,6 +253,14 @@ final class BigFiveEnglishResultAssetPackageTest extends TestCase
         $this->assertStringContainsString('under sustained pressure', $n3['description']);
         $this->assertStringContainsString('drained, fatigued', $n3['description']);
         $this->assertStringContainsString('energy needed to keep responding', $n3['description']);
+        $n4 = array_values(array_filter(
+            $byUnit['facet_subscale_explanations']['facets'],
+            static fn (array $facet): bool => $facet['code'] === 'N4'
+        ))[0];
+        $this->assertSame('Social Self-Consciousness', $n4['label']);
+        $this->assertStringContainsString('feel discomfort', $n4['description']);
+        $this->assertStringContainsString('monitor yourself', $n4['description']);
+        $this->assertStringContainsString('gaze, evaluation, or social exposure', $n4['description']);
         $n5 = array_values(array_filter(
             $byUnit['facet_subscale_explanations']['facets'],
             static fn (array $facet): bool => $facet['code'] === 'N5'
@@ -276,7 +306,7 @@ final class BigFiveEnglishResultAssetPackageTest extends TestCase
             hash('sha256', implode("\n", $canonical))
         );
         $this->assertSame(
-            '47d43575aea0c638a21b90c33e1f0c147e4f679986d76db182c0f28606cf4dd4',
+            'aea87a8c0545d1be6cb1a32ff981576d62d077a8eab36834f34ec9d41c1bfc81',
             $shaManifest['package_sha256']
         );
     }

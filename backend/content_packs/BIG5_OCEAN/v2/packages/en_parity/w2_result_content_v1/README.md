@@ -11,6 +11,7 @@ The package is a producer draft for manual review. It is not a runtime registry,
 - Inventory package SHA-256: `0f50f4108af14656442ef7d57d410b2e74f8dffced6ed3db372bf848ea051292`
 - Inventory source-ledger SHA-256: `facbf57a362a430cdc8b5f6545db4a227e1268d285e2c27beed3c935ea9cf6e2`
 - `inventory_row_reconciliation.json` preserves all 118 frozen row IDs: 52 completed public controls, 50 reconciled historical revisions, and 16 result-content rows mapped to exact draft asset IDs and required content/item keys.
+- The same reconciliation binds source-aligned semantic anchors for all 30 facet codes; validation fails if any facet loses its pinned glossary meaning.
 
 ## Safety and authority
 
