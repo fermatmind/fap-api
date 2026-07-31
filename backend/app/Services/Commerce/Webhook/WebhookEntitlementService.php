@@ -442,6 +442,23 @@ class WebhookEntitlementService
                         return $this->core->semanticReject($guardCode, $guardMessage);
                     }
 
+                    $giftService = app(ReportGiftService::class);
+                    $giftRequest = $giftService->findBoundGiftForOrder($order, true);
+                    if ($giftRequest !== null) {
+                        $giftRestore = $giftService->restoreTerminalGiftForVerifiedPayment(
+                            $giftRequest,
+                            $order,
+                            true
+                        );
+                        if (! ($giftRestore['ok'] ?? false)) {
+                            $code = (string) ($giftRestore['error'] ?? 'GIFT_REQUEST_NOT_PAYABLE');
+                            $message = (string) ($giftRestore['message'] ?? 'gift request is not payable.');
+                            $this->core->markEventError($provider, $providerEventId, 'rejected', $code, $message);
+
+                            return $this->core->semanticReject($code, $message);
+                        }
+                    }
+
                     if (! $orderAlreadySettled) {
                         $orderTransition = $this->core->orderManager()->transitionToPaidAtomic(
                             $orderNo,

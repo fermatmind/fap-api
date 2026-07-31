@@ -92,6 +92,8 @@ final class ReportGiftController extends Controller
             (string) $payload['wx_login_code']
         );
         if (($payment['ok'] ?? false) !== true) {
+            $this->gifts->releaseUnpayableReservationForOrder($reserved['order']);
+
             return $this->respond($payment);
         }
 

@@ -9,6 +9,7 @@ use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Commerce\EntitlementManager;
 use App\Services\Commerce\OrderManager;
+use App\Services\Commerce\Repair\OrderRepairService;
 use App\Services\Commerce\ReportGiftService;
 use App\Services\Commerce\WechatMiniVirtualPaymentService;
 use Database\Seeders\Pr19CommerceSeeder;
@@ -436,13 +437,32 @@ final class ReportGiftPurchaseContractTest extends TestCase
             ])
             ->assertOk();
         $orderNo = (string) $purchased->json('order_no');
+        $signData = json_decode((string) $purchased->json('pay.params.signData'), true, flags: JSON_THROW_ON_ERROR);
         $order = DB::table('orders')->where('order_no', $orderNo)->first();
         $this->assertNotNull($order);
+        app(OrderManager::class)->transition($orderNo, 'canceled', 0, [
+            'payment_state' => 'canceled',
+            'closed_at' => now(),
+        ]);
         app(ReportGiftService::class)->releaseReservationForOrder($order, 'canceled');
         $this->assertSame('canceled', (string) DB::table('report_gift_requests')->where('id', $giftId)->value('status'));
-        $this->withHeaders($this->headersFor($recipientAnonId))
+        $replacement = $this->withHeaders($this->headersFor($recipientAnonId))
             ->postJson('/api/v0.3/attempts/'.$attemptId.'/gift-requests')
             ->assertCreated();
+        $replacementGiftId = (string) $replacement->json('gift_request.id');
+
+        $handled = app(WechatMiniVirtualPaymentService::class)->handleCallback(
+            $this->signedCallbackRequest($this->paidCallbackPayload($orderNo, (string) $signData['outTradeNo']))
+        );
+        $this->assertTrue(
+            (bool) ($handled['ok'] ?? false),
+            json_encode($handled, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+        );
+        $this->assertSame('fulfilled', (string) DB::table('report_gift_requests')->where('id', $giftId)->value('status'));
+        $this->assertSame('canceled', (string) DB::table('report_gift_requests')
+            ->where('id', $replacementGiftId)
+            ->value('status'));
+        $this->assertSame('paid', (string) DB::table('orders')->where('order_no', $orderNo)->value('payment_state'));
 
         $paid = $this->createAndPayGift(
             $this->createAttempt('anon_gift_queue_refund_recipient'),
@@ -456,6 +476,154 @@ final class ReportGiftPurchaseContractTest extends TestCase
         $this->assertSame('refunded', (string) DB::table('report_gift_requests')
             ->where('id', $paid['gift_id'])
             ->value('status'));
+        $this->assertSame(1, DB::table('benefit_grants')
+            ->where('order_no', $paid['order_no'])
+            ->where('status', 'revoked')
+            ->count());
+    }
+
+    public function test_login_exchange_failure_releases_unpayable_order_and_allows_retry(): void
+    {
+        $recipientAnonId = 'anon_gift_login_failure_recipient';
+        $payerAnonId = 'anon_gift_login_failure_payer';
+        $attemptId = $this->createAttempt($recipientAnonId);
+        $created = $this->withHeaders($this->headersFor($recipientAnonId))
+            ->postJson('/api/v0.3/attempts/'.$attemptId.'/gift-requests')
+            ->assertCreated();
+        $token = (string) $created->json('gift_request.public_token');
+        $giftId = (string) $created->json('gift_request.id');
+
+        Http::fake(function ($request) {
+            parse_str((string) parse_url($request->url(), PHP_URL_QUERY), $query);
+            if (($query['js_code'] ?? null) === 'valid-login-code') {
+                return Http::response([
+                    'openid' => 'openid-gift-login-retry',
+                    'session_key' => 'session-key-login-retry',
+                ]);
+            }
+
+            return Http::response([
+                'errcode' => 40029,
+                'errmsg' => 'invalid code',
+            ]);
+        });
+        $failed = $this->withHeaders($this->headersFor($payerAnonId))
+            ->postJson('/api/v0.3/report-gifts/'.$token.'/orders/wechat_mini_virtual', [
+                'idempotency_key' => 'gift-login-failure',
+                'wx_login_code' => 'invalid-login-code',
+            ]);
+        $failed->assertJsonPath('ok', false);
+
+        $gift = DB::table('report_gift_requests')->where('id', $giftId)->first();
+        $this->assertNotNull($gift);
+        $this->assertSame('pending', (string) $gift->status);
+        $this->assertNull($gift->purchased_order_id);
+        $this->assertSame('canceled', (string) DB::table('orders')
+            ->where('target_attempt_id', $attemptId)
+            ->value('payment_state'));
+        $this->assertSame(0, DB::table('payment_attempts')->count());
+
+        $retry = $this->withHeaders($this->headersFor('anon_gift_login_retry_payer'))
+            ->postJson('/api/v0.3/report-gifts/'.$token.'/orders/wechat_mini_virtual', [
+                'idempotency_key' => 'gift-login-retry',
+                'wx_login_code' => 'valid-login-code',
+            ]);
+        $this->assertTrue((bool) $retry->json('ok'), $retry->getContent());
+    }
+
+    public function test_repair_materializes_paid_gift_after_reused_grant_naturally_expires(): void
+    {
+        $recipientAnonId = 'anon_gift_natural_expiry_recipient';
+        $payerAnonId = 'anon_gift_natural_expiry_payer';
+        $attemptId = $this->createAttempt($recipientAnonId);
+        $created = $this->withHeaders($this->headersFor($recipientAnonId))
+            ->postJson('/api/v0.3/attempts/'.$attemptId.'/gift-requests')
+            ->assertCreated();
+        $token = (string) $created->json('gift_request.public_token');
+
+        Http::fake([
+            'https://api.weixin.qq.com/sns/jscode2session*' => Http::response([
+                'openid' => 'openid-gift-payer',
+                'session_key' => 'session-key-natural-expiry',
+            ]),
+        ]);
+        $purchased = $this->withHeaders($this->headersFor($payerAnonId))
+            ->postJson('/api/v0.3/report-gifts/'.$token.'/orders/wechat_mini_virtual', [
+                'idempotency_key' => 'gift-natural-expiry',
+                'wx_login_code' => 'wx-login-natural-expiry',
+            ])
+            ->assertOk();
+        $giftOrderNo = (string) $purchased->json('order_no');
+        $signData = json_decode((string) $purchased->json('pay.params.signData'), true, flags: JSON_THROW_ON_ERROR);
+
+        $selfOrderNo = 'ord_gift_natural_expiry_self';
+        $selfOrderId = $this->insertOrder($selfOrderNo, $attemptId, $recipientAnonId, 'billing');
+        $selfGrant = app(EntitlementManager::class)->grantAttemptUnlock(
+            0,
+            null,
+            $recipientAnonId,
+            'MBTI_REPORT_FULL',
+            $attemptId,
+            $selfOrderNo,
+            'attempt',
+            now()->addHour()->toISOString(),
+            [],
+            ['unlock_source' => 'self_purchase']
+        );
+        $this->assertTrue((bool) ($selfGrant['ok'] ?? false));
+        DB::table('benefit_grants')->where('attempt_id', $attemptId)->update(['source_order_id' => $selfOrderId]);
+
+        $handled = app(WechatMiniVirtualPaymentService::class)->handleCallback(
+            $this->signedCallbackRequest(
+                $this->paidCallbackPayload($giftOrderNo, (string) $signData['outTradeNo'])
+            )
+        );
+        $this->assertTrue(
+            (bool) ($handled['ok'] ?? false),
+            json_encode($handled, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+        );
+        $this->assertSame($selfOrderNo, (string) DB::table('benefit_grants')
+            ->where('attempt_id', $attemptId)
+            ->value('order_no'));
+
+        DB::table('benefit_grants')->where('attempt_id', $attemptId)->update([
+            'expires_at' => now()->subMinute(),
+            'updated_at' => now(),
+        ]);
+        $giftOrder = DB::table('orders')->where('order_no', $giftOrderNo)->first();
+        $this->assertNotNull($giftOrder);
+        $repair = app(OrderRepairService::class)->repairPaidOrder($giftOrder, ['source' => 'gift_contract_test']);
+        $this->assertTrue(
+            (bool) ($repair['ok'] ?? false),
+            json_encode($repair, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+        );
+
+        $grant = DB::table('benefit_grants')->where('attempt_id', $attemptId)->first();
+        $this->assertNotNull($grant);
+        $this->assertSame('active', (string) $grant->status);
+        $this->assertSame($giftOrderNo, (string) $grant->order_no);
+        $this->assertNull($grant->expires_at);
+        $this->assertStringContainsString('"unlock_source":"gift_purchase"', (string) $grant->meta_json);
+    }
+
+    public function test_manual_benefit_revocation_does_not_mislabel_paid_gift_as_refunded(): void
+    {
+        $attemptId = $this->createAttempt('anon_gift_manual_revoke_recipient');
+        $paid = $this->createAndPayGift(
+            $attemptId,
+            'anon_gift_manual_revoke_recipient',
+            'anon_gift_manual_revoke_payer',
+            'manual-revoke'
+        );
+
+        $revoked = app(EntitlementManager::class)->revokeByOrderNo(0, $paid['order_no']);
+        $this->assertTrue((bool) ($revoked['ok'] ?? false));
+        $this->assertSame('fulfilled', (string) DB::table('report_gift_requests')
+            ->where('id', $paid['gift_id'])
+            ->value('status'));
+        $this->assertSame('paid', (string) DB::table('orders')
+            ->where('order_no', $paid['order_no'])
+            ->value('payment_state'));
         $this->assertSame(1, DB::table('benefit_grants')
             ->where('order_no', $paid['order_no'])
             ->where('status', 'revoked')

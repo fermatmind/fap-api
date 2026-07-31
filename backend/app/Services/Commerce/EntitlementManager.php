@@ -537,7 +537,9 @@ class EntitlementManager
             ];
         }
 
-        $isGiftOrder = Schema::hasTable('report_gift_requests')
+        $isActualRefund = strtolower(trim((string) ($order->payment_state ?? $order->status ?? ''))) === 'refunded';
+        $isGiftOrder = $isActualRefund
+            && Schema::hasTable('report_gift_requests')
             && DB::table('report_gift_requests')
                 ->where('purchased_order_id', (string) ($order->id ?? ''))
                 ->exists();

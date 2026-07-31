@@ -390,17 +390,83 @@ final class ReportGiftService
     /**
      * @return array{ok:bool,error?:string,message?:string}
      */
+    public function restoreTerminalGiftForVerifiedPayment(
+        object $gift,
+        object $order,
+        bool $verifiedPaidEvent = false
+    ): array {
+        $identityGuard = $this->validateGiftOrderIdentity($gift, $order);
+        if (($identityGuard['ok'] ?? false) !== true) {
+            return $identityGuard;
+        }
+
+        $orderIsPaid = in_array(
+            strtolower(trim((string) ($order->payment_state ?? $order->status ?? ''))),
+            ['paid', 'fulfilled'],
+            true
+        );
+        if (! $verifiedPaidEvent && ! $orderIsPaid) {
+            return $this->error(
+                'GIFT_PAYMENT_NOT_VERIFIED',
+                'gift request can only be restored for a verified paid order.',
+                409
+            );
+        }
+
+        $status = $this->effectiveStatus($gift);
+        if (! in_array($status, [self::STATUS_CANCELED, self::STATUS_EXPIRED], true)) {
+            return ['ok' => true];
+        }
+
+        $competitors = DB::table('report_gift_requests')
+            ->where('org_id', (int) $gift->org_id)
+            ->where('target_attempt_id', (string) $gift->target_attempt_id)
+            ->where('id', '<>', (string) $gift->id)
+            ->lockForUpdate()
+            ->get();
+        foreach ($competitors as $competitor) {
+            $competitorStatus = $this->effectiveStatus($competitor);
+            if (in_array($competitorStatus, [self::STATUS_PURCHASING, self::STATUS_FULFILLED], true)) {
+                return $this->error(
+                    'GIFT_PAYMENT_CONFLICT',
+                    'another gift request is already being purchased or fulfilled.',
+                    409
+                );
+            }
+            if ($competitorStatus === self::STATUS_PENDING) {
+                DB::table('report_gift_requests')
+                    ->where('id', (string) $competitor->id)
+                    ->where('status', self::STATUS_PENDING)
+                    ->update([
+                        'status' => self::STATUS_CANCELED,
+                        'canceled_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+            }
+        }
+
+        $restored = DB::table('report_gift_requests')
+            ->where('id', (string) $gift->id)
+            ->whereIn('status', [self::STATUS_CANCELED, self::STATUS_EXPIRED])
+            ->update([
+                'status' => self::STATUS_PURCHASING,
+                'canceled_at' => null,
+                'updated_at' => now(),
+            ]);
+
+        return $restored === 1
+            ? ['ok' => true]
+            : $this->error('GIFT_REQUEST_STATUS_CHANGED', 'gift request status changed.', 409);
+    }
+
+    /**
+     * @return array{ok:bool,error?:string,message?:string}
+     */
     public function validateBoundGiftOrder(object $gift, object $order): array
     {
-        if ((int) ($gift->org_id ?? -1) !== (int) ($order->org_id ?? -2)
-            || trim((string) ($gift->target_attempt_id ?? '')) !== trim((string) ($order->target_attempt_id ?? ''))
-            || strtoupper(trim((string) ($gift->sku ?? ''))) !== strtoupper(trim((string) ($order->sku ?? '')))
-            || ! $this->actorMatchesPurchaser($gift, $order->user_id ?? null, $order->anon_id ?? null)) {
-            return [
-                'ok' => false,
-                'error' => 'GIFT_ORDER_MISMATCH',
-                'message' => 'gift request does not match the paid order.',
-            ];
+        $identityGuard = $this->validateGiftOrderIdentity($gift, $order);
+        if (($identityGuard['ok'] ?? false) !== true) {
+            return $identityGuard;
         }
         if (! in_array($this->effectiveStatus($gift), [self::STATUS_PURCHASING, self::STATUS_FULFILLED], true)) {
             return [
@@ -428,9 +494,6 @@ final class ReportGiftService
         $guard = $this->validateBoundGiftOrder($gift, $order);
         if (($guard['ok'] ?? false) !== true) {
             return $guard;
-        }
-        if ($this->effectiveStatus($gift) === self::STATUS_FULFILLED) {
-            return ['ok' => true, 'idempotent' => true];
         }
 
         $existingGrant = DB::table('benefit_grants')
@@ -539,6 +602,69 @@ final class ReportGiftService
             ->where('purchased_order_id', $orderId)
             ->where('status', self::STATUS_PURCHASING)
             ->update($updates);
+    }
+
+    public function releaseUnpayableReservationForOrder(object $order): void
+    {
+        $orderNo = trim((string) ($order->order_no ?? ''));
+        $orgId = (int) ($order->org_id ?? 0);
+        if ($orderNo === '' || $this->orders->latestPaymentAttemptForOrder($orderNo, $orgId) !== null) {
+            return;
+        }
+
+        DB::transaction(function () use ($orderNo, $orgId): void {
+            $freshOrder = DB::table('orders')
+                ->where('order_no', $orderNo)
+                ->where('org_id', $orgId)
+                ->lockForUpdate()
+                ->first();
+            if ($freshOrder === null || $this->orders->latestPaymentAttemptForOrder($orderNo, $orgId) !== null) {
+                return;
+            }
+
+            $paymentState = strtolower(trim((string) ($freshOrder->payment_state ?? '')));
+            if (in_array($paymentState, ['paid', 'refunded'], true)) {
+                return;
+            }
+
+            $transition = $this->orders->transition($orderNo, 'canceled', $orgId, [
+                'payment_state' => 'canceled',
+                'closed_at' => now(),
+            ]);
+            if (($transition['ok'] ?? false) !== true) {
+                return;
+            }
+
+            DB::table('report_gift_requests')
+                ->where('purchased_order_id', (string) $freshOrder->id)
+                ->where('status', self::STATUS_PURCHASING)
+                ->update([
+                    'purchased_order_id' => null,
+                    'purchased_by_user_id' => null,
+                    'purchased_by_anon_id' => null,
+                    'status' => self::STATUS_PENDING,
+                    'updated_at' => now(),
+                ]);
+        });
+    }
+
+    /**
+     * @return array{ok:bool,error?:string,message?:string}
+     */
+    private function validateGiftOrderIdentity(object $gift, object $order): array
+    {
+        if ((int) ($gift->org_id ?? -1) !== (int) ($order->org_id ?? -2)
+            || trim((string) ($gift->target_attempt_id ?? '')) !== trim((string) ($order->target_attempt_id ?? ''))
+            || strtoupper(trim((string) ($gift->sku ?? ''))) !== strtoupper(trim((string) ($order->sku ?? '')))
+            || ! $this->actorMatchesPurchaser($gift, $order->user_id ?? null, $order->anon_id ?? null)) {
+            return [
+                'ok' => false,
+                'error' => 'GIFT_ORDER_MISMATCH',
+                'message' => 'gift request does not match the paid order.',
+            ];
+        }
+
+        return ['ok' => true];
     }
 
     private function findByToken(string $token, int $orgId): ?object

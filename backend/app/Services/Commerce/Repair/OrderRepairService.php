@@ -69,6 +69,18 @@ final class OrderRepairService
         $attemptMeta = $this->resolveAttemptMeta((int) $freshOrder->org_id, $attemptId);
         $giftService = app(ReportGiftService::class);
         $giftRequest = $giftService->findBoundGiftForOrder($freshOrder, true);
+        if ($giftRequest !== null) {
+            $restored = $giftService->restoreTerminalGiftForVerifiedPayment($giftRequest, $freshOrder);
+            if (! ($restored['ok'] ?? false)) {
+                return $this->failure(
+                    (string) ($restored['error'] ?? 'GIFT_REQUEST_NOT_PAYABLE'),
+                    (string) ($restored['message'] ?? 'gift request is not payable.'),
+                    $freshOrder,
+                    $context
+                );
+            }
+            $giftRequest = $giftService->findBoundGiftForOrder($freshOrder, true);
+        }
         $ownershipGuard = $giftRequest !== null
             ? $giftService->validateBoundGiftOrder($giftRequest, $freshOrder)
             : $this->validateAttemptOwnershipForOrder($freshOrder, $attemptMeta);
@@ -158,7 +170,7 @@ final class OrderRepairService
                 $benefitCode,
                 $scopeOverride,
                 $expiresAt,
-                $modulesIncluded
+                $modulesIncluded ?? []
             )
             : $this->entitlements->grantAttemptUnlock(
                 (int) $freshOrder->org_id,
