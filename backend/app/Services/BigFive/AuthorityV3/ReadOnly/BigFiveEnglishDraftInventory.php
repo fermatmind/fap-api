@@ -1012,12 +1012,16 @@ final class BigFiveEnglishDraftInventory
             if ($this->containsImageMetadataTag($value)) {
                 return true;
             }
-            if (preg_match('/<[^>]+[\x20\t\r\n\f](?:src|srcset|poster|background)\s*=/i', $value) === 1
-                || preg_match(
-                    '/<input\b[^>]*[\x20\t\r\n\f]type\s*=\s*(?:"image"|\x27image\x27|image\b)/i',
-                    $value,
-                ) === 1) {
-                return true;
+            foreach ($this->htmlTags($value) as $tag) {
+                foreach (['src', 'srcset', 'poster', 'background'] as $attribute) {
+                    if ($this->htmlAttributeValue($tag, $attribute) !== null) {
+                        return true;
+                    }
+                }
+                if (preg_match('/^<input\b/i', $tag) === 1
+                    && strtolower($this->htmlAttributeValue($tag, 'type') ?? '') === 'image') {
+                    return true;
+                }
             }
             if ($this->containsCssImageReference($value)) {
                 return true;
@@ -1074,8 +1078,7 @@ final class BigFiveEnglishDraftInventory
             return true;
         }
 
-        preg_match_all('/<[^>]+>/s', $value, $tags);
-        foreach ($tags[0] as $tag) {
+        foreach ($this->htmlTags($value) as $tag) {
             $style = $this->htmlAttributeValue($tag, 'style');
             if ($style === null) {
                 continue;
@@ -1131,8 +1134,10 @@ final class BigFiveEnglishDraftInventory
 
     private function containsImageMetadataTag(string $value): bool
     {
-        preg_match_all('/<(?:meta|link)\b[^>]*>/i', $value, $tags);
-        foreach ($tags[0] as $tag) {
+        foreach ($this->htmlTags($value) as $tag) {
+            if (preg_match('/^<(?:meta|link)\b/i', $tag) !== 1) {
+                continue;
+            }
             if (preg_match('/^<meta\b/i', $tag) === 1) {
                 foreach (['property', 'name', 'itemprop'] as $attribute) {
                     $metadataKey = strtolower($this->htmlAttributeValue($tag, $attribute) ?? '');
@@ -1161,6 +1166,46 @@ final class BigFiveEnglishDraftInventory
         }
 
         return false;
+    }
+
+    /** @return list<string> */
+    private function htmlTags(string $value): array
+    {
+        $tags = [];
+        $length = strlen($value);
+        $offset = 0;
+        while (($start = strpos($value, '<', $offset)) !== false) {
+            $quote = null;
+            for ($index = $start + 1; $index < $length; $index++) {
+                $character = $value[$index];
+                if ($quote !== null) {
+                    if ($character === $quote) {
+                        $quote = null;
+                    }
+
+                    continue;
+                }
+                if ($character === '"' || $character === "'") {
+                    $quote = $character;
+
+                    continue;
+                }
+                if ($character !== '>') {
+                    continue;
+                }
+                $tag = substr($value, $start, $index - $start + 1);
+                if (preg_match('/^<\/?[a-z]/i', $tag) === 1) {
+                    $tags[] = $tag;
+                }
+                $offset = $index + 1;
+
+                continue 2;
+            }
+
+            break;
+        }
+
+        return $tags;
     }
 
     private function htmlAttributeValue(string $tag, string $attribute): ?string

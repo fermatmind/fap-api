@@ -321,6 +321,7 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             '<svg viewBox="0 0 10 10"><path d="M0 0h10v10z"/></svg>',
             '<object data="https://private.invalid/embedded-image.svg"></object>',
             '<div style="background-image:url(https://private.invalid/css-image.webp)">Text</div>',
+            '<div data-note=">" style="background-image:url(hero.webp)">Text</div>',
             '<div style="background-image:\75rl(hero.webp)">Text</div>',
             '<div style="background-\69mage:url(hero.webp)">Text</div>',
             '<div style="background-image:&#117;rl(hero.webp)">Text</div>',
