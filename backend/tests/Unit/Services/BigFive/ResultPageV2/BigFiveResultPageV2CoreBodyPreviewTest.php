@@ -3887,6 +3887,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             "+            ->name('api.v0_3.report_gifts.orders.wechat_mini_virtual.store');",
         ];
         $orderRepairServiceChangedLines = $this->paidReportGiftingOrderRepairChangedLines();
+        $orderRepairServiceHunkHeaders = $this->paidReportGiftingOrderRepairHunkHeaders();
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
             $changed,
@@ -3894,6 +3895,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             '',
             routeChangedLines: $routeChangedLines,
             orderRepairServiceChangedLines: $orderRepairServiceChangedLines,
+            orderRepairServiceHunkHeaders: $orderRepairServiceHunkHeaders,
         ));
         $this->assertSame(
             ['backend/app/Services/Commerce/Repair/OrderRepairService.php'],
@@ -3905,6 +3907,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 orderRepairServiceChangedLines: [
                     ...$orderRepairServiceChangedLines,
                     '+        return true;',
+                ],
+                orderRepairServiceHunkHeaders: $orderRepairServiceHunkHeaders,
+            ),
+        );
+        $this->assertSame(
+            ['backend/app/Services/Commerce/Repair/OrderRepairService.php'],
+            $this->mbtiImpactingRuntimeChanges(
+                $changed,
+                '',
+                '',
+                routeChangedLines: $routeChangedLines,
+                orderRepairServiceChangedLines: $orderRepairServiceChangedLines,
+                orderRepairServiceHunkHeaders: [
+                    '@@ -10,0 +11 @@',
+                    ...array_slice($orderRepairServiceHunkHeaders, 1),
                 ],
             ),
         );
@@ -6787,6 +6804,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ?array $llmsControllerChangedLines = null,
         ?array $generateReportSnapshotJobChangedLines = null,
         ?array $orderRepairServiceChangedLines = null,
+        ?array $orderRepairServiceHunkHeaders = null,
     ): array {
         $impacting = [];
         $soloOwnerReviewFoundationAddedFileSet = array_fill_keys(
@@ -7242,7 +7260,12 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                         $repoRoot !== '' && $baseRef !== ''
                             ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
                             : []
-                    )
+                    ),
+                    $orderRepairServiceHunkHeaders ?? (
+                        $repoRoot !== '' && $baseRef !== ''
+                            ? $this->hunkHeadersForFile($repoRoot, $baseRef, $file)
+                            : []
+                    ),
                 )
             ) {
                 continue;
@@ -9645,10 +9668,39 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
     /**
      * @param  list<string>  $changedLines
+     * @param  list<string>  $hunkHeaders
      */
-    private function orderRepairServiceDiffIsPaidReportGiftingOnly(array $changedLines): bool
+    private function orderRepairServiceDiffIsPaidReportGiftingOnly(
+        array $changedLines,
+        array $hunkHeaders
+    ): bool {
+        return $changedLines === $this->paidReportGiftingOrderRepairChangedLines()
+            && $hunkHeaders === $this->paidReportGiftingOrderRepairHunkHeaders();
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function paidReportGiftingOrderRepairHunkHeaders(): array
     {
-        return $changedLines === $this->paidReportGiftingOrderRepairChangedLines();
+        return [
+            '@@ -9,0 +10 @@',
+            '@@ -33 +34,14 @@ public function repairPaidOrder(object $order, array $context = []): array',
+            '@@ -41,0 +56,8 @@ public function repairPaidOrder(object $order, array $context = []): array',
+            '@@ -69,2 +91,18 @@ public function repairPaidOrder(object $order, array $context = []): array',
+            '@@ -72,2 +110,2 @@ public function repairPaidOrder(object $order, array $context = []): array',
+            '@@ -112,2 +150,2 @@ public function repairPaidOrder(object $order, array $context = []): array',
+            '@@ -149,11 +187,20 @@ public function repairPaidOrder(object $order, array $context = []): array',
+            '@@ -221,2 +268,5 @@ public function hasActiveGrantForOrder(object $order): bool',
+            '@@ -234,0 +285,4 @@ public function resolveActiveGrantForOrder(object $order, ?string $benefitCode =',
+            '@@ -253,0 +308,3 @@ public function resolveActiveGrantForOrder(object $order, ?string $benefitCode =',
+            '@@ -270,0 +328,3 @@ public function requiresPaidOrderRepair(object $order): bool',
+            '@@ -418 +478 @@ private function emptyAttemptMeta(): array',
+            '@@ -429 +489 @@ private function reloadOrder(object $order): ?object',
+            '@@ -431,2 +491,6 @@ private function reloadOrder(object $order): ?object',
+            '@@ -435 +499 @@ private function reloadOrder(object $order): ?object',
+            '@@ -437,2 +501,11 @@ private function reloadOrder(object $order): ?object',
+        ];
     }
 
     /**
@@ -15629,6 +15681,30 @@ DIFF;
             },
             $output,
         )));
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function hunkHeadersForFile(string $repoRoot, string $baseRef, string $file): array
+    {
+        $command = [
+            'git',
+            '-C',
+            $repoRoot,
+            'diff',
+            '--unified=0',
+            "{$baseRef}...HEAD",
+            '--',
+            $file,
+        ];
+        exec(implode(' ', array_map('escapeshellarg', $command)), $output, $exitCode);
+        $this->assertSame(0, $exitCode);
+
+        return array_values(array_filter(
+            $output,
+            static fn (string $line): bool => str_starts_with($line, '@@ '),
+        ));
     }
 
     /**

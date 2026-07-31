@@ -551,8 +551,12 @@ class WebhookEntitlementService
                     ], $anonId);
                     $eventUserId = $order->user_id ? (string) $order->user_id : $userId;
                     $repairService = app(OrderRepairService::class);
+                    $giftGrantIntentionallyRevoked = $giftRequest !== null
+                        && $orderAlreadySettled
+                        && strtolower(trim((string) ($order->grant_state ?? ''))) === \App\Models\Order::GRANT_STATE_REVOKED;
                     $grantMissingOnSettledOrder = $kind === 'report_unlock'
                         && $orderAlreadySettled
+                        && ! $giftGrantIntentionallyRevoked
                         && ! $repairService->hasActiveGrantForOrder($order);
 
                     $retryingPostCommitOnly = $inserted === 0
@@ -616,7 +620,7 @@ class WebhookEntitlementService
                             return $this->core->semanticReject($code, $message);
                         }
 
-                        if (! $retryingPostCommitOnly) {
+                        if (! $retryingPostCommitOnly && ! $giftGrantIntentionallyRevoked) {
                             $scopeOverride = trim((string) ($skuRow->scope ?? ''));
                             if ($scopeOverride === '') {
                                 $scopeOverride = 'attempt';

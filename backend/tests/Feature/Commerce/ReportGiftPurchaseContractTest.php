@@ -843,6 +843,27 @@ final class ReportGiftPurchaseContractTest extends TestCase
             ->where('status', 'revoked')
             ->count());
 
+        $replayedPayload = $this->paidCallbackPayload(
+            $paid['order_no'],
+            $paid['provider_order_no']
+        );
+        $replayedPayload['WeChatPayInfo']['TransactionId'] = 'wx-gift-manual-revoke-replay';
+        $replayed = app(WechatMiniVirtualPaymentService::class)->handleCallback(
+            $this->signedCallbackRequest($replayedPayload)
+        );
+        $this->assertTrue(
+            (bool) ($replayed['ok'] ?? false),
+            json_encode($replayed, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+        );
+        $this->assertTrue((bool) ($replayed['duplicate'] ?? false));
+        $this->assertSame('revoked', (string) DB::table('orders')
+            ->where('order_no', $paid['order_no'])
+            ->value('grant_state'));
+        $this->assertSame(1, DB::table('benefit_grants')
+            ->where('order_no', $paid['order_no'])
+            ->where('status', 'revoked')
+            ->count());
+
         $giftOrder = DB::table('orders')->where('order_no', $paid['order_no'])->first();
         $this->assertNotNull($giftOrder);
         $this->assertFalse(app(OrderRepairService::class)->requiresPaidOrderRepair($giftOrder));
