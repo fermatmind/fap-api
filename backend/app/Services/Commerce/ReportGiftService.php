@@ -517,6 +517,30 @@ final class ReportGiftService
             ]);
     }
 
+    public function releaseReservationForOrder(object $order, string $paymentState): void
+    {
+        $orderId = trim((string) ($order->id ?? ''));
+        if ($orderId === '') {
+            return;
+        }
+
+        $status = strtolower(trim($paymentState)) === 'expired'
+            ? self::STATUS_EXPIRED
+            : self::STATUS_CANCELED;
+        $updates = [
+            'status' => $status,
+            'updated_at' => now(),
+        ];
+        if ($status === self::STATUS_CANCELED) {
+            $updates['canceled_at'] = now();
+        }
+
+        DB::table('report_gift_requests')
+            ->where('purchased_order_id', $orderId)
+            ->where('status', self::STATUS_PURCHASING)
+            ->update($updates);
+    }
+
     private function findByToken(string $token, int $orgId): ?object
     {
         if (preg_match('/^[A-Za-z0-9_-]{43}$/', trim($token)) !== 1) {
@@ -621,6 +645,7 @@ final class ReportGiftService
             self::STATUS_PURCHASING,
             self::STATUS_FULFILLED,
             self::STATUS_CANCELED,
+            self::STATUS_EXPIRED,
             self::STATUS_REFUNDED,
         ], true) ? $status : self::STATUS_CANCELED;
     }

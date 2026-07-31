@@ -382,6 +382,10 @@ class WebhookEntitlementService
 
                             return $transition;
                         }
+                        app(ReportGiftService::class)->releaseReservationForOrder(
+                            $order,
+                            $nonSuccessPaymentState
+                        );
 
                         if ($boundPaymentAttempt !== null) {
                             $this->core->orderManager()->advancePaymentAttempt((string) ($boundPaymentAttempt->id ?? ''), [
