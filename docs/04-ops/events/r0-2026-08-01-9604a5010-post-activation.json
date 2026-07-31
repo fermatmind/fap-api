@@ -1,0 +1,89 @@
+{
+  "event_id": "r0-2026-08-01-9604a5010",
+  "timestamp": "2026-07-31T16:50:00Z",
+  "classification": "worker_convergence_failure",
+  "deploy": {
+    "sha": "9604a5010927dc2a50dfeb752f93be0452700f84",
+    "release": "r2-20260801-30647155260-1",
+    "release_id": "r2-20260801",
+    "deploy_run_id": 30647155260,
+    "deploy_mode": "standard",
+    "staging_run_id": 30645549132,
+    "symlink": "releases/r2-20260801-30647155260-1",
+    "deploy_lock": false,
+    "activated_at": "2026-08-01 00:28 UTC+8"
+  },
+  "services": {
+    "php_fpm": {
+      "active": true,
+      "version": "8.4",
+      "pm_max_children": 5,
+      "process_count": 6
+    },
+    "nginx": {
+      "active": true
+    },
+    "queue_workers": {
+      "fap-queue-default-high_00": "RUNNING",
+      "fap-queue-default-high_01": "RUNNING",
+      "fap-queue-ops_00": "RUNNING",
+      "fap-queue-reports_00": "RUNNING",
+      "fap-queue-reports_01": "RUNNING"
+    }
+  },
+  "health": {
+    "loopback_healthz": {
+      "ok": true,
+      "status": "pass"
+    },
+    "public_flags_api": {
+      "http_code": 200,
+      "latency_ms": 380,
+      "status": "pass"
+    },
+    "public_bigfive_hub_zh_cn": {
+      "http_code": 200,
+      "latency_ms": 210,
+      "status": "pass"
+    },
+    "www_fermatmind_com": {
+      "http_code": 308,
+      "status": "pass_redirect"
+    }
+  },
+  "resources": {
+    "disk_free_gb": 98,
+    "disk_used_pct": 14,
+    "memory_total_mb": 3499,
+    "memory_available_mb": 1697
+  },
+  "warnings": [
+    {
+      "severity": "high",
+      "type": "pm_max_children_reached",
+      "count_last_10min": 10,
+      "detail": "pm.max_children=5 repeatedly hit. Deployed Redis cache layer (#3459) should reduce ContentPage worker time from 300ms to <10ms, but career discoverability-manifest routes remain slow. Consider raising pm.max_children or isolating SAEP executor."
+    },
+    {
+      "severity": "high",
+      "type": "nginx_upstream_timeout",
+      "count_last_15min": 8,
+      "detail": "Upstream timeout on career/first-wave/discoverability-manifest routes. Same root cause as PM saturation.",
+      "affected_routes": [
+        "GET /api/v0.5/career/first-wave/discoverability-manifest?locale=zh-CN",
+        "GET /api/v0.5/career/first-wave/discoverability-manifest?locale=en",
+        "GET /api/v0.5/career/jobs/food-preparation-workers/salary-asset?locale=zh-CN",
+        "GET /api/v0.5/career/jobs/food-preparation-workers/ai-impact-asset?locale=zh-CN"
+      ]
+    }
+  ],
+  "prs_deployed": [
+    { "number": 3448, "title": "API-GIFT-01: paid report gifting contract" },
+    { "number": 3459, "title": "Redis cache layer with model-driven invalidation" },
+    { "number": 3460, "title": "Tier 4 healthz probes (cache hit rate + P95)" },
+    { "number": 3461, "title": "Healthz Redis catch non-blocking fix" },
+    { "number": 3462, "title": "Healthz P95 exceedance non-blocking fix" }
+  ],
+  "changes": "read_only_no_changes",
+  "operator": "fermatmind-codex-r0"
+}
