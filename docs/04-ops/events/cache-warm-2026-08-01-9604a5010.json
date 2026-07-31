@@ -1,0 +1,52 @@
+{
+  "authorization_id": "cache-warm-2026-08-01-9604a5010",
+  "timestamp": "2026-07-31T17:01:00Z",
+  "deploy_sha": "9604a5010927dc2a50dfeb752f93be0452700f84",
+  "release": "r2-20260801-30647155260-1",
+  "r1_source_probe": {
+    "status": "pass",
+    "rounds": 5,
+    "stable_rounds": 3,
+    "targets": {
+      "L1_BigFive_zh": { "bytes": 48847, "latency_range_ms": "184-393" },
+      "L2_BigFive_en": { "bytes": 31557, "latency_range_ms": "187-329" },
+      "L3_Career_zh": { "bytes": 28812, "latency_range_ms": "57-91" }
+    }
+  },
+  "r1_cold_build": {
+    "status": "pass",
+    "rounds": 3,
+    "results": [
+      { "round": 1, "L1": "200·216ms", "L2": "200·181ms", "L3": "200·122ms" },
+      { "round": 2, "L1": "200·153ms", "L2": "200·160ms", "L3": "200·93ms" },
+      { "round": 3, "L1": "200·139ms", "L2": "200·297ms", "L3": "200·120ms" }
+    ],
+    "byte_consistent": true
+  },
+  "cache_warm": {
+    "status": "executed",
+    "tasks": [
+      {
+        "command": "career:warm-public-authority-cache --refresh-if-changed",
+        "result": "rebuilt",
+        "fingerprint_sha256": "cfe690cda126ca7e22ff518c7d92ed54bb540c1498800fb2bd3baef93bd0ca19",
+        "user": "www-data"
+      },
+      {
+        "command": "mbti:prewarm",
+        "result": "completed",
+        "user": "www-data"
+      },
+      {
+        "command": "verify_sitemap_source_cache_warm.sh",
+        "result": "degraded (command_failed, strict=false)",
+        "non_blocking": true
+      }
+    ]
+  },
+  "notes": [
+    "CACHE_STORE=file on production (not Redis). ContentPage file cache is rebuilt in <10ms.",
+    "Sitemap source warm degraded but non-blocking (strict=false).",
+    "MBTI public hub endpoint (/api/v0.5/personality-content-assets/mbti/hub/mbti) returns 404 — not in this deployment scope."
+  ]
+}
