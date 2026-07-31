@@ -102274,5 +102274,126 @@
       }
     ],
     "updated_at": "2026-07-31T02:53:23Z"
+  },
+  "EN-PARITY-W1-MBTI-RESULT-IMPORTER-01": {
+    "id": "EN-PARITY-W1-MBTI-RESULT-IMPORTER-01",
+    "repo": "fap-api",
+    "title": "EN-PARITY-W1-MBTI-RESULT-IMPORTER-01: add exact-package result dry-run importer",
+    "base": "main",
+    "branch": "codex/en-parity-w1-mbti-result-importer-01",
+    "depends_on": [
+      "EN-PARITY-W1-MBTI-RESULT-ASSETS-01"
+    ],
+    "status": "github_checks_pending",
+    "commit_sha": "26add1aa0ffd5f2da53bb516206c34afedd1de2a",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3446",
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The operator supplied a continuous execution /goal with this exact PR id, title, repository, dependency, scope, checks, and controlled-action boundaries."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "PR #3429 is MERGED at a460acd0ff2c968c93fb5c005e77de1b0599971e and the exact frozen result package SHA is 9325013b870fd2496efc0882656240f91ce28ff4faaf1da42fb3dde3577b0ed3."
+      },
+      "preflight": {
+        "status": "passed",
+        "evidence": "Created a clean isolated branch/worktree from origin/main 06286bfcaa3b5a60bfdee52ff19dcb92b5a1b240 after PR05 closeout, then rebased cleanly as main advanced. No matching local branch, remote branch, or open PR existed at start."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "Importer feature suite passed 8 tests / 251 assertions, including manifest-first authentication, symlink/hard-link rejection, descriptor identity binding, and the frozen-size-plus-one read bound; runtime-freeze classifier passed 1 test / 2 assertions; scoped Pint passed; exact-package command returned 46 redacted rows with zero writes/private reads; API route inventory returned 225 lines; YAML, JSON, and diff checks passed. Before the same-scope review fixes, the process guard was clear and scripts/ci_verify_mbti.sh completed with exit 0, including integrated scripts/verify_mbti.sh, the complete Big Five gate (1623 tests / 195834 assertions), and all remaining safety gates."
+      },
+      "changed_file_scope": {
+        "status": "passed",
+        "evidence": "Exact changed-file validation matches all 7 changed paths to the manifest allowlist. Verifier-generated BIG5_OCEAN compiled drift was restored. Review-found unrelated ledger drift was restored exactly from latest origin/main before the PR06 entry was uniquely reapplied."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": "Exact implementation head 26add1aa0ffd5f2da53bb516206c34afedd1de2a contains the bounded-read review fix and passed focused local validation. Its metadata-tail head must repeat the required GitHub checks before merge."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "private_payload_read": false,
+    "api_runtime_change": false,
+    "activation_allowed": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "history": [
+      {
+        "at": "2026-07-31T03:10:35Z",
+        "status": "in_progress",
+        "note": "Started PR06 from a clean isolated origin/main after verifying PR04 merged and binding the frozen result package SHA plus manifest-byte SHA. Scope is a redacted no-write 46-row importer plan only."
+      },
+      {
+        "at": "2026-07-31T03:23:08Z",
+        "status": "local_verified",
+        "note": "All focused and full local gates passed. The importer planned 46 redacted rows with zero writes/private reads; the integrated MBTI verifier and full CI safety chain exited 0; exact scope validation passed for 7 allowlisted paths."
+      },
+      {
+        "at": "2026-07-31T03:25:30Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the scoped branch and opened PR #3446."
+      },
+      {
+        "at": "2026-07-31T03:45:13Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "All required checks on the prior head passed. Two automated review findings exposed non-unique ledger patching plus concurrent main ledger additions. Restored both train files exactly from latest origin/main and reapplied only the uniquely keyed PR06 entries; corrected head must repeat required checks."
+      },
+      {
+        "at": "2026-07-31T03:47:53Z",
+        "status": "github_checks_pending",
+        "note": "Rebased cleanly onto latest origin/main 012392aaf0d83375414f8eb9ad010f6c7c577714. Focused importer, classifier, Pint, exact dry-run, YAML/JSON, diff, and exact 7-path scope checks passed; corrected implementation commit is b96f227786a074dca46de865615dc24ae3fe5191."
+      },
+      {
+        "at": "2026-07-31T03:58:34Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Inspected the exact-head P2 review before editing. Manifest bytes are now authenticated against the frozen manifest SHA before any declared file path or symlink is followed. A malicious declared-path regression proves only package_manifest.json is read; importer suite passes 5 tests / 242 assertions, scoped Pint and exact 46-row dry-run pass, and scope remains exactly 7/7 paths."
+      },
+      {
+        "at": "2026-07-31T04:08:49Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Inspected the next exact-head P2 review before editing. Every exact-package file now rejects symbolic links before File::isFile/File::get and must resolve inside the selected package directory. An outside-target symlink regression fails before target bytes are read; importer suite passes 6 tests / 247 assertions, scoped Pint and exact dry-run pass. Rebased cleanly onto latest origin/main b115c29775e02064f6e8168a6b1545e239d10718; implementation head is f8be7cb152ec3c425689bdb8d906f829faea4660."
+      },
+      {
+        "at": "2026-07-31T04:18:14Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Inspected the next exact-head P2 review before editing. Exact-package files must now have exactly one filesystem link before any bytes are read, closing the hard-link path to outside private data. The hard-link regression fails with package_file_hardlink_rejected; importer suite passes 7 tests / 251 assertions, scoped Pint and exact dry-run pass."
+      },
+      {
+        "at": "2026-07-31T04:20:20Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Proactive same-boundary follow-up removed the check/read race: each file is opened once, fstat identity and single-link state must match the pre-open lstat, and bytes are read from that verified descriptor. Rebuilt assets still fail before parsing; importer suite passes 7 tests / 249 assertions, scoped Pint and exact dry-run pass."
+      },
+      {
+        "at": "2026-07-31T04:31:35Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Inspected the exact-head P2 size-bound finding before editing. The importer now allowlists every frozen filename and requires its exact frozen byte length both before and after opening the verified descriptor, so oversized or sparse replacements fail before materialization. Importer suite passes 7 tests / 249 assertions, scoped Pint and exact dry-run pass."
+      },
+      {
+        "at": "2026-07-31T04:42:00Z",
+        "status": "ready_to_merge",
+        "note": "Exact implementation head a80741a186cf01975798e1969e247c72b48f9cbd passed all nine applicable required checks with staging parity skipped, has CLEAN/MERGEABLE status, and retains exact 7/7 remote scope. All five review findings were fixed and replied to; the latest head has no new actionable review. This readiness metadata tail must repeat required checks before squash merge."
+      },
+      {
+        "at": "2026-07-31T04:52:07Z",
+        "status": "github_checks_pending",
+        "note": "Inspected the metadata-tail exact-head P2 before editing. Descriptor reads are now bounded to frozen expectedBytes + 1 and reject every non-exact result, preventing concurrent growth from causing unbounded memory consumption. A source-level regression locks both the bounded call and exact-length condition; importer suite passes 8 tests / 251 assertions, scoped Pint, exact 46-row dry-run, and diff checks pass. Exact implementation head is 26add1aa0ffd5f2da53bb516206c34afedd1de2a."
+      }
+    ],
+    "updated_at": "2026-07-31T04:52:07Z"
   }
 }
