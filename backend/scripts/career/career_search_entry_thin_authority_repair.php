@@ -92,11 +92,21 @@ function repairManifestSlugs(string $currentRelease, string $manifestSha256): ar
 
 function approvedWorkbookPath(string $deployPath): ?string
 {
+    $transportPath = trim((string) getenv('CAREER_THIN_AUTHORITY_WORKBOOK_PATH'));
     $candidates = [
         rtrim($deployPath, '/').'/shared/private/career-assets/'.EXPECTED_WORKBOOK_BASENAME,
         rtrim($deployPath, '/').'/shared/career-assets/'.EXPECTED_WORKBOOK_BASENAME,
         '/tmp/'.EXPECTED_WORKBOOK_BASENAME,
     ];
+    if ($transportPath !== '') {
+        if (preg_match(
+            '#^/tmp/fermat_career_assets_v4_2_v9_d23b_schema_repaired-[1-9][0-9]*-[1-9][0-9]*\.xlsx$#',
+            $transportPath,
+        ) !== 1) {
+            throw new RuntimeException('INVALID_WORKBOOK_TRANSPORT_PATH');
+        }
+        array_unshift($candidates, $transportPath);
+    }
     $matches = [];
     foreach ($candidates as $candidate) {
         if (is_file($candidate) && is_readable($candidate)

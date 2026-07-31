@@ -54,6 +54,26 @@ on:
         description: Exact 10-URL thin target set SHA256
         required: true
         type: string
+      failed_preflight_run_id:
+        description: Exact workbook-unavailable preflight run
+        required: true
+        type: string
+      failed_preflight_run_attempt:
+        description: Exact workbook-unavailable preflight attempt
+        required: true
+        type: string
+      expected_failed_preflight_receipt_sha256:
+        description: Exact workbook-unavailable preflight receipt SHA256
+        required: true
+        type: string
+      expected_failed_preflight_artifact_digest:
+        description: Exact workbook-unavailable preflight artifact digest
+        required: true
+        type: string
+      source_workbook_release_tag:
+        description: Exact private draft-release transport tag for the reviewed workbook
+        required: true
+        type: string
       preflight_run_id:
         description: Repair mode only; exact successful preflight run
         required: false
@@ -103,6 +123,8 @@ jobs:
       manifest_sha256: ${{ steps.validate.outputs.manifest_sha256 }}
       repair_set_sha256: ${{ steps.validate.outputs.repair_set_sha256 }}
       repair_payload_set_sha256: ${{ steps.validate.outputs.repair_payload_set_sha256 }}
+      source_workbook_release_tag: ${{ steps.validate.outputs.source_workbook_release_tag }}
+      source_workbook_asset_id: ${{ steps.validate.outputs.source_workbook_asset_id }}
     steps:
       - name: Checkout exact authority repair control plane
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
@@ -127,6 +149,11 @@ jobs:
           EXPECTED_DIAGNOSTIC_STATE_SHA256: ${{ inputs.expected_diagnostic_state_sha256 }}
           EXPECTED_AUTHORITY_STATE_SHA256: ${{ inputs.expected_authority_state_sha256 }}
           EXPECTED_THIN_TARGET_SET_SHA256: ${{ inputs.expected_thin_target_set_sha256 }}
+          FAILED_PREFLIGHT_RUN_ID: ${{ inputs.failed_preflight_run_id }}
+          FAILED_PREFLIGHT_RUN_ATTEMPT: ${{ inputs.failed_preflight_run_attempt }}
+          EXPECTED_FAILED_PREFLIGHT_RECEIPT_SHA256: ${{ inputs.expected_failed_preflight_receipt_sha256 }}
+          EXPECTED_FAILED_PREFLIGHT_ARTIFACT_DIGEST: ${{ inputs.expected_failed_preflight_artifact_digest }}
+          SOURCE_WORKBOOK_RELEASE_TAG: ${{ inputs.source_workbook_release_tag }}
           PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
           PREFLIGHT_RUN_ATTEMPT: ${{ inputs.preflight_run_attempt }}
           EXPECTED_PREFLIGHT_RECEIPT_SHA256: ${{ inputs.expected_preflight_receipt_sha256 }}
@@ -135,6 +162,9 @@ jobs:
           EXPECTED_REPAIR_PAYLOAD_SET_SHA256: ${{ inputs.expected_repair_payload_set_sha256 }}
           OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
           SOURCE_CONTROL_PLANE_SHA: b5370fde71f9e94194270f10ffe4fd4fc9be6a45
+          WORKBOOK_ASSET_NAME: fermat_career_assets_v4_2_v9_d23b_schema_repaired.xlsx
+          WORKBOOK_SHA256: c30f8743cfd0d8baa14ac931cc7270807425164952f6a44953b5b4ab448778ef
+          WORKBOOK_SIZE: "29974136"
         run: |
           set -euo pipefail
           test "$GITHUB_REF" = "refs/heads/main"
@@ -149,6 +179,11 @@ jobs:
           [[ "$EXPECTED_DIAGNOSTIC_STATE_SHA256" =~ ^[0-9a-f]{64}$ ]]
           [[ "$EXPECTED_AUTHORITY_STATE_SHA256" =~ ^[0-9a-f]{64}$ ]]
           [[ "$EXPECTED_THIN_TARGET_SET_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$FAILED_PREFLIGHT_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$FAILED_PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+          [[ "$EXPECTED_FAILED_PREFLIGHT_RECEIPT_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$EXPECTED_FAILED_PREFLIGHT_ARTIFACT_DIGEST" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$SOURCE_WORKBOOK_RELEASE_TAG" =~ ^career-thin-authority-workbook-[0-9a-f]{8}-[0-9a-f]{8}$ ]]
           git fetch --no-tags origin main:refs/remotes/origin/main
           test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
           test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
@@ -206,6 +241,67 @@ jobs:
              and .workflow_run_id == $run_id
              and .workflow_run_attempt == $attempt' "$source_receipt" >/dev/null
 
+          failed_preflight_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${FAILED_PREFLIGHT_RUN_ID}")"
+          jq -e \
+            --arg control "cc111cc27aab9eba5d9232ef7a409f7374779eee" \
+            --argjson attempt "$FAILED_PREFLIGHT_RUN_ATTEMPT" \
+            '.name == "Career Search Entry Thin Authority Repair"
+             and .path == ".github/workflows/career-search-entry-thin-authority-repair.yml"
+             and .event == "workflow_dispatch"
+             and .status == "completed"
+             and .conclusion == "failure"
+             and .head_branch == "main"
+             and .head_sha == $control
+             and .run_attempt == $attempt' <<<"$failed_preflight_run" >/dev/null
+          failed_preflight_name="career-search-entry-thin-authority-preflight-${FAILED_PREFLIGHT_RUN_ID}-${FAILED_PREFLIGHT_RUN_ATTEMPT}"
+          failed_preflight_artifacts="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${FAILED_PREFLIGHT_RUN_ID}/artifacts?per_page=100")"
+          jq -e \
+            --arg name "$failed_preflight_name" \
+            --arg digest "sha256:${EXPECTED_FAILED_PREFLIGHT_ARTIFACT_DIGEST}" \
+            '[.artifacts[] | select(.name == $name and .expired == false and .digest == $digest)] | length == 1' \
+            <<<"$failed_preflight_artifacts" >/dev/null
+          failed_preflight_dir="$(mktemp -d)"
+          gh run download "$FAILED_PREFLIGHT_RUN_ID" --name "$failed_preflight_name" --dir "$failed_preflight_dir"
+          failed_preflight_receipt="$failed_preflight_dir/career-search-entry-thin-authority-repair.json"
+          test "$(sha256sum "$failed_preflight_receipt" | awk '{print $1}')" = "$EXPECTED_FAILED_PREFLIGHT_RECEIPT_SHA256"
+          jq -e \
+            --arg release "$EXPECTED_RELEASE_SHA" \
+            --arg manifest "$EXPECTED_MANIFEST_SHA256" \
+            --arg workbook "$WORKBOOK_SHA256" \
+            --argjson run_id "$FAILED_PREFLIGHT_RUN_ID" \
+            --argjson attempt "$FAILED_PREFLIGHT_RUN_ATTEMPT" \
+            '.contract_version == "career.search_entry_batch.thin_authority_repair.v1"
+             and .status == "HOLD_APPROVED_WORKBOOK_UNAVAILABLE"
+             and .mode == "preflight"
+             and .release_sha == $release
+             and .manifest_sha256 == $manifest
+             and .workbook_sha256 == $workbook
+             and .manifest_positions == [30, 33, 34, 40, 42]
+             and .repair_count == 0
+             and .write_state == "none"
+             and .server_write_count == 0
+             and .database_write_count == 0
+             and .cache_write_count == 0
+             and .workflow_run_id == $run_id
+             and .workflow_run_attempt == $attempt' "$failed_preflight_receipt" >/dev/null
+
+          workbook_release="$(gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${SOURCE_WORKBOOK_RELEASE_TAG}")"
+          jq -e \
+            --arg tag "$SOURCE_WORKBOOK_RELEASE_TAG" \
+            --arg target "$EXPECTED_CONTROL_PLANE_SHA" \
+            --arg asset "$WORKBOOK_ASSET_NAME" \
+            --argjson size "$WORKBOOK_SIZE" \
+            '.tag_name == $tag
+             and .target_commitish == $target
+             and .draft == true
+             and .prerelease == false
+             and ([.assets[] | select(.name == $asset and .state == "uploaded" and .size == $size)] | length == 1)
+             and (.assets | length) == 1' <<<"$workbook_release" >/dev/null
+          workbook_asset_id="$(jq -er \
+            --arg asset "$WORKBOOK_ASSET_NAME" \
+            '.assets[] | select(.name == $asset) | .id' <<<"$workbook_release")"
+          [[ "$workbook_asset_id" =~ ^[1-9][0-9]*$ ]]
+
           repair_set=""
           repair_payload_set=""
           if [ "$MODE" = "preflight" ]; then
@@ -215,7 +311,7 @@ jobs:
             test -z "$EXPECTED_PREFLIGHT_ARTIFACT_DIGEST"
             test -z "$EXPECTED_REPAIR_SET_SHA256"
             test -z "$EXPECTED_REPAIR_PAYLOAD_SET_SHA256"
-            expected_phrase="I explicitly approve one read-only Career search-entry thin-authority repair preflight for thin-source diagnostic run ${SOURCE_DIAGNOSTIC_RUN_ID} attempt ${SOURCE_DIAGNOSTIC_RUN_ATTEMPT} receipt ${EXPECTED_SOURCE_RECEIPT_SHA256} artifact ${EXPECTED_SOURCE_ARTIFACT_DIGEST}, control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA}, active SHA ${EXPECTED_RELEASE_SHA}, manifest ${EXPECTED_MANIFEST_SHA256}, diagnostic state ${EXPECTED_DIAGNOSTIC_STATE_SHA256}, authority state ${EXPECTED_AUTHORITY_STATE_SHA256}, thin target set ${EXPECTED_THIN_TARGET_SET_SHA256}; inspect only exact five manifest-position reviewed-workbook and display-authority repair candidates, with zero server write, cache write, CMS/DB write, retry, rollback, deploy, or Search Channel operation."
+            expected_phrase="I explicitly approve one-time Career search-entry approved-workbook staging and thin-authority repair preflight for failed preflight run ${FAILED_PREFLIGHT_RUN_ID} attempt ${FAILED_PREFLIGHT_RUN_ATTEMPT} receipt ${EXPECTED_FAILED_PREFLIGHT_RECEIPT_SHA256} artifact ${EXPECTED_FAILED_PREFLIGHT_ARTIFACT_DIGEST}, source diagnostic run ${SOURCE_DIAGNOSTIC_RUN_ID} attempt ${SOURCE_DIAGNOSTIC_RUN_ATTEMPT} receipt ${EXPECTED_SOURCE_RECEIPT_SHA256}, control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA}, active SHA ${EXPECTED_RELEASE_SHA}, manifest ${EXPECTED_MANIFEST_SHA256}, private draft release ${SOURCE_WORKBOOK_RELEASE_TAG}, workbook SHA ${WORKBOOK_SHA256} size ${WORKBOOK_SIZE}; create exactly one private draft-release transport asset, stage exactly one ephemeral production /tmp workbook, verify and remove it, then inspect exact five display-authority repair candidates, with zero persistent server write, cache write, CMS/DB write, retry, rollback, deploy, or Search Channel operation."
           elif [ "$MODE" = "repair" ]; then
             [[ "$PREFLIGHT_RUN_ID" =~ ^[1-9][0-9]*$ ]]
             [[ "$PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
@@ -265,7 +361,9 @@ jobs:
                and .repair_set_sha256 == $repair_set
                and .repair_payload_set_sha256 == $payload_set
                and .write_state == "none"
-               and .server_write_count == 0
+               and .server_write_count == 1
+               and .server_delete_count == 1
+               and .persistent_server_write_count == 0
                and .database_write_count == 0
                and .workflow_run_id == $run_id
                and .workflow_run_attempt == $attempt' "$preflight_receipt" >/dev/null
@@ -277,7 +375,7 @@ jobs:
               <<<"$later_runs" >/dev/null
             repair_set="$EXPECTED_REPAIR_SET_SHA256"
             repair_payload_set="$EXPECTED_REPAIR_PAYLOAD_SET_SHA256"
-            expected_phrase="I explicitly approve one-time Career search-entry thin-authority repair for preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} receipt ${EXPECTED_PREFLIGHT_RECEIPT_SHA256} artifact ${EXPECTED_PREFLIGHT_ARTIFACT_DIGEST}, source diagnostic run ${SOURCE_DIAGNOSTIC_RUN_ID} attempt ${SOURCE_DIAGNOSTIC_RUN_ATTEMPT} receipt ${EXPECTED_SOURCE_RECEIPT_SHA256}, control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA}, active SHA ${EXPECTED_RELEASE_SHA}, manifest ${EXPECTED_MANIFEST_SHA256}, repair set ${EXPECTED_REPAIR_SET_SHA256}, repair payload set ${EXPECTED_REPAIR_PAYLOAD_SET_SHA256}; atomically create exactly five missing reviewed-workbook career display-authority rows and verify 10 bilingual surfaces, with zero cache write, publication, indexability, queue, sitemap, llms, Search Channel, URL submission, deploy, rollback, or non-target write."
+            expected_phrase="I explicitly approve one-time Career search-entry thin-authority repair for preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} receipt ${EXPECTED_PREFLIGHT_RECEIPT_SHA256} artifact ${EXPECTED_PREFLIGHT_ARTIFACT_DIGEST}, source diagnostic run ${SOURCE_DIAGNOSTIC_RUN_ID} attempt ${SOURCE_DIAGNOSTIC_RUN_ATTEMPT} receipt ${EXPECTED_SOURCE_RECEIPT_SHA256}, control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA}, active SHA ${EXPECTED_RELEASE_SHA}, manifest ${EXPECTED_MANIFEST_SHA256}, private draft release ${SOURCE_WORKBOOK_RELEASE_TAG}, repair set ${EXPECTED_REPAIR_SET_SHA256}, repair payload set ${EXPECTED_REPAIR_PAYLOAD_SET_SHA256}; stage and remove exactly one ephemeral production /tmp workbook, atomically create exactly five missing reviewed-workbook career display-authority rows, verify 10 bilingual surfaces, and delete the private draft-release transport, with zero persistent server write, cache write, publication, indexability, queue, sitemap, llms, Search Channel, URL submission, deploy, rollback, or non-target write."
           else
             exit 2
           fi
@@ -290,6 +388,8 @@ jobs:
             echo "manifest_sha256=$EXPECTED_MANIFEST_SHA256"
             echo "repair_set_sha256=$repair_set"
             echo "repair_payload_set_sha256=$repair_payload_set"
+            echo "source_workbook_release_tag=$SOURCE_WORKBOOK_RELEASE_TAG"
+            echo "source_workbook_asset_id=$workbook_asset_id"
           } >> "$GITHUB_OUTPUT"
 
   operate:
@@ -297,12 +397,33 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     environment: production
+    permissions:
+      actions: read
+      contents: write
     steps:
       - name: Checkout exact authority repair control plane
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
           ref: ${{ needs.eligibility.outputs.control_plane_sha }}
           fetch-depth: 1
+
+      - name: Download exact private reviewed-workbook transport
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_WORKBOOK_ASSET_ID: ${{ needs.eligibility.outputs.source_workbook_asset_id }}
+          WORKBOOK_ASSET_NAME: fermat_career_assets_v4_2_v9_d23b_schema_repaired.xlsx
+          WORKBOOK_SHA256: c30f8743cfd0d8baa14ac931cc7270807425164952f6a44953b5b4ab448778ef
+          WORKBOOK_SIZE: "29974136"
+        run: |
+          set -euo pipefail
+          mkdir -p transport
+          workbook="transport/$WORKBOOK_ASSET_NAME"
+          gh api \
+            -H "Accept: application/octet-stream" \
+            "repos/${GITHUB_REPOSITORY}/releases/assets/${SOURCE_WORKBOOK_ASSET_ID}" > "$workbook"
+          test "$(sha256sum "$workbook" | awk '{print $1}')" = "$WORKBOOK_SHA256"
+          test "$(stat -c '%s' "$workbook")" = "$WORKBOOK_SIZE"
 
       - name: Validate protected production topology
         shell: bash
@@ -356,9 +477,14 @@ jobs:
           EXPECTED_DIAGNOSTIC_STATE_SHA256: ${{ inputs.expected_diagnostic_state_sha256 }}
           EXPECTED_AUTHORITY_STATE_SHA256: ${{ inputs.expected_authority_state_sha256 }}
           EXPECTED_THIN_TARGET_SET_SHA256: ${{ inputs.expected_thin_target_set_sha256 }}
+          SOURCE_WORKBOOK_RELEASE_TAG: ${{ needs.eligibility.outputs.source_workbook_release_tag }}
+          WORKBOOK_ASSET_NAME: fermat_career_assets_v4_2_v9_d23b_schema_repaired.xlsx
+          WORKBOOK_SHA256: c30f8743cfd0d8baa14ac931cc7270807425164952f6a44953b5b4ab448778ef
+          WORKBOOK_SIZE: "29974136"
         run: |
           set -euo pipefail
           mkdir -p artifacts
+          workbook="transport/$WORKBOOK_ASSET_NAME"
           probe="backend/scripts/career/career_search_entry_thin_authority_repair.php"
           probe_sha256="$(sha256sum "$probe" | awk '{print $1}')"
           for variable in DEPLOY_PATH MODE EXPECTED_RELEASE_SHA EXPECTED_RELEASE_NAME \
@@ -374,13 +500,30 @@ jobs:
             -o ServerAliveInterval=20 -o ServerAliveCountMax=30
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST"
           )
+          remote_workbook="/tmp/${WORKBOOK_ASSET_NAME%.xlsx}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.xlsx"
+          printf -v q_remote_workbook '%q' "$remote_workbook"
+          remote_env="$remote_env CAREER_THIN_AUTHORITY_WORKBOOK_PATH=$q_remote_workbook"
+          cleanup_remote_workbook() {
+            "${ssh_base[@]}" "rm -f -- $q_remote_workbook"
+          }
+          trap cleanup_remote_workbook EXIT
+          "${ssh_base[@]}" "test ! -e $q_remote_workbook && umask 077 && cat > $q_remote_workbook" < "$workbook"
+          "${ssh_base[@]}" \
+            "test -f $q_remote_workbook && test ! -L $q_remote_workbook && test \"\$(sha256sum $q_remote_workbook | awk '{print \$1}')\" = '$WORKBOOK_SHA256' && test \"\$(stat -c '%s' $q_remote_workbook)\" = '$WORKBOOK_SIZE' && test \"\$(stat -c '%a' $q_remote_workbook)\" = '600'"
           set +e
           "${ssh_base[@]}" "$remote_env /usr/bin/php" < "$probe" > artifacts/probe.json
           probe_status=$?
           set -e
+          cleanup_remote_workbook
+          trap - EXIT
+          "${ssh_base[@]}" "test ! -e $q_remote_workbook"
           jq \
             --arg control "$CONTROL_PLANE_SHA" \
             --arg probe "$probe_sha256" \
+            --arg workbook_release "$SOURCE_WORKBOOK_RELEASE_TAG" \
+            --arg workbook_asset "$WORKBOOK_ASSET_NAME" \
+            --arg workbook_sha "$WORKBOOK_SHA256" \
+            --argjson workbook_size "$WORKBOOK_SIZE" \
             --arg source_receipt "$EXPECTED_SOURCE_RECEIPT_SHA256" \
             --arg source_artifact "$EXPECTED_SOURCE_ARTIFACT_DIGEST" \
             --arg source_state "$EXPECTED_DIAGNOSTIC_STATE_SHA256" \
@@ -394,6 +537,14 @@ jobs:
               contract_version: "career.search_entry_batch.thin_authority_repair.v1",
               control_plane_sha: $control,
               probe_sha256: $probe,
+              workbook_transport_release_tag: $workbook_release,
+              workbook_transport_asset_name: $workbook_asset,
+              workbook_transport_sha256: $workbook_sha,
+              workbook_transport_size: $workbook_size,
+              probe_server_write_count: .server_write_count,
+              server_write_count: 1,
+              server_delete_count: 1,
+              persistent_server_write_count: 0,
               source_diagnostic_run_id: $source_run,
               source_diagnostic_run_attempt: $source_attempt,
               source_diagnostic_receipt_sha256: $source_receipt,
@@ -408,14 +559,18 @@ jobs:
           if [ "$MODE" = "preflight" ]; then
             jq -e '.status == "PASS_AUTHORITY_REPAIR_PREFLIGHT"
               and .write_state == "none"
-              and .server_write_count == 0
+              and .server_write_count == 1
+              and .server_delete_count == 1
+              and .persistent_server_write_count == 0
               and .database_write_count == 0
               and .cache_write_count == 0' \
               artifacts/career-search-entry-thin-authority-repair.json >/dev/null
           else
             jq -e '.status == "PASS_AUTHORITY_REPAIR_COMPLETE"
               and .write_state == "committed_verified"
-              and .server_write_count == 0
+              and .server_write_count == 1
+              and .server_delete_count == 1
+              and .persistent_server_write_count == 0
               and .database_write_count == 5
               and .cache_write_count == 0
               and (.verification_rows | length) == 10' \
@@ -430,3 +585,20 @@ jobs:
           path: artifacts/career-search-entry-thin-authority-repair.json
           if-no-files-found: error
           retention-days: 90
+
+      - name: Delete exact private workbook transport after repair
+        if: success() && inputs.mode == 'repair'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_WORKBOOK_RELEASE_TAG: ${{ needs.eligibility.outputs.source_workbook_release_tag }}
+        run: |
+          set -euo pipefail
+          release="$(gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${SOURCE_WORKBOOK_RELEASE_TAG}")"
+          release_id="$(jq -er '.id' <<<"$release")"
+          test "$(jq -r '.draft' <<<"$release")" = "true"
+          test "$(jq -r '.assets | length' <<<"$release")" = "1"
+          gh api --method DELETE "repos/${GITHUB_REPOSITORY}/releases/${release_id}"
+          if gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${SOURCE_WORKBOOK_RELEASE_TAG}" >/dev/null 2>&1; then
+            exit 1
+          fi
