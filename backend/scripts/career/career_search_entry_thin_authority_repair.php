@@ -19,6 +19,15 @@ const EXPECTED_MANIFEST_POSITIONS = [30, 33, 34, 40, 42];
 const EXPECTED_REPAIR_COUNT = 5;
 const EXPECTED_COMPONENT_COUNT = 24;
 
+final class CrosswalkAuthorityDrift extends RuntimeException
+{
+    /** @param list<array<string, int|string>> $diagnostics */
+    public function __construct(public readonly array $diagnostics)
+    {
+        parent::__construct('CROSSWALK_AUTHORITY_DRIFT');
+    }
+}
+
 /** @param array<string, mixed> $extra */
 function emitRepair(array $extra, int $exitCode = 0): never
 {
@@ -142,12 +151,84 @@ function workbookRows(
     return $rows;
 }
 
+/**
+ * @param  list<string>  $manifestSlugs
+ * @param  array<string, array<string, mixed>>  $rows
+ * @return list<array<string, int|string>>
+ */
+function crosswalkAuthorityDiagnostics(array $manifestSlugs, array $rows): array
+{
+    $diagnostics = [];
+    foreach (EXPECTED_MANIFEST_POSITIONS as $position) {
+        $slug = $manifestSlugs[$position - 1] ?? '';
+        $row = $rows[$slug] ?? null;
+        if (! is_array($row)) {
+            throw new RuntimeException('WORKBOOK_TARGET_INCOMPLETE');
+        }
+        $occupationRows = Occupation::query()
+            ->with('crosswalks')
+            ->where('canonical_slug', $slug)
+            ->get();
+        if ($occupationRows->count() !== 1) {
+            throw new RuntimeException('OCCUPATION_IDENTITY_DRIFT');
+        }
+        /** @var Occupation $occupation */
+        $occupation = $occupationRows->first();
+        $expectedSoc = trim((string) ($row['SOC_Code'] ?? ''));
+        $expectedOnet = trim((string) ($row['O_NET_Code'] ?? ''));
+        $counts = [
+            'us_soc_total' => 0,
+            'us_soc_match' => 0,
+            'onet_soc_2019_total' => 0,
+            'onet_soc_2019_match' => 0,
+        ];
+        foreach ($occupation->crosswalks as $crosswalk) {
+            $system = strtolower(trim((string) $crosswalk->source_system));
+            $code = trim((string) $crosswalk->source_code);
+            if ($system === 'us_soc') {
+                $counts['us_soc_total']++;
+                $counts['us_soc_match'] += (int) ($code === $expectedSoc);
+            }
+            if ($system === 'onet_soc_2019') {
+                $counts['onet_soc_2019_total']++;
+                $counts['onet_soc_2019_match'] += (int) ($code === $expectedOnet);
+            }
+        }
+        $classification = match (true) {
+            $counts === [
+                'us_soc_total' => 1,
+                'us_soc_match' => 1,
+                'onet_soc_2019_total' => 1,
+                'onet_soc_2019_match' => 1,
+            ] => 'exact',
+            $counts['us_soc_total'] === 0 || $counts['onet_soc_2019_total'] === 0 => 'missing',
+            $counts['us_soc_total'] > 1 || $counts['onet_soc_2019_total'] > 1 => 'duplicate',
+            default => 'conflict',
+        };
+        $diagnostics[] = [
+            'manifest_position' => $position,
+            ...$counts,
+            'classification' => $classification,
+        ];
+    }
+
+    return $diagnostics;
+}
+
 /** @return array{items: list<array<string, mixed>>, payload_set_sha256: string, repair_set_sha256: string} */
 function planRepair(
     CareerSelectedDisplayAssetMapper $mapper,
     array $manifestSlugs,
     array $rows,
 ): array {
+    $crosswalkDiagnostics = crosswalkAuthorityDiagnostics($manifestSlugs, $rows);
+    if (array_filter(
+        $crosswalkDiagnostics,
+        static fn (array $item): bool => $item['classification'] !== 'exact',
+    ) !== []) {
+        throw new CrosswalkAuthorityDrift($crosswalkDiagnostics);
+    }
+
     $items = [];
     $repairSet = [];
     foreach (EXPECTED_MANIFEST_POSITIONS as $position) {
@@ -167,20 +248,6 @@ function planRepair(
         $occupation = $occupationRows->first();
         $expectedSoc = trim((string) ($row['SOC_Code'] ?? ''));
         $expectedOnet = trim((string) ($row['O_NET_Code'] ?? ''));
-        $crosswalkCounts = ['us_soc' => 0, 'onet_soc_2019' => 0];
-        foreach ($occupation->crosswalks as $crosswalk) {
-            $system = strtolower(trim((string) $crosswalk->source_system));
-            $code = trim((string) $crosswalk->source_code);
-            if ($system === 'us_soc' && $code === $expectedSoc) {
-                $crosswalkCounts['us_soc']++;
-            }
-            if ($system === 'onet_soc_2019' && $code === $expectedOnet) {
-                $crosswalkCounts['onet_soc_2019']++;
-            }
-        }
-        if ($crosswalkCounts !== ['us_soc' => 1, 'onet_soc_2019' => 1]) {
-            throw new RuntimeException('CROSSWALK_AUTHORITY_DRIFT');
-        }
         $existing = CareerJobDisplayAsset::query()
             ->where('occupation_id', $occupation->id)
             ->where('canonical_slug', $slug)
@@ -497,6 +564,38 @@ try {
         'database_write_count' => $result['written_count'],
         'write_state' => 'committed_verified',
     ]);
+} catch (CrosswalkAuthorityDrift $throwable) {
+    if ($mode === 'preflight') {
+        emitRepair([
+            'status' => 'HOLD_CROSSWALK_AUTHORITY_REPAIR_REQUIRED',
+            'mode' => $mode,
+            'release_sha' => $releaseSha,
+            'release_name' => $releaseName,
+            'manifest_sha256' => $manifestSha256,
+            'workbook_sha256' => EXPECTED_WORKBOOK_SHA256,
+            'manifest_positions' => EXPECTED_MANIFEST_POSITIONS,
+            'repair_count' => 0,
+            'crosswalk_diagnostics' => $throwable->diagnostics,
+            'crosswalk_diagnostic_state_sha256' => hash(
+                'sha256',
+                canonicalRepairJson($throwable->diagnostics),
+            ),
+            'server_write_count' => 0,
+            'database_write_count' => 0,
+            'write_state' => 'none',
+        ]);
+    }
+    emitRepair([
+        'status' => 'FAIL_CLOSED',
+        'mode' => $mode,
+        'release_sha' => $releaseSha,
+        'release_name' => $releaseName,
+        'manifest_sha256' => $manifestSha256,
+        'failure_category' => $throwable->getMessage(),
+        'server_write_count' => 0,
+        'database_write_count' => 0,
+        'write_state' => 'none_or_transaction_rolled_back',
+    ], 1);
 } catch (Throwable $throwable) {
     emitRepair([
         'status' => 'FAIL_CLOSED',

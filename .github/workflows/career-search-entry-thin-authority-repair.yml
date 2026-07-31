@@ -70,6 +70,10 @@ on:
         description: Exact workbook-unavailable preflight artifact digest
         required: true
         type: string
+      failed_crosswalk_preflight_lineage:
+        description: Exact run:attempt:receipt:artifact crosswalk-drift lineage
+        required: true
+        type: string
       source_workbook_release_tag:
         description: Exact private draft-release transport tag for the reviewed workbook
         required: true
@@ -152,6 +156,7 @@ jobs:
           FAILED_PREFLIGHT_RUN_ATTEMPT: ${{ inputs.failed_preflight_run_attempt }}
           EXPECTED_FAILED_PREFLIGHT_RECEIPT_SHA256: ${{ inputs.expected_failed_preflight_receipt_sha256 }}
           EXPECTED_FAILED_PREFLIGHT_ARTIFACT_DIGEST: ${{ inputs.expected_failed_preflight_artifact_digest }}
+          FAILED_CROSSWALK_PREFLIGHT_LINEAGE: ${{ inputs.failed_crosswalk_preflight_lineage }}
           SOURCE_WORKBOOK_RELEASE_TAG: ${{ inputs.source_workbook_release_tag }}
           PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
           PREFLIGHT_RUN_ATTEMPT: ${{ inputs.preflight_run_attempt }}
@@ -182,6 +187,14 @@ jobs:
           [[ "$FAILED_PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
           [[ "$EXPECTED_FAILED_PREFLIGHT_RECEIPT_SHA256" =~ ^[0-9a-f]{64}$ ]]
           [[ "$EXPECTED_FAILED_PREFLIGHT_ARTIFACT_DIGEST" =~ ^[0-9a-f]{64}$ ]]
+          IFS=: read -r FAILED_CROSSWALK_PREFLIGHT_RUN_ID FAILED_CROSSWALK_PREFLIGHT_RUN_ATTEMPT \
+            EXPECTED_FAILED_CROSSWALK_RECEIPT_SHA256 EXPECTED_FAILED_CROSSWALK_ARTIFACT_DIGEST \
+            <<<"$FAILED_CROSSWALK_PREFLIGHT_LINEAGE"
+          test "$FAILED_CROSSWALK_PREFLIGHT_LINEAGE" = "${FAILED_CROSSWALK_PREFLIGHT_RUN_ID}:${FAILED_CROSSWALK_PREFLIGHT_RUN_ATTEMPT}:${EXPECTED_FAILED_CROSSWALK_RECEIPT_SHA256}:${EXPECTED_FAILED_CROSSWALK_ARTIFACT_DIGEST}"
+          [[ "$FAILED_CROSSWALK_PREFLIGHT_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$FAILED_CROSSWALK_PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+          [[ "$EXPECTED_FAILED_CROSSWALK_RECEIPT_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$EXPECTED_FAILED_CROSSWALK_ARTIFACT_DIGEST" =~ ^[0-9a-f]{64}$ ]]
           [[ "$SOURCE_WORKBOOK_RELEASE_TAG" =~ ^career-thin-authority-workbook-[0-9a-f]{8}-[0-9a-f]{8}$ ]]
           git fetch --no-tags origin main:refs/remotes/origin/main
           test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
@@ -284,6 +297,49 @@ jobs:
              and .workflow_run_id == $run_id
              and .workflow_run_attempt == $attempt' "$failed_preflight_receipt" >/dev/null
 
+          failed_crosswalk_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${FAILED_CROSSWALK_PREFLIGHT_RUN_ID}")"
+          jq -e \
+            --arg control "15eb6a2fbf55630f3d1e53fd3bf891930ebcb60b" \
+            --argjson attempt "$FAILED_CROSSWALK_PREFLIGHT_RUN_ATTEMPT" \
+            '.name == "Career Search Entry Thin Authority Repair"
+             and .path == ".github/workflows/career-search-entry-thin-authority-repair.yml"
+             and .event == "workflow_dispatch"
+             and .status == "completed"
+             and .conclusion == "failure"
+             and .head_branch == "main"
+             and .head_sha == $control
+             and .run_attempt == $attempt' <<<"$failed_crosswalk_run" >/dev/null
+          failed_crosswalk_name="career-search-entry-thin-authority-preflight-${FAILED_CROSSWALK_PREFLIGHT_RUN_ID}-${FAILED_CROSSWALK_PREFLIGHT_RUN_ATTEMPT}"
+          failed_crosswalk_artifacts="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${FAILED_CROSSWALK_PREFLIGHT_RUN_ID}/artifacts?per_page=100")"
+          jq -e \
+            --arg name "$failed_crosswalk_name" \
+            --arg digest "sha256:${EXPECTED_FAILED_CROSSWALK_ARTIFACT_DIGEST}" \
+            '[.artifacts[] | select(.name == $name and .expired == false and .digest == $digest)] | length == 1' \
+            <<<"$failed_crosswalk_artifacts" >/dev/null
+          failed_crosswalk_dir="$(mktemp -d)"
+          gh run download "$FAILED_CROSSWALK_PREFLIGHT_RUN_ID" --name "$failed_crosswalk_name" --dir "$failed_crosswalk_dir"
+          failed_crosswalk_receipt="$failed_crosswalk_dir/career-search-entry-thin-authority-repair.json"
+          test "$(sha256sum "$failed_crosswalk_receipt" | awk '{print $1}')" = "$EXPECTED_FAILED_CROSSWALK_RECEIPT_SHA256"
+          jq -e \
+            --arg release "$EXPECTED_RELEASE_SHA" \
+            --arg manifest "$EXPECTED_MANIFEST_SHA256" \
+            --argjson run_id "$FAILED_CROSSWALK_PREFLIGHT_RUN_ID" \
+            --argjson attempt "$FAILED_CROSSWALK_PREFLIGHT_RUN_ATTEMPT" \
+            '.contract_version == "career.search_entry_batch.thin_authority_repair.v1"
+             and .status == "FAIL_CLOSED"
+             and .mode == "preflight"
+             and .failure_category == "CROSSWALK_AUTHORITY_DRIFT"
+             and .release_sha == $release
+             and .manifest_sha256 == $manifest
+             and .write_state == "none_or_transaction_rolled_back"
+             and .server_write_count == 1
+             and .server_delete_count == 1
+             and .persistent_server_write_count == 0
+             and .database_write_count == 0
+             and .cache_write_count == 0
+             and .workflow_run_id == $run_id
+             and .workflow_run_attempt == $attempt' "$failed_crosswalk_receipt" >/dev/null
+
           repair_set=""
           repair_payload_set=""
           if [ "$MODE" = "preflight" ]; then
@@ -293,7 +349,7 @@ jobs:
             test -z "$EXPECTED_PREFLIGHT_ARTIFACT_DIGEST"
             test -z "$EXPECTED_REPAIR_SET_SHA256"
             test -z "$EXPECTED_REPAIR_PAYLOAD_SET_SHA256"
-            expected_phrase="I explicitly approve one-time Career search-entry approved-workbook staging and thin-authority repair preflight for failed preflight run ${FAILED_PREFLIGHT_RUN_ID} attempt ${FAILED_PREFLIGHT_RUN_ATTEMPT} receipt ${EXPECTED_FAILED_PREFLIGHT_RECEIPT_SHA256} artifact ${EXPECTED_FAILED_PREFLIGHT_ARTIFACT_DIGEST}, source diagnostic run ${SOURCE_DIAGNOSTIC_RUN_ID} attempt ${SOURCE_DIAGNOSTIC_RUN_ATTEMPT} receipt ${EXPECTED_SOURCE_RECEIPT_SHA256}, control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA}, active SHA ${EXPECTED_RELEASE_SHA}, manifest ${EXPECTED_MANIFEST_SHA256}, private draft release ${SOURCE_WORKBOOK_RELEASE_TAG}, workbook SHA ${WORKBOOK_SHA256} size ${WORKBOOK_SIZE}; create exactly one private draft-release transport asset, stage exactly one ephemeral production /tmp workbook, verify and remove it, then inspect exact five display-authority repair candidates, with zero persistent server write, cache write, CMS/DB write, retry, rollback, deploy, or Search Channel operation."
+            expected_phrase="I explicitly approve one-time Career search-entry crosswalk-diagnostic thin-authority repair preflight for failed crosswalk preflight run ${FAILED_CROSSWALK_PREFLIGHT_RUN_ID} attempt ${FAILED_CROSSWALK_PREFLIGHT_RUN_ATTEMPT} receipt ${EXPECTED_FAILED_CROSSWALK_RECEIPT_SHA256} artifact ${EXPECTED_FAILED_CROSSWALK_ARTIFACT_DIGEST}, failed workbook-unavailable preflight run ${FAILED_PREFLIGHT_RUN_ID} attempt ${FAILED_PREFLIGHT_RUN_ATTEMPT} receipt ${EXPECTED_FAILED_PREFLIGHT_RECEIPT_SHA256} artifact ${EXPECTED_FAILED_PREFLIGHT_ARTIFACT_DIGEST}, source diagnostic run ${SOURCE_DIAGNOSTIC_RUN_ID} attempt ${SOURCE_DIAGNOSTIC_RUN_ATTEMPT} receipt ${EXPECTED_SOURCE_RECEIPT_SHA256}, control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA}, active SHA ${EXPECTED_RELEASE_SHA}, manifest ${EXPECTED_MANIFEST_SHA256}, private draft release ${SOURCE_WORKBOOK_RELEASE_TAG}, workbook SHA ${WORKBOOK_SHA256} size ${WORKBOOK_SIZE}; stage exactly one ephemeral production /tmp workbook, verify and remove it, then inspect only safe aggregate crosswalk authority state for exact five manifest positions, with zero persistent server write, cache write, CMS/DB write, retry, rollback, deploy, or Search Channel operation."
           elif [ "$MODE" = "repair" ]; then
             [[ "$PREFLIGHT_RUN_ID" =~ ^[1-9][0-9]*$ ]]
             [[ "$PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
@@ -561,7 +617,13 @@ jobs:
             }' artifacts/probe.json > artifacts/career-search-entry-thin-authority-repair.json
           test "$probe_status" -eq 0
           if [ "$MODE" = "preflight" ]; then
-            jq -e '.status == "PASS_AUTHORITY_REPAIR_PREFLIGHT"
+            jq -e '(.status == "PASS_AUTHORITY_REPAIR_PREFLIGHT"
+                or (.status == "HOLD_CROSSWALK_AUTHORITY_REPAIR_REQUIRED"
+                    and .repair_count == 0
+                    and (.crosswalk_diagnostics | length) == 5
+                    and ([.crosswalk_diagnostics[].manifest_position] == [30, 33, 34, 40, 42])
+                    and ([.crosswalk_diagnostics[].classification] | any(. != "exact"))
+                    and (.crosswalk_diagnostic_state_sha256 | test("^[0-9a-f]{64}$"))))
               and .write_state == "none"
               and .server_write_count == 1
               and .server_delete_count == 1
