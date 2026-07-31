@@ -6,11 +6,19 @@
     "pr_number": 1866,
     "merge_sha": "897490e4baa31fe197ee50c89f0c3fae6bac408d",
     "package_sha256": "0f50f4108af14656442ef7d57d410b2e74f8dffced6ed3db372bf848ea051292",
+    "source_ledger_sha256": "facbf57a362a430cdc8b5f6545db4a227e1268d285e2c27beed3c935ea9cf6e2",
+    "row_id_set_sha256": "347bd92a3db93d873b44e27c88327e860ee5915e9e7eafb9adb2227e75fef8b7",
+    "row_count": 118,
+    "cohort_counts": {
+      "public_profile_control": 52,
+      "english_historical_revision_verification": 50,
+      "result_content": 16
+    },
     "status": "inventory_frozen"
   },
   "output_package": {
     "path": "backend/content_packs/BIG5_OCEAN/v2/packages/en_parity/w2_result_content_v1",
-    "package_sha256": "76c547083230ae57c7028037bfb50623bdfd7cf007335166ac01abde1cf66851",
+    "package_sha256": "b6676eff4e63f257a7a460f5c79114f79ce23bc5cd54ccaf06ff835d5c635e6c",
     "inventory_unit_count": 16,
     "covered_unit_count": 16,
     "asset_group_count": 16,
@@ -20,6 +28,8 @@
   },
   "validation": {
     "exact_units": "PASS",
+    "exact_118_source_rows": "PASS",
+    "result_row_required_keys": "PASS",
     "unique_traceability": "PASS",
     "english_complete": "PASS",
     "cjk_leakage": 0,

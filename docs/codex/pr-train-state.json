@@ -102419,7 +102419,7 @@
       },
       "local_validation": {
         "status": "pass",
-        "evidence": "Package validator passes twice byte-identically with SHA 76c547083230ae57c7028037bfb50623bdfd7cf007335166ac01abde1cf66851. Focused package PHPUnit passes 6 tests / 253 assertions; runtime-freeze scope regression passes 2 tests / 6 assertions; composer test:content passes 4 tests / 62 assertions. Scoped Pint, PHP syntax, JSON/JSONL/YAML parsing, CJK/private-field/public-URL/fixed-type/forbidden-claim scans, deterministic SHA recomputation, diff checks, and exact allowlist validation pass."
+        "evidence": "Package validator passes twice byte-identically with SHA b6676eff4e63f257a7a460f5c79114f79ce23bc5cd54ccaf06ff835d5c635e6c. Focused package PHPUnit passes 7 tests / 433 assertions with exact 118-row reconciliation and required-key coverage; runtime-freeze scope regression passes 2 tests / 6 assertions; composer test:content passes 4 tests / 62 assertions. Scoped Pint, PHP syntax, JSON/JSONL/YAML parsing, CJK/private-field/public-URL/fixed-type/forbidden-claim scans, deterministic SHA recomputation, diff checks, and exact allowlist validation pass."
       },
       "github_required_checks": {
         "status": "pending",
@@ -102484,8 +102484,13 @@
         "at": "2026-07-31T06:33:53Z",
         "status": "review_fix_local_checks_passed",
         "note": "Exact-head review on f72ca150846d4d31072cc6866200c23c8764aa57 identified one remaining C5 semantic drift. C5 now preserves the pinned source authority's continued progress without immediate feedback or reward, with three focused semantic assertions. The byte-exact package was rebuilt as 76c547083230ae57c7028037bfb50623bdfd7cf007335166ac01abde1cf66851. Validator passes twice identically; package suite passes 6 tests / 253 assertions, content suite passes 4 tests / 62 assertions, and Pint, parsers, diff, and exact 17-path scope validation pass."
+      },
+      {
+        "at": "2026-07-31T06:48:30Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Exact-head review on 675e96810e1c2359c67cf07edfdf9e5ce6b6fe81 identified three current-scope gaps. Added fail-closed reconciliation for all 118 immutable source rows, pinned the source-ledger and ordered row-id-set hashes, preserved the 52/50 completed-control and historical cohorts, and mapped every one of the 16 result rows to an exact asset ID, required top-level keys, and nested item identities. A4 now preserves conflict mediation and de-escalation; N2 preserves anger/resistance activation under obstruction, misunderstanding, or boundary violation. Package SHA is b6676eff4e63f257a7a460f5c79114f79ce23bc5cd54ccaf06ff835d5c635e6c. Validator passes twice; package suite passes 7 tests / 433 assertions, runtime-freeze regression and content suite pass, and Pint, syntax, parsers, scans, diff, and exact allowlist validation pass."
       }
     ],
-    "updated_at": "2026-07-31T06:33:53Z"
+    "updated_at": "2026-07-31T06:48:30Z"
   }
 }

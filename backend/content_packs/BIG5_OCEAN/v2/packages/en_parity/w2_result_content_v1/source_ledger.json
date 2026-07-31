@@ -2,6 +2,17 @@
   "schema_version": "fermatmind.big5.en_parity.result_content_source_ledger.v1",
   "package_id": "BIG5-OCEAN-EN-PARITY-W2-RESULT-CONTENT-V1",
   "source_inventory_sha256": "0f50f4108af14656442ef7d57d410b2e74f8dffced6ed3db372bf848ea051292",
+  "source_inventory_ledger_sha256": "facbf57a362a430cdc8b5f6545db4a227e1268d285e2c27beed3c935ea9cf6e2",
+  "inventory_row_reconciliation": {
+    "file": "inventory_row_reconciliation.json",
+    "row_count": 118,
+    "row_id_set_sha256": "347bd92a3db93d873b44e27c88327e860ee5915e9e7eafb9adb2227e75fef8b7",
+    "cohort_counts": {
+      "public_profile_control": 52,
+      "english_historical_revision_verification": 50,
+      "result_content": 16
+    }
+  },
   "shared_claim_map": "big5-continuous-contextual-nondiagnostic-v1",
   "entries": [
     {"unit":"free_preview","translation_identity":"big5-result:free_preview:zh-CN:en","source_authority":"W2-RESULT-free_preview","asset_id":"big5.en.w2.free_preview"},

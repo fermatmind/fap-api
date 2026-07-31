@@ -6,11 +6,13 @@
 
 The package contains natural English reader copy for previews, locked and full reports, entitlements, five dimensions, 30 facets, score-range boundaries, practical reflection, workplace and relationship context, public-safe sharing, private PDF/history use, calls to action, fail-closed states, cross-device reading, and reader-facing analytics labels.
 
+It also reconciles every row in the immutable 118-row source inventory: 52 completed public-profile controls and 50 historical revision rows remain preserved and unmodified, while all 16 result-content rows map to exact draft asset IDs, content keys, and nested item identities.
+
 ## Exact lineage
 
 - Inventory merge SHA: `897490e4baa31fe197ee50c89f0c3fae6bac408d`
 - Inventory package SHA-256: `0f50f4108af14656442ef7d57d410b2e74f8dffced6ed3db372bf848ea051292`
-- Result content package SHA-256: `76c547083230ae57c7028037bfb50623bdfd7cf007335166ac01abde1cf66851`
+- Result content package SHA-256: `b6676eff4e63f257a7a460f5c79114f79ce23bc5cd54ccaf06ff835d5c635e6c`
 
 ## Boundaries
 

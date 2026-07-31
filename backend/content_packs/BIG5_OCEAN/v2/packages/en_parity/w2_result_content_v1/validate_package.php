@@ -36,6 +36,24 @@ if (($manifest['inventory_units'] ?? null) !== $expectedUnits || ($manifest['inv
     throw new RuntimeException('Frozen inventory units do not match.');
 }
 
+$expectedInventoryEvidence = [
+    'inventory_package_sha256' => '0f50f4108af14656442ef7d57d410b2e74f8dffced6ed3db372bf848ea051292',
+    'source_ledger_sha256' => 'facbf57a362a430cdc8b5f6545db4a227e1268d285e2c27beed3c935ea9cf6e2',
+    'row_id_set_sha256' => '347bd92a3db93d873b44e27c88327e860ee5915e9e7eafb9adb2227e75fef8b7',
+    'row_count' => 118,
+    'cohort_counts' => [
+        'public_profile_control' => 52,
+        'english_historical_revision_verification' => 50,
+        'result_content' => 16,
+    ],
+    'row_reconciliation_file' => 'inventory_row_reconciliation.json',
+];
+foreach ($expectedInventoryEvidence as $field => $expected) {
+    if (($manifest['source_inventory'][$field] ?? null) !== $expected) {
+        throw new RuntimeException("Frozen source inventory evidence does not match: {$field}");
+    }
+}
+
 $assets = [];
 foreach (file($root.'/content_assets.jsonl', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
     $assets[] = json_decode($line, true, 512, JSON_THROW_ON_ERROR);
@@ -49,6 +67,66 @@ if (count($assets) !== 16 || count(array_unique($units)) !== 16 || $units !== $e
 $assetIds = array_column($assets, 'asset_id');
 if (count(array_unique($assetIds)) !== 16) {
     throw new RuntimeException('Content asset IDs must be unique.');
+}
+
+$reconciliation = $decode($root.'/inventory_row_reconciliation.json');
+$publicRows = $reconciliation['public_profile_control_rows'] ?? [];
+$historicalRows = $reconciliation['english_historical_revision_rows'] ?? [];
+$resultRows = $reconciliation['result_content_rows'] ?? [];
+$sourceRowIds = [
+    ...$publicRows,
+    ...$historicalRows,
+    ...array_column($resultRows, 'row_id'),
+];
+if (
+    ($reconciliation['source_inventory_package_sha256'] ?? null) !== $expectedInventoryEvidence['inventory_package_sha256']
+    || ($reconciliation['source_inventory_ledger_sha256'] ?? null) !== $expectedInventoryEvidence['source_ledger_sha256']
+    || ($reconciliation['source_row_id_set_sha256'] ?? null) !== $expectedInventoryEvidence['row_id_set_sha256']
+    || ($reconciliation['source_row_count'] ?? null) !== 118
+    || ($reconciliation['cohort_counts'] ?? null) !== $expectedInventoryEvidence['cohort_counts']
+    || count($publicRows) !== 52
+    || count($historicalRows) !== 50
+    || count($resultRows) !== 16
+    || count($sourceRowIds) !== 118
+    || count(array_unique($sourceRowIds)) !== 118
+    || hash('sha256', implode("\n", $sourceRowIds)."\n") !== $expectedInventoryEvidence['row_id_set_sha256']
+) {
+    throw new RuntimeException('Frozen 118-row inventory reconciliation does not match.');
+}
+
+$assetsByUnit = array_column($assets, null, 'unit');
+foreach ($resultRows as $index => $row) {
+    $unit = $expectedUnits[$index];
+    $asset = $assetsByUnit[$unit] ?? null;
+    if (
+        ($row['row_id'] ?? null) !== 'W2-RESULT-'.$unit
+        || ($row['unit'] ?? null) !== $unit
+        || ($row['stable_asset_identity'] ?? null) !== 'big5.result_content.'.$unit
+        || ($row['translation_identity'] ?? null) !== 'big5-result:'.$unit.':zh-CN:en'
+        || ($row['asset_id'] ?? null) !== 'big5.en.w2.'.$unit
+        || ($asset['asset_id'] ?? null) !== ($row['asset_id'] ?? null)
+    ) {
+        throw new RuntimeException("Frozen result row mapping does not match: {$unit}");
+    }
+
+    $content = $asset['content'] ?? [];
+    foreach ($row['required_content_keys'] ?? [] as $key) {
+        if (! array_key_exists($key, $content)) {
+            throw new RuntimeException("Required content key is missing for {$unit}: {$key}");
+        }
+    }
+
+    foreach ($row['required_item_identities'] ?? [] as $path => $expectedIdentities) {
+        if (str_contains($path, '.')) {
+            [$collection, $identityKey] = explode('.', $path, 2);
+            $actualIdentities = array_column($content[$collection] ?? [], $identityKey);
+        } else {
+            $actualIdentities = $content[$path] ?? null;
+        }
+        if ($actualIdentities !== $expectedIdentities) {
+            throw new RuntimeException("Required item identities do not match for {$unit}: {$path}");
+        }
+    }
 }
 
 $encodedAssets = json_encode($assets, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);

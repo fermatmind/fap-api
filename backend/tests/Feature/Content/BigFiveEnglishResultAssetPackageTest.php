@@ -53,6 +53,66 @@ final class BigFiveEnglishResultAssetPackageTest extends TestCase
     }
 
     #[Test]
+    public function it_reconciles_all_118_frozen_source_rows_and_required_result_keys(): void
+    {
+        $manifest = $this->loadJson('package_manifest.json');
+        $ledger = $this->loadJson('source_ledger.json');
+        $reconciliation = $this->loadJson('inventory_row_reconciliation.json');
+        $assetsByUnit = array_column($this->assets(), null, 'unit');
+        $expectedCounts = [
+            'public_profile_control' => 52,
+            'english_historical_revision_verification' => 50,
+            'result_content' => 16,
+        ];
+
+        $this->assertSame(118, $manifest['source_inventory']['row_count']);
+        $this->assertSame($expectedCounts, $manifest['source_inventory']['cohort_counts']);
+        $this->assertSame('inventory_row_reconciliation.json', $manifest['source_inventory']['row_reconciliation_file']);
+        $this->assertSame(118, $ledger['inventory_row_reconciliation']['row_count']);
+        $this->assertSame($expectedCounts, $ledger['inventory_row_reconciliation']['cohort_counts']);
+        $this->assertSame(52, count($reconciliation['public_profile_control_rows']));
+        $this->assertSame(50, count($reconciliation['english_historical_revision_rows']));
+        $this->assertSame(16, count($reconciliation['result_content_rows']));
+
+        $sourceRowIds = [
+            ...$reconciliation['public_profile_control_rows'],
+            ...$reconciliation['english_historical_revision_rows'],
+            ...array_column($reconciliation['result_content_rows'], 'row_id'),
+        ];
+        $this->assertCount(118, $sourceRowIds);
+        $this->assertCount(118, array_unique($sourceRowIds));
+        $this->assertSame(
+            '347bd92a3db93d873b44e27c88327e860ee5915e9e7eafb9adb2227e75fef8b7',
+            hash('sha256', implode("\n", $sourceRowIds)."\n")
+        );
+
+        foreach ($reconciliation['result_content_rows'] as $index => $row) {
+            $unit = self::UNITS[$index];
+            $asset = $assetsByUnit[$unit];
+
+            $this->assertSame('W2-RESULT-'.$unit, $row['row_id']);
+            $this->assertSame($unit, $row['unit']);
+            $this->assertSame('big5.result_content.'.$unit, $row['stable_asset_identity']);
+            $this->assertSame('big5-result:'.$unit.':zh-CN:en', $row['translation_identity']);
+            $this->assertSame($asset['asset_id'], $row['asset_id']);
+
+            foreach ($row['required_content_keys'] as $key) {
+                $this->assertArrayHasKey($key, $asset['content'], "{$unit}.{$key}");
+            }
+
+            foreach ($row['required_item_identities'] ?? [] as $path => $expectedIdentities) {
+                if (str_contains($path, '.')) {
+                    [$collection, $identityKey] = explode('.', $path, 2);
+                    $actualIdentities = array_column($asset['content'][$collection], $identityKey);
+                } else {
+                    $actualIdentities = $asset['content'][$path];
+                }
+                $this->assertSame($expectedIdentities, $actualIdentities, "{$unit}.{$path}");
+            }
+        }
+    }
+
+    #[Test]
     public function it_keeps_every_asset_draft_only_and_every_permission_false(): void
     {
         $manifest = $this->loadJson('package_manifest.json');
@@ -147,6 +207,22 @@ final class BigFiveEnglishResultAssetPackageTest extends TestCase
         $this->assertSame('Delayed-Feedback Persistence', $c5['label']);
         $this->assertStringContainsString('keep making progress', $c5['description']);
         $this->assertStringContainsString('feedback or reward is not immediate', $c5['description']);
+        $a4 = array_values(array_filter(
+            $byUnit['facet_subscale_explanations']['facets'],
+            static fn (array $facet): bool => $facet['code'] === 'A4'
+        ))[0];
+        $this->assertSame('Conflict Mediation', $a4['label']);
+        $this->assertStringContainsString('maintain the relationship', $a4['description']);
+        $this->assertStringContainsString('yield when useful', $a4['description']);
+        $this->assertStringContainsString('prevent escalation', $a4['description']);
+        $n2 = array_values(array_filter(
+            $byUnit['facet_subscale_explanations']['facets'],
+            static fn (array $facet): bool => $facet['code'] === 'N2'
+        ))[0];
+        $this->assertSame('Anger Activation', $n2['label']);
+        $this->assertStringContainsString('internal anger or resistance', $n2['description']);
+        $this->assertStringContainsString('obstructed, misunderstood', $n2['description']);
+        $this->assertStringContainsString('boundary is violated', $n2['description']);
         $n3 = array_values(array_filter(
             $byUnit['facet_subscale_explanations']['facets'],
             static fn (array $facet): bool => $facet['code'] === 'N3'
@@ -188,7 +264,7 @@ final class BigFiveEnglishResultAssetPackageTest extends TestCase
             hash('sha256', implode("\n", $canonical))
         );
         $this->assertSame(
-            '76c547083230ae57c7028037bfb50623bdfd7cf007335166ac01abde1cf66851',
+            'b6676eff4e63f257a7a460f5c79114f79ce23bc5cd54ccaf06ff835d5c635e6c',
             $shaManifest['package_sha256']
         );
     }
