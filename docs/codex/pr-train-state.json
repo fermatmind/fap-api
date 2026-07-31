@@ -101179,7 +101179,7 @@
     "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
     "status": "ready_to_merge",
     "depends_on": [],
-    "commit_sha": "f0886e9acba8ab0a5acc08504e5bafc50afd9308",
+    "commit_sha": "04ebc075fb4f684415befe3f5b7047e3cb23ae59",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3421",
     "checks": {
       "production_read_only_inventory": {
@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "CI run 30595271594 and Code Scanning run 30595271629 passed all required jobs on metadata head c13e570466fc372029644752cdc7d0c57384df4d. Exact-head review then identified over-broad plain-prose CSS function matching and missing cover/thumbnail media key families. Implementation f0886e9acba8ab0a5acc08504e5bafc50afd9308 scopes CSS image functions to image-capable declarations or style attributes and rejects normalized cover/thumbnail keys; required checks must rerun."
+        "evidence": "CI run 30595778238 and Code Scanning run 30595778236 passed all required jobs on metadata head f6f9743b99fec53afda1672d77b4bd807127f261. Exact-head review then identified CSS-escaped image function names as a browser-renderable bypass. Implementation 04ebc075fb4f684415befe3f5b7047e3cb23ae59 decodes CSS escapes before matching image-capable declarations and style attributes; required checks must rerun."
       }
     },
     "scope_validation": {
@@ -101458,9 +101458,14 @@
         "at": "2026-07-31T01:12:33Z",
         "status": "github_checks_pending",
         "note": "CI run 30595271594 and Code Scanning run 30595271629 passed all required jobs on metadata head c13e570466fc372029644752cdc7d0c57384df4d. Exact-head review then found that plain prose mentioning CSS image functions was rejected and normalized cover/thumbnail media keys were not rejected. Implementation f0886e9acba8ab0a5acc08504e5bafc50afd9308 confines CSS detection to image-capable declarations or actual style attributes and expands normalized media-key families. Focused PHPUnit passes 30 tests / 237 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
+      },
+      {
+        "at": "2026-07-31T01:23:08Z",
+        "status": "github_checks_pending",
+        "note": "CI run 30595778238 and Code Scanning run 30595778236 passed all required jobs on metadata head f6f9743b99fec53afda1672d77b4bd807127f261. Exact-head review then found a valid CSS escape bypass such as \\75rl(...). Implementation 04ebc075fb4f684415befe3f5b7047e3cb23ae59 decodes CSS hexadecimal and simple escapes before matching image functions in declarations and bounded style attributes. Focused PHPUnit passes 30 tests / 241 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
       }
     ],
-    "updated_at": "2026-07-31T01:12:33Z"
+    "updated_at": "2026-07-31T01:23:08Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
