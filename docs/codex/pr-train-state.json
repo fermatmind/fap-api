@@ -24,7 +24,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "The final focused contract suite passed 48 tests / 564 assertions; OpenAPI passed 2 / 6; the exact runtime-freeze classifier passed 3 / 9 after committing and integrating latest main; scoped Pint passed all 9 files; route:list exposed 98 v0.3 routes including the five gift routes; backend Composer strict validation, YAML/JSON parsing, git diff checks, and exact allowed-path scope passed. The complete backend/scripts/ci_verify_mbti.sh exited 0 with the repository test APP_KEY supplied only as process environment, including Big Five 1622 tests / 195831 assertions, Personality authority 95 / 5917, migration, auth, OpenAPI, order-security, dependency-security, webhook, attempt, and downstream gates. Verifier-generated Big Five compiled artifacts were restored and no secret or production configuration was created."
+        "evidence": "After exact-head review repair, the final focused contract suite passed 49 tests / 584 assertions; OpenAPI passed 2 / 6; the exact runtime-freeze classifier passed 3 / 9; scoped Pint passed all 9 files; route:list exposed 98 v0.3 routes including the five gift routes; backend Composer strict validation, YAML/JSON parsing, git diff checks, and exact allowed-path scope passed. The complete backend/scripts/ci_verify_mbti.sh exited 0 with the repository test APP_KEY supplied only as process environment, including Big Five 1622 tests / 195831 assertions, Personality authority 95 / 5917, migration, auth, OpenAPI, order-security, dependency-security, webhook, attempt, and downstream gates. Verifier-generated Big Five compiled artifacts were restored and no secret or production configuration was created."
       },
       "github_required_checks": {
         "status": "pending",
@@ -71,9 +71,14 @@
         "at": "2026-07-31T03:35:13Z",
         "status": "github_checks_pending",
         "note": "Pushed immutable implementation commit 6c1328394f5efaf84f9b5419cc1c52fdb040cf97 and opened PR #3448. Required GitHub checks, exact-head review, clean mergeability, and main-drift reconciliation remain mandatory before squash merge."
+      },
+      {
+        "at": "2026-07-31T03:46:41Z",
+        "status": "github_checks_pending",
+        "note": "Exact head e73a18fd3dec8288524ebe705b3e860c148ffc04 passed all nine required checks with staging parity skipped, but review found three valid entitlement lifecycle issues and origin/main advanced by two commits. The repair keeps purchasing requests active beyond request TTL, reactivates and rebinds a revoked grant for a later paid gift, and preserves unrelated active entitlement provenance. Focused validation now passes 49 tests / 584 assertions plus the 3 / 9 classifier and scoped Pint; latest-main integration and fresh exact-head checks remain required."
       }
     ],
-    "updated_at": "2026-07-31T03:35:13Z"
+    "updated_at": "2026-07-31T03:46:41Z"
   },
   "MBTI-CROSS-PUBLISH-51": {
     "id": "MBTI-CROSS-PUBLISH-51",

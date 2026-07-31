@@ -103,8 +103,13 @@ final class ReportGiftService
         $existing = DB::table('report_gift_requests')
             ->where('org_id', $orgId)
             ->where('target_attempt_id', $attemptId)
-            ->whereIn('status', [self::STATUS_PENDING, self::STATUS_PURCHASING])
-            ->where('expires_at', '>', now())
+            ->where(function ($query) {
+                $query->where('status', self::STATUS_PURCHASING)
+                    ->orWhere(function ($pending) {
+                        $pending->where('status', self::STATUS_PENDING)
+                            ->where('expires_at', '>', now());
+                    });
+            })
             ->first();
         if ($existing) {
             return $this->error('GIFT_REQUEST_ACTIVE', 'an active gift request already exists.', 409);
@@ -428,21 +433,57 @@ final class ReportGiftService
             return ['ok' => true, 'idempotent' => true];
         }
 
+        $existingGrant = DB::table('benefit_grants')
+            ->where('org_id', (int) $gift->org_id)
+            ->where('benefit_code', strtoupper(trim($benefitCode)))
+            ->where('scope', $scope)
+            ->where('attempt_id', (string) $gift->target_attempt_id)
+            ->lockForUpdate()
+            ->first();
+        $orderNo = (string) $order->order_no;
+        $existingGrantIsUsable = $existingGrant !== null
+            && strtolower(trim((string) ($existingGrant->status ?? ''))) === 'active'
+            && ($existingGrant->expires_at === null || now()->lessThan($existingGrant->expires_at));
+        $existingGrantBelongsToOrder = $existingGrantIsUsable
+            && trim((string) ($existingGrant->order_no ?? '')) === $orderNo;
+
+        if ($existingGrant !== null && ! $existingGrantIsUsable) {
+            DB::table('benefit_grants')
+                ->where('id', (string) $existingGrant->id)
+                ->update([
+                    'user_id' => $this->normalizeActorId($gift->recipient_user_id ?? null)
+                        ?? $this->normalizeActorId($gift->recipient_anon_id ?? null)
+                        ?? 'attempt:'.(string) $gift->target_attempt_id,
+                    'benefit_ref' => $this->normalizeActorId($gift->recipient_anon_id ?? null)
+                        ?? $this->normalizeActorId($gift->recipient_user_id ?? null)
+                        ?? 'attempt:'.(string) $gift->target_attempt_id,
+                    'order_no' => $orderNo,
+                    'source_order_id' => (string) $order->id,
+                    'status' => 'active',
+                    'expires_at' => $expiresAt,
+                    'revoked_at' => null,
+                    'updated_at' => now(),
+                ]);
+            $existingGrantBelongsToOrder = true;
+        }
+
         $grant = $this->entitlements->grantAttemptUnlock(
             (int) $gift->org_id,
             $this->normalizeActorId($gift->recipient_user_id ?? null),
             $this->normalizeActorId($gift->recipient_anon_id ?? null),
             $benefitCode,
             (string) $gift->target_attempt_id,
-            (string) $order->order_no,
+            $orderNo,
             $scope,
             $expiresAt,
             $modules,
-            [
-                'unlock_source' => ReportAccess::UNLOCK_SOURCE_GIFT_PURCHASE,
-                'granted_via' => ReportAccess::UNLOCK_SOURCE_GIFT_PURCHASE,
-                'gift_request_id' => (string) $gift->id,
-            ]
+            $existingGrant === null || $existingGrantBelongsToOrder
+                ? [
+                    'unlock_source' => ReportAccess::UNLOCK_SOURCE_GIFT_PURCHASE,
+                    'granted_via' => ReportAccess::UNLOCK_SOURCE_GIFT_PURCHASE,
+                    'gift_request_id' => (string) $gift->id,
+                ]
+                : null
         );
         if (($grant['ok'] ?? false) !== true) {
             return $grant;
