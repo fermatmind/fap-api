@@ -221,15 +221,23 @@ final class ContentPage extends Model
         });
 
         static::saved(function (self $page): void {
-            Cache::store('redis')->forget(
-                "content_page:v1:{$page->org_id}:{$page->slug}:{$page->locale}"
-            );
+            try {
+                Cache::forget(
+                    "content_page:v1:{$page->org_id}:{$page->slug}:{$page->locale}"
+                );
+            } catch (\RedisException) {
+                // Redis unavailable — cache invalidation skipped; next read will miss cache
+            }
         });
 
         static::deleted(function (self $page): void {
-            Cache::store('redis')->forget(
-                "content_page:v1:{$page->org_id}:{$page->slug}:{$page->locale}"
-            );
+            try {
+                Cache::forget(
+                    "content_page:v1:{$page->org_id}:{$page->slug}:{$page->locale}"
+                );
+            } catch (\RedisException) {
+                // Redis unavailable — cache invalidation skipped; next read will miss cache
+            }
         });
     }
 

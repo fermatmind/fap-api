@@ -39,7 +39,7 @@ final class ContentPageController extends Controller
         $normalizedSlug = $this->normalizeSlug($slug);
         $cacheKey = "content_page:v1:{$validated['org_id']}:{$normalizedSlug}:{$validated['locale']}";
 
-        $pagePayload = Cache::store('redis')->remember($cacheKey, 300, function () use ($validated, $normalizedSlug) {
+        $pagePayload = Cache::remember($cacheKey, 300, function () use ($validated, $normalizedSlug) {
             $page = ContentPage::query()
                 ->withoutGlobalScopes()
                 ->where('org_id', $validated['org_id'])
