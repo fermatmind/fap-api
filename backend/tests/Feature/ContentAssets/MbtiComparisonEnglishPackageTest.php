@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class MbtiComparisonEnglishPackageTest extends TestCase
 {
-    private const PACKAGE_DIRECTORY = __DIR__.'/../../../content_assets/en-content-parity/W1-mbti/comparisons/w9-correction-3583b491';
+    private const PACKAGE_DIRECTORY = __DIR__.'/../../../content_assets/en-content-parity/W1-mbti/comparisons/w9-correction-01a5dd2e';
 
     private const INVENTORY_SHA = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
@@ -31,6 +31,30 @@ final class MbtiComparisonEnglishPackageTest extends TestCase
         'W1-COMP-05-INTJ-VS-INTP',
         'W1-COMP-06-ISFP-VS-INFP',
         'W1-COMP-07-ISTJ-VS-ISFJ',
+    ];
+
+    private const REQUIRED_SOURCE_EQUIVALENT_LINKS = [
+        'W1-COMP-01-ENFP-VS-ENTP' => [
+            '/en/tests/big-five-personality-test-ocean-model',
+            '/en/tests/holland-career-interest-test-riasec',
+            '/en/personality/enfp-a-vs-enfp-t',
+            '/en/personality/entp-a-vs-entp-t',
+        ],
+        'W1-COMP-03-ESTJ-VS-ENTJ' => [
+            '/en/tests/big-five-personality-test-ocean-model',
+            '/en/tests/holland-career-interest-test-riasec',
+            '/en/personality/estj-a-vs-estj-t',
+            '/en/personality/entj-a-vs-entj-t',
+        ],
+        'W1-COMP-06-ISFP-VS-INFP' => [
+            '/en/tests/big-five-personality-test-ocean-model',
+            '/en/tests/holland-career-interest-test-riasec',
+            '/en/personality/isfp-a-vs-isfp-t',
+            '/en/personality/infp-a-vs-infp-t',
+        ],
+        'W1-COMP-07-ISTJ-VS-ISFJ' => [
+            '/en/personality/esfj-a',
+        ],
     ];
 
     private const FORBIDDEN_KEYS = [
@@ -64,7 +88,7 @@ final class MbtiComparisonEnglishPackageTest extends TestCase
         $package = $this->readPackageJson('assets.json');
 
         self::assertSame('fermatmind.en_parity.immutable_content_package_manifest.v1', $manifest['schema_version']);
-        self::assertSame('EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-03-2026-07-31', $manifest['package_id']);
+        self::assertSame('EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-04-2026-07-31', $manifest['package_id']);
         self::assertSame(self::INVENTORY_SHA, $manifest['inventory_package_sha256']);
         self::assertSame('unpublished_candidate', $manifest['status']);
         self::assertSame(7, $manifest['asset_count']);
@@ -81,7 +105,7 @@ final class MbtiComparisonEnglishPackageTest extends TestCase
         }
 
         self::assertSame($manifest['package_sha256'], hash('sha256', $packageHashInput));
-        self::assertSame('3583b491806683747898787f106a24f46a09ab031e043ea22e817c900fa88914', $manifest['package_sha256']);
+        self::assertSame('01a5dd2e5f5c52545faadbea4b3b6b01cc4ddc73e8e653df3541926e475fbf4f', $manifest['package_sha256']);
     }
 
     #[Test]
@@ -154,6 +178,13 @@ final class MbtiComparisonEnglishPackageTest extends TestCase
 
             foreach ($payload['internal_links'] as $link) {
                 self::assertStringStartsWith('/en/', $link['href']);
+            }
+            foreach (self::REQUIRED_SOURCE_EQUIVALENT_LINKS[$asset['row_id']] ?? [] as $requiredHref) {
+                self::assertContains(
+                    $requiredHref,
+                    array_column($payload['internal_links'], 'href'),
+                    $asset['row_id'].' omitted the source-authoritative internal-link intent '.$requiredHref,
+                );
             }
 
             $mapRows = array_values(array_filter(
