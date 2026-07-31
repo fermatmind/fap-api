@@ -7,6 +7,7 @@ error_reporting(E_ALL);
 
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
+use App\Models\OccupationCrosswalk;
 use App\Services\Career\Bundles\CareerJobDisplaySurfaceBuilder;
 use App\Services\Career\Import\CareerSelectedDisplayAssetMapper;
 use Illuminate\Contracts\Console\Kernel;
@@ -17,7 +18,9 @@ const EXPECTED_WORKBOOK_SHA256 = 'c30f8743cfd0d8baa14ac931cc7270807425164952f6a4
 const EXPECTED_WORKBOOK_BASENAME = 'fermat_career_assets_v4_2_v9_d23b_schema_repaired.xlsx';
 const EXPECTED_MANIFEST_POSITIONS = [30, 33, 34, 40, 42];
 const EXPECTED_REPAIR_COUNT = 5;
+const EXPECTED_CROSSWALK_REPAIR_COUNT = 10;
 const EXPECTED_COMPONENT_COUNT = 24;
+const CROSSWALK_REPAIR_NOTES = 'Career search-entry exact reviewed-workbook authority repair.';
 
 final class CrosswalkAuthorityDrift extends RuntimeException
 {
@@ -151,6 +154,52 @@ function workbookRows(
     return $rows;
 }
 
+/** @param array<string, mixed> $row
+ * @return array<string, mixed>
+ */
+function normalizeReviewedWorkbookRow(array $row): array
+{
+    $row['_source_workbook_row_sha256'] = CareerSelectedDisplayAssetMapper::workbookRowAuthorityHash($row);
+    if (trim((string) ($row['Primary_CTA_Target_Action'] ?? '')) !== 'start_click') {
+        throw new RuntimeException('REVIEWED_WORKBOOK_NORMALIZATION_DRIFT');
+    }
+    $row['Primary_CTA_Target_Action'] = 'start_riasec_test';
+
+    $cnSchema = json_decode(
+        (string) ($row['CN_Occupation_Schema_JSON'] ?? ''),
+        true,
+        512,
+        JSON_THROW_ON_ERROR,
+    );
+    $description = (string) ($cnSchema['description'] ?? '');
+    if (! str_contains($description, '招聘样本')) {
+        throw new RuntimeException('REVIEWED_WORKBOOK_NORMALIZATION_DRIFT');
+    }
+    $cnSchema['description'] = str_replace(
+        ['招聘平台样本', '招聘样本'],
+        '公开市场信号',
+        $description,
+    );
+    $row['CN_Occupation_Schema_JSON'] = canonicalRepairJson($cnSchema);
+
+    $sourceRefs = json_decode(
+        (string) ($row['Claim_Level_Source_Refs'] ?? ''),
+        true,
+        512,
+        JSON_THROW_ON_ERROR,
+    );
+    if (! is_array($sourceRefs) || array_key_exists('fermatmind_interpretation', $sourceRefs)) {
+        throw new RuntimeException('REVIEWED_WORKBOOK_NORMALIZATION_DRIFT');
+    }
+    $sourceRefs['fermatmind_interpretation'] = [
+        'label' => 'FermatMind interpretation boundary',
+        'usage' => 'FermatMind interpretation is separated from cited occupational facts.',
+    ];
+    $row['Claim_Level_Source_Refs'] = canonicalRepairJson($sourceRefs);
+
+    return $row;
+}
+
 /**
  * @param  list<string>  $manifestSlugs
  * @param  array<string, array<string, mixed>>  $rows
@@ -215,22 +264,46 @@ function crosswalkAuthorityDiagnostics(array $manifestSlugs, array $rows): array
     return $diagnostics;
 }
 
-/** @return array{items: list<array<string, mixed>>, payload_set_sha256: string, repair_set_sha256: string} */
+/**
+ * @return array{
+ *   items: list<array<string, mixed>>,
+ *   payload_set_sha256: string,
+ *   display_repair_set_sha256: string,
+ *   crosswalk_repair_set_sha256: string,
+ *   normalization_set_sha256: string,
+ *   repair_set_sha256: string
+ * }
+ */
 function planRepair(
     CareerSelectedDisplayAssetMapper $mapper,
     array $manifestSlugs,
     array $rows,
+    bool $allowExactMissingCrosswalks = false,
 ): array {
     $crosswalkDiagnostics = crosswalkAuthorityDiagnostics($manifestSlugs, $rows);
-    if (array_filter(
+    $drift = array_filter(
         $crosswalkDiagnostics,
         static fn (array $item): bool => $item['classification'] !== 'exact',
-    ) !== []) {
-        throw new CrosswalkAuthorityDrift($crosswalkDiagnostics);
+    );
+    if ($drift !== []) {
+        $exactMissing = $allowExactMissingCrosswalks
+            && array_filter(
+                $crosswalkDiagnostics,
+                static fn (array $item): bool => $item['classification'] !== 'missing'
+                    || $item['us_soc_total'] !== 0
+                    || $item['us_soc_match'] !== 0
+                    || $item['onet_soc_2019_total'] !== 0
+                    || $item['onet_soc_2019_match'] !== 0,
+            ) === [];
+        if (! $exactMissing) {
+            throw new CrosswalkAuthorityDrift($crosswalkDiagnostics);
+        }
     }
 
     $items = [];
     $repairSet = [];
+    $crosswalkRepairSet = [];
+    $normalizationSet = [];
     foreach (EXPECTED_MANIFEST_POSITIONS as $position) {
         $slug = $manifestSlugs[$position - 1] ?? '';
         $row = $rows[$slug] ?? null;
@@ -274,28 +347,60 @@ function planRepair(
             'manifest_position' => $position,
             'slug' => $slug,
             'occupation' => $occupation,
+            'source_title' => trim((string) ($row['EN_Title'] ?? '')),
+            'expected_soc' => $expectedSoc,
+            'expected_onet' => $expectedOnet,
             'payload' => $payload,
             'payload_sha256' => $payloadSha,
             'row_number' => $mapped['row_number'],
-            'workbook_row_sha256' => CareerSelectedDisplayAssetMapper::workbookRowAuthorityHash($row),
+            'workbook_row_sha256' => (string) ($row['_source_workbook_row_sha256']
+                ?? CareerSelectedDisplayAssetMapper::workbookRowAuthorityHash($row)),
         ];
+        $workbookRowSha = (string) ($row['_source_workbook_row_sha256']
+            ?? CareerSelectedDisplayAssetMapper::workbookRowAuthorityHash($row));
         $repairSet[] = [
             'manifest_position' => $position,
             'payload_sha256' => $payloadSha,
-            'workbook_row_sha256' => CareerSelectedDisplayAssetMapper::workbookRowAuthorityHash($row),
+            'workbook_row_sha256' => $workbookRowSha,
+        ];
+        foreach (['us_soc' => $expectedSoc, 'onet_soc_2019' => $expectedOnet] as $system => $code) {
+            $crosswalkRepairSet[] = [
+                'manifest_position' => $position,
+                'source_system' => $system,
+                'source_code_sha256' => hash('sha256', $code),
+                'source_title_sha256' => hash('sha256', trim((string) ($row['EN_Title'] ?? ''))),
+                'workbook_row_sha256' => $workbookRowSha,
+            ];
+        }
+        $normalizationSet[] = [
+            'manifest_position' => $position,
+            'source_workbook_row_sha256' => $workbookRowSha,
+            'normalized_row_sha256' => CareerSelectedDisplayAssetMapper::workbookRowAuthorityHash($row),
         ];
     }
 
+    $displayRepairSetSha256 = hash('sha256', canonicalRepairJson($repairSet));
+    $crosswalkRepairSetSha256 = hash('sha256', canonicalRepairJson($crosswalkRepairSet));
+    $normalizationSetSha256 = hash('sha256', canonicalRepairJson($normalizationSet));
+    $payloadSetSha256 = hash('sha256', canonicalRepairJson(array_map(
+        static fn (array $item): array => [
+            'manifest_position' => $item['manifest_position'],
+            'payload_sha256' => $item['payload_sha256'],
+        ],
+        $items,
+    )));
+
     return [
         'items' => $items,
-        'payload_set_sha256' => hash('sha256', canonicalRepairJson(array_map(
-            static fn (array $item): array => [
-                'manifest_position' => $item['manifest_position'],
-                'payload_sha256' => $item['payload_sha256'],
-            ],
-            $items,
-        ))),
-        'repair_set_sha256' => hash('sha256', canonicalRepairJson($repairSet)),
+        'payload_set_sha256' => $payloadSetSha256,
+        'display_repair_set_sha256' => $displayRepairSetSha256,
+        'crosswalk_repair_set_sha256' => $crosswalkRepairSetSha256,
+        'normalization_set_sha256' => $normalizationSetSha256,
+        'repair_set_sha256' => hash('sha256', canonicalRepairJson([
+            'crosswalk_repair_set_sha256' => $crosswalkRepairSetSha256,
+            'display_repair_set_sha256' => $displayRepairSetSha256,
+            'normalization_set_sha256' => $normalizationSetSha256,
+        ])),
     ];
 }
 
@@ -327,6 +432,9 @@ function installRepairGuard(object $app): void
         if (preg_match('/^insert into [`"]?career_job_display_assets[`"]?\b/D', $normalized) === 1) {
             return;
         }
+        if (preg_match('/^insert into [`"]?occupation_crosswalks[`"]?\b/D', $normalized) === 1) {
+            return;
+        }
         throw new RuntimeException('NON_TARGET_DATABASE_WRITE_BLOCKED');
     });
 }
@@ -348,6 +456,21 @@ function nonTargetStateSha256(array $targetSlugs): string
             'template_version' => (string) $asset->template_version,
             'status' => (string) $asset->status,
             'updated_at' => optional($asset->updated_at)->toISOString(),
+        ])."\n");
+    }
+    foreach (OccupationCrosswalk::query()
+        ->whereHas('occupation', static function ($query) use ($targetSlugs): void {
+            $query->whereNotIn('canonical_slug', $targetSlugs);
+        })
+        ->orderBy('id')
+        ->cursor() as $crosswalk) {
+        hash_update($context, canonicalRepairJson([
+            'id' => (string) $crosswalk->id,
+            'occupation_id' => (string) $crosswalk->occupation_id,
+            'source_system' => (string) $crosswalk->source_system,
+            'source_code' => (string) $crosswalk->source_code,
+            'mapping_type' => (string) $crosswalk->mapping_type,
+            'updated_at' => optional($crosswalk->updated_at)->toISOString(),
         ])."\n");
     }
 
@@ -394,6 +517,9 @@ try {
     $expectedPayloadSet = $mode === 'repair'
         ? requiredRepairEnv('EXPECTED_REPAIR_PAYLOAD_SET_SHA256', '/^[0-9a-f]{64}$/D')
         : null;
+    $expectedCrosswalkDiagnosticState = $mode === 'repair'
+        ? requiredRepairEnv('EXPECTED_CROSSWALK_DIAGNOSTIC_STATE_SHA256', '/^[0-9a-f]{64}$/D')
+        : null;
     $currentRelease = realpath(rtrim($deployPath, '/').'/current');
     if (
         $currentRelease === false
@@ -437,7 +563,17 @@ try {
         EXPECTED_MANIFEST_POSITIONS,
     );
     $rows = workbookRows($mapper, $workbook, $targetSlugs);
-    $plan = planRepair($mapper, $manifestSlugs, $rows);
+    if ($mode === 'repair') {
+        $observedCrosswalkDiagnostics = crosswalkAuthorityDiagnostics($manifestSlugs, $rows);
+        if (hash('sha256', canonicalRepairJson($observedCrosswalkDiagnostics)) !== $expectedCrosswalkDiagnosticState) {
+            throw new RuntimeException('CROSSWALK_DIAGNOSTIC_STATE_DRIFT');
+        }
+        $rows = array_map(
+            static fn (array $row): array => normalizeReviewedWorkbookRow($row),
+            $rows,
+        );
+    }
+    $plan = planRepair($mapper, $manifestSlugs, $rows, $mode === 'repair');
     if ($mode === 'preflight') {
         emitRepair([
             'status' => 'PASS_AUTHORITY_REPAIR_PREFLIGHT',
@@ -461,8 +597,55 @@ try {
     }
 
     $nonTargetBefore = nonTargetStateSha256($targetSlugs);
-    $result = DB::transaction(function () use ($plan, $workbook, $app, $targetSlugs, $nonTargetBefore): array {
-        $written = 0;
+    $result = DB::transaction(function () use (
+        $plan,
+        $workbook,
+        $app,
+        $targetSlugs,
+        $nonTargetBefore,
+        $manifestSlugs,
+        $rows,
+    ): array {
+        $crosswalkWritten = 0;
+        foreach ($plan['items'] as $item) {
+            /** @var Occupation $occupation */
+            $occupation = Occupation::query()->lockForUpdate()->findOrFail($item['occupation']->id);
+            foreach ([
+                'us_soc' => $item['expected_soc'],
+                'onet_soc_2019' => $item['expected_onet'],
+            ] as $sourceSystem => $sourceCode) {
+                $existing = OccupationCrosswalk::query()
+                    ->where('occupation_id', $occupation->id)
+                    ->where('source_system', $sourceSystem)
+                    ->lockForUpdate()
+                    ->count();
+                if ($existing !== 0) {
+                    throw new RuntimeException('CROSSWALK_REPAIR_TARGET_STATE_DRIFT');
+                }
+                OccupationCrosswalk::query()->create([
+                    'occupation_id' => $occupation->id,
+                    'source_system' => $sourceSystem,
+                    'source_code' => $sourceCode,
+                    'source_title' => $item['source_title'],
+                    'mapping_type' => 'direct_match',
+                    'confidence_score' => 1.0,
+                    'notes' => CROSSWALK_REPAIR_NOTES,
+                ]);
+                $crosswalkWritten++;
+            }
+        }
+        if ($crosswalkWritten !== EXPECTED_CROSSWALK_REPAIR_COUNT) {
+            throw new RuntimeException('CROSSWALK_REPAIR_WRITE_COUNT_INVALID');
+        }
+        $postCrosswalkDiagnostics = crosswalkAuthorityDiagnostics($manifestSlugs, $rows);
+        if (array_filter(
+            $postCrosswalkDiagnostics,
+            static fn (array $item): bool => $item['classification'] !== 'exact',
+        ) !== []) {
+            throw new RuntimeException('CROSSWALK_REPAIR_VERIFICATION_FAILED');
+        }
+
+        $displayWritten = 0;
         foreach ($plan['items'] as $item) {
             /** @var Occupation $occupation */
             $occupation = $item['occupation'];
@@ -503,9 +686,9 @@ try {
                     ],
                 ],
             ]);
-            $written++;
+            $displayWritten++;
         }
-        if ($written !== EXPECTED_REPAIR_COUNT) {
+        if ($displayWritten !== EXPECTED_REPAIR_COUNT) {
             throw new RuntimeException('REPAIR_WRITE_COUNT_INVALID');
         }
         $surfaceBuilder = $app->make(CareerJobDisplaySurfaceBuilder::class);
@@ -539,7 +722,8 @@ try {
         }
 
         return [
-            'written_count' => $written,
+            'crosswalk_written_count' => $crosswalkWritten,
+            'display_written_count' => $displayWritten,
             'verification' => $verification,
             'verification_sha256' => hash('sha256', canonicalRepairJson($verification)),
             'non_target_state_sha256' => $nonTargetAfter,
@@ -555,13 +739,19 @@ try {
         'workbook_sha256' => EXPECTED_WORKBOOK_SHA256,
         'manifest_positions' => EXPECTED_MANIFEST_POSITIONS,
         'repair_count' => EXPECTED_REPAIR_COUNT,
+        'crosswalk_repair_count' => EXPECTED_CROSSWALK_REPAIR_COUNT,
         'repair_set_sha256' => $plan['repair_set_sha256'],
         'repair_payload_set_sha256' => $plan['payload_set_sha256'],
+        'display_repair_set_sha256' => $plan['display_repair_set_sha256'],
+        'crosswalk_repair_set_sha256' => $plan['crosswalk_repair_set_sha256'],
+        'normalization_set_sha256' => $plan['normalization_set_sha256'],
         'verification_sha256' => $result['verification_sha256'],
         'verification_rows' => $result['verification'],
         'non_target_state_sha256' => $result['non_target_state_sha256'],
         'server_write_count' => 0,
-        'database_write_count' => $result['written_count'],
+        'crosswalk_write_count' => $result['crosswalk_written_count'],
+        'display_write_count' => $result['display_written_count'],
+        'database_write_count' => $result['crosswalk_written_count'] + $result['display_written_count'],
         'write_state' => 'committed_verified',
     ]);
 } catch (CrosswalkAuthorityDrift $throwable) {
@@ -615,7 +805,12 @@ try {
             'WORKBOOK_TARGET_INCOMPLETE',
             'OCCUPATION_IDENTITY_DRIFT',
             'CROSSWALK_AUTHORITY_DRIFT',
+            'CROSSWALK_DIAGNOSTIC_STATE_DRIFT',
+            'CROSSWALK_REPAIR_TARGET_STATE_DRIFT',
+            'CROSSWALK_REPAIR_WRITE_COUNT_INVALID',
+            'CROSSWALK_REPAIR_VERIFICATION_FAILED',
             'REPAIR_TARGET_STATE_DRIFT',
+            'REVIEWED_WORKBOOK_NORMALIZATION_DRIFT',
             'REVIEWED_WORKBOOK_ROW_INVALID',
             'PREFLIGHT_PLAN_DRIFT',
             'REPAIR_WRITE_COUNT_INVALID',
