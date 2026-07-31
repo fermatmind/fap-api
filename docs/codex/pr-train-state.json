@@ -102402,12 +102402,12 @@
     "base": "main",
     "branch": "codex/en-parity-w2-big5-result-assets-01",
     "title": "EN-PARITY-W2-BIG5-RESULT-ASSETS-01: produce reviewed Big Five English result assets",
-    "status": "local_verified",
+    "status": "github_checks_pending",
     "depends_on": [
       "EN-PARITY-W2-BIG5-INVENTORY-01"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "6fc25b8a8247c660f969a1709dca4236276a9496",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3451",
     "checks": {
       "dependency": {
         "status": "pass",
@@ -102423,7 +102423,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "PR not opened."
+        "evidence": "PR 3451 opened from implementation head 6fc25b8a8247c660f969a1709dca4236276a9496; exact-head required checks and review are pending."
       }
     },
     "scope_validation": {
@@ -102454,8 +102454,13 @@
         "at": "2026-07-31T05:34:22Z",
         "status": "local_verified",
         "note": "Produced exactly sixteen traceable English draft asset groups with 5 dimension and 30 facet explanations, value-neutral range copy, share/private-reader boundaries, fail-closed states, cross-device copy, and analytics reader labels separated from internal IDs. Deterministic package SHA is cda743f52cebaf753b8d0f2f234dd893e88f5d630ea6cc4e7a5f5b32faefda06. All required local package, focused, content-suite, formatting, parsing, scan, diff, and scope checks pass; no write or runtime authority changed."
+      },
+      {
+        "at": "2026-07-31T05:35:51Z",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed the exact sixteen-path scope as implementation head 6fc25b8a8247c660f969a1709dca4236276a9496, then opened PR 3451. Required GitHub checks and exact-head review are pending."
       }
     ],
-    "updated_at": "2026-07-31T05:34:22Z"
+    "updated_at": "2026-07-31T05:35:51Z"
   }
 }
