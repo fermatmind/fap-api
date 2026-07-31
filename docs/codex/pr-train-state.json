@@ -102285,7 +102285,7 @@
       "EN-PARITY-W1-MBTI-RESULT-ASSETS-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "88ca01b13bd59dca62e002bc0edfa2624fded14c",
+    "commit_sha": "b96f227786a074dca46de865615dc24ae3fe5191",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3446",
     "checks": {
       "authorization": {
@@ -102352,8 +102352,13 @@
         "at": "2026-07-31T03:45:13Z",
         "status": "review_fix_local_checks_passed",
         "note": "All required checks on the prior head passed. Two automated review findings exposed non-unique ledger patching plus concurrent main ledger additions. Restored both train files exactly from latest origin/main and reapplied only the uniquely keyed PR06 entries; corrected head must repeat required checks."
+      },
+      {
+        "at": "2026-07-31T03:47:53Z",
+        "status": "github_checks_pending",
+        "note": "Rebased cleanly onto latest origin/main 012392aaf0d83375414f8eb9ad010f6c7c577714. Focused importer, classifier, Pint, exact dry-run, YAML/JSON, diff, and exact 7-path scope checks passed; corrected implementation commit is b96f227786a074dca46de865615dc24ae3fe5191."
       }
     ],
-    "updated_at": "2026-07-31T03:45:13Z"
+    "updated_at": "2026-07-31T03:47:53Z"
   }
 }
