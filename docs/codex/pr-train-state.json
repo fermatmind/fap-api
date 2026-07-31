@@ -101829,7 +101829,7 @@
     "depends_on": [
       "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-01"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "5af71413195ce9a0cfe20ea2417790c0ec044d3f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3439",
     "checks": {
@@ -101854,8 +101854,8 @@
         "evidence": "Changed paths are limited to the exact command, ContentImport service, focused importer test, the existing Big Five runtime-freeze classifier regression required by the failed current-PR check, backend/AGENTS.md, and this PR's docs/codex manifest/state entries. No frozen package, model, migration, route, controller, public API, result package, CMS/database data, publish, SEO runtime, Search Channel, deploy, or frontend file changed."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": null
+        "status": "passed",
+        "evidence": "Exact head ab606c71d1da82bf1a665d36802ea9744e7d94b1 passed all nine applicable required checks: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, semgrep SARIF upload, and Semgrep OSS. Staging parity was skipped and is not a required deploy wait."
       }
     },
     "failure_reason": null,
@@ -101865,7 +101865,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "production_write_execution": false,
@@ -101920,8 +101920,13 @@
         "at": "2026-07-31T02:43:44Z",
         "status": "github_checks_pending",
         "note": "Exact head 01043effecbe91be0e89daca9495d49784de050c passed all nine required checks with staging parity skipped, contained latest origin/main, and was CLEAN/MERGEABLE, but final review found one valid P2 TOCTOU boundary. Fix commit 5af71413195ce9a0cfe20ea2417790c0ec044d3f now reads every package file exactly once, verifies the SHA-256 of that exact byte buffer, and parses assets.json only from the verified buffer. A focused partial-Facade replacement regression proves unverified bytes cannot be consumed even when the frozen filesystem copy remains available. Importer validation passes 6 tests/205 assertions, classifier regression passes 1 test/2 assertions, and scoped Pint, seven-row dry run, 225-line routes, and diff checks pass. Fresh exact-head checks and review remain pending."
+      },
+      {
+        "at": "2026-07-31T02:53:23Z",
+        "status": "ready_to_merge",
+        "note": "Exact head ab606c71d1da82bf1a665d36802ea9744e7d94b1 passed all nine applicable required checks with staging parity skipped, has zero unresolved review threads, is CLEAN/MERGEABLE, and contains latest origin/main 15eb6a2fbf55630f3d1e53fd3bf891930ebcb60b. The exact seven-path PR05 scope remains valid. This readiness metadata tail must independently repeat required checks and exact-head review before squash merge."
       }
     ],
-    "updated_at": "2026-07-31T02:43:44Z"
+    "updated_at": "2026-07-31T02:53:23Z"
   }
 }
