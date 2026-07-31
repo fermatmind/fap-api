@@ -101830,7 +101830,7 @@
       "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": null,
+    "commit_sha": "5fe58e971a1794d0c092dc5830d1db299b102fe9",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3439",
     "checks": {
       "authorization": {
@@ -101847,7 +101847,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "php artisan test --filter=MbtiComparisonEnglishPackageImporterTest --no-ansi passed 4 tests/190 assertions. The focused Big Five runtime-freeze classifier regression passed 1 test/2 assertions and proves only the two exact no-write importer paths are ignored while an actual Big Five runtime service remains blocked. The exact repository package dry run returned seven ordered rows with zh-CN read-only sources, en inactive/draft targets, no reader copy, and every write/release flag false. Wrong SHA, rebuilt package, deterministic replay, protected zh-CN rows, and unsupported write mode passed. Scoped Pint passed for all four PHP files. php artisan route:list --path=api --except-vendor completed with 224 lines. YAML, JSON, and git diff checks passed."
+        "evidence": "php artisan test --filter=MbtiComparisonEnglishPackageImporterTest --no-ansi passed 5 tests/199 assertions. The focused Big Five runtime-freeze classifier regression passed 1 test/2 assertions and proves only the two exact no-write importer paths are ignored while an actual Big Five runtime service remains blocked. The exact repository package dry run returned seven ordered rows with zh-CN read-only sources, en inactive/draft targets, no reader copy, and every write/release flag false. Wrong SHA, rebuilt payload, uppercase manifest digest, arbitrary manifest contract drift, deterministic replay, protected zh-CN rows, and unsupported write mode passed. Scoped Pint passed for all four PHP files. php artisan route:list --path=api --except-vendor completed with 224 lines. YAML, JSON, and git diff checks passed."
       },
       "changed_file_scope": {
         "status": "passed",
@@ -101900,8 +101900,13 @@
         "at": "2026-07-31T02:01:45Z",
         "status": "github_checks_pending",
         "note": "Exact head ecb39ee432d7429499ff7347845236948da00f90 passed 8 required checks with staging parity skipped, but CI/verify-bigfive failed only because its runtime-freeze classifier treated the two new no-write dry-run importer paths as MBTI runtime changes. Inspected the failing job first, then added the two exact paths to the existing comparison-import dry-run predicate plus an allowed/blocked regression, and registered that one classifier test path in this PR scope. Focused validation passed the importer suite at 4 tests/190 assertions and the classifier regression at 1 test/2 assertions; scoped Pint, seven-row command dry run, 224-line route inventory, YAML/JSON, and diff checks passed. No CMS/database/write/release action occurred; fresh exact-head checks remain pending after commit and push."
+      },
+      {
+        "at": "2026-07-31T02:13:22Z",
+        "status": "github_checks_pending",
+        "note": "Exact head ba4617c341b0f2c10a92fb5839e8a41cea144b54 passed all nine required checks with staging parity skipped, then final review found three valid current-scope P2 issues. Fix commit 5fe58e971a1794d0c092dc5830d1db299b102fe9 now validates manifest file digests before normalization, binds the complete frozen package_manifest.json bytes to SHA-256 82eb45134ca4f596efc966a7da41cff17e43eea2ba4c0f35cf53d51e2913deec, adds uppercase-digest and arbitrary-contract-drift regressions, restores the unrelated SECURITY-103-API-07 commit pointer to null, and assigns this implementation pointer to PR05. Integrated latest origin/main 0a354eb6397d13a4c6b3aa45734fc02342ece2d1 without conflict as merge head a4da98c30684896b2e786f6264c4080d4f1de6a2. Post-integration importer validation passed 5 tests/199 assertions and the classifier regression passed 1 test/2 assertions; scoped Pint, seven-row dry run, 224-line routes, YAML/JSON, diff, and exact scope checks passed. Fresh exact-head GitHub checks remain pending."
       }
     ],
-    "updated_at": "2026-07-31T02:01:45Z"
+    "updated_at": "2026-07-31T02:13:22Z"
   }
 }
