@@ -63,6 +63,28 @@
     },
     "mobile_desktop_authority": "same_fields",
     "claim_boundary": "MBTI preference patterns are structured references and working hypotheses, not diagnoses, fixed identities, ability judgments, or outcome predictions.",
+    "authority_targets": {
+      "english_commercial_spec_v1": {
+        "creation_mode": "create_new_inactive_english_content_pack",
+        "pack_type": "content_pack",
+        "scale_code": "MBTI",
+        "region": "GLOBAL",
+        "locale": "en",
+        "content_package_version": "v0.3",
+        "pack_id": "MBTI.global.en.default",
+        "directory_version": "MBTI-GLOBAL-en-v0.3",
+        "planned_repository_path": "content_packages/default/GLOBAL/en/MBTI-GLOBAL-en-v0.3",
+        "authority_file": "commercial_spec.json",
+        "target_state": "inactive_draft",
+        "existing_at_package_freeze": false,
+        "materialized_by_this_package": false,
+        "existing_zh_cn_pack_reuse_allowed": false,
+        "existing_zh_cn_pack_mutation_allowed": false,
+        "runtime_fallback_registration_allowed": false,
+        "importer_absent_target_behavior": "fail_closed_with_separate_pack_creation_prerequisite",
+        "required_creation_scope": "separate English content-pack authority PR before any draft import"
+      }
+    },
     "canonical_projection_contract": {
       "sections": {
         "title_from": "content.title",
@@ -136,6 +158,7 @@
       "authority_field": "commercial_spec.variants[].cta_copy",
       "consumer_field": "offer_set.cta",
       "variant_selector": {
+        "authority_target_ref": "english_commercial_spec_v1",
         "variant_id": "mbti_report_paywall_default_v1",
         "default": true,
         "upgrade_sku_anchor": "MBTI_REPORT_FULL",

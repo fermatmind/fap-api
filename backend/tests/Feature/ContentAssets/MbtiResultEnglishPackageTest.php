@@ -16,7 +16,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
 
     private const INVENTORY_SHA = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
-    private const PACKAGE_SHA = '129451a81fdbe5c4e9593324e7ad44985128a6f1eaf3996b63e1a1c0be2e982b';
+    private const PACKAGE_SHA = '9325013b870fd2496efc0882656240f91ce28ff4faaf1da42fb3dde3577b0ed3';
 
     private const EXPECTED_CANDIDATE_ROW_IDS = [
         'W1-RESULT-CORE-05-OFFER-CTA',
@@ -292,6 +292,30 @@ final class MbtiResultEnglishPackageTest extends TestCase
         self::assertFalse(
             $package['template_contract']['canonical_projection_contract']['runtime_or_entitlement_policy_change_allowed'],
         );
+        $commercialTarget = $package['template_contract']['authority_targets']['english_commercial_spec_v1'];
+        self::assertSame([
+            'creation_mode' => 'create_new_inactive_english_content_pack',
+            'pack_type' => 'content_pack',
+            'scale_code' => 'MBTI',
+            'region' => 'GLOBAL',
+            'locale' => 'en',
+            'content_package_version' => 'v0.3',
+            'pack_id' => 'MBTI.global.en.default',
+            'directory_version' => 'MBTI-GLOBAL-en-v0.3',
+            'planned_repository_path' => 'content_packages/default/GLOBAL/en/MBTI-GLOBAL-en-v0.3',
+            'authority_file' => 'commercial_spec.json',
+            'target_state' => 'inactive_draft',
+            'existing_at_package_freeze' => false,
+            'materialized_by_this_package' => false,
+            'existing_zh_cn_pack_reuse_allowed' => false,
+            'existing_zh_cn_pack_mutation_allowed' => false,
+            'runtime_fallback_registration_allowed' => false,
+            'importer_absent_target_behavior' => 'fail_closed_with_separate_pack_creation_prerequisite',
+            'required_creation_scope' => 'separate English content-pack authority PR before any draft import',
+        ], $commercialTarget);
+        self::assertDirectoryDoesNotExist(
+            dirname(base_path()).'/'.$commercialTarget['planned_repository_path'],
+        );
 
         $stableIdentities = [];
         $readerCopyFingerprints = [];
@@ -308,6 +332,7 @@ final class MbtiResultEnglishPackageTest extends TestCase
                 self::assertSame('offer_set.cta', $asset['consumer_field']);
                 self::assertSame('locked_upsell_only', $asset['entitlement_level']);
                 self::assertSame([
+                    'authority_target_ref' => 'english_commercial_spec_v1',
                     'variant_id' => 'mbti_report_paywall_default_v1',
                     'default' => true,
                     'upgrade_sku_anchor' => 'MBTI_REPORT_FULL',
@@ -791,9 +816,11 @@ final class MbtiResultEnglishPackageTest extends TestCase
         self::assertSame(1, $review['coverage']['pdf_fixture_targets_reviewed']);
         $offerCopyCheck = collect($review['checks'])->firstWhere('id', 'offer_copy');
         self::assertIsArray($offerCopyCheck);
-        self::assertSame('pass', $offerCopyCheck['status']);
+        self::assertSame('pass_with_hold', $offerCopyCheck['status']);
         self::assertStringContainsString('commercial_spec.variants[].cta_copy', $offerCopyCheck['evidence']);
         self::assertStringContainsString('offer_set.cta', $offerCopyCheck['evidence']);
+        self::assertStringContainsString('MBTI.global.en.default', $offerCopyCheck['evidence']);
+        self::assertStringContainsString('forbids reuse or mutation of existing zh-CN packs', $offerCopyCheck['evidence']);
         self::assertStringContainsString('no preview variant', $offerCopyCheck['evidence']);
         self::assertNotEmpty($review['known_holds']);
         self::assertSame('pending', $manifest['quality_gates']['independent_w9']);
