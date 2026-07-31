@@ -101829,9 +101829,9 @@
     "depends_on": [
       "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-01"
     ],
-    "status": "local_verified",
+    "status": "github_checks_pending",
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3439",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -101890,8 +101890,13 @@
         "at": "2026-07-31T01:49:50Z",
         "status": "local_verified",
         "note": "Committed the exact-package dry-run importer as immutable implementation commit d6adb6000d279863852acba13bac62e4f24573f8. This metadata-only commit records that implementation pointer; push, PR creation, and exact-head GitHub checks remain pending."
+      },
+      {
+        "at": "2026-07-31T01:50:48Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the scoped branch and opened PR #3439. The implementation pointer remains d6adb6000d279863852acba13bac62e4f24573f8; this metadata head records the PR identity. Fresh exact-head repository-policy checks and review are pending."
       }
     ],
-    "updated_at": "2026-07-31T01:49:50Z"
+    "updated_at": "2026-07-31T01:50:48Z"
   }
 }
