@@ -101177,9 +101177,9 @@
     "base": "main",
     "branch": "codex/en-parity-w2-big5-draft-reconcile-01",
     "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
-    "status": "ready_to_merge",
+    "status": "github_checks_pending",
     "depends_on": [],
-    "commit_sha": "90fc19a71da2402d0afcf0ff75c3c457a6e3873d",
+    "commit_sha": "ce4cadf7a46812c3037b66d732ba4bf03b2fc32d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3421",
     "checks": {
       "production_read_only_inventory": {
@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "CI run 30597119403 and Code Scanning run 30597119249 passed all required jobs on metadata head 8fdbe8c7f18d63719722f2e7bb245160c2a976d9. Exact-head review then identified CSS custom-property image indirection. Implementation 90fc19a71da2402d0afcf0ff75c3c457a6e3873d inspects direct image functions throughout actual style contexts and rejects var/env on image-capable declarations; required checks must rerun."
+        "evidence": "CI run 30597566201 and Code Scanning run 30597566196 passed all required jobs on metadata head 32368f0ff2316d82e569a005f1fcb198698ff818. Exact-head review then identified CSS comments that reconstruct image function tokens and a stale top-level ready status. Implementation ce4cadf7a46812c3037b66d732ba4bf03b2fc32d strips CSS comments before escape and image-function normalization; the current item remains github_checks_pending until exact-head checks rerun."
       }
     },
     "scope_validation": {
@@ -101478,9 +101478,14 @@
         "at": "2026-07-31T01:53:37Z",
         "status": "github_checks_pending",
         "note": "CI run 30597119403 and Code Scanning run 30597119249 passed all required jobs on metadata head 8fdbe8c7f18d63719722f2e7bb245160c2a976d9. Exact-head review then found CSS custom-property image indirection could hide url() behind var(). Implementation 90fc19a71da2402d0afcf0ff75c3c457a6e3873d scans any direct image function inside actual style elements and style attributes, while image-capable properties also reject var()/env() indirection. Plain prose remains exempt. Focused PHPUnit passes 30 tests / 247 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
+      },
+      {
+        "at": "2026-07-31T02:03:23Z",
+        "status": "github_checks_pending",
+        "note": "CI run 30597566201 and Code Scanning run 30597566196 passed all required jobs on metadata head 32368f0ff2316d82e569a005f1fcb198698ff818. Exact-head review then found CSS comments could reconstruct url() tokens and the current train item's top-level status lagged its pending check evidence. Implementation ce4cadf7a46812c3037b66d732ba4bf03b2fc32d strips complete or unterminated CSS comments before escape normalization and media scanning; the top-level status is explicitly github_checks_pending. Focused PHPUnit passes 30 tests / 249 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
       }
     ],
-    "updated_at": "2026-07-31T01:53:37Z"
+    "updated_at": "2026-07-31T02:03:23Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
