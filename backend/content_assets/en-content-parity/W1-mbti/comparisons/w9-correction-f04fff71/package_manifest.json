@@ -1,0 +1,69 @@
+{
+  "schema_version": "fermatmind.en_parity.immutable_content_package_manifest.v1",
+  "package_id": "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-05-2026-07-31",
+  "lane_id": "W1",
+  "asset_id": "ENPARITY-W1-MBTI-CROSS-COMPARISONS",
+  "inventory_package_id": "EN-PARITY-W1-MBTI-INVENTORY-2026-07-30",
+  "inventory_package_sha256": "8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85",
+  "status": "unpublished_candidate",
+  "asset_count": 7,
+  "exact_slugs": [
+    "enfp-vs-entp",
+    "entj-vs-intj",
+    "estj-vs-entj",
+    "infj-vs-infp",
+    "intj-vs-intp",
+    "isfp-vs-infp",
+    "istj-vs-isfj"
+  ],
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "1924ac25c9094396b992707365bb2f82f666bde07db0d033147ba17fb202ef73"
+    },
+    {
+      "path": "assets.json",
+      "sha256": "6a0d8b0c49eaca7d44aa1e74fd2c3c21a8b3f9d712517c01bf37bd43d502cba7"
+    },
+    {
+      "path": "translation_map.json",
+      "sha256": "71c84e0ce699ebe4f59740dc0e3cbd1bcf25863ceea57be8896cbb634c52075a"
+    },
+    {
+      "path": "claim_boundary_report.json",
+      "sha256": "2dd93eaaad50cbb33e8b4b58b561b8e02e0ca2f571bde42260c50e181faf290e"
+    },
+    {
+      "path": "editorial_review.json",
+      "sha256": "9bb1f45d980fcfded77978936104609a3eaf548ee3d9efedceb9ed0d7ecb3efd"
+    }
+  ],
+  "package_sha256_algorithm": "sha256 of the UTF-8 concatenation of each manifest file path, NUL, lowercase file SHA-256, and newline in files[] order",
+  "package_sha256": "f04fff71fa975ecfb04a2eb260e92faff9c9cfc45c2128adc3264ceac8d6b784",
+  "quality_gates": {
+    "exact_inventory_identity": "pass",
+    "exact_asset_count": "pass",
+    "source_hash_bound": "pass",
+    "structure_count_aligned": "pass",
+    "english_only_reader_copy": "pass_corrected_after_w9_blocker",
+    "claim_boundary": "pass_producer_self_check_only",
+    "independent_w9": "pending_full_rereview_after_fifth_prior_package_blocked",
+    "exact_package_dry_run": "pending_future_pr",
+    "source_nested_structure_aligned": "pass_corrected_after_w9_blocker",
+    "translation_map_complete": "pass",
+    "claim_boundary_report_complete": "pass_producer_self_check_only",
+    "editorial_review_complete": "pass_producer_self_check_only"
+  },
+  "permissions": {
+    "cms_write_authorized": false,
+    "database_write_authorized": false,
+    "draft_import_authorized": false,
+    "production_import_authorized": false,
+    "publication_authorized": false,
+    "activation_authorized": false,
+    "seo_runtime_release_authorized": false,
+    "indexability_authorized": false,
+    "search_submission_authorized": false,
+    "deploy_authorized": false
+  }
+}
