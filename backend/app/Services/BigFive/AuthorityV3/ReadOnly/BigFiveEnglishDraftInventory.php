@@ -516,11 +516,6 @@ final class BigFiveEnglishDraftInventory
             ]);
         }, $rows);
 
-        $after = $this->databaseFingerprint();
-        if (! hash_equals($before, $after)) {
-            throw new RuntimeException('Read-only Big Five English draft inventory changed the database.');
-        }
-
         $dispositions = array_count_values(array_column($rows, 'recommended_disposition'));
         ksort($dispositions);
 
@@ -574,6 +569,10 @@ final class BigFiveEnglishDraftInventory
             ->sort()
             ->values()
             ->all();
+        $after = $this->databaseFingerprint();
+        if (! hash_equals($before, $after)) {
+            throw new RuntimeException('Read-only Big Five English draft inventory observed a moving database snapshot.');
+        }
         $expectedEn52PackageRevisionKeys = array_keys(self::EN52_DESCRIPTOR_LOCKS);
         sort($expectedEn52PackageRevisionKeys);
         $en52PackageRevisionSetComplete = count($en52PackageRevisionKeys) === BigFiveEn52PackageCompiler::ASSET_COUNT
@@ -1183,12 +1182,49 @@ final class BigFiveEnglishDraftInventory
         );
     }
 
-    private function containsLegacyAliasReference(mixed $value): bool
+    private function containsLegacyAliasReference(mixed $value, ?string $parentKey = null): bool
     {
         if (is_string($value)) {
+            $identityBearingKeys = [
+                'authority_asset_key',
+                'canonical',
+                'canonical_path',
+                'canonical_url',
+                'entity_key',
+                'href',
+                'identity',
+                'logical_identity',
+                'path',
+                'redirect_from',
+                'redirect_to',
+                'slug',
+                'url',
+            ];
+            $normalizedParentKey = strtolower((string) preg_replace(
+                '/[^a-zA-Z0-9]+/',
+                '_',
+                $parentKey ?? '',
+            ));
             foreach (array_keys(BigFiveCanonicalRouteCatalog::EN_REDIRECT_ONLY_ALIAS_TARGETS) as $alias) {
+                if ((in_array($normalizedParentKey, $identityBearingKeys, true)
+                        && ($value === $alias || basename(parse_url($value, PHP_URL_PATH) ?: $value) === $alias))
+                    || preg_match(
+                        '~/(?:en/)?personality/big-five/(?:[^)\s"\'<>]+/)?'
+                            .preg_quote($alias, '~').'(?=$|[/\s"\'?#)])~i',
+                        $value,
+                    ) === 1) {
+                    return true;
+                }
+                if (in_array($normalizedParentKey, $identityBearingKeys, true)
+                    && preg_match(
+                        '~(?:^|[/:"\'])'.preg_quote($alias, '~').'(?=$|[/:"\'?#])~i',
+                        $value,
+                    ) === 1) {
+                    return true;
+                }
                 if (preg_match(
-                    '~(?:^|[/\s"\'(])'.preg_quote($alias, '~').'(?=$|[/\s"\'?#)])~i',
+                    '~(?:href|src)\s*=\s*(?:"|\')?[^>"\']*/personality/big-five/'
+                        .'(?:[^)\s"\'<>]+/)?'.preg_quote($alias, '~').'(?=$|[/\s"\'?#)])~i',
                     $value,
                 ) === 1) {
                     return true;
@@ -1200,8 +1236,8 @@ final class BigFiveEnglishDraftInventory
         if (! is_array($value)) {
             return false;
         }
-        foreach ($value as $item) {
-            if ($this->containsLegacyAliasReference($item)) {
+        foreach ($value as $key => $item) {
+            if ($this->containsLegacyAliasReference($item, is_string($key) ? $key : null)) {
                 return true;
             }
         }

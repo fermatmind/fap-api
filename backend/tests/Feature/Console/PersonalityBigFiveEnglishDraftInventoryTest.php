@@ -993,6 +993,14 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
         $this->assertTrue($row['legacy_alias_reference']);
         $this->assertSame('prohibited_content', $row['recommended_disposition']);
         $this->assertFalse($result['ok']);
+
+        $snapshot['content_sections_json'][0]['body'] = 'The literal term high-openness appears only in prose.';
+        $working->forceFill(['snapshot_json' => $snapshot])->saveQuietly();
+        $proseResult = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
+        $proseRow = collect($proseResult['rows'])->firstWhere('logical_identity', 'domain:openness');
+
+        $this->assertFalse($proseRow['legacy_alias_reference']);
+        $this->assertSame('valid_unpublished_candidate', $proseRow['current_revision_disposition']);
     }
 
     public function test_prohibited_history_blocks_without_erasing_current_candidate_classification(): void
