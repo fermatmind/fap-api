@@ -101819,5 +101819,114 @@
       }
     ],
     "updated_at": "2026-07-31T01:28:15Z"
+  },
+  "EN-PARITY-W1-MBTI-COMPARISON-IMPORTER-01": {
+    "id": "EN-PARITY-W1-MBTI-COMPARISON-IMPORTER-01",
+    "repo": "fap-api",
+    "title": "EN-PARITY-W1-MBTI-COMPARISON-IMPORTER-01: add exact-package comparison dry-run importer",
+    "base": "main",
+    "branch": "codex/en-parity-w1-mbti-comparison-importer-01",
+    "depends_on": [
+      "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-01"
+    ],
+    "status": "ready_to_merge",
+    "commit_sha": "5af71413195ce9a0cfe20ea2417790c0ec044d3f",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3439",
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The operator supplied a continuous execution /goal with this exact PR id, title, repository, dependency, scope, local checks, and controlled-action boundaries."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "PR #3424 is MERGED at 12dff5f80161afa5b80151715171e037cdcdb2a3 and its exact frozen comparison package SHA is 2e2beb694b62ddff56b128b2b4a443fb5797b76bd5df160f8946b55a3368931a."
+      },
+      "preflight": {
+        "status": "passed",
+        "evidence": "Created a clean isolated worktree and branch from exact origin/main cc111cc27aab9eba5d9232ef7a409f7374779eee. No matching local branch, remote branch, or open PR existed."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "php artisan test --filter=MbtiComparisonEnglishPackageImporterTest --no-ansi passed 6 tests/205 assertions. The focused Big Five runtime-freeze classifier regression passed 1 test/2 assertions and proves only the two exact no-write importer paths are ignored while an actual Big Five runtime service remains blocked. The exact repository package dry run returned seven ordered rows with zh-CN read-only sources, en inactive/draft targets, no reader copy, and every write/release flag false. Wrong SHA, rebuilt payload, uppercase manifest digest, arbitrary manifest contract drift, verified-buffer replacement, deterministic replay, protected zh-CN rows, and unsupported write mode passed. Scoped Pint passed for all four PHP files. php artisan route:list --path=api --except-vendor completed with 225 lines after the latest unrelated main integration. YAML, JSON, and git diff checks passed."
+      },
+      "changed_file_scope": {
+        "status": "passed",
+        "evidence": "Changed paths are limited to the exact command, ContentImport service, focused importer test, the existing Big Five runtime-freeze classifier regression required by the failed current-PR check, backend/AGENTS.md, and this PR's docs/codex manifest/state entries. No frozen package, model, migration, route, controller, public API, result package, CMS/database data, publish, SEO runtime, Search Channel, deploy, or frontend file changed."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "Exact head ab606c71d1da82bf1a665d36802ea9744e7d94b1 passed all nine applicable required checks: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, semgrep SARIF upload, and Semgrep OSS. Staging parity was skipped and is not a required deploy wait."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "history": [
+      {
+        "at": "2026-07-31T01:46:37Z",
+        "status": "in_progress",
+        "note": "Started PR05 from clean latest origin/main after verifying PR03 merged and the exact frozen seven-asset package SHA. Scope is a redacted no-write dry-run importer only; database/CMS import, W9, publication, activation, indexability, search, and deploy remain deferred."
+      },
+      {
+        "at": "2026-07-31T01:48:53Z",
+        "status": "local_verified",
+        "note": "Implemented an exact-package no-write importer that recomputes the frozen manifest chain, rejects wrong or rebuilt SHA identities, freezes deterministic zh-CN-to-en pairing for all seven slugs, and emits a redacted inactive/draft plan. Focused tests passed 4 tests/190 assertions, including byte-identical replay and preservation of existing zh-CN rows. Pint, command-level dry run, 224-line API route inventory, YAML/JSON, diff, and exact scope checks passed. No database/CMS write or release action occurred."
+      },
+      {
+        "at": "2026-07-31T01:49:50Z",
+        "status": "local_verified",
+        "note": "Committed the exact-package dry-run importer as immutable implementation commit d6adb6000d279863852acba13bac62e4f24573f8. This metadata-only commit records that implementation pointer; push, PR creation, and exact-head GitHub checks remain pending."
+      },
+      {
+        "at": "2026-07-31T01:50:48Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the scoped branch and opened PR #3439. The implementation pointer remains d6adb6000d279863852acba13bac62e4f24573f8; this metadata head records the PR identity. Fresh exact-head repository-policy checks and review are pending."
+      },
+      {
+        "at": "2026-07-31T02:01:45Z",
+        "status": "github_checks_pending",
+        "note": "Exact head ecb39ee432d7429499ff7347845236948da00f90 passed 8 required checks with staging parity skipped, but CI/verify-bigfive failed only because its runtime-freeze classifier treated the two new no-write dry-run importer paths as MBTI runtime changes. Inspected the failing job first, then added the two exact paths to the existing comparison-import dry-run predicate plus an allowed/blocked regression, and registered that one classifier test path in this PR scope. Focused validation passed the importer suite at 4 tests/190 assertions and the classifier regression at 1 test/2 assertions; scoped Pint, seven-row command dry run, 224-line route inventory, YAML/JSON, and diff checks passed. No CMS/database/write/release action occurred; fresh exact-head checks remain pending after commit and push."
+      },
+      {
+        "at": "2026-07-31T02:13:22Z",
+        "status": "github_checks_pending",
+        "note": "Exact head ba4617c341b0f2c10a92fb5839e8a41cea144b54 passed all nine required checks with staging parity skipped, then final review found three valid current-scope P2 issues. Fix commit 5fe58e971a1794d0c092dc5830d1db299b102fe9 now validates manifest file digests before normalization, binds the complete frozen package_manifest.json bytes to SHA-256 82eb45134ca4f596efc966a7da41cff17e43eea2ba4c0f35cf53d51e2913deec, adds uppercase-digest and arbitrary-contract-drift regressions, restores the unrelated SECURITY-103-API-07 commit pointer to null, and assigns this implementation pointer to PR05. Integrated latest origin/main 0a354eb6397d13a4c6b3aa45734fc02342ece2d1 without conflict as merge head a4da98c30684896b2e786f6264c4080d4f1de6a2. Post-integration importer validation passed 5 tests/199 assertions and the classifier regression passed 1 test/2 assertions; scoped Pint, seven-row dry run, 224-line routes, YAML/JSON, diff, and exact scope checks passed. Fresh exact-head GitHub checks remain pending."
+      },
+      {
+        "at": "2026-07-31T02:23:51Z",
+        "status": "github_checks_pending",
+        "note": "Review-repair head dbdcab3647d475726b68160a69411d87119efc76 passed all nine required checks with staging parity skipped and had zero unresolved review threads, but origin/main advanced before readiness. Integrated latest origin/main 2f5d3d6d0a7df2970721a85adfba6a549c91cf5a without conflict as merge head 40a9e66c6e229a3ce058de508efb15797bf392d4. Focused importer validation still passes 5 tests/199 assertions, classifier regression passes 1 test/2 assertions, and scoped Pint, seven-row dry run, and 224-line routes pass. Fresh exact-head checks remain pending."
+      },
+      {
+        "at": "2026-07-31T02:33:41Z",
+        "status": "github_checks_pending",
+        "note": "Exact head e8566974ac2e1c7ac9a2e136fc77e6c3e260e545 passed all nine required checks with staging parity skipped and zero unresolved review threads, but origin/main advanced again before readiness. Integrated latest origin/main 15eb6a2fbf55630f3d1e53fd3bf891930ebcb60b without conflict as merge head 91ffcce1a90e7bf2f5787ba90c8bc54ce091deda. The latest main touched the shared classifier with unrelated commerce coverage; PR05's focused importer validation still passes 5 tests/199 assertions and its classifier regression passes 1 test/2 assertions. Scoped Pint, seven-row dry run, and the now 225-line route inventory pass. Fresh exact-head checks remain pending."
+      },
+      {
+        "at": "2026-07-31T02:43:44Z",
+        "status": "github_checks_pending",
+        "note": "Exact head 01043effecbe91be0e89daca9495d49784de050c passed all nine required checks with staging parity skipped, contained latest origin/main, and was CLEAN/MERGEABLE, but final review found one valid P2 TOCTOU boundary. Fix commit 5af71413195ce9a0cfe20ea2417790c0ec044d3f now reads every package file exactly once, verifies the SHA-256 of that exact byte buffer, and parses assets.json only from the verified buffer. A focused partial-Facade replacement regression proves unverified bytes cannot be consumed even when the frozen filesystem copy remains available. Importer validation passes 6 tests/205 assertions, classifier regression passes 1 test/2 assertions, and scoped Pint, seven-row dry run, 225-line routes, and diff checks pass. Fresh exact-head checks and review remain pending."
+      },
+      {
+        "at": "2026-07-31T02:53:23Z",
+        "status": "ready_to_merge",
+        "note": "Exact head ab606c71d1da82bf1a665d36802ea9744e7d94b1 passed all nine applicable required checks with staging parity skipped, has zero unresolved review threads, is CLEAN/MERGEABLE, and contains latest origin/main 15eb6a2fbf55630f3d1e53fd3bf891930ebcb60b. The exact seven-path PR05 scope remains valid. This readiness metadata tail must independently repeat required checks and exact-head review before squash merge."
+      }
+    ],
+    "updated_at": "2026-07-31T02:53:23Z"
   }
 }

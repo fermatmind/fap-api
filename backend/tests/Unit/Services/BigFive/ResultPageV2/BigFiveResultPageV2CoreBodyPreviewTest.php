@@ -1108,9 +1108,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $changed = [
             'backend/app/Console/Commands/PersonalityMbtiComparisonCmsImportDryRun.php',
             'backend/app/Services/Cms/MbtiComparisonCmsImportDryRunPlanner.php',
+            'backend/app/Console/Commands/ImportMbtiComparisonEnglishPackage.php',
+            'backend/app/Services/ContentImport/MbtiComparisonEnglishPackageImporter.php',
         ];
+        $blocked = ['backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php'];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
     public function test_runtime_freeze_classifier_ignores_mbti_content15_mixed_import_preflight_files(): void
@@ -8900,6 +8904,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityMbtiComparisonCmsImportDryRun.php',
             'backend/app/Services/Cms/MbtiComparisonCmsImportDryRunPlanner.php',
+            'backend/app/Console/Commands/ImportMbtiComparisonEnglishPackage.php',
+            'backend/app/Services/ContentImport/MbtiComparisonEnglishPackageImporter.php',
         ], true);
     }
 
