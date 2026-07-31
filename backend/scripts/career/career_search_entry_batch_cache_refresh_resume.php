@@ -412,9 +412,6 @@ $postReadbackStateSha256 = null;
 $qualityPackageSha256 = null;
 $reviewPackageSha256 = null;
 $reviewTargetSetSha256 = null;
-$preWriteQualityPackageSha256 = null;
-$preWriteReviewPackageSha256 = null;
-$preWriteReviewTargetSetSha256 = null;
 $preSummary = null;
 
 try {
@@ -507,26 +504,6 @@ try {
             'payload_set_sha256' => $preSummary['payload_set_sha256'],
             'target_set_sha256' => $targetSetSha256,
         ]));
-        $preWriteQuality = $app->make(CareerSearchEntryQualityBatchPlanner::class)->build();
-        if (
-            ($preWriteQuality['candidate_count'] ?? null) !== EXPECTED_CANDIDATES
-            || ($preWriteQuality['bilingual_url_count'] ?? null) !== EXPECTED_URLS
-            || ($preWriteQuality['target_count'] ?? null) !== EXPECTED_REVIEW_TARGETS
-        ) {
-            throw new RuntimeException('POST_AUTHORITY_QUALITY_DRIFT');
-        }
-        $preWriteQualityPackageSha256 = (string) ($preWriteQuality['quality_package_sha256'] ?? '');
-        $preWriteReviewPackageSha256 = (string) ($preWriteQuality['package_sha256'] ?? '');
-        $preWriteReviewTargetSetSha256 = (string) ($preWriteQuality['target_set_sha256'] ?? '');
-        foreach ([
-            $preWriteQualityPackageSha256,
-            $preWriteReviewPackageSha256,
-            $preWriteReviewTargetSetSha256,
-        ] as $hash) {
-            if (preg_match('/^[0-9a-f]{64}$/D', $hash) !== 1) {
-                throw new RuntimeException('POST_AUTHORITY_QUALITY_DRIFT');
-            }
-        }
     } elseif ($mode === 'diagnose') {
         $snapshotComplete = publicSnapshotIsComplete($preSummary);
         $baselineMatch = $snapshotComplete
@@ -723,19 +700,6 @@ try {
             throw new RuntimeException('SAFE_EXECUTE_FAILURE');
         }
     }
-    if (
-        $mode === 'post_authority_execute'
-        && (
-            ! hash_equals((string) $preWriteQualityPackageSha256, $qualityPackageSha256)
-            || ! hash_equals((string) $preWriteReviewPackageSha256, $reviewPackageSha256)
-            || ! hash_equals((string) $preWriteReviewTargetSetSha256, $reviewTargetSetSha256)
-        )
-    ) {
-        $failedStage = 'post_refresh_exact_quality_package';
-        $failureCategory = 'quality_incomplete';
-        throw new RuntimeException('SAFE_EXECUTE_FAILURE');
-    }
-
     emit(receipt([
         'mode' => $mode,
         'status' => $mode === 'post_authority_execute'
@@ -795,7 +759,6 @@ try {
             'ACTIVE_RELEASE_INTERFACE_DRIFT',
             'BATCH_BOUNDARY_DRIFT',
             'POST_AUTHORITY_TARGET_DRIFT',
-            'POST_AUTHORITY_QUALITY_DRIFT',
         ],
         true,
     ) ? $throwable->getMessage() : null;

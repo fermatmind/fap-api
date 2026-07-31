@@ -102,6 +102,12 @@ jobs:
           FAILED_PREWRITE_RUN_ID: "30602511379"
           FAILED_PREWRITE_RUN_ATTEMPT: "1"
           FAILED_PREWRITE_CONTROL_SHA: 012392aaf0d83375414f8eb9ad010f6c7c577714
+          FAILED_QUALITY_RUN_ID: "30607466396"
+          FAILED_QUALITY_RUN_ATTEMPT: "1"
+          FAILED_QUALITY_CONTROL_SHA: d9f1a5554bb9831a1a9dd87d76b41daf8bcac353
+          EXPECTED_FAILED_QUALITY_RECEIPT_SHA256: 7468d2a5db0744ee9c5fdb656b92629898897bebb9a550b59e57561381ff8688
+          EXPECTED_FAILED_QUALITY_ARTIFACT_DIGEST: 19f9044b7a7c8ab003a7d169a932530c12ed67cd93becfd680271b23bd7e16ea
+          EXPECTED_FAILED_QUALITY_PAYLOAD_SET_SHA256: 02467d3f6363da0a1ff23ccc5c84223f4662ab14a23a0d22558ff972f89f3fd3
           EXPECTED_VERIFICATION_SHA256: a4b038b0c782aa33248f9d664a207d99cd475b040bf0ac0858fdb2de7a11616c
           EXPECTED_NON_TARGET_STATE_SHA256: a3fa4d66f8691760d6b04c630dbb500258a1111a6622753982bfeece17e9c1b5
         run: |
@@ -161,6 +167,73 @@ jobs:
           )"
           jq -e '.total_count == 0 and (.artifacts | length) == 0' <<<"$failed_artifacts" >/dev/null
 
+          failed_quality_run="$(
+            gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${FAILED_QUALITY_RUN_ID}"
+          )"
+          jq -e \
+            --arg control "$FAILED_QUALITY_CONTROL_SHA" \
+            --argjson attempt "$FAILED_QUALITY_RUN_ATTEMPT" \
+            '.name == "Career Search Entry Post-Authority Cache Refresh"
+             and .path == ".github/workflows/career-search-entry-post-authority-cache-refresh.yml"
+             and .event == "workflow_dispatch"
+             and .status == "completed"
+             and .conclusion == "failure"
+             and .head_branch == "main"
+             and .head_sha == $control
+             and .run_attempt == $attempt' <<<"$failed_quality_run" >/dev/null
+          failed_quality_name="career-search-entry-post-authority-cache-refresh-${FAILED_QUALITY_RUN_ID}-${FAILED_QUALITY_RUN_ATTEMPT}"
+          failed_quality_artifacts="$(
+            gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${FAILED_QUALITY_RUN_ID}/artifacts?per_page=100"
+          )"
+          jq -e \
+            --arg name "$failed_quality_name" \
+            --arg digest "sha256:${EXPECTED_FAILED_QUALITY_ARTIFACT_DIGEST}" \
+            '[.artifacts[] |
+              select(.name == $name and .expired == false and .digest == $digest)] | length == 1' \
+            <<<"$failed_quality_artifacts" >/dev/null
+          failed_quality_dir="$(mktemp -d)"
+          gh run download \
+            "$FAILED_QUALITY_RUN_ID" \
+            --name "$failed_quality_name" \
+            --dir "$failed_quality_dir"
+          failed_quality_receipt="$failed_quality_dir/career-search-entry-post-authority-cache-refresh.json"
+          test "$(sha256sum "$failed_quality_receipt" | awk '{print $1}')" = \
+            "$EXPECTED_FAILED_QUALITY_RECEIPT_SHA256"
+          jq -e \
+            --arg release "$EXPECTED_RELEASE_SHA" \
+            --arg manifest "$EXPECTED_MANIFEST_SHA256" \
+            --arg target_set "$EXPECTED_TARGET_SET_SHA256" \
+            --arg payload_set "$EXPECTED_FAILED_QUALITY_PAYLOAD_SET_SHA256" \
+            --argjson run_id "$FAILED_QUALITY_RUN_ID" \
+            --argjson attempt "$FAILED_QUALITY_RUN_ATTEMPT" \
+            '.contract_version == "career.search_entry_batch.post_authority_cache_refresh.v1"
+             and .status == "FAIL_CLOSED"
+             and .mode == "post_authority_execute"
+             and .release_sha == $release
+             and .manifest_sha256 == $manifest
+             and .resume_target_set_sha256 == null
+             and .failed_stage == "pre_write_validation"
+             and .failure_category == "unexpected"
+             and .write_state == "none"
+             and .production_write_execution == false
+             and .cache_write_count == 0
+             and .cache_refresh_target_count == 0
+             and .completed_batch_count == 0
+             and .observed_payload_set_sha256 == $payload_set
+             and .observed_url_count == 100
+             and .observed_http_200_count == 100
+             and .observed_transport_failure_count == 0
+             and .observed_non_200_response_count == 0
+             and .observed_canonical_ok_count == 100
+             and .observed_robots_ok_count == 100
+             and .observed_locale_ok_count == 100
+             and .observed_bad_href_url_count == 0
+             and .observed_low_module_url_count == 10
+             and .database_write_count == 0
+             and .cms_write_count == 0
+             and .workflow_run_id == $run_id
+             and .workflow_run_attempt == $attempt' "$failed_quality_receipt" >/dev/null
+
           repair_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${AUTHORITY_REPAIR_RUN_ID}")"
           jq -e \
             --arg control "$AUTHORITY_REPAIR_CONTROL_SHA" \
@@ -214,7 +287,7 @@ jobs:
              and .workflow_run_id == $run_id
              and .workflow_run_attempt == $attempt' "$repair_receipt" >/dev/null
 
-          expected_phrase="I explicitly approve one-time Career search-entry topology-repaired post-authority cache-only refresh for failed pre-write run ${FAILED_PREWRITE_RUN_ID} attempt ${FAILED_PREWRITE_RUN_ATTEMPT} with SSH and execute skipped and zero artifacts, authority repair run ${AUTHORITY_REPAIR_RUN_ID} attempt ${AUTHORITY_REPAIR_RUN_ATTEMPT} receipt ${EXPECTED_AUTHORITY_REPAIR_RECEIPT_SHA256} artifact ${EXPECTED_AUTHORITY_REPAIR_ARTIFACT_DIGEST}, control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA}, active SHA ${EXPECTED_RELEASE_SHA}, manifest ${EXPECTED_MANIFEST_SHA256}, combined repair set ${EXPECTED_REPAIR_SET_SHA256}, repair payload set ${EXPECTED_REPAIR_PAYLOAD_SET_SHA256}, target set ${EXPECTED_TARGET_SET_SHA256}; refresh exactly five manifest-position slugs and 10 bilingual cache targets in one batch using the 5000ms offline build budget and zero per-target retry, then require exact quality-package and complete 100-URL public readback, with no DB, CMS, publication, indexability, queue, sitemap, llms, Search Channel, URL submission, deploy, rollback, or non-target write."
+          expected_phrase="I explicitly approve one-time Career search-entry quality-recovered post-authority cache-only refresh for failed zero-write quality-prewrite run ${FAILED_QUALITY_RUN_ID} attempt ${FAILED_QUALITY_RUN_ATTEMPT} receipt ${EXPECTED_FAILED_QUALITY_RECEIPT_SHA256} artifact ${EXPECTED_FAILED_QUALITY_ARTIFACT_DIGEST} observed payload set ${EXPECTED_FAILED_QUALITY_PAYLOAD_SET_SHA256} with 100 complete public URLs and 10 thin URLs, failed topology pre-write run ${FAILED_PREWRITE_RUN_ID} attempt ${FAILED_PREWRITE_RUN_ATTEMPT} with SSH and execute skipped and zero artifacts, authority repair run ${AUTHORITY_REPAIR_RUN_ID} attempt ${AUTHORITY_REPAIR_RUN_ATTEMPT} receipt ${EXPECTED_AUTHORITY_REPAIR_RECEIPT_SHA256} artifact ${EXPECTED_AUTHORITY_REPAIR_ARTIFACT_DIGEST}, control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA}, active SHA ${EXPECTED_RELEASE_SHA}, manifest ${EXPECTED_MANIFEST_SHA256}, combined repair set ${EXPECTED_REPAIR_SET_SHA256}, repair payload set ${EXPECTED_REPAIR_PAYLOAD_SET_SHA256}, target set ${EXPECTED_TARGET_SET_SHA256}; refresh exactly five manifest-position slugs and 10 bilingual cache targets in one batch using the 5000ms offline build budget and zero per-target retry, then require exact post-refresh quality-package and complete 100-URL public readback, with no DB, CMS, publication, indexability, queue, sitemap, llms, Search Channel, URL submission, deploy, rollback, or non-target write."
           test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
 
           {
