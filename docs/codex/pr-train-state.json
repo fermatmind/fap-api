@@ -101179,7 +101179,7 @@
     "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
     "status": "ready_to_merge",
     "depends_on": [],
-    "commit_sha": "04ebc075fb4f684415befe3f5b7047e3cb23ae59",
+    "commit_sha": "078fa76598e244f720e968191ca581dba9d7c527",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3421",
     "checks": {
       "production_read_only_inventory": {
@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "CI run 30595778238 and Code Scanning run 30595778236 passed all required jobs on metadata head f6f9743b99fec53afda1672d77b4bd807127f261. Exact-head review then identified CSS-escaped image function names as a browser-renderable bypass. Implementation 04ebc075fb4f684415befe3f5b7047e3cb23ae59 decodes CSS escapes before matching image-capable declarations and style attributes; required checks must rerun."
+        "evidence": "CI run 30596232563 and Code Scanning run 30596232628 passed all required jobs on metadata head cbb7d685e9cb1a73e3419dcaae29f693a45bfda3. Exact-head review then identified HTML entity decoding and partial data-* attribute-name matching gaps. Implementation 078fa76598e244f720e968191ca581dba9d7c527 decodes HTML5 attribute entities and binds media attributes to complete names following HTML whitespace; required checks must rerun."
       }
     },
     "scope_validation": {
@@ -101463,9 +101463,14 @@
         "at": "2026-07-31T01:23:08Z",
         "status": "github_checks_pending",
         "note": "CI run 30595778238 and Code Scanning run 30595778236 passed all required jobs on metadata head f6f9743b99fec53afda1672d77b4bd807127f261. Exact-head review then found a valid CSS escape bypass such as \\75rl(...). Implementation 04ebc075fb4f684415befe3f5b7047e3cb23ae59 decodes CSS hexadecimal and simple escapes before matching image functions in declarations and bounded style attributes. Focused PHPUnit passes 30 tests / 241 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
+      },
+      {
+        "at": "2026-07-31T01:33:37Z",
+        "status": "github_checks_pending",
+        "note": "CI run 30596232563 and Code Scanning run 30596232628 passed all required jobs on metadata head cbb7d685e9cb1a73e3419dcaae29f693a45bfda3. Exact-head review then found that HTML entities could conceal CSS image functions and that data-style/data-property could be parsed as rendering attributes. Implementation 078fa76598e244f720e968191ca581dba9d7c527 HTML5-decodes bounded attribute values, requires complete attribute names after HTML whitespace, and applies the same boundary to src/background/type detection. Focused PHPUnit passes 30 tests / 243 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
       }
     ],
-    "updated_at": "2026-07-31T01:23:08Z"
+    "updated_at": "2026-07-31T01:33:37Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
