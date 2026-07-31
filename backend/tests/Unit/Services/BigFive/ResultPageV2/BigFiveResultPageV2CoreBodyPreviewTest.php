@@ -3886,13 +3886,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             "+            ->where('token', '[A-Za-z0-9_-]{43}')",
             "+            ->name('api.v0_3.report_gifts.orders.wechat_mini_virtual.store');",
         ];
+        $orderRepairServiceChangedLines = $this->paidReportGiftingOrderRepairChangedLines();
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
             $changed,
             '',
             '',
             routeChangedLines: $routeChangedLines,
+            orderRepairServiceChangedLines: $orderRepairServiceChangedLines,
         ));
+        $this->assertSame(
+            ['backend/app/Services/Commerce/Repair/OrderRepairService.php'],
+            $this->mbtiImpactingRuntimeChanges(
+                $changed,
+                '',
+                '',
+                routeChangedLines: $routeChangedLines,
+                orderRepairServiceChangedLines: [
+                    ...$orderRepairServiceChangedLines,
+                    '+        return true;',
+                ],
+            ),
+        );
         $this->assertSame(
             ['backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php'],
             $this->mbtiImpactingRuntimeChanges(
@@ -6771,6 +6786,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ?array $soloOwnerReviewFoundationAddedFiles = null,
         ?array $llmsControllerChangedLines = null,
         ?array $generateReportSnapshotJobChangedLines = null,
+        ?array $orderRepairServiceChangedLines = null,
     ): array {
         $impacting = [];
         $soloOwnerReviewFoundationAddedFileSet = array_fill_keys(
@@ -7216,6 +7232,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isCommercePaymentActionFile($file)) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/app/Services/Commerce/Repair/OrderRepairService.php'
+                && $this->orderRepairServiceDiffIsPaidReportGiftingOnly(
+                    $orderRepairServiceChangedLines ?? (
+                        $repoRoot !== '' && $baseRef !== ''
+                            ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                            : []
+                    )
+                )
+            ) {
                 continue;
             }
 
@@ -9610,9 +9639,154 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Http/Controllers/API/V0_3/ReportGiftController.php',
-            'backend/app/Services/Commerce/Repair/OrderRepairService.php',
             'backend/app/Services/Commerce/ReportGiftService.php',
         ], true);
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function orderRepairServiceDiffIsPaidReportGiftingOnly(array $changedLines): bool
+    {
+        return $changedLines === $this->paidReportGiftingOrderRepairChangedLines();
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function paidReportGiftingOrderRepairChangedLines(): array
+    {
+        $diff = <<<'DIFF'
++use App\Services\Commerce\ReportGiftService;
+-        $freshOrder = $this->reloadOrder($order);
++        return DB::transaction(
++            fn (): array => $this->repairPaidOrderLocked($order, $context),
++            3
++        );
++    }
++
++    /**
++     * @param  Order|object  $order
++     * @param  array<string,mixed>  $context
++     * @return array<string,mixed>
++     */
++    private function repairPaidOrderLocked(object $order, array $context): array
++    {
++        $freshOrder = $this->reloadOrder($order, true);
++        if ($this->isIntentionallyRevoked($freshOrder)) {
++            return $this->skip(
++                'GRANT_INTENTIONALLY_REVOKED',
++                'order grant was intentionally revoked.',
++                $freshOrder,
++                $context
++            );
++        }
+-        $ownerGuard = $this->validateAttemptOwnershipForOrder($freshOrder, $attemptMeta);
+-        if (! ($ownerGuard['ok'] ?? false)) {
++        $giftService = app(ReportGiftService::class);
++        $giftRequest = $giftService->findBoundGiftForOrder($freshOrder, true);
++        if ($giftRequest !== null) {
++            $restored = $giftService->restoreTerminalGiftForVerifiedPayment($giftRequest, $freshOrder);
++            if (! ($restored['ok'] ?? false)) {
++                return $this->failure(
++                    (string) ($restored['error'] ?? 'GIFT_REQUEST_NOT_PAYABLE'),
++                    (string) ($restored['message'] ?? 'gift request is not payable.'),
++                    $freshOrder,
++                    $context
++                );
++            }
++            $giftRequest = $giftService->findBoundGiftForOrder($freshOrder, true);
++        }
++        $ownershipGuard = $giftRequest !== null
++            ? $giftService->validateBoundGiftOrder($giftRequest, $freshOrder)
++            : $this->validateAttemptOwnershipForOrder($freshOrder, $attemptMeta);
++        if (! ($ownershipGuard['ok'] ?? false)) {
+-                (string) ($ownerGuard['error'] ?? 'ATTEMPT_OWNER_MISMATCH'),
+-                (string) ($ownerGuard['message'] ?? 'order owner mismatch.'),
++                (string) ($ownershipGuard['error'] ?? 'ATTEMPT_OWNER_MISMATCH'),
++                (string) ($ownershipGuard['message'] ?? 'order owner mismatch.'),
+-        $activeGrant = $this->resolveActiveGrantForOrder($freshOrder, $benefitCode);
+-        if ($activeGrant !== null) {
++        $activeGrant = $this->resolveActiveGrantForOrder($freshOrder, $benefitCode, true);
++        if ($activeGrant !== null && $giftRequest === null) {
+-        $grant = $this->entitlements->grantAttemptUnlock(
+-            (int) $freshOrder->org_id,
+-            $freshOrder->user_id ? (string) $freshOrder->user_id : null,
+-            $freshOrder->anon_id ? (string) $freshOrder->anon_id : null,
+-            $benefitCode,
+-            $attemptId,
+-            (string) $freshOrder->order_no,
+-            $scopeOverride,
+-            $expiresAt,
+-            $modulesIncluded
+-        );
++        $grant = $giftRequest !== null
++            ? $giftService->grantVerifiedPaidGift(
++                $giftRequest,
++                $freshOrder,
++                $benefitCode,
++                $scopeOverride,
++                $expiresAt,
++                $modulesIncluded ?? []
++            )
++            : $this->entitlements->grantAttemptUnlock(
++                (int) $freshOrder->org_id,
++                $freshOrder->user_id ? (string) $freshOrder->user_id : null,
++                $freshOrder->anon_id ? (string) $freshOrder->anon_id : null,
++                $benefitCode,
++                $attemptId,
++                (string) $freshOrder->order_no,
++                $scopeOverride,
++                $expiresAt,
++                $modulesIncluded
++            );
+-    public function resolveActiveGrantForOrder(object $order, ?string $benefitCode = null): ?object
+-    {
++    public function resolveActiveGrantForOrder(
++        object $order,
++        ?string $benefitCode = null,
++        bool $lockForUpdate = false
++    ): ?object {
++            ->where(function ($query): void {
++                $query->whereNull('expires_at')
++                    ->orWhere('expires_at', '>', now());
++            })
++        if ($lockForUpdate) {
++            $query->lockForUpdate();
++        }
++        if ($this->isIntentionallyRevoked($freshOrder)) {
++            return false;
++        }
+-    private function reloadOrder(object $order): ?object
++    private function reloadOrder(object $order, bool $lockForUpdate = false): ?object
+-            return DB::table('orders')
++            $query = DB::table('orders')
+-                ->when($orgId > 0 || isset($order->org_id), fn ($query) => $query->where('org_id', $orgId))
+-                ->first();
++                ->when($orgId > 0 || isset($order->org_id), fn ($query) => $query->where('org_id', $orgId));
++            if ($lockForUpdate) {
++                $query->lockForUpdate();
++            }
++
++            return $query->first();
+-        return DB::table('orders')
++        $query = DB::table('orders')
+-            ->where('org_id', $orgId)
+-            ->first();
++            ->where('org_id', $orgId);
++        if ($lockForUpdate) {
++            $query->lockForUpdate();
++        }
++
++        return $query->first();
++    }
++
++    private function isIntentionallyRevoked(object $order): bool
++    {
++        return strtolower(trim((string) ($order->grant_state ?? ''))) === Order::GRANT_STATE_REVOKED;
+DIFF;
+
+        return explode("\n", $diff);
     }
 
     private function isFreemiumLocalePolicyFile(string $file): bool
