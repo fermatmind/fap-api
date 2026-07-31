@@ -6191,7 +6191,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2256",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "ready_to_merge",
+    "status": "github_checks_pending",
     "title": "B5-RESULT-WEEKLY-OPS-RUNNER-01: Schedule Big Five V2 weekly ops report",
     "train_scope": "big5_result_page_v2_asset_agent_automation",
     "transitions": [
@@ -101170,6 +101170,352 @@
       }
     ],
     "updated_at": "2026-07-27T09:33:00Z"
+  },
+  "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01": {
+    "id": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/en-parity-w2-big5-draft-reconcile-01",
+    "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
+    "status": "ready_to_merge",
+    "depends_on": [],
+    "commit_sha": "f15e81992ab291a8b578fbe19f2e1846a19aa48c",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3421",
+    "checks": {
+      "production_read_only_inventory": {
+        "status": "pass",
+        "evidence": "One-time operator-authorized read-only observation of deployed release 20260730-6cca48a754a3-r3 at SHA 6cca48a754a3dc7ab52cf40851aeb1d6005e4ee8; source evidence SHA-256 29f62379ce1e36c59831862bef102b920c65cf3179bda0cfdea8d9a7cf1fa6e4; writes_committed=false."
+      },
+      "local_validation": {
+        "status": "pass",
+        "evidence": "Focused PHPUnit, scoped Pint, PHP syntax, JSON/YAML parsing, deterministic artifact invariants, diff checks, and exact allowlist validation passed. Production historical revision QA SHA-256 109e995dd9c900b978d5ceaca1f7851607d4332c8bf9a734c705bd32982dd11e proves 50 rows, database fingerprint unchanged, and zero CJK/media/private-field leakage."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "Exact implementation head f15e81992ab291a8b578fbe19f2e1846a19aa48c passed every required job in CI run 30601381477 and Code Scanning run 30601381442. verify-staging-parity was skipped as expected and is not a required check. All review threads are resolved and the PR is CLEAN/MERGEABLE."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_read_only_evidence": true,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-07-30T15:20:00Z",
+        "status": "implementation_in_progress",
+        "note": "Started from exact main 2284f5d9f0528722c7a58486f86c0716e526ed5c. The operator separately authorized one read-only production inventory observation; no database/CMS/publication/deploy/search write occurred."
+      },
+      {
+        "at": "2026-07-30T15:36:00Z",
+        "status": "production_evidence_reconciled",
+        "note": "Exact production authority proves 52 canonical English assets, 50 registered historical revision rows, zero independent current drafts, 50 current working pointers equal to their published pointers, 50 public projections, and zero alias rows. Each historical revision is immutable and traceable but superseded, so disposition is stale_working_revision rather than an active draft."
+      },
+      {
+        "at": "2026-07-30T15:43:00Z",
+        "status": "local_checks_passed",
+        "note": "Corrected key-aware historical revision QA proves all exact 50 rows have zero private-field, media-reference, and Chinese leakage with unchanged production database fingerprint. Focused local checks and exact scope validation passed; no write, publish, promotion, deploy, or search action occurred."
+      },
+      {
+        "at": "2026-07-30T15:46:00Z",
+        "status": "committed",
+        "note": "Committed the exact seven-path implementation and durable evidence as 6e320344e698259cabc489d29c48570b7dfa6fd5 after explicit path-limited staging."
+      },
+      {
+        "at": "2026-07-30T15:50:44Z",
+        "status": "github_checks_failed_in_scope_fix_in_progress",
+        "note": "Inspected GitHub CI run 30557953403 job 90923688642 before editing. The only failure was the branch-diff runtime-freeze classifier rejecting the two newly introduced read-only inventory classes; 1620 Big Five tests passed. Repair is constrained to the existing classifier test plus the exact two inventory paths."
+      },
+      {
+        "at": "2026-07-30T15:52:00Z",
+        "status": "github_retry_pending",
+        "note": "The exact classifier regression test passes with 2 assertions, scoped Pint passes, YAML/JSON parsing passes, and git diff --check passes. The manifest allowlist now explicitly includes the classifier test as the same-scope required-check repair."
+      },
+      {
+        "at": "2026-07-30T16:04:14Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Inspected all seven unresolved Codex review threads. Same-scope fixes now enforce org-0 authority, preserve higher-priority current-authority failures, separate revision-pointer equality from content equivalence, honor future publish scheduling, bind historical slots by registered Authority V2 source-package lineage, order revisions by revision_no, and report the 50-slot cohort accurately. Focused tests pass 8 tests / 32 assertions; scoped Pint, PHP syntax, JSON/YAML parsing, and diff checks pass."
+      },
+      {
+        "at": "2026-07-30T16:16:05Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Inspected the three new exact-head review findings after CI run 30559823419 passed. The inventory now counts only the exact registered redirect identities, reports unexpected org-0 rows separately as authority drift, fails closed for missing or ambiguous registered historical slots, and validates historical snapshots for private fields, media, and CJK before allowing stale classification. Focused tests pass 11 tests / 56 assertions; all 50 production-evidence source packages match the registered lineage classifier; scoped Pint and parsing/diff checks pass."
+      },
+      {
+        "at": "2026-07-30T16:30:28Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Inspected four new exact-head review findings after CI run 30560724406 passed. Current published pointers now require exact locked EN52 package, SHA, workflow, and asset-key lineage; a distinct newer working revision remains a valid unpublished candidate; historical slot identity is bound to the exact row family, authority key, and locked Authority V2 package SHA; and the private-result denylist covers the established attempt/report/user/raw-score/vector snapshot families. Focused inventory plus runtime-freeze regression checks pass 12 tests / 68 assertions; scoped Pint, JSON/YAML parsing, diff checks, and exact allowlist validation pass."
+      },
+      {
+        "at": "2026-07-30T16:44:50Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "Inspected three new exact-head review findings after all required jobs in CI run 30562045318 passed. Locked EN52 facet lineage now maps every route key to its exact content identity, text-only validation rejects img/picture/source HTML elements, and the runtime command has a distinct schema version from the immutable production-evidence artifact. The 11-test inventory suite and 405-test runtime-freeze suite pass, as do scoped Pint, PHP syntax, state JSON parsing, and diff checks."
+      },
+      {
+        "at": "2026-07-30T16:59:13Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After all required jobs in CI run 30562910486 passed, exact-head review identified three further fail-closed gaps. The inventory now requires the exact 52-row canonical EN52 cohort, lets prohibited historical evidence block while preserving the current candidate classification separately, and reuses established result-page forbidden-field contracts plus private_path. Concurrent origin/main efa84b9a482193a6996453a6395ec060749c7b88 was merged; both train entries and both runtime-freeze exceptions were preserved exactly. The 12-test inventory suite and 407-test runtime-freeze suite pass, as do scoped Pint, PHP syntax, YAML/JSON parsing, and diff checks."
+      },
+      {
+        "at": "2026-07-30T17:13:52Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After all required jobs in CI run 30564012592 passed, exact-head review identified three authority-state gaps. The two excluded hubs now have explicit locked-EN52, pointer-equality, schema, text-only, and public-projection validation; registered Authority V2 lineage is selected from all revisions and reports working/published pointer activity separately; and plural images fields are rejected. The complete 50-slot authority cohort is also required to satisfy locked published lineage and projection gates. The 14-test inventory suite and 409-test runtime-freeze suite pass, as do scoped Pint, PHP syntax, YAML/JSON parsing, and diff checks."
+      },
+      {
+        "at": "2026-07-30T17:41:14Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30565108964 passed, exact-head review identified one remaining live-projection gap. The inventory now applies the publisher's exact field-by-field runtime readback against the locked published revision descriptor, validates its EN52 envelope and source hash, and fails closed when live title, content, SEO, hreflang, eligibility, source, review, or operator-owned fields drift. Snapshot content validation handles the locked descriptor envelope without exposing raw values. The 15-test inventory suite passes 100 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, JSON parsing, diff checks, and exact eight-path scope validation pass."
+      },
+      {
+        "at": "2026-07-30T17:57:53Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30567136115 passed, exact-head review found two remaining self-attestation gaps. The service now embeds deterministic locks generated from the exact EN52 release package for all 52 per-asset source hashes and complete stable descriptor snapshots, and exact per-slot source hashes verified against the Authority V2 draft-import package for all 50 historical identities. A mutually altered revision/live asset and a historical revision with a substituted source hash both fail closed. The 17-test inventory suite passes 109 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, YAML/JSON parsing, diff checks, and exact eight-path scope validation pass."
+      },
+      {
+        "at": "2026-07-30T18:14:52Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30568401101 passed, exact-head review identified two remaining lineage-integrity gaps. Published EN52 revisions now require the publisher's exact operator admin id, and each of the 50 registered Authority V2 historical slots is bound to its exact stable transformed snapshot hash in addition to package, asset key, package SHA, and source hash. A clean substituted historical snapshot is retained as sanitized evidence but resolves as snapshot_mismatch and blocks stale classification. The 19-test inventory suite passes 118 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, all 100 historical source/snapshot locks cross-validate against the frozen package, and scoped Pint, PHP syntax, and diff checks pass."
+      },
+      {
+        "at": "2026-07-30T18:26:09Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30569685735 passed, exact-head review identified two remaining publisher-equivalence gaps. The inventory now requires the locked EN52 package to contain exactly the 52 expected authority keys with no extra or duplicate revision, and requires every published projection to retain a non-null effective published_at timestamp. The 21-test inventory suite passes 128 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions after the local heavy-validation guard released, and scoped Pint, PHP syntax, YAML/JSON parsing, diff checks, and exact scope validation pass."
+      },
+      {
+        "at": "2026-07-30T18:38:06Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30570549188 passed, exact-head review identified two remaining snapshot-sanitization gaps. Private-field, CJK, and media scans now cover the complete working revision envelope while content completeness still derives from attributes, and Markdown image detection mirrors the compiler boundary for optional whitespace and empty destinations. Envelope-level private values, spaced Markdown images, and empty-destination images all fail closed without exposing raw values. The 22-test inventory suite passes 136 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, and diff checks pass."
+      },
+      {
+        "at": "2026-07-30T18:47:42Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30571343057 passed, exact-head review identified one remaining redirect-only alias gate gap. The canonical cohort and top-level pass condition now both require the legacy alias database set to be empty, while the sanitized output exposes only the absence boolean and aggregate count. The 22-test inventory suite passes 137 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint and PHP syntax pass."
+      },
+      {
+        "at": "2026-07-30T18:57:58Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30572071351 passed, exact-head review identified two remaining state and Unicode gaps. Registered Authority V2 historical slots now require the collision-safe writer's exact draft workflow state, and a shared complete CJK detector covers BMP plus supplementary unified-ideograph and compatibility ranges for both current and historical snapshots. The 23-test inventory suite passes 142 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint passes."
+      },
+      {
+        "at": "2026-07-30T19:08:30Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30572828400 passed, exact-head review identified two remaining candidate-validation gaps. Independent working candidates now require the revision model's exact draft workflow state, and title/summary completeness requires non-empty scalar strings rather than Laravel filled semantics. The 25-test inventory suite passes 150 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, YAML/JSON parsing, and diff checks pass."
+      },
+      {
+        "at": "2026-07-30T19:19:05Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30573601659 passed, exact-head review identified one remaining text-only semantic mismatch. Media/image keys now fail closed on key presence even when their values are null, empty strings, or empty arrays, matching the EN52 package compiler's authority boundary. The 25-test inventory suite passes 152 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint and PHP syntax pass."
+      },
+      {
+        "at": "2026-07-30T19:29:05Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30574341370 passed, exact-head review identified one remaining candidate authority-identity gap. Independent working candidates now compare every supplied org, framework, entity type/key, locale, slug, and canonical path against the org-0 backend asset and canonical catalog before translation_identity_mismatch can pass. The 26-test inventory suite passes 155 assertions and the complete runtime-freeze suite passes 395 tests / 808 assertions."
+      },
+      {
+        "at": "2026-07-30T19:39:32Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30575064365 passed, exact-head review identified one remaining semantic content-comparison gap. Working and published fingerprints now hash recursively key-sorted stable JSON, so associative insertion order cannot turn identical content into a false independent candidate. The reordered-key regression resolves as duplicate_of_published; the 26-test inventory suite passes 156 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint and PHP syntax pass."
+      },
+      {
+        "at": "2026-07-30T19:49:23Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30575816571 passed, exact-head review identified one remaining supplementary Han gap and stale implementation binding. The detector now uses the Unicode Han script property, including Extension H U+31350, and the ledger binds exact implementation commit ee590b81a1e3f7c760032daf32ac0acf94cc7bd7. The 26-test inventory suite passes 156 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint and PHP syntax pass."
+      },
+      {
+        "at": "2026-07-30T20:00:19Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30576523438 passed, exact-head review identified one remaining candidate collection-completeness gap. Independent working candidates now require non-empty list-shaped sections with key/kind/heading/body and non-empty list-shaped FAQs with question/answer, while published or historical pointer classification retains its separate authority precedence. The ledger binds implementation 4f955e2447a74e27ef8f244d812f10015e30eb9a. The 27-test inventory suite passes 161 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint and PHP syntax pass."
+      },
+      {
+        "at": "2026-07-30T20:11:08Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30577312935 passed, exact-head review identified two remaining identity-boundary gaps. Independent candidates now require every org/framework/entity/locale/slug/canonical identity field to be present and equal, and emitted translation-group ids are restricted to a safe Big Five identity pattern with invalid arbitrary JSON reduced to null plus a boolean. The ledger binds implementation 98008a55a63c2935033734d17b84f58048a3d8cb. The 27-test inventory suite passes 167 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint and PHP syntax pass."
+      },
+      {
+        "at": "2026-07-30T20:20:49Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30578108800 passed, exact-head review identified one remaining mutable workflow-state output gap. Working revision status now emits only the draft, pending_manual_review, or locked published-content state; every other database value becomes invalid_unrecognized plus working_revision_status_safe=false. A private-URL credential regression proves the raw value is absent. The ledger binds implementation 9a93b25ff39f8a6041aa56bbbfab1bf7e43ca92f. The 27-test inventory suite passes 170 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint and PHP syntax pass."
+      },
+      {
+        "at": "2026-07-30T20:30:32Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30578816950 passed, exact-head review identified one remaining reference-style Markdown image gap. Text-only scanning now rejects every Markdown image token beginning with ![...], covering inline, empty destination, full reference, collapsed reference, and shortcut reference forms, plus existing HTML image elements. The ledger binds implementation 39658663d28db65b36408b9e19f40e48a03915b4. The 27-test inventory suite passes 172 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint and PHP syntax pass."
+      },
+      {
+        "at": "2026-07-30T20:41:20Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30579530405 passed, exact-head review identified one remaining camelCase media-key gap. Text-only scanning now uses the runtime verifier's broader media-key boundary, so heroImage, ogImage, twitterImage, inlineMedia, and imageUrl fail closed. The ledger binds implementation b2367e2be02a2807633ca9834b2648216ce67453. The 27-test inventory suite passes 174 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, YAML/JSON parsing, and diff checks pass."
+      },
+      {
+        "at": "2026-07-30T20:51:42Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30580307314 passed, exact-head review identified two remaining sanitization-accuracy gaps. Private-result keys are normalized from camelCase, acronym case, punctuation, and separators into the snake_case denylist boundary; Markdown image detection counts immediately preceding backslashes so odd escaped markers remain literal text while even/unescaped image tokens fail closed. The ledger binds implementation 124f0e030eeeca8dda2d7b73e313fe069046fbd4. The 27-test inventory suite passes 179 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, YAML/JSON parsing, and diff checks pass."
+      },
+      {
+        "at": "2026-07-30T21:02:48Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30581043323 passed, exact-head review identified one remaining redirect-only alias gap. The inventory now recursively scans the complete candidate snapshot against the canonical ten English redirect-only alias slugs, reports only a sanitized boolean, and fails closed for nested canonical, redirect_from, or section-link references. An initial local regex delimiter error was fixed before commit; the rerun passes 28 tests / 182 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, YAML/JSON parsing, and diff checks pass. The ledger binds implementation 455e98f825ebb0af19b6757cf9634de2bf39c734."
+      },
+      {
+        "at": "2026-07-30T21:14:14Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30581831908 passed, exact-head review identified one remaining cross-locale redirect-only alias gap. The database pass gate now inspects org-0 Big Five authority rows across en and zh-CN, applies the canonical ten-alias key set to entity key, slug, canonical path, and redirect_from, and keeps unknown-authority drift scoped to the English canonical inventory. A zh-CN high-openness regression proves the aggregate alias count blocks ok=true. The ledger binds implementation 7b890223ee014b30ea45e803aa36668b76ee3b60. The 28-test inventory suite passes 182 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, YAML/JSON parsing, and diff checks pass."
+      },
+      {
+        "at": "2026-07-30T21:25:16Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30582615012 passed, exact-head review identified one remaining cross-organization redirect-only alias gap. The alias database pass gate now matches BigFiveEn52Publisher::assertRedirectAliasesAbsent(): it has no organization or locale filter and checks all candidate rows by framework, polarity identity, alias slug, canonical path, and redirect_from, while the English canonical inventory remains org-0/en. A nonzero-org low-openness regression proves global alias reappearance blocks ok=true. Scoped Pint initially reported mechanical formatting, which was fixed and rerun before commit. The ledger binds implementation b6d6fbb8957e2002884346b1ef6f3abe30569f6c. The 28-test inventory suite passes 182 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, YAML/JSON parsing, and diff checks pass."
+      },
+      {
+        "at": "2026-07-30T21:36:16Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30583353912 passed, exact-head review identified one remaining unregistered alias-shape gap. The global database alias filter now exactly mirrors the publisher predicate: emotional-stability and every high-* or low-* identity shape fail closed, including shapes outside the locked ten-key redirect catalog. A nonzero-org high-curiosity regression proves the aggregate boundary blocks ok=true. Scoped Pint initially reported the expected mechanical closure cleanup, which was formatted and fully rerun before commit. The ledger binds implementation 4a343538ededc4cde60b2760f01f05e810c4cd09. The 28-test inventory suite passes 182 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, YAML/JSON parsing, and diff checks pass."
+      },
+      {
+        "at": "2026-07-30T21:46:21Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30584090809 passed, exact-head review identified one remaining distinct-working-pointer validation gap. Candidate workflow, identity, and deep section/FAQ checks now apply to every working pointer distinct from the published pointer regardless of revision number; newer versus stale ordering only selects the final valid disposition after those gates pass. A stale revision with pending_manual_review, zh-CN identity, and empty sections proves fail-closed behavior. The ledger binds implementation a7af7c99b985214831c925e8dd886dca3ed6cfad. The 29-test inventory suite passes 188 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, YAML/JSON parsing, and diff checks pass."
+      },
+      {
+        "at": "2026-07-30T21:57:00Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After every required job in CI run 30584737453 passed, exact-head review identified two remaining EN52 compiler content-shape gaps. Candidate sections now require the compiler's exact rich_text kind, and FAQ validation requires question-mark-terminated prompts plus compiler-equivalent normalized-question uniqueness and non-empty answers. Gallery sections, duplicate normalized questions, and missing question marks all fail closed as schema_repair_required. The ledger binds implementation 190b3e3edb3dd34ee8edda0cf351632f13b621df. The 29-test inventory suite passes 193 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, YAML/JSON parsing, and diff checks pass."
+      },
+      {
+        "at": "2026-07-30T22:15:17Z",
+        "status": "ready_to_merge",
+        "note": "Exact implementation 190b3e3edb3dd34ee8edda0cf351632f13b621df is bound by metadata head 8e014a11d81ff6ef5f85145271004436bb292d13. CI run 30585553555 and Code Scanning run 30585553557 passed all required jobs, GitHub reports MERGEABLE, exact eight-path scope validation is clean, and unresolved review thread count is zero. This metadata-only ready_to_merge tail must repeat required checks before squash merge."
+      },
+      {
+        "at": "2026-07-30T22:26:24Z",
+        "status": "github_checks_pending",
+        "note": "After CI run 30586522407 passed all required jobs, exact-head review identified one remaining text-only boundary gap. HTML media scanning now rejects inline SVG plus image-capable or audiovisual embed tags including image, canvas, object, embed, iframe, video, and audio. Inline SVG and object regressions fail closed. The ledger binds implementation 494d0b2489c59d89df57e4729ac27c83f55f43cc. The 29-test inventory suite passes 197 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, and diff checks pass."
+      },
+      {
+        "at": "2026-07-30T22:38:10Z",
+        "status": "github_checks_pending",
+        "note": "After CI run 30587176185 passed all required jobs, exact-head review identified one remaining immutable-lineage gap. Each of the 50 historical slots now requires the exact revision id recorded by the authorized production observation in addition to its package, asset key, source hash, package SHA, workflow state, and transformed snapshot hash. A deleted row recreated with otherwise identical attributes fails closed as missing. All 50 locks cross-check against the durable evidence artifact. The ledger binds implementation 2a11d6128a2010aecb93227dea100d3f06373375. The 30-test inventory suite passes 201 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, YAML/JSON parsing, and diff checks pass."
+      },
+      {
+        "at": "2026-07-30T22:47:00Z",
+        "status": "ready_to_merge",
+        "note": "Exact implementation 2a11d6128a2010aecb93227dea100d3f06373375 is bound by metadata head ade80d52e44cbe452d539b54d993d17756ca50ff. CI run 30587864941 and Code Scanning run 30587864845 passed all required jobs, GitHub reports CLEAN/MERGEABLE, exact eight-path scope validation is clean, and the implementation review finding is resolved. Manifest, ledger status, check evidence, and scope flags now consistently record ready_to_merge. This metadata-only tail must repeat required checks before squash merge."
+      },
+      {
+        "at": "2026-07-30T22:58:35Z",
+        "status": "github_checks_pending",
+        "note": "After CI run 30588371315 passed all required jobs, exact-head review identified one remaining CSS media gap. Text-only scanning now rejects style and stylesheet link elements plus CSS image functions in background, border-image, content, cursor, list-style, and mask declarations, including url(), image-set(), cross-fade(), element(), and gradient functions. CSS url(), image-set(), and style-element regressions fail closed. The ledger binds implementation 6fea47f2504b66d06f5686ad58a9d6909bf5889f. The 30-test inventory suite passes 207 assertions, the complete runtime-freeze suite passes 395 tests / 808 assertions, and scoped Pint, PHP syntax, and diff checks pass."
+      },
+      {
+        "at": "2026-07-30T23:10:02Z",
+        "status": "github_checks_pending",
+        "note": "After CI run 30589025088 passed all required jobs, exact-head review identified shape-outside:url() as a remaining property-allowlist bypass and confirmed the ledger top-level status had not matched its pending fields. The inventory now rejects CSS url(), image(), image-set(), cross-fade(), element(), and gradient functions independent of property name; shape-outside:url() fails closed. The exact task ledger status is pending. The ledger binds implementation b94952ada0f6795411e71ec50cafba49a337a242. The 30-test inventory suite passes 209 assertions, scoped Pint and PHP syntax pass, and the focused runtime-freeze classifier passes 1 test / 2 assertions. The complete runtime-freeze file was not duplicated while another repository validation held the heavy-process guard."
+      },
+      {
+        "at": "2026-07-30T23:19:26Z",
+        "status": "github_checks_pending",
+        "note": "After CI run 30589679599 passed all required jobs, exact-head review identified HTML input type=image as a remaining media vector. The scanner now rejects any HTML src, srcset, poster, or background loading attribute and image-type input control in addition to the existing media-tag and CSS-function boundaries. Image input and legacy table background regressions fail closed. The ledger binds implementation 04e25651849c5e1fd1e6114d8a8897f0da86c6cb. The 30-test inventory suite passes 213 assertions, scoped Pint and PHP syntax pass, and the focused runtime-freeze classifier passes 1 test / 2 assertions. The complete runtime-freeze file was not duplicated while another repository Vitest validation held the heavy-process guard."
+      },
+      {
+        "at": "2026-07-30T23:28:52Z",
+        "status": "github_checks_pending",
+        "note": "After CI run 30590176791 passed all required jobs, exact-head review identified HTML image metadata as a remaining media vector. The scanner now rejects meta declarations, covering og:image, twitter:image, and itemprop=image alongside the existing tag, loading-attribute, CSS-function, and Markdown boundaries. The ledger binds implementation 164829a5e618b5489211e6ee2067438bf7c9ba49. The 30-test inventory suite passes 219 assertions, scoped Pint and PHP syntax pass, and the focused runtime-freeze classifier passes 1 test / 2 assertions."
+      },
+      {
+        "at": "2026-07-30T23:38:17Z",
+        "status": "github_checks_pending",
+        "note": "After CI run 30590670744 passed all required jobs, exact-head review identified scalar private result-module references as a remaining claim-boundary gap. Recursive scanning now applies the public content contract's private_result, result_page_module, report_module, and entitlement patterns to string values as well as keys. Section-body regressions for all four patterns fail closed. The ledger binds implementation 9daca2b4a0241f74d08e01d11d6c4d32d4b752c8. The 30-test inventory suite passes 231 assertions, scoped Pint and PHP syntax pass, and the focused runtime-freeze classifier passes 1 test / 2 assertions."
+      },
+      {
+        "at": "2026-07-31T00:41:11Z",
+        "status": "github_checks_pending",
+        "note": "After CI run 30591158059 passed all required jobs, exact-head review identified that blanket meta/link rejection produced false positives. The media scanner now rejects only image-bearing metadata and link declarations: og:image, twitter:image, itemprop=image, icon/image_src relations, and as=image. Charset, description, and canonical metadata remain text-only compliant. The ledger binds implementation 735f37e6f918eedaf331465f0615d4e4326676d2. The 30-test inventory suite passes 232 assertions, scoped Pint and PHP syntax pass, and the focused runtime-freeze classifier passes 1 test / 2 assertions."
+      },
+      {
+        "at": "2026-07-31T00:51:15Z",
+        "status": "github_checks_pending",
+        "note": "After CI run 30594279222 passed all required jobs, exact-head review identified that the link relation regex could find icon in a later href such as /styles/iconic.css. Meta/link tags are now parsed one at a time with bounded quoted or unquoted attribute extraction; rel is tokenized before matching icon/image_src, and as=image is checked independently. The stylesheet iconic.css regression remains text-only compliant. The ledger binds implementation fb14e50244bddd653d06947432055201be099d35. The 30-test inventory suite passes 232 assertions, scoped Pint and PHP syntax pass, and the focused runtime-freeze classifier passes 1 test / 2 assertions."
+      },
+      {
+        "at": "2026-07-31T01:00:13Z",
+        "status": "ready_to_merge",
+        "note": "Exact implementation fb14e50244bddd653d06947432055201be099d35 is bound by metadata head e887aa2316555b459f9578842db313c49e5f79c9. CI run 30594758241 and Code Scanning run 30594758293 passed all required jobs, GitHub reports CLEAN/MERGEABLE, exact eight-path scope validation is clean, and all implementation review threads are resolved. The two unrelated train statuses accidentally changed by an earlier generic patch are restored exactly to origin/main ready_to_merge. This metadata-only tail must repeat required checks before squash merge."
+      },
+      {
+        "at": "2026-07-31T01:12:33Z",
+        "status": "github_checks_pending",
+        "note": "CI run 30595271594 and Code Scanning run 30595271629 passed all required jobs on metadata head c13e570466fc372029644752cdc7d0c57384df4d. Exact-head review then found that plain prose mentioning CSS image functions was rejected and normalized cover/thumbnail media keys were not rejected. Implementation f0886e9acba8ab0a5acc08504e5bafc50afd9308 confines CSS detection to image-capable declarations or actual style attributes and expands normalized media-key families. Focused PHPUnit passes 30 tests / 237 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
+      },
+      {
+        "at": "2026-07-31T01:23:08Z",
+        "status": "github_checks_pending",
+        "note": "CI run 30595778238 and Code Scanning run 30595778236 passed all required jobs on metadata head f6f9743b99fec53afda1672d77b4bd807127f261. Exact-head review then found a valid CSS escape bypass such as \\75rl(...). Implementation 04ebc075fb4f684415befe3f5b7047e3cb23ae59 decodes CSS hexadecimal and simple escapes before matching image functions in declarations and bounded style attributes. Focused PHPUnit passes 30 tests / 241 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
+      },
+      {
+        "at": "2026-07-31T01:33:37Z",
+        "status": "github_checks_pending",
+        "note": "CI run 30596232563 and Code Scanning run 30596232628 passed all required jobs on metadata head cbb7d685e9cb1a73e3419dcaae29f693a45bfda3. Exact-head review then found that HTML entities could conceal CSS image functions and that data-style/data-property could be parsed as rendering attributes. Implementation 078fa76598e244f720e968191ca581dba9d7c527 HTML5-decodes bounded attribute values, requires complete attribute names after HTML whitespace, and applies the same boundary to src/background/type detection. Focused PHPUnit passes 30 tests / 243 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
+      },
+      {
+        "at": "2026-07-31T01:43:17Z",
+        "status": "github_checks_pending",
+        "note": "CI run 30596691414 and Code Scanning run 30596691423 passed all required jobs on metadata head cfc0b25a9aa3dcea38870eff4b49e75420b781b2. Exact-head review then found harmless style elements were rejected before CSS content inspection. Implementation aa5f1e8e81045e78aaa17063e82cf51619378a86 removes style from the blanket media-tag list and delegates style content to the normalized CSS image detector. Focused PHPUnit remains 30 tests / 243 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
+      },
+      {
+        "at": "2026-07-31T01:53:37Z",
+        "status": "github_checks_pending",
+        "note": "CI run 30597119403 and Code Scanning run 30597119249 passed all required jobs on metadata head 8fdbe8c7f18d63719722f2e7bb245160c2a976d9. Exact-head review then found CSS custom-property image indirection could hide url() behind var(). Implementation 90fc19a71da2402d0afcf0ff75c3c457a6e3873d scans any direct image function inside actual style elements and style attributes, while image-capable properties also reject var()/env() indirection. Plain prose remains exempt. Focused PHPUnit passes 30 tests / 247 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
+      },
+      {
+        "at": "2026-07-31T02:03:23Z",
+        "status": "github_checks_pending",
+        "note": "CI run 30597566201 and Code Scanning run 30597566196 passed all required jobs on metadata head 32368f0ff2316d82e569a005f1fcb198698ff818. Exact-head review then found CSS comments could reconstruct url() tokens and the current train item's top-level status lagged its pending check evidence. Implementation ce4cadf7a46812c3037b66d732ba4bf03b2fc32d strips complete or unterminated CSS comments before escape normalization and media scanning; the top-level status is explicitly github_checks_pending. Focused PHPUnit passes 30 tests / 249 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
+      },
+      {
+        "at": "2026-07-31T02:14:15Z",
+        "status": "github_checks_pending",
+        "note": "CI run 30598001465 and Code Scanning run 30598001391 passed all required jobs on metadata head 07f897a3c7dff86fd27e8d75697474177cd981a2. Exact-head review then found the package-revision query occurred after the database seal and plain prose alias terms were over-rejected. Implementation 14f5fb96a8b15b58e81ba319624ab8adbc54fb60 moves the after fingerprint behind the final authority query and constrains alias matching to identity-bearing fields, actual Big Five URL paths, or rendering attributes. Focused PHPUnit passes 30 tests / 251 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
+      },
+      {
+        "at": "2026-07-31T02:24:30Z",
+        "status": "github_checks_pending",
+        "note": "CI run 30598482165 and Code Scanning run 30598482162 passed all required jobs on metadata head 6be51309a4a49625bb340f9809ccb735938db8d7. Exact-head review then found that a greater-than sign inside a quoted HTML attribute could truncate tag scanning before a real media attribute. Implementation 6b142be732cdca673578a8c82cf3837656a48160 adds a quote-aware HTML tag scanner and reuses it for style attributes, src/srcset/poster/background/type, and meta/link image metadata. Focused PHPUnit passes 30 tests / 253 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
+      },
+      {
+        "at": "2026-07-31T02:34:38Z",
+        "status": "github_checks_pending",
+        "note": "CI run 30598924082 and Code Scanning run 30598924307 passed all required jobs on metadata head 4fc675d446aec53a8a8212341ca54f701a902d5e. Exact-head review then found camelCase identity-bearing keys could hide an alias and legacy WebKit gradients were not recognized as image functions. Implementation 93548b840fac9f786c29f53a751d5a7f06f1b159 applies the shared camelCase-to-snake_case normalization to alias keys and covers vendor image-set/gradient plus paint functions. Focused PHPUnit passes 30 tests / 257 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
+      },
+      {
+        "at": "2026-07-31T02:45:03Z",
+        "status": "github_checks_pending",
+        "note": "CI run 30599370188 and Code Scanning run 30599370190 passed all required jobs on metadata head 7042e109b60de8279b9b27a82b1a683ca51ba828. Exact-head review then found HTML-entity/percent-encoded alias URLs and harmless image-function text inside CSS strings. Implementation 5de437e1579294b8232ad53d6e983271b4a2a93c normalizes encoded link targets before alias matching and strips quoted CSS strings before comment/escape/function scanning while preserving functions outside strings. Focused PHPUnit passes 30 tests / 259 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
+      },
+      {
+        "at": "2026-07-31T02:56:53Z",
+        "status": "github_checks_pending",
+        "note": "CI run 30599822055 and Code Scanning run 30599822064 passed all required jobs on metadata head 2855974c9dbde28847f2538db1a9d8ecc6d4606b. Exact-head review then found comment markers inside CSS strings could hide later image declarations and attribute-like text inside an HTML quoted value could be misparsed. Implementation 306fe3e955b75ce58b94dbba9ba5d98683dea3eb tokenizes CSS strings/comments in one pass and parses HTML attributes only outside quoted values. Focused PHPUnit passes 30 tests / 261 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
+      },
+      {
+        "at": "2026-07-31T03:30:14Z",
+        "status": "ready_to_merge",
+        "note": "Exact implementation head f15e81992ab291a8b578fbe19f2e1846a19aa48c passed every required job in CI run 30601381477 and Code Scanning run 30601381442. Final same-scope hardening makes malformed attributes terminate safely, rejects structured src/srcset media keys, decodes HTML entities before Han detection, restarts tag scanning at nested openers, and ignores non-rendering HTML-comment media. Focused validation passes 30 tests / 271 assertions plus the exact runtime-freeze regression; scoped Pint, PHP syntax, JSON/YAML, diff, eight-path scope, and unresolved-thread checks pass. This final metadata-only tail head must independently repeat exact-head CI/review before squash merge."
+      }
+    ],
+    "updated_at": "2026-07-31T03:30:14Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
