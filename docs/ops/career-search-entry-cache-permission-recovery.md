@@ -259,3 +259,35 @@ every non-read query. Cache/server/CMS/database writes, publication,
 indexability, queue, sitemap, llms, Search Channel, URL submission, deploy,
 rollback, retry, and non-target mutation remain prohibited. Merging this
 control does not authorize its production dispatch or any content/cache repair.
+## Thin-source authority repair
+
+The successful read-only thin-source diagnostic proved that the residual ten
+thin URLs are five bilingual manifest members at manifest positions `30`, `33`,
+`34`, `40`, and `42`. Each has one occupation row but no exact v4.2 display
+asset, so the runtime correctly falls back to the restricted navigation shell.
+The diagnostic classification is `exact_display_asset_missing`; permission
+repair and blind cache refresh cannot supply the missing authority.
+
+`Career Search Entry Thin Authority Repair` is a separate two-gate control. Its
+`preflight` mode is read-only. It binds the immutable thin-source diagnostic,
+the unchanged active release, and the exact 50-slug manifest, then validates
+only the five reviewed workbook rows against the occupation crosswalks and the
+existing display publish gate. The only accepted workbook is the historical
+reviewed workbook with SHA-256
+`c30f8743cfd0d8baa14ac931cc7270807425164952f6a44953b5b4ab448778ef`.
+The receipt exposes manifest positions and hashes, not slugs or editorial
+payloads.
+
+`repair` is separately authorized by the exact successful preflight receipt,
+repair-set SHA, and payload-set SHA. It revalidates the complete plan and
+atomically creates exactly five `career_job_display_assets` rows. The database
+guard permits inserts only into that table, and every target must be absent
+before the transaction starts. Before commit, both locales must resolve to the
+24-component display contract with locale-safe hrefs. A hash over all
+non-target display-asset identities must remain unchanged.
+
+The repair does not warm or forget cache entries. It does not change CMS
+resources, publication, indexability, queues, sitemap, llms, Search Channel,
+URL submission, deployment, rollback, or any non-target row. After a verified
+repair, use a separately authorized cache-only refresh and require the exact
+quality package plus complete 100-URL public readback before resuming Task 12.
