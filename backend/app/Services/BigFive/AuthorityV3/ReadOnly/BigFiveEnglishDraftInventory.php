@@ -1062,10 +1062,11 @@ final class BigFiveEnglishDraftInventory
         $imageFunction = '(?:url|image(?:-set)?|cross-fade|element|(?:linear|radial|conic)-gradient)\s*\(';
         $imageProperty = '(?:background(?:-image)?|border-image(?:-source)?|clip-path|content|cursor|'
             .'filter|list-style(?:-image)?|mask(?:-image)?|offset-path|shape-outside)';
+        $decodedValue = $this->decodeCssEscapes($value);
 
         if (preg_match(
             '/(?:^|[;{]\s*)'.$imageProperty.'\s*:\s*[^;}]*'.$imageFunction.'/i',
-            $value,
+            $decodedValue,
         ) === 1) {
             return true;
         }
@@ -1073,12 +1074,30 @@ final class BigFiveEnglishDraftInventory
         preg_match_all('/<[^>]+>/s', $value, $tags);
         foreach ($tags[0] as $tag) {
             $style = $this->htmlAttributeValue($tag, 'style');
-            if ($style !== null && preg_match('/'.$imageFunction.'/i', $style) === 1) {
+            if ($style !== null
+                && preg_match('/'.$imageFunction.'/i', $this->decodeCssEscapes($style)) === 1) {
                 return true;
             }
         }
 
         return false;
+    }
+
+    private function decodeCssEscapes(string $value): string
+    {
+        return preg_replace_callback(
+            '/\\\\(?:([0-9a-fA-F]{1,6})(?:\r\n|[ \t\r\n\f])?|([^\r\n\f0-9a-fA-F])|(\r\n|[\r\n\f]))/u',
+            static function (array $matches): string {
+                if (($matches[1] ?? '') !== '') {
+                    $codepoint = hexdec($matches[1]);
+
+                    return $codepoint >= 0x20 && $codepoint <= 0x7E ? chr($codepoint) : ' ';
+                }
+
+                return $matches[2] ?? '';
+            },
+            $value,
+        ) ?? $value;
     }
 
     private function containsImageMetadataTag(string $value): bool
