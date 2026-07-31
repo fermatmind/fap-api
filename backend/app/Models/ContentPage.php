@@ -225,8 +225,8 @@ final class ContentPage extends Model
                 Cache::forget(
                     "content_page:v1:{$page->org_id}:{$page->slug}:{$page->locale}"
                 );
-            } catch (\RedisException) {
-                // Redis unavailable — cache invalidation skipped; next read will miss cache
+            } catch (\Exception) {
+                // Cache failure must never block a model save (Redis down, store not available, etc.)
             }
         });
 
@@ -235,8 +235,8 @@ final class ContentPage extends Model
                 Cache::forget(
                     "content_page:v1:{$page->org_id}:{$page->slug}:{$page->locale}"
                 );
-            } catch (\RedisException) {
-                // Redis unavailable — cache invalidation skipped; next read will miss cache
+            } catch (\Exception) {
+                // Cache failure must never block a model save (Redis down, store not available, etc.)
             }
         });
     }
