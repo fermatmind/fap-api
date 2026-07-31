@@ -1013,8 +1013,11 @@ final class BigFiveEnglishDraftInventory
             if ($this->containsImageMetadataTag($value)) {
                 return true;
             }
-            if (preg_match('/<[^>]+\b(?:src|srcset|poster|background)\s*=/i', $value) === 1
-                || preg_match('/<input\b[^>]*\btype\s*=\s*(?:"image"|\x27image\x27|image\b)/i', $value) === 1) {
+            if (preg_match('/<[^>]+[\x20\t\r\n\f](?:src|srcset|poster|background)\s*=/i', $value) === 1
+                || preg_match(
+                    '/<input\b[^>]*[\x20\t\r\n\f]type\s*=\s*(?:"image"|\x27image\x27|image\b)/i',
+                    $value,
+                ) === 1) {
                 return true;
             }
             if ($this->containsCssImageReference($value)) {
@@ -1137,7 +1140,8 @@ final class BigFiveEnglishDraftInventory
     private function htmlAttributeValue(string $tag, string $attribute): ?string
     {
         if (preg_match(
-            '/\b'.preg_quote($attribute, '/').'\s*=\s*(?:"([^"]*)"|\x27([^\x27]*)\x27|([^\s>]+))/i',
+            '/(?:^|[\x20\t\r\n\f])'.preg_quote($attribute, '/')
+                .'\s*=\s*(?:"([^"]*)"|\x27([^\x27]*)\x27|([^\s>]+))/i',
             $tag,
             $match,
             PREG_UNMATCHED_AS_NULL,
@@ -1145,7 +1149,11 @@ final class BigFiveEnglishDraftInventory
             return null;
         }
 
-        return $match[1] ?? $match[2] ?? $match[3];
+        return html_entity_decode(
+            $match[1] ?? $match[2] ?? $match[3],
+            ENT_QUOTES | ENT_HTML5,
+            'UTF-8',
+        );
     }
 
     private function containsLegacyAliasReference(mixed $value): bool

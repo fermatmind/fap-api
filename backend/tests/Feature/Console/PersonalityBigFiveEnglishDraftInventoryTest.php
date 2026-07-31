@@ -323,6 +323,7 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             '<div style="background-image:url(https://private.invalid/css-image.webp)">Text</div>',
             '<div style="background-image:\75rl(hero.webp)">Text</div>',
             '<div style="background-\69mage:url(hero.webp)">Text</div>',
+            '<div style="background-image:&#117;rl(hero.webp)">Text</div>',
             '<div style="background: image-set(url(hero.webp) 1x, url(hero@2x.webp) 2x)">Text</div>',
             '<div style="shape-outside:url(hero.webp)">Text</div>',
             '<style>.hero { background-image: url(hero.webp); }</style>',
@@ -348,7 +349,9 @@ final class PersonalityBigFiveEnglishDraftInventoryTest extends TestCase
             'attributes' => $this->completeSnapshot('Candidate'),
             'body' => '<meta charset="utf-8"><meta name="description" content="Summary">'
                 .'<link rel="canonical" href="https://example.invalid/canonical">'
-                .'<link rel="stylesheet" href="/styles/iconic.css">',
+                .'<link rel="stylesheet" href="/styles/iconic.css">'
+                .'<div data-style="background:url(hero.webp)" data-property="og:image" '
+                .'data-src="hero.webp" data-type="image">Text</div>',
         ]])->saveQuietly();
         $nonImageMetadata = $this->app->make(BigFiveEnglishDraftInventory::class)->inspect();
         $nonImageMetadataRow = collect($nonImageMetadata['rows'])
