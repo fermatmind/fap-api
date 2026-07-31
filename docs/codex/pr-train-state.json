@@ -101847,11 +101847,11 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "php artisan test --filter=MbtiComparisonEnglishPackageImporterTest --no-ansi passed 4 tests/190 assertions. The exact repository package dry run returned seven ordered rows with zh-CN read-only sources, en inactive/draft targets, no reader copy, and every write/release flag false. Wrong SHA, rebuilt package, deterministic replay, protected zh-CN rows, and unsupported write mode passed. Scoped Pint passed for all three PHP files. php artisan route:list --path=api --except-vendor completed with 224 lines. YAML, JSON, and git diff checks passed."
+        "evidence": "php artisan test --filter=MbtiComparisonEnglishPackageImporterTest --no-ansi passed 4 tests/190 assertions. The focused Big Five runtime-freeze classifier regression passed 1 test/2 assertions and proves only the two exact no-write importer paths are ignored while an actual Big Five runtime service remains blocked. The exact repository package dry run returned seven ordered rows with zh-CN read-only sources, en inactive/draft targets, no reader copy, and every write/release flag false. Wrong SHA, rebuilt package, deterministic replay, protected zh-CN rows, and unsupported write mode passed. Scoped Pint passed for all four PHP files. php artisan route:list --path=api --except-vendor completed with 224 lines. YAML, JSON, and git diff checks passed."
       },
       "changed_file_scope": {
         "status": "passed",
-        "evidence": "Changed paths are limited to the exact command, ContentImport service, focused importer test, backend/AGENTS.md, and this PR's docs/codex manifest/state entries. No frozen package, model, migration, route, controller, public API, result package, CMS/database data, publish, SEO runtime, Search Channel, deploy, or frontend file changed."
+        "evidence": "Changed paths are limited to the exact command, ContentImport service, focused importer test, the existing Big Five runtime-freeze classifier regression required by the failed current-PR check, backend/AGENTS.md, and this PR's docs/codex manifest/state entries. No frozen package, model, migration, route, controller, public API, result package, CMS/database data, publish, SEO runtime, Search Channel, deploy, or frontend file changed."
       },
       "github_required_checks": {
         "status": "pending",
@@ -101895,8 +101895,13 @@
         "at": "2026-07-31T01:50:48Z",
         "status": "github_checks_pending",
         "note": "Pushed the scoped branch and opened PR #3439. The implementation pointer remains d6adb6000d279863852acba13bac62e4f24573f8; this metadata head records the PR identity. Fresh exact-head repository-policy checks and review are pending."
+      },
+      {
+        "at": "2026-07-31T02:01:45Z",
+        "status": "github_checks_pending",
+        "note": "Exact head ecb39ee432d7429499ff7347845236948da00f90 passed 8 required checks with staging parity skipped, but CI/verify-bigfive failed only because its runtime-freeze classifier treated the two new no-write dry-run importer paths as MBTI runtime changes. Inspected the failing job first, then added the two exact paths to the existing comparison-import dry-run predicate plus an allowed/blocked regression, and registered that one classifier test path in this PR scope. Focused validation passed the importer suite at 4 tests/190 assertions and the classifier regression at 1 test/2 assertions; scoped Pint, seven-row command dry run, 224-line route inventory, YAML/JSON, and diff checks passed. No CMS/database/write/release action occurred; fresh exact-head checks remain pending after commit and push."
       }
     ],
-    "updated_at": "2026-07-31T01:50:48Z"
+    "updated_at": "2026-07-31T02:01:45Z"
   }
 }
