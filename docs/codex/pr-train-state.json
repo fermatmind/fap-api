@@ -101179,7 +101179,7 @@
     "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
     "status": "github_checks_pending",
     "depends_on": [],
-    "commit_sha": "ce4cadf7a46812c3037b66d732ba4bf03b2fc32d",
+    "commit_sha": "14f5fb96a8b15b58e81ba319624ab8adbc54fb60",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3421",
     "checks": {
       "production_read_only_inventory": {
@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "CI run 30597566201 and Code Scanning run 30597566196 passed all required jobs on metadata head 32368f0ff2316d82e569a005f1fcb198698ff818. Exact-head review then identified CSS comments that reconstruct image function tokens and a stale top-level ready status. Implementation ce4cadf7a46812c3037b66d732ba4bf03b2fc32d strips CSS comments before escape and image-function normalization; the current item remains github_checks_pending until exact-head checks rerun."
+        "evidence": "CI run 30598001465 and Code Scanning run 30598001391 passed all required jobs on metadata head 07f897a3c7dff86fd27e8d75697474177cd981a2. Exact-head review then identified a final authority read after the database seal and over-broad prose alias matching. Implementation 14f5fb96a8b15b58e81ba319624ab8adbc54fb60 seals the fingerprint after the final query and limits alias rejection to identity-bearing fields or actual Big Five paths; required checks must rerun."
       }
     },
     "scope_validation": {
@@ -101483,9 +101483,14 @@
         "at": "2026-07-31T02:03:23Z",
         "status": "github_checks_pending",
         "note": "CI run 30597566201 and Code Scanning run 30597566196 passed all required jobs on metadata head 32368f0ff2316d82e569a005f1fcb198698ff818. Exact-head review then found CSS comments could reconstruct url() tokens and the current train item's top-level status lagged its pending check evidence. Implementation ce4cadf7a46812c3037b66d732ba4bf03b2fc32d strips complete or unterminated CSS comments before escape normalization and media scanning; the top-level status is explicitly github_checks_pending. Focused PHPUnit passes 30 tests / 249 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
+      },
+      {
+        "at": "2026-07-31T02:14:15Z",
+        "status": "github_checks_pending",
+        "note": "CI run 30598001465 and Code Scanning run 30598001391 passed all required jobs on metadata head 07f897a3c7dff86fd27e8d75697474177cd981a2. Exact-head review then found the package-revision query occurred after the database seal and plain prose alias terms were over-rejected. Implementation 14f5fb96a8b15b58e81ba319624ab8adbc54fb60 moves the after fingerprint behind the final authority query and constrains alias matching to identity-bearing fields, actual Big Five URL paths, or rendering attributes. Focused PHPUnit passes 30 tests / 251 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
       }
     ],
-    "updated_at": "2026-07-31T02:03:23Z"
+    "updated_at": "2026-07-31T02:14:15Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
