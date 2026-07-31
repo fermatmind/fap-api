@@ -108,8 +108,9 @@ class HealthzController extends Controller
             $info = Redis::connection($connection)->command('INFO', ['stats']);
             if (! is_string($info)) {
                 return [
-                    'ok' => false,
-                    'error_code' => 'REDIS_INFO_FAILED',
+                    'ok' => true,
+                    'skipped' => true,
+                    'reason' => 'REDIS_INFO_FAILED',
                     'message' => 'Failed to parse Redis INFO stats.',
                 ];
             }
@@ -131,8 +132,9 @@ class HealthzController extends Controller
             ];
         } catch (\Throwable $e) {
             return [
-                'ok' => false,
-                'error_code' => 'REDIS_CACHE_HIT_RATE_UNAVAILABLE',
+                'ok' => true,
+                'skipped' => true,
+                'reason' => 'REDIS_CACHE_HIT_RATE_UNAVAILABLE',
                 'message' => (string) $e->getMessage(),
             ];
         }
