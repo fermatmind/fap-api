@@ -101179,7 +101179,7 @@
     "title": "EN-PARITY-W2-BIG5-DRAFT-RECONCILE-01: expose sanitized Big Five draft inventory",
     "status": "github_checks_pending",
     "depends_on": [],
-    "commit_sha": "5de437e1579294b8232ad53d6e983271b4a2a93c",
+    "commit_sha": "306fe3e955b75ce58b94dbba9ba5d98683dea3eb",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3421",
     "checks": {
       "production_read_only_inventory": {
@@ -101192,7 +101192,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "CI run 30599370188 and Code Scanning run 30599370190 passed all required jobs on metadata head 7042e109b60de8279b9b27a82b1a683ca51ba828. Exact-head review then identified encoded alias link targets and image-function text inside CSS strings. Implementation 5de437e1579294b8232ad53d6e983271b4a2a93c decodes HTML/percent URL forms and strips CSS quoted strings before media scanning; required checks must rerun."
+        "evidence": "CI run 30599822055 and Code Scanning run 30599822064 passed all required jobs on metadata head 2855974c9dbde28847f2538db1a9d8ecc6d4606b. Exact-head review then identified CSS string/comment ordering and quoted HTML attribute false positives. Implementation 306fe3e955b75ce58b94dbba9ba5d98683dea3eb uses single-pass CSS string/comment tokenization and quote-aware HTML attribute parsing; required checks must rerun."
       }
     },
     "scope_validation": {
@@ -101503,9 +101503,14 @@
         "at": "2026-07-31T02:45:03Z",
         "status": "github_checks_pending",
         "note": "CI run 30599370188 and Code Scanning run 30599370190 passed all required jobs on metadata head 7042e109b60de8279b9b27a82b1a683ca51ba828. Exact-head review then found HTML-entity/percent-encoded alias URLs and harmless image-function text inside CSS strings. Implementation 5de437e1579294b8232ad53d6e983271b4a2a93c normalizes encoded link targets before alias matching and strips quoted CSS strings before comment/escape/function scanning while preserving functions outside strings. Focused PHPUnit passes 30 tests / 259 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
+      },
+      {
+        "at": "2026-07-31T02:56:53Z",
+        "status": "github_checks_pending",
+        "note": "CI run 30599822055 and Code Scanning run 30599822064 passed all required jobs on metadata head 2855974c9dbde28847f2538db1a9d8ecc6d4606b. Exact-head review then found comment markers inside CSS strings could hide later image declarations and attribute-like text inside an HTML quoted value could be misparsed. Implementation 306fe3e955b75ce58b94dbba9ba5d98683dea3eb tokenizes CSS strings/comments in one pass and parses HTML attributes only outside quoted values. Focused PHPUnit passes 30 tests / 261 assertions; scoped Pint, PHP syntax, and diff checks pass. Required checks must rerun."
       }
     ],
-    "updated_at": "2026-07-31T02:45:03Z"
+    "updated_at": "2026-07-31T02:56:53Z"
   },
   "API-UNLOCK-01": {
     "id": "API-UNLOCK-01",
