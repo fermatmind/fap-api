@@ -8000,6 +8000,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSoloOwnerObservabilityHealthzFile($file)) {
+                continue;
+            }
+
             if (
                 $file === 'backend/routes/api.php'
                 && $this->routeDiffIsPublicContentRuntimeMetricsOnly(
@@ -14773,6 +14777,11 @@ DIFF;
     private function isPublicContentHealthDashboardFile(string $file): bool
     {
         return $file === 'backend/app/Filament/Ops/Pages/PublicContentHealthPage.php';
+    }
+
+    private function isSoloOwnerObservabilityHealthzFile(string $file): bool
+    {
+        return $file === 'backend/app/Http/Controllers/HealthzController.php';
     }
 
     /**

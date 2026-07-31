@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\Ops\PublicContentRuntimeMetricsService;
 use App\Services\SelfCheck\V2\SelfCheckIoV2;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -11,7 +12,10 @@ use Illuminate\Support\Str;
 
 class HealthzController extends Controller
 {
-    public function __construct(private readonly ?SelfCheckIoV2 $selfCheckIoV2 = null) {}
+    public function __construct(
+        private readonly ?PublicContentRuntimeMetricsService $runtimeMetrics = null,
+        private readonly ?SelfCheckIoV2 $selfCheckIoV2 = null,
+    ) {}
 
     public function show(Request $request)
     {
@@ -34,6 +38,8 @@ class HealthzController extends Controller
             $deps['queue'] = $this->checkQueue();
             $deps['cache_dirs'] = $this->checkCacheDirs();
             $deps['content_source'] = $this->checkContentSource($region, $locale);
+            $deps['redis_cache_hit_rate'] = $this->checkRedisCacheHitRate();
+            $deps['public_content_p95'] = $this->checkPublicContentRuntimeP95();
         }
 
         $allOk = true;
@@ -80,6 +86,105 @@ class HealthzController extends Controller
         }
 
         return $out;
+    }
+
+    private function checkRedisCacheHitRate(): array
+    {
+        $storeName = (string) config('cache.default', 'array');
+        $driver = (string) config("cache.stores.{$storeName}.driver", $storeName);
+
+        if ($driver !== 'redis') {
+            return [
+                'ok' => true,
+                'skipped' => true,
+                'reason' => 'cache_store_not_redis',
+                'store' => $storeName,
+            ];
+        }
+
+        $connection = (string) config("cache.stores.{$storeName}.connection", 'default');
+
+        try {
+            $info = Redis::connection($connection)->command('INFO', ['stats']);
+            if (! is_string($info)) {
+                return [
+                    'ok' => false,
+                    'error_code' => 'REDIS_INFO_FAILED',
+                    'message' => 'Failed to parse Redis INFO stats.',
+                ];
+            }
+
+            $hits = $this->parseRedisInfoValue($info, 'keyspace_hits');
+            $misses = $this->parseRedisInfoValue($info, 'keyspace_misses');
+            $total = $hits + $misses;
+            $hitRate = $total > 0 ? round($hits / $total, 4) : null;
+
+            return [
+                'ok' => true,
+                'connection' => $connection,
+                'keyspace_hits' => $hits,
+                'keyspace_misses' => $misses,
+                'hit_rate' => $hitRate,
+                'message' => ($hitRate !== null && $hitRate < 0.5)
+                    ? 'Cache hit rate < 50%; possible cold cache or invalidation storm.'
+                    : '',
+            ];
+        } catch (\Throwable $e) {
+            return [
+                'ok' => false,
+                'error_code' => 'REDIS_CACHE_HIT_RATE_UNAVAILABLE',
+                'message' => (string) $e->getMessage(),
+            ];
+        }
+    }
+
+    private function checkPublicContentRuntimeP95(): array
+    {
+        $thresholdMs = (float) config('healthz.public_content_p95_warning_threshold_ms', 5000);
+        $windowMinutes = (int) config('healthz.public_content_p95_query_window_minutes', 5);
+
+        try {
+            $metrics = $this->runtimeMetrics ?? app(PublicContentRuntimeMetricsService::class);
+            $exceedances = $metrics->p95Exceedances($windowMinutes, $thresholdMs);
+
+            if ($exceedances === []) {
+                return [
+                    'ok' => true,
+                    'threshold_ms' => $thresholdMs,
+                    'window_minutes' => $windowMinutes,
+                    'exceedances' => [],
+                ];
+            }
+
+            return [
+                'ok' => false,
+                'error_code' => 'PUBLIC_CONTENT_P95_EXCEEDED',
+                'threshold_ms' => $thresholdMs,
+                'window_minutes' => $windowMinutes,
+                'exceedances' => $exceedances,
+                'message' => sprintf(
+                    '%d route family(s) exceeded P95 threshold of %.0fms.',
+                    count($exceedances),
+                    $thresholdMs,
+                ),
+            ];
+        } catch (\Throwable $e) {
+            return [
+                'ok' => true,
+                'skipped' => true,
+                'reason' => 'PUBLIC_CONTENT_P95_CHECK_FAILED',
+                'message' => (string) $e->getMessage(),
+            ];
+        }
+    }
+
+    private function parseRedisInfoValue(string $info, string $key): int
+    {
+        if (preg_match('/^'.preg_quote($key, '/').':(\d+)/m', $info, $matches)) {
+            return (int) $matches[1];
+        }
+
+        return 0;
     }
 
     private function checkDb(): array
