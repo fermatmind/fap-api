@@ -102419,7 +102419,7 @@
       },
       "local_validation": {
         "status": "pass",
-        "evidence": "Package validator passes twice byte-identically with SHA ca7a77819b74f0b0127b2f01fc626c28120903ac56cbfc77cdc60ea4af789b70. Focused package PHPUnit passes 6 tests / 247 assertions; runtime-freeze scope regression passes 2 tests / 6 assertions; composer test:content passes 4 tests / 62 assertions. Scoped Pint, PHP syntax, JSON/JSONL/YAML parsing, CJK/private-field/public-URL/fixed-type/forbidden-claim scans, deterministic SHA recomputation, diff checks, and exact allowlist validation pass."
+        "evidence": "Package validator passes twice byte-identically with SHA 479d071448e0b3385a3814d2256c4c084574746dcb2413dbf4ecb4107a221908. Focused package PHPUnit passes 6 tests / 250 assertions; runtime-freeze scope regression passes 2 tests / 6 assertions; composer test:content passes 4 tests / 62 assertions. Scoped Pint, PHP syntax, JSON/JSONL/YAML parsing, CJK/private-field/public-URL/fixed-type/forbidden-claim scans, deterministic SHA recomputation, diff checks, and exact allowlist validation pass."
       },
       "github_required_checks": {
         "status": "pending",
@@ -102474,8 +102474,13 @@
         "at": "2026-07-31T06:12:00Z",
         "status": "review_fix_local_checks_passed",
         "note": "After all nine applicable required checks passed on exact head 5253de1d373ecb4c948ad6bd4e1d3d04aa099043, exact-head review identified one remaining O3 semantic drift. O3 now preserves the pinned source authority's willingness to identify, approach, express, and use inner feelings as information, with three focused semantic assertions. The byte-exact package was rebuilt as ca7a77819b74f0b0127b2f01fc626c28120903ac56cbfc77cdc60ea4af789b70. Validator passes twice identically; package suite passes 6 tests / 247 assertions, content suite passes 4 tests / 62 assertions, and Pint, parsers, diff, and exact 17-path scope validation pass."
+      },
+      {
+        "at": "2026-07-31T06:25:35Z",
+        "status": "review_fix_local_checks_passed",
+        "note": "After all nine applicable required checks passed on exact head 4798999c49381693d97e1be52f691d694c701bce, exact-head review identified one remaining N6 semantic drift. N6 now preserves the pinned source authority's visible coping-limit vulnerability under high pressure, loss of control, and complex demands, with three focused semantic assertions. The byte-exact package was rebuilt as 479d071448e0b3385a3814d2256c4c084574746dcb2413dbf4ecb4107a221908. Validator passes twice identically; package suite passes 6 tests / 250 assertions, content suite passes 4 tests / 62 assertions, and Pint, parsers, diff, and exact 17-path scope validation pass."
       }
     ],
-    "updated_at": "2026-07-31T06:12:00Z"
+    "updated_at": "2026-07-31T06:25:35Z"
   }
 }

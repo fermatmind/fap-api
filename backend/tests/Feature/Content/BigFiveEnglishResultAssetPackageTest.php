@@ -155,6 +155,13 @@ final class BigFiveEnglishResultAssetPackageTest extends TestCase
         $this->assertSame('Overload Exit Urge', $n5['label']);
         $this->assertStringContainsString('when overloaded', $n5['description']);
         $this->assertStringContainsString('disconnect, withdraw, or change the situation immediately', $n5['description']);
+        $n6 = array_values(array_filter(
+            $byUnit['facet_subscale_explanations']['facets'],
+            static fn (array $facet): bool => $facet['code'] === 'N6'
+        ))[0];
+        $this->assertSame('Coping-Limit Vulnerability', $n6['label']);
+        $this->assertStringContainsString('visible coping limits', $n6['description']);
+        $this->assertStringContainsString('high pressure, loss of control, or complex demands', $n6['description']);
     }
 
     #[Test]
@@ -174,7 +181,7 @@ final class BigFiveEnglishResultAssetPackageTest extends TestCase
             hash('sha256', implode("\n", $canonical))
         );
         $this->assertSame(
-            'ca7a77819b74f0b0127b2f01fc626c28120903ac56cbfc77cdc60ea4af789b70',
+            '479d071448e0b3385a3814d2256c4c084574746dcb2413dbf4ecb4107a221908',
             $shaManifest['package_sha256']
         );
     }
