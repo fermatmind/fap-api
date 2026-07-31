@@ -336,7 +336,12 @@ final class ReportGiftService
                 1,
                 (string) $gift->target_attempt_id,
                 self::PROVIDER,
-                $this->giftIdempotencyKey((string) $gift->id, $idempotencyKey),
+                $this->giftIdempotencyKey(
+                    (string) $gift->id,
+                    $idempotencyKey,
+                    $this->normalizeActorId($payerUserId),
+                    $this->normalizeActorId($payerAnonId)
+                ),
                 null,
                 $requestId
             );
@@ -426,17 +431,10 @@ final class ReportGiftService
             ->get();
         foreach ($competitors as $competitor) {
             $competitorStatus = $this->effectiveStatus($competitor);
-            if (in_array($competitorStatus, [self::STATUS_PURCHASING, self::STATUS_FULFILLED], true)) {
-                return $this->error(
-                    'GIFT_PAYMENT_CONFLICT',
-                    'another gift request is already being purchased or fulfilled.',
-                    409
-                );
-            }
-            if ($competitorStatus === self::STATUS_PENDING) {
+            if (in_array($competitorStatus, [self::STATUS_PENDING, self::STATUS_PURCHASING], true)) {
                 DB::table('report_gift_requests')
                     ->where('id', (string) $competitor->id)
-                    ->where('status', self::STATUS_PENDING)
+                    ->whereIn('status', [self::STATUS_PENDING, self::STATUS_PURCHASING])
                     ->update([
                         'status' => self::STATUS_CANCELED,
                         'canceled_at' => now(),
@@ -801,9 +799,17 @@ final class ReportGiftService
         return hash('sha256', trim($token));
     }
 
-    private function giftIdempotencyKey(string $giftRequestId, string $key): string
-    {
-        return 'gift:'.$giftRequestId.':'.hash('sha256', $key);
+    private function giftIdempotencyKey(
+        string $giftRequestId,
+        string $key,
+        ?string $payerUserId,
+        ?string $payerAnonId
+    ): string {
+        $payerIdentity = $payerUserId !== null
+            ? 'user:'.$payerUserId
+            : 'anon:'.(string) $payerAnonId;
+
+        return 'gift:'.$giftRequestId.':'.hash('sha256', $payerIdentity."\0".$key);
     }
 
     private function normalizeActorId(mixed $value): ?string

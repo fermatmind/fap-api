@@ -579,6 +579,7 @@ class EntitlementManager
                     'gift_orders.order_no',
                 ])
                 ->orderByDesc('gifts.fulfilled_at')
+                ->lockForUpdate()
                 ->first()
             : null;
         if ($directGrant !== null && $fallbackGift !== null) {
@@ -598,6 +599,7 @@ class EntitlementManager
                         ?: 'attempt:'.$attemptId,
                     'order_no' => (string) $fallbackGift->order_no,
                     'source_order_id' => (string) $fallbackGift->order_id,
+                    'expires_at' => null,
                     'meta_json' => json_encode($meta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
                     'updated_at' => $now,
                     'revoked_at' => null,

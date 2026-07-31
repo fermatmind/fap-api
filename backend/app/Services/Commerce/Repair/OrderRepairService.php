@@ -258,6 +258,10 @@ final class OrderRepairService
         $query = DB::table('benefit_grants')
             ->where('org_id', $orgId)
             ->where('status', 'active')
+            ->where(function ($query): void {
+                $query->whereNull('expires_at')
+                    ->orWhere('expires_at', '>', now());
+            })
             ->where(function ($query) use ($orderNo, $attemptId): void {
                 $applied = false;
                 if ($orderNo !== '') {
