@@ -1,0 +1,432 @@
+name: Career Search Entry Thin Authority Repair
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Read-only preflight or separately authorized repair
+        required: true
+        type: choice
+        options:
+          - preflight
+          - repair
+      expected_control_plane_sha:
+        description: Exact latest main SHA containing this control
+        required: true
+        type: string
+      expected_release_sha:
+        description: Exact unchanged active production application SHA
+        required: true
+        type: string
+      expected_release_name:
+        description: Exact unchanged active production release name
+        required: true
+        type: string
+      expected_manifest_sha256:
+        description: Exact 50-slug manifest SHA256
+        required: true
+        type: string
+      source_diagnostic_run_id:
+        description: Exact successful thin-source diagnostic run
+        required: true
+        type: string
+      source_diagnostic_run_attempt:
+        description: Exact successful thin-source diagnostic attempt
+        required: true
+        type: string
+      expected_source_receipt_sha256:
+        description: Exact thin-source diagnostic receipt SHA256
+        required: true
+        type: string
+      expected_source_artifact_digest:
+        description: Exact thin-source diagnostic artifact digest
+        required: true
+        type: string
+      expected_diagnostic_state_sha256:
+        description: Exact thin-source diagnostic state SHA256
+        required: true
+        type: string
+      expected_authority_state_sha256:
+        description: Exact thin-source authority state SHA256
+        required: true
+        type: string
+      expected_thin_target_set_sha256:
+        description: Exact 10-URL thin target set SHA256
+        required: true
+        type: string
+      preflight_run_id:
+        description: Repair mode only; exact successful preflight run
+        required: false
+        type: string
+      preflight_run_attempt:
+        description: Repair mode only; exact successful preflight attempt
+        required: false
+        type: string
+      expected_preflight_receipt_sha256:
+        description: Repair mode only; exact preflight receipt SHA256
+        required: false
+        type: string
+      expected_preflight_artifact_digest:
+        description: Repair mode only; exact preflight artifact digest
+        required: false
+        type: string
+      expected_repair_set_sha256:
+        description: Repair mode only; exact five-row repair set SHA256
+        required: false
+        type: string
+      expected_repair_payload_set_sha256:
+        description: Repair mode only; exact reviewed payload set SHA256
+        required: false
+        type: string
+      operator_approval_phrase:
+        description: Exact mode-specific operator approval phrase
+        required: true
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.repository }}-production
+  cancel-in-progress: false
+
+jobs:
+  eligibility:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      mode: ${{ steps.validate.outputs.mode }}
+      control_plane_sha: ${{ steps.validate.outputs.control_plane_sha }}
+      release_sha: ${{ steps.validate.outputs.release_sha }}
+      release_name: ${{ steps.validate.outputs.release_name }}
+      manifest_sha256: ${{ steps.validate.outputs.manifest_sha256 }}
+      repair_set_sha256: ${{ steps.validate.outputs.repair_set_sha256 }}
+      repair_payload_set_sha256: ${{ steps.validate.outputs.repair_payload_set_sha256 }}
+    steps:
+      - name: Checkout exact authority repair control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 0
+
+      - name: Bind source diagnostic, optional preflight, and authorization
+        id: validate
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MODE: ${{ inputs.mode }}
+          EXPECTED_CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+          EXPECTED_RELEASE_SHA: ${{ inputs.expected_release_sha }}
+          EXPECTED_RELEASE_NAME: ${{ inputs.expected_release_name }}
+          EXPECTED_MANIFEST_SHA256: ${{ inputs.expected_manifest_sha256 }}
+          SOURCE_DIAGNOSTIC_RUN_ID: ${{ inputs.source_diagnostic_run_id }}
+          SOURCE_DIAGNOSTIC_RUN_ATTEMPT: ${{ inputs.source_diagnostic_run_attempt }}
+          EXPECTED_SOURCE_RECEIPT_SHA256: ${{ inputs.expected_source_receipt_sha256 }}
+          EXPECTED_SOURCE_ARTIFACT_DIGEST: ${{ inputs.expected_source_artifact_digest }}
+          EXPECTED_DIAGNOSTIC_STATE_SHA256: ${{ inputs.expected_diagnostic_state_sha256 }}
+          EXPECTED_AUTHORITY_STATE_SHA256: ${{ inputs.expected_authority_state_sha256 }}
+          EXPECTED_THIN_TARGET_SET_SHA256: ${{ inputs.expected_thin_target_set_sha256 }}
+          PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
+          PREFLIGHT_RUN_ATTEMPT: ${{ inputs.preflight_run_attempt }}
+          EXPECTED_PREFLIGHT_RECEIPT_SHA256: ${{ inputs.expected_preflight_receipt_sha256 }}
+          EXPECTED_PREFLIGHT_ARTIFACT_DIGEST: ${{ inputs.expected_preflight_artifact_digest }}
+          EXPECTED_REPAIR_SET_SHA256: ${{ inputs.expected_repair_set_sha256 }}
+          EXPECTED_REPAIR_PAYLOAD_SET_SHA256: ${{ inputs.expected_repair_payload_set_sha256 }}
+          OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+          SOURCE_CONTROL_PLANE_SHA: b5370fde71f9e94194270f10ffe4fd4fc9be6a45
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = "refs/heads/main"
+          [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_RELEASE_NAME" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]
+          [[ "$EXPECTED_MANIFEST_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$SOURCE_DIAGNOSTIC_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$SOURCE_DIAGNOSTIC_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+          [[ "$EXPECTED_SOURCE_RECEIPT_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$EXPECTED_SOURCE_ARTIFACT_DIGEST" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$EXPECTED_DIAGNOSTIC_STATE_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$EXPECTED_AUTHORITY_STATE_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$EXPECTED_THIN_TARGET_SET_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          git merge-base --is-ancestor "$EXPECTED_RELEASE_SHA" origin/main
+
+          source_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${SOURCE_DIAGNOSTIC_RUN_ID}")"
+          jq -e \
+            --arg control "$SOURCE_CONTROL_PLANE_SHA" \
+            --argjson attempt "$SOURCE_DIAGNOSTIC_RUN_ATTEMPT" \
+            '.name == "Career Search Entry Cache Thin-Source Diagnostic"
+             and .path == ".github/workflows/career-search-entry-cache-thin-source-diagnostic.yml"
+             and .event == "workflow_dispatch"
+             and .status == "completed"
+             and .conclusion == "success"
+             and .head_branch == "main"
+             and .head_sha == $control
+             and .run_attempt == $attempt' <<<"$source_run" >/dev/null
+          source_name="career-search-entry-cache-thin-source-diagnostic-${SOURCE_DIAGNOSTIC_RUN_ID}-${SOURCE_DIAGNOSTIC_RUN_ATTEMPT}"
+          source_artifacts="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${SOURCE_DIAGNOSTIC_RUN_ID}/artifacts?per_page=100")"
+          jq -e \
+            --arg name "$source_name" \
+            --arg digest "sha256:${EXPECTED_SOURCE_ARTIFACT_DIGEST}" \
+            '[.artifacts[] | select(.name == $name and .expired == false and .digest == $digest)] | length == 1' \
+            <<<"$source_artifacts" >/dev/null
+          source_dir="$(mktemp -d)"
+          gh run download "$SOURCE_DIAGNOSTIC_RUN_ID" --name "$source_name" --dir "$source_dir"
+          source_receipt="$source_dir/career-search-entry-cache-thin-source-diagnostic.json"
+          test "$(sha256sum "$source_receipt" | awk '{print $1}')" = "$EXPECTED_SOURCE_RECEIPT_SHA256"
+          jq -e \
+            --arg release "$EXPECTED_RELEASE_SHA" \
+            --arg release_name "$EXPECTED_RELEASE_NAME" \
+            --arg manifest "$EXPECTED_MANIFEST_SHA256" \
+            --arg diagnostic "$EXPECTED_DIAGNOSTIC_STATE_SHA256" \
+            --arg authority "$EXPECTED_AUTHORITY_STATE_SHA256" \
+            --arg thin_set "$EXPECTED_THIN_TARGET_SET_SHA256" \
+            --argjson run_id "$SOURCE_DIAGNOSTIC_RUN_ID" \
+            --argjson attempt "$SOURCE_DIAGNOSTIC_RUN_ATTEMPT" \
+            '.contract_version == "career.search_entry_batch.cache_thin_source_diagnostic.v1"
+             and .status == "PASS_THIN_SOURCE_AUTHORITY_REPAIR_REQUIRED"
+             and .release_sha == $release
+             and .release_name == $release_name
+             and .manifest_sha256 == $manifest
+             and .diagnostic_state_sha256 == $diagnostic
+             and .authority_state_sha256 == $authority
+             and .thin_target_set_sha256 == $thin_set
+             and .thin_url_count == 10
+             and .thin_slug_count == 5
+             and ([.authority_rows[].manifest_position] == [30, 33, 34, 40, 42])
+             and ([.authority_rows[].classification] | all(. == "exact_display_asset_missing"))
+             and .write_state == "none"
+             and .server_write_count == 0
+             and .cache_write_count == 0
+             and .database_write_count == 0
+             and .cms_write_count == 0
+             and .workflow_run_id == $run_id
+             and .workflow_run_attempt == $attempt' "$source_receipt" >/dev/null
+
+          repair_set=""
+          repair_payload_set=""
+          if [ "$MODE" = "preflight" ]; then
+            test -z "$PREFLIGHT_RUN_ID"
+            test -z "$PREFLIGHT_RUN_ATTEMPT"
+            test -z "$EXPECTED_PREFLIGHT_RECEIPT_SHA256"
+            test -z "$EXPECTED_PREFLIGHT_ARTIFACT_DIGEST"
+            test -z "$EXPECTED_REPAIR_SET_SHA256"
+            test -z "$EXPECTED_REPAIR_PAYLOAD_SET_SHA256"
+            expected_phrase="I explicitly approve one read-only Career search-entry thin-authority repair preflight for thin-source diagnostic run ${SOURCE_DIAGNOSTIC_RUN_ID} attempt ${SOURCE_DIAGNOSTIC_RUN_ATTEMPT} receipt ${EXPECTED_SOURCE_RECEIPT_SHA256} artifact ${EXPECTED_SOURCE_ARTIFACT_DIGEST}, control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA}, active SHA ${EXPECTED_RELEASE_SHA}, manifest ${EXPECTED_MANIFEST_SHA256}, diagnostic state ${EXPECTED_DIAGNOSTIC_STATE_SHA256}, authority state ${EXPECTED_AUTHORITY_STATE_SHA256}, thin target set ${EXPECTED_THIN_TARGET_SET_SHA256}; inspect only exact five manifest-position reviewed-workbook and display-authority repair candidates, with zero server write, cache write, CMS/DB write, retry, rollback, deploy, or Search Channel operation."
+          elif [ "$MODE" = "repair" ]; then
+            [[ "$PREFLIGHT_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+            [[ "$PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+            [[ "$EXPECTED_PREFLIGHT_RECEIPT_SHA256" =~ ^[0-9a-f]{64}$ ]]
+            [[ "$EXPECTED_PREFLIGHT_ARTIFACT_DIGEST" =~ ^[0-9a-f]{64}$ ]]
+            [[ "$EXPECTED_REPAIR_SET_SHA256" =~ ^[0-9a-f]{64}$ ]]
+            [[ "$EXPECTED_REPAIR_PAYLOAD_SET_SHA256" =~ ^[0-9a-f]{64}$ ]]
+            preflight_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}")"
+            jq -e \
+              --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
+              --argjson attempt "$PREFLIGHT_RUN_ATTEMPT" \
+              '.name == "Career Search Entry Thin Authority Repair"
+               and .path == ".github/workflows/career-search-entry-thin-authority-repair.yml"
+               and .event == "workflow_dispatch"
+               and .status == "completed"
+               and .conclusion == "success"
+               and .head_branch == "main"
+               and .head_sha == $control
+               and .run_attempt == $attempt' <<<"$preflight_run" >/dev/null
+            preflight_name="career-search-entry-thin-authority-preflight-${PREFLIGHT_RUN_ID}-${PREFLIGHT_RUN_ATTEMPT}"
+            preflight_artifacts="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}/artifacts?per_page=100")"
+            jq -e \
+              --arg name "$preflight_name" \
+              --arg digest "sha256:${EXPECTED_PREFLIGHT_ARTIFACT_DIGEST}" \
+              '[.artifacts[] | select(.name == $name and .expired == false and .digest == $digest)] | length == 1' \
+              <<<"$preflight_artifacts" >/dev/null
+            preflight_dir="$(mktemp -d)"
+            gh run download "$PREFLIGHT_RUN_ID" --name "$preflight_name" --dir "$preflight_dir"
+            preflight_receipt="$preflight_dir/career-search-entry-thin-authority-repair.json"
+            test "$(sha256sum "$preflight_receipt" | awk '{print $1}')" = "$EXPECTED_PREFLIGHT_RECEIPT_SHA256"
+            jq -e \
+              --arg release "$EXPECTED_RELEASE_SHA" \
+              --arg manifest "$EXPECTED_MANIFEST_SHA256" \
+              --arg repair_set "$EXPECTED_REPAIR_SET_SHA256" \
+              --arg payload_set "$EXPECTED_REPAIR_PAYLOAD_SET_SHA256" \
+              --arg source_receipt "$EXPECTED_SOURCE_RECEIPT_SHA256" \
+              --argjson run_id "$PREFLIGHT_RUN_ID" \
+              --argjson attempt "$PREFLIGHT_RUN_ATTEMPT" \
+              '.contract_version == "career.search_entry_batch.thin_authority_repair.v1"
+               and .status == "PASS_AUTHORITY_REPAIR_PREFLIGHT"
+               and .mode == "preflight"
+               and .release_sha == $release
+               and .manifest_sha256 == $manifest
+               and .source_diagnostic_receipt_sha256 == $source_receipt
+               and .repair_count == 5
+               and .manifest_positions == [30, 33, 34, 40, 42]
+               and .repair_set_sha256 == $repair_set
+               and .repair_payload_set_sha256 == $payload_set
+               and .write_state == "none"
+               and .server_write_count == 0
+               and .database_write_count == 0
+               and .workflow_run_id == $run_id
+               and .workflow_run_attempt == $attempt' "$preflight_receipt" >/dev/null
+            later_runs="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/career-search-entry-thin-authority-repair.yml/runs?event=workflow_dispatch&per_page=100")"
+            jq -e \
+              --argjson preflight "$PREFLIGHT_RUN_ID" \
+              --argjson current "$GITHUB_RUN_ID" \
+              '[.workflow_runs[] | select(.id > $preflight and .id != $current)] | length == 0' \
+              <<<"$later_runs" >/dev/null
+            repair_set="$EXPECTED_REPAIR_SET_SHA256"
+            repair_payload_set="$EXPECTED_REPAIR_PAYLOAD_SET_SHA256"
+            expected_phrase="I explicitly approve one-time Career search-entry thin-authority repair for preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} receipt ${EXPECTED_PREFLIGHT_RECEIPT_SHA256} artifact ${EXPECTED_PREFLIGHT_ARTIFACT_DIGEST}, source diagnostic run ${SOURCE_DIAGNOSTIC_RUN_ID} attempt ${SOURCE_DIAGNOSTIC_RUN_ATTEMPT} receipt ${EXPECTED_SOURCE_RECEIPT_SHA256}, control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA}, active SHA ${EXPECTED_RELEASE_SHA}, manifest ${EXPECTED_MANIFEST_SHA256}, repair set ${EXPECTED_REPAIR_SET_SHA256}, repair payload set ${EXPECTED_REPAIR_PAYLOAD_SET_SHA256}; atomically create exactly five missing reviewed-workbook career display-authority rows and verify 10 bilingual surfaces, with zero cache write, publication, indexability, queue, sitemap, llms, Search Channel, URL submission, deploy, rollback, or non-target write."
+          else
+            exit 2
+          fi
+          test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
+          {
+            echo "mode=$MODE"
+            echo "control_plane_sha=$EXPECTED_CONTROL_PLANE_SHA"
+            echo "release_sha=$EXPECTED_RELEASE_SHA"
+            echo "release_name=$EXPECTED_RELEASE_NAME"
+            echo "manifest_sha256=$EXPECTED_MANIFEST_SHA256"
+            echo "repair_set_sha256=$repair_set"
+            echo "repair_payload_set_sha256=$repair_payload_set"
+          } >> "$GITHUB_OUTPUT"
+
+  operate:
+    needs: eligibility
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: production
+    steps:
+      - name: Checkout exact authority repair control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ needs.eligibility.outputs.control_plane_sha }}
+          fetch-depth: 1
+
+      - name: Validate protected production topology
+        shell: bash
+        env:
+          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+          RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
+        run: |
+          set -euo pipefail
+          test -n "$DEPLOY_HOST"
+          test -n "$RETIRED_DEPLOY_HOST"
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        env:
+          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Run exact bounded authority operation
+        shell: bash
+        env:
+          DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+          DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+          MODE: ${{ needs.eligibility.outputs.mode }}
+          CONTROL_PLANE_SHA: ${{ needs.eligibility.outputs.control_plane_sha }}
+          EXPECTED_RELEASE_SHA: ${{ needs.eligibility.outputs.release_sha }}
+          EXPECTED_RELEASE_NAME: ${{ needs.eligibility.outputs.release_name }}
+          EXPECTED_MANIFEST_SHA256: ${{ needs.eligibility.outputs.manifest_sha256 }}
+          EXPECTED_REPAIR_SET_SHA256: ${{ needs.eligibility.outputs.repair_set_sha256 }}
+          EXPECTED_REPAIR_PAYLOAD_SET_SHA256: ${{ needs.eligibility.outputs.repair_payload_set_sha256 }}
+          SOURCE_DIAGNOSTIC_RUN_ID: ${{ inputs.source_diagnostic_run_id }}
+          SOURCE_DIAGNOSTIC_RUN_ATTEMPT: ${{ inputs.source_diagnostic_run_attempt }}
+          EXPECTED_SOURCE_RECEIPT_SHA256: ${{ inputs.expected_source_receipt_sha256 }}
+          EXPECTED_SOURCE_ARTIFACT_DIGEST: ${{ inputs.expected_source_artifact_digest }}
+          EXPECTED_DIAGNOSTIC_STATE_SHA256: ${{ inputs.expected_diagnostic_state_sha256 }}
+          EXPECTED_AUTHORITY_STATE_SHA256: ${{ inputs.expected_authority_state_sha256 }}
+          EXPECTED_THIN_TARGET_SET_SHA256: ${{ inputs.expected_thin_target_set_sha256 }}
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          probe="backend/scripts/career/career_search_entry_thin_authority_repair.php"
+          probe_sha256="$(sha256sum "$probe" | awk '{print $1}')"
+          for variable in DEPLOY_PATH MODE EXPECTED_RELEASE_SHA EXPECTED_RELEASE_NAME \
+            EXPECTED_MANIFEST_SHA256 EXPECTED_REPAIR_SET_SHA256 EXPECTED_REPAIR_PAYLOAD_SET_SHA256; do
+            printf -v "q_${variable}" '%q' "${!variable}"
+          done
+          remote_env="DEPLOY_PATH=$q_DEPLOY_PATH CAREER_THIN_AUTHORITY_REPAIR_MODE=$q_MODE EXPECTED_RELEASE_SHA=$q_EXPECTED_RELEASE_SHA EXPECTED_RELEASE_NAME=$q_EXPECTED_RELEASE_NAME EXPECTED_MANIFEST_SHA256=$q_EXPECTED_MANIFEST_SHA256"
+          if [ "$MODE" = "repair" ]; then
+            remote_env="$remote_env EXPECTED_REPAIR_SET_SHA256=$q_EXPECTED_REPAIR_SET_SHA256 EXPECTED_REPAIR_PAYLOAD_SET_SHA256=$q_EXPECTED_REPAIR_PAYLOAD_SET_SHA256"
+          fi
+          ssh_base=(
+            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10
+            -o ServerAliveInterval=20 -o ServerAliveCountMax=30
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST"
+          )
+          set +e
+          "${ssh_base[@]}" "$remote_env /usr/bin/php" < "$probe" > artifacts/probe.json
+          probe_status=$?
+          set -e
+          jq \
+            --arg control "$CONTROL_PLANE_SHA" \
+            --arg probe "$probe_sha256" \
+            --arg source_receipt "$EXPECTED_SOURCE_RECEIPT_SHA256" \
+            --arg source_artifact "$EXPECTED_SOURCE_ARTIFACT_DIGEST" \
+            --arg source_state "$EXPECTED_DIAGNOSTIC_STATE_SHA256" \
+            --arg authority_state "$EXPECTED_AUTHORITY_STATE_SHA256" \
+            --arg thin_set "$EXPECTED_THIN_TARGET_SET_SHA256" \
+            --argjson source_run "$SOURCE_DIAGNOSTIC_RUN_ID" \
+            --argjson source_attempt "$SOURCE_DIAGNOSTIC_RUN_ATTEMPT" \
+            --argjson run_id "$GITHUB_RUN_ID" \
+            --argjson run_attempt "$GITHUB_RUN_ATTEMPT" \
+            '. + {
+              contract_version: "career.search_entry_batch.thin_authority_repair.v1",
+              control_plane_sha: $control,
+              probe_sha256: $probe,
+              source_diagnostic_run_id: $source_run,
+              source_diagnostic_run_attempt: $source_attempt,
+              source_diagnostic_receipt_sha256: $source_receipt,
+              source_diagnostic_artifact_digest: $source_artifact,
+              source_diagnostic_state_sha256: $source_state,
+              source_authority_state_sha256: $authority_state,
+              source_thin_target_set_sha256: $thin_set,
+              workflow_run_id: $run_id,
+              workflow_run_attempt: $run_attempt
+            }' artifacts/probe.json > artifacts/career-search-entry-thin-authority-repair.json
+          test "$probe_status" -eq 0
+          if [ "$MODE" = "preflight" ]; then
+            jq -e '.status == "PASS_AUTHORITY_REPAIR_PREFLIGHT"
+              and .write_state == "none"
+              and .server_write_count == 0
+              and .database_write_count == 0
+              and .cache_write_count == 0' \
+              artifacts/career-search-entry-thin-authority-repair.json >/dev/null
+          else
+            jq -e '.status == "PASS_AUTHORITY_REPAIR_COMPLETE"
+              and .write_state == "committed_verified"
+              and .server_write_count == 0
+              and .database_write_count == 5
+              and .cache_write_count == 0
+              and (.verification_rows | length) == 10' \
+              artifacts/career-search-entry-thin-authority-repair.json >/dev/null
+          fi
+
+      - name: Upload sanitized immutable authority receipt
+        if: always()
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4
+        with:
+          name: career-search-entry-thin-authority-${{ inputs.mode }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/career-search-entry-thin-authority-repair.json
+          if-no-files-found: error
+          retention-days: 90

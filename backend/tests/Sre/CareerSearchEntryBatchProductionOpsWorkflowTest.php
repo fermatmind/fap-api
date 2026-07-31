@@ -1186,6 +1186,105 @@ final class CareerSearchEntryBatchProductionOpsWorkflowTest extends TestCase
         }
     }
 
+    public function test_thin_authority_repair_is_receipt_bound_and_exactly_five_row_scoped(): void
+    {
+        $workflow = $this->repoFile('.github/workflows/career-search-entry-thin-authority-repair.yml');
+        $probe = $this->repoFile('backend/scripts/career/career_search_entry_thin_authority_repair.php');
+        $runbook = $this->repoFile('docs/ops/career-search-entry-cache-permission-recovery.md');
+
+        foreach ([
+            'Career Search Entry Thin Authority Repair',
+            'options:',
+            'preflight',
+            'repair',
+            'source_diagnostic_run_id:',
+            'expected_source_receipt_sha256:',
+            'expected_source_artifact_digest:',
+            'expected_diagnostic_state_sha256:',
+            'expected_authority_state_sha256:',
+            'expected_thin_target_set_sha256:',
+            'expected_preflight_receipt_sha256:',
+            'expected_repair_set_sha256:',
+            'expected_repair_payload_set_sha256:',
+            'PASS_THIN_SOURCE_AUTHORITY_REPAIR_REQUIRED',
+            '[.authority_rows[].manifest_position] == [30, 33, 34, 40, 42]',
+            '[.authority_rows[].classification] | all(. == "exact_display_asset_missing")',
+            'select(.id > $preflight and .id != $current)',
+            'PASS_AUTHORITY_REPAIR_PREFLIGHT',
+            'PASS_AUTHORITY_REPAIR_COMPLETE',
+            'atomically create exactly five missing reviewed-workbook career display-authority rows',
+            'zero cache write, publication, indexability, queue, sitemap, llms, Search Channel',
+            'group: deploy-${{ github.repository }}-production',
+            'environment: production',
+            'secrets.PRODUCTION_DEPLOY_HOST',
+            'secrets.PRODUCTION_DEPLOY_PATH',
+            'if: always()',
+        ] as $required) {
+            $this->assertStringContainsString($required, $workflow);
+        }
+
+        foreach ([
+            'career.search_entry_batch.thin_authority_repair_probe.v1',
+            "EXPECTED_WORKBOOK_SHA256 = 'c30f8743cfd0d8baa14ac931cc7270807425164952f6a44953b5b4ab448778ef'",
+            'EXPECTED_MANIFEST_POSITIONS = [30, 33, 34, 40, 42]',
+            'EXPECTED_REPAIR_COUNT = 5',
+            'EXPECTED_COMPONENT_COUNT = 24',
+            'PASS_AUTHORITY_REPAIR_PREFLIGHT',
+            'PASS_AUTHORITY_REPAIR_COMPLETE',
+            'REPAIR_TARGET_STATE_DRIFT',
+            'PREFLIGHT_PLAN_DRIFT',
+            'NON_TARGET_DATABASE_WRITE_BLOCKED',
+            'CareerSelectedDisplayAssetMapper::workbookRowAuthorityHash',
+            'CareerSelectedDisplayAssetMapper::SURFACE_VERSION',
+            'CareerSelectedDisplayAssetMapper::TEMPLATE_VERSION',
+            "'command' => 'career:import-selected-display-assets'",
+            "'mapper_version' => CareerSelectedDisplayAssetMapper::MAPPER_VERSION",
+            "'row_number' => \$item['row_number']",
+            'DB::transaction',
+            'nonTargetStateSha256',
+            'database_write_count',
+            "'cache_write_count' => 0",
+            "'publication_write_count' => 0",
+            "'indexability_write_count' => 0",
+            "'search_channel_action_count' => 0",
+        ] as $required) {
+            $this->assertStringContainsString($required, $probe);
+        }
+
+        foreach ([
+            'Thin-source authority repair',
+            'exact_display_asset_missing',
+            'positions `30`, `33`,',
+            'c30f8743cfd0d8baa14ac931cc7270807425164952f6a44953b5b4ab448778ef',
+            'five `career_job_display_assets` rows',
+            'does not warm or forget cache entries',
+        ] as $required) {
+            $this->assertStringContainsString($required, $runbook);
+        }
+
+        foreach ([
+            'php artisan migrate',
+            'queue:restart',
+            'deploy:symlink',
+            'indexnow',
+            'googleapis',
+            '139.224.',
+            '/var/www/fap-api',
+        ] as $forbidden) {
+            $this->assertStringNotContainsString($forbidden, strtolower($workflow.$probe));
+        }
+        foreach ([
+            'warmJobDetailPayload',
+            'forgetJobDetailPayload',
+            'Cache::',
+            'updateOrCreate',
+            '->update(',
+            '->delete(',
+        ] as $forbidden) {
+            $this->assertStringNotContainsString($forbidden, $probe);
+        }
+    }
+
     private function repoFile(string $path): string
     {
         $contents = file_get_contents(dirname(__DIR__, 3).'/'.$path);
