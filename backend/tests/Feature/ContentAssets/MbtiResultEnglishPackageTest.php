@@ -313,9 +313,6 @@ final class MbtiResultEnglishPackageTest extends TestCase
             'importer_absent_target_behavior' => 'fail_closed_with_separate_pack_creation_prerequisite',
             'required_creation_scope' => 'separate English content-pack authority PR before any draft import',
         ], $commercialTarget);
-        self::assertDirectoryDoesNotExist(
-            dirname(base_path()).'/'.$commercialTarget['planned_repository_path'],
-        );
 
         $stableIdentities = [];
         $readerCopyFingerprints = [];

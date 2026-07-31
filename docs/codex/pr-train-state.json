@@ -101518,7 +101518,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "php artisan test --filter=MbtiResultEnglishPackageTest passed 7 tests/1413 assertions. The focused contract freezes and validates a new inactive English content-pack target with exact pack id, region, locale, version, directory version, planned repository path, commercial_spec authority file, absent-at-freeze state, fail-closed importer behavior, and separate creation prerequisite; it also proves the target path is absent and forbids zh-CN pack reuse/mutation or runtime fallback registration. Plural claim evidence, split result/PDF access, and adjacent-axis fixtures remain covered. Scoped Pint, all package JSON, train YAML/state JSON, deterministic package SHA 9325013b870fd2496efc0882656240f91ce28ff4faaf1da42fb3dde3577b0ed3, diff, and exact scope checks pass. The earlier isolated SQLite ci_verify_mbti exit-0 evidence remains applicable because no runtime code changed."
+        "evidence": "Exact-current validation passed after removing the future-checkout absence assertion: php artisan test --filter=MbtiResultEnglishPackageTest --no-ansi passed 7 tests/1412 assertions. bash scripts/ci_verify_mbti.sh completed exit 0 on isolated SQLite and executed the manifest-required scripts/verify_mbti.sh through all 8/8 HTTP gates with [DONE] verify_mbti OK; its remaining MBTI, Big Five, Enneagram, migration, security, and regression gates also passed. The immutable package metadata still records existing_at_package_freeze=false, but the test no longer requires the separately scoped English content pack to remain absent forever. Scoped Pint, JSON/YAML parsing, deterministic package SHA 9325013b870fd2496efc0882656240f91ce28ff4faaf1da42fb3dde3577b0ed3, diff, and exact scope checks pass."
       },
       "changed_file_scope": {
         "status": "passed",
@@ -101801,8 +101801,13 @@
         "at": "2026-07-31T00:01:00Z",
         "status": "github_checks_pending",
         "note": "Committed the exact inactive English commercial authority target as immutable implementation commit 5e381302a8620134423cb9310a3305bb7b0bf4ef. This metadata-only commit records that pointer; exact-head checks and review remain pending."
+      },
+      {
+        "at": "2026-07-31T01:16:30Z",
+        "status": "review_fix_local_verified",
+        "note": "Exact head 1b9e635a0e51ccc077295864aa35df7151baa6eb passed all nine required checks with staging parity skipped, then review found two valid current-scope P2 issues. Removed the permanent future-checkout absence assertion while retaining immutable existing_at_package_freeze=false metadata. Reran exact-current validation: the focused package test passed 7 tests/1412 assertions, and isolated SQLite ci_verify_mbti completed exit 0 while invoking the manifest-required verify_mbti.sh through all 8/8 gates. Generated verifier artifacts were isolated and removed from PR scope. Candidate SHA remains 9325013b870fd2496efc0882656240f91ce28ff4faaf1da42fb3dde3577b0ed3; exact-head checks remain pending."
       }
     ],
-    "updated_at": "2026-07-31T00:01:00Z"
+    "updated_at": "2026-07-31T01:16:30Z"
   }
 }
