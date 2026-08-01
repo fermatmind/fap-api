@@ -10,6 +10,7 @@ use DomainException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Symfony\Component\Process\Process;
 use Tests\TestCase;
 
 final class MbtiResultEnglishRuntimeCapabilityPreflightServiceTest extends TestCase
@@ -83,6 +84,12 @@ final class MbtiResultEnglishRuntimeCapabilityPreflightServiceTest extends TestC
             self::assertFalse($approval['permissions'][$permission], $permission.' must remain closed.');
         }
         self::assertStringContainsString("const REQUIRED_ACTIVE_REVISION = '660280d00a57e58bd8bc76608e19de2492c03f53'", $executor);
+        self::assertSame(1, substr_count($executor, 'fwrite(STDOUT'));
+        self::assertStringContainsString('mbtiResultRuntimeCapabilityPreflightDiscardOutputBuffers', $executor);
+        self::assertStringContainsString('register_shutdown_function', $executor);
+        self::assertStringContainsString("mbtiResultRuntimeCapabilityPreflightFail('executor_stdout_contaminated')", $executor);
+        self::assertStringContainsString("mbtiResultRuntimeCapabilityPreflightFail('executor_receipt_encode_failed')", $executor);
+        self::assertStringNotContainsString('$throwable->getMessage()', $executor);
         self::assertStringContainsString('controlled_read_only_runtime_capability_preflight', $service);
         self::assertStringNotContainsString('payload_json', $service);
         self::assertStringNotContainsString("DB::table('attempts')", $service);
@@ -105,6 +112,34 @@ final class MbtiResultEnglishRuntimeCapabilityPreflightServiceTest extends TestC
         self::assertStringNotContainsString('scp -P "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes "$run_dir/receipt', $workflow);
         self::assertStringNotContainsString('php artisan migrate', $workflow);
         self::assertStringNotContainsString('dep deploy', $workflow);
+    }
+
+    public function test_the_executor_emits_only_a_single_json_receipt_or_a_safe_stderr_failure(): void
+    {
+        $success = $this->runExecutorFixture('success');
+
+        self::assertTrue($success->isSuccessful(), $success->getErrorOutput());
+        self::assertSame('', $success->getErrorOutput());
+        self::assertStringEndsWith(PHP_EOL, $success->getOutput());
+        self::assertSame(1, substr_count($success->getOutput(), PHP_EOL));
+        self::assertSame([
+            'artifact' => 'fixture-receipt',
+            'status' => 'PASS',
+            'control_plane_sha' => str_repeat('a', 40),
+            'active_revision' => '660280d00a57e58bd8bc76608e19de2492c03f53',
+        ], json_decode($success->getOutput(), true, 512, JSON_THROW_ON_ERROR));
+
+        foreach ([
+            'bootstrap_output' => 'executor_stdout_contaminated',
+            'runtime_exception' => 'executor_runtime_failed',
+            'invalid_json' => 'executor_receipt_encode_failed',
+        ] as $mode => $errorCode) {
+            $failure = $this->runExecutorFixture($mode);
+
+            self::assertFalse($failure->isSuccessful(), $mode);
+            self::assertSame('', $failure->getOutput(), $mode);
+            self::assertSame("mbti_result_runtime_capability_preflight_failed:$errorCode\n", $failure->getErrorOutput(), $mode);
+        }
     }
 
     private function seedExactInactiveAuthority(): void
@@ -161,5 +196,69 @@ final class MbtiResultEnglishRuntimeCapabilityPreflightServiceTest extends TestC
     {
         $this->expectException(DomainException::class);
         $this->expectExceptionMessage($code.':');
+    }
+
+    private function runExecutorFixture(string $mode): Process
+    {
+        $fixtureRoot = storage_path('app/private/testing/mbti-result-runtime-capability-executor-'.bin2hex(random_bytes(4)));
+        File::ensureDirectoryExists($fixtureRoot.'/vendor');
+        File::ensureDirectoryExists($fixtureRoot.'/bootstrap');
+        File::put($fixtureRoot.'/artisan', "#!/usr/bin/env php\n");
+        File::put($fixtureRoot.'/vendor/autoload.php', '<?php require '.var_export(base_path('vendor/autoload.php'), true).';');
+        File::put($fixtureRoot.'/bootstrap/app.php', <<<'PHP'
+<?php
+
+$mode = getenv('MBTI_PREFLIGHT_FIXTURE_MODE');
+if ($mode === 'bootstrap_output') {
+    echo 'fixture-bootstrap-output';
+}
+
+return new class($mode) {
+    public function __construct(private readonly string|false $mode) {}
+
+    public function make(string $abstract): object
+    {
+        if ($abstract === \Illuminate\Contracts\Console\Kernel::class) {
+            return new class {
+                public function bootstrap(): void {}
+            };
+        }
+
+        return new class($this->mode) {
+            public function __construct(private readonly string|false $mode) {}
+
+            public function inspect(string $approvalPath, string $approvalSha256): array
+            {
+                if ($this->mode === 'runtime_exception') {
+                    throw new \RuntimeException('fixture runtime detail must not escape');
+                }
+
+                if ($this->mode === 'invalid_json') {
+                    return ['value' => INF];
+                }
+
+                return ['artifact' => 'fixture-receipt', 'status' => 'PASS'];
+            }
+        };
+    }
+};
+PHP);
+
+        try {
+            $process = new Process([
+                PHP_BINARY,
+                base_path('scripts/mbti_result_english_runtime_capability_preflight.php'),
+                '--backend-root='.$fixtureRoot,
+                '--source-backend-root='.base_path(),
+                '--control-plane-sha='.str_repeat('a', 40),
+                '--active-revision=660280d00a57e58bd8bc76608e19de2492c03f53',
+            ], base_path(), ['MBTI_PREFLIGHT_FIXTURE_MODE' => $mode]);
+            $process->setTimeout(15);
+            $process->run();
+
+            return $process;
+        } finally {
+            File::deleteDirectory($fixtureRoot);
+        }
     }
 }
