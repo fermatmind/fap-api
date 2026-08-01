@@ -262,6 +262,88 @@ final class AppleIapPaymentContractTest extends TestCase
         $this->assertSame(0, DB::table('payment_attempts')->where('order_no', $orderNo)->count());
     }
 
+    public function test_historical_ios_retry_can_settle_after_the_original_sku_is_removed(): void
+    {
+        $this->configureProvider();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
+        $this->seedSku();
+        $attemptId = $this->createAttempt('anon_apple_iap_historical_settlement', true);
+        $token = $this->issueAnonToken('anon_apple_iap_historical_settlement');
+        Http::fake([
+            'https://api.weixin.qq.com/sns/jscode2session*' => Http::response([
+                'openid' => 'openid-apple-historical-settlement',
+                'session_key' => 'session-key-apple-historical-settlement',
+            ]),
+        ]);
+        $headers = [
+            'Authorization' => 'Bearer '.$token,
+            'X-Anon-Id' => 'anon_apple_iap_historical_settlement',
+            'X-Channel' => 'wechat_miniapp',
+        ];
+        $payload = [
+            'sku' => 'MBTI_REPORT_FULL',
+            'quantity' => 1,
+            'target_attempt_id' => $attemptId,
+            'idempotency_key' => 'idem-apple-iap-historical-settlement',
+            'wx_login_code' => 'wx-login-apple-historical-settlement',
+        ];
+
+        $created = $this->withHeaders($headers)->postJson('/api/v0.3/orders/apple_iap', $payload);
+        $created->assertOk();
+        $orderNo = (string) $created->json('order_no');
+        $signData = json_decode(
+            (string) $created->json('pay.params.signData'),
+            true,
+            flags: JSON_THROW_ON_ERROR
+        );
+        $externalOrderNo = (string) ($signData['outTradeNo'] ?? '');
+        $this->assertNotSame('', $externalOrderNo);
+
+        DB::table('skus')->where('sku', 'MBTI_REPORT_FULL')->delete();
+        $retry = $this->withHeaders($headers)->postJson('/api/v0.3/orders/apple_iap', $payload);
+        $retry->assertOk()->assertJsonPath('order_no', $orderNo);
+        Http::fake([
+            'https://api.weixin.qq.com/cgi-bin/token*' => Http::response([
+                'access_token' => 'apple-access-token-historical-settlement',
+                'expires_in' => 7200,
+            ]),
+            'https://api.weixin.qq.com/xpay/query_order*' => Http::sequence()
+                ->push($this->appleQueryResponse($externalOrderNo))
+                ->push($this->appleQueryResponse($externalOrderNo, 8, 499, 1700000200)),
+        ]);
+
+        $settled = app(AppleIapPaymentService::class)->handleCallback($this->signedCallbackRequest([
+            'Event' => 'xpay_goods_deliver_notify',
+            'OpenId' => 'openid-apple-historical-settlement',
+            'OutTradeNo' => $externalOrderNo,
+            'Env' => 0,
+            'channel_order_id' => 'apple-channel-historical-settlement',
+            'GoodsInfo' => [
+                'ProductId' => 'mbti-report-full',
+                'Quantity' => 1,
+                'OrigPrice' => 499,
+                'ActualPrice' => 499,
+                'Attach' => $orderNo,
+            ],
+        ]));
+
+        $this->assertTrue(
+            (bool) ($settled['ok'] ?? false),
+            json_encode($settled, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR)
+        );
+        $this->assertSame(Order::PAYMENT_STATE_PAID, DB::table('orders')->where('order_no', $orderNo)->value('payment_state'));
+        $this->assertSame(1, DB::table('benefit_grants')->where('order_no', $orderNo)->where('status', 'active')->count());
+
+        $this->withHeaders($headers)
+            ->postJson('/api/v0.3/orders/'.$orderNo.'/apple-iap/reconcile')
+            ->assertOk()
+            ->assertJsonPath('provider_status', 8)
+            ->assertJsonPath('grant_state', 'revoked');
+        $this->assertSame(0, DB::table('benefit_grants')->where('order_no', $orderNo)->where('status', 'active')->count());
+        $this->assertSame(1, DB::table('benefit_grants')->where('order_no', $orderNo)->where('status', 'revoked')->count());
+    }
+
     public function test_apple_channel_callback_and_query_are_verified_idempotent_and_refund_revokes_grant(): void
     {
         $this->configureProvider();

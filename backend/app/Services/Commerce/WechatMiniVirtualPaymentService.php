@@ -504,6 +504,7 @@ final class WechatMiniVirtualPaymentService
                     'quantity' => (int) ($lockedOrder->quantity ?? 0),
                     'amount_cents' => (int) ($lockedOrder->amount_cents ?? 0),
                     'currency' => strtoupper(trim((string) ($lockedOrder->currency ?? ''))),
+                    'settlement_sku_snapshot' => $this->settlementSkuSnapshot($lockedOrder),
                 ], $attemptMeta);
             } else {
                 if (! $this->orderContractMatches($lockedOrder, $config, $provider)) {
@@ -540,6 +541,7 @@ final class WechatMiniVirtualPaymentService
                     'quantity' => (int) ($lockedOrder->quantity ?? 0),
                     'amount_cents' => (int) ($lockedOrder->amount_cents ?? 0),
                     'currency' => strtoupper(trim((string) ($lockedOrder->currency ?? ''))),
+                    'settlement_sku_snapshot' => $this->settlementSkuSnapshot($lockedOrder),
                 ];
             }
 
@@ -925,6 +927,17 @@ final class WechatMiniVirtualPaymentService
             && strtoupper(trim((string) ($order->sku ?? ''))) === strtoupper(trim($sku))
             && (int) ($order->quantity ?? 0) === $quantity
             && $this->checkoutOrderContractMatches($order, $config, AppleIapGateway::PROVIDER);
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function settlementSkuSnapshot(object $order): ?array
+    {
+        $orderMeta = $this->decodeJson($order->meta_json ?? null);
+        $snapshot = $orderMeta['settlement_sku_snapshot'] ?? null;
+
+        return is_array($snapshot) ? $snapshot : null;
     }
 
     /**

@@ -287,11 +287,13 @@ prs:
       - backend/app/Http/Controllers/API/V0_3/Webhooks/PaymentWebhookController.php
       - backend/app/Internal/Commerce/PaymentWebhookHandlerCore.php
       - backend/app/Services/Commerce/AppleIapPaymentService.php
+      - backend/app/Services/Commerce/EntitlementManager.php
       - backend/app/Services/Commerce/OrderManager.php
       - backend/app/Services/Commerce/PaymentGateway/AppleIapGateway.php
       - backend/app/Services/Commerce/PaymentGateway/WechatMiniVirtualGateway.php
       - backend/app/Services/Commerce/PaymentWebhookProcessor.php
       - backend/app/Services/Commerce/WechatMiniVirtualPaymentService.php
+      - backend/app/Services/Commerce/Webhook/WebhookEntitlementService.php
       - backend/app/Services/Payments/PaymentProviderRegistry.php
       - backend/config/payments.php
       - backend/docs/contracts/openapi.snapshot.json
@@ -311,7 +313,7 @@ prs:
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Commerce/AppleIapPaymentContractTest.php tests/Feature/Commerce/WechatMiniVirtualPaymentContractTest.php --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/OpenApiDiffTest.php --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='test_runtime_paths_have_no_uncommitted_diff|test_runtime_freeze_classifier_ignores_apple_iap_payment_only' --no-ansi
-      - cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_3/CommerceController.php app/Http/Controllers/API/V0_3/Webhooks/PaymentWebhookController.php app/Internal/Commerce/PaymentWebhookHandlerCore.php app/Services/Commerce/AppleIapPaymentService.php app/Services/Commerce/OrderManager.php app/Services/Commerce/PaymentGateway/AppleIapGateway.php app/Services/Commerce/PaymentGateway/WechatMiniVirtualGateway.php app/Services/Commerce/PaymentWebhookProcessor.php app/Services/Commerce/WechatMiniVirtualPaymentService.php app/Services/Payments/PaymentProviderRegistry.php config/payments.php routes/api.php tests/Feature/Commerce/AppleIapPaymentContractTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_3/CommerceController.php app/Http/Controllers/API/V0_3/Webhooks/PaymentWebhookController.php app/Internal/Commerce/PaymentWebhookHandlerCore.php app/Services/Commerce/AppleIapPaymentService.php app/Services/Commerce/EntitlementManager.php app/Services/Commerce/OrderManager.php app/Services/Commerce/PaymentGateway/AppleIapGateway.php app/Services/Commerce/PaymentGateway/WechatMiniVirtualGateway.php app/Services/Commerce/PaymentWebhookProcessor.php app/Services/Commerce/WechatMiniVirtualPaymentService.php app/Services/Commerce/Webhook/WebhookEntitlementService.php app/Services/Payments/PaymentProviderRegistry.php config/payments.php routes/api.php tests/Feature/Commerce/AppleIapPaymentContractTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - cd backend && php artisan route:list --path=api/v0.3/orders --except-vendor
       - cd backend && bash scripts/export_openapi.sh --check
       - cd backend && composer validate --strict

@@ -3858,7 +3858,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $changed = [
             'backend/app/Services/Commerce/AppleIapPaymentService.php',
+            'backend/app/Services/Commerce/EntitlementManager.php',
+            'backend/app/Services/Commerce/OrderManager.php',
             'backend/app/Services/Commerce/PaymentGateway/AppleIapGateway.php',
+            'backend/app/Services/Commerce/Webhook/WebhookEntitlementService.php',
             'backend/app/Services/Payments/PaymentProviderRegistry.php',
             'backend/routes/api.php',
         ];
