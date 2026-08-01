@@ -6531,7 +6531,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2256",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "title": "B5-RESULT-WEEKLY-OPS-RUNNER-01: Schedule Big Five V2 weekly ops report",
     "train_scope": "big5_result_page_v2_asset_agent_automation",
     "transitions": [
@@ -103157,6 +103157,10 @@
       "changed_file_scope": {
         "status": "passed",
         "evidence": "Only the W4-G01/W4-G02 producer package, its focused package test, PR2 manifest/state, and runtime-ledger reconciliation changed. No control master, registry/runtime, scoring, forms, CMS/database, importer, frontend, SEO, release, or future W4 group path changed."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "Exact implementation head 9ccb966016ff58ac0a97d074e8f092e64201788e passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep OSS, Semgrep blocking secrets, and non-blocking SARIF; staging parity was skipped."
       }
     },
     "failure_reason": null,
@@ -103185,8 +103189,13 @@
         "at": "2026-08-01T20:18:00+08:00",
         "status": "github_checks_pending",
         "note": "Pushed implementation head f524e2ab047c32b0542936a8ced1586a304bd945 and opened PR #3474. Required GitHub checks, mergeability, squash merge, cleanup, and post-merge revalidation remain pending."
+      },
+      {
+        "at": "2026-08-01T20:28:00+08:00",
+        "status": "ready_to_merge",
+        "note": "Exact implementation head 9ccb966016ff58ac0a97d074e8f092e64201788e passed all required checks with staging parity skipped. This ledger-only readiness update requires its own fresh required checks before squash merge."
       }
     ],
-    "updated_at": "2026-08-01T20:18:00+08:00"
+    "updated_at": "2026-08-01T20:28:00+08:00"
   }
 }
