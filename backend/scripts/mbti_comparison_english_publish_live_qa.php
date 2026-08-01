@@ -56,7 +56,7 @@ foreach (MbtiComparisonEnglishPublishService::exactSlugs() as $slug) {
     if (! is_array($projection)
         || ($projection['comparison_slug'] ?? null) !== $slug
         || ($projection['locale'] ?? null) !== 'en'
-        || ($projection['source_package_id'] ?? null) !== MbtiComparisonEnglishPackageImporter::PACKAGE_ID
+        || ! in_array(MbtiComparisonEnglishPackageImporter::PACKAGE_ID, (array) ($projection['source_refs'] ?? []), true)
         || ($projection['is_indexable'] ?? null) !== false
         || ($projection['sitemap_eligible'] ?? null) !== false
         || ($projection['llms_eligible'] ?? null) !== false) {
@@ -64,7 +64,7 @@ foreach (MbtiComparisonEnglishPublishService::exactSlugs() as $slug) {
     }
     $runtimeRows[] = [
         'slug' => $slug,
-        'source_sha256' => $projection['_source_sha256'] ?? null,
+        'source_sha256' => $projection['source_sha256'] ?? null,
         'meta_robots' => 'noindex,follow',
         'sitemap_included' => false,
         'llms_included' => false,
