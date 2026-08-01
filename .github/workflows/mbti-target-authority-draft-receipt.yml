@@ -131,12 +131,20 @@ jobs:
           test ! -e "$DEPLOY_PATH/.dep/deploy.lock"
           mkdir -p "$RUN_DIR/input" "$RUN_DIR/receipts"
           tar -xzf "$RUN_DIR.tgz" -C "$RUN_DIR/input"
+          set +e
           php "$RUN_DIR/input/backend/scripts/mbti_target_authority_draft_receipt.php" \
             --backend-root="$current/backend" \
             --source-backend-root="$RUN_DIR/input/backend" \
             --receipt-dir="$RUN_DIR/receipts" \
             --control-plane-sha="$CONTROL_PLANE_SHA" \
-            --active-revision="$ACTIVE_REVISION"
+            --active-revision="$ACTIVE_REVISION" \
+            >"$RUN_DIR/executor.stdout" 2>"$RUN_DIR/executor.stderr"
+          executor_status=$?
+          set -e
+          if [ "$executor_status" -ne 0 ]; then
+            printf '%s\n' 'target_authority_receipt_failed' >&2
+            exit "$executor_status"
+          fi
           jq -e '.status == "PASS" and .row_count == 7 and .publish_attempted == false and .activation_attempted == false and .active_pointer_changed == false and .indexability_attempted == false and .deploy_attempted == false and .private_authority_read_attempted == false' "$RUN_DIR/receipts/comparison-target-authority-draft-receipt.json" >/dev/null
           jq -e '.status == "PASS" and .row_count == 46 and .authority_content_row_count == 21 and .publish_attempted == false and .activation_attempted == false and .active_pointer_changed == false and .indexability_attempted == false and .deploy_attempted == false and .private_authority_read_attempted == false' "$RUN_DIR/receipts/result-target-authority-draft-receipt.json" >/dev/null
           REMOTE

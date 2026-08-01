@@ -11,6 +11,7 @@ const COMPARISON_APPROVAL_SHA256 = '5455bc63ea094bb2adb11576d29a67f812a9189b6dde
 const RESULT_PACKAGE_SHA256 = '9325013b870fd2496efc0882656240f91ce28ff4faaf1da42fb3dde3577b0ed3';
 const RESULT_MANIFEST_SHA256 = '43f646a288c46b698d49f102eb7e7b611b66148f74cd459bd61ea9826d7c8bac';
 const RESULT_APPROVAL_SHA256 = 'ba793884a5517f1194edab787c99a5be5159a2660954a15deb6cf0659544fa40';
+const RESULT_MANIFEST_STORAGE_SCHEMA_VERSION = 'mbti.en_result_draft.v1';
 
 set_exception_handler(static function (Throwable $throwable): never {
     fwrite(STDERR, "target_authority_receipt_failed\n");
@@ -241,7 +242,7 @@ function resultReceipt(array $bundle, array $approval, string $controlPlaneSha, 
         } elseif ((string) $existing->content_hash !== $contentHash || (string) $existing->to_pack_id !== 'MBTI.global.en.default' || (string) $existing->pack_version !== 'v0.3') {
             throw new RuntimeException('result_existing_target_collision');
         }
-        DB::table('content_release_manifests')->updateOrInsert(['manifest_hash' => $contentHash], ['content_pack_release_id' => $releaseId, 'schema_version' => 'fermatmind.mbti.en_result_content_inactive_draft.v1', 'storage_disk' => 'database', 'storage_path' => 'content_pack_releases/'.$releaseId, 'pack_id' => 'MBTI.global.en.default', 'pack_version' => 'v0.3', 'compiled_hash' => RESULT_PACKAGE_SHA256, 'content_hash' => $contentHash, 'source_commit' => $controlPlaneSha, 'payload_json' => json_encode($draft, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR), 'updated_at' => now(), 'created_at' => now()]);
+        DB::table('content_release_manifests')->updateOrInsert(['manifest_hash' => $contentHash], ['content_pack_release_id' => $releaseId, 'schema_version' => RESULT_MANIFEST_STORAGE_SCHEMA_VERSION, 'storage_disk' => 'database', 'storage_path' => 'content_pack_releases/'.$releaseId, 'pack_id' => 'MBTI.global.en.default', 'pack_version' => 'v0.3', 'compiled_hash' => RESULT_PACKAGE_SHA256, 'content_hash' => $contentHash, 'source_commit' => $controlPlaneSha, 'payload_json' => json_encode($draft, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR), 'updated_at' => now(), 'created_at' => now()]);
     }, 3);
     $release = DB::table('content_pack_releases')->where('id', $releaseId)->first();
     $manifest = DB::table('content_release_manifests')->where('manifest_hash', $contentHash)->first();

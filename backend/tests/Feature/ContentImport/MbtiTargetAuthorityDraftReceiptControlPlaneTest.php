@@ -61,5 +61,18 @@ final class MbtiTargetAuthorityDraftReceiptControlPlaneTest extends TestCase
         self::assertStringContainsString('environment: production', $workflow);
         self::assertStringContainsString('mbti_target_authority_draft_receipt.php', $workflow);
         self::assertStringContainsString('active_pointer_changed == false', $workflow);
+        self::assertStringContainsString('>"$RUN_DIR/executor.stdout" 2>"$RUN_DIR/executor.stderr"', $workflow);
+        self::assertStringContainsString("printf '%s\\n' 'target_authority_receipt_failed' >&2", $workflow);
+    }
+
+    public function test_result_manifest_storage_schema_fits_the_existing_authority_column_without_changing_the_document_schema(): void
+    {
+        $executor = (string) File::get(base_path('scripts/mbti_target_authority_draft_receipt.php'));
+
+        self::assertMatchesRegularExpression("/const RESULT_MANIFEST_STORAGE_SCHEMA_VERSION = '([^']+)'/", $executor);
+        preg_match("/const RESULT_MANIFEST_STORAGE_SCHEMA_VERSION = '([^']+)'/", $executor, $matches);
+        self::assertLessThanOrEqual(32, strlen($matches[1]));
+        self::assertStringContainsString("'schema_version' => 'fermatmind.mbti.en_result_content_inactive_draft.v1'", $executor);
+        self::assertStringContainsString("'schema_version' => RESULT_MANIFEST_STORAGE_SCHEMA_VERSION", $executor);
     }
 }
