@@ -51,11 +51,16 @@ final class RewardedAdUnlockService
         if ($activeSessionId !== '') {
             $activeSession = $this->session($activeSessionId);
             if ($this->sessionBelongsTo($activeSession, $attempt, $actor) && ($activeSession['status'] ?? null) === 'pending') {
-                return [
-                    'ok' => true,
-                    'session' => $this->presentSession($activeSession),
-                    'idempotent' => true,
-                ];
+                if (hash_equals(
+                    (string) ($activeSession['ad_unit_fingerprint'] ?? ''),
+                    SensitiveDiagnosticRedactor::fingerprint($adUnitId),
+                )) {
+                    return [
+                        'ok' => true,
+                        'session' => $this->presentSession($activeSession),
+                        'idempotent' => true,
+                    ];
+                }
             }
 
             Cache::forget($activeKey);

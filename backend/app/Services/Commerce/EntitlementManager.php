@@ -583,18 +583,6 @@ class EntitlementManager
             ];
         }
 
-        if ($directGrant === null && $historicalOrderGrant !== null) {
-            $this->orders->syncGrantState($orderNo, $orderOrgId, 'revoked');
-
-            return [
-                'ok' => true,
-                'revoked' => 0,
-                'benefit_code' => $benefitCode,
-                'attempt_id' => $attemptId,
-                'idempotent' => true,
-            ];
-        }
-
         $isActualRefund = strtolower(trim((string) ($order->payment_state ?? $order->status ?? ''))) === 'refunded';
         $isGiftOrder = Schema::hasTable('report_gift_requests')
             && DB::table('report_gift_requests')
@@ -608,6 +596,18 @@ class EntitlementManager
                     'status' => 'refunded',
                     'updated_at' => now(),
                 ]);
+        }
+
+        if ($directGrant === null && $historicalOrderGrant !== null) {
+            $this->orders->syncGrantState($orderNo, $orderOrgId, 'revoked');
+
+            return [
+                'ok' => true,
+                'revoked' => 0,
+                'benefit_code' => $benefitCode,
+                'attempt_id' => $attemptId,
+                'idempotent' => true,
+            ];
         }
 
         $now = now();

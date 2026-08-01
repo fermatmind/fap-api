@@ -6,7 +6,7 @@
     "branch": "codex/api-ad-01-rewarded-unlock",
     "title": "API-AD-01: add residual-risk rewarded-ad report unlock",
     "depends_on": ["API-UNLOCK-01"],
-    "status": "github_checks_pending",
+    "status": "github_review_repairing",
     "commit_sha": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3469",
     "checks": {
@@ -19,8 +19,8 @@
         "evidence": "The operator-provided rewarded-video API material documents only client onClose(res).isEnded. No platform server receipt, callback, signature, query, delivery, or anti-replay protocol was supplied."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "PR #3469's previous exact head passed all required checks. A subsequent exact-head review found three further service boundaries: completion must serialize across every owner of one attempt, repeated refunds must not revoke a later orderless rewarded-ad grant, and an active grant must match the current actor before reuse. The repair locks by org+attempt, treats historical grants for the refunded order as idempotent without the attempt-wide fallback, and requires the same actor predicate used for report access. Focused rewarded-ad, refund/entitlement, classifier, syntax, Pint, and diff checks pass; GitHub must rerun required checks, exact-head review, mergeability, and latest-main reconciliation."
+        "status": "repairing",
+        "evidence": "The previous exact head passed all required checks. Its exact-head review then found two further P2 boundaries: reuse of a pending session must include the requested ad-unit fingerprint, and refunded gift state must be reconciled before an idempotent historical-order return. The repair replaces the actor's active-session pointer when the ad unit differs and moves the idempotent return after gift refund reconciliation. Rewarded-ad contracts now pass 10 tests / 76 assertions; fresh GitHub checks, exact-head review, mergeability, and latest-main reconciliation remain mandatory."
       }
     },
     "scope_validation": {
@@ -69,9 +69,14 @@
         "at": "2026-08-01T18:53:28+08:00",
         "status": "github_checks_pending",
         "note": "Exact-head review then found three further valid boundaries. Completion now serializes by org+attempt rather than actor, a repeated refund recognizes its own historical order grant and cannot fall through to revoke a later orderless rewarded-ad grant, and active grant reuse requires the current report-access actor predicate. Rewarded-ad contracts pass 9 tests / 69 assertions; adjacent gift-refund regression passes 2 / 30; entitlement projection/module regressions pass 2 / 13; the exact runtime-freeze classifier, scoped Pint, syntax, and diff checks pass. No provider activation or production/platform action occurred. Fresh GitHub checks and exact-head review remain mandatory."
+      },
+      {
+        "at": "2026-08-01T19:08:20+08:00",
+        "status": "github_review_repairing",
+        "note": "All required checks passed on exact head 75313747fc3ef478b1f7c9465bb62e4793442cd1, then exact-head review found two valid P2 boundaries. A different ad unit now replaces the actor's active-session pointer instead of returning a mismatched pending session, while a historical-order idempotent return occurs only after actual-refund gift status reconciliation. Rewarded-ad contracts pass 10 tests / 76 assertions with regressions for both paths; scoped Pint, syntax, and diff checks pass. No provider activation or production/platform action occurred. Fresh GitHub checks and exact-head review remain mandatory."
       }
     ],
-    "updated_at": "2026-08-01T18:53:28+08:00"
+    "updated_at": "2026-08-01T19:08:20+08:00"
   },
   "API-IAP-01": {
     "id": "API-IAP-01",

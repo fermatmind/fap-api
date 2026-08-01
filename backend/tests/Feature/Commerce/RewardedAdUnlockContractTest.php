@@ -98,6 +98,32 @@ final class RewardedAdUnlockContractTest extends TestCase
         $this->assertSame(0, DB::table('benefit_grants')->where('attempt_id', $attemptId)->count());
     }
 
+    public function test_create_does_not_reuse_a_pending_session_for_a_different_ad_unit(): void
+    {
+        $anonId = 'anon_rewarded_ad_unit_switch';
+        $attemptId = $this->createAttempt($anonId);
+        $headers = $this->headersFor($anonId);
+        $firstSessionId = (string) $this->withHeaders($headers)
+            ->postJson('/api/v0.3/attempts/'.$attemptId.'/rewarded-ad-sessions', ['ad_unit_id' => self::AD_UNIT_ID])
+            ->assertOk()
+            ->json('session.id');
+
+        $secondSessionId = (string) $this->withHeaders($headers)
+            ->postJson('/api/v0.3/attempts/'.$attemptId.'/rewarded-ad-sessions', ['ad_unit_id' => 'adunit-c14fa8b4fc08bbc2'])
+            ->assertOk()
+            ->assertJsonPath('idempotent', false)
+            ->json('session.id');
+
+        $this->assertNotSame($firstSessionId, $secondSessionId);
+        $this->withHeaders($headers)
+            ->postJson('/api/v0.3/attempts/'.$attemptId.'/rewarded-ad-sessions/'.$secondSessionId.'/complete', [
+                'ad_unit_id' => 'adunit-c14fa8b4fc08bbc2',
+                'is_ended' => true,
+            ])
+            ->assertOk()
+            ->assertJsonPath('report_access.access_level', 'full');
+    }
+
     public function test_complete_is_idempotent_and_refreshes_the_unified_report_access_projection(): void
     {
         $attemptId = $this->createAttempt('anon_rewarded_complete');
@@ -246,6 +272,11 @@ final class RewardedAdUnlockContractTest extends TestCase
         );
         $firstRefund = app(EntitlementManager::class)->revokeByOrderNo(0, $orderNo);
         $this->assertSame(1, (int) ($firstRefund['revoked'] ?? 0));
+        $this->insertFulfilledGiftRequest(
+            (string) DB::table('orders')->where('order_no', $orderNo)->value('id'),
+            $attemptId,
+            $anonId,
+        );
 
         $headers = $this->headersFor($anonId);
         $sessionId = (string) $this->withHeaders($headers)
@@ -263,6 +294,9 @@ final class RewardedAdUnlockContractTest extends TestCase
         $retryRefund = app(EntitlementManager::class)->revokeByOrderNo(0, $orderNo);
         $this->assertSame(0, (int) ($retryRefund['revoked'] ?? -1));
         $this->assertTrue((bool) ($retryRefund['idempotent'] ?? false));
+        $this->assertSame('refunded', (string) DB::table('report_gift_requests')
+            ->where('purchased_order_id', DB::table('orders')->where('order_no', $orderNo)->value('id'))
+            ->value('status'));
         $this->assertSame(1, DB::table('benefit_grants')
             ->where('attempt_id', $attemptId)
             ->where('status', 'active')
@@ -443,6 +477,28 @@ final class RewardedAdUnlockContractTest extends TestCase
             'provider' => 'billing',
             'created_at' => now()->subDay(),
             'updated_at' => now()->subDay(),
+        ]);
+    }
+
+    private function insertFulfilledGiftRequest(string $orderId, string $attemptId, string $anonId): void
+    {
+        DB::table('report_gift_requests')->insert([
+            'id' => (string) Str::uuid(),
+            'public_token_hash' => hash('sha256', (string) Str::uuid()),
+            'org_id' => 0,
+            'target_attempt_id' => $attemptId,
+            'recipient_user_id' => null,
+            'recipient_anon_id' => $anonId,
+            'scale_code' => 'MBTI',
+            'sku' => 'MBTI_REPORT_FULL',
+            'status' => 'fulfilled',
+            'expires_at' => now()->addDay(),
+            'purchased_order_id' => $orderId,
+            'purchased_by_user_id' => null,
+            'purchased_by_anon_id' => 'anon_rewarded_gift_payer',
+            'fulfilled_at' => now()->subHour(),
+            'created_at' => now()->subHour(),
+            'updated_at' => now()->subHour(),
         ]);
     }
 
