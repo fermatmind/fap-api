@@ -220,7 +220,7 @@ final class ContentPage extends Model
             $page->source_version_hash = $page->computeSourceVersionHash();
         });
 
-        static::saved(function (self $page): void {
+        self::saved(function (self $page): void {
             try {
                 Cache::forget(
                     "content_page:v1:{$page->org_id}:{$page->slug}:{$page->locale}"
@@ -230,7 +230,7 @@ final class ContentPage extends Model
             }
         });
 
-        static::deleted(function (self $page): void {
+        self::deleted(function (self $page): void {
             try {
                 Cache::forget(
                     "content_page:v1:{$page->org_id}:{$page->slug}:{$page->locale}"

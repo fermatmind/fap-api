@@ -235,6 +235,7 @@ final class EnneagramResultPageRenderedQaSmokeHarness
             $path = $evidenceDir.'/'.$evidenceKey.'_report.json';
             if (! is_file($path)) {
                 $errors[] = 'evidence_report_missing:'.$evidenceKey;
+
                 continue;
             }
 

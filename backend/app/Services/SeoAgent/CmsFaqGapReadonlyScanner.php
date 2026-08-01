@@ -256,9 +256,6 @@ final class CmsFaqGapReadonlyScanner
         return preg_match('/\b(faq|help|support)\b/u', $identity) === 1;
     }
 
-    /**
-     * @param  mixed  $items
-     */
     private function hasValidFaqItems(mixed $items): bool
     {
         if (! is_array($items) || $items === []) {
@@ -280,9 +277,6 @@ final class CmsFaqGapReadonlyScanner
         return true;
     }
 
-    /**
-     * @param  mixed  $value
-     */
     private function containsFaqPage(mixed $value): bool
     {
         if (! is_array($value)) {

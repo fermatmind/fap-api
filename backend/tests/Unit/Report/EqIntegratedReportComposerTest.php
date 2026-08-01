@@ -11,7 +11,7 @@ final class EqIntegratedReportComposerTest extends TestCase
 {
     public function test_it_composes_integrated_report_without_merging_self_report_and_sjt_scores(): void
     {
-        $report = (new EqIntegratedReportComposer())->compose($this->eq60Report(), $this->sjtScore());
+        $report = (new EqIntegratedReportComposer)->compose($this->eq60Report(), $this->sjtScore());
 
         $this->assertSame('eq.integrated_report.v1', $report['schema_version']);
         $this->assertSame('integrated', $report['eq_report_mode']);
@@ -38,7 +38,7 @@ final class EqIntegratedReportComposerTest extends TestCase
 
     public function test_it_builds_gap_map_pressure_pattern_scripts_and_action_path(): void
     {
-        $report = (new EqIntegratedReportComposer())->compose($this->eq60Report(), $this->sjtScore());
+        $report = (new EqIntegratedReportComposer)->compose($this->eq60Report(), $this->sjtScore());
         $gapMap = $report['interpretation']['gap_map'];
 
         $this->assertCount(6, $gapMap);
@@ -58,7 +58,7 @@ final class EqIntegratedReportComposerTest extends TestCase
 
     public function test_claim_boundary_prevents_ability_msceit_hiring_and_clinical_claims(): void
     {
-        $report = (new EqIntegratedReportComposer())->compose($this->eq60Report(), $this->sjtScore());
+        $report = (new EqIntegratedReportComposer)->compose($this->eq60Report(), $this->sjtScore());
 
         $this->assertTrue($report['claim_boundary']['not_clinical']);
         $this->assertTrue($report['claim_boundary']['not_hiring']);

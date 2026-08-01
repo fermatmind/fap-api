@@ -16,7 +16,7 @@ final class TestKpiDailyInlineWidget extends Widget
 
     protected static string $view = 'filament.ops.widgets.test-kpi-daily-inline-widget';
 
-    protected int | string | array $columnSpan = 'full';
+    protected int|string|array $columnSpan = 'full';
 
     private const GLOBAL_ORG_ID = 0;
 
