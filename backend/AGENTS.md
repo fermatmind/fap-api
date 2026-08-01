@@ -134,6 +134,8 @@
 - W1 MBTI English result dry-run import is separately bound to the immutable result-package SHA recorded by `EN-PARITY-W1-MBTI-RESULT-ASSETS-01`. It must validate the complete 46-row reconciliation, the exact English canonical-section and entitlement identities, and the synthetic private-safe PDF fixture access identity from the same verified package bytes.
 - `EN-PARITY-W1-MBTI-RESULT-IMPORTER-01` is no-write and no-activation only. It must not read an attempt, report, private URL, user score, answer, entitlement owner, order, payment, recovery record, or production PDF payload; change an active package pointer; or expose reader copy, filesystem paths, or private identifiers in its receipt.
 - The result dry-run plan must preserve the exact split of 24 unchanged controls, 21 inactive English candidate assets, and one W9 fixture-only PDF row. The absent English content-pack authority remains a fail-closed prerequisite for the separately controlled inactive-content import; dry-run success never materializes that authority.
+- W4 RIASEC importer dry-runs may accept only the exact CONTROL qa_pass package SHA and independent W9 report bound in `backend/content_assets/en-content-parity/W4-riasec/external_package_evidence.json`.
+- W4 dry-run validation must preserve the 14 logical groups, 1550 atomic rows, 15 normalized pairs, and 3/2/2 safe-surface reconciliation; `--write` is fail-closed until separately authorized.
 
 ## DailyGiving proof handling rules
 - Original charity donation receipt/proof images may be uploaded as the public proof media asset when the operator explicitly approves that original image for public use. A separate redacted derivative is not required for DailyGiving public proof.

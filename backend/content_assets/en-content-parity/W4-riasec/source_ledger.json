@@ -1,0 +1,329 @@
+{
+  "schema_version": "fermatmind.en_content_parity_source_ledger.v1",
+  "control_id": "EN-PARITY-CONTROL-BOOTSTRAP-01",
+  "lane_id": "W4",
+  "subscope_id": null,
+  "package_id": "EN-PARITY-W4-RIASEC-PACKAGE-REFREEZE-01",
+  "scan": {
+    "fap_web_commit": "2abee293f5b417bb0ebdabfda1e43a61c6e445d4",
+    "fap_api_origin_main_commit": "a202c8175ad0cfda59585d9adb20e1b2d8b929a2",
+    "master_manifest_sha256": "5dfa51907860aaee4dabef952e15c4a6cabaa7d72cd47225089d15470b685039",
+    "source_revalidation": "fap-api changes from the prior scan source SHA contain no RIASEC/Holland/interest paths",
+    "private_data_accessed": false,
+    "package_rebuild": {
+      "prior_blocked_package_sha256": "944ddac51957b38aa6232335f07269cd904c2513348fad652acb5acb0de59e33",
+      "repairs": [
+        {"producer_package_id": "EN-PARITY-W4-RIASEC-140Q-NATURALNESS-REPAIR-01", "affected_group": "W4-G06", "affected_asset_count": 126, "segment_aggregate_sha256": "ee3c52a6de9d2b69029ce8351871eb1e18796cb0d794d6e2553943645eefd7c2"},
+        {"producer_package_id": "EN-PARITY-W4-RIASEC-DIMENSION-DUPLICATE-REPAIR-01", "affected_group": "W4-G02", "affected_asset_count": 4, "segment_aggregate_sha256": "640e56dad5ff9e51c09a41212895d5030c2851c3dbf2f0ee8f3bdf05f8ff0390"}
+      ],
+      "segment_aggregates": {
+        "140q-context-structural": "ee3c52a6de9d2b69029ce8351871eb1e18796cb0d794d6e2553943645eefd7c2",
+        "activity-examples": "4b8e9ac0eb0741b81745aa45809139cb22b5e731de5987c456b1ff09dd0acd9b",
+        "aspirations-disagree": "ae09d38b3cd7739594faf08d1c08e2498e71c52db4cd0e0d82547b5bfcd9fc0a",
+        "dimension-core": "640e56dad5ff9e51c09a41212895d5030c2851c3dbf2f0ee8f3bdf05f8ff0390",
+        "feedback-action-lab": "b85690fdd841ddf5b707d4dc4571ce32f6eab42ead4e1ace92981b1000a5d868",
+        "pair": "3c1e51c1e97888383435c131d0368b87a40f27f7499ad2b6d887a2921bf29cbc",
+        "quality-reading-state": "b23a5cbdda8bbc202627d3524e8feb44d03de75aaa506838ad45ef15f70d385c",
+        "share-pdf-history": "e5cd7cbb5399222733bd422ec02b7a7edf49e257ec1aa1a27618ee105979fc58",
+        "top3": "d6385c928f833ee0d7a6b7deaad42213e0980bbc5ad19f29e122d97f221d5d3c"
+      }
+    }
+  },
+  "rows": [
+    {
+      "row_id": "W4-INVENTORY-W4-G01",
+      "asset_id": "ENPARITY-W4-RIASEC-DEEP-ASSETS",
+      "group_id": "W4-G01",
+      "canonical_group_name": "six_dimension_deep_interpretation",
+      "expected_expanded_rows": 24,
+      "zh_current_rows": 24,
+      "en_current_rows": 24,
+      "en_missing_rows": 0,
+      "authority_owner": "fap-api RiasecDeepCopySlotRegistry",
+      "backend_registry_slot": "dimension_deep_copy",
+      "supported_forms": [
+        "riasec_60",
+        "riasec_140"
+      ],
+      "source_evidence_state": "repo_authority_present",
+      "claim_boundary_verdict": "PASS_WITH_BOUNDARY",
+      "private_data_accessed": false,
+      "package_status": "unpublished_candidate_pending_independent_w9"
+    },
+    {
+      "row_id": "W4-INVENTORY-W4-G02",
+      "asset_id": "ENPARITY-W4-RIASEC-DEEP-ASSETS",
+      "group_id": "W4-G02",
+      "canonical_group_name": "core_drive_cost_shadow",
+      "expected_expanded_rows": 18,
+      "zh_current_rows": 18,
+      "en_current_rows": 18,
+      "en_missing_rows": 0,
+      "authority_owner": "fap-api RiasecDeepCopySlotRegistry",
+      "backend_registry_slot": "core_drive_cost_shadow_copy logical block inside dimension_deep_copy",
+      "supported_forms": [
+        "riasec_60",
+        "riasec_140"
+      ],
+      "source_evidence_state": "repo_authority_present",
+      "claim_boundary_verdict": "PASS_WITH_BOUNDARY",
+      "private_data_accessed": false,
+      "package_status": "unpublished_candidate_pending_independent_w9"
+    },
+    {
+      "row_id": "W4-INVENTORY-W4-G03",
+      "asset_id": "ENPARITY-W4-RIASEC-DEEP-ASSETS",
+      "group_id": "W4-G03",
+      "canonical_group_name": "pair_blend_15_unordered",
+      "expected_expanded_rows": 15,
+      "zh_current_rows": 15,
+      "en_current_rows": 15,
+      "en_missing_rows": 0,
+      "authority_owner": "fap-api RiasecDeepCopySlotRegistry",
+      "backend_registry_slot": "pair_blend_copy",
+      "supported_forms": [
+        "riasec_60",
+        "riasec_140"
+      ],
+      "source_evidence_state": "repo_authority_present",
+      "claim_boundary_verdict": "PASS_WITH_BOUNDARY",
+      "private_data_accessed": false,
+      "package_status": "unpublished_candidate_pending_independent_w9"
+    },
+    {
+      "row_id": "W4-INVENTORY-W4-G04",
+      "asset_id": "ENPARITY-W4-RIASEC-DEEP-ASSETS",
+      "group_id": "W4-G04",
+      "canonical_group_name": "top3_code_activity_composition",
+      "expected_expanded_rows": 20,
+      "zh_current_rows": 20,
+      "en_current_rows": 20,
+      "en_missing_rows": 0,
+      "authority_owner": "fap-api RiasecDeepCopySlotRegistry",
+      "backend_registry_slot": "triad_blend_copy under pair_blend_copy group",
+      "supported_forms": [
+        "riasec_60",
+        "riasec_140"
+      ],
+      "source_evidence_state": "repo_authority_present",
+      "claim_boundary_verdict": "PASS_WITH_QA_GAP",
+      "private_data_accessed": false,
+      "package_status": "unpublished_candidate_pending_independent_w9"
+    },
+    {
+      "row_id": "W4-INVENTORY-W4-G05",
+      "asset_id": "ENPARITY-W4-RIASEC-DEEP-ASSETS",
+      "group_id": "W4-G05",
+      "canonical_group_name": "career_activity_families_examples_only",
+      "expected_expanded_rows": 720,
+      "zh_current_rows": 720,
+      "en_current_rows": 720,
+      "en_missing_rows": 0,
+      "authority_owner": "fap-api RiasecActivityExplorerService",
+      "backend_registry_slot": "activity_task_examples_v1 + occupation_examples_boundary_v1 service assets",
+      "supported_forms": [
+        "riasec_60",
+        "riasec_140"
+      ],
+      "source_evidence_state": "repo_authority_present",
+      "claim_boundary_verdict": "PASS_WITH_BOUNDARY",
+      "private_data_accessed": false,
+      "package_status": "unpublished_candidate_pending_independent_w9"
+    },
+    {
+      "row_id": "W4-INVENTORY-W4-G06",
+      "asset_id": "ENPARITY-W4-RIASEC-DEEP-ASSETS",
+      "group_id": "W4-G06",
+      "canonical_group_name": "140q_task_environment_role_narrative",
+      "expected_expanded_rows": 126,
+      "zh_current_rows": 126,
+      "en_current_rows": 126,
+      "en_missing_rows": 0,
+      "authority_owner": "fap-api RiasecDeepCopySlotRegistry",
+      "backend_registry_slot": "140q task/environment/role/commercial_state asset slots",
+      "supported_forms": [
+        "riasec_140"
+      ],
+      "source_evidence_state": "repo_authority_present",
+      "claim_boundary_verdict": "PASS_WITH_BOUNDARY",
+      "private_data_accessed": false,
+      "package_status": "unpublished_candidate_pending_independent_w9"
+    },
+    {
+      "row_id": "W4-INVENTORY-W4-G07",
+      "asset_id": "ENPARITY-W4-RIASEC-DEEP-ASSETS",
+      "group_id": "W4-G07",
+      "canonical_group_name": "140q_tension_structural_difference",
+      "expected_expanded_rows": 7,
+      "zh_current_rows": 7,
+      "en_current_rows": 7,
+      "en_missing_rows": 0,
+      "authority_owner": "fap-api RiasecDeepCopySlotRegistry",
+      "backend_registry_slot": "structural_difference_copy",
+      "supported_forms": [
+        "riasec_140"
+      ],
+      "source_evidence_state": "code_authority_present_externalizable_asset_missing",
+      "claim_boundary_verdict": "PASS_WITH_BOUNDARY",
+      "private_data_accessed": false,
+      "package_status": "unpublished_candidate_pending_independent_w9"
+    },
+    {
+      "row_id": "W4-INVENTORY-W4-G08",
+      "asset_id": "ENPARITY-W4-RIASEC-DEEP-ASSETS",
+      "group_id": "W4-G08",
+      "canonical_group_name": "low_quality_cautious_and_interpretation_state",
+      "expected_expanded_rows": 24,
+      "zh_current_rows": 24,
+      "en_current_rows": 24,
+      "en_missing_rows": 0,
+      "authority_owner": "fap-api RiasecDeepCopySlotRegistry + RiasecQualityRuleContract",
+      "backend_registry_slot": "quality_copy + interpretation_state_copy",
+      "supported_forms": [
+        "riasec_60",
+        "riasec_140"
+      ],
+      "source_evidence_state": "repo_authority_present",
+      "claim_boundary_verdict": "PASS_WITH_BOUNDARY",
+      "private_data_accessed": false,
+      "package_status": "unpublished_candidate_pending_independent_w9"
+    },
+    {
+      "row_id": "W4-INVENTORY-W4-G09",
+      "asset_id": "ENPARITY-W4-RIASEC-DEEP-ASSETS",
+      "group_id": "W4-G09",
+      "canonical_group_name": "aspirations_calibration",
+      "expected_expanded_rows": 70,
+      "zh_current_rows": 70,
+      "en_current_rows": 70,
+      "en_missing_rows": 0,
+      "authority_owner": "fap-api RiasecDeepCopySlotRegistry",
+      "backend_registry_slot": "aspirations_calibration_copy",
+      "supported_forms": [
+        "riasec_60",
+        "riasec_140"
+      ],
+      "source_evidence_state": "repo_authority_present",
+      "claim_boundary_verdict": "PASS_WITH_BOUNDARY",
+      "private_data_accessed": false,
+      "package_status": "unpublished_candidate_pending_independent_w9"
+    },
+    {
+      "row_id": "W4-INVENTORY-W4-G10",
+      "asset_id": "ENPARITY-W4-RIASEC-DEEP-ASSETS",
+      "group_id": "W4-G10",
+      "canonical_group_name": "disagree_path",
+      "expected_expanded_rows": 45,
+      "zh_current_rows": 45,
+      "en_current_rows": 45,
+      "en_missing_rows": 0,
+      "authority_owner": "fap-api RiasecDeepCopySlotRegistry",
+      "backend_registry_slot": "disagree_path_copy",
+      "supported_forms": [
+        "riasec_60",
+        "riasec_140"
+      ],
+      "source_evidence_state": "repo_authority_present",
+      "claim_boundary_verdict": "PASS_WITH_BOUNDARY",
+      "private_data_accessed": false,
+      "package_status": "unpublished_candidate_pending_independent_w9"
+    },
+    {
+      "row_id": "W4-INVENTORY-W4-G11",
+      "asset_id": "ENPARITY-W4-RIASEC-DEEP-ASSETS",
+      "group_id": "W4-G11",
+      "canonical_group_name": "feedback_action_lab_response",
+      "expected_expanded_rows": 474,
+      "zh_current_rows": 474,
+      "en_current_rows": 474,
+      "en_missing_rows": 0,
+      "authority_owner": "fap-api RiasecExplorationFeedbackOverlayService",
+      "backend_registry_slot": "feedback_action_lab_v1 + next_exploration_nodes_v1 service assets",
+      "supported_forms": [
+        "riasec_60",
+        "riasec_140"
+      ],
+      "source_evidence_state": "repo_authority_present",
+      "claim_boundary_verdict": "PASS_WITH_BOUNDARY",
+      "private_data_accessed": false,
+      "package_status": "unpublished_candidate_pending_independent_w9"
+    },
+    {
+      "row_id": "W4-INVENTORY-W4-G12",
+      "asset_id": "ENPARITY-W4-RIASEC-DEEP-ASSETS",
+      "group_id": "W4-G12",
+      "canonical_group_name": "share_safe_variant",
+      "expected_expanded_rows": 3,
+      "zh_current_rows": 3,
+      "en_current_rows": 3,
+      "en_missing_rows": 0,
+      "authority_owner": "fap-api RiasecLifecycleCopyService",
+      "backend_registry_slot": "share_pdf_history_v1 surfaces: share_safe_card, share_detail_boundary, low_quality_share",
+      "supported_forms": [
+        "riasec_60",
+        "riasec_140"
+      ],
+      "source_evidence_state": "RESULT-EN-PARITY-02 historical candidate",
+      "claim_boundary_verdict": "PASS_SAFETY_NOT_PARITY_READY",
+      "private_data_accessed": false,
+      "package_status": "unpublished_candidate_pending_independent_w9"
+    },
+    {
+      "row_id": "W4-INVENTORY-W4-G13",
+      "asset_id": "ENPARITY-W4-RIASEC-DEEP-ASSETS",
+      "group_id": "W4-G13",
+      "canonical_group_name": "pdf_safe_variant",
+      "expected_expanded_rows": 2,
+      "zh_current_rows": 2,
+      "en_current_rows": 2,
+      "en_missing_rows": 0,
+      "authority_owner": "fap-api RiasecLifecycleCopyService / report-access PDF authority",
+      "backend_registry_slot": "share_pdf_history_v1 surfaces: pdf_personal, pdf_counselor_discussion",
+      "supported_forms": [
+        "riasec_60",
+        "riasec_140"
+      ],
+      "source_evidence_state": "RESULT-EN-PARITY-02 historical candidate",
+      "claim_boundary_verdict": "PASS_SAFETY_NOT_PARITY_READY",
+      "private_data_accessed": false,
+      "package_status": "unpublished_candidate_pending_independent_w9"
+    },
+    {
+      "row_id": "W4-INVENTORY-W4-G14",
+      "asset_id": "ENPARITY-W4-RIASEC-DEEP-ASSETS",
+      "group_id": "W4-G14",
+      "canonical_group_name": "history_safe_variant",
+      "expected_expanded_rows": 2,
+      "zh_current_rows": 2,
+      "en_current_rows": 2,
+      "en_missing_rows": 0,
+      "authority_owner": "fap-api RiasecLifecycleCopyService / history authority",
+      "backend_registry_slot": "share_pdf_history_v1 surfaces: history_same_form, history_cross_form",
+      "supported_forms": [
+        "riasec_60",
+        "riasec_140"
+      ],
+      "source_evidence_state": "RESULT-EN-PARITY-02 historical candidate",
+      "claim_boundary_verdict": "PASS_SAFETY_NOT_PARITY_READY",
+      "private_data_accessed": false,
+      "package_status": "unpublished_candidate_pending_independent_w9"
+    }
+  ],
+  "reconciliation": {
+    "master_expected_en_count": 14,
+    "source_ledger_logical_rows": 14,
+    "expanded_atomic_rows": 1550,
+    "segment_row_counts": {
+      "dimension-core": 42,
+      "pair": 15,
+      "top3": 20,
+      "activity-examples": 720,
+      "140q-context-structural": 133,
+      "quality-reading-state": 24,
+      "aspirations-disagree": 115,
+      "feedback-action-lab": 474,
+      "share-pdf-history": 7
+    },
+    "statement": "The master asset count and source ledger remain logical-group evidence; the 1550 immutable candidate rows are bound in translation_map.json and segment package provenance."
+  }
+}

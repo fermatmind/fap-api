@@ -103355,5 +103355,45 @@
       }
     ],
     "updated_at": "2026-08-02T05:14:21+08:00"
+  },
+  "EN-PARITY-W4-RIASEC-IMPORTER-DRY-RUN-01": {
+    "id": "EN-PARITY-W4-RIASEC-IMPORTER-DRY-RUN-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/en-parity-w4-riasec-importer-dry-run-01",
+    "title": "EN-PARITY-W4-RIASEC-IMPORTER-DRY-RUN-01: add exact-package RIASEC dry-run importer",
+    "depends_on": [
+      "EN-PARITY-W4-RIASEC-PACKAGE-REFREEZE-01",
+      "EN-PARITY-W9-W4-RIASEC-INDEPENDENT-QA-02",
+      "CONTROL-W4-RIASEC-QA-PASS-01"
+    ],
+    "status": "in_progress",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "preflight": {
+        "status": "passed",
+        "evidence": "Started from isolated fap-api origin/main 8e738763162ff7c1507e28fa30d1b8cb7154de85 after confirming no concurrent FermatMind heavy verifier."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-08-02T00:00:00+08:00",
+        "status": "in_progress",
+        "note": "Registered and started in an isolated worktree. Scope is exact-package dry-run validation only; no authority write or CONTROL transition is authorized."
+      }
+    ],
+    "updated_at": "2026-08-02T00:00:00+08:00"
   }
 }

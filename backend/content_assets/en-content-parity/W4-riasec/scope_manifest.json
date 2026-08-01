@@ -1,0 +1,53 @@
+{
+  "$schema": "../../../docs/seo/generated/en-content-parity-control-master.v1.schema.json",
+  "artifact_kind": "lane_package",
+  "schema_version": "fermatmind.en_content_parity_lane_package.v1",
+  "control_id": "EN-PARITY-CONTROL-BOOTSTRAP-01",
+  "lane_id": "W4",
+  "subscope_id": null,
+  "package_id": "EN-PARITY-W4-RIASEC-PACKAGE-REFREEZE-01",
+  "status": "package_frozen",
+  "output_directory": "generated/en-content-parity/W4-riasec/",
+  "artifact_files": [
+    "scope_manifest.json",
+    "assets.jsonl",
+    "translation_map.json",
+    "source_ledger.json",
+    "claim_boundary_report.json",
+    "editorial_review.json",
+    "dry_run_readiness.json",
+    "sha256_manifest.json",
+    "master_manifest_patch.candidate.json",
+    "handoff.md"
+  ],
+  "assets": [
+    {
+      "asset_id": "ENPARITY-W4-RIASEC-DEEP-ASSETS",
+      "lane_id": "W4",
+      "asset_type": "riasec_deep_result_content",
+      "translation_group": "cohort:riasec:deep-result-content",
+      "locales": [
+        "zh-CN",
+        "en"
+      ],
+      "authority_source": "backend RIASEC result content authority",
+      "expected_en_count": 14,
+      "current_en_count": 0,
+      "remaining_en_count": 14,
+      "parity_state": "en_missing",
+      "evidence": [
+        "docs/codex/riasec-full-content-pack-asset-inventory.md defines the 14-group deep asset target."
+      ],
+      "notes": "The reader boundary is career-interest direction, not precise career matching."
+    }
+  ],
+  "permissions": {
+    "cms_write_authorized": false,
+    "staging_write_authorized": false,
+    "production_import_authorized": false,
+    "public_release_authorized": false,
+    "seo_runtime_release_authorized": false,
+    "search_submission_authorized": false,
+    "master_manifest_write_authorized": false
+  }
+}
