@@ -63,6 +63,7 @@ final class MbtiTargetAuthorityDraftReceiptControlPlaneTest extends TestCase
         self::assertStringContainsString('active_pointer_changed == false', $workflow);
         self::assertStringContainsString('>"$RUN_DIR/executor.stdout" 2>"$RUN_DIR/executor.stderr"', $workflow);
         self::assertStringContainsString("printf '%s\\n' 'target_authority_receipt_failed' >&2", $workflow);
+        self::assertStringContainsString('scp -r -P "$DEPLOY_PORT"', $workflow);
     }
 
     public function test_result_manifest_storage_schema_fits_the_existing_authority_column_without_changing_the_document_schema(): void
