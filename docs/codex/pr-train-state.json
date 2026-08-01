@@ -102633,7 +102633,7 @@
     "depends_on": [
       "EN-PARITY-W1-MBTI-RESULT-ASSETS-01"
     ],
-    "status": "github_checks_pending",
+    "status": "post_merge_execution_repairing",
     "commit_sha": "26add1aa0ffd5f2da53bb516206c34afedd1de2a",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3446",
     "checks": {
@@ -102662,10 +102662,10 @@
         "evidence": "Exact implementation head 26add1aa0ffd5f2da53bb516206c34afedd1de2a contains the bounded-read review fix and passed focused local validation. Its metadata-tail head must repeat the required GitHub checks before merge."
       }
     },
-    "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "failure_reason": "Production publish workflow run 30706029394 failed closed before a receipt because executor stderr was not returned to the runner; no receipt was emitted and publication success was not claimed.",
+    "merged_at": "2026-08-01T15:28:33Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
@@ -103277,8 +103277,13 @@
         "at": "2026-08-01T21:10:00+08:00",
         "status": "ready_to_merge",
         "note": "Exact repair head 27fcff06b0bd72a027f541ce28f7dbef4519d4d9 passed all required checks. Scope revalidation confirmed only the declared PR11 paths changed; squash merge is permitted by the repository policy."
+      },
+      {
+        "at": "2026-08-01T23:30:00+08:00",
+        "status": "post_merge_execution_repairing",
+        "note": "PR #3478 merged as 16261b0ea5f87654d65eb340ee3316c43807951d. Controlled publish run 30706029394 failed closed before a receipt because the workflow did not return the executor's safe error code; a minimal same-scope workflow observability repair is in progress."
       }
     ],
-    "updated_at": "2026-08-01T20:40:00+08:00"
+    "updated_at": "2026-08-01T23:30:00+08:00"
   }
 }

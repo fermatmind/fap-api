@@ -134,6 +134,7 @@ jobs:
           executor_status=$?
           set -e
           if [ "$executor_status" -ne 0 ]; then
+            sed -n '1p' "$RUN_DIR/executor.stderr" >&2 || true
             printf '%s\n' 'comparison_english_publish_live_qa_failed' >&2
             exit "$executor_status"
           fi
