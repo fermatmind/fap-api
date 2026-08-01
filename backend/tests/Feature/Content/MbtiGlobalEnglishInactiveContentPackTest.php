@@ -133,6 +133,26 @@ final class MbtiGlobalEnglishInactiveContentPackTest extends TestCase
         }
     }
 
+    public function test_exact_result_draft_authority_is_stored_but_not_runtime_registered(): void
+    {
+        $path = $this->packDirectory().'/drafts/en-parity-w1-mbti-result-content-v1.json';
+        self::assertFileExists($path);
+        $bytes = (string) file_get_contents($path);
+        self::assertSame('8cbff5b45e21b7ac637eeaa937927b3900aa80da82488e9a9d20a289390f9b64', hash('sha256', $bytes));
+        $draft = json_decode($bytes, true, 512, JSON_THROW_ON_ERROR);
+
+        self::assertSame('fermatmind.mbti.en_result_content_inactive_draft.v1', $draft['schema_version']);
+        self::assertSame(self::PACK_ID, $draft['authority']['pack_id']);
+        self::assertSame('inactive_draft', $draft['authority']['state']);
+        self::assertFalse($draft['authority']['runtime_available']);
+        self::assertFalse($draft['authority']['active_pointer_registered']);
+        self::assertSame(46, $draft['counts']['total_rows']);
+        self::assertSame(21, $draft['counts']['authority_content_rows']);
+        self::assertCount(46, $draft['rows']);
+        self::assertCount(21, array_filter($draft['rows'], static fn (array $row): bool => isset($row['asset'])));
+        self::assertSame(['commercial_spec.json'], $this->jsonFile('manifest.json')['assets']['rules']);
+    }
+
     private function packDirectory(): string
     {
         return base_path('../content_packages/default/GLOBAL/en/'.self::DIRECTORY_VERSION);

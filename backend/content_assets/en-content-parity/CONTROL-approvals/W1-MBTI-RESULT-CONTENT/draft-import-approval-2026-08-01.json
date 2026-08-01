@@ -1,0 +1,22 @@
+{
+  "$schema": "docs/seo/generated/en-content-parity-control-master.v1.schema.json",
+  "artifact_kind": "controlled_transition_approval",
+  "schema_version": "fermatmind.en_content_parity_controlled_transition_approval.v1",
+  "control_id": "EN-PARITY-CONTROL-BOOTSTRAP-01",
+  "approval_owner": "human_operator",
+  "approval_ref": "human-operator:w1-mbti-result-content-draft-import:2026-08-01",
+  "producer_lane_id": "W1",
+  "subscope_id": "W1-MBTI-RESULT-CONTENT",
+  "package_sha256": "9325013b870fd2496efc0882656240f91ce28ff4faaf1da42fb3dde3577b0ed3",
+  "gate": "draft_imported",
+  "verdict": "APPROVED",
+  "permissions": {
+    "cms_write_authorized": false,
+    "staging_write_authorized": false,
+    "production_import_authorized": false,
+    "public_release_authorized": false,
+    "seo_runtime_release_authorized": false,
+    "search_submission_authorized": false,
+    "master_manifest_write_authorized": false
+  }
+}

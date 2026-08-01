@@ -1,0 +1,787 @@
+{
+    "schema_version": "fermatmind.mbti.en_result_content_inactive_draft.v1",
+    "authority": {
+        "pack_id": "MBTI.global.en.default",
+        "region": "GLOBAL",
+        "locale": "en",
+        "content_package_version": "v0.3",
+        "state": "inactive_draft",
+        "runtime_available": false,
+        "active_pointer_registered": false
+    },
+    "source": {
+        "package_id": "EN-PARITY-W1-MBTI-RESULT-ASSETS-2026-07-31",
+        "package_sha256": "9325013b870fd2496efc0882656240f91ce28ff4faaf1da42fb3dde3577b0ed3",
+        "inventory_package_sha256": "8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85",
+        "approval_ref": "human-operator:w1-mbti-result-content-draft-import:2026-08-01",
+        "approval_sha256": "17ae71733abe77bd7e75f4492374879c1888c4f5f3f671f53b003b6b878152e2"
+    },
+    "counts": {
+        "total_rows": 46,
+        "preserved_reference_rows": 24,
+        "inactive_candidate_rows": 21,
+        "fixture_validation_rows": 1,
+        "authority_content_rows": 21
+    },
+    "permissions": {
+        "private_payload_read": false,
+        "activation": false,
+        "publication": false,
+        "indexability": false,
+        "sitemap": false,
+        "llms": false,
+        "search_submission": false,
+        "deployment": false
+    },
+    "rows": [
+        {
+            "position": 1,
+            "row_id": "W1-RESULT-CORE-01-PROFILE",
+            "disposition": "preserved_reference",
+            "authority_state": "unchanged_no_write"
+        },
+        {
+            "position": 2,
+            "row_id": "W1-RESULT-CORE-02-SUMMARY-CARD",
+            "disposition": "preserved_reference",
+            "authority_state": "unchanged_no_write"
+        },
+        {
+            "position": 3,
+            "row_id": "W1-RESULT-CORE-03-DIMENSIONS",
+            "disposition": "preserved_reference",
+            "authority_state": "unchanged_no_write"
+        },
+        {
+            "position": 4,
+            "row_id": "W1-RESULT-CORE-04-ACCESS-ENVELOPE",
+            "disposition": "preserved_reference",
+            "authority_state": "unchanged_no_write"
+        },
+        {
+            "position": 5,
+            "row_id": "W1-RESULT-CORE-05-OFFER-CTA",
+            "disposition": "candidate_asset",
+            "authority_state": "inactive_draft",
+            "asset_sha256": "a212d39ae552d73b54724236cc462a1c42f535430cb58bc308aa966f71e1d751",
+            "asset": {
+                "row_id": "W1-RESULT-CORE-05-OFFER-CTA",
+                "stable_asset_identity": "mbti:result:offer-set-and-cta-copy",
+                "asset_kind": "offer_copy_family",
+                "authority_field": "commercial_spec.variants[].cta_copy",
+                "consumer_field": "offer_set.cta",
+                "variant_selector": {
+                    "authority_target_ref": "english_commercial_spec_v1",
+                    "variant_id": "mbti_report_paywall_default_v1",
+                    "default": true,
+                    "upgrade_sku_anchor": "MBTI_REPORT_FULL",
+                    "upgrade_sku": "MBTI_REPORT_FULL_199",
+                    "resolver": "OfferResolver::resolveCtaCopy"
+                },
+                "entitlement_level": "locked_upsell_only",
+                "content": {
+                    "title": "Unlock the complete interpretation",
+                    "subtitle": "Review deeper sections, reflection prompts, and action experiments. Access expands the report; it does not change your score or guarantee a personal, career, or relationship outcome.",
+                    "primary_label": "See access options",
+                    "secondary_label": "Return to summary",
+                    "benefit_bullets": [
+                        "Structured context for work, communication, growth, and relationships",
+                        "Reflection prompts and practical experiments"
+                    ],
+                    "badge": "Full report"
+                },
+                "mobile_desktop_consumption": "same_authority_fields"
+            }
+        },
+        {
+            "position": 6,
+            "row_id": "W1-RESULT-SECTION-01-LETTERS_INTRO",
+            "disposition": "preserved_reference",
+            "authority_state": "unchanged_no_write"
+        },
+        {
+            "position": 7,
+            "row_id": "W1-RESULT-SECTION-02-OVERVIEW",
+            "disposition": "preserved_reference",
+            "authority_state": "unchanged_no_write"
+        },
+        {
+            "position": 8,
+            "row_id": "W1-RESULT-SECTION-03-TRAIT_OVERVIEW",
+            "disposition": "preserved_reference",
+            "authority_state": "unchanged_no_write"
+        },
+        {
+            "position": 9,
+            "row_id": "W1-RESULT-SECTION-04-TRAITS-AT_DIFFERENCE",
+            "disposition": "candidate_asset",
+            "authority_state": "inactive_draft",
+            "asset_sha256": "62ebbba34f26aa87f0996da0cb82c24f551340a1ff39ffafa5784eba02e80c0b",
+            "asset": {
+                "row_id": "W1-RESULT-SECTION-04-TRAITS-AT_DIFFERENCE",
+                "stable_asset_identity": "mbti:result:section:traits.at_difference",
+                "asset_kind": "canonical_section_family",
+                "section_key": "traits.at_difference",
+                "authority_field": "sections.traits.at_difference",
+                "entitlement_level": "free_preview_or_full_by_access_policy",
+                "content": {
+                    "title": "How the A/T identity layer may show up",
+                    "summary_template": "{{type_code}} describes four preference axes; {{identity_variant}} adds a context-sensitive identity layer about how confidently or reactively those preferences may be expressed.",
+                    "body_template": [
+                        "An Assertive pattern may recover from doubt more quickly and hold a chosen direction with less internal checking. A Turbulent pattern may notice gaps and feedback sooner and revisit a decision more readily. Either response can help or hinder depending on the situation.",
+                        "Use the distinction as a reflection prompt, not a ranking. Compare how you respond when rested, under pressure, and around unfamiliar people; expression can shift with experience, role, and context."
+                    ],
+                    "reflection_prompts": [
+                        "When does confidence help you act, and when does it reduce useful checking?",
+                        "When does self-monitoring improve your work, and when does it become unproductive pressure?"
+                    ]
+                },
+                "mobile_desktop_consumption": "same_authority_fields"
+            }
+        },
+        {
+            "position": 10,
+            "row_id": "W1-RESULT-SECTION-05-FAQ",
+            "disposition": "preserved_reference",
+            "authority_state": "unchanged_no_write"
+        },
+        {
+            "position": 11,
+            "row_id": "W1-RESULT-SECTION-06-TRAITS-WHY_THIS_TYPE",
+            "disposition": "candidate_asset",
+            "authority_state": "inactive_draft",
+            "asset_sha256": "e351b3a5287bbee152fc2cc1dd28c32b5c178043268eef99addc023095ab8dbb",
+            "asset": {
+                "row_id": "W1-RESULT-SECTION-06-TRAITS-WHY_THIS_TYPE",
+                "stable_asset_identity": "mbti:result:section:traits.why_this_type",
+                "asset_kind": "canonical_section_family",
+                "section_key": "traits.why_this_type",
+                "authority_field": "sections.traits.why_this_type",
+                "entitlement_level": "free_preview_or_full_by_access_policy",
+                "content": {
+                    "title": "Why this pattern is the current best fit",
+                    "summary_template": "The {{type_code}} result reflects the direction selected on the four preference axes in this assessment.",
+                    "body_template": [
+                        "The result is a compact description of the response pattern, not proof that every {{type_code}} description will fit. Stronger signals may feel familiar across settings, while closer calls can look different at work, at home, or under stress.",
+                        "Treat the type as a starting hypothesis. Keep the parts that help you notice repeatable choices and test the uncertain parts against recent examples."
+                    ],
+                    "reflection_prompts": [
+                        "Which preference appears most consistently across settings?",
+                        "Which preference changes most when the context changes?"
+                    ]
+                },
+                "mobile_desktop_consumption": "same_authority_fields"
+            }
+        },
+        {
+            "position": 12,
+            "row_id": "W1-RESULT-SECTION-07-TRAITS-CLOSE_CALL_AXES",
+            "disposition": "candidate_asset",
+            "authority_state": "inactive_draft",
+            "asset_sha256": "5c48f9ef647b6c5d93222ba868a454992b4cb837b0186bcdf255082ac1713aad",
+            "asset": {
+                "row_id": "W1-RESULT-SECTION-07-TRAITS-CLOSE_CALL_AXES",
+                "stable_asset_identity": "mbti:result:section:traits.close_call_axes",
+                "asset_kind": "canonical_section_family",
+                "section_key": "traits.close_call_axes",
+                "authority_field": "sections.traits.close_call_axes",
+                "entitlement_level": "free_preview_or_full_by_access_policy",
+                "content": {
+                    "title": "Understanding a close-call preference",
+                    "summary_template": "For {{type_code}}, the closest call is {{axis_label}}: the result still leans toward {{side_label}}, with a {{delta}}-point margin.",
+                    "body_template": [
+                        "A near-boundary result does not make the assessment invalid and does not require you to choose a permanent side. It means the current answers produced a smaller separation on {{axis_label}}.",
+                        "In familiar situations you may begin with {{side_label}}, while pressure, misunderstanding, or a role change can make {{opposite_side_label}} easier to see. Similar outward actions can still come from different preference processes."
+                    ],
+                    "reflection_prompts": [
+                        "Which situations make {{opposite_side_label}} easier to see?",
+                        "What remains consistent even when your visible behavior changes?"
+                    ]
+                },
+                "mobile_desktop_consumption": "same_authority_fields"
+            }
+        },
+        {
+            "position": 13,
+            "row_id": "W1-RESULT-SECTION-08-TRAITS-ADJACENT_TYPE_CONTRAST",
+            "disposition": "candidate_asset",
+            "authority_state": "inactive_draft",
+            "asset_sha256": "0e9b5ce536f6c782107ee8ea830829683182791ad4f78fcc0ece91ba0bd24a1a",
+            "asset": {
+                "row_id": "W1-RESULT-SECTION-08-TRAITS-ADJACENT_TYPE_CONTRAST",
+                "stable_asset_identity": "mbti:result:section:traits.adjacent_type_contrast",
+                "asset_kind": "canonical_section_family",
+                "section_key": "traits.adjacent_type_contrast",
+                "authority_field": "sections.traits.adjacent_type_contrast",
+                "entitlement_level": "free_preview_or_full_by_access_policy",
+                "content": {
+                    "title": "Why a nearby type may also feel familiar",
+                    "summary_template": "The nearby pattern {{neighbor_type}} may resemble {{type_code}} because the two patterns share several preferences.",
+                    "body_template": [
+                        "The useful contrast is {{adjacent_axis_label}}: {{type_code}} still returns to {{adjacent_side_label}}, while {{neighbor_type}} represents the neighboring pattern reached by crossing toward {{adjacent_opposite_side_label}}. Notice the sequence used before a decision, not just a single habit or role requirement.",
+                        "Familiarity with a nearby type can reflect a close score, learned skill, current environment, or broad wording. It does not automatically replace the current result."
+                    ],
+                    "reflection_prompts": [
+                        "Does {{adjacent_side_label}} or {{adjacent_opposite_side_label}} better explain your first impulse on {{adjacent_axis_label}}?",
+                        "Which behavior is learned for a role rather than naturally preferred?"
+                    ]
+                },
+                "mobile_desktop_consumption": "same_authority_fields"
+            }
+        },
+        {
+            "position": 14,
+            "row_id": "W1-RESULT-SECTION-09-TRAITS-DECISION_STYLE",
+            "disposition": "candidate_asset",
+            "authority_state": "inactive_draft",
+            "asset_sha256": "08be4e55c8c61e3accccfadd2ddbc963fa984304cd874bbea4a394b8a035271a",
+            "asset": {
+                "row_id": "W1-RESULT-SECTION-09-TRAITS-DECISION_STYLE",
+                "stable_asset_identity": "mbti:result:section:traits.decision_style",
+                "asset_kind": "canonical_section_family",
+                "section_key": "traits.decision_style",
+                "authority_field": "sections.traits.decision_style",
+                "entitlement_level": "free_preview_or_full_by_access_policy",
+                "content": {
+                    "title": "Decision style",
+                    "summary_template": "{{type_code}} may narrow options by combining its preferred sides of the four axes in a recognizable but adaptable sequence.",
+                    "body_template": [
+                        "A preference describes what may feel easier to consult first; it does not prevent you from using the opposite approach. High-stakes decisions often benefit from deliberately adding the perspective that receives less attention.",
+                        "Before committing, separate reversible choices from expensive ones. For reversible choices, define a small test. For expensive choices, record the evidence, people affected, and the condition that would change your mind."
+                    ],
+                    "reflection_prompts": [
+                        "What information do you consult first?",
+                        "What missing perspective would make this decision more balanced?"
+                    ]
+                },
+                "mobile_desktop_consumption": "same_authority_fields"
+            }
+        },
+        {
+            "position": 15,
+            "row_id": "W1-RESULT-SECTION-10-CAREER-SUMMARY",
+            "disposition": "preserved_reference",
+            "authority_state": "unchanged_no_write"
+        },
+        {
+            "position": 16,
+            "row_id": "W1-RESULT-SECTION-11-CAREER-COLLABORATION_FIT",
+            "disposition": "candidate_asset",
+            "authority_state": "inactive_draft",
+            "asset_sha256": "37003c7b8121f3109ac053510a77d98bb0c069cad097149814fe7991d6179fd8",
+            "asset": {
+                "row_id": "W1-RESULT-SECTION-11-CAREER-COLLABORATION_FIT",
+                "stable_asset_identity": "mbti:result:section:career.collaboration_fit",
+                "asset_kind": "canonical_section_family",
+                "section_key": "career.collaboration_fit",
+                "authority_field": "sections.career.collaboration_fit",
+                "entitlement_level": "free_preview_or_full_by_access_policy",
+                "content": {
+                    "title": "Collaboration fit",
+                    "summary_template": "{{type_code}} may contribute most consistently when expectations, decision ownership, and feedback channels match the way the person prefers to engage.",
+                    "body_template": [
+                        "Fit is not a list of compatible or incompatible people. It is the quality of the working agreement: how ideas are surfaced, how disagreement is handled, and when a decision becomes final.",
+                        "Name the contribution you can reliably make and one condition that helps you make it. Ask teammates for the same information instead of inferring their needs from a type label."
+                    ],
+                    "reflection_prompts": [
+                        "What team condition helps you contribute clearly?",
+                        "Which collaboration habit creates avoidable friction?"
+                    ]
+                },
+                "mobile_desktop_consumption": "same_authority_fields"
+            }
+        },
+        {
+            "position": 17,
+            "row_id": "W1-RESULT-SECTION-12-CAREER-WORK_ENVIRONMENT",
+            "disposition": "candidate_asset",
+            "authority_state": "inactive_draft",
+            "asset_sha256": "f265075d1361cd6af985baa45eaa2f356774b9aad07d50d896c7b12c7fbc5e31",
+            "asset": {
+                "row_id": "W1-RESULT-SECTION-12-CAREER-WORK_ENVIRONMENT",
+                "stable_asset_identity": "mbti:result:section:career.work_environment",
+                "asset_kind": "canonical_section_family",
+                "section_key": "career.work_environment",
+                "authority_field": "sections.career.work_environment",
+                "entitlement_level": "free_preview_or_full_by_access_policy",
+                "content": {
+                    "title": "Work environment fit",
+                    "summary_template": "A supportive environment for {{type_code}} is better defined by workable conditions than by a job title.",
+                    "body_template": [
+                        "Consider the balance of focus and interaction, concrete direction and open exploration, independent judgment and stakeholder input, and planned cadence and flexibility. The best mix can change by task and career stage.",
+                        "Use these preferences to design questions for a manager or interview, not to rule a role in or out. Actual responsibilities, resources, culture, and learning opportunities matter more than a four-letter match."
+                    ],
+                    "reflection_prompts": [
+                        "Which work condition has the largest effect on your energy?",
+                        "Which condition can you negotiate or redesign?"
+                    ]
+                },
+                "mobile_desktop_consumption": "same_authority_fields"
+            }
+        },
+        {
+            "position": 18,
+            "row_id": "W1-RESULT-SECTION-13-CAREER-WORK_EXPERIMENTS",
+            "disposition": "candidate_asset",
+            "authority_state": "inactive_draft",
+            "asset_sha256": "2bc98b3d853f26cad102b2bf02c42b201fb6ce7971b6bfb2637666379430982c",
+            "asset": {
+                "row_id": "W1-RESULT-SECTION-13-CAREER-WORK_EXPERIMENTS",
+                "stable_asset_identity": "mbti:result:section:career.work_experiments",
+                "asset_kind": "canonical_section_family",
+                "section_key": "career.work_experiments",
+                "authority_field": "sections.career.work_experiments",
+                "entitlement_level": "free_preview_or_full_by_access_policy",
+                "content": {
+                    "title": "Work experiments",
+                    "summary_template": "Test one {{type_code}} work-style hypothesis through a small, reversible change.",
+                    "body_template": [
+                        "Choose a recurring task and change one condition for a week: meeting preparation, focus blocks, feedback timing, decision notes, or the amount of structure. Keep the task and success measure stable.",
+                        "At the end of the week, compare energy, clarity, quality, and coordination cost. Keep the change only if the evidence is useful in your real role."
+                    ],
+                    "reflection_prompts": [
+                        "What one condition will you change this week?",
+                        "What observable result would make the experiment worth keeping?"
+                    ]
+                },
+                "mobile_desktop_consumption": "same_authority_fields"
+            }
+        },
+        {
+            "position": 19,
+            "row_id": "W1-RESULT-SECTION-14-CAREER-ADVANTAGES",
+            "disposition": "preserved_reference",
+            "authority_state": "unchanged_no_write"
+        },
+        {
+            "position": 20,
+            "row_id": "W1-RESULT-SECTION-15-CAREER-WEAKNESSES",
+            "disposition": "preserved_reference",
+            "authority_state": "unchanged_no_write"
+        },
+        {
+            "position": 21,
+            "row_id": "W1-RESULT-SECTION-16-CAREER-PREFERRED_ROLES",
+            "disposition": "preserved_reference",
+            "authority_state": "unchanged_no_write"
+        },
+        {
+            "position": 22,
+            "row_id": "W1-RESULT-SECTION-17-CAREER-NEXT_STEP",
+            "disposition": "candidate_asset",
+            "authority_state": "inactive_draft",
+            "asset_sha256": "aa246317d119a6684c2a1c61d6a46b96236f1146bef296bd2ae55b81826a8624",
+            "asset": {
+                "row_id": "W1-RESULT-SECTION-17-CAREER-NEXT_STEP",
+                "stable_asset_identity": "mbti:result:section:career.next_step",
+                "asset_kind": "canonical_section_family",
+                "section_key": "career.next_step",
+                "authority_field": "sections.career.next_step",
+                "entitlement_level": "free_preview_or_full_by_access_policy",
+                "content": {
+                    "title": "A practical career next step",
+                    "summary_template": "Turn one {{type_code}} work-style signal into a low-risk question, conversation, or experiment.",
+                    "body_template": [
+                        "Select the preference that seems most relevant to a current work decision. Translate it into a need you can observe, such as clearer priorities, more preparation time, faster feedback, or a defined area of autonomy.",
+                        "Then test the need without treating it as a permanent requirement. A useful next step creates evidence about the work, not certainty about a career outcome."
+                    ],
+                    "reflection_prompts": [
+                        "Which current decision needs better evidence?",
+                        "What is the smallest action that could produce that evidence?"
+                    ]
+                },
+                "mobile_desktop_consumption": "same_authority_fields"
+            }
+        },
+        {
+            "position": 23,
+            "row_id": "W1-RESULT-SECTION-18-CAREER-UPGRADE_SUGGESTIONS",
+            "disposition": "preserved_reference",
+            "authority_state": "unchanged_no_write"
+        },
+        {
+            "position": 24,
+            "row_id": "W1-RESULT-SECTION-19-GROWTH-SUMMARY",
+            "disposition": "preserved_reference",
+            "authority_state": "unchanged_no_write"
+        },
+        {
+            "position": 25,
+            "row_id": "W1-RESULT-SECTION-20-GROWTH-STABILITY_CONFIDENCE",
+            "disposition": "candidate_asset",
+            "authority_state": "inactive_draft",
+            "asset_sha256": "55ec96f282c97c80a7d4f3a94a56fdd7e1cedf5d767280bc93baa8ae48a32f74",
+            "asset": {
+                "row_id": "W1-RESULT-SECTION-20-GROWTH-STABILITY_CONFIDENCE",
+                "stable_asset_identity": "mbti:result:section:growth.stability_confidence",
+                "asset_kind": "canonical_section_family",
+                "section_key": "growth.stability_confidence",
+                "authority_field": "sections.growth.stability_confidence",
+                "entitlement_level": "free_preview_or_full_by_access_policy",
+                "content": {
+                    "title": "Stability and confidence",
+                    "summary_template": "Confidence in {{type_code}} should be based on repeated fit across contexts, not on the label alone.",
+                    "body_template": [
+                        "Clearer preferences may remain recognizable over time, while close-call axes may move with role, stress, learning, or the wording of the questions. A later result can differ without making either assessment meaningless.",
+                        "Track examples rather than trying to defend the label. Confidence grows when the same preference explains several independent situations and remains useful for reflection."
+                    ],
+                    "reflection_prompts": [
+                        "Which part of the result has the strongest real-world evidence?",
+                        "Which part should remain an open question?"
+                    ]
+                },
+                "mobile_desktop_consumption": "same_authority_fields"
+            }
+        },
+        {
+            "position": 26,
+            "row_id": "W1-RESULT-SECTION-21-GROWTH-NEXT_ACTIONS",
+            "disposition": "candidate_asset",
+            "authority_state": "inactive_draft",
+            "asset_sha256": "9074215338072e59903863a2bd38030fe5d2318576a08361921f37efd4ec401a",
+            "asset": {
+                "row_id": "W1-RESULT-SECTION-21-GROWTH-NEXT_ACTIONS",
+                "stable_asset_identity": "mbti:result:section:growth.next_actions",
+                "asset_kind": "canonical_section_family",
+                "section_key": "growth.next_actions",
+                "authority_field": "sections.growth.next_actions",
+                "entitlement_level": "free_preview_or_full_by_access_policy",
+                "content": {
+                    "title": "Next actions",
+                    "summary_template": "Use {{type_code}} as a prompt to practice range, not to perfect a type.",
+                    "body_template": [
+                        "Choose one preference that already serves you and one opposite-side behavior that would widen your options. Make both actions specific enough to notice in a normal week.",
+                        "Review what happened without grading your identity. The aim is a more flexible response repertoire, not a stronger attachment to four letters."
+                    ],
+                    "reflection_prompts": [
+                        "Which existing preference will you use deliberately?",
+                        "Which opposite-side behavior will you practice once?"
+                    ]
+                },
+                "mobile_desktop_consumption": "same_authority_fields"
+            }
+        },
+        {
+            "position": 27,
+            "row_id": "W1-RESULT-SECTION-22-GROWTH-WEEKLY_EXPERIMENTS",
+            "disposition": "candidate_asset",
+            "authority_state": "inactive_draft",
+            "asset_sha256": "b7c6bfca86c3991d1cb74800a2721423a1e2cea79d980aad7cd4262921f794a0",
+            "asset": {
+                "row_id": "W1-RESULT-SECTION-22-GROWTH-WEEKLY_EXPERIMENTS",
+                "stable_asset_identity": "mbti:result:section:growth.weekly_experiments",
+                "asset_kind": "canonical_section_family",
+                "section_key": "growth.weekly_experiments",
+                "authority_field": "sections.growth.weekly_experiments",
+                "entitlement_level": "free_preview_or_full_by_access_policy",
+                "content": {
+                    "title": "Weekly experiments",
+                    "summary_template": "A short experiment can show where the {{type_code}} hypothesis is useful and where it needs revision.",
+                    "body_template": [
+                        "Pick one ordinary situation, one changed behavior, and one observable signal. Examples include asking for written context before a meeting, stating a decision rule, scheduling recovery time, or inviting a dissenting view.",
+                        "Run the experiment for one week. Record what became easier, what became harder, and whether another explanation fits the evidence better."
+                    ],
+                    "reflection_prompts": [
+                        "What will you try, and in which situation?",
+                        "What evidence will you record after the experiment?"
+                    ]
+                },
+                "mobile_desktop_consumption": "same_authority_fields"
+            }
+        },
+        {
+            "position": 28,
+            "row_id": "W1-RESULT-SECTION-23-GROWTH-STRENGTHS",
+            "disposition": "preserved_reference",
+            "authority_state": "unchanged_no_write"
+        },
+        {
+            "position": 29,
+            "row_id": "W1-RESULT-SECTION-24-GROWTH-WEAKNESSES",
+            "disposition": "preserved_reference",
+            "authority_state": "unchanged_no_write"
+        },
+        {
+            "position": 30,
+            "row_id": "W1-RESULT-SECTION-25-GROWTH-STRESS_RECOVERY",
+            "disposition": "candidate_asset",
+            "authority_state": "inactive_draft",
+            "asset_sha256": "ce8a060e33a32a16d747d07e9c718d06c2bca700d8de4f5d894640a6fcf8e19d",
+            "asset": {
+                "row_id": "W1-RESULT-SECTION-25-GROWTH-STRESS_RECOVERY",
+                "stable_asset_identity": "mbti:result:section:growth.stress_recovery",
+                "asset_kind": "canonical_section_family",
+                "section_key": "growth.stress_recovery",
+                "authority_field": "sections.growth.stress_recovery",
+                "entitlement_level": "free_preview_or_full_by_access_policy",
+                "content": {
+                    "title": "Stress and recovery",
+                    "summary_template": "Under pressure, familiar {{type_code}} preferences may become narrower, faster, or more rigid.",
+                    "body_template": [
+                        "Treat a changed pattern as a cue to check workload, sleep, uncertainty, conflict, and available support before attributing it to personality. The report is not a health assessment.",
+                        "A practical reset is to reduce the number of open decisions, restore one basic routine, and ask for the kind of context or space that helps you think clearly. Seek qualified support when distress or impairment persists."
+                    ],
+                    "reflection_prompts": [
+                        "What is your earliest sign of overload?",
+                        "What small condition reliably supports recovery?"
+                    ]
+                },
+                "mobile_desktop_consumption": "same_authority_fields"
+            }
+        },
+        {
+            "position": 31,
+            "row_id": "W1-RESULT-SECTION-26-GROWTH-WATCHOUTS",
+            "disposition": "candidate_asset",
+            "authority_state": "inactive_draft",
+            "asset_sha256": "7bd8254f58041c22b89e3d963fb1079bd995f1a884b9c642e08eaa354f4f9f79",
+            "asset": {
+                "row_id": "W1-RESULT-SECTION-26-GROWTH-WATCHOUTS",
+                "stable_asset_identity": "mbti:result:section:growth.watchouts",
+                "asset_kind": "canonical_section_family",
+                "section_key": "growth.watchouts",
+                "authority_field": "sections.growth.watchouts",
+                "entitlement_level": "free_preview_or_full_by_access_policy",
+                "content": {
+                    "title": "Watchouts",
+                    "summary_template": "A useful watchout is an overused preference, not a defect assigned to every {{type_code}} person.",
+                    "body_template": [
+                        "Strengths can become less effective when they are applied automatically. Focus can become isolation, exploration can become delay, analysis can overlook impact, care can avoid necessary disagreement, structure can become rigidity, and flexibility can lose follow-through.",
+                        "Choose the pattern that matches actual evidence. Define an early signal and a balancing action instead of adopting a generic weakness list."
+                    ],
+                    "reflection_prompts": [
+                        "Which strength is easiest for you to overuse?",
+                        "What early signal tells you to change approach?"
+                    ]
+                },
+                "mobile_desktop_consumption": "same_authority_fields"
+            }
+        },
+        {
+            "position": 32,
+            "row_id": "W1-RESULT-SECTION-27-GROWTH-MOTIVATORS",
+            "disposition": "candidate_asset",
+            "authority_state": "inactive_draft",
+            "asset_sha256": "885455b39ef1a13302590ea5c5cdb9f6f33f1237d149aeb16611c5a1abb14b14",
+            "asset": {
+                "row_id": "W1-RESULT-SECTION-27-GROWTH-MOTIVATORS",
+                "stable_asset_identity": "mbti:result:section:growth.motivators",
+                "asset_kind": "canonical_section_family",
+                "section_key": "growth.motivators",
+                "authority_field": "premium_teaser.growth.motivators",
+                "entitlement_level": "premium_full",
+                "content": {
+                    "title": "Growth motivators",
+                    "teaser": "{{type_code}} preferences may point to conditions that make effort easier to sustain, but motivation still depends on meaning, resources, skill, relationships, and current demands.",
+                    "summary_template": "{{type_code}} preferences may point to conditions that make effort easier to sustain, but motivation still depends on meaning, resources, skill, relationships, and current demands.",
+                    "body_template": [
+                        "Look for recurring conditions behind engaged periods: autonomy or connection, concrete progress or possibility, principled challenge or human impact, closure or room to adapt.",
+                        "Use these as design hypotheses. Add one supportive condition to an important task and observe whether initiation, persistence, or quality changes."
+                    ],
+                    "reflection_prompts": [
+                        "Which condition repeatedly supports sustained effort?",
+                        "How can you add a small version of it to this week?"
+                    ]
+                },
+                "mobile_desktop_consumption": "same_authority_fields"
+            }
+        },
+        {
+            "position": 33,
+            "row_id": "W1-RESULT-SECTION-28-GROWTH-DRAINERS",
+            "disposition": "candidate_asset",
+            "authority_state": "inactive_draft",
+            "asset_sha256": "a36adbced5d1ce45af6b5971eb19f483fe5c652f544ee91377ee70a62e284b08",
+            "asset": {
+                "row_id": "W1-RESULT-SECTION-28-GROWTH-DRAINERS",
+                "stable_asset_identity": "mbti:result:section:growth.drainers",
+                "asset_kind": "canonical_section_family",
+                "section_key": "growth.drainers",
+                "authority_field": "premium_teaser.growth.drainers",
+                "entitlement_level": "premium_full",
+                "content": {
+                    "title": "Growth drainers",
+                    "teaser": "{{type_code}} preferences may help identify recurring friction, but they do not prove why energy is low.",
+                    "summary_template": "{{type_code}} preferences may help identify recurring friction, but they do not prove why energy is low.",
+                    "body_template": [
+                        "Separate task friction from workload, health, conflict, unclear expectations, and missing resources. Similar fatigue can have very different causes and may need different responses.",
+                        "Name the specific condition, reduce or redesign one part of it, and review the result. Do not use a type label to normalize sustained overload or avoid necessary support."
+                    ],
+                    "reflection_prompts": [
+                        "Which condition is draining, and what evidence supports that?",
+                        "What can be reduced, clarified, delegated, or recovered from?"
+                    ]
+                },
+                "mobile_desktop_consumption": "same_authority_fields"
+            }
+        },
+        {
+            "position": 34,
+            "row_id": "W1-RESULT-SECTION-29-RELATIONSHIPS-SUMMARY",
+            "disposition": "preserved_reference",
+            "authority_state": "unchanged_no_write"
+        },
+        {
+            "position": 35,
+            "row_id": "W1-RESULT-SECTION-30-RELATIONSHIPS-STRENGTHS",
+            "disposition": "preserved_reference",
+            "authority_state": "unchanged_no_write"
+        },
+        {
+            "position": 36,
+            "row_id": "W1-RESULT-SECTION-31-RELATIONSHIPS-WEAKNESSES",
+            "disposition": "preserved_reference",
+            "authority_state": "unchanged_no_write"
+        },
+        {
+            "position": 37,
+            "row_id": "W1-RESULT-SECTION-32-RELATIONSHIPS-COMMUNICATION_STYLE",
+            "disposition": "candidate_asset",
+            "authority_state": "inactive_draft",
+            "asset_sha256": "32289d85c665cfdf1e2bd80a515e1efff13a9bbd1e374c7363c8f67c2536cddd",
+            "asset": {
+                "row_id": "W1-RESULT-SECTION-32-RELATIONSHIPS-COMMUNICATION_STYLE",
+                "stable_asset_identity": "mbti:result:section:relationships.communication_style",
+                "asset_kind": "canonical_section_family",
+                "section_key": "relationships.communication_style",
+                "authority_field": "sections.relationships.communication_style",
+                "entitlement_level": "free_preview_or_full_by_access_policy",
+                "content": {
+                    "title": "Communication and collaboration",
+                    "summary_template": "{{type_code}} may shape what a person notices first in conversation, but it does not determine empathy, honesty, or compatibility.",
+                    "body_template": [
+                        "Make the communication contract visible: whether the conversation is for listening, exploring, deciding, or planning. State how much context and time you need instead of assuming the other person shares your default.",
+                        "When a message lands poorly, check intention and impact separately. Repair with a concrete restatement or request rather than explaining the problem through type labels."
+                    ],
+                    "reflection_prompts": [
+                        "What do you usually assume without saying?",
+                        "What request would make the next conversation clearer?"
+                    ]
+                },
+                "mobile_desktop_consumption": "same_authority_fields"
+            }
+        },
+        {
+            "position": 38,
+            "row_id": "W1-RESULT-SECTION-33-RELATIONSHIPS-TRY_THIS_WEEK",
+            "disposition": "candidate_asset",
+            "authority_state": "inactive_draft",
+            "asset_sha256": "e23985973b5bfddc6d764e7601c98ed202b51c2335b2cfe160ea251bdbcf89cc",
+            "asset": {
+                "row_id": "W1-RESULT-SECTION-33-RELATIONSHIPS-TRY_THIS_WEEK",
+                "stable_asset_identity": "mbti:result:section:relationships.try_this_week",
+                "asset_kind": "canonical_section_family",
+                "section_key": "relationships.try_this_week",
+                "authority_field": "sections.relationships.try_this_week",
+                "entitlement_level": "free_preview_or_full_by_access_policy",
+                "content": {
+                    "title": "Try this week",
+                    "summary_template": "Test one small communication adjustment related to the {{type_code}} hypothesis.",
+                    "body_template": [
+                        "Choose a low-stakes conversation. Before it begins, state the purpose and ask what would make the exchange useful for the other person.",
+                        "Afterward, note whether clarity, connection, or decision quality improved. Keep the practice only if it helps the relationship in context."
+                    ],
+                    "reflection_prompts": [
+                        "Which conversation is suitable for a small experiment?",
+                        "What will you ask instead of assume?"
+                    ]
+                },
+                "mobile_desktop_consumption": "same_authority_fields"
+            }
+        },
+        {
+            "position": 39,
+            "row_id": "W1-RESULT-SECTION-34-RELATIONSHIPS-REL_ADVANTAGES",
+            "disposition": "candidate_asset",
+            "authority_state": "inactive_draft",
+            "asset_sha256": "8195bc0d314b50a883c1547ff4b0bbc4dac1ddc03ac1c4116afeb2d9bcf917a6",
+            "asset": {
+                "row_id": "W1-RESULT-SECTION-34-RELATIONSHIPS-REL_ADVANTAGES",
+                "stable_asset_identity": "mbti:result:section:relationships.rel_advantages",
+                "asset_kind": "canonical_section_family",
+                "section_key": "relationships.rel_advantages",
+                "authority_field": "premium_teaser.relationships.rel_advantages",
+                "entitlement_level": "premium_full",
+                "content": {
+                    "title": "Relationship advantages",
+                    "teaser": "{{type_code}} preferences may support certain relationship contributions when they are used with attention to the other person's needs.",
+                    "summary_template": "{{type_code}} preferences may support certain relationship contributions when they are used with attention to the other person's needs.",
+                    "body_template": [
+                        "Potential contributions can include focused presence, shared possibility, practical care, principled candor, dependable structure, or adaptive responsiveness. None is guaranteed by type.",
+                        "Identify the contribution supported by recent examples and ask whether it is experienced as helpful. Feedback is stronger evidence than a flattering description."
+                    ],
+                    "reflection_prompts": [
+                        "What contribution do others actually experience from you?",
+                        "How can you offer it without overusing it?"
+                    ]
+                },
+                "mobile_desktop_consumption": "same_authority_fields"
+            }
+        },
+        {
+            "position": 40,
+            "row_id": "W1-RESULT-SECTION-35-RELATIONSHIPS-REL_RISKS",
+            "disposition": "candidate_asset",
+            "authority_state": "inactive_draft",
+            "asset_sha256": "d94c289140847a21607ec2c9b5fb59103459478ed8640bf60acde68dfa39b73f",
+            "asset": {
+                "row_id": "W1-RESULT-SECTION-35-RELATIONSHIPS-REL_RISKS",
+                "stable_asset_identity": "mbti:result:section:relationships.rel_risks",
+                "asset_kind": "canonical_section_family",
+                "section_key": "relationships.rel_risks",
+                "authority_field": "premium_teaser.relationships.rel_risks",
+                "entitlement_level": "premium_full",
+                "content": {
+                    "title": "Relationship risks",
+                    "teaser": "Relationship friction is not predetermined by {{type_code}}; a preference may only suggest where misreadings are worth checking.",
+                    "summary_template": "Relationship friction is not predetermined by {{type_code}}; a preference may only suggest where misreadings are worth checking.",
+                    "body_template": [
+                        "Common process risks include withdrawing without explanation, expanding possibilities after others expect closure, debating when reassurance is needed, preserving harmony instead of naming a boundary, overplanning, or leaving commitments implicit.",
+                        "Use only the pattern supported by evidence. Repair it with a specific signal, request, or agreement; do not assign motives or compatibility from type."
+                    ],
+                    "reflection_prompts": [
+                        "Which repeated misreading has concrete evidence?",
+                        "What agreement could reduce that friction?"
+                    ]
+                },
+                "mobile_desktop_consumption": "same_authority_fields"
+            }
+        },
+        {
+            "position": 41,
+            "row_id": "W1-RESULT-SURFACE-01-SHARE-PUBLIC-SUMMARY",
+            "disposition": "preserved_reference",
+            "authority_state": "unchanged_no_write"
+        },
+        {
+            "position": 42,
+            "row_id": "W1-RESULT-SURFACE-02-PDF",
+            "disposition": "w9_fixture_target",
+            "authority_state": "unchanged_no_write"
+        },
+        {
+            "position": 43,
+            "row_id": "W1-RESULT-SURFACE-03-HISTORY",
+            "disposition": "preserved_reference",
+            "authority_state": "unchanged_no_write"
+        },
+        {
+            "position": 44,
+            "row_id": "W1-RESULT-SURFACE-04-RESULT-RENDERER-LABELS",
+            "disposition": "preserved_reference",
+            "authority_state": "unchanged_no_write"
+        },
+        {
+            "position": 45,
+            "row_id": "W1-RESULT-SURFACE-05-LIFECYCLE-LABELS",
+            "disposition": "preserved_reference",
+            "authority_state": "unchanged_no_write"
+        },
+        {
+            "position": 46,
+            "row_id": "W1-RESULT-SURFACE-06-SHARE-RENDERER-LABELS",
+            "disposition": "preserved_reference",
+            "authority_state": "unchanged_no_write"
+        }
+    ]
+}
