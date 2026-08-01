@@ -103367,9 +103367,9 @@
       "EN-PARITY-W9-W4-RIASEC-INDEPENDENT-QA-02",
       "CONTROL-W4-RIASEC-QA-PASS-01"
     ],
-    "status": "local_verified",
+    "status": "github_checks_pending",
     "commit_sha": "8a49f99bd",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3489",
     "checks": {
       "preflight": {
         "status": "passed",
@@ -103378,6 +103378,10 @@
       "local_validation": {
         "status": "passed",
         "evidence": "Focused PHPUnit passed 5 tests / 42 assertions; Pint, route:list, YAML/JSON parsing, payload/aggregate SHA recomputation, deterministic dual dry-run, redacted receipt checks, diff checks, and exact scope validation passed. No write path was executed."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": "PR #3489 opened from exact scoped branch; required GitHub checks and review remain mandatory."
       }
     },
     "failure_reason": null,
@@ -103401,8 +103405,13 @@
         "at": "2026-08-02T05:58:59+08:00",
         "status": "local_verified",
         "note": "Implementation commit 8a49f99bd passed all registered focused local validation. The receipt confirms the exact f3f246 package, 14 logical groups, 1550 atomic rows, 15 pairs, 3/2/2 safe surfaces, all-false permissions, and W9 report f2c0f838 without CMS, database, runtime, or release writes."
+      },
+      {
+        "at": "2026-08-02T06:00:05+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #3489 from the locally verified exact-package dry-run branch. Required checks, review, squash merge, cleanup, and separate CONTROL dry_run_ready acceptance remain pending."
       }
     ],
-    "updated_at": "2026-08-02T05:58:59+08:00"
+    "updated_at": "2026-08-02T06:00:05+08:00"
   }
 }
