@@ -48247,3 +48247,63 @@ prs:
     deploy_allowed: false
     content_authority: backend exact-package promotion executor; fap-web snapshots remain non-executable evidence
     repository_rule_impact: exact-package content goals continuously authorize trusted CMS promotion after automated gates; infrastructure, discoverability, and destructive operations remain separately controlled
+
+  - id: EN-PARITY-W4-RIASEC-IMPORTER-DRY-RUN-01
+    repo: fap-api
+    base: main
+    branch: codex/en-parity-w4-riasec-importer-dry-run-01
+    title: "EN-PARITY-W4-RIASEC-IMPORTER-DRY-RUN-01: add exact-package RIASEC dry-run importer"
+    status: in_progress
+    depends_on:
+      - EN-PARITY-W4-RIASEC-PACKAGE-REFREEZE-01
+      - EN-PARITY-W9-W4-RIASEC-INDEPENDENT-QA-02
+      - CONTROL-W4-RIASEC-QA-PASS-01
+    train_scope: en_parity_w4_riasec_exact_package_dry_run_importer
+    scope:
+      - Snapshot and validate the exact CONTROL qa_pass W4 RIASEC English package without a symlinked backend copy.
+      - Add a deterministic no-write command that proves 14 logical groups, 1550 atomic rows, 15 normalized pairs, 3/2/2 safe surfaces, and the exact independent W9 evidence chain.
+      - Emit only redacted future inactive-draft mapping plans; no existing RIASEC registry, content pack, API, score, result, or public surface may change.
+    allowed_paths:
+      - backend/content_assets/en-content-parity/W4-riasec/scope_manifest.json
+      - backend/content_assets/en-content-parity/W4-riasec/assets.jsonl
+      - backend/content_assets/en-content-parity/W4-riasec/translation_map.json
+      - backend/content_assets/en-content-parity/W4-riasec/source_ledger.json
+      - backend/content_assets/en-content-parity/W4-riasec/claim_boundary_report.json
+      - backend/content_assets/en-content-parity/W4-riasec/editorial_review.json
+      - backend/content_assets/en-content-parity/W4-riasec/dry_run_readiness.json
+      - backend/content_assets/en-content-parity/W4-riasec/handoff.md
+      - backend/content_assets/en-content-parity/W4-riasec/external_package_evidence.json
+      - backend/app/Console/Commands/ImportRiasecEnglishPackage.php
+      - backend/app/Services/ContentImport/RiasecEnglishPackageImporter.php
+      - backend/tests/Feature/ContentImport/RiasecEnglishPackageImporterTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/AGENTS.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Write CMS, database, content authority, runtime, API, slot-registry, score, result, import, activation, publication, or SEO state.
+      - Read private attempt, report, score, token, order, payment, user, or PDF URL data; expose reader copy or local paths in a receipt.
+      - Modify fap-web control/W9 evidence, CMS schema, migration, route, deployment, sitemap, llms, indexability, or Search Channel state.
+      - Treat dry-run validation as dry_run_ready, draft import authorization, editorial approval, publication, or release approval.
+    validation:
+      - cd backend && php artisan test tests/Feature/ContentImport/RiasecEnglishPackageImporterTest.php --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=riasec_english_exact_package_dry_run --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/ImportRiasecEnglishPackage.php app/Services/ContentImport/RiasecEnglishPackageImporter.php tests/Feature/ContentImport/RiasecEnglishPackageImporterTest.php
+      - cd backend && php artisan content:import-riasec-english-package --package-sha=f3f2463fadd827e586d39d42ecd9e6418b7cb7f36a0697eb06dcead8292f54eb --dry-run --json
+      - cd backend && php artisan route:list --path=api --except-vendor
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: exact package dry-run planner only; backend RIASEC runtime authority unchanged
+    repository_rule_impact: adds an exact-SHA no-write RIASEC importer boundary; all future authority writes and release gates remain separate

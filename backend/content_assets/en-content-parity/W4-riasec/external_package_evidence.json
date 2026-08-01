@@ -1,0 +1,41 @@
+{
+  "schema_version": "fermatmind.en_content_parity_external_package_evidence.v1",
+  "lane_id": "W4",
+  "package_id": "EN-PARITY-W4-RIASEC-PACKAGE-REFREEZE-01",
+  "producer": {
+    "source_repository": "fap-web",
+    "source_commit_sha": "d16333b2dc234eb2e1d08baa237346ca7d271274",
+    "source_package_path": "generated/en-content-parity/W4-riasec/",
+    "package_sha256": "f3f2463fadd827e586d39d42ecd9e6418b7cb7f36a0697eb06dcead8292f54eb"
+  },
+  "immutable_payloads": [
+    {"path": "scope_manifest.json", "sha256": "6cd7f2332c1f4ce46c898ec769d017b518c974f0a2e7155461e418587b2d96b3"},
+    {"path": "assets.jsonl", "sha256": "eb0a5d702e099164622f4b5e3056a3269d7f79efda3cf0d0f4d4974bab2953ca"},
+    {"path": "translation_map.json", "sha256": "a57d6781ce0d6751668181b10a66ff111abba1f78da310852273beafc60e0294"},
+    {"path": "source_ledger.json", "sha256": "f6c69257f9ab125c1b4885aa47aca326a76b9ec3a9c1ba603e5b7e0b191d898b"},
+    {"path": "claim_boundary_report.json", "sha256": "715ffd948eb71759f10f6f4691b3a27820982cfd00b052f57e4df491e348e726"},
+    {"path": "editorial_review.json", "sha256": "b8e39eebd501e727fd08babbd9367548ba5417a0820c134946da9eef7409c8a5"},
+    {"path": "dry_run_readiness.json", "sha256": "a68b36968035e08900be4d7adfe1647641b08f91e347b19c734b6bb106a38ccf"},
+    {"path": "handoff.md", "sha256": "faf3d0195f7672befdba1009ac7acd498acf949af034bb9738359c5c709c8577"}
+  ],
+  "control_acceptance": {
+    "source_repository": "fap-web",
+    "source_commit_sha": "588a32dcfb48d4c3474010c331ed488b34fdda0d",
+    "master_path": "docs/seo/generated/en-content-parity-control-master.v1.json",
+    "lane_id": "W4",
+    "status": "qa_pass",
+    "package_sha256": "f3f2463fadd827e586d39d42ecd9e6418b7cb7f36a0697eb06dcead8292f54eb",
+    "qa_report_ref": "generated/en-content-parity/W9-independent-qa/riasec/w4-riasec-f3f2463f/independent_qa_report.json",
+    "qa_report_sha256": "f2c0f83871ecae1ed76bd742f0ddcf20de71f7980c012bc5cd1affe72dd46882",
+    "w9_aggregate_sha256": "b1472c21370893c905f12492a7b14995e25a85c46da70afadf269526000c2ff7"
+  },
+  "permissions": {
+    "cms_write_authorized": false,
+    "staging_write_authorized": false,
+    "production_import_authorized": false,
+    "public_release_authorized": false,
+    "seo_runtime_release_authorized": false,
+    "search_submission_authorized": false,
+    "master_manifest_write_authorized": false
+  }
+}
