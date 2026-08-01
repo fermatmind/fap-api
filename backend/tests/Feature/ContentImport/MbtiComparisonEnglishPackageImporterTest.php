@@ -15,6 +15,25 @@ final class MbtiComparisonEnglishPackageImporterTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_importer_is_bound_to_the_final_independently_passed_w9_correction_package(): void
+    {
+        self::assertSame(
+            'deecc8175fb43ba3730d6513b496a0ab6834459108e3b24e25550bbf40e001a2',
+            MbtiComparisonEnglishPackageImporter::PACKAGE_SHA256,
+        );
+        self::assertSame(
+            base_path('content_assets/en-content-parity/W1-mbti/comparisons/w9-correction-deecc817'),
+            MbtiComparisonEnglishPackageImporter::defaultPackageDirectory(),
+        );
+
+        $manifestPath = MbtiComparisonEnglishPackageImporter::defaultPackageDirectory().'/package_manifest.json';
+        $manifest = json_decode((string) File::get($manifestPath), true, 512, JSON_THROW_ON_ERROR);
+
+        self::assertSame(MbtiComparisonEnglishPackageImporter::PACKAGE_ID, $manifest['package_id']);
+        self::assertSame(MbtiComparisonEnglishPackageImporter::PACKAGE_SHA256, $manifest['package_sha256']);
+        self::assertSame(MbtiComparisonEnglishPackageImporter::MANIFEST_SHA256, hash_file('sha256', $manifestPath));
+    }
+
     public function test_exact_package_produces_seven_redacted_deterministic_locale_pair_plans_without_writes(): void
     {
         $exitCode = $this->runDryRun();
