@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Tests\Feature\Commerce;
 
 use App\Models\Attempt;
+use App\Models\Order;
+use App\Models\PaymentAttempt;
 use App\Models\Result;
 use App\Services\Commerce\AppleIapPaymentService;
 use App\Services\Commerce\PaymentGateway\AppleIapGateway;
@@ -117,6 +119,35 @@ final class AppleIapPaymentContractTest extends TestCase
         );
         $this->assertSame($signData['outTradeNo'], $duplicateSignData['outTradeNo']);
         $this->assertSame(1, DB::table('payment_attempts')->where('order_no', $orderNo)->count());
+
+        DB::table('orders')->where('order_no', $orderNo)->update([
+            'payment_state' => Order::PAYMENT_STATE_PAID,
+            'status' => Order::STATUS_PAID,
+        ]);
+        DB::table('payment_attempts')->where('order_no', $orderNo)->update([
+            'state' => PaymentAttempt::STATE_PAID,
+        ]);
+        $this->withHeaders($headers)
+            ->postJson('/api/v0.3/orders/apple_iap', $payload)
+            ->assertOk();
+        $this->assertSame(
+            Order::PAYMENT_STATE_PAID,
+            DB::table('orders')->where('order_no', $orderNo)->value('payment_state')
+        );
+        $this->assertSame(Order::STATUS_PAID, DB::table('orders')->where('order_no', $orderNo)->value('status'));
+
+        DB::table('orders')->where('order_no', $orderNo)->update([
+            'payment_state' => Order::PAYMENT_STATE_REFUNDED,
+            'status' => Order::STATUS_REFUNDED,
+        ]);
+        $this->withHeaders($headers)
+            ->postJson('/api/v0.3/orders/apple_iap', $payload)
+            ->assertOk();
+        $this->assertSame(
+            Order::PAYMENT_STATE_REFUNDED,
+            DB::table('orders')->where('order_no', $orderNo)->value('payment_state')
+        );
+        $this->assertSame(Order::STATUS_REFUNDED, DB::table('orders')->where('order_no', $orderNo)->value('status'));
     }
 
     public function test_apple_channel_callback_and_query_are_verified_idempotent_and_refund_revokes_grant(): void

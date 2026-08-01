@@ -459,17 +459,31 @@ final class WechatMiniVirtualPaymentService
                     'channel' => $provider,
                 ],
             ]);
-            DB::table('orders')
-                ->where('order_no', $orderNo)
-                ->where('org_id', $orgId)
-                ->update([
-                    'external_trade_no' => $externalOrderNo,
-                    'channel' => 'wechat_miniapp',
-                    'provider_app' => (string) $config['app_id'],
-                    'payment_state' => Order::PAYMENT_STATE_PENDING,
-                    'status' => Order::STATUS_PENDING,
-                    'updated_at' => now(),
-                ]);
+            $terminalPaymentStates = [
+                Order::PAYMENT_STATE_PAID,
+                Order::PAYMENT_STATE_FAILED,
+                Order::PAYMENT_STATE_CANCELED,
+                Order::PAYMENT_STATE_EXPIRED,
+                Order::PAYMENT_STATE_REFUNDED,
+            ];
+            if (! in_array($this->orders->resolvedPaymentState($lockedOrder), $terminalPaymentStates, true)) {
+                DB::table('orders')
+                    ->where('order_no', $orderNo)
+                    ->where('org_id', $orgId)
+                    ->update([
+                        'external_trade_no' => $externalOrderNo,
+                        'updated_at' => now(),
+                    ]);
+                $pending = $this->orders->markPaymentPending(
+                    $orderNo,
+                    $orgId,
+                    'wechat_miniapp',
+                    (string) $config['app_id']
+                );
+                if (($pending['ok'] ?? false) !== true) {
+                    return $pending;
+                }
+            }
 
             return ['ok' => true, 'external_order_no' => $externalOrderNo];
         });
