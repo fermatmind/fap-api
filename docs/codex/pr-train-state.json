@@ -9,8 +9,8 @@
       "API-UNLOCK-01",
       "API-VPAY-01"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": null,
+    "status": "github_checks_pending",
+    "commit_sha": "2f3de11e4060e233665700066839fd0fc00005c8",
     "pr_url": null,
     "checks": {
       "official_contract": {
@@ -60,9 +60,14 @@
         "at": "2026-08-01T13:15:09+08:00",
         "status": "local_validation_passed",
         "note": "All declared local checks pass. The mock/contract provider verifies WeChat callback signatures and query responses, Apple order type and production environment, product/amount/openid/order ownership, stable event idempotency, restore, refund/revoke, and secret redaction while ordinary WeChat virtual payment remains green. Complete ci_verify_mbti.sh exits 0; generated compiled artifacts were restored. Provider activation remains externally blocked and fail-closed."
+      },
+      {
+        "at": "2026-08-01T13:17:49+08:00",
+        "status": "github_checks_pending",
+        "note": "Committed the exact 19-path implementation as 2f3de11e4060e233665700066839fd0fc00005c8 after staged diff checks. The committed branch-diff runtime gate passes 2 tests / 8 assertions. A metadata-only commit will record this immutable implementation head before push and PR creation; required GitHub checks remain mandatory."
       }
     ],
-    "updated_at": "2026-08-01T13:15:09+08:00"
+    "updated_at": "2026-08-01T13:17:49+08:00"
   },
   "API-GIFT-01": {
     "id": "API-GIFT-01",
