@@ -102676,9 +102676,9 @@
     "depends_on": [
       "EN-PARITY-W1-MBTI-COMPARISON-IMPORTER-01"
     ],
-    "status": "local_verified",
+    "status": "github_checks_pending",
     "commit_sha": "2e7a621b9a48658e726c9abc32b9202e8e2f8cb2",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3468",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -102734,8 +102734,13 @@
         "at": "2026-08-01T09:18:00Z",
         "status": "local_verified",
         "note": "Implemented exact-approval-gated transactional import for seven org-0 English comparison drafts. Exact package and approval files are bounded, single-link, descriptor-stable reads; public/indexability flags remain closed; existing public collisions roll back the cohort; replay is idempotent. Focused validation, local SQLite write/readback/replay, Pint, route inventory, parsers, diff, exact seven-path scope, and PR05 merge reconciliation all passed."
+      },
+      {
+        "at": "2026-08-01T09:22:00Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the scoped branch and opened PR #3468. Required GitHub checks, exact-head review, mergeability, and post-merge cleanup remain pending; staging deployment is not awaited."
       }
     ],
-    "updated_at": "2026-08-01T09:18:00Z"
+    "updated_at": "2026-08-01T09:22:00Z"
   }
 }
