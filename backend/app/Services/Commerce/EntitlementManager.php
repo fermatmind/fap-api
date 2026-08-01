@@ -81,7 +81,8 @@ class EntitlementManager
         ?string $scopeOverride = null,
         ?string $expiresAt = null,
         ?array $modules = null,
-        ?array $metaPatch = null
+        ?array $metaPatch = null,
+        bool $preserveExistingUnlockSource = false,
     ): array {
         $benefitCode = strtoupper(trim($benefitCode));
         $attemptId = trim($attemptId);
@@ -131,7 +132,14 @@ class EntitlementManager
             }
 
             if (is_array($metaPatch) && $metaPatch !== []) {
-                $meta = array_merge($meta, $metaPatch);
+                $safeMetaPatch = $metaPatch;
+                $existingSource = ReportAccess::normalizeThreeChannelUnlockSource((string) (
+                    $meta['unlock_source'] ?? $meta['granted_via'] ?? ''
+                ));
+                if ($preserveExistingUnlockSource && $existingSource !== ReportAccess::UNLOCK_SOURCE_NONE) {
+                    unset($safeMetaPatch['unlock_source'], $safeMetaPatch['granted_via']);
+                }
+                $meta = array_merge($meta, $safeMetaPatch);
                 $metaChanged = true;
             }
 

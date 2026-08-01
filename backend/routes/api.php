@@ -5,6 +5,7 @@ use App\Http\Controllers\API\V0_3\AttemptInviteUnlockController;
 use App\Http\Controllers\API\V0_3\AttemptProgressController;
 use App\Http\Controllers\API\V0_3\AttemptQuestionDeliveryController;
 use App\Http\Controllers\API\V0_3\AttemptReadController;
+use App\Http\Controllers\API\V0_3\AttemptRewardedAdController;
 use App\Http\Controllers\API\V0_3\AttemptWriteController;
 use App\Http\Controllers\API\V0_3\AuthGuestController as AuthGuestV03Controller;
 use App\Http\Controllers\API\V0_3\AuthPhoneController as AuthPhoneV03Controller;
@@ -346,6 +347,18 @@ Route::prefix('v0.3')->middleware([
                 ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id'])
                 ->defaults('public_realm', true)
                 ->name('api.v0_3.attempts.invite_unlocks.show');
+            Route::post('/attempts/{id}/rewarded-ad-sessions', [AttemptRewardedAdController::class, 'store'])
+                ->middleware(['throttle:api_attempt_submit', \App\Http\Middleware\FmTokenAuth::class, 'uuid:id'])
+                ->defaults('public_realm', true)
+                ->name('api.v0_3.attempts.rewarded_ad_sessions.store');
+            Route::get('/attempts/{id}/rewarded-ad-sessions/{session_id}', [AttemptRewardedAdController::class, 'show'])
+                ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id', 'uuid:session_id'])
+                ->defaults('public_realm', true)
+                ->name('api.v0_3.attempts.rewarded_ad_sessions.show');
+            Route::post('/attempts/{id}/rewarded-ad-sessions/{session_id}/complete', [AttemptRewardedAdController::class, 'complete'])
+                ->middleware(['throttle:api_attempt_submit', \App\Http\Middleware\FmTokenAuth::class, 'uuid:id', 'uuid:session_id'])
+                ->defaults('public_realm', true)
+                ->name('api.v0_3.attempts.rewarded_ad_sessions.complete');
             Route::post('/attempts/{id}/gift-requests', [ReportGiftController::class, 'store'])
                 ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id'])
                 ->defaults('public_realm', true)

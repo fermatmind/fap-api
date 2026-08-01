@@ -1881,6 +1881,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_rewarded_ad_unlock_contract_files(): void
+    {
+        $changed = [
+            'backend/routes/api.php',
+            'backend/app/Http/Controllers/API/V0_3/AttemptRewardedAdController.php',
+            'backend/app/Services/Commerce/RewardedAdUnlockService.php',
+            'backend/app/Services/Commerce/EntitlementManager.php',
+            'backend/tests/Feature/Commerce/RewardedAdUnlockContractTest.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_free_full_report_mode_feature_flag_files(): void
     {
         $changed = [
@@ -8596,6 +8609,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isRewardedAdUnlockContractFile($file)) {
+                continue;
+            }
+
             if ($this->isFreeFullReportModeFeatureFlagFile($file)) {
                 continue;
             }
@@ -11334,6 +11351,17 @@ DIFF;
             'backend/app/Services/Commerce/ReportUnlockOptionResolver.php',
             'backend/app/Services/Report/InviteUnlockSummaryBuilder.php',
             'backend/database/migrations/2026_07_30_235900_create_report_gift_requests_table.php',
+        ], true);
+    }
+
+    private function isRewardedAdUnlockContractFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/routes/api.php',
+            'backend/app/Http/Controllers/API/V0_3/AttemptRewardedAdController.php',
+            'backend/app/Services/Commerce/RewardedAdUnlockService.php',
+            'backend/app/Services/Commerce/EntitlementManager.php',
+            'backend/tests/Feature/Commerce/RewardedAdUnlockContractTest.php',
         ], true);
     }
 

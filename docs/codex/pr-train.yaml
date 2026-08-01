@@ -333,6 +333,56 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: API-AD-01
+    repo: fap-api
+    base: main
+    branch: codex/api-ad-01-rewarded-unlock
+    title: "API-AD-01: add residual-risk rewarded-ad report unlock"
+    status: implementation_in_progress
+    depends_on:
+      - API-UNLOCK-01
+    train_scope: rewarded_ad_report_unlock
+    scope:
+      - Add short-lived, actor-bound rewarded-ad unlock sessions for locked, result-ready MBTI reports only.
+      - Accept only the explicitly approved client isEnded residual-risk signal, bound to one nonce, attempt, actor, and ad unit with expiry, rate limiting, replay protection, and idempotent entitlement grant.
+      - Reuse FmTokenAuth, attempt ownership, benefit_grants, EntitlementManager, and unified access projection; no second order, payment, or entitlement ledger is introduced.
+      - Keep provider availability disabled by default and IQ hard-disabled.
+    allowed_paths:
+      - backend/routes/api.php
+      - backend/app/Http/Controllers/API/V0_3/AttemptRewardedAdController.php
+      - backend/app/Services/Commerce/RewardedAdUnlockService.php
+      - backend/app/Services/Commerce/EntitlementManager.php
+      - backend/docs/contracts/openapi.snapshot.json
+      - backend/tests/Feature/Commerce/RewardedAdUnlockContractTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add a migration, new database table, payment order, payment provider, client receipt protocol, frontend code, CMS data, production secret, or provider activation.
+      - Represent the client isEnded signal as a platform receipt or server-side platform verification.
+      - Permit IQ, a cross-attempt or cross-actor session replay, an incomplete video completion, duplicate grants, deploy, publish, upload the mini-program, create production orders, or perform real payments.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RewardedAdUnlockContractTest --no-ansi --display-warnings
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_rewarded_ad_unlock_contract_files|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi
+      - cd backend && bash scripts/export_openapi.sh --check
+      - cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_3/AttemptRewardedAdController.php app/Services/Commerce/RewardedAdUnlockService.php app/Services/Commerce/EntitlementManager.php tests/Feature/Commerce/RewardedAdUnlockContractTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php routes/api.php
+      - cd backend && php artisan route:list --path=api/v0.3/attempts --except-vendor
+      - cd backend && composer validate --strict
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: API-GIFT-01
     repo: fap-api
     base: main

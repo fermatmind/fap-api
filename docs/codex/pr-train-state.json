@@ -1,4 +1,54 @@
 {
+  "API-AD-01": {
+    "id": "API-AD-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/api-ad-01-rewarded-unlock",
+    "title": "API-AD-01: add residual-risk rewarded-ad report unlock",
+    "depends_on": ["API-UNLOCK-01"],
+    "status": "implementation_in_progress",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization_boundary": {
+        "status": "passed",
+        "evidence": "The operator explicitly accepted the residual risk of using only the client isEnded completion signal. This is not represented as a platform receipt or server-side platform verification."
+      },
+      "official_platform_evidence": {
+        "status": "partial",
+        "evidence": "The operator-provided rewarded-video API material documents only client onClose(res).isEnded. No platform server receipt, callback, signature, query, delivery, or anti-replay protocol was supplied."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-08-01T17:34:00+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started from exact origin/main a202c8175ad0cfda59585d9adb20e1b2d8b929a2 in an isolated worktree. Fixed order: routes added; migration N/A because short-lived session state uses cache; FmTokenAuth N/A because existing middleware and ownership checks are reused; controller/service in progress; scripts/CI N/A. Provider remains unavailable by default. No production configuration, platform mutation, secret, deployment, upload, order, or payment occurred."
+      },
+      {
+        "at": "2026-08-01T17:58:11+08:00",
+        "status": "local_validation_passed",
+        "note": "Focused rewarded-ad contract tests passed 5 tests / 44 assertions; existing unlock-option and report-access regression tests passed 23 tests / 273 assertions; OpenAPI passed 2 tests / 6 assertions; the exact runtime-freeze gate passed 2 tests / 5 assertions; scoped Pint, route inventory, OpenAPI snapshot check, YAML/JSON parsing, diff check, and exact nine-path scope validation passed. The full ci_verify_mbti.sh verifier completed using isolated SQLite; its transient BIG5 compiled artifacts were restored and excluded from scope. Composer validate --strict still reports the repository's pre-existing missing package name and description publish metadata. No migration, provider activation, deployment, platform mutation, production order, or payment occurred."
+      }
+    ],
+    "updated_at": "2026-08-01T17:58:11+08:00"
+  },
   "API-IAP-01": {
     "id": "API-IAP-01",
     "repo": "fap-api",
