@@ -48024,3 +48024,51 @@ prs:
     deploy_allowed: false
     content_authority: unregistered MBTI.global.en.default inactive draft file only; runtime authority unchanged
     repository_rule_impact: adds exact-approval-bound inactive result authority materialization without activation or discoverability
+
+  - id: EN-PARITY-W4-RIASEC-RUNTIME-LOCALE-01
+    repo: fap-api
+    base: main
+    branch: codex/en-parity-w4-riasec-runtime-locale-01
+    title: "EN-PARITY-W4-RIASEC-RUNTIME-LOCALE-01 add locale-aware backend RIASEC content resolution"
+    status: in_progress
+    depends_on:
+      - EN-PARITY-W4-RIASEC-INVENTORY-01
+    train_scope: riasec_locale_aware_registry_projection_contract
+    scope:
+      - Bind RIASEC deep, activity, feedback, and lifecycle runtime selection to the requested locale.
+      - Omit unavailable English content and reject draft_human_review_required lifecycle assets at runtime.
+      - Preserve zh-CN behavior and scoring, question-pack, CMS, database, and production state.
+    allowed_paths:
+      - backend/app/Services/Riasec/RiasecDeepCopySlotRegistry.php
+      - backend/app/Services/Riasec/RiasecPublicProjectionService.php
+      - backend/app/Services/Riasec/RiasecActivityExplorerService.php
+      - backend/app/Services/Riasec/RiasecExplorationFeedbackOverlayService.php
+      - backend/app/Services/Riasec/RiasecLifecycleCopyService.php
+      - backend/tests/Unit/Services/Riasec/*Locale*Test.php
+      - backend/tests/Unit/Services/Riasec/RiasecFullContentFixtureMatrixTest.php
+      - backend/docs/riasec/*english-parity*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add English reader copy, frontend fallback, CMS/database/import/production write, or deploy action.
+      - Change RIASEC scoring, question packs, form measurement, or 60Q/140Q comparison policy.
+      - Expose private attempts, raw scores, reports, payments, tokens, or PDF URLs.
+    validation:
+      - cd backend && php artisan test tests/Unit/Services/Riasec --no-ansi
+      - cd backend && ./vendor/bin/pint --test
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: backend RIASEC authority; English draft assets remain non-runtime until separately reviewed
+    repository_rule_impact: adds fail-closed locale selection; no authority transfer or publication state change

@@ -23,10 +23,11 @@ final class RiasecExplorationFeedbackOverlayService
     /**
      * @return array<string,mixed>
      */
-    public function build(Result $result, array $projectionV2, bool $snapshotBound): array
+    public function build(Result $result, array $projectionV2, bool $snapshotBound, string $locale = 'zh-CN'): array
     {
         $payload = is_array($result->result_json ?? null) ? $result->result_json : [];
         $topCode = (string) data_get($projectionV2, 'holland_code.code', '');
+        $normalizedLocale = str_starts_with(strtolower($locale), 'zh') ? 'zh-CN' : 'en';
 
         return [
             'schema_version' => self::SCHEMA_VERSION,
@@ -89,16 +90,21 @@ final class RiasecExplorationFeedbackOverlayService
                 'form_code' => (string) ($payload['form_code'] ?? data_get($projectionV2, 'form.form_code', '')),
                 'score_space_version' => (string) ($payload['score_space_version'] ?? data_get($projectionV2, 'form.score_space_version', '')),
             ],
-            'action_lab_v1' => $this->actionLabPayload(),
-            'next_exploration_nodes_v1' => $this->nextExplorationNodesPayload($topCode),
+            'locale' => $normalizedLocale,
+            'action_lab_v1' => $this->actionLabPayload($normalizedLocale),
+            'next_exploration_nodes_v1' => $this->nextExplorationNodesPayload($topCode, $normalizedLocale),
         ];
     }
 
     /**
      * @return array<string,mixed>
      */
-    private function actionLabPayload(): array
+    private function actionLabPayload(string $locale): array
     {
+        if ($locale === 'en') {
+            return $this->unavailableLocalePayload('riasec.feedback_action_lab_payload.v1');
+        }
+
         $rows = $this->feedbackActionRows();
 
         return [
@@ -163,8 +169,12 @@ final class RiasecExplorationFeedbackOverlayService
     /**
      * @return array<string,mixed>
      */
-    private function nextExplorationNodesPayload(string $topCode): array
+    private function nextExplorationNodesPayload(string $topCode, string $locale): array
     {
+        if ($locale === 'en') {
+            return $this->unavailableLocalePayload('riasec.next_exploration_nodes_payload.v1');
+        }
+
         $rows = $this->nextExplorationNodeRows();
 
         return [
@@ -183,6 +193,24 @@ final class RiasecExplorationFeedbackOverlayService
             'creates_career_match' => false,
             'share_pdf_history_measured_payload_mutation_allowed' => false,
             'nodes' => $this->starterNextExplorationNodes($rows, $topCode),
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function unavailableLocalePayload(string $schemaVersion): array
+    {
+        return [
+            'schema_version' => $schemaVersion,
+            'content_authority' => 'backend_riasec_locale_gate',
+            'content_version' => 'en.pending_human_review',
+            'status' => 'unavailable',
+            'reason' => 'locale_content_unavailable',
+            'missing_content_behavior' => 'omit_module_fail_closed',
+            'frontend_fallback_allowed' => false,
+            'starter_actions' => [],
+            'nodes' => [],
         ];
     }
 

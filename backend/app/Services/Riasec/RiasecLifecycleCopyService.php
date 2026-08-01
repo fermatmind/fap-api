@@ -136,6 +136,35 @@ final class RiasecLifecycleCopyService
     }
 
     /**
+     * Runtime selection is stricter than catalog inspection: English assets
+     * must have an approved review state before a result projection may expose
+     * them. Draft catalog files remain non-runtime evidence only.
+     *
+     * @return array<string,mixed>
+     */
+    public function runtimeLifecycleCopyContract(bool $snapshotBound = false, string $locale = self::DEFAULT_LOCALE): array
+    {
+        $normalizedLocale = $this->normalizeLocale($locale);
+        $contract = $this->lifecycleCopyContract($snapshotBound, $normalizedLocale);
+
+        if ($normalizedLocale !== 'en' || $this->runtimeAssetsAvailable($normalizedLocale)) {
+            return $contract;
+        }
+
+        return array_merge($contract, [
+            'status' => 'unavailable',
+            'share_pdf_history_asset_id' => '',
+            'faq_asset_id' => '',
+            'technical_note_summary_asset_id' => '',
+            'professional_method_boundary_asset_id' => '',
+            'surfaces' => [],
+            'faq_items' => [],
+            'faq_markdown_reference_available' => false,
+            'runtime_review_gate' => 'locale_content_unavailable',
+        ]);
+    }
+
+    /**
      * @return array<string,mixed>
      */
     private function sharePdfHistoryAsset(string $locale): array
@@ -285,6 +314,36 @@ final class RiasecLifecycleCopyService
         }
 
         return in_array($normalized, self::SUPPORTED_LOCALES, true) ? $normalized : self::DEFAULT_LOCALE;
+    }
+
+    /**
+     * @param  array<string,mixed>  $asset
+     * @return array<string,mixed>
+     */
+    private function runtimeAsset(array $asset, string $locale): array
+    {
+        if ($asset === [] || ($asset['locale'] ?? null) !== $locale) {
+            return [];
+        }
+
+        if ($locale !== 'en') {
+            return $asset;
+        }
+
+        return in_array((string) ($asset['review_status'] ?? ''), [
+            'approved',
+            'approved_for_staging',
+            'approved_for_production',
+            'approved_for_runtime',
+        ], true) ? $asset : [];
+    }
+
+    private function runtimeAssetsAvailable(string $locale): bool
+    {
+        return $this->runtimeAsset($this->sharePdfHistoryAsset($locale), $locale) !== []
+            && $this->runtimeAsset($this->faqAsset($locale), $locale) !== []
+            && $this->runtimeAsset($this->technicalNoteSummaryAsset($locale), $locale) !== []
+            && $this->runtimeAsset($this->professionalMethodBoundaryAsset($locale), $locale) !== [];
     }
 
     /**

@@ -137,6 +137,10 @@ final class RiasecActivityExplorerService
         $code = $this->normalizeCode($hollandCode);
         $dimensions = $this->dimensionsForCode($code);
 
+        if ($normalizedLocale === 'en') {
+            return $this->unavailableLocalePayload($code, $normalizedLocale);
+        }
+
         return [
             'schema_version' => self::SCHEMA_VERSION,
             'content_version' => self::CONTENT_VERSION,
@@ -159,6 +163,37 @@ final class RiasecActivityExplorerService
             ],
             'dimension_activity_families' => $this->dimensionFamilies($dimensions, $normalizedLocale),
             'code_activity_pack' => $this->codeActivityPack($code, $normalizedLocale),
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function unavailableLocalePayload(string $code, string $locale): array
+    {
+        return [
+            'schema_version' => self::SCHEMA_VERSION,
+            'content_version' => 'activity_task_examples_v1.en.pending',
+            'status' => 'unavailable',
+            'reason' => 'locale_content_unavailable',
+            'source_status' => 'locale_review_required',
+            'locale' => $locale,
+            'holland_code' => $code,
+            'boundary' => [
+                'frontend_fallback_allowed' => false,
+                'missing_content_behavior' => 'omit_module_fail_closed',
+                'ranking_allowed' => false,
+                'fit_score_allowed' => false,
+                'success_prediction_allowed' => false,
+                'qualification_judgment_allowed' => false,
+            ],
+            'dimension_activity_families' => [],
+            'code_activity_pack' => [
+                'status' => 'unavailable',
+                'reason' => 'locale_content_unavailable',
+                'activities' => [],
+                'occupation_examples' => [],
+            ],
         ];
     }
 

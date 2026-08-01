@@ -354,11 +354,9 @@ final class RiasecFullContentFixtureMatrixTest extends TestCase
 
         $this->assertSame('en', data_get($projection, 'locale'));
         $this->assertSame('en', data_get($projection, 'lifecycle_copy_v1.locale'));
-        $this->assertSame('available', data_get($projection, 'lifecycle_copy_v1.status'));
-        $this->assertStringContainsString(
-            'interest snapshot',
-            strtolower((string) data_get($projection, 'lifecycle_copy_v1.surfaces.0.copy')),
-        );
+        $this->assertSame('unavailable', data_get($projection, 'lifecycle_copy_v1.status'));
+        $this->assertSame([], data_get($projection, 'lifecycle_copy_v1.surfaces'));
+        $this->assertSame('locale_content_unavailable', data_get($projection, 'lifecycle_copy_v1.runtime_review_gate'));
     }
 
     public function test_140q_projection_selects_layer_emphasis_without_cross_form_score_comparison(): void
