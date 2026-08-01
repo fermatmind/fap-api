@@ -206,6 +206,33 @@ class CommerceController extends Controller
             abort($status, $message !== '' ? $message : 'request failed.');
         }
 
+        if ($provider === 'apple_iap'
+            && ($result['idempotent'] ?? false) === true
+            && is_object($result['order'] ?? null)) {
+            $postCreateEligibility = $this->appleIap->validateOrderEligibility(
+                $orgId,
+                $userId !== null ? (string) $userId : null,
+                $anonId !== null ? (string) $anonId : null,
+                $targetAttemptId,
+                (string) $payload['sku'],
+                (int) ($payload['quantity'] ?? 1),
+                $result['order']
+            );
+            if (($postCreateEligibility['ok'] ?? false) !== true) {
+                return response()->json(
+                    $postCreateEligibility,
+                    (int) ($postCreateEligibility['status'] ?? 422)
+                );
+            }
+            if (($postCreateEligibility['historical_idempotent_retry'] ?? false) !== true) {
+                return response()->json([
+                    'ok' => false,
+                    'error_code' => 'IDEMPOTENCY_CONFLICT',
+                    'message' => 'idempotency key is already bound to another Apple order contract.',
+                ], 409);
+            }
+        }
+
         $responsePayload = [
             'ok' => true,
             'order_no' => $result['order_no'] ?? null,

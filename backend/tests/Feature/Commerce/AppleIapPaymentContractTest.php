@@ -9,8 +9,13 @@ use App\Models\Order;
 use App\Models\PaymentAttempt;
 use App\Models\Result;
 use App\Services\Commerce\AppleIapPaymentService;
+use App\Services\Commerce\OrderManager;
 use App\Services\Commerce\PaymentGateway\AppleIapGateway;
+use App\Services\Commerce\PaymentRecoveryToken;
+use App\Services\Commerce\SkuCatalog;
+use App\Services\Email\EmailOutboxService;
 use App\Services\Payments\PaymentProviderRegistry;
+use App\Services\Scale\ScaleIdentityWriteProjector;
 use Database\Seeders\Pr19CommerceSeeder;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -185,6 +190,75 @@ final class AppleIapPaymentContractTest extends TestCase
             DB::table('orders')->where('order_no', $orderNo)->value('payment_state')
         );
         $this->assertSame(Order::STATUS_REFUNDED, DB::table('orders')->where('order_no', $orderNo)->value('status'));
+    }
+
+    public function test_ios_order_revalidates_an_idempotent_order_returned_after_the_precheck(): void
+    {
+        $this->configureProvider();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
+        $this->seedSku();
+        $firstAttemptId = $this->createAttempt('anon_apple_iap_race', true);
+        $secondAttemptId = $this->createAttempt('anon_apple_iap_race', true);
+        $token = $this->issueAnonToken('anon_apple_iap_race');
+        Http::fake([
+            'https://api.weixin.qq.com/sns/jscode2session*' => Http::response([
+                'openid' => 'openid-apple-race',
+                'session_key' => 'session-key-apple-race',
+            ]),
+        ]);
+
+        $headers = [
+            'Authorization' => 'Bearer '.$token,
+            'X-Anon-Id' => 'anon_apple_iap_race',
+            'X-Channel' => 'wechat_miniapp',
+        ];
+        $payload = [
+            'sku' => 'MBTI_REPORT_FULL',
+            'quantity' => 1,
+            'target_attempt_id' => $firstAttemptId,
+            'idempotency_key' => 'idem-apple-iap-race',
+            'wx_login_code' => 'wx-login-apple-race',
+        ];
+
+        $created = app(OrderManager::class)->createOrder(
+            0,
+            null,
+            'anon_apple_iap_race',
+            'MBTI_REPORT_FULL',
+            1,
+            $firstAttemptId,
+            AppleIapGateway::PROVIDER,
+            'idem-apple-iap-race'
+        );
+        $this->assertTrue($created['ok']);
+        $orderNo = (string) $created['order_no'];
+
+        $orders = \Mockery::mock(OrderManager::class, [
+            app(SkuCatalog::class),
+            app(ScaleIdentityWriteProjector::class),
+            app(EmailOutboxService::class),
+            app(PaymentRecoveryToken::class),
+            app(PaymentProviderRegistry::class),
+        ])->makePartial();
+        $orders->shouldReceive('findIdempotentOrderForCheckout')
+            ->once()
+            ->andReturnNull();
+        $this->app->instance(OrderManager::class, $orders);
+
+        $this->withHeaders($headers)
+            ->postJson('/api/v0.3/orders/apple_iap', array_merge($payload, [
+                'target_attempt_id' => $secondAttemptId,
+            ]))
+            ->assertStatus(409)
+            ->assertJsonPath('error_code', 'IDEMPOTENCY_CONFLICT');
+
+        $this->assertSame(
+            $firstAttemptId,
+            DB::table('orders')->where('order_no', $orderNo)->value('target_attempt_id')
+        );
+        $this->assertSame(1, DB::table('orders')->where('idempotency_key', 'idem-apple-iap-race')->count());
+        $this->assertSame(0, DB::table('payment_attempts')->where('order_no', $orderNo)->count());
     }
 
     public function test_apple_channel_callback_and_query_are_verified_idempotent_and_refund_revokes_grant(): void
