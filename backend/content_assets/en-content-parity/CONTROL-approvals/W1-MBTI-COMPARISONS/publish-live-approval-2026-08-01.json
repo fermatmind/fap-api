@@ -1,0 +1,37 @@
+{
+  "artifact_kind": "controlled_transition_approval",
+  "schema_version": "fermatmind.en_content_parity_controlled_transition_approval.v1",
+  "control_id": "EN-PARITY-W1-MBTI-COMPARISON-PUBLISH-LIVE-QA-01",
+  "approval_owner": "human_operator",
+  "approval_ref": "human-operator:w1-mbti-comparisons-publish-live:2026-08-01",
+  "producer_lane_id": "W1",
+  "subscope_id": "W1-MBTI-COMPARISONS",
+  "package_sha256": "deecc8175fb43ba3730d6513b496a0ab6834459108e3b24e25550bbf40e001a2",
+  "target_authority_receipt_sha256": "b44e50a252f48d85ca93f572f4bf5ee7f334d6155a19713cfd3c8185359edae8",
+  "gate": "published",
+  "verdict": "APPROVED",
+  "exact_slugs": [
+    "enfp-vs-entp",
+    "entj-vs-intj",
+    "estj-vs-entj",
+    "infj-vs-infp",
+    "intj-vs-intp",
+    "isfp-vs-infp",
+    "istj-vs-isfj"
+  ],
+  "permissions": {
+    "publish_authorized": true,
+    "target_authority_readback_authorized": true,
+    "activation_authorized": false,
+    "active_pointer_authorized": false,
+    "indexability_authorized": false,
+    "sitemap_authorized": false,
+    "hreflang_authorized": false,
+    "llms_authorized": false,
+    "json_ld_authorized": false,
+    "search_submission_authorized": false,
+    "deployment_authorized": false,
+    "private_result_read_authorized": false,
+    "attempt_report_order_payment_read_authorized": false
+  }
+}

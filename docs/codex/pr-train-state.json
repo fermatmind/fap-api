@@ -103221,5 +103221,49 @@
     "publish_allowed": false,
     "deploy_allowed": false,
     "updated_at": "2026-08-01T12:25:00Z"
+  },
+  "EN-PARITY-W1-MBTI-COMPARISON-PUBLISH-LIVE-QA-01": {
+    "id": "EN-PARITY-W1-MBTI-COMPARISON-PUBLISH-LIVE-QA-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/en-parity-w1-mbti-comparison-publish-live-qa-01",
+    "title": "EN-PARITY-W1-MBTI-COMPARISON-PUBLISH-LIVE-QA-01: publish seven English MBTI comparisons with live QA",
+    "depends_on": ["EN-PARITY-W1-MBTI-TARGET-AUTHORITY-RECEIPT-01"],
+    "status": "in_progress",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "human_operator approved only the exact seven-row comparison publish gate, package SHA deecc8175fb43ba3730d6513b496a0ab6834459108e3b24e25550bbf40e001a2, target receipt SHA b44e50a252f48d85ca93f572f4bf5ee7f334d6155a19713cfd3c8185359edae8, and deployed runtime revision 660280d00a57e58bd8bc76608e19de2492c03f53."
+      },
+      "local_validation": {"status": "passed", "evidence": "Focused SQLite publish service test passed 4 tests / 92 assertions; scoped Pint, PHP syntax, approval SHA, YAML/JSON parsing, diff check, and exact path scope validation passed."},
+      "github_required_checks": {"status": "pending", "evidence": "No PR has been opened."}
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": true,
+    "database_mutation": true,
+    "cms_mutation": true,
+    "private_payload_read": false,
+    "activation_allowed": false,
+    "publish_allowed": true,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-08-01T20:40:00+08:00",
+        "status": "in_progress",
+        "note": "Started from isolated latest-main branch after the exact English runtime projection revision was deployed. Scope is only exact seven-row controlled comparison publication with no discoverability release."
+      },
+      {
+        "at": "2026-08-01T20:46:00+08:00",
+        "status": "local_verified",
+        "note": "Focused publisher tests, immutable approval binding, runtime-executor source contract, syntax, Pint, JSON/YAML parsing, diff check, and exact changed-file scope validation passed."
+      }
+    ],
+    "updated_at": "2026-08-01T20:40:00+08:00"
   }
 }
