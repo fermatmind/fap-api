@@ -1,0 +1,29 @@
+{
+  "$schema": "docs/seo/generated/en-content-parity-control-master.v1.schema.json",
+  "artifact_kind": "controlled_target_authority_receipt_approval",
+  "schema_version": "fermatmind.en_content_parity_controlled_target_authority_receipt_approval.v1",
+  "control_id": "EN-PARITY-W1-MBTI-TARGET-AUTHORITY-RECEIPT-01",
+  "approval_owner": "human_operator",
+  "approval_ref": "human-operator:w1-mbti-comparisons-target-authority-draft-receipt:2026-08-01",
+  "producer_lane_id": "W1",
+  "subscope_id": "W1-MBTI-COMPARISONS",
+  "package_sha256": "deecc8175fb43ba3730d6513b496a0ab6834459108e3b24e25550bbf40e001a2",
+  "gate": "target_authority_draft_receipt",
+  "verdict": "APPROVED",
+  "permissions": {
+    "target_authority_draft_write_authorized": true,
+    "target_authority_readback_authorized": true,
+    "publish_authorized": false,
+    "activation_authorized": false,
+    "active_pointer_authorized": false,
+    "indexability_authorized": false,
+    "sitemap_authorized": false,
+    "hreflang_authorized": false,
+    "llms_authorized": false,
+    "json_ld_authorized": false,
+    "search_submission_authorized": false,
+    "deployment_authorized": false,
+    "private_result_read_authorized": false,
+    "attempt_report_order_payment_read_authorized": false
+  }
+}

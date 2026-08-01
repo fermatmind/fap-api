@@ -48116,3 +48116,24 @@ prs:
     deploy_allowed: false
     content_authority: producer candidate package only; backend runtime authority unchanged
     repository_rule_impact: establishes a review-gated English candidate artifact without activation or authority transfer
+
+  - id: EN-PARITY-W1-MBTI-TARGET-AUTHORITY-RECEIPT-01
+    repo: fap-api
+    base: main
+    branch: codex/en-parity-w1-mbti-target-authority-receipt-01
+    title: "EN-PARITY-W1-MBTI-TARGET-AUTHORITY-RECEIPT-01: generate exact production target-authority draft receipts"
+    status: in_progress
+    depends_on: [EN-PARITY-W1-MBTI-COMPARISON-DRAFT-IMPORT-01, EN-PARITY-W1-MBTI-RESULT-DRAFT-IMPORT-01]
+    train_scope: en_parity_w1_mbti_production_target_authority_draft_receipts
+    allowed_paths: [.github/workflows/mbti-target-authority-draft-receipt.yml, backend/scripts/mbti_target_authority_draft_receipt.php, backend/tests/Feature/ContentImport/MbtiTargetAuthorityDraftReceiptControlPlaneTest.php, backend/content_assets/en-content-parity/CONTROL-approvals/W1-MBTI-COMPARISONS/target-authority-draft-receipt-approval-2026-08-01.json, backend/content_assets/en-content-parity/CONTROL-approvals/W1-MBTI-RESULT-CONTENT/target-authority-draft-receipt-approval-2026-08-01.json, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json]
+    do_not: [publish, activate, change active pointer, release indexability, deploy, read private result data]
+    validation: ["cd backend && php artisan test --filter=MbtiTargetAuthorityDraftReceiptControlPlaneTest --no-ansi", "cd backend && php -l scripts/mbti_target_authority_draft_receipt.php", "isolated SQLite comparison=7 result=46/21 activation=0", "git diff --check"]
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: true
+    database_mutation: true
+    cms_mutation: true
+    private_payload_read: false
+    activation_allowed: false
+    publish_allowed: false
+    deploy_allowed: false
