@@ -103380,8 +103380,8 @@
         "evidence": "Focused PHPUnit passed 5 tests / 42 assertions; Pint, route:list, YAML/JSON parsing, payload/aggregate SHA recomputation, deterministic dual dry-run, redacted receipt checks, diff checks, and exact scope validation passed. No write path was executed."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "PR #3489 opened from exact scoped branch; required GitHub checks and review remain mandatory."
+        "status": "retry_pending",
+        "evidence": "PR #3489 first required run passed hygiene, supply-chain, content-pack validation, MBTI, and Semgrep gates, but verify-bigfive rejected the new no-write importer files only because its runtime-freeze classifier had no exact allowlist entry. The scoped classifier contract repair passed locally; a replacement required-check run is pending."
       }
     },
     "failure_reason": null,
@@ -103410,8 +103410,13 @@
         "at": "2026-08-02T06:00:05+08:00",
         "status": "github_checks_pending",
         "note": "Opened PR #3489 from the locally verified exact-package dry-run branch. Required checks, review, squash merge, cleanup, and separate CONTROL dry_run_ready acceptance remain pending."
+      },
+      {
+        "at": "2026-08-02T06:10:18+08:00",
+        "status": "github_checks_repairing",
+        "note": "First verify-bigfive run failed only because the existing runtime-freeze classifier had no exact RIASEC dry-run classification. Added a two-file no-write classifier allowlist plus blocked runtime control; focused importer and classifier tests passed."
       }
     ],
-    "updated_at": "2026-08-02T06:00:05+08:00"
+    "updated_at": "2026-08-02T06:10:18+08:00"
   }
 }
