@@ -6531,7 +6531,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2256",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "title": "B5-RESULT-WEEKLY-OPS-RUNNER-01: Schedule Big Five V2 weekly ops report",
     "train_scope": "big5_result_page_v2_asset_agent_automation",
     "transitions": [
@@ -103069,8 +103069,8 @@
     "depends_on": [
       "EN-PARITY-W4-RIASEC-INVENTORY-01"
     ],
-    "status": "github_checks_pending",
-    "commit_sha": "3817a8c9c61bb4152ba5e6a6bd85711d53099db6",
+    "status": "merged_reconciled",
+    "commit_sha": "a6ba4e7e6f2003c5f14978c7bd7848c86434a1fc",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3472",
     "checks": {
       "preflight": {
@@ -103091,8 +103091,8 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
+    "merged_at": "2026-08-01T12:00:18Z",
+    "remote_branch_deleted": true,
     "local_cleanup_executed": false,
     "production_write_execution": false,
     "database_mutation": false,
@@ -103126,8 +103126,76 @@
         "at": "2026-08-01T19:50:00+08:00",
         "status": "ready_to_merge",
         "note": "Exact implementation head 21ae058a467419c18d2ca01f0a1d7c28e43d58b0 passed all applicable required checks with staging parity skipped. This ledger-only readiness update requires its own fresh required checks before squash merge."
+      },
+      {
+        "at": "2026-08-01T20:05:00+08:00",
+        "status": "merged_reconciled",
+        "note": "GitHub reports PR #3472 merged at 2026-08-01T12:00:18Z as squash commit a6ba4e7e6f2003c5f14978c7bd7848c86434a1fc, which origin/main contains. The remote task branch is deleted; cleanup of its isolated local worktree is recorded separately."
       }
     ],
-    "updated_at": "2026-08-01T19:50:00+08:00"
+    "updated_at": "2026-08-01T20:05:00+08:00"
+  },
+  "EN-PARITY-W4-RIASEC-DIMENSION-ASSETS-01": {
+    "id": "EN-PARITY-W4-RIASEC-DIMENSION-ASSETS-01",
+    "repo": "fap-api",
+    "title": "EN-PARITY-W4-RIASEC-DIMENSION-ASSETS-01 author W4 English dimension candidate assets",
+    "base": "main",
+    "branch": "codex/en-parity-w4-riasec-dimension-assets-01",
+    "depends_on": ["EN-PARITY-W4-RIASEC-RUNTIME-LOCALE-01"],
+    "status": "github_checks_pending",
+    "commit_sha": "f524e2ab047c32b0542936a8ced1586a304bd945",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3474",
+    "checks": {
+      "preflight": {
+        "status": "passed",
+        "evidence": "PR #3472 is merged as a6ba4e7e6f2003c5f14978c7bd7848c86434a1fc and origin/main contains that exact commit. W4 remains inventory_frozen in the CONTROL master with all write and release permissions false."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "Focused package contract passed 3 tests / 39 assertions, including exact 2-group/42-row count, English-only payload, false permission fields, every payload SHA, and aggregate package SHA. Scoped Pint, PHP syntax, JSON/YAML parsing, source-ledger 24+18 reconciliation, English-only scan, claim-boundary scan with negated-boundary interpretation, diff checks, and exact path scope validation passed."
+      },
+      "changed_file_scope": {
+        "status": "passed",
+        "evidence": "Only the W4-G01/W4-G02 producer package, its focused package test, PR2 manifest/state, and runtime-ledger reconciliation changed. No control master, registry/runtime, scoring, forms, CMS/database, importer, frontend, SEO, release, or future W4 group path changed."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "Exact implementation head 9ccb966016ff58ac0a97d074e8f092e64201788e passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep OSS, Semgrep blocking secrets, and non-blocking SARIF; staging parity was skipped."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-08-01T20:05:00+08:00",
+        "status": "in_progress",
+        "note": "Started from isolated latest-main worktree after runtime-locale merge. Scope is only W4-G01/W4-G02 English producer candidates, 42 atomic identities, supporting evidence, and no activation/import/release action."
+      },
+      {
+        "at": "2026-08-01T20:15:00+08:00",
+        "status": "local_verified",
+        "note": "Produced exactly 42 English candidate identities for G01/G02 with source SHA binding, producer self-review only, immutable payload SHA manifest, all-false permissions, and no runtime/release claim. Focused validation, format, parser, English-only, count, and scope checks pass."
+      },
+      {
+        "at": "2026-08-01T20:18:00+08:00",
+        "status": "github_checks_pending",
+        "note": "Pushed implementation head f524e2ab047c32b0542936a8ced1586a304bd945 and opened PR #3474. Required GitHub checks, mergeability, squash merge, cleanup, and post-merge revalidation remain pending."
+      },
+      {
+        "at": "2026-08-01T20:28:00+08:00",
+        "status": "ready_to_merge",
+        "note": "Exact implementation head 9ccb966016ff58ac0a97d074e8f092e64201788e passed all required checks with staging parity skipped. This ledger-only readiness update requires its own fresh required checks before squash merge."
+      }
+    ],
+    "updated_at": "2026-08-01T20:28:00+08:00"
   }
 }

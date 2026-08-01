@@ -1,0 +1,43 @@
+{
+  "schema_version": "fermatmind.en_content_parity.immutable_content_package_manifest.v1",
+  "package_id": "EN-PARITY-W4-RIASEC-DIMENSION-ASSETS-2026-08-01",
+  "lane_id": "W4",
+  "master_asset_id": "ENPARITY-W4-RIASEC-DEEP-ASSETS",
+  "status": "unpublished_candidate",
+  "groups": ["W4-G01", "W4-G02"],
+  "logical_group_count": 2,
+  "atomic_row_count": 42,
+  "source_locale": "zh-CN",
+  "target_locale": "en",
+  "files": [
+    {"path":"README.md","sha256":"f79634f68bf57abf153489ad1ba0e725fda5956fd9f51832316038c84669d533"},
+    {"path":"assets.json","sha256":"d62f7a02aca7d8d2e4148b9a0caf25971d885a0fea77c93e10b6d2493a4a56f3"},
+    {"path":"translation_map.json","sha256":"41eb972a5d6e027df65f9d293bb886b949e3074418b344a038b3760e05911162"},
+    {"path":"source_ledger.json","sha256":"1fc31f91df45bc9a9dfb6876aa57bcf24ea2881be93ae2058c07052527b8d51f"},
+    {"path":"claim_boundary_report.json","sha256":"509ad4311b74355ac278eef8785cef52d68a91cc75a8e675a249125b32e4a508"},
+    {"path":"editorial_review.json","sha256":"d5875cbdc80950ad9c23160078139642c0c6135ddcda69b18a089b03b449755b"}
+  ],
+  "package_sha256_algorithm": "sha256 of UTF-8 concatenation of each files[] path, NUL, lowercase SHA-256, and newline in order",
+  "package_sha256": "f24b1706e53fe4cf6c0eb2a0a5ecaa13171c2b4a51168c16113c11c77b3b08aa",
+  "quality_gates": {
+    "exact_group_scope": "pass",
+    "exact_atomic_row_count": "pass",
+    "source_hash_bound": "pass",
+    "english_only_reader_copy": "pass",
+    "producer_claim_boundary": "pass_self_review_only",
+    "independent_w9": "pending",
+    "complete_w4_package_freeze": "pending_future_pr"
+  },
+  "permissions": {
+    "cms_write_authorized": false,
+    "database_write_authorized": false,
+    "draft_import_authorized": false,
+    "production_import_authorized": false,
+    "publication_authorized": false,
+    "activation_authorized": false,
+    "seo_runtime_release_authorized": false,
+    "indexability_authorized": false,
+    "search_submission_authorized": false,
+    "deploy_authorized": false
+  }
+}
