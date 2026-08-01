@@ -47909,3 +47909,68 @@ prs:
     deploy_allowed: false
     content_authority: backend CMS comparison authority; exact English rows remain inactive drafts
     repository_rule_impact: adds an exact-approval-bound inactive/draft write path; public runtime and discoverability remain unchanged
+
+  - id: EN-PARITY-W1-MBTI-RESULT-DRAFT-IMPORT-01
+    repo: fap-api
+    base: main
+    branch: codex/en-parity-w1-mbti-result-draft-import-01
+    title: "EN-PARITY-W1-MBTI-RESULT-DRAFT-IMPORT-01: import exact English result drafts"
+    status: in_progress
+    depends_on:
+      - EN-PARITY-W1-MBTI-RESULT-IMPORTER-01
+      - EN-PARITY-W1-MBTI-COMPARISON-DRAFT-IMPORT-01
+    external_dependencies:
+      - W1-MBTI-RESULT-CONTENT control state is dry_run_ready
+      - inactive MBTI.global.en.default GLOBAL/en/v0.3 authority is merged
+      - exact human-operator approval artifact SHA 17ae71733abe77bd7e75f4492374879c1888c4f5f3f671f53b003b6b878152e2
+    train_scope: en_parity_w1_mbti_result_exact_package_inactive_draft_import
+    scope:
+      - Accept the exact CONTROL approval artifact bound to the frozen 46-row result package and draft_imported gate.
+      - Materialize exactly 21 candidate assets inside the existing unregistered MBTI.global.en.default inactive draft authority.
+      - Preserve 24 complete controls and the synthetic PDF fixture as no-write references while retaining the exact ordered 46-row reconciliation.
+      - Extend the exact-package importer with atomic, collision-safe, strictly idempotent local/testing write and sanitized receipt modes.
+      - Keep the pack manifest, commercial runtime file, fallback registry, active pointer, private result data, release surfaces, and deploy state unchanged.
+    allowed_paths:
+      - backend/app/Console/Commands/ImportMbtiResultEnglishPackage.php
+      - backend/app/Services/ContentImport/MbtiResultEnglishPackageImporter.php
+      - backend/tests/Feature/ContentImport/MbtiResultEnglishPackageImporterTest.php
+      - backend/tests/Feature/Content/MbtiGlobalEnglishInactiveContentPackTest.php
+      - backend/content_assets/en-content-parity/CONTROL-approvals/W1-MBTI-RESULT-CONTENT/draft-import-approval-2026-08-01.json
+      - content_packages/default/GLOBAL/en/MBTI-GLOBAL-en-v0.3/drafts/en-parity-w1-mbti-result-content-v1.json
+      - backend/AGENTS.md
+      - generated/pr-train-sidecar-issues/sidecar_issues.md
+      - generated/pr-train-sidecar-issues/sidecar_issues.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify the frozen package, the three prerequisite authority files, any zh-CN pack, fallback registry, active pointer, runtime resolver, model, migration, route, controller, scheduler, queue, or frontend.
+      - Read attempts, reports, private URLs, scores, answers, entitlements, accounts, orders, payments, recovery data, production PDF payloads, secrets, or private CMS records.
+      - Activate, publish, release indexability, change sitemap/llms/canonical, submit search URLs, invalidate public caches, trigger staging/manual/production deploy, or claim live availability.
+    validation:
+      - cd backend && php artisan test --filter=MbtiResultEnglishPackageImporterTest --no-ansi
+      - cd backend && php artisan test --filter=MbtiGlobalEnglishInactiveContentPackTest --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/ImportMbtiResultEnglishPackage.php app/Services/ContentImport/MbtiResultEnglishPackageImporter.php tests/Feature/ContentImport/MbtiResultEnglishPackageImporterTest.php tests/Feature/Content/MbtiGlobalEnglishInactiveContentPackTest.php
+      - cd backend && php artisan content:import-mbti-result-english-package --package-sha=9325013b870fd2496efc0882656240f91ce28ff4faaf1da42fb3dde3577b0ed3 --dry-run --json
+      - exact local/testing create and zero-write replay receipt validation
+      - sha256sum backend/content_assets/en-content-parity/CONTROL-approvals/W1-MBTI-RESULT-CONTENT/draft-import-approval-2026-08-01.json
+      - sha256sum content_packages/default/GLOBAL/en/MBTI-GLOBAL-en-v0.3/drafts/en-parity-w1-mbti-result-content-v1.json
+      - cd backend && php artisan route:list --path=api --except-vendor
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    private_payload_read: false
+    content_authority_mutation: true
+    api_runtime_change: false
+    activation_allowed: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: unregistered MBTI.global.en.default inactive draft file only; runtime authority unchanged
+    repository_rule_impact: adds exact-approval-bound inactive result authority materialization without activation or discoverability

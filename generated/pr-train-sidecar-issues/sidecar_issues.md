@@ -1,5 +1,22 @@
 # PR Train Sidecar Issues
 
+## EN-PARITY-W1-MBTI-COMPARISON-DRAFT-IMPORT-01 local main sync blocker
+
+- repo: `fap-api`
+- PR id / branch: `#3468` / `codex/en-parity-w1-mbti-comparison-draft-import-01`
+- blocker type: `local_main_sync_blocked_by_unrelated_user_changes`
+- evidence:
+  - PR #3468 squash-merged as `3622db7ca7a01701f3efd4c6d7d4db86504a9756`, and `origin/main` contains that commit.
+  - The isolated train worktree is clean and detached at exact `origin/main`; both local and remote task branches are deleted.
+  - Repository local `main` remains `0386505910f1de5a054171df152dc08126b04217` because it is checked out in `/Users/rainie/Desktop/GitHub/fap-api-seo13-cache-control-plane` with unrelated modified/deleted files across Commerce, Career, Health, CMS, tests, routes, contracts, and train metadata.
+- why not current PR scope:
+  - Those user-owned changes predate PR09 and are outside the exact English comparison draft-import scope. Updating, stashing, committing, or discarding them would risk altering another task.
+- whether required checks are affected: `false`
+  - PR09 passed every required GitHub check and merged; this affects only the shared local `main` ref, not the isolated train worktree, merge, or branch cleanup.
+- recommended follow-up:
+  - Finish, commit, stash, or explicitly discard the unrelated changes in `/Users/rainie/Desktop/GitHub/fap-api-seo13-cache-control-plane`, then fast-forward that worktree with `git pull --ff-only origin main` and verify `main == origin/main`.
+- whether train continued: `true`
+
 ## fap-api MBTI CMS import gate local main sync blocker
 
 - repo: `fap-api`

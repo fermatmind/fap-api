@@ -1,6 +1,21 @@
 [
   {
     "repo": "fap-api",
+    "pr_id": "#3468",
+    "branch": "codex/en-parity-w1-mbti-comparison-draft-import-01",
+    "blocker_type": "local_main_sync_blocked_by_unrelated_user_changes",
+    "evidence": [
+      "PR #3468 squash-merged as 3622db7ca7a01701f3efd4c6d7d4db86504a9756, and origin/main contains that commit.",
+      "The isolated train worktree is clean and detached at exact origin/main; both local and remote task branches are deleted.",
+      "Repository local main remains 0386505910f1de5a054171df152dc08126b04217 because it is checked out in /Users/rainie/Desktop/GitHub/fap-api-seo13-cache-control-plane with unrelated modified/deleted files across Commerce, Career, Health, CMS, tests, routes, contracts, and train metadata."
+    ],
+    "why_not_current_pr_scope": "Those user-owned changes predate PR09 and are outside the exact English comparison draft-import scope. Updating, stashing, committing, or discarding them would risk altering another task.",
+    "required_checks_affected": false,
+    "recommended_follow_up": "Finish, commit, stash, or explicitly discard the unrelated changes in /Users/rainie/Desktop/GitHub/fap-api-seo13-cache-control-plane, then fast-forward that worktree with git pull --ff-only origin main and verify main == origin/main.",
+    "train_continued": true
+  },
+  {
+    "repo": "fap-api",
     "pr_id": "MBTI-CMS-26",
     "branch": "codex/mbti-cms-26-content15-mixed-import-preflight",
     "blocker_type": "local_main_sync_blocked_by_unrelated_staged_files",

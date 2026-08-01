@@ -102791,8 +102791,8 @@
     "depends_on": [
       "EN-PARITY-W1-MBTI-COMPARISON-IMPORTER-01"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "ccc66c24fc5b30fb46753988c7943693df8fbfa4",
+    "status": "merged_reconciled",
+    "commit_sha": "3622db7ca7a01701f3efd4c6d7d4db86504a9756",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3468",
     "checks": {
       "authorization": {
@@ -102821,14 +102821,14 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-08-01T10:59:17Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "production_write_execution": false,
     "database_mutation": true,
@@ -102889,8 +102889,86 @@
         "at": "2026-08-01T10:50:07Z",
         "status": "ready_to_merge",
         "note": "Exact head ccc66c24fc5b30fb46753988c7943693df8fbfa4 passed all nine applicable required checks with staging parity skipped and remains CLEAN/MERGEABLE. Repository policy requires no review. The optional exact-head Codex review request produced no result after ten minutes and is not a merge-policy blocker. This following readiness commit changes only the PR09 state ledger; its own required checks remain mandatory before squash merge."
+      },
+      {
+        "at": "2026-08-01T11:05:00Z",
+        "status": "merged_reconciled",
+        "note": "GitHub reports PR #3468 merged at 2026-08-01T10:59:17Z as squash commit 3622db7ca7a01701f3efd4c6d7d4db86504a9756, which exact origin/main contains. The isolated train worktree was detached at that exact main commit; the local and remote task branches were deleted; post-merge focused validation passed 14 tests / 381 assertions. The shared local main ref is checked out in another dirty user worktree and cannot be moved safely; that external non-required blocker is recorded in generated/pr-train-sidecar-issues and does not affect required checks, merge policy, or this isolated train."
       }
     ],
-    "updated_at": "2026-08-01T10:50:07Z"
+    "updated_at": "2026-08-01T11:05:00Z"
+  },
+  "EN-PARITY-W1-MBTI-RESULT-DRAFT-IMPORT-01": {
+    "id": "EN-PARITY-W1-MBTI-RESULT-DRAFT-IMPORT-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/en-parity-w1-mbti-result-draft-import-01",
+    "title": "EN-PARITY-W1-MBTI-RESULT-DRAFT-IMPORT-01: import exact English result drafts",
+    "depends_on": [
+      "EN-PARITY-W1-MBTI-RESULT-IMPORTER-01",
+      "EN-PARITY-W1-MBTI-COMPARISON-DRAFT-IMPORT-01"
+    ],
+    "status": "local_verified",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The human_operator explicitly authorized exact 46-row English result inactive/draft authority import under approval ref human-operator:w1-mbti-result-content-draft-import:2026-08-01 after the English content-pack authority prerequisite and renewed exact dry run, while excluding active pointer, publish, activation, indexability, search, and deploy."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "The exact result importer and comparison PR09 are merged. The inactive GLOBAL/en MBTI v0.3 authority prerequisite merged as fap-api commit e5997548beb7da3f9850b7d382a015e175b0397d; the recomputed result dry-run plan remains 7008c5d530a9b37a48c2a3200ec88fa56731d88277dfa79473f812ad4cab7aee; fap-web CONTROL accepted package SHA 9325013b870fd2496efc0882656240f91ce28ff4faaf1da42fb3dde3577b0ed3 through dry_run_ready and merged approval artifact SHA 17ae71733abe77bd7e75f4492374879c1888c4f5f3f671f53b003b6b878152e2."
+      },
+      "preflight": {
+        "status": "passed",
+        "evidence": "Started an isolated scoped branch from exact fap-api origin/main 3622db7ca7a01701f3efd4c6d7d4db86504a9756 after PR09 merged and post-merge validation passed."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "The focused importer suite passes 12 tests / 307 assertions; inactive authority boundary suite passes 4 tests / 93 assertions; immutable result package schema, claim-boundary, reconciliation, private-field, and fixture suite passes 7 tests / 1412 assertions. Scoped Pint, PHP syntax, YAML/JSON parsing, git diff, exact 11-path scope, and 227-route inventory pass. The dry-run receipt rehashes exactly to 7008c5d530a9b37a48c2a3200ec88fa56731d88277dfa79473f812ad4cab7aee. Controlled local/testing create receipt SHA is 4d1ffa67f12636159ea445fb674f33b2d9fc0bb6afe71981bf104cb7b0d7b3e1; exact replay receipt SHA is 9ff5955fd076c64dc577f1df46348c7c6036eee76fa2b9661744924c7e5ea972 and reports zero writes. Approval SHA is 17ae71733abe77bd7e75f4492374879c1888c4f5f3f671f53b003b6b878152e2; unregistered inactive authority SHA is 8cbff5b45e21b7ac637eeaa937927b3900aa80da82488e9a9d20a289390f9b64."
+      },
+      "changed_file_scope": {
+        "status": "passed",
+        "evidence": "The exact 11 changed paths match the manifest allowlist: command/service/two focused tests, byte-exact approval, unregistered inactive draft authority, backend rule, PR-train manifest/state, and required external-blocker sidecar. The frozen result package, three prerequisite authority files, zh-CN, manifest/commercial runtime, fallback/active pointer, models, migrations, APIs, frontend, release, SEO runtime, search, and deploy paths are unchanged."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "content_authority_mutation": true,
+    "private_payload_read": false,
+    "api_runtime_change": false,
+    "activation_allowed": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "history": [
+      {
+        "at": "2026-08-01T11:13:20Z",
+        "status": "local_validation_pending",
+        "note": "Started PR10 from exact origin/main after PR09 closeout. This scope stores the 21 exact candidate assets plus all 46 reconciliation identities in one unregistered inactive-only GLOBAL/en authority draft, preserves 24 existing controls and one synthetic PDF fixture as no-write references, and copies the byte-exact human approval. No manifest, commercial spec, runtime fallback, active pointer, database, CMS, private result, publication, SEO runtime, search, or deploy action is allowed."
+      },
+      {
+        "at": "2026-08-01T11:16:38Z",
+        "status": "local_verified",
+        "note": "Implemented exact-approval-bound, local/testing-only atomic inactive authority materialization. The exact dry-run remains byte-identical at SHA 7008c5d530a9b37a48c2a3200ec88fa56731d88277dfa79473f812ad4cab7aee. A controlled create committed the 21 candidates and retained all 46 ordered identities; exact replay performs zero writes; staging fails before any authority attempt. Focused package/importer/authority tests pass 23 tests / 1812 assertions, scoped Pint and parsers pass, the approval and authority rehash exactly, and the exact 11-path scope allowlist passes."
+      }
+    ],
+    "updated_at": "2026-08-01T11:16:38Z"
   }
 }

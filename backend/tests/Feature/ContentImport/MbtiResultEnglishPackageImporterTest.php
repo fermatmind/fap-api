@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\ContentImport;
 
 use App\Services\ContentImport\MbtiResultEnglishPackageImporter;
+use DomainException;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Tests\TestCase;
@@ -216,23 +217,147 @@ final class MbtiResultEnglishPackageImporterTest extends TestCase
         );
     }
 
-    public function test_write_mode_fails_closed_without_private_or_database_access(): void
+    public function test_exact_approval_imports_twenty_one_candidates_into_inactive_authority_and_replays_without_writes(): void
+    {
+        $authorityDirectory = sys_get_temp_dir().'/w1-mbti-result-authority-'.bin2hex(random_bytes(6));
+        File::copyDirectory(MbtiResultEnglishPackageImporter::defaultAuthorityDirectory(), $authorityDirectory);
+        File::deleteDirectory($authorityDirectory.'/drafts');
+        $importer = $this->app->make(MbtiResultEnglishPackageImporter::class);
+
+        $first = $importer->importDraft(
+            MbtiResultEnglishPackageImporter::defaultPackageDirectory(),
+            MbtiResultEnglishPackageImporter::PACKAGE_SHA256,
+            MbtiResultEnglishPackageImporter::defaultApprovalPath(),
+            MbtiResultEnglishPackageImporter::APPROVAL_SHA256,
+            $authorityDirectory,
+        );
+
+        self::assertTrue($first['writes_committed']);
+        self::assertTrue($first['content_authority_write_attempted']);
+        self::assertFalse($first['database_write_attempted']);
+        self::assertFalse($first['cms_write_attempted']);
+        self::assertFalse($first['private_payload_read_attempted']);
+        self::assertFalse($first['activation_attempted']);
+        self::assertFalse($first['publish_attempted']);
+        self::assertFalse($first['indexability_attempted']);
+        self::assertSame(46, $first['row_count']);
+        self::assertSame(21, $first['authority']['created_count']);
+        self::assertFalse($first['authority']['active_pointer_changed']);
+        self::assertFalse($first['authority']['runtime_registered']);
+
+        $draftPath = $authorityDirectory.'/drafts/en-parity-w1-mbti-result-content-v1.json';
+        $draftBytes = (string) File::get($draftPath);
+        $draft = json_decode($draftBytes, true, 512, JSON_THROW_ON_ERROR);
+        self::assertSame('inactive_draft', $draft['authority']['state']);
+        self::assertFalse($draft['authority']['runtime_available']);
+        self::assertFalse($draft['authority']['active_pointer_registered']);
+        self::assertCount(46, $draft['rows']);
+        self::assertCount(21, array_filter($draft['rows'], static fn (array $row): bool => isset($row['asset'])));
+        self::assertSame($first['authority']['authority_sha256'], hash('sha256', $draftBytes));
+        $serializedDraft = json_encode($draft, JSON_THROW_ON_ERROR);
+        foreach (['attempt_id', 'report_token', 'result_lookup_token', 'share_token', 'user_id', 'account_id', 'email', 'phone', 'user_scores', 'raw_scores', 'answers', 'orders', 'payments', 'recovery_data', 'secret', 'authorization'] as $forbidden) {
+            self::assertStringNotContainsString('"'.$forbidden.'"', $serializedDraft);
+        }
+
+        $second = $importer->importDraft(
+            MbtiResultEnglishPackageImporter::defaultPackageDirectory(),
+            MbtiResultEnglishPackageImporter::PACKAGE_SHA256,
+            MbtiResultEnglishPackageImporter::defaultApprovalPath(),
+            MbtiResultEnglishPackageImporter::APPROVAL_SHA256,
+            $authorityDirectory,
+        );
+        self::assertFalse($second['writes_committed']);
+        self::assertFalse($second['content_authority_write_attempted']);
+        self::assertSame(46, $second['authority']['preserved_count']);
+        self::assertSame($draftBytes, File::get($draftPath));
+    }
+
+    public function test_wrong_approval_fails_closed(): void
+    {
+        $authorityDirectory = sys_get_temp_dir().'/w1-mbti-result-authority-'.bin2hex(random_bytes(6));
+        File::copyDirectory(MbtiResultEnglishPackageImporter::defaultAuthorityDirectory(), $authorityDirectory);
+        File::deleteDirectory($authorityDirectory.'/drafts');
+        $importer = $this->app->make(MbtiResultEnglishPackageImporter::class);
+
+        $this->expectException(DomainException::class);
+        $this->expectExceptionMessage('confirmed_approval_sha256_mismatch');
+        $importer->importDraft(
+            MbtiResultEnglishPackageImporter::defaultPackageDirectory(),
+            MbtiResultEnglishPackageImporter::PACKAGE_SHA256,
+            MbtiResultEnglishPackageImporter::defaultApprovalPath(),
+            str_repeat('0', 64),
+            $authorityDirectory,
+        );
+    }
+
+    public function test_existing_inactive_authority_collision_is_never_overwritten(): void
+    {
+        $authorityDirectory = sys_get_temp_dir().'/w1-mbti-result-authority-'.bin2hex(random_bytes(6));
+        File::copyDirectory(MbtiResultEnglishPackageImporter::defaultAuthorityDirectory(), $authorityDirectory);
+        $draftPath = $authorityDirectory.'/drafts/en-parity-w1-mbti-result-content-v1.json';
+        File::put($draftPath, "protected unrelated draft\n");
+        $importer = $this->app->make(MbtiResultEnglishPackageImporter::class);
+
+        try {
+            $importer->importDraft(
+                MbtiResultEnglishPackageImporter::defaultPackageDirectory(),
+                MbtiResultEnglishPackageImporter::PACKAGE_SHA256,
+                MbtiResultEnglishPackageImporter::defaultApprovalPath(),
+                MbtiResultEnglishPackageImporter::APPROVAL_SHA256,
+                $authorityDirectory,
+            );
+            self::fail('Expected the unrelated inactive authority collision to fail closed.');
+        } catch (DomainException $exception) {
+            self::assertStringStartsWith('authority_target_collision:', $exception->getMessage());
+        }
+        self::assertSame("protected unrelated draft\n", File::get($draftPath));
+        self::assertFalse($importer->authorityWriteAttempted());
+    }
+
+    public function test_command_replays_committed_default_inactive_authority_without_write(): void
     {
         $exitCode = Artisan::call('content:import-mbti-result-english-package', [
             '--package-sha' => MbtiResultEnglishPackageImporter::PACKAGE_SHA256,
             '--write' => true,
+            '--approval-sha' => MbtiResultEnglishPackageImporter::APPROVAL_SHA256,
+            '--json' => true,
+        ]);
+        $payload = $this->jsonOutput();
+
+        self::assertSame(0, $exitCode);
+        self::assertTrue($payload['ok']);
+        self::assertSame('write_inactive_draft', $payload['mode']);
+        self::assertFalse($payload['writes_committed']);
+        self::assertFalse($payload['content_authority_write_attempted']);
+        self::assertSame(46, $payload['authority']['preserved_count']);
+    }
+
+    public function test_staging_environment_refuses_write_before_authority_attempt(): void
+    {
+        $this->app->detectEnvironment(static fn (): string => 'staging');
+
+        $exitCode = Artisan::call('content:import-mbti-result-english-package', [
+            '--package-sha' => MbtiResultEnglishPackageImporter::PACKAGE_SHA256,
+            '--write' => true,
+            '--approval-sha' => MbtiResultEnglishPackageImporter::APPROVAL_SHA256,
             '--json' => true,
         ]);
         $payload = $this->jsonOutput();
 
         self::assertSame(1, $exitCode);
-        self::assertFalse($payload['ok']);
-        self::assertSame('write_mode_not_supported', $payload['errors'][0]['code']);
+        self::assertSame('environment_write_not_authorized', $payload['errors'][0]['code']);
         self::assertFalse($payload['writes_committed']);
+        self::assertFalse($payload['content_authority_write_attempted']);
         self::assertFalse($payload['database_write_attempted']);
         self::assertFalse($payload['cms_write_attempted']);
         self::assertFalse($payload['private_payload_read_attempted']);
-        self::assertFalse($payload['attempt_or_report_accessed']);
+        self::assertFalse($payload['activation_attempted']);
+        self::assertFalse($payload['publish_attempted']);
+        self::assertFalse($payload['indexability_attempted']);
+        self::assertFalse($payload['sitemap_attempted']);
+        self::assertFalse($payload['llms_attempted']);
+        self::assertFalse($payload['search_submission_attempted']);
+        self::assertFalse($payload['deploy_attempted']);
     }
 
     private function runDryRun(
