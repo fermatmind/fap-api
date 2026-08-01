@@ -205,6 +205,9 @@ final class AppleIapPaymentContractTest extends TestCase
         $this->assertSame('PROVIDER_ENV_MISMATCH', $rejected['error_code'] ?? null);
 
         config()->set('payments.apple_iap.app_key', 'rotated-production-app-key');
+        config()->set('payments.apple_iap.sku', 'MBTI_REPORT_FULL_V2');
+        config()->set('payments.apple_iap.product_id', 'mbti-report-full-v2');
+        config()->set('payments.apple_iap.price_cents', 999);
         Http::fake([
             'https://api.weixin.qq.com/cgi-bin/token*' => Http::response([
                 'access_token' => 'apple-access-token-contract',

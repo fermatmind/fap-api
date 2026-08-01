@@ -170,7 +170,8 @@ final class WechatMiniVirtualPaymentService
     ): array {
         $provider = $this->normalizeProvider($provider);
         $config = $this->config($provider);
-        if (! $this->orderContractMatches($order, $config, $provider)) {
+        if ($provider !== AppleIapGateway::PROVIDER
+            && ! $this->orderContractMatches($order, $config, $provider)) {
             return $this->error('ORDER_CONTRACT_MISMATCH', 'order does not match virtual payment contract.', 409);
         }
 
@@ -460,6 +461,10 @@ final class WechatMiniVirtualPaymentService
                     'product_id' => (string) $config['product_id'],
                     'environment' => (int) $config['environment'],
                     'channel' => $provider,
+                    'sku' => strtoupper(trim((string) ($lockedOrder->sku ?? ''))),
+                    'quantity' => (int) ($lockedOrder->quantity ?? 0),
+                    'amount_cents' => (int) ($lockedOrder->amount_cents ?? 0),
+                    'currency' => strtoupper(trim((string) ($lockedOrder->currency ?? ''))),
                 ],
             ]);
             $terminalPaymentStates = [
@@ -505,6 +510,10 @@ final class WechatMiniVirtualPaymentService
             return $this->error('PAYMENT_ATTEMPT_NOT_FOUND', 'virtual payment attempt not found.', 409);
         }
         $meta = $this->decodeJson($attempt->payload_meta_json ?? null);
+        if ($provider === AppleIapGateway::PROVIDER
+            && ! $this->settlementOrderContractMatches($order, $attempt, $meta, $provider)) {
+            return $this->error('ORDER_CONTRACT_MISMATCH', 'order does not match its payment attempt contract.', 409);
+        }
         $openid = $this->piiCipher->decrypt((string) ($meta['openid_enc'] ?? ''));
         if ($openid === null || trim($openid) === '') {
             return $this->error('WECHAT_IDENTITY_UNAVAILABLE', 'WeChat identity is unavailable.', 409);
@@ -576,9 +585,6 @@ final class WechatMiniVirtualPaymentService
     private function validateCallbackContract(array $payload, object $order, string $provider): array
     {
         $config = $this->config($provider);
-        if (! $this->orderContractMatches($order, $config, $provider)) {
-            return $this->error('ORDER_CONTRACT_MISMATCH', 'order contract mismatch.', 409);
-        }
         $attempt = $this->orders->latestPaymentAttemptForOrder(
             (string) ($order->order_no ?? ''),
             (int) ($order->org_id ?? 0)
@@ -587,6 +593,12 @@ final class WechatMiniVirtualPaymentService
             return $this->error('PAYMENT_ATTEMPT_NOT_FOUND', 'payment attempt not found.', 409);
         }
         $meta = $this->decodeJson($attempt->payload_meta_json ?? null);
+        $contractMatches = $provider === AppleIapGateway::PROVIDER
+            ? $this->settlementOrderContractMatches($order, $attempt, $meta, $provider)
+            : $this->orderContractMatches($order, $config, $provider);
+        if (! $contractMatches) {
+            return $this->error('ORDER_CONTRACT_MISMATCH', 'order contract mismatch.', 409);
+        }
         foreach ([
             'app_id_hash' => hash('sha256', (string) $config['app_id']),
             'offer_id_hash' => hash('sha256', (string) $config['offer_id']),
@@ -626,8 +638,7 @@ final class WechatMiniVirtualPaymentService
         }
         $goods = is_array($payload['GoodsInfo'] ?? null) ? $payload['GoodsInfo'] : [];
         $productId = trim((string) ($goods['ProductId'] ?? $goods['product_id'] ?? ''));
-        if ($productId !== (string) $config['product_id']
-            || $productId !== (string) ($meta['product_id'] ?? '')) {
+        if ($productId !== (string) ($meta['product_id'] ?? '')) {
             return $this->error('PRODUCT_MISMATCH', 'product mismatch.', 409);
         }
         $actualPrice = (int) ($goods['ActualPrice'] ?? $goods['actual_price'] ?? 0);
@@ -767,6 +778,41 @@ final class WechatMiniVirtualPaymentService
             && (int) ($order->quantity ?? 0) === 1
             && (int) ($order->amount_cents ?? 0) === (int) $config['price_cents']
             && strtoupper(trim((string) ($order->currency ?? ''))) === 'CNY'
+            && trim((string) ($order->target_attempt_id ?? '')) !== '';
+    }
+
+    /**
+     * Settlement must remain bound to the immutable sale snapshot instead of
+     * the current checkout SKU/price configuration, which can legitimately
+     * change while historical callbacks and refunds are still in flight.
+     *
+     * @param  array<string,mixed>  $meta
+     */
+    private function settlementOrderContractMatches(
+        object $order,
+        object $attempt,
+        array $meta,
+        string $provider
+    ): bool {
+        $orderSku = strtoupper(trim((string) ($order->sku ?? '')));
+        $orderCurrency = strtoupper(trim((string) ($order->currency ?? '')));
+        $amount = (int) ($order->amount_cents ?? 0);
+
+        return strtolower(trim((string) ($order->provider ?? ''))) === $provider
+            && strtolower(trim((string) ($attempt->provider ?? ''))) === $provider
+            && $orderSku !== ''
+            && $orderSku === strtoupper(trim((string) ($meta['sku'] ?? '')))
+            && (int) ($order->quantity ?? 0) === 1
+            && (int) ($meta['quantity'] ?? 0) === 1
+            && $amount > 0
+            && $amount === (int) ($attempt->amount_expected ?? 0)
+            && $amount === (int) ($meta['amount_cents'] ?? 0)
+            && $orderCurrency === 'CNY'
+            && $orderCurrency === strtoupper(trim((string) ($attempt->currency ?? '')))
+            && $orderCurrency === strtoupper(trim((string) ($meta['currency'] ?? '')))
+            && trim((string) ($meta['product_id'] ?? '')) !== ''
+            && (int) ($meta['environment'] ?? -1) === 0
+            && strtolower(trim((string) ($meta['channel'] ?? ''))) === $provider
             && trim((string) ($order->target_attempt_id ?? '')) !== '';
     }
 
