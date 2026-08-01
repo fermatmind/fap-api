@@ -77,6 +77,7 @@ final class MbtiComparisonEnglishPackageImporter
         string $confirmedApprovalSha256,
     ): array {
         $this->writeAttempted = false;
+        $this->assertWriteEnvironmentAllowed();
 
         return DB::transaction(function () use (
             $packageDirectory,
@@ -167,9 +168,9 @@ final class MbtiComparisonEnglishPackageImporter
                 'mode' => 'write_inactive_draft',
                 'dry_run_only' => false,
                 'write_supported_in_this_pr' => true,
-                'writes_committed' => true,
-                'database_write_attempted' => true,
-                'cms_write_attempted' => true,
+                'writes_committed' => $this->writeAttempted,
+                'database_write_attempted' => $this->writeAttempted,
+                'cms_write_attempted' => $this->writeAttempted,
                 'publish_attempted' => false,
                 'activation_attempted' => false,
                 'indexability_attempted' => false,
@@ -569,6 +570,7 @@ final class MbtiComparisonEnglishPackageImporter
         if ((int) $authority->org_id !== 0
             || (string) $authority->locale !== 'en'
             || (string) $authority->source_package_id !== self::PACKAGE_ID
+            || (string) $authority->review_status !== 'w9_passed_pending_editorial'
             || (string) $authority->publish_status !== 'draft'
             || (bool) $authority->is_public
             || (bool) $authority->is_indexable
@@ -577,6 +579,16 @@ final class MbtiComparisonEnglishPackageImporter
             || (bool) $authority->search_submission_eligible
             || $authority->published_at !== null) {
             $this->fail('existing_target_collision', 'An English target identity is not an exact-package inactive draft.');
+        }
+    }
+
+    private function assertWriteEnvironmentAllowed(): void
+    {
+        if (! app()->environment(['local', 'testing'])) {
+            $this->fail(
+                'environment_write_not_authorized',
+                'This approval does not authorize staging or production CMS execution.',
+            );
         }
     }
 
