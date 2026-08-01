@@ -10,7 +10,11 @@ use Illuminate\Contracts\Console\Kernel;
 const REQUIRED_ACTIVE_REVISION = '660280d00a57e58bd8bc76608e19de2492c03f53';
 
 set_exception_handler(static function (Throwable $throwable): never {
-    fwrite(STDERR, "comparison_english_publish_live_qa_failed\n");
+    $errorCode = strtolower(trim((string) strtok($throwable->getMessage(), ':')));
+    if (preg_match('/\A[a-z0-9_]{1,96}\z/', $errorCode) !== 1) {
+        $errorCode = 'unexpected_error';
+    }
+    fwrite(STDERR, "comparison_english_publish_live_qa_failed:$errorCode\n");
     exit(1);
 });
 
