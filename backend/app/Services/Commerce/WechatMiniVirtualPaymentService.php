@@ -234,20 +234,27 @@ final class WechatMiniVirtualPaymentService
         $this->orders->touchReconciledLedger((string) ($order->order_no ?? ''), (int) ($order->org_id ?? 0));
 
         if (in_array($status, [2, 3, 4, 5, 6, 8, 9, 10], true)) {
-            $processed = $this->webhooks->handle(
-                $provider,
-                $eventPayload,
-                (int) ($order->org_id ?? 0),
-                isset($order->user_id) ? (string) $order->user_id : null,
-                isset($order->anon_id) ? (string) $order->anon_id : null,
-                true,
-                ['source' => 'official_query_order']
-            );
-            if ($provider === AppleIapGateway::PROVIDER) {
-                $this->orders->advancePaymentAttempt((string) ($attempt->id ?? ''), [
-                    'external_trade_no' => (string) ($attempt->external_trade_no ?? ''),
-                ]);
-            }
+            $handleWebhook = function () use ($provider, $eventPayload, $order, $attempt): array {
+                $processed = $this->webhooks->handle(
+                    $provider,
+                    $eventPayload,
+                    (int) ($order->org_id ?? 0),
+                    isset($order->user_id) ? (string) $order->user_id : null,
+                    isset($order->anon_id) ? (string) $order->anon_id : null,
+                    true,
+                    ['source' => 'official_query_order']
+                );
+                if ($provider === AppleIapGateway::PROVIDER) {
+                    $this->orders->advancePaymentAttempt((string) ($attempt->id ?? ''), [
+                        'external_trade_no' => (string) ($attempt->external_trade_no ?? ''),
+                    ]);
+                }
+
+                return $processed;
+            };
+            $processed = $isAppleRefund
+                ? $this->processAppleRefundMonotonically($order, $refundAmount, $handleWebhook)
+                : $handleWebhook();
             if (($processed['ok'] ?? false) !== true) {
                 return $processed;
             }
@@ -317,6 +324,7 @@ final class WechatMiniVirtualPaymentService
             return $validation;
         }
 
+        $verified = null;
         $verifiedProviderOrder = null;
         if ($provider === AppleIapGateway::PROVIDER) {
             $verified = $this->queryVerifiedProviderOrder($order, $provider, $this->config($provider));
@@ -391,25 +399,39 @@ final class WechatMiniVirtualPaymentService
             'refund_amount_cents' => $normalizedRefundAmount,
             'event_type' => $eventType === 'xpay_refund_notify' ? 'refund_succeeded' : 'payment_succeeded',
         ]);
-        $result = $this->webhooks->handle(
+        $handleWebhook = function () use (
             $provider,
             $normalizedPayload,
-            (int) ($order->org_id ?? 0),
-            isset($order->user_id) ? (string) $order->user_id : null,
-            isset($order->anon_id) ? (string) $order->anon_id : null,
-            true,
-            [
-                'source' => 'wechat_message_push',
-                'content_type' => $isJson ? 'json' : 'xml',
-            ],
-            hash('sha256', $raw),
-            strlen($raw)
-        );
-        if ($provider === AppleIapGateway::PROVIDER && is_object($verified['attempt'] ?? null)) {
-            $this->orders->advancePaymentAttempt((string) ($verified['attempt']->id ?? ''), [
-                'external_trade_no' => (string) ($verified['attempt']->external_trade_no ?? ''),
-            ]);
-        }
+            $order,
+            $isJson,
+            $raw,
+            $verified
+        ): array {
+            $result = $this->webhooks->handle(
+                $provider,
+                $normalizedPayload,
+                (int) ($order->org_id ?? 0),
+                isset($order->user_id) ? (string) $order->user_id : null,
+                isset($order->anon_id) ? (string) $order->anon_id : null,
+                true,
+                [
+                    'source' => 'wechat_message_push',
+                    'content_type' => $isJson ? 'json' : 'xml',
+                ],
+                hash('sha256', $raw),
+                strlen($raw)
+            );
+            if ($provider === AppleIapGateway::PROVIDER && is_object($verified['attempt'] ?? null)) {
+                $this->orders->advancePaymentAttempt((string) ($verified['attempt']->id ?? ''), [
+                    'external_trade_no' => (string) ($verified['attempt']->external_trade_no ?? ''),
+                ]);
+            }
+
+            return $result;
+        };
+        $result = $provider === AppleIapGateway::PROVIDER && $eventType === 'xpay_refund_notify'
+            ? $this->processAppleRefundMonotonically($order, $normalizedRefundAmount, $handleWebhook)
+            : $handleWebhook();
         $result['ack_format'] = $isJson ? 'json' : 'xml';
 
         return $result;
@@ -858,6 +880,35 @@ final class WechatMiniVirtualPaymentService
             && (int) ($meta['environment'] ?? -1) === 0
             && strtolower(trim((string) ($meta['channel'] ?? ''))) === $provider
             && trim((string) ($order->target_attempt_id ?? '')) !== '';
+    }
+
+    /**
+     * @param  callable():array<string,mixed>  $handler
+     * @return array<string,mixed>
+     */
+    private function processAppleRefundMonotonically(object $order, int $refundAmount, callable $handler): array
+    {
+        return DB::transaction(function () use ($order, $refundAmount, $handler): array {
+            $lockedOrder = DB::table('orders')
+                ->where('order_no', (string) ($order->order_no ?? ''))
+                ->where('org_id', (int) ($order->org_id ?? 0))
+                ->lockForUpdate()
+                ->first();
+            if ($lockedOrder === null) {
+                return $this->error('ORDER_NOT_FOUND', 'order not found.', 404);
+            }
+
+            $recordedRefund = (int) ($lockedOrder->refund_amount_cents ?? 0);
+            if ($recordedRefund >= $refundAmount) {
+                return [
+                    'ok' => true,
+                    'duplicate' => true,
+                    'stale_refund' => $recordedRefund > $refundAmount,
+                ];
+            }
+
+            return $handler();
+        });
     }
 
     private function openidHash(string $openid, string $appKey): string
