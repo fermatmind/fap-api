@@ -1,4 +1,83 @@
 {
+  "API-AD-01": {
+    "id": "API-AD-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/api-ad-01-rewarded-unlock",
+    "title": "API-AD-01: add residual-risk rewarded-ad report unlock",
+    "depends_on": ["API-UNLOCK-01"],
+    "status": "github_review_repairing",
+    "commit_sha": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3469",
+    "checks": {
+      "authorization_boundary": {
+        "status": "passed",
+        "evidence": "The operator explicitly accepted the residual risk of using only the client isEnded completion signal. This is not represented as a platform receipt or server-side platform verification."
+      },
+      "official_platform_evidence": {
+        "status": "partial",
+        "evidence": "The operator-provided rewarded-video API material documents only client onClose(res).isEnded. No platform server receipt, callback, signature, query, delivery, or anti-replay protocol was supplied."
+      },
+      "github_required_checks": {
+        "status": "repairing",
+        "evidence": "The previous exact head passed all required checks. Its exact-head review then found two further P2 boundaries: reuse of a pending session must include the requested ad-unit fingerprint, and refunded gift state must be reconciled before an idempotent historical-order return. The repair replaces the actor's active-session pointer when the ad unit differs and moves the idempotent return after gift refund reconciliation. Rewarded-ad contracts now pass 10 tests / 76 assertions; fresh GitHub checks, exact-head review, mergeability, and latest-main reconciliation remain mandatory."
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-08-01T17:34:00+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started from exact origin/main a202c8175ad0cfda59585d9adb20e1b2d8b929a2 in an isolated worktree. Fixed order: routes added; migration N/A because short-lived session state uses cache; FmTokenAuth N/A because existing middleware and ownership checks are reused; controller/service in progress; scripts/CI N/A. Provider remains unavailable by default. No production configuration, platform mutation, secret, deployment, upload, order, or payment occurred."
+      },
+      {
+        "at": "2026-08-01T17:58:11+08:00",
+        "status": "local_validation_passed",
+        "note": "Focused rewarded-ad contract tests passed 5 tests / 44 assertions; existing unlock-option and report-access regression tests passed 23 tests / 273 assertions; OpenAPI passed 2 tests / 6 assertions; the exact runtime-freeze gate passed 2 tests / 5 assertions; scoped Pint, route inventory, OpenAPI snapshot check, YAML/JSON parsing, diff check, and exact nine-path scope validation passed. The full ci_verify_mbti.sh verifier completed using isolated SQLite; its transient BIG5 compiled artifacts were restored and excluded from scope. Composer validate --strict still reports the repository's pre-existing missing package name and description publish metadata. No migration, provider activation, deployment, platform mutation, production order, or payment occurred."
+      },
+      {
+        "at": "2026-08-01T18:00:00+08:00",
+        "status": "github_checks_pending",
+        "note": "Pushed branch codex/api-ad-01-rewarded-unlock and opened PR #3469. Required GitHub checks, exact-head review, mergeability, and latest-main reconciliation are pending."
+      },
+      {
+        "at": "2026-08-01T18:13:19+08:00",
+        "status": "github_review_repairing",
+        "note": "verify-bigfive on the prior head passed 1648 tests but failed 16 negative runtime-freeze assertions because routes/api.php was exempted too broadly. The repair uses an exact zero-context list of the thirteen rewarded-ad route addition lines and a negative debug-route control. The full classifier file passes 401 tests / 846 assertions; rewarded-ad contracts pass 5 / 44; OpenAPI snapshot passes 2 / 6. No provider activation or production/platform action occurred. Fresh GitHub checks and exact-head review remain mandatory."
+      },
+      {
+        "at": "2026-08-01T18:33:22+08:00",
+        "status": "github_review_repairing",
+        "note": "Exact-head review found three valid service boundaries: a revoked/expired historical grant must not make completion look successful while access stays locked; separate live rewarded sessions need attempt+actor completion serialization; and the shared EntitlementManager classifier must be diff-specific. The repair creates a distinct active rewarded grant while retaining the old inactive row, returns 409 before any grant when that actor+attempt lock is held, and allows only the exact signed initial, repair, or combined EntitlementManager diff sequences. Rewarded-ad contracts pass 7 tests / 56 assertions; the targeted classifier passes 2 / 32 and its source-level negative controls pass. No provider activation or production/platform action occurred. Fresh GitHub checks and exact-head review remain mandatory."
+      },
+      {
+        "at": "2026-08-01T18:53:28+08:00",
+        "status": "github_checks_pending",
+        "note": "Exact-head review then found three further valid boundaries. Completion now serializes by org+attempt rather than actor, a repeated refund recognizes its own historical order grant and cannot fall through to revoke a later orderless rewarded-ad grant, and active grant reuse requires the current report-access actor predicate. Rewarded-ad contracts pass 9 tests / 69 assertions; adjacent gift-refund regression passes 2 / 30; entitlement projection/module regressions pass 2 / 13; the exact runtime-freeze classifier, scoped Pint, syntax, and diff checks pass. No provider activation or production/platform action occurred. Fresh GitHub checks and exact-head review remain mandatory."
+      },
+      {
+        "at": "2026-08-01T19:08:20+08:00",
+        "status": "github_review_repairing",
+        "note": "All required checks passed on exact head 75313747fc3ef478b1f7c9465bb62e4793442cd1, then exact-head review found two valid P2 boundaries. A different ad unit now replaces the actor's active-session pointer instead of returning a mismatched pending session, while a historical-order idempotent return occurs only after actual-refund gift status reconciliation. Rewarded-ad contracts pass 10 tests / 76 assertions with regressions for both paths; scoped Pint, syntax, and diff checks pass. No provider activation or production/platform action occurred. Fresh GitHub checks and exact-head review remain mandatory."
+      }
+    ],
+    "updated_at": "2026-08-01T19:08:20+08:00"
+  },
   "API-IAP-01": {
     "id": "API-IAP-01",
     "repo": "fap-api",

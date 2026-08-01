@@ -81,7 +81,10 @@ class EntitlementManager
         ?string $scopeOverride = null,
         ?string $expiresAt = null,
         ?array $modules = null,
-        ?array $metaPatch = null
+        ?array $metaPatch = null,
+        bool $preserveExistingUnlockSource = false,
+        bool $ignoreInactiveExisting = false,
+        bool $matchExistingActor = false,
     ): array {
         $benefitCode = strtoupper(trim($benefitCode));
         $attemptId = trim($attemptId);
@@ -101,12 +104,35 @@ class EntitlementManager
         $userIdToStore = $userId !== '' ? $userId : ($anonId !== '' ? $anonId : ('attempt:'.$attemptId));
         $benefitRef = $anonId !== '' ? $anonId : ($userId !== '' ? $userId : ('attempt:'.$attemptId));
 
-        $existing = DB::table('benefit_grants')
+        $existingQuery = DB::table('benefit_grants')
             ->where('org_id', $orgId)
             ->where('benefit_code', $benefitCode)
             ->where('scope', $scope)
-            ->where('attempt_id', $attemptId)
-            ->first();
+            ->where('attempt_id', $attemptId);
+        if ($ignoreInactiveExisting) {
+            $existingQuery
+                ->where('status', 'active')
+                ->where(function ($query) {
+                    $query->whereNull('expires_at')
+                        ->orWhere('expires_at', '>', now());
+                });
+        }
+        if ($matchExistingActor) {
+            $existingQuery->where(function ($query) use ($userId, $anonId, $benefitRef): void {
+                if ($userId !== '') {
+                    $query->where('user_id', $userId);
+
+                    if ($anonId !== '') {
+                        $query->orWhere('benefit_ref', $anonId);
+                    }
+
+                    return;
+                }
+
+                $query->where('benefit_ref', $benefitRef);
+            });
+        }
+        $existing = $existingQuery->first();
 
         $catalog = $this->benefitModuleRuleCatalog();
         $grantedModules = ReportAccess::normalizeModules(
@@ -131,7 +157,14 @@ class EntitlementManager
             }
 
             if (is_array($metaPatch) && $metaPatch !== []) {
-                $meta = array_merge($meta, $metaPatch);
+                $safeMetaPatch = $metaPatch;
+                $existingSource = ReportAccess::normalizeThreeChannelUnlockSource((string) (
+                    $meta['unlock_source'] ?? $meta['granted_via'] ?? ''
+                ));
+                if ($preserveExistingUnlockSource && $existingSource !== ReportAccess::UNLOCK_SOURCE_NONE) {
+                    unset($safeMetaPatch['unlock_source'], $safeMetaPatch['granted_via']);
+                }
+                $meta = array_merge($meta, $safeMetaPatch);
                 $metaChanged = true;
             }
 
@@ -517,8 +550,13 @@ class EntitlementManager
             ->where('status', 'active')
             ->lockForUpdate()
             ->first();
+        $historicalOrderGrant = $directGrant ?? DB::table('benefit_grants')
+            ->where('org_id', $orderOrgId)
+            ->where('order_no', $orderNo)
+            ->lockForUpdate()
+            ->first();
         $sku = strtoupper((string) ($order->effective_sku ?? $order->sku ?? $order->item_sku ?? ''));
-        if ($sku === '' && $directGrant === null) {
+        if ($sku === '' && $historicalOrderGrant === null) {
             return [
                 'ok' => true,
                 'revoked' => 0,
@@ -528,7 +566,7 @@ class EntitlementManager
         $skuRow = app(SkuCatalog::class)->getActiveSku($sku, null, $orderOrgId);
         $benefitCode = $skuRow
             ? strtoupper((string) ($skuRow->benefit_code ?? ''))
-            : strtoupper((string) ($directGrant->benefit_code ?? ''));
+            : strtoupper((string) ($historicalOrderGrant->benefit_code ?? ''));
 
         if ($benefitCode === '') {
             return [
@@ -558,6 +596,18 @@ class EntitlementManager
                     'status' => 'refunded',
                     'updated_at' => now(),
                 ]);
+        }
+
+        if ($directGrant === null && $historicalOrderGrant !== null) {
+            $this->orders->syncGrantState($orderNo, $orderOrgId, 'revoked');
+
+            return [
+                'ok' => true,
+                'revoked' => 0,
+                'benefit_code' => $benefitCode,
+                'attempt_id' => $attemptId,
+                'idempotent' => true,
+            ];
         }
 
         $now = now();

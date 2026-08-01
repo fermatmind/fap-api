@@ -1861,7 +1861,6 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     public function test_runtime_freeze_classifier_ignores_iq_paid_report_entitlement_contract_changes(): void
     {
         $changed = [
-            'backend/app/Services/Commerce/EntitlementManager.php',
             'backend/app/Services/Report/ReportAccess.php',
             'backend/app/Services/Report/Resolvers/AccessResolver.php',
         ];
@@ -1879,6 +1878,55 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
+    public function test_runtime_freeze_classifier_ignores_rewarded_ad_unlock_contract_files(): void
+    {
+        $changed = [
+            'backend/routes/api.php',
+            'backend/app/Http/Controllers/API/V0_3/AttemptRewardedAdController.php',
+            'backend/app/Services/Commerce/RewardedAdUnlockService.php',
+            'backend/app/Services/Commerce/EntitlementManager.php',
+            'backend/tests/Feature/Commerce/RewardedAdUnlockContractTest.php',
+        ];
+
+        $rewardedAdRouteChangedLines = array_map(
+            static fn (string $line): string => '+'.$line,
+            $this->rewardedAdUnlockRouteChangedLines(),
+        );
+        $rewardedAdEntitlementManagerChangedLines = $this->rewardedAdUnlockEntitlementManagerChangedLines();
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            routeChangedLines: $rewardedAdRouteChangedLines,
+            entitlementManagerChangedLines: $rewardedAdEntitlementManagerChangedLines,
+        ));
+        $this->assertSame(
+            ['backend/routes/api.php'],
+            $this->mbtiImpactingRuntimeChanges(
+                ['backend/routes/api.php'],
+                '',
+                '',
+                routeChangedLines: array_merge(
+                    $rewardedAdRouteChangedLines,
+                    ['+            Route::post(\'/attempts/{id}/rewarded-ad-sessions/debug\', [AttemptRewardedAdController::class, \'store\']);'],
+                ),
+            )
+        );
+        $this->assertSame(
+            ['backend/app/Services/Commerce/EntitlementManager.php'],
+            $this->mbtiImpactingRuntimeChanges(
+                ['backend/app/Services/Commerce/EntitlementManager.php'],
+                '',
+                '',
+                entitlementManagerChangedLines: array_merge(
+                    $rewardedAdEntitlementManagerChangedLines,
+                    ['+        $existingQuery->where("org_id", 999);'],
+                ),
+            )
+        );
     }
 
     public function test_runtime_freeze_classifier_ignores_free_full_report_mode_feature_flag_files(): void
@@ -3858,7 +3906,6 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $changed = [
             'backend/app/Services/Commerce/AppleIapPaymentService.php',
-            'backend/app/Services/Commerce/EntitlementManager.php',
             'backend/app/Services/Commerce/OrderManager.php',
             'backend/app/Services/Commerce/PaymentGateway/AppleIapGateway.php',
             'backend/app/Services/Commerce/Webhook/WebhookEntitlementService.php',
@@ -6871,6 +6918,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ?array $generateReportSnapshotJobChangedLines = null,
         ?array $orderRepairServiceChangedLines = null,
         ?array $orderRepairServiceHunkHeaders = null,
+        ?array $entitlementManagerChangedLines = null,
     ): array {
         $impacting = [];
         $soloOwnerReviewFoundationAddedFileSet = array_fill_keys(
@@ -8020,6 +8068,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (
+                $file === 'backend/app/Services/Commerce/EntitlementManager.php'
+                && $this->entitlementManagerDiffIsRewardedAdUnlockOnly(
+                    $entitlementManagerChangedLines ?? (
+                        $repoRoot !== '' && $baseRef !== ''
+                            ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                            : []
+                    )
+                )
+            ) {
+                continue;
+            }
+
+            if (
                 $file === 'backend/routes/api.php'
                 && $this->routeDiffIsPaidReportGiftingOnly(
                     $routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef)
@@ -8460,6 +8521,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if (
+                $file === 'backend/routes/api.php'
+                && $this->routeDiffIsRewardedAdUnlockOnly(
+                    $routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef)
+                )
+            ) {
+                continue;
+            }
+
             if ($this->isRiasecMeasurementContractComparePolicyFile($file)) {
                 continue;
             }
@@ -8593,6 +8663,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isThreeChannelReportUnlockContractFile($file)) {
+                continue;
+            }
+
+            if ($this->isRewardedAdUnlockContractFile($file)) {
                 continue;
             }
 
@@ -11321,7 +11395,6 @@ DIFF;
     private function isIqPaidReportEntitlementContractFile(string $file): bool
     {
         return in_array($file, [
-            'backend/app/Services/Commerce/EntitlementManager.php',
             'backend/app/Services/Report/ReportAccess.php',
             'backend/app/Services/Report/Resolvers/AccessResolver.php',
         ], true);
@@ -11334,6 +11407,15 @@ DIFF;
             'backend/app/Services/Commerce/ReportUnlockOptionResolver.php',
             'backend/app/Services/Report/InviteUnlockSummaryBuilder.php',
             'backend/database/migrations/2026_07_30_235900_create_report_gift_requests_table.php',
+        ], true);
+    }
+
+    private function isRewardedAdUnlockContractFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_3/AttemptRewardedAdController.php',
+            'backend/app/Services/Commerce/RewardedAdUnlockService.php',
+            'backend/tests/Feature/Commerce/RewardedAdUnlockContractTest.php',
         ], true);
     }
 
@@ -15052,6 +15134,190 @@ DIFF;
         }
 
         return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsRewardedAdUnlockOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        $actual = [];
+        foreach ($changedLines as $line) {
+            if (! is_string($line) || ($line[0] ?? '') !== '+') {
+                return false;
+            }
+
+            $actual[] = substr($line, 1);
+        }
+
+        return $actual === $this->rewardedAdUnlockRouteChangedLines();
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function rewardedAdUnlockRouteChangedLines(): array
+    {
+        return [
+            'use App\\Http\\Controllers\\API\\V0_3\\AttemptRewardedAdController;',
+            "            Route::post('/attempts/{id}/rewarded-ad-sessions', [AttemptRewardedAdController::class, 'store'])",
+            "                ->middleware(['throttle:api_attempt_submit', \\App\\Http\\Middleware\\FmTokenAuth::class, 'uuid:id'])",
+            "                ->defaults('public_realm', true)",
+            "                ->name('api.v0_3.attempts.rewarded_ad_sessions.store');",
+            "            Route::get('/attempts/{id}/rewarded-ad-sessions/{session_id}', [AttemptRewardedAdController::class, 'show'])",
+            "                ->middleware([\\App\\Http\\Middleware\\FmTokenAuth::class, 'uuid:id', 'uuid:session_id'])",
+            "                ->defaults('public_realm', true)",
+            "                ->name('api.v0_3.attempts.rewarded_ad_sessions.show');",
+            "            Route::post('/attempts/{id}/rewarded-ad-sessions/{session_id}/complete', [AttemptRewardedAdController::class, 'complete'])",
+            "                ->middleware(['throttle:api_attempt_submit', \\App\\Http\\Middleware\\FmTokenAuth::class, 'uuid:id', 'uuid:session_id'])",
+            "                ->defaults('public_realm', true)",
+            "                ->name('api.v0_3.attempts.rewarded_ad_sessions.complete');",
+        ];
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function entitlementManagerDiffIsRewardedAdUnlockOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        $actual = [];
+        foreach ($changedLines as $line) {
+            if (! is_string($line) || ! in_array($line[0] ?? '', ['+', '-'], true)) {
+                return false;
+            }
+
+            $actual[] = $line;
+        }
+
+        return $actual === $this->rewardedAdUnlockEntitlementManagerInitialChangedLines()
+            || $actual === $this->rewardedAdUnlockEntitlementManagerChangedLines()
+            || $actual === $this->rewardedAdUnlockEntitlementManagerRepairChangedLines();
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function rewardedAdUnlockEntitlementManagerChangedLines(): array
+    {
+        return [
+            '-        ?array $metaPatch = null',
+            '+        ?array $metaPatch = null,',
+            '+        bool $preserveExistingUnlockSource = false,',
+            '+        bool $ignoreInactiveExisting = false,',
+            '+        bool $matchExistingActor = false,',
+            "-        \$existing = DB::table('benefit_grants')",
+            "+        \$existingQuery = DB::table('benefit_grants')",
+            "-            ->where('attempt_id', \$attemptId)",
+            '-            ->first();',
+            "+            ->where('attempt_id', \$attemptId);",
+            '+        if ($ignoreInactiveExisting) {',
+            '+            $existingQuery',
+            "+                ->where('status', 'active')",
+            '+                ->where(function ($query) {',
+            "+                    \$query->whereNull('expires_at')",
+            "+                        ->orWhere('expires_at', '>', now());",
+            '+                });',
+            '+        }',
+            '+        if ($matchExistingActor) {',
+            '+            $existingQuery->where(function ($query) use ($userId, $anonId, $benefitRef): void {',
+            "+                if (\$userId !== '') {",
+            "+                    \$query->where('user_id', \$userId);",
+            '+',
+            "+                    if (\$anonId !== '') {",
+            "+                        \$query->orWhere('benefit_ref', \$anonId);",
+            '+                    }',
+            '+',
+            '+                    return;',
+            '+                }',
+            '+',
+            "+                \$query->where('benefit_ref', \$benefitRef);",
+            '+            });',
+            '+        }',
+            '+        $existing = $existingQuery->first();',
+            '-                $meta = array_merge($meta, $metaPatch);',
+            '+                $safeMetaPatch = $metaPatch;',
+            '+                $existingSource = ReportAccess::normalizeThreeChannelUnlockSource((string) (',
+            "+                    \$meta['unlock_source'] ?? \$meta['granted_via'] ?? ''",
+            '+                ));',
+            '+                if ($preserveExistingUnlockSource && $existingSource !== ReportAccess::UNLOCK_SOURCE_NONE) {',
+            "+                    unset(\$safeMetaPatch['unlock_source'], \$safeMetaPatch['granted_via']);",
+            '+                }',
+            '+                $meta = array_merge($meta, $safeMetaPatch);',
+            "+        \$historicalOrderGrant = \$directGrant ?? DB::table('benefit_grants')",
+            "+            ->where('org_id', \$orderOrgId)",
+            "+            ->where('order_no', \$orderNo)",
+            '+            ->lockForUpdate()',
+            '+            ->first();',
+            "-        if (\$sku === '' && \$directGrant === null) {",
+            "+        if (\$sku === '' && \$historicalOrderGrant === null) {",
+            "-            : strtoupper((string) (\$directGrant->benefit_code ?? ''));",
+            "+            : strtoupper((string) (\$historicalOrderGrant->benefit_code ?? ''));",
+            '+        if ($directGrant === null && $historicalOrderGrant !== null) {',
+            "+            \$this->orders->syncGrantState(\$orderNo, \$orderOrgId, 'revoked');",
+            '+',
+            '+            return [',
+            "+                'ok' => true,",
+            "+                'revoked' => 0,",
+            "+                'benefit_code' => \$benefitCode,",
+            "+                'attempt_id' => \$attemptId,",
+            "+                'idempotent' => true,",
+            '+            ];',
+            '+        }',
+            '+',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function rewardedAdUnlockEntitlementManagerInitialChangedLines(): array
+    {
+        return [
+            '-        ?array $metaPatch = null',
+            '+        ?array $metaPatch = null,',
+            '+        bool $preserveExistingUnlockSource = false,',
+            '-                $meta = array_merge($meta, $metaPatch);',
+            '+                $safeMetaPatch = $metaPatch;',
+            '+                $existingSource = ReportAccess::normalizeThreeChannelUnlockSource((string) (',
+            "+                    \$meta['unlock_source'] ?? \$meta['granted_via'] ?? ''",
+            '+                ));',
+            '+                if ($preserveExistingUnlockSource && $existingSource !== ReportAccess::UNLOCK_SOURCE_NONE) {',
+            "+                    unset(\$safeMetaPatch['unlock_source'], \$safeMetaPatch['granted_via']);",
+            '+                }',
+            '+                $meta = array_merge($meta, $safeMetaPatch);',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function rewardedAdUnlockEntitlementManagerRepairChangedLines(): array
+    {
+        return [
+            '+        bool $ignoreInactiveExisting = false,',
+            "-        \$existing = DB::table('benefit_grants')",
+            "+        \$existingQuery = DB::table('benefit_grants')",
+            "-            ->where('attempt_id', \$attemptId)",
+            '-            ->first();',
+            "+            ->where('attempt_id', \$attemptId);",
+            '+        if ($ignoreInactiveExisting) {',
+            '+            $existingQuery',
+            "+                ->where('status', 'active')",
+            '+                ->where(function ($query) {',
+            "+                    \$query->whereNull('expires_at')",
+            "+                        ->orWhere('expires_at', '>', now());",
+            '+                });',
+            '+        }',
+            '+        $existing = $existingQuery->first();',
+        ];
     }
 
     /**
