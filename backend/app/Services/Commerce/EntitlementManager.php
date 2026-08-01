@@ -511,8 +511,14 @@ class EntitlementManager
         }
 
         $orderOrgId = (int) ($order->org_id ?? $orgId);
+        $directGrant = DB::table('benefit_grants')
+            ->where('org_id', $orderOrgId)
+            ->where('order_no', $orderNo)
+            ->where('status', 'active')
+            ->lockForUpdate()
+            ->first();
         $sku = strtoupper((string) ($order->effective_sku ?? $order->sku ?? $order->item_sku ?? ''));
-        if ($sku === '') {
+        if ($sku === '' && $directGrant === null) {
             return [
                 'ok' => true,
                 'revoked' => 0,
@@ -520,7 +526,9 @@ class EntitlementManager
         }
 
         $skuRow = app(SkuCatalog::class)->getActiveSku($sku, null, $orderOrgId);
-        $benefitCode = $skuRow ? strtoupper((string) ($skuRow->benefit_code ?? '')) : '';
+        $benefitCode = $skuRow
+            ? strtoupper((string) ($skuRow->benefit_code ?? ''))
+            : strtoupper((string) ($directGrant->benefit_code ?? ''));
 
         if ($benefitCode === '') {
             return [
@@ -553,12 +561,6 @@ class EntitlementManager
         }
 
         $now = now();
-        $directGrant = DB::table('benefit_grants')
-            ->where('org_id', $orderOrgId)
-            ->where('order_no', $orderNo)
-            ->where('status', 'active')
-            ->lockForUpdate()
-            ->first();
         $fallbackGift = $directGrant !== null && Schema::hasTable('report_gift_requests')
             ? DB::table('report_gift_requests as gifts')
                 ->join('orders as gift_orders', 'gift_orders.id', '=', 'gifts.purchased_order_id')
