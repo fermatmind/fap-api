@@ -6,6 +6,7 @@ namespace Tests\Feature\Cms;
 
 use App\Services\Cms\MbtiResultEnglishRuntimeCapabilityPreflightService;
 use App\Services\ContentPackResolver;
+use App\Services\Mbti\MbtiResultPersonalizationService;
 use DomainException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -50,6 +51,28 @@ final class MbtiResultEnglishRuntimeCapabilityPreflightServiceTest extends TestC
         $this->inspect();
     }
 
+    public function test_it_uses_the_deployed_projection_renderer_without_constructing_its_dependency_graph(): void
+    {
+        $this->seedExactInactiveAuthority();
+        app()->forgetInstance(MbtiResultEnglishRuntimeCapabilityPreflightService::class);
+        app()->forgetInstance(MbtiResultPersonalizationService::class);
+        app()->bind(MbtiResultPersonalizationService::class, static function (): never {
+            throw new \RuntimeException('personalization container construction must not run');
+        });
+
+        ob_start();
+        try {
+            $this->inspect();
+            self::fail('The synthetic projection must retain unresolved tokens.');
+        } catch (DomainException $exception) {
+            self::assertStringContainsString('runtime_result_token_unresolved:', $exception->getMessage());
+        } finally {
+            $output = (string) ob_get_clean();
+        }
+
+        self::assertSame('', $output);
+    }
+
     public function test_it_fails_closed_when_an_active_pointer_exists(): void
     {
         $this->seedExactInactiveAuthority();
@@ -91,6 +114,12 @@ final class MbtiResultEnglishRuntimeCapabilityPreflightServiceTest extends TestC
         self::assertStringContainsString("mbtiResultRuntimeCapabilityPreflightFail('executor_receipt_encode_failed')", $executor);
         self::assertStringNotContainsString('$throwable->getMessage()', $executor);
         self::assertStringContainsString('controlled_read_only_runtime_capability_preflight', $service);
+        self::assertStringContainsString('new \\ReflectionClass(MbtiResultPersonalizationService::class)', $service);
+        self::assertStringContainsString('newInstanceWithoutConstructor()', $service);
+        self::assertStringContainsString('runtime_projection_renderer_unavailable', $service);
+        self::assertStringNotContainsString('private readonly MbtiResultPersonalizationService $personalizationService', $service);
+        self::assertStringNotContainsString('app()->make(MbtiResultPersonalizationService::class)', $service);
+        self::assertStringNotContainsString('fwrite(STDOUT', $service);
         self::assertStringNotContainsString('payload_json', $service);
         self::assertStringNotContainsString("DB::table('attempts')", $service);
         self::assertStringNotContainsString("DB::table('results')", $service);
