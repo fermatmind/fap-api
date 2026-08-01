@@ -90,7 +90,7 @@ class PaymentWebhookHandlerCore
             $this->gateways[$wechatMiniVirtual->provider()] = $wechatMiniVirtual;
         }
         $appleIap = new AppleIapGateway;
-        if ($this->isProviderEnabled($appleIap->provider())) {
+        if ($this->canProcessSettlement($appleIap->provider())) {
             $this->gateways[$appleIap->provider()] = $appleIap;
         }
 
@@ -1588,6 +1588,11 @@ class PaymentWebhookHandlerCore
     private function isProviderEnabled(string $provider): bool
     {
         return app(PaymentProviderRegistry::class)->isEnabled($provider);
+    }
+
+    private function canProcessSettlement(string $provider): bool
+    {
+        return app(PaymentProviderRegistry::class)->canProcessSettlement($provider);
     }
 
     public function normalizeResultStatus(array $result): array

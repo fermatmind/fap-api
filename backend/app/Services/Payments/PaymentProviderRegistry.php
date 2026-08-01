@@ -118,6 +118,34 @@ final class PaymentProviderRegistry
 
     public function isAppleIapConfigured(): bool
     {
+        if (! $this->canProcessAppleIapSettlement()) {
+            return false;
+        }
+
+        $config = config('payments.apple_iap', []);
+
+        $expectedSku = strtoupper(trim((string) ($config['sku'] ?? '')));
+        $rolloutSku = strtoupper(trim((string) config('report_unlock.sku_by_scale.MBTI', '')));
+
+        return $expectedSku !== ''
+            && $expectedSku === $rolloutSku
+            && (int) ($config['price_cents'] ?? 0) === (int) config('report_unlock.price_cents', 499)
+            && (int) ($config['price_cents'] ?? 0) >= 100
+            && strtoupper(trim((string) config('report_unlock.currency', 'CNY'))) === 'CNY'
+            && (bool) config('report_unlock.providers.apple_iap.available', false);
+    }
+
+    public function canProcessSettlement(string $provider): bool
+    {
+        $provider = strtolower(trim($provider));
+
+        return $provider === 'apple_iap'
+            ? $this->canProcessAppleIapSettlement()
+            : $this->isEnabled($provider);
+    }
+
+    private function canProcessAppleIapSettlement(): bool
+    {
         $config = config('payments.apple_iap', []);
         if (! is_array($config)) {
             return false;
@@ -129,22 +157,8 @@ final class PaymentProviderRegistry
             }
         }
 
-        if ((int) ($config['environment'] ?? -1) !== 0) {
-            return false;
-        }
-        if (trim((string) ($config['mode'] ?? '')) !== 'short_series_goods') {
-            return false;
-        }
-
-        $expectedSku = strtoupper(trim((string) ($config['sku'] ?? '')));
-        $rolloutSku = strtoupper(trim((string) config('report_unlock.sku_by_scale.MBTI', '')));
-
-        return $expectedSku !== ''
-            && $expectedSku === $rolloutSku
-            && (int) ($config['price_cents'] ?? 0) === (int) config('report_unlock.price_cents', 499)
-            && (int) ($config['price_cents'] ?? 0) >= 100
-            && strtoupper(trim((string) config('report_unlock.currency', 'CNY'))) === 'CNY'
-            && (bool) config('report_unlock.providers.apple_iap.available', false);
+        return (int) ($config['environment'] ?? -1) === 0
+            && trim((string) ($config['mode'] ?? '')) === 'short_series_goods';
     }
 
     private function isWechatPayConfigured(): bool

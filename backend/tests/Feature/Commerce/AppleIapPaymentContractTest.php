@@ -39,6 +39,11 @@ final class AppleIapPaymentContractTest extends TestCase
 
         config()->set('payments.apple_iap.environment', 0);
         $this->assertTrue(app(PaymentProviderRegistry::class)->isEnabled(AppleIapGateway::PROVIDER));
+
+        config()->set('payments.providers.apple_iap.enabled', false);
+        config()->set('report_unlock.providers.apple_iap.available', false);
+        $this->assertFalse(app(PaymentProviderRegistry::class)->isEnabled(AppleIapGateway::PROVIDER));
+        $this->assertTrue(app(PaymentProviderRegistry::class)->canProcessSettlement(AppleIapGateway::PROVIDER));
     }
 
     public function test_ios_order_uses_shared_virtual_payment_api_with_production_environment_and_backend_price(): void
@@ -161,6 +166,20 @@ final class AppleIapPaymentContractTest extends TestCase
         $this->assertFalse((bool) ($rejected['ok'] ?? true));
         $this->assertSame('PROVIDER_ENV_MISMATCH', $rejected['error_code'] ?? null);
 
+        Http::fake([
+            'https://api.weixin.qq.com/cgi-bin/token*' => Http::response([
+                'access_token' => 'apple-access-token-contract',
+                'expires_in' => 7200,
+            ]),
+            'https://api.weixin.qq.com/xpay/query_order*' => Http::sequence()
+                ->push($this->appleQueryResponse($externalOrderNo))
+                ->push($this->appleQueryResponse($externalOrderNo))
+                ->push($this->appleQueryResponse($externalOrderNo))
+                ->push($this->appleQueryResponse($externalOrderNo))
+                ->push($this->appleQueryResponse($externalOrderNo))
+                ->push($this->appleQueryResponse($externalOrderNo, 8)),
+        ]);
+
         $handled = app(AppleIapPaymentService::class)
             ->handleCallback($this->signedCallbackRequest($callbackPayload));
         $this->assertTrue((bool) ($handled['ok'] ?? false));
@@ -175,62 +194,6 @@ final class AppleIapPaymentContractTest extends TestCase
         $this->assertStringNotContainsString('openid-apple-contract', $eventPayload);
         $this->assertStringNotContainsString('session-key-apple-contract', $eventPayload);
 
-        Http::fake([
-            'https://api.weixin.qq.com/cgi-bin/token*' => Http::response([
-                'access_token' => 'apple-access-token-contract',
-                'expires_in' => 7200,
-            ]),
-            'https://api.weixin.qq.com/xpay/query_order*' => Http::sequence()
-                ->push([
-                    'errcode' => 0,
-                    'errmsg' => 'ok',
-                    'order' => [
-                        'order_id' => $externalOrderNo,
-                        'channel_order_id' => 'apple-channel-bill-1',
-                        'wx_order_id' => 'wx-apple-order-1',
-                        'status' => 2,
-                        'order_type' => 7,
-                        'env_type' => 1,
-                        'order_fee' => 499,
-                        'paid_fee' => 499,
-                        'paid_time' => 1700000000,
-                        'update_time' => 1700000050,
-                    ],
-                ])
-                ->push([
-                    'errcode' => 0,
-                    'errmsg' => 'ok',
-                    'order' => [
-                        'order_id' => $externalOrderNo,
-                        'channel_order_id' => 'apple-channel-bill-1',
-                        'wx_order_id' => 'wx-apple-order-1',
-                        'status' => 2,
-                        'order_type' => 7,
-                        'env_type' => 1,
-                        'order_fee' => 499,
-                        'paid_fee' => 499,
-                        'paid_time' => 1700000000,
-                        'update_time' => 1700000050,
-                    ],
-                ])
-                ->push([
-                    'errcode' => 0,
-                    'errmsg' => 'ok',
-                    'order' => [
-                        'order_id' => $externalOrderNo,
-                        'channel_order_id' => 'apple-channel-bill-1',
-                        'wx_order_id' => 'wx-apple-order-1',
-                        'status' => 8,
-                        'order_type' => 8,
-                        'env_type' => 1,
-                        'order_fee' => 499,
-                        'paid_fee' => 499,
-                        'refund_fee' => 499,
-                        'paid_time' => 1700000000,
-                        'update_time' => 1700000100,
-                    ],
-                ]),
-        ]);
         $this->withHeaders($headers)
             ->postJson('/api/v0.3/orders/'.$orderNo.'/apple-iap/reconcile')
             ->assertOk()
@@ -244,12 +207,27 @@ final class AppleIapPaymentContractTest extends TestCase
         $this->assertSame(1, DB::table('benefit_grants')->where('order_no', $orderNo)->where('status', 'active')->count());
         $this->assertSame(2, DB::table('payment_events')->where('provider', AppleIapGateway::PROVIDER)->count());
 
+        config()->set('payments.providers.apple_iap.enabled', false);
+        config()->set('report_unlock.providers.apple_iap.available', false);
+        $this->assertFalse(app(PaymentProviderRegistry::class)->isEnabled(AppleIapGateway::PROVIDER));
+        $this->assertTrue(app(PaymentProviderRegistry::class)->canProcessSettlement(AppleIapGateway::PROVIDER));
         $this->withHeaders($headers)
             ->postJson('/api/v0.3/orders/'.$orderNo.'/apple-iap/reconcile')
             ->assertOk()
-            ->assertJsonPath('provider_status', 8)
-            ->assertJsonPath('payment_state', 'refunded')
-            ->assertJsonPath('grant_state', 'revoked');
+            ->assertJsonPath('provider_status', 2)
+            ->assertJsonPath('grant_state', 'granted');
+
+        $refundPayload = [
+            'Event' => 'xpay_refund_notify',
+            'OpenId' => 'openid-apple-contract',
+            'MchOrderId' => $externalOrderNo,
+            'RefundFee' => 499,
+            'RetCode' => 0,
+        ];
+        $refunded = app(AppleIapPaymentService::class)
+            ->handleCallback($this->signedCallbackRequest($refundPayload));
+        $this->assertTrue((bool) ($refunded['ok'] ?? false));
+        $this->assertSame(3, DB::table('payment_events')->where('provider', AppleIapGateway::PROVIDER)->count());
         $this->assertSame(1, DB::table('benefit_grants')->where('order_no', $orderNo)->where('status', 'revoked')->count());
     }
 
@@ -302,6 +280,17 @@ final class AppleIapPaymentContractTest extends TestCase
                     'order' => [
                         'order_id' => $externalOrderNo,
                         'status' => 2,
+                        'order_type' => 0,
+                        'env_type' => 1,
+                        'order_fee' => 499,
+                        'paid_fee' => 499,
+                    ],
+                ])
+                ->push([
+                    'errcode' => 0,
+                    'order' => [
+                        'order_id' => $externalOrderNo,
+                        'status' => 2,
                         'order_type' => 7,
                         'env_type' => 2,
                         'order_fee' => 499,
@@ -309,6 +298,25 @@ final class AppleIapPaymentContractTest extends TestCase
                     ],
                 ]),
         ]);
+        $callback = [
+            'Event' => 'xpay_goods_deliver_notify',
+            'OpenId' => 'openid-apple-contract',
+            'OutTradeNo' => $externalOrderNo,
+            'Env' => 0,
+            'GoodsInfo' => [
+                'ProductId' => 'mbti-report-full',
+                'Quantity' => 1,
+                'OrigPrice' => 499,
+                'ActualPrice' => 499,
+                'Attach' => $orderNo,
+            ],
+        ];
+        $callbackRejected = app(AppleIapPaymentService::class)
+            ->handleCallback($this->signedCallbackRequest($callback));
+        $this->assertFalse((bool) ($callbackRejected['ok'] ?? true));
+        $this->assertSame('PROVIDER_CHANNEL_MISMATCH', $callbackRejected['error_code'] ?? null);
+        $this->assertSame(0, DB::table('payment_events')->where('order_no', $orderNo)->count());
+
         $this->withHeaders($headers)
             ->postJson('/api/v0.3/orders/'.$orderNo.'/apple-iap/reconcile')
             ->assertStatus(409)
@@ -444,5 +452,31 @@ final class AppleIapPaymentContractTest extends TestCase
             ['CONTENT_TYPE' => 'application/json'],
             json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR)
         );
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function appleQueryResponse(string $externalOrderNo, int $status = 2): array
+    {
+        $isRefund = $status === 8;
+
+        return [
+            'errcode' => 0,
+            'errmsg' => 'ok',
+            'order' => array_filter([
+                'order_id' => $externalOrderNo,
+                'channel_order_id' => 'apple-channel-bill-1',
+                'wx_order_id' => 'wx-apple-order-1',
+                'status' => $status,
+                'order_type' => $isRefund ? 8 : 7,
+                'env_type' => 1,
+                'order_fee' => 499,
+                'paid_fee' => 499,
+                'refund_fee' => $isRefund ? 499 : null,
+                'paid_time' => 1700000000,
+                'update_time' => $isRefund ? 1700000100 : 1700000050,
+            ], static fn (mixed $value): bool => $value !== null),
+        ];
     }
 }
