@@ -421,6 +421,15 @@ final class AppleIapPaymentContractTest extends TestCase
                 ->push($this->appleQueryResponse($externalOrderNo)),
         ]);
 
+        DB::table('skus')->where('sku', 'MBTI_REPORT_FULL')->update([
+            'benefit_code' => 'MBTI_REPORT_CHANGED_AFTER_SALE',
+            'scope' => 'account',
+            'meta_json' => json_encode([
+                'duration_days' => 1,
+                'modules_included' => ['changed_after_sale'],
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),
+        ]);
+
         $handled = app(AppleIapPaymentService::class)
             ->handleCallback($this->signedCallbackRequest($callbackPayload));
         $this->assertTrue((bool) ($handled['ok'] ?? false));
@@ -429,6 +438,10 @@ final class AppleIapPaymentContractTest extends TestCase
         $this->assertTrue((bool) ($duplicate['duplicate'] ?? false));
         $this->assertSame(1, DB::table('payment_events')->where('provider', AppleIapGateway::PROVIDER)->count());
         $this->assertSame(1, DB::table('benefit_grants')->where('order_no', $orderNo)->where('status', 'active')->count());
+        $grant = DB::table('benefit_grants')->where('order_no', $orderNo)->where('status', 'active')->first();
+        $this->assertSame('MBTI_REPORT_FULL', (string) ($grant->benefit_code ?? ''));
+        $this->assertSame('attempt', (string) ($grant->scope ?? ''));
+        $this->assertNull($grant->expires_at ?? null);
         $eventPayload = (string) DB::table('payment_events')
             ->where('provider', AppleIapGateway::PROVIDER)
             ->value('payload_json');

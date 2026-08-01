@@ -419,14 +419,17 @@ class WebhookEntitlementService
                         return $this->core->semanticReject('SKU_NOT_FOUND', 'sku missing on order.');
                     }
 
-                    $skuRow = $this->core->skuCatalog()->getActiveSku($effectiveSku, null, (int) ($order->org_id ?? $orgId));
-                    if (! $skuRow) {
-                        $skuRow = $this->appleSettlementSkuSnapshot(
+                    $skuRow = $provider === 'apple_iap'
+                        ? $this->appleSettlementSkuSnapshot(
                             $order,
                             $boundPaymentAttempt,
                             $effectiveSku
+                        )
+                        : $this->core->skuCatalog()->getActiveSku(
+                            $effectiveSku,
+                            null,
+                            (int) ($order->org_id ?? $orgId)
                         );
-                    }
                     if (! $skuRow) {
                         $this->core->markEventError($provider, $providerEventId, 'rejected', 'SKU_NOT_FOUND', 'sku not found.');
 
