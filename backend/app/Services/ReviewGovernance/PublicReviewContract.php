@@ -61,6 +61,7 @@ final class PublicReviewContract
             'approved_for_production',
             'approved_for_staging',
             'agent_promoted_content_ready',
+            'automation_published',
             'human_review_approved',
             'human_review_completed',
             'human_reviewed',
@@ -90,6 +91,7 @@ final class PublicReviewContract
 
         if (in_array($normalized, [
             'draft',
+            'w9_passed_automation_ready',
             'human_review',
             'claim_review',
             'cms_import_draft_pending_review',

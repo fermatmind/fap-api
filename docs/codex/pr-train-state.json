@@ -43241,7 +43241,7 @@
     "id": "SECURITY-103-API-05",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3488",
     "production_write_execution": false,
     "publish_allowed": false,
     "remote_branch_deleted": false,
@@ -103285,5 +103285,75 @@
       }
     ],
     "updated_at": "2026-08-01T23:30:00+08:00"
+  },
+  "CONTENT-PROMOTION-AUTOMATION-BACKEND-01": {
+    "id": "CONTENT-PROMOTION-AUTOMATION-BACKEND-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/content-promotion-automation-backend-01",
+    "title": "CONTENT-PROMOTION-AUTOMATION-BACKEND-01: automate exact-package CMS import and publication",
+    "depends_on": [],
+    "status": "ready_to_merge",
+    "commit_sha": "b179fd62a96d902816d6a59e604e39a6ad92ad30",
+    "pr_url": null,
+    "checks": {
+      "local_validation": {
+        "status": "passed",
+        "evidence": "33 focused lifecycle/adapter/workflow/legacy-regression tests passed with 618 assertions; the exact runtime-freeze classifier contract passed with 2 assertions; Pint, actionlint, JSON/YAML parsing, exact scope validation, PHP syntax, and diff checks passed. No production workflow was dispatched."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "Exact implementation/repair head b179fd62a96d902816d6a59e604e39a6ad92ad30 passed hygiene, supply-chain, content-pack build, verify-mbti-v2, verify-mbti-legacy, verify-bigfive, Semgrep OSS, and blocking secret checks; staging parity was correctly skipped. Exact-head Codex review reported no actionable finding."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-08-02T04:15:00+08:00",
+        "status": "in_progress",
+        "note": "Started the reusable exact-package promotion executor and machine-receipt workflow from isolated latest main. This PR does not dispatch production, write CMS, or deploy."
+      },
+      {
+        "at": "2026-08-02T04:56:04+08:00",
+        "status": "local_verified",
+        "note": "Focused executor, receipt-chain, idempotency, rollback, workflow, forged-authorization rejection, legacy compatibility, and runtime-freeze checks passed. Unsupported legacy adapters remain registered fail closed; no CMS write, publication, deployment, migration, SEO, sitemap, llms, or Search Channel action occurred."
+      },
+      {
+        "at": "2026-08-02T04:57:29+08:00",
+        "status": "github_checks_pending",
+        "note": "Recorded locally verified implementation commit 90bd9cdef9f45e72c71c07d38373eb3aaa5d784f before push. Required GitHub checks and review remain mandatory."
+      },
+      {
+        "at": "2026-08-02T04:58:32+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #3488 from the exact scoped branch. The production content-promotion workflow was not dispatched; required checks are pending."
+      },
+      {
+        "at": "2026-08-02T05:04:54+08:00",
+        "status": "github_checks_repairing",
+        "note": "Inspected the failed verify-mbti-v2 job before editing. PR75 found direct env() calls only in the new PromotionContextFactory and PromotionReceiptStore; moved per-run values into config/content_promotion.php so runtime app code reads config(), preserving the same workflow bindings."
+      },
+      {
+        "at": "2026-08-02T05:06:26+08:00",
+        "status": "github_checks_pending",
+        "note": "The exact PR75 app env() gate now passes locally; all 33 focused tests/618 assertions and the runtime-freeze classifier contract also pass after the same-scope repair. A new exact-head required-check run is required."
+      },
+      {
+        "at": "2026-08-02T05:14:21+08:00",
+        "status": "ready_to_merge",
+        "note": "Exact head b179fd62a96d902816d6a59e604e39a6ad92ad30 passed every applicable GitHub check and exact-head review with no actionable finding. Scope and production-write boundaries remain intact; this ledger-only closeout commit must pass its own final checks before squash merge."
+      }
+    ],
+    "updated_at": "2026-08-02T05:14:21+08:00"
   }
 }

@@ -77,23 +77,39 @@ final class MbtiComparisonEnglishPackageImporter
         string $confirmedPackageSha256,
         string $approvalPath,
         string $confirmedApprovalSha256,
+        ?array $automationContext = null,
     ): array {
         $this->writeAttempted = false;
         $this->writeCommittedInCurrentAttempt = false;
-        $this->assertWriteEnvironmentAllowed();
+        $this->assertWriteEnvironmentAllowed($automationContext !== null);
 
         return DB::transaction(function () use (
             $packageDirectory,
             $confirmedPackageSha256,
             $approvalPath,
             $confirmedApprovalSha256,
+            $automationContext,
         ): array {
             // Laravel may invoke this callback again after a retryable transaction
             // failure. Retain the audit fact that any attempt wrote, but only report
             // a committed write when the final successful attempt mutated a row.
             $this->writeCommittedInCurrentAttempt = false;
             $bundle = $this->validatedBundle($packageDirectory, $confirmedPackageSha256);
-            $approval = $this->validatedApproval($approvalPath, $confirmedApprovalSha256);
+            if ($automationContext === null) {
+                $approval = $this->validatedApproval($approvalPath, $confirmedApprovalSha256);
+                $authorization = [
+                    'approval_ref' => $approval['approval_ref'],
+                    'approval_sha256' => self::APPROVAL_SHA256,
+                    'subscope_id' => $approval['subscope_id'],
+                    'gate' => $approval['gate'],
+                    'verdict' => $approval['verdict'],
+                ];
+            } else {
+                $authorization = $this->validatedAutomationContext($automationContext, $confirmedPackageSha256);
+            }
+            $reviewStatus = $automationContext === null
+                ? 'w9_passed_pending_editorial'
+                : 'w9_passed_automation_ready';
             $rows = [];
 
             foreach ($bundle['assets'] as $asset) {
@@ -108,7 +124,7 @@ final class MbtiComparisonEnglishPackageImporter
                     ->first();
 
                 if ($existing instanceof MbtiCrossTypeComparisonAuthority) {
-                    $this->assertExistingTargetIsSafeDraft($existing);
+                    $this->assertExistingTargetIsSafeDraft($existing, $reviewStatus);
                 }
 
                 $contentSha256 = $this->payloadSha256($payload);
@@ -126,7 +142,7 @@ final class MbtiComparisonEnglishPackageImporter
                     'source_sha256' => $contentSha256,
                     'authority_contract_version' => MbtiCrossTypeComparisonAuthority::AUTHORITY_CONTRACT_VERSION,
                     'readmodel_contract_version' => MbtiCrossTypeComparisonAuthority::READMODEL_CONTRACT_VERSION,
-                    'review_status' => 'w9_passed_pending_editorial',
+                    'review_status' => $reviewStatus,
                     'publish_status' => 'draft',
                     'indexability_status' => 'blocked',
                     'is_public' => false,
@@ -173,7 +189,7 @@ final class MbtiComparisonEnglishPackageImporter
                 ];
             }
 
-            $this->assertExactInactiveDraftReadback($rows);
+            $this->assertExactInactiveDraftReadback($rows, $reviewStatus);
 
             return [
                 'artifact' => 'EN-PARITY-W1-MBTI-COMPARISON-DRAFT-IMPORT-RECEIPT',
@@ -194,13 +210,7 @@ final class MbtiComparisonEnglishPackageImporter
                 'search_submission_attempted' => false,
                 'deploy_attempted' => false,
                 'package' => $bundle['summary']['package'],
-                'approval' => [
-                    'approval_ref' => $approval['approval_ref'],
-                    'approval_sha256' => self::APPROVAL_SHA256,
-                    'subscope_id' => $approval['subscope_id'],
-                    'gate' => $approval['gate'],
-                    'verdict' => $approval['verdict'],
-                ],
+                $automationContext === null ? 'approval' : 'automation_authorization' => $authorization,
                 'row_count' => count($rows),
                 'created_count' => count(array_filter($rows, static fn (array $row): bool => $row['action'] === 'created_inactive_draft')),
                 'updated_count' => count(array_filter($rows, static fn (array $row): bool => $row['action'] === 'updated_exact_inactive_draft')),
@@ -580,12 +590,12 @@ final class MbtiComparisonEnglishPackageImporter
         return $approval;
     }
 
-    private function assertExistingTargetIsSafeDraft(MbtiCrossTypeComparisonAuthority $authority): void
+    private function assertExistingTargetIsSafeDraft(MbtiCrossTypeComparisonAuthority $authority, string $reviewStatus): void
     {
         if ((int) $authority->org_id !== 0
             || (string) $authority->locale !== 'en'
             || (string) $authority->source_package_id !== self::PACKAGE_ID
-            || (string) $authority->review_status !== 'w9_passed_pending_editorial'
+            || (string) $authority->review_status !== $reviewStatus
             || (string) $authority->publish_status !== 'draft'
             || (string) $authority->indexability_status !== 'blocked'
             || (bool) $authority->is_public
@@ -598,9 +608,85 @@ final class MbtiComparisonEnglishPackageImporter
         }
     }
 
-    private function assertWriteEnvironmentAllowed(): void
+    /** @param array<string, mixed> $context
+     * @return array<string, mixed>
+     */
+    private function validatedAutomationContext(array $context, string $confirmedPackageSha256): array
     {
-        if (! app()->environment(['local', 'testing'])) {
+        $expected = [
+            'schema_version' => 'fermatmind.content_promotion_automation_context.v2',
+            'lane' => 'W1',
+            'subscope' => 'mbti-comparisons',
+            'package_sha256' => self::PACKAGE_SHA256,
+            'source_repository' => 'fermatmind/fap-api',
+            'cms_draft_import_authorized' => true,
+            'public_publish_authorized' => true,
+            'indexability_authorized' => false,
+            'sitemap_authorized' => false,
+            'llms_authorized' => false,
+            'search_submission_authorized' => false,
+            'deploy_authorized' => false,
+        ];
+        foreach ($expected as $field => $value) {
+            if (($context[$field] ?? null) !== $value) {
+                $this->fail('automation_context_mismatch', 'The trusted promotion context is not exact or opens a prohibited boundary.');
+            }
+        }
+        if (! hash_equals(self::PACKAGE_SHA256, strtolower(trim($confirmedPackageSha256)))
+            || preg_match('/\A[a-f0-9]{40}\z/', (string) ($context['source_commit'] ?? '')) !== 1
+            || preg_match('/\A[a-f0-9]{64}\z/', (string) ($context['executor_release_sha256'] ?? '')) !== 1
+            || preg_match('/\A[a-f0-9]{64}\z/', (string) ($context['release_policy_sha256'] ?? '')) !== 1
+            || preg_match('/\A[a-f0-9]{64}\z/', (string) ($context['idempotency_key'] ?? '')) !== 1) {
+            $this->fail('automation_context_integrity_invalid', 'The trusted promotion context integrity binding is incomplete.');
+        }
+        $this->assertTrustedWorkflowAuthorization($context);
+
+        return $context;
+    }
+
+    /** @param array<string, mixed> $context */
+    private function assertTrustedWorkflowAuthorization(array $context): void
+    {
+        $key = (string) config('content_promotion.workflow_identity_key', '');
+        $policySha256 = hash('sha256', \App\Services\ContentPromotion\PromotionContextFactory::canonicalJson(
+            (array) config('content_promotion.release_policy', []),
+        ));
+        $expectedIdempotencyKey = hash('sha256', implode('|', [
+            'content-promotion-v2',
+            'W1',
+            'mbti-comparisons',
+            self::PACKAGE_SHA256,
+            (string) ($context['source_commit'] ?? ''),
+            $policySha256,
+        ]));
+        $signatureMaterial = implode('|', [
+            'content-promotion-v2',
+            (string) ($context['source_commit'] ?? ''),
+            (string) ($context['workflow_run_id'] ?? ''),
+            (string) ($context['workflow_run_attempt'] ?? ''),
+            'W1',
+            'mbti-comparisons',
+            self::PACKAGE_SHA256,
+            $policySha256,
+            '7',
+        ]);
+        $signature = (string) ($context['workflow_signature'] ?? '');
+        if (strlen($key) < 32
+            || ($context['release_policy_sha256'] ?? null) !== $policySha256
+            || ($context['expected_row_count'] ?? null) !== 7
+            || preg_match('/\A[1-9][0-9]{0,19}\z/', (string) ($context['workflow_run_id'] ?? '')) !== 1
+            || ! is_int($context['workflow_run_attempt'] ?? null)
+            || (int) $context['workflow_run_attempt'] < 1
+            || ($context['idempotency_key'] ?? null) !== $expectedIdempotencyKey
+            || preg_match('/\A[a-f0-9]{64}\z/', $signature) !== 1
+            || ! hash_equals(hash_hmac('sha256', $signatureMaterial, $key), $signature)) {
+            $this->fail('automation_workflow_authorization_invalid', 'The automatic import must originate from the trusted exact-package executor.');
+        }
+    }
+
+    private function assertWriteEnvironmentAllowed(bool $trustedAutomation): void
+    {
+        if (! $trustedAutomation && ! app()->environment(['local', 'testing'])) {
             $this->fail(
                 'environment_write_not_authorized',
                 'This approval does not authorize staging or production CMS execution.',
@@ -611,7 +697,7 @@ final class MbtiComparisonEnglishPackageImporter
     /**
      * @param  list<array<string, mixed>>  $rows
      */
-    private function assertExactInactiveDraftReadback(array $rows): void
+    private function assertExactInactiveDraftReadback(array $rows, string $reviewStatus): void
     {
         if (count($rows) !== 7 || array_column($rows, 'slug') !== self::EXACT_SLUGS) {
             $this->fail('draft_import_row_cohort_mismatch', 'The write result does not retain the exact seven-row cohort.');
@@ -632,8 +718,8 @@ final class MbtiComparisonEnglishPackageImporter
             if (! $authority instanceof MbtiCrossTypeComparisonAuthority) {
                 $this->fail('draft_import_readback_type_mismatch', 'An imported authority row has an unexpected type.');
             }
-            $this->assertExistingTargetIsSafeDraft($authority);
-            if ((string) $authority->review_status !== 'w9_passed_pending_editorial'
+            $this->assertExistingTargetIsSafeDraft($authority, $reviewStatus);
+            if ((string) $authority->review_status !== $reviewStatus
                 || (string) $authority->indexability_status !== 'blocked') {
                 $this->fail('draft_import_readback_state_mismatch', 'An imported authority row escaped the approved draft-only state.');
             }
