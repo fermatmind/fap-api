@@ -102792,7 +102792,7 @@
       "EN-PARITY-W1-MBTI-COMPARISON-IMPORTER-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "cde2a63484b299893fcfcb2b16de936af454b8c6",
+    "commit_sha": "f81d385b553d8842e0f2b22d0f6171384170de0b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3468",
     "checks": {
       "authorization": {
@@ -102869,8 +102869,13 @@
         "at": "2026-08-01T09:54:34Z",
         "status": "review_fix_local_verified",
         "note": "All required checks passed on head 47d3e0385eb1e40a292c07bc04fbb165bf93364b, then fresh exact-head review identified two additional valid current-scope boundaries. Existing English drafts now require indexability_status=blocked before any replay so advanced indexability workflow state cannot be downgraded. Transaction retry accounting resets committed-write state at each callback attempt while retaining any rolled-back write attempt for audit. The focused importer suite passes 12 tests / 364 assertions, including advanced indexability rollback preservation; scoped Pint and diff checks pass. A separate heavyweight FermatMind verification was already running, so the repository concurrency guard prohibited a duplicate local full run; fresh required GitHub checks remain mandatory. Implementation head is cde2a63484b299893fcfcb2b16de936af454b8c6 and the following commit changes only this ledger pointer."
+      },
+      {
+        "at": "2026-08-01T10:05:07Z",
+        "status": "review_fix_local_verified",
+        "note": "All nine applicable checks passed on head fa718430bff65dfc2e5fa89c36e5a12dbfd2f14b, then fresh exact-head review identified two further valid receipt/idempotence boundaries. Existing JSON payloads are now compared through recursive canonical object-key ordering before fill, preventing MySQL-normalized key order from creating a semantic no-op update; list order remains significant. Failed dry-run receipts now keep write_supported_in_this_pr=false, matching successful dry runs and the selected mode. The focused importer suite passes 13 tests / 373 assertions, including reordered nested JSON as a zero-write replay and the failed dry-run receipt contract; scoped Pint and diff checks pass. Fresh exact-head required checks remain mandatory. Implementation head is f81d385b553d8842e0f2b22d0f6171384170de0b and the following commit changes only this ledger pointer."
       }
     ],
-    "updated_at": "2026-08-01T09:54:34Z"
+    "updated_at": "2026-08-01T10:05:07Z"
   }
 }
