@@ -417,8 +417,11 @@ final class WechatMiniVirtualPaymentService
             }
             if ($attempt !== null) {
                 $attemptMeta = $this->decodeJson($attempt->payload_meta_json ?? null);
-                $boundHash = trim((string) ($attemptMeta['openid_hash'] ?? ''));
-                if ($boundHash !== '' && ! hash_equals($boundHash, $openidHash)) {
+                $boundOpenid = $this->piiCipher->decrypt((string) ($attemptMeta['openid_enc'] ?? ''));
+                if ($boundOpenid === null || trim($boundOpenid) === '') {
+                    return $this->error('WECHAT_IDENTITY_UNAVAILABLE', 'WeChat identity is unavailable.', 409);
+                }
+                if (! hash_equals($boundOpenid, $openid)) {
                     return $this->error('WECHAT_IDENTITY_MISMATCH', 'order is bound to another WeChat identity.', 409);
                 }
             } else {
@@ -503,10 +506,7 @@ final class WechatMiniVirtualPaymentService
         }
         $meta = $this->decodeJson($attempt->payload_meta_json ?? null);
         $openid = $this->piiCipher->decrypt((string) ($meta['openid_enc'] ?? ''));
-        if ($openid === null || ! hash_equals(
-            (string) ($meta['openid_hash'] ?? ''),
-            $this->openidHash($openid, (string) $config['app_key'])
-        )) {
+        if ($openid === null || trim($openid) === '') {
             return $this->error('WECHAT_IDENTITY_UNAVAILABLE', 'WeChat identity is unavailable.', 409);
         }
 
@@ -598,10 +598,8 @@ final class WechatMiniVirtualPaymentService
 
         $eventType = trim((string) ($payload['Event'] ?? $payload['event'] ?? ''));
         $openid = trim((string) ($payload['OpenId'] ?? $payload['openid'] ?? ''));
-        if ($openid === '' || ! hash_equals(
-            (string) ($meta['openid_hash'] ?? ''),
-            $this->openidHash($openid, (string) $config['app_key'])
-        )) {
+        $boundOpenid = $this->piiCipher->decrypt((string) ($meta['openid_enc'] ?? ''));
+        if ($openid === '' || $boundOpenid === null || ! hash_equals($boundOpenid, $openid)) {
             return $this->error('WECHAT_IDENTITY_MISMATCH', 'WeChat identity mismatch.', 409);
         }
 

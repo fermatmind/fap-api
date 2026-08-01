@@ -109,6 +109,7 @@ final class AppleIapPaymentContractTest extends TestCase
         $this->assertStringNotContainsString('openid-apple-contract', $stored);
         $this->assertStringContainsString('apple_iap', $stored);
 
+        config()->set('payments.apple_iap.app_key', 'rotated-production-app-key');
         $duplicate = $this->withHeaders($headers)->postJson('/api/v0.3/orders/apple_iap', $payload);
         $duplicate->assertOk();
         $this->assertSame($orderNo, (string) $duplicate->json('order_no'));
@@ -203,6 +204,7 @@ final class AppleIapPaymentContractTest extends TestCase
         $this->assertFalse((bool) ($rejected['ok'] ?? true));
         $this->assertSame('PROVIDER_ENV_MISMATCH', $rejected['error_code'] ?? null);
 
+        config()->set('payments.apple_iap.app_key', 'rotated-production-app-key');
         Http::fake([
             'https://api.weixin.qq.com/cgi-bin/token*' => Http::response([
                 'access_token' => 'apple-access-token-contract',
