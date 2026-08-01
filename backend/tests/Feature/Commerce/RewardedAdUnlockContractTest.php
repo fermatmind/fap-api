@@ -159,6 +159,24 @@ final class RewardedAdUnlockContractTest extends TestCase
             ->assertJsonPath('idempotent', true)
             ->assertJsonPath('session.status', 'completed');
         $this->assertSame(1, DB::table('benefit_grants')->where('attempt_id', $attemptId)->where('status', 'active')->count());
+
+        $service = app(RewardedAdUnlockService::class);
+        $sessionKey = (string) (new \ReflectionMethod($service, 'sessionKey'))->invoke($service, $sessionId);
+        $interruptedSession = (array) Cache::get($sessionKey);
+        $interruptedSession['status'] = 'pending';
+        unset($interruptedSession['completed_at'], $interruptedSession['grant_id']);
+        Cache::put($sessionKey, $interruptedSession, now()->addMinutes(5));
+
+        $this->withHeaders($headers)
+            ->postJson('/api/v0.3/attempts/'.$attemptId.'/rewarded-ad-sessions/'.$sessionId.'/complete', [
+                'ad_unit_id' => self::AD_UNIT_ID,
+                'is_ended' => true,
+            ])
+            ->assertOk()
+            ->assertJsonPath('idempotent', true)
+            ->assertJsonPath('session.status', 'completed')
+            ->assertJsonPath('report_access.access_level', 'full');
+        $this->assertSame(1, DB::table('benefit_grants')->where('attempt_id', $attemptId)->where('status', 'active')->count());
     }
 
     public function test_completion_creates_a_new_rewarded_grant_after_a_historical_grant_was_revoked(): void
