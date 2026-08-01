@@ -102791,8 +102791,8 @@
     "depends_on": [
       "EN-PARITY-W1-MBTI-COMPARISON-IMPORTER-01"
     ],
-    "status": "github_checks_pending",
-    "commit_sha": "f81d385b553d8842e0f2b22d0f6171384170de0b",
+    "status": "ready_to_merge",
+    "commit_sha": "4ce370b83a37b5252cfd95eee574887317b621a3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3468",
     "checks": {
       "authorization": {
@@ -102816,8 +102816,8 @@
         "evidence": "The exact seven changed paths are limited to the existing comparison command/service/test, the byte-exact CONTROL approval snapshot, backend repository rules, and this PR's train manifest/state. No package, model, migration, public read model, API route/controller, result-content, frontend, publish, activation, SEO runtime, Search Channel, or deploy path changed."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": null
+        "status": "passed",
+        "evidence": "Exact head 4ce370b83a37b5252cfd95eee574887317b621a3 passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep OSS, Semgrep blocking secrets, and the non-blocking SARIF upload; staging parity was correctly skipped. GitHub reports CLEAN/MERGEABLE. Explicit exact-head Codex review completed at 2026-08-01T10:18:25Z with no major issues."
       }
     },
     "failure_reason": null,
@@ -102827,7 +102827,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "production_write_execution": false,
@@ -102874,8 +102874,13 @@
         "at": "2026-08-01T10:05:07Z",
         "status": "review_fix_local_verified",
         "note": "All nine applicable checks passed on head fa718430bff65dfc2e5fa89c36e5a12dbfd2f14b, then fresh exact-head review identified two further valid receipt/idempotence boundaries. Existing JSON payloads are now compared through recursive canonical object-key ordering before fill, preventing MySQL-normalized key order from creating a semantic no-op update; list order remains significant. Failed dry-run receipts now keep write_supported_in_this_pr=false, matching successful dry runs and the selected mode. The focused importer suite passes 13 tests / 373 assertions, including reordered nested JSON as a zero-write replay and the failed dry-run receipt contract; scoped Pint and diff checks pass. Fresh exact-head required checks remain mandatory. Implementation head is f81d385b553d8842e0f2b22d0f6171384170de0b and the following commit changes only this ledger pointer."
+      },
+      {
+        "at": "2026-08-01T10:20:11Z",
+        "status": "ready_to_merge",
+        "note": "Exact head 4ce370b83a37b5252cfd95eee574887317b621a3 passed all nine applicable required checks with staging parity skipped. GitHub reports CLEAN/MERGEABLE, all prior review findings are repaired within the exact seven-path scope, and the explicit exact-head Codex review reported no major issues. This following readiness commit changes only the PR09 state ledger, so its own required checks and exact-head review remain mandatory before merge."
       }
     ],
-    "updated_at": "2026-08-01T10:05:07Z"
+    "updated_at": "2026-08-01T10:20:11Z"
   }
 }
