@@ -275,7 +275,7 @@ final class WechatMiniVirtualPaymentService
             if (($processed['ok'] ?? false) !== true) {
                 return $processed;
             }
-            if ($status === 2) {
+            if ($status === 2 && ($processed['stale_payment'] ?? false) !== true) {
                 $this->notifyProvidedGoods(
                     (string) ($attempt->external_trade_no ?? ''),
                     (string) ($providerOrder['wx_order_id'] ?? $providerTradeNo),

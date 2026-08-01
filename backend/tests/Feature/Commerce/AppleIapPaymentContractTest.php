@@ -19,6 +19,7 @@ use App\Services\Scale\ScaleIdentityWriteProjector;
 use Database\Seeders\Pr19CommerceSeeder;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -411,6 +412,10 @@ final class AppleIapPaymentContractTest extends TestCase
         $this->assertSame(4, DB::table('payment_events')->where('provider', AppleIapGateway::PROVIDER)->count());
         $this->assertSame(499, DB::table('orders')->where('order_no', $orderNo)->value('refund_amount_cents'));
 
+        $providedGoodsNotificationsBeforeStalePayment = Http::recorded(
+            static fn (ClientRequest $request): bool => str_contains($request->url(), '/xpay/notify_provide_goods')
+        )->count();
+        $this->assertGreaterThan(0, $providedGoodsNotificationsBeforeStalePayment);
         $this->withHeaders($headers)
             ->postJson('/api/v0.3/orders/'.$orderNo.'/apple-iap/reconcile')
             ->assertOk()
@@ -432,7 +437,12 @@ final class AppleIapPaymentContractTest extends TestCase
             ->assertJsonPath('grant_state', 'revoked');
         $this->assertSame(4, DB::table('payment_events')->where('provider', AppleIapGateway::PROVIDER)->count());
         $this->assertSame(0, DB::table('benefit_grants')->where('order_no', $orderNo)->where('status', 'active')->count());
-
+        $this->assertCount(
+            $providedGoodsNotificationsBeforeStalePayment,
+            Http::recorded(
+                static fn (ClientRequest $request): bool => str_contains($request->url(), '/xpay/notify_provide_goods')
+            )
+        );
     }
 
     public function test_query_rejects_non_apple_channel_and_environment_mismatch(): void
