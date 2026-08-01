@@ -1891,7 +1891,29 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/tests/Feature/Commerce/RewardedAdUnlockContractTest.php',
         ];
 
-        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+        $rewardedAdRouteChangedLines = array_map(
+            static fn (string $line): string => '+'.$line,
+            $this->rewardedAdUnlockRouteChangedLines(),
+        );
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            routeChangedLines: $rewardedAdRouteChangedLines,
+        ));
+        $this->assertSame(
+            ['backend/routes/api.php'],
+            $this->mbtiImpactingRuntimeChanges(
+                ['backend/routes/api.php'],
+                '',
+                '',
+                routeChangedLines: array_merge(
+                    $rewardedAdRouteChangedLines,
+                    ['+            Route::post(\'/attempts/{id}/rewarded-ad-sessions/debug\', [AttemptRewardedAdController::class, \'store\']);'],
+                ),
+            )
+        );
     }
 
     public function test_runtime_freeze_classifier_ignores_free_full_report_mode_feature_flag_files(): void
@@ -8473,6 +8495,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if (
+                $file === 'backend/routes/api.php'
+                && $this->routeDiffIsRewardedAdUnlockOnly(
+                    $routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef)
+                )
+            ) {
+                continue;
+            }
+
             if ($this->isRiasecMeasurementContractComparePolicyFile($file)) {
                 continue;
             }
@@ -11357,7 +11388,6 @@ DIFF;
     private function isRewardedAdUnlockContractFile(string $file): bool
     {
         return in_array($file, [
-            'backend/routes/api.php',
             'backend/app/Http/Controllers/API/V0_3/AttemptRewardedAdController.php',
             'backend/app/Services/Commerce/RewardedAdUnlockService.php',
             'backend/app/Services/Commerce/EntitlementManager.php',
@@ -15080,6 +15110,49 @@ DIFF;
         }
 
         return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsRewardedAdUnlockOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        $actual = [];
+        foreach ($changedLines as $line) {
+            if (! is_string($line) || ($line[0] ?? '') !== '+') {
+                return false;
+            }
+
+            $actual[] = substr($line, 1);
+        }
+
+        return $actual === $this->rewardedAdUnlockRouteChangedLines();
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function rewardedAdUnlockRouteChangedLines(): array
+    {
+        return [
+            'use App\\Http\\Controllers\\API\\V0_3\\AttemptRewardedAdController;',
+            "            Route::post('/attempts/{id}/rewarded-ad-sessions', [AttemptRewardedAdController::class, 'store'])",
+            "                ->middleware(['throttle:api_attempt_submit', \\App\\Http\\Middleware\\FmTokenAuth::class, 'uuid:id'])",
+            "                ->defaults('public_realm', true)",
+            "                ->name('api.v0_3.attempts.rewarded_ad_sessions.store');",
+            "            Route::get('/attempts/{id}/rewarded-ad-sessions/{session_id}', [AttemptRewardedAdController::class, 'show'])",
+            "                ->middleware([\\App\\Http\\Middleware\\FmTokenAuth::class, 'uuid:id', 'uuid:session_id'])",
+            "                ->defaults('public_realm', true)",
+            "                ->name('api.v0_3.attempts.rewarded_ad_sessions.show');",
+            "            Route::post('/attempts/{id}/rewarded-ad-sessions/{session_id}/complete', [AttemptRewardedAdController::class, 'complete'])",
+            "                ->middleware(['throttle:api_attempt_submit', \\App\\Http\\Middleware\\FmTokenAuth::class, 'uuid:id', 'uuid:session_id'])",
+            "                ->defaults('public_realm', true)",
+            "                ->name('api.v0_3.attempts.rewarded_ad_sessions.complete');",
+        ];
     }
 
     /**
