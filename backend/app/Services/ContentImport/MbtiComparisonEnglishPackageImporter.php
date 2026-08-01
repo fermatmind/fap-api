@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\ContentImport;
 
-use Illuminate\Support\Facades\File;
+use App\Models\MbtiCrossTypeComparisonAuthority;
+use Illuminate\Support\Facades\DB;
 use RuntimeException;
 
 final class MbtiComparisonEnglishPackageImporter
@@ -16,6 +17,21 @@ final class MbtiComparisonEnglishPackageImporter
     public const PACKAGE_ID = 'EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-07-2026-07-31';
 
     public const INVENTORY_PACKAGE_SHA256 = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
+
+    public const APPROVAL_SHA256 = '42853f27ff4e921f0d91e8e50210620dd212fddf6fab7763ae82544087d02a8b';
+
+    public const APPROVAL_REF = 'human-operator:w1-mbti-comparisons-draft-import:2026-08-01';
+
+    private const APPROVAL_BYTES = 917;
+
+    private const EXPECTED_FILE_BYTES = [
+        'package_manifest.json' => 2626,
+        'README.md' => 2333,
+        'assets.json' => 115899,
+        'translation_map.json' => 28014,
+        'claim_boundary_report.json' => 5005,
+        'editorial_review.json' => 6787,
+    ];
 
     /**
      * @var list<string>
@@ -35,10 +51,143 @@ final class MbtiComparisonEnglishPackageImporter
         return base_path('content_assets/en-content-parity/W1-mbti/comparisons/w9-correction-deecc817');
     }
 
+    public static function defaultApprovalPath(): string
+    {
+        return base_path('content_assets/en-content-parity/CONTROL-approvals/W1-MBTI-COMPARISONS/draft-import-approval-2026-08-01.json');
+    }
+
     /**
      * @return array<string, mixed>
      */
     public function plan(string $packageDirectory, string $confirmedPackageSha256): array
+    {
+        return $this->validatedBundle($packageDirectory, $confirmedPackageSha256)['summary'];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function importDraft(
+        string $packageDirectory,
+        string $confirmedPackageSha256,
+        string $approvalPath,
+        string $confirmedApprovalSha256,
+    ): array {
+        return DB::transaction(function () use (
+            $packageDirectory,
+            $confirmedPackageSha256,
+            $approvalPath,
+            $confirmedApprovalSha256,
+        ): array {
+            $bundle = $this->validatedBundle($packageDirectory, $confirmedPackageSha256);
+            $approval = $this->validatedApproval($approvalPath, $confirmedApprovalSha256);
+            $rows = [];
+
+            foreach ($bundle['assets'] as $asset) {
+                $payload = $asset['payload'];
+                $slug = (string) $payload['comparison_slug'];
+                $existing = MbtiCrossTypeComparisonAuthority::query()
+                    ->withoutGlobalScopes()
+                    ->where('org_id', 0)
+                    ->where('locale', 'en')
+                    ->where('slug', $slug)
+                    ->lockForUpdate()
+                    ->first();
+
+                if ($existing instanceof MbtiCrossTypeComparisonAuthority) {
+                    $this->assertExistingTargetIsSafeDraft($existing);
+                }
+
+                $contentSha256 = $this->payloadSha256($payload);
+                MbtiCrossTypeComparisonAuthority::query()
+                    ->withoutGlobalScopes()
+                    ->updateOrCreate(
+                        ['org_id' => 0, 'locale' => 'en', 'slug' => $slug],
+                        [
+                            'comparison_type' => MbtiCrossTypeComparisonAuthority::COMPARISON_TYPE,
+                            'left_type_code' => (string) $payload['left_type'],
+                            'right_type_code' => (string) $payload['right_type'],
+                            'title' => (string) $payload['title'],
+                            'seo_title' => (string) $payload['seo_title'],
+                            'seo_description' => (string) $payload['seo_description'],
+                            'summary' => (string) $payload['summary'],
+                            'content_payload_json' => $payload,
+                            'claim_boundary' => (string) $payload['claim_boundary'],
+                            'source_package_id' => self::PACKAGE_ID,
+                            'source_sha256' => $contentSha256,
+                            'authority_contract_version' => MbtiCrossTypeComparisonAuthority::AUTHORITY_CONTRACT_VERSION,
+                            'readmodel_contract_version' => MbtiCrossTypeComparisonAuthority::READMODEL_CONTRACT_VERSION,
+                            'review_status' => 'w9_passed_pending_editorial',
+                            'publish_status' => 'draft',
+                            'indexability_status' => 'blocked',
+                            'is_public' => false,
+                            'is_indexable' => false,
+                            'sitemap_eligible' => false,
+                            'llms_eligible' => false,
+                            'search_submission_eligible' => false,
+                            'published_at' => null,
+                            'imported_at' => now(),
+                        ],
+                    );
+
+                $rows[] = [
+                    'slug' => $slug,
+                    'action' => $existing instanceof MbtiCrossTypeComparisonAuthority ? 'updated_exact_inactive_draft' : 'created_inactive_draft',
+                    'content_sha256' => $contentSha256,
+                ];
+            }
+
+            $this->assertExactInactiveDraftReadback($rows);
+
+            return [
+                'artifact' => 'EN-PARITY-W1-MBTI-COMPARISON-DRAFT-IMPORT-RECEIPT',
+                'schema_version' => 'fermatmind.en_parity.comparison_draft_import_receipt.v1',
+                'status' => 'pass',
+                'ok' => true,
+                'mode' => 'write_inactive_draft',
+                'dry_run_only' => false,
+                'write_supported_in_this_pr' => true,
+                'writes_committed' => true,
+                'database_write_attempted' => true,
+                'cms_write_attempted' => true,
+                'publish_attempted' => false,
+                'activation_attempted' => false,
+                'indexability_attempted' => false,
+                'sitemap_attempted' => false,
+                'llms_attempted' => false,
+                'search_submission_attempted' => false,
+                'deploy_attempted' => false,
+                'package' => $bundle['summary']['package'],
+                'approval' => [
+                    'approval_ref' => $approval['approval_ref'],
+                    'approval_sha256' => self::APPROVAL_SHA256,
+                    'subscope_id' => $approval['subscope_id'],
+                    'gate' => $approval['gate'],
+                    'verdict' => $approval['verdict'],
+                ],
+                'row_count' => count($rows),
+                'created_count' => count(array_filter($rows, static fn (array $row): bool => $row['action'] === 'created_inactive_draft')),
+                'updated_count' => count(array_filter($rows, static fn (array $row): bool => $row['action'] === 'updated_exact_inactive_draft')),
+                'rows' => $rows,
+                'readback' => [
+                    'exact_row_count' => count($rows),
+                    'english_draft_only' => true,
+                    'public_row_count' => 0,
+                    'indexable_row_count' => 0,
+                    'sitemap_eligible_row_count' => 0,
+                    'llms_eligible_row_count' => 0,
+                    'search_submission_eligible_row_count' => 0,
+                ],
+                'errors' => [],
+                'warnings' => [],
+            ];
+        }, 3);
+    }
+
+    /**
+     * @return array{summary: array<string, mixed>, assets: list<array<string, mixed>>}
+     */
+    private function validatedBundle(string $packageDirectory, string $confirmedPackageSha256): array
     {
         $confirmedPackageSha256 = strtolower(trim($confirmedPackageSha256));
         if ($confirmedPackageSha256 !== self::PACKAGE_SHA256) {
@@ -62,7 +211,7 @@ final class MbtiComparisonEnglishPackageImporter
         $this->validateTopLevelContracts($manifest, $assetsDocument);
         $rowPlans = $this->buildRowPlans($assetsDocument);
 
-        return [
+        $summary = [
             'artifact' => 'EN-PARITY-W1-MBTI-COMPARISON-IMPORTER-DRY-RUN-RECEIPT',
             'schema_version' => 'fermatmind.en_parity.comparison_import_dry_run_receipt.v1',
             'status' => 'pass',
@@ -110,6 +259,11 @@ final class MbtiComparisonEnglishPackageImporter
             'errors' => [],
             'warnings' => [],
         ];
+
+        return [
+            'summary' => $summary,
+            'assets' => array_values($assetsDocument['assets']),
+        ];
     }
 
     /**
@@ -117,6 +271,10 @@ final class MbtiComparisonEnglishPackageImporter
      */
     private function validateManifestAndReadPackageFiles(string $packageDirectory, array $manifest, string $manifestBytes): array
     {
+        if (! hash_equals(self::MANIFEST_SHA256, hash('sha256', $manifestBytes))) {
+            $this->fail('manifest_sha256_mismatch', 'The package manifest bytes do not match the frozen W1 comparison manifest.');
+        }
+
         if (($manifest['package_sha256'] ?? null) !== self::PACKAGE_SHA256) {
             $this->fail('manifest_package_sha256_mismatch', 'The manifest does not name the frozen W1 comparison package SHA-256.');
         }
@@ -155,10 +313,6 @@ final class MbtiComparisonEnglishPackageImporter
             $seen[$path] = $position;
             $verifiedFiles[$path] = $fileBytes;
             $chain .= $path."\0".$expectedSha256."\n";
-        }
-
-        if (! hash_equals(self::MANIFEST_SHA256, hash('sha256', $manifestBytes))) {
-            $this->fail('manifest_sha256_mismatch', 'The package manifest bytes do not match the frozen W1 comparison manifest.');
         }
 
         return [
@@ -271,6 +425,7 @@ final class MbtiComparisonEnglishPackageImporter
             if (($payload['canonical_url'] ?? null) !== 'https://fermatmind.com/en/personality/'.$slug) {
                 $this->fail('canonical_url_mismatch', 'Every target canonical must match its exact English public route.');
             }
+            $this->assertPrivateFieldsExcluded($payload);
             if (($publication['status'] ?? null) !== 'unpublished_candidate'
                 || ($publication['review_status'] ?? null) !== 'pending_independent_w9'
                 || ($publication['indexability_status'] ?? null) !== 'blocked') {
@@ -332,14 +487,210 @@ final class MbtiComparisonEnglishPackageImporter
     /**
      * @return array<string, mixed>
      */
-    private function readPackageFile(string $packageDirectory, string $filename): string
+    private function validatedApproval(string $approvalPath, string $confirmedApprovalSha256): array
     {
-        $path = rtrim($packageDirectory, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$filename;
-        if (! File::isFile($path)) {
-            $this->fail('package_file_missing', 'A required exact-package file is missing.');
+        $confirmedApprovalSha256 = strtolower(trim($confirmedApprovalSha256));
+        if ($confirmedApprovalSha256 !== self::APPROVAL_SHA256) {
+            $this->fail('confirmed_approval_sha256_mismatch', 'The confirmed approval SHA-256 is not the exact CONTROL artifact.');
         }
 
-        return (string) File::get($path);
+        $approvalBytes = $this->readExactFile($approvalPath, self::APPROVAL_BYTES, null, 'approval');
+        if (! hash_equals(self::APPROVAL_SHA256, hash('sha256', $approvalBytes))) {
+            $this->fail('approval_sha256_mismatch', 'The CONTROL approval artifact bytes do not match the authorized SHA-256.');
+        }
+        $approval = $this->decodeJson($approvalBytes);
+        $expected = [
+            'artifact_kind' => 'controlled_transition_approval',
+            'schema_version' => 'fermatmind.en_content_parity_controlled_transition_approval.v1',
+            'control_id' => 'EN-PARITY-CONTROL-BOOTSTRAP-01',
+            'approval_owner' => 'human_operator',
+            'approval_ref' => self::APPROVAL_REF,
+            'producer_lane_id' => 'W1',
+            'subscope_id' => 'W1-MBTI-COMPARISONS',
+            'package_sha256' => self::PACKAGE_SHA256,
+            'gate' => 'draft_imported',
+            'verdict' => 'APPROVED',
+        ];
+        foreach ($expected as $field => $value) {
+            if (($approval[$field] ?? null) !== $value) {
+                $this->fail('approval_contract_mismatch', 'The CONTROL approval identity or gate contract is invalid.');
+            }
+        }
+
+        $permissions = $approval['permissions'] ?? null;
+        if (! is_array($permissions)) {
+            $this->fail('approval_permissions_missing', 'The CONTROL approval permissions contract is missing.');
+        }
+        foreach ([
+            'cms_write_authorized',
+            'staging_write_authorized',
+            'production_import_authorized',
+            'public_release_authorized',
+            'seo_runtime_release_authorized',
+            'search_submission_authorized',
+            'master_manifest_write_authorized',
+        ] as $permission) {
+            if (($permissions[$permission] ?? null) !== false) {
+                $this->fail('approval_permission_boundary_open', 'The approval artifact must retain every global permission as false.');
+            }
+        }
+
+        return $approval;
+    }
+
+    private function assertExistingTargetIsSafeDraft(MbtiCrossTypeComparisonAuthority $authority): void
+    {
+        if ((int) $authority->org_id !== 0
+            || (string) $authority->locale !== 'en'
+            || (string) $authority->source_package_id !== self::PACKAGE_ID
+            || (string) $authority->publish_status !== 'draft'
+            || (bool) $authority->is_public
+            || (bool) $authority->is_indexable
+            || (bool) $authority->sitemap_eligible
+            || (bool) $authority->llms_eligible
+            || (bool) $authority->search_submission_eligible
+            || $authority->published_at !== null) {
+            $this->fail('existing_target_collision', 'An English target identity is not an exact-package inactive draft.');
+        }
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $rows
+     */
+    private function assertExactInactiveDraftReadback(array $rows): void
+    {
+        if (count($rows) !== 7 || array_column($rows, 'slug') !== self::EXACT_SLUGS) {
+            $this->fail('draft_import_row_cohort_mismatch', 'The write result does not retain the exact seven-row cohort.');
+        }
+
+        $authorities = MbtiCrossTypeComparisonAuthority::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->where('locale', 'en')
+            ->whereIn('slug', self::EXACT_SLUGS)
+            ->orderBy('slug')
+            ->get();
+        if ($authorities->count() !== 7) {
+            $this->fail('draft_import_readback_count_mismatch', 'The exact seven English draft rows were not readable after write.');
+        }
+
+        foreach ($authorities as $authority) {
+            if (! $authority instanceof MbtiCrossTypeComparisonAuthority) {
+                $this->fail('draft_import_readback_type_mismatch', 'An imported authority row has an unexpected type.');
+            }
+            $this->assertExistingTargetIsSafeDraft($authority);
+            if ((string) $authority->review_status !== 'w9_passed_pending_editorial'
+                || (string) $authority->indexability_status !== 'blocked') {
+                $this->fail('draft_import_readback_state_mismatch', 'An imported authority row escaped the approved draft-only state.');
+            }
+        }
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     */
+    private function payloadSha256(array $payload): string
+    {
+        return hash('sha256', (string) json_encode(
+            $payload,
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE | JSON_THROW_ON_ERROR,
+        ));
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     */
+    private function assertPrivateFieldsExcluded(array $payload): void
+    {
+        $forbidden = [
+            'attempt', 'attempt_id', 'report', 'report_id', 'order', 'order_id', 'payment', 'payment_id',
+            'account', 'account_id', 'answers', 'scores', 'recovery', 'recovery_token', 'private_url',
+        ];
+        $walk = function (array $value) use (&$walk, $forbidden): void {
+            foreach ($value as $key => $nested) {
+                if (is_string($key) && in_array(strtolower($key), $forbidden, true)) {
+                    $this->fail('private_field_present', 'A private result, order, payment, account, or recovery field is present.');
+                }
+                if (is_array($nested)) {
+                    $walk($nested);
+                }
+            }
+        };
+        $walk($payload);
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function readPackageFile(string $packageDirectory, string $filename): string
+    {
+        $expectedBytes = self::EXPECTED_FILE_BYTES[$filename] ?? null;
+        if (! is_int($expectedBytes)) {
+            $this->fail('package_file_not_allowlisted', 'Only frozen exact-package filenames may be read.');
+        }
+
+        $path = rtrim($packageDirectory, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$filename;
+
+        return $this->readExactFile($path, $expectedBytes, $packageDirectory, 'package');
+    }
+
+    private function readExactFile(string $path, int $expectedBytes, ?string $boundaryDirectory, string $kind): string
+    {
+        if (is_link($path)) {
+            $this->fail($kind.'_file_symlink_rejected', 'Exact evidence files must not be symbolic links.');
+        }
+
+        $linkStat = @lstat($path);
+        if ($linkStat === false || (($linkStat['mode'] ?? 0) & 0170000) !== 0100000) {
+            $this->fail($kind.'_file_missing', 'A required exact evidence file is missing or is not a regular file.');
+        }
+        if (($linkStat['nlink'] ?? null) !== 1) {
+            $this->fail($kind.'_file_hardlink_rejected', 'Exact evidence files must have exactly one filesystem link.');
+        }
+        if (($linkStat['size'] ?? null) !== $expectedBytes) {
+            $this->fail($kind.'_file_size_mismatch', 'An exact evidence file does not match its frozen byte length.');
+        }
+
+        $resolvedPath = realpath($path);
+        if ($resolvedPath === false) {
+            $this->fail($kind.'_file_boundary_invalid', 'An exact evidence file does not resolve safely.');
+        }
+        if ($boundaryDirectory !== null) {
+            $resolvedDirectory = realpath($boundaryDirectory);
+            if ($resolvedDirectory === false
+                || ! str_starts_with($resolvedPath, rtrim($resolvedDirectory, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR)) {
+                $this->fail($kind.'_file_boundary_invalid', 'Exact-package files must resolve inside the selected package directory.');
+            }
+        }
+
+        $handle = @fopen($resolvedPath, 'rb');
+        if ($handle === false) {
+            $this->fail($kind.'_file_unreadable', 'An exact evidence file cannot be opened safely.');
+        }
+
+        try {
+            $openedStat = fstat($handle);
+            if ($openedStat === false
+                || (($openedStat['mode'] ?? 0) & 0170000) !== 0100000
+                || ($openedStat['nlink'] ?? null) !== 1
+                || ($openedStat['size'] ?? null) !== $expectedBytes
+                || ($openedStat['dev'] ?? null) !== ($linkStat['dev'] ?? null)
+                || ($openedStat['ino'] ?? null) !== ($linkStat['ino'] ?? null)) {
+                $this->fail($kind.'_file_identity_changed', 'Exact evidence file identity changed before the safe read.');
+            }
+
+            $bytes = stream_get_contents($handle, $expectedBytes + 1);
+            if ($bytes === false) {
+                $this->fail($kind.'_file_unreadable', 'An exact evidence file cannot be read safely.');
+            }
+            if (strlen($bytes) !== $expectedBytes) {
+                $this->fail($kind.'_file_size_changed', 'Exact evidence file size changed during the bounded read.');
+            }
+
+            return $bytes;
+        } finally {
+            fclose($handle);
+        }
     }
 
     /**
