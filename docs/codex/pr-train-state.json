@@ -102792,7 +102792,7 @@
       "EN-PARITY-W1-MBTI-COMPARISON-IMPORTER-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "826a1311af4dd8ae0cb0fc75e83b66b3c8d26566",
+    "commit_sha": "cca01b0b7b1b60a3df19aa6f1440372bac51985e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3468",
     "checks": {
       "authorization": {
@@ -102809,7 +102809,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "After exact-head review repair and latest-main integration, the combined package/importer/runtime-freeze/review-governance suite passed 17 tests / 1371 assertions. It covers package schema, claim boundary, private-field exclusion, exact approval SHA, safe-file reads, registered review surface, transactional seven-row create, strict no-update replay, preserved timestamps, zh-CN preservation, collision rollback, accurate write-attempt reporting, and zero public/discoverability flags. Scoped Pint passed. Exact dry-run returned seven rows and zero writes. A temporary local SQLite CMS authority execution completed seven creates and exact readback, then preserved all seven exact rows with zero updates on replay; its sanitized local-validation create receipt SHA was 61198b468cc944d1049e98ed79430277dbd5b9a886a8d50c9fac0156e502e2c8. Route inventory returned 231 lines; YAML/JSON, PHP syntax, approval rehash, and diff checks passed."
+        "evidence": "After both exact-head review repair rounds and latest-main integration, the combined package/importer/runtime-freeze/review-governance suite passed 19 tests / 1394 assertions. It covers package schema, claim boundary, private-field exclusion, exact approval SHA, safe-file reads, registered review surface, transactional seven-row create, strict no-update replay, preserved timestamps, zh-CN preservation, public and advanced-editorial collision rollback, accurate write-attempt reporting, hard refusal in staging/production, and zero public/discoverability flags. Scoped Pint passed. Exact dry-run returned seven rows and zero writes. A temporary testing SQLite CMS authority execution completed seven creates and exact readback, then preserved all seven exact rows with zero updates and no write attempt on replay; its sanitized local-validation create receipt SHA was 61198b468cc944d1049e98ed79430277dbd5b9a886a8d50c9fac0156e502e2c8. Route inventory returned 231 lines; YAML/JSON, PHP syntax, approval rehash, and diff checks passed."
       },
       "changed_file_scope": {
         "status": "passed",
@@ -102859,8 +102859,13 @@
         "at": "2026-08-01T09:34:00Z",
         "status": "review_fix_local_verified",
         "note": "All required checks passed on prior head e5a754dbcc8ee3df0381d711c858fce6326bf8be, then exact-head review identified three valid current-scope issues. Added the registered mbti_cross_type_comparison_authority review-surface declaration, made exact-package replay preserve imported_at/updated_at with zero SQL updates, and report rolled-back SQL attempts accurately. Integrated latest origin/main a202c8175ad0cfda59585d9adb20e1b2d8b929a2 without conflict. Focused validation passes 17 tests / 1371 assertions plus scoped Pint and exact local write/readback/strict replay; fresh exact-head required checks remain mandatory."
+      },
+      {
+        "at": "2026-08-01T09:43:00Z",
+        "status": "review_fix_local_verified",
+        "note": "All required checks passed again on head 83b935bbcb387deb7e9559e5aa610428677ba85b, then fresh exact-head review identified three additional valid boundaries. The scoped approval now rejects staging/production execution, exact replay rejects advanced editorial states instead of downgrading them, and no-op replay receipts report no attempted or committed writes. Focused validation passes 19 tests / 1394 assertions, scoped Pint, create/readback/no-op replay receipt semantics, parsers, diff, and exact scope all pass; fresh exact-head checks remain mandatory."
       }
     ],
-    "updated_at": "2026-08-01T09:34:00Z"
+    "updated_at": "2026-08-01T09:43:00Z"
   }
 }
