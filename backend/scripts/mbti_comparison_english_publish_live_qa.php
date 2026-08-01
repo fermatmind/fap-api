@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Services\Cms\Mbti64CrossTypeComparisonPublicReadModel;
 use App\Services\Cms\MbtiComparisonEnglishPublishService;
 use App\Services\ContentImport\MbtiComparisonEnglishPackageImporter;
+use App\Support\ControlledReceiptWriter;
 use Illuminate\Contracts\Console\Kernel;
 
 const REQUIRED_ACTIVE_REVISION = '660280d00a57e58bd8bc76608e19de2492c03f53';
@@ -40,6 +41,7 @@ if (! is_file($backendRoot.'/artisan') || ! is_file($backendRoot.'/vendor/autolo
 
 require $backendRoot.'/vendor/autoload.php';
 require $sourceBackendRoot.'/app/Services/Cms/MbtiComparisonEnglishPublishService.php';
+require $sourceBackendRoot.'/app/Support/ControlledReceiptWriter.php';
 $app = require $backendRoot.'/bootstrap/app.php';
 $app->make(Kernel::class)->bootstrap();
 
@@ -80,5 +82,5 @@ $receipt['runtime_live_qa'] = [
     'rows' => $runtimeRows,
 ];
 $receiptBytes = json_encode($receipt, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR).PHP_EOL;
-file_put_contents($receiptDir.'/comparison-english-publish-live-qa-receipt.json', $receiptBytes, LOCK_EX);
-fwrite(STDOUT, json_encode(['status' => 'PASS', 'receipt_sha256' => hash('sha256', $receiptBytes)], JSON_UNESCAPED_SLASHES).PHP_EOL);
+$receiptSha256 = (new ControlledReceiptWriter)->write($receiptDir, 'comparison-english-publish-live-qa-receipt.json', $receiptBytes);
+fwrite(STDOUT, json_encode(['status' => 'PASS', 'receipt_sha256' => $receiptSha256], JSON_UNESCAPED_SLASHES).PHP_EOL);

@@ -214,6 +214,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_controlled_receipt_writer(): void
+    {
+        $allowed = [
+            'backend/app/Support/ControlledReceiptWriter.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_eq60_form_catalog(): void
     {
         $allowed = [
@@ -10986,7 +10999,10 @@ DIFF;
 
     private function isSafeTmpArtifactSupportFile(string $file): bool
     {
-        return $file === 'backend/app/Support/SafeArtifactDirectory.php';
+        return in_array($file, [
+            'backend/app/Support/SafeArtifactDirectory.php',
+            'backend/app/Support/ControlledReceiptWriter.php',
+        ], true);
     }
 
     private function isDbMigrationPortabilityFile(string $file): bool
