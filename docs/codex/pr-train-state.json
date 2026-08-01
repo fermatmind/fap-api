@@ -102019,7 +102019,7 @@
     "depends_on": [
       "EN-PARITY-W1-MBTI-INVENTORY-01"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "0c9eebbe8af44a50decf2270aec6611637faa4c1",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3424",
     "checks": {
@@ -103238,7 +103238,7 @@
         "evidence": "human_operator approved only the exact seven-row comparison publish gate, package SHA deecc8175fb43ba3730d6513b496a0ab6834459108e3b24e25550bbf40e001a2, target receipt SHA b44e50a252f48d85ca93f572f4bf5ee7f334d6155a19713cfd3c8185359edae8, and deployed runtime revision 660280d00a57e58bd8bc76608e19de2492c03f53."
       },
       "local_validation": {"status": "passed", "evidence": "Focused SQLite publish service test passed 4 tests / 92 assertions; scoped Pint, PHP syntax, approval SHA, YAML/JSON parsing, diff check, and exact path scope validation passed."},
-      "github_required_checks": {"status": "repairing", "evidence": "PR #3478 failed only verify-bigfive because the new workflow-only publisher was not registered in the MBTI runtime-freeze classifier. The scoped classifier contract repair passed focused validation; fresh required checks are pending."}
+      "github_required_checks": {"status": "passed", "evidence": "PR #3478 exact repair head 27fcff06b0bd72a027f541ce28f7dbef4519d4d9 passed hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and non-blocking SARIF. Staging parity was skipped and is not a required merge gate."}
     },
     "failure_reason": null,
     "merged_at": null,
@@ -103272,6 +103272,11 @@
         "at": "2026-08-01T21:00:00+08:00",
         "status": "github_checks_repairing",
         "note": "Inspected failing verify-bigfive job before changing code. The only failure was the current PR's new controlled publisher missing from the existing runtime-freeze classifier allowlist; added one narrow classifier contract and will rerun required checks."
+      },
+      {
+        "at": "2026-08-01T21:10:00+08:00",
+        "status": "ready_to_merge",
+        "note": "Exact repair head 27fcff06b0bd72a027f541ce28f7dbef4519d4d9 passed all required checks. Scope revalidation confirmed only the declared PR11 paths changed; squash merge is permitted by the repository policy."
       }
     ],
     "updated_at": "2026-08-01T20:40:00+08:00"
