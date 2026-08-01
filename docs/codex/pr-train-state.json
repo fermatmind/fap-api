@@ -102791,8 +102791,8 @@
     "depends_on": [
       "EN-PARITY-W1-MBTI-COMPARISON-IMPORTER-01"
     ],
-    "status": "ready_to_merge",
-    "commit_sha": "4ce370b83a37b5252cfd95eee574887317b621a3",
+    "status": "github_checks_pending",
+    "commit_sha": "4038e80dcffc86a9a397f8e48481b1123067e852",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3468",
     "checks": {
       "authorization": {
@@ -102816,8 +102816,8 @@
         "evidence": "The exact seven changed paths are limited to the existing comparison command/service/test, the byte-exact CONTROL approval snapshot, backend repository rules, and this PR's train manifest/state. No package, model, migration, public read model, API route/controller, result-content, frontend, publish, activation, SEO runtime, Search Channel, or deploy path changed."
       },
       "github_required_checks": {
-        "status": "passed",
-        "evidence": "Exact head 4ce370b83a37b5252cfd95eee574887317b621a3 passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep OSS, Semgrep blocking secrets, and the non-blocking SARIF upload; staging parity was correctly skipped. GitHub reports CLEAN/MERGEABLE. Explicit exact-head Codex review completed at 2026-08-01T10:18:25Z with no major issues."
+        "status": "pending",
+        "evidence": "The superseded implementation head 4ce370b83a37b5252cfd95eee574887317b621a3 and ledger-only head 6477f55f30dc741547b65d13ab460b5c7cf5e679 both passed all nine applicable checks. Exact-head review of the latter found a database-exception receipt redaction gap; fresh checks are mandatory after the scoped repair."
       }
     },
     "failure_reason": null,
@@ -102827,7 +102827,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": true,
+      "github_checks_green": false,
       "post_merge_revalidated": false
     },
     "production_write_execution": false,
@@ -102879,8 +102879,13 @@
         "at": "2026-08-01T10:20:11Z",
         "status": "ready_to_merge",
         "note": "Exact head 4ce370b83a37b5252cfd95eee574887317b621a3 passed all nine applicable required checks with staging parity skipped. GitHub reports CLEAN/MERGEABLE, all prior review findings are repaired within the exact seven-path scope, and the explicit exact-head Codex review reported no major issues. This following readiness commit changes only the PR09 state ledger, so its own required checks and exact-head review remain mandatory before merge."
+      },
+      {
+        "at": "2026-08-01T10:31:18Z",
+        "status": "review_fix_local_verified",
+        "note": "The ledger-only ready head 6477f55f30dc741547b65d13ab460b5c7cf5e679 passed all nine applicable checks, then exact-head review found that QueryException inherits RuntimeException and could expose SQL, bindings, unpublished payload, or connection details in a failure receipt. Controlled contract failures now use DomainException; every database and other unexpected throwable is mapped to the fixed redacted unexpected_error receipt. A dropped-authority-table regression proves SQLSTATE, table name, and content_payload_json never enter output. The focused importer suite passes 14 tests / 381 assertions, scoped Pint and diff checks pass, and fresh exact-head required checks remain mandatory. Implementation head is 4038e80dcffc86a9a397f8e48481b1123067e852 and the following commit changes only this ledger pointer."
       }
     ],
-    "updated_at": "2026-08-01T10:20:11Z"
+    "updated_at": "2026-08-01T10:31:18Z"
   }
 }
