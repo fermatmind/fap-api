@@ -20,7 +20,22 @@ final class Mbti64CrossTypeComparisonPublicReadModel
 
     private const COMPARISON_TYPE = 'mbti_cross_type';
 
-    private const LOCALE = 'zh-CN';
+    private const DEFAULT_LOCALE = 'zh-CN';
+
+    private const ENGLISH_LOCALE = 'en';
+
+    private const ENGLISH_W1_PACKAGE_ID = 'EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-07-2026-07-31';
+
+    /** @var list<string> */
+    private const ENGLISH_W1_SLUGS = [
+        'enfp-vs-entp',
+        'entj-vs-intj',
+        'estj-vs-entj',
+        'infj-vs-infp',
+        'intj-vs-intp',
+        'isfp-vs-infp',
+        'istj-vs-isfj',
+    ];
 
     public function __construct(private readonly PublicReviewContract $publicReviewContract) {}
 
@@ -29,12 +44,12 @@ final class Mbti64CrossTypeComparisonPublicReadModel
      */
     public function list(string $locale): array
     {
-        if ($locale !== self::LOCALE) {
+        if (! $this->supportsLocale($locale)) {
             return [];
         }
 
         $items = [];
-        foreach ($this->authorityAssetsBySlug() as $asset) {
+        foreach ($this->authorityAssetsBySlug($locale) as $asset) {
             $item = $this->listItem($asset, $locale);
             if ($item !== null) {
                 $items[] = $item;
@@ -52,11 +67,11 @@ final class Mbti64CrossTypeComparisonPublicReadModel
     public function find(string $slug, string $locale): ?array
     {
         $normalizedSlug = strtolower(trim($slug));
-        if ($locale !== self::LOCALE || ! $this->isCrossTypeSlug($normalizedSlug)) {
+        if (! $this->supportsLocale($locale) || ! $this->isCrossTypeSlug($normalizedSlug)) {
             return null;
         }
 
-        $asset = $this->authorityAssetsBySlug()[$normalizedSlug] ?? null;
+        $asset = $this->authorityAssetsBySlug($locale)[$normalizedSlug] ?? null;
         if (! is_array($asset)) {
             return null;
         }
@@ -67,18 +82,24 @@ final class Mbti64CrossTypeComparisonPublicReadModel
     /**
      * @return array<string,array<string,mixed>>
      */
-    private function authorityAssetsBySlug(): array
+    private function authorityAssetsBySlug(string $locale): array
     {
         $assets = [];
-        $rows = MbtiCrossTypeComparisonAuthority::query()
+        $query = MbtiCrossTypeComparisonAuthority::query()
             ->withoutGlobalScopes()
             ->where('org_id', 0)
-            ->where('locale', self::LOCALE)
+            ->where('locale', $locale)
             ->where('comparison_type', self::COMPARISON_TYPE)
             ->where('publish_status', 'published')
-            ->where('is_public', true)
-            ->orderBy('slug')
-            ->get();
+            ->where('is_public', true);
+
+        if ($locale === self::ENGLISH_LOCALE) {
+            $query
+                ->where('source_package_id', self::ENGLISH_W1_PACKAGE_ID)
+                ->whereIn('slug', self::ENGLISH_W1_SLUGS);
+        }
+
+        $rows = $query->orderBy('slug')->get();
 
         foreach ($rows as $row) {
             if (! $row instanceof MbtiCrossTypeComparisonAuthority) {
@@ -94,6 +115,11 @@ final class Mbti64CrossTypeComparisonPublicReadModel
         }
 
         return $assets;
+    }
+
+    private function supportsLocale(string $locale): bool
+    {
+        return in_array($locale, [self::DEFAULT_LOCALE, self::ENGLISH_LOCALE], true);
     }
 
     /**
@@ -228,7 +254,7 @@ final class Mbti64CrossTypeComparisonPublicReadModel
             'seo_description' => (string) $asset['seo_description'],
             'summary' => (string) $asset['summary'],
             'canonical_url' => $canonicalUrl,
-            'alternates' => $this->alternates($canonicalUrl),
+            'alternates' => $this->alternates($canonicalUrl, $locale),
             'sections' => $sections,
             'faq' => $faq,
             'internal_links' => $internalLinks,
@@ -367,13 +393,13 @@ final class Mbti64CrossTypeComparisonPublicReadModel
     }
 
     /** @return array<string,string> */
-    private function alternates(?string $canonicalUrl): array
+    private function alternates(?string $canonicalUrl, string $locale): array
     {
         if ($canonicalUrl === null) {
             return [];
         }
 
-        return [self::LOCALE => $canonicalUrl];
+        return [$locale => $canonicalUrl];
     }
 
     /**
