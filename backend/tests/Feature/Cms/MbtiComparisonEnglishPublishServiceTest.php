@@ -109,13 +109,17 @@ final class MbtiComparisonEnglishPublishServiceTest extends TestCase
         }
         self::assertStringContainsString("const REQUIRED_ACTIVE_REVISION = '660280d00a57e58bd8bc76608e19de2492c03f53'", $executor);
         self::assertStringContainsString("'meta_robots' => 'noindex,follow'", $executor);
+        self::assertStringContainsString("(array) (\$projection['source_refs'] ?? [])", $executor);
+        self::assertStringContainsString("\$projection['source_sha256']", $executor);
         self::assertStringContainsString('comparison_english_publish_live_qa_failed:$errorCode', $executor);
         self::assertStringContainsString('ControlledReceiptWriter', $executor);
         self::assertStringContainsString('environment: production', $workflow);
         self::assertStringContainsString('mbti_comparison_english_publish_live_qa.php', $workflow);
         self::assertStringContainsString("sed -n '1p' \"\$RUN_DIR/executor.stderr\" >&2 || true", $workflow);
-        self::assertStringContainsString('test -s "$receipt_path"', $workflow);
-        self::assertStringContainsString('sha256sum "$receipt_path"', $workflow);
+        self::assertStringContainsString('test -s "$remote_receipt_path"', $workflow);
+        self::assertStringContainsString('sha256sum "$remote_receipt_path"', $workflow);
+        self::assertStringContainsString('> "$receipt_path" <<\'REMOTE\'', $workflow);
+        self::assertStringNotContainsString('$run_dir/receipts/.', $workflow);
         self::assertStringNotContainsString('php artisan migrate', $workflow);
         self::assertStringNotContainsString('dep deploy', $workflow);
     }

@@ -1,14 +1,14 @@
-name: MBTI W1 English Comparison Publish Live QA
+name: MBTI W1 English Comparison Publish Diagnostic
 
 on:
   workflow_dispatch:
     inputs:
       expected_control_plane_sha:
-        description: Exact main SHA containing this controlled publish executor
+        description: Exact main SHA containing this read-only diagnostic
         required: true
         type: string
       expected_active_revision:
-        description: Exact deployed runtime SHA approved for English projection live QA
+        description: Exact deployed runtime SHA for the W1 English projection
         required: true
         type: string
 
@@ -16,14 +16,14 @@ permissions:
   contents: read
 
 concurrency:
-  group: mbti-w1-comparison-english-publish-live-qa
+  group: mbti-w1-comparison-english-publish-diagnostic
   cancel-in-progress: false
 
 jobs:
-  controlled-publish-live-qa:
-    name: Publish seven exact English comparisons and verify noindex projection
+  controlled-read-only-diagnostic:
+    name: Read seven exact English comparison authority rows without mutation
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 15
     environment: production
     steps:
       - name: Checkout exact control plane
@@ -32,7 +32,7 @@ jobs:
           ref: ${{ inputs.expected_control_plane_sha }}
           fetch-depth: 1
 
-      - name: Verify immutable approval and control-plane contract
+      - name: Verify immutable diagnostic approval and control-plane contract
         shell: bash
         env:
           EXPECTED_CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
@@ -46,7 +46,7 @@ jobs:
           test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
           test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
           printf '%s  %s\n' \
-            3a9a929dcfecc64a02d40453540a0d0ad71c002f10304d8d544c597f808a3f1c backend/content_assets/en-content-parity/CONTROL-approvals/W1-MBTI-COMPARISONS/publish-live-approval-2026-08-01.json \
+            78b5cbe1bc0a26f41a183996f62808233800c3ffb677397ebbe46d8f8dcf232a backend/content_assets/en-content-parity/CONTROL-approvals/W1-MBTI-COMPARISONS/publish-diagnostic-readback-approval-2026-08-02.json \
             | sha256sum -c -
           jq -e '
             .artifact_kind == "controlled_transition_approval" and
@@ -54,9 +54,10 @@ jobs:
             .subscope_id == "W1-MBTI-COMPARISONS" and
             .package_sha256 == "deecc8175fb43ba3730d6513b496a0ab6834459108e3b24e25550bbf40e001a2" and
             .target_authority_receipt_sha256 == "b44e50a252f48d85ca93f572f4bf5ee7f334d6155a19713cfd3c8185359edae8" and
-            .gate == "published" and .verdict == "APPROVED" and
-            .permissions.publish_authorized == true and
+            .prior_publish_approval_sha256 == "3a9a929dcfecc64a02d40453540a0d0ad71c002f10304d8d544c597f808a3f1c" and
+            .gate == "publish_diagnostic_readback" and .verdict == "APPROVED" and
             .permissions.target_authority_readback_authorized == true and
+            .permissions.publish_authorized == false and
             .permissions.activation_authorized == false and
             .permissions.active_pointer_authorized == false and
             .permissions.indexability_authorized == false and
@@ -68,7 +69,7 @@ jobs:
             .permissions.deployment_authorized == false and
             .permissions.private_result_read_authorized == false and
             .permissions.attempt_report_order_payment_read_authorized == false
-          ' backend/content_assets/en-content-parity/CONTROL-approvals/W1-MBTI-COMPARISONS/publish-live-approval-2026-08-01.json >/dev/null
+          ' backend/content_assets/en-content-parity/CONTROL-approvals/W1-MBTI-COMPARISONS/publish-diagnostic-readback-approval-2026-08-02.json >/dev/null
 
       - name: Set up pinned production SSH identity
         uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
@@ -91,7 +92,7 @@ jobs:
           chmod 0600 ~/.ssh/known_hosts
           ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
 
-      - name: Execute exact publish and live QA without deployment
+      - name: Execute one read-only authority and projection diagnostic
         shell: bash
         env:
           DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
@@ -106,24 +107,24 @@ jobs:
           [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
           [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
           [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ && "$DEPLOY_PATH" != *".."* ]]
-          run_dir="/tmp/mbti-w1-comparison-english-publish-${GITHUB_RUN_ID}"
-          bundle="$RUNNER_TEMP/mbti-w1-comparison-english-publish-input.tgz"
-          receipt_dir="$RUNNER_TEMP/mbti-w1-comparison-english-publish-receipts"
-          receipt_path="$receipt_dir/comparison-english-publish-live-qa-receipt.json"
-          mkdir -p "$receipt_dir"
+          run_dir="/tmp/mbti-w1-comparison-english-publish-diagnostic-${GITHUB_RUN_ID}"
+          bundle="$RUNNER_TEMP/mbti-w1-comparison-english-publish-diagnostic-input.tgz"
+          artifact_dir="$RUNNER_TEMP/mbti-w1-comparison-english-publish-diagnostic"
+          receipt_path="$artifact_dir/mbti-comparison-english-publish-diagnostic.json"
+          mkdir -p "$artifact_dir"
           emit_failure_receipt() {
             jq -n \
               --arg control "$CONTROL_PLANE_SHA" \
               --arg revision "$ACTIVE_REVISION" \
               --arg stage "$1" \
-              '{artifact:"EN-PARITY-W1-MBTI-COMPARISON-PUBLISH-LIVE-QA-FAILURE-RECEIPT",schema_version:"fermatmind.en_parity.comparison_publish_live_qa_failure_receipt.v1",status:"BLOCKED",ok:false,failed_stage:$stage,control_plane_sha:$control,active_revision:$revision,write_state:"unknown",publish_attempted:null,activation_attempted:false,active_pointer_changed:false,indexability_attempted:false,sitemap_attempted:false,llms_attempted:false,search_submission_attempted:false,deploy_attempted:false}' \
+              '{artifact:"EN-PARITY-W1-MBTI-COMPARISON-PUBLISH-DIAGNOSTIC-FAILURE-RECEIPT",schema_version:"fermatmind.en_parity.comparison_publish_diagnostic_failure_receipt.v1",status:"BLOCKED",ok:false,failed_stage:$stage,control_plane_sha:$control,active_revision:$revision,read_only:true,cms_write_attempted:false,publish_attempted:false,activation_attempted:false,active_pointer_changed:false,indexability_attempted:false,sitemap_attempted:false,llms_attempted:false,search_submission_attempted:false,deploy_attempted:false}' \
               > "$receipt_path"
           }
           tar -C "$GITHUB_WORKSPACE" -czf "$bundle" \
-            backend/scripts/mbti_comparison_english_publish_live_qa.php \
-            backend/app/Services/Cms/MbtiComparisonEnglishPublishService.php \
-            backend/app/Support/ControlledReceiptWriter.php \
-            backend/content_assets/en-content-parity/CONTROL-approvals/W1-MBTI-COMPARISONS/publish-live-approval-2026-08-01.json
+            backend/scripts/mbti_comparison_english_publish_diagnostic.php \
+            backend/app/Services/Cms/MbtiComparisonEnglishPublishDiagnosticService.php \
+            backend/app/Services/ContentImport/MbtiComparisonEnglishPackageImporter.php \
+            backend/content_assets/en-content-parity/CONTROL-approvals/W1-MBTI-COMPARISONS/publish-diagnostic-readback-approval-2026-08-02.json
           set +e
           scp -P "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes "$bundle" "$DEPLOY_USER@$DEPLOY_HOST:$run_dir.tgz"
           bundle_status=$?
@@ -141,43 +142,27 @@ jobs:
           test -f "$current/REVISION"
           test "$(tr -d '\r\n' < "$current/REVISION")" = "$ACTIVE_REVISION"
           test ! -e "$DEPLOY_PATH/.dep/deploy.lock"
-          mkdir -p "$RUN_DIR/input" "$RUN_DIR/receipts"
+          mkdir -p "$RUN_DIR/input"
           tar -xzf "$RUN_DIR.tgz" -C "$RUN_DIR/input"
-          set +e
-          php -d display_errors=0 -d log_errors=0 "$RUN_DIR/input/backend/scripts/mbti_comparison_english_publish_live_qa.php" \
+          php -d display_errors=0 -d log_errors=0 "$RUN_DIR/input/backend/scripts/mbti_comparison_english_publish_diagnostic.php" \
             --backend-root="$current/backend" \
             --source-backend-root="$RUN_DIR/input/backend" \
-            --receipt-dir="$RUN_DIR/receipts" \
             --control-plane-sha="$CONTROL_PLANE_SHA" \
-            --active-revision="$ACTIVE_REVISION" \
-            >"$RUN_DIR/executor.stdout" 2>"$RUN_DIR/executor.stderr"
-          executor_status=$?
-          set -e
-          if [ "$executor_status" -ne 0 ]; then
-            sed -n '1p' "$RUN_DIR/executor.stderr" >&2 || true
-            printf '%s\n' 'comparison_english_publish_live_qa_failed' >&2
-            exit "$executor_status"
-          fi
-          remote_receipt_path="$RUN_DIR/receipts/comparison-english-publish-live-qa-receipt.json"
-          test -s "$remote_receipt_path"
-          receipt_sha256="$(jq -er 'select(.status == "PASS") | .receipt_sha256 | strings | select(test("^[a-f0-9]{64}$"))' "$RUN_DIR/executor.stdout")"
-          test "$(sha256sum "$remote_receipt_path" | awk '{print $1}')" = "$receipt_sha256"
-          jq -e '.status == "PASS" and .row_count == 7 and .publish_attempted == true and .activation_attempted == false and .active_pointer_changed == false and .indexability_attempted == false and .sitemap_attempted == false and .llms_attempted == false and .deploy_attempted == false and .runtime_live_qa.exact_row_count == 7 and .runtime_live_qa.meta_robots == "noindex,follow" and .runtime_live_qa.sitemap_excluded == true and .runtime_live_qa.llms_withheld == true' "$remote_receipt_path" >/dev/null
-          cat "$remote_receipt_path"
+            --active-revision="$ACTIVE_REVISION"
           REMOTE
           remote_status=$?
           set -e
           if [ "$remote_status" -ne 0 ]; then
-            emit_failure_receipt remote_publish_execution_failed
+            emit_failure_receipt remote_diagnostic_execution_failed
             exit "$remote_status"
           fi
-          jq -e '.status == "PASS" and .row_count == 7 and .publish_attempted == true and .activation_attempted == false and .active_pointer_changed == false and .indexability_attempted == false and .sitemap_attempted == false and .llms_attempted == false and .deploy_attempted == false and .runtime_live_qa.exact_row_count == 7 and .runtime_live_qa.meta_robots == "noindex,follow" and .runtime_live_qa.sitemap_excluded == true and .runtime_live_qa.llms_withheld == true' "$receipt_path" >/dev/null
+          jq -e '.status == "PASS" and .ok == true and .read_only == true and .row_count == 7 and (.authority_state == "draft_exact_english_comparison" or .authority_state == "published_exact_english_comparison") and .cms_write_attempted == false and .publish_attempted == false and .activation_attempted == false and .active_pointer_changed == false and .indexability_attempted == false and .sitemap_attempted == false and .llms_attempted == false and .search_submission_attempted == false and .deploy_attempted == false and .runtime_projection.meta_robots == "noindex,follow" and .runtime_projection.sitemap_excluded == true and .runtime_projection.llms_withheld == true and .runtime_projection.search_submission_held == true' "$receipt_path" >/dev/null
 
-      - name: Publish immutable live-QA receipt
+      - name: Publish immutable read-only diagnostic receipt
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: mbti-w1-comparison-english-publish-live-qa-${{ github.run_id }}-${{ github.run_attempt }}
-          path: ${{ runner.temp }}/mbti-w1-comparison-english-publish-receipts
+          name: mbti-w1-comparison-english-publish-diagnostic-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/mbti-w1-comparison-english-publish-diagnostic
           if-no-files-found: warn
           retention-days: 90

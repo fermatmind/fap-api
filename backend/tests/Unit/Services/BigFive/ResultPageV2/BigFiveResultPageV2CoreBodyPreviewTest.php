@@ -1031,6 +1031,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_the_controlled_w1_english_comparison_diagnostic(): void
+    {
+        $allowed = [
+            'backend/app/Services/Cms/MbtiComparisonEnglishPublishDiagnosticService.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_mbti_result_page_pdf_export_route_changes(): void
     {
         $changed = [
@@ -9306,7 +9319,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
     private function isMbtiComparisonEnglishControlledPublisherFile(string $file): bool
     {
-        return $file === 'backend/app/Services/Cms/MbtiComparisonEnglishPublishService.php';
+        return in_array($file, [
+            'backend/app/Services/Cms/MbtiComparisonEnglishPublishService.php',
+            'backend/app/Services/Cms/MbtiComparisonEnglishPublishDiagnosticService.php',
+        ], true);
     }
 
     private function isMbtiIndex52ProjectionRepairFile(string $file): bool
