@@ -102792,7 +102792,7 @@
       "EN-PARITY-W1-MBTI-COMPARISON-IMPORTER-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "2e7a621b9a48658e726c9abc32b9202e8e2f8cb2",
+    "commit_sha": "826a1311af4dd8ae0cb0fc75e83b66b3c8d26566",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3468",
     "checks": {
       "authorization": {
@@ -102809,7 +102809,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "The combined package/importer/runtime-freeze suite passed 16 tests / 1360 assertions, including package schema, claim boundary, private-field exclusion, exact approval SHA, symlink rejection, transactional seven-row create, idempotent seven-row replay, zh-CN preservation, collision rollback, and zero public/discoverability flags. Scoped Pint passed. Exact dry-run returned seven rows and zero writes. A temporary local SQLite CMS authority execution completed seven creates, exact readback, then seven exact-package updates on replay; its sanitized local-validation receipt SHA was aaebe4fb9c3c3a6d4987233185ea20ff7f392dcfd448b61fd169e5468f2041b7. Route inventory returned 230 lines; YAML/JSON, PHP syntax, approval rehash, and diff checks passed."
+        "evidence": "After exact-head review repair and latest-main integration, the combined package/importer/runtime-freeze/review-governance suite passed 17 tests / 1371 assertions. It covers package schema, claim boundary, private-field exclusion, exact approval SHA, safe-file reads, registered review surface, transactional seven-row create, strict no-update replay, preserved timestamps, zh-CN preservation, collision rollback, accurate write-attempt reporting, and zero public/discoverability flags. Scoped Pint passed. Exact dry-run returned seven rows and zero writes. A temporary local SQLite CMS authority execution completed seven creates and exact readback, then preserved all seven exact rows with zero updates on replay; its sanitized local-validation create receipt SHA was 61198b468cc944d1049e98ed79430277dbd5b9a886a8d50c9fac0156e502e2c8. Route inventory returned 231 lines; YAML/JSON, PHP syntax, approval rehash, and diff checks passed."
       },
       "changed_file_scope": {
         "status": "passed",
@@ -102854,8 +102854,13 @@
         "at": "2026-08-01T09:22:00Z",
         "status": "github_checks_pending",
         "note": "Pushed the scoped branch and opened PR #3468. Required GitHub checks, exact-head review, mergeability, and post-merge cleanup remain pending; staging deployment is not awaited."
+      },
+      {
+        "at": "2026-08-01T09:34:00Z",
+        "status": "review_fix_local_verified",
+        "note": "All required checks passed on prior head e5a754dbcc8ee3df0381d711c858fce6326bf8be, then exact-head review identified three valid current-scope issues. Added the registered mbti_cross_type_comparison_authority review-surface declaration, made exact-package replay preserve imported_at/updated_at with zero SQL updates, and report rolled-back SQL attempts accurately. Integrated latest origin/main a202c8175ad0cfda59585d9adb20e1b2d8b929a2 without conflict. Focused validation passes 17 tests / 1371 assertions plus scoped Pint and exact local write/readback/strict replay; fresh exact-head required checks remain mandatory."
       }
     ],
-    "updated_at": "2026-08-01T09:22:00Z"
+    "updated_at": "2026-08-01T09:34:00Z"
   }
 }
