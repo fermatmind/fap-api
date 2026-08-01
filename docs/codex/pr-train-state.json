@@ -103293,8 +103293,8 @@
     "branch": "codex/content-promotion-automation-backend-01",
     "title": "CONTENT-PROMOTION-AUTOMATION-BACKEND-01: automate exact-package CMS import and publication",
     "depends_on": [],
-    "status": "github_checks_pending",
-    "commit_sha": "90bd9cdef9f45e72c71c07d38373eb3aaa5d784f",
+    "status": "ready_to_merge",
+    "commit_sha": "b179fd62a96d902816d6a59e604e39a6ad92ad30",
     "pr_url": null,
     "checks": {
       "local_validation": {
@@ -103302,8 +103302,8 @@
         "evidence": "33 focused lifecycle/adapter/workflow/legacy-regression tests passed with 618 assertions; the exact runtime-freeze classifier contract passed with 2 assertions; Pint, actionlint, JSON/YAML parsing, exact scope validation, PHP syntax, and diff checks passed. No production workflow was dispatched."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "Implementation commit 90bd9cdef9f45e72c71c07d38373eb3aaa5d784f is locally verified and ready for push and required-check execution."
+        "status": "passed",
+        "evidence": "Exact implementation/repair head b179fd62a96d902816d6a59e604e39a6ad92ad30 passed hygiene, supply-chain, content-pack build, verify-mbti-v2, verify-mbti-legacy, verify-bigfive, Semgrep OSS, and blocking secret checks; staging parity was correctly skipped. Exact-head Codex review reported no actionable finding."
       }
     },
     "failure_reason": null,
@@ -103347,8 +103347,13 @@
         "at": "2026-08-02T05:06:26+08:00",
         "status": "github_checks_pending",
         "note": "The exact PR75 app env() gate now passes locally; all 33 focused tests/618 assertions and the runtime-freeze classifier contract also pass after the same-scope repair. A new exact-head required-check run is required."
+      },
+      {
+        "at": "2026-08-02T05:14:21+08:00",
+        "status": "ready_to_merge",
+        "note": "Exact head b179fd62a96d902816d6a59e604e39a6ad92ad30 passed every applicable GitHub check and exact-head review with no actionable finding. Scope and production-write boundaries remain intact; this ledger-only closeout commit must pass its own final checks before squash merge."
       }
     ],
-    "updated_at": "2026-08-02T05:06:26+08:00"
+    "updated_at": "2026-08-02T05:14:21+08:00"
   }
 }
