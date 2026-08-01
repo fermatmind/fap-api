@@ -9,11 +9,11 @@ use RuntimeException;
 
 final class MbtiComparisonEnglishPackageImporter
 {
-    public const PACKAGE_SHA256 = '2e2beb694b62ddff56b128b2b4a443fb5797b76bd5df160f8946b55a3368931a';
+    public const PACKAGE_SHA256 = 'deecc8175fb43ba3730d6513b496a0ab6834459108e3b24e25550bbf40e001a2';
 
-    public const MANIFEST_SHA256 = '82eb45134ca4f596efc966a7da41cff17e43eea2ba4c0f35cf53d51e2913deec';
+    public const MANIFEST_SHA256 = 'dcdd1a20448301c5cd00667727e6d4be7bf5090efd5ce5cf90a192a0224021ba';
 
-    public const PACKAGE_ID = 'EN-PARITY-W1-MBTI-COMPARISON-ASSETS-2026-07-30';
+    public const PACKAGE_ID = 'EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-07-2026-07-31';
 
     public const INVENTORY_PACKAGE_SHA256 = '8079465c6ec26820c99ca2be3f08346674e90509dee6d84fd610d5c6bbac2b85';
 
@@ -32,7 +32,7 @@ final class MbtiComparisonEnglishPackageImporter
 
     public static function defaultPackageDirectory(): string
     {
-        return base_path('content_assets/en-content-parity/W1-mbti/comparisons');
+        return base_path('content_assets/en-content-parity/W1-mbti/comparisons/w9-correction-deecc817');
     }
 
     /**
