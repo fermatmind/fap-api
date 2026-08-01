@@ -110,6 +110,12 @@ final class AppleIapPaymentContractTest extends TestCase
         $duplicate = $this->withHeaders($headers)->postJson('/api/v0.3/orders/apple_iap', $payload);
         $duplicate->assertOk();
         $this->assertSame($orderNo, (string) $duplicate->json('order_no'));
+        $duplicateSignData = json_decode(
+            (string) $duplicate->json('pay.params.signData'),
+            true,
+            flags: JSON_THROW_ON_ERROR
+        );
+        $this->assertSame($signData['outTradeNo'], $duplicateSignData['outTradeNo']);
         $this->assertSame(1, DB::table('payment_attempts')->where('order_no', $orderNo)->count());
     }
 
@@ -296,7 +302,9 @@ final class AppleIapPaymentContractTest extends TestCase
                         'order_fee' => 499,
                         'paid_fee' => 499,
                     ],
-                ]),
+                ])
+                ->push($this->appleQueryResponse($externalOrderNo, 8, 0))
+                ->push($this->appleQueryResponse($externalOrderNo, 8, 500)),
         ]);
         $callback = [
             'Event' => 'xpay_goods_deliver_notify',
@@ -326,6 +334,15 @@ final class AppleIapPaymentContractTest extends TestCase
             ->postJson('/api/v0.3/orders/'.$orderNo.'/apple-iap/reconcile')
             ->assertStatus(409)
             ->assertJsonPath('error_code', 'PROVIDER_ENV_MISMATCH');
+        $this->withHeaders($headers)
+            ->postJson('/api/v0.3/orders/'.$orderNo.'/apple-iap/reconcile')
+            ->assertStatus(409)
+            ->assertJsonPath('error_code', 'REFUND_MISMATCH');
+        $this->withHeaders($headers)
+            ->postJson('/api/v0.3/orders/'.$orderNo.'/apple-iap/reconcile')
+            ->assertStatus(409)
+            ->assertJsonPath('error_code', 'REFUND_MISMATCH');
+        $this->assertSame(0, DB::table('payment_events')->where('order_no', $orderNo)->count());
         $this->assertSame(0, DB::table('benefit_grants')->where('order_no', $orderNo)->count());
     }
 
@@ -457,7 +474,7 @@ final class AppleIapPaymentContractTest extends TestCase
     /**
      * @return array<string,mixed>
      */
-    private function appleQueryResponse(string $externalOrderNo, int $status = 2): array
+    private function appleQueryResponse(string $externalOrderNo, int $status = 2, int $refundAmount = 499): array
     {
         $isRefund = $status === 8;
 
@@ -473,7 +490,7 @@ final class AppleIapPaymentContractTest extends TestCase
                 'env_type' => 1,
                 'order_fee' => 499,
                 'paid_fee' => 499,
-                'refund_fee' => $isRefund ? 499 : null,
+                'refund_fee' => $isRefund ? $refundAmount : null,
                 'paid_time' => 1700000000,
                 'update_time' => $isRefund ? 1700000100 : 1700000050,
             ], static fn (mixed $value): bool => $value !== null),

@@ -125,43 +125,12 @@ final class WechatMiniVirtualPaymentService
         $sessionKey = (string) $session['session_key'];
         $orgId = (int) ($order->org_id ?? 0);
         $orderNo = trim((string) ($order->order_no ?? ''));
-        $attempt = $this->orders->latestPaymentAttemptForOrder($orderNo, $orgId);
-        if ($attempt !== null && strtolower(trim((string) ($attempt->provider ?? ''))) !== $provider) {
-            return $this->error('PAYMENT_ATTEMPT_PROVIDER_MISMATCH', 'payment attempt provider mismatch.', 409);
-        }
-
         $openidHash = $this->openidHash($openid, (string) $config['app_key']);
-        $externalOrderNo = trim((string) ($attempt->external_trade_no ?? ''));
-        if ($attempt !== null) {
-            $attemptMeta = $this->decodeJson($attempt->payload_meta_json ?? null);
-            $boundHash = trim((string) ($attemptMeta['openid_hash'] ?? ''));
-            if ($boundHash !== '' && ! hash_equals($boundHash, $openidHash)) {
-                return $this->error('WECHAT_IDENTITY_MISMATCH', 'order is bound to another WeChat identity.', 409);
-            }
-        } else {
-            $created = $this->orders->createPaymentAttempt(
-                $orderNo,
-                $orgId,
-                $provider,
-                'wechat_miniapp',
-                (string) $config['app_id'],
-                'mini_program',
-                (int) ($order->amount_cents ?? 0),
-                'CNY'
-            );
-            if (($created['ok'] ?? false) !== true || ! is_object($created['attempt'] ?? null)) {
-                return $this->error(
-                    (string) ($created['error_code'] ?? 'PAYMENT_ATTEMPT_CREATE_FAILED'),
-                    (string) ($created['message'] ?? 'payment attempt could not be created.'),
-                    409
-                );
-            }
-            $attempt = $created['attempt'];
+        $binding = $this->bindPaymentAttempt($order, $provider, $config, $openid, $openidHash);
+        if (($binding['ok'] ?? false) !== true) {
+            return $binding;
         }
-
-        if ($externalOrderNo === '') {
-            $externalOrderNo = 'fm'.strtolower(Str::random(30));
-        }
+        $externalOrderNo = (string) $binding['external_order_no'];
         $signData = [
             'offerId' => (string) $config['offer_id'],
             'buyQuantity' => 1,
@@ -175,32 +144,6 @@ final class WechatMiniVirtualPaymentService
         $signDataJson = json_encode($signData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
         $paySig = hash_hmac('sha256', 'requestVirtualPayment&'.$signDataJson, (string) $config['app_key']);
         $signature = hash_hmac('sha256', $signDataJson, $sessionKey);
-
-        $attemptMeta = [
-            'openid_enc' => $this->piiCipher->encrypt($openid),
-            'openid_hash' => $openidHash,
-            'app_id_hash' => hash('sha256', (string) $config['app_id']),
-            'offer_id_hash' => hash('sha256', (string) $config['offer_id']),
-            'product_id' => (string) $config['product_id'],
-            'environment' => (int) $config['environment'],
-            'channel' => $provider,
-        ];
-        $this->orders->advancePaymentAttempt((string) ($attempt->id ?? ''), [
-            'state' => PaymentAttempt::STATE_CLIENT_PRESENTED,
-            'external_trade_no' => $externalOrderNo,
-            'payload_meta_json' => $attemptMeta,
-        ]);
-        DB::table('orders')
-            ->where('order_no', $orderNo)
-            ->where('org_id', $orgId)
-            ->update([
-                'external_trade_no' => $externalOrderNo,
-                'channel' => 'wechat_miniapp',
-                'provider_app' => (string) $config['app_id'],
-                'payment_state' => Order::PAYMENT_STATE_PENDING,
-                'status' => Order::STATUS_PENDING,
-                'updated_at' => now(),
-            ]);
 
         return [
             'ok' => true,
@@ -241,9 +184,15 @@ final class WechatMiniVirtualPaymentService
         $status = (int) ($providerOrder['status'] ?? 0);
         $amount = (int) ($providerOrder['order_fee'] ?? 0);
         $paidAmount = (int) ($providerOrder['paid_fee'] ?? $amount);
-        if (in_array($status, [2, 3, 4], true)
+        if (in_array($status, [2, 3, 4, 5, 8, 9, 10], true)
             && ($amount !== (int) ($order->amount_cents ?? 0) || $paidAmount !== (int) ($order->amount_cents ?? 0))) {
             return $this->error('AMOUNT_MISMATCH', 'provider amount mismatch.', 409);
+        }
+        $refundAmount = (int) ($providerOrder['refund_fee'] ?? 0);
+        if ($provider === AppleIapGateway::PROVIDER
+            && in_array($status, [5, 8, 9, 10], true)
+            && ($refundAmount <= 0 || $refundAmount > (int) ($order->amount_cents ?? 0))) {
+            return $this->error('REFUND_MISMATCH', 'refund result mismatch.', 409);
         }
 
         $providerTradeNo = trim((string) (
@@ -268,7 +217,7 @@ final class WechatMiniVirtualPaymentService
             'provider_trade_no' => $providerTradeNo,
             'provider_status' => $status,
             'amount_cents' => $amount,
-            'refund_amount_cents' => (int) ($providerOrder['refund_fee'] ?? 0),
+            'refund_amount_cents' => $refundAmount,
             'paid_at' => (string) ($providerOrder['paid_time'] ?? ''),
         ];
         $this->orders->touchReconciledLedger((string) ($order->order_no ?? ''), (int) ($order->org_id ?? 0));
@@ -437,6 +386,93 @@ final class WechatMiniVirtualPaymentService
         $result['ack_format'] = $isJson ? 'json' : 'xml';
 
         return $result;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function bindPaymentAttempt(
+        object $order,
+        string $provider,
+        array $config,
+        string $openid,
+        string $openidHash
+    ): array {
+        $orderNo = trim((string) ($order->order_no ?? ''));
+        $orgId = (int) ($order->org_id ?? 0);
+
+        return DB::transaction(function () use ($orderNo, $orgId, $provider, $config, $openid, $openidHash): array {
+            $lockedOrder = DB::table('orders')
+                ->where('order_no', $orderNo)
+                ->where('org_id', $orgId)
+                ->lockForUpdate()
+                ->first();
+            if ($lockedOrder === null) {
+                return $this->error('ORDER_NOT_FOUND', 'order not found.', 404);
+            }
+
+            $attempt = $this->orders->latestPaymentAttemptForOrder($orderNo, $orgId);
+            if ($attempt !== null && strtolower(trim((string) ($attempt->provider ?? ''))) !== $provider) {
+                return $this->error('PAYMENT_ATTEMPT_PROVIDER_MISMATCH', 'payment attempt provider mismatch.', 409);
+            }
+            if ($attempt !== null) {
+                $attemptMeta = $this->decodeJson($attempt->payload_meta_json ?? null);
+                $boundHash = trim((string) ($attemptMeta['openid_hash'] ?? ''));
+                if ($boundHash !== '' && ! hash_equals($boundHash, $openidHash)) {
+                    return $this->error('WECHAT_IDENTITY_MISMATCH', 'order is bound to another WeChat identity.', 409);
+                }
+            } else {
+                $created = $this->orders->createPaymentAttempt(
+                    $orderNo,
+                    $orgId,
+                    $provider,
+                    'wechat_miniapp',
+                    (string) $config['app_id'],
+                    'mini_program',
+                    (int) ($lockedOrder->amount_cents ?? 0),
+                    'CNY'
+                );
+                if (($created['ok'] ?? false) !== true || ! is_object($created['attempt'] ?? null)) {
+                    return $this->error(
+                        (string) ($created['error_code'] ?? 'PAYMENT_ATTEMPT_CREATE_FAILED'),
+                        (string) ($created['message'] ?? 'payment attempt could not be created.'),
+                        409
+                    );
+                }
+                $attempt = $created['attempt'];
+            }
+
+            $externalOrderNo = trim((string) ($attempt->external_trade_no ?? ''));
+            if ($externalOrderNo === '') {
+                $externalOrderNo = 'fm'.strtolower(Str::random(30));
+            }
+            $this->orders->advancePaymentAttempt((string) ($attempt->id ?? ''), [
+                'state' => PaymentAttempt::STATE_CLIENT_PRESENTED,
+                'external_trade_no' => $externalOrderNo,
+                'payload_meta_json' => [
+                    'openid_enc' => $this->piiCipher->encrypt($openid),
+                    'openid_hash' => $openidHash,
+                    'app_id_hash' => hash('sha256', (string) $config['app_id']),
+                    'offer_id_hash' => hash('sha256', (string) $config['offer_id']),
+                    'product_id' => (string) $config['product_id'],
+                    'environment' => (int) $config['environment'],
+                    'channel' => $provider,
+                ],
+            ]);
+            DB::table('orders')
+                ->where('order_no', $orderNo)
+                ->where('org_id', $orgId)
+                ->update([
+                    'external_trade_no' => $externalOrderNo,
+                    'channel' => 'wechat_miniapp',
+                    'provider_app' => (string) $config['app_id'],
+                    'payment_state' => Order::PAYMENT_STATE_PENDING,
+                    'status' => Order::STATUS_PENDING,
+                    'updated_at' => now(),
+                ]);
+
+            return ['ok' => true, 'external_order_no' => $externalOrderNo];
+        });
     }
 
     /**
