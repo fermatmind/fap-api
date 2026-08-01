@@ -39,7 +39,31 @@ final class MbtiComparisonEnglishPublishService
     {
         $approval = $this->validatedApproval($approvalPath, $confirmedApprovalSha256);
 
-        return DB::transaction(function () use ($approval): array {
+        return $this->publishAuthorized(['approval' => [
+            'approval_ref' => $approval['approval_ref'],
+            'approval_sha256' => self::APPROVAL_SHA256,
+            'gate' => $approval['gate'],
+            'verdict' => $approval['verdict'],
+        ]], false);
+    }
+
+    /** @param array<string, mixed> $automationContext
+     * @return array<string, mixed>
+     */
+    public function publishAutomated(array $automationContext): array
+    {
+        $authorization = $this->validatedAutomationContext($automationContext);
+
+        return $this->publishAuthorized(['automation_authorization' => $authorization], true);
+    }
+
+    /** @param array<string, array<string, mixed>> $authorization
+     * @return array<string, mixed>
+     */
+    private function publishAuthorized(array $authorization, bool $automated): array
+    {
+
+        return DB::transaction(function () use ($authorization, $automated): array {
             $rows = [];
             $writesCommitted = false;
 
@@ -56,7 +80,7 @@ final class MbtiComparisonEnglishPublishService
                     $this->fail('exact_target_missing', 'An approved English draft target does not exist.');
                 }
 
-                $action = $this->publishExactDraft($authority);
+                $action = $this->publishExactDraft($authority, $automated);
                 $writesCommitted = $writesCommitted || $action === 'published_exact_english_comparison';
                 $rows[] = $this->receiptRow($authority, $action);
             }
@@ -82,12 +106,7 @@ final class MbtiComparisonEnglishPublishService
                 'package_sha256' => MbtiComparisonEnglishPackageImporter::PACKAGE_SHA256,
                 'package_id' => MbtiComparisonEnglishPackageImporter::PACKAGE_ID,
                 'target_authority_receipt_sha256' => self::TARGET_AUTHORITY_RECEIPT_SHA256,
-                'approval' => [
-                    'approval_ref' => $approval['approval_ref'],
-                    'approval_sha256' => self::APPROVAL_SHA256,
-                    'gate' => $approval['gate'],
-                    'verdict' => $approval['verdict'],
-                ],
+                ...$authorization,
                 'row_count' => count($rows),
                 'rows' => $rows,
                 'readback' => [
@@ -102,6 +121,81 @@ final class MbtiComparisonEnglishPublishService
                 ],
             ];
         }, 3);
+    }
+
+    /** @param array<string, mixed> $context
+     * @return array<string, mixed>
+     */
+    private function validatedAutomationContext(array $context): array
+    {
+        $expected = [
+            'schema_version' => 'fermatmind.content_promotion_automation_context.v2',
+            'lane' => 'W1',
+            'subscope' => 'mbti-comparisons',
+            'package_sha256' => MbtiComparisonEnglishPackageImporter::PACKAGE_SHA256,
+            'source_repository' => 'fermatmind/fap-api',
+            'cms_draft_import_authorized' => true,
+            'public_publish_authorized' => true,
+            'indexability_authorized' => false,
+            'sitemap_authorized' => false,
+            'llms_authorized' => false,
+            'search_submission_authorized' => false,
+            'deploy_authorized' => false,
+        ];
+        foreach ($expected as $field => $value) {
+            if (($context[$field] ?? null) !== $value) {
+                $this->fail('automation_context_mismatch', 'The trusted promotion context is not exact or opens a prohibited boundary.');
+            }
+        }
+        if (preg_match('/\A[a-f0-9]{40}\z/', (string) ($context['source_commit'] ?? '')) !== 1
+            || preg_match('/\A[a-f0-9]{64}\z/', (string) ($context['executor_release_sha256'] ?? '')) !== 1
+            || preg_match('/\A[a-f0-9]{64}\z/', (string) ($context['release_policy_sha256'] ?? '')) !== 1
+            || preg_match('/\A[a-f0-9]{64}\z/', (string) ($context['idempotency_key'] ?? '')) !== 1) {
+            $this->fail('automation_context_integrity_invalid', 'The trusted promotion context integrity binding is incomplete.');
+        }
+        $this->assertTrustedWorkflowAuthorization($context);
+
+        return $context;
+    }
+
+    /** @param array<string, mixed> $context */
+    private function assertTrustedWorkflowAuthorization(array $context): void
+    {
+        $key = (string) config('content_promotion.workflow_identity_key', '');
+        $policySha256 = hash('sha256', \App\Services\ContentPromotion\PromotionContextFactory::canonicalJson(
+            (array) config('content_promotion.release_policy', []),
+        ));
+        $expectedIdempotencyKey = hash('sha256', implode('|', [
+            'content-promotion-v2',
+            'W1',
+            'mbti-comparisons',
+            MbtiComparisonEnglishPackageImporter::PACKAGE_SHA256,
+            (string) ($context['source_commit'] ?? ''),
+            $policySha256,
+        ]));
+        $signatureMaterial = implode('|', [
+            'content-promotion-v2',
+            (string) ($context['source_commit'] ?? ''),
+            (string) ($context['workflow_run_id'] ?? ''),
+            (string) ($context['workflow_run_attempt'] ?? ''),
+            'W1',
+            'mbti-comparisons',
+            MbtiComparisonEnglishPackageImporter::PACKAGE_SHA256,
+            $policySha256,
+            '7',
+        ]);
+        $signature = (string) ($context['workflow_signature'] ?? '');
+        if (strlen($key) < 32
+            || ($context['release_policy_sha256'] ?? null) !== $policySha256
+            || ($context['expected_row_count'] ?? null) !== 7
+            || preg_match('/\A[1-9][0-9]{0,19}\z/', (string) ($context['workflow_run_id'] ?? '')) !== 1
+            || ! is_int($context['workflow_run_attempt'] ?? null)
+            || (int) $context['workflow_run_attempt'] < 1
+            || ($context['idempotency_key'] ?? null) !== $expectedIdempotencyKey
+            || preg_match('/\A[a-f0-9]{64}\z/', $signature) !== 1
+            || ! hash_equals(hash_hmac('sha256', $signatureMaterial, $key), $signature)) {
+            $this->fail('automation_workflow_authorization_invalid', 'The automatic publish must originate from the trusted exact-package executor.');
+        }
     }
 
     /**
@@ -154,7 +248,7 @@ final class MbtiComparisonEnglishPublishService
         return $approval;
     }
 
-    private function publishExactDraft(MbtiCrossTypeComparisonAuthority $authority): string
+    private function publishExactDraft(MbtiCrossTypeComparisonAuthority $authority, bool $automated): string
     {
         if ($authority->comparison_type !== MbtiCrossTypeComparisonAuthority::COMPARISON_TYPE
             || $authority->source_package_id !== MbtiComparisonEnglishPackageImporter::PACKAGE_ID
@@ -171,15 +265,17 @@ final class MbtiComparisonEnglishPublishService
             $this->fail('discoverability_boundary_open', 'A discoverability gate was already open.');
         }
 
-        if ($authority->publish_status === 'published' && $authority->is_public && $authority->review_status === 'operator_approved_published') {
+        $draftReviewStatus = $automated ? 'w9_passed_automation_ready' : 'w9_passed_pending_editorial';
+        $publishedReviewStatus = $automated ? 'automation_published' : 'operator_approved_published';
+        if ($authority->publish_status === 'published' && $authority->is_public && $authority->review_status === $publishedReviewStatus) {
             return 'preserved_exact_published_english_comparison';
         }
-        if ($authority->publish_status !== 'draft' || $authority->is_public || $authority->review_status !== 'w9_passed_pending_editorial') {
+        if ($authority->publish_status !== 'draft' || $authority->is_public || $authority->review_status !== $draftReviewStatus) {
             $this->fail('target_not_exact_english_draft', 'Only exact W9-passed English draft targets can be published.');
         }
 
         $authority->forceFill([
-            'review_status' => 'operator_approved_published',
+            'review_status' => $publishedReviewStatus,
             'publish_status' => 'published',
             'indexability_status' => 'blocked',
             'is_public' => true,

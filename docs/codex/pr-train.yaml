@@ -38315,7 +38315,6 @@ prs:
       - backend/app/Http/Controllers/API/V0_3/AttemptWriteController.php
       - backend/bootstrap/app.php
       - backend/app/Services/Analytics/TestMetricsDailyBuilder.php
-      - backend/app/Providers/AppServiceProvider.php
       - backend/database/migrations/2025_12_14_084436_create_attempts_table.php
       - backend/database/migrations/2025_12_13_231207_create_results_table.php
       - backend/tests/Feature/Attempts/Big5RetakeCooldownTest.php
@@ -48191,3 +48190,60 @@ prs:
     deploy_allowed: false
     content_authority: backend MBTI comparison authority; only exact English comparison rows become public and remain noindex
     repository_rule_impact: adds an exact-SHA controlled publication path; backend authority remains canonical and no discoverability surface is released
+
+  - id: CONTENT-PROMOTION-AUTOMATION-BACKEND-01
+    repo: fap-api
+    base: main
+    branch: codex/content-promotion-automation-backend-01
+    title: "CONTENT-PROMOTION-AUTOMATION-BACKEND-01: automate exact-package CMS import and publication"
+    status: in_progress
+    depends_on: []
+    train_scope: exact_package_content_promotion_automation_v2
+    scope:
+      - Add one exact-package command and protected workflow for ordered preflight, non-public draft import, exact readback, publication, live QA, and bounded rollback.
+      - Replace repeated human content approval artifacts with immutable machine receipts bound to package SHA, source commit, workflow identity, counts, release policy, idempotency, and rollback evidence.
+      - Register authority-specific adapters and fail closed when an existing authority lacks compatible audit metadata or rollback.
+      - Preserve separate controls for deploy, migrations, secrets/permissions, destructive operations, indexability, sitemap, llms, and Search Channel actions.
+    allowed_paths:
+      - AGENTS.md
+      - .github/workflows/content-promotion-automation.yml
+      - backend/app/Console/Commands/ContentPromoteExactPackage.php
+      - backend/app/Services/ContentPromotion/**
+      - backend/app/Services/ContentImport/MbtiComparisonEnglishPackageImporter.php
+      - backend/app/Services/Cms/MbtiComparisonEnglishPublishService.php
+      - backend/app/Services/ReviewGovernance/PublicReviewContract.php
+      - backend/config/content_promotion.php
+      - backend/config/content_promotion_release_policy.v2.json
+      - backend/docs/content-promotion-automation-v2.md
+      - backend/docs/schemas/content-promotion-receipt.v2.schema.json
+      - backend/tests/Feature/Console/ContentPromoteExactPackageCommandTest.php
+      - backend/tests/Unit/ContentPromotion/PromotionAdapterCapabilityTest.php
+      - backend/tests/Sre/ContentPromotionAutomationWorkflowTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Dispatch the production workflow, write production CMS/database state, deploy, or run a migration.
+      - Change indexability, sitemap, llms, Search Channel, canonical, JSON-LD, or public enumeration.
+      - Permit package-authored commands, arbitrary SQL/Artisan execution, frontend snapshots as executable authority, private content reads, or unbounded rollback.
+    validation:
+      - cd backend && php artisan test tests/Feature/Console/ContentPromoteExactPackageCommandTest.php tests/Unit/ContentPromotion/PromotionAdapterCapabilityTest.php tests/Sre/ContentPromotionAutomationWorkflowTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/ContentImport/MbtiComparisonEnglishPackageImporterTest.php tests/Feature/Cms/MbtiComparisonEnglishPublishServiceTest.php --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=test_runtime_freeze_classifier_ignores_only_exact_package_content_promotion_automation_files --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/ContentPromoteExactPackage.php app/Services/ContentPromotion app/Services/ContentImport/MbtiComparisonEnglishPackageImporter.php app/Services/Cms/MbtiComparisonEnglishPublishService.php app/Services/ReviewGovernance/PublicReviewContract.php config/content_promotion.php tests/Feature/Console/ContentPromoteExactPackageCommandTest.php tests/Unit/ContentPromotion/PromotionAdapterCapabilityTest.php tests/Sre/ContentPromotionAutomationWorkflowTest.php
+      - parse workflow YAML, config JSON, receipt JSON Schema, train YAML, and state JSON
+      - exact changed-file scope validation
+      - git diff --check
+      - git diff --cached --check
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: backend exact-package promotion executor; fap-web snapshots remain non-executable evidence
+    repository_rule_impact: exact-package content goals continuously authorize trusted CMS promotion after automated gates; infrastructure, discoverability, and destructive operations remain separately controlled

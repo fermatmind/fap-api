@@ -1,0 +1,194 @@
+name: Exact Package Content Promotion Automation
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_control_plane_sha:
+        description: Exact deployed fap-api main commit containing the executor and package
+        required: true
+        type: string
+      lane:
+        description: Registered English content lane
+        required: true
+        type: choice
+        options: [W1, W2, W3, W4, W5, W6, W7, W8]
+      subscope:
+        description: Registered adapter subscope
+        required: false
+        type: string
+      package_path:
+        description: Package path relative to backend authority root
+        required: true
+        type: string
+      expected_package_sha256:
+        description: Exact package SHA-256
+        required: true
+        type: string
+      release_policy_sha256:
+        description: Exact V2 release-policy SHA-256
+        required: true
+        type: string
+      expected_row_count:
+        description: Exact package row count
+        required: true
+        type: number
+
+permissions:
+  contents: read
+
+concurrency:
+  group: content-promotion-${{ inputs.lane }}-${{ inputs.subscope || 'default' }}
+  cancel-in-progress: false
+
+jobs:
+  promote:
+    name: Promote exact package without deploy or discoverability mutation
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: production
+    steps:
+      - name: Checkout exact control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 1
+
+      - name: Verify immutable workflow inputs
+        shell: bash
+        env:
+          EXPECTED_CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+          LANE: ${{ inputs.lane }}
+          SUBSCOPE: ${{ inputs.subscope }}
+          PACKAGE_PATH: ${{ inputs.package_path }}
+          PACKAGE_SHA256: ${{ inputs.expected_package_sha256 }}
+          RELEASE_POLICY_SHA256: ${{ inputs.release_policy_sha256 }}
+          EXPECTED_ROW_COUNT: ${{ inputs.expected_row_count }}
+          AUTOMATION_KEY: ${{ secrets.CONTENT_PROMOTION_AUTOMATION_KEY }}
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = refs/heads/main
+          [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[a-f0-9]{40}$ ]]
+          [[ "$LANE" =~ ^W[1-8]$ ]]
+          [[ "$SUBSCOPE" =~ ^$|^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$ ]]
+          [[ "$PACKAGE_SHA256" =~ ^[a-f0-9]{64}$ ]]
+          [[ "$RELEASE_POLICY_SHA256" =~ ^[a-f0-9]{64}$ ]]
+          [[ "$EXPECTED_ROW_COUNT" =~ ^[1-9][0-9]{0,5}$ ]]
+          [[ "$PACKAGE_PATH" =~ ^(content_assets/en-content-parity|content_packs|content_baselines|database/seeders/data)/[A-Za-z0-9._/-]+$ ]]
+          [[ "$PACKAGE_PATH" != *".."* ]]
+          test -d "backend/$PACKAGE_PATH"
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          policy="$(jq -cS . backend/config/content_promotion_release_policy.v2.json)"
+          test "$(printf '%s' "$policy" | sha256sum | awk '{print $1}')" = "$RELEASE_POLICY_SHA256"
+
+      - name: Set up pinned production SSH identity
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          install -d -m 0700 ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 0600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Execute preflight through live QA without deployment
+        shell: bash
+        env:
+          DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+          DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+          EXPECTED_CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+          LANE: ${{ inputs.lane }}
+          SUBSCOPE: ${{ inputs.subscope }}
+          PACKAGE_PATH: ${{ inputs.package_path }}
+          PACKAGE_SHA256: ${{ inputs.expected_package_sha256 }}
+          RELEASE_POLICY_SHA256: ${{ inputs.release_policy_sha256 }}
+          EXPECTED_ROW_COUNT: ${{ inputs.expected_row_count }}
+          AUTOMATION_KEY: ${{ secrets.CONTENT_PROMOTION_AUTOMATION_KEY }}
+        run: |
+          set -euo pipefail
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ && "$DEPLOY_PATH" != *".."* ]]
+          local_receipts="$RUNNER_TEMP/content-promotion-receipts"
+          mkdir -p "$local_receipts"
+          remote_root="/tmp/content-promotion-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          test "${#AUTOMATION_KEY}" -ge 32
+          signature_material="content-promotion-v2|$EXPECTED_CONTROL_PLANE_SHA|$GITHUB_RUN_ID|$GITHUB_RUN_ATTEMPT|$LANE|${SUBSCOPE:--}|$PACKAGE_SHA256|$RELEASE_POLICY_SHA256|$EXPECTED_ROW_COUNT"
+          workflow_signature="$(printf '%s' "$signature_material" | openssl dgst -sha256 -hmac "$AUTOMATION_KEY" -binary | xxd -p -c 256)"
+          ssh -p "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes "$DEPLOY_USER@$DEPLOY_HOST" \
+            "DEPLOY_PATH='$DEPLOY_PATH' RECEIPT_ROOT='$remote_root' CONTROL_SHA='$EXPECTED_CONTROL_PLANE_SHA' LANE='$LANE' SUBSCOPE='$SUBSCOPE' PACKAGE_PATH='$PACKAGE_PATH' PACKAGE_SHA='$PACKAGE_SHA256' POLICY_SHA='$RELEASE_POLICY_SHA256' ROW_COUNT='$EXPECTED_ROW_COUNT' RUN_ID='$GITHUB_RUN_ID' RUN_ATTEMPT='$GITHUB_RUN_ATTEMPT' WORKFLOW_SIGNATURE='$workflow_signature' bash -s" <<'REMOTE'
+          set -euo pipefail
+          current="$(readlink -f "$DEPLOY_PATH/current")"
+          test -f "$current/REVISION"
+          test "$(tr -d '\r\n' < "$current/REVISION")" = "$CONTROL_SHA"
+          test ! -e "$DEPLOY_PATH/.dep/deploy.lock"
+          install -d -m 0700 "$RECEIPT_ROOT"
+          cd "$current/backend"
+          executor_sha="$(printf '%s\n' \
+            app/Console/Commands/ContentPromoteExactPackage.php \
+            app/Services/ContentPromotion/ExactPackagePromotionService.php \
+            config/content_promotion_release_policy.v2.json \
+            | xargs sha256sum | sha256sum | awk '{print $1}')"
+          export CONTENT_PROMOTION_SOURCE_COMMIT="$CONTROL_SHA"
+          export CONTENT_PROMOTION_WORKFLOW_RUN_ID="$RUN_ID"
+          export CONTENT_PROMOTION_WORKFLOW_RUN_ATTEMPT="$RUN_ATTEMPT"
+          export CONTENT_PROMOTION_EXPECTED_ROW_COUNT="$ROW_COUNT"
+          export CONTENT_PROMOTION_EXECUTOR_RELEASE_SHA256="$executor_sha"
+          export CONTENT_PROMOTION_RELEASE_POLICY_SHA256="$POLICY_SHA"
+          export CONTENT_PROMOTION_WORKFLOW_SIGNATURE="$WORKFLOW_SIGNATURE"
+          run_phase() {
+            phase="$1"
+            receipt="$2"
+            previous="${3:-}"
+            if [ -n "$previous" ]; then
+              export CONTENT_PROMOTION_PREVIOUS_RECEIPT="$previous"
+            else
+              unset CONTENT_PROMOTION_PREVIOUS_RECEIPT || true
+            fi
+            stdout="$RECEIPT_ROOT/$phase.stdout.json"
+            php artisan content:promote-exact-package \
+              --package="$PACKAGE_PATH" \
+              --expected-package-sha256="$PACKAGE_SHA" \
+              --lane="$LANE" \
+              --subscope="$SUBSCOPE" \
+              --phase="$phase" \
+              --receipt="$receipt" \
+              --json --no-ansi > "$stdout"
+            test "$(wc -l < "$stdout" | tr -d ' ')" = 1
+            jq -e '.ok == true and .result == "SUCCEEDED" and (.receipt_sha256 | test("^[a-f0-9]{64}$"))' "$stdout" >/dev/null
+          }
+          run_phase preflight "$RECEIPT_ROOT/preflight.json"
+          run_phase draft-import "$RECEIPT_ROOT/draft-import.json"
+          run_phase publish "$RECEIPT_ROOT/publication.json" "$RECEIPT_ROOT/draft-import.json"
+          run_phase live-qa "$RECEIPT_ROOT/live-qa.json" "$RECEIPT_ROOT/publication.json"
+          jq -e '.result == "SUCCEEDED" and .published_count == .expected_count and .deploy_mutation_count == 0 and .indexability_mutation_count == 0 and .sitemap_mutation_count == 0 and .llms_mutation_count == 0 and .search_mutation_count == 0' "$RECEIPT_ROOT/live-qa.json" >/dev/null
+          REMOTE
+          scp -P "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes \
+            "$DEPLOY_USER@$DEPLOY_HOST:$remote_root/*.json" "$local_receipts/"
+          jq -e '.receipt_kind == "cms_draft_import_receipt" and .published_count == 0' "$local_receipts/draft-import.json" >/dev/null
+          jq -e '.receipt_kind == "cms_publication_receipt" and .published_count == .expected_count' "$local_receipts/publication.json" >/dev/null
+          jq -e '.receipt_kind == "cms_live_qa_receipt" and .published_count == .expected_count' "$local_receipts/live-qa.json" >/dev/null
+
+      - name: Upload immutable redacted receipts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: content-promotion-${{ inputs.lane }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/content-promotion-receipts
+          if-no-files-found: warn
+          retention-days: 90

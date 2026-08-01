@@ -1,0 +1,62 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Services\ContentPromotion;
+
+use App\Services\ContentPromotion\Adapters\LegacyAuditIncompatiblePromotionAdapter;
+use App\Services\ContentPromotion\Adapters\MbtiComparisonEnglishPromotionAdapter;
+use App\Services\ContentPromotion\Contracts\ExactPackagePromotionAdapter;
+use DomainException;
+
+final class PromotionAdapterRegistry
+{
+    /** @var list<ExactPackagePromotionAdapter> */
+    private array $adapters;
+
+    public function __construct(MbtiComparisonEnglishPromotionAdapter $mbtiComparison)
+    {
+        $adapters = [
+            $mbtiComparison,
+            new LegacyAuditIncompatiblePromotionAdapter('w1_mbti_results_legacy', 'W1', 'mbti-results'),
+            new LegacyAuditIncompatiblePromotionAdapter('w2_big_five_legacy', 'W2', 'big-five'),
+            new LegacyAuditIncompatiblePromotionAdapter('w3_articles_legacy', 'W3', 'articles'),
+            new LegacyAuditIncompatiblePromotionAdapter('w3_career_guides_legacy', 'W3', 'career-guides'),
+            new LegacyAuditIncompatiblePromotionAdapter('w4_riasec_legacy', 'W4', 'riasec'),
+            new LegacyAuditIncompatiblePromotionAdapter('w5_enneagram_legacy', 'W5', 'enneagram'),
+            new LegacyAuditIncompatiblePromotionAdapter('w6_iq_legacy', 'W6', 'iq'),
+            new LegacyAuditIncompatiblePromotionAdapter('w7_eq_legacy', 'W7', 'eq'),
+            new LegacyAuditIncompatiblePromotionAdapter('w8_career_jobs_legacy', 'W8', 'career-jobs'),
+        ];
+        $this->adapters = [];
+        $ids = [];
+        foreach ($adapters as $adapter) {
+            if (isset($ids[$adapter->id()])) {
+                throw new DomainException('duplicate_promotion_adapter');
+            }
+            $ids[$adapter->id()] = true;
+            $this->adapters[] = $adapter;
+        }
+    }
+
+    public function resolve(string $lane, ?string $subscope): ExactPackagePromotionAdapter
+    {
+        $matches = array_values(array_filter(
+            $this->adapters,
+            static fn (ExactPackagePromotionAdapter $adapter): bool => $adapter->supports($lane, $subscope),
+        ));
+        if (count($matches) !== 1) {
+            throw new DomainException(count($matches) === 0
+                ? 'promotion_adapter_not_audit_compatible'
+                : 'promotion_adapter_ambiguous');
+        }
+
+        return $matches[0];
+    }
+
+    /** @return list<string> */
+    public function ids(): array
+    {
+        return array_map(static fn (ExactPackagePromotionAdapter $adapter): string => $adapter->id(), $this->adapters);
+    }
+}

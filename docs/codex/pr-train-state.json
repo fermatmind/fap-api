@@ -103285,5 +103285,50 @@
       }
     ],
     "updated_at": "2026-08-01T23:30:00+08:00"
+  },
+  "CONTENT-PROMOTION-AUTOMATION-BACKEND-01": {
+    "id": "CONTENT-PROMOTION-AUTOMATION-BACKEND-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/content-promotion-automation-backend-01",
+    "title": "CONTENT-PROMOTION-AUTOMATION-BACKEND-01: automate exact-package CMS import and publication",
+    "depends_on": [],
+    "status": "local_verified",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "local_validation": {
+        "status": "passed",
+        "evidence": "33 focused lifecycle/adapter/workflow/legacy-regression tests passed with 618 assertions; the exact runtime-freeze classifier contract passed with 2 assertions; Pint, actionlint, JSON/YAML parsing, exact scope validation, PHP syntax, and diff checks passed. No production workflow was dispatched."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-08-02T04:15:00+08:00",
+        "status": "in_progress",
+        "note": "Started the reusable exact-package promotion executor and machine-receipt workflow from isolated latest main. This PR does not dispatch production, write CMS, or deploy."
+      },
+      {
+        "at": "2026-08-02T04:56:04+08:00",
+        "status": "local_verified",
+        "note": "Focused executor, receipt-chain, idempotency, rollback, workflow, forged-authorization rejection, legacy compatibility, and runtime-freeze checks passed. Unsupported legacy adapters remain registered fail closed; no CMS write, publication, deployment, migration, SEO, sitemap, llms, or Search Channel action occurred."
+      }
+    ],
+    "updated_at": "2026-08-02T04:56:04+08:00"
   }
 }

@@ -1031,6 +1031,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_exact_package_content_promotion_automation_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/ContentPromoteExactPackage.php',
+            'backend/app/Services/ContentPromotion/Contracts/ExactPackagePromotionAdapter.php',
+            'backend/app/Services/ContentPromotion/Adapters/LegacyAuditIncompatiblePromotionAdapter.php',
+            'backend/app/Services/ContentPromotion/Adapters/MbtiComparisonEnglishPromotionAdapter.php',
+            'backend/app/Services/ContentPromotion/ExactPackagePathGuard.php',
+            'backend/app/Services/ContentPromotion/ExactPackagePromotionService.php',
+            'backend/app/Services/ContentPromotion/PromotionAdapterRegistry.php',
+            'backend/app/Services/ContentPromotion/PromotionContext.php',
+            'backend/app/Services/ContentPromotion/PromotionContextFactory.php',
+            'backend/app/Services/ContentPromotion/PromotionReceiptStore.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_only_the_controlled_w1_english_comparison_diagnostic(): void
     {
         $allowed = [
@@ -7006,6 +7028,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isExactPackageContentPromotionAutomationFile($file)) {
+                continue;
+            }
+
             if ($this->isContentPackLkgFile($file)) {
                 continue;
             }
@@ -9336,6 +9362,22 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Cms/MbtiComparisonEnglishPublishService.php',
             'backend/app/Services/Cms/MbtiComparisonEnglishPublishDiagnosticService.php',
             'backend/app/Services/Cms/MbtiResultEnglishRuntimeCapabilityPreflightService.php',
+        ], true);
+    }
+
+    private function isExactPackageContentPromotionAutomationFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/ContentPromoteExactPackage.php',
+            'backend/app/Services/ContentPromotion/Contracts/ExactPackagePromotionAdapter.php',
+            'backend/app/Services/ContentPromotion/Adapters/LegacyAuditIncompatiblePromotionAdapter.php',
+            'backend/app/Services/ContentPromotion/Adapters/MbtiComparisonEnglishPromotionAdapter.php',
+            'backend/app/Services/ContentPromotion/ExactPackagePathGuard.php',
+            'backend/app/Services/ContentPromotion/ExactPackagePromotionService.php',
+            'backend/app/Services/ContentPromotion/PromotionAdapterRegistry.php',
+            'backend/app/Services/ContentPromotion/PromotionContext.php',
+            'backend/app/Services/ContentPromotion/PromotionContextFactory.php',
+            'backend/app/Services/ContentPromotion/PromotionReceiptStore.php',
         ], true);
     }
 
