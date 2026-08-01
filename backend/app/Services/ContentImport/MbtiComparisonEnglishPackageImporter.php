@@ -13,6 +13,8 @@ final class MbtiComparisonEnglishPackageImporter
 {
     private bool $writeAttempted = false;
 
+    private bool $writeCommittedInCurrentAttempt = false;
+
     public const PACKAGE_SHA256 = 'deecc8175fb43ba3730d6513b496a0ab6834459108e3b24e25550bbf40e001a2';
 
     public const MANIFEST_SHA256 = 'dcdd1a20448301c5cd00667727e6d4be7bf5090efd5ce5cf90a192a0224021ba';
@@ -77,6 +79,7 @@ final class MbtiComparisonEnglishPackageImporter
         string $confirmedApprovalSha256,
     ): array {
         $this->writeAttempted = false;
+        $this->writeCommittedInCurrentAttempt = false;
         $this->assertWriteEnvironmentAllowed();
 
         return DB::transaction(function () use (
@@ -85,6 +88,10 @@ final class MbtiComparisonEnglishPackageImporter
             $approvalPath,
             $confirmedApprovalSha256,
         ): array {
+            // Laravel may invoke this callback again after a retryable transaction
+            // failure. Retain the audit fact that any attempt wrote, but only report
+            // a committed write when the final successful attempt mutated a row.
+            $this->writeCommittedInCurrentAttempt = false;
             $bundle = $this->validatedBundle($packageDirectory, $confirmedPackageSha256);
             $approval = $this->validatedApproval($approvalPath, $confirmedApprovalSha256);
             $rows = [];
@@ -138,10 +145,12 @@ final class MbtiComparisonEnglishPackageImporter
                         : 'preserved_exact_inactive_draft';
                     if ($existing->isDirty()) {
                         $this->writeAttempted = true;
+                        $this->writeCommittedInCurrentAttempt = true;
                         $existing->save();
                     }
                 } else {
                     $this->writeAttempted = true;
+                    $this->writeCommittedInCurrentAttempt = true;
                     MbtiCrossTypeComparisonAuthority::query()->withoutGlobalScopes()->create([
                         'org_id' => 0,
                         'locale' => 'en',
@@ -168,7 +177,7 @@ final class MbtiComparisonEnglishPackageImporter
                 'mode' => 'write_inactive_draft',
                 'dry_run_only' => false,
                 'write_supported_in_this_pr' => true,
-                'writes_committed' => $this->writeAttempted,
+                'writes_committed' => $this->writeCommittedInCurrentAttempt,
                 'database_write_attempted' => $this->writeAttempted,
                 'cms_write_attempted' => $this->writeAttempted,
                 'publish_attempted' => false,
@@ -572,6 +581,7 @@ final class MbtiComparisonEnglishPackageImporter
             || (string) $authority->source_package_id !== self::PACKAGE_ID
             || (string) $authority->review_status !== 'w9_passed_pending_editorial'
             || (string) $authority->publish_status !== 'draft'
+            || (string) $authority->indexability_status !== 'blocked'
             || (bool) $authority->is_public
             || (bool) $authority->is_indexable
             || (bool) $authority->sitemap_eligible

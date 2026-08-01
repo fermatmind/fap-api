@@ -386,6 +386,41 @@ final class MbtiComparisonEnglishPackageImporterTest extends TestCase
         self::assertSame('Editorially approved English draft', $protected->title);
     }
 
+    public function test_advanced_indexability_draft_state_is_never_downgraded_by_replay(): void
+    {
+        $slug = MbtiComparisonEnglishPackageImporter::EXACT_SLUGS[3];
+        MbtiCrossTypeComparisonAuthority::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'locale' => 'en',
+            'slug' => $slug,
+            'left_type_code' => 'INFJ',
+            'right_type_code' => 'INFP',
+            'title' => 'Indexability-held English draft',
+            'seo_title' => 'Indexability-held English draft',
+            'seo_description' => 'Protected',
+            'summary' => 'Protected',
+            'content_payload_json' => ['protected' => true],
+            'source_package_id' => MbtiComparisonEnglishPackageImporter::PACKAGE_ID,
+            'review_status' => 'w9_passed_pending_editorial',
+            'publish_status' => 'draft',
+            'indexability_status' => 'held_for_mbti_cross_indexability_release',
+            'is_public' => false,
+            'is_indexable' => false,
+            'sitemap_eligible' => false,
+            'llms_eligible' => false,
+            'search_submission_eligible' => false,
+        ]);
+
+        self::assertSame(1, $this->runWrite());
+        $payload = $this->jsonOutput();
+        self::assertSame('existing_target_collision', $payload['errors'][0]['code']);
+        self::assertTrue($payload['database_write_attempted']);
+        self::assertFalse($payload['writes_committed']);
+        $protected = MbtiCrossTypeComparisonAuthority::query()->withoutGlobalScopes()->where('locale', 'en')->firstOrFail();
+        self::assertSame('held_for_mbti_cross_indexability_release', $protected->indexability_status);
+        self::assertSame('Indexability-held English draft', $protected->title);
+    }
+
     public function test_staging_and_production_environments_fail_before_any_write_attempt(): void
     {
         foreach (['staging', 'production'] as $environment) {
