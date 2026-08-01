@@ -145,6 +145,15 @@ class CommerceController extends Controller
                 return response()->json($eligibility, (int) ($eligibility['status'] ?? 422));
             }
             $historicalVirtualRetry = ($eligibility['historical_idempotent_retry'] ?? false) === true;
+            if ($provider === 'apple_iap'
+                && is_object($idempotentVirtualOrder)
+                && ! $historicalVirtualRetry) {
+                return response()->json([
+                    'ok' => false,
+                    'error_code' => 'IDEMPOTENCY_CONFLICT',
+                    'message' => 'idempotency key is already bound to another Apple order contract.',
+                ], 409);
+            }
         }
         // The three-channel MBTI contract is a distinct backend authority
         // (fixed 499 CNY) from the legacy web-only zh-CN 199 offer.

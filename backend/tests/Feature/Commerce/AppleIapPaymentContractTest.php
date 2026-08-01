@@ -68,6 +68,7 @@ final class AppleIapPaymentContractTest extends TestCase
         (new Pr19CommerceSeeder)->run();
         $this->seedSku();
         $attemptId = $this->createAttempt('anon_apple_iap', true);
+        $sameOwnerOtherAttemptId = $this->createAttempt('anon_apple_iap', true);
         $otherAttemptId = $this->createAttempt('anon_apple_iap_other', true);
         $token = $this->issueAnonToken('anon_apple_iap');
         Http::fake([
@@ -121,6 +122,14 @@ final class AppleIapPaymentContractTest extends TestCase
         $this->assertStringNotContainsString('session-key-apple-contract', $stored);
         $this->assertStringNotContainsString('openid-apple-contract', $stored);
         $this->assertStringContainsString('apple_iap', $stored);
+
+        $this->withHeaders($headers)
+            ->postJson('/api/v0.3/orders/apple_iap', array_merge($payload, [
+                'target_attempt_id' => $sameOwnerOtherAttemptId,
+            ]))
+            ->assertStatus(409)
+            ->assertJsonPath('error_code', 'IDEMPOTENCY_CONFLICT');
+        $this->assertSame(1, DB::table('payment_attempts')->where('order_no', $orderNo)->count());
 
         config()->set('payments.apple_iap.app_key', 'rotated-production-app-key');
         config()->set('payments.apple_iap.offer_id', 'offer-test-v2');
