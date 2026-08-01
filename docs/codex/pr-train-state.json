@@ -43241,7 +43241,7 @@
     "id": "SECURITY-103-API-05",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3488",
     "production_write_execution": false,
     "publish_allowed": false,
     "remote_branch_deleted": false,
@@ -103332,8 +103332,13 @@
         "at": "2026-08-02T04:57:29+08:00",
         "status": "github_checks_pending",
         "note": "Recorded locally verified implementation commit 90bd9cdef9f45e72c71c07d38373eb3aaa5d784f before push. Required GitHub checks and review remain mandatory."
+      },
+      {
+        "at": "2026-08-02T04:58:32+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #3488 from the exact scoped branch. The production content-promotion workflow was not dispatched; required checks are pending."
       }
     ],
-    "updated_at": "2026-08-02T04:57:29+08:00"
+    "updated_at": "2026-08-02T04:58:32+08:00"
   }
 }
