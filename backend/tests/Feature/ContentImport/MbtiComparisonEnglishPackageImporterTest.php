@@ -93,6 +93,7 @@ final class MbtiComparisonEnglishPackageImporterTest extends TestCase
 
         self::assertSame(1, $exitCode);
         self::assertFalse($payload['ok']);
+        self::assertFalse($payload['write_supported_in_this_pr']);
         self::assertSame('confirmed_package_sha256_mismatch', $payload['errors'][0]['code']);
 
         $rebuiltDirectory = $this->copyPackage();
@@ -316,6 +317,27 @@ final class MbtiComparisonEnglishPackageImporterTest extends TestCase
         self::assertSame(0, MbtiCrossTypeComparisonAuthority::query()->withoutGlobalScopes()->count());
     }
 
+    public function test_semantically_identical_json_key_order_is_a_zero_write_replay(): void
+    {
+        self::assertSame(0, $this->runWrite());
+        $authority = MbtiCrossTypeComparisonAuthority::query()
+            ->withoutGlobalScopes()
+            ->where('locale', 'en')
+            ->where('slug', MbtiComparisonEnglishPackageImporter::EXACT_SLUGS[0])
+            ->firstOrFail();
+        $authority->content_payload_json = $this->reverseObjectKeys($authority->content_payload_json);
+        $authority->save();
+        $timestamp = $authority->fresh()->updated_at?->toJSON();
+
+        self::assertSame(0, $this->runWrite());
+        $payload = $this->jsonOutput();
+        self::assertSame(0, $payload['updated_count']);
+        self::assertSame(7, $payload['preserved_count']);
+        self::assertFalse($payload['writes_committed']);
+        self::assertFalse($payload['database_write_attempted']);
+        self::assertSame($timestamp, $authority->fresh()->updated_at?->toJSON());
+    }
+
     public function test_existing_public_english_collision_rolls_back_the_whole_cohort(): void
     {
         MbtiCrossTypeComparisonAuthority::query()->withoutGlobalScopes()->create([
@@ -485,5 +507,22 @@ final class MbtiComparisonEnglishPackageImporterTest extends TestCase
         File::copyDirectory(MbtiComparisonEnglishPackageImporter::defaultPackageDirectory(), $directory);
 
         return $directory;
+    }
+
+    private function reverseObjectKeys(mixed $value): mixed
+    {
+        if (! is_array($value)) {
+            return $value;
+        }
+        if (array_is_list($value)) {
+            return array_map(fn (mixed $item): mixed => $this->reverseObjectKeys($item), $value);
+        }
+
+        $reordered = [];
+        foreach (array_reverse(array_keys($value)) as $key) {
+            $reordered[$key] = $this->reverseObjectKeys($value[$key]);
+        }
+
+        return $reordered;
     }
 }

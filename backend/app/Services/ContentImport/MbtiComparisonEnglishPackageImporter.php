@@ -139,7 +139,13 @@ final class MbtiComparisonEnglishPackageImporter
                 ];
 
                 if ($existing instanceof MbtiCrossTypeComparisonAuthority) {
-                    $existing->fill($values);
+                    $valuesToFill = $values;
+                    if ($this->payloadsAreEquivalent($existing->content_payload_json, $payload)) {
+                        // MySQL may normalize JSON object-key order. Do not turn an
+                        // order-only representation change into an authority write.
+                        unset($valuesToFill['content_payload_json']);
+                    }
+                    $existing->fill($valuesToFill);
                     $action = $existing->isDirty()
                         ? 'updated_exact_inactive_draft'
                         : 'preserved_exact_inactive_draft';
@@ -643,6 +649,40 @@ final class MbtiComparisonEnglishPackageImporter
             $payload,
             JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE | JSON_THROW_ON_ERROR,
         ));
+    }
+
+    /**
+     * @param  array<string, mixed>  $expected
+     */
+    private function payloadsAreEquivalent(mixed $existing, array $expected): bool
+    {
+        if (! is_array($existing)) {
+            return false;
+        }
+
+        return $this->canonicalJson($existing) === $this->canonicalJson($expected);
+    }
+
+    private function canonicalJson(mixed $value): string
+    {
+        $canonicalize = function (mixed $nested) use (&$canonicalize): mixed {
+            if (! is_array($nested)) {
+                return $nested;
+            }
+
+            if (array_is_list($nested)) {
+                return array_map($canonicalize, $nested);
+            }
+
+            ksort($nested, SORT_STRING);
+
+            return array_map($canonicalize, $nested);
+        };
+
+        return (string) json_encode(
+            $canonicalize($value),
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE | JSON_THROW_ON_ERROR,
+        );
     }
 
     /**

@@ -110,7 +110,7 @@ final class ImportMbtiComparisonEnglishPackage extends Command
             'ok' => false,
             'mode' => (bool) $this->option('write') ? 'write_inactive_draft' : 'dry_run',
             'dry_run_only' => ! (bool) $this->option('write'),
-            'write_supported_in_this_pr' => true,
+            'write_supported_in_this_pr' => (bool) $this->option('write'),
             'writes_committed' => false,
             'database_write_attempted' => $writeAttempted,
             'cms_write_attempted' => $writeAttempted,
