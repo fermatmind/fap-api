@@ -3986,6 +3986,32 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             '',
             routeChangedLines: $routeChangedLines,
         ));
+
+        $callbackVerificationRouteChangedLines = [
+            '+    // 微信消息推送首次保存 URL 时会发起 GET 签名校验。',
+            '+    Route::get(',
+            "+        '/webhooks/payment/wechat_mini_virtual',",
+            "+        [PaymentWebhookController::class, 'verifyWechatMiniVirtualEndpoint']",
+            "+    )->middleware('throttle:api_webhook')",
+            "+        ->name('api.v0_3.webhooks.payment.wechat_mini_virtual.verify');",
+            '+',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            ['backend/routes/api.php'],
+            '',
+            '',
+            routeChangedLines: $callbackVerificationRouteChangedLines,
+        ));
+        $this->assertSame(
+            ['backend/routes/api.php'],
+            $this->mbtiImpactingRuntimeChanges(
+                ['backend/routes/api.php'],
+                '',
+                '',
+                routeChangedLines: [...$callbackVerificationRouteChangedLines, '+    Route::delete("/orders", fn () => null);'],
+            ),
+        );
     }
 
     public function test_runtime_freeze_classifier_ignores_apple_iap_payment_only(): void
@@ -12954,15 +12980,28 @@ DIFF;
      */
     private function routeDiffIsWechatMiniVirtualPaymentOnly(array $changedLines): bool
     {
-        return array_values($changedLines) === [
-            "-    \$payProviders = ['stripe', 'billing', 'lemonsqueezy', 'wechatpay', 'alipay'];",
-            "+    \$payProviders = ['stripe', 'billing', 'lemonsqueezy', 'wechatpay', 'wechat_mini_virtual', 'alipay'];",
-            '+        Route::post(',
-            "+            '/orders/{order_no}/wechat-mini-virtual/reconcile',",
-            "+            'App\\\\Http\\\\Controllers\\\\API\\\\V0_3\\\\CommerceController@reconcileWechatMiniVirtual'",
-            '+        )->middleware(\\App\\Http\\Middleware\\FmTokenAuth::class)',
-            "+            ->name('api.v0_3.orders.wechat_mini_virtual.reconcile');",
+        $allowedChanges = [
+            [
+                "-    \$payProviders = ['stripe', 'billing', 'lemonsqueezy', 'wechatpay', 'alipay'];",
+                "+    \$payProviders = ['stripe', 'billing', 'lemonsqueezy', 'wechatpay', 'wechat_mini_virtual', 'alipay'];",
+                '+        Route::post(',
+                "+            '/orders/{order_no}/wechat-mini-virtual/reconcile',",
+                "+            'App\\\\Http\\\\Controllers\\\\API\\\\V0_3\\\\CommerceController@reconcileWechatMiniVirtual'",
+                '+        )->middleware(\\App\\Http\\Middleware\\FmTokenAuth::class)',
+                "+            ->name('api.v0_3.orders.wechat_mini_virtual.reconcile');",
+            ],
+            [
+                '+    // 微信消息推送首次保存 URL 时会发起 GET 签名校验。',
+                '+    Route::get(',
+                "+        '/webhooks/payment/wechat_mini_virtual',",
+                "+        [PaymentWebhookController::class, 'verifyWechatMiniVirtualEndpoint']",
+                "+    )->middleware('throttle:api_webhook')",
+                "+        ->name('api.v0_3.webhooks.payment.wechat_mini_virtual.verify');",
+                '+',
+            ],
         ];
+
+        return in_array(array_values($changedLines), $allowedChanges, true);
     }
 
     /**
