@@ -6,6 +6,7 @@ namespace App\Services\Commerce;
 
 use App\Services\Analytics\EventRecorder;
 use App\Services\Commerce\PaymentGateway\AlipayGateway;
+use App\Services\Commerce\PaymentGateway\AppleIapGateway;
 use App\Services\Commerce\PaymentGateway\BillingGateway;
 use App\Services\Commerce\PaymentGateway\LemonSqueezyGateway;
 use App\Services\Commerce\PaymentGateway\StripeGateway;
@@ -150,6 +151,7 @@ class PaymentWebhookProcessor
             'lemonsqueezy' => (new LemonSqueezyGateway)->normalizePayload($payload),
             'wechatpay' => (new WechatPayGateway)->normalizePayload($payload),
             'wechat_mini_virtual' => (new WechatMiniVirtualGateway)->normalizePayload($payload),
+            'apple_iap' => (new AppleIapGateway)->normalizePayload($payload),
             'alipay' => (new AlipayGateway)->normalizePayload($payload),
             default => $payload,
         };

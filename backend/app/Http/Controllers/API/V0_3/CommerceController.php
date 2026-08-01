@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\V0_3;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Services\BigFive\BigFivePublicFormSummaryBuilder;
+use App\Services\Commerce\AppleIapPaymentService;
 use App\Services\Commerce\Checkout\AlipayCheckoutService;
 use App\Services\Commerce\Checkout\LemonSqueezyCheckoutService;
 use App\Services\Commerce\Checkout\WechatPayCheckoutService;
@@ -51,6 +52,7 @@ class CommerceController extends Controller
         private PendingOrderCompensationService $pendingOrderCompensation,
         private FreemiumLocalePolicy $freemiumLocalePolicy,
         private WechatMiniVirtualPaymentService $wechatMiniVirtual,
+        private AppleIapPaymentService $appleIap,
     ) {}
 
     /**
@@ -123,22 +125,39 @@ class CommerceController extends Controller
             $userId !== null ? (string) $userId : null,
             $anonId !== null ? (string) $anonId : null
         );
-        if ($provider === 'wechat_mini_virtual') {
-            $eligibility = $this->wechatMiniVirtual->validateOrderEligibility(
+        $idempotentVirtualOrder = null;
+        $historicalVirtualRetry = false;
+        if (in_array($provider, ['wechat_mini_virtual', 'apple_iap'], true)) {
+            $virtualPayment = $provider === 'apple_iap' ? $this->appleIap : $this->wechatMiniVirtual;
+            $idempotentVirtualOrder = $provider === 'apple_iap'
+                ? $this->orders->findIdempotentOrderForCheckout($orgId, $provider, $idempotencyKey)
+                : null;
+            $eligibility = $virtualPayment->validateOrderEligibility(
                 $orgId,
                 $userId !== null ? (string) $userId : null,
                 $anonId !== null ? (string) $anonId : null,
                 $targetAttemptId,
                 (string) $payload['sku'],
-                (int) ($payload['quantity'] ?? 1)
+                (int) ($payload['quantity'] ?? 1),
+                $idempotentVirtualOrder
             );
             if (($eligibility['ok'] ?? false) !== true) {
                 return response()->json($eligibility, (int) ($eligibility['status'] ?? 422));
             }
+            $historicalVirtualRetry = ($eligibility['historical_idempotent_retry'] ?? false) === true;
+            if ($provider === 'apple_iap'
+                && is_object($idempotentVirtualOrder)
+                && ! $historicalVirtualRetry) {
+                return response()->json([
+                    'ok' => false,
+                    'error_code' => 'IDEMPOTENCY_CONFLICT',
+                    'message' => 'idempotency key is already bound to another Apple order contract.',
+                ], 409);
+            }
         }
         // The three-channel MBTI contract is a distinct backend authority
         // (fixed 499 CNY) from the legacy web-only zh-CN 199 offer.
-        $localePolicyViolation = $provider === 'wechat_mini_virtual'
+        $localePolicyViolation = in_array($provider, ['wechat_mini_virtual', 'apple_iap'], true)
             ? null
             : $this->freemiumLocalePolicyOrderViolation(
                 $request,
@@ -150,29 +169,36 @@ class CommerceController extends Controller
             return $localePolicyViolation;
         }
 
-        $result = $this->orders->createOrder(
-            $orgId,
-            $userId !== null ? (string) $userId : null,
-            $anonId !== null ? (string) $anonId : null,
-            (string) $payload['sku'],
-            (int) ($payload['quantity'] ?? 1),
-            $targetAttemptId,
-            $provider,
-            $idempotencyKey,
-            $contactEmail,
-            $this->resolveRequestId($request),
-            [],
-            [],
-            $this->resolveOrderLedgerContext(
-                $request,
-                $payload,
-                $targetAttemptId,
+        $result = $historicalVirtualRetry && is_object($idempotentVirtualOrder)
+            ? [
+                'ok' => true,
+                'order_no' => $idempotentVirtualOrder->order_no ?? null,
+                'order' => $idempotentVirtualOrder,
+                'idempotent' => true,
+            ]
+            : $this->orders->createOrder(
                 $orgId,
                 $userId !== null ? (string) $userId : null,
                 $anonId !== null ? (string) $anonId : null,
-                $provider
-            )
-        );
+                (string) $payload['sku'],
+                (int) ($payload['quantity'] ?? 1),
+                $targetAttemptId,
+                $provider,
+                $idempotencyKey,
+                $contactEmail,
+                $this->resolveRequestId($request),
+                [],
+                [],
+                $this->resolveOrderLedgerContext(
+                    $request,
+                    $payload,
+                    $targetAttemptId,
+                    $orgId,
+                    $userId !== null ? (string) $userId : null,
+                    $anonId !== null ? (string) $anonId : null,
+                    $provider
+                )
+            );
 
         if (! ($result['ok'] ?? false)) {
             $status = $this->mapErrorStatus((string) data_get($result, 'error_code', data_get($result, 'error', '')));
@@ -180,11 +206,38 @@ class CommerceController extends Controller
             abort($status, $message !== '' ? $message : 'request failed.');
         }
 
+        if ($provider === 'apple_iap'
+            && ($result['idempotent'] ?? false) === true
+            && is_object($result['order'] ?? null)) {
+            $postCreateEligibility = $this->appleIap->validateOrderEligibility(
+                $orgId,
+                $userId !== null ? (string) $userId : null,
+                $anonId !== null ? (string) $anonId : null,
+                $targetAttemptId,
+                (string) $payload['sku'],
+                (int) ($payload['quantity'] ?? 1),
+                $result['order']
+            );
+            if (($postCreateEligibility['ok'] ?? false) !== true) {
+                return response()->json(
+                    $postCreateEligibility,
+                    (int) ($postCreateEligibility['status'] ?? 422)
+                );
+            }
+            if (($postCreateEligibility['historical_idempotent_retry'] ?? false) !== true) {
+                return response()->json([
+                    'ok' => false,
+                    'error_code' => 'IDEMPOTENCY_CONFLICT',
+                    'message' => 'idempotency key is already bound to another Apple order contract.',
+                ], 409);
+            }
+        }
+
         $responsePayload = [
             'ok' => true,
             'order_no' => $result['order_no'] ?? null,
         ];
-        if ($provider === 'wechat_mini_virtual') {
+        if (in_array($provider, ['wechat_mini_virtual', 'apple_iap'], true)) {
             $order = is_object($result['order'] ?? null)
                 ? $result['order']
                 : $this->orders->findOrderByOrderNo((string) ($result['order_no'] ?? ''), $orgId);
@@ -195,7 +248,8 @@ class CommerceController extends Controller
                     'message' => 'order not found after creation.',
                 ], 500);
             }
-            $paymentAction = $this->wechatMiniVirtual->createPaymentAction(
+            $virtualPayment = $provider === 'apple_iap' ? $this->appleIap : $this->wechatMiniVirtual;
+            $paymentAction = $virtualPayment->createPaymentAction(
                 $order,
                 (string) ($payload['wx_login_code'] ?? '')
             );
@@ -213,6 +267,22 @@ class CommerceController extends Controller
      */
     public function reconcileWechatMiniVirtual(Request $request, string $order_no): JsonResponse
     {
+        return $this->reconcileWechatVirtualOrder($request, $order_no, $this->wechatMiniVirtual);
+    }
+
+    /**
+     * POST /api/v0.3/orders/{order_no}/apple-iap/reconcile
+     */
+    public function reconcileAppleIap(Request $request, string $order_no): JsonResponse
+    {
+        return $this->reconcileWechatVirtualOrder($request, $order_no, $this->appleIap);
+    }
+
+    private function reconcileWechatVirtualOrder(
+        Request $request,
+        string $order_no,
+        WechatMiniVirtualPaymentService|AppleIapPaymentService $service
+    ): JsonResponse {
         $orgId = $this->orgContext->orgId();
         $userId = $this->orgContext->userId();
         $anonId = $this->resolveAnonId($request);
@@ -230,7 +300,7 @@ class CommerceController extends Controller
             ], (int) (($owned['error_code'] ?? '') === 'ORDER_NOT_FOUND' ? 404 : 403));
         }
 
-        $result = $this->wechatMiniVirtual->reconcile($owned['order']);
+        $result = $service->reconcile($owned['order']);
 
         return response()->json($result, (int) (($result['ok'] ?? false) ? 200 : ($result['status'] ?? 502)));
     }

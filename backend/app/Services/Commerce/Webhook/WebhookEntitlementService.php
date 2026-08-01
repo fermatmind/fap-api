@@ -419,7 +419,17 @@ class WebhookEntitlementService
                         return $this->core->semanticReject('SKU_NOT_FOUND', 'sku missing on order.');
                     }
 
-                    $skuRow = $this->core->skuCatalog()->getActiveSku($effectiveSku, null, (int) ($order->org_id ?? $orgId));
+                    $skuRow = $provider === 'apple_iap'
+                        ? $this->appleSettlementSkuSnapshot(
+                            $order,
+                            $boundPaymentAttempt,
+                            $effectiveSku
+                        )
+                        : $this->core->skuCatalog()->getActiveSku(
+                            $effectiveSku,
+                            null,
+                            (int) ($order->org_id ?? $orgId)
+                        );
                     if (! $skuRow) {
                         $this->core->markEventError($provider, $providerEventId, 'rejected', 'SKU_NOT_FOUND', 'sku not found.');
 
@@ -766,6 +776,52 @@ class WebhookEntitlementService
         $ctx['post_commit_ctx'] = $postCommitCtx;
 
         return $ctx;
+    }
+
+    private function appleSettlementSkuSnapshot(
+        object $order,
+        ?object $paymentAttempt,
+        string $effectiveSku
+    ): ?object {
+        if (strtolower(trim((string) ($order->provider ?? ''))) !== 'apple_iap'
+            || $paymentAttempt === null
+            || strtolower(trim((string) ($paymentAttempt->provider ?? ''))) !== 'apple_iap') {
+            return null;
+        }
+
+        $orderMeta = $this->core->decodeMeta($order->meta_json ?? null);
+        $attemptMeta = $this->core->decodeMeta($paymentAttempt->payload_meta_json ?? null);
+        $orderSnapshot = $orderMeta['settlement_sku_snapshot'] ?? null;
+        $snapshot = $attemptMeta['settlement_sku_snapshot'] ?? null;
+        if (! is_array($orderSnapshot) || ! is_array($snapshot) || $snapshot !== $orderSnapshot) {
+            return null;
+        }
+
+        $snapshotSku = strtoupper(trim((string) ($snapshot['sku'] ?? '')));
+        $benefitCode = strtoupper(trim((string) ($snapshot['benefit_code'] ?? '')));
+        $kind = trim((string) ($snapshot['kind'] ?? ''));
+        $scaleCode = strtoupper(trim((string) ($snapshot['scale_code'] ?? '')));
+        if ($snapshotSku === ''
+            || ! hash_equals($snapshotSku, strtoupper(trim($effectiveSku)))
+            || $benefitCode === ''
+            || $kind !== 'report_unlock'
+            || $scaleCode === '') {
+            return null;
+        }
+
+        $meta = is_array($snapshot['meta'] ?? null) ? $snapshot['meta'] : [];
+
+        return (object) [
+            'sku' => $snapshotSku,
+            'benefit_code' => $benefitCode,
+            'kind' => $kind,
+            'unit_qty' => (int) ($snapshot['unit_qty'] ?? 0),
+            'scope' => trim((string) ($snapshot['scope'] ?? '')),
+            'scale_code' => $scaleCode,
+            'meta_json' => $meta !== []
+                ? json_encode($meta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+                : null,
+        ];
     }
 
     private function untrustedPayloadSummaryJson(string $payloadSummaryJson): string

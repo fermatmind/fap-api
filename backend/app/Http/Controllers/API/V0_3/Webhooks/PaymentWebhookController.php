@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V0_3\Webhooks;
 
 use App\Http\Controllers\Controller;
+use App\Services\Commerce\AppleIapPaymentService;
 use App\Services\Commerce\PaymentGateway\BillingGateway;
 use App\Services\Commerce\PaymentGateway\LemonSqueezyGateway;
 use App\Services\Commerce\PaymentGateway\PaymentGatewayInterface;
@@ -30,6 +31,7 @@ final class PaymentWebhookController extends Controller
         private PaymentWebhookProcessor $processor,
         private PaymentProviderRegistry $paymentProviders,
         private WechatMiniVirtualPaymentService $wechatMiniVirtual,
+        private AppleIapPaymentService $appleIap,
     ) {}
 
     public function handle(Request $request, string $provider): Response
@@ -48,6 +50,10 @@ final class PaymentWebhookController extends Controller
 
         if ($provider === 'wechat_mini_virtual') {
             return $this->handleWechatMiniVirtual($request);
+        }
+
+        if ($provider === 'apple_iap') {
+            return $this->handleAppleIap($request);
         }
 
         if ($provider === 'wechatpay') {
@@ -73,6 +79,27 @@ final class PaymentWebhookController extends Controller
     private function handleWechatMiniVirtual(Request $request): Response
     {
         $result = $this->wechatMiniVirtual->handleCallback($request);
+        if (($result['ok'] ?? false) !== true) {
+            return $this->jsonResult($result);
+        }
+
+        if (($result['ack_format'] ?? '') === 'xml') {
+            return response(
+                '<xml><ErrCode>0</ErrCode><ErrMsg><![CDATA[success]]></ErrMsg></xml>',
+                200,
+                ['Content-Type' => 'application/xml; charset=UTF-8']
+            );
+        }
+
+        return response()->json([
+            'ErrCode' => 0,
+            'ErrMsg' => 'success',
+        ]);
+    }
+
+    private function handleAppleIap(Request $request): Response
+    {
+        $result = $this->appleIap->handleCallback($request);
         if (($result['ok'] ?? false) !== true) {
             return $this->jsonResult($result);
         }
@@ -433,7 +460,7 @@ final class PaymentWebhookController extends Controller
 
     private function isProviderEnabled(string $provider): bool
     {
-        return $this->paymentProviders->isEnabled($provider);
+        return $this->paymentProviders->canAcceptWebhook($provider);
     }
 
     /**

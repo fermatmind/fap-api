@@ -84,6 +84,20 @@ class OrderManager
         if ($provider === '' || ! in_array($provider, $this->allowedProviders(), true)) {
             return $this->badRequest('PROVIDER_NOT_SUPPORTED', 'provider not supported.');
         }
+        $settlementSkuSnapshot = $provider === 'apple_iap'
+            ? [
+                'sku' => $skuToLookup,
+                'benefit_code' => strtoupper(trim((string) ($skuRow->benefit_code ?? ''))),
+                'kind' => trim((string) ($skuRow->kind ?? '')),
+                'unit_qty' => (int) ($skuRow->unit_qty ?? 0),
+                'scope' => trim((string) ($skuRow->scope ?? '')),
+                'scale_code' => strtoupper(trim((string) ($skuRow->scale_code ?? ''))),
+                'meta' => array_filter([
+                    'modules_included' => $modulesIncluded,
+                    'duration_days' => isset($skuMeta['duration_days']) ? (int) $skuMeta['duration_days'] : null,
+                ], static fn (mixed $value): bool => $value !== null && $value !== []),
+            ]
+            : null;
 
         $normalizedUserId = $this->trimOrNull($userId);
         $normalizedAnonId = $this->trimOrNull($anonId);
@@ -120,6 +134,7 @@ class OrderManager
             $idempotencyKey,
             $useIdempotency,
             $modulesIncluded,
+            $settlementSkuSnapshot,
             $contactEmailHash,
             $requestId,
             $attribution,
@@ -132,6 +147,9 @@ class OrderManager
             $orderMeta = [];
             if ($modulesIncluded !== []) {
                 $orderMeta['modules_included'] = $modulesIncluded;
+            }
+            if ($settlementSkuSnapshot !== null) {
+                $orderMeta['settlement_sku_snapshot'] = $settlementSkuSnapshot;
             }
             $normalizedAttribution = $this->normalizeAttribution($attribution);
             if ($normalizedAttribution !== []) {
@@ -239,6 +257,20 @@ class OrderManager
             'order_no' => $order->order_no ?? $row['order_no'],
             'order' => $order ?? $row,
         ];
+    }
+
+    public function findIdempotentOrderForCheckout(
+        int $orgId,
+        string $provider,
+        ?string $idempotencyKey
+    ): ?object {
+        $provider = strtolower(trim($provider));
+        $idempotencyKey = $this->normalizeIdempotencyKey($idempotencyKey);
+        if ($provider === '' || $idempotencyKey === '') {
+            return null;
+        }
+
+        return $this->findIdempotentOrder($orgId, $provider, $idempotencyKey);
     }
 
     public function findLookupOrder(

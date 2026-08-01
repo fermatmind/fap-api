@@ -7,7 +7,7 @@ namespace App\Services\Commerce\PaymentGateway;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-final class WechatMiniVirtualGateway implements PaymentGatewayInterface
+class WechatMiniVirtualGateway implements PaymentGatewayInterface
 {
     public const PROVIDER = 'wechat_mini_virtual';
 
@@ -18,7 +18,7 @@ final class WechatMiniVirtualGateway implements PaymentGatewayInterface
 
     public function verifySignature(Request $request): bool
     {
-        $token = trim((string) config('payments.wechat_mini_virtual.callback_token', ''));
+        $token = $this->callbackToken();
         $timestamp = trim((string) $request->query('timestamp', ''));
         $nonce = trim((string) $request->query('nonce', ''));
         $signature = strtolower(trim((string) $request->query('signature', '')));
@@ -52,7 +52,7 @@ final class WechatMiniVirtualGateway implements PaymentGatewayInterface
         $orderNo = $this->firstString([$payload['order_no'] ?? null]);
         if ($orderNo === '' && $externalOrderNo !== '') {
             $orderNo = trim((string) DB::table('orders')
-                ->where('provider', self::PROVIDER)
+                ->where('provider', $this->provider())
                 ->where('external_trade_no', $externalOrderNo)
                 ->value('order_no'));
         }
@@ -61,6 +61,7 @@ final class WechatMiniVirtualGateway implements PaymentGatewayInterface
         $eventType = $this->eventType($payload, $status);
         $providerTradeNo = $this->firstString([
             $payload['provider_trade_no'] ?? null,
+            $payload['channel_order_id'] ?? null,
             $payload['wx_order_id'] ?? null,
             $orderInfo['wx_order_id'] ?? null,
             $wechatPayInfo['TransactionId'] ?? null,
@@ -105,6 +106,11 @@ final class WechatMiniVirtualGateway implements PaymentGatewayInterface
             'refund_amount_cents' => $refundAmount,
             'refund_reason' => $this->firstString([$payload['refund_reason'] ?? null]) ?: null,
         ];
+    }
+
+    protected function callbackToken(): string
+    {
+        return trim((string) config('payments.wechat_mini_virtual.callback_token', ''));
     }
 
     private function eventType(array $payload, int $status): string

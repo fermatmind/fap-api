@@ -642,3 +642,22 @@
   - No code change is required: the exact-head package already enforces all-30 facet semantic anchors and all earlier review findings are resolved.
 - status: `recorded_external_nonblocking`
 - whether train continued: `true`
+
+## API-IAP-01 WeChat Apple payment platform readiness is unverified
+
+- observed at: `2026-08-01T12:56:46+08:00`
+- repo: `fap-api`
+- PR id / branch: `API-IAP-01` / `codex/api-iap-01-apple-provider`
+- blocker type: `external_platform_configuration_unverified`
+- evidence:
+  - The official WeChat iOS virtual-payment guide states that Apple payment in this channel uses `wx.requestVirtualPayment` plus the existing xpay server APIs and does not support sandbox; production environment is required.
+  - Official query-order documentation identifies Apple payment and refund records with `order_type=7` and `order_type=8`.
+  - Read-only screenshots prove a virtual-payment OfferID and linked merchant account exist, but do not prove Apple agreement/tax/product review, exact production product publication, callback reachability, or a successful verified production transaction.
+  - No platform agreement, key, callback, product, order, charge, refund, deployment, publication, or mini-program upload was created or changed.
+- why not current PR scope:
+  - These are operator/platform production-readiness actions and evidence. API-IAP-01 is a code-only mock/contract PR and must not perform them.
+- whether required checks are affected: `false`; the code contract is intentionally fail-closed and provider availability remains false.
+- recommended follow-up:
+  - Complete the WeChat/Apple operator checklist separately, then provide sanitized product and callback readback plus an approved production verification plan before enabling `APPLE_IAP_ENABLED` and the `report_unlock` rollout gate.
+- status: `recorded_external_blocking_provider_activation`
+- whether train continued: `true` for code-only contract validation and PR lifecycle

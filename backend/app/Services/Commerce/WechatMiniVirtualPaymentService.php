@@ -6,6 +6,7 @@ namespace App\Services\Commerce;
 
 use App\Models\Order;
 use App\Models\PaymentAttempt;
+use App\Services\Commerce\PaymentGateway\AppleIapGateway;
 use App\Services\Commerce\PaymentGateway\WechatMiniVirtualGateway;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportGatekeeper;
@@ -29,7 +30,7 @@ final class WechatMiniVirtualPaymentService
     ) {}
 
     /**
-     * @return array{ok:bool,error_code?:string,message?:string,status?:int}
+     * @return array{ok:bool,error_code?:string,message?:string,status?:int,historical_idempotent_retry?:bool}
      */
     public function validateOrderEligibility(
         int $orgId,
@@ -37,7 +38,9 @@ final class WechatMiniVirtualPaymentService
         ?string $anonId,
         ?string $targetAttemptId,
         string $sku,
-        int $quantity
+        int $quantity,
+        ?object $idempotentOrder = null,
+        string $provider = WechatMiniVirtualGateway::PROVIDER
     ): array {
         if ($targetAttemptId === null || trim($targetAttemptId) === '') {
             return $this->error('ATTEMPT_REQUIRED', 'target_attempt_id is required.', 422);
@@ -46,8 +49,22 @@ final class WechatMiniVirtualPaymentService
             return $this->error('QUANTITY_INVALID', 'virtual report unlock quantity must be 1.', 422);
         }
 
-        $expectedSku = strtoupper(trim((string) config('payments.wechat_mini_virtual.sku', '')));
-        if ($expectedSku === '' || strtoupper(trim($sku)) !== $expectedSku) {
+        $config = $this->config($provider);
+        $expectedSku = strtoupper(trim((string) ($config['sku'] ?? '')));
+        $historicalAppleRetry = $provider === AppleIapGateway::PROVIDER
+            && $idempotentOrder !== null
+            && $this->historicalAppleRetryMatches(
+                $idempotentOrder,
+                $config,
+                $orgId,
+                $userId,
+                $anonId,
+                $targetAttemptId,
+                $sku,
+                $quantity
+            );
+        if (! $historicalAppleRetry
+            && ($expectedSku === '' || strtoupper(trim($sku)) !== $expectedSku)) {
             return $this->error('SKU_NOT_SUPPORTED', 'sku is not supported by this provider.', 422);
         }
 
@@ -92,20 +109,27 @@ final class WechatMiniVirtualPaymentService
             return $this->error('REPORT_ALREADY_FULL', 'report already has full access.', 409);
         }
 
-        return ['ok' => true];
+        return [
+            'ok' => true,
+            'historical_idempotent_retry' => $historicalAppleRetry,
+        ];
     }
 
     /**
      * @return array<string,mixed>
      */
-    public function createPaymentAction(object $order, string $loginCode): array
-    {
-        $config = $this->config();
+    public function createPaymentAction(
+        object $order,
+        string $loginCode,
+        string $provider = WechatMiniVirtualGateway::PROVIDER
+    ): array {
+        $provider = $this->normalizeProvider($provider);
+        $config = $this->config($provider);
         $loginCode = trim($loginCode);
         if ($loginCode === '' || strlen($loginCode) > 128) {
             return $this->error('WX_LOGIN_CODE_REQUIRED', 'wx_login_code is required.', 422);
         }
-        if (! $this->orderContractMatches($order, $config)) {
+        if (! $this->checkoutOrderContractMatches($order, $config, $provider)) {
             return $this->error('ORDER_CONTRACT_MISMATCH', 'order does not match virtual payment contract.', 409);
         }
 
@@ -118,50 +142,20 @@ final class WechatMiniVirtualPaymentService
         $sessionKey = (string) $session['session_key'];
         $orgId = (int) ($order->org_id ?? 0);
         $orderNo = trim((string) ($order->order_no ?? ''));
-        $attempt = $this->orders->latestPaymentAttemptForOrder($orderNo, $orgId);
-        if ($attempt !== null && strtolower(trim((string) ($attempt->provider ?? ''))) !== WechatMiniVirtualGateway::PROVIDER) {
-            return $this->error('PAYMENT_ATTEMPT_PROVIDER_MISMATCH', 'payment attempt provider mismatch.', 409);
-        }
-
         $openidHash = $this->openidHash($openid, (string) $config['app_key']);
-        $externalOrderNo = trim((string) ($attempt->external_trade_no ?? ''));
-        if ($attempt !== null) {
-            $attemptMeta = $this->decodeJson($attempt->payload_meta_json ?? null);
-            $boundHash = trim((string) ($attemptMeta['openid_hash'] ?? ''));
-            if ($boundHash !== '' && ! hash_equals($boundHash, $openidHash)) {
-                return $this->error('WECHAT_IDENTITY_MISMATCH', 'order is bound to another WeChat identity.', 409);
-            }
-        } else {
-            $created = $this->orders->createPaymentAttempt(
-                $orderNo,
-                $orgId,
-                WechatMiniVirtualGateway::PROVIDER,
-                'wechat_miniapp',
-                (string) $config['app_id'],
-                'mini_program',
-                (int) ($order->amount_cents ?? 0),
-                'CNY'
-            );
-            if (($created['ok'] ?? false) !== true || ! is_object($created['attempt'] ?? null)) {
-                return $this->error(
-                    (string) ($created['error_code'] ?? 'PAYMENT_ATTEMPT_CREATE_FAILED'),
-                    (string) ($created['message'] ?? 'payment attempt could not be created.'),
-                    409
-                );
-            }
-            $attempt = $created['attempt'];
+        $binding = $this->bindPaymentAttempt($order, $provider, $config, $openid, $openidHash);
+        if (($binding['ok'] ?? false) !== true) {
+            return $binding;
         }
-
-        if ($externalOrderNo === '') {
-            $externalOrderNo = 'fm'.strtolower(Str::random(30));
-        }
+        $externalOrderNo = (string) $binding['external_order_no'];
+        $contractMeta = is_array($binding['contract_meta'] ?? null) ? $binding['contract_meta'] : [];
         $signData = [
-            'offerId' => (string) $config['offer_id'],
+            'offerId' => (string) ($contractMeta['offer_id'] ?? $config['offer_id']),
             'buyQuantity' => 1,
-            'env' => (int) $config['environment'],
+            'env' => (int) ($contractMeta['environment'] ?? $config['environment']),
             'currencyType' => 'CNY',
-            'productId' => (string) $config['product_id'],
-            'goodsPrice' => (int) $config['price_cents'],
+            'productId' => (string) ($contractMeta['product_id'] ?? $config['product_id']),
+            'goodsPrice' => (int) ($contractMeta['amount_cents'] ?? $config['price_cents']),
             'outTradeNo' => $externalOrderNo,
             'attach' => $orderNo,
         ];
@@ -169,37 +163,12 @@ final class WechatMiniVirtualPaymentService
         $paySig = hash_hmac('sha256', 'requestVirtualPayment&'.$signDataJson, (string) $config['app_key']);
         $signature = hash_hmac('sha256', $signDataJson, $sessionKey);
 
-        $attemptMeta = [
-            'openid_enc' => $this->piiCipher->encrypt($openid),
-            'openid_hash' => $openidHash,
-            'app_id_hash' => hash('sha256', (string) $config['app_id']),
-            'offer_id_hash' => hash('sha256', (string) $config['offer_id']),
-            'product_id' => (string) $config['product_id'],
-            'environment' => (int) $config['environment'],
-        ];
-        $this->orders->advancePaymentAttempt((string) ($attempt->id ?? ''), [
-            'state' => PaymentAttempt::STATE_CLIENT_PRESENTED,
-            'external_trade_no' => $externalOrderNo,
-            'payload_meta_json' => $attemptMeta,
-        ]);
-        DB::table('orders')
-            ->where('order_no', $orderNo)
-            ->where('org_id', $orgId)
-            ->update([
-                'external_trade_no' => $externalOrderNo,
-                'channel' => 'wechat_miniapp',
-                'provider_app' => (string) $config['app_id'],
-                'payment_state' => Order::PAYMENT_STATE_PENDING,
-                'status' => Order::STATUS_PENDING,
-                'updated_at' => now(),
-            ]);
-
         return [
             'ok' => true,
             'order_no' => $orderNo,
             'pay' => [
-                'type' => WechatMiniVirtualGateway::PROVIDER,
-                'provider' => WechatMiniVirtualGateway::PROVIDER,
+                'type' => $provider,
+                'provider' => $provider,
                 'params' => [
                     'signData' => $signDataJson,
                     'paySig' => $paySig,
@@ -213,99 +182,104 @@ final class WechatMiniVirtualPaymentService
     /**
      * @return array<string,mixed>
      */
-    public function reconcile(object $order): array
-    {
-        $config = $this->config();
-        if (! $this->orderContractMatches($order, $config)) {
+    public function reconcile(
+        object $order,
+        string $provider = WechatMiniVirtualGateway::PROVIDER
+    ): array {
+        $provider = $this->normalizeProvider($provider);
+        $config = $this->config($provider);
+        if ($provider !== AppleIapGateway::PROVIDER
+            && ! $this->orderContractMatches($order, $config, $provider)) {
             return $this->error('ORDER_CONTRACT_MISMATCH', 'order does not match virtual payment contract.', 409);
         }
 
-        $attempt = $this->orders->latestPaymentAttemptForOrder(
-            (string) ($order->order_no ?? ''),
-            (int) ($order->org_id ?? 0)
-        );
-        if ($attempt === null || strtolower((string) ($attempt->provider ?? '')) !== WechatMiniVirtualGateway::PROVIDER) {
-            return $this->error('PAYMENT_ATTEMPT_NOT_FOUND', 'virtual payment attempt not found.', 409);
+        $verified = $this->queryVerifiedProviderOrder($order, $provider, $config);
+        if (($verified['ok'] ?? false) !== true) {
+            return $verified;
         }
-        $meta = $this->decodeJson($attempt->payload_meta_json ?? null);
-        $openid = $this->piiCipher->decrypt((string) ($meta['openid_enc'] ?? ''));
-        if ($openid === null || ! hash_equals(
-            (string) ($meta['openid_hash'] ?? ''),
-            $this->openidHash($openid, (string) $config['app_key'])
-        )) {
-            return $this->error('WECHAT_IDENTITY_UNAVAILABLE', 'WeChat identity is unavailable.', 409);
-        }
-
-        $accessToken = $this->accessToken($config);
-        if (($accessToken['ok'] ?? false) !== true) {
-            return $accessToken;
-        }
-
-        $body = [
-            'openid' => $openid,
-            'env' => (int) $config['environment'],
-            'order_id' => (string) ($attempt->external_trade_no ?? ''),
-        ];
-        try {
-            $response = $this->signedPost(
-                '/xpay/query_order',
-                $body,
-                (string) $accessToken['access_token'],
-                (string) $config['app_key'],
-                $config
-            );
-        } catch (\Throwable) {
-            return $this->error('WECHAT_QUERY_FAILED', 'WeChat API request failed.', 502);
-        }
-        $decoded = $this->decodeProviderResponse($response, 'WECHAT_QUERY_FAILED');
-        if (($decoded['ok'] ?? false) !== true) {
-            return $decoded;
-        }
-
-        $providerOrder = is_array($decoded['body']['order'] ?? null) ? $decoded['body']['order'] : [];
+        $attempt = $verified['attempt'];
+        $accessToken = $verified['access_token'];
+        $providerOrder = $verified['provider_order'];
         $status = (int) ($providerOrder['status'] ?? 0);
         $amount = (int) ($providerOrder['order_fee'] ?? 0);
         $paidAmount = (int) ($providerOrder['paid_fee'] ?? $amount);
-        if (in_array($status, [2, 3, 4], true)
+        if (in_array($status, [2, 3, 4, 5, 8, 9, 10], true)
             && ($amount !== (int) ($order->amount_cents ?? 0) || $paidAmount !== (int) ($order->amount_cents ?? 0))) {
             return $this->error('AMOUNT_MISMATCH', 'provider amount mismatch.', 409);
         }
+        $refundAmount = (int) ($providerOrder['refund_fee'] ?? 0);
+        if ($provider === AppleIapGateway::PROVIDER
+            && in_array($status, [5, 8, 9, 10], true)
+            && ($refundAmount <= 0 || $refundAmount > (int) ($order->amount_cents ?? 0))) {
+            return $this->error('REFUND_MISMATCH', 'refund result mismatch.', 409);
+        }
 
+        $providerTradeNo = trim((string) (
+            $provider === AppleIapGateway::PROVIDER
+                ? ($providerOrder['channel_order_id'] ?? $providerOrder['wx_order_id'] ?? '')
+                : ($providerOrder['wx_order_id'] ?? '')
+        ));
+        if ($providerTradeNo === '') {
+            $providerTradeNo = (string) ($attempt->external_trade_no ?? '');
+        }
+        $isAppleRefund = $provider === AppleIapGateway::PROVIDER
+            && in_array($status, [5, 8, 9, 10], true);
         $eventPayload = [
-            'provider_event_id' => sprintf(
-                'query:%s:%d:%d',
-                (string) ($providerOrder['wx_order_id'] ?? $attempt->external_trade_no ?? ''),
-                $status,
-                (int) ($providerOrder['update_time'] ?? 0)
-            ),
+            'provider_event_id' => $provider === AppleIapGateway::PROVIDER
+                ? ($isAppleRefund
+                    ? sprintf(
+                        'query:refund:%s:%d:%d',
+                        $providerTradeNo,
+                        (int) ($providerOrder['update_time'] ?? 0),
+                        $refundAmount
+                    )
+                    : sprintf('query:payment:%s', $providerTradeNo))
+                : sprintf(
+                    'query:%s:%d:%d',
+                    $providerTradeNo,
+                    $status,
+                    (int) ($providerOrder['update_time'] ?? 0)
+                ),
             'order_no' => (string) ($order->order_no ?? ''),
             'external_order_no' => (string) ($attempt->external_trade_no ?? ''),
-            'provider_trade_no' => (string) ($providerOrder['wx_order_id'] ?? ''),
+            'provider_trade_no' => $providerTradeNo,
             'provider_status' => $status,
             'amount_cents' => $amount,
-            'refund_amount_cents' => (int) ($providerOrder['refund_fee'] ?? 0),
+            'refund_amount_cents' => $refundAmount,
             'paid_at' => (string) ($providerOrder['paid_time'] ?? ''),
         ];
         $this->orders->touchReconciledLedger((string) ($order->order_no ?? ''), (int) ($order->org_id ?? 0));
 
         if (in_array($status, [2, 3, 4, 5, 6, 8, 9, 10], true)) {
-            $processed = $this->webhooks->handle(
-                WechatMiniVirtualGateway::PROVIDER,
-                $eventPayload,
-                (int) ($order->org_id ?? 0),
-                isset($order->user_id) ? (string) $order->user_id : null,
-                isset($order->anon_id) ? (string) $order->anon_id : null,
-                true,
-                ['source' => 'official_query_order']
-            );
+            $handleWebhook = function () use ($provider, $eventPayload, $order, $attempt): array {
+                $processed = $this->webhooks->handle(
+                    $provider,
+                    $eventPayload,
+                    (int) ($order->org_id ?? 0),
+                    isset($order->user_id) ? (string) $order->user_id : null,
+                    isset($order->anon_id) ? (string) $order->anon_id : null,
+                    true,
+                    ['source' => 'official_query_order']
+                );
+                if ($provider === AppleIapGateway::PROVIDER) {
+                    $this->orders->advancePaymentAttempt((string) ($attempt->id ?? ''), [
+                        'external_trade_no' => (string) ($attempt->external_trade_no ?? ''),
+                    ]);
+                }
+
+                return $processed;
+            };
+            $processed = $provider === AppleIapGateway::PROVIDER
+                ? $this->processAppleSettlementSerially($order, $isAppleRefund, $refundAmount, $handleWebhook)
+                : $handleWebhook();
             if (($processed['ok'] ?? false) !== true) {
                 return $processed;
             }
-            if ($status === 2) {
+            if ($status === 2 && ($processed['stale_payment'] ?? false) !== true) {
                 $this->notifyProvidedGoods(
                     (string) ($attempt->external_trade_no ?? ''),
-                    (string) ($providerOrder['wx_order_id'] ?? ''),
-                    (string) $accessToken['access_token'],
+                    (string) ($providerOrder['wx_order_id'] ?? $providerTradeNo),
+                    (string) $accessToken,
                     $config
                 );
             }
@@ -327,9 +301,14 @@ final class WechatMiniVirtualPaymentService
     /**
      * @return array<string,mixed>
      */
-    public function handleCallback(Request $request): array
-    {
-        $gateway = new WechatMiniVirtualGateway;
+    public function handleCallback(
+        Request $request,
+        string $provider = WechatMiniVirtualGateway::PROVIDER
+    ): array {
+        $provider = $this->normalizeProvider($provider);
+        $gateway = $provider === AppleIapGateway::PROVIDER
+            ? new AppleIapGateway
+            : new WechatMiniVirtualGateway;
         if (! $gateway->verifySignature($request)) {
             return $this->error('INVALID_SIGNATURE', 'invalid signature.', 400);
         }
@@ -351,57 +330,352 @@ final class WechatMiniVirtualPaymentService
 
         $externalOrderNo = trim((string) ($payload['OutTradeNo'] ?? $payload['out_trade_no'] ?? $payload['MchOrderId'] ?? ''));
         $order = DB::table('orders')
-            ->where('provider', WechatMiniVirtualGateway::PROVIDER)
+            ->where('provider', $provider)
             ->where('external_trade_no', $externalOrderNo)
             ->first();
         if (! $order) {
             return $this->error('ORDER_NOT_FOUND', 'order not found.', 404);
         }
-        $validation = $this->validateCallbackContract($payload, $order);
+        $validation = $this->validateCallbackContract($payload, $order, $provider);
         if (($validation['ok'] ?? false) !== true) {
             return $validation;
         }
 
+        $verified = null;
+        $verifiedProviderOrder = null;
+        if ($provider === AppleIapGateway::PROVIDER) {
+            $verified = $this->queryVerifiedProviderOrder($order, $provider, $this->config($provider));
+            if (($verified['ok'] ?? false) !== true) {
+                return $verified;
+            }
+            $verifiedProviderOrder = $verified['provider_order'];
+            $verifiedStatus = (int) ($verifiedProviderOrder['status'] ?? 0);
+            $verifiedOrderType = (int) ($verifiedProviderOrder['order_type'] ?? -1);
+            $expectedStatuses = $eventType === 'xpay_refund_notify'
+                ? [5, 8, 9, 10]
+                : [2, 3, 4];
+            $expectedOrderType = $eventType === 'xpay_refund_notify' ? 8 : 7;
+            if ($verifiedOrderType !== $expectedOrderType || ! in_array($verifiedStatus, $expectedStatuses, true)) {
+                return $this->error(
+                    $eventType === 'xpay_refund_notify' ? 'REFUND_NOT_CONFIRMED' : 'PAYMENT_NOT_CONFIRMED',
+                    'Apple-routed callback is not confirmed by official query_order.',
+                    409
+                );
+            }
+            $verifiedAmount = (int) ($verifiedProviderOrder['order_fee'] ?? 0);
+            $verifiedPaidAmount = (int) ($verifiedProviderOrder['paid_fee'] ?? $verifiedAmount);
+            if ($verifiedAmount !== (int) ($order->amount_cents ?? 0)
+                || $verifiedPaidAmount !== (int) ($order->amount_cents ?? 0)) {
+                return $this->error('AMOUNT_MISMATCH', 'provider amount mismatch.', 409);
+            }
+            if ($eventType === 'xpay_refund_notify') {
+                $verifiedRefundAmount = (int) ($verifiedProviderOrder['refund_fee'] ?? 0);
+                if ($verifiedRefundAmount <= 0 || $verifiedRefundAmount > (int) ($order->amount_cents ?? 0)) {
+                    return $this->error('REFUND_MISMATCH', 'refund result mismatch.', 409);
+                }
+            }
+        }
+
         $goods = is_array($payload['GoodsInfo'] ?? null) ? $payload['GoodsInfo'] : [];
         $wechatInfo = is_array($payload['WeChatPayInfo'] ?? null) ? $payload['WeChatPayInfo'] : [];
+        $providerTradeNo = trim((string) (
+            $verifiedProviderOrder['channel_order_id']
+            ?? $verifiedProviderOrder['wx_order_id']
+            ?? $wechatInfo['TransactionId']
+            ?? $payload['channel_order_id']
+            ?? $payload['channel_bill']
+            ?? $payload['WxRefundId']
+            ?? $payload['wx_refund_id']
+            ?? $externalOrderNo
+        ));
+        $verifiedRefundAmount = (int) ($verifiedProviderOrder['refund_fee'] ?? 0);
+        $normalizedRefundAmount = $provider === AppleIapGateway::PROVIDER
+            ? $verifiedRefundAmount
+            : (int) ($payload['RefundFee'] ?? $payload['refund_fee'] ?? 0);
         $normalizedPayload = array_merge($payload, [
-            'provider_event_id' => $eventType.':'.trim((string) (
-                $wechatInfo['TransactionId']
-                ?? $payload['WxRefundId']
-                ?? $payload['wx_refund_id']
-                ?? $externalOrderNo
-            )),
+            'provider_event_id' => $provider === AppleIapGateway::PROVIDER
+                ? ($eventType === 'xpay_refund_notify'
+                    ? sprintf(
+                        'refund:%s:%d:%d',
+                        $providerTradeNo,
+                        (int) ($verifiedProviderOrder['update_time'] ?? 0),
+                        $verifiedRefundAmount
+                    )
+                    : sprintf('payment:%s', $providerTradeNo))
+                : $eventType.':'.$providerTradeNo,
             'order_no' => (string) ($order->order_no ?? ''),
             'external_order_no' => $externalOrderNo,
-            'amount_cents' => (int) ($goods['ActualPrice'] ?? $goods['actual_price'] ?? $order->amount_cents ?? 0),
-            'refund_amount_cents' => (int) ($payload['RefundFee'] ?? $payload['refund_fee'] ?? 0),
+            'provider_trade_no' => $providerTradeNo,
+            'amount_cents' => (int) (
+                $verifiedProviderOrder['order_fee']
+                ?? $goods['ActualPrice']
+                ?? $goods['actual_price']
+                ?? $order->amount_cents
+                ?? 0
+            ),
+            'refund_amount_cents' => $normalizedRefundAmount,
             'event_type' => $eventType === 'xpay_refund_notify' ? 'refund_succeeded' : 'payment_succeeded',
         ]);
-        $result = $this->webhooks->handle(
-            WechatMiniVirtualGateway::PROVIDER,
+        $handleWebhook = function () use (
+            $provider,
             $normalizedPayload,
-            (int) ($order->org_id ?? 0),
-            isset($order->user_id) ? (string) $order->user_id : null,
-            isset($order->anon_id) ? (string) $order->anon_id : null,
-            true,
-            [
-                'source' => 'wechat_message_push',
-                'content_type' => $isJson ? 'json' : 'xml',
-            ],
-            hash('sha256', $raw),
-            strlen($raw)
-        );
+            $order,
+            $isJson,
+            $raw,
+            $verified
+        ): array {
+            $result = $this->webhooks->handle(
+                $provider,
+                $normalizedPayload,
+                (int) ($order->org_id ?? 0),
+                isset($order->user_id) ? (string) $order->user_id : null,
+                isset($order->anon_id) ? (string) $order->anon_id : null,
+                true,
+                [
+                    'source' => 'wechat_message_push',
+                    'content_type' => $isJson ? 'json' : 'xml',
+                ],
+                hash('sha256', $raw),
+                strlen($raw)
+            );
+            if ($provider === AppleIapGateway::PROVIDER && is_object($verified['attempt'] ?? null)) {
+                $this->orders->advancePaymentAttempt((string) ($verified['attempt']->id ?? ''), [
+                    'external_trade_no' => (string) ($verified['attempt']->external_trade_no ?? ''),
+                ]);
+            }
+
+            return $result;
+        };
+        $result = $provider === AppleIapGateway::PROVIDER
+            ? $this->processAppleSettlementSerially(
+                $order,
+                $eventType === 'xpay_refund_notify',
+                $normalizedRefundAmount,
+                $handleWebhook
+            )
+            : $handleWebhook();
         $result['ack_format'] = $isJson ? 'json' : 'xml';
 
         return $result;
     }
 
-    private function validateCallbackContract(array $payload, object $order): array
+    /**
+     * @return array<string,mixed>
+     */
+    private function bindPaymentAttempt(
+        object $order,
+        string $provider,
+        array $config,
+        string $openid,
+        string $openidHash
+    ): array {
+        $orderNo = trim((string) ($order->order_no ?? ''));
+        $orgId = (int) ($order->org_id ?? 0);
+
+        return DB::transaction(function () use ($orderNo, $orgId, $provider, $config, $openid, $openidHash): array {
+            $lockedOrder = DB::table('orders')
+                ->where('order_no', $orderNo)
+                ->where('org_id', $orgId)
+                ->lockForUpdate()
+                ->first();
+            if ($lockedOrder === null) {
+                return $this->error('ORDER_NOT_FOUND', 'order not found.', 404);
+            }
+
+            $attempt = $this->orders->latestPaymentAttemptForOrder($orderNo, $orgId);
+            if ($attempt !== null && strtolower(trim((string) ($attempt->provider ?? ''))) !== $provider) {
+                return $this->error('PAYMENT_ATTEMPT_PROVIDER_MISMATCH', 'payment attempt provider mismatch.', 409);
+            }
+            if ($attempt !== null) {
+                $attemptMeta = $this->decodeJson($attempt->payload_meta_json ?? null);
+                if ($provider === AppleIapGateway::PROVIDER
+                    && ! $this->settlementOrderContractMatches($lockedOrder, $attempt, $attemptMeta, $provider)) {
+                    return $this->error('ORDER_CONTRACT_MISMATCH', 'order does not match its payment attempt contract.', 409);
+                }
+                $boundOpenid = $this->piiCipher->decrypt((string) ($attemptMeta['openid_enc'] ?? ''));
+                if ($boundOpenid === null || trim($boundOpenid) === '') {
+                    return $this->error('WECHAT_IDENTITY_UNAVAILABLE', 'WeChat identity is unavailable.', 409);
+                }
+                if (! hash_equals($boundOpenid, $openid)) {
+                    return $this->error('WECHAT_IDENTITY_MISMATCH', 'order is bound to another WeChat identity.', 409);
+                }
+                $paymentMeta = array_merge([
+                    'sku' => strtoupper(trim((string) ($lockedOrder->sku ?? ''))),
+                    'quantity' => (int) ($lockedOrder->quantity ?? 0),
+                    'amount_cents' => (int) ($lockedOrder->amount_cents ?? 0),
+                    'currency' => strtoupper(trim((string) ($lockedOrder->currency ?? ''))),
+                    'settlement_sku_snapshot' => $this->settlementSkuSnapshot($lockedOrder),
+                ], $attemptMeta);
+            } else {
+                if (! $this->orderContractMatches($lockedOrder, $config, $provider)) {
+                    return $this->error('ORDER_CONTRACT_MISMATCH', 'order does not match virtual payment contract.', 409);
+                }
+                $created = $this->orders->createPaymentAttempt(
+                    $orderNo,
+                    $orgId,
+                    $provider,
+                    'wechat_miniapp',
+                    (string) $config['app_id'],
+                    'mini_program',
+                    (int) ($lockedOrder->amount_cents ?? 0),
+                    'CNY'
+                );
+                if (($created['ok'] ?? false) !== true || ! is_object($created['attempt'] ?? null)) {
+                    return $this->error(
+                        (string) ($created['error_code'] ?? 'PAYMENT_ATTEMPT_CREATE_FAILED'),
+                        (string) ($created['message'] ?? 'payment attempt could not be created.'),
+                        409
+                    );
+                }
+                $attempt = $created['attempt'];
+                $paymentMeta = [
+                    'openid_enc' => $this->piiCipher->encrypt($openid),
+                    'openid_hash' => $openidHash,
+                    'app_id_hash' => hash('sha256', (string) $config['app_id']),
+                    'offer_id_hash' => hash('sha256', (string) $config['offer_id']),
+                    'offer_id' => (string) $config['offer_id'],
+                    'product_id' => (string) $config['product_id'],
+                    'environment' => (int) $config['environment'],
+                    'channel' => $provider,
+                    'sku' => strtoupper(trim((string) ($lockedOrder->sku ?? ''))),
+                    'quantity' => (int) ($lockedOrder->quantity ?? 0),
+                    'amount_cents' => (int) ($lockedOrder->amount_cents ?? 0),
+                    'currency' => strtoupper(trim((string) ($lockedOrder->currency ?? ''))),
+                    'settlement_sku_snapshot' => $this->settlementSkuSnapshot($lockedOrder),
+                ];
+            }
+
+            $externalOrderNo = trim((string) ($attempt->external_trade_no ?? ''));
+            if ($externalOrderNo === '') {
+                $externalOrderNo = 'fm'.strtolower(Str::random(30));
+            }
+            $this->orders->advancePaymentAttempt((string) ($attempt->id ?? ''), [
+                'state' => PaymentAttempt::STATE_CLIENT_PRESENTED,
+                'external_trade_no' => $externalOrderNo,
+                'payload_meta_json' => $paymentMeta,
+            ]);
+            $terminalPaymentStates = [
+                Order::PAYMENT_STATE_PAID,
+                Order::PAYMENT_STATE_FAILED,
+                Order::PAYMENT_STATE_CANCELED,
+                Order::PAYMENT_STATE_EXPIRED,
+                Order::PAYMENT_STATE_REFUNDED,
+            ];
+            if (! in_array($this->orders->resolvedPaymentState($lockedOrder), $terminalPaymentStates, true)) {
+                DB::table('orders')
+                    ->where('order_no', $orderNo)
+                    ->where('org_id', $orgId)
+                    ->update([
+                        'external_trade_no' => $externalOrderNo,
+                        'updated_at' => now(),
+                    ]);
+                $pending = $this->orders->markPaymentPending(
+                    $orderNo,
+                    $orgId,
+                    'wechat_miniapp',
+                    (string) $config['app_id']
+                );
+                if (($pending['ok'] ?? false) !== true) {
+                    return $pending;
+                }
+            }
+
+            return [
+                'ok' => true,
+                'external_order_no' => $externalOrderNo,
+                'contract_meta' => $paymentMeta,
+            ];
+        });
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function queryVerifiedProviderOrder(object $order, string $provider, array $config): array
     {
-        $config = $this->config();
-        if (! $this->orderContractMatches($order, $config)) {
-            return $this->error('ORDER_CONTRACT_MISMATCH', 'order contract mismatch.', 409);
+        $attempt = $this->orders->latestPaymentAttemptForOrder(
+            (string) ($order->order_no ?? ''),
+            (int) ($order->org_id ?? 0)
+        );
+        if ($attempt === null || strtolower((string) ($attempt->provider ?? '')) !== $provider) {
+            return $this->error('PAYMENT_ATTEMPT_NOT_FOUND', 'virtual payment attempt not found.', 409);
         }
+        $meta = $this->decodeJson($attempt->payload_meta_json ?? null);
+        if ($provider === AppleIapGateway::PROVIDER
+            && ! $this->settlementOrderContractMatches($order, $attempt, $meta, $provider)) {
+            return $this->error('ORDER_CONTRACT_MISMATCH', 'order does not match its payment attempt contract.', 409);
+        }
+        $openid = $this->piiCipher->decrypt((string) ($meta['openid_enc'] ?? ''));
+        if ($openid === null || trim($openid) === '') {
+            return $this->error('WECHAT_IDENTITY_UNAVAILABLE', 'WeChat identity is unavailable.', 409);
+        }
+
+        $accessToken = $this->accessToken($config);
+        if (($accessToken['ok'] ?? false) !== true) {
+            return $accessToken;
+        }
+
+        try {
+            $response = $this->signedPost(
+                '/xpay/query_order',
+                [
+                    'openid' => $openid,
+                    'env' => (int) $config['environment'],
+                    'order_id' => (string) ($attempt->external_trade_no ?? ''),
+                ],
+                (string) $accessToken['access_token'],
+                (string) $config['app_key'],
+                $config
+            );
+        } catch (\Throwable) {
+            return $this->error('WECHAT_QUERY_FAILED', 'WeChat API request failed.', 502);
+        }
+        $decoded = $this->decodeProviderResponse($response, 'WECHAT_QUERY_FAILED');
+        if (($decoded['ok'] ?? false) !== true) {
+            return $decoded;
+        }
+
+        $providerOrder = is_array($decoded['body']['order'] ?? null) ? $decoded['body']['order'] : [];
+        if (trim((string) ($providerOrder['order_id'] ?? '')) !== (string) ($attempt->external_trade_no ?? '')) {
+            return $this->error('ORDER_MISMATCH', 'provider order mismatch.', 409);
+        }
+
+        $orderType = (int) ($providerOrder['order_type'] ?? -1);
+        $envType = (int) ($providerOrder['env_type'] ?? 0);
+        if ($provider === AppleIapGateway::PROVIDER) {
+            if (! in_array($orderType, [7, 8], true)) {
+                return $this->error('PROVIDER_CHANNEL_MISMATCH', 'provider order is not an Apple-routed payment.', 409);
+            }
+            if ($envType !== 1) {
+                return $this->error('PROVIDER_ENV_MISMATCH', 'provider environment mismatch.', 409);
+            }
+            $status = (int) ($providerOrder['status'] ?? 0);
+            if ((in_array($status, [2, 3, 4], true) && $orderType !== 7)
+                || (in_array($status, [5, 8, 9, 10], true) && $orderType !== 8)) {
+                return $this->error('PROVIDER_CHANNEL_MISMATCH', 'provider order type does not match its state.', 409);
+            }
+            if (in_array($status, [2, 3, 4, 5, 8, 9, 10], true)
+                && trim((string) ($providerOrder['channel_order_id'] ?? $providerOrder['wx_order_id'] ?? '')) === '') {
+                return $this->error('PROVIDER_TRANSACTION_ID_MISSING', 'provider transaction identifier missing.', 409);
+            }
+        } else {
+            $expectedEnvType = (int) $config['environment'] === 0 ? 1 : 2;
+            if ($envType > 0 && $envType !== $expectedEnvType) {
+                return $this->error('PROVIDER_ENV_MISMATCH', 'provider environment mismatch.', 409);
+            }
+        }
+
+        return [
+            'ok' => true,
+            'attempt' => $attempt,
+            'access_token' => (string) $accessToken['access_token'],
+            'provider_order' => $providerOrder,
+        ];
+    }
+
+    private function validateCallbackContract(array $payload, object $order, string $provider): array
+    {
+        $config = $this->config($provider);
         $attempt = $this->orders->latestPaymentAttemptForOrder(
             (string) ($order->order_no ?? ''),
             (int) ($order->org_id ?? 0)
@@ -410,21 +684,30 @@ final class WechatMiniVirtualPaymentService
             return $this->error('PAYMENT_ATTEMPT_NOT_FOUND', 'payment attempt not found.', 409);
         }
         $meta = $this->decodeJson($attempt->payload_meta_json ?? null);
-        foreach ([
+        $contractMatches = $provider === AppleIapGateway::PROVIDER
+            ? $this->settlementOrderContractMatches($order, $attempt, $meta, $provider)
+            : $this->orderContractMatches($order, $config, $provider);
+        if (! $contractMatches) {
+            return $this->error('ORDER_CONTRACT_MISMATCH', 'order contract mismatch.', 409);
+        }
+        $providerIdentity = [
             'app_id_hash' => hash('sha256', (string) $config['app_id']),
             'offer_id_hash' => hash('sha256', (string) $config['offer_id']),
-        ] as $key => $expected) {
-            if (! hash_equals($expected, (string) ($meta[$key] ?? ''))) {
+        ];
+        foreach ($providerIdentity as $key => $expected) {
+            $actual = (string) ($meta[$key] ?? '');
+            $matches = $provider === AppleIapGateway::PROVIDER
+                ? preg_match('/\A[a-f0-9]{64}\z/', $actual) === 1
+                : hash_equals($expected, $actual);
+            if (! $matches) {
                 return $this->error('PROVIDER_IDENTITY_MISMATCH', 'provider identity mismatch.', 409);
             }
         }
 
         $eventType = trim((string) ($payload['Event'] ?? $payload['event'] ?? ''));
         $openid = trim((string) ($payload['OpenId'] ?? $payload['openid'] ?? ''));
-        if ($openid === '' || ! hash_equals(
-            (string) ($meta['openid_hash'] ?? ''),
-            $this->openidHash($openid, (string) $config['app_key'])
-        )) {
+        $boundOpenid = $this->piiCipher->decrypt((string) ($meta['openid_enc'] ?? ''));
+        if ($openid === '' || $boundOpenid === null || ! hash_equals($boundOpenid, $openid)) {
             return $this->error('WECHAT_IDENTITY_MISMATCH', 'WeChat identity mismatch.', 409);
         }
 
@@ -446,10 +729,12 @@ final class WechatMiniVirtualPaymentService
         if ($env !== (int) $config['environment']) {
             return $this->error('PROVIDER_ENV_MISMATCH', 'provider environment mismatch.', 409);
         }
+        if ($provider === AppleIapGateway::PROVIDER && $env !== 0) {
+            return $this->error('PROVIDER_ENV_MISMATCH', 'Apple-routed payment must use the production environment.', 409);
+        }
         $goods = is_array($payload['GoodsInfo'] ?? null) ? $payload['GoodsInfo'] : [];
         $productId = trim((string) ($goods['ProductId'] ?? $goods['product_id'] ?? ''));
-        if ($productId !== (string) $config['product_id']
-            || $productId !== (string) ($meta['product_id'] ?? '')) {
+        if ($productId !== (string) ($meta['product_id'] ?? '')) {
             return $this->error('PRODUCT_MISMATCH', 'product mismatch.', 409);
         }
         $actualPrice = (int) ($goods['ActualPrice'] ?? $goods['actual_price'] ?? 0);
@@ -582,14 +867,156 @@ final class WechatMiniVirtualPaymentService
         return ['ok' => true, 'body' => $body];
     }
 
-    private function orderContractMatches(object $order, array $config): bool
+    private function orderContractMatches(object $order, array $config, string $provider): bool
     {
-        return strtolower(trim((string) ($order->provider ?? ''))) === WechatMiniVirtualGateway::PROVIDER
+        return strtolower(trim((string) ($order->provider ?? ''))) === $provider
             && strtoupper(trim((string) ($order->sku ?? ''))) === strtoupper((string) $config['sku'])
             && (int) ($order->quantity ?? 0) === 1
             && (int) ($order->amount_cents ?? 0) === (int) $config['price_cents']
             && strtoupper(trim((string) ($order->currency ?? ''))) === 'CNY'
             && trim((string) ($order->target_attempt_id ?? '')) !== '';
+    }
+
+    /**
+     * Apple retries recover the immutable contract accepted by the existing
+     * payment attempt. Only a new attempt is compared with current checkout
+     * configuration, which may change after the original response was lost.
+     */
+    private function checkoutOrderContractMatches(object $order, array $config, string $provider): bool
+    {
+        if ($provider !== AppleIapGateway::PROVIDER) {
+            return $this->orderContractMatches($order, $config, $provider);
+        }
+
+        $attempt = $this->orders->latestPaymentAttemptForOrder(
+            (string) ($order->order_no ?? ''),
+            (int) ($order->org_id ?? 0)
+        );
+        if ($attempt === null) {
+            return $this->orderContractMatches($order, $config, $provider);
+        }
+
+        return $this->settlementOrderContractMatches(
+            $order,
+            $attempt,
+            $this->decodeJson($attempt->payload_meta_json ?? null),
+            $provider
+        );
+    }
+
+    private function historicalAppleRetryMatches(
+        object $order,
+        array $config,
+        int $orgId,
+        ?string $userId,
+        ?string $anonId,
+        ?string $targetAttemptId,
+        string $sku,
+        int $quantity
+    ): bool {
+        $ownedByUser = $userId !== null
+            && trim($userId) !== ''
+            && hash_equals(trim((string) ($order->user_id ?? '')), trim($userId));
+        $ownedByAnon = $anonId !== null
+            && trim($anonId) !== ''
+            && hash_equals(trim((string) ($order->anon_id ?? '')), trim($anonId));
+
+        return (int) ($order->org_id ?? -1) === $orgId
+            && ($ownedByUser || $ownedByAnon)
+            && trim((string) ($order->target_attempt_id ?? '')) === trim((string) $targetAttemptId)
+            && strtoupper(trim((string) ($order->sku ?? ''))) === strtoupper(trim($sku))
+            && (int) ($order->quantity ?? 0) === $quantity
+            && $this->checkoutOrderContractMatches($order, $config, AppleIapGateway::PROVIDER);
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function settlementSkuSnapshot(object $order): ?array
+    {
+        $orderMeta = $this->decodeJson($order->meta_json ?? null);
+        $snapshot = $orderMeta['settlement_sku_snapshot'] ?? null;
+
+        return is_array($snapshot) ? $snapshot : null;
+    }
+
+    /**
+     * Settlement must remain bound to the immutable sale snapshot instead of
+     * the current checkout SKU/price configuration, which can legitimately
+     * change while historical callbacks and refunds are still in flight.
+     *
+     * @param  array<string,mixed>  $meta
+     */
+    private function settlementOrderContractMatches(
+        object $order,
+        object $attempt,
+        array $meta,
+        string $provider
+    ): bool {
+        $orderSku = strtoupper(trim((string) ($order->sku ?? '')));
+        $orderCurrency = strtoupper(trim((string) ($order->currency ?? '')));
+        $amount = (int) ($order->amount_cents ?? 0);
+
+        return strtolower(trim((string) ($order->provider ?? ''))) === $provider
+            && strtolower(trim((string) ($attempt->provider ?? ''))) === $provider
+            && $orderSku !== ''
+            && $orderSku === strtoupper(trim((string) ($meta['sku'] ?? '')))
+            && (int) ($order->quantity ?? 0) === 1
+            && (int) ($meta['quantity'] ?? 0) === 1
+            && $amount > 0
+            && $amount === (int) ($attempt->amount_expected ?? 0)
+            && $amount === (int) ($meta['amount_cents'] ?? 0)
+            && $orderCurrency === 'CNY'
+            && $orderCurrency === strtoupper(trim((string) ($attempt->currency ?? '')))
+            && $orderCurrency === strtoupper(trim((string) ($meta['currency'] ?? '')))
+            && trim((string) ($meta['product_id'] ?? '')) !== ''
+            && trim((string) ($meta['offer_id'] ?? '')) !== ''
+            && (int) ($meta['environment'] ?? -1) === 0
+            && strtolower(trim((string) ($meta['channel'] ?? ''))) === $provider
+            && trim((string) ($order->target_attempt_id ?? '')) !== '';
+    }
+
+    /**
+     * @param  callable():array<string,mixed>  $handler
+     * @return array<string,mixed>
+     */
+    private function processAppleSettlementSerially(
+        object $order,
+        bool $isRefund,
+        int $refundAmount,
+        callable $handler
+    ): array {
+        return DB::transaction(function () use ($order, $isRefund, $refundAmount, $handler): array {
+            $lockedOrder = DB::table('orders')
+                ->where('order_no', (string) ($order->order_no ?? ''))
+                ->where('org_id', (int) ($order->org_id ?? 0))
+                ->lockForUpdate()
+                ->first();
+            if ($lockedOrder === null) {
+                return $this->error('ORDER_NOT_FOUND', 'order not found.', 404);
+            }
+
+            $recordedRefund = (int) ($lockedOrder->refund_amount_cents ?? 0);
+            if ($isRefund && $recordedRefund >= $refundAmount) {
+                return [
+                    'ok' => true,
+                    'duplicate' => true,
+                    'stale_refund' => $recordedRefund > $refundAmount,
+                ];
+            }
+            if (! $isRefund
+                && ($this->orders->resolvedPaymentState($lockedOrder) === Order::PAYMENT_STATE_REFUNDED
+                    || $recordedRefund > 0
+                    || ! empty($lockedOrder->refunded_at))) {
+                return [
+                    'ok' => true,
+                    'duplicate' => true,
+                    'stale_payment' => true,
+                ];
+            }
+
+            return $handler();
+        });
     }
 
     private function openidHash(string $openid, string $appKey): string
@@ -632,11 +1059,20 @@ final class WechatMiniVirtualPaymentService
         return is_array($decoded) ? $decoded : [];
     }
 
-    private function config(): array
+    private function config(string $provider): array
     {
-        $config = config('payments.wechat_mini_virtual', []);
+        $config = config('payments.'.$this->normalizeProvider($provider), []);
 
         return is_array($config) ? $config : [];
+    }
+
+    private function normalizeProvider(string $provider): string
+    {
+        $provider = strtolower(trim($provider));
+
+        return $provider === AppleIapGateway::PROVIDER
+            ? AppleIapGateway::PROVIDER
+            : WechatMiniVirtualGateway::PROVIDER;
     }
 
     private function timeout(array $config): int
