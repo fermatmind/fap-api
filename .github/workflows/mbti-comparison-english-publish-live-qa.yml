@@ -111,6 +111,7 @@ jobs:
           tar -C "$GITHUB_WORKSPACE" -czf "$bundle" \
             backend/scripts/mbti_comparison_english_publish_live_qa.php \
             backend/app/Services/Cms/MbtiComparisonEnglishPublishService.php \
+            backend/app/Support/ControlledReceiptWriter.php \
             backend/content_assets/en-content-parity/CONTROL-approvals/W1-MBTI-COMPARISONS/publish-live-approval-2026-08-01.json
           scp -P "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes "$bundle" "$DEPLOY_USER@$DEPLOY_HOST:$run_dir.tgz"
           ssh -p "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes "$DEPLOY_USER@$DEPLOY_HOST" \
@@ -138,7 +139,11 @@ jobs:
             printf '%s\n' 'comparison_english_publish_live_qa_failed' >&2
             exit "$executor_status"
           fi
-          jq -e '.status == "PASS" and .row_count == 7 and .publish_attempted == true and .activation_attempted == false and .active_pointer_changed == false and .indexability_attempted == false and .sitemap_attempted == false and .llms_attempted == false and .deploy_attempted == false and .runtime_live_qa.exact_row_count == 7 and .runtime_live_qa.meta_robots == "noindex,follow" and .runtime_live_qa.sitemap_excluded == true and .runtime_live_qa.llms_withheld == true' "$RUN_DIR/receipts/comparison-english-publish-live-qa-receipt.json" >/dev/null
+          receipt_path="$RUN_DIR/receipts/comparison-english-publish-live-qa-receipt.json"
+          test -s "$receipt_path"
+          receipt_sha256="$(jq -er 'select(.status == "PASS") | .receipt_sha256 | strings | select(test("^[a-f0-9]{64}$"))' "$RUN_DIR/executor.stdout")"
+          test "$(sha256sum "$receipt_path" | awk '{print $1}')" = "$receipt_sha256"
+          jq -e '.status == "PASS" and .row_count == 7 and .publish_attempted == true and .activation_attempted == false and .active_pointer_changed == false and .indexability_attempted == false and .sitemap_attempted == false and .llms_attempted == false and .deploy_attempted == false and .runtime_live_qa.exact_row_count == 7 and .runtime_live_qa.meta_robots == "noindex,follow" and .runtime_live_qa.sitemap_excluded == true and .runtime_live_qa.llms_withheld == true' "$receipt_path" >/dev/null
           REMOTE
           mkdir -p "$RUNNER_TEMP/mbti-w1-comparison-english-publish-receipts"
           scp -r -P "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes "$DEPLOY_USER@$DEPLOY_HOST:$run_dir/receipts/." "$RUNNER_TEMP/mbti-w1-comparison-english-publish-receipts/"
