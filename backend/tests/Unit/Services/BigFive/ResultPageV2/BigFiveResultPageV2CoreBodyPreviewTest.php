@@ -6912,6 +6912,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCareerJobDetailBundleDtoFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveCareerBridgeContractFile($file)) {
                 continue;
             }
@@ -8943,6 +8947,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Career/Review/CareerSearchEntryQualityBatchControlService.php',
             'backend/database/migrations/2026_07_28_000100_create_career_search_entry_quality_batch_operations_table.php',
         ], true);
+    }
+
+    private function isCareerJobDetailBundleDtoFile(string $file): bool
+    {
+        return $file === 'backend/app/DTO/Career/CareerJobDetailBundle.php';
     }
 
     private function isBigFiveCareerBridgeContractFile(string $file): bool

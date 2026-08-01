@@ -18,6 +18,7 @@ use App\Models\Scopes\TenantScope;
 use App\Services\Analytics\CareerConversionClosureBuilder;
 use App\Services\Career\Scoring\CareerWhiteBoxScorePayloadBuilder;
 use App\Services\PublicSurface\SeoSurfaceContractService;
+use App\Services\Career\Review\CareerSearchEntryTierResolver;
 use App\Services\ReviewGovernance\PublicReviewContract;
 use Illuminate\Support\Arr;
 
@@ -53,6 +54,7 @@ final class CareerJobDetailBundleBuilder
         private readonly CareerRuntimePublishProjectionVisibility $runtimePublishProjection,
         private readonly CareerLocaleIntegrityGate $localeIntegrityGate,
         private readonly PublicReviewContract $publicReviewContract,
+        private readonly CareerSearchEntryTierResolver $searchEntryTierResolver,
     ) {}
 
     /**
@@ -184,6 +186,7 @@ final class CareerJobDetailBundleBuilder
         $lifecycleOperational = $this->lifecycleOperationalSummaryService->buildForSlug($subjectSlug);
         $conversionClosure = $conversionClosureOverride
             ?? $this->conversionClosureBuilder->buildForSubjectSlug($subjectSlug);
+        $searchEntry = $this->searchEntryTierResolver->resolve($subjectSlug);
 
         return new CareerJobDetailBundle(
             identity: [
@@ -330,6 +333,8 @@ final class CareerJobDetailBundleBuilder
                 'write_endpoint' => '/api/v0.5/career/shortlist',
             ],
             conversionClosure: $conversionClosure,
+            searchEntryTier: $searchEntry['search_entry_tier'],
+            searchEntryAuthority: $searchEntry,
         );
     }
 
