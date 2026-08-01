@@ -1,0 +1,18 @@
+{
+  "schema_version": "fermatmind.en_content_parity.w4_riasec_source_ledger.v1",
+  "package_id": "EN-PARITY-W4-RIASEC-DIMENSION-ASSETS-2026-08-01",
+  "source_repository": "fap-api",
+  "source_commit": "a6ba4e7e6f2003c5f14978c7bd7848c86434a1fc",
+  "source_asset": {
+    "path": "backend/content_assets/riasec/dimension_deep_copy_v1.zh-CN.r3.json",
+    "sha256": "1bd0a0c3530d00298a686468cc431df86897fa1607f3fadaaffe08afe7ace59f",
+    "locale": "zh-CN",
+    "authority": "RiasecDeepCopySlotRegistry"
+  },
+  "rows": [
+    {"group_id":"W4-G01","canonical_group_name":"six_dimension_deep_interpretation","expanded_row_count":24,"source_fields":["base_interpretation","high_score_reading","medium_score_reading","low_score_safe_reading"],"supported_forms":["riasec_60","riasec_140"],"surfaces":["private_result","report_snapshot"]},
+    {"group_id":"W4-G02","canonical_group_name":"core_drive_cost_shadow","expanded_row_count":18,"source_fields":["core_drive","real_world_cost","possible_drains"],"supported_forms":["riasec_60","riasec_140"],"surfaces":["private_result","report_snapshot"]}
+  ],
+  "private_data_accessed": false,
+  "authority_mutated": false
+}

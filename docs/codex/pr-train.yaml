@@ -48030,7 +48030,7 @@ prs:
     base: main
     branch: codex/en-parity-w4-riasec-runtime-locale-01
     title: "EN-PARITY-W4-RIASEC-RUNTIME-LOCALE-01 add locale-aware backend RIASEC content resolution"
-    status: in_progress
+    status: merged
     depends_on:
       - EN-PARITY-W4-RIASEC-INVENTORY-01
     train_scope: riasec_locale_aware_registry_projection_contract
@@ -48072,3 +48072,47 @@ prs:
     deploy_allowed: false
     content_authority: backend RIASEC authority; English draft assets remain non-runtime until separately reviewed
     repository_rule_impact: adds fail-closed locale selection; no authority transfer or publication state change
+
+  - id: EN-PARITY-W4-RIASEC-DIMENSION-ASSETS-01
+    repo: fap-api
+    base: main
+    branch: codex/en-parity-w4-riasec-dimension-assets-01
+    title: "EN-PARITY-W4-RIASEC-DIMENSION-ASSETS-01 author W4 English dimension candidate assets"
+    status: in_progress
+    depends_on:
+      - EN-PARITY-W4-RIASEC-RUNTIME-LOCALE-01
+    train_scope: w4_riasec_dimension_candidate_assets_only
+    scope:
+      - Author English producer candidates for W4-G01 six_dimension_deep_interpretation and W4-G02 core_drive_cost_shadow.
+      - Preserve exactly 24 plus 18 atomic identities, source mapping, source ledger, claim boundaries, editorial self-review, and immutable SHA evidence.
+      - Reconcile the already merged runtime-locale ledger facts only.
+    allowed_paths:
+      - backend/content_assets/en-content-parity/W4-riasec/dimension-assets-01/**
+      - backend/tests/Unit/Services/Riasec/RiasecEnglishDimensionAssetsPackageTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify the W4 control master, RIASEC runtime, scoring, questions, forms, CMS/database, importer, frontend, SEO, or release state.
+      - Add pair, top3, activity, 140Q, quality, calibration, feedback, or safe-variant assets.
+      - Claim independent W9 QA, import, publication, runtime readiness, or any write/release authorization.
+    validation:
+      - cd backend && php artisan test tests/Unit/Services/Riasec/RiasecEnglishDimensionAssetsPackageTest.php --no-ansi
+      - JSON parsing and exact 2-group / 42-row identity reconciliation
+      - English-only and claim-boundary scan
+      - package SHA recomputation and manifest binding
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: producer candidate package only; backend runtime authority unchanged
+    repository_rule_impact: establishes a review-gated English candidate artifact without activation or authority transfer

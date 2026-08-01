@@ -1,0 +1,23 @@
+{
+  "schema_version": "fermatmind.en_content_parity.w4_riasec_claim_boundary_report.v1",
+  "package_id": "EN-PARITY-W4-RIASEC-DIMENSION-ASSETS-2026-08-01",
+  "verdict": "PASS_PRODUCER_SELF_REVIEW_ONLY",
+  "checked_atomic_rows": 42,
+  "required_boundaries": [
+    "Interest direction and activity preference only.",
+    "No ability, qualification, personality identity, career fit, hiring, income, success, or future-outcome claim.",
+    "A score only prioritizes observation; it does not prove training, performance, or a future result.",
+    "Lower placement is not a weakness and does not rule out learning or related work.",
+    "Real-world conditions, training, safety, responsibility, and context remain separate from interest signals."
+  ],
+  "prohibited_claim_scan": {
+    "career_match": "pass",
+    "employment_or_hiring": "pass",
+    "income_or_success": "pass",
+    "ability_or_qualification": "pass",
+    "psychometric_numeric_claim": "pass",
+    "fixed_identity_or_destiny": "pass"
+  },
+  "independent_w9_verdict": "pending",
+  "import_or_release_authorized": false
+}
