@@ -12,6 +12,8 @@ final class MbtiCrossTypeComparisonAuthorityReadModelTest extends TestCase
 {
     use RefreshDatabase;
 
+    private const ENGLISH_W1_PACKAGE_ID = 'EN-PARITY-W1-MBTI-COMPARISON-ASSETS-W9-CORRECTION-07-2026-07-31';
+
     public function test_cross_type_comparison_index_returns_the_existing_four_published_database_authorities(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
@@ -57,6 +59,91 @@ final class MbtiCrossTypeComparisonAuthorityReadModelTest extends TestCase
         self::assertNull($authorityItem['reviewer']);
         self::assertStringNotContainsString('/zh/result', (string) $response->getContent());
         self::assertStringNotContainsString('token=', (string) $response->getContent());
+    }
+
+    public function test_english_projection_only_reads_the_controlled_w1_authorities_and_stays_noindex(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+
+        foreach ([
+            ['enfp-vs-entp', 'ENFP', 'ENTP'],
+            ['entj-vs-intj', 'ENTJ', 'INTJ'],
+            ['estj-vs-entj', 'ESTJ', 'ENTJ'],
+            ['infj-vs-infp', 'INFJ', 'INFP'],
+            ['intj-vs-intp', 'INTJ', 'INTP'],
+            ['isfp-vs-infp', 'ISFP', 'INFP'],
+            ['istj-vs-isfj', 'ISTJ', 'ISFJ'],
+        ] as [$slug, $leftType, $rightType]) {
+            $this->createAuthority([
+                'locale' => 'en',
+                'slug' => $slug,
+                'left_type_code' => $leftType,
+                'right_type_code' => $rightType,
+                'title' => $leftType.' vs '.$rightType,
+                'seo_title' => $leftType.' vs '.$rightType.' | FermatMind',
+                'seo_description' => $leftType.' vs '.$rightType.' comparison.',
+                'summary' => $leftType.' and '.$rightType.' comparison summary.',
+                'source_package_id' => self::ENGLISH_W1_PACKAGE_ID,
+            ]);
+        }
+
+        $this->createAuthority([
+            'locale' => 'en',
+            'slug' => 'isfj-vs-isfp',
+            'left_type_code' => 'ISFJ',
+            'right_type_code' => 'ISFP',
+            'source_package_id' => self::ENGLISH_W1_PACKAGE_ID,
+        ]);
+
+        $index = $this->getJson('/api/v0.5/personality/comparisons?locale=en');
+
+        $index->assertOk()
+            ->assertJsonPath('cross_type_comparisons.0.public_url', 'https://fermatmind.com/en/personality/enfp-vs-entp')
+            ->assertJsonPath('cross_type_comparisons.0.is_indexable', false)
+            ->assertJsonPath('cross_type_comparisons.0.sitemap_eligible', false)
+            ->assertJsonPath('cross_type_comparisons.0.llms_eligible', false);
+        self::assertSame([
+            'enfp-vs-entp',
+            'entj-vs-intj',
+            'estj-vs-entj',
+            'infj-vs-infp',
+            'intj-vs-intp',
+            'isfp-vs-infp',
+            'istj-vs-isfj',
+        ], collect($index->json('cross_type_comparisons'))->pluck('slug')->all());
+
+        $detail = $this->getJson('/api/v0.5/personality/comparisons/intj-vs-intp?locale=en');
+        $detail->assertOk()
+            ->assertJsonPath('comparison_public_projection_v1.locale', 'en')
+            ->assertJsonPath('comparison_public_projection_v1.canonical_url', 'https://fermatmind.com/en/personality/intj-vs-intp')
+            ->assertJsonPath('comparison_public_projection_v1.is_indexable', false)
+            ->assertJsonPath('comparison_public_projection_v1.sitemap_eligible', false)
+            ->assertJsonPath('comparison_public_projection_v1.llms_eligible', false)
+            ->assertJsonPath('seo_meta.robots', 'noindex,follow')
+            ->assertJsonPath('seo_surface_v1.indexability_state', 'noindex')
+            ->assertJsonPath('seo_surface_v1.sitemap_state', 'excluded')
+            ->assertJsonPath('seo_surface_v1.llms_exposure_state', 'withhold');
+
+        $this->getJson('/api/v0.5/personality/comparisons/isfj-vs-isfp?locale=en')
+            ->assertNotFound()
+            ->assertJsonPath('error_code', 'NOT_FOUND');
+    }
+
+    public function test_english_projection_rejects_an_unrelated_package_even_for_a_controlled_slug(): void
+    {
+        $this->createAuthority([
+            'locale' => 'en',
+            'slug' => 'intj-vs-intp',
+            'source_package_id' => 'unrelated-english-comparison-package',
+        ]);
+
+        $this->getJson('/api/v0.5/personality/comparisons?locale=en')
+            ->assertOk()
+            ->assertJsonCount(0, 'cross_type_comparisons');
+
+        $this->getJson('/api/v0.5/personality/comparisons/intj-vs-intp?locale=en')
+            ->assertNotFound()
+            ->assertJsonPath('error_code', 'NOT_FOUND');
     }
 
     public function test_cross_type_comparison_detail_reads_database_authority_payload(): void
