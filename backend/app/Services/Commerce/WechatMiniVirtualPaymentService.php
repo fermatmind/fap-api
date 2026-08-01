@@ -131,13 +131,14 @@ final class WechatMiniVirtualPaymentService
             return $binding;
         }
         $externalOrderNo = (string) $binding['external_order_no'];
+        $contractMeta = is_array($binding['contract_meta'] ?? null) ? $binding['contract_meta'] : [];
         $signData = [
-            'offerId' => (string) $config['offer_id'],
+            'offerId' => (string) ($contractMeta['offer_id'] ?? $config['offer_id']),
             'buyQuantity' => 1,
-            'env' => (int) $config['environment'],
+            'env' => (int) ($contractMeta['environment'] ?? $config['environment']),
             'currencyType' => 'CNY',
-            'productId' => (string) $config['product_id'],
-            'goodsPrice' => (int) $config['price_cents'],
+            'productId' => (string) ($contractMeta['product_id'] ?? $config['product_id']),
+            'goodsPrice' => (int) ($contractMeta['amount_cents'] ?? $config['price_cents']),
             'outTradeNo' => $externalOrderNo,
             'attach' => $orderNo,
         ];
@@ -425,6 +426,12 @@ final class WechatMiniVirtualPaymentService
                 if (! hash_equals($boundOpenid, $openid)) {
                     return $this->error('WECHAT_IDENTITY_MISMATCH', 'order is bound to another WeChat identity.', 409);
                 }
+                $paymentMeta = array_merge([
+                    'sku' => strtoupper(trim((string) ($lockedOrder->sku ?? ''))),
+                    'quantity' => (int) ($lockedOrder->quantity ?? 0),
+                    'amount_cents' => (int) ($lockedOrder->amount_cents ?? 0),
+                    'currency' => strtoupper(trim((string) ($lockedOrder->currency ?? ''))),
+                ], $attemptMeta);
             } else {
                 $created = $this->orders->createPaymentAttempt(
                     $orderNo,
@@ -444,6 +451,20 @@ final class WechatMiniVirtualPaymentService
                     );
                 }
                 $attempt = $created['attempt'];
+                $paymentMeta = [
+                    'openid_enc' => $this->piiCipher->encrypt($openid),
+                    'openid_hash' => $openidHash,
+                    'app_id_hash' => hash('sha256', (string) $config['app_id']),
+                    'offer_id_hash' => hash('sha256', (string) $config['offer_id']),
+                    'offer_id' => (string) $config['offer_id'],
+                    'product_id' => (string) $config['product_id'],
+                    'environment' => (int) $config['environment'],
+                    'channel' => $provider,
+                    'sku' => strtoupper(trim((string) ($lockedOrder->sku ?? ''))),
+                    'quantity' => (int) ($lockedOrder->quantity ?? 0),
+                    'amount_cents' => (int) ($lockedOrder->amount_cents ?? 0),
+                    'currency' => strtoupper(trim((string) ($lockedOrder->currency ?? ''))),
+                ];
             }
 
             $externalOrderNo = trim((string) ($attempt->external_trade_no ?? ''));
@@ -453,19 +474,7 @@ final class WechatMiniVirtualPaymentService
             $this->orders->advancePaymentAttempt((string) ($attempt->id ?? ''), [
                 'state' => PaymentAttempt::STATE_CLIENT_PRESENTED,
                 'external_trade_no' => $externalOrderNo,
-                'payload_meta_json' => [
-                    'openid_enc' => $this->piiCipher->encrypt($openid),
-                    'openid_hash' => $openidHash,
-                    'app_id_hash' => hash('sha256', (string) $config['app_id']),
-                    'offer_id_hash' => hash('sha256', (string) $config['offer_id']),
-                    'product_id' => (string) $config['product_id'],
-                    'environment' => (int) $config['environment'],
-                    'channel' => $provider,
-                    'sku' => strtoupper(trim((string) ($lockedOrder->sku ?? ''))),
-                    'quantity' => (int) ($lockedOrder->quantity ?? 0),
-                    'amount_cents' => (int) ($lockedOrder->amount_cents ?? 0),
-                    'currency' => strtoupper(trim((string) ($lockedOrder->currency ?? ''))),
-                ],
+                'payload_meta_json' => $paymentMeta,
             ]);
             $terminalPaymentStates = [
                 Order::PAYMENT_STATE_PAID,
@@ -493,7 +502,11 @@ final class WechatMiniVirtualPaymentService
                 }
             }
 
-            return ['ok' => true, 'external_order_no' => $externalOrderNo];
+            return [
+                'ok' => true,
+                'external_order_no' => $externalOrderNo,
+                'contract_meta' => $paymentMeta,
+            ];
         });
     }
 
@@ -599,11 +612,16 @@ final class WechatMiniVirtualPaymentService
         if (! $contractMatches) {
             return $this->error('ORDER_CONTRACT_MISMATCH', 'order contract mismatch.', 409);
         }
-        foreach ([
+        $providerIdentity = [
             'app_id_hash' => hash('sha256', (string) $config['app_id']),
             'offer_id_hash' => hash('sha256', (string) $config['offer_id']),
-        ] as $key => $expected) {
-            if (! hash_equals($expected, (string) ($meta[$key] ?? ''))) {
+        ];
+        foreach ($providerIdentity as $key => $expected) {
+            $actual = (string) ($meta[$key] ?? '');
+            $matches = $provider === AppleIapGateway::PROVIDER
+                ? preg_match('/\A[a-f0-9]{64}\z/', $actual) === 1
+                : hash_equals($expected, $actual);
+            if (! $matches) {
                 return $this->error('PROVIDER_IDENTITY_MISMATCH', 'provider identity mismatch.', 409);
             }
         }
@@ -811,6 +829,7 @@ final class WechatMiniVirtualPaymentService
             && $orderCurrency === strtoupper(trim((string) ($attempt->currency ?? '')))
             && $orderCurrency === strtoupper(trim((string) ($meta['currency'] ?? '')))
             && trim((string) ($meta['product_id'] ?? '')) !== ''
+            && trim((string) ($meta['offer_id'] ?? '')) !== ''
             && (int) ($meta['environment'] ?? -1) === 0
             && strtolower(trim((string) ($meta['channel'] ?? ''))) === $provider
             && trim((string) ($order->target_attempt_id ?? '')) !== '';

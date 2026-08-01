@@ -110,6 +110,8 @@ final class AppleIapPaymentContractTest extends TestCase
         $this->assertStringContainsString('apple_iap', $stored);
 
         config()->set('payments.apple_iap.app_key', 'rotated-production-app-key');
+        config()->set('payments.apple_iap.offer_id', 'offer-test-v2');
+        config()->set('payments.apple_iap.product_id', 'mbti-report-full-v2');
         $duplicate = $this->withHeaders($headers)->postJson('/api/v0.3/orders/apple_iap', $payload);
         $duplicate->assertOk();
         $this->assertSame($orderNo, (string) $duplicate->json('order_no'));
@@ -119,7 +121,14 @@ final class AppleIapPaymentContractTest extends TestCase
             flags: JSON_THROW_ON_ERROR
         );
         $this->assertSame($signData['outTradeNo'], $duplicateSignData['outTradeNo']);
+        $this->assertSame($signData['offerId'], $duplicateSignData['offerId']);
+        $this->assertSame($signData['productId'], $duplicateSignData['productId']);
+        $this->assertSame($signData['goodsPrice'], $duplicateSignData['goodsPrice']);
         $this->assertSame(1, DB::table('payment_attempts')->where('order_no', $orderNo)->count());
+        $this->assertSame(
+            $stored,
+            (string) DB::table('payment_attempts')->where('order_no', $orderNo)->value('payload_meta_json')
+        );
 
         DB::table('orders')->where('order_no', $orderNo)->update([
             'payment_state' => Order::PAYMENT_STATE_PAID,
@@ -205,6 +214,7 @@ final class AppleIapPaymentContractTest extends TestCase
         $this->assertSame('PROVIDER_ENV_MISMATCH', $rejected['error_code'] ?? null);
 
         config()->set('payments.apple_iap.app_key', 'rotated-production-app-key');
+        config()->set('payments.apple_iap.offer_id', 'offer-test-v2');
         config()->set('payments.apple_iap.sku', 'MBTI_REPORT_FULL_V2');
         config()->set('payments.apple_iap.product_id', 'mbti-report-full-v2');
         config()->set('payments.apple_iap.price_cents', 999);
