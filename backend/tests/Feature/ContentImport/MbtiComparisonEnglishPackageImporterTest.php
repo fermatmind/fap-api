@@ -237,6 +237,7 @@ final class MbtiComparisonEnglishPackageImporterTest extends TestCase
         self::assertSame(7, $first['row_count']);
         self::assertSame(7, $first['created_count']);
         self::assertSame(0, $first['updated_count']);
+        self::assertSame(0, $first['preserved_count']);
         self::assertFalse($first['publish_attempted']);
         self::assertFalse($first['activation_attempted']);
         self::assertFalse($first['indexability_attempted']);
@@ -245,10 +246,33 @@ final class MbtiComparisonEnglishPackageImporterTest extends TestCase
         self::assertFalse($first['search_submission_attempted']);
         self::assertFalse($first['deploy_attempted']);
 
+        $timestamps = MbtiCrossTypeComparisonAuthority::query()
+            ->withoutGlobalScopes()
+            ->where('locale', 'en')
+            ->orderBy('slug')
+            ->get()
+            ->mapWithKeys(static fn (MbtiCrossTypeComparisonAuthority $row): array => [
+                $row->slug => [$row->imported_at?->toJSON(), $row->updated_at?->toJSON()],
+            ])
+            ->all();
+
         self::assertSame(0, $this->runWrite());
         $second = $this->jsonOutput();
         self::assertSame(0, $second['created_count']);
-        self::assertSame(7, $second['updated_count']);
+        self::assertSame(0, $second['updated_count']);
+        self::assertSame(7, $second['preserved_count']);
+        self::assertSame(
+            $timestamps,
+            MbtiCrossTypeComparisonAuthority::query()
+                ->withoutGlobalScopes()
+                ->where('locale', 'en')
+                ->orderBy('slug')
+                ->get()
+                ->mapWithKeys(static fn (MbtiCrossTypeComparisonAuthority $row): array => [
+                    $row->slug => [$row->imported_at?->toJSON(), $row->updated_at?->toJSON()],
+                ])
+                ->all(),
+        );
 
         self::assertSame(7, MbtiCrossTypeComparisonAuthority::query()->withoutGlobalScopes()->where('locale', 'en')->count());
         self::assertSame(7, MbtiCrossTypeComparisonAuthority::query()->withoutGlobalScopes()->where('locale', 'zh-CN')->count());
@@ -316,6 +340,9 @@ final class MbtiComparisonEnglishPackageImporterTest extends TestCase
         self::assertSame(1, $this->runWrite());
         $payload = $this->jsonOutput();
         self::assertSame('existing_target_collision', $payload['errors'][0]['code']);
+        self::assertTrue($payload['database_write_attempted']);
+        self::assertTrue($payload['cms_write_attempted']);
+        self::assertFalse($payload['writes_committed']);
         self::assertSame(1, MbtiCrossTypeComparisonAuthority::query()->withoutGlobalScopes()->where('locale', 'en')->count());
         $protected = MbtiCrossTypeComparisonAuthority::query()->withoutGlobalScopes()->where('locale', 'en')->firstOrFail();
         self::assertSame('Protected public English row', $protected->title);

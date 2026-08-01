@@ -59,9 +59,12 @@ final class ImportMbtiComparisonEnglishPackage extends Command
                 $summary = $importer->importDraft($packageDirectory, $packageSha, $approvalPath, $approvalSha);
             }
         } catch (RuntimeException $exception) {
-            $summary = $this->failureSummary($exception->getMessage());
+            $summary = $this->failureSummary($exception->getMessage(), $importer->writeAttempted());
         } catch (Throwable) {
-            $summary = $this->failureSummary('unexpected_error: Exact-package validation failed closed.');
+            $summary = $this->failureSummary(
+                'unexpected_error: Exact-package validation failed closed.',
+                $importer->writeAttempted(),
+            );
         }
 
         $this->emitSummary($summary);
@@ -92,7 +95,7 @@ final class ImportMbtiComparisonEnglishPackage extends Command
     /**
      * @return array<string, mixed>
      */
-    private function failureSummary(string $message): array
+    private function failureSummary(string $message, bool $writeAttempted): array
     {
         [$code, $safeMessage] = array_pad(explode(': ', $message, 2), 2, 'Exact-package validation failed closed.');
 
@@ -109,8 +112,8 @@ final class ImportMbtiComparisonEnglishPackage extends Command
             'dry_run_only' => ! (bool) $this->option('write'),
             'write_supported_in_this_pr' => true,
             'writes_committed' => false,
-            'database_write_attempted' => false,
-            'cms_write_attempted' => false,
+            'database_write_attempted' => $writeAttempted,
+            'cms_write_attempted' => $writeAttempted,
             'publish_attempted' => false,
             'activation_attempted' => false,
             'indexability_attempted' => false,

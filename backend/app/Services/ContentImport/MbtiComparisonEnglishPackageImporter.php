@@ -8,8 +8,11 @@ use App\Models\MbtiCrossTypeComparisonAuthority;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
 
+/** @review-surface mbti_cross_type_comparison_authority */
 final class MbtiComparisonEnglishPackageImporter
 {
+    private bool $writeAttempted = false;
+
     public const PACKAGE_SHA256 = 'deecc8175fb43ba3730d6513b496a0ab6834459108e3b24e25550bbf40e001a2';
 
     public const MANIFEST_SHA256 = 'dcdd1a20448301c5cd00667727e6d4be7bf5090efd5ce5cf90a192a0224021ba';
@@ -73,6 +76,8 @@ final class MbtiComparisonEnglishPackageImporter
         string $approvalPath,
         string $confirmedApprovalSha256,
     ): array {
+        $this->writeAttempted = false;
+
         return DB::transaction(function () use (
             $packageDirectory,
             $confirmedPackageSha256,
@@ -99,40 +104,55 @@ final class MbtiComparisonEnglishPackageImporter
                 }
 
                 $contentSha256 = $this->payloadSha256($payload);
-                MbtiCrossTypeComparisonAuthority::query()
-                    ->withoutGlobalScopes()
-                    ->updateOrCreate(
-                        ['org_id' => 0, 'locale' => 'en', 'slug' => $slug],
-                        [
-                            'comparison_type' => MbtiCrossTypeComparisonAuthority::COMPARISON_TYPE,
-                            'left_type_code' => (string) $payload['left_type'],
-                            'right_type_code' => (string) $payload['right_type'],
-                            'title' => (string) $payload['title'],
-                            'seo_title' => (string) $payload['seo_title'],
-                            'seo_description' => (string) $payload['seo_description'],
-                            'summary' => (string) $payload['summary'],
-                            'content_payload_json' => $payload,
-                            'claim_boundary' => (string) $payload['claim_boundary'],
-                            'source_package_id' => self::PACKAGE_ID,
-                            'source_sha256' => $contentSha256,
-                            'authority_contract_version' => MbtiCrossTypeComparisonAuthority::AUTHORITY_CONTRACT_VERSION,
-                            'readmodel_contract_version' => MbtiCrossTypeComparisonAuthority::READMODEL_CONTRACT_VERSION,
-                            'review_status' => 'w9_passed_pending_editorial',
-                            'publish_status' => 'draft',
-                            'indexability_status' => 'blocked',
-                            'is_public' => false,
-                            'is_indexable' => false,
-                            'sitemap_eligible' => false,
-                            'llms_eligible' => false,
-                            'search_submission_eligible' => false,
-                            'published_at' => null,
-                            'imported_at' => now(),
-                        ],
-                    );
+                $values = [
+                    'comparison_type' => MbtiCrossTypeComparisonAuthority::COMPARISON_TYPE,
+                    'left_type_code' => (string) $payload['left_type'],
+                    'right_type_code' => (string) $payload['right_type'],
+                    'title' => (string) $payload['title'],
+                    'seo_title' => (string) $payload['seo_title'],
+                    'seo_description' => (string) $payload['seo_description'],
+                    'summary' => (string) $payload['summary'],
+                    'content_payload_json' => $payload,
+                    'claim_boundary' => (string) $payload['claim_boundary'],
+                    'source_package_id' => self::PACKAGE_ID,
+                    'source_sha256' => $contentSha256,
+                    'authority_contract_version' => MbtiCrossTypeComparisonAuthority::AUTHORITY_CONTRACT_VERSION,
+                    'readmodel_contract_version' => MbtiCrossTypeComparisonAuthority::READMODEL_CONTRACT_VERSION,
+                    'review_status' => 'w9_passed_pending_editorial',
+                    'publish_status' => 'draft',
+                    'indexability_status' => 'blocked',
+                    'is_public' => false,
+                    'is_indexable' => false,
+                    'sitemap_eligible' => false,
+                    'llms_eligible' => false,
+                    'search_submission_eligible' => false,
+                    'published_at' => null,
+                    'imported_at' => $existing?->imported_at ?? now(),
+                ];
+
+                if ($existing instanceof MbtiCrossTypeComparisonAuthority) {
+                    $existing->fill($values);
+                    $action = $existing->isDirty()
+                        ? 'updated_exact_inactive_draft'
+                        : 'preserved_exact_inactive_draft';
+                    if ($existing->isDirty()) {
+                        $this->writeAttempted = true;
+                        $existing->save();
+                    }
+                } else {
+                    $this->writeAttempted = true;
+                    MbtiCrossTypeComparisonAuthority::query()->withoutGlobalScopes()->create([
+                        'org_id' => 0,
+                        'locale' => 'en',
+                        'slug' => $slug,
+                        ...$values,
+                    ]);
+                    $action = 'created_inactive_draft';
+                }
 
                 $rows[] = [
                     'slug' => $slug,
-                    'action' => $existing instanceof MbtiCrossTypeComparisonAuthority ? 'updated_exact_inactive_draft' : 'created_inactive_draft',
+                    'action' => $action,
                     'content_sha256' => $contentSha256,
                 ];
             }
@@ -168,6 +188,7 @@ final class MbtiComparisonEnglishPackageImporter
                 'row_count' => count($rows),
                 'created_count' => count(array_filter($rows, static fn (array $row): bool => $row['action'] === 'created_inactive_draft')),
                 'updated_count' => count(array_filter($rows, static fn (array $row): bool => $row['action'] === 'updated_exact_inactive_draft')),
+                'preserved_count' => count(array_filter($rows, static fn (array $row): bool => $row['action'] === 'preserved_exact_inactive_draft')),
                 'rows' => $rows,
                 'readback' => [
                     'exact_row_count' => count($rows),
@@ -182,6 +203,11 @@ final class MbtiComparisonEnglishPackageImporter
                 'warnings' => [],
             ];
         }, 3);
+    }
+
+    public function writeAttempted(): bool
+    {
+        return $this->writeAttempted;
     }
 
     /**
