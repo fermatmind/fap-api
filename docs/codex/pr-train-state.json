@@ -102908,8 +102908,8 @@
       "EN-PARITY-W1-MBTI-RESULT-IMPORTER-01",
       "EN-PARITY-W1-MBTI-COMPARISON-DRAFT-IMPORT-01"
     ],
-    "status": "github_checks_pending",
-    "commit_sha": "4b24fbf3ea9a2eb189934b896436576528ecf6bb",
+    "status": "ready_to_merge",
+    "commit_sha": "15cb3d946689f4b894304d4cbd59af5a49e007e9",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3470",
     "checks": {
       "authorization": {
@@ -102933,8 +102933,8 @@
         "evidence": "The exact 11 changed paths match the manifest allowlist: command/service/two focused tests, byte-exact approval, unregistered inactive draft authority, backend rule, PR-train manifest/state, and required external-blocker sidecar. The frozen result package, three prerequisite authority files, zh-CN, manifest/commercial runtime, fallback/active pointer, models, migrations, APIs, frontend, release, SEO runtime, search, and deploy paths are unchanged."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": null
+        "status": "passed",
+        "evidence": "Exact head 15cb3d946689f4b894304d4cbd59af5a49e007e9 passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep OSS, Semgrep blocking secrets, and the non-blocking SARIF upload; staging parity was correctly skipped. GitHub reports CLEAN/MERGEABLE and repository policy requires no review."
       }
     },
     "failure_reason": null,
@@ -102944,7 +102944,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false
     },
     "production_write_execution": false,
@@ -102972,8 +102972,13 @@
         "at": "2026-08-01T11:18:02Z",
         "status": "github_checks_pending",
         "note": "Pushed implementation head 4b24fbf3ea9a2eb189934b896436576528ecf6bb and opened PR #3470. Required checks, exact-head review, mergeability, squash merge, branch cleanup, and post-merge revalidation remain pending; no staging or deploy workflow will be awaited or triggered."
+      },
+      {
+        "at": "2026-08-01T11:26:55Z",
+        "status": "ready_to_merge",
+        "note": "Exact head 15cb3d946689f4b894304d4cbd59af5a49e007e9 passed all nine applicable checks; staging parity was skipped. GitHub reports CLEAN/MERGEABLE with no required review. Exact-head re-review found no scope, authority, collision, idempotence, receipt, private-field, runtime registration, release, or deploy defect. This following readiness commit changes only the PR10 state ledger, so its own required checks remain mandatory before squash merge."
       }
     ],
-    "updated_at": "2026-08-01T11:18:02Z"
+    "updated_at": "2026-08-01T11:26:55Z"
   }
 }
