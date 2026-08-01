@@ -103,8 +103,9 @@ jobs:
           [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
           [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ && "$DEPLOY_PATH" != *".."* ]]
           receipt_path="$RUNNER_TEMP/mbti-result-english-runtime-capability-preflight.json"
+          candidate_receipt_path="$RUNNER_TEMP/mbti-result-english-runtime-capability-preflight.candidate.json"
           emit_failure_receipt() {
-            jq -n --arg stage "$1" --arg error_code "$2" --arg control_plane_sha "$CONTROL_PLANE_SHA" --arg active_revision "$ACTIVE_REVISION" '{artifact:"EN-PARITY-W1-MBTI-RESULT-RUNTIME-CAPABILITY-PREFLIGHT-RECEIPT",schema_version:"fermatmind.en_parity.result_runtime_capability_preflight_receipt.v1",status:"BLOCKED",ok:false,mode:"controlled_read_only_runtime_capability_preflight",read_only:true,stage:$stage,error_code:$error_code,control_plane_sha:$control_plane_sha,active_revision:$active_revision,cms_write_attempted:false,publish_attempted:false,activation_attempted:false,active_pointer_changed:false,indexability_attempted:false,sitemap_attempted:false,llms_attempted:false,search_submission_attempted:false,deploy_attempted:false,private_authority_read_attempted:false,attempt_report_order_payment_read_attempted:false}' > "$receipt_path"
+            jq -n --arg stage "$1" --arg error_code "$2" --arg control_plane_sha "$CONTROL_PLANE_SHA" --arg active_revision "$ACTIVE_REVISION" '{artifact:"EN-PARITY-W1-MBTI-RESULT-RUNTIME-CAPABILITY-PREFLIGHT-RECEIPT",schema_version:"fermatmind.en_parity.result_runtime_capability_preflight_receipt.v1",status:"BLOCKED",ok:false,mode:"controlled_read_only_runtime_capability_preflight",read_only:true,stage:$stage,error_code:$error_code,control_plane_sha:$control_plane_sha,active_revision:$active_revision,cms_write_attempted:false,publish_attempted:false,activation_attempted:false,active_pointer_changed:false,indexability_attempted:false,sitemap_attempted:false,hreflang_attempted:false,llms_attempted:false,json_ld_attempted:false,search_submission_attempted:false,deploy_attempted:false,private_authority_read_attempted:false,attempt_report_order_payment_read_attempted:false}' > "$receipt_path"
           }
           bundle="$RUNNER_TEMP/mbti-result-english-runtime-capability-preflight-input.tgz"
           tar -C "$GITHUB_WORKSPACE" -czf "$bundle" \
@@ -113,12 +114,12 @@ jobs:
             backend/content_assets/en-content-parity/CONTROL-approvals/W1-MBTI-RESULT-CONTENT/runtime-capability-preflight-approval-2026-08-02.json
           run_dir="/tmp/mbti-w1-result-runtime-capability-${GITHUB_RUN_ID}"
           if ! scp -P "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes "$bundle" "$DEPLOY_USER@$DEPLOY_HOST:$run_dir.tgz"; then
-            emit_failure_receipt source_bundle_transfer_failed source_bundle_transfer_failed
+            emit_failure_receipt remote_transport_or_bootstrap_failed remote_transport_or_bootstrap_failed
             exit 1
           fi
           set +e
           ssh -p "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes "$DEPLOY_USER@$DEPLOY_HOST" \
-            "DEPLOY_PATH='$DEPLOY_PATH' RUN_DIR='$run_dir' CONTROL_PLANE_SHA='$CONTROL_PLANE_SHA' ACTIVE_REVISION='$ACTIVE_REVISION' bash -s" > "$receipt_path" 2>"$RUNNER_TEMP/mbti-result-runtime-preflight.stderr" <<'REMOTE'
+            "DEPLOY_PATH='$DEPLOY_PATH' RUN_DIR='$run_dir' CONTROL_PLANE_SHA='$CONTROL_PLANE_SHA' ACTIVE_REVISION='$ACTIVE_REVISION' bash -s" > "$candidate_receipt_path" 2>"$RUNNER_TEMP/mbti-result-runtime-preflight.stderr" <<'REMOTE'
           set -euo pipefail
           current="$(readlink -f "$DEPLOY_PATH/current")"
           test -d "$current/backend"
@@ -128,19 +129,76 @@ jobs:
           trap 'rm -rf "$RUN_DIR" "$RUN_DIR.tgz"' EXIT
           mkdir -p "$RUN_DIR/input"
           tar -xzf "$RUN_DIR.tgz" -C "$RUN_DIR/input"
+          emit_remote_receipt() {
+            jq -nc --arg stage "$1" --arg error_code "$2" --arg control_plane_sha "$CONTROL_PLANE_SHA" --arg active_revision "$ACTIVE_REVISION" '{artifact:"EN-PARITY-W1-MBTI-RESULT-RUNTIME-CAPABILITY-PREFLIGHT-RECEIPT",schema_version:"fermatmind.en_parity.result_runtime_capability_preflight_receipt.v1",status:"BLOCKED",ok:false,mode:"controlled_read_only_runtime_capability_preflight",read_only:true,stage:$stage,error_code:$error_code,control_plane_sha:$control_plane_sha,active_revision:$active_revision,cms_write_attempted:false,publish_attempted:false,activation_attempted:false,active_pointer_changed:false,indexability_attempted:false,sitemap_attempted:false,hreflang_attempted:false,llms_attempted:false,json_ld_attempted:false,search_submission_attempted:false,deploy_attempted:false,private_authority_read_attempted:false,attempt_report_order_payment_read_attempted:false}'
+          }
+          set +e
           php -d display_errors=0 -d log_errors=0 "$RUN_DIR/input/backend/scripts/mbti_result_english_runtime_capability_preflight.php" \
             --backend-root="$current/backend" \
             --source-backend-root="$RUN_DIR/input/backend" \
             --control-plane-sha="$CONTROL_PLANE_SHA" \
-            --active-revision="$ACTIVE_REVISION"
+            --active-revision="$ACTIVE_REVISION" > "$RUN_DIR/executor.stdout" 2> "$RUN_DIR/executor.stderr"
+          executor_status=$?
+          set -e
+          if [ "$executor_status" -ne 0 ]; then
+            emit_remote_receipt remote_executor_failed remote_executor_failed
+            exit 0
+          fi
+          if ! test -s "$RUN_DIR/executor.stdout" || ! jq -e -s '
+            length == 1 and (
+            .[0] |
+            type == "object" and
+            (.status == "PASS" or .status == "BLOCKED") and
+            .artifact == "EN-PARITY-W1-MBTI-RESULT-RUNTIME-CAPABILITY-PREFLIGHT-RECEIPT" and
+            .schema_version == "fermatmind.en_parity.result_runtime_capability_preflight_receipt.v1" and
+            .mode == "controlled_read_only_runtime_capability_preflight" and
+            .read_only == true and
+            .cms_write_attempted == false and .publish_attempted == false and
+            .activation_attempted == false and .active_pointer_changed == false and
+            .indexability_attempted == false and .sitemap_attempted == false and
+            .llms_attempted == false and .search_submission_attempted == false and
+            .deploy_attempted == false and .private_authority_read_attempted == false and
+            .attempt_report_order_payment_read_attempted == false
+            )
+          ' "$RUN_DIR/executor.stdout" >/dev/null; then
+            emit_remote_receipt remote_executor_stdout_invalid remote_executor_stdout_invalid
+            exit 0
+          fi
+          cat "$RUN_DIR/executor.stdout"
           REMOTE
           remote_status=$?
           set -e
           if [ "$remote_status" -ne 0 ]; then
-            emit_failure_receipt remote_runtime_preflight_failed remote_runtime_preflight_failed
-            exit "$remote_status"
+            emit_failure_receipt remote_transport_or_bootstrap_failed remote_transport_or_bootstrap_failed
+            exit 1
           fi
-          if ! test -s "$receipt_path" || ! jq -e '
+          if ! test -s "$candidate_receipt_path" || ! jq -e -s --arg control_plane_sha "$CONTROL_PLANE_SHA" --arg active_revision "$ACTIVE_REVISION" '
+            length == 1 and (
+            .[0] |
+            type == "object" and
+            (.status == "PASS" or .status == "BLOCKED") and
+            .artifact == "EN-PARITY-W1-MBTI-RESULT-RUNTIME-CAPABILITY-PREFLIGHT-RECEIPT" and
+            .schema_version == "fermatmind.en_parity.result_runtime_capability_preflight_receipt.v1" and
+            .mode == "controlled_read_only_runtime_capability_preflight" and
+            .read_only == true and
+            .control_plane_sha == $control_plane_sha and .active_revision == $active_revision and
+            .cms_write_attempted == false and .publish_attempted == false and
+            .activation_attempted == false and .active_pointer_changed == false and
+            .indexability_attempted == false and .sitemap_attempted == false and
+            .llms_attempted == false and .search_submission_attempted == false and
+            .deploy_attempted == false and .private_authority_read_attempted == false and
+            .attempt_report_order_payment_read_attempted == false and
+            (if .status == "PASS" then .ok == true else .ok == false end)
+            )
+          ' "$candidate_receipt_path" >/dev/null; then
+            emit_failure_receipt runner_receipt_contract_failed runner_receipt_contract_failed
+            exit 1
+          fi
+          mv "$candidate_receipt_path" "$receipt_path"
+          if jq -e '.status == "BLOCKED"' "$receipt_path" >/dev/null; then
+            exit 1
+          fi
+          if ! jq -e '
             .status == "PASS" and .read_only == true and
             .package.package_sha256 == "9325013b870fd2496efc0882656240f91ce28ff4faaf1da42fb3dde3577b0ed3" and
             .package.row_count == 46 and .package.authority_content_row_count == 21 and

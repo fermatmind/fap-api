@@ -66,7 +66,7 @@ final class MbtiResultEnglishRuntimeCapabilityPreflightServiceTest extends TestC
         $this->inspect();
     }
 
-    public function test_the_executor_and_workflow_are_read_only_and_capture_stdout_on_the_runner(): void
+    public function test_the_executor_and_workflow_are_read_only_and_frame_only_validated_stdout_receipts(): void
     {
         $approvalPath = MbtiResultEnglishRuntimeCapabilityPreflightService::defaultApprovalPath();
         $approvalBytes = (string) File::get($approvalPath);
@@ -89,8 +89,20 @@ final class MbtiResultEnglishRuntimeCapabilityPreflightServiceTest extends TestC
         self::assertStringNotContainsString("DB::table('results')", $service);
         self::assertStringContainsString('environment: production', $workflow);
         self::assertStringContainsString('controlled_read_only_runtime_capability_preflight', $workflow);
-        self::assertStringContainsString('> "$receipt_path" 2>"$RUNNER_TEMP/mbti-result-runtime-preflight.stderr"', $workflow);
+        self::assertStringContainsString('candidate_receipt_path=', $workflow);
+        self::assertStringContainsString('> "$RUN_DIR/executor.stdout" 2> "$RUN_DIR/executor.stderr"', $workflow);
+        self::assertStringContainsString('jq -e -s', $workflow);
+        self::assertStringContainsString('length == 1', $workflow);
+        self::assertStringContainsString('emit_remote_receipt remote_executor_failed remote_executor_failed', $workflow);
+        self::assertStringContainsString('emit_remote_receipt remote_executor_stdout_invalid remote_executor_stdout_invalid', $workflow);
+        self::assertStringContainsString('emit_failure_receipt remote_transport_or_bootstrap_failed remote_transport_or_bootstrap_failed', $workflow);
+        self::assertStringContainsString('cat "$RUN_DIR/executor.stdout"', $workflow);
+        self::assertStringContainsString('mv "$candidate_receipt_path" "$receipt_path"', $workflow);
+        self::assertStringContainsString("jq -e '.status == \"BLOCKED\"' \"\$receipt_path\"", $workflow);
+        self::assertStringContainsString('runner_receipt_contract_failed', $workflow);
+        self::assertStringNotContainsString('> "$receipt_path" 2>"$RUNNER_TEMP/mbti-result-runtime-preflight.stderr"', $workflow);
         self::assertStringNotContainsString('$run_dir/receipts/.', $workflow);
+        self::assertStringNotContainsString('scp -P "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes "$run_dir/receipt', $workflow);
         self::assertStringNotContainsString('php artisan migrate', $workflow);
         self::assertStringNotContainsString('dep deploy', $workflow);
     }
