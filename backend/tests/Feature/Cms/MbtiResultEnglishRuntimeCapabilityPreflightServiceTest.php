@@ -212,6 +212,48 @@ final class MbtiResultEnglishRuntimeCapabilityPreflightServiceTest extends TestC
         self::assertStringNotContainsString('dep deploy', $workflow);
     }
 
+    public function test_the_phase_stdout_provenance_diagnostic_is_read_only_and_records_only_phase_statistics(): void
+    {
+        $approvalPath = base_path('content_assets/en-content-parity/CONTROL-approvals/W1-MBTI-RESULT-CONTENT/runtime-capability-phase-provenance-diagnostic-approval-2026-08-02.json');
+        $approvalBytes = (string) File::get($approvalPath);
+        $approval = json_decode($approvalBytes, true, 512, JSON_THROW_ON_ERROR);
+        $workflow = (string) File::get(base_path('../.github/workflows/mbti-result-english-runtime-capability-phase-provenance-diagnostic.yml'));
+
+        self::assertSame('6e266ad254ca445ce4d60524af7deecebb78398cf5e65db34a62919f97aff6f7', hash('sha256', $approvalBytes));
+        self::assertSame('runtime_capability_phase_provenance_diagnostic', $approval['gate']);
+        self::assertTrue($approval['permissions']['target_authority_readback_authorized']);
+        self::assertTrue($approval['permissions']['runtime_projection_readback_authorized']);
+        foreach (array_diff(array_keys($approval['permissions']), ['target_authority_readback_authorized', 'runtime_projection_readback_authorized']) as $permission) {
+            self::assertFalse($approval['permissions'][$permission], $permission.' must remain closed.');
+        }
+
+        self::assertStringContainsString('expected_approval_sha', $workflow);
+        self::assertStringContainsString('runtime_capability_phase_provenance_diagnostic', $workflow);
+        self::assertStringContainsString('run_phase authority_metadata', $workflow);
+        self::assertStringContainsString('run_phase physical_pack_resolver', $workflow);
+        self::assertStringContainsString('run_phase compiled_path_resolver', $workflow);
+        self::assertStringContainsString('run_phase isolated_projection_renderer', $workflow);
+        self::assertStringContainsString("config()->set('storage_rollout.resolver_materialization_enabled', false)", $workflow);
+        self::assertStringContainsString("config()->set('storage_rollout.packs_v2_remote_rehydrate_enabled', false)", $workflow);
+        self::assertStringContainsString('stdout_bytes', $workflow);
+        self::assertStringContainsString('newline_count', $workflow);
+        self::assertStringContainsString('json_document_count', $workflow);
+        self::assertStringContainsString('stdout_sha256', $workflow);
+        self::assertStringContainsString('direct_stdout_observed', $workflow);
+        self::assertStringContainsString('single_json_document_observed', $workflow);
+        self::assertStringContainsString('multiple_json_documents', $workflow);
+        self::assertStringContainsString('probe_failed', $workflow);
+        self::assertStringContainsString("trap 'rm -rf \"\$RUN_DIR\"' EXIT", $workflow);
+        self::assertStringContainsString('keys | sort', $workflow);
+        self::assertStringNotContainsString('cat "$RUN_DIR/authority_metadata.stdout"', $workflow);
+        self::assertStringNotContainsString('cat "$RUN_DIR/physical_pack_resolver.stdout"', $workflow);
+        self::assertStringNotContainsString('cat "$RUN_DIR/compiled_path_resolver.stdout"', $workflow);
+        self::assertStringNotContainsString('cat "$RUN_DIR/isolated_projection_renderer.stdout"', $workflow);
+        self::assertStringNotContainsString('scp -P "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes "$RUN_DIR/', $workflow);
+        self::assertStringNotContainsString('php artisan migrate', $workflow);
+        self::assertStringNotContainsString('dep deploy', $workflow);
+    }
+
     private function seedExactInactiveAuthority(): void
     {
         File::ensureDirectoryExists($this->compiledRoot.'/compiled');

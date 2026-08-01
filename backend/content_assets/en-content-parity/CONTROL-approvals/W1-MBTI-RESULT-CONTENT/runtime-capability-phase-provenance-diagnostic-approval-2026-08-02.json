@@ -1,0 +1,30 @@
+{
+  "artifact_kind": "controlled_transition_approval",
+  "schema_version": "fermatmind.en_content_parity_controlled_transition_approval.v1",
+  "control_id": "EN-PARITY-W1-MBTI-RESULT-RUNTIME-CAPABILITY-PHASE-PROVENANCE-DIAGNOSTIC-01",
+  "approval_owner": "human_operator",
+  "approval_ref": "human-operator:w1-mbti-result-runtime-capability-phase-provenance-diagnostic:2026-08-02",
+  "subscope_id": "W1-MBTI-RESULT-CONTENT",
+  "package_sha256": "9325013b870fd2496efc0882656240f91ce28ff4faaf1da42fb3dde3577b0ed3",
+  "target_authority_receipt_sha256": "f093096ff881bfabc633407d51ee01061dc17b9dbc43da41dc03ae7881b13756",
+  "target_manifest_sha256": "649a61633a05728618477b97036718c582673c96a82c24d142287991b3d2d0e1",
+  "active_runtime_revision": "660280d00a57e58bd8bc76608e19de2492c03f53",
+  "gate": "runtime_capability_phase_provenance_diagnostic",
+  "verdict": "APPROVED",
+  "permissions": {
+    "target_authority_readback_authorized": true,
+    "runtime_projection_readback_authorized": true,
+    "publish_authorized": false,
+    "activation_authorized": false,
+    "active_pointer_authorized": false,
+    "indexability_authorized": false,
+    "sitemap_authorized": false,
+    "hreflang_authorized": false,
+    "llms_authorized": false,
+    "json_ld_authorized": false,
+    "search_submission_authorized": false,
+    "deployment_authorized": false,
+    "private_result_read_authorized": false,
+    "attempt_report_order_payment_read_authorized": false
+  }
+}
