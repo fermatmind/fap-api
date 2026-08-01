@@ -9,6 +9,7 @@ use App\Services\ContentImport\MbtiComparisonEnglishPackageImporter;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
 final class MbtiComparisonEnglishPackageImporterTest extends TestCase
@@ -455,6 +456,22 @@ final class MbtiComparisonEnglishPackageImporterTest extends TestCase
             self::assertFalse($payload['writes_committed']);
             self::assertSame(0, MbtiCrossTypeComparisonAuthority::query()->withoutGlobalScopes()->count());
         }
+    }
+
+    public function test_database_exception_receipt_is_redacted(): void
+    {
+        Schema::drop('mbti_cross_type_comparison_authorities');
+
+        self::assertSame(1, $this->runWrite());
+        $output = Artisan::output();
+        self::assertJson($output);
+        $payload = json_decode($output, true, 512, JSON_THROW_ON_ERROR);
+        self::assertSame('unexpected_error', $payload['errors'][0]['code']);
+        self::assertSame('Exact-package validation failed closed.', $payload['errors'][0]['message']);
+        self::assertFalse($payload['database_write_attempted']);
+        self::assertStringNotContainsString('SQLSTATE', $output);
+        self::assertStringNotContainsString('mbti_cross_type_comparison_authorities', $output);
+        self::assertStringNotContainsString('content_payload_json', $output);
     }
 
     private function runDryRun(

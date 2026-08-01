@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Services\ContentImport;
 
 use App\Models\MbtiCrossTypeComparisonAuthority;
+use DomainException;
 use Illuminate\Support\Facades\DB;
-use RuntimeException;
 
 /** @review-surface mbti_cross_type_comparison_authority */
 final class MbtiComparisonEnglishPackageImporter
@@ -796,6 +796,6 @@ final class MbtiComparisonEnglishPackageImporter
 
     private function fail(string $code, string $message): never
     {
-        throw new RuntimeException($code.': '.$message);
+        throw new DomainException($code.': '.$message);
     }
 }

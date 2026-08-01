@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Services\ContentImport\MbtiComparisonEnglishPackageImporter;
+use DomainException;
 use Illuminate\Console\Command;
-use RuntimeException;
 use Throwable;
 
 final class ImportMbtiComparisonEnglishPackage extends Command
@@ -27,12 +27,12 @@ final class ImportMbtiComparisonEnglishPackage extends Command
         try {
             $write = (bool) $this->option('write');
             if ($write && (bool) $this->option('dry-run')) {
-                throw new RuntimeException('mode_conflict: --dry-run and --write are mutually exclusive.');
+                throw new DomainException('mode_conflict: --dry-run and --write are mutually exclusive.');
             }
 
             $packageSha = strtolower(trim((string) $this->option('package-sha')));
             if ($packageSha === '') {
-                throw new RuntimeException('package_sha_required: --package-sha is required.');
+                throw new DomainException('package_sha_required: --package-sha is required.');
             }
 
             $packageDirectory = trim((string) $this->option('package'));
@@ -47,7 +47,7 @@ final class ImportMbtiComparisonEnglishPackage extends Command
             } else {
                 $approvalSha = strtolower(trim((string) $this->option('approval-sha')));
                 if ($approvalSha === '') {
-                    throw new RuntimeException('approval_sha_required: --approval-sha is required for --write.');
+                    throw new DomainException('approval_sha_required: --approval-sha is required for --write.');
                 }
                 $approvalPath = trim((string) $this->option('approval'));
                 if ($approvalPath === '') {
@@ -58,7 +58,7 @@ final class ImportMbtiComparisonEnglishPackage extends Command
 
                 $summary = $importer->importDraft($packageDirectory, $packageSha, $approvalPath, $approvalSha);
             }
-        } catch (RuntimeException $exception) {
+        } catch (DomainException $exception) {
             $summary = $this->failureSummary($exception->getMessage(), $importer->writeAttempted());
         } catch (Throwable) {
             $summary = $this->failureSummary(
