@@ -2455,6 +2455,27 @@
                 "x-laravel-name": "api.v0_3.skus"
             }
         },
+        "/api/v0.3/webhooks/payment/wechat_mini_virtual": {
+            "get": {
+                "operationId": "api.v0_3.webhooks.payment.wechat_mini_virtual.verify",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\Webhooks\\PaymentWebhookController@verifyWechatMiniVirtualEndpoint",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_webhook"
+                ],
+                "x-laravel-name": "api.v0_3.webhooks.payment.wechat_mini_virtual.verify"
+            }
+        },
         "/api/v0.3/webhooks/payment/{provider}": {
             "post": {
                 "operationId": "api.v0_3.webhooks.payment",
