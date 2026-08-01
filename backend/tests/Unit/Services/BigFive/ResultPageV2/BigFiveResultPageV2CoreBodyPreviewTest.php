@@ -1861,7 +1861,6 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     public function test_runtime_freeze_classifier_ignores_iq_paid_report_entitlement_contract_changes(): void
     {
         $changed = [
-            'backend/app/Services/Commerce/EntitlementManager.php',
             'backend/app/Services/Report/ReportAccess.php',
             'backend/app/Services/Report/Resolvers/AccessResolver.php',
         ];
@@ -1895,12 +1894,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             static fn (string $line): string => '+'.$line,
             $this->rewardedAdUnlockRouteChangedLines(),
         );
+        $rewardedAdEntitlementManagerChangedLines = $this->rewardedAdUnlockEntitlementManagerChangedLines();
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
             $changed,
             '',
             '',
             routeChangedLines: $rewardedAdRouteChangedLines,
+            entitlementManagerChangedLines: $rewardedAdEntitlementManagerChangedLines,
         ));
         $this->assertSame(
             ['backend/routes/api.php'],
@@ -1911,6 +1912,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 routeChangedLines: array_merge(
                     $rewardedAdRouteChangedLines,
                     ['+            Route::post(\'/attempts/{id}/rewarded-ad-sessions/debug\', [AttemptRewardedAdController::class, \'store\']);'],
+                ),
+            )
+        );
+        $this->assertSame(
+            ['backend/app/Services/Commerce/EntitlementManager.php'],
+            $this->mbtiImpactingRuntimeChanges(
+                ['backend/app/Services/Commerce/EntitlementManager.php'],
+                '',
+                '',
+                entitlementManagerChangedLines: array_merge(
+                    $rewardedAdEntitlementManagerChangedLines,
+                    ['+        $existingQuery->where("org_id", 999);'],
                 ),
             )
         );
@@ -3893,7 +3906,6 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $changed = [
             'backend/app/Services/Commerce/AppleIapPaymentService.php',
-            'backend/app/Services/Commerce/EntitlementManager.php',
             'backend/app/Services/Commerce/OrderManager.php',
             'backend/app/Services/Commerce/PaymentGateway/AppleIapGateway.php',
             'backend/app/Services/Commerce/Webhook/WebhookEntitlementService.php',
@@ -6906,6 +6918,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ?array $generateReportSnapshotJobChangedLines = null,
         ?array $orderRepairServiceChangedLines = null,
         ?array $orderRepairServiceHunkHeaders = null,
+        ?array $entitlementManagerChangedLines = null,
     ): array {
         $impacting = [];
         $soloOwnerReviewFoundationAddedFileSet = array_fill_keys(
@@ -8048,6 +8061,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     )
                     || $this->routeDiffIsAppleIapPaymentOnly(
                         $routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef)
+                    )
+                )
+            ) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/app/Services/Commerce/EntitlementManager.php'
+                && $this->entitlementManagerDiffIsRewardedAdUnlockOnly(
+                    $entitlementManagerChangedLines ?? (
+                        $repoRoot !== '' && $baseRef !== ''
+                            ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                            : []
                     )
                 )
             ) {
@@ -11369,7 +11395,6 @@ DIFF;
     private function isIqPaidReportEntitlementContractFile(string $file): bool
     {
         return in_array($file, [
-            'backend/app/Services/Commerce/EntitlementManager.php',
             'backend/app/Services/Report/ReportAccess.php',
             'backend/app/Services/Report/Resolvers/AccessResolver.php',
         ], true);
@@ -11390,7 +11415,6 @@ DIFF;
         return in_array($file, [
             'backend/app/Http/Controllers/API/V0_3/AttemptRewardedAdController.php',
             'backend/app/Services/Commerce/RewardedAdUnlockService.php',
-            'backend/app/Services/Commerce/EntitlementManager.php',
             'backend/tests/Feature/Commerce/RewardedAdUnlockContractTest.php',
         ], true);
     }
@@ -15152,6 +15176,110 @@ DIFF;
             "                ->middleware(['throttle:api_attempt_submit', \\App\\Http\\Middleware\\FmTokenAuth::class, 'uuid:id', 'uuid:session_id'])",
             "                ->defaults('public_realm', true)",
             "                ->name('api.v0_3.attempts.rewarded_ad_sessions.complete');",
+        ];
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function entitlementManagerDiffIsRewardedAdUnlockOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        $actual = [];
+        foreach ($changedLines as $line) {
+            if (! is_string($line) || ! in_array($line[0] ?? '', ['+', '-'], true)) {
+                return false;
+            }
+
+            $actual[] = $line;
+        }
+
+        return $actual === $this->rewardedAdUnlockEntitlementManagerInitialChangedLines()
+            || $actual === $this->rewardedAdUnlockEntitlementManagerChangedLines()
+            || $actual === $this->rewardedAdUnlockEntitlementManagerRepairChangedLines();
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function rewardedAdUnlockEntitlementManagerChangedLines(): array
+    {
+        return [
+            '-        ?array $metaPatch = null',
+            '+        ?array $metaPatch = null,',
+            '+        bool $preserveExistingUnlockSource = false,',
+            '+        bool $ignoreInactiveExisting = false,',
+            "-        \$existing = DB::table('benefit_grants')",
+            "+        \$existingQuery = DB::table('benefit_grants')",
+            "-            ->where('attempt_id', \$attemptId)",
+            '-            ->first();',
+            "+            ->where('attempt_id', \$attemptId);",
+            '+        if ($ignoreInactiveExisting) {',
+            '+            $existingQuery',
+            "+                ->where('status', 'active')",
+            '+                ->where(function ($query) {',
+            "+                    \$query->whereNull('expires_at')",
+            "+                        ->orWhere('expires_at', '>', now());",
+            '+                });',
+            '+        }',
+            '+        $existing = $existingQuery->first();',
+            '-                $meta = array_merge($meta, $metaPatch);',
+            '+                $safeMetaPatch = $metaPatch;',
+            '+                $existingSource = ReportAccess::normalizeThreeChannelUnlockSource((string) (',
+            "+                    \$meta['unlock_source'] ?? \$meta['granted_via'] ?? ''",
+            '+                ));',
+            '+                if ($preserveExistingUnlockSource && $existingSource !== ReportAccess::UNLOCK_SOURCE_NONE) {',
+            "+                    unset(\$safeMetaPatch['unlock_source'], \$safeMetaPatch['granted_via']);",
+            '+                }',
+            '+                $meta = array_merge($meta, $safeMetaPatch);',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function rewardedAdUnlockEntitlementManagerInitialChangedLines(): array
+    {
+        return [
+            '-        ?array $metaPatch = null',
+            '+        ?array $metaPatch = null,',
+            '+        bool $preserveExistingUnlockSource = false,',
+            '-                $meta = array_merge($meta, $metaPatch);',
+            '+                $safeMetaPatch = $metaPatch;',
+            '+                $existingSource = ReportAccess::normalizeThreeChannelUnlockSource((string) (',
+            "+                    \$meta['unlock_source'] ?? \$meta['granted_via'] ?? ''",
+            '+                ));',
+            '+                if ($preserveExistingUnlockSource && $existingSource !== ReportAccess::UNLOCK_SOURCE_NONE) {',
+            "+                    unset(\$safeMetaPatch['unlock_source'], \$safeMetaPatch['granted_via']);",
+            '+                }',
+            '+                $meta = array_merge($meta, $safeMetaPatch);',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function rewardedAdUnlockEntitlementManagerRepairChangedLines(): array
+    {
+        return [
+            '+        bool $ignoreInactiveExisting = false,',
+            "-        \$existing = DB::table('benefit_grants')",
+            "+        \$existingQuery = DB::table('benefit_grants')",
+            "-            ->where('attempt_id', \$attemptId)",
+            '-            ->first();',
+            "+            ->where('attempt_id', \$attemptId);",
+            '+        if ($ignoreInactiveExisting) {',
+            '+            $existingQuery',
+            "+                ->where('status', 'active')",
+            '+                ->where(function ($query) {',
+            "+                    \$query->whereNull('expires_at')",
+            "+                        ->orWhere('expires_at', '>', now());",
+            '+                });',
+            '+        }',
+            '+        $existing = $existingQuery->first();',
         ];
     }
 

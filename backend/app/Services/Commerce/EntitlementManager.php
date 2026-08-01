@@ -83,6 +83,7 @@ class EntitlementManager
         ?array $modules = null,
         ?array $metaPatch = null,
         bool $preserveExistingUnlockSource = false,
+        bool $ignoreInactiveExisting = false,
     ): array {
         $benefitCode = strtoupper(trim($benefitCode));
         $attemptId = trim($attemptId);
@@ -102,12 +103,20 @@ class EntitlementManager
         $userIdToStore = $userId !== '' ? $userId : ($anonId !== '' ? $anonId : ('attempt:'.$attemptId));
         $benefitRef = $anonId !== '' ? $anonId : ($userId !== '' ? $userId : ('attempt:'.$attemptId));
 
-        $existing = DB::table('benefit_grants')
+        $existingQuery = DB::table('benefit_grants')
             ->where('org_id', $orgId)
             ->where('benefit_code', $benefitCode)
             ->where('scope', $scope)
-            ->where('attempt_id', $attemptId)
-            ->first();
+            ->where('attempt_id', $attemptId);
+        if ($ignoreInactiveExisting) {
+            $existingQuery
+                ->where('status', 'active')
+                ->where(function ($query) {
+                    $query->whereNull('expires_at')
+                        ->orWhere('expires_at', '>', now());
+                });
+        }
+        $existing = $existingQuery->first();
 
         $catalog = $this->benefitModuleRuleCatalog();
         $grantedModules = ReportAccess::normalizeModules(

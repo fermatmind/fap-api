@@ -8,6 +8,7 @@ use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Report\ReportAccess;
 use App\Support\Logging\SensitiveDiagnosticRedactor;
+use Illuminate\Contracts\Cache\LockTimeoutException;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -17,6 +18,10 @@ final class RewardedAdUnlockService
     private const SESSION_TTL_SECONDS = 600;
 
     private const COMPLETED_SESSION_TTL_SECONDS = 300;
+
+    private const ATTEMPT_COMPLETION_LOCK_TTL_SECONDS = 15;
+
+    private const ATTEMPT_COMPLETION_LOCK_WAIT_SECONDS = 1;
 
     private const TRUST_MODE = 'client_is_ended_residual_risk_accepted';
 
@@ -144,12 +149,31 @@ final class RewardedAdUnlockService
             return $this->failure(409, 'REWARDED_AD_SESSION_CONSUMED', 'rewarded-ad session is no longer pending.');
         }
 
-        $completionKey = $this->completionKey($sessionId);
-        if (! Cache::add($completionKey, '1', now()->addSeconds(self::SESSION_TTL_SECONDS))) {
-            return $this->failure(409, 'REWARDED_AD_SESSION_IN_PROGRESS', 'rewarded-ad session completion is in progress.');
-        }
-
+        $attemptLock = Cache::lock(
+            $this->attemptCompletionLockKey($attempt, $actor['fingerprint']),
+            self::ATTEMPT_COMPLETION_LOCK_TTL_SECONDS,
+        );
+        $attemptLockAcquired = false;
         try {
+            $attemptLock->block(self::ATTEMPT_COMPLETION_LOCK_WAIT_SECONDS);
+            $attemptLockAcquired = true;
+
+            $session = $this->session($sessionId);
+            if (! $this->sessionBelongsTo($session, $attempt, $actor)) {
+                return $this->failure(404, 'REWARDED_AD_SESSION_NOT_FOUND', 'rewarded-ad session was not found.');
+            }
+            if (($session['status'] ?? null) === 'completed') {
+                return [
+                    'ok' => true,
+                    'session' => $this->presentSession($session),
+                    'idempotent' => true,
+                    'grant_id' => isset($session['grant_id']) ? (string) $session['grant_id'] : null,
+                ];
+            }
+            if (($session['status'] ?? null) !== 'pending') {
+                return $this->failure(409, 'REWARDED_AD_SESSION_CONSUMED', 'rewarded-ad session is no longer pending.');
+            }
+
             $eligibility = $this->assertEligible($attempt, $actor);
             if ($eligibility !== null) {
                 return $eligibility;
@@ -173,6 +197,7 @@ final class RewardedAdUnlockService
                     'rewarded_ad_completion_trust' => self::TRUST_MODE,
                 ],
                 true,
+                true,
             );
             if (($grant['ok'] ?? false) !== true) {
                 return $grant;
@@ -194,10 +219,11 @@ final class RewardedAdUnlockService
                 'idempotent' => (bool) ($grant['idempotent'] ?? false),
                 'grant_id' => $session['grant_id'],
             ];
+        } catch (LockTimeoutException) {
+            return $this->failure(409, 'REWARDED_AD_SESSION_IN_PROGRESS', 'rewarded-ad session completion is in progress.');
         } finally {
-            $finalSession = $this->session($sessionId);
-            if (($finalSession['status'] ?? null) !== 'completed') {
-                Cache::forget($completionKey);
+            if ($attemptLockAcquired) {
+                $attemptLock->release();
             }
         }
     }
@@ -313,9 +339,13 @@ final class RewardedAdUnlockService
         ]));
     }
 
-    private function completionKey(string $sessionId): string
+    private function attemptCompletionLockKey(Attempt $attempt, string $actorFingerprint): string
     {
-        return 'rewarded-ad-unlock:completion:'.hash('sha256', $sessionId);
+        return 'rewarded-ad-unlock:attempt-completion:'.hash('sha256', implode(':', [
+            (string) $attempt->org_id,
+            (string) $attempt->id,
+            $actorFingerprint,
+        ]));
     }
 
     /**

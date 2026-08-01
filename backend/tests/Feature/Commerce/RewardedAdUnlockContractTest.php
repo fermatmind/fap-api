@@ -6,6 +6,7 @@ namespace Tests\Feature\Commerce;
 
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Services\Commerce\RewardedAdUnlockService;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
@@ -133,6 +134,63 @@ final class RewardedAdUnlockContractTest extends TestCase
         $this->assertSame(1, DB::table('benefit_grants')->where('attempt_id', $attemptId)->where('status', 'active')->count());
     }
 
+    public function test_completion_creates_a_new_rewarded_grant_after_a_historical_grant_was_revoked(): void
+    {
+        $anonId = 'anon_rewarded_revoked';
+        $attemptId = $this->createAttempt($anonId);
+        $this->insertHistoricalRevokedGrant($attemptId, $anonId);
+        $headers = $this->headersFor($anonId);
+        $sessionId = (string) $this->withHeaders($headers)
+            ->postJson('/api/v0.3/attempts/'.$attemptId.'/rewarded-ad-sessions', ['ad_unit_id' => self::AD_UNIT_ID])
+            ->assertOk()
+            ->json('session.id');
+
+        $this->withHeaders($headers)
+            ->postJson('/api/v0.3/attempts/'.$attemptId.'/rewarded-ad-sessions/'.$sessionId.'/complete', [
+                'ad_unit_id' => self::AD_UNIT_ID,
+                'is_ended' => true,
+            ])
+            ->assertOk()
+            ->assertJsonPath('report_access.access_level', 'full')
+            ->assertJsonPath('report_access.full_report_entitlement_v1.unlock_source', 'rewarded_ad');
+
+        $this->assertSame(1, DB::table('benefit_grants')->where('attempt_id', $attemptId)->where('status', 'revoked')->count());
+        $this->assertSame(1, DB::table('benefit_grants')->where('attempt_id', $attemptId)->where('status', 'active')->count());
+        $this->assertSame(2, DB::table('benefit_grants')->where('attempt_id', $attemptId)->count());
+    }
+
+    public function test_completion_is_serialized_per_attempt_and_actor_before_any_grant_is_created(): void
+    {
+        $anonId = 'anon_rewarded_locked';
+        $attemptId = $this->createAttempt($anonId);
+        $headers = $this->headersFor($anonId);
+        $sessionId = (string) $this->withHeaders($headers)
+            ->postJson('/api/v0.3/attempts/'.$attemptId.'/rewarded-ad-sessions', ['ad_unit_id' => self::AD_UNIT_ID])
+            ->assertOk()
+            ->json('session.id');
+
+        $service = app(RewardedAdUnlockService::class);
+        $actorMethod = new \ReflectionMethod($service, 'actor');
+        $actor = $actorMethod->invoke($service, null, $anonId);
+        $keyMethod = new \ReflectionMethod($service, 'attemptCompletionLockKey');
+        $lockKey = (string) $keyMethod->invoke($service, Attempt::query()->findOrFail($attemptId), $actor['fingerprint']);
+        $lock = Cache::lock($lockKey, 15);
+        $this->assertTrue($lock->get());
+
+        try {
+            $this->withHeaders($headers)
+                ->postJson('/api/v0.3/attempts/'.$attemptId.'/rewarded-ad-sessions/'.$sessionId.'/complete', [
+                    'ad_unit_id' => self::AD_UNIT_ID,
+                    'is_ended' => true,
+                ])
+                ->assertStatus(409)
+                ->assertJsonPath('error_code', 'REWARDED_AD_SESSION_IN_PROGRESS');
+            $this->assertSame(0, DB::table('benefit_grants')->where('attempt_id', $attemptId)->count());
+        } finally {
+            $lock->release();
+        }
+    }
+
     public function test_expired_session_and_disabled_or_iq_unlocks_fail_closed(): void
     {
         $attemptId = $this->createAttempt('anon_rewarded_expired');
@@ -240,6 +298,27 @@ final class RewardedAdUnlockContractTest extends TestCase
         ]);
 
         return (string) $attempt->id;
+    }
+
+    private function insertHistoricalRevokedGrant(string $attemptId, string $anonId): void
+    {
+        DB::table('benefit_grants')->insert([
+            'id' => (string) Str::uuid(),
+            'org_id' => 0,
+            'user_id' => $anonId,
+            'benefit_code' => 'MBTI_REPORT_FULL',
+            'scope' => 'attempt',
+            'attempt_id' => $attemptId,
+            'order_no' => 'historical-refunded-order',
+            'status' => 'revoked',
+            'benefit_ref' => $anonId,
+            'benefit_type' => 'report_unlock',
+            'source_order_id' => (string) Str::uuid(),
+            'source_event_id' => null,
+            'meta_json' => json_encode(['unlock_source' => 'self_purchase']),
+            'created_at' => now()->subDay(),
+            'updated_at' => now()->subDay(),
+        ]);
     }
 
     /** @return array<string,string> */

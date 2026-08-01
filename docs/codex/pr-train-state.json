@@ -20,7 +20,7 @@
       },
       "github_required_checks": {
         "status": "repairing",
-        "evidence": "PR #3469's prior exact head passed every required check except verify-bigfive. Sixteen negative runtime-freeze assertions correctly rejected a broad routes/api.php exception. The repair allows only the exact thirteen rewarded-ad route addition lines and rejects any extra route line; GitHub must rerun required checks, exact-head review, mergeability, and latest-main reconciliation."
+        "evidence": "PR #3469's prior repaired head passed all required checks. Exact-head review then found that a revoked/expired historical grant could be treated as idempotent without restoring access, that separate concurrent rewarded sessions could race, and that EntitlementManager still had a broad classifier exemption. The current repair preserves historical inactive rows and creates a distinct active rewarded grant, serializes completion by actor+attempt cache lock, and accepts only exact review-approved EntitlementManager diffs; GitHub must rerun required checks, exact-head review, mergeability, and latest-main reconciliation."
       }
     },
     "scope_validation": {
@@ -59,9 +59,14 @@
         "at": "2026-08-01T18:13:19+08:00",
         "status": "github_review_repairing",
         "note": "verify-bigfive on the prior head passed 1648 tests but failed 16 negative runtime-freeze assertions because routes/api.php was exempted too broadly. The repair uses an exact zero-context list of the thirteen rewarded-ad route addition lines and a negative debug-route control. The full classifier file passes 401 tests / 846 assertions; rewarded-ad contracts pass 5 / 44; OpenAPI snapshot passes 2 / 6. No provider activation or production/platform action occurred. Fresh GitHub checks and exact-head review remain mandatory."
+      },
+      {
+        "at": "2026-08-01T18:33:22+08:00",
+        "status": "github_review_repairing",
+        "note": "Exact-head review found three valid service boundaries: a revoked/expired historical grant must not make completion look successful while access stays locked; separate live rewarded sessions need attempt+actor completion serialization; and the shared EntitlementManager classifier must be diff-specific. The repair creates a distinct active rewarded grant while retaining the old inactive row, returns 409 before any grant when that actor+attempt lock is held, and allows only the exact signed initial, repair, or combined EntitlementManager diff sequences. Rewarded-ad contracts pass 7 tests / 56 assertions; the targeted classifier passes 2 / 32 and its source-level negative controls pass. No provider activation or production/platform action occurred. Fresh GitHub checks and exact-head review remain mandatory."
       }
     ],
-    "updated_at": "2026-08-01T18:13:19+08:00"
+    "updated_at": "2026-08-01T18:33:22+08:00"
   },
   "API-IAP-01": {
     "id": "API-IAP-01",
