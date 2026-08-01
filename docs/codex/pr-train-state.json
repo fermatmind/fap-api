@@ -102751,7 +102751,7 @@
     "base": "main",
     "branch": "codex/en-parity-w2-big5-result-assets-01",
     "title": "EN-PARITY-W2-BIG5-RESULT-ASSETS-01: produce reviewed Big Five English result assets",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "depends_on": [
       "EN-PARITY-W2-BIG5-INVENTORY-01"
     ],
@@ -103380,8 +103380,8 @@
         "evidence": "Focused PHPUnit passed 5 tests / 42 assertions; Pint, route:list, YAML/JSON parsing, payload/aggregate SHA recomputation, deterministic dual dry-run, redacted receipt checks, diff checks, and exact scope validation passed. No write path was executed."
       },
       "github_required_checks": {
-        "status": "retry_pending",
-        "evidence": "PR #3489 first required run passed hygiene, supply-chain, content-pack validation, MBTI, and Semgrep gates, but verify-bigfive rejected the new no-write importer files only because its runtime-freeze classifier had no exact allowlist entry. The scoped classifier contract repair passed locally; a replacement required-check run is pending."
+        "status": "passed",
+        "evidence": "Exact repair head df37b5026 passed hygiene, supply-chain, content-pack validation, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, blocking Semgrep, and Semgrep OSS. Staging parity was skipped by policy; no review block remains."
       }
     },
     "failure_reason": null,
@@ -103415,8 +103415,13 @@
         "at": "2026-08-02T06:10:18+08:00",
         "status": "github_checks_repairing",
         "note": "First verify-bigfive run failed only because the existing runtime-freeze classifier had no exact RIASEC dry-run classification. Added a two-file no-write classifier allowlist plus blocked runtime control; focused importer and classifier tests passed."
+      },
+      {
+        "at": "2026-08-02T06:18:32+08:00",
+        "status": "ready_to_merge",
+        "note": "The exact repair head passed every required GitHub check. PR scope remains the registered snapshot, importer, tests, rules, and train ledger; squash merge is permitted after this closeout state update passes checks."
       }
     ],
-    "updated_at": "2026-08-02T06:10:18+08:00"
+    "updated_at": "2026-08-02T06:18:32+08:00"
   }
 }
