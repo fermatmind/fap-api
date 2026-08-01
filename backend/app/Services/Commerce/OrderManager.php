@@ -241,6 +241,20 @@ class OrderManager
         ];
     }
 
+    public function findIdempotentOrderForCheckout(
+        int $orgId,
+        string $provider,
+        ?string $idempotencyKey
+    ): ?object {
+        $provider = strtolower(trim($provider));
+        $idempotencyKey = $this->normalizeIdempotencyKey($idempotencyKey);
+        if ($provider === '' || $idempotencyKey === '') {
+            return null;
+        }
+
+        return $this->findIdempotentOrder($orgId, $provider, $idempotencyKey);
+    }
+
     public function findLookupOrder(
         int $orgId,
         ?string $userId,

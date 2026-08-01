@@ -124,7 +124,12 @@ final class AppleIapPaymentContractTest extends TestCase
 
         config()->set('payments.apple_iap.app_key', 'rotated-production-app-key');
         config()->set('payments.apple_iap.offer_id', 'offer-test-v2');
+        config()->set('payments.apple_iap.sku', 'MBTI_REPORT_FULL_V2');
         config()->set('payments.apple_iap.product_id', 'mbti-report-full-v2');
+        config()->set('payments.apple_iap.price_cents', 999);
+        config()->set('report_unlock.sku_by_scale.MBTI', 'MBTI_REPORT_FULL_V2');
+        config()->set('report_unlock.price_cents', 999);
+        DB::table('skus')->where('sku', 'MBTI_REPORT_FULL')->delete();
         $duplicate = $this->withHeaders($headers)->postJson('/api/v0.3/orders/apple_iap', $payload);
         $duplicate->assertOk();
         $this->assertSame($orderNo, (string) $duplicate->json('order_no'));

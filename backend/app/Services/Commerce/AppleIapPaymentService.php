@@ -17,7 +17,8 @@ final class AppleIapPaymentService
         ?string $anonId,
         ?string $targetAttemptId,
         string $sku,
-        int $quantity
+        int $quantity,
+        ?object $idempotentOrder = null
     ): array {
         return $this->wechatVirtual->validateOrderEligibility(
             $orgId,
@@ -26,6 +27,7 @@ final class AppleIapPaymentService
             $targetAttemptId,
             $sku,
             $quantity,
+            $idempotentOrder,
             AppleIapGateway::PROVIDER
         );
     }

@@ -30,7 +30,7 @@ final class WechatMiniVirtualPaymentService
     ) {}
 
     /**
-     * @return array{ok:bool,error_code?:string,message?:string,status?:int}
+     * @return array{ok:bool,error_code?:string,message?:string,status?:int,historical_idempotent_retry?:bool}
      */
     public function validateOrderEligibility(
         int $orgId,
@@ -39,6 +39,7 @@ final class WechatMiniVirtualPaymentService
         ?string $targetAttemptId,
         string $sku,
         int $quantity,
+        ?object $idempotentOrder = null,
         string $provider = WechatMiniVirtualGateway::PROVIDER
     ): array {
         if ($targetAttemptId === null || trim($targetAttemptId) === '') {
@@ -50,7 +51,20 @@ final class WechatMiniVirtualPaymentService
 
         $config = $this->config($provider);
         $expectedSku = strtoupper(trim((string) ($config['sku'] ?? '')));
-        if ($expectedSku === '' || strtoupper(trim($sku)) !== $expectedSku) {
+        $historicalAppleRetry = $provider === AppleIapGateway::PROVIDER
+            && $idempotentOrder !== null
+            && $this->historicalAppleRetryMatches(
+                $idempotentOrder,
+                $config,
+                $orgId,
+                $userId,
+                $anonId,
+                $targetAttemptId,
+                $sku,
+                $quantity
+            );
+        if (! $historicalAppleRetry
+            && ($expectedSku === '' || strtoupper(trim($sku)) !== $expectedSku)) {
             return $this->error('SKU_NOT_SUPPORTED', 'sku is not supported by this provider.', 422);
         }
 
@@ -95,7 +109,10 @@ final class WechatMiniVirtualPaymentService
             return $this->error('REPORT_ALREADY_FULL', 'report already has full access.', 409);
         }
 
-        return ['ok' => true];
+        return [
+            'ok' => true,
+            'historical_idempotent_retry' => $historicalAppleRetry,
+        ];
     }
 
     /**
@@ -112,7 +129,7 @@ final class WechatMiniVirtualPaymentService
         if ($loginCode === '' || strlen($loginCode) > 128) {
             return $this->error('WX_LOGIN_CODE_REQUIRED', 'wx_login_code is required.', 422);
         }
-        if (! $this->orderContractMatches($order, $config, $provider)) {
+        if (! $this->checkoutOrderContractMatches($order, $config, $provider)) {
             return $this->error('ORDER_CONTRACT_MISMATCH', 'order does not match virtual payment contract.', 409);
         }
 
@@ -471,6 +488,10 @@ final class WechatMiniVirtualPaymentService
             }
             if ($attempt !== null) {
                 $attemptMeta = $this->decodeJson($attempt->payload_meta_json ?? null);
+                if ($provider === AppleIapGateway::PROVIDER
+                    && ! $this->settlementOrderContractMatches($lockedOrder, $attempt, $attemptMeta, $provider)) {
+                    return $this->error('ORDER_CONTRACT_MISMATCH', 'order does not match its payment attempt contract.', 409);
+                }
                 $boundOpenid = $this->piiCipher->decrypt((string) ($attemptMeta['openid_enc'] ?? ''));
                 if ($boundOpenid === null || trim($boundOpenid) === '') {
                     return $this->error('WECHAT_IDENTITY_UNAVAILABLE', 'WeChat identity is unavailable.', 409);
@@ -485,6 +506,9 @@ final class WechatMiniVirtualPaymentService
                     'currency' => strtoupper(trim((string) ($lockedOrder->currency ?? ''))),
                 ], $attemptMeta);
             } else {
+                if (! $this->orderContractMatches($lockedOrder, $config, $provider)) {
+                    return $this->error('ORDER_CONTRACT_MISMATCH', 'order does not match virtual payment contract.', 409);
+                }
                 $created = $this->orders->createPaymentAttempt(
                     $orderNo,
                     $orgId,
@@ -849,6 +873,58 @@ final class WechatMiniVirtualPaymentService
             && (int) ($order->amount_cents ?? 0) === (int) $config['price_cents']
             && strtoupper(trim((string) ($order->currency ?? ''))) === 'CNY'
             && trim((string) ($order->target_attempt_id ?? '')) !== '';
+    }
+
+    /**
+     * Apple retries recover the immutable contract accepted by the existing
+     * payment attempt. Only a new attempt is compared with current checkout
+     * configuration, which may change after the original response was lost.
+     */
+    private function checkoutOrderContractMatches(object $order, array $config, string $provider): bool
+    {
+        if ($provider !== AppleIapGateway::PROVIDER) {
+            return $this->orderContractMatches($order, $config, $provider);
+        }
+
+        $attempt = $this->orders->latestPaymentAttemptForOrder(
+            (string) ($order->order_no ?? ''),
+            (int) ($order->org_id ?? 0)
+        );
+        if ($attempt === null) {
+            return $this->orderContractMatches($order, $config, $provider);
+        }
+
+        return $this->settlementOrderContractMatches(
+            $order,
+            $attempt,
+            $this->decodeJson($attempt->payload_meta_json ?? null),
+            $provider
+        );
+    }
+
+    private function historicalAppleRetryMatches(
+        object $order,
+        array $config,
+        int $orgId,
+        ?string $userId,
+        ?string $anonId,
+        ?string $targetAttemptId,
+        string $sku,
+        int $quantity
+    ): bool {
+        $ownedByUser = $userId !== null
+            && trim($userId) !== ''
+            && hash_equals(trim((string) ($order->user_id ?? '')), trim($userId));
+        $ownedByAnon = $anonId !== null
+            && trim($anonId) !== ''
+            && hash_equals(trim((string) ($order->anon_id ?? '')), trim($anonId));
+
+        return (int) ($order->org_id ?? -1) === $orgId
+            && ($ownedByUser || $ownedByAnon)
+            && trim((string) ($order->target_attempt_id ?? '')) === trim((string) $targetAttemptId)
+            && strtoupper(trim((string) ($order->sku ?? ''))) === strtoupper(trim($sku))
+            && (int) ($order->quantity ?? 0) === $quantity
+            && $this->checkoutOrderContractMatches($order, $config, AppleIapGateway::PROVIDER);
     }
 
     /**

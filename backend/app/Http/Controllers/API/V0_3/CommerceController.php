@@ -125,19 +125,26 @@ class CommerceController extends Controller
             $userId !== null ? (string) $userId : null,
             $anonId !== null ? (string) $anonId : null
         );
+        $idempotentVirtualOrder = null;
+        $historicalVirtualRetry = false;
         if (in_array($provider, ['wechat_mini_virtual', 'apple_iap'], true)) {
             $virtualPayment = $provider === 'apple_iap' ? $this->appleIap : $this->wechatMiniVirtual;
+            $idempotentVirtualOrder = $provider === 'apple_iap'
+                ? $this->orders->findIdempotentOrderForCheckout($orgId, $provider, $idempotencyKey)
+                : null;
             $eligibility = $virtualPayment->validateOrderEligibility(
                 $orgId,
                 $userId !== null ? (string) $userId : null,
                 $anonId !== null ? (string) $anonId : null,
                 $targetAttemptId,
                 (string) $payload['sku'],
-                (int) ($payload['quantity'] ?? 1)
+                (int) ($payload['quantity'] ?? 1),
+                $idempotentVirtualOrder
             );
             if (($eligibility['ok'] ?? false) !== true) {
                 return response()->json($eligibility, (int) ($eligibility['status'] ?? 422));
             }
+            $historicalVirtualRetry = ($eligibility['historical_idempotent_retry'] ?? false) === true;
         }
         // The three-channel MBTI contract is a distinct backend authority
         // (fixed 499 CNY) from the legacy web-only zh-CN 199 offer.
@@ -153,29 +160,36 @@ class CommerceController extends Controller
             return $localePolicyViolation;
         }
 
-        $result = $this->orders->createOrder(
-            $orgId,
-            $userId !== null ? (string) $userId : null,
-            $anonId !== null ? (string) $anonId : null,
-            (string) $payload['sku'],
-            (int) ($payload['quantity'] ?? 1),
-            $targetAttemptId,
-            $provider,
-            $idempotencyKey,
-            $contactEmail,
-            $this->resolveRequestId($request),
-            [],
-            [],
-            $this->resolveOrderLedgerContext(
-                $request,
-                $payload,
-                $targetAttemptId,
+        $result = $historicalVirtualRetry && is_object($idempotentVirtualOrder)
+            ? [
+                'ok' => true,
+                'order_no' => $idempotentVirtualOrder->order_no ?? null,
+                'order' => $idempotentVirtualOrder,
+                'idempotent' => true,
+            ]
+            : $this->orders->createOrder(
                 $orgId,
                 $userId !== null ? (string) $userId : null,
                 $anonId !== null ? (string) $anonId : null,
-                $provider
-            )
-        );
+                (string) $payload['sku'],
+                (int) ($payload['quantity'] ?? 1),
+                $targetAttemptId,
+                $provider,
+                $idempotencyKey,
+                $contactEmail,
+                $this->resolveRequestId($request),
+                [],
+                [],
+                $this->resolveOrderLedgerContext(
+                    $request,
+                    $payload,
+                    $targetAttemptId,
+                    $orgId,
+                    $userId !== null ? (string) $userId : null,
+                    $anonId !== null ? (string) $anonId : null,
+                    $provider
+                )
+            );
 
         if (! ($result['ok'] ?? false)) {
             $status = $this->mapErrorStatus((string) data_get($result, 'error_code', data_get($result, 'error', '')));
