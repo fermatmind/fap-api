@@ -34,6 +34,7 @@ final class AppleIapPaymentContractTest extends TestCase
         $this->configureProvider();
         config()->set('payments.apple_iap.product_id', '');
         $this->assertFalse(app(PaymentProviderRegistry::class)->isEnabled(AppleIapGateway::PROVIDER));
+        $this->assertTrue(app(PaymentProviderRegistry::class)->canProcessSettlement(AppleIapGateway::PROVIDER));
 
         config()->set('payments.apple_iap.product_id', 'mbti-report-full');
         config()->set('payments.apple_iap.environment', 1);
@@ -44,6 +45,9 @@ final class AppleIapPaymentContractTest extends TestCase
 
         config()->set('payments.providers.apple_iap.enabled', false);
         config()->set('report_unlock.providers.apple_iap.available', false);
+        config()->set('payments.apple_iap.offer_id', '');
+        config()->set('payments.apple_iap.product_id', '');
+        config()->set('payments.apple_iap.mode', '');
         $this->assertFalse(app(PaymentProviderRegistry::class)->isEnabled(AppleIapGateway::PROVIDER));
         $this->assertTrue(app(PaymentProviderRegistry::class)->canProcessSettlement(AppleIapGateway::PROVIDER));
     }
@@ -264,6 +268,9 @@ final class AppleIapPaymentContractTest extends TestCase
 
         config()->set('payments.providers.apple_iap.enabled', false);
         config()->set('report_unlock.providers.apple_iap.available', false);
+        config()->set('payments.apple_iap.offer_id', '');
+        config()->set('payments.apple_iap.product_id', '');
+        config()->set('payments.apple_iap.mode', '');
         $this->assertFalse(app(PaymentProviderRegistry::class)->isEnabled(AppleIapGateway::PROVIDER));
         $this->assertTrue(app(PaymentProviderRegistry::class)->canProcessSettlement(AppleIapGateway::PROVIDER));
         $this->withHeaders($headers)

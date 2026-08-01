@@ -123,6 +123,14 @@ final class PaymentProviderRegistry
         }
 
         $config = config('payments.apple_iap', []);
+        foreach (['offer_id', 'product_id'] as $key) {
+            if (trim((string) ($config[$key] ?? '')) === '') {
+                return false;
+            }
+        }
+        if (trim((string) ($config['mode'] ?? '')) !== 'short_series_goods') {
+            return false;
+        }
 
         $expectedSku = strtoupper(trim((string) ($config['sku'] ?? '')));
         $rolloutSku = strtoupper(trim((string) config('report_unlock.sku_by_scale.MBTI', '')));
@@ -151,14 +159,13 @@ final class PaymentProviderRegistry
             return false;
         }
 
-        foreach (['app_id', 'app_secret', 'offer_id', 'app_key', 'callback_token', 'product_id'] as $key) {
+        foreach (['app_id', 'app_secret', 'app_key', 'callback_token'] as $key) {
             if (trim((string) ($config[$key] ?? '')) === '') {
                 return false;
             }
         }
 
-        return (int) ($config['environment'] ?? -1) === 0
-            && trim((string) ($config['mode'] ?? '')) === 'short_series_goods';
+        return (int) ($config['environment'] ?? -1) === 0;
     }
 
     private function isWechatPayConfigured(): bool
