@@ -460,7 +460,7 @@ final class PaymentWebhookController extends Controller
 
     private function isProviderEnabled(string $provider): bool
     {
-        return $this->paymentProviders->canProcessSettlement($provider);
+        return $this->paymentProviders->canAcceptWebhook($provider);
     }
 
     /**

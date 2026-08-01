@@ -118,7 +118,7 @@ final class PaymentProviderRegistry
 
     public function isAppleIapConfigured(): bool
     {
-        if (! $this->canProcessAppleIapSettlement()) {
+        if (! $this->canAcceptWebhook('apple_iap')) {
             return false;
         }
 
@@ -152,6 +152,17 @@ final class PaymentProviderRegistry
             : $this->isEnabled($provider);
     }
 
+    public function canAcceptWebhook(string $provider): bool
+    {
+        $provider = strtolower(trim($provider));
+        if ($provider !== 'apple_iap') {
+            return $this->isEnabled($provider);
+        }
+
+        return $this->canProcessAppleIapSettlement()
+            && trim((string) config('payments.apple_iap.callback_token', '')) !== '';
+    }
+
     private function canProcessAppleIapSettlement(): bool
     {
         $config = config('payments.apple_iap', []);
@@ -159,7 +170,7 @@ final class PaymentProviderRegistry
             return false;
         }
 
-        foreach (['app_id', 'app_secret', 'app_key', 'callback_token'] as $key) {
+        foreach (['app_id', 'app_secret', 'app_key'] as $key) {
             if (trim((string) ($config[$key] ?? '')) === '') {
                 return false;
             }

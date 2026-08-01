@@ -43,6 +43,15 @@ final class AppleIapPaymentContractTest extends TestCase
         config()->set('payments.apple_iap.environment', 0);
         $this->assertTrue(app(PaymentProviderRegistry::class)->isEnabled(AppleIapGateway::PROVIDER));
 
+        config()->set('payments.apple_iap.callback_token', '');
+        $this->assertFalse(app(PaymentProviderRegistry::class)->isEnabled(AppleIapGateway::PROVIDER));
+        $this->assertTrue(app(PaymentProviderRegistry::class)->canProcessSettlement(AppleIapGateway::PROVIDER));
+        $this->assertFalse(app(PaymentProviderRegistry::class)->canAcceptWebhook(AppleIapGateway::PROVIDER));
+        $this->postJson('/api/v0.3/webhooks/payment/apple_iap', [])
+            ->assertNotFound()
+            ->assertJsonPath('error_code', 'PROVIDER_DISABLED');
+        config()->set('payments.apple_iap.callback_token', 'apple-callback-token');
+
         config()->set('payments.providers.apple_iap.enabled', false);
         config()->set('report_unlock.providers.apple_iap.available', false);
         config()->set('payments.apple_iap.offer_id', '');
@@ -281,6 +290,19 @@ final class AppleIapPaymentContractTest extends TestCase
             ->assertJsonPath('provider_status', 2)
             ->assertJsonPath('grant_state', 'granted');
 
+        config()->set('payments.apple_iap.callback_token', '');
+        $this->assertTrue(app(PaymentProviderRegistry::class)->canProcessSettlement(AppleIapGateway::PROVIDER));
+        $this->assertFalse(app(PaymentProviderRegistry::class)->canAcceptWebhook(AppleIapGateway::PROVIDER));
+        $this->withHeaders($headers)
+            ->postJson('/api/v0.3/orders/'.$orderNo.'/apple-iap/reconcile')
+            ->assertOk()
+            ->assertJsonPath('provider_status', 8)
+            ->assertJsonPath('grant_state', 'revoked');
+        $this->assertSame(3, DB::table('payment_events')->where('provider', AppleIapGateway::PROVIDER)->count());
+        $this->assertSame(1, DB::table('benefit_grants')->where('order_no', $orderNo)->where('status', 'revoked')->count());
+        $this->assertSame(100, DB::table('orders')->where('order_no', $orderNo)->value('refund_amount_cents'));
+        config()->set('payments.apple_iap.callback_token', 'apple-callback-token');
+
         $refundPayload = [
             'Event' => 'xpay_refund_notify',
             'OpenId' => 'openid-apple-contract',
@@ -293,13 +315,6 @@ final class AppleIapPaymentContractTest extends TestCase
         $this->assertTrue((bool) ($refunded['ok'] ?? false));
         $this->assertSame(3, DB::table('payment_events')->where('provider', AppleIapGateway::PROVIDER)->count());
         $this->assertSame(1, DB::table('benefit_grants')->where('order_no', $orderNo)->where('status', 'revoked')->count());
-
-        $this->withHeaders($headers)
-            ->postJson('/api/v0.3/orders/'.$orderNo.'/apple-iap/reconcile')
-            ->assertOk()
-            ->assertJsonPath('provider_status', 8);
-        $this->assertSame(3, DB::table('payment_events')->where('provider', AppleIapGateway::PROVIDER)->count());
-        $this->assertSame(100, DB::table('orders')->where('order_no', $orderNo)->value('refund_amount_cents'));
 
         $this->withHeaders($headers)
             ->postJson('/api/v0.3/orders/'.$orderNo.'/apple-iap/reconcile')
