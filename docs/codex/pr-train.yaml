@@ -48159,6 +48159,7 @@ prs:
       - backend/app/Services/Cms/MbtiComparisonEnglishPublishService.php
       - backend/scripts/mbti_comparison_english_publish_live_qa.php
       - backend/tests/Feature/Cms/MbtiComparisonEnglishPublishServiceTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/content_assets/en-content-parity/CONTROL-approvals/W1-MBTI-COMPARISONS/publish-live-approval-2026-08-01.json
       - .github/workflows/mbti-comparison-english-publish-live-qa.yml
       - docs/codex/pr-train.yaml
@@ -48170,7 +48171,8 @@ prs:
       - Run a migration, queue/cache restart, generic CMS endpoint, staging/manual/production deployment, or private attempt/report/order/payment read.
     validation:
       - cd backend && php artisan test tests/Feature/Cms/MbtiComparisonEnglishPublishServiceTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test app/Services/Cms/MbtiComparisonEnglishPublishService.php scripts/mbti_comparison_english_publish_live_qa.php tests/Feature/Cms/MbtiComparisonEnglishPublishServiceTest.php
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=controlled_w1_english_comparison_publisher --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Cms/MbtiComparisonEnglishPublishService.php scripts/mbti_comparison_english_publish_live_qa.php tests/Feature/Cms/MbtiComparisonEnglishPublishServiceTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - cd backend && php -l app/Services/Cms/MbtiComparisonEnglishPublishService.php && php -l scripts/mbti_comparison_english_publish_live_qa.php
       - sha256sum backend/content_assets/en-content-parity/CONTROL-approvals/W1-MBTI-COMPARISONS/publish-live-approval-2026-08-01.json
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"

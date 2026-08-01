@@ -103238,7 +103238,7 @@
         "evidence": "human_operator approved only the exact seven-row comparison publish gate, package SHA deecc8175fb43ba3730d6513b496a0ab6834459108e3b24e25550bbf40e001a2, target receipt SHA b44e50a252f48d85ca93f572f4bf5ee7f334d6155a19713cfd3c8185359edae8, and deployed runtime revision 660280d00a57e58bd8bc76608e19de2492c03f53."
       },
       "local_validation": {"status": "passed", "evidence": "Focused SQLite publish service test passed 4 tests / 92 assertions; scoped Pint, PHP syntax, approval SHA, YAML/JSON parsing, diff check, and exact path scope validation passed."},
-      "github_required_checks": {"status": "pending", "evidence": "PR #3478 is open at implementation head 3530ee24d4a4797ea9e52e95b49497bca4d4d73f; required checks are pending."}
+      "github_required_checks": {"status": "repairing", "evidence": "PR #3478 failed only verify-bigfive because the new workflow-only publisher was not registered in the MBTI runtime-freeze classifier. The scoped classifier contract repair passed focused validation; fresh required checks are pending."}
     },
     "failure_reason": null,
     "merged_at": null,
@@ -103267,6 +103267,11 @@
         "at": "2026-08-01T20:48:00+08:00",
         "status": "github_checks_pending",
         "note": "Opened PR #3478 from implementation head 3530ee24d4a4797ea9e52e95b49497bca4d4d73f; required checks, review, squash merge, controlled production publish workflow, cleanup, and post-merge revalidation remain pending."
+      },
+      {
+        "at": "2026-08-01T21:00:00+08:00",
+        "status": "github_checks_repairing",
+        "note": "Inspected failing verify-bigfive job before changing code. The only failure was the current PR's new controlled publisher missing from the existing runtime-freeze classifier allowlist; added one narrow classifier contract and will rerun required checks."
       }
     ],
     "updated_at": "2026-08-01T20:40:00+08:00"
