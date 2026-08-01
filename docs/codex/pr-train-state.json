@@ -102908,9 +102908,9 @@
       "EN-PARITY-W1-MBTI-RESULT-IMPORTER-01",
       "EN-PARITY-W1-MBTI-COMPARISON-DRAFT-IMPORT-01"
     ],
-    "status": "local_verified",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "4b24fbf3ea9a2eb189934b896436576528ecf6bb",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3470",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -102967,8 +102967,13 @@
         "at": "2026-08-01T11:16:38Z",
         "status": "local_verified",
         "note": "Implemented exact-approval-bound, local/testing-only atomic inactive authority materialization. The exact dry-run remains byte-identical at SHA 7008c5d530a9b37a48c2a3200ec88fa56731d88277dfa79473f812ad4cab7aee. A controlled create committed the 21 candidates and retained all 46 ordered identities; exact replay performs zero writes; staging fails before any authority attempt. Focused package/importer/authority tests pass 23 tests / 1812 assertions, scoped Pint and parsers pass, the approval and authority rehash exactly, and the exact 11-path scope allowlist passes."
+      },
+      {
+        "at": "2026-08-01T11:18:02Z",
+        "status": "github_checks_pending",
+        "note": "Pushed implementation head 4b24fbf3ea9a2eb189934b896436576528ecf6bb and opened PR #3470. Required checks, exact-head review, mergeability, squash merge, branch cleanup, and post-merge revalidation remain pending; no staging or deploy workflow will be awaited or triggered."
       }
     ],
-    "updated_at": "2026-08-01T11:16:38Z"
+    "updated_at": "2026-08-01T11:18:02Z"
   }
 }
