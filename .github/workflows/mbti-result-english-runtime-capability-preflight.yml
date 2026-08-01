@@ -1,0 +1,167 @@
+name: MBTI W1 English Result Runtime Capability Preflight
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_control_plane_sha:
+        description: Exact latest main SHA containing this read-only preflight control
+        required: true
+        type: string
+      expected_active_revision:
+        description: Exact active production application SHA to inspect without mutation
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mbti-w1-result-runtime-capability-preflight
+  cancel-in-progress: false
+
+jobs:
+  read-only-runtime-capability-preflight:
+    name: Read exact English result authority and runtime capability without mutation
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: production
+    steps:
+      - name: Checkout exact control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 1
+
+      - name: Verify immutable control inputs
+        shell: bash
+        env:
+          EXPECTED_CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+          EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = refs/heads/main
+          [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          test "$EXPECTED_ACTIVE_REVISION" = 660280d00a57e58bd8bc76608e19de2492c03f53
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          printf '%s  %s\n' \
+            7d20ee867a1a2eb0f69d0d3a4441615690d836f3e8f3a47222b6dfb43f6c5a3b backend/content_assets/en-content-parity/CONTROL-approvals/W1-MBTI-RESULT-CONTENT/runtime-capability-preflight-approval-2026-08-02.json \
+            | sha256sum -c -
+          jq -e '
+            .approval_owner == "human_operator" and
+            .subscope_id == "W1-MBTI-RESULT-CONTENT" and
+            .package_sha256 == "9325013b870fd2496efc0882656240f91ce28ff4faaf1da42fb3dde3577b0ed3" and
+            .target_authority_receipt_sha256 == "f093096ff881bfabc633407d51ee01061dc17b9dbc43da41dc03ae7881b13756" and
+            .target_manifest_sha256 == "649a61633a05728618477b97036718c582673c96a82c24d142287991b3d2d0e1" and
+            .active_runtime_revision == "660280d00a57e58bd8bc76608e19de2492c03f53" and
+            .gate == "runtime_capability_preflight" and .verdict == "APPROVED" and
+            .permissions.target_authority_readback_authorized == true and
+            .permissions.runtime_projection_readback_authorized == true and
+            .permissions.publish_authorized == false and .permissions.activation_authorized == false and
+            .permissions.active_pointer_authorized == false and .permissions.indexability_authorized == false and
+            .permissions.sitemap_authorized == false and .permissions.hreflang_authorized == false and
+            .permissions.llms_authorized == false and .permissions.json_ld_authorized == false and
+            .permissions.search_submission_authorized == false and .permissions.deployment_authorized == false and
+            .permissions.private_result_read_authorized == false and .permissions.attempt_report_order_payment_read_authorized == false
+          ' backend/content_assets/en-content-parity/CONTROL-approvals/W1-MBTI-RESULT-CONTENT/runtime-capability-preflight-approval-2026-08-02.json >/dev/null
+
+      - name: Set up pinned production SSH identity
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          install -d -m 0700 ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 0600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Execute one read-only runtime capability preflight
+        shell: bash
+        env:
+          DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+          DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+          CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+          ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+        run: |
+          set -euo pipefail
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ && "$DEPLOY_PATH" != *".."* ]]
+          receipt_path="$RUNNER_TEMP/mbti-result-english-runtime-capability-preflight.json"
+          emit_failure_receipt() {
+            jq -n --arg stage "$1" --arg error_code "$2" --arg control_plane_sha "$CONTROL_PLANE_SHA" --arg active_revision "$ACTIVE_REVISION" '{artifact:"EN-PARITY-W1-MBTI-RESULT-RUNTIME-CAPABILITY-PREFLIGHT-RECEIPT",schema_version:"fermatmind.en_parity.result_runtime_capability_preflight_receipt.v1",status:"BLOCKED",ok:false,mode:"controlled_read_only_runtime_capability_preflight",read_only:true,stage:$stage,error_code:$error_code,control_plane_sha:$control_plane_sha,active_revision:$active_revision,cms_write_attempted:false,publish_attempted:false,activation_attempted:false,active_pointer_changed:false,indexability_attempted:false,sitemap_attempted:false,llms_attempted:false,search_submission_attempted:false,deploy_attempted:false,private_authority_read_attempted:false,attempt_report_order_payment_read_attempted:false}' > "$receipt_path"
+          }
+          bundle="$RUNNER_TEMP/mbti-result-english-runtime-capability-preflight-input.tgz"
+          tar -C "$GITHUB_WORKSPACE" -czf "$bundle" \
+            backend/app/Services/Cms/MbtiResultEnglishRuntimeCapabilityPreflightService.php \
+            backend/scripts/mbti_result_english_runtime_capability_preflight.php \
+            backend/content_assets/en-content-parity/CONTROL-approvals/W1-MBTI-RESULT-CONTENT/runtime-capability-preflight-approval-2026-08-02.json
+          run_dir="/tmp/mbti-w1-result-runtime-capability-${GITHUB_RUN_ID}"
+          if ! scp -P "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes "$bundle" "$DEPLOY_USER@$DEPLOY_HOST:$run_dir.tgz"; then
+            emit_failure_receipt source_bundle_transfer_failed source_bundle_transfer_failed
+            exit 1
+          fi
+          set +e
+          ssh -p "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes "$DEPLOY_USER@$DEPLOY_HOST" \
+            "DEPLOY_PATH='$DEPLOY_PATH' RUN_DIR='$run_dir' CONTROL_PLANE_SHA='$CONTROL_PLANE_SHA' ACTIVE_REVISION='$ACTIVE_REVISION' bash -s" > "$receipt_path" 2>"$RUNNER_TEMP/mbti-result-runtime-preflight.stderr" <<'REMOTE'
+          set -euo pipefail
+          current="$(readlink -f "$DEPLOY_PATH/current")"
+          test -d "$current/backend"
+          test -f "$current/REVISION"
+          test "$(tr -d '\r\n' < "$current/REVISION")" = "$ACTIVE_REVISION"
+          test ! -e "$DEPLOY_PATH/.dep/deploy.lock"
+          trap 'rm -rf "$RUN_DIR" "$RUN_DIR.tgz"' EXIT
+          mkdir -p "$RUN_DIR/input"
+          tar -xzf "$RUN_DIR.tgz" -C "$RUN_DIR/input"
+          php -d display_errors=0 -d log_errors=0 "$RUN_DIR/input/backend/scripts/mbti_result_english_runtime_capability_preflight.php" \
+            --backend-root="$current/backend" \
+            --source-backend-root="$RUN_DIR/input/backend" \
+            --control-plane-sha="$CONTROL_PLANE_SHA" \
+            --active-revision="$ACTIVE_REVISION"
+          REMOTE
+          remote_status=$?
+          set -e
+          if [ "$remote_status" -ne 0 ]; then
+            emit_failure_receipt remote_runtime_preflight_failed remote_runtime_preflight_failed
+            exit "$remote_status"
+          fi
+          if ! test -s "$receipt_path" || ! jq -e '
+            .status == "PASS" and .read_only == true and
+            .package.package_sha256 == "9325013b870fd2496efc0882656240f91ce28ff4faaf1da42fb3dde3577b0ed3" and
+            .package.row_count == 46 and .package.authority_content_row_count == 21 and
+            .target_authority.active_pointer_present == false and
+            .runtime.physical_pack_resolved.resolved == true and
+            .runtime.inactive_authority_resolved == true and
+            .runtime.real_projection_substitution_verified == true and
+            .runtime.unresolved_token_rejection_verified == true and
+            .cms_write_attempted == false and .activation_attempted == false and
+            .active_pointer_changed == false and .deploy_attempted == false and
+            .private_authority_read_attempted == false and .attempt_report_order_payment_read_attempted == false
+          ' "$receipt_path" >/dev/null; then
+            emit_failure_receipt runner_receipt_contract_failed runner_receipt_contract_failed
+            exit 1
+          fi
+
+      - name: Publish immutable read-only preflight receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: mbti-w1-result-english-runtime-capability-preflight-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/mbti-result-english-runtime-capability-preflight.json
+          if-no-files-found: warn
+          retention-days: 90
