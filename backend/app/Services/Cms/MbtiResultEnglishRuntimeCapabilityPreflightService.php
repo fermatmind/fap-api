@@ -35,7 +35,6 @@ final class MbtiResultEnglishRuntimeCapabilityPreflightService
     public function __construct(
         private readonly ContentPackResolver $contentPackResolver,
         private readonly ContentPackV2Resolver $contentPackV2Resolver,
-        private readonly MbtiResultPersonalizationService $personalizationService,
     ) {}
 
     public static function defaultApprovalPath(): string
@@ -238,9 +237,38 @@ final class MbtiResultEnglishRuntimeCapabilityPreflightService
             'locale' => 'en',
             'sections' => ['traits.close_call_axes' => ['blocks' => [], 'selected_blocks' => []]],
         ];
-        $rendered = $this->personalizationService->applyToProjection($projection, $personalization);
+        $rendered = $this->runtimeProjectionRenderer()->applyToProjection($projection, $personalization);
         if ($this->containsUnresolvedToken($rendered)) {
             $this->fail('runtime_result_token_unresolved');
+        }
+    }
+
+    private function runtimeProjectionRenderer(): MbtiResultPersonalizationService
+    {
+        try {
+            $reflection = new \ReflectionClass(MbtiResultPersonalizationService::class);
+            $expectedPath = realpath(base_path('app/Services/Mbti/MbtiResultPersonalizationService.php'));
+            $rendererPath = $reflection->getFileName();
+            $method = $reflection->getMethod('applyToProjection');
+
+            if (! is_string($expectedPath)
+                || ! is_string($rendererPath)
+                || realpath($rendererPath) !== $expectedPath
+                || ! $method->isPublic()
+                || $method->isStatic()) {
+                $this->fail('runtime_projection_renderer_unavailable');
+            }
+
+            $renderer = $reflection->newInstanceWithoutConstructor();
+            if (! $renderer instanceof MbtiResultPersonalizationService) {
+                $this->fail('runtime_projection_renderer_unavailable');
+            }
+
+            return $renderer;
+        } catch (DomainException $exception) {
+            throw $exception;
+        } catch (\Throwable) {
+            $this->fail('runtime_projection_renderer_unavailable');
         }
     }
 
