@@ -174,6 +174,13 @@ Route::prefix('v0.3')->middleware([
     }
     $payProviders = array_values(array_unique($payProviders));
 
+    // 微信消息推送首次保存 URL 时会发起 GET 签名校验。
+    Route::get(
+        '/webhooks/payment/wechat_mini_virtual',
+        [PaymentWebhookController::class, 'verifyWechatMiniVirtualEndpoint']
+    )->middleware('throttle:api_webhook')
+        ->name('api.v0_3.webhooks.payment.wechat_mini_virtual.verify');
+
     // ✅ 关键修复：payment webhook 必须是“公共入口”，不能依赖 ResolveOrgContext / token
     Route::post(
         '/webhooks/payment/{provider}',

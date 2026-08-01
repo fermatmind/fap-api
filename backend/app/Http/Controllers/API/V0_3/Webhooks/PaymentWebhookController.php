@@ -8,6 +8,7 @@ use App\Services\Commerce\PaymentGateway\BillingGateway;
 use App\Services\Commerce\PaymentGateway\LemonSqueezyGateway;
 use App\Services\Commerce\PaymentGateway\PaymentGatewayInterface;
 use App\Services\Commerce\PaymentGateway\StripeGateway;
+use App\Services\Commerce\PaymentGateway\WechatMiniVirtualGateway;
 use App\Services\Commerce\PaymentWebhookProcessor;
 use App\Services\Commerce\WechatMiniVirtualPaymentService;
 use App\Services\Payments\PaymentProviderRegistry;
@@ -74,6 +75,20 @@ final class PaymentWebhookController extends Controller
         }
 
         return $this->jsonResult($result);
+    }
+
+    public function verifyWechatMiniVirtualEndpoint(Request $request): Response
+    {
+        $echo = trim((string) $request->query('echostr', ''));
+        if ($echo === '' || strlen($echo) > 512 || preg_match('/[\x00-\x1F\x7F]/', $echo) === 1) {
+            return $this->errorResponse(400, 'INVALID_ECHOSTR', 'invalid echostr');
+        }
+
+        if (! (new WechatMiniVirtualGateway)->verifySignature($request)) {
+            return $this->errorResponse(400, 'INVALID_SIGNATURE', 'invalid signature');
+        }
+
+        return response($echo, 200, ['Content-Type' => 'text/plain; charset=UTF-8']);
     }
 
     private function handleWechatMiniVirtual(Request $request): Response
