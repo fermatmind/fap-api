@@ -10,6 +10,7 @@ use App\Services\Report\ReportAccess;
 use App\Support\Logging\SensitiveDiagnosticRedactor;
 use Illuminate\Contracts\Cache\LockTimeoutException;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -177,6 +178,26 @@ final class RewardedAdUnlockService
             }
             if (($session['status'] ?? null) !== 'pending') {
                 return $this->failure(409, 'REWARDED_AD_SESSION_CONSUMED', 'rewarded-ad session is no longer pending.');
+            }
+
+            $recoveredGrant = $this->rewardedGrantForSession($attempt, $actor, $sessionId);
+            if ($recoveredGrant !== null) {
+                $session['status'] = 'completed';
+                $session['completed_at'] = now()->toIso8601String();
+                $session['grant_id'] = (string) $recoveredGrant->id;
+                Cache::put($this->sessionKey($sessionId), $session, now()->addSeconds(self::COMPLETED_SESSION_TTL_SECONDS));
+                Cache::forget($this->activeKey($attempt, $actor['fingerprint']));
+                $this->audit('recovered', $attempt, $actor, $session, [
+                    'idempotent' => true,
+                    'grant_fingerprint' => SensitiveDiagnosticRedactor::fingerprint((string) $recoveredGrant->id),
+                ]);
+
+                return [
+                    'ok' => true,
+                    'session' => $this->presentSession($session),
+                    'idempotent' => true,
+                    'grant_id' => $session['grant_id'],
+                ];
             }
 
             $eligibility = $this->assertEligible($attempt, $actor);
@@ -351,6 +372,39 @@ final class RewardedAdUnlockService
             (string) $attempt->org_id,
             (string) $attempt->id,
         ]));
+    }
+
+    /** @param array{user_id:?string,anon_id:?string,fingerprint:string} $actor */
+    private function rewardedGrantForSession(Attempt $attempt, array $actor, string $sessionId): ?object
+    {
+        $sessionFingerprint = SensitiveDiagnosticRedactor::fingerprint($sessionId);
+        $query = DB::table('benefit_grants')
+            ->where('org_id', (int) $attempt->org_id)
+            ->where('attempt_id', (string) $attempt->id)
+            ->where('benefit_code', 'MBTI_REPORT_FULL')
+            ->where('status', 'active')
+            ->where(function ($query): void {
+                $query->whereNull('expires_at')->orWhere('expires_at', '>', now());
+            });
+        $query->where(function ($query) use ($actor): void {
+            if ($actor['user_id'] !== null) {
+                $query->where('user_id', $actor['user_id']);
+                if ($actor['anon_id'] !== null) {
+                    $query->orWhere('benefit_ref', $actor['anon_id']);
+                }
+
+                return;
+            }
+
+            $query->where('benefit_ref', $actor['anon_id']);
+        });
+
+        return $query->orderByDesc('created_at')->get()->first(function (object $grant) use ($sessionFingerprint): bool {
+            $meta = json_decode((string) ($grant->meta_json ?? ''), true);
+
+            return is_array($meta)
+                && hash_equals((string) ($meta['rewarded_ad_session_fingerprint'] ?? ''), $sessionFingerprint);
+        });
     }
 
     /**
