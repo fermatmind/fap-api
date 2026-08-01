@@ -167,6 +167,32 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
         $this->assertFalse($gateway->verifySignature($invalid));
     }
 
+    public function test_message_push_endpoint_echoes_challenge_only_for_a_valid_signature(): void
+    {
+        config()->set('payments.wechat_mini_virtual.callback_token', 'callback-token');
+
+        $timestamp = '1700000000';
+        $nonce = 'nonce-endpoint-verification';
+        $parts = ['callback-token', $timestamp, $nonce];
+        sort($parts, SORT_STRING);
+        $query = [
+            'timestamp' => $timestamp,
+            'nonce' => $nonce,
+            'signature' => sha1(implode('', $parts)),
+            'echostr' => 'wechat-endpoint-ready',
+        ];
+
+        $this->get('/api/v0.3/webhooks/payment/wechat_mini_virtual?'.http_build_query($query))
+            ->assertOk()
+            ->assertHeader('Content-Type', 'text/plain; charset=UTF-8')
+            ->assertSeeText('wechat-endpoint-ready');
+
+        $query['signature'] = str_repeat('0', 40);
+        $this->get('/api/v0.3/webhooks/payment/wechat_mini_virtual?'.http_build_query($query))
+            ->assertStatus(400)
+            ->assertJsonPath('error_code', 'INVALID_SIGNATURE');
+    }
+
     public function test_http_order_callback_idempotency_and_refund_reconciliation_follow_existing_ledger(): void
     {
         $this->configureProvider();
