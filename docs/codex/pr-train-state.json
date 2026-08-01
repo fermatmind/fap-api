@@ -103293,8 +103293,8 @@
     "branch": "codex/content-promotion-automation-backend-01",
     "title": "CONTENT-PROMOTION-AUTOMATION-BACKEND-01: automate exact-package CMS import and publication",
     "depends_on": [],
-    "status": "local_verified",
-    "commit_sha": null,
+    "status": "github_checks_pending",
+    "commit_sha": "90bd9cdef9f45e72c71c07d38373eb3aaa5d784f",
     "pr_url": null,
     "checks": {
       "local_validation": {
@@ -103303,7 +103303,7 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": null
+        "evidence": "Implementation commit 90bd9cdef9f45e72c71c07d38373eb3aaa5d784f is locally verified and ready for push and required-check execution."
       }
     },
     "failure_reason": null,
@@ -103327,8 +103327,13 @@
         "at": "2026-08-02T04:56:04+08:00",
         "status": "local_verified",
         "note": "Focused executor, receipt-chain, idempotency, rollback, workflow, forged-authorization rejection, legacy compatibility, and runtime-freeze checks passed. Unsupported legacy adapters remain registered fail closed; no CMS write, publication, deployment, migration, SEO, sitemap, llms, or Search Channel action occurred."
+      },
+      {
+        "at": "2026-08-02T04:57:29+08:00",
+        "status": "github_checks_pending",
+        "note": "Recorded locally verified implementation commit 90bd9cdef9f45e72c71c07d38373eb3aaa5d784f before push. Required GitHub checks and review remain mandatory."
       }
     ],
-    "updated_at": "2026-08-02T04:56:04+08:00"
+    "updated_at": "2026-08-02T04:57:29+08:00"
   }
 }
