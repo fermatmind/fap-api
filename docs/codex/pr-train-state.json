@@ -23,11 +23,11 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "Exact reviewed implementation head 33c97510da42d4cddacfb3b5fb58edf13441fd7b passes the focused Apple IAP, ordinary WeChat virtual-payment, and OpenAPI suites at 10 tests / 156 assertions. Scoped Pint and git diff checks pass. The earlier complete backend/scripts/ci_verify_mbti.sh run also exits 0 across Big Five, Enneagram, Personality authority, migration safety, authentication, OpenAPI, order/IDOR security, dependency security, webhook, attempt, and downstream gates. No global PsySH trust, secret, production configuration, platform mutation, real order, or payment was created."
+        "evidence": "Exact implementation head 61031fc1d5dd060472be241212544e5dfdcdbaf1 passes the focused Apple IAP, ordinary WeChat virtual-payment, and OpenAPI suites at 10 tests / 165 assertions. The regression proves callback acceptance stays fail-closed without its token while authenticated query_order reconciliation remains available for historical refunds and revokes the grant. Scoped Pint and git diff checks pass. The earlier complete backend/scripts/ci_verify_mbti.sh run also exits 0 across Big Five, Enneagram, Personality authority, migration safety, authentication, OpenAPI, order/IDOR security, dependency security, webhook, attempt, and downstream gates. No global PsySH trust, secret, production configuration, platform mutation, real order, or payment was created."
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "Exact reviewed implementation head 33c97510da42d4cddacfb3b5fb58edf13441fd7b passed hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and SARIF upload. All prior actionable review threads were resolved. The ledger-only repair head must rerun required checks and exact-head review before merge."
+        "evidence": "Ledger-repair head 3706e4250e4cfc9e33090fb27a3a8d9e07056235 passed hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and SARIF upload. Exact-head review then identified callback-only credentials were still coupled to query-based settlement. Runtime head 61031fc1d5dd060472be241212544e5dfdcdbaf1 fixes that issue; the final ledger head must rerun required checks and exact-head review before merge."
       },
       "merge_reconciliation": {
         "status": "pending",
@@ -75,9 +75,14 @@
         "at": "2026-08-01T15:37:20+08:00",
         "status": "github_review_repairing",
         "note": "Exact reviewed implementation head 33c97510da42d4cddacfb3b5fb58edf13441fd7b passed all nine applicable GitHub checks after the focused 10-test / 156-assertion local validation. Final automated review correctly identified that commit_sha still named the obsolete pre-review implementation head. Set commit_sha to null until GitHub supplies the squash merge commit, and record the exact green implementation head in validation evidence without creating a false ledger self-reference. The ledger-only repair head must pass required checks and exact-head review; no provider activation or production/platform action occurred."
+      },
+      {
+        "at": "2026-08-01T15:49:15+08:00",
+        "status": "github_review_repairing",
+        "note": "Exact-head review of green ledger-repair head 3706e4250e4cfc9e33090fb27a3a8d9e07056235 found that callback_token was incorrectly required for authenticated query_order settlement. Runtime head 61031fc1d5dd060472be241212544e5dfdcdbaf1 separates callback acceptance from query settlement: new checkout and external callbacks remain fail-closed without the token, while historical reconciliation can process a verified refund and revoke the grant. Focused Apple, ordinary WeChat, and OpenAPI validation passes 10 tests / 165 assertions; scoped Pint and diff checks pass. Required GitHub checks and exact-head review remain mandatory; no provider activation or production/platform action occurred."
       }
     ],
-    "updated_at": "2026-08-01T15:37:20+08:00"
+    "updated_at": "2026-08-01T15:49:15+08:00"
   },
   "API-GIFT-01": {
     "id": "API-GIFT-01",
