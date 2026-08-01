@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Services\Cms;
 
-use App\Models\CmsTranslationRevision;
 use App\Services\ReviewGovernance\ReviewAttestationValidationException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;

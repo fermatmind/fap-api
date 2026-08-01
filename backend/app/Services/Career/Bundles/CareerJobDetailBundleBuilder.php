@@ -16,9 +16,9 @@ use App\Models\OccupationCrosswalk;
 use App\Models\RecommendationSnapshot;
 use App\Models\Scopes\TenantScope;
 use App\Services\Analytics\CareerConversionClosureBuilder;
+use App\Services\Career\Review\CareerSearchEntryTierResolver;
 use App\Services\Career\Scoring\CareerWhiteBoxScorePayloadBuilder;
 use App\Services\PublicSurface\SeoSurfaceContractService;
-use App\Services\Career\Review\CareerSearchEntryTierResolver;
 use App\Services\ReviewGovernance\PublicReviewContract;
 use Illuminate\Support\Arr;
 

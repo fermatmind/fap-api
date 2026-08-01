@@ -10,22 +10,37 @@ use Illuminate\Support\Carbon;
 final class BigFiveResultPageV2AuditFields
 {
     public const STATUS_ATTACHED = 'attached';
+
     public const STATUS_FALLBACK = 'fallback';
+
     public const STATUS_INVALID = 'invalid';
+
     public const STATUS_DISABLED = 'disabled';
+
     public const STATUS_NOT_EVALUATED = 'not_evaluated';
 
     public const REASON_V2_ATTACHED = 'v2_attached';
+
     public const REASON_NOT_BIG5 = 'not_big5';
+
     public const REASON_PRODUCTION_RUNTIME_DISABLED = 'production_runtime_disabled';
+
     public const REASON_PRODUCTION_ROLLOUT_DENIED = 'production_rollout_denied';
+
     public const REASON_LOCKED_OR_FREE_PREVIEW = 'locked_or_free_preview';
+
     public const REASON_MISSING_SCORE_RESULT = 'missing_score_result';
+
     public const REASON_ROUTE_INPUT_INVALID = 'route_input_invalid';
+
     public const REASON_ROUTE_LOOKUP_FAILED = 'route_lookup_failed';
+
     public const REASON_COMPOSER_FAILED = 'composer_failed';
+
     public const REASON_PAYLOAD_VALIDATION_FAILED = 'payload_validation_failed';
+
     public const REASON_EXCEPTION = 'exception';
+
     public const REASON_LEGACY_ENGINE_ONLY = 'legacy_engine_only';
 
     /**

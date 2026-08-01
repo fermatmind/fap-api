@@ -34,9 +34,7 @@ final class Mbti64CmsRevisionDraftWriter
         'status',
     ];
 
-    public function __construct(private readonly Mbti64BackendImportContractPlanner $planner)
-    {
-    }
+    public function __construct(private readonly Mbti64BackendImportContractPlanner $planner) {}
 
     /**
      * @param  array<string,mixed>  $package

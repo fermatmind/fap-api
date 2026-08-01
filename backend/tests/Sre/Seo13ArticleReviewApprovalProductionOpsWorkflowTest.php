@@ -65,8 +65,8 @@ final class Seo13ArticleReviewApprovalProductionOpsWorkflowTest extends TestCase
         $this->assertStringContainsString("data_get(\$import->exactness_json, 'canonical_url')", $runner);
         $this->assertStringContainsString('$canonicalPath(', $runner);
         $this->assertStringContainsString("'https://fermatmind.com/zh/articles/'.(string) \$article->slug", $runner);
-        $this->assertStringNotContainsString("\$article->seoMeta?->robots", $runner);
-        $this->assertStringNotContainsString("\$article->seoMeta?->is_indexable", $runner);
+        $this->assertStringNotContainsString('$article->seoMeta?->robots', $runner);
+        $this->assertStringNotContainsString('$article->seoMeta?->is_indexable', $runner);
         foreach ([
             'cohort_runtime_contract',
             'reviewer_identity',

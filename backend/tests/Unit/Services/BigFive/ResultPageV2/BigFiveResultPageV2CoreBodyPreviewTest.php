@@ -16003,6 +16003,30 @@ DIFF;
                 '-use Illuminate\\Database\\Eloquent\\Relations\\BelongsTo;',
                 '+use Illuminate\\Database\\Eloquent\\Relations\\BelongsTo;',
             ],
+            'backend/app/Console/Kernel.php' => [
+                '-use App\\Console\\Commands\\SeoAgentCompileModeCPackageCommand;',
+                '-// ✅ 显式注册（更稳，避免自动扫描失效/缓存导致找不到）',
+                '+// ✅ 显式注册（更稳，避免自动扫描失效/缓存导致找不到）',
+                '+use App\\Console\\Commands\\PersonalityEnneagramCmsPromote;',
+                '+use App\\Console\\Commands\\PersonalityEnneagramCmsPublishGate;',
+                '-use App\\Console\\Commands\\PersonalityMbti64GscQueryReadonlyExport;',
+                '-use App\\Console\\Commands\\PersonalityTdkNextBatchApprovalDraftGateCommand;',
+                '-use App\\Console\\Commands\\PersonalityTdkRuntimePromotionSearchGateReadinessCommand;',
+                '+use App\\Console\\Commands\\PersonalityMbti64GscQueryReadonlyExport;',
+                '-use App\\Console\\Commands\\PersonalityEnneagramCmsPromote;',
+                '-use App\\Console\\Commands\\PersonalityEnneagramCmsPublishGate;',
+                '+use App\\Console\\Commands\\PersonalityTdkNextBatchApprovalDraftGateCommand;',
+                '+use App\\Console\\Commands\\PersonalityTdkRuntimePromotionSearchGateReadinessCommand;',
+                '+use App\\Console\\Commands\\SeoAgentCompileModeCPackageCommand;',
+                '-use App\\Console\\Commands\\SeoOpsP0CtrArticleCmsUpdateWriterCommand;',
+                '+use App\\Console\\Commands\\SeoIntelSearchChannelQueueCommand;',
+                '+use App\\Console\\Commands\\SeoIntelUrlTruthHandoffCommand;',
+                '+use App\\Console\\Commands\\SeoOpsP0CtrArticleCmsUpdateWriterCommand;',
+                '-use App\\Console\\Commands\\SeoOpsZhArticleQualityRepairDryRunCommand;',
+                '-use App\\Console\\Commands\\SeoIntelSearchChannelQueueCommand;',
+                '-use App\\Console\\Commands\\SeoIntelUrlTruthHandoffCommand;',
+                '+use App\\Console\\Commands\\SeoOpsZhArticleQualityRepairDryRunCommand;',
+            ],
             'backend/app/Models/InterpretationGuide.php' => [
                 '-use Illuminate\\Database\\Eloquent\\Relations\\BelongsTo;',
                 '+use Illuminate\\Database\\Eloquent\\Relations\\BelongsTo;',
@@ -16043,6 +16067,12 @@ DIFF;
             'backend/routes/console.php' => [
                 "-})->purpose('Display an inspiring quote');",
                 "+})->purpose('Display an inspiring quote');",
+            ],
+            'backend/routes/web.php' => [
+                '+use App\\Http\\Controllers\\API\\V0_5\\SEO\\LlmsController;',
+                '+use App\\Http\\Controllers\\SitemapController;',
+                '-use App\\Http\\Controllers\\SitemapController;',
+                '-use App\\Http\\Controllers\\API\\V0_5\\SEO\\LlmsController;',
             ],
         ];
     }

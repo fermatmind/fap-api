@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\API\V0_5\SEO\LlmsController;
 use App\Http\Controllers\Ops\ArticleDraftPreviewController;
+use App\Http\Controllers\SitemapController;
 use App\Http\Middleware\AdminAuth;
 use App\Http\Middleware\EnsureAdminTotpVerified;
 use App\Http\Middleware\EnsureCmsAdminAuthorized;
@@ -8,8 +10,6 @@ use App\Http\Middleware\OpsAccessControl;
 use App\Http\Middleware\RequireOpsOrgSelected;
 use App\Http\Middleware\ResolveOrgContext;
 use App\Http\Middleware\SetOpsRequestContext;
-use App\Http\Controllers\SitemapController;
-use App\Http\Controllers\API\V0_5\SEO\LlmsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

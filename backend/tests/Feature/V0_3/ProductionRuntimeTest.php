@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\V0_3;
 
-use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2Contract;
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2AuditFields;
+use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2Contract;
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2RuntimeWrapper;
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2TransformerContract;
 use App\Services\Report\ReportAccess;

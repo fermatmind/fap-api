@@ -221,7 +221,6 @@ final class AutoApprovalPolicy
     }
 
     /**
-     * @param  mixed  $value
      * @return list<string>
      */
     private function forbiddenKeysPresent(mixed $value): array

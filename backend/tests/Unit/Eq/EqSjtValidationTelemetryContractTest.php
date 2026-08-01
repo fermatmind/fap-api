@@ -14,7 +14,7 @@ final class EqSjtValidationTelemetryContractTest extends TestCase
     public function test_sjt_scored_telemetry_is_safe_and_does_not_include_answers(): void
     {
         $score = $this->scoreGoldenCase('boundary_gap');
-        $event = (new EqSjtValidationTelemetryContract())->scoredEvent($score, [
+        $event = (new EqSjtValidationTelemetryContract)->scoredEvent($score, [
             'attempt_id' => 'attempt-eq-sjt-telemetry',
             'anon_id' => 'anon-eq-sjt-telemetry',
             'locale' => 'en',
@@ -41,7 +41,7 @@ final class EqSjtValidationTelemetryContractTest extends TestCase
     public function test_low_quality_sjt_path_is_telemetry_visible_but_not_validation_claimed(): void
     {
         $score = $this->scoreGoldenCase('low_effectiveness');
-        $event = (new EqSjtValidationTelemetryContract())->scoredEvent($score);
+        $event = (new EqSjtValidationTelemetryContract)->scoredEvent($score);
 
         $this->assertSame('B', $event['meta']['quality_level']);
         $this->assertSame(['low_effectiveness_pattern'], $event['meta']['quality_flags']);
@@ -52,8 +52,8 @@ final class EqSjtValidationTelemetryContractTest extends TestCase
     public function test_integrated_report_telemetry_and_qa_gate_keep_public_release_closed(): void
     {
         $score = $this->scoreGoldenCase('boundary_gap');
-        $report = (new EqIntegratedReportComposer())->compose($this->eq60Report('en'), $score, ['locale' => 'en']);
-        $contract = new EqSjtValidationTelemetryContract();
+        $report = (new EqIntegratedReportComposer)->compose($this->eq60Report('en'), $score, ['locale' => 'en']);
+        $contract = new EqSjtValidationTelemetryContract;
         $event = $contract->integratedReportComposedEvent($report, [
             'attempt_id' => 'attempt-integrated-eq',
             'locale' => 'en',
@@ -79,7 +79,7 @@ final class EqSjtValidationTelemetryContractTest extends TestCase
     {
         $score = $this->scoreGoldenCase('balanced_effective');
         foreach (['zh-CN', 'en'] as $locale) {
-            $report = (new EqIntegratedReportComposer())->compose($this->eq60Report($locale), $score, ['locale' => $locale]);
+            $report = (new EqIntegratedReportComposer)->compose($this->eq60Report($locale), $score, ['locale' => $locale]);
 
             $this->assertSame($locale, $report['locale']);
             $this->assertTrue($report['access']['all_results_free']);
@@ -100,9 +100,9 @@ final class EqSjtValidationTelemetryContractTest extends TestCase
 
     public function test_claim_boundary_gate_blocks_overclaiming_payloads(): void
     {
-        $contract = new EqSjtValidationTelemetryContract();
+        $contract = new EqSjtValidationTelemetryContract;
         $score = $this->scoreGoldenCase('balanced_effective');
-        $report = (new EqIntegratedReportComposer())->compose($this->eq60Report('en'), $score, ['locale' => 'en']);
+        $report = (new EqIntegratedReportComposer)->compose($this->eq60Report('en'), $score, ['locale' => 'en']);
         $report['claim_copy'] = 'This is a MSCEIT-like certified emotional intelligence clinical assessment.';
         $report['visibility']['frontend_integrated_report_visible'] = true;
 
@@ -124,7 +124,7 @@ final class EqSjtValidationTelemetryContractTest extends TestCase
         $case = collect((array) ($cases['cases'] ?? []))->firstWhere('case_id', $caseId);
         $this->assertIsArray($case, $caseId);
 
-        return (new EqSjt16Scorer())->score((array) ($case['answers'] ?? []), $this->items(), [
+        return (new EqSjt16Scorer)->score((array) ($case['answers'] ?? []), $this->items(), [
             'scoring_spec_version' => 'eq_sjt_16_partial_credit_v1',
             'content_version' => 'EQ_SJT_16/v1',
         ]);
