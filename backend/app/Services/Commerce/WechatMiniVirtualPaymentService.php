@@ -205,9 +205,18 @@ final class WechatMiniVirtualPaymentService
         if ($providerTradeNo === '') {
             $providerTradeNo = (string) ($attempt->external_trade_no ?? '');
         }
+        $isAppleRefund = $provider === AppleIapGateway::PROVIDER
+            && in_array($status, [5, 8, 9, 10], true);
         $eventPayload = [
             'provider_event_id' => $provider === AppleIapGateway::PROVIDER
-                ? sprintf('query:%s:%s', in_array($status, [5, 8, 9, 10], true) ? 'refund' : 'payment', $providerTradeNo)
+                ? ($isAppleRefund
+                    ? sprintf(
+                        'query:refund:%s:%d:%d',
+                        $providerTradeNo,
+                        (int) ($providerOrder['update_time'] ?? 0),
+                        $refundAmount
+                    )
+                    : sprintf('query:payment:%s', $providerTradeNo))
                 : sprintf(
                     'query:%s:%d:%d',
                     $providerTradeNo,
@@ -234,6 +243,11 @@ final class WechatMiniVirtualPaymentService
                 true,
                 ['source' => 'official_query_order']
             );
+            if ($provider === AppleIapGateway::PROVIDER) {
+                $this->orders->advancePaymentAttempt((string) ($attempt->id ?? ''), [
+                    'external_trade_no' => (string) ($attempt->external_trade_no ?? ''),
+                ]);
+            }
             if (($processed['ok'] ?? false) !== true) {
                 return $processed;
             }
@@ -349,9 +363,20 @@ final class WechatMiniVirtualPaymentService
             ?? $payload['wx_refund_id']
             ?? $externalOrderNo
         ));
+        $verifiedRefundAmount = (int) ($verifiedProviderOrder['refund_fee'] ?? 0);
+        $normalizedRefundAmount = $provider === AppleIapGateway::PROVIDER
+            ? $verifiedRefundAmount
+            : (int) ($payload['RefundFee'] ?? $payload['refund_fee'] ?? 0);
         $normalizedPayload = array_merge($payload, [
             'provider_event_id' => $provider === AppleIapGateway::PROVIDER
-                ? sprintf('%s:%s', $eventType === 'xpay_refund_notify' ? 'refund' : 'payment', $providerTradeNo)
+                ? ($eventType === 'xpay_refund_notify'
+                    ? sprintf(
+                        'refund:%s:%d:%d',
+                        $providerTradeNo,
+                        (int) ($verifiedProviderOrder['update_time'] ?? 0),
+                        $verifiedRefundAmount
+                    )
+                    : sprintf('payment:%s', $providerTradeNo))
                 : $eventType.':'.$providerTradeNo,
             'order_no' => (string) ($order->order_no ?? ''),
             'external_order_no' => $externalOrderNo,
@@ -363,12 +388,7 @@ final class WechatMiniVirtualPaymentService
                 ?? $order->amount_cents
                 ?? 0
             ),
-            'refund_amount_cents' => (int) (
-                $verifiedProviderOrder['refund_fee']
-                ?? $payload['RefundFee']
-                ?? $payload['refund_fee']
-                ?? 0
-            ),
+            'refund_amount_cents' => $normalizedRefundAmount,
             'event_type' => $eventType === 'xpay_refund_notify' ? 'refund_succeeded' : 'payment_succeeded',
         ]);
         $result = $this->webhooks->handle(
@@ -385,6 +405,11 @@ final class WechatMiniVirtualPaymentService
             hash('sha256', $raw),
             strlen($raw)
         );
+        if ($provider === AppleIapGateway::PROVIDER && is_object($verified['attempt'] ?? null)) {
+            $this->orders->advancePaymentAttempt((string) ($verified['attempt']->id ?? ''), [
+                'external_trade_no' => (string) ($verified['attempt']->external_trade_no ?? ''),
+            ]);
+        }
         $result['ack_format'] = $isJson ? 'json' : 'xml';
 
         return $result;

@@ -229,7 +229,10 @@ final class AppleIapPaymentContractTest extends TestCase
                 ->push($this->appleQueryResponse($externalOrderNo))
                 ->push($this->appleQueryResponse($externalOrderNo))
                 ->push($this->appleQueryResponse($externalOrderNo))
-                ->push($this->appleQueryResponse($externalOrderNo, 8)),
+                ->push($this->appleQueryResponse($externalOrderNo, 8, 100, 1700000100))
+                ->push($this->appleQueryResponse($externalOrderNo, 8, 100, 1700000100))
+                ->push($this->appleQueryResponse($externalOrderNo, 8, 499, 1700000200))
+                ->push($this->appleQueryResponse($externalOrderNo, 8, 499, 1700000200)),
         ]);
 
         $handled = app(AppleIapPaymentService::class)
@@ -273,7 +276,7 @@ final class AppleIapPaymentContractTest extends TestCase
             'Event' => 'xpay_refund_notify',
             'OpenId' => 'openid-apple-contract',
             'MchOrderId' => $externalOrderNo,
-            'RefundFee' => 499,
+            'RefundFee' => 100,
             'RetCode' => 0,
         ];
         $refunded = app(AppleIapPaymentService::class)
@@ -281,6 +284,26 @@ final class AppleIapPaymentContractTest extends TestCase
         $this->assertTrue((bool) ($refunded['ok'] ?? false));
         $this->assertSame(3, DB::table('payment_events')->where('provider', AppleIapGateway::PROVIDER)->count());
         $this->assertSame(1, DB::table('benefit_grants')->where('order_no', $orderNo)->where('status', 'revoked')->count());
+
+        $this->withHeaders($headers)
+            ->postJson('/api/v0.3/orders/'.$orderNo.'/apple-iap/reconcile')
+            ->assertOk()
+            ->assertJsonPath('provider_status', 8);
+        $this->assertSame(4, DB::table('payment_events')->where('provider', AppleIapGateway::PROVIDER)->count());
+        $this->assertSame(100, DB::table('orders')->where('order_no', $orderNo)->value('refund_amount_cents'));
+
+        $this->withHeaders($headers)
+            ->postJson('/api/v0.3/orders/'.$orderNo.'/apple-iap/reconcile')
+            ->assertOk()
+            ->assertJsonPath('provider_status', 8);
+        $this->assertSame(5, DB::table('payment_events')->where('provider', AppleIapGateway::PROVIDER)->count());
+        $this->assertSame(499, DB::table('orders')->where('order_no', $orderNo)->value('refund_amount_cents'));
+
+        $this->withHeaders($headers)
+            ->postJson('/api/v0.3/orders/'.$orderNo.'/apple-iap/reconcile')
+            ->assertOk()
+            ->assertJsonPath('provider_status', 8);
+        $this->assertSame(5, DB::table('payment_events')->where('provider', AppleIapGateway::PROVIDER)->count());
     }
 
     public function test_query_rejects_non_apple_channel_and_environment_mismatch(): void
@@ -520,8 +543,12 @@ final class AppleIapPaymentContractTest extends TestCase
     /**
      * @return array<string,mixed>
      */
-    private function appleQueryResponse(string $externalOrderNo, int $status = 2, int $refundAmount = 499): array
-    {
+    private function appleQueryResponse(
+        string $externalOrderNo,
+        int $status = 2,
+        int $refundAmount = 499,
+        int $updateTime = 1700000100
+    ): array {
         $isRefund = $status === 8;
 
         return [
@@ -538,7 +565,7 @@ final class AppleIapPaymentContractTest extends TestCase
                 'paid_fee' => 499,
                 'refund_fee' => $isRefund ? $refundAmount : null,
                 'paid_time' => 1700000000,
-                'update_time' => $isRefund ? 1700000100 : 1700000050,
+                'update_time' => $isRefund ? $updateTime : 1700000050,
             ], static fn (mixed $value): bool => $value !== null),
         ];
     }
