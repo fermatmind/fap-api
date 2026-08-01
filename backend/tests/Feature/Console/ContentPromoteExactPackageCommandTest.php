@@ -281,6 +281,19 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
         putenv($name.'='.$value);
         $_ENV[$name] = $value;
         $_SERVER[$name] = $value;
+        $configKeys = [
+            'CONTENT_PROMOTION_SOURCE_COMMIT' => 'source_commit',
+            'CONTENT_PROMOTION_WORKFLOW_RUN_ID' => 'workflow_run_id',
+            'CONTENT_PROMOTION_WORKFLOW_RUN_ATTEMPT' => 'workflow_run_attempt',
+            'CONTENT_PROMOTION_EXPECTED_ROW_COUNT' => 'expected_row_count',
+            'CONTENT_PROMOTION_EXECUTOR_RELEASE_SHA256' => 'executor_release_sha256',
+            'CONTENT_PROMOTION_RELEASE_POLICY_SHA256' => 'release_policy_sha256',
+            'CONTENT_PROMOTION_WORKFLOW_SIGNATURE' => 'workflow_signature',
+            'CONTENT_PROMOTION_PREVIOUS_RECEIPT' => 'previous_receipt',
+        ];
+        if (isset($configKeys[$name])) {
+            config(['content_promotion.execution.'.$configKeys[$name] => $value]);
+        }
     }
 
     /** @template T

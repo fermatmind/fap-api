@@ -32,7 +32,7 @@ final class PromotionReceiptStore
     /** @return array{receipt:array<string,mixed>,sha256:string,path:string} */
     public function readPrevious(string $expectedKind, PromotionContext $context): array
     {
-        $path = trim((string) env('CONTENT_PROMOTION_PREVIOUS_RECEIPT', ''));
+        $path = trim((string) config('content_promotion.execution.previous_receipt', ''));
         if ($path === '' || ! is_file($path) || is_link($path)) {
             throw new DomainException('previous_receipt_required');
         }

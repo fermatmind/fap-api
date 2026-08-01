@@ -17,13 +17,13 @@ final class PromotionContextFactory
         ?string $subscope,
     ): PromotionContext {
         $resolved = $this->pathGuard->resolve($package);
-        $sourceCommit = strtolower(trim((string) env('CONTENT_PROMOTION_SOURCE_COMMIT', '')));
-        $workflowRunId = trim((string) env('CONTENT_PROMOTION_WORKFLOW_RUN_ID', ''));
-        $workflowRunAttempt = (int) env('CONTENT_PROMOTION_WORKFLOW_RUN_ATTEMPT', 0);
-        $expectedRowCount = (int) env('CONTENT_PROMOTION_EXPECTED_ROW_COUNT', 0);
-        $executorReleaseSha256 = strtolower(trim((string) env('CONTENT_PROMOTION_EXECUTOR_RELEASE_SHA256', '')));
-        $releasePolicySha256 = strtolower(trim((string) env('CONTENT_PROMOTION_RELEASE_POLICY_SHA256', '')));
-        $workflowSignature = strtolower(trim((string) env('CONTENT_PROMOTION_WORKFLOW_SIGNATURE', '')));
+        $sourceCommit = strtolower(trim((string) config('content_promotion.execution.source_commit', '')));
+        $workflowRunId = trim((string) config('content_promotion.execution.workflow_run_id', ''));
+        $workflowRunAttempt = (int) config('content_promotion.execution.workflow_run_attempt', 0);
+        $expectedRowCount = (int) config('content_promotion.execution.expected_row_count', 0);
+        $executorReleaseSha256 = strtolower(trim((string) config('content_promotion.execution.executor_release_sha256', '')));
+        $releasePolicySha256 = strtolower(trim((string) config('content_promotion.execution.release_policy_sha256', '')));
+        $workflowSignature = strtolower(trim((string) config('content_promotion.execution.workflow_signature', '')));
 
         $actualPolicySha256 = hash('sha256', self::canonicalJson((array) config('content_promotion.release_policy', [])));
         if (! hash_equals($actualPolicySha256, $releasePolicySha256)) {

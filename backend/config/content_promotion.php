@@ -5,6 +5,16 @@ declare(strict_types=1);
 return [
     'contract_version' => 'fermatmind.content_promotion.v2',
     'workflow_identity_key' => env('CONTENT_PROMOTION_AUTOMATION_KEY'),
+    'execution' => [
+        'source_commit' => env('CONTENT_PROMOTION_SOURCE_COMMIT'),
+        'workflow_run_id' => env('CONTENT_PROMOTION_WORKFLOW_RUN_ID'),
+        'workflow_run_attempt' => env('CONTENT_PROMOTION_WORKFLOW_RUN_ATTEMPT'),
+        'workflow_signature' => env('CONTENT_PROMOTION_WORKFLOW_SIGNATURE'),
+        'expected_row_count' => env('CONTENT_PROMOTION_EXPECTED_ROW_COUNT'),
+        'executor_release_sha256' => env('CONTENT_PROMOTION_EXECUTOR_RELEASE_SHA256'),
+        'release_policy_sha256' => env('CONTENT_PROMOTION_RELEASE_POLICY_SHA256'),
+        'previous_receipt' => env('CONTENT_PROMOTION_PREVIOUS_RECEIPT'),
+    ],
     'authority_roots' => [
         'content_assets/en-content-parity',
         'content_packs',
