@@ -102436,7 +102436,7 @@
     "depends_on": [
       "EN-PARITY-W1-MBTI-COMPARISON-ASSETS-01"
     ],
-    "status": "ready_to_merge",
+    "status": "merged",
     "commit_sha": "5af71413195ce9a0cfe20ea2417790c0ec044d3f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3439",
     "checks": {
@@ -102463,17 +102463,21 @@
       "github_required_checks": {
         "status": "passed",
         "evidence": "Exact head ab606c71d1da82bf1a665d36802ea9744e7d94b1 passed all nine applicable required checks: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, semgrep SARIF upload, and Semgrep OSS. Staging parity was skipped and is not a required deploy wait."
+      },
+      "merge_reconciliation": {
+        "status": "passed",
+        "evidence": "GitHub reports PR #3439 MERGED at 2026-07-31T03:02:02Z as squash commit 06286bfcaa3b5a60bfdee52ff19dcb92b5a1b240; origin/main contains that commit, and the local and remote task branches are absent."
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-07-31T03:02:02Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false
+      "post_merge_revalidated": true
     },
     "production_write_execution": false,
     "database_mutation": false,
@@ -102532,9 +102536,14 @@
         "at": "2026-07-31T02:53:23Z",
         "status": "ready_to_merge",
         "note": "Exact head ab606c71d1da82bf1a665d36802ea9744e7d94b1 passed all nine applicable required checks with staging parity skipped, has zero unresolved review threads, is CLEAN/MERGEABLE, and contains latest origin/main 15eb6a2fbf55630f3d1e53fd3bf891930ebcb60b. The exact seven-path PR05 scope remains valid. This readiness metadata tail must independently repeat required checks and exact-head review before squash merge."
+      },
+      {
+        "at": "2026-08-01T09:12:00Z",
+        "status": "merged_reconciled",
+        "note": "PR09 dependency reconciliation verified GitHub PR #3439 is MERGED as 06286bfcaa3b5a60bfdee52ff19dcb92b5a1b240, origin/main contains the merge commit, and neither local nor remote PR05 task branch remains. No runtime or content mutation was performed by this bookkeeping transition."
       }
     ],
-    "updated_at": "2026-07-31T02:53:23Z"
+    "updated_at": "2026-08-01T09:12:00Z"
   },
   "EN-PARITY-W1-MBTI-RESULT-IMPORTER-01": {
     "id": "EN-PARITY-W1-MBTI-RESULT-IMPORTER-01",
@@ -102772,5 +102781,116 @@
       }
     ],
     "updated_at": "2026-07-31T07:23:51Z"
+  },
+  "EN-PARITY-W1-MBTI-COMPARISON-DRAFT-IMPORT-01": {
+    "id": "EN-PARITY-W1-MBTI-COMPARISON-DRAFT-IMPORT-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/en-parity-w1-mbti-comparison-draft-import-01",
+    "title": "EN-PARITY-W1-MBTI-COMPARISON-DRAFT-IMPORT-01: import exact English comparison drafts",
+    "depends_on": [
+      "EN-PARITY-W1-MBTI-COMPARISON-IMPORTER-01"
+    ],
+    "status": "ready_to_merge",
+    "commit_sha": "ccc66c24fc5b30fb46753988c7943693df8fbfa4",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3468",
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The human_operator explicitly authorized exact seven-row English comparison draft import under approval ref human-operator:w1-mbti-comparisons-draft-import:2026-08-01, while excluding publish, activation, indexability, search, and deploy."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "The exact-package comparison importer is merged on main; fap-web CONTROL independently accepted package SHA deecc8175fb43ba3730d6513b496a0ab6834459108e3b24e25550bbf40e001a2 through dry_run_ready and merged approval artifact SHA 42853f27ff4e921f0d91e8e50210620dd212fddf6fab7763ae82544087d02a8b."
+      },
+      "preflight": {
+        "status": "passed",
+        "evidence": "Started a clean isolated branch from exact fap-api origin/main e5997548beb7da3f9850b7d382a015e175b0397d after the inactive English content-pack authority dependency merged."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "After the first two exact-head review repair rounds and latest-main integration, the combined package/importer/runtime-freeze/review-governance suite passed 19 tests / 1394 assertions. The latest focused importer rerun passes 12 tests / 364 assertions and now also proves an advanced indexability workflow state is a collision that is preserved after rollback. Transaction retry accounting retains any rolled-back write attempt for audit while reporting writes_committed only when the final successful transaction attempt mutated rows. Scoped Pint and git diff checks pass. The prior exact dry-run returned seven rows and zero writes; a temporary testing SQLite CMS authority execution completed seven creates and exact readback, then preserved all seven exact rows with zero updates and no write attempt on replay. Its sanitized local-validation create receipt SHA was 61198b468cc944d1049e98ed79430277dbd5b9a886a8d50c9fac0156e502e2c8. Route inventory returned 231 lines; YAML/JSON, PHP syntax, approval rehash, and exact scope checks passed. A different FermatMind worktree was running the single allowed heavyweight full verification during this focused rerun, so no duplicate heavyweight suite was started."
+      },
+      "changed_file_scope": {
+        "status": "passed",
+        "evidence": "The exact seven changed paths are limited to the existing comparison command/service/test, the byte-exact CONTROL approval snapshot, backend repository rules, and this PR's train manifest/state. No package, model, migration, public read model, API route/controller, result-content, frontend, publish, activation, SEO runtime, Search Channel, or deploy path changed."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "Exact head ccc66c24fc5b30fb46753988c7943693df8fbfa4 passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep OSS, Semgrep blocking secrets, and the non-blocking SARIF upload; staging parity was correctly skipped. GitHub reports CLEAN/MERGEABLE. An optional exact-head Codex review was explicitly requested at 2026-08-01T10:40:08Z but returned no result after ten minutes; repository policy requires no review, and all required checks remain green."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": false
+    },
+    "production_write_execution": false,
+    "database_mutation": true,
+    "cms_mutation": true,
+    "private_payload_read": false,
+    "api_runtime_change": false,
+    "activation_allowed": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "history": [
+      {
+        "at": "2026-08-01T09:05:00Z",
+        "status": "implementation_in_progress",
+        "note": "Started PR09 after both comparison/result CONTROL scopes reached dry_run_ready, the inactive GLOBAL/en MBTI pack authority merged, and both exact human-operator approval artifacts were rehashed. This scope is exact seven-row English inactive/draft import only."
+      },
+      {
+        "at": "2026-08-01T09:18:00Z",
+        "status": "local_verified",
+        "note": "Implemented exact-approval-gated transactional import for seven org-0 English comparison drafts. Exact package and approval files are bounded, single-link, descriptor-stable reads; public/indexability flags remain closed; existing public collisions roll back the cohort; replay is idempotent. Focused validation, local SQLite write/readback/replay, Pint, route inventory, parsers, diff, exact seven-path scope, and PR05 merge reconciliation all passed."
+      },
+      {
+        "at": "2026-08-01T09:22:00Z",
+        "status": "github_checks_pending",
+        "note": "Pushed the scoped branch and opened PR #3468. Required GitHub checks, exact-head review, mergeability, and post-merge cleanup remain pending; staging deployment is not awaited."
+      },
+      {
+        "at": "2026-08-01T09:34:00Z",
+        "status": "review_fix_local_verified",
+        "note": "All required checks passed on prior head e5a754dbcc8ee3df0381d711c858fce6326bf8be, then exact-head review identified three valid current-scope issues. Added the registered mbti_cross_type_comparison_authority review-surface declaration, made exact-package replay preserve imported_at/updated_at with zero SQL updates, and report rolled-back SQL attempts accurately. Integrated latest origin/main a202c8175ad0cfda59585d9adb20e1b2d8b929a2 without conflict. Focused validation passes 17 tests / 1371 assertions plus scoped Pint and exact local write/readback/strict replay; fresh exact-head required checks remain mandatory."
+      },
+      {
+        "at": "2026-08-01T09:43:00Z",
+        "status": "review_fix_local_verified",
+        "note": "All required checks passed again on head 83b935bbcb387deb7e9559e5aa610428677ba85b, then fresh exact-head review identified three additional valid boundaries. The scoped approval now rejects staging/production execution, exact replay rejects advanced editorial states instead of downgrading them, and no-op replay receipts report no attempted or committed writes. Focused validation passes 19 tests / 1394 assertions, scoped Pint, create/readback/no-op replay receipt semantics, parsers, diff, and exact scope all pass; fresh exact-head checks remain mandatory."
+      },
+      {
+        "at": "2026-08-01T09:54:34Z",
+        "status": "review_fix_local_verified",
+        "note": "All required checks passed on head 47d3e0385eb1e40a292c07bc04fbb165bf93364b, then fresh exact-head review identified two additional valid current-scope boundaries. Existing English drafts now require indexability_status=blocked before any replay so advanced indexability workflow state cannot be downgraded. Transaction retry accounting resets committed-write state at each callback attempt while retaining any rolled-back write attempt for audit. The focused importer suite passes 12 tests / 364 assertions, including advanced indexability rollback preservation; scoped Pint and diff checks pass. A separate heavyweight FermatMind verification was already running, so the repository concurrency guard prohibited a duplicate local full run; fresh required GitHub checks remain mandatory. Implementation head is cde2a63484b299893fcfcb2b16de936af454b8c6 and the following commit changes only this ledger pointer."
+      },
+      {
+        "at": "2026-08-01T10:05:07Z",
+        "status": "review_fix_local_verified",
+        "note": "All nine applicable checks passed on head fa718430bff65dfc2e5fa89c36e5a12dbfd2f14b, then fresh exact-head review identified two further valid receipt/idempotence boundaries. Existing JSON payloads are now compared through recursive canonical object-key ordering before fill, preventing MySQL-normalized key order from creating a semantic no-op update; list order remains significant. Failed dry-run receipts now keep write_supported_in_this_pr=false, matching successful dry runs and the selected mode. The focused importer suite passes 13 tests / 373 assertions, including reordered nested JSON as a zero-write replay and the failed dry-run receipt contract; scoped Pint and diff checks pass. Fresh exact-head required checks remain mandatory. Implementation head is f81d385b553d8842e0f2b22d0f6171384170de0b and the following commit changes only this ledger pointer."
+      },
+      {
+        "at": "2026-08-01T10:20:11Z",
+        "status": "ready_to_merge",
+        "note": "Exact head 4ce370b83a37b5252cfd95eee574887317b621a3 passed all nine applicable required checks with staging parity skipped. GitHub reports CLEAN/MERGEABLE, all prior review findings are repaired within the exact seven-path scope, and the explicit exact-head Codex review reported no major issues. This following readiness commit changes only the PR09 state ledger, so its own required checks and exact-head review remain mandatory before merge."
+      },
+      {
+        "at": "2026-08-01T10:31:18Z",
+        "status": "review_fix_local_verified",
+        "note": "The ledger-only ready head 6477f55f30dc741547b65d13ab460b5c7cf5e679 passed all nine applicable checks, then exact-head review found that QueryException inherits RuntimeException and could expose SQL, bindings, unpublished payload, or connection details in a failure receipt. Controlled contract failures now use DomainException; every database and other unexpected throwable is mapped to the fixed redacted unexpected_error receipt. A dropped-authority-table regression proves SQLSTATE, table name, and content_payload_json never enter output. The focused importer suite passes 14 tests / 381 assertions, scoped Pint and diff checks pass, and fresh exact-head required checks remain mandatory. Implementation head is 4038e80dcffc86a9a397f8e48481b1123067e852 and the following commit changes only this ledger pointer."
+      },
+      {
+        "at": "2026-08-01T10:50:07Z",
+        "status": "ready_to_merge",
+        "note": "Exact head ccc66c24fc5b30fb46753988c7943693df8fbfa4 passed all nine applicable required checks with staging parity skipped and remains CLEAN/MERGEABLE. Repository policy requires no review. The optional exact-head Codex review request produced no result after ten minutes and is not a merge-policy blocker. This following readiness commit changes only the PR09 state ledger; its own required checks remain mandatory before squash merge."
+      }
+    ],
+    "updated_at": "2026-08-01T10:50:07Z"
   }
 }

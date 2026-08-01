@@ -47751,7 +47751,7 @@ prs:
     base: main
     branch: codex/en-parity-w1-mbti-comparison-importer-01
     title: "EN-PARITY-W1-MBTI-COMPARISON-IMPORTER-01: add exact-package comparison dry-run importer"
-    status: ready_to_merge
+    status: merged
     depends_on:
       - EN-PARITY-W1-MBTI-COMPARISON-ASSETS-01
     train_scope: en_parity_w1_mbti_comparison_exact_package_dry_run_importer
@@ -47852,3 +47852,60 @@ prs:
     deploy_allowed: false
     content_authority: exact result package dry-run planner only; inactive and runtime authorities unchanged
     repository_rule_impact: adds exact result-package validation and no-write reconciliation rules; inactive import and activation remain separately controlled
+
+  - id: EN-PARITY-W1-MBTI-COMPARISON-DRAFT-IMPORT-01
+    repo: fap-api
+    base: main
+    branch: codex/en-parity-w1-mbti-comparison-draft-import-01
+    title: "EN-PARITY-W1-MBTI-COMPARISON-DRAFT-IMPORT-01: import exact English comparison drafts"
+    status: in_progress
+    depends_on:
+      - EN-PARITY-W1-MBTI-COMPARISON-IMPORTER-01
+    external_dependencies:
+      - W1-MBTI-COMPARISONS control state is dry_run_ready
+      - exact human-operator approval artifact SHA 42853f27ff4e921f0d91e8e50210620dd212fddf6fab7763ae82544087d02a8b
+    train_scope: en_parity_w1_mbti_comparison_exact_package_inactive_draft_import
+    scope:
+      - Accept the exact CONTROL approval artifact bound to the frozen seven-row comparison package and draft_imported gate.
+      - Extend the existing exact-package importer with a transactional, idempotent, collision-safe English inactive/draft write mode.
+      - Upsert exactly seven org-0 English comparison authority rows while preserving every zh-CN row and every public/release flag.
+      - Emit a sanitized exact-package and exact-approval-bound draft import receipt with post-write readback.
+      - Update backend repository rules for the controlled comparison draft-import boundary.
+    allowed_paths:
+      - backend/app/Console/Commands/ImportMbtiComparisonEnglishPackage.php
+      - backend/app/Services/ContentImport/MbtiComparisonEnglishPackageImporter.php
+      - backend/tests/Feature/ContentImport/MbtiComparisonEnglishPackageImporterTest.php
+      - backend/content_assets/en-content-parity/CONTROL-approvals/W1-MBTI-COMPARISONS/draft-import-approval-2026-08-01.json
+      - backend/AGENTS.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change the frozen package, model, migration, public read model, route, controller, scheduler, queue, frontend, or result-content scope.
+      - Overwrite zh-CN rows or any existing public/indexable English collision.
+      - Publish, activate, change an active pointer, release indexability, modify sitemap/llms/canonical, submit search URLs, invalidate public caches, or deploy.
+      - Read attempts, reports, private URLs, user scores, answers, entitlements, accounts, orders, payments, recovery data, secrets, or private CMS records.
+      - Claim editorial approval, publication, live QA, public availability, SEO release, staging execution, or production deployment.
+    validation:
+      - cd backend && php artisan test --filter=MbtiComparisonEnglishPackageImporterTest --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/ImportMbtiComparisonEnglishPackage.php app/Services/ContentImport/MbtiComparisonEnglishPackageImporter.php tests/Feature/ContentImport/MbtiComparisonEnglishPackageImporterTest.php
+      - cd backend && php artisan content:import-mbti-comparison-english-package --package-sha=deecc8175fb43ba3730d6513b496a0ab6834459108e3b24e25550bbf40e001a2 --dry-run --json
+      - sha256sum backend/content_assets/en-content-parity/CONTROL-approvals/W1-MBTI-COMPARISONS/draft-import-approval-2026-08-01.json
+      - cd backend && php artisan route:list --path=api --except-vendor
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: true
+    cms_mutation: true
+    private_payload_read: false
+    api_runtime_change: false
+    activation_allowed: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: backend CMS comparison authority; exact English rows remain inactive drafts
+    repository_rule_impact: adds an exact-approval-bound inactive/draft write path; public runtime and discoverability remain unchanged

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Services\ContentImport\MbtiComparisonEnglishPackageImporter;
+use DomainException;
 use Illuminate\Console\Command;
-use RuntimeException;
 use Throwable;
 
 final class ImportMbtiComparisonEnglishPackage extends Command
@@ -15,21 +15,24 @@ final class ImportMbtiComparisonEnglishPackage extends Command
         {--package= : Exact package directory; defaults to the repository-frozen W1 package}
         {--package-sha= : Required exact frozen package SHA-256}
         {--dry-run : Explicitly select the default no-write mode}
-        {--write : Unsupported in this PR; fails closed}
+        {--write : Import the exact package as seven English inactive draft rows}
+        {--approval= : Exact CONTROL approval artifact; required for --write}
+        {--approval-sha= : Required exact CONTROL approval SHA-256 for --write}
         {--json : Emit the complete redacted plan}';
 
-    protected $description = 'Validate and plan the exact W1 MBTI English comparison package without writes.';
+    protected $description = 'Dry-run or CONTROL-authorized draft-import the exact W1 MBTI English comparison package.';
 
     public function handle(MbtiComparisonEnglishPackageImporter $importer): int
     {
         try {
-            if ((bool) $this->option('write')) {
-                throw new RuntimeException('write_mode_not_supported: --write is deferred to the separately controlled draft-import PR.');
+            $write = (bool) $this->option('write');
+            if ($write && (bool) $this->option('dry-run')) {
+                throw new DomainException('mode_conflict: --dry-run and --write are mutually exclusive.');
             }
 
             $packageSha = strtolower(trim((string) $this->option('package-sha')));
             if ($packageSha === '') {
-                throw new RuntimeException('package_sha_required: --package-sha is required.');
+                throw new DomainException('package_sha_required: --package-sha is required.');
             }
 
             $packageDirectory = trim((string) $this->option('package'));
@@ -39,11 +42,29 @@ final class ImportMbtiComparisonEnglishPackage extends Command
                 $packageDirectory = base_path($packageDirectory);
             }
 
-            $summary = $importer->plan($packageDirectory, $packageSha);
-        } catch (RuntimeException $exception) {
-            $summary = $this->failureSummary($exception->getMessage());
+            if (! $write) {
+                $summary = $importer->plan($packageDirectory, $packageSha);
+            } else {
+                $approvalSha = strtolower(trim((string) $this->option('approval-sha')));
+                if ($approvalSha === '') {
+                    throw new DomainException('approval_sha_required: --approval-sha is required for --write.');
+                }
+                $approvalPath = trim((string) $this->option('approval'));
+                if ($approvalPath === '') {
+                    $approvalPath = MbtiComparisonEnglishPackageImporter::defaultApprovalPath();
+                } elseif (! str_starts_with($approvalPath, '/')) {
+                    $approvalPath = base_path($approvalPath);
+                }
+
+                $summary = $importer->importDraft($packageDirectory, $packageSha, $approvalPath, $approvalSha);
+            }
+        } catch (DomainException $exception) {
+            $summary = $this->failureSummary($exception->getMessage(), $importer->writeAttempted());
         } catch (Throwable) {
-            $summary = $this->failureSummary('unexpected_error: Exact-package validation failed closed.');
+            $summary = $this->failureSummary(
+                'unexpected_error: Exact-package validation failed closed.',
+                $importer->writeAttempted(),
+            );
         }
 
         $this->emitSummary($summary);
@@ -74,21 +95,25 @@ final class ImportMbtiComparisonEnglishPackage extends Command
     /**
      * @return array<string, mixed>
      */
-    private function failureSummary(string $message): array
+    private function failureSummary(string $message, bool $writeAttempted): array
     {
         [$code, $safeMessage] = array_pad(explode(': ', $message, 2), 2, 'Exact-package validation failed closed.');
 
         return [
-            'artifact' => 'EN-PARITY-W1-MBTI-COMPARISON-IMPORTER-DRY-RUN-RECEIPT',
-            'schema_version' => 'fermatmind.en_parity.comparison_import_dry_run_receipt.v1',
+            'artifact' => (bool) $this->option('write')
+                ? 'EN-PARITY-W1-MBTI-COMPARISON-DRAFT-IMPORT-RECEIPT'
+                : 'EN-PARITY-W1-MBTI-COMPARISON-IMPORTER-DRY-RUN-RECEIPT',
+            'schema_version' => (bool) $this->option('write')
+                ? 'fermatmind.en_parity.comparison_draft_import_receipt.v1'
+                : 'fermatmind.en_parity.comparison_import_dry_run_receipt.v1',
             'status' => 'fail',
             'ok' => false,
-            'mode' => 'dry_run',
-            'dry_run_only' => true,
-            'write_supported_in_this_pr' => false,
+            'mode' => (bool) $this->option('write') ? 'write_inactive_draft' : 'dry_run',
+            'dry_run_only' => ! (bool) $this->option('write'),
+            'write_supported_in_this_pr' => (bool) $this->option('write'),
             'writes_committed' => false,
-            'database_write_attempted' => false,
-            'cms_write_attempted' => false,
+            'database_write_attempted' => $writeAttempted,
+            'cms_write_attempted' => $writeAttempted,
             'publish_attempted' => false,
             'activation_attempted' => false,
             'indexability_attempted' => false,
