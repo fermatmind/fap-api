@@ -252,8 +252,8 @@ final class WechatMiniVirtualPaymentService
 
                 return $processed;
             };
-            $processed = $isAppleRefund
-                ? $this->processAppleRefundMonotonically($order, $refundAmount, $handleWebhook)
+            $processed = $provider === AppleIapGateway::PROVIDER
+                ? $this->processAppleSettlementSerially($order, $isAppleRefund, $refundAmount, $handleWebhook)
                 : $handleWebhook();
             if (($processed['ok'] ?? false) !== true) {
                 return $processed;
@@ -429,8 +429,13 @@ final class WechatMiniVirtualPaymentService
 
             return $result;
         };
-        $result = $provider === AppleIapGateway::PROVIDER && $eventType === 'xpay_refund_notify'
-            ? $this->processAppleRefundMonotonically($order, $normalizedRefundAmount, $handleWebhook)
+        $result = $provider === AppleIapGateway::PROVIDER
+            ? $this->processAppleSettlementSerially(
+                $order,
+                $eventType === 'xpay_refund_notify',
+                $normalizedRefundAmount,
+                $handleWebhook
+            )
             : $handleWebhook();
         $result['ack_format'] = $isJson ? 'json' : 'xml';
 
@@ -886,9 +891,13 @@ final class WechatMiniVirtualPaymentService
      * @param  callable():array<string,mixed>  $handler
      * @return array<string,mixed>
      */
-    private function processAppleRefundMonotonically(object $order, int $refundAmount, callable $handler): array
-    {
-        return DB::transaction(function () use ($order, $refundAmount, $handler): array {
+    private function processAppleSettlementSerially(
+        object $order,
+        bool $isRefund,
+        int $refundAmount,
+        callable $handler
+    ): array {
+        return DB::transaction(function () use ($order, $isRefund, $refundAmount, $handler): array {
             $lockedOrder = DB::table('orders')
                 ->where('order_no', (string) ($order->order_no ?? ''))
                 ->where('org_id', (int) ($order->org_id ?? 0))
@@ -899,11 +908,21 @@ final class WechatMiniVirtualPaymentService
             }
 
             $recordedRefund = (int) ($lockedOrder->refund_amount_cents ?? 0);
-            if ($recordedRefund >= $refundAmount) {
+            if ($isRefund && $recordedRefund >= $refundAmount) {
                 return [
                     'ok' => true,
                     'duplicate' => true,
                     'stale_refund' => $recordedRefund > $refundAmount,
+                ];
+            }
+            if (! $isRefund
+                && ($this->orders->resolvedPaymentState($lockedOrder) === Order::PAYMENT_STATE_REFUNDED
+                    || $recordedRefund > 0
+                    || ! empty($lockedOrder->refunded_at))) {
+                return [
+                    'ok' => true,
+                    'duplicate' => true,
+                    'stale_payment' => true,
                 ];
             }
 

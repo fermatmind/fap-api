@@ -237,7 +237,8 @@ final class AppleIapPaymentContractTest extends TestCase
                 ->push($this->appleQueryResponse($externalOrderNo, 8, 100, 1700000100))
                 ->push($this->appleQueryResponse($externalOrderNo, 8, 499, 1700000200))
                 ->push($this->appleQueryResponse($externalOrderNo, 8, 499, 1700000200))
-                ->push($this->appleQueryResponse($externalOrderNo, 8, 100, 1700000100)),
+                ->push($this->appleQueryResponse($externalOrderNo, 8, 100, 1700000100))
+                ->push($this->appleQueryResponse($externalOrderNo)),
         ]);
 
         $handled = app(AppleIapPaymentService::class)
@@ -319,6 +320,16 @@ final class AppleIapPaymentContractTest extends TestCase
             ->assertJsonPath('provider_status', 8);
         $this->assertSame(4, DB::table('payment_events')->where('provider', AppleIapGateway::PROVIDER)->count());
         $this->assertSame(499, DB::table('orders')->where('order_no', $orderNo)->value('refund_amount_cents'));
+
+        $this->withHeaders($headers)
+            ->postJson('/api/v0.3/orders/'.$orderNo.'/apple-iap/reconcile')
+            ->assertOk()
+            ->assertJsonPath('provider_status', 2)
+            ->assertJsonPath('payment_state', Order::PAYMENT_STATE_REFUNDED)
+            ->assertJsonPath('grant_state', 'revoked');
+        $this->assertSame(4, DB::table('payment_events')->where('provider', AppleIapGateway::PROVIDER)->count());
+        $this->assertSame(0, DB::table('benefit_grants')->where('order_no', $orderNo)->where('status', 'active')->count());
+
     }
 
     public function test_query_rejects_non_apple_channel_and_environment_mismatch(): void
