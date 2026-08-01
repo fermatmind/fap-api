@@ -26,6 +26,7 @@ final class CareerJobDetailBundle
      * @param  array<string, mixed>  $lifecycleOperational
      * @param  array<string, mixed>  $shortlistContract
      * @param  array<string, mixed>  $conversionClosure
+     * @param  array<string, mixed>  $searchEntryAuthority
      */
     public function __construct(
         public readonly array $identity,
@@ -48,6 +49,8 @@ final class CareerJobDetailBundle
         public readonly array $lifecycleOperational,
         public readonly array $shortlistContract,
         public readonly array $conversionClosure,
+        public readonly ?string $searchEntryTier = null,
+        public readonly ?array $searchEntryAuthority = null,
     ) {}
 
     /**
@@ -78,6 +81,8 @@ final class CareerJobDetailBundle
             'lifecycle_operational' => $this->lifecycleOperational,
             'shortlist_contract' => $this->shortlistContract,
             'conversion_closure' => $this->conversionClosure,
+            'search_entry_tier' => $this->searchEntryTier,
+            'search_entry_authority' => $this->searchEntryAuthority,
         ];
     }
 }
