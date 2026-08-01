@@ -204,7 +204,7 @@
       "API-GIFT-SCHEMA-01",
       "API-VPAY-01"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "472b256c42cf99c208414fe92b72aab0b124bc1f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3448",
     "checks": {
@@ -103084,6 +103084,10 @@
       "changed_file_scope": {
         "status": "passed",
         "evidence": "Changes are limited to five RIASEC locale-resolution services, one focused locale test, the directly affected fixture-matrix expectation, and the registered PR-train manifest/state. No English reader copy, scoring, question pack, CMS/database/import, private data, runtime release, SEO, search, or deploy path changed."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "Exact implementation head 21ae058a467419c18d2ca01f0a1d7c28e43d58b0 passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep OSS, Semgrep blocking secrets, and non-blocking SARIF; staging parity was skipped."
       }
     },
     "failure_reason": null,
@@ -103117,8 +103121,13 @@
         "at": "2026-08-01T19:43:00+08:00",
         "status": "github_checks_pending",
         "note": "Pushed exact implementation head 3817a8c9c61bb4152ba5e6a6bd85711d53099db6 and opened PR #3472. Required GitHub checks, mergeability, squash merge, branch cleanup, and post-merge validation remain pending."
+      },
+      {
+        "at": "2026-08-01T19:50:00+08:00",
+        "status": "ready_to_merge",
+        "note": "Exact implementation head 21ae058a467419c18d2ca01f0a1d7c28e43d58b0 passed all applicable required checks with staging parity skipped. This ledger-only readiness update requires its own fresh required checks before squash merge."
       }
     ],
-    "updated_at": "2026-08-01T19:43:00+08:00"
+    "updated_at": "2026-08-01T19:50:00+08:00"
   }
 }
