@@ -1,4 +1,69 @@
 {
+  "API-IAP-01": {
+    "id": "API-IAP-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/api-iap-01-apple-provider",
+    "title": "API-IAP-01: add fail-closed WeChat-routed Apple IAP provider",
+    "depends_on": [
+      "API-UNLOCK-01",
+      "API-VPAY-01"
+    ],
+    "status": "local_validation_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "official_contract": {
+        "status": "passed",
+        "evidence": "The official WeChat Mini Program iOS virtual-payment contract uses wx.requestVirtualPayment and the existing WeChat xpay server APIs, requires production environment because Apple payment does not support sandbox in this channel, and identifies Apple query results with order_type 7 or 8."
+      },
+      "authorization_boundary": {
+        "status": "passed",
+        "evidence": "The active goal permits mock/contract implementation when Apple agreements, tax, product review, or manual platform configuration are incomplete, but requires provider availability=false and forbids pretending the channel is production-ready."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "Apple IAP and ordinary WeChat virtual-payment contracts pass 8 tests / 106 assertions, including server-side verified restore and refund/revoke idempotency. OpenAPI passes 2 / 6 and its export snapshot is exact; the Apple runtime-freeze classifier passes with its negative control; scoped Pint, 11-route inventory, strict Composer validation, YAML/JSON parsing, git diff checks, and exact allowed-path review pass. The complete backend/scripts/ci_verify_mbti.sh exits 0 across Big Five, Enneagram, Personality authority, migration safety, authentication, OpenAPI, order/IDOR security, dependency security, webhook, attempt, and downstream gates. Verifier-generated Big Five compiled files were restored to HEAD. No global PsySH trust, secret, production configuration, platform mutation, real order, or payment was created."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": null
+      },
+      "merge_reconciliation": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-08-01T12:56:46+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started from exact origin/main 0386505910f1de5a054171df152dc08126b04217 in an isolated worktree. The provider reuses official WeChat xpay transport for iOS, remains disabled and unavailable by default, forces production environment semantics, and adds no native Apple credential, migration, deployment, platform mutation, real order, or payment."
+      },
+      {
+        "at": "2026-08-01T13:15:09+08:00",
+        "status": "local_validation_passed",
+        "note": "All declared local checks pass. The mock/contract provider verifies WeChat callback signatures and query responses, Apple order type and production environment, product/amount/openid/order ownership, stable event idempotency, restore, refund/revoke, and secret redaction while ordinary WeChat virtual payment remains green. Complete ci_verify_mbti.sh exits 0; generated compiled artifacts were restored. Provider activation remains externally blocked and fail-closed."
+      }
+    ],
+    "updated_at": "2026-08-01T13:15:09+08:00"
+  },
   "API-GIFT-01": {
     "id": "API-GIFT-01",
     "repo": "fap-api",

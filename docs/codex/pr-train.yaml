@@ -264,6 +264,72 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: API-IAP-01
+    repo: fap-api
+    base: main
+    branch: codex/api-iap-01-apple-provider
+    title: "API-IAP-01: add fail-closed WeChat-routed Apple IAP provider"
+    status: local_validation_passed
+    depends_on:
+      - API-UNLOCK-01
+      - API-VPAY-01
+    train_scope: wechat_routed_apple_iap_contract
+    scope:
+      - Add apple_iap as an independent provider over the official WeChat Mini Program virtual-payment transport.
+      - Force production environment semantics because Apple payment has no sandbox in this WeChat channel.
+      - Verify provider, product, amount, openid binding, Apple order type, environment, callback signature, idempotency, and confirmed refund/revoke before entitlement mutation.
+      - Keep provider availability false until exact WeChat production configuration and the report-unlock rollout gate are explicitly complete.
+      - Reuse existing orders, payment_attempts, payment_events, and entitlement ledger; add no migration or native App Store credential path.
+    allowed_paths:
+      - backend/.env.example
+      - backend/routes/api.php
+      - backend/app/Http/Controllers/API/V0_3/CommerceController.php
+      - backend/app/Http/Controllers/API/V0_3/Webhooks/PaymentWebhookController.php
+      - backend/app/Internal/Commerce/PaymentWebhookHandlerCore.php
+      - backend/app/Services/Commerce/AppleIapPaymentService.php
+      - backend/app/Services/Commerce/PaymentGateway/AppleIapGateway.php
+      - backend/app/Services/Commerce/PaymentGateway/WechatMiniVirtualGateway.php
+      - backend/app/Services/Commerce/PaymentWebhookProcessor.php
+      - backend/app/Services/Commerce/WechatMiniVirtualPaymentService.php
+      - backend/app/Services/Payments/PaymentProviderRegistry.php
+      - backend/config/payments.php
+      - backend/docs/contracts/openapi.snapshot.json
+      - backend/tests/Feature/Commerce/AppleIapPaymentContractTest.php
+      - backend/tests/Feature/Commerce/WechatMiniVirtualPaymentContractTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/sidecar_issues.md
+      - generated/pr-train-sidecar-issues/sidecar_issues.json
+    do_not:
+      - Add StoreKit, App Store Server API/JWS credentials, migrations, frontend code, CMS data, or production secrets.
+      - Mark the provider available without complete production WeChat configuration, an exact CNY 499 MBTI SKU, and an explicit rollout gate.
+      - Trust a client-only success, accept sandbox as production evidence, bypass callback/query verification, or grant before a verified payment.
+      - Deploy, publish, upload the mini-program, sign platform agreements, create keys, submit callbacks, create production orders, or perform real payments.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Commerce/AppleIapPaymentContractTest.php tests/Feature/Commerce/WechatMiniVirtualPaymentContractTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/OpenApiDiffTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='test_runtime_paths_have_no_uncommitted_diff|test_runtime_freeze_classifier_ignores_apple_iap_payment_only' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_3/CommerceController.php app/Http/Controllers/API/V0_3/Webhooks/PaymentWebhookController.php app/Internal/Commerce/PaymentWebhookHandlerCore.php app/Services/Commerce/AppleIapPaymentService.php app/Services/Commerce/PaymentGateway/AppleIapGateway.php app/Services/Commerce/PaymentGateway/WechatMiniVirtualGateway.php app/Services/Commerce/PaymentWebhookProcessor.php app/Services/Commerce/WechatMiniVirtualPaymentService.php app/Services/Payments/PaymentProviderRegistry.php config/payments.php routes/api.php tests/Feature/Commerce/AppleIapPaymentContractTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && php artisan route:list --path=api/v0.3/orders --except-vendor
+      - cd backend && bash scripts/export_openapi.sh --check
+      - cd backend && composer validate --strict
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -m json.tool generated/pr-train-sidecar-issues/sidecar_issues.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: API-GIFT-01
     repo: fap-api
     base: main

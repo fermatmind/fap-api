@@ -66,6 +66,9 @@ final class PaymentProviderRegistry
             if ($provider === 'wechat_mini_virtual') {
                 return $this->isWechatMiniVirtualConfigured();
             }
+            if ($provider === 'apple_iap') {
+                return $this->isAppleIapConfigured();
+            }
 
             return $provider !== 'stub' || $this->isStubEnabled();
         }
@@ -111,6 +114,37 @@ final class PaymentProviderRegistry
             && (int) ($config['price_cents'] ?? 0) === (int) config('report_unlock.price_cents', 499)
             && strtoupper(trim((string) config('report_unlock.currency', 'CNY'))) === 'CNY'
             && (bool) config('report_unlock.providers.wechat_mini_virtual.available', false);
+    }
+
+    public function isAppleIapConfigured(): bool
+    {
+        $config = config('payments.apple_iap', []);
+        if (! is_array($config)) {
+            return false;
+        }
+
+        foreach (['app_id', 'app_secret', 'offer_id', 'app_key', 'callback_token', 'product_id'] as $key) {
+            if (trim((string) ($config[$key] ?? '')) === '') {
+                return false;
+            }
+        }
+
+        if ((int) ($config['environment'] ?? -1) !== 0) {
+            return false;
+        }
+        if (trim((string) ($config['mode'] ?? '')) !== 'short_series_goods') {
+            return false;
+        }
+
+        $expectedSku = strtoupper(trim((string) ($config['sku'] ?? '')));
+        $rolloutSku = strtoupper(trim((string) config('report_unlock.sku_by_scale.MBTI', '')));
+
+        return $expectedSku !== ''
+            && $expectedSku === $rolloutSku
+            && (int) ($config['price_cents'] ?? 0) === (int) config('report_unlock.price_cents', 499)
+            && (int) ($config['price_cents'] ?? 0) >= 100
+            && strtoupper(trim((string) config('report_unlock.currency', 'CNY'))) === 'CNY'
+            && (bool) config('report_unlock.providers.apple_iap.available', false);
     }
 
     private function isWechatPayConfigured(): bool

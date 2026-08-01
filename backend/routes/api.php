@@ -161,7 +161,7 @@ Route::prefix('v0.3')->middleware([
     'throttle:api_public',
     NormalizeApiErrorContract::class,
 ])->group(function () {
-    $payProviders = ['stripe', 'billing', 'lemonsqueezy', 'wechatpay', 'wechat_mini_virtual', 'alipay'];
+    $payProviders = ['stripe', 'billing', 'lemonsqueezy', 'wechatpay', 'wechat_mini_virtual', 'apple_iap', 'alipay'];
     if (app()->environment(['local', 'testing']) && config('payments.allow_stub') === true) {
         $payProviders[] = 'stub';
     }
@@ -419,6 +419,11 @@ Route::prefix('v0.3')->middleware([
             'App\\Http\\Controllers\\API\\V0_3\\CommerceController@reconcileWechatMiniVirtual'
         )->middleware(\App\Http\Middleware\FmTokenAuth::class)
             ->name('api.v0_3.orders.wechat_mini_virtual.reconcile');
+        Route::post(
+            '/orders/{order_no}/apple-iap/reconcile',
+            'App\\Http\\Controllers\\API\\V0_3\\CommerceController@reconcileAppleIap'
+        )->middleware(\App\Http\Middleware\FmTokenAuth::class)
+            ->name('api.v0_3.orders.apple_iap.reconcile');
         Route::get('/orders/{order_no}/pay/alipay', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@launchAlipay')
             ->middleware(\App\Http\Middleware\FmTokenOptional::class);
         Route::get('/orders/{order_no}', [ReportGiftController::class, 'getOrder'])

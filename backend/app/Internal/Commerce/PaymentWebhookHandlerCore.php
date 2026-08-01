@@ -8,6 +8,7 @@ use App\Services\Commerce\BenefitWalletService;
 use App\Services\Commerce\EntitlementManager;
 use App\Services\Commerce\OrderManager;
 use App\Services\Commerce\PaymentGateway\AlipayGateway;
+use App\Services\Commerce\PaymentGateway\AppleIapGateway;
 use App\Services\Commerce\PaymentGateway\BillingGateway;
 use App\Services\Commerce\PaymentGateway\LemonSqueezyGateway;
 use App\Services\Commerce\PaymentGateway\PaymentGatewayInterface;
@@ -87,6 +88,10 @@ class PaymentWebhookHandlerCore
         $wechatMiniVirtual = new WechatMiniVirtualGateway;
         if ($this->isProviderEnabled($wechatMiniVirtual->provider())) {
             $this->gateways[$wechatMiniVirtual->provider()] = $wechatMiniVirtual;
+        }
+        $appleIap = new AppleIapGateway;
+        if ($this->isProviderEnabled($appleIap->provider())) {
+            $this->gateways[$appleIap->provider()] = $appleIap;
         }
 
         $alipay = new AlipayGateway;

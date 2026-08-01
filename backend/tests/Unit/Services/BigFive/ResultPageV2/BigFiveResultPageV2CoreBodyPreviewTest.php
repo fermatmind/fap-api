@@ -3854,6 +3854,41 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_apple_iap_payment_only(): void
+    {
+        $changed = [
+            'backend/app/Services/Commerce/AppleIapPaymentService.php',
+            'backend/app/Services/Commerce/PaymentGateway/AppleIapGateway.php',
+            'backend/app/Services/Payments/PaymentProviderRegistry.php',
+            'backend/routes/api.php',
+        ];
+        $routeChangedLines = [
+            "-    \$payProviders = ['stripe', 'billing', 'lemonsqueezy', 'wechatpay', 'wechat_mini_virtual', 'alipay'];",
+            "+    \$payProviders = ['stripe', 'billing', 'lemonsqueezy', 'wechatpay', 'wechat_mini_virtual', 'apple_iap', 'alipay'];",
+            '+        Route::post(',
+            "+            '/orders/{order_no}/apple-iap/reconcile',",
+            "+            'App\\\\Http\\\\Controllers\\\\API\\\\V0_3\\\\CommerceController@reconcileAppleIap'",
+            '+        )->middleware(\\App\\Http\\Middleware\\FmTokenAuth::class)',
+            "+            ->name('api.v0_3.orders.apple_iap.reconcile');",
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            routeChangedLines: $routeChangedLines,
+        ));
+        $this->assertSame(
+            ['backend/routes/api.php'],
+            $this->mbtiImpactingRuntimeChanges(
+                $changed,
+                '',
+                '',
+                routeChangedLines: [...$routeChangedLines, '+        Route::delete("/orders/{order_no}", fn () => null);'],
+            ),
+        );
+    }
+
     public function test_runtime_freeze_classifier_ignores_paid_report_gifting_only(): void
     {
         $changed = [
@@ -7969,8 +8004,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
             if (
                 $file === 'backend/routes/api.php'
-                && $this->routeDiffIsWechatMiniVirtualPaymentOnly(
-                    $routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef)
+                && (
+                    $this->routeDiffIsWechatMiniVirtualPaymentOnly(
+                        $routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef)
+                    )
+                    || $this->routeDiffIsAppleIapPaymentOnly(
+                        $routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef)
+                    )
                 )
             ) {
                 continue;
@@ -9694,9 +9734,12 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Http/Controllers/API/V0_3/Webhooks/PaymentWebhookController.php',
             'backend/app/Internal/Commerce/PaymentWebhookHandlerCore.php',
             'backend/app/Services/Commerce/Checkout/AlipayCheckoutService.php',
+            'backend/app/Services/Commerce/AppleIapPaymentService.php',
             'backend/app/Services/Commerce/OrderManager.php',
+            'backend/app/Services/Commerce/PaymentGateway/AppleIapGateway.php',
             'backend/app/Services/Commerce/PaymentGateway/WechatMiniVirtualGateway.php',
             'backend/app/Services/Commerce/PaymentWebhookProcessor.php',
+            'backend/app/Services/Payments/PaymentProviderRegistry.php',
             'backend/app/Services/Commerce/Webhook/WebhookEntitlementService.php',
             'backend/app/Services/Commerce/WechatMiniVirtualPaymentService.php',
             'backend/app/Jobs/Commerce/ReprocessPaymentEventJob.php',
@@ -12700,6 +12743,22 @@ DIFF;
             "+            'App\\\\Http\\\\Controllers\\\\API\\\\V0_3\\\\CommerceController@reconcileWechatMiniVirtual'",
             '+        )->middleware(\\App\\Http\\Middleware\\FmTokenAuth::class)',
             "+            ->name('api.v0_3.orders.wechat_mini_virtual.reconcile');",
+        ];
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsAppleIapPaymentOnly(array $changedLines): bool
+    {
+        return array_values($changedLines) === [
+            "-    \$payProviders = ['stripe', 'billing', 'lemonsqueezy', 'wechatpay', 'wechat_mini_virtual', 'alipay'];",
+            "+    \$payProviders = ['stripe', 'billing', 'lemonsqueezy', 'wechatpay', 'wechat_mini_virtual', 'apple_iap', 'alipay'];",
+            '+        Route::post(',
+            "+            '/orders/{order_no}/apple-iap/reconcile',",
+            "+            'App\\\\Http\\\\Controllers\\\\API\\\\V0_3\\\\CommerceController@reconcileAppleIap'",
+            '+        )->middleware(\\App\\Http\\Middleware\\FmTokenAuth::class)',
+            "+            ->name('api.v0_3.orders.apple_iap.reconcile');",
         ];
     }
 

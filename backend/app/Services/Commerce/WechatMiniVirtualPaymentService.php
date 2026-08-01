@@ -6,6 +6,7 @@ namespace App\Services\Commerce;
 
 use App\Models\Order;
 use App\Models\PaymentAttempt;
+use App\Services\Commerce\PaymentGateway\AppleIapGateway;
 use App\Services\Commerce\PaymentGateway\WechatMiniVirtualGateway;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportGatekeeper;
@@ -37,7 +38,8 @@ final class WechatMiniVirtualPaymentService
         ?string $anonId,
         ?string $targetAttemptId,
         string $sku,
-        int $quantity
+        int $quantity,
+        string $provider = WechatMiniVirtualGateway::PROVIDER
     ): array {
         if ($targetAttemptId === null || trim($targetAttemptId) === '') {
             return $this->error('ATTEMPT_REQUIRED', 'target_attempt_id is required.', 422);
@@ -46,7 +48,8 @@ final class WechatMiniVirtualPaymentService
             return $this->error('QUANTITY_INVALID', 'virtual report unlock quantity must be 1.', 422);
         }
 
-        $expectedSku = strtoupper(trim((string) config('payments.wechat_mini_virtual.sku', '')));
+        $config = $this->config($provider);
+        $expectedSku = strtoupper(trim((string) ($config['sku'] ?? '')));
         if ($expectedSku === '' || strtoupper(trim($sku)) !== $expectedSku) {
             return $this->error('SKU_NOT_SUPPORTED', 'sku is not supported by this provider.', 422);
         }
@@ -98,14 +101,18 @@ final class WechatMiniVirtualPaymentService
     /**
      * @return array<string,mixed>
      */
-    public function createPaymentAction(object $order, string $loginCode): array
-    {
-        $config = $this->config();
+    public function createPaymentAction(
+        object $order,
+        string $loginCode,
+        string $provider = WechatMiniVirtualGateway::PROVIDER
+    ): array {
+        $provider = $this->normalizeProvider($provider);
+        $config = $this->config($provider);
         $loginCode = trim($loginCode);
         if ($loginCode === '' || strlen($loginCode) > 128) {
             return $this->error('WX_LOGIN_CODE_REQUIRED', 'wx_login_code is required.', 422);
         }
-        if (! $this->orderContractMatches($order, $config)) {
+        if (! $this->orderContractMatches($order, $config, $provider)) {
             return $this->error('ORDER_CONTRACT_MISMATCH', 'order does not match virtual payment contract.', 409);
         }
 
@@ -119,7 +126,7 @@ final class WechatMiniVirtualPaymentService
         $orgId = (int) ($order->org_id ?? 0);
         $orderNo = trim((string) ($order->order_no ?? ''));
         $attempt = $this->orders->latestPaymentAttemptForOrder($orderNo, $orgId);
-        if ($attempt !== null && strtolower(trim((string) ($attempt->provider ?? ''))) !== WechatMiniVirtualGateway::PROVIDER) {
+        if ($attempt !== null && strtolower(trim((string) ($attempt->provider ?? ''))) !== $provider) {
             return $this->error('PAYMENT_ATTEMPT_PROVIDER_MISMATCH', 'payment attempt provider mismatch.', 409);
         }
 
@@ -135,7 +142,7 @@ final class WechatMiniVirtualPaymentService
             $created = $this->orders->createPaymentAttempt(
                 $orderNo,
                 $orgId,
-                WechatMiniVirtualGateway::PROVIDER,
+                $provider,
                 'wechat_miniapp',
                 (string) $config['app_id'],
                 'mini_program',
@@ -176,6 +183,7 @@ final class WechatMiniVirtualPaymentService
             'offer_id_hash' => hash('sha256', (string) $config['offer_id']),
             'product_id' => (string) $config['product_id'],
             'environment' => (int) $config['environment'],
+            'channel' => $provider,
         ];
         $this->orders->advancePaymentAttempt((string) ($attempt->id ?? ''), [
             'state' => PaymentAttempt::STATE_CLIENT_PRESENTED,
@@ -198,8 +206,8 @@ final class WechatMiniVirtualPaymentService
             'ok' => true,
             'order_no' => $orderNo,
             'pay' => [
-                'type' => WechatMiniVirtualGateway::PROVIDER,
-                'provider' => WechatMiniVirtualGateway::PROVIDER,
+                'type' => $provider,
+                'provider' => $provider,
                 'params' => [
                     'signData' => $signDataJson,
                     'paySig' => $paySig,
@@ -213,10 +221,13 @@ final class WechatMiniVirtualPaymentService
     /**
      * @return array<string,mixed>
      */
-    public function reconcile(object $order): array
-    {
-        $config = $this->config();
-        if (! $this->orderContractMatches($order, $config)) {
+    public function reconcile(
+        object $order,
+        string $provider = WechatMiniVirtualGateway::PROVIDER
+    ): array {
+        $provider = $this->normalizeProvider($provider);
+        $config = $this->config($provider);
+        if (! $this->orderContractMatches($order, $config, $provider)) {
             return $this->error('ORDER_CONTRACT_MISMATCH', 'order does not match virtual payment contract.', 409);
         }
 
@@ -224,7 +235,7 @@ final class WechatMiniVirtualPaymentService
             (string) ($order->order_no ?? ''),
             (int) ($order->org_id ?? 0)
         );
-        if ($attempt === null || strtolower((string) ($attempt->provider ?? '')) !== WechatMiniVirtualGateway::PROVIDER) {
+        if ($attempt === null || strtolower((string) ($attempt->provider ?? '')) !== $provider) {
             return $this->error('PAYMENT_ATTEMPT_NOT_FOUND', 'virtual payment attempt not found.', 409);
         }
         $meta = $this->decodeJson($attempt->payload_meta_json ?? null);
@@ -264,6 +275,15 @@ final class WechatMiniVirtualPaymentService
 
         $providerOrder = is_array($decoded['body']['order'] ?? null) ? $decoded['body']['order'] : [];
         $status = (int) ($providerOrder['status'] ?? 0);
+        $orderType = (int) ($providerOrder['order_type'] ?? -1);
+        $envType = (int) ($providerOrder['env_type'] ?? 0);
+        if ($provider === AppleIapGateway::PROVIDER && ! in_array($orderType, [7, 8], true)) {
+            return $this->error('PROVIDER_CHANNEL_MISMATCH', 'provider order is not an Apple-routed payment.', 409);
+        }
+        $expectedEnvType = (int) $config['environment'] === 0 ? 1 : 2;
+        if ($envType > 0 && $envType !== $expectedEnvType) {
+            return $this->error('PROVIDER_ENV_MISMATCH', 'provider environment mismatch.', 409);
+        }
         $amount = (int) ($providerOrder['order_fee'] ?? 0);
         $paidAmount = (int) ($providerOrder['paid_fee'] ?? $amount);
         if (in_array($status, [2, 3, 4], true)
@@ -271,16 +291,26 @@ final class WechatMiniVirtualPaymentService
             return $this->error('AMOUNT_MISMATCH', 'provider amount mismatch.', 409);
         }
 
+        $providerTradeNo = trim((string) (
+            $provider === AppleIapGateway::PROVIDER
+                ? ($providerOrder['channel_order_id'] ?? $providerOrder['wx_order_id'] ?? '')
+                : ($providerOrder['wx_order_id'] ?? '')
+        ));
+        if ($providerTradeNo === '') {
+            $providerTradeNo = (string) ($attempt->external_trade_no ?? '');
+        }
         $eventPayload = [
-            'provider_event_id' => sprintf(
-                'query:%s:%d:%d',
-                (string) ($providerOrder['wx_order_id'] ?? $attempt->external_trade_no ?? ''),
-                $status,
-                (int) ($providerOrder['update_time'] ?? 0)
-            ),
+            'provider_event_id' => $provider === AppleIapGateway::PROVIDER
+                ? sprintf('%s:%s', in_array($status, [5, 8, 9, 10], true) ? 'refund' : 'payment', $providerTradeNo)
+                : sprintf(
+                    'query:%s:%d:%d',
+                    $providerTradeNo,
+                    $status,
+                    (int) ($providerOrder['update_time'] ?? 0)
+                ),
             'order_no' => (string) ($order->order_no ?? ''),
             'external_order_no' => (string) ($attempt->external_trade_no ?? ''),
-            'provider_trade_no' => (string) ($providerOrder['wx_order_id'] ?? ''),
+            'provider_trade_no' => $providerTradeNo,
             'provider_status' => $status,
             'amount_cents' => $amount,
             'refund_amount_cents' => (int) ($providerOrder['refund_fee'] ?? 0),
@@ -290,7 +320,7 @@ final class WechatMiniVirtualPaymentService
 
         if (in_array($status, [2, 3, 4, 5, 6, 8, 9, 10], true)) {
             $processed = $this->webhooks->handle(
-                WechatMiniVirtualGateway::PROVIDER,
+                $provider,
                 $eventPayload,
                 (int) ($order->org_id ?? 0),
                 isset($order->user_id) ? (string) $order->user_id : null,
@@ -304,7 +334,7 @@ final class WechatMiniVirtualPaymentService
             if ($status === 2) {
                 $this->notifyProvidedGoods(
                     (string) ($attempt->external_trade_no ?? ''),
-                    (string) ($providerOrder['wx_order_id'] ?? ''),
+                    (string) ($providerOrder['wx_order_id'] ?? $providerTradeNo),
                     (string) $accessToken['access_token'],
                     $config
                 );
@@ -327,9 +357,14 @@ final class WechatMiniVirtualPaymentService
     /**
      * @return array<string,mixed>
      */
-    public function handleCallback(Request $request): array
-    {
-        $gateway = new WechatMiniVirtualGateway;
+    public function handleCallback(
+        Request $request,
+        string $provider = WechatMiniVirtualGateway::PROVIDER
+    ): array {
+        $provider = $this->normalizeProvider($provider);
+        $gateway = $provider === AppleIapGateway::PROVIDER
+            ? new AppleIapGateway
+            : new WechatMiniVirtualGateway;
         if (! $gateway->verifySignature($request)) {
             return $this->error('INVALID_SIGNATURE', 'invalid signature.', 400);
         }
@@ -351,13 +386,13 @@ final class WechatMiniVirtualPaymentService
 
         $externalOrderNo = trim((string) ($payload['OutTradeNo'] ?? $payload['out_trade_no'] ?? $payload['MchOrderId'] ?? ''));
         $order = DB::table('orders')
-            ->where('provider', WechatMiniVirtualGateway::PROVIDER)
+            ->where('provider', $provider)
             ->where('external_trade_no', $externalOrderNo)
             ->first();
         if (! $order) {
             return $this->error('ORDER_NOT_FOUND', 'order not found.', 404);
         }
-        $validation = $this->validateCallbackContract($payload, $order);
+        $validation = $this->validateCallbackContract($payload, $order, $provider);
         if (($validation['ok'] ?? false) !== true) {
             return $validation;
         }
@@ -367,6 +402,8 @@ final class WechatMiniVirtualPaymentService
         $normalizedPayload = array_merge($payload, [
             'provider_event_id' => $eventType.':'.trim((string) (
                 $wechatInfo['TransactionId']
+                ?? $payload['channel_order_id']
+                ?? $payload['channel_bill']
                 ?? $payload['WxRefundId']
                 ?? $payload['wx_refund_id']
                 ?? $externalOrderNo
@@ -378,7 +415,7 @@ final class WechatMiniVirtualPaymentService
             'event_type' => $eventType === 'xpay_refund_notify' ? 'refund_succeeded' : 'payment_succeeded',
         ]);
         $result = $this->webhooks->handle(
-            WechatMiniVirtualGateway::PROVIDER,
+            $provider,
             $normalizedPayload,
             (int) ($order->org_id ?? 0),
             isset($order->user_id) ? (string) $order->user_id : null,
@@ -396,10 +433,10 @@ final class WechatMiniVirtualPaymentService
         return $result;
     }
 
-    private function validateCallbackContract(array $payload, object $order): array
+    private function validateCallbackContract(array $payload, object $order, string $provider): array
     {
-        $config = $this->config();
-        if (! $this->orderContractMatches($order, $config)) {
+        $config = $this->config($provider);
+        if (! $this->orderContractMatches($order, $config, $provider)) {
             return $this->error('ORDER_CONTRACT_MISMATCH', 'order contract mismatch.', 409);
         }
         $attempt = $this->orders->latestPaymentAttemptForOrder(
@@ -445,6 +482,9 @@ final class WechatMiniVirtualPaymentService
         $env = (int) ($payload['Env'] ?? $payload['env'] ?? -1);
         if ($env !== (int) $config['environment']) {
             return $this->error('PROVIDER_ENV_MISMATCH', 'provider environment mismatch.', 409);
+        }
+        if ($provider === AppleIapGateway::PROVIDER && $env !== 0) {
+            return $this->error('PROVIDER_ENV_MISMATCH', 'Apple-routed payment must use the production environment.', 409);
         }
         $goods = is_array($payload['GoodsInfo'] ?? null) ? $payload['GoodsInfo'] : [];
         $productId = trim((string) ($goods['ProductId'] ?? $goods['product_id'] ?? ''));
@@ -582,9 +622,9 @@ final class WechatMiniVirtualPaymentService
         return ['ok' => true, 'body' => $body];
     }
 
-    private function orderContractMatches(object $order, array $config): bool
+    private function orderContractMatches(object $order, array $config, string $provider): bool
     {
-        return strtolower(trim((string) ($order->provider ?? ''))) === WechatMiniVirtualGateway::PROVIDER
+        return strtolower(trim((string) ($order->provider ?? ''))) === $provider
             && strtoupper(trim((string) ($order->sku ?? ''))) === strtoupper((string) $config['sku'])
             && (int) ($order->quantity ?? 0) === 1
             && (int) ($order->amount_cents ?? 0) === (int) $config['price_cents']
@@ -632,11 +672,20 @@ final class WechatMiniVirtualPaymentService
         return is_array($decoded) ? $decoded : [];
     }
 
-    private function config(): array
+    private function config(string $provider): array
     {
-        $config = config('payments.wechat_mini_virtual', []);
+        $config = config('payments.'.$this->normalizeProvider($provider), []);
 
         return is_array($config) ? $config : [];
+    }
+
+    private function normalizeProvider(string $provider): string
+    {
+        $provider = strtolower(trim($provider));
+
+        return $provider === AppleIapGateway::PROVIDER
+            ? AppleIapGateway::PROVIDER
+            : WechatMiniVirtualGateway::PROVIDER;
     }
 
     private function timeout(array $config): int

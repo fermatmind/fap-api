@@ -46,6 +46,10 @@ return [
             'enabled' => (bool) env('PAYMENTS_PROVIDER_WECHAT_MINI_VIRTUAL_ENABLED', false),
             'auto_enable_when_configured' => false,
         ],
+        'apple_iap' => [
+            'enabled' => (bool) env('PAYMENTS_PROVIDER_APPLE_IAP_ENABLED', false),
+            'auto_enable_when_configured' => false,
+        ],
         'alipay' => [
             'enabled' => (bool) env('PAYMENTS_PROVIDER_ALIPAY_ENABLED', false),
             'auto_enable_when_configured' => (bool) env('PAYMENTS_PROVIDER_ALIPAY_AUTO_ENABLE_WHEN_CONFIGURED', true),
@@ -80,5 +84,21 @@ return [
         'sku' => env('WECHAT_MINI_VIRTUAL_SKU', 'MBTI_REPORT_FULL'),
         'price_cents' => (int) env('WECHAT_MINI_VIRTUAL_PRICE_CENTS', 499),
         'http_timeout_seconds' => (int) env('WECHAT_MINI_VIRTUAL_HTTP_TIMEOUT_SECONDS', 8),
+    ],
+    // WeChat Mini Program iOS virtual payment is routed by WeChat to Apple.
+    // It uses the same wx.requestVirtualPayment/xpay contract, not merchant-side
+    // StoreKit receipts or App Store Server API credentials. iOS supports env=0 only.
+    'apple_iap' => [
+        'app_id' => env('APPLE_IAP_WECHAT_APP_ID', ''),
+        'app_secret' => env('APPLE_IAP_WECHAT_APP_SECRET', ''),
+        'offer_id' => env('APPLE_IAP_WECHAT_OFFER_ID', ''),
+        'app_key' => env('APPLE_IAP_WECHAT_APP_KEY', ''),
+        'callback_token' => env('APPLE_IAP_WECHAT_CALLBACK_TOKEN', ''),
+        'environment' => 0,
+        'mode' => env('APPLE_IAP_WECHAT_MODE', 'short_series_goods'),
+        'product_id' => env('APPLE_IAP_WECHAT_PRODUCT_ID', ''),
+        'sku' => env('APPLE_IAP_WECHAT_SKU', 'MBTI_REPORT_FULL'),
+        'price_cents' => (int) env('APPLE_IAP_WECHAT_PRICE_CENTS', 499),
+        'http_timeout_seconds' => (int) env('APPLE_IAP_WECHAT_HTTP_TIMEOUT_SECONDS', 8),
     ],
 ];
