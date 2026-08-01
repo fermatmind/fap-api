@@ -192,8 +192,8 @@ final class RiasecPublicProjectionService
         ];
         $projection['module_visibility_policy'] = $this->moduleSelector->build($projection);
         $projection['deep_content_slots_v1'] = $this->deepContentSlotsEnvelope($projection, $locale);
-        $projection['exploration_feedback_overlay_v0_1'] = $this->feedbackOverlay->build($result, $projection, $snapshotBound);
-        $projection['lifecycle_copy_v1'] = $this->lifecycleCopy->lifecycleCopyContract($snapshotBound, $locale);
+        $projection['exploration_feedback_overlay_v0_1'] = $this->feedbackOverlay->build($result, $projection, $snapshotBound, $locale);
+        $projection['lifecycle_copy_v1'] = $this->lifecycleCopy->runtimeLifecycleCopyContract($snapshotBound, $locale);
 
         return $projection;
     }
@@ -334,6 +334,7 @@ final class RiasecPublicProjectionService
         string $locale,
         ?string $forcedVisibility = null
     ): void {
+        $slot = $this->deepCopySlots->resolveForLocale($slot, $locale);
         if (($slot['content_status'] ?? null) !== 'authored') {
             return;
         }

@@ -245,6 +245,38 @@ final class RiasecDeepCopySlotRegistry
     }
 
     /**
+     * Keep deep-result content locale-bound. A slot may only be rendered when
+     * its declared locale equals the request locale; callers must omit a
+     * missing locale rather than infer or translate it at runtime.
+     *
+     * @param  array<string,mixed>  $slot
+     * @return array<string,mixed>
+     */
+    public function resolveForLocale(array $slot, string $locale): array
+    {
+        $requestedLocale = $this->normalizeContentLocale($locale);
+        $slotLocale = $this->normalizeContentLocale((string) ($slot['locale'] ?? ''));
+
+        if ($slotLocale === $requestedLocale) {
+            return $slot;
+        }
+
+        return [
+            'slot_key' => (string) ($slot['slot_key'] ?? 'riasec_deep_copy'),
+            'slot_group' => (string) ($slot['slot_group'] ?? ''),
+            'slot_name' => (string) ($slot['slot_name'] ?? ''),
+            'locale' => $requestedLocale,
+            'requested_locale' => $requestedLocale,
+            'source_locale' => $slotLocale,
+            'content_status' => 'unavailable',
+            'module_state' => 'omitted',
+            'fallback_behavior' => 'omit_module',
+            'frontend_fallback_allowed' => false,
+            'reason' => 'locale_content_unavailable',
+        ];
+    }
+
+    /**
      * @return array<string,array<string,mixed>>
      */
     public function pairBlendSlots(): array
@@ -2710,6 +2742,11 @@ final class RiasecDeepCopySlotRegistry
             'missing_content_fails_closed',
             'frontend_fallback_forbidden',
         ];
+    }
+
+    private function normalizeContentLocale(string $locale): string
+    {
+        return str_starts_with(strtolower(trim($locale)), 'zh') ? 'zh-CN' : 'en';
     }
 
     private function isBlank(mixed $value): bool

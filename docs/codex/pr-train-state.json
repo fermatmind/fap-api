@@ -204,7 +204,7 @@
       "API-GIFT-SCHEMA-01",
       "API-VPAY-01"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "472b256c42cf99c208414fe92b72aab0b124bc1f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3448",
     "checks": {
@@ -103059,5 +103059,75 @@
       }
     ],
     "updated_at": "2026-08-01T11:26:55Z"
+  },
+  "EN-PARITY-W4-RIASEC-RUNTIME-LOCALE-01": {
+    "id": "EN-PARITY-W4-RIASEC-RUNTIME-LOCALE-01",
+    "repo": "fap-api",
+    "title": "EN-PARITY-W4-RIASEC-RUNTIME-LOCALE-01 add locale-aware backend RIASEC content resolution",
+    "base": "main",
+    "branch": "codex/en-parity-w4-riasec-runtime-locale-01",
+    "depends_on": [
+      "EN-PARITY-W4-RIASEC-INVENTORY-01"
+    ],
+    "status": "github_checks_pending",
+    "commit_sha": "3817a8c9c61bb4152ba5e6a6bd85711d53099db6",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3472",
+    "checks": {
+      "preflight": {
+        "status": "pass",
+        "evidence": "W4 inventory producer PR #1940 and revalidation PR #1944 are merged; CONTROL PR #1946 sets W4 to launch_ready/inventory_frozen with all write and release permissions false. The runtime scope was rebased to fap-api origin/main 780403247d8367e50e06ccb70bb2ae6d5b450f2c after the isolated Pint baseline repair merged."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "After latest-main rebase, php artisan test tests/Unit/Services/Riasec --no-ansi passed 84 tests / 114429 assertions. ./vendor/bin/pint --test passed 4724 files. PHP syntax, YAML/JSON parsing, git diff --check, git diff --cached --check, Han-copy scan, and exact nine-path scope validation passed. The 108 test warnings are existing file_get_contents path deprecations from the isolated temporary worktree."
+      },
+      "changed_file_scope": {
+        "status": "passed",
+        "evidence": "Changes are limited to five RIASEC locale-resolution services, one focused locale test, the directly affected fixture-matrix expectation, and the registered PR-train manifest/state. No English reader copy, scoring, question pack, CMS/database/import, private data, runtime release, SEO, search, or deploy path changed."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "Exact implementation head 21ae058a467419c18d2ca01f0a1d7c28e43d58b0 passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep OSS, Semgrep blocking secrets, and non-blocking SARIF; staging parity was skipped."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-08-01T19:00:00+08:00",
+        "status": "in_progress",
+        "note": "Started from isolated fap-api worktree after W4 inventory_frozen control acceptance. Scope is locale-equal, review-gated, fail-closed backend selection only; no English reader copy, scoring, CMS/import, publication, or deploy work is authorized."
+      },
+      {
+        "at": "2026-08-01T19:39:03+08:00",
+        "status": "rebased_after_baseline_repair",
+        "note": "Rebased to exact origin/main 780403247d8367e50e06ccb70bb2ae6d5b450f2c after isolated PR #3471 repaired pre-existing repository-wide Pint violations and passed all required checks."
+      },
+      {
+        "at": "2026-08-01T19:41:47+08:00",
+        "status": "local_verified",
+        "note": "Locale-equal fail-closed projection now suppresses unavailable English deep/activity/feedback/lifecycle copy while retaining zh-CN behavior. The full RIASEC suite, full Pint, syntax, parsers, diff checks, Han-copy scan, and exact scope validation all pass."
+      },
+      {
+        "at": "2026-08-01T19:43:00+08:00",
+        "status": "github_checks_pending",
+        "note": "Pushed exact implementation head 3817a8c9c61bb4152ba5e6a6bd85711d53099db6 and opened PR #3472. Required GitHub checks, mergeability, squash merge, branch cleanup, and post-merge validation remain pending."
+      },
+      {
+        "at": "2026-08-01T19:50:00+08:00",
+        "status": "ready_to_merge",
+        "note": "Exact implementation head 21ae058a467419c18d2ca01f0a1d7c28e43d58b0 passed all applicable required checks with staging parity skipped. This ledger-only readiness update requires its own fresh required checks before squash merge."
+      }
+    ],
+    "updated_at": "2026-08-01T19:50:00+08:00"
   }
 }
