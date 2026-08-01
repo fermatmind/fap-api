@@ -48137,3 +48137,57 @@ prs:
     activation_allowed: false
     publish_allowed: false
     deploy_allowed: false
+
+  - id: EN-PARITY-W1-MBTI-COMPARISON-PUBLISH-LIVE-QA-01
+    repo: fap-api
+    base: main
+    branch: codex/en-parity-w1-mbti-comparison-publish-live-qa-01
+    title: "EN-PARITY-W1-MBTI-COMPARISON-PUBLISH-LIVE-QA-01: publish seven English MBTI comparisons with live QA"
+    status: in_progress
+    depends_on: [EN-PARITY-W1-MBTI-TARGET-AUTHORITY-RECEIPT-01]
+    external_dependencies:
+      - exact target-authority receipt SHA b44e50a252f48d85ca93f572f4bf5ee7f334d6155a19713cfd3c8185359edae8
+      - exact production runtime revision 660280d00a57e58bd8bc76608e19de2492c03f53
+      - exact human-operator publish approval SHA 3a9a929dcfecc64a02d40453540a0d0ad71c002f10304d8d544c597f808a3f1c
+    train_scope: en_parity_w1_mbti_comparison_controlled_publish_live_qa
+    scope:
+      - Add a fail-closed, exact-approval-bound publisher for only the seven W1 English MBTI comparison authority rows.
+      - Require the exact frozen package, target-authority receipt, slug set, and deployed English runtime revision before the protected production workflow can write.
+      - Publish the exact English drafts atomically while preserving noindex, sitemap exclusion, llms withholding, search hold, and every non-publish authority boundary.
+      - Produce a sanitized immutable publication/readback/live-QA receipt that verifies the deployed English runtime projection.
+    allowed_paths:
+      - backend/app/Services/Cms/MbtiComparisonEnglishPublishService.php
+      - backend/scripts/mbti_comparison_english_publish_live_qa.php
+      - backend/tests/Feature/Cms/MbtiComparisonEnglishPublishServiceTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/content_assets/en-content-parity/CONTROL-approvals/W1-MBTI-COMPARISONS/publish-live-approval-2026-08-01.json
+      - .github/workflows/mbti-comparison-english-publish-live-qa.yml
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Publish or activate result content, mutate a content-pack active pointer, or alter any zh-CN or non-target English comparison.
+      - Enable indexability, sitemap, hreflang, llms, JSON-LD, search submission, canonical release, or any discoverability surface.
+      - Run a migration, queue/cache restart, generic CMS endpoint, staging/manual/production deployment, or private attempt/report/order/payment read.
+    validation:
+      - cd backend && php artisan test tests/Feature/Cms/MbtiComparisonEnglishPublishServiceTest.php --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=controlled_w1_english_comparison_publisher --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Cms/MbtiComparisonEnglishPublishService.php scripts/mbti_comparison_english_publish_live_qa.php tests/Feature/Cms/MbtiComparisonEnglishPublishServiceTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && php -l app/Services/Cms/MbtiComparisonEnglishPublishService.php && php -l scripts/mbti_comparison_english_publish_live_qa.php
+      - sha256sum backend/content_assets/en-content-parity/CONTROL-approvals/W1-MBTI-COMPARISONS/publish-live-approval-2026-08-01.json
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: true
+    database_mutation: true
+    cms_mutation: true
+    private_payload_read: false
+    activation_allowed: false
+    publish_allowed: true
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: backend MBTI comparison authority; only exact English comparison rows become public and remain noindex
+    repository_rule_impact: adds an exact-SHA controlled publication path; backend authority remains canonical and no discoverability surface is released
