@@ -103142,9 +103142,9 @@
     "base": "main",
     "branch": "codex/en-parity-w4-riasec-dimension-assets-01",
     "depends_on": ["EN-PARITY-W4-RIASEC-RUNTIME-LOCALE-01"],
-    "status": "local_verified",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "f524e2ab047c32b0542936a8ced1586a304bd945",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3474",
     "checks": {
       "preflight": {
         "status": "passed",
@@ -103180,8 +103180,13 @@
         "at": "2026-08-01T20:15:00+08:00",
         "status": "local_verified",
         "note": "Produced exactly 42 English candidate identities for G01/G02 with source SHA binding, producer self-review only, immutable payload SHA manifest, all-false permissions, and no runtime/release claim. Focused validation, format, parser, English-only, count, and scope checks pass."
+      },
+      {
+        "at": "2026-08-01T20:18:00+08:00",
+        "status": "github_checks_pending",
+        "note": "Pushed implementation head f524e2ab047c32b0542936a8ced1586a304bd945 and opened PR #3474. Required GitHub checks, mergeability, squash merge, cleanup, and post-merge revalidation remain pending."
       }
     ],
-    "updated_at": "2026-08-01T20:15:00+08:00"
+    "updated_at": "2026-08-01T20:18:00+08:00"
   }
 }
