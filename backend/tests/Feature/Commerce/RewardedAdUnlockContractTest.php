@@ -6,6 +6,7 @@ namespace Tests\Feature\Commerce;
 
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Services\Commerce\EntitlementManager;
 use App\Services\Commerce\RewardedAdUnlockService;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -159,7 +160,7 @@ final class RewardedAdUnlockContractTest extends TestCase
         $this->assertSame(2, DB::table('benefit_grants')->where('attempt_id', $attemptId)->count());
     }
 
-    public function test_completion_is_serialized_per_attempt_and_actor_before_any_grant_is_created(): void
+    public function test_completion_is_serialized_per_attempt_before_any_grant_is_created(): void
     {
         $anonId = 'anon_rewarded_locked';
         $attemptId = $this->createAttempt($anonId);
@@ -170,10 +171,8 @@ final class RewardedAdUnlockContractTest extends TestCase
             ->json('session.id');
 
         $service = app(RewardedAdUnlockService::class);
-        $actorMethod = new \ReflectionMethod($service, 'actor');
-        $actor = $actorMethod->invoke($service, null, $anonId);
         $keyMethod = new \ReflectionMethod($service, 'attemptCompletionLockKey');
-        $lockKey = (string) $keyMethod->invoke($service, Attempt::query()->findOrFail($attemptId), $actor['fingerprint']);
+        $lockKey = (string) $keyMethod->invoke($service, Attempt::query()->findOrFail($attemptId));
         $lock = Cache::lock($lockKey, 15);
         $this->assertTrue($lock->get());
 
@@ -189,6 +188,86 @@ final class RewardedAdUnlockContractTest extends TestCase
         } finally {
             $lock->release();
         }
+    }
+
+    public function test_completion_creates_a_current_actor_grant_after_an_attempt_is_claimed(): void
+    {
+        $oldAnonId = 'anon_rewarded_before_claim';
+        $currentAnonId = 'anon_rewarded_after_claim';
+        $userId = '144';
+        $attemptId = $this->createAttempt($oldAnonId);
+        $this->insertHistoricalActiveGrant($attemptId, $oldAnonId);
+        DB::table('users')->insert([
+            'id' => (int) $userId,
+            'name' => 'Rewarded Ad Claimed Owner',
+            'email' => 'rewarded-ad-claimed-owner@example.test',
+            'password' => bcrypt('secret'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('attempts')->where('id', $attemptId)->update(['user_id' => $userId]);
+        $headers = $this->headersFor($currentAnonId, $userId);
+
+        $sessionId = (string) $this->withHeaders($headers)
+            ->postJson('/api/v0.3/attempts/'.$attemptId.'/rewarded-ad-sessions', ['ad_unit_id' => self::AD_UNIT_ID])
+            ->assertOk()
+            ->json('session.id');
+
+        $this->withHeaders($headers)
+            ->postJson('/api/v0.3/attempts/'.$attemptId.'/rewarded-ad-sessions/'.$sessionId.'/complete', [
+                'ad_unit_id' => self::AD_UNIT_ID,
+                'is_ended' => true,
+            ])
+            ->assertOk()
+            ->assertJsonPath('report_access.access_level', 'full')
+            ->assertJsonPath('report_access.full_report_entitlement_v1.unlock_source', 'rewarded_ad');
+
+        $this->assertSame(2, DB::table('benefit_grants')->where('attempt_id', $attemptId)->where('status', 'active')->count());
+        $this->assertSame(1, DB::table('benefit_grants')->where('attempt_id', $attemptId)->where('user_id', $userId)->count());
+    }
+
+    public function test_refund_retry_does_not_revoke_a_later_rewarded_ad_grant(): void
+    {
+        $anonId = 'anon_rewarded_refund_retry';
+        $attemptId = $this->createAttempt($anonId);
+        $orderNo = 'ord_rewarded_refund_retry';
+        $this->insertRefundedOrder($orderNo, $attemptId, $anonId);
+        app(EntitlementManager::class)->grantAttemptUnlock(
+            0,
+            null,
+            $anonId,
+            'MBTI_REPORT_FULL',
+            $attemptId,
+            $orderNo,
+            'attempt',
+            null,
+            [],
+            ['unlock_source' => 'self_purchase'],
+        );
+        $firstRefund = app(EntitlementManager::class)->revokeByOrderNo(0, $orderNo);
+        $this->assertSame(1, (int) ($firstRefund['revoked'] ?? 0));
+
+        $headers = $this->headersFor($anonId);
+        $sessionId = (string) $this->withHeaders($headers)
+            ->postJson('/api/v0.3/attempts/'.$attemptId.'/rewarded-ad-sessions', ['ad_unit_id' => self::AD_UNIT_ID])
+            ->assertOk()
+            ->json('session.id');
+        $this->withHeaders($headers)
+            ->postJson('/api/v0.3/attempts/'.$attemptId.'/rewarded-ad-sessions/'.$sessionId.'/complete', [
+                'ad_unit_id' => self::AD_UNIT_ID,
+                'is_ended' => true,
+            ])
+            ->assertOk()
+            ->assertJsonPath('report_access.access_level', 'full');
+
+        $retryRefund = app(EntitlementManager::class)->revokeByOrderNo(0, $orderNo);
+        $this->assertSame(0, (int) ($retryRefund['revoked'] ?? -1));
+        $this->assertTrue((bool) ($retryRefund['idempotent'] ?? false));
+        $this->assertSame(1, DB::table('benefit_grants')
+            ->where('attempt_id', $attemptId)
+            ->where('status', 'active')
+            ->whereNull('order_no')
+            ->count());
     }
 
     public function test_expired_session_and_disabled_or_iq_unlocks_fail_closed(): void
@@ -321,14 +400,60 @@ final class RewardedAdUnlockContractTest extends TestCase
         ]);
     }
 
+    private function insertHistoricalActiveGrant(string $attemptId, string $anonId): void
+    {
+        DB::table('benefit_grants')->insert([
+            'id' => (string) Str::uuid(),
+            'org_id' => 0,
+            'user_id' => $anonId,
+            'benefit_code' => 'MBTI_REPORT_FULL',
+            'scope' => 'attempt',
+            'attempt_id' => $attemptId,
+            'order_no' => 'historical-active-order',
+            'status' => 'active',
+            'benefit_ref' => $anonId,
+            'benefit_type' => 'report_unlock',
+            'source_order_id' => (string) Str::uuid(),
+            'source_event_id' => null,
+            'meta_json' => json_encode(['unlock_source' => 'self_purchase']),
+            'created_at' => now()->subDay(),
+            'updated_at' => now()->subDay(),
+        ]);
+    }
+
+    private function insertRefundedOrder(string $orderNo, string $attemptId, string $anonId): void
+    {
+        DB::table('orders')->insert([
+            'id' => (string) Str::uuid(),
+            'order_no' => $orderNo,
+            'org_id' => 0,
+            'user_id' => null,
+            'anon_id' => $anonId,
+            'sku' => 'MBTI_REPORT_FULL',
+            'item_sku' => 'MBTI_REPORT_FULL',
+            'effective_sku' => 'MBTI_REPORT_FULL',
+            'quantity' => 1,
+            'target_attempt_id' => $attemptId,
+            'amount_cents' => 499,
+            'amount_total' => 499,
+            'amount_refunded' => 499,
+            'currency' => 'CNY',
+            'status' => 'refunded',
+            'payment_state' => 'refunded',
+            'provider' => 'billing',
+            'created_at' => now()->subDay(),
+            'updated_at' => now()->subDay(),
+        ]);
+    }
+
     /** @return array<string,string> */
-    private function headersFor(string $anonId): array
+    private function headersFor(string $anonId, ?string $userId = null): array
     {
         $token = 'fm_'.(string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,
             'token_hash' => hash('sha256', $token),
-            'user_id' => null,
+            'user_id' => $userId,
             'anon_id' => $anonId,
             'org_id' => 0,
             'role' => 'public',

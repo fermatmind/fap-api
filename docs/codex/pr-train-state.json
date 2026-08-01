@@ -6,7 +6,7 @@
     "branch": "codex/api-ad-01-rewarded-unlock",
     "title": "API-AD-01: add residual-risk rewarded-ad report unlock",
     "depends_on": ["API-UNLOCK-01"],
-    "status": "github_review_repairing",
+    "status": "github_checks_pending",
     "commit_sha": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3469",
     "checks": {
@@ -19,8 +19,8 @@
         "evidence": "The operator-provided rewarded-video API material documents only client onClose(res).isEnded. No platform server receipt, callback, signature, query, delivery, or anti-replay protocol was supplied."
       },
       "github_required_checks": {
-        "status": "repairing",
-        "evidence": "PR #3469's prior repaired head passed all required checks. Exact-head review then found that a revoked/expired historical grant could be treated as idempotent without restoring access, that separate concurrent rewarded sessions could race, and that EntitlementManager still had a broad classifier exemption. The current repair preserves historical inactive rows and creates a distinct active rewarded grant, serializes completion by actor+attempt cache lock, and accepts only exact review-approved EntitlementManager diffs; GitHub must rerun required checks, exact-head review, mergeability, and latest-main reconciliation."
+        "status": "pending",
+        "evidence": "PR #3469's previous exact head passed all required checks. A subsequent exact-head review found three further service boundaries: completion must serialize across every owner of one attempt, repeated refunds must not revoke a later orderless rewarded-ad grant, and an active grant must match the current actor before reuse. The repair locks by org+attempt, treats historical grants for the refunded order as idempotent without the attempt-wide fallback, and requires the same actor predicate used for report access. Focused rewarded-ad, refund/entitlement, classifier, syntax, Pint, and diff checks pass; GitHub must rerun required checks, exact-head review, mergeability, and latest-main reconciliation."
       }
     },
     "scope_validation": {
@@ -64,9 +64,14 @@
         "at": "2026-08-01T18:33:22+08:00",
         "status": "github_review_repairing",
         "note": "Exact-head review found three valid service boundaries: a revoked/expired historical grant must not make completion look successful while access stays locked; separate live rewarded sessions need attempt+actor completion serialization; and the shared EntitlementManager classifier must be diff-specific. The repair creates a distinct active rewarded grant while retaining the old inactive row, returns 409 before any grant when that actor+attempt lock is held, and allows only the exact signed initial, repair, or combined EntitlementManager diff sequences. Rewarded-ad contracts pass 7 tests / 56 assertions; the targeted classifier passes 2 / 32 and its source-level negative controls pass. No provider activation or production/platform action occurred. Fresh GitHub checks and exact-head review remain mandatory."
+      },
+      {
+        "at": "2026-08-01T18:53:28+08:00",
+        "status": "github_checks_pending",
+        "note": "Exact-head review then found three further valid boundaries. Completion now serializes by org+attempt rather than actor, a repeated refund recognizes its own historical order grant and cannot fall through to revoke a later orderless rewarded-ad grant, and active grant reuse requires the current report-access actor predicate. Rewarded-ad contracts pass 9 tests / 69 assertions; adjacent gift-refund regression passes 2 / 30; entitlement projection/module regressions pass 2 / 13; the exact runtime-freeze classifier, scoped Pint, syntax, and diff checks pass. No provider activation or production/platform action occurred. Fresh GitHub checks and exact-head review remain mandatory."
       }
     ],
-    "updated_at": "2026-08-01T18:33:22+08:00"
+    "updated_at": "2026-08-01T18:53:28+08:00"
   },
   "API-IAP-01": {
     "id": "API-IAP-01",

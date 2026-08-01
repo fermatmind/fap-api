@@ -150,7 +150,7 @@ final class RewardedAdUnlockService
         }
 
         $attemptLock = Cache::lock(
-            $this->attemptCompletionLockKey($attempt, $actor['fingerprint']),
+            $this->attemptCompletionLockKey($attempt),
             self::ATTEMPT_COMPLETION_LOCK_TTL_SECONDS,
         );
         $attemptLockAcquired = false;
@@ -196,6 +196,7 @@ final class RewardedAdUnlockService
                     'rewarded_ad_unit_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($adUnitId),
                     'rewarded_ad_completion_trust' => self::TRUST_MODE,
                 ],
+                true,
                 true,
                 true,
             );
@@ -339,12 +340,11 @@ final class RewardedAdUnlockService
         ]));
     }
 
-    private function attemptCompletionLockKey(Attempt $attempt, string $actorFingerprint): string
+    private function attemptCompletionLockKey(Attempt $attempt): string
     {
         return 'rewarded-ad-unlock:attempt-completion:'.hash('sha256', implode(':', [
             (string) $attempt->org_id,
             (string) $attempt->id,
-            $actorFingerprint,
         ]));
     }
 
