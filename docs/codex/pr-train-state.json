@@ -103069,9 +103069,9 @@
     "depends_on": [
       "EN-PARITY-W4-RIASEC-INVENTORY-01"
     ],
-    "status": "local_verified",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "3817a8c9c61bb4152ba5e6a6bd85711d53099db6",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3472",
     "checks": {
       "preflight": {
         "status": "pass",
@@ -103112,8 +103112,13 @@
         "at": "2026-08-01T19:41:47+08:00",
         "status": "local_verified",
         "note": "Locale-equal fail-closed projection now suppresses unavailable English deep/activity/feedback/lifecycle copy while retaining zh-CN behavior. The full RIASEC suite, full Pint, syntax, parsers, diff checks, Han-copy scan, and exact scope validation all pass."
+      },
+      {
+        "at": "2026-08-01T19:43:00+08:00",
+        "status": "github_checks_pending",
+        "note": "Pushed exact implementation head 3817a8c9c61bb4152ba5e6a6bd85711d53099db6 and opened PR #3472. Required GitHub checks, mergeability, squash merge, branch cleanup, and post-merge validation remain pending."
       }
     ],
-    "updated_at": "2026-08-01T19:41:47+08:00"
+    "updated_at": "2026-08-01T19:43:00+08:00"
   }
 }
