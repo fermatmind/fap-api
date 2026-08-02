@@ -693,7 +693,7 @@ jobs:
 
       - name: Upload Deployer timing receipt
         if: ${{ always() }}
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: deployer-task-timing-staging
           path: |
@@ -953,7 +953,7 @@ jobs:
 
       - name: Upload exact isolated Runtime 46 staging receipt
         if: ${{ steps.stale_guard.outputs.skip_deploy != 'true' && github.event_name == 'workflow_dispatch' && inputs.release_mode == 'mbti_runtime46_isolated' }}
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: mbti-runtime46-isolated-staging-${{ github.run_id }}
           path: artifacts/isolated-staging-receipt.json

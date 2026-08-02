@@ -633,7 +633,7 @@ jobs:
 
       - name: Upload immutable cache-only preflight
         if: always() && inputs.mode == 'preflight'
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: enneagram-pr23-cache-only-preflight-${{ github.run_id }}-${{ github.run_attempt }}
           path: preflight.json
@@ -642,7 +642,7 @@ jobs:
 
       - name: Upload cache-only execute receipt
         if: always() && inputs.mode == 'execute'
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: enneagram-pr23-cache-only-execute-${{ github.run_id }}-${{ github.run_attempt }}
           path: execute.json
@@ -651,7 +651,7 @@ jobs:
 
       - name: Upload post-readback-only receipt
         if: always() && inputs.mode == 'post_readback_only'
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: enneagram-pr23-post-readback-${{ github.run_id }}-${{ github.run_attempt }}
           path: post-readback.json
