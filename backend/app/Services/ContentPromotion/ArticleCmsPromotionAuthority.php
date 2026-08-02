@@ -25,7 +25,7 @@ final class ArticleCmsPromotionAuthority
 {
     private const SNAPSHOT_FIELDS = ['title', 'excerpt', 'content_md', 'seo_title', 'seo_description'];
 
-    private const ARTICLE_STATE_FIELDS = ['org_id', 'slug', 'locale', 'title', 'excerpt', 'content_md', 'content_html', 'cover_image_alt', 'related_test_slug', 'voice', 'voice_order', 'status', 'is_public', 'is_indexable', 'sitemap_eligible', 'llms_eligible', 'published_at'];
+    private const ARTICLE_STATE_FIELDS = ['org_id', 'slug', 'locale', 'title', 'excerpt', 'content_md', 'content_html', 'cover_image_alt', 'related_test_slug', 'voice', 'voice_order', 'translation_status', 'status', 'is_public', 'is_indexable', 'sitemap_eligible', 'llms_eligible', 'published_at'];
 
     public function __construct(
         private readonly ArticleController $publicApi,
@@ -39,6 +39,9 @@ final class ArticleCmsPromotionAuthority
     {
         if ($context->lane !== 'W3' || $context->subscope !== 'articles') {
             throw new DomainException('article_promotion_context_invalid');
+        }
+        if (is_file($context->packageDirectory.'/promotion_manifest.json')) {
+            return $this->inspectExternalFrozenPackage($context);
         }
         $manifestBytes = $this->read($context->packageDirectory, 'manifest.json');
         $manifest = $this->decode($manifestBytes, 'article_promotion_manifest_invalid');
@@ -123,6 +126,165 @@ final class ArticleCmsPromotionAuthority
         return ['targets' => $targets, 'package_sha256' => $packageSha];
     }
 
+    /**
+     * Reads the non-symlinked W3 producer snapshot without recomputing its
+     * package identity. The promoted payload remains the exact fap-web package
+     * named by external evidence; this backend envelope is only an executable
+     * authority binding.
+     *
+     * @return array{targets:list<array<string,mixed>>,package_sha256:string}
+     */
+    private function inspectExternalFrozenPackage(PromotionContext $context): array
+    {
+        $manifest = $this->decode($this->read($context->packageDirectory, 'promotion_manifest.json'), 'article_promotion_manifest_invalid');
+        if (($manifest['schema_version'] ?? null) !== 'fermatmind.article_cms_external_promotion.v3'
+            || ($manifest['lane'] ?? null) !== 'W3' || ($manifest['subscope'] ?? null) !== 'articles'
+            || ($manifest['locale'] ?? null) !== 'en' || (int) ($manifest['expected_row_count'] ?? 0) !== $context->expectedRowCount
+            || ! is_array($manifest['permissions'] ?? null) || ($manifest['frozen_package_directory'] ?? null) !== 'frozen_package'
+            || ($manifest['external_evidence'] ?? null) !== 'external_package_evidence.json') {
+            throw new DomainException('article_promotion_manifest_contract_invalid');
+        }
+        foreach ($manifest['permissions'] as $value) {
+            if ($value !== false) {
+                throw new DomainException('article_promotion_permission_escalation');
+            }
+        }
+        $evidence = $this->decode($this->read($context->packageDirectory, 'external_package_evidence.json'), 'article_promotion_external_evidence_invalid');
+        if (($evidence['schema_version'] ?? null) !== 'fermatmind.en_content_parity_external_package_evidence.v2'
+            || ($evidence['lane_id'] ?? null) !== 'W3' || ($evidence['subscope_id'] ?? null) !== 'W3-ARTICLES'
+            || ($evidence['resource'] ?? null) !== 'Article'
+            || ($evidence['producer']['source_repository'] ?? null) !== 'fap-web'
+            || preg_match('/\A[a-f0-9]{40}\z/', (string) ($evidence['producer']['source_commit_sha'] ?? '')) !== 1
+            || ($evidence['producer']['source_package_path'] ?? null) !== 'generated/en-content-parity/W3-editorial-cms/articles'
+            || ! hash_equals((string) ($evidence['producer']['package_sha256'] ?? ''), $context->packageSha256)
+            || ! hash_equals((string) ($manifest['effective_package_sha256'] ?? ''), $context->packageSha256)) {
+            throw new DomainException('article_promotion_external_evidence_invalid');
+        }
+        $payloads = is_array($evidence['immutable_payloads'] ?? null) ? $evidence['immutable_payloads'] : [];
+        $expectedPaths = [
+            'frozen_package/assets.jsonl', 'frozen_package/claim_boundary_report.json', 'frozen_package/dry_run_readiness.json',
+            'frozen_package/editorial_review.json', 'frozen_package/handoff.md', 'frozen_package/master_manifest_patch.candidate.json',
+            'frozen_package/scope_manifest.json', 'frozen_package/sha256_manifest.json', 'frozen_package/source_ledger.json',
+            'frozen_package/translation_map.json',
+        ];
+        $declared = [];
+        foreach ($payloads as $payload) {
+            $path = (string) ($payload['path'] ?? '');
+            $sha = (string) ($payload['sha256'] ?? '');
+            if (! in_array($path, $expectedPaths, true) || isset($declared[$path]) || preg_match('/\A[a-f0-9]{64}\z/', $sha) !== 1
+                || ! hash_equals($sha, hash('sha256', $this->readRelative($context->packageDirectory, $path)))) {
+                throw new DomainException('article_promotion_external_inventory_invalid');
+            }
+            $declared[$path] = $sha;
+        }
+        ksort($declared, SORT_STRING);
+        $sortedExpected = $expectedPaths;
+        sort($sortedExpected, SORT_STRING);
+        $expectedPhysicalFiles = array_merge(['external_package_evidence.json', 'promotion_manifest.json'], $sortedExpected);
+        sort($expectedPhysicalFiles, SORT_STRING);
+        if (array_keys($declared) !== $sortedExpected || $this->packageFiles($context->packageDirectory) !== $expectedPhysicalFiles) {
+            throw new DomainException('article_promotion_external_inventory_invalid');
+        }
+        $packageManifest = (array) ($evidence['frozen_package_manifest'] ?? []);
+        if (($packageManifest['path'] ?? null) !== 'frozen_package/sha256_manifest.json'
+            || ! hash_equals((string) ($packageManifest['sha256'] ?? ''), $declared['frozen_package/sha256_manifest.json'])) {
+            throw new DomainException('article_promotion_external_evidence_invalid');
+        }
+        $frozenManifest = $this->decode($this->readRelative($context->packageDirectory, 'frozen_package/sha256_manifest.json'), 'article_promotion_external_evidence_invalid');
+        if (($frozenManifest['schema_version'] ?? null) !== 'fermatmind.en_content_parity_package_sha256_manifest.v1'
+            || ($frozenManifest['lane_id'] ?? null) !== 'W3' || ($frozenManifest['subscope_id'] ?? null) !== 'W3-ARTICLES'
+            || ! hash_equals((string) ($frozenManifest['package_sha256'] ?? ''), $context->packageSha256)) {
+            throw new DomainException('article_promotion_package_sha_invalid');
+        }
+        $frozenPayloadChain = [];
+        $seenFrozenPayloads = [];
+        foreach ((array) ($frozenManifest['files'] ?? []) as $file) {
+            $relativePath = (string) ($file['path'] ?? '');
+            $sha = (string) ($file['sha256'] ?? '');
+            $path = 'frozen_package/'.$relativePath;
+            if ($relativePath === '' || basename($relativePath) !== $relativePath || isset($seenFrozenPayloads[$relativePath])
+                || ! isset($declared[$path]) || preg_match('/\A[a-f0-9]{64}\z/', $sha) !== 1
+                || ! hash_equals($sha, $declared[$path])) {
+                throw new DomainException('article_promotion_external_inventory_invalid');
+            }
+            $seenFrozenPayloads[$relativePath] = true;
+            $frozenPayloadChain[] = $relativePath.':'.$sha;
+        }
+        $derivedPackageSha = hash('sha256', implode("\n", $frozenPayloadChain));
+        if (count($frozenPayloadChain) !== 8 || ! hash_equals($derivedPackageSha, $context->packageSha256)) {
+            throw new DomainException('article_promotion_package_sha_invalid');
+        }
+        $w9 = (array) ($evidence['independent_w9'] ?? []);
+        if (($w9['path'] ?? null) !== 'articles/d70e468b/independent_qa_report.json'
+            || ! hash_equals((string) ($w9['sha256'] ?? ''), 'a286486e040b410a28224732e6a4cf61d42255db43e92bba3905bdf0af52caf4')
+            || (int) ($w9['expected_row_count'] ?? 0) !== $context->expectedRowCount) {
+            throw new DomainException('article_promotion_w9_evidence_incomplete');
+        }
+        $w9Bytes = $this->readRelative((string) config('content_promotion.w9_authority_root'), (string) $w9['path']);
+        if (! hash_equals((string) $w9['sha256'], hash('sha256', $w9Bytes))) {
+            throw new DomainException('article_promotion_w9_evidence_incomplete');
+        }
+        $w9Report = $this->decode($w9Bytes, 'article_promotion_w9_evidence_incomplete');
+        if (($w9Report['schema_version'] ?? null) !== 'fermatmind.en_content_parity_independent_qa_report.v1'
+            || ($w9Report['qa_lane_id'] ?? null) !== 'W9' || ($w9Report['producer_lane_id'] ?? null) !== 'W3'
+            || ($w9Report['subscope_id'] ?? null) !== 'W3-ARTICLES' || ($w9Report['verdict'] ?? null) !== 'PASS'
+            || ! hash_equals((string) ($w9Report['package_sha256'] ?? ''), $context->packageSha256)
+            || (int) ($w9Report['reviewed_row_count'] ?? 0) !== $context->expectedRowCount) {
+            throw new DomainException('article_promotion_w9_evidence_incomplete');
+        }
+        $ledger = $this->decode($this->readRelative($context->packageDirectory, 'frozen_package/source_ledger.json'), 'article_promotion_assets_invalid');
+        $rows = is_array($ledger['rows'] ?? null) ? $ledger['rows'] : [];
+        if (count($rows) !== $context->expectedRowCount) {
+            throw new DomainException('article_promotion_target_count_invalid');
+        }
+        $targets = [];
+        $seen = [];
+        foreach ($rows as $row) {
+            $sourceId = (int) ($row['source_article_id'] ?? 0);
+            $sourceRevisionId = (int) ($row['source_revision_id'] ?? 0);
+            $slug = trim((string) ($row['slug'] ?? ''));
+            $pair = trim((string) ($row['translation_pair_identity'] ?? ''));
+            $key = '0:en:'.$slug;
+            $snapshot = ['title' => $row['candidate_title'] ?? null, 'excerpt' => $row['candidate_excerpt'] ?? null, 'content_md' => $row['candidate_content_md'] ?? null, 'seo_title' => null, 'seo_description' => null];
+            if ($sourceId < 1 || $sourceRevisionId < 1 || $slug === '' || $pair === '' || isset($seen[$key])
+                || ($row['target_locale'] ?? null) !== 'en' || ($row['source_locale'] ?? null) !== 'zh-CN'
+                || ($row['target_publication_status'] ?? null) !== 'candidate_only_not_imported') {
+                throw new DomainException('article_promotion_target_identity_invalid');
+            }
+            $this->assertExternalSnapshot($snapshot);
+            $source = Article::query()->withoutGlobalScopes()->find($sourceId);
+            $sourceRevision = $source instanceof Article ? ArticleTranslationRevision::query()->withoutGlobalScopes()->whereKey($sourceRevisionId)->where('article_id', $source->id)->first() : null;
+            if (! $source instanceof Article || ! $sourceRevision instanceof ArticleTranslationRevision || (string) $source->locale !== 'zh-CN'
+                || (string) $source->status !== 'published' || ! (bool) $source->is_public
+                || (string) $sourceRevision->revision_status !== ArticleTranslationRevision::STATUS_PUBLISHED
+                || (int) $source->published_revision_id !== $sourceRevisionId
+                || ! hash_equals((string) $source->translation_group_id, $pair)) {
+                throw new DomainException('article_promotion_translation_source_drift');
+            }
+            $article = Article::query()->withoutGlobalScopes()->where(['org_id' => $source->org_id, 'slug' => $slug, 'locale' => 'en'])->first();
+            if ($article instanceof Article && ((int) $article->source_article_id !== (int) $source->id
+                || ! hash_equals((string) $article->translation_group_id, $pair)
+                || (string) $article->source_locale !== 'zh-CN')) {
+                throw new DomainException('article_promotion_translation_pair_invalid');
+            }
+            if ($article instanceof Article && ! ArticleTranslationRevision::query()->withoutGlobalScopes()
+                ->where('article_id', $article->id)
+                ->where('authority_package_sha256', $context->packageSha256)
+                ->where('authority_asset_key', $key)
+                ->exists()) {
+                throw new DomainException('article_promotion_candidate_target_collision');
+            }
+            $seen[$key] = true;
+            $targets[] = ['article' => $article, 'source_article' => $source, 'source_revision' => $sourceRevision,
+                'identity' => ['org_id' => (int) $source->org_id, 'locale' => 'en', 'slug' => $slug], 'asset_key' => ((int) $source->org_id).':en:'.$slug,
+                'translation_pair_identity' => $pair, 'candidate_only' => true, 'snapshot' => $snapshot,
+                'source_hash' => hash('sha256', PromotionContextFactory::canonicalJson($row))];
+        }
+        usort($targets, static fn (array $left, array $right): int => $left['asset_key'] <=> $right['asset_key']);
+
+        return ['targets' => $targets, 'package_sha256' => $context->packageSha256];
+    }
+
     /** @return array{created_count:int,unchanged_count:int,readback_count:int} */
     public function importDraft(PromotionContext $context): array
     {
@@ -131,10 +293,15 @@ final class ArticleCmsPromotionAuthority
         $result = DB::transaction(function () use ($context, $package): array {
             $created = 0;
             foreach ($package['targets'] as $target) {
-                $article = Article::query()->withoutGlobalScopes()->lockForUpdate()->findOrFail($target['article']->id);
+                $article = $target['article'] instanceof Article
+                    ? Article::query()->withoutGlobalScopes()->lockForUpdate()->findOrFail($target['article']->id)
+                    : $this->createCandidateArticle($target);
                 $revision = $this->exactRevision($article, $context, $target);
                 if ($revision instanceof ArticleTranslationRevision) {
-                    if ((int) $article->working_revision_id !== (int) $revision->id && (int) $article->published_revision_id !== (int) $revision->id) {
+                    if ((int) $article->published_revision_id === (int) $revision->id || (string) $revision->revision_status === ArticleTranslationRevision::STATUS_PUBLISHED) {
+                        throw new DomainException('article_promotion_draft_already_published');
+                    }
+                    if ((int) $article->working_revision_id !== (int) $revision->id || (string) $revision->revision_status !== ArticleTranslationRevision::STATUS_APPROVED) {
                         throw new DomainException('article_promotion_revision_collision');
                     }
 
@@ -208,7 +375,11 @@ final class ArticleCmsPromotionAuthority
                 }
                 $publishedAt = Carbon::parse((string) data_get($beforeByAsset, $target['asset_key'].'.publication_timestamp'));
                 $revision->forceFill(['revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED, 'published_at' => $publishedAt])->saveQuietly();
-                $article->forceFill(['title' => $revision->title, 'excerpt' => $revision->excerpt, 'content_md' => $revision->content_md, 'content_html' => null, 'published_revision_id' => $revision->id, 'working_revision_id' => null])->save();
+                $projection = ['title' => $revision->title, 'excerpt' => $revision->excerpt, 'content_md' => $revision->content_md, 'content_html' => null, 'published_revision_id' => $revision->id, 'working_revision_id' => null];
+                if (($target['candidate_only'] ?? false) === true) {
+                    $projection += ['status' => 'published', 'is_public' => true, 'translation_status' => Article::TRANSLATION_STATUS_PUBLISHED, 'published_at' => $publishedAt];
+                }
+                $article->forceFill($projection)->save();
                 $this->syncExistingSeoMeta($revision, $seo);
                 $this->logPublication($article);
                 $changed++;
@@ -226,22 +397,26 @@ final class ArticleCmsPromotionAuthority
     {
         $package = $this->inspect($context);
         foreach ($package['targets'] as $target) {
-            $article = Article::query()->withoutGlobalScopes()->find($target['article']->id);
+            $article = $target['article'] instanceof Article ? Article::query()->withoutGlobalScopes()->find($target['article']->id) : null;
             $revision = $article instanceof Article ? $this->exactRevision($article, $context, $target) : null;
             if (! $article instanceof Article || ! $revision instanceof ArticleTranslationRevision || $article->working_revision_id !== null || (int) $article->published_revision_id !== (int) $revision->id || (string) $revision->revision_status !== ArticleTranslationRevision::STATUS_PUBLISHED) {
                 throw new DomainException('article_promotion_public_projection_invalid');
             }
             $response = $this->publicApi->show(Request::create('/api/v0.5/articles/'.$article->slug, 'GET', ['locale' => 'en', 'org_id' => $article->org_id]), $article->slug);
             $payload = $response->getData(true);
-            if (($payload['ok'] ?? false) !== true || ! hash_equals(PromotionContextFactory::canonicalJson($target['snapshot']), PromotionContextFactory::canonicalJson([
-                'title' => data_get($payload, 'article.title'), 'excerpt' => data_get($payload, 'article.excerpt'), 'content_md' => data_get($payload, 'article.content_md'), 'seo_title' => $revision->seo_title, 'seo_description' => $revision->seo_description,
-            ]))) {
+            $publicSnapshot = ['title' => data_get($payload, 'article.title'), 'excerpt' => data_get($payload, 'article.excerpt'), 'content_md' => data_get($payload, 'article.content_md')];
+            $expectedSnapshot = array_intersect_key((array) $target['snapshot'], $publicSnapshot);
+            if (($target['candidate_only'] ?? false) !== true) {
+                $publicSnapshot += ['seo_title' => $revision->seo_title, 'seo_description' => $revision->seo_description];
+                $expectedSnapshot = (array) $target['snapshot'];
+            }
+            if (($payload['ok'] ?? false) !== true || ! hash_equals(PromotionContextFactory::canonicalJson($expectedSnapshot), PromotionContextFactory::canonicalJson($publicSnapshot))) {
                 throw new DomainException('article_promotion_public_api_readback_invalid');
             }
-            if (! hash_equals((string) $revision->seo_title, (string) data_get($payload, 'seo_surface_v1.title'))
+            if (($target['candidate_only'] ?? false) !== true && (! hash_equals((string) $revision->seo_title, (string) data_get($payload, 'seo_surface_v1.title'))
                 || ! hash_equals((string) $revision->seo_description, (string) data_get($payload, 'seo_surface_v1.description'))
                 || ! hash_equals((string) $revision->seo_title, (string) data_get($payload, 'seo_surface_v1.og_payload.title'))
-                || ! hash_equals((string) $revision->seo_description, (string) data_get($payload, 'seo_surface_v1.og_payload.description'))) {
+                || ! hash_equals((string) $revision->seo_description, (string) data_get($payload, 'seo_surface_v1.og_payload.description')))) {
                 throw new DomainException('article_promotion_public_seo_readback_invalid');
             }
         }
@@ -267,11 +442,50 @@ final class ArticleCmsPromotionAuthority
     private function revisionPayload(Article $article, PromotionContext $context, array $target): array
     {
         $snapshot = $target['snapshot'];
-        $revisionSourceHash = $article->isSourceArticle()
+        $sourceRevision = $target['source_revision'] ?? null;
+        $revisionSourceHash = $sourceRevision instanceof ArticleTranslationRevision
+            ? (string) $sourceRevision->source_version_hash
+            : ($article->isSourceArticle()
             ? $this->projectedSourceVersionHash($article, $snapshot)
-            : ($this->revisionWorkspace->sourceVersionHashFor($article) ?: $article->source_version_hash);
+            : ($this->revisionWorkspace->sourceVersionHashFor($article) ?: $article->source_version_hash));
 
-        return ['org_id' => $article->org_id, 'article_id' => $article->id, 'source_article_id' => $article->source_article_id ?: $article->id, 'translation_group_id' => $article->translation_group_id, 'locale' => 'en', 'source_locale' => $article->source_locale ?: 'en', 'revision_number' => ((int) ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', $article->id)->max('revision_number')) + 1, 'revision_status' => ArticleTranslationRevision::STATUS_APPROVED, 'source_version_hash' => $revisionSourceHash, 'translated_from_version_hash' => $article->isSourceArticle() ? $revisionSourceHash : ($article->translated_from_version_hash ?: $revisionSourceHash), 'supersedes_revision_id' => $article->working_revision_id ?: $article->published_revision_id, 'authority_asset_key' => $target['asset_key'], 'authority_source_package' => 'content-promotion/W3/articles', 'authority_source_hash' => $target['source_hash'], 'authority_package_sha256' => $context->packageSha256, 'authority_metadata_json' => ['snapshot' => $snapshot, 'article_state_sha256' => $this->articleStateHash($article)], 'title' => $snapshot['title'], 'excerpt' => $snapshot['excerpt'], 'content_md' => $snapshot['content_md'], 'seo_title' => $snapshot['seo_title'], 'seo_description' => $snapshot['seo_description'], 'approved_at' => now()];
+        return ['org_id' => $article->org_id, 'article_id' => $article->id, 'source_article_id' => $article->source_article_id ?: $article->id, 'translation_group_id' => $article->translation_group_id, 'locale' => 'en', 'source_locale' => $article->source_locale ?: 'en', 'revision_number' => ((int) ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', $article->id)->max('revision_number')) + 1, 'revision_status' => ArticleTranslationRevision::STATUS_APPROVED, 'source_version_hash' => $revisionSourceHash, 'translated_from_version_hash' => $article->isSourceArticle() ? $revisionSourceHash : ($article->translated_from_version_hash ?: $revisionSourceHash), 'supersedes_revision_id' => $article->working_revision_id ?: $article->published_revision_id, 'authority_asset_key' => $target['asset_key'], 'authority_source_package' => 'content-promotion/W3/articles', 'authority_source_hash' => $target['source_hash'], 'authority_package_sha256' => $context->packageSha256, 'authority_metadata_json' => ['snapshot' => $snapshot, 'article_state_sha256' => $this->articleStateHash($article), 'candidate_only' => (bool) ($target['candidate_only'] ?? false)], 'title' => $snapshot['title'], 'excerpt' => $snapshot['excerpt'], 'content_md' => $snapshot['content_md'], 'seo_title' => $snapshot['seo_title'], 'seo_description' => $snapshot['seo_description'], 'approved_at' => now()];
+    }
+
+    /** @param array<string,mixed> $target */
+    private function createCandidateArticle(array $target): Article
+    {
+        $source = $target['source_article'] ?? null;
+        if (! $source instanceof Article) {
+            throw new DomainException('article_promotion_translation_source_drift');
+        }
+        $lockedSource = Article::query()->withoutGlobalScopes()->lockForUpdate()->find($source->id);
+        $expectedRevision = $target['source_revision'] ?? null;
+        $lockedRevision = $expectedRevision instanceof ArticleTranslationRevision
+            ? ArticleTranslationRevision::query()->withoutGlobalScopes()->lockForUpdate()->where('article_id', $source->id)->find($expectedRevision->id)
+            : null;
+        if (! $lockedSource instanceof Article || ! $lockedRevision instanceof ArticleTranslationRevision
+            || (string) $lockedSource->locale !== 'zh-CN' || (string) $lockedSource->translation_group_id !== (string) $target['translation_pair_identity']
+            || (string) $lockedSource->status !== 'published' || ! (bool) $lockedSource->is_public
+            || (int) $lockedSource->published_revision_id !== (int) $lockedRevision->id
+            || (string) $lockedRevision->revision_status !== ArticleTranslationRevision::STATUS_PUBLISHED
+            || ! hash_equals((string) $lockedRevision->source_version_hash, (string) $expectedRevision?->source_version_hash)) {
+            throw new DomainException('article_promotion_translation_source_drift');
+        }
+        $snapshot = (array) $target['snapshot'];
+
+        return Article::query()->withoutGlobalScopes()->create([
+            'org_id' => $lockedSource->org_id, 'category_id' => $lockedSource->category_id, 'author_admin_user_id' => $lockedSource->author_admin_user_id,
+            'author_name' => $lockedSource->author_name, 'reviewer_name' => $lockedSource->reviewer_name, 'reading_minutes' => $lockedSource->reading_minutes,
+            'slug' => $target['identity']['slug'], 'locale' => 'en', 'translation_group_id' => $target['translation_pair_identity'],
+            'source_locale' => 'zh-CN', 'translation_status' => Article::TRANSLATION_STATUS_APPROVED,
+            'source_article_id' => $lockedSource->id, 'translated_from_article_id' => $lockedSource->id,
+            'translated_from_version_hash' => $lockedSource->source_version_hash, 'title' => $snapshot['title'], 'excerpt' => $snapshot['excerpt'],
+            'content_md' => $snapshot['content_md'], 'content_html' => null, 'cover_image_url' => null, 'cover_image_alt' => null,
+            'cover_image_width' => null, 'cover_image_height' => null, 'cover_image_variants' => null, 'related_test_slug' => $target['related_test_slug'] ?? null,
+            'voice' => $lockedSource->voice, 'voice_order' => $lockedSource->voice_order, 'status' => 'draft', 'is_public' => false,
+            'is_indexable' => false, 'sitemap_eligible' => false, 'llms_eligible' => false, 'published_at' => null,
+        ]);
     }
 
     /** @param array<string,mixed> $snapshot */
@@ -292,6 +506,19 @@ final class ArticleCmsPromotionAuthority
         } catch (\InvalidArgumentException $exception) {
             throw new DomainException('article_promotion_body_h1_invalid', previous: $exception);
         }
+    }
+
+    /** @param array<string,mixed> $snapshot */
+    private function assertExternalSnapshot(array $snapshot): void
+    {
+        if (! is_string($snapshot['title'] ?? null) || ! is_string($snapshot['excerpt'] ?? null)
+            || ! is_string($snapshot['content_md'] ?? null) || trim((string) $snapshot['title']) === ''
+            || trim((string) $snapshot['content_md']) === '' || mb_strlen((string) $snapshot['title']) > 255
+            || preg_match('/[\p{Han}]/u', implode("\n", array_filter($snapshot, 'is_string'))) === 1) {
+            throw new DomainException('article_promotion_snapshot_invalid');
+        }
+        $this->articleBodyHeadingGuard->assertNoBodyH1((string) $snapshot['content_md']);
+        $this->assertNoPrivatePayload($snapshot);
     }
 
     private function assertNoPrivatePayload(mixed $value, ?string $key = null): void
@@ -358,9 +585,9 @@ final class ArticleCmsPromotionAuthority
         ]);
     }
 
-    public function invalidateDiscoverabilityCaches(): void
+    public function invalidateDiscoverabilityCaches(bool $preserveArticleListLkg = true): void
     {
-        $this->discoverabilityCache->flushArticleDiscoverabilityCaches();
+        $this->discoverabilityCache->flushArticleDiscoverabilityCaches($preserveArticleListLkg);
     }
 
     private function logPublication(Article $article): void
@@ -454,6 +681,57 @@ final class ArticleCmsPromotionAuthority
         }
 
         return $bytes;
+    }
+
+    private function readRelative(string $root, string $path): string
+    {
+        $root = str_starts_with($root, DIRECTORY_SEPARATOR) ? $root : base_path($root);
+        if ($path === '' || str_starts_with($path, '/') || str_contains($path, '..') || preg_match('#\A[A-Za-z0-9._/-]+\z#', $path) !== 1) {
+            throw new DomainException('article_promotion_payload_missing');
+        }
+        $realRoot = realpath($root);
+        $candidate = $root.DIRECTORY_SEPARATOR.$path;
+        $resolved = realpath($candidate);
+        if ($realRoot === false || $resolved === false || ! str_starts_with($resolved, $realRoot.DIRECTORY_SEPARATOR) || ! is_file($candidate) || is_link($candidate)) {
+            throw new DomainException('article_promotion_payload_missing');
+        }
+        $cursor = $root;
+        foreach (explode('/', $path) as $part) {
+            $cursor .= DIRECTORY_SEPARATOR.$part;
+            if (is_link($cursor)) {
+                throw new DomainException('article_promotion_payload_missing');
+            }
+        }
+        $bytes = file_get_contents($candidate);
+        if (! is_string($bytes)) {
+            throw new DomainException('article_promotion_payload_missing');
+        }
+
+        return $bytes;
+    }
+
+    /** @return list<string> */
+    private function packageFiles(string $root): array
+    {
+        $realRoot = realpath($root);
+        if ($realRoot === false || is_link($root)) {
+            throw new DomainException('article_promotion_external_inventory_invalid');
+        }
+        $files = [];
+        $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($root, \FilesystemIterator::SKIP_DOTS));
+        foreach ($iterator as $file) {
+            if (! $file instanceof \SplFileInfo || ! $file->isFile() || $file->isLink()) {
+                throw new DomainException('article_promotion_external_inventory_invalid');
+            }
+            $path = substr($file->getPathname(), strlen(rtrim($root, DIRECTORY_SEPARATOR)) + 1);
+            if (! is_string($path) || $path === '') {
+                throw new DomainException('article_promotion_external_inventory_invalid');
+            }
+            $files[] = str_replace(DIRECTORY_SEPARATOR, '/', $path);
+        }
+        sort($files, SORT_STRING);
+
+        return $files;
     }
 
     /** @return array<string,mixed> */

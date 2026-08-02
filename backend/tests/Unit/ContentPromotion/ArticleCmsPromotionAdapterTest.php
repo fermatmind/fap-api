@@ -215,6 +215,61 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
         }
     }
 
+    public function test_frozen_w3_articles_external_package_creates_candidate_only_english_authority_and_restores_its_private_draft(): void
+    {
+        $backendRoot = dirname(__DIR__, 3);
+        $packageDirectory = $backendRoot.'/content_assets/en-content-parity/W3/articles/d70e468b';
+        config(['content_promotion.w9_authority_root' => $backendRoot.'/content_assets/en-content-parity/W9']);
+        $ledger = json_decode((string) File::get($packageDirectory.'/frozen_package/source_ledger.json'), true, 512, JSON_THROW_ON_ERROR);
+        foreach ((array) $ledger['rows'] as $row) {
+            $source = Article::query()->withoutGlobalScopes()->forceCreate([
+                'id' => (int) $row['source_article_id'], 'org_id' => 0, 'slug' => (string) $row['slug'], 'locale' => 'zh-CN',
+                'translation_group_id' => (string) $row['translation_pair_identity'], 'source_locale' => 'zh-CN',
+                'translation_status' => Article::TRANSLATION_STATUS_SOURCE, 'title' => 'Frozen source '.(int) $row['source_article_id'],
+                'excerpt' => 'Source excerpt', 'content_md' => 'Source body', 'status' => 'published', 'is_public' => true,
+                'is_indexable' => true, 'sitemap_eligible' => true, 'llms_eligible' => true, 'published_at' => now(),
+            ]);
+            $revision = ArticleTranslationRevision::query()->withoutGlobalScopes()->forceCreate([
+                'id' => (int) $row['source_revision_id'], 'org_id' => 0, 'article_id' => $source->id, 'source_article_id' => $source->id,
+                'translation_group_id' => $source->translation_group_id, 'locale' => 'zh-CN', 'source_locale' => 'zh-CN',
+                'revision_number' => 1, 'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+                'source_version_hash' => $source->source_version_hash, 'translated_from_version_hash' => $source->source_version_hash,
+                'title' => $source->title, 'excerpt' => $source->excerpt, 'content_md' => $source->content_md, 'published_at' => now(),
+            ]);
+            $source->forceFill(['published_revision_id' => $revision->id])->saveQuietly();
+        }
+        $context = new PromotionContext(
+            $packageDirectory,
+            'd70e468bb1a07d74e786e5a93b5279feff5347be49a0264916408a6b2ccbdc9a',
+            'W3', 'articles', str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '1', 1, str_repeat('d', 64), 17, str_repeat('e', 64),
+        );
+        $adapter = app(PromotionAdapterRegistry::class)->resolve('W3', 'articles');
+
+        self::assertSame(17, $adapter->preflight($context)['readback_count']);
+        self::assertSame(17, $adapter->draftImport($context)['created_count']);
+        self::assertSame(17, Article::query()->withoutGlobalScopes()->where('locale', 'en')->where('is_public', false)->count());
+        self::assertSame(0, Article::query()->withoutGlobalScopes()->where('locale', 'en')->where('is_indexable', true)->count());
+        $published = $adapter->publish($context);
+        self::assertSame(17, $published['published_count']);
+        self::assertSame(17, $adapter->liveQa($context)['published_count']);
+        try {
+            $adapter->draftImport($context);
+            self::fail('A published exact revision must not be reported as a new draft import.');
+        } catch (\DomainException $exception) {
+            self::assertSame('article_promotion_draft_already_published', $exception->getMessage());
+        }
+        self::assertSame(17, Article::query()->withoutGlobalScopes()->where('locale', 'en')->where('status', 'published')->where('is_public', true)->count());
+        self::assertSame(0, Article::query()->withoutGlobalScopes()->where('locale', 'en')->where('is_indexable', true)->count());
+
+        Cache::put(ArticlePublicListReadCache::CACHE_KEY_PREFIX.':previous-generation', 'published-candidate-generation', ArticlePublicListReadCache::LKG_TTL_SECONDS);
+        Article::query()->withoutGlobalScopes()->findOrFail(1)->forceFill(['title' => 'Changed after English publication'])->saveQuietly();
+        $adapter->rollback($context, (string) $published['rollback_reference']);
+        self::assertNull(Cache::get(ArticlePublicListReadCache::CACHE_KEY_PREFIX.':previous-generation'));
+        self::assertSame(17, Article::query()->withoutGlobalScopes()->where('locale', 'en')->where('status', 'draft')->where('is_public', false)->count());
+        self::assertSame(17, Article::query()->withoutGlobalScopes()->where('locale', 'en')->where('translation_status', Article::TRANSLATION_STATUS_APPROVED)->count());
+        self::assertSame(17, ArticleTranslationRevision::query()->withoutGlobalScopes()->where('authority_package_sha256', $context->packageSha256)->where('revision_status', ArticleTranslationRevision::STATUS_APPROVED)->count());
+    }
+
     private function article(string $slug): Article
     {
         $article = Article::query()->withoutGlobalScopes()->create([

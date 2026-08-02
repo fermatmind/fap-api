@@ -1,0 +1,207 @@
+{
+  "schema_version": "fermatmind.en_content_parity_translation_map.v1",
+  "control_id": "EN-PARITY-CONTROL-BOOTSTRAP-01",
+  "lane_id": "W3",
+  "subscope_id": "W3-ARTICLES",
+  "package_id": "EN-PARITY-W3-ARTICLE-ASSETS-PRODUCER-REWORK-10-2026-08-01",
+  "mapping_policy": {
+    "pairing": "Article id plus immutable source translation_group_id; preserve the reviewed slug across locale",
+    "source_revision": "Each candidate is bound to the exact published source revision recorded in the frozen inventory.",
+    "target_state": "Candidate payload only; no CMS resource, revision, publication state, or public route is created.",
+    "excluded": [
+      "CMS credentials and private fields",
+      "SEO runtime and indexability state",
+      "publication and search-submission actions",
+      "frontend editorial fallback content"
+    ]
+  },
+  "article_pairs": [
+    {
+      "stable_asset_identity": "Article:1",
+      "translation_pair_identity": "big5-v2-f29331ce54d2f28a7051702932c39aaf69d2bf61",
+      "source_article_id": 1,
+      "source_revision_id": 446,
+      "slug": "big-five-growth-guide",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "source_status": "published",
+      "target_status": "candidate_only_not_stored"
+    },
+    {
+      "stable_asset_identity": "Article:2",
+      "translation_pair_identity": "big5-v2-8381cc150e7180b365a397ce3e3a25e2626b8970",
+      "source_article_id": 2,
+      "source_revision_id": 445,
+      "slug": "big-five-narrative-portrait",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "source_status": "published",
+      "target_status": "candidate_only_not_stored"
+    },
+    {
+      "stable_asset_identity": "Article:3",
+      "translation_pair_identity": "big5-v2-df8d5e7f157e301b9a0f4dc8e6b8c3b66c7e31f4",
+      "source_article_id": 3,
+      "source_revision_id": 383,
+      "slug": "big-five-tool-guide",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "source_status": "published",
+      "target_status": "candidate_only_not_stored"
+    },
+    {
+      "stable_asset_identity": "Article:4",
+      "translation_pair_identity": "article-4",
+      "source_article_id": 4,
+      "source_revision_id": 58,
+      "slug": "eq-test-tool-guide",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "source_status": "published",
+      "target_status": "candidate_only_not_stored"
+    },
+    {
+      "stable_asset_identity": "Article:5",
+      "translation_pair_identity": "article-5",
+      "source_article_id": 5,
+      "source_revision_id": 444,
+      "slug": "iq-test-growth-guide",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "source_status": "published",
+      "target_status": "candidate_only_not_stored"
+    },
+    {
+      "stable_asset_identity": "Article:6",
+      "translation_pair_identity": "article-6",
+      "source_article_id": 6,
+      "source_revision_id": 443,
+      "slug": "iq-test-narrative-portrait",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "source_status": "published",
+      "target_status": "candidate_only_not_stored"
+    },
+    {
+      "stable_asset_identity": "Article:7",
+      "translation_pair_identity": "article-7",
+      "source_article_id": 7,
+      "source_revision_id": 442,
+      "slug": "iq-test-tool-guide",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "source_status": "published",
+      "target_status": "candidate_only_not_stored"
+    },
+    {
+      "stable_asset_identity": "Article:8",
+      "translation_pair_identity": "article-8",
+      "source_article_id": 8,
+      "source_revision_id": 72,
+      "slug": "mbti-basics",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "source_status": "published",
+      "target_status": "candidate_only_not_stored"
+    },
+    {
+      "stable_asset_identity": "Article:9",
+      "translation_pair_identity": "article-9",
+      "source_article_id": 9,
+      "source_revision_id": 441,
+      "slug": "mbti-growth-guide",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "source_status": "published",
+      "target_status": "candidate_only_not_stored"
+    },
+    {
+      "stable_asset_identity": "Article:10",
+      "translation_pair_identity": "article-10",
+      "source_article_id": 10,
+      "source_revision_id": 440,
+      "slug": "mbti-narrative-portrait",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "source_status": "published",
+      "target_status": "candidate_only_not_stored"
+    },
+    {
+      "stable_asset_identity": "Article:50",
+      "translation_pair_identity": "tg_article_iq_test_score_and_limits_explained_2026v1",
+      "source_article_id": 50,
+      "source_revision_id": 57,
+      "slug": "iq-test-score-and-limits-explained",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "source_status": "published",
+      "target_status": "candidate_only_not_stored"
+    },
+    {
+      "stable_asset_identity": "Article:51",
+      "translation_pair_identity": "tg_article_enneagram_personality_test_explained_2026v1",
+      "source_article_id": 51,
+      "source_revision_id": 73,
+      "slug": "enneagram-personality-test-explained",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "source_status": "published",
+      "target_status": "candidate_only_not_stored"
+    },
+    {
+      "stable_asset_identity": "Article:52",
+      "translation_pair_identity": "tg_article_college_major_choice_holland_mbti_career_test_2026v1",
+      "source_article_id": 52,
+      "source_revision_id": 64,
+      "slug": "college-major-choice-holland-mbti-career-test",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "source_status": "published",
+      "target_status": "candidate_only_not_stored"
+    },
+    {
+      "stable_asset_identity": "Article:53",
+      "translation_pair_identity": "tg_article_gaokao_score_major_shortlist_riasec_2026v1",
+      "source_article_id": 53,
+      "source_revision_id": 65,
+      "slug": "gaokao-score-major-shortlist-riasec-checklist",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "source_status": "published",
+      "target_status": "candidate_only_not_stored"
+    },
+    {
+      "stable_asset_identity": "Article:55",
+      "translation_pair_identity": "tg_article_gaokao_parent_conflict_riasec_course_checklist_2026v1",
+      "source_article_id": 55,
+      "source_revision_id": 75,
+      "slug": "gaokao-major-choice-parent-conflict-riasec-course-checklist",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "source_status": "published",
+      "target_status": "candidate_only_not_stored"
+    },
+    {
+      "stable_asset_identity": "Article:58",
+      "translation_pair_identity": "tg_gaokao_adjustment_unacceptable_major_2026v1",
+      "source_article_id": 58,
+      "source_revision_id": 78,
+      "slug": "gaokao-major-adjustment-unacceptable-major-checklist",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "source_status": "published",
+      "target_status": "candidate_only_not_stored"
+    },
+    {
+      "stable_asset_identity": "Article:59",
+      "translation_pair_identity": "tg_math_computer_ai_course_riasec_2026v1",
+      "source_article_id": 59,
+      "source_revision_id": 79,
+      "slug": "math-not-good-computer-ai-major-course-riasec-checklist",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "source_status": "published",
+      "target_status": "candidate_only_not_stored"
+    }
+  ]
+}

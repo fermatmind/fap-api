@@ -1,0 +1,54 @@
+{
+  "$schema": "../../../../docs/seo/generated/en-content-parity-control-master.v1.schema.json",
+  "artifact_kind": "lane_package",
+  "schema_version": "fermatmind.en_content_parity_lane_package.v1",
+  "control_id": "EN-PARITY-CONTROL-BOOTSTRAP-01",
+  "lane_id": "W3",
+  "subscope_id": "W3-ARTICLES",
+  "package_id": "EN-PARITY-W3-ARTICLE-ASSETS-PRODUCER-REWORK-10-2026-08-01",
+  "status": "package_frozen",
+  "output_directory": "generated/en-content-parity/W3-editorial-cms/articles/",
+  "artifact_files": [
+    "scope_manifest.json",
+    "assets.jsonl",
+    "translation_map.json",
+    "source_ledger.json",
+    "claim_boundary_report.json",
+    "editorial_review.json",
+    "dry_run_readiness.json",
+    "sha256_manifest.json",
+    "master_manifest_patch.candidate.json",
+    "handoff.md"
+  ],
+  "assets": [
+    {
+      "asset_id": "ENPARITY-W3-ARTICLES",
+      "lane_id": "W3",
+      "asset_type": "article",
+      "translation_group": "cohort:editorial:article-english-backlog",
+      "locales": [
+        "zh-CN",
+        "en"
+      ],
+      "authority_source": "backend CMS Article resources",
+      "expected_en_count": 17,
+      "current_en_count": 0,
+      "remaining_en_count": 17,
+      "parity_state": "en_missing",
+      "evidence": [
+        "The deep CMS scan identified 17 Article resources without an English content asset.",
+        "The live public Article index returned 89 zh-CN and 23 English records at baseline time."
+      ],
+      "notes": "The 17-record backlog is a reviewed translation cohort, not the arithmetic difference between locale totals."
+    }
+  ],
+  "permissions": {
+    "cms_write_authorized": false,
+    "staging_write_authorized": false,
+    "production_import_authorized": false,
+    "public_release_authorized": false,
+    "seo_runtime_release_authorized": false,
+    "search_submission_authorized": false,
+    "master_manifest_write_authorized": false
+  }
+}

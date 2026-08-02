@@ -1,0 +1,58 @@
+{
+  "$schema": "../../../../docs/seo/generated/en-content-parity-control-master.v1.schema.json",
+  "artifact_kind": "master_manifest_patch_candidate",
+  "schema_version": "fermatmind.en_content_parity_master_patch_candidate.v1",
+  "control_id": "EN-PARITY-CONTROL-BOOTSTRAP-01",
+  "lane_id": "W3",
+  "subscope_id": "W3-ARTICLES",
+  "package_id": "EN-PARITY-W3-ARTICLE-ASSETS-PRODUCER-REWORK-10-2026-08-01",
+  "base_manifest_sha256": "5dfa51907860aaee4dabef952e15c4a6cabaa7d72cd47225089d15470b685039",
+  "sha256_manifest_path": "generated/en-content-parity/W3-editorial-cms/articles/sha256_manifest.json",
+  "package_sha256": "d70e468bb1a07d74e786e5a93b5279feff5347be49a0264916408a6b2ccbdc9a",
+  "proposed_status": "package_frozen",
+  "gate_evidence": {
+    "gate": "package_frozen",
+    "report_path": "editorial_review.json",
+    "report_sha256": "753caafa4c979a335aac2cd3b1ebc11ca70f2aa9246c2696ea1a947ff1554c6e",
+    "report_in_package": true,
+    "owner_lane_id": "W3",
+    "verdict": null,
+    "asset_ids": [
+      "ENPARITY-W3-ARTICLES"
+    ],
+    "row_count": 17,
+    "rework_10_source_evidence_package_sha256": "480523fc03dc09927d420de306aca193da707b32584d84b6ee07701605fec061",
+    "repaired_stable_asset_identity": "Article:53"
+  },
+  "asset_updates": [
+    {
+      "asset_id": "ENPARITY-W3-ARTICLES",
+      "lane_id": "W3",
+      "asset_type": "article",
+      "translation_group": "cohort:editorial:article-english-backlog",
+      "locales": [
+        "zh-CN",
+        "en"
+      ],
+      "authority_source": "backend CMS Article resources",
+      "expected_en_count": 17,
+      "current_en_count": 0,
+      "remaining_en_count": 17,
+      "parity_state": "en_missing",
+      "evidence": [
+        "The deep CMS scan identified 17 Article resources without an English content asset.",
+        "The live public Article index returned 89 zh-CN and 23 English records at baseline time."
+      ],
+      "notes": "The 17-record backlog is a reviewed translation cohort, not the arithmetic difference between locale totals."
+    }
+  ],
+  "permissions": {
+    "cms_write_authorized": false,
+    "staging_write_authorized": false,
+    "production_import_authorized": false,
+    "public_release_authorized": false,
+    "seo_runtime_release_authorized": false,
+    "search_submission_authorized": false,
+    "master_manifest_write_authorized": false
+  }
+}
