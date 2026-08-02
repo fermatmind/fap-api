@@ -9,6 +9,7 @@ use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Cms\ArticlePublicListReadCache;
+use App\Services\ContentPromotion\ArticleCmsPromotionAuthority;
 use App\Services\ContentPromotion\PromotionAdapterRegistry;
 use App\Services\ContentPromotion\PromotionContext;
 use App\Services\ContentPromotion\PromotionContextFactory;
@@ -138,6 +139,29 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
             self::assertSame('article_promotion_rollback_public_projection_drift', $exception->getMessage());
         }
         self::assertTrue((bool) $translated->refresh()->is_indexable);
+    }
+
+    public function test_w3_article_publish_refuses_a_concurrent_seo_row_change(): void
+    {
+        $article = $this->article('seo-race-article');
+        $context = $this->context($this->package([$article]), 1);
+        $adapter = app(PromotionAdapterRegistry::class)->resolve('W3', 'articles');
+        $adapter->draftImport($context);
+        ArticleSeoMeta::query()->withoutGlobalScopes()->create([
+            'article_id' => $article->id,
+            'seo_title' => 'Concurrent SEO',
+            'seo_description' => 'Concurrent description',
+        ]);
+        try {
+            app(ArticleCmsPromotionAuthority::class)->publish($context, [[
+                'asset_key' => '0:en:seo-race-article',
+                'package_sha256' => $context->packageSha256,
+                'seo_before' => [],
+            ]]);
+            self::fail('Publication must reject SEO state changed after the snapshot.');
+        } catch (\DomainException $exception) {
+            self::assertSame('article_promotion_seo_precondition_drift', $exception->getMessage());
+        }
     }
 
     private function article(string $slug): Article

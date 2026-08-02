@@ -64,7 +64,8 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
     {
         $package = $this->authority->inspect($context);
         $reference = $this->capture($context, $package, 'before_publication');
-        $result = $this->authority->publish($context);
+        $snapshot = $this->snapshots->resolve($context, $this->targets($package), 'article-cms', 'before_publication', $reference);
+        $result = $this->authority->publish($context, (array) data_get($snapshot->meta_json, 'rows', []));
 
         return PromotionAdapterResultFactory::make($context, $result['changed_count'], $result['readback_count'], $result['readback_count'], $reference, $this->zero(), [
             'created_count' => 0, 'updated_count' => $result['changed_count'], 'unchanged_count' => $result['unchanged_count'],

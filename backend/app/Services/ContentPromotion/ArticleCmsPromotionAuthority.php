@@ -155,11 +155,20 @@ final class ArticleCmsPromotionAuthority
     }
 
     /** @return array{changed_count:int,unchanged_count:int,readback_count:int} */
-    public function publish(PromotionContext $context): array
+    /** @param list<array<string,mixed>> $beforePublicationRows */
+    public function publish(PromotionContext $context, array $beforePublicationRows): array
     {
         $package = $this->inspect($context);
+        $beforeByAsset = [];
+        foreach ($beforePublicationRows as $row) {
+            $assetKey = (string) ($row['asset_key'] ?? '');
+            if ((string) ($row['package_sha256'] ?? '') !== $context->packageSha256 || $assetKey === '' || isset($beforeByAsset[$assetKey])) {
+                throw new DomainException('article_promotion_seo_precondition_invalid');
+            }
+            $beforeByAsset[$assetKey] = $row;
+        }
 
-        $result = DB::transaction(function () use ($context, $package): array {
+        $result = DB::transaction(function () use ($context, $package, $beforeByAsset): array {
             $changed = 0;
             foreach ($package['targets'] as $target) {
                 $article = Article::query()->withoutGlobalScopes()->lockForUpdate()->findOrFail($target['article']->id);
@@ -174,12 +183,14 @@ final class ArticleCmsPromotionAuthority
                     || ! hash_equals((string) data_get($revision->authority_metadata_json, 'article_state_sha256'), $this->articleStateHash($article))) {
                     throw new DomainException('article_promotion_working_revision_invalid');
                 }
+                $seo = ArticleSeoMeta::query()->withoutGlobalScopes()->lockForUpdate()->where('article_id', $article->id)->first();
+                $this->assertSeoPrecondition($seo, $beforeByAsset[$target['asset_key']] ?? null);
                 if ($article->published_revision_id) {
                     ArticleTranslationRevision::query()->withoutGlobalScopes()->whereKey($article->published_revision_id)->where('article_id', $article->id)->update(['revision_status' => ArticleTranslationRevision::STATUS_STALE]);
                 }
                 $revision->forceFill(['revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED, 'published_at' => now()])->saveQuietly();
                 $article->forceFill(['title' => $revision->title, 'excerpt' => $revision->excerpt, 'content_md' => $revision->content_md, 'content_html' => null, 'published_revision_id' => $revision->id, 'working_revision_id' => null])->save();
-                $this->syncExistingSeoMeta($article, $revision);
+                $this->syncExistingSeoMeta($revision, $seo);
                 $this->logPublication($article);
                 $changed++;
             }
@@ -347,7 +358,22 @@ final class ArticleCmsPromotionAuthority
         }
     }
 
-    private function syncExistingSeoMeta(Article $article, ArticleTranslationRevision $revision): void
+    /** @param array<string,mixed>|null $row */
+    private function assertSeoPrecondition(?ArticleSeoMeta $seo, ?array $row): void
+    {
+        if (! is_array($row)) {
+            throw new DomainException('article_promotion_seo_precondition_invalid');
+        }
+        $before = (array) ($row['seo_before'] ?? []);
+        $expectedId = (int) ($before['id'] ?? 0);
+        $expected = (int) ($before['id'] ?? 0) > 0 ? (array) ($before['values'] ?? []) : [];
+        $actual = $seo instanceof ArticleSeoMeta ? $this->seoState($seo) : [];
+        if ($expectedId !== (int) ($seo?->id ?? 0) || ! hash_equals(PromotionContextFactory::canonicalJson($expected), PromotionContextFactory::canonicalJson($actual))) {
+            throw new DomainException('article_promotion_seo_precondition_drift');
+        }
+    }
+
+    private function syncExistingSeoMeta(ArticleTranslationRevision $revision, ?ArticleSeoMeta $seo): void
     {
         $updates = [];
         if (filled($revision->seo_title)) {
@@ -358,9 +384,20 @@ final class ArticleCmsPromotionAuthority
             $updates['seo_description'] = (string) $revision->seo_description;
             $updates['og_description'] = (string) $revision->seo_description;
         }
-        if ($updates !== []) {
-            ArticleSeoMeta::query()->withoutGlobalScopes()->where('article_id', $article->id)->update($updates);
+        if ($updates !== [] && $seo instanceof ArticleSeoMeta) {
+            $seo->forceFill($updates)->saveQuietly();
         }
+    }
+
+    /** @return array<string,mixed> */
+    private function seoState(ArticleSeoMeta $seo): array
+    {
+        return [
+            'seo_title' => $seo->seo_title,
+            'seo_description' => $seo->seo_description,
+            'og_title' => $seo->og_title,
+            'og_description' => $seo->og_description,
+        ];
     }
 
     private function read(string $root, string $name): string
