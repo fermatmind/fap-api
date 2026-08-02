@@ -97,7 +97,7 @@
     "CONTENT-PROMOTION-W4-RIASEC-ADAPTER-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "ready_to_merge",
       "branch": "codex/content-promotion-w4-riasec-adapter-01",
       "commit_sha": "26df0767f",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3509",
@@ -136,7 +136,13 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "command": "GitHub required checks on PR #3509 head ea654f35996afe0ef732bea914a5d7f19a3c5c5f",
+            "status": "passed",
+            "details": "hygiene, supply-chain, content-pack-build-validate, MBTI legacy/v2, Big Five, Semgrep blocking secrets, Semgrep OSS, and the non-blocking SARIF upload passed. verify-staging-parity was skipped."
+          }
+        ]
       },
       "failure_reason": null,
       "resume_policy": "continuous_goal",
@@ -163,6 +169,11 @@
           "at": "2026-08-02T14:45:00Z",
           "status": "pr_open",
           "summary": "Opened PR #3509 after scoped local validation. Required GitHub checks are pending; no production operation was executed."
+        },
+        {
+          "at": "2026-08-02T14:55:00Z",
+          "status": "ready_to_merge",
+          "summary": "All required GitHub checks passed on the current PR head. verify-staging-parity was skipped; no staging or deployment action was performed."
         }
       ]
     },
