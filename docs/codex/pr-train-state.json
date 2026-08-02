@@ -53613,12 +53613,7 @@
     ],
     "status": "merged",
     "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
-    "checks": {
-      "local_validation": {
-        "status": "passed",
-        "evidence": "Focused Content Promotion conformance, capability, executor, workflow, W1 importer, and W1 publisher PHPUnit passed: 38 tests / 648 assertions. Focused Pint, changed-PHP syntax, YAML/JSON parsing, exact changed-file scope validation, and diff checks passed. No migration, CMS write, publication, production workflow dispatch, deploy, or discoverability mutation occurred."
-      }
-    },
+    "checks": {},
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
@@ -103436,10 +103431,15 @@
     "branch": "codex/content-promotion-adapter-conformance-01",
     "title": "CONTENT-PROMOTION-ADAPTER-CONFORMANCE-01: establish reusable promotion adapter conformance primitives",
     "depends_on": [],
-    "status": "github_checks_pending",
+    "status": "github_checks_repairing",
     "commit_sha": "ec5ba974a4470962d47ed4e54839963f2591413b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3497",
-    "checks": {},
+    "checks": {
+      "local_validation": {
+        "status": "passed",
+        "evidence": "Focused Content Promotion conformance, capability, executor, workflow, W1 importer, and W1 publisher PHPUnit passed: 38 tests / 648 assertions. The exact-head review repair for metadata overwrite and phase-bound rollback passed 10 focused tests / 94 assertions. Focused Pint, changed-PHP syntax, YAML/JSON parsing, exact changed-file scope validation, and diff checks passed. No migration, CMS write, publication, production workflow dispatch, deploy, or discoverability mutation occurred."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -103466,8 +103466,13 @@
         "at": "2026-08-02T04:31:21Z",
         "status": "github_checks_pending",
         "note": "Opened PR #3497 from the exact scoped branch after local validation. Required GitHub checks, review, squash merge, origin/main synchronization, and branch cleanup remain mandatory."
+      },
+      {
+        "at": "2026-08-02T04:36:18Z",
+        "status": "github_checks_repairing",
+        "note": "Addressed two exact-head P1 rollback findings: caller metadata cannot overwrite protected snapshot bindings, and rollback now requires the expected phase plus its phase identity. Focused conformance and executor tests passed; a new exact-head check run is required."
       }
     ],
-    "updated_at": "2026-08-02T04:31:21Z"
+    "updated_at": "2026-08-02T04:36:18Z"
   }
 }

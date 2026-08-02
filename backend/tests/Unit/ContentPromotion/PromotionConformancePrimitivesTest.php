@@ -69,13 +69,17 @@ final class PromotionConformancePrimitivesTest extends TestCase
             'test-pack',
             'before_draft_import',
             [['id' => 7, 'locale' => 'en', 'slug' => 'a']],
+            ['rows' => [['id' => 99]], 'phase' => 'metadata_phase'],
         );
 
-        self::assertSame('test-pack', $snapshots->resolve($context, $targets, 'test-pack', $reference)->pack_id);
+        $snapshot = $snapshots->resolve($context, $targets, 'test-pack', 'before_draft_import', $reference);
+        self::assertSame('test-pack', $snapshot->pack_id);
+        self::assertSame([['id' => 7, 'locale' => 'en', 'slug' => 'a']], data_get($snapshot->meta_json, 'rows'));
+        self::assertSame('before_draft_import', data_get($snapshot->meta_json, 'phase'));
 
         $this->expectException(DomainException::class);
         $this->expectExceptionMessage('rollback_snapshot_mismatch');
-        $snapshots->resolve($this->context(lane: 'W2'), $targets, 'test-pack', $reference);
+        $snapshots->resolve($this->context(lane: 'W2'), $targets, 'test-pack', 'before_draft_import', $reference);
     }
 
     public function test_result_factory_and_shared_harness_require_exact_readback_and_no_boundary_mutation(): void
@@ -88,6 +92,18 @@ final class PromotionConformancePrimitivesTest extends TestCase
         $this->expectException(DomainException::class);
         $this->expectExceptionMessage('promotion_readback_count_mismatch');
         PromotionAdapterResultFactory::make($context, 0, 0, 0, null);
+    }
+
+    public function test_snapshot_resolution_rejects_a_phase_mismatch(): void
+    {
+        $context = $this->context();
+        $targets = PromotionTargetSet::fromIdentities([['locale' => 'en', 'slug' => 'a']]);
+        $snapshots = app(PromotionRollbackSnapshotService::class);
+        $reference = $snapshots->capture($context, $targets, 'test-pack', 'before_draft_import', []);
+
+        $this->expectException(DomainException::class);
+        $this->expectExceptionMessage('rollback_snapshot_mismatch');
+        $snapshots->resolve($context, $targets, 'test-pack', 'before_publication', $reference);
     }
 
     private function context(string $lane = 'W1'): PromotionContext

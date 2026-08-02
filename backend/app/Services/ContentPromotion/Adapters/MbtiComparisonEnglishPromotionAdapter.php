@@ -119,6 +119,7 @@ final class MbtiComparisonEnglishPromotionAdapter implements ExactPackagePromoti
             $context,
             $this->targets(),
             'ENPARITY-W1-MBTI-COMPARISONS',
+            'before_publication',
             $rollbackReference,
         );
         $rows = data_get($snapshot->meta_json, 'rows');

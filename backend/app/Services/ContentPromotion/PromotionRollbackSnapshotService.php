@@ -35,6 +35,7 @@ final class PromotionRollbackSnapshotService
             'reason' => 'content_promotion_'.$phase,
             'created_by' => 'content-promotion-v2',
             'meta_json' => [
+                ...$metadata,
                 'schema_version' => 'fermatmind.content_promotion_rollback_snapshot.v2',
                 'lane' => $context->lane,
                 'subscope' => $context->subscope,
@@ -46,7 +47,6 @@ final class PromotionRollbackSnapshotService
                 'target_fingerprint' => $targets->fingerprint(),
                 'target_identities' => $targets->identities(),
                 'rows' => $rows,
-                ...$metadata,
             ],
         ]);
 
@@ -57,8 +57,12 @@ final class PromotionRollbackSnapshotService
         PromotionContext $context,
         PromotionTargetSet $targets,
         string $packId,
+        string $expectedPhase,
         string $rollbackReference,
     ): ContentReleaseSnapshot {
+        if (! preg_match('/\A[a-z][a-z0-9_]{2,63}\z/', $expectedPhase)) {
+            throw new DomainException('promotion_snapshot_phase_invalid');
+        }
         if (preg_match('/\Acontent-release-snapshot:([1-9][0-9]*)\z/', $rollbackReference, $match) !== 1) {
             throw new DomainException('rollback_reference_invalid');
         }
@@ -70,6 +74,8 @@ final class PromotionRollbackSnapshotService
             || data_get($snapshot->meta_json, 'package_sha256') !== $context->packageSha256
             || data_get($snapshot->meta_json, 'source_commit') !== $context->sourceCommit
             || data_get($snapshot->meta_json, 'idempotency_key') !== $context->idempotencyKey
+            || data_get($snapshot->meta_json, 'phase') !== $expectedPhase
+            || data_get($snapshot->meta_json, 'phase_idempotency_key') !== PromotionPhaseIdentity::idempotencyKey($context, $expectedPhase, $targets)
             || data_get($snapshot->meta_json, 'target_fingerprint') !== $targets->fingerprint()
             || data_get($snapshot->meta_json, 'target_identities') !== $targets->identities()) {
             throw new DomainException('rollback_snapshot_mismatch');
