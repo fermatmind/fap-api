@@ -18,7 +18,7 @@ final class Seo13ArticleReleaseCloseoutProductionOpsWorkflowTest extends TestCas
             'expected_release_name:',
             'operator_approval_phrase:',
             'actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10',
-            'actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08',
+            'actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a',
             'test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"',
             'test "$EXPECTED_RELEASE_SHA" = "$EXPECTED_CONTROL_PLANE_SHA"',
             'I explicitly approve read-only SEO 13 release closeout',

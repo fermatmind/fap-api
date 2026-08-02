@@ -1383,7 +1383,7 @@ jobs:
 
       - name: Upload Deployer timing receipt
         if: ${{ always() }}
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: deployer-task-timing-production
           path: |
@@ -1395,7 +1395,7 @@ jobs:
 
       - name: Upload production deploy progress receipt
         if: ${{ always() }}
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: backend-production-deploy-progress-${{ github.run_id }}-${{ github.run_attempt }}
           path: artifacts/deployer-progress.json
@@ -1404,7 +1404,7 @@ jobs:
 
       - name: Upload immutable candidate control receipt
         if: ${{ always() && steps.immutable_candidate_control.outputs.enabled == 'true' }}
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: backend-immutable-candidate-control-${{ github.run_id }}
           path: ${{ steps.immutable_candidate_control.outputs.receipt_path }}
@@ -1486,7 +1486,7 @@ jobs:
 
       - name: Upload inactive candidate materialization receipt
         if: ${{ needs.deployment-eligibility.outputs.deploy_mode == 'candidate_only' }}
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: backend-inactive-candidate-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ steps.inactive_candidate.outputs.receipt_path }}
@@ -1847,7 +1847,7 @@ jobs:
 
       - name: Upload production deploy incident receipt
         if: ${{ always() }}
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: backend-production-incident-diagnostic-${{ github.run_id }}-${{ github.run_attempt }}
           path: artifacts/backend-production-incident-diagnostic.json

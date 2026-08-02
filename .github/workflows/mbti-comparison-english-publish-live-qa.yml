@@ -175,7 +175,7 @@ jobs:
 
       - name: Publish immutable live-QA receipt
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: mbti-w1-comparison-english-publish-live-qa-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/mbti-w1-comparison-english-publish-receipts
