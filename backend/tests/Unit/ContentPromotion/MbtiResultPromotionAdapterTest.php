@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\ContentPromotion;
 
+use App\Services\Content\ContentPackV2Resolver;
 use App\Services\ContentPromotion\PromotionAdapterRegistry;
 use App\Services\ContentPromotion\PromotionContext;
 use DomainException;
@@ -23,18 +24,29 @@ final class MbtiResultPromotionAdapterTest extends TestCase
     /** @var list<string> */
     private array $packageDirectories = [];
 
+    private string $w9Directory;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->w9Directory = sys_get_temp_dir().'/mbti-result-w9-'.bin2hex(random_bytes(8));
+        mkdir($this->w9Directory, 0700, true);
+        config()->set('content_promotion.w9_authority_root', $this->w9Directory);
+    }
+
     protected function tearDown(): void
     {
         foreach ($this->packageDirectories as $directory) {
             File::deleteDirectory($directory);
         }
+        File::deleteDirectory($this->w9Directory);
         parent::tearDown();
     }
 
     public function test_exact_database_authority_is_idempotent_and_rollback_restores_only_the_previous_activation(): void
     {
         $directory = $this->copyPackage();
-        $context = $this->context($directory, $this->packageSha($directory));
+        $context = $this->context($directory, $this->makePromotable($directory));
         $adapter = app(PromotionAdapterRegistry::class)->resolve('W1', 'mbti-results');
 
         $this->assertExactPhaseResult($adapter->preflight($context), $context, 'preflight');
@@ -44,6 +56,7 @@ final class MbtiResultPromotionAdapterTest extends TestCase
         $draftReplay = $adapter->draftImport($context);
         self::assertSame(0, $draftReplay['written_count']);
         self::assertSame(1, DB::table('content_pack_releases')->count());
+        self::assertSame('mbti_result_promotion.v2', DB::table('content_release_manifests')->value('schema_version'));
         self::assertSame(0, DB::table('content_pack_activations')->count());
 
         $previousReleaseId = '11111111-1111-5111-8111-111111111111';
@@ -72,6 +85,10 @@ final class MbtiResultPromotionAdapterTest extends TestCase
         self::assertSame(46, $publish['written_count']);
         self::assertNotSame($previousReleaseId, DB::table('content_pack_activations')->value('release_id'));
         self::assertSame(0, $adapter->publish($context)['written_count']);
+        self::assertSame(
+            $context->packageSha256,
+            app(ContentPackV2Resolver::class)->resolveActiveMbtiResultAuthority()['source']['package_sha256'] ?? null,
+        );
         $this->assertExactPhaseResult($adapter->liveQa($context), $context, 'live-qa');
 
         $adapter->rollback($context, (string) $publish['rollback_reference']);
@@ -83,6 +100,7 @@ final class MbtiResultPromotionAdapterTest extends TestCase
         $directory = $this->copyPackage();
         File::append($directory.'/README.md', "\nDynamic package-chain regression fixture.\n");
         $sha = $this->recomputePackageSha($directory);
+        $this->writeW9Evidence($directory, $sha);
         $context = $this->context($directory, $sha);
         $adapter = app(PromotionAdapterRegistry::class)->resolve('W1', 'mbti-results');
 
@@ -90,6 +108,15 @@ final class MbtiResultPromotionAdapterTest extends TestCase
 
         $this->assertExactPhaseResult($result, $context, 'preflight');
         self::assertNotSame('9325013b870fd2496efc0882656240f91ce28ff4faaf1da42fb3dde3577b0ed3', $sha);
+    }
+
+    public function test_independent_w9_evidence_is_required_before_any_draft_authority_is_created(): void
+    {
+        $directory = $this->copyPackage();
+        $adapter = app(PromotionAdapterRegistry::class)->resolve('W1', 'mbti-results');
+
+        $this->expectExceptionObject(new DomainException('mbti_result_w9_evidence_incomplete'));
+        $adapter->preflight($this->context($directory, $this->packageSha($directory)));
     }
 
     public function test_locale_private_payload_cjk_and_release_collisions_fail_closed(): void
@@ -101,6 +128,7 @@ final class MbtiResultPromotionAdapterTest extends TestCase
         $assets['assets'][0]['content']['title'] = '中文泄漏';
         File::put($directory.'/assets.json', json_encode($assets, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)."\n");
         $sha = $this->recomputePackageSha($directory);
+        $this->writeW9Evidence($directory, $sha);
         try {
             $adapter->preflight($this->context($directory, $sha));
             self::fail('CJK reader content must fail closed.');
@@ -109,7 +137,7 @@ final class MbtiResultPromotionAdapterTest extends TestCase
         }
 
         $cleanDirectory = $this->copyPackage();
-        $context = $this->context($cleanDirectory, $this->packageSha($cleanDirectory));
+        $context = $this->context($cleanDirectory, $this->makePromotable($cleanDirectory));
         $adapter->draftImport($context);
         DB::table('content_pack_releases')->update(['compiled_hash' => str_repeat('0', 64)]);
         try {
@@ -132,6 +160,37 @@ final class MbtiResultPromotionAdapterTest extends TestCase
     private function packageSha(string $directory): string
     {
         return (string) ($this->jsonFile($directory.'/package_manifest.json')['package_sha256'] ?? '');
+    }
+
+    private function makePromotable(string $directory): string
+    {
+        $sha = $this->recomputePackageSha($directory);
+        $this->writeW9Evidence($directory, $sha);
+
+        return $sha;
+    }
+
+    private function writeW9Evidence(string $directory, string $packageSha): void
+    {
+        $report = [
+            'schema_version' => 'fermatmind.en_parity.independent_w9_report.v1',
+            'review_kind' => 'independent_w9',
+            'verdict' => 'PASS',
+            'package_sha256' => $packageSha,
+            'lane_id' => 'W1',
+            'subscope' => 'mbti-results',
+            'reviewed_row_count' => 46,
+        ];
+        $bytes = json_encode($report, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)."\n";
+        $reportRef = hash('sha256', $directory).'.json';
+        File::put($this->w9Directory.'/'.$reportRef, $bytes);
+        $manifest = $this->jsonFile($directory.'/package_manifest.json');
+        $manifest['quality_gates']['independent_w9'] = [
+            'status' => 'pass',
+            'report_ref' => $reportRef,
+            'report_sha256' => hash('sha256', $bytes),
+        ];
+        File::put($directory.'/package_manifest.json', json_encode($manifest, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)."\n");
     }
 
     private function recomputePackageSha(string $directory): string

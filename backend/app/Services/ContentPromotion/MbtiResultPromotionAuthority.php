@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\ContentPromotion;
 
+use App\Services\Content\ContentPackV2Resolver;
 use DomainException;
 use Illuminate\Support\Facades\DB;
 
@@ -22,6 +23,7 @@ final class MbtiResultPromotionAuthority
 
     private const REQUIRED_FILES = [
         'assets.json',
+        'editorial_review.json',
         'inventory_reconciliation.json',
         'entitlement_matrix.json',
         'pdf_reader_fixture_mapping.json',
@@ -42,6 +44,8 @@ final class MbtiResultPromotionAuthority
         'account_id', 'email', 'phone', 'answer', 'raw_score', 'score_vector',
         'recovery', 'secret', 'authorization', 'cookie',
     ];
+
+    public function __construct(private readonly ContentPackV2Resolver $runtimeResolver) {}
 
     /** @return array<string, mixed> */
     public function inspect(PromotionContext $context): array
@@ -97,6 +101,7 @@ final class MbtiResultPromotionAuthority
                 throw new DomainException('mbti_result_package_required_payload_missing');
             }
         }
+        $this->assertIndependentW9Evidence($manifest, $packageSha256);
 
         $assets = $this->decode($files['assets.json'], 'mbti_result_assets_json_invalid');
         $inventory = $this->decode($files['inventory_reconciliation.json'], 'mbti_result_inventory_json_invalid');
@@ -189,7 +194,7 @@ final class MbtiResultPromotionAuthority
         }
 
         $authority = [
-            'schema_version' => 'fermatmind.content_promotion.mbti_result_authority.v2',
+            'schema_version' => 'mbti_result_promotion.v2',
             'authority' => [
                 'pack_id' => self::PACK_ID,
                 'pack_version' => self::PACK_VERSION,
@@ -282,7 +287,7 @@ final class MbtiResultPromotionAuthority
             DB::table('content_release_manifests')->insert([
                 'content_pack_release_id' => $package['release_id'],
                 'manifest_hash' => $package['authority_hash'],
-                'schema_version' => 'fermatmind.content_promotion.mbti_result_authority.v2',
+                'schema_version' => 'mbti_result_promotion.v2',
                 'storage_disk' => 'database',
                 'storage_path' => 'content_pack_releases/'.$package['release_id'],
                 'pack_id' => self::PACK_ID,
@@ -331,6 +336,14 @@ final class MbtiResultPromotionAuthority
         }
         $release = $this->exactRelease($package, $context, false);
         $payload = $this->decode((string) $release->manifest_json, 'mbti_result_live_qa_payload_invalid');
+        $runtimePayload = $this->runtimeResolver->resolveActiveMbtiResultAuthority();
+        if ($runtimePayload === null
+            || ! hash_equals(
+                PromotionContextFactory::canonicalJson($payload),
+                PromotionContextFactory::canonicalJson($runtimePayload),
+            )) {
+            throw new DomainException('mbti_result_live_qa_runtime_projection_mismatch');
+        }
         if (($payload['source']['package_sha256'] ?? null) !== $context->packageSha256
             || ($payload['authority']['locale'] ?? null) !== 'en'
             || ($payload['authority']['pack_id'] ?? null) !== self::PACK_ID
@@ -449,6 +462,43 @@ final class MbtiResultPromotionAuthority
             if ($permission !== false) {
                 throw new DomainException('mbti_result_package_permission_escalation');
             }
+        }
+    }
+
+    /** @param array<string,mixed> $manifest */
+    private function assertIndependentW9Evidence(array $manifest, string $packageSha256): void
+    {
+        $gate = $manifest['quality_gates']['independent_w9'] ?? null;
+        if (! is_array($gate)
+            || ($gate['status'] ?? null) !== 'pass'
+            || ! is_string($gate['report_ref'] ?? null)
+            || ! preg_match('/\A[a-f0-9]{64}\z/', (string) ($gate['report_sha256'] ?? ''))) {
+            throw new DomainException('mbti_result_w9_evidence_incomplete');
+        }
+        $configuredRoot = (string) config('content_promotion.w9_authority_root');
+        $root = realpath(str_starts_with($configuredRoot, DIRECTORY_SEPARATOR) ? $configuredRoot : base_path($configuredRoot));
+        $reportRef = (string) $gate['report_ref'];
+        if ($root === false || $reportRef === '' || basename($reportRef) !== $reportRef || str_contains($reportRef, '..')) {
+            throw new DomainException('mbti_result_w9_evidence_incomplete');
+        }
+        $path = $root.DIRECTORY_SEPARATOR.$reportRef;
+        $resolved = realpath($path);
+        if (! is_file($path) || is_link($path) || $resolved === false || dirname($resolved) !== $root) {
+            throw new DomainException('mbti_result_w9_evidence_incomplete');
+        }
+        $bytes = file_get_contents($path);
+        if (! is_string($bytes) || ! hash_equals((string) $gate['report_sha256'], hash('sha256', $bytes))) {
+            throw new DomainException('mbti_result_w9_evidence_incomplete');
+        }
+        $report = $this->decode($bytes, 'mbti_result_w9_evidence_incomplete');
+        if (($report['schema_version'] ?? null) !== 'fermatmind.en_parity.independent_w9_report.v1'
+            || ($report['review_kind'] ?? null) !== 'independent_w9'
+            || ($report['verdict'] ?? null) !== 'PASS'
+            || ($report['package_sha256'] ?? null) !== $packageSha256
+            || ($report['lane_id'] ?? null) !== 'W1'
+            || ($report['subscope'] ?? null) !== 'mbti-results'
+            || (int) ($report['reviewed_row_count'] ?? 0) !== 46) {
+            throw new DomainException('mbti_result_w9_evidence_incomplete');
         }
     }
 

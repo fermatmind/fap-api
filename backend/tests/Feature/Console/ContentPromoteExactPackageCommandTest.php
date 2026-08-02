@@ -14,6 +14,7 @@ use App\Services\ContentPromotion\PromotionContextFactory;
 use DomainException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Tests\TestCase;
 use Tests\Unit\ContentPromotion\Concerns\AssertsExactPackagePromotionConformance;
@@ -25,11 +26,18 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
 
     private string $receiptDirectory;
 
+    private string $w9Directory;
+
+    private ?string $mbtiResultPackageDirectory = null;
+
     protected function setUp(): void
     {
         parent::setUp();
         $this->receiptDirectory = sys_get_temp_dir().'/content-promotion-v2-'.bin2hex(random_bytes(8));
         mkdir($this->receiptDirectory, 0700, true);
+        $this->w9Directory = sys_get_temp_dir().'/content-promotion-w9-'.bin2hex(random_bytes(8));
+        mkdir($this->w9Directory, 0700, true);
+        config()->set('content_promotion.w9_authority_root', $this->w9Directory);
         $this->setExecutionEnvironment();
     }
 
@@ -39,6 +47,10 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
             @unlink($path);
         }
         @rmdir($this->receiptDirectory);
+        if ($this->mbtiResultPackageDirectory !== null) {
+            File::deleteDirectory($this->mbtiResultPackageDirectory);
+        }
+        File::deleteDirectory($this->w9Directory);
         foreach ([
             'CONTENT_PROMOTION_SOURCE_COMMIT',
             'CONTENT_PROMOTION_WORKFLOW_RUN_ID',
@@ -264,11 +276,12 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
     /** @return array<string, mixed> */
     private function runMbtiResultPhase(string $phase, string $filename, int $expectedExit = 0): array
     {
-        $sha = MbtiResultEnglishPackageImporter::PACKAGE_SHA256;
+        $packageDirectory = $this->mbtiResultPackageDirectory();
+        $sha = (string) (json_decode((string) File::get($packageDirectory.'/package_manifest.json'), true, 512, JSON_THROW_ON_ERROR)['package_sha256'] ?? '');
         $this->setWorkflowSignature('W1', 'mbti-results', $sha);
         $output = new BufferedOutput;
         $exit = Artisan::call('content:promote-exact-package', [
-            '--package' => MbtiResultEnglishPackageImporter::defaultPackageDirectory(),
+            '--package' => $packageDirectory,
             '--expected-package-sha256' => $sha,
             '--lane' => 'W1',
             '--subscope' => 'mbti-results',
@@ -282,6 +295,36 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
         self::assertCount(1, $lines, 'stdout must contain exactly one JSON object.');
 
         return json_decode($lines[0], true, 512, JSON_THROW_ON_ERROR);
+    }
+
+    private function mbtiResultPackageDirectory(): string
+    {
+        if ($this->mbtiResultPackageDirectory !== null) {
+            return $this->mbtiResultPackageDirectory;
+        }
+        $directory = base_path('content_assets/en-content-parity/.testing-mbti-result-'.bin2hex(random_bytes(8)));
+        File::copyDirectory(MbtiResultEnglishPackageImporter::defaultPackageDirectory(), $directory);
+        $manifest = json_decode((string) File::get($directory.'/package_manifest.json'), true, 512, JSON_THROW_ON_ERROR);
+        $report = [
+            'schema_version' => 'fermatmind.en_parity.independent_w9_report.v1',
+            'review_kind' => 'independent_w9',
+            'verdict' => 'PASS',
+            'package_sha256' => $manifest['package_sha256'],
+            'lane_id' => 'W1',
+            'subscope' => 'mbti-results',
+            'reviewed_row_count' => 46,
+        ];
+        $bytes = json_encode($report, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)."\n";
+        $reportRef = 'mbti-result-command-fixture.json';
+        File::put($this->w9Directory.'/'.$reportRef, $bytes);
+        $manifest['quality_gates']['independent_w9'] = [
+            'status' => 'pass',
+            'report_ref' => $reportRef,
+            'report_sha256' => hash('sha256', $bytes),
+        ];
+        File::put($directory.'/package_manifest.json', json_encode($manifest, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)."\n");
+
+        return $this->mbtiResultPackageDirectory = $directory;
     }
 
     /** @return array<string, mixed> */

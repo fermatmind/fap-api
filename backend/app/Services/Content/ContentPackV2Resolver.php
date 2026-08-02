@@ -75,6 +75,26 @@ final class ContentPackV2Resolver
         return $this->resolveCompiledPathFromRelease($release);
     }
 
+    /** @return array<string,mixed>|null */
+    public function resolveActiveMbtiResultAuthority(): ?array
+    {
+        try {
+            $activation = DB::table('content_pack_activations')
+                ->whereRaw('LOWER(pack_id) = ?', [strtolower(self::MBTI_INACTIVE_RESULT_PACK_ID)])
+                ->where('pack_version', self::MBTI_INACTIVE_RESULT_PACK_VERSION)
+                ->first();
+            $releaseId = trim((string) ($activation->release_id ?? ''));
+            if ($releaseId === '') {
+                return null;
+            }
+            $release = DB::table('content_pack_releases')->where('id', $releaseId)->first();
+        } catch (QueryException) {
+            return null;
+        }
+
+        return $release === null ? null : $this->resolveDatabaseBackedMbtiResultAuthority($release);
+    }
+
     public function resolveCompiledPathByManifestHash(string $packId, string $packVersion, string $manifestHash): ?string
     {
         $packId = strtoupper(trim($packId));
@@ -235,6 +255,69 @@ final class ContentPackV2Resolver
         }
 
         return $packRoot;
+    }
+
+    /** @return array<string,mixed>|null */
+    private function resolveDatabaseBackedMbtiResultAuthority(object $release): ?array
+    {
+        $releaseId = trim((string) ($release->id ?? ''));
+        if ($releaseId === ''
+            || str_replace('\\', '/', trim((string) ($release->storage_path ?? ''))) !== 'database/content_pack_releases/'.$releaseId
+            || trim((string) ($release->action ?? '')) !== 'content_promotion_w1_mbti_results_v2'
+            || strtoupper(trim((string) ($release->to_pack_id ?? ''))) !== self::MBTI_INACTIVE_RESULT_PACK_ID
+            || trim((string) ($release->pack_version ?? '')) !== self::MBTI_INACTIVE_RESULT_PACK_VERSION
+            || trim((string) ($release->region ?? '')) !== 'GLOBAL'
+            || trim((string) ($release->locale ?? '')) !== 'en'
+            || trim((string) ($release->status ?? '')) !== 'success') {
+            return null;
+        }
+        $payload = $this->decodeJsonObject((string) ($release->manifest_json ?? ''));
+        if (! $this->isPromotedMbtiResultAuthority($payload, (string) ($release->compiled_hash ?? ''))) {
+            return null;
+        }
+        try {
+            $manifest = DB::table('content_release_manifests')
+                ->where('content_pack_release_id', $releaseId)
+                ->where('manifest_hash', (string) $release->manifest_hash)
+                ->first();
+        } catch (QueryException) {
+            return null;
+        }
+        if ($manifest === null
+            || trim((string) ($manifest->schema_version ?? '')) !== 'mbti_result_promotion.v2'
+            || trim((string) ($manifest->storage_disk ?? '')) !== 'database'
+            || trim((string) ($manifest->storage_path ?? '')) !== 'content_pack_releases/'.$releaseId
+            || strtoupper(trim((string) ($manifest->pack_id ?? ''))) !== self::MBTI_INACTIVE_RESULT_PACK_ID
+            || trim((string) ($manifest->pack_version ?? '')) !== self::MBTI_INACTIVE_RESULT_PACK_VERSION
+            || strtolower(trim((string) ($manifest->compiled_hash ?? ''))) !== strtolower(trim((string) ($release->compiled_hash ?? '')))) {
+            return null;
+        }
+        $manifestPayload = $this->decodeJsonObject((string) ($manifest->payload_json ?? ''));
+        if ($manifestPayload === null || json_encode($payload) !== json_encode($manifestPayload)) {
+            return null;
+        }
+
+        return $payload;
+    }
+
+    /** @param array<string,mixed>|null $payload */
+    private function isPromotedMbtiResultAuthority(?array $payload, string $compiledHash): bool
+    {
+        if ($payload === null || ($payload['schema_version'] ?? null) !== 'mbti_result_promotion.v2') {
+            return false;
+        }
+        $authority = is_array($payload['authority'] ?? null) ? $payload['authority'] : [];
+        $source = is_array($payload['source'] ?? null) ? $payload['source'] : [];
+        $counts = is_array($payload['counts'] ?? null) ? $payload['counts'] : [];
+
+        return strcasecmp((string) ($authority['pack_id'] ?? ''), self::MBTI_INACTIVE_RESULT_PACK_ID) === 0
+            && ($authority['pack_version'] ?? null) === self::MBTI_INACTIVE_RESULT_PACK_VERSION
+            && ($authority['region'] ?? null) === 'GLOBAL'
+            && ($authority['locale'] ?? null) === 'en'
+            && ($source['package_sha256'] ?? null) === $compiledHash
+            && (int) ($counts['rows'] ?? 0) === 46
+            && is_array($payload['rows'] ?? null)
+            && count($payload['rows']) === 46;
     }
 
     private function hasActivePointer(): bool
