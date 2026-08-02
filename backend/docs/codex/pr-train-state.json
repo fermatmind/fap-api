@@ -9,10 +9,10 @@
     "CONTENT-PROMOTION-CAREER-CMS-ADAPTERS-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/content-promotion-career-cms-adapters-01",
       "commit_sha": "c665afe00",
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3508",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -70,6 +70,11 @@
           "at": "2026-08-02T11:15:00Z",
           "status": "local_checks_passed",
           "summary": "Career revision authority, exact-SHA package checks, draft revisions, independent receipt chains, idempotency, target-isolated rollback, capability registry, automation workflow, review-policy, freeze, JSON/YAML and diff checks passed. No production operation was executed."
+        },
+        {
+          "at": "2026-08-02T11:20:00Z",
+          "status": "pr_open",
+          "summary": "Opened PR #3508 after scoped local validation. Required GitHub checks are pending; no production operation was executed."
         }
       ]
     },
