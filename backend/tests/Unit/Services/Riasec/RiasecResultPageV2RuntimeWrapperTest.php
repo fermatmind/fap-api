@@ -44,14 +44,42 @@ final class RiasecResultPageV2RuntimeWrapperTest extends TestCase
         $this->assertNull($free);
     }
 
-    public function test_runtime_wrapper_denies_production_rollout_flags(): void
+    public function test_staging_behavior_is_unchanged_when_production_flags_are_present(): void
     {
         $this->enableStagingGate();
         config()->set('riasec_result_page_v2.production_runtime_enabled', true);
 
         $payload = $this->compose(ReportAccess::VARIANT_FULL, ['riasec_result_page_v2_staging' => true]);
 
-        $this->assertNull($payload);
+        $this->assertIsArray($payload);
+        $this->assertSame('staging_only', $payload['runtime_use'] ?? null);
+        $this->assertFalse((bool) ($payload['production_use_allowed'] ?? true));
+    }
+
+    public function test_production_runtime_returns_payload_only_after_real_rollout_gate_allows(): void
+    {
+        $this->app->detectEnvironment(static fn (): string => 'production');
+        $this->enableProductionGate();
+
+        $payload = $this->compose(ReportAccess::VARIANT_FULL, []);
+
+        $this->assertIsArray($payload);
+        $this->assertSame('production', $payload['runtime_use'] ?? null);
+        $this->assertTrue((bool) ($payload['production_use_allowed'] ?? false));
+        $this->assertTrue((bool) ($payload['ready_for_production'] ?? false));
+        $this->assertTrue((bool) data_get($payload, 'gate.production_runtime_enabled'));
+        $this->assertSame('attempt_id', data_get($payload, 'gate.gate_matched_rule'));
+
+        $this->assertNull($this->compose(ReportAccess::VARIANT_FREE, []));
+    }
+
+    public function test_production_runtime_falls_back_when_emergency_disabled(): void
+    {
+        $this->app->detectEnvironment(static fn (): string => 'production');
+        $this->enableProductionGate();
+        config()->set('riasec_result_page_v2.production_emergency_disabled', true);
+
+        $this->assertNull($this->compose(ReportAccess::VARIANT_FULL, []));
     }
 
     /**
@@ -81,12 +109,45 @@ final class RiasecResultPageV2RuntimeWrapperTest extends TestCase
         config()->set('riasec_result_page_v2.production_rollout_manual_approval_granted', false);
     }
 
+    private function enableProductionGate(): void
+    {
+        foreach ([
+            'production_runtime_enabled' => true,
+            'production_rollout_enabled' => true,
+            'production_rollout_configured' => true,
+            'production_rollout_manual_approval_granted' => true,
+            'production_import_gate_passed' => true,
+            'production_emergency_disabled' => false,
+            'production_release_snapshot_id' => 'riasec_result_page_v2_prod_v0_2',
+            'production_approved_release_snapshot_ids' => ['riasec_result_page_v2_prod_v0_2'],
+            'production_disabled_release_snapshot_ids' => [],
+            'production_rollout_mode' => 'allowlist_only',
+            'production_rollout_percentage' => 0,
+            'production_rollout_max_percentage' => 0,
+            'production_rollout_allowed_attempt_ids' => ['attempt_riasec_runtime_wrapper'],
+            'production_rollout_allowed_user_ids' => [],
+            'production_rollout_allowed_anon_ids' => [],
+            'production_rollout_allowed_org_ids' => [],
+            'production_rollout_require_tenant_scope' => true,
+            'production_rollout_allowed_tenant_ids' => ['0'],
+            'production_rollout_allowed_scale_codes' => ['RIASEC'],
+            'production_rollout_allowed_form_codes' => ['riasec_60', 'riasec_140'],
+            'production_rollout_allowed_locales' => ['zh-CN'],
+            'production_post_deploy_smoke_required' => true,
+            'production_post_deploy_smoke_procedure_id' => 'riasec_result_page_v2_post_deploy_smoke_v0_2',
+        ] as $key => $value) {
+            config()->set('riasec_result_page_v2.'.$key, $value);
+        }
+    }
+
     private function attempt(): Attempt
     {
         $attempt = new Attempt;
         $attempt->attempt_id = 'attempt_riasec_runtime_wrapper';
         $attempt->scale_code = 'RIASEC';
         $attempt->locale = 'zh-CN';
+        $attempt->org_id = 0;
+        $attempt->answers_summary_json = ['meta' => ['form_code' => 'riasec_60']];
 
         return $attempt;
     }

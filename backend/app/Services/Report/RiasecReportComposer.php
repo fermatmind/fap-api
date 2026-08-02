@@ -7,12 +7,15 @@ namespace App\Services\Report;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Riasec\RiasecPublicProjectionService;
+use App\Services\Riasec\RiasecResultPageProductionRolloutDecision;
+use App\Services\Riasec\RiasecResultPageProductionRolloutGate;
 use Illuminate\Support\Facades\Log;
 
 final class RiasecReportComposer
 {
     public function __construct(
         private readonly RiasecPublicProjectionService $projectionService,
+        private readonly RiasecResultPageProductionRolloutGate $productionRolloutGate,
     ) {}
 
     /**
@@ -87,6 +90,10 @@ final class RiasecReportComposer
             $this->recordResultPageV2PilotGateDecision($gateDecision);
         }
 
+        if ($gateDecision['mode'] === 'production') {
+            $this->recordResultPageV2ProductionGateDecision($gateDecision);
+        }
+
         if (! (bool) $gateDecision['allowed']) {
             return null;
         }
@@ -100,23 +107,28 @@ final class RiasecReportComposer
         $attemptId = (string) ($attempt->attempt_id ?? '');
         $locale = trim((string) ($attempt->locale ?? data_get($projectionV2, 'locale', 'zh-CN')));
 
+        $isProduction = $gateDecision['mode'] === 'production';
+
         return [
             'schema_version' => 'fap.riasec.result_page_v2.runtime_wrapper.v0.1',
-            'runtime_use' => 'staging_only',
-            'production_use_allowed' => false,
-            'ready_for_production' => false,
+            'runtime_use' => $isProduction ? 'production' : 'staging_only',
+            'production_use_allowed' => $isProduction,
+            'ready_for_production' => $isProduction,
             'cms_write_performed' => false,
             'runtime_wrapper_enabled' => true,
-            'production_rollout_enabled' => false,
+            'production_rollout_enabled' => $isProduction,
             'frontend_fallback_allowed' => false,
             'private_payload_exported' => false,
             'gate' => [
                 'enabled' => true,
                 'staging_runtime_enabled' => (bool) config('riasec_result_page_v2.staging_runtime_enabled', false),
                 'pilot_runtime_enabled' => (bool) config('riasec_result_page_v2.pilot_runtime_enabled', false),
-                'production_runtime_enabled' => false,
+                'production_runtime_enabled' => $isProduction && (bool) config('riasec_result_page_v2.production_runtime_enabled', false),
                 'environment' => app()->environment(),
                 'mode' => $gateDecision['mode'],
+                'gate_decision' => $gateDecision['allowed'] ? 'allow' : 'deny',
+                'gate_reason' => $gateDecision['reason'],
+                'gate_matched_rule' => $gateDecision['matched_rule'],
                 'pilot_gate_decision' => $gateDecision['allowed'] ? 'allow' : 'deny',
                 'pilot_gate_reason' => $gateDecision['reason'],
                 'pilot_gate_matched_rule' => $gateDecision['matched_rule'],
@@ -160,14 +172,8 @@ final class RiasecReportComposer
     {
         $context = $this->resultPageV2PilotContext($attempt, $projectionV2);
 
-        if ((bool) config('riasec_result_page_v2.production_runtime_enabled', false)) {
-            return $this->resultPageV2GateDenied('none', 'production_runtime_flag_denied', $context);
-        }
-        if ((bool) config('riasec_result_page_v2.production_rollout_enabled', false)) {
-            return $this->resultPageV2GateDenied('none', 'production_rollout_flag_denied', $context);
-        }
-        if ((bool) config('riasec_result_page_v2.production_rollout_manual_approval_granted', false)) {
-            return $this->resultPageV2GateDenied('none', 'production_manual_approval_flag_denied', $context);
+        if (app()->environment('production')) {
+            return $this->productionDecisionAsArray($this->productionRolloutGate->decide($attempt));
         }
         if (! (bool) config('riasec_result_page_v2.enabled', false)) {
             return $this->resultPageV2GateDenied('none', 'runtime_gate_disabled', $context);
@@ -346,6 +352,43 @@ final class RiasecReportComposer
             'raw_identifier_exported' => false,
             'production_rollout_enabled' => false,
         ]);
+    }
+
+    /**
+     * @param  array{allowed: bool, mode: string, reason: string, matched_rule: string|null, context: array<string,string>}  $decision
+     */
+    private function recordResultPageV2ProductionGateDecision(array $decision): void
+    {
+        $context = $decision['context'];
+
+        Log::log($decision['allowed'] ? 'info' : 'warning', 'RIASEC_RESULT_PAGE_V2_PRODUCTION_GATE', [
+            'decision' => $decision['allowed'] ? 'allow' : 'deny',
+            'reason' => $decision['reason'],
+            'matched_rule' => $decision['matched_rule'],
+            'environment' => $context['environment'] ?? '',
+            'scale_code' => $context['scale_code'] ?? '',
+            'form_code' => $context['form_code'] ?? '',
+            'locale' => $context['locale'] ?? '',
+            'raw_identifier_exported' => false,
+            'legacy_fallback' => ! $decision['allowed'],
+        ]);
+    }
+
+    /**
+     * @return array{allowed: bool, mode: string, reason: string, matched_rule: string|null, context: array<string,string>}
+     */
+    private function productionDecisionAsArray(RiasecResultPageProductionRolloutDecision $decision): array
+    {
+        return [
+            'allowed' => $decision->allowed,
+            'mode' => 'production',
+            'reason' => $decision->reason,
+            'matched_rule' => $decision->matchedBy,
+            'context' => array_map(
+                static fn (string|int $value): string => (string) $value,
+                $decision->context,
+            ),
+        ];
     }
 
     private function resultPageV2HashIdentifier(string $identifier): string

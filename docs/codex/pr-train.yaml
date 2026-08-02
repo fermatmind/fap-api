@@ -48356,3 +48356,50 @@ prs:
     deploy_allowed: false
     content_authority: backend exact-package promotion executor; fap-web snapshots remain non-executable evidence
     repository_rule_impact: codifies reusable exact-target and bounded-rollback proof without changing authority ownership or discoverability
+
+  - id: RIASEC-RESULT-V2-PRODUCTION-RUNTIME-02
+    repo: fap-api
+    base: main
+    branch: codex/riasec-result-v2-production-runtime-02
+    title: "RIASEC-RESULT-V2-PRODUCTION-RUNTIME-02: enable fail-closed production result runtime"
+    status: github_checks_pending
+    depends_on: []
+    train_scope: riasec_result_page_v2_production_runtime
+    scope:
+      - Replace the hard-coded RIASEC production denial with a real runtime and rollout decision gate.
+      - Require runtime, import, approved snapshot, manual approval, exact scope, kill switch, and smoke procedure before production payload emission.
+      - Keep staging and pilot behavior unchanged and emit only redacted production decision telemetry.
+    allowed_paths:
+      - backend/app/Services/Report/RiasecReportComposer.php
+      - backend/app/Services/Riasec/RiasecResultPageProductionRolloutDecision.php
+      - backend/app/Services/Riasec/RiasecResultPageProductionRolloutGate.php
+      - backend/tests/Unit/Services/Riasec/RolloutGateTest.php
+      - backend/tests/Unit/Services/Riasec/RiasecResultPageV2RuntimeWrapperTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Deploy, execute a production import, or write production environment configuration.
+      - Change routes, migrations, authentication, MBTI, Big Five, EQ, Enneagram, frontend, mini-program, SEO, sitemap, llms, or CMS public content.
+      - Export raw attempt, user, anonymous, organization, order, or payment identifiers.
+    validation:
+      - cd backend && php artisan test --filter='RiasecResultPage|RiasecAssessmentFlow|RolloutGate|ProductionRuntime' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Report/RiasecReportComposer.php app/Services/Riasec/RiasecResultPageProductionRolloutDecision.php app/Services/Riasec/RiasecResultPageProductionRolloutGate.php tests/Unit/Services/Riasec/RolloutGateTest.php tests/Unit/Services/Riasec/RiasecResultPageV2RuntimeWrapperTest.php
+      - cd backend && php artisan route:list --path=api --except-vendor
+      - cd backend && php artisan migrate --env=testing --force
+      - cd backend && bash scripts/verify_riasec_launch.sh
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: backend RIASEC report composer and immutable approved production snapshots
+    repository_rule_impact: production RIASEC V2 remains fail closed until every independently controlled release gate passes
