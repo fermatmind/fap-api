@@ -464,11 +464,11 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             $this->assertStringContainsString($contract, $source);
         }
 
-        $this->assertSame(2, substr_count(
+        $this->assertSame(3, substr_count(
             $source,
             'backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php'
         ));
-        $this->assertSame(3, substr_count(
+        $this->assertSame(4, substr_count(
             $source,
             'backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php'
         ));
