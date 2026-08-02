@@ -2430,6 +2430,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $changed = [
             'backend/database/migrations/2026_06_23_000100_expand_content_release_id_columns.php',
             'backend/database/migrations/2026_06_23_000200_expand_content_release_action_column.php',
+            'backend/database/migrations/2026_08_02_170000_widen_content_release_manifest_schema_version.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -11192,6 +11193,7 @@ DIFF;
             'backend/database/migrations/2026_02_27_110000_ensure_norms_table_lookup_index.php',
             'backend/database/migrations/2026_06_23_000100_expand_content_release_id_columns.php',
             'backend/database/migrations/2026_06_23_000200_expand_content_release_action_column.php',
+            'backend/database/migrations/2026_08_02_170000_widen_content_release_manifest_schema_version.php',
         ], true);
     }
 
