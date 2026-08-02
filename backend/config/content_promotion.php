@@ -34,11 +34,11 @@ return [
     'adapter_capabilities' => [
         'W1' => ['mbti-comparisons' => 'audit_compatible', 'mbti-results' => 'audit_compatible'],
         'W2' => ['big-five' => 'audit_compatible'],
-        'W3' => ['articles' => 'audit_compatible', 'career-guides' => 'fail_closed_legacy_audit'],
+        'W3' => ['articles' => 'audit_compatible', 'career-guides' => 'audit_compatible'],
         'W4' => ['riasec' => 'fail_closed_legacy_audit'],
         'W5' => ['enneagram' => 'audit_compatible'],
         'W6' => ['iq' => 'fail_closed_legacy_audit'],
         'W7' => ['eq' => 'fail_closed_legacy_audit'],
-        'W8' => ['career-jobs' => 'fail_closed_legacy_audit'],
+        'W8' => ['career-jobs' => 'audit_compatible'],
     ],
 ];

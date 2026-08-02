@@ -6,6 +6,94 @@
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
+    "CONTENT-PROMOTION-CAREER-CMS-ADAPTERS-01": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "ready_to_merge",
+      "branch": "codex/content-promotion-career-cms-adapters-01",
+      "commit_sha": "c665afe00",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3508",
+      "checks": {
+        "dependency": {
+          "status": "passed",
+          "details": "CONTENT-PROMOTION-W3-ARTICLES-ADAPTER-01 merged at 3c0991b1793a1cb6e649ab9c5e4462281b0cd0d0 and origin/main contains that merge commit."
+        },
+        "local": [
+          {
+            "command": "php -l scoped T5 ContentPromotion paths",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test scoped T5 paths",
+            "status": "passed",
+            "details": "Nine scoped PHP files passed."
+          },
+          {
+            "command": "php artisan test tests/Unit/ContentPromotion/CareerCmsPromotionAdapterTest.php tests/Unit/ContentPromotion/PromotionAdapterCapabilityTest.php",
+            "status": "passed",
+            "details": "6 tests and 59 assertions passed."
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/ContentPromoteExactPackageCommandTest.php",
+            "status": "passed",
+            "details": "9 tests and 148 assertions passed, including independent Career Guide and Career Job receipt chains."
+          },
+          {
+            "command": "php artisan test tests/Sre/ContentPromotionAutomationWorkflowTest.php tests/Architecture/ReviewPolicyRegistryTest.php",
+            "status": "passed",
+            "details": "12 tests and 381 assertions passed across the SRE workflow and review-policy registry checks."
+          },
+          {
+            "command": "Big Five freeze, JSON, YAML and diff checks",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "command": "verify-bigfive",
+            "status": "failed_then_repaired",
+            "details": "The initial PR head omitted the four T5 Career ContentPromotion paths from the exact-package runtime-freeze allowlist. The failure was repaired in the same PR; focused freeze validation passed locally before retry."
+          }
+        ]
+      },
+      "failure_reason": null,
+      "resume_policy": "continuous_goal",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "publish_allowed": false,
+      "deploy_allowed": false,
+      "history": [
+        {
+          "at": "2026-08-02T11:00:00Z",
+          "status": "in_progress",
+          "summary": "Initialized the exact W3 Career Guides and W8 Career Jobs adapter family after T4 merged. The work is local/testing only; no CMS import, publication, discoverability mutation, Search Channel action, or deployment was executed."
+        },
+        {
+          "at": "2026-08-02T11:15:00Z",
+          "status": "local_checks_passed",
+          "summary": "Career revision authority, exact-SHA package checks, draft revisions, independent receipt chains, idempotency, target-isolated rollback, capability registry, automation workflow, review-policy, freeze, JSON/YAML and diff checks passed. No production operation was executed."
+        },
+        {
+          "at": "2026-08-02T11:20:00Z",
+          "status": "pr_open",
+          "summary": "Opened PR #3508 after scoped local validation. Required GitHub checks are pending; no production operation was executed."
+        },
+        {
+          "at": "2026-08-02T12:45:00Z",
+          "status": "github_check_repairing",
+          "summary": "verify-bigfive failed because the exact-package runtime-freeze allowlist did not yet list the four new T5 adapter/authority files. Added only those exact paths and reran the focused runtime-freeze contract locally; no production operation was executed."
+        },
+        {
+          "at": "2026-08-02T13:00:00Z",
+          "status": "ready_to_merge",
+          "summary": "All required GitHub checks passed on the repaired PR head, including hygiene, supply-chain, content-pack validation, MBTI legacy/v2, Big Five, and security checks. Staging parity remained skipped and is not a deployment action."
+        }
+      ]
+    },
     "CONTENT-PROMOTION-W3-ARTICLES-ADAPTER-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
