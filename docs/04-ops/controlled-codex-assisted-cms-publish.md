@@ -1,5 +1,7 @@
 # Controlled Codex-Assisted CMS Publish SOP
 
+> **Legacy/manual-only.** This SOP does not apply to a registered V2 exact package and must not be used as an additional V2 promotion approval gate. Its confirmation phrase protects only an operator who directly invokes `articles:publish-controlled`.
+
 This SOP allows Codex to assist with publishing reviewed CMS article drafts only through a controlled backend command. It does not allow Codex to freely publish content through the CMS UI or to bypass editorial gates.
 
 ## When This Applies
