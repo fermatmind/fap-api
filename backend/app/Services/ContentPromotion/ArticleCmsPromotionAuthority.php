@@ -234,8 +234,11 @@ final class ArticleCmsPromotionAuthority
     private function revisionPayload(Article $article, PromotionContext $context, array $target): array
     {
         $snapshot = $target['snapshot'];
+        $revisionSourceHash = $article->isSourceArticle()
+            ? $this->projectedSourceVersionHash($article, $snapshot)
+            : $article->source_version_hash;
 
-        return ['org_id' => $article->org_id, 'article_id' => $article->id, 'source_article_id' => $article->source_article_id ?: $article->id, 'translation_group_id' => $article->translation_group_id, 'locale' => 'en', 'source_locale' => $article->source_locale ?: 'en', 'revision_number' => ((int) ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', $article->id)->max('revision_number')) + 1, 'revision_status' => ArticleTranslationRevision::STATUS_APPROVED, 'source_version_hash' => $article->source_version_hash, 'translated_from_version_hash' => $article->translated_from_version_hash, 'supersedes_revision_id' => $article->working_revision_id ?: $article->published_revision_id, 'authority_asset_key' => $target['asset_key'], 'authority_source_package' => 'content-promotion/W3/articles', 'authority_source_hash' => $target['source_hash'], 'authority_package_sha256' => $context->packageSha256, 'authority_metadata_json' => ['snapshot' => $snapshot, 'article_state_sha256' => $this->articleStateHash($article)], 'title' => $snapshot['title'], 'excerpt' => $snapshot['excerpt'], 'content_md' => $snapshot['content_md'], 'seo_title' => $snapshot['seo_title'], 'seo_description' => $snapshot['seo_description'], 'approved_at' => now()];
+        return ['org_id' => $article->org_id, 'article_id' => $article->id, 'source_article_id' => $article->source_article_id ?: $article->id, 'translation_group_id' => $article->translation_group_id, 'locale' => 'en', 'source_locale' => $article->source_locale ?: 'en', 'revision_number' => ((int) ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', $article->id)->max('revision_number')) + 1, 'revision_status' => ArticleTranslationRevision::STATUS_APPROVED, 'source_version_hash' => $revisionSourceHash, 'translated_from_version_hash' => $article->isSourceArticle() ? $revisionSourceHash : $article->translated_from_version_hash, 'supersedes_revision_id' => $article->working_revision_id ?: $article->published_revision_id, 'authority_asset_key' => $target['asset_key'], 'authority_source_package' => 'content-promotion/W3/articles', 'authority_source_hash' => $target['source_hash'], 'authority_package_sha256' => $context->packageSha256, 'authority_metadata_json' => ['snapshot' => $snapshot, 'article_state_sha256' => $this->articleStateHash($article)], 'title' => $snapshot['title'], 'excerpt' => $snapshot['excerpt'], 'content_md' => $snapshot['content_md'], 'seo_title' => $snapshot['seo_title'], 'seo_description' => $snapshot['seo_description'], 'approved_at' => now()];
     }
 
     /** @param array<string,mixed> $snapshot */
@@ -245,7 +248,7 @@ final class ArticleCmsPromotionAuthority
         sort($keys);
         $expected = self::SNAPSHOT_FIELDS;
         sort($expected);
-        if ($keys !== $expected || ! is_string($snapshot['title']) || ! is_string($snapshot['content_md']) || ! is_string($snapshot['excerpt']) || ! is_string($snapshot['seo_title']) || ! is_string($snapshot['seo_description']) || trim($snapshot['title']) === '' || trim($snapshot['content_md']) === '') {
+        if ($keys !== $expected || ! is_string($snapshot['title']) || ! is_string($snapshot['content_md']) || ! is_string($snapshot['excerpt']) || ! is_string($snapshot['seo_title']) || ! is_string($snapshot['seo_description']) || trim($snapshot['title']) === '' || trim($snapshot['content_md']) === '' || trim($snapshot['seo_title']) === '' || trim($snapshot['seo_description']) === '') {
             throw new DomainException('article_promotion_snapshot_invalid');
         }
         if (preg_match('/[\p{Han}]/u', implode("\n", $snapshot)) === 1) {
@@ -299,6 +302,22 @@ final class ArticleCmsPromotionAuthority
         }
 
         return hash('sha256', PromotionContextFactory::canonicalJson($state));
+    }
+
+    /** @param array<string,mixed> $snapshot */
+    private function projectedSourceVersionHash(Article $article, array $snapshot): string
+    {
+        return Article::sourceVersionHashFromPayload([
+            'locale' => $article->locale,
+            'title' => $snapshot['title'],
+            'excerpt' => $snapshot['excerpt'],
+            'content_md' => $snapshot['content_md'],
+            'content_html' => null,
+            'cover_image_alt' => $article->cover_image_alt,
+            'related_test_slug' => $article->related_test_slug,
+            'voice' => $article->voice,
+            'voice_order' => $article->voice_order,
+        ]);
     }
 
     public function invalidateDiscoverabilityCaches(): void

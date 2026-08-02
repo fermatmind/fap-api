@@ -60,6 +60,7 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
         self::assertNull($first->content_html);
         self::assertSame('Promoted second-article', $second->refresh()->title);
         self::assertNotSame($firstSourceHash, $first->source_version_hash);
+        self::assertSame($first->source_version_hash, ArticleTranslationRevision::query()->withoutGlobalScopes()->findOrFail($first->published_revision_id)->source_version_hash);
         self::assertSame('Promoted SEO', $firstSeo->refresh()->seo_title);
         self::assertSame('Promoted SEO', $firstSeo->refresh()->og_title);
         self::assertNotSame('before-publish', Cache::get(ArticlePublicListReadCache::CACHE_KEY_PREFIX.':generation'));
@@ -83,6 +84,7 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
         $adapter = app(PromotionAdapterRegistry::class)->resolve('W3', 'articles');
         foreach ([
             ['snapshot' => ['title' => '中文'], 'error' => 'article_promotion_cjk_leakage'],
+            ['snapshot' => ['seo_title' => '   '], 'error' => 'article_promotion_snapshot_invalid'],
             ['row' => ['private_token' => 'secret'], 'error' => 'article_promotion_private_payload_invalid'],
         ] as $case) {
             try {
