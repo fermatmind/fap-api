@@ -100,7 +100,7 @@ return [
     'production_rollout_allowed_tenant_ids' => array_values(array_filter(array_map(
         static fn (string $tenantId): string => trim($tenantId),
         explode(',', (string) env('BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_ALLOWED_TENANT_IDS', '')),
-    ))),
+    ), static fn (string $tenantId): bool => $tenantId !== '')),
     'production_rollout_allowed_scale_codes' => array_values(array_filter(array_map(
         static fn (string $scaleCode): string => strtoupper(trim($scaleCode)),
         explode(',', (string) env('BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_ALLOWED_SCALE_CODES', '')),

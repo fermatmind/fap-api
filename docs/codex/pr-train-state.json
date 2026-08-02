@@ -103618,5 +103618,50 @@
       {"at": "2026-08-02T15:25:00+08:00", "status": "github_checks_pending", "note": "Addressed the current-head resolver integrity review: runtime now recomputes canonical authority hashes against release and manifest records. Focused regression passed; GitHub checks must rerun for the repair head."}
     ],
     "updated_at": "2026-08-02T15:25:00+08:00"
+  },
+  "BIG5-RESULT-V2-PRODUCTION-SNAPSHOT-04": {
+    "id": "BIG5-RESULT-V2-PRODUCTION-SNAPSHOT-04",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/big5-result-v2-production-snapshot-04",
+    "title": "BIG5-RESULT-V2-PRODUCTION-SNAPSHOT-04: bind immutable v0_4 production snapshot and controlled import",
+    "depends_on": [],
+    "status": "merge_ready",
+    "commit_sha": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3501",
+    "checks": {
+      "authorization": {"status": "passed", "evidence": "Operator explicitly authorized BIG5-RESULT-V2-PRODUCTION-SNAPSHOT-04 implementation and normal PR lifecycle while excluding production deployment, import execution, rollout, cache refresh, and environment writes."},
+      "local_validation": {"status": "passed", "evidence": "Big Five focused suite passed 763 tests / 136182 assertions; the complete ci_verify_mbti gate passed, including the Big Five full gate at 1677 tests / 196692 assertions; dedicated controlled-import and rollout tests passed; the exact dry-run command produced its bound confirmation token with zero writes; v0_4 SHA256SUMS, scoped Pint, route listing, fresh SQLite migration, architecture review registry, JSON/YAML parsing, and diff checks passed. The legacy verify_riasec_launch probe exited 56 because the public production health endpoint returned 404, so it was recorded as an environment/policy mismatch and not treated as production release evidence."},
+      "github_required_checks": {"status": "passed", "evidence": "All required CI and Code Scanning checks passed on the pre-rebase exact head; the final latest-main head must rerun them before merge."}
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-08-02T06:40:00Z",
+        "status": "in_progress",
+        "note": "Started from merged origin/main in an isolated worktree. rc_0_3 remains immutable; no production import, deploy, rollout, cache refresh, or environment write is authorized."
+      },
+      {
+        "at": "2026-08-02T07:04:00Z",
+        "status": "local_verified",
+        "note": "All scoped checks passed, including immutable v0_4 hash verification, exact-token dry-run with zero writes, focused Big Five tests, architecture review, and the complete CI gate. Production import and rollout remain unexecuted and separately gated."
+      },
+      {
+        "at": "2026-08-02T07:28:00Z",
+        "status": "merge_ready",
+        "note": "PR #3501 passed all required checks before latest-main reconciliation. Rebased onto current origin/main after PR #3498 advanced the base; the final exact head must rerun required checks before squash merge."
+      }
+    ],
+    "updated_at": "2026-08-02T07:28:00Z"
   }
 }

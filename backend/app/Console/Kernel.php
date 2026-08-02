@@ -202,6 +202,7 @@ use App\Console\Commands\PersonalityTdkRuntimePromotionSearchGateReadinessComman
 use App\Console\Commands\PersonalityWarmPublicReadModels;
 use App\Console\Commands\QualityDailySummary;
 use App\Console\Commands\RefreshCareerAttributionDailyCommand;
+use App\Console\Commands\BigFiveResultPageV2ProductionImportCommand;
 use App\Console\Commands\RiasecResultPageAssetAgentAuditCommand;
 use App\Console\Commands\RiasecResultPageV2ProductionImportCommand;
 use App\Console\Commands\RiasecResultPageV2ProductionSmokeCommand;
@@ -347,6 +348,7 @@ class Kernel extends ConsoleKernel
         Big5AttemptPurge::class,
         Big5TelemetrySummary::class,
         BigFiveResultPageV2AssetAgentAuditCommand::class,
+        BigFiveResultPageV2ProductionImportCommand::class,
         RiasecResultPageAssetAgentAuditCommand::class,
         RiasecResultPageV2ProductionImportCommand::class,
         RiasecResultPageV2ProductionSmokeCommand::class,
