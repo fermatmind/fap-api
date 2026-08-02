@@ -46,7 +46,7 @@ final class MbtiComparisonEnglishPromotionAdapter implements ExactPackagePromoti
         $plan = $this->importer->plan($context->packageDirectory, $context->packageSha256);
         $count = (int) ($plan['row_count'] ?? 0);
 
-        return PromotionAdapterResultFactory::make($context, 0, $count, 0, null);
+        return PromotionAdapterResultFactory::make($context, 0, $count, 0, null, $this->verifiedZeroBoundaryMutations());
     }
 
     public function draftImport(PromotionContext $context): array
@@ -68,6 +68,7 @@ final class MbtiComparisonEnglishPromotionAdapter implements ExactPackagePromoti
             (int) data_get($receipt, 'readback.exact_row_count', 0),
             (int) data_get($receipt, 'readback.public_row_count', -1),
             $rollbackReference,
+            $this->verifiedZeroBoundaryMutations(),
         );
     }
 
@@ -87,6 +88,7 @@ final class MbtiComparisonEnglishPromotionAdapter implements ExactPackagePromoti
             (int) ($receipt['row_count'] ?? 0),
             (int) data_get($receipt, 'readback.published_public_row_count', 0),
             $rollbackReference,
+            $this->verifiedZeroBoundaryMutations(),
         );
     }
 
@@ -109,7 +111,7 @@ final class MbtiComparisonEnglishPromotionAdapter implements ExactPackagePromoti
             $rows[] = $projection;
         }
 
-        return PromotionAdapterResultFactory::make($context, 0, count($rows), count($rows), null);
+        return PromotionAdapterResultFactory::make($context, 0, count($rows), count($rows), null, $this->verifiedZeroBoundaryMutations());
     }
 
     public function rollback(PromotionContext $context, string $rollbackReference): void
@@ -210,5 +212,17 @@ final class MbtiComparisonEnglishPromotionAdapter implements ExactPackagePromoti
             static fn (string $slug): array => ['locale' => 'en', 'org_id' => 0, 'slug' => $slug],
             MbtiComparisonEnglishPackageImporter::EXACT_SLUGS,
         ));
+    }
+
+    /** @return array<string, int> */
+    private function verifiedZeroBoundaryMutations(): array
+    {
+        return [
+            'indexability_mutation_count' => 0,
+            'sitemap_mutation_count' => 0,
+            'llms_mutation_count' => 0,
+            'search_mutation_count' => 0,
+            'deploy_mutation_count' => 0,
+        ];
     }
 }

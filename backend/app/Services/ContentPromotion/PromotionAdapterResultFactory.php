@@ -15,9 +15,15 @@ final class PromotionAdapterResultFactory
         int $readbackCount,
         int $publishedCount,
         ?string $rollbackReference,
+        array $boundaryMutationCounts,
     ): array {
         if ($readbackCount !== $context->expectedRowCount) {
             throw new DomainException('promotion_readback_count_mismatch');
+        }
+        foreach (['indexability_mutation_count', 'sitemap_mutation_count', 'llms_mutation_count', 'search_mutation_count', 'deploy_mutation_count'] as $field) {
+            if (! array_key_exists($field, $boundaryMutationCounts) || ! is_int($boundaryMutationCounts[$field]) || $boundaryMutationCounts[$field] !== 0) {
+                throw new DomainException('prohibited_mutation_reported');
+            }
         }
 
         return [
@@ -29,11 +35,7 @@ final class PromotionAdapterResultFactory
             'locale_check' => 'PASS',
             'cjk_leakage_check' => 'PASS',
             'identity_check' => 'PASS',
-            'indexability_mutation_count' => 0,
-            'sitemap_mutation_count' => 0,
-            'llms_mutation_count' => 0,
-            'search_mutation_count' => 0,
-            'deploy_mutation_count' => 0,
+            ...$boundaryMutationCounts,
         ];
     }
 }

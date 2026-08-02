@@ -90,13 +90,13 @@ final class PromotionConformancePrimitivesTest extends TestCase
     public function test_result_factory_and_shared_harness_require_exact_readback_and_no_boundary_mutation(): void
     {
         $context = $this->context();
-        $result = PromotionAdapterResultFactory::make($context, 1, 1, 0, 'content-release-snapshot:1');
+        $result = PromotionAdapterResultFactory::make($context, 1, 1, 0, 'content-release-snapshot:1', $this->zeroBoundaryMutations());
 
         $this->assertExactPhaseResult($result, $context, 'draft-import');
 
         $this->expectException(DomainException::class);
         $this->expectExceptionMessage('promotion_readback_count_mismatch');
-        PromotionAdapterResultFactory::make($context, 0, 0, 0, null);
+        PromotionAdapterResultFactory::make($context, 0, 0, 0, null, $this->zeroBoundaryMutations());
     }
 
     public function test_snapshot_resolution_rejects_a_phase_mismatch(): void
@@ -127,5 +127,11 @@ final class PromotionConformancePrimitivesTest extends TestCase
             expectedRowCount: 1,
             idempotencyKey: str_repeat('e', 64),
         );
+    }
+
+    /** @return array<string, int> */
+    private function zeroBoundaryMutations(): array
+    {
+        return ['indexability_mutation_count' => 0, 'sitemap_mutation_count' => 0, 'llms_mutation_count' => 0, 'search_mutation_count' => 0, 'deploy_mutation_count' => 0];
     }
 }
