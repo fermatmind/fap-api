@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-07-24T05:15:00Z",
+  "updated_at": "2026-08-02T10:42:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -11,7 +11,7 @@
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
       "status": "pr_open",
       "branch": "codex/content-promotion-w3-articles-adapter-01",
-      "commit_sha": "58a006e2127c75fdacee114dd4536bf1c3241853",
+      "commit_sha": "055fd14a8c591a6d52380d5839e3755b8f67634b",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3506",
       "checks": {
         "dependency": {
@@ -96,6 +96,11 @@
           "at": "2026-08-02T09:58:00Z",
           "status": "review_fixes_validated",
           "summary": "Addressed follow-up review findings with the locked and audited Article authority, semantic post-publication drift detection before rollback, complete Article discoverability cache invalidation, stale HTML clearing/restoration, and public SEO response readback. Scoped local checks were rerun successfully."
+        },
+        {
+          "at": "2026-08-02T10:42:00Z",
+          "status": "review_fixes_validated",
+          "summary": "Bound the ledger to the final reviewed implementation SHA 055fd14a8. Scoped local checks passed after the final concurrency hardening: locked SEO projection checks for publish and rollback, replay cache closeout, and complete source-hash preconditions. Required GitHub checks are pending for this SHA; no production operation was executed."
         }
       ]
     },
