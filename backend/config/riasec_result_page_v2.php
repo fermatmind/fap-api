@@ -1,9 +1,12 @@
 <?php
 
-$csv = static fn (string $key, string $default = ''): array => array_values(array_filter(array_map(
-    static fn (string $value): string => trim($value),
-    explode(',', (string) env($key, $default)),
-)));
+$csv = static fn (string $key, string $default = ''): array => array_values(array_filter(
+    array_map(
+        static fn (string $value): string => trim($value),
+        explode(',', (string) env($key, $default)),
+    ),
+    static fn (string $value): bool => $value !== '',
+));
 
 return [
     'enabled' => env('RIASEC_RESULT_PAGE_V2_ENABLED', false),
