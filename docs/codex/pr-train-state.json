@@ -103229,7 +103229,7 @@
     "branch": "codex/en-parity-w1-mbti-comparison-publish-live-qa-01",
     "title": "EN-PARITY-W1-MBTI-COMPARISON-PUBLISH-LIVE-QA-01: publish seven English MBTI comparisons with live QA",
     "depends_on": ["EN-PARITY-W1-MBTI-TARGET-AUTHORITY-RECEIPT-01"],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "3530ee24d4a4797ea9e52e95b49497bca4d4d73f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3478",
     "checks": {
@@ -103787,8 +103787,16 @@
         "evidence": "T1 merged as 1f863f4b8f63d86149d5bc0fe7563c4936e86446 and origin/main contains the squash merge."
       },
       "scope": {
-        "status": "in_progress",
-        "evidence": "Only the comparison promotion adapter, its public provenance projection, immutable external W9 snapshot/envelope, direct adapter test, and required train metadata are in scope."
+        "status": "passed",
+        "evidence": "Final PR file list is exactly the seven manifest-allowed paths: adapter, public provenance projection, immutable external W9 snapshot/envelope, direct adapter test, and required train metadata."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "Focused adoption and full exact-command-chain suites passed (19 tests / 250 assertions); scoped Pint, PHP syntax, YAML/JSON parsing, exact W9 report/envelope SHA verification, and diff checks passed."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "Exact PR head 904bf2e9523a0ea7d851107531257ce255d45f9e passed CI run 30758983382: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, and verify-bigfive. Code Scanning run 30758983380 passed; staging parity was skipped by workflow."
       }
     },
     "failure_reason": null,
@@ -103817,8 +103825,13 @@
         "at": "2026-08-03T01:30:00+08:00",
         "status": "github_checks_pending",
         "note": "PR #3516 opened from exact implementation head 6ca8e24a1b6e248cf8f7922978a0ff072259fd14. Required GitHub checks are pending; no production workflow, CMS/database write, publication mutation, deploy, or discoverability action occurred."
+      },
+      {
+        "at": "2026-08-03T01:38:08+08:00",
+        "status": "ready_to_merge",
+        "note": "Exact head 904bf2e9523a0ea7d851107531257ce255d45f9e passed all required CI and Code Scanning checks. PR #3516 is CLEAN; final changed files remain exact T3 scope, and no production promotion, CMS/database mutation, deploy, or discoverability action occurred."
       }
     ],
-    "updated_at": "2026-08-03T01:30:00+08:00"
+    "updated_at": "2026-08-03T01:38:08+08:00"
   }
 }
