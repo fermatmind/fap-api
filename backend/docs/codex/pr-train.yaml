@@ -123,6 +123,65 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: CONTENT-PROMOTION-W7-EQ-ADAPTER-01
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/content-promotion-w7-eq-adapter-01
+    base: main
+    depends_on: ["CONTENT-PROMOTION-W4-RIASEC-ADAPTER-01"]
+    dependency_exception: "The user explicitly skipped T7/W6 IQ after its authority audit found no eligible compiled revision/release boundary. W7 proceeds only after W4 is merged; W6 remains fail_closed_legacy_audit."
+    mode: execute
+    title: "CONTENT-PROMOTION-W7-EQ-ADAPTER-01: activate compiled EQ result-content promotion"
+    scope: >
+      Activate only the W7 EQ exact-package adapter using the existing EQ_60
+      compiled pack, compiler lint contract, report assets and runtime result
+      projection. Bind every release to the active compiled manifest and its
+      seven deterministic payload hashes, stage only inactive English
+      result-content release identities, and retain bounded rollback to the
+      preceding compiled release. Do not use raw authoring files as runtime
+      authority, touch questions/scoring/SJT/entitlements, read private
+      assessment/attempt/score/report/order data, mutate discoverability,
+      write production CMS content, or deploy. T7/W6 IQ is user-skipped and
+      remains legacy; this PR truthfully yields 9 compatible and 1 legacy adapter.
+    allowed_paths:
+      - app/Services/ContentPromotion/**
+      - config/content_promotion.php
+      - tests/Feature/Console/ContentPromoteExactPackageCommandTest.php
+      - tests/Unit/ContentPromotion/**
+      - tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    checks:
+      - "php -l app/Services/ContentPromotion/Eq60CompiledPromotionAuthority.php"
+      - "php -l app/Services/ContentPromotion/Adapters/Eq60CompiledPromotionAdapter.php"
+      - "vendor/bin/pint --test app/Services/ContentPromotion/Eq60CompiledPromotionAuthority.php app/Services/ContentPromotion/Adapters/Eq60CompiledPromotionAdapter.php app/Services/ContentPromotion/PromotionAdapterRegistry.php config/content_promotion.php tests/Unit/ContentPromotion/Eq60CompiledPromotionAdapterTest.php tests/Unit/ContentPromotion/PromotionAdapterCapabilityTest.php tests/Feature/Console/ContentPromoteExactPackageCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      - "php artisan test tests/Unit/ContentPromotion/Eq60CompiledPromotionAdapterTest.php tests/Unit/ContentPromotion/PromotionAdapterCapabilityTest.php"
+      - "php artisan test tests/Feature/Console/ContentPromoteExactPackageCommandTest.php"
+      - "php artisan test tests/Sre/ContentPromotionAutomationWorkflowTest.php"
+      - "php artisan test tests/Architecture/ReviewPolicyRegistryTest.php"
+      - "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=exact_package_content_promotion"
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "ruby -e 'require \"yaml\"; YAML.safe_load(File.read(\"docs/codex/pr-train.yaml\"), aliases: true)'"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: continuous_goal
+    merge_policy:
+      mode: github_checks_required
+      local_verify_required: true
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: CONTENT-PROMOTION-CAREER-CMS-ADAPTERS-01
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend

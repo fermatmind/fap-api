@@ -38,7 +38,7 @@ return [
         'W4' => ['riasec' => 'audit_compatible'],
         'W5' => ['enneagram' => 'audit_compatible'],
         'W6' => ['iq' => 'fail_closed_legacy_audit'],
-        'W7' => ['eq' => 'fail_closed_legacy_audit'],
+        'W7' => ['eq' => 'audit_compatible'],
         'W8' => ['career-jobs' => 'audit_compatible'],
     ],
 ];

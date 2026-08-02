@@ -12,6 +12,7 @@ use App\Models\CareerGuide;
 use App\Models\CareerJob;
 use App\Models\MbtiCrossTypeComparisonAuthority;
 use App\Services\Cms\MbtiComparisonEnglishPublishService;
+use App\Services\Content\Eq60PackLoader;
 use App\Services\ContentImport\MbtiComparisonEnglishPackageImporter;
 use App\Services\ContentImport\MbtiResultEnglishPackageImporter;
 use App\Services\ContentImport\RiasecEnglishPackageImporter;
@@ -228,6 +229,25 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
         });
         self::assertSame(1550, $this->receipt('riasec-live-qa.json')['published_count']);
         self::assertSame(0, $this->receipt('riasec-live-qa.json')['deploy_mutation_count']);
+    }
+
+    public function test_w7_eq_adapter_runs_the_full_receipt_chain_against_the_exact_compiled_english_result_content_authority(): void
+    {
+        $loader = app(Eq60PackLoader::class);
+        $package = $loader->compiledDir(Eq60PackLoader::PACK_VERSION);
+        $sha = $loader->resolveManifestHash(Eq60PackLoader::PACK_VERSION);
+        $this->withExpectedCount(2, function () use ($package, $sha): void {
+            self::assertTrue($this->runEqPhase($package, $sha, 'preflight', 'eq-preflight.json')['ok']);
+            self::assertTrue($this->runEqPhase($package, $sha, 'draft-import', 'eq-draft.json')['ok']);
+            self::assertSame(2, $this->receipt('eq-draft.json')['written_count']);
+            $this->setEnv('CONTENT_PROMOTION_PREVIOUS_RECEIPT', $this->receiptDirectory.'/eq-draft.json');
+            self::assertTrue($this->runEqPhase($package, $sha, 'publish', 'eq-publish.json')['ok']);
+            self::assertSame(2, $this->receipt('eq-publish.json')['published_count']);
+            $this->setEnv('CONTENT_PROMOTION_PREVIOUS_RECEIPT', $this->receiptDirectory.'/eq-publish.json');
+            self::assertTrue($this->runEqPhase($package, $sha, 'live-qa', 'eq-live-qa.json')['ok']);
+        });
+        self::assertSame(2, $this->receipt('eq-live-qa.json')['published_count']);
+        self::assertSame(0, $this->receipt('eq-live-qa.json')['deploy_mutation_count']);
     }
 
     public function test_mbti_result_live_qa_failure_restores_only_the_pre_publication_activation(): void
@@ -499,6 +519,12 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
     private function runRiasecPhase(string $package, string $sha, string $phase, string $filename): array
     {
         return $this->runCareerPhase($package, $sha, 'W4', 'riasec', $phase, $filename);
+    }
+
+    /** @return array<string,mixed> */
+    private function runEqPhase(string $package, string $sha, string $phase, string $filename): array
+    {
+        return $this->runCareerPhase($package, $sha, 'W7', 'eq', $phase, $filename);
     }
 
     /** @return array<string, mixed> */

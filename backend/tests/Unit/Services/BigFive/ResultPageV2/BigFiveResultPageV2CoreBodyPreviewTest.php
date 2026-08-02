@@ -1269,6 +1269,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_eq60_compiled_result_exact_package_content_promotion_files(): void
+    {
+        $changed = [
+            'backend/app/Services/ContentPromotion/Eq60CompiledPromotionAuthority.php',
+            'backend/app/Services/ContentPromotion/Adapters/Eq60CompiledPromotionAdapter.php',
+        ];
+        $blocked = ['backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php'];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_mbti_content15_mixed_import_preflight_files(): void
     {
         $changed = [
@@ -7243,6 +7255,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isEq60CompiledResultContentPromotionFile($file)) {
+                continue;
+            }
+
             if ($this->isMbtiContent15MixedImportPreflightFile($file)) {
                 continue;
             }
@@ -9412,6 +9428,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/ContentImport/RiasecEnglishPackageImporter.php',
             'backend/app/Services/ContentPromotion/RiasecContentPromotionAuthority.php',
             'backend/app/Services/ContentPromotion/Adapters/RiasecContentPromotionAdapter.php',
+            'backend/app/Services/ContentPromotion/Eq60CompiledPromotionAuthority.php',
+            'backend/app/Services/ContentPromotion/Adapters/Eq60CompiledPromotionAdapter.php',
+        ], true);
+    }
+
+    private function isEq60CompiledResultContentPromotionFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/ContentPromotion/Eq60CompiledPromotionAuthority.php',
+            'backend/app/Services/ContentPromotion/Adapters/Eq60CompiledPromotionAdapter.php',
         ], true);
     }
 
