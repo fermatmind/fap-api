@@ -10,10 +10,15 @@ final class ContentPromotionAutomationWorkflowTest extends TestCase
 {
     public function test_workflow_binds_exact_inputs_runs_ordered_phases_and_never_deploys_or_changes_discoverability(): void
     {
-        $workflow = (string) file_get_contents(base_path('../.github/workflows/content-promotion-automation.yml'));
+        $workflow = (string) file_get_contents(dirname(__DIR__, 3).'/.github/workflows/content-promotion-automation.yml');
 
         self::assertStringContainsString('environment: production', $workflow);
-        self::assertStringContainsString('test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"', $workflow);
+        self::assertStringContainsString('fetch-depth: 0', $workflow);
+        self::assertStringContainsString('test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"', $workflow);
+        self::assertStringContainsString('minimum_executor_sha="8e738763162ff7c1507e28fa30d1b8cb7154de85"', $workflow);
+        self::assertStringContainsString('git merge-base --is-ancestor "$EXPECTED_CONTROL_PLANE_SHA" origin/main', $workflow);
+        self::assertStringContainsString('git merge-base --is-ancestor "$minimum_executor_sha" "$EXPECTED_CONTROL_PLANE_SHA"', $workflow);
+        self::assertStringNotContainsString('test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"', $workflow);
         self::assertStringContainsString('test "$(tr -d', $workflow);
         self::assertStringContainsString('= "$CONTROL_SHA"', $workflow);
         self::assertStringContainsString('run_phase preflight', $workflow);

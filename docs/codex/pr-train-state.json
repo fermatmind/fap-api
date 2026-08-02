@@ -103735,5 +103735,40 @@
       {"at": "2026-08-02T08:32:00Z", "status": "ready_to_merge", "note": "Exact head 48b2b2042a03782dd79030c48546e046aecaeb51 passed CI run 30739764955 and Code Scanning run 30739764963. No production CMS operation, deployment, or discoverability action occurred."}
     ],
     "updated_at": "2026-08-02T08:32:00Z"
+  },
+  "CONTENT-PROMOTION-V2-DEPLOYED-EXECUTOR-PIN-01": {
+    "id": "CONTENT-PROMOTION-V2-DEPLOYED-EXECUTOR-PIN-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/content-promotion-v2-deployed-executor-pin-01",
+    "title": "CONTENT-PROMOTION-V2-DEPLOYED-EXECUTOR-PIN-01 — Pin promotion workflow to deployed executor SHA",
+    "depends_on": [],
+    "status": "ready_to_merge",
+    "commit_sha": "286fa963a59be2ca4bb800dd4d7a70e24c418704",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3513",
+    "checks": {
+      "dependency": {"status": "passed", "evidence": "No task dependency; isolated worktree starts from origin/main ffc36dedb6df28efabcd0ff2f1cdf1b1bf1f8a2a."},
+      "scope": {"status": "passed", "evidence": "Only workflow, direct SRE source-contract test, and required train metadata are allowed."},
+      "local_validation": {"status": "passed", "evidence": "Focused SRE source-contract test passed: 1 test / 31 assertions. Scoped Pint, workflow/train YAML parsing, state JSON parsing, and git diff --check passed."},
+      "github_required_checks": {"status": "passed", "evidence": "CI run 30757120319 passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-v2, verify-mbti-legacy, and verify-bigfive; Code Scanning run 30757120309 passed. Staging parity was skipped and is not a required closeout blocker."}
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {"at": "2026-08-03T00:00:00+08:00", "status": "implementation_in_progress", "note": "Started from isolated origin/main ffc36dedb6df28efabcd0ff2f1cdf1b1bf1f8a2a. This task changes only the immutable control-plane provenance guard; no deploy, production access, CMS/database write, package mutation, receipt ingestion, or discoverability action is authorized."},
+      {"at": "2026-08-03T00:37:05+08:00", "status": "local_validation_passed", "note": "Focused SRE source-contract test passed (1 test / 31 assertions); scoped Pint, YAML/JSON parsing, diff check, and exact four-path scope validation passed. The test resolves the workflow relative to its own checkout, so the isolated worktree is the tested control plane."},
+      {"at": "2026-08-03T00:38:57+08:00", "status": "github_checks_pending", "note": "PR #3513 opened from exact head 25a8cd429d97f3d0aa76f056e69af00deba03402. Required CI and Code Scanning checks are pending; no deploy, CMS/database write, or discoverability action occurred."},
+      {"at": "2026-08-03T00:48:31+08:00", "status": "ready_to_merge", "note": "Exact head 59e178fbf914bbaf98008700f6c90491300d89b5 passed CI run 30757120319 and Code Scanning run 30757120309. PR #3513 is CLEAN; final changed-file scope remains exactly workflow, focused SRE test, and train metadata."}
+    ],
+    "updated_at": "2026-08-03T00:48:31+08:00"
   }
 }

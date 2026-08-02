@@ -51,7 +51,7 @@ jobs:
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
           ref: ${{ inputs.expected_control_plane_sha }}
-          fetch-depth: 1
+          fetch-depth: 0
 
       - name: Verify immutable workflow inputs
         shell: bash
@@ -78,7 +78,9 @@ jobs:
           test -d "backend/$PACKAGE_PATH"
           git fetch --no-tags origin main:refs/remotes/origin/main
           test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
-          test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          minimum_executor_sha="8e738763162ff7c1507e28fa30d1b8cb7154de85"
+          git merge-base --is-ancestor "$EXPECTED_CONTROL_PLANE_SHA" origin/main
+          git merge-base --is-ancestor "$minimum_executor_sha" "$EXPECTED_CONTROL_PLANE_SHA"
           policy="$(jq -cS . backend/config/content_promotion_release_policy.v2.json)"
           test "$(printf '%s' "$policy" | sha256sum | awk '{print $1}')" = "$RELEASE_POLICY_SHA256"
 

@@ -48657,3 +48657,41 @@ prs:
     deploy_allowed: false
     content_authority: PersonalityPublicContentAsset, PersonalityPublicContentAssetRevision, and published/working revision pointers
     repository_rule_impact: preserves text-only personality media and backend-only revision authority while enabling audited exact-package execution
+
+  - id: CONTENT-PROMOTION-V2-DEPLOYED-EXECUTOR-PIN-01
+    repo: fap-api
+    base: main
+    branch: codex/content-promotion-v2-deployed-executor-pin-01
+    title: "CONTENT-PROMOTION-V2-DEPLOYED-EXECUTOR-PIN-01 — Pin promotion workflow to deployed executor SHA"
+    status: user_authorized
+    depends_on: []
+    train_scope: content_promotion_v2_deployed_executor_pin
+    scope:
+      - Permit the exact-package promotion workflow to use an exact deployed executor SHA reachable from main instead of requiring it to equal latest main.
+      - Retain exact checked-out SHA, minimum-executor ancestry, active production revision, deploy-lock, package, release-policy, workflow-signature, receipt-chain, and zero-mutation gates.
+    allowed_paths:
+      - .github/workflows/content-promotion-automation.yml
+      - backend/tests/Sre/ContentPromotionAutomationWorkflowTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Promote content, write CMS or database state, deploy, migrate, alter adapters or packages, ingest receipts, modify fap-web validators, or change SEO, indexability, sitemap, llms, Search Channel, GitHub environments, secrets, or permissions.
+    validation:
+      - cd backend && php artisan test tests/Sre/ContentPromotionAutomationWorkflowTest.php --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: unchanged; workflow only verifies an already deployed backend executor
+    repository_rule_impact: preserves backend authority and all zero-mutation/discoverability boundaries while making deployed executor provenance explicit
