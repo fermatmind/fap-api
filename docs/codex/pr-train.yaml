@@ -48458,3 +48458,54 @@ prs:
     deploy_allowed: false
     content_authority: immutable backend RIASEC v0_2 snapshot and exact file hashes
     repository_rule_impact: import remains dry-run by default and rollout remains an independently approved production action
+
+  - id: CONTENT-PROMOTION-W1-MBTI-RESULTS-ADAPTER-01
+    repo: fap-api
+    base: main
+    branch: codex/content-promotion-w1-mbti-results-adapter-01
+    title: "CONTENT-PROMOTION-W1-MBTI-RESULTS-ADAPTER-01: activate audited W1 MBTI result promotion"
+    status: github_checks_pending
+    depends_on: [CONTENT-PROMOTION-ADAPTER-CONFORMANCE-01]
+    train_scope: content_promotion_w1_mbti_results_adapter_v2
+    scope:
+      - Replace the W1/mbti-results legacy fail-closed adapter with a concrete V2 adapter over the existing content-pack release, manifest, activation, and snapshot authority.
+      - Dynamically verify the submitted backend package manifest chain and exact SHA; keep draft authority non-public and publish only the matching English result target set.
+      - Prove exact readback, receipt chaining, idempotency, safe result/report/share/PDF/history projections, and bounded prior-activation rollback without a migration, package-payload edit, real promotion, or deployed-tree write.
+    allowed_paths:
+      - AGENTS.md
+      - backend/app/Services/Content/ContentPackV2Resolver.php
+      - backend/app/Services/ContentPromotion/**
+      - backend/app/Services/Mbti/MbtiResultPersonalizationService.php
+      - backend/config/content_promotion.php
+      - backend/docs/content-promotion-automation-v2.md
+      - backend/docs/schemas/content-promotion-receipt.v2.schema.json
+      - backend/tests/Feature/Console/ContentPromoteExactPackageCommandTest.php
+      - backend/tests/Sre/ContentPromotionAutomationWorkflowTest.php
+      - backend/tests/Unit/ContentPromotion/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify package payloads, immutable deployed content-pack trees, private assessment/report/order/payment authorities, database schema, discoverability, or deploy configuration.
+      - Change W1/mbti-comparisons or activate a later lane adapter.
+    validation:
+      - cd backend && php artisan test tests/Unit/ContentPromotion/PromotionConformancePrimitivesTest.php tests/Unit/ContentPromotion/PromotionAdapterCapabilityTest.php tests/Unit/ContentPromotion/MbtiResultPromotionAdapterTest.php tests/Feature/Console/ContentPromoteExactPackageCommandTest.php tests/Sre/ContentPromotionAutomationWorkflowTest.php --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Content app/Services/ContentPromotion app/Services/Mbti tests/Unit/ContentPromotion tests/Feature/Console/ContentPromoteExactPackageCommandTest.php
+      - php -l each modified PHP file
+      - parse train YAML and state JSON
+      - exact changed-file scope validation
+      - git diff --check
+      - git diff --cached --check
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: backend content-pack release, release-manifest, activation, and snapshot records; package bytes are integrity inputs, never frontend authority
+    repository_rule_impact: records the W1 result V2 authority boundary and preserves immutable deployed-tree and discoverability protections

@@ -21,6 +21,10 @@ return [
         'content_baselines',
         'database/seeders/data',
     ],
+    // Independent W9 evidence is intentionally outside the frozen producer
+    // package. A package may name an exact report here, but cannot self-approve
+    // by adding a payload file beside its own candidate assets.
+    'w9_authority_root' => 'content_assets/en-content-parity/W9',
     'release_policy' => json_decode(
         (string) file_get_contents(__DIR__.'/content_promotion_release_policy.v2.json'),
         true,
@@ -28,7 +32,7 @@ return [
         JSON_THROW_ON_ERROR,
     ),
     'adapter_capabilities' => [
-        'W1' => ['mbti-comparisons' => 'audit_compatible', 'mbti-results' => 'fail_closed_legacy_audit'],
+        'W1' => ['mbti-comparisons' => 'audit_compatible', 'mbti-results' => 'audit_compatible'],
         'W2' => ['big-five' => 'fail_closed_legacy_audit'],
         'W3' => ['articles' => 'fail_closed_legacy_audit', 'career-guides' => 'fail_closed_legacy_audit'],
         'W4' => ['riasec' => 'fail_closed_legacy_audit'],

@@ -80,10 +80,18 @@ final class ExactPackagePromotionService
     ): array {
         $expected = $context->expectedRowCount;
         $written = (int) ($result['written_count'] ?? 0);
+        $created = (int) ($result['created_count'] ?? 0);
+        $updated = (int) ($result['updated_count'] ?? 0);
+        $unchanged = (int) ($result['unchanged_count'] ?? 0);
         $readback = (int) ($result['readback_count'] ?? 0);
         $published = (int) ($result['published_count'] ?? 0);
         if (($result['ok'] ?? false) !== true || $readback !== $expected) {
             throw new DomainException('adapter_result_failed_or_count_mismatch');
+        }
+        if ($created < 0 || $updated < 0 || $unchanged < 0
+            || $created + $updated !== $written
+            || $created + $updated + $unchanged !== $expected) {
+            throw new DomainException('adapter_operation_counts_invalid');
         }
         if ($phase === 'draft-import' && $published !== 0) {
             throw new DomainException('draft_import_public_count_nonzero');
@@ -116,6 +124,9 @@ final class ExactPackagePromotionService
             'idempotency_key' => $context->idempotencyKey,
             'expected_count' => $expected,
             'written_count' => $written,
+            'created_count' => $created,
+            'updated_count' => $updated,
+            'unchanged_count' => $unchanged,
             'readback_count' => $readback,
             'published_count' => $published,
             'previous_receipt_sha256' => $previous['sha256'] ?? null,
