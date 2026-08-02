@@ -211,7 +211,7 @@
     "CONTENT-PROMOTION-W7-EQ-ADAPTER-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "ready_to_merge",
       "branch": "codex/content-promotion-w7-eq-adapter-01",
       "commit_sha": "255c33e9c7c110f60cb6bfe184ef5d2e5a6d6c66",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3510",
@@ -259,7 +259,13 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "command": "GitHub required checks on PR #3510 head 3a1cb4454a1f2d6dbec1d7f053c2d09c9b36118a",
+            "status": "passed",
+            "details": "hygiene, supply-chain, content-pack-build-validate, MBTI legacy/v2, Big Five, Semgrep blocking secrets, and Semgrep SARIF upload passed. verify-staging-parity was skipped."
+          }
+        ]
       },
       "failure_reason": null,
       "resume_policy": "continuous_goal",
@@ -286,6 +292,11 @@
           "at": "2026-08-02T14:00:00Z",
           "status": "pr_open",
           "summary": "Opened PR #3510 after scoped local validation. Required GitHub checks are pending; no production operation was executed."
+        },
+        {
+          "at": "2026-08-02T14:10:00Z",
+          "status": "ready_to_merge",
+          "summary": "All required GitHub checks passed on the current implementation. verify-staging-parity was skipped; no staging or deployment action was performed."
         }
       ]
     },
