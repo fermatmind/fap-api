@@ -103205,7 +103205,7 @@
     "branch": "codex/en-parity-w1-mbti-target-authority-receipt-01",
     "title": "EN-PARITY-W1-MBTI-TARGET-AUTHORITY-RECEIPT-01: generate exact production target-authority draft receipts",
     "depends_on": ["EN-PARITY-W1-MBTI-COMPARISON-DRAFT-IMPORT-01", "EN-PARITY-W1-MBTI-RESULT-DRAFT-IMPORT-01"],
-    "status": "ready_to_merge",
+    "status": "github_checks_pending",
     "commit_sha": "46a5b82b851d9ecda568151387a82421cb970c6b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3473",
     "checks": {"authorization": {"status": "passed", "evidence": "human_operator authorized the exact two-target production CMS draft receipt scope."}, "github_required_checks": {"status": "passed", "evidence": "The prior PR head passed all GitHub checks; this rebase requires fresh checks."}},
@@ -103708,7 +103708,7 @@
     "branch": "codex/content-promotion-v2-deployed-executor-pin-01",
     "title": "CONTENT-PROMOTION-V2-DEPLOYED-EXECUTOR-PIN-01 — Pin promotion workflow to deployed executor SHA",
     "depends_on": [],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "286fa963a59be2ca4bb800dd4d7a70e24c418704",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3513",
     "checks": {
