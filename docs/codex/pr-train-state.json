@@ -103540,9 +103540,9 @@
     "branch": "codex/riasec-result-v2-production-snapshot-smoke-02",
     "title": "RIASEC-RESULT-V2-PRODUCTION-SNAPSHOT-SMOKE-02: bind immutable v0_2 content and read-only smoke",
     "depends_on": ["RIASEC-RESULT-V2-PRODUCTION-RUNTIME-02"],
-    "status": "local_verified",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "d9c380701d889831794bbc94b120b078519f60ed",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3500",
     "checks": {
       "authorization": {"status": "passed", "evidence": "Operator explicitly authorized the dependent v0_2 snapshot, approval, dry-run import readiness, and smoke implementation while excluding all production actions."},
       "dependency": {"status": "passed", "evidence": "RIASEC runtime PR #3499 merged as db4b1bb1aaa82ace265172a1fa620d5fe4a2b6db."},
@@ -103570,8 +103570,13 @@
         "at": "2026-08-02T06:35:00Z",
         "status": "local_verified",
         "note": "All scoped local checks passed, including immutable file-hash verification, exact-token dry-run with zero writes, read-only 60/140 smoke, and the complete CI gate. Production import and rollout remain unexecuted and separately gated."
+      },
+      {
+        "at": "2026-08-02T06:37:00Z",
+        "status": "github_checks_pending",
+        "note": "PR #3500 opened from exact local-verified head d9c380701d889831794bbc94b120b078519f60ed; waiting for GitHub mergeability and required-check resolution."
       }
     ],
-    "updated_at": "2026-08-02T06:35:00Z"
+    "updated_at": "2026-08-02T06:37:00Z"
   }
 }
