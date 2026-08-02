@@ -92,7 +92,7 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
 
         foreach ([
             'RELEASE_ID="standard-${DEPLOY_SHA:0:12}"',
-            'gh run list --workflow deploy.yml --branch main --commit \"$DEPLOY_SHA\" --status completed --limit 100',
+            'gh run list --workflow deploy.yml --branch main --commit "$DEPLOY_SHA" --status completed --limit 100',
             '--json databaseId,headSha,name,event,status,conclusion',
             'and .headSha == $deploy_sha)',
             '| .databaseId]',

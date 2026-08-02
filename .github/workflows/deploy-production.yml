@@ -128,7 +128,7 @@ jobs:
                 exit 2
               fi
               if [ -z "$STAGING_RUN_ID" ]; then
-                RUNS_JSON="$(gh run list --workflow deploy.yml --branch main --commit \"$DEPLOY_SHA\" --status completed --limit 100 --json databaseId,headSha,name,event,status,conclusion)"
+                RUNS_JSON="$(gh run list --workflow deploy.yml --branch main --commit "$DEPLOY_SHA" --status completed --limit 100 --json databaseId,headSha,name,event,status,conclusion)"
                 STAGING_RUN_ID="$(jq -r --arg deploy_sha "$DEPLOY_SHA" '
                   [.[]
                    | select(.name == "Deploy Application"
