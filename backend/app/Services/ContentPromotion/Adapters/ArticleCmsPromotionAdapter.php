@@ -5,16 +5,20 @@ declare(strict_types=1);
 namespace App\Services\ContentPromotion\Adapters;
 
 use App\Models\Article;
+use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
+use App\Models\ContentReleaseSnapshot;
 use App\Services\ContentPromotion\ArticleCmsPromotionAuthority;
 use App\Services\ContentPromotion\Contracts\ExactPackagePromotionAdapter;
 use App\Services\ContentPromotion\PromotionAdapterResultFactory;
 use App\Services\ContentPromotion\PromotionContext;
+use App\Services\ContentPromotion\PromotionPhaseIdentity;
 use App\Services\ContentPromotion\PromotionRollbackSnapshotService;
 use App\Services\ContentPromotion\PromotionTargetSet;
 use DomainException;
 use Illuminate\Support\Facades\DB;
 
+/** @review-surface article */
 final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
 {
     public function __construct(
@@ -98,18 +102,41 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
                     ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', $article->id)->whereKey((int) $revisionId)
                         ->update(['revision_status' => (string) $status]);
                 }
-                $article->forceFill((array) ($row['article_before'] ?? []))->saveQuietly();
+                $article->forceFill((array) ($row['article_before'] ?? []))->save();
+                $seoBefore = (array) ($row['seo_before'] ?? []);
+                if ((int) ($seoBefore['id'] ?? 0) > 0) {
+                    $seo = ArticleSeoMeta::query()->withoutGlobalScopes()->lockForUpdate()->find((int) $seoBefore['id']);
+                    if (! $seo instanceof ArticleSeoMeta || (int) $seo->article_id !== (int) $article->id) {
+                        throw new DomainException('article_promotion_rollback_seo_meta_invalid');
+                    }
+                    $seo->forceFill((array) ($seoBefore['values'] ?? []))->saveQuietly();
+                }
                 $revision->forceFill([
                     'revision_status' => (string) ($row['package_revision_status_before'] ?? ArticleTranslationRevision::STATUS_APPROVED),
                     'published_at' => $row['package_revision_published_at_before'] ?? null,
                 ])->saveQuietly();
             }
         }, 3);
+        $this->authority->invalidatePublicListCache();
     }
 
     /** @param array{targets:list<array<string,mixed>>} $package */
     private function capture(PromotionContext $context, array $package, string $phase): string
     {
+        $targets = $this->targets($package);
+        if ($phase === 'before_publication') {
+            $phaseKey = PromotionPhaseIdentity::idempotencyKey($context, $phase, $targets);
+            $existing = ContentReleaseSnapshot::query()
+                ->where('pack_id', 'article-cms')
+                ->where('reason', 'content_promotion_before_publication')
+                ->orderBy('id')
+                ->get()
+                ->first(static fn (ContentReleaseSnapshot $snapshot): bool => data_get($snapshot->meta_json, 'phase_idempotency_key') === $phaseKey
+                    && data_get($snapshot->meta_json, 'target_fingerprint') === $targets->fingerprint());
+            if ($existing instanceof ContentReleaseSnapshot) {
+                return 'content-release-snapshot:'.$existing->id;
+            }
+        }
         $rows = [];
         foreach ($package['targets'] as $target) {
             /** @var Article $article */
@@ -120,15 +147,17 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
                 ->where('authority_package_sha256', $context->packageSha256)
                 ->where('authority_asset_key', $target['asset_key'])
                 ->first();
+            $seo = ArticleSeoMeta::query()->withoutGlobalScopes()->where('article_id', $article->id)->first();
             $rows[] = [
                 'article_id' => $article->id, 'asset_key' => $target['asset_key'], 'package_sha256' => $context->packageSha256,
                 'article_before' => $this->articleState($article), 'revision_statuses_before' => $statuses,
+                'seo_before' => $seo instanceof ArticleSeoMeta ? ['id' => $seo->id, 'values' => $this->seoState($seo)] : [],
                 'package_revision_status_before' => $packageRevision?->revision_status ?? ArticleTranslationRevision::STATUS_APPROVED,
                 'package_revision_published_at_before' => $packageRevision?->published_at?->toISOString(),
             ];
         }
 
-        return $this->snapshots->capture($context, $this->targets($package), 'article-cms', $phase, $rows, $this->targets($package)->identities());
+        return $this->snapshots->capture($context, $targets, 'article-cms', $phase, $rows, $targets->identities());
     }
 
     /** @param array{targets:list<array<string,mixed>>} $package */
@@ -143,6 +172,17 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
         $state = [];
         foreach (['title', 'excerpt', 'content_md', 'working_revision_id', 'published_revision_id', 'status', 'is_public', 'published_at'] as $field) {
             $state[$field] = $article->getAttribute($field);
+        }
+
+        return $state;
+    }
+
+    /** @return array<string,mixed> */
+    private function seoState(ArticleSeoMeta $seo): array
+    {
+        $state = [];
+        foreach (['seo_title', 'seo_description', 'og_title', 'og_description'] as $field) {
+            $state[$field] = $seo->getAttribute($field);
         }
 
         return $state;

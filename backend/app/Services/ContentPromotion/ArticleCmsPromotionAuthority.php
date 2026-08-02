@@ -7,19 +7,25 @@ namespace App\Services\ContentPromotion;
 use App\Http\Controllers\API\V0_5\Cms\ArticleController;
 use App\Models\Article;
 use App\Models\ArticleEditorialPackageImport;
+use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
+use App\Services\Cms\ArticlePublicListReadCache;
 use DomainException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /** Exact-SHA authority for W3 English Articles; it does not own discoverability. */
+/** @review-surface article */
 final class ArticleCmsPromotionAuthority
 {
     private const SNAPSHOT_FIELDS = ['title', 'excerpt', 'content_md', 'seo_title', 'seo_description'];
 
     private const ARTICLE_STATE_FIELDS = ['title', 'excerpt', 'content_md', 'status', 'is_public', 'is_indexable', 'sitemap_eligible', 'llms_eligible', 'published_at'];
 
-    public function __construct(private readonly ArticleController $publicApi) {}
+    public function __construct(
+        private readonly ArticleController $publicApi,
+        private readonly ArticlePublicListReadCache $articleListCache,
+    ) {}
 
     /** @return array{targets:list<array<string,mixed>>,package_sha256:string} */
     public function inspect(PromotionContext $context): array
@@ -109,7 +115,7 @@ final class ArticleCmsPromotionAuthority
     {
         $package = $this->inspect($context);
 
-        return DB::transaction(function () use ($context, $package): array {
+        $result = DB::transaction(function () use ($context, $package): array {
             $created = 0;
             foreach ($package['targets'] as $target) {
                 $article = Article::query()->withoutGlobalScopes()->lockForUpdate()->findOrFail($target['article']->id);
@@ -138,6 +144,8 @@ final class ArticleCmsPromotionAuthority
 
             return ['created_count' => $created, 'unchanged_count' => count($package['targets']) - $created, 'readback_count' => count($package['targets'])];
         }, 3);
+
+        return $result;
     }
 
     /** @return array{changed_count:int,unchanged_count:int,readback_count:int} */
@@ -145,7 +153,7 @@ final class ArticleCmsPromotionAuthority
     {
         $package = $this->inspect($context);
 
-        return DB::transaction(function () use ($context, $package): array {
+        $result = DB::transaction(function () use ($context, $package): array {
             $changed = 0;
             foreach ($package['targets'] as $target) {
                 $article = Article::query()->withoutGlobalScopes()->lockForUpdate()->findOrFail($target['article']->id);
@@ -164,12 +172,18 @@ final class ArticleCmsPromotionAuthority
                     ArticleTranslationRevision::query()->withoutGlobalScopes()->whereKey($article->published_revision_id)->where('article_id', $article->id)->update(['revision_status' => ArticleTranslationRevision::STATUS_STALE]);
                 }
                 $revision->forceFill(['revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED, 'published_at' => now()])->saveQuietly();
-                $article->forceFill(['title' => $revision->title, 'excerpt' => $revision->excerpt, 'content_md' => $revision->content_md, 'published_revision_id' => $revision->id, 'working_revision_id' => null])->saveQuietly();
+                $article->forceFill(['title' => $revision->title, 'excerpt' => $revision->excerpt, 'content_md' => $revision->content_md, 'published_revision_id' => $revision->id, 'working_revision_id' => null])->save();
+                $this->syncExistingSeoMeta($article, $revision);
                 $changed++;
             }
 
             return ['changed_count' => $changed, 'unchanged_count' => count($package['targets']) - $changed, 'readback_count' => count($package['targets'])];
         }, 3);
+        if ($result['changed_count'] > 0) {
+            $this->invalidatePublicListCache();
+        }
+
+        return $result;
     }
 
     /** @return array{readback_count:int} */
@@ -277,6 +291,27 @@ final class ArticleCmsPromotionAuthority
         }
 
         return hash('sha256', PromotionContextFactory::canonicalJson($state));
+    }
+
+    public function invalidatePublicListCache(): void
+    {
+        $this->articleListCache->invalidate();
+    }
+
+    private function syncExistingSeoMeta(Article $article, ArticleTranslationRevision $revision): void
+    {
+        $updates = [];
+        if (filled($revision->seo_title)) {
+            $updates['seo_title'] = (string) $revision->seo_title;
+            $updates['og_title'] = (string) $revision->seo_title;
+        }
+        if (filled($revision->seo_description)) {
+            $updates['seo_description'] = (string) $revision->seo_description;
+            $updates['og_description'] = (string) $revision->seo_description;
+        }
+        if ($updates !== []) {
+            ArticleSeoMeta::query()->withoutGlobalScopes()->where('article_id', $article->id)->update($updates);
+        }
     }
 
     private function read(string $root, string $name): string

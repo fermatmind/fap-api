@@ -6,11 +6,14 @@ namespace Tests\Unit\ContentPromotion;
 
 use App\Models\Article;
 use App\Models\ArticleEditorialPackageImport;
+use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
+use App\Services\Cms\ArticlePublicListReadCache;
 use App\Services\ContentPromotion\PromotionAdapterRegistry;
 use App\Services\ContentPromotion\PromotionContext;
 use App\Services\ContentPromotion\PromotionContextFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 
@@ -33,6 +36,11 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
     {
         $first = $this->article('first-article');
         $second = $this->article('second-article');
+        $firstSourceHash = (string) $first->source_version_hash;
+        $firstSeo = ArticleSeoMeta::query()->withoutGlobalScopes()->create([
+            'article_id' => $first->id, 'seo_title' => 'Original SEO', 'seo_description' => 'Original description',
+            'og_title' => 'Original OG', 'og_description' => 'Original OG description',
+        ]);
         $package = $this->package([$first, $second]);
         $context = $this->context($package, 2);
         $adapter = app(PromotionAdapterRegistry::class)->resolve('W3', 'articles');
@@ -41,18 +49,28 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
         self::assertSame(2, $adapter->draftImport($context)['created_count']);
         self::assertSame(0, $adapter->draftImport($context)['created_count']);
         self::assertSame(2, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
+        Cache::put(ArticlePublicListReadCache::CACHE_KEY_PREFIX.':generation', 'before-publish', 600);
         $published = $adapter->publish($context);
         self::assertSame(2, $published['published_count']);
-        self::assertSame(0, $adapter->publish($context)['written_count']);
+        $replayed = $adapter->publish($context);
+        self::assertSame(0, $replayed['written_count']);
+        self::assertSame($published['rollback_reference'], $replayed['rollback_reference']);
         self::assertSame(2, $adapter->liveQa($context)['published_count']);
         self::assertSame('Promoted first-article', $first->refresh()->title);
         self::assertSame('Promoted second-article', $second->refresh()->title);
+        self::assertNotSame($firstSourceHash, $first->source_version_hash);
+        self::assertSame('Promoted SEO', $firstSeo->refresh()->seo_title);
+        self::assertSame('Promoted SEO', $firstSeo->refresh()->og_title);
+        self::assertNotSame('before-publish', Cache::get(ArticlePublicListReadCache::CACHE_KEY_PREFIX.':generation'));
         self::assertFalse((bool) $first->is_indexable);
         self::assertFalse((bool) $first->sitemap_eligible);
         self::assertFalse((bool) $first->llms_eligible);
         $adapter->rollback($context, (string) $published['rollback_reference']);
         self::assertSame('Original first-article', $first->refresh()->title);
         self::assertSame('Original second-article', $second->refresh()->title);
+        self::assertSame($firstSourceHash, $first->source_version_hash);
+        self::assertSame('Original SEO', $firstSeo->refresh()->seo_title);
+        self::assertSame('Original OG', $firstSeo->refresh()->og_title);
         self::assertNotNull($first->working_revision_id);
         self::assertSame(ArticleTranslationRevision::STATUS_APPROVED, ArticleTranslationRevision::query()->withoutGlobalScopes()->findOrFail($first->working_revision_id)->revision_status);
     }
