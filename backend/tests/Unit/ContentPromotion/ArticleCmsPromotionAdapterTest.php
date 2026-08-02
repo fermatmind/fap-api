@@ -53,6 +53,7 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
         Cache::put(ArticlePublicListReadCache::CACHE_KEY_PREFIX.':generation', 'before-publish', 600);
         $published = $adapter->publish($context);
         self::assertSame(2, $published['published_count']);
+        Cache::put(ArticlePublicListReadCache::CACHE_KEY_PREFIX.':generation', 'before-replay', 600);
         $replayed = $adapter->publish($context);
         self::assertSame(0, $replayed['written_count']);
         self::assertSame($published['rollback_reference'], $replayed['rollback_reference']);
@@ -64,7 +65,7 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
         self::assertSame($first->source_version_hash, ArticleTranslationRevision::query()->withoutGlobalScopes()->findOrFail($first->published_revision_id)->source_version_hash);
         self::assertSame('Promoted SEO', $firstSeo->refresh()->seo_title);
         self::assertSame('Promoted SEO', $firstSeo->refresh()->og_title);
-        self::assertNotSame('before-publish', Cache::get(ArticlePublicListReadCache::CACHE_KEY_PREFIX.':generation'));
+        self::assertNotSame('before-replay', Cache::get(ArticlePublicListReadCache::CACHE_KEY_PREFIX.':generation'));
         self::assertFalse((bool) $first->is_indexable);
         self::assertFalse((bool) $first->sitemap_eligible);
         self::assertFalse((bool) $first->llms_eligible);
@@ -161,6 +162,21 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
             self::fail('Publication must reject SEO state changed after the snapshot.');
         } catch (\DomainException $exception) {
             self::assertSame('article_promotion_seo_precondition_drift', $exception->getMessage());
+        }
+    }
+
+    public function test_w3_article_publish_refuses_source_hash_input_drift_after_draft_import(): void
+    {
+        $article = $this->article('source-hash-race-article');
+        $context = $this->context($this->package([$article]), 1);
+        $adapter = app(PromotionAdapterRegistry::class)->resolve('W3', 'articles');
+        $adapter->draftImport($context);
+        $article->forceFill(['voice' => 'concurrent-voice'])->save();
+        try {
+            $adapter->publish($context);
+            self::fail('Publication must reject source-hash input drift after draft import.');
+        } catch (\DomainException $exception) {
+            self::assertSame('article_promotion_working_revision_invalid', $exception->getMessage());
         }
     }
 

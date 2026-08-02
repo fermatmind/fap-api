@@ -24,7 +24,7 @@ final class ArticleCmsPromotionAuthority
 {
     private const SNAPSHOT_FIELDS = ['title', 'excerpt', 'content_md', 'seo_title', 'seo_description'];
 
-    private const ARTICLE_STATE_FIELDS = ['title', 'excerpt', 'content_md', 'content_html', 'status', 'is_public', 'is_indexable', 'sitemap_eligible', 'llms_eligible', 'published_at'];
+    private const ARTICLE_STATE_FIELDS = ['title', 'excerpt', 'content_md', 'content_html', 'cover_image_alt', 'related_test_slug', 'voice', 'voice_order', 'status', 'is_public', 'is_indexable', 'sitemap_eligible', 'llms_eligible', 'published_at'];
 
     public function __construct(
         private readonly ArticleController $publicApi,
@@ -197,9 +197,7 @@ final class ArticleCmsPromotionAuthority
 
             return ['changed_count' => $changed, 'unchanged_count' => count($package['targets']) - $changed, 'readback_count' => count($package['targets'])];
         }, 3);
-        if ($result['changed_count'] > 0) {
-            $this->invalidateDiscoverabilityCaches();
-        }
+        $this->invalidateDiscoverabilityCaches();
 
         return $result;
     }

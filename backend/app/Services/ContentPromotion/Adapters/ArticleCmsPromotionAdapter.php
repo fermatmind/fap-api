@@ -100,7 +100,8 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
                     || $article->working_revision_id !== null) {
                     throw new DomainException('article_promotion_rollback_concurrent_publication');
                 }
-                $this->assertExpectedPublishedProjection($article, $revision, $row);
+                $seo = ArticleSeoMeta::query()->withoutGlobalScopes()->lockForUpdate()->where('article_id', $article->id)->first();
+                $this->assertExpectedPublishedProjection($article, $revision, $seo, $row);
                 foreach ((array) ($row['revision_statuses_before'] ?? []) as $revisionId => $status) {
                     ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', $article->id)->whereKey((int) $revisionId)
                         ->update(['revision_status' => (string) $status]);
@@ -108,7 +109,6 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
                 $article->forceFill((array) ($row['article_before'] ?? []))->save();
                 $seoBefore = (array) ($row['seo_before'] ?? []);
                 if ((int) ($seoBefore['id'] ?? 0) > 0) {
-                    $seo = ArticleSeoMeta::query()->withoutGlobalScopes()->lockForUpdate()->find((int) $seoBefore['id']);
                     if (! $seo instanceof ArticleSeoMeta || (int) $seo->article_id !== (int) $article->id) {
                         throw new DomainException('article_promotion_rollback_seo_meta_invalid');
                     }
@@ -196,9 +196,8 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
     }
 
     /** @param array<string,mixed> $row */
-    private function assertExpectedPublishedProjection(Article $article, ArticleTranslationRevision $revision, array $row): void
+    private function assertExpectedPublishedProjection(Article $article, ArticleTranslationRevision $revision, ?ArticleSeoMeta $seo, array $row): void
     {
-        $seo = ArticleSeoMeta::query()->withoutGlobalScopes()->where('article_id', $article->id)->first();
         $actual = ['article' => $this->articleProjection($article), 'revision' => ['id' => $revision->id, 'revision_status' => $revision->revision_status], 'seo' => $seo instanceof ArticleSeoMeta ? $this->seoState($seo) : []];
         if (! hash_equals(PromotionContextFactory::canonicalJson((array) ($row['expected_public_projection'] ?? [])), PromotionContextFactory::canonicalJson($actual))) {
             throw new DomainException('article_promotion_rollback_public_projection_drift');
