@@ -9,10 +9,10 @@
     "EN-PARITY-W3-ARTICLES-BACKEND-PROMOTION-PACKAGE-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "in_progress",
+      "status": "pr_open",
       "branch": "codex/en-parity-w3-articles-backend-promotion-package-01",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "9c82e5e2da6c25c55b7b173a62f271019b513157",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3511",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -66,6 +66,11 @@
           "at": "2026-08-03T00:00:00+08:00",
           "status": "local_checks_passed",
           "summary": "Scoped syntax, Pint, Article candidate-only import/publication/readback/rollback, adapter capability, exact-package command, automation workflow, review-policy, frozen inventory/SHA/W9/no-symlink, JSON/YAML, changed-file allowlist and diff checks passed. No production operation was executed."
+        },
+        {
+          "at": "2026-08-03T00:00:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened ready PR #3511 at commit 9c82e5e2da6c25c55b7b173a62f271019b513157 after scoped local validation. Required GitHub checks are pending; no production operation was executed."
         }
       ]
     },
