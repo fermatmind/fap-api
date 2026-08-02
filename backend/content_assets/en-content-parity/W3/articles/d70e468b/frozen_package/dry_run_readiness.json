@@ -1,0 +1,25 @@
+{
+  "schema_version": "fermatmind.en_content_parity_dry_run_readiness.v1",
+  "control_id": "EN-PARITY-CONTROL-BOOTSTRAP-01",
+  "lane_id": "W3",
+  "subscope_id": "W3-ARTICLES",
+  "package_id": "EN-PARITY-W3-ARTICLE-ASSETS-PRODUCER-REWORK-10-2026-08-01",
+  "ready": false,
+  "status": "package_frozen_qa_pending",
+  "blockers": [
+    "Fresh independent W9 QA has not reviewed every registered row and field in the rebuilt rework-10 package.",
+    "The draft-only importer contract and Media Library authority remain pending independent review.",
+    "No separately controlled dry-run importer execution is authorized in this scope.",
+    "No exact-SHA human approval exists for CMS draft import or public release."
+  ],
+  "next_gate": "independent_W9_QA_for_exact_frozen_package_SHA",
+  "permissions": {
+    "cms_write_authorized": false,
+    "staging_write_authorized": false,
+    "production_import_authorized": false,
+    "public_release_authorized": false,
+    "seo_runtime_release_authorized": false,
+    "search_submission_authorized": false,
+    "master_manifest_write_authorized": false
+  }
+}

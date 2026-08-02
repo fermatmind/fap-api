@@ -51,11 +51,12 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
 
     public function draftImport(PromotionContext $context): array
     {
-        $package = $this->authority->inspect($context);
-        $reference = $this->capture($context, $package, 'before_draft_import');
         $result = $this->authority->importDraft($context);
 
-        return PromotionAdapterResultFactory::make($context, $result['created_count'], $result['readback_count'], 0, $reference, $this->zero(), [
+        // Candidate-only W3 rows have no English Article to snapshot until the
+        // non-public draft is created. The publication snapshot remains the
+        // sole rollback authority and is captured immediately before publish.
+        return PromotionAdapterResultFactory::make($context, $result['created_count'], $result['readback_count'], 0, null, $this->zero(), [
             'created_count' => $result['created_count'], 'updated_count' => 0, 'unchanged_count' => $result['unchanged_count'],
         ]);
     }
@@ -208,11 +209,16 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
         $candidate = $article->replicate();
         $candidate->forceFill(['title' => $snapshot['title'], 'excerpt' => $snapshot['excerpt'], 'content_md' => $snapshot['content_md'], 'content_html' => null]);
         $seoValues = $seo instanceof ArticleSeoMeta ? $this->seoState($seo) : [];
-        if ($seo instanceof ArticleSeoMeta) {
+        if ($seo instanceof ArticleSeoMeta && ! ($target['candidate_only'] ?? false)) {
             $seoValues = ['seo_title' => $snapshot['seo_title'], 'seo_description' => $snapshot['seo_description'], 'og_title' => $snapshot['seo_title'], 'og_description' => $snapshot['seo_description']];
         }
 
-        return ['article' => array_replace($this->articleProjection($article), ['title' => $snapshot['title'], 'excerpt' => $snapshot['excerpt'], 'content_md' => $snapshot['content_md'], 'content_html' => null, 'source_version_hash' => $candidate->computeSourceVersionHash(), 'published_revision_id' => $revision?->id, 'working_revision_id' => null]), 'revision' => ['id' => $revision?->id, 'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED, 'published_at' => $publicationTimestamp], 'seo' => $seoValues];
+        $projection = ['title' => $snapshot['title'], 'excerpt' => $snapshot['excerpt'], 'content_md' => $snapshot['content_md'], 'content_html' => null, 'source_version_hash' => $candidate->computeSourceVersionHash(), 'published_revision_id' => $revision?->id, 'working_revision_id' => null];
+        if (($target['candidate_only'] ?? false) === true) {
+            $projection += ['status' => 'published', 'is_public' => true, 'published_at' => $publicationTimestamp];
+        }
+
+        return ['article' => array_replace($this->articleProjection($article), $projection), 'revision' => ['id' => $revision?->id, 'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED, 'published_at' => $publicationTimestamp], 'seo' => $seoValues];
     }
 
     /** @param array<string,mixed> $row */

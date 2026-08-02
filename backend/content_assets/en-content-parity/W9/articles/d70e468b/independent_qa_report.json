@@ -1,0 +1,35 @@
+{
+  "$schema": "docs/seo/generated/en-content-parity-control-master.v1.schema.json",
+  "artifact_kind": "independent_qa_report",
+  "schema_version": "fermatmind.en_content_parity_independent_qa_report.v1",
+  "qa_lane_id": "W9",
+  "producer_lane_id": "W3",
+  "subscope_id": "W3-ARTICLES",
+  "output_directory": "generated/en-content-parity/W9-independent-qa/",
+  "package_sha256": "d70e468bb1a07d74e786e5a93b5279feff5347be49a0264916408a6b2ccbdc9a",
+  "verdict": "PASS",
+  "reviewed_asset_ids": [
+    "ENPARITY-W3-ARTICLES"
+  ],
+  "reviewed_row_count": 17,
+  "checks": {
+    "language_naturalness": "PASS",
+    "chinese_leakage": "PASS",
+    "claim_boundary": "PASS",
+    "asset_duplication": "PASS",
+    "field_leakage": "PASS",
+    "page_api_alignment": "NOT_APPLICABLE"
+  },
+  "page_api_alignment_status": "NOT_APPLICABLE",
+  "permissions": {
+    "cms_write_authorized": false,
+    "staging_write_authorized": false,
+    "production_import_authorized": false,
+    "public_release_authorized": false,
+    "seo_runtime_release_authorized": false,
+    "search_submission_authorized": false,
+    "master_manifest_write_authorized": false
+  },
+  "control_id": "EN-PARITY-CONTROL-BOOTSTRAP-01",
+  "independent_review_basis": "Fresh W9 review of the exact frozen package; historical W9 conclusions were not used."
+}

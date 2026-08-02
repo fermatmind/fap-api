@@ -1,11 +1,74 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-02T14:15:00Z",
+  "updated_at": "2026-08-03T00:00:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
+    "EN-PARITY-W3-ARTICLES-BACKEND-PROMOTION-PACKAGE-01": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "in_progress",
+      "branch": "codex/en-parity-w3-articles-backend-promotion-package-01",
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "dependency": {
+          "status": "passed",
+          "details": "CONTENT-PROMOTION-W3-ARTICLES-ADAPTER-01 merged at 3c0991b1793a1cb6e649ab9c5e4462281b0cd0d0 and origin/main contains that merge commit."
+        },
+        "local": [
+          {
+            "command": "php -l Article promotion authority and adapter; vendor/bin/pint --test scoped paths",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/ContentPromotion/ArticleCmsPromotionAdapterTest.php tests/Unit/ContentPromotion/PromotionAdapterCapabilityTest.php",
+            "status": "passed_with_framework_deprecations",
+            "details": "9 tests and 74 assertions completed; PHPUnit reported existing framework deprecation warnings only."
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/ContentPromoteExactPackageCommandTest.php",
+            "status": "passed_with_framework_deprecations",
+            "details": "11 tests and 180 assertions completed; PHPUnit reported framework deprecation warnings only."
+          },
+          {
+            "command": "php artisan test tests/Sre/ContentPromotionAutomationWorkflowTest.php tests/Architecture/ReviewPolicyRegistryTest.php",
+            "status": "passed_with_framework_deprecations",
+            "details": "12 tests and 381 assertions completed; automation workflow and review registry boundaries remained intact."
+          },
+          {
+            "command": "package inventory/SHA/W9/no-symlink validator; JSON/YAML parse; changed-file allowlist; git diff --check",
+            "status": "passed",
+            "details": "Verified 10 immutable frozen files, effective package SHA d70e468b…, W9 SHA a286486e…, 17 rows, no symlinks, and no out-of-scope paths."
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": null,
+      "resume_policy": "continuous_goal",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "publish_allowed": false,
+      "deploy_allowed": false,
+      "history": [
+        {
+          "at": "2026-08-03T00:00:00+08:00",
+          "status": "in_progress",
+          "summary": "Initialized the exact W3 Articles backend authority package scope. The frozen 17-row fap-web payload and independent W9 bytes are copied byte-for-byte into a non-symlink envelope; no CMS write, publication, discoverability, search, deploy, or private-data operation was executed."
+        },
+        {
+          "at": "2026-08-03T00:00:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Scoped syntax, Pint, Article candidate-only import/publication/readback/rollback, adapter capability, exact-package command, automation workflow, review-policy, frozen inventory/SHA/W9/no-symlink, JSON/YAML, changed-file allowlist and diff checks passed. No production operation was executed."
+        }
+      ]
+    },
     "CONTENT-PROMOTION-CAREER-CMS-ADAPTERS-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
@@ -303,9 +366,9 @@
     "CONTENT-PROMOTION-W3-ARTICLES-ADAPTER-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "merged",
       "branch": "codex/content-promotion-w3-articles-adapter-01",
-      "commit_sha": "055fd14a8c591a6d52380d5839e3755b8f67634b",
+      "commit_sha": "3c0991b1793a1cb6e649ab9c5e4462281b0cd0d0",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3506",
       "checks": {
         "dependency": {
@@ -351,9 +414,9 @@
       },
       "failure_reason": null,
       "resume_policy": "continuous_goal",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-08-02T11:38:15Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "database_mutation": false,
       "cms_mutation": false,
@@ -395,6 +458,11 @@
           "at": "2026-08-02T10:42:00Z",
           "status": "review_fixes_validated",
           "summary": "Bound the ledger to the final reviewed implementation SHA 055fd14a8. Scoped local checks passed after the final concurrency hardening: locked SEO projection checks for publish and rollback, replay cache closeout, and complete source-hash preconditions. Required GitHub checks are pending for this SHA; no production operation was executed."
+        },
+        {
+          "at": "2026-08-03T00:00:00+08:00",
+          "status": "reconciled_merged",
+          "summary": "Reconciled the stale open ledger state against GitHub: PR #3506 is MERGED at 3c0991b1793a1cb6e649ab9c5e4462281b0cd0d0, origin/main contains that merge commit, and both local and remote task branches are absent."
         }
       ]
     },
