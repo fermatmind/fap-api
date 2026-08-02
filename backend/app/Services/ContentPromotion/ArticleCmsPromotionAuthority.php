@@ -189,6 +189,7 @@ final class ArticleCmsPromotionAuthority
                     || ! hash_equals((string) data_get($revision->authority_metadata_json, 'article_state_sha256'), $this->articleStateHash($article))) {
                     throw new DomainException('article_promotion_working_revision_invalid');
                 }
+                $this->assertTranslationSourcePrecondition($article, $revision);
                 $seo = ArticleSeoMeta::query()->withoutGlobalScopes()->lockForUpdate()
                     ->where('org_id', $article->org_id)
                     ->where('article_id', $article->id)
@@ -272,7 +273,7 @@ final class ArticleCmsPromotionAuthority
         sort($keys);
         $expected = self::SNAPSHOT_FIELDS;
         sort($expected);
-        if ($keys !== $expected || ! is_string($snapshot['title']) || ! is_string($snapshot['content_md']) || ! is_string($snapshot['excerpt']) || ! is_string($snapshot['seo_title']) || ! is_string($snapshot['seo_description']) || trim($snapshot['title']) === '' || trim($snapshot['content_md']) === '' || trim($snapshot['seo_title']) === '' || trim($snapshot['seo_description']) === '') {
+        if ($keys !== $expected || ! is_string($snapshot['title']) || ! is_string($snapshot['content_md']) || ! is_string($snapshot['excerpt']) || ! is_string($snapshot['seo_title']) || ! is_string($snapshot['seo_description']) || trim($snapshot['title']) === '' || trim($snapshot['content_md']) === '' || trim($snapshot['seo_title']) === '' || trim($snapshot['seo_description']) === '' || mb_strlen($snapshot['title']) > 255 || mb_strlen($snapshot['seo_title']) > 60 || mb_strlen($snapshot['seo_description']) > 160) {
             throw new DomainException('article_promotion_snapshot_invalid');
         }
         if (preg_match('/[\p{Han}]/u', implode("\n", $snapshot)) === 1) {
@@ -378,6 +379,29 @@ final class ArticleCmsPromotionAuthority
         $actual = $seo instanceof ArticleSeoMeta ? $this->seoState($seo) : [];
         if ($expectedId !== (int) ($seo?->id ?? 0) || ! hash_equals(PromotionContextFactory::canonicalJson($expected), PromotionContextFactory::canonicalJson($actual))) {
             throw new DomainException('article_promotion_seo_precondition_drift');
+        }
+    }
+
+    private function assertTranslationSourcePrecondition(Article $article, ArticleTranslationRevision $revision): void
+    {
+        if ($article->isSourceArticle()) {
+            return;
+        }
+        $sourceId = (int) ($article->source_article_id ?: $article->translated_from_article_id);
+        $source = $sourceId > 0
+            ? Article::query()->withoutGlobalScopes()->lockForUpdate()->find($sourceId)
+            : null;
+        $sourceRevision = $source instanceof Article && $source->working_revision_id
+            ? ArticleTranslationRevision::query()->withoutGlobalScopes()->lockForUpdate()
+                ->where('article_id', $source->id)->find($source->working_revision_id)
+            : null;
+        $sourceHash = $sourceRevision instanceof ArticleTranslationRevision && filled($sourceRevision->source_version_hash)
+            ? (string) $sourceRevision->source_version_hash
+            : (string) ($source?->source_version_hash ?? '');
+        if (! $source instanceof Article || $sourceHash === '' || (int) $revision->source_article_id !== (int) $source->id
+            || ! hash_equals($sourceHash, (string) $revision->source_version_hash)
+            || ! hash_equals($sourceHash, (string) $revision->translated_from_version_hash)) {
+            throw new DomainException('article_promotion_translation_source_drift');
         }
     }
 

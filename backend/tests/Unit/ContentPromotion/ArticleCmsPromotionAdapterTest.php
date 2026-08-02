@@ -95,6 +95,9 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
         foreach ([
             ['snapshot' => ['title' => '中文'], 'error' => 'article_promotion_cjk_leakage'],
             ['snapshot' => ['seo_title' => '   '], 'error' => 'article_promotion_snapshot_invalid'],
+            ['snapshot' => ['title' => str_repeat('a', 256)], 'error' => 'article_promotion_snapshot_invalid'],
+            ['snapshot' => ['seo_title' => str_repeat('a', 61)], 'error' => 'article_promotion_snapshot_invalid'],
+            ['snapshot' => ['seo_description' => str_repeat('a', 161)], 'error' => 'article_promotion_snapshot_invalid'],
             ['snapshot' => ['content_md' => '# Heading'], 'error' => 'article_promotion_body_h1_invalid'],
             ['snapshot' => ['content_md' => 'See /checkout?token=private'], 'error' => 'article_promotion_private_payload_invalid'],
             ['snapshot' => ['content_md' => 'See /shares/private-share-id'], 'error' => 'article_promotion_private_payload_invalid'],
@@ -186,6 +189,29 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
             self::fail('Publication must reject source-hash input drift after draft import.');
         } catch (\DomainException $exception) {
             self::assertSame('article_promotion_working_revision_invalid', $exception->getMessage());
+        }
+    }
+
+    public function test_w3_article_publish_refuses_canonical_source_drift_after_draft_import(): void
+    {
+        $canonical = $this->article('canonical-source-race');
+        $canonical->forceFill(['locale' => 'zh'])->save();
+        $translated = $this->article('translated-source-race');
+        $translated->forceFill([
+            'translation_status' => Article::TRANSLATION_STATUS_APPROVED,
+            'source_article_id' => $canonical->id,
+            'translated_from_article_id' => $canonical->id,
+            'source_locale' => 'zh',
+        ])->saveQuietly();
+        $context = $this->context($this->package([$translated]), 1);
+        $adapter = app(PromotionAdapterRegistry::class)->resolve('W3', 'articles');
+        $adapter->draftImport($context);
+        $canonical->forceFill(['voice' => 'changed-source-voice'])->save();
+        try {
+            $adapter->publish($context);
+            self::fail('Publication must reject canonical source drift after draft import.');
+        } catch (\DomainException $exception) {
+            self::assertSame('article_promotion_translation_source_drift', $exception->getMessage());
         }
     }
 
