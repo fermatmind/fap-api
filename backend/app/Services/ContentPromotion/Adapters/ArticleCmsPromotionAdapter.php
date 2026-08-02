@@ -139,7 +139,9 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
                 ])->saveQuietly();
             }
         }, 3);
-        $this->authority->invalidateDiscoverabilityCaches();
+        // A failed live-QA rollback must never retain a generation that exposed
+        // these candidate rows while they were briefly public.
+        $this->authority->invalidateDiscoverabilityCaches(false);
     }
 
     /** @param array{targets:list<array<string,mixed>>} $package */

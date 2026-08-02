@@ -585,9 +585,9 @@ final class ArticleCmsPromotionAuthority
         ]);
     }
 
-    public function invalidateDiscoverabilityCaches(): void
+    public function invalidateDiscoverabilityCaches(bool $preserveArticleListLkg = true): void
     {
-        $this->discoverabilityCache->flushArticleDiscoverabilityCaches();
+        $this->discoverabilityCache->flushArticleDiscoverabilityCaches($preserveArticleListLkg);
     }
 
     private function logPublication(Article $article): void
