@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace App\Services\ContentPromotion;
 
+use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Http\Controllers\API\V0_5\Cms\ArticleController;
 use App\Models\Article;
 use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
-use App\Services\Cms\ArticlePublicListReadCache;
+use App\Services\SEO\SeoDiscoverabilityCacheInvalidator;
 use DomainException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,11 +21,11 @@ final class ArticleCmsPromotionAuthority
 {
     private const SNAPSHOT_FIELDS = ['title', 'excerpt', 'content_md', 'seo_title', 'seo_description'];
 
-    private const ARTICLE_STATE_FIELDS = ['title', 'excerpt', 'content_md', 'status', 'is_public', 'is_indexable', 'sitemap_eligible', 'llms_eligible', 'published_at'];
+    private const ARTICLE_STATE_FIELDS = ['title', 'excerpt', 'content_md', 'content_html', 'status', 'is_public', 'is_indexable', 'sitemap_eligible', 'llms_eligible', 'published_at'];
 
     public function __construct(
         private readonly ArticleController $publicApi,
-        private readonly ArticlePublicListReadCache $articleListCache,
+        private readonly SeoDiscoverabilityCacheInvalidator $discoverabilityCache,
     ) {}
 
     /** @return array{targets:list<array<string,mixed>>,package_sha256:string} */
@@ -172,15 +173,16 @@ final class ArticleCmsPromotionAuthority
                     ArticleTranslationRevision::query()->withoutGlobalScopes()->whereKey($article->published_revision_id)->where('article_id', $article->id)->update(['revision_status' => ArticleTranslationRevision::STATUS_STALE]);
                 }
                 $revision->forceFill(['revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED, 'published_at' => now()])->saveQuietly();
-                $article->forceFill(['title' => $revision->title, 'excerpt' => $revision->excerpt, 'content_md' => $revision->content_md, 'published_revision_id' => $revision->id, 'working_revision_id' => null])->save();
+                $article->forceFill(['title' => $revision->title, 'excerpt' => $revision->excerpt, 'content_md' => $revision->content_md, 'content_html' => null, 'published_revision_id' => $revision->id, 'working_revision_id' => null])->save();
                 $this->syncExistingSeoMeta($article, $revision);
+                ContentReleaseAudit::log('article', $article, 'content_promotion_w3_articles_exact_package', false);
                 $changed++;
             }
 
             return ['changed_count' => $changed, 'unchanged_count' => count($package['targets']) - $changed, 'readback_count' => count($package['targets'])];
         }, 3);
         if ($result['changed_count'] > 0) {
-            $this->invalidatePublicListCache();
+            $this->invalidateDiscoverabilityCaches();
         }
 
         return $result;
@@ -202,6 +204,12 @@ final class ArticleCmsPromotionAuthority
                 'title' => data_get($payload, 'article.title'), 'excerpt' => data_get($payload, 'article.excerpt'), 'content_md' => data_get($payload, 'article.content_md'), 'seo_title' => $revision->seo_title, 'seo_description' => $revision->seo_description,
             ]))) {
                 throw new DomainException('article_promotion_public_api_readback_invalid');
+            }
+            if (! hash_equals((string) $revision->seo_title, (string) data_get($payload, 'seo_surface_v1.title'))
+                || ! hash_equals((string) $revision->seo_description, (string) data_get($payload, 'seo_surface_v1.description'))
+                || ! hash_equals((string) $revision->seo_title, (string) data_get($payload, 'seo_surface_v1.og_payload.title'))
+                || ! hash_equals((string) $revision->seo_description, (string) data_get($payload, 'seo_surface_v1.og_payload.description'))) {
+                throw new DomainException('article_promotion_public_seo_readback_invalid');
             }
         }
 
@@ -293,9 +301,9 @@ final class ArticleCmsPromotionAuthority
         return hash('sha256', PromotionContextFactory::canonicalJson($state));
     }
 
-    public function invalidatePublicListCache(): void
+    public function invalidateDiscoverabilityCaches(): void
     {
-        $this->articleListCache->invalidate();
+        $this->discoverabilityCache->flushArticleDiscoverabilityCaches();
     }
 
     private function syncExistingSeoMeta(Article $article, ArticleTranslationRevision $revision): void

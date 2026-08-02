@@ -57,6 +57,7 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
         self::assertSame($published['rollback_reference'], $replayed['rollback_reference']);
         self::assertSame(2, $adapter->liveQa($context)['published_count']);
         self::assertSame('Promoted first-article', $first->refresh()->title);
+        self::assertNull($first->content_html);
         self::assertSame('Promoted second-article', $second->refresh()->title);
         self::assertNotSame($firstSourceHash, $first->source_version_hash);
         self::assertSame('Promoted SEO', $firstSeo->refresh()->seo_title);
@@ -67,6 +68,7 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
         self::assertFalse((bool) $first->llms_eligible);
         $adapter->rollback($context, (string) $published['rollback_reference']);
         self::assertSame('Original first-article', $first->refresh()->title);
+        self::assertSame('<p>Original body</p>', $first->content_html);
         self::assertSame('Original second-article', $second->refresh()->title);
         self::assertSame($firstSourceHash, $first->source_version_hash);
         self::assertSame('Original SEO', $firstSeo->refresh()->seo_title);
@@ -111,7 +113,7 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
     {
         $article = Article::query()->withoutGlobalScopes()->create([
             'org_id' => 0, 'slug' => $slug, 'locale' => 'en', 'translation_status' => Article::TRANSLATION_STATUS_SOURCE,
-            'title' => 'Original '.$slug, 'excerpt' => 'Original excerpt', 'content_md' => 'Original body', 'status' => 'published', 'is_public' => true,
+            'title' => 'Original '.$slug, 'excerpt' => 'Original excerpt', 'content_md' => 'Original body', 'content_html' => '<p>Original body</p>', 'status' => 'published', 'is_public' => true,
             'is_indexable' => false, 'sitemap_eligible' => false, 'llms_eligible' => false, 'published_at' => now(),
         ]);
         $revision = ArticleTranslationRevision::query()->withoutGlobalScopes()->create($this->revisionPayload($article, 'original', ArticleTranslationRevision::STATUS_PUBLISHED));
