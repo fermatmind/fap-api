@@ -103,7 +103,11 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
                     || $article->working_revision_id !== null) {
                     throw new DomainException('article_promotion_rollback_concurrent_publication');
                 }
-                $seo = ArticleSeoMeta::query()->withoutGlobalScopes()->lockForUpdate()->where('article_id', $article->id)->first();
+                $seo = ArticleSeoMeta::query()->withoutGlobalScopes()->lockForUpdate()
+                    ->where('org_id', $article->org_id)
+                    ->where('article_id', $article->id)
+                    ->where('locale', $article->locale)
+                    ->first();
                 $this->assertExpectedPublishedProjection($article, $revision, $seo, $row);
                 foreach ((array) ($row['revision_statuses_before'] ?? []) as $revisionId => $status) {
                     if ((int) $revisionId === (int) $revision->id) {
@@ -160,7 +164,11 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
                 ->where('authority_package_sha256', $context->packageSha256)
                 ->where('authority_asset_key', $target['asset_key'])
                 ->first();
-            $seo = ArticleSeoMeta::query()->withoutGlobalScopes()->where('article_id', $article->id)->first();
+            $seo = ArticleSeoMeta::query()->withoutGlobalScopes()
+                ->where('org_id', $article->org_id)
+                ->where('article_id', $article->id)
+                ->where('locale', $article->locale)
+                ->first();
             $rows[] = [
                 'article_id' => $article->id, 'asset_key' => $target['asset_key'], 'package_sha256' => $context->packageSha256,
                 'article_before' => $this->articleState($article), 'revision_statuses_before' => $statuses,

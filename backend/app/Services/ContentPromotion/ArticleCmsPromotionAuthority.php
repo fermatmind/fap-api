@@ -189,7 +189,11 @@ final class ArticleCmsPromotionAuthority
                     || ! hash_equals((string) data_get($revision->authority_metadata_json, 'article_state_sha256'), $this->articleStateHash($article))) {
                     throw new DomainException('article_promotion_working_revision_invalid');
                 }
-                $seo = ArticleSeoMeta::query()->withoutGlobalScopes()->lockForUpdate()->where('article_id', $article->id)->first();
+                $seo = ArticleSeoMeta::query()->withoutGlobalScopes()->lockForUpdate()
+                    ->where('org_id', $article->org_id)
+                    ->where('article_id', $article->id)
+                    ->where('locale', $article->locale)
+                    ->first();
                 $this->assertSeoPrecondition($seo, $beforeByAsset[$target['asset_key']] ?? null);
                 if ($article->published_revision_id) {
                     ArticleTranslationRevision::query()->withoutGlobalScopes()->whereKey($article->published_revision_id)->where('article_id', $article->id)->update(['revision_status' => ArticleTranslationRevision::STATUS_STALE]);
@@ -286,7 +290,7 @@ final class ArticleCmsPromotionAuthority
         if (is_string($key) && preg_match('/(?:attempt|report|order|payment|token|user|score|percentile)/i', $key) === 1) {
             throw new DomainException('article_promotion_private_payload_invalid');
         }
-        if (is_string($value) && preg_match('~/(?:account|attempts?|checkout|history|orders?|payments?|pay|private|recovery|reports?|results?|share)(?:/|[?#\s]|$)|[?&](?:token|attempt(?:_id)?|report(?:_id)?|order(?:_id)?|payment(?:_id)?|checkout(?:_id)?|share(?:_id)?|user(?:_id)?)=~i', $value) === 1) {
+        if (is_string($value) && preg_match('~/(?:account|attempts?|checkout|history|orders?|payments?|pay|private|recovery|reports?|results?|shares?)(?:/|[?#\s]|$)|[?&](?:token|attempt(?:_id)?|report(?:_id)?|order(?:_id)?|payment(?:_id)?|checkout(?:_id)?|share(?:_id)?|user(?:_id)?)=~i', $value) === 1) {
             throw new DomainException('article_promotion_private_payload_invalid');
         }
         if (is_array($value)) {

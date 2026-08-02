@@ -15,6 +15,7 @@ use App\Services\ContentPromotion\PromotionContext;
 use App\Services\ContentPromotion\PromotionContextFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 
@@ -41,6 +42,12 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
         $firstSeo = ArticleSeoMeta::query()->withoutGlobalScopes()->create([
             'article_id' => $first->id, 'seo_title' => 'Original SEO', 'seo_description' => 'Original description',
             'og_title' => 'Original OG', 'og_description' => 'Original OG description',
+        ]);
+        DB::table('article_seo_meta')->insert([
+            'org_id' => $first->org_id, 'article_id' => $first->id, 'locale' => 'zh',
+            'seo_title' => 'Stale locale SEO', 'seo_description' => 'Stale locale description',
+            'og_title' => 'Stale locale OG', 'og_description' => 'Stale locale OG description',
+            'created_at' => now(), 'updated_at' => now(),
         ]);
         $package = $this->package([$first, $second]);
         $context = $this->context($package, 2);
@@ -76,6 +83,7 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
         self::assertSame($firstSourceHash, $first->source_version_hash);
         self::assertSame('Original SEO', $firstSeo->refresh()->seo_title);
         self::assertSame('Original OG', $firstSeo->refresh()->og_title);
+        self::assertSame('Stale locale SEO', DB::table('article_seo_meta')->where('article_id', $first->id)->where('locale', 'zh')->value('seo_title'));
         self::assertNotNull($first->working_revision_id);
         self::assertSame(ArticleTranslationRevision::STATUS_APPROVED, ArticleTranslationRevision::query()->withoutGlobalScopes()->findOrFail($first->working_revision_id)->revision_status);
     }
@@ -89,6 +97,7 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
             ['snapshot' => ['seo_title' => '   '], 'error' => 'article_promotion_snapshot_invalid'],
             ['snapshot' => ['content_md' => '# Heading'], 'error' => 'article_promotion_body_h1_invalid'],
             ['snapshot' => ['content_md' => 'See /checkout?token=private'], 'error' => 'article_promotion_private_payload_invalid'],
+            ['snapshot' => ['content_md' => 'See /shares/private-share-id'], 'error' => 'article_promotion_private_payload_invalid'],
             ['row' => ['private_token' => 'secret'], 'error' => 'article_promotion_private_payload_invalid'],
         ] as $case) {
             try {
