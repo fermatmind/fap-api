@@ -53613,7 +53613,12 @@
     ],
     "status": "merged",
     "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
-    "checks": {},
+    "checks": {
+      "local_validation": {
+        "status": "passed",
+        "evidence": "Focused Content Promotion conformance, capability, executor, workflow, W1 importer, and W1 publisher PHPUnit passed: 38 tests / 648 assertions. Focused Pint, changed-PHP syntax, YAML/JSON parsing, exact changed-file scope validation, and diff checks passed. No migration, CMS write, publication, production workflow dispatch, deploy, or discoverability mutation occurred."
+      }
+    },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
@@ -103423,5 +103428,41 @@
       }
     ],
     "updated_at": "2026-08-02T06:18:32+08:00"
+  },
+  "CONTENT-PROMOTION-ADAPTER-CONFORMANCE-01": {
+    "id": "CONTENT-PROMOTION-ADAPTER-CONFORMANCE-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/content-promotion-adapter-conformance-01",
+    "title": "CONTENT-PROMOTION-ADAPTER-CONFORMANCE-01: establish reusable promotion adapter conformance primitives",
+    "depends_on": [],
+    "status": "in_progress",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-08-02T04:26:49Z",
+        "status": "in_progress",
+        "note": "Started from isolated latest origin/main. T1 only establishes reusable V2 adapter conformance primitives; all nine legacy adapters remain fail closed and no production or CMS action is authorized."
+      },
+      {
+        "at": "2026-08-02T04:30:19Z",
+        "status": "local_verified",
+        "note": "Reusable exact-target fingerprints, phase identities, bounded snapshot resolution, result/receipt conformance assertions, and registry capability consistency passed focused validation. W1 comparisons remains audit compatible; all nine remaining adapters remain legacy fail closed."
+      }
+    ],
+    "updated_at": "2026-08-02T04:30:19Z"
   }
 }

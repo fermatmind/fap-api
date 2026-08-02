@@ -48307,3 +48307,52 @@ prs:
     deploy_allowed: false
     content_authority: exact package dry-run planner only; backend RIASEC runtime authority unchanged
     repository_rule_impact: adds an exact-SHA no-write RIASEC importer boundary; all future authority writes and release gates remain separate
+
+  - id: CONTENT-PROMOTION-ADAPTER-CONFORMANCE-01
+    repo: fap-api
+    base: main
+    branch: codex/content-promotion-adapter-conformance-01
+    title: "CONTENT-PROMOTION-ADAPTER-CONFORMANCE-01: establish reusable promotion adapter conformance primitives"
+    status: in_progress
+    depends_on: []
+    train_scope: content_promotion_adapter_conformance_primitives
+    scope:
+      - Establish reusable exact target-set fingerprints, phase-bound idempotency identities, bounded snapshot resolution, exact readback results, receipt-chain assertions, and a shared promotion adapter conformance harness.
+      - Keep W1/mbti-comparisons executable and behavior-compatible while all nine remaining registered adapters stay fail closed.
+      - Prove configuration capability declarations match concrete adapter capability implementations without adding a migration or activating another lane.
+    allowed_paths:
+      - AGENTS.md
+      - backend/AGENTS.md
+      - backend/app/Services/ContentPromotion/**
+      - backend/tests/Unit/ContentPromotion/**
+      - backend/tests/Feature/Console/ContentPromoteExactPackageCommandTest.php
+      - backend/tests/Sre/ContentPromotionAutomationWorkflowTest.php
+      - backend/config/content_promotion.php
+      - backend/docs/content-promotion-automation-v2.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Activate a new lane adapter, change package payloads, add a database migration, or write CMS/publication/production state.
+      - Change indexability, sitemap, llms, Search Channel, canonical, JSON-LD, or deployment behavior.
+      - Turn the executor into arbitrary Artisan, SQL, file-copy, or frontend-snapshot authority.
+    validation:
+      - cd backend && php artisan test tests/Unit/ContentPromotion/PromotionConformancePrimitivesTest.php tests/Unit/ContentPromotion/PromotionAdapterCapabilityTest.php tests/Feature/Console/ContentPromoteExactPackageCommandTest.php tests/Sre/ContentPromotionAutomationWorkflowTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/ContentImport/MbtiComparisonEnglishPackageImporterTest.php tests/Feature/Cms/MbtiComparisonEnglishPublishServiceTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/ContentPromotion tests/Unit/ContentPromotion tests/Feature/Console/ContentPromoteExactPackageCommandTest.php tests/Sre/ContentPromotionAutomationWorkflowTest.php
+      - php -l each modified PHP file
+      - parse train YAML and state JSON
+      - exact changed-file scope validation
+      - git diff --check
+      - git diff --cached --check
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: backend exact-package promotion executor; fap-web snapshots remain non-executable evidence
+    repository_rule_impact: codifies reusable exact-target and bounded-rollback proof without changing authority ownership or discoverability

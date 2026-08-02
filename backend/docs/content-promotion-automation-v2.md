@@ -17,6 +17,12 @@ Current capability truth:
 
 This distinction prevents the unified command from becoming an arbitrary Artisan or SQL runner. Adding an adapter requires focused importer, publication, readback, idempotency and rollback tests for that authority.
 
+## Reusable conformance primitives
+
+Every V2 adapter uses one canonical target set. Its sorted identity fingerprint is bound to the lane, subscope, package SHA, source commit and lifecycle phase when a snapshot is taken. A rollback reference is accepted only when all of those bindings, including the exact target set, match; an adapter may restore only its own captured rows.
+
+The shared result factory requires exact readback before a phase can emit a success receipt. The test harness checks the same result and boundary invariants for every adapter: draft phases stay non-public, publication and live QA reach the exact expected count, and indexability, sitemap, llms, Search Channel and deploy mutation counts remain zero. `content_promotion.adapter_capabilities` is a contract mirror of concrete registry adapters; a mismatch fails the registry contract rather than changing capability truth by configuration alone.
+
 ## Invocation
 
 ```bash

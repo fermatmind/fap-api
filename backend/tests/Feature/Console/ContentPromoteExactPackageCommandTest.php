@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Console;
 
+require_once __DIR__.'/../../Unit/ContentPromotion/Concerns/AssertsExactPackagePromotionConformance.php';
+
 use App\Models\MbtiCrossTypeComparisonAuthority;
 use App\Services\Cms\MbtiComparisonEnglishPublishService;
 use App\Services\ContentImport\MbtiComparisonEnglishPackageImporter;
@@ -13,9 +15,11 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Tests\TestCase;
+use Tests\Unit\ContentPromotion\Concerns\AssertsExactPackagePromotionConformance;
 
 final class ContentPromoteExactPackageCommandTest extends TestCase
 {
+    use AssertsExactPackagePromotionConformance;
     use RefreshDatabase;
 
     private string $receiptDirectory;
@@ -70,7 +74,7 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
         $publish = $this->runPhase('publish', 'publish.json');
         self::assertTrue($publish['ok']);
         $publicationReceipt = $this->receipt('publish.json');
-        self::assertSame(hash_file('sha256', $this->receiptDirectory.'/draft.json'), $publicationReceipt['previous_receipt_sha256']);
+        $this->assertReceiptChainsFrom($this->receiptDirectory.'/draft.json', $publicationReceipt, 'cms_draft_import_receipt');
         self::assertSame(7, $publicationReceipt['published_count']);
 
         $this->setEnv('CONTENT_PROMOTION_PREVIOUS_RECEIPT', $this->receiptDirectory.'/publish.json');
@@ -78,7 +82,7 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
         self::assertTrue($liveQa['ok']);
         $liveQaReceipt = $this->receipt('live-qa.json');
         self::assertSame('cms_live_qa_receipt', $liveQaReceipt['receipt_kind']);
-        self::assertSame(hash_file('sha256', $this->receiptDirectory.'/publish.json'), $liveQaReceipt['previous_receipt_sha256']);
+        $this->assertReceiptChainsFrom($this->receiptDirectory.'/publish.json', $liveQaReceipt, 'cms_publication_receipt');
         self::assertSame(7, $liveQaReceipt['published_count']);
         self::assertSame(0, $liveQaReceipt['indexability_mutation_count']);
         self::assertSame(0, $liveQaReceipt['sitemap_mutation_count']);
