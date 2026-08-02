@@ -262,6 +262,7 @@ final class Mbti64CrossTypeComparisonPublicReadModel
             'claim_boundary' => (string) $asset['claim_boundary'],
             'source_notes' => $this->sourceNotes($asset),
             'source_refs' => $this->sourceRefs($asset),
+            'source_package_id' => (string) ($asset['source_package_id'] ?? ''),
             'source_sha256' => (string) ($asset['_source_sha256'] ?? ''),
             'authority_source' => (string) $asset['_authority_source'],
             'is_public' => (bool) ($asset['_is_public'] ?? true),

@@ -48695,3 +48695,47 @@ prs:
     deploy_allowed: false
     content_authority: unchanged; workflow only verifies an already deployed backend executor
     repository_rule_impact: preserves backend authority and all zero-mutation/discoverability boundaries while making deployed executor provenance explicit
+
+  - id: W1-MBTI-COMPARISONS-V2-READINESS-REPAIR-01
+    repo: fap-api
+    base: main
+    branch: codex/w1-mbti-comparisons-v2-readiness-repair-01
+    title: "W1-MBTI-COMPARISONS-V2-READINESS-REPAIR-01 — Adopt exact published comparison cohort into V2 promotion"
+    status: user_authorized
+    depends_on: [CONTENT-PROMOTION-V2-DEPLOYED-EXECUTOR-PIN-01]
+    train_scope: w1_mbti_comparisons_v2_legacy_adoption
+    scope:
+      - Bind only the immutable fap-web W9 PASS report and exact seven-row deecc817 comparison package to the already published English comparison cohort.
+      - Permit idempotent V2 adoption only when every existing authority row exactly matches org, locale, slug, package, source SHA, published public state, noindex gates, and English-only payload requirements.
+      - Keep adoption, publication verification, and live-QA zero-write; expose existing package provenance in the public comparison projection solely for exact live-QA verification.
+    allowed_paths:
+      - backend/app/Services/ContentPromotion/Adapters/MbtiComparisonEnglishPromotionAdapter.php
+      - backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php
+      - backend/content_assets/en-content-parity/W9/mbti-comparisons/deecc817-renderer-2f388c32/**
+      - backend/tests/Unit/ContentPromotion/MbtiComparisonEnglishPromotionAdapterTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify the frozen comparison package, content payloads, source SHA values, locale, slug, review evidence bytes, indexability, sitemap, llms, search submission, CMS state, database schema, deployment configuration, or other promotion cohorts.
+      - Add a generic legacy bypass, create a new W9 review, fabricate a draft receipt, unpublish or downgrade an already published comparison row, or access private results or user data.
+    validation:
+      - cd backend && php artisan test tests/Unit/ContentPromotion/MbtiComparisonEnglishPromotionAdapterTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/Console/ContentPromoteExactPackageCommandTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/ContentPromotion/Adapters/MbtiComparisonEnglishPromotionAdapter.php app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php tests/Unit/ContentPromotion/MbtiComparisonEnglishPromotionAdapterTest.php
+      - php -l each modified PHP file
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - exact changed-file scope validation
+      - git diff --check
+      - git diff --cached --check
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: existing backend comparison authority with immutable external fap-web W9 evidence
+    repository_rule_impact: preserves backend-only content authority and all noindex/discoverability boundaries while allowing exact legacy cohort receipt adoption
