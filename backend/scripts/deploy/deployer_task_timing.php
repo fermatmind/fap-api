@@ -4,6 +4,7 @@
 declare(strict_types=1);
 
 const DEPLOY_TIMING_SCHEMA = 'fermatmind.deployer-task-timing.v1';
+const DEPLOY_PROGRESS_SCHEMA = 'fermatmind.deployer-progress.v1';
 
 function failUsage(string $message): never
 {
@@ -139,6 +140,37 @@ function writeReceipt(array $context, array $tasks, string $planStatus): void
     );
     if (! rename($temporary, $context['receipt'])) {
         throw new RuntimeException('unable to publish timing receipt');
+    }
+}
+
+function writeProgressReceipt(array $context, string $path, string $status, ?string $activeTask, float $started): void
+{
+    $directory = dirname($path);
+    if (! is_dir($directory) && ! mkdir($directory, 0775, true) && ! is_dir($directory)) {
+        throw new RuntimeException('unable to create progress receipt directory');
+    }
+
+    $payload = [
+        'schema_version' => DEPLOY_PROGRESS_SCHEMA,
+        'environment' => $context['environment'],
+        'sha' => $context['sha'],
+        'workflow_run_id' => $context['workflow_run_id'],
+        'workflow_run_attempt' => $context['workflow_run_attempt'],
+        'status' => $status,
+        'active_task' => $activeTask,
+        'started_at' => isoTime($started),
+        'updated_at' => isoTime(microtime(true)),
+        'elapsed_seconds' => max(0, (int) floor(microtime(true) - $started)),
+    ];
+
+    $temporary = $path.'.tmp';
+    file_put_contents(
+        $temporary,
+        json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR)."\n",
+        LOCK_EX,
+    );
+    if (! rename($temporary, $path)) {
+        throw new RuntimeException('unable to publish progress receipt');
     }
 }
 
@@ -313,6 +345,11 @@ final class TimingObserver
         return $ordered;
     }
 
+    public function activeTask(): ?string
+    {
+        return $this->active['task'] ?? $this->pending['task'] ?? null;
+    }
+
     private function finalizePendingSuccess(): void
     {
         if ($this->pending === null) {
@@ -337,8 +374,26 @@ function runTimedCommand(array $context, array $options, array $command): never
         failUsage('run requires a command after --');
     }
 
+    $heartbeatInterval = (int) ($options['heartbeat-interval-seconds'] ?? 0);
+    if ($heartbeatInterval < 0 || $heartbeatInterval > 300) {
+        failUsage('heartbeat-interval-seconds must be between 0 and 300');
+    }
+    $progressReceipt = trim((string) ($options['progress-receipt'] ?? ''));
+    $started = microtime(true);
+    $lastHeartbeat = $started;
     $plan = plannedTasks($options);
     $observer = new TimingObserver($context);
+    $writeProgress = static function (string $status) use ($context, $progressReceipt, $observer, $started): void {
+        if ($progressReceipt === '') {
+            return;
+        }
+        try {
+            writeProgressReceipt($context, $progressReceipt, $status, $observer->activeTask(), $started);
+        } catch (Throwable) {
+            fwrite(STDERR, "deployer timing: progress receipt write failed\n");
+        }
+    };
+    $writeProgress('running');
     $pipes = [];
     $process = proc_open($command, [0 => STDIN, 1 => ['pipe', 'w'], 2 => ['pipe', 'w']], $pipes);
     if (! is_resource($process)) {
@@ -379,6 +434,13 @@ function runTimedCommand(array $context, array $options, array $command): never
                 }
             }
         }
+        if ($heartbeatInterval > 0 && microtime(true) - $lastHeartbeat >= $heartbeatInterval) {
+            $activeTask = $observer->activeTask() ?? 'unknown';
+            $elapsedSeconds = max(0, (int) floor(microtime(true) - $started));
+            fwrite(STDOUT, "::notice title=Deployer heartbeat::elapsed_seconds={$elapsedSeconds} active_task={$activeTask}\n");
+            $writeProgress('running');
+            $lastHeartbeat = microtime(true);
+        }
         if (! $status['running'] && feof($pipes[1]) && feof($pipes[2])) {
             $processExitCode = $status['exitcode'];
             break;
@@ -399,8 +461,10 @@ function runTimedCommand(array $context, array $options, array $command): never
         $processExitCode = 1;
     }
 
+    $tasks = $observer->finish($processExitCode, $plan['tasks']);
+    $writeProgress($processExitCode === 0 ? 'completed' : 'failed');
     try {
-        writeReceipt($context, $observer->finish($processExitCode, $plan['tasks']), $plan['status']);
+        writeReceipt($context, $tasks, $plan['status']);
     } catch (Throwable $exception) {
         fwrite(STDERR, "deployer timing: receipt write failed without changing Deployer exit {$processExitCode}\n");
     }

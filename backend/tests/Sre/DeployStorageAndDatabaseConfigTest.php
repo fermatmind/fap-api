@@ -413,13 +413,16 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('expected_deployed_revision:', $source);
         $this->assertStringContainsString('approved_migration:', $source);
         $this->assertStringContainsString('default: auto', $source);
-        $this->assertSame(3, substr_count($source, 'required: true'));
+        $this->assertSame(2, substr_count($source, 'required: true'));
         $this->assertStringContainsString('actions: read', $source);
         $this->assertStringContainsString('Validate manual exact-SHA approval and staging evidence', $source);
         $this->assertStringNotContainsString("if: github.event_name == 'workflow_dispatch'", $source);
         $this->assertStringContainsString('[[ ! "$DEPLOY_SHA" =~ ^[0-9a-f]{40}$ ]]', $source);
         $this->assertStringContainsString('staging_run_id must be numeric outside the exact-active candidate_only fast path.', $source);
         $this->assertStringContainsString('[[ ! "$RELEASE_ID" =~ ^[A-Za-z0-9._-]{1,80}$ ]]', $source);
+        $this->assertStringContainsString('RELEASE_ID="standard-${DEPLOY_SHA:0:12}"', $source);
+        $this->assertStringContainsString('standard deploy could not resolve a successful exact-SHA staging run.', $source);
+        $this->assertStringContainsString('standard deploy requires approved_migration to be omitted; do not submit false.', $source);
         $this->assertStringContainsString('I explicitly approve bounded backend production deploy for exact SHA ${DEPLOY_SHA}, excluding all newer main commits, release ${RELEASE_ID}.', $source);
         $this->assertStringContainsString('I explicitly approve backend code-only production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID}.', $source);
         $this->assertStringContainsString('I explicitly approve bounded backend inactive candidate materialization for exact SHA ${DEPLOY_SHA} using exact staging run ${STAGING_RUN_ID} from active SHA ${EXPECTED_DEPLOYED_REVISION}, excluding all newer main commits, release ${RELEASE_ID}; distinct inactive release path, zero activation.', $source);
@@ -1065,7 +1068,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             'APPROVED_MIGRATION: ${{ inputs.approved_migration }}',
             'schema_only requires expected_deployed_revision as a lowercase 40-character deployed REVISION.',
             'schema_only requires one exact approved_migration filename.',
-            'standard deploy refuses approved_migration; use schema_only for an exact migration.',
+            'standard deploy requires approved_migration to be omitted; do not submit false. Use schema_only for an exact migration.',
             'auto/code_only/candidate_only refuses approved_migration; use schema_only for an exact migration.',
             'git diff --no-renames --name-status "$EXPECTED_DEPLOYED_REVISION" "$DEPLOY_SHA" -- backend/database/migrations',
             '$\'A\\t\'"$MIGRATION_PATH"',

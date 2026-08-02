@@ -73,10 +73,14 @@ if (($argv[1] ?? '') === 'tree') {
     exit(0);
 }
 $mode = getenv('FAKE_DEPLOY_RESULT') ?: 'success';
+$delay = (int) (getenv('FAKE_DEPLOY_DELAY_US') ?: 0);
 echo "::group::task task:one\\n";
 usleep(1000);
 echo "::endgroup::\\n";
 echo "::group::task task:two\\n";
+if ($delay > 0) {
+    usleep($delay);
+}
 usleep(1000);
 if ($mode === 'failure') {
     fwrite(STDERR, "[staging] exit code 23 (failure)\\n");
@@ -147,6 +151,42 @@ exit(0);
         self.assertEqual(tasks["task:three"]["result"], "skipped")
         self.assertIsNone(tasks["task:three"]["started_at"])
         self.assertIsNone(tasks["task:three"]["duration_ms"])
+
+    def test_progress_receipt_emits_sanitized_heartbeat_and_terminal_state(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            directory = Path(tmp)
+            receipt = directory / "receipt.json"
+            progress = directory / "progress.json"
+            deployer = self.make_fake_deployer(directory)
+            command = [
+                "php",
+                str(RUNNER),
+                "run",
+                *context_args(receipt),
+                "--heartbeat-interval-seconds=1",
+                f"--progress-receipt={progress}",
+                f"--deployer-bin={deployer}",
+                f"--recipe={ROOT / 'deploy.php'}",
+                "--task=deploy",
+                "--",
+                "php",
+                str(deployer),
+                "deploy",
+            ]
+            env = os.environ.copy()
+            env["FAKE_DEPLOY_DELAY_US"] = "1200000"
+            completed = subprocess.run(command, cwd=ROOT, env=env, text=True, capture_output=True)
+            payload = json.loads(progress.read_text(encoding="utf-8"))
+
+        self.assertEqual(completed.returncode, 0, completed.stderr)
+        self.assertIn("::notice title=Deployer heartbeat::", completed.stdout)
+        self.assertEqual(payload["schema_version"], "fermatmind.deployer-progress.v1")
+        self.assertEqual(payload["status"], "completed")
+        self.assertEqual(payload["sha"], SHA)
+        self.assertGreaterEqual(payload["elapsed_seconds"], 1)
+        serialized = json.dumps(payload).lower()
+        for forbidden in ("secret", "ssh_host", "private_path", "token", "credential"):
+            self.assertNotIn(forbidden, serialized)
 
     def test_receipt_write_failure_does_not_change_deployer_exit(self):
         with tempfile.TemporaryDirectory() as tmp:
