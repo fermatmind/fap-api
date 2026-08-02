@@ -89,7 +89,7 @@
       "API-VPAY-01"
     ],
     "status": "github_review_repairing",
-    "commit_sha": null,
+    "commit_sha": "9d5d60f84d8e43a78248f4deae2c32f275b33681",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3466",
     "checks": {
       "official_contract": {
@@ -103700,5 +103700,38 @@
       {"at": "2026-08-02T08:32:00Z", "status": "ready_to_merge", "note": "Exact head 48b2b2042a03782dd79030c48546e046aecaeb51 passed CI run 30739764955 and Code Scanning run 30739764963. No production CMS operation, deployment, or discoverability action occurred."}
     ],
     "updated_at": "2026-08-02T08:32:00Z"
+  },
+  "CONTENT-PROMOTION-V2-DEPLOYED-EXECUTOR-PIN-01": {
+    "id": "CONTENT-PROMOTION-V2-DEPLOYED-EXECUTOR-PIN-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/content-promotion-v2-deployed-executor-pin-01",
+    "title": "CONTENT-PROMOTION-V2-DEPLOYED-EXECUTOR-PIN-01 — Pin promotion workflow to deployed executor SHA",
+    "depends_on": [],
+    "status": "implementation_in_progress",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "dependency": {"status": "passed", "evidence": "No task dependency; isolated worktree starts from origin/main ffc36dedb6df28efabcd0ff2f1cdf1b1bf1f8a2a."},
+      "scope": {"status": "passed", "evidence": "Only workflow, direct SRE source-contract test, and required train metadata are allowed."},
+      "local_validation": {"status": "passed", "evidence": "Focused SRE source-contract test passed: 1 test / 31 assertions. Scoped Pint, workflow/train YAML parsing, state JSON parsing, and git diff --check passed."},
+      "github_required_checks": {"status": "pending", "evidence": null}
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {"at": "2026-08-03T00:00:00+08:00", "status": "implementation_in_progress", "note": "Started from isolated origin/main ffc36dedb6df28efabcd0ff2f1cdf1b1bf1f8a2a. This task changes only the immutable control-plane provenance guard; no deploy, production access, CMS/database write, package mutation, receipt ingestion, or discoverability action is authorized."},
+      {"at": "2026-08-03T00:37:05+08:00", "status": "local_validation_passed", "note": "Focused SRE source-contract test passed (1 test / 31 assertions); scoped Pint, YAML/JSON parsing, diff check, and exact four-path scope validation passed. The test resolves the workflow relative to its own checkout, so the isolated worktree is the tested control plane."}
+    ],
+    "updated_at": "2026-08-03T00:37:05+08:00"
   }
 }
