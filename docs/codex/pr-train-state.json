@@ -103841,9 +103841,9 @@
     "branch": "codex/w1-mbti-result-v2-w9-authority-binding-01",
     "title": "W1-MBTI-RESULT-V2-W9-AUTHORITY-BINDING-01 — Bind immutable W9 evidence for MBTI English result authority",
     "depends_on": ["CONTENT-PROMOTION-V2-DEPLOYED-EXECUTOR-PIN-01", "W1-MBTI-COMPARISONS-V2-READINESS-REPAIR-01"],
-    "status": "implementation_in_progress",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "10bc5d59df2f5ef7c84b049784f841b5fd696f4c",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3517",
     "checks": {
       "dependency": {
         "status": "passed",
@@ -103875,8 +103875,13 @@
         "at": "2026-08-03T01:52:45+08:00",
         "status": "local_validation_passed",
         "note": "Focused result-adapter and full exact-command-chain suites passed (18 tests / 241 assertions). Scoped Pint, PHP syntax, YAML/JSON parsing, exact W9 report/envelope SHA verification, and diff checks passed. The immutable fap-web report bytes remain exact at b1179976102f903b36de9888ee4cb0b4dd74fc3906d5951682922464bc8dec7d; no CMS/database mutation, promotion execution, activation, deploy, discoverability, or private-data action occurred."
+      },
+      {
+        "at": "2026-08-03T01:54:00+08:00",
+        "status": "github_checks_pending",
+        "note": "PR #3517 opened from exact implementation head 10bc5d59df2f5ef7c84b049784f841b5fd696f4c. Required GitHub checks are pending; no production workflow, CMS/database write, activation, deploy, discoverability, or private-data action occurred."
       }
     ],
-    "updated_at": "2026-08-03T01:52:45+08:00"
+    "updated_at": "2026-08-03T01:54:00+08:00"
   }
 }
