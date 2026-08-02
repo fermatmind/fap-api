@@ -75,10 +75,10 @@
     "EN-PARITY-W5-ENNEAGRAM-PRIVATE-AUTHORITY-ADAPTER-V2-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/en-parity-w5-enneagram-private-authority-adapter-v2-01",
       "commit_sha": "0792f98b45c24067a1c48da99d8ece82d6faa567",
-      "pr_url": null,
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3515",
       "checks": {
         "authority_revalidation": {
           "status": "passed",
@@ -112,6 +112,11 @@
           "at": "2026-08-03T00:00:00+08:00",
           "status": "local_checks_passed",
           "summary": "Focused adapter, privacy, result/report/share/PDF/history, exact-package command, route, formatting, JSON/YAML and diff checks passed. No production registry, CMS, deployment, search or discoverability mutation was executed."
+        },
+        {
+          "at": "2026-08-03T00:00:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #3515 after scoped local validation. Required GitHub checks are pending; no production operation was executed."
         }
       ]
     },
