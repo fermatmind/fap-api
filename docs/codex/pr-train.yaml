@@ -43631,7 +43631,6 @@ prs:
     allowed_paths:
       - backend/app/Services/Content/ContentPackV2Materializer.php
       - backend/app/Services/Content/ContentPackV2Resolver.php
-      - backend/app/Services/Mbti/MbtiResultPersonalizationService.php
       - backend/tests/Unit/Content/ContentPackV2ResolverMaterializationTest.php
       - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
@@ -48210,7 +48209,6 @@ prs:
       - .github/workflows/content-promotion-automation.yml
       - backend/app/Console/Commands/ContentPromoteExactPackage.php
       - backend/app/Services/ContentPromotion/**
-      - backend/app/Services/Content/ContentPackV2Resolver.php
       - backend/app/Services/ContentImport/MbtiComparisonEnglishPackageImporter.php
       - backend/app/Services/Cms/MbtiComparisonEnglishPublishService.php
       - backend/app/Services/ReviewGovernance/PublicReviewContract.php
@@ -48327,8 +48325,6 @@ prs:
       - backend/AGENTS.md
       - backend/app/Services/ContentPromotion/**
       - backend/tests/Unit/ContentPromotion/**
-      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
-      - backend/tests/Unit/Content/ContentPackV2ResolverDatabaseBackedInactiveMbtiResultTest.php
       - backend/tests/Feature/Console/ContentPromoteExactPackageCommandTest.php
       - backend/tests/Sre/ContentPromotionAutomationWorkflowTest.php
       - backend/config/content_promotion.php
