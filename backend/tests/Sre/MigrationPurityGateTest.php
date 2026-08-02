@@ -63,6 +63,7 @@ final class MigrationPurityGateTest extends TestCase
      * @var list<string>
      */
     private const DB_GUARD_ALLOWLIST = [
+        '/\bALTER\s+TABLE\b.*\bMODIFY\s+COLUMN\b/is',
         '/\bSHOW\s+INDEX\b/i',
         '/\binformation_schema\b/i',
         '/\bpg_indexes\b/i',
