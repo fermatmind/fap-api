@@ -9,7 +9,7 @@
     "EN-PARITY-W3-ARTICLES-BACKEND-PROMOTION-PACKAGE-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "ready_to_merge",
       "branch": "codex/en-parity-w3-articles-backend-promotion-package-01",
       "commit_sha": "9c82e5e2da6c25c55b7b173a62f271019b513157",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3511",
@@ -75,9 +75,9 @@
     "EN-PARITY-W5-ENNEAGRAM-PRIVATE-AUTHORITY-ADAPTER-V2-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "ready_to_merge",
+      "status": "merged",
       "branch": "codex/en-parity-w5-enneagram-private-authority-adapter-v2-01",
-      "commit_sha": "e11a50896",
+      "commit_sha": "0336cbc64b8ecac54b1622c09cc742e944ad612c",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3515",
       "checks": {
         "authority_revalidation": {
@@ -98,9 +98,9 @@
       },
       "failure_reason": null,
       "resume_policy": "continuous_goal",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-08-03T00:00:00+08:00",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "production_write_execution": false,
       "database_mutation": false,
       "cms_mutation": false,
@@ -131,6 +131,82 @@
           "at": "2026-08-03T00:00:00+08:00",
           "status": "ready_to_merge",
           "summary": "The classifier repair and focused regression passed. PR #3515 then passed all required GitHub checks; the workflow-policy staging parity job was skipped. No production operation was executed."
+        },
+        {
+          "at": "2026-08-03T00:00:00+08:00",
+          "status": "merged",
+          "summary": "Reconciled against GitHub and origin/main: PR #3515 was squash-merged at 0336cbc64b8ecac54b1622c09cc742e944ad612c, its remote branch was deleted, and local cleanup completed."
+        }
+      ]
+    },
+    "EN-PARITY-W5-ENNEAGRAM-PRIVATE-CONTENT-PACKAGE-V2-01": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "pr_open",
+      "branch": "codex/en-parity-w5-enneagram-private-content-package-v2-01",
+      "commit_sha": "8623f8f19b4912ad9ceb355f67f5fc9db1510cbe",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3518",
+      "checks": {
+        "dependencies": {
+          "status": "passed",
+          "details": "W5 authority adapter PR #3515 merged at 0336cbc64b8ecac54b1622c09cc742e944ad612c and W5 web consumer PR #1997 merged at 45e988ff1e14a36a4583a62ead4369b885a853bc."
+        },
+        "authority_revalidation": {
+          "status": "passed",
+          "details": "Current main source inventory contains 1,332 committed A--H assets, the current registry manifest SHA is ac5bdaab3c761b0d01a56f92679aa58341110d64de0f47a1fa0062b64f76f97f, public 58/58 remains a read-only control, and 1R-I/1R-J remain disposition-only. Historical scan bytes were not accepted as authority."
+        },
+        "local": [
+          {
+            "command": "PHP syntax, Bash syntax, scoped Pint, JSON/YAML parse, package inventory/SHA/W9/no-symlink/CJK/scope and git diff checks",
+            "status": "passed",
+            "details": "The immutable physical inventory binds exactly 630 payload files, 630 unique identities, all 36 close-call pairs, 1,332 source identities, the external W9 PASS SHA, and no CJK or out-of-scope path."
+          },
+          {
+            "command": "php artisan test tests/Feature/ContentAssets/EnneagramPrivateResultEnglishPackageTest.php",
+            "status": "passed_with_framework_deprecations",
+            "details": "4 tests and 12,077 assertions passed: exact package preflight, source and surface reconciliation, full W9 validation, and two deterministic rebuilds with the same package SHA."
+          },
+          {
+            "command": "php artisan test focused W5 adapter and private result/report/share/PDF/history contracts",
+            "status": "passed_with_framework_deprecations",
+            "details": "Adapter conformance plus 11 private surface contract tests passed; no import, activation, publication, or deployment command was run."
+          }
+        ],
+        "github": {
+          "status": "passed",
+          "details": "PR #3518 package head passed hygiene, supply-chain, content-pack-build-validate, verify-mbti legacy/v2, verify-bigfive, Code Scanning, Semgrep blocking secrets, and Semgrep OSS. verify-staging-parity was skipped by its pull-request-only workflow policy."
+        }
+      },
+      "failure_reason": null,
+      "resume_policy": "continuous_goal",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "publish_allowed": false,
+      "deploy_allowed": false,
+      "history": [
+        {
+          "at": "2026-08-03T00:00:00+08:00",
+          "status": "in_progress",
+          "summary": "Initialized the W5 private Enneagram producer package on latest main. It rebuilds only the 630 English private-result rows and external W9 evidence; no CMS, registry, publication, deployment, discoverability, or public-page mutation is permitted."
+        },
+        {
+          "at": "2026-08-03T00:00:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Frozen package SHA 8a1653b5053b7ab910957543c8bb831b8c0759aaec82a7200e5c13c08a5e98d5 and external W9 PASS evidence SHA 6516d035cff4aa59e97a85eff2b28b384b5501b6037b0f7c4caaeca5070e64f2 passed exact inventory, identity, privacy, CJK, 36-pair, surface, adapter preflight, contract, formatting, syntax, JSON/YAML, reproducibility, diff, and scope validation. No production operation was executed."
+        },
+        {
+          "at": "2026-08-03T00:00:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #3518 at package commit 8623f8f19b4912ad9ceb355f67f5fc9db1510cbe. Required GitHub checks, including the Enneagram W9 exact-package gate embedded in verify-mbti, are pending; no production operation was executed."
+        },
+        {
+          "at": "2026-08-03T00:00:00+08:00",
+          "status": "ready_to_merge",
+          "summary": "PR #3518 passed all required GitHub checks for its package head. The Enneagram W9 exact-package check ran inside both verify-mbti modes; no production operation was executed."
         }
       ]
     },

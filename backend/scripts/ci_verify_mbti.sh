@@ -246,6 +246,7 @@ if [[ "$CI_VERIFY_PARITY_ONLY" == "1" ]]; then
     tests/Feature/V0_3/EnneagramReadReportContractTest.php \
     tests/Feature/Attempts/EnneagramHistorySummaryTest.php \
     tests/Feature/Report/EnneagramPdfDeliveryTest.php \
+    tests/Feature/ContentAssets/EnneagramPrivateResultEnglishPackageTest.php \
     --no-ansi
 
   echo "[CI] mysql8-redis6 staging parity gate OK"
@@ -335,7 +336,8 @@ if [[ "$RUN_ENNEAGRAM_GATE" == "1" ]]; then
     tests/Feature/V0_3/EnneagramAssessmentFlowTest.php \
     tests/Feature/V0_3/EnneagramReadReportContractTest.php \
     tests/Feature/Attempts/EnneagramHistorySummaryTest.php \
-    tests/Feature/Report/EnneagramPdfDeliveryTest.php
+    tests/Feature/Report/EnneagramPdfDeliveryTest.php \
+    tests/Feature/ContentAssets/EnneagramPrivateResultEnglishPackageTest.php
 
   echo "[CI] rebuilding sqlite baseline after ENNEAGRAM gate"
   bash "$BACKEND_DIR/scripts/ci/prepare_sqlite.sh"
