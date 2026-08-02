@@ -1,0 +1,2625 @@
+{
+    "schema_version": "fermatmind.en_parity.enneagram_private_result_package.v2",
+    "package_id": "EN-PARITY-W5-ENNEAGRAM-PRIVATE-CONTENT-PACKAGE-V2-01",
+    "lane_id": "W5",
+    "subscope": "enneagram-results",
+    "locale": "en",
+    "status": "unpublished_candidate",
+    "source_commit": "44bd661c18dd470ae8d2dca48f101f37db306418",
+    "expected_row_count": 630,
+    "source_asset_count": 1332,
+    "package_sha256": "8a1653b5053b7ab910957543c8bb831b8c0759aaec82a7200e5c13c08a5e98d5",
+    "package_sha256_algorithm": "sha256 of path NUL lowercase file SHA-256 newline in files order",
+    "files": [
+        {
+            "path": "README.md",
+            "sha256": "176d2a42906b6247f36da3a0f091701977fe1c4a9f738d73592c8002a3310308"
+        },
+        {
+            "path": "candidate/candidate_hashes.json",
+            "sha256": "0d7bea16ac0e7403f8c46871915dacb3149dcd9320f1ffc84e03ae3b4e67d6a3"
+        },
+        {
+            "path": "candidate/candidate_manifest.json",
+            "sha256": "997a3de15f38dd40a5e6db4ecfc234de08cd67ba8f8d13d2ff2976f3257a69ff"
+        },
+        {
+            "path": "candidate/candidate_payload_hashes.json",
+            "sha256": "649f96ee8150cb63a3d105db09a4bed994b7ba207b39b354f92cc1f72069da8b"
+        },
+        {
+            "path": "candidate/candidate_payload_source_mapping.json",
+            "sha256": "6d600373b0618aa2c89da7768a14718b6c9a65b227f66290249cadf65455ca46"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-001-enneagram-1r-a-v6-t1-page1-summary-v1.json",
+            "sha256": "849420db4d0d058f1a3fb2d85447d4519c8c2e9edc150d472c4f50185578fe1c"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-002-enneagram-1r-a-v6-t1-page1-summary-v2.json",
+            "sha256": "fd704c2a17fa3361bce896c89b0c8236f30c4eaa5224409db4d9b70d5a501bc0"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-003-enneagram-1r-a-v6-t1-page1-summary-v3.json",
+            "sha256": "9c1266d843db1f7837579c8dd96b4eb9f1b7c33a090a801b7cf4ddfcaacfd47f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-004-enneagram-1r-a-v6-t1-page1-summary-v4.json",
+            "sha256": "db957b7c111a79c9d3ae1e293cfeee9bd7bb375edcd348ed3ddbf41c4aa5b6e8"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-005-enneagram-1r-a-v6-t1-page1-summary-v5.json",
+            "sha256": "3368f7c40956ee843e3933e717a518735fce1c29bb0cdcd8783cf2bbeb5e5337"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-006-enneagram-1r-a-v6-t1-page1-summary-v6.json",
+            "sha256": "3167d29b2109eb1deda43676ff68bb5655a7bec9ab4438ced91b2381d07b283c"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-007-enneagram-1r-a-v6-t2-page1-summary-v1.json",
+            "sha256": "2e1c7309e2ad01052f6644a6741c4d79bda831ce54e1ad4ab5e380da37c31b51"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-008-enneagram-1r-a-v6-t2-page1-summary-v2.json",
+            "sha256": "456972b128099fe47ea9bf6407e7a6cb8810c56a4920ffd151642a5e08bf5de8"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-009-enneagram-1r-a-v6-t2-page1-summary-v3.json",
+            "sha256": "6193330a0d11cd838d8a59e1f90d360675d04fb9160c6708fcf950ce0a0da0fa"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-010-enneagram-1r-a-v6-t2-page1-summary-v4.json",
+            "sha256": "a8dcc12d579cc6cf98731b1c212d3657fc95f6ba0453b5856b351978dc201a2c"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-011-enneagram-1r-a-v6-t2-page1-summary-v5.json",
+            "sha256": "95ba139b6fc3a2930e6d07d5519b133fd372a8a477ac781c4cec7d66d4105983"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-012-enneagram-1r-a-v6-t2-page1-summary-v6.json",
+            "sha256": "9ff1ad8fe9838d33ddecc23f038501a0b34214b7c1be7ea68f2b2f3d6e008466"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-013-enneagram-1r-a-v6-t3-page1-summary-v1.json",
+            "sha256": "91350b457875d4a42fd09902d7f0dfdf3f0086d1062b143a73d5c0b8c9075be3"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-014-enneagram-1r-a-v6-t3-page1-summary-v2.json",
+            "sha256": "7625c90a5375a5ad161f1b5c8943639f93df85f1ce5a6f3f8e9ecb2045ed07ca"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-015-enneagram-1r-a-v6-t3-page1-summary-v3.json",
+            "sha256": "005efc31d546fe3c7023933852ec7ba13bca3635b159c457877556b7e63b29d3"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-016-enneagram-1r-a-v6-t3-page1-summary-v4.json",
+            "sha256": "570489eed1589e0d94ea0b8cc4f3de2f953068ce0aca0cdcbdb580429f025376"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-017-enneagram-1r-a-v6-t3-page1-summary-v5.json",
+            "sha256": "3aed636c13a76da02ac741d9003d1d493cbbb06e2a440d68bcc09b45a8f89df8"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-018-enneagram-1r-a-v6-t3-page1-summary-v6.json",
+            "sha256": "549becc027e1b71a102a04e2effc2417a7bde73afe4122083d8b57ef28928848"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-019-enneagram-1r-a-v6-t4-page1-summary-v1.json",
+            "sha256": "ec5dd3aac5c21f50fe9d76b0cdd2ea3d6547fef33c731167b679743cf900e3bf"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-020-enneagram-1r-a-v6-t4-page1-summary-v2.json",
+            "sha256": "452b72ee9589667b742bf0219a1f802deef7bd227dcfc79ba33dedc80d52c1b5"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-021-enneagram-1r-a-v6-t4-page1-summary-v3.json",
+            "sha256": "4eb178f30d16a75050e0eaaa0956011c0670bb9667adcd8e82b28def23b407f5"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-022-enneagram-1r-a-v6-t4-page1-summary-v4.json",
+            "sha256": "ea404e73d5e436baf4eb33588d70a1f6f1aa26d56d022a84a2410900d09ffe88"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-023-enneagram-1r-a-v6-t4-page1-summary-v5.json",
+            "sha256": "508c12babb6cfc957cf5b082e6fd5d1fd1adabd2006c595f2302b618cd24dee3"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-024-enneagram-1r-a-v6-t4-page1-summary-v6.json",
+            "sha256": "317e1bd58fc6a34b847a570a6476554e52df025b4dc1eee08e79ab3a30df58c8"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-025-enneagram-1r-a-v6-t5-page1-summary-v1.json",
+            "sha256": "cd8c7dbe61418dc72e8f5e24d49111cdeded94da13b2faccfbd0c147ac3f7667"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-026-enneagram-1r-a-v6-t5-page1-summary-v2.json",
+            "sha256": "e0e18ff625747a737140c080c20702bb138eee203abb52cad9a09ce56314a477"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-027-enneagram-1r-a-v6-t5-page1-summary-v3.json",
+            "sha256": "db55e25586a41754a576b8f86a97bb47e0c9e820a459955dac691a3501debdbd"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-028-enneagram-1r-a-v6-t5-page1-summary-v4.json",
+            "sha256": "89e0b33cdfc412395953b422aeadcaf2492c02dd2ced77ee055a15c4407f00a0"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-029-enneagram-1r-a-v6-t5-page1-summary-v5.json",
+            "sha256": "8cd19680be0312c9701604804cd89594cebc04fa152318798f5fd1676032a378"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-030-enneagram-1r-a-v6-t5-page1-summary-v6.json",
+            "sha256": "b998ab8459d6dcd17ef11efe878ed9d9145330b064912efb1141a93fbcf7e58a"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-031-enneagram-1r-a-v6-t6-page1-summary-v1.json",
+            "sha256": "072851e7e15420c461d2940939e9ecd8d3bb68c5318e986f6606f349b9e645c1"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-032-enneagram-1r-a-v6-t6-page1-summary-v2.json",
+            "sha256": "f3d56c164b2b2c9618bf5ec201c2691a5353d64717a7211f8624f398eb59cbb3"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-033-enneagram-1r-a-v6-t6-page1-summary-v3.json",
+            "sha256": "192c993c1e1ea9ad2d11dc92f5a9f2d9ce8ec8dbee36effbcd11beba33937780"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-034-enneagram-1r-a-v6-t6-page1-summary-v4.json",
+            "sha256": "b8c47dd85432818af44cfbccae59969a4b55ce4c15f394c94619bca0c10d1b0e"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-035-enneagram-1r-a-v6-t6-page1-summary-v5.json",
+            "sha256": "935c6f33c4504c48ca8ed63b0c66d0bd211c5b726ff75703a88e825dc6ed377b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-baseline-036-enneagram-1r-a-v6-t6-page1-summary-v6.json",
+            "sha256": "66bedba188b3b9eb5805e903db6bf4079a83f3f8147b6aedeb2ffa8652699358"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-001-enneagram-1r-f-pair-1-2.json",
+            "sha256": "f96f4a97d40f305f9af9a1c0eb1088da7c760ad0c62bcde3bd2d5e5e12d068dd"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-002-enneagram-1r-f-pair-1-3.json",
+            "sha256": "1ec63d359f5d931f6cc0931b3cb2dd33dc2ea4e5ce8a26d4996d7ddf86a8f11b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-003-enneagram-1r-f-pair-1-4.json",
+            "sha256": "e12c297eef3f64f10787da3b97620070cdafdb9ae6058f4c89ba65f6a550a009"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-004-enneagram-1r-f-pair-1-5.json",
+            "sha256": "26d17d1e932b1bebc1062f0d97aa7cf58f538dbeefce0e3f6dc6d752b56e45fc"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-005-enneagram-1r-f-pair-1-6.json",
+            "sha256": "4cc064a28c9c4b0efe6059cc055ae961c6480a1b2d4f418901ec3c51a8933cfe"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-006-enneagram-1r-f-pair-1-7.json",
+            "sha256": "467c727d6fd34a463bad013ab317eda1eb646af31364778c30a790a62c57b419"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-007-enneagram-1r-f-pair-1-8.json",
+            "sha256": "08c4f9b3607a0c092360d6d8195a04e38a70f9cfa2ee263537b3e9bf32c2951b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-008-enneagram-1r-f-pair-1-9.json",
+            "sha256": "93aa6ce21512f4a8afbb12d7a7d25e0d5ebccb33fe677d3f514afe2e4d3744a9"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-009-enneagram-1r-f-pair-2-3.json",
+            "sha256": "a30810548dfb2cf87ca4d20bc6e0eeea9c9e5401b1638777aa8b81de16428c00"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-010-enneagram-1r-f-pair-2-4.json",
+            "sha256": "b0bd4a61577df03e133d91b48f4a91e33865baeb044022add576e64f2cfb10ed"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-011-enneagram-1r-f-pair-2-5.json",
+            "sha256": "bcfc8f539eb98f2b507b469c1f1e34687e2097a48447c55da9456d99c3f4292d"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-012-enneagram-1r-f-pair-2-6.json",
+            "sha256": "f9f58171ce0b427004e0e27553204ca9cb3016027150aecb8952e4d273e49bca"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-013-enneagram-1r-f-pair-2-7.json",
+            "sha256": "768433260ab50c522b49d152fb965f652399e54dc0cb3fe71eace1421f396a30"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-014-enneagram-1r-f-pair-2-8.json",
+            "sha256": "3043db75331c51d2d6983f848ab902a6ae390bbcf5b58703205da07fbf71e846"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-015-enneagram-1r-f-pair-2-9.json",
+            "sha256": "74962a6828c09f28de1a1babf91f31cfeab372f7e01b6bed8e91ba5162ce3378"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-016-enneagram-1r-f-pair-3-4.json",
+            "sha256": "b4b130dda0267eb3fd45f73b3ccf9ac96d94ebf8ac582282a5645b9a2e00e1f6"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-017-enneagram-1r-f-pair-3-5.json",
+            "sha256": "768aef41ca927df9475e3197c97ca77eba484de4f87121256462695ac966e09f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-018-enneagram-1r-f-pair-3-6.json",
+            "sha256": "0b207b05a788eed2b8299c68bd9bd75583f226da51271259d105e67415f7a70e"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-019-enneagram-1r-f-pair-3-7.json",
+            "sha256": "dd1cb105165ea264c415102a3fd5a120b71c07fda6687544071c68c163b30e2c"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-020-enneagram-1r-f-pair-3-8.json",
+            "sha256": "0fd66c218f6173605235807d744db6f175ce307d50acfe82924de69f49347f4e"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-021-enneagram-1r-f-pair-3-9.json",
+            "sha256": "b1bcdb81837e570b6477a2bdc093174607ee8955f65fee4bcf1b78531e0abca7"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-022-enneagram-1r-f-pair-4-5.json",
+            "sha256": "f7655c086d58476678fbcc3e4017340725f41fdb75924d01a24b132997c8d930"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-023-enneagram-1r-f-pair-4-6.json",
+            "sha256": "d47ac546dd5895fe80c3f0f939570ec59f3ed5b33f1babc35a0a05943d65464f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-024-enneagram-1r-f-pair-4-7.json",
+            "sha256": "72650b817413cb68ae6202a1cf1ee29022934700b6376fc3b438f72a6f20b6e6"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-025-enneagram-1r-f-pair-4-8.json",
+            "sha256": "d21fc9ff68999f54c82fa5b1677f0c1924039832e2f6adbc1fb2764f3a0c4f6d"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-026-enneagram-1r-f-pair-4-9.json",
+            "sha256": "8ded5b56daf3e7911e714f8fa4c3b65565ea73ecace6db3cfbf73dcb6b303cda"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-027-enneagram-1r-f-pair-5-6.json",
+            "sha256": "bf7a6a2819df045984d9da96ab0d18e97cfc9114f4ccd472fe6a6fbca84e416d"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-028-enneagram-1r-f-pair-5-7.json",
+            "sha256": "b1e271449bb5abf69dc119d84b6957f9705780482015e4bc7f85bbf5165ffbad"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-029-enneagram-1r-f-pair-5-8.json",
+            "sha256": "55240fbf02c29e3cea3fcc9b2026c699127beceb4d50b4c2595e3e75f2faadac"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-030-enneagram-1r-f-pair-5-9.json",
+            "sha256": "55e24f7b72817c9a7f3bbf54b2c124d39f167c58000002ab8187a38e27efc639"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-031-enneagram-1r-f-pair-6-7.json",
+            "sha256": "9d6d00697ac08c4909827b15edc0b097addb756449061013097d30df46712671"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-032-enneagram-1r-f-pair-6-8.json",
+            "sha256": "a9c19a371060d2fa3fdcccadb000ed3608f495e40d7985759ed4ccabd0f8a8e0"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-033-enneagram-1r-f-pair-6-9.json",
+            "sha256": "0b5be74ff3b2c91cb76e3438a9bcc7f61cabcf2a2d1f7487ef5c9d8ab46a60b3"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-034-enneagram-1r-f-pair-7-8.json",
+            "sha256": "83b27f4994699953bced6f4cf26cacbfd00a880a006bc0e83da835cb2343c628"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-035-enneagram-1r-f-pair-7-9.json",
+            "sha256": "d12802ba8648a7888e12967646de704e7643762402b60a23961cf727f2a90c40"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-close_call_pair-036-enneagram-1r-f-pair-8-9.json",
+            "sha256": "9849f1f36de28344c7ef489da70b53003bb865c4b1702c3d1e492ed43ca0c3f3"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-001-enneagram-1r-e-t1-behavior-vs-motivation-v1.json",
+            "sha256": "81aa39f9cf5bfbe9e4a1775100ececd8b64ac5db5fb0a6c4c53d991398868bf9"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-002-enneagram-1r-e-t1-broad-distribution-v1.json",
+            "sha256": "bd39d0aa3fdbef6fcaa96d76e4ab12afd19a4f0b01872a2dc60e6c5e7dce017d"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-003-enneagram-1r-e-t1-center-clustered-body-v1.json",
+            "sha256": "398a874bf057d4a38d870e0971d469ffc056fa7b0bc3b11961e1e6359f88771d"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-004-enneagram-1r-e-t1-center-clustered-head-v1.json",
+            "sha256": "a8c17bfc0faae33686cc0e036ba1460a25e41f0983c4f036d2b8cf2765c1fc5b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-005-enneagram-1r-e-t1-center-clustered-heart-v1.json",
+            "sha256": "8a523b0e9c194d53fd4eb7f352cd7cd6b960e51abaa00ebd70435f1c93f6c883"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-006-enneagram-1r-e-t1-contradictory-pattern-v1.json",
+            "sha256": "8026a6d723b5a8fa2440836eb63510363a1b2b2acd2a89978d8ca8619fd779a1"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-007-enneagram-1r-e-t1-cross-center-distribution-v1.json",
+            "sha256": "e960182424e5d6ac33f526f99f1c8f76d3820b81896458b814fab27b28364a04"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-008-enneagram-1r-e-t1-low-signal-top3-v1.json",
+            "sha256": "18cf298b9f7aa1a777d344513af588bca3834745bb6dacfb70799410c89d9139"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-009-enneagram-1r-e-t1-next-step-convergence-v1.json",
+            "sha256": "f48ba007057a5a490a0711d1c88d4c44696f25df4775a8e7a3c79f520dec2b20"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-010-enneagram-1r-e-t1-scene-specific-top3-v1.json",
+            "sha256": "c6145bd61c62f0ecfd20a2b54236a7810a27317a088363c59c27242eaf70e523"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-011-enneagram-1r-e-t1-three-center-spread-v1.json",
+            "sha256": "fa64741899783e2bcd858545f11865eba0b510c4101ddf8e04811ba926e20180"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-012-enneagram-1r-e-t1-top3-flat-v1.json",
+            "sha256": "a327b7c8d74a9f35d03a06edfec24eea99e12cbabb2a85a23cc9d37d7f086706"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-013-enneagram-1r-e-t2-behavior-vs-motivation-v1.json",
+            "sha256": "d86d4da34a5a4de5a4ddeb1628f992dd685f75af3a209ed4d34d1d7af2ee416b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-014-enneagram-1r-e-t2-broad-distribution-v1.json",
+            "sha256": "ae5795b8cc6622a5b10379f89dc46f7dcbc7a8e6fbd7a45c5a6b3fa77992e39a"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-015-enneagram-1r-e-t2-center-clustered-body-v1.json",
+            "sha256": "171be1ed8512e88d17519b4a650f919587b2fa99ed5a5312afa94d8bc229fba9"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-016-enneagram-1r-e-t2-center-clustered-head-v1.json",
+            "sha256": "b801330a0dcabe28345f1af8449eae7fe7f82216a733908e5b4b41d32dfdd043"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-017-enneagram-1r-e-t2-center-clustered-heart-v1.json",
+            "sha256": "ad7d7205061201961cae8c628e902ff1fbe4b74f5caea9d633d80521f7b79d00"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-018-enneagram-1r-e-t2-contradictory-pattern-v1.json",
+            "sha256": "c57ecc03f1549537f24ebe45fd2676bc51232af3adcaa41df9a063eb026bf578"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-019-enneagram-1r-e-t2-cross-center-distribution-v1.json",
+            "sha256": "75f04e9a5a483dfa3456638e1d0eea3ae27c289f0f9bcdbfbc6f21409ff9c157"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-020-enneagram-1r-e-t2-low-signal-top3-v1.json",
+            "sha256": "9e308790861dddbf915a55a6550f6ad67522a878e0e7bf8e0d766749307329e5"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-021-enneagram-1r-e-t2-next-step-convergence-v1.json",
+            "sha256": "c2a752085aa2ae515909a06eadcbe530603798b8c769ddf2a370b11fa51aa641"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-022-enneagram-1r-e-t2-scene-specific-top3-v1.json",
+            "sha256": "a4f9bb4292a4c32a0b7d67ee1eab0c0ff1100c6aa2bd035cf11d4cd0c1b5bbef"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-023-enneagram-1r-e-t2-three-center-spread-v1.json",
+            "sha256": "4492e16ef28ed31e3175a7755a1771dd7d98562bfb57599a7d49896b5374a043"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-024-enneagram-1r-e-t2-top3-flat-v1.json",
+            "sha256": "99c3a798774d391dc24d3e576d6ae31ed29517a8e0d1cae419ae1619afb6dded"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-025-enneagram-1r-e-t3-behavior-vs-motivation-v1.json",
+            "sha256": "199fd9013f3ff0ec5a834156c6039b28312bb28192525ada09ef6eb743c86db9"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-026-enneagram-1r-e-t3-broad-distribution-v1.json",
+            "sha256": "4de8e967f68714f107e74b84a2c1ea13389eb52c21849afa264c9b7625bf8964"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-027-enneagram-1r-e-t3-center-clustered-body-v1.json",
+            "sha256": "d5180beebd596e863c250d45cc4c1b767746546b45aa5dfdc75e87a505eb82cf"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-028-enneagram-1r-e-t3-center-clustered-head-v1.json",
+            "sha256": "c0d5287b61694a0b3dff38d379f12da0bff3fca485071f23e5b51984fe4f23fa"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-029-enneagram-1r-e-t3-center-clustered-heart-v1.json",
+            "sha256": "96ee56e36a73af7c3faa5757f2bee1bd85516fbca36e0a483dde644321e24b0a"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-030-enneagram-1r-e-t3-contradictory-pattern-v1.json",
+            "sha256": "5d5549b23e5ab399afa02bc7f5312d559d866a873f5f7cd0fa48de36d097b9f4"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-031-enneagram-1r-e-t3-cross-center-distribution-v1.json",
+            "sha256": "db9b5a204846bf6ddd58faf4943759946d2eccf48366f1d60a1c676283dc19b6"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-032-enneagram-1r-e-t3-low-signal-top3-v1.json",
+            "sha256": "dcec34dee3fb3bce398773bc628073729e5674926431efaabb7fd60ff0a7ec04"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-033-enneagram-1r-e-t3-next-step-convergence-v1.json",
+            "sha256": "ac8a7f402b0aa117812c8d156d93bcdca7c78e1325bdab53304bea569db4bf07"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-034-enneagram-1r-e-t3-scene-specific-top3-v1.json",
+            "sha256": "dda5ea1ddc48f9c3212b6a7ea38e1304b14bfb50359c95f636df9f91da5d1102"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-035-enneagram-1r-e-t3-three-center-spread-v1.json",
+            "sha256": "6f7338da93ca0b2ecc6752dbc123b3b50945caf172e25b0d3cf295da91467580"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-036-enneagram-1r-e-t3-top3-flat-v1.json",
+            "sha256": "555922d48ad6c8187faaa8bf5cabef3e3aaa294513ac81971b98eafa6b97a86f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-037-enneagram-1r-e-t4-behavior-vs-motivation-v1.json",
+            "sha256": "330258da40ca0d9e344ddf36f7ae58cf5ceae733aadb9b9c2c837972f0f85bb0"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-038-enneagram-1r-e-t4-broad-distribution-v1.json",
+            "sha256": "3b3bf5d971ce8c4fec91a3737c25fc002d34e2cbb125da4e537f7180c9b8ddde"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-039-enneagram-1r-e-t4-center-clustered-body-v1.json",
+            "sha256": "1b0dd6704a2a3f41dd2125c7093de33725caff3ad185f338bd6588ce62a01e5d"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-040-enneagram-1r-e-t4-center-clustered-head-v1.json",
+            "sha256": "1753a296ae8c7e642def058633adf8c65986d61a2e2cc4c4da3a99574e3837dd"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-041-enneagram-1r-e-t4-center-clustered-heart-v1.json",
+            "sha256": "48840c6a307ff472c7778a175c287e880828fad55124bebffba3aa5da95d77ac"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-042-enneagram-1r-e-t4-contradictory-pattern-v1.json",
+            "sha256": "8fb125537e4af9a1a86c4cae4f0551fbdffa8bbd765486107c6c7daf121c2d1f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-043-enneagram-1r-e-t4-cross-center-distribution-v1.json",
+            "sha256": "a065ca553cca2604fd93a263b0a0cfcec93b8f5ed235e0f8dc276941d14d1c7b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-044-enneagram-1r-e-t4-low-signal-top3-v1.json",
+            "sha256": "d43fc19f6762d1b04b3b9d45c91b493aeae9b0f9aa772a6e0d89a1e823d3958b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-045-enneagram-1r-e-t4-next-step-convergence-v1.json",
+            "sha256": "e6fb905a078e643a3c15dfa03e6447d56cd1f2dcc695decf81ecf3613a28d0a6"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-046-enneagram-1r-e-t4-scene-specific-top3-v1.json",
+            "sha256": "b2411bf6d1dd98c2ac7cc7928c8cd1a372f9c304e3394be75540926532bd097c"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-047-enneagram-1r-e-t4-three-center-spread-v1.json",
+            "sha256": "53d94889b66135a440c11ca7f104084d2a2643cc5ee2c20b786161d115eb3888"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-048-enneagram-1r-e-t4-top3-flat-v1.json",
+            "sha256": "a062db40281a7c722590cb36ff707638afd78c6dbd1448cd1036d90ae1eddda5"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-049-enneagram-1r-e-t5-behavior-vs-motivation-v1.json",
+            "sha256": "fa5ce959d4e78276d01c02513a1c657a4f38ac189145fea3c75af6b3298f558b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-050-enneagram-1r-e-t5-broad-distribution-v1.json",
+            "sha256": "cc59d2068294fa3050586037e46cc9e5bd0ca10b8ea281bdcf5592b46422c882"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-051-enneagram-1r-e-t5-center-clustered-body-v1.json",
+            "sha256": "770f116b2f6291067927906ac871a22a971bfc7e95f648b13cad957c6c19f4c1"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-052-enneagram-1r-e-t5-center-clustered-head-v1.json",
+            "sha256": "547c616a83c342037dc80af4a5c26c03f95370c27af9d813bf49367840b49857"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-053-enneagram-1r-e-t5-center-clustered-heart-v1.json",
+            "sha256": "b65206cd6b2272d77fd0d809747964920866d65e4f9cf851dc389b62ed2c520f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-054-enneagram-1r-e-t5-contradictory-pattern-v1.json",
+            "sha256": "bcfb7958be8c825fcbc7630ecec20565cc11638304822fbd92b40a8ad23a23f6"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-055-enneagram-1r-e-t5-cross-center-distribution-v1.json",
+            "sha256": "c7e88b45f8f747402eea82132bbd6abe650697261a68a1205a8e84a25eefbb1b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-056-enneagram-1r-e-t5-low-signal-top3-v1.json",
+            "sha256": "648534e55c791dff30f5db67721dafc4838697f811659ab0010a201750ea1667"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-057-enneagram-1r-e-t5-next-step-convergence-v1.json",
+            "sha256": "1f710ed3787e24b05b1dafb68c639421eb1dda3e279a2345bcd28c043eb9e888"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-058-enneagram-1r-e-t5-scene-specific-top3-v1.json",
+            "sha256": "096bc4c7f05c566f498145a8964f46fa4e549169f954fe61550444fc3da54704"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-059-enneagram-1r-e-t5-three-center-spread-v1.json",
+            "sha256": "bdd2767e647ae71a539367f8ad9993b2653f21fa5efa58cabf96abaf02f968dc"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-060-enneagram-1r-e-t5-top3-flat-v1.json",
+            "sha256": "de5c2a6685ede34f6c9dfa5779929728e86346f8adae396d37bc798bbbeed1ed"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-061-enneagram-1r-e-t6-behavior-vs-motivation-v1.json",
+            "sha256": "becb78a5c18e30f04a5f3d9a19a8ac020d74c168cf6dc9d78e678eec0e0887fb"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-062-enneagram-1r-e-t6-broad-distribution-v1.json",
+            "sha256": "2922b133fd91baeeaa499188c257e566350ee4314f530f8cb1a7086f159ee86b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-063-enneagram-1r-e-t6-center-clustered-body-v1.json",
+            "sha256": "e854ca6536f004bce549ebbb67999b669fd715019bdf87c1de6265e1b8dd9ab9"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-064-enneagram-1r-e-t6-center-clustered-head-v1.json",
+            "sha256": "9dfb400f5b8278d63b8e6c930a22ba980ba162272ecb7fb2ec394d491079e2b2"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-065-enneagram-1r-e-t6-center-clustered-heart-v1.json",
+            "sha256": "70322e57f2361731e42a23fd44c25c6ba911abd50b50afb878f0f5f24512c44b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-066-enneagram-1r-e-t6-contradictory-pattern-v1.json",
+            "sha256": "8c7d6231481ab33445e36424d8834367b8ad085fef29e01c5f118d284a7429b9"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-067-enneagram-1r-e-t6-cross-center-distribution-v1.json",
+            "sha256": "bb183de50c2ec7bcd94d56bb5b194a6b3dcdc94e3c17132414c965a51bfcb3d4"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-068-enneagram-1r-e-t6-low-signal-top3-v1.json",
+            "sha256": "93c937007d23dbaa4b35c9850456c1d6831ab9f85559708811794e6a9ac4f96c"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-069-enneagram-1r-e-t6-next-step-convergence-v1.json",
+            "sha256": "62d174a8fa83ab1426b1ddbfaed7785e96da09d9e00646e0e7536421a4b7b401"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-070-enneagram-1r-e-t6-scene-specific-top3-v1.json",
+            "sha256": "6610ab06e0fab4df7798a0a0bf5a6657d87e3579d384656bf1674ecca70279c8"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-071-enneagram-1r-e-t6-three-center-spread-v1.json",
+            "sha256": "67c6d9af448317e64eb99b31d0289db451ee2f412463090d77eaf413eb086d19"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-072-enneagram-1r-e-t6-top3-flat-v1.json",
+            "sha256": "bde540e677507a45cec5df9474e27be6e7b103c9eff9f0b491b8bac065973c23"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-073-enneagram-1r-e-t7-behavior-vs-motivation-v1.json",
+            "sha256": "d1b183fc2994058634ddd9a4fe2fd2ec24af911891123330b0d73606342024fd"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-074-enneagram-1r-e-t7-broad-distribution-v1.json",
+            "sha256": "ef5c1eb8fdeca9dc60ccdcdb9735ef3a54932a604a5c3fb3bd503bb6bbc9be5d"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-075-enneagram-1r-e-t7-center-clustered-body-v1.json",
+            "sha256": "b9d6ae7cbd43f839be312679faf81d340b933e5ebf65a9684eb5393f19626e6e"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-076-enneagram-1r-e-t7-center-clustered-head-v1.json",
+            "sha256": "c7e498ca10133b6ff3f3746b4ea1a33ac5f70f60fa7883c26de4bce81234091c"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-077-enneagram-1r-e-t7-center-clustered-heart-v1.json",
+            "sha256": "6e6941c0515d1ca9cafc6935c909d51d3e185f15d49d7f6dafcbcf64ad497484"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-078-enneagram-1r-e-t7-contradictory-pattern-v1.json",
+            "sha256": "6ef7db435db6820dfcce8b32bb74eab1d263f0f5edcc1daf9acb2296e35008f8"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-079-enneagram-1r-e-t7-cross-center-distribution-v1.json",
+            "sha256": "e19a4fb434a31df0ee3f2a45ac7290b233099ecfb47efe9b92fb06dfd5b2ea61"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-080-enneagram-1r-e-t7-low-signal-top3-v1.json",
+            "sha256": "525d16098aee4db526b459acc479c46a77aeb10c1aa0054d4a1ebfe4ce349ccd"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-081-enneagram-1r-e-t7-next-step-convergence-v1.json",
+            "sha256": "faa51a64fb9ac99bb4e551d22581742afbd6d21fb0f8fdd51a97fae010edb60f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-082-enneagram-1r-e-t7-scene-specific-top3-v1.json",
+            "sha256": "e55f914b6eaf56699e111ae11dfd40d841967b39afbaa6696aec1d4535d3fe02"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-083-enneagram-1r-e-t7-three-center-spread-v1.json",
+            "sha256": "7cde38dabe50d0fa872526c195d6d664bd2d953f822aa4d9c17f56da6a5c0cd8"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-084-enneagram-1r-e-t7-top3-flat-v1.json",
+            "sha256": "c9fa3e125bae06392bb04290206bfaa777288a0e28b77ff1dbd4bc78a9e6e8af"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-085-enneagram-1r-e-t8-behavior-vs-motivation-v1.json",
+            "sha256": "c52d51e158c10016c9def5abb915894df2a8c85784ad7770cb1e0c585c91d88a"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-086-enneagram-1r-e-t8-broad-distribution-v1.json",
+            "sha256": "59ffd154ff1a9201f63ff75ff0cf2dface1d32ebeba53436e145658f2ea45ed2"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-087-enneagram-1r-e-t8-center-clustered-body-v1.json",
+            "sha256": "7a803a4f973c35ed9a0a2448b5905b7fa273bcc16b637474f63c0e5c6e16089c"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-088-enneagram-1r-e-t8-center-clustered-head-v1.json",
+            "sha256": "f744e646389eee401405aafc0aebe6fade29226f031651b8d558dfc3916fba03"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-089-enneagram-1r-e-t8-center-clustered-heart-v1.json",
+            "sha256": "9603c1c76765b9e35a5f65ac5fcb6f9a7aaf969777ef51d5dddf1140a3170425"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-090-enneagram-1r-e-t8-contradictory-pattern-v1.json",
+            "sha256": "35e4c6cd810c1fda1d61ed46c19436f5bad3d2b6e592bdd3e696dff424c59a71"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-091-enneagram-1r-e-t8-cross-center-distribution-v1.json",
+            "sha256": "b970f54499694da7dd98069003044d13f8fa9d9aea72ffbadb7cf21f8db0ff6f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-092-enneagram-1r-e-t8-low-signal-top3-v1.json",
+            "sha256": "85bb336b5630477a0043e97ca22c9207e64f1c420d1851d70eab415ca6fd7ad1"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-093-enneagram-1r-e-t8-next-step-convergence-v1.json",
+            "sha256": "3e34c623d09c8908275d9d125b4bef76d5a8f44930248850df0aa67d26147e79"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-094-enneagram-1r-e-t8-scene-specific-top3-v1.json",
+            "sha256": "f91afbf863ea761e334830d25d83554f7a7d7b6b8a92a99be257cb6b6c9c3781"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-095-enneagram-1r-e-t8-three-center-spread-v1.json",
+            "sha256": "1125f7480a887f2228dc85eeb506effee799bb94237d0077f2a3fdeb86bc8f86"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-096-enneagram-1r-e-t8-top3-flat-v1.json",
+            "sha256": "e8c0619045bcce7f49d83acedbb5c43c897be16e1526c13ca5c9106061b91ee7"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-097-enneagram-1r-e-t9-behavior-vs-motivation-v1.json",
+            "sha256": "fc98101e328718b36d5d8173513c2fcc97b69035ebd86b3e5492c2cc9f893814"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-098-enneagram-1r-e-t9-broad-distribution-v1.json",
+            "sha256": "1cf5f6586bd891ad49acf4e165e7974017656925c5a4d9eabb8f9d32cc58d2b4"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-099-enneagram-1r-e-t9-center-clustered-body-v1.json",
+            "sha256": "c486239000ccb52a848776a088e38187b1abb8ec1565972dc22f18d2b53b96f1"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-100-enneagram-1r-e-t9-center-clustered-head-v1.json",
+            "sha256": "4f009c905d1c05258d7624c0b49842ee57555d15a9f0fcda06d12712ad8decd5"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-101-enneagram-1r-e-t9-center-clustered-heart-v1.json",
+            "sha256": "5748fd93f4c9cae5d380091f588ffeabe9e007e20ac8da20b735eb924ffef90c"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-102-enneagram-1r-e-t9-contradictory-pattern-v1.json",
+            "sha256": "2cf86d6b19030b4ac87aeaf40a2c90a1c7b4ce70feecd448bff0bfbb3298b862"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-103-enneagram-1r-e-t9-cross-center-distribution-v1.json",
+            "sha256": "83d000944799ba6fd9b965cee790376981e2db32f2624ae0367e7f89b5a3a17b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-104-enneagram-1r-e-t9-low-signal-top3-v1.json",
+            "sha256": "736bc45a1a9d96a097d0457ad51ecabb9e9d3620d04f393215ae64d1d09da737"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-105-enneagram-1r-e-t9-next-step-convergence-v1.json",
+            "sha256": "1d0b3bffd15eb6caf086c865c3160fc05008f9cec2aaccd23236cbb58dacfe76"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-106-enneagram-1r-e-t9-scene-specific-top3-v1.json",
+            "sha256": "b3985cb77166ae7ac41cf02ac13b874e821f341d977634f491983b7b00ace731"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-107-enneagram-1r-e-t9-three-center-spread-v1.json",
+            "sha256": "8a5fe4b54de4c6395775b1b57854a2b19ba624e25936c1f0efc5488e6659e388"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-diffuse_convergence-108-enneagram-1r-e-t9-top3-flat-v1.json",
+            "sha256": "dca669c2806c67af0c4c18b6082ccce2d4651b8eee0b6077b77d000b40a10a80"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-001-enneagram-1r-h-t1-fc144-recommendation-after-pair-comparison-v1.json",
+            "sha256": "07dd7b58e433c87fb196a21b1121352b49a59c6263327da2977b0031e7317af1"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-002-enneagram-1r-h-t1-fc144-recommendation-after-scene-localization-v1.json",
+            "sha256": "ad9d7b216894af7a0701b2bd071148d35d7b9d9d504e23e069b7fa3b492b5a7e"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-003-enneagram-1r-h-t1-fc144-recommendation-clear-high-resonance-v1.json",
+            "sha256": "cef0055886c8df6bf669ce8008fc3a5cd892a9a3a2c2b6da49ed13eef4ec258a"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-004-enneagram-1r-h-t1-fc144-recommendation-close-call-top2-v1.json",
+            "sha256": "37798feb8626288cdd7b72517a9c1a20f606fa95fdaae88c9ea9ed76cad3e40e"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-005-enneagram-1r-h-t1-fc144-recommendation-diffuse-top3-v1.json",
+            "sha256": "fa8eb6edfa160d1aee22d1a5d4d64d99477dfde2ab9c9e7e59fb548ba670ef8e"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-006-enneagram-1r-h-t1-fc144-recommendation-high-engagement-deep-reader-v1.json",
+            "sha256": "13101cd71fb385a89fbcf77230fd0832028b73001f84655617fb965579cace67"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-007-enneagram-1r-h-t1-fc144-recommendation-low-quality-v1.json",
+            "sha256": "dda0655284aa5c6b827562560bc37a183674d06e8de9a1bdaba47b6778395a8f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-008-enneagram-1r-h-t1-fc144-recommendation-low-resonance-v1.json",
+            "sha256": "199b9339706aa187e0a4678037b86e5665633d00e7422ac5bdfd866a40eb13a1"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-009-enneagram-1r-h-t1-fc144-recommendation-paid-preview-teaser-v1.json",
+            "sha256": "2a35c33d0ecbb2f556d3071f229945b448f48940f9e8d06df927312ca1e37a31"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-010-enneagram-1r-h-t1-fc144-recommendation-partial-resonance-v1.json",
+            "sha256": "5abf71d8b813e645dbf7d44802e4d42ed6a55ef8b85804969a4761ed22845ddc"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-011-enneagram-1r-h-t2-fc144-recommendation-after-pair-comparison-v1.json",
+            "sha256": "a732442747fe034e45932752f07a68464898529cf22a925da9c2eac3e8c7acda"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-012-enneagram-1r-h-t2-fc144-recommendation-after-scene-localization-v1.json",
+            "sha256": "20a8422723643041c141c9294a583b955a44d8e8feb679e3356b087a448eb779"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-013-enneagram-1r-h-t2-fc144-recommendation-clear-high-resonance-v1.json",
+            "sha256": "b1f02b98e0104db98abe9835e3dfd652426ef6c71e7c8239808f9a27c24e0271"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-014-enneagram-1r-h-t2-fc144-recommendation-close-call-top2-v1.json",
+            "sha256": "027a512be0811bb33a5f2d3a2b57d0c66f5a1c23aa92b607dcec9fc1fa266173"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-015-enneagram-1r-h-t2-fc144-recommendation-diffuse-top3-v1.json",
+            "sha256": "7301bbede64cb3b32b97fe3c5f22768d4a0c74544818ca0f7474871160e05806"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-016-enneagram-1r-h-t2-fc144-recommendation-high-engagement-deep-reader-v1.json",
+            "sha256": "a854cb7c2c6d37f570fc73131e105b8adc877b1b1e3ce691e9442424fd95c5e5"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-017-enneagram-1r-h-t2-fc144-recommendation-low-quality-v1.json",
+            "sha256": "0d36c4383e91db32654f91e3d678b7a6204f9e94c88658aa5ac774a79426f3a9"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-018-enneagram-1r-h-t2-fc144-recommendation-low-resonance-v1.json",
+            "sha256": "598486f59090327b0a82b26d8cd92d2d9eb41be4797d01b574ec9ad14f07aa79"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-019-enneagram-1r-h-t2-fc144-recommendation-paid-preview-teaser-v1.json",
+            "sha256": "26112ad7869b834cae0672f018022e36ccf2361213204dd289f85fbdbc3de74f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-020-enneagram-1r-h-t2-fc144-recommendation-partial-resonance-v1.json",
+            "sha256": "5e485dfad404e72bcf4bf67dcd4b489424dc7677ada6b76023c125a16a42bc8f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-021-enneagram-1r-h-t3-fc144-recommendation-after-pair-comparison-v1.json",
+            "sha256": "b7ba50ca988a2d14e432777ac7751373330ef32cf6ad834edcc97f66f75a0954"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-022-enneagram-1r-h-t3-fc144-recommendation-after-scene-localization-v1.json",
+            "sha256": "4bb98883281c37cf0e4e31b3a650d8518190e6dbd0814881aa86ec5bcb582037"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-023-enneagram-1r-h-t3-fc144-recommendation-clear-high-resonance-v1.json",
+            "sha256": "50e754e38d598396d1a6103c1f1177f8bf1b5432ec4b7c96989e93d41a263188"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-024-enneagram-1r-h-t3-fc144-recommendation-close-call-top2-v1.json",
+            "sha256": "75b99bd49b3b168c04a5d699da0c2604a5e105f000db442cf2ef9516629d51f4"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-025-enneagram-1r-h-t3-fc144-recommendation-diffuse-top3-v1.json",
+            "sha256": "f2ef2600133d164ad7b943c3c257132c5de4c56326f916dc4bda31b1d03c2059"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-026-enneagram-1r-h-t3-fc144-recommendation-high-engagement-deep-reader-v1.json",
+            "sha256": "0e5947a2e255822a76fb4b56dec90d33ee5a5b70563ef3f39f0401de75fc796b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-027-enneagram-1r-h-t3-fc144-recommendation-low-quality-v1.json",
+            "sha256": "5246c5c049f3dc1dc9c4ce718b21b10aac59f64d4a574ad1fd9353f0ea5ea23c"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-028-enneagram-1r-h-t3-fc144-recommendation-low-resonance-v1.json",
+            "sha256": "20583df197758fe4f932e9303a27d5e1c0ee9e65c0103b45ea967b5b91efa5bf"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-029-enneagram-1r-h-t3-fc144-recommendation-paid-preview-teaser-v1.json",
+            "sha256": "81bc0eaeae8f0f4bc92a83f6fa2f49a3f7d7cfe623761c09ad9fe74842d39535"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-030-enneagram-1r-h-t3-fc144-recommendation-partial-resonance-v1.json",
+            "sha256": "e730b3e830e983128a0e6d93ece354f9eae27a43f720ade9d1356f29af233a00"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-031-enneagram-1r-h-t4-fc144-recommendation-after-pair-comparison-v1.json",
+            "sha256": "55ed4786e5fff017967c25259f5aca62fedf14a2db75ae903451723c10563636"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-032-enneagram-1r-h-t4-fc144-recommendation-after-scene-localization-v1.json",
+            "sha256": "49a3c8bb42871b60dcdfa9311c498aae931d8354a2b0d18cf271671e30fbaed5"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-033-enneagram-1r-h-t4-fc144-recommendation-clear-high-resonance-v1.json",
+            "sha256": "dd5e7cd5e086c3473d99e1741aa0586905544c9f8a43ff5ce5fe43ad580de53b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-034-enneagram-1r-h-t4-fc144-recommendation-close-call-top2-v1.json",
+            "sha256": "3398446710ffe6f3ef84859870bf62d2d44b840ea04e7951caec8f62cccbb7c5"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-035-enneagram-1r-h-t4-fc144-recommendation-diffuse-top3-v1.json",
+            "sha256": "b4c0e7ca773a0d974b7617798cef7889177944d4215c97002074f62baf486fc4"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-036-enneagram-1r-h-t4-fc144-recommendation-high-engagement-deep-reader-v1.json",
+            "sha256": "4e9b6058d3dbb675ae9cc5a9275dea64fc6b8556224fdc04f8e795a9b20c1be9"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-037-enneagram-1r-h-t4-fc144-recommendation-low-quality-v1.json",
+            "sha256": "f3d8e6adcda7c989eee86fbccd7d3b0ffc6594a9368af41691dd51fe2f7a877d"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-038-enneagram-1r-h-t4-fc144-recommendation-low-resonance-v1.json",
+            "sha256": "2a20453d0ec1ee8073746341c637c6ee8e16416e2367f94caec7a3acd02734dd"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-039-enneagram-1r-h-t4-fc144-recommendation-paid-preview-teaser-v1.json",
+            "sha256": "d489b11078714fc5c8d7c8131e2587b5a274ad5b340f339369338ef2db148e04"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-040-enneagram-1r-h-t4-fc144-recommendation-partial-resonance-v1.json",
+            "sha256": "74974de99e8d8af4c4571c4f2bd8922de957a9b42e893832113ddab09f16c9ae"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-041-enneagram-1r-h-t5-fc144-recommendation-after-pair-comparison-v1.json",
+            "sha256": "8906f6ac8733cf478c0b19814e452d814870d8df460264e0772eb0f6b8ae25b9"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-042-enneagram-1r-h-t5-fc144-recommendation-after-scene-localization-v1.json",
+            "sha256": "487ea316be5e63abe6f7e3675c104df90f2cfbc40d60499d2a954aeaf94d91c5"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-043-enneagram-1r-h-t5-fc144-recommendation-clear-high-resonance-v1.json",
+            "sha256": "81d1834171a0956c91d28aff7bf609c4b252d9cfc507101a7ce4030d222304f8"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-044-enneagram-1r-h-t5-fc144-recommendation-close-call-top2-v1.json",
+            "sha256": "64e8c124a69b67ca9385e40c987e8a7383ceb0e94fbd7101155024d117c7b706"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-045-enneagram-1r-h-t5-fc144-recommendation-diffuse-top3-v1.json",
+            "sha256": "cc8ff94837c8b83cd9d737a24c73cbf468aaee65e2e8fbcbbccb304a7d2e39c5"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-046-enneagram-1r-h-t5-fc144-recommendation-high-engagement-deep-reader-v1.json",
+            "sha256": "6e8e2087940ee9b4e7e0c9a9684795a2b42cdad718a5dc0770eef7d5d238e805"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-047-enneagram-1r-h-t5-fc144-recommendation-low-quality-v1.json",
+            "sha256": "6680314085921f4f8f8b1acd886d7c46ae992914955a1097438b42a094d529d6"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-048-enneagram-1r-h-t5-fc144-recommendation-low-resonance-v1.json",
+            "sha256": "36e844fbcd04fcf71720399977271aced7dac3db05557d64844e0ccaa0d5841b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-049-enneagram-1r-h-t5-fc144-recommendation-paid-preview-teaser-v1.json",
+            "sha256": "93eb4ac85d220863a03fe5bcf8dd3fabe4bec764cf64d5bccddebedef8d11009"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-050-enneagram-1r-h-t5-fc144-recommendation-partial-resonance-v1.json",
+            "sha256": "0fceed0ffbbfd4be456684a3446dcf8c6faee485c02bba6bd57c3c47500800f6"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-051-enneagram-1r-h-t6-fc144-recommendation-after-pair-comparison-v1.json",
+            "sha256": "234268c72cca8565c861a529524b4d11f1b15466837d0408961c5b42e11f374a"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-052-enneagram-1r-h-t6-fc144-recommendation-after-scene-localization-v1.json",
+            "sha256": "fb529c566b23081e08e7cd2c07fa3866782853c48570673195ecd59049307085"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-053-enneagram-1r-h-t6-fc144-recommendation-clear-high-resonance-v1.json",
+            "sha256": "ca8561a9c1715866798b70eb8530c0f01cce47f67fe2fdc5bb87ed1f7a0114bc"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-054-enneagram-1r-h-t6-fc144-recommendation-close-call-top2-v1.json",
+            "sha256": "3cb7aa7ec578f33855fad72a2cd6142ce40d1836543adc91d35ab0c9ff02eb82"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-055-enneagram-1r-h-t6-fc144-recommendation-diffuse-top3-v1.json",
+            "sha256": "6a0637a23d4c8bf9a28ca2a5c71fd260250f060ea846059ededc74761b1baf63"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-056-enneagram-1r-h-t6-fc144-recommendation-high-engagement-deep-reader-v1.json",
+            "sha256": "340b1525954cb86ce85d525c8454247a040e3e8d1755424d5d0bf84396690e84"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-057-enneagram-1r-h-t6-fc144-recommendation-low-quality-v1.json",
+            "sha256": "0fb73a4113d0b473e1cdaa589551f53862b87ec46e50a26772f34029ee2d5e0c"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-058-enneagram-1r-h-t6-fc144-recommendation-low-resonance-v1.json",
+            "sha256": "6a2d401989aee12df8980b3aa3be0a350d0007fb8654423397e45428de684a09"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-059-enneagram-1r-h-t6-fc144-recommendation-paid-preview-teaser-v1.json",
+            "sha256": "c9b7a03658d5390e5a00d03ee690654f617b4666a94db27e2c7741f5dc9cc8d7"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-060-enneagram-1r-h-t6-fc144-recommendation-partial-resonance-v1.json",
+            "sha256": "63b5b04e1510fa17520f1ba87f05bd3fe9036352a904fb590a7b78a105bdb237"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-061-enneagram-1r-h-t7-fc144-recommendation-after-pair-comparison-v1.json",
+            "sha256": "fa5669a44e7b7d0ff1fd8ec7c1b24d819be6235f9005eb39d28a7aa7a63a8d22"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-062-enneagram-1r-h-t7-fc144-recommendation-after-scene-localization-v1.json",
+            "sha256": "9df16689b57b8012c507296f85c445b006f94afd8a1edd8b1712cb9f8123e4af"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-063-enneagram-1r-h-t7-fc144-recommendation-clear-high-resonance-v1.json",
+            "sha256": "b6e7115812d03f0473133b47ddb2145b0e51026f38e8789c7d1dde633b615e5f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-064-enneagram-1r-h-t7-fc144-recommendation-close-call-top2-v1.json",
+            "sha256": "814b364d951a7174596f688ce0411af8682880208e938d0faa14dd25fb3e2db2"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-065-enneagram-1r-h-t7-fc144-recommendation-diffuse-top3-v1.json",
+            "sha256": "df0019a26d9420e8b62b3a4dce06adceb050f8d41dca745a2add1c81060a710f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-066-enneagram-1r-h-t7-fc144-recommendation-high-engagement-deep-reader-v1.json",
+            "sha256": "44805e5b77aeae1ab04d978320cf97e6f46278c4ff1e64ef339c4ee944fcfb11"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-067-enneagram-1r-h-t7-fc144-recommendation-low-quality-v1.json",
+            "sha256": "03d1ae4491ea0398d4abf205202baf6cc70adb37cd5acaf5af71525e829aee1a"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-068-enneagram-1r-h-t7-fc144-recommendation-low-resonance-v1.json",
+            "sha256": "7d48c69dd65c9f6baec4aa139f3ba6e19b6de24954c06f0e0a068e13bfc76c29"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-069-enneagram-1r-h-t7-fc144-recommendation-paid-preview-teaser-v1.json",
+            "sha256": "135c8f798058f79a81a62b8d8dba7bd3ff21af40d802d79d364ecbc37f2b2f84"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-070-enneagram-1r-h-t7-fc144-recommendation-partial-resonance-v1.json",
+            "sha256": "1ba858aebf812cd7c526ff28b750d9efaaa78ba8084ad3030cbb4470bdb89b0d"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-071-enneagram-1r-h-t8-fc144-recommendation-after-pair-comparison-v1.json",
+            "sha256": "fc27913e198acfed44ad831c7f44191b0b6ce42ebafdd1b7f32adaa110263e2c"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-072-enneagram-1r-h-t8-fc144-recommendation-after-scene-localization-v1.json",
+            "sha256": "088e4586498fb625f83395c7e9a001442d28fb0d8b07d91e4b1b29db8f874f0c"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-073-enneagram-1r-h-t8-fc144-recommendation-clear-high-resonance-v1.json",
+            "sha256": "84df5cfa64d1b5f52de19daf752fc7b68443285cf19f9b5d7529932b80262e8f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-074-enneagram-1r-h-t8-fc144-recommendation-close-call-top2-v1.json",
+            "sha256": "b6a69f5dc3b454838c4ff792e68f748cf37ece2be52aa031584ccb56f72996b6"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-075-enneagram-1r-h-t8-fc144-recommendation-diffuse-top3-v1.json",
+            "sha256": "8bd5d4b8573fc0cb806bc7ef1bf86fc37d511b743a53c9f3c7828829a465c89e"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-076-enneagram-1r-h-t8-fc144-recommendation-high-engagement-deep-reader-v1.json",
+            "sha256": "0234f65bc4b7737fcd7b80f1cca4916abb4ef9c7b883721e05ff2c72800265f9"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-077-enneagram-1r-h-t8-fc144-recommendation-low-quality-v1.json",
+            "sha256": "a270984d99a4d36750edffb84358d9a716c3acf3a366adc65bbfd1ffbac2cc06"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-078-enneagram-1r-h-t8-fc144-recommendation-low-resonance-v1.json",
+            "sha256": "f6d80ab7da53e6428a11d952b738ff1c3a456a5324a5177ea8e90bc01dbefd4b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-079-enneagram-1r-h-t8-fc144-recommendation-paid-preview-teaser-v1.json",
+            "sha256": "148ae389eae18c11bae4a2a8bbcb97423cb4af99332f3f5c02f2151ead4cb588"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-080-enneagram-1r-h-t8-fc144-recommendation-partial-resonance-v1.json",
+            "sha256": "5d1b68177d018785e46b881438cbf395bf50471af6736fabe0910c19df150a85"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-081-enneagram-1r-h-t9-fc144-recommendation-after-pair-comparison-v1.json",
+            "sha256": "78e01c70531f72fbaf8aaa7992084aaa6a23b94d3c3bca24ef91d994a3ea4672"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-082-enneagram-1r-h-t9-fc144-recommendation-after-scene-localization-v1.json",
+            "sha256": "1fa083dbb1fb731544e4f69e01a94526c3eb45bf32bab645ae6010c1cbd8773a"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-083-enneagram-1r-h-t9-fc144-recommendation-clear-high-resonance-v1.json",
+            "sha256": "535b59aaec6f11dda3129adc78402cd352267407153dc7baf28d46ae0884667f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-084-enneagram-1r-h-t9-fc144-recommendation-close-call-top2-v1.json",
+            "sha256": "372f071c40e4672cbd8f06f01149a36b86bbdaf338419998f62e1380c7c5316d"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-085-enneagram-1r-h-t9-fc144-recommendation-diffuse-top3-v1.json",
+            "sha256": "f64db8114fd3a584d5ae32e8011bb6237124b91369c2e25869e8795bfd0d5c9f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-086-enneagram-1r-h-t9-fc144-recommendation-high-engagement-deep-reader-v1.json",
+            "sha256": "492dbbc52883046501ff9d260d8477ac7845e97cbc7ff9c46e048d7945d7508b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-087-enneagram-1r-h-t9-fc144-recommendation-low-quality-v1.json",
+            "sha256": "9be09ad060177ab3d5f03d50622c8f9ca0a0299f08ecefd18ca868c638cbedce"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-088-enneagram-1r-h-t9-fc144-recommendation-low-resonance-v1.json",
+            "sha256": "8098141504e0aca44a8df7acb1ec86f625be6ca4a74e465268a3b80f17bf98a7"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-089-enneagram-1r-h-t9-fc144-recommendation-paid-preview-teaser-v1.json",
+            "sha256": "9a391b9f213ab732c4f1be611639319c951ba83c14460e97a9611e92f357dcd0"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-fc144_recommendation-090-enneagram-1r-h-t9-fc144-recommendation-partial-resonance-v1.json",
+            "sha256": "7f02c742fc35ee3260d2c91b5e2fce5a83fad4ff7533056dc501f9842832cedf"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-001-enneagram-1r-c-t1-low-resonance-anti-labeling-resistance-v1.json",
+            "sha256": "47ea9082029f73aef5c618b95357f3a84d2a2cc25dceaeb0afb8094609cd96f9"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-002-enneagram-1r-c-t1-low-resonance-behavior-yes-motivation-no-v1.json",
+            "sha256": "7bed887daaa5f96817c44f7a715c2037b859a25c995dcc50f2fca4c1ba1e63b4"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-003-enneagram-1r-c-t1-low-resonance-complete-disagreement-v1.json",
+            "sha256": "574a2dfce13ad1fb44170aa74403ccfabfd3d2655db42b4dbb6fa2b230f1025a"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-004-enneagram-1r-c-t1-low-resonance-current-state-affected-answering-v1.json",
+            "sha256": "baa6fb5e472b2188f649efa88286b8b4973a4ca5d7f8ec31c7876928dd6a5f3c"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-005-enneagram-1r-c-t1-low-resonance-growth-only-resonance-v1.json",
+            "sha256": "f1987bcfe63f4faedb1cf62062b9240235d4d04a5ae9aa210b172181c703d8f6"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-006-enneagram-1r-c-t1-low-resonance-relationship-only-resonance-v1.json",
+            "sha256": "19d4cb5649be6ec277830d0a56ea833599545fa5a478f154f759a28e4eabd330"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-007-enneagram-1r-c-t1-low-resonance-stress-only-resonance-v1.json",
+            "sha256": "6e10ab6210b34e567a9b5e2be36944632c5ba53a60473f354f5485db44a5af8b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-008-enneagram-1r-c-t1-low-resonance-suspected-test-mismatch-v1.json",
+            "sha256": "357dfdc89d9f9a185aa1e23624db10ebaaf3c4be0134bad3379f7ce071b42a92"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-009-enneagram-1r-c-t1-low-resonance-top2-feels-closer-v1.json",
+            "sha256": "51cac3d5605fbef7d1212ea7c711a2d6b6a22c1125fca1ecb6c10f6187f272b1"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-010-enneagram-1r-c-t1-low-resonance-top3-none-fit-v1.json",
+            "sha256": "16ef9667e1113a0fb58e6e99a4b33ee7c9f264c5e480d7c7004b0535b3810686"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-011-enneagram-1r-c-t1-low-resonance-type-label-resistance-v1.json",
+            "sha256": "1bc35a161132f00aa7bc1be81a680da5dab60922ef308d5efe0050d634a37524"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-012-enneagram-1r-c-t1-low-resonance-work-only-resonance-v1.json",
+            "sha256": "3c4c465bfff154dc79d4e1ec731a925575d55ed75fad9575ca9ff0ec06de8fcd"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-013-enneagram-1r-c-t2-low-resonance-anti-labeling-resistance-v1.json",
+            "sha256": "7b6109c42211e316f7de7f624963ed4c3bcbdb4889d4e2fde9596ff906278971"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-014-enneagram-1r-c-t2-low-resonance-behavior-yes-motivation-no-v1.json",
+            "sha256": "e3934a46f01fa14fa378de91f2698fc799b972f8e7ced86d2249f05af460611e"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-015-enneagram-1r-c-t2-low-resonance-complete-disagreement-v1.json",
+            "sha256": "132d7a85ab7438a68b16509d497ec327f73e257a8672ec2a0d174f67fa472d6d"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-016-enneagram-1r-c-t2-low-resonance-current-state-affected-answering-v1.json",
+            "sha256": "971c4fe2c16d5c077ef07e63675060a31adb15194769c4ffb3f3021eafc52e26"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-017-enneagram-1r-c-t2-low-resonance-growth-only-resonance-v1.json",
+            "sha256": "af65497b341f1bea56198b55a868ed03314b8779d1bbd0f563647a0bfcac2313"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-018-enneagram-1r-c-t2-low-resonance-relationship-only-resonance-v1.json",
+            "sha256": "411d1083b03e13be668297a47ce2d4d098e4ff35a95cd755233a453fc7897fab"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-019-enneagram-1r-c-t2-low-resonance-stress-only-resonance-v1.json",
+            "sha256": "dd54f476b93d8f1999a1cc8137b7194c043549aec567eaf4a2245d95e1f732bd"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-020-enneagram-1r-c-t2-low-resonance-suspected-test-mismatch-v1.json",
+            "sha256": "2737caba8239434c4f55a34389ca63d3d31f8c180a4af20ff616bbba13120223"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-021-enneagram-1r-c-t2-low-resonance-top2-feels-closer-v1.json",
+            "sha256": "b8a50a0bf0c5b150db48c762290823d06ffc6f47fd9fe5fee47db324f092b342"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-022-enneagram-1r-c-t2-low-resonance-top3-none-fit-v1.json",
+            "sha256": "cc2c4c57d9a8329027ae0da62d93183f9301adfb72ebf3351abd17eb8048e719"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-023-enneagram-1r-c-t2-low-resonance-type-label-resistance-v1.json",
+            "sha256": "5c599efb69f0e02c36a679b78dd44bef0697449469fd8bc547670a12988f0119"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-024-enneagram-1r-c-t2-low-resonance-work-only-resonance-v1.json",
+            "sha256": "de5ebbfeb4fd2cc71a4b4af5da6111e0e53d34e05952e340d690682c0d51bc95"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-025-enneagram-1r-c-t3-low-resonance-anti-labeling-resistance-v1.json",
+            "sha256": "73d450d0a4a0ac846ffd95990060711362e286e88b30c4d2f6d53396b7a9afd3"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-026-enneagram-1r-c-t3-low-resonance-behavior-yes-motivation-no-v1.json",
+            "sha256": "5dc01799e8caff24c002d6afb3ad54dd41fdc0207000a6b98467e6df1114a713"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-027-enneagram-1r-c-t3-low-resonance-complete-disagreement-v1.json",
+            "sha256": "1682320b11f4b8c92bdfa34c332d5b12f112fc39e6161fea7eaec3fa963b020d"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-028-enneagram-1r-c-t3-low-resonance-current-state-affected-answering-v1.json",
+            "sha256": "0c8559d99395a981c5a1149134196f95ea132c276545d640b9536a530a0152eb"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-029-enneagram-1r-c-t3-low-resonance-growth-only-resonance-v1.json",
+            "sha256": "cc6bbb9dd9f63b8ed0ef4aa9ba100666cbe0e6378cca3dab8872512eff7a26b4"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-030-enneagram-1r-c-t3-low-resonance-relationship-only-resonance-v1.json",
+            "sha256": "27505283cc28c6b79fc2a471c38f35dc5ec1a1d715908611b0e3487331a2b954"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-031-enneagram-1r-c-t3-low-resonance-stress-only-resonance-v1.json",
+            "sha256": "991707cd1b2f2c6d07ecfd2d7c7312de8775a055feba1c4ac93db05424cc47eb"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-032-enneagram-1r-c-t3-low-resonance-suspected-test-mismatch-v1.json",
+            "sha256": "9cc1d9b2d6c92f95382ea5754e6797b72c00d9a8c6b973e65cd052569183a706"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-033-enneagram-1r-c-t3-low-resonance-top2-feels-closer-v1.json",
+            "sha256": "19f00dc78860c1f367a057cec23e2134ea3505d53ae8ccc9cd3cc6e05c7c8f03"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-034-enneagram-1r-c-t3-low-resonance-top3-none-fit-v1.json",
+            "sha256": "a99d6966f118f88da0b079cf59f55f96068bd01e2e76b6c6f25021c0b8462b80"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-035-enneagram-1r-c-t3-low-resonance-type-label-resistance-v1.json",
+            "sha256": "1d4c10b4c73a55f3990213baef36733d80c1f83977248ca9ea992d2770f8bb2f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-036-enneagram-1r-c-t3-low-resonance-work-only-resonance-v1.json",
+            "sha256": "674bf7972932c51413a8d37fa20b3cd4667724b78ad831387a54194a5b42252f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-037-enneagram-1r-c-t4-low-resonance-anti-labeling-resistance-v1.json",
+            "sha256": "7575534d6f6c7a2b79d4a03fa1c4d193f7c96f6a081d033f0cabd1c091c418ef"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-038-enneagram-1r-c-t4-low-resonance-behavior-yes-motivation-no-v1.json",
+            "sha256": "fa1fb5b15ae808a8cbdd572987731c9ef3c0859665b4f82832e70bb6fad537e5"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-039-enneagram-1r-c-t4-low-resonance-complete-disagreement-v1.json",
+            "sha256": "ad5f390b405754e35c61ebb3150a3452298ae046cd4ea77b32c0972667bcca5b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-040-enneagram-1r-c-t4-low-resonance-current-state-affected-answering-v1.json",
+            "sha256": "29ee1b855550813f1747c4a26bd24724705dcef03824dfade6f681a2706d80e2"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-041-enneagram-1r-c-t4-low-resonance-growth-only-resonance-v1.json",
+            "sha256": "2d93be208b67ea6eb4ad26d4e853a88fa1d507fc68156107a572c38a8477f16b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-042-enneagram-1r-c-t4-low-resonance-relationship-only-resonance-v1.json",
+            "sha256": "98af2d8ed00ef4e9ac935ace985420cbe75d67a8a95919fbbee79b6a428e9ea0"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-043-enneagram-1r-c-t4-low-resonance-stress-only-resonance-v1.json",
+            "sha256": "08a6c78449dc30f9b16a35d90ce9a16e1e86b194655c9ad5cf7260d6423f4082"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-044-enneagram-1r-c-t4-low-resonance-suspected-test-mismatch-v1.json",
+            "sha256": "6e2045a4db1fc07893fbabcc57cf21125427faa571e923e4e6923d53718ecd08"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-045-enneagram-1r-c-t4-low-resonance-top2-feels-closer-v1.json",
+            "sha256": "2917c4679a0724dd5fa20b7666ffa103744bc6a3d0e33958e06382392c770a5b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-046-enneagram-1r-c-t4-low-resonance-top3-none-fit-v1.json",
+            "sha256": "0e8e11f2f6df643934855c1bad9dc731faecfb4a8cafce4386b284965090195d"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-047-enneagram-1r-c-t4-low-resonance-type-label-resistance-v1.json",
+            "sha256": "a6929fb5b5462faf820fc9c4bcb06e4f23aa85b164300af4b09debcacad59749"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-048-enneagram-1r-c-t4-low-resonance-work-only-resonance-v1.json",
+            "sha256": "9608b76393f5640debc878b281c84132fb302372d8accb1e1373925b3e529c5e"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-049-enneagram-1r-c-t5-low-resonance-anti-labeling-resistance-v1.json",
+            "sha256": "6b50f9a6f06aed08f3a906da9b6e1ae0cac4073f40704a3b28b1a44520ad9026"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-050-enneagram-1r-c-t5-low-resonance-behavior-yes-motivation-no-v1.json",
+            "sha256": "53fbb008954de547a58ac0b81b79ad2b4f34150825289c63ea24f930b418332e"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-051-enneagram-1r-c-t5-low-resonance-complete-disagreement-v1.json",
+            "sha256": "1f3d4ae03c718aee7985c230f945e06d907f24e8818ba47c50180fb4d7e83c24"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-052-enneagram-1r-c-t5-low-resonance-current-state-affected-answering-v1.json",
+            "sha256": "2c89f4e00c6f634852c42a06fe9e0dfec7067ccc5bbaf62f2e674cfc40a255c8"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-053-enneagram-1r-c-t5-low-resonance-growth-only-resonance-v1.json",
+            "sha256": "1e0a248a63c1282905da12ae064ce44bd0058f5de556634bec510a241443f4cf"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-054-enneagram-1r-c-t5-low-resonance-relationship-only-resonance-v1.json",
+            "sha256": "f5b3fb42e6c7450609973cc625dbea83b1b0ddbee7a0fedc4d86027ad7af5d95"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-055-enneagram-1r-c-t5-low-resonance-stress-only-resonance-v1.json",
+            "sha256": "1d28d965af3eb060f614e1cf1b76eb25dcf2ee4ff6a457eca50daa6d87e97f1a"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-056-enneagram-1r-c-t5-low-resonance-suspected-test-mismatch-v1.json",
+            "sha256": "7f27faf682a2ef5d940762e2e53f05e1744e6ca49bb2bf12fd1399a1e3cb60e1"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-057-enneagram-1r-c-t5-low-resonance-top2-feels-closer-v1.json",
+            "sha256": "9c17b457108dc2e51956fe18a30eeebd0a1ec949db8a0f383f6042d5c39fc17d"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-058-enneagram-1r-c-t5-low-resonance-top3-none-fit-v1.json",
+            "sha256": "0835801a75ff598ae4ec1b3e7c9f832b3210783b5f140e2c033c2949d086d8c1"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-059-enneagram-1r-c-t5-low-resonance-type-label-resistance-v1.json",
+            "sha256": "c1e706fec8dc47ec75dad62c6ae0f46740d7ccb75696109a475f83d734d16927"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-060-enneagram-1r-c-t5-low-resonance-work-only-resonance-v1.json",
+            "sha256": "1517f42b1004bc768a3459e4aacc5ae31a2f3d741c9a94d7123c52349b0c29fb"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-061-enneagram-1r-c-t6-low-resonance-anti-labeling-resistance-v1.json",
+            "sha256": "a15a2c35da0f516b861583ccf2c78cffc703f85e3b6dcf735a054a16d489c58b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-062-enneagram-1r-c-t6-low-resonance-behavior-yes-motivation-no-v1.json",
+            "sha256": "0b0f43f60492bf76d5d5b5f4d08451eeb4f884262edde702cddcb0213e3764e4"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-063-enneagram-1r-c-t6-low-resonance-complete-disagreement-v1.json",
+            "sha256": "3d1dec72afd3e56b1a07b02b9d13cf69ea4880fe27e697c6ff1fef6befa40845"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-064-enneagram-1r-c-t6-low-resonance-current-state-affected-answering-v1.json",
+            "sha256": "b8aef42c77d3128980d74661f2e831b6b7145addf2cd625fc5e0c06abb4879bf"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-065-enneagram-1r-c-t6-low-resonance-growth-only-resonance-v1.json",
+            "sha256": "a526adb1e4ced11e4cf5783a7bb309a6dc274fb973d032dd838e6e383376db74"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-066-enneagram-1r-c-t6-low-resonance-relationship-only-resonance-v1.json",
+            "sha256": "8795653724c5d0e7f7223bbd219ce26d5fcbb9f5bbae91535347e8365c4b58a8"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-067-enneagram-1r-c-t6-low-resonance-stress-only-resonance-v1.json",
+            "sha256": "828692ca213561880d8b8ee079c55e94de1a29f44dfdaa36cd71a8f58dc4df9a"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-068-enneagram-1r-c-t6-low-resonance-suspected-test-mismatch-v1.json",
+            "sha256": "dd30a8b572138d7ae5155794548bf518f94731de4b1d14ca0e8527abb99c8db8"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-069-enneagram-1r-c-t6-low-resonance-top2-feels-closer-v1.json",
+            "sha256": "7020c9a6e9ab9ac3d6250652fe0e2e216eb3b4ac5ad4fd78841071ddad47efc0"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-070-enneagram-1r-c-t6-low-resonance-top3-none-fit-v1.json",
+            "sha256": "df0458ccc9bb3725da9bdb1e4e5fce5aac8af055914899b3bebe96524328d297"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-071-enneagram-1r-c-t6-low-resonance-type-label-resistance-v1.json",
+            "sha256": "0f2ada0358f3a32109996cbf48b8b3722fef7ad5549244ebc3883fb6f525f7de"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-072-enneagram-1r-c-t6-low-resonance-work-only-resonance-v1.json",
+            "sha256": "97e4161c8e3786eb73b3226b66749a9a392b68ab645e87d77b26d96faaa07aff"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-073-enneagram-1r-c-t7-low-resonance-anti-labeling-resistance-v1.json",
+            "sha256": "a4c57deec3e9edc574bac60263aaab4ea987d8797332b3561dc8407f993ed763"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-074-enneagram-1r-c-t7-low-resonance-behavior-yes-motivation-no-v1.json",
+            "sha256": "8529cad06851f88f3a661ad485bbac318ab86d6ff6eb34c8d8327a612d5ccf2c"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-075-enneagram-1r-c-t7-low-resonance-complete-disagreement-v1.json",
+            "sha256": "895ab00ec36ae39686cd93a5599b7944a6b55eafd9f3a71d3b8d7d5a661846ad"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-076-enneagram-1r-c-t7-low-resonance-current-state-affected-answering-v1.json",
+            "sha256": "b7208098a27c9745e35ec934ac0ed033444986f8c869e5696d4638298383c45e"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-077-enneagram-1r-c-t7-low-resonance-growth-only-resonance-v1.json",
+            "sha256": "cf5d99777d583d455738956a094f034cfbad0852dcca318eb6ad781b5f302178"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-078-enneagram-1r-c-t7-low-resonance-relationship-only-resonance-v1.json",
+            "sha256": "ce7325a80f2f457d2359d0237b0a4610f1631971c50867845b122dbbfc85aa69"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-079-enneagram-1r-c-t7-low-resonance-stress-only-resonance-v1.json",
+            "sha256": "382f138f96d62f6b13de102b61642fd7cbf794f32a55a649f7dec7c4f3cf758c"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-080-enneagram-1r-c-t7-low-resonance-suspected-test-mismatch-v1.json",
+            "sha256": "9a04e3000deae0d9b5d8c7230aa954eba2bf630492b9d228fdf8107e60dca8c0"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-081-enneagram-1r-c-t7-low-resonance-top2-feels-closer-v1.json",
+            "sha256": "2a06da6c6f7a9bb7a125bbb72dbcb5d3855fc23a522122adb44866d23fb7a33c"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-082-enneagram-1r-c-t7-low-resonance-top3-none-fit-v1.json",
+            "sha256": "d9e287001ae460245fc021decff2ed546b0f94744da674a6e56aa5b7ddcf784c"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-083-enneagram-1r-c-t7-low-resonance-type-label-resistance-v1.json",
+            "sha256": "50b3437639a19a52ce319788ab2d1c8a65702dd505a58fabc6b9dba3f9aaa973"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-084-enneagram-1r-c-t7-low-resonance-work-only-resonance-v1.json",
+            "sha256": "3c61c94fb1ba8e4371120e3f76207397184ee524be205233f47d6f81d0346370"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-085-enneagram-1r-c-t8-low-resonance-anti-labeling-resistance-v1.json",
+            "sha256": "887cc28b34ea524f23c60a09d34fe92bb6d4e6f32513cc9e159e62d34d271449"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-086-enneagram-1r-c-t8-low-resonance-behavior-yes-motivation-no-v1.json",
+            "sha256": "23d8ec408392ae478f43cc56444ba49d97c87d7b17e15ad6a54abd5fc789c91f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-087-enneagram-1r-c-t8-low-resonance-complete-disagreement-v1.json",
+            "sha256": "e780f21e466e020926293fa606089105641f1a1642e33d5e1e82f5e7e26c821e"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-088-enneagram-1r-c-t8-low-resonance-current-state-affected-answering-v1.json",
+            "sha256": "0a95295a1a147188bbec0c1d1d7401e2e4a08a11fce357dfd00dda926a598255"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-089-enneagram-1r-c-t8-low-resonance-growth-only-resonance-v1.json",
+            "sha256": "7e5613fe924521e08409f150fe5d8859eb2fb687b942a13ccfc217aae6258734"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-090-enneagram-1r-c-t8-low-resonance-relationship-only-resonance-v1.json",
+            "sha256": "436a059f54b1d3a7b9186e2469eb4be4daa7396f03766a3287a372712021ee42"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-091-enneagram-1r-c-t8-low-resonance-stress-only-resonance-v1.json",
+            "sha256": "14b8f792ebb10c61505e8e5862fecea4ecf4519080ddd5b4a9def32ceb511ede"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-092-enneagram-1r-c-t8-low-resonance-suspected-test-mismatch-v1.json",
+            "sha256": "fb7f0de013300082301790ff32a4da956b873835bf7a95fa79ef26f4de33fdc3"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-093-enneagram-1r-c-t8-low-resonance-top2-feels-closer-v1.json",
+            "sha256": "d180ba14a85caae4f0bdb2674c5e1ca5f8e3f28c86556ae0756611cee62800c4"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-094-enneagram-1r-c-t8-low-resonance-top3-none-fit-v1.json",
+            "sha256": "c4ee0fad5c2594f2140ca0b3399e39ba31093a0dbe0d7e6b56524f4e7740e9ce"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-095-enneagram-1r-c-t8-low-resonance-type-label-resistance-v1.json",
+            "sha256": "989dbc6f38ee87ad8e612fa842c0c5834a3cc69f25ee3091539ad441733ccaf6"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-096-enneagram-1r-c-t8-low-resonance-work-only-resonance-v1.json",
+            "sha256": "b1c3c3de70ed2914182d34d039845bbbdcadb0ac4d5b6544393e70d77abd7349"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-097-enneagram-1r-c-t9-low-resonance-anti-labeling-resistance-v1.json",
+            "sha256": "6b11981f9e0f96d51f4fb3cc25d176318ad1abaf7b8a154bce3f6adc1779f3ca"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-098-enneagram-1r-c-t9-low-resonance-behavior-yes-motivation-no-v1.json",
+            "sha256": "3e3de45995606712c5c85e7bbea49ec7fde121ad84c7e2bf59a27910b61382a4"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-099-enneagram-1r-c-t9-low-resonance-complete-disagreement-v1.json",
+            "sha256": "517ffb2038b5e9c95fe94580f4c837342158255551913e563c2c9be73cb978df"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-100-enneagram-1r-c-t9-low-resonance-current-state-affected-answering-v1.json",
+            "sha256": "ddae6fad5b7056fd2ec6b1cdb797b3dad1c275972a124ba5b6aa080f4970c7b6"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-101-enneagram-1r-c-t9-low-resonance-growth-only-resonance-v1.json",
+            "sha256": "17dbbeabbf7de90afdb623ad026e5a23531aad0a79f6b9739622c9385626bfe6"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-102-enneagram-1r-c-t9-low-resonance-relationship-only-resonance-v1.json",
+            "sha256": "334e64efabce8467b493822f515543ae49ca7bb06b08beae1aee01bd917a326c"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-103-enneagram-1r-c-t9-low-resonance-stress-only-resonance-v1.json",
+            "sha256": "d5c332bb63df6a4ed7a738685aa04bbe334b30a48fcd59358cf2339fad98af7a"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-104-enneagram-1r-c-t9-low-resonance-suspected-test-mismatch-v1.json",
+            "sha256": "c585dca9dcb7beeef3aa90d321aa2c1d1512dc33c3b983a03d74c4380f14ee02"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-105-enneagram-1r-c-t9-low-resonance-top2-feels-closer-v1.json",
+            "sha256": "849b6756adef054bc2aa5a585fc1bf0c544651fd4211a953c301ee7fa1e78e7a"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-106-enneagram-1r-c-t9-low-resonance-top3-none-fit-v1.json",
+            "sha256": "43c03df438989ca23275410da314574f74ddd13a5cb31c7cb4da0430f45bfb97"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-107-enneagram-1r-c-t9-low-resonance-type-label-resistance-v1.json",
+            "sha256": "21707a8c1254b48f77d04d6ba1f955af25f2e7ffe6c618b606219c5330298b24"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-low_resonance-108-enneagram-1r-c-t9-low-resonance-work-only-resonance-v1.json",
+            "sha256": "c7fe9fded44f8b6d13d8e73690f39a2592b8a8b6a88db92a387d00e08d52fb72"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-001-enneagram-1r-d-t1-blindspot-only-v1.json",
+            "sha256": "14b8cfa413b17a68f18c4f07d95f25e8c211eb1307e62a0e603d5026e2cdcd4e"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-002-enneagram-1r-d-t1-context-specific-v1.json",
+            "sha256": "39a562fc2753676729f46ddcab45a63ab5baf94dfcb678dcb05919ee452cbaf8"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-003-enneagram-1r-d-t1-fear-only-v1.json",
+            "sha256": "913142d9575e0accd9ba26d86058eb71a72c5ef344663f88be65d7d50b7e4eb7"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-004-enneagram-1r-d-t1-growth-only-v1.json",
+            "sha256": "38925382ef7384141014e6a9720207f46f528f4b128a7bc78e2bc7adaf07c8a3"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-005-enneagram-1r-d-t1-motivation-only-v1.json",
+            "sha256": "240cc52c383f4ae33cb779c91325995dd510d527b4c69e4769288cded4f12039"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-006-enneagram-1r-d-t1-relationship-only-v1.json",
+            "sha256": "f7f0ce47366d42b7fbfd6727980b7a188cafe1664077de9e0a46cd0ebf2f0233"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-007-enneagram-1r-d-t1-strength-only-v1.json",
+            "sha256": "7756238010b006dacab6055375a8a33ff6f3edd8a79ceedd29205066c490bca7"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-008-enneagram-1r-d-t1-stress-only-v1.json",
+            "sha256": "6cceccdb7881043c32822ab37629526f7b87e7e938f52e9b601c888cb6dc11d8"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-009-enneagram-1r-d-t1-top2-only-v1.json",
+            "sha256": "550c1876887296ca2be674c3de6fff17c961a2c0c61c0c34a92c16dfb247b067"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-010-enneagram-1r-d-t1-work-only-v1.json",
+            "sha256": "381a4d27eddd066488e8a8f65b6bed1c0de33cba87719107e82781f62e618774"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-011-enneagram-1r-d-t2-blindspot-only-v1.json",
+            "sha256": "da4566eef43ffa2fad0a3f7dce5754c8f62c88663e28482b50a9792b217eeacf"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-012-enneagram-1r-d-t2-context-specific-v1.json",
+            "sha256": "a8b6b2d09a621609f33436e6eb83b0ae6905343135c37ddd70b31ae4a7b643c8"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-013-enneagram-1r-d-t2-fear-only-v1.json",
+            "sha256": "76dfe0a2ae48db63b2916acb9e0ee97895b8f2a8875658b70fefbd4b4fa0cded"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-014-enneagram-1r-d-t2-growth-only-v1.json",
+            "sha256": "730931a6665819a9a951d79bae3400d85f912fa6ef5d6cfb05b53cb35b2363ae"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-015-enneagram-1r-d-t2-motivation-only-v1.json",
+            "sha256": "4fbc30aeeb5cf53c49b2785c172eb6c04538adb6dea76fe326a26e5e45efacdc"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-016-enneagram-1r-d-t2-relationship-only-v1.json",
+            "sha256": "b0cd723fe8102ac993c2157ef58e378be585a8a9022abdd5694bb188c9400e82"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-017-enneagram-1r-d-t2-strength-only-v1.json",
+            "sha256": "a2878399e337406fb2d08f9a5a4e0957d1af909dcfb2585ce44f9126592ad9e6"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-018-enneagram-1r-d-t2-stress-only-v1.json",
+            "sha256": "138882ef4fae38b428aaa7cf61b18c4702d0bb8cfc5046307f139c263c7d0774"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-019-enneagram-1r-d-t2-top2-only-v1.json",
+            "sha256": "c046c37bff603d2a55847bbf486a119011f56b366142797847d3d31cf9b19898"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-020-enneagram-1r-d-t2-work-only-v1.json",
+            "sha256": "3918c96f1cdfa71754d276dfe0a3c4358667f81c29be06e08bed8225db00cea1"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-021-enneagram-1r-d-t3-blindspot-only-v1.json",
+            "sha256": "8a20e5fcdec5f73782597637aebcd42212d494b26ef4d4f1155bca39b69a7333"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-022-enneagram-1r-d-t3-context-specific-v1.json",
+            "sha256": "76699c6b1b9aa5598735f234ca8c2a6965e27d12477877709f22dec9b7b2d31d"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-023-enneagram-1r-d-t3-fear-only-v1.json",
+            "sha256": "a4e07d8d5a48c9f0a7b33efd57e3db343e09adc007b6e28cb8f8a062d72bedd0"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-024-enneagram-1r-d-t3-growth-only-v1.json",
+            "sha256": "f170160565c38a907c86fed937190b7ce070e8e4ac81e981eb24955ce939b409"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-025-enneagram-1r-d-t3-motivation-only-v1.json",
+            "sha256": "2ca54603c0ce1eb88e70fce59aa72c4faa00990024f6d3911bd8326074b63dc0"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-026-enneagram-1r-d-t3-relationship-only-v1.json",
+            "sha256": "8ee062765cb486de3c7278e8eb8c1e008f11386373a7979e2e11a3d16cb5605e"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-027-enneagram-1r-d-t3-strength-only-v1.json",
+            "sha256": "766b07e8da3257529fa975a30946d86e9bd95404f97bb6f7d05d29bebc0d9e92"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-028-enneagram-1r-d-t3-stress-only-v1.json",
+            "sha256": "a6f093973a1d4dd8525286fd276e58fa7c9ce5b8fa7a9ab7faa77aed0331c6fd"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-029-enneagram-1r-d-t3-top2-only-v1.json",
+            "sha256": "d6cc96008eb9cabb0e9db394c55c468837783be70804fa683a950d728c619618"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-030-enneagram-1r-d-t3-work-only-v1.json",
+            "sha256": "a163fb97649f981238d947b74f19cd9be3712b3f775e592a50956afcc1d047ba"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-031-enneagram-1r-d-t4-blindspot-only-v1.json",
+            "sha256": "51caaa8263f2921083ac83fca2964e9efa37bbeba54f913a3a63c1b8e98a8886"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-032-enneagram-1r-d-t4-context-specific-v1.json",
+            "sha256": "99faf1ed93d8076b44870133cde3f57c7045a7a4c4c4128b0146862f150401f7"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-033-enneagram-1r-d-t4-fear-only-v1.json",
+            "sha256": "e780d71de8137159496aada19dcacf1170a2ff1693ed8574382c632f30b3f625"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-034-enneagram-1r-d-t4-growth-only-v1.json",
+            "sha256": "4eb5a07bdeac10600d7a478f6bfc4478b44ac1e7b13ee9442e2fdd6febf4f788"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-035-enneagram-1r-d-t4-motivation-only-v1.json",
+            "sha256": "e80c39a793cd12319bb2699ad1535226fc650a2085bc4946c45de23b6655f074"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-036-enneagram-1r-d-t4-relationship-only-v1.json",
+            "sha256": "3048f71cbd0547649145cdf6c19e9e3de67e9c9b506883da93eaed6b11ddf520"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-037-enneagram-1r-d-t4-strength-only-v1.json",
+            "sha256": "3b247cd47e3d8c94006120fa6d67642885ba0e5c7545c4e39d8674d09996e91d"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-038-enneagram-1r-d-t4-stress-only-v1.json",
+            "sha256": "6274a084f45cab4f0f5835cab752a284fe5828309850ea25e9ed1696d7f6ab0f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-039-enneagram-1r-d-t4-top2-only-v1.json",
+            "sha256": "35171d4bd723361a33aa124b1eacb466ba8255ef438cb198a4070fd1b3590975"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-040-enneagram-1r-d-t4-work-only-v1.json",
+            "sha256": "1a7ca952af4ecbc8384d8bf040cf38c3b1a0aeb04fb14b9df7ad99273fd4952d"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-041-enneagram-1r-d-t5-blindspot-only-v1.json",
+            "sha256": "8500a61227ab916342ea757ce1dfd76cc25a64106a8244256b2956b35b93717e"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-042-enneagram-1r-d-t5-context-specific-v1.json",
+            "sha256": "29fd34f76e02f92b9907a978c0a929c7e5d6724402f425510190fc36aa4f77d7"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-043-enneagram-1r-d-t5-fear-only-v1.json",
+            "sha256": "954708205aabb23edd3db311bb21c73d42913f29d6c5787fd2ad655ae50197a8"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-044-enneagram-1r-d-t5-growth-only-v1.json",
+            "sha256": "988c7bfed2ce7b2309af1ff80cbf0fc84ab71159897062d08fc9783a8196df5b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-045-enneagram-1r-d-t5-motivation-only-v1.json",
+            "sha256": "05214bb379676f539cba007ffec10081da54086ad59e81c4d63f152849873e24"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-046-enneagram-1r-d-t5-relationship-only-v1.json",
+            "sha256": "9db31cc7f18e2e284ab038457a2c62ca12d15829120b8214796891850f53d73a"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-047-enneagram-1r-d-t5-strength-only-v1.json",
+            "sha256": "adee6c9b6b543cd7fa15c930a1b7bf4f675a082d7e5d4f4ba1ba675d86b61b09"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-048-enneagram-1r-d-t5-stress-only-v1.json",
+            "sha256": "8800e7e6da46f06b81161111935fedabac789e5265051d34cea156d45f39cdef"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-049-enneagram-1r-d-t5-top2-only-v1.json",
+            "sha256": "be9df256bf944bbaeb218e8b452b6f55c44d8ca807ada0d0958eb31cf7ee118b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-050-enneagram-1r-d-t5-work-only-v1.json",
+            "sha256": "5e3d8c64cc393fcaae667dc1944c46d9ca7397dfae6c6bbe643dd6bd47d2dc3a"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-051-enneagram-1r-d-t6-blindspot-only-v1.json",
+            "sha256": "10b2699fc5d65f8276e8a4cc08d5bac157dd651cb39f49f3e54445e4f08f8368"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-052-enneagram-1r-d-t6-context-specific-v1.json",
+            "sha256": "628744fd011d43aafd8a5425f80ba8f0201138db52632ed358321c8e0c77494b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-053-enneagram-1r-d-t6-fear-only-v1.json",
+            "sha256": "6ebc62308904951f610bed96ba68702336af8a4a3e233d075162179d84396a9e"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-054-enneagram-1r-d-t6-growth-only-v1.json",
+            "sha256": "5001728a81fcc4adba21105172096c995d14ad79fe7ebb0baab10b57e2e395a6"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-055-enneagram-1r-d-t6-motivation-only-v1.json",
+            "sha256": "00859adbf4cf6d8db43e1ad864ca9fd1410272e42c165859ccf8e2b29f24dff4"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-056-enneagram-1r-d-t6-relationship-only-v1.json",
+            "sha256": "db3b80045c9d478a3735717da8aff37ace37ed3b6e7311230771f280736245e4"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-057-enneagram-1r-d-t6-strength-only-v1.json",
+            "sha256": "4172f94d686ca3a4e307b465a8d8954811c5d302de1ecc2bcf88a01bea3f47bf"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-058-enneagram-1r-d-t6-stress-only-v1.json",
+            "sha256": "80ef6aa3117c2ef44c13ff6c252d0cd95d337c482d33d07adc420983b4b9e688"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-059-enneagram-1r-d-t6-top2-only-v1.json",
+            "sha256": "f570b310ae83c2962ea8f6638f34bdca3b1db43a57a30a44e19d8d2e81e975a4"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-060-enneagram-1r-d-t6-work-only-v1.json",
+            "sha256": "6a6cda29c233e01e02675c8152e918ec43e295f6eea9d803d2812537b64d55c8"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-061-enneagram-1r-d-t7-blindspot-only-v1.json",
+            "sha256": "dfa9ffb0283ab6f98ec7bcea12f59eaed538a8b147eb305a30a9ffa8d94720f6"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-062-enneagram-1r-d-t7-context-specific-v1.json",
+            "sha256": "be65b0a439fe39ff9cc61af5214efa7319e5cba48370ee57c6db5cf9552ec6b5"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-063-enneagram-1r-d-t7-fear-only-v1.json",
+            "sha256": "76bf40b61dc0acbcbae01059e67858636d7e37e981752fbdfea20c3c2ab3dc5a"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-064-enneagram-1r-d-t7-growth-only-v1.json",
+            "sha256": "9676c60bd97d414bfd679e253c9f4ca5771a5dc145d233afccf1b5f424b922fe"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-065-enneagram-1r-d-t7-motivation-only-v1.json",
+            "sha256": "70c5d217dfc91b6e7e55fb3fe1c2383d2b40160364f011bb8c19c4275473812a"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-066-enneagram-1r-d-t7-relationship-only-v1.json",
+            "sha256": "b4e97d5f3fdf065f98d84b11b7e82548b29c7531c8acf58d7f51166db0439d4c"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-067-enneagram-1r-d-t7-strength-only-v1.json",
+            "sha256": "3a66559d0e045ca540581baca146274068a7b5d140fe4f3af15ab46a5d9cd494"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-068-enneagram-1r-d-t7-stress-only-v1.json",
+            "sha256": "1d30923dc503339840c39b7d0fabafe83e96c69358db01bb190127a98c0f185b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-069-enneagram-1r-d-t7-top2-only-v1.json",
+            "sha256": "ac032560ac32fb9d4972d087a4da75fdc2aca7c2e1e25e58c9310080f53dde12"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-070-enneagram-1r-d-t7-work-only-v1.json",
+            "sha256": "b7b238fbb29189a18e761e119f9f391b94ce0eccb28df854370601d3b42b7ea6"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-071-enneagram-1r-d-t8-blindspot-only-v1.json",
+            "sha256": "d7fd5de1ac88b0de6dffa8088b23fdbbfd186cb45309d1bc2159f10f3580af05"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-072-enneagram-1r-d-t8-context-specific-v1.json",
+            "sha256": "2b6cf892b60723acba03b5c24e64b995e62ae8f1f0163694743455b6a97cabe6"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-073-enneagram-1r-d-t8-fear-only-v1.json",
+            "sha256": "b1f97d23a244798635590030a1cca19f1c98f144b6f5a2f2b1e3a610b90a2e7c"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-074-enneagram-1r-d-t8-growth-only-v1.json",
+            "sha256": "629d71a0d211da3fa1285ffc1933561d18be2cb3c1e4d5112da2446de6155399"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-075-enneagram-1r-d-t8-motivation-only-v1.json",
+            "sha256": "c3bf5c4f0af193362ec86cb578241ebc919ed8cda046eddf0dea5ea9bc552b73"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-076-enneagram-1r-d-t8-relationship-only-v1.json",
+            "sha256": "ac22a422a21f7d94ec13608bff6b577031dae4f66a54c5c235b29227761ea4b4"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-077-enneagram-1r-d-t8-strength-only-v1.json",
+            "sha256": "5f281f2df6c79e00bcde1175ff50edf556141296873a5bf54f55f3f2cf6ebdc6"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-078-enneagram-1r-d-t8-stress-only-v1.json",
+            "sha256": "d5708b0209e91695a7a8dcc5da62a4a980f1929c3d2ccf929a6458fa7ef6bbba"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-079-enneagram-1r-d-t8-top2-only-v1.json",
+            "sha256": "998c3d68817d4a81ee453b7cfa340ffc42ac0a87c868ff77184f6d153d9922ba"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-080-enneagram-1r-d-t8-work-only-v1.json",
+            "sha256": "254acf1c0c35a4490d998a0384598ba2d516e6afb831450b12d87ebe7325bd32"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-081-enneagram-1r-d-t9-blindspot-only-v1.json",
+            "sha256": "97c1128f0b07ae0012e27e79b40ef37fa96ce3089e7108c4c5465200d104a5e4"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-082-enneagram-1r-d-t9-context-specific-v1.json",
+            "sha256": "f57df7dab534260858317e3c10570619fc4a8e89fbd851bee92900083e022ec3"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-083-enneagram-1r-d-t9-fear-only-v1.json",
+            "sha256": "5e5eb0b8dffca124fb4bc1c9245ed981789389ae823239c681508ab4d4444690"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-084-enneagram-1r-d-t9-growth-only-v1.json",
+            "sha256": "28ebcfe21dbc1fae7fde43a01f28d8d04f4c3fb806027f8e6d4cd54e6e373b2b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-085-enneagram-1r-d-t9-motivation-only-v1.json",
+            "sha256": "87f8fc9dc88afa0ee7623635b7ce68d1424f33a9e7f6936414081ed97edeb989"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-086-enneagram-1r-d-t9-relationship-only-v1.json",
+            "sha256": "12b93c2ecfc1b701737e4815c2f940c0ac2168fdb41b328e798637bae56c2681"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-087-enneagram-1r-d-t9-strength-only-v1.json",
+            "sha256": "168430793fe6b7b492b18933765f5fd75f77a0662c1a81e896d6406ec9f289cd"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-088-enneagram-1r-d-t9-stress-only-v1.json",
+            "sha256": "b8ef501bfc70d83e765485d008685cef624939d3b7c738ad322ca3604bd4628b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-089-enneagram-1r-d-t9-top2-only-v1.json",
+            "sha256": "ddc0e04d5efb9cfbfddb0cf2e40a0d374a7275b71475884cb36827da3b3c31d8"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-partial_resonance-090-enneagram-1r-d-t9-work-only-v1.json",
+            "sha256": "2c589331ebe0fb3839a8445e3933ad3c2d9d5973de51005038360f80706b48c3"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-001-enneagram-1r-g-t1-early-career-cross-team-v1.json",
+            "sha256": "b637a158801026fe5f347ab705be6e7537deecf8b23f7ee29d2c94a80de1414b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-002-enneagram-1r-g-t1-early-career-internship-v1.json",
+            "sha256": "853d481be0602c49cc89e9aa12f588b877ab1d13e5147afc0512cd627da13677"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-003-enneagram-1r-g-t1-early-career-kpi-feedback-v1.json",
+            "sha256": "86b9c908de998f266508cccf194ae6ac3e80abd10a892d3e27f8ba2b43d7fd58"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-004-enneagram-1r-g-t1-early-career-probation-v1.json",
+            "sha256": "db0657f4cb8620399ee6a74cd01c75009fbdd78f996ead68171e3d956f6ff004"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-005-enneagram-1r-g-t1-early-career-reporting-v1.json",
+            "sha256": "9c67d73bac5b2e7aa89e4074cb5baa30ede7034a270eb9b707e76207cd93ca7d"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-006-enneagram-1r-g-t1-relationship-cold-war-v1.json",
+            "sha256": "d0305dd7db515ef83951b9a80c0578be1bcd396701a188f804616ee1707f2023"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-007-enneagram-1r-g-t1-relationship-conflict-repair-v1.json",
+            "sha256": "2aa29474215d0fa73f8e6f9771b6ea4bd731e767a16410d32422bdb3267b8f25"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-008-enneagram-1r-g-t1-relationship-family-expectation-v1.json",
+            "sha256": "1b9701b651850213ed667ca6905f024b5f07afc8387ad89a5a3f7f4a11d1634b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-009-enneagram-1r-g-t1-relationship-intimacy-v1.json",
+            "sha256": "45cc1b2a9c8032986aa5d9cbb7ce76650c438a136d2e7e173d4a4012528566ed"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-010-enneagram-1r-g-t1-relationship-no-reply-v1.json",
+            "sha256": "3266c531b71200a69ef8c85ede3a7b7d1bdf4f697d7fab0c800b55d0dc80d066"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-011-enneagram-1r-g-t1-student-club-collaboration-v1.json",
+            "sha256": "f33a2ace89791463498ed7e1e6fae2b6de75c061300bf8e8d5bfb1a7cd0ae534"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-012-enneagram-1r-g-t1-student-dorm-relationship-v1.json",
+            "sha256": "f90a60e9719038af144051f97d660f27c7bc7e5127f0a272cc99299c996bdc60"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-013-enneagram-1r-g-t1-student-exam-pressure-v1.json",
+            "sha256": "b23757eed454b228ad4e6c835583a8763691e5edcb74094e5a9b0c3d86f9f808"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-014-enneagram-1r-g-t1-student-group-project-v1.json",
+            "sha256": "02e553ce3ff97eed62ffc73fb5205176eec24574a6044a5753b0341438c86756"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-015-enneagram-1r-g-t1-student-job-search-v1.json",
+            "sha256": "ccfcb98d1e8c8bab054f35278a88243f73d084efc7f2a5817c3f58ad3e2ab1fc"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-016-enneagram-1r-g-t1-student-thesis-paper-v1.json",
+            "sha256": "a5b299f1f5d50a0245594c24eba6698db8a78d45108f23e0dc3a26d33a64212f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-017-enneagram-1r-g-t1-work-colleague-blame-shift-v1.json",
+            "sha256": "7dd7ac5fa00e3d3f4eeea427b7ba646a74e8d189db76949d7282a64ca2d51782"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-018-enneagram-1r-g-t1-work-leader-changes-requirements-v1.json",
+            "sha256": "9a6631a3d6cb08fddfd03d130e826532dfb62eec4784356497ecf71761d47696"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-019-enneagram-1r-g-t2-early-career-cross-team-v1.json",
+            "sha256": "1b79e5862d603a1991624d70e94c4096730ca21e73f03547d17806589df550e2"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-020-enneagram-1r-g-t2-early-career-internship-v1.json",
+            "sha256": "9dc960ca8467a4667ff04972679536b2c617aaee63ec88d16b9e769267633cd9"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-021-enneagram-1r-g-t2-early-career-kpi-feedback-v1.json",
+            "sha256": "a83dd0fe750d78d75fece256fbe38bcb1844128efe7dec346563b463f3de4ff8"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-022-enneagram-1r-g-t2-early-career-probation-v1.json",
+            "sha256": "84446dfc6fdbb359bb7a6b48a91caa13b327a42723ab7d75b1503afb981f8fb0"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-023-enneagram-1r-g-t2-early-career-reporting-v1.json",
+            "sha256": "8b7845025c68ad44fa18aa8037b61c509156d70bfe33f80fcf958d46dd5cef2f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-024-enneagram-1r-g-t2-relationship-cold-war-v1.json",
+            "sha256": "fa4db7c963d7b7c32802d9c4281c40dfffc6267b25040c4e2c75cbcecbdf8835"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-025-enneagram-1r-g-t2-relationship-conflict-repair-v1.json",
+            "sha256": "758c026f5b1188213dc93cb5886f863242d680b14537995cf61fe3b167c68121"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-026-enneagram-1r-g-t2-relationship-family-expectation-v1.json",
+            "sha256": "b4b2dc67d60cfc8a62d7fd28aacab3756022c88fb943687dd352ababbf030f87"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-027-enneagram-1r-g-t2-relationship-intimacy-v1.json",
+            "sha256": "1aa0f886ed340dd3a69a57bf0b01890b945d6eb955eee1dd7eac0d2cb12753a4"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-028-enneagram-1r-g-t2-relationship-no-reply-v1.json",
+            "sha256": "4fbfe02b6f2f7cb892a634986d25ecc3c46daa9ebd49a81851fdef374b639ac5"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-029-enneagram-1r-g-t2-student-club-collaboration-v1.json",
+            "sha256": "b483ee41d478ff8b628131268db29f298f54a74720bb85dee040807799216bf3"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-030-enneagram-1r-g-t2-student-dorm-relationship-v1.json",
+            "sha256": "7d8cfa5ffe4e2e1bb1f3f822a7ac0dfcdd01cdb8c5caff41cd9b3ad1903de37c"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-031-enneagram-1r-g-t2-student-exam-pressure-v1.json",
+            "sha256": "7d26a3bb15ac181c42ac8eec1b6093a32b27dd67b69e8b965fc51592a0442559"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-032-enneagram-1r-g-t2-student-group-project-v1.json",
+            "sha256": "d5f80cbae20df18bd091d18921c8931fb5a36fccd9711ed3708d59af88ea2102"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-033-enneagram-1r-g-t2-student-job-search-v1.json",
+            "sha256": "6fa18e0c3e09be9a41d31c4c2e32b6b23b6c791189fc2f4f0170b71371de4aa7"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-034-enneagram-1r-g-t2-student-thesis-paper-v1.json",
+            "sha256": "ca482c8d3769b7329f79909a559893f4b7e8d55fd227b9a42187d5b58e7e3462"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-035-enneagram-1r-g-t2-work-colleague-blame-shift-v1.json",
+            "sha256": "eae08cc7b9325ff03df7279cc432e63db789e22bc513296ad8422926a0808d22"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-036-enneagram-1r-g-t2-work-leader-changes-requirements-v1.json",
+            "sha256": "764deb7581304826e89962c6c0e3251e0d96f4226dafd99742657781a1751bb7"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-037-enneagram-1r-g-t3-early-career-cross-team-v1.json",
+            "sha256": "45b63a742c9734d5cbeb9d05ed96a474c1c156c5115edfc198223558dadaa1f5"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-038-enneagram-1r-g-t3-early-career-internship-v1.json",
+            "sha256": "56336c2b52e80640eeae6b19f87e7142425b72200716cf806d141c42fc5a90c0"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-039-enneagram-1r-g-t3-early-career-kpi-feedback-v1.json",
+            "sha256": "aecad1856f5da195860eb278c97f20cf1abbdd7d82f18ff4a62a8d543c77ab29"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-040-enneagram-1r-g-t3-early-career-probation-v1.json",
+            "sha256": "a6e1e441ff1b848ecb527d0e44b26fa7ed03796f49176b0a35b8d4060616b083"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-041-enneagram-1r-g-t3-early-career-reporting-v1.json",
+            "sha256": "037aae66c6b27e56828b76e0f482af0811f17461681048501dbbb88b85731aae"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-042-enneagram-1r-g-t3-relationship-cold-war-v1.json",
+            "sha256": "19d6731237c6f716e0b7a0561c778c87528d9f3aad8325ea13dc8320e3ce7f6d"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-043-enneagram-1r-g-t3-relationship-conflict-repair-v1.json",
+            "sha256": "6ed4f9d411af6664210f8cef8c4ac330a5ec59aa882a9af7762295cd52d87fb7"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-044-enneagram-1r-g-t3-relationship-family-expectation-v1.json",
+            "sha256": "8bf5a0b487e35971fe5f4faf0d4ce3debc96a416265625baa799579ea4cc76b3"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-045-enneagram-1r-g-t3-relationship-intimacy-v1.json",
+            "sha256": "5238bb3d8796d7bd5ce3dd23b54095450183f997d855dac4e39dc95e0810c48b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-046-enneagram-1r-g-t3-relationship-no-reply-v1.json",
+            "sha256": "08b88403b60911e6344811b74d210df3025326999009a098c742fd800f381e33"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-047-enneagram-1r-g-t3-student-club-collaboration-v1.json",
+            "sha256": "768b4148bf579b9d5685a4acd1f35fe81b1736cfe06a445291f9c8834c429ad2"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-048-enneagram-1r-g-t3-student-dorm-relationship-v1.json",
+            "sha256": "97d3e5fde58bbfcbddc14930aa03d98b416d92a5f64442a4c4f77ed1bb4a8e90"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-049-enneagram-1r-g-t3-student-exam-pressure-v1.json",
+            "sha256": "2c864a783a33aa9ff622ec5b7cd5b20aeafedeb859db7ed1b3d9dc81fc20c865"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-050-enneagram-1r-g-t3-student-group-project-v1.json",
+            "sha256": "7ec282234080c7b11621450dc1b659e6d9f8954f5e603088789432bf7f669da5"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-051-enneagram-1r-g-t3-student-job-search-v1.json",
+            "sha256": "cbb5de910e772e2f884e5838876805a6e5422eab2e8a301f8dd48833a9025b94"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-052-enneagram-1r-g-t3-student-thesis-paper-v1.json",
+            "sha256": "1b7e891e47b80eefcee936bb020464fc632ff6d5b90ac8222710be32c2e4922f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-053-enneagram-1r-g-t3-work-colleague-blame-shift-v1.json",
+            "sha256": "f0df7f05783e818b9768405fa25e73b7f677b405a883f8529988f7173eafad84"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-054-enneagram-1r-g-t3-work-leader-changes-requirements-v1.json",
+            "sha256": "a7232d439752aaa1c12da7a48692fbe82b061fd80d15fb163d8843e3c6dd971b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-055-enneagram-1r-g-t4-early-career-cross-team-v1.json",
+            "sha256": "79d94eb0863250bd275b24841a908fce97a80eac2e4e1d23802d6f0581a67b51"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-056-enneagram-1r-g-t4-early-career-internship-v1.json",
+            "sha256": "55519b4b86e2983702056872eb51fb21e0555a814dd28fd75a98cdadef8251d4"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-057-enneagram-1r-g-t4-early-career-kpi-feedback-v1.json",
+            "sha256": "6cda2b91f0a4d481460433f655e67837d0f9629137fd13c371d1b1d4d7f2efa9"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-058-enneagram-1r-g-t4-early-career-probation-v1.json",
+            "sha256": "c35a0bb1d715fdcc83b41cabe565ddab950438f6520fdc84aaf7e9d2e2e34e6f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-059-enneagram-1r-g-t4-early-career-reporting-v1.json",
+            "sha256": "882e3cfdd64022b8631559487b8c66b07c88d17d9b8f31ecfe7192e2023cea45"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-060-enneagram-1r-g-t4-relationship-cold-war-v1.json",
+            "sha256": "e67bbabf600e361bec4904bbdc6bc905463000ab96c976f0d0b920f0bd656074"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-061-enneagram-1r-g-t4-relationship-conflict-repair-v1.json",
+            "sha256": "63cc38e89741fdcc56b33ed75f98a64af0d5360c33d871b7adec67d839d4f44e"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-062-enneagram-1r-g-t4-relationship-family-expectation-v1.json",
+            "sha256": "9a67836a6b3e1cc43e7f48ef672c6373a272034779944dd8145be4dfcf31d78d"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-063-enneagram-1r-g-t4-relationship-intimacy-v1.json",
+            "sha256": "a36ed8527ca97ad6302e73854c8771c0c9d065a53200a707906824564329a795"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-064-enneagram-1r-g-t4-relationship-no-reply-v1.json",
+            "sha256": "3d2ead3e0034e84a8d1dd1e1af63fb776acb431566cd64771368edc30e07896f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-065-enneagram-1r-g-t4-student-club-collaboration-v1.json",
+            "sha256": "f1419dc4fc8d3e974e85959679ebffa2198b0f0f329c0942c6d1ff7964d61d06"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-066-enneagram-1r-g-t4-student-dorm-relationship-v1.json",
+            "sha256": "21ef4fb0d9f83fcb8f418c7047ecfa1aa30a23dc193574b77eedd119f42d4878"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-067-enneagram-1r-g-t4-student-exam-pressure-v1.json",
+            "sha256": "e872d8dba2bf692a2599235749c6740aa3b8fcb60a0127e6d2a015413e41a292"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-068-enneagram-1r-g-t4-student-group-project-v1.json",
+            "sha256": "f5b487326680df736effcf608cf39d55539e23dfd29c4260b7ce5de05883ea92"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-069-enneagram-1r-g-t4-student-job-search-v1.json",
+            "sha256": "ab624679776edac9ea3fbd22a59a2bd502867c96483018ad9a44a2320588367d"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-070-enneagram-1r-g-t4-student-thesis-paper-v1.json",
+            "sha256": "895f06998257b55adca8a99af7064ffd807e09be4e6e53a3c07848e3628f5c14"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-071-enneagram-1r-g-t4-work-colleague-blame-shift-v1.json",
+            "sha256": "e68b0b31ef9e13c92a3b5cf8f2d9702cf1a113ccd28229d2e118c2c9eb403b94"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-072-enneagram-1r-g-t4-work-leader-changes-requirements-v1.json",
+            "sha256": "309d828ab8741a1359dcf4c9addd23b21ca5f1c1744f3e54f16cab7bb4856209"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-073-enneagram-1r-g-t5-early-career-cross-team-v1.json",
+            "sha256": "2dcad1f12642231c97983f3c319716b7ebea27f222bed4040247f056566f2b82"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-074-enneagram-1r-g-t5-early-career-internship-v1.json",
+            "sha256": "97c9d3aa840ec06fed114f49b659858c08424d8ed0a9d94ec4be969dbba19770"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-075-enneagram-1r-g-t5-early-career-kpi-feedback-v1.json",
+            "sha256": "8960815048550c3903e2a093159cd47a158676b98e4a5d034d7c7ddeab52f716"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-076-enneagram-1r-g-t5-early-career-probation-v1.json",
+            "sha256": "726f995dcbd6d6f318bab01895fb8492c1c1e109c11069f4905eb5519334bf14"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-077-enneagram-1r-g-t5-early-career-reporting-v1.json",
+            "sha256": "3e4a7ac6abc8e577f35d4337cb0672fb787d5233642f1516ec48dc036655ffe3"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-078-enneagram-1r-g-t5-relationship-cold-war-v1.json",
+            "sha256": "eaf0ed849aaeb5f698aa1ed18c5370a94d9b35079034899b043cdc0056e9593b"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-079-enneagram-1r-g-t5-relationship-conflict-repair-v1.json",
+            "sha256": "e966d5c779a6dd531a920ff51728e68eda0cdfdc355a80f5776c3e18fad57e5c"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-080-enneagram-1r-g-t5-relationship-family-expectation-v1.json",
+            "sha256": "0b3a822f2e7c561544e3aaa33bc9bf505607d21a484969a30463b3636020b36f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-081-enneagram-1r-g-t5-relationship-intimacy-v1.json",
+            "sha256": "121abe6dc83b13d80a8f5ce3d8b141d4876ed6bdf3aad2cf9879e947845c0c0a"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-082-enneagram-1r-g-t5-relationship-no-reply-v1.json",
+            "sha256": "f6718143004c6e6ee3a2bbc57b3636090582a8374a4a6c5531daf0cf950b984d"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-083-enneagram-1r-g-t5-student-club-collaboration-v1.json",
+            "sha256": "8fe664708d89d0bc2dd8a230c49abbce703a34ed707139196cc66063f585fdef"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-084-enneagram-1r-g-t5-student-dorm-relationship-v1.json",
+            "sha256": "073f5318145c8849f96cb986efd9495a891724f17d7c2af28399605bd71e04ce"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-085-enneagram-1r-g-t5-student-exam-pressure-v1.json",
+            "sha256": "02a04bba90bef07cc6b67f6aa59aef37f4ed321df4e00750650c9aa4ea319874"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-086-enneagram-1r-g-t5-student-group-project-v1.json",
+            "sha256": "a620b85dda764135e175faae8ab83fa1e067167c65b0048a0d1e58e88876d9b4"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-087-enneagram-1r-g-t5-student-job-search-v1.json",
+            "sha256": "e21cf3f1743f5cce81718223f9616881b0f8218ba1f72ade6e7e2752367dc02d"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-088-enneagram-1r-g-t5-student-thesis-paper-v1.json",
+            "sha256": "2c6afbec929b4ce1466a69833b1d1c7cdf3818a704cf80a35a7531a52dbba450"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-089-enneagram-1r-g-t5-work-colleague-blame-shift-v1.json",
+            "sha256": "ba31adef4090b0e3a7b0c7548fbdc238e7f06820918ca68a2d857907f8900ec7"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-090-enneagram-1r-g-t5-work-leader-changes-requirements-v1.json",
+            "sha256": "29138678406b5422039b58a6e8d40d06f881f4a168cea2fdff1a4d24c2a03aa3"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-091-enneagram-1r-g-t6-early-career-cross-team-v1.json",
+            "sha256": "5260e0b7c75a2709326244eaa31a5cb360bb2e69a930c2ad2d121b8e82e9922a"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-092-enneagram-1r-g-t6-early-career-internship-v1.json",
+            "sha256": "18ed9b950a2fc9cb9701ca57c02cf55bfa069c8d129cf97f29746c585dbdc6ec"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-093-enneagram-1r-g-t6-early-career-kpi-feedback-v1.json",
+            "sha256": "f68319567bea716134ac88d7af130393f76f007301b72c75b67e057a38dfa38a"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-094-enneagram-1r-g-t6-early-career-probation-v1.json",
+            "sha256": "04c6434290fb34326d0ca9a6b9bf36a97266fa21c3cb66fe3e87b8baae392c52"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-095-enneagram-1r-g-t6-early-career-reporting-v1.json",
+            "sha256": "6014b5e40d080b5edd50ace63bb1264f6801d0cbbb70c041d681bce7d1411998"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-096-enneagram-1r-g-t6-relationship-cold-war-v1.json",
+            "sha256": "f69695cf8f7bb4c23f7d6199f3cd6a8061896655c7fc8c67468ac5d8fdb1e5c0"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-097-enneagram-1r-g-t6-relationship-conflict-repair-v1.json",
+            "sha256": "50cfcabdabcde44cdeec136aeb2a1219482019ad3d09a9195776f7a9c137eda5"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-098-enneagram-1r-g-t6-relationship-family-expectation-v1.json",
+            "sha256": "2bd2cd29c36ff4eefbaa6f51ea8992b8874b3cad9f81fd216601f50b210f93c2"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-099-enneagram-1r-g-t6-relationship-intimacy-v1.json",
+            "sha256": "34d5dc590e7a156264c953672035f3270df6694528e8df8af0fd72644bf124d8"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-100-enneagram-1r-g-t6-relationship-no-reply-v1.json",
+            "sha256": "98d6340ce37428e78c027a379e2d4ae74dab3fdc65e944a50b531fbde8727e2e"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-101-enneagram-1r-g-t6-student-club-collaboration-v1.json",
+            "sha256": "4c72461419a41766617e21623008c87db762f2b4cb93d8f74fd748bf748d27c2"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-102-enneagram-1r-g-t6-student-dorm-relationship-v1.json",
+            "sha256": "ff808ab286151e19dcf89784bd2a9218c2c25506f87596b8dc8a2f6bc3743aef"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-103-enneagram-1r-g-t6-student-exam-pressure-v1.json",
+            "sha256": "8903b9a87de0c1d7d6d1da8644629cadd57c741ce0acde7b130417b46d2d6639"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-104-enneagram-1r-g-t6-student-group-project-v1.json",
+            "sha256": "1f29b818e80f558bc2c766e8734cc9a7b3fd6ecd4fc01ede9516a6d1faa9ba0c"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-105-enneagram-1r-g-t6-student-job-search-v1.json",
+            "sha256": "2e5989510c5a8b77d59c8c9ba2955d2ac9b3321763c4ff28923584d702bda647"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-106-enneagram-1r-g-t6-student-thesis-paper-v1.json",
+            "sha256": "41425dcfe820e530a7db3d2a3fc1f7c5f8ddad68deca7f089479b061e7e8e592"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-107-enneagram-1r-g-t6-work-colleague-blame-shift-v1.json",
+            "sha256": "8a5c963727c357961d0eacefbd3b529c7f8e91c4410838709656f93dcf88808c"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-108-enneagram-1r-g-t6-work-leader-changes-requirements-v1.json",
+            "sha256": "da2a47e117352d1be2090d15465fd896e82484eafb2bfd758b5ad4f9c0f9a595"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-109-enneagram-1r-g-t7-early-career-cross-team-v1.json",
+            "sha256": "0f53e96b139bc5e81facc5f3d789609a4dc950c2dd959e991c0e10c47eb4ec13"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-110-enneagram-1r-g-t7-early-career-internship-v1.json",
+            "sha256": "d2351674871392dde43b9a82654bedff38211e221d8ae112cbd64ffb63e56062"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-111-enneagram-1r-g-t7-early-career-kpi-feedback-v1.json",
+            "sha256": "28d99bdd5b6a0fd5f9e422da25d80031745404b4796a17a16a71486d1cb320ad"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-112-enneagram-1r-g-t7-early-career-probation-v1.json",
+            "sha256": "cbc0f0c92e169d86c14a556dcc7c6ddab2fafe4646ce780d6257583fb91c4051"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-113-enneagram-1r-g-t7-early-career-reporting-v1.json",
+            "sha256": "120121355afd07e0c10d041e5db5cd0926497f33f475596f8f1d9aac5dc21d49"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-114-enneagram-1r-g-t7-relationship-cold-war-v1.json",
+            "sha256": "ffc58614be43a87e69b13a516a5232ab783d90d787fea0b144a667e01e75b4ea"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-115-enneagram-1r-g-t7-relationship-conflict-repair-v1.json",
+            "sha256": "5ad43d0e0c9290c326e934aa6bd56311902564d3a53ddf8feec18a44d929ca5a"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-116-enneagram-1r-g-t7-relationship-family-expectation-v1.json",
+            "sha256": "0cac803620d8a897f9b6eaf37af74be10fd25c900d1d292790b0682168efa9c8"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-117-enneagram-1r-g-t7-relationship-intimacy-v1.json",
+            "sha256": "1da15ffef77787f454149b781015e4be627ac6197afc29c1cab59d6b2ba1b9de"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-118-enneagram-1r-g-t7-relationship-no-reply-v1.json",
+            "sha256": "3fcaf46cf8784dbbeb18d5148d515ad3234a87a0720fec9ea5ec179257303db6"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-119-enneagram-1r-g-t7-student-club-collaboration-v1.json",
+            "sha256": "8d74e18990c5d6114b4eae8da338306839b848a14745242dd0be67217079c886"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-120-enneagram-1r-g-t7-student-dorm-relationship-v1.json",
+            "sha256": "719346cba8e091b672e57880fcefc81e193ccd2e6cb8ccf5ae2545a4d71a3c0a"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-121-enneagram-1r-g-t7-student-exam-pressure-v1.json",
+            "sha256": "0e9971f2a0e5841c41745e443bd6450ec2d9730db97008dedfd212ce7ff0d315"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-122-enneagram-1r-g-t7-student-group-project-v1.json",
+            "sha256": "8f97d5e71b5e2fd948edd658a7dd453d733e07787ed6dfe74c41db007f5e5047"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-123-enneagram-1r-g-t7-student-job-search-v1.json",
+            "sha256": "7de6a0c35367f086a223e1afc6dedcc545966117d8e4ffc19b565d41d81606b0"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-124-enneagram-1r-g-t7-student-thesis-paper-v1.json",
+            "sha256": "15ec2d1dd07b3fcbe740d1b897f9657b03a8a5a495fd10b29cd491cd474c9f94"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-125-enneagram-1r-g-t7-work-colleague-blame-shift-v1.json",
+            "sha256": "fd09f16b693b7d95f028ae0151e00205a1b55b82c3ee17623574226f949406bc"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-126-enneagram-1r-g-t7-work-leader-changes-requirements-v1.json",
+            "sha256": "db373070387c7f357556ba6830346be547c1755c5306455d7fbe67c7602337b1"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-127-enneagram-1r-g-t8-early-career-cross-team-v1.json",
+            "sha256": "ea554bb0af004eeb8b4e921292033649d89274759feaeb5e80b5328ce1b36590"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-128-enneagram-1r-g-t8-early-career-internship-v1.json",
+            "sha256": "628dc558034bc372f7a8b8fc474d912e42350d1177e55103c7350bcfc279f559"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-129-enneagram-1r-g-t8-early-career-kpi-feedback-v1.json",
+            "sha256": "404f12251d444463e8ae26d1b80251fd6d9d524ba14121546cefc63dd47ef19a"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-130-enneagram-1r-g-t8-early-career-probation-v1.json",
+            "sha256": "b682f5566061079c2263bb02b2c9b60a84de029cdecb66c43967a8b4eef2a95f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-131-enneagram-1r-g-t8-early-career-reporting-v1.json",
+            "sha256": "c955244c82b2877e215969ab6aabe6b63def8fd227148740883c4e05ff087d2a"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-132-enneagram-1r-g-t8-relationship-cold-war-v1.json",
+            "sha256": "b4b0ca9d21f6f2c62ca593603becba1fc5ab38597d1974f4fd7365b8ad4a325d"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-133-enneagram-1r-g-t8-relationship-conflict-repair-v1.json",
+            "sha256": "ca7ad170d71542ef3976a01c09cb48a7abf3ae9776a8a8c2e162eb52ed230da3"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-134-enneagram-1r-g-t8-relationship-family-expectation-v1.json",
+            "sha256": "362f6922aee16acb0e33f6e6198fa3c17b5e3a518d2477687bce9fbecb78c621"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-135-enneagram-1r-g-t8-relationship-intimacy-v1.json",
+            "sha256": "c89d4c5e4accddf622fafaf23075f8141671a9212a732ae7b25cdc7c036af10f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-136-enneagram-1r-g-t8-relationship-no-reply-v1.json",
+            "sha256": "23a5ba4b903059aaf5ac02a09a86d5af978a7c9d83bcec93820eac175be6abf7"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-137-enneagram-1r-g-t8-student-club-collaboration-v1.json",
+            "sha256": "d2be523cac212d9375ff4e526aedf3df87d775557c68aa806cbd65d8685e161a"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-138-enneagram-1r-g-t8-student-dorm-relationship-v1.json",
+            "sha256": "97a7048eba80ce25903f587f2f804a75559dcefd2fd049a5f2c3dcfab337bddb"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-139-enneagram-1r-g-t8-student-exam-pressure-v1.json",
+            "sha256": "914cf820d283d441a268d2636c28f8c5a8a4712ea6291bcb6a1197de37217084"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-140-enneagram-1r-g-t8-student-group-project-v1.json",
+            "sha256": "1a7fa06b66ce179ddd065af1374353ec40d1bb347edb13638ca954c23e5f91bf"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-141-enneagram-1r-g-t8-student-job-search-v1.json",
+            "sha256": "fc842b9be534e538df3426eabe64a983f9ac439070a91b0c7b0ead537074c3d5"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-142-enneagram-1r-g-t8-student-thesis-paper-v1.json",
+            "sha256": "5ac9f589f195c8a9de55443077bf52716f495ce3e52dea35dca0bfa5c6fa8099"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-143-enneagram-1r-g-t8-work-colleague-blame-shift-v1.json",
+            "sha256": "0f173453507429ca7e24baafebca56ee64f0900ece5b9ff34d46a8b2397517fb"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-144-enneagram-1r-g-t8-work-leader-changes-requirements-v1.json",
+            "sha256": "09bc8303911c7115a1b5a82e0132bc88e49357e9916ed0fbeb7b872d1be73cc2"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-145-enneagram-1r-g-t9-early-career-cross-team-v1.json",
+            "sha256": "a58261fab070de403cdfc2d715040bf4df81ccf6ca65fcd0548ca3e1c7c21ed9"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-146-enneagram-1r-g-t9-early-career-internship-v1.json",
+            "sha256": "d8565fc1e602b5068b2079f906bea2c6ad36f243cb8f901f012f9177e0384d5f"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-147-enneagram-1r-g-t9-early-career-kpi-feedback-v1.json",
+            "sha256": "e3c3e33559bd1bf7654d367ded2faeaa4be54714cf88a0c8cbb42aeee87a4bf2"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-148-enneagram-1r-g-t9-early-career-probation-v1.json",
+            "sha256": "c7a8d24fc4b5adbffd0bd8c2c134e9809d39b4f7af40d47c65d3a5026d990131"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-149-enneagram-1r-g-t9-early-career-reporting-v1.json",
+            "sha256": "06a0e121490c917a7effdc43370d27d5fa99e4743d360210abd3c72e11579cd6"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-150-enneagram-1r-g-t9-relationship-cold-war-v1.json",
+            "sha256": "6949834707277d654164f7669fc6746983f11edb285e7bba77571fe6676382f3"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-151-enneagram-1r-g-t9-relationship-conflict-repair-v1.json",
+            "sha256": "abb6036e40e8a682d0e9c5f276cd65dd041017d06e40fc2d46c007512f2d4079"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-152-enneagram-1r-g-t9-relationship-family-expectation-v1.json",
+            "sha256": "74139ef977e487e156dc5f8d8bec6fb4df8aba0512f9e0da06ad7bc9a83b05c7"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-153-enneagram-1r-g-t9-relationship-intimacy-v1.json",
+            "sha256": "4b966e76c1c557b3748f51cfa1c61b74690a7cd7d21530524da770c8df11e85a"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-154-enneagram-1r-g-t9-relationship-no-reply-v1.json",
+            "sha256": "7a09236256c1be158678c19787772692d3d3c2349bb1d5253d822c2f8e7b5ad7"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-155-enneagram-1r-g-t9-student-club-collaboration-v1.json",
+            "sha256": "6c6ae9ec88d6ca8e8bdf73afa4f0494f078b24b0495d4df9377a905981ecda51"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-156-enneagram-1r-g-t9-student-dorm-relationship-v1.json",
+            "sha256": "d8508be5f1102b1f81503f230606061fb0e5be44c7a08c1c6597a460b287d251"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-157-enneagram-1r-g-t9-student-exam-pressure-v1.json",
+            "sha256": "9fd579161d95100a9e304cd835c2e31da7a836cb6b4875fa1b71c3e50ede29db"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-158-enneagram-1r-g-t9-student-group-project-v1.json",
+            "sha256": "a47ec34d34f13789ea6ea9e914a9ea1d7d6988ea5e130a6b4124228d614d80fa"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-159-enneagram-1r-g-t9-student-job-search-v1.json",
+            "sha256": "ac33b2be66e0bb1cf8e167740d6e8973985d4a50a2201ac138cf7fc435eeac4c"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-160-enneagram-1r-g-t9-student-thesis-paper-v1.json",
+            "sha256": "26a9875f66d70e286f1cdd73fe2d471d5b74300c75d0e346d2d8056e4e0d4e7d"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-161-enneagram-1r-g-t9-work-colleague-blame-shift-v1.json",
+            "sha256": "8bd434a21af84805403015bd08758250bd56e5deebd2fa3a25c14a857095ec58"
+        },
+        {
+            "path": "candidate/candidate_payloads/w5-scene_localization-162-enneagram-1r-g-t9-work-leader-changes-requirements-v1.json",
+            "sha256": "bd7444b438fbc2451c5ae6792279c62a4cf29abf72c5fa89d80f55e174ed5c7f"
+        },
+        {
+            "path": "candidate/candidate_payloads_manifest.json",
+            "sha256": "0044916b178b8ad95a5db6b8621a669983c0985132795c5ca8fc5d21feac863b"
+        },
+        {
+            "path": "candidate/fc144_boundary_report.json",
+            "sha256": "7eff68a1cf239edf3f9887fb5a33de1fbdc7eca21db9a28120cd81316c080365"
+        },
+        {
+            "path": "candidate/forbidden_claim_report.json",
+            "sha256": "ad2acc4c50ae2d59dcd6c9077ddf0ec88ab21d0ab2c97f28fb829d763e52911c"
+        },
+        {
+            "path": "candidate/import_diff_summary.json",
+            "sha256": "a0e830f8e6db7f7fa2252cbe47102dfba3e27eb8142498cb747f3f4ff63ed268"
+        },
+        {
+            "path": "candidate/legacy_residual_scan.json",
+            "sha256": "d6735f401c261675f185b734eb19ef068c8ef2e63a62119089b30fa4f1cb60fa"
+        },
+        {
+            "path": "candidate/phase8b_summary.json",
+            "sha256": "0a9bf8f6f80a6ca10978349398ddb94ca202b949011fb65980a18bc73c1b9da5"
+        },
+        {
+            "path": "candidate/replacement_additive_map.json",
+            "sha256": "2ecc3027c761520c5a4ddae063133c509f7fe08973827cfe1b3d4c90a1b2d290"
+        },
+        {
+            "path": "candidate/rollback_plan.md",
+            "sha256": "6f6441ca635a770882085b8ca408b8827fb098b60d85fd4368add57ab433688c"
+        },
+        {
+            "path": "candidate/source_mapping_report.json",
+            "sha256": "73bcd3ddadb838c1521feccd38ed6001af20e2daa2ec9649f46d64672204ff4b"
+        },
+        {
+            "path": "claim_boundary_report.json",
+            "sha256": "3659f3e7df09194f4fd9201e0dd38f07a8895a3d3aafad2d057b8e85598db806"
+        },
+        {
+            "path": "editorial_review.json",
+            "sha256": "0e9d8459e75f4b017c63972de112a99e21c63ee1c1f99985dcec4ff37f6277cf"
+        },
+        {
+            "path": "source_ledger.json",
+            "sha256": "88685833a08e9d9a3688b974e784c98f586da9c697e756fad9e9ef3ea92ab8f6"
+        },
+        {
+            "path": "surface_matrix.json",
+            "sha256": "73cc0e6766c96e37291dda1365efc66f0f05e6331589c0e9a33e59c4b20df09b"
+        },
+        {
+            "path": "translation_identity_map.json",
+            "sha256": "90ac26784388399c4ba62563a25a8c4e40e31c16607451241b62e08e0261763a"
+        }
+    ],
+    "quality_gates": {
+        "independent_w9": {
+            "status": "pass",
+            "report_ref": "enneagram-private-results/8a1653b5053b7ab910957543c8bb831b8c0759aaec82a7200e5c13c08a5e98d5/independent_w9_report.json",
+            "report_sha256": "6516d035cff4aa59e97a85eff2b28b384b5501b6037b0f7c4caaeca5070e64f2"
+        }
+    },
+    "permissions": {
+        "cms_write_authorized": false,
+        "activation_authorized": false,
+        "publication_authorized": false,
+        "deploy_authorized": false,
+        "seo_mutation_authorized": false
+    }
+}

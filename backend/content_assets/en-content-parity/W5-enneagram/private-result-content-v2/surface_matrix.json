@@ -1,0 +1,18 @@
+{
+    "private_surfaces": [
+        "result",
+        "report",
+        "share",
+        "pdf",
+        "history"
+    ],
+    "locale_rule": "all projected slots inherit the exact en payload locale",
+    "share_projection": "minimum_public_safe_fields_only",
+    "pdf_authority": "backend_generated_only",
+    "history_boundary": {
+        "private": true,
+        "noindex": true,
+        "no_store": true
+    },
+    "discoverability_mutations": 0
+}
