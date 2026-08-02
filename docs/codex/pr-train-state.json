@@ -103770,5 +103770,50 @@
       {"at": "2026-08-03T00:48:31+08:00", "status": "ready_to_merge", "note": "Exact head 59e178fbf914bbaf98008700f6c90491300d89b5 passed CI run 30757120319 and Code Scanning run 30757120309. PR #3513 is CLEAN; final changed-file scope remains exactly workflow, focused SRE test, and train metadata."}
     ],
     "updated_at": "2026-08-03T00:48:31+08:00"
+  },
+  "W1-MBTI-COMPARISONS-V2-READINESS-REPAIR-01": {
+    "id": "W1-MBTI-COMPARISONS-V2-READINESS-REPAIR-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/w1-mbti-comparisons-v2-readiness-repair-01",
+    "title": "W1-MBTI-COMPARISONS-V2-READINESS-REPAIR-01 — Adopt exact published comparison cohort into V2 promotion",
+    "depends_on": ["CONTENT-PROMOTION-V2-DEPLOYED-EXECUTOR-PIN-01"],
+    "status": "implementation_in_progress",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "dependency": {
+        "status": "passed",
+        "evidence": "T1 merged as 1f863f4b8f63d86149d5bc0fe7563c4936e86446 and origin/main contains the squash merge."
+      },
+      "scope": {
+        "status": "in_progress",
+        "evidence": "Only the comparison promotion adapter, its public provenance projection, immutable external W9 snapshot/envelope, direct adapter test, and required train metadata are in scope."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-08-03T01:00:00+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started from clean origin/main c80114c0537a7fbe7c412b0909921bd3954ce0a5 after the exact T1 and T2 dependencies merged. Scope is exact published-cohort adoption only; no CMS/database write, promotion execution, deploy, indexability, sitemap, llms, search, or private-data action occurred."
+      },
+      {
+        "at": "2026-08-03T01:28:04+08:00",
+        "status": "local_validation_passed",
+        "note": "Focused adoption and full exact-command-chain suites passed (19 tests / 250 assertions). Scoped Pint, PHP syntax, train YAML/state JSON parsing, W9 report/envelope SHA verification, and git diff --check passed. The original W9 report bytes remain exact at 3b2fc2d61f5153a9e59a25da0d3c5de26e12bc3d44dd1c4c1e109628c455b51b; no CMS/database mutation, promotion execution, deploy, or discoverability action occurred."
+      }
+    ],
+    "updated_at": "2026-08-03T01:28:04+08:00"
   }
 }
