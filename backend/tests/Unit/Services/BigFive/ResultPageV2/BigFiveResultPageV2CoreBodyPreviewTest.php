@@ -1260,6 +1260,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $changed = [
             'backend/app/Console/Commands/ImportRiasecEnglishPackage.php',
             'backend/app/Services/ContentImport/RiasecEnglishPackageImporter.php',
+            'backend/app/Services/ContentPromotion/RiasecContentPromotionAuthority.php',
+            'backend/app/Services/ContentPromotion/Adapters/RiasecContentPromotionAdapter.php',
         ];
         $blocked = ['backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php'];
 
@@ -9408,6 +9410,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/ImportRiasecEnglishPackage.php',
             'backend/app/Services/ContentImport/RiasecEnglishPackageImporter.php',
+            'backend/app/Services/ContentPromotion/RiasecContentPromotionAuthority.php',
+            'backend/app/Services/ContentPromotion/Adapters/RiasecContentPromotionAdapter.php',
         ], true);
     }
 

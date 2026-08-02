@@ -75,7 +75,7 @@ final class RiasecEnglishPackageImporterTest extends TestCase
 
         $directory = $this->copyPackage();
         $evidence = json_decode((string) File::get($directory.'/external_package_evidence.json'), true, 512, JSON_THROW_ON_ERROR);
-        $evidence['control_acceptance']['qa_report_sha256'] = str_repeat('0', 64);
+        $evidence['control_acceptance']['qa_report_sha256'] = str_repeat('0', 63);
         File::put($directory.'/external_package_evidence.json', json_encode($evidence, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).PHP_EOL);
         $driftedW9 = $this->runDryRun(['--package' => $directory]);
         self::assertFalse($driftedW9['ok']);
