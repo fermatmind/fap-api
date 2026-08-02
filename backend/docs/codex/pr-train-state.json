@@ -97,10 +97,10 @@
     "CONTENT-PROMOTION-W4-RIASEC-ADAPTER-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/content-promotion-w4-riasec-adapter-01",
-      "commit_sha": "67e3d3fa38acb67fcd81159281c98160cd3320ce",
-      "pr_url": null,
+      "commit_sha": "26df0767f",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3509",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -158,6 +158,11 @@
           "at": "2026-08-02T14:30:00Z",
           "status": "local_checks_passed",
           "summary": "W4 evidence-chain validation, 14-group / 1550-row / 15-pair / 3-2-2 safety contract, 60Q/140Q boundary, inactive English release staging, exact-release publication, rollback, machine receipt chain, capability registry, workflow, review-policy, freeze, JSON/YAML and diff checks passed. No real promotion, runtime activation, or deployment was executed."
+        },
+        {
+          "at": "2026-08-02T14:45:00Z",
+          "status": "pr_open",
+          "summary": "Opened PR #3509 after scoped local validation. Required GitHub checks are pending; no production operation was executed."
         }
       ]
     },
