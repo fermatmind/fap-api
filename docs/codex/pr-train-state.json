@@ -103778,9 +103778,9 @@
     "branch": "codex/w1-mbti-comparisons-v2-readiness-repair-01",
     "title": "W1-MBTI-COMPARISONS-V2-READINESS-REPAIR-01 — Adopt exact published comparison cohort into V2 promotion",
     "depends_on": ["CONTENT-PROMOTION-V2-DEPLOYED-EXECUTOR-PIN-01"],
-    "status": "implementation_in_progress",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "6ca8e24a1b6e248cf8f7922978a0ff072259fd14",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3516",
     "checks": {
       "dependency": {
         "status": "passed",
@@ -103812,8 +103812,13 @@
         "at": "2026-08-03T01:28:04+08:00",
         "status": "local_validation_passed",
         "note": "Focused adoption and full exact-command-chain suites passed (19 tests / 250 assertions). Scoped Pint, PHP syntax, train YAML/state JSON parsing, W9 report/envelope SHA verification, and git diff --check passed. The original W9 report bytes remain exact at 3b2fc2d61f5153a9e59a25da0d3c5de26e12bc3d44dd1c4c1e109628c455b51b; no CMS/database mutation, promotion execution, deploy, or discoverability action occurred."
+      },
+      {
+        "at": "2026-08-03T01:30:00+08:00",
+        "status": "github_checks_pending",
+        "note": "PR #3516 opened from exact implementation head 6ca8e24a1b6e248cf8f7922978a0ff072259fd14. Required GitHub checks are pending; no production workflow, CMS/database write, publication mutation, deploy, or discoverability action occurred."
       }
     ],
-    "updated_at": "2026-08-03T01:28:04+08:00"
+    "updated_at": "2026-08-03T01:30:00+08:00"
   }
 }
