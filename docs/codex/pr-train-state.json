@@ -29,7 +29,7 @@
       "github_checks_green": false,
       "post_merge_revalidated": false
     },
-    "failure_reason": null,
+    "failure_reason": "Prior current-head verify-bigfive classifier omission was repaired; the subsequent current-head review repair is pending required GitHub checks.",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -103591,8 +103591,8 @@
     "branch": "codex/content-promotion-w1-mbti-results-adapter-01",
     "title": "CONTENT-PROMOTION-W1-MBTI-RESULTS-ADAPTER-01: activate audited W1 MBTI result promotion",
     "depends_on": ["CONTENT-PROMOTION-ADAPTER-CONFORMANCE-01"],
-    "status": "github_checks_pending",
-    "commit_sha": "f2fe5605c0aaf7352c0394dd38cf35e18f2a684c",
+    "status": "merged",
+    "commit_sha": "54903f653f00df00bd8768e209555a550584a5b3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3498",
     "checks": {
       "dependency": {"status": "passed", "evidence": "PR #3497 is MERGED as defc0ff1dc94c364000016adbf02ae1e5bf962a7 and origin/main contains the squash commit."},
@@ -103600,9 +103600,9 @@
       "github_required_checks": {"status": "passed", "evidence": "CI run 30736823530 and Code Scanning run 30736823555 succeeded for exact rebased head e0bcfeabf1f42c212d7aa9abc11a8fc5b8588ee4."}
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-08-02T07:33:48Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -103615,9 +103615,10 @@
       {"at": "2026-08-02T14:52:00+08:00", "status": "github_checks_pending", "note": "Same-scope repairs are pending required GitHub checks. No production or deploy action occurred."},
       {"at": "2026-08-02T15:05:00+08:00", "status": "github_checks_pending", "note": "Exact-head CI and Code Scanning passed before rebase; rebase onto advanced main is in progress, so required checks must rerun for the rebased head."},
       {"at": "2026-08-02T15:15:00+08:00", "status": "ready_to_merge", "note": "Rebased head e0bcfeabf1f42c212d7aa9abc11a8fc5b8588ee4 passed CI run 30736823530 and Code Scanning run 30736823555. No production, deployment, or discoverability action occurred."},
-      {"at": "2026-08-02T15:25:00+08:00", "status": "github_checks_pending", "note": "Addressed the current-head resolver integrity review: runtime now recomputes canonical authority hashes against release and manifest records. Focused regression passed; GitHub checks must rerun for the repair head."}
+      {"at": "2026-08-02T15:25:00+08:00", "status": "github_checks_pending", "note": "Addressed the current-head resolver integrity review: runtime now recomputes canonical authority hashes against release and manifest records. Focused regression passed; GitHub checks must rerun for the repair head."},
+      {"at": "2026-08-02T07:33:48Z", "status": "merged", "note": "PR #3498 squash-merged as 54903f653f00df00bd8768e209555a550584a5b3; origin/main containment, remote branch deletion, and isolated local worktree cleanup were verified."}
     ],
-    "updated_at": "2026-08-02T15:25:00+08:00"
+    "updated_at": "2026-08-02T07:33:48Z"
   },
   "BIG5-RESULT-V2-PRODUCTION-SNAPSHOT-04": {
     "id": "BIG5-RESULT-V2-PRODUCTION-SNAPSHOT-04",
@@ -103663,5 +103664,41 @@
       }
     ],
     "updated_at": "2026-08-02T07:28:00Z"
+  },
+  "CONTENT-PROMOTION-PERSONALITY-CMS-ADAPTERS-01": {
+    "id": "CONTENT-PROMOTION-PERSONALITY-CMS-ADAPTERS-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/content-promotion-personality-cms-adapters-01",
+    "title": "CONTENT-PROMOTION-PERSONALITY-CMS-ADAPTERS-01: activate Big Five and Enneagram CMS promotion adapters",
+    "depends_on": ["CONTENT-PROMOTION-W1-MBTI-RESULTS-ADAPTER-01"],
+    "status": "ready_to_merge",
+    "commit_sha": "48b2b2042a03782dd79030c48546e046aecaeb51",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3503",
+    "checks": {
+      "dependency": {"status": "passed", "evidence": "PR #3498 is MERGED as 54903f653f00df00bd8768e209555a550584a5b3 and origin/main contains the squash commit."},
+      "local_validation": {"status": "passed", "evidence": "Focused T3 conformance, capability, personality adapter, command, and SRE workflow suite passed after review repair (25 tests / 234 assertions); the exact-package Big Five freeze-classifier regression passed; scoped Pint, syntax, JSON/YAML parsing, and diff checks passed. No package promotion, CMS import, publication, deployment, or discoverability action occurred."},
+      "github_required_checks": {"status": "passed", "evidence": "CI run 30739764955 and Code Scanning run 30739764963 passed for exact head 48b2b2042a03782dd79030c48546e046aecaeb51; staging parity was skipped and no deployment action occurred."}
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {"at": "2026-08-02T07:40:00Z", "status": "in_progress", "note": "Started T3 from isolated origin/main 54903f653f00df00bd8768e209555a550584a5b3. Scope is shared Big Five and Enneagram PersonalityPublicContentAsset revision authority only; no real import, publication, deployment, or discoverability action is authorized."},
+      {"at": "2026-08-02T08:10:00Z", "status": "github_checks_pending", "note": "Addressed all current-head review findings: exact bound human review/fingerprint gate, observer-backed cache invalidation, restorable draft lineage, complete snapshot parity, and Markdown/HTML media rejection. Required GitHub checks must rerun for the repair head."},
+      {"at": "2026-08-02T08:12:00Z", "status": "github_checks_failed", "note": "verify-bigfive failed only because its exact-package automation freeze classifier did not yet include the two T3 authority files. Other CI jobs and Code Scanning passed; same-scope classifier repair is pending local verification and a current-head retry."},
+      {"at": "2026-08-02T08:16:00Z", "status": "github_checks_pending", "note": "Added only the two T3 exact-package authority files to the existing Big Five freeze classifier and its focused regression. Local retry passed; required GitHub checks must rerun for the repair head."},
+      {"at": "2026-08-02T08:24:00Z", "status": "github_checks_pending", "note": "Addressed current-head review findings with review-evidence binding, strict snapshot types/live parity, post-transaction cache invalidation, concurrent-publication rollback fencing, and registered review-surface metadata. Focused T3 and freeze-classifier checks passed; required GitHub checks must rerun."},
+      {"at": "2026-08-02T08:32:00Z", "status": "ready_to_merge", "note": "Exact head 48b2b2042a03782dd79030c48546e046aecaeb51 passed CI run 30739764955 and Code Scanning run 30739764963. No production CMS operation, deployment, or discoverability action occurred."}
+    ],
+    "updated_at": "2026-08-02T08:32:00Z"
   }
 }

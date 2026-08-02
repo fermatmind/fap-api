@@ -48562,3 +48562,51 @@ prs:
     deploy_allowed: false
     content_authority: immutable backend Big Five v0_4 snapshot and exact file hashes
     repository_rule_impact: import remains dry-run by default and rollout remains an independently approved production action
+
+  - id: CONTENT-PROMOTION-PERSONALITY-CMS-ADAPTERS-01
+    repo: fap-api
+    base: main
+    branch: codex/content-promotion-personality-cms-adapters-01
+    title: "CONTENT-PROMOTION-PERSONALITY-CMS-ADAPTERS-01: activate Big Five and Enneagram CMS promotion adapters"
+    status: in_progress
+    depends_on: [CONTENT-PROMOTION-W1-MBTI-RESULTS-ADAPTER-01]
+    train_scope: content_promotion_personality_cms_adapters_v2
+    scope:
+      - Add shared package-driven PersonalityPublicContentAsset revision authority for W2/big-five and W5/enneagram, with separate package, receipt, target, and rollback lineage.
+      - Preserve text-only media boundaries, inactive/non-public draft revisions, exact English pointer promotion, and unchanged discoverability fields.
+      - Prove framework/locale/package isolation, idempotency, bounded rollback, and safe public projection readback without invoking legacy manual production commands.
+    allowed_paths:
+      - AGENTS.md
+      - backend/app/Services/ContentPromotion/**
+      - backend/config/content_promotion.php
+      - backend/docs/content-promotion-automation-v2.md
+      - backend/tests/Unit/ContentPromotion/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/tests/Feature/Console/ContentPromoteExactPackageCommandTest.php
+      - backend/tests/Sre/ContentPromotionAutomationWorkflowTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify public content bytes, legacy Big Five or Enneagram commands/runtime contracts, media fields, database schema, discoverability, or deploy configuration.
+      - Execute a real package promotion, CMS import, publication, production operation, or manual approval command.
+    validation:
+      - cd backend && php artisan test tests/Unit/ContentPromotion/PromotionConformancePrimitivesTest.php tests/Unit/ContentPromotion/PromotionAdapterCapabilityTest.php tests/Unit/ContentPromotion/PersonalityCmsPromotionAdapterTest.php tests/Feature/Console/ContentPromoteExactPackageCommandTest.php tests/Sre/ContentPromotionAutomationWorkflowTest.php --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=exact_package_content_promotion_automation --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/ContentPromotion tests/Unit/ContentPromotion tests/Feature/Console/ContentPromoteExactPackageCommandTest.php
+      - php -l each modified PHP file
+      - parse train YAML and state JSON
+      - exact changed-file scope validation
+      - git diff --check
+      - git diff --cached --check
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: PersonalityPublicContentAsset, PersonalityPublicContentAssetRevision, and published/working revision pointers
+    repository_rule_impact: preserves text-only personality media and backend-only revision authority while enabling audited exact-package execution

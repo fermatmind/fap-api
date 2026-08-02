@@ -193,7 +193,7 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
         self::assertSame('mbti_comparison_exact_package_mismatch', $wrongCount['error_code']);
 
         $unknown = $this->runPhase('preflight', 'unknown.json', lane: 'W2', subscope: 'big-five', expectedExit: 1);
-        self::assertSame('adapter_audit_metadata_incompatible', $unknown['error_code']);
+        self::assertSame('personality_promotion_manifest_missing', $unknown['error_code']);
 
         self::assertSame(0, MbtiCrossTypeComparisonAuthority::query()->withoutGlobalScopes()->count());
     }

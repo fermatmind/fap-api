@@ -52,18 +52,18 @@ final class PromotionAdapterCapabilityTest extends TestCase
         self::assertCount(10, $registry->capabilities());
         self::assertSame('audit_compatible', $capabilities['W1/mbti-comparisons']);
         self::assertSame('audit_compatible', $capabilities['W1/mbti-results']);
-        self::assertSame(2, count(array_filter($capabilities, static fn (string $capability): bool => $capability === 'audit_compatible')));
-        self::assertSame(8, count(array_filter($capabilities, static fn (string $capability): bool => $capability === 'fail_closed_legacy_audit')));
+        self::assertSame('audit_compatible', $capabilities['W2/big-five']);
+        self::assertSame('audit_compatible', $capabilities['W5/enneagram']);
+        self::assertSame(4, count(array_filter($capabilities, static fn (string $capability): bool => $capability === 'audit_compatible')));
+        self::assertSame(6, count(array_filter($capabilities, static fn (string $capability): bool => $capability === 'fail_closed_legacy_audit')));
     }
 
     /** @return iterable<string, array{string,string}> */
     public static function legacyAdapters(): iterable
     {
-        yield 'W2 Big Five' => ['W2', 'big-five'];
         yield 'W3 Articles' => ['W3', 'articles'];
         yield 'W3 Career Guides' => ['W3', 'career-guides'];
         yield 'W4 RIASEC' => ['W4', 'riasec'];
-        yield 'W5 Enneagram' => ['W5', 'enneagram'];
         yield 'W6 IQ' => ['W6', 'iq'];
         yield 'W7 EQ' => ['W7', 'eq'];
         yield 'W8 Career Jobs' => ['W8', 'career-jobs'];
