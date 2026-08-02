@@ -8,6 +8,17 @@ The executor never changes indexability, sitemap, llms, Search Channel or deploy
 
 ## Adapter capability contract
 
+## Priority matrix
+
+| Situation | Required path |
+| --- | --- |
+| Registered, audit-compatible adapter | V2 automatic workflow: independent W9/QA, dry-run, import, readback, publish, and live QA. |
+| Registered, incompatible adapter | Complete the adapter; do not fall back to manual publication. |
+| Non-package legacy operation | The separate manual SOP may apply only when its direct legacy command is intentionally invoked. |
+| Deploy, migration, secrets/permissions, destructive or SEO discoverability work | Separately controlled; V2 promotion does not authorize it. |
+
+The V2 path must not request a confirmation phrase or approval artifact after its machine gates pass. A W9 `BLOCKED` verdict is repaired and rerun in the same Producer PR, not in a status-only or separate evidence/reset/refreeze PR.
+
 An adapter is executable only after it proves all of the following against its real authority store: atomic draft import, deterministic replay, exact readback, exact publication, no discoverability mutation, an existing audit metadata location and bounded rollback. Missing compatibility fails closed during preflight.
 
 Current capability truth:

@@ -42,6 +42,8 @@ They must not be queried as runtime page-rendering authority. Runtime content sh
 
 ## Import Validation Protocol
 
+Registered audit-compatible exact packages use the V2 promotion workflow as their authoritative import/readback/publish/live-QA path. An end-to-end `/goal` is continuing authorization for that executor once its machine gates pass; legacy confirmation phrases and approval artifacts cannot be reintroduced as V2 prerequisites. An incompatible registered adapter must be completed, not manually bypassed. This does not authorize deployment, migration, secrets/permissions, destructive work, sitemap/llms/Search Channel or other SEO discoverability actions.
+
 Large content imports must be schema-validated and dry-run before import.
 
 Required validation areas:
