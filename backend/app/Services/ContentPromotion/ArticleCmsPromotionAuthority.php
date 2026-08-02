@@ -104,9 +104,15 @@ final class ArticleCmsPromotionAuthority
             $seen[$key] = true;
             $snapshot = is_array($row['snapshot'] ?? null) ? $row['snapshot'] : [];
             $this->assertSnapshot($snapshot);
+            if (str_starts_with($slug, 'big-five-') && preg_match('/\|\s*FermatMind\s*$/i', $snapshot['seo_title']) === 1) {
+                throw new DomainException('article_promotion_seo_title_normalization_invalid');
+            }
             $this->assertNoPrivatePayload($row);
             $article = Article::query()->withoutGlobalScopes()->where(['org_id' => $org, 'slug' => $slug, 'locale' => 'en'])->first();
-            if (! $article instanceof Article || (string) $article->status !== 'published' || ! (bool) $article->is_public) {
+            $publishedRevision = $article instanceof Article && $article->published_revision_id
+                ? ArticleTranslationRevision::query()->withoutGlobalScopes()->whereKey($article->published_revision_id)->where('article_id', $article->id)->first()
+                : null;
+            if (! $article instanceof Article || (string) $article->status !== 'published' || ! (bool) $article->is_public || ! $publishedRevision instanceof ArticleTranslationRevision || (string) $publishedRevision->revision_status !== ArticleTranslationRevision::STATUS_PUBLISHED) {
                 throw new DomainException('article_promotion_target_not_public_authority');
             }
             $targets[] = ['article' => $article, 'identity' => ['org_id' => $org, 'locale' => 'en', 'slug' => $slug], 'asset_key' => $key, 'snapshot' => $snapshot, 'source_hash' => hash('sha256', PromotionContextFactory::canonicalJson($row))];

@@ -103,8 +103,15 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
                 $seo = ArticleSeoMeta::query()->withoutGlobalScopes()->lockForUpdate()->where('article_id', $article->id)->first();
                 $this->assertExpectedPublishedProjection($article, $revision, $seo, $row);
                 foreach ((array) ($row['revision_statuses_before'] ?? []) as $revisionId => $status) {
-                    ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', $article->id)->whereKey((int) $revisionId)
-                        ->update(['revision_status' => (string) $status]);
+                    if ((int) $revisionId === (int) $revision->id) {
+                        continue;
+                    }
+                    $priorRevision = ArticleTranslationRevision::query()->withoutGlobalScopes()->lockForUpdate()->where('article_id', $article->id)->find((int) $revisionId);
+                    $expectedStatus = (string) $status === ArticleTranslationRevision::STATUS_PUBLISHED ? ArticleTranslationRevision::STATUS_STALE : (string) $status;
+                    if (! $priorRevision instanceof ArticleTranslationRevision || (string) $priorRevision->revision_status !== $expectedStatus) {
+                        throw new DomainException('article_promotion_rollback_revision_drift');
+                    }
+                    $priorRevision->forceFill(['revision_status' => (string) $status])->saveQuietly();
                 }
                 $article->forceFill((array) ($row['article_before'] ?? []))->save();
                 $seoBefore = (array) ($row['seo_before'] ?? []);
