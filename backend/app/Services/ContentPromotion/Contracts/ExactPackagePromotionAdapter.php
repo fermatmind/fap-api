@@ -10,6 +10,12 @@ interface ExactPackagePromotionAdapter
 {
     public function id(): string;
 
+    /**
+     * Returns the capability proven by this concrete adapter, rather than a
+     * configuration-only declaration.
+     */
+    public function capability(): string;
+
     public function supports(string $lane, ?string $subscope): bool;
 
     /** @return array<string, mixed> */

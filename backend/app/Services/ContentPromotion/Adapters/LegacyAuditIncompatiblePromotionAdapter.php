@@ -21,6 +21,11 @@ final readonly class LegacyAuditIncompatiblePromotionAdapter implements ExactPac
         return $this->adapterId;
     }
 
+    public function capability(): string
+    {
+        return 'fail_closed_legacy_audit';
+    }
+
     public function supports(string $lane, ?string $subscope): bool
     {
         return $lane === $this->lane && $subscope === $this->subscope;

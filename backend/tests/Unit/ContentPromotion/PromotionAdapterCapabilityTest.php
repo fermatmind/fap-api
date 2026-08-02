@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace Tests\Unit\ContentPromotion;
 
+require_once __DIR__.'/Concerns/AssertsExactPackagePromotionConformance.php';
+
 use App\Services\ContentPromotion\PromotionAdapterRegistry;
 use App\Services\ContentPromotion\PromotionContext;
-use DomainException;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
+use Tests\Unit\ContentPromotion\Concerns\AssertsExactPackagePromotionConformance;
 
 final class PromotionAdapterCapabilityTest extends TestCase
 {
+    use AssertsExactPackagePromotionConformance;
+
     #[DataProvider('legacyAdapters')]
     public function test_legacy_adapters_fail_closed_for_every_phase_until_audit_and_rollback_are_compatible(string $lane, string $subscope): void
     {
@@ -32,19 +36,23 @@ final class PromotionAdapterCapabilityTest extends TestCase
         );
 
         foreach (['preflight', 'draftImport', 'publish', 'liveQa'] as $method) {
-            try {
-                $adapter->{$method}($context);
-                self::fail($method.' must fail closed.');
-            } catch (DomainException $exception) {
-                self::assertSame('adapter_audit_metadata_incompatible', $exception->getMessage());
-            }
+            $this->assertAdapterFailsClosed(fn (): array => $adapter->{$method}($context));
         }
-        try {
+        $this->assertAdapterFailsClosed(function () use ($adapter, $context): void {
             $adapter->rollback($context, 'none');
-            self::fail('rollback must fail closed.');
-        } catch (DomainException $exception) {
-            self::assertSame('adapter_audit_metadata_incompatible', $exception->getMessage());
-        }
+        });
+    }
+
+    public function test_registry_capabilities_are_proven_by_concrete_adapters_and_match_config(): void
+    {
+        $registry = app(PromotionAdapterRegistry::class);
+        $capabilities = $registry->capabilitiesByLaneSubscope();
+
+        self::assertCount(10, $capabilities);
+        self::assertCount(10, $registry->capabilities());
+        self::assertSame('audit_compatible', $capabilities['W1/mbti-comparisons']);
+        self::assertSame(1, count(array_filter($capabilities, static fn (string $capability): bool => $capability === 'audit_compatible')));
+        self::assertSame(9, count(array_filter($capabilities, static fn (string $capability): bool => $capability === 'fail_closed_legacy_audit')));
     }
 
     /** @return iterable<string, array{string,string}> */

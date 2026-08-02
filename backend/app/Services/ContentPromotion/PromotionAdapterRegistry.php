@@ -59,4 +59,34 @@ final class PromotionAdapterRegistry
     {
         return array_map(static fn (ExactPackagePromotionAdapter $adapter): string => $adapter->id(), $this->adapters);
     }
+
+    /** @return array<string, string> */
+    public function capabilities(): array
+    {
+        $capabilities = [];
+        foreach ($this->adapters as $adapter) {
+            $capabilities[$adapter->id()] = $adapter->capability();
+        }
+        ksort($capabilities, SORT_STRING);
+
+        return $capabilities;
+    }
+
+    /** @return array<string, string> */
+    public function capabilitiesByLaneSubscope(): array
+    {
+        $capabilities = [];
+        foreach ((array) config('content_promotion.adapter_capabilities', []) as $lane => $subscopes) {
+            foreach ((array) $subscopes as $subscope => $declaredCapability) {
+                $adapter = $this->resolve((string) $lane, (string) $subscope);
+                $capabilities[(string) $lane.'/'.(string) $subscope] = $adapter->capability();
+                if ($adapter->capability() !== $declaredCapability) {
+                    throw new DomainException('promotion_adapter_capability_config_drift');
+                }
+            }
+        }
+        ksort($capabilities, SORT_STRING);
+
+        return $capabilities;
+    }
 }

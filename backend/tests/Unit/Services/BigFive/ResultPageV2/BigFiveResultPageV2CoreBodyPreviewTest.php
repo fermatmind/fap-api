@@ -1044,6 +1044,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/ContentPromotion/PromotionContext.php',
             'backend/app/Services/ContentPromotion/PromotionContextFactory.php',
             'backend/app/Services/ContentPromotion/PromotionReceiptStore.php',
+            'backend/app/Services/ContentPromotion/PromotionAdapterResultFactory.php',
+            'backend/app/Services/ContentPromotion/PromotionPhaseIdentity.php',
+            'backend/app/Services/ContentPromotion/PromotionRollbackSnapshotService.php',
+            'backend/app/Services/ContentPromotion/PromotionTargetSet.php',
         ];
         $blocked = [
             'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
@@ -9428,6 +9432,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/ContentPromotion/PromotionContext.php',
             'backend/app/Services/ContentPromotion/PromotionContextFactory.php',
             'backend/app/Services/ContentPromotion/PromotionReceiptStore.php',
+            'backend/app/Services/ContentPromotion/PromotionAdapterResultFactory.php',
+            'backend/app/Services/ContentPromotion/PromotionPhaseIdentity.php',
+            'backend/app/Services/ContentPromotion/PromotionRollbackSnapshotService.php',
+            'backend/app/Services/ContentPromotion/PromotionTargetSet.php',
         ], true);
     }
 
