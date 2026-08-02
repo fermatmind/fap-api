@@ -1056,6 +1056,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $allowed = [
             'backend/app/Console/Commands/ContentPromoteExactPackage.php',
+            'backend/app/Console/Commands/ContentBindPersonalityPromotionReview.php',
             'backend/app/Services/ContentPromotion/Contracts/ExactPackagePromotionAdapter.php',
             'backend/app/Services/ContentPromotion/Adapters/LegacyAuditIncompatiblePromotionAdapter.php',
             'backend/app/Services/ContentPromotion/Adapters/MbtiComparisonEnglishPromotionAdapter.php',
@@ -1065,6 +1066,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/ContentPromotion/ExactPackagePromotionService.php',
             'backend/app/Services/ContentPromotion/MbtiResultPromotionAuthority.php',
             'backend/app/Services/ContentPromotion/PersonalityCmsPromotionAuthority.php',
+            'backend/app/Services/ContentPromotion/PersonalityCmsPromotionReviewBinder.php',
             'backend/app/Services/ContentPromotion/PromotionAdapterRegistry.php',
             'backend/app/Services/ContentPromotion/PromotionContext.php',
             'backend/app/Services/ContentPromotion/PromotionContextFactory.php',
@@ -9462,6 +9464,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Console/Commands/ContentPromoteExactPackage.php',
+            'backend/app/Console/Commands/ContentBindPersonalityPromotionReview.php',
             'backend/app/Services/ContentPromotion/Contracts/ExactPackagePromotionAdapter.php',
             'backend/app/Services/ContentPromotion/Adapters/LegacyAuditIncompatiblePromotionAdapter.php',
             'backend/app/Services/ContentPromotion/Adapters/MbtiComparisonEnglishPromotionAdapter.php',
@@ -9471,6 +9474,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/ContentPromotion/ExactPackagePromotionService.php',
             'backend/app/Services/ContentPromotion/MbtiResultPromotionAuthority.php',
             'backend/app/Services/ContentPromotion/PersonalityCmsPromotionAuthority.php',
+            'backend/app/Services/ContentPromotion/PersonalityCmsPromotionReviewBinder.php',
             'backend/app/Services/ContentPromotion/PromotionAdapterRegistry.php',
             'backend/app/Services/ContentPromotion/PromotionContext.php',
             'backend/app/Services/ContentPromotion/PromotionContextFactory.php',
