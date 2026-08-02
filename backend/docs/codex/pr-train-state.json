@@ -48,7 +48,13 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "command": "verify-bigfive",
+            "status": "failed_then_repaired",
+            "details": "The initial PR head omitted the four T5 Career ContentPromotion paths from the exact-package runtime-freeze allowlist. The failure was repaired in the same PR; focused freeze validation passed locally before retry."
+          }
+        ]
       },
       "failure_reason": null,
       "resume_policy": "continuous_goal",
@@ -75,6 +81,11 @@
           "at": "2026-08-02T11:20:00Z",
           "status": "pr_open",
           "summary": "Opened PR #3508 after scoped local validation. Required GitHub checks are pending; no production operation was executed."
+        },
+        {
+          "at": "2026-08-02T12:45:00Z",
+          "status": "github_check_repairing",
+          "summary": "verify-bigfive failed because the exact-package runtime-freeze allowlist did not yet list the four new T5 adapter/authority files. Added only those exact paths and reran the focused runtime-freeze contract locally; no production operation was executed."
         }
       ]
     },
