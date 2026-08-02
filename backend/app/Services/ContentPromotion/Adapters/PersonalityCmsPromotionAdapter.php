@@ -117,12 +117,13 @@ final class PersonalityCmsPromotionAdapter implements ExactPackagePromotionAdapt
                     ...$before,
                     'published_revision_id' => $revisionId > 0 ? $revisionId : null,
                     'working_revision_id' => $workingRevisionId > 0 ? $workingRevisionId : null,
-                ])->save();
+                ])->saveQuietly();
                 $promotedRevision->forceFill([
                     'workflow_state' => (string) ($row['working_revision_workflow_state_before'] ?? PersonalityPublicContentAssetRevision::STATE_DRAFT),
                 ])->save();
             }
         });
+        $this->authority->invalidateTargets($package['targets']);
     }
 
     /** @param array{framework:string,targets:list<array<string,mixed>>,package_sha256:string} $package */

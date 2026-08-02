@@ -873,6 +873,15 @@ final class PersonalityPublicContentAssetController extends Controller
             <= self::MAX_DETAIL_PAYLOAD_BYTES;
     }
 
+    /**
+     * Read-only support for exact-package preflight. The caller supplies an
+     * unsaved candidate model, so this does not read or mutate public state.
+     */
+    public function detailPayloadWithinBudgetForAsset(PersonalityPublicContentAsset $asset): bool
+    {
+        return $this->detailPayloadWithinBudget($this->detailPayload($asset));
+    }
+
     private function payloadBudgetExceededResponse(string $cacheState): JsonResponse
     {
         return response()->json([

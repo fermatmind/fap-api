@@ -167,9 +167,27 @@ final readonly class PersonalityReviewAttestationService
     /** @param list<array{identity:string,sha256:string}> $authoritativeTargets */
     public function hasApprovedEvidence(string $surfaceId, array $authoritativeTargets): bool
     {
+        return $this->approvedAllEvidence($surfaceId, $authoritativeTargets) instanceof ReviewAttestation;
+    }
+
+    /**
+     * Return the newest immutable configured-owner approval over exactly the
+     * supplied target set. This is private evidence only; callers must never
+     * project the returned attestation or reviewer identity to public output.
+     *
+     * @param  list<array{identity:string,sha256:string}>  $authoritativeTargets
+     */
+    public function approvedAllEvidence(
+        string $surfaceId,
+        array $authoritativeTargets,
+        ?string $expectedPackageSha256 = null,
+    ): ?ReviewAttestation {
         $currentOwnerAdminUserId = (int) config('review_governance.solo_owner_admin_user_id');
-        if (! $this->usesSoloOwnerMode() || $currentOwnerAdminUserId <= 0) {
-            return false;
+        if (! $this->usesSoloOwnerMode()
+            || $currentOwnerAdminUserId <= 0
+            || ($expectedPackageSha256 !== null
+                && preg_match('/^[0-9a-f]{64}$/', $expectedPackageSha256) !== 1)) {
+            return null;
         }
 
         $targetSet = ReviewTargetSet::fromArray(
@@ -177,9 +195,11 @@ final readonly class PersonalityReviewAttestationService
             $this->canonicalizer,
         );
 
-        return ReviewAttestation::query()
+        $query = ReviewAttestation::query()
+            ->where('schema_version', (string) config('review_governance.attestation.schema_version'))
             ->where('review_mode', 'solo_owner')
             ->where('review_source', (string) config('review_governance.attestation.review_source'))
+            ->where('statement_version', (string) config('review_governance.attestation.statement_version'))
             ->where('attested_by_admin_user_id', $currentOwnerAdminUserId)
             ->where('decision', 'approved_all')
             ->where('target_count', $targetSet->count())
@@ -195,8 +215,13 @@ final readonly class PersonalityReviewAttestationService
                         }
                     });
             }, '=', $targetSet->count())
-            ->has('targetEvidences', '=', $targetSet->count())
-            ->exists();
+            ->has('targetEvidences', '=', $targetSet->count());
+
+        if ($expectedPackageSha256 !== null) {
+            $query->where('package_sha256', $expectedPackageSha256);
+        }
+
+        return $query->orderByDesc('attested_at')->orderByDesc('id')->first();
     }
 
     /** @param list<array{identity:string,sha256:string}> $authoritativeTargets */

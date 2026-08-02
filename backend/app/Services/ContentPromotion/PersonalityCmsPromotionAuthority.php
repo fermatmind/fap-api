@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services\ContentPromotion;
 
+use App\Http\Controllers\API\V0_5\Cms\PersonalityPublicContentAssetController;
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
-use App\Models\PersonalityPublicContentAssetRevisionReview;
 use App\Services\Cms\PersonalityPublicAssetReadModelCache;
 use DomainException;
 use Illuminate\Support\Facades\DB;
@@ -24,7 +24,15 @@ final class PersonalityCmsPromotionAuthority
 
     private const JSON_EDITORIAL_FIELDS = ['content_sections_json', 'seo_json', 'faq_json', 'method_boundary_json', 'evidence_notes_json', 'authority_json', 'internal_links_json'];
 
-    public function __construct(private readonly PersonalityPublicAssetReadModelCache $cache) {}
+    private const PRIVATE_ROUTE_PATTERN = '~(?<![A-Za-z0-9_-])/(?:attempt|attempts|result|results|report|reports|order|orders|payment|pay|share|shares|recovery|account|private)(?:/|[?#\s)"\']|$)~i';
+
+    private const SENSITIVE_QUERY_PATTERN = '/(?:[?&]|^)(?:attempt_id|result_id|order_id|payment_id|token|recovery_token|score|user_id|report_id)=/i';
+
+    public function __construct(
+        private readonly PersonalityPublicAssetReadModelCache $cache,
+        private readonly PersonalityCmsPromotionReviewBinder $reviews,
+        private readonly PersonalityPublicContentAssetController $payloads,
+    ) {}
 
     /** @return array{framework:string,targets:list<array<string,mixed>>,package_sha256:string} */
     public function inspect(PromotionContext $context): array
@@ -51,7 +59,7 @@ final class PersonalityCmsPromotionAuthority
         $payloads = $manifest['payloads'];
         usort($payloads, static fn (array $a, array $b): int => ((string) ($a['path'] ?? '')) <=> ((string) ($b['path'] ?? '')));
         $assets = null;
-        $reviews = null;
+        $payloadPaths = [];
         foreach ($payloads as $payload) {
             $relative = trim((string) ($payload['path'] ?? ''));
             $expected = strtolower(trim((string) ($payload['sha256'] ?? '')));
@@ -62,13 +70,14 @@ final class PersonalityCmsPromotionAuthority
             if (! is_string($bytes) || ! hash_equals($expected, hash('sha256', $bytes))) {
                 throw new DomainException('personality_promotion_payload_hash_invalid');
             }
+            $payloadPaths[] = $relative;
             $chain .= $relative."\n".$expected."\n";
             if ($relative === 'assets.json') {
                 $assets = $this->decode($bytes, 'personality_promotion_assets_invalid');
             }
-            if ($relative === 'review-evidence.json') {
-                $reviews = $this->decode($bytes, 'personality_promotion_review_evidence_invalid');
-            }
+        }
+        if ($payloadPaths !== ['assets.json']) {
+            throw new DomainException('personality_promotion_payload_contract_invalid');
         }
         $manifestForChain = $manifest;
         unset($manifestForChain['package_sha256']);
@@ -79,18 +88,6 @@ final class PersonalityCmsPromotionAuthority
         $rows = is_array($assets['assets'] ?? null) ? $assets['assets'] : null;
         if (! is_array($rows) || count($rows) !== $context->expectedRowCount || (int) ($manifest['expected_row_count'] ?? -1) !== $context->expectedRowCount) {
             throw new DomainException('personality_promotion_target_count_invalid');
-        }
-        $reviewRows = is_array($reviews['reviews'] ?? null) ? $reviews['reviews'] : null;
-        if (! is_array($reviewRows) || count($reviewRows) !== $context->expectedRowCount) {
-            throw new DomainException('personality_promotion_review_evidence_invalid');
-        }
-        $reviewsByKey = [];
-        foreach ($reviewRows as $review) {
-            $reviewKey = is_array($review) ? (string) ($review['asset_key'] ?? '') : '';
-            if ($reviewKey === '' || isset($reviewsByKey[$reviewKey])) {
-                throw new DomainException('personality_promotion_review_evidence_invalid');
-            }
-            $reviewsByKey[$reviewKey] = $review;
         }
         $seen = [];
         $targets = [];
@@ -107,9 +104,7 @@ final class PersonalityCmsPromotionAuthority
             $seen[$key] = true;
             $this->assertNoPrivateFields($row);
             $this->assertTextOnlySnapshot($snapshot);
-            $review = $reviewsByKey[$key] ?? null;
             $sourceHash = hash('sha256', PromotionContextFactory::canonicalJson($row));
-            $this->assertReviewPayload($review, $key, $sourceHash);
             $asset = PersonalityPublicContentAsset::query()->withoutGlobalScopes()->where([
                 'org_id' => 0,
                 'framework' => $framework,
@@ -120,7 +115,12 @@ final class PersonalityCmsPromotionAuthority
             if (! $asset instanceof PersonalityPublicContentAsset || ! (bool) $asset->is_public || (string) $asset->launch_state !== PersonalityPublicContentAsset::LAUNCH_PUBLISHED) {
                 throw new DomainException('personality_promotion_target_not_public_authority');
             }
-            $targets[] = ['asset' => $asset, 'identity' => $identity, 'asset_key' => $key, 'snapshot' => $snapshot, 'source_hash' => $sourceHash, 'review' => $review];
+            $candidate = $asset->replicate();
+            $candidate->forceFill($snapshot);
+            if (! $this->payloads->detailPayloadWithinBudgetForAsset($candidate)) {
+                throw new DomainException('personality_promotion_public_payload_budget_exceeded');
+            }
+            $targets[] = ['asset' => $asset, 'identity' => $identity, 'asset_key' => $key, 'snapshot' => $snapshot, 'source_hash' => $sourceHash];
         }
         usort($targets, static fn (array $a, array $b): int => $a['asset_key'] <=> $b['asset_key']);
 
@@ -160,7 +160,6 @@ final class PersonalityCmsPromotionAuthority
                     $asset->forceFill(['working_revision_id' => $revision->id])->saveQuietly();
                     $created++;
                 }
-                $this->bindReviewEvidence($asset, $revision, $target['review'], $context);
             }
 
             return ['created_count' => $created, 'unchanged_count' => count($package['targets']) - $created, 'readback_count' => count($package['targets'])];
@@ -174,19 +173,26 @@ final class PersonalityCmsPromotionAuthority
 
         $result = DB::transaction(function () use ($context, $package): array {
             $changed = 0;
+            $resolved = [];
             foreach ($package['targets'] as $target) {
                 $asset = PersonalityPublicContentAsset::query()->withoutGlobalScopes()->lockForUpdate()->findOrFail($target['asset']->id);
                 $revision = PersonalityPublicContentAssetRevision::query()->where('authority_package_sha256', $context->packageSha256)->where('authority_asset_key', $target['asset_key'])->first();
                 if (! $revision instanceof PersonalityPublicContentAssetRevision) {
                     throw new DomainException('personality_promotion_draft_missing');
                 }
+                if (! ((int) $asset->published_revision_id === (int) $revision->id && $asset->working_revision_id === null)
+                    && (int) $asset->working_revision_id !== (int) $revision->id) {
+                    throw new DomainException('personality_promotion_working_pointer_invalid');
+                }
+                $resolved[] = ['asset' => $asset, 'revision' => $revision, 'asset_key' => $target['asset_key']];
+            }
+            $this->reviews->assertApproved($context, $resolved);
+            foreach ($resolved as $target) {
+                $asset = $target['asset'];
+                $revision = $target['revision'];
                 if ((int) $asset->published_revision_id === (int) $revision->id && $asset->working_revision_id === null) {
                     continue;
                 }
-                if ((int) $asset->working_revision_id !== (int) $revision->id) {
-                    throw new DomainException('personality_promotion_working_pointer_invalid');
-                }
-                $this->assertApprovedReview($asset, $revision, $context);
                 if (! hash_equals(
                     (string) $revision->public_runtime_fingerprint_before,
                     hash('sha256', PromotionContextFactory::canonicalJson($this->publicSnapshot($asset))),
@@ -209,7 +215,7 @@ final class PersonalityCmsPromotionAuthority
 
             return ['changed_count' => $changed, 'unchanged_count' => count($package['targets']) - $changed, 'readback_count' => count($package['targets'])];
         });
-        $this->invalidate($package['targets']);
+        $this->invalidateTargets($package['targets']);
 
         return $result;
     }
@@ -218,6 +224,7 @@ final class PersonalityCmsPromotionAuthority
     public function liveQa(PromotionContext $context): array
     {
         $package = $this->inspect($context);
+        $resolved = [];
         foreach ($package['targets'] as $target) {
             $asset = PersonalityPublicContentAsset::query()->withoutGlobalScopes()->find($target['asset']->id);
             if (! $asset instanceof PersonalityPublicContentAsset || $asset->working_revision_id !== null || ! $asset->published_revision_id) {
@@ -231,7 +238,9 @@ final class PersonalityCmsPromotionAuthority
                 throw new DomainException('personality_promotion_public_projection_parity_invalid');
             }
             $this->assertTextOnlySnapshot($this->publicSnapshot($asset));
+            $resolved[] = ['asset' => $asset, 'revision' => $revision, 'asset_key' => $target['asset_key']];
         }
+        $this->reviews->assertApproved($context, $resolved);
 
         return ['readback_count' => count($package['targets'])];
     }
@@ -269,12 +278,16 @@ final class PersonalityCmsPromotionAuthority
                 throw new DomainException('personality_promotion_snapshot_type_invalid');
             }
         }
+        if (trim((string) $snapshot['source_package']) === ''
+            || preg_match('/\A[0-9a-f]{64}\z/', (string) $snapshot['source_hash']) !== 1) {
+            throw new DomainException('personality_promotion_snapshot_provenance_invalid');
+        }
     }
 
     private function containsCjkOrImage(mixed $value): bool
     {
         if (is_string($value)) {
-            return preg_match('/[\p{Han}]|!\[[^\]]*\]\s*(?:\(|\[)|<\/?(?:img|picture|source|svg|figure|video|audio|iframe|object|embed|canvas)\b/iu', $value) === 1;
+            return preg_match('/[\p{Han}]|!\[|<\/?(?:img|picture|source|svg|figure|video|audio|iframe|object|embed|canvas)\b/iu', $value) === 1;
         }
         if (! is_array($value)) {
             return false;
@@ -290,6 +303,11 @@ final class PersonalityCmsPromotionAuthority
 
     private function assertNoPrivateFields(mixed $value): void
     {
+        if (is_string($value)
+            && (preg_match(self::PRIVATE_ROUTE_PATTERN, $value) === 1
+                || preg_match(self::SENSITIVE_QUERY_PATTERN, $value) === 1)) {
+            throw new DomainException('personality_promotion_private_payload_invalid');
+        }
         if (! is_array($value)) {
             return;
         }
@@ -301,70 +319,15 @@ final class PersonalityCmsPromotionAuthority
         }
     }
 
-    private function assertApprovedReview(
-        PersonalityPublicContentAsset $asset,
-        PersonalityPublicContentAssetRevision $revision,
-        PromotionContext $context,
-    ): void {
-        $review = PersonalityPublicContentAssetRevisionReview::query()
-            ->where('revision_id', $revision->id)
-            ->first();
-        if (! $review instanceof PersonalityPublicContentAssetRevisionReview
-            || (int) $review->asset_id !== (int) $asset->id
-            || (string) $review->authority_asset_key !== (string) $revision->authority_asset_key
-            || (string) $review->source_package !== (string) $revision->source_package
-            || ! hash_equals((string) $review->asset_sha256, (string) $revision->source_hash)
-            || ! hash_equals((string) $review->authority_package_sha256, $context->packageSha256)
-            || ! hash_equals((string) $review->authority_package_sha256, (string) $revision->authority_package_sha256)
-            || preg_match('/\A[0-9a-f]{64}\z/', (string) $review->review_register_sha256) !== 1
-            || trim((string) $review->reviewer_name) === ''
-            || $review->reviewed_at === null
-            || (string) $review->decision !== PersonalityPublicContentAssetRevisionReview::DECISION_APPROVED
-            || (string) $review->review_source !== PersonalityPublicContentAssetRevisionReview::REVIEW_SOURCE_OPERATOR_SUPPLIED_HUMAN
-            || preg_match('/\A[0-9a-f]{64}\z/', (string) $review->evidence_sha256) !== 1) {
-            throw new DomainException('personality_promotion_review_evidence_invalid');
-        }
-    }
-
-    private function assertReviewPayload(mixed $review, string $assetKey, string $sourceHash): void
-    {
-        if (! is_array($review)
-            || (string) ($review['asset_key'] ?? '') !== $assetKey
-            || ! hash_equals((string) ($review['asset_sha256'] ?? ''), $sourceHash)
-            || preg_match('/\A[0-9a-f]{64}\z/', (string) ($review['review_register_sha256'] ?? '')) !== 1
-            || trim((string) ($review['reviewer_name'] ?? '')) === ''
-            || trim((string) ($review['reviewed_at'] ?? '')) === ''
-            || ($review['decision'] ?? null) !== PersonalityPublicContentAssetRevisionReview::DECISION_APPROVED
-            || ($review['review_source'] ?? null) !== PersonalityPublicContentAssetRevisionReview::REVIEW_SOURCE_OPERATOR_SUPPLIED_HUMAN
-            || preg_match('/\A[0-9a-f]{64}\z/', (string) ($review['evidence_sha256'] ?? '')) !== 1) {
-            throw new DomainException('personality_promotion_review_evidence_invalid');
-        }
-    }
-
-    /** @param array<string,mixed> $review */
-    private function bindReviewEvidence(PersonalityPublicContentAsset $asset, PersonalityPublicContentAssetRevision $revision, array $review, PromotionContext $context): void
-    {
-        $existing = PersonalityPublicContentAssetRevisionReview::query()->where('revision_id', $revision->id)->first();
-        if ($existing instanceof PersonalityPublicContentAssetRevisionReview) {
-            $this->assertApprovedReview($asset, $revision, $context);
-
-            return;
-        }
-        PersonalityPublicContentAssetRevisionReview::query()->create([
-            'revision_id' => $revision->id, 'asset_id' => $asset->id, 'authority_asset_key' => $revision->authority_asset_key,
-            'source_package' => $revision->source_package, 'asset_sha256' => $revision->source_hash, 'authority_package_sha256' => $context->packageSha256,
-            'review_register_sha256' => $review['review_register_sha256'], 'reviewer_name' => $review['reviewer_name'], 'reviewed_at' => $review['reviewed_at'],
-            'decision' => $review['decision'], 'review_source' => $review['review_source'], 'evidence_sha256' => $review['evidence_sha256'],
-        ]);
-    }
-
     /** @param list<array<string,mixed>> $targets */
-    private function invalidate(array $targets): void
+    public function invalidateTargets(array $targets): void
     {
         foreach ($targets as $target) {
             $asset = $target['asset'];
-            $this->cache->invalidateAsset($asset->framework, $asset->entity_type, $asset->entity_key, $asset->slug, $asset->locale, (int) $asset->org_id, true);
-            $this->cache->invalidateCollections($asset->framework, $asset->entity_type, $asset->locale, (int) $asset->org_id, true);
+            if (! $this->cache->invalidateAsset($asset->framework, $asset->entity_type, $asset->entity_key, $asset->slug, $asset->locale, (int) $asset->org_id, true)
+                || ! $this->cache->invalidateCollections($asset->framework, $asset->entity_type, $asset->locale, (int) $asset->org_id, true)) {
+                throw new DomainException('personality_promotion_cache_invalidation_failed');
+            }
         }
     }
 
