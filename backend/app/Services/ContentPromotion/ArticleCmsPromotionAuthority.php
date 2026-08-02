@@ -196,11 +196,23 @@ final class ArticleCmsPromotionAuthority
             || ! hash_equals((string) ($frozenManifest['package_sha256'] ?? ''), $context->packageSha256)) {
             throw new DomainException('article_promotion_package_sha_invalid');
         }
+        $frozenPayloadChain = [];
+        $seenFrozenPayloads = [];
         foreach ((array) ($frozenManifest['files'] ?? []) as $file) {
-            $path = 'frozen_package/'.(string) ($file['path'] ?? '');
-            if (! isset($declared[$path]) || ! hash_equals((string) ($file['sha256'] ?? ''), $declared[$path])) {
+            $relativePath = (string) ($file['path'] ?? '');
+            $sha = (string) ($file['sha256'] ?? '');
+            $path = 'frozen_package/'.$relativePath;
+            if ($relativePath === '' || basename($relativePath) !== $relativePath || isset($seenFrozenPayloads[$relativePath])
+                || ! isset($declared[$path]) || preg_match('/\A[a-f0-9]{64}\z/', $sha) !== 1
+                || ! hash_equals($sha, $declared[$path])) {
                 throw new DomainException('article_promotion_external_inventory_invalid');
             }
+            $seenFrozenPayloads[$relativePath] = true;
+            $frozenPayloadChain[] = $relativePath.':'.$sha;
+        }
+        $derivedPackageSha = hash('sha256', implode("\n", $frozenPayloadChain));
+        if (count($frozenPayloadChain) !== 8 || ! hash_equals($derivedPackageSha, $context->packageSha256)) {
+            throw new DomainException('article_promotion_package_sha_invalid');
         }
         $w9 = (array) ($evidence['independent_w9'] ?? []);
         if (($w9['path'] ?? null) !== 'articles/d70e468b/independent_qa_report.json'
@@ -286,7 +298,10 @@ final class ArticleCmsPromotionAuthority
                     : $this->createCandidateArticle($target);
                 $revision = $this->exactRevision($article, $context, $target);
                 if ($revision instanceof ArticleTranslationRevision) {
-                    if ((int) $article->working_revision_id !== (int) $revision->id && (int) $article->published_revision_id !== (int) $revision->id) {
+                    if ((int) $article->published_revision_id === (int) $revision->id || (string) $revision->revision_status === ArticleTranslationRevision::STATUS_PUBLISHED) {
+                        throw new DomainException('article_promotion_draft_already_published');
+                    }
+                    if ((int) $article->working_revision_id !== (int) $revision->id || (string) $revision->revision_status !== ArticleTranslationRevision::STATUS_APPROVED) {
                         throw new DomainException('article_promotion_revision_collision');
                     }
 

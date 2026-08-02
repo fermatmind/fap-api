@@ -252,6 +252,12 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
         $published = $adapter->publish($context);
         self::assertSame(17, $published['published_count']);
         self::assertSame(17, $adapter->liveQa($context)['published_count']);
+        try {
+            $adapter->draftImport($context);
+            self::fail('A published exact revision must not be reported as a new draft import.');
+        } catch (\DomainException $exception) {
+            self::assertSame('article_promotion_draft_already_published', $exception->getMessage());
+        }
         self::assertSame(17, Article::query()->withoutGlobalScopes()->where('locale', 'en')->where('status', 'published')->where('is_public', true)->count());
         self::assertSame(0, Article::query()->withoutGlobalScopes()->where('locale', 'en')->where('is_indexable', true)->count());
 
