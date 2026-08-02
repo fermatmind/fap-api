@@ -227,6 +227,27 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_big_five_v0_4_controlled_import_registration(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/BigFiveResultPageV2ProductionImportCommand.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/BigFive/ResultPageV2/Production/BigFiveResultPageV2ProductionImportExecutor.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\BigFiveResultPageV2ProductionImportCommand;',
+            '+        BigFiveResultPageV2ProductionImportCommand::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', '', $kernelChangedLines));
+        $this->assertSame(
+            ['backend/app/Console/Kernel.php'],
+            $this->mbtiImpactingRuntimeChanges($allowed, '', '', array_merge($kernelChangedLines, [
+                '+        FutureBigFiveRuntimeCommand::class,',
+            ])),
+        );
+    }
+
     public function test_runtime_freeze_classifier_ignores_eq60_form_catalog(): void
     {
         $allowed = [
@@ -7129,6 +7150,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveV04ControlledImportFile($file)) {
+                continue;
+            }
+
             if ($this->isCareerAiImpactPreviewRouteReadinessFile($file)) {
                 continue;
             }
@@ -8910,6 +8935,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsBigFiveSeoDiscoverabilityReleaseOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsBigFivePublicProfileAgentDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsBigFivePublicProfileAgentPromotionOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsBigFiveV04ControlledImportOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoOpsP0CtrArticleCmsUpdateWriterOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoOpsZhArticleQualityRepairDryRunOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoOpsZhArticleQualityWriterOrReadbackOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -9207,6 +9233,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Domain/Career/Bridge/BigFiveCareerBridgeContract.php',
             'backend/app/Domain/Career/Bridge/BigFiveCareerBridgeAuditor.php',
+        ], true);
+    }
+
+    private function isBigFiveV04ControlledImportFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/BigFiveResultPageV2ProductionImportCommand.php',
+            'backend/app/Services/BigFive/ResultPageV2/Production/BigFiveResultPageV2ProductionImportExecutor.php',
         ], true);
     }
 
@@ -14931,6 +14965,22 @@ DIFF;
         }
 
         return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsBigFiveV04ControlledImportOnly(array $changedLines): bool
+    {
+        $normalized = array_map(
+            static fn (string $line): string => ltrim($line, '+-'),
+            $changedLines,
+        );
+
+        return $normalized === [
+            'use App\\Console\\Commands\\BigFiveResultPageV2ProductionImportCommand;',
+            '        BigFiveResultPageV2ProductionImportCommand::class,',
+        ];
     }
 
     /**
