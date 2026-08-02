@@ -6,6 +6,8 @@ namespace Tests\Feature\Console;
 
 require_once __DIR__.'/../../Unit/ContentPromotion/Concerns/AssertsExactPackagePromotionConformance.php';
 
+use App\Models\Article;
+use App\Models\ArticleTranslationRevision;
 use App\Models\MbtiCrossTypeComparisonAuthority;
 use App\Services\Cms\MbtiComparisonEnglishPublishService;
 use App\Services\ContentImport\MbtiComparisonEnglishPackageImporter;
@@ -30,6 +32,8 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
 
     private ?string $mbtiResultPackageDirectory = null;
 
+    private ?string $articlePackageDirectory = null;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -49,6 +53,9 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
         @rmdir($this->receiptDirectory);
         if ($this->mbtiResultPackageDirectory !== null) {
             File::deleteDirectory($this->mbtiResultPackageDirectory);
+        }
+        if ($this->articlePackageDirectory !== null) {
+            File::deleteDirectory($this->articlePackageDirectory);
         }
         File::deleteDirectory($this->w9Directory);
         foreach ([
@@ -138,6 +145,39 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
             self::assertSame(1, \Illuminate\Support\Facades\DB::table('content_pack_activations')
                 ->where('pack_id', 'MBTI.global.en.default')->where('pack_version', 'v0.3')->count());
         });
+    }
+
+    public function test_w3_article_adapter_runs_the_full_receipt_chain_against_revision_bound_authority(): void
+    {
+        $article = Article::query()->withoutGlobalScopes()->create([
+            'org_id' => 0, 'slug' => 'command-w3-article', 'locale' => 'en',
+            'translation_status' => Article::TRANSLATION_STATUS_SOURCE,
+            'title' => 'Original command article', 'excerpt' => 'Original excerpt', 'content_md' => 'Original body',
+            'status' => 'published', 'is_public' => true, 'is_indexable' => false,
+            'sitemap_eligible' => false, 'llms_eligible' => false, 'published_at' => now(),
+        ]);
+        $previous = ArticleTranslationRevision::query()->withoutGlobalScopes()->create([
+            'org_id' => 0, 'article_id' => $article->id, 'source_article_id' => $article->id,
+            'translation_group_id' => $article->translation_group_id, 'locale' => 'en', 'source_locale' => 'en',
+            'revision_number' => 1, 'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+            'source_version_hash' => $article->source_version_hash, 'title' => 'Original command article',
+            'excerpt' => 'Original excerpt', 'content_md' => 'Original body', 'seo_title' => 'Original SEO',
+            'seo_description' => 'Original description', 'published_at' => now(),
+        ]);
+        $article->forceFill(['published_revision_id' => $previous->id])->saveQuietly();
+        $package = $this->articlePackageDirectory();
+        $sha = (string) json_decode((string) File::get($package.'/manifest.json'), true, 512, JSON_THROW_ON_ERROR)['package_sha256'];
+        $this->withExpectedCount(1, function () use ($package, $sha): void {
+            self::assertTrue($this->runArticlePhase($package, $sha, 'preflight', 'article-preflight.json')['ok']);
+            self::assertTrue($this->runArticlePhase($package, $sha, 'draft-import', 'article-draft.json')['ok']);
+            $this->setEnv('CONTENT_PROMOTION_PREVIOUS_RECEIPT', $this->receiptDirectory.'/article-draft.json');
+            self::assertTrue($this->runArticlePhase($package, $sha, 'publish', 'article-publish.json')['ok']);
+            $this->setEnv('CONTENT_PROMOTION_PREVIOUS_RECEIPT', $this->receiptDirectory.'/article-publish.json');
+            self::assertTrue($this->runArticlePhase($package, $sha, 'live-qa', 'article-live-qa.json')['ok']);
+        });
+        self::assertSame('Promoted command article', $article->refresh()->title);
+        self::assertSame(1, $this->receipt('article-live-qa.json')['published_count']);
+        self::assertSame(0, $this->receipt('article-live-qa.json')['sitemap_mutation_count']);
     }
 
     public function test_mbti_result_live_qa_failure_restores_only_the_pre_publication_activation(): void
@@ -325,6 +365,50 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
         File::put($directory.'/package_manifest.json', json_encode($manifest, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)."\n");
 
         return $this->mbtiResultPackageDirectory = $directory;
+    }
+
+    private function articlePackageDirectory(): string
+    {
+        if ($this->articlePackageDirectory !== null) {
+            return $this->articlePackageDirectory;
+        }
+        $directory = base_path('content_assets/en-content-parity/.testing-w3-articles-'.bin2hex(random_bytes(8)));
+        File::ensureDirectoryExists($directory);
+        $assets = ['assets' => [[
+            'identity' => ['org_id' => 0, 'slug' => 'command-w3-article', 'locale' => 'en'],
+            'snapshot' => ['title' => 'Promoted command article', 'excerpt' => 'Promoted excerpt', 'content_md' => 'Promoted English body.', 'seo_title' => 'Promoted SEO', 'seo_description' => 'Promoted description'],
+        ]]];
+        $assetsBytes = json_encode($assets, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+        File::put($directory.'/assets.json', $assetsBytes);
+        $manifest = [
+            'schema_version' => 'fermatmind.article_cms_promotion.v2', 'lane' => 'W3', 'subscope' => 'articles', 'locale' => 'en',
+            'permissions' => ['cms_draft_import' => false, 'public_publish' => false, 'indexability' => false, 'sitemap' => false, 'llms' => false, 'search' => false, 'deploy' => false],
+            'expected_row_count' => 1, 'payloads' => [['path' => 'assets.json', 'sha256' => hash('sha256', $assetsBytes)]],
+        ];
+        $sha = hash('sha256', hash('sha256', PromotionContextFactory::canonicalJson($manifest))."\nassets.json\n".hash('sha256', $assetsBytes)."\n");
+        $report = ['schema_version' => 'fermatmind.en_parity.independent_w9_report.v1', 'review_kind' => 'independent_w9', 'verdict' => 'PASS', 'package_sha256' => $sha, 'lane_id' => 'W3', 'subscope' => 'articles', 'reviewed_row_count' => 1];
+        $reportBytes = json_encode($report, JSON_THROW_ON_ERROR);
+        File::put($this->w9Directory.'/w3-article-command-fixture.json', $reportBytes);
+        $manifest['quality_gates'] = ['independent_w9' => ['status' => 'pass', 'report_ref' => 'w3-article-command-fixture.json', 'report_sha256' => hash('sha256', $reportBytes)]];
+        $manifest['package_sha256'] = $sha;
+        File::put($directory.'/manifest.json', json_encode($manifest, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR));
+
+        return $this->articlePackageDirectory = $directory;
+    }
+
+    /** @return array<string,mixed> */
+    private function runArticlePhase(string $package, string $sha, string $phase, string $filename): array
+    {
+        $this->setWorkflowSignature('W3', 'articles', $sha);
+        $output = new BufferedOutput;
+        $exit = Artisan::call('content:promote-exact-package', [
+            '--package' => $package, '--expected-package-sha256' => $sha, '--lane' => 'W3', '--subscope' => 'articles',
+            '--phase' => $phase, '--receipt' => $this->receiptDirectory.'/'.$filename, '--json' => true,
+        ], $output);
+        $stdout = $output->fetch();
+        self::assertSame(0, $exit, $stdout);
+
+        return json_decode(trim($stdout), true, 512, JSON_THROW_ON_ERROR);
     }
 
     /** @return array<string, mixed> */
