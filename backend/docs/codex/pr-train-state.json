@@ -6,6 +6,79 @@
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
+    "CONTENT-PROMOTION-W3-ARTICLES-ADAPTER-01": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "in_progress",
+      "branch": "codex/content-promotion-w3-articles-adapter-01",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "dependency": {
+          "status": "passed",
+          "details": "CONTENT-PROMOTION-PERSONALITY-CMS-ADAPTERS-01 is merged; its independent review-binding baseline repair is also merged on origin/main."
+        },
+        "local": [
+          {
+            "command": "php -l app/Services/ContentPromotion/ArticleCmsPromotionAuthority.php && php -l app/Services/ContentPromotion/Adapters/ArticleCmsPromotionAdapter.php",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test scoped T4 ContentPromotion paths",
+            "status": "passed",
+            "details": "Eight scoped PHP files passed."
+          },
+          {
+            "command": "php artisan test tests/Unit/ContentPromotion/ArticleCmsPromotionAdapterTest.php tests/Unit/ContentPromotion/PromotionAdapterCapabilityTest.php",
+            "status": "passed",
+            "details": "8 tests and 55 assertions passed."
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/ContentPromoteExactPackageCommandTest.php",
+            "status": "passed",
+            "details": "8 tests and 122 assertions passed, including the W3 Article receipt chain."
+          },
+          {
+            "command": "php artisan test tests/Sre/ContentPromotionAutomationWorkflowTest.php tests/Architecture/ReviewPolicyRegistryTest.php",
+            "status": "passed",
+            "details": "12 tests and 381 assertions passed."
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=exact_package_content_promotion",
+            "status": "passed",
+            "details": "1 test and 2 assertions passed."
+          },
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && ruby -e 'require \"yaml\"; YAML.safe_load(File.read(\"docs/codex/pr-train.yaml\"), aliases: true)' && git diff --check && git diff --cached --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": null,
+      "resume_policy": "continuous_goal",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "publish_allowed": false,
+      "deploy_allowed": false,
+      "history": [
+        {
+          "at": "2026-08-02T09:20:00Z",
+          "status": "in_progress",
+          "summary": "Initialized exact W3 Articles adapter scope after T3 and its independent review-binding repair merged. No production CMS operation, content import, publication, discoverability mutation, search submission, or deployment was executed."
+        }
+        ,
+        {
+          "at": "2026-08-02T09:35:00Z",
+          "status": "local_checks_passed",
+          "summary": "W3 Article exact-SHA authority, revision ledger, public API readback, idempotency, rollback, command receipt-chain, capability registry, SRE workflow, review-policy, freeze allowlist, JSON/YAML, and diff checks passed. No production operation was executed."
+        }
+      ]
+    },
     "SEO-10K-GSC-BOUNDED-BACKFILL-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",

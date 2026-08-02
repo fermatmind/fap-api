@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\ContentPromotion;
 
+use App\Services\ContentPromotion\Adapters\ArticleCmsPromotionAdapter;
 use App\Services\ContentPromotion\Adapters\LegacyAuditIncompatiblePromotionAdapter;
 use App\Services\ContentPromotion\Adapters\MbtiComparisonEnglishPromotionAdapter;
 use App\Services\ContentPromotion\Adapters\MbtiResultPromotionAdapter;
@@ -20,13 +21,14 @@ final class PromotionAdapterRegistry
         MbtiComparisonEnglishPromotionAdapter $mbtiComparison,
         MbtiResultPromotionAdapter $mbtiResults,
         PersonalityCmsPromotionAuthority $personalityAuthority,
+        ArticleCmsPromotionAuthority $articleAuthority,
         PromotionRollbackSnapshotService $snapshots,
     ) {
         $adapters = [
             $mbtiComparison,
             $mbtiResults,
             new PersonalityCmsPromotionAdapter('W2', 'big-five', $personalityAuthority, $snapshots),
-            new LegacyAuditIncompatiblePromotionAdapter('w3_articles_legacy', 'W3', 'articles'),
+            new ArticleCmsPromotionAdapter($articleAuthority, $snapshots),
             new LegacyAuditIncompatiblePromotionAdapter('w3_career_guides_legacy', 'W3', 'career-guides'),
             new LegacyAuditIncompatiblePromotionAdapter('w4_riasec_legacy', 'W4', 'riasec'),
             new PersonalityCmsPromotionAdapter('W5', 'enneagram', $personalityAuthority, $snapshots),
