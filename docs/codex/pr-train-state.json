@@ -103479,5 +103479,48 @@
       }
     ],
     "updated_at": "2026-08-02T04:43:02Z"
+  },
+  "RIASEC-RESULT-V2-PRODUCTION-RUNTIME-02": {
+    "id": "RIASEC-RESULT-V2-PRODUCTION-RUNTIME-02",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/riasec-result-v2-production-runtime-02",
+    "title": "RIASEC-RESULT-V2-PRODUCTION-RUNTIME-02: enable fail-closed production result runtime",
+    "depends_on": [],
+    "status": "local_verified",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "Operator explicitly authorized RIASEC-RESULT-V2-PRODUCTION-RUNTIME-02 implementation and the normal PR lifecycle while excluding production deployment, import execution, and environment writes."
+      },
+      "local_validation": {"status": "passed", "evidence": "RIASEC focused suite passed 92 tests / 2042 assertions; dedicated rollout/runtime tests passed 13 tests / 101 assertions; scoped Pint, route listing, fresh SQLite migration, YAML/JSON parsing, diff check, and the complete ci_verify_mbti gate passed. The legacy verify_riasec_launch script was also probed and remains incompatible with the repository's intentional public healthz 404 policy; no production probe was treated as release evidence."},
+      "github_required_checks": {"status": "pending", "evidence": null}
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-08-02T05:00:00Z",
+        "status": "in_progress",
+        "note": "Started from an isolated latest-origin/main worktree. Scope is limited to the real fail-closed RIASEC production runtime gate and redacted telemetry; no production action is authorized."
+      },
+      {
+        "at": "2026-08-02T06:12:00Z",
+        "status": "local_verified",
+        "note": "Real production gate, public org-0 scope handling, full-only payload emission, staging compatibility, emergency fallback, and redacted telemetry passed focused and complete CI validation."
+      }
+    ],
+    "updated_at": "2026-08-02T06:12:00Z"
   }
 }
