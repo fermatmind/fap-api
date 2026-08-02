@@ -103436,9 +103436,9 @@
     "branch": "codex/content-promotion-adapter-conformance-01",
     "title": "CONTENT-PROMOTION-ADAPTER-CONFORMANCE-01: establish reusable promotion adapter conformance primitives",
     "depends_on": [],
-    "status": "in_progress",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "ec5ba974a4470962d47ed4e54839963f2591413b",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3497",
     "checks": {},
     "failure_reason": null,
     "merged_at": null,
@@ -103461,8 +103461,13 @@
         "at": "2026-08-02T04:30:19Z",
         "status": "local_verified",
         "note": "Reusable exact-target fingerprints, phase identities, bounded snapshot resolution, result/receipt conformance assertions, and registry capability consistency passed focused validation. W1 comparisons remains audit compatible; all nine remaining adapters remain legacy fail closed."
+      },
+      {
+        "at": "2026-08-02T04:31:21Z",
+        "status": "github_checks_pending",
+        "note": "Opened PR #3497 from the exact scoped branch after local validation. Required GitHub checks, review, squash merge, origin/main synchronization, and branch cleanup remain mandatory."
       }
     ],
-    "updated_at": "2026-08-02T04:30:19Z"
+    "updated_at": "2026-08-02T04:31:21Z"
   }
 }
