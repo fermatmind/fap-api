@@ -48509,3 +48509,56 @@ prs:
     deploy_allowed: false
     content_authority: backend content-pack release, release-manifest, activation, and snapshot records; package bytes are integrity inputs, never frontend authority
     repository_rule_impact: records the W1 result V2 authority boundary and preserves immutable deployed-tree and discoverability protections
+
+  - id: BIG5-RESULT-V2-PRODUCTION-SNAPSHOT-04
+    repo: fap-api
+    base: main
+    branch: codex/big5-result-v2-production-snapshot-04
+    title: "BIG5-RESULT-V2-PRODUCTION-SNAPSHOT-04: bind immutable v0_4 production snapshot and controlled import"
+    status: merge_ready
+    depends_on: []
+    train_scope: big5_result_page_v2_production_snapshot
+    scope:
+      - Add immutable v0_4 release evidence binding the exact current selector, trait, coupling, facet, profile, scenario, and candidate payload assets by SHA-256.
+      - Add a dry-run-by-default controlled import command requiring exact snapshot, approval, scope, rollback, smoke, and command-generated confirmation-token bindings.
+      - Preserve the existing Big Five runtime and rollout-gate interface while allowing public tenant org_id=0 to survive exact tenant-scope parsing.
+    allowed_paths:
+      - backend/app/Console/Commands/BigFiveResultPageV2ProductionImportCommand.php
+      - backend/app/Console/Kernel.php
+      - backend/app/Services/BigFive/ResultPageV2/Production/BigFiveResultPageV2ProductionImportExecutor.php
+      - backend/app/Services/BigFive/ResultPageV2/ContentAssets/BigFiveV2AssetPackageLoader.php
+      - backend/app/Services/BigFive/ResultPageV2/Rollout/BigFiveV2ProductionRolloutGate.php
+      - backend/config/big5_result_page_v2.php
+      - backend/content_assets/big5/result_page_v2/releases/v0_4/**
+      - backend/tests/Feature/Console/BigFiveResultPageV2ProductionImportCommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AssetLoaderTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/RolloutDryRunTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Execute production import, deploy, write production environment configuration, refresh production caches, or activate rollout.
+      - Modify rc_0_3 or earlier snapshots, routes, migrations, authentication, MBTI, RIASEC, EQ, Enneagram, frontend, mini-program, SEO, sitemap, llms, or CMS public content.
+      - Persist or log raw attempt, user, anonymous, organization, order, payment, or result payload identifiers.
+    validation:
+      - cd backend && php artisan test --filter='BigFiveResultPageV2|BigFiveRolloutGate' --no-ansi
+      - cd backend && php artisan test tests/Feature/Console/BigFiveResultPageV2ProductionImportCommandTest.php --no-ansi
+      - cd backend && php artisan bigfive:result-page-v2-production-import <exact v0_4 hashes> --json
+      - cd backend && vendor/bin/pint --test <touched-php-files>
+      - cd backend && php artisan route:list --path=api --except-vendor
+      - cd backend && php artisan migrate --env=testing --force
+      - cd backend && bash scripts/verify_riasec_launch.sh
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: immutable backend Big Five v0_4 snapshot and exact file hashes
+    repository_rule_impact: import remains dry-run by default and rollout remains an independently approved production action
