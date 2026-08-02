@@ -16,6 +16,7 @@ use App\Services\SEO\SeoDiscoverabilityCacheInvalidator;
 use App\Support\OrgContext;
 use DomainException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 /** Exact-SHA authority for W3 English Articles; it does not own discoverability. */
@@ -189,6 +190,12 @@ final class ArticleCmsPromotionAuthority
                     || ! hash_equals((string) data_get($revision->authority_metadata_json, 'article_state_sha256'), $this->articleStateHash($article))) {
                     throw new DomainException('article_promotion_working_revision_invalid');
                 }
+                if (! hash_equals(PromotionContextFactory::canonicalJson((array) $target['snapshot']), PromotionContextFactory::canonicalJson([
+                    'title' => $revision->title, 'excerpt' => $revision->excerpt, 'content_md' => $revision->content_md,
+                    'seo_title' => $revision->seo_title, 'seo_description' => $revision->seo_description,
+                ]))) {
+                    throw new DomainException('article_promotion_revision_payload_drift');
+                }
                 $this->assertTranslationSourcePrecondition($article, $revision);
                 $seo = ArticleSeoMeta::query()->withoutGlobalScopes()->lockForUpdate()
                     ->where('org_id', $article->org_id)
@@ -199,7 +206,8 @@ final class ArticleCmsPromotionAuthority
                 if ($article->published_revision_id) {
                     ArticleTranslationRevision::query()->withoutGlobalScopes()->whereKey($article->published_revision_id)->where('article_id', $article->id)->update(['revision_status' => ArticleTranslationRevision::STATUS_STALE]);
                 }
-                $revision->forceFill(['revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED, 'published_at' => now()])->saveQuietly();
+                $publishedAt = Carbon::parse((string) data_get($beforeByAsset, $target['asset_key'].'.publication_timestamp'));
+                $revision->forceFill(['revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED, 'published_at' => $publishedAt])->saveQuietly();
                 $article->forceFill(['title' => $revision->title, 'excerpt' => $revision->excerpt, 'content_md' => $revision->content_md, 'content_html' => null, 'published_revision_id' => $revision->id, 'working_revision_id' => null])->save();
                 $this->syncExistingSeoMeta($revision, $seo);
                 $this->logPublication($article);

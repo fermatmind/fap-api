@@ -169,11 +169,13 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
                 ->where('article_id', $article->id)
                 ->where('locale', $article->locale)
                 ->first();
+            $publicationTimestamp = now()->startOfSecond()->toISOString();
             $rows[] = [
                 'article_id' => $article->id, 'asset_key' => $target['asset_key'], 'package_sha256' => $context->packageSha256,
                 'article_before' => $this->articleState($article), 'revision_statuses_before' => $statuses,
                 'seo_before' => $seo instanceof ArticleSeoMeta ? ['id' => $seo->id, 'values' => $this->seoState($seo)] : [],
-                'expected_public_projection' => $this->expectedPublishedProjection($article, $packageRevision, $target, $seo),
+                'publication_timestamp' => $publicationTimestamp,
+                'expected_public_projection' => $this->expectedPublishedProjection($article, $packageRevision, $target, $seo, $publicationTimestamp),
                 'package_revision_status_before' => $packageRevision?->revision_status ?? ArticleTranslationRevision::STATUS_APPROVED,
                 'package_revision_published_at_before' => $packageRevision?->published_at?->toISOString(),
             ];
@@ -200,7 +202,7 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
     }
 
     /** @param array<string,mixed> $target @return array<string,mixed> */
-    private function expectedPublishedProjection(Article $article, ?ArticleTranslationRevision $revision, array $target, ?ArticleSeoMeta $seo): array
+    private function expectedPublishedProjection(Article $article, ?ArticleTranslationRevision $revision, array $target, ?ArticleSeoMeta $seo, string $publicationTimestamp): array
     {
         $snapshot = (array) $target['snapshot'];
         $candidate = $article->replicate();
@@ -210,13 +212,13 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
             $seoValues = ['seo_title' => $snapshot['seo_title'], 'seo_description' => $snapshot['seo_description'], 'og_title' => $snapshot['seo_title'], 'og_description' => $snapshot['seo_description']];
         }
 
-        return ['article' => array_replace($this->articleProjection($article), ['title' => $snapshot['title'], 'excerpt' => $snapshot['excerpt'], 'content_md' => $snapshot['content_md'], 'content_html' => null, 'source_version_hash' => $candidate->computeSourceVersionHash(), 'published_revision_id' => $revision?->id, 'working_revision_id' => null]), 'revision' => ['id' => $revision?->id, 'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED], 'seo' => $seoValues];
+        return ['article' => array_replace($this->articleProjection($article), ['title' => $snapshot['title'], 'excerpt' => $snapshot['excerpt'], 'content_md' => $snapshot['content_md'], 'content_html' => null, 'source_version_hash' => $candidate->computeSourceVersionHash(), 'published_revision_id' => $revision?->id, 'working_revision_id' => null]), 'revision' => ['id' => $revision?->id, 'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED, 'published_at' => $publicationTimestamp], 'seo' => $seoValues];
     }
 
     /** @param array<string,mixed> $row */
     private function assertExpectedPublishedProjection(Article $article, ArticleTranslationRevision $revision, ?ArticleSeoMeta $seo, array $row): void
     {
-        $actual = ['article' => $this->articleProjection($article), 'revision' => ['id' => $revision->id, 'revision_status' => $revision->revision_status], 'seo' => $seo instanceof ArticleSeoMeta ? $this->seoState($seo) : []];
+        $actual = ['article' => $this->articleProjection($article), 'revision' => ['id' => $revision->id, 'revision_status' => $revision->revision_status, 'published_at' => $revision->published_at?->toISOString()], 'seo' => $seo instanceof ArticleSeoMeta ? $this->seoState($seo) : []];
         if (! hash_equals(PromotionContextFactory::canonicalJson((array) ($row['expected_public_projection'] ?? [])), PromotionContextFactory::canonicalJson($actual))) {
             throw new DomainException('article_promotion_rollback_public_projection_drift');
         }
