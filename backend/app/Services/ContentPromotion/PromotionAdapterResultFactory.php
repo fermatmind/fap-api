@@ -20,7 +20,11 @@ final class PromotionAdapterResultFactory
         if ($readbackCount !== $context->expectedRowCount) {
             throw new DomainException('promotion_readback_count_mismatch');
         }
-        foreach (['indexability_mutation_count', 'sitemap_mutation_count', 'llms_mutation_count', 'search_mutation_count', 'deploy_mutation_count'] as $field) {
+        $fields = ['indexability_mutation_count', 'sitemap_mutation_count', 'llms_mutation_count', 'search_mutation_count', 'deploy_mutation_count'];
+        if (array_keys($boundaryMutationCounts) !== $fields) {
+            throw new DomainException('boundary_mutation_evidence_invalid');
+        }
+        foreach ($fields as $field) {
             if (! array_key_exists($field, $boundaryMutationCounts) || ! is_int($boundaryMutationCounts[$field]) || $boundaryMutationCounts[$field] !== 0) {
                 throw new DomainException('prohibited_mutation_reported');
             }
@@ -35,7 +39,11 @@ final class PromotionAdapterResultFactory
             'locale_check' => 'PASS',
             'cjk_leakage_check' => 'PASS',
             'identity_check' => 'PASS',
-            ...$boundaryMutationCounts,
+            'indexability_mutation_count' => $boundaryMutationCounts['indexability_mutation_count'],
+            'sitemap_mutation_count' => $boundaryMutationCounts['sitemap_mutation_count'],
+            'llms_mutation_count' => $boundaryMutationCounts['llms_mutation_count'],
+            'search_mutation_count' => $boundaryMutationCounts['search_mutation_count'],
+            'deploy_mutation_count' => $boundaryMutationCounts['deploy_mutation_count'],
         ];
     }
 }

@@ -203,6 +203,7 @@ final class MbtiComparisonEnglishPromotionAdapter implements ExactPackagePromoti
             'ENPARITY-W1-MBTI-COMPARISONS',
             $reason,
             $rows,
+            array_map(static fn (array $row): array => ['locale' => (string) $row['locale'], 'org_id' => (int) $row['org_id'], 'slug' => (string) $row['slug']], $rows),
         );
     }
 

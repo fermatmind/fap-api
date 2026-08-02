@@ -69,6 +69,7 @@ final class PromotionConformancePrimitivesTest extends TestCase
             'test-pack',
             'before_draft_import',
             [['id' => 7, 'locale' => 'en', 'slug' => 'a']],
+            [['locale' => 'en', 'slug' => 'a']],
             ['rows' => [['id' => 99]], 'phase' => 'metadata_phase'],
         );
 
@@ -104,7 +105,7 @@ final class PromotionConformancePrimitivesTest extends TestCase
         $context = $this->context();
         $targets = PromotionTargetSet::fromIdentities([['locale' => 'en', 'slug' => 'a']]);
         $snapshots = app(PromotionRollbackSnapshotService::class);
-        $reference = $snapshots->capture($context, $targets, 'test-pack', 'before_draft_import', []);
+        $reference = $snapshots->capture($context, $targets, 'test-pack', 'before_draft_import', [], []);
 
         $this->expectException(DomainException::class);
         $this->expectExceptionMessage('rollback_snapshot_mismatch');

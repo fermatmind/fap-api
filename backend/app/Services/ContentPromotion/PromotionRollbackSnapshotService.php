@@ -22,9 +22,19 @@ final class PromotionRollbackSnapshotService
         string $packId,
         string $phase,
         array $rows,
+        array $rowTargetIdentities,
         array $metadata = [],
     ): string {
         $targets->assertExpectedCount($context->expectedRowCount);
+        if (count($rows) !== count($rowTargetIdentities)) {
+            throw new DomainException('promotion_snapshot_row_identity_count_mismatch');
+        }
+        $allowed = array_flip(array_map(static fn (array $identity): string => PromotionContextFactory::canonicalJson($identity), $targets->identities()));
+        foreach ($rowTargetIdentities as $identity) {
+            if (! is_array($identity) || ! isset($allowed[PromotionContextFactory::canonicalJson($identity)])) {
+                throw new DomainException('promotion_snapshot_row_target_mismatch');
+            }
+        }
         if (! preg_match('/\A[a-z][a-z0-9_]{2,63}\z/', $phase)) {
             throw new DomainException('promotion_snapshot_phase_invalid');
         }
@@ -46,6 +56,7 @@ final class PromotionRollbackSnapshotService
                 'phase_idempotency_key' => PromotionPhaseIdentity::idempotencyKey($context, $phase, $targets),
                 'target_fingerprint' => $targets->fingerprint(),
                 'target_identities' => $targets->identities(),
+                'row_target_fingerprint' => hash('sha256', PromotionContextFactory::canonicalJson(['identities' => $rowTargetIdentities])),
                 'rows' => $rows,
             ],
         ]);
