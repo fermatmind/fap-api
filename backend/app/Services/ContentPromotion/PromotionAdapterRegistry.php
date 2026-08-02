@@ -6,6 +6,7 @@ namespace App\Services\ContentPromotion;
 
 use App\Services\ContentPromotion\Adapters\LegacyAuditIncompatiblePromotionAdapter;
 use App\Services\ContentPromotion\Adapters\MbtiComparisonEnglishPromotionAdapter;
+use App\Services\ContentPromotion\Adapters\MbtiResultPromotionAdapter;
 use App\Services\ContentPromotion\Contracts\ExactPackagePromotionAdapter;
 use DomainException;
 
@@ -14,11 +15,13 @@ final class PromotionAdapterRegistry
     /** @var list<ExactPackagePromotionAdapter> */
     private array $adapters;
 
-    public function __construct(MbtiComparisonEnglishPromotionAdapter $mbtiComparison)
-    {
+    public function __construct(
+        MbtiComparisonEnglishPromotionAdapter $mbtiComparison,
+        MbtiResultPromotionAdapter $mbtiResults,
+    ) {
         $adapters = [
             $mbtiComparison,
-            new LegacyAuditIncompatiblePromotionAdapter('w1_mbti_results_legacy', 'W1', 'mbti-results'),
+            $mbtiResults,
             new LegacyAuditIncompatiblePromotionAdapter('w2_big_five_legacy', 'W2', 'big-five'),
             new LegacyAuditIncompatiblePromotionAdapter('w3_articles_legacy', 'W3', 'articles'),
             new LegacyAuditIncompatiblePromotionAdapter('w3_career_guides_legacy', 'W3', 'career-guides'),

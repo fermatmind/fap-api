@@ -100,6 +100,23 @@ final class PromotionConformancePrimitivesTest extends TestCase
         PromotionAdapterResultFactory::make($context, 0, 0, 0, null, $this->zeroBoundaryMutations());
     }
 
+    public function test_result_factory_requires_explicit_operation_counts_to_match_exact_readback(): void
+    {
+        $context = $this->context();
+
+        $this->expectException(DomainException::class);
+        $this->expectExceptionMessage('promotion_operation_counts_invalid');
+        PromotionAdapterResultFactory::make(
+            $context,
+            1,
+            1,
+            0,
+            null,
+            $this->zeroBoundaryMutations(),
+            ['created_count' => 1, 'updated_count' => 0, 'unchanged_count' => 1],
+        );
+    }
+
     public function test_snapshot_resolution_rejects_a_phase_mismatch(): void
     {
         $context = $this->context();

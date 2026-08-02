@@ -103583,5 +103583,38 @@
       }
     ],
     "updated_at": "2026-08-02T06:38:00Z"
+  },
+  "CONTENT-PROMOTION-W1-MBTI-RESULTS-ADAPTER-01": {
+    "id": "CONTENT-PROMOTION-W1-MBTI-RESULTS-ADAPTER-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/content-promotion-w1-mbti-results-adapter-01",
+    "title": "CONTENT-PROMOTION-W1-MBTI-RESULTS-ADAPTER-01: activate audited W1 MBTI result promotion",
+    "depends_on": ["CONTENT-PROMOTION-ADAPTER-CONFORMANCE-01"],
+    "status": "github_checks_pending",
+    "commit_sha": "a6faa46674f742c5fc5a3cea57c7a91bcc3aeb6c",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3498",
+    "checks": {
+      "dependency": {"status": "passed", "evidence": "PR #3497 is MERGED as defc0ff1dc94c364000016adbf02ae1e5bf962a7 and origin/main contains the squash commit."},
+      "local_validation": {"status": "passed", "evidence": "Focused T2 suite and the Big Five runtime freeze classifier passed. No production CMS write, package promotion, deployment, or discoverability action occurred."},
+      "github_required_checks": {"status": "passed", "evidence": "CI run 30736474314 and Code Scanning run 30736475401 succeeded for exact head a6faa46674f742c5fc5a3cea57c7a91bcc3aeb6c."}
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {"at": "2026-08-02T13:48:52+08:00", "status": "in_progress", "note": "Started T2 from isolated exact origin/main defc0ff1dc94c364000016adbf02ae1e5bf962a7 after reconciling the merged T1 dependency. Scope is W1/mbti-results V2 adapter authority only; no package payload, production CMS state, deployment, or discoverability action is authorized."},
+      {"at": "2026-08-02T14:52:00+08:00", "status": "github_checks_pending", "note": "Same-scope repairs are pending required GitHub checks. No production or deploy action occurred."},
+      {"at": "2026-08-02T15:05:00+08:00", "status": "github_checks_pending", "note": "Exact-head CI and Code Scanning passed before rebase; rebase onto advanced main is in progress, so required checks must rerun for the rebased head."}
+    ],
+    "updated_at": "2026-08-02T15:05:00+08:00"
   }
 }

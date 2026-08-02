@@ -9,6 +9,7 @@ require_once __DIR__.'/../../Unit/ContentPromotion/Concerns/AssertsExactPackageP
 use App\Models\MbtiCrossTypeComparisonAuthority;
 use App\Services\Cms\MbtiComparisonEnglishPublishService;
 use App\Services\ContentImport\MbtiComparisonEnglishPackageImporter;
+use App\Services\ContentImport\MbtiResultEnglishPackageImporter;
 use App\Services\ContentPromotion\PromotionContextFactory;
 use DomainException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -65,6 +66,9 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
         self::assertSame('cms_draft_import_receipt', $draftReceipt['receipt_kind']);
         self::assertSame(7, $draftReceipt['expected_count']);
         self::assertSame(7, $draftReceipt['written_count']);
+        self::assertSame(7, $draftReceipt['created_count']);
+        self::assertSame(0, $draftReceipt['updated_count']);
+        self::assertSame(0, $draftReceipt['unchanged_count']);
         self::assertSame(7, $draftReceipt['readback_count']);
         self::assertSame(0, $draftReceipt['published_count']);
         self::assertFalse($draftReceipt['server_topology_exposed']);
@@ -92,6 +96,57 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
             ->where('locale', 'en')->where('review_status', 'automation_published')->count());
     }
 
+    public function test_mbti_result_adapter_runs_the_full_receipt_chain_against_database_backed_authority(): void
+    {
+        $this->withExpectedCount(46, function (): void {
+            $preflight = $this->runMbtiResultPhase('preflight', 'result-preflight.json');
+            self::assertTrue($preflight['ok']);
+
+            $draft = $this->runMbtiResultPhase('draft-import', 'result-draft.json');
+            self::assertTrue($draft['ok']);
+            self::assertSame(46, $this->receipt('result-draft.json')['written_count']);
+            self::assertSame(46, $this->receipt('result-draft.json')['created_count']);
+            self::assertSame(0, $this->receipt('result-draft.json')['updated_count']);
+            self::assertSame(0, $this->receipt('result-draft.json')['unchanged_count']);
+            self::assertSame(0, $this->receipt('result-draft.json')['published_count']);
+
+            $this->setEnv('CONTENT_PROMOTION_PREVIOUS_RECEIPT', $this->receiptDirectory.'/result-draft.json');
+            $publish = $this->runMbtiResultPhase('publish', 'result-publish.json');
+            self::assertTrue($publish['ok']);
+            $publication = $this->receipt('result-publish.json');
+            $this->assertReceiptChainsFrom($this->receiptDirectory.'/result-draft.json', $publication, 'cms_draft_import_receipt');
+            self::assertSame(46, $publication['published_count']);
+
+            $this->setEnv('CONTENT_PROMOTION_PREVIOUS_RECEIPT', $this->receiptDirectory.'/result-publish.json');
+            $liveQa = $this->runMbtiResultPhase('live-qa', 'result-live-qa.json');
+            self::assertTrue($liveQa['ok']);
+            $this->assertReceiptChainsFrom($this->receiptDirectory.'/result-publish.json', $this->receipt('result-live-qa.json'), 'cms_publication_receipt');
+            self::assertSame(1, \Illuminate\Support\Facades\DB::table('content_pack_releases')
+                ->where('action', 'content_promotion_w1_mbti_results_v2')->count());
+            self::assertSame(1, \Illuminate\Support\Facades\DB::table('content_pack_activations')
+                ->where('pack_id', 'MBTI.global.en.default')->where('pack_version', 'v0.3')->count());
+        });
+    }
+
+    public function test_mbti_result_live_qa_failure_restores_only_the_pre_publication_activation(): void
+    {
+        $this->withExpectedCount(46, function (): void {
+            $this->runMbtiResultPhase('draft-import', 'result-failure-draft.json');
+            $this->setEnv('CONTENT_PROMOTION_PREVIOUS_RECEIPT', $this->receiptDirectory.'/result-failure-draft.json');
+            $this->runMbtiResultPhase('publish', 'result-failure-publish.json');
+            \Illuminate\Support\Facades\DB::table('content_pack_releases')
+                ->where('action', 'content_promotion_w1_mbti_results_v2')
+                ->update(['manifest_json' => '{}']);
+
+            $this->setEnv('CONTENT_PROMOTION_PREVIOUS_RECEIPT', $this->receiptDirectory.'/result-failure-publish.json');
+            $result = $this->runMbtiResultPhase('live-qa', 'result-failure-live-qa.json', expectedExit: 1);
+
+            self::assertSame('live_qa_failed_rollback_succeeded', $result['error_code']);
+            self::assertSame(0, \Illuminate\Support\Facades\DB::table('content_pack_activations')
+                ->where('pack_id', 'MBTI.global.en.default')->where('pack_version', 'v0.3')->count());
+        });
+    }
+
     public function test_repeated_dispatch_is_idempotent_and_receipt_destinations_are_immutable(): void
     {
         $this->runPhase('draft-import', 'draft.json');
@@ -103,6 +158,7 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
         $second = $this->runPhase('draft-import', 'draft-replay.json');
         self::assertTrue($second['ok']);
         self::assertSame(0, $this->receipt('draft-replay.json')['written_count']);
+        self::assertSame(7, $this->receipt('draft-replay.json')['unchanged_count']);
         self::assertSame(
             $firstTimestamps,
             MbtiCrossTypeComparisonAuthority::query()
@@ -193,6 +249,29 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
             '--expected-package-sha256' => $sha,
             '--lane' => $lane,
             '--subscope' => $subscope,
+            '--phase' => $phase,
+            '--receipt' => $this->receiptDirectory.'/'.$filename,
+            '--json' => true,
+        ], $output);
+        $stdout = $output->fetch();
+        self::assertSame($expectedExit, $exit, $stdout);
+        $lines = array_values(array_filter(explode("\n", trim($stdout))));
+        self::assertCount(1, $lines, 'stdout must contain exactly one JSON object.');
+
+        return json_decode($lines[0], true, 512, JSON_THROW_ON_ERROR);
+    }
+
+    /** @return array<string, mixed> */
+    private function runMbtiResultPhase(string $phase, string $filename, int $expectedExit = 0): array
+    {
+        $sha = MbtiResultEnglishPackageImporter::PACKAGE_SHA256;
+        $this->setWorkflowSignature('W1', 'mbti-results', $sha);
+        $output = new BufferedOutput;
+        $exit = Artisan::call('content:promote-exact-package', [
+            '--package' => MbtiResultEnglishPackageImporter::defaultPackageDirectory(),
+            '--expected-package-sha256' => $sha,
+            '--lane' => 'W1',
+            '--subscope' => 'mbti-results',
             '--phase' => $phase,
             '--receipt' => $this->receiptDirectory.'/'.$filename,
             '--json' => true,

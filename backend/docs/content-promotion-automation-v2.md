@@ -13,7 +13,8 @@ An adapter is executable only after it proves all of the following against its r
 Current capability truth:
 
 - `W1 / mbti-comparisons`: audit-compatible and executable through V2.
-- `W1 / mbti-results`, `W2 / big-five`, `W3 / articles`, `W3 / career-guides`, `W4 / riasec`, `W5 / enneagram`, `W6 / iq`, `W7 / eq`, `W8 / career-jobs`: registered but fail closed until their existing authority-specific importer/publisher exposes compatible revision/audit metadata and rollback.
+- `W1 / mbti-results`: audit-compatible through the database-backed `content_pack_releases`, `content_release_manifests`, activation, and `ContentReleaseSnapshot` authority. It dynamically recomputes the package manifest chain, creates only the exact inactive authority record, activates only the matching English target set, and restores only the prior activation on rollback. It never writes an immutable deployed content-pack tree or reads private attempts, reports, orders, payments, or tokens.
+- `W2 / big-five`, `W3 / articles`, `W3 / career-guides`, `W4 / riasec`, `W5 / enneagram`, `W6 / iq`, `W7 / eq`, `W8 / career-jobs`: registered but fail closed until their existing authority-specific importer/publisher exposes compatible revision/audit metadata and rollback.
 
 This distinction prevents the unified command from becoming an arbitrary Artisan or SQL runner. Adding an adapter requires focused importer, publication, readback, idempotency and rollback tests for that authority.
 
@@ -21,7 +22,7 @@ This distinction prevents the unified command from becoming an arbitrary Artisan
 
 Every V2 adapter uses one canonical target set. Its sorted identity fingerprint is bound to the lane, subscope, package SHA, source commit and lifecycle phase when a snapshot is taken. A rollback reference is accepted only when all of those bindings, including the exact target set, match; an adapter may restore only its own captured rows.
 
-The shared result factory requires exact readback before a phase can emit a success receipt. The test harness checks the same result and boundary invariants for every adapter: draft phases stay non-public, publication and live QA reach the exact expected count, and indexability, sitemap, llms, Search Channel and deploy mutation counts remain zero. `content_promotion.adapter_capabilities` is a contract mirror of concrete registry adapters; a mismatch fails the registry contract rather than changing capability truth by configuration alone.
+The shared result factory requires exact readback before a phase can emit a success receipt. Every receipt separately records `created_count`, `updated_count`, and `unchanged_count`; those values must sum to the exact readback count and created plus updated must equal written. The test harness checks the same result and boundary invariants for every adapter: draft phases stay non-public, publication and live QA reach the exact expected count, and indexability, sitemap, llms, Search Channel and deploy mutation counts remain zero. `content_promotion.adapter_capabilities` is a contract mirror of concrete registry adapters; a mismatch fails the registry contract rather than changing capability truth by configuration alone.
 
 ## Invocation
 

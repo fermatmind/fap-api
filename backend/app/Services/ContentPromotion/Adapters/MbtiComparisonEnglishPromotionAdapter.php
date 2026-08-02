@@ -69,6 +69,11 @@ final class MbtiComparisonEnglishPromotionAdapter implements ExactPackagePromoti
             (int) data_get($receipt, 'readback.public_row_count', -1),
             $rollbackReference,
             $this->verifiedZeroBoundaryMutations(),
+            [
+                'created_count' => (int) ($receipt['created_count'] ?? 0),
+                'updated_count' => (int) ($receipt['updated_count'] ?? 0),
+                'unchanged_count' => $context->expectedRowCount - $written,
+            ],
         );
     }
 
@@ -89,6 +94,7 @@ final class MbtiComparisonEnglishPromotionAdapter implements ExactPackagePromoti
             (int) data_get($receipt, 'readback.published_public_row_count', 0),
             $rollbackReference,
             $this->verifiedZeroBoundaryMutations(),
+            ['created_count' => 0, 'updated_count' => $written, 'unchanged_count' => $context->expectedRowCount - $written],
         );
     }
 
@@ -111,7 +117,15 @@ final class MbtiComparisonEnglishPromotionAdapter implements ExactPackagePromoti
             $rows[] = $projection;
         }
 
-        return PromotionAdapterResultFactory::make($context, 0, count($rows), count($rows), null, $this->verifiedZeroBoundaryMutations());
+        return PromotionAdapterResultFactory::make(
+            $context,
+            0,
+            count($rows),
+            count($rows),
+            null,
+            $this->verifiedZeroBoundaryMutations(),
+            ['created_count' => 0, 'updated_count' => 0, 'unchanged_count' => count($rows)],
+        );
     }
 
     public function rollback(PromotionContext $context, string $rollbackReference): void
