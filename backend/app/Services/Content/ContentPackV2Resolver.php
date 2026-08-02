@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Content;
 
+use App\Services\ContentPromotion\PromotionContextFactory;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -275,6 +276,10 @@ final class ContentPackV2Resolver
         if (! $this->isPromotedMbtiResultAuthority($payload, (string) ($release->compiled_hash ?? ''))) {
             return null;
         }
+        $payloadHash = hash('sha256', PromotionContextFactory::canonicalJson($payload));
+        if (! hash_equals(strtolower(trim((string) ($release->manifest_hash ?? ''))), $payloadHash)) {
+            return null;
+        }
         try {
             $manifest = DB::table('content_release_manifests')
                 ->where('content_pack_release_id', $releaseId)
@@ -289,11 +294,13 @@ final class ContentPackV2Resolver
             || trim((string) ($manifest->storage_path ?? '')) !== 'content_pack_releases/'.$releaseId
             || strtoupper(trim((string) ($manifest->pack_id ?? ''))) !== self::MBTI_INACTIVE_RESULT_PACK_ID
             || trim((string) ($manifest->pack_version ?? '')) !== self::MBTI_INACTIVE_RESULT_PACK_VERSION
-            || strtolower(trim((string) ($manifest->compiled_hash ?? ''))) !== strtolower(trim((string) ($release->compiled_hash ?? '')))) {
+            || strtolower(trim((string) ($manifest->compiled_hash ?? ''))) !== strtolower(trim((string) ($release->compiled_hash ?? '')))
+            || ! hash_equals(strtolower(trim((string) ($manifest->content_hash ?? ''))), $payloadHash)) {
             return null;
         }
         $manifestPayload = $this->decodeJsonObject((string) ($manifest->payload_json ?? ''));
-        if ($manifestPayload === null || json_encode($payload) !== json_encode($manifestPayload)) {
+        if ($manifestPayload === null
+            || ! hash_equals($payloadHash, hash('sha256', PromotionContextFactory::canonicalJson($manifestPayload)))) {
             return null;
         }
 

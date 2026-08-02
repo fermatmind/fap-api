@@ -103591,8 +103591,8 @@
     "branch": "codex/content-promotion-w1-mbti-results-adapter-01",
     "title": "CONTENT-PROMOTION-W1-MBTI-RESULTS-ADAPTER-01: activate audited W1 MBTI result promotion",
     "depends_on": ["CONTENT-PROMOTION-ADAPTER-CONFORMANCE-01"],
-    "status": "ready_to_merge",
-    "commit_sha": "e0bcfeabf1f42c212d7aa9abc11a8fc5b8588ee4",
+    "status": "github_checks_pending",
+    "commit_sha": "f2fe5605c0aaf7352c0394dd38cf35e18f2a684c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3498",
     "checks": {
       "dependency": {"status": "passed", "evidence": "PR #3497 is MERGED as defc0ff1dc94c364000016adbf02ae1e5bf962a7 and origin/main contains the squash commit."},
@@ -103614,8 +103614,9 @@
       {"at": "2026-08-02T13:48:52+08:00", "status": "in_progress", "note": "Started T2 from isolated exact origin/main defc0ff1dc94c364000016adbf02ae1e5bf962a7 after reconciling the merged T1 dependency. Scope is W1/mbti-results V2 adapter authority only; no package payload, production CMS state, deployment, or discoverability action is authorized."},
       {"at": "2026-08-02T14:52:00+08:00", "status": "github_checks_pending", "note": "Same-scope repairs are pending required GitHub checks. No production or deploy action occurred."},
       {"at": "2026-08-02T15:05:00+08:00", "status": "github_checks_pending", "note": "Exact-head CI and Code Scanning passed before rebase; rebase onto advanced main is in progress, so required checks must rerun for the rebased head."},
-      {"at": "2026-08-02T15:15:00+08:00", "status": "ready_to_merge", "note": "Rebased head e0bcfeabf1f42c212d7aa9abc11a8fc5b8588ee4 passed CI run 30736823530 and Code Scanning run 30736823555. No production, deployment, or discoverability action occurred."}
+      {"at": "2026-08-02T15:15:00+08:00", "status": "ready_to_merge", "note": "Rebased head e0bcfeabf1f42c212d7aa9abc11a8fc5b8588ee4 passed CI run 30736823530 and Code Scanning run 30736823555. No production, deployment, or discoverability action occurred."},
+      {"at": "2026-08-02T15:25:00+08:00", "status": "github_checks_pending", "note": "Addressed the current-head resolver integrity review: runtime now recomputes canonical authority hashes against release and manifest records. Focused regression passed; GitHub checks must rerun for the repair head."}
     ],
-    "updated_at": "2026-08-02T15:15:00+08:00"
+    "updated_at": "2026-08-02T15:25:00+08:00"
   }
 }

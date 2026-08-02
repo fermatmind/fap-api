@@ -90,6 +90,18 @@ final class MbtiResultPromotionAdapterTest extends TestCase
             $context->packageSha256,
             app(ContentPackV2Resolver::class)->resolveActiveMbtiResultAuthority()['source']['package_sha256'] ?? null,
         );
+        $releaseId = (string) DB::table('content_pack_activations')->value('release_id');
+        $canonicalJson = (string) DB::table('content_pack_releases')->where('id', $releaseId)->value('manifest_json');
+        $tampered = json_decode($canonicalJson, true, 512, JSON_THROW_ON_ERROR);
+        $tampered['counts']['rows'] = 46;
+        $tampered['authority']['locale'] = 'en';
+        $tampered['rows'][0]['content']['body_md'] = 'tampered';
+        $tamperedJson = json_encode($tampered, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+        DB::table('content_pack_releases')->where('id', $releaseId)->update(['manifest_json' => $tamperedJson]);
+        DB::table('content_release_manifests')->where('content_pack_release_id', $releaseId)->update(['payload_json' => $tamperedJson]);
+        self::assertNull(app(ContentPackV2Resolver::class)->resolveActiveMbtiResultAuthority());
+        DB::table('content_pack_releases')->where('id', $releaseId)->update(['manifest_json' => $canonicalJson]);
+        DB::table('content_release_manifests')->where('content_pack_release_id', $releaseId)->update(['payload_json' => $canonicalJson]);
         $runtimeProjection = app(MbtiResultPersonalizationService::class)->applyToProjection([
             'sections' => [['key' => 'traits.why_this_type', 'title' => 'Legacy title', 'body_md' => 'Legacy body', 'payload' => []]],
         ], ['locale' => 'en', 'type_code' => 'INTJ', 'sections' => []]);
