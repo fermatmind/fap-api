@@ -9,9 +9,9 @@
     "CONTENT-PROMOTION-W3-ARTICLES-ADAPTER-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "ready_to_merge",
+      "status": "pr_open",
       "branch": "codex/content-promotion-w3-articles-adapter-01",
-      "commit_sha": "444fb33a9d6dae7999dfc488df84778fa7adcfad",
+      "commit_sha": "58a006e21d5424ef48f024c8b47c46f52da9b0e1",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3506",
       "checks": {
         "dependency": {
@@ -53,13 +53,7 @@
             "status": "passed"
           }
         ],
-        "github": [
-          {
-            "command": "GitHub required checks on PR #3506 head 529ef6f87e67c27c9765815a4d8935b191302f9c",
-            "status": "passed",
-            "details": "hygiene, Semgrep blocking secrets, supply-chain, content-pack-build-validate, Semgrep OSS, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 passed; verify-staging-parity was skipped."
-          }
-        ]
+        "github": []
       },
       "failure_reason": null,
       "resume_policy": "continuous_goal",
@@ -97,6 +91,11 @@
           "at": "2026-08-02T09:47:00Z",
           "status": "ready_to_merge",
           "summary": "All required GitHub checks passed on the current reviewed implementation; staging parity was skipped and is not a merge or deployment gate."
+        },
+        {
+          "at": "2026-08-02T09:58:00Z",
+          "status": "review_fixes_validated",
+          "summary": "Addressed follow-up review findings with the locked and audited Article authority, semantic post-publication drift detection before rollback, complete Article discoverability cache invalidation, stale HTML clearing/restoration, and public SEO response readback. Scoped local checks were rerun successfully."
         }
       ]
     },
