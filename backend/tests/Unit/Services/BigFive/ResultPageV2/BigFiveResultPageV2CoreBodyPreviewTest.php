@@ -1050,6 +1050,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/ContentPromotion/PromotionPhaseIdentity.php',
             'backend/app/Services/ContentPromotion/PromotionRollbackSnapshotService.php',
             'backend/app/Services/ContentPromotion/PromotionTargetSet.php',
+            'backend/app/Services/Mbti/MbtiResultPersonalizationService.php',
         ];
         $blocked = [
             'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
@@ -9440,6 +9441,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/ContentPromotion/PromotionPhaseIdentity.php',
             'backend/app/Services/ContentPromotion/PromotionRollbackSnapshotService.php',
             'backend/app/Services/ContentPromotion/PromotionTargetSet.php',
+            'backend/app/Services/Mbti/MbtiResultPersonalizationService.php',
         ], true);
     }
 
