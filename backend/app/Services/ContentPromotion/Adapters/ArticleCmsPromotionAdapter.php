@@ -94,6 +94,9 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
                 $revision = ArticleTranslationRevision::query()->withoutGlobalScopes()->lockForUpdate()
                     ->where('authority_package_sha256', $context->packageSha256)
                     ->where('authority_asset_key', (string) ($row['asset_key'] ?? ''))->first();
+                if ($article instanceof Article && $revision instanceof ArticleTranslationRevision && $this->isRestored($article, $revision, $row)) {
+                    continue;
+                }
                 if (! $article instanceof Article || ! $revision instanceof ArticleTranslationRevision
                     || (int) $revision->article_id !== (int) $article->id
                     || (int) $article->published_revision_id !== (int) $revision->id
@@ -229,6 +232,16 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
             'published_at' => $article->published_at?->toISOString(),
             'source_version_hash' => $article->source_version_hash,
         ];
+    }
+
+    /** @param array<string,mixed> $row */
+    private function isRestored(Article $article, ArticleTranslationRevision $revision, array $row): bool
+    {
+        $before = (array) ($row['article_before'] ?? []);
+
+        return (int) $article->published_revision_id === (int) ($before['published_revision_id'] ?? 0)
+            && (int) $article->working_revision_id === (int) ($before['working_revision_id'] ?? 0)
+            && (string) $revision->revision_status === (string) ($row['package_revision_status_before'] ?? ArticleTranslationRevision::STATUS_APPROVED);
     }
 
     /** @return array<string,mixed> */
