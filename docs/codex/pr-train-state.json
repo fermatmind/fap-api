@@ -103367,7 +103367,7 @@
       "EN-PARITY-W9-W4-RIASEC-INDEPENDENT-QA-02",
       "CONTROL-W4-RIASEC-QA-PASS-01"
     ],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "8a49f99bd",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3489",
     "checks": {
@@ -103833,5 +103833,68 @@
       }
     ],
     "updated_at": "2026-08-03T01:38:08+08:00"
+  },
+  "W1-MBTI-RESULT-V2-W9-AUTHORITY-BINDING-01": {
+    "id": "W1-MBTI-RESULT-V2-W9-AUTHORITY-BINDING-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/w1-mbti-result-v2-w9-authority-binding-01",
+    "title": "W1-MBTI-RESULT-V2-W9-AUTHORITY-BINDING-01 — Bind immutable W9 evidence for MBTI English result authority",
+    "depends_on": ["CONTENT-PROMOTION-V2-DEPLOYED-EXECUTOR-PIN-01", "W1-MBTI-COMPARISONS-V2-READINESS-REPAIR-01"],
+    "status": "ready_to_merge",
+    "commit_sha": "10bc5d59df2f5ef7c84b049784f841b5fd696f4c",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3517",
+    "checks": {
+      "dependency": {
+        "status": "passed",
+        "evidence": "T1 merged as 1f863f4b8f63d86149d5bc0fe7563c4936e86446 and T3 merged as beaec277058534189176a6814d2c0f3c116cc4ce; current branch starts from origin/main beaec277058534189176a6814d2c0f3c116cc4ce."
+      },
+      "scope": {
+        "status": "passed",
+        "evidence": "Final PR file list is exactly the seven manifest-allowed paths: result promotion authority, exact external W9 snapshot/envelope, direct tests, shared command fixture, and required train metadata."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "Focused result adapter plus exact command-chain suites passed (18 tests / 241 assertions); scoped Pint, syntax, YAML/JSON parsing, exact report/envelope SHA verification, and diff checks passed."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "Exact PR head 631a2d1e1d9489cccdcdef04d76a24dede9892b6 passed CI run 30759893042: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, and verify-bigfive. Code Scanning run 30759893031 passed; staging parity was skipped by workflow."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-08-03T01:51:49+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started T4 from clean origin/main beaec277058534189176a6814d2c0f3c116cc4ce after T1 and T3 merges. Scope is immutable fap-web W9 evidence binding for the exact fixed MBTI result package only; no CMS/database write, promotion execution, activation, deploy, discoverability, or private-data action occurred."
+      },
+      {
+        "at": "2026-08-03T01:52:45+08:00",
+        "status": "local_validation_passed",
+        "note": "Focused result-adapter and full exact-command-chain suites passed (18 tests / 241 assertions). Scoped Pint, PHP syntax, YAML/JSON parsing, exact W9 report/envelope SHA verification, and diff checks passed. The immutable fap-web report bytes remain exact at b1179976102f903b36de9888ee4cb0b4dd74fc3906d5951682922464bc8dec7d; no CMS/database mutation, promotion execution, activation, deploy, discoverability, or private-data action occurred."
+      },
+      {
+        "at": "2026-08-03T01:54:00+08:00",
+        "status": "github_checks_pending",
+        "note": "PR #3517 opened from exact implementation head 10bc5d59df2f5ef7c84b049784f841b5fd696f4c. Required GitHub checks are pending; no production workflow, CMS/database write, activation, deploy, discoverability, or private-data action occurred."
+      },
+      {
+        "at": "2026-08-03T02:01:29+08:00",
+        "status": "ready_to_merge",
+        "note": "Exact head 631a2d1e1d9489cccdcdef04d76a24dede9892b6 passed all required CI and Code Scanning checks. PR #3517 is CLEAN; final changed files remain exact T4 scope, and no production promotion, CMS/database mutation, activation, deploy, discoverability, or private-data action occurred."
+      }
+    ],
+    "updated_at": "2026-08-03T02:01:29+08:00"
   }
 }

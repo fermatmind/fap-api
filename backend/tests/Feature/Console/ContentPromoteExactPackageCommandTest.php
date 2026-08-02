@@ -414,25 +414,6 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
         }
         $directory = base_path('content_assets/en-content-parity/.testing-mbti-result-'.bin2hex(random_bytes(8)));
         File::copyDirectory(MbtiResultEnglishPackageImporter::defaultPackageDirectory(), $directory);
-        $manifest = json_decode((string) File::get($directory.'/package_manifest.json'), true, 512, JSON_THROW_ON_ERROR);
-        $report = [
-            'schema_version' => 'fermatmind.en_parity.independent_w9_report.v1',
-            'review_kind' => 'independent_w9',
-            'verdict' => 'PASS',
-            'package_sha256' => $manifest['package_sha256'],
-            'lane_id' => 'W1',
-            'subscope' => 'mbti-results',
-            'reviewed_row_count' => 46,
-        ];
-        $bytes = json_encode($report, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)."\n";
-        $reportRef = 'mbti-result-command-fixture.json';
-        File::put($this->w9Directory.'/'.$reportRef, $bytes);
-        $manifest['quality_gates']['independent_w9'] = [
-            'status' => 'pass',
-            'report_ref' => $reportRef,
-            'report_sha256' => hash('sha256', $bytes),
-        ];
-        File::put($directory.'/package_manifest.json', json_encode($manifest, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)."\n");
 
         return $this->mbtiResultPackageDirectory = $directory;
     }

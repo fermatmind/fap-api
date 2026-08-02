@@ -48739,3 +48739,47 @@ prs:
     deploy_allowed: false
     content_authority: existing backend comparison authority with immutable external fap-web W9 evidence
     repository_rule_impact: preserves backend-only content authority and all noindex/discoverability boundaries while allowing exact legacy cohort receipt adoption
+
+  - id: W1-MBTI-RESULT-V2-W9-AUTHORITY-BINDING-01
+    repo: fap-api
+    base: main
+    branch: codex/w1-mbti-result-v2-w9-authority-binding-01
+    title: "W1-MBTI-RESULT-V2-W9-AUTHORITY-BINDING-01 — Bind immutable W9 evidence for MBTI English result authority"
+    status: user_authorized
+    depends_on: [CONTENT-PROMOTION-V2-DEPLOYED-EXECUTOR-PIN-01, W1-MBTI-COMPARISONS-V2-READINESS-REPAIR-01]
+    train_scope: w1_mbti_result_external_w9_authority_binding
+    scope:
+      - Bind only the immutable fap-web W9 PASS report for the exact 46-row W1 MBTI English result package through a non-symlinked external evidence envelope.
+      - Require exact external source repository, source commit, source path, report SHA, package SHA, W1 result subscope, reviewed count, authority-content count, and PASS verdict before preflight or authority creation.
+      - Preserve the frozen package bytes and SHA, inactive draft authority, zero-write preflight, inactive pointer, and existing private-field exclusion.
+    allowed_paths:
+      - backend/app/Services/ContentPromotion/MbtiResultPromotionAuthority.php
+      - backend/content_assets/en-content-parity/W9/mbti-results/9325013b-renderer-643b7a80/**
+      - backend/tests/Unit/ContentPromotion/MbtiResultPromotionAdapterTest.php
+      - backend/tests/Feature/Console/ContentPromoteExactPackageCommandTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify result package payload or package SHA, producer-owned W9 gate bytes, runtime active pointer, private data boundaries, CMS/database state, activation, deployment, indexability, sitemap, llms, search submission, or other promotion cohorts.
+      - Create or rerun W9, accept producer self-approval, read private attempt/report/order/payment/PDF data, or introduce a generic evidence bypass.
+    validation:
+      - cd backend && php artisan test tests/Unit/ContentPromotion/MbtiResultPromotionAdapterTest.php tests/Feature/Console/ContentPromoteExactPackageCommandTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/ContentPromotion/MbtiResultPromotionAuthority.php tests/Unit/ContentPromotion/MbtiResultPromotionAdapterTest.php tests/Feature/Console/ContentPromoteExactPackageCommandTest.php
+      - php -l each modified PHP file
+      - verify exact external W9 report and envelope SHA-256
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - exact changed-file scope validation
+      - git diff --check
+      - git diff --cached --check
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: exact backend W1 result authority with immutable external fap-web W9 evidence
+    repository_rule_impact: replaces producer-self-acceptance with external W9 provenance while retaining package immutability and all inactive/no-discoverability boundaries
