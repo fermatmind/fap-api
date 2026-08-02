@@ -9,10 +9,10 @@
     "CONTENT-PROMOTION-W3-ARTICLES-ADAPTER-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "in_progress",
+      "status": "pr_open",
       "branch": "codex/content-promotion-w3-articles-adapter-01",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "1f7f3c9feabf4647685cbd6c19a54c0f34a75b34",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3506",
       "checks": {
         "dependency": {
           "status": "passed",
@@ -76,6 +76,11 @@
           "at": "2026-08-02T09:35:00Z",
           "status": "local_checks_passed",
           "summary": "W3 Article exact-SHA authority, revision ledger, public API readback, idempotency, rollback, command receipt-chain, capability registry, SRE workflow, review-policy, freeze allowlist, JSON/YAML, and diff checks passed. No production operation was executed."
+        },
+        {
+          "at": "2026-08-02T09:45:00Z",
+          "status": "pr_open",
+          "summary": "Opened PR #3506 after scoped local validation. Required GitHub checks remain pending; no production operation was executed."
         }
       ]
     },
