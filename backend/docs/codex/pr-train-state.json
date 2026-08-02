@@ -9,7 +9,7 @@
     "EN-PARITY-W3-ARTICLES-BACKEND-PROMOTION-PACKAGE-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "ready_to_merge",
       "branch": "codex/en-parity-w3-articles-backend-promotion-package-01",
       "commit_sha": "9c82e5e2da6c25c55b7b173a62f271019b513157",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3511",
@@ -171,7 +171,11 @@
             "status": "passed_with_framework_deprecations",
             "details": "Adapter conformance plus 11 private surface contract tests passed; no import, activation, publication, or deployment command was run."
           }
-        ]
+        ],
+        "github": {
+          "status": "passed",
+          "details": "PR #3518 package head passed hygiene, supply-chain, content-pack-build-validate, verify-mbti legacy/v2, verify-bigfive, Code Scanning, Semgrep blocking secrets, and Semgrep OSS. verify-staging-parity was skipped by its pull-request-only workflow policy."
+        }
       },
       "failure_reason": null,
       "resume_policy": "continuous_goal",
@@ -198,6 +202,11 @@
           "at": "2026-08-03T00:00:00+08:00",
           "status": "pr_open",
           "summary": "Opened PR #3518 at package commit 8623f8f19b4912ad9ceb355f67f5fc9db1510cbe. Required GitHub checks, including the Enneagram W9 exact-package gate embedded in verify-mbti, are pending; no production operation was executed."
+        },
+        {
+          "at": "2026-08-03T00:00:00+08:00",
+          "status": "ready_to_merge",
+          "summary": "PR #3518 passed all required GitHub checks for its package head. The Enneagram W9 exact-package check ran inside both verify-mbti modes; no production operation was executed."
         }
       ]
     },
