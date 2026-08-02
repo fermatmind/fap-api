@@ -1180,7 +1180,8 @@ class AttemptReadController extends Controller
             $unlockSource,
             $modulesAllowed,
             $modulesOffered,
-            (string) data_get($payloadJson, 'three_channel_unlock_source', $unlockSource)
+            (string) data_get($payloadJson, 'three_channel_unlock_source', $unlockSource),
+            $attempt,
         );
         $responsePayload['unlock_stage'] = $unlockStage;
         $responsePayload['unlock_source'] = $unlockSource;

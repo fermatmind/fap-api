@@ -84,6 +84,11 @@ return [
         'sku' => env('WECHAT_MINI_VIRTUAL_SKU', 'MBTI_REPORT_FULL'),
         'price_cents' => (int) env('WECHAT_MINI_VIRTUAL_PRICE_CENTS', 499),
         'http_timeout_seconds' => (int) env('WECHAT_MINI_VIRTUAL_HTTP_TIMEOUT_SECONDS', 8),
+        'products' => [
+            'BIG5_OCEAN' => [
+                'product_id' => env('WECHAT_MINI_VIRTUAL_BIG5_PRODUCT_ID', 'BigFive'),
+            ],
+        ],
     ],
     // WeChat Mini Program iOS virtual payment is routed by WeChat to Apple.
     // It uses the same wx.requestVirtualPayment/xpay contract, not merchant-side
@@ -100,5 +105,10 @@ return [
         'sku' => env('APPLE_IAP_WECHAT_SKU', 'MBTI_REPORT_FULL'),
         'price_cents' => (int) env('APPLE_IAP_WECHAT_PRICE_CENTS', 499),
         'http_timeout_seconds' => (int) env('APPLE_IAP_WECHAT_HTTP_TIMEOUT_SECONDS', 8),
+        'products' => [
+            'BIG5_OCEAN' => [
+                'product_id' => env('APPLE_IAP_WECHAT_BIG5_PRODUCT_ID', 'BigFive'),
+            ],
+        ],
     ],
 ];

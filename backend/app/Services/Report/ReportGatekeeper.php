@@ -11,6 +11,7 @@ use App\Repositories\Report\ReportSubjectRepository;
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2AuditFields;
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2Contract;
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2RuntimeWrapper;
+use App\Services\Commerce\BigFiveReportUnlockRolloutGate;
 use App\Services\Commerce\FreemiumLocalePolicy;
 use App\Services\Content\ContentPack;
 use App\Services\Content\ContentStore;
@@ -41,6 +42,7 @@ class ReportGatekeeper
         private CrisisPolicyResolver $crisisPolicyResolver,
         private ReportSubjectRepository $subjects,
         private OrgContext $orgContext,
+        private BigFiveReportUnlockRolloutGate $bigFiveReportUnlockRollout,
     ) {}
 
     private function freemiumLocalePolicy(): FreemiumLocalePolicy
@@ -83,7 +85,7 @@ class ReportGatekeeper
 
         $commercial = $this->offerResolver->normalizeCommercial($registry['commercial_json'] ?? null);
         $paywallMode = ScaleRolloutGate::paywallMode($registry);
-        $forceFreeOnly = $this->shouldForceFreeOnly($scaleCode, $paywallMode);
+        $forceFreeOnly = $this->shouldForceFreeOnly($scaleCode, $paywallMode, $attempt);
         $localePolicy = $this->freemiumLocalePolicy()->resolve(
             $scaleCode,
             (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN'))
@@ -158,7 +160,7 @@ class ReportGatekeeper
         $commercial = $this->offerResolver->normalizeCommercial($registry['commercial_json'] ?? null);
         $commercialSpec = $isMbtiContract ? $this->loadCommercialSpecForAttempt($attempt, $result) : [];
         $paywallMode = ScaleRolloutGate::paywallMode($registry);
-        $forceFreeOnly = $this->shouldForceFreeOnly($scaleCode, $paywallMode);
+        $forceFreeOnly = $this->shouldForceFreeOnly($scaleCode, $paywallMode, $attempt);
         $localePolicy = $this->freemiumLocalePolicy()->resolve(
             $scaleCode,
             (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN'))
@@ -644,13 +646,13 @@ class ReportGatekeeper
         return $normalizedRole === 'system';
     }
 
-    private function shouldForceFreeOnly(string $scaleCode, string $paywallMode): bool
+    private function shouldForceFreeOnly(string $scaleCode, string $paywallMode, Attempt $attempt): bool
     {
         $scaleCode = strtoupper(trim($scaleCode));
         $freeByPaywallMode = in_array($paywallMode, [ScaleRolloutGate::PAYWALL_FREE_ONLY, ScaleRolloutGate::PAYWALL_OFF], true);
 
         if ($scaleCode === ReportAccess::SCALE_BIG5_OCEAN) {
-            return $freeByPaywallMode;
+            return $freeByPaywallMode || ! $this->bigFiveReportUnlockRollout->allows($attempt);
         }
 
         if (in_array($scaleCode, [ReportAccess::SCALE_EQ_60, ReportAccess::SCALE_RIASEC], true)) {

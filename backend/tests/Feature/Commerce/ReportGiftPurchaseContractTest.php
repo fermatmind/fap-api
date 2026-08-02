@@ -100,6 +100,55 @@ final class ReportGiftPurchaseContractTest extends TestCase
         $this->assertSame(0, DB::table('benefit_grants')->where('attempt_id', $attemptId)->count());
     }
 
+    public function test_big_five_gift_requires_rollout_and_grants_only_after_verified_payment(): void
+    {
+        config()->set('report_unlock.big5_rollout.mode', 'allowlist_only');
+        config()->set('report_unlock.big5_rollout.allowed_anon_ids', ['anon_big5_gift_recipient']);
+        config()->set('payments.wechat_mini_virtual.products.BIG5_OCEAN.product_id', 'BigFive');
+        $this->seedBigFiveSku();
+        $this->enableBigFivePaywall();
+
+        $attemptId = $this->createAttempt('anon_big5_gift_recipient', 'BIG5_OCEAN');
+        $created = $this->withHeaders($this->headersFor('anon_big5_gift_recipient'))
+            ->postJson('/api/v0.3/attempts/'.$attemptId.'/gift-requests')
+            ->assertCreated();
+        $token = (string) $created->json('gift_request.public_token');
+
+        Http::fake([
+            'https://api.weixin.qq.com/sns/jscode2session*' => Http::response([
+                'openid' => 'openid-gift-payer',
+                'session_key' => 'session-key-big5-gift',
+            ]),
+        ]);
+        $purchased = $this->withHeaders($this->headersFor('anon_big5_gift_payer'))
+            ->postJson('/api/v0.3/report-gifts/'.$token.'/orders/wechat_mini_virtual', [
+                'idempotency_key' => 'big5-gift-order',
+                'wx_login_code' => 'wx-login-big5-gift',
+            ])
+            ->assertOk();
+        $orderNo = (string) $purchased->json('order_no');
+        $signData = json_decode((string) $purchased->json('pay.params.signData'), true, flags: JSON_THROW_ON_ERROR);
+        $this->assertSame('BigFive', (string) $signData['productId']);
+        $this->assertSame(499, (int) $signData['goodsPrice']);
+        $this->assertSame(0, DB::table('benefit_grants')->where('attempt_id', $attemptId)->count());
+
+        $payload = $this->paidCallbackPayload($orderNo, (string) $signData['outTradeNo']);
+        $payload['GoodsInfo']['ProductId'] = 'BigFive';
+        $handled = app(WechatMiniVirtualPaymentService::class)
+            ->handleCallback($this->signedCallbackRequest($payload));
+        $this->assertTrue((bool) ($handled['ok'] ?? false));
+        $this->assertSame('BIG5_FULL_REPORT', (string) DB::table('benefit_grants')
+            ->where('attempt_id', $attemptId)
+            ->where('status', 'active')
+            ->value('benefit_code'));
+
+        $blockedAttemptId = $this->createAttempt('anon_big5_gift_not_allowlisted', 'BIG5_OCEAN');
+        $this->withHeaders($this->headersFor('anon_big5_gift_not_allowlisted'))
+            ->postJson('/api/v0.3/attempts/'.$blockedAttemptId.'/gift-requests')
+            ->assertForbidden()
+            ->assertJsonPath('error_code', 'ROLLOUT_DISABLED');
+    }
+
     public function test_expired_and_iq_gift_requests_fail_closed_without_orders_or_grants(): void
     {
         $attemptId = $this->createAttempt('anon_gift_expired');
@@ -1051,7 +1100,7 @@ final class ReportGiftPurchaseContractTest extends TestCase
             'scale_version' => 'v0.3',
             'region' => 'CN_MAINLAND',
             'locale' => 'zh-CN',
-            'question_count' => 60,
+            'question_count' => $scaleCode === 'BIG5_OCEAN' ? 120 : 60,
             'answers_summary_json' => ['stage' => 'seed'],
             'client_platform' => 'test',
             'channel' => 'wechat_miniapp',
@@ -1097,6 +1146,40 @@ final class ReportGiftPurchaseContractTest extends TestCase
             'is_active' => true,
             'meta_json' => null,
             'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
+
+    private function seedBigFiveSku(): void
+    {
+        DB::table('skus')->updateOrInsert(['sku' => 'SKU_BIG5_FULL_REPORT_499'], [
+            'org_id' => 0,
+            'scale_code' => 'BIG5_OCEAN',
+            'kind' => 'report_unlock',
+            'unit_qty' => 1,
+            'benefit_code' => 'BIG5_FULL_REPORT',
+            'scope' => 'attempt',
+            'price_cents' => 499,
+            'currency' => 'CNY',
+            'is_active' => true,
+            'meta_json' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
+
+    private function enableBigFivePaywall(): void
+    {
+        $scale = DB::table('scales_registry')->where('org_id', 0)->where('code', 'BIG5_OCEAN')->first();
+        $this->assertNotNull($scale);
+        $capabilities = json_decode((string) $scale->capabilities_json, true, flags: JSON_THROW_ON_ERROR);
+        $commercial = json_decode((string) $scale->commercial_json, true, flags: JSON_THROW_ON_ERROR);
+        $capabilities['paywall_mode'] = 'full';
+        $commercial['report_unlock_sku'] = 'SKU_BIG5_FULL_REPORT_499';
+        $commercial['report_benefit_code'] = 'BIG5_FULL_REPORT';
+        DB::table('scales_registry')->where('org_id', 0)->where('code', 'BIG5_OCEAN')->update([
+            'capabilities_json' => json_encode($capabilities, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),
+            'commercial_json' => json_encode($commercial, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),
             'updated_at' => now(),
         ]);
     }

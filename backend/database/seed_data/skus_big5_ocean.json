@@ -1,5 +1,31 @@
 [
   {
+    "sku": "SKU_BIG5_FULL_REPORT_499",
+    "sku_code": "SKU_BIG5_FULL_REPORT_499",
+    "anchor_sku": "SKU_BIG5_FULL_REPORT",
+    "scale_code": "BIG5_OCEAN",
+    "benefit_type": "report_unlock",
+    "benefit_code": "BIG5_FULL_REPORT",
+    "benefit_qty": 1,
+    "scope": "attempt",
+    "price_cents": 499,
+    "currency": "CNY",
+    "offer_code": "BIG5_FULL_MAIN",
+    "modules_included": ["big5_full", "big5_action_plan"],
+    "title": "BIG5 Full Report",
+    "is_active": true,
+    "metadata_json": {
+      "label": "BIG5 full report",
+      "offer_code": "BIG5_FULL_MAIN",
+      "effective_default": true,
+      "anchor_sku": "SKU_BIG5_FULL_REPORT",
+      "grant_type": "report_unlock",
+      "grant_qty": 1,
+      "entitlement_id": "big5_full_report",
+      "modules_included": ["big5_full", "big5_action_plan"]
+    }
+  },
+  {
     "sku": "SKU_BIG5_FULL_REPORT_299",
     "sku_code": "SKU_BIG5_FULL_REPORT_299",
     "anchor_sku": "SKU_BIG5_FULL_REPORT",
@@ -20,7 +46,8 @@
     "metadata_json": {
       "label": "BIG5 full report",
       "offer_code": "BIG5_FULL_MAIN",
-      "effective_default": true,
+      "effective_default": false,
+      "historical_only": true,
       "anchor_sku": "SKU_BIG5_FULL_REPORT",
       "grant_type": "report_unlock",
       "grant_qty": 1,
@@ -48,7 +75,7 @@
       "label": "BIG5 full report (anchor)",
       "anchor": true,
       "deprecated": true,
-      "effective_sku": "SKU_BIG5_FULL_REPORT_299",
+      "effective_sku": "SKU_BIG5_FULL_REPORT_499",
       "grant_type": "report_unlock",
       "grant_qty": 1,
       "entitlement_id": "big5_full_report",

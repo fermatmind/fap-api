@@ -50,6 +50,7 @@ return Application::configure(basePath: dirname(__DIR__))
         \App\Console\Commands\PersonalityMbtiFullIndexabilityPromote::class,
         \App\Console\Commands\FapResolvePack::class,
         \App\Console\Commands\RiasecResultPageAssetAgentAuditCommand::class,
+        \App\Console\Commands\ActivateBigFiveReportUnlockCommerce::class,
     ])
     ->withSchedule(function (Schedule $schedule): void {
         $schedule->command('storage:prune --execute --scope=reports_backups --strategy=strict')->dailyAt('03:10')->withoutOverlapping();

@@ -119,6 +119,7 @@ final class BigFiveResultEngineFoundationTest extends TestCase
 
         $anonId = 'anon_big5_paid_redaction';
         $attemptId = $this->seedAttempt($anonId);
+        $this->enableBigFiveCommerceForAttempt($attemptId);
         $this->seedResult($attemptId);
         $token = $this->issueAnonToken($anonId);
 
@@ -297,16 +298,34 @@ final class BigFiveResultEngineFoundationTest extends TestCase
                     'free_sections' => ['disclaimer_top', 'summary', 'domains_overview', 'disclaimer'],
                     'blur_others' => true,
                     'teaser_percent' => 0.0,
-                    'upgrade_sku' => 'SKU_BIG5_FULL_REPORT_299',
+                    'upgrade_sku' => 'SKU_BIG5_FULL_REPORT_499',
                 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
                 'commercial_json' => json_encode([
                     'price_tier' => 'PAID',
                     'report_benefit_code' => 'BIG5_FULL_REPORT',
                     'credit_benefit_code' => 'BIG5_FULL_REPORT',
-                    'report_unlock_sku' => 'SKU_BIG5_FULL_REPORT_299',
+                    'report_unlock_sku' => 'SKU_BIG5_FULL_REPORT_499',
                 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
                 'updated_at' => now(),
             ]);
+    }
+
+    private function enableBigFiveCommerceForAttempt(string $attemptId): void
+    {
+        config()->set('report_unlock.rollout_scales', ['MBTI', 'BIG5_OCEAN']);
+        config()->set('report_unlock.big5_rollout', [
+            'mode' => 'allowlist_only',
+            'percentage' => 0,
+            'max_percentage' => 10,
+            'emergency_disabled' => false,
+            'allowed_attempt_ids' => [$attemptId],
+            'allowed_user_ids' => [],
+            'allowed_anon_ids' => [],
+            'allowed_org_ids' => [],
+            'allowed_tenant_ids' => ['0'],
+            'allowed_form_codes' => ['big5_90', 'big5_120'],
+            'allowed_locales' => ['zh-CN'],
+        ]);
     }
 
     /**

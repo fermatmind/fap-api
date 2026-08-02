@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Commerce;
 
+use App\Models\Attempt;
 use App\Services\Commerce\ReportUnlockOptionResolver;
 use App\Services\Report\ReportAccess;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 final class ReportUnlockOptionResolverTest extends TestCase
@@ -127,6 +129,49 @@ final class ReportUnlockOptionResolverTest extends TestCase
         $this->assertFalse((bool) data_get($iq, 'unlock_options.0.available'));
     }
 
+    public function test_allowlisted_big_five_attempt_exposes_the_499_three_channel_contract(): void
+    {
+        $attempt = Attempt::create([
+            'id' => (string) Str::uuid(),
+            'org_id' => 0,
+            'anon_id' => 'anon_big5_contract',
+            'scale_code' => 'BIG5_OCEAN',
+            'scale_version' => 'v1',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'question_count' => 120,
+            'answers_summary_json' => [],
+            'client_platform' => 'test',
+            'started_at' => now(),
+        ]);
+        $this->seedBigFiveSku();
+        config()->set('report_unlock.big5_rollout.mode', 'allowlist_only');
+        config()->set('report_unlock.big5_rollout.allowed_attempt_ids', [$attempt->id]);
+        config()->set('report_unlock.providers.rewarded_ad.available', true);
+        config()->set('report_unlock.providers.wechat_mini_virtual.available', true);
+        config()->set('report_unlock.providers.gift_purchase.available', true);
+
+        $contract = $this->resolver()->resolve(
+            'BIG5_OCEAN',
+            'zh-CN',
+            0,
+            ReportAccess::UNLOCK_STAGE_LOCKED,
+            ReportAccess::UNLOCK_SOURCE_NONE,
+            [ReportAccess::MODULE_BIG5_CORE],
+            [ReportAccess::MODULE_BIG5_FULL, ReportAccess::MODULE_BIG5_ACTION_PLAN],
+            null,
+            $attempt,
+        );
+
+        $this->assertSame('enabled', data_get($contract, 'rollout.state'));
+        $this->assertTrue((bool) data_get($contract, 'unlock_options.0.available'));
+        $this->assertTrue((bool) data_get($contract, 'unlock_options.1.available'));
+        $this->assertSame('SKU_BIG5_FULL_REPORT_499', data_get($contract, 'unlock_options.1.sku'));
+        $this->assertSame(499, data_get($contract, 'unlock_options.1.price_cents'));
+        $this->assertSame('¥4.99', data_get($contract, 'unlock_options.1.display_price'));
+        $this->assertTrue((bool) data_get($contract, 'unlock_options.2.available'));
+    }
+
     public function test_three_channel_source_normalization_excludes_legacy_invite_and_mixed(): void
     {
         $this->assertSame('rewarded_ad', ReportAccess::normalizeThreeChannelUnlockSource('rewarded_ad'));
@@ -158,6 +203,30 @@ final class ReportUnlockOptionResolverTest extends TestCase
                     ReportAccess::MODULE_CORE_FULL,
                     ReportAccess::MODULE_CAREER,
                     ReportAccess::MODULE_RELATIONSHIPS,
+                ],
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
+
+    private function seedBigFiveSku(): void
+    {
+        DB::table('skus')->insert([
+            'sku' => 'SKU_BIG5_FULL_REPORT_499',
+            'scale_code' => 'BIG5_OCEAN',
+            'kind' => 'report_unlock',
+            'unit_qty' => 1,
+            'benefit_code' => 'BIG5_FULL_REPORT',
+            'scope' => 'attempt',
+            'price_cents' => 499,
+            'currency' => 'CNY',
+            'is_active' => true,
+            'meta_json' => json_encode([
+                'effective_default' => true,
+                'modules_included' => [
+                    ReportAccess::MODULE_BIG5_FULL,
+                    ReportAccess::MODULE_BIG5_ACTION_PLAN,
                 ],
             ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
             'created_at' => now(),

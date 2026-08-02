@@ -4,13 +4,18 @@ declare(strict_types=1);
 
 namespace App\Services\Commerce;
 
+use App\Models\Attempt;
 use App\Models\Sku;
 use App\Services\Report\ReportAccess;
 use Throwable;
 
 final class ReportUnlockOptionResolver
 {
-    public function __construct(private readonly SkuCatalog $skus) {}
+    public function __construct(
+        private readonly SkuCatalog $skus,
+        private readonly ReportUnlockProductCatalog $products,
+        private readonly BigFiveReportUnlockRolloutGate $bigFiveRollout,
+    ) {}
 
     /**
      * @param  list<string>  $modulesAllowed
@@ -25,12 +30,13 @@ final class ReportUnlockOptionResolver
         string $legacyUnlockSource,
         array $modulesAllowed,
         array $modulesOffered,
-        ?string $threeChannelUnlockSource = null
+        ?string $threeChannelUnlockSource = null,
+        ?Attempt $attempt = null,
     ): array {
         $scaleCode = strtoupper(trim($scaleCode));
         $locale = trim($locale);
         $unlockStage = ReportAccess::normalizeUnlockStage($unlockStage);
-        $rolloutEnabled = $this->rolloutEnabled($scaleCode, $locale);
+        $rolloutEnabled = $this->rolloutEnabled($scaleCode, $locale, $attempt);
         $isLocked = $unlockStage !== ReportAccess::UNLOCK_STAGE_FULL;
         $modulesOffered = ReportAccess::normalizeModules($modulesOffered);
         $modulesAllowed = $this->modulesAllowed(
@@ -77,7 +83,7 @@ final class ReportUnlockOptionResolver
         ];
     }
 
-    private function rolloutEnabled(string $scaleCode, string $locale): bool
+    private function rolloutEnabled(string $scaleCode, string $locale, ?Attempt $attempt): bool
     {
         if ($scaleCode === '' || ReportAccess::isIqScale($scaleCode)) {
             return false;
@@ -92,16 +98,22 @@ final class ReportUnlockOptionResolver
             (array) config('report_unlock.supported_locales', ['zh-CN'])
         )));
 
-        return in_array($scaleCode, $scales, true)
-            && in_array($locale, $locales, true);
+        if ($scaleCode === ReportAccess::SCALE_BIG5_OCEAN) {
+            return in_array($locale, $locales, true)
+                && $attempt instanceof Attempt
+                && $this->bigFiveRollout->allows($attempt);
+        }
+
+        return in_array($scaleCode, $scales, true) && in_array($locale, $locales, true);
     }
 
     private function resolveExactSku(string $scaleCode, int $orgId): ?Sku
     {
-        $candidate = strtoupper(trim((string) config("report_unlock.sku_by_scale.{$scaleCode}", '')));
-        if ($candidate === '') {
+        $contract = $this->products->forScale($scaleCode);
+        if ($contract === null) {
             return null;
         }
+        $candidate = (string) $contract['sku'];
 
         try {
             $meta = $this->skus->resolveSkuMeta($candidate, $scaleCode, $orgId);
@@ -114,8 +126,8 @@ final class ReportUnlockOptionResolver
             return null;
         }
 
-        $expectedPrice = (int) config('report_unlock.price_cents', 499);
-        $expectedCurrency = strtoupper(trim((string) config('report_unlock.currency', 'CNY')));
+        $expectedPrice = (int) $contract['price_cents'];
+        $expectedCurrency = (string) $contract['currency'];
         $benefitCode = strtoupper(trim((string) ($row->benefit_code ?? '')));
         $scope = strtolower(trim((string) ($row->scope ?? '')));
         $kind = strtolower(trim((string) ($row->kind ?? '')));
@@ -125,7 +137,7 @@ final class ReportUnlockOptionResolver
             || strtoupper(trim((string) ($row->currency ?? ''))) !== $expectedCurrency
             || $scope !== 'attempt'
             || $kind !== 'report_unlock'
-            || $benefitCode !== 'MBTI_REPORT_FULL'
+            || $benefitCode !== $contract['benefit_code']
         ) {
             return null;
         }

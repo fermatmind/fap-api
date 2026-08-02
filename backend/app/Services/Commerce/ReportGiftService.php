@@ -34,6 +34,8 @@ final class ReportGiftService
         private readonly EntitlementManager $entitlements,
         private readonly PaymentProviderRegistry $paymentProviders,
         private readonly WechatMiniVirtualPaymentService $wechatMiniVirtual,
+        private readonly ReportUnlockProductCatalog $products,
+        private readonly BigFiveReportUnlockRolloutGate $bigFiveRollout,
     ) {}
 
     /**
@@ -81,8 +83,11 @@ final class ReportGiftService
         if ($scaleCode === ReportAccess::SCALE_IQ_RAVEN) {
             return $this->error('IQ_GIFT_DISABLED', 'IQ report gifting is unavailable.', 403);
         }
-        if ($scaleCode !== ReportAccess::SCALE_MBTI) {
+        if ($this->products->forScale($scaleCode) === null) {
             return $this->error('ROLLOUT_DISABLED', 'report gifting is unavailable for this scale.', 403);
+        }
+        if ($scaleCode === ReportAccess::SCALE_BIG5_OCEAN && ! $this->bigFiveRollout->allows($attempt)) {
+            return $this->error('ROLLOUT_DISABLED', 'report gifting is unavailable for this attempt.', 403);
         }
 
         $sku = $this->skuForScale($scaleCode);
@@ -894,10 +899,14 @@ final class ReportGiftService
 
     private function skuContractIsValid(?object $skuRow): bool
     {
+        $contract = $skuRow !== null ? $this->products->forSku((string) ($skuRow->sku ?? '')) : null;
+
         return $skuRow !== null
-            && (int) ($skuRow->price_cents ?? 0) === (int) config('report_unlock.price_cents', 499)
+            && $contract !== null
+            && (int) ($skuRow->price_cents ?? 0) === (int) $contract['price_cents']
             && strtoupper(trim((string) ($skuRow->currency ?? ''))) === 'CNY'
-            && strtolower(trim((string) ($skuRow->kind ?? ''))) === 'report_unlock';
+            && strtolower(trim((string) ($skuRow->kind ?? ''))) === 'report_unlock'
+            && strtoupper(trim((string) ($skuRow->benefit_code ?? ''))) === $contract['benefit_code'];
     }
 
     private function actorOwnsAttempt(object $attempt, ?string $userId, ?string $anonId): bool
@@ -949,7 +958,7 @@ final class ReportGiftService
 
     private function skuForScale(string $scaleCode): string
     {
-        return strtoupper(trim((string) config('report_unlock.sku_by_scale.'.$scaleCode, '')));
+        return (string) data_get($this->products->forScale($scaleCode), 'sku', '');
     }
 
     private function giftAvailable(): bool
