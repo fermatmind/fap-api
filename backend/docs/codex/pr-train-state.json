@@ -9,7 +9,7 @@
     "CONTENT-PROMOTION-CAREER-CMS-ADAPTERS-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "ready_to_merge",
       "branch": "codex/content-promotion-career-cms-adapters-01",
       "commit_sha": "c665afe00",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3508",
@@ -86,6 +86,11 @@
           "at": "2026-08-02T12:45:00Z",
           "status": "github_check_repairing",
           "summary": "verify-bigfive failed because the exact-package runtime-freeze allowlist did not yet list the four new T5 adapter/authority files. Added only those exact paths and reran the focused runtime-freeze contract locally; no production operation was executed."
+        },
+        {
+          "at": "2026-08-02T13:00:00Z",
+          "status": "ready_to_merge",
+          "summary": "All required GitHub checks passed on the repaired PR head, including hygiene, supply-chain, content-pack validation, MBTI legacy/v2, Big Five, and security checks. Staging parity remained skipped and is not a deployment action."
         }
       ]
     },
