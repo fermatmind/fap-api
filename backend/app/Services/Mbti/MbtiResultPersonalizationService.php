@@ -8,6 +8,7 @@ use App\Services\AI\ControlledGenerationRuntime;
 use App\Services\AI\ControlledNarrativeLayerService;
 use App\Services\Comparative\VersionedComparativeNormingLayerService;
 use App\Services\Content\ContentPacksIndex;
+use App\Services\Content\ContentPackV2Resolver;
 use App\Services\Content\CulturalCalibrationLayerService;
 use App\Support\Mbti\MbtiAxisStrengthBand;
 
@@ -746,6 +747,7 @@ final class MbtiResultPersonalizationService
         private readonly ControlledNarrativeLayerService $controlledNarrativeLayerService,
         private readonly CulturalCalibrationLayerService $culturalCalibrationLayerService,
         private readonly MbtiReadModelContractService $readModelContractService,
+        private readonly ContentPackV2Resolver $contentPackV2Resolver,
     ) {}
 
     /**
@@ -1599,9 +1601,87 @@ final class MbtiResultPersonalizationService
             $sections[$index] = $section;
         }
 
-        $projection['sections'] = $sections;
+        $projection['sections'] = $this->applyPromotedEnglishResultAuthority($sections, $personalization);
 
         return $projection;
+    }
+
+    /**
+     * Apply only the activated, database-backed W1 English result authority to
+     * private result/report projections. Public share projections do not call
+     * applyToProjection and therefore remain excluded by their safe surface
+     * contract.
+     *
+     * @param  list<array<string,mixed>>  $sections
+     * @param  array<string,mixed>  $personalization
+     * @return list<array<string,mixed>>
+     */
+    private function applyPromotedEnglishResultAuthority(array $sections, array $personalization): array
+    {
+        if ($this->normalizeLocale((string) ($personalization['locale'] ?? '')) !== 'en') {
+            return $sections;
+        }
+        $authority = $this->contentPackV2Resolver->resolveActiveMbtiResultAuthority();
+        if (! is_array($authority) || ($authority['schema_version'] ?? null) !== 'mbti_result_promotion.v2') {
+            return $sections;
+        }
+        $assets = [];
+        foreach ((array) ($authority['rows'] ?? []) as $row) {
+            $asset = is_array($row) && is_array($row['asset'] ?? null) ? $row['asset'] : null;
+            $field = is_array($asset) ? trim((string) ($asset['authority_field'] ?? '')) : '';
+            if ($asset !== null && str_starts_with($field, 'sections.')) {
+                $assets[substr($field, strlen('sections.'))] = $asset;
+            }
+        }
+        if ($assets === []) {
+            return $sections;
+        }
+        $templateContext = $this->promotedResultTemplateContext($personalization);
+        foreach ($sections as $index => $section) {
+            $key = strtolower(trim((string) ($section['key'] ?? '')));
+            $asset = $assets[$key] ?? null;
+            $content = is_array($asset) && is_array($asset['content'] ?? null) ? $asset['content'] : null;
+            if ($key === '' || $content === null) {
+                continue;
+            }
+            $body = array_values(array_filter(array_map(
+                fn (mixed $line): string => $this->renderTemplate((string) $line, $templateContext),
+                (array) ($content['body_template'] ?? []),
+            ), static fn (string $line): bool => $line !== ''));
+            if ($body === [] || implode(' ', $body) === '' || str_contains(implode(' ', $body), '{{')) {
+                continue;
+            }
+            $payload = is_array($section['payload'] ?? null) ? $section['payload'] : [];
+            $payload['summary'] = $this->renderTemplate((string) ($content['summary_template'] ?? ''), $templateContext);
+            $payload['reflection_prompts'] = array_values(array_map(
+                fn (mixed $prompt): string => $this->renderTemplate((string) $prompt, $templateContext),
+                (array) ($content['reflection_prompts'] ?? []),
+            ));
+            $section['title'] = $this->renderTemplate((string) ($content['title'] ?? ($section['title'] ?? '')), $templateContext);
+            $section['body_md'] = implode("\n\n", $body);
+            $section['payload'] = $payload;
+            $section['_meta'] = array_merge(is_array($section['_meta'] ?? null) ? $section['_meta'] : [], [
+                'authority_source' => 'content_promotion_w1_mbti_results_v2',
+                'authority_row_id' => (string) ($asset['row_id'] ?? ''),
+            ]);
+            $sections[$index] = $section;
+        }
+
+        return $sections;
+    }
+
+    /** @param array<string,mixed> $personalization @return array<string,string> */
+    private function promotedResultTemplateContext(array $personalization): array
+    {
+        $identity = is_array($personalization['identity'] ?? null) ? $personalization['identity'] : [];
+        $typeCode = trim((string) ($personalization['type_code'] ?? 'MBTI result'));
+
+        return [
+            'type_code' => $typeCode,
+            'identity_variant' => trim((string) ($identity['variant_code'] ?? 'identity pattern')),
+            'axis_label' => 'preference axis', 'side_label' => 'the reported side', 'opposite_side_label' => 'the opposite side', 'delta' => 'a measured',
+            'neighbor_type' => 'a nearby pattern', 'adjacent_axis_label' => 'a nearby preference axis', 'adjacent_side_label' => 'the reported side', 'adjacent_opposite_side_label' => 'the opposite side',
+        ];
     }
 
     /**

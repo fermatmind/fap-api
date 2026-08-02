@@ -208,7 +208,6 @@ final class MbtiResultPromotionAuthority
                 'package_id' => (string) ($manifest['package_id'] ?? ''),
                 'package_sha256' => $packageSha256,
                 'manifest_sha256' => hash('sha256', $manifestBytes),
-                'source_commit' => $context->sourceCommit,
             ],
             'counts' => [
                 'rows' => count($rows),

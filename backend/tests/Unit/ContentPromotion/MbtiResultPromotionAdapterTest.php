@@ -7,6 +7,7 @@ namespace Tests\Unit\ContentPromotion;
 use App\Services\Content\ContentPackV2Resolver;
 use App\Services\ContentPromotion\PromotionAdapterRegistry;
 use App\Services\ContentPromotion\PromotionContext;
+use App\Services\Mbti\MbtiResultPersonalizationService;
 use DomainException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -89,6 +90,11 @@ final class MbtiResultPromotionAdapterTest extends TestCase
             $context->packageSha256,
             app(ContentPackV2Resolver::class)->resolveActiveMbtiResultAuthority()['source']['package_sha256'] ?? null,
         );
+        $runtimeProjection = app(MbtiResultPersonalizationService::class)->applyToProjection([
+            'sections' => [['key' => 'traits.why_this_type', 'title' => 'Legacy title', 'body_md' => 'Legacy body', 'payload' => []]],
+        ], ['locale' => 'en', 'type_code' => 'INTJ', 'sections' => []]);
+        self::assertSame('content_promotion_w1_mbti_results_v2', $runtimeProjection['sections'][0]['_meta']['authority_source']);
+        self::assertStringContainsString('INTJ', $runtimeProjection['sections'][0]['body_md']);
         $this->assertExactPhaseResult($adapter->liveQa($context), $context, 'live-qa');
 
         $adapter->rollback($context, (string) $publish['rollback_reference']);
@@ -108,6 +114,18 @@ final class MbtiResultPromotionAdapterTest extends TestCase
 
         $this->assertExactPhaseResult($result, $context, 'preflight');
         self::assertNotSame('9325013b870fd2496efc0882656240f91ce28ff4faaf1da42fb3dde3577b0ed3', $sha);
+    }
+
+    public function test_replaying_the_same_package_from_a_new_executor_commit_is_idempotent(): void
+    {
+        $directory = $this->copyPackage();
+        $sha = $this->makePromotable($directory);
+        $adapter = app(PromotionAdapterRegistry::class)->resolve('W1', 'mbti-results');
+        $first = $this->context($directory, $sha);
+        $adapter->draftImport($first);
+        $replayed = $this->context($directory, $sha, str_repeat('f', 40));
+
+        self::assertSame(0, $adapter->draftImport($replayed)['written_count']);
     }
 
     public function test_independent_w9_evidence_is_required_before_any_draft_authority_is_created(): void
@@ -215,14 +233,14 @@ final class MbtiResultPromotionAdapterTest extends TestCase
         return json_decode((string) File::get($path), true, 512, JSON_THROW_ON_ERROR);
     }
 
-    private function context(string $directory, string $packageSha): PromotionContext
+    private function context(string $directory, string $packageSha, string $sourceCommit = ''): PromotionContext
     {
         return new PromotionContext(
             packageDirectory: $directory,
             packageSha256: $packageSha,
             lane: 'W1',
             subscope: 'mbti-results',
-            sourceCommit: str_repeat('a', 40),
+            sourceCommit: $sourceCommit !== '' ? $sourceCommit : str_repeat('a', 40),
             executorReleaseSha256: str_repeat('b', 64),
             releasePolicySha256: str_repeat('c', 64),
             workflowRunId: '123',
