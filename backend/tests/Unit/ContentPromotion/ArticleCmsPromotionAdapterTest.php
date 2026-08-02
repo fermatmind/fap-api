@@ -255,8 +255,10 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
         self::assertSame(17, Article::query()->withoutGlobalScopes()->where('locale', 'en')->where('status', 'published')->where('is_public', true)->count());
         self::assertSame(0, Article::query()->withoutGlobalScopes()->where('locale', 'en')->where('is_indexable', true)->count());
 
+        Article::query()->withoutGlobalScopes()->findOrFail(1)->forceFill(['title' => 'Changed after English publication'])->saveQuietly();
         $adapter->rollback($context, (string) $published['rollback_reference']);
         self::assertSame(17, Article::query()->withoutGlobalScopes()->where('locale', 'en')->where('status', 'draft')->where('is_public', false)->count());
+        self::assertSame(17, Article::query()->withoutGlobalScopes()->where('locale', 'en')->where('translation_status', Article::TRANSLATION_STATUS_APPROVED)->count());
         self::assertSame(17, ArticleTranslationRevision::query()->withoutGlobalScopes()->where('authority_package_sha256', $context->packageSha256)->where('revision_status', ArticleTranslationRevision::STATUS_APPROVED)->count());
     }
 

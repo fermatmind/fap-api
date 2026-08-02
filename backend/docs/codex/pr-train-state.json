@@ -9,7 +9,7 @@
     "EN-PARITY-W3-ARTICLES-BACKEND-PROMOTION-PACKAGE-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "ready_to_merge",
+      "status": "pr_open",
       "branch": "codex/en-parity-w3-articles-backend-promotion-package-01",
       "commit_sha": "9c82e5e2da6c25c55b7b173a62f271019b513157",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3511",
@@ -84,6 +84,11 @@
           "at": "2026-08-03T00:00:00+08:00",
           "status": "ready_to_merge",
           "summary": "Required GitHub checks passed for PR #3511 head 7cc21c0110dfe88f88503d07821e89b16439bffb: hygiene, supply-chain, content validation, verify-mbti legacy/v2, verify-bigfive, and Code Scanning. Staging parity was skipped and is not a required gate."
+        },
+        {
+          "at": "2026-08-03T00:00:00+08:00",
+          "status": "review_fixes_validated",
+          "summary": "Addressed actionable review findings in the same PR: foreign candidate collisions fail closed, source identity is revalidated under lock, rollback derives target identities from the immutable publication snapshot, and translation status is restored. Scoped local checks passed; required GitHub checks must rerun for the new head."
         }
       ]
     },

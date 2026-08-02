@@ -84,8 +84,12 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
 
     public function rollback(PromotionContext $context, string $rollbackReference): void
     {
-        $package = $this->authority->inspect($context);
-        $snapshot = $this->snapshots->resolve($context, $this->targets($package), 'article-cms', 'before_publication', $rollbackReference);
+        if (preg_match('/\Acontent-release-snapshot:([1-9][0-9]*)\z/', $rollbackReference, $match) !== 1) {
+            throw new DomainException('rollback_reference_invalid');
+        }
+        $candidate = ContentReleaseSnapshot::query()->find((int) $match[1]);
+        $identities = $candidate instanceof ContentReleaseSnapshot ? (array) data_get($candidate->meta_json, 'target_identities', []) : [];
+        $snapshot = $this->snapshots->resolve($context, PromotionTargetSet::fromIdentities($identities), 'article-cms', 'before_publication', $rollbackReference);
         DB::transaction(function () use ($snapshot, $context): void {
             foreach ((array) data_get($snapshot->meta_json, 'rows', []) as $row) {
                 if (! is_array($row) || (string) ($row['package_sha256'] ?? '') !== $context->packageSha256) {
@@ -195,7 +199,7 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
     private function articleState(Article $article): array
     {
         $state = [];
-        foreach (['title', 'excerpt', 'content_md', 'content_html', 'working_revision_id', 'published_revision_id', 'status', 'is_public', 'is_indexable', 'sitemap_eligible', 'llms_eligible', 'published_at', 'source_version_hash'] as $field) {
+        foreach (['title', 'excerpt', 'content_md', 'content_html', 'working_revision_id', 'published_revision_id', 'translation_status', 'status', 'is_public', 'is_indexable', 'sitemap_eligible', 'llms_eligible', 'published_at', 'source_version_hash'] as $field) {
             $state[$field] = $article->getAttribute($field);
         }
 
@@ -215,7 +219,7 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
 
         $projection = ['title' => $snapshot['title'], 'excerpt' => $snapshot['excerpt'], 'content_md' => $snapshot['content_md'], 'content_html' => null, 'source_version_hash' => $candidate->computeSourceVersionHash(), 'published_revision_id' => $revision?->id, 'working_revision_id' => null];
         if (($target['candidate_only'] ?? false) === true) {
-            $projection += ['status' => 'published', 'is_public' => true, 'published_at' => $publicationTimestamp];
+            $projection += ['translation_status' => Article::TRANSLATION_STATUS_PUBLISHED, 'status' => 'published', 'is_public' => true, 'published_at' => $publicationTimestamp];
         }
 
         return ['article' => array_replace($this->articleProjection($article), $projection), 'revision' => ['id' => $revision?->id, 'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED, 'published_at' => $publicationTimestamp], 'seo' => $seoValues];
@@ -240,6 +244,7 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
             'content_html' => $article->content_html,
             'working_revision_id' => $article->working_revision_id,
             'published_revision_id' => $article->published_revision_id,
+            'translation_status' => $article->translation_status,
             'status' => $article->status,
             'is_public' => (bool) $article->is_public,
             'is_indexable' => (bool) $article->is_indexable,

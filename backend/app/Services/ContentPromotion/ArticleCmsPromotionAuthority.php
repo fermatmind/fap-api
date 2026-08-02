@@ -25,7 +25,7 @@ final class ArticleCmsPromotionAuthority
 {
     private const SNAPSHOT_FIELDS = ['title', 'excerpt', 'content_md', 'seo_title', 'seo_description'];
 
-    private const ARTICLE_STATE_FIELDS = ['org_id', 'slug', 'locale', 'title', 'excerpt', 'content_md', 'content_html', 'cover_image_alt', 'related_test_slug', 'voice', 'voice_order', 'status', 'is_public', 'is_indexable', 'sitemap_eligible', 'llms_eligible', 'published_at'];
+    private const ARTICLE_STATE_FIELDS = ['org_id', 'slug', 'locale', 'title', 'excerpt', 'content_md', 'content_html', 'cover_image_alt', 'related_test_slug', 'voice', 'voice_order', 'translation_status', 'status', 'is_public', 'is_indexable', 'sitemap_eligible', 'llms_eligible', 'published_at'];
 
     public function __construct(
         private readonly ArticleController $publicApi,
@@ -255,6 +255,13 @@ final class ArticleCmsPromotionAuthority
                 || (string) $article->source_locale !== 'zh-CN')) {
                 throw new DomainException('article_promotion_translation_pair_invalid');
             }
+            if ($article instanceof Article && ! ArticleTranslationRevision::query()->withoutGlobalScopes()
+                ->where('article_id', $article->id)
+                ->where('authority_package_sha256', $context->packageSha256)
+                ->where('authority_asset_key', $key)
+                ->exists()) {
+                throw new DomainException('article_promotion_candidate_target_collision');
+            }
             $seen[$key] = true;
             $targets[] = ['article' => $article, 'source_article' => $source, 'source_revision' => $sourceRevision,
                 'identity' => ['org_id' => (int) $source->org_id, 'locale' => 'en', 'slug' => $slug], 'asset_key' => ((int) $source->org_id).':en:'.$slug,
@@ -438,7 +445,16 @@ final class ArticleCmsPromotionAuthority
             throw new DomainException('article_promotion_translation_source_drift');
         }
         $lockedSource = Article::query()->withoutGlobalScopes()->lockForUpdate()->find($source->id);
-        if (! $lockedSource instanceof Article || (string) $lockedSource->status !== 'published' || ! (bool) $lockedSource->is_public) {
+        $expectedRevision = $target['source_revision'] ?? null;
+        $lockedRevision = $expectedRevision instanceof ArticleTranslationRevision
+            ? ArticleTranslationRevision::query()->withoutGlobalScopes()->lockForUpdate()->where('article_id', $source->id)->find($expectedRevision->id)
+            : null;
+        if (! $lockedSource instanceof Article || ! $lockedRevision instanceof ArticleTranslationRevision
+            || (string) $lockedSource->locale !== 'zh-CN' || (string) $lockedSource->translation_group_id !== (string) $target['translation_pair_identity']
+            || (string) $lockedSource->status !== 'published' || ! (bool) $lockedSource->is_public
+            || (int) $lockedSource->published_revision_id !== (int) $lockedRevision->id
+            || (string) $lockedRevision->revision_status !== ArticleTranslationRevision::STATUS_PUBLISHED
+            || ! hash_equals((string) $lockedRevision->source_version_hash, (string) $expectedRevision?->source_version_hash)) {
             throw new DomainException('article_promotion_translation_source_drift');
         }
         $snapshot = (array) $target['snapshot'];
