@@ -227,6 +227,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_w5_private_enneagram_promotion_adapter(): void
+    {
+        $allowed = [
+            'backend/app/Services/ContentPromotion/EnneagramPrivateResultPromotionAuthority.php',
+            'backend/app/Services/ContentPromotion/Adapters/EnneagramPrivateResultPromotionAdapter.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_only_big_five_v0_4_controlled_import_registration(): void
     {
         $allowed = [
@@ -1066,8 +1080,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/ContentPromotion/Adapters/AbstractCareerCmsPromotionAdapter.php',
             'backend/app/Services/ContentPromotion/Adapters/CareerGuideCmsPromotionAdapter.php',
             'backend/app/Services/ContentPromotion/Adapters/CareerJobCmsPromotionAdapter.php',
+            'backend/app/Services/ContentPromotion/Adapters/EnneagramPrivateResultPromotionAdapter.php',
             'backend/app/Services/ContentPromotion/ExactPackagePathGuard.php',
             'backend/app/Services/ContentPromotion/ExactPackagePromotionService.php',
+            'backend/app/Services/ContentPromotion/EnneagramPrivateResultPromotionAuthority.php',
             'backend/app/Services/ContentPromotion/MbtiResultPromotionAuthority.php',
             'backend/app/Services/ContentPromotion/PersonalityCmsPromotionAuthority.php',
             'backend/app/Services/ContentPromotion/ArticleCmsPromotionAuthority.php',
@@ -9525,8 +9541,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/ContentPromotion/Adapters/AbstractCareerCmsPromotionAdapter.php',
             'backend/app/Services/ContentPromotion/Adapters/CareerGuideCmsPromotionAdapter.php',
             'backend/app/Services/ContentPromotion/Adapters/CareerJobCmsPromotionAdapter.php',
+            'backend/app/Services/ContentPromotion/Adapters/EnneagramPrivateResultPromotionAdapter.php',
             'backend/app/Services/ContentPromotion/ExactPackagePathGuard.php',
             'backend/app/Services/ContentPromotion/ExactPackagePromotionService.php',
+            'backend/app/Services/ContentPromotion/EnneagramPrivateResultPromotionAuthority.php',
             'backend/app/Services/ContentPromotion/MbtiResultPromotionAuthority.php',
             'backend/app/Services/ContentPromotion/PersonalityCmsPromotionAuthority.php',
             'backend/app/Services/ContentPromotion/ArticleCmsPromotionAuthority.php',

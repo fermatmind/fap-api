@@ -75,7 +75,7 @@
     "EN-PARITY-W5-ENNEAGRAM-PRIVATE-AUTHORITY-ADAPTER-V2-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "github_check_repairing",
       "branch": "codex/en-parity-w5-enneagram-private-authority-adapter-v2-01",
       "commit_sha": "0792f98b45c24067a1c48da99d8ece82d6faa567",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3515",
@@ -92,7 +92,7 @@
           }
         ]
       },
-      "failure_reason": null,
+      "failure_reason": "GitHub verify-bigfive failed because its exact runtime-freeze classifier did not yet recognize the new W5-only private Enneagram exact-package authority and adapter paths. No adapter behavior or content contract failure was reported.",
       "resume_policy": "continuous_goal",
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -117,6 +117,11 @@
           "at": "2026-08-03T00:00:00+08:00",
           "status": "pr_open",
           "summary": "Opened PR #3515 after scoped local validation. Required GitHub checks are pending; no production operation was executed."
+        },
+        {
+          "at": "2026-08-03T00:00:00+08:00",
+          "status": "github_check_repairing",
+          "summary": "GitHub verify-bigfive rejected only the new W5 ContentPromotion paths as unclassified runtime changes. Repairing the exact classifier allowlist and its focused regression; no production operation was executed."
         }
       ]
     },
