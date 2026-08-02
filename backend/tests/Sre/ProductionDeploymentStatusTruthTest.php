@@ -92,7 +92,10 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
 
         foreach ([
             'RELEASE_ID="standard-${DEPLOY_SHA:0:12}"',
-            'actions/workflows/deploy.yml/runs?branch=main&status=completed&per_page=100',
+            'gh run list --workflow deploy.yml --branch main --commit \"$DEPLOY_SHA\" --status completed --limit 100',
+            '--json databaseId,headSha,name,event,status,conclusion',
+            'and .headSha == $deploy_sha)',
+            '| .databaseId]',
             'standard deploy could not resolve a successful exact-SHA staging run.',
             'standard deploy requires approved_migration to be omitted; do not submit false.',
             'release_id: ${{ steps.resolve_deploy_mode.outputs.release_id }}',
@@ -100,6 +103,10 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         ] as $contract) {
             $this->assertStringContainsString($contract, $eligibility);
         }
+        $this->assertStringNotContainsString(
+            'actions/workflows/deploy.yml/runs?branch=main&status=completed&per_page=100',
+            $eligibility
+        );
 
         $this->assertStringContainsString(
             'RELEASE_ID: ${{ needs.deployment-eligibility.outputs.release_id }}',

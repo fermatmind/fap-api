@@ -421,6 +421,8 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('staging_run_id must be numeric outside the exact-active candidate_only fast path.', $source);
         $this->assertStringContainsString('[[ ! "$RELEASE_ID" =~ ^[A-Za-z0-9._-]{1,80}$ ]]', $source);
         $this->assertStringContainsString('RELEASE_ID="standard-${DEPLOY_SHA:0:12}"', $source);
+        $this->assertStringContainsString('gh run list --workflow deploy.yml --branch main --commit \\"$DEPLOY_SHA\\" --status completed --limit 100', $source);
+        $this->assertStringContainsString('--json databaseId,headSha,name,event,status,conclusion', $source);
         $this->assertStringContainsString('standard deploy could not resolve a successful exact-SHA staging run.', $source);
         $this->assertStringContainsString('standard deploy requires approved_migration to be omitted; do not submit false.', $source);
         $this->assertStringContainsString('I explicitly approve bounded backend production deploy for exact SHA ${DEPLOY_SHA}, excluding all newer main commits, release ${RELEASE_ID}.', $source);
