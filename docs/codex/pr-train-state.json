@@ -103708,9 +103708,9 @@
     "branch": "codex/content-promotion-v2-deployed-executor-pin-01",
     "title": "CONTENT-PROMOTION-V2-DEPLOYED-EXECUTOR-PIN-01 — Pin promotion workflow to deployed executor SHA",
     "depends_on": [],
-    "status": "implementation_in_progress",
+    "status": "github_checks_pending",
     "commit_sha": "286fa963a59be2ca4bb800dd4d7a70e24c418704",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3513",
     "checks": {
       "dependency": {"status": "passed", "evidence": "No task dependency; isolated worktree starts from origin/main ffc36dedb6df28efabcd0ff2f1cdf1b1bf1f8a2a."},
       "scope": {"status": "passed", "evidence": "Only workflow, direct SRE source-contract test, and required train metadata are allowed."},
@@ -103730,8 +103730,9 @@
     "deploy_allowed": false,
     "transitions": [
       {"at": "2026-08-03T00:00:00+08:00", "status": "implementation_in_progress", "note": "Started from isolated origin/main ffc36dedb6df28efabcd0ff2f1cdf1b1bf1f8a2a. This task changes only the immutable control-plane provenance guard; no deploy, production access, CMS/database write, package mutation, receipt ingestion, or discoverability action is authorized."},
-      {"at": "2026-08-03T00:37:05+08:00", "status": "local_validation_passed", "note": "Focused SRE source-contract test passed (1 test / 31 assertions); scoped Pint, YAML/JSON parsing, diff check, and exact four-path scope validation passed. The test resolves the workflow relative to its own checkout, so the isolated worktree is the tested control plane."}
+      {"at": "2026-08-03T00:37:05+08:00", "status": "local_validation_passed", "note": "Focused SRE source-contract test passed (1 test / 31 assertions); scoped Pint, YAML/JSON parsing, diff check, and exact four-path scope validation passed. The test resolves the workflow relative to its own checkout, so the isolated worktree is the tested control plane."},
+      {"at": "2026-08-03T00:38:57+08:00", "status": "github_checks_pending", "note": "PR #3513 opened from exact head 25a8cd429d97f3d0aa76f056e69af00deba03402. Required CI and Code Scanning checks are pending; no deploy, CMS/database write, or discoverability action occurred."}
     ],
-    "updated_at": "2026-08-03T00:37:05+08:00"
+    "updated_at": "2026-08-03T00:38:57+08:00"
   }
 }
