@@ -76,8 +76,7 @@ final class PromotionRollbackSnapshotService
             || data_get($snapshot->meta_json, 'idempotency_key') !== $context->idempotencyKey
             || data_get($snapshot->meta_json, 'phase') !== $expectedPhase
             || data_get($snapshot->meta_json, 'phase_idempotency_key') !== PromotionPhaseIdentity::idempotencyKey($context, $expectedPhase, $targets)
-            || data_get($snapshot->meta_json, 'target_fingerprint') !== $targets->fingerprint()
-            || data_get($snapshot->meta_json, 'target_identities') !== $targets->identities()) {
+            || data_get($snapshot->meta_json, 'target_fingerprint') !== $targets->fingerprint()) {
             throw new DomainException('rollback_snapshot_mismatch');
         }
 

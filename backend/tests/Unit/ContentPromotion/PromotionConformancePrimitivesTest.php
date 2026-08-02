@@ -77,6 +77,11 @@ final class PromotionConformancePrimitivesTest extends TestCase
         self::assertSame([['id' => 7, 'locale' => 'en', 'slug' => 'a']], data_get($snapshot->meta_json, 'rows'));
         self::assertSame('before_draft_import', data_get($snapshot->meta_json, 'phase'));
 
+        $meta = $snapshot->meta_json;
+        $meta['target_identities'] = [['slug' => 'a', 'locale' => 'en']];
+        $snapshot->forceFill(['meta_json' => $meta])->save();
+        self::assertSame('test-pack', $snapshots->resolve($context, $targets, 'test-pack', 'before_draft_import', $reference)->pack_id);
+
         $this->expectException(DomainException::class);
         $this->expectExceptionMessage('rollback_snapshot_mismatch');
         $snapshots->resolve($this->context(lane: 'W2'), $targets, 'test-pack', 'before_draft_import', $reference);

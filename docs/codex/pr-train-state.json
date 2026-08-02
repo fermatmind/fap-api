@@ -103437,7 +103437,7 @@
     "checks": {
       "local_validation": {
         "status": "passed",
-        "evidence": "Focused Content Promotion conformance, capability, executor, workflow, W1 importer, and W1 publisher PHPUnit passed: 38 tests / 648 assertions. The exact-head review repair for metadata overwrite and phase-bound rollback passed 10 focused tests / 94 assertions. Focused Pint, changed-PHP syntax, YAML/JSON parsing, exact changed-file scope validation, and diff checks passed. No migration, CMS write, publication, production workflow dispatch, deploy, or discoverability mutation occurred."
+        "evidence": "Focused Content Promotion conformance, capability, executor, workflow, W1 importer, and W1 publisher PHPUnit passed: 38 tests / 648 assertions. Exact-head review repairs for metadata overwrite, phase-bound rollback, and persisted JSON target-key order passed 10 focused tests / 95 assertions. Focused Pint, changed-PHP syntax, YAML/JSON parsing, exact changed-file scope validation, and diff checks passed. No migration, CMS write, publication, production workflow dispatch, deploy, or discoverability mutation occurred."
       }
     },
     "failure_reason": null,
@@ -103471,8 +103471,13 @@
         "at": "2026-08-02T04:36:18Z",
         "status": "github_checks_repairing",
         "note": "Addressed two exact-head P1 rollback findings: caller metadata cannot overwrite protected snapshot bindings, and rollback now requires the expected phase plus its phase identity. Focused conformance and executor tests passed; a new exact-head check run is required."
+      },
+      {
+        "at": "2026-08-02T04:43:02Z",
+        "status": "github_checks_repairing",
+        "note": "Addressed the subsequent exact-head P1 rollback finding: persisted JSON target identity key order no longer controls rollback acceptance because the canonical target fingerprint remains the exact binding. Focused conformance and executor tests passed; a new exact-head check run is required."
       }
     ],
-    "updated_at": "2026-08-02T04:36:18Z"
+    "updated_at": "2026-08-02T04:43:02Z"
   }
 }
