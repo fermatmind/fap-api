@@ -75,9 +75,9 @@
     "EN-PARITY-W5-ENNEAGRAM-PRIVATE-AUTHORITY-ADAPTER-V2-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "github_check_repairing",
+      "status": "ready_to_merge",
       "branch": "codex/en-parity-w5-enneagram-private-authority-adapter-v2-01",
-      "commit_sha": "0792f98b45c24067a1c48da99d8ece82d6faa567",
+      "commit_sha": "e11a50896",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3515",
       "checks": {
         "authority_revalidation": {
@@ -90,9 +90,13 @@
             "status": "passed",
             "details": "Adapter preflight, immutable inventory/SHA/count/identity failure closure, 36-pair close-call coverage, W9 evidence, inactive import, idempotent repeat, activation, live readback, rollback and private-field/CJK rejection passed. The established report snapshot contract is 202 while generating and 200 only after the snapshot is materialized; stale share fixtures now materialize that snapshot before asserting the public projection."
           }
-        ]
+        ],
+        "github": {
+          "status": "passed",
+          "details": "PR #3515 passed hygiene, Semgrep blocking secrets, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy and Semgrep OSS. verify-staging-parity was skipped by its existing workflow policy."
+        }
       },
-      "failure_reason": "GitHub verify-bigfive failed because its exact runtime-freeze classifier did not yet recognize the new W5-only private Enneagram exact-package authority and adapter paths. No adapter behavior or content contract failure was reported.",
+      "failure_reason": null,
       "resume_policy": "continuous_goal",
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -122,6 +126,11 @@
           "at": "2026-08-03T00:00:00+08:00",
           "status": "github_check_repairing",
           "summary": "GitHub verify-bigfive rejected only the new W5 ContentPromotion paths as unclassified runtime changes. Repairing the exact classifier allowlist and its focused regression; no production operation was executed."
+        },
+        {
+          "at": "2026-08-03T00:00:00+08:00",
+          "status": "ready_to_merge",
+          "summary": "The classifier repair and focused regression passed. PR #3515 then passed all required GitHub checks; the workflow-policy staging parity job was skipped. No production operation was executed."
         }
       ]
     },
