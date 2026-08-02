@@ -115,6 +115,42 @@ final class RiasecEnglishPackageImporterTest extends TestCase
         self::assertSame('unsafe_package_file', $payload['errors'][0]['code']);
     }
 
+    public function test_authority_plan_binds_all_nine_physical_segments_and_rejects_reader_visible_cjk(): void
+    {
+        $authority = app(RiasecEnglishPackageImporter::class)->authorityPlan(
+            RiasecEnglishPackageImporter::defaultPackageDirectory(),
+            RiasecEnglishPackageImporter::PACKAGE_SHA256,
+        );
+        self::assertCount(1550, $authority['authority_rows']);
+        self::assertSame(9, count(array_unique(array_column($authority['authority_rows'], 'snapshot_segment'))));
+        self::assertSame(1550, count(array_unique(array_column($authority['authority_rows'], 'source_line_sha256'))));
+        foreach ($authority['authority_rows'] as $row) {
+            self::assertNotEmpty($row['reader_payload']);
+            self::assertDoesNotMatchRegularExpression('/[\x{3400}-\x{9fff}]/u', json_encode($row['reader_payload'], JSON_THROW_ON_ERROR));
+        }
+
+        $directory = $this->copyPackage();
+        $path = $directory.'/payloads/dimension-core.jsonl';
+        $lines = explode("\n", trim((string) File::get($path)));
+        $first = json_decode($lines[0], true, 512, JSON_THROW_ON_ERROR);
+        $first['reader_copy'] = '中文泄漏';
+        $lines[0] = json_encode($first, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+        File::put($path, implode("\n", $lines)."\n");
+        $evidencePath = $directory.'/external_package_evidence.json';
+        $evidence = json_decode((string) File::get($evidencePath), true, 512, JSON_THROW_ON_ERROR);
+        foreach ($evidence['authority_snapshot']['segment_payloads'] as &$payload) {
+            if ($payload['segment'] === 'dimension-core') {
+                $payload['sha256'] = hash_file('sha256', $path);
+            }
+        }
+        unset($payload);
+        File::put($evidencePath, json_encode($evidence, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).PHP_EOL);
+
+        $this->expectException(\DomainException::class);
+        $this->expectExceptionMessage('reader_visible_cjk_leakage');
+        app(RiasecEnglishPackageImporter::class)->authorityPlan($directory, RiasecEnglishPackageImporter::PACKAGE_SHA256);
+    }
+
     /** @param array<string, mixed> $options @return array<string, mixed> */
     private function runDryRun(array $options = []): array
     {

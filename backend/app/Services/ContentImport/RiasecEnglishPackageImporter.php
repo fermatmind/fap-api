@@ -27,6 +27,19 @@ final class RiasecEnglishPackageImporter
         'W4-G13' => 2, 'W4-G14' => 2,
     ];
 
+    /** @var array<string,int> */
+    private const SEGMENTS = [
+        'dimension-core' => 42,
+        'pair' => 15,
+        'top3' => 20,
+        'activity-examples' => 720,
+        '140q-context-structural' => 133,
+        'quality-reading-state' => 24,
+        'aspirations-disagree' => 115,
+        'feedback-action-lab' => 474,
+        'share-pdf-history' => 7,
+    ];
+
     public static function defaultPackageDirectory(): string
     {
         return base_path('content_assets/en-content-parity/W4-riasec');
@@ -35,6 +48,24 @@ final class RiasecEnglishPackageImporter
     /** @return array<string, mixed> */
     public function plan(string $packageDirectory, string $confirmedPackageSha256): array
     {
+        return $this->buildPlan($packageDirectory, $confirmedPackageSha256, false);
+    }
+
+    /**
+     * Returns the private authority plan consumed only by the promotion
+     * adapter. Unlike plan(), it carries the exact reader payload for every
+     * immutable row and must never be rendered as a command receipt.
+     *
+     * @return array<string,mixed>
+     */
+    public function authorityPlan(string $packageDirectory, string $confirmedPackageSha256): array
+    {
+        return $this->buildPlan($packageDirectory, $confirmedPackageSha256, true);
+    }
+
+    /** @return array<string,mixed> */
+    private function buildPlan(string $packageDirectory, string $confirmedPackageSha256, bool $includeAuthorityRows): array
+    {
         $confirmedPackageSha256 = strtolower(trim($confirmedPackageSha256));
         if (preg_match('/\\A[a-f0-9]{64}\\z/', $confirmedPackageSha256) !== 1) {
             $this->fail('confirmed_package_sha256_invalid', 'The confirmed W4 package SHA-256 is invalid.');
@@ -42,6 +73,7 @@ final class RiasecEnglishPackageImporter
 
         $evidence = $this->decodeJson($this->readImmutableFile($packageDirectory, 'external_package_evidence.json'));
         $payloads = $this->validateEvidence($evidence, $confirmedPackageSha256);
+        $segmentPayloads = $this->validateSegmentPayloads($evidence, $packageDirectory);
         $documents = [];
         $chain = '';
         foreach ($payloads as $file => $expectedSha) {
@@ -63,7 +95,7 @@ final class RiasecEnglishPackageImporter
             (array) $documents['source_ledger.json'],
         );
 
-        return [
+        $plan = [
             'artifact' => 'EN-PARITY-W4-RIASEC-IMPORTER-DRY-RUN-RECEIPT',
             'schema_version' => 'fermatmind.en_parity.riasec_import_dry_run_receipt.v2',
             'status' => 'pass', 'ok' => true, 'mode' => 'dry_run', 'dry_run_only' => true,
@@ -92,6 +124,11 @@ final class RiasecEnglishPackageImporter
             ],
             'row_count' => count($rows), 'rows' => $rows, 'errors' => [], 'warnings' => [],
         ];
+        if ($includeAuthorityRows) {
+            $plan['authority_rows'] = $this->hydrateAuthorityRows($rows, $segmentPayloads);
+        }
+
+        return $plan;
     }
 
     /** @param array<string, mixed> $evidence @return array<string,string> */
@@ -101,7 +138,7 @@ final class RiasecEnglishPackageImporter
             || ! hash_equals($confirmedPackageSha256, strtolower((string) ($evidence['control_acceptance']['package_sha256'] ?? '')))) {
             $this->fail('confirmed_package_sha256_mismatch', 'The confirmed SHA-256 is not bound by the W4 producer and CONTROL evidence.');
         }
-        if (($evidence['schema_version'] ?? null) !== 'fermatmind.en_content_parity_external_package_evidence.v1'
+        if (($evidence['schema_version'] ?? null) !== 'fermatmind.en_content_parity_external_package_evidence.v2'
             || ($evidence['lane_id'] ?? null) !== 'W4'
             || ! is_string($evidence['package_id'] ?? null)
             || ($evidence['producer']['source_repository'] ?? null) !== 'fap-web'
@@ -131,6 +168,106 @@ final class RiasecEnglishPackageImporter
         }
 
         return $payloads;
+    }
+
+    /**
+     * @param  array<string,mixed>  $evidence
+     * @return array<string,array{sha256:string,rows:list<array<string,mixed>>,line_sha256:array<string,string>}>
+     */
+    private function validateSegmentPayloads(array $evidence, string $packageDirectory): array
+    {
+        $snapshot = (array) ($evidence['authority_snapshot'] ?? []);
+        if (($snapshot['backend_package_path'] ?? null) !== 'backend/content_assets/en-content-parity/W4-riasec'
+            || ($snapshot['source_repository'] ?? null) !== 'fap-web'
+            || ! is_string($snapshot['source_commit_sha'] ?? null)
+            || preg_match('/\A[a-f0-9]{40}\z/', (string) $snapshot['source_commit_sha']) !== 1
+            || ($snapshot['logical_group_count'] ?? null) !== 14
+            || ($snapshot['promotion_row_count'] ?? null) !== 1550) {
+            $this->fail('authority_snapshot_contract_invalid', 'The backend W4 authority snapshot contract is invalid.');
+        }
+        $segments = [];
+        foreach ((array) ($snapshot['segment_payloads'] ?? []) as $entry) {
+            $segment = is_array($entry) ? (string) ($entry['segment'] ?? '') : '';
+            $path = is_array($entry) ? (string) ($entry['path'] ?? '') : '';
+            $sha = strtolower(is_array($entry) ? (string) ($entry['sha256'] ?? '') : '');
+            $rowCount = is_array($entry) ? ($entry['row_count'] ?? null) : null;
+            if (! isset(self::SEGMENTS[$segment]) || isset($segments[$segment])
+                || $path !== 'payloads/'.$segment.'.jsonl' || $rowCount !== self::SEGMENTS[$segment]
+                || preg_match('/\A[a-f0-9]{64}\z/', $sha) !== 1) {
+                $this->fail('authority_snapshot_segment_invalid', 'The W4 authority snapshot must declare the exact nine segment files.');
+            }
+            $bytes = $this->readImmutablePath($packageDirectory, $path);
+            if (! hash_equals($sha, hash('sha256', $bytes))) {
+                $this->fail('authority_snapshot_payload_sha256_mismatch', 'A W4 authority snapshot segment no longer matches its declared SHA-256.');
+            }
+            $rows = [];
+            $lineSha256 = [];
+            $lines = array_values(array_filter(explode("\n", trim($bytes)), static fn (string $line): bool => $line !== ''));
+            if (count($lines) !== self::SEGMENTS[$segment]) {
+                $this->fail('authority_snapshot_segment_row_count_invalid', 'A W4 authority snapshot segment has an unexpected row count.');
+            }
+            foreach ($lines as $line) {
+                $row = $this->decodeJson($line);
+                $assetId = trim((string) ($row['asset_id'] ?? ''));
+                if ($assetId === '' || isset($rows[$assetId])) {
+                    $this->fail('authority_snapshot_identity_invalid', 'Every W4 authority snapshot row must have one unique asset identity.');
+                }
+                $rows[$assetId] = $row;
+                $lineSha256[$assetId] = hash('sha256', $line);
+            }
+            $segments[$segment] = ['sha256' => $sha, 'rows' => $rows, 'line_sha256' => $lineSha256];
+        }
+        if (array_keys($segments) !== array_keys(self::SEGMENTS)
+            || array_sum(array_map(static fn (array $segment): int => count($segment['rows']), $segments)) !== 1550) {
+            $this->fail('authority_snapshot_inventory_invalid', 'The W4 authority snapshot must contain exactly 1550 rows in the nine required segments.');
+        }
+
+        return $segments;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $rows
+     * @param  array<string,array{sha256:string,rows:list<array<string,mixed>>,line_sha256:array<string,string>}>  $segments
+     * @return list<array<string,mixed>>
+     */
+    private function hydrateAuthorityRows(array $rows, array $segments): array
+    {
+        $authorityRows = [];
+        foreach ($rows as $row) {
+            $segment = (string) ($row['segment'] ?? '');
+            $rowId = (string) ($row['row_id'] ?? '');
+            $source = $segments[$segment]['rows'][$rowId] ?? null;
+            if (! is_array($source)) {
+                $this->fail('authority_snapshot_row_missing', 'A frozen W4 identity is absent from its authority snapshot segment.');
+            }
+            $readerPayload = $this->readerPayload($source);
+            $canonicalPayload = \App\Services\ContentPromotion\PromotionContextFactory::canonicalJson($readerPayload);
+            if ($readerPayload === [] || preg_match('/[\x{3400}-\x{9fff}]/u', $canonicalPayload) === 1) {
+                $this->fail('reader_visible_cjk_leakage', 'English W4 reader payloads must not contain CJK text.');
+            }
+            $authorityRows[] = $row + [
+                'snapshot_segment' => $segment,
+                'segment_payload_sha256' => $segments[$segment]['sha256'],
+                'source_line_sha256' => $segments[$segment]['line_sha256'][$rowId],
+                'reader_payload' => $readerPayload,
+                'reader_payload_sha256' => hash('sha256', $canonicalPayload),
+            ];
+        }
+        if (count($authorityRows) !== 1550) {
+            $this->fail('authority_snapshot_inventory_invalid', 'The authority plan must materialize all 1550 frozen W4 rows.');
+        }
+
+        return $authorityRows;
+    }
+
+    /** @param array<string,mixed> $source @return array<string,mixed> */
+    private function readerPayload(array $source): array
+    {
+        foreach (['asset_id', 'translation_group', 'source_identity', 'locale', 'source_locale', 'status', 'review_status', 'runtime_ready', 'translation_method', 'permissions'] as $key) {
+            unset($source[$key]);
+        }
+
+        return $source;
     }
 
     /** @param array<string, mixed> $documents */
@@ -232,7 +369,7 @@ final class RiasecEnglishPackageImporter
             $plans[] = [
                 'position' => $position + 1, 'row_id' => $id, 'stable_asset_identity' => $stable,
                 'translation_group' => (string) ($row['translation_group'] ?? ''), 'group_id' => $group,
-                'asset_kind' => (string) ($row['asset_kind'] ?? ''), 'locale' => 'en',
+                'asset_kind' => (string) ($row['asset_kind'] ?? ''), 'segment' => (string) ($row['segment'] ?? ''), 'locale' => 'en',
                 'supported_form_codes' => $supportedForms[$group],
                 'action' => 'would_stage_inactive_english_candidate', 'write_executed' => false,
                 'reader_copy_in_plan' => false,
@@ -261,14 +398,24 @@ final class RiasecEnglishPackageImporter
 
     private function readImmutableFile(string $directory, string $filename): string
     {
-        if ($filename !== basename($filename) || str_contains($filename, '..')) {
+        if ($filename !== basename($filename)) {
             $this->fail('unsafe_package_path', 'Only safe package-root filenames are accepted.');
+        }
+
+        return $this->readImmutablePath($directory, $filename);
+    }
+
+    private function readImmutablePath(string $directory, string $relativePath): string
+    {
+        $parts = explode('/', $relativePath);
+        if ($relativePath === '' || str_starts_with($relativePath, '/') || array_filter($parts, static fn (string $part): bool => $part === '' || $part === '.' || $part === '..') !== []) {
+            $this->fail('unsafe_package_path', 'Only safe relative package paths are accepted.');
         }
         $root = realpath($directory);
         if ($root === false || ! is_dir($root)) {
             $this->fail('package_directory_invalid', 'The frozen package directory is unavailable.');
         }
-        $path = $root.DIRECTORY_SEPARATOR.$filename;
+        $path = $root.DIRECTORY_SEPARATOR.str_replace('/', DIRECTORY_SEPARATOR, $relativePath);
         $stat = @lstat($path);
         if ($stat === false || ! is_file($path) || is_link($path) || ($stat['nlink'] ?? 0) !== 1) {
             $this->fail('unsafe_package_file', 'Immutable package files must be regular single-link files.');
