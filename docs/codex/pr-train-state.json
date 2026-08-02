@@ -89,7 +89,7 @@
       "API-VPAY-01"
     ],
     "status": "github_review_repairing",
-    "commit_sha": "5ff80fcb57b028a7c360b2c68b3a265116434d44",
+    "commit_sha": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3466",
     "checks": {
       "official_contract": {
@@ -103673,7 +103673,7 @@
     "title": "EN-PARITY-W4-RIASEC-AUTHORITY-PROMOTION-REPAIR-01: bind and promote exact 1550-row RIASEC English authority",
     "depends_on": [],
     "status": "in_progress",
-    "commit_sha": null,
+    "commit_sha": "711f8954092b81dc8a0cac2422f3feba676f148a",
     "pr_url": null,
     "checks": {
       "package_identity": {"status": "pass", "evidence": "Verified the fap-web main ancestor d16333b2dc234eb2e1d08baa237346ca7d271274, exact f3f2463fadd827e586d39d42ecd9e6418b7cb7f36a0697eb06dcead8292f54eb package chain, W9 SHA f2c0f83871ecae1ed76bd742f0ddcf20de71f7980c012bc5cd1affe72dd46882, nine physical JSONL segments, and 1550 unique source identities before implementation."},
@@ -103693,7 +103693,7 @@
     "transitions": [
       {"at": "2026-08-03T00:00:00+08:00", "status": "in_progress", "note": "Started Task 1 in a new isolated worktree from exact fap-api origin/main ffc36dedb6df28efabcd0ff2f1cdf1b1bf1f8a2a. No production promotion, deployment, CMS/database mutation, discoverability action, or private-data access has occurred."},
       {"at": "2026-08-02T16:36:18Z", "status": "local_verified", "note": "Focused importer, promotion adapter, exact command-chain, and RIASEC locale-resolution suites passed with 12506 assertions. Scoped Pint, route list, JSON/YAML parsing, exact f3f246 package-chain recomputation, nine physical payload SHA checks, 14/1550/15/20/3-2-2 reconciliation, no-link scan, redacted receipt contract, diff check, and changed-file scope validation passed. No production promotion, deployment, CMS/database mutation, discoverability action, or private-data access occurred."},
-      {"at": "2026-08-02T16:36:18Z", "status": "committed", "note": "Committed the exact Task 1 scope as 5ff80fcb57b028a7c360b2c68b3a265116434d44 after staged diff and scope validation passed."}
+      {"at": "2026-08-02T16:36:18Z", "status": "committed", "note": "Committed the exact Task 1 implementation scope as 711f8954092b81dc8a0cac2422f3feba676f148a after staged diff and scope validation passed."}
     ],
     "updated_at": "2026-08-02T16:36:18Z"
   },
