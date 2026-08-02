@@ -103142,7 +103142,7 @@
     "base": "main",
     "branch": "codex/en-parity-w4-riasec-dimension-assets-01",
     "depends_on": ["EN-PARITY-W4-RIASEC-RUNTIME-LOCALE-01"],
-    "status": "github_checks_pending",
+    "status": "merge_ready",
     "commit_sha": "f524e2ab047c32b0542936a8ced1586a304bd945",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3474",
     "checks": {
@@ -103547,7 +103547,7 @@
       "authorization": {"status": "passed", "evidence": "Operator explicitly authorized the dependent v0_2 snapshot, approval, dry-run import readiness, and smoke implementation while excluding all production actions."},
       "dependency": {"status": "passed", "evidence": "RIASEC runtime PR #3499 merged as db4b1bb1aaa82ace265172a1fa620d5fe4a2b6db."},
       "local_validation": {"status": "passed", "evidence": "RIASEC focused runtime/assessment suite passed 93 tests / 2051 assertions; dedicated v0_2 import and smoke tests passed 6 tests / 47 assertions; read-only smoke passed for riasec_60 and riasec_140 with full payload, locked/free omission, private-field filtering, and emergency legacy fallback; exact dry-run import produced the bound confirmation token with zero writes; scoped Pint, route listing, fresh SQLite migration, JSON/YAML parsing, diff check, and the complete ci_verify_mbti gate passed. The legacy verify_riasec_launch probe returned exit 0 while its public endpoint remained intentionally 404 and was not treated as production release evidence."},
-      "github_required_checks": {"status": "pending", "evidence": null}
+      "github_required_checks": {"status": "passed", "evidence": "GitHub reported no required checks for the exact PR head; merge state is CLEAN and MERGEABLE."}
     },
     "failure_reason": null,
     "merged_at": null,
@@ -103575,8 +103575,13 @@
         "at": "2026-08-02T06:37:00Z",
         "status": "github_checks_pending",
         "note": "PR #3500 opened from exact local-verified head d9c380701d889831794bbc94b120b078519f60ed; waiting for GitHub mergeability and required-check resolution."
+      },
+      {
+        "at": "2026-08-02T06:38:00Z",
+        "status": "merge_ready",
+        "note": "GitHub reported no required checks; PR #3500 is CLEAN and MERGEABLE."
       }
     ],
-    "updated_at": "2026-08-02T06:37:00Z"
+    "updated_at": "2026-08-02T06:38:00Z"
   }
 }
