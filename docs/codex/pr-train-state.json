@@ -103205,7 +103205,7 @@
     "branch": "codex/en-parity-w1-mbti-target-authority-receipt-01",
     "title": "EN-PARITY-W1-MBTI-TARGET-AUTHORITY-RECEIPT-01: generate exact production target-authority draft receipts",
     "depends_on": ["EN-PARITY-W1-MBTI-COMPARISON-DRAFT-IMPORT-01", "EN-PARITY-W1-MBTI-RESULT-DRAFT-IMPORT-01"],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "46a5b82b851d9ecda568151387a82421cb970c6b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3473",
     "checks": {"authorization": {"status": "passed", "evidence": "human_operator authorized the exact two-target production CMS draft receipt scope."}, "github_required_checks": {"status": "passed", "evidence": "The prior PR head passed all GitHub checks; this rebase requires fresh checks."}},
@@ -103664,6 +103664,41 @@
       }
     ],
     "updated_at": "2026-08-02T07:28:00Z"
+  },
+  "EN-PARITY-W4-RIASEC-AUTHORITY-PROMOTION-REPAIR-01": {
+    "id": "EN-PARITY-W4-RIASEC-AUTHORITY-PROMOTION-REPAIR-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/en-parity-w4-riasec-authority-promotion-repair-01",
+    "title": "EN-PARITY-W4-RIASEC-AUTHORITY-PROMOTION-REPAIR-01: bind and promote exact 1550-row RIASEC English authority",
+    "depends_on": [],
+    "status": "github_checks_pending",
+    "commit_sha": "711f8954092b81dc8a0cac2422f3feba676f148a",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3512",
+    "checks": {
+      "package_identity": {"status": "pass", "evidence": "Verified the fap-web main ancestor d16333b2dc234eb2e1d08baa237346ca7d271274, exact f3f2463fadd827e586d39d42ecd9e6418b7cb7f36a0697eb06dcead8292f54eb package chain, W9 SHA f2c0f83871ecae1ed76bd742f0ddcf20de71f7980c012bc5cd1affe72dd46882, nine physical JSONL segments, and 1550 unique source identities before implementation."},
+      "scope_isolation": {"status": "pass", "evidence": "Started from clean isolated worktree at ffc36dedb6df28efabcd0ff2f1cdf1b1bf1f8a2a; unrelated Big Five changes remain only in the original worktree."},
+      "github_required_checks": {"status": "pass", "evidence": "Current PR head 5712a51cda109db7b1d6c593c341baff4bfb1b4f passed hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep OSS, blocking secrets, and SARIF upload. verify-staging-parity was skipped and is outside this task scope."}
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {"at": "2026-08-03T00:00:00+08:00", "status": "in_progress", "note": "Started Task 1 in a new isolated worktree from exact fap-api origin/main ffc36dedb6df28efabcd0ff2f1cdf1b1bf1f8a2a. No production promotion, deployment, CMS/database mutation, discoverability action, or private-data access has occurred."},
+      {"at": "2026-08-02T16:36:18Z", "status": "local_verified", "note": "Focused importer, promotion adapter, exact command-chain, and RIASEC locale-resolution suites passed with 12506 assertions. Scoped Pint, route list, JSON/YAML parsing, exact f3f246 package-chain recomputation, nine physical payload SHA checks, 14/1550/15/20/3-2-2 reconciliation, no-link scan, redacted receipt contract, diff check, and changed-file scope validation passed. No production promotion, deployment, CMS/database mutation, discoverability action, or private-data access occurred."},
+      {"at": "2026-08-02T16:36:18Z", "status": "committed", "note": "Committed the exact Task 1 implementation scope as 711f8954092b81dc8a0cac2422f3feba676f148a after staged diff and scope validation passed."},
+      {"at": "2026-08-02T16:36:18Z", "status": "github_checks_pending", "note": "Opened PR #3512 from the isolated W4 authority branch. Required GitHub checks are pending; no production workflow, application deployment, CMS write, or discoverability action occurred."},
+      {"at": "2026-08-02T16:47:48Z", "status": "ready_to_merge", "note": "PR #3512 head 5712a51cda109db7b1d6c593c341baff4bfb1b4f passed all required checks and is CLEAN. This ledger update requires the final exact head to rerun required checks before squash merge."}
+    ],
+    "updated_at": "2026-08-02T16:47:48Z"
   },
   "CONTENT-PROMOTION-PERSONALITY-CMS-ADAPTERS-01": {
     "id": "CONTENT-PROMOTION-PERSONALITY-CMS-ADAPTERS-01",

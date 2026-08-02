@@ -37,12 +37,12 @@ final class RiasecContentPromotionAuthority
         if ($context->lane !== 'W4' || $context->subscope !== 'riasec') {
             throw new DomainException('riasec_promotion_context_invalid');
         }
-        $plan = $this->importer->plan($context->packageDirectory, $context->packageSha256);
+        $plan = $this->importer->authorityPlan($context->packageDirectory, $context->packageSha256);
         if (($plan['ok'] ?? false) !== true || (int) ($plan['row_count'] ?? -1) !== $context->expectedRowCount) {
             throw new DomainException('riasec_promotion_inventory_invalid');
         }
         $targets = [];
-        foreach ((array) ($plan['rows'] ?? []) as $row) {
+        foreach ((array) ($plan['authority_rows'] ?? []) as $row) {
             if (! is_array($row) || ($row['locale'] ?? null) !== 'en') {
                 throw new DomainException('riasec_promotion_locale_invalid');
             }
@@ -62,7 +62,28 @@ final class RiasecContentPromotionAuthority
             if ($identity['row_id'] === '' || $identity['stable_asset_identity'] === '' || $identity['group_id'] === '') {
                 throw new DomainException('riasec_promotion_target_identity_invalid');
             }
-            $targets[] = ['identity' => $identity, 'asset_key' => $identity['row_id'], 'row' => $row, 'supported_form_codes' => $forms];
+            $readerPayload = (array) ($row['reader_payload'] ?? []);
+            $readerPayloadSha256 = (string) ($row['reader_payload_sha256'] ?? '');
+            $sourceLineSha256 = (string) ($row['source_line_sha256'] ?? '');
+            $segmentPayloadSha256 = (string) ($row['segment_payload_sha256'] ?? '');
+            $snapshotSegment = (string) ($row['snapshot_segment'] ?? '');
+            if ($readerPayload === [] || $snapshotSegment === ''
+                || preg_match('/\A[a-f0-9]{64}\z/', $readerPayloadSha256) !== 1
+                || preg_match('/\A[a-f0-9]{64}\z/', $sourceLineSha256) !== 1
+                || preg_match('/\A[a-f0-9]{64}\z/', $segmentPayloadSha256) !== 1) {
+                throw new DomainException('riasec_promotion_reader_copy_invalid');
+            }
+            $targets[] = [
+                'identity' => $identity,
+                'asset_key' => $identity['row_id'],
+                'row' => $row,
+                'supported_form_codes' => $forms,
+                'snapshot_segment' => $snapshotSegment,
+                'segment_payload_sha256' => $segmentPayloadSha256,
+                'source_line_sha256' => $sourceLineSha256,
+                'reader_payload' => $readerPayload,
+                'reader_payload_sha256' => $readerPayloadSha256,
+            ];
         }
         $targets = array_values($targets);
         usort($targets, static fn (array $a, array $b): int => $a['asset_key'] <=> $b['asset_key']);
@@ -79,7 +100,14 @@ final class RiasecContentPromotionAuthority
             'logical_group_count' => (int) data_get($plan, 'package.logical_group_count'),
             'normalized_unordered_pair_count' => (int) data_get($plan, 'package.normalized_unordered_pair_count'),
             'safe_surface_counts' => (array) data_get($plan, 'package.safe_surface_counts'),
-            'targets' => array_map(static fn (array $target): array => $target['identity'], $targets),
+            'targets' => array_map(static fn (array $target): array => [
+                'identity' => $target['identity'],
+                'snapshot_segment' => $target['snapshot_segment'],
+                'segment_payload_sha256' => $target['segment_payload_sha256'],
+                'source_line_sha256' => $target['source_line_sha256'],
+                'reader_payload' => $target['reader_payload'],
+                'reader_payload_sha256' => $target['reader_payload_sha256'],
+            ], $targets),
             'runtime_activation' => false,
             'indexability_mutation' => false,
         ];
@@ -117,6 +145,7 @@ final class RiasecContentPromotionAuthority
                 'content_hash' => $context->packageSha256, 'source_commit' => $context->sourceCommit,
                 'payload_json' => $package['manifest'],
             ]);
+            $this->assertRelease($release, $context, $package, 'draft');
 
             return ['created_count' => count($package['targets']), 'unchanged_count' => 0, 'readback_count' => count($package['targets'])];
         }, 3);
@@ -134,6 +163,8 @@ final class RiasecContentPromotionAuthority
             }
             $this->assertRelease($release, $context, $package, 'draft_or_published');
             if ((string) $release->status === 'published') {
+                $this->assertRelease($release, $context, $package, 'published');
+
                 return ['changed_count' => 0, 'unchanged_count' => count($package['targets']), 'readback_count' => count($package['targets'])];
             }
             $previous = $this->activeRelease($context->packageSha256, true);
@@ -144,6 +175,7 @@ final class RiasecContentPromotionAuthority
                 $previous->forceFill(['status' => 'superseded', 'message' => 'Superseded by exact W4 English content release '.$release->getKey().'.'])->saveQuietly();
             }
             $release->forceFill(['status' => 'published', 'message' => 'Exact W4 English content release published; runtime activation remains disabled.'])->saveQuietly();
+            $this->assertRelease($release, $context, $package, 'published');
 
             return ['changed_count' => count($package['targets']), 'unchanged_count' => 0, 'readback_count' => count($package['targets'])];
         }, 3);
@@ -158,12 +190,8 @@ final class RiasecContentPromotionAuthority
             throw new DomainException('riasec_promotion_release_missing');
         }
         $this->assertRelease($release, $context, $package, 'published');
-        foreach ($package['targets'] as $target) {
-            $identity = $target['identity'];
-            if (($identity['locale'] ?? null) !== 'en' || (($identity['group_id'] ?? null) === 'W4-G06' && str_contains((string) ($identity['form_scope'] ?? ''), 'riasec_60'))) {
-                throw new DomainException('riasec_promotion_public_projection_invalid');
-            }
-        }
+        $this->assertSyntheticProjection($package, 'riasec_60');
+        $this->assertSyntheticProjection($package, 'riasec_140');
 
         return ['readback_count' => count($package['targets'])];
     }
@@ -227,6 +255,63 @@ final class RiasecContentPromotionAuthority
                 'draft' => ['draft'], 'published' => ['published'], default => ['draft', 'published']
             }, true)) {
             throw new DomainException('riasec_promotion_release_state_invalid');
+        }
+        $actualTargets = (array) data_get($release->manifest_json, 'targets', []);
+        if (count($actualTargets) !== count($package['targets'])) {
+            throw new DomainException('riasec_promotion_exact_readback_count_invalid');
+        }
+        foreach ($package['targets'] as $target) {
+            $rowId = (string) data_get($target, 'identity.row_id');
+            $actual = collect($actualTargets)->first(static fn (mixed $candidate): bool => is_array($candidate) && data_get($candidate, 'identity.row_id') === $rowId);
+            if (! is_array($actual)
+                || ! hash_equals((string) ($target['reader_payload_sha256'] ?? ''), (string) ($actual['reader_payload_sha256'] ?? ''))
+                || ! hash_equals((string) ($target['source_line_sha256'] ?? ''), (string) ($actual['source_line_sha256'] ?? ''))
+                || ! hash_equals((string) ($target['segment_payload_sha256'] ?? ''), (string) ($actual['segment_payload_sha256'] ?? ''))
+                || (string) ($target['snapshot_segment'] ?? '') !== (string) ($actual['snapshot_segment'] ?? '')
+                || PromotionContextFactory::canonicalJson((array) ($target['reader_payload'] ?? [])) !== PromotionContextFactory::canonicalJson((array) ($actual['reader_payload'] ?? []))
+            ) {
+                throw new DomainException('riasec_promotion_exact_readback_invalid');
+            }
+        }
+    }
+
+    /** @param array{targets:list<array<string,mixed>>} $package */
+    private function assertSyntheticProjection(array $package, string $form): void
+    {
+        $counts = ['W4-G06' => 0, 'W4-G07' => 0];
+        $safeKinds = ['W4-G12' => 'share_safe_variant', 'W4-G13' => 'pdf_safe_variant', 'W4-G14' => 'history_safe_variant'];
+        $projected = 0;
+        foreach ($package['targets'] as $target) {
+            $identity = (array) ($target['identity'] ?? []);
+            $forms = explode(',', (string) ($identity['form_scope'] ?? ''));
+            if (! in_array($form, $forms, true)) {
+                continue;
+            }
+            $projected++;
+            $group = (string) ($identity['group_id'] ?? '');
+            if (($identity['locale'] ?? null) !== 'en'
+                || preg_match('/[\x{3400}-\x{9fff}]/u', PromotionContextFactory::canonicalJson((array) ($target['reader_payload'] ?? []))) === 1
+                || ($form === 'riasec_60' && in_array($group, ['W4-G06', 'W4-G07'], true))) {
+                throw new DomainException('riasec_promotion_public_projection_invalid');
+            }
+            if (isset($counts[$group])) {
+                $counts[$group]++;
+            }
+            if (isset($safeKinds[$group])) {
+                $payload = (array) ($target['reader_payload'] ?? []);
+                if (($target['row']['asset_kind'] ?? null) !== $safeKinds[$group]
+                    || ($payload['raw_scores_allowed'] ?? null) !== false
+                    || ($payload['raw_feedback_allowed'] ?? null) !== false
+                    || ($group === 'W4-G12' && ($payload['public_safe'] ?? null) !== true)
+                    || (in_array($group, ['W4-G13', 'W4-G14'], true) && ($payload['public_safe'] ?? null) !== false)) {
+                    throw new DomainException('riasec_promotion_safe_surface_invalid');
+                }
+            }
+        }
+        if ($projected === 0
+            || ($form === 'riasec_60' && $counts !== ['W4-G06' => 0, 'W4-G07' => 0])
+            || ($form === 'riasec_140' && $counts !== ['W4-G06' => 126, 'W4-G07' => 7])) {
+            throw new DomainException('riasec_promotion_form_projection_invalid');
         }
     }
 }

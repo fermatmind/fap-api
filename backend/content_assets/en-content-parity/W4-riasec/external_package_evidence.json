@@ -1,5 +1,5 @@
 {
-  "schema_version": "fermatmind.en_content_parity_external_package_evidence.v1",
+  "schema_version": "fermatmind.en_content_parity_external_package_evidence.v2",
   "lane_id": "W4",
   "package_id": "EN-PARITY-W4-RIASEC-PACKAGE-REFREEZE-01",
   "producer": {
@@ -18,6 +18,24 @@
     {"path": "dry_run_readiness.json", "sha256": "a68b36968035e08900be4d7adfe1647641b08f91e347b19c734b6bb106a38ccf"},
     {"path": "handoff.md", "sha256": "faf3d0195f7672befdba1009ac7acd498acf949af034bb9738359c5c709c8577"}
   ],
+  "authority_snapshot": {
+    "backend_package_path": "backend/content_assets/en-content-parity/W4-riasec",
+    "source_repository": "fap-web",
+    "source_commit_sha": "d16333b2dc234eb2e1d08baa237346ca7d271274",
+    "logical_group_count": 14,
+    "promotion_row_count": 1550,
+    "segment_payloads": [
+      {"segment": "dimension-core", "path": "payloads/dimension-core.jsonl", "sha256": "240308dbdd3e2a1d03e56b966e22b3650a335595701eace1896f8138d6eb719c", "row_count": 42},
+      {"segment": "pair", "path": "payloads/pair.jsonl", "sha256": "73f25affd59c05b7831d01b4bcf6bcd28fb3c5276a1e6a3ca4ea851bd5101727", "row_count": 15},
+      {"segment": "top3", "path": "payloads/top3.jsonl", "sha256": "08017348a81896be1f7a40d54f3782012b4a0d8522066c9b8bf4e25c51ded0dc", "row_count": 20},
+      {"segment": "activity-examples", "path": "payloads/activity-examples.jsonl", "sha256": "8aba5bc912bb8c8f167978ad1cf6bef04c0bcf876a644f40366aed3faba59eae", "row_count": 720},
+      {"segment": "140q-context-structural", "path": "payloads/140q-context-structural.jsonl", "sha256": "865c871b02b768038344def3aee9185947b95b43a9c2eabc42849a6fa4d119b7", "row_count": 133},
+      {"segment": "quality-reading-state", "path": "payloads/quality-reading-state.jsonl", "sha256": "b4c77f2c4998b4df907b18b6c94562a2a54dcd8a8362305c948190f38ea49c16", "row_count": 24},
+      {"segment": "aspirations-disagree", "path": "payloads/aspirations-disagree.jsonl", "sha256": "2eb18c53a1523ecd46418ee1e2f300b2571e0fee91ac2334c3f89eeb67ea48bd", "row_count": 115},
+      {"segment": "feedback-action-lab", "path": "payloads/feedback-action-lab.jsonl", "sha256": "bdc2fff2164caab4298266024454a07e895a2179f7ac3c2180defe0b69638f1b", "row_count": 474},
+      {"segment": "share-pdf-history", "path": "payloads/share-pdf-history.jsonl", "sha256": "a63c7c3b4d0422d86298da7e3e09a111b834b7d07c1e8a47e30e3eaad7a74421", "row_count": 7}
+    ]
+  },
   "control_acceptance": {
     "source_repository": "fap-web",
     "source_commit_sha": "588a32dcfb48d4c3474010c331ed488b34fdda0d",

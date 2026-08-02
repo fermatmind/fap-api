@@ -46,6 +46,17 @@ final class RiasecContentPromotionAdapterTest extends TestCase
         self::assertSame(1550, $adapter->draftImport($context)['created_count']);
         self::assertSame(0, $adapter->draftImport($context)['created_count']);
         self::assertSame(1, ContentReleaseManifest::query()->count());
+        $draft = ContentPackRelease::query()->where('content_hash', RiasecEnglishPackageImporter::PACKAGE_SHA256)->sole();
+        $targets = (array) data_get($draft->manifest_json, 'targets', []);
+        self::assertCount(1550, $targets);
+        foreach ($targets as $target) {
+            self::assertIsArray($target);
+            self::assertNotEmpty($target['reader_payload'] ?? []);
+            self::assertMatchesRegularExpression('/\A[a-f0-9]{64}\z/', (string) ($target['reader_payload_sha256'] ?? ''));
+            self::assertMatchesRegularExpression('/\A[a-f0-9]{64}\z/', (string) ($target['source_line_sha256'] ?? ''));
+            self::assertMatchesRegularExpression('/\A[a-f0-9]{64}\z/', (string) ($target['segment_payload_sha256'] ?? ''));
+            self::assertDoesNotMatchRegularExpression('/[\x{3400}-\x{9fff}]/u', json_encode($target['reader_payload'], JSON_THROW_ON_ERROR));
+        }
 
         $published = $adapter->publish($context);
         self::assertSame(1550, $published['published_count']);
