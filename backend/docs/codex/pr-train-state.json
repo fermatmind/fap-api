@@ -9,7 +9,7 @@
     "EN-PARITY-W3-ARTICLES-BACKEND-PROMOTION-PACKAGE-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "ready_to_merge",
       "branch": "codex/en-parity-w3-articles-backend-promotion-package-01",
       "commit_sha": "9c82e5e2da6c25c55b7b173a62f271019b513157",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3511",
@@ -44,7 +44,15 @@
             "details": "Verified 10 immutable frozen files, effective package SHA d70e468b…, W9 SHA a286486e…, 17 rows, no symlinks, and no out-of-scope paths."
           }
         ],
-        "github": []
+        "github": [
+          {"name": "hygiene", "status": "passed"},
+          {"name": "supply-chain", "status": "passed"},
+          {"name": "content-pack-build-validate", "status": "passed"},
+          {"name": "verify-mbti-legacy", "status": "passed"},
+          {"name": "verify-mbti-v2", "status": "passed"},
+          {"name": "verify-bigfive", "status": "passed"},
+          {"name": "Code Scanning", "status": "passed"}
+        ]
       },
       "failure_reason": null,
       "resume_policy": "continuous_goal",
@@ -71,6 +79,11 @@
           "at": "2026-08-03T00:00:00+08:00",
           "status": "pr_open",
           "summary": "Opened ready PR #3511 at commit 9c82e5e2da6c25c55b7b173a62f271019b513157 after scoped local validation. Required GitHub checks are pending; no production operation was executed."
+        },
+        {
+          "at": "2026-08-03T00:00:00+08:00",
+          "status": "ready_to_merge",
+          "summary": "Required GitHub checks passed for PR #3511 head 7cc21c0110dfe88f88503d07821e89b16439bffb: hygiene, supply-chain, content validation, verify-mbti legacy/v2, verify-bigfive, and Code Scanning. Staging parity was skipped and is not a required gate."
         }
       ]
     },
