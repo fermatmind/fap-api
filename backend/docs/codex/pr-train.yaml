@@ -61,6 +61,60 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: EN-PARITY-W5-ENNEAGRAM-PRIVATE-AUTHORITY-ADAPTER-V2-01
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/en-parity-w5-enneagram-private-authority-adapter-v2-01
+    base: main
+    depends_on: []
+    mode: execute
+    title: "EN-PARITY-W5-ENNEAGRAM-PRIVATE-AUTHORITY-ADAPTER-V2-01: establish exact-package promotion for private Enneagram results"
+    scope: >
+      Establish a distinct W5/enneagram-results exact-package adapter for
+      private Enneagram result content. Bind immutable inventory, package SHA,
+      source commit, workflow identity, W9 evidence, inactive release import,
+      registry activation/readback and rollback without changing the W5 public
+      PersonalityPublicContentAsset adapter, generating English payloads,
+      migrating schema, or executing production promotion.
+    allowed_paths:
+      - app/Services/ContentPromotion/**
+      - config/content_promotion.php
+      - tests/Unit/ContentPromotion/**
+      - tests/Feature/V0_3/EnneagramShareSummaryContractTest.php
+      - tests/Feature/V0_3/EnneagramShareSummaryStateVariantsTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    checks:
+      - "php -l app/Services/ContentPromotion/EnneagramPrivateResultPromotionAuthority.php"
+      - "php -l app/Services/ContentPromotion/Adapters/EnneagramPrivateResultPromotionAdapter.php"
+      - "vendor/bin/pint --test app/Services/ContentPromotion/EnneagramPrivateResultPromotionAuthority.php app/Services/ContentPromotion/Adapters/EnneagramPrivateResultPromotionAdapter.php app/Services/ContentPromotion/PromotionAdapterRegistry.php config/content_promotion.php tests/Unit/ContentPromotion/EnneagramPrivateResultPromotionAdapterTest.php tests/Unit/ContentPromotion/PromotionAdapterCapabilityTest.php tests/Feature/V0_3/EnneagramShareSummaryContractTest.php tests/Feature/V0_3/EnneagramShareSummaryStateVariantsTest.php"
+      - "php artisan test tests/Unit/ContentPromotion/EnneagramPrivateResultPromotionAdapterTest.php tests/Unit/ContentPromotion/PromotionAdapterCapabilityTest.php"
+      - "php artisan test tests/Feature/V0_3/EnneagramReadReportContractTest.php tests/Feature/V0_3/EnneagramShareSummaryContractTest.php tests/Feature/V0_3/EnneagramShareSummaryStateVariantsTest.php tests/Feature/Report/EnneagramPdfMetadataContractTest.php tests/Feature/Attempts/EnneagramHistorySummaryTest.php"
+      - "php artisan test tests/Feature/Console/ContentPromoteExactPackageCommandTest.php"
+      - "php artisan route:list --path=api --except-vendor"
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "ruby -e 'require \"yaml\"; YAML.safe_load(File.read(\"docs/codex/pr-train.yaml\"), aliases: true)'"
+      - "git diff --check"
+      - "git diff --cached --check"
+      - "exact changed-file scope validation"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: continuous_goal
+    merge_policy:
+      mode: github_checks_required
+      local_verify_required: true
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: SEO-10K-GSC-BOUNDED-BACKFILL-01
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\V0_3;
 
+use App\Jobs\GenerateReportSnapshotJob;
+use App\Services\Report\ReportSnapshotStore;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -84,6 +86,9 @@ final class EnneagramShareSummaryStateVariantsTest extends TestCase
 
     private function primeSnapshot(string $attemptId, string $anonId, string $token): void
     {
+        (new GenerateReportSnapshotJob(0, $attemptId, 'submit', null))
+            ->handle(app(ReportSnapshotStore::class));
+
         $this->withHeaders([
             'Authorization' => 'Bearer '.$token,
             'X-Anon-Id' => $anonId,

@@ -36,7 +36,7 @@ return [
         'W2' => ['big-five' => 'audit_compatible'],
         'W3' => ['articles' => 'audit_compatible', 'career-guides' => 'audit_compatible'],
         'W4' => ['riasec' => 'audit_compatible'],
-        'W5' => ['enneagram' => 'audit_compatible'],
+        'W5' => ['enneagram' => 'audit_compatible', 'enneagram-results' => 'audit_compatible'],
         'W6' => ['iq' => 'fail_closed_legacy_audit'],
         'W7' => ['eq' => 'audit_compatible'],
         'W8' => ['career-jobs' => 'audit_compatible'],

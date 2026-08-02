@@ -7,6 +7,7 @@ namespace App\Services\ContentPromotion;
 use App\Services\ContentPromotion\Adapters\ArticleCmsPromotionAdapter;
 use App\Services\ContentPromotion\Adapters\CareerGuideCmsPromotionAdapter;
 use App\Services\ContentPromotion\Adapters\CareerJobCmsPromotionAdapter;
+use App\Services\ContentPromotion\Adapters\EnneagramPrivateResultPromotionAdapter;
 use App\Services\ContentPromotion\Adapters\Eq60CompiledPromotionAdapter;
 use App\Services\ContentPromotion\Adapters\LegacyAuditIncompatiblePromotionAdapter;
 use App\Services\ContentPromotion\Adapters\MbtiComparisonEnglishPromotionAdapter;
@@ -29,6 +30,7 @@ final class PromotionAdapterRegistry
         CareerCmsPromotionAuthority $careerAuthority,
         RiasecContentPromotionAuthority $riasecAuthority,
         Eq60CompiledPromotionAuthority $eq60Authority,
+        EnneagramPrivateResultPromotionAuthority $enneagramPrivateResultAuthority,
         PromotionRollbackSnapshotService $snapshots,
     ) {
         $adapters = [
@@ -39,6 +41,7 @@ final class PromotionAdapterRegistry
             new CareerGuideCmsPromotionAdapter($careerAuthority, $snapshots),
             new RiasecContentPromotionAdapter($riasecAuthority, $snapshots),
             new PersonalityCmsPromotionAdapter('W5', 'enneagram', $personalityAuthority, $snapshots),
+            new EnneagramPrivateResultPromotionAdapter($enneagramPrivateResultAuthority, $snapshots),
             new LegacyAuditIncompatiblePromotionAdapter('w6_iq_legacy', 'W6', 'iq'),
             new Eq60CompiledPromotionAdapter($eq60Authority, $snapshots),
             new CareerJobCmsPromotionAdapter($careerAuthority, $snapshots),
