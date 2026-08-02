@@ -1,0 +1,30 @@
+{
+  "schema_version": "fap.big5.result_page_v2.candidate_payload_set.v0.4",
+  "candidate_set_id": "big5_result_page_v2_candidate_payload_set_v0_4",
+  "immutable": true,
+  "locale": "zh-CN",
+  "form_codes": ["big5_90", "big5_120"],
+  "payload_count": 325,
+  "source_assets_sha256": "44c57f2976f0b46c36ddc76cb2873996e4c71085c1f7cf97c7d3a226e3efe336",
+  "candidate_manifest_sha256": "07510b53084ee52a1aa8f102aae1210676b0b32cf07d8a53165c0b384ee9c59e",
+  "payload_set_sha256": "ad573527ff3495fe31402256dd4310d5f02421391b7c299b3fa16ab703c51a4b",
+  "verification": {
+    "source_mapping_failure_count": 0,
+    "missing_count": 0,
+    "fallback_count": 0,
+    "blocked_count": 0,
+    "duplicate_selection_count": 0,
+    "mapped_count": 325,
+    "metadata_leak_count": 0,
+    "forbidden_claim_count": 0
+  },
+  "execution": {
+    "activation_happened": false,
+    "production_import_happened": false,
+    "full_replacement_happened": false
+  },
+  "procedure": {
+    "command": "php artisan bigfive:result-page-v2-export-candidate-payloads --source=content_assets/big5/result_page_v2/selector_ready_assets/v0_3_p0_full/assets.json --dry-run --json",
+    "verdict": "PASS_FOR_BIG5_RESULT_PAGE_V2_INACTIVE_IMPORT_DRY_RUN"
+  }
+}

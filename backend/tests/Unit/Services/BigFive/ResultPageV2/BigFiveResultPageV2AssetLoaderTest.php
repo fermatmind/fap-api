@@ -56,6 +56,16 @@ final class BigFiveResultPageV2AssetLoaderTest extends TestCase
         $this->assertContains('staging_only', $selectorReady->runtimeUses);
     }
 
+    public function test_loader_excludes_production_release_governance_from_staging_inventory(): void
+    {
+        $packages = collect(app(BigFiveV2AssetPackageLoader::class)->inventory()->packages)
+            ->pluck('relativePath');
+
+        $this->assertFalse($packages->contains(
+            static fn (string $path): bool => str_starts_with($path, 'content_assets/big5/result_page_v2/releases/'),
+        ));
+    }
+
     public function test_loader_validates_sha256sums_for_packages_that_provide_them(): void
     {
         $inventory = app(BigFiveV2AssetPackageLoader::class)->inventory();

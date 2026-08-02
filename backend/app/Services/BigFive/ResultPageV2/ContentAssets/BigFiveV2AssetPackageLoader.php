@@ -121,12 +121,27 @@ final class BigFiveV2AssetPackageLoader
     {
         $paths = [];
         foreach ($this->filesUnder($rootPath) as $file) {
+            if ($this->isReleaseGovernanceFile($file, $rootPath)) {
+                continue;
+            }
+
             if ($this->isManifestFile($file) || $this->isChecksumFile($file)) {
                 $paths[$file->getPath()] = true;
             }
         }
 
         return array_keys($paths);
+    }
+
+    private function isReleaseGovernanceFile(SplFileInfo $file, string $rootPath): bool
+    {
+        $relativePath = ltrim(str_replace(
+            rtrim(str_replace(DIRECTORY_SEPARATOR, '/', $rootPath), '/'),
+            '',
+            str_replace(DIRECTORY_SEPARATOR, '/', $file->getPathname()),
+        ), '/');
+
+        return str_starts_with($relativePath, 'releases/');
     }
 
     /**

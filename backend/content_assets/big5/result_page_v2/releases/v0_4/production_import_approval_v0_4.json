@@ -1,0 +1,28 @@
+{
+  "schema_version": "fap.big5.result_page_v2.production_import_approval.v0.4",
+  "approval_id": "big5_result_page_v2_production_import_approval_v0_4",
+  "review_surface": "big_five_v2_editorial_revision",
+  "decision": "GO",
+  "approval_scope": "production_import_only",
+  "snapshot": {
+    "snapshot_id": "big5_result_page_v2_v0_4",
+    "sha256": "d4e9f457f5514e01681e27723d99ede228d58e49a3abac446947671d064950a1"
+  },
+  "scope": {
+    "org_ids": ["0"],
+    "form_codes": ["big5_90", "big5_120"],
+    "locales": ["zh-CN"]
+  },
+  "safety": {
+    "rollback_snapshot_id": "big5_result_page_v2_rc_0_3",
+    "kill_switch_ref": "big5_result_page_v2.production_emergency_disabled",
+    "post_deploy_smoke_procedure_id": "big5_result_page_v2_post_deploy_smoke_v0_4"
+  },
+  "authorization": {
+    "production_import_execution_authorized": false,
+    "production_rollout_authorized": false,
+    "deployment_authorized": false,
+    "environment_write_authorized": false,
+    "cache_refresh_authorized": false
+  }
+}

@@ -150,6 +150,24 @@ final class RolloutDryRunTest extends TestCase
         $this->assertSame('production_rollout_emergency_disabled', $halted->reason);
     }
 
+    public function test_public_org_zero_survives_exact_tenant_scope_parsing_for_v0_4(): void
+    {
+        $this->simulateRollout([
+            'production_release_snapshot_id' => 'big5_result_page_v2_v0_4',
+            'production_approved_release_snapshot_ids' => ['big5_result_page_v2_v0_4'],
+            'production_rollout_allowed_tenant_ids' => ['0'],
+            'production_rollout_allowed_attempt_ids' => ['attempt_public'],
+        ]);
+
+        $decision = $this->gate()->decide($this->attempt([
+            'id' => 'attempt_public',
+            'org_id' => 0,
+        ]));
+
+        $this->assertTrue($decision->allowed);
+        $this->assertSame('production_rollout_allowed', $decision->reason);
+    }
+
     public function test_files_do_not_enable_production_rollout(): void
     {
         foreach (glob($this->packagePath('*')) ?: [] as $file) {

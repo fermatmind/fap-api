@@ -1,0 +1,74 @@
+{
+  "schema_version": "fap.big5.result_page_v2.release_snapshot.v0.4",
+  "snapshot_id": "big5_result_page_v2_v0_4",
+  "release_version": "v0_4",
+  "immutable": true,
+  "runtime_use": "production_import_candidate",
+  "production_use_allowed": true,
+  "ready_for_production_import": true,
+  "ready_for_production_rollout": false,
+  "production_import_performed": false,
+  "production_rollout_enabled": false,
+  "scope": {
+    "org_ids": ["0"],
+    "form_codes": ["big5_90", "big5_120"],
+    "locales": ["zh-CN"]
+  },
+  "asset_bindings": [
+    {
+      "kind": "selector",
+      "path": "content_assets/big5/result_page_v2/selector_ready_assets/v0_3_p0_full/assets.json",
+      "sha256": "44c57f2976f0b46c36ddc76cb2873996e4c71085c1f7cf97c7d3a226e3efe336"
+    },
+    {
+      "kind": "trait",
+      "path": "content_assets/big5/result_page_v2/trait_band_assets/v0_1/big5_trait_band_assets_v0_1.json",
+      "sha256": "f0a2903d31a870c6f2da9da55c228dc9e14d3afec4d52145a5ac5d15446f5eeb"
+    },
+    {
+      "kind": "coupling_canonical",
+      "path": "content_assets/big5/result_page_v2/coupling_assets/v0_1/big5_coupling_assets_v0_1.json",
+      "sha256": "dc36ebad582b2a8074b21548c637dbad9d9392e80eb4959d23e344b162030d7a"
+    },
+    {
+      "kind": "coupling_supplemental",
+      "path": "content_assets/big5/result_page_v2/coupling_assets/supplemental/v0_1/big5_supplemental_coupling_assets_v0_1.json",
+      "sha256": "812262ce74ccf5857634769ad287a34547eb16bdeac6208ce1de0da581051167"
+    },
+    {
+      "kind": "facet",
+      "path": "content_assets/big5/result_page_v2/facet_assets/v0_1/big5_facet_assets_v0_1.json",
+      "sha256": "9f98e4a387984b6a2eaa6a07484dd2bcc3dbb1a527df75ee6e074371e233fb81"
+    },
+    {
+      "kind": "profile",
+      "path": "content_assets/big5/result_page_v2/canonical_profiles/v0_1/big5_canonical_profile_assets_v0_1.json",
+      "sha256": "180e7fe4e49074c8ebe84e8ce5358bb6c4b91e10ddee2c85988cc3a117a9755d"
+    },
+    {
+      "kind": "scenario",
+      "path": "content_assets/big5/result_page_v2/scenario_action_assets/v0_1_1/big5_scenario_action_assets_v0_1.json",
+      "sha256": "3a9f0b509084a4cc7f7ca910938886c9986f25dbe059af36079492677194c683"
+    }
+  ],
+  "candidate_payload_evidence": {
+    "path": "content_assets/big5/result_page_v2/releases/v0_4/candidate_payload_set_v0_4.json",
+    "sha256": "c009b8878e1c7a4b76d63fe4cc2cf557ec576008d51669d3ed3bbe8bca658afa",
+    "payload_count": 325,
+    "payload_set_sha256": "ad573527ff3495fe31402256dd4310d5f02421391b7c299b3fa16ab703c51a4b"
+  },
+  "rollback": {
+    "snapshot_id": "big5_result_page_v2_rc_0_3",
+    "path": "content_assets/big5/result_page_v2/releases/v0_3/big5_v2_release_snapshot_rc_0_3.json",
+    "sha256": "6398bd43904d2029bf598c4a047a984b14326e47e66533f786824d049a9b66b1",
+    "kill_switch_ref": "big5_result_page_v2.production_emergency_disabled"
+  },
+  "post_deploy_smoke_procedure_id": "big5_result_page_v2_post_deploy_smoke_v0_4",
+  "negative_guarantees": {
+    "runtime_change_performed": false,
+    "environment_change_performed": false,
+    "production_import_performed": false,
+    "production_rollout_performed": false,
+    "historical_snapshot_modified": false
+  }
+}

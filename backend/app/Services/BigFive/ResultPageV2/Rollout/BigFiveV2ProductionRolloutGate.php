@@ -242,7 +242,7 @@ final class BigFiveV2ProductionRolloutGate
         return array_values(array_filter(array_map(
             static fn (mixed $value): string => trim((string) $value),
             $configured,
-        )));
+        ), static fn (string $value): bool => $value !== ''));
     }
 
     /**
