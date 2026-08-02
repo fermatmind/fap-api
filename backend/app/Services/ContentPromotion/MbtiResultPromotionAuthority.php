@@ -7,6 +7,7 @@ namespace App\Services\ContentPromotion;
 use App\Services\Content\ContentPackV2Resolver;
 use DomainException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 /**
  * Database-backed, package-derived authority for the W1 English MBTI result
@@ -15,6 +16,16 @@ use Illuminate\Support\Facades\DB;
  */
 final class MbtiResultPromotionAuthority
 {
+    private const PACKAGE_SHA256 = '9325013b870fd2496efc0882656240f91ce28ff4faaf1da42fb3dde3577b0ed3';
+
+    private const EXTERNAL_W9_REPORT_SHA256 = 'b1179976102f903b36de9888ee4cb0b4dd74fc3906d5951682922464bc8dec7d';
+
+    private const EXTERNAL_W9_ENVELOPE_SHA256 = 'ad1b74998d0e245076197fa3135d150c0757eb48c241b25ffb9966db55028bfe';
+
+    private const EXTERNAL_W9_SOURCE_COMMIT = 'e623de1894b54b3ef70faae9d17fac4d216337ee';
+
+    private const EXTERNAL_W9_SOURCE_PATH = 'generated/en-content-parity/W9-independent-qa/W1-mbti-result-content/9325013b-renderer-643b7a80/independent_qa_report.json';
+
     private const PACKAGE_MANIFEST_SCHEMA = 'fermatmind.en_parity.immutable_content_package_manifest.v1';
 
     private const PACK_ID = 'MBTI.global.en.default';
@@ -92,7 +103,8 @@ final class MbtiResultPromotionAuthority
             $chain .= $path."\0".$sha256."\n";
         }
         $packageSha256 = hash('sha256', $chain);
-        if (! hash_equals(strtolower((string) ($manifest['package_sha256'] ?? '')), $packageSha256)
+        if (! hash_equals(self::PACKAGE_SHA256, $packageSha256)
+            || ! hash_equals(strtolower((string) ($manifest['package_sha256'] ?? '')), $packageSha256)
             || ! hash_equals($context->packageSha256, $packageSha256)) {
             throw new DomainException('mbti_result_package_sha256_mismatch');
         }
@@ -101,7 +113,10 @@ final class MbtiResultPromotionAuthority
                 throw new DomainException('mbti_result_package_required_payload_missing');
             }
         }
-        $this->assertIndependentW9Evidence($manifest, $packageSha256);
+        if (($manifest['quality_gates']['independent_w9'] ?? null) !== 'pending') {
+            throw new DomainException('mbti_result_package_w9_self_acceptance_forbidden');
+        }
+        $this->assertImmutableExternalW9Evidence($packageSha256);
 
         $assets = $this->decode($files['assets.json'], 'mbti_result_assets_json_invalid');
         $inventory = $this->decode($files['inventory_reconciliation.json'], 'mbti_result_inventory_json_invalid');
@@ -464,40 +479,52 @@ final class MbtiResultPromotionAuthority
         }
     }
 
-    /** @param array<string,mixed> $manifest */
-    private function assertIndependentW9Evidence(array $manifest, string $packageSha256): void
+    private function assertImmutableExternalW9Evidence(string $packageSha256): void
     {
-        $gate = $manifest['quality_gates']['independent_w9'] ?? null;
-        if (! is_array($gate)
-            || ($gate['status'] ?? null) !== 'pass'
-            || ! is_string($gate['report_ref'] ?? null)
-            || ! preg_match('/\A[a-f0-9]{64}\z/', (string) ($gate['report_sha256'] ?? ''))) {
-            throw new DomainException('mbti_result_w9_evidence_incomplete');
+        $configuredRoot = (string) config(
+            'content_promotion.mbti_result_external_w9_root',
+            'content_assets/en-content-parity/W9/mbti-results/9325013b-renderer-643b7a80',
+        );
+        $rootPath = str_starts_with($configuredRoot, DIRECTORY_SEPARATOR) ? $configuredRoot : base_path($configuredRoot);
+        $root = realpath($rootPath);
+        $envelopePath = ($root ?: '').DIRECTORY_SEPARATOR.'external_evidence_envelope.json';
+        $reportPath = ($root ?: '').DIRECTORY_SEPARATOR.'independent_qa_report.json';
+        $resolvedEnvelope = realpath($envelopePath);
+        $resolvedReport = realpath($reportPath);
+        if ($root === false || is_link($rootPath)
+            || ! is_file($envelopePath) || is_link($envelopePath) || $resolvedEnvelope === false || dirname($resolvedEnvelope) !== $root
+            || ! is_file($reportPath) || is_link($reportPath) || $resolvedReport === false || dirname($resolvedReport) !== $root) {
+            throw new DomainException('mbti_result_external_w9_evidence_incomplete');
         }
-        $configuredRoot = (string) config('content_promotion.w9_authority_root');
-        $root = realpath(str_starts_with($configuredRoot, DIRECTORY_SEPARATOR) ? $configuredRoot : base_path($configuredRoot));
-        $reportRef = (string) $gate['report_ref'];
-        if ($root === false || $reportRef === '' || basename($reportRef) !== $reportRef || str_contains($reportRef, '..')) {
-            throw new DomainException('mbti_result_w9_evidence_incomplete');
+        $envelopeBytes = File::get($envelopePath);
+        $reportBytes = File::get($reportPath);
+        if (! hash_equals(self::EXTERNAL_W9_ENVELOPE_SHA256, hash('sha256', $envelopeBytes))
+            || ! hash_equals(self::EXTERNAL_W9_REPORT_SHA256, hash('sha256', $reportBytes))) {
+            throw new DomainException('mbti_result_external_w9_evidence_incomplete');
         }
-        $path = $root.DIRECTORY_SEPARATOR.$reportRef;
-        $resolved = realpath($path);
-        if (! is_file($path) || is_link($path) || $resolved === false || dirname($resolved) !== $root) {
-            throw new DomainException('mbti_result_w9_evidence_incomplete');
-        }
-        $bytes = file_get_contents($path);
-        if (! is_string($bytes) || ! hash_equals((string) $gate['report_sha256'], hash('sha256', $bytes))) {
-            throw new DomainException('mbti_result_w9_evidence_incomplete');
-        }
-        $report = $this->decode($bytes, 'mbti_result_w9_evidence_incomplete');
-        if (($report['schema_version'] ?? null) !== 'fermatmind.en_parity.independent_w9_report.v1'
-            || ($report['review_kind'] ?? null) !== 'independent_w9'
+        $envelope = $this->decode($envelopeBytes, 'mbti_result_external_w9_evidence_incomplete');
+        $report = $this->decode($reportBytes, 'mbti_result_external_w9_evidence_incomplete');
+        if (($envelope['schema_version'] ?? null) !== 'fermatmind.content_promotion.external_w9_evidence_envelope.v1'
+            || ($envelope['source_repository'] ?? null) !== 'fermatmind/fap-web'
+            || ($envelope['source_commit'] ?? null) !== self::EXTERNAL_W9_SOURCE_COMMIT
+            || ($envelope['source_path'] ?? null) !== self::EXTERNAL_W9_SOURCE_PATH
+            || ($envelope['report_sha256'] ?? null) !== self::EXTERNAL_W9_REPORT_SHA256
+            || ($envelope['package_sha256'] ?? null) !== self::PACKAGE_SHA256
+            || ($envelope['producer_lane_id'] ?? null) !== 'W1'
+            || ($envelope['subscope_id'] ?? null) !== 'W1-MBTI-RESULT-CONTENT'
+            || ($envelope['promotion_subscope'] ?? null) !== 'mbti-results'
+            || ($envelope['reviewed_row_count'] ?? null) !== 46
+            || ($envelope['authority_content_count'] ?? null) !== 21
+            || ($envelope['verdict'] ?? null) !== 'PASS'
+            || ($report['schema_version'] ?? null) !== 'fermatmind.en_content_parity_independent_qa_report.v1'
+            || ($report['artifact_kind'] ?? null) !== 'independent_qa_report'
+            || ($report['qa_lane_id'] ?? null) !== 'W9'
+            || ($report['producer_lane_id'] ?? null) !== 'W1'
+            || ($report['subscope_id'] ?? null) !== 'W1-MBTI-RESULT-CONTENT'
             || ($report['verdict'] ?? null) !== 'PASS'
             || ($report['package_sha256'] ?? null) !== $packageSha256
-            || ($report['lane_id'] ?? null) !== 'W1'
-            || ($report['subscope'] ?? null) !== 'mbti-results'
             || (int) ($report['reviewed_row_count'] ?? 0) !== 46) {
-            throw new DomainException('mbti_result_w9_evidence_incomplete');
+            throw new DomainException('mbti_result_external_w9_evidence_incomplete');
         }
     }
 
