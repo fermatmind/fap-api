@@ -103487,9 +103487,9 @@
     "branch": "codex/riasec-result-v2-production-runtime-02",
     "title": "RIASEC-RESULT-V2-PRODUCTION-RUNTIME-02: enable fail-closed production result runtime",
     "depends_on": [],
-    "status": "local_verified",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "2dca2109562ffa9c6af90bf7663468639650b011",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3499",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -103519,8 +103519,13 @@
         "at": "2026-08-02T06:12:00Z",
         "status": "local_verified",
         "note": "Real production gate, public org-0 scope handling, full-only payload emission, staging compatibility, emergency fallback, and redacted telemetry passed focused and complete CI validation."
+      },
+      {
+        "at": "2026-08-02T06:30:00Z",
+        "status": "github_checks_pending",
+        "note": "PR #3499 opened from commit 2dca2109562ffa9c6af90bf7663468639650b011; waiting for required GitHub checks before squash merge."
       }
     ],
-    "updated_at": "2026-08-02T06:12:00Z"
+    "updated_at": "2026-08-02T06:30:00Z"
   }
 }
