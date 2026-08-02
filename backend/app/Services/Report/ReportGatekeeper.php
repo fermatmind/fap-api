@@ -42,12 +42,16 @@ class ReportGatekeeper
         private CrisisPolicyResolver $crisisPolicyResolver,
         private ReportSubjectRepository $subjects,
         private OrgContext $orgContext,
-        private BigFiveReportUnlockRolloutGate $bigFiveReportUnlockRollout,
     ) {}
 
     private function freemiumLocalePolicy(): FreemiumLocalePolicy
     {
         return app(FreemiumLocalePolicy::class);
+    }
+
+    private function bigFiveReportUnlockRollout(): BigFiveReportUnlockRolloutGate
+    {
+        return app(BigFiveReportUnlockRolloutGate::class);
     }
 
     public function ensureAccess(
@@ -652,7 +656,7 @@ class ReportGatekeeper
         $freeByPaywallMode = in_array($paywallMode, [ScaleRolloutGate::PAYWALL_FREE_ONLY, ScaleRolloutGate::PAYWALL_OFF], true);
 
         if ($scaleCode === ReportAccess::SCALE_BIG5_OCEAN) {
-            return $freeByPaywallMode || ! $this->bigFiveReportUnlockRollout->allows($attempt);
+            return $freeByPaywallMode || ! $this->bigFiveReportUnlockRollout()->allows($attempt);
         }
 
         if (in_array($scaleCode, [ReportAccess::SCALE_EQ_60, ReportAccess::SCALE_RIASEC], true)) {
