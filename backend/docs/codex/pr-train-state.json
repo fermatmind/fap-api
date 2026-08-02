@@ -65,30 +65,72 @@
       "publish_allowed": false,
       "deploy_allowed": false,
       "history": [
+        {"at": "2026-08-03T00:00:00+08:00", "status": "in_progress", "summary": "Initialized the exact W3 Articles backend authority package scope. The frozen 17-row fap-web payload and independent W9 bytes are copied byte-for-byte into a non-symlink envelope; no CMS write, publication, discoverability, search, deploy, or private-data operation was executed."},
+        {"at": "2026-08-03T00:00:00+08:00", "status": "local_checks_passed", "summary": "Scoped syntax, Pint, Article candidate-only import/publication/readback/rollback, adapter capability, exact-package command, automation workflow, review-policy, frozen inventory/SHA/W9/no-symlink, JSON/YAML, changed-file allowlist and diff checks passed. No production operation was executed."},
+        {"at": "2026-08-03T00:00:00+08:00", "status": "pr_open", "summary": "Opened ready PR #3511 at commit 9c82e5e2da6c25c55b7b173a62f271019b513157 after scoped local validation. Required GitHub checks are pending; no production operation was executed."},
+        {"at": "2026-08-03T00:00:00+08:00", "status": "ready_to_merge", "summary": "Required GitHub checks passed for PR #3511 head 7cc21c0110dfe88f88503d07821e89b16439bffb: hygiene, supply-chain, content validation, verify-mbti legacy/v2, verify-bigfive, and Code Scanning. Staging parity was skipped and is not a required gate."},
+        {"at": "2026-08-03T00:00:00+08:00", "status": "review_fixes_validated", "summary": "Addressed actionable review findings in the same PR: foreign candidate collisions fail closed, source identity is revalidated under lock, rollback derives target identities from the immutable publication snapshot, and translation status is restored. Scoped local checks passed; required GitHub checks must rerun for the new head."}
+      ]
+    },
+    "EN-PARITY-W5-ENNEAGRAM-PRIVATE-AUTHORITY-ADAPTER-V2-01": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "ready_to_merge",
+      "branch": "codex/en-parity-w5-enneagram-private-authority-adapter-v2-01",
+      "commit_sha": "e11a50896",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3515",
+      "checks": {
+        "authority_revalidation": {
+          "status": "passed",
+          "details": "Current main, the W5 V2 control state, the private inactive-candidate importer, registry activation gate, report snapshot 200/202 contract, and result/share/PDF/history contracts were re-read. Historical W5 scan SHA was not accepted as authority."
+        },
+        "local": [
+          {
+            "command": "PHP syntax, scoped Pint, focused W5 adapter / result / share / PDF / history tests, exact-package command regression, route list, JSON/YAML and diff checks",
+            "status": "passed",
+            "details": "Adapter preflight, immutable inventory/SHA/count/identity failure closure, 36-pair close-call coverage, W9 evidence, inactive import, idempotent repeat, activation, live readback, rollback and private-field/CJK rejection passed. The established report snapshot contract is 202 while generating and 200 only after the snapshot is materialized; stale share fixtures now materialize that snapshot before asserting the public projection."
+          }
+        ],
+        "github": {
+          "status": "passed",
+          "details": "PR #3515 passed hygiene, Semgrep blocking secrets, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy and Semgrep OSS. verify-staging-parity was skipped by its existing workflow policy."
+        }
+      },
+      "failure_reason": null,
+      "resume_policy": "continuous_goal",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "publish_allowed": false,
+      "deploy_allowed": false,
+      "history": [
         {
           "at": "2026-08-03T00:00:00+08:00",
           "status": "in_progress",
-          "summary": "Initialized the exact W3 Articles backend authority package scope. The frozen 17-row fap-web payload and independent W9 bytes are copied byte-for-byte into a non-symlink envelope; no CMS write, publication, discoverability, search, deploy, or private-data operation was executed."
+          "summary": "Initialized the W5 private Enneagram authority adapter scope. This branch establishes only exact-package, inactive-release, readback and rollback mechanics; it does not generate the 630 English assets or execute a production promotion."
         },
         {
           "at": "2026-08-03T00:00:00+08:00",
           "status": "local_checks_passed",
-          "summary": "Scoped syntax, Pint, Article candidate-only import/publication/readback/rollback, adapter capability, exact-package command, automation workflow, review-policy, frozen inventory/SHA/W9/no-symlink, JSON/YAML, changed-file allowlist and diff checks passed. No production operation was executed."
+          "summary": "Focused adapter, privacy, result/report/share/PDF/history, exact-package command, route, formatting, JSON/YAML and diff checks passed. No production registry, CMS, deployment, search or discoverability mutation was executed."
         },
         {
           "at": "2026-08-03T00:00:00+08:00",
           "status": "pr_open",
-          "summary": "Opened ready PR #3511 at commit 9c82e5e2da6c25c55b7b173a62f271019b513157 after scoped local validation. Required GitHub checks are pending; no production operation was executed."
+          "summary": "Opened PR #3515 after scoped local validation. Required GitHub checks are pending; no production operation was executed."
+        },
+        {
+          "at": "2026-08-03T00:00:00+08:00",
+          "status": "github_check_repairing",
+          "summary": "GitHub verify-bigfive rejected only the new W5 ContentPromotion paths as unclassified runtime changes. Repairing the exact classifier allowlist and its focused regression; no production operation was executed."
         },
         {
           "at": "2026-08-03T00:00:00+08:00",
           "status": "ready_to_merge",
-          "summary": "Required GitHub checks passed for PR #3511 head 7cc21c0110dfe88f88503d07821e89b16439bffb: hygiene, supply-chain, content validation, verify-mbti legacy/v2, verify-bigfive, and Code Scanning. Staging parity was skipped and is not a required gate."
-        },
-        {
-          "at": "2026-08-03T00:00:00+08:00",
-          "status": "review_fixes_validated",
-          "summary": "Addressed actionable review findings in the same PR: foreign candidate collisions fail closed, source identity is revalidated under lock, rollback derives target identities from the immutable publication snapshot, and translation status is restored. Scoped local checks passed; required GitHub checks must rerun for the new head."
+          "summary": "The classifier repair and focused regression passed. PR #3515 then passed all required GitHub checks; the workflow-policy staging parity job was skipped. No production operation was executed."
         }
       ]
     },
