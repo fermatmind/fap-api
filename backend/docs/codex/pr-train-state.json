@@ -177,6 +177,129 @@
         }
       ]
     },
+    "CONTENT-PROMOTION-W6-IQ-ADAPTER-01": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "skipped_by_user",
+      "branch": null,
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "authority_audit": {
+          "status": "failed_closed",
+          "details": "No eligible IQ compiled revision/release/public projection authority exists. The current IQ driver and report builder are attempt-bound; no package import or promotion branch was created."
+        }
+      },
+      "failure_reason": "User explicitly directed: IQ not do; continue another PR. W6 remains fail_closed_legacy_audit.",
+      "resume_policy": "user_skipped",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "publish_allowed": false,
+      "deploy_allowed": false,
+      "history": [
+        {
+          "at": "2026-08-02T13:20:00Z",
+          "status": "skipped_by_user",
+          "summary": "User explicitly skipped T7/W6 IQ after the authority audit. No IQ PR, CMS write, publication, runtime activation, or deployment was performed."
+        }
+      ]
+    },
+    "CONTENT-PROMOTION-W7-EQ-ADAPTER-01": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "ready_to_merge",
+      "branch": "codex/content-promotion-w7-eq-adapter-01",
+      "commit_sha": "255c33e9c7c110f60cb6bfe184ef5d2e5a6d6c66",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3510",
+      "checks": {
+        "dependency": {
+          "status": "passed_with_user_exception",
+          "details": "CONTENT-PROMOTION-W4-RIASEC-ADAPTER-01 is merged at 3e1383999d3ece464d9c1283b6e83a3e55f89344 and origin/main contains it. The user explicitly skipped T7/W6 IQ; W6 remains legacy."
+        },
+        "authority_audit": {
+          "status": "passed",
+          "details": "EQ_60/v1 has a backend compiled manifest, seven deterministic compiled payload hashes, Eq60PackLoader, lint contract, report assets and runtime projection. Raw authoring remains validation-only."
+        },
+        "local": [
+          {
+            "command": "php -l app/Services/ContentPromotion/Eq60CompiledPromotionAuthority.php && php -l app/Services/ContentPromotion/Adapters/Eq60CompiledPromotionAdapter.php && php -l app/Services/ContentPromotion/PromotionAdapterRegistry.php",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test scoped W7 paths",
+            "status": "passed",
+            "details": "Eight scoped PHP files passed."
+          },
+          {
+            "command": "php artisan test tests/Unit/ContentPromotion/Eq60CompiledPromotionAdapterTest.php tests/Unit/ContentPromotion/PromotionAdapterCapabilityTest.php",
+            "status": "passed",
+            "details": "4 tests and 31 assertions passed."
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/ContentPromoteExactPackageCommandTest.php",
+            "status": "passed",
+            "details": "11 tests and 180 assertions passed, including the W7 compiled EQ receipt chain."
+          },
+          {
+            "command": "php artisan test tests/Sre/ContentPromotionAutomationWorkflowTest.php tests/Architecture/ReviewPolicyRegistryTest.php",
+            "status": "passed",
+            "details": "12 tests and 381 assertions passed."
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=exact_package_content_promotion",
+            "status": "passed",
+            "details": "2 tests and 4 assertions passed."
+          },
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && ruby -e YAML.safe_load && git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "command": "GitHub required checks on PR #3510 head 3a1cb4454a1f2d6dbec1d7f053c2d09c9b36118a",
+            "status": "passed",
+            "details": "hygiene, supply-chain, content-pack-build-validate, MBTI legacy/v2, Big Five, Semgrep blocking secrets, and Semgrep SARIF upload passed. verify-staging-parity was skipped."
+          }
+        ]
+      },
+      "failure_reason": null,
+      "resume_policy": "continuous_goal",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "publish_allowed": false,
+      "deploy_allowed": false,
+      "history": [
+        {
+          "at": "2026-08-02T13:25:00Z",
+          "status": "in_progress",
+          "summary": "Initialized W7 EQ compiled result-content adapter after merged W4 and the explicit user skip of W6 IQ. This scope is implementation and tests only; no real promotion, CMS write, publication, runtime activation, discoverability mutation, private assessment read, or deployment was executed."
+        },
+        {
+          "at": "2026-08-02T13:45:00Z",
+          "status": "local_checks_passed",
+          "summary": "W7 compiled-manifest hash verification, lint gate, inactive release staging, exact publication, rollback, receipt chain, registry capability, workflow, review-policy, freeze, JSON/YAML and diff checks passed. No real promotion, CMS write, runtime activation, or deployment was executed."
+        },
+        {
+          "at": "2026-08-02T14:00:00Z",
+          "status": "pr_open",
+          "summary": "Opened PR #3510 after scoped local validation. Required GitHub checks are pending; no production operation was executed."
+        },
+        {
+          "at": "2026-08-02T14:10:00Z",
+          "status": "ready_to_merge",
+          "summary": "All required GitHub checks passed on the current implementation. verify-staging-parity was skipped; no staging or deployment action was performed."
+        }
+      ]
+    },
     "CONTENT-PROMOTION-W3-ARTICLES-ADAPTER-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
