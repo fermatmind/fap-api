@@ -191,17 +191,37 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
             $seoValues = ['seo_title' => $snapshot['seo_title'], 'seo_description' => $snapshot['seo_description'], 'og_title' => $snapshot['seo_title'], 'og_description' => $snapshot['seo_description']];
         }
 
-        return ['article' => ['title' => $snapshot['title'], 'excerpt' => $snapshot['excerpt'], 'content_md' => $snapshot['content_md'], 'content_html' => null, 'source_version_hash' => $candidate->computeSourceVersionHash(), 'published_revision_id' => $revision?->id, 'working_revision_id' => null], 'revision' => ['id' => $revision?->id, 'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED], 'seo' => $seoValues];
+        return ['article' => array_replace($this->articleProjection($article), ['title' => $snapshot['title'], 'excerpt' => $snapshot['excerpt'], 'content_md' => $snapshot['content_md'], 'content_html' => null, 'source_version_hash' => $candidate->computeSourceVersionHash(), 'published_revision_id' => $revision?->id, 'working_revision_id' => null]), 'revision' => ['id' => $revision?->id, 'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED], 'seo' => $seoValues];
     }
 
     /** @param array<string,mixed> $row */
     private function assertExpectedPublishedProjection(Article $article, ArticleTranslationRevision $revision, array $row): void
     {
         $seo = ArticleSeoMeta::query()->withoutGlobalScopes()->where('article_id', $article->id)->first();
-        $actual = ['article' => ['title' => $article->title, 'excerpt' => $article->excerpt, 'content_md' => $article->content_md, 'content_html' => $article->content_html, 'source_version_hash' => $article->source_version_hash, 'published_revision_id' => $article->published_revision_id, 'working_revision_id' => $article->working_revision_id], 'revision' => ['id' => $revision->id, 'revision_status' => $revision->revision_status], 'seo' => $seo instanceof ArticleSeoMeta ? $this->seoState($seo) : []];
+        $actual = ['article' => $this->articleProjection($article), 'revision' => ['id' => $revision->id, 'revision_status' => $revision->revision_status], 'seo' => $seo instanceof ArticleSeoMeta ? $this->seoState($seo) : []];
         if (! hash_equals(PromotionContextFactory::canonicalJson((array) ($row['expected_public_projection'] ?? [])), PromotionContextFactory::canonicalJson($actual))) {
             throw new DomainException('article_promotion_rollback_public_projection_drift');
         }
+    }
+
+    /** @return array<string,mixed> */
+    private function articleProjection(Article $article): array
+    {
+        return [
+            'title' => $article->title,
+            'excerpt' => $article->excerpt,
+            'content_md' => $article->content_md,
+            'content_html' => $article->content_html,
+            'working_revision_id' => $article->working_revision_id,
+            'published_revision_id' => $article->published_revision_id,
+            'status' => $article->status,
+            'is_public' => (bool) $article->is_public,
+            'is_indexable' => (bool) $article->is_indexable,
+            'sitemap_eligible' => (bool) $article->sitemap_eligible,
+            'llms_eligible' => (bool) $article->llms_eligible,
+            'published_at' => $article->published_at?->toISOString(),
+            'source_version_hash' => $article->source_version_hash,
+        ];
     }
 
     /** @return array<string,mixed> */

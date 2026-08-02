@@ -85,6 +85,8 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
         foreach ([
             ['snapshot' => ['title' => '中文'], 'error' => 'article_promotion_cjk_leakage'],
             ['snapshot' => ['seo_title' => '   '], 'error' => 'article_promotion_snapshot_invalid'],
+            ['snapshot' => ['content_md' => '# Heading'], 'error' => 'article_promotion_body_h1_invalid'],
+            ['snapshot' => ['content_md' => 'See /checkout?token=private'], 'error' => 'article_promotion_private_payload_invalid'],
             ['row' => ['private_token' => 'secret'], 'error' => 'article_promotion_private_payload_invalid'],
         ] as $case) {
             try {
@@ -109,6 +111,33 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
         } catch (\DomainException $exception) {
             self::assertSame('article_promotion_foreign_working_revision', $exception->getMessage());
         }
+    }
+
+    public function test_w3_article_rollback_refuses_discoverability_drift_and_translation_revisions_bind_the_canonical_source(): void
+    {
+        $canonical = $this->article('canonical-article');
+        $canonical->forceFill(['locale' => 'zh'])->save();
+        $translated = $this->article('translated-article');
+        $translated->forceFill([
+            'translation_status' => Article::TRANSLATION_STATUS_APPROVED,
+            'source_article_id' => $canonical->id,
+            'translated_from_article_id' => $canonical->id,
+            'source_locale' => 'zh',
+        ])->saveQuietly();
+        $context = $this->context($this->package([$translated]), 1);
+        $adapter = app(PromotionAdapterRegistry::class)->resolve('W3', 'articles');
+        $adapter->draftImport($context);
+        $revision = ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', $translated->id)->latest('id')->firstOrFail();
+        self::assertSame($canonical->refresh()->source_version_hash, $revision->source_version_hash);
+        $published = $adapter->publish($context);
+        $translated->forceFill(['is_indexable' => true])->save();
+        try {
+            $adapter->rollback($context, (string) $published['rollback_reference']);
+            self::fail('Rollback must reject an intervening discoverability change.');
+        } catch (\DomainException $exception) {
+            self::assertSame('article_promotion_rollback_public_projection_drift', $exception->getMessage());
+        }
+        self::assertTrue((bool) $translated->refresh()->is_indexable);
     }
 
     private function article(string $slug): Article

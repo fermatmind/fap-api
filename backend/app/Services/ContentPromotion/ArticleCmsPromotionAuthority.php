@@ -10,7 +10,10 @@ use App\Models\Article;
 use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
+use App\Services\Cms\ArticleBodyHeadingGuard;
+use App\Services\Cms\ArticleTranslationRevisionWorkspace;
 use App\Services\SEO\SeoDiscoverabilityCacheInvalidator;
+use App\Support\OrgContext;
 use DomainException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -26,6 +29,8 @@ final class ArticleCmsPromotionAuthority
     public function __construct(
         private readonly ArticleController $publicApi,
         private readonly SeoDiscoverabilityCacheInvalidator $discoverabilityCache,
+        private readonly ArticleBodyHeadingGuard $articleBodyHeadingGuard,
+        private readonly ArticleTranslationRevisionWorkspace $revisionWorkspace,
     ) {}
 
     /** @return array{targets:list<array<string,mixed>>,package_sha256:string} */
@@ -175,7 +180,7 @@ final class ArticleCmsPromotionAuthority
                 $revision->forceFill(['revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED, 'published_at' => now()])->saveQuietly();
                 $article->forceFill(['title' => $revision->title, 'excerpt' => $revision->excerpt, 'content_md' => $revision->content_md, 'content_html' => null, 'published_revision_id' => $revision->id, 'working_revision_id' => null])->save();
                 $this->syncExistingSeoMeta($article, $revision);
-                ContentReleaseAudit::log('article', $article, 'content_promotion_w3_articles_exact_package', false);
+                $this->logPublication($article);
                 $changed++;
             }
 
@@ -236,9 +241,9 @@ final class ArticleCmsPromotionAuthority
         $snapshot = $target['snapshot'];
         $revisionSourceHash = $article->isSourceArticle()
             ? $this->projectedSourceVersionHash($article, $snapshot)
-            : $article->source_version_hash;
+            : ($this->revisionWorkspace->sourceVersionHashFor($article) ?: $article->source_version_hash);
 
-        return ['org_id' => $article->org_id, 'article_id' => $article->id, 'source_article_id' => $article->source_article_id ?: $article->id, 'translation_group_id' => $article->translation_group_id, 'locale' => 'en', 'source_locale' => $article->source_locale ?: 'en', 'revision_number' => ((int) ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', $article->id)->max('revision_number')) + 1, 'revision_status' => ArticleTranslationRevision::STATUS_APPROVED, 'source_version_hash' => $revisionSourceHash, 'translated_from_version_hash' => $article->isSourceArticle() ? $revisionSourceHash : $article->translated_from_version_hash, 'supersedes_revision_id' => $article->working_revision_id ?: $article->published_revision_id, 'authority_asset_key' => $target['asset_key'], 'authority_source_package' => 'content-promotion/W3/articles', 'authority_source_hash' => $target['source_hash'], 'authority_package_sha256' => $context->packageSha256, 'authority_metadata_json' => ['snapshot' => $snapshot, 'article_state_sha256' => $this->articleStateHash($article)], 'title' => $snapshot['title'], 'excerpt' => $snapshot['excerpt'], 'content_md' => $snapshot['content_md'], 'seo_title' => $snapshot['seo_title'], 'seo_description' => $snapshot['seo_description'], 'approved_at' => now()];
+        return ['org_id' => $article->org_id, 'article_id' => $article->id, 'source_article_id' => $article->source_article_id ?: $article->id, 'translation_group_id' => $article->translation_group_id, 'locale' => 'en', 'source_locale' => $article->source_locale ?: 'en', 'revision_number' => ((int) ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', $article->id)->max('revision_number')) + 1, 'revision_status' => ArticleTranslationRevision::STATUS_APPROVED, 'source_version_hash' => $revisionSourceHash, 'translated_from_version_hash' => $article->isSourceArticle() ? $revisionSourceHash : ($article->translated_from_version_hash ?: $revisionSourceHash), 'supersedes_revision_id' => $article->working_revision_id ?: $article->published_revision_id, 'authority_asset_key' => $target['asset_key'], 'authority_source_package' => 'content-promotion/W3/articles', 'authority_source_hash' => $target['source_hash'], 'authority_package_sha256' => $context->packageSha256, 'authority_metadata_json' => ['snapshot' => $snapshot, 'article_state_sha256' => $this->articleStateHash($article)], 'title' => $snapshot['title'], 'excerpt' => $snapshot['excerpt'], 'content_md' => $snapshot['content_md'], 'seo_title' => $snapshot['seo_title'], 'seo_description' => $snapshot['seo_description'], 'approved_at' => now()];
     }
 
     /** @param array<string,mixed> $snapshot */
@@ -254,6 +259,11 @@ final class ArticleCmsPromotionAuthority
         if (preg_match('/[\p{Han}]/u', implode("\n", $snapshot)) === 1) {
             throw new DomainException('article_promotion_cjk_leakage');
         }
+        try {
+            $this->articleBodyHeadingGuard->assertNoBodyH1($snapshot['content_md']);
+        } catch (\InvalidArgumentException $exception) {
+            throw new DomainException('article_promotion_body_h1_invalid', previous: $exception);
+        }
     }
 
     private function assertNoPrivatePayload(mixed $value, ?string $key = null): void
@@ -261,7 +271,7 @@ final class ArticleCmsPromotionAuthority
         if (is_string($key) && preg_match('/(?:attempt|report|order|payment|token|user|score|percentile)/i', $key) === 1) {
             throw new DomainException('article_promotion_private_payload_invalid');
         }
-        if (is_string($value) && preg_match('~/(?:attempts?|results?|reports?|orders?|payments?|recovery|private)(?:/|[?#\s]|$)|[?&](?:token|attempt_id|report_id|order_id|payment_id)=~i', $value) === 1) {
+        if (is_string($value) && preg_match('~/(?:account|attempts?|checkout|history|orders?|payments?|pay|private|recovery|reports?|results?|share)(?:/|[?#\s]|$)|[?&](?:token|attempt(?:_id)?|report(?:_id)?|order(?:_id)?|payment(?:_id)?|checkout(?:_id)?|share(?:_id)?|user(?:_id)?)=~i', $value) === 1) {
             throw new DomainException('article_promotion_private_payload_invalid');
         }
         if (is_array($value)) {
@@ -323,6 +333,18 @@ final class ArticleCmsPromotionAuthority
     public function invalidateDiscoverabilityCaches(): void
     {
         $this->discoverabilityCache->flushArticleDiscoverabilityCaches();
+    }
+
+    private function logPublication(Article $article): void
+    {
+        $orgContext = app(OrgContext::class);
+        $prior = [$orgContext->orgId(), $orgContext->userId(), $orgContext->role(), $orgContext->anonId(), $orgContext->contextKind()];
+        $orgContext->set((int) $article->org_id, $prior[1], $prior[2], $prior[3], OrgContext::deriveContextKind((int) $article->org_id));
+        try {
+            ContentReleaseAudit::log('article', $article, 'content_promotion_w3_articles_exact_package', false);
+        } finally {
+            $orgContext->set($prior[0], $prior[1], $prior[2], $prior[3], $prior[4]);
+        }
     }
 
     private function syncExistingSeoMeta(Article $article, ArticleTranslationRevision $revision): void
