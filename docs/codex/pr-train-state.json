@@ -103142,7 +103142,7 @@
     "base": "main",
     "branch": "codex/en-parity-w4-riasec-dimension-assets-01",
     "depends_on": ["EN-PARITY-W4-RIASEC-RUNTIME-LOCALE-01"],
-    "status": "github_checks_pending",
+    "status": "merge_ready",
     "commit_sha": "f524e2ab047c32b0542936a8ced1586a304bd945",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3474",
     "checks": {
@@ -103487,7 +103487,7 @@
     "branch": "codex/riasec-result-v2-production-runtime-02",
     "title": "RIASEC-RESULT-V2-PRODUCTION-RUNTIME-02: enable fail-closed production result runtime",
     "depends_on": [],
-    "status": "github_checks_pending",
+    "status": "merged",
     "commit_sha": "2dca2109562ffa9c6af90bf7663468639650b011",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3499",
     "checks": {
@@ -103496,12 +103496,12 @@
         "evidence": "Operator explicitly authorized RIASEC-RESULT-V2-PRODUCTION-RUNTIME-02 implementation and the normal PR lifecycle while excluding production deployment, import execution, and environment writes."
       },
       "local_validation": {"status": "passed", "evidence": "RIASEC focused suite passed 92 tests / 2042 assertions; dedicated rollout/runtime tests passed 13 tests / 101 assertions; scoped Pint, route listing, fresh SQLite migration, YAML/JSON parsing, diff check, and the complete ci_verify_mbti gate passed. The legacy verify_riasec_launch script was also probed and remains incompatible with the repository's intentional public healthz 404 policy; no production probe was treated as release evidence."},
-      "github_required_checks": {"status": "pending", "evidence": null}
+      "github_required_checks": {"status": "passed", "evidence": "GitHub reported no required checks for the exact head; merge state was CLEAN and MERGEABLE before squash merge."}
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-08-02T06:13:55Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -103524,8 +103524,64 @@
         "at": "2026-08-02T06:30:00Z",
         "status": "github_checks_pending",
         "note": "PR #3499 opened from commit 2dca2109562ffa9c6af90bf7663468639650b011; waiting for required GitHub checks before squash merge."
+      },
+      {
+        "at": "2026-08-02T06:31:00Z",
+        "status": "merged",
+        "note": "PR #3499 squash-merged as db4b1bb1aaa82ace265172a1fa620d5fe4a2b6db after GitHub reported CLEAN/MERGEABLE with no required checks; remote/local branch and temporary worktree were removed."
       }
     ],
-    "updated_at": "2026-08-02T06:30:00Z"
+    "updated_at": "2026-08-02T06:31:00Z"
+  },
+  "RIASEC-RESULT-V2-PRODUCTION-SNAPSHOT-SMOKE-02": {
+    "id": "RIASEC-RESULT-V2-PRODUCTION-SNAPSHOT-SMOKE-02",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/riasec-result-v2-production-snapshot-smoke-02",
+    "title": "RIASEC-RESULT-V2-PRODUCTION-SNAPSHOT-SMOKE-02: bind immutable v0_2 content and read-only smoke",
+    "depends_on": ["RIASEC-RESULT-V2-PRODUCTION-RUNTIME-02"],
+    "status": "github_checks_pending",
+    "commit_sha": "d9c380701d889831794bbc94b120b078519f60ed",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3500",
+    "checks": {
+      "authorization": {"status": "passed", "evidence": "Operator explicitly authorized the dependent v0_2 snapshot, approval, dry-run import readiness, and smoke implementation while excluding all production actions."},
+      "dependency": {"status": "passed", "evidence": "RIASEC runtime PR #3499 merged as db4b1bb1aaa82ace265172a1fa620d5fe4a2b6db."},
+      "local_validation": {"status": "passed", "evidence": "RIASEC focused runtime/assessment suite passed 93 tests / 2051 assertions; dedicated v0_2 import and smoke tests passed 6 tests / 47 assertions; read-only smoke passed for riasec_60 and riasec_140 with full payload, locked/free omission, private-field filtering, and emergency legacy fallback; exact dry-run import produced the bound confirmation token with zero writes; scoped Pint, route listing, fresh SQLite migration, JSON/YAML parsing, diff check, and the complete ci_verify_mbti gate passed. The legacy verify_riasec_launch probe returned exit 0 while its public endpoint remained intentionally 404 and was not treated as production release evidence."},
+      "github_required_checks": {"status": "passed", "evidence": "GitHub reported no required checks for the exact PR head; merge state is CLEAN and MERGEABLE."}
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-08-02T06:32:00Z",
+        "status": "in_progress",
+        "note": "Started from merged origin/main in an isolated worktree. v0_1 history remains immutable; no production import, deploy, rollout, cache refresh, or environment write is authorized."
+      },
+      {
+        "at": "2026-08-02T06:35:00Z",
+        "status": "local_verified",
+        "note": "All scoped local checks passed, including immutable file-hash verification, exact-token dry-run with zero writes, read-only 60/140 smoke, and the complete CI gate. Production import and rollout remain unexecuted and separately gated."
+      },
+      {
+        "at": "2026-08-02T06:37:00Z",
+        "status": "github_checks_pending",
+        "note": "PR #3500 opened from exact local-verified head d9c380701d889831794bbc94b120b078519f60ed; waiting for GitHub mergeability and required-check resolution."
+      },
+      {
+        "at": "2026-08-02T06:38:00Z",
+        "status": "merge_ready",
+        "note": "GitHub reported no required checks; PR #3500 is CLEAN and MERGEABLE."
+      }
+    ],
+    "updated_at": "2026-08-02T06:38:00Z"
   }
 }

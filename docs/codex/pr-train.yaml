@@ -48362,7 +48362,7 @@ prs:
     base: main
     branch: codex/riasec-result-v2-production-runtime-02
     title: "RIASEC-RESULT-V2-PRODUCTION-RUNTIME-02: enable fail-closed production result runtime"
-    status: github_checks_pending
+    status: merged
     depends_on: []
     train_scope: riasec_result_page_v2_production_runtime
     scope:
@@ -48403,3 +48403,58 @@ prs:
     deploy_allowed: false
     content_authority: backend RIASEC report composer and immutable approved production snapshots
     repository_rule_impact: production RIASEC V2 remains fail closed until every independently controlled release gate passes
+
+  - id: RIASEC-RESULT-V2-PRODUCTION-SNAPSHOT-SMOKE-02
+    repo: fap-api
+    base: main
+    branch: codex/riasec-result-v2-production-snapshot-smoke-02
+    title: "RIASEC-RESULT-V2-PRODUCTION-SNAPSHOT-SMOKE-02: bind immutable v0_2 content and read-only smoke"
+    status: merge_ready
+    depends_on:
+      - RIASEC-RESULT-V2-PRODUCTION-RUNTIME-02
+    train_scope: riasec_result_page_v2_production_snapshot_smoke
+    scope:
+      - Add an immutable v0_2 snapshot binding the current zh-CN RIASEC runtime content and selector files by SHA-256.
+      - Bind production-import approval, rollback target, exact form/locale/public-tenant scope, and a dry-run-only import artifact.
+      - Add a read-only smoke command for 60/140 full payloads, locked omission, private-field filtering, and emergency legacy fallback.
+    allowed_paths:
+      - backend/app/Console/Commands/RiasecResultPageV2ProductionImportCommand.php
+      - backend/app/Console/Commands/RiasecResultPageV2ProductionSmokeCommand.php
+      - backend/app/Console/Kernel.php
+      - backend/app/Services/Riasec/RiasecResultPageV2ProductionImportExecutor.php
+      - backend/app/Services/Riasec/RiasecResultPageV2ProductionSmokeVerifier.php
+      - backend/content_assets/riasec/result_page_v2/governance/production_approval_evidence/v0_2/**
+      - backend/content_assets/riasec/result_page_v2/qa/production_import_gate_dry_run_authorized_snapshot/v0_2/**
+      - backend/content_assets/riasec/result_page_v2/releases/production_approved/v0_2/**
+      - backend/content_assets/riasec/result_page_v2/releases/v0_2/**
+      - backend/tests/Feature/Console/RiasecResultPageV2ProductionImportCommandTest.php
+      - backend/tests/Feature/Console/RiasecResultPageV2ProductionSmokeCommandTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Execute production import, deploy, write production environment configuration, refresh production caches, or activate rollout.
+      - Modify the 2026-06-22 v0_1 snapshot/evidence, routes, migrations, authentication, MBTI, Big Five, EQ, Enneagram, frontend, mini-program, SEO, sitemap, llms, or CMS public content.
+      - Persist or log raw attempt, user, anonymous, organization, order, or payment identifiers.
+    validation:
+      - cd backend && php artisan test --filter='RiasecResultPage|RiasecAssessmentFlow|RolloutGate|ProductionRuntime' --no-ansi
+      - cd backend && php artisan test tests/Feature/Console/RiasecResultPageV2ProductionImportCommandTest.php tests/Feature/Console/RiasecResultPageV2ProductionSmokeCommandTest.php --no-ansi
+      - cd backend && php artisan riasec:result-page-v2-production-import <exact v0_2 hashes> --json
+      - cd backend && php artisan riasec:result-page-v2-production-smoke --json
+      - cd backend && vendor/bin/pint --test <touched-php-files>
+      - cd backend && php artisan route:list --path=api --except-vendor
+      - cd backend && php artisan migrate --env=testing --force
+      - cd backend && bash scripts/verify_riasec_launch.sh
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - git diff --check
+      - exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: immutable backend RIASEC v0_2 snapshot and exact file hashes
+    repository_rule_impact: import remains dry-run by default and rollout remains an independently approved production action

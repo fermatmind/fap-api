@@ -25,7 +25,7 @@ final class RiasecResultPageV2ProductionImportCommand extends Command
         {--allowlist=owner_manual_import_only : Exact comma-separated allowlist scope}
         {--rollback-kill-switch-confirmed : Required for pass}
         {--kill-switch-ref=riasec_result_page_v2.production_emergency_disabled : Exact kill switch reference}
-        {--post-deploy-smoke-procedure-id=riasec_result_page_v2_post_deploy_smoke_v0_1 : Exact post-deploy smoke procedure id}
+        {--post-deploy-smoke-procedure-id=riasec_result_page_v2_post_deploy_smoke_v0_2 : Exact post-deploy smoke procedure id}
         {--execute : Execute the controlled production import write}
         {--confirm-execute= : Required exact token for --execute}
         {--output-dir= : Optional directory for riasec_production_import_summary.json}

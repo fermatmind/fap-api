@@ -1,0 +1,46 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.production_import_human_approval.v0.1",
+  "approval_id": "riasec_result_page_v2_production_import_approval_v0_2",
+  "approval_type": "production_import",
+  "decision": "GO",
+  "approved_by": "FermatMind operator",
+  "approver_role": "operator",
+  "approved_at": "2026-08-02T06:30:00Z",
+  "approval_channel": "codex_execution_goal",
+  "approval_evidence_ref": "RIASEC-RESULT-V2-PRODUCTION-SNAPSHOT-SMOKE-02",
+  "source_release_snapshot_id": "riasec_result_page_v2_v0_2",
+  "source_release_snapshot_path": "backend/content_assets/riasec/result_page_v2/releases/v0_2/riasec_result_page_v2_release_snapshot_v0_2.json",
+  "source_release_snapshot_sha256": "428f6ea8673ef7b5f7129f31561fbb3293d503f7eb417f233771c4526158307a",
+  "approved_release_snapshot_id": "riasec_result_page_v2_prod_approved_v0_2",
+  "approved_release_snapshot_path": "backend/content_assets/riasec/result_page_v2/releases/production_approved/v0_2/riasec_result_page_v2_prod_approved_v0_2.json",
+  "approved_release_snapshot_sha256": "0b0787e53c6bba62c97f049d745aca7985a2b9d80685d01fb3b52766aa3a2e1a",
+  "scope": {
+    "tenant_ids": ["single_owner_global"],
+    "runtime_tenant_ids": ["0"],
+    "form_codes": ["riasec_60", "riasec_140"],
+    "locales": ["zh-CN"],
+    "allowlist": ["owner_manual_import_only"],
+    "percentage": 0,
+    "max_percentage": 0
+  },
+  "rollback_kill_switch_confirmed": true,
+  "kill_switch_ref": "riasec_result_page_v2.production_emergency_disabled",
+  "rollback_snapshot_id": "riasec_result_page_v2_prod_approved_2026_06_22_01",
+  "post_deploy_smoke_procedure_id": "riasec_result_page_v2_post_deploy_smoke_v0_2",
+  "private_payload_leak_ack": true,
+  "staging_only_rejection_ack": true,
+  "rollout_remains_separately_gated_ack": true,
+  "authorization_source": {
+    "operator_confirmation_text": "Implement the approved RIASEC v0_2 snapshot, controlled import readiness, and read-only smoke; do not deploy, import, or write production configuration.",
+    "codex_filled_human_identity_or_scope": false
+  },
+  "negative_guarantees": {
+    "cms_write_performed": false,
+    "production_import_performed": false,
+    "runtime_change_performed": false,
+    "environment_change_performed": false,
+    "production_rollout_performed": false,
+    "production_rollout_enabled": false,
+    "deployment_performed": false
+  }
+}

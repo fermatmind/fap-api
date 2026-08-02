@@ -118,18 +118,18 @@ final class RiasecResultPageV2ProductionImportCommandTest extends TestCase
         $baseline = $this->expectedConfirmToken();
 
         $this->assertNotSame($baseline, RiasecResultPageV2ProductionImportExecutor::expectedConfirmExecuteToken(
-            'riasec_result_page_v2_prod_approved_2026_06_22_01',
+            'riasec_result_page_v2_prod_approved_v0_2',
             str_repeat('a', 64),
-            'riasec_result_page_v2_production_import_approval_2026_06_22_01',
+            'riasec_result_page_v2_production_import_approval_v0_2',
             str_repeat('b', 64),
             str_repeat('c', 64),
         ));
         $this->assertNotSame($baseline, RiasecResultPageV2ProductionImportExecutor::expectedConfirmExecuteToken(
             'riasec_result_page_v2_prod_approved_2026_06_22_01',
-            '999dc22a4c01b50891b342d75713a2fda1ce99b79933470f91fe1073744e0741',
+            '0b0787e53c6bba62c97f049d745aca7985a2b9d80685d01fb3b52766aa3a2e1a',
             'different-approval',
-            '1fecb849e2ee47d2234631ad10614e327463928be2a390a0836552acdff23095',
-            '038f8118a992caf58112ff06e225272bfdaeda603e4d5f26ad3ac30aab89b55d',
+            '71c0c58b30a39caee1d0d7aa1418cacd34e4d999bb6a1e16ec0f6477fa998fba',
+            '828736c22aad23b6a45c8871ad1153a68140c05fb38894ba09b751e53037693e',
         ));
     }
 
@@ -139,29 +139,29 @@ final class RiasecResultPageV2ProductionImportCommandTest extends TestCase
     private function baseOptions(): array
     {
         return [
-            '--approved-snapshot-id' => 'riasec_result_page_v2_prod_approved_2026_06_22_01',
-            '--approved-snapshot-sha256' => '999dc22a4c01b50891b342d75713a2fda1ce99b79933470f91fe1073744e0741',
-            '--approval-evidence-id' => 'riasec_result_page_v2_production_import_approval_2026_06_22_01',
-            '--approval-evidence-sha256' => '1fecb849e2ee47d2234631ad10614e327463928be2a390a0836552acdff23095',
-            '--dry-run-artifact-sha256' => '038f8118a992caf58112ff06e225272bfdaeda603e4d5f26ad3ac30aab89b55d',
+            '--approved-snapshot-id' => 'riasec_result_page_v2_prod_approved_v0_2',
+            '--approved-snapshot-sha256' => '0b0787e53c6bba62c97f049d745aca7985a2b9d80685d01fb3b52766aa3a2e1a',
+            '--approval-evidence-id' => 'riasec_result_page_v2_production_import_approval_v0_2',
+            '--approval-evidence-sha256' => '71c0c58b30a39caee1d0d7aa1418cacd34e4d999bb6a1e16ec0f6477fa998fba',
+            '--dry-run-artifact-sha256' => '828736c22aad23b6a45c8871ad1153a68140c05fb38894ba09b751e53037693e',
             '--tenant-ids' => 'single_owner_global',
             '--form-codes' => 'riasec_60,riasec_140',
             '--locales' => 'zh-CN',
             '--allowlist' => 'owner_manual_import_only',
             '--rollback-kill-switch-confirmed' => true,
             '--kill-switch-ref' => 'riasec_result_page_v2.production_emergency_disabled',
-            '--post-deploy-smoke-procedure-id' => 'riasec_result_page_v2_post_deploy_smoke_v0_1',
+            '--post-deploy-smoke-procedure-id' => 'riasec_result_page_v2_post_deploy_smoke_v0_2',
         ];
     }
 
     private function expectedConfirmToken(): string
     {
         return RiasecResultPageV2ProductionImportExecutor::expectedConfirmExecuteToken(
-            'riasec_result_page_v2_prod_approved_2026_06_22_01',
-            '999dc22a4c01b50891b342d75713a2fda1ce99b79933470f91fe1073744e0741',
-            'riasec_result_page_v2_production_import_approval_2026_06_22_01',
-            '1fecb849e2ee47d2234631ad10614e327463928be2a390a0836552acdff23095',
-            '038f8118a992caf58112ff06e225272bfdaeda603e4d5f26ad3ac30aab89b55d',
+            'riasec_result_page_v2_prod_approved_v0_2',
+            '0b0787e53c6bba62c97f049d745aca7985a2b9d80685d01fb3b52766aa3a2e1a',
+            'riasec_result_page_v2_production_import_approval_v0_2',
+            '71c0c58b30a39caee1d0d7aa1418cacd34e4d999bb6a1e16ec0f6477fa998fba',
+            '828736c22aad23b6a45c8871ad1153a68140c05fb38894ba09b751e53037693e',
         );
     }
 
