@@ -142,10 +142,10 @@
     "EN-PARITY-W5-ENNEAGRAM-PRIVATE-CONTENT-PACKAGE-V2-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "in_progress",
+      "status": "pr_open",
       "branch": "codex/en-parity-w5-enneagram-private-content-package-v2-01",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "8623f8f19b4912ad9ceb355f67f5fc9db1510cbe",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3518",
       "checks": {
         "dependencies": {
           "status": "passed",
@@ -193,6 +193,11 @@
           "at": "2026-08-03T00:00:00+08:00",
           "status": "local_checks_passed",
           "summary": "Frozen package SHA 8a1653b5053b7ab910957543c8bb831b8c0759aaec82a7200e5c13c08a5e98d5 and external W9 PASS evidence SHA 6516d035cff4aa59e97a85eff2b28b384b5501b6037b0f7c4caaeca5070e64f2 passed exact inventory, identity, privacy, CJK, 36-pair, surface, adapter preflight, contract, formatting, syntax, JSON/YAML, reproducibility, diff, and scope validation. No production operation was executed."
+        },
+        {
+          "at": "2026-08-03T00:00:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #3518 at package commit 8623f8f19b4912ad9ceb355f67f5fc9db1510cbe. Required GitHub checks, including the Enneagram W9 exact-package gate embedded in verify-mbti, are pending; no production operation was executed."
         }
       ]
     },
