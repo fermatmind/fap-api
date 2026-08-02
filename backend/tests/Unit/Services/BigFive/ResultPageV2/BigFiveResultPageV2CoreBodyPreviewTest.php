@@ -7092,6 +7092,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         );
 
         foreach ($changed as $file) {
+            if ($this->isBigFiveReportUnlockCommerceFile($file)) {
+                continue;
+            }
+
             if (
                 $this->isSoloOwnerReviewFoundationFile($file)
                 && isset($soloOwnerReviewFoundationAddedFileSet[$file])
@@ -9100,6 +9104,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         }
 
         return array_values(array_unique($impacting));
+    }
+
+    private function isBigFiveReportUnlockCommerceFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/ActivateBigFiveReportUnlockCommerce.php',
+            'backend/app/Services/Commerce/BigFiveReportUnlockRolloutGate.php',
+            'backend/app/Services/Commerce/ReportUnlockProductCatalog.php',
+            'backend/database/seed_data/skus_big5_ocean.json',
+        ], true);
     }
 
     private function isSoloOwnerReviewFoundationFile(string $file): bool

@@ -29,6 +29,7 @@ final class RewardedAdUnlockService
     public function __construct(
         private readonly EntitlementManager $entitlements,
         private readonly ReportUnlockOptionResolver $unlockOptions,
+        private readonly ReportUnlockProductCatalog $products,
     ) {}
 
     /**
@@ -205,11 +206,15 @@ final class RewardedAdUnlockService
                 return $eligibility;
             }
 
+            $contract = $this->products->forScale((string) $attempt->scale_code);
+            if ($contract === null) {
+                return $this->failure(422, 'REWARDED_AD_UNAVAILABLE', 'rewarded-ad unlock contract is unavailable.');
+            }
             $grant = $this->entitlements->grantAttemptUnlock(
                 (int) $attempt->org_id,
                 $actor['user_id'],
                 $actor['anon_id'],
-                'MBTI_REPORT_FULL',
+                (string) $contract['benefit_code'],
                 (string) $attempt->id,
                 null,
                 null,
@@ -265,7 +270,8 @@ final class RewardedAdUnlockService
         if (ReportAccess::isIqScale($scaleCode)) {
             return $this->failure(403, 'IQ_REWARDED_AD_DISABLED', 'rewarded-ad unlock is unavailable for IQ.');
         }
-        if ($scaleCode !== ReportAccess::SCALE_MBTI) {
+        $contract = $this->products->forScale($scaleCode);
+        if ($contract === null) {
             return $this->failure(403, 'REWARDED_AD_ROLLOUT_DISABLED', 'rewarded-ad unlock is unavailable for this scale.');
         }
         if (! Result::query()->where('org_id', (int) $attempt->org_id)->where('attempt_id', (string) $attempt->id)->exists()) {
@@ -276,7 +282,7 @@ final class RewardedAdUnlockService
             $actor['user_id'],
             $actor['anon_id'],
             (string) $attempt->id,
-            'MBTI_REPORT_FULL',
+            (string) $contract['benefit_code'],
         )) {
             return $this->failure(409, 'ALREADY_UNLOCKED', 'report is already unlocked.');
         }
@@ -288,7 +294,9 @@ final class RewardedAdUnlockService
             ReportAccess::UNLOCK_STAGE_LOCKED,
             ReportAccess::UNLOCK_SOURCE_NONE,
             [],
-            []
+            [],
+            null,
+            $attempt,
         );
         $option = (array) data_get($contract, 'unlock_options.0', []);
         if (($option['method'] ?? null) !== ReportAccess::UNLOCK_SOURCE_REWARDED_AD || ($option['available'] ?? false) !== true) {
@@ -381,7 +389,7 @@ final class RewardedAdUnlockService
         $query = DB::table('benefit_grants')
             ->where('org_id', (int) $attempt->org_id)
             ->where('attempt_id', (string) $attempt->id)
-            ->where('benefit_code', 'MBTI_REPORT_FULL')
+            ->where('benefit_code', (string) data_get($this->products->forScale((string) $attempt->scale_code), 'benefit_code', ''))
             ->where('status', 'active')
             ->where(function ($query): void {
                 $query->whereNull('expires_at')->orWhere('expires_at', '>', now());

@@ -105,6 +105,56 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
         );
     }
 
+    public function test_big_five_payment_uses_the_published_product_and_499_contract(): void
+    {
+        $this->configureProvider();
+        config()->set('report_unlock.big5_rollout.mode', 'allowlist_only');
+        config()->set('report_unlock.big5_rollout.allowed_anon_ids', ['anon_vpay_big5']);
+        (new ScaleRegistrySeeder)->run();
+        $this->setBigFivePaywallMode('full');
+        $attemptId = $this->createAttempt(true, 'anon_vpay_big5', 'BIG5_OCEAN');
+        $this->seedBigFiveSku();
+
+        $eligibility = app(WechatMiniVirtualPaymentService::class)->validateOrderEligibility(
+            0,
+            null,
+            'anon_vpay_big5',
+            $attemptId,
+            'SKU_BIG5_FULL_REPORT_499',
+            1,
+        );
+        $this->assertTrue((bool) ($eligibility['ok'] ?? false));
+
+        $created = app(OrderManager::class)->createOrder(
+            0,
+            null,
+            'anon_vpay_big5',
+            'SKU_BIG5_FULL_REPORT_499',
+            1,
+            $attemptId,
+            WechatMiniVirtualGateway::PROVIDER,
+            'idem-vpay-big5-contract',
+            null,
+            null,
+            [],
+            [],
+            ['channel' => 'wechat_miniapp'],
+        );
+        $this->assertTrue((bool) ($created['ok'] ?? false));
+        Http::fake([
+            'https://api.weixin.qq.com/sns/jscode2session*' => Http::response([
+                'openid' => 'openid-big5-contract',
+                'session_key' => 'session-key-big5-contract',
+            ]),
+        ]);
+
+        $payment = app(WechatMiniVirtualPaymentService::class)->createPaymentAction($created['order'], 'wx-big5-code');
+        $this->assertTrue((bool) ($payment['ok'] ?? false));
+        $signData = json_decode((string) data_get($payment, 'pay.params.signData'), true, flags: JSON_THROW_ON_ERROR);
+        $this->assertSame('BigFive', $signData['productId']);
+        $this->assertSame(499, $signData['goodsPrice']);
+    }
+
     public function test_callback_signature_and_payload_normalization_are_provider_specific(): void
     {
         $this->configureProvider();
@@ -346,39 +396,44 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
             'product_id' => 'mbti-report-full-sandbox',
             'sku' => 'MBTI_REPORT_FULL',
             'price_cents' => 499,
+            'products' => [
+                'BIG5_OCEAN' => [
+                    'product_id' => 'BigFive',
+                ],
+            ],
             'http_timeout_seconds' => 2,
         ]);
     }
 
-    private function createAttempt(bool $withResult = false, string $anonId = 'anon_vpay_contract'): string
+    private function createAttempt(bool $withResult = false, string $anonId = 'anon_vpay_contract', string $scaleCode = 'MBTI'): string
     {
         $attempt = Attempt::query()->create([
             'id' => (string) Str::uuid(),
             'org_id' => 0,
             'anon_id' => $anonId,
-            'scale_code' => 'MBTI',
+            'scale_code' => $scaleCode,
             'scale_version' => 'v0.3',
             'region' => 'CN_MAINLAND',
             'locale' => 'zh-CN',
-            'question_count' => 60,
+            'question_count' => $scaleCode === 'BIG5_OCEAN' ? 120 : 60,
             'answers_summary_json' => ['stage' => 'seed'],
             'client_platform' => 'test',
             'channel' => 'wechat_miniapp',
             'started_at' => now()->subMinutes(3),
             'submitted_at' => now(),
-            'pack_id' => 'MBTI',
+            'pack_id' => $scaleCode,
             'dir_version' => 'v1',
             'content_package_version' => 'v1',
-            'scoring_spec_version' => 'mbti_spec_v1',
+            'scoring_spec_version' => strtolower($scaleCode).'_spec_v1',
         ]);
         if ($withResult) {
             Result::query()->create([
                 'id' => (string) Str::uuid(),
                 'org_id' => 0,
                 'attempt_id' => (string) $attempt->id,
-                'scale_code' => 'MBTI',
+                'scale_code' => $scaleCode,
                 'scale_version' => 'v0.3',
-                'type_code' => 'INTJ-A',
+                'type_code' => $scaleCode === 'MBTI' ? 'INTJ-A' : 'BIG5',
                 'scores_json' => [
                     'EI' => ['a' => 10, 'b' => 10, 'neutral' => 0, 'sum' => 0, 'total' => 20],
                     'SN' => ['a' => 10, 'b' => 10, 'neutral' => 0, 'sum' => 0, 'total' => 20],
@@ -388,9 +443,9 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
                 ],
                 'scores_pct' => ['EI' => 50, 'SN' => 50, 'TF' => 50, 'JP' => 50, 'AT' => 50],
                 'axis_states' => ['EI' => 'clear', 'SN' => 'clear', 'TF' => 'clear', 'JP' => 'clear', 'AT' => 'clear'],
-                'pack_id' => 'MBTI',
+                'pack_id' => $scaleCode,
                 'dir_version' => 'v1',
-                'scoring_spec_version' => 'mbti_spec_v1',
+                'scoring_spec_version' => strtolower($scaleCode).'_spec_v1',
                 'report_engine_version' => 'v1',
                 'is_valid' => true,
                 'computed_at' => now(),
@@ -414,6 +469,36 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
             'is_active' => true,
             'meta_json' => null,
             'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
+
+    private function seedBigFiveSku(): void
+    {
+        DB::table('skus')->updateOrInsert(['sku' => 'SKU_BIG5_FULL_REPORT_499'], [
+            'org_id' => 0,
+            'scale_code' => 'BIG5_OCEAN',
+            'kind' => 'report_unlock',
+            'unit_qty' => 1,
+            'benefit_code' => 'BIG5_FULL_REPORT',
+            'scope' => 'attempt',
+            'price_cents' => 499,
+            'currency' => 'CNY',
+            'is_active' => true,
+            'meta_json' => json_encode(['effective_default' => true]),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
+
+    private function setBigFivePaywallMode(string $mode): void
+    {
+        $scale = DB::table('scales_registry')->where('org_id', 0)->where('code', 'BIG5_OCEAN')->first();
+        $capabilities = json_decode((string) ($scale->capabilities_json ?? '{}'), true);
+        $capabilities = is_array($capabilities) ? $capabilities : [];
+        $capabilities['paywall_mode'] = $mode;
+        DB::table('scales_registry')->where('org_id', 0)->where('code', 'BIG5_OCEAN')->update([
+            'capabilities_json' => json_encode($capabilities, JSON_UNESCAPED_SLASHES),
             'updated_at' => now(),
         ]);
     }

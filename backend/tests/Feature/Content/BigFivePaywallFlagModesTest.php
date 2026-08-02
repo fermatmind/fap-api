@@ -79,6 +79,7 @@ final class BigFivePaywallFlagModesTest extends TestCase
         $anonId = 'anon_big5_paywall_full';
         $token = $this->issueAnonToken($anonId);
         $attemptId = $this->createSubmittedBigFiveAttemptWithResult($anonId);
+        $this->enableBigFiveCommerceForAttempt($attemptId);
         $headers = [
             'X-Anon-Id' => $anonId,
             'Authorization' => 'Bearer '.$token,
@@ -180,6 +181,24 @@ final class BigFivePaywallFlagModesTest extends TestCase
                 'capabilities_json' => json_encode($caps, JSON_UNESCAPED_UNICODE),
                 'updated_at' => now(),
             ]);
+    }
+
+    private function enableBigFiveCommerceForAttempt(string $attemptId): void
+    {
+        config()->set('report_unlock.rollout_scales', ['MBTI', 'BIG5_OCEAN']);
+        config()->set('report_unlock.big5_rollout', [
+            'mode' => 'allowlist_only',
+            'percentage' => 0,
+            'max_percentage' => 10,
+            'emergency_disabled' => false,
+            'allowed_attempt_ids' => [$attemptId],
+            'allowed_user_ids' => [],
+            'allowed_anon_ids' => [],
+            'allowed_org_ids' => [],
+            'allowed_tenant_ids' => ['0'],
+            'allowed_form_codes' => ['big5_90', 'big5_120'],
+            'allowed_locales' => ['zh-CN'],
+        ]);
     }
 
     private function issueAnonToken(string $anonId): string

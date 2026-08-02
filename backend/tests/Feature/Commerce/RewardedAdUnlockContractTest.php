@@ -179,6 +179,38 @@ final class RewardedAdUnlockContractTest extends TestCase
         $this->assertSame(1, DB::table('benefit_grants')->where('attempt_id', $attemptId)->where('status', 'active')->count());
     }
 
+    public function test_big_five_incomplete_ad_stays_locked_and_completed_ad_grants_only_big_five_access(): void
+    {
+        config()->set('report_unlock.big5_rollout.mode', 'allowlist_only');
+        config()->set('report_unlock.big5_rollout.allowed_anon_ids', ['anon_big5_rewarded']);
+        $attemptId = $this->createAttempt('anon_big5_rewarded', 'BIG5_OCEAN');
+        $headers = $this->headersFor('anon_big5_rewarded');
+
+        $sessionId = (string) $this->withHeaders($headers)
+            ->postJson('/api/v0.3/attempts/'.$attemptId.'/rewarded-ad-sessions', ['ad_unit_id' => self::AD_UNIT_ID])
+            ->assertOk()
+            ->json('session.id');
+
+        $this->withHeaders($headers)
+            ->postJson('/api/v0.3/attempts/'.$attemptId.'/rewarded-ad-sessions/'.$sessionId.'/complete', [
+                'ad_unit_id' => self::AD_UNIT_ID,
+                'is_ended' => false,
+            ])
+            ->assertStatus(422)
+            ->assertJsonPath('error_code', 'REWARDED_AD_INCOMPLETE');
+        $this->assertSame(0, DB::table('benefit_grants')->where('attempt_id', $attemptId)->count());
+
+        $this->withHeaders($headers)
+            ->postJson('/api/v0.3/attempts/'.$attemptId.'/rewarded-ad-sessions/'.$sessionId.'/complete', [
+                'ad_unit_id' => self::AD_UNIT_ID,
+                'is_ended' => true,
+            ])
+            ->assertOk()
+            ->assertJsonPath('report_access.access_level', 'full');
+        $this->assertSame('BIG5_FULL_REPORT', DB::table('benefit_grants')->where('attempt_id', $attemptId)->value('benefit_code'));
+        $this->assertSame(0, DB::table('benefit_grants')->where('attempt_id', $attemptId)->where('benefit_code', 'MBTI_REPORT_FULL')->count());
+    }
+
     public function test_completion_creates_a_new_rewarded_grant_after_a_historical_grant_was_revoked(): void
     {
         $anonId = 'anon_rewarded_revoked';
@@ -399,7 +431,7 @@ final class RewardedAdUnlockContractTest extends TestCase
             'scale_version' => 'v0.3',
             'region' => 'CN_MAINLAND',
             'locale' => 'zh-CN',
-            'question_count' => 60,
+            'question_count' => $scaleCode === 'BIG5_OCEAN' ? 120 : 60,
             'answers_summary_json' => ['stage' => 'seed'],
             'client_platform' => 'test',
             'channel' => 'wechat_miniapp',

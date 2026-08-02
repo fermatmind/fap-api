@@ -27,6 +27,8 @@ final class WechatMiniVirtualPaymentService
         private readonly PaymentWebhookProcessor $webhooks,
         private readonly ReportGatekeeper $reportGatekeeper,
         private readonly PiiCipher $piiCipher,
+        private readonly ReportUnlockProductCatalog $products,
+        private readonly BigFiveReportUnlockRolloutGate $bigFiveRollout,
     ) {}
 
     /**
@@ -49,7 +51,18 @@ final class WechatMiniVirtualPaymentService
             return $this->error('QUANTITY_INVALID', 'virtual report unlock quantity must be 1.', 422);
         }
 
-        $config = $this->config($provider);
+        $attempt = DB::table('attempts')
+            ->where('org_id', $orgId)
+            ->where('id', trim($targetAttemptId))
+            ->first();
+        if (! $attempt) {
+            return $this->error('ATTEMPT_NOT_FOUND', 'target attempt not found.', 404);
+        }
+
+        $scale = strtoupper(trim((string) ($attempt->scale_code ?? '')));
+        $locale = trim((string) ($attempt->locale ?? ''));
+        $contract = $this->products->forScale($scale);
+        $config = $contract !== null ? $this->products->provider($provider, $contract) : $this->config($provider);
         $expectedSku = strtoupper(trim((string) ($config['sku'] ?? '')));
         $historicalAppleRetry = $provider === AppleIapGateway::PROVIDER
             && $idempotentOrder !== null
@@ -64,20 +77,9 @@ final class WechatMiniVirtualPaymentService
                 $quantity
             );
         if (! $historicalAppleRetry
-            && ($expectedSku === '' || strtoupper(trim($sku)) !== $expectedSku)) {
+            && ($contract === null || $expectedSku === '' || strtoupper(trim($sku)) !== $expectedSku)) {
             return $this->error('SKU_NOT_SUPPORTED', 'sku is not supported by this provider.', 422);
         }
-
-        $attempt = DB::table('attempts')
-            ->where('org_id', $orgId)
-            ->where('id', trim($targetAttemptId))
-            ->first();
-        if (! $attempt) {
-            return $this->error('ATTEMPT_NOT_FOUND', 'target attempt not found.', 404);
-        }
-
-        $scale = strtoupper(trim((string) ($attempt->scale_code ?? '')));
-        $locale = trim((string) ($attempt->locale ?? ''));
         $rolloutScales = array_map(
             static fn (mixed $value): string => strtoupper(trim((string) $value)),
             (array) config('report_unlock.rollout_scales', [ReportAccess::SCALE_MBTI])
@@ -86,9 +88,11 @@ final class WechatMiniVirtualPaymentService
             static fn (mixed $value): string => trim((string) $value),
             (array) config('report_unlock.supported_locales', ['zh-CN'])
         );
-        if ($scale !== ReportAccess::SCALE_MBTI
-            || ! in_array($scale, $rolloutScales, true)
-            || ! in_array($locale, $rolloutLocales, true)) {
+        if (! in_array($locale, $rolloutLocales, true)
+            || ($scale !== ReportAccess::SCALE_BIG5_OCEAN && ! in_array($scale, $rolloutScales, true))) {
+            return $this->error('ROLLOUT_DISABLED', 'virtual payment is unavailable for this attempt.', 403);
+        }
+        if ($scale === ReportAccess::SCALE_BIG5_OCEAN && ! $this->bigFiveRollout->allows($attempt)) {
             return $this->error('ROLLOUT_DISABLED', 'virtual payment is unavailable for this attempt.', 403);
         }
 
@@ -124,7 +128,7 @@ final class WechatMiniVirtualPaymentService
         string $provider = WechatMiniVirtualGateway::PROVIDER
     ): array {
         $provider = $this->normalizeProvider($provider);
-        $config = $this->config($provider);
+        $config = $this->config($provider, (string) ($order->sku ?? ''));
         $loginCode = trim($loginCode);
         if ($loginCode === '' || strlen($loginCode) > 128) {
             return $this->error('WX_LOGIN_CODE_REQUIRED', 'wx_login_code is required.', 422);
@@ -187,7 +191,7 @@ final class WechatMiniVirtualPaymentService
         string $provider = WechatMiniVirtualGateway::PROVIDER
     ): array {
         $provider = $this->normalizeProvider($provider);
-        $config = $this->config($provider);
+        $config = $this->config($provider, (string) ($order->sku ?? ''));
         if ($provider !== AppleIapGateway::PROVIDER
             && ! $this->orderContractMatches($order, $config, $provider)) {
             return $this->error('ORDER_CONTRACT_MISMATCH', 'order does not match virtual payment contract.', 409);
@@ -344,7 +348,7 @@ final class WechatMiniVirtualPaymentService
         $verified = null;
         $verifiedProviderOrder = null;
         if ($provider === AppleIapGateway::PROVIDER) {
-            $verified = $this->queryVerifiedProviderOrder($order, $provider, $this->config($provider));
+            $verified = $this->queryVerifiedProviderOrder($order, $provider, $this->config($provider, (string) ($order->sku ?? '')));
             if (($verified['ok'] ?? false) !== true) {
                 return $verified;
             }
@@ -675,7 +679,7 @@ final class WechatMiniVirtualPaymentService
 
     private function validateCallbackContract(array $payload, object $order, string $provider): array
     {
-        $config = $this->config($provider);
+        $config = $this->config($provider, (string) ($order->sku ?? ''));
         $attempt = $this->orders->latestPaymentAttemptForOrder(
             (string) ($order->order_no ?? ''),
             (int) ($order->org_id ?? 0)
@@ -1059,9 +1063,13 @@ final class WechatMiniVirtualPaymentService
         return is_array($decoded) ? $decoded : [];
     }
 
-    private function config(string $provider): array
+    private function config(string $provider, ?string $sku = null): array
     {
-        $config = config('payments.'.$this->normalizeProvider($provider), []);
+        $provider = $this->normalizeProvider($provider);
+        $contract = $sku !== null ? $this->products->forSku($sku) : null;
+        $config = $contract !== null
+            ? $this->products->provider($provider, $contract)
+            : config('payments.'.$provider, []);
 
         return is_array($config) ? $config : [];
     }

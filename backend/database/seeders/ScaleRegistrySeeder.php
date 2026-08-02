@@ -197,7 +197,7 @@ final class ScaleRegistrySeeder extends Seeder
                 'price_tier' => 'PAID',
                 'report_benefit_code' => 'BIG5_FULL_REPORT',
                 'credit_benefit_code' => 'BIG5_FULL_REPORT',
-                'report_unlock_sku' => 'SKU_BIG5_FULL_REPORT_299',
+                'report_unlock_sku' => 'SKU_BIG5_FULL_REPORT_499',
             ],
             'seo_schema_json' => [
                 '@context' => 'https://schema.org',
