@@ -21,11 +21,11 @@ final class RiasecResultPageV2ProductionImportExecutor
 
     public const RELEASE_SCHEMA_VERSION = 'fap.riasec.result_page_v2.production_import_release.v0.1';
 
-    public const DEFAULT_APPROVED_SNAPSHOT_PATH = 'content_assets/riasec/result_page_v2/releases/production_approved/v0_1/riasec_result_page_v2_prod_approved_2026_06_22_01.json';
+    public const DEFAULT_APPROVED_SNAPSHOT_PATH = 'content_assets/riasec/result_page_v2/releases/production_approved/v0_2/riasec_result_page_v2_prod_approved_v0_2.json';
 
-    public const DEFAULT_APPROVAL_EVIDENCE_PATH = 'content_assets/riasec/result_page_v2/governance/production_approval_evidence/v0_1/riasec_result_page_v2_production_import_approval_2026_06_22_01.json';
+    public const DEFAULT_APPROVAL_EVIDENCE_PATH = 'content_assets/riasec/result_page_v2/governance/production_approval_evidence/v0_2/riasec_result_page_v2_production_import_approval_v0_2.json';
 
-    public const DEFAULT_DRY_RUN_ARTIFACT_PATH = 'content_assets/riasec/result_page_v2/qa/production_import_gate_dry_run_authorized_snapshot/v0_1/riasec_result_page_v2_production_import_gate_dry_run_authorized_snapshot_v0_1.json';
+    public const DEFAULT_DRY_RUN_ARTIFACT_PATH = 'content_assets/riasec/result_page_v2/qa/production_import_gate_dry_run_authorized_snapshot/v0_2/riasec_result_page_v2_production_import_gate_dry_run_v0_2.json';
 
     public const DEFAULT_RELEASE_STORAGE_ROOT = 'private/content_releases/RIASEC/result_page_v2/production_import';
 
@@ -417,8 +417,72 @@ final class RiasecResultPageV2ProductionImportExecutor
         $this->requireEquals($errors, 'snapshot.runtime_use', 'production_import_candidate', (string) ($snapshot['runtime_use'] ?? ''));
         $this->requireEquals($errors, 'snapshot.approval_summary.approval_type', 'production_import', (string) data_get($snapshot, 'approval_summary.approval_type', ''));
         $this->requireEquals($errors, 'snapshot.approval_summary.decision', 'GO', (string) data_get($snapshot, 'approval_summary.decision', ''));
-        $this->requireEquals($errors, 'snapshot.source_snapshot_sha256', '4e5b7a3c356324bbd854ad2a3c8586caf07f0e05fee6bb26ab56af5c29f4b853', (string) ($snapshot['source_snapshot_sha256'] ?? ''));
+        $this->assertSourceSnapshot($errors, $snapshot);
         $this->requireEquals($errors, 'snapshot.expected_sha256_self_reference', $expectedSnapshotSha, $actualSnapshotSha);
+    }
+
+    /**
+     * @param  list<string>  $errors
+     * @param  array<string,mixed>  $approvedSnapshot
+     */
+    private function assertSourceSnapshot(array &$errors, array $approvedSnapshot): void
+    {
+        $sourcePath = $this->absolutePath((string) ($approvedSnapshot['source_snapshot_path'] ?? ''));
+        [$sourceSnapshot, $sourceContents] = $this->decodeJsonFile($sourcePath);
+        $sourceSha = hash('sha256', $sourceContents);
+
+        $this->requireEquals(
+            $errors,
+            'snapshot.source_snapshot_sha256',
+            $this->normalizeSha256((string) ($approvedSnapshot['source_snapshot_sha256'] ?? '')),
+            $sourceSha,
+        );
+        $this->requireEquals(
+            $errors,
+            'snapshot.source_snapshot_id',
+            (string) ($approvedSnapshot['source_snapshot_id'] ?? ''),
+            (string) ($sourceSnapshot['snapshot_id'] ?? ''),
+        );
+
+        if (($sourceSnapshot['snapshot_version'] ?? null) !== 'v0_2') {
+            return;
+        }
+
+        $this->requireEquals($errors, 'source_snapshot.schema_version', 'fap.riasec.result_page_v2.release_snapshot.v0.2', (string) ($sourceSnapshot['schema_version'] ?? ''));
+        $this->requireEquals($errors, 'source_snapshot.scale_code', 'RIASEC', (string) ($sourceSnapshot['scale_code'] ?? ''));
+        $this->requireEquals($errors, 'source_snapshot.form_codes', 'riasec_60,riasec_140', implode(',', (array) ($sourceSnapshot['form_codes'] ?? [])));
+        $this->requireEquals($errors, 'source_snapshot.locales', 'zh-CN', implode(',', (array) ($sourceSnapshot['locales'] ?? [])));
+        $this->assertBoundFiles($errors, (array) ($sourceSnapshot['runtime_content_files'] ?? []), 'runtime_content_files');
+        $this->assertBoundFiles($errors, (array) ($sourceSnapshot['runtime_selector_files'] ?? []), 'runtime_selector_files');
+    }
+
+    /**
+     * @param  list<string>  $errors
+     * @param  array<int,mixed>  $files
+     */
+    private function assertBoundFiles(array &$errors, array $files, string $label): void
+    {
+        if ($files === []) {
+            $errors[] = 'source_snapshot.'.$label.'_missing';
+
+            return;
+        }
+
+        foreach ($files as $index => $file) {
+            if (! is_array($file)) {
+                $errors[] = 'source_snapshot.'.$label.'.'.$index.'_invalid';
+
+                continue;
+            }
+            $path = $this->absolutePath((string) ($file['path'] ?? ''));
+            $expectedSha = $this->normalizeSha256((string) ($file['sha256'] ?? ''));
+            if (! is_file($path)) {
+                $errors[] = 'source_snapshot.'.$label.'.'.$index.'_missing_file';
+
+                continue;
+            }
+            $this->requireEquals($errors, 'source_snapshot.'.$label.'.'.$index.'.sha256', $expectedSha, (string) hash_file('sha256', $path));
+        }
     }
 
     /**
@@ -486,7 +550,7 @@ final class RiasecResultPageV2ProductionImportExecutor
     {
         $this->requireTrue($errors, 'option.rollback_kill_switch_confirmed', (bool) ($options['rollback_kill_switch_confirmed'] ?? false));
         $this->requireEquals($errors, 'option.kill_switch_ref', 'riasec_result_page_v2.production_emergency_disabled', trim((string) ($options['kill_switch_ref'] ?? '')));
-        $this->requireEquals($errors, 'option.post_deploy_smoke_procedure_id', 'riasec_result_page_v2_post_deploy_smoke_v0_1', trim((string) ($options['post_deploy_smoke_procedure_id'] ?? '')));
+        $this->requireEquals($errors, 'option.post_deploy_smoke_procedure_id', RiasecResultPageV2ProductionSmokeVerifier::PROCEDURE_ID, trim((string) ($options['post_deploy_smoke_procedure_id'] ?? '')));
 
         foreach ([
             'snapshot' => $snapshot,

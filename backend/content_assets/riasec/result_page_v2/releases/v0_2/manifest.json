@@ -1,0 +1,18 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.release_manifest.v0.2",
+  "snapshot_id": "riasec_result_page_v2_v0_2",
+  "snapshot_path": "content_assets/riasec/result_page_v2/releases/v0_2/riasec_result_page_v2_release_snapshot_v0_2.json",
+  "snapshot_sha256": "428f6ea8673ef7b5f7129f31561fbb3293d503f7eb417f233771c4526158307a",
+  "approved_snapshot_id": "riasec_result_page_v2_prod_approved_v0_2",
+  "approval_evidence_id": "riasec_result_page_v2_production_import_approval_v0_2",
+  "rollback_snapshot_id": "riasec_result_page_v2_prod_approved_2026_06_22_01",
+  "smoke_procedure_id": "riasec_result_page_v2_post_deploy_smoke_v0_2",
+  "scope": {
+    "tenant_ids": ["0"],
+    "form_codes": ["riasec_60", "riasec_140"],
+    "locales": ["zh-CN"]
+  },
+  "immutable": true,
+  "production_import_performed": false,
+  "production_rollout_performed": false
+}
