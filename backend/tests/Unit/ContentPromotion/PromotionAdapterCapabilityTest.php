@@ -55,17 +55,17 @@ final class PromotionAdapterCapabilityTest extends TestCase
         self::assertSame('audit_compatible', $capabilities['W2/big-five']);
         self::assertSame('audit_compatible', $capabilities['W3/articles']);
         self::assertSame('audit_compatible', $capabilities['W5/enneagram']);
-        self::assertSame(5, count(array_filter($capabilities, static fn (string $capability): bool => $capability === 'audit_compatible')));
-        self::assertSame(5, count(array_filter($capabilities, static fn (string $capability): bool => $capability === 'fail_closed_legacy_audit')));
+        self::assertSame('audit_compatible', $capabilities['W3/career-guides']);
+        self::assertSame('audit_compatible', $capabilities['W8/career-jobs']);
+        self::assertSame(7, count(array_filter($capabilities, static fn (string $capability): bool => $capability === 'audit_compatible')));
+        self::assertSame(3, count(array_filter($capabilities, static fn (string $capability): bool => $capability === 'fail_closed_legacy_audit')));
     }
 
     /** @return iterable<string, array{string,string}> */
     public static function legacyAdapters(): iterable
     {
-        yield 'W3 Career Guides' => ['W3', 'career-guides'];
         yield 'W4 RIASEC' => ['W4', 'riasec'];
         yield 'W6 IQ' => ['W6', 'iq'];
         yield 'W7 EQ' => ['W7', 'eq'];
-        yield 'W8 Career Jobs' => ['W8', 'career-jobs'];
     }
 }

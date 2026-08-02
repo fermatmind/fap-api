@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Services\ContentPromotion;
 
 use App\Services\ContentPromotion\Adapters\ArticleCmsPromotionAdapter;
+use App\Services\ContentPromotion\Adapters\CareerGuideCmsPromotionAdapter;
+use App\Services\ContentPromotion\Adapters\CareerJobCmsPromotionAdapter;
 use App\Services\ContentPromotion\Adapters\LegacyAuditIncompatiblePromotionAdapter;
 use App\Services\ContentPromotion\Adapters\MbtiComparisonEnglishPromotionAdapter;
 use App\Services\ContentPromotion\Adapters\MbtiResultPromotionAdapter;
@@ -22,6 +24,7 @@ final class PromotionAdapterRegistry
         MbtiResultPromotionAdapter $mbtiResults,
         PersonalityCmsPromotionAuthority $personalityAuthority,
         ArticleCmsPromotionAuthority $articleAuthority,
+        CareerCmsPromotionAuthority $careerAuthority,
         PromotionRollbackSnapshotService $snapshots,
     ) {
         $adapters = [
@@ -29,12 +32,12 @@ final class PromotionAdapterRegistry
             $mbtiResults,
             new PersonalityCmsPromotionAdapter('W2', 'big-five', $personalityAuthority, $snapshots),
             new ArticleCmsPromotionAdapter($articleAuthority, $snapshots),
-            new LegacyAuditIncompatiblePromotionAdapter('w3_career_guides_legacy', 'W3', 'career-guides'),
+            new CareerGuideCmsPromotionAdapter($careerAuthority, $snapshots),
             new LegacyAuditIncompatiblePromotionAdapter('w4_riasec_legacy', 'W4', 'riasec'),
             new PersonalityCmsPromotionAdapter('W5', 'enneagram', $personalityAuthority, $snapshots),
             new LegacyAuditIncompatiblePromotionAdapter('w6_iq_legacy', 'W6', 'iq'),
             new LegacyAuditIncompatiblePromotionAdapter('w7_eq_legacy', 'W7', 'eq'),
-            new LegacyAuditIncompatiblePromotionAdapter('w8_career_jobs_legacy', 'W8', 'career-jobs'),
+            new CareerJobCmsPromotionAdapter($careerAuthority, $snapshots),
         ];
         $this->adapters = [];
         $ids = [];

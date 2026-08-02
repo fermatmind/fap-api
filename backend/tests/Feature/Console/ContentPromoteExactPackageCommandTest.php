@@ -8,6 +8,8 @@ require_once __DIR__.'/../../Unit/ContentPromotion/Concerns/AssertsExactPackageP
 
 use App\Models\Article;
 use App\Models\ArticleTranslationRevision;
+use App\Models\CareerGuide;
+use App\Models\CareerJob;
 use App\Models\MbtiCrossTypeComparisonAuthority;
 use App\Services\Cms\MbtiComparisonEnglishPublishService;
 use App\Services\ContentImport\MbtiComparisonEnglishPackageImporter;
@@ -34,6 +36,9 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
 
     private ?string $articlePackageDirectory = null;
 
+    /** @var list<string> */
+    private array $careerPackageDirectories = [];
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -56,6 +61,9 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
         }
         if ($this->articlePackageDirectory !== null) {
             File::deleteDirectory($this->articlePackageDirectory);
+        }
+        foreach ($this->careerPackageDirectories as $directory) {
+            File::deleteDirectory($directory);
         }
         File::deleteDirectory($this->w9Directory);
         foreach ([
@@ -178,6 +186,29 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
         self::assertSame('Promoted command article', $article->refresh()->title);
         self::assertSame(1, $this->receipt('article-live-qa.json')['published_count']);
         self::assertSame(0, $this->receipt('article-live-qa.json')['sitemap_mutation_count']);
+    }
+
+    public function test_career_guide_and_job_adapters_run_independent_machine_receipt_chains(): void
+    {
+        CareerGuide::query()->withoutGlobalScopes()->create([
+            'org_id' => 0, 'guide_code' => 'command-guide', 'slug' => 'command-guide', 'locale' => 'en', 'title' => 'Original guide', 'excerpt' => 'Original excerpt', 'category_slug' => 'career', 'body_md' => 'Original guide body.', 'body_html' => '<p>Original guide body.</p>', 'related_industry_slugs_json' => [], 'status' => 'published', 'is_public' => true, 'is_indexable' => false, 'published_at' => now(), 'schema_version' => 'v1', 'sort_order' => 0,
+        ]);
+        CareerJob::query()->withoutGlobalScopes()->create([
+            'org_id' => 0, 'job_code' => 'command-job', 'slug' => 'command-job', 'locale' => 'en', 'title' => 'Original job', 'subtitle' => 'Original subtitle', 'excerpt' => 'Original excerpt', 'hero_kicker' => 'Explore', 'hero_quote' => 'Original quote.', 'industry_slug' => 'technology', 'industry_label' => 'Technology', 'body_md' => 'Original job body.', 'body_html' => '<p>Original job body.</p>', 'salary_json' => [], 'outlook_json' => [], 'skills_json' => [], 'work_contents_json' => [], 'growth_path_json' => [], 'fit_personality_codes_json' => [], 'mbti_primary_codes_json' => [], 'mbti_secondary_codes_json' => [], 'riasec_profile_json' => [], 'big5_targets_json' => [], 'iq_eq_notes_json' => [], 'market_demand_json' => [], 'status' => 'published', 'is_public' => true, 'is_indexable' => false, 'published_at' => now(), 'schema_version' => 'v1', 'sort_order' => 0,
+        ]);
+        foreach ([['guide', 'W3', 'career-guides'], ['job', 'W8', 'career-jobs']] as [$kind, $lane, $subscope]) {
+            $package = $this->careerPackageDirectory($kind);
+            $sha = (string) json_decode((string) File::get($package.'/manifest.json'), true, 512, JSON_THROW_ON_ERROR)['package_sha256'];
+            $this->withExpectedCount(1, function () use ($package, $sha, $lane, $subscope, $kind): void {
+                self::assertTrue($this->runCareerPhase($package, $sha, $lane, $subscope, 'preflight', 'career-'.$kind.'-preflight.json')['ok']);
+                self::assertTrue($this->runCareerPhase($package, $sha, $lane, $subscope, 'draft-import', 'career-'.$kind.'-draft.json')['ok']);
+                $this->setEnv('CONTENT_PROMOTION_PREVIOUS_RECEIPT', $this->receiptDirectory.'/career-'.$kind.'-draft.json');
+                self::assertTrue($this->runCareerPhase($package, $sha, $lane, $subscope, 'publish', 'career-'.$kind.'-publish.json')['ok']);
+                $this->setEnv('CONTENT_PROMOTION_PREVIOUS_RECEIPT', $this->receiptDirectory.'/career-'.$kind.'-publish.json');
+                self::assertTrue($this->runCareerPhase($package, $sha, $lane, $subscope, 'live-qa', 'career-'.$kind.'-live-qa.json')['ok']);
+                self::assertSame(1, $this->receipt('career-'.$kind.'-live-qa.json')['published_count']);
+            });
+        }
     }
 
     public function test_mbti_result_live_qa_failure_restores_only_the_pre_publication_activation(): void
@@ -396,6 +427,26 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
         return $this->articlePackageDirectory = $directory;
     }
 
+    private function careerPackageDirectory(string $kind): string
+    {
+        $directory = base_path('content_assets/en-content-parity/.testing-t5-career-'.$kind.'-'.bin2hex(random_bytes(8)));
+        $this->careerPackageDirectories[] = $directory;
+        File::ensureDirectoryExists($directory);
+        $isGuide = $kind === 'guide';
+        $snapshot = $isGuide
+            ? ['title' => 'Promoted guide', 'excerpt' => 'Promoted excerpt', 'category_slug' => 'career', 'body_md' => 'Promoted guide body.', 'body_html' => null, 'related_industry_slugs_json' => [], 'schema_version' => 'v1', 'sort_order' => 1]
+            : ['title' => 'Promoted job', 'subtitle' => 'Promoted subtitle', 'excerpt' => 'Promoted excerpt', 'hero_kicker' => 'Explore', 'hero_quote' => 'Promoted quote.', 'industry_slug' => 'technology', 'industry_label' => 'Technology', 'body_md' => 'Promoted job body.', 'body_html' => null, 'salary_json' => [], 'outlook_json' => [], 'skills_json' => [], 'work_contents_json' => [], 'growth_path_json' => [], 'fit_personality_codes_json' => [], 'mbti_primary_codes_json' => [], 'mbti_secondary_codes_json' => [], 'riasec_profile_json' => [], 'big5_targets_json' => [], 'iq_eq_notes_json' => [], 'market_demand_json' => [], 'schema_version' => 'v1', 'sort_order' => 1];
+        $lane = $isGuide ? 'W3' : 'W8';
+        $subscope = $isGuide ? 'career-guides' : 'career-jobs';
+        $assetsBytes = json_encode(['assets' => [['identity' => ['org_id' => 0, 'slug' => $isGuide ? 'command-guide' : 'command-job', 'locale' => 'en'], 'snapshot' => $snapshot]]], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+        File::put($directory.'/assets.json', $assetsBytes);
+        $manifest = ['schema_version' => 'fermatmind.career_cms_promotion.v2', 'lane' => $lane, 'subscope' => $subscope, 'locale' => 'en', 'permissions' => ['cms_draft_import' => false, 'public_publish' => false, 'indexability' => false, 'sitemap' => false, 'llms' => false, 'search' => false, 'deploy' => false], 'expected_row_count' => 1, 'payloads' => [['path' => 'assets.json', 'sha256' => hash('sha256', $assetsBytes)]]];
+        $manifest['package_sha256'] = hash('sha256', hash('sha256', PromotionContextFactory::canonicalJson($manifest))."\nassets.json\n".hash('sha256', $assetsBytes)."\n");
+        File::put($directory.'/manifest.json', json_encode($manifest, JSON_THROW_ON_ERROR));
+
+        return $directory;
+    }
+
     /** @return array<string,mixed> */
     private function runArticlePhase(string $package, string $sha, string $phase, string $filename): array
     {
@@ -409,6 +460,20 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
         self::assertSame(0, $exit, $stdout);
 
         return json_decode(trim($stdout), true, 512, JSON_THROW_ON_ERROR);
+    }
+
+    /** @return array<string,mixed> */
+    private function runCareerPhase(string $package, string $sha, string $lane, string $subscope, string $phase, string $filename): array
+    {
+        $this->setWorkflowSignature($lane, $subscope, $sha);
+        $output = new BufferedOutput;
+        $exit = Artisan::call('content:promote-exact-package', ['--package' => $package, '--expected-package-sha256' => $sha, '--lane' => $lane, '--subscope' => $subscope, '--phase' => $phase, '--receipt' => $this->receiptDirectory.'/'.$filename, '--json' => true], $output);
+        $stdout = $output->fetch();
+        self::assertSame(0, $exit, $stdout);
+        $lines = array_values(array_filter(explode("\n", trim($stdout))));
+        self::assertCount(1, $lines);
+
+        return json_decode($lines[0], true, 512, JSON_THROW_ON_ERROR);
     }
 
     /** @return array<string, mixed> */
