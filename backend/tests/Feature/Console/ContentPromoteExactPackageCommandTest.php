@@ -14,6 +14,7 @@ use App\Models\MbtiCrossTypeComparisonAuthority;
 use App\Services\Cms\MbtiComparisonEnglishPublishService;
 use App\Services\ContentImport\MbtiComparisonEnglishPackageImporter;
 use App\Services\ContentImport\MbtiResultEnglishPackageImporter;
+use App\Services\ContentImport\RiasecEnglishPackageImporter;
 use App\Services\ContentPromotion\PromotionContextFactory;
 use DomainException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -209,6 +210,24 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
                 self::assertSame(1, $this->receipt('career-'.$kind.'-live-qa.json')['published_count']);
             });
         }
+    }
+
+    public function test_w4_riasec_adapter_runs_the_full_receipt_chain_against_the_exact_english_release_authority(): void
+    {
+        $package = RiasecEnglishPackageImporter::defaultPackageDirectory();
+        $sha = RiasecEnglishPackageImporter::PACKAGE_SHA256;
+        $this->withExpectedCount(1550, function () use ($package, $sha): void {
+            self::assertTrue($this->runRiasecPhase($package, $sha, 'preflight', 'riasec-preflight.json')['ok']);
+            self::assertTrue($this->runRiasecPhase($package, $sha, 'draft-import', 'riasec-draft.json')['ok']);
+            self::assertSame(1550, $this->receipt('riasec-draft.json')['written_count']);
+            $this->setEnv('CONTENT_PROMOTION_PREVIOUS_RECEIPT', $this->receiptDirectory.'/riasec-draft.json');
+            self::assertTrue($this->runRiasecPhase($package, $sha, 'publish', 'riasec-publish.json')['ok']);
+            self::assertSame(1550, $this->receipt('riasec-publish.json')['published_count']);
+            $this->setEnv('CONTENT_PROMOTION_PREVIOUS_RECEIPT', $this->receiptDirectory.'/riasec-publish.json');
+            self::assertTrue($this->runRiasecPhase($package, $sha, 'live-qa', 'riasec-live-qa.json')['ok']);
+        });
+        self::assertSame(1550, $this->receipt('riasec-live-qa.json')['published_count']);
+        self::assertSame(0, $this->receipt('riasec-live-qa.json')['deploy_mutation_count']);
     }
 
     public function test_mbti_result_live_qa_failure_restores_only_the_pre_publication_activation(): void
@@ -474,6 +493,12 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
         self::assertCount(1, $lines);
 
         return json_decode($lines[0], true, 512, JSON_THROW_ON_ERROR);
+    }
+
+    /** @return array<string,mixed> */
+    private function runRiasecPhase(string $package, string $sha, string $phase, string $filename): array
+    {
+        return $this->runCareerPhase($package, $sha, 'W4', 'riasec', $phase, $filename);
     }
 
     /** @return array<string, mixed> */

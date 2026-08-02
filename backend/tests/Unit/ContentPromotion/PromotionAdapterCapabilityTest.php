@@ -57,14 +57,14 @@ final class PromotionAdapterCapabilityTest extends TestCase
         self::assertSame('audit_compatible', $capabilities['W5/enneagram']);
         self::assertSame('audit_compatible', $capabilities['W3/career-guides']);
         self::assertSame('audit_compatible', $capabilities['W8/career-jobs']);
-        self::assertSame(7, count(array_filter($capabilities, static fn (string $capability): bool => $capability === 'audit_compatible')));
-        self::assertSame(3, count(array_filter($capabilities, static fn (string $capability): bool => $capability === 'fail_closed_legacy_audit')));
+        self::assertSame('audit_compatible', $capabilities['W4/riasec']);
+        self::assertSame(8, count(array_filter($capabilities, static fn (string $capability): bool => $capability === 'audit_compatible')));
+        self::assertSame(2, count(array_filter($capabilities, static fn (string $capability): bool => $capability === 'fail_closed_legacy_audit')));
     }
 
     /** @return iterable<string, array{string,string}> */
     public static function legacyAdapters(): iterable
     {
-        yield 'W4 RIASEC' => ['W4', 'riasec'];
         yield 'W6 IQ' => ['W6', 'iq'];
         yield 'W7 EQ' => ['W7', 'eq'];
     }

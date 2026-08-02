@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-08-02T10:42:00Z",
+  "updated_at": "2026-08-02T14:15:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -91,6 +91,89 @@
           "at": "2026-08-02T13:00:00Z",
           "status": "ready_to_merge",
           "summary": "All required GitHub checks passed on the repaired PR head, including hygiene, supply-chain, content-pack validation, MBTI legacy/v2, Big Five, and security checks. Staging parity remained skipped and is not a deployment action."
+        }
+      ]
+    },
+    "CONTENT-PROMOTION-W4-RIASEC-ADAPTER-01": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "ready_to_merge",
+      "branch": "codex/content-promotion-w4-riasec-adapter-01",
+      "commit_sha": "26df0767f",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3509",
+      "checks": {
+        "dependency": {
+          "status": "passed",
+          "details": "CONTENT-PROMOTION-CAREER-CMS-ADAPTERS-01 is merged and origin/main contains cd87e7008679a2592a0d737f193f233e76ea41d2."
+        },
+        "local": [
+          {
+            "command": "php -l app/Services/ContentImport/RiasecEnglishPackageImporter.php && php -l app/Services/ContentPromotion/RiasecContentPromotionAuthority.php && php -l app/Services/ContentPromotion/Adapters/RiasecContentPromotionAdapter.php",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test scoped W4 paths",
+            "status": "passed",
+            "details": "Ten scoped PHP files passed."
+          },
+          {
+            "command": "php artisan test tests/Unit/ContentPromotion/RiasecContentPromotionAdapterTest.php tests/Unit/ContentPromotion/PromotionAdapterCapabilityTest.php tests/Feature/ContentImport/RiasecEnglishPackageImporterTest.php",
+            "status": "passed",
+            "details": "10 tests and 80 assertions passed."
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/ContentPromoteExactPackageCommandTest.php",
+            "status": "passed",
+            "details": "10 tests and 164 assertions passed, including the W4 exact release receipt chain."
+          },
+          {
+            "command": "php artisan test tests/Sre/ContentPromotionAutomationWorkflowTest.php tests/Architecture/ReviewPolicyRegistryTest.php",
+            "status": "passed",
+            "details": "12 tests and 381 assertions passed."
+          },
+          {
+            "command": "Big Five freeze, JSON, YAML and diff checks",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "command": "GitHub required checks on PR #3509 head ea654f35996afe0ef732bea914a5d7f19a3c5c5f",
+            "status": "passed",
+            "details": "hygiene, supply-chain, content-pack-build-validate, MBTI legacy/v2, Big Five, Semgrep blocking secrets, Semgrep OSS, and the non-blocking SARIF upload passed. verify-staging-parity was skipped."
+          }
+        ]
+      },
+      "failure_reason": null,
+      "resume_policy": "continuous_goal",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "production_write_execution": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "publish_allowed": false,
+      "deploy_allowed": false,
+      "history": [
+        {
+          "at": "2026-08-02T14:15:00Z",
+          "status": "in_progress",
+          "summary": "Initialized the W4 RIASEC exact-package adapter after T5 merged. This scope is implementation and tests only; no CMS import, publication, runtime activation, indexability mutation, search action, deployment, or private attempt/report access was executed."
+        },
+        {
+          "at": "2026-08-02T14:30:00Z",
+          "status": "local_checks_passed",
+          "summary": "W4 evidence-chain validation, 14-group / 1550-row / 15-pair / 3-2-2 safety contract, 60Q/140Q boundary, inactive English release staging, exact-release publication, rollback, machine receipt chain, capability registry, workflow, review-policy, freeze, JSON/YAML and diff checks passed. No real promotion, runtime activation, or deployment was executed."
+        },
+        {
+          "at": "2026-08-02T14:45:00Z",
+          "status": "pr_open",
+          "summary": "Opened PR #3509 after scoped local validation. Required GitHub checks are pending; no production operation was executed."
+        },
+        {
+          "at": "2026-08-02T14:55:00Z",
+          "status": "ready_to_merge",
+          "summary": "All required GitHub checks passed on the current PR head. verify-staging-parity was skipped; no staging or deployment action was performed."
         }
       ]
     },
