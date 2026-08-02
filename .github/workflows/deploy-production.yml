@@ -8,13 +8,13 @@ on:
         required: true
         type: string
       staging_run_id:
-        description: "Successful Deploy Application staging run; leave empty only for exact-active same-SHA candidate_only"
+        description: "Successful Deploy Application staging run; optional for standard, which resolves the latest exact-SHA success"
         required: false
         default: ""
         type: string
       release_id:
-        description: "Operator-approved release identifier"
-        required: true
+        description: "Operator-approved release identifier; optional for standard, which derives standard-<sha12>"
+        required: false
         type: string
       operator_approval_phrase:
         description: "Exact SHA-bound production deploy approval phrase"
@@ -72,6 +72,8 @@ jobs:
       career_public_cache_summary_sha256: ${{ steps.resolve_deploy_mode.outputs.career_public_cache_summary_sha256 }}
       career_expected_candidate_summary_sha256: ${{ steps.resolve_deploy_mode.outputs.career_expected_candidate_summary_sha256 }}
       career_cache_repair_required: ${{ steps.resolve_deploy_mode.outputs.career_cache_repair_required }}
+      release_id: ${{ steps.resolve_deploy_mode.outputs.release_id }}
+      staging_run_id: ${{ steps.resolve_deploy_mode.outputs.staging_run_id }}
       main_sha: ${{ steps.latest_main_guard.outputs.main_sha }}
       staging_sha: ${{ steps.resolve_deploy_mode.outputs.staging_sha }}
     steps:
@@ -87,6 +89,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           STAGING_RUN_ID: ${{ inputs.staging_run_id }}
+          RELEASE_ID: ${{ inputs.release_id }}
           OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
           REQUESTED_DEPLOY_MODE: ${{ inputs.deploy_mode }}
           EXPECTED_DEPLOYED_REVISION: ${{ inputs.expected_deployed_revision }}
@@ -97,6 +100,9 @@ jobs:
           if [[ ! "$DEPLOY_SHA" =~ ^[0-9a-f]{40}$ ]]; then
             echo "expected_release_sha must be a lowercase 40-character Git SHA." >&2
             exit 2
+          fi
+          if [ "$REQUESTED_DEPLOY_MODE" = "standard" ] && [ -z "${RELEASE_ID:-}" ]; then
+            RELEASE_ID="standard-${DEPLOY_SHA:0:12}"
           fi
           if [[ ! "$RELEASE_ID" =~ ^[A-Za-z0-9._-]{1,80}$ ]]; then
             echo "release_id must use 1-80 safe identifier characters." >&2
@@ -118,8 +124,26 @@ jobs:
           case "$REQUESTED_DEPLOY_MODE" in
             standard)
               if [ -n "$APPROVED_MIGRATION" ]; then
-                echo "standard deploy refuses approved_migration; use schema_only for an exact migration." >&2
+                echo "standard deploy requires approved_migration to be omitted; do not submit false. Use schema_only for an exact migration." >&2
                 exit 2
+              fi
+              if [ -z "$STAGING_RUN_ID" ]; then
+                RUNS_JSON="$(gh api --paginate --slurp \"repos/${GITHUB_REPOSITORY}/actions/workflows/deploy.yml/runs?branch=main&status=completed&per_page=100\")"
+                STAGING_RUN_ID="$(jq -r --arg deploy_sha "$DEPLOY_SHA" '
+                  [.[].workflow_runs[]
+                   | select(.name == "Deploy Application"
+                       and (.event == "push" or .event == "workflow_dispatch")
+                       and .status == "completed"
+                       and .conclusion == "success"
+                       and .head_branch == "main"
+                       and .head_sha == $deploy_sha)
+                   | .id]
+                  | max // empty
+                ' <<<"$RUNS_JSON")"
+                if [[ ! "$STAGING_RUN_ID" =~ ^[0-9]+$ ]]; then
+                  echo "standard deploy could not resolve a successful exact-SHA staging run." >&2
+                  exit 1
+                fi
               fi
               RESOLVED_DEPLOY_MODE=standard
               EXPECTED_APPROVAL="I explicitly approve bounded backend production deploy for exact SHA ${DEPLOY_SHA}, excluding all newer main commits, release ${RELEASE_ID}."
@@ -422,6 +446,8 @@ jobs:
           echo "career_public_cache_summary_sha256=$CAREER_PUBLIC_CACHE_SUMMARY_SHA256" >> "$GITHUB_OUTPUT"
           echo "career_expected_candidate_summary_sha256=$CAREER_EXPECTED_CANDIDATE_SUMMARY_SHA256" >> "$GITHUB_OUTPUT"
           echo "career_cache_repair_required=$CAREER_CACHE_REPAIR_REQUIRED" >> "$GITHUB_OUTPUT"
+          echo "release_id=$RELEASE_ID" >> "$GITHUB_OUTPUT"
+          echo "staging_run_id=$STAGING_RUN_ID" >> "$GITHUB_OUTPUT"
 
           if [ "$EXACT_ACTIVE_CANDIDATE_FAST_PATH" = true ]; then
             echo "staging_sha=" >> "$GITHUB_OUTPUT"
@@ -679,6 +705,8 @@ jobs:
       CAREER_PUBLIC_CACHE_SUMMARY_SHA256: ${{ needs.deployment-eligibility.outputs.career_public_cache_summary_sha256 }}
       CAREER_EXPECTED_CANDIDATE_SUMMARY_SHA256: ${{ needs.deployment-eligibility.outputs.career_expected_candidate_summary_sha256 }}
       CAREER_CACHE_REPAIR_REQUIRED: ${{ needs.deployment-eligibility.outputs.career_cache_repair_required }}
+      RELEASE_ID: ${{ needs.deployment-eligibility.outputs.release_id }}
+      STAGING_RUN_ID: ${{ needs.deployment-eligibility.outputs.staging_run_id }}
       EXPECTED_DEPLOYED_REVISION: ${{ inputs.expected_deployed_revision }}
       APPROVED_MIGRATION: ${{ inputs.approved_migration }}
       WORKFLOW_CONTROL_SHA: ${{ github.sha }}
@@ -693,8 +721,6 @@ jobs:
       - name: Prepare exact immutable candidate deployment control
         id: immutable_candidate_control
         shell: bash
-        env:
-          STAGING_RUN_ID: ${{ inputs.staging_run_id }}
         run: |
           set -euo pipefail
           candidate_sha="49038deb50cda789e4365ea42068832ed28d6023"
@@ -829,6 +855,7 @@ jobs:
           timing_runner="$RUNNER_TEMP/deployer_task_timing.php"
           timing_history="$RUNNER_TEMP/download_deployer_timing_history.sh"
           timing_receipt="$GITHUB_WORKSPACE/artifacts/deployer-task-timing.json"
+          progress_receipt="$GITHUB_WORKSPACE/artifacts/deployer-progress.json"
           timing_summary="$GITHUB_WORKSPACE/artifacts/deployer-task-timing.md"
           timing_history_dir="$GITHUB_WORKSPACE/artifacts/deployer-task-timing-history"
           git cat-file -e "${WORKFLOW_CONTROL_SHA}^{commit}"
@@ -856,6 +883,7 @@ jobs:
             echo "DEPLOY_TIMING_RUNNER=$timing_runner"
             echo "DEPLOY_TIMING_HISTORY=$timing_history"
             echo "DEPLOY_TIMING_RECEIPT=$timing_receipt"
+            echo "DEPLOY_PROGRESS_RECEIPT=$progress_receipt"
             echo "DEPLOY_TIMING_SUMMARY=$timing_summary"
             echo "DEPLOY_TIMING_HISTORY_DIR=$timing_history_dir"
           } >> "$GITHUB_ENV"
@@ -1315,6 +1343,8 @@ jobs:
             --sha="$DEPLOY_SHA" \
             --run-id="$GITHUB_RUN_ID" \
             --run-attempt="$GITHUB_RUN_ATTEMPT" \
+            --heartbeat-interval-seconds=60 \
+            --progress-receipt="$DEPLOY_PROGRESS_RECEIPT" \
             --deployer-bin=/tmp/dep.phar \
             --recipe="$deployer_recipe" \
             --task="$DEPLOY_TASK" \
@@ -1364,6 +1394,15 @@ jobs:
           overwrite: true
           retention-days: 90
 
+      - name: Upload production deploy progress receipt
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: backend-production-deploy-progress-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/deployer-progress.json
+          if-no-files-found: warn
+          retention-days: 30
+
       - name: Upload immutable candidate control receipt
         if: ${{ always() && steps.immutable_candidate_control.outputs.enabled == 'true' }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
@@ -1377,8 +1416,6 @@ jobs:
         id: inactive_candidate
         if: ${{ needs.deployment-eligibility.outputs.deploy_mode == 'candidate_only' }}
         shell: bash
-        env:
-          STAGING_RUN_ID: ${{ inputs.staging_run_id }}
         run: |
           set -euo pipefail
           ssh_retry() {
@@ -1696,3 +1733,124 @@ jobs:
               git log --format='- %H %s' "${DEPLOY_SHA}..${MAIN_SHA}"
             fi
           } >> "$GITHUB_STEP_SUMMARY"
+
+  production-incident-diagnostic:
+    name: Capture read-only production deploy incident evidence
+    needs: [deployment-eligibility, deploy-production]
+    if: ${{ always() && (needs.deploy-production.result == 'failure' || needs.deploy-production.result == 'cancelled') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment:
+      name: production
+    env:
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+      SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+      HEALTHCHECK_URL: ${{ vars.PRODUCTION_HEALTHCHECK_URL }}
+      DEPLOY_SHA: ${{ needs.deployment-eligibility.outputs.deploy_sha }}
+      RELEASE_ID: ${{ needs.deployment-eligibility.outputs.release_id }}
+    steps:
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Capture read-only deploy incident receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST DEPLOY_PATH HEALTHCHECK_URL; do
+            test -n "${!name:-}"
+          done
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          [[ "$DEPLOY_PATH" != *".."* ]]
+          mkdir -p artifacts
+          remote_receipt="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "DEPLOY_PATH=$(printf '%q' "$DEPLOY_PATH") bash -s" 2>/dev/null <<'REMOTE'
+          set -euo pipefail
+          current="$(readlink -f "$DEPLOY_PATH/current")"
+          revision="$(tr -d '\r\n' < "$current/REVISION")"
+          [[ "$revision" =~ ^[0-9a-f]{40}$ ]]
+          lock_present=false
+          [ -e "$DEPLOY_PATH/.dep/deploy.lock" ] && lock_present=true
+          nginx=unknown
+          php_fpm=unknown
+          supervisor=unknown
+          if command -v systemctl >/dev/null 2>&1; then
+            systemctl is-active --quiet nginx && nginx=active || nginx=inactive
+            for service in php8.4-fpm php8.3-fpm php-fpm; do
+              if systemctl is-active --quiet "$service" 2>/dev/null; then php_fpm=active; break; fi
+            done
+            [ "$php_fpm" = unknown ] && php_fpm=inactive
+          fi
+          if command -v supervisorctl >/dev/null 2>&1; then
+            supervisorctl status >/dev/null 2>&1 && supervisor=available || supervisor=degraded
+          fi
+          jq -cn --arg revision "$revision" --arg nginx "$nginx" --arg php_fpm "$php_fpm" --arg supervisor "$supervisor" --argjson lock_present "$lock_present" '{active_revision: $revision, deploy_lock_present: $lock_present, nginx: $nginx, php_fpm: $php_fpm, supervisor: $supervisor}'
+          REMOTE
+          )"
+          public_health_status="$(curl -sS --connect-timeout 5 --max-time 15 -o /dev/null -w '%{http_code}' "$HEALTHCHECK_URL" 2>/dev/null || true)"
+          jq -n \
+            --arg schema_version "fermatmind.backend-production-incident-diagnostic.v1" \
+            --arg deploy_sha "$DEPLOY_SHA" \
+            --arg release_id "$RELEASE_ID" \
+            --arg workflow_run_id "$GITHUB_RUN_ID" \
+            --arg workflow_run_attempt "$GITHUB_RUN_ATTEMPT" \
+            --arg public_health_status "$public_health_status" \
+            --argjson remote "$remote_receipt" \
+            '{schema_version: $schema_version, status: "hold_no_retry", deploy_sha: $deploy_sha, release_id: $release_id, workflow_run_id: $workflow_run_id, workflow_run_attempt: $workflow_run_attempt, active_revision: $remote.active_revision, deploy_lock_present: $remote.deploy_lock_present, nginx: $remote.nginx, php_fpm: $remote.php_fpm, supervisor: $remote.supervisor, public_health_status: $public_health_status, cms_or_db_write_count: 0, deploy_attempted: false, deploy_lock_modified: false, process_restart_attempted: false, queue_or_cache_operation_attempted: false, publication_or_seo_mutation_attempted: false}' > artifacts/backend-production-incident-diagnostic.json
+          jq -e '
+            .schema_version == "fermatmind.backend-production-incident-diagnostic.v1"
+            and .status == "hold_no_retry"
+            and (.deploy_sha | test("^[0-9a-f]{40}$"))
+            and (.active_revision | test("^[0-9a-f]{40}$"))
+            and .cms_or_db_write_count == 0
+            and .deploy_attempted == false
+            and .deploy_lock_modified == false
+            and .process_restart_attempted == false
+            and .queue_or_cache_operation_attempted == false
+            and .publication_or_seo_mutation_attempted == false
+          ' artifacts/backend-production-incident-diagnostic.json >/dev/null
+
+      - name: Ensure a sanitized incident receipt exists
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          if [ -s artifacts/backend-production-incident-diagnostic.json ]; then
+            exit 0
+          fi
+          jq -n \
+            --arg schema_version "fermatmind.backend-production-incident-diagnostic.v1" \
+            --arg deploy_sha "${DEPLOY_SHA:-unknown}" \
+            --arg release_id "${RELEASE_ID:-unknown}" \
+            --arg workflow_run_id "$GITHUB_RUN_ID" \
+            --arg workflow_run_attempt "$GITHUB_RUN_ATTEMPT" \
+            '{schema_version: $schema_version, status: "hold_no_retry", diagnostic_stage: "transport_or_bootstrap_failed", deploy_sha: $deploy_sha, release_id: $release_id, workflow_run_id: $workflow_run_id, workflow_run_attempt: $workflow_run_attempt, cms_or_db_write_count: 0, deploy_attempted: false, deploy_lock_modified: false, process_restart_attempted: false, queue_or_cache_operation_attempted: false, publication_or_seo_mutation_attempted: false}' > artifacts/backend-production-incident-diagnostic.json
+
+      - name: Upload production deploy incident receipt
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: backend-production-incident-diagnostic-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/backend-production-incident-diagnostic.json
+          if-no-files-found: warn
+          retention-days: 30

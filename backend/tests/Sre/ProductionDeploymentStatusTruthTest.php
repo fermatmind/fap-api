@@ -84,6 +84,62 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringNotContainsString('rm -f', $candidateStep);
     }
 
+    public function test_standard_solo_release_fast_lane_derives_safe_inputs_and_retains_exact_approval(): void
+    {
+        $workflow = $this->workflow();
+        $eligibility = $this->between($workflow, '  deployment-eligibility:', '  deploy-production:');
+        $deploy = strstr($workflow, '  deploy-production:') ?: '';
+
+        foreach ([
+            'RELEASE_ID="standard-${DEPLOY_SHA:0:12}"',
+            'actions/workflows/deploy.yml/runs?branch=main&status=completed&per_page=100',
+            'standard deploy could not resolve a successful exact-SHA staging run.',
+            'standard deploy requires approved_migration to be omitted; do not submit false.',
+            'release_id: ${{ steps.resolve_deploy_mode.outputs.release_id }}',
+            'staging_run_id: ${{ steps.resolve_deploy_mode.outputs.staging_run_id }}',
+        ] as $contract) {
+            $this->assertStringContainsString($contract, $eligibility);
+        }
+
+        $this->assertStringContainsString(
+            'RELEASE_ID: ${{ needs.deployment-eligibility.outputs.release_id }}',
+            $deploy
+        );
+        $this->assertStringContainsString(
+            'STAGING_RUN_ID: ${{ needs.deployment-eligibility.outputs.staging_run_id }}',
+            $deploy
+        );
+        $this->assertStringContainsString('CURRENT_PRODUCTION_SHA="$(ssh_retry', $deploy);
+        $this->assertStringContainsString('Immutable standard candidate baseline verified without disclosing revision values.', $deploy);
+    }
+
+    public function test_failed_production_deploy_collects_only_read_only_incident_evidence(): void
+    {
+        $workflow = $this->workflow();
+        $incident = strstr($workflow, '  production-incident-diagnostic:') ?: '';
+
+        $this->assertStringContainsString('needs: [deployment-eligibility, deploy-production]', $incident);
+        $this->assertStringContainsString("needs.deploy-production.result == 'failure'", $incident);
+        $this->assertStringContainsString("needs.deploy-production.result == 'cancelled'", $incident);
+        $this->assertStringContainsString('status: "hold_no_retry"', $incident);
+        $this->assertStringContainsString('backend-production-incident-diagnostic', $incident);
+        $this->assertStringContainsString('Ensure a sanitized incident receipt exists', $incident);
+        $this->assertStringContainsString('transport_or_bootstrap_failed', $incident);
+        foreach ([
+            'cms_or_db_write_count: 0',
+            'deploy_attempted: false',
+            'deploy_lock_modified: false',
+            'process_restart_attempted: false',
+            'queue_or_cache_operation_attempted: false',
+            'publication_or_seo_mutation_attempted: false',
+        ] as $contract) {
+            $this->assertStringContainsString($contract, $incident);
+        }
+        foreach (['queue:restart', 'deploy:unlock', 'artisan migrate', 'dep deploy'] as $forbidden) {
+            $this->assertStringNotContainsString($forbidden, $incident);
+        }
+    }
+
     public function test_standard_candidate_accepts_only_a_staged_descendant_of_the_audited_runtime46_bridge(): void
     {
         $deploy = strstr($this->workflow(), '  deploy-production:') ?: '';
@@ -201,6 +257,7 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
     {
         $workflow = $this->workflow();
         $deploy = strstr($workflow, '  deploy-production:') ?: '';
+        $deploy = strstr($deploy, '  production-incident-diagnostic:', true) ?: $deploy;
         $deployer = (string) file_get_contents(dirname(__DIR__, 3).'/deploy.php');
         $publicBusinessCommand = $this->between(
             $deployer,
