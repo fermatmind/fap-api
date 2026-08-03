@@ -1,0 +1,22 @@
+{
+  "schema_version": "fermatmind.en_content_parity_dry_run_readiness.v1",
+  "control_id": "EN-PARITY-CONTROL-BOOTSTRAP-01",
+  "lane_id": "W3",
+  "subscope_id": "W3-CAREER-GUIDES",
+  "package_id": "EN-PARITY-W3-CAREER-GUIDE-PACKAGE-FREEZE-2026-08-02",
+  "ready": false,
+  "status": "package_frozen_independent_w9_pending",
+  "blockers": [
+    "Independent W9 QA for this exact frozen package SHA is required before qa_pass.",
+    "CMS import, publication, indexability, and search release are separately unauthorized."
+  ],
+  "permissions": {
+    "cms_write_authorized": false,
+    "staging_write_authorized": false,
+    "production_import_authorized": false,
+    "public_release_authorized": false,
+    "seo_runtime_release_authorized": false,
+    "search_submission_authorized": false,
+    "master_manifest_write_authorized": false
+  }
+}
