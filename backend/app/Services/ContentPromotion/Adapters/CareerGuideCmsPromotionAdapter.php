@@ -18,7 +18,7 @@ final class CareerGuideCmsPromotionAdapter extends AbstractCareerCmsPromotionAda
 
     protected function subscope(): string
     {
-        return 'career-guides';
+        return 'W3-CAREER-GUIDES';
     }
 
     protected function revisionStore(): string
