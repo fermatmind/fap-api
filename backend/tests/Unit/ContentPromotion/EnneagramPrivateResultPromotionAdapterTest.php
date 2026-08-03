@@ -46,7 +46,8 @@ final class EnneagramPrivateResultPromotionAdapterTest extends TestCase
     {
         $directory = $this->package();
         $sha = $this->makePromotable($directory);
-        $context = $this->context($directory, $sha);
+        $workflowSourceCommit = str_repeat('b', 40);
+        $context = $this->context($directory, $sha, $workflowSourceCommit);
         $adapter = app(PromotionAdapterRegistry::class)->resolve('W5', 'enneagram-results');
 
         $this->assertExactPhaseResult($adapter->preflight($context), $context, 'preflight');
@@ -54,6 +55,9 @@ final class EnneagramPrivateResultPromotionAdapterTest extends TestCase
         $this->assertExactPhaseResult($draft, $context, 'draft-import');
         self::assertSame(630, $draft['written_count']);
         self::assertSame(0, $adapter->draftImport($context)['written_count']);
+        self::assertSame($workflowSourceCommit, DB::table('content_pack_releases')->where('id', 'like', 'enneagram_1r_a_to_1r_h_phase8b_candidate_%')->value('source_commit'));
+        $releaseManifest = json_decode((string) DB::table('content_pack_releases')->where('id', 'like', 'enneagram_1r_a_to_1r_h_phase8b_candidate_%')->value('manifest_json'), true, 512, JSON_THROW_ON_ERROR);
+        self::assertSame(str_repeat('a', 40), data_get($releaseManifest, 'exact_package.package_source_commit'));
         self::assertSame(0, DB::table('content_pack_activations')->count());
 
         $previousReleaseId = $this->previousActiveRelease();
@@ -184,7 +188,7 @@ final class EnneagramPrivateResultPromotionAdapterTest extends TestCase
     private function makePromotable(string $root): string
     {
         $sha = $this->recomputePackage($root);
-        $report = ['schema_version' => 'fermatmind.en_parity.independent_w9_report.v1', 'review_kind' => 'independent_w9', 'verdict' => 'PASS', 'package_sha256' => $sha, 'lane_id' => 'W5', 'subscope' => 'enneagram-results', 'reviewed_row_count' => 630];
+        $report = ['schema_version' => 'fermatmind.en_parity.independent_w9_report.v1', 'review_kind' => 'independent_w9', 'verdict' => 'PASS', 'package_sha256' => $sha, 'lane_id' => 'W5', 'subscope' => 'enneagram-results', 'reviewed_row_count' => 630, 'reviewed_source_commit' => str_repeat('a', 40)];
         $bytes = json_encode($report, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)."\n";
         $ref = 'w5-'.substr($sha, 0, 16).'.json';
         File::put($this->w9Directory.'/'.$ref, $bytes);
@@ -227,8 +231,8 @@ final class EnneagramPrivateResultPromotionAdapterTest extends TestCase
         return json_decode((string) File::get($path), true, 512, JSON_THROW_ON_ERROR);
     }
 
-    private function context(string $root, string $sha): PromotionContext
+    private function context(string $root, string $sha, ?string $workflowSourceCommit = null): PromotionContext
     {
-        return new PromotionContext($root, $sha, 'W5', 'enneagram-results', str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '123', 1, str_repeat('d', 64), 630, str_repeat('e', 64));
+        return new PromotionContext($root, $sha, 'W5', 'enneagram-results', $workflowSourceCommit ?? str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '123', 1, str_repeat('d', 64), 630, str_repeat('e', 64));
     }
 }

@@ -101,6 +101,7 @@ final class EnneagramPrivateResultPromotionAuthority
         }
         $manifestBytes = $this->read($root, 'package_manifest.json');
         $manifest = $this->decode($manifestBytes, 'enneagram_private_result_package_manifest_invalid');
+        $packageSourceCommit = strtolower(trim((string) ($manifest['source_commit'] ?? '')));
         if (($manifest['schema_version'] ?? null) !== self::PACKAGE_MANIFEST_SCHEMA
             || ($manifest['lane_id'] ?? null) !== 'W5'
             || ($manifest['subscope'] ?? null) !== 'enneagram-results'
@@ -108,7 +109,7 @@ final class EnneagramPrivateResultPromotionAuthority
             || ($manifest['status'] ?? null) !== 'unpublished_candidate'
             || (int) ($manifest['expected_row_count'] ?? -1) !== self::EXPECTED_ROWS
             || (int) ($manifest['source_asset_count'] ?? -1) !== self::EXPECTED_SOURCE_ASSETS
-            || (string) ($manifest['source_commit'] ?? '') !== $context->sourceCommit) {
+            || preg_match('/\A[a-f0-9]{40}\z/', $packageSourceCommit) !== 1) {
             throw new DomainException('enneagram_private_result_package_manifest_contract_invalid');
         }
 
@@ -154,12 +155,13 @@ final class EnneagramPrivateResultPromotionAuthority
             }
             $this->assertNoPrivateFields($payload);
         }
-        $this->assertW9($manifest, $context->packageSha256, self::EXPECTED_ROWS);
+        $this->assertW9($manifest, $context->packageSha256, self::EXPECTED_ROWS, $packageSourceCommit);
 
         return [
             'root' => $root,
             'candidate_dir' => $candidateDir,
             'package_sha256' => $context->packageSha256,
+            'package_source_commit' => $packageSourceCommit,
             'candidate_manifest_sha256' => $candidateManifestSha,
             'runtime_registry_manifest_sha256' => $runtimeRegistrySha,
             'release_id' => $this->releaseId($candidateManifestSha),
@@ -198,6 +200,7 @@ final class EnneagramPrivateResultPromotionAuthority
         $payload['exact_package'] = [
             'package_sha256' => $context->packageSha256,
             'source_commit' => $context->sourceCommit,
+            'package_source_commit' => $package['package_source_commit'],
             'workflow_run_id' => $context->workflowRunId,
             'idempotency_key' => $context->idempotencyKey,
             'candidate_manifest_sha256' => $package['candidate_manifest_sha256'],
@@ -346,7 +349,7 @@ final class EnneagramPrivateResultPromotionAuthority
     }
 
     /** @param array<string,mixed> $manifest */
-    private function assertW9(array $manifest, string $packageSha, int $rows): void
+    private function assertW9(array $manifest, string $packageSha, int $rows, string $packageSourceCommit): void
     {
         $gate = data_get($manifest, 'quality_gates.independent_w9');
         $root = realpath((string) config('content_promotion.w9_authority_root'));
@@ -368,7 +371,8 @@ final class EnneagramPrivateResultPromotionAuthority
             || ($report['package_sha256'] ?? null) !== $packageSha
             || ($report['lane_id'] ?? null) !== 'W5'
             || ($report['subscope'] ?? null) !== 'enneagram-results'
-            || (int) ($report['reviewed_row_count'] ?? -1) !== $rows) {
+            || (int) ($report['reviewed_row_count'] ?? -1) !== $rows
+            || ($report['reviewed_source_commit'] ?? null) !== $packageSourceCommit) {
             throw new DomainException('enneagram_private_result_w9_evidence_incomplete');
         }
     }
@@ -398,6 +402,7 @@ final class EnneagramPrivateResultPromotionAuthority
         $payload = is_array($release->manifest_json) ? $release->manifest_json : [];
         if (data_get($payload, 'exact_package.package_sha256') !== $context->packageSha256
             || data_get($payload, 'exact_package.source_commit') !== $context->sourceCommit
+            || data_get($payload, 'exact_package.package_source_commit') !== $package['package_source_commit']
             || data_get($payload, 'exact_package.candidate_manifest_sha256') !== $package['candidate_manifest_sha256']) {
             throw new DomainException('enneagram_private_result_release_binding_invalid');
         }

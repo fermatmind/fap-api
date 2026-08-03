@@ -23,6 +23,8 @@ final class EnneagramPrivateResultEnglishPackageTest extends TestCase
 
     private const SOURCE_COMMIT = '44bd661c18dd470ae8d2dca48f101f37db306418';
 
+    private const WORKFLOW_SOURCE_COMMIT = 'b52532e6122ee9aa86c5a13f5e1a7fc9d4973701';
+
     #[Test]
     public function it_freezes_the_current_1332_source_assets_and_the_exact_630_row_matrix(): void
     {
@@ -122,7 +124,7 @@ final class EnneagramPrivateResultEnglishPackageTest extends TestCase
             self::PACKAGE_SHA,
             'W5',
             'enneagram-results',
-            self::SOURCE_COMMIT,
+            self::WORKFLOW_SOURCE_COMMIT,
             str_repeat('a', 64),
             str_repeat('b', 64),
             '51',
