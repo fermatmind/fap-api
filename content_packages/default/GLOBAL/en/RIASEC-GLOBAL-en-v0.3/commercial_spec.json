@@ -2,7 +2,7 @@
   "schema": "fap.report.rules.v1",
   "schema_version": "v1",
   "version": "v0.3",
-  "scale_code": "MBTI",
+  "scale_code": "RIASEC",
   "region": "GLOBAL",
   "locale": "en",
   "authority_state": "draft",
@@ -10,21 +10,21 @@
   "active_pointer_registered": true,
   "offers": [
     {
-      "offer_id": "mbti_free_result_en_v1",
+      "offer_id": "riasec_free_result_en_v1",
       "locale": "en",
       "variant": "free_result",
-      "entitlement": "MBTI_BASIC",
+      "entitlement": "RIASEC_BASIC",
       "cta_label": "View Your Free Result",
       "upgrade_cta": "Unlock Full Report"
     }
   ],
   "variants": [
     {
-      "variant_id": "mbti_report_paywall_default_v1_en",
+      "variant_id": "riasec_report_paywall_default_v1_en",
       "locale": "en",
       "cta_copy": {
-        "free_result": "See your MBTI type and dimension overview",
-        "locked_report": "Unlock your full personality report with career, growth, and relationship insights",
+        "free_result": "See your Holland code and interest profile",
+        "locked_report": "Unlock your full career interest report with occupation matches and exploration guides",
         "upgrade": "Get Full Report",
         "share": "Share Your Result",
         "email": "Send Report to Email",
@@ -33,11 +33,12 @@
     }
   ],
   "claim_boundary": {
-    "assessment_role": "structured_reference_and_working_hypothesis",
+    "assessment_role": "career_interest_exploration_only",
     "diagnosis": false,
     "fixed_identity": false,
     "ability_judgment": false,
-    "outcome_prediction": false
+    "outcome_prediction": false,
+    "career_recommendation": false
   },
   "permissions": {
     "draft_content_import": false,

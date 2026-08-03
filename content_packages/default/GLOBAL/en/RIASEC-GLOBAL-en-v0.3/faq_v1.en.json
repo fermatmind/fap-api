@@ -1,0 +1,122 @@
+{
+  "asset_id": "faq_v1.en",
+  "asset_status": "draft_authority_candidate_human_review_required",
+  "locale": "en",
+  "scale_code": "RIASEC",
+  "review_status": "draft_human_review_required",
+  "questions": [
+    {
+      "q": "What does IAS mean?",
+      "a": "I, A, and S are the three interest dimensions that stand out in this result. Their order describes this result ranking; it is not a fixed identity."
+    },
+    {
+      "q": "Does this tell me which career I should choose?",
+      "a": "No. It points to work activities that may be worth exploring or validating first. Real choices also depend on ability, experience, opportunity, values, entry barriers, and market conditions."
+    },
+    {
+      "q": "Does a score of 80 mean I scored higher than 80% of people?",
+      "a": "No. The current 0-100 score is a within-form interest-strength conversion. It is not a population percentile and it is not an ability score."
+    },
+    {
+      "q": "Does low E mean I cannot start a business, sell, or manage?",
+      "a": "No. Low E only means high-persuasion, high-exposure, and high-competition activities may not be the most natural interest entry point. Capability still depends on skills, experience, and real opportunities."
+    },
+    {
+      "q": "Does low R mean I cannot do technical or hands-on work?",
+      "a": "No. Low R does not mean clumsy or unable to learn technical work. It means tools, field work, and physical operation may not be the most natural interest entry point right now."
+    },
+    {
+      "q": "Is 140Q more accurate?",
+      "a": "Do not read it that way. 140Q observes tasks, environments, and role responsibilities in more context. It does not overturn 60Q and it does not compare raw scores across forms."
+    },
+    {
+      "q": "What if I disagree with the result?",
+      "a": "Record the disagreement, check answer quality, near ties, and activity imagination, then use low-risk experiments or a same-form retest to validate. Feedback does not change scores."
+    },
+    {
+      "q": "Why are occupation examples not expanded into a direct list?",
+      "a": "Occupation names are easy to misread as conclusions. FermatMind shows activities and tasks first. Occupation names are only context examples and must keep source status visible."
+    },
+    {
+      "q": "Can I share the report with a teacher, counselor, or friend?",
+      "a": "Start with the safe share version. When a full report includes personal interest structure or feedback history, you should decide whether to show it."
+    },
+    {
+      "q": "Can an employer use this for screening?",
+      "a": "No. This report must not be used for recruiting, admission, promotion, elimination, or qualification decisions."
+    },
+    {
+      "q": "Why does the result page include Action Lab?",
+      "a": "Career interests need real-world validation. Action Lab supports low-risk experiments and does not generate career conclusions."
+    },
+    {
+      "q": "What if a retest looks different?",
+      "a": "First check whether it used the same form, answer quality, near ties, and your state at the time. Do not chart raw score gains or drops across different forms."
+    },
+    {
+      "q": "Can a Holland Code change over time?",
+      "a": "Interest structure often has some stability, but experience, opportunity, and environment can affect expression. Treat retesting as a clue about change, not a win-or-lose result."
+    },
+    {
+      "q": "How is this different from an ability test?",
+      "a": "RIASEC looks at interest in activities. It does not decide whether you are already good at them. Ability needs other evidence."
+    },
+    {
+      "q": "Why not just tell me the single path I should take?",
+      "a": "A direct conclusion can hide real-world constraints. A steadier approach is to read activities, tasks, environments, and roles first, then test small next steps."
+    },
+    {
+      "q": "If I already have a target occupation, should I still read RIASEC?",
+      "a": "Yes. Put the target into aspiration calibration and read which activities overlap with current interest clues, and which real-world parts still need validation."
+    },
+    {
+      "q": "Can I show the PDF to a counselor?",
+      "a": "Yes, but once a PDF is forwarded the platform cannot remotely recall it. A counselor discussion version should be used only with your permission."
+    },
+    {
+      "q": "Why does the result page not show every score detail by default?",
+      "a": "The default view shows levels and explanations to reduce false precision. Expanded views can show more evidence when appropriate."
+    },
+    {
+      "q": "Is a higher score always better?",
+      "a": "No. High interest can be a more natural energy entry point, but it can also carry practical costs. Low interest is not a defect."
+    },
+    {
+      "q": "Can I use this report to choose a college major?",
+      "a": "It can be an exploration input, but not the only basis. Major decisions also depend on course content, ability foundation, portfolio, resources, location, and long-term commitment."
+    }
+  ],
+  "required_boundaries": [
+    "interest_evidence_only",
+    "not_personality_identity",
+    "not_ability_or_skill_measure",
+    "not_career_recommendation",
+    "examples_not_matches",
+    "not_job_fit",
+    "not_success_prediction",
+    "not_hiring_or_screening_use",
+    "no_60q_140q_raw_delta",
+    "140q_contextual_not_more_accurate",
+    "feedback_does_not_mutate_measured_result",
+    "missing_content_fails_closed",
+    "frontend_fallback_forbidden"
+  ],
+  "forbidden_claims": [
+    "personality_identity",
+    "ability_or_skill_inference",
+    "career_match",
+    "career_recommendation",
+    "job_fit",
+    "fit_score",
+    "occupation_ranking",
+    "success_prediction",
+    "hiring_suitability",
+    "screening_use",
+    "140q_more_accurate",
+    "raw_score_delta",
+    "onet_soc_source_invention"
+  ],
+  "frontend_fallback_allowed": false,
+  "fallback_behavior": "omit_module",
+  "v5_editorial_note": "English FAQ lifecycle draft covers user misunderstanding paths, share/PDF/history, and non-recommendation boundaries."
+}
