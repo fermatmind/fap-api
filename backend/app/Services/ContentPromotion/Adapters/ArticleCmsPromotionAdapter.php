@@ -39,7 +39,7 @@ final class ArticleCmsPromotionAdapter implements ExactPackagePromotionAdapter
 
     public function supports(string $lane, ?string $subscope): bool
     {
-        return $lane === 'W3' && $subscope === 'articles';
+        return $lane === 'W3' && $subscope === ArticleCmsPromotionAuthority::CONTROL_SUBSCOPE;
     }
 
     public function preflight(PromotionContext $context): array

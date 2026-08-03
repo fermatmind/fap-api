@@ -53,7 +53,7 @@ final class PromotionAdapterCapabilityTest extends TestCase
         self::assertSame('audit_compatible', $capabilities['W1/mbti-comparisons']);
         self::assertSame('audit_compatible', $capabilities['W1/mbti-results']);
         self::assertSame('audit_compatible', $capabilities['W2/big-five']);
-        self::assertSame('audit_compatible', $capabilities['W3/articles']);
+        self::assertSame('audit_compatible', $capabilities['W3/W3-ARTICLES']);
         self::assertSame('audit_compatible', $capabilities['W5/enneagram']);
         self::assertSame('audit_compatible', $capabilities['W5/enneagram-results']);
         self::assertSame('audit_compatible', $capabilities['W3/career-guides']);

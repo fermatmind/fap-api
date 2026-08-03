@@ -51,7 +51,7 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
         ]);
         $package = $this->package([$first, $second]);
         $context = $this->context($package, 2);
-        $adapter = app(PromotionAdapterRegistry::class)->resolve('W3', 'articles');
+        $adapter = app(PromotionAdapterRegistry::class)->resolve('W3', 'W3-ARTICLES');
         self::assertSame('audit_compatible', $adapter->capability());
         self::assertSame(2, $adapter->preflight($context)['readback_count']);
         self::assertSame(2, $adapter->draftImport($context)['created_count']);
@@ -91,7 +91,7 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
     public function test_w3_article_package_fails_closed_on_cjk_private_payload_w9_and_foreign_working_revision(): void
     {
         $article = $this->article('bounded-article');
-        $adapter = app(PromotionAdapterRegistry::class)->resolve('W3', 'articles');
+        $adapter = app(PromotionAdapterRegistry::class)->resolve('W3', 'W3-ARTICLES');
         foreach ([
             ['snapshot' => ['title' => '中文'], 'error' => 'article_promotion_cjk_leakage'],
             ['snapshot' => ['seo_title' => '   '], 'error' => 'article_promotion_snapshot_invalid'],
@@ -139,7 +139,7 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
             'source_locale' => 'zh',
         ])->saveQuietly();
         $context = $this->context($this->package([$translated]), 1);
-        $adapter = app(PromotionAdapterRegistry::class)->resolve('W3', 'articles');
+        $adapter = app(PromotionAdapterRegistry::class)->resolve('W3', 'W3-ARTICLES');
         $adapter->draftImport($context);
         $revision = ArticleTranslationRevision::query()->withoutGlobalScopes()->where('article_id', $translated->id)->latest('id')->firstOrFail();
         self::assertSame($canonical->refresh()->source_version_hash, $revision->source_version_hash);
@@ -158,7 +158,7 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
     {
         $article = $this->article('seo-race-article');
         $context = $this->context($this->package([$article]), 1);
-        $adapter = app(PromotionAdapterRegistry::class)->resolve('W3', 'articles');
+        $adapter = app(PromotionAdapterRegistry::class)->resolve('W3', 'W3-ARTICLES');
         $adapter->draftImport($context);
         ArticleSeoMeta::query()->withoutGlobalScopes()->create([
             'article_id' => $article->id,
@@ -181,7 +181,7 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
     {
         $article = $this->article('source-hash-race-article');
         $context = $this->context($this->package([$article]), 1);
-        $adapter = app(PromotionAdapterRegistry::class)->resolve('W3', 'articles');
+        $adapter = app(PromotionAdapterRegistry::class)->resolve('W3', 'W3-ARTICLES');
         $adapter->draftImport($context);
         $article->forceFill(['voice' => 'concurrent-voice'])->save();
         try {
@@ -204,7 +204,7 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
             'source_locale' => 'zh',
         ])->saveQuietly();
         $context = $this->context($this->package([$translated]), 1);
-        $adapter = app(PromotionAdapterRegistry::class)->resolve('W3', 'articles');
+        $adapter = app(PromotionAdapterRegistry::class)->resolve('W3', 'W3-ARTICLES');
         $adapter->draftImport($context);
         $canonical->forceFill(['voice' => 'changed-source-voice'])->save();
         try {
@@ -241,9 +241,9 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
         $context = new PromotionContext(
             $packageDirectory,
             'd70e468bb1a07d74e786e5a93b5279feff5347be49a0264916408a6b2ccbdc9a',
-            'W3', 'articles', str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '1', 1, str_repeat('d', 64), 17, str_repeat('e', 64),
+            'W3', 'W3-ARTICLES', str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '1', 1, str_repeat('d', 64), 17, str_repeat('e', 64),
         );
-        $adapter = app(PromotionAdapterRegistry::class)->resolve('W3', 'articles');
+        $adapter = app(PromotionAdapterRegistry::class)->resolve('W3', 'W3-ARTICLES');
 
         self::assertSame(17, $adapter->preflight($context)['readback_count']);
         self::assertSame(17, $adapter->draftImport($context)['created_count']);
@@ -319,7 +319,7 @@ final class ArticleCmsPromotionAdapterTest extends TestCase
     {
         $manifest = json_decode((string) File::get($directory.'/manifest.json'), true, 512, JSON_THROW_ON_ERROR);
 
-        return new PromotionContext($directory, $manifest['package_sha256'], 'W3', 'articles', str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '1', 1, str_repeat('d', 64), $rows, hash('sha256', $directory));
+        return new PromotionContext($directory, $manifest['package_sha256'], 'W3', 'W3-ARTICLES', str_repeat('a', 40), str_repeat('b', 64), str_repeat('c', 64), '1', 1, str_repeat('d', 64), $rows, hash('sha256', $directory));
     }
 
     /** @return array<string,mixed> */

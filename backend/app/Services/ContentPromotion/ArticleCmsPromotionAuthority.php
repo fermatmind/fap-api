@@ -23,6 +23,12 @@ use Illuminate\Support\Facades\DB;
 /** @review-surface article */
 final class ArticleCmsPromotionAuthority
 {
+    /** V2 control and receipt identity; distinct from the frozen package label. */
+    public const CONTROL_SUBSCOPE = 'W3-ARTICLES';
+
+    /** Legacy package manifests retain this immutable, package-local label. */
+    private const PACKAGE_SUBSCOPE = 'articles';
+
     private const SNAPSHOT_FIELDS = ['title', 'excerpt', 'content_md', 'seo_title', 'seo_description'];
 
     private const ARTICLE_STATE_FIELDS = ['org_id', 'slug', 'locale', 'title', 'excerpt', 'content_md', 'content_html', 'cover_image_alt', 'related_test_slug', 'voice', 'voice_order', 'translation_status', 'status', 'is_public', 'is_indexable', 'sitemap_eligible', 'llms_eligible', 'published_at'];
@@ -37,7 +43,7 @@ final class ArticleCmsPromotionAuthority
     /** @return array{targets:list<array<string,mixed>>,package_sha256:string} */
     public function inspect(PromotionContext $context): array
     {
-        if ($context->lane !== 'W3' || $context->subscope !== 'articles') {
+        if ($context->lane !== 'W3' || $context->subscope !== self::CONTROL_SUBSCOPE) {
             throw new DomainException('article_promotion_context_invalid');
         }
         if (is_file($context->packageDirectory.'/promotion_manifest.json')) {
@@ -46,7 +52,7 @@ final class ArticleCmsPromotionAuthority
         $manifestBytes = $this->read($context->packageDirectory, 'manifest.json');
         $manifest = $this->decode($manifestBytes, 'article_promotion_manifest_invalid');
         if (($manifest['schema_version'] ?? null) !== 'fermatmind.article_cms_promotion.v2'
-            || ($manifest['lane'] ?? null) !== 'W3' || ($manifest['subscope'] ?? null) !== 'articles'
+            || ($manifest['lane'] ?? null) !== 'W3' || ($manifest['subscope'] ?? null) !== self::PACKAGE_SUBSCOPE
             || ($manifest['locale'] ?? null) !== 'en' || ! is_array($manifest['payloads'] ?? null)
             || ! is_array($manifest['permissions'] ?? null)) {
             throw new DomainException('article_promotion_manifest_contract_invalid');
@@ -138,7 +144,7 @@ final class ArticleCmsPromotionAuthority
     {
         $manifest = $this->decode($this->read($context->packageDirectory, 'promotion_manifest.json'), 'article_promotion_manifest_invalid');
         if (($manifest['schema_version'] ?? null) !== 'fermatmind.article_cms_external_promotion.v3'
-            || ($manifest['lane'] ?? null) !== 'W3' || ($manifest['subscope'] ?? null) !== 'articles'
+            || ($manifest['lane'] ?? null) !== 'W3' || ($manifest['subscope'] ?? null) !== self::PACKAGE_SUBSCOPE
             || ($manifest['locale'] ?? null) !== 'en' || (int) ($manifest['expected_row_count'] ?? 0) !== $context->expectedRowCount
             || ! is_array($manifest['permissions'] ?? null) || ($manifest['frozen_package_directory'] ?? null) !== 'frozen_package'
             || ($manifest['external_evidence'] ?? null) !== 'external_package_evidence.json') {
@@ -554,7 +560,7 @@ final class ArticleCmsPromotionAuthority
             throw new DomainException('article_promotion_w9_evidence_incomplete');
         }
         $report = $this->decode($bytes, 'article_promotion_w9_evidence_incomplete');
-        if (($report['schema_version'] ?? null) !== 'fermatmind.en_parity.independent_w9_report.v1' || ($report['review_kind'] ?? null) !== 'independent_w9' || ($report['verdict'] ?? null) !== 'PASS' || ($report['package_sha256'] ?? null) !== $packageSha || ($report['lane_id'] ?? null) !== 'W3' || ($report['subscope'] ?? null) !== 'articles' || (int) ($report['reviewed_row_count'] ?? 0) !== $rows) {
+        if (($report['schema_version'] ?? null) !== 'fermatmind.en_parity.independent_w9_report.v1' || ($report['review_kind'] ?? null) !== 'independent_w9' || ($report['verdict'] ?? null) !== 'PASS' || ($report['package_sha256'] ?? null) !== $packageSha || ($report['lane_id'] ?? null) !== 'W3' || ($report['subscope'] ?? null) !== self::PACKAGE_SUBSCOPE || (int) ($report['reviewed_row_count'] ?? 0) !== $rows) {
             throw new DomainException('article_promotion_w9_evidence_incomplete');
         }
     }

@@ -187,6 +187,7 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
         });
         self::assertSame('Promoted command article', $article->refresh()->title);
         self::assertSame(1, $this->receipt('article-live-qa.json')['published_count']);
+        self::assertSame('W3-ARTICLES', $this->receipt('article-live-qa.json')['subscope']);
         self::assertSame(0, $this->receipt('article-live-qa.json')['sitemap_mutation_count']);
     }
 
@@ -470,10 +471,10 @@ final class ContentPromoteExactPackageCommandTest extends TestCase
     /** @return array<string,mixed> */
     private function runArticlePhase(string $package, string $sha, string $phase, string $filename): array
     {
-        $this->setWorkflowSignature('W3', 'articles', $sha);
+        $this->setWorkflowSignature('W3', 'W3-ARTICLES', $sha);
         $output = new BufferedOutput;
         $exit = Artisan::call('content:promote-exact-package', [
-            '--package' => $package, '--expected-package-sha256' => $sha, '--lane' => 'W3', '--subscope' => 'articles',
+            '--package' => $package, '--expected-package-sha256' => $sha, '--lane' => 'W3', '--subscope' => 'W3-ARTICLES',
             '--phase' => $phase, '--receipt' => $this->receiptDirectory.'/'.$filename, '--json' => true,
         ], $output);
         $stdout = $output->fetch();
