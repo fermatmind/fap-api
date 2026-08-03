@@ -120,6 +120,47 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringContainsString('Immutable standard candidate baseline verified without disclosing revision values.', $deploy);
     }
 
+    public function test_w1_content_executor_can_use_only_the_exact_no_migration_code_only_release(): void
+    {
+        $workflow = $this->workflow();
+        $eligibility = $this->between($workflow, '  deployment-eligibility:', '  deploy-production:');
+        $deployer = (string) file_get_contents(dirname(__DIR__, 3).'/deploy.php');
+        $codeOnlyStart = strpos($deployer, "task('deploy:code-only', [");
+        $this->assertIsInt($codeOnlyStart);
+        $codeOnlyEnd = strpos($deployer, ']);', $codeOnlyStart);
+        $this->assertIsInt($codeOnlyEnd);
+        $codeOnlyTask = substr($deployer, $codeOnlyStart, $codeOnlyEnd - $codeOnlyStart + 3);
+
+        foreach ([
+            'W1_CONTENT_EXECUTOR_ACTIVE_SHA="beaec277058534189176a6814d2c0f3c116cc4ce"',
+            'W1_CONTENT_EXECUTOR_CANDIDATE_SHA="44bd661c18dd470ae8d2dca48f101f37db306418"',
+            'W1_CONTENT_EXECUTOR_STAGING_RUN_ID="30760540181"',
+            'W1_CONTENT_EXECUTOR_DIFF_SHA256="423f2d9b7a3907648d0769023297a8002383a1da64f554ba03a97a6b5deffa48"',
+            'test "$STAGING_RUN_ID" = "$W1_CONTENT_EXECUTOR_STAGING_RUN_ID"',
+            'git diff --binary "$EXPECTED_DEPLOYED_REVISION" "$DEPLOY_SHA" | sha256sum',
+            'git diff --no-renames --name-only "$EXPECTED_DEPLOYED_REVISION" "$DEPLOY_SHA" -- backend/database/migrations',
+            'backend/content_assets/en-content-parity/W9/mbti-results/9325013b-renderer-643b7a80/external_evidence_envelope.json',
+            'backend/content_assets/en-content-parity/W9/mbti-results/9325013b-renderer-643b7a80/independent_qa_report.json',
+            'code-only scope accepted the exact W1 content-promotion executor release without migrations or authority writes.',
+            'code-only scope refused unbound W1 external W9 evidence: $path',
+            'I explicitly approve backend code-only production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID}.',
+            'DEPLOY_TASK=deploy:code-only',
+        ] as $contract) {
+            $this->assertStringContainsString($contract, $eligibility.$workflow);
+        }
+
+        foreach ([
+            'artisan:migrate',
+            'artisan:scales:seed-default',
+            'cms:import-landing-surface-baselines',
+            'cms:import-content-page-baselines',
+            'career:warm-public-authority-cache',
+            'seo:warm-sitemap-source-cache',
+        ] as $forbiddenTask) {
+            $this->assertStringNotContainsString($forbiddenTask, $codeOnlyTask);
+        }
+    }
+
     public function test_failed_production_deploy_collects_only_read_only_incident_evidence(): void
     {
         $workflow = $this->workflow();
