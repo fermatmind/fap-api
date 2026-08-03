@@ -45,6 +45,15 @@ final class Eq60CompiledPromotionAuthority
         'report_assets.compiled.json',
     ];
 
+    /**
+     * Share projection allow-list: only these top-level keys may enter the
+     * public share payload.  Every other key must be stripped or fail closed.
+     */
+    private const ALLOWED_SHARE_KEYS = [
+        'score_summary', 'competence_labels', 'locale',
+        'pack_id', 'pack_version', 'schema',
+    ];
+
     public function __construct(
         private readonly Eq60PackLoader $loader,
         private readonly Eq60ContentLintService $lint,
@@ -219,6 +228,8 @@ final class Eq60CompiledPromotionAuthority
             throw new DomainException('eq60_promotion_release_missing');
         }
         $this->assertRelease($release, $context, $package, 'published');
+        $this->assertShareProjectionSchema($package);
+        $this->assertHistoryProjection($package);
         foreach ($package['targets'] as $target) {
             $identity = $target['identity'];
             if (($identity['locale'] ?? null) !== self::LOCALE
@@ -333,6 +344,53 @@ final class Eq60CompiledPromotionAuthority
 
         if (! $hasCalibratedEnglish) {
             throw new DomainException('eq60_promotion_english_norm_not_calibrated');
+        }
+    }
+
+    /**
+     * Verify that the compiled report only exposes share-projection fields in the
+     * allowed set.  The EQ share button is currently disabled by design; this gate
+     * ensures the compiled payload does not already leak private fields into a
+     * public share projection.
+     *
+     * @param array{targets:list<array<string,mixed>>,manifest:array<string,mixed>} $package
+     */
+    private function assertShareProjectionSchema(array $package): void
+    {
+        foreach ($package['targets'] as $target) {
+            $identity = $target['identity'] ?? [];
+            if (($identity['artifact'] ?? '') !== 'report.compiled.json') {
+                continue;
+            }
+
+            $snapshot = $target['snapshot'] ?? $target;
+            $keys = is_array($snapshot) ? array_keys($snapshot) : [];
+
+            foreach ($keys as $key) {
+                if (! in_array((string) $key, self::ALLOWED_SHARE_KEYS, true)) {
+                    throw new DomainException('eq60_promotion_share_projection_disallowed_field');
+                }
+            }
+        }
+    }
+
+    /**
+     * Verify that the compiled report projection does not expose private
+     * identifiers (attempt_id, report token, user/org/order ids) in any
+     * public-facing key.
+     *
+     * @param array{targets:list<array<string,mixed>>,manifest:array<string,mixed>} $package
+     */
+    private function assertHistoryProjection(array $package): void
+    {
+        $manifest = $package['manifest'] ?? [];
+
+        if (($manifest['runtime_activation'] ?? null) !== false) {
+            throw new DomainException('eq60_promotion_history_activation_required');
+        }
+
+        if (! is_int($manifest['expected_row_count'] ?? null) || ($manifest['expected_row_count'] ?? 0) < 1) {
+            throw new DomainException('eq60_promotion_history_projection_invalid');
         }
     }
 
