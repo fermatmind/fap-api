@@ -11,6 +11,7 @@ use App\Services\Storage\ContentReleaseManifestCatalogService;
 use DomainException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 /**
@@ -104,6 +105,7 @@ final class Eq60CompiledPromotionAuthority
         $this->assertClaimBoundary($assetsProjection);
         $this->assertNoCjk($reportProjection);
         $this->assertNoCjk($assetsProjection);
+        $this->assertNormAuthorityCalibrated();
 
         $projections = [
             'report.compiled.json' => $reportProjection,
@@ -306,6 +308,31 @@ final class Eq60CompiledPromotionAuthority
     {
         if (preg_match('/\p{sc=Han}/u', PromotionContextFactory::canonicalJson($projection)) === 1) {
             throw new DomainException('eq60_promotion_cjk_leakage');
+        }
+    }
+
+    /**
+     * Fail closed when English result blocks require a calibrated norm that does not exist.
+     *
+     * The compiled report may reference percentile/percentile-rank claims. Those claims
+     * are only valid when a calibrated English norm authority with the required locale,
+     * cohort, and version is present in the production scale_norms_versions / scale_norm_stats
+     * tables. This is a read-only existence check; it does not import, create, or
+     * activate norms.
+     */
+    private function assertNormAuthorityCalibrated(): void
+    {
+        if (! Schema::hasTable('scale_norms_versions') || ! Schema::hasTable('scale_norm_stats')) {
+            throw new DomainException('eq60_promotion_english_norm_not_calibrated');
+        }
+
+        $hasCalibratedEnglish = DB::table('scale_norms_versions')
+            ->where('locale', 'en')
+            ->whereIn('status', ['active', 'calibrated'])
+            ->exists();
+
+        if (! $hasCalibratedEnglish) {
+            throw new DomainException('eq60_promotion_english_norm_not_calibrated');
         }
     }
 
