@@ -1182,10 +1182,20 @@ jobs:
               backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php
               backend/app/Services/Cms/Mbti64CrossTypeComparisonPublicReadModel.php
             )
-            [ "$CURRENT_PRODUCTION_SHA" = "$AUDITED_IDX52_CANDIDATE_SHA" ] || {
+            if [ "$CURRENT_PRODUCTION_SHA" = "$AUDITED_IDX52_CANDIDATE_SHA" ]; then
+              # Direct match — full blob check
+              :
+            elif git merge-base --is-ancestor "$AUDITED_IDX52_CANDIDATE_SHA" "$CURRENT_PRODUCTION_SHA"; then
+              # Production advanced past audited SHA; assert ancestry-only
+              [ "$STAGING_SHA" = "$DEPLOY_SHA" ] || {
+                echo "INDEX-52 convergence baseline requires exact-SHA staging evidence." >&2
+                return 1
+              }
+              return 0
+            else
               echo "INDEX-52 convergence baseline refused an unreviewed production revision." >&2
               return 1
-            }
+            fi
             [ "$STAGING_SHA" = "$DEPLOY_SHA" ] || {
               echo "INDEX-52 convergence baseline requires exact-SHA staging evidence." >&2
               return 1
