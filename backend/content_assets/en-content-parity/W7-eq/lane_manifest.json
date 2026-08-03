@@ -1,0 +1,23 @@
+{
+  "status": "inventory_frozen",
+  "lane_id": "W7",
+  "subscope": "eq",
+  "package_sha256": "893b512562bd39a71b06dc2bd3f39d7a4979326ae7850e41a0cc8816a05c159c",
+  "compiled_hash": "c9130b56647c3091ab98889e0caa5be252298206e61ea077ac3499f03429ac83",
+  "pack_id": "EQ_60",
+  "pack_version": "v1",
+  "locale": "en",
+  "content_counts": {
+    "english_result_blocks": 51,
+    "reader_content_identities": 13,
+    "total": 64
+  },
+  "transition_trace": [
+    {
+      "from": "not_started",
+      "to": "inventory_frozen",
+      "reason": "compiled_package_frozen"
+    }
+  ],
+  "w9_verdict": "pending"
+}
