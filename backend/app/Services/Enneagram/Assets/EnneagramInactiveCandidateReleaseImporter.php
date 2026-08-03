@@ -131,7 +131,7 @@ final class EnneagramInactiveCandidateReleaseImporter
             throw new RuntimeException('candidate_hashes.json runtime_registry_manifest_sha256 mismatch.');
         }
 
-        $runtimeRegistryManifestPath = $this->registryReleaseResolver->runtimeRegistryRoot(self::PACK_VERSION)
+        $runtimeRegistryManifestPath = $this->registryReleaseResolver->repoFallbackRegistryRoot(self::PACK_VERSION)
             .DIRECTORY_SEPARATOR.'manifest.json';
         $runtimeRegistryHashActual = hash_file('sha256', $runtimeRegistryManifestPath) ?: '';
         if ($runtimeRegistryHashActual !== $expectedRuntimeRegistryHash) {
