@@ -276,8 +276,38 @@ jobs:
                   exit 1
                 fi
                 CODE_ONLY_SCOPE=true
+                # The W1 content-promotion executor must be deployed before its
+                # exact-package workflow can run, but the standard deploy task
+                # always invokes Laravel migrations. Keep this exception
+                # fail-closed: it accepts one audited active-to-candidate diff,
+                # one exact staging receipt, and no migration files. The actual
+                # Deployer task remains deploy:code-only, which excludes
+                # migration and CMS/discoverability authority mutation.
+                W1_CONTENT_EXECUTOR_CODE_ONLY=false
+                W1_CONTENT_EXECUTOR_ACTIVE_SHA="beaec277058534189176a6814d2c0f3c116cc4ce"
+                W1_CONTENT_EXECUTOR_CANDIDATE_SHA="44bd661c18dd470ae8d2dca48f101f37db306418"
+                W1_CONTENT_EXECUTOR_STAGING_RUN_ID="30760540181"
+                W1_CONTENT_EXECUTOR_DIFF_SHA256="423f2d9b7a3907648d0769023297a8002383a1da64f554ba03a97a6b5deffa48"
+                if [ "$REQUESTED_DEPLOY_MODE" = code_only ] \
+                  && [ "$EXPECTED_DEPLOYED_REVISION" = "$W1_CONTENT_EXECUTOR_ACTIVE_SHA" ] \
+                  && [ "$DEPLOY_SHA" = "$W1_CONTENT_EXECUTOR_CANDIDATE_SHA" ]; then
+                  test "$STAGING_RUN_ID" = "$W1_CONTENT_EXECUTOR_STAGING_RUN_ID"
+                  test "$(git diff --binary "$EXPECTED_DEPLOYED_REVISION" "$DEPLOY_SHA" | sha256sum | awk '{print $1}')" = \
+                    "$W1_CONTENT_EXECUTOR_DIFF_SHA256"
+                  test -z "$(git diff --no-renames --name-only "$EXPECTED_DEPLOYED_REVISION" "$DEPLOY_SHA" -- backend/database/migrations)"
+                  W1_CONTENT_EXECUTOR_CODE_ONLY=true
+                  echo "code-only scope accepted the exact W1 content-promotion executor release without migrations or authority writes."
+                fi
                 for path in "${CHANGED_FILES[@]}"; do
                   case "$path" in
+                  backend/content_assets/en-content-parity/W9/mbti-results/9325013b-renderer-643b7a80/external_evidence_envelope.json|backend/content_assets/en-content-parity/W9/mbti-results/9325013b-renderer-643b7a80/independent_qa_report.json)
+                    if [ "$W1_CONTENT_EXECUTOR_CODE_ONLY" = true ]; then
+                      echo "code-only scope accepted the exact immutable W1 external W9 evidence: $path"
+                    else
+                      CODE_ONLY_SCOPE=false
+                      echo "code-only scope refused unbound W1 external W9 evidence: $path" >&2
+                    fi
+                    ;;
                   backend/app/Services/Cms/PersonalityPublicAssetReadModelCache.php|backend/app/Services/Cms/PersonalityPublicContentAssetContract.php)
                     echo "code-only scope accepted audited personality runtime projection service: $path"
                     ;;
