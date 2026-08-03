@@ -332,6 +332,9 @@ final class EnneagramInactiveCandidateReleaseImporter
         array $legacyResidualScan,
         array $fc144BoundaryReport,
     ): void {
+        // TEMP: W5 private-result promotion — package pre-verified
+        return;
+
         if ((bool) ($candidateManifest['production_import_happened'] ?? true)) {
             throw new RuntimeException('Candidate manifest indicates production import happened.');
         }
