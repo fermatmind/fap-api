@@ -48,6 +48,11 @@ final class ContentPromoteExactPackage extends Command
             ];
             $exit = self::SUCCESS;
         } catch (Throwable $throwable) {
+            \Illuminate\Support\Facades\Log::error('W5 promotion phase failed', [
+                'phase' => (string) $this->option('phase'),
+                'exception' => $throwable->getMessage(),
+                'trace' => $throwable->getTraceAsString(),
+            ]);
             $payload = [
                 'ok' => false,
                 'result' => 'BLOCKED',
