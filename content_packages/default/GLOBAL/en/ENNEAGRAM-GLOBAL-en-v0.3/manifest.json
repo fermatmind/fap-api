@@ -1,11 +1,11 @@
 {
   "schema_version": "pack-manifest@v1",
   "pack_type": "content_pack",
-  "scale_code": "MBTI",
+  "scale_code": "ENNEAGRAM",
   "region": "GLOBAL",
   "locale": "en",
   "content_package_version": "v0.3",
-  "pack_id": "MBTI.global.en.default",
+  "pack_id": "ENNEAGRAM.global.en.default",
   "fallback": [],
   "lifecycle": {
     "state": "draft",
@@ -24,11 +24,7 @@
   },
   "assets": {
     "rules": [
-      "commercial_spec.json",
-      "report_identity_cards.json"
-    ],
-    "share_templates": [
-      "share_templates/wechat_default.json"
+      "commercial_spec.json"
     ]
   }
 }

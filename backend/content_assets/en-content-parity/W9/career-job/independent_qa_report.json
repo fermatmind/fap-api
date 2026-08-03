@@ -1,0 +1,35 @@
+{
+  "$schema": "docs/seo/generated/en-content-parity-control-master.v1.schema.json",
+  "artifact_kind": "independent_qa_report",
+  "schema_version": "fermatmind.en_content_parity_independent_qa_report.v1",
+  "qa_lane_id": "W9",
+  "producer_lane_id": "W8",
+  "subscope_id": "W8-CAREER-JOB",
+  "output_directory": "generated/en-content-parity/W9-independent-qa/",
+  "package_sha256": "de72fd4286a6a853621dc89b1b718125124305e3073673a6eadde5f77ea98e09",
+  "verdict": "PASS",
+  "reviewed_asset_ids": [
+    "ENPARITY-W8-CAREER-JOB-BATCH-50"
+  ],
+  "reviewed_row_count": 50,
+  "checks": {
+    "language_naturalness": "PASS",
+    "chinese_leakage": "PASS",
+    "claim_boundary": "PASS",
+    "asset_duplication": "PASS",
+    "field_leakage": "PASS",
+    "page_api_alignment": "PASS"
+  },
+  "permissions": {
+    "cms_write_authorized": false,
+    "staging_write_authorized": false,
+    "production_import_authorized": false,
+    "public_release_authorized": false,
+    "seo_runtime_release_authorized": false,
+    "search_submission_authorized": false,
+    "master_manifest_write_authorized": false
+  },
+  "control_id": "EN-PARITY-CONTROL-BOOTSTRAP-01",
+  "reviewed_at": "2026-08-03T19:00:53.972575+00:00",
+  "notes": "50 EN career jobs reviewed. 36 EN-first + 14 ONET-based across 6 industries. All status=draft, no Chinese leakage, claim boundaries respected. Batch-50 complete; remaining 292 to reach 342 parity."
+}

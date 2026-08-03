@@ -1,0 +1,37 @@
+{
+  "schema": "fap.share.templates.v1",
+  "schema_version": "share-template/v1",
+  "template_id": "mbti.wechat_default.v1.en",
+  "scale_slug": "personality-mbti-test",
+  "distribution_channel": "wechat",
+  "sync_to_meta": true,
+  "title": "FermatMind MBTI 16 Personality Types (24/93/144 Questions)",
+  "abstract": "Free assessment & free report | Three versions available, discover your MBTI type and strength profile",
+  "tagline": "Free Assessment · Free Report",
+  "keywords": [
+    "MBTI",
+    "16 Personality Types",
+    "Career Personality",
+    "Free Assessment",
+    "FermatMind"
+  ],
+  "cover_image_wide": "assets/share/mbti_wide_1200x630.png",
+  "cover_image_square": "assets/share/mbti_square_600x600.png",
+  "is_free_badge": true,
+  "social_count_template": "{{count}}+ users have received their professional report",
+  "social_proof_schema": {
+    "@context": "https://schema.org",
+    "@type": "InteractionCounter",
+    "interactionType": "https://schema.org/ShareAction",
+    "userInteractionCount": "{{count}}",
+    "name": "Share count",
+    "description": "{{count}}+ users have received their professional report"
+  },
+  "placeholders": {
+    "is_free": "Free",
+    "scale_name": "MBTI 16 Personality Types",
+    "year": "2026",
+    "count": "100000"
+  },
+  "locale": "en"
+}

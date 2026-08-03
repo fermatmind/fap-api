@@ -1,0 +1,528 @@
+{
+  "schema": "fap.report.identity_cards.v1",
+  "schema_version": "v1",
+  "locale": "en",
+  "engine": "v1.2",
+  "rules": {
+    "style_presets": [
+      "classic",
+      "youth",
+      "minimal"
+    ],
+    "max_tags": 6
+  },
+  "items": {
+    "ENFJ-A": {
+      "id": "idcard_ENFJ-A_en",
+      "type_code": "ENFJ-A",
+      "locale": "en",
+      "title": "Protagonist",
+      "subtitle": "A guide who organizes people and purpose into a unified rhythm, with steadier composure",
+      "tagline": "Understand people first, then guide the group toward a shared direction",
+      "tags": [
+        "visionary leadership",
+        "group coordination",
+        "emotional insight",
+        "organizational drive",
+        "steady composure"
+      ],
+      "summary": "You excel at sensing emotions and needs in complex social situations and guiding people back toward shared goals. Your influence typically comes from genuine understanding, clear communication, and a rhythm that others want to follow. You tend to maintain composure and confidence under pressure, organizing rather than reacting."
+    },
+    "ENFJ-T": {
+      "id": "idcard_ENFJ-T_en",
+      "type_code": "ENFJ-T",
+      "locale": "en",
+      "title": "Protagonist",
+      "subtitle": "A guide who organizes people and purpose into a unified rhythm, with sharper calibration",
+      "tagline": "Understand people first, then guide the group toward a shared direction",
+      "tags": [
+        "visionary leadership",
+        "group coordination",
+        "emotional insight",
+        "organizational drive",
+        "sharp calibration"
+      ],
+      "summary": "You excel at sensing emotions and needs in complex social situations and guiding people back toward shared goals. Your influence typically comes from genuine understanding, clear communication, and a rhythm that others want to follow. You tend to be more sensitive to feedback, risk, and subtle shifts, which sharpens your read of people and situations."
+    },
+    "ENFP-A": {
+      "id": "idcard_ENFP-A_en",
+      "type_code": "ENFP-A",
+      "locale": "en",
+      "title": "Campaigner",
+      "subtitle": "An inspirer who connects ideas, relationships, and momentum, with steadier energy",
+      "tagline": "You excel at igniting possibilities and making people want to join the journey",
+      "tags": [
+        "idea generation",
+        "relationship building",
+        "spontaneous energy",
+        "opportunity seeking",
+        "steady optimism"
+      ],
+      "summary": "You are skilled at seeing the potential in any situation and communicating that possibility to others. Your strength is not mechanical execution but the ability to ignite relationships, creativity, and motivation in the same moment. You tend to maintain steady optimism and energy even when pursuing multiple directions."
+    },
+    "ENFP-T": {
+      "id": "idcard_ENFP-T_en",
+      "type_code": "ENFP-T",
+      "locale": "en",
+      "title": "Campaigner",
+      "subtitle": "An inspirer who connects ideas, relationships, and momentum, with deeper reflection",
+      "tagline": "You excel at igniting possibilities and making people want to join the journey",
+      "tags": [
+        "idea generation",
+        "relationship building",
+        "spontaneous energy",
+        "opportunity seeking",
+        "reflective depth"
+      ],
+      "summary": "You are skilled at seeing the potential in any situation and communicating that possibility to others. Your strength is not mechanical execution but the ability to ignite relationships, creativity, and motivation in the same moment. You tend to reflect more deeply on feedback and outcomes, which may slow you but deepens your insight."
+    },
+    "ENTJ-A": {
+      "id": "idcard_ENTJ-A_en",
+      "type_code": "ENTJ-A",
+      "locale": "en",
+      "title": "Commander",
+      "subtitle": "A strategist who turns vision into executable order, with steadier confidence",
+      "tagline": "You see the big picture and organize people and resources to achieve it",
+      "tags": [
+        "strategic vision",
+        "decisive action",
+        "resource optimization",
+        "team alignment",
+        "steady confidence"
+      ],
+      "summary": "You naturally see inefficiencies and design better systems. Your leadership style is direct and outcome-focused: clarify the objective, assign the right people, and remove obstacles. You tend to project steady confidence and make decisions quickly based on strategic assessment."
+    },
+    "ENTJ-T": {
+      "id": "idcard_ENTJ-T_en",
+      "type_code": "ENTJ-T",
+      "locale": "en",
+      "title": "Commander",
+      "subtitle": "A strategist who turns vision into executable order, with heightened sensitivity to risk",
+      "tagline": "You see the big picture and organize people and resources to achieve it",
+      "tags": [
+        "strategic vision",
+        "decisive action",
+        "resource optimization",
+        "team alignment",
+        "risk awareness"
+      ],
+      "summary": "You naturally see inefficiencies and design better systems. Your leadership style is direct and outcome-focused: clarify the objective, assign the right people, and remove obstacles. You tend to be more attuned to risks and potential failures, which makes your planning more thorough but may slow decisive action."
+    },
+    "ENTP-A": {
+      "id": "idcard_ENTP-A_en",
+      "type_code": "ENTP-A",
+      "locale": "en",
+      "title": "Debater",
+      "subtitle": "An innovator who thrives on debate and possibility, with steadier direction",
+      "tagline": "You thrive on exploring ideas from every angle and challenging assumptions",
+      "tags": [
+        "intellectual exploration",
+        "debate and challenge",
+        "pattern recognition",
+        "creative disruption",
+        "steady focus"
+      ],
+      "summary": "You are energized by ideas, debate, and the exploration of what could be. Your mind naturally finds connections others miss, and you enjoy testing assumptions through argument. You tend to maintain steady intellectual focus across multiple domains of interest."
+    },
+    "ENTP-T": {
+      "id": "idcard_ENTP-T_en",
+      "type_code": "ENTP-T",
+      "locale": "en",
+      "title": "Debater",
+      "subtitle": "An innovator who thrives on debate and possibility, with more self-questioning",
+      "tagline": "You thrive on exploring ideas from every angle and challenging assumptions",
+      "tags": [
+        "intellectual exploration",
+        "debate and challenge",
+        "pattern recognition",
+        "creative disruption",
+        "self-questioning"
+      ],
+      "summary": "You are energized by ideas, debate, and the exploration of what could be. Your mind naturally finds connections others miss, and you enjoy testing assumptions through argument. You tend to question your own positions more intensely, which fuels deeper exploration but may create internal uncertainty."
+    },
+    "ESFJ-A": {
+      "id": "idcard_ESFJ-A_en",
+      "type_code": "ESFJ-A",
+      "locale": "en",
+      "title": "Consul",
+      "subtitle": "A caretaker who builds harmony through practical support, with steadier composure",
+      "tagline": "You create stability by caring for people's practical and emotional needs",
+      "tags": [
+        "practical care",
+        "social harmony",
+        "dependable support",
+        "community building",
+        "steady composure"
+      ],
+      "summary": "You create stability by attending to the practical and emotional needs of those around you. Your care is expressed through action: remembering details, showing up, and making sure people feel supported. You tend to maintain steady composure and reliability under most circumstances."
+    },
+    "ESFJ-T": {
+      "id": "idcard_ESFJ-T_en",
+      "type_code": "ESFJ-T",
+      "locale": "en",
+      "title": "Consul",
+      "subtitle": "A caretaker who builds harmony through practical support, with more emotional attunement",
+      "tagline": "You create stability by caring for people's practical and emotional needs",
+      "tags": [
+        "practical care",
+        "social harmony",
+        "dependable support",
+        "community building",
+        "emotional attunement"
+      ],
+      "summary": "You create stability by attending to the practical and emotional needs of those around you. Your care is expressed through action: remembering details, showing up, and making sure people feel supported. You tend to be more attuned to emotional undercurrents and others' unspoken needs."
+    },
+    "ESFP-A": {
+      "id": "idcard_ESFP-A_en",
+      "type_code": "ESFP-A",
+      "locale": "en",
+      "title": "Entertainer",
+      "subtitle": "A performer who brings energy and spontaneity to the present moment, with steadier presence",
+      "tagline": "You bring the present moment to life and make experiences memorable",
+      "tags": [
+        "present-moment energy",
+        "social spontaneity",
+        "aesthetic appreciation",
+        "hands-on engagement",
+        "steady optimism"
+      ],
+      "summary": "You are fully present, bringing energy and spontaneity to every moment. You learn by doing and connect by sharing experiences. You tend to maintain steady optimism and adapt easily to changing situations without losing your center."
+    },
+    "ESFP-T": {
+      "id": "idcard_ESFP-T_en",
+      "type_code": "ESFP-T",
+      "locale": "en",
+      "title": "Entertainer",
+      "subtitle": "A performer who brings energy and spontaneity to the present moment, with deeper self-awareness",
+      "tagline": "You bring the present moment to life and make experiences memorable",
+      "tags": [
+        "present-moment energy",
+        "social spontaneity",
+        "aesthetic appreciation",
+        "hands-on engagement",
+        "self-awareness"
+      ],
+      "summary": "You are fully present, bringing energy and spontaneity to every moment. You learn by doing and connect by sharing experiences. You tend to be more self-aware about how you come across, which adds a reflective layer to your natural expressiveness."
+    },
+    "ESTJ-A": {
+      "id": "idcard_ESTJ-A_en",
+      "type_code": "ESTJ-A",
+      "locale": "en",
+      "title": "Executive",
+      "subtitle": "An executor who brings structure and accountability to teams, with steadier authority",
+      "tagline": "You bring order, accountability, and follow-through to everything you lead",
+      "tags": [
+        "structured execution",
+        "accountability",
+        "standard setting",
+        "operational efficiency",
+        "steady authority"
+      ],
+      "summary": "You bring structure, accountability, and follow-through to every commitment. People rely on you because you set clear expectations and meet them consistently. You tend to lead with steady authority and respond to challenges with practical solutions."
+    },
+    "ESTJ-T": {
+      "id": "idcard_ESTJ-T_en",
+      "type_code": "ESTJ-T",
+      "locale": "en",
+      "title": "Executive",
+      "subtitle": "An executor who brings structure and accountability to teams, with more self-scrutiny",
+      "tagline": "You bring order, accountability, and follow-through to everything you lead",
+      "tags": [
+        "structured execution",
+        "accountability",
+        "standard setting",
+        "operational efficiency",
+        "self-scrutiny"
+      ],
+      "summary": "You bring structure, accountability, and follow-through to every commitment. People rely on you because you set clear expectations and meet them consistently. You tend to hold yourself to even higher standards and worry more about outcomes than others may realize."
+    },
+    "ESTP-A": {
+      "id": "idcard_ESTP-A_en",
+      "type_code": "ESTP-A",
+      "locale": "en",
+      "title": "Entrepreneur",
+      "subtitle": "A doer who acts decisively in the moment, with steadier confidence",
+      "tagline": "You assess situations quickly and act with confidence in the here and now",
+      "tags": [
+        "rapid assessment",
+        "tactical action",
+        "risk tolerance",
+        "direct communication",
+        "steady confidence"
+      ],
+      "summary": "You assess situations rapidly and act with confidence in the here and now. Your strength is tactical: identify the real problem and solve it immediately. You tend to maintain steady nerve under pressure and trust your instincts."
+    },
+    "ESTP-T": {
+      "id": "idcard_ESTP-T_en",
+      "type_code": "ESTP-T",
+      "locale": "en",
+      "title": "Entrepreneur",
+      "subtitle": "A doer who acts decisively in the moment, with sharper risk awareness",
+      "tagline": "You assess situations quickly and act with confidence in the here and now",
+      "tags": [
+        "rapid assessment",
+        "tactical action",
+        "risk tolerance",
+        "direct communication",
+        "risk awareness"
+      ],
+      "summary": "You assess situations rapidly and act with confidence in the here and now. Your strength is tactical: identify the real problem and solve it immediately. You tend to have sharper awareness of what could go wrong, which tempers your natural boldness with caution."
+    },
+    "INFJ-A": {
+      "id": "idcard_INFJ-A_en",
+      "type_code": "INFJ-A",
+      "locale": "en",
+      "title": "Advocate",
+      "subtitle": "A visionary who sees patterns in human experience and quietly moves toward meaning, with steadier resolve",
+      "tagline": "You sense deeper patterns and quietly work to bring meaning into the world",
+      "tags": [
+        "deep insight",
+        "quiet determination",
+        "meaning-making",
+        "human potential",
+        "steady resolve"
+      ],
+      "summary": "You perceive deeper patterns in human experience and quietly work to bring meaning into the world. Your influence is subtle but profound: you plant ideas, connect people, and move toward purpose with quiet determination. You tend to maintain steady resolve even when progress feels slow."
+    },
+    "INFJ-T": {
+      "id": "idcard_INFJ-T_en",
+      "type_code": "INFJ-T",
+      "locale": "en",
+      "title": "Advocate",
+      "subtitle": "A visionary who sees patterns in human experience and quietly moves toward meaning, with deeper emotional attunement",
+      "tagline": "You sense deeper patterns and quietly work to bring meaning into the world",
+      "tags": [
+        "deep insight",
+        "quiet determination",
+        "meaning-making",
+        "human potential",
+        "emotional depth"
+      ],
+      "summary": "You perceive deeper patterns in human experience and quietly work to bring meaning into the world. Your influence is subtle but profound: you plant ideas, connect people, and move toward purpose with quiet determination. You tend to feel the weight of your ideals more intensely, which deepens your empathy and sometimes your exhaustion."
+    },
+    "INFP-A": {
+      "id": "idcard_INFP-A_en",
+      "type_code": "INFP-A",
+      "locale": "en",
+      "title": "Mediator",
+      "subtitle": "An idealist who navigates by inner values and imagines better worlds, with steadier conviction",
+      "tagline": "You move through the world guided by inner ideals and a search for authenticity",
+      "tags": [
+        "inner values",
+        "creative imagination",
+        "authenticity seeking",
+        "compassionate advocacy",
+        "steady conviction"
+      ],
+      "summary": "You navigate by inner values and imagine better worlds with clarity and conviction. Your strength is not conformity but authentic vision: you see what could be and live in alignment with what matters. You tend to maintain steady conviction in your ideals even when they run counter to consensus."
+    },
+    "INFP-T": {
+      "id": "idcard_INFP-T_en",
+      "type_code": "INFP-T",
+      "locale": "en",
+      "title": "Mediator",
+      "subtitle": "An idealist who navigates by inner values and imagines better worlds, with more self-reflection",
+      "tagline": "You move through the world guided by inner ideals and a search for authenticity",
+      "tags": [
+        "inner values",
+        "creative imagination",
+        "authenticity seeking",
+        "compassionate advocacy",
+        "self-reflection"
+      ],
+      "summary": "You navigate by inner values and imagine better worlds with clarity and conviction. Your strength is not conformity but authentic vision: you see what could be and live in alignment with what matters. You tend to question and refine your ideals more continuously, which deepens your authenticity and sometimes your uncertainty."
+    },
+    "INTJ-A": {
+      "id": "idcard_INTJ-A_en",
+      "type_code": "INTJ-A",
+      "locale": "en",
+      "title": "Architect",
+      "subtitle": "A systems thinker who designs frameworks for complex problems, with steadier confidence",
+      "tagline": "You design systems and strategies to solve the problems that others find intractable",
+      "tags": [
+        "systems thinking",
+        "strategic foresight",
+        "independent analysis",
+        "efficiency optimization",
+        "steady confidence"
+      ],
+      "summary": "You design systems and strategies to solve problems that others find intractable. Your mind works in frameworks: understand the structure, identify leverage points, and execute with precision. You tend to trust your analysis and move forward with steady confidence."
+    },
+    "INTJ-T": {
+      "id": "idcard_INTJ-T_en",
+      "type_code": "INTJ-T",
+      "locale": "en",
+      "title": "Architect",
+      "subtitle": "A systems thinker who designs frameworks for complex problems, with heightened perfectionism",
+      "tagline": "You design systems and strategies to solve the problems that others find intractable",
+      "tags": [
+        "systems thinking",
+        "strategic foresight",
+        "independent analysis",
+        "efficiency optimization",
+        "high standards"
+      ],
+      "summary": "You design systems and strategies to solve problems that others find intractable. Your mind works in frameworks: understand the structure, identify leverage points, and execute with precision. You tend to set extremely high standards for yourself and continuously refine your thinking, which drives excellence and occasional self-criticism."
+    },
+    "INTP-A": {
+      "id": "idcard_INTP-A_en",
+      "type_code": "INTP-A",
+      "locale": "en",
+      "title": "Logician",
+      "subtitle": "A logician who dissects ideas to their foundations, with steadier focus",
+      "tagline": "You are driven to understand how things work at the deepest conceptual level",
+      "tags": [
+        "conceptual analysis",
+        "logical precision",
+        "intellectual independence",
+        "theoretical depth",
+        "steady focus"
+      ],
+      "summary": "You are driven to understand how things work at the deepest conceptual level. Your mind dissects ideas to their foundations, looking for the principles that explain everything. You tend to maintain steady focus on your intellectual pursuits and trust your analytical process."
+    },
+    "INTP-T": {
+      "id": "idcard_INTP-T_en",
+      "type_code": "INTP-T",
+      "locale": "en",
+      "title": "Logician",
+      "subtitle": "A logician who dissects ideas to their foundations, with more restless curiosity",
+      "tagline": "You are driven to understand how things work at the deepest conceptual level",
+      "tags": [
+        "conceptual analysis",
+        "logical precision",
+        "intellectual independence",
+        "theoretical depth",
+        "restless curiosity"
+      ],
+      "summary": "You are driven to understand how things work at the deepest conceptual level. Your mind dissects ideas to their foundations, looking for the principles that explain everything. You tend to have restless curiosity that drives you to explore more questions than answers, which fuels innovation and occasional scattered focus."
+    },
+    "ISFJ-A": {
+      "id": "idcard_ISFJ-A_en",
+      "type_code": "ISFJ-A",
+      "locale": "en",
+      "title": "Defender",
+      "subtitle": "A protector who quietly safeguards people and traditions, with steadier resilience",
+      "tagline": "You protect what matters through quiet dedication and practical care",
+      "tags": [
+        "quiet dedication",
+        "practical memory",
+        "protective care",
+        "tradition stewardship",
+        "steady resilience"
+      ],
+      "summary": "You protect what matters through quiet dedication and practical care. Your memory for what people need and your follow-through on commitments make you a steady anchor. You tend to maintain resilience through routine and reliability, weathering challenges with quiet strength."
+    },
+    "ISFJ-T": {
+      "id": "idcard_ISFJ-T_en",
+      "type_code": "ISFJ-T",
+      "locale": "en",
+      "title": "Defender",
+      "subtitle": "A protector who quietly safeguards people and traditions, with more emotional sensitivity",
+      "tagline": "You protect what matters through quiet dedication and practical care",
+      "tags": [
+        "quiet dedication",
+        "practical memory",
+        "protective care",
+        "tradition stewardship",
+        "emotional sensitivity"
+      ],
+      "summary": "You protect what matters through quiet dedication and practical care. Your memory for what people need and your follow-through on commitments make you a steady anchor. You tend to be more emotionally sensitive to others' wellbeing, which deepens your care and sometimes your worry."
+    },
+    "ISFP-A": {
+      "id": "idcard_ISFP-A_en",
+      "type_code": "ISFP-A",
+      "locale": "en",
+      "title": "Adventurer",
+      "subtitle": "A creator who expresses through aesthetics and lived experience, with steadier self-assurance",
+      "tagline": "You experience the world through a rich inner aesthetic and a strong personal compass",
+      "tags": [
+        "aesthetic sensitivity",
+        "personal authenticity",
+        "gentle independence",
+        "lived experience",
+        "steady self-assurance"
+      ],
+      "summary": "You experience the world through a rich inner aesthetic and a strong personal compass. Your creativity is expressed through action, craft, and the way you live rather than through words alone. You tend to maintain steady self-assurance in your values and aesthetic judgments."
+    },
+    "ISFP-T": {
+      "id": "idcard_ISFP-T_en",
+      "type_code": "ISFP-T",
+      "locale": "en",
+      "title": "Adventurer",
+      "subtitle": "A creator who expresses through aesthetics and lived experience, with deeper introspection",
+      "tagline": "You experience the world through a rich inner aesthetic and a strong personal compass",
+      "tags": [
+        "aesthetic sensitivity",
+        "personal authenticity",
+        "gentle independence",
+        "lived experience",
+        "introspective depth"
+      ],
+      "summary": "You experience the world through a rich inner aesthetic and a strong personal compass. Your creativity is expressed through action, craft, and the way you live rather than through words alone. You tend toward deeper introspection about your choices and their alignment with your values."
+    },
+    "ISTJ-A": {
+      "id": "idcard_ISTJ-A_en",
+      "type_code": "ISTJ-A",
+      "locale": "en",
+      "title": "Logistician",
+      "subtitle": "An inspector who upholds standards through diligence and order, with steadier composure",
+      "tagline": "You build reliable foundations through thoroughness, integrity, and follow-through",
+      "tags": [
+        "thorough execution",
+        "factual integrity",
+        "procedural reliability",
+        "quiet diligence",
+        "steady composure"
+      ],
+      "summary": "You build reliable foundations through thoroughness, integrity, and follow-through. Your word is your bond: when you commit, it gets done correctly. You tend to maintain steady composure and focus on facts regardless of emotional pressure."
+    },
+    "ISTJ-T": {
+      "id": "idcard_ISTJ-T_en",
+      "type_code": "ISTJ-T",
+      "locale": "en",
+      "title": "Logistician",
+      "subtitle": "An inspector who upholds standards through diligence and order, with more concern for outcomes",
+      "tagline": "You build reliable foundations through thoroughness, integrity, and follow-through",
+      "tags": [
+        "thorough execution",
+        "factual integrity",
+        "procedural reliability",
+        "quiet diligence",
+        "outcome concern"
+      ],
+      "summary": "You build reliable foundations through thoroughness, integrity, and follow-through. Your word is your bond: when you commit, it gets done correctly. You tend to be more concerned about getting things exactly right, which drives thoroughness and occasional over-preparation."
+    },
+    "ISTP-A": {
+      "id": "idcard_ISTP-A_en",
+      "type_code": "ISTP-A",
+      "locale": "en",
+      "title": "Virtuoso",
+      "subtitle": "A craftsman who analyzes and masters tools and systems, with steadier independence",
+      "tagline": "You master tools, systems, and situations through hands-on analysis and calm action",
+      "tags": [
+        "hands-on mastery",
+        "analytical troubleshooting",
+        "calm under pressure",
+        "tool proficiency",
+        "steady independence"
+      ],
+      "summary": "You master tools, systems, and situations through hands-on analysis and calm action. You learn by doing, troubleshoot by isolating variables, and stay cool when others panic. You tend to maintain steady independence and trust your practical judgment."
+    },
+    "ISTP-T": {
+      "id": "idcard_ISTP-T_en",
+      "type_code": "ISTP-T",
+      "locale": "en",
+      "title": "Virtuoso",
+      "subtitle": "A craftsman who analyzes and masters tools and systems, with more situational adaptation",
+      "tagline": "You master tools, systems, and situations through hands-on analysis and calm action",
+      "tags": [
+        "hands-on mastery",
+        "analytical troubleshooting",
+        "calm under pressure",
+        "tool proficiency",
+        "situational adaptation"
+      ],
+      "summary": "You master tools, systems, and situations through hands-on analysis and calm action. You learn by doing, troubleshoot by isolating variables, and stay cool when others panic. You tend to adapt more fluidly to situational demands, which makes you resourceful and sometimes hard to predict."
+    }
+  }
+}

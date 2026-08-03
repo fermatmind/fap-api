@@ -1,11 +1,11 @@
 {
   "schema_version": "pack-manifest@v1",
   "pack_type": "content_pack",
-  "scale_code": "MBTI",
+  "scale_code": "RIASEC",
   "region": "GLOBAL",
   "locale": "en",
   "content_package_version": "v0.3",
-  "pack_id": "MBTI.global.en.default",
+  "pack_id": "RIASEC.global.en.default",
   "fallback": [],
   "lifecycle": {
     "state": "draft",
@@ -24,11 +24,13 @@
   },
   "assets": {
     "rules": [
-      "commercial_spec.json",
-      "report_identity_cards.json"
+      "commercial_spec.json"
     ],
-    "share_templates": [
-      "share_templates/wechat_default.json"
+    "lifecycle": [
+      "faq_v1.en.json",
+      "share_pdf_history_v1.en.json",
+      "technical_note_user_summary_v1.en.json",
+      "professional_method_boundary_v1.en.json"
     ]
   }
 }

@@ -1,0 +1,210 @@
+{
+  "$schema": "../../backend/docs/seo/generated/en-content-parity-control-master.v1.schema.json",
+  "artifact_kind": "global_master_manifest",
+  "schema_version": "fermatmind.en_content_parity_global_master_manifest.v1",
+  "control_id": "EN-PARITY-CONTROL-2026-07-30",
+  "initiative": "FermatMind English Parity 2026-07-30",
+  "created_at": "2026-08-04T02:05:00+08:00",
+  "handoff_root": "generated/en-parity-2026-07-30",
+  "asset_id_namespace": {
+    "prefix": "ENPARITY",
+    "pattern": "ENPARITY-{WINDOW}-{SCOPE}",
+    "reserved": {
+      "W1": [
+        "ENPARITY-W1-MBTI-ARTICLES",
+        "ENPARITY-W1-MBTI-COMPARISONS",
+        "ENPARITY-W1-MBTI-RESULT-CONTENT"
+      ],
+      "W2": [
+        "ENPARITY-W2-BIGFIVE-ARTICLES",
+        "ENPARITY-W2-BIGFIVE-CONTENT-PAGES",
+        "ENPARITY-W2-BIGFIVE-RESULT-V2"
+      ],
+      "W3": [
+        "ENPARITY-W3-CAREER-GUIDES"
+      ],
+      "W4": [
+        "ENPARITY-W4-RIASEC-ARTICLES",
+        "ENPARITY-W4-RIASEC-DEEP-ASSETS",
+        "ENPARITY-W4-RIASEC-LIFECYCLE"
+      ],
+      "W5": [
+        "ENPARITY-W5-ENNEAGRAM-ARTICLE",
+        "ENPARITY-W5-ENNEAGRAM-RESULT-PRIVATE",
+        "ENPARITY-W5-ENNEAGRAM-RESULT-PUBLIC"
+      ],
+      "W7": [
+        "ENPARITY-W7-EQ-ARTICLE",
+        "ENPARITY-W7-EQ-RESULT"
+      ],
+      "W8": [
+        "ENPARITY-W8-CAREER-JOB-MAPPING",
+        "ENPARITY-W8-CAREER-JOB-BATCH-50"
+      ]
+    }
+  },
+  "translation_group_conventions": {
+    "article_cohort": "cohort:editorial:article-english-backlog",
+    "content_page": "cohort:content-page:{slug}",
+    "career_guide": "cohort:career-guide:{guide_code}",
+    "career_job": "cohort:career-job:{job_code}",
+    "result_asset": "cohort:{family}:{scope}",
+    "hash_based_article": "{family}-v2-{content_hash}"
+  },
+  "batch_number_rules": {
+    "default_batch_size": 50,
+    "career_job_batch_size": 50,
+    "career_guide_canary_size": 5,
+    "career_guide_batch_size": 15,
+    "increment_per_scope": true
+  },
+  "window_dependency_graph": {
+    "W1-mbti": {
+      "depends_on": [
+        "W3-articles"
+      ]
+    },
+    "W2-big-five": {
+      "depends_on": [
+        "W3-articles"
+      ]
+    },
+    "W3-career-guide": {
+      "depends_on": []
+    },
+    "W4-riasec": {
+      "depends_on": [
+        "W3-articles"
+      ]
+    },
+    "W5-enneagram": {
+      "depends_on": [
+        "W3-articles"
+      ]
+    },
+    "W7-eq": {
+      "depends_on": [
+        "W3-articles"
+      ]
+    },
+    "W8-career-job": {
+      "depends_on": []
+    },
+    "W9-qa": {
+      "depends_on": [
+        "W1",
+        "W2",
+        "W3",
+        "W4",
+        "W5",
+        "W7",
+        "W8"
+      ]
+    }
+  },
+  "windows": {
+    "W1-mbti": {
+      "status": "complete",
+      "w9_verdict": "PASS",
+      "w9_subscopes": [
+        "W1-MBTI-RESULT-CONTENT",
+        "W1-MBTI-COMPARISONS"
+      ],
+      "articles_imported": true,
+      "comparisons_imported": true,
+      "result_chain_ready": true,
+      "priority": 1
+    },
+    "W2-big-five": {
+      "status": "complete",
+      "w9_verdict": null,
+      "articles_imported": true,
+      "content_pages_complete": true,
+      "result_v2_ready": "reviewed_import_package_7_groups",
+      "priority": 2
+    },
+    "W3-career-guide": {
+      "status": "complete",
+      "w9_verdict": "PASS",
+      "w9_subscopes": [
+        "W3-ARTICLES"
+      ],
+      "articles_imported": true,
+      "career_guides_cms_siblings": true,
+      "priority": 6
+    },
+    "W4-riasec": {
+      "status": "complete",
+      "w9_verdict": null,
+      "articles_imported": true,
+      "lifecycle_ready": true,
+      "deep_assets_ready": "14_of_14",
+      "priority": 3
+    },
+    "W5-enneagram": {
+      "status": "complete",
+      "w9_verdict": "PASS",
+      "w9_subscopes": [
+        "W5-ENNEAGRAM-PRIVATE-RESULTS"
+      ],
+      "articles_imported": true,
+      "public_result_chain_ready": true,
+      "priority": 4
+    },
+    "W7-eq": {
+      "status": "complete",
+      "w9_verdict": "PASS",
+      "articles_imported": true,
+      "result_chain_ready": true,
+      "priority": 5
+    },
+    "W8-career-job": {
+      "status": "complete",
+      "w9_verdict": null,
+      "mapping_complete": true,
+      "en_baseline_count": 50,
+      "target_en_count": 342,
+      "priority": 7,
+      "batch_50_complete": true
+    },
+    "W9-qa": {
+      "status": "complete",
+      "completed_subscopes": [
+        "W1-MBTI-RESULT-CONTENT",
+        "W1-MBTI-COMPARISONS",
+        "W3-ARTICLES",
+        "W5-ENNEAGRAM-PRIVATE-RESULTS",
+        "W2-BIGFIVE",
+        "W4-RIASEC",
+        "W7-EQ",
+        "W8-CAREER-JOB"
+      ],
+      "pending_subscopes": [],
+      "priority": 8
+    }
+  },
+  "permissions": {
+    "lanes_may_modify_own_directory": true,
+    "lanes_may_modify_global_manifest": false,
+    "lanes_may_modify_cms": false,
+    "lanes_may_modify_sitemap": false,
+    "lanes_may_modify_llms": false,
+    "lanes_may_deploy": false,
+    "control_may_modify_all": true
+  },
+  "execution_order": [
+    "C.1 CMS import authorization",
+    "C.2 W3 articles CMS import",
+    "C.3 W1 MBTI complete",
+    "C.4 W2 Big Five complete",
+    "C.5 W4 RIASEC complete",
+    "C.6 W5 Enneagram complete",
+    "C.7 W3 CareerGuide complete",
+    "C.8 W7 EQ complete",
+    "C.9 W8 CareerJob complete",
+    "C.10 W9 independent QA sweep",
+    "C.11 Global manifest merge",
+    "C.12 Post-release smoke"
+  ],
+  "updated_at": "2026-08-03T19:00:53.972575+00:00"
+}
