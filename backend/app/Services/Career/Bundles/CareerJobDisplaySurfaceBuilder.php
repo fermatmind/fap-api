@@ -28,6 +28,7 @@ final class CareerJobDisplaySurfaceBuilder
 
     private const ASSET_TYPE = 'career_job_public_display';
 
+    /** @var list<string> Keys that must never appear in public reader-facing payloads. */
     private const FORBIDDEN_PUBLIC_KEYS = [
         'release_gate',
         'release_gates',
@@ -35,6 +36,19 @@ final class CareerJobDisplaySurfaceBuilder
         'admin_review_state',
         'tracking_json',
         'raw_ai_exposure_score',
+        // W8-03: Internal identifiers and metadata must not leak to public readers.
+        'truth_metric_id',
+        'trust_manifest_id',
+        'index_state_id',
+        'compile_run_id',
+        'import_run_id',
+        'source_trace_id',
+        'metadata_fingerprint',
+        'fingerprint_seed',
+        'compile_refs',
+        'provenance_meta',
+        'lineage_id',
+        'lineage_json',
     ];
 
     private const PRODUCT_SCHEMA_KEYS = [

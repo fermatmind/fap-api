@@ -7,7 +7,7 @@ namespace App\Services\Career\Bundles;
 use App\Domain\Career\Import\RunStatus;
 use App\Domain\Career\IndexStateValue;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
-use App\DTO\Career\CareerJobListItemBundle;
+use App\Services\Career\Bundles\CareerJobPublicAllowlist;
 use App\Models\CareerCompileRun;
 use App\Models\CareerJob;
 use App\Models\CareerJobDisplayAsset;
@@ -429,7 +429,7 @@ final class CareerJobListBundleBuilder
                 'confidence_score' => $this->compactScore($payload['score_bundle']['confidence_score'] ?? null),
             ],
             seoContract: $this->buildSeoContract($occupation, $snapshot),
-            provenanceMeta: [
+            provenanceMeta: CareerJobPublicAllowlist::sanitizeProvenanceMeta([
                 'content_version' => $trustManifest?->content_version,
                 'data_version' => $trustManifest?->data_version,
                 'logic_version' => $trustManifest?->logic_version,
@@ -440,7 +440,7 @@ final class CareerJobListBundleBuilder
                 'index_state_id' => $snapshot->index_state_id,
                 'compile_run_id' => $snapshot->compile_run_id,
                 'import_run_id' => $importRunId,
-            ],
+            ]),
         );
     }
 

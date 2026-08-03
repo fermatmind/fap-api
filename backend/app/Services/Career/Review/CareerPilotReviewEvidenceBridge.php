@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Career\Review;
 
 use App\Models\ReviewAttestation;
-use App\Services\Career\Dataset\CareerPublishTrackResolver;
+use App\Services\Career\Bundles\CareerJobPublicAllowlist;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\ReviewGovernance\CareerSeoReviewAttestationService;
 use App\Services\ReviewGovernance\ReviewAttestationCanonicalizer;
@@ -179,6 +179,17 @@ final class CareerPilotReviewEvidenceBridge
             $payload['trust_manifest'],
             Arr::only($projection, ['review_state', 'last_reviewed_at']),
         );
+        // W8-04: Redact locale-inappropriate title fields.
+        if (is_array($payload['titles'] ?? null) && is_string($payload['display_surface_v1']['page']['locale'] ?? null)) {
+            $payload['titles'] = CareerJobPublicAllowlist::filterTitlesForLocale(
+                $payload['titles'],
+                $payload['display_surface_v1']['page']['locale'],
+            );
+        }
+        // W8-03: Redact provenance_meta internal identifiers.
+        if (is_array($payload['provenance_meta'] ?? null)) {
+            $payload['provenance_meta'] = CareerJobPublicAllowlist::sanitizeProvenanceMeta($payload['provenance_meta']);
+        }
         $authority = $this->searchEntryAuthority($slug, $projection, $payload);
         $payload['search_entry_tier'] = $authority['search_entry_tier'];
         $payload['search_entry_authority'] = $authority;
@@ -212,6 +223,14 @@ final class CareerPilotReviewEvidenceBridge
                 $item['trust_summary'],
                 Arr::only($projection, ['review_state', 'last_reviewed_at']),
             );
+            // W8-04: Redact locale-inappropriate title fields.
+            if (is_array($item['titles'] ?? null)) {
+                $item['titles'] = CareerJobPublicAllowlist::filterTitlesForLocale($item['titles'], $locale);
+            }
+            // W8-03: Redact provenance_meta internal identifiers.
+            if (is_array($item['provenance_meta'] ?? null)) {
+                $item['provenance_meta'] = CareerJobPublicAllowlist::sanitizeProvenanceMeta($item['provenance_meta']);
+            }
             $authority = $this->searchEntryAuthority($slug, $projection, $item);
             $item['search_entry_tier'] = $authority['search_entry_tier'];
             $item['search_entry_authority'] = $authority;

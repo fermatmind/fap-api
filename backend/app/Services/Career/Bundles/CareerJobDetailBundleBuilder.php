@@ -20,6 +20,7 @@ use App\Services\Career\Review\CareerSearchEntryTierResolver;
 use App\Services\Career\Scoring\CareerWhiteBoxScorePayloadBuilder;
 use App\Services\PublicSurface\SeoSurfaceContractService;
 use App\Services\ReviewGovernance\PublicReviewContract;
+use App\Services\Career\Bundles\CareerJobPublicAllowlist;
 use Illuminate\Support\Arr;
 
 /**
@@ -308,7 +309,7 @@ final class CareerJobDetailBundleBuilder
                 $publicLocale,
                 $exposureProjectionItem,
             ),
-            provenanceMeta: [
+            provenanceMeta: CareerJobPublicAllowlist::sanitizeProvenanceMeta([
                 'content_version' => $trustManifest?->content_version,
                 'data_version' => $trustManifest?->data_version,
                 'logic_version' => $trustManifest?->logic_version,
@@ -321,7 +322,7 @@ final class CareerJobDetailBundleBuilder
                 'import_run_id' => $importRunId,
                 'source_trace_id' => $truthMetric?->source_trace_id,
                 'compile_refs' => $this->normalizeArray($payload['compile_refs'] ?? []),
-            ],
+            ]),
             lifecycleCompanion: $this->feedbackTimelineAuthorityService->buildCompanionForJobSnapshot($snapshot),
             lifecycleOperational: $lifecycleOperational,
             shortlistContract: [
@@ -488,7 +489,7 @@ final class CareerJobDetailBundleBuilder
                 'degradation_factor' => 1,
             ],
             seoContract: $this->buildRuntimeProjectionSeoContract($occupation, $publicLocale, $exposureProjectionItem),
-            provenanceMeta: [
+            provenanceMeta: CareerJobPublicAllowlist::sanitizeProvenanceMeta([
                 'content_version' => 'runtime_published_navigation_shell',
                 'data_version' => 'career_runtime_publish_projection',
                 'logic_version' => 'career.protocol.job_detail.runtime_published_shell.v1',
@@ -503,7 +504,7 @@ final class CareerJobDetailBundleBuilder
                 'compile_refs' => [
                     'runtime_publish_projection' => 'release_gate_pass',
                 ],
-            ],
+            ]),
             lifecycleCompanion: [],
             lifecycleOperational: $lifecycleOperational,
             shortlistContract: [
@@ -685,7 +686,7 @@ final class CareerJobDetailBundleBuilder
                 'degradation_factor' => 1,
             ],
             seoContract: $this->buildDisplayAssetBackedSeoContract($occupation, $publicLocale, $exposureProjectionItem),
-            provenanceMeta: [
+            provenanceMeta: CareerJobPublicAllowlist::sanitizeProvenanceMeta([
                 'content_version' => 'display_asset_backed_v4_2',
                 'data_version' => 'career_job_display_assets.v4.2',
                 'logic_version' => 'career.protocol.job_detail.display_asset_backed.v1',
@@ -703,7 +704,7 @@ final class CareerJobDetailBundleBuilder
                     'asset_version' => (string) $asset->asset_version,
                     'status' => (string) $asset->status,
                 ],
-            ],
+            ]),
             lifecycleCompanion: [],
             lifecycleOperational: $lifecycleOperational,
             shortlistContract: [
@@ -891,7 +892,7 @@ final class CareerJobDetailBundleBuilder
                 'robots_policy' => $surface['robots_policy'] ?? $robotsPolicy,
                 'metadata_fingerprint' => $surface['metadata_fingerprint'] ?? null,
             ],
-            provenanceMeta: [
+            provenanceMeta: CareerJobPublicAllowlist::sanitizeProvenanceMeta([
                 'content_version' => 'docx_342_career_batch',
                 'data_version' => 'docx_342_career_batch',
                 'logic_version' => 'career.protocol.job_detail.docx_baseline.v1',
@@ -907,7 +908,7 @@ final class CareerJobDetailBundleBuilder
                     'cms_job_id' => (int) $job->id,
                     'source_docx' => Arr::get($job->seoMeta?->jsonld_overrides_json, 'source_docx'),
                 ],
-            ],
+            ]),
             lifecycleCompanion: [],
             lifecycleOperational: [
                 'member_kind' => 'career_job_detail',
