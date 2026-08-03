@@ -1,0 +1,53 @@
+{
+  "$schema": "../../../../docs/seo/generated/en-content-parity-control-master.v1.schema.json",
+  "artifact_kind": "lane_package",
+  "schema_version": "fermatmind.en_content_parity_lane_package.v1",
+  "control_id": "EN-PARITY-CONTROL-BOOTSTRAP-01",
+  "lane_id": "W3",
+  "subscope_id": "W3-CAREER-GUIDES",
+  "package_id": "EN-PARITY-W3-CAREER-GUIDE-PACKAGE-FREEZE-2026-08-02",
+  "status": "package_frozen",
+  "output_directory": "generated/en-content-parity/W3-editorial-cms/career-guides/",
+  "artifact_files": [
+    "scope_manifest.json",
+    "assets.jsonl",
+    "translation_map.json",
+    "source_ledger.json",
+    "claim_boundary_report.json",
+    "editorial_review.json",
+    "dry_run_readiness.json",
+    "sha256_manifest.json",
+    "master_manifest_patch.candidate.json",
+    "handoff.md"
+  ],
+  "assets": [
+    {
+      "asset_id": "ENPARITY-W3-CAREER-GUIDES",
+      "lane_id": "W3",
+      "asset_type": "career_guide",
+      "translation_group": "cohort:editorial:career-guide-english-backlog",
+      "locales": [
+        "zh-CN",
+        "en"
+      ],
+      "authority_source": "backend CMS CareerGuide resources",
+      "expected_en_count": 20,
+      "current_en_count": 0,
+      "remaining_en_count": 20,
+      "parity_state": "en_missing",
+      "evidence": [
+        "The live public CareerGuide index returned 20 zh-CN and zero English records at baseline time."
+      ],
+      "notes": "This cohort is a separate package and PR from Article assets."
+    }
+  ],
+  "permissions": {
+    "cms_write_authorized": false,
+    "staging_write_authorized": false,
+    "production_import_authorized": false,
+    "public_release_authorized": false,
+    "seo_runtime_release_authorized": false,
+    "search_submission_authorized": false,
+    "master_manifest_write_authorized": false
+  }
+}

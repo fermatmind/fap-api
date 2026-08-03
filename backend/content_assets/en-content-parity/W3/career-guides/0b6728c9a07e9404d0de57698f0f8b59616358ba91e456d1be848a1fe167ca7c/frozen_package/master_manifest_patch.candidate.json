@@ -1,0 +1,55 @@
+{
+  "$schema": "../../../../docs/seo/generated/en-content-parity-control-master.v1.schema.json",
+  "artifact_kind": "master_manifest_patch_candidate",
+  "schema_version": "fermatmind.en_content_parity_master_patch_candidate.v1",
+  "control_id": "EN-PARITY-CONTROL-BOOTSTRAP-01",
+  "lane_id": "W3",
+  "subscope_id": "W3-CAREER-GUIDES",
+  "package_id": "EN-PARITY-W3-CAREER-GUIDE-PACKAGE-FREEZE-2026-08-02",
+  "base_manifest_sha256": "398b7000513817c07887257928db3d0238e9843511d20ae165dd4c71b1cde740",
+  "sha256_manifest_path": "generated/en-content-parity/W3-editorial-cms/career-guides/sha256_manifest.json",
+  "package_sha256": "0b6728c9a07e9404d0de57698f0f8b59616358ba91e456d1be848a1fe167ca7c",
+  "proposed_status": "package_frozen",
+  "gate_evidence": {
+    "gate": "package_frozen",
+    "report_path": "editorial_review.json",
+    "report_sha256": "137c719a434aa795c41332d89bdd4c10b5e6f2879b4ed5f98a5d0ebcb69fe402",
+    "report_in_package": true,
+    "owner_lane_id": "W3",
+    "verdict": null,
+    "asset_ids": [
+      "ENPARITY-W3-CAREER-GUIDES"
+    ],
+    "row_count": 20
+  },
+  "asset_updates": [
+    {
+      "asset_id": "ENPARITY-W3-CAREER-GUIDES",
+      "lane_id": "W3",
+      "asset_type": "career_guide",
+      "translation_group": "cohort:editorial:career-guide-english-backlog",
+      "locales": [
+        "zh-CN",
+        "en"
+      ],
+      "authority_source": "backend CMS CareerGuide resources",
+      "expected_en_count": 20,
+      "current_en_count": 0,
+      "remaining_en_count": 20,
+      "parity_state": "en_missing",
+      "evidence": [
+        "The live public CareerGuide index returned 20 zh-CN and zero English records at baseline time."
+      ],
+      "notes": "This cohort is a separate package and PR from Article assets."
+    }
+  ],
+  "permissions": {
+    "cms_write_authorized": false,
+    "staging_write_authorized": false,
+    "production_import_authorized": false,
+    "public_release_authorized": false,
+    "seo_runtime_release_authorized": false,
+    "search_submission_authorized": false,
+    "master_manifest_write_authorized": false
+  }
+}

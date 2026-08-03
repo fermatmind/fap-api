@@ -1,0 +1,1141 @@
+{
+  "schema_version": "fermatmind.en_content_parity_source_ledger.v1",
+  "control_id": "EN-PARITY-CONTROL-BOOTSTRAP-01",
+  "lane_id": "W3",
+  "subscope_id": "W3-CAREER-GUIDES",
+  "package_id": "EN-PARITY-W3-CAREER-GUIDE-PACKAGE-FREEZE-2026-08-02",
+  "source_snapshot": {
+    "repository": "fap-api",
+    "commit_sha": "f9b560e593a672e1e7c42aee810521593d88fdbf",
+    "en_path": "content_baselines/career_guides/career_guides.en.json",
+    "en_sha256": "474b3ca869e3f32033089f48967458f977f7bf3cffd4d42c29eae689362bb416",
+    "zh_path": "content_baselines/career_guides/career_guides.zh-CN.json",
+    "zh_sha256": "3664183d9685dc67fd2b44d231837e5638ad64410f9e7b6b70110d9fd93d5b31"
+  },
+  "source_batches": [
+    {
+      "batch_id": "batch-a-8",
+      "package_sha256": "5b423b9eef7877d0ee6c5c5fb74a89d236958fd4a3d5ccc1ad5d90782f1a15cd"
+    },
+    {
+      "batch_id": "batch-b-12",
+      "package_sha256": "53458328d70d3035c7f29deb1038ba3edf96295db72cae4ca0ce61aace33b9d9"
+    }
+  ],
+  "claim_boundary_reference": {
+    "path": "generated/en-content-parity/W3-editorial-cms/career-guides/boundary/sha256_manifest.json",
+    "package_sha256": "1b092960030804e1846c93083977f36ce507c4de1ddc2386a5d46e3c5b21325a",
+    "usage": "claim and target-market boundary only; not reader-content or runtime authority"
+  },
+  "rows": [
+    {
+      "row_id": "W3-CAREER-GUIDE-BATCH-A-01",
+      "asset_id": "ENPARITY-W3-CAREER-GUIDES",
+      "guide_code": "big5-for-career-decisions",
+      "translation_pair_identity": "career-guide:big5-for-career-decisions",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "slug": "big5-for-career-decisions",
+      "source_title": "如何用大五人格做职业决策",
+      "baseline_en_title": "Using Big Five for Career Decisions",
+      "candidate_title": "Using Big Five as a Career Decision Lens",
+      "candidate_excerpt": "Use trait patterns as hypotheses about work conditions and experiments, not as a system for assigning a single best career.",
+      "candidate_content_md": "# Using Big Five as a Career Decision Lens\n\n## Start with conditions, not a verdict\n\nBig Five language can help you notice recurring preferences in energy, planning, curiosity, cooperation, and stress response. It cannot tell you which job you are destined for, whether you will succeed in a role, or what an employer should decide about you. Treat a profile as a prompt to observe conditions rather than as a label to obey.\n\nWrite down one decision you are actually facing: choosing a project, exploring a role family, changing the way you work with a manager, or deciding what to learn next. Then name the conditions that make the decision difficult. You may need more structure, more feedback, deeper focus time, clearer collaboration, or a smaller experiment before making a larger change.\n\n## Translate a trait into a work question\n\nInstead of saying “I am high or low on a trait,” ask a question that can be tested in a real work setting. For example:\n\n- When deadlines change, what planning routine helps me recover without over-controlling every detail?\n- Which kinds of unfamiliar tasks make me curious enough to learn, and which simply create avoidable confusion?\n- What kind of feedback helps me improve a draft or decision before the stakes become high?\n- When I am under pressure, what signals tell me to ask for context, reduce scope, or take a pause?\n\nThe useful unit is a behavior in a situation. It is not a personality score in isolation.\n\n## Compare role demands with your current evidence\n\nChoose one role or project and list its visible demands: planning rhythm, ambiguity, stakeholder contact, independent analysis, routine follow-through, and pace of change. Next to each demand, record evidence from work you have already done. Use examples such as a project you completed, a meeting pattern you handled well, or a type of task you would like to practice more deliberately.\n\nThis comparison is not a fit score. It can reveal where a role deserves more investigation, where you may need support, and where a small trial would be more informative than a yes-or-no conclusion.\n\n## Run a two-week experiment\n\nPick one condition to adjust for two weeks. A person who wants more structure might define a weekly planning review and a visible decision log. A person who wants to test comfort with broader collaboration might schedule two short conversations with adjacent teams and write down what they learned. Keep the experiment small enough that an unhelpful result is still useful.\n\nAt the end, review three questions: What changed in the quality of my work? What did the experiment cost in time or energy? What evidence would I need before making a larger career decision? A result can be mixed. Mixed evidence is often more honest and more useful than forcing a trait into a career answer.\n\n## Keep the boundary visible\n\nBig Five can support reflection on workplace behavior. It is not a precise career-matching engine, a hiring tool, a medical assessment, or a prediction of income, promotion, or future success. Do not use a self-report result to rule yourself out of a field, to judge another person, or to replace conversations with people who know the work.\n\n## Frequently asked questions\n\n### Does a Big Five profile identify the best job for me?\n\nNo. It can help you form questions about work conditions and habits, but career choices also involve skills, opportunities, constraints, values, and changing circumstances.\n\n### What if my profile seems inconsistent with a role I enjoy?\n\nUse the inconsistency as a prompt to look at the actual work. You may enjoy some parts of the role, have developed useful routines, or need a different team environment rather than a different career direction.\n\n### What is a good next step?\n\nChoose one low-risk work experiment, record what happened, and revisit the decision with more than one source of evidence.",
+      "source_authority": {
+        "repository": "fap-api",
+        "commit_sha": "f9b560e593a672e1e7c42aee810521593d88fdbf",
+        "zh_path": "content_baselines/career_guides/career_guides.zh-CN.json",
+        "zh_sha256": "aa40ea810242c72c5d4b0198df66dfce293839cb3e16fbf0336a340695b086ac",
+        "en_path": "content_baselines/career_guides/career_guides.en.json",
+        "en_sha256": "905c45abcddd197e0db73116c112f079f89458735a7a50b09a8018556c3eacf7",
+        "usage": "zh-CN structure and information-use authority; English baseline identity/reference only",
+        "baseline_is_runtime_authority": false
+      },
+      "structure_review": {
+        "source_heading_count": 10,
+        "candidate_heading_count": 10,
+        "major_sections_preserved": true,
+        "source_faq_present": false,
+        "candidate_faq_present": true,
+        "information_use_equivalence": "producer_review_pass"
+      },
+      "internal_link_review": {
+        "source_related_article_count": 3,
+        "candidate_links": [],
+        "status": "no_candidate_links_added_without an independently verified localized target"
+      },
+      "claim_boundary": {
+        "status": "producer_preflight_pass",
+        "prohibited_claims_absent": [
+          "employment_guarantee",
+          "income_or_promotion_guarantee",
+          "admission_or_licensing_advice",
+          "medical_diagnosis_or_treatment",
+          "deterministic_test_to_career_fit"
+        ],
+        "disclaimer": "FermatMind career material is structured reference and exploration support, not employment, admissions, medical, legal, financial, or licensing advice."
+      },
+      "language_review": {
+        "chinese_han_leakage_detected": false,
+        "producer_naturalness_review": "pass",
+        "independent_w9_review": "pending"
+      },
+      "target_publication_status": "candidate_only_not_imported",
+      "import_ready": false
+    },
+    {
+      "row_id": "W3-CAREER-GUIDE-BATCH-A-02",
+      "asset_id": "ENPARITY-W3-CAREER-GUIDES",
+      "guide_code": "build-portfolio-for-career-switch",
+      "translation_pair_identity": "career-guide:build-portfolio-for-career-switch",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "slug": "build-portfolio-for-career-switch",
+      "source_title": "转岗时如何构建高质量作品集",
+      "baseline_en_title": "Build a Portfolio for Career Switching",
+      "candidate_title": "Build a Portfolio for a Career Switch",
+      "candidate_excerpt": "Create evidence of transferable work and learning without treating a portfolio as a promise of an interview or offer.",
+      "candidate_content_md": "# Build a Portfolio for a Career Switch\n\n## Define the transition you are testing\n\nA career-switch portfolio is not a collection of everything you have ever made. It is a small, honest set of work samples that helps you and a reader understand what you can do now, what you are learning, and what you would need to practice next. Start with one target direction and a realistic question: which parts of my previous work can I demonstrate in a new context?\n\nAvoid beginning with a title alone. Break the target direction into visible activities: explaining a decision, researching a user need, organizing a process, writing a brief, presenting a recommendation, or improving a handoff. Your portfolio should make these activities inspectable.\n\n## Inventory transferable evidence\n\nMake three columns: work you have done, the capability it demonstrates, and the evidence you can safely share. A project plan may demonstrate coordination; a customer summary may demonstrate synthesis; a process improvement may demonstrate careful observation. Remove confidential details and use a reconstructed example when necessary.\n\nFor every item, add one sentence about the problem, one about your contribution, and one about what you learned. The goal is not to make every project sound impressive. The goal is to make your reasoning visible and accurate.\n\n## Build two small case studies\n\nChoose two samples with different purposes. One can show how you investigated or framed a problem. The other can show how you moved from an idea to a usable output. Each case study should explain the context, the constraints, the choices you made, and what you would change next time.\n\nIf you do not yet have direct experience in the target field, create a bounded practice project. Use a real but non-sensitive prompt, state that it is a practice exercise, and document your assumptions. Do not present simulated work as client work or imply that it proves professional readiness.\n\n## Add a learning trail\n\nCareer switches are easier to discuss when learning is concrete. Include a short list of skills you are practicing, the projects that use them, and the feedback you are seeking. A learning trail can show direction without claiming that a course, certificate, or portfolio guarantees eligibility, employment, or a particular outcome.\n\nAsk for feedback on clarity: Can another person understand the decision you made? Can they see what you owned? Can they distinguish evidence from aspiration? Revise the portfolio after feedback, not only after collecting more material.\n\n## Use the portfolio in conversations\n\nBring one case study to an informational conversation, mentor meeting, or peer review. Ask focused questions: Which part of this work resembles work in your team? What would make the example more useful? What skill gap is most important to investigate next? These questions create better evidence than asking someone to predict whether you will be hired.\n\n## Frequently asked questions\n\n### How many samples do I need?\n\nTwo clear, truthful case studies are more useful than a large gallery of weakly explained work. Add material only when it shows a distinct capability.\n\n### Should I copy the style of a company I admire?\n\nYou can study public examples for presentation ideas, but do not copy confidential work, brand assets, or another person’s portfolio. Keep your own contribution and limits clear.\n\n### Does a stronger portfolio guarantee a career switch?\n\nNo. It can improve the quality of your learning and conversations, but it does not guarantee interviews, offers, compensation, or a transition timeline.",
+      "source_authority": {
+        "repository": "fap-api",
+        "commit_sha": "f9b560e593a672e1e7c42aee810521593d88fdbf",
+        "zh_path": "content_baselines/career_guides/career_guides.zh-CN.json",
+        "zh_sha256": "2197b6fcad43f012db3d1565bb8c814d54a5e41ea487a5751d94d7f1c9267cac",
+        "en_path": "content_baselines/career_guides/career_guides.en.json",
+        "en_sha256": "e89f551264818871e5c2111cb13f4488083e92f2ab259e3e09fa8baa70c3c57f",
+        "usage": "zh-CN structure and information-use authority; English baseline identity/reference only",
+        "baseline_is_runtime_authority": false
+      },
+      "structure_review": {
+        "source_heading_count": 10,
+        "candidate_heading_count": 10,
+        "major_sections_preserved": true,
+        "source_faq_present": false,
+        "candidate_faq_present": true,
+        "information_use_equivalence": "producer_review_pass"
+      },
+      "internal_link_review": {
+        "source_related_article_count": 0,
+        "candidate_links": [],
+        "status": "no_candidate_links_added_without an independently verified localized target"
+      },
+      "claim_boundary": {
+        "status": "producer_preflight_pass",
+        "prohibited_claims_absent": [
+          "employment_guarantee",
+          "income_or_promotion_guarantee",
+          "admission_or_licensing_advice",
+          "medical_diagnosis_or_treatment",
+          "deterministic_test_to_career_fit"
+        ],
+        "disclaimer": "FermatMind career material is structured reference and exploration support, not employment, admissions, medical, legal, financial, or licensing advice."
+      },
+      "language_review": {
+        "chinese_han_leakage_detected": false,
+        "producer_naturalness_review": "pass",
+        "independent_w9_review": "pending"
+      },
+      "target_publication_status": "candidate_only_not_imported",
+      "import_ready": false
+    },
+    {
+      "row_id": "W3-CAREER-GUIDE-BATCH-A-03",
+      "asset_id": "ENPARITY-W3-CAREER-GUIDES",
+      "guide_code": "career-growth-with-manager",
+      "translation_pair_identity": "career-guide:career-growth-with-manager",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "slug": "career-growth-with-manager",
+      "source_title": "如何与上级共建职业成长路径",
+      "baseline_en_title": "Career Growth with Your Manager",
+      "candidate_title": "Build Career Growth with Your Manager",
+      "candidate_excerpt": "Turn growth conversations into clear expectations, visible evidence, and revisable next steps rather than promises of promotion.",
+      "candidate_content_md": "# Build Career Growth with Your Manager\n\n## Make the conversation specific\n\nCareer growth discussions work better when they begin with current work, not with a vague request to “move up.” Choose one or two areas where you want clearer feedback: scope, collaboration, technical judgment, communication, reliability, or decision ownership. Describe the work you are doing now and the kind of evidence you want to build next.\n\nYour manager may have constraints you cannot see, including team priorities, timing, or role design. A useful conversation makes those constraints discussable without turning them into a personal verdict.\n\n## Prepare a short evidence brief\n\nBefore the meeting, collect examples of work that show outcomes, process, and learning. Include one contribution you feel confident about and one area where you want coaching. Keep the brief short enough to discuss in ten minutes.\n\nFor each example, state: the context, your role, the decision or action you took, and what you would improve. This makes it easier for your manager to respond to observable work instead of relying on general impressions.\n\n## Agree on a working experiment\n\nAsk for a small opportunity that creates useful evidence. It could be leading a meeting, owning a project handoff, drafting a decision memo, mentoring a colleague, or testing a new workflow. Define what success would look like for the experiment, what support is available, and when you will review it.\n\nAn experiment is not a promotion promise. It is a way to learn whether a different scope or responsibility is a good next step.\n\n## Create a review rhythm\n\nUse regular check-ins to compare expectations with evidence. Bring a short update: what you tried, what happened, what feedback you received, and what decision is needed next. If priorities changed, update the experiment rather than continuing with an outdated plan.\n\nIf feedback is broad, ask for examples. “Can you point to a recent situation where a clearer decision note would have helped?” is easier to act on than “communicate better.”\n\n## Protect your own agency\n\nManagers matter, but they are not the only source of career information. Maintain a record of work you value, seek perspectives from peers and mentors, and notice which environments help you do good work. If you do not have regular manager access, use the same evidence brief for a project lead, mentor, or self-review.\n\n## Frequently asked questions\n\n### How often should I raise career growth?\n\nUse a regular rhythm that fits your team, such as a quarterly review plus smaller project check-ins. The useful part is continuity, not a fixed schedule.\n\n### What if my manager cannot offer a new opportunity now?\n\nAsk what evidence would be valuable later and look for smaller ways to practice the capability. A delayed opportunity is information, not proof that growth is impossible.\n\n### Does good performance guarantee promotion?\n\nNo. Promotion decisions depend on many organizational factors. This guide helps you make your work and learning clearer; it does not promise a title, raise, or outcome.",
+      "source_authority": {
+        "repository": "fap-api",
+        "commit_sha": "f9b560e593a672e1e7c42aee810521593d88fdbf",
+        "zh_path": "content_baselines/career_guides/career_guides.zh-CN.json",
+        "zh_sha256": "402a837bc09aa9779a1d49682538447c8bd399b49cfa48b5053a7c0eb583ac34",
+        "en_path": "content_baselines/career_guides/career_guides.en.json",
+        "en_sha256": "185885f6c84b6dd4a57ae4e387c63a7bc950fc2a2ba97af618850d727f358395",
+        "usage": "zh-CN structure and information-use authority; English baseline identity/reference only",
+        "baseline_is_runtime_authority": false
+      },
+      "structure_review": {
+        "source_heading_count": 10,
+        "candidate_heading_count": 10,
+        "major_sections_preserved": true,
+        "source_faq_present": false,
+        "candidate_faq_present": true,
+        "information_use_equivalence": "producer_review_pass"
+      },
+      "internal_link_review": {
+        "source_related_article_count": 0,
+        "candidate_links": [],
+        "status": "no_candidate_links_added_without an independently verified localized target"
+      },
+      "claim_boundary": {
+        "status": "producer_preflight_pass",
+        "prohibited_claims_absent": [
+          "employment_guarantee",
+          "income_or_promotion_guarantee",
+          "admission_or_licensing_advice",
+          "medical_diagnosis_or_treatment",
+          "deterministic_test_to_career_fit"
+        ],
+        "disclaimer": "FermatMind career material is structured reference and exploration support, not employment, admissions, medical, legal, financial, or licensing advice."
+      },
+      "language_review": {
+        "chinese_han_leakage_detected": false,
+        "producer_naturalness_review": "pass",
+        "independent_w9_review": "pending"
+      },
+      "target_publication_status": "candidate_only_not_imported",
+      "import_ready": false
+    },
+    {
+      "row_id": "W3-CAREER-GUIDE-BATCH-A-04",
+      "asset_id": "ENPARITY-W3-CAREER-GUIDES",
+      "guide_code": "first-90-days-in-new-role",
+      "translation_pair_identity": "career-guide:first-90-days-in-new-role",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "slug": "first-90-days-in-new-role",
+      "source_title": "新岗位前 90 天行动指南",
+      "baseline_en_title": "First 90 Days in a New Role",
+      "candidate_title": "Plan Your First 90 Days in a New Role",
+      "candidate_excerpt": "Use the first months to learn the system, build working relationships, and choose bounded contributions without promising a fixed outcome.",
+      "candidate_content_md": "# Plan Your First 90 Days in a New Role\n\n## Treat the first months as a learning period\n\nThe first 90 days are not a test you either pass or fail. They are a period for learning how work moves through a team: who makes decisions, where information lives, what quality looks like, and which constraints matter. Begin by observing before trying to redesign everything.\n\nKeep a private learning log with recurring terms, open questions, stakeholders, and examples of completed work. This reduces the pressure to remember everything and makes patterns easier to review.\n\n## Map the work system\n\nDuring the first weeks, ask practical questions. What is the team trying to deliver? Which decisions are reversible and which need wider input? How are priorities communicated? What does a strong handoff look like? Where do delays or misunderstandings usually appear?\n\nUse the answers to make a simple map of people, processes, and artifacts. The map is for orientation, not for judging who is important.\n\n## Build trust through small commitments\n\nChoose a few commitments you can complete with care: summarize a meeting accurately, close a small task, document an assumption, or ask for feedback before a deadline. Small reliable actions help colleagues see how you work and give you information about the team’s standards.\n\nDo not take on extra work only to prove value. If a request is unclear, clarify the outcome, deadline, owner, and trade-offs first.\n\n## Set a 30–60–90 review\n\nAt around 30 days, review what you understand and what is still uncertain. At 60 days, identify one contribution you can make with growing confidence. At 90 days, discuss what you learned, what you delivered, and which capability or relationship needs attention next.\n\nThese reviews can be written as questions rather than declarations. What would improve the quality of my next project? Which stakeholder context am I still missing? Where should I ask for a clearer decision boundary?\n\n## Manage energy and boundaries\n\nNew roles can create pressure to be constantly available. Build sustainable routines early: prepare for meetings, protect focus time when possible, and ask for priorities when workload expands. If work stress becomes difficult to manage, use appropriate workplace and qualified-support resources rather than treating a career plan as medical advice.\n\n## Frequently asked questions\n\n### What if I make a mistake early?\n\nAddress it promptly, explain what you understand, correct what you can, and ask what would prevent a repeat. A mistake can become useful learning evidence when handled openly.\n\n### Should I try to impress everyone immediately?\n\nFocus on understanding the work and meeting a few clear commitments. Visibility is more durable when it follows useful contribution rather than constant self-promotion.\n\n### Will a 90-day plan secure my role?\n\nNo. It is a reflection and planning tool, not a guarantee of job security, performance ratings, or future advancement.",
+      "source_authority": {
+        "repository": "fap-api",
+        "commit_sha": "f9b560e593a672e1e7c42aee810521593d88fdbf",
+        "zh_path": "content_baselines/career_guides/career_guides.zh-CN.json",
+        "zh_sha256": "4b5f07207f399d077755b69c348f7beee8249f3797154ed2dba7f8ff590e5bb2",
+        "en_path": "content_baselines/career_guides/career_guides.en.json",
+        "en_sha256": "aa9ef1a806a86b155605f5362aecd710f191c69b8208bd703f51df348886ea3a",
+        "usage": "zh-CN structure and information-use authority; English baseline identity/reference only",
+        "baseline_is_runtime_authority": false
+      },
+      "structure_review": {
+        "source_heading_count": 10,
+        "candidate_heading_count": 10,
+        "major_sections_preserved": true,
+        "source_faq_present": false,
+        "candidate_faq_present": true,
+        "information_use_equivalence": "producer_review_pass"
+      },
+      "internal_link_review": {
+        "source_related_article_count": 0,
+        "candidate_links": [],
+        "status": "no_candidate_links_added_without an independently verified localized target"
+      },
+      "claim_boundary": {
+        "status": "producer_preflight_pass",
+        "prohibited_claims_absent": [
+          "employment_guarantee",
+          "income_or_promotion_guarantee",
+          "admission_or_licensing_advice",
+          "medical_diagnosis_or_treatment",
+          "deterministic_test_to_career_fit"
+        ],
+        "disclaimer": "FermatMind career material is structured reference and exploration support, not employment, admissions, medical, legal, financial, or licensing advice."
+      },
+      "language_review": {
+        "chinese_han_leakage_detected": false,
+        "producer_naturalness_review": "pass",
+        "independent_w9_review": "pending"
+      },
+      "target_publication_status": "candidate_only_not_imported",
+      "import_ready": false
+    },
+    {
+      "row_id": "W3-CAREER-GUIDE-BATCH-A-05",
+      "asset_id": "ENPARITY-W3-CAREER-GUIDES",
+      "guide_code": "from-mbti-to-job-fit",
+      "translation_pair_identity": "career-guide:from-mbti-to-job-fit",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "slug": "from-mbti-to-job-fit",
+      "source_title": "如何将 MBTI 用于职业匹配",
+      "baseline_en_title": "From MBTI to Job Fit",
+      "candidate_title": "From MBTI Preferences to Job-Fit Questions",
+      "candidate_excerpt": "Use MBTI language to explore work preferences and experiments without treating type as a precise career recommendation.",
+      "candidate_content_md": "# From MBTI Preferences to Job-Fit Questions\n\n## Use preference language carefully\n\nMBTI can offer words for how you tend to notice information, make decisions, and restore energy. Those words may be useful when you are reflecting on work. They do not establish a fixed identity, prove competence, or identify one correct occupation.\n\nStart with a work situation instead of a type label. You may be deciding whether you want more collaboration, more independent analysis, clearer routines, more variety, or a different pace of feedback. Preference language can help you describe the question, but the answer needs evidence from real work.\n\n## Break “fit” into conditions\n\nJob fit is not one score. Consider several conditions separately: tasks, team norms, decision pace, learning opportunities, feedback quality, schedule, values, and practical constraints. A role can suit some conditions and strain others.\n\nWrite down a recent day when you felt engaged and a day when you felt depleted. What were you doing? Who were you working with? How clear were the goals? What choices did you control? This gives you a more useful starting point than asking whether a type “matches” a job.\n\n## Test one preference in context\n\nRun a low-risk experiment. If you think you prefer deeper independent work, block a focused hour for a complex task and compare it with a collaborative approach. If you think you need more people contact, volunteer for a bounded discovery conversation or project handoff. Record what helped, what made the work harder, and what you would test next.\n\nExperiments should be reversible. They are designed to improve your questions, not to force a conclusion about your identity or future.\n\n## Avoid type-based shortcuts\n\nDo not use MBTI to rule out a field, to label a colleague, or to predict whether someone will be hired, promoted, or successful. People develop skills, work in different contexts, and often use strategies that are not captured by a simple preference statement.\n\nWhen a decision has high stakes, add other evidence: role research, conversations with people doing the work, a skills inventory, financial and location constraints, and time to reflect.\n\n## Frequently asked questions\n\n### Can MBTI tell me which job I should choose?\n\nNo. It can support self-reflection, but it is not a precise career recommender or a guarantee of satisfaction or success.\n\n### What if my current role does not match type descriptions I have read?\n\nLook at the actual parts of the role. You may enjoy a particular team, skill, mission, or work rhythm even if a broad description feels incomplete.\n\n### How should I use a test result?\n\nTreat it as one structured reference. Pair it with observed work experiences and small experiments, and revise your view when new evidence appears.",
+      "source_authority": {
+        "repository": "fap-api",
+        "commit_sha": "f9b560e593a672e1e7c42aee810521593d88fdbf",
+        "zh_path": "content_baselines/career_guides/career_guides.zh-CN.json",
+        "zh_sha256": "6458ee4e799b1bca964adb3f37ec1c0389d6909013c61f160aaf3c62a517f27b",
+        "en_path": "content_baselines/career_guides/career_guides.en.json",
+        "en_sha256": "7f2e9f2724fa7ae92720c7b548bec6a301adf7de331866f541448b1288a51caf",
+        "usage": "zh-CN structure and information-use authority; English baseline identity/reference only",
+        "baseline_is_runtime_authority": false
+      },
+      "structure_review": {
+        "source_heading_count": 10,
+        "candidate_heading_count": 9,
+        "major_sections_preserved": true,
+        "source_faq_present": false,
+        "candidate_faq_present": true,
+        "information_use_equivalence": "producer_review_pass"
+      },
+      "internal_link_review": {
+        "source_related_article_count": 3,
+        "candidate_links": [],
+        "status": "no_candidate_links_added_without an independently verified localized target"
+      },
+      "claim_boundary": {
+        "status": "producer_preflight_pass",
+        "prohibited_claims_absent": [
+          "employment_guarantee",
+          "income_or_promotion_guarantee",
+          "admission_or_licensing_advice",
+          "medical_diagnosis_or_treatment",
+          "deterministic_test_to_career_fit"
+        ],
+        "disclaimer": "FermatMind career material is structured reference and exploration support, not employment, admissions, medical, legal, financial, or licensing advice."
+      },
+      "language_review": {
+        "chinese_han_leakage_detected": false,
+        "producer_naturalness_review": "pass",
+        "independent_w9_review": "pending"
+      },
+      "target_publication_status": "candidate_only_not_imported",
+      "import_ready": false
+    },
+    {
+      "row_id": "W3-CAREER-GUIDE-BATCH-A-06",
+      "asset_id": "ENPARITY-W3-CAREER-GUIDES",
+      "guide_code": "iq-eq-balance-at-work",
+      "translation_pair_identity": "career-guide:iq-eq-balance-at-work",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "slug": "iq-eq-balance-at-work",
+      "source_title": "IQ 与 EQ 如何协同影响职业表现",
+      "baseline_en_title": "Balancing IQ and EQ at Work",
+      "candidate_title": "Balance Analytical and Emotional Skills at Work",
+      "candidate_excerpt": "Develop observation, reasoning, communication, and self-regulation as learnable work habits without reducing people to scores.",
+      "candidate_content_md": "# Balance Analytical and Emotional Skills at Work\n\n## Move beyond score language\n\nWork often asks for both careful reasoning and effective interaction. It is tempting to turn this into a comparison between “IQ” and “EQ,” but scores and labels can hide the practical habits that matter: clarifying a problem, checking an assumption, noticing emotion in a conversation, and choosing a response that fits the situation.\n\nUse this guide to identify habits you can practice. It is not a diagnostic tool, a measure of worth, or a prediction of work performance.\n\n## Notice the task before choosing a strength\n\nDifferent tasks need different combinations of skills. A complex analysis may require quiet attention and verification. A project disagreement may require listening, summarizing competing concerns, and making the next decision visible. A client conversation may require both preparation and sensitivity to what is not yet clear.\n\nFor one week, note the tasks that felt difficult. Ask whether the difficulty came from missing information, unclear reasoning, a communication gap, time pressure, or an emotional reaction. More than one answer can be true.\n\n## Practice an analytical routine\n\nBefore finalizing a recommendation, write the question, the evidence you used, the assumptions you made, and one alternative explanation. This routine is useful even when the work is small. It creates a place to revise your thinking before a conversation becomes defensive.\n\nIf information is incomplete, say so. A careful “I do not know yet” is more useful than a confident answer that exceeds the evidence.\n\n## Practice an interpersonal routine\n\nIn a difficult conversation, try a three-part sequence: name what you heard, state the decision or concern in plain language, and ask what information would make the next step clearer. This does not mean agreeing with everyone. It means making disagreement workable.\n\nAfter the conversation, review your own signals. Did you interrupt? Did you avoid an important question? Did you explain your reasoning? Choose one small change for the next interaction.\n\n## Combine the routines in real work\n\nChoose a project where analysis and communication meet. Prepare a short decision note, ask a colleague to challenge one assumption, and record what changed after the discussion. Over time, this can create a more reliable feedback loop than trying to prove that one kind of intelligence matters more than another.\n\n## Frequently asked questions\n\n### Are analytical and emotional skills opposites?\n\nNo. Many work situations need both. The useful question is which habit the situation calls for and how you can practice it responsibly.\n\n### Can an online score explain my workplace ability?\n\nNot by itself. Results may be a reference for reflection, but they do not diagnose ability, determine potential, or predict career outcomes.\n\n### What should I do when a conversation feels overwhelming?\n\nPause when possible, clarify the immediate issue, and seek appropriate support from a manager, colleague, or qualified professional when needed. This guide is not medical or mental-health advice.",
+      "source_authority": {
+        "repository": "fap-api",
+        "commit_sha": "f9b560e593a672e1e7c42aee810521593d88fdbf",
+        "zh_path": "content_baselines/career_guides/career_guides.zh-CN.json",
+        "zh_sha256": "de3c747d49e10fbcd5ccbb062d1619e78ecb5c2466e8931f5daa0c61cfc2645f",
+        "en_path": "content_baselines/career_guides/career_guides.en.json",
+        "en_sha256": "ffd86431810ac9f184083806e43209946cfd58da898902750b81a1e9450e19bc",
+        "usage": "zh-CN structure and information-use authority; English baseline identity/reference only",
+        "baseline_is_runtime_authority": false
+      },
+      "structure_review": {
+        "source_heading_count": 10,
+        "candidate_heading_count": 10,
+        "major_sections_preserved": true,
+        "source_faq_present": false,
+        "candidate_faq_present": true,
+        "information_use_equivalence": "producer_review_pass"
+      },
+      "internal_link_review": {
+        "source_related_article_count": 4,
+        "candidate_links": [],
+        "status": "no_candidate_links_added_without an independently verified localized target"
+      },
+      "claim_boundary": {
+        "status": "producer_preflight_pass",
+        "prohibited_claims_absent": [
+          "employment_guarantee",
+          "income_or_promotion_guarantee",
+          "admission_or_licensing_advice",
+          "medical_diagnosis_or_treatment",
+          "deterministic_test_to_career_fit"
+        ],
+        "disclaimer": "FermatMind career material is structured reference and exploration support, not employment, admissions, medical, legal, financial, or licensing advice."
+      },
+      "language_review": {
+        "chinese_han_leakage_detected": false,
+        "producer_naturalness_review": "pass",
+        "independent_w9_review": "pending"
+      },
+      "target_publication_status": "candidate_only_not_imported",
+      "import_ready": false
+    },
+    {
+      "row_id": "W3-CAREER-GUIDE-BATCH-A-07",
+      "asset_id": "ENPARITY-W3-CAREER-GUIDES",
+      "guide_code": "networking-that-actually-works",
+      "translation_pair_identity": "career-guide:networking-that-actually-works",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "slug": "networking-that-actually-works",
+      "source_title": "高质量职业人脉搭建方法",
+      "baseline_en_title": "Networking That Actually Works",
+      "candidate_title": "Networking That Builds Useful Working Relationships",
+      "candidate_excerpt": "Build reciprocal professional relationships through clear context, thoughtful follow-up, and realistic requests rather than transactional promises.",
+      "candidate_content_md": "# Networking That Builds Useful Working Relationships\n\n## Start with a real reason to connect\n\nUseful networking is not collecting contacts or asking strangers to solve a career problem for you. It begins with a specific reason to learn: understanding a role, comparing project approaches, finding a community, or getting feedback on a small work sample.\n\nBefore reaching out, write one sentence about what you are exploring and one respectful question you can ask. This makes the conversation easier for both people.\n\n## Map the relationships you already have\n\nList people who have seen different parts of your work: peers, former teammates, mentors, clients, classmates, or community organizers. Notice where relationships are active, where a thank-you or update is appropriate, and where you are asking for more than you are prepared to offer.\n\nYou do not need to contact everyone. Choose a few relationships where a genuine conversation would be useful.\n\n## Make a bounded request\n\nA good request is easy to decline and specific enough to answer. Ask for fifteen minutes to understand a work process, for one piece of feedback on a portfolio case study, or for a suggestion about what to research next. Do not ask someone to guarantee a referral, an interview, or an outcome they do not control.\n\nShare enough context to make the request legible, but avoid sending a long life story or sensitive personal information to a new contact.\n\n## Prepare for the conversation\n\nBring two or three questions that focus on the work itself. What decisions are difficult in this role? What evidence helps a newcomer become useful? Which assumptions about the field are often wrong? Listen for constraints as well as opportunities.\n\nAfterward, write a short note about what you learned and one action you will take. Follow up only when you have something concrete to share or a genuine reason to continue the conversation.\n\n## Make reciprocity practical\n\nReciprocity does not require equal status or immediate exchange. You can thank someone clearly, share a relevant resource, make an introduction only with permission, or report back on how their advice changed your next step. Respect boundaries and do not turn every interaction into a transaction.\n\n## Frequently asked questions\n\n### What if I do not know anyone in my target field?\n\nBegin with communities, public events, alumni groups, or people adjacent to the work. Your first goal is learning what questions to ask, not securing a job.\n\n### How often should I follow up?\n\nFollow up when you have a relevant update or a clear reason. A thoughtful message is better than frequent generic check-ins.\n\n### Can networking guarantee an opportunity?\n\nNo. Relationships can improve learning and context, but they do not guarantee referrals, interviews, offers, or career outcomes.",
+      "source_authority": {
+        "repository": "fap-api",
+        "commit_sha": "f9b560e593a672e1e7c42aee810521593d88fdbf",
+        "zh_path": "content_baselines/career_guides/career_guides.zh-CN.json",
+        "zh_sha256": "379b71375b5201f4cbecbe2a1be727cb42192a4793088765c70857df6e9b4fc1",
+        "en_path": "content_baselines/career_guides/career_guides.en.json",
+        "en_sha256": "6f37d410b586760c096102dc68e9a6147b19a7784cb402b2127bc4224397488f",
+        "usage": "zh-CN structure and information-use authority; English baseline identity/reference only",
+        "baseline_is_runtime_authority": false
+      },
+      "structure_review": {
+        "source_heading_count": 10,
+        "candidate_heading_count": 10,
+        "major_sections_preserved": true,
+        "source_faq_present": false,
+        "candidate_faq_present": true,
+        "information_use_equivalence": "producer_review_pass"
+      },
+      "internal_link_review": {
+        "source_related_article_count": 0,
+        "candidate_links": [],
+        "status": "no_candidate_links_added_without an independently verified localized target"
+      },
+      "claim_boundary": {
+        "status": "producer_preflight_pass",
+        "prohibited_claims_absent": [
+          "employment_guarantee",
+          "income_or_promotion_guarantee",
+          "admission_or_licensing_advice",
+          "medical_diagnosis_or_treatment",
+          "deterministic_test_to_career_fit"
+        ],
+        "disclaimer": "FermatMind career material is structured reference and exploration support, not employment, admissions, medical, legal, financial, or licensing advice."
+      },
+      "language_review": {
+        "chinese_han_leakage_detected": false,
+        "producer_naturalness_review": "pass",
+        "independent_w9_review": "pending"
+      },
+      "target_publication_status": "candidate_only_not_imported",
+      "import_ready": false
+    },
+    {
+      "row_id": "W3-CAREER-GUIDE-BATCH-A-08",
+      "asset_id": "ENPARITY-W3-CAREER-GUIDES",
+      "guide_code": "personal-brand-for-professionals",
+      "translation_pair_identity": "career-guide:personal-brand-for-professionals",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "slug": "personal-brand-for-professionals",
+      "source_title": "专业人士个人品牌建设",
+      "baseline_en_title": "Personal Brand for Professionals",
+      "candidate_title": "Build a Professional Reputation from Useful Evidence",
+      "candidate_excerpt": "Make your work easier to understand through clear examples and boundaries, without treating visibility as a guarantee of career outcomes.",
+      "candidate_content_md": "# Build a Professional Reputation from Useful Evidence\n\n## Think evidence before image\n\nA professional reputation is the pattern people can observe in your work: how you solve problems, communicate limits, collaborate, and follow through. It is not a demand to be constantly visible or to turn every activity into public content.\n\nStart by choosing two capabilities you want people to understand. They might be research, design judgment, project coordination, writing, analysis, facilitation, or customer understanding. Then look for evidence that shows those capabilities in action.\n\n## Write a clear working statement\n\nCreate a short statement that names the kind of problem you like to work on, the contribution you can make, and the evidence you are building. Keep it provisional. A useful statement can change as your work changes.\n\nFor example, instead of claiming to be an expert in everything, describe a specific practice: “I turn messy project information into decisions a team can review.” The statement should be true now, not a promise about a future title or result.\n\n## Curate proof of work\n\nChoose a few examples: a case study, a process note, a presentation, a project brief, or a portfolio piece. Explain the context, your contribution, the constraints, and what you learned. Protect confidential information and obtain permission before sharing material that belongs to an employer, client, or collaborator.\n\nProof of work can include unfinished learning. Label practice work honestly and distinguish your own contribution from a team’s output.\n\n## Choose a sustainable visibility rhythm\n\nYou do not need to post constantly. Pick a rhythm that fits your workload and energy: a quarterly portfolio update, a short reflection after a project, or a carefully prepared conversation with people in your field. The right rhythm is one you can maintain without weakening the work itself.\n\nBefore sharing, ask: Is this useful to a reader? Is it accurate? Does it expose anyone’s private information? Does it make a claim I cannot support? If the answer is uncertain, revise or keep the material private.\n\n## Review the signal you are sending\n\nEvery few months, look at the examples and conversations that represent you. Are they aligned with the work you want to explore? Do they show only outcomes, or also judgment and collaboration? Is there a capability you are claiming without evidence? Use the review to choose a next project or learning step, not to create a fixed personal brand.\n\n## Frequently asked questions\n\n### Do I need a public online presence?\n\nNot necessarily. A portfolio, internal reputation, community contribution, or direct conversation can all make work more visible. Choose channels that fit your context and boundaries.\n\n### Can personal branding replace strong work?\n\nNo. Visibility can help people understand your work, but it does not replace learning, contribution, or trust built over time.\n\n### Will a stronger reputation guarantee a promotion or opportunity?\n\nNo. This guide supports clearer communication about your work; it does not guarantee hiring, promotion, income, or future success.",
+      "source_authority": {
+        "repository": "fap-api",
+        "commit_sha": "f9b560e593a672e1e7c42aee810521593d88fdbf",
+        "zh_path": "content_baselines/career_guides/career_guides.zh-CN.json",
+        "zh_sha256": "391d2de8f35b62582b380e535d16638388b3146c46c5599e9b0ec7e5fa2af2f8",
+        "en_path": "content_baselines/career_guides/career_guides.en.json",
+        "en_sha256": "2e4a250e1ec450cf57256a23ac5048e456576b8e993980573500772cd0de4e40",
+        "usage": "zh-CN structure and information-use authority; English baseline identity/reference only",
+        "baseline_is_runtime_authority": false
+      },
+      "structure_review": {
+        "source_heading_count": 10,
+        "candidate_heading_count": 10,
+        "major_sections_preserved": true,
+        "source_faq_present": false,
+        "candidate_faq_present": true,
+        "information_use_equivalence": "producer_review_pass"
+      },
+      "internal_link_review": {
+        "source_related_article_count": 0,
+        "candidate_links": [],
+        "status": "no_candidate_links_added_without an independently verified localized target"
+      },
+      "claim_boundary": {
+        "status": "producer_preflight_pass",
+        "prohibited_claims_absent": [
+          "employment_guarantee",
+          "income_or_promotion_guarantee",
+          "admission_or_licensing_advice",
+          "medical_diagnosis_or_treatment",
+          "deterministic_test_to_career_fit"
+        ],
+        "disclaimer": "FermatMind career material is structured reference and exploration support, not employment, admissions, medical, legal, financial, or licensing advice."
+      },
+      "language_review": {
+        "chinese_han_leakage_detected": false,
+        "producer_naturalness_review": "pass",
+        "independent_w9_review": "pending"
+      },
+      "target_publication_status": "candidate_only_not_imported",
+      "import_ready": false
+    },
+    {
+      "row_id": "W3-CAREER-GUIDE-BATCH-B-01",
+      "asset_id": "ENPARITY-W3-CAREER-GUIDES",
+      "guide_code": "annual-career-review-system",
+      "translation_pair_identity": "career-guide:annual-career-review-system",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "slug": "annual-career-review-system",
+      "source_title": "年度职业复盘系统",
+      "baseline_en_title": "Annual Career Review System",
+      "candidate_title": "Build an Annual Career Review System",
+      "candidate_excerpt": "Use a repeatable review to notice evidence, constraints, and next experiments instead of treating one year as a verdict on your career.",
+      "candidate_content_md": "# Build an Annual Career Review System\n\n## Start with a question you can revisit\n\nA yearly review is most useful when it turns scattered memories into a small set of evidence. It is not a scorecard for whether you are ahead or behind. Start by collecting projects, decisions, feedback themes, learning efforts, and changes in your responsibilities.\n\n## Compare evidence and assumptions\n\nCompare the work you intended to do with the work that actually occupied your time. Separate outcomes you influenced from conditions outside your control, then identify one pattern worth carrying forward and one pattern worth changing.\n\n## Run a bounded next step\n\nWrite a one-page review with four headings: work that gave you useful evidence, work that drained attention, relationships or environments that affected the work, and one experiment for the next quarter. Revisit the document after a few weeks and revise it when new information appears.\n\n## Keep the boundary visible\n\nThe review supports reflection and planning. It cannot predict promotion, income, job security, or the value of a future choice.\n\n## Frequently asked questions\n\n### What should I do when I do not have enough information?\n\nUse a calendar, project notes, and conversations rather than trying to remember everything. If the year was disrupted, record the disruption as context instead of treating it as personal failure.\n\n### Is this a prediction or a guarantee?\n\nNo. FermatMind Career Guides are structured reference and exploration support. They do not determine identity, diagnose health, select people for employment, or guarantee future outcomes.",
+      "source_authority": {
+        "repository": "fap-api",
+        "commit_sha": "f9b560e593a672e1e7c42aee810521593d88fdbf",
+        "zh_path": "content_baselines/career_guides/career_guides.zh-CN.json",
+        "zh_sha256": "4bee90679554a73e53b0e819c3c28f84baf185f4d4e79c338d140f24d5f146df",
+        "en_path": "content_baselines/career_guides/career_guides.en.json",
+        "en_sha256": "e00516429b5b0de8b19bdd1d327ac6bd7acc11baa91bf3b75c55d72f643ac290",
+        "usage": "zh-CN structure and information-use authority; English baseline identity/reference only",
+        "baseline_is_runtime_authority": false
+      },
+      "structure_review": {
+        "source_heading_count": 10,
+        "candidate_heading_count": 8,
+        "major_sections_preserved": true,
+        "source_faq_present": false,
+        "candidate_faq_present": true,
+        "information_use_equivalence": "producer_review_pass"
+      },
+      "internal_link_review": {
+        "source_related_article_count": 0,
+        "candidate_links": [],
+        "status": "no_candidate_links_added_without_an_independently_verified_localized_target"
+      },
+      "claim_boundary": {
+        "status": "producer_preflight_pass",
+        "prohibited_claims_absent": [
+          "employment_guarantee",
+          "income_or_promotion_guarantee",
+          "admission_or_licensing_advice",
+          "medical_diagnosis_or_treatment",
+          "deterministic_test_to_career_fit"
+        ],
+        "disclaimer": "FermatMind career material is structured reference and exploration support, not employment, admissions, medical, legal, financial, or licensing advice."
+      },
+      "language_review": {
+        "chinese_han_leakage_detected": false,
+        "producer_naturalness_review": "pass",
+        "independent_w9_review": "pending"
+      },
+      "target_publication_status": "candidate_only_not_imported",
+      "import_ready": false
+    },
+    {
+      "row_id": "W3-CAREER-GUIDE-BATCH-B-02",
+      "asset_id": "ENPARITY-W3-CAREER-GUIDES",
+      "guide_code": "build-five-year-career-roadmap",
+      "translation_pair_identity": "career-guide:build-five-year-career-roadmap",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "slug": "build-five-year-career-roadmap",
+      "source_title": "如何制定五年职业路线图",
+      "baseline_en_title": "Build a Five-Year Career Roadmap",
+      "candidate_title": "Build a Flexible Five-Year Career Roadmap",
+      "candidate_excerpt": "Turn a long-term direction into revisable scenarios, near-term skills, and small evidence-building steps.",
+      "candidate_content_md": "# Build a Flexible Five-Year Career Roadmap\n\n## Start with a question you can revisit\n\nA five-year view can help you name a direction without pretending that work, health, family, or markets will remain fixed. Begin with a few possible role, craft, or responsibility themes rather than a single promised destination.\n\n## Compare evidence and assumptions\n\nFor each scenario, list the capabilities, examples of work, relationships, and constraints that would matter. Distinguish what you can test now from what depends on future opportunities or decisions by other people.\n\n## Run a bounded next step\n\nSet a six-month learning or contribution experiment, then review it against a simple question: did it create better evidence about the work I want to do? Keep a roadmap as a living document with assumptions, not as a contract with yourself.\n\n## Keep the boundary visible\n\nA roadmap is an exploration tool, not a forecast of career success, income, promotion, or a guaranteed transition.\n\n## Frequently asked questions\n\n### What should I do when I do not have enough information?\n\nWhen the roadmap changes, note why it changed. Updated information is a reason to revise a plan, not proof that planning was useless.\n\n### Is this a prediction or a guarantee?\n\nNo. FermatMind Career Guides are structured reference and exploration support. They do not determine identity, diagnose health, select people for employment, or guarantee future outcomes.",
+      "source_authority": {
+        "repository": "fap-api",
+        "commit_sha": "f9b560e593a672e1e7c42aee810521593d88fdbf",
+        "zh_path": "content_baselines/career_guides/career_guides.zh-CN.json",
+        "zh_sha256": "a7578b10a9c2ce8b3fecfae1da1057cbd0bd41de10f82adfbe082ba59c244d80",
+        "en_path": "content_baselines/career_guides/career_guides.en.json",
+        "en_sha256": "53e47bcadd1aad0c6467fbb84a4473c55cf3e7f891f77c7a403880025f535dc2",
+        "usage": "zh-CN structure and information-use authority; English baseline identity/reference only",
+        "baseline_is_runtime_authority": false
+      },
+      "structure_review": {
+        "source_heading_count": 10,
+        "candidate_heading_count": 8,
+        "major_sections_preserved": true,
+        "source_faq_present": false,
+        "candidate_faq_present": true,
+        "information_use_equivalence": "producer_review_pass"
+      },
+      "internal_link_review": {
+        "source_related_article_count": 0,
+        "candidate_links": [],
+        "status": "no_candidate_links_added_without_an_independently_verified_localized_target"
+      },
+      "claim_boundary": {
+        "status": "producer_preflight_pass",
+        "prohibited_claims_absent": [
+          "employment_guarantee",
+          "income_or_promotion_guarantee",
+          "admission_or_licensing_advice",
+          "medical_diagnosis_or_treatment",
+          "deterministic_test_to_career_fit"
+        ],
+        "disclaimer": "FermatMind career material is structured reference and exploration support, not employment, admissions, medical, legal, financial, or licensing advice."
+      },
+      "language_review": {
+        "chinese_han_leakage_detected": false,
+        "producer_naturalness_review": "pass",
+        "independent_w9_review": "pending"
+      },
+      "target_publication_status": "candidate_only_not_imported",
+      "import_ready": false
+    },
+    {
+      "row_id": "W3-CAREER-GUIDE-BATCH-B-03",
+      "asset_id": "ENPARITY-W3-CAREER-GUIDES",
+      "guide_code": "career-risk-management",
+      "translation_pair_identity": "career-guide:career-risk-management",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "slug": "career-risk-management",
+      "source_title": "职业风险管理指南",
+      "baseline_en_title": "Career Risk Management",
+      "candidate_title": "Manage Career Risk With Better Signals",
+      "candidate_excerpt": "Identify controllable risks, test assumptions, and prepare options without making fear or certainty the decision-maker.",
+      "candidate_content_md": "# Manage Career Risk With Better Signals\n\n## Start with a question you can revisit\n\nCareer risk is easier to work with when it is broken into concrete questions: which skills are becoming less useful, where is your income or role concentrated, what support do you have, and which assumptions have not been tested? This is preparation, not prediction.\n\n## Compare evidence and assumptions\n\nMake a simple risk map with likelihood, impact, early signals, and a response you could take. Include personal capacity and financial constraints only at the level you are comfortable reviewing; a guide cannot replace qualified legal, financial, or health advice.\n\n## Run a bounded next step\n\nChoose one low-cost resilience action, such as documenting a transferable project, updating a portfolio, strengthening a professional relationship, or learning a tool used in adjacent work. Review whether the action actually reduces uncertainty rather than merely adding activity.\n\n## Keep the boundary visible\n\nRisk planning cannot guarantee safety from job loss, market changes, income changes, or future outcomes.\n\n## Frequently asked questions\n\n### What should I do when I do not have enough information?\n\nPrioritize the risks with a visible early signal and a practical response. If every risk feels urgent, reduce the list and seek context from people who understand the work.\n\n### Is this a prediction or a guarantee?\n\nNo. FermatMind Career Guides are structured reference and exploration support. They do not determine identity, diagnose health, select people for employment, or guarantee future outcomes.",
+      "source_authority": {
+        "repository": "fap-api",
+        "commit_sha": "f9b560e593a672e1e7c42aee810521593d88fdbf",
+        "zh_path": "content_baselines/career_guides/career_guides.zh-CN.json",
+        "zh_sha256": "18b45c620540dc583d87dd0a02bda797bf0228a7c4056d6ee6e98e53cbe21752",
+        "en_path": "content_baselines/career_guides/career_guides.en.json",
+        "en_sha256": "66b49fdcf1391d709e98f39b77789f2342023464358c802c0bdf5e79b124c642",
+        "usage": "zh-CN structure and information-use authority; English baseline identity/reference only",
+        "baseline_is_runtime_authority": false
+      },
+      "structure_review": {
+        "source_heading_count": 10,
+        "candidate_heading_count": 8,
+        "major_sections_preserved": true,
+        "source_faq_present": false,
+        "candidate_faq_present": true,
+        "information_use_equivalence": "producer_review_pass"
+      },
+      "internal_link_review": {
+        "source_related_article_count": 0,
+        "candidate_links": [],
+        "status": "no_candidate_links_added_without_an_independently_verified_localized_target"
+      },
+      "claim_boundary": {
+        "status": "producer_preflight_pass",
+        "prohibited_claims_absent": [
+          "employment_guarantee",
+          "income_or_promotion_guarantee",
+          "admission_or_licensing_advice",
+          "medical_diagnosis_or_treatment",
+          "deterministic_test_to_career_fit"
+        ],
+        "disclaimer": "FermatMind career material is structured reference and exploration support, not employment, admissions, medical, legal, financial, or licensing advice."
+      },
+      "language_review": {
+        "chinese_han_leakage_detected": false,
+        "producer_naturalness_review": "pass",
+        "independent_w9_review": "pending"
+      },
+      "target_publication_status": "candidate_only_not_imported",
+      "import_ready": false
+    },
+    {
+      "row_id": "W3-CAREER-GUIDE-BATCH-B-04",
+      "asset_id": "ENPARITY-W3-CAREER-GUIDES",
+      "guide_code": "career-transition-playbook",
+      "translation_pair_identity": "career-guide:career-transition-playbook",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "slug": "career-transition-playbook",
+      "source_title": "职业转型行动手册",
+      "baseline_en_title": "Career Transition Playbook",
+      "candidate_title": "Create a Practical Career Transition Playbook",
+      "candidate_excerpt": "Organize a transition around evidence, conversations, and reversible steps rather than a leap based on a single result.",
+      "candidate_content_md": "# Create a Practical Career Transition Playbook\n\n## Start with a question you can revisit\n\nA transition can involve more than changing a title. It may mean changing tasks, working conditions, industry context, income patterns, or identity at work. Start by naming what you want to test and what you need to protect while testing it.\n\n## Compare evidence and assumptions\n\nInventory transferable evidence: projects, decisions, tools, stakeholder work, and learning that show how you work. Then identify the gaps that are real requirements versus assumptions you have not checked with people who do the work.\n\n## Run a bounded next step\n\nBuild a sequence of small steps: research a role, speak with practitioners, create one relevant work sample, and review the evidence before committing more time. Keep a transition log that records what changed your view.\n\n## Keep the boundary visible\n\nA playbook can improve preparation; it does not guarantee an offer, a smooth switch, or a particular income or status outcome.\n\n## Frequently asked questions\n\n### What should I do when I do not have enough information?\n\nIf a step is too costly or irreversible, reduce its scope. A useful experiment produces information even when it does not lead to a transition.\n\n### Is this a prediction or a guarantee?\n\nNo. FermatMind Career Guides are structured reference and exploration support. They do not determine identity, diagnose health, select people for employment, or guarantee future outcomes.",
+      "source_authority": {
+        "repository": "fap-api",
+        "commit_sha": "f9b560e593a672e1e7c42aee810521593d88fdbf",
+        "zh_path": "content_baselines/career_guides/career_guides.zh-CN.json",
+        "zh_sha256": "1c4960c3f7a4e64000131662614ab133e2e5e4864e45a49ec7518bc4d1b214ef",
+        "en_path": "content_baselines/career_guides/career_guides.en.json",
+        "en_sha256": "11858142093fee36dae39ca48e99419a903ecba0aa9a9fd4cb2caae152809c9d",
+        "usage": "zh-CN structure and information-use authority; English baseline identity/reference only",
+        "baseline_is_runtime_authority": false
+      },
+      "structure_review": {
+        "source_heading_count": 10,
+        "candidate_heading_count": 8,
+        "major_sections_preserved": true,
+        "source_faq_present": false,
+        "candidate_faq_present": true,
+        "information_use_equivalence": "producer_review_pass"
+      },
+      "internal_link_review": {
+        "source_related_article_count": 0,
+        "candidate_links": [],
+        "status": "no_candidate_links_added_without_an_independently_verified_localized_target"
+      },
+      "claim_boundary": {
+        "status": "producer_preflight_pass",
+        "prohibited_claims_absent": [
+          "employment_guarantee",
+          "income_or_promotion_guarantee",
+          "admission_or_licensing_advice",
+          "medical_diagnosis_or_treatment",
+          "deterministic_test_to_career_fit"
+        ],
+        "disclaimer": "FermatMind career material is structured reference and exploration support, not employment, admissions, medical, legal, financial, or licensing advice."
+      },
+      "language_review": {
+        "chinese_han_leakage_detected": false,
+        "producer_naturalness_review": "pass",
+        "independent_w9_review": "pending"
+      },
+      "target_publication_status": "candidate_only_not_imported",
+      "import_ready": false
+    },
+    {
+      "row_id": "W3-CAREER-GUIDE-BATCH-B-05",
+      "asset_id": "ENPARITY-W3-CAREER-GUIDES",
+      "guide_code": "cross-industry-move-strategy",
+      "translation_pair_identity": "career-guide:cross-industry-move-strategy",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "slug": "cross-industry-move-strategy",
+      "source_title": "跨行业转型策略",
+      "baseline_en_title": "Cross-Industry Move Strategy",
+      "candidate_title": "Plan a Cross-Industry Move",
+      "candidate_excerpt": "Translate your existing work into industry-relevant evidence and test the move before relying on assumptions about fit.",
+      "candidate_content_md": "# Plan a Cross-Industry Move\n\n## Start with a question you can revisit\n\nMoving industries often requires translating familiar work for a new context. The question is not whether your past title looks identical, but which problems you solved, which tools you used, and what constraints you learned to handle.\n\n## Compare evidence and assumptions\n\nCompare one target industry with your current experience across customers, regulation, pace, language, tools, and decision cycles. Mark the parts you already understand, the parts you need to learn, and the parts that require a conversation rather than an online guess.\n\n## Run a bounded next step\n\nCreate one short case study that explains a transferable project in the target industry's terms. Ask for feedback on clarity and missing context, then improve the case study rather than assuming it proves readiness.\n\n## Keep the boundary visible\n\nA cross-industry strategy does not guarantee hiring, recognition of prior experience, or a successful move.\n\n## Frequently asked questions\n\n### What should I do when I do not have enough information?\n\nA smaller bridge role, project, course, or collaboration may offer better evidence than an all-or-nothing application campaign.\n\n### Is this a prediction or a guarantee?\n\nNo. FermatMind Career Guides are structured reference and exploration support. They do not determine identity, diagnose health, select people for employment, or guarantee future outcomes.",
+      "source_authority": {
+        "repository": "fap-api",
+        "commit_sha": "f9b560e593a672e1e7c42aee810521593d88fdbf",
+        "zh_path": "content_baselines/career_guides/career_guides.zh-CN.json",
+        "zh_sha256": "1997cf6dadef78949dc3c1f3902df8ab6335d8f62eb442dc58ad0bd617425094",
+        "en_path": "content_baselines/career_guides/career_guides.en.json",
+        "en_sha256": "c74599f7d7633c1014c45e72b2684efda6cebf0ca6fbd40e99ba9203dd29e7a7",
+        "usage": "zh-CN structure and information-use authority; English baseline identity/reference only",
+        "baseline_is_runtime_authority": false
+      },
+      "structure_review": {
+        "source_heading_count": 10,
+        "candidate_heading_count": 8,
+        "major_sections_preserved": true,
+        "source_faq_present": false,
+        "candidate_faq_present": true,
+        "information_use_equivalence": "producer_review_pass"
+      },
+      "internal_link_review": {
+        "source_related_article_count": 0,
+        "candidate_links": [],
+        "status": "no_candidate_links_added_without_an_independently_verified_localized_target"
+      },
+      "claim_boundary": {
+        "status": "producer_preflight_pass",
+        "prohibited_claims_absent": [
+          "employment_guarantee",
+          "income_or_promotion_guarantee",
+          "admission_or_licensing_advice",
+          "medical_diagnosis_or_treatment",
+          "deterministic_test_to_career_fit"
+        ],
+        "disclaimer": "FermatMind career material is structured reference and exploration support, not employment, admissions, medical, legal, financial, or licensing advice."
+      },
+      "language_review": {
+        "chinese_han_leakage_detected": false,
+        "producer_naturalness_review": "pass",
+        "independent_w9_review": "pending"
+      },
+      "target_publication_status": "candidate_only_not_imported",
+      "import_ready": false
+    },
+    {
+      "row_id": "W3-CAREER-GUIDE-BATCH-B-06",
+      "asset_id": "ENPARITY-W3-CAREER-GUIDES",
+      "guide_code": "how-to-choose-college-major",
+      "translation_pair_identity": "career-guide:how-to-choose-college-major",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "slug": "how-to-choose-college-major",
+      "source_title": "如何选择大学专业",
+      "baseline_en_title": "How to Choose a College Major",
+      "candidate_title": "Choose a College Major as an Exploration Decision",
+      "candidate_excerpt": "Compare interests, learning conditions, course evidence, and practical constraints without treating one major as a fixed life outcome.",
+      "candidate_content_md": "# Choose a College Major as an Exploration Decision\n\n## Start with a question you can revisit\n\nA major can shape what you study and whom you meet, but it is not a complete prediction of a career. Begin with the kinds of questions, methods, environments, and problems that keep your attention, alongside practical constraints such as cost, location, and available support.\n\n## Compare evidence and assumptions\n\nLook at course work, not only labels. Read sample assignments, speak with students or advisers, and notice whether the learning process fits your current strengths and the skills you want to develop.\n\n## Run a bounded next step\n\nCompare a small number of options using the same questions: what would I learn, what evidence would I create, what alternatives remain open, and what support would I need? Record uncertainty instead of forcing a false ranking.\n\n## Keep the boundary visible\n\nThis guide does not predict admission, graduation, licensing, employment, or the career outcome of a major choice.\n\n## Frequently asked questions\n\n### What should I do when I do not have enough information?\n\nIf you are unsure, choose an information-gathering action such as a class, project, conversation, or advising appointment rather than treating uncertainty as a personal defect.\n\n### Is this a prediction or a guarantee?\n\nNo. FermatMind Career Guides are structured reference and exploration support. They do not determine identity, diagnose health, select people for employment, or guarantee future outcomes.",
+      "source_authority": {
+        "repository": "fap-api",
+        "commit_sha": "f9b560e593a672e1e7c42aee810521593d88fdbf",
+        "zh_path": "content_baselines/career_guides/career_guides.zh-CN.json",
+        "zh_sha256": "21d020d26afc0325193246adfa487d47a179a48d8f32b3c78d1c539ac61d1ddf",
+        "en_path": "content_baselines/career_guides/career_guides.en.json",
+        "en_sha256": "052e5e239c3f292b214d413bdf883a7ceebdc4efde3959b42ae6bcc405be1a5d",
+        "usage": "zh-CN structure and information-use authority; English baseline identity/reference only",
+        "baseline_is_runtime_authority": false
+      },
+      "structure_review": {
+        "source_heading_count": 10,
+        "candidate_heading_count": 8,
+        "major_sections_preserved": true,
+        "source_faq_present": false,
+        "candidate_faq_present": true,
+        "information_use_equivalence": "producer_review_pass"
+      },
+      "internal_link_review": {
+        "source_related_article_count": 0,
+        "candidate_links": [],
+        "status": "no_candidate_links_added_without_an_independently_verified_localized_target"
+      },
+      "claim_boundary": {
+        "status": "producer_preflight_pass",
+        "prohibited_claims_absent": [
+          "employment_guarantee",
+          "income_or_promotion_guarantee",
+          "admission_or_licensing_advice",
+          "medical_diagnosis_or_treatment",
+          "deterministic_test_to_career_fit"
+        ],
+        "disclaimer": "FermatMind career material is structured reference and exploration support, not employment, admissions, medical, legal, financial, or licensing advice."
+      },
+      "language_review": {
+        "chinese_han_leakage_detected": false,
+        "producer_naturalness_review": "pass",
+        "independent_w9_review": "pending"
+      },
+      "target_publication_status": "candidate_only_not_imported",
+      "import_ready": false
+    },
+    {
+      "row_id": "W3-CAREER-GUIDE-BATCH-B-07",
+      "asset_id": "ENPARITY-W3-CAREER-GUIDES",
+      "guide_code": "how-to-find-right-career-direction",
+      "translation_pair_identity": "career-guide:how-to-find-right-career-direction",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "slug": "how-to-find-right-career-direction",
+      "source_title": "如何找到适合自己的职业方向",
+      "baseline_en_title": "How to Find the Right Career Direction",
+      "candidate_title": "Find a Career Direction Through Evidence",
+      "candidate_excerpt": "Use values, skills, constraints, and experiments to narrow options without searching for a single predetermined calling.",
+      "candidate_content_md": "# Find a Career Direction Through Evidence\n\n## Start with a question you can revisit\n\nCareer direction is often clearer after repeated contact with real work. Instead of asking for one perfect answer, collect evidence about the problems you care about, the tasks you can practice, the conditions you need, and the constraints you cannot ignore.\n\n## Compare evidence and assumptions\n\nCreate a short option map with role families, not only job titles. For each option, note what you know from direct experience, what comes from assumptions, and what you could learn through a low-risk conversation or project.\n\n## Run a bounded next step\n\nRun one bounded experiment for each promising direction. This might be a sample task, a volunteer contribution, a course exercise, or an interview with someone in the field. Compare the evidence afterwards instead of relying on first impressions alone.\n\n## Keep the boundary visible\n\nNo assessment, guide, or experiment can identify a destined career or guarantee future satisfaction, employment, or income.\n\n## Frequently asked questions\n\n### What should I do when I do not have enough information?\n\nA direction can be provisional. Revisit it when your skills, responsibilities, opportunities, or constraints change.\n\n### Is this a prediction or a guarantee?\n\nNo. FermatMind Career Guides are structured reference and exploration support. They do not determine identity, diagnose health, select people for employment, or guarantee future outcomes.",
+      "source_authority": {
+        "repository": "fap-api",
+        "commit_sha": "f9b560e593a672e1e7c42aee810521593d88fdbf",
+        "zh_path": "content_baselines/career_guides/career_guides.zh-CN.json",
+        "zh_sha256": "d5e65bc52e59b42dca1533ef4a02d46c5556429d14382cc7003f1c214e44446c",
+        "en_path": "content_baselines/career_guides/career_guides.en.json",
+        "en_sha256": "63431236cb5a395b08a4d642ec6cb590a9e15670ce00be3ae798fede35699486",
+        "usage": "zh-CN structure and information-use authority; English baseline identity/reference only",
+        "baseline_is_runtime_authority": false
+      },
+      "structure_review": {
+        "source_heading_count": 10,
+        "candidate_heading_count": 8,
+        "major_sections_preserved": true,
+        "source_faq_present": false,
+        "candidate_faq_present": true,
+        "information_use_equivalence": "producer_review_pass"
+      },
+      "internal_link_review": {
+        "source_related_article_count": 1,
+        "candidate_links": [],
+        "status": "no_candidate_links_added_without_an_independently_verified_localized_target"
+      },
+      "claim_boundary": {
+        "status": "producer_preflight_pass",
+        "prohibited_claims_absent": [
+          "employment_guarantee",
+          "income_or_promotion_guarantee",
+          "admission_or_licensing_advice",
+          "medical_diagnosis_or_treatment",
+          "deterministic_test_to_career_fit"
+        ],
+        "disclaimer": "FermatMind career material is structured reference and exploration support, not employment, admissions, medical, legal, financial, or licensing advice."
+      },
+      "language_review": {
+        "chinese_han_leakage_detected": false,
+        "producer_naturalness_review": "pass",
+        "independent_w9_review": "pending"
+      },
+      "target_publication_status": "candidate_only_not_imported",
+      "import_ready": false
+    },
+    {
+      "row_id": "W3-CAREER-GUIDE-BATCH-B-08",
+      "asset_id": "ENPARITY-W3-CAREER-GUIDES",
+      "guide_code": "improve-workplace-competitiveness",
+      "translation_pair_identity": "career-guide:improve-workplace-competitiveness",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "slug": "improve-workplace-competitiveness",
+      "source_title": "如何提升职场竞争力",
+      "baseline_en_title": "Improve Workplace Competitiveness",
+      "candidate_title": "Strengthen Workplace Contribution",
+      "candidate_excerpt": "Build visible, useful work habits and evidence of contribution without turning employability into a guaranteed outcome.",
+      "candidate_content_md": "# Strengthen Workplace Contribution\n\n## Start with a question you can revisit\n\nWorkplace contribution becomes easier to discuss when it is connected to actual work: clearer decisions, reliable follow-through, useful collaboration, and learning from feedback. Avoid treating a broad label such as competitiveness as a measure of personal worth.\n\n## Compare evidence and assumptions\n\nChoose one capability that matters in your current context, such as communicating progress, solving a recurring problem, improving a handoff, or developing a tool skill. Ask what evidence would show improvement to you and to the people affected by the work.\n\n## Run a bounded next step\n\nSet a small work agreement with a manager, peer, or mentor where appropriate. Track the situation, action, result, and what you would change next time. This creates a learning record, not a promise of recognition.\n\n## Keep the boundary visible\n\nImprovement work does not guarantee hiring, promotion, performance ratings, job security, or income.\n\n## Frequently asked questions\n\n### What should I do when I do not have enough information?\n\nWhen feedback is limited, use project outcomes and your own process notes, then seek a specific conversation rather than guessing how others evaluate you.\n\n### Is this a prediction or a guarantee?\n\nNo. FermatMind Career Guides are structured reference and exploration support. They do not determine identity, diagnose health, select people for employment, or guarantee future outcomes.",
+      "source_authority": {
+        "repository": "fap-api",
+        "commit_sha": "f9b560e593a672e1e7c42aee810521593d88fdbf",
+        "zh_path": "content_baselines/career_guides/career_guides.zh-CN.json",
+        "zh_sha256": "18778146560364837b96bc8b5c310e5bbff0d81d0309adaf43d3932b38746844",
+        "en_path": "content_baselines/career_guides/career_guides.en.json",
+        "en_sha256": "b0cef6cbf61826519a0344dc16397ea5ad114a47e42397d36dc80bc994dea7c5",
+        "usage": "zh-CN structure and information-use authority; English baseline identity/reference only",
+        "baseline_is_runtime_authority": false
+      },
+      "structure_review": {
+        "source_heading_count": 10,
+        "candidate_heading_count": 8,
+        "major_sections_preserved": true,
+        "source_faq_present": false,
+        "candidate_faq_present": true,
+        "information_use_equivalence": "producer_review_pass"
+      },
+      "internal_link_review": {
+        "source_related_article_count": 0,
+        "candidate_links": [],
+        "status": "no_candidate_links_added_without_an_independently_verified_localized_target"
+      },
+      "claim_boundary": {
+        "status": "producer_preflight_pass",
+        "prohibited_claims_absent": [
+          "employment_guarantee",
+          "income_or_promotion_guarantee",
+          "admission_or_licensing_advice",
+          "medical_diagnosis_or_treatment",
+          "deterministic_test_to_career_fit"
+        ],
+        "disclaimer": "FermatMind career material is structured reference and exploration support, not employment, admissions, medical, legal, financial, or licensing advice."
+      },
+      "language_review": {
+        "chinese_han_leakage_detected": false,
+        "producer_naturalness_review": "pass",
+        "independent_w9_review": "pending"
+      },
+      "target_publication_status": "candidate_only_not_imported",
+      "import_ready": false
+    },
+    {
+      "row_id": "W3-CAREER-GUIDE-BATCH-B-09",
+      "asset_id": "ENPARITY-W3-CAREER-GUIDES",
+      "guide_code": "interview-strategy-by-role",
+      "translation_pair_identity": "career-guide:interview-strategy-by-role",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "slug": "interview-strategy-by-role",
+      "source_title": "按岗位定制面试策略",
+      "baseline_en_title": "Interview Strategy by Role",
+      "candidate_title": "Prepare for Interviews by Understanding the Role",
+      "candidate_excerpt": "Practice explaining relevant evidence and asking better questions without promising an offer or a selection outcome.",
+      "candidate_content_md": "# Prepare for Interviews by Understanding the Role\n\n## Start with a question you can revisit\n\nInterview preparation works best when it is grounded in the role's likely work, not a script for appearing perfect. Review the responsibilities, stakeholders, decisions, and examples you can explain honestly from your own experience.\n\n## Compare evidence and assumptions\n\nBuild a small set of stories that show context, your contribution, trade-offs, and what you learned. Adapt the emphasis to the role, but do not claim experience or outcomes you cannot support.\n\n## Run a bounded next step\n\nRehearse concise answers and questions about expectations, collaboration, decision-making, and learning. After each practice round, improve one part of the explanation instead of trying to predict what a particular interviewer wants.\n\n## Keep the boundary visible\n\nPreparation can support clearer communication; it does not guarantee an interview, an offer, a hiring decision, or compensation.\n\n## Frequently asked questions\n\n### What should I do when I do not have enough information?\n\nIf you lack a direct example, explain a related situation and the steps you would take to learn. Honest limits are more useful than invented certainty.\n\n### Is this a prediction or a guarantee?\n\nNo. FermatMind Career Guides are structured reference and exploration support. They do not determine identity, diagnose health, select people for employment, or guarantee future outcomes.",
+      "source_authority": {
+        "repository": "fap-api",
+        "commit_sha": "f9b560e593a672e1e7c42aee810521593d88fdbf",
+        "zh_path": "content_baselines/career_guides/career_guides.zh-CN.json",
+        "zh_sha256": "1f7c95bf2164b0cee9cf08a24e79265ce65c5aa81519e82aaf505370f94bcc2a",
+        "en_path": "content_baselines/career_guides/career_guides.en.json",
+        "en_sha256": "74ec033af9bf02077140a166003c4d1ac30220a7df708efa20da688c4614dabf",
+        "usage": "zh-CN structure and information-use authority; English baseline identity/reference only",
+        "baseline_is_runtime_authority": false
+      },
+      "structure_review": {
+        "source_heading_count": 10,
+        "candidate_heading_count": 8,
+        "major_sections_preserved": true,
+        "source_faq_present": false,
+        "candidate_faq_present": true,
+        "information_use_equivalence": "producer_review_pass"
+      },
+      "internal_link_review": {
+        "source_related_article_count": 0,
+        "candidate_links": [],
+        "status": "no_candidate_links_added_without_an_independently_verified_localized_target"
+      },
+      "claim_boundary": {
+        "status": "producer_preflight_pass",
+        "prohibited_claims_absent": [
+          "employment_guarantee",
+          "income_or_promotion_guarantee",
+          "admission_or_licensing_advice",
+          "medical_diagnosis_or_treatment",
+          "deterministic_test_to_career_fit"
+        ],
+        "disclaimer": "FermatMind career material is structured reference and exploration support, not employment, admissions, medical, legal, financial, or licensing advice."
+      },
+      "language_review": {
+        "chinese_han_leakage_detected": false,
+        "producer_naturalness_review": "pass",
+        "independent_w9_review": "pending"
+      },
+      "target_publication_status": "candidate_only_not_imported",
+      "import_ready": false
+    },
+    {
+      "row_id": "W3-CAREER-GUIDE-BATCH-B-10",
+      "asset_id": "ENPARITY-W3-CAREER-GUIDES",
+      "guide_code": "leader-track-vs-expert-track",
+      "translation_pair_identity": "career-guide:leader-track-vs-expert-track",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "slug": "leader-track-vs-expert-track",
+      "source_title": "管理路径与专家路径如何选择",
+      "baseline_en_title": "Leader Track vs Expert Track",
+      "candidate_title": "Compare Leadership and Expert Career Tracks",
+      "candidate_excerpt": "Compare day-to-day responsibilities, preferred problems, and development experiments instead of treating either path as higher status.",
+      "candidate_content_md": "# Compare Leadership and Expert Career Tracks\n\n## Start with a question you can revisit\n\nLeadership and expert paths can both involve influence, learning, and responsibility, but their daily work may differ. Start with the kind of problems you want to own, the people or systems you want to support, and the trade-offs you are willing to practice.\n\n## Compare evidence and assumptions\n\nLook beyond titles. Compare activities such as setting direction, developing people, making technical or domain decisions, coordinating stakeholders, maintaining standards, and building depth in a craft.\n\n## Run a bounded next step\n\nTest one responsibility before making a larger choice: lead a small project, mentor a colleague, own a technical decision, or document a standard. Ask for feedback on the work itself and on the conditions that helped or hindered you.\n\n## Keep the boundary visible\n\nNeither track guarantees promotion, authority, income, security, or personal fulfillment.\n\n## Frequently asked questions\n\n### What should I do when I do not have enough information?\n\nA path can change over time. Treat the comparison as a current development choice, not a permanent identity label.\n\n### Is this a prediction or a guarantee?\n\nNo. FermatMind Career Guides are structured reference and exploration support. They do not determine identity, diagnose health, select people for employment, or guarantee future outcomes.",
+      "source_authority": {
+        "repository": "fap-api",
+        "commit_sha": "f9b560e593a672e1e7c42aee810521593d88fdbf",
+        "zh_path": "content_baselines/career_guides/career_guides.zh-CN.json",
+        "zh_sha256": "6503ca4c9c47da28a3dc8a67aab6172f3d3dee58b1a7b1561ed3ddc49b4f0b22",
+        "en_path": "content_baselines/career_guides/career_guides.en.json",
+        "en_sha256": "be8b1a7b91c8c4b9d96939eecc5896ee14b8adfc9f81fd6825c16595de60ba9f",
+        "usage": "zh-CN structure and information-use authority; English baseline identity/reference only",
+        "baseline_is_runtime_authority": false
+      },
+      "structure_review": {
+        "source_heading_count": 10,
+        "candidate_heading_count": 8,
+        "major_sections_preserved": true,
+        "source_faq_present": false,
+        "candidate_faq_present": true,
+        "information_use_equivalence": "producer_review_pass"
+      },
+      "internal_link_review": {
+        "source_related_article_count": 0,
+        "candidate_links": [],
+        "status": "no_candidate_links_added_without_an_independently_verified_localized_target"
+      },
+      "claim_boundary": {
+        "status": "producer_preflight_pass",
+        "prohibited_claims_absent": [
+          "employment_guarantee",
+          "income_or_promotion_guarantee",
+          "admission_or_licensing_advice",
+          "medical_diagnosis_or_treatment",
+          "deterministic_test_to_career_fit"
+        ],
+        "disclaimer": "FermatMind career material is structured reference and exploration support, not employment, admissions, medical, legal, financial, or licensing advice."
+      },
+      "language_review": {
+        "chinese_han_leakage_detected": false,
+        "producer_naturalness_review": "pass",
+        "independent_w9_review": "pending"
+      },
+      "target_publication_status": "candidate_only_not_imported",
+      "import_ready": false
+    },
+    {
+      "row_id": "W3-CAREER-GUIDE-BATCH-B-11",
+      "asset_id": "ENPARITY-W3-CAREER-GUIDES",
+      "guide_code": "prevent-burnout-while-growing",
+      "translation_pair_identity": "career-guide:prevent-burnout-while-growing",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "slug": "prevent-burnout-while-growing",
+      "source_title": "成长阶段如何预防职业倦怠",
+      "baseline_en_title": "Prevent Burnout While Growing",
+      "candidate_title": "Support Sustainable Growth at Work",
+      "candidate_excerpt": "Notice workload patterns, recovery needs, and support options while keeping wellbeing guidance non-clinical and bounded.",
+      "candidate_content_md": "# Support Sustainable Growth at Work\n\n## Start with a question you can revisit\n\nGrowth can become unsustainable when effort, expectations, and recovery remain unexamined. Start by noticing patterns in workload, boundaries, concentration, sleep, relationships, and the work conditions that repeatedly leave you depleted.\n\n## Compare evidence and assumptions\n\nSeparate what you can change directly from what needs a conversation or support. This may include scope, priorities, meeting load, handoffs, time away from work, or asking for clearer expectations.\n\n## Run a bounded next step\n\nChoose one sustainable change for a short period, such as a weekly priority review, a clearer stopping point, or a conversation about workload. Record what happens without using self-tracking as a diagnosis.\n\n## Keep the boundary visible\n\nThis is non-clinical reflection, not medical diagnosis, treatment, or prevention advice. Seek qualified support for health or safety concerns.\n\n## Frequently asked questions\n\n### What should I do when I do not have enough information?\n\nIf exhaustion, distress, or safety concerns feel severe or persistent, prioritise appropriate professional or local support rather than relying on a career guide.\n\n### Is this a prediction or a guarantee?\n\nNo. FermatMind Career Guides are structured reference and exploration support. They do not determine identity, diagnose health, select people for employment, or guarantee future outcomes.",
+      "source_authority": {
+        "repository": "fap-api",
+        "commit_sha": "f9b560e593a672e1e7c42aee810521593d88fdbf",
+        "zh_path": "content_baselines/career_guides/career_guides.zh-CN.json",
+        "zh_sha256": "84e6654965a4172a6635f4d7e7f5441a1e4ff559c3f2ea82725904b322c8b0b5",
+        "en_path": "content_baselines/career_guides/career_guides.en.json",
+        "en_sha256": "35da8a52ae2498be01f6fac3fe67815a4b7b774b5d008c2db741525f45675bb9",
+        "usage": "zh-CN structure and information-use authority; English baseline identity/reference only",
+        "baseline_is_runtime_authority": false
+      },
+      "structure_review": {
+        "source_heading_count": 10,
+        "candidate_heading_count": 8,
+        "major_sections_preserved": true,
+        "source_faq_present": false,
+        "candidate_faq_present": true,
+        "information_use_equivalence": "producer_review_pass"
+      },
+      "internal_link_review": {
+        "source_related_article_count": 0,
+        "candidate_links": [],
+        "status": "no_candidate_links_added_without_an_independently_verified_localized_target"
+      },
+      "claim_boundary": {
+        "status": "producer_preflight_pass",
+        "prohibited_claims_absent": [
+          "employment_guarantee",
+          "income_or_promotion_guarantee",
+          "admission_or_licensing_advice",
+          "medical_diagnosis_or_treatment",
+          "deterministic_test_to_career_fit"
+        ],
+        "disclaimer": "FermatMind career material is structured reference and exploration support, not employment, admissions, medical, legal, financial, or licensing advice."
+      },
+      "language_review": {
+        "chinese_han_leakage_detected": false,
+        "producer_naturalness_review": "pass",
+        "independent_w9_review": "pending"
+      },
+      "target_publication_status": "candidate_only_not_imported",
+      "import_ready": false
+    },
+    {
+      "row_id": "W3-CAREER-GUIDE-BATCH-B-12",
+      "asset_id": "ENPARITY-W3-CAREER-GUIDES",
+      "guide_code": "salary-negotiation-framework",
+      "translation_pair_identity": "career-guide:salary-negotiation-framework",
+      "source_locale": "zh-CN",
+      "target_locale": "en",
+      "slug": "salary-negotiation-framework",
+      "source_title": "薪资谈判实战框架",
+      "baseline_en_title": "Salary Negotiation Framework",
+      "candidate_title": "Prepare for a Salary Negotiation Conversation",
+      "candidate_excerpt": "Organize your questions, contribution evidence, and constraints for a compensation discussion without promising a raise, offer, or income outcome.",
+      "candidate_content_md": "# Prepare for a Salary Negotiation Conversation\n\n## Start with a question you can revisit\n\nCompensation conversations are context-dependent. Preparation can help you explain your work and ask clearer questions, but an employer's policies, budget, timing, and local conditions may shape the outcome.\n\n## Compare evidence and assumptions\n\nCollect accurate evidence you are comfortable discussing: responsibilities, scope changes, contributions, skills, and questions about how compensation decisions are made. Avoid treating informal anecdotes or online ranges as a guaranteed benchmark.\n\n## Run a bounded next step\n\nWrite a concise conversation outline: what has changed in your work, what you want to understand, what you are requesting, and how you will respond if the answer is delayed or unclear. Practice listening for constraints as well as stating your case.\n\n## Keep the boundary visible\n\nThis guide supports preparation only. It does not guarantee a salary, raise, offer, income level, or legal result.\n\n## Frequently asked questions\n\n### What should I do when I do not have enough information?\n\nIf local employment, contract, tax, or legal issues are involved, seek qualified advice appropriate to your jurisdiction rather than relying on general guidance.\n\n### Is this a prediction or a guarantee?\n\nNo. FermatMind Career Guides are structured reference and exploration support. They do not determine identity, diagnose health, select people for employment, or guarantee future outcomes.",
+      "source_authority": {
+        "repository": "fap-api",
+        "commit_sha": "f9b560e593a672e1e7c42aee810521593d88fdbf",
+        "zh_path": "content_baselines/career_guides/career_guides.zh-CN.json",
+        "zh_sha256": "15b2a590bdfad03a3b3cdbbf510747926be1638abd3600cc7d531693503a8fa7",
+        "en_path": "content_baselines/career_guides/career_guides.en.json",
+        "en_sha256": "837f1a5fe506cc676516dfe192babefa7e6273b924bd785a15e8582fe163048a",
+        "usage": "zh-CN structure and information-use authority; English baseline identity/reference only",
+        "baseline_is_runtime_authority": false
+      },
+      "structure_review": {
+        "source_heading_count": 10,
+        "candidate_heading_count": 8,
+        "major_sections_preserved": true,
+        "source_faq_present": false,
+        "candidate_faq_present": true,
+        "information_use_equivalence": "producer_review_pass"
+      },
+      "internal_link_review": {
+        "source_related_article_count": 0,
+        "candidate_links": [],
+        "status": "no_candidate_links_added_without_an_independently_verified_localized_target"
+      },
+      "claim_boundary": {
+        "status": "producer_preflight_pass",
+        "prohibited_claims_absent": [
+          "employment_guarantee",
+          "income_or_promotion_guarantee",
+          "admission_or_licensing_advice",
+          "medical_diagnosis_or_treatment",
+          "deterministic_test_to_career_fit"
+        ],
+        "disclaimer": "FermatMind career material is structured reference and exploration support, not employment, admissions, medical, legal, financial, or licensing advice."
+      },
+      "language_review": {
+        "chinese_han_leakage_detected": false,
+        "producer_naturalness_review": "pass",
+        "independent_w9_review": "pending"
+      },
+      "target_publication_status": "candidate_only_not_imported",
+      "import_ready": false
+    }
+  ],
+  "permissions": {
+    "cms_write_authorized": false,
+    "staging_write_authorized": false,
+    "production_import_authorized": false,
+    "public_release_authorized": false,
+    "seo_runtime_release_authorized": false,
+    "search_submission_authorized": false,
+    "master_manifest_write_authorized": false
+  }
+}
