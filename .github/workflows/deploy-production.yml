@@ -1080,6 +1080,7 @@ jobs:
             local production_parent actual_diff expected_diff path production_blob candidate_blob
             local -a production_commit
             local production_is_audited=false
+            git fetch --no-tags origin "$AUDITED_RUNTIME46_PRODUCTION_SHA" "$AUDITED_IDX52_CANDIDATE_SHA" >/dev/null 2>&1 || true
             if [ "$CURRENT_PRODUCTION_SHA" = "$AUDITED_RUNTIME46_PRODUCTION_SHA" ]; then
               production_is_audited=true
             elif git merge-base --is-ancestor "$AUDITED_RUNTIME46_PRODUCTION_SHA" "$CURRENT_PRODUCTION_SHA"; then
