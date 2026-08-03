@@ -32,6 +32,10 @@ final class ContentPromotionAutomationWorkflowTest extends TestCase
         self::assertStringContainsString('CONTENT_PROMOTION_PREVIOUS_RECEIPT', $workflow);
         self::assertSame(2, substr_count($workflow, 'AUTOMATION_KEY: ${{ secrets.CONTENT_PROMOTION_AUTOMATION_KEY }}'));
         self::assertStringContainsString('CONTENT_PROMOTION_WORKFLOW_SIGNATURE="$WORKFLOW_SIGNATURE"', $workflow);
+        self::assertStringContainsString('fermatmind.content_promotion_failure_evidence.v1', $workflow);
+        self::assertStringContainsString('privacy_redaction:true', $workflow);
+        self::assertStringContainsString('private_payload_read_count:0', $workflow);
+        self::assertStringContainsString('*.failure.json "$local_receipts/"', $workflow);
         self::assertStringContainsString('.published_count == 0', $workflow);
         self::assertStringContainsString('.deploy_mutation_count == 0', $workflow);
         self::assertStringContainsString('.indexability_mutation_count == 0', $workflow);

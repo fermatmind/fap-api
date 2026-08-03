@@ -132,6 +132,7 @@ jobs:
           test "${#AUTOMATION_KEY}" -ge 32
           signature_material="content-promotion-v2|$EXPECTED_CONTROL_PLANE_SHA|$GITHUB_RUN_ID|$GITHUB_RUN_ATTEMPT|$LANE|${SUBSCOPE:--}|$PACKAGE_SHA256|$RELEASE_POLICY_SHA256|$EXPECTED_ROW_COUNT"
           workflow_signature="$(printf '%s' "$signature_material" | openssl dgst -sha256 -hmac "$AUTOMATION_KEY" -binary | xxd -p -c 256)"
+          set +e
           ssh -p "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes "$DEPLOY_USER@$DEPLOY_HOST" \
             "DEPLOY_PATH='$DEPLOY_PATH' RECEIPT_ROOT='$remote_root' CONTROL_SHA='$EXPECTED_CONTROL_PLANE_SHA' LANE='$LANE' SUBSCOPE='$SUBSCOPE' PACKAGE_PATH='$PACKAGE_PATH' PACKAGE_SHA='$PACKAGE_SHA256' POLICY_SHA='$RELEASE_POLICY_SHA256' ROW_COUNT='$EXPECTED_ROW_COUNT' RUN_ID='$GITHUB_RUN_ID' RUN_ATTEMPT='$GITHUB_RUN_ATTEMPT' WORKFLOW_SIGNATURE='$workflow_signature' bash -s" <<'REMOTE'
           set -euo pipefail
@@ -163,6 +164,7 @@ jobs:
               unset CONTENT_PROMOTION_PREVIOUS_RECEIPT || true
             fi
             stdout="$RECEIPT_ROOT/$phase.stdout.json"
+            set +e
             php artisan content:promote-exact-package \
               --package="$PACKAGE_PATH" \
               --expected-package-sha256="$PACKAGE_SHA" \
@@ -171,6 +173,18 @@ jobs:
               --phase="$phase" \
               --receipt="$receipt" \
               --json --no-ansi > "$stdout"
+            command_status=$?
+            set -e
+            if [ "$command_status" -ne 0 ]; then
+              error_code="$(jq -r '.error_code // empty' "$stdout" 2>/dev/null || true)"
+              if ! jq -e '.ok == false and .result == "BLOCKED" and (.error_code | type == "string" and test("^[a-z0-9_]{1,96}$"))' "$stdout" >/dev/null 2>&1; then
+                error_code="unexpected_error"
+              fi
+              jq -nc --arg phase "$phase" --arg error_code "$error_code" --arg lane "$LANE" --arg subscope "$SUBSCOPE" \
+                '{schema_version:"fermatmind.content_promotion_failure_evidence.v1",result:"BLOCKED",phase:$phase,error_code:$error_code,lane:$lane,subscope:$subscope,privacy_redaction:true,private_payload_read_count:0,indexability_mutation_count:0,sitemap_mutation_count:0,llms_mutation_count:0,search_mutation_count:0,deploy_mutation_count:0}' \
+                > "$RECEIPT_ROOT/$phase.failure.json"
+              exit 1
+            fi
             test "$(wc -l < "$stdout" | tr -d ' ')" = 1
             jq -e '.ok == true and .result == "SUCCEEDED" and (.receipt_sha256 | test("^[a-f0-9]{64}$"))' "$stdout" >/dev/null
           }
@@ -180,6 +194,13 @@ jobs:
           run_phase live-qa "$RECEIPT_ROOT/live-qa.json" "$RECEIPT_ROOT/publication.json"
           jq -e '.result == "SUCCEEDED" and .published_count == .expected_count and .deploy_mutation_count == 0 and .indexability_mutation_count == 0 and .sitemap_mutation_count == 0 and .llms_mutation_count == 0 and .search_mutation_count == 0' "$RECEIPT_ROOT/live-qa.json" >/dev/null
           REMOTE
+          remote_status=$?
+          set -e
+          if [ "$remote_status" -ne 0 ]; then
+            scp -P "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes \
+              "$DEPLOY_USER@$DEPLOY_HOST:$remote_root"/*.failure.json "$local_receipts/" >/dev/null 2>&1 || true
+            exit "$remote_status"
+          fi
           scp -P "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes \
             "$DEPLOY_USER@$DEPLOY_HOST:$remote_root/*.json" "$local_receipts/"
           jq -e '.receipt_kind == "cms_draft_import_receipt" and .published_count == 0' "$local_receipts/draft-import.json" >/dev/null
