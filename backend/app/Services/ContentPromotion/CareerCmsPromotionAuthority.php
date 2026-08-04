@@ -202,7 +202,7 @@ final class CareerCmsPromotionAuthority
     public function kind(PromotionContext $context): string
     {
         return match ($context->lane.'/'.$context->subscope) {
-            'W3/career-guides' => 'guide',
+            'W3/career-guides', 'W3/W3-CAREER-GUIDES' => 'guide',
             'W8/career-jobs' => 'job',
             default => throw new DomainException('career_promotion_context_invalid'),
         };
