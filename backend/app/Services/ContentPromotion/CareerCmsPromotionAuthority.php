@@ -321,21 +321,21 @@ final class CareerCmsPromotionAuthority
         }
         // Per-occurrence context-aware claim boundary scan. A prohibited
         // term is only a violation when it appears outside a negated,
-        // question, or disclaimer context. This replaces aggressive regex
-        // stripping which cannot reliably distinguish positive claims from
-        // compliance-required disclaimers.
+        // question, or disclaimer context.
         $scan = PromotionContextFactory::canonicalJson($snapshot);
         $pattern = '/\b(?:guarantee(?:d|s)?\s+(?:income|outcome|future|career|salary|offer|promotion|hiring|job)|predict(?:s|ed|ing)?\s+(?:income|outcome|future)|hiring\s+decision|medical\s+advice)\b/i';
+        $negators = '/\b(?:does\s+not|do\s+not|cannot|will\s+not|neither|nor|rather\s+than|doesnt|dont|cant|wont)\b/i';
         if (preg_match_all($pattern, $scan, $hits, PREG_OFFSET_CAPTURE) === false) {
             // no matches — pass
         } else {
             foreach ($hits[0] as $hit) {
                 $offset = (int) $hit[1];
-                $before = strtolower(substr($scan, max(0, $offset - 80), 80));
-                $headingCheck = substr($scan, max(0, $offset - 5), 5);
-                if (preg_match('/\b(?:does\s+not|do\s+not|cannot|will\s+not|neither|nor|doesnt|dont|cant|wont)\b/', $before) === 1
-                    || str_starts_with($headingCheck, '### ')
-                    || preg_match('/\?$/', trim(substr($scan, $offset + strlen((string) $hit[0]), 40))) === 1) {
+                $before = strtolower(substr($scan, max(0, $offset - 120), 120));
+                $lineStart = (int) strrpos(substr($scan, 0, $offset), "\n") ?: 0;
+                $linePrefix = substr($scan, $lineStart, min(5, $offset - $lineStart));
+                if (preg_match($negators, $before) === 1
+                    || str_starts_with($linePrefix, '###')
+                    || preg_match('/\?$/', trim(substr($scan, $offset, 120))) === 1) {
                     continue;
                 }
                 throw new DomainException('career_promotion_claim_boundary_invalid');
