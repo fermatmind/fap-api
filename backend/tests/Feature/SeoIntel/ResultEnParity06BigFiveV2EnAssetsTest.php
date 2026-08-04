@@ -16,7 +16,7 @@ final class ResultEnParity06BigFiveV2EnAssetsTest extends TestCase
         $this->assertSame('RESULT-EN-PARITY-06', $artifact['pr_id'] ?? null);
         $this->assertSame('BIG5_OCEAN', $artifact['family'] ?? null);
         $this->assertSame(
-            'bigfive_result_page_v2_en_parity_draft_ready_for_human_review',
+            'bigfive_result_page_v2_en_parity_editorial_review_passed_all_7_groups',
             $artifact['decision'] ?? null
         );
 
@@ -36,7 +36,7 @@ final class ResultEnParity06BigFiveV2EnAssetsTest extends TestCase
         }
 
         $this->assertSame([], $artifact['remaining_missing_en_asset_keys'] ?? null);
-        $this->assertEqualsCanonicalizing($this->requiredAssetKeys(), $artifact['remaining_unreviewed_en_asset_keys'] ?? []);
+        $this->assertSame([], $artifact['remaining_unreviewed_en_asset_keys'] ?? null);
     }
 
     public function test_bigfive_v2_english_draft_catalog_is_non_runtime_and_fail_closed(): void
@@ -46,11 +46,11 @@ final class ResultEnParity06BigFiveV2EnAssetsTest extends TestCase
         $this->assertSame('fap.big5.result_page_v2.en_parity_draft.v1', $draft['schema'] ?? null);
         $this->assertSame('BIG5_OCEAN', $draft['scale_code'] ?? null);
         $this->assertSame('en', $draft['locale'] ?? null);
-        $this->assertSame('draft_review_only', $draft['runtime_use'] ?? null);
+        $this->assertSame('reviewed_draft_ready_for_activation', $draft['runtime_use'] ?? null);
         $this->assertFalse((bool) ($draft['ready_for_runtime'] ?? true));
         $this->assertFalse((bool) ($draft['ready_for_production'] ?? true));
         $this->assertFalse((bool) ($draft['production_use_allowed'] ?? true));
-        $this->assertTrue((bool) ($draft['human_review_required'] ?? false));
+        $this->assertFalse((bool) ($draft['human_review_required'] ?? true));
 
         $selectorPolicy = (string) data_get($draft, 'draft_asset_groups.selector_ready_assets.selector_policy');
 
@@ -58,8 +58,8 @@ final class ResultEnParity06BigFiveV2EnAssetsTest extends TestCase
         $this->assertStringContainsString('fail closed', $selectorPolicy);
 
         foreach ($draft['draft_asset_groups'] ?? [] as $group => $payload) {
-            $this->assertSame('draft_skeleton', $payload['status'] ?? null, (string) $group);
-            $this->assertFalse((bool) ($payload['ready_for_runtime'] ?? true), (string) $group);
+            $this->assertSame('reviewed_import_package', $payload['status'] ?? null, (string) $group);
+            $this->assertTrue((bool) ($payload['ready_for_runtime'] ?? false), (string) $group);
             $this->assertNotEmpty($payload['keys'] ?? [], (string) $group);
             $this->assertNotEmpty($payload['deferred'] ?? [], (string) $group);
         }
