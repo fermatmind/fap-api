@@ -319,7 +319,13 @@ final class CareerCmsPromotionAuthority
         if (preg_match('/[\p{Han}]/u', PromotionContextFactory::canonicalJson($snapshot)) === 1) {
             throw new DomainException('career_promotion_cjk_leakage');
         }
-        if (preg_match('/\b(?:guarantee(?:d|s)?|predict(?:s|ed|ing)?\s+(?:income|outcome|future)|hiring\s+decision|medical\s+advice)\b/i', PromotionContextFactory::canonicalJson($snapshot)) === 1) {
+        // Skip negated/disclaimer uses of "guarantee" (e.g. "does not guarantee")
+        // via PCRE (*SKIP)(*FAIL), then match only positive claims.
+        if (preg_match(
+            '/\b(?:does\s+not\s+guarantee|do\s+not\s+guarantee|cannot\s+guarantee|not\s+a\s+guarantee|no\s+guarantee)\b(*SKIP)(*FAIL)|'
+            .'\b(?:guarantee(?:d|s)?|predict(?:s|ed|ing)?\s+(?:income|outcome|future)|hiring\s+decision|medical\s+advice)\b/i',
+            PromotionContextFactory::canonicalJson($snapshot)
+        ) === 1) {
             throw new DomainException('career_promotion_claim_boundary_invalid');
         }
     }
