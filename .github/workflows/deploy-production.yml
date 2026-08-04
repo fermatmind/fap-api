@@ -22,15 +22,8 @@ on:
         type: string
       deploy_mode:
         description: "auto permits strict code-only scope; candidate_only materializes an inactive exact release; schema_only requires one exact approved migration"
-        required: false
-        default: auto
-        type: choice
-        options:
-          - auto
-          - code_only
-          - candidate_only
-          - schema_only
-          - standard
+        required: true
+        type: string
       expected_deployed_revision:
         description: "Required current production REVISION for auto, code_only, or schema_only"
         required: false
