@@ -319,17 +319,27 @@ final class CareerCmsPromotionAuthority
         if (preg_match('/[\p{Han}]/u', PromotionContextFactory::canonicalJson($snapshot)) === 1) {
             throw new DomainException('career_promotion_cjk_leakage');
         }
-        // Strip sentences with negation prefixes, FAQ/question forms, and
-        // comparative negators before scanning. These contexts cannot be
-        // positive claims — they are either disclaimers or questions.
-        $stripped = preg_replace(
-            '/\b(?:does\s+not|do\s+not|cannot|will\s+not|neither)\b[^.]*\./i',
-            '.', PromotionContextFactory::canonicalJson($snapshot));
-        $stripped = preg_replace(
-            '/^#{1,3}\s+[^?]*(?:guarantee|medical\s+advice|hiring\s+decision)[^?]*[?]\s*$/im',
-            '', $stripped);
-        if (preg_match('/\b(?:guarantee(?:d|s)?\s+(?:income|outcome|future|carrer|salary|offer|promotion|hiring|job)|predict(?:s|ed|ing)?\s+(?:income|outcome|future)|hiring\s+decision|medical\s+advice)\b/i', $stripped) === 1) {
-            throw new DomainException('career_promotion_claim_boundary_invalid');
+        // Per-occurrence context-aware claim boundary scan. A prohibited
+        // term is only a violation when it appears outside a negated,
+        // question, or disclaimer context. This replaces aggressive regex
+        // stripping which cannot reliably distinguish positive claims from
+        // compliance-required disclaimers.
+        $scan = PromotionContextFactory::canonicalJson($snapshot);
+        $pattern = '/\b(?:guarantee(?:d|s)?\s+(?:income|outcome|future|career|salary|offer|promotion|hiring|job)|predict(?:s|ed|ing)?\s+(?:income|outcome|future)|hiring\s+decision|medical\s+advice)\b/i';
+        if (preg_match_all($pattern, $scan, $hits, PREG_OFFSET_CAPTURE) === false) {
+            // no matches — pass
+        } else {
+            foreach ($hits[0] as $hit) {
+                $offset = (int) $hit[1];
+                $before = strtolower(substr($scan, max(0, $offset - 80), 80));
+                $headingCheck = substr($scan, max(0, $offset - 5), 5);
+                if (preg_match('/\b(?:does\s+not|do\s+not|cannot|will\s+not|neither|nor|doesnt|dont|cant|wont)\b/', $before) === 1
+                    || str_starts_with($headingCheck, '### ')
+                    || preg_match('/\?$/', trim(substr($scan, $offset + strlen((string) $hit[0]), 40))) === 1) {
+                    continue;
+                }
+                throw new DomainException('career_promotion_claim_boundary_invalid');
+            }
         }
     }
 
