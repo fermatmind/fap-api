@@ -319,23 +319,27 @@ final class CareerCmsPromotionAuthority
         if (preg_match('/[\p{Han}]/u', PromotionContextFactory::canonicalJson($snapshot)) === 1) {
             throw new DomainException('career_promotion_cjk_leakage');
         }
-        // Per-occurrence context-aware claim boundary scan. A prohibited
-        // term is only a violation when it appears outside a negated,
-        // question, or disclaimer context.
+        // Per-occurrence context-aware claim boundary scan. Only flag
+        // prohibited terms when the surrounding paragraph does not contain
+        // any recognized negation, disclaimer, or FAQ marker. This avoids
+        // false positives on required disclaimers while catching genuine
+        // positive claims.
         $scan = PromotionContextFactory::canonicalJson($snapshot);
         $pattern = '/\b(?:guarantee(?:d|s)?\s+(?:income|outcome|future|career|salary|offer|promotion|hiring|job)|predict(?:s|ed|ing)?\s+(?:income|outcome|future)|hiring\s+decision|medical\s+advice)\b/i';
-        $negators = '/\b(?:does\s+not|do\s+not|cannot|will\s+not|neither|nor|rather\s+than|without|doesnt|dont|cant|wont)\b/i';
+        $negators = '/\b(?:does\s+not|do\s+not|cannot|will\s+not|neither|nor|rather\s+than|without|instead\s+of|not\s+a|not\s+an|no\b|beyond|is\s+not|are\s+not)\b/i';
         if (preg_match_all($pattern, $scan, $hits, PREG_OFFSET_CAPTURE) === false) {
             // no matches — pass
         } else {
             foreach ($hits[0] as $hit) {
                 $offset = (int) $hit[1];
-                $before = strtolower(substr($scan, max(0, $offset - 120), 120));
+                // Look at the surrounding paragraph (up to 200 chars each way)
+                $ctx = strtolower(substr($scan, max(0, $offset - 200), 400));
+                // Find if we're inside a FAQ heading (line starts with ##)
                 $lineStart = (int) strrpos(substr($scan, 0, $offset), "\n") ?: 0;
-                $linePrefix = substr($scan, $lineStart, min(5, $offset - $lineStart));
-                if (preg_match($negators, $before) === 1
-                    || str_starts_with($linePrefix, '###')
-                    || preg_match('/\?$/', trim(substr($scan, $offset, 120))) === 1) {
+                $linePrefix = ltrim(substr($scan, $lineStart, min(10, $offset - $lineStart)));
+                if (preg_match($negators, $ctx) === 1
+                    || str_starts_with($linePrefix, '##')
+                    || str_ends_with(trim(substr($scan, $offset, 200)), '?')) {
                     continue;
                 }
                 throw new DomainException('career_promotion_claim_boundary_invalid');
