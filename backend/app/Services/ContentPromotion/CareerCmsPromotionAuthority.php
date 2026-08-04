@@ -324,7 +324,7 @@ final class CareerCmsPromotionAuthority
         // question, or disclaimer context.
         $scan = PromotionContextFactory::canonicalJson($snapshot);
         $pattern = '/\b(?:guarantee(?:d|s)?\s+(?:income|outcome|future|career|salary|offer|promotion|hiring|job)|predict(?:s|ed|ing)?\s+(?:income|outcome|future)|hiring\s+decision|medical\s+advice)\b/i';
-        $negators = '/\b(?:does\s+not|do\s+not|cannot|will\s+not|neither|nor|rather\s+than|doesnt|dont|cant|wont)\b/i';
+        $negators = '/\b(?:does\s+not|do\s+not|cannot|will\s+not|neither|nor|rather\s+than|without|doesnt|dont|cant|wont)\b/i';
         if (preg_match_all($pattern, $scan, $hits, PREG_OFFSET_CAPTURE) === false) {
             // no matches — pass
         } else {
