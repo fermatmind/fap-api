@@ -319,17 +319,13 @@ final class CareerCmsPromotionAuthority
         if (preg_match('/[\p{Han}]/u', PromotionContextFactory::canonicalJson($snapshot)) === 1) {
             throw new DomainException('career_promotion_cjk_leakage');
         }
-        // Skip negated/disclaimer uses of prohibited phrases (e.g. "does not
-        // guarantee", "not a guarantee", "cannot predict hiring decision") via
-        // PCRE (*SKIP)(*FAIL), then match only positive claims.
-        if (preg_match(
-            '/\b(?:does\s+not\s+guarantee|do\s+not\s+guarantee|cannot\s+guarantee|not\s+a\s+guarantee|no\s+guarantee'
-            .'|does\s+not\s+pre.+\bhiring\s+decision|do\s+not\s+pre.+\bhiring\s+decision|cannot\s+pre.+\bhiring\s+decision'
-            .'|does\s+not\s+pre.+\bmedical\s+advice|do\s+not\s+pre.+\bmedical\s+advice|cannot\s+pre.+\bmedical\s+advice'
-            .')\b(*SKIP)(*FAIL)|'
-            .'\b(?:guarantee(?:d|s)?|predict(?:s|ed|ing)?\s+(?:income|outcome|future)|hiring\s+decision|medical\s+advice)\b/i',
-            PromotionContextFactory::canonicalJson($snapshot)
-        ) === 1) {
+        // Remove negated/disclaimer sentences before scanning. Sentences that
+        // contain a negation prefix cannot be positive claims — they are
+        // disclaimers, and we should not flag prohibited terms inside them.
+        $stripped = preg_replace(
+            '/\b(?:does\s+not|do\s+not|cannot|will\s+not|not\s+a|not\s+an|no)\b.*?\./i',
+            '.', PromotionContextFactory::canonicalJson($snapshot));
+        if (preg_match('/\b(?:guarantee(?:d|s)?|predict(?:s|ed|ing)?\s+(?:income|outcome|future)|hiring\s+decision|medical\s+advice)\b/i', $stripped) === 1) {
             throw new DomainException('career_promotion_claim_boundary_invalid');
         }
     }
