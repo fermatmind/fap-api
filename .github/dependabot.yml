@@ -1,0 +1,10 @@
+version: 2
+updates:
+  - package-ecosystem: "composer"
+    directory: "/backend"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "security"
