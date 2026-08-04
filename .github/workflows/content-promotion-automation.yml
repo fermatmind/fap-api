@@ -81,7 +81,7 @@ jobs:
           minimum_executor_sha="8e738763162ff7c1507e28fa30d1b8cb7154de85"
           git merge-base --is-ancestor "$EXPECTED_CONTROL_PLANE_SHA" origin/main
           git merge-base --is-ancestor "$minimum_executor_sha" "$EXPECTED_CONTROL_PLANE_SHA"
-          policy="$(jq -cS . backend/config/content_promotion_release_policy.v2.json)"
+          policy="$(jq -cS . backend/config/content_promotion_release_policy.v2.json | tr -d '\n')"
           test "$(printf '%s' "$policy" | sha256sum | awk '{print $1}')" = "$RELEASE_POLICY_SHA256"
 
       - name: Set up pinned production SSH identity
