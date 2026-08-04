@@ -4,7 +4,15 @@ updates:
     directory: "/backend"
     schedule:
       interval: "daily"
-    open-pull-requests-limit: 3
+    open-pull-requests-limit: 5
     labels:
       - "dependencies"
       - "security"
+    versioning-strategy: increase
+    ignore:
+      - dependency-name: "laravel/pail"
+        update-types: ["version-update:semver-patch", "version-update:semver-minor"]
+      - dependency-name: "laravel/pint"
+        update-types: ["version-update:semver-patch", "version-update:semver-minor"]
+      - dependency-name: "nunomaduro/collision"
+        update-types: ["version-update:semver-patch", "version-update:semver-minor"]
