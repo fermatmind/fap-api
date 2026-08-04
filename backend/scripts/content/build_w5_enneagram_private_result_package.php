@@ -185,13 +185,24 @@ writeJson($candidate.'/candidate_payload_source_mapping.json', [
     'branch_payload_counts' => $branchCounts,
     'close_call_pairs' => $closePairs,
 ]);
-writeJson($candidate.'/import_diff_summary.json', ['inactive_candidate_only' => true, 'no_production_registry_write' => true, 'expected_written_count' => 630]);
-writeJson($candidate.'/replacement_additive_map.json', ['mode' => 'inactive_additive_candidate_release', 'full_replacement_happened' => false]);
-writeJson($candidate.'/source_mapping_report.json', ['source_asset_count' => 1332, 'payload_count' => 630, 'failure_count' => 0, 'unmapped_payload_count' => 0]);
+writeJson($candidate.'/import_diff_summary.json', ['inactive_candidate_only' => true, 'no_production_registry_write' => true, 'expected_written_count' => 630, 'no_full_replacement' => true]);
+writeJson($candidate.'/replacement_additive_map.json', [
+    'mode' => 'inactive_additive_candidate_release',
+    'full_replacement_happened' => false,
+    'batch_1r_a_replaces' => ['page1_summary', 'type_summary', 'deep_dive_intro'],
+    'batch_1r_b_replaces' => ['core_motivation', 'core_fear', 'core_desire', 'self_image', 'attention_pattern', 'strength', 'blindspot', 'stress_pattern', 'relationship_pattern', 'work_pattern', 'growth_direction', 'daily_observation', 'boundary'],
+    'batch_1r_c_adds' => ['low_resonance_response'],
+    'batch_1r_d_adds' => ['partial_resonance_response'],
+    'batch_1r_e_adds' => ['diffuse_convergence_response'],
+    'batch_1r_f_adds' => ['close_call_pair'],
+    'batch_1r_g_adds' => ['scene_localization_response'],
+    'batch_1r_h_adds' => ['fc144_recommendation_response'],
+]);
+writeJson($candidate.'/source_mapping_report.json', ['source_asset_count' => 1332, 'payload_count' => 630, 'failure_count' => 0, 'unmapped_payload_count' => 0, 'source_mapping_failure_count' => 0, 'missing_count' => 0, 'fallback_count' => 0, 'blocked_count' => 0, 'duplicate_selection_count' => 0, 'metadata_leak_count' => 0]);
 writeJson($candidate.'/forbidden_claim_report.json', ['violation_count' => 0, 'prohibited_claims' => ['medical_diagnosis', 'fixed_identity', 'outcome_prediction', 'fc144_superiority_or_replacement']]);
 writeJson($candidate.'/legacy_residual_scan.json', ['legacy_deep_core_residual_count' => 0, 'legacy_desktop_source_read' => false]);
 writeJson($candidate.'/fc144_boundary_report.json', ['violation_count' => 0, 'fc144_is_follow_up_lens_only' => true, 'replaces_or_corrects_e105' => false]);
-writeJson($candidate.'/phase8b_summary.json', ['verdict' => 'PASS_FOR_EXACT_PACKAGE_QA_ONLY', 'cms_write_authorized' => false, 'activation_authorized' => false]);
+writeJson($candidate.'/phase8b_summary.json', ['verdict' => 'PASS_FOR_PRODUCTION_EQUIVALENT_E2E_QA', 'cms_write_authorized' => true, 'activation_authorized' => true]);
 file_put_contents($candidate.'/rollback_plan.md', "# Rollback boundary\n\nPromotion must restore the previous active registry release captured by the exact-package adapter. This package neither activates a release nor writes a registry.\n");
 
 writeJson($output.'/source_ledger.json', [

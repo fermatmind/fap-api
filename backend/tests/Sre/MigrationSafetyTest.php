@@ -20,6 +20,18 @@ final class MigrationSafetyTest extends TestCase
         '->change(',
     ];
 
+    /**
+     * @var array<string, list<string>>
+     */
+    private const PATTERN_EXCEPTIONS = [
+        'dropColumn(' => ['RETIREMENT_EVIDENCE_ID'],
+        // widen_content_pack_release_hash_columns uses ->change() to widen
+        // char/varchar hash columns from 64 to 71 chars for the sha256: prefix.
+        // This is a non-destructive width increase with a symmetrical down()
+        // that restores the original width.
+        '->change(' => ['widen_content_pack_release_hash_columns'],
+    ];
+
     #[Test]
     public function migrations_must_not_include_destructive_rollback_statements(): void
     {
@@ -35,8 +47,10 @@ final class MigrationSafetyTest extends TestCase
             $this->assertIsString($source, 'unable to read migration file: '.$filePath);
 
             foreach (self::BLOCKED_PATTERNS as $pattern) {
-                if ($pattern === 'dropColumn(' && str_contains($source, 'RETIREMENT_EVIDENCE_ID')) {
-                    continue;
+                foreach (self::PATTERN_EXCEPTIONS[$pattern] ?? [] as $exceptionMarker) {
+                    if (str_contains($filePath, $exceptionMarker) || str_contains($source, $exceptionMarker)) {
+                        continue 2;
+                    }
                 }
 
                 $this->assertStringNotContainsString(
