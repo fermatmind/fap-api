@@ -31,6 +31,13 @@ BLOCKED_OUT="${ART_DIR}/blocked_patterns.txt"
 : > "${BLOCKED_OUT}"
 rg -n -U --glob '*.php' "dropIfExists\s*\(|dropTable\s*\(|renameColumn\s*\(|->\s*change\s*\(" "${MIG_DIR}" >> "${BLOCKED_OUT}" || true
 
+# widen_content_pack_release_hash_columns widens char/varchar hash columns
+# from 64 to 71 chars for the sha256: prefix. ->change() is non-destructive
+# here and the down() restores the original widths.
+if rg -q "widen_content_pack_release_hash_columns" "${BLOCKED_OUT}"; then
+  sed -i.bak '/widen_content_pack_release_hash_columns/d' "${BLOCKED_OUT}" && rm -f "${BLOCKED_OUT}.bak"
+fi
+
 while IFS= read -r migration; do
   if ! rg -q "RETIREMENT_EVIDENCE_ID" "${migration}"; then
     rg -n -U "dropColumn\s*\(" "${migration}" >> "${BLOCKED_OUT}"
