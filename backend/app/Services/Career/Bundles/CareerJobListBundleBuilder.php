@@ -7,6 +7,7 @@ namespace App\Services\Career\Bundles;
 use App\Domain\Career\Import\RunStatus;
 use App\Domain\Career\IndexStateValue;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
+use App\DTO\Career\CareerJobListItemBundle;
 use App\Services\Career\Bundles\CareerJobPublicAllowlist;
 use App\Models\CareerCompileRun;
 use App\Models\CareerJob;
