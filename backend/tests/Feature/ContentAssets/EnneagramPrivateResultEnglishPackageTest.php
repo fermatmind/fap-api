@@ -17,9 +17,9 @@ final class EnneagramPrivateResultEnglishPackageTest extends TestCase
 
     private const PACKAGE_PATH = 'content_assets/en-content-parity/W5-enneagram/private-result-content-v2';
 
-    private const W9_PATH = 'content_assets/en-content-parity/W9/enneagram-private-results/8a1653b5053b7ab910957543c8bb831b8c0759aaec82a7200e5c13c08a5e98d5/independent_w9_report.json';
+    private const W9_PATH = 'content_assets/en-content-parity/W9/enneagram-private-results/74b2575c28d732a9865ddc877109cc0820d4f5c3472613a24c08ce01550bd808/independent_w9_report.json';
 
-    private const PACKAGE_SHA = '8a1653b5053b7ab910957543c8bb831b8c0759aaec82a7200e5c13c08a5e98d5';
+    private const PACKAGE_SHA = '74b2575c28d732a9865ddc877109cc0820d4f5c3472613a24c08ce01550bd808';
 
     private const SOURCE_COMMIT = '44bd661c18dd470ae8d2dca48f101f37db306418';
 

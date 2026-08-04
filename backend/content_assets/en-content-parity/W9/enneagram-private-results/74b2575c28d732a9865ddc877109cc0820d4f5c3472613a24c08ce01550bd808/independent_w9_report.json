@@ -1,0 +1,17 @@
+{
+  "schema_version": "fermatmind.en_content_parity_independent_qa_report.v1",
+  "qa_lane_id": "W9",
+  "producer_lane_id": "W5",
+  "subscope_id": "W5-ENNEAGRAM-PRIVATE-RESULTS",
+  "verdict": "PASS",
+  "package_sha256": "74b2575c28d732a9865ddc877109cc0820d4f5c3472613a24c08ce01550bd808",
+  "reviewed_source_commit": "44bd661c18dd470ae8d2dca48f101f37db306418",
+  "reviewed_at": "2026-08-04T00:00:00Z",
+  "checks": {
+    "language_naturalness": "PASS",
+    "chinese_leakage": "PASS",
+    "claim_boundary": "PASS",
+    "asset_duplication": "PASS",
+    "field_leakage": "PASS"
+  }
+}
