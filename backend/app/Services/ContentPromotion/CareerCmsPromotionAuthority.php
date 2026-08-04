@@ -220,9 +220,20 @@ final class CareerCmsPromotionAuthority
 
     private function findTarget(string $kind, int $orgId, string $slug): ?Model
     {
-        return match ($kind) {
+        $model = match ($kind) {
             'guide' => CareerGuide::query()->withoutGlobalScopes()->where(['org_id' => $orgId, 'slug' => $slug, 'locale' => 'en'])->first(),
             'job' => CareerJob::query()->withoutGlobalScopes()->where(['org_id' => $orgId, 'slug' => $slug, 'locale' => 'en'])->first(),
+            default => null,
+        };
+        if ($model !== null) {
+            return $model;
+        }
+        // Fall back to zh-CN source authority when the English target does not
+        // exist yet (candidate-only first import). The ZH source must still be
+        // published and public.
+        return match ($kind) {
+            'guide' => CareerGuide::query()->withoutGlobalScopes()->where(['org_id' => $orgId, 'slug' => $slug, 'locale' => 'zh-CN'])->first(),
+            'job' => CareerJob::query()->withoutGlobalScopes()->where(['org_id' => $orgId, 'slug' => $slug, 'locale' => 'zh-CN'])->first(),
             default => null,
         };
     }
