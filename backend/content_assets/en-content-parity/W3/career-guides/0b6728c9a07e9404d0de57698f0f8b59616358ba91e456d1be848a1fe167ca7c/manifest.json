@@ -1,7 +1,60 @@
 {
-  "schema_version": "fermatmind.career_promotion_manifest.v1",
-  "pipeline": "career_cms_v2",
-  "kind": "guide",
-  "expected_locale": "en",
-  "expected_count": 20
+  "schema_version": "fermatmind.career_cms_promotion.v2",
+  "lane": "W3",
+  "subscope": "W3-CAREER-GUIDES",
+  "locale": "en",
+  "package_sha256": "0b6728c9a07e9404d0de57698f0f8b59616358ba91e456d1be848a1fe167ca7c",
+  "expected_count": 20,
+  "payloads": [
+    {
+      "path": "assets.jsonl",
+      "sha256": "75c5445f49306ce596a725b048fefb3e3f9ea719d75d871ecd97f2dccbcd19c0"
+    },
+    {
+      "path": "claim_boundary_report.json",
+      "sha256": "f62f09c98a81fc3f0f7a3838634f5a251e892790e010af272f1b99bba917fad9"
+    },
+    {
+      "path": "dry_run_readiness.json",
+      "sha256": "9cac0ac7af5af4bbc22470939ff1e78f187e7b522829f658f04744d4c37a52d6"
+    },
+    {
+      "path": "editorial_review.json",
+      "sha256": "137c719a434aa795c41332d89bdd4c10b5e6f2879b4ed5f98a5d0ebcb69fe402"
+    },
+    {
+      "path": "handoff.md",
+      "sha256": "35e698a2980ad00082bed1a7c94aa9d2b5b907e2487dca66c945c4cdf1837b7d"
+    },
+    {
+      "path": "master_manifest_patch.candidate.json",
+      "sha256": "7808006ff0f5561f7ecff6679d9e60f0b819d190d269658edeba54adfbf2cccf"
+    },
+    {
+      "path": "scope_manifest.json",
+      "sha256": "8f61d6fa9f3fd93f39d1969532611d7dd46af292b7a7c5ccb3ee209d594ffb25"
+    },
+    {
+      "path": "sha256_manifest.json",
+      "sha256": "51e6f8fab780404b917cadf50ff817d9adb825a51ca050b9b480ab2c05bdb75b"
+    },
+    {
+      "path": "source_ledger.json",
+      "sha256": "1241b04e2d21b3342b8363274a35122b38faa213152282b5b0b2fb3b28a1c9bc"
+    },
+    {
+      "path": "translation_map.json",
+      "sha256": "b761f109e81d57ecba37fbdd77d9d3b74fa4fa4e1d6e15d36a748558e9facd03"
+    }
+  ],
+  "permissions": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ]
 }
