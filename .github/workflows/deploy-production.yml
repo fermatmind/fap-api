@@ -1355,6 +1355,22 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          ssh_retry() {
+            local attempt rc
+            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
+            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
+            for attempt in $(seq 1 "$max_attempts"); do
+              set +e
+              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$@"
+              rc=$?
+              set -e
+              if [ "$rc" -eq 0 ]; then return 0; fi
+              if [ "$attempt" -ge "$max_attempts" ]; then return "$rc"; fi
+              echo "SSH attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              sleep "$retry_delay"
+            done
+          }
           RESOLVED_PATH="${DEPLOY_PATH:-/var/www/fap-api}"
           echo "deploy_path=${RESOLVED_PATH}"
           echo "resolved_deploy_path=${RESOLVED_PATH}" >> "$GITHUB_OUTPUT"
