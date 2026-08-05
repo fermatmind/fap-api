@@ -34,8 +34,22 @@
 
 ## Known Remaining Issue
 
-**Deploy workflow eligibility validation**: `deploy-production.yml` step `Validate manual exact-SHA approval and staging evidence` rejects all dispatch methods. `${{ inputs.expected_release_sha }}` appears empty in the `run:` block, causing all three format checks (SHA, release_id, deploy_mode) to fail immediately.
+~~**Deploy workflow eligibility validation**: `deploy-production.yml` step `Validate manual exact-SHA approval and staging evidence` rejects all dispatch methods. `${{ inputs.expected_release_sha }}` appears empty in the `run:` block, causing all three format checks (SHA, release_id, deploy_mode) to fail immediately.~~
 
-Root cause: likely GitHub Actions `workflow_dispatch` input resolution bug or `DEPLOY_SHA` / `RELEASE_ID` env var scoping issue in the composite `run:` block.
+~~Root cause: likely GitHub Actions `workflow_dispatch` input resolution bug or `DEPLOY_SHA` / `RELEASE_ID` env var scoping issue in the composite `run:` block.~~
 
-**Workaround**: Content-only changes can be deployed via manual `rsync` + `REVISION` update. Core application changes should wait for this to be fully diagnosed.
+**Status (2026-08-05)**: Eligibility check now passes with correct inputs (verified in deploy run 30968920271). The issue was likely resolved by `fix(deploy): change deploy_mode from type:choice to type:string` (commit `27cbcf7cf`).
+
+### New Issue: deploy:setup path detection
+
+**Deployer deploy:setup task fails on GitHub Actions**: The `deploy:setup` task detects `current` as a directory (not symlink) at the deploy path, causing the Deployer to abort. Root cause likely `secrets.PRODUCTION_DEPLOY_PATH` pointing to a wrong path on the GitHub Actions runner.
+
+**Fix applied (2026-08-05)**: Added a `Verify production deploy path` step before the Deployer runs that:
+1. Prints the resolved deploy path for diagnostics
+2. Verifies the path exists on production
+3. Verifies `current` is a symlink (not a directory)
+4. Fails early with a clear error message if the path is wrong
+
+This catches the issue before the Deployer runs, providing actionable diagnostics instead of a cryptic `deploy:setup` error.
+
+**Workaround**: Use local `dep deploy` with `DEPLOY_IDENTITY_FILE_PROD=~/.ssh/fap_api_gha` (the production SSH key). Content-only changes can be deployed via manual `rsync` + `REVISION` update.
