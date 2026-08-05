@@ -1351,10 +1351,29 @@ jobs:
             }
           echo "Career public-cache summary remains exact immediately before candidate verification."
 
+      - name: Verify production deploy path
+        shell: bash
+        run: |
+          set -euo pipefail
+          RESOLVED_PATH="${DEPLOY_PATH:-/var/www/fap-api}"
+          echo "deploy_path=${RESOLVED_PATH}"
+          echo "resolved_deploy_path=${RESOLVED_PATH}" >> "$GITHUB_OUTPUT"
+          if ! ssh_retry "test -d '${RESOLVED_PATH}'" >/dev/null; then
+            echo "Production deploy path does not exist: ${RESOLVED_PATH}" >&2
+            exit 1
+          fi
+          if ! ssh_retry "test -L '${RESOLVED_PATH}/current'"; then
+            echo "Production current is not a symlink at ${RESOLVED_PATH}/current — this will cause deploy:setup to fail." >&2
+            echo "Current state: $(ssh_retry "ls -la '${RESOLVED_PATH}/current' 2>&1 || echo 'NOT_FOUND'")" >&2
+            exit 1
+          fi
+          echo "Verified: ${RESOLVED_PATH}/current is a symlink → $(ssh_retry "readlink '${RESOLVED_PATH}/current'")"
+
       - name: Deploy production with Deployer
         shell: bash
         env:
           DEPLOYER_NO_INTERACTION: "1"
+          DEPLOY_PATH_PROD: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
         run: |
           set -euo pipefail
           DEPLOY_LOCK_METADATA="$(php -r '
