@@ -1266,16 +1266,13 @@ task('queue:reload-workers', function () {
 
 task('guard:shared-permissions', function () {
     $owner = currentHost()->getRemoteUser() ?: 'ubuntu';
-    $group = 'www-data';
     $runtimeUser = 'www-data';
 
-    // When the deploy owner is not in the www-data group, the shared
-    // directory tree will carry the owner's primary group. Accept that
-    // group as valid to prevent OWNER_GROUP_MISMATCH failures.
-    $inWwwData = run("id -nG '{$owner}' 2>/dev/null | grep -qw www-data && echo yes || echo no");
-    if (trim($inWwwData) !== 'yes') {
-        $group = trim(run("id -gn '{$owner}' 2>/dev/null"));
-    }
+    // Always use the deploy owner's primary group for shared directories.
+    // The group will match what Deployer actually creates (the owner's
+    // primary GID), preventing OWNER_GROUP_MISMATCH across staging and
+    // production hosts.
+    $group = trim(run("id -gn '{$owner}' 2>/dev/null"));
 
     deployOwnerGroupArg($owner, $group);
 
