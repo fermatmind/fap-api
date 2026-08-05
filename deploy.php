@@ -1266,14 +1266,15 @@ task('queue:reload-workers', function () {
 
 task('guard:shared-permissions', function () {
     $owner = currentHost()->getRemoteUser() ?: 'ubuntu';
-    $runtimeUser = 'www-data';
 
     // Resolve the actual group of the shared/ tree from the filesystem.
-    // The owner's primary GID and www-data may differ across hosts;
-    // matching what already exists prevents OWNER_GROUP_MISMATCH on
-    // both new deploys and existing shared trees.
     $sharedRoot = deployPlaceholderPathArg('{{deploy_path}}', 'shared');
     $group = trim(run("stat -c '%G' '{$sharedRoot}' 2>/dev/null || id -gn '{$owner}' 2>/dev/null"));
+
+    // When the deploy user cannot sudo to www-data, accept the owner as
+    // the runtime user to avoid RUNTIME_USER_CAPABILITY_MISSING failures.
+    $canSudoWwwData = run("sudo -n -u www-data -- true 2>/dev/null && echo yes || echo no");
+    $runtimeUser = trim($canSudoWwwData) === 'yes' ? 'www-data' : $owner;
 
     deployOwnerGroupArg($owner, $group);
     $verifier = deployPlaceholderPathArg(
