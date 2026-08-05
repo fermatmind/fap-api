@@ -1268,15 +1268,14 @@ task('guard:shared-permissions', function () {
     $owner = currentHost()->getRemoteUser() ?: 'ubuntu';
     $runtimeUser = 'www-data';
 
-    // Always use the deploy owner's primary group for shared directories.
-    // The group will match what Deployer actually creates (the owner's
-    // primary GID), preventing OWNER_GROUP_MISMATCH across staging and
-    // production hosts.
-    $group = trim(run("id -gn '{$owner}' 2>/dev/null"));
+    // Resolve the actual group of the shared/ tree from the filesystem.
+    // The owner's primary GID and www-data may differ across hosts;
+    // matching what already exists prevents OWNER_GROUP_MISMATCH on
+    // both new deploys and existing shared trees.
+    $sharedRoot = deployPlaceholderPathArg('{{deploy_path}}', 'shared');
+    $group = trim(run("stat -c '%G' '{$sharedRoot}' 2>/dev/null || id -gn '{$owner}' 2>/dev/null"));
 
     deployOwnerGroupArg($owner, $group);
-
-    $sharedRoot = deployPlaceholderPathArg('{{deploy_path}}', 'shared');
     $verifier = deployPlaceholderPathArg(
         '{{release_path}}',
         'backend/scripts/deploy/verify_shared_permissions.sh',
