@@ -303,6 +303,15 @@ function deploySystemdServiceArg(string $service, string $label): string
     return deployShellArg($service);
 }
 
+function deployCanSudoWwwData(): bool
+{
+    static $canSudo = null;
+    if ($canSudo === null) {
+        $canSudo = trim(run('sudo -n -u www-data -- true 2>/dev/null && echo yes || echo no')) === 'yes';
+    }
+    return $canSudo;
+}
+
 function deployOwnerGroupArg(string $owner, string $group): string
 {
     foreach (['owner' => $owner, 'group' => $group] as $label => $value) {
@@ -902,12 +911,18 @@ task('seo:warm-sitemap-source-cache', function () {
     $killAfterSeconds = (string) (getenv('DEPLOY_SEO_SITEMAP_SOURCE_WARM_KILL_AFTER') ?: '30');
     $strict = (string) (getenv('DEPLOY_SEO_SITEMAP_SOURCE_WARM_STRICT') ?: 'false');
 
+    $canSudoWwwData = deployCanSudoWwwData();
+    $sudoPrefix = $canSudoWwwData
+        ? 'sudo -n -u www-data -- env'
+        : '';
+
     $output = run(sprintf(
         <<<'BASH'
 php_bin="$(command -v {{bin/php}})"
 test -n "$php_bin"
-sudo -n -u www-data -- env SITEMAP_SOURCE_WARM_PHP_BIN="$php_bin" SITEMAP_SOURCE_WARM_ARTISAN=%s SITEMAP_SOURCE_WARM_TIMEOUT_SECONDS=%s SITEMAP_SOURCE_WARM_KILL_AFTER_SECONDS=%s SITEMAP_SOURCE_WARM_STRICT=%s bash %s
+%s SITEMAP_SOURCE_WARM_PHP_BIN="$php_bin" SITEMAP_SOURCE_WARM_ARTISAN=%s SITEMAP_SOURCE_WARM_TIMEOUT_SECONDS=%s SITEMAP_SOURCE_WARM_KILL_AFTER_SECONDS=%s SITEMAP_SOURCE_WARM_STRICT=%s bash %s
 BASH,
+        $sudoPrefix,
         deployPlaceholderPathArg('{{release_path}}', 'backend/artisan'),
         deployShellArg($timeoutSeconds),
         deployShellArg($killAfterSeconds),
@@ -1025,10 +1040,12 @@ task('guard:queue-reload-capability', function () {
             'backend/storage/framework/cache/data',
         );
 
-        if (! test("sudo -n -u www-data -- test -r {$artisan}")) {
+        $sudoPrefix = deployCanSudoWwwData() ? 'sudo -n -u www-data -- ' : '';
+
+        if (! test("{$sudoPrefix}test -r {$artisan}")) {
             throw new \RuntimeException('queue restart preflight requires the application runtime identity to read Artisan');
         }
-        if (! test("sudo -n -u www-data -- test -w {$cacheData}")) {
+        if (! test("{$sudoPrefix}test -w {$cacheData}")) {
             throw new \RuntimeException('queue restart preflight requires the application runtime identity to write the shared cache directory');
         }
     }
@@ -1158,7 +1175,8 @@ task('queue:reload-workers', function () {
 
         if (! $codeOnly) {
             within('{{current_path}}/backend', function () {
-                run('sudo -n -u www-data -- {{bin/php}} artisan queue:restart --ansi');
+                $sudoPrefix = deployCanSudoWwwData() ? 'sudo -n -u www-data -- ' : '';
+                run($sudoPrefix.'{{bin/php}} artisan queue:restart --ansi');
             });
         } else {
             writeln('<comment>Reload queue workers through the process manager without a cache restart signal in code_only deploy mode</comment>');
@@ -1250,7 +1268,8 @@ task('queue:reload-workers', function () {
 
         if (! $codeOnly) {
             within('{{current_path}}/backend', function () {
-                run('sudo -n -u www-data -- {{bin/php}} artisan queue:restart --ansi');
+                $sudoPrefix = deployCanSudoWwwData() ? 'sudo -n -u www-data -- ' : '';
+                run($sudoPrefix.'{{bin/php}} artisan queue:restart --ansi');
             });
         } else {
             writeln('<comment>Reload queue workers through systemd without a cache restart signal in code_only deploy mode</comment>');
@@ -1273,8 +1292,7 @@ task('guard:shared-permissions', function () {
 
     // When the deploy user cannot sudo to www-data, accept the owner as
     // the runtime user to avoid RUNTIME_USER_CAPABILITY_MISSING failures.
-    $canSudoWwwData = run("sudo -n -u www-data -- true 2>/dev/null && echo yes || echo no");
-    $runtimeUser = trim($canSudoWwwData) === 'yes' ? 'www-data' : $owner;
+    $runtimeUser = deployCanSudoWwwData() ? 'www-data' : $owner;
 
     deployOwnerGroupArg($owner, $group);
     $verifier = deployPlaceholderPathArg(
