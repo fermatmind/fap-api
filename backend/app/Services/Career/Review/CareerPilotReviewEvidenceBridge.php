@@ -9,6 +9,7 @@ use App\Services\Career\Bundles\CareerJobPublicAllowlist;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\ReviewGovernance\CareerSeoReviewAttestationService;
 use App\Services\ReviewGovernance\ReviewAttestationCanonicalizer;
+use App\Services\Career\Dataset\CareerPublishTrackResolver;
 use Illuminate\Support\Arr;
 
 /**
