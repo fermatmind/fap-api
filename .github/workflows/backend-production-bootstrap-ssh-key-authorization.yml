@@ -83,7 +83,6 @@ jobs:
       DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
       DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
       SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
-      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
     steps:
       - name: Initialize sanitized failure receipt
@@ -218,6 +217,11 @@ jobs:
              and .writes_committed == false' "$source_receipt" >/dev/null
           rm -rf "$source_dir"
 
+      - name: Start pinned existing production SSH agent
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
       - name: Validate protected password and derive exact existing public key
         shell: bash
         run: |
@@ -231,9 +235,7 @@ jobs:
           test -n "$SSH_KNOWN_HOSTS"
           printf '%s\n' "$SSH_KNOWN_HOSTS" > "$RUNNER_TEMP/known_hosts"
           chmod 600 "$RUNNER_TEMP/known_hosts"
-          printf '%s\n' "$SSH_PRIVATE_KEY" > "$RUNNER_TEMP/production-key"
-          chmod 600 "$RUNNER_TEMP/production-key"
-          ssh-keygen -y -f "$RUNNER_TEMP/production-key" > "$RUNNER_TEMP/production-key.pub"
+          ssh-add -L > "$RUNNER_TEMP/production-key.pub"
           awk 'NF == 2 && $1 ~ /^(ssh-ed25519|ssh-rsa|ecdsa-sha2-nistp(256|384|521))$/ {print; ok=1} END {exit !ok}' \
             "$RUNNER_TEMP/production-key.pub" > "$RUNNER_TEMP/normalized-key.pub"
           test "$(wc -l < "$RUNNER_TEMP/normalized-key.pub" | tr -d ' ')" = 1
@@ -310,7 +312,7 @@ jobs:
             )"
           password_rc=$?
           existing_key_rc=0
-          ssh -i "$RUNNER_TEMP/production-key" -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/known_hosts" -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$BOOTSTRAP_SSH_USER@$DEPLOY_HOST" true >/dev/null 2>&1 || existing_key_rc=$?
+          ssh -o BatchMode=yes -o IdentitiesOnly=no -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/known_hosts" -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$BOOTSTRAP_SSH_USER@$DEPLOY_HOST" true >/dev/null 2>&1 || existing_key_rc=$?
           set -e
 
           target_user_sha="$zero_sha"; home_safe=false; ssh_dir_safe=false; authorized_keys_safe=false
@@ -453,7 +455,7 @@ jobs:
           if [ "$apply_rc" -eq 0 ] && [ "$remote_status" = PASS ] && [ "$committed" = true ]; then status=PASS_SSH_KEY_AUTHORIZATION_APPLY; stage=""; fi
           key_login=false
           if [ "$committed" = true ]; then
-            if ssh -i "$RUNNER_TEMP/production-key" -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/known_hosts" -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$BOOTSTRAP_SSH_USER@$DEPLOY_HOST" "test \"\$(printf '%s' \"\$(id -un)\" | sha256sum | awk '{print \$1}')\" = '$TARGET_USER_SHA'"; then key_login=true; else status=FAIL_SSH_KEY_LOGIN_READBACK; stage=key_login_readback; fi
+            if ssh -o BatchMode=yes -o IdentitiesOnly=no -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/known_hosts" -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$BOOTSTRAP_SSH_USER@$DEPLOY_HOST" "test \"\$(printf '%s' \"\$(id -un)\" | sha256sum | awk '{print \$1}')\" = '$TARGET_USER_SHA'"; then key_login=true; else status=FAIL_SSH_KEY_LOGIN_READBACK; stage=key_login_readback; fi
           fi
           jq --arg status "$status" --arg stage "$stage" --arg user_sha "$TARGET_USER_SHA" \
             --arg key_sha "$PUBLIC_KEY_SHA256" --arg fingerprint "$PUBLIC_KEY_FINGERPRINT" \
