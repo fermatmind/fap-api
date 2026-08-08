@@ -110,6 +110,7 @@ Prefer a repo-compatible default implementation and mark options as optional.
 ### Production Verify-Only Discipline
 - The generic backend production verify-only workflow is a read-only evidence authority, not a deploy path. It requires an exact SHA/release approval on `main`, may read only the current release identity, internal/public health, business APIs, schema and process state, and may create only a sanitized runner-side artifact.
 - Verify-only release directory identifiers accept ASCII letters in either case, digits, dots, underscores, and hyphens so existing UTC-stamped production names with `T` and `Z` remain verifiable; path separators, whitespace, shell metacharacters, and names longer than 128 characters remain rejected.
+- Verify-only must initialize its runner-side receipt before checkout and upload it on both success and failure. The receipt may expose only fixed allowlisted checkpoint identifiers, booleans, bounded counts, exact approved release identity, timestamps, and explicit zero-write guarantees; it must never include response bodies, raw paths, topology, logs, command output, or secrets.
 - Verify-only must not deploy, migrate, publish, restart, unlock, write remote files, inspect raw logs, submit search URLs, or mutate CMS/database state. Any failed check stops and reports without repairing production.
 
 ### Production Release Discovery Discipline
