@@ -101,7 +101,7 @@ jobs:
             --arg source_receipt "$FAILED_BOOTSTRAP_RECEIPT_SHA256" \
             --arg source_control "$FAILED_BOOTSTRAP_CONTROL_PLANE_SHA" \
             '{
-              schema_version: "backend.production_bootstrap_ssh_key_authorization.v1",
+              schema_version: "backend.production_bootstrap_ssh_key_authorization.v2",
               mode: $mode,
               status: "FAIL_SSH_KEY_AUTHORIZATION_INITIALIZATION",
               failed_stage: "initialize",
@@ -127,12 +127,18 @@ jobs:
               target_key_present_after: false,
               password_ssh_tested: false,
               password_ssh_accepted: false,
+              exact_key_login_tested: false,
+              exact_key_login_accepted: false,
               key_ssh_authorized_after: false,
+              target_key_count_before: 0,
+              target_key_count_after: 0,
               candidate_created: false,
               candidate_cleanup_attempted: false,
               candidate_absent_after: true,
+              candidate_identity_rechecked: false,
               apply_eligible: false,
               secret_retirement_required: true,
+              write_state: "NOT_ATTEMPTED",
               production_write_execution: false,
               authorized_keys_write_count: 0,
               remote_temp_file_write_count: 0,
@@ -151,6 +157,10 @@ jobs:
                 home_safe: false,
                 ssh_directory_safe: false,
                 authorized_keys_safe: false,
+                authorized_keys_ends_with_lf: false,
+                authorized_keys_size: 0,
+                authorized_keys_nlink: 0,
+                same_filesystem: false,
                 existing_key_login_rejected: false
               }
             }' > "$receipt"
@@ -168,9 +178,10 @@ jobs:
           set -euo pipefail
           test "$GITHUB_REF" = "refs/heads/main"
           test "$MODE" = preflight || test "$MODE" = apply
-          for value in "$EXPECTED_CONTROL_PLANE_SHA" "$EXPECTED_ACTIVE_REVISION" "$FAILED_BOOTSTRAP_RECEIPT_SHA256" "$FAILED_BOOTSTRAP_CONTROL_PLANE_SHA"; do
-            [[ "$value" =~ ^[0-9a-f]{40}$|^[0-9a-f]{64}$ ]]
-          done
+          [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$FAILED_BOOTSTRAP_RECEIPT_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$FAILED_BOOTSTRAP_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
           [[ "$FAILED_BOOTSTRAP_RUN_ID" =~ ^[1-9][0-9]*$ ]]
           [[ "$FAILED_BOOTSTRAP_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
           git fetch --no-tags origin main
@@ -227,17 +238,20 @@ jobs:
         run: |
           set -euo pipefail
           test -n "$BOOTSTRAP_SSH_USER"
+          [[ "$BOOTSTRAP_SSH_USER" =~ ^[a-z_][a-z0-9_-]{0,31}$ ]]
           test -n "$BOOTSTRAP_PASSWORD"
           test "${BOOTSTRAP_PASSWORD//$'\n'/}" = "$BOOTSTRAP_PASSWORD"
           test -n "$DEPLOY_HOST"
           [[ "$DEPLOY_PORT" =~ ^[1-9][0-9]{0,4}$ ]]
-          test -n "$DEPLOY_PATH"
+          (( DEPLOY_PORT <= 65535 ))
+          [[ "$DEPLOY_PATH" = /* ]]
+          test "${DEPLOY_PATH//$'\n'/}" = "$DEPLOY_PATH"
           test -n "$SSH_KNOWN_HOSTS"
           printf '%s\n' "$SSH_KNOWN_HOSTS" > "$RUNNER_TEMP/known_hosts"
           chmod 600 "$RUNNER_TEMP/known_hosts"
           ssh-add -L > "$RUNNER_TEMP/production-key.pub"
-          awk 'NF == 2 && $1 ~ /^(ssh-ed25519|ssh-rsa|ecdsa-sha2-nistp(256|384|521))$/ {print; ok=1} END {exit !ok}' \
-            "$RUNNER_TEMP/production-key.pub" > "$RUNNER_TEMP/normalized-key.pub"
+          .github/scripts/normalize-single-ssh-public-key.sh \
+            < "$RUNNER_TEMP/production-key.pub" > "$RUNNER_TEMP/normalized-key.pub"
           test "$(wc -l < "$RUNNER_TEMP/normalized-key.pub" | tr -d ' ')" = 1
           key_sha="$(sha256sum "$RUNNER_TEMP/normalized-key.pub" | awk '{print $1}')"
           fingerprint="$(ssh-keygen -lf "$RUNNER_TEMP/normalized-key.pub" -E sha256 | awk '{print $2}')"
@@ -267,39 +281,56 @@ jobs:
           receipt="$RUNNER_TEMP/backend-production-bootstrap-ssh-key-authorization.json"
           zero_sha="$(printf '0%.0s' {1..64})"
           target_expected_sha="$(printf '%s' "$BOOTSTRAP_SSH_USER" | sha256sum | awk '{print $1}')"
-          ssh_base=(ssh -o BatchMode=no -o PubkeyAuthentication=no -o PreferredAuthentications=password -o NumberOfPasswordPrompts=1 -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/known_hosts" -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$BOOTSTRAP_SSH_USER@$DEPLOY_HOST")
+          deploy_path_b64="$(printf '%s' "$DEPLOY_PATH" | base64 -w0)"
+          ssh_base=(ssh -F /dev/null -o BatchMode=no -o PubkeyAuthentication=no -o KbdInteractiveAuthentication=no -o PreferredAuthentications=password -o NumberOfPasswordPrompts=1 -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/known_hosts" -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$BOOTSTRAP_SSH_USER@$DEPLOY_HOST")
 
           set +e
           export SSH_ASKPASS="$BOOTSTRAP_ASKPASS" SSH_ASKPASS_REQUIRE=force DISPLAY=:0
           password_result="$(setsid -w "${ssh_base[@]}" \
-              "DEPLOY_PATH='$DEPLOY_PATH' EXPECTED_ACTIVE_REVISION='$EXPECTED_ACTIVE_REVISION' TARGET_KEY_SHA='$PUBLIC_KEY_SHA256' bash -s" <<'REMOTE'
+              "bash -s -- '$deploy_path_b64' '$EXPECTED_ACTIVE_REVISION' '$PUBLIC_KEY_SHA256' '$PUBLIC_KEY_FINGERPRINT'" 2>/dev/null <<'REMOTE'
           set -u
+          DEPLOY_PATH="$(printf '%s' "$1" | base64 -d)"; EXPECTED_ACTIVE_REVISION="$2"; TARGET_KEY_SHA="$3"; TARGET_KEY_FINGERPRINT="$4"
           actor_sha="$(printf '%s' "$(id -un)" | sha256sum | awk '{print $1}')"
           home_dir="$(getent passwd "$(id -un)" | cut -d: -f6)"
-          home_safe=false; ssh_dir_safe=false; authorized_keys_safe=false
+          home_safe=false; ssh_dir_safe=false; authorized_keys_safe=false; authorized_keys_ends_with_lf=false; same_filesystem=false
           authorized_keys_state=UNKNOWN; authorized_keys_sha="$(printf '0%.0s' {1..64})"
-          key_count=0; target_present=false; active_match=false; lock_absent=false; deploy_process_count=0
+          key_count=0; target_count=0; active_match=false; lock_absent=false; deploy_process_count=0; auth_size=0; auth_nlink=0
           if [ -n "$home_dir" ] && [ -d "$home_dir" ] && [ ! -L "$home_dir" ] && [ "$(stat -Lc '%U' "$home_dir" 2>/dev/null)" = "$(id -un)" ]; then
             home_mode="$(stat -Lc '%a' "$home_dir")"
-            if [[ "$home_mode" =~ ^[0-7]{3,4}$ ]] && (( (8#$home_mode & 0022) == 0 )); then home_safe=true; fi
+            if [[ "$home_mode" =~ ^[0-7]{3,4}$ ]] && (( (8#$home_mode & 0100) != 0 )) && (( (8#$home_mode & 0022) == 0 )) && [ -x "$home_dir" ]; then home_safe=true; fi
           fi
           ssh_dir="$home_dir/.ssh"; auth="$ssh_dir/authorized_keys"
           if [ -d "$ssh_dir" ] && [ ! -L "$ssh_dir" ] && [ "$(stat -Lc '%U' "$ssh_dir" 2>/dev/null)" = "$(id -un)" ]; then
             ssh_mode="$(stat -Lc '%a' "$ssh_dir")"
-            if [[ "$ssh_mode" =~ ^[0-7]{3,4}$ ]] && (( (8#$ssh_mode & 0077) == 0 )); then ssh_dir_safe=true; fi
+            if [[ "$ssh_mode" =~ ^[0-7]{3,4}$ ]] && (( (8#$ssh_mode & 0700) == 0700 )) && (( (8#$ssh_mode & 0077) == 0 )) && [ -r "$ssh_dir" ] && [ -w "$ssh_dir" ] && [ -x "$ssh_dir" ]; then ssh_dir_safe=true; fi
           fi
-          if [ ! -e "$auth" ] && [ ! -L "$auth" ]; then
-            authorized_keys_state=ABSENT; authorized_keys_safe=true
-          elif [ -f "$auth" ] && [ ! -L "$auth" ] && [ "$(stat -Lc '%U' "$auth" 2>/dev/null)" = "$(id -un)" ]; then
+          ssh_dev="$(stat -Lc '%d' "$ssh_dir" 2>/dev/null || true)"
+          if [ "$ssh_dir_safe" = true ] && [ ! -e "$auth" ] && [ ! -L "$auth" ]; then
+            authorized_keys_state=ABSENT; authorized_keys_safe=true; authorized_keys_ends_with_lf=true; same_filesystem=true
+          elif [ "$ssh_dir_safe" = true ] && [ -f "$auth" ] && [ ! -L "$auth" ] && [ -r "$auth" ] && [ "$(stat -Lc '%U' "$auth" 2>/dev/null)" = "$(id -un)" ]; then
             auth_mode="$(stat -Lc '%a' "$auth")"
-            if [[ "$auth_mode" =~ ^[0-7]{3,4}$ ]] && (( (8#$auth_mode & 0022) == 0 )); then
-              authorized_keys_state=PRESENT; authorized_keys_safe=true
+            auth_size="$(stat -Lc '%s' "$auth" 2>/dev/null || printf invalid)"; auth_nlink="$(stat -Lc '%h' "$auth" 2>/dev/null || printf invalid)"; auth_dev="$(stat -Lc '%d' "$auth" 2>/dev/null || true)"
+            if [[ "$auth_mode" =~ ^[0-7]{3,4}$ ]] && (( (8#$auth_mode & 0022) == 0 )) && [[ "$auth_size" =~ ^[0-9]+$ ]] && (( auth_size <= 1048576 )) && [ "$auth_nlink" = 1 ] && [ -n "$ssh_dev" ] && [ "$auth_dev" = "$ssh_dev" ]; then
+              authorized_keys_state=PRESENT; authorized_keys_safe=true; same_filesystem=true
               authorized_keys_sha="$(sha256sum "$auth" | awk '{print $1}')"
-              while IFS= read -r normalized; do
-                [ -n "$normalized" ] || continue
-                key_count=$((key_count + 1))
-                if [ "$(printf '%s\n' "$normalized" | sha256sum | awk '{print $1}')" = "$TARGET_KEY_SHA" ]; then target_present=true; fi
-              done < <(awk '{for(i=1;i<NF;i++) if($i ~ /^(ssh-ed25519|ssh-rsa|ecdsa-sha2-nistp(256|384|521))$/){print $i" "$(i+1); break}}' "$auth")
+              if [ "$auth_size" -eq 0 ] || [ "$(tail -c 1 "$auth" | od -An -t x1 | tr -d ' \n')" = 0a ]; then authorized_keys_ends_with_lf=true; fi
+              while IFS= read -r line || [ -n "$line" ]; do
+                trimmed="${line#"${line%%[![:space:]]*}"}"
+                [ -n "$trimmed" ] || continue
+                [[ "$trimmed" = \#* ]] && continue
+                if [[ ! "$trimmed" =~ ^(ssh-ed25519|ssh-rsa|ecdsa-sha2-nistp(256|384|521))[[:space:]]+ ]] && \
+                   [[ ! "$trimmed" =~ ^(cert-authority|restrict|no-agent-forwarding|no-port-forwarding|no-pty|no-user-rc|no-X11-forwarding|command=|environment=|expiry-time=|from=|permitlisten=|permitopen=|principals=|tunnel=)[^[:cntrl:]]*[[:space:]]+(ssh-ed25519|ssh-rsa|ecdsa-sha2-nistp(256|384|521))[[:space:]]+ ]]; then
+                  authorized_keys_safe=false
+                  continue
+                fi
+                fingerprint="$(printf '%s\n' "$line" | ssh-keygen -lf /dev/stdin -E sha256 2>/dev/null | awk 'NR==1{print $2}')"
+                if [[ "$fingerprint" =~ ^SHA256:[A-Za-z0-9+/]{43}$ ]]; then
+                  key_count=$((key_count + 1))
+                  if [ "$fingerprint" = "$TARGET_KEY_FINGERPRINT" ]; then target_count=$((target_count + 1)); fi
+                else
+                  authorized_keys_safe=false
+                fi
+              done < "$auth"
             fi
           else
             authorized_keys_state=UNSAFE
@@ -307,26 +338,34 @@ jobs:
           if [ -r "$DEPLOY_PATH/current/REVISION" ] && [ "$(tr -d '\r\n' < "$DEPLOY_PATH/current/REVISION")" = "$EXPECTED_ACTIVE_REVISION" ]; then active_match=true; fi
           if [ ! -e "$DEPLOY_PATH/.dep/deploy.lock" ]; then lock_absent=true; fi
           deploy_process_count="$(ps -eo comm=,args= | awk '$1=="php" && ($0 ~ /dep\.phar/ || $0 ~ /artisan migrate/ || $0 ~ /queue:reload-workers/) {n++} $1=="composer" && $0 ~ /install/ {n++} END {print n+0}')"
-          printf '%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s\n' "$actor_sha" "$home_safe" "$ssh_dir_safe" "$authorized_keys_safe" "$authorized_keys_state" "$authorized_keys_sha" "$key_count" "$target_present" "$active_match" "$lock_absent" "$deploy_process_count"
+          printf 'REMOTE_INVENTORY_V2|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s\n' "$actor_sha" "$home_safe" "$ssh_dir_safe" "$authorized_keys_safe" "$authorized_keys_state" "$authorized_keys_sha" "$key_count" "$target_count" "$authorized_keys_ends_with_lf" "$active_match" "$lock_absent" "$deploy_process_count" "$auth_size" "$auth_nlink" "$same_filesystem" "$ssh_dev" "${auth_dev:-$ssh_dev}"
           REMOTE
             )"
           password_rc=$?
           existing_key_rc=0
-          ssh -o BatchMode=yes -o IdentitiesOnly=no -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/known_hosts" -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$BOOTSTRAP_SSH_USER@$DEPLOY_HOST" true >/dev/null 2>&1 || existing_key_rc=$?
+          ssh -F /dev/null -o BatchMode=yes -o IdentitiesOnly=yes -o IdentityFile="$RUNNER_TEMP/normalized-key.pub" -o PreferredAuthentications=publickey -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o NumberOfPasswordPrompts=0 -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/known_hosts" -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$BOOTSTRAP_SSH_USER@$DEPLOY_HOST" true >/dev/null 2>&1 || existing_key_rc=$?
           set -e
 
-          target_user_sha="$zero_sha"; home_safe=false; ssh_dir_safe=false; authorized_keys_safe=false
-          authorized_keys_state=UNKNOWN; authorized_keys_sha="$zero_sha"; key_count=0; target_present=false
-          active_match=false; lock_absent=false; deploy_process_count=0
+          protocol=INVALID; target_user_sha="$zero_sha"; home_safe=false; ssh_dir_safe=false; authorized_keys_safe=false
+          authorized_keys_state=UNKNOWN; authorized_keys_sha="$zero_sha"; key_count=0; target_count=0; authorized_keys_ends_with_lf=false
+          active_match=false; lock_absent=false; deploy_process_count=0; auth_size=0; auth_nlink=0; same_filesystem=false; ssh_dev=0; auth_dev=0
           if [ "$password_rc" -eq 0 ]; then
-            IFS='|' read -r target_user_sha home_safe ssh_dir_safe authorized_keys_safe authorized_keys_state authorized_keys_sha key_count target_present active_match lock_absent deploy_process_count <<<"$password_result"
+            IFS='|' read -r protocol target_user_sha home_safe ssh_dir_safe authorized_keys_safe authorized_keys_state authorized_keys_sha key_count target_count authorized_keys_ends_with_lf active_match lock_absent deploy_process_count auth_size auth_nlink same_filesystem ssh_dev auth_dev extra <<<"$password_result"
           fi
-          [[ "$target_user_sha" =~ ^[0-9a-f]{64}$ ]]
-          [[ "$authorized_keys_sha" =~ ^[0-9a-f]{64}$ ]]
-          [[ "$key_count" =~ ^[0-9]+$ ]]
-          [[ "$deploy_process_count" =~ ^[0-9]+$ ]]
-          for value in "$home_safe" "$ssh_dir_safe" "$authorized_keys_safe" "$target_present" "$active_match" "$lock_absent"; do [[ "$value" =~ ^(true|false)$ ]]; done
-          [[ "$authorized_keys_state" =~ ^(ABSENT|PRESENT|UNSAFE|UNKNOWN)$ ]]
+          protocol_valid=true
+          [ "$protocol" = REMOTE_INVENTORY_V2 ] || protocol_valid=false
+          [ -z "${extra:-}" ] || protocol_valid=false
+          [[ "$target_user_sha" =~ ^[0-9a-f]{64}$ ]] || protocol_valid=false
+          [[ "$authorized_keys_sha" =~ ^[0-9a-f]{64}$ ]] || protocol_valid=false
+          for value in "$key_count" "$target_count" "$deploy_process_count" "$auth_size" "$auth_nlink" "$ssh_dev" "$auth_dev"; do [[ "$value" =~ ^[0-9]+$ ]] || protocol_valid=false; done
+          for value in "$home_safe" "$ssh_dir_safe" "$authorized_keys_safe" "$authorized_keys_ends_with_lf" "$active_match" "$lock_absent" "$same_filesystem"; do [[ "$value" =~ ^(true|false)$ ]] || protocol_valid=false; done
+          [[ "$authorized_keys_state" =~ ^(ABSENT|PRESENT|UNSAFE|UNKNOWN)$ ]] || protocol_valid=false
+          if [ "$protocol_valid" != true ]; then
+            target_user_sha="$zero_sha"; home_safe=false; ssh_dir_safe=false; authorized_keys_safe=false
+            authorized_keys_state=UNKNOWN; authorized_keys_sha="$zero_sha"; key_count=0; target_count=0
+            authorized_keys_ends_with_lf=false; active_match=false; lock_absent=false; deploy_process_count=0
+            auth_size=0; auth_nlink=0; same_filesystem=false; ssh_dev=0; auth_dev=0
+          fi
 
           target_identity_match=false; existing_key_login_rejected=false; password_accepted=false; apply_eligible=false
           if [ "$target_user_sha" = "$target_expected_sha" ]; then target_identity_match=true; fi
@@ -334,12 +373,15 @@ jobs:
           if [ "$password_rc" -eq 0 ]; then password_accepted=true; fi
           status=PASS_SSH_KEY_AUTHORIZATION_PREFLIGHT; failed_stage=""
           if [ "$password_rc" -ne 0 ]; then status=FAIL_PASSWORD_SSH_AUTH; failed_stage=password_ssh
+          elif [ "$protocol_valid" != true ]; then status=FAIL_REMOTE_INVENTORY_PROTOCOL; failed_stage=remote_inventory_protocol
           elif [ "$target_identity_match" != true ]; then status=BLOCKED_TARGET_IDENTITY; failed_stage=target_identity
           elif [ "$active_match" != true ]; then status=BLOCKED_ACTIVE_REVISION; failed_stage=active_revision
           elif [ "$lock_absent" != true ]; then status=BLOCKED_DEPLOY_LOCK; failed_stage=deploy_lock
           elif [ "$deploy_process_count" -ne 0 ]; then status=BLOCKED_DEPLOY_PROCESS; failed_stage=deploy_process
-          elif [ "$home_safe" != true ] || [ "$ssh_dir_safe" != true ] || [ "$authorized_keys_safe" != true ]; then status=BLOCKED_UNSAFE_AUTHORIZED_KEYS; failed_stage=authorized_keys_safety
-          elif [ "$target_present" = true ] || [ "$existing_key_rc" -eq 0 ]; then status=NOOP_KEY_ALREADY_AUTHORIZED; failed_stage=already_authorized
+          elif [ "$home_safe" != true ] || [ "$ssh_dir_safe" != true ] || [ "$authorized_keys_safe" != true ] || [ "$authorized_keys_ends_with_lf" != true ] || [ "$same_filesystem" != true ]; then status=BLOCKED_UNSAFE_AUTHORIZED_KEYS; failed_stage=authorized_keys_safety
+          elif [ "$target_count" -gt 0 ] && [ "$existing_key_rc" -ne 0 ]; then status=BLOCKED_TARGET_KEY_PRESENT_BUT_UNUSABLE; failed_stage=target_key_unusable
+          elif [ "$existing_key_rc" -eq 0 ] && [ "$target_count" -gt 0 ]; then status=NOOP_KEY_ALREADY_AUTHORIZED; failed_stage=already_authorized
+          elif [ "$existing_key_rc" -eq 0 ]; then status=BLOCKED_EXACT_LOGIN_WITHOUT_TARGET; failed_stage=exact_login_inconsistent
           else apply_eligible=true
           fi
 
@@ -347,26 +389,31 @@ jobs:
             --arg status "$status" --arg stage "$failed_stage" --arg user_sha "$target_user_sha" \
             --arg key_sha "$PUBLIC_KEY_SHA256" --arg fingerprint "$PUBLIC_KEY_FINGERPRINT" \
             --arg auth_sha "$authorized_keys_sha" --arg auth_state "$authorized_keys_state" \
-            --argjson key_count "$key_count" --argjson target_present "$target_present" \
+            --argjson key_count "$key_count" --argjson target_count "$target_count" \
             --argjson password_accepted "$password_accepted" --argjson eligible "$apply_eligible" \
             --argjson identity "$target_identity_match" --argjson active "$active_match" \
             --argjson lock "$lock_absent" --argjson process_count "$deploy_process_count" \
             --argjson home_safe "$home_safe" --argjson ssh_safe "$ssh_dir_safe" \
             --argjson auth_safe "$authorized_keys_safe" --argjson key_rejected "$existing_key_login_rejected" \
+            --argjson ends_lf "$authorized_keys_ends_with_lf" --argjson auth_size "$auth_size" --argjson auth_nlink "$auth_nlink" \
+            --argjson same_fs "$same_filesystem" --argjson exact_login "$([ "$existing_key_rc" -eq 0 ] && echo true || echo false)" \
             '.status=$status | .failed_stage=$stage | .target_user_sha256=$user_sha
              | .public_key_sha256=$key_sha | .public_key_fingerprint=$fingerprint
              | .authorized_keys_sha256_before=$auth_sha | .authorized_keys_sha256_after=$auth_sha
              | .authorized_keys_state=$auth_state | .authorized_key_count_before=$key_count | .authorized_key_count_after=$key_count
-             | .target_key_present_before=$target_present | .target_key_present_after=$target_present
+             | .target_key_present_before=($target_count > 0) | .target_key_present_after=($target_count > 0)
+             | .target_key_count_before=$target_count | .target_key_count_after=$target_count
              | .password_ssh_tested=true | .password_ssh_accepted=$password_accepted | .apply_eligible=$eligible
+             | .exact_key_login_tested=true | .exact_key_login_accepted=$exact_login
              | .checks.target_identity_match=$identity | .checks.active_revision_match=$active
              | .checks.deploy_lock_absent=$lock | .checks.deploy_like_process_count=$process_count
              | .checks.home_safe=$home_safe | .checks.ssh_directory_safe=$ssh_safe
-             | .checks.authorized_keys_safe=$auth_safe | .checks.existing_key_login_rejected=$key_rejected' \
+             | .checks.authorized_keys_safe=$auth_safe | .checks.authorized_keys_ends_with_lf=$ends_lf
+             | .checks.authorized_keys_size=$auth_size | .checks.authorized_keys_nlink=$auth_nlink
+             | .checks.same_filesystem=$same_fs | .checks.existing_key_login_rejected=$key_rejected' \
             "$receipt" > "$receipt.tmp"
           mv "$receipt.tmp" "$receipt"
-          test "$status" = PASS_SSH_KEY_AUTHORIZATION_PREFLIGHT
-          test "$apply_eligible" = true
+          printf 'CONTROL_STATUS=%s\n' "$status" >> "$GITHUB_ENV"
 
       - name: Validate apply receipt and exact approval
         if: ${{ inputs.mode == 'apply' }}
@@ -391,14 +438,34 @@ jobs:
           preflight_receipt="$preflight_dir/backend-production-bootstrap-ssh-key-authorization.json"
           test "$(sha256sum "$preflight_receipt" | awk '{print $1}')" = "$KEY_PREFLIGHT_RECEIPT_SHA256"
           jq -e --arg control "$EXPECTED_CONTROL_PLANE_SHA" --arg active "$EXPECTED_ACTIVE_REVISION" \
-            --arg key_sha "$PUBLIC_KEY_SHA256" \
-            '.schema_version == "backend.production_bootstrap_ssh_key_authorization.v1"
+            --arg key_sha "$PUBLIC_KEY_SHA256" --arg fingerprint "$PUBLIC_KEY_FINGERPRINT" \
+            --arg run "$KEY_PREFLIGHT_RUN_ID" --arg attempt "$KEY_PREFLIGHT_RUN_ATTEMPT" \
+            --arg source_run "$FAILED_BOOTSTRAP_RUN_ID" --arg source_attempt "$FAILED_BOOTSTRAP_RUN_ATTEMPT" \
+            --arg source_receipt "$FAILED_BOOTSTRAP_RECEIPT_SHA256" --arg source_control "$FAILED_BOOTSTRAP_CONTROL_PLANE_SHA" \
+            '.schema_version == "backend.production_bootstrap_ssh_key_authorization.v2"
              and .mode == "preflight" and .status == "PASS_SSH_KEY_AUTHORIZATION_PREFLIGHT"
+             and .run_id == $run and .run_attempt == $attempt
              and .control_plane_sha == $control and .active_revision == $active
-             and .public_key_sha256 == $key_sha and .password_ssh_accepted == true
+             and .failed_bootstrap.run_id == $source_run
+             and .failed_bootstrap.run_attempt == $source_attempt
+             and .failed_bootstrap.receipt_sha256 == $source_receipt
+             and .failed_bootstrap.control_plane_sha == $source_control
+             and .public_key_sha256 == $key_sha and .public_key_fingerprint == $fingerprint
+             and .password_ssh_tested == true and .password_ssh_accepted == true
              and .target_key_present_before == false and .apply_eligible == true
+             and .checks.target_identity_match == true and .checks.active_revision_match == true
+             and .checks.deploy_lock_absent == true and .checks.deploy_like_process_count == 0
+             and .checks.home_safe == true and .checks.ssh_directory_safe == true
+             and .checks.authorized_keys_safe == true and .checks.authorized_keys_ends_with_lf == true
+             and .checks.authorized_keys_nlink >= 0 and .checks.authorized_keys_size >= 0
+             and .checks.same_filesystem == true and .checks.existing_key_login_rejected == true
+             and .exact_key_login_tested == true and .exact_key_login_accepted == false
+             and .target_key_count_before == 0 and .target_key_count_after == 0
              and .production_write_execution == false and .authorized_keys_write_count == 0
-             and .remote_temp_file_write_count == 0 and .writes_committed == false' "$preflight_receipt" >/dev/null
+             and .remote_temp_file_write_count == 0 and .ssh_config_write_count == 0
+             and .service_restart_count == 0 and .deploy_count == 0
+             and .database_or_cms_write_count == 0 and .warm_or_publication_count == 0
+             and .discoverability_write_count == 0 and .writes_committed == false' "$preflight_receipt" >/dev/null
           user_sha="$(jq -r '.target_user_sha256' "$preflight_receipt")"
           auth_sha="$(jq -r '.authorized_keys_sha256_before' "$preflight_receipt")"
           fingerprint="$(jq -r '.public_key_fingerprint' "$preflight_receipt")"
@@ -415,64 +482,228 @@ jobs:
           receipt="$RUNNER_TEMP/backend-production-bootstrap-ssh-key-authorization.json"
           candidate_name="authorized_keys.codex-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
           key_b64="$(base64 -w0 "$RUNNER_TEMP/normalized-key.pub")"
-          ssh_base=(ssh -o BatchMode=no -o PubkeyAuthentication=no -o PreferredAuthentications=password -o NumberOfPasswordPrompts=1 -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/known_hosts" -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$BOOTSTRAP_SSH_USER@$DEPLOY_HOST")
+          deploy_path_b64="$(printf '%s' "$DEPLOY_PATH" | base64 -w0)"
+          ssh_base=(ssh -F /dev/null -o BatchMode=no -o PubkeyAuthentication=no -o KbdInteractiveAuthentication=no -o PreferredAuthentications=password -o NumberOfPasswordPrompts=1 -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/known_hosts" -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$BOOTSTRAP_SSH_USER@$DEPLOY_HOST")
           set +e
           export SSH_ASKPASS="$BOOTSTRAP_ASKPASS" SSH_ASKPASS_REQUIRE=force DISPLAY=:0
           apply_result="$(setsid -w "${ssh_base[@]}" \
-              "EXPECTED_BEFORE_SHA='$PREFLIGHT_AUTHORIZED_KEYS_SHA' TARGET_KEY_SHA='$PUBLIC_KEY_SHA256' TARGET_USER_SHA='$TARGET_USER_SHA' KEY_B64='$key_b64' CANDIDATE_NAME='$candidate_name' bash -s" <<'REMOTE'
+              "bash -s -- '$deploy_path_b64' '$EXPECTED_ACTIVE_REVISION' '$PREFLIGHT_AUTHORIZED_KEYS_SHA' '$PUBLIC_KEY_SHA256' '$PUBLIC_KEY_FINGERPRINT' '$TARGET_USER_SHA' '$key_b64' '$candidate_name'" 2>/dev/null <<'REMOTE'
           set -u
-          zero_sha="$(printf '0%.0s' {1..64})"; before_sha="$zero_sha"; after_sha="$zero_sha"; key_count=0
-          candidate_created=false; cleanup_attempted=false; candidate_absent_after=true; committed=false
+          DEPLOY_PATH="$(printf '%s' "$1" | base64 -d)"; EXPECTED_ACTIVE_REVISION="$2"; EXPECTED_BEFORE_SHA="$3"
+          TARGET_KEY_SHA="$4"; TARGET_KEY_FINGERPRINT="$5"; TARGET_USER_SHA="$6"; KEY_B64="$7"; CANDIDATE_NAME="$8"
+          zero_sha="$(printf '0%.0s' {1..64})"; before_sha="$zero_sha"; after_sha="$zero_sha"
+          before_count=0; after_count=0; target_before=0; target_after=0; process_count=0
+          auth_size=0; auth_nlink=0
+          candidate_created=false; cleanup_attempted=false; candidate_absent_after=true; candidate_identity_rechecked=false; committed=false
+          identity_match=false; home_safe=false; ssh_safe=false; auth_safe=false; ends_lf=false; active_match=false; lock_absent=false; same_filesystem=false
           home_dir="$(getent passwd "$(id -un)" | cut -d: -f6)"; ssh_dir="$home_dir/.ssh"; auth="$ssh_dir/authorized_keys"; candidate="$ssh_dir/$CANDIDATE_NAME"
-          finish() { printf '%s|%s|%s|%s|%s|%s|%s|%s\n' "$1" "$before_sha" "$after_sha" "$key_count" "$candidate_created" "$cleanup_attempted" "$candidate_absent_after" "$committed"; exit 0; }
-          cleanup_fail() { cleanup_attempted=true; rm -f "$candidate" >/dev/null 2>&1 || true; if [ -e "$candidate" ] || [ -L "$candidate" ]; then candidate_absent_after=false; fi; finish FAIL; }
-          [ "$(printf '%s' "$(id -un)" | sha256sum | awk '{print $1}')" = "$TARGET_USER_SHA" ] || finish FAIL
-          [ -d "$ssh_dir" ] && [ ! -L "$ssh_dir" ] && [ ! -e "$candidate" ] || finish FAIL
-          before_sha="$(if [ -f "$auth" ]; then sha256sum "$auth" | awk '{print $1}'; else printf '0%.0s' {1..64}; fi)"
-          [ "$before_sha" = "$EXPECTED_BEFORE_SHA" ] || finish FAIL
-          key_line="$(printf '%s' "$KEY_B64" | base64 -d)" || finish FAIL
-          [ "$(printf '%s\n' "$key_line" | sha256sum | awk '{print $1}')" = "$TARGET_KEY_SHA" ] || finish FAIL
-          if [ -f "$auth" ]; then cp --preserve=mode "$auth" "$candidate" || finish FAIL; else : > "$candidate" || finish FAIL; chmod 600 "$candidate" || cleanup_fail; fi
+          finish() { printf 'REMOTE_APPLY_V2|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s\n' "$1" "$before_sha" "$after_sha" "$before_count" "$after_count" "$target_before" "$target_after" "$candidate_created" "$cleanup_attempted" "$candidate_absent_after" "$candidate_identity_rechecked" "$committed" "$identity_match" "$home_safe" "$ssh_safe" "$auth_safe" "$ends_lf" "$active_match" "$lock_absent" "$process_count" "$same_filesystem" "$auth_size" "$auth_nlink"; exit 0; }
+          cleanup_fail() {
+            cleanup_attempted=true
+            if [ "$candidate_created" = true ] && [ -n "${candidate_identity:-}" ]; then
+              current_identity="$(stat -Lc '%d:%i' "$candidate" 2>/dev/null || true)"
+              if [ "$current_identity" = "$candidate_identity" ]; then candidate_identity_rechecked=true; rm -f -- "$candidate" >/dev/null 2>&1 || true; fi
+            fi
+            if [ -e "$candidate" ] || [ -L "$candidate" ]; then candidate_absent_after=false; else candidate_absent_after=true; fi
+            finish "$1"
+          }
+          count_keys() {
+            counted=0; target_counted=0; parse_safe=true
+            while IFS= read -r line || [ -n "$line" ]; do
+              trimmed="${line#"${line%%[![:space:]]*}"}"
+              [ -n "$trimmed" ] || continue
+              [[ "$trimmed" = \#* ]] && continue
+              if [[ ! "$trimmed" =~ ^(ssh-ed25519|ssh-rsa|ecdsa-sha2-nistp(256|384|521))[[:space:]]+ ]] && \
+                 [[ ! "$trimmed" =~ ^(cert-authority|restrict|no-agent-forwarding|no-port-forwarding|no-pty|no-user-rc|no-X11-forwarding|command=|environment=|expiry-time=|from=|permitlisten=|permitopen=|principals=|tunnel=)[^[:cntrl:]]*[[:space:]]+(ssh-ed25519|ssh-rsa|ecdsa-sha2-nistp(256|384|521))[[:space:]]+ ]]; then
+                parse_safe=false
+                continue
+              fi
+              fp="$(printf '%s\n' "$line" | ssh-keygen -lf /dev/stdin -E sha256 2>/dev/null | awk 'NR==1{print $2}')"
+              if [[ "$fp" =~ ^SHA256:[A-Za-z0-9+/]{43}$ ]]; then counted=$((counted + 1)); [ "$fp" = "$TARGET_KEY_FINGERPRINT" ] && target_counted=$((target_counted + 1)); else parse_safe=false; fi
+            done < "$1"
+          }
+          [ "$(printf '%s' "$(id -un)" | sha256sum | awk '{print $1}')" = "$TARGET_USER_SHA" ] || finish FAIL_TARGET_IDENTITY
+          identity_match=true
+          if [ -n "$home_dir" ] && [ -d "$home_dir" ] && [ ! -L "$home_dir" ] && [ "$(stat -Lc '%U' "$home_dir" 2>/dev/null)" = "$(id -un)" ]; then
+            home_mode="$(stat -Lc '%a' "$home_dir")"; if [[ "$home_mode" =~ ^[0-7]{3,4}$ ]] && (( (8#$home_mode & 0100) != 0 )) && (( (8#$home_mode & 0022) == 0 )) && [ -x "$home_dir" ]; then home_safe=true; fi
+          fi
+          [ "$home_safe" = true ] || finish FAIL_HOME_SAFETY
+          if [ -d "$ssh_dir" ] && [ ! -L "$ssh_dir" ] && [ "$(stat -Lc '%U' "$ssh_dir" 2>/dev/null)" = "$(id -un)" ]; then
+            ssh_mode="$(stat -Lc '%a' "$ssh_dir")"; if [[ "$ssh_mode" =~ ^[0-7]{3,4}$ ]] && (( (8#$ssh_mode & 0700) == 0700 )) && (( (8#$ssh_mode & 0077) == 0 )) && [ -r "$ssh_dir" ] && [ -w "$ssh_dir" ] && [ -x "$ssh_dir" ]; then ssh_safe=true; fi
+          fi
+          [ "$ssh_safe" = true ] || finish FAIL_SSH_DIRECTORY_SAFETY
+          ssh_dev="$(stat -Lc '%d' "$ssh_dir" 2>/dev/null || true)"; [ -n "$ssh_dev" ] || finish FAIL_SSH_DIRECTORY_DEVICE
+          if [ -e "$candidate" ] || [ -L "$candidate" ]; then candidate_absent_after=false; finish FAIL_CANDIDATE_PREEXISTS; fi
+          if [ -r "$DEPLOY_PATH/current/REVISION" ] && [ "$(tr -d '\r\n' < "$DEPLOY_PATH/current/REVISION")" = "$EXPECTED_ACTIVE_REVISION" ]; then active_match=true; fi
+          [ "$active_match" = true ] || finish FAIL_ACTIVE_REVISION
+          if [ ! -e "$DEPLOY_PATH/.dep/deploy.lock" ]; then lock_absent=true; fi
+          [ "$lock_absent" = true ] || finish FAIL_DEPLOY_LOCK
+          process_count="$(ps -eo comm=,args= | awk '$1=="php" && ($0 ~ /dep\.phar/ || $0 ~ /artisan migrate/ || $0 ~ /queue:reload-workers/) {n++} $1=="composer" && $0 ~ /install/ {n++} END {print n+0}')"
+          [ "$process_count" = 0 ] || finish FAIL_DEPLOY_PROCESS
+          if [ ! -e "$auth" ] && [ ! -L "$auth" ]; then
+            before_sha="$zero_sha"; auth_safe=true; ends_lf=true; same_filesystem=true
+          elif [ -f "$auth" ] && [ ! -L "$auth" ] && [ "$(stat -Lc '%U' "$auth" 2>/dev/null)" = "$(id -un)" ]; then
+            auth_mode="$(stat -Lc '%a' "$auth")"; auth_size="$(stat -Lc '%s' "$auth" 2>/dev/null || printf invalid)"; auth_nlink="$(stat -Lc '%h' "$auth" 2>/dev/null || printf invalid)"; auth_dev="$(stat -Lc '%d' "$auth" 2>/dev/null || true)"
+            if [[ "$auth_mode" =~ ^[0-7]{3,4}$ ]] && (( (8#$auth_mode & 0022) == 0 )) && [ -r "$auth" ] && [[ "$auth_size" =~ ^[0-9]+$ ]] && (( auth_size <= 1048576 )) && [ "$auth_nlink" = 1 ] && [ "$auth_dev" = "$ssh_dev" ]; then auth_safe=true; same_filesystem=true; fi
+            [ "$auth_safe" = true ] || finish FAIL_AUTHORIZED_KEYS_SAFETY
+            before_sha="$(sha256sum "$auth" | awk '{print $1}')"; if [ "$auth_size" -eq 0 ] || [ "$(tail -c 1 "$auth" | od -An -t x1 | tr -d ' \n')" = 0a ]; then ends_lf=true; fi
+            [ "$ends_lf" = true ] || finish FAIL_AUTHORIZED_KEYS_FINAL_LF
+            count_keys "$auth"; before_count="$counted"; target_before="$target_counted"; [ "$parse_safe" = true ] || finish FAIL_AUTHORIZED_KEYS_PARSE
+          else
+            finish FAIL_AUTHORIZED_KEYS_SAFETY
+          fi
+          [ "$before_sha" = "$EXPECTED_BEFORE_SHA" ] || finish FAIL_BEFORE_SHA_DRIFT
+          [ "$target_before" = 0 ] || finish FAIL_TARGET_ALREADY_PRESENT
+          key_line="$(printf '%s' "$KEY_B64" | base64 -d)" || finish FAIL_KEY_DECODE
+          [ "$(printf '%s\n' "$key_line" | sha256sum | awk '{print $1}')" = "$TARGET_KEY_SHA" ] || finish FAIL_KEY_SHA
+          (set -o noclobber; : > "$candidate") 2>/dev/null || { if [ -e "$candidate" ] || [ -L "$candidate" ]; then candidate_absent_after=false; fi; finish FAIL_CANDIDATE_CREATE; }
           candidate_created=true; candidate_absent_after=false
-          printf '%s\n' "$key_line" >> "$candidate" || cleanup_fail
-          count="$(awk -v target="$TARGET_KEY_SHA" '{for(i=1;i<NF;i++) if($i ~ /^(ssh-ed25519|ssh-rsa|ecdsa-sha2-nistp(256|384|521))$/){cmd="printf \\047%s\\n\\047 \\042"$i" "$ (i+1) "\\042 | sha256sum"; cmd | getline h; close(cmd); split(h,a," "); if(a[1]==target)n++; break}} END{print n+0}' "$candidate")" || cleanup_fail
-          [ "$count" = 1 ] || cleanup_fail
-          chmod 600 "$candidate" || cleanup_fail
-          mv "$candidate" "$auth" || cleanup_fail
+          candidate_identity="$(stat -Lc '%d:%i' "$candidate" 2>/dev/null || true)"; [ -n "$candidate_identity" ] || cleanup_fail FAIL_CANDIDATE_IDENTITY
+          [ "${candidate_identity%%:*}" = "$ssh_dev" ] || cleanup_fail FAIL_CANDIDATE_FILESYSTEM
+          if [ -f "$auth" ]; then cat "$auth" > "$candidate" || cleanup_fail FAIL_CANDIDATE_COPY; fi
+          printf '%s\n' "$key_line" >> "$candidate" || cleanup_fail FAIL_CANDIDATE_APPEND
+          count_keys "$candidate"; after_count="$counted"; target_after="$target_counted"; [ "$parse_safe" = true ] && [ "$target_after" = 1 ] || cleanup_fail FAIL_CANDIDATE_KEY_COUNT
+          chmod 600 "$candidate" || cleanup_fail FAIL_CANDIDATE_MODE
+          [ "$(stat -Lc '%d:%i' "$candidate" 2>/dev/null)" = "$candidate_identity" ] || cleanup_fail FAIL_CANDIDATE_IDENTITY_DRIFT
+          [ "$(stat -Lc '%U' "$candidate" 2>/dev/null)" = "$(id -un)" ] || cleanup_fail FAIL_CANDIDATE_OWNER
+          [ "$(stat -Lc '%h' "$candidate" 2>/dev/null)" = 1 ] || cleanup_fail FAIL_CANDIDATE_NLINK
+          candidate_size="$(stat -Lc '%s' "$candidate" 2>/dev/null || printf invalid)"
+          [[ "$candidate_size" =~ ^[0-9]+$ ]] && (( candidate_size <= 1048576 )) || cleanup_fail FAIL_CANDIDATE_SIZE
+          [ "$(tail -c 1 "$candidate" | od -An -t x1 | tr -d ' \n')" = 0a ] || cleanup_fail FAIL_CANDIDATE_FINAL_LF
+          candidate_identity_rechecked=true
+          current_before="$(if [ -f "$auth" ] && [ ! -L "$auth" ]; then sha256sum "$auth" | awk '{print $1}'; elif [ ! -e "$auth" ] && [ ! -L "$auth" ]; then printf '%s' "$zero_sha"; else printf invalid; fi)"
+          [ "$current_before" = "$EXPECTED_BEFORE_SHA" ] || cleanup_fail FAIL_BEFORE_SHA_DRIFT
+          if [ "$EXPECTED_BEFORE_SHA" = "$zero_sha" ]; then
+            [ ! -e "$auth" ] && [ ! -L "$auth" ] || cleanup_fail FAIL_AUTHORIZED_KEYS_TYPE_DRIFT
+          else
+            [ -f "$auth" ] && [ ! -L "$auth" ] && [ -r "$auth" ] || cleanup_fail FAIL_AUTHORIZED_KEYS_TYPE_DRIFT
+            [ "$(stat -Lc '%U' "$auth" 2>/dev/null)" = "$(id -un)" ] || cleanup_fail FAIL_AUTHORIZED_KEYS_OWNER_DRIFT
+            current_mode="$(stat -Lc '%a' "$auth" 2>/dev/null || printf invalid)"
+            current_size="$(stat -Lc '%s' "$auth" 2>/dev/null || printf invalid)"
+            current_nlink="$(stat -Lc '%h' "$auth" 2>/dev/null || printf invalid)"
+            current_dev="$(stat -Lc '%d' "$auth" 2>/dev/null || printf invalid)"
+            [[ "$current_mode" =~ ^[0-7]{3,4}$ ]] && (( (8#$current_mode & 0022) == 0 )) || cleanup_fail FAIL_AUTHORIZED_KEYS_MODE_DRIFT
+            [[ "$current_size" =~ ^[0-9]+$ ]] && (( current_size <= 1048576 )) || cleanup_fail FAIL_AUTHORIZED_KEYS_SIZE_DRIFT
+            [ "$current_nlink" = 1 ] || cleanup_fail FAIL_AUTHORIZED_KEYS_NLINK_DRIFT
+            [ "$current_dev" = "$ssh_dev" ] || cleanup_fail FAIL_AUTHORIZED_KEYS_DEVICE_DRIFT
+            if [ "$current_size" -gt 0 ]; then [ "$(tail -c 1 "$auth" | od -An -t x1 | tr -d ' \n')" = 0a ] || cleanup_fail FAIL_AUTHORIZED_KEYS_FINAL_LF_DRIFT; fi
+            count_keys "$auth"; [ "$parse_safe" = true ] && [ "$target_counted" = 0 ] || cleanup_fail FAIL_TARGET_PRESENCE_DRIFT
+          fi
+          [ -r "$DEPLOY_PATH/current/REVISION" ] && [ "$(tr -d '\r\n' < "$DEPLOY_PATH/current/REVISION")" = "$EXPECTED_ACTIVE_REVISION" ] || cleanup_fail FAIL_ACTIVE_REVISION_DRIFT
+          [ ! -e "$DEPLOY_PATH/.dep/deploy.lock" ] || cleanup_fail FAIL_DEPLOY_LOCK_DRIFT
+          process_count="$(ps -eo comm=,args= | awk '$1=="php" && ($0 ~ /dep\.phar/ || $0 ~ /artisan migrate/ || $0 ~ /queue:reload-workers/) {n++} $1=="composer" && $0 ~ /install/ {n++} END {print n+0}')"; [ "$process_count" = 0 ] || cleanup_fail FAIL_DEPLOY_PROCESS_DRIFT
+          mv -T "$candidate" "$auth" || cleanup_fail FAIL_ATOMIC_RENAME
           candidate_absent_after=true; committed=true
-          after_sha="$(sha256sum "$auth" | awk '{print $1}')" || finish FAIL
-          key_count="$(awk '{for(i=1;i<NF;i++) if($i ~ /^(ssh-ed25519|ssh-rsa|ecdsa-sha2-nistp(256|384|521))$/){n++;break}} END{print n+0}' "$auth")" || finish FAIL
-          finish PASS
+          after_sha="$(sha256sum "$auth" | awk '{print $1}')" || finish FAIL_POST_COMMIT_HASH
+          count_keys "$auth"; after_count="$counted"; target_after="$target_counted"; [ "$parse_safe" = true ] && [ "$target_after" = 1 ] || finish FAIL_POST_COMMIT_KEY_COUNT
+          [ -f "$auth" ] && [ ! -L "$auth" ] && [ -r "$auth" ] || finish FAIL_POST_COMMIT_TYPE
+          [ "$(stat -Lc '%U' "$auth" 2>/dev/null)" = "$(id -un)" ] || finish FAIL_POST_COMMIT_OWNER
+          [ "$(stat -Lc '%a' "$auth" 2>/dev/null)" = 600 ] || finish FAIL_POST_COMMIT_MODE
+          auth_size="$(stat -Lc '%s' "$auth" 2>/dev/null || printf invalid)"; auth_nlink="$(stat -Lc '%h' "$auth" 2>/dev/null || printf invalid)"
+          [[ "$auth_size" =~ ^[0-9]+$ ]] && (( auth_size <= 1048576 )) || finish FAIL_POST_COMMIT_SIZE
+          [ "$auth_nlink" = 1 ] || finish FAIL_POST_COMMIT_NLINK
+          [ "$(stat -Lc '%d' "$auth" 2>/dev/null)" = "$ssh_dev" ] || finish FAIL_POST_COMMIT_DEVICE
+          [ "$(tail -c 1 "$auth" | od -An -t x1 | tr -d ' \n')" = 0a ] || finish FAIL_POST_COMMIT_FINAL_LF
+          [ -r "$DEPLOY_PATH/current/REVISION" ] && [ "$(tr -d '\r\n' < "$DEPLOY_PATH/current/REVISION")" = "$EXPECTED_ACTIVE_REVISION" ] || finish FAIL_POST_COMMIT_ACTIVE_REVISION
+          finish PASS_APPLY
           REMOTE
             )"
           apply_rc=$?
           set -e
-          remote_status=FAIL; before_sha="$PREFLIGHT_AUTHORIZED_KEYS_SHA"; after_sha="$(printf '0%.0s' {1..64})"; after_count=0
-          candidate_created=false; cleanup_attempted=false; candidate_absent_after=true; committed=false
-          if [ "$apply_rc" -eq 0 ]; then IFS='|' read -r remote_status before_sha after_sha after_count candidate_created cleanup_attempted candidate_absent_after committed <<<"$apply_result"; fi
-          test "$before_sha" = "$PREFLIGHT_AUTHORIZED_KEYS_SHA"
-          status=FAIL_SSH_KEY_AUTHORIZATION_APPLY; stage=authorized_keys_apply
-          if [ "$apply_rc" -eq 0 ] && [ "$remote_status" = PASS ] && [ "$committed" = true ]; then status=PASS_SSH_KEY_AUTHORIZATION_APPLY; stage=""; fi
-          key_login=false
+          zero_sha="$(printf '0%.0s' {1..64})"
+          protocol=INVALID; remote_status=FAIL_APPLY_TRANSPORT; before_sha="$PREFLIGHT_AUTHORIZED_KEYS_SHA"; after_sha="$zero_sha"
+          before_count=0; after_count=0; target_before=0; target_after=0; candidate_created=false
+          cleanup_attempted=false; candidate_absent_after=false; candidate_identity_rechecked=false; committed=null
+          identity_match=false; home_safe=false; ssh_safe=false; auth_safe=false; ends_lf=false; active_match=false; lock_absent=false
+          process_count=0; same_filesystem=false; auth_size=0; auth_nlink=0; extra=""
+          if [ "$apply_rc" -eq 0 ]; then
+            IFS='|' read -r protocol remote_status before_sha after_sha before_count after_count target_before target_after \
+              candidate_created cleanup_attempted candidate_absent_after candidate_identity_rechecked committed identity_match \
+              home_safe ssh_safe auth_safe ends_lf active_match lock_absent process_count same_filesystem auth_size auth_nlink extra <<<"$apply_result"
+          fi
+          protocol_valid=true
+          [ "$protocol" = REMOTE_APPLY_V2 ] || protocol_valid=false
+          [ -z "$extra" ] || protocol_valid=false
+          [[ "$remote_status" =~ ^(PASS_APPLY|FAIL_[A-Z0-9_]+)$ ]] || protocol_valid=false
+          [[ "$before_sha" =~ ^[0-9a-f]{64}$ ]] || protocol_valid=false
+          [[ "$after_sha" =~ ^[0-9a-f]{64}$ ]] || protocol_valid=false
+          for value in "$before_count" "$after_count" "$target_before" "$target_after" "$process_count" "$auth_size" "$auth_nlink"; do [[ "$value" =~ ^[0-9]+$ ]] || protocol_valid=false; done
+          for value in "$candidate_created" "$cleanup_attempted" "$candidate_absent_after" "$candidate_identity_rechecked" "$committed" "$identity_match" "$home_safe" "$ssh_safe" "$auth_safe" "$ends_lf" "$active_match" "$lock_absent" "$same_filesystem"; do [[ "$value" =~ ^(true|false)$ ]] || protocol_valid=false; done
+          if [ "$protocol_valid" != true ]; then
+            remote_status=FAIL_REMOTE_APPLY_PROTOCOL; before_sha="$PREFLIGHT_AUTHORIZED_KEYS_SHA"; after_sha="$zero_sha"
+            before_count=0; after_count=0; target_before=0; target_after=0; candidate_created=false
+            cleanup_attempted=false; candidate_absent_after=false; candidate_identity_rechecked=false; committed=false
+            identity_match=false; home_safe=false; ssh_safe=false; auth_safe=false; ends_lf=false
+            active_match=false; lock_absent=false; process_count=0; same_filesystem=false; auth_size=0; auth_nlink=0
+          fi
+
+          password_accepted=false; write_state=ATTEMPTED_UNKNOWN; writes_committed=null; auth_state=UNKNOWN
+          status=FAIL_SSH_KEY_AUTHORIZATION_TRANSPORT; stage=password_ssh_transport
+          if [ "$apply_rc" -eq 0 ]; then password_accepted=true; fi
+          if [ "$apply_rc" -eq 0 ] && [ "$protocol_valid" != true ]; then
+            status=FAIL_REMOTE_APPLY_PROTOCOL; stage=remote_apply_protocol
+          elif [ "$apply_rc" -eq 0 ]; then
+            writes_committed="$committed"
+            if [ "$before_sha" = "$zero_sha" ]; then auth_state=ABSENT; else auth_state=PRESENT; fi
+            if [ "$committed" = true ]; then auth_state=PRESENT; fi
+            if [ "$committed" = true ]; then write_state=COMMITTED; else write_state=NOT_COMMITTED; fi
+            status="$remote_status"; stage=authorized_keys_apply
+            if [ "$remote_status" = PASS_APPLY ] && [ "$committed" = true ]; then status=PASS_SSH_KEY_AUTHORIZATION_APPLY; stage=""; fi
+          fi
+
+          key_login=false; key_login_tested=false
           if [ "$committed" = true ]; then
-            if ssh -o BatchMode=yes -o IdentitiesOnly=no -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/known_hosts" -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$BOOTSTRAP_SSH_USER@$DEPLOY_HOST" "test \"\$(printf '%s' \"\$(id -un)\" | sha256sum | awk '{print \$1}')\" = '$TARGET_USER_SHA'"; then key_login=true; else status=FAIL_SSH_KEY_LOGIN_READBACK; stage=key_login_readback; fi
+            key_login_tested=true
+            if ssh -F /dev/null -o BatchMode=yes -o IdentitiesOnly=yes -o IdentityFile="$RUNNER_TEMP/normalized-key.pub" -o PreferredAuthentications=publickey -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o NumberOfPasswordPrompts=0 -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/known_hosts" -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$BOOTSTRAP_SSH_USER@$DEPLOY_HOST" "test \"\$(printf '%s' \"\$(id -un)\" | sha256sum | awk '{print \$1}')\" = '$TARGET_USER_SHA'" >/dev/null 2>&1; then
+              key_login=true
+            else
+              status=FAIL_SSH_KEY_LOGIN_READBACK; stage=key_login_readback
+            fi
           fi
           jq --arg status "$status" --arg stage "$stage" --arg user_sha "$TARGET_USER_SHA" \
             --arg key_sha "$PUBLIC_KEY_SHA256" --arg fingerprint "$PUBLIC_KEY_FINGERPRINT" \
-            --arg before "$before_sha" --arg after "$after_sha" \
-            --argjson after_count "$after_count" --argjson key_login "$key_login" --argjson created "$candidate_created" \
-            --argjson cleanup "$cleanup_attempted" --argjson absent "$candidate_absent_after" --argjson committed "$committed" \
+            --arg before "$before_sha" --arg after "$after_sha" --arg write_state "$write_state" --arg auth_state "$auth_state" \
+            --argjson before_count "$before_count" --argjson after_count "$after_count" \
+            --argjson target_before "$target_before" --argjson target_after "$target_after" \
+            --argjson password_accepted "$password_accepted" --argjson key_login_tested "$key_login_tested" \
+            --argjson key_login "$key_login" --argjson created "$candidate_created" \
+            --argjson cleanup "$cleanup_attempted" --argjson absent "$candidate_absent_after" \
+            --argjson identity_rechecked "$candidate_identity_rechecked" --argjson committed "$writes_committed" \
+            --argjson identity "$identity_match" --argjson home_safe "$home_safe" --argjson ssh_safe "$ssh_safe" --argjson auth_safe "$auth_safe" \
+            --argjson ends_lf "$ends_lf" --argjson active "$active_match" --argjson lock "$lock_absent" \
+            --argjson process_count "$process_count" --argjson same_fs "$same_filesystem" \
+            --argjson auth_size "$auth_size" --argjson auth_nlink "$auth_nlink" \
             '.status=$status | .failed_stage=$stage | .target_user_sha256=$user_sha
              | .public_key_sha256=$key_sha | .public_key_fingerprint=$fingerprint
              | .authorized_keys_sha256_before=$before | .authorized_keys_sha256_after=$after
-             | .password_ssh_tested=true | .password_ssh_accepted=true
-             | .target_key_present_before=false | .target_key_present_after=$key_login
-             | .key_ssh_authorized_after=$key_login | .authorized_key_count_after=$after_count
-             | .candidate_created=$created | .candidate_cleanup_attempted=$cleanup | .candidate_absent_after=$absent
-             | .production_write_execution=$committed | .authorized_keys_write_count=(if $committed then 1 else 0 end)
-             | .remote_temp_file_write_count=(if $created then 1 else 0 end) | .writes_committed=$committed' "$receipt" > "$receipt.tmp"
+             | .authorized_keys_state=$auth_state
+             | .authorized_key_count_before=$before_count | .authorized_key_count_after=$after_count
+             | .target_key_count_before=$target_before | .target_key_count_after=$target_after
+             | .target_key_present_before=($target_before > 0) | .target_key_present_after=($target_after > 0)
+             | .password_ssh_tested=true | .password_ssh_accepted=$password_accepted
+             | .exact_key_login_tested=$key_login_tested | .exact_key_login_accepted=$key_login
+             | .key_ssh_authorized_after=$key_login | .candidate_created=$created
+             | .candidate_cleanup_attempted=$cleanup | .candidate_absent_after=$absent
+             | .candidate_identity_rechecked=$identity_rechecked | .write_state=$write_state
+             | .checks.target_identity_match=$identity | .checks.active_revision_match=$active
+             | .checks.deploy_lock_absent=$lock | .checks.deploy_like_process_count=$process_count
+             | .checks.home_safe=$home_safe | .checks.ssh_directory_safe=$ssh_safe
+             | .checks.authorized_keys_safe=$auth_safe | .checks.authorized_keys_ends_with_lf=$ends_lf
+             | .checks.authorized_keys_size=$auth_size | .checks.authorized_keys_nlink=$auth_nlink
+             | .checks.same_filesystem=$same_fs
+             | .production_write_execution=true
+             | .authorized_keys_write_count=(if $committed == true then 1 else 0 end)
+             | .remote_temp_file_write_count=(if $created then 1 else 0 end)
+             | .writes_committed=$committed' "$receipt" > "$receipt.tmp"
           mv "$receipt.tmp" "$receipt"
-          test "$status" = PASS_SSH_KEY_AUTHORIZATION_APPLY
+          printf 'CONTROL_STATUS=%s\n' "$status" >> "$GITHUB_ENV"
+
+      - name: Remove runner-local password transport and public-key files
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f -- "$RUNNER_TEMP/bootstrap-askpass" "$RUNNER_TEMP/production-key.pub" "$RUNNER_TEMP/normalized-key.pub" "$RUNNER_TEMP/known_hosts"
 
       - name: Validate sanitized SSH key authorization receipt
         if: ${{ always() }}
@@ -480,21 +711,48 @@ jobs:
         run: |
           set -euo pipefail
           receipt="$RUNNER_TEMP/backend-production-bootstrap-ssh-key-authorization.json"
-          jq -e '.schema_version == "backend.production_bootstrap_ssh_key_authorization.v1"
+          jq -e '.schema_version == "backend.production_bootstrap_ssh_key_authorization.v2"
             and (.target_user_sha256 | test("^[0-9a-f]{64}$"))
             and (.public_key_sha256 | test("^[0-9a-f]{64}$"))
             and (.authorized_keys_sha256_before | test("^[0-9a-f]{64}$"))
             and (.authorized_keys_sha256_after | test("^[0-9a-f]{64}$"))
             and .secret_retirement_required == true
+            and (.write_state | IN("NOT_ATTEMPTED", "ATTEMPTED_UNKNOWN", "NOT_COMMITTED", "COMMITTED"))
             and .ssh_config_write_count == 0 and .service_restart_count == 0 and .deploy_count == 0
             and .database_or_cms_write_count == 0 and .warm_or_publication_count == 0
             and .discoverability_write_count == 0' "$receipt" >/dev/null
           if [ "$MODE" = preflight ]; then
             jq -e '.status == "PASS_SSH_KEY_AUTHORIZATION_PREFLIGHT"
               and .password_ssh_tested == true and .password_ssh_accepted == true
-              and .target_key_present_before == false and .apply_eligible == true
+              and .exact_key_login_tested == true and .exact_key_login_accepted == false
+              and .target_key_present_before == false and .target_key_count_before == 0 and .apply_eligible == true
+              and .checks.target_identity_match == true and .checks.active_revision_match == true
+              and .checks.deploy_lock_absent == true and .checks.deploy_like_process_count == 0
+              and .checks.home_safe == true and .checks.ssh_directory_safe == true
+              and .checks.authorized_keys_safe == true and .checks.authorized_keys_ends_with_lf == true
+              and .checks.same_filesystem == true and .write_state == "NOT_ATTEMPTED"
               and .production_write_execution == false and .authorized_keys_write_count == 0
               and .remote_temp_file_write_count == 0 and .writes_committed == false' "$receipt" >/dev/null
+          else
+            jq -e '
+              if .status == "PASS_SSH_KEY_AUTHORIZATION_APPLY" then
+                .password_ssh_tested == true and .password_ssh_accepted == true
+                and .exact_key_login_tested == true and .exact_key_login_accepted == true
+                and .target_key_present_after == true and .target_key_count_after == 1
+                and .candidate_created == true and .candidate_identity_rechecked == true
+                and .candidate_absent_after == true and .write_state == "COMMITTED"
+                and .production_write_execution == true and .authorized_keys_write_count == 1
+                and .remote_temp_file_write_count == 1 and .writes_committed == true
+                and .checks.target_identity_match == true and .checks.active_revision_match == true
+                and .checks.deploy_lock_absent == true and .checks.deploy_like_process_count == 0
+                and .checks.home_safe == true and .checks.ssh_directory_safe == true
+                and .checks.authorized_keys_safe == true and .checks.authorized_keys_ends_with_lf == true
+                and .checks.same_filesystem == true
+              else
+                .status != "INITIALIZING"
+                and .password_ssh_tested == true
+                and (.writes_committed == true or .writes_committed == false or .writes_committed == null)
+              end' "$receipt" >/dev/null
           fi
 
       - name: Publish safe SSH key authorization summary
@@ -503,7 +761,7 @@ jobs:
         run: |
           set -euo pipefail
           receipt="$RUNNER_TEMP/backend-production-bootstrap-ssh-key-authorization.json"
-          jq '{schema_version,mode,status,failed_stage,run_id,run_attempt,control_plane_sha,active_revision,failed_bootstrap,target_user_sha256,public_key_sha256,public_key_fingerprint,authorized_keys_sha256_before,authorized_keys_sha256_after,authorized_keys_state,authorized_key_count_before,authorized_key_count_after,target_key_present_before,target_key_present_after,password_ssh_tested,password_ssh_accepted,key_ssh_authorized_after,candidate_created,candidate_cleanup_attempted,candidate_absent_after,apply_eligible,secret_retirement_required,production_write_execution,authorized_keys_write_count,remote_temp_file_write_count,ssh_config_write_count,service_restart_count,deploy_count,database_or_cms_write_count,warm_or_publication_count,discoverability_write_count,writes_committed,checks}' "$receipt" >> "$GITHUB_STEP_SUMMARY"
+          jq '{schema_version,mode,status,failed_stage,run_id,run_attempt,control_plane_sha,active_revision,failed_bootstrap,target_user_sha256,public_key_sha256,public_key_fingerprint,authorized_keys_sha256_before,authorized_keys_sha256_after,authorized_keys_state,authorized_key_count_before,authorized_key_count_after,target_key_present_before,target_key_present_after,target_key_count_before,target_key_count_after,password_ssh_tested,password_ssh_accepted,exact_key_login_tested,exact_key_login_accepted,key_ssh_authorized_after,candidate_created,candidate_cleanup_attempted,candidate_absent_after,candidate_identity_rechecked,apply_eligible,secret_retirement_required,write_state,production_write_execution,authorized_keys_write_count,remote_temp_file_write_count,ssh_config_write_count,service_restart_count,deploy_count,database_or_cms_write_count,warm_or_publication_count,discoverability_write_count,writes_committed,checks}' "$receipt" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload immutable SSH key authorization receipt
         if: ${{ always() }}
@@ -513,3 +771,17 @@ jobs:
           path: ${{ runner.temp }}/backend-production-bootstrap-ssh-key-authorization.json
           if-no-files-found: error
           retention-days: 14
+
+      - name: Enforce terminal SSH key authorization result
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/backend-production-bootstrap-ssh-key-authorization.json"
+          if [ "$MODE" = preflight ]; then
+            test "${CONTROL_STATUS:-}" = PASS_SSH_KEY_AUTHORIZATION_PREFLIGHT
+            jq -e '.status == "PASS_SSH_KEY_AUTHORIZATION_PREFLIGHT" and .apply_eligible == true and .writes_committed == false' "$receipt" >/dev/null
+          else
+            test "${CONTROL_STATUS:-}" = PASS_SSH_KEY_AUTHORIZATION_APPLY
+            jq -e '.status == "PASS_SSH_KEY_AUTHORIZATION_APPLY" and .exact_key_login_accepted == true and .writes_committed == true' "$receipt" >/dev/null
+          fi
