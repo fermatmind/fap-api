@@ -46,11 +46,11 @@ final class EnglishParityProgramScanner
     {
         $this->assertOptions($options);
         $repositories = [
-            'fap-web' => $this->scanRepository($options['fap_web_root'], $options['since']),
-            'fap-api' => $this->scanRepository($options['fap_api_root'], $options['since']),
+            'fap-web' => $this->scanRepository('fap-web', $options['fap_web_root'], $options['since']),
+            'fap-api' => $this->scanRepository('fap-api', $options['fap_api_root'], $options['since']),
         ];
         $tasks = $this->deduplicateTasks(array_merge($repositories['fap-web']['tasks'], $repositories['fap-api']['tasks']));
-        $control = $this->scanControlEvidence($options['fap_web_root']);
+        $control = $this->scanControlEvidence($options['fap_web_root'], $repositories['fap-web']['commit']);
         $live = $this->scanLive($options);
         $lanes = $this->buildLanes($tasks, $control);
 
@@ -141,9 +141,9 @@ final class EnglishParityProgramScanner
     }
 
     /** @return array{commit:string,candidate_commit_count:int,tasks:list<array<string,mixed>>} */
-    private function scanRepository(string $root, string $since): array
+    private function scanRepository(string $repository, string $root, string $since): array
     {
-        $commit = $this->git($root, ['rev-parse', 'origin/main']);
+        $commit = $this->git($root, ['rev-parse', 'HEAD']);
         $log = $this->git($root, ['log', '--since='.$since, '--pretty=format:%H%x09%aI%x09%s', 'origin/main']);
         $tasks = [];
         foreach (preg_split('/\R/', trim($log)) ?: [] as $line) {
@@ -151,7 +151,7 @@ final class EnglishParityProgramScanner
             if (count($parts) !== 3 || ! $this->isProgramSubject($parts[2])) {
                 continue;
             }
-            $tasks[] = $this->taskFromCommit(basename($root), $parts[0], $parts[1], $parts[2]);
+            $tasks[] = $this->taskFromCommit($repository, $parts[0], $parts[1], $parts[2]);
         }
 
         return ['commit' => $commit, 'candidate_commit_count' => count($tasks), 'tasks' => $tasks];
@@ -165,6 +165,16 @@ final class EnglishParityProgramScanner
         $process->mustRun();
 
         return trim($process->getOutput());
+    }
+
+    /** @param list<string> $arguments */
+    private function gitBytes(string $root, array $arguments): string
+    {
+        $process = new Process(array_merge(['git', '-C', $root], $arguments));
+        $process->setTimeout(30);
+        $process->mustRun();
+
+        return $process->getOutput();
     }
 
     private function isProgramSubject(string $subject): bool
@@ -267,12 +277,12 @@ final class EnglishParityProgramScanner
     }
 
     /** @return array{evidence:array<string,mixed>,drift:list<array<string,mixed>>} */
-    private function scanControlEvidence(string $webRoot): array
+    private function scanControlEvidence(string $webRoot, string $webCommit): array
     {
-        $masterPath = $webRoot.'/docs/seo/generated/en-content-parity-control-master.v2.json';
-        $inputsPath = $webRoot.'/docs/seo/generated/en-content-parity-control-inputs.v2.json';
-        $master = $this->readJson($masterPath);
-        $inputs = $this->readJson($inputsPath);
+        $masterPath = 'docs/seo/generated/en-content-parity-control-master.v2.json';
+        $inputsPath = 'docs/seo/generated/en-content-parity-control-inputs.v2.json';
+        [$master, $masterBytes] = $this->readJsonAtCommit($webRoot, $webCommit, $masterPath);
+        [$inputs, $inputsBytes] = $this->readJsonAtCommit($webRoot, $webCommit, $inputsPath);
         $masterLanes = [];
         foreach ((array) ($master['lanes'] ?? []) as $lane) {
             if (is_array($lane) && isset($lane['lane_id'])) {
@@ -281,11 +291,11 @@ final class EnglishParityProgramScanner
         }
 
         $laneManifests = [];
-        foreach ($this->recursiveFiles($webRoot.'/generated/en-content-parity', 'lane_manifest.json') as $path) {
-            $payload = $this->readJson($path);
+        foreach ($this->recursiveFilesAtCommit($webRoot, $webCommit, 'generated/en-content-parity', 'lane_manifest.json') as $path) {
+            [$payload] = $this->readJsonAtCommit($webRoot, $webCommit, $path);
             $lane = (string) ($payload['lane_id'] ?? $payload['lane'] ?? '');
             if ($lane !== '') {
-                $laneManifests[] = ['lane' => $lane, 'status' => $payload['status'] ?? null, 'package_sha256' => $payload['package_sha256'] ?? null, 'path' => $this->relative($webRoot, $path)];
+                $laneManifests[] = ['lane' => $lane, 'status' => $payload['status'] ?? null, 'package_sha256' => $payload['package_sha256'] ?? null, 'path' => $path];
             }
         }
 
@@ -345,8 +355,8 @@ final class EnglishParityProgramScanner
 
         return [
             'evidence' => [
-                'master' => ['path' => $this->relative($webRoot, $masterPath), 'sha256' => hash_file('sha256', $masterPath), 'lanes' => $masterLanes],
-                'inputs' => ['path' => $this->relative($webRoot, $inputsPath), 'sha256' => hash_file('sha256', $inputsPath), 'entry_count' => count($inputRows), 'lane_manifest_count' => count($registeredManifests), 'receipt_chain_count' => count($receiptChains)],
+                'master' => ['path' => $masterPath, 'sha256' => hash('sha256', $masterBytes), 'lanes' => $masterLanes],
+                'inputs' => ['path' => $inputsPath, 'sha256' => hash('sha256', $inputsBytes), 'entry_count' => count($inputRows), 'lane_manifest_count' => count($registeredManifests), 'receipt_chain_count' => count($receiptChains)],
                 'lane_manifests' => $laneManifests,
             ],
             'drift' => $drift,
@@ -358,7 +368,8 @@ final class EnglishParityProgramScanner
     {
         $siteBase = rtrim($options['site_base'], '/');
         $apiBase = rtrim($options['api_base'], '/');
-        $sitemapUrls = $this->sitemapUrls($siteBase.'/sitemap.xml', $options['timeout'], $options['max_urls']);
+        $sitemap = $this->sitemapUrls($siteBase.'/sitemap.xml', $options['timeout'], $options['max_urls']);
+        $sitemapUrls = $sitemap['urls'];
         $documents = array_values(array_unique(array_merge($sitemapUrls, [$siteBase.'/llms.txt', $siteBase.'/llms-full.txt'])));
         $pageResults = $this->fetchBatch($documents, $options['concurrency'], $options['timeout'], $options['max_urls']);
 
@@ -372,7 +383,7 @@ final class EnglishParityProgramScanner
         }
         $apiResults = $this->fetchBatch($apiEndpoints, $options['concurrency'], $options['timeout'], $options['max_urls']);
 
-        $findings = [];
+        $findings = $sitemap['findings'];
         $canonicalOwners = [];
         foreach ($pageResults as $result) {
             foreach ($result['findings'] as $finding) {
@@ -402,12 +413,13 @@ final class EnglishParityProgramScanner
         ];
     }
 
-    /** @return list<string> */
+    /** @return array{urls:list<string>,findings:list<array<string,mixed>>} */
     private function sitemapUrls(string $initialUrl, int $timeout, int $maxUrls): array
     {
         $pending = [$initialUrl];
         $seenMaps = [];
         $urls = [];
+        $findings = [];
         while ($pending !== [] && count($urls) < $maxUrls) {
             $url = array_shift($pending);
             if (isset($seenMaps[$url])) {
@@ -418,12 +430,34 @@ final class EnglishParityProgramScanner
             if (! $response->successful() || strlen($response->body()) > self::BODY_LIMIT) {
                 $response->close();
 
+                if ($url === $initialUrl) {
+                    throw new RuntimeException('root_sitemap_unavailable');
+                }
+
+                continue;
+            }
+            $xml = @simplexml_load_string($response->body(), options: LIBXML_NONET | LIBXML_NOERROR | LIBXML_NOWARNING);
+            if ($xml === false) {
+                $response->close();
+                if ($url === $initialUrl) {
+                    throw new RuntimeException('root_sitemap_malformed');
+                }
+
                 continue;
             }
             preg_match_all('/<loc>\s*([^<]+)\s*<\/loc>/i', $response->body(), $matches);
+            if ($url === $initialUrl && ($matches[1] ?? []) === []) {
+                $response->close();
+                throw new RuntimeException('root_sitemap_empty');
+            }
             foreach ($matches[1] ?? [] as $location) {
                 $location = html_entity_decode(trim($location), ENT_QUOTES | ENT_XML1, 'UTF-8');
                 if (! $this->allowedUrl($location)) {
+                    continue;
+                }
+                if ($this->isPrivateUrl($location)) {
+                    $findings[] = ['surface' => 'sitemap', 'url_hash' => hash('sha256', $location), 'code' => 'private_path_in_public_inventory_not_fetched'];
+
                     continue;
                 }
                 if (str_ends_with((string) parse_url($location, PHP_URL_PATH), '.xml')) {
@@ -440,7 +474,7 @@ final class EnglishParityProgramScanner
         $urls = array_keys($urls);
         sort($urls, SORT_STRING);
 
-        return $urls;
+        return ['urls' => $urls, 'findings' => $findings];
     }
 
     /** @return list<array<string,mixed>> */
@@ -463,7 +497,7 @@ final class EnglishParityProgramScanner
                 if ($response instanceof Response && ($response->status() === 429 || $response->serverError())) {
                     $response->close();
                     try {
-                        $response = $this->request($url, $timeout);
+                        $response = $this->request($url, $timeout, false);
                     } catch (\Throwable $exception) {
                         $response = null;
                     }
@@ -483,10 +517,10 @@ final class EnglishParityProgramScanner
         return $results;
     }
 
-    private function request(string $url, int $timeout): Response
+    private function request(string $url, int $timeout, bool $allowRetry = true): Response
     {
         $response = Http::withOptions($this->boundedHttpOptions())->timeout($timeout)->accept('*/*')->get($url);
-        if (($response->status() === 429 || $response->serverError())) {
+        if ($allowRetry && ($response->status() === 429 || $response->serverError())) {
             $retryAfter = min(2, max(0, (int) $response->header('Retry-After')));
             $response->close();
             if ($retryAfter > 0) {
@@ -524,7 +558,7 @@ final class EnglishParityProgramScanner
         $hreflangCount = 0;
         $identityCount = null;
         if ($body !== '' && str_contains($contentType, 'html')) {
-            [$canonical, $htmlLang, $hreflangCount, $visibleText] = $this->parseHtml($body);
+            [$canonical, $htmlLang, $hreflangCount, $visibleText, $robotsNoindex] = $this->parseHtml($body);
             if ($canonical === null) {
                 $findings[] = 'canonical_missing';
             }
@@ -541,7 +575,7 @@ final class EnglishParityProgramScanner
             if (str_starts_with($path, '/en') && $this->cjkRatio($visibleText) > 0.02) {
                 $findings[] = 'english_visible_text_cjk_ratio_high';
             }
-            if (preg_match('/<meta[^>]+name=["\']robots["\'][^>]+content=["\'][^"\']*noindex/i', $body) === 1 && $this->isPublicContentPath($path)) {
+            if ($robotsNoindex && $this->isPublicContentPath($path)) {
                 $findings[] = 'public_sitemap_page_noindex';
             }
         } elseif ($body !== '' && (str_contains($contentType, 'json') || str_starts_with(ltrim($body), '{') || str_starts_with(ltrim($body), '['))) {
@@ -578,7 +612,7 @@ final class EnglishParityProgramScanner
         ];
     }
 
-    /** @return array{0:?string,1:?string,2:int,3:string} */
+    /** @return array{0:?string,1:?string,2:int,3:string,4:bool} */
     private function parseHtml(string $html): array
     {
         $document = new DOMDocument;
@@ -590,6 +624,13 @@ final class EnglishParityProgramScanner
         $canonicalNode = $xpath->query('//link[contains(concat(" ", translate(@rel, "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"), " "), " canonical ")]')->item(0);
         $htmlNode = $xpath->query('/html')->item(0);
         $hreflangCount = $xpath->query('//link[@hreflang]')->length;
+        $robotsNoindex = false;
+        foreach ($xpath->query('//meta[translate(@name, "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz")="robots"]') as $node) {
+            if (str_contains(strtolower((string) $node->attributes?->getNamedItem('content')?->nodeValue), 'noindex')) {
+                $robotsNoindex = true;
+                break;
+            }
+        }
         foreach ($xpath->query('//script|//style|//svg|//noscript') as $node) {
             $node->parentNode?->removeChild($node);
         }
@@ -601,6 +642,7 @@ final class EnglishParityProgramScanner
             $htmlNode?->attributes?->getNamedItem('lang')?->nodeValue,
             $hreflangCount,
             trim($visible),
+            $robotsNoindex,
         ];
     }
 
@@ -638,6 +680,18 @@ final class EnglishParityProgramScanner
         return parse_url($url, PHP_URL_SCHEME) === 'https' && in_array(strtolower((string) parse_url($url, PHP_URL_HOST)), self::ALLOWED_HOSTS, true);
     }
 
+    private function isPrivateUrl(string $url): bool
+    {
+        $normalized = strtolower($url);
+        foreach (self::PRIVATE_PATH_MARKERS as $marker) {
+            if (str_contains($normalized, $marker)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /** @return array<string,mixed> */
     private function boundedHttpOptions(): array
     {
@@ -673,12 +727,7 @@ final class EnglishParityProgramScanner
             $laneTasks = array_values(array_filter($tasks, static fn (array $task): bool => $task['lane'] === $laneId));
             $manifestStatuses = array_values(array_filter($manifests, static fn (array $manifest): bool => str_starts_with((string) $manifest['lane'], $laneId)));
             $masterStatus = $masterLanes[$laneId]['status'] ?? 'not_started';
-            $bestStatus = $masterStatus;
-            foreach ($manifestStatuses as $manifest) {
-                if ($this->stateRank((string) $manifest['status']) > $this->stateRank((string) $bestStatus)) {
-                    $bestStatus = $manifest['status'];
-                }
-            }
+            $bestStatus = $this->aggregateLaneStatus($laneId, (string) $masterStatus, $manifestStatuses, (array) ($masterLanes[$laneId]['subscopes'] ?? []));
             if ($laneId === 'W6') {
                 $bestStatus = 'deferred';
             }
@@ -734,6 +783,42 @@ final class EnglishParityProgramScanner
         return $rank === false ? -1 : $rank;
     }
 
+    /** @param list<array<string,mixed>> $manifests @param list<array<string,mixed>> $masterSubscopes */
+    private function aggregateLaneStatus(string $laneId, string $masterStatus, array $manifests, array $masterSubscopes): string
+    {
+        if ($laneId !== 'W3') {
+            $status = $masterStatus;
+            foreach ($manifests as $manifest) {
+                if ($this->stateRank((string) $manifest['status']) > $this->stateRank($status)) {
+                    $status = (string) $manifest['status'];
+                }
+            }
+
+            return $status;
+        }
+
+        $required = ['articles' => null, 'career_guides' => null];
+        foreach ($masterSubscopes as $subscope) {
+            $id = strtolower((string) ($subscope['id'] ?? ''));
+            $key = str_contains($id, 'article') ? 'articles' : (str_contains($id, 'career') ? 'career_guides' : null);
+            if ($key !== null) {
+                $required[$key] = (string) ($subscope['status'] ?? $masterStatus);
+            }
+        }
+        foreach ($manifests as $manifest) {
+            $id = strtolower((string) ($manifest['lane'] ?? ''));
+            $key = str_contains($id, 'article') ? 'articles' : (str_contains($id, 'career') ? 'career_guides' : null);
+            if ($key !== null && ($required[$key] === null || $this->stateRank((string) $manifest['status']) > $this->stateRank((string) $required[$key]))) {
+                $required[$key] = (string) $manifest['status'];
+            }
+        }
+
+        $statuses = array_map(static fn (?string $status): string => $status ?? $masterStatus, $required);
+        usort($statuses, fn (string $a, string $b): int => $this->stateRank($a) <=> $this->stateRank($b));
+
+        return $statuses[0];
+    }
+
     /** @return list<array<string,mixed>> */
     private function followups(array $lanes, array $drift, array $findings): array
     {
@@ -753,30 +838,29 @@ final class EnglishParityProgramScanner
         return $followups;
     }
 
-    /** @return array<string,mixed> */
-    private function readJson(string $path): array
+    /** @return array{0:array<string,mixed>,1:string} */
+    private function readJsonAtCommit(string $root, string $commit, string $path): array
     {
-        if (! is_file($path)) {
-            return [];
+        $bytes = $this->gitBytes($root, ['show', $commit.':'.$path]);
+        try {
+            $decoded = json_decode($bytes, true, flags: JSON_THROW_ON_ERROR);
+        } catch (\JsonException $exception) {
+            throw new RuntimeException('invalid_control_json:'.$path, previous: $exception);
         }
-        $decoded = json_decode((string) file_get_contents($path), true);
+        if (! is_array($decoded)) {
+            throw new RuntimeException('invalid_control_json_shape:'.$path);
+        }
 
-        return is_array($decoded) ? $decoded : [];
+        return [$decoded, $bytes];
     }
 
     /** @return list<string> */
-    private function recursiveFiles(string $root, string $filename): array
+    private function recursiveFilesAtCommit(string $root, string $commit, string $prefix, string $filename): array
     {
-        if (! is_dir($root)) {
-            return [];
-        }
-        $files = [];
-        $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($root, \FilesystemIterator::SKIP_DOTS));
-        foreach ($iterator as $file) {
-            if ($file->isFile() && $file->getFilename() === $filename && ! $file->isLink()) {
-                $files[] = $file->getPathname();
-            }
-        }
+        $files = array_values(array_filter(
+            preg_split('/\R/', $this->git($root, ['ls-tree', '-r', '--name-only', $commit, '--', $prefix])) ?: [],
+            static fn (string $path): bool => basename($path) === $filename,
+        ));
         sort($files, SORT_STRING);
 
         return $files;
@@ -798,10 +882,5 @@ final class EnglishParityProgramScanner
         $sort($value);
 
         return (string) json_encode($value, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-    }
-
-    private function relative(string $root, string $path): string
-    {
-        return ltrim(str_replace(rtrim($root, '/'), '', $path), '/');
     }
 }
