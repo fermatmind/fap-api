@@ -414,6 +414,9 @@ final class BigFiveCanonicalTruthFixturesTest extends TestCase
             foreach ($value as $key => $item) {
                 $normalized[(string) $key] = $this->sanitizeForFixture($item);
             }
+            // Operational processing timings are intentionally dynamic and are
+            // covered by their dedicated response-contract tests.
+            unset($normalized['processing_timing_v1']);
             // Runtime timing metrics can fluctuate by machine load and second-level scheduling.
             // Keep canonical fixtures stable by treating these as non-contractual.
             if (array_key_exists('time_per_item_avg', $normalized)) {
