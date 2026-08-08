@@ -48783,3 +48783,55 @@ prs:
     deploy_allowed: false
     content_authority: exact backend W1 result authority with immutable external fap-web W9 evidence
     repository_rule_impact: replaces producer-self-acceptance with external W9 provenance while retaining package immutability and all inactive/no-discoverability boundaries
+
+  - id: DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-02
+    repo: fap-api
+    base: main
+    branch: codex/detail-ready-1046-rollout-apply-preflight-02
+    title: "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-02 — Protect AA canary and 1046 zero-write production preflight"
+    status: local_validation_passed
+    depends_on: [DETAIL_READY_1046_DELTA_AUTHORITY_REPAIR-01, DETAIL_READY_1046_ROLLOUT_NO_AUDIT_DRY_RUN-01]
+    train_scope: career_detail_ready_1046_rollout_zero_write_production_preflight
+    risk_level: p1_career_runtime_publication_gate
+    scope:
+      - Add one protected manual workflow and stdin-streamed runner for exact-SHA-bound zero-write production preflight only.
+      - Recheck the 30 plus 1016 manifest, AA projection/truth/review authority, no-audit canonical rollout dry-run, public job-index versus directory state, and current sitemap/AA surfaces.
+      - Keep legacy canonical rollout authority separate from Search Entry review/eligibility authority and reject cross-pipeline approval inference.
+      - Capture a bounded memory snapshot and conservative batch recommendation without running a full rollout or warm.
+      - Produce repository evidence, documentation, and a focused workflow contract test without dispatching the production workflow.
+    allowed_paths:
+      - .github/workflows/career-1046-rollout-zero-write-preflight.yml
+      - backend/scripts/career/career_1046_rollout_preflight.sh
+      - backend/tests/Sre/Career1046RolloutZeroWritePreflightWorkflowTest.php
+      - backend/docs/seo/detail-ready-1046-rollout-apply-preflight-02.md
+      - backend/docs/seo/generated/detail-ready-1046-rollout-apply-preflight-02.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Dispatch any production workflow or run production apply, database/CMS mutation, publication, warm, capacity change, deploy, sitemap/llms mutation, Search Channel action, or URL submission.
+      - Treat Search Entry review as canonical publication approval, remove existing manual holds/conflict exclusions, generate an apply approval phrase, read raw logs, or access production user data.
+    validation:
+      - cd backend && php artisan test tests/Sre/Career1046RolloutZeroWritePreflightWorkflowTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Sre/Career1046RolloutZeroWritePreflightWorkflowTest.php
+      - bash -n backend/scripts/career/career_1046_rollout_preflight.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool backend/docs/seo/generated/detail-ready-1046-rollout-apply-preflight-02.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - exact changed-file scope validation
+      - git diff --check
+      - git diff --cached --check
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: existing backend release ledger, runtime projection, canonical truth, and review gates
+    repository_rule_impact: adds a protected zero-write evidence control while preserving backend authority and all production/discoverability write boundaries

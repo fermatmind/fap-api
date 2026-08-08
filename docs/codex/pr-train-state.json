@@ -103896,5 +103896,66 @@
       }
     ],
     "updated_at": "2026-08-03T02:01:29+08:00"
+  },
+  "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-02": {
+    "id": "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-02",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/detail-ready-1046-rollout-apply-preflight-02",
+    "title": "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-02 — Protect AA canary and 1046 zero-write production preflight",
+    "depends_on": [
+      "DETAIL_READY_1046_DELTA_AUTHORITY_REPAIR-01",
+      "DETAIL_READY_1046_ROLLOUT_NO_AUDIT_DRY_RUN-01"
+    ],
+    "status": "local_validation_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "User explicitly authorized code, tests, PR, and zero-write evidence control for DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-02; production dispatch and every write, publish, warm, capacity, deploy, and discoverability action remain forbidden."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "DETAIL_READY_1046_DELTA_AUTHORITY_REPAIR-01 merged as 6716bf50c3cd22691d4609434f8a2b12442b2c8a and DETAIL_READY_1046_ROLLOUT_NO_AUDIT_DRY_RUN-01 merged as f0dc07d19c4dee1cebb537c5bc98cef12f6c2798."
+      },
+      "scope": {
+        "status": "passed",
+        "evidence": "Changed-file scope is limited to the seven manifest-allowed paths; unrelated user-owned untracked research/gap-analysis directories remain untouched."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "Focused workflow contract passed 3 tests / 73 assertions; scoped Pint, bash syntax, shellcheck, actionlint, YAML/JSON parsing, manifest uniqueness, and git diff checks passed."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "production_workflow_dispatched": false,
+    "transitions": [
+      {
+        "at": "2026-08-08T09:59:43+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started from main 2214a38769f1a72e3183ba27e84d7f9f4e4b9642 after verifying exact dependencies and public read-only baseline. No production workflow was dispatched and no production apply, DB/CMS mutation, publication, warm, capacity change, deploy, sitemap/llms change, Search Channel action, or URL submission occurred."
+      },
+      {
+        "at": "2026-08-08T10:05:21+08:00",
+        "status": "local_validation_passed",
+        "note": "Focused workflow contract passed 3 tests / 73 assertions. Scoped Pint, bash syntax, shellcheck, actionlint, YAML/JSON parsing, manifest uniqueness, and diff checks passed. Public read-only baseline remains 1046 job-index versus 30 directory items per locale, sitemap 613/60 with AA absent, and AA SEO authority 500/500; no protected production workflow was dispatched and no write-capable action occurred."
+      }
+    ],
+    "updated_at": "2026-08-08T10:05:21+08:00"
   }
 }

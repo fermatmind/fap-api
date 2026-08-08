@@ -1,0 +1,201 @@
+name: Career 1046 Rollout Zero Write Preflight
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_control_plane_sha:
+        description: Exact latest main SHA containing this zero-write control plane
+        required: true
+        type: string
+      expected_release_sha:
+        description: Exact active production backend SHA
+        required: true
+        type: string
+      expected_release_name:
+        description: Exact active production release directory name
+        required: true
+        type: string
+      expected_manifest_sha256:
+        description: Exact detail-ready 1046 rollout manifest SHA-256
+        required: true
+        default: b570ec0cdda65278aa543431886b3529d072de8d67a8e79f1cafbb1c4c8dfc0e
+        type: string
+      operator_approval_phrase:
+        description: Exact SHA-bound approval for this zero-write preflight only
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.repository }}-production
+  cancel-in-progress: false
+
+jobs:
+  eligibility:
+    name: Validate latest main and zero-write authority
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      control_plane_sha: ${{ steps.validate.outputs.control_plane_sha }}
+      release_sha: ${{ steps.validate.outputs.release_sha }}
+      release_name: ${{ steps.validate.outputs.release_name }}
+      manifest_sha256: ${{ steps.validate.outputs.manifest_sha256 }}
+    steps:
+      - name: Checkout exact control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 0
+
+      - name: Validate exact latest-main and read-only approval
+        id: validate
+        shell: bash
+        env:
+          EXPECTED_CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+          EXPECTED_RELEASE_SHA: ${{ inputs.expected_release_sha }}
+          EXPECTED_RELEASE_NAME: ${{ inputs.expected_release_name }}
+          EXPECTED_MANIFEST_SHA256: ${{ inputs.expected_manifest_sha256 }}
+          OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = "refs/heads/main"
+          [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_RELEASE_NAME" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]
+          [[ "$EXPECTED_MANIFEST_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          expected="I explicitly approve zero-write Career 1046 rollout preflight for control plane SHA ${EXPECTED_CONTROL_PLANE_SHA} release SHA ${EXPECTED_RELEASE_SHA} release ${EXPECTED_RELEASE_NAME} manifest SHA ${EXPECTED_MANIFEST_SHA256}."
+          test "$OPERATOR_APPROVAL_PHRASE" = "$expected"
+
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          git cat-file -e "${EXPECTED_RELEASE_SHA}^{commit}"
+          git merge-base --is-ancestor "$EXPECTED_RELEASE_SHA" origin/main
+          test "$(sha256sum backend/docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json | awk '{print $1}')" = "$EXPECTED_MANIFEST_SHA256"
+
+          {
+            echo "control_plane_sha=$EXPECTED_CONTROL_PLANE_SHA"
+            echo "release_sha=$EXPECTED_RELEASE_SHA"
+            echo "release_name=$EXPECTED_RELEASE_NAME"
+            echo "manifest_sha256=$EXPECTED_MANIFEST_SHA256"
+          } >> "$GITHUB_OUTPUT"
+
+  preflight:
+    name: Capture AA and 1046 zero-write production evidence
+    needs: eligibility
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: production
+    env:
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+      HEALTHCHECK_URL: ${{ secrets.PRODUCTION_HEALTHCHECK_URL }}
+      EXPECTED_CONTROL_PLANE_SHA: ${{ needs.eligibility.outputs.control_plane_sha }}
+      EXPECTED_RELEASE_SHA: ${{ needs.eligibility.outputs.release_sha }}
+      EXPECTED_RELEASE_NAME: ${{ needs.eligibility.outputs.release_name }}
+      EXPECTED_MANIFEST_SHA256: ${{ needs.eligibility.outputs.manifest_sha256 }}
+    steps:
+      - name: Checkout exact control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ needs.eligibility.outputs.control_plane_sha }}
+          fetch-depth: 0
+
+      - name: Validate protected production topology
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST RETIRED_DEPLOY_HOST DEPLOY_PATH HEALTHCHECK_URL; do
+            test -n "${!name:-}"
+          done
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          test "$DEPLOY_PORT" -ge 1
+          test "$DEPLOY_PORT" -le 65535
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$RETIRED_DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          [[ "$DEPLOY_PATH" != *".."* ]]
+          [[ "$HEALTHCHECK_URL" =~ ^https://[A-Za-z0-9.-]+/api/healthz$ ]]
+          echo "Protected production topology validation passed without disclosing values."
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Run protected zero-write production preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          public_api_base_url="${HEALTHCHECK_URL%/api/healthz}"
+          public_web_base_url="https://fermatmind.com"
+          [[ "$public_api_base_url" =~ ^https://[A-Za-z0-9.-]+$ ]]
+
+          printf -v q_deploy_path '%q' "$DEPLOY_PATH"
+          printf -v q_expected_release_sha '%q' "$EXPECTED_RELEASE_SHA"
+          printf -v q_expected_release_name '%q' "$EXPECTED_RELEASE_NAME"
+          printf -v q_expected_manifest_sha256 '%q' "$EXPECTED_MANIFEST_SHA256"
+          printf -v q_public_api_base_url '%q' "$public_api_base_url"
+          printf -v q_public_web_base_url '%q' "$public_web_base_url"
+
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -o ServerAliveInterval=20 -o ServerAliveCountMax=30 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "DEPLOY_PATH=$q_deploy_path EXPECTED_RELEASE_SHA=$q_expected_release_sha EXPECTED_RELEASE_NAME=$q_expected_release_name EXPECTED_MANIFEST_SHA256=$q_expected_manifest_sha256 PUBLIC_API_BASE_URL=$q_public_api_base_url PUBLIC_WEB_BASE_URL=$q_public_web_base_url bash -s" \
+            < backend/scripts/career/career_1046_rollout_preflight.sh \
+            > artifacts/career-1046-rollout-zero-write-preflight.json
+
+          jq -e \
+            --arg release "$EXPECTED_RELEASE_SHA" \
+            --arg release_name "$EXPECTED_RELEASE_NAME" \
+            --arg manifest "$EXPECTED_MANIFEST_SHA256" \
+            '.schema_version == "career.1046_rollout.zero_write_preflight.v1"
+             and (.status == "PASS_ZERO_WRITE_PREFLIGHT_CAPTURED" or .status == "HOLD_ZERO_WRITE_PREFLIGHT_INCOMPLETE")
+             and .release.sha == $release
+             and .release.name == $release_name
+             and .authority_manifest.sha256 == $manifest
+             and .authority_manifest.apply_allowed == false
+             and .authority_manifest.rollout_apply_allowed == false
+             and .negative_guarantees.production_apply == false
+             and .negative_guarantees.database_write == false
+             and .negative_guarantees.cms_write == false
+             and .negative_guarantees.publication == false
+             and .negative_guarantees.warm == false
+             and .negative_guarantees.deploy == false
+             and .negative_guarantees.sitemap_write == false
+             and .negative_guarantees.llms_write == false
+             and .negative_guarantees.search_channel_action == false
+             and .negative_guarantees.remote_file_write == false
+             and .apply_authorized == false
+             and .writes_committed == false' \
+            artifacts/career-1046-rollout-zero-write-preflight.json >/dev/null
+
+      - name: Upload immutable zero-write evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: career-1046-rollout-zero-write-preflight-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/career-1046-rollout-zero-write-preflight.json
+          if-no-files-found: error
+          retention-days: 30
