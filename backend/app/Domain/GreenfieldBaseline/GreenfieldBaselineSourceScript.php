@@ -105,7 +105,9 @@ try {
 
         $exists = $pdo->prepare('SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = ? AND table_name = ?');
         $exists->execute([$database, $table]);
-        if ((int) $exists->fetchColumn() !== 1) {
+        $tableExists = (int) $exists->fetchColumn() === 1;
+        $exists->closeCursor();
+        if (! $tableExists) {
             if (($definition['required'] ?? true) === true) {
                 $fail('REQUIRED_SOURCE_TABLE_MISSING');
             }
@@ -116,6 +118,7 @@ try {
         $columnsStatement = $pdo->prepare('SELECT column_name FROM information_schema.columns WHERE table_schema = ? AND table_name = ? ORDER BY ordinal_position');
         $columnsStatement->execute([$database, $table]);
         $columns = $columnsStatement->fetchAll(PDO::FETCH_COLUMN);
+        $columnsStatement->closeCursor();
         if (! is_array($columns) || $columns === []) {
             $fail('SOURCE_TABLE_COLUMNS_MISSING');
         }
@@ -161,6 +164,7 @@ try {
             $emit(['type' => 'row', 'dataset' => $name, 'row' => $row]);
             $count++;
         }
+        $statement->closeCursor();
         $counts[$name] = $count;
     }
 
@@ -195,7 +199,11 @@ try {
     ]);
 } catch (Throwable $throwable) {
     if (isset($pdo) && $pdo instanceof PDO && $pdo->inTransaction()) {
-        $pdo->rollBack();
+        try {
+            $pdo->rollBack();
+        } catch (Throwable) {
+            // The read-only transaction is rolled back when the connection closes.
+        }
     }
     $fail('GREENFIELD_SOURCE_EXPORT_FAILED');
 }

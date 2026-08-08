@@ -45,6 +45,9 @@ final class GreenfieldBaselineTransferTest extends TestCase
         foreach ([
             'SET TRANSACTION READ ONLY',
             'START TRANSACTION WITH CONSISTENT SNAPSHOT',
+            '$exists->closeCursor()',
+            '$columnsStatement->closeCursor()',
+            '$statement->closeCursor()',
             '$pdo->rollBack()',
             "'writes_committed' => false",
             "'type' => 'row'",
@@ -64,6 +67,10 @@ final class GreenfieldBaselineTransferTest extends TestCase
         $this->assertStringNotContainsString("'password' =>", $source);
         $this->assertStringNotContainsString("'host' =>", $source);
         $this->assertStringNotContainsString("'database' =>", $source);
+        $this->assertLessThan(
+            strpos($source, '$pdo->rollBack()'),
+            strpos($source, '$statement->closeCursor()'),
+        );
     }
 
     #[Test]
