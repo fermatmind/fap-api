@@ -77,6 +77,29 @@ final class GreenfieldBaselineTransferTest extends TestCase
     }
 
     #[Test]
+    public function occupation_export_is_limited_to_the_complete_production_asset_cohort(): void
+    {
+        $occupations = collect(GreenfieldBaselineCatalog::datasets())
+            ->firstWhere('name', 'occupations');
+        $where = (string) ($occupations['where'] ?? '');
+
+        foreach ([
+            'career_job_ai_impact_assets',
+            'career_job_salary_assets',
+            'career_job_page_assembly_assets',
+        ] as $requiredAssetTable) {
+            $this->assertStringContainsString(
+                "SELECT occupation_id FROM {$requiredAssetTable} WHERE status = 'production_imported'",
+                $where,
+            );
+        }
+
+        $this->assertSame(2, substr_count($where, 'AND id IN'));
+        $this->assertStringNotContainsString(' UNION ', $where);
+        $this->assertStringNotContainsString('career_job_display_assets', $where);
+    }
+
+    #[Test]
     public function same_stream_builds_the_same_package_and_keeps_only_allowlisted_rows(): void
     {
         [$stream, $projectionSha] = $this->writeFixtureStream();
