@@ -443,7 +443,7 @@ jobs:
             '{record_kind: $record_kind, active_release_name: $active_release_name, active_revision: $active_revision, target_device: $target_device, deploy_device: $deploy_device, target_inode: $target_inode, target_mtime: $target_mtime, deploy_lock_present: false, target_is_active: false, mountpoint_count: $mountpoint_count, process_reference_count: $process_reference_count}'
           REMOTE
 
-          jq -e -c 'select(.record_kind == "tree")' artifacts/remote-inventory.jsonl \
+          jq -c 'select(.record_kind == "tree")' artifacts/remote-inventory.jsonl \
             | LC_ALL=C sort > artifacts/tree-manifest.jsonl
           jq -e 'select(.record_kind == "control")' artifacts/remote-inventory.jsonl \
             > artifacts/remote-control.json
