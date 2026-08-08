@@ -1,0 +1,132 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api.fermatmind.com/schemas/english-content-parity-program-ledger.v1.schema.json",
+  "title": "FermatMind English Content Parity Program Ledger V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "generated_at",
+    "scan_window",
+    "source_repositories",
+    "method",
+    "summary",
+    "lanes",
+    "tasks",
+    "control_drift",
+    "control_evidence",
+    "live_scan",
+    "superseded_workflows",
+    "evidence_precedence",
+    "followups",
+    "negative_guarantees"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "const": "english-content-parity-program-ledger.v1" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "scan_window": {
+      "type": "object",
+      "required": ["since", "until"],
+      "properties": {
+        "since": { "type": "string" },
+        "until": { "type": "string", "format": "date-time" }
+      },
+      "additionalProperties": false
+    },
+    "source_repositories": {
+      "type": "object",
+      "required": ["fap-web", "fap-api"],
+      "properties": {
+        "fap-web": { "$ref": "#/definitions/repository" },
+        "fap-api": { "$ref": "#/definitions/repository" }
+      },
+      "additionalProperties": false
+    },
+    "method": { "type": "object" },
+    "summary": {
+      "type": "object",
+      "required": ["candidate_commit_count", "deduplicated_task_count", "explicit_pull_request_count", "sitemap_url_count", "live_finding_count", "control_drift_count"],
+      "properties": {
+        "candidate_commit_count": { "type": "integer", "minimum": 0 },
+        "deduplicated_task_count": { "type": "integer", "minimum": 0 },
+        "explicit_pull_request_count": { "type": "integer", "minimum": 0 },
+        "task_dispositions": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } },
+        "sitemap_url_count": { "type": "integer", "minimum": 0 },
+        "live_finding_count": { "type": "integer", "minimum": 0 },
+        "control_drift_count": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "lanes": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "items": { "$ref": "#/definitions/lane" }
+    },
+    "tasks": { "type": "array", "items": { "$ref": "#/definitions/task" } },
+    "control_drift": { "type": "array", "items": { "type": "object" } },
+    "control_evidence": { "type": "object" },
+    "live_scan": { "type": "object" },
+    "superseded_workflows": { "type": "array", "items": { "type": "string" } },
+    "evidence_precedence": { "type": "array", "minItems": 6, "items": { "type": "string" } },
+    "followups": { "type": "array", "items": { "type": "object" } },
+    "negative_guarantees": {
+      "type": "object",
+      "additionalProperties": { "const": false }
+    }
+  },
+  "definitions": {
+    "repository": {
+      "type": "object",
+      "required": ["path", "commit"],
+      "properties": {
+        "path": { "type": "string" },
+        "commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" }
+      },
+      "additionalProperties": false
+    },
+    "lane": {
+      "type": "object",
+      "required": ["lane_id", "name", "lane_kind", "task_count", "repository_state", "control_state", "asset_ready", "qa_ready", "promotion_ready", "live_verified", "control_synced", "remaining_work", "confidence"],
+      "properties": {
+        "lane_id": { "enum": ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8", "W9"] },
+        "name": { "type": "string" },
+        "lane_kind": { "enum": ["producer", "qa_capability"] },
+        "initial_scope": { "type": ["object", "array"] },
+        "operator_disposition": { "enum": ["active", "deferred"] },
+        "task_count": { "type": "integer", "minimum": 0 },
+        "task_ids": { "type": "array", "items": { "type": "string" } },
+        "repository_state": { "type": "string" },
+        "control_state": { "type": "string" },
+        "asset_ready": { "type": "boolean" },
+        "qa_ready": { "type": "boolean" },
+        "promotion_ready": { "type": "boolean" },
+        "live_verified": { "type": "boolean" },
+        "control_synced": { "type": "boolean" },
+        "package_evidence": { "type": "array" },
+        "remaining_work": { "type": "array", "items": { "type": "string" } },
+        "confidence": { "enum": ["low", "medium", "high"] }
+      },
+      "additionalProperties": false
+    },
+    "task": {
+      "type": "object",
+      "required": ["repository", "commit", "title", "lane", "category", "phase", "disposition", "merged_at", "evidence_refs"],
+      "properties": {
+        "repository": { "enum": ["fap-web", "fap-api"] },
+        "commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "pull_request_number": { "type": ["string", "null"], "pattern": "^[0-9]+$" },
+        "task_id": { "type": ["string", "null"] },
+        "title": { "type": "string" },
+        "lane": { "type": "string" },
+        "category": { "type": "string" },
+        "phase": { "const": "merged" },
+        "disposition": { "type": "string" },
+        "merged_at": { "type": "string" },
+        "evidence_refs": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    }
+  }
+}

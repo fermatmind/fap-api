@@ -16,6 +16,11 @@
 
 ## 0) 快速导航（Start Here）
 
+- English content parity program（W1-W9 复盘与可重复扫描）
+  - `backend/docs/seo/english-content-parity-program-retrospective-2026-08-08.md`
+  - `backend/docs/seo/generated/english-content-parity-program-ledger.v1.json`
+  - `cd backend && php artisan en-parity:scan-program --help`
+
 - Stage 1（V0.2-A）：中台最小骨架（规范/口径/发布/合规基础）
   - docs/03-stage1/README.md
 
