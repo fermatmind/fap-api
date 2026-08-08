@@ -200,6 +200,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_english_parity_program_scanner_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/ScanEnglishContentParityProgram.php',
+            'backend/app/Services/EnglishParity/EnglishParityProgramScanner.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_big_five_english_draft_inventory_files(): void
     {
         $allowed = [
@@ -7108,6 +7122,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         );
 
         foreach ($changed as $file) {
+            if ($this->isEnglishParityProgramScannerFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveReportUnlockCommerceFile($file)) {
                 continue;
             }
@@ -12909,6 +12927,14 @@ DIFF;
     {
         return $file === 'backend/app/Console/Commands/RefreshAnalyticsProviderFreshnessCommand.php'
             || str_starts_with($file, 'backend/app/Services/Analytics/ProviderFreshness/');
+    }
+
+    private function isEnglishParityProgramScannerFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/ScanEnglishContentParityProgram.php',
+            'backend/app/Services/EnglishParity/EnglishParityProgramScanner.php',
+        ], true);
     }
 
     private function isSeo10kArticleRecoveryBatchFile(string $file): bool
