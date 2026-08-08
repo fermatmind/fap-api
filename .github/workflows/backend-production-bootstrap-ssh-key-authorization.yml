@@ -1,0 +1,513 @@
+name: Backend Production Bootstrap SSH Key Authorization
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Strict zero-write preflight or separately approved apply
+        required: true
+        type: choice
+        options:
+          - preflight
+          - apply
+      expected_control_plane_sha:
+        description: Exact latest main SHA containing this control
+        required: true
+        type: string
+      expected_active_revision:
+        description: Exact active backend production revision
+        required: true
+        type: string
+      failed_bootstrap_run_id:
+        description: Failed v2 root-bootstrap preflight run ID
+        required: true
+        type: string
+      failed_bootstrap_run_attempt:
+        description: Failed v2 root-bootstrap preflight run attempt
+        required: true
+        type: string
+      failed_bootstrap_receipt_sha256:
+        description: Failed v2 root-bootstrap receipt SHA256
+        required: true
+        type: string
+      failed_bootstrap_control_plane_sha:
+        description: Failed v2 root-bootstrap control-plane SHA
+        required: true
+        type: string
+      key_preflight_run_id:
+        description: Apply only - SSH key authorization preflight run ID
+        required: false
+        type: string
+      key_preflight_run_attempt:
+        description: Apply only - SSH key authorization preflight run attempt
+        required: false
+        type: string
+      key_preflight_receipt_sha256:
+        description: Apply only - SSH key authorization preflight receipt SHA256
+        required: false
+        type: string
+      operator_approval_phrase:
+        description: Apply only - exact receipt-bound authorized_keys approval
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: deploy-${{ github.repository }}-production
+  cancel-in-progress: false
+
+jobs:
+  control:
+    name: Preflight or apply exact bootstrap SSH key authorization
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 15
+    env:
+      MODE: ${{ inputs.mode }}
+      EXPECTED_CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+      EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+      FAILED_BOOTSTRAP_RUN_ID: ${{ inputs.failed_bootstrap_run_id }}
+      FAILED_BOOTSTRAP_RUN_ATTEMPT: ${{ inputs.failed_bootstrap_run_attempt }}
+      FAILED_BOOTSTRAP_RECEIPT_SHA256: ${{ inputs.failed_bootstrap_receipt_sha256 }}
+      FAILED_BOOTSTRAP_CONTROL_PLANE_SHA: ${{ inputs.failed_bootstrap_control_plane_sha }}
+      KEY_PREFLIGHT_RUN_ID: ${{ inputs.key_preflight_run_id }}
+      KEY_PREFLIGHT_RUN_ATTEMPT: ${{ inputs.key_preflight_run_attempt }}
+      KEY_PREFLIGHT_RECEIPT_SHA256: ${{ inputs.key_preflight_receipt_sha256 }}
+      OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+      BOOTSTRAP_SSH_USER: ${{ secrets.PRODUCTION_ROOT_BOOTSTRAP_SSH_USER }}
+      BOOTSTRAP_PASSWORD: ${{ secrets.PRODUCTION_ROOT_BOOTSTRAP_SUDO_PASSWORD }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+      SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    steps:
+      - name: Initialize sanitized failure receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/backend-production-bootstrap-ssh-key-authorization.json"
+          jq -n \
+            --arg mode "$MODE" \
+            --arg run_id "$GITHUB_RUN_ID" \
+            --arg run_attempt "$GITHUB_RUN_ATTEMPT" \
+            --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
+            --arg active "$EXPECTED_ACTIVE_REVISION" \
+            --arg source_run "$FAILED_BOOTSTRAP_RUN_ID" \
+            --arg source_attempt "$FAILED_BOOTSTRAP_RUN_ATTEMPT" \
+            --arg source_receipt "$FAILED_BOOTSTRAP_RECEIPT_SHA256" \
+            --arg source_control "$FAILED_BOOTSTRAP_CONTROL_PLANE_SHA" \
+            '{
+              schema_version: "backend.production_bootstrap_ssh_key_authorization.v1",
+              mode: $mode,
+              status: "FAIL_SSH_KEY_AUTHORIZATION_INITIALIZATION",
+              failed_stage: "initialize",
+              run_id: $run_id,
+              run_attempt: $run_attempt,
+              control_plane_sha: $control,
+              active_revision: $active,
+              failed_bootstrap: {
+                run_id: $source_run,
+                run_attempt: $source_attempt,
+                receipt_sha256: $source_receipt,
+                control_plane_sha: $source_control
+              },
+              target_user_sha256: ("0" * 64),
+              public_key_sha256: ("0" * 64),
+              public_key_fingerprint: "UNAVAILABLE",
+              authorized_keys_sha256_before: ("0" * 64),
+              authorized_keys_sha256_after: ("0" * 64),
+              authorized_keys_state: "UNKNOWN",
+              authorized_key_count_before: 0,
+              authorized_key_count_after: 0,
+              target_key_present_before: false,
+              target_key_present_after: false,
+              password_ssh_tested: false,
+              password_ssh_accepted: false,
+              key_ssh_authorized_after: false,
+              candidate_created: false,
+              candidate_cleanup_attempted: false,
+              candidate_absent_after: true,
+              apply_eligible: false,
+              secret_retirement_required: true,
+              production_write_execution: false,
+              authorized_keys_write_count: 0,
+              remote_temp_file_write_count: 0,
+              ssh_config_write_count: 0,
+              service_restart_count: 0,
+              deploy_count: 0,
+              database_or_cms_write_count: 0,
+              warm_or_publication_count: 0,
+              discoverability_write_count: 0,
+              writes_committed: false,
+              checks: {
+                target_identity_match: false,
+                active_revision_match: false,
+                deploy_lock_absent: false,
+                deploy_like_process_count: 0,
+                home_safe: false,
+                ssh_directory_safe: false,
+                authorized_keys_safe: false,
+                existing_key_login_rejected: false
+              }
+            }' > "$receipt"
+
+      - name: Check out exact main control plane
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate latest main and failed bootstrap receipt chain
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = "refs/heads/main"
+          test "$MODE" = preflight || test "$MODE" = apply
+          for value in "$EXPECTED_CONTROL_PLANE_SHA" "$EXPECTED_ACTIVE_REVISION" "$FAILED_BOOTSTRAP_RECEIPT_SHA256" "$FAILED_BOOTSTRAP_CONTROL_PLANE_SHA"; do
+            [[ "$value" =~ ^[0-9a-f]{40}$|^[0-9a-f]{64}$ ]]
+          done
+          [[ "$FAILED_BOOTSTRAP_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$FAILED_BOOTSTRAP_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+          git fetch --no-tags origin main
+          test "$GITHUB_SHA" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+
+          source_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${FAILED_BOOTSTRAP_RUN_ID}")"
+          jq -e \
+            --arg attempt "$FAILED_BOOTSTRAP_RUN_ATTEMPT" \
+            --arg control "$FAILED_BOOTSTRAP_CONTROL_PLANE_SHA" \
+            '.name == "Backend Production Supervisor Root Bootstrap"
+             and .path == ".github/workflows/backend-production-supervisor-root-bootstrap.yml"
+             and .event == "workflow_dispatch"
+             and .status == "completed"
+             and .conclusion == "failure"
+             and (.run_attempt | tostring) == $attempt
+             and .head_sha == $control' <<<"$source_run" >/dev/null
+          source_dir="$(mktemp -d)"
+          gh run download "$FAILED_BOOTSTRAP_RUN_ID" \
+            --repo "$GITHUB_REPOSITORY" \
+            --name "backend-production-supervisor-root-bootstrap-preflight-${FAILED_BOOTSTRAP_RUN_ID}-${FAILED_BOOTSTRAP_RUN_ATTEMPT}" \
+            --dir "$source_dir"
+          source_receipt="$source_dir/backend-production-supervisor-root-bootstrap.json"
+          test -f "$source_receipt"
+          test "$(sha256sum "$source_receipt" | awk '{print $1}')" = "$FAILED_BOOTSTRAP_RECEIPT_SHA256"
+          jq -e \
+            --arg run "$FAILED_BOOTSTRAP_RUN_ID" \
+            --arg attempt "$FAILED_BOOTSTRAP_RUN_ATTEMPT" \
+            --arg control "$FAILED_BOOTSTRAP_CONTROL_PLANE_SHA" \
+            --arg active "$EXPECTED_ACTIVE_REVISION" \
+            '.schema_version == "backend.production_supervisor_root_bootstrap.v2"
+             and .mode == "preflight"
+             and .status == "FAIL_ROOT_BOOTSTRAP_BOOTSTRAP_SSH"
+             and .failed_stage == "bootstrap_ssh"
+             and .run_id == $run
+             and .run_attempt == $attempt
+             and .control_plane_sha == $control
+             and .active_revision == $active
+             and .credential_present == true
+             and .credential_tested == false
+             and .production_write_execution == false
+             and .sudoers_rule_write_count == 0
+             and .remote_temp_file_write_count == 0
+             and .writes_committed == false' "$source_receipt" >/dev/null
+          rm -rf "$source_dir"
+
+      - name: Validate protected password and derive exact existing public key
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$BOOTSTRAP_SSH_USER"
+          test -n "$BOOTSTRAP_PASSWORD"
+          test "${BOOTSTRAP_PASSWORD//$'\n'/}" = "$BOOTSTRAP_PASSWORD"
+          test -n "$DEPLOY_HOST"
+          [[ "$DEPLOY_PORT" =~ ^[1-9][0-9]{0,4}$ ]]
+          test -n "$DEPLOY_PATH"
+          test -n "$SSH_KNOWN_HOSTS"
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > "$RUNNER_TEMP/known_hosts"
+          chmod 600 "$RUNNER_TEMP/known_hosts"
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$RUNNER_TEMP/production-key"
+          chmod 600 "$RUNNER_TEMP/production-key"
+          ssh-keygen -y -f "$RUNNER_TEMP/production-key" > "$RUNNER_TEMP/production-key.pub"
+          awk 'NF == 2 && $1 ~ /^(ssh-ed25519|ssh-rsa|ecdsa-sha2-nistp(256|384|521))$/ {print; ok=1} END {exit !ok}' \
+            "$RUNNER_TEMP/production-key.pub" > "$RUNNER_TEMP/normalized-key.pub"
+          test "$(wc -l < "$RUNNER_TEMP/normalized-key.pub" | tr -d ' ')" = 1
+          key_sha="$(sha256sum "$RUNNER_TEMP/normalized-key.pub" | awk '{print $1}')"
+          fingerprint="$(ssh-keygen -lf "$RUNNER_TEMP/normalized-key.pub" -E sha256 | awk '{print $2}')"
+          [[ "$key_sha" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$fingerprint" =~ ^SHA256:[A-Za-z0-9+/]{43}$ ]]
+          printf 'PUBLIC_KEY_SHA256=%s\n' "$key_sha" >> "$GITHUB_ENV"
+          printf 'PUBLIC_KEY_FINGERPRINT=%s\n' "$fingerprint" >> "$GITHUB_ENV"
+          echo "Protected password and exact existing SSH public-key fingerprint are available."
+
+      - name: Prepare password-only bootstrap SSH transport
+        shell: bash
+        run: |
+          set -euo pipefail
+          askpass="$RUNNER_TEMP/bootstrap-askpass"
+          cat > "$askpass" <<'ASKPASS'
+          #!/usr/bin/env bash
+          printf '%s\n' "$BOOTSTRAP_PASSWORD"
+          ASKPASS
+          chmod 700 "$askpass"
+          printf 'BOOTSTRAP_ASKPASS=%s\n' "$askpass" >> "$GITHUB_ENV"
+
+      - name: Run strict zero-write authorized_keys preflight
+        if: ${{ inputs.mode == 'preflight' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/backend-production-bootstrap-ssh-key-authorization.json"
+          zero_sha="$(printf '0%.0s' {1..64})"
+          target_expected_sha="$(printf '%s' "$BOOTSTRAP_SSH_USER" | sha256sum | awk '{print $1}')"
+          ssh_base=(ssh -o BatchMode=no -o PubkeyAuthentication=no -o PreferredAuthentications=password -o NumberOfPasswordPrompts=1 -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/known_hosts" -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$BOOTSTRAP_SSH_USER@$DEPLOY_HOST")
+
+          set +e
+          export SSH_ASKPASS="$BOOTSTRAP_ASKPASS" SSH_ASKPASS_REQUIRE=force DISPLAY=:0
+          password_result="$(setsid -w "${ssh_base[@]}" \
+              "DEPLOY_PATH='$DEPLOY_PATH' EXPECTED_ACTIVE_REVISION='$EXPECTED_ACTIVE_REVISION' TARGET_KEY_SHA='$PUBLIC_KEY_SHA256' bash -s" <<'REMOTE'
+          set -u
+          actor_sha="$(printf '%s' "$(id -un)" | sha256sum | awk '{print $1}')"
+          home_dir="$(getent passwd "$(id -un)" | cut -d: -f6)"
+          home_safe=false; ssh_dir_safe=false; authorized_keys_safe=false
+          authorized_keys_state=UNKNOWN; authorized_keys_sha="$(printf '0%.0s' {1..64})"
+          key_count=0; target_present=false; active_match=false; lock_absent=false; deploy_process_count=0
+          if [ -n "$home_dir" ] && [ -d "$home_dir" ] && [ ! -L "$home_dir" ] && [ "$(stat -Lc '%U' "$home_dir" 2>/dev/null)" = "$(id -un)" ]; then
+            home_mode="$(stat -Lc '%a' "$home_dir")"
+            if [[ "$home_mode" =~ ^[0-7]{3,4}$ ]] && (( (8#$home_mode & 0022) == 0 )); then home_safe=true; fi
+          fi
+          ssh_dir="$home_dir/.ssh"; auth="$ssh_dir/authorized_keys"
+          if [ -d "$ssh_dir" ] && [ ! -L "$ssh_dir" ] && [ "$(stat -Lc '%U' "$ssh_dir" 2>/dev/null)" = "$(id -un)" ]; then
+            ssh_mode="$(stat -Lc '%a' "$ssh_dir")"
+            if [[ "$ssh_mode" =~ ^[0-7]{3,4}$ ]] && (( (8#$ssh_mode & 0077) == 0 )); then ssh_dir_safe=true; fi
+          fi
+          if [ ! -e "$auth" ] && [ ! -L "$auth" ]; then
+            authorized_keys_state=ABSENT; authorized_keys_safe=true
+          elif [ -f "$auth" ] && [ ! -L "$auth" ] && [ "$(stat -Lc '%U' "$auth" 2>/dev/null)" = "$(id -un)" ]; then
+            auth_mode="$(stat -Lc '%a' "$auth")"
+            if [[ "$auth_mode" =~ ^[0-7]{3,4}$ ]] && (( (8#$auth_mode & 0022) == 0 )); then
+              authorized_keys_state=PRESENT; authorized_keys_safe=true
+              authorized_keys_sha="$(sha256sum "$auth" | awk '{print $1}')"
+              while IFS= read -r normalized; do
+                [ -n "$normalized" ] || continue
+                key_count=$((key_count + 1))
+                if [ "$(printf '%s\n' "$normalized" | sha256sum | awk '{print $1}')" = "$TARGET_KEY_SHA" ]; then target_present=true; fi
+              done < <(awk '{for(i=1;i<NF;i++) if($i ~ /^(ssh-ed25519|ssh-rsa|ecdsa-sha2-nistp(256|384|521))$/){print $i" "$(i+1); break}}' "$auth")
+            fi
+          else
+            authorized_keys_state=UNSAFE
+          fi
+          if [ -r "$DEPLOY_PATH/current/REVISION" ] && [ "$(tr -d '\r\n' < "$DEPLOY_PATH/current/REVISION")" = "$EXPECTED_ACTIVE_REVISION" ]; then active_match=true; fi
+          if [ ! -e "$DEPLOY_PATH/.dep/deploy.lock" ]; then lock_absent=true; fi
+          deploy_process_count="$(ps -eo comm=,args= | awk '$1=="php" && ($0 ~ /dep\.phar/ || $0 ~ /artisan migrate/ || $0 ~ /queue:reload-workers/) {n++} $1=="composer" && $0 ~ /install/ {n++} END {print n+0}')"
+          printf '%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s\n' "$actor_sha" "$home_safe" "$ssh_dir_safe" "$authorized_keys_safe" "$authorized_keys_state" "$authorized_keys_sha" "$key_count" "$target_present" "$active_match" "$lock_absent" "$deploy_process_count"
+          REMOTE
+            )"
+          password_rc=$?
+          existing_key_rc=0
+          ssh -i "$RUNNER_TEMP/production-key" -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/known_hosts" -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$BOOTSTRAP_SSH_USER@$DEPLOY_HOST" true >/dev/null 2>&1 || existing_key_rc=$?
+          set -e
+
+          target_user_sha="$zero_sha"; home_safe=false; ssh_dir_safe=false; authorized_keys_safe=false
+          authorized_keys_state=UNKNOWN; authorized_keys_sha="$zero_sha"; key_count=0; target_present=false
+          active_match=false; lock_absent=false; deploy_process_count=0
+          if [ "$password_rc" -eq 0 ]; then
+            IFS='|' read -r target_user_sha home_safe ssh_dir_safe authorized_keys_safe authorized_keys_state authorized_keys_sha key_count target_present active_match lock_absent deploy_process_count <<<"$password_result"
+          fi
+          [[ "$target_user_sha" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$authorized_keys_sha" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$key_count" =~ ^[0-9]+$ ]]
+          [[ "$deploy_process_count" =~ ^[0-9]+$ ]]
+          for value in "$home_safe" "$ssh_dir_safe" "$authorized_keys_safe" "$target_present" "$active_match" "$lock_absent"; do [[ "$value" =~ ^(true|false)$ ]]; done
+          [[ "$authorized_keys_state" =~ ^(ABSENT|PRESENT|UNSAFE|UNKNOWN)$ ]]
+
+          target_identity_match=false; existing_key_login_rejected=false; password_accepted=false; apply_eligible=false
+          if [ "$target_user_sha" = "$target_expected_sha" ]; then target_identity_match=true; fi
+          if [ "$existing_key_rc" -ne 0 ]; then existing_key_login_rejected=true; fi
+          if [ "$password_rc" -eq 0 ]; then password_accepted=true; fi
+          status=PASS_SSH_KEY_AUTHORIZATION_PREFLIGHT; failed_stage=""
+          if [ "$password_rc" -ne 0 ]; then status=FAIL_PASSWORD_SSH_AUTH; failed_stage=password_ssh
+          elif [ "$target_identity_match" != true ]; then status=BLOCKED_TARGET_IDENTITY; failed_stage=target_identity
+          elif [ "$active_match" != true ]; then status=BLOCKED_ACTIVE_REVISION; failed_stage=active_revision
+          elif [ "$lock_absent" != true ]; then status=BLOCKED_DEPLOY_LOCK; failed_stage=deploy_lock
+          elif [ "$deploy_process_count" -ne 0 ]; then status=BLOCKED_DEPLOY_PROCESS; failed_stage=deploy_process
+          elif [ "$home_safe" != true ] || [ "$ssh_dir_safe" != true ] || [ "$authorized_keys_safe" != true ]; then status=BLOCKED_UNSAFE_AUTHORIZED_KEYS; failed_stage=authorized_keys_safety
+          elif [ "$target_present" = true ] || [ "$existing_key_rc" -eq 0 ]; then status=NOOP_KEY_ALREADY_AUTHORIZED; failed_stage=already_authorized
+          else apply_eligible=true
+          fi
+
+          jq \
+            --arg status "$status" --arg stage "$failed_stage" --arg user_sha "$target_user_sha" \
+            --arg key_sha "$PUBLIC_KEY_SHA256" --arg fingerprint "$PUBLIC_KEY_FINGERPRINT" \
+            --arg auth_sha "$authorized_keys_sha" --arg auth_state "$authorized_keys_state" \
+            --argjson key_count "$key_count" --argjson target_present "$target_present" \
+            --argjson password_accepted "$password_accepted" --argjson eligible "$apply_eligible" \
+            --argjson identity "$target_identity_match" --argjson active "$active_match" \
+            --argjson lock "$lock_absent" --argjson process_count "$deploy_process_count" \
+            --argjson home_safe "$home_safe" --argjson ssh_safe "$ssh_dir_safe" \
+            --argjson auth_safe "$authorized_keys_safe" --argjson key_rejected "$existing_key_login_rejected" \
+            '.status=$status | .failed_stage=$stage | .target_user_sha256=$user_sha
+             | .public_key_sha256=$key_sha | .public_key_fingerprint=$fingerprint
+             | .authorized_keys_sha256_before=$auth_sha | .authorized_keys_sha256_after=$auth_sha
+             | .authorized_keys_state=$auth_state | .authorized_key_count_before=$key_count | .authorized_key_count_after=$key_count
+             | .target_key_present_before=$target_present | .target_key_present_after=$target_present
+             | .password_ssh_tested=true | .password_ssh_accepted=$password_accepted | .apply_eligible=$eligible
+             | .checks.target_identity_match=$identity | .checks.active_revision_match=$active
+             | .checks.deploy_lock_absent=$lock | .checks.deploy_like_process_count=$process_count
+             | .checks.home_safe=$home_safe | .checks.ssh_directory_safe=$ssh_safe
+             | .checks.authorized_keys_safe=$auth_safe | .checks.existing_key_login_rejected=$key_rejected' \
+            "$receipt" > "$receipt.tmp"
+          mv "$receipt.tmp" "$receipt"
+          test "$status" = PASS_SSH_KEY_AUTHORIZATION_PREFLIGHT
+          test "$apply_eligible" = true
+
+      - name: Validate apply receipt and exact approval
+        if: ${{ inputs.mode == 'apply' }}
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          [[ "$KEY_PREFLIGHT_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$KEY_PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+          [[ "$KEY_PREFLIGHT_RECEIPT_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          preflight_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${KEY_PREFLIGHT_RUN_ID}")"
+          jq -e --arg attempt "$KEY_PREFLIGHT_RUN_ATTEMPT" --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
+            '.name == "Backend Production Bootstrap SSH Key Authorization"
+             and .path == ".github/workflows/backend-production-bootstrap-ssh-key-authorization.yml"
+             and .event == "workflow_dispatch" and .status == "completed" and .conclusion == "success"
+             and (.run_attempt | tostring) == $attempt and .head_sha == $control' <<<"$preflight_run" >/dev/null
+          preflight_dir="$(mktemp -d)"
+          gh run download "$KEY_PREFLIGHT_RUN_ID" --repo "$GITHUB_REPOSITORY" \
+            --name "backend-production-bootstrap-ssh-key-authorization-preflight-${KEY_PREFLIGHT_RUN_ID}-${KEY_PREFLIGHT_RUN_ATTEMPT}" \
+            --dir "$preflight_dir"
+          preflight_receipt="$preflight_dir/backend-production-bootstrap-ssh-key-authorization.json"
+          test "$(sha256sum "$preflight_receipt" | awk '{print $1}')" = "$KEY_PREFLIGHT_RECEIPT_SHA256"
+          jq -e --arg control "$EXPECTED_CONTROL_PLANE_SHA" --arg active "$EXPECTED_ACTIVE_REVISION" \
+            --arg key_sha "$PUBLIC_KEY_SHA256" \
+            '.schema_version == "backend.production_bootstrap_ssh_key_authorization.v1"
+             and .mode == "preflight" and .status == "PASS_SSH_KEY_AUTHORIZATION_PREFLIGHT"
+             and .control_plane_sha == $control and .active_revision == $active
+             and .public_key_sha256 == $key_sha and .password_ssh_accepted == true
+             and .target_key_present_before == false and .apply_eligible == true
+             and .production_write_execution == false and .authorized_keys_write_count == 0
+             and .remote_temp_file_write_count == 0 and .writes_committed == false' "$preflight_receipt" >/dev/null
+          user_sha="$(jq -r '.target_user_sha256' "$preflight_receipt")"
+          auth_sha="$(jq -r '.authorized_keys_sha256_before' "$preflight_receipt")"
+          fingerprint="$(jq -r '.public_key_fingerprint' "$preflight_receipt")"
+          expected_phrase="I explicitly approve atomic authorization of the existing GitHub fap-api production SSH public key fingerprint ${fingerprint} for bootstrap-user fingerprint ${user_sha}, from preflight run ${KEY_PREFLIGHT_RUN_ID} attempt ${KEY_PREFLIGHT_RUN_ATTEMPT} receipt ${KEY_PREFLIGHT_RECEIPT_SHA256}, control-plane SHA ${EXPECTED_CONTROL_PLANE_SHA}, active SHA ${EXPECTED_ACTIVE_REVISION}, authorized_keys before SHA256 ${auth_sha}; append exactly one key by same-directory atomic rename, preserve all existing keys, then verify key login, with no sudo, SSH configuration change, credential replacement, service restart, deploy, database/CMS write, warm, publication, or discoverability change."
+          test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
+          printf 'PREFLIGHT_AUTHORIZED_KEYS_SHA=%s\n' "$auth_sha" >> "$GITHUB_ENV"
+          printf 'TARGET_USER_SHA=%s\n' "$user_sha" >> "$GITHUB_ENV"
+
+      - name: Apply exact authorized_keys addition
+        if: ${{ inputs.mode == 'apply' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/backend-production-bootstrap-ssh-key-authorization.json"
+          candidate_name="authorized_keys.codex-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          key_b64="$(base64 -w0 "$RUNNER_TEMP/normalized-key.pub")"
+          ssh_base=(ssh -o BatchMode=no -o PubkeyAuthentication=no -o PreferredAuthentications=password -o NumberOfPasswordPrompts=1 -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/known_hosts" -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$BOOTSTRAP_SSH_USER@$DEPLOY_HOST")
+          set +e
+          export SSH_ASKPASS="$BOOTSTRAP_ASKPASS" SSH_ASKPASS_REQUIRE=force DISPLAY=:0
+          apply_result="$(setsid -w "${ssh_base[@]}" \
+              "EXPECTED_BEFORE_SHA='$PREFLIGHT_AUTHORIZED_KEYS_SHA' TARGET_KEY_SHA='$PUBLIC_KEY_SHA256' TARGET_USER_SHA='$TARGET_USER_SHA' KEY_B64='$key_b64' CANDIDATE_NAME='$candidate_name' bash -s" <<'REMOTE'
+          set -u
+          zero_sha="$(printf '0%.0s' {1..64})"; before_sha="$zero_sha"; after_sha="$zero_sha"; key_count=0
+          candidate_created=false; cleanup_attempted=false; candidate_absent_after=true; committed=false
+          home_dir="$(getent passwd "$(id -un)" | cut -d: -f6)"; ssh_dir="$home_dir/.ssh"; auth="$ssh_dir/authorized_keys"; candidate="$ssh_dir/$CANDIDATE_NAME"
+          finish() { printf '%s|%s|%s|%s|%s|%s|%s|%s\n' "$1" "$before_sha" "$after_sha" "$key_count" "$candidate_created" "$cleanup_attempted" "$candidate_absent_after" "$committed"; exit 0; }
+          cleanup_fail() { cleanup_attempted=true; rm -f "$candidate" >/dev/null 2>&1 || true; if [ -e "$candidate" ] || [ -L "$candidate" ]; then candidate_absent_after=false; fi; finish FAIL; }
+          [ "$(printf '%s' "$(id -un)" | sha256sum | awk '{print $1}')" = "$TARGET_USER_SHA" ] || finish FAIL
+          [ -d "$ssh_dir" ] && [ ! -L "$ssh_dir" ] && [ ! -e "$candidate" ] || finish FAIL
+          before_sha="$(if [ -f "$auth" ]; then sha256sum "$auth" | awk '{print $1}'; else printf '0%.0s' {1..64}; fi)"
+          [ "$before_sha" = "$EXPECTED_BEFORE_SHA" ] || finish FAIL
+          key_line="$(printf '%s' "$KEY_B64" | base64 -d)" || finish FAIL
+          [ "$(printf '%s\n' "$key_line" | sha256sum | awk '{print $1}')" = "$TARGET_KEY_SHA" ] || finish FAIL
+          if [ -f "$auth" ]; then cp --preserve=mode "$auth" "$candidate" || finish FAIL; else : > "$candidate" || finish FAIL; chmod 600 "$candidate" || cleanup_fail; fi
+          candidate_created=true; candidate_absent_after=false
+          printf '%s\n' "$key_line" >> "$candidate" || cleanup_fail
+          count="$(awk -v target="$TARGET_KEY_SHA" '{for(i=1;i<NF;i++) if($i ~ /^(ssh-ed25519|ssh-rsa|ecdsa-sha2-nistp(256|384|521))$/){cmd="printf \\047%s\\n\\047 \\042"$i" "$ (i+1) "\\042 | sha256sum"; cmd | getline h; close(cmd); split(h,a," "); if(a[1]==target)n++; break}} END{print n+0}' "$candidate")" || cleanup_fail
+          [ "$count" = 1 ] || cleanup_fail
+          chmod 600 "$candidate" || cleanup_fail
+          mv "$candidate" "$auth" || cleanup_fail
+          candidate_absent_after=true; committed=true
+          after_sha="$(sha256sum "$auth" | awk '{print $1}')" || finish FAIL
+          key_count="$(awk '{for(i=1;i<NF;i++) if($i ~ /^(ssh-ed25519|ssh-rsa|ecdsa-sha2-nistp(256|384|521))$/){n++;break}} END{print n+0}' "$auth")" || finish FAIL
+          finish PASS
+          REMOTE
+            )"
+          apply_rc=$?
+          set -e
+          remote_status=FAIL; before_sha="$PREFLIGHT_AUTHORIZED_KEYS_SHA"; after_sha="$(printf '0%.0s' {1..64})"; after_count=0
+          candidate_created=false; cleanup_attempted=false; candidate_absent_after=true; committed=false
+          if [ "$apply_rc" -eq 0 ]; then IFS='|' read -r remote_status before_sha after_sha after_count candidate_created cleanup_attempted candidate_absent_after committed <<<"$apply_result"; fi
+          test "$before_sha" = "$PREFLIGHT_AUTHORIZED_KEYS_SHA"
+          status=FAIL_SSH_KEY_AUTHORIZATION_APPLY; stage=authorized_keys_apply
+          if [ "$apply_rc" -eq 0 ] && [ "$remote_status" = PASS ] && [ "$committed" = true ]; then status=PASS_SSH_KEY_AUTHORIZATION_APPLY; stage=""; fi
+          key_login=false
+          if [ "$committed" = true ]; then
+            if ssh -i "$RUNNER_TEMP/production-key" -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$RUNNER_TEMP/known_hosts" -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$BOOTSTRAP_SSH_USER@$DEPLOY_HOST" "test \"\$(printf '%s' \"\$(id -un)\" | sha256sum | awk '{print \$1}')\" = '$TARGET_USER_SHA'"; then key_login=true; else status=FAIL_SSH_KEY_LOGIN_READBACK; stage=key_login_readback; fi
+          fi
+          jq --arg status "$status" --arg stage "$stage" --arg user_sha "$TARGET_USER_SHA" \
+            --arg key_sha "$PUBLIC_KEY_SHA256" --arg fingerprint "$PUBLIC_KEY_FINGERPRINT" \
+            --arg before "$before_sha" --arg after "$after_sha" \
+            --argjson after_count "$after_count" --argjson key_login "$key_login" --argjson created "$candidate_created" \
+            --argjson cleanup "$cleanup_attempted" --argjson absent "$candidate_absent_after" --argjson committed "$committed" \
+            '.status=$status | .failed_stage=$stage | .target_user_sha256=$user_sha
+             | .public_key_sha256=$key_sha | .public_key_fingerprint=$fingerprint
+             | .authorized_keys_sha256_before=$before | .authorized_keys_sha256_after=$after
+             | .password_ssh_tested=true | .password_ssh_accepted=true
+             | .target_key_present_before=false | .target_key_present_after=$key_login
+             | .key_ssh_authorized_after=$key_login | .authorized_key_count_after=$after_count
+             | .candidate_created=$created | .candidate_cleanup_attempted=$cleanup | .candidate_absent_after=$absent
+             | .production_write_execution=$committed | .authorized_keys_write_count=(if $committed then 1 else 0 end)
+             | .remote_temp_file_write_count=(if $created then 1 else 0 end) | .writes_committed=$committed' "$receipt" > "$receipt.tmp"
+          mv "$receipt.tmp" "$receipt"
+          test "$status" = PASS_SSH_KEY_AUTHORIZATION_APPLY
+
+      - name: Validate sanitized SSH key authorization receipt
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/backend-production-bootstrap-ssh-key-authorization.json"
+          jq -e '.schema_version == "backend.production_bootstrap_ssh_key_authorization.v1"
+            and (.target_user_sha256 | test("^[0-9a-f]{64}$"))
+            and (.public_key_sha256 | test("^[0-9a-f]{64}$"))
+            and (.authorized_keys_sha256_before | test("^[0-9a-f]{64}$"))
+            and (.authorized_keys_sha256_after | test("^[0-9a-f]{64}$"))
+            and .secret_retirement_required == true
+            and .ssh_config_write_count == 0 and .service_restart_count == 0 and .deploy_count == 0
+            and .database_or_cms_write_count == 0 and .warm_or_publication_count == 0
+            and .discoverability_write_count == 0' "$receipt" >/dev/null
+          if [ "$MODE" = preflight ]; then
+            jq -e '.status == "PASS_SSH_KEY_AUTHORIZATION_PREFLIGHT"
+              and .password_ssh_tested == true and .password_ssh_accepted == true
+              and .target_key_present_before == false and .apply_eligible == true
+              and .production_write_execution == false and .authorized_keys_write_count == 0
+              and .remote_temp_file_write_count == 0 and .writes_committed == false' "$receipt" >/dev/null
+          fi
+
+      - name: Publish safe SSH key authorization summary
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/backend-production-bootstrap-ssh-key-authorization.json"
+          jq '{schema_version,mode,status,failed_stage,run_id,run_attempt,control_plane_sha,active_revision,failed_bootstrap,target_user_sha256,public_key_sha256,public_key_fingerprint,authorized_keys_sha256_before,authorized_keys_sha256_after,authorized_keys_state,authorized_key_count_before,authorized_key_count_after,target_key_present_before,target_key_present_after,password_ssh_tested,password_ssh_accepted,key_ssh_authorized_after,candidate_created,candidate_cleanup_attempted,candidate_absent_after,apply_eligible,secret_retirement_required,production_write_execution,authorized_keys_write_count,remote_temp_file_write_count,ssh_config_write_count,service_restart_count,deploy_count,database_or_cms_write_count,warm_or_publication_count,discoverability_write_count,writes_committed,checks}' "$receipt" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload immutable SSH key authorization receipt
+        if: ${{ always() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: backend-production-bootstrap-ssh-key-authorization-${{ inputs.mode }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/backend-production-bootstrap-ssh-key-authorization.json
+          if-no-files-found: error
+          retention-days: 14
