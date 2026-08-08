@@ -23,11 +23,19 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             $deployer,
         );
         $this->assertStringContainsString(
-            'sudo -n -u www-data -- test -r {$artisan}',
+            'function deployCanSudoWwwData(): bool',
             $deployer,
         );
         $this->assertStringContainsString(
-            'sudo -n -u www-data -- test -w {$cacheData}',
+            "\$sudoPrefix = deployCanSudoWwwData() ? 'sudo -n -u www-data -- ' : '';",
+            $deployer,
+        );
+        $this->assertStringContainsString(
+            'if (! test("{$sudoPrefix}test -r {$artisan}"))',
+            $deployer,
+        );
+        $this->assertStringContainsString(
+            'if (! test("{$sudoPrefix}test -w {$cacheData}"))',
             $deployer,
         );
         $this->assertStringContainsString(
@@ -38,7 +46,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             2,
             substr_count(
                 $deployer,
-                "run('sudo -n -u www-data -- {{bin/php}} artisan queue:restart --ansi');",
+                "run(\$sudoPrefix.'{{bin/php}} artisan queue:restart --ansi');",
             ),
         );
         $this->assertStringNotContainsString(
@@ -242,8 +250,13 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $source = $this->readRepoFile('deploy.php');
 
         $this->assertStringContainsString('php_bin="$(command -v {{bin/php}})"', $source);
+        $this->assertStringContainsString('$canSudoWwwData = deployCanSudoWwwData();', $source);
         $this->assertStringContainsString(
-            'sudo -n -u www-data -- env SITEMAP_SOURCE_WARM_PHP_BIN="$php_bin"',
+            "? 'sudo -n -u www-data -- env'",
+            $source,
+        );
+        $this->assertStringContainsString(
+            '%s SITEMAP_SOURCE_WARM_PHP_BIN="$php_bin"',
             $source,
         );
         $this->assertStringNotContainsString('SITEMAP_SOURCE_WARM_PHP_BIN={{bin/php}}', $source);
@@ -412,8 +425,8 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('deploy_mode:', $source);
         $this->assertStringContainsString('expected_deployed_revision:', $source);
         $this->assertStringContainsString('approved_migration:', $source);
-        $this->assertStringContainsString('default: auto', $source);
-        $this->assertSame(2, substr_count($source, 'required: true'));
+        $this->assertStringContainsString('deploy_mode must be auto, code_only, candidate_only, schema_only, or standard.', $source);
+        $this->assertSame(3, substr_count($source, 'required: true'));
         $this->assertStringContainsString('actions: read', $source);
         $this->assertStringContainsString('Validate manual exact-SHA approval and staging evidence', $source);
         $this->assertStringNotContainsString("if: github.event_name == 'workflow_dispatch'", $source);
@@ -956,7 +969,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $deployer = $this->readRepoFile('deploy.php');
 
         foreach ([
-            '- candidate_only',
+            'auto|code_only|candidate_only|schema_only|standard) ;;',
             'candidate_only accepted an empty diff for the exact-active same-SHA inactive-release fast path.',
             'exact-active candidate_only fast path requires staging_run_id to be empty.',
             'Exact-active candidate_only fast path requires the candidate SHA to equal expected_deployed_revision.',
