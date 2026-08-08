@@ -15,6 +15,7 @@ use App\Services\Access\AttemptUnlockProjectionRepairService;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Attempts\AttemptSubmissionService;
 use App\Services\Attempts\InviteUnlock\InviteUnlockDiagnostics;
+use App\Services\Attempts\ResultProcessingTimingService;
 use App\Services\BigFive\BigFivePublicFormSummaryBuilder;
 use App\Services\BigFive\BigFivePublicProjectionService;
 use App\Services\BigFive\ReportEngine\Bridge\BigFiveLiveRuntimeBridge;
@@ -77,6 +78,7 @@ class AttemptReadController extends Controller
 
     public function __construct(
         private AttemptSubmissionService $attemptSubmissionService,
+        private ResultProcessingTimingService $resultProcessingTimingService,
         private ReportGatekeeper $reportGatekeeper,
         private ReportPdfDocumentService $reportPdfDocumentService,
         private ResultPagePdfTokenService $resultPagePdfTokenService,
@@ -263,7 +265,7 @@ class AttemptReadController extends Controller
                 $responsePayload['mbti_form_v1'] = $mbtiFormSummary;
             }
 
-            return $this->privateNoStoreJson($responsePayload);
+            return $this->privateNoStoreJson($this->withProcessingTiming($responsePayload, $orgId, $id));
         }
 
         $payload = $result->result_json;
@@ -437,7 +439,7 @@ class AttemptReadController extends Controller
             $responsePayload = IqResultPayloadRedactor::redactAnswerKeys($responsePayload);
         }
 
-        return $this->privateNoStoreJson($responsePayload);
+        return $this->privateNoStoreJson($this->withProcessingTiming($responsePayload, $orgId, $id));
     }
 
     /**
@@ -550,7 +552,7 @@ class AttemptReadController extends Controller
                 $responsePayload['enneagram_form_v1'] = $enneagramFormSummary;
             }
 
-            return $this->privateNoStoreJson($responsePayload, 202);
+            return $this->privateNoStoreJson($this->withProcessingTiming($responsePayload, $orgId, $id), 202);
         }
 
         if ($scaleCode === 'MBTI') {
@@ -739,7 +741,7 @@ class AttemptReadController extends Controller
             $responsePayload = IqResultPayloadRedactor::redactAnswerKeys($responsePayload);
         }
 
-        return $this->privateNoStoreJson($responsePayload);
+        return $this->privateNoStoreJson($this->withProcessingTiming($responsePayload, $orgId, $id));
     }
 
     /**
@@ -2830,7 +2832,11 @@ class AttemptReadController extends Controller
             $payload['report'] = [];
         }
 
-        return $this->privateNoStoreJson($payload, 202);
+        return $this->privateNoStoreJson($this->withProcessingTiming(
+            $payload,
+            $this->currentOrgContext()->orgId(),
+            $attemptId
+        ), 202);
     }
 
     private function failedSubmissionResponse(string $attemptId, array $submissionPayload, bool $includeReport): JsonResponse
@@ -2854,7 +2860,11 @@ class AttemptReadController extends Controller
             $payload['report'] = [];
         }
 
-        return $this->privateNoStoreJson($payload);
+        return $this->privateNoStoreJson($this->withProcessingTiming(
+            $payload,
+            $this->currentOrgContext()->orgId(),
+            $attemptId
+        ));
     }
 
     private function missingResultAfterSubmissionResponse(string $attemptId, array $submissionPayload, bool $includeReport): JsonResponse
@@ -2873,7 +2883,25 @@ class AttemptReadController extends Controller
             $payload['report'] = [];
         }
 
-        return $this->privateNoStoreJson($payload);
+        return $this->privateNoStoreJson($this->withProcessingTiming(
+            $payload,
+            $this->currentOrgContext()->orgId(),
+            $attemptId
+        ));
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @return array<string,mixed>
+     */
+    private function withProcessingTiming(array $payload, int $orgId, string $attemptId): array
+    {
+        $timing = $this->resultProcessingTimingService->forAttempt($orgId, $attemptId);
+        if ($timing !== []) {
+            $payload['processing_timing_v1'] = $timing;
+        }
+
+        return $payload;
     }
 
     /**
