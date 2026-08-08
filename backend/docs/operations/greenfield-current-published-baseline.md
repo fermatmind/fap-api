@@ -35,7 +35,7 @@ Source topology and host pinning are intentionally separate from generic product
 
 `export` requires that exact host-set SHA-256 and downloads every selected public media object through credential-free HTTPS with redirects disabled. It verifies object bytes and SHA-256, rebuilds the deterministic package, and uploads the package plus sanitized receipt. Artifacts expire after three days.
 
-The workflow fails closed unless the frozen public baseline counts and Career boundaries match, including 1046 occupations, 2092 rows for each bilingual Career asset family, and the exact 342 tracked / 30 public / 622 blocked / 2 quarantined runtime projection.
+The workflow fails closed unless the frozen public baseline counts and Career boundaries match, including the 1046-occupation intersection shared by all three production-imported bilingual Career asset families, 2092 rows for each asset family, and the exact 342 tracked / 30 public / 622 blocked / 2 quarantined runtime projection. Display-only draft occupations are not part of this transferable product baseline.
 
 ## Package verification
 

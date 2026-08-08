@@ -180,12 +180,12 @@ final class GreenfieldBaselineCatalog
         return <<<'SQL'
 id IN (
     SELECT occupation_id FROM career_job_ai_impact_assets WHERE status = 'production_imported'
-    UNION
+)
+AND id IN (
     SELECT occupation_id FROM career_job_salary_assets WHERE status = 'production_imported'
-    UNION
+)
+AND id IN (
     SELECT occupation_id FROM career_job_page_assembly_assets WHERE status = 'production_imported'
-    UNION
-    SELECT occupation_id FROM career_job_display_assets WHERE status = 'ready_for_pilot'
 )
 SQL;
     }
