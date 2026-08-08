@@ -132,6 +132,10 @@ use App\Console\Commands\FapResolvePack;
 use App\Console\Commands\FapSelfCheck;
 use App\Console\Commands\FapValidateReport;
 use App\Console\Commands\FapWeeklyReport;
+use App\Console\Commands\GreenfieldBaselineImport;
+use App\Console\Commands\GreenfieldBaselinePackageStream;
+use App\Console\Commands\GreenfieldBaselineRenderSource;
+use App\Console\Commands\GreenfieldBaselineVerify;
 use App\Console\Commands\MbtiPrewarm;
 use App\Console\Commands\MbtiUpgradeLegacyPartialUnlocks;
 use App\Console\Commands\MediaAssetsImportSeoImageBundle;
@@ -432,6 +436,10 @@ class Kernel extends ConsoleKernel
         CareerExportFirstWaveRolloutBundleArtifacts::class,
         CareerExportFirstWaveReleaseArtifacts::class,
         CareerExportFirstWaveRolloutWavePlanArtifact::class,
+        GreenfieldBaselineRenderSource::class,
+        GreenfieldBaselinePackageStream::class,
+        GreenfieldBaselineVerify::class,
+        GreenfieldBaselineImport::class,
         RefreshCareerAttributionDailyCommand::class,
         PacksPublish::class,
         PacksRollback::class,

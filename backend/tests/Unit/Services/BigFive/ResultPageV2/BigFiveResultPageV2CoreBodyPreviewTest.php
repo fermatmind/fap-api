@@ -185,6 +185,55 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $changed);
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_greenfield_baseline_transfer_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/GreenfieldBaselineImport.php',
+            'backend/app/Console/Commands/GreenfieldBaselinePackageStream.php',
+            'backend/app/Console/Commands/GreenfieldBaselineRenderSource.php',
+            'backend/app/Console/Commands/GreenfieldBaselineVerify.php',
+            'backend/app/Domain/GreenfieldBaseline/GreenfieldBaselineCatalog.php',
+            'backend/app/Domain/GreenfieldBaseline/GreenfieldBaselineImporter.php',
+            'backend/app/Domain/GreenfieldBaseline/GreenfieldBaselineJson.php',
+            'backend/app/Domain/GreenfieldBaseline/GreenfieldBaselineMediaExporter.php',
+            'backend/app/Domain/GreenfieldBaseline/GreenfieldBaselinePackageBuilder.php',
+            'backend/app/Domain/GreenfieldBaseline/GreenfieldBaselinePackageVerifier.php',
+            'backend/app/Domain/GreenfieldBaseline/GreenfieldBaselineSourceScript.php',
+        ];
+        $blocked = [
+            'backend/app/Domain/GreenfieldBaseline/UnexpectedProductionWriter.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+        $kernelLines = [
+            'use App\\Console\\Commands\\GreenfieldBaselineImport;',
+            'use App\\Console\\Commands\\GreenfieldBaselinePackageStream;',
+            'use App\\Console\\Commands\\GreenfieldBaselineRenderSource;',
+            'use App\\Console\\Commands\\GreenfieldBaselineVerify;',
+            '        GreenfieldBaselineRenderSource::class,',
+            '        GreenfieldBaselinePackageStream::class,',
+            '        GreenfieldBaselineVerify::class,',
+            '        GreenfieldBaselineImport::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            ['backend/app/Console/Kernel.php'],
+            '',
+            '',
+            $kernelLines,
+        ));
+        $this->assertSame(
+            ['backend/app/Console/Kernel.php'],
+            $this->mbtiImpactingRuntimeChanges(
+                ['backend/app/Console/Kernel.php'],
+                '',
+                '',
+                [...$kernelLines, '        UnexpectedProductionWriter::class,'],
+            ),
+        );
+    }
+
     public function test_runtime_freeze_classifier_ignores_analytics_provider_freshness_files(): void
     {
         $allowed = [
@@ -7170,6 +7219,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isGreenfieldCurrentBaselineTransferFile($file)) {
+                continue;
+            }
+
             if ($this->isContentPackLkgFile($file)) {
                 continue;
             }
@@ -8979,6 +9032,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 $file === 'backend/app/Console/Kernel.php'
                 && (
                     $this->kernelDiffIsCareerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsGreenfieldCurrentBaselineTransferOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsArticleEditorialPackageDraftGateOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoContentPackageDraftImporterOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoImageBundleImporterOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -9272,6 +9326,42 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isCareerConsoleCommandFile(string $file): bool
     {
         return preg_match('#^backend/app/Console/Commands/Career[A-Za-z0-9_]*\.php$#', $file) === 1;
+    }
+
+    private function isGreenfieldCurrentBaselineTransferFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/GreenfieldBaselineImport.php',
+            'backend/app/Console/Commands/GreenfieldBaselinePackageStream.php',
+            'backend/app/Console/Commands/GreenfieldBaselineRenderSource.php',
+            'backend/app/Console/Commands/GreenfieldBaselineVerify.php',
+            'backend/app/Domain/GreenfieldBaseline/GreenfieldBaselineCatalog.php',
+            'backend/app/Domain/GreenfieldBaseline/GreenfieldBaselineImporter.php',
+            'backend/app/Domain/GreenfieldBaseline/GreenfieldBaselineJson.php',
+            'backend/app/Domain/GreenfieldBaseline/GreenfieldBaselineMediaExporter.php',
+            'backend/app/Domain/GreenfieldBaseline/GreenfieldBaselinePackageBuilder.php',
+            'backend/app/Domain/GreenfieldBaseline/GreenfieldBaselinePackageVerifier.php',
+            'backend/app/Domain/GreenfieldBaseline/GreenfieldBaselineSourceScript.php',
+        ], true);
+    }
+
+    /** @param list<string> $changedLines */
+    private function kernelDiffIsGreenfieldCurrentBaselineTransferOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (preg_match(
+                '/^(?:use App\\\\Console\\\\Commands\\\\GreenfieldBaseline(?:Import|PackageStream|RenderSource|Verify);| {8}GreenfieldBaseline(?:Import|PackageStream|RenderSource|Verify)::class,)$/',
+                $line,
+            ) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private function isCareerCliArtifactPathGuardFile(string $file): bool
