@@ -35,6 +35,7 @@ class BackendProductionSupervisorRootBootstrapWorkflowTest(unittest.TestCase):
 
     def test_preflight_is_strict_zero_write_and_does_not_authenticate_secret(self):
         self.assertIn("PRODUCTION_ROOT_BOOTSTRAP_SUDO_PASSWORD", self.raw)
+        self.assertIn("PRODUCTION_ROOT_BOOTSTRAP_SSH_USER", self.raw)
         self.assertIn("credential_present: false", self.raw)
         self.assertIn("credential_tested: false", self.raw)
         self.assertIn('echo "Protected one-time credential is present; no authentication was attempted."', self.raw)
@@ -64,8 +65,10 @@ class BackendProductionSupervisorRootBootstrapWorkflowTest(unittest.TestCase):
         for value in (
             "PASS_ROOT_BOOTSTRAP_PREFLIGHT",
             "/etc/sudoers.d/fap-api-github-production-supervisor-status",
-            '$target_user ALL=(root) NOPASSWD: /usr/bin/supervisorctl status',
+            '$DEPLOY_USER ALL=(root) NOPASSWD: /usr/bin/supervisorctl status',
             "/usr/bin/install /usr/sbin/visudo /usr/bin/sha256sum /usr/bin/supervisorctl",
+            "BLOCKED_BOOTSTRAP_IDENTITY",
+            "BLOCKED_DEPLOY_IDENTITY",
             "BLOCKED_ACTIVE_REVISION",
             "BLOCKED_DEPLOY_LOCK",
             "BLOCKED_DEPLOY_PROCESS",
@@ -77,16 +80,20 @@ class BackendProductionSupervisorRootBootstrapWorkflowTest(unittest.TestCase):
         ):
             self.assertIn(value, self.raw)
 
-    def test_preflight_preserves_empty_failed_stage_and_receipt_precedes_assertions(self):
+    def test_preflight_uses_distinct_bootstrap_and_deploy_ssh_identities(self):
         preflight = self.raw.split("- name: Run strict zero-write root-bootstrap preflight", 1)[1].split(
             "- name: Apply exact one-time root bootstrap", 1
         )[0]
-        self.assertIn("IFS='|' read -r status failed_stage", preflight)
-        self.assertNotIn("IFS=$'\\t' read -r status failed_stage", preflight)
-        self.assertIn("printf '%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s\\n'", preflight)
+        self.assertIn('"$BOOTSTRAP_SSH_USER@$DEPLOY_HOST"', preflight)
+        self.assertIn('"$DEPLOY_USER@$DEPLOY_HOST"', preflight)
+        self.assertIn("IFS='|' read -r bootstrap_user_sha", preflight)
+        self.assertIn("IFS='|' read -r deploy_user_sha", preflight)
+        self.assertNotIn("IFS=$'\\t'", preflight)
+        self.assertIn(".checks.bootstrap_identity_match", preflight)
+        self.assertIn(".checks.deploy_identity_match", preflight)
         self.assertLess(
             preflight.index('mv "$tmp" "$receipt"'),
-            preflight.index('test "$user_sha" = "$EXPECTED_DEPLOY_USER_SHA256"'),
+            preflight.index('test "$bootstrap_user_sha" = "$bootstrap_expected_sha"'),
         )
         self.assertLess(
             preflight.index('mv "$tmp" "$receipt"'),
@@ -101,6 +108,7 @@ class BackendProductionSupervisorRootBootstrapWorkflowTest(unittest.TestCase):
             "backend-production-supervisor-root-bootstrap-preflight-${BOOTSTRAP_PREFLIGHT_RUN_ID}-${BOOTSTRAP_PREFLIGHT_RUN_ATTEMPT}",
             'and .status == "PASS_ROOT_BOOTSTRAP_PREFLIGHT"',
             "I explicitly approve one-time backend production Supervisor root bootstrap",
+            "bootstrap-user fingerprint ${bootstrap_user_sha}",
             "installing only /etc/sudoers.d/fap-api-github-production-supervisor-status",
             "test \"$OPERATOR_APPROVAL_PHRASE\" = \"$expected_phrase\"",
         ):
@@ -118,22 +126,50 @@ class BackendProductionSupervisorRootBootstrapWorkflowTest(unittest.TestCase):
         for command in expected:
             self.assertIn(command, apply)
         self.assertEqual(apply.count("sudo -S -k -p ''"), 3)
+        self.assertIn("bootstrap_remote=", apply)
+        self.assertIn("deploy_remote=", apply)
+        self.assertIn("| $bootstrap_remote", apply)
+        self.assertIn('$deploy_remote "sudo -n /usr/bin/supervisorctl status"', apply)
+        self.assertNotIn('$bootstrap_remote "sudo -n /usr/bin/supervisorctl status"', apply)
         for forbidden in ("sudo bash", "sudo -S bash", "sudo sh", "rm -rf", "systemctl", "supervisorctl restart"):
             self.assertNotIn(forbidden, apply)
         self.assertIn("sudo -n /usr/bin/supervisorctl status", apply)
         self.assertIn("set -o noclobber", apply)
         self.assertIn("FAIL_ROOT_BOOTSTRAP_INSTALL", apply)
+        self.assertIn("FAIL_ROOT_BOOTSTRAP_CREDENTIAL_AUTH", apply)
         self.assertIn("FAIL_ROOT_BOOTSTRAP_FULL_POLICY", apply)
         self.assertIn("FAIL_ROOT_BOOTSTRAP_EXACT_READBACK", apply)
         self.assertIn("FAIL_ROOT_BOOTSTRAP_QUEUE_STATE", apply)
         self.assertNotIn("sudo -n rm", apply)
+
+    def test_v2_receipt_tracks_credential_and_candidate_lifecycle(self):
+        self.assertIn('backend.production_supervisor_root_bootstrap.v2', self.raw)
+        self.assertNotIn('backend.production_supervisor_root_bootstrap.v1', self.raw)
+        for value in (
+            "bootstrap_user_sha256",
+            "deploy_user_sha256",
+            "credential_tested",
+            "credential_accepted",
+            "candidate_created",
+            "candidate_cleanup_attempted",
+            "candidate_absent_after",
+        ):
+            self.assertIn(value, self.raw)
+        apply = self.raw.split("- name: Apply exact one-time root bootstrap", 1)[1].split(
+            "- name: Validate sanitized root-bootstrap receipt", 1
+        )[0]
+        self.assertIn("trap cleanup_candidate EXIT", apply)
+        self.assertIn('rm -f $q_candidate; test ! -e $q_candidate', apply)
+        self.assertIn(".credential_tested = true", apply)
+        self.assertIn(".credential_accepted = true", apply)
+        self.assertNotIn('cat "$sudo_error"', apply)
 
     def test_failure_receipt_is_initialized_before_checkout_and_always_uploaded(self):
         initialize = self.raw.index("- name: Initialize sanitized failure receipt")
         checkout = self.raw.index("- name: Check out exact main control plane")
         self.assertLess(initialize, checkout)
         self.assertIn("if: ${{ always() }}", self.raw)
-        self.assertIn("backend.production_supervisor_root_bootstrap.v1", self.raw)
+        self.assertIn("backend.production_supervisor_root_bootstrap.v2", self.raw)
         self.assertIn("secret_retirement_required: true", self.raw)
         self.assertIn(
             "actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7",
