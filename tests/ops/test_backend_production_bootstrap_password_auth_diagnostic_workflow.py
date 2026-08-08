@@ -161,6 +161,9 @@ class BackendProductionBootstrapPasswordAuthDiagnosticWorkflowTest(unittest.Test
             self.assertIn(value, method_section)
         self.assertNotIn("SSH_ASKPASS", method_section)
         self.assertIn('if [ "$method_rc" -eq 0 ]', self.raw)
+        self.assertIn("if ssh -F /dev/null -vv \\", method_section)
+        self.assertIn("else\n            method_rc=$?\n          fi", method_section)
+        self.assertNotIn("set +e\n          ssh -F /dev/null -vv", method_section)
 
     def test_password_probe_is_password_only_and_runs_once_after_offer(self):
         password_section = self.raw.split('password_method_offered=true', 1)[1]
@@ -173,7 +176,20 @@ class BackendProductionBootstrapPasswordAuthDiagnosticWorkflowTest(unittest.Test
             'printf \'%s\\n\' "$BOOTSTRAP_PASSWORD"',
         ):
             self.assertIn(value, password_section)
-        self.assertEqual(1, self.raw.count("password_result=\"$(setsid -w ssh"))
+        self.assertEqual(1, self.raw.count("if password_result=\"$(setsid -w ssh"))
+        self.assertIn("else\n            password_rc=$?\n          fi", password_section)
+        self.assertNotIn("set +e\n          export SSH_ASKPASS", password_section)
+
+    def test_expected_ssh_failures_are_conditionally_handled_before_err_trap(self):
+        self.assertIn("trap unexpected_failure ERR", self.raw)
+        self.assertLess(
+            self.raw.index("trap unexpected_failure ERR"),
+            self.raw.index("if ssh -F /dev/null -vv"),
+        )
+        self.assertLess(
+            self.raw.index("if ssh -F /dev/null -vv"),
+            self.raw.index('if password_result="$(setsid -w ssh'),
+        )
 
     def test_all_terminal_statuses_and_sanitized_receipt_contract_exist(self):
         for status in (

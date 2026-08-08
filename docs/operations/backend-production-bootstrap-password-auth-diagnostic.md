@@ -30,6 +30,10 @@ GSSAPI, and host-based client authentication. It sends no password. OpenSSH
 debug stderr is captured to a mode-`0600` runner-temporary file, reduced by the
 repository classifier to an allowlisted status, and deleted immediately.
 Neither raw stderr nor routing values enter logs, summaries, or artifacts.
+Both SSH operations are evaluated as Bash conditional commands because a
+non-zero authentication result is expected diagnostic input; this lets the
+sanitized classifier handle it without invoking the unexpected-runner-error
+trap.
 
 If the server explicitly offers `password`, the workflow performs exactly one
 password-only connection using the protected secret through `SSH_ASKPASS`.
