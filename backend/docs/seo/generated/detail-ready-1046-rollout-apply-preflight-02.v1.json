@@ -1,0 +1,127 @@
+{
+  "schema_version": "detail_ready_1046_rollout_apply_preflight_02.v1",
+  "task": "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-02",
+  "generated_at": "2026-08-08T01:59:43Z",
+  "evidence_kind": "control_plane_and_public_read_only_baseline",
+  "final_decision": "ready_to_merge_zero_write_control_plane_not_authorized_to_dispatch_or_apply",
+  "repository_base_sha": "2214a38769f1a72e3183ba27e84d7f9f4e4b9642",
+  "authority_manifest": {
+    "path": "backend/docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json",
+    "sha256": "b570ec0cdda65278aa543431886b3529d072de8d67a8e79f1cafbb1c4c8dfc0e",
+    "current_public_detail_count": 30,
+    "clean_delta_count": 1016,
+    "target_public_total": 1046,
+    "aa_canary_in_delta": true,
+    "software_developers_excluded": true,
+    "digital_forensics_analysts_excluded": true,
+    "computer_occupations_all_other_excluded": true,
+    "apply_allowed": false,
+    "rollout_apply_allowed": false
+  },
+  "prerequisite_authority": {
+    "delta_authority_repair": {
+      "task": "DETAIL_READY_1046_DELTA_AUTHORITY_REPAIR-01",
+      "merged": true,
+      "merge_commit": "6716bf50c3cd22691d4609434f8a2b12442b2c8a"
+    },
+    "no_audit_dry_run": {
+      "task": "DETAIL_READY_1046_ROLLOUT_NO_AUDIT_DRY_RUN-01",
+      "merged": true,
+      "merge_commit": "f0dc07d19c4dee1cebb537c5bc98cef12f6c2798",
+      "dry_run_no_audit_write_supported": true,
+      "apply_no_audit_write_rejected": true
+    }
+  },
+  "public_read_only_baseline": {
+    "observed_at": "2026-08-08T01:59:43Z",
+    "job_index_items": {
+      "en": 1046,
+      "zh_CN": 1046
+    },
+    "directory_items": {
+      "en": 30,
+      "zh_CN": 30
+    },
+    "sitemap": {
+      "total_urls": 613,
+      "career_detail_urls": 60,
+      "aa_present": false
+    },
+    "aa": {
+      "seo_authority_http": {
+        "en": 500,
+        "zh_CN": 500
+      },
+      "page_http": {
+        "en": 200,
+        "zh_CN": 200
+      },
+      "page_body_classification": "not_reasserted_by_this_control_artifact"
+    }
+  },
+  "pipeline_authority_model": {
+    "legacy_canonical_rollout": {
+      "authority": "full release ledger to runtime projection to canonical truth to rollout gate",
+      "known_failure_for_out_of_ledger_slugs": "candidate_truth_row_missing",
+      "aa_preflight_command": "career:execute-canonical-rollout-batch --dry-run --no-audit-write"
+    },
+    "search_entry_quality_pipeline": {
+      "authority": "search-entry review and eligibility",
+      "publication_authority": false,
+      "indexability_authority": false,
+      "sitemap_authority": false
+    },
+    "cross_pipeline_inference_allowed": false
+  },
+  "protected_zero_write_control": {
+    "workflow": ".github/workflows/career-1046-rollout-zero-write-preflight.yml",
+    "runner": "backend/scripts/career/career_1046_rollout_preflight.sh",
+    "requires_latest_main_control_plane_sha": true,
+    "requires_exact_active_release_sha_and_name": true,
+    "requires_exact_manifest_sha256": true,
+    "requires_protected_production_environment": true,
+    "requires_pinned_ssh_known_hosts": true,
+    "requires_exact_read_only_operator_phrase": true,
+    "remote_file_write": false,
+    "production_dispatch_performed": false
+  },
+  "memory_batch_policy": {
+    "aa_canary_batch_size": 1,
+    "delta_batch_size_is_runtime_derived_from_mem_available": true,
+    "candidate_sizes": [
+      10,
+      25,
+      50,
+      100
+    ],
+    "php_memory_limit_mb": 768,
+    "command_timeout_seconds": 180,
+    "stop_on_timeout_or_non_json": true,
+    "warm_included": false,
+    "full_rollout_included": false,
+    "peak_rss_measured_by_this_repository_artifact": false,
+    "upgrade_required": "unknown_until_protected_zero_write_evidence_is_captured"
+  },
+  "approval_boundary": {
+    "this_task_authorizes_code_test_pr_and_zero_write_evidence_control_only": true,
+    "workflow_dispatch_authorized_by_this_task": false,
+    "future_apply_authorized": false,
+    "future_apply_requires_separate_exact_receipt_bound_control": true,
+    "chat_approval_is_not_encoded_as_apply_authority": true
+  },
+  "negative_guarantees": {
+    "production_apply": false,
+    "database_write": false,
+    "cms_write": false,
+    "publication": false,
+    "warm": false,
+    "capacity_change": false,
+    "deploy": false,
+    "sitemap_write": false,
+    "llms_write": false,
+    "search_channel_action": false,
+    "url_submission": false,
+    "fap_web_change": false
+  },
+  "next_task": "After merge, separately authorize one exact protected zero-write workflow dispatch; consume its immutable receipt before deciding AA apply, batching, warm, capacity, deploy, or discoverability work."
+}
