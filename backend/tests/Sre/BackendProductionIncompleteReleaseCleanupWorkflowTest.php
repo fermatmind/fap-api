@@ -48,17 +48,20 @@ final class BackendProductionIncompleteReleaseCleanupWorkflowTest extends TestCa
         );
 
         foreach ([
-            'test "$target" != "$current_release"',
-            'test ! -e "$DEPLOY_PATH/.dep/deploy.lock"',
+            'target_is_active="$([ -n "$current_release" ] && [ "$target" = "$current_release" ] && echo true || echo false)"',
+            'deploy_lock_present="$([ -e "$DEPLOY_PATH/.dep/deploy.lock" ] && echo true || echo false)"',
             "expected_inventory=\$'d backend\\nd backend/storage\\nd backend/storage/framework\\nd backend/storage/framework/cache'",
-            'test "$regular_file_count" = 0',
-            'test "$symlink_count" = 0',
-            'test "$process_reference_count" = 0',
+            'elif .regular_file_count != 0 then "REGULAR_FILES_PRESENT"',
+            'elif .symlink_count != 0 then "SYMLINKS_PRESENT"',
+            'elif .process_reference_count != 0 then "PROCESS_REFERENCE_PRESENT"',
             'directory_removal_count: 0',
             'file_delete_count: 0',
             'writes_committed: false',
-            'INCOMPLETE_RELEASE_CLEANUP_REMOTE_FAILURE_LINE_',
-            "rg -o 'INCOMPLETE_RELEASE_CLEANUP_REMOTE_FAILURE_LINE_[0-9]+'",
+            'releases_root_valid: $releases_root_valid',
+            'current_release_valid: $current_release_valid',
+            'target_resolved_exact: $target_resolved_exact',
+            'inventory_exact: $inventory_exact',
+            'INCOMPLETE_RELEASE_CLEANUP_PREFLIGHT_BLOCKED_${failure_code}',
         ] as $contract) {
             $this->assertStringContainsString($contract, $preflight);
         }
