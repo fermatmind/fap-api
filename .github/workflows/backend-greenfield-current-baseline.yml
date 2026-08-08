@@ -112,16 +112,16 @@ jobs:
       - name: Set up pinned production SSH identity
         uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-private-key: ${{ secrets.GREENFIELD_SOURCE_SSH_PRIVATE_KEY }}
 
       - name: Install pinned SSH known hosts
         shell: bash
         env:
-          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
-          DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
-          DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
-          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
-          DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+          SSH_KNOWN_HOSTS: ${{ secrets.GREENFIELD_SOURCE_SSH_KNOWN_HOSTS }}
+          DEPLOY_USER: ${{ secrets.GREENFIELD_SOURCE_USER }}
+          DEPLOY_PORT: ${{ secrets.GREENFIELD_SOURCE_PORT }}
+          DEPLOY_HOST: ${{ secrets.GREENFIELD_SOURCE_HOST }}
+          DEPLOY_PATH: ${{ secrets.GREENFIELD_SOURCE_PATH }}
         run: |
           set -euo pipefail
           test -n "$SSH_KNOWN_HOSTS"
@@ -144,10 +144,10 @@ jobs:
       - name: Stream source snapshot through stdin without remote files
         shell: bash
         env:
-          DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
-          DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
-          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
-          DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+          DEPLOY_USER: ${{ secrets.GREENFIELD_SOURCE_USER }}
+          DEPLOY_PORT: ${{ secrets.GREENFIELD_SOURCE_PORT }}
+          DEPLOY_HOST: ${{ secrets.GREENFIELD_SOURCE_HOST }}
+          DEPLOY_PATH: ${{ secrets.GREENFIELD_SOURCE_PATH }}
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/greenfield"

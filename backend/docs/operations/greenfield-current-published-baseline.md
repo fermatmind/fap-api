@@ -21,6 +21,17 @@ Both modes require:
 - the exact current Career runtime projection SHA-256;
 - the workflow-generated exact operator approval sentence.
 
+The production Environment provides a dedicated, pinned read-only source identity:
+
+- `GREENFIELD_SOURCE_SSH_PRIVATE_KEY`
+- `GREENFIELD_SOURCE_SSH_KNOWN_HOSTS`
+- `GREENFIELD_SOURCE_USER`
+- `GREENFIELD_SOURCE_PORT`
+- `GREENFIELD_SOURCE_HOST`
+- `GREENFIELD_SOURCE_PATH`
+
+These values are intentionally separate from generic production deployment SSH secrets. Baseline export remains bound to the verified current-published source while deployment targets move between cloud providers; changing the Greenfield source identity cannot redirect or authorize a production deployment.
+
 `preflight` builds and verifies the package without downloading media. It uploads only a sanitized receipt containing the package identity, dataset counts, Career projection summary, public-media count/size summary, and the opaque public-media host-set SHA-256.
 
 `export` requires that exact host-set SHA-256 and downloads every selected public media object through credential-free HTTPS with redirects disabled. It verifies object bytes and SHA-256, rebuilds the deterministic package, and uploads the package plus sanitized receipt. Artifacts expire after three days.
