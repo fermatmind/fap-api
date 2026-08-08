@@ -64,11 +64,11 @@ jobs:
     timeout-minutes: 20
     environment: production
     env:
-      DEPLOY_USER: ${{ vars.PRODUCTION_DEPLOY_USER }}
-      DEPLOY_PORT: ${{ vars.PRODUCTION_DEPLOY_PORT }}
-      DEPLOY_HOST: ${{ vars.PRODUCTION_DEPLOY_HOST }}
-      RETIRED_DEPLOY_HOST: ${{ vars.PRODUCTION_RETIRED_DEPLOY_HOST }}
-      DEPLOY_PATH: ${{ vars.PRODUCTION_DEPLOY_PATH }}
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
       HEALTHCHECK_URL: ${{ vars.PRODUCTION_HEALTHCHECK_URL }}
       EXPECTED_RELEASE_SHA: ${{ inputs.expected_release_sha }}
       RELEASE_NAME: ${{ inputs.release_name }}

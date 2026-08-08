@@ -50,6 +50,20 @@ class BackendProductionVerifyOnlyWorkflowTest(unittest.TestCase):
             self.run_text,
         )
 
+    def test_production_connection_identity_uses_protected_secrets(self):
+        for name in (
+            "PRODUCTION_DEPLOY_USER",
+            "PRODUCTION_DEPLOY_PORT",
+            "PRODUCTION_DEPLOY_HOST",
+            "PRODUCTION_RETIRED_DEPLOY_HOST",
+            "PRODUCTION_DEPLOY_PATH",
+        ):
+            with self.subTest(name=name):
+                self.assertIn(f"${{{{ secrets.{name} }}}}", self.raw)
+                self.assertNotIn(f"${{{{ vars.{name} }}}}", self.raw)
+
+        self.assertIn("${{ vars.PRODUCTION_HEALTHCHECK_URL }}", self.raw)
+
     def test_release_name_contract_accepts_existing_utc_release_identifiers(self):
         release_name_pattern = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$")
 
@@ -115,7 +129,7 @@ class BackendProductionVerifyOnlyWorkflowTest(unittest.TestCase):
             self.raw,
         )
         self.assertIn(
-            "uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a",
             self.raw,
         )
         self.assertIn("retention-days: 30", self.raw)
