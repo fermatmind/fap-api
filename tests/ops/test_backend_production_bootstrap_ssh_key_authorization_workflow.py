@@ -67,6 +67,14 @@ class BackendProductionBootstrapSshKeyAuthorizationWorkflowTest(unittest.TestCas
         self.assertNotIn("BOOTSTRAP_PASSWORD", summary)
         self.assertNotIn("normalized-key.pub", summary)
 
+    def test_existing_key_is_derived_and_used_only_through_pinned_agent(self):
+        self.assertIn("webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0", self.raw)
+        self.assertIn("ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}", self.raw)
+        self.assertIn('ssh-add -L > "$RUNNER_TEMP/production-key.pub"', self.raw)
+        self.assertNotIn('printf \'%s\\n\' "$SSH_PRIVATE_KEY"', self.raw)
+        self.assertNotIn('ssh-keygen -y -f "$RUNNER_TEMP/production-key"', self.raw)
+        self.assertNotIn('-i "$RUNNER_TEMP/production-key"', self.raw)
+
     def test_apply_is_receipt_and_exact_phrase_bound(self):
         for value in (
             "KEY_PREFLIGHT_RUN_ID",
