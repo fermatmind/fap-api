@@ -103907,9 +103907,9 @@
       "DETAIL_READY_1046_DELTA_AUTHORITY_REPAIR-01",
       "DETAIL_READY_1046_ROLLOUT_NO_AUDIT_DRY_RUN-01"
     ],
-    "status": "local_validation_passed",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "dca7fb2630bc44f93c4a22aa9bc8980efe8f9827",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3553",
     "checks": {
       "authorization": {
         "status": "passed",
@@ -103954,8 +103954,13 @@
         "at": "2026-08-08T10:05:21+08:00",
         "status": "local_validation_passed",
         "note": "Focused workflow contract passed 3 tests / 73 assertions. Scoped Pint, bash syntax, shellcheck, actionlint, YAML/JSON parsing, manifest uniqueness, and diff checks passed. Public read-only baseline remains 1046 job-index versus 30 directory items per locale, sitemap 613/60 with AA absent, and AA SEO authority 500/500; no protected production workflow was dispatched and no write-capable action occurred."
+      },
+      {
+        "at": "2026-08-08T10:06:37+08:00",
+        "status": "github_checks_pending",
+        "note": "PR #3553 opened from validated implementation commit dca7fb2630bc44f93c4a22aa9bc8980efe8f9827. Required GitHub checks are pending; no production workflow was dispatched and no production apply, DB/CMS mutation, publication, warm, capacity change, deploy, or discoverability action occurred."
       }
     ],
-    "updated_at": "2026-08-08T10:05:21+08:00"
+    "updated_at": "2026-08-08T10:06:37+08:00"
   }
 }
