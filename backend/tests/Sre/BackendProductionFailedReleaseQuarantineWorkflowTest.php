@@ -53,6 +53,7 @@ final class BackendProductionFailedReleaseQuarantineWorkflowTest extends TestCas
 
         foreach ([
             'find "$target" -xdev -mindepth 1 -print0',
+            'jq -c \'select(.record_kind == "tree")\'',
             'grep -q \'[[:cntrl:]]\'',
             'sha256sum -- "$path"',
             'link_target_sha256',
@@ -78,6 +79,12 @@ final class BackendProductionFailedReleaseQuarantineWorkflowTest extends TestCas
         foreach (['rm -', 'mv -T', 'touch ', 'sudo ', 'php artisan', 'supervisorctl', 'chmod ', 'chown '] as $forbidden) {
             $this->assertStringNotContainsString($forbidden, $inventory);
         }
+
+        $this->assertStringNotContainsString(
+            'jq -e -c \'select(.record_kind == "tree")\'',
+            $inventory,
+            'An empty failed-release directory is a valid deterministic inventory, not a jq no-output failure.',
+        );
     }
 
     #[Test]
