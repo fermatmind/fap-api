@@ -129,15 +129,32 @@ jobs:
           test "${#release_names[@]}" -le 50
 
           inactive_releases='[]'
+          release_anomalies='[]'
           for release_name in "${release_names[@]}"; do
             [[ "$release_name" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]
             release_path="$releases_root/$release_name"
             resolved_release="$(readlink -f "$release_path")"
             test "$resolved_release" = "$release_path"
-            test -f "$release_path/REVISION"
-            revision="$(tr -d '\r\n' < "$release_path/REVISION")"
-            [[ "$revision" =~ ^[0-9a-f]{40}$ ]]
             if [ "$resolved_release" = "$current_release" ]; then
+              continue
+            fi
+            if [ ! -f "$release_path/REVISION" ]; then
+              release_anomalies="$(
+                jq -c \
+                  --arg release_name "$release_name" \
+                  '. + [{release_name: $release_name, reason: "revision_missing"}]' \
+                  <<<"$release_anomalies"
+              )"
+              continue
+            fi
+            revision="$(tr -d '\r\n' < "$release_path/REVISION")"
+            if [[ ! "$revision" =~ ^[0-9a-f]{40}$ ]]; then
+              release_anomalies="$(
+                jq -c \
+                  --arg release_name "$release_name" \
+                  '. + [{release_name: $release_name, reason: "revision_invalid"}]' \
+                  <<<"$release_anomalies"
+              )"
               continue
             fi
             inactive_releases="$(
@@ -154,6 +171,7 @@ jobs:
             --arg active_revision "$active_revision" \
             --argjson managed_release_count "${#release_names[@]}" \
             --argjson inactive_releases "$inactive_releases" \
+            --argjson release_anomalies "$release_anomalies" \
             '{
               schema_version: "backend-production-release-remote-read.v1",
               active: {
@@ -162,6 +180,7 @@ jobs:
               },
               managed_release_count: $managed_release_count,
               inactive_releases: $inactive_releases,
+              release_anomalies: $release_anomalies,
               deploy_lock_present: false
             }'
           REMOTE
@@ -180,6 +199,11 @@ jobs:
             and ([.inactive_releases[] |
               (.release_name | test("^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"))
               and (.revision | test("^[0-9a-f]{40}$"))
+            ] | all)
+            and (.release_anomalies | type == "array")
+            and ([.release_anomalies[] |
+              (.release_name | test("^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"))
+              and (.reason == "revision_missing" or .reason == "revision_invalid")
             ] | all)
             and .deploy_lock_present == false
           ' artifacts/remote-releases.json >/dev/null
@@ -289,8 +313,13 @@ jobs:
                | if length == 0 then null else max_by(.staging_run_id) end' \
               <<<"$candidates"
           )"
+          release_anomalies="$(jq -c '.release_anomalies' artifacts/remote-releases.json)"
+          anomaly_count="$(jq -r 'length' <<<"$release_anomalies")"
           status="READY"
-          if [ "$selected_candidate" = null ]; then
+          if [ "$anomaly_count" -gt 0 ]; then
+            status="BLOCKED_RELEASE_ANOMALIES"
+            selected_candidate=null
+          elif [ "$selected_candidate" = null ]; then
             status="NO_ELIGIBLE_INACTIVE_CANDIDATE"
           fi
 
@@ -301,6 +330,7 @@ jobs:
             --argjson active_main_reachable "$active_main_reachable" \
             --argjson managed_release_count "$(jq -r '.managed_release_count' artifacts/remote-releases.json)" \
             --argjson inactive_releases "$candidates" \
+            --argjson release_anomalies "$release_anomalies" \
             --argjson selected_candidate "$selected_candidate" \
             '{
               schema_version: "backend-production-release-discovery.v1",
@@ -309,12 +339,14 @@ jobs:
               active: ($active + {main_reachable: $active_main_reachable}),
               managed_release_count: $managed_release_count,
               inactive_releases: $inactive_releases,
+              release_anomalies: $release_anomalies,
               selected_candidate: $selected_candidate,
               checks: {
                 current_symlink_resolved: true,
                 active_revision_valid: true,
                 deploy_lock_absent: true,
                 managed_release_count_bounded: true,
+                release_anomalies_absent: ($release_anomalies | length == 0),
                 staging_evidence_exact: true
               },
               negative_guarantees: {
@@ -335,7 +367,7 @@ jobs:
 
           jq -e '
             .schema_version == "backend-production-release-discovery.v1"
-            and (.status == "READY" or .status == "NO_ELIGIBLE_INACTIVE_CANDIDATE")
+            and (.status == "READY" or .status == "NO_ELIGIBLE_INACTIVE_CANDIDATE" or .status == "BLOCKED_RELEASE_ANOMALIES")
             and (.control_plane_sha | test("^[0-9a-f]{40}$"))
             and (.active.release_name | test("^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"))
             and (.active.revision | test("^[0-9a-f]{40}$"))
@@ -348,12 +380,22 @@ jobs:
               and (.staging_evidence_valid | type == "boolean")
               and (.eligible | type == "boolean")
             ] | all)
+            and (.release_anomalies | type == "array")
+            and ([.release_anomalies[] |
+              (.release_name | test("^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"))
+              and (.reason == "revision_missing" or .reason == "revision_invalid")
+            ] | all)
             and (
               if .status == "READY" then
                 .selected_candidate != null
                 and .selected_candidate.eligible == true
+                and (.release_anomalies | length) == 0
+              elif .status == "BLOCKED_RELEASE_ANOMALIES" then
+                .selected_candidate == null
+                and (.release_anomalies | length) >= 1
               else
                 .selected_candidate == null
+                and (.release_anomalies | length) == 0
               end
             )
             and .negative_guarantees.remote_file_write == false
@@ -369,6 +411,7 @@ jobs:
           status="$(jq -r '.status' artifacts/backend-production-release-discovery.json)"
           inactive_count="$(jq -r '.inactive_releases | length' artifacts/backend-production-release-discovery.json)"
           eligible_count="$(jq -r '[.inactive_releases[] | select(.eligible == true)] | length' artifacts/backend-production-release-discovery.json)"
+          anomaly_count="$(jq -r '.release_anomalies | length' artifacts/backend-production-release-discovery.json)"
           {
             echo "## Backend production release discovery"
             echo
@@ -376,6 +419,7 @@ jobs:
             echo "- Active release identity: discovered"
             echo "- Inactive releases: ${inactive_count}"
             echo "- Exact-staging eligible candidates: ${eligible_count}"
+            echo "- Release identity anomalies: ${anomaly_count}"
             echo "- Writes committed: false"
           } >> "$GITHUB_STEP_SUMMARY"
 

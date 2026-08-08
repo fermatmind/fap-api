@@ -47,7 +47,10 @@ final class BackendProductionReleaseDiscoveryWorkflowTest extends TestCase
             'current_release="$(readlink -f "$DEPLOY_PATH/current")"',
             'test "${#release_names[@]}" -le 50',
             'test -f "$current_release/REVISION"',
-            'test -f "$release_path/REVISION"',
+            'if [ ! -f "$release_path/REVISION" ]; then',
+            'reason: "revision_missing"',
+            'reason: "revision_invalid"',
+            'release_anomalies: $release_anomalies',
             'backend-production-release-remote-read.v1',
             'deploy_lock_present: false',
             '2>/dev/null',
@@ -93,6 +96,7 @@ final class BackendProductionReleaseDiscoveryWorkflowTest extends TestCase
             'eligible: $eligible',
             'max_by(.staging_run_id)',
             'NO_ELIGIBLE_INACTIVE_CANDIDATE',
+            'BLOCKED_RELEASE_ANOMALIES',
         ] as $contract) {
             $this->assertStringContainsString($contract, $source);
         }
@@ -116,6 +120,8 @@ final class BackendProductionReleaseDiscoveryWorkflowTest extends TestCase
             'raw_log_read: false',
             'search_submit: false',
             'writes_committed: false',
+            'release_anomalies_absent: ($release_anomalies | length == 0)',
+            'Release identity anomalies: ${anomaly_count}',
             'backend-production-release-discovery-${{ github.run_id }}',
         ] as $contract) {
             $this->assertStringContainsString($contract, $source);
