@@ -57,6 +57,8 @@ final class BackendProductionIncompleteReleaseCleanupWorkflowTest extends TestCa
             'directory_removal_count: 0',
             'file_delete_count: 0',
             'writes_committed: false',
+            'INCOMPLETE_RELEASE_CLEANUP_REMOTE_FAILURE_LINE_',
+            "rg -o 'INCOMPLETE_RELEASE_CLEANUP_REMOTE_FAILURE_LINE_[0-9]+'",
         ] as $contract) {
             $this->assertStringContainsString($contract, $preflight);
         }
@@ -97,6 +99,8 @@ final class BackendProductionIncompleteReleaseCleanupWorkflowTest extends TestCa
             'process_restart_count: 0',
             'discoverability_write_count: 0',
             'writes_committed: true',
+            'INCOMPLETE_RELEASE_CLEANUP_REMOTE_FAILURE_LINE_',
+            "rg -o 'INCOMPLETE_RELEASE_CLEANUP_REMOTE_FAILURE_LINE_[0-9]+'",
         ] as $contract) {
             $this->assertStringContainsString($contract, $apply);
         }

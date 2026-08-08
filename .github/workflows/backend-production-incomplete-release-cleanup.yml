@@ -269,8 +269,9 @@ jobs:
           if ! ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
             "DEPLOY_PATH=$q_deploy_path TARGET_RELEASE_NAME=$q_target_release_name bash -s" \
-            <<'REMOTE' > artifacts/remote-preflight.json 2>/dev/null
+            <<'REMOTE' > artifacts/remote-preflight.json 2> artifacts/remote-preflight.err
           set -Eeuo pipefail
+          trap 'printf "INCOMPLETE_RELEASE_CLEANUP_REMOTE_FAILURE_LINE_%s\n" "$LINENO" >&2' ERR
           releases_root="$(readlink -f "$DEPLOY_PATH/releases")"
           current_release="$(readlink -f "$DEPLOY_PATH/current")"
           target="$releases_root/$TARGET_RELEASE_NAME"
@@ -321,7 +322,8 @@ jobs:
             }'
           REMOTE
           then
-            echo "INCOMPLETE_RELEASE_CLEANUP_REMOTE_PREFLIGHT_FAILED" >&2
+            failure_code="$(rg -o 'INCOMPLETE_RELEASE_CLEANUP_REMOTE_FAILURE_LINE_[0-9]+' artifacts/remote-preflight.err | tail -n 1 || true)"
+            echo "${failure_code:-INCOMPLETE_RELEASE_CLEANUP_REMOTE_PREFLIGHT_FAILED}" >&2
             exit 1
           fi
 
@@ -411,8 +413,9 @@ jobs:
           if ! ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
             "DEPLOY_PATH=$q_deploy_path TARGET_RELEASE_NAME=$q_target_release_name EXPECTED_ACTIVE_REVISION=$q_expected_active_revision EXPECTED_ACTIVE_RELEASE_NAME=$q_expected_active_release_name EXPECTED_INVENTORY_SHA256=$q_expected_inventory_sha256 bash -s" \
-            <<'REMOTE' > artifacts/remote-apply.json 2>/dev/null
+            <<'REMOTE' > artifacts/remote-apply.json 2> artifacts/remote-apply.err
           set -Eeuo pipefail
+          trap 'printf "INCOMPLETE_RELEASE_CLEANUP_REMOTE_FAILURE_LINE_%s\n" "$LINENO" >&2' ERR
           releases_root="$(readlink -f "$DEPLOY_PATH/releases")"
           current_release="$(readlink -f "$DEPLOY_PATH/current")"
           target="$releases_root/$TARGET_RELEASE_NAME"
@@ -470,7 +473,8 @@ jobs:
             }'
           REMOTE
           then
-            echo "INCOMPLETE_RELEASE_CLEANUP_REMOTE_APPLY_FAILED" >&2
+            failure_code="$(rg -o 'INCOMPLETE_RELEASE_CLEANUP_REMOTE_FAILURE_LINE_[0-9]+' artifacts/remote-apply.err | tail -n 1 || true)"
+            echo "${failure_code:-INCOMPLETE_RELEASE_CLEANUP_REMOTE_APPLY_FAILED}" >&2
             exit 1
           fi
 
