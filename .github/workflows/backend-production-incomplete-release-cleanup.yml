@@ -270,29 +270,26 @@ jobs:
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
             "DEPLOY_PATH=$q_deploy_path TARGET_RELEASE_NAME=$q_target_release_name bash -s" \
             <<'REMOTE' > artifacts/remote-preflight.json 2> artifacts/remote-preflight.err
-          set -Eeuo pipefail
-          trap 'printf "INCOMPLETE_RELEASE_CLEANUP_REMOTE_FAILURE_LINE_%s\n" "$LINENO" >&2' ERR
-          releases_root="$(readlink -f "$DEPLOY_PATH/releases")"
-          current_release="$(readlink -f "$DEPLOY_PATH/current")"
+          set -u -o pipefail
+          releases_root="$(readlink -f "$DEPLOY_PATH/releases" 2>/dev/null || true)"
+          current_release="$(readlink -f "$DEPLOY_PATH/current" 2>/dev/null || true)"
           target="$releases_root/$TARGET_RELEASE_NAME"
-          resolved_target="$(readlink -f "$target")"
-          test "$resolved_target" = "$target"
-          test -d "$target"
-          test "$target" != "$current_release"
-          test ! -e "$DEPLOY_PATH/.dep/deploy.lock"
+          resolved_target="$(readlink -f "$target" 2>/dev/null || true)"
+          releases_root_valid="$([ -n "$releases_root" ] && [ -d "$releases_root" ] && echo true || echo false)"
+          current_release_valid="$([ -n "$current_release" ] && [ -d "$current_release" ] && echo true || echo false)"
+          target_resolved_exact="$([ -n "$resolved_target" ] && [ "$resolved_target" = "$target" ] && echo true || echo false)"
+          target_exists="$([ -d "$target" ] && echo true || echo false)"
+          target_is_active="$([ -n "$current_release" ] && [ "$target" = "$current_release" ] && echo true || echo false)"
+          deploy_lock_present="$([ -e "$DEPLOY_PATH/.dep/deploy.lock" ] && echo true || echo false)"
           active_release_name="$(basename "$current_release")"
-          active_revision="$(tr -d '\r\n' < "$current_release/REVISION")"
-          [[ "$active_release_name" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]
-          [[ "$active_revision" =~ ^[0-9a-f]{40}$ ]]
+          active_revision="$(tr -d '\r\n' < "$current_release/REVISION" 2>/dev/null || true)"
 
-          inventory="$(find "$target" -mindepth 1 -printf '%y %P\n' | LC_ALL=C sort)"
+          inventory="$(find "$target" -mindepth 1 -printf '%y %P\n' 2>/dev/null | LC_ALL=C sort)"
           expected_inventory=$'d backend\nd backend/storage\nd backend/storage/framework\nd backend/storage/framework/cache'
-          test "$inventory" = "$expected_inventory"
+          inventory_exact="$([ "$inventory" = "$expected_inventory" ] && echo true || echo false)"
           inventory_sha256="$(printf '%s\n' "$inventory" | sha256sum | awk '{print $1}')"
-          regular_file_count="$(find "$target" -xdev -type f | wc -l | tr -d ' ')"
-          symlink_count="$(find "$target" -xdev -type l | wc -l | tr -d ' ')"
-          test "$regular_file_count" = 0
-          test "$symlink_count" = 0
+          regular_file_count="$(find "$target" -xdev -type f 2>/dev/null | wc -l | tr -d ' ')"
+          symlink_count="$(find "$target" -xdev -type l 2>/dev/null | wc -l | tr -d ' ')"
 
           process_reference_count=0
           for process_root in /proc/[0-9]*; do
@@ -301,12 +298,17 @@ jobs:
             root="$(readlink -f "$process_root/root" 2>/dev/null || true)"
             case "$cwd|$exe|$root" in *"$target"*) process_reference_count=$((process_reference_count + 1));; esac
           done
-          test "$process_reference_count" = 0
-
           jq -n \
             --arg active_release_name "$active_release_name" \
             --arg active_revision "$active_revision" \
             --arg inventory_sha256 "$inventory_sha256" \
+            --argjson releases_root_valid "$releases_root_valid" \
+            --argjson current_release_valid "$current_release_valid" \
+            --argjson target_resolved_exact "$target_resolved_exact" \
+            --argjson target_exists "$target_exists" \
+            --argjson target_is_active "$target_is_active" \
+            --argjson deploy_lock_present "$deploy_lock_present" \
+            --argjson inventory_exact "$inventory_exact" \
             --argjson regular_file_count "$regular_file_count" \
             --argjson symlink_count "$symlink_count" \
             --argjson process_reference_count "$process_reference_count" \
@@ -314,8 +316,13 @@ jobs:
               active_release_name: $active_release_name,
               active_revision: $active_revision,
               inventory_sha256: $inventory_sha256,
-              target_is_active: false,
-              deploy_lock_present: false,
+              releases_root_valid: $releases_root_valid,
+              current_release_valid: $current_release_valid,
+              target_resolved_exact: $target_resolved_exact,
+              target_exists: $target_exists,
+              target_is_active: $target_is_active,
+              deploy_lock_present: $deploy_lock_present,
+              inventory_exact: $inventory_exact,
               regular_file_count: $regular_file_count,
               symlink_count: $symlink_count,
               process_reference_count: $process_reference_count
@@ -327,16 +334,27 @@ jobs:
             exit 1
           fi
 
-          jq -e '
-            (.active_release_name | test("^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"))
-            and (.active_revision | test("^[0-9a-f]{40}$"))
-            and (.inventory_sha256 | test("^[0-9a-f]{64}$"))
-            and .target_is_active == false
-            and .deploy_lock_present == false
-            and .regular_file_count == 0
-            and .symlink_count == 0
-            and .process_reference_count == 0
-          ' artifacts/remote-preflight.json >/dev/null
+          failure_code="$(jq -r '
+            if .releases_root_valid != true then "RELEASES_ROOT_INVALID"
+            elif .current_release_valid != true then "CURRENT_RELEASE_INVALID"
+            elif .target_resolved_exact != true then "TARGET_RESOLUTION_INVALID"
+            elif .target_exists != true then "TARGET_MISSING"
+            elif .target_is_active != false then "TARGET_IS_ACTIVE"
+            elif .deploy_lock_present != false then "DEPLOY_LOCK_PRESENT"
+            elif (.active_release_name | test("^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$") | not) then "ACTIVE_RELEASE_NAME_INVALID"
+            elif (.active_revision | test("^[0-9a-f]{40}$") | not) then "ACTIVE_REVISION_INVALID"
+            elif .inventory_exact != true then "INVENTORY_MISMATCH"
+            elif (.inventory_sha256 | test("^[0-9a-f]{64}$") | not) then "INVENTORY_SHA_INVALID"
+            elif .regular_file_count != 0 then "REGULAR_FILES_PRESENT"
+            elif .symlink_count != 0 then "SYMLINKS_PRESENT"
+            elif .process_reference_count != 0 then "PROCESS_REFERENCE_PRESENT"
+            else "PASS"
+            end
+          ' artifacts/remote-preflight.json)"
+          if [ "$failure_code" != PASS ]; then
+            echo "INCOMPLETE_RELEASE_CLEANUP_PREFLIGHT_BLOCKED_${failure_code}" >&2
+            exit 1
+          fi
 
           jq -n \
             --arg contract_version "backend.production_incomplete_release_cleanup.v1" \
