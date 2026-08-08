@@ -83,12 +83,14 @@ coverage guard before moving the production symlink.
 ## Deployment activation gate
 
 Every Deployer release runs the read-only coverage command before
-`deploy:symlink`. Activation requires `status=ready`, a coverage ratio of 1.0,
-and at least 2,092 eligible targets. The target floor can be increased with
-`DEPLOY_CAREER_DETAIL_MINIMUM_TARGETS`; lowering it is an operator-controlled
-release decision and never repairs or republishes content. A failed gate leaves
-the current symlink unchanged. It must not be bypassed by warming one sampled
-detail URL.
+`deploy:symlink`. Activation requires both `status=ready` and the environment's
+eligible-target floor. Staging derives its cohort from runtime publication
+authority, requires at least one eligible target, and still requires complete
+coverage: covered targets equal eligible targets, missing and broken counts are
+zero, and the coverage ratio is 1.0. Production keeps the 2,092-target default;
+`DEPLOY_CAREER_DETAIL_MINIMUM_TARGETS` may raise or explicitly control that
+production floor without changing staging. A failed gate leaves the current
+symlink unchanged. It must not be bypassed by warming one sampled detail URL.
 
 ## Runtime SLO and controlled repair
 

@@ -77,7 +77,7 @@ final class CareerVerifyJobDetailCacheCoverage extends Command
         if (! $repair) {
             $this->emit($report);
 
-            return ($report['status'] === 'ready' || ($report['minimum_target_count_met'] ?? false))
+            return ($report['status'] === 'ready' && ($report['minimum_target_count_met'] ?? false))
                 ? self::SUCCESS : self::FAILURE;
         }
 

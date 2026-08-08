@@ -106,6 +106,67 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
         Queue::assertNothingPushed();
     }
 
+    public function test_verify_only_accepts_a_non_empty_fully_covered_dynamic_cohort(): void
+    {
+        $this->bindProjection(['one']);
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        foreach (['en', 'zh-CN'] as $locale) {
+            $cache->publishJobDetailReadModel('one', $locale, ['slug' => 'one']);
+        }
+
+        $exit = Artisan::call('career:verify-job-detail-cache-coverage', [
+            '--verify-only' => true,
+            '--minimum-targets' => 1,
+            '--json' => true,
+        ]);
+        $report = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertSame(0, $exit);
+        $this->assertSame('ready', $report['status']);
+        $this->assertSame(2, $report['eligible_target_count']);
+        $this->assertSame($report['eligible_target_count'], $report['covered_target_count']);
+        $this->assertSame(0, $report['missing_count']);
+        $this->assertSame(0, $report['broken_count']);
+        $this->assertSame(1, $report['coverage_ratio']);
+        $this->assertTrue($report['minimum_target_count_met']);
+    }
+
+    public function test_verify_only_rejects_an_empty_dynamic_cohort(): void
+    {
+        $this->bindProjection([]);
+
+        $exit = Artisan::call('career:verify-job-detail-cache-coverage', [
+            '--verify-only' => true,
+            '--minimum-targets' => 1,
+            '--json' => true,
+        ]);
+        $report = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertSame(1, $exit);
+        $this->assertSame('incomplete', $report['status']);
+        $this->assertSame(0, $report['eligible_target_count']);
+        $this->assertFalse($report['minimum_target_count_met']);
+    }
+
+    public function test_rollout_floor_does_not_override_incomplete_cache_coverage(): void
+    {
+        $slugs = array_map(static fn (int $index): string => sprintf('career-%04d', $index), range(1, 1046));
+        $this->bindProjection($slugs);
+
+        $exit = Artisan::call('career:verify-job-detail-cache-coverage', [
+            '--verify-only' => true,
+            '--minimum-targets' => 2092,
+            '--json' => true,
+        ]);
+        $report = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertSame(1, $exit);
+        $this->assertSame('incomplete', $report['status']);
+        $this->assertSame(2092, $report['eligible_target_count']);
+        $this->assertSame(2092, $report['missing_count']);
+        $this->assertTrue($report['minimum_target_count_met']);
+    }
+
     public function test_rollout_floor_fails_closed_before_deploy_or_repair_when_target_count_is_too_small(): void
     {
         $this->bindProjection(['one']);

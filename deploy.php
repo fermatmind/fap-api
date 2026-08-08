@@ -165,6 +165,23 @@ function deployBooleanOption(string $name, bool $default): bool
     throw new \RuntimeException("{$name} must be an explicit boolean");
 }
 
+function deployCareerDetailMinimumTargets(string $hostAlias): int
+{
+    if ($hostAlias === 'staging') {
+        return 1;
+    }
+
+    $minimumTargetsRaw = getenv('DEPLOY_CAREER_DETAIL_MINIMUM_TARGETS');
+    $minimumTargetsRaw = $minimumTargetsRaw === false || trim($minimumTargetsRaw) === ''
+        ? '2092'
+        : trim($minimumTargetsRaw);
+    if (preg_match('/^[1-9][0-9]*$/D', $minimumTargetsRaw) !== 1) {
+        throw new \RuntimeException('DEPLOY_CAREER_DETAIL_MINIMUM_TARGETS must be a positive base-10 integer.');
+    }
+
+    return (int) $minimumTargetsRaw;
+}
+
 function deploySkipsAuthorityMutations(): bool
 {
     return in_array(deployMode(), ['code_only', 'candidate_only', 'schema_only'], true);
@@ -477,14 +494,7 @@ task('guard:career-detail-cache-coverage', function () {
         return;
     }
 
-    $minimumTargetsRaw = getenv('DEPLOY_CAREER_DETAIL_MINIMUM_TARGETS');
-    $minimumTargetsRaw = $minimumTargetsRaw === false || trim($minimumTargetsRaw) === ''
-        ? '2092'
-        : trim($minimumTargetsRaw);
-    if (preg_match('/^[1-9][0-9]*$/D', $minimumTargetsRaw) !== 1) {
-        throw new RuntimeException('DEPLOY_CAREER_DETAIL_MINIMUM_TARGETS must be a positive base-10 integer.');
-    }
-    $minimumTargets = (int) $minimumTargetsRaw;
+    $minimumTargets = deployCareerDetailMinimumTargets(currentHost()->getAlias());
     $timeoutSeconds = (int) (getenv('DEPLOY_CAREER_DETAIL_COVERAGE_TIMEOUT') ?: 180);
     $timeoutSeconds = max(60, $timeoutSeconds);
 
@@ -514,15 +524,12 @@ task('career:repair-staging-detail-cache-coverage', function () {
         throw new \RuntimeException('DEPLOY_CAREER_DETAIL_MAXIMUM_SYNC_REPAIRS must be an integer between 1 and 1000.');
     }
 
-    $minimumTargetsRaw = trim((string) (getenv('DEPLOY_CAREER_DETAIL_MINIMUM_TARGETS') ?: '2092'));
-    if (preg_match('/^[1-9][0-9]*$/D', $minimumTargetsRaw) !== 1) {
-        throw new \RuntimeException('DEPLOY_CAREER_DETAIL_MINIMUM_TARGETS must be a positive base-10 integer.');
-    }
+    $minimumTargets = deployCareerDetailMinimumTargets(currentHost()->getAlias());
 
     run(sprintf(
         'timeout 300 {{bin/php}} %s career:verify-job-detail-cache-coverage --repair-missing-sync --locales=en,zh-CN --minimum-targets=%d --maximum-sync-repairs=%d --json --no-interaction --no-ansi',
         deployPlaceholderPathArg('{{release_path}}', 'backend/artisan'),
-        (int) $minimumTargetsRaw,
+        $minimumTargets,
         (int) $maximumRepairsRaw,
     ));
 });
