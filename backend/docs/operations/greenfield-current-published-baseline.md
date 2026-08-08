@@ -23,14 +23,13 @@ Both modes require:
 
 The production Environment provides a dedicated, pinned read-only source identity:
 
-- `GREENFIELD_SOURCE_SSH_PRIVATE_KEY`
 - `GREENFIELD_SOURCE_SSH_KNOWN_HOSTS`
 - `GREENFIELD_SOURCE_USER`
 - `GREENFIELD_SOURCE_PORT`
 - `GREENFIELD_SOURCE_HOST`
 - `GREENFIELD_SOURCE_PATH`
 
-These values are intentionally separate from generic production deployment SSH secrets. Baseline export remains bound to the verified current-published source while deployment targets move between cloud providers; changing the Greenfield source identity cannot redirect or authorize a production deployment.
+Source topology and host pinning are intentionally separate from generic production deployment SSH secrets. The workflow reuses only the existing non-interactive production SSH identity because the source server already authorizes that deployment key; it does not reuse the deploy host, port, user, path, or known-host set. Baseline export therefore remains bound to the verified current-published source while deployment targets move between cloud providers, and changing the Greenfield source topology cannot redirect or authorize a production deployment.
 
 `preflight` builds and verifies the package without downloading media. It uploads only a sanitized receipt containing the package identity, dataset counts, Career projection summary, public-media count/size summary, and the opaque public-media host-set SHA-256.
 
