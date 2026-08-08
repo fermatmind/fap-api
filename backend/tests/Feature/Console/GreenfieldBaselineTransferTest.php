@@ -49,6 +49,8 @@ final class GreenfieldBaselineTransferTest extends TestCase
             '$columnsStatement->closeCursor()',
             '$statement->closeCursor()',
             '$pdo->rollBack()',
+            "'GREENFIELD_SOURCE_EXPORT_FAILED_STAGE_%s_DATASET_%d%s'",
+            "'_PDO_'.(string) \$candidate",
             "'writes_committed' => false",
             "'type' => 'row'",
             "'type' => 'artifact'",
@@ -67,6 +69,7 @@ final class GreenfieldBaselineTransferTest extends TestCase
         $this->assertStringNotContainsString("'password' =>", $source);
         $this->assertStringNotContainsString("'host' =>", $source);
         $this->assertStringNotContainsString("'database' =>", $source);
+        $this->assertStringNotContainsString('getMessage()', $source);
         $this->assertLessThan(
             strpos($source, '$pdo->rollBack()'),
             strpos($source, '$statement->closeCursor()'),

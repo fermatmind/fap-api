@@ -42,6 +42,11 @@ final class BackendGreenfieldCurrentBaselineWorkflowTest extends TestCase
             'GreenfieldBaselineSourceScript)->render()',
             'EXPECTED_ACTIVE_REVISION=$q_active_revision php',
             '> "$RUNNER_TEMP/greenfield/source.jsonl"',
+            'pipeline_status=("${PIPESTATUS[@]}")',
+            'producer_status="${pipeline_status[0]}"',
+            'remote_status="${pipeline_status[1]}"',
+            'GREENFIELD_REMOTE_SOURCE_STREAM_FAILED',
+            'GREENFIELD_SOURCE_EXPORT_FAILED_STAGE_[A-Z0-9_]+',
             '.writes_committed == false',
         ] as $contract) {
             $this->assertStringContainsString($contract, $remote);
@@ -52,6 +57,10 @@ final class BackendGreenfieldCurrentBaselineWorkflowTest extends TestCase
             'rm ', 'mv ', 'cp ', 'touch ', 'chmod ', 'chown ', 'tee ',
         ] as $forbidden) {
             $this->assertStringNotContainsString($forbidden, $remote);
+        }
+
+        foreach (['cat "$RUNNER_TEMP/greenfield/source.stderr"', 'getMessage()', 'set -x'] as $secretRisk) {
+            $this->assertStringNotContainsString($secretRisk, $remote);
         }
     }
 
