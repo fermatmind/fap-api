@@ -5144,6 +5144,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_attempt_result_processing_timing_diagnostics(): void
+    {
+        $changed = [
+            'backend/app/Services/Attempts/ResultProcessingTimingService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_riasec_measurement_contract_compare_policy_changes(): void
     {
         $changed = [
@@ -8539,6 +8548,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isAttemptSubmissionQueueJitterFile($file)) {
+                continue;
+            }
+
+            if ($this->isAttemptResultProcessingTimingDiagnosticsFile($file)) {
                 continue;
             }
 
@@ -12869,6 +12882,11 @@ DIFF;
     private function isAttemptSubmissionQueueJitterFile(string $file): bool
     {
         return $file === 'backend/app/Jobs/ProcessAttemptSubmissionJob.php';
+    }
+
+    private function isAttemptResultProcessingTimingDiagnosticsFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/Attempts/ResultProcessingTimingService.php';
     }
 
     private function isCommerceTenantRepairCommandFile(string $file): bool
