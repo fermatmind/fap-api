@@ -103907,8 +103907,8 @@
       "DETAIL_READY_1046_DELTA_AUTHORITY_REPAIR-01",
       "DETAIL_READY_1046_ROLLOUT_NO_AUDIT_DRY_RUN-01"
     ],
-    "status": "github_checks_pending",
-    "commit_sha": "dca7fb2630bc44f93c4a22aa9bc8980efe8f9827",
+    "status": "ready_to_merge",
+    "commit_sha": "0faa8205906484b5ae1a6a67a1063a5f7ae79e0f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3553",
     "checks": {
       "authorization": {
@@ -103928,8 +103928,8 @@
         "evidence": "Focused workflow contract passed 3 tests / 73 assertions; scoped Pint, bash syntax, shellcheck, actionlint, YAML/JSON parsing, manifest uniqueness, and git diff checks passed."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": null
+        "status": "passed",
+        "evidence": "Exact PR head 0faa8205906484b5ae1a6a67a1063a5f7ae79e0f passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep OSS, and non-blocking SARIF upload; staging parity skipped by workflow."
       }
     },
     "failure_reason": null,
@@ -103959,8 +103959,13 @@
         "at": "2026-08-08T10:06:37+08:00",
         "status": "github_checks_pending",
         "note": "PR #3553 opened from validated implementation commit dca7fb2630bc44f93c4a22aa9bc8980efe8f9827. Required GitHub checks are pending; no production workflow was dispatched and no production apply, DB/CMS mutation, publication, warm, capacity change, deploy, or discoverability action occurred."
+      },
+      {
+        "at": "2026-08-08T10:15:21+08:00",
+        "status": "ready_to_merge",
+        "note": "Exact PR head 0faa8205906484b5ae1a6a67a1063a5f7ae79e0f passed all required CI and code-scanning checks and PR #3553 is CLEAN. Final changed-file scope remains exact; no production workflow was dispatched and no production apply, DB/CMS mutation, publication, warm, capacity change, deploy, or discoverability action occurred."
       }
     ],
-    "updated_at": "2026-08-08T10:06:37+08:00"
+    "updated_at": "2026-08-08T10:15:21+08:00"
   }
 }

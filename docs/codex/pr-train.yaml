@@ -48789,7 +48789,7 @@ prs:
     base: main
     branch: codex/detail-ready-1046-rollout-apply-preflight-02
     title: "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-02 — Protect AA canary and 1046 zero-write production preflight"
-    status: github_checks_pending
+    status: ready_to_merge
     depends_on: [DETAIL_READY_1046_DELTA_AUTHORITY_REPAIR-01, DETAIL_READY_1046_ROLLOUT_NO_AUDIT_DRY_RUN-01]
     train_scope: career_detail_ready_1046_rollout_zero_write_production_preflight
     risk_level: p1_career_runtime_publication_gate
