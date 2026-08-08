@@ -17,7 +17,7 @@ class BackendProductionVerifyOnlyWorkflowTest(unittest.TestCase):
         cls.raw = WORKFLOW.read_text(encoding="utf-8")
         cls.run_text = cls.raw
         remote_match = re.search(
-            r"<<'REMOTE' > artifacts/backend-production-verification\.remote\.json\n(?P<body>.*?)\n\s+REMOTE",
+            r'''<<'REMOTE' > "\$RUNNER_TEMP/backend-production-verification\.remote\.json"\n(?P<body>.*?)\n\s+REMOTE''',
             cls.run_text,
             re.DOTALL,
         )
@@ -166,6 +166,22 @@ class BackendProductionVerifyOnlyWorkflowTest(unittest.TestCase):
         initialize_at = self.raw.index("- name: Initialize sanitized verification receipt")
         checkout_at = self.raw.index("- name: Checkout main authority", initialize_at)
         self.assertLess(initialize_at, checkout_at)
+        self.assertIn(
+            'receipt="$RUNNER_TEMP/backend-production-verification.json"',
+            self.raw,
+        )
+        self.assertIn(
+            'remote_receipt="$RUNNER_TEMP/backend-production-verification.remote.json"',
+            self.raw,
+        )
+        self.assertIn(
+            "path: ${{ runner.temp }}/backend-production-verification.json",
+            self.raw,
+        )
+        self.assertNotIn(
+            'receipt="artifacts/backend-production-verification.json"',
+            self.raw,
+        )
         self.assertIn('failed_check: "checkout_main"', self.raw)
         self.assertIn('status: "FAIL_BACKEND_PRODUCTION_VERIFY_ONLY"', self.raw)
 
@@ -217,7 +233,7 @@ class BackendProductionVerifyOnlyWorkflowTest(unittest.TestCase):
         self.assertIn('.failed_check = "ssh_session"', self.raw)
         self.assertIn('.failed_check = "remote_receipt_validation"', self.raw)
         self.assertIn(
-            'remote_receipt="artifacts/backend-production-verification.remote.json"',
+            'remote_receipt="$RUNNER_TEMP/backend-production-verification.remote.json"',
             self.raw,
         )
         self.assertIn("(.negative_guarantees | to_entries | all(.value == false))", self.raw)

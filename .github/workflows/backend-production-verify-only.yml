@@ -78,7 +78,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p artifacts
+          receipt="$RUNNER_TEMP/backend-production-verification.json"
           checked_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
           jq -n \
             --arg release_sha "$EXPECTED_RELEASE_SHA" \
@@ -127,7 +127,7 @@ jobs:
                 search_submit: false
               },
               writes_committed: false
-            }' > artifacts/backend-production-verification.json
+            }' > "$receipt"
 
       - name: Checkout main authority
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
@@ -139,7 +139,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          receipt="artifacts/backend-production-verification.json"
+          receipt="$RUNNER_TEMP/backend-production-verification.json"
           receipt_tmp="${receipt}.tmp"
           jq '.failed_check = "production_topology"' "$receipt" > "$receipt_tmp"
           mv "$receipt_tmp" "$receipt"
@@ -167,7 +167,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          receipt="artifacts/backend-production-verification.json"
+          receipt="$RUNNER_TEMP/backend-production-verification.json"
           receipt_tmp="${receipt}.tmp"
           public_api_base_url="${HEALTHCHECK_URL%/api/healthz}"
           [[ "$public_api_base_url" =~ ^https://[A-Za-z0-9.-]+$ ]]
@@ -208,7 +208,7 @@ jobs:
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
         run: |
           set -euo pipefail
-          receipt="artifacts/backend-production-verification.json"
+          receipt="$RUNNER_TEMP/backend-production-verification.json"
           receipt_tmp="${receipt}.tmp"
           jq '.failed_check = "ssh_known_hosts"' "$receipt" > "$receipt_tmp"
           mv "$receipt_tmp" "$receipt"
@@ -237,7 +237,7 @@ jobs:
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
             "DEPLOY_PATH=$q_deploy_path EXPECTED_RELEASE_SHA=$q_expected_sha RELEASE_NAME=$q_release_name HEALTHCHECK_URL=$q_healthcheck_url bash -s" \
-            <<'REMOTE' > artifacts/backend-production-verification.remote.json
+            <<'REMOTE' > "$RUNNER_TEMP/backend-production-verification.remote.json"
           set -uo pipefail
 
           active_symlink_resolved=false
@@ -484,8 +484,8 @@ jobs:
           ssh_status=$?
           set -e
 
-          receipt="artifacts/backend-production-verification.json"
-          remote_receipt="artifacts/backend-production-verification.remote.json"
+          receipt="$RUNNER_TEMP/backend-production-verification.json"
+          remote_receipt="$RUNNER_TEMP/backend-production-verification.remote.json"
           receipt_tmp="${receipt}.tmp"
           if jq -e '
             .schema_version == "backend-production-verify-only.v2" and
@@ -534,7 +534,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          receipt="artifacts/backend-production-verification.json"
+          receipt="$RUNNER_TEMP/backend-production-verification.json"
           jq -e '
             .schema_version == "backend-production-verify-only.v2" and
             .release_sha == env.EXPECTED_RELEASE_SHA and
@@ -579,11 +579,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          status="$(jq -r '.status' artifacts/backend-production-verification.json)"
-          checked_at="$(jq -r '.checked_at' artifacts/backend-production-verification.json)"
-          failed_check="$(jq -r '.failed_check // "none"' artifacts/backend-production-verification.json)"
-          last_completed_check="$(jq -r '.last_completed_check // "none"' artifacts/backend-production-verification.json)"
-          queue_total="$(jq -r '.checks.queue_total' artifacts/backend-production-verification.json)"
+          receipt="$RUNNER_TEMP/backend-production-verification.json"
+          status="$(jq -r '.status' "$receipt")"
+          checked_at="$(jq -r '.checked_at' "$receipt")"
+          failed_check="$(jq -r '.failed_check // "none"' "$receipt")"
+          last_completed_check="$(jq -r '.last_completed_check // "none"' "$receipt")"
+          queue_total="$(jq -r '.checks.queue_total' "$receipt")"
           {
             echo "## Backend production verify-only"
             echo
@@ -591,8 +592,8 @@ jobs:
             echo "- Checked at: ${checked_at}"
             echo "- Failed check: ${failed_check}"
             echo "- Last completed check: ${last_completed_check}"
-            echo "- Scale lookups: $(jq -r '.checks.scale_lookup_count' artifacts/backend-production-verification.json)"
-            echo "- RIASEC question counts: $(jq -r '.checks.riasec_60_questions' artifacts/backend-production-verification.json) / $(jq -r '.checks.riasec_140_questions' artifacts/backend-production-verification.json)"
+            echo "- Scale lookups: $(jq -r '.checks.scale_lookup_count' "$receipt")"
+            echo "- RIASEC question counts: $(jq -r '.checks.riasec_60_questions' "$receipt") / $(jq -r '.checks.riasec_140_questions' "$receipt")"
             echo "- Running queues: ${queue_total}"
             echo "- Writes committed: false"
           } >> "$GITHUB_STEP_SUMMARY"
@@ -602,6 +603,6 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: backend-production-verify-only-${{ github.run_id }}
-          path: artifacts/backend-production-verification.json
+          path: ${{ runner.temp }}/backend-production-verification.json
           if-no-files-found: error
           retention-days: 30
