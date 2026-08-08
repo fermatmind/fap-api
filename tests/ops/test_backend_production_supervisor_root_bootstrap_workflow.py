@@ -77,6 +77,22 @@ class BackendProductionSupervisorRootBootstrapWorkflowTest(unittest.TestCase):
         ):
             self.assertIn(value, self.raw)
 
+    def test_preflight_preserves_empty_failed_stage_and_receipt_precedes_assertions(self):
+        preflight = self.raw.split("- name: Run strict zero-write root-bootstrap preflight", 1)[1].split(
+            "- name: Apply exact one-time root bootstrap", 1
+        )[0]
+        self.assertIn("IFS='|' read -r status failed_stage", preflight)
+        self.assertNotIn("IFS=$'\\t' read -r status failed_stage", preflight)
+        self.assertIn("printf '%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s\\n'", preflight)
+        self.assertLess(
+            preflight.index('mv "$tmp" "$receipt"'),
+            preflight.index('test "$user_sha" = "$EXPECTED_DEPLOY_USER_SHA256"'),
+        )
+        self.assertLess(
+            preflight.index('mv "$tmp" "$receipt"'),
+            preflight.index('test "$status" = PASS_ROOT_BOOTSTRAP_PREFLIGHT'),
+        )
+
     def test_apply_is_bootstrap_receipt_and_exact_phrase_bound(self):
         for value in (
             "BOOTSTRAP_PREFLIGHT_RUN_ID",
