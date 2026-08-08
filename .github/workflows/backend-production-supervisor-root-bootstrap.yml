@@ -388,7 +388,7 @@ jobs:
           apply_eligible=false
           if [ "$sudoers_dir_safe" = true ] && [ "$binaries_safe" = true ]; then toolchain_safe=true; fi
           if [ "$status" = PASS_ROOT_BOOTSTRAP_PREFLIGHT ] && [ "$active_match" = true ] && [ "$lock_absent" = true ] && [ "$deploy_process_count" -eq 0 ] && [ "$target_state" = ABSENT ] && [ "$toolchain_safe" = true ]; then apply_eligible=true; fi
-          printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
+          printf '%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s\n' \
             "$status" "$failed_stage" "$user_sha" "$rule_sha" "$target_state" "$toolchain_safe" "$apply_eligible" "$active_match" "$lock_absent" "$deploy_process_count" "$sudoers_dir_safe" "$binaries_safe"
           REMOTE
           )"
@@ -408,7 +408,7 @@ jobs:
           sudoers_dir_safe=false
           binaries_safe=false
           if [ "$ssh_rc" -eq 0 ]; then
-            IFS=$'\t' read -r status failed_stage user_sha rule_sha target_state toolchain_safe apply_eligible active_match lock_absent deploy_process_count sudoers_dir_safe binaries_safe <<<"$result"
+            IFS='|' read -r status failed_stage user_sha rule_sha target_state toolchain_safe apply_eligible active_match lock_absent deploy_process_count sudoers_dir_safe binaries_safe <<<"$result"
           fi
           [[ "$status" =~ ^(PASS_ROOT_BOOTSTRAP_PREFLIGHT|BLOCKED_[A-Z_]+|FAIL_ROOT_BOOTSTRAP_SSH)$ ]]
           [[ "$failed_stage" =~ ^[a-z_]*$ ]]
@@ -417,9 +417,6 @@ jobs:
           [[ "$target_state" =~ ^(ABSENT|PRESENT_OR_LINK|UNKNOWN)$ ]]
           for value in "$toolchain_safe" "$apply_eligible" "$active_match" "$lock_absent" "$sudoers_dir_safe" "$binaries_safe"; do [[ "$value" =~ ^(true|false)$ ]]; done
           [[ "$deploy_process_count" =~ ^[0-9]+$ ]]
-          test "$user_sha" = "$EXPECTED_DEPLOY_USER_SHA256"
-          test "$rule_sha" = "$EXPECTED_RULE_SHA256"
-
           tmp="${receipt}.tmp"
           jq \
             --arg status "$status" \
@@ -448,6 +445,8 @@ jobs:
              | .checks.fixed_binaries_safe = $binaries_safe' "$receipt" > "$tmp"
           mv "$tmp" "$receipt"
           echo "apply_eligible=$apply_eligible" >> "$GITHUB_OUTPUT"
+          test "$user_sha" = "$EXPECTED_DEPLOY_USER_SHA256"
+          test "$rule_sha" = "$EXPECTED_RULE_SHA256"
           test "$status" = PASS_ROOT_BOOTSTRAP_PREFLIGHT
           test "$apply_eligible" = true
 
