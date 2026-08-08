@@ -27,6 +27,7 @@ use App\Console\Commands\Big5TelemetrySummary;
 use App\Console\Commands\BigFiveExportProductionEquivalentCandidatePayloads;
 use App\Console\Commands\BigFiveImportInactiveCandidateRelease;
 use App\Console\Commands\BigFiveResultPageV2AssetAgentAuditCommand;
+use App\Console\Commands\BigFiveResultPageV2ProductionImportCommand;
 use App\Console\Commands\CareerAlignActorsAuthorityOccupation;
 use App\Console\Commands\CareerAlignCareerAuthorityBatch;
 use App\Console\Commands\CareerAlignD8AuthorityCrosswalks;
@@ -132,6 +133,10 @@ use App\Console\Commands\FapResolvePack;
 use App\Console\Commands\FapSelfCheck;
 use App\Console\Commands\FapValidateReport;
 use App\Console\Commands\FapWeeklyReport;
+use App\Console\Commands\GreenfieldBaselineImport;
+use App\Console\Commands\GreenfieldBaselinePackageStream;
+use App\Console\Commands\GreenfieldBaselineRenderSource;
+use App\Console\Commands\GreenfieldBaselineVerify;
 use App\Console\Commands\MbtiPrewarm;
 use App\Console\Commands\MbtiUpgradeLegacyPartialUnlocks;
 use App\Console\Commands\MediaAssetsImportSeoImageBundle;
@@ -202,7 +207,6 @@ use App\Console\Commands\PersonalityTdkRuntimePromotionSearchGateReadinessComman
 use App\Console\Commands\PersonalityWarmPublicReadModels;
 use App\Console\Commands\QualityDailySummary;
 use App\Console\Commands\RefreshCareerAttributionDailyCommand;
-use App\Console\Commands\BigFiveResultPageV2ProductionImportCommand;
 use App\Console\Commands\RiasecResultPageAssetAgentAuditCommand;
 use App\Console\Commands\RiasecResultPageV2ProductionImportCommand;
 use App\Console\Commands\RiasecResultPageV2ProductionSmokeCommand;
@@ -432,6 +436,10 @@ class Kernel extends ConsoleKernel
         CareerExportFirstWaveRolloutBundleArtifacts::class,
         CareerExportFirstWaveReleaseArtifacts::class,
         CareerExportFirstWaveRolloutWavePlanArtifact::class,
+        GreenfieldBaselineRenderSource::class,
+        GreenfieldBaselinePackageStream::class,
+        GreenfieldBaselineVerify::class,
+        GreenfieldBaselineImport::class,
         RefreshCareerAttributionDailyCommand::class,
         PacksPublish::class,
         PacksRollback::class,
