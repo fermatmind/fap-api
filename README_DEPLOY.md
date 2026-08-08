@@ -259,10 +259,9 @@ if ($after > $maxDepth || ($after - $before) > $maxGrowth || $recentPending > $m
 - 如需显式指定 key：
   - `DEPLOY_IDENTITY_FILE_PROD=~/.ssh/fap_prod vendor/bin/dep deploy production -o release_name=$(date +%Y%m%d%H%M%S)`
 - `release 93 already exists` 不是成功上线，只表示失败残留目录未被复用。
-- 若 `releases/93` 不是 `current` 指向目标，且该 release 从未成功切换为 active release，则可安全清理：
-  - `test "$(readlink -f current)" != "$(readlink -f releases/93)"`
-  - `rm -rf releases/93`
-- 若不确定 `releases/93` 是否曾成为 active release，优先保留目录并直接使用新的唯一 `release_name` rerun。
+- 若失败 release 仅剩已知空目录结构，可使用受保护的 `Backend Production Incomplete Release Cleanup` workflow；不得手工补写 `REVISION`。
+- 若失败发生在 `deploy:update_code` 或目录树内容未知，必须先使用受保护的 `Backend Production Failed Release Quarantine` inventory 模式绑定失败 run、discovery receipt、active release 和完整树指纹。通过后只能在新的逐字生产批准下，将精确目录原子移动到 `releases` 外的可恢复隔离名称；禁止直接 `rm -rf`。
+- 若不确定失败 release 是否曾成为 active、仍被进程引用或包含挂载点/越界 symlink，保持原状并使用新的唯一 `release_name` rerun。
 
 ### 5.3 Bootstrap Cache Lifecycle in Deploy / Rollback
 - `backend/bootstrap/cache` 中的 `config.php`、`routes-*.php`、`events.php`、`packages.php`、`services.php` 都是 release-derived bootstrap cache，不应作为跨 release 的 shared state 继承。
