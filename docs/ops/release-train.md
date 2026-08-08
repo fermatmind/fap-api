@@ -471,11 +471,15 @@ evidence workflow. It runs only from `main`, requires the exact read-only
 approval phrase, and verifies the deployed `REVISION`, release directory,
 internal health, public health policy, business APIs, content source hash,
 scale lookups, RIASEC question counts, schema, web processes, and all discovered
-`fap-queue` processes. It creates only a sanitized runner-side artifact retained
-for 30 days. It does not deploy, migrate, publish, restart or unlock processes,
-write remote files, inspect raw logs, submit search URLs, or change CMS/database
-state. A failed verification stops with evidence only and does not repair the
-production node. Release directory names may contain ASCII letters in either
+`fap-queue` processes. It initializes the sanitized runner-side v2 receipt before
+checkout and retains it for 30 days on both success and failure. The receipt
+records only the exact approved release identity, fixed allowlisted checkpoint
+IDs, booleans, bounded counts, timestamps, and explicit zero-write guarantees;
+it never includes response bodies, raw paths, topology, logs, command output, or
+secrets. It does not deploy, migrate, publish, restart or unlock processes, write
+remote files, inspect raw logs, submit search URLs, or change CMS/database state.
+A failed verification stops with its last completed and failed checkpoint and
+does not repair the production node. Release directory names may contain ASCII letters in either
 case, digits, dots, underscores, and hyphens, up to 128 characters; this includes
 the uppercase `T` and `Z` used by existing UTC-stamped production releases.
 

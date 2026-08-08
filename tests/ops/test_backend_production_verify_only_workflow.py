@@ -1,4 +1,8 @@
+import json
+import os
 import re
+import subprocess
+import textwrap
 import unittest
 from pathlib import Path
 
@@ -13,7 +17,7 @@ class BackendProductionVerifyOnlyWorkflowTest(unittest.TestCase):
         cls.raw = WORKFLOW.read_text(encoding="utf-8")
         cls.run_text = cls.raw
         remote_match = re.search(
-            r"<<'REMOTE' > artifacts/backend-production-verification\.json\n(?P<body>.*?)\n\s+REMOTE",
+            r"<<'REMOTE' > artifacts/backend-production-verification\.remote\.json\n(?P<body>.*?)\n\s+REMOTE",
             cls.run_text,
             re.DOTALL,
         )
@@ -133,8 +137,15 @@ class BackendProductionVerifyOnlyWorkflowTest(unittest.TestCase):
             self.raw,
         )
         self.assertIn("retention-days: 30", self.raw)
-        self.assertIn('schema_version: "backend-production-verify-only.v1"', self.remote_body)
-        self.assertIn('status: "PASS_BACKEND_PRODUCTION_VERIFY_ONLY"', self.remote_body)
+        self.assertIn('schema_version: "backend-production-verify-only.v2"', self.remote_body)
+        self.assertIn(
+            'emit_receipt "PASS_BACKEND_PRODUCTION_VERIFY_ONLY" "" null',
+            self.remote_body,
+        )
+        self.assertIn(
+            'emit_receipt "FAIL_BACKEND_PRODUCTION_VERIFY_ONLY" "$1" 1',
+            self.remote_body,
+        )
         self.assertIn("writes_committed: false", self.remote_body)
         for guarantee in (
             "deploy",
@@ -150,6 +161,101 @@ class BackendProductionVerifyOnlyWorkflowTest(unittest.TestCase):
             "search_submit",
         ):
             self.assertIn(f"{guarantee}: false", self.remote_body)
+
+    def test_failure_receipt_is_initialized_before_checkout_and_always_uploaded(self):
+        initialize_at = self.raw.index("- name: Initialize sanitized verification receipt")
+        checkout_at = self.raw.index("- name: Checkout main authority", initialize_at)
+        self.assertLess(initialize_at, checkout_at)
+        self.assertIn('failed_check: "checkout_main"', self.raw)
+        self.assertIn('status: "FAIL_BACKEND_PRODUCTION_VERIFY_ONLY"', self.raw)
+
+        for step_name in (
+            "Validate sanitized verification receipt",
+            "Publish safe verification summary",
+            "Upload safe verification artifact",
+        ):
+            step_match = re.search(
+                rf"(?ms)^\s+- name: {re.escape(step_name)}\n(?P<body>.*?)(?=^\s+- name:|\Z)",
+                self.raw,
+            )
+            self.assertIsNotNone(step_match)
+            self.assertIn("if: ${{ always() }}", step_match.group("body"))
+
+    def test_remote_checks_emit_only_allowlisted_sanitized_checkpoints(self):
+        checkpoint_ids = (
+            "healthcheck_url_contract",
+            "active_symlink",
+            "release_name",
+            "revision_file",
+            "revision_match",
+            "internal_health",
+            "public_health_policy_404",
+            "flags_api",
+            "big_five_public_authority",
+            "big_five_internal_authority",
+            "personality_source_hash_match",
+            "riasec_60",
+            "riasec_140",
+            "schema_verify",
+            "php_fpm",
+            "nginx",
+            "queue_status",
+            "queue_runtime",
+        )
+        self.assertIn("fail_check()", self.remote_body)
+        self.assertIn("last_completed_check", self.remote_body)
+        for checkpoint_id in checkpoint_ids:
+            with self.subTest(checkpoint_id=checkpoint_id):
+                self.assertIn(f'fail_check "{checkpoint_id}"', self.remote_body)
+                self.assertIn(f'"{checkpoint_id}"', self.raw)
+
+        self.assertNotIn("$current_release", self.raw.split("Publish safe verification summary", 1)[1])
+        self.assertNotIn("$public_hub", self.raw.split("Publish safe verification summary", 1)[1])
+
+    def test_runner_preserves_failure_receipt_for_transport_or_remote_validation_failure(self):
+        self.assertIn("ssh_status=$?", self.raw)
+        self.assertIn('.failed_check = "ssh_session"', self.raw)
+        self.assertIn('.failed_check = "remote_receipt_validation"', self.raw)
+        self.assertIn(
+            'remote_receipt="artifacts/backend-production-verification.remote.json"',
+            self.raw,
+        )
+        self.assertIn("(.negative_guarantees | to_entries | all(.value == false))", self.raw)
+        self.assertIn(
+            '.status == "FAIL_BACKEND_PRODUCTION_VERIFY_ONLY" and',
+            self.raw,
+        )
+        self.assertIn('(.failed_check | type) == "string"', self.raw)
+        self.assertIn("2>/dev/null", self.remote_body)
+
+    def test_remote_failure_path_emits_one_sanitized_v2_receipt(self):
+        env = os.environ.copy()
+        env.update(
+            {
+                "DEPLOY_PATH": "/invalid",
+                "EXPECTED_RELEASE_SHA": "a" * 40,
+                "RELEASE_NAME": "initial",
+                "HEALTHCHECK_URL": "invalid",
+            }
+        )
+        completed = subprocess.run(
+            ["bash"],
+            input=textwrap.dedent(self.remote_body),
+            text=True,
+            capture_output=True,
+            env=env,
+            check=False,
+        )
+        self.assertEqual(1, completed.returncode)
+        self.assertEqual("", completed.stderr)
+        receipt = json.loads(completed.stdout)
+        self.assertEqual("backend-production-verify-only.v2", receipt["schema_version"])
+        self.assertEqual("FAIL_BACKEND_PRODUCTION_VERIFY_ONLY", receipt["status"])
+        self.assertEqual("healthcheck_url_contract", receipt["failed_check"])
+        self.assertEqual("ssh_session", receipt["last_completed_check"])
+        self.assertEqual(1, receipt["failure_exit_code"])
+        self.assertFalse(receipt["writes_committed"])
+        self.assertTrue(all(value is False for value in receipt["negative_guarantees"].values()))
 
     def test_remote_body_contains_no_mutating_or_raw_log_commands(self):
         command_body = self.remote_body.split("jq -n \\", 1)[0]
