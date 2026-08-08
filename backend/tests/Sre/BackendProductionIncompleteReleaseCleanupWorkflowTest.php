@@ -50,7 +50,7 @@ final class BackendProductionIncompleteReleaseCleanupWorkflowTest extends TestCa
         foreach ([
             'test "$target" != "$current_release"',
             'test ! -e "$DEPLOY_PATH/.dep/deploy.lock"',
-            "expected_inventory=\$'d backend\\nd backend/storage\\nd backend/storage/framework'",
+            "expected_inventory=\$'d backend\\nd backend/storage\\nd backend/storage/framework\\nd backend/storage/framework/cache'",
             'test "$regular_file_count" = 0',
             'test "$symlink_count" = 0',
             'test "$process_reference_count" = 0',
@@ -81,14 +81,14 @@ final class BackendProductionIncompleteReleaseCleanupWorkflowTest extends TestCa
             $source,
         );
         $this->assertStringContainsString('test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"', $source);
-        $this->assertSame(4, substr_count($apply, 'rmdir -- '));
+        $this->assertSame(5, substr_count($apply, 'rmdir -- '));
 
         foreach ([
             'test "$inventory_sha256" = "$EXPECTED_INVENTORY_SHA256"',
             'test "$process_reference_count" = 0',
             'test ! -e "$target"',
             'active_release_unchanged: true',
-            'directory_removal_count: 4',
+            'directory_removal_count: 5',
             'file_delete_count: 0',
             'deploy_count: 0',
             'database_write_count: 0',

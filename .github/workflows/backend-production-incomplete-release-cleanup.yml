@@ -285,7 +285,7 @@ jobs:
           [[ "$active_revision" =~ ^[0-9a-f]{40}$ ]]
 
           inventory="$(find "$target" -mindepth 1 -printf '%y %P\n' | LC_ALL=C sort)"
-          expected_inventory=$'d backend\nd backend/storage\nd backend/storage/framework'
+          expected_inventory=$'d backend\nd backend/storage\nd backend/storage/framework\nd backend/storage/framework/cache'
           test "$inventory" = "$expected_inventory"
           inventory_sha256="$(printf '%s\n' "$inventory" | sha256sum | awk '{print $1}')"
           regular_file_count="$(find "$target" -xdev -type f | wc -l | tr -d ' ')"
@@ -425,7 +425,7 @@ jobs:
           test "$(tr -d '\r\n' < "$current_release/REVISION")" = "$EXPECTED_ACTIVE_REVISION"
 
           inventory="$(find "$target" -mindepth 1 -printf '%y %P\n' | LC_ALL=C sort)"
-          expected_inventory=$'d backend\nd backend/storage\nd backend/storage/framework'
+          expected_inventory=$'d backend\nd backend/storage\nd backend/storage/framework\nd backend/storage/framework/cache'
           test "$inventory" = "$expected_inventory"
           inventory_sha256="$(printf '%s\n' "$inventory" | sha256sum | awk '{print $1}')"
           test "$inventory_sha256" = "$EXPECTED_INVENTORY_SHA256"
@@ -441,6 +441,7 @@ jobs:
           done
           test "$process_reference_count" = 0
 
+          rmdir -- "$target/backend/storage/framework/cache"
           rmdir -- "$target/backend/storage/framework"
           rmdir -- "$target/backend/storage"
           rmdir -- "$target/backend"
@@ -464,7 +465,7 @@ jobs:
               target_absent: true,
               active_release_unchanged: true,
               deploy_lock_present: false,
-              directory_removal_count: 4,
+              directory_removal_count: 5,
               file_delete_count: 0
             }'
           REMOTE
@@ -483,7 +484,7 @@ jobs:
              and .target_absent == true
              and .active_release_unchanged == true
              and .deploy_lock_present == false
-             and .directory_removal_count == 4
+             and .directory_removal_count == 5
              and .file_delete_count == 0' \
             artifacts/remote-apply.json >/dev/null
 
@@ -516,7 +517,7 @@ jobs:
               target_absent: true,
               active_release_unchanged: true,
               deploy_lock_present: false,
-              directory_removal_count: 4,
+              directory_removal_count: 5,
               file_delete_count: 0,
               deploy_count: 0,
               activation_count: 0,
