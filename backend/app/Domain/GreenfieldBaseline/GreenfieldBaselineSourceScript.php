@@ -21,6 +21,8 @@ $catalog = __CATALOG__;
 $forbiddenFields = __FORBIDDEN_FIELDS__;
 $streamSchema = __STREAM_SCHEMA__;
 $projectionFilename = __PROJECTION_FILENAME__;
+$stage = 'bootstrap';
+$datasetOrdinal = 0;
 
 $fail = static function (string $code): never {
     fwrite(STDERR, $code."\n");
@@ -59,6 +61,7 @@ if (! is_file($autoload)) {
 require $autoload;
 
 try {
+    $stage = 'environment';
     Dotenv\Dotenv::createImmutable($backend)->safeLoad();
     $connection = trim((string) ($_ENV['DB_CONNECTION'] ?? getenv('DB_CONNECTION') ?: 'mysql'));
     if ($connection !== 'mysql') {
@@ -73,6 +76,7 @@ try {
         $fail('SOURCE_DATABASE_CONFIG_INCOMPLETE');
     }
 
+    $stage = 'database_connect';
     $pdo = new PDO(
         sprintf('mysql:host=%s;port=%s;dbname=%s;charset=utf8mb4', $host, $port, $database),
         $username,
@@ -83,6 +87,7 @@ try {
             PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => false,
         ],
     );
+    $stage = 'transaction_start';
     $pdo->exec('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ');
     $pdo->exec('SET TRANSACTION READ ONLY');
     $pdo->exec('START TRANSACTION WITH CONSISTENT SNAPSHOT');
@@ -97,6 +102,8 @@ try {
 
     $counts = [];
     foreach ($catalog as $definition) {
+        $datasetOrdinal++;
+        $stage = 'dataset_metadata';
         $table = (string) $definition['table'];
         $name = (string) $definition['name'];
         if (preg_match('/^[a-z0-9_]+$/', $table) !== 1 || preg_match('/^[a-z0-9_]+$/', $name) !== 1) {
@@ -147,6 +154,7 @@ try {
                 : $quotedColumn;
         }
 
+        $stage = 'dataset_query';
         $sql = sprintf('SELECT %s FROM `%s` WHERE %s ORDER BY %s', implode(', ', $selectColumns), $table, (string) $definition['where'], implode(', ', $orderColumns));
         $statement = $pdo->query($sql);
         $count = 0;
@@ -168,6 +176,7 @@ try {
         $counts[$name] = $count;
     }
 
+    $stage = 'career_projection';
     $projectionRoot = $backend.'/storage/app/private/career_runtime_publish_projection';
     $candidates = [];
     foreach (glob($projectionRoot.'/*/'.$projectionFilename) ?: [] as $path) {
@@ -190,6 +199,7 @@ try {
         'content_base64' => base64_encode($projectionBytes),
     ]);
 
+    $stage = 'transaction_rollback';
     $pdo->rollBack();
     ksort($counts, SORT_STRING);
     $emit([
@@ -205,7 +215,20 @@ try {
             // The read-only transaction is rolled back when the connection closes.
         }
     }
-    $fail('GREENFIELD_SOURCE_EXPORT_FAILED');
+    $safeStage = preg_replace('/[^a-z0-9_]/', '', strtolower((string) $stage)) ?: 'unknown';
+    $driverCode = '';
+    if ($throwable instanceof PDOException) {
+        $candidate = $throwable->errorInfo[1] ?? null;
+        $driverCode = is_int($candidate) || (is_string($candidate) && ctype_digit($candidate))
+            ? '_PDO_'.(string) $candidate
+            : '_PDO';
+    }
+    $fail(sprintf(
+        'GREENFIELD_SOURCE_EXPORT_FAILED_STAGE_%s_DATASET_%d%s',
+        strtoupper($safeStage),
+        $datasetOrdinal,
+        $driverCode,
+    ));
 }
 PHP;
 

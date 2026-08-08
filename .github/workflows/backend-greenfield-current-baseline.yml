@@ -153,6 +153,7 @@ jobs:
           mkdir -p "$RUNNER_TEMP/greenfield"
           printf -v q_deploy_path '%q' "$DEPLOY_PATH"
           printf -v q_active_revision '%q' "$EXPECTED_ACTIVE_REVISION"
+          set +e
           php -r '
             require "backend/app/Domain/GreenfieldBaseline/GreenfieldBaselineCatalog.php";
             require "backend/app/Domain/GreenfieldBaseline/GreenfieldBaselineSourceScript.php";
@@ -162,6 +163,22 @@ jobs:
             "DEPLOY_PATH=$q_deploy_path EXPECTED_ACTIVE_REVISION=$q_active_revision php" \
             > "$RUNNER_TEMP/greenfield/source.jsonl" \
             2> "$RUNNER_TEMP/greenfield/source.stderr"
+          pipeline_status=("${PIPESTATUS[@]}")
+          producer_status="${pipeline_status[0]}"
+          remote_status="${pipeline_status[1]}"
+          set -e
+          if [ "$producer_status" -ne 0 ]; then
+            echo "::error::GREENFIELD_LOCAL_SOURCE_RENDER_FAILED"
+            exit 1
+          fi
+          if [ "$remote_status" -ne 0 ]; then
+            safe_code="$(grep -E '^(INVALID_[A-Z0-9_]+|ACTIVE_[A-Z0-9_]+|AUTOLOAD_MISSING|SOURCE_[A-Z0-9_]+|REQUIRED_SOURCE_TABLE_MISSING|CAREER_RUNTIME_PROJECTION_[A-Z0-9_]+|GREENFIELD_SOURCE_EXPORT_FAILED_STAGE_[A-Z0-9_]+)$' "$RUNNER_TEMP/greenfield/source.stderr" | tail -n 1 || true)"
+            if [ -z "$safe_code" ]; then
+              safe_code="GREENFIELD_REMOTE_SOURCE_STREAM_FAILED"
+            fi
+            echo "::error::$safe_code"
+            exit 1
+          fi
           test ! -s "$RUNNER_TEMP/greenfield/source.stderr"
           jq -e -c 'select(.type == "header") | .writes_committed == false' \
             "$RUNNER_TEMP/greenfield/source.jsonl" >/dev/null
