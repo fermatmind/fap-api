@@ -119,7 +119,10 @@ class BackendProductionSupervisorRootBootstrapWorkflowTest(unittest.TestCase):
         self.assertIn("if: ${{ always() }}", self.raw)
         self.assertIn("backend.production_supervisor_root_bootstrap.v1", self.raw)
         self.assertIn("secret_retirement_required: true", self.raw)
-        self.assertIn("actions/upload-artifact@v7", self.raw)
+        self.assertIn(
+            "actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7",
+            self.raw,
+        )
         self.assertIn("retention-days: 14", self.raw)
 
 
