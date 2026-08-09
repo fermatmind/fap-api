@@ -141,14 +141,41 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
     }
 
     #[Test]
-    public function mysql_connection_keeps_ssl_ca_option_configurable(): void
+    public function mysql_connections_keep_ssl_ca_and_fail_closed_verification_configurable(): void
     {
         $source = $this->readRepoFile('backend/config/database.php');
         $mysqlBlock = $this->extractArrayBlock($source, "'mysql' => [");
+        $mariadbBlock = $this->extractArrayBlock($source, "'mariadb' => [");
 
-        $this->assertStringContainsString("'options' => extension_loaded('pdo_mysql')", $mysqlBlock);
-        $this->assertStringContainsString('MYSQL_ATTR_SSL_CA', $mysqlBlock);
-        $this->assertStringContainsString("env('MYSQL_ATTR_SSL_CA')", $mysqlBlock);
+        $this->assertStringContainsString("env('MYSQL_ATTR_SSL_CA')", $source);
+        $this->assertStringContainsString("env('MYSQL_ATTR_SSL_VERIFY_SERVER_CERT', true)", $source);
+        $this->assertStringContainsString('FILTER_VALIDATE_BOOLEAN', $source);
+        $this->assertStringContainsString('FILTER_NULL_ON_FAILURE', $source);
+        $this->assertStringContainsString('$verifyServerCertificate ?? true', $source);
+        $this->assertStringNotContainsString('array_filter([', $source);
+        $this->assertStringContainsString("'options' => \$mysqlSslOptions()", $mysqlBlock);
+        $this->assertStringContainsString("'options' => \$mysqlSslOptions()", $mariadbBlock);
+    }
+
+    #[Test]
+    public function mysql_ssl_options_retain_false_only_when_a_ca_is_configured(): void
+    {
+        $ca = '/tmp/fermatmind-rds-ca.pem';
+
+        $withoutCa = $this->loadDatabaseConfigWithSslEnvironment(null, 'false');
+        $withFalse = $this->loadDatabaseConfigWithSslEnvironment($ca, 'false');
+        $withTrue = $this->loadDatabaseConfigWithSslEnvironment($ca, 'true');
+        $withInvalid = $this->loadDatabaseConfigWithSslEnvironment($ca, 'not-a-boolean');
+
+        $this->assertSame([], $withoutCa['mysql']['options']);
+        $this->assertSame([], $withoutCa['mariadb']['options']);
+
+        foreach (['mysql', 'mariadb'] as $connection) {
+            $this->assertSame($ca, $withFalse[$connection]['options'][$this->mysqlSslCaAttribute()]);
+            $this->assertFalse($withFalse[$connection]['options'][$this->mysqlSslVerifyServerCertificateAttribute()]);
+            $this->assertTrue($withTrue[$connection]['options'][$this->mysqlSslVerifyServerCertificateAttribute()]);
+            $this->assertTrue($withInvalid[$connection]['options'][$this->mysqlSslVerifyServerCertificateAttribute()]);
+        }
     }
 
     #[Test]
@@ -1164,6 +1191,81 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             "after('artisan:scales:seed-default', 'career:warm-public-authority-cache');",
             $deployer,
         );
+    }
+
+    /**
+     * @return array<string, array<string, mixed>>
+     */
+    private function loadDatabaseConfigWithSslEnvironment(?string $ca, string $verify): array
+    {
+        $names = ['MYSQL_ATTR_SSL_CA', 'MYSQL_ATTR_SSL_VERIFY_SERVER_CERT'];
+        $snapshot = [];
+
+        foreach ($names as $name) {
+            $snapshot[$name] = [
+                'env_exists' => array_key_exists($name, $_ENV),
+                'env' => $_ENV[$name] ?? null,
+                'server_exists' => array_key_exists($name, $_SERVER),
+                'server' => $_SERVER[$name] ?? null,
+                'getenv' => getenv($name),
+            ];
+        }
+
+        try {
+            $this->setEnvironmentValue('MYSQL_ATTR_SSL_CA', $ca);
+            $this->setEnvironmentValue('MYSQL_ATTR_SSL_VERIFY_SERVER_CERT', $verify);
+
+            /** @var array{connections: array<string, array<string, mixed>>} $config */
+            $config = require dirname(__DIR__, 2).'/config/database.php';
+
+            return $config['connections'];
+        } finally {
+            foreach ($snapshot as $name => $values) {
+                if ($values['env_exists']) {
+                    $_ENV[$name] = $values['env'];
+                } else {
+                    unset($_ENV[$name]);
+                }
+
+                if ($values['server_exists']) {
+                    $_SERVER[$name] = $values['server'];
+                } else {
+                    unset($_SERVER[$name]);
+                }
+
+                if ($values['getenv'] === false) {
+                    putenv($name);
+                } else {
+                    putenv($name.'='.$values['getenv']);
+                }
+            }
+        }
+    }
+
+    private function setEnvironmentValue(string $name, ?string $value): void
+    {
+        if ($value === null) {
+            unset($_ENV[$name], $_SERVER[$name]);
+            putenv($name);
+
+            return;
+        }
+
+        $_ENV[$name] = $value;
+        $_SERVER[$name] = $value;
+        putenv($name.'='.$value);
+    }
+
+    private function mysqlSslCaAttribute(): int
+    {
+        return PHP_VERSION_ID >= 80500 ? \Pdo\Mysql::ATTR_SSL_CA : \PDO::MYSQL_ATTR_SSL_CA;
+    }
+
+    private function mysqlSslVerifyServerCertificateAttribute(): int
+    {
+        return PHP_VERSION_ID >= 80500
+            ? \Pdo\Mysql::ATTR_SSL_VERIFY_SERVER_CERT
+            : \PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT;
     }
 
     private function readRepoFile(string $relativePath): string
