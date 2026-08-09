@@ -1403,6 +1403,7 @@ NGINX;
     $command = strtr(<<<'BASH'
 set -euo pipefail
 tmp_site="$(mktemp)"
+tmp_site_source="$(mktemp)"
 tmp_script="$(mktemp)"
 tmp_snippet="$(mktemp)"
 site_backup="$(mktemp /tmp/fap-api-nginx-site-backup.XXXXXX.conf)"
@@ -1411,10 +1412,11 @@ site_path=__QUOTED_SITE__
 snippet_path=__QUOTED_SNIPPET__
 snippet_existed=0
 static_route_action=install
-trap 'rm -f "$tmp_site" "$tmp_script" "$tmp_snippet"; sudo -n rm -f "$site_backup" "$snippet_backup" 2>/dev/null || true' EXIT
+trap 'rm -f "$tmp_site" "$tmp_site_source" "$tmp_script" "$tmp_snippet"; sudo -n rm -f "$site_backup" "$snippet_backup" 2>/dev/null || true' EXIT
 
 printf %s __ENCODED_SNIPPET__ | base64 -d > "$tmp_snippet"
 sudo -n test -f "$site_path"
+sudo -n /usr/bin/cat "$site_path" > "$tmp_site_source"
 
 restore_nginx_static_config() {
     echo "nginx static media route: restoring previous site file: $site_path" >&2
@@ -1434,9 +1436,9 @@ restore_nginx_static_config() {
 
 cat > "$tmp_script" <<'PHP'
 <?php
-[$script, $site, $include, $host, $primaryHost] = $argv;
+[$script, $siteSource, $site, $include, $host, $primaryHost] = $argv;
 
-$content = shell_exec('sudo -n /usr/bin/cat ' . escapeshellarg($site));
+$content = file_get_contents($siteSource);
 if (! is_string($content) || $content === '') {
     fwrite(STDERR, "nginx site is empty or unreadable: {$site}\n");
     exit(1);
@@ -1496,7 +1498,7 @@ function readableIncludeHasStaticLocation(string $content, array $seen = []): bo
         }
 
         $seen[$realPath] = true;
-        $included = shell_exec('sudo -n /usr/bin/cat ' . escapeshellarg($includePath));
+        $included = @file_get_contents($includePath);
 
         if (is_string($included) && hasStaticLocation($included)) {
             fwrite(STDERR, "existing /static/ location found in included nginx file: {$includePath}; skipping managed static snippet\n");
@@ -1553,7 +1555,7 @@ echo $next;
 PHP
 
 set +e
-php "$tmp_script" "$site_path" "$snippet_path" __QUOTED_HOST__ __QUOTED_PRIMARY_HOST__ > "$tmp_site"
+php "$tmp_script" "$tmp_site_source" "$site_path" "$snippet_path" __QUOTED_HOST__ __QUOTED_PRIMARY_HOST__ > "$tmp_site"
 php_status=$?
 set -e
 
