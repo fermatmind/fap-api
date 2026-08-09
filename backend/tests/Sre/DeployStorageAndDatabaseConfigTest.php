@@ -417,6 +417,10 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('skip_existing_static_location', $source);
         $this->assertStringNotContainsString('function currentNginxConfigHasStaticLocation(): bool', $source);
         $this->assertStringNotContainsString("shell_exec('sudo -n nginx -T 2>/dev/null')", $source);
+        $this->assertStringNotContainsString("shell_exec('sudo -n /usr/bin/cat '", $source);
+        $this->assertStringContainsString('sudo -n /usr/bin/cat "$site_path" > "$tmp_site_source"', $source);
+        $this->assertStringContainsString('$content = file_get_contents($siteSource);', $source);
+        $this->assertStringContainsString('$included = @file_get_contents($includePath);', $source);
         $this->assertStringNotContainsString('existing /static/ location found in current nginx config', $source);
         $this->assertStringContainsString('function nginxIncludePaths(string $content): array', $source);
         $this->assertStringContainsString("\$includePath = '/etc/nginx/'.ltrim(\$includePath, '/');", $source);
