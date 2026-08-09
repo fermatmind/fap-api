@@ -16,7 +16,7 @@ final class CareerVerifyJobDetailCacheCoverage extends Command
     protected $signature = 'career:verify-job-detail-cache-coverage
         {--verify-only : Explicitly select the default read-only verification mode}
         {--repair-missing : Queue only missing or broken published targets}
-        {--repair-missing-sync : Synchronize only missing or broken targets in a non-production deploy gate}
+        {--repair-missing-sync : Synchronize only a bounded set of missing or broken targets in a deploy gate}
         {--repair-missing-direct : Directly warm one bounded missing/broken batch in the current candidate runtime}
         {--locales=en,zh-CN : Comma-separated public locales}
         {--minimum-targets=0 : Fail when the dynamic eligible target count is below this rollout floor}
@@ -24,7 +24,7 @@ final class CareerVerifyJobDetailCacheCoverage extends Command
         {--maximum-sync-repairs=250 : Refuse synchronous repair before writes when more targets are missing or broken}
         {--resume-key=default : Durable repair cursor namespace}
         {--reset : Reset the queued or direct repair cursor before processing}
-        {--confirm-production-write : Confirm production cache writes for a queued or direct repair}
+        {--confirm-production-write : Confirm production cache writes for any repair mode}
         {--json : Emit the stable JSON contract}';
 
     protected $description = 'Verify published Career detail cache coverage and optionally repair bounded missing/broken targets.';
@@ -52,6 +52,9 @@ final class CareerVerifyJobDetailCacheCoverage extends Command
         if (! ($queuedRepair || $directRepair) && (bool) $this->option('reset')) {
             return $this->failCommand('--reset is available only with --repair-missing or --repair-missing-direct.');
         }
+        if ($repair && app()->environment('production') && ! (bool) $this->option('confirm-production-write')) {
+            return $this->failCommand('Production repair requires --confirm-production-write; verification remains read-only by default.');
+        }
 
         $locales = $this->locales((string) $this->option('locales'));
         if ($locales === []) {
@@ -74,6 +77,7 @@ final class CareerVerifyJobDetailCacheCoverage extends Command
         if (! $report['minimum_target_count_met']) {
             $report['status'] = 'incomplete';
         }
+        $inspection['report'] = $report;
         if (! $repair) {
             $this->emit($report);
 
@@ -91,9 +95,6 @@ final class CareerVerifyJobDetailCacheCoverage extends Command
             return $this->repairSynchronously($inspection, $locales);
         }
 
-        if (app()->environment('production') && ! (bool) $this->option('confirm-production-write')) {
-            return $this->failCommand('Production repair requires --confirm-production-write; verification remains read-only by default.');
-        }
         if ($directRepair) {
             return $this->repairDirectly($inspection, $locales);
         }
@@ -232,13 +233,9 @@ final class CareerVerifyJobDetailCacheCoverage extends Command
      */
     private function repairSynchronously(array $inspection, array $locales): int
     {
-        if (app()->environment('production')) {
-            return $this->failCommand('Synchronous cache coverage repair is forbidden in production.');
-        }
-
         $maximumRaw = trim((string) $this->option('maximum-sync-repairs'));
-        if (preg_match('/^[1-9][0-9]*$/D', $maximumRaw) !== 1 || (int) $maximumRaw > 1000) {
-            return $this->failCommand('--maximum-sync-repairs must be an integer between 1 and 1000.');
+        if (preg_match('/^[1-9][0-9]*$/D', $maximumRaw) !== 1 || (int) $maximumRaw > 250) {
+            return $this->failCommand('--maximum-sync-repairs must be an integer between 1 and 250.');
         }
 
         $targets = array_values(array_filter(
@@ -273,7 +270,9 @@ final class CareerVerifyJobDetailCacheCoverage extends Command
         $postRepair['minimum_target_count'] = (int) ($inspection['report']['minimum_target_count'] ?? 0);
         $postRepair['minimum_target_count_met'] = (bool) ($inspection['report']['minimum_target_count_met'] ?? false);
         $postRepair['coverage_status'] = $postRepair['status'];
-        $postRepair['status'] = $postRepair['coverage_status'] === 'ready'
+        $repairReady = $postRepair['coverage_status'] === 'ready'
+            && $postRepair['minimum_target_count_met'];
+        $postRepair['status'] = $repairReady
             ? 'sync_repair_completed'
             : 'sync_repair_incomplete';
         $postRepair['repair'] = [
@@ -292,7 +291,7 @@ final class CareerVerifyJobDetailCacheCoverage extends Command
         ];
         $this->emit($postRepair);
 
-        return $postRepair['coverage_status'] === 'ready' ? self::SUCCESS : self::FAILURE;
+        return $repairReady ? self::SUCCESS : self::FAILURE;
     }
 
     private function failCommand(string $message): int

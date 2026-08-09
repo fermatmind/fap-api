@@ -167,19 +167,11 @@ function deployBooleanOption(string $name, bool $default): bool
 
 function deployCareerDetailMinimumTargets(string $hostAlias): int
 {
-    if ($hostAlias === 'staging') {
-        return 1;
+    if (! in_array($hostAlias, ['staging', 'production'], true)) {
+        throw new \RuntimeException('Career detail cache coverage is supported only for staging or production.');
     }
 
-    $minimumTargetsRaw = getenv('DEPLOY_CAREER_DETAIL_MINIMUM_TARGETS');
-    $minimumTargetsRaw = $minimumTargetsRaw === false || trim($minimumTargetsRaw) === ''
-        ? '2092'
-        : trim($minimumTargetsRaw);
-    if (preg_match('/^[1-9][0-9]*$/D', $minimumTargetsRaw) !== 1) {
-        throw new \RuntimeException('DEPLOY_CAREER_DETAIL_MINIMUM_TARGETS must be a positive base-10 integer.');
-    }
-
-    return (int) $minimumTargetsRaw;
+    return 1;
 }
 
 function deploySkipsAuthorityMutations(): bool
@@ -508,35 +500,45 @@ task('guard:career-detail-cache-coverage', function () {
 
 /**
  * Staging deploys may outlive legacy detail-cache TTLs while rebuilding the
- * directory authority. Repair only the targets that are missing at the end of
- * that rebuild, then keep the complete read-only gate below as the authority.
- * Production is deliberately excluded from this cache-write task.
+ * directory authority, while a Greenfield production deploy may begin with an
+ * empty derived cache. Repair only the current published cohort when the whole
+ * repair set fits inside the bounded synchronous limit, then keep the complete
+ * read-only gate below as the activation authority.
  */
-task('career:repair-staging-detail-cache-coverage', function () {
-    if (currentHost()->getAlias() !== 'staging') {
-        writeln('<comment>Skipping staging-only Career detail cache repair.</comment>');
+task('career:repair-published-detail-cache-coverage', function () {
+    if (deployIsCodeOnly()) {
+        writeln('<comment>Skipping Career detail cache repair for code-only release; shared detail caches are unchanged.</comment>');
 
         return;
     }
 
-    $maximumRepairsRaw = trim((string) (getenv('DEPLOY_CAREER_DETAIL_MAXIMUM_SYNC_REPAIRS') ?: '250'));
-    if (preg_match('/^[1-9][0-9]*$/D', $maximumRepairsRaw) !== 1 || (int) $maximumRepairsRaw > 1000) {
-        throw new \RuntimeException('DEPLOY_CAREER_DETAIL_MAXIMUM_SYNC_REPAIRS must be an integer between 1 and 1000.');
+    $hostAlias = currentHost()->getAlias();
+    if (! in_array($hostAlias, ['staging', 'production'], true)) {
+        throw new \RuntimeException('Career detail cache repair is supported only for staging or production.');
     }
 
-    $minimumTargets = deployCareerDetailMinimumTargets(currentHost()->getAlias());
+    $maximumRepairsRaw = trim((string) (getenv('DEPLOY_CAREER_DETAIL_MAXIMUM_SYNC_REPAIRS') ?: '250'));
+    if (preg_match('/^[1-9][0-9]*$/D', $maximumRepairsRaw) !== 1 || (int) $maximumRepairsRaw > 250) {
+        throw new \RuntimeException('DEPLOY_CAREER_DETAIL_MAXIMUM_SYNC_REPAIRS must be an integer between 1 and 250.');
+    }
+
+    $minimumTargets = deployCareerDetailMinimumTargets($hostAlias);
+    $productionConfirmation = $hostAlias === 'production'
+        ? ' --confirm-production-write'
+        : '';
 
     run(sprintf(
-        'timeout 300 {{bin/php}} %s career:verify-job-detail-cache-coverage --repair-missing-sync --locales=en,zh-CN --minimum-targets=%d --maximum-sync-repairs=%d --json --no-interaction --no-ansi',
+        'timeout 300 {{bin/php}} %s career:verify-job-detail-cache-coverage --repair-missing-sync --locales=en,zh-CN --minimum-targets=%d --maximum-sync-repairs=%d --json --no-interaction --no-ansi%s',
         deployPlaceholderPathArg('{{release_path}}', 'backend/artisan'),
         $minimumTargets,
         (int) $maximumRepairsRaw,
+        $productionConfirmation,
     ));
 });
 
 before('deploy:symlink', 'guard:career-detail-cache-coverage');
 before('deploy:symlink', 'guard:queue-reload-capability');
-before('guard:career-detail-cache-coverage', 'career:repair-staging-detail-cache-coverage');
+before('guard:career-detail-cache-coverage', 'career:repair-published-detail-cache-coverage');
 
 task('guard:ops-theme-asset', function () {
     $asset = deployPlaceholderPathArg('{{release_path}}', 'backend/public/css/app/ops-theme.css');
