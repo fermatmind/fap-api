@@ -108,6 +108,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             'HEALTHCHECK_URL: ${{ secrets.STAGING_HEALTHCHECK_URL }}',
             'AUTH_GUEST_CHECK_URL: ${{ secrets.STAGING_AUTH_GUEST_CHECK_URL }}',
             'OPS_HOST: ${{ secrets.STAGING_OPS_HOST }}',
+            '[[ "$DEPLOY_USER" =~ ^[A-Za-z0-9_][A-Za-z0-9_-]{0,31}$ ]]',
             'Protected staging topology validation passed without disclosing values.',
             '- name: Set up SSH agent without key metadata output',
             'printf \'%s\\n\' "$SSH_PRIVATE_KEY" | ssh-add - >/dev/null 2>&1',
@@ -138,6 +139,11 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         ] as $forbidden) {
             $this->assertStringNotContainsString($forbidden, $workflow);
         }
+
+        $this->assertStringNotContainsString(
+            '[[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]',
+            $workflow,
+        );
     }
 
     #[Test]

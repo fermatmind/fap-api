@@ -412,7 +412,7 @@ jobs:
               exit 2
             fi
           done
-          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z0-9_][A-Za-z0-9_-]{0,31}$ ]]
           [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
           [ "$DEPLOY_PORT" -ge 1 ] && [ "$DEPLOY_PORT" -le 65535 ]
           [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
