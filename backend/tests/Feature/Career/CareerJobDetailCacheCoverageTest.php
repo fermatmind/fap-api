@@ -491,14 +491,42 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
         }
     }
 
-    public function test_sync_repair_refuses_before_writes_when_missing_count_exceeds_limit(): void
+    public function test_sync_repair_fails_when_a_target_remains_missing_after_repair(): void
     {
-        $this->bindProjection(['one', 'two']);
+        $this->createOccupation('buildable');
+        $this->bindProjection(['buildable', 'unbuildable']);
         $cache = app(PublicCareerAuthorityResponseCache::class);
 
         $exit = Artisan::call('career:verify-job-detail-cache-coverage', [
             '--repair-missing-sync' => true,
-            '--maximum-sync-repairs' => 3,
+            '--maximum-sync-repairs' => 4,
+            '--json' => true,
+        ]);
+        $report = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertSame(1, $exit);
+        $this->assertSame('sync_repair_incomplete', $report['status']);
+        $this->assertSame('incomplete', $report['coverage_status']);
+        $this->assertSame(2, $report['covered_target_count']);
+        $this->assertSame(2, $report['missing_count']);
+        $this->assertSame(2, $report['repair']['cached_target_count']);
+        $this->assertSame(2, $report['repair']['failed_target_count']);
+        foreach (['en', 'zh-CN'] as $locale) {
+            $this->assertIsString(Cache::get($cache->jobDetailActiveVersionKey('buildable', $locale)));
+            $this->assertFalse(Cache::has($cache->jobDetailActiveVersionKey('unbuildable', $locale)));
+        }
+    }
+
+    public function test_sync_repair_refuses_before_writes_when_missing_count_exceeds_limit(): void
+    {
+        $slugs = array_map(static fn (int $index): string => sprintf('career-%03d', $index), range(1, 251));
+        $this->bindProjection($slugs);
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+
+        $exit = Artisan::call('career:verify-job-detail-cache-coverage', [
+            '--repair-missing-sync' => true,
+            '--locales' => 'en',
+            '--maximum-sync-repairs' => 250,
             '--json' => true,
         ]);
         $report = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
@@ -506,22 +534,79 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
         $this->assertSame(1, $exit);
         $this->assertSame('sync_repair_refused_over_limit', $report['status']);
         $this->assertFalse($report['repair']['write_executed']);
-        $this->assertSame(4, $report['repair']['repairable_target_count']);
-        foreach (['one', 'two'] as $slug) {
-            foreach (['en', 'zh-CN'] as $locale) {
-                $this->assertFalse(Cache::has($cache->jobDetailActiveVersionKey($slug, $locale)));
-            }
-        }
+        $this->assertSame(251, $report['repair']['repairable_target_count']);
+        $this->assertSame(250, $report['repair']['maximum_sync_repairs']);
+        $this->assertFalse(Cache::has($cache->jobDetailActiveVersionKey('career-001', 'en')));
+        $this->assertFalse(Cache::has($cache->jobDetailActiveVersionKey('career-251', 'en')));
     }
 
-    public function test_sync_repair_is_forbidden_in_production(): void
+    public function test_production_sync_repair_requires_explicit_confirmation_before_writes(): void
     {
         $this->bindProjection(['one']);
         $this->app->detectEnvironment(static fn (): string => 'production');
+        $cache = app(PublicCareerAuthorityResponseCache::class);
 
-        $this->artisan('career:verify-job-detail-cache-coverage', ['--repair-missing-sync' => true])
-            ->expectsOutput('Synchronous cache coverage repair is forbidden in production.')
-            ->assertExitCode(1);
+        $exit = Artisan::call('career:verify-job-detail-cache-coverage', ['--repair-missing-sync' => true]);
+
+        $this->assertSame(1, $exit);
+        $this->assertStringContainsString(
+            'Production repair requires --confirm-production-write; verification remains read-only by default.',
+            Artisan::output(),
+        );
+
+        $this->assertFalse(Cache::has($cache->jobDetailActiveVersionKey('one', 'en')));
+        $this->assertFalse(Cache::has($cache->jobDetailActiveVersionKey('one', 'zh-CN')));
+    }
+
+    public function test_production_sync_repair_warms_only_the_current_public_cohort_and_is_idempotent(): void
+    {
+        $publicSlugs = array_map(static fn (int $index): string => sprintf('public-career-%02d', $index), range(1, 30));
+        foreach ([...$publicSlugs, 'held-career'] as $slug) {
+            $this->createOccupation($slug);
+        }
+        $this->bindProjection($publicSlugs);
+        $this->app->detectEnvironment(static fn (): string => 'production');
+        Queue::fake();
+
+        $options = [
+            '--repair-missing-sync' => true,
+            '--confirm-production-write' => true,
+            '--minimum-targets' => 1,
+            '--maximum-sync-repairs' => 250,
+            '--json' => true,
+        ];
+
+        $exit = Artisan::call('career:verify-job-detail-cache-coverage', $options);
+        $output = Artisan::output();
+        $this->assertSame(0, $exit, $output);
+        $this->assertJson($output);
+        $report = json_decode($output, true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertSame('sync_repair_completed', $report['status']);
+        $this->assertSame('ready', $report['coverage_status']);
+        $this->assertSame(30, $report['published_slug_count']);
+        $this->assertSame(60, $report['eligible_target_count']);
+        $this->assertSame(60, $report['covered_target_count']);
+        $this->assertSame(0, $report['missing_count']);
+        $this->assertSame(0, $report['broken_count']);
+        $this->assertSame(1, $report['coverage_ratio']);
+        $this->assertTrue($report['minimum_target_count_met']);
+        $this->assertTrue($report['repair']['write_executed']);
+        $this->assertSame(60, $report['repair']['cached_target_count']);
+        $this->assertSame(0, $report['repair']['failed_target_count']);
+
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        foreach (['en', 'zh-CN'] as $locale) {
+            $this->assertFalse(Cache::has($cache->jobDetailActiveVersionKey('held-career', $locale)));
+        }
+        Queue::assertNothingPushed();
+
+        $this->assertSame(0, Artisan::call('career:verify-job-detail-cache-coverage', $options));
+        $idempotent = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('sync_repair_completed', $idempotent['status']);
+        $this->assertFalse($idempotent['repair']['write_executed']);
+        $this->assertSame(0, $idempotent['repair']['cached_target_count']);
+        $this->assertSame(60, $idempotent['covered_target_count']);
     }
 
     /**

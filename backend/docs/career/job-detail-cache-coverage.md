@@ -22,9 +22,10 @@ php artisan career:verify-job-detail-cache-coverage --verify-only --locales=en,z
 The command exits successfully only when every eligible target is covered by an
 active, last-known-good, or one-release migratable legacy payload. The JSON
 contract reports dynamic published slug and locale counts, all cache-state
-classifications, bounded examples, and the coverage ratio. The current rollout
-baseline is expected to be 1,046 slugs × 2 locales = 2,092 targets, but the
-implementation always derives the slug set from runtime publish authority.
+classifications, bounded examples, and the coverage ratio. The deployment gate
+always derives its cohort from runtime publish authority and requires at least
+one eligible target; it does not use the 1,046-occupation product inventory as a
+public-route floor.
 
 ## Bounded repair
 
@@ -46,15 +47,21 @@ to restart that cursor intentionally. Repair refuses `queue.default=sync` so a
 command cannot accidentally perform full detail assembly inline.
 
 Production repair remains a controlled write boundary and additionally requires
-`--confirm-production-write`. This repository PR implements and tests the
-capability only; it does not authorize or execute a production repair, deployment,
-CMS/DB write, or publication change.
+`--confirm-production-write` for every repair mode. Synchronous deploy repair
+refuses before any write when more than 250 current published targets are
+missing or broken. It never changes CMS/DB authority or publication state.
 
 Repair jobs are routed explicitly to the managed `default` queue. The production
 Supervisor baseline consumes `high,default`; no separate `career-cache` worker is
 required.
 
 ## Controlled production bootstrap
+
+A standard staging or production deployment may synchronously repair the exact
+current published cohort before activation only when at most 250 targets are
+missing or broken. It then reruns the complete read-only coverage gate. This
+small-cohort path is intended for an empty Greenfield derived cache and does not
+enumerate or publish held occupations.
 
 The `Career detail production cache repair` workflow is the only repository
 workflow for recovering a large production pointer gap before a standard deploy.
@@ -83,14 +90,14 @@ coverage guard before moving the production symlink.
 ## Deployment activation gate
 
 Every Deployer release runs the read-only coverage command before
-`deploy:symlink`. Activation requires both `status=ready` and the environment's
-eligible-target floor. Staging derives its cohort from runtime publication
-authority, requires at least one eligible target, and still requires complete
-coverage: covered targets equal eligible targets, missing and broken counts are
-zero, and the coverage ratio is 1.0. Production keeps the 2,092-target default;
-`DEPLOY_CAREER_DETAIL_MINIMUM_TARGETS` may raise or explicitly control that
-production floor without changing staging. A failed gate leaves the current
-symlink unchanged. It must not be bypassed by warming one sampled detail URL.
+`deploy:symlink`. Staging and production both derive their cohort from runtime
+publication authority and require at least one eligible target. Activation still
+requires complete coverage: covered targets equal eligible targets, missing and
+broken counts are zero, and the coverage ratio is 1.0. The independent Greenfield
+baseline contract continues to protect the 1,046 occupations and the 2,092-row
+AI impact, salary, and page-assembly asset families; those product-inventory
+counts do not authorize public routes. A failed gate leaves the current symlink
+unchanged and must not be bypassed by warming one sampled detail URL.
 
 ## Runtime SLO and controlled repair
 

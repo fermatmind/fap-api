@@ -644,24 +644,24 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             $source
         );
         $this->assertStringContainsString('function deployCareerDetailMinimumTargets(string $hostAlias): int', $source);
-        $this->assertStringContainsString("if (\$hostAlias === 'staging') {", $source);
+        $this->assertStringContainsString("in_array(\$hostAlias, ['staging', 'production'], true)", $source);
         $this->assertStringContainsString('return 1;', $source);
-        $this->assertStringContainsString("? '2092'", $source);
         $this->assertStringContainsString('career:verify-job-detail-cache-coverage --verify-only --locales=en,zh-CN', $source);
         $this->assertStringContainsString('--minimum-targets=%d --json --no-interaction --no-ansi', $source);
-        $this->assertStringContainsString("getenv('DEPLOY_CAREER_DETAIL_MINIMUM_TARGETS')", $source);
-        $this->assertStringContainsString("preg_match('/^[1-9][0-9]*$/D', \$minimumTargetsRaw) !== 1", $source);
-        $this->assertStringContainsString('DEPLOY_CAREER_DETAIL_MINIMUM_TARGETS must be a positive base-10 integer.', $source);
+        $this->assertStringNotContainsString("getenv('DEPLOY_CAREER_DETAIL_MINIMUM_TARGETS')", $source);
         $this->assertSame(
-            2,
-            substr_count($source, '$minimumTargets = deployCareerDetailMinimumTargets(currentHost()->getAlias());')
+            3,
+            substr_count($source, 'deployCareerDetailMinimumTargets(')
         );
         $this->assertStringContainsString("before('deploy:symlink', 'guard:career-detail-cache-coverage')", $source);
-        $this->assertStringContainsString("task('career:repair-staging-detail-cache-coverage'", $source);
-        $this->assertStringContainsString("currentHost()->getAlias() !== 'staging'", $source);
+        $this->assertStringContainsString("task('career:repair-published-detail-cache-coverage'", $source);
+        $this->assertStringContainsString('Skipping Career detail cache repair for code-only release; shared detail caches are unchanged.', $source);
+        $this->assertStringContainsString("\$hostAlias === 'production'", $source);
+        $this->assertStringContainsString("? ' --confirm-production-write'", $source);
+        $this->assertStringContainsString('DEPLOY_CAREER_DETAIL_MAXIMUM_SYNC_REPAIRS must be an integer between 1 and 250.', $source);
         $this->assertStringContainsString('career:verify-job-detail-cache-coverage --repair-missing-sync --locales=en,zh-CN', $source);
-        $this->assertStringContainsString('--maximum-sync-repairs=%d --json --no-interaction --no-ansi', $source);
-        $this->assertStringContainsString("before('guard:career-detail-cache-coverage', 'career:repair-staging-detail-cache-coverage')", $source);
+        $this->assertStringContainsString('--maximum-sync-repairs=%d --json --no-interaction --no-ansi%s', $source);
+        $this->assertStringContainsString("before('guard:career-detail-cache-coverage', 'career:repair-published-detail-cache-coverage')", $source);
         $this->assertStringNotContainsString('career:verify-job-detail-cache-coverage --repair-missing --', $source);
     }
 
