@@ -1,5 +1,27 @@
 <?php
 
+$mysqlSslOptions = static function (): array {
+    if (! extension_loaded('pdo_mysql')) {
+        return [];
+    }
+
+    $ca = env('MYSQL_ATTR_SSL_CA');
+    if (! is_string($ca) || trim($ca) === '') {
+        return [];
+    }
+
+    $verifyServerCertificate = filter_var(
+        env('MYSQL_ATTR_SSL_VERIFY_SERVER_CERT', true),
+        FILTER_VALIDATE_BOOLEAN,
+        FILTER_NULL_ON_FAILURE,
+    );
+
+    return [
+        (PHP_VERSION_ID >= 80500 ? \Pdo\Mysql::ATTR_SSL_CA : \PDO::MYSQL_ATTR_SSL_CA) => $ca,
+        (PHP_VERSION_ID >= 80500 ? \Pdo\Mysql::ATTR_SSL_VERIFY_SERVER_CERT : \PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT) => $verifyServerCertificate ?? true,
+    ];
+};
+
 return [
 
     /*
@@ -56,9 +78,7 @@ return [
             'prefix_indexes' => true,
             'strict' => true,
             'engine' => null,
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
-                (PHP_VERSION_ID >= 80500 ? \Pdo\Mysql::ATTR_SSL_CA : \PDO::MYSQL_ATTR_SSL_CA) => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
+            'options' => $mysqlSslOptions(),
         ],
 
         'seo_intel' => [
@@ -91,9 +111,7 @@ return [
             'prefix_indexes' => true,
             'strict' => true,
             'engine' => null,
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
-                (PHP_VERSION_ID >= 80500 ? \Pdo\Mysql::ATTR_SSL_CA : \PDO::MYSQL_ATTR_SSL_CA) => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
+            'options' => $mysqlSslOptions(),
         ],
 
         'pgsql' => [
