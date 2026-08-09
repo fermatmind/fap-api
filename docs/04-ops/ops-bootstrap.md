@@ -90,8 +90,12 @@ The official first-admin path is:
 
 ```bash
 cd backend
-php artisan admin:bootstrap-owner --email=owner@example.com --password='ChangeMe123!' --name='Owner'
+php artisan admin:bootstrap-owner --email=owner@example.com --name='Owner'
 ```
+
+The command prompts for the password through hidden interactive input. The
+password must contain at least 12 characters. Do not pass or paste passwords in
+command arguments, chat, logs, or shell history.
 
 What this command does today:
 

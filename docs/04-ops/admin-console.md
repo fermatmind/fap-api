@@ -24,7 +24,7 @@
 
 ## 登录方式
 - 首次 bootstrap：优先参考 `docs/04-ops/ops-bootstrap.md`
-- 官方首个管理员命令：`php artisan admin:bootstrap-owner --email=owner@example.com --password='ChangeMe123!' --name='Owner'`
+- 官方首个管理员命令：`php artisan admin:bootstrap-owner --email=owner@example.com --name='Owner'`；密码通过隐藏交互输入，至少 12 个字符。
 - 正确登录模型：`App\Models\AdminUser`，不要用 `App\Models\User`
 - 打开：`/ops/login`（默认 `http://127.0.0.1:18010/ops/login`）
 - 备用：API Token 访问 `/api/v0.3/admin/*`（Header：`X-FAP-Admin-Token`）

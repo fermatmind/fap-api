@@ -262,7 +262,7 @@ curl -sS "https://<backend-host>/api/v0.5/articles/<slug>/seo?org_id=0&locale=en
 ```bash
 cd /Users/rainie/Desktop/GitHub/fap-api/backend
 
-php artisan admin:bootstrap-owner --email=owner@example.com --password='ChangeMe123!' --name='Owner'
+php artisan admin:bootstrap-owner --email=owner@example.com --name='Owner'
 ```
 
 人工验收步骤：
@@ -509,7 +509,7 @@ curl -X POST "https://<staging-api-host>/api/v0.5/cms/articles" \
 ```bash
 cd /Users/rainie/Desktop/GitHub/fap-api/backend
 
-php artisan admin:bootstrap-owner --email=owner@example.com --password='ChangeMe123!' --name='Owner'
+php artisan admin:bootstrap-owner --email=owner@example.com --name='Owner'
 php artisan route:list --path=api/v0.5 --except-vendor
 php artisan route:list --path=sitemap.xml --except-vendor
 php artisan migrate:status
