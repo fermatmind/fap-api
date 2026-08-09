@@ -37,10 +37,10 @@ class AdminBootstrapOwner extends Command
         }
 
         $validator = Validator::make(['password' => $password], [
-            'password' => ['required', Password::min(14)->mixedCase()->numbers()->symbols()],
+            'password' => ['required', Password::min(12)],
         ]);
         if ($validator->fails()) {
-            $this->error('Password must be at least 14 characters and include upper/lowercase letters, numbers, and symbols.');
+            $this->error('Password must be at least 12 characters.');
 
             return 1;
         }

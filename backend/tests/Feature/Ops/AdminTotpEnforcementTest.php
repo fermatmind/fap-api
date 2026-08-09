@@ -120,14 +120,33 @@ final class AdminTotpEnforcementTest extends TestCase
         ));
     }
 
-    public function test_bootstrap_owner_uses_hidden_input_and_rejects_weak_password(): void
+    public function test_bootstrap_owner_uses_hidden_input_and_rejects_password_shorter_than_twelve_characters(): void
     {
         $this->artisan('admin:bootstrap-owner', ['--email' => 'owner@example.test'])
-            ->expectsQuestion('Owner password', 'weak')
-            ->expectsOutputToContain('Password must be at least 14 characters')
+            ->expectsQuestion('Owner password', 'abcdefghijk')
+            ->expectsOutputToContain('Password must be at least 12 characters')
             ->assertFailed();
 
         $this->assertDatabaseMissing('admin_users', ['email' => 'owner@example.test']);
+    }
+
+    public function test_bootstrap_owner_accepts_twelve_characters_without_character_class_requirements(): void
+    {
+        $this->artisan('admin:bootstrap-owner', [
+            '--email' => 'owner@example.test',
+            '--name' => 'Owner',
+        ])
+            ->expectsQuestion('Owner password', 'abcdefghijkl')
+            ->expectsOutputToContain('Owner ready: owner@example.test')
+            ->assertSuccessful();
+
+        $admin = AdminUser::query()->where('email', 'owner@example.test')->firstOrFail();
+
+        $this->assertSame(1, (int) $admin->is_active);
+        $this->assertEqualsCanonicalizing(
+            ['OpsAdmin', 'Owner'],
+            $admin->roles()->pluck('name')->all(),
+        );
     }
 
     /** @param array<string,mixed> $overrides */
