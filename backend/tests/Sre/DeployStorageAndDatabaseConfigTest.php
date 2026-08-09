@@ -10,6 +10,21 @@ use Tests\TestCase;
 final class DeployStorageAndDatabaseConfigTest extends TestCase
 {
     #[Test]
+    public function staging_deployer_healthchecks_the_api_vhost(): void
+    {
+        $deployer = $this->readRepoFile('deploy.php');
+
+        $this->assertStringContainsString(
+            "->set('healthcheck_host', getenv('HEALTHCHECK_HOST_STG') ?: 'staging-api.fermatmind.com')",
+            $deployer,
+        );
+        $this->assertStringNotContainsString(
+            "->set('healthcheck_host', getenv('HEALTHCHECK_HOST_STG') ?: 'staging.fermatmind.com')",
+            $deployer,
+        );
+    }
+
+    #[Test]
     public function staging_deploy_preflights_queue_capability_before_release_activation(): void
     {
         $deployer = $this->readRepoFile('deploy.php');
