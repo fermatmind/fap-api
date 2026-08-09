@@ -162,6 +162,20 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
     }
 
     #[Test]
+    public function staging_ops_asset_smoke_accepts_the_same_numeric_prefix_deploy_user_as_the_workflow(): void
+    {
+        $workflow = $this->readRepoFile('.github/workflows/deploy.yml');
+        $smokeRunner = $this->readRepoFile('backend/scripts/deploy/verify_ops_asset_smoke.sh');
+        $numericPrefixContract = '^[A-Za-z0-9_][A-Za-z0-9_-]{0,31}$';
+        $legacyLetterPrefixContract = '^[A-Za-z_][A-Za-z0-9_-]{0,31}$';
+
+        $this->assertStringContainsString($numericPrefixContract, $workflow);
+        $this->assertStringContainsString($numericPrefixContract, $smokeRunner);
+        $this->assertStringNotContainsString($legacyLetterPrefixContract, $workflow);
+        $this->assertStringNotContainsString($legacyLetterPrefixContract, $smokeRunner);
+    }
+
+    #[Test]
     public function mysql_connections_keep_ssl_ca_and_fail_closed_verification_configurable(): void
     {
         $source = $this->readRepoFile('backend/config/database.php');

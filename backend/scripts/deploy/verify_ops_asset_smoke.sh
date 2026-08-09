@@ -9,7 +9,7 @@ if [ ! -r "$remote_script" ] || [ -z "$receipt_path" ]; then
   echo "ops asset smoke: remote script and receipt path are required" >&2
   exit 64
 fi
-if [[ ! "${DEPLOY_USER:-}" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]; then
+if [[ ! "${DEPLOY_USER:-}" =~ ^[A-Za-z0-9_][A-Za-z0-9_-]{0,31}$ ]]; then
   echo "ops asset smoke: invalid deploy user" >&2
   exit 64
 fi
