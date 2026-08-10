@@ -1,0 +1,145 @@
+{
+    "acceptance_thresholds": {
+        "en": 1046,
+        "localized_total": 2092,
+        "unique_slugs": 1046,
+        "zh_CN": 1046
+    },
+    "c05_cold_start_gate": {
+        "active": false,
+        "ancestry": false,
+        "deploy_wiring_present": false,
+        "runner_present": false
+    },
+    "career_link_publication_gate": "CLOSED",
+    "contract_version": "career.1046.truth_rescan_06.v1",
+    "counts": {
+        "authority_locale_rows": 684,
+        "authority_unique_slugs": 342,
+        "family_members_en": 0,
+        "family_members_zh_CN": 0,
+        "industries_en": 0,
+        "industries_zh_CN": 0,
+        "public_en": 30,
+        "public_locale_rows": 60,
+        "public_zh_CN": 30,
+        "published_unique_slugs": 30,
+        "scanned_locale_rows": 60,
+        "scanned_unique_slugs": 30
+    },
+    "evidence_boundary": {
+        "authority_source": "fresh C03 production verify receipts",
+        "held_or_unpublished_paths_requested": false,
+        "historical_1046_used_as_authority": false,
+        "public_cohort_source": "receipt-bound current Jobs and Directory read models",
+        "response_bodies_retained": false
+    },
+    "generated_at": "2026-08-10T15:03:56Z",
+    "lineage": {
+        "active_revision": "40020ab7ef269ee56ce597e9f2fd2fbb99e83549",
+        "authority_artifact_sha256": "397f2a4ec284e9c0a6cd610447541ad4773fa7a7f3045008fab5efb334ec85c6",
+        "base_main_sha": "b8def9d3087cef60d479b1dcfc2a382c61074e93",
+        "runner_sha256": "21c0fb7b40ab1ad730a51f0c30eb4946f145b4ff3aaab8a65689849166ce0567",
+        "source_receipts_sha256": "2f8ec96436b294d0ac0f191ea7d36e63150befd8c9ef2951adc0938e3f1f7c44",
+        "target_readback_sha256": "aa3b1591f7c2cb2fdaa29ed50b1fb7f19d6d479504bb84d38db139595f262de5"
+    },
+    "pr6_allowed": false,
+    "production_writes": {
+        "cache": 0,
+        "cms": 0,
+        "database": 0,
+        "deploy": 0,
+        "indexability": 0,
+        "migration": 0,
+        "publication": 0,
+        "restart": 0,
+        "search_submission": 0
+    },
+    "receipt_stability": {
+        "drift_fields": [],
+        "stable": true
+    },
+    "scan_safety": {
+        "aborted": false,
+        "conflicting_identity_count": 0,
+        "duplicate_reference_count": 120,
+        "private_path_leak_count": 0,
+        "round_count": 2,
+        "safe": false,
+        "safe_error": null,
+        "scan_status": "SCAN_COMPLETE",
+        "server_error_count": 0,
+        "surface_diagnostics": {
+            "llms": [
+                {
+                    "conflicting_identity_count": 0,
+                    "duplicate_reference_count": 0,
+                    "matches_expected": true,
+                    "occurrence_count": 60,
+                    "round": 1,
+                    "row_set_sha256": "a42b2c69562ee7ea463d8190572f3b9f8244a633e1616d73b2122c3119ecfbee",
+                    "unique_identity_count": 60
+                },
+                {
+                    "conflicting_identity_count": 0,
+                    "duplicate_reference_count": 0,
+                    "matches_expected": true,
+                    "occurrence_count": 60,
+                    "round": 2,
+                    "row_set_sha256": "a42b2c69562ee7ea463d8190572f3b9f8244a633e1616d73b2122c3119ecfbee",
+                    "unique_identity_count": 60
+                }
+            ],
+            "llms_full": [
+                {
+                    "conflicting_identity_count": 0,
+                    "duplicate_reference_count": 60,
+                    "matches_expected": true,
+                    "occurrence_count": 120,
+                    "round": 1,
+                    "row_set_sha256": "a42b2c69562ee7ea463d8190572f3b9f8244a633e1616d73b2122c3119ecfbee",
+                    "unique_identity_count": 60
+                },
+                {
+                    "conflicting_identity_count": 0,
+                    "duplicate_reference_count": 60,
+                    "matches_expected": true,
+                    "occurrence_count": 120,
+                    "round": 2,
+                    "row_set_sha256": "a42b2c69562ee7ea463d8190572f3b9f8244a633e1616d73b2122c3119ecfbee",
+                    "unique_identity_count": 60
+                }
+            ],
+            "sitemap": [
+                {
+                    "conflicting_identity_count": 0,
+                    "duplicate_reference_count": 0,
+                    "matches_expected": true,
+                    "occurrence_count": 60,
+                    "round": 1,
+                    "row_set_sha256": "a42b2c69562ee7ea463d8190572f3b9f8244a633e1616d73b2122c3119ecfbee",
+                    "unique_identity_count": 60
+                },
+                {
+                    "conflicting_identity_count": 0,
+                    "duplicate_reference_count": 0,
+                    "matches_expected": true,
+                    "occurrence_count": 60,
+                    "round": 2,
+                    "row_set_sha256": "a42b2c69562ee7ea463d8190572f3b9f8244a633e1616d73b2122c3119ecfbee",
+                    "unique_identity_count": 60
+                }
+            ]
+        },
+        "target_failure_count": 48,
+        "timeout_count": 0
+    },
+    "scan_window": {
+        "completed_at": "2026-08-10T14:59:07Z",
+        "round_count": 2,
+        "stable": true,
+        "started_at": "2026-08-10T14:56:39Z"
+    },
+    "task_id": "CAREER-1046-TRUTH-RESCAN-06",
+    "verdict": "NO_GO"
+}
