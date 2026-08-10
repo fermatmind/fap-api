@@ -21,7 +21,7 @@ final class MbtiSeoFieldOverrideRevisionService
     public const STATUS_ROLLED_BACK = 'rolled_back';
 
     /**
-     * @return array{status:string,protected_fields:list<string>,marker_revision_id:int|null,marker_snapshot_sha256:string|null}
+     * @return array{status:string,protected_fields:list<string>,marker_revision_id:int|null,marker_snapshot_sha256:string|null,promotion_id:string|null,package_sha256:string|null}
      */
     public function resolve(
         PersonalityProfile $profile,
@@ -56,6 +56,8 @@ final class MbtiSeoFieldOverrideRevisionService
                 'protected_fields' => $status === self::STATUS_PROMOTED_LIVE ? ['seo_title'] : [],
                 'marker_revision_id' => (int) $revision->id,
                 'marker_snapshot_sha256' => (string) $snapshot['snapshot_sha256'],
+                'promotion_id' => (string) $snapshot['promotion_id'],
+                'package_sha256' => (string) $snapshot['package_sha256'],
             ];
         }
 
@@ -64,7 +66,43 @@ final class MbtiSeoFieldOverrideRevisionService
             'protected_fields' => [],
             'marker_revision_id' => null,
             'marker_snapshot_sha256' => null,
+            'promotion_id' => null,
+            'package_sha256' => null,
         ];
+    }
+
+    /**
+     * @param  array{org_id:int,framework:string,locale:string,runtime_type_code:string,route:string}  $target
+     * @return array<string,mixed>
+     */
+    public function markerSnapshot(
+        string $status,
+        string $promotionId,
+        string $packageSha256,
+        array $target,
+        string $previous,
+        string $promoted,
+    ): array {
+        if (! in_array($status, [self::STATUS_PROMOTED_LIVE, self::STATUS_ROLLED_BACK], true)) {
+            throw new RuntimeException('MBTI SEO field override marker status is unsupported.');
+        }
+
+        $snapshot = [
+            'schema_version' => self::SCHEMA_VERSION,
+            'status' => $status,
+            'promotion_id' => $promotionId,
+            'package_sha256' => $packageSha256,
+            'target' => $target,
+            'change' => [
+                'field' => self::FIELD_SEO_TITLE,
+                'previous' => $previous,
+                'promoted' => $promoted,
+                'live_value' => $status === self::STATUS_PROMOTED_LIVE ? $promoted : $previous,
+            ],
+        ];
+        $snapshot['snapshot_sha256'] = $this->snapshotSha256($snapshot);
+
+        return $snapshot;
     }
 
     /** @param array<string,mixed> $snapshot */

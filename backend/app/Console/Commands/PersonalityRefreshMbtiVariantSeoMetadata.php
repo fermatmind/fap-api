@@ -217,7 +217,7 @@ final class PersonalityRefreshMbtiVariantSeoMetadata extends Command
         return self::SUCCESS;
     }
 
-    /** @return array{status:string,protected_fields:list<string>,marker_revision_id:null,marker_snapshot_sha256:null} */
+    /** @return array{status:string,protected_fields:list<string>,marker_revision_id:null,marker_snapshot_sha256:null,promotion_id:null,package_sha256:null} */
     private function emptyOverride(): array
     {
         return [
@@ -225,6 +225,8 @@ final class PersonalityRefreshMbtiVariantSeoMetadata extends Command
             'protected_fields' => [],
             'marker_revision_id' => null,
             'marker_snapshot_sha256' => null,
+            'promotion_id' => null,
+            'package_sha256' => null,
         ];
     }
 
