@@ -384,7 +384,11 @@ final class MbtiIntpASeoTitleExperimentService
         }
 
         $expectedProjectionFingerprint = (string) data_get($package, 'authority_baseline.public_projection_sha256');
-        $actualProjectionFingerprint = $this->publicProjectionFingerprint($profile, $variant);
+        $actualProjectionFingerprint = $this->publicProjectionFingerprint(
+            $profile,
+            $variant,
+            trim((string) $seoMeta->canonical_url),
+        );
         if (! hash_equals($expectedProjectionFingerprint, $actualProjectionFingerprint)) {
             throw new RuntimeException('Target INTP-A complete public authority drifted; refusing the experiment draft.');
         }
@@ -502,7 +506,11 @@ final class MbtiIntpASeoTitleExperimentService
                 'og_image_url', 'twitter_title', 'twitter_description', 'twitter_image_url', 'robots',
                 'jsonld_overrides_json',
             ]),
-            'complete_public_projection_sha256' => $this->publicProjectionFingerprint($profile, $variant),
+            'complete_public_projection_sha256' => $this->publicProjectionFingerprint(
+                $profile,
+                $variant,
+                trim((string) $seoMeta->canonical_url),
+            ),
             'profile_sections' => $profile->sections->map->only([
                 'section_key', 'title', 'render_variant', 'body_md', 'body_html', 'payload_json',
                 'sort_order', 'is_enabled',
@@ -523,12 +531,18 @@ final class MbtiIntpASeoTitleExperimentService
     private function publicProjectionFingerprint(
         PersonalityProfile $profile,
         PersonalityProfileVariant $variant,
+        string $authorityCanonicalUrl,
     ): string {
         $projection = $this->publicProjectionService->buildForPublicPersonalityRoute(
             $profile,
             $variant,
             'public_variant',
         );
+        if (trim((string) data_get($projection, 'seo.canonical_url')) === '') {
+            throw new RuntimeException('Complete public projection canonical URL is missing.');
+        }
+
+        data_set($projection, 'seo.canonical_url', $authorityCanonicalUrl);
         $canonical = $this->canonicalize($projection);
         $encoded = json_encode($canonical, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE);
         if (! is_string($encoded)) {
