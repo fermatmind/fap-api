@@ -201,12 +201,18 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $targets = $this->seedTargets();
         $packagePath = $this->writePackage($this->validPackage());
         $this->createDraftRevisions($packagePath);
+        $current = PersonalityProfileVariantRevision::query()
+            ->where('personality_profile_variant_id', (int) $targets['en|INTJ-A']->id)
+            ->firstOrFail();
+        $snapshot = $current->snapshot_json;
+        $snapshotKey = (string) array_key_first($snapshot);
+        data_set($snapshot, $snapshotKey.'.source.source_sha256', str_repeat('b', 64));
 
         PersonalityProfileVariantRevision::query()->create([
             'personality_profile_variant_id' => (int) $targets['en|INTJ-A']->id,
             'revision_no' => 2,
-            'snapshot_json' => ['manual_revision' => true],
-            'note' => 'newer manual draft',
+            'snapshot_json' => $snapshot,
+            'note' => 'newer same-namespace draft',
             'created_by_admin_user_id' => null,
             'created_at' => now(),
         ]);
@@ -223,6 +229,32 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileVariantSeoMeta::query()->count());
         $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
         $this->assertSame(0, PersonalityProfileSection::query()->count());
+    }
+
+    public function test_namespaced_seo_title_experiment_revision_does_not_shadow_content_revision(): void
+    {
+        $targets = $this->seedTargets();
+        $packagePath = $this->writePackage($this->validPackage());
+        $this->createDraftRevisions($packagePath);
+        PersonalityProfileVariantRevision::query()->create([
+            'personality_profile_variant_id' => (int) $targets['en|INTJ-A']->id,
+            'revision_no' => 2,
+            'snapshot_json' => [
+                'schema_version' => 'personality.mbti-seo-title-experiment.v1',
+                'status' => 'inactive_draft',
+                'experiment_id' => 'zh-intp-a-seo-title-20260810-v1',
+            ],
+            'note' => 'namespaced inactive SEO title experiment',
+            'created_by_admin_user_id' => null,
+            'created_at' => now(),
+        ]);
+
+        $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', $this->promoteWriteOptions($packagePath));
+        $payload = $this->jsonOutput();
+
+        $this->assertSame(0, $exitCode, (string) json_encode($payload, JSON_UNESCAPED_SLASHES));
+        $this->assertTrue($payload['ok']);
+        $this->assertSame(8, $payload['promoted_count']);
     }
 
     public function test_forbidden_private_route_pattern_is_rejected_before_writes(): void

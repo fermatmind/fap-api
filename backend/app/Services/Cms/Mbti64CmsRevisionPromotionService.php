@@ -928,8 +928,7 @@ final class Mbti64CmsRevisionPromotionService
 
         foreach ($query->orderByDesc('revision_no')->get() as $revision) {
             $snapshot = is_array($revision->snapshot_json) ? $revision->snapshot_json : [];
-            if (is_array($snapshot[self::AGENT_PROJECTION_SNAPSHOT_KEY] ?? null)
-                && ! is_array($snapshot[$snapshotKey] ?? null)) {
+            if (! is_array($snapshot[$snapshotKey] ?? null)) {
                 continue;
             }
 
