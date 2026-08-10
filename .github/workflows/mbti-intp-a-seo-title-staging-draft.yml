@@ -165,9 +165,21 @@ jobs:
             | jq -S -j -c '.mbti_public_projection_v1' > "$RUNNER_TEMP/public-before.json"
           jq -e '.runtime_type_code == "INTP-A" and .seo.title != null' "$RUNNER_TEMP/public-before.json" >/dev/null
           package="backend/docs/seo/personality/experiments/zh-intp-a-seo-title-v1.json"
+          target_route="$(jq -r '.target.route' "$package")"
+          authority_canonical="$(jq -r '.authority_baseline.database_contract.seo_meta.canonical_url' "$package")"
+          test "$target_route" = "/zh/personality/intp-a"
+          test "$authority_canonical" = "https://fermatmind.com${target_route}"
+          test "$(jq -r '.seo.canonical_url' "$RUNNER_TEMP/public-before.json")" = "https://staging.fermatmind.com${target_route}"
+
+          # The staging projection intentionally rewrites only the public canonical host.
+          # Normalize that environment-owned value before comparing with the production
+          # authority baseline; keep public-before.json raw for the post-write byte check.
+          jq -S -j -c --arg canonical "$authority_canonical" \
+            '.seo.canonical_url = $canonical' \
+            "$RUNNER_TEMP/public-before.json" > "$RUNNER_TEMP/public-before-authority-normalized.json"
           expected_projection_sha="$(jq -r '.authority_baseline.public_projection_sha256' "$package")"
           [[ "$expected_projection_sha" =~ ^[0-9a-f]{64}$ ]]
-          test "$(sha256sum "$RUNNER_TEMP/public-before.json" | awk '{print $1}')" = "$expected_projection_sha"
+          test "$(sha256sum "$RUNNER_TEMP/public-before-authority-normalized.json" | awk '{print $1}')" = "$expected_projection_sha"
 
       - name: Execute dry-run, create inactive draft, and read back
         shell: bash
