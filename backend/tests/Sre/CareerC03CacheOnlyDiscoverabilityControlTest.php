@@ -148,6 +148,8 @@ final class CareerC03CacheOnlyDiscoverabilityControlTest extends TestCase
     public function public_verify_accepts_an_exactly_converged_bilingual_fixture_without_writes(): void
     {
         [$arguments, $directory] = $this->publicFixture();
+        file_put_contents($arguments[9], file_get_contents($arguments[9])."https://fermatmind.com/en/personality/big-five/facets/order\n");
+        file_put_contents($arguments[10], file_get_contents($arguments[10])."https://fermatmind.com/zh/personality/big-five/facets/order\n");
 
         try {
             [$exit, $receipt] = $this->runPublicVerify($arguments);

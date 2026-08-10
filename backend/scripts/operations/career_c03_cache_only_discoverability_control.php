@@ -46,7 +46,7 @@ final class CareerC03CacheOnlyDiscoverabilityControl
         '/llms-full.txt',
     ];
 
-    private const PRIVATE_PATH_PATTERN = '#/(?:result|results|orders?|share|pay|payment|history)(?:/|$)|/(?:en|zh)/tests/[^/]+/take(?:/|$)#i';
+    private const PRIVATE_PATH_PATTERN = '#^(?:(?:/(?:en|zh))?/(?:attempts?|results?|reports?|orders?|share|pay|payment|history)(?:/|$)|/(?:en|zh)/tests/[^/]+/take(?:/|$))#iD';
 
     public static function main(array $argv): int
     {
@@ -123,8 +123,10 @@ final class CareerC03CacheOnlyDiscoverabilityControl
         ];
         $privateLeakCount = 0;
         foreach ([$sitemapXmlPath, $llmsPath, $llmsFullPath] as $path) {
-            $bytes = self::fileBytes($path, 'PUBLIC_TEXT_INPUT_INVALID');
-            $privateLeakCount += preg_match_all(self::PRIVATE_PATH_PATTERN, $bytes) ?: 0;
+            foreach (self::urlsFromText(self::fileBytes($path, 'PUBLIC_TEXT_INPUT_INVALID')) as $url) {
+                $urlPath = (string) (parse_url($url, PHP_URL_PATH) ?? '');
+                $privateLeakCount += preg_match(self::PRIVATE_PATH_PATTERN, $urlPath) === 1 ? 1 : 0;
+            }
         }
 
         $converged = $mismatches === []
