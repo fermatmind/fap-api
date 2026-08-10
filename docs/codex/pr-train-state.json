@@ -104195,6 +104195,85 @@
       }
     ]
   },
+  "CAREER-1046-TRUTH-RESCAN-06": {
+    "id": "CAREER-1046-TRUTH-RESCAN-06",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-1046-truth-rescan-06",
+    "title": "CAREER-1046-TRUTH-RESCAN-06: verify Engineering Publication and Production truth",
+    "status": "hold_production_evidence",
+    "depends_on": [
+      "CAREER-COLD-CACHE-DISCOVERABILITY-GATE-02"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "dependency": {
+        "status": "passed",
+        "evidence": "C05 PR #3592 merged as 4ad35bd2b15448569a3bafc6bd27f6ad115dc014 and latest origin/main 92e372f8b6adb775a90765d40a6ceaf339717105 contains it. C02 run 31372257233 and C03 incident closeout run 31379780335 are successful with their exact receipt and artifact lineage."
+      },
+      "production_boundary": {
+        "status": "closed_read_only",
+        "evidence": "This item permits only fresh C03 verify receipts and bounded credential-free public GET readback. Deploy, migration, cache warm, CMS/database/publication/indexability/discoverability mutation, Search Channel action, and Career edge activation remain prohibited."
+      },
+      "local_focused_validation": {
+        "status": "passed",
+        "evidence": "Career1046TruthRescan06Test: 9 passed / 42 assertions; scoped Pint, PHP syntax, Composer strict validation, YAML parse, JSON parse, and git diff check passed on 2026-08-10."
+      },
+      "pre_c03_verify": {
+        "status": "hold_lineage_head_mismatch",
+        "evidence": "Read-only verify run 31382701613 attempt 1 failed before authority/public readback because incident closeout run 31379780335 belongs to control-plane SHA 339743bc3b4b80028a77211a5051133551c8a49e while exact latest main is 92e372f8b6adb775a90765d40a6ceaf339717105. Failure receipt SHA-256 5067ee13656668efaff0d0622491ab0b54f151d1f137fd3cc500e0b71eb2bbc2; artifact digest sha256:58e805ce115527efd276a678c5618e81fb1a72c0a3b100f7a2811bd8841cc950; zero production writes."
+      },
+      "latest_main_incident_closeout": {
+        "status": "hold_public_readback_incomplete",
+        "evidence": "Read-only incident_closeout run 31382787907 attempt 1 passed main/topology/C02/failed-deploy/authority checks, then public readback returned two curl(18) incomplete-transfer errors. The final receipt is HOLD_CONTROL_INCOMPLETE with automatic_retry_allowed=false; receipt SHA-256 958af6a18d45c4e4114ab9f106b832fb9bdd01175a4153200bd8812aafc05171; artifact digest sha256:c80e3b500dcd03fda7ed6b6a8912e947b48e4353a1bc115a0963953b4e1496dd; zero production writes."
+      }
+    },
+    "lineage": {
+      "c02": {
+        "run_id": 31372257233,
+        "run_attempt": 1,
+        "receipt_sha256": "f1a30b3c83c8d3f11b83e4b8056074bf724e1f6d37646f93750567b0a60b4cc1",
+        "artifact_digest": "sha256:ba1be4f6862851752b1bbfd6a535c7c1ef589e90658d9043f372174fd17ea6eb"
+      },
+      "c03_incident_closeout": {
+        "run_id": 31379780335,
+        "run_attempt": 1,
+        "receipt_sha256": "09bec867fb5054056e9b29211183ba5736c8a23346f08435e546739c9b08044e",
+        "artifact_digest": "sha256:455f5967177783aa45c315241e5104d97a0c90c7c8274bc3deaef4f02a548711"
+      },
+      "c05": {
+        "pr_number": 3592,
+        "merge_commit_sha": "4ad35bd2b15448569a3bafc6bd27f6ad115dc014"
+      }
+    },
+    "failure_reason": "A verifiable PASS pre-C03 receipt could not be produced for the stable latest-main window. The exact old incident closeout is rejected by the workflow's same-control-plane lineage guard, and the replacement latest-main incident closeout failed its bounded public readback with curl(18) before it could emit PASS_INCIDENT_CLOSED. The failure receipt forbids automatic retry, so scan/finalize evidence is intentionally absent and this PR must remain Draft/HOLD.",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_read_only_evidence": true,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "deploy_allowed": false,
+    "career_link_publication_gate": "CLOSED",
+    "transitions": [
+      {
+        "at": "2026-08-10T11:02:29Z",
+        "status": "in_progress",
+        "note": "Started PR5 from origin/main 1109500e8c1eb7c112140bea5b5f3ac5669cb5bf in an isolated worktree, then latest-main guard advanced the uncommitted scope to 92e372f8b6adb775a90765d40a6ceaf339717105 before any production read. Scope is read-only current Career truth evidence only; no production write or public-state mutation occurred."
+      },
+      {
+        "at": "2026-08-10T11:21:24Z",
+        "status": "hold_production_evidence",
+        "note": "Run 31382701613 failed closed on old-closeout/current-main lineage before public inspection. A same-main read-only replacement closeout run 31382787907 then failed its public readback with curl(18) and emitted HOLD_CONTROL_INCOMPLETE with automatic_retry_allowed=false. Both controls report zero cache/database/publication/indexability/deploy/migration writes. No PR5 scan snapshot or generated verdict evidence was created; PR6 remains prohibited."
+      }
+    ],
+    "updated_at": "2026-08-10T11:21:24Z"
+  },
   "CAREER-1046-PUBLICATION-CONTROL-03": {
     "id": "CAREER-1046-PUBLICATION-CONTROL-03",
     "repo": "fap-api",
