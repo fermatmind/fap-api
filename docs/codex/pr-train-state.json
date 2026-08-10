@@ -20,6 +20,7 @@
       "backend/tests/Feature/V0_3/ReportPaywallTeaserTest.php",
       "backend/tests/Feature/V0_3/MbtiReportHttpContractRegressionTest.php",
       "backend/tests/Feature/V0_3/PaymentWebhookControllerTest.php",
+      "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
       "backend/tests/Feature/Commerce/FreemiumLocalePolicyTest.php",
       "backend/tests/Feature/Commerce/MbtiCommerceConsolidationTest.php",
       "backend/tests/Feature/Commerce/BigFiveUnlockDeliveryPipelineTest.php",
@@ -43,7 +44,7 @@
         "evidence": "Approved Window 3 product-truth contract SHA 3d9bef9549374007cedb5859cd14a90566020d5322ff47a12764bc6504269857 and source manifest SHA ba7b58afaa1228c445e138d5d5d5e5fa90db7f5222dfea19ee493be536a3b2ae are available.",
         "status": "pass"
       },
-      "github_pr": { "evidence": "PR #3609 opened from the exact scoped branch; required checks are pending.", "status": "pending" },
+      "github_pr": { "evidence": "PR #3609 exact head 58db5d6865d4ee4c7ce3ee04edd94d362a5cd782 passed hygiene, supply-chain, content-pack, Code Scanning, and both MBTI jobs. verify-bigfive failed only because the runtime-freeze classifier had no exact Catalog authority allowlist; same-scope repair is in progress.", "status": "repairing" },
       "local_validation": {
         "evidence": [
           "Latest-main focused product, commerce, report, history, SEO, and migration contracts passed: 35 tests / 1630 assertions.",
@@ -61,7 +62,7 @@
     },
     "commit_sha": "b2a1e942a5842050fc87467bd8bf63ee2b4e5cb1",
     "depends_on": [],
-    "failure_reason": null,
+    "failure_reason": "verify-bigfive rejected five exact Catalog convergence files at BigFiveResultPageV2CoreBodyPreviewTest.php:185; all 1688 other Big Five tests passed. Repair adds a narrow five-path classifier contract and keeps adjacent scale and Big Five runtime files blocked.",
     "local_cleanup_executed": false,
     "merged_at": null,
     "name": "Converge six-assessment public product truth",
@@ -76,7 +77,7 @@
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_type": "assessment_catalog_fact_authority_convergence",
-    "status": "github_checks_pending",
+    "status": "github_checks_repairing",
     "title": "ASSESSMENT-CATALOG-FACT-AUTHORITY-CONVERGENCE-01: converge six-assessment public product truth",
     "transitions": [
       {
@@ -93,6 +94,11 @@
         "at": "2026-08-10T17:26:00+08:00",
         "status": "github_checks_pending",
         "note": "PR #3609 opened from codex/assessment-catalog-fact-authority-convergence-01. Required GitHub checks and exact-head review remain pending."
+      },
+      {
+        "at": "2026-08-10T17:36:00+08:00",
+        "status": "github_checks_repairing",
+        "note": "CI run 31374575363 passed Code Scanning, hygiene, supply-chain, content-pack, verify-mbti-legacy, and verify-mbti-v2. verify-bigfive passed 1688 tests and failed only its branch-diff runtime-freeze assertion because five exact Catalog convergence paths lacked a classifier exception. Repair is limited to an exact five-path allowlist with adjacent runtime negatives."
       }
     ]
   },

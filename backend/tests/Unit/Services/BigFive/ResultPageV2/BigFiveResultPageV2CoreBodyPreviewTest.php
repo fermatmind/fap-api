@@ -249,6 +249,24 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_assessment_catalog_product_truth_convergence_files(): void
+    {
+        $allowed = [
+            'backend/app/Http/Controllers/API/V0_3/ScalesLookupController.php',
+            'backend/app/Services/Scale/PublicScaleFormsProjector.php',
+            'backend/database/migrations/2026_08_10_120000_converge_assessment_catalog_product_truth.php',
+            'backend/database/seed_data/skus_eq_60.json',
+            'backend/database/seed_data/skus_mbti.json',
+        ];
+        $blocked = [
+            'backend/app/Services/Scale/ScaleRegistry.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_measurement_instrumentation_files(): void
     {
         $allowed = [
@@ -7265,6 +7283,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isAssessmentCatalogProductTruthConvergenceFile($file)) {
+                continue;
+            }
+
             if (
                 $this->isSoloOwnerReviewFoundationFile($file)
                 && isset($soloOwnerReviewFoundationAddedFileSet[$file])
@@ -9313,6 +9335,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Commerce/BigFiveReportUnlockRolloutGate.php',
             'backend/app/Services/Commerce/ReportUnlockProductCatalog.php',
             'backend/database/seed_data/skus_big5_ocean.json',
+        ], true);
+    }
+
+    private function isAssessmentCatalogProductTruthConvergenceFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_3/ScalesLookupController.php',
+            'backend/app/Services/Scale/PublicScaleFormsProjector.php',
+            'backend/database/migrations/2026_08_10_120000_converge_assessment_catalog_product_truth.php',
+            'backend/database/seed_data/skus_eq_60.json',
+            'backend/database/seed_data/skus_mbti.json',
         ], true);
     }
 
