@@ -480,8 +480,8 @@ before('deploy:symlink', 'guard:public-dns-health');
  * L1 runtime activation.
  */
 task('guard:career-detail-cache-coverage', function () {
-    if (deployIsCodeOnly()) {
-        writeln('<comment>Skipping Career detail cache coverage for code-only release; shared detail caches are unchanged.</comment>');
+    if (deploySkipsAuthorityMutations()) {
+        writeln('<comment>Skipping Career detail cache coverage because this isolated release does not mutate Career authority caches.</comment>');
 
         return;
     }
@@ -506,8 +506,8 @@ task('guard:career-detail-cache-coverage', function () {
  * read-only gate below as the activation authority.
  */
 task('career:repair-published-detail-cache-coverage', function () {
-    if (deployIsCodeOnly()) {
-        writeln('<comment>Skipping Career detail cache repair for code-only release; shared detail caches are unchanged.</comment>');
+    if (deploySkipsAuthorityMutations()) {
+        writeln('<comment>Skipping Career detail cache repair because this isolated release does not mutate Career authority caches.</comment>');
 
         return;
     }
@@ -536,9 +536,65 @@ task('career:repair-published-detail-cache-coverage', function () {
     ));
 });
 
-before('deploy:symlink', 'guard:career-detail-cache-coverage');
 before('deploy:symlink', 'guard:queue-reload-capability');
-before('guard:career-detail-cache-coverage', 'career:repair-published-detail-cache-coverage');
+
+/**
+ * Resolve the exact materialized Career publication cohort before any standard
+ * cache mutation. Schema-only activation is read-only here but still fails
+ * closed when the shared private authority artifact is missing or malformed.
+ */
+task('guard:career-runtime-projection-authority', function () {
+    if (in_array(deployMode(), ['code_only', 'candidate_only'], true)) {
+        writeln('<comment>Skipping Career runtime projection gate for isolated code/candidate release.</comment>');
+
+        return;
+    }
+
+    run(sprintf(
+        'FM_CAREER_COLD_CACHE_GATE_EXECUTE=1 {{bin/php}} %s authority',
+        deployPlaceholderPathArg('{{release_path}}', 'backend/scripts/deploy/verify_career_cold_cache_discoverability.php'),
+    ));
+});
+
+/**
+ * Detail coverage changes which Career links are reader-safe. Always rebuild
+ * both directory locales after the bounded detail repair and complete coverage
+ * gate, even when the broader warm fingerprint was unchanged.
+ */
+task('career:rebuild-directory-after-detail-repair', function () {
+    if (deployMode() !== 'standard') {
+        writeln('<comment>Skipping Career directory-only rebuild outside standard deploy.</comment>');
+
+        return;
+    }
+
+    run(sprintf(
+        'timeout 300 {{bin/php}} %s career:warm-public-authority-cache --directory-only --json --no-interaction --no-ansi',
+        deployPlaceholderPathArg('{{release_path}}', 'backend/artisan'),
+    ));
+});
+
+task('guard:career-discoverability-pre-sitemap', function () {
+    if (deployMode() !== 'standard') {
+        return;
+    }
+
+    run(sprintf(
+        'FM_CAREER_COLD_CACHE_GATE_EXECUTE=1 {{bin/php}} %s pre_sitemap',
+        deployPlaceholderPathArg('{{release_path}}', 'backend/scripts/deploy/verify_career_cold_cache_discoverability.php'),
+    ));
+});
+
+task('guard:career-discoverability-post-sitemap', function () {
+    if (deployMode() !== 'standard') {
+        return;
+    }
+
+    run(sprintf(
+        'FM_CAREER_COLD_CACHE_GATE_EXECUTE=1 {{bin/php}} %s post_sitemap',
+        deployPlaceholderPathArg('{{release_path}}', 'backend/scripts/deploy/verify_career_cold_cache_discoverability.php'),
+    ));
+});
 
 task('guard:ops-theme-asset', function () {
     $asset = deployPlaceholderPathArg('{{release_path}}', 'backend/public/css/app/ops-theme.css');
@@ -2009,9 +2065,15 @@ after('guard:required-public-static-media-assets', 'ensure:release-public-static
 after('artisan:config:cache', 'guard:sitemap-authority');
 after('artisan:migrate', 'guard:no-pending-migrations');
 after('guard:no-pending-migrations', 'artisan:scales:seed-default');
-after('artisan:scales:seed-default', 'career:warm-public-authority-cache');
-after('career:warm-public-authority-cache', 'seo:warm-sitemap-source-cache');
-after('seo:warm-sitemap-source-cache', 'guard:public-content-release');
+after('artisan:scales:seed-default', 'guard:career-runtime-projection-authority');
+after('guard:career-runtime-projection-authority', 'career:repair-published-detail-cache-coverage');
+after('career:repair-published-detail-cache-coverage', 'guard:career-detail-cache-coverage');
+after('guard:career-detail-cache-coverage', 'career:warm-public-authority-cache');
+after('career:warm-public-authority-cache', 'career:rebuild-directory-after-detail-repair');
+after('career:rebuild-directory-after-detail-repair', 'guard:career-discoverability-pre-sitemap');
+after('guard:career-discoverability-pre-sitemap', 'seo:warm-sitemap-source-cache');
+after('seo:warm-sitemap-source-cache', 'guard:career-discoverability-post-sitemap');
+after('guard:career-discoverability-post-sitemap', 'guard:public-content-release');
 after('guard:public-content-release', 'prepare:release-bootstrap-cache-access');
 after('deploy:symlink', 'ensure:nginx-public-static-media-route');
 after('deploy:symlink', 'reload:php-fpm');
@@ -2086,6 +2148,7 @@ task('deploy:schema-only', [
     'artisan:view:cache',
     'artisan:event:cache',
     'artisan:migrate-schema-only',
+    'guard:career-runtime-projection-authority',
     'guard:public-content-release',
     'deploy:publish',
 ]);
