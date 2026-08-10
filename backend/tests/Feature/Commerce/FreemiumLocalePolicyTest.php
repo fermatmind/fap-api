@@ -36,8 +36,8 @@ final class FreemiumLocalePolicyTest extends TestCase
             ->assertJsonPath('ok', true)
             ->assertJsonPath('locale_freemium_policy.authority', 'backend')
             ->assertJsonPath('locale_freemium_policy.locale_family', 'en')
-            ->assertJsonPath('locale_freemium_policy.policy', 'free_until')
-            ->assertJsonPath('locale_freemium_policy.free_until', '2026-12-31')
+            ->assertJsonPath('locale_freemium_policy.policy', 'free_only')
+            ->assertJsonPath('locale_freemium_policy.free_until', null)
             ->assertJsonPath('locale_freemium_policy.english_free_active', true)
             ->assertJsonPath('locale_freemium_policy.paywall_allowed', false)
             ->assertJsonPath('locale_freemium_policy.order_creation_allowed', false)
@@ -53,7 +53,7 @@ final class FreemiumLocalePolicyTest extends TestCase
         $this->assertNotContains('MBTI_REPORT_FULL_199', $skus);
     }
 
-    public function test_chinese_sku_policy_returns_cny_199_unlock_when_enabled(): void
+    public function test_chinese_sku_policy_returns_full_free_without_offer(): void
     {
         $this->seedScales();
 
@@ -63,19 +63,17 @@ final class FreemiumLocalePolicyTest extends TestCase
             ->assertJsonPath('ok', true)
             ->assertJsonPath('locale_freemium_policy.authority', 'backend')
             ->assertJsonPath('locale_freemium_policy.locale_family', 'zh')
-            ->assertJsonPath('locale_freemium_policy.policy', 'cny_199_unlock')
-            ->assertJsonPath('locale_freemium_policy.paywall_allowed', true)
-            ->assertJsonPath('locale_freemium_policy.order_creation_allowed', true)
-            ->assertJsonPath('locale_freemium_policy.currency', 'CNY')
-            ->assertJsonPath('locale_freemium_policy.price_cents', 199)
-            ->assertJsonPath('locale_freemium_policy.sku', 'MBTI_REPORT_FULL_199')
-            ->assertJsonPath('locale_freemium_policy.upgrade_sku', 'MBTI_REPORT_FULL');
+            ->assertJsonPath('locale_freemium_policy.policy', 'free_only')
+            ->assertJsonPath('locale_freemium_policy.report_access_level', 'full')
+            ->assertJsonPath('locale_freemium_policy.paywall_allowed', false)
+            ->assertJsonPath('locale_freemium_policy.order_creation_allowed', false)
+            ->assertJsonPath('locale_freemium_policy.currency', null)
+            ->assertJsonPath('locale_freemium_policy.price_cents', null)
+            ->assertJsonPath('locale_freemium_policy.sku', null)
+            ->assertJsonPath('locale_freemium_policy.upgrade_sku', null);
 
         $items = (array) $response->json('items');
-        $this->assertCount(1, $items);
-        $this->assertSame('MBTI_REPORT_FULL_199', (string) data_get($items, '0.sku'));
-        $this->assertSame('CNY', (string) data_get($items, '0.currency'));
-        $this->assertSame(199, (int) data_get($items, '0.price_cents'));
+        $this->assertSame([], $items);
     }
 
     public function test_english_mbti_report_is_full_free_with_no_cny_offer(): void
@@ -125,11 +123,9 @@ final class FreemiumLocalePolicyTest extends TestCase
             'target_attempt_id' => $attemptId,
         ]);
 
-        $response->assertStatus(422)
+        $response->assertStatus(404)
             ->assertJsonPath('ok', false)
-            ->assertJsonPath('error_code', 'LOCALE_POLICY_ORDER_NOT_ALLOWED')
-            ->assertJsonPath('details.locale_freemium_policy.locale_family', 'en')
-            ->assertJsonPath('details.locale_freemium_policy.paywall_allowed', false);
+            ->assertJsonPath('error_code', 'NOT_FOUND');
 
         $this->assertSame(0, DB::table('orders')->count());
     }

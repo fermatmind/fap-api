@@ -132,7 +132,7 @@ class ReportPaywallTeaserTest extends TestCase
         return $attemptId;
     }
 
-    public function test_report_paywall_teaser_without_entitlement(): void
+    public function test_report_is_full_free_without_entitlement(): void
     {
         $this->seedScales();
 
@@ -146,23 +146,24 @@ class ReportPaywallTeaserTest extends TestCase
         $report->assertStatus(200);
         $report->assertJson([
             'ok' => true,
-            'locked' => true,
-            'access_level' => 'free',
-            'variant' => 'free',
-            'upgrade_sku' => 'MBTI_REPORT_FULL',
-            'upgrade_sku_effective' => 'MBTI_REPORT_FULL_199',
+            'locked' => false,
+            'access_level' => 'full',
+            'variant' => 'full',
+            'access_source' => 'scale_free_only',
+            'paywall_suppressed' => true,
+            'upgrade_sku' => null,
+            'upgrade_sku_effective' => null,
         ]);
 
         $this->assertNotNull($report->json('view_policy'));
-        $this->assertSame('MBTI_REPORT_FULL_199', $report->json('view_policy.upgrade_sku'));
-        $this->assertNotEmpty($report->json('offers'));
+        $this->assertFalse((bool) $report->json('view_policy.blur_others'));
+        $this->assertSame(0, $report->json('view_policy.teaser_percent'));
+        $this->assertNull($report->json('view_policy.upgrade_sku'));
+        $this->assertSame([], $report->json('offers'));
         $offerSkus = array_map(fn ($item) => $item['sku'] ?? null, (array) $report->json('offers'));
-        $this->assertContains('MBTI_REPORT_FULL_199', $offerSkus);
+        $this->assertSame([], $offerSkus);
         $this->assertIsArray($report->json('cta'));
-        $this->assertTrue((bool) $report->json('cta.visible'));
-        $this->assertSame('upsell', $report->json('cta.kind'));
-        $this->assertSame('MBTI_REPORT_FULL', $report->json('cta.target_sku'));
-        $this->assertSame('MBTI_REPORT_FULL_199', $report->json('cta.target_sku_effective'));
+        $this->assertFalse((bool) $report->json('cta.visible'));
         $this->assertNotNull($report->json('report'));
         $this->assertNotEmpty((array) $report->json('report.profile'));
         $this->assertNotEmpty((array) $report->json('report.identity_card'));
@@ -171,6 +172,6 @@ class ReportPaywallTeaserTest extends TestCase
         foreach (['traits', 'growth', 'career', 'relationships'] as $section) {
             $this->assertNotEmpty((array) $report->json("report.sections.{$section}.cards"));
         }
-        $this->assertSame(0, DB::table('report_snapshots')->count());
+        $this->assertSame(1, DB::table('report_snapshots')->count());
     }
 }

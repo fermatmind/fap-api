@@ -11,6 +11,76 @@ continuation_protocol:
     do_not_stop_train_when_external_and_required_checks_green: true
 prs:
 
+  - id: ASSESSMENT-CATALOG-FACT-AUTHORITY-CONVERGENCE-01
+    repo: fap-api
+    base: main
+    branch: codex/assessment-catalog-fact-authority-convergence-01
+    title: "ASSESSMENT-CATALOG-FACT-AUTHORITY-CONVERGENCE-01: converge six-assessment public product truth"
+    status: ready_to_merge
+    depends_on: []
+    train_scope: assessment_catalog_fact_authority_convergence
+    scope:
+      - Converge the six approved assessment form, question-count, duration, free-report, and public claim facts into backend authority.
+      - Fail closed the public lookup and catalog projections against historical paid, offer, blur, teaser, and unsupported rating residue.
+      - Add a forward-only migration for org-0 registry facts and attempt-scoped report-unlock SKU retirement without executing it in production.
+    allowed_paths:
+      - backend/app/Http/Controllers/API/V0_3/ScalesLookupController.php
+      - backend/app/Http/Controllers/API/V0_3/CommerceController.php
+      - backend/app/Services/Scale/PublicScaleFormsProjector.php
+      - backend/app/Services/Report/Resolvers/AccessResolver.php
+      - backend/app/Services/Report/ReportGatekeeper.php
+      - backend/app/Services/Commerce/FreemiumLocalePolicy.php
+      - backend/app/Services/V0_3/Me/MeAttemptsService.php
+      - backend/config/content_packs.php
+      - backend/config/freemium_locale_policy.php
+      - backend/database/migrations/2026_08_10_120000_converge_assessment_catalog_product_truth.php
+      - backend/database/seed_data/skus_mbti.json
+      - backend/database/seed_data/skus_big5_ocean.json
+      - backend/database/seed_data/skus_eq_60.json
+      - backend/database/seeders/ScaleRegistrySeeder.php
+      - backend/database/seeders/Pr19CommerceSeeder.php
+      - backend/tests/Feature/V0_3/ScalesLookupTest.php
+      - backend/tests/Feature/V0_3/ReportPaywallTeaserTest.php
+      - backend/tests/Feature/V0_3/MbtiReportHttpContractRegressionTest.php
+      - backend/tests/Feature/V0_3/PaymentWebhookControllerTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/tests/Feature/Commerce/FreemiumLocalePolicyTest.php
+      - backend/tests/Feature/Commerce/MbtiCommerceConsolidationTest.php
+      - backend/tests/Feature/Commerce/BigFiveUnlockDeliveryPipelineTest.php
+      - backend/tests/Feature/Commerce/BigFiveWebhookIdempotencyTest.php
+      - backend/tests/Feature/Attempts/BigFiveHistoryCompareTest.php
+      - backend/tests/Feature/Content/BigFivePaywallFlagModesTest.php
+      - backend/tests/Feature/SEO/BigFiveAuthorityV220Test.php
+      - backend/tests/Feature/Scale/AssessmentCatalogProductTruthConvergenceTest.php
+      - backend/docs/seo/assessment-catalog-product-truth-convergence-01.md
+      - backend/docs/seo/generated/assessment-catalog-product-truth-convergence-01.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web, Hub or landing CMS content, canonical, hreflang, sitemap, llms, analytics, experiments, or tenant-specific registry rows.
+      - Disable MBTI org-scoped Pro, Gift, or Credit SKUs.
+      - Deploy, execute the production migration, write CMS or production database state, publish, or submit Search Channel actions.
+    validation:
+      - php -l for every changed PHP file
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/ScalesLookupTest.php tests/Feature/Scale/AssessmentCatalogProductTruthConvergenceTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Commerce/BigFiveUnlockDeliveryPipelineTest.php tests/Feature/Commerce/BigFiveWebhookIdempotencyTest.php tests/Feature/Attempts/BigFiveHistoryCompareTest.php tests/Feature/Content/BigFivePaywallFlagModesTest.php tests/Feature/SEO/BigFiveAuthorityV220Test.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate:fresh --force --no-ansi
+      - cd backend && php artisan route:list --path=api/v0.3/scales --except-vendor --no-ansi
+      - cd backend && vendor/bin/pint --test on changed PHP files
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - parse changed JSON and YAML
+      - git diff --check and exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: BIG5-CMS-IMPORT-DRYRUN-01
     repo: fap-api
     depends_on: []

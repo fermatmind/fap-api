@@ -30,8 +30,6 @@ final class ScaleRegistrySeeder extends Seeder
             );
         }
 
-        $skuDefaults = $this->resolveSkuDefaults();
-
         $writer = app(ScaleRegistryWriter::class);
 
         $scale = $writer->upsertScale([
@@ -57,24 +55,19 @@ final class ScaleRegistrySeeder extends Seeder
             'capabilities_json' => [
                 'share_templates' => true,
                 'content_graph' => true,
+                'paywall_mode' => 'free_only',
+                'forms' => ['mbti_144', 'mbti_93'],
+                'default_form_code' => 'mbti_144',
             ],
 
-            // 保持你现有的商业化口径：view_policy 内是 effective SKU，新老兼容由响应层做 anchor 映射
             'view_policy_json' => [
                 'free_sections' => ['intro', 'score'],
-                'blur_others' => true,
-                'teaser_percent' => 0.3,
-                'upgrade_sku' => $skuDefaults['effective_sku'] ?? null,
+                'blur_others' => false,
+                'teaser_percent' => 0.0,
+                'upgrade_sku' => null,
             ],
 
-            'commercial_json' => [
-                'price_tier' => 'FREE',
-                'report_benefit_code' => 'MBTI_REPORT_FULL',
-                'credit_benefit_code' => 'MBTI_CREDIT',
-                'report_unlock_sku' => $skuDefaults['effective_sku'] ?? null,
-                'upgrade_sku_anchor' => $skuDefaults['anchor_sku'] ?? null,
-                'offers' => $skuDefaults['offers'] ?? [],
-            ],
+            'commercial_json' => $this->freeCommercialContract(),
 
             'seo_schema_json' => [
                 '@context' => 'https://schema.org',
@@ -108,11 +101,11 @@ final class ScaleRegistrySeeder extends Seeder
                 enTagline: 'Type axis synthesis',
                 zhTagline: '类型轴线综合',
                 priority: 100,
-                rating: 5,
-                enExcerpt: 'Discover the inner drivers that make your personality uniquely yours. Get a full read on your preference patterns and core strengths, plus tailored guidance for career growth and communication.',
-                zhExcerpt: '探索造就你独特个性的内在动力。全面解析你的性格偏好与核心优势，并获取为你量身定制的职业发展与人际沟通指南。',
-                enSeoCopy: 'The MBTI flow is built on Jungian type dimensions and structured preference scoring. It helps users interpret E/I, S/N, T/F, and J/P patterns for communication, planning, and role-fit decisions.',
-                zhSeoCopy: '该 MBTI 测评基于荣格类型维度与结构化偏好评分，帮助你理解 E/I、S/N、T/F、J/P 模式，并用于沟通协作、计划习惯与岗位匹配决策。',
+                rating: 0,
+                enExcerpt: 'Describe your E/I, S/N, T/F, and J/P preference patterns as a structured reference for communication, self-reflection, and career exploration.',
+                zhExcerpt: '了解你的 E/I、S/N、T/F、J/P 偏好模式，作为沟通、自我观察与职业探索的结构化参考。',
+                enSeoCopy: 'This MBTI assessment describes preference patterns for self-reflection, communication, and career exploration. It does not determine hiring, career outcomes, ability, health, or future results.',
+                zhSeoCopy: '该 MBTI 测评用于描述偏好模式，供自我观察、沟通与职业探索参考；不用于决定录用、职业结果、能力、健康或未来表现。',
                 zhFaq: [
                     [
                         'q' => 'MBTI 测试免费吗？',
@@ -186,6 +179,8 @@ final class ScaleRegistrySeeder extends Seeder
                 'enabled_regions' => ['CN_MAINLAND', 'GLOBAL'],
                 'rollout_ratio' => 1.0,
                 'paywall_mode' => 'free_only',
+                'forms' => ['big5_120', 'big5_90'],
+                'default_form_code' => 'big5_120',
             ],
             'view_policy_json' => [
                 'free_sections' => ['disclaimer_top', 'summary', 'domains_overview', 'disclaimer'],
@@ -193,12 +188,7 @@ final class ScaleRegistrySeeder extends Seeder
                 'teaser_percent' => 0.0,
                 'upgrade_sku' => null,
             ],
-            'commercial_json' => [
-                'price_tier' => 'PAID',
-                'report_benefit_code' => 'BIG5_FULL_REPORT',
-                'credit_benefit_code' => 'BIG5_FULL_REPORT',
-                'report_unlock_sku' => 'SKU_BIG5_FULL_REPORT_499',
-            ],
+            'commercial_json' => $this->freeCommercialContract(),
             'seo_schema_json' => [
                 '@context' => 'https://schema.org',
                 '@type' => 'Quiz',
@@ -223,7 +213,7 @@ final class ScaleRegistrySeeder extends Seeder
                 enDescription: 'Measure your Openness, Conscientiousness, Extraversion, Agreeableness, and Neuroticism in one assessment.',
                 zhDescription: '用一次测评了解开放性、尽责性、外倾性、宜人性与神经质。',
                 questions: 120,
-                minutes: 20,
+                minutes: 15,
                 cardVisual: 'bars_ocean',
                 cardTone: 'editorial',
                 cardSeed: 'big-five',
@@ -231,11 +221,11 @@ final class ScaleRegistrySeeder extends Seeder
                 enTagline: 'Trait distribution profile',
                 zhTagline: '特质分布画像',
                 priority: 95,
-                rating: 5,
-                enExcerpt: 'Using a scientifically validated framework, uncover the traits at the core of your personality. See how the Big Five can shape your life, career path, and close relationships.',
-                zhExcerpt: '借助学术界公认的科学量表，解码你的底层性格特征。深入了解这五大特质将如何深刻影响你的生活、工作轨迹与亲密关系。',
-                enSeoCopy: 'Big Five is one of the most validated personality frameworks in modern psychology. The report translates Openness, Conscientiousness, Extraversion, Agreeableness, and Neuroticism into practical growth decisions.',
-                zhSeoCopy: '大五人格是现代心理学验证度最高的模型之一。报告将开放性、尽责性、外倾性、宜人性与神经质转化为可执行的成长建议。'
+                rating: 0,
+                enExcerpt: 'Explore your current pattern across five continuous trait dimensions and use the scores as a reference for self-observation and growth planning.',
+                zhExcerpt: '了解你在五个连续特质维度上的当前分布，并将分数作为自我观察与成长规划的参考。',
+                enSeoCopy: 'This report describes five continuous trait dimensions for self-observation. FermatMind does not currently publish specific reliability, validity, norm, or percentile evidence for this assessment.',
+                zhSeoCopy: '该报告描述五个连续特质维度，供自我观察参考；费马测试当前未公开本测评的具体信度、效度、常模或百分位证据。'
             ),
 
             'is_public' => true,
@@ -270,6 +260,7 @@ final class ScaleRegistrySeeder extends Seeder
                 'rollout_ratio' => 1.0,
                 'paywall_mode' => 'free_only',
                 'forms' => ['enneagram_likert_105', 'enneagram_forced_choice_144'],
+                'default_form_code' => 'enneagram_likert_105',
             ],
             'view_policy_json' => [
                 'free_sections' => ['summary', 'scores'],
@@ -277,13 +268,7 @@ final class ScaleRegistrySeeder extends Seeder
                 'teaser_percent' => 0.0,
                 'upgrade_sku' => null,
             ],
-            'commercial_json' => [
-                'price_tier' => 'FREE',
-                'report_benefit_code' => 'ENNEAGRAM_REPORT',
-                'credit_benefit_code' => 'ENNEAGRAM_REPORT',
-                'report_unlock_sku' => null,
-                'offers' => [],
-            ],
+            'commercial_json' => $this->freeCommercialContract(),
             'seo_schema_json' => [
                 '@context' => 'https://schema.org',
                 '@type' => 'Quiz',
@@ -316,7 +301,7 @@ final class ScaleRegistrySeeder extends Seeder
                 enTagline: 'Nine-type profile',
                 zhTagline: '九型人格画像',
                 priority: 90,
-                rating: 5,
+                rating: 0,
                 enExcerpt: 'Map your strongest Enneagram patterns and see how the nine types rank in your profile.',
                 zhExcerpt: '了解你的九型人格主导类型与九个类型的完整排序。',
                 enSeoCopy: 'The Enneagram backend assessment supports a 105-item Likert form and a 144-item forced-choice form under one scale, with scoring owned by the submit pipeline.',
@@ -363,13 +348,7 @@ final class ScaleRegistrySeeder extends Seeder
                 'teaser_percent' => 0.0,
                 'upgrade_sku' => null,
             ],
-            'commercial_json' => [
-                'price_tier' => 'FREE',
-                'report_benefit_code' => 'RIASEC_REPORT',
-                'credit_benefit_code' => 'RIASEC_REPORT',
-                'report_unlock_sku' => null,
-                'offers' => [],
-            ],
+            'commercial_json' => $this->freeCommercialContract(),
             'seo_schema_json' => [
                 '@context' => 'https://schema.org',
                 '@type' => 'Quiz',
@@ -402,7 +381,7 @@ final class ScaleRegistrySeeder extends Seeder
                 enTagline: 'Career interest profile',
                 zhTagline: '职业兴趣画像',
                 priority: 88,
-                rating: 5,
+                rating: 0,
                 enExcerpt: 'Map your strongest career interests into a Holland Code and compare your six RIASEC dimensions.',
                 zhExcerpt: '将你的职业兴趣整理为霍兰德三字母主码，并查看六个 RIASEC 维度的分数分布。',
                 enSeoCopy: 'The RIASEC assessment uses Holland career-interest dimensions and backend scoring. The default public form is 60 questions, with an enhanced 140-question form supported by the same scale.',
@@ -602,15 +581,17 @@ final class ScaleRegistrySeeder extends Seeder
                 'enabled_in_prod' => true,
                 'enabled_regions' => ['CN_MAINLAND', 'GLOBAL'],
                 'rollout_ratio' => 1.0,
+                'paywall_mode' => 'free_only',
+                'forms' => ['IQ_OWNER_ORIGINAL_30'],
+                'default_form_code' => 'IQ_OWNER_ORIGINAL_30',
             ],
             'view_policy_json' => [
                 'free_sections' => ['intro', 'summary'],
-                'blur_others' => true,
-                'teaser_percent' => 0.35,
+                'blur_others' => false,
+                'teaser_percent' => 0.0,
+                'upgrade_sku' => null,
             ],
-            'commercial_json' => [
-                'price_tier' => 'FREE',
-            ],
+            'commercial_json' => $this->freeCommercialContract(),
             'seo_schema_json' => [
                 '@context' => 'https://schema.org',
                 '@type' => 'Quiz',
@@ -642,11 +623,11 @@ final class ScaleRegistrySeeder extends Seeder
                 enTagline: 'Cognitive reasoning profile',
                 zhTagline: '认知推理画像',
                 priority: 80,
-                rating: 4,
-                enExcerpt: 'Explore your true cognitive potential. Through rigorous logic and spatial-reasoning challenges, pinpoint your intellectual strengths and core problem-solving ability.',
-                zhExcerpt: '探索你大脑的真实认知潜能。通过严谨的逻辑与空间推理挑战，精准定位你的智力优势与核心解决问题能力。',
-                enSeoCopy: 'This IQ assessment focuses on matrix reasoning and pattern analysis for educational self-evaluation.',
-                zhSeoCopy: '该 IQ 测试聚焦矩阵推理与模式分析，用于学习与认知能力自评参考。'
+                rating: 0,
+                enExcerpt: 'Work through matrix-reasoning and pattern-analysis questions to observe your current problem-solving approach. The result is not a fixed judgment of intelligence or potential.',
+                zhExcerpt: '通过矩阵推理与模式分析题观察你当前的问题解决方式；结果不是对智力或潜能的固定判断。',
+                enSeoCopy: 'This IQ assessment focuses on matrix reasoning and pattern analysis for self-evaluation. It does not determine fixed intelligence, potential, education, or employment outcomes.',
+                zhSeoCopy: '该 IQ 测试聚焦矩阵推理与模式分析，用于自评参考；不用于决定固定智力、潜能、升学或录用结果。'
             ),
             'is_public' => true,
             'is_active' => true,
@@ -676,6 +657,8 @@ final class ScaleRegistrySeeder extends Seeder
                 'enabled_regions' => ['CN_MAINLAND', 'GLOBAL'],
                 'rollout_ratio' => 1.0,
                 'paywall_mode' => 'free_only',
+                'forms' => ['eq_60'],
+                'default_form_code' => 'eq_60',
             ],
             'view_policy_json' => [
                 'free_sections' => [
@@ -695,13 +678,7 @@ final class ScaleRegistrySeeder extends Seeder
                 'teaser_percent' => 0.0,
                 'upgrade_sku' => null,
             ],
-            'commercial_json' => [
-                'price_tier' => 'FREE',
-                'report_benefit_code' => null,
-                'credit_benefit_code' => null,
-                'report_unlock_sku' => null,
-                'offers' => [],
-            ],
+            'commercial_json' => $this->freeCommercialContract(),
             'seo_schema_json' => [
                 '@context' => 'https://schema.org',
                 '@type' => 'Quiz',
@@ -733,7 +710,7 @@ final class ScaleRegistrySeeder extends Seeder
                 enTagline: 'Emotional capability map',
                 zhTagline: '情绪能力图谱',
                 priority: 79,
-                rating: 4,
+                rating: 0,
                 enExcerpt: 'Understand your emotional and relational patterns. Assess self-awareness and empathy tendencies to build clearer boundaries, relationship action, and recovery strategies at work and in life.',
                 zhExcerpt: '理解你处理情绪与人际关系的模式。深度评估自我觉察与共情倾向，帮助你在职场与生活中建立更清晰的情绪边界、关系行动和自我恢复策略。',
                 enSeoCopy: 'This EQ assessment emphasizes emotional regulation and relationship communication for practical growth planning.',
@@ -931,141 +908,19 @@ final class ScaleRegistrySeeder extends Seeder
         ];
     }
 
-    private function resolveSkuDefaults(): array
-    {
-        $rows = $this->loadSkuSeedData();
-        if (count($rows) === 0) {
-            return [
-                'effective_sku' => null,
-                'anchor_sku' => null,
-                'offers' => [],
-            ];
-        }
-
-        $anchorSku = null;
-        $effectiveSku = null;
-
-        foreach ($rows as $item) {
-            if (! is_array($item)) {
-                continue;
-            }
-
-            $sku = strtoupper(trim((string) ($item['sku'] ?? '')));
-            if ($sku === '') {
-                continue;
-            }
-
-            $meta = $item['metadata_json'] ?? [];
-            $meta = is_array($meta) ? $meta : [];
-
-            if ($anchorSku === null && ! empty($meta['anchor'])) {
-                $anchorSku = $sku;
-            }
-
-            if ($effectiveSku === null && (! empty($meta['effective_default']) || ! empty($meta['default']))) {
-                $effectiveSku = $sku;
-            }
-        }
-
-        $offers = $this->buildOffersFromSeed($rows);
-
-        return [
-            'effective_sku' => $effectiveSku,
-            'anchor_sku' => $anchorSku,
-            'offers' => $offers,
-        ];
-    }
-
-    private function loadSkuSeedData(): array
-    {
-        $path = database_path('seed_data/skus_mbti.json');
-        if (! is_file($path)) {
-            return [];
-        }
-
-        $raw = file_get_contents($path);
-        if (! is_string($raw) || $raw === '') {
-            return [];
-        }
-
-        $decoded = json_decode($raw, true);
-
-        return is_array($decoded) ? $decoded : [];
-    }
-
-    private function buildOffersFromSeed(array $rows): array
-    {
-        $offers = [];
-        foreach ($rows as $item) {
-            if (! is_array($item)) {
-                continue;
-            }
-
-            $sku = strtoupper(trim((string) ($item['sku'] ?? '')));
-            if ($sku === '') {
-                continue;
-            }
-
-            $meta = $item['metadata_json'] ?? [];
-            $meta = is_array($meta) ? $meta : [];
-            if (! empty($meta['anchor']) || ! empty($meta['deprecated'])) {
-                continue;
-            }
-            if (array_key_exists('offer', $meta) && $meta['offer'] === false) {
-                continue;
-            }
-
-            $grantType = trim((string) ($meta['grant_type'] ?? ''));
-            if ($grantType === '') {
-                $grantType = strtolower(trim((string) ($item['benefit_type'] ?? '')));
-            }
-
-            $grantQty = isset($meta['grant_qty']) ? (int) $meta['grant_qty'] : 1;
-            $periodDays = isset($meta['period_days']) ? (int) $meta['period_days'] : null;
-
-            $entitlementId = trim((string) ($meta['entitlement_id'] ?? ''));
-            $modulesIncluded = $this->normalizeModulesIncluded($meta['modules_included'] ?? null);
-
-            $offers[] = [
-                'sku' => $sku,
-                'price_cents' => (int) ($item['price_cents'] ?? 0),
-                'currency' => (string) ($item['currency'] ?? 'CNY'),
-                'title' => (string) ($meta['title'] ?? $meta['label'] ?? ''),
-                'entitlement_id' => $entitlementId !== '' ? $entitlementId : null,
-                'modules_included' => $modulesIncluded,
-                'grant' => [
-                    'type' => $grantType !== '' ? $grantType : null,
-                    'qty' => $grantQty,
-                    'period_days' => $periodDays,
-                ],
-            ];
-        }
-
-        return $offers;
-    }
-
     /**
-     * @return list<string>
+     * @return array<string,mixed>
      */
-    private function normalizeModulesIncluded(mixed $raw): array
+    private function freeCommercialContract(): array
     {
-        if (is_string($raw)) {
-            $decoded = json_decode($raw, true);
-            $raw = is_array($decoded) ? $decoded : null;
-        }
-        if (! is_array($raw)) {
-            return [];
-        }
-
-        $out = [];
-        foreach ($raw as $module) {
-            $module = strtolower(trim((string) $module));
-            if ($module === '') {
-                continue;
-            }
-            $out[$module] = true;
-        }
-
-        return array_keys($out);
+        return [
+            'price_tier' => 'FREE',
+            'report_benefit_code' => null,
+            'credit_benefit_code' => null,
+            'report_unlock_sku' => null,
+            'upgrade_sku' => null,
+            'upgrade_sku_anchor' => null,
+            'offers' => [],
+        ];
     }
 }

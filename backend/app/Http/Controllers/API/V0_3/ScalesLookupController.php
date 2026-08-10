@@ -25,6 +25,15 @@ class ScalesLookupController extends Controller
 
     private const CATALOG_FALLBACK_IMAGE = 'https://api.fermatmind.com/static/share/mbti_square_600x600.png';
 
+    private const FREE_ONLY_ASSESSMENT_CODES = [
+        'MBTI',
+        'BIG5_OCEAN',
+        'ENNEAGRAM',
+        'RIASEC',
+        'IQ_RAVEN',
+        'EQ_60',
+    ];
+
     public function __construct(
         private ScaleRegistry $registry,
         private ScaleIdentityResolver $identityResolver,
@@ -108,6 +117,7 @@ class ScalesLookupController extends Controller
         $locale = $this->resolveRequestedLocale($request, (string) ($row['default_locale'] ?? 'en'));
         $seo = $this->resolveSeoByLocale($row, $locale);
         $isIndexable = $this->scaleDiscoverabilityPolicy->isIndexable($row);
+        $forms = $this->publicScaleFormsProjector->projectForRegistryRow($row, $locale);
         $payload = [
             'ok' => true,
             'scale_code' => $scaleCodeMeta['scale_code'],
@@ -125,10 +135,10 @@ class ScalesLookupController extends Controller
             'region' => $row['default_region'] ?? null,
             'locale' => $locale,
             'driver_type' => $row['driver_type'] ?? '',
-            'view_policy' => $row['view_policy_json'] ?? null,
-            'capabilities' => $row['capabilities_json'] ?? null,
+            'view_policy' => $this->projectPublicViewPolicy($row),
+            'capabilities' => $this->projectPublicCapabilities($row, $forms),
             'commercial' => $this->projectPublicCommercial($row),
-            'forms' => $this->publicScaleFormsProjector->projectForRegistryRow($row, $locale),
+            'forms' => $forms,
             'seo_title' => $seo['title'],
             'seo_description' => $seo['description'],
             'og_image_url' => $seo['og_image_url'],
@@ -268,25 +278,71 @@ class ScalesLookupController extends Controller
     private function projectPublicCommercial(array $row): ?array
     {
         $commercial = $this->toArray($row['commercial_json'] ?? null);
-        if ($commercial === []) {
-            return null;
-        }
-
         $scaleCode = strtoupper(trim((string) ($row['code'] ?? '')));
-        $capabilities = $this->toArray($row['capabilities_json'] ?? null);
-        $paywallMode = strtolower(trim((string) ($capabilities['paywall_mode'] ?? '')));
+        if (! $this->isFreeOnlyAssessment($scaleCode)) {
+            if ($commercial === []) {
+                return null;
+            }
 
-        if ($scaleCode !== 'BIG5_OCEAN' || $paywallMode !== 'free_only') {
             return $commercial;
         }
 
-        $commercial['price_tier'] = 'FREE';
-        $commercial['report_unlock_sku'] = null;
-        $commercial['upgrade_sku'] = null;
-        $commercial['upgrade_sku_anchor'] = null;
-        $commercial['offers'] = [];
+        return [
+            'price_tier' => 'FREE',
+            'report_benefit_code' => null,
+            'credit_benefit_code' => null,
+            'report_unlock_sku' => null,
+            'upgrade_sku' => null,
+            'upgrade_sku_anchor' => null,
+            'offers' => [],
+        ];
+    }
 
-        return $commercial;
+    /**
+     * @param  array<string,mixed>  $row
+     * @return array<string,mixed>|null
+     */
+    private function projectPublicViewPolicy(array $row): ?array
+    {
+        $viewPolicy = $this->toArray($row['view_policy_json'] ?? null);
+        $scaleCode = strtoupper(trim((string) ($row['code'] ?? '')));
+        if (! $this->isFreeOnlyAssessment($scaleCode)) {
+            return $viewPolicy !== [] ? $viewPolicy : null;
+        }
+
+        $viewPolicy['blur_others'] = false;
+        $viewPolicy['teaser_percent'] = 0.0;
+        $viewPolicy['upgrade_sku'] = null;
+
+        return $viewPolicy;
+    }
+
+    /**
+     * @param  array<string,mixed>  $row
+     * @param  list<array<string,mixed>>  $forms
+     * @return array<string,mixed>|null
+     */
+    private function projectPublicCapabilities(array $row, array $forms): ?array
+    {
+        $capabilities = $this->toArray($row['capabilities_json'] ?? null);
+        $scaleCode = strtoupper(trim((string) ($row['code'] ?? '')));
+        if (! $this->isFreeOnlyAssessment($scaleCode)) {
+            return $capabilities !== [] ? $capabilities : null;
+        }
+
+        $capabilities['paywall_mode'] = 'free_only';
+        $capabilities['forms'] = array_values(array_map(
+            static fn (array $form): string => (string) ($form['form_code'] ?? ''),
+            $forms
+        ));
+        foreach ($forms as $form) {
+            if (($form['is_default'] ?? false) === true) {
+                $capabilities['default_form_code'] = (string) ($form['form_code'] ?? '');
+                break;
+            }
+        }
+
+        return $capabilities;
     }
 
     /**
@@ -310,6 +366,8 @@ class ScalesLookupController extends Controller
         $fallbackHighlight = $this->toArray($englishContent['highlight'] ?? null);
         $forms = $this->publicScaleFormsProjector->projectForRegistryRow($row, $locale);
         $defaultFormQuestionCount = $this->publicScaleFormsProjector->defaultQuestionCount($row, $locale);
+        $defaultFormEstimatedMinutes = $this->publicScaleFormsProjector->defaultEstimatedMinutes($row, $locale);
+        $isFreeOnlyAssessment = $this->isFreeOnlyAssessment(strtoupper(trim((string) ($row['code'] ?? ''))));
 
         $title = $this->trimOrNull($localizedContent['title'] ?? null)
             ?? $seo['title']
@@ -339,9 +397,10 @@ class ScalesLookupController extends Controller
                 ?? $this->trimOrNull($fallbackCatalog['cover_image'] ?? null)
                 ?? $seo['og_image_url']
                 ?? self::CATALOG_FALLBACK_IMAGE,
-            'questions_count' => $this->positiveInt($catalog['questions_count'] ?? $fallbackCatalog['questions_count'] ?? null)
-                ?: $defaultFormQuestionCount,
-            'time_minutes' => $this->positiveInt($catalog['time_minutes'] ?? $fallbackCatalog['time_minutes'] ?? null),
+            'questions_count' => $defaultFormQuestionCount
+                ?: $this->positiveInt($catalog['questions_count'] ?? $fallbackCatalog['questions_count'] ?? null),
+            'time_minutes' => $defaultFormEstimatedMinutes
+                ?: $this->positiveInt($catalog['time_minutes'] ?? $fallbackCatalog['time_minutes'] ?? null),
             'forms' => $forms,
             'card_visual' => $this->trimOrNull($card['visual'] ?? null) ?? $this->trimOrNull($fallbackCard['visual'] ?? null),
             'card_tone' => $this->trimOrNull($card['tone'] ?? null) ?? $this->trimOrNull($fallbackCard['tone'] ?? null),
@@ -352,7 +411,9 @@ class ScalesLookupController extends Controller
                 'zh' => $this->trimOrNull($this->toArray($zhContent['card'] ?? null)['tagline'] ?? null) ?? '',
             ],
             'highlight_priority' => $this->positiveInt($highlight['priority'] ?? $fallbackHighlight['priority'] ?? null),
-            'highlight_rating' => $this->positiveInt($highlight['rating'] ?? $fallbackHighlight['rating'] ?? null),
+            'highlight_rating' => $isFreeOnlyAssessment
+                ? 0
+                : $this->positiveInt($highlight['rating'] ?? $fallbackHighlight['rating'] ?? null),
             'highlight_excerpt_i18n' => [
                 'en' => $this->trimOrNull($this->toArray($englishContent['highlight'] ?? null)['excerpt'] ?? null) ?? '',
                 'zh' => $this->trimOrNull($this->toArray($zhContent['highlight'] ?? null)['excerpt'] ?? null) ?? '',
@@ -386,6 +447,11 @@ class ScalesLookupController extends Controller
         $int = (int) $value;
 
         return $int > 0 ? $int : 0;
+    }
+
+    private function isFreeOnlyAssessment(string $scaleCode): bool
+    {
+        return in_array($scaleCode, self::FREE_ONLY_ASSESSMENT_CODES, true);
     }
 
     private function resolveRequestedLocale(Request $request, string $defaultLocale): string

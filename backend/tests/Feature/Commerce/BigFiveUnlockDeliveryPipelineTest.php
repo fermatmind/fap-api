@@ -29,6 +29,12 @@ final class BigFiveUnlockDeliveryPipelineTest extends TestCase
     {
         (new ScaleRegistrySeeder)->run();
         (new Pr19CommerceSeeder)->run();
+
+        // Exercise the historical webhook delivery path without changing the
+        // production seed contract, where assessment report-unlock SKUs stay inactive.
+        DB::table('skus')
+            ->where('sku', 'SKU_BIG5_FULL_REPORT_299')
+            ->update(['is_active' => true]);
     }
 
     private function createUserWithEmail(string $email): string

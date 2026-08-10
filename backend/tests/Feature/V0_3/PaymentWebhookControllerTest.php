@@ -283,6 +283,9 @@ final class PaymentWebhookControllerTest extends TestCase
     public function test_valid_billing_signature_queues_payment_success_email_when_delivery_context_exists(): void
     {
         (new Pr19CommerceSeeder)->run();
+        DB::table('skus')
+            ->where('sku', 'SKU_BIG5_FULL_REPORT_299')
+            ->update(['is_active' => true]);
 
         config([
             'services.billing.webhook_secret' => 'billing_secret_email_queue',

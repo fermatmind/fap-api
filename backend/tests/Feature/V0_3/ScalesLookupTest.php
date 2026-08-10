@@ -112,8 +112,9 @@ class ScalesLookupTest extends TestCase
             ->value('commercial_json');
         $rawCommercial = is_string($rawCommercial) ? json_decode($rawCommercial, true) : $rawCommercial;
 
-        $this->assertSame('PAID', data_get($rawCommercial, 'price_tier'));
-        $this->assertSame('SKU_BIG5_FULL_REPORT_299', data_get($rawCommercial, 'report_unlock_sku'));
+        $this->assertSame('FREE', data_get($rawCommercial, 'price_tier'));
+        $this->assertNull(data_get($rawCommercial, 'report_unlock_sku'));
+        $this->assertSame([], data_get($rawCommercial, 'offers'));
 
         foreach (['en', 'zh'] as $locale) {
             $response = $this->getJson('/api/v0.3/scales/lookup?slug=big-five-personality-test-ocean-model&locale='.$locale);
@@ -132,6 +133,68 @@ class ScalesLookupTest extends TestCase
             $response->assertJsonPath('forms.0.form_code', 'big5_120');
             $response->assertJsonPath('forms.1.form_code', 'big5_90');
             $this->assertStringNotContainsString('SKU_BIG5_FULL_REPORT_299', $response->getContent());
+        }
+    }
+
+    public function test_six_approved_assessments_project_exact_free_product_truth_for_en_and_zh(): void
+    {
+        $this->artisan('migrate', ['--force' => true]);
+        $this->artisan('fap:scales:seed-default');
+        $this->artisan('fap:scales:sync-slugs');
+
+        $truth = [
+            'mbti-personality-test-16-personality-types' => [
+                ['mbti_144', true, 144, 15],
+                ['mbti_93', false, 93, 10],
+            ],
+            'big-five-personality-test-ocean-model' => [
+                ['big5_120', true, 120, 15],
+                ['big5_90', false, 90, 11],
+            ],
+            'enneagram-personality-test-nine-types' => [
+                ['enneagram_likert_105', true, 105, 12],
+                ['enneagram_forced_choice_144', false, 144, 18],
+            ],
+            'holland-career-interest-test-riasec' => [
+                ['riasec_60', true, 60, 8],
+                ['riasec_140', false, 140, 18],
+            ],
+            'iq-test-intelligence-quotient-assessment' => [
+                ['IQ_OWNER_ORIGINAL_30', true, 30, 20],
+            ],
+            'eq-test-emotional-intelligence-assessment' => [
+                ['eq_60', true, 60, 10],
+            ],
+        ];
+
+        foreach (['en', 'zh'] as $locale) {
+            foreach ($truth as $slug => $forms) {
+                $response = $this->getJson("/api/v0.3/scales/lookup?slug={$slug}&locale={$locale}");
+
+                $response->assertOk();
+                $response->assertJsonPath('capabilities.paywall_mode', 'free_only');
+                $response->assertJsonPath('capabilities.forms', array_column($forms, 0));
+                $response->assertJsonPath('capabilities.default_form_code', $forms[0][0]);
+                $response->assertJsonPath('view_policy.blur_others', false);
+                $response->assertJsonPath('view_policy.teaser_percent', 0);
+                $response->assertJsonPath('view_policy.upgrade_sku', null);
+                $response->assertJsonPath('commercial.price_tier', 'FREE');
+                $response->assertJsonPath('commercial.report_unlock_sku', null);
+                $response->assertJsonPath('commercial.upgrade_sku', null);
+                $response->assertJsonPath('commercial.upgrade_sku_anchor', null);
+                $response->assertJsonPath('commercial.offers', []);
+                $this->assertCount(count($forms), $response->json('forms'));
+
+                foreach ($forms as $index => [$formCode, $isDefault, $questions, $minutes]) {
+                    $response->assertJsonPath("forms.{$index}.form_code", $formCode);
+                    $response->assertJsonPath("forms.{$index}.is_default", $isDefault);
+                    $response->assertJsonPath("forms.{$index}.question_count", $questions);
+                    $response->assertJsonPath("forms.{$index}.estimated_minutes", $minutes);
+                }
+
+                $this->assertStringNotContainsString('SKU_', $response->getContent());
+                $this->assertStringNotContainsString('MBTI_REPORT_FULL', $response->getContent());
+            }
         }
     }
 
@@ -193,6 +256,9 @@ class ScalesLookupTest extends TestCase
 
         $bigFive = $items->firstWhere('slug', 'big-five-personality-test-ocean-model');
         $this->assertIsArray($bigFive);
+        $this->assertSame(120, $bigFive['questions_count']);
+        $this->assertSame(15, $bigFive['time_minutes']);
+        $this->assertSame(0, $bigFive['highlight_rating']);
         $this->assertSame('big5_120', data_get($bigFive, 'forms.0.form_code'));
         $this->assertSame('big5_90', data_get($bigFive, 'forms.1.form_code'));
 
@@ -210,6 +276,22 @@ class ScalesLookupTest extends TestCase
         $this->assertSame(60, data_get($riasec, 'forms.0.question_count'));
         $this->assertSame('riasec_140', data_get($riasec, 'forms.1.form_code'));
         $this->assertSame(140, data_get($riasec, 'forms.1.question_count'));
+
+        $iq = $items->firstWhere('slug', 'iq-test-intelligence-quotient-assessment');
+        $this->assertIsArray($iq);
+        $this->assertSame(30, $iq['questions_count']);
+        $this->assertSame(20, $iq['time_minutes']);
+        $this->assertSame(0, $iq['highlight_rating']);
+        $this->assertSame('IQ_OWNER_ORIGINAL_30', data_get($iq, 'forms.0.form_code'));
+        $this->assertCount(1, $iq['forms']);
+
+        $eq = $items->firstWhere('slug', 'eq-test-emotional-intelligence-assessment');
+        $this->assertIsArray($eq);
+        $this->assertSame(60, $eq['questions_count']);
+        $this->assertSame(10, $eq['time_minutes']);
+        $this->assertSame(0, $eq['highlight_rating']);
+        $this->assertSame('eq_60', data_get($eq, 'forms.0.form_code'));
+        $this->assertCount(1, $eq['forms']);
     }
 
     public function test_lookup_alias_mode_canonical_only_rejects_alias_but_allows_canonical(): void

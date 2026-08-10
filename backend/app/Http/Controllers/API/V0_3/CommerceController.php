@@ -67,9 +67,7 @@ class CommerceController extends Controller
 
         $locale = $this->resolveExplicitRequestedLocale($request);
         $items = $this->skus->listActiveSkus($scale, $this->orgContext->orgId());
-        if ($locale !== null) {
-            $items = $this->freemiumLocalePolicy->filterSkuItems($items, $scale, $locale);
-        }
+        $items = $this->freemiumLocalePolicy->filterSkuItems($items, $scale, $locale);
         $localePolicy = $this->freemiumLocalePolicy->resolve($scale, $locale);
 
         return response()->json([

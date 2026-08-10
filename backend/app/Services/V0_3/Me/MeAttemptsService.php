@@ -437,6 +437,10 @@ class MeAttemptsService
 
     private function isBigFiveFreeReadable(Attempt $attempt): bool
     {
+        if ((int) ($attempt->org_id ?? 0) === 0) {
+            return true;
+        }
+
         $registry = $this->scaleRegistry->getByCode(ReportAccess::SCALE_BIG5_OCEAN, (int) ($attempt->org_id ?? 0));
         if (! is_array($registry)) {
             return false;

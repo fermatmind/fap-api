@@ -31,9 +31,9 @@ class AccessResolver
 
         if ($freeFullReportMode) {
             $hasFullAccess = true;
-        } elseif ($forceFreeOnly && ! $this->isForceFreeFullAccessScale($scaleCode)) {
+        } elseif ($forceFreeOnly && ! $this->freeOnlyGrantsFullAccess($scaleCode)) {
             $hasFullAccess = false;
-        } elseif ($forceFreeOnly && $this->isForceFreeFullAccessScale($scaleCode)) {
+        } elseif ($forceFreeOnly && $this->freeOnlyGrantsFullAccess($scaleCode)) {
             $hasFullAccess = true;
         }
 
@@ -61,7 +61,7 @@ class AccessResolver
     ): array {
         $scaleCode = strtoupper(trim($scaleCode));
         if (
-            ($forceFreeOnly && $this->isForceFreeFullAccessScale($scaleCode))
+            ($forceFreeOnly && $this->freeOnlyGrantsFullAccess($scaleCode))
             || $this->freeFullReportModeEnabled($scaleCode)
         ) {
             $modulesAllowed = $this->fullRuntimeModulesForScale($scaleCode);
@@ -148,13 +148,16 @@ class AccessResolver
         return $benefitCode;
     }
 
-    private function isForceFreeFullAccessScale(string $scaleCode): bool
+    public function freeOnlyGrantsFullAccess(string $scaleCode): bool
     {
         return in_array($scaleCode, [
+            ReportAccess::SCALE_MBTI,
             ReportAccess::SCALE_BIG5_OCEAN,
             ReportAccess::SCALE_EQ_60,
             ReportAccess::SCALE_ENNEAGRAM,
             ReportAccess::SCALE_RIASEC,
+            ReportAccess::SCALE_IQ_RAVEN,
+            ReportAccess::SCALE_IQ_INTELLIGENCE_QUOTIENT,
         ], true);
     }
 

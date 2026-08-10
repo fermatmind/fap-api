@@ -18,7 +18,7 @@ final class MbtiCommerceConsolidationTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_mbti_catalog_and_sku_endpoint_hide_legacy_partial_skus(): void
+    public function test_mbti_catalog_keeps_org_skus_but_public_endpoint_exposes_no_assessment_offer(): void
     {
         $this->seedScales();
 
@@ -30,9 +30,14 @@ final class MbtiCommerceConsolidationTest extends TestCase
             ->values()
             ->all();
 
-        $this->assertContains('MBTI_REPORT_FULL_199', $catalogSkus);
+        $this->assertNotContains('MBTI_REPORT_FULL', $catalogSkus);
+        $this->assertNotContains('MBTI_REPORT_FULL_199', $catalogSkus);
         $this->assertNotContains('MBTI_CAREER_99', $catalogSkus);
         $this->assertNotContains('MBTI_RELATIONSHIP_99', $catalogSkus);
+        $this->assertContains('MBTI_PRO_MONTH_599', $catalogSkus);
+        $this->assertContains('MBTI_PRO_YEAR_1999', $catalogSkus);
+        $this->assertContains('MBTI_GIFT_PACK_2990', $catalogSkus);
+        $this->assertContains('MBTI_CREDIT', $catalogSkus);
 
         $response = $this->getJson('/api/v0.3/skus?scale=MBTI');
         $response->assertOk()->assertJsonPath('ok', true);
@@ -43,12 +48,10 @@ final class MbtiCommerceConsolidationTest extends TestCase
             ->values()
             ->all();
 
-        $this->assertContains('MBTI_REPORT_FULL_199', $apiSkus);
-        $this->assertNotContains('MBTI_CAREER_99', $apiSkus);
-        $this->assertNotContains('MBTI_RELATIONSHIP_99', $apiSkus);
+        $this->assertSame([], $apiSkus);
     }
 
-    public function test_mbti_report_paywall_only_returns_the_full_report_offer(): void
+    public function test_mbti_report_is_full_free_without_offer(): void
     {
         $this->seedScales();
 
@@ -63,13 +66,15 @@ final class MbtiCommerceConsolidationTest extends TestCase
 
         $response->assertOk()
             ->assertJsonPath('ok', true)
-            ->assertJsonPath('locked', true)
-            ->assertJsonPath('upgrade_sku', 'MBTI_REPORT_FULL')
-            ->assertJsonPath('upgrade_sku_effective', 'MBTI_REPORT_FULL_199')
-            ->assertJsonPath('cta.target_sku', 'MBTI_REPORT_FULL')
-            ->assertJsonPath('cta.target_sku_effective', 'MBTI_REPORT_FULL_199')
-            ->assertJsonCount(1, 'offers')
-            ->assertJsonPath('offers.0.sku', 'MBTI_REPORT_FULL_199');
+            ->assertJsonPath('locked', false)
+            ->assertJsonPath('access_level', 'full')
+            ->assertJsonPath('variant', 'full')
+            ->assertJsonPath('access_source', 'scale_free_only')
+            ->assertJsonPath('paywall_suppressed', true)
+            ->assertJsonPath('upgrade_sku', null)
+            ->assertJsonPath('upgrade_sku_effective', null)
+            ->assertJsonPath('cta.visible', false)
+            ->assertJsonCount(0, 'offers');
 
         $offerSkus = collect((array) $response->json('offers'))
             ->map(fn (mixed $item): string => is_array($item) ? (string) ($item['sku'] ?? '') : '')
@@ -77,9 +82,7 @@ final class MbtiCommerceConsolidationTest extends TestCase
             ->values()
             ->all();
 
-        $this->assertSame(['MBTI_REPORT_FULL_199'], $offerSkus);
-        $this->assertNotContains('MBTI_CAREER_99', $offerSkus);
-        $this->assertNotContains('MBTI_RELATIONSHIP_99', $offerSkus);
+        $this->assertSame([], $offerSkus);
     }
 
     private function seedScales(): void
