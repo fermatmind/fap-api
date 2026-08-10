@@ -3,6 +3,11 @@
 declare(strict_types=1);
 
 return [
+    'funnel_daily' => [
+        'reporting_timezone' => env('ANALYTICS_FUNNEL_REPORTING_TIMEZONE', 'Asia/Shanghai'),
+        'storage_timezone' => env('ANALYTICS_STORAGE_TIMEZONE', 'UTC'),
+    ],
+
     'provider_freshness' => [
         'enabled' => (bool) env('ANALYTICS_PROVIDER_FRESHNESS_ENABLED', false),
         'timezone' => 'Asia/Shanghai',

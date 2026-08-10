@@ -28,6 +28,10 @@ final class RefreshAnalyticsFunnelDailyCommandTest extends TestCase
         ])
             ->expectsOutputToContain('dry_run=1')
             ->expectsOutputToContain('attempted_rows=2')
+            ->expectsOutputToContain('reporting_timezone=Asia/Shanghai')
+            ->expectsOutputToContain('storage_timezone=UTC')
+            ->expectsOutputToContain('window_utc_start=2026-01-02T16:00:00+00:00')
+            ->expectsOutputToContain('window_utc_end_exclusive=2026-01-03T16:00:00+00:00')
             ->assertExitCode(0);
 
         $this->assertSame(0, DB::table('analytics_funnel_daily')->count());

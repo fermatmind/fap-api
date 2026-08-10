@@ -1,4 +1,86 @@
 {
+  "MEASUREMENT-M04-BACKEND-READ-MODEL-REMEDIATION-01": {
+    "allowed_paths": [
+      "backend/app/Console/Commands/RefreshAnalyticsFunnelDailyCommand.php",
+      "backend/app/Services/Analytics/AnalyticsFunnelDailyBuilder.php",
+      "backend/.env.example",
+      "backend/config/analytics.php",
+      "backend/tests/Feature/Analytics/AnalyticsFunnelDailyBuilderTest.php",
+      "backend/tests/Feature/Analytics/RefreshAnalyticsFunnelDailyCommandTest.php",
+      "backend/docs/seo/measurement-m04-backend-read-model-remediation-01.md",
+      "backend/docs/seo/generated/measurement-m04-backend-read-model-remediation-01.v1.json",
+      "docs/codex/pr-train.yaml",
+      "docs/codex/pr-train-state.json"
+    ],
+    "api_runtime_change": false,
+    "branch": "codex/measurement-m04-backend-read-model-remediation-01",
+    "checks": {
+      "authorization": {
+        "evidence": "User explicitly requested end-to-end implementation of MEASUREMENT-M04-BACKEND-READ-MODEL-REMEDIATION-01 on 2026-08-10.",
+        "status": "pass"
+      },
+      "dependency": {
+        "evidence": "Catalog dependency PR #3609 merged as dcaffb3cdac468ca252c41391637b5696cd4c92f; origin/main contains the merge, its remote/local task branches and isolated worktree were removed, and its focused post-merge authority test passed 2 tests / 260 assertions.",
+        "status": "pass"
+      },
+      "github_pr": {
+        "evidence": null,
+        "status": "pending"
+      },
+      "local_validation": {
+        "evidence": [
+          "Focused Builder/Command and existing SQL/write-guard/taxonomy regressions passed: 34 tests / 177 assertions.",
+          "The complete guarded bash scripts/ci_verify_mbti.sh passed; the Big Five gate passed 1691 tests / 196731 assertions and the Personality authority gate passed 95 tests / 5761 assertions, with Enneagram, MBTI, migration, OpenAPI, order security, dependency security, webhook/attempt, and queue gates green.",
+          "Pint passed for all five changed PHP files; php -l passed for all five; analytics config resolved Asia/Shanghai and UTC; API route inventory remained 232 routes.",
+          "Catalog post-merge authority verification passed 2 tests / 260 assertions from the M04 local worktree after Composer loading was isolated from the active M05 worktree."
+        ],
+        "status": "pass"
+      },
+      "scope": {
+        "evidence": "Exact allowlist comparison passed for all 10 changed files after restoring verifier-generated Big Five compiled artifacts. The active codex/seo-measurement-failure-cohorts-01 worktree and all M05 attribution, taxonomy, event-contract, and failure-cohort files remain untouched. Added-line private-route, PII, credential, and token scans passed.",
+        "status": "pass"
+      }
+    },
+    "cms_mutation": false,
+    "commit_sha": null,
+    "content_authority": "backend_analytics_read_model",
+    "database_mutation": false,
+    "depends_on": [
+      "ASSESSMENT-CATALOG-FACT-AUTHORITY-CONVERGENCE-01"
+    ],
+    "deploy_allowed": false,
+    "failure_reason": null,
+    "local_cleanup_executed": false,
+    "merged_at": null,
+    "name": "Repair M04 report-ready and reporting-day semantics",
+    "non_goals": [
+      "no production refresh write or historical backfill",
+      "no production deploy or migration",
+      "no GA4 taxonomy or M05 attribution/failure-cohort change",
+      "no frontend, CMS, experiment, publication, or Search Channel change"
+    ],
+    "pr_url": null,
+    "production_write_execution": false,
+    "publish_allowed": false,
+    "remote_branch_deleted": false,
+    "repo": "fap-api",
+    "scope_type": "measurement_m04_backend_read_model_remediation",
+    "search_channel_action": false,
+    "status": "local_validation_passed",
+    "title": "MEASUREMENT-M04-BACKEND-READ-MODEL-REMEDIATION-01: repair report-ready and reporting-day semantics",
+    "transitions": [
+      {
+        "at": "2026-08-10T18:10:00+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started only after Catalog PR #3609 merged and its temporary branch/worktree cleanup completed. This isolated worktree is based on exact origin/main dcaffb3cdac468ca252c41391637b5696cd4c92f. Scope is Builder/Command/config/contracts/evidence only; no schema, write refresh, production backfill, deployment, migration, GA4 taxonomy, M05 file, CMS, frontend, experiment, publication, or Search Channel mutation is authorized."
+      },
+      {
+        "at": "2026-08-10T18:30:00+08:00",
+        "status": "local_validation_passed",
+        "note": "Implemented independent submitted report_ready semantics and explicit Asia/Shanghai reporting dates over UTC half-open storage windows. Focused and legacy regressions passed 34 tests / 177 assertions; the complete guarded verifier passed every gate, including Big Five 1691 tests / 196731 assertions and Personality 95 / 5761. Pint, PHP syntax, config parsing, 232-route inventory, JSON/YAML, diff, privacy, and exact 10-file scope checks passed. No refresh write, historical backfill, schema change, production migration, deployment, GA4 taxonomy, M05, CMS, frontend, experiment, publication, or Search Channel action occurred."
+      }
+    ]
+  },
   "ASSESSMENT-CATALOG-FACT-AUTHORITY-CONVERGENCE-01": {
     "allowed_paths": [
       "backend/app/Http/Controllers/API/V0_3/ScalesLookupController.php",
@@ -60,11 +142,11 @@
         "status": "pass"
       }
     },
-    "commit_sha": "5dd47511210018c176152f07cd42e75a5bd8192b",
+    "commit_sha": "dcaffb3cdac468ca252c41391637b5696cd4c92f",
     "depends_on": [],
     "failure_reason": null,
-    "local_cleanup_executed": false,
-    "merged_at": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-08-10T10:08:51Z",
     "name": "Converge six-assessment public product truth",
     "non_goals": [
       "no production migration execution",
@@ -74,10 +156,10 @@
       "no MBTI org-scoped Pro, Gift, or Credit SKU deactivation"
     ],
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3609",
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
     "scope_type": "assessment_catalog_fact_authority_convergence",
-    "status": "ready_to_merge",
+    "status": "merged",
     "title": "ASSESSMENT-CATALOG-FACT-AUTHORITY-CONVERGENCE-01: converge six-assessment public product truth",
     "transitions": [
       {
@@ -114,6 +196,11 @@
         "at": "2026-08-10T18:00:00+08:00",
         "status": "ready_to_merge",
         "note": "Exact implementation/repair head 5dd47511210018c176152f07cd42e75a5bd8192b passed all required GitHub checks, including verify-bigfive and both MBTI lanes. GitHub reports CLEAN mergeability; final scope review remains exactly 32 allowlisted files with no production write, migration execution, deployment, CMS mutation, publication, or Search Channel action. The ledger-only closeout head must pass checks before squash merge."
+      },
+      {
+        "at": "2026-08-10T18:09:00+08:00",
+        "status": "merged",
+        "note": "Final ledger head 477ad66e630ce23a560cd67650fe3af21b590484 passed all nine required checks and PR #3609 squash-merged as dcaffb3cdac468ca252c41391637b5696cd4c92f at 2026-08-10T10:08:51Z. origin/main contains the merge; the remote branch, local task branch, and isolated Catalog worktree were removed. Post-merge authority verification passed 2 tests / 260 assertions. Production migration and deployment remain deferred."
       }
     ]
   },

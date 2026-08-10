@@ -182,7 +182,7 @@ final class AnalyticsFunnelDailyBuilderTest extends TestCase
         $this->assertSame(0, (int) ($row['report_ready_attempts'] ?? 0));
     }
 
-    public function test_grant_missing_does_not_count_projection_as_report_ready(): void
+    public function test_projection_ready_without_grant_counts_as_report_ready(): void
     {
         $day = CarbonImmutable::parse('2026-02-04 09:00:00');
 
@@ -198,7 +198,7 @@ final class AnalyticsFunnelDailyBuilderTest extends TestCase
 
         $this->assertNotNull($row);
         $this->assertSame(0, (int) ($row['unlocked_attempts'] ?? 0));
-        $this->assertSame(0, (int) ($row['report_ready_attempts'] ?? 0));
+        $this->assertSame(1, (int) ($row['report_ready_attempts'] ?? 0));
     }
 
     public function test_snapshot_and_projection_ready_sources_count_once_per_attempt(): void
@@ -242,6 +242,144 @@ final class AnalyticsFunnelDailyBuilderTest extends TestCase
         $this->assertSame(1, (int) ($row['paid_attempts'] ?? 0));
         $this->assertSame(1, (int) ($row['unlocked_attempts'] ?? 0));
         $this->assertSame(1, (int) ($row['report_ready_attempts'] ?? 0));
+    }
+
+    public function test_free_ready_snapshot_counts_without_view_order_payment_or_unlock(): void
+    {
+        $day = CarbonImmutable::parse('2026-07-13 01:00:00', 'UTC');
+        $attemptId = (string) Str::uuid();
+
+        $this->insertAttempt($attemptId, 106, 'en', $day, null);
+        $this->insertAttemptSubmission($attemptId, 106, $day->addMinutes(5));
+        $this->insertReportSnapshot($attemptId, 'free_ready_106', 106, $day->addMinutes(10));
+
+        $payload = app(AnalyticsFunnelDailyBuilder::class)->build(
+            new \DateTimeImmutable('2026-07-13'),
+            new \DateTimeImmutable('2026-07-13'),
+            [106],
+        );
+
+        $row = collect($payload['rows'])->firstWhere('locale', 'en');
+
+        $this->assertNotNull($row);
+        $this->assertSame(1, (int) ($row['started_attempts'] ?? 0));
+        $this->assertSame(1, (int) ($row['submitted_attempts'] ?? 0));
+        $this->assertSame(0, (int) ($row['first_view_attempts'] ?? 0));
+        $this->assertSame(0, (int) ($row['order_created_attempts'] ?? 0));
+        $this->assertSame(0, (int) ($row['paid_attempts'] ?? 0));
+        $this->assertSame(0, (int) ($row['unlocked_attempts'] ?? 0));
+        $this->assertSame(1, (int) ($row['report_ready_attempts'] ?? 0));
+    }
+
+    public function test_report_ready_requires_successful_submit_and_ready_not_before_submit(): void
+    {
+        $day = CarbonImmutable::parse('2026-07-13 02:00:00', 'UTC');
+        $missingSubmitAttempt = (string) Str::uuid();
+        $earlyReadyAttempt = (string) Str::uuid();
+
+        $this->insertAttempt($missingSubmitAttempt, 107, 'en', $day, null);
+        $this->insertReportSnapshot($missingSubmitAttempt, 'missing_submit_107', 107, $day->addMinutes(10));
+
+        $this->insertAttempt($earlyReadyAttempt, 107, 'en', $day->addHour(), null);
+        $this->insertAttemptSubmission($earlyReadyAttempt, 107, $day->addHour()->addMinutes(20));
+        $this->insertReportSnapshot($earlyReadyAttempt, 'early_ready_107', 107, $day->addHour()->addMinutes(10));
+
+        $payload = app(AnalyticsFunnelDailyBuilder::class)->build(
+            new \DateTimeImmutable('2026-07-13'),
+            new \DateTimeImmutable('2026-07-13'),
+            [107],
+        );
+
+        $this->assertSame(0, (int) collect($payload['rows'])->sum('report_ready_attempts'));
+    }
+
+    public function test_snapshot_must_be_ready_and_projection_must_be_complete(): void
+    {
+        $day = CarbonImmutable::parse('2026-07-13 03:00:00', 'UTC');
+        $snapshotAttempt = (string) Str::uuid();
+        $projectionAttempt = $this->seedProjectionAccessAttempt(orgId: 108, day: $day->addHour());
+
+        $this->insertAttempt($snapshotAttempt, 108, 'en', $day, null);
+        $this->insertAttemptSubmission($snapshotAttempt, 108, $day->addMinutes(5));
+        $this->insertReportSnapshot($snapshotAttempt, 'pending_snapshot_108', 108, $day->addMinutes(10));
+        DB::table('report_snapshots')->where('attempt_id', $snapshotAttempt)->update(['status' => 'pending']);
+        DB::table('unified_access_projections')->where('attempt_id', $projectionAttempt)->update(['report_state' => 'pending']);
+
+        $payload = app(AnalyticsFunnelDailyBuilder::class)->build(
+            new \DateTimeImmutable('2026-07-13'),
+            new \DateTimeImmutable('2026-07-13'),
+            [108],
+        );
+
+        $this->assertSame(0, (int) collect($payload['rows'])->sum('report_ready_attempts'));
+    }
+
+    public function test_reporting_day_uses_shanghai_boundary_over_utc_storage(): void
+    {
+        $beforeBoundary = CarbonImmutable::parse('2026-07-13 15:59:59', 'UTC');
+        $atBoundary = CarbonImmutable::parse('2026-07-13 16:00:00', 'UTC');
+
+        foreach ([
+            [(string) Str::uuid(), $beforeBoundary],
+            [(string) Str::uuid(), $atBoundary],
+        ] as [$attemptId, $readyAt]) {
+            $this->insertAttempt($attemptId, 109, 'en', $readyAt->subMinutes(10), null);
+            $this->insertAttemptSubmission($attemptId, 109, $readyAt->subMinutes(5));
+            $this->insertReportSnapshot($attemptId, 'boundary_'.$attemptId, 109, $readyAt);
+        }
+
+        $payload = app(AnalyticsFunnelDailyBuilder::class)->build(
+            new \DateTimeImmutable('2026-07-13'),
+            new \DateTimeImmutable('2026-07-14'),
+            [109],
+        );
+        $rowsByDay = collect($payload['rows'])->keyBy('day');
+
+        $this->assertSame('Asia/Shanghai', $payload['reporting_timezone']);
+        $this->assertSame('UTC', $payload['storage_timezone']);
+        $this->assertSame('2026-07-12T16:00:00+00:00', $payload['window_utc_start']);
+        $this->assertSame('2026-07-14T16:00:00+00:00', $payload['window_utc_end_exclusive']);
+        $this->assertSame(1, (int) ($rowsByDay->get('2026-07-13')['report_ready_attempts'] ?? 0));
+        $this->assertSame(1, (int) ($rowsByDay->get('2026-07-14')['report_ready_attempts'] ?? 0));
+
+        $dayThirteenOnly = app(AnalyticsFunnelDailyBuilder::class)->build(
+            new \DateTimeImmutable('2026-07-13'),
+            new \DateTimeImmutable('2026-07-13'),
+            [109],
+        );
+        $this->assertSame(1, (int) collect($dayThirteenOnly['rows'])->sum('report_ready_attempts'));
+
+        $dayFourteenOnly = app(AnalyticsFunnelDailyBuilder::class)->build(
+            new \DateTimeImmutable('2026-07-14'),
+            new \DateTimeImmutable('2026-07-14'),
+            [109],
+        );
+        $dayFourteenRow = collect($dayFourteenOnly['rows'])->firstWhere('day', '2026-07-14');
+
+        $this->assertNotNull($dayFourteenRow);
+        $this->assertSame(0, (int) ($dayFourteenRow['started_attempts'] ?? 0));
+        $this->assertSame(0, (int) ($dayFourteenRow['submitted_attempts'] ?? 0));
+        $this->assertSame(1, (int) ($dayFourteenRow['report_ready_attempts'] ?? 0));
+    }
+
+    public function test_invalid_timezone_configuration_fails_closed(): void
+    {
+        config(['analytics.funnel_daily.reporting_timezone' => 'Not/A_Timezone']);
+
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('ANALYTICS_FUNNEL_REPORTING_TIMEZONE must name a valid timezone.');
+
+        new AnalyticsFunnelDailyBuilder;
+    }
+
+    public function test_invalid_storage_timezone_configuration_fails_closed(): void
+    {
+        config(['analytics.funnel_daily.storage_timezone' => 'Also/Not_A_Timezone']);
+
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('ANALYTICS_STORAGE_TIMEZONE must name a valid timezone.');
+
+        new AnalyticsFunnelDailyBuilder;
     }
 
     private function seedProjectionAccessAttempt(

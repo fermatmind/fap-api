@@ -16,7 +16,7 @@ prs:
     base: main
     branch: codex/assessment-catalog-fact-authority-convergence-01
     title: "ASSESSMENT-CATALOG-FACT-AUTHORITY-CONVERGENCE-01: converge six-assessment public product truth"
-    status: ready_to_merge
+    status: merged
     depends_on: []
     train_scope: assessment_catalog_fact_authority_convergence
     scope:
@@ -80,6 +80,53 @@ prs:
     search_channel_action: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: MEASUREMENT-M04-BACKEND-READ-MODEL-REMEDIATION-01
+    repo: fap-api
+    base: main
+    branch: codex/measurement-m04-backend-read-model-remediation-01
+    title: "MEASUREMENT-M04-BACKEND-READ-MODEL-REMEDIATION-01: repair report-ready and reporting-day semantics"
+    status: user_authorized
+    depends_on:
+      - ASSESSMENT-CATALOG-FACT-AUTHORITY-CONVERGENCE-01
+    train_scope: measurement_m04_backend_read_model_remediation
+    scope:
+      - Count report_ready as a submitted content-availability stage independent of result view and the order/payment/unlock chain.
+      - Interpret from/to as Asia/Shanghai reporting days over UTC storage with explicit half-open query bounds and fail-closed timezone configuration.
+      - Expose reporting/storage timezone and UTC window metadata from Builder and refresh-command output without writing or backfilling production data.
+    allowed_paths:
+      - backend/app/Console/Commands/RefreshAnalyticsFunnelDailyCommand.php
+      - backend/app/Services/Analytics/AnalyticsFunnelDailyBuilder.php
+      - backend/.env.example
+      - backend/config/analytics.php
+      - backend/tests/Feature/Analytics/AnalyticsFunnelDailyBuilderTest.php
+      - backend/tests/Feature/Analytics/RefreshAnalyticsFunnelDailyCommandTest.php
+      - backend/docs/seo/measurement-m04-backend-read-model-remediation-01.md
+      - backend/docs/seo/generated/measurement-m04-backend-read-model-remediation-01.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify attribution controllers, FunnelEventTaxonomy, MeasurementEventContract, M05 failure-cohort files, GA4 taxonomy, or frontend/CMS code.
+      - Change database schema, execute analytics refresh writes, backfill 2026-07-13..2026-08-09, deploy, migrate production, publish, or submit Search Channel actions.
+      - Change the analytics_funnel_daily grain or weaken the controlled refresh write guard.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Analytics/AnalyticsFunnelDailyBuilderTest.php tests/Feature/Analytics/RefreshAnalyticsFunnelDailyCommandTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/RefreshAnalyticsFunnelDailyCommand.php app/Services/Analytics/AnalyticsFunnelDailyBuilder.php config/analytics.php tests/Feature/Analytics/AnalyticsFunnelDailyBuilderTest.php tests/Feature/Analytics/RefreshAnalyticsFunnelDailyCommandTest.php
+      - php -l for every changed PHP file
+      - cd backend && php artisan route:list --path=api --except-vendor --no-ansi
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - parse changed JSON and pr-train YAML
+      - git diff --check and exact changed-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: backend_analytics_read_model
 
   - id: BIG5-CMS-IMPORT-DRYRUN-01
     repo: fap-api
