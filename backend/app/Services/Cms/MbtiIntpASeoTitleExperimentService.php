@@ -548,6 +548,15 @@ final class MbtiIntpASeoTitleExperimentService
             $variant,
             'public_variant',
         );
+        // PersonalityController applies this same visibility gate before exposing
+        // mbti_public_projection_v1. Keep the experiment bound to the public
+        // projection while liveFingerprint() separately binds every raw section.
+        $projection['sections'] = array_values(array_filter(
+            (array) ($projection['sections'] ?? []),
+            static fn (mixed $section): bool => is_array($section)
+                && (bool) ($section['is_enabled'] ?? false)
+                && (string) ($section['render'] ?? '') !== 'premium_teaser',
+        ));
         if (trim((string) data_get($projection, 'seo.canonical_url')) === '') {
             throw new RuntimeException('Complete public projection canonical URL is missing.');
         }
