@@ -21,7 +21,7 @@ Recovered transport failures are diagnostic and may pass. A terminal transport f
 
 ## Public surface diagnostic receipt
 
-The fixed shared-surface allowlist is `jobs`, `directory`, `sitemap_source`, `sitemap`, `llms` and `llms_full`. The same bounded public GETs already used by C03 emit runner-temporary status rows under opaque fixed IDs. Requests remain paired at maximum concurrency two, use HTTPS GET without redirects, retain the existing 10-second connect and 60-second request bounds, and keep at most two bounded curl retries.
+The fixed shared-surface allowlist is `jobs`, `directory`, `sitemap_source`, `sitemap`, `llms` and `llms_full`. The same bounded public GETs already used by C03 emit runner-temporary status rows under opaque fixed IDs. Requests remain paired at maximum concurrency two, use HTTPS GET without redirects, retain the existing 10-second connect and 60-second request bounds, and keep at most two bounded curl retries. Retry accounting is implemented by the workflow's fixed three-attempt loop and portable `http_code` / `time_total` write-out values; it does not depend on curl's version-specific `num_retries` variable.
 
 Every incident-closeout and verify receipt exposes `surface_diagnostics` with exactly those six keys. Each entry contains a `matches_expected` boolean, bilingual slug/row counts and set SHA-256 values, plus a sanitized transport and latency class. `shared_surface_readback` contains only aggregate counts and classifications. Neither object contains URLs, response bodies, cache keys, topology, raw elapsed timings or curl diagnostics. Terminal transport/HTTP failure is fail closed; a recovered bounded retry may pass. Transport, retry and latency classifications are excluded from the semantic pre-state and rollback identity SHA.
 
@@ -122,7 +122,7 @@ bash -n scripts/operations/career_c03_bounded_public_readback.sh
 composer validate --strict
 ```
 
-From the repository root, also parse the workflow YAML, validate the exact five-file scope, and run `git diff --check`.
+From the repository root, also parse the workflow YAML, validate the exact task allowlist, and run `git diff --check`.
 
 ## Repository rule impact
 

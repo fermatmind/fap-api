@@ -473,29 +473,38 @@ jobs:
           }
           fetch() {
             local id="$1" kind="$2" url="$3" output="$4"
-            local metadata rc http retries elapsed elapsed_ms
-            set +e
-            metadata="$(curl --http1.1 --proto '=https' --request GET --max-redirs 0 \
-              -fsS --retry 2 --retry-delay 2 --retry-all-errors \
-              --connect-timeout 10 --max-time 60 -H 'Cache-Control: no-cache' \
-              --output "$output" --write-out $'%{http_code}\t%{num_retries}\t%{time_total}' "$url" \
-              2>"$dir/$id.stderr")"
-            rc=$?
-            set -e
+            local metadata rc http elapsed elapsed_ms attempt retries=0 total_elapsed_ms=0
+            for attempt in 1 2 3; do
+              set +e
+              metadata="$(curl --http1.1 --proto '=https' --request GET --max-redirs 0 \
+                -fsS --connect-timeout 10 --max-time 60 -H 'Cache-Control: no-cache' \
+                --output "$output" --write-out $'%{http_code}\t%{time_total}' "$url" \
+                2>"$dir/$id.stderr")"
+              rc=$?
+              set -e
+              IFS=$'\t' read -r http elapsed <<<"$metadata"
+              if [[ ! "${http:-}" =~ ^[0-9]{3}$ ]] \
+                || [[ ! "${elapsed:-}" =~ ^[0-9]+([.][0-9]+)?$ ]]; then
+                http=000
+                elapsed=0
+                rc=99
+              fi
+              elapsed_ms="$(awk -v seconds="$elapsed" 'BEGIN {printf "%d", (seconds * 1000) + 0.5}')"
+              total_elapsed_ms=$((total_elapsed_ms + elapsed_ms))
+              retries=$((attempt - 1))
+              if [ "$rc" -eq 0 ]; then
+                break
+              fi
+              if [ "$attempt" -lt 3 ]; then
+                sleep 2
+                total_elapsed_ms=$((total_elapsed_ms + 2000))
+              fi
+            done
             rm -f "$dir/$id.stderr"
-            IFS=$'\t' read -r http retries elapsed <<<"$metadata"
-            if [[ ! "${http:-}" =~ ^[0-9]{3}$ ]] || [[ ! "${retries:-}" =~ ^[0-2]$ ]] \
-              || [[ ! "${elapsed:-}" =~ ^[0-9]+([.][0-9]+)?$ ]]; then
-              http=000
-              retries=0
-              elapsed=0
-              rc=99
-            fi
-            elapsed_ms="$(awk -v seconds="$elapsed" 'BEGIN {printf "%d", (seconds * 1000) + 0.5}')"
             if [ "$rc" -ne 0 ] || [ "$http" != 200 ]; then
               safe_empty "$kind" "$output"
             fi
-            printf '%s\t%s\t%s\t%s\t%s\n' "$id" "$http" "$rc" "$retries" "$elapsed_ms" \
+            printf '%s\t%s\t%s\t%s\t%s\n' "$id" "$http" "$rc" "$retries" "$total_elapsed_ms" \
               > "$dir/status-$id.tsv"
           }
           fetch jobs_en collection 'https://api.fermatmind.com/api/v0.5/career/jobs?locale=en' "$dir/jobs-en.json" &
@@ -950,29 +959,38 @@ jobs:
             }
             fetch() {
               local id="$1" kind="$2" url="$3" destination="$4"
-              local metadata rc http retries elapsed elapsed_ms
-              set +e
-              metadata="$(curl --http1.1 --proto '=https' --request GET --max-redirs 0 \
-                -fsS --retry 2 --retry-delay 2 --retry-all-errors \
-                --connect-timeout 10 --max-time 60 -H 'Cache-Control: no-cache' \
-                --output "$destination" --write-out $'%{http_code}\t%{num_retries}\t%{time_total}' "$url" \
-                2>"$dir/$id.stderr")"
-              rc=$?
-              set -e
+              local metadata rc http elapsed elapsed_ms attempt retries=0 total_elapsed_ms=0
+              for attempt in 1 2 3; do
+                set +e
+                metadata="$(curl --http1.1 --proto '=https' --request GET --max-redirs 0 \
+                  -fsS --connect-timeout 10 --max-time 60 -H 'Cache-Control: no-cache' \
+                  --output "$destination" --write-out $'%{http_code}\t%{time_total}' "$url" \
+                  2>"$dir/$id.stderr")"
+                rc=$?
+                set -e
+                IFS=$'\t' read -r http elapsed <<<"$metadata"
+                if [[ ! "${http:-}" =~ ^[0-9]{3}$ ]] \
+                  || [[ ! "${elapsed:-}" =~ ^[0-9]+([.][0-9]+)?$ ]]; then
+                  http=000
+                  elapsed=0
+                  rc=99
+                fi
+                elapsed_ms="$(awk -v seconds="$elapsed" 'BEGIN {printf "%d", (seconds * 1000) + 0.5}')"
+                total_elapsed_ms=$((total_elapsed_ms + elapsed_ms))
+                retries=$((attempt - 1))
+                if [ "$rc" -eq 0 ]; then
+                  break
+                fi
+                if [ "$attempt" -lt 3 ]; then
+                  sleep 2
+                  total_elapsed_ms=$((total_elapsed_ms + 2000))
+                fi
+              done
               rm -f "$dir/$id.stderr"
-              IFS=$'\t' read -r http retries elapsed <<<"$metadata"
-              if [[ ! "${http:-}" =~ ^[0-9]{3}$ ]] || [[ ! "${retries:-}" =~ ^[0-2]$ ]] \
-                || [[ ! "${elapsed:-}" =~ ^[0-9]+([.][0-9]+)?$ ]]; then
-                http=000
-                retries=0
-                elapsed=0
-                rc=99
-              fi
-              elapsed_ms="$(awk -v seconds="$elapsed" 'BEGIN {printf "%d", (seconds * 1000) + 0.5}')"
               if [ "$rc" -ne 0 ] || [ "$http" != 200 ]; then
                 safe_empty "$kind" "$destination"
               fi
-              printf '%s\t%s\t%s\t%s\t%s\n' "$id" "$http" "$rc" "$retries" "$elapsed_ms" \
+              printf '%s\t%s\t%s\t%s\t%s\n' "$id" "$http" "$rc" "$retries" "$total_elapsed_ms" \
                 > "$dir/status-$id.tsv"
             }
             fetch jobs_en collection 'https://api.fermatmind.com/api/v0.5/career/jobs?locale=en' "$dir/jobs-en.json" &
