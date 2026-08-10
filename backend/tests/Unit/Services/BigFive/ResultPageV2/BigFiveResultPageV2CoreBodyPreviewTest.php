@@ -2045,8 +2045,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $changed = [
             'backend/app/Console/Commands/RefreshSeoConversionDailyCommand.php',
+            'backend/app/Services/Analytics/PublicArticleAttributionResolver.php',
             'backend/app/Services/Analytics/SeoConversionDailyBuilder.php',
             'backend/database/migrations/2026_06_09_000100_create_analytics_seo_conversion_daily_table.php',
+            'backend/database/migrations/2026_08_10_100000_add_article_result_ready_to_analytics_seo_conversion_daily.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -13291,8 +13293,10 @@ DIFF;
     {
         return in_array($file, [
             'backend/app/Console/Commands/RefreshSeoConversionDailyCommand.php',
+            'backend/app/Services/Analytics/PublicArticleAttributionResolver.php',
             'backend/app/Services/Analytics/SeoConversionDailyBuilder.php',
             'backend/database/migrations/2026_06_09_000100_create_analytics_seo_conversion_daily_table.php',
+            'backend/database/migrations/2026_08_10_100000_add_article_result_ready_to_analytics_seo_conversion_daily.php',
         ], true);
     }
 
