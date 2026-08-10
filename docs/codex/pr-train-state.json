@@ -104001,9 +104001,9 @@
     "depends_on": [
       "PUBLIC-TOPIC-GRAPH-AUDIT-CLOSEOUT-01"
     ],
-    "status": "local_checks_passed_ready_to_push",
-    "commit_sha": null,
-    "pr_url": null,
+    "status": "github_checks_pending",
+    "commit_sha": "f03585927e8ff57ddf2913c188e3449febe35041",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3605",
     "prior_implementation": {
       "pr_url": "https://github.com/fermatmind/fap-api/pull/3594",
       "head_sha": "deb12436c422244754c19438ec9b7293ecfb9e61",
@@ -104050,8 +104050,8 @@
         "evidence": "After restoring the repository-required non-destructive migration down(), bash backend/scripts/ci_verify_mbti.sh passed in one guarded full run, including 1,690 Big Five tests, Enneagram, MBTI, migration safety, dependency security, and webhook/attempt regression gates."
       },
       "github_required_checks": {
-        "status": "pending_for_repair",
-        "evidence": "Prior implementation PR #3594 passed its required checks at deb12436c422244754c19438ec9b7293ecfb9e61. Fresh required checks remain mandatory for the governed-G03 alignment repair head before merge."
+        "status": "pending",
+        "evidence": "Repair PR #3605 is open from validated implementation head f03585927e8ff57ddf2913c188e3449febe35041. Fresh required checks remain mandatory before merge."
       }
     },
     "failure_reason": null,
@@ -104148,6 +104148,11 @@
         "at": "2026-08-10T08:03:36Z",
         "status": "local_checks_passed_ready_to_push",
         "note": "Rebased the two scoped repair commits cleanly onto latest origin/main a2bb1ea9497deba080063ece1fa14f8bb3f50505 after concurrent PRs #3600 and #3601 merged. Post-rebase Authority/G03/OpenAPI tests passed 25 tests / 442 assertions, classifier isolation passed 1 test / 3 assertions, OpenAPI remained current, and the exact scope diff stayed clean."
+      },
+      {
+        "at": "2026-08-10T08:04:42Z",
+        "status": "github_checks_pending",
+        "note": "Opened repair PR #3605 after the exact validated scope was pushed. Required checks are pending; no production migration, CMS import/write, edge activation/publication, deployment, frontend, sitemap/llms, or Search Channel action occurred."
       }
     ]
   },
