@@ -103897,6 +103897,101 @@
     ],
     "updated_at": "2026-08-03T02:01:29+08:00"
   },
+  "CAREER-COLD-CACHE-DISCOVERABILITY-GATE-02": {
+    "id": "CAREER-COLD-CACHE-DISCOVERABILITY-GATE-02",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-cold-cache-discoverability-gate-02",
+    "title": "CAREER-COLD-CACHE-DISCOVERABILITY-GATE-02: make Career cold-start activation cohort-complete",
+    "status": "ready_to_merge",
+    "depends_on": [],
+    "commit_sha": "9885ee5226f7020eaea15b9c42dea1df063414c3",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3592",
+    "checks": {
+      "focused_tests": {
+        "status": "passed",
+        "evidence": "php artisan test tests/Sre/CareerColdCacheDiscoverabilityGateTest.php tests/Sre/DeployStorageAndDatabaseConfigTest.php tests/Sre/CareerWarmFingerprintDeployTest.php --no-ansi: 36 tests, 743 assertions."
+      },
+      "pint": {
+        "status": "passed",
+        "evidence": "Pint --test passed for the new runner and all three focused SRE test files."
+      },
+      "syntax_and_manifests": {
+        "status": "passed",
+        "evidence": "PHP syntax, Composer strict validation, YAML parsing, JSON parsing, git diff --check, and exact seven-file scope validation passed."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "Exact implementation/PR-status head 80929367f04b92f9673b57814f903fa2f12a3db1 passed hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep OSS, Semgrep blocking secrets, and SARIF upload; conditional staging parity was skipped as designed."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-08-10T12:30:00+08:00",
+        "status": "planned",
+        "note": "Initialized from the operator-supplied Career 1046 evidence-closure plan; no production write, workflow dispatch, deploy, cache warm, publication, or discoverability action was authorized."
+      },
+      {
+        "at": "2026-08-10T12:30:01+08:00",
+        "status": "in_progress",
+        "note": "Started repository-only implementation in a clean detached origin/main worktree after Task 1 authority evidence remained held and Task 4 reproduced intermittent API timeouts. Production recovery remains blocked."
+      },
+      {
+        "at": "2026-08-10T12:39:00+08:00",
+        "status": "local_validation_failed",
+        "note": "The first focused run exposed two same-scope DeployStorageAndDatabaseConfigTest assertions that still encoded the old direct seed-to-warm hook and pre-gate skip count. No runtime defect or scope drift was found; the assertions were updated to the new ordered gate contract."
+      },
+      {
+        "at": "2026-08-10T12:44:27+08:00",
+        "status": "local_validation_passed",
+        "note": "Focused tests passed (36 tests / 743 assertions), followed by scoped Pint, PHP syntax, Composer strict validation, YAML/JSON parsing, diff checks, and exact changed-file scope validation. No production workflow, deploy, cache warm, publication, or discoverability action occurred."
+      },
+      {
+        "at": "2026-08-10T12:46:00+08:00",
+        "status": "commit_created",
+        "note": "Scoped implementation commit 9885ee5226f7020eaea15b9c42dea1df063414c3 created from exact origin/main 8f1296ea1e1917caf44ee96b2f7a48b2038c2f28 in the isolated worktree."
+      },
+      {
+        "at": "2026-08-10T12:49:00+08:00",
+        "status": "github_checks_pending",
+        "note": "PR #3592 opened from the exact scoped branch. Required GitHub checks are pending; production recovery, deployment, cache warming, publication, sitemap/llms mutation, and Search Channel actions remain unexecuted."
+      },
+      {
+        "at": "2026-08-10T13:00:00+08:00",
+        "status": "ready_to_merge",
+        "note": "All registered required checks passed on head 80929367f04b92f9673b57814f903fa2f12a3db1, GitHub reports CLEAN, origin/main remains at the exact base, and the final diff remains limited to the seven manifest paths. This metadata transition itself requires fresh exact-head checks before merge."
+      }
+    ]
+  },
+  "CAREER-1046-PUBLICATION-CONTROL-03": {
+    "id": "CAREER-1046-PUBLICATION-CONTROL-03",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-1046-publication-control-03",
+    "title": "CAREER-1046-PUBLICATION-CONTROL-03: add protected exact-authority Career 1046 promotion",
+    "status": "planned",
+    "depends_on": [
+      "CAREER-COLD-CACHE-DISCOVERABILITY-GATE-02"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-08-10T12:30:00+08:00",
+        "status": "planned",
+        "note": "Initialized from the operator-supplied plan and remains dependency-blocked pending CAREER-COLD-CACHE-DISCOVERABILITY-GATE-02 plus the recovery-versus-new-publication evidence decision."
+      }
+    ]
+  },
   "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-02": {
     "id": "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-02",
     "repo": "fap-api",

@@ -29,5 +29,18 @@ final class CareerWarmFingerprintDeployTest extends TestCase
             "invoke('career:public-authority-cache-'.\$match[1])",
             $source,
         );
+        $this->assertStringContainsString(
+            'career:warm-public-authority-cache --directory-only --json --no-interaction --no-ansi',
+            $source,
+        );
+        $this->assertStringContainsString(
+            "after('career:warm-public-authority-cache', 'career:rebuild-directory-after-detail-repair')",
+            $source,
+        );
+        $this->assertStringContainsString(
+            "after('seo:warm-sitemap-source-cache', 'guard:career-discoverability-post-sitemap')",
+            $source,
+        );
+        $this->assertStringContainsString('post_sitemap', $source);
     }
 }

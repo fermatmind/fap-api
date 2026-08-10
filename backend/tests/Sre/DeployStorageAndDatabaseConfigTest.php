@@ -633,14 +633,18 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
     }
 
     #[Test]
-    public function career_detail_cache_coverage_is_read_only_complete_and_does_not_block_code_only_activation(): void
+    public function career_cold_cache_activation_is_ordered_cohort_complete_and_keeps_isolated_modes_separate(): void
     {
         $source = $this->readRepoFile('deploy.php');
 
+        $this->assertStringContainsString("task('guard:career-runtime-projection-authority'", $source);
+        $this->assertStringContainsString("in_array(deployMode(), ['code_only', 'candidate_only'], true)", $source);
+        $this->assertStringContainsString('verify_career_cold_cache_discoverability.php', $source);
+        $this->assertStringContainsString("'artisan:migrate-schema-only',\n    'guard:career-runtime-projection-authority'", $source);
         $this->assertStringContainsString("task('guard:career-detail-cache-coverage'", $source);
-        $this->assertStringContainsString('if (deployIsCodeOnly()) {', $source);
+        $this->assertStringContainsString('if (deploySkipsAuthorityMutations()) {', $source);
         $this->assertStringContainsString(
-            'Skipping Career detail cache coverage for code-only release; shared detail caches are unchanged.',
+            'Skipping Career detail cache coverage because this isolated release does not mutate Career authority caches.',
             $source
         );
         $this->assertStringContainsString('function deployCareerDetailMinimumTargets(string $hostAlias): int', $source);
@@ -653,16 +657,35 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             3,
             substr_count($source, 'deployCareerDetailMinimumTargets(')
         );
-        $this->assertStringContainsString("before('deploy:symlink', 'guard:career-detail-cache-coverage')", $source);
+        $this->assertStringNotContainsString("before('deploy:symlink', 'guard:career-detail-cache-coverage')", $source);
         $this->assertStringContainsString("task('career:repair-published-detail-cache-coverage'", $source);
-        $this->assertStringContainsString('Skipping Career detail cache repair for code-only release; shared detail caches are unchanged.', $source);
+        $this->assertStringContainsString('Skipping Career detail cache repair because this isolated release does not mutate Career authority caches.', $source);
         $this->assertStringContainsString("\$hostAlias === 'production'", $source);
         $this->assertStringContainsString("? ' --confirm-production-write'", $source);
         $this->assertStringContainsString('DEPLOY_CAREER_DETAIL_MAXIMUM_SYNC_REPAIRS must be an integer between 1 and 250.', $source);
         $this->assertStringContainsString('career:verify-job-detail-cache-coverage --repair-missing-sync --locales=en,zh-CN', $source);
         $this->assertStringContainsString('--maximum-sync-repairs=%d --json --no-interaction --no-ansi%s', $source);
-        $this->assertStringContainsString("before('guard:career-detail-cache-coverage', 'career:repair-published-detail-cache-coverage')", $source);
+        $this->assertStringNotContainsString("before('guard:career-detail-cache-coverage', 'career:repair-published-detail-cache-coverage')", $source);
         $this->assertStringNotContainsString('career:verify-job-detail-cache-coverage --repair-missing --', $source);
+
+        $orderedHooks = [
+            "after('artisan:scales:seed-default', 'guard:career-runtime-projection-authority')",
+            "after('guard:career-runtime-projection-authority', 'career:repair-published-detail-cache-coverage')",
+            "after('career:repair-published-detail-cache-coverage', 'guard:career-detail-cache-coverage')",
+            "after('guard:career-detail-cache-coverage', 'career:warm-public-authority-cache')",
+            "after('career:warm-public-authority-cache', 'career:rebuild-directory-after-detail-repair')",
+            "after('career:rebuild-directory-after-detail-repair', 'guard:career-discoverability-pre-sitemap')",
+            "after('guard:career-discoverability-pre-sitemap', 'seo:warm-sitemap-source-cache')",
+            "after('seo:warm-sitemap-source-cache', 'guard:career-discoverability-post-sitemap')",
+            "after('guard:career-discoverability-post-sitemap', 'guard:public-content-release')",
+        ];
+        $previous = -1;
+        foreach ($orderedHooks as $hook) {
+            $position = strpos($source, $hook);
+            $this->assertNotFalse($position, $hook);
+            $this->assertGreaterThan($previous, $position, $hook);
+            $previous = $position;
+        }
     }
 
     #[Test]
@@ -1185,6 +1208,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             "'artisan:route:cache'",
             "'artisan:event:cache'",
             "'artisan:migrate-schema-only'",
+            "'guard:career-runtime-projection-authority'",
             "'guard:public-content-release'",
             "'deploy:publish'",
         ] as $requiredTask) {
@@ -1210,7 +1234,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString("after('artisan:migrate', 'guard:no-pending-migrations')", $deployer);
         $this->assertStringNotContainsString("after('artisan:migrate-schema-only'", $deployer);
         $this->assertStringContainsString("return in_array(deployMode(), ['code_only', 'candidate_only', 'schema_only'], true);", $deployer);
-        $this->assertSame(3, substr_count($deployer, 'if (deploySkipsAuthorityMutations())'));
+        $this->assertSame(5, substr_count($deployer, 'if (deploySkipsAuthorityMutations())'));
         $this->assertStringContainsString('Skip nginx static media route mutation in authority-mutation-free deploy mode', $deployer);
         $this->assertStringContainsString('Skip auth guest POST contract probe in authority-mutation-free deploy mode', $deployer);
         $this->assertStringContainsString('Skip shared content package copy in authority-mutation-free deploy mode', $deployer);
@@ -1226,7 +1250,11 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringNotContainsString('landing-surfaces:import-local-baseline', $deployer);
         $this->assertStringNotContainsString('content-pages:import-local-baseline', $deployer);
         $this->assertStringContainsString(
-            "after('artisan:scales:seed-default', 'career:warm-public-authority-cache');",
+            "after('artisan:scales:seed-default', 'guard:career-runtime-projection-authority');",
+            $deployer,
+        );
+        $this->assertStringContainsString(
+            "after('guard:career-detail-cache-coverage', 'career:warm-public-authority-cache');",
             $deployer,
         );
     }

@@ -48835,3 +48835,61 @@ prs:
     frontend_fallback_authority: false
     content_authority: existing backend release ledger, runtime projection, canonical truth, and review gates
     repository_rule_impact: adds a protected zero-write evidence control while preserving backend authority and all production/discoverability write boundaries
+
+  - id: CAREER-COLD-CACHE-DISCOVERABILITY-GATE-02
+    repo: fap-api
+    base: main
+    branch: codex/career-cold-cache-discoverability-gate-02
+    title: "CAREER-COLD-CACHE-DISCOVERABILITY-GATE-02: make Career cold-start activation cohort-complete"
+    status: ready_to_merge
+    depends_on: []
+    train_scope: career_cold_cache_discoverability_activation_gate
+    risk_level: p0_career_deploy_activation_gate
+    scope:
+      - Run bounded published-detail repair before any Career directory warm in a standard deploy.
+      - Force a directory-only rebuild after detail coverage is complete and before sitemap-source warm.
+      - Fail closed when the materialized runtime projection is missing or jobs, details, directory, and sitemap-source do not expose the same non-empty Career cohort.
+      - Keep code-only, candidate-only, and unrelated L1 activation paths isolated from Career L3 cache mutation.
+      - Cover empty-cache, missing-artifact, stale-directory, and sitemap-shrink regressions.
+    allowed_paths:
+      - deploy.php
+      - backend/scripts/deploy/verify_career_cold_cache_discoverability.php
+      - backend/tests/Sre/CareerColdCacheDiscoverabilityGateTest.php
+      - backend/tests/Sre/DeployStorageAndDatabaseConfigTest.php
+      - backend/tests/Sre/CareerWarmFingerprintDeployTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Restore or publish Career authority, change eligibility, dispatch a production workflow, deploy, warm production cache, mutate database/CMS state, or change sitemap/llms/Search Channel state.
+      - Hard-code 1046, 2092, or a total sitemap count as the deploy authority.
+      - Treat an expiring rollout receipt as durable publication authority.
+    validation:
+      - cd backend && php artisan test tests/Sre/CareerColdCacheDiscoverabilityGateTest.php tests/Sre/DeployStorageAndDatabaseConfigTest.php tests/Sre/CareerWarmFingerprintDeployTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test scripts/deploy/verify_career_cold_cache_discoverability.php tests/Sre/CareerColdCacheDiscoverabilityGateTest.php tests/Sre/DeployStorageAndDatabaseConfigTest.php tests/Sre/CareerWarmFingerprintDeployTest.php
+      - php -l deploy.php
+      - php -l backend/scripts/deploy/verify_career_cold_cache_discoverability.php
+      - cd backend && composer validate --strict
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - exact changed-file scope validation
+      - git diff --check
+      - git diff --cached --check
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    repository_rule_impact: strengthens standard deploy ordering and fail-closed Career cohort checks without changing backend publication authority or controlled production-action boundaries
+
+  - id: CAREER-1046-PUBLICATION-CONTROL-03
+    repo: fap-api
+    base: main
+    branch: codex/career-1046-publication-control-03
+    title: "CAREER-1046-PUBLICATION-CONTROL-03: add protected exact-authority Career 1046 promotion"
+    status: planned
+    depends_on:
+      - CAREER-COLD-CACHE-DISCOVERABILITY-GATE-02
