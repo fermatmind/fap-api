@@ -347,6 +347,26 @@ final class Career1046TruthRescan06Test extends TestCase
         $this->assertArrayNotHasKey('url', $safety['surface_diagnostics']['llms_full'][0]);
     }
 
+    public function test_detail_semantic_failure_is_retained_while_timeout_or_5xx_blocks_the_round(): void
+    {
+        $non200 = [['request_id' => 'page|en|actuaries', 'reason' => 'non_200', 'status' => 0]];
+        $transport = [['request_id' => 'page|en|actuaries', 'reason' => 'transport_error', 'status' => 0]];
+        $timeout = [['request_id' => 'page|en|actuaries', 'reason' => 'timeout', 'status' => 0]];
+        $serverError = [['request_id' => 'page|en|actuaries', 'reason' => 'server_error', 'status' => 503]];
+
+        $this->assertFalse($this->invoke('detailErrorsBlockRound', [$non200]));
+        $this->assertFalse($this->invoke('detailErrorsBlockRound', [$transport]));
+        $this->assertTrue($this->invoke('detailErrorsBlockRound', [$timeout]));
+        $this->assertTrue($this->invoke('detailErrorsBlockRound', [$serverError]));
+
+        $target = $this->target();
+        $target['page_http_status'] = 0;
+        $target['page_canonical_ok'] = false;
+        $target['page_hreflang_ok'] = false;
+        $target['page_robots_ok'] = false;
+        $this->assertFalse($this->invoke('targetPasses', [$target]));
+    }
+
     public function test_runner_is_get_only_concurrency_two_and_has_no_production_mutator_calls(): void
     {
         $source = (string) file_get_contents(dirname(__DIR__, 2).'/scripts/operations/career_1046_truth_rescan_06.php');

@@ -44102,7 +44102,7 @@ prs:
     branch: codex/enneagram-en13-evidence-cms-refresh-01
     title: "ENNEAGRAM-EN13-EVIDENCE-CMS-REFRESH-01: refresh exact 26-page EN13 evidence provenance"
     train_scope: enneagram_en13_evidence_cms_refresh
-    status: pending_fresh_exact_main_window
+    status: no_go_evidence_complete
     scope:
       - After the evidence upgrade merge SHA is separately deployed, run an exact 26-page read-only dry-run and derive an immutable cohort SHA.
       - Only after separate exact deployed-SHA and cohort-SHA authorization, idempotently refresh visible evidence, evidence provenance, source package/hash, and contract version while preserving all release and review state.
@@ -49012,8 +49012,8 @@ prs:
       - CAREER-COLD-CACHE-DISCOVERABILITY-GATE-02
     external_dependencies:
       - Career C02 PASS run 31372257233 attempt 1 with receipt f1a30b3c83c8d3f11b83e4b8056074bf724e1f6d37646f93750567b0a60b4cc1 and artifact sha256:ba1be4f6862851752b1bbfd6a535c7c1ef589e90658d9043f372174fd17ea6eb
-      - A fresh latest-main Career C03 incident closeout PASS receipt and artifact
-      - Two fresh PASS_C03_REVERIFIED_NO_APPLY_REQUIRED receipts bracketing one stable public read-only scan
+      - Career C03 incident closeout PASS run 31404596553 attempt 1 with receipt a2b3ac48ca57d718b15a4345d56028de91e0904e63288975b959adb05fbdab32 and artifact sha256:06fa8d800b5e235148a06429d0e76c1e10bc62c5f344d6c2a9fdd82bb6bbcd53
+      - Career C03 pre/post PASS_C03_REVERIFIED_NO_APPLY_REQUIRED runs 31404898744 and 31406086532 bracketing the stable public read-only scan
     train_scope: career_1046_current_production_truth_rescan
     risk_level: p1_read_only_production_evidence
     scope:

@@ -61,6 +61,21 @@ The HTTP policy is fixed: credential-free HTTPS GET, redirects disabled, maximum
 
 Semantic mismatches are retained as safe aggregate facts so a successful post-C03 receipt can close the window with a formal `NO_GO`. Repeated text-surface references are informational; only conflicting identity forms or a unique-set mismatch make the text surface unsafe.
 
+A discarded pre-final window exposed one detail response with status zero but no curl errno. That observation identified a runner contract gap: detail non-200 and non-terminal transport failures must become target-level semantic failures and must not prevent the second round. The focused repair now keeps those rows with failed metadata booleans, while timeout and 5xx remain the only detail errors that block the round. The discarded snapshot is not evidence and is not reused.
+
+## Final read-only window
+
+The completed window is bound to exact main `c8015fac05ae544c8730adac6e18f387c76b2e33` and active revision `40020ab7ef269ee56ce597e9f2fd2fbb99e83549`:
+
+- incident closeout run `31404596553` emitted `PASS_INCIDENT_CLOSED`;
+- pre-verify run `31404898744` and post-verify run `31406086532` both emitted `PASS_C03_REVERIFIED_NO_APPLY_REQUIRED`;
+- pre/post authority, inventory, published cohort, detail coverage, and target-set identities were stable;
+- both scan rounds completed with 30 unique slugs / 60 locale rows, zero timeout, 5xx, redirect, private leakage, or conflicting text-surface identity;
+- sitemap and llms each exposed 60 occurrences / 60 unique identities; llms-full exposed 120 occurrences / 60 unique identities, with 60 identical repeated references and zero conflicts per round;
+- 24 targets per round failed the public detail API indexability contract, split evenly as 12 English and 12 Chinese targets. HTTP, page canonical, reciprocal hreflang, page robots, identity, and all public-set membership checks otherwise passed.
+
+The finalized verdict is `NO_GO`. The authority population is also only 342/684, the public cohort is 30/60, and the active revision does not contain the C05 cold-start gate. Those shortfalls would be `PARTIALLY_BLOCKED` only if the scan were otherwise safe; the repeated API indexability mismatch is a hard failure, so `NO_GO` takes precedence. The evidence is complete and mergeable under the PR5 lifecycle, but PR6 production execution remains prohibited and the Career link publication gate remains `CLOSED`.
+
 ## Evidence boundary
 
 The repository retains only:

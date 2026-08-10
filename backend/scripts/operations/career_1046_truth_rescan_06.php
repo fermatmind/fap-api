@@ -324,45 +324,50 @@ final class Career1046TruthRescan06
         $errors = array_merge($errors, $detailErrors);
 
         $targets = [];
-        if ($detailErrors === []) {
-            foreach ($slugs as $slug) {
-                foreach (['en' => 'en', 'zh-CN' => 'zh'] as $locale => $prefix) {
-                    $api = $details['api|'.$locale.'|'.$slug];
-                    $page = $details['page|'.$locale.'|'.$slug];
-                    $apiPayload = self::jsonBody($api['body']);
-                    $pageMeta = self::htmlMeta((string) $page['body']);
-                    $expectedPath = '/'.$prefix.'/career/jobs/'.$slug;
-                    $expectedCanonical = self::WEB_BASE.$expectedPath;
-                    $alternateEn = self::WEB_BASE.'/en/career/jobs/'.$slug;
-                    $alternateZh = self::WEB_BASE.'/zh/career/jobs/'.$slug;
-                    $familyUuid = self::nullableString($apiPayload['identity']['family_uuid'] ?? null);
-                    $directoryFamily = self::nullableString($directories[$locale]['families'][$slug] ?? null);
-                    $targets[] = [
-                        'slug' => $slug,
-                        'locale' => $locale,
-                        'path' => $expectedPath,
-                        'api_http_status' => (int) $api['status'],
-                        'page_http_status' => (int) $page['status'],
-                        'redirect_count' => (int) $page['redirect_count'],
-                        'api_identity_ok' => ($apiPayload['identity']['canonical_slug'] ?? null) === $slug,
-                        'api_canonical_ok' => ($apiPayload['seo_contract']['canonical_path'] ?? null) === $expectedPath
-                            && ($apiPayload['seo_contract']['canonical_target'] ?? null) === $expectedPath,
-                        'api_indexability_ok' => ($apiPayload['seo_contract']['index_state'] ?? null) === 'indexable'
-                            && ($apiPayload['seo_contract']['index_eligible'] ?? false) === true
-                            && self::robotsIndexable((string) ($apiPayload['seo_contract']['robots_policy'] ?? '')),
-                        'page_canonical_ok' => $pageMeta['canonical'] === $expectedCanonical,
-                        'page_hreflang_ok' => ($pageMeta['alternates']['en'] ?? null) === $alternateEn
-                            && ($pageMeta['alternates']['zh-CN'] ?? null) === $alternateZh,
-                        'page_robots_ok' => self::robotsIndexable((string) $pageMeta['robots']),
-                        'jobs_member' => true,
-                        'directory_member' => true,
-                        'sitemap_member' => in_array($slug.'|'.$locale, $surfaceRows['sitemap'], true),
-                        'llms_member' => in_array($slug.'|'.$locale, $surfaceRows['llms'], true),
-                        'llms_full_member' => in_array($slug.'|'.$locale, $surfaceRows['llms_full'], true),
-                        'family_uuid' => $familyUuid,
-                        'directory_family_slug' => $directoryFamily,
-                    ];
-                }
+        foreach ($slugs as $slug) {
+            foreach (['en' => 'en', 'zh-CN' => 'zh'] as $locale => $prefix) {
+                $api = $details['api|'.$locale.'|'.$slug];
+                $page = $details['page|'.$locale.'|'.$slug];
+                $apiSucceeded = self::responseSucceeded($api);
+                $pageSucceeded = self::responseSucceeded($page);
+                $apiPayload = $apiSucceeded ? self::jsonBody($api['body']) : [];
+                $pageMeta = $pageSucceeded
+                    ? self::htmlMeta((string) $page['body'])
+                    : ['canonical' => null, 'robots' => '', 'alternates' => []];
+                $expectedPath = '/'.$prefix.'/career/jobs/'.$slug;
+                $expectedCanonical = self::WEB_BASE.$expectedPath;
+                $alternateEn = self::WEB_BASE.'/en/career/jobs/'.$slug;
+                $alternateZh = self::WEB_BASE.'/zh/career/jobs/'.$slug;
+                $familyUuid = self::nullableString($apiPayload['identity']['family_uuid'] ?? null);
+                $directoryFamily = self::nullableString($directories[$locale]['families'][$slug] ?? null);
+                $targets[] = [
+                    'slug' => $slug,
+                    'locale' => $locale,
+                    'path' => $expectedPath,
+                    'api_http_status' => (int) $api['status'],
+                    'page_http_status' => (int) $page['status'],
+                    'redirect_count' => (int) $page['redirect_count'],
+                    'api_identity_ok' => $apiSucceeded && ($apiPayload['identity']['canonical_slug'] ?? null) === $slug,
+                    'api_canonical_ok' => $apiSucceeded
+                        && ($apiPayload['seo_contract']['canonical_path'] ?? null) === $expectedPath
+                        && ($apiPayload['seo_contract']['canonical_target'] ?? null) === $expectedPath,
+                    'api_indexability_ok' => $apiSucceeded
+                        && ($apiPayload['seo_contract']['index_state'] ?? null) === 'indexable'
+                        && ($apiPayload['seo_contract']['index_eligible'] ?? false) === true
+                        && self::robotsIndexable((string) ($apiPayload['seo_contract']['robots_policy'] ?? '')),
+                    'page_canonical_ok' => $pageSucceeded && $pageMeta['canonical'] === $expectedCanonical,
+                    'page_hreflang_ok' => $pageSucceeded
+                        && ($pageMeta['alternates']['en'] ?? null) === $alternateEn
+                        && ($pageMeta['alternates']['zh-CN'] ?? null) === $alternateZh,
+                    'page_robots_ok' => $pageSucceeded && self::robotsIndexable((string) $pageMeta['robots']),
+                    'jobs_member' => true,
+                    'directory_member' => true,
+                    'sitemap_member' => in_array($slug.'|'.$locale, $surfaceRows['sitemap'], true),
+                    'llms_member' => in_array($slug.'|'.$locale, $surfaceRows['llms'], true),
+                    'llms_full_member' => in_array($slug.'|'.$locale, $surfaceRows['llms_full'], true),
+                    'family_uuid' => $familyUuid,
+                    'directory_family_slug' => $directoryFamily,
+                ];
             }
         }
 
@@ -376,7 +381,7 @@ final class Career1046TruthRescan06
         return [
             'round' => $number,
             'checked_at' => gmdate('Y-m-d\TH:i:s\Z'),
-            'complete' => $errors === [],
+            'complete' => ! self::detailErrorsBlockRound($detailErrors),
             'errors' => $errors,
             'slug_set' => $slugs,
             'slug_count' => count($slugs),
@@ -503,6 +508,24 @@ final class Career1046TruthRescan06
         }
 
         return $errors;
+    }
+
+    /** @param array{status:int,body:string,curl_errno:int,redirect_count:int} $response */
+    private static function responseSucceeded(array $response): bool
+    {
+        return $response['curl_errno'] === 0 && $response['status'] === 200;
+    }
+
+    /** @param list<array{request_id:string,reason:string,status:int}> $errors */
+    private static function detailErrorsBlockRound(array $errors): bool
+    {
+        foreach ($errors as $error) {
+            if (in_array($error['reason'] ?? null, ['timeout', 'server_error'], true)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /** @return list<string> */
