@@ -24,6 +24,8 @@ final class PersonalityMbtiIntpASeoTitleExperimentCommandTest extends TestCase
 
     private const PROPOSED_TITLE = 'INTP-A 是什么？人格特点、优势盲点与适合场景 | FermatMind';
 
+    private const CURRENT_DESCRIPTION = '了解 INTP-A 的分析建模、可能性探索和独立解题、适合与不适合的场景、A/T 差异、职业、关系、压力应对、常见误解与 FAQ。内容仅用于自我理解和成长复盘。';
+
     private const APPROVAL = 'I authorize one inactive staging CMS revision for the zh-CN INTP-A seo_title experiment. No production, live SEO metadata, publish, indexability, sitemap, llms, search, or deploy write is authorized.';
 
     public function test_dry_run_validates_one_target_without_writes(): void
@@ -104,10 +106,45 @@ final class PersonalityMbtiIntpASeoTitleExperimentCommandTest extends TestCase
         $this->assertSame(1, PersonalityProfileVariantRevision::query()->count());
     }
 
+    public function test_idempotent_rerun_rejects_live_authority_drift(): void
+    {
+        [, $variant] = $this->createAuthority();
+        $writeOptions = [
+            '--write' => true,
+            '--draft-only' => true,
+            '--no-publish' => true,
+            '--no-indexability-change' => true,
+            '--no-sitemap' => true,
+            '--no-llms' => true,
+            '--no-search-release' => true,
+        ];
+
+        [$firstExit] = $this->runCommand($writeOptions);
+        $variant->update(['nickname' => 'Drifted nickname']);
+        [$secondExit, $secondReceipt] = $this->runCommand($writeOptions);
+
+        $this->assertSame(0, $firstExit);
+        $this->assertSame(1, $secondExit);
+        $this->assertFalse($secondReceipt['ok']);
+        $this->assertSame(1, PersonalityProfileVariantRevision::query()->count());
+    }
+
     public function test_baseline_drift_fails_closed(): void
     {
         [, , $seoMeta] = $this->createAuthority();
         $seoMeta->update(['seo_title' => 'Drifted title']);
+
+        [$exitCode, $receipt] = $this->runCommand(['--dry-run' => true]);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($receipt['ok']);
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_non_title_authority_baseline_drift_fails_closed(): void
+    {
+        [, , $seoMeta] = $this->createAuthority();
+        $seoMeta->update(['canonical_url' => 'https://fermatmind.com/zh/personality/intp']);
 
         [$exitCode, $receipt] = $this->runCommand(['--dry-run' => true]);
 
@@ -278,8 +315,8 @@ final class PersonalityMbtiIntpASeoTitleExperimentCommandTest extends TestCase
             'canonical_type_code' => 'INTP',
             'slug' => 'intp',
             'locale' => 'zh-CN',
-            'title' => 'INTP 逻辑学家人格',
-            'type_name' => '逻辑学家',
+            'title' => 'INTP - 逻辑学家',
+            'type_name' => '逻辑学家型',
             'nickname' => '逻辑学家',
             'keywords_json' => [],
             'status' => 'published',
@@ -305,13 +342,20 @@ final class PersonalityMbtiIntpASeoTitleExperimentCommandTest extends TestCase
             'org_id' => 0,
             'personality_profile_variant_id' => (int) $variant->id,
             'seo_title' => self::CURRENT_TITLE,
-            'seo_description' => 'Current description remains unchanged.',
+            'seo_description' => self::CURRENT_DESCRIPTION,
             'canonical_url' => 'https://fermatmind.com/zh/personality/intp-a',
-            'og_title' => 'Current OG title',
-            'og_description' => 'Current OG description',
-            'twitter_title' => 'Current Twitter title',
-            'twitter_description' => 'Current Twitter description',
+            'og_title' => self::CURRENT_TITLE,
+            'og_description' => self::CURRENT_DESCRIPTION,
+            'og_image_url' => null,
+            'twitter_title' => self::CURRENT_TITLE,
+            'twitter_description' => self::CURRENT_DESCRIPTION,
+            'twitter_image_url' => null,
             'robots' => 'index,follow',
+            'jsonld_overrides_json' => [
+                'url' => 'https://fermatmind.com/zh/personality/intp-a',
+                'name' => 'INTP-A 人格特点',
+                'description' => self::CURRENT_DESCRIPTION,
+            ],
         ]);
 
         return [$profile, $variant, $seoMeta];

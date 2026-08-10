@@ -27,6 +27,10 @@ final class MbtiIntpASeoTitleExperimentService
 
     private const PROPOSED_TITLE = 'INTP-A 是什么？人格特点、优势盲点与适合场景 | FermatMind';
 
+    private const CURRENT_DESCRIPTION = '了解 INTP-A 的分析建模、可能性探索和独立解题、适合与不适合的场景、A/T 差异、职业、关系、压力应对、常见误解与 FAQ。内容仅用于自我理解和成长复盘。';
+
+    private const PUBLIC_PROJECTION_SHA256 = '1c5c515c29a9e73721f104da92bf59dab56975c47eba431f6dc9e5b89885a97d';
+
     private const M01_SHA256 = '9b7c470aa39aff0e6062c41fe5d71e2e8164159747953d42bd032046cc10f691';
 
     private const CANNIBALIZATION_SHA256 = '07a153df4fd2b2bb11a639c6fc18d52f3a39988030407a17489b1d6ddd579a91';
@@ -45,10 +49,10 @@ final class MbtiIntpASeoTitleExperimentService
     {
         $this->assertPackage($package, $packageSha256);
         [$profile, $variant, $seoMeta] = $this->resolveAuthority();
-        $this->assertLiveBaseline($seoMeta);
+        $this->assertLiveBaseline($profile, $variant, $seoMeta, $package);
 
-        $existing = $this->findExistingExperimentRevision($variant, $packageSha256);
         $liveFingerprint = $this->liveFingerprint($profile, $variant, $seoMeta);
+        $existing = $this->findExistingExperimentRevision($variant, $packageSha256, $liveFingerprint);
 
         return $this->receipt(
             status: $existing instanceof PersonalityProfileVariantRevision ? 'idempotent_existing_draft' : 'planned',
@@ -73,10 +77,10 @@ final class MbtiIntpASeoTitleExperimentService
 
         return DB::transaction(function () use ($package, $packageSha256, $targetEnvironment): array {
             [$profile, $variant, $seoMeta] = $this->resolveAuthority(lock: true);
-            $this->assertLiveBaseline($seoMeta);
+            $this->assertLiveBaseline($profile, $variant, $seoMeta, $package);
 
             $liveFingerprintBefore = $this->liveFingerprint($profile, $variant, $seoMeta);
-            $existing = $this->findExistingExperimentRevision($variant, $packageSha256);
+            $existing = $this->findExistingExperimentRevision($variant, $packageSha256, $liveFingerprintBefore);
             if ($existing instanceof PersonalityProfileVariantRevision) {
                 return $this->receipt(
                     status: 'idempotent_existing_draft',
@@ -164,6 +168,9 @@ final class MbtiIntpASeoTitleExperimentService
             'measurement.page_indexing_state' => 'UNKNOWN_PAGE_LEVEL',
             'measurement.post_window_days' => 28,
             'measurement.insufficient_evidence_state' => 'INCONCLUSIVE',
+            'authority_baseline.source' => 'production_public_api_readonly',
+            'authority_baseline.captured_at' => '2026-08-10',
+            'authority_baseline.public_projection_sha256' => self::PUBLIC_PROJECTION_SHA256,
         ];
         foreach ($expectedScalarValues as $path => $expected) {
             if (data_get($package, $path) !== $expected) {
@@ -205,6 +212,39 @@ final class MbtiIntpASeoTitleExperimentService
         ];
         if (data_get($package, 'evidence.queries') !== $expectedQueries) {
             throw new RuntimeException('Package query evidence does not match the exact M01 baseline.');
+        }
+
+        $expectedAuthorityBaseline = [
+            'profile' => [
+                'title' => 'INTP - 逻辑学家',
+                'type_name' => '逻辑学家型',
+                'status' => 'published',
+                'is_public' => true,
+                'is_indexable' => true,
+            ],
+            'variant' => [
+                'is_published' => true,
+            ],
+            'seo_meta' => [
+                'seo_title' => self::CURRENT_TITLE,
+                'seo_description' => self::CURRENT_DESCRIPTION,
+                'canonical_url' => 'https://fermatmind.com'.self::TARGET_ROUTE,
+                'og_title' => self::CURRENT_TITLE,
+                'og_description' => self::CURRENT_DESCRIPTION,
+                'og_image_url' => null,
+                'twitter_title' => self::CURRENT_TITLE,
+                'twitter_description' => self::CURRENT_DESCRIPTION,
+                'twitter_image_url' => null,
+                'robots' => 'index,follow',
+                'jsonld_overrides_json' => [
+                    'url' => 'https://fermatmind.com'.self::TARGET_ROUTE,
+                    'name' => 'INTP-A 人格特点',
+                    'description' => self::CURRENT_DESCRIPTION,
+                ],
+            ],
+        ];
+        if (data_get($package, 'authority_baseline.database_contract') !== $expectedAuthorityBaseline) {
+            throw new RuntimeException('Package live authority baseline does not match the locked contract.');
         }
 
         $negativeGuarantees = (array) ($package['negative_guarantees'] ?? []);
@@ -284,16 +324,51 @@ final class MbtiIntpASeoTitleExperimentService
         return [$profile, $variant, $seoMeta];
     }
 
-    private function assertLiveBaseline(PersonalityProfileVariantSeoMeta $seoMeta): void
-    {
-        if (! hash_equals(self::CURRENT_TITLE, trim((string) $seoMeta->seo_title))) {
-            throw new RuntimeException('Target INTP-A seo_title baseline drifted; refusing the experiment draft.');
+    /**
+     * @param  array<string, mixed>  $package
+     */
+    private function assertLiveBaseline(
+        PersonalityProfile $profile,
+        PersonalityProfileVariant $variant,
+        PersonalityProfileVariantSeoMeta $seoMeta,
+        array $package,
+    ): void {
+        $expected = data_get($package, 'authority_baseline.database_contract');
+        $actual = [
+            'profile' => [
+                'title' => (string) $profile->title,
+                'type_name' => (string) $profile->type_name,
+                'status' => (string) $profile->status,
+                'is_public' => (bool) $profile->is_public,
+                'is_indexable' => (bool) $profile->is_indexable,
+            ],
+            'variant' => [
+                'is_published' => (bool) $variant->is_published,
+            ],
+            'seo_meta' => [
+                'seo_title' => trim((string) $seoMeta->seo_title),
+                'seo_description' => trim((string) $seoMeta->seo_description),
+                'canonical_url' => trim((string) $seoMeta->canonical_url),
+                'og_title' => $seoMeta->og_title,
+                'og_description' => $seoMeta->og_description,
+                'og_image_url' => $seoMeta->og_image_url,
+                'twitter_title' => $seoMeta->twitter_title,
+                'twitter_description' => $seoMeta->twitter_description,
+                'twitter_image_url' => $seoMeta->twitter_image_url,
+                'robots' => trim((string) $seoMeta->robots),
+                'jsonld_overrides_json' => $seoMeta->jsonld_overrides_json,
+            ],
+        ];
+
+        if ($actual !== $expected) {
+            throw new RuntimeException('Target INTP-A live authority baseline drifted; refusing the experiment draft.');
         }
     }
 
     private function findExistingExperimentRevision(
         PersonalityProfileVariant $variant,
         string $packageSha256,
+        string $liveFingerprint,
     ): ?PersonalityProfileVariantRevision {
         $exact = null;
 
@@ -316,6 +391,12 @@ final class MbtiIntpASeoTitleExperimentService
 
             if (! hash_equals($this->snapshotSha256($snapshot), (string) ($snapshot['snapshot_sha256'] ?? ''))) {
                 throw new RuntimeException('Existing experiment revision snapshot checksum mismatch.');
+            }
+
+            $storedLiveFingerprint = (string) ($snapshot['live_authority_fingerprint_before'] ?? '');
+            if (! preg_match('/^[a-f0-9]{64}$/', $storedLiveFingerprint)
+                || ! hash_equals($storedLiveFingerprint, $liveFingerprint)) {
+                throw new RuntimeException('Live authority drifted since the existing experiment revision was created.');
             }
 
             $exact = $revision;

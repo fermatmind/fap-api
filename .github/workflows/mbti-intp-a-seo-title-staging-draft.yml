@@ -176,14 +176,21 @@ jobs:
                   canonical_url: .seo_meta.canonical_url,
                   og_title: .seo_meta.og_title,
                   og_description: .seo_meta.og_description,
+                  og_image_url: .seo_meta.og_image_url,
                   twitter_title: .seo_meta.twitter_title,
                   twitter_description: .seo_meta.twitter_description,
-                  robots: .seo_meta.robots
+                  twitter_image_url: .seo_meta.twitter_image_url,
+                  robots: .seo_meta.robots,
+                  jsonld_overrides_json: .seo_meta.jsonld_overrides_json
                 },
                 sections: .sections,
                 internal_links: .internal_links
               }' > "$RUNNER_TEMP/public-before.json"
           jq -e '.ok == true and .seo_meta.seo_title != null' "$RUNNER_TEMP/public-before.json" >/dev/null
+          package="backend/docs/seo/personality/experiments/zh-intp-a-seo-title-v1.json"
+          expected_projection_sha="$(jq -r '.authority_baseline.public_projection_sha256' "$package")"
+          [[ "$expected_projection_sha" =~ ^[0-9a-f]{64}$ ]]
+          test "$(sha256sum "$RUNNER_TEMP/public-before.json" | awk '{print $1}')" = "$expected_projection_sha"
 
       - name: Execute dry-run, create inactive draft, and read back
         shell: bash
@@ -263,9 +270,12 @@ jobs:
                   canonical_url: .seo_meta.canonical_url,
                   og_title: .seo_meta.og_title,
                   og_description: .seo_meta.og_description,
+                  og_image_url: .seo_meta.og_image_url,
                   twitter_title: .seo_meta.twitter_title,
                   twitter_description: .seo_meta.twitter_description,
-                  robots: .seo_meta.robots
+                  twitter_image_url: .seo_meta.twitter_image_url,
+                  robots: .seo_meta.robots,
+                  jsonld_overrides_json: .seo_meta.jsonld_overrides_json
                 },
                 sections: .sections,
                 internal_links: .internal_links
