@@ -410,6 +410,63 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
     }
 
     #[Test]
+    public function bounded_candidate_uses_one_incident_bound_runner_only_public_dns_override(): void
+    {
+        $workflow = $this->readRepoFile('.github/workflows/deploy-production.yml');
+        $wrapperPath = 'backend/scripts/deploy/bounded_candidate_public_dns_control.php';
+        $wrapper = $this->readRepoFile($wrapperPath);
+
+        foreach ([
+            '363bbba54f7cac78b9cbb6118c1800dd0c6b7340',
+            '31384127889',
+            'e27282825c2074e56067e6ec4cb9a8a3951ad8d4207c0c3f598fc93a1d02128b',
+            '31397650099',
+            'sha256:4bd544410f69855d589b5305276a5fac6dd1df26907e4cc7fb1b8abdabd41d79',
+            '7977e008407dea54299c922357b800c584a0f0c18ae73a8662e03615a6757729',
+            'Prepare bounded candidate public-DNS control',
+            'WORKFLOW_CONTROL_SHA: ${{ github.sha }}',
+            'gh run download "$incident_run_id"',
+            '.task_evidence.public_dns_guard == "failure"',
+            '.task_evidence.symlink == "skipped"',
+            '.activation_completed == false',
+            'git show "${WORKFLOW_CONTROL_SHA}:${wrapper_path}"',
+            'candidate_recipe_with_runner_only_public_dns_override',
+            'overridden_tasks: ["guard:public-dns-health"]',
+            'release_overlay: false',
+            'remote_control_file_write: false',
+            'activation_authorized: false',
+            'BOUNDED_PUBLIC_DNS_CANDIDATE_RECIPE_PATH="$GITHUB_WORKSPACE/deploy.php"',
+            'backend-bounded-public-dns-control-receipt.v1',
+        ] as $boundary) {
+            $this->assertStringContainsString($boundary, $workflow);
+        }
+
+        $expectedWrapperSha = '274701f9b23afe61987376de6867ab723c9ed38638a0e89bd4b45a6e35445658';
+        $this->assertSame(
+            $expectedWrapperSha,
+            hash_file('sha256', dirname(__DIR__, 3).'/'.$wrapperPath)
+        );
+        $this->assertStringContainsString(
+            'EXPECTED_BOUNDED_PUBLIC_DNS_CONTROL_SHA256="'.$expectedWrapperSha.'"',
+            $workflow
+        );
+
+        $this->assertStringContainsString('require $candidateRecipe;', $wrapper);
+        $this->assertSame(1, substr_count($wrapper, "task('"));
+        $this->assertStringContainsString("task('guard:public-dns-health'", $wrapper);
+        $this->assertStringContainsString('PRODUCTION_PUBLIC_PROBE_ATTEMPTS=3', $wrapper);
+        $this->assertStringContainsString('if ! raw="$(curl -sS', $wrapper);
+        $this->assertStringContainsString('429|502|503|504) return 75', $wrapper);
+        $this->assertStringContainsString(
+            'case "$attempt" in 1) sleep 2 ;; 2) sleep 5',
+            $wrapper
+        );
+        $this->assertStringNotContainsString('set +e; raw=', $wrapper);
+        $this->assertStringNotContainsString('file_put_contents', $wrapper);
+        $this->assertStringNotContainsString('upload(', $wrapper);
+    }
+
+    #[Test]
     public function failed_deploy_unlock_passes_runner_identity_to_the_remote_verifier_explicitly(): void
     {
         $source = $this->readRepoFile('deploy.php');
