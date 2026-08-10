@@ -1296,16 +1296,15 @@ jobs:
           PRODUCTION_PUBLIC_PROBE_RETRY_DELAYS=(2 5)
           PROBE_STATUS=
           PROBE_BODY=
+          PROBE_STAGE=not_started
           production_probe() {
-            local url="$1" raw rc
-            set +e
-            raw="$(curl -sS \
+            local url="$1" raw
+            PROBE_STATUS=
+            PROBE_BODY=
+            if ! raw="$(curl -sS \
               --connect-timeout "$PRODUCTION_PUBLIC_PROBE_CONNECT_TIMEOUT_SECONDS" \
               --max-time "$PRODUCTION_PUBLIC_PROBE_MAX_TIME_SECONDS" \
-              -w $'\n%{http_code}' "$url" 2>/dev/null)"
-            rc=$?
-            set -e
-            if [ "$rc" -ne 0 ]; then
+              -w $'\n%{http_code}' "$url" 2>/dev/null)"; then
               return 75
             fi
             PROBE_STATUS="${raw##*$'\n'}"
@@ -1316,13 +1315,17 @@ jobs:
             return 0
           }
           verify_public_evidence() {
+            PROBE_STAGE=public_health
             production_probe "$HEALTHCHECK_URL" || return $?
             [ "$PROBE_STATUS" = "404" ] || return 1
+            PROBE_STAGE=public_flags
             production_probe "${PUBLIC_API_ORIGIN}/api/v0.3/flags" || return $?
             [ "$PROBE_STATUS" = "200" ] || return 1
+            PROBE_STAGE=public_bigfive
             production_probe \
               "${PUBLIC_API_ORIGIN}/api/v0.5/personality-content-assets/big_five/hub/big-five?locale=zh-CN" \
               || return $?
+            PROBE_STAGE=public_bigfive_contract
             [ "$PROBE_STATUS" = "200" ] \
               && jq -e '.ok==true and (.personality_public_content_asset_v1.source_hash | strings | test("^[0-9a-f]{64}$"))' \
                 <<<"$PROBE_BODY" >/dev/null
@@ -1336,11 +1339,11 @@ jobs:
               exit 0
             fi
             if [ "$probe_rc" -ne 75 ]; then
-              echo "Production health evidence baseline failed terminally on attempt ${attempt}" >&2
+              echo "Production health evidence baseline failed terminally on attempt ${attempt}: stage=${PROBE_STAGE} status=${PROBE_STATUS:-none}" >&2
               exit 1
             fi
             if [ "$attempt" -eq "$PRODUCTION_PUBLIC_PROBE_ATTEMPTS" ]; then
-              echo "Production health evidence baseline failed after 3 attempts" >&2
+              echo "Production health evidence baseline failed after 3 attempts: stage=${PROBE_STAGE} status=${PROBE_STATUS:-none}" >&2
               exit 1
             fi
             sleep "${PRODUCTION_PUBLIC_PROBE_RETRY_DELAYS[$((attempt - 1))]}"
@@ -1727,16 +1730,15 @@ jobs:
           PRODUCTION_PUBLIC_PROBE_RETRY_DELAYS=(2 5)
           PROBE_STATUS=
           PROBE_BODY=
+          PROBE_STAGE=not_started
           production_probe() {
-            local url="$1" raw rc
-            set +e
-            raw="$(curl -sS \
+            local url="$1" raw
+            PROBE_STATUS=
+            PROBE_BODY=
+            if ! raw="$(curl -sS \
               --connect-timeout "$PRODUCTION_PUBLIC_PROBE_CONNECT_TIMEOUT_SECONDS" \
               --max-time "$PRODUCTION_PUBLIC_PROBE_MAX_TIME_SECONDS" \
-              -w $'\n%{http_code}' "$url" 2>/dev/null)"
-            rc=$?
-            set -e
-            if [ "$rc" -ne 0 ]; then
+              -w $'\n%{http_code}' "$url" 2>/dev/null)"; then
               return 75
             fi
             PROBE_STATUS="${raw##*$'\n'}"
@@ -1747,13 +1749,17 @@ jobs:
             return 0
           }
           verify_public_evidence() {
+            PROBE_STAGE=public_health
             production_probe "$HEALTHCHECK_URL" || return $?
             [ "$PROBE_STATUS" = "404" ] || return 1
+            PROBE_STAGE=public_flags
             production_probe "${PUBLIC_API_ORIGIN}/api/v0.3/flags" || return $?
             [ "$PROBE_STATUS" = "200" ] || return 1
+            PROBE_STAGE=public_bigfive
             production_probe \
               "${PUBLIC_API_ORIGIN}/api/v0.5/personality-content-assets/big_five/hub/big-five?locale=zh-CN" \
               || return $?
+            PROBE_STAGE=public_bigfive_contract
             [ "$PROBE_STATUS" = "200" ] \
               && jq -e '.ok==true and (.personality_public_content_asset_v1.source_hash | strings | test("^[0-9a-f]{64}$"))' \
                 <<<"$PROBE_BODY" >/dev/null
@@ -1777,11 +1783,11 @@ jobs:
               break
             fi
             if [ "$probe_rc" -ne 75 ]; then
-              echo "Post-deploy public business evidence failed terminally on attempt ${attempt}" >&2
+              echo "Post-deploy public business evidence failed terminally on attempt ${attempt}: stage=${PROBE_STAGE} status=${PROBE_STATUS:-none}" >&2
               exit 1
             fi
             if [ "$attempt" -eq "$PRODUCTION_PUBLIC_PROBE_ATTEMPTS" ]; then
-              echo "Post-deploy public business evidence failed after 3 attempts" >&2
+              echo "Post-deploy public business evidence failed after 3 attempts: stage=${PROBE_STAGE} status=${PROBE_STATUS:-none}" >&2
               exit 1
             fi
             sleep "${PRODUCTION_PUBLIC_PROBE_RETRY_DELAYS[$((attempt - 1))]}"

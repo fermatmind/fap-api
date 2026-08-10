@@ -279,10 +279,9 @@ function deployPublicDnsBusinessEvidenceCommand(string $host): string
         '.ok==true and (.personality_public_content_asset_v1.source_hash | strings | test("^[0-9a-f]{64}$"))'
     );
     $probeFunction = 'production_probe() { '
-        .'url="$1"; set +e; '
-        .'raw="$(curl -sS --connect-timeout 3 --max-time 10 '
-        ."-w {$httpCode} \"\$url\" 2>/dev/null)\"; rc=\$?; set -e; "
-        .'if [ "$rc" -ne 0 ]; then return 75; fi; '
+        .'url="$1"; PROBE_STATUS=; PROBE_BODY=; '
+        .'if ! raw="$(curl -sS --connect-timeout 3 --max-time 10 '
+        ."-w {$httpCode} \"\$url\" 2>/dev/null)\"; then return 75; fi; "
         .'PROBE_STATUS="${raw##*$\'\n\'}"; PROBE_BODY="${raw%$\'\n\'*}"; '
         .'case "$PROBE_STATUS" in 429|502|503|504) return 75 ;; esac; return 0; }';
     $verifyFunction = 'verify_public_evidence() { '
