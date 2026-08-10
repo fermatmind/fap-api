@@ -7,6 +7,7 @@ namespace App\Services\Attempts;
 use App\Exceptions\Api\ApiProblemException;
 use App\Models\Attempt;
 use App\Services\Analytics\EventRecorder;
+use App\Services\Analytics\MeasurementAttributionDimensions;
 use App\Services\Assessments\AssessmentService;
 use App\Services\Commerce\BenefitWalletService;
 use App\Services\Commerce\EntitlementManager;
@@ -253,14 +254,26 @@ final class AttemptSubmitSideEffects
         ?string $actorAnonId,
         array $postCommitCtx
     ): void {
+        $attempt = Attempt::withoutGlobalScopes()
+            ->where('org_id', $ctx->orgId())
+            ->where('id', $attemptId)
+            ->first();
+        $safeDimensions = $attempt instanceof Attempt
+            ? app(MeasurementAttributionDimensions::class)->fromAttempt($attempt)
+            : [
+                'scale_code' => strtoupper(trim((string) ($postCommitCtx['scale_code'] ?? ''))) ?: 'unknown',
+                'form_code' => strtolower(trim((string) ($postCommitCtx['form_code'] ?? ''))) ?: 'unknown',
+                'locale' => 'unknown',
+                'entry_surface' => 'unknown',
+                'source_page_type' => 'unknown',
+                'target_action' => 'unknown',
+                'organic_channel' => 'unknown',
+                'device_class' => 'unknown',
+                'result_state' => 'unknown',
+            ];
+
         $this->eventRecorder->record('test_submit', $this->resolveUserIdInt($ctx, $actorUserId), [
-            'scale_code' => (string) ($postCommitCtx['scale_code'] ?? ''),
-            'scale_code_v2' => (string) ($postCommitCtx['scale_code_v2'] ?? ''),
-            'scale_uid' => (string) ($postCommitCtx['scale_uid'] ?? ''),
-            'pack_id' => (string) ($postCommitCtx['pack_id'] ?? ''),
-            'dir_version' => (string) ($postCommitCtx['dir_version'] ?? ''),
-            'form_code' => (string) ($postCommitCtx['form_code'] ?? ''),
-            'attempt_id' => $attemptId,
+            ...$safeDimensions,
         ], [
             'org_id' => $ctx->orgId(),
             'anon_id' => $actorAnonId,
