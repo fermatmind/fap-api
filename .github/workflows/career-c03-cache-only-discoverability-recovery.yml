@@ -137,7 +137,14 @@ jobs:
               llms_submission_count: 0,
               search_submission_count: 0,
               career_link_publication_gate: "CLOSED",
-              automatic_retry_allowed: false
+              automatic_retry_allowed: false,
+              safe_failure_code: null,
+              input_boundary: {
+                checked: false,
+                passed: false,
+                failed_invariant: "control.input_boundary.not_evaluated",
+                validator_sha256: null
+              }
             }' > "$receipt"
 
       - name: Checkout exact control plane
@@ -153,6 +160,7 @@ jobs:
           set -euo pipefail
           runner='backend/scripts/operations/career_c03_cache_only_discoverability_control.php'
           public_readback_runner='backend/scripts/operations/career_c03_bounded_public_readback.sh'
+          input_boundary_runner='backend/scripts/operations/career_c03_input_boundary_control.sh'
           test "$GITHUB_REF" = refs/heads/main
           [[ "$CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
           [[ "$EXPECTED_ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]
@@ -167,11 +175,16 @@ jobs:
           test -f "$public_readback_runner"
           test ! -L "$public_readback_runner"
           bash -n "$public_readback_runner"
+          test -f "$input_boundary_runner"
+          test ! -L "$input_boundary_runner"
+          bash -n "$input_boundary_runner"
           {
             printf 'RUNNER=%s\n' "$runner"
             printf 'RUNNER_SHA256=%s\n' "$(sha256sum "$runner" | awk '{print $1}')"
             printf 'PUBLIC_READBACK_RUNNER=%s\n' "$public_readback_runner"
             printf 'PUBLIC_READBACK_RUNNER_SHA256=%s\n' "$(sha256sum "$public_readback_runner" | awk '{print $1}')"
+            printf 'INPUT_BOUNDARY_RUNNER=%s\n' "$input_boundary_runner"
+            printf 'INPUT_BOUNDARY_RUNNER_SHA256=%s\n' "$(sha256sum "$input_boundary_runner" | awk '{print $1}')"
           } >> "$GITHUB_ENV"
 
       - name: Validate protected production topology
@@ -195,35 +208,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          numeric='^[1-9][0-9]*$'
-          sha='^[0-9a-f]{64}$'
-          digest='^sha256:[0-9a-f]{64}$'
-          case "$MODE" in
-            incident_closeout)
-              test -z "$INCIDENT_CLOSEOUT_RUN_ID$INCIDENT_CLOSEOUT_RUN_ATTEMPT$VERIFY_RUN_ID$VERIFY_RUN_ATTEMPT"
-              test -z "$EXPECTED_INCIDENT_CLOSEOUT_RECEIPT_SHA256$EXPECTED_INCIDENT_CLOSEOUT_ARTIFACT_DIGEST"
-              test -z "$EXPECTED_VERIFY_RECEIPT_SHA256$EXPECTED_VERIFY_ARTIFACT_DIGEST$OPERATOR_APPROVAL_PHRASE"
-              ;;
-            verify)
-              [[ "$INCIDENT_CLOSEOUT_RUN_ID" =~ $numeric ]]
-              [[ "$INCIDENT_CLOSEOUT_RUN_ATTEMPT" =~ $numeric ]]
-              [[ "$EXPECTED_INCIDENT_CLOSEOUT_RECEIPT_SHA256" =~ $sha ]]
-              [[ "$EXPECTED_INCIDENT_CLOSEOUT_ARTIFACT_DIGEST" =~ $digest ]]
-              test -z "$VERIFY_RUN_ID$VERIFY_RUN_ATTEMPT$EXPECTED_VERIFY_RECEIPT_SHA256$EXPECTED_VERIFY_ARTIFACT_DIGEST$OPERATOR_APPROVAL_PHRASE"
-              ;;
-            apply)
-              [[ "$INCIDENT_CLOSEOUT_RUN_ID" =~ $numeric ]]
-              [[ "$INCIDENT_CLOSEOUT_RUN_ATTEMPT" =~ $numeric ]]
-              [[ "$EXPECTED_INCIDENT_CLOSEOUT_RECEIPT_SHA256" =~ $sha ]]
-              [[ "$EXPECTED_INCIDENT_CLOSEOUT_ARTIFACT_DIGEST" =~ $digest ]]
-              [[ "$VERIFY_RUN_ID" =~ $numeric ]]
-              [[ "$VERIFY_RUN_ATTEMPT" =~ $numeric ]]
-              [[ "$EXPECTED_VERIFY_RECEIPT_SHA256" =~ $sha ]]
-              [[ "$EXPECTED_VERIFY_ARTIFACT_DIGEST" =~ $digest ]]
-              test -n "$OPERATOR_APPROVAL_PHRASE"
-              ;;
-            *) exit 2 ;;
-          esac
+          bash "$INPUT_BOUNDARY_RUNNER" "$RECEIPT"
 
       - name: Set up SSH
         uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
@@ -361,6 +346,7 @@ jobs:
             --arg active "$EXPECTED_ACTIVE_REVISION" \
             --arg authority "$AUTHORITY_PROJECTION_SHA256" \
             --arg readback_runner "$PUBLIC_READBACK_RUNNER_SHA256" \
+            --arg input_boundary_runner "$INPUT_BOUNDARY_RUNNER_SHA256" \
             --argjson run_id "$INCIDENT_CLOSEOUT_RUN_ID" \
             --argjson attempt "$INCIDENT_CLOSEOUT_RUN_ATTEMPT" '
             .status == "PASS_INCIDENT_CLOSED"
@@ -368,6 +354,7 @@ jobs:
             and .active_revision == $active
             and .authority_artifact_sha256 == $authority
             and .public_readback_runner_sha256 == $readback_runner
+            and .input_boundary == {checked:true,passed:true,failed_invariant:null,validator_sha256:$input_boundary_runner}
             and .workflow_run_id == $run_id
             and .workflow_run_attempt == $attempt
             and .failed_deploy_run_id == 31373985399
@@ -405,6 +392,7 @@ jobs:
             --arg active "$EXPECTED_ACTIVE_REVISION" \
             --arg incident_sha "$EXPECTED_INCIDENT_CLOSEOUT_RECEIPT_SHA256" \
             --arg readback_runner "$PUBLIC_READBACK_RUNNER_SHA256" \
+            --arg input_boundary_runner "$INPUT_BOUNDARY_RUNNER_SHA256" \
             --argjson run_id "$VERIFY_RUN_ID" \
             --argjson attempt "$VERIFY_RUN_ATTEMPT" '
             .status == "PASS_RECOVERY_REQUIRED"
@@ -412,6 +400,7 @@ jobs:
             and .active_revision == $active
             and .incident_closeout_receipt_sha256 == $incident_sha
             and .public_readback_runner_sha256 == $readback_runner
+            and .input_boundary == {checked:true,passed:true,failed_invariant:null,validator_sha256:$input_boundary_runner}
             and .workflow_run_id == $run_id
             and .workflow_run_attempt == $attempt
             and .detail_repair_target_count <= 250
@@ -583,6 +572,7 @@ jobs:
               --arg active "$EXPECTED_ACTIVE_REVISION" \
               --arg runner "$RUNNER_SHA256" \
               --arg readback_runner "$PUBLIC_READBACK_RUNNER_SHA256" \
+              --arg input_boundary_runner "$INPUT_BOUNDARY_RUNNER_SHA256" \
               --arg failure "$PUBLIC_FAILURE_CODE" \
               --arg run_id "$GITHUB_RUN_ID" \
               --arg attempt "$GITHUB_RUN_ATTEMPT" \
@@ -596,6 +586,7 @@ jobs:
                 active_revision: $active,
                 runner_sha256: $runner,
                 public_readback_runner_sha256: $readback_runner,
+                input_boundary: {checked:true,passed:true,failed_invariant:null,validator_sha256:$input_boundary_runner},
                 workflow_run_id: ($run_id | tonumber),
                 workflow_run_attempt: ($attempt | tonumber),
                 detail_readback: $public.detail_readback,
@@ -628,6 +619,7 @@ jobs:
             --arg active "$EXPECTED_ACTIVE_REVISION" \
             --arg runner "$RUNNER_SHA256" \
             --arg readback_runner "$PUBLIC_READBACK_RUNNER_SHA256" \
+            --arg input_boundary_runner "$INPUT_BOUNDARY_RUNNER_SHA256" \
             --arg authority "$AUTHORITY_PROJECTION_SHA256" \
             --arg failed_run "$FAILED_DEPLOY_RUN_ID" \
             --arg failed_attempt "$FAILED_DEPLOY_RUN_ATTEMPT" \
@@ -647,6 +639,7 @@ jobs:
               active_revision: $active,
               runner_sha256: $runner,
               public_readback_runner_sha256: $readback_runner,
+              input_boundary: {checked:true,passed:true,failed_invariant:null,validator_sha256:$input_boundary_runner},
               workflow_run_id: ($run_id | tonumber),
               workflow_run_attempt: ($attempt | tonumber),
               failed_deploy_run_id: ($failed_run | tonumber),
@@ -755,6 +748,7 @@ jobs:
               --arg active "$EXPECTED_ACTIVE_REVISION" \
               --arg runner "$RUNNER_SHA256" \
               --arg readback_runner "$PUBLIC_READBACK_RUNNER_SHA256" \
+              --arg input_boundary_runner "$INPUT_BOUNDARY_RUNNER_SHA256" \
               --arg failure "$PUBLIC_FAILURE_CODE" \
               --arg run_id "$GITHUB_RUN_ID" \
               --arg attempt "$GITHUB_RUN_ATTEMPT" \
@@ -768,6 +762,7 @@ jobs:
                 active_revision: $active,
                 runner_sha256: $runner,
                 public_readback_runner_sha256: $readback_runner,
+                input_boundary: {checked:true,passed:true,failed_invariant:null,validator_sha256:$input_boundary_runner},
                 workflow_run_id: ($run_id | tonumber),
                 workflow_run_attempt: ($attempt | tonumber),
                 detail_readback: $public.detail_readback,
@@ -799,6 +794,7 @@ jobs:
             --arg active "$EXPECTED_ACTIVE_REVISION" \
             --arg runner "$RUNNER_SHA256" \
             --arg readback_runner "$PUBLIC_READBACK_RUNNER_SHA256" \
+            --arg input_boundary_runner "$INPUT_BOUNDARY_RUNNER_SHA256" \
             --arg authority "$AUTHORITY_PROJECTION_SHA256" \
             --arg incident_run "$INCIDENT_CLOSEOUT_RUN_ID" \
             --arg incident_attempt "$INCIDENT_CLOSEOUT_RUN_ATTEMPT" \
@@ -817,6 +813,7 @@ jobs:
               active_revision: $active,
               runner_sha256: $runner,
               public_readback_runner_sha256: $readback_runner,
+              input_boundary: {checked:true,passed:true,failed_invariant:null,validator_sha256:$input_boundary_runner},
               workflow_run_id: ($run_id | tonumber),
               workflow_run_attempt: ($attempt | tonumber),
               incident_closeout_run_id: ($incident_run | tonumber),
@@ -911,6 +908,7 @@ jobs:
               --arg status "$status" \
               --arg control "$CONTROL_PLANE_SHA" \
               --arg active "$EXPECTED_ACTIVE_REVISION" \
+              --arg input_boundary_runner "$INPUT_BOUNDARY_RUNNER_SHA256" \
               --argjson rollback_verified "$rollback_verified" '
               {
                 contract_version: "career.c03.cache_only_discoverability_recovery.v1",
@@ -918,6 +916,7 @@ jobs:
                 status: $status,
                 control_plane_sha: $control,
                 active_revision: $active,
+                input_boundary: {checked:true,passed:true,failed_invariant:null,validator_sha256:$input_boundary_runner},
                 rollback_verified: $rollback_verified,
                 automatic_retry_allowed: false,
                 database_write_count: 0,
@@ -1089,6 +1088,7 @@ jobs:
             --arg status "$status" \
             --arg control "$CONTROL_PLANE_SHA" \
             --arg active "$EXPECTED_ACTIVE_REVISION" \
+            --arg input_boundary_runner "$INPUT_BOUNDARY_RUNNER_SHA256" \
             --argjson rollback_verified "$rollback_complete" \
             '{
               contract_version: "career.c03.cache_only_discoverability_recovery.v1",
@@ -1096,6 +1096,7 @@ jobs:
               status: $status,
               control_plane_sha: $control,
               active_revision: $active,
+              input_boundary: {checked:true,passed:true,failed_invariant:null,validator_sha256:$input_boundary_runner},
               rollback_verified: $rollback_verified,
               automatic_retry_allowed: false,
               database_write_count: 0,
@@ -1127,6 +1128,7 @@ jobs:
             --arg active "$EXPECTED_ACTIVE_REVISION" \
             --arg runner "$RUNNER_SHA256" \
             --arg readback_runner "$PUBLIC_READBACK_RUNNER_SHA256" \
+            --arg input_boundary_runner "$INPUT_BOUNDARY_RUNNER_SHA256" \
             --arg authority "$AUTHORITY_PROJECTION_SHA256" \
             --arg incident_run "$INCIDENT_CLOSEOUT_RUN_ID" \
             --arg incident_sha "$EXPECTED_INCIDENT_CLOSEOUT_RECEIPT_SHA256" \
@@ -1146,6 +1148,7 @@ jobs:
               active_revision: $active,
               runner_sha256: $runner,
               public_readback_runner_sha256: $readback_runner,
+              input_boundary: {checked:true,passed:true,failed_invariant:null,validator_sha256:$input_boundary_runner},
               workflow_run_id: ($run_id | tonumber),
               workflow_run_attempt: ($attempt | tonumber),
               incident_closeout_run_id: ($incident_run | tonumber),
@@ -1201,12 +1204,14 @@ jobs:
             apply) expected=PASS_C03_RECOVERED ;;
           esac
           jq -e --arg mode "$MODE" --arg control "$CONTROL_PLANE_SHA" --arg active "$EXPECTED_ACTIVE_REVISION" \
-            --arg readback_runner "$PUBLIC_READBACK_RUNNER_SHA256" '
+            --arg readback_runner "$PUBLIC_READBACK_RUNNER_SHA256" \
+            --arg input_boundary_runner "$INPUT_BOUNDARY_RUNNER_SHA256" '
             .contract_version == "career.c03.cache_only_discoverability_recovery.v1"
             and .mode == $mode
             and .control_plane_sha == $control
             and .active_revision == $active
             and .public_readback_runner_sha256 == $readback_runner
+            and .input_boundary == {checked:true,passed:true,failed_invariant:null,validator_sha256:$input_boundary_runner}
             and .career_link_publication_gate == "CLOSED"
             and .database_write_count == 0
             and .publication_write_count == 0

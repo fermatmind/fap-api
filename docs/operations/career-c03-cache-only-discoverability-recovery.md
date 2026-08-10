@@ -45,6 +45,8 @@ The phase verifies the exact failed-run timing, progress and misleading incident
 
 Record the successful run id, run attempt, receipt SHA-256 and Actions artifact digest before continuing.
 
+Every mode validates its workflow inputs before SSH or any production read. The receipt binds the validator SHA and records `input_boundary.checked`, `input_boundary.passed`, and a fixed `failed_invariant`. A boundary failure records only the mode, field name and rule (for example, `verify.incident_closeout_run_id.required_numeric`), never the supplied value, and remains `HOLD_CONTROL_INCOMPLETE` with automatic retry forbidden. Repair the named invariant or the control implementation before creating a new latest-main window; never rerun that terminal receipt.
+
 ### 2. `verify`
 
 ```bash
@@ -118,6 +120,7 @@ vendor/bin/pint --test \
   tests/Sre/CareerC03CacheOnlyDiscoverabilityRecoveryWorkflowTest.php \
   tests/Sre/CareerC03CacheOnlyDiscoverabilityControlTest.php
 php -l scripts/operations/career_c03_cache_only_discoverability_control.php
+bash -n scripts/operations/career_c03_input_boundary_control.sh
 bash -n scripts/operations/career_c03_bounded_public_readback.sh
 composer validate --strict
 ```
