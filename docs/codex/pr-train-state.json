@@ -59,7 +59,7 @@
         "status": "pass"
       }
     },
-    "commit_sha": null,
+    "commit_sha": "b2a1e942a5842050fc87467bd8bf63ee2b4e5cb1",
     "depends_on": [],
     "failure_reason": null,
     "local_cleanup_executed": false,
@@ -76,13 +76,18 @@
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_type": "assessment_catalog_fact_authority_convergence",
-    "status": "local_validation_passed",
+    "status": "github_pr_pending",
     "title": "ASSESSMENT-CATALOG-FACT-AUTHORITY-CONVERGENCE-01: converge six-assessment public product truth",
     "transitions": [
       {
         "at": "2026-08-10T17:22:30+08:00",
         "status": "local_validation_passed",
         "note": "Implemented from latest origin/main 8e352dc727e131101f741be99a0a69f4178a7329 in an isolated temporary worktree. Full validation initially exposed stale paid/free expectations in existing Big Five history, frozen SEO authority, MBTI report, and payment webhook tests; each was repaired within the declared Catalog authority scope without reactivating public commerce. The final complete verifier and all focused, migration, route, format, parse, diff, privacy, and exact-scope checks passed. No production migration, deployment, CMS write, database backfill, publication, or Search Channel action occurred."
+      },
+      {
+        "at": "2026-08-10T17:24:00+08:00",
+        "status": "github_pr_pending",
+        "note": "Implementation and locally validated ledger were committed as b2a1e942a5842050fc87467bd8bf63ee2b4e5cb1. Push, PR creation, required checks, merge, and cleanup remain pending."
       }
     ]
   },
