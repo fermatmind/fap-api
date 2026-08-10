@@ -266,7 +266,6 @@ final class AttemptSubmitSideEffects
                 'locale' => 'unknown',
                 'entry_surface' => 'unknown',
                 'source_page_type' => 'unknown',
-                'target_action' => 'unknown',
                 'organic_channel' => 'unknown',
                 'device_class' => 'unknown',
                 'result_state' => 'unknown',

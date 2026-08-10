@@ -22,7 +22,6 @@ final class MeasurementEventContract
         'locale',
         'entry_surface',
         'source_page_type',
-        'target_action',
         'organic_channel',
         'device_class',
         'result_state',

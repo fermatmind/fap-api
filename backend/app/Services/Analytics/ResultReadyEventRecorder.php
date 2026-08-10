@@ -13,16 +13,7 @@ use Throwable;
 final class ResultReadyEventRecorder
 {
     /** @var list<string> */
-    private const META_PROPERTIES = [
-        'scale_code',
-        'form_code',
-        'locale',
-        'entry_surface',
-        'source_page_type',
-        'organic_channel',
-        'device_class',
-        'result_state',
-    ];
+    private const META_PROPERTIES = MeasurementEventContract::ALLOWED_PROPERTIES;
 
     public function __construct(
         private readonly EventRecorder $events,

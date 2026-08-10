@@ -11,6 +11,16 @@ final class MeasurementEventContractTest extends TestCase
 {
     public function test_contract_freezes_aliases_authorities_and_privacy_boundary(): void
     {
+        self::assertSame([
+            'scale_code',
+            'form_code',
+            'locale',
+            'entry_surface',
+            'source_page_type',
+            'organic_channel',
+            'device_class',
+            'result_state',
+        ], MeasurementEventContract::ALLOWED_PROPERTIES);
         self::assertSame('test_start', MeasurementEventContract::canonicalize('start_test'));
         self::assertSame('test_complete', MeasurementEventContract::canonicalize('test_submit'));
         self::assertSame('test_complete', MeasurementEventContract::canonicalize('complete_test'));
