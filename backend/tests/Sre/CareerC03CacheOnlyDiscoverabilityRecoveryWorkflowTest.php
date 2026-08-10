@@ -71,6 +71,7 @@ final class CareerC03CacheOnlyDiscoverabilityRecoveryWorkflowTest extends TestCa
     public function verify_and_apply_contracts_preserve_exact_career_and_non_career_sets(): void
     {
         $workflow = $this->workflow();
+        $readback = $this->publicReadbackRunner();
 
         foreach ([
             'PASS_C03_REVERIFIED_NO_APPLY_REQUIRED',
@@ -88,8 +89,12 @@ final class CareerC03CacheOnlyDiscoverabilityRecoveryWorkflowTest extends TestCa
             'revalidation_path_manifest: $inspect.revalidation_path_manifest',
             'revalidation_path_manifest_sha256: $inspect.revalidation_path_manifest_sha256',
             'non_career_url_set_sha256',
-            'xargs -P2',
-            'for round in 1 2; do',
+            'HOLD_PUBLIC_READBACK_FAILED',
+            'PUBLIC_READBACK_RUNNER_SHA256',
+            'public_recovered_incomplete_transfer_count',
+            'public_other_transport_failure_count',
+            'public_non_200_count',
+            'del(.detail_readback.network_attempt_count,.detail_readback.transport_retry_count,.detail_readback.recovered_transport_failure_count,.detail_readback.recovered_incomplete_transfer_count)',
             "'https://fermatmind.com/sitemap.xml'",
             "'https://fermatmind.com/llms.txt'",
             "'https://fermatmind.com/llms-full.txt'",
@@ -99,15 +104,87 @@ final class CareerC03CacheOnlyDiscoverabilityRecoveryWorkflowTest extends TestCa
             self::assertStringContainsString($contract, $workflow);
         }
 
-        self::assertStringNotContainsString('1046', $workflow);
-        self::assertStringNotContainsString('2092', $workflow);
-        self::assertStringNotContainsString('uses: ./.github/workflows/deploy-production.yml', $workflow);
-        self::assertStringNotContainsString('gh workflow run deploy-production.yml', $workflow);
-        self::assertStringNotContainsString('php artisan migrate', $workflow);
-        self::assertStringNotContainsString('queue:restart', $workflow);
-        self::assertStringNotContainsString('supervisorctl', $workflow);
-        self::assertStringNotContainsString('indexnow', strtolower($workflow));
-        self::assertStringNotContainsString('googleapis', strtolower($workflow));
+        $controlPlane = $workflow."\n".$readback;
+        self::assertStringNotContainsString('1046', $controlPlane);
+        self::assertStringNotContainsString('2092', $controlPlane);
+        self::assertStringNotContainsString('uses: ./.github/workflows/deploy-production.yml', $controlPlane);
+        self::assertStringNotContainsString('gh workflow run deploy-production.yml', $controlPlane);
+        self::assertStringNotContainsString('php artisan migrate', $controlPlane);
+        self::assertStringNotContainsString('queue:restart', $controlPlane);
+        self::assertStringNotContainsString('supervisorctl', $controlPlane);
+        self::assertStringNotContainsString('indexnow', strtolower($controlPlane));
+        self::assertStringNotContainsString('googleapis', strtolower($controlPlane));
+
+        foreach ([
+            'for round in 1 2; do',
+            'xargs -0 -P 2 -n 1',
+            "--proto '=https'",
+            '--request GET',
+            '--max-redirs 0',
+            '--connect-timeout 5',
+            '--max-time 20',
+            'sleep 1',
+        ] as $contract) {
+            self::assertStringContainsString($contract, $readback);
+        }
+
+        self::assertStringNotContainsString('--location', $readback);
+        self::assertStringNotContainsString('--request POST', $readback);
+        self::assertStringNotContainsString('--data', $readback);
+    }
+
+    #[Test]
+    public function bounded_readback_recovers_curl_18_once_and_does_not_retry_http_500(): void
+    {
+        $recovered = $this->runPublicReadback('recover18');
+        self::assertSame(0, $recovered['exit']);
+        self::assertSame(3, $recovered['curl_count']);
+        self::assertSame([
+            ['1', 'https://fermatmind.com/en/career/jobs/example-job', '200', '0', '2', '18'],
+            ['2', 'https://fermatmind.com/en/career/jobs/example-job', '200', '0', '1', '0'],
+        ], $recovered['rows']);
+
+        $httpFailure = $this->runPublicReadback('http500');
+        self::assertSame(0, $httpFailure['exit']);
+        self::assertSame(2, $httpFailure['curl_count']);
+        self::assertSame('500', $httpFailure['rows'][0][2]);
+        self::assertSame('1', $httpFailure['rows'][0][4]);
+        self::assertSame('0', $httpFailure['rows'][0][5]);
+    }
+
+    #[Test]
+    public function bounded_readback_records_terminal_curl_18_after_one_retry_per_round(): void
+    {
+        $result = $this->runPublicReadback('persistent18');
+
+        self::assertSame(0, $result['exit']);
+        self::assertSame(4, $result['curl_count']);
+        self::assertCount(2, $result['rows']);
+        foreach ($result['rows'] as $row) {
+            self::assertSame('18', $row[3]);
+            self::assertSame('2', $row[4]);
+            self::assertSame('18', $row[5]);
+        }
+    }
+
+    #[Test]
+    public function bounded_readback_rejects_duplicate_private_malformed_and_cross_locale_targets_before_curl(): void
+    {
+        foreach ([
+            [
+                'https://fermatmind.com/en/career/jobs/example-job',
+                'https://fermatmind.com/en/career/jobs/example-job',
+            ],
+            ['https://fermatmind.com/en/results/private'],
+            ['http://fermatmind.com/en/career/jobs/example-job'],
+            ['https://fermatmind.com/zh-CN/career/jobs/example-job'],
+        ] as $urls) {
+            $result = $this->runPublicReadback('success', $urls);
+
+            self::assertSame(2, $result['exit']);
+            self::assertSame(0, $result['curl_count']);
+            self::assertSame([], $result['rows']);
+        }
     }
 
     #[Test]
@@ -134,5 +211,92 @@ final class CareerC03CacheOnlyDiscoverabilityRecoveryWorkflowTest extends TestCa
         return (string) file_get_contents(
             dirname(__DIR__, 3).'/.github/workflows/career-c03-cache-only-discoverability-recovery.yml',
         );
+    }
+
+    private function publicReadbackRunner(): string
+    {
+        return (string) file_get_contents(
+            dirname(__DIR__, 2).'/scripts/operations/career_c03_bounded_public_readback.sh',
+        );
+    }
+
+    /**
+     * @param  list<string>|null  $urls
+     * @return array{exit: int, curl_count: int, rows: list<list<string>>}
+     */
+    private function runPublicReadback(string $mode, ?array $urls = null): array
+    {
+        $directory = sys_get_temp_dir().'/career-c03-readback-'.bin2hex(random_bytes(8));
+        self::assertTrue(mkdir($directory, 0700));
+        $inspection = $directory.'/inspection.json';
+        $output = $directory.'/detail-status.tsv';
+        $counter = $directory.'/curl-count';
+        $fakeCurl = $directory.'/curl';
+        file_put_contents($inspection, json_encode([
+            'expected_urls' => $urls ?? ['https://fermatmind.com/en/career/jobs/example-job'],
+        ], JSON_THROW_ON_ERROR));
+        file_put_contents($fakeCurl, <<<'BASH'
+#!/usr/bin/env bash
+set -euo pipefail
+count=0
+if [ -f "$FAKE_CURL_COUNT_FILE" ]; then
+  count="$(<"$FAKE_CURL_COUNT_FILE")"
+fi
+count=$((count + 1))
+printf '%s' "$count" > "$FAKE_CURL_COUNT_FILE"
+case "$FAKE_CURL_MODE" in
+  recover18)
+    printf '200'
+    if [ "$count" -eq 1 ]; then exit 18; fi
+    ;;
+  persistent18)
+    printf '000'
+    exit 18
+    ;;
+  http500)
+    printf '500'
+    ;;
+  success)
+    printf '200'
+    ;;
+  *)
+    exit 99
+    ;;
+esac
+BASH);
+        chmod($fakeCurl, 0700);
+
+        $environment = array_merge($_ENV, [
+            'PATH' => $directory.PATH_SEPARATOR.(string) getenv('PATH'),
+            'FAKE_CURL_COUNT_FILE' => $counter,
+            'FAKE_CURL_MODE' => $mode,
+        ]);
+        $process = proc_open(
+            ['bash', dirname(__DIR__, 2).'/scripts/operations/career_c03_bounded_public_readback.sh', $inspection, $output],
+            [1 => ['pipe', 'w'], 2 => ['pipe', 'w']],
+            $pipes,
+            dirname(__DIR__, 3),
+            $environment,
+        );
+        self::assertIsResource($process);
+        stream_get_contents($pipes[1]);
+        fclose($pipes[1]);
+        stream_get_contents($pipes[2]);
+        fclose($pipes[2]);
+        $exit = proc_close($process);
+        $rows = [];
+        if (is_file($output)) {
+            foreach (file($output, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
+                $rows[] = explode("\t", $line);
+            }
+        }
+        $curlCount = is_file($counter) ? (int) file_get_contents($counter) : 0;
+
+        foreach (glob($directory.'/*') ?: [] as $path) {
+            unlink($path);
+        }
+        rmdir($directory);
+
+        return ['exit' => $exit, 'curl_count' => $curlCount, 'rows' => $rows];
     }
 }

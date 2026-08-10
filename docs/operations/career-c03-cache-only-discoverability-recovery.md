@@ -4,7 +4,20 @@
 
 This control closes the exact failed production run `31373985399` and, only when machine verification proves it necessary, repairs allowlisted Career cache and derived discoverability state. It is not an application deployment path.
 
-The workflow is `.github/workflows/career-c03-cache-only-discoverability-recovery.yml`. Every invocation must run from the exact latest `main` SHA and bind the unchanged active revision. The runner is streamed to the active release and is not installed into the active release.
+The workflow is `.github/workflows/career-c03-cache-only-discoverability-recovery.yml`. Every invocation must run from the exact latest `main` SHA and bind the unchanged active revision. The control runner and `backend/scripts/operations/career_c03_bounded_public_readback.sh` helper are streamed to the active release and are not installed into the active release. Every success or sanitized public-readback failure receipt binds the exact helper SHA-256.
+
+## Bounded public detail readback
+
+Both the initial verification and post-apply revalidation use the same helper interface:
+
+```bash
+bash backend/scripts/operations/career_c03_bounded_public_readback.sh \
+  <inspection-json> <detail-status-tsv>
+```
+
+The inspection must contain a unique list of receipt-derived public EN/ZH Career detail HTTPS URLs. Invalid, duplicate, private or cross-locale targets fail before any request. The helper performs exactly two rounds with maximum concurrency two, explicit GET, redirects disabled, a five-second connect timeout and a 20-second request timeout. A transport exit retries exactly once after one second; an HTTP status failure does not retry. Response bodies are discarded, and the temporary TSV records only round, URL, final HTTP status, final curl exit, attempt count and first curl exit.
+
+Recovered transport failures are diagnostic and may pass. A terminal transport failure fails closed. Receipt aggregates distinguish recovered transport errors, recovered `curl(18)`, terminal `curl(18)`, final timeouts, other transport failures, 5xx and non-200 responses. Recovered-retry diagnostic counters are excluded from cache pre-state and rollback identity hashes.
 
 ## Fixed sequence
 
@@ -42,6 +55,7 @@ The authority inventory and current published cohort are derived from the exact 
 
 - `PASS_C03_REVERIFIED_NO_APPLY_REQUIRED`: C03 is PASS with zero production writes. Do not run `apply`.
 - `PASS_RECOVERY_REQUIRED`: C03 remains HOLD. Copy the exact one-time approval phrase and receipt lineage into `apply`.
+- `HOLD_PUBLIC_READBACK_FAILED`: stop on terminal transport, HTTP, private-leak or set-drift failure. The sanitized receipt contains aggregate counts and zero-write facts only; it contains no URL, body, topology, cache key or approval phrase.
 - Any HOLD status: stop. C03 remains HOLD and automatic retry is forbidden.
 
 ### 3. `apply` only when required
@@ -96,10 +110,11 @@ vendor/bin/pint --test \
   tests/Sre/CareerC03CacheOnlyDiscoverabilityRecoveryWorkflowTest.php \
   tests/Sre/CareerC03CacheOnlyDiscoverabilityControlTest.php
 php -l scripts/operations/career_c03_cache_only_discoverability_control.php
+bash -n scripts/operations/career_c03_bounded_public_readback.sh
 composer validate --strict
 ```
 
-From the repository root, also parse the workflow YAML, validate the exact five-file scope, and run `git diff --check`.
+From the repository root, also parse the workflow YAML, validate the exact six-file scope, and run `git diff --check`.
 
 ## Repository rule impact
 
