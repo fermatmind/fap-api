@@ -48897,11 +48897,13 @@ prs:
   - id: PUBLIC-TOPIC-GRAPH-AUTHORITY-CONTRACT-01
     repo: fap-api
     base: main
-    branch: codex/public-topic-graph-authority-contract-01
+    branch: codex/public-topic-graph-authority-g03-alignment-01
     title: "PUBLIC-TOPIC-GRAPH-AUTHORITY-CONTRACT-01: expose CMS-authoritative public topic edges"
-    status: ready_to_merge
+    status: in_progress
     depends_on:
       - PUBLIC-TOPIC-GRAPH-AUDIT-CLOSEOUT-01
+    external_dependencies:
+      - fap-web PUBLIC-TOPIC-GRAPH-G03-GOVERNED-REVIEW-01 merged in PR #2040 as 5466522801be6f71d01f0af96a495a84bddd059f
     train_scope: cms_authoritative_public_topic_edge_contract
     risk_level: p1_public_api_authority
     scope:
@@ -48920,6 +48922,7 @@ prs:
       - backend/app/Services/Cms/PublicTopicEdgeReadModel.php
       - backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php
       - backend/tests/Feature/V0_5/PublicTopicEdgeApiTest.php
+      - backend/tests/Fixtures/PublicTopicGraph/g03-governed-review.v1.json
       - backend/tests/Architecture/ReviewPolicyRegistryTest.php
       - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/docs/seo/public-topic-edge-authority-contract.md
@@ -48933,6 +48936,7 @@ prs:
       - Return private targets, unavailable targets, stale canonicals, or unsupported source and target types.
     validation:
       - cd backend && php artisan test tests/Feature/V0_5/PublicTopicEdgeApiTest.php --no-ansi
+      - verify the G03 fixture SHA/count/relation/Career contract against fap-web merge 5466522801be6f71d01f0af96a495a84bddd059f
       - cd backend && php artisan test tests/Architecture/ReviewPolicyRegistryTest.php --no-ansi
       - cd backend && php artisan route:list --path=api --except-vendor
       - cd backend && vendor/bin/pint --test routes/api.php app/Models/PublicTopicEdge.php app/Http/Controllers/API/V0_5/Cms/PublicTopicEdgeController.php app/Services/Cms/PublicTopicEdgeAuthorityResolver.php app/Services/Cms/PublicTopicEdgeReadModel.php app/Services/ReviewGovernance/ReviewPolicyRegistry.php database/migrations/2026_08_10_060000_create_public_topic_edges_table.php tests/Feature/V0_5/PublicTopicEdgeApiTest.php tests/Architecture/ReviewPolicyRegistryTest.php
