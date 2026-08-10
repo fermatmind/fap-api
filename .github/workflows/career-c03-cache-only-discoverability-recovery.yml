@@ -152,6 +152,7 @@ jobs:
         run: |
           set -euo pipefail
           runner='backend/scripts/operations/career_c03_cache_only_discoverability_control.php'
+          public_readback_runner='backend/scripts/operations/career_c03_bounded_public_readback.sh'
           test "$GITHUB_REF" = refs/heads/main
           [[ "$CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
           [[ "$EXPECTED_ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]
@@ -163,8 +164,15 @@ jobs:
           test -f "$runner"
           test ! -L "$runner"
           php -l "$runner" >/dev/null
-          printf 'RUNNER=%s\n' "$runner" >> "$GITHUB_ENV"
-          printf 'RUNNER_SHA256=%s\n' "$(sha256sum "$runner" | awk '{print $1}')" >> "$GITHUB_ENV"
+          test -f "$public_readback_runner"
+          test ! -L "$public_readback_runner"
+          bash -n "$public_readback_runner"
+          {
+            printf 'RUNNER=%s\n' "$runner"
+            printf 'RUNNER_SHA256=%s\n' "$(sha256sum "$runner" | awk '{print $1}')"
+            printf 'PUBLIC_READBACK_RUNNER=%s\n' "$public_readback_runner"
+            printf 'PUBLIC_READBACK_RUNNER_SHA256=%s\n' "$(sha256sum "$public_readback_runner" | awk '{print $1}')"
+          } >> "$GITHUB_ENV"
 
       - name: Validate protected production topology
         shell: bash
@@ -352,12 +360,14 @@ jobs:
             --arg control "$CONTROL_PLANE_SHA" \
             --arg active "$EXPECTED_ACTIVE_REVISION" \
             --arg authority "$AUTHORITY_PROJECTION_SHA256" \
+            --arg readback_runner "$PUBLIC_READBACK_RUNNER_SHA256" \
             --argjson run_id "$INCIDENT_CLOSEOUT_RUN_ID" \
             --argjson attempt "$INCIDENT_CLOSEOUT_RUN_ATTEMPT" '
             .status == "PASS_INCIDENT_CLOSED"
             and .control_plane_sha == $control
             and .active_revision == $active
             and .authority_artifact_sha256 == $authority
+            and .public_readback_runner_sha256 == $readback_runner
             and .workflow_run_id == $run_id
             and .workflow_run_attempt == $attempt
             and .failed_deploy_run_id == 31373985399
@@ -394,12 +404,14 @@ jobs:
             --arg control "$CONTROL_PLANE_SHA" \
             --arg active "$EXPECTED_ACTIVE_REVISION" \
             --arg incident_sha "$EXPECTED_INCIDENT_CLOSEOUT_RECEIPT_SHA256" \
+            --arg readback_runner "$PUBLIC_READBACK_RUNNER_SHA256" \
             --argjson run_id "$VERIFY_RUN_ID" \
             --argjson attempt "$VERIFY_RUN_ATTEMPT" '
             .status == "PASS_RECOVERY_REQUIRED"
             and .control_plane_sha == $control
             and .active_revision == $active
             and .incident_closeout_receipt_sha256 == $incident_sha
+            and .public_readback_runner_sha256 == $readback_runner
             and .workflow_run_id == $run_id
             and .workflow_run_attempt == $attempt
             and .detail_repair_target_count <= 250
@@ -476,19 +488,8 @@ jobs:
           second=$!
           wait "$first"; wait "$second"
 
-          : > "$dir/detail-status.tsv"
-          for round in 1 2; do
-            export round
-            # The child shell reads the exported round value.
-            # shellcheck disable=SC2016
-            jq -r '.expected_urls[]' "$RUNNER_TEMP/career-c03-inspection.json" \
-              | xargs -P2 -I{} bash -c '
-                  set +e
-                  code="$(curl --http1.1 -sS --connect-timeout 10 --max-time 60 -o /dev/null -w "%{http_code}" -H "Cache-Control: no-cache" "$1")"
-                  rc=$?
-                  printf "%s\t%s\t%s\t%s\n" "$round" "$1" "${code:-000}" "$rc"
-                ' _ {} >> "$dir/detail-status.tsv"
-          done
+          bash "$PUBLIC_READBACK_RUNNER" \
+            "$RUNNER_TEMP/career-c03-inspection.json" "$dir/detail-status.tsv"
 
           set +e
           php "$RUNNER" public-verify \
@@ -501,7 +502,19 @@ jobs:
           verify_rc=$?
           set -e
           jq -e 'type == "object"' "$RUNNER_TEMP/career-c03-public-verification.json" >/dev/null
+          public_failure_code="$(jq -r '
+            if .detail_readback.incomplete_transfer_count > 0 then "PUBLIC_TRANSPORT_INCOMPLETE"
+            elif .detail_readback.timeout_count > 0 then "PUBLIC_TRANSPORT_TIMEOUT"
+            elif .detail_readback.other_transport_failure_count > 0 then "PUBLIC_TRANSPORT_OTHER"
+            elif .detail_readback.server_error_count > 0 then "PUBLIC_HTTP_5XX"
+            elif .detail_readback.non_200_count > 0 then "PUBLIC_HTTP_NON_200"
+            elif .private_path_leak_count > 0 then "PUBLIC_PRIVATE_PATH_LEAK"
+            elif (.surface_mismatches | length) > 0 then "PUBLIC_SET_DRIFT"
+            else "PUBLIC_READBACK_UNKNOWN"
+            end
+          ' "$RUNNER_TEMP/career-c03-public-verification.json")"
           printf 'PUBLIC_VERIFY_RC=%s\n' "$verify_rc" >> "$GITHUB_ENV"
+          printf 'PUBLIC_FAILURE_CODE=%s\n' "$public_failure_code" >> "$GITHUB_ENV"
 
       - name: Write corrected incident closeout receipt
         if: inputs.mode == 'incident_closeout'
@@ -510,6 +523,48 @@ jobs:
           set -euo pipefail
           inspect="$RUNNER_TEMP/career-c03-inspection.json"
           public="$RUNNER_TEMP/career-c03-public-verification.json"
+          if [ "$PUBLIC_VERIFY_RC" != 0 ]; then
+            jq -n \
+              --arg mode incident_closeout \
+              --arg control "$CONTROL_PLANE_SHA" \
+              --arg active "$EXPECTED_ACTIVE_REVISION" \
+              --arg runner "$RUNNER_SHA256" \
+              --arg readback_runner "$PUBLIC_READBACK_RUNNER_SHA256" \
+              --arg failure "$PUBLIC_FAILURE_CODE" \
+              --arg run_id "$GITHUB_RUN_ID" \
+              --arg attempt "$GITHUB_RUN_ATTEMPT" \
+              --argjson public "$(<"$public")" '
+              {
+                contract_version: "career.c03.cache_only_discoverability_recovery.v1",
+                mode: $mode,
+                status: "HOLD_PUBLIC_READBACK_FAILED",
+                safe_failure_code: $failure,
+                control_plane_sha: $control,
+                active_revision: $active,
+                runner_sha256: $runner,
+                public_readback_runner_sha256: $readback_runner,
+                workflow_run_id: ($run_id | tonumber),
+                workflow_run_attempt: ($attempt | tonumber),
+                detail_readback: $public.detail_readback,
+                surface_mismatch_count: ($public.surface_mismatches | length),
+                private_path_leak_count: $public.private_path_leak_count,
+                cache_write_count: 0,
+                database_write_count: 0,
+                publication_write_count: 0,
+                indexability_write_count: 0,
+                deploy_count: 0,
+                migration_count: 0,
+                symlink_write_count: 0,
+                process_restart_count: 0,
+                queue_reload_count: 0,
+                sitemap_submission_count: 0,
+                llms_submission_count: 0,
+                search_submission_count: 0,
+                career_link_publication_gate: "CLOSED",
+                automatic_retry_allowed: false
+              }' > "$RECEIPT"
+            exit 1
+          fi
           test "$PUBLIC_VERIFY_RC" = 0
           jq -e '.converged == true' "$public" >/dev/null
           jq -e '.migration_record_present == true and .public_topic_edges_table_present == true' "$inspect" >/dev/null
@@ -517,6 +572,7 @@ jobs:
             --arg control "$CONTROL_PLANE_SHA" \
             --arg active "$EXPECTED_ACTIVE_REVISION" \
             --arg runner "$RUNNER_SHA256" \
+            --arg readback_runner "$PUBLIC_READBACK_RUNNER_SHA256" \
             --arg authority "$AUTHORITY_PROJECTION_SHA256" \
             --arg failed_run "$FAILED_DEPLOY_RUN_ID" \
             --arg failed_attempt "$FAILED_DEPLOY_RUN_ATTEMPT" \
@@ -535,6 +591,7 @@ jobs:
               control_plane_sha: $control,
               active_revision: $active,
               runner_sha256: $runner,
+              public_readback_runner_sha256: $readback_runner,
               workflow_run_id: ($run_id | tonumber),
               workflow_run_attempt: ($attempt | tonumber),
               failed_deploy_run_id: ($failed_run | tonumber),
@@ -570,7 +627,14 @@ jobs:
               published_cohort: $inspect.authority,
               public_readback: $public.expected,
               public_timeout_count: $public.detail_readback.timeout_count,
+              public_transport_retry_count: $public.detail_readback.transport_retry_count,
+              public_recovered_transport_failure_count: $public.detail_readback.recovered_transport_failure_count,
+              public_recovered_incomplete_transfer_count: $public.detail_readback.recovered_incomplete_transfer_count,
+              public_terminal_transport_failure_count: $public.detail_readback.terminal_transport_failure_count,
+              public_incomplete_transfer_count: $public.detail_readback.incomplete_transfer_count,
+              public_other_transport_failure_count: $public.detail_readback.other_transport_failure_count,
               public_5xx_count: $public.detail_readback.server_error_count,
+              public_non_200_count: $public.detail_readback.non_200_count,
               private_path_leak_count: $public.private_path_leak_count,
               active_revision_unchanged: true,
               deploy_lock_absent: true,
@@ -603,7 +667,7 @@ jobs:
           inspect="$RUNNER_TEMP/career-c03-inspection.json"
           public="$RUNNER_TEMP/career-c03-public-verification.json"
           pre_state="$(jq -Scn --argjson inspect "$(<"$inspect")" --argjson public "$(<"$public")" \
-            '{authority_artifact_sha256:$inspect.authority_artifact_sha256,authority:$inspect.authority,coverage:$inspect.coverage,detail_coverage:$inspect.detail_coverage,job_index_converged:$inspect.job_index_converged,directory_converged:$inspect.directory_converged,sitemap_source_converged:$inspect.sitemap_source_converged,public:$public}' \
+            '{authority_artifact_sha256:$inspect.authority_artifact_sha256,authority:$inspect.authority,coverage:$inspect.coverage,detail_coverage:$inspect.detail_coverage,job_index_converged:$inspect.job_index_converged,directory_converged:$inspect.directory_converged,sitemap_source_converged:$inspect.sitemap_source_converged,public:($public | del(.detail_readback.network_attempt_count,.detail_readback.transport_retry_count,.detail_readback.recovered_transport_failure_count,.detail_readback.recovered_incomplete_transfer_count))}' \
             | sha256sum | awk '{print $1}')"
           incident_sha="$EXPECTED_INCIDENT_CLOSEOUT_RECEIPT_SHA256"
           if [ "$PUBLIC_VERIFY_RC" = 0 ] && jq -e '.internal_converged == true' "$inspect" >/dev/null; then
@@ -613,20 +677,66 @@ jobs:
             .job_index_converged == true
             and ((.coverage.missing_count + .coverage.broken_count) <= 250)
             and $public.private_path_leak_count == 0
+            and $public.detail_readback.terminal_transport_failure_count == 0
             and $public.detail_readback.timeout_count == 0
             and $public.detail_readback.server_error_count == 0
+            and $public.detail_readback.non_200_count == 0
             and (($public.surface_mismatches | index("jobs")) == null)' "$inspect" >/dev/null; then
             status=PASS_RECOVERY_REQUIRED
             expected_phrase="I explicitly approve Career C03 cache-only discoverability recovery for control ${CONTROL_PLANE_SHA}, active ${EXPECTED_ACTIVE_REVISION}, incident closeout run ${INCIDENT_CLOSEOUT_RUN_ID} attempt ${INCIDENT_CLOSEOUT_RUN_ATTEMPT}, verify run ${GITHUB_RUN_ID} attempt ${GITHUB_RUN_ATTEMPT}, authority ${AUTHORITY_PROJECTION_SHA256}, target set $(jq -r '.target_set_sha256' "$inspect"), pre-state ${pre_state}; repair at most 250 current published detail cache targets, rebuild only en/zh directories, refresh sitemap/llms derived caches, revalidate exact receipt paths, and keep deploy, migration, CMS/database authority, publication, eligibility, restart, queue, and search submission at zero."
           else
-            status=HOLD_NON_RECOVERABLE_DRIFT
-            expected_phrase=''
+            if [ "$PUBLIC_VERIFY_RC" = 0 ]; then
+              status=HOLD_NON_RECOVERABLE_DRIFT
+              expected_phrase=''
+            else
+            jq -n \
+              --arg mode verify \
+              --arg control "$CONTROL_PLANE_SHA" \
+              --arg active "$EXPECTED_ACTIVE_REVISION" \
+              --arg runner "$RUNNER_SHA256" \
+              --arg readback_runner "$PUBLIC_READBACK_RUNNER_SHA256" \
+              --arg failure "$PUBLIC_FAILURE_CODE" \
+              --arg run_id "$GITHUB_RUN_ID" \
+              --arg attempt "$GITHUB_RUN_ATTEMPT" \
+              --argjson public "$(<"$public")" '
+              {
+                contract_version: "career.c03.cache_only_discoverability_recovery.v1",
+                mode: $mode,
+                status: "HOLD_PUBLIC_READBACK_FAILED",
+                safe_failure_code: $failure,
+                control_plane_sha: $control,
+                active_revision: $active,
+                runner_sha256: $runner,
+                public_readback_runner_sha256: $readback_runner,
+                workflow_run_id: ($run_id | tonumber),
+                workflow_run_attempt: ($attempt | tonumber),
+                detail_readback: $public.detail_readback,
+                surface_mismatch_count: ($public.surface_mismatches | length),
+                private_path_leak_count: $public.private_path_leak_count,
+                cache_write_count: 0,
+                database_write_count: 0,
+                publication_write_count: 0,
+                indexability_write_count: 0,
+                deploy_count: 0,
+                migration_count: 0,
+                symlink_write_count: 0,
+                process_restart_count: 0,
+                queue_reload_count: 0,
+                sitemap_submission_count: 0,
+                llms_submission_count: 0,
+                search_submission_count: 0,
+                career_link_publication_gate: "CLOSED",
+                automatic_retry_allowed: false
+              }' > "$RECEIPT"
+            exit 1
+            fi
           fi
           jq -n \
             --arg status "$status" \
             --arg control "$CONTROL_PLANE_SHA" \
             --arg active "$EXPECTED_ACTIVE_REVISION" \
             --arg runner "$RUNNER_SHA256" \
+            --arg readback_runner "$PUBLIC_READBACK_RUNNER_SHA256" \
             --arg authority "$AUTHORITY_PROJECTION_SHA256" \
             --arg incident_run "$INCIDENT_CLOSEOUT_RUN_ID" \
             --arg incident_attempt "$INCIDENT_CLOSEOUT_RUN_ATTEMPT" \
@@ -644,6 +754,7 @@ jobs:
               control_plane_sha: $control,
               active_revision: $active,
               runner_sha256: $runner,
+              public_readback_runner_sha256: $readback_runner,
               workflow_run_id: ($run_id | tonumber),
               workflow_run_attempt: ($attempt | tonumber),
               incident_closeout_run_id: ($incident_run | tonumber),
@@ -665,7 +776,14 @@ jobs:
               public_converged: $public.converged,
               detail_repair_target_count: ($inspect.coverage.missing_count + $inspect.coverage.broken_count),
               public_timeout_count: $public.detail_readback.timeout_count,
+              public_transport_retry_count: $public.detail_readback.transport_retry_count,
+              public_recovered_transport_failure_count: $public.detail_readback.recovered_transport_failure_count,
+              public_recovered_incomplete_transfer_count: $public.detail_readback.recovered_incomplete_transfer_count,
+              public_terminal_transport_failure_count: $public.detail_readback.terminal_transport_failure_count,
+              public_incomplete_transfer_count: $public.detail_readback.incomplete_transfer_count,
+              public_other_transport_failure_count: $public.detail_readback.other_transport_failure_count,
               public_5xx_count: $public.detail_readback.server_error_count,
+              public_non_200_count: $public.detail_readback.non_200_count,
               private_path_leak_count: $public.private_path_leak_count,
               non_career_url_set_sha256: $public.non_career_url_set_sha256,
               expected_apply_approval_phrase: $expected_phrase,
@@ -698,7 +816,7 @@ jobs:
           current_pre_state="$(jq -Scn \
             --argjson inspect "$(<"$RUNNER_TEMP/career-c03-inspection.json")" \
             --argjson public "$(<"$RUNNER_TEMP/career-c03-public-verification.json")" \
-            '{authority_artifact_sha256:$inspect.authority_artifact_sha256,authority:$inspect.authority,coverage:$inspect.coverage,detail_coverage:$inspect.detail_coverage,job_index_converged:$inspect.job_index_converged,directory_converged:$inspect.directory_converged,sitemap_source_converged:$inspect.sitemap_source_converged,public:$public}' \
+            '{authority_artifact_sha256:$inspect.authority_artifact_sha256,authority:$inspect.authority,coverage:$inspect.coverage,detail_coverage:$inspect.detail_coverage,job_index_converged:$inspect.job_index_converged,directory_converged:$inspect.directory_converged,sitemap_source_converged:$inspect.sitemap_source_converged,public:($public | del(.detail_readback.network_attempt_count,.detail_readback.transport_retry_count,.detail_readback.recovered_transport_failure_count,.detail_readback.recovered_incomplete_transfer_count))}' \
             | sha256sum | awk '{print $1}')"
           test "$current_pre_state" = "$(jq -r '.pre_state_sha256' "$verify")"
           test "$(jq -Sc '.cache_key_manifest' "$RUNNER_TEMP/career-c03-inspection.json")" = "$(jq -Sc '.cache_key_manifest' "$verify")"
@@ -791,19 +909,7 @@ jobs:
             fetch 'https://fermatmind.com/llms-full.txt' "$dir/llms-full.txt" &
             second=$!
             wait "$first"; wait "$second"
-            : > "$dir/detail-status.tsv"
-            for round in 1 2; do
-              export round
-              # The child shell reads the exported round value.
-              # shellcheck disable=SC2016
-              jq -r '.expected_urls[]' "$inspection" \
-                | xargs -P2 -I{} bash -c '
-                    set +e
-                    code="$(curl --http1.1 -sS --connect-timeout 10 --max-time 60 -o /dev/null -w "%{http_code}" -H "Cache-Control: no-cache" "$1")"
-                    rc=$?
-                    printf "%s\t%s\t%s\t%s\n" "$round" "$1" "${code:-000}" "$rc"
-                  ' _ {} >> "$dir/detail-status.tsv"
-            done
+            bash "$PUBLIC_READBACK_RUNNER" "$inspection" "$dir/detail-status.tsv"
             set +e
             php "$RUNNER" public-verify \
               "$inspection" \
@@ -853,7 +959,7 @@ jobs:
               restored_pre_state="$(jq -Scn \
                 --argjson inspect "$(<"$RUNNER_TEMP/career-c03-restored-inspection.json")" \
                 --argjson public "$(<"$RUNNER_TEMP/career-c03-public-restored.json")" \
-                '{authority_artifact_sha256:$inspect.authority_artifact_sha256,authority:$inspect.authority,coverage:$inspect.coverage,detail_coverage:$inspect.detail_coverage,job_index_converged:$inspect.job_index_converged,directory_converged:$inspect.directory_converged,sitemap_source_converged:$inspect.sitemap_source_converged,public:$public}' \
+                '{authority_artifact_sha256:$inspect.authority_artifact_sha256,authority:$inspect.authority,coverage:$inspect.coverage,detail_coverage:$inspect.detail_coverage,job_index_converged:$inspect.job_index_converged,directory_converged:$inspect.directory_converged,sitemap_source_converged:$inspect.sitemap_source_converged,public:($public | del(.detail_readback.network_attempt_count,.detail_readback.transport_retry_count,.detail_readback.recovered_transport_failure_count,.detail_readback.recovered_incomplete_transfer_count))}' \
                 | sha256sum | awk '{print $1}')"
               if [ "$restored_pre_state" = "$(jq -r '.pre_state_sha256' "$verify")" ]; then
                 rollback_complete=true
@@ -908,6 +1014,7 @@ jobs:
             --arg control "$CONTROL_PLANE_SHA" \
             --arg active "$EXPECTED_ACTIVE_REVISION" \
             --arg runner "$RUNNER_SHA256" \
+            --arg readback_runner "$PUBLIC_READBACK_RUNNER_SHA256" \
             --arg authority "$AUTHORITY_PROJECTION_SHA256" \
             --arg incident_run "$INCIDENT_CLOSEOUT_RUN_ID" \
             --arg incident_sha "$EXPECTED_INCIDENT_CLOSEOUT_RECEIPT_SHA256" \
@@ -926,6 +1033,7 @@ jobs:
               control_plane_sha: $control,
               active_revision: $active,
               runner_sha256: $runner,
+              public_readback_runner_sha256: $readback_runner,
               workflow_run_id: ($run_id | tonumber),
               workflow_run_attempt: ($attempt | tonumber),
               incident_closeout_run_id: ($incident_run | tonumber),
@@ -941,7 +1049,14 @@ jobs:
               detail_repair_target_count: $apply.detail_repair_target_count,
               frontend_revalidation_path_count: $apply.frontend_revalidation_path_count,
               public_timeout_count: $public.detail_readback.timeout_count,
+              public_transport_retry_count: $public.detail_readback.transport_retry_count,
+              public_recovered_transport_failure_count: $public.detail_readback.recovered_transport_failure_count,
+              public_recovered_incomplete_transfer_count: $public.detail_readback.recovered_incomplete_transfer_count,
+              public_terminal_transport_failure_count: $public.detail_readback.terminal_transport_failure_count,
+              public_incomplete_transfer_count: $public.detail_readback.incomplete_transfer_count,
+              public_other_transport_failure_count: $public.detail_readback.other_transport_failure_count,
               public_5xx_count: $public.detail_readback.server_error_count,
+              public_non_200_count: $public.detail_readback.non_200_count,
               private_path_leak_count: $public.private_path_leak_count,
               non_career_url_set_sha256: $public.non_career_url_set_sha256,
               operator_approval_phrase_sha256: $approval_sha,
@@ -971,11 +1086,13 @@ jobs:
             verify) expected_re='^(PASS_C03_REVERIFIED_NO_APPLY_REQUIRED|PASS_RECOVERY_REQUIRED)$' ;;
             apply) expected=PASS_C03_RECOVERED ;;
           esac
-          jq -e --arg mode "$MODE" --arg control "$CONTROL_PLANE_SHA" --arg active "$EXPECTED_ACTIVE_REVISION" '
+          jq -e --arg mode "$MODE" --arg control "$CONTROL_PLANE_SHA" --arg active "$EXPECTED_ACTIVE_REVISION" \
+            --arg readback_runner "$PUBLIC_READBACK_RUNNER_SHA256" '
             .contract_version == "career.c03.cache_only_discoverability_recovery.v1"
             and .mode == $mode
             and .control_plane_sha == $control
             and .active_revision == $active
+            and .public_readback_runner_sha256 == $readback_runner
             and .career_link_publication_gate == "CLOSED"
             and .database_write_count == 0
             and .publication_write_count == 0
