@@ -749,10 +749,8 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
 
         foreach ([
             '.github/workflows/career-detail-production-cache-repair.yml',
-            '.github/workflows/career-detail-staging-cache-repair.yml',
             '.github/workflows/deploy.yml',
             '.github/workflows/mbti-comp-runtime46-production-ops.yml',
-            '.github/workflows/mbti-comp-runtime46-staging-dry-run.yml',
             'backend/app/Filament/Ops/Resources/AdminApprovalResource.php',
             'backend/app/Models/AdminApproval.php',
             'backend/app/Models/DailyGivingRecord.php',
@@ -883,7 +881,8 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('code-only scope requires an external trusted SHA-256 receipt for deploy.yml.', $source);
         $this->assertStringContainsString('sha256sum .github/workflows/deploy.yml', $source);
         $this->assertStringContainsString('code-only scope refused deploy.yml because its SHA-256 does not match the external trusted receipt.', $source);
-        $this->assertStringNotContainsString('.github/workflows/career-detail-staging-cache-repair.yml|.github/workflows/deploy.yml|', $source);
+        $this->assertStringNotContainsString('.github/workflows/career-detail-staging-cache-repair.yml', $source);
+        $this->assertStringNotContainsString('.github/workflows/mbti-comp-runtime46-staging-dry-run.yml', $source);
         $this->assertStringContainsString('backend/database/*', $source);
         $this->assertStringContainsString('backend/content_baselines/*', $source);
         $this->assertStringContainsString('content_packages/*', $source);
