@@ -174,16 +174,37 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringContainsString('Ensure a sanitized incident receipt exists', $incident);
         $this->assertStringContainsString('transport_or_bootstrap_failed', $incident);
         foreach ([
-            'cms_or_db_write_count: 0',
-            'deploy_attempted: false',
-            'deploy_lock_modified: false',
-            'process_restart_attempted: false',
-            'queue_or_cache_operation_attempted: false',
-            'publication_or_seo_mutation_attempted: false',
+            'Download sanitized Deployer timing evidence',
+            'deployer-task-timing-production',
+            'fermatmind.backend-production-incident-diagnostic.v2',
+            'timing_evidence_available: $timing_evidence_available',
+            'task_evidence: $task_evidence',
+            'deploy_lock_metadata_present: $remote.deploy_lock_metadata_present',
+            'cms_or_db_write_count: null',
+            'cms_or_db_operation_attempted:',
+            'deploy_attempted:',
+            'activation_completed:',
+            'deploy_lock_modified:',
+            'process_restart_attempted:',
+            'queue_or_cache_operation_attempted:',
+            'publication_or_seo_mutation_attempted:',
+            'result("artisan:migrate")',
+            'result("career:rebuild-directory-after-detail-repair")',
+            'result("seo:sitemap-source-cache-rebuilt")',
+            'result("guard:public-dns-health")',
+            'result("deploy:symlink")',
         ] as $contract) {
             $this->assertStringContainsString($contract, $incident);
         }
-        foreach (['queue:restart', 'deploy:unlock', 'artisan migrate', 'dep deploy'] as $forbidden) {
+        foreach ([
+            'cms_or_db_write_count: 0',
+            'deploy_attempted: false',
+            'queue_or_cache_operation_attempted: false',
+            'publication_or_seo_mutation_attempted: false',
+        ] as $falseClaim) {
+            $this->assertStringNotContainsString($falseClaim, $incident);
+        }
+        foreach (['queue:restart --no-interaction', '--task deploy:unlock', 'php artisan migrate', 'vendor/bin/dep deploy'] as $forbidden) {
             $this->assertStringNotContainsString($forbidden, $incident);
         }
     }
@@ -286,6 +307,7 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
     public function test_revision_queue_restart_and_both_smoke_steps_are_mandatory(): void
     {
         $deploy = strstr($this->workflow(), '  deploy-production:') ?: '';
+        $deploy = strstr($deploy, '  production-incident-diagnostic:', true) ?: $deploy;
         foreach ([
             'Deploy production with Deployer',
             'Restart queue workers through Laravel queue restart',
@@ -356,6 +378,11 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringContainsString('429|502|503|504) return 75', $publicBusinessCommand);
         $this->assertStringContainsString('case "$attempt" in 1) sleep 2 ;; 2) sleep 5', $publicBusinessCommand);
         $this->assertStringContainsString('Public DNS business evidence failed after 3 attempts', $publicBusinessCommand);
+        $this->assertStringContainsString('PROBE_STAGE=public_health', $publicBusinessCommand);
+        $this->assertStringContainsString('PROBE_STAGE=public_flags', $publicBusinessCommand);
+        $this->assertStringContainsString('PROBE_STAGE=public_bigfive', $publicBusinessCommand);
+        $this->assertStringContainsString('PROBE_STAGE=public_bigfive_contract', $publicBusinessCommand);
+        $this->assertStringContainsString('stage=${PROBE_STAGE} status=${PROBE_STATUS:-none}', $publicBusinessCommand);
         $this->assertStringContainsString("deployHttpsUrlArg(\$host, '/api/healthz')", $publicBusinessCommand);
         $this->assertStringContainsString("deployHttpsUrlArg(\$host, '/api/v0.3/flags')", $publicBusinessCommand);
         $this->assertStringContainsString(
@@ -372,6 +399,7 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $workflow = $this->workflow();
         $eligibility = $this->between($workflow, '  deployment-eligibility:', '  deploy-production:');
         $deploy = strstr($workflow, '  deploy-production:') ?: '';
+        $deploy = strstr($deploy, '  production-incident-diagnostic:', true) ?: $deploy;
 
         $this->assertStringContainsString('fetch-depth: 0', $eligibility);
         $this->assertStringContainsString('expected_deployed_revision as a lowercase 40-character deployed REVISION', $eligibility);
@@ -684,6 +712,7 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $workflow = $this->workflow();
         $eligibility = $this->between($workflow, '  deployment-eligibility:', '  deploy-production:');
         $deploy = strstr($workflow, '  deploy-production:') ?: '';
+        $deploy = strstr($deploy, '  production-incident-diagnostic:', true) ?: $deploy;
 
         foreach ([
             'schema_only requires one exact approved_migration filename.',

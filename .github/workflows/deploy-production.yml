@@ -1921,6 +1921,14 @@ jobs:
           ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
             || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
 
+      - name: Download sanitized Deployer timing evidence
+        id: timing_evidence
+        continue-on-error: true
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          name: deployer-task-timing-production
+          path: incident-timing
+
       - name: Capture read-only deploy incident receipt
         shell: bash
         run: |
@@ -1943,6 +1951,8 @@ jobs:
           [[ "$revision" =~ ^[0-9a-f]{40}$ ]]
           lock_present=false
           [ -e "$DEPLOY_PATH/.dep/deploy.lock" ] && lock_present=true
+          lock_metadata_present=false
+          [ -e "$DEPLOY_PATH/.dep/deploy.lock.meta.json" ] && lock_metadata_present=true
           nginx=unknown
           php_fpm=unknown
           supervisor=unknown
@@ -1956,30 +1966,116 @@ jobs:
           if command -v supervisorctl >/dev/null 2>&1; then
             supervisorctl status >/dev/null 2>&1 && supervisor=available || supervisor=degraded
           fi
-          jq -cn --arg revision "$revision" --arg nginx "$nginx" --arg php_fpm "$php_fpm" --arg supervisor "$supervisor" --argjson lock_present "$lock_present" '{active_revision: $revision, deploy_lock_present: $lock_present, nginx: $nginx, php_fpm: $php_fpm, supervisor: $supervisor}'
+          jq -cn --arg revision "$revision" --arg nginx "$nginx" --arg php_fpm "$php_fpm" --arg supervisor "$supervisor" --argjson lock_present "$lock_present" --argjson lock_metadata_present "$lock_metadata_present" '{active_revision: $revision, deploy_lock_present: $lock_present, deploy_lock_metadata_present: $lock_metadata_present, nginx: $nginx, php_fpm: $php_fpm, supervisor: $supervisor}'
           REMOTE
           )"
           public_health_status="$(curl -sS --connect-timeout 5 --max-time 15 -o /dev/null -w '%{http_code}' "$HEALTHCHECK_URL" 2>/dev/null || true)"
+          timing_path="incident-timing/deployer-task-timing.json"
+          timing_evidence_available=false
+          task_evidence='{}'
+          if [ -s "$timing_path" ] && jq -e \
+            --arg sha "$DEPLOY_SHA" \
+            --arg run_id "$GITHUB_RUN_ID" \
+            --arg run_attempt "$GITHUB_RUN_ATTEMPT" '
+              .schema_version == "fermatmind.deployer-task-timing.v1"
+              and .sha == $sha
+              and .workflow_run_id == $run_id
+              and .workflow_run_attempt == $run_attempt
+              and (.tasks | type == "array")
+            ' "$timing_path" >/dev/null; then
+            timing_evidence_available=true
+            task_evidence="$(jq -c '
+              def result($name): ([.tasks[] | select(.task == $name) | .result] | last) // "absent";
+              {
+                deploy_lock: result("deploy:lock"),
+                migrate: result("artisan:migrate"),
+                seed_default_scales: result("artisan:scales:seed-default"),
+                career_detail_repair: result("career:repair-published-detail-cache-coverage"),
+                career_authority_cache: (
+                  if result("career:public-authority-cache-rebuilt") == "success" then "rebuilt"
+                  elif result("career:public-authority-cache-verified_unchanged") == "success" then "verified_unchanged"
+                  else result("career:warm-public-authority-cache") end
+                ),
+                career_directory_rebuild: result("career:rebuild-directory-after-detail-repair"),
+                sitemap_source_cache: (
+                  if result("seo:sitemap-source-cache-rebuilt") == "success" then "rebuilt"
+                  else result("seo:warm-sitemap-source-cache") end
+                ),
+                public_dns_guard: result("guard:public-dns-health"),
+                symlink: result("deploy:symlink"),
+                php_fpm_reload: result("reload:php-fpm"),
+                nginx_reload: result("reload:nginx"),
+                queue_reload: result("queue:reload-workers"),
+                deploy_unlock: result("deploy:unlock"),
+                lock_metadata_remove: result("fap:remove-deploy-lock-metadata")
+              }
+            ' "$timing_path")"
+          fi
           jq -n \
-            --arg schema_version "fermatmind.backend-production-incident-diagnostic.v1" \
+            --arg schema_version "fermatmind.backend-production-incident-diagnostic.v2" \
             --arg deploy_sha "$DEPLOY_SHA" \
             --arg release_id "$RELEASE_ID" \
             --arg workflow_run_id "$GITHUB_RUN_ID" \
             --arg workflow_run_attempt "$GITHUB_RUN_ATTEMPT" \
             --arg public_health_status "$public_health_status" \
             --argjson remote "$remote_receipt" \
-            '{schema_version: $schema_version, status: "hold_no_retry", deploy_sha: $deploy_sha, release_id: $release_id, workflow_run_id: $workflow_run_id, workflow_run_attempt: $workflow_run_attempt, active_revision: $remote.active_revision, deploy_lock_present: $remote.deploy_lock_present, nginx: $remote.nginx, php_fpm: $remote.php_fpm, supervisor: $remote.supervisor, public_health_status: $public_health_status, cms_or_db_write_count: 0, deploy_attempted: false, deploy_lock_modified: false, process_restart_attempted: false, queue_or_cache_operation_attempted: false, publication_or_seo_mutation_attempted: false}' > artifacts/backend-production-incident-diagnostic.json
+            --argjson timing_evidence_available "$timing_evidence_available" \
+            --argjson task_evidence "$task_evidence" \
+            '{
+              schema_version: $schema_version,
+              status: "hold_no_retry",
+              deploy_sha: $deploy_sha,
+              release_id: $release_id,
+              workflow_run_id: $workflow_run_id,
+              workflow_run_attempt: $workflow_run_attempt,
+              active_revision: $remote.active_revision,
+              deploy_lock_present: $remote.deploy_lock_present,
+              deploy_lock_metadata_present: $remote.deploy_lock_metadata_present,
+              nginx: $remote.nginx,
+              php_fpm: $remote.php_fpm,
+              supervisor: $remote.supervisor,
+              public_health_status: $public_health_status,
+              timing_evidence_available: $timing_evidence_available,
+              task_evidence: $task_evidence,
+              cms_or_db_write_count: null,
+              cms_or_db_operation_attempted: (
+                if $timing_evidence_available then
+                  (($task_evidence.migrate | IN("success", "failure")) or ($task_evidence.seed_default_scales | IN("success", "failure")))
+                else null end
+              ),
+              deploy_attempted: (if $timing_evidence_available then ($task_evidence.deploy_lock != "absent" and $task_evidence.deploy_lock != "skipped") else null end),
+              activation_completed: ($remote.active_revision == $deploy_sha),
+              deploy_lock_modified: (if $timing_evidence_available then ($task_evidence.deploy_lock == "success") else null end),
+              process_restart_attempted: (
+                if $timing_evidence_available then
+                  any([$task_evidence.php_fpm_reload, $task_evidence.nginx_reload][]; . != "absent" and . != "skipped")
+                else null end
+              ),
+              queue_or_cache_operation_attempted: (
+                if $timing_evidence_available then
+                  any([$task_evidence.career_detail_repair, $task_evidence.career_authority_cache, $task_evidence.career_directory_rebuild, $task_evidence.sitemap_source_cache, $task_evidence.queue_reload][]; . != "absent" and . != "skipped")
+                else null end
+              ),
+              publication_or_seo_mutation_attempted: (
+                if $timing_evidence_available then ($task_evidence.sitemap_source_cache == "rebuilt" or $task_evidence.sitemap_source_cache == "success") else null end
+              )
+            }' > artifacts/backend-production-incident-diagnostic.json
           jq -e '
-            .schema_version == "fermatmind.backend-production-incident-diagnostic.v1"
+            .schema_version == "fermatmind.backend-production-incident-diagnostic.v2"
             and .status == "hold_no_retry"
             and (.deploy_sha | test("^[0-9a-f]{40}$"))
             and (.active_revision | test("^[0-9a-f]{40}$"))
-            and .cms_or_db_write_count == 0
-            and .deploy_attempted == false
-            and .deploy_lock_modified == false
-            and .process_restart_attempted == false
-            and .queue_or_cache_operation_attempted == false
-            and .publication_or_seo_mutation_attempted == false
+            and .cms_or_db_write_count == null
+            and (.timing_evidence_available | type == "boolean")
+            and (.task_evidence | type == "object")
+            and (.deploy_lock_metadata_present | type == "boolean")
+            and (.deploy_attempted == null or (.deploy_attempted | type == "boolean"))
+            and (.activation_completed | type == "boolean")
+            and (.cms_or_db_operation_attempted == null or (.cms_or_db_operation_attempted | type == "boolean"))
+            and (.deploy_lock_modified == null or (.deploy_lock_modified | type == "boolean"))
+            and (.process_restart_attempted == null or (.process_restart_attempted | type == "boolean"))
+            and (.queue_or_cache_operation_attempted == null or (.queue_or_cache_operation_attempted | type == "boolean"))
+            and (.publication_or_seo_mutation_attempted == null or (.publication_or_seo_mutation_attempted | type == "boolean"))
           ' artifacts/backend-production-incident-diagnostic.json >/dev/null
 
       - name: Ensure a sanitized incident receipt exists
@@ -1992,12 +2088,12 @@ jobs:
             exit 0
           fi
           jq -n \
-            --arg schema_version "fermatmind.backend-production-incident-diagnostic.v1" \
+            --arg schema_version "fermatmind.backend-production-incident-diagnostic.v2" \
             --arg deploy_sha "${DEPLOY_SHA:-unknown}" \
             --arg release_id "${RELEASE_ID:-unknown}" \
             --arg workflow_run_id "$GITHUB_RUN_ID" \
             --arg workflow_run_attempt "$GITHUB_RUN_ATTEMPT" \
-            '{schema_version: $schema_version, status: "hold_no_retry", diagnostic_stage: "transport_or_bootstrap_failed", deploy_sha: $deploy_sha, release_id: $release_id, workflow_run_id: $workflow_run_id, workflow_run_attempt: $workflow_run_attempt, cms_or_db_write_count: 0, deploy_attempted: false, deploy_lock_modified: false, process_restart_attempted: false, queue_or_cache_operation_attempted: false, publication_or_seo_mutation_attempted: false}' > artifacts/backend-production-incident-diagnostic.json
+            '{schema_version: $schema_version, status: "hold_no_retry", diagnostic_stage: "transport_or_bootstrap_failed", deploy_sha: $deploy_sha, release_id: $release_id, workflow_run_id: $workflow_run_id, workflow_run_attempt: $workflow_run_attempt, timing_evidence_available: false, task_evidence: {}, deploy_lock_metadata_present: null, cms_or_db_write_count: null, cms_or_db_operation_attempted: null, deploy_attempted: null, activation_completed: null, deploy_lock_modified: null, process_restart_attempted: null, queue_or_cache_operation_attempted: null, publication_or_seo_mutation_attempted: null}' > artifacts/backend-production-incident-diagnostic.json
 
       - name: Upload production deploy incident receipt
         if: ${{ always() }}
