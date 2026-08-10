@@ -462,31 +462,69 @@ jobs:
           set -euo pipefail
           dir="$RUNNER_TEMP/career-c03-public"
           mkdir -p "$dir"
-          fetch() {
-            local url="$1" output="$2"
-            curl --http1.1 -fsS --retry 2 --retry-delay 2 --retry-all-errors \
-              --connect-timeout 10 --max-time 60 -H 'Cache-Control: no-cache' "$url" > "$output"
+          safe_empty() {
+            local kind="$1" output="$2"
+            case "$kind" in
+              collection) printf '%s' '{"items":[]}' > "$output" ;;
+              sitemap_source) printf '%s' '{"ok":true,"source":"backend_sitemap_generator","items":[]}' > "$output" ;;
+              text) : > "$output" ;;
+              *) return 2 ;;
+            esac
           }
-          fetch 'https://api.fermatmind.com/api/v0.5/career/jobs?locale=en' "$dir/jobs-en.json" &
+          fetch() {
+            local id="$1" kind="$2" url="$3" output="$4"
+            local metadata rc http retries elapsed elapsed_ms
+            set +e
+            metadata="$(curl --http1.1 --proto '=https' --request GET --max-redirs 0 \
+              -fsS --retry 2 --retry-delay 2 --retry-all-errors \
+              --connect-timeout 10 --max-time 60 -H 'Cache-Control: no-cache' \
+              --output "$output" --write-out $'%{http_code}\t%{num_retries}\t%{time_total}' "$url" \
+              2>"$dir/$id.stderr")"
+            rc=$?
+            set -e
+            rm -f "$dir/$id.stderr"
+            IFS=$'\t' read -r http retries elapsed <<<"$metadata"
+            if [[ ! "${http:-}" =~ ^[0-9]{3}$ ]] || [[ ! "${retries:-}" =~ ^[0-2]$ ]] \
+              || [[ ! "${elapsed:-}" =~ ^[0-9]+([.][0-9]+)?$ ]]; then
+              http=000
+              retries=0
+              elapsed=0
+              rc=99
+            fi
+            elapsed_ms="$(awk -v seconds="$elapsed" 'BEGIN {printf "%d", (seconds * 1000) + 0.5}')"
+            if [ "$rc" -ne 0 ] || [ "$http" != 200 ]; then
+              safe_empty "$kind" "$output"
+            fi
+            printf '%s\t%s\t%s\t%s\t%s\n' "$id" "$http" "$rc" "$retries" "$elapsed_ms" \
+              > "$dir/status-$id.tsv"
+          }
+          fetch jobs_en collection 'https://api.fermatmind.com/api/v0.5/career/jobs?locale=en' "$dir/jobs-en.json" &
           first=$!
-          fetch 'https://api.fermatmind.com/api/v0.5/career/jobs?locale=zh-CN' "$dir/jobs-zh.json" &
+          fetch jobs_zh collection 'https://api.fermatmind.com/api/v0.5/career/jobs?locale=zh-CN' "$dir/jobs-zh.json" &
           second=$!
           wait "$first"; wait "$second"
-          fetch 'https://api.fermatmind.com/api/v0.5/career/directory?locale=en' "$dir/directory-en.json" &
+          fetch directory_en collection 'https://api.fermatmind.com/api/v0.5/career/directory?locale=en' "$dir/directory-en.json" &
           first=$!
-          fetch 'https://api.fermatmind.com/api/v0.5/career/directory?locale=zh-CN' "$dir/directory-zh.json" &
+          fetch directory_zh collection 'https://api.fermatmind.com/api/v0.5/career/directory?locale=zh-CN' "$dir/directory-zh.json" &
           second=$!
           wait "$first"; wait "$second"
-          fetch 'https://api.fermatmind.com/api/v0.5/seo/sitemap-source' "$dir/sitemap-source.json" &
+          fetch sitemap_source sitemap_source 'https://api.fermatmind.com/api/v0.5/seo/sitemap-source' "$dir/sitemap-source.json" &
           first=$!
-          fetch 'https://fermatmind.com/sitemap.xml' "$dir/sitemap.xml" &
+          fetch sitemap text 'https://fermatmind.com/sitemap.xml' "$dir/sitemap.xml" &
           second=$!
           wait "$first"; wait "$second"
-          fetch 'https://fermatmind.com/llms.txt' "$dir/llms.txt" &
+          fetch llms text 'https://fermatmind.com/llms.txt' "$dir/llms.txt" &
           first=$!
-          fetch 'https://fermatmind.com/llms-full.txt' "$dir/llms-full.txt" &
+          fetch llms_full text 'https://fermatmind.com/llms-full.txt' "$dir/llms-full.txt" &
           second=$!
           wait "$first"; wait "$second"
+          : > "$dir/shared-surface-status.tsv"
+          for id in jobs_en jobs_zh directory_en directory_zh sitemap_source sitemap llms llms_full; do
+            test -f "$dir/status-$id.tsv"
+            while IFS= read -r line; do
+              printf '%s\n' "$line" >> "$dir/shared-surface-status.tsv"
+            done < "$dir/status-$id.tsv"
+          done
 
           bash "$PUBLIC_READBACK_RUNNER" \
             "$RUNNER_TEMP/career-c03-inspection.json" "$dir/detail-status.tsv"
@@ -498,12 +536,18 @@ jobs:
             "$dir/directory-en.json" "$dir/directory-zh.json" \
             "$dir/sitemap-source.json" "$dir/sitemap.xml" \
             "$dir/llms.txt" "$dir/llms-full.txt" "$dir/detail-status.tsv" \
+            "$dir/shared-surface-status.tsv" \
             > "$RUNNER_TEMP/career-c03-public-verification.json"
           verify_rc=$?
           set -e
           jq -e 'type == "object"' "$RUNNER_TEMP/career-c03-public-verification.json" >/dev/null
           public_failure_code="$(jq -r '
-            if .detail_readback.incomplete_transfer_count > 0 then "PUBLIC_TRANSPORT_INCOMPLETE"
+            if .shared_surface_readback.incomplete_transfer_count > 0 then "PUBLIC_SHARED_TRANSPORT_INCOMPLETE"
+            elif .shared_surface_readback.timeout_count > 0 then "PUBLIC_SHARED_TRANSPORT_TIMEOUT"
+            elif .shared_surface_readback.other_transport_failure_count > 0 then "PUBLIC_SHARED_TRANSPORT_OTHER"
+            elif .shared_surface_readback.server_error_count > 0 then "PUBLIC_SHARED_HTTP_5XX"
+            elif .shared_surface_readback.non_200_count > 0 then "PUBLIC_SHARED_HTTP_NON_200"
+            elif .detail_readback.incomplete_transfer_count > 0 then "PUBLIC_TRANSPORT_INCOMPLETE"
             elif .detail_readback.timeout_count > 0 then "PUBLIC_TRANSPORT_TIMEOUT"
             elif .detail_readback.other_transport_failure_count > 0 then "PUBLIC_TRANSPORT_OTHER"
             elif .detail_readback.server_error_count > 0 then "PUBLIC_HTTP_5XX"
@@ -547,6 +591,8 @@ jobs:
                 workflow_run_attempt: ($attempt | tonumber),
                 detail_readback: $public.detail_readback,
                 surface_mismatch_count: ($public.surface_mismatches | length),
+                surface_diagnostics: $public.surface_diagnostics,
+                shared_surface_readback: $public.shared_surface_readback,
                 private_path_leak_count: $public.private_path_leak_count,
                 cache_write_count: 0,
                 database_write_count: 0,
@@ -626,6 +672,8 @@ jobs:
               authority_inventory: $inspect.authority_inventory,
               published_cohort: $inspect.authority,
               public_readback: $public.expected,
+              surface_diagnostics: $public.surface_diagnostics,
+              shared_surface_readback: $public.shared_surface_readback,
               public_timeout_count: $public.detail_readback.timeout_count,
               public_transport_retry_count: $public.detail_readback.transport_retry_count,
               public_recovered_transport_failure_count: $public.detail_readback.recovered_transport_failure_count,
@@ -667,7 +715,7 @@ jobs:
           inspect="$RUNNER_TEMP/career-c03-inspection.json"
           public="$RUNNER_TEMP/career-c03-public-verification.json"
           pre_state="$(jq -Scn --argjson inspect "$(<"$inspect")" --argjson public "$(<"$public")" \
-            '{authority_artifact_sha256:$inspect.authority_artifact_sha256,authority:$inspect.authority,coverage:$inspect.coverage,detail_coverage:$inspect.detail_coverage,job_index_converged:$inspect.job_index_converged,directory_converged:$inspect.directory_converged,sitemap_source_converged:$inspect.sitemap_source_converged,public:($public | del(.detail_readback.network_attempt_count,.detail_readback.transport_retry_count,.detail_readback.recovered_transport_failure_count,.detail_readback.recovered_incomplete_transfer_count))}' \
+            '{authority_artifact_sha256:$inspect.authority_artifact_sha256,authority:$inspect.authority,coverage:$inspect.coverage,detail_coverage:$inspect.detail_coverage,job_index_converged:$inspect.job_index_converged,directory_converged:$inspect.directory_converged,sitemap_source_converged:$inspect.sitemap_source_converged,public:($public | del(.detail_readback.network_attempt_count,.detail_readback.transport_retry_count,.detail_readback.recovered_transport_failure_count,.detail_readback.recovered_incomplete_transfer_count,.shared_surface_readback) | .surface_diagnostics |= with_entries(.value |= del(.request_count,.transport_class,.latency_class,.transport_retry_count,.recovered_retry_count,.terminal_transport_failure_count,.incomplete_transfer_count,.timeout_count,.other_transport_failure_count,.server_error_count,.non_200_count,.terminal)))}' \
             | sha256sum | awk '{print $1}')"
           incident_sha="$EXPECTED_INCIDENT_CLOSEOUT_RECEIPT_SHA256"
           if [ "$PUBLIC_VERIFY_RC" = 0 ] && jq -e '.internal_converged == true' "$inspect" >/dev/null; then
@@ -677,6 +725,9 @@ jobs:
             .job_index_converged == true
             and ((.coverage.missing_count + .coverage.broken_count) <= 250)
             and $public.private_path_leak_count == 0
+            and $public.shared_surface_readback.terminal_transport_failure_count == 0
+            and $public.shared_surface_readback.server_error_count == 0
+            and $public.shared_surface_readback.non_200_count == 0
             and $public.detail_readback.terminal_transport_failure_count == 0
             and $public.detail_readback.timeout_count == 0
             and $public.detail_readback.server_error_count == 0
@@ -712,6 +763,8 @@ jobs:
                 workflow_run_attempt: ($attempt | tonumber),
                 detail_readback: $public.detail_readback,
                 surface_mismatch_count: ($public.surface_mismatches | length),
+                surface_diagnostics: $public.surface_diagnostics,
+                shared_surface_readback: $public.shared_surface_readback,
                 private_path_leak_count: $public.private_path_leak_count,
                 cache_write_count: 0,
                 database_write_count: 0,
@@ -774,6 +827,8 @@ jobs:
               directory_converged: $inspect.directory_converged,
               sitemap_source_converged: $inspect.sitemap_source_converged,
               public_converged: $public.converged,
+              surface_diagnostics: $public.surface_diagnostics,
+              shared_surface_readback: $public.shared_surface_readback,
               detail_repair_target_count: ($inspect.coverage.missing_count + $inspect.coverage.broken_count),
               public_timeout_count: $public.detail_readback.timeout_count,
               public_transport_retry_count: $public.detail_readback.transport_retry_count,
@@ -816,7 +871,7 @@ jobs:
           current_pre_state="$(jq -Scn \
             --argjson inspect "$(<"$RUNNER_TEMP/career-c03-inspection.json")" \
             --argjson public "$(<"$RUNNER_TEMP/career-c03-public-verification.json")" \
-            '{authority_artifact_sha256:$inspect.authority_artifact_sha256,authority:$inspect.authority,coverage:$inspect.coverage,detail_coverage:$inspect.detail_coverage,job_index_converged:$inspect.job_index_converged,directory_converged:$inspect.directory_converged,sitemap_source_converged:$inspect.sitemap_source_converged,public:($public | del(.detail_readback.network_attempt_count,.detail_readback.transport_retry_count,.detail_readback.recovered_transport_failure_count,.detail_readback.recovered_incomplete_transfer_count))}' \
+            '{authority_artifact_sha256:$inspect.authority_artifact_sha256,authority:$inspect.authority,coverage:$inspect.coverage,detail_coverage:$inspect.detail_coverage,job_index_converged:$inspect.job_index_converged,directory_converged:$inspect.directory_converged,sitemap_source_converged:$inspect.sitemap_source_converged,public:($public | del(.detail_readback.network_attempt_count,.detail_readback.transport_retry_count,.detail_readback.recovered_transport_failure_count,.detail_readback.recovered_incomplete_transfer_count,.shared_surface_readback) | .surface_diagnostics |= with_entries(.value |= del(.request_count,.transport_class,.latency_class,.transport_retry_count,.recovered_retry_count,.terminal_transport_failure_count,.incomplete_transfer_count,.timeout_count,.other_transport_failure_count,.server_error_count,.non_200_count,.terminal)))}' \
             | sha256sum | awk '{print $1}')"
           test "$current_pre_state" = "$(jq -r '.pre_state_sha256' "$verify")"
           test "$(jq -Sc '.cache_key_manifest' "$RUNNER_TEMP/career-c03-inspection.json")" = "$(jq -Sc '.cache_key_manifest' "$verify")"
@@ -884,31 +939,69 @@ jobs:
           capture_public() {
             local inspection="$1" dir="$2" output="$3"
             mkdir -p "$dir"
-            fetch() {
-              local url="$1" destination="$2"
-              curl --http1.1 -fsS --retry 2 --retry-delay 2 --retry-all-errors \
-                --connect-timeout 10 --max-time 60 -H 'Cache-Control: no-cache' "$url" > "$destination"
+            safe_empty() {
+              local kind="$1" destination="$2"
+              case "$kind" in
+                collection) printf '%s' '{"items":[]}' > "$destination" ;;
+                sitemap_source) printf '%s' '{"ok":true,"source":"backend_sitemap_generator","items":[]}' > "$destination" ;;
+                text) : > "$destination" ;;
+                *) return 2 ;;
+              esac
             }
-            fetch 'https://api.fermatmind.com/api/v0.5/career/jobs?locale=en' "$dir/jobs-en.json" &
+            fetch() {
+              local id="$1" kind="$2" url="$3" destination="$4"
+              local metadata rc http retries elapsed elapsed_ms
+              set +e
+              metadata="$(curl --http1.1 --proto '=https' --request GET --max-redirs 0 \
+                -fsS --retry 2 --retry-delay 2 --retry-all-errors \
+                --connect-timeout 10 --max-time 60 -H 'Cache-Control: no-cache' \
+                --output "$destination" --write-out $'%{http_code}\t%{num_retries}\t%{time_total}' "$url" \
+                2>"$dir/$id.stderr")"
+              rc=$?
+              set -e
+              rm -f "$dir/$id.stderr"
+              IFS=$'\t' read -r http retries elapsed <<<"$metadata"
+              if [[ ! "${http:-}" =~ ^[0-9]{3}$ ]] || [[ ! "${retries:-}" =~ ^[0-2]$ ]] \
+                || [[ ! "${elapsed:-}" =~ ^[0-9]+([.][0-9]+)?$ ]]; then
+                http=000
+                retries=0
+                elapsed=0
+                rc=99
+              fi
+              elapsed_ms="$(awk -v seconds="$elapsed" 'BEGIN {printf "%d", (seconds * 1000) + 0.5}')"
+              if [ "$rc" -ne 0 ] || [ "$http" != 200 ]; then
+                safe_empty "$kind" "$destination"
+              fi
+              printf '%s\t%s\t%s\t%s\t%s\n' "$id" "$http" "$rc" "$retries" "$elapsed_ms" \
+                > "$dir/status-$id.tsv"
+            }
+            fetch jobs_en collection 'https://api.fermatmind.com/api/v0.5/career/jobs?locale=en' "$dir/jobs-en.json" &
             local first=$!
-            fetch 'https://api.fermatmind.com/api/v0.5/career/jobs?locale=zh-CN' "$dir/jobs-zh.json" &
+            fetch jobs_zh collection 'https://api.fermatmind.com/api/v0.5/career/jobs?locale=zh-CN' "$dir/jobs-zh.json" &
             local second=$!
             wait "$first"; wait "$second"
-            fetch 'https://api.fermatmind.com/api/v0.5/career/directory?locale=en' "$dir/directory-en.json" &
+            fetch directory_en collection 'https://api.fermatmind.com/api/v0.5/career/directory?locale=en' "$dir/directory-en.json" &
             first=$!
-            fetch 'https://api.fermatmind.com/api/v0.5/career/directory?locale=zh-CN' "$dir/directory-zh.json" &
+            fetch directory_zh collection 'https://api.fermatmind.com/api/v0.5/career/directory?locale=zh-CN' "$dir/directory-zh.json" &
             second=$!
             wait "$first"; wait "$second"
-            fetch 'https://api.fermatmind.com/api/v0.5/seo/sitemap-source' "$dir/sitemap-source.json" &
+            fetch sitemap_source sitemap_source 'https://api.fermatmind.com/api/v0.5/seo/sitemap-source' "$dir/sitemap-source.json" &
             first=$!
-            fetch 'https://fermatmind.com/sitemap.xml' "$dir/sitemap.xml" &
+            fetch sitemap text 'https://fermatmind.com/sitemap.xml' "$dir/sitemap.xml" &
             second=$!
             wait "$first"; wait "$second"
-            fetch 'https://fermatmind.com/llms.txt' "$dir/llms.txt" &
+            fetch llms text 'https://fermatmind.com/llms.txt' "$dir/llms.txt" &
             first=$!
-            fetch 'https://fermatmind.com/llms-full.txt' "$dir/llms-full.txt" &
+            fetch llms_full text 'https://fermatmind.com/llms-full.txt' "$dir/llms-full.txt" &
             second=$!
             wait "$first"; wait "$second"
+            : > "$dir/shared-surface-status.tsv"
+            for id in jobs_en jobs_zh directory_en directory_zh sitemap_source sitemap llms llms_full; do
+              test -f "$dir/status-$id.tsv"
+              while IFS= read -r line; do
+                printf '%s\n' "$line" >> "$dir/shared-surface-status.tsv"
+              done < "$dir/status-$id.tsv"
+            done
             bash "$PUBLIC_READBACK_RUNNER" "$inspection" "$dir/detail-status.tsv"
             set +e
             php "$RUNNER" public-verify \
@@ -916,7 +1009,8 @@ jobs:
               "$dir/jobs-en.json" "$dir/jobs-zh.json" \
               "$dir/directory-en.json" "$dir/directory-zh.json" \
               "$dir/sitemap-source.json" "$dir/sitemap.xml" \
-              "$dir/llms.txt" "$dir/llms-full.txt" "$dir/detail-status.tsv" > "$output"
+              "$dir/llms.txt" "$dir/llms-full.txt" "$dir/detail-status.tsv" \
+              "$dir/shared-surface-status.tsv" > "$output"
             CAPTURE_RC=$?
             set -e
             jq -e 'type == "object"' "$output" >/dev/null
@@ -959,7 +1053,7 @@ jobs:
               restored_pre_state="$(jq -Scn \
                 --argjson inspect "$(<"$RUNNER_TEMP/career-c03-restored-inspection.json")" \
                 --argjson public "$(<"$RUNNER_TEMP/career-c03-public-restored.json")" \
-                '{authority_artifact_sha256:$inspect.authority_artifact_sha256,authority:$inspect.authority,coverage:$inspect.coverage,detail_coverage:$inspect.detail_coverage,job_index_converged:$inspect.job_index_converged,directory_converged:$inspect.directory_converged,sitemap_source_converged:$inspect.sitemap_source_converged,public:($public | del(.detail_readback.network_attempt_count,.detail_readback.transport_retry_count,.detail_readback.recovered_transport_failure_count,.detail_readback.recovered_incomplete_transfer_count))}' \
+                '{authority_artifact_sha256:$inspect.authority_artifact_sha256,authority:$inspect.authority,coverage:$inspect.coverage,detail_coverage:$inspect.detail_coverage,job_index_converged:$inspect.job_index_converged,directory_converged:$inspect.directory_converged,sitemap_source_converged:$inspect.sitemap_source_converged,public:($public | del(.detail_readback.network_attempt_count,.detail_readback.transport_retry_count,.detail_readback.recovered_transport_failure_count,.detail_readback.recovered_incomplete_transfer_count,.shared_surface_readback) | .surface_diagnostics |= with_entries(.value |= del(.request_count,.transport_class,.latency_class,.transport_retry_count,.recovered_retry_count,.terminal_transport_failure_count,.incomplete_transfer_count,.timeout_count,.other_transport_failure_count,.server_error_count,.non_200_count,.terminal)))}' \
                 | sha256sum | awk '{print $1}')"
               if [ "$restored_pre_state" = "$(jq -r '.pre_state_sha256' "$verify")" ]; then
                 rollback_complete=true
@@ -1048,6 +1142,8 @@ jobs:
               published_cohort: $apply.cohort,
               detail_repair_target_count: $apply.detail_repair_target_count,
               frontend_revalidation_path_count: $apply.frontend_revalidation_path_count,
+              surface_diagnostics: $public.surface_diagnostics,
+              shared_surface_readback: $public.shared_surface_readback,
               public_timeout_count: $public.detail_readback.timeout_count,
               public_transport_retry_count: $public.detail_readback.transport_retry_count,
               public_recovered_transport_failure_count: $public.detail_readback.recovered_transport_failure_count,
