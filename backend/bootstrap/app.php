@@ -87,7 +87,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 ->withoutOverlapping(10)
                 ->onOneServer();
         }
-        $schedule->command('career:runtime-slo-check --json')->everyFiveMinutes()->withoutOverlapping();
+        $schedule->command('career:runtime-slo-check --lightweight --json')->everyFiveMinutes()->withoutOverlapping();
         if ((bool) config('ops.career_runtime_slo.repair_missing_enabled', false)) {
             $repairBatchSize = min(500, max(1, (int) config('ops.career_runtime_slo.repair_batch_size', 100)));
             $minimumTargets = max(1, (int) config('ops.career_runtime_slo.minimum_detail_target_count', 2092));
