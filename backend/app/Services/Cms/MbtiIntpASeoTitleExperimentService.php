@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace App\Services\Cms;
 
 use App\Models\PersonalityProfile;
+use App\Models\PersonalityProfileSeoMeta;
 use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantRevision;
 use App\Models\PersonalityProfileVariantSeoMeta;
+use App\Services\Mbti\MbtiPublicProjectionService;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
 
@@ -29,8 +31,6 @@ final class MbtiIntpASeoTitleExperimentService
 
     private const CURRENT_DESCRIPTION = '了解 INTP-A 的分析建模、可能性探索和独立解题、适合与不适合的场景、A/T 差异、职业、关系、压力应对、常见误解与 FAQ。内容仅用于自我理解和成长复盘。';
 
-    private const PUBLIC_PROJECTION_SHA256 = '1c5c515c29a9e73721f104da92bf59dab56975c47eba431f6dc9e5b89885a97d';
-
     private const M01_SHA256 = '9b7c470aa39aff0e6062c41fe5d71e2e8164159747953d42bd032046cc10f691';
 
     private const CANNIBALIZATION_SHA256 = '07a153df4fd2b2bb11a639c6fc18d52f3a39988030407a17489b1d6ddd579a91';
@@ -41,6 +41,10 @@ final class MbtiIntpASeoTitleExperimentService
 
     private const SOURCE_COMMIT = 'a931f8cdb3cc6756d225f592be12847676bdfe99';
 
+    public function __construct(
+        private readonly MbtiPublicProjectionService $publicProjectionService,
+    ) {}
+
     /**
      * @param  array<string, mixed>  $package
      * @return array<string, mixed>
@@ -48,10 +52,10 @@ final class MbtiIntpASeoTitleExperimentService
     public function plan(array $package, string $packageSha256, string $targetEnvironment): array
     {
         $this->assertPackage($package, $packageSha256);
-        [$profile, $variant, $seoMeta] = $this->resolveAuthority();
+        [$profile, $variant, $seoMeta, $profileSeoMeta] = $this->resolveAuthority();
         $this->assertLiveBaseline($profile, $variant, $seoMeta, $package);
 
-        $liveFingerprint = $this->liveFingerprint($profile, $variant, $seoMeta);
+        $liveFingerprint = $this->liveFingerprint($profile, $variant, $seoMeta, $profileSeoMeta);
         $existing = $this->findExistingExperimentRevision($variant, $packageSha256, $liveFingerprint);
 
         return $this->receipt(
@@ -76,10 +80,10 @@ final class MbtiIntpASeoTitleExperimentService
         $this->assertPackage($package, $packageSha256);
 
         return DB::transaction(function () use ($package, $packageSha256, $targetEnvironment): array {
-            [$profile, $variant, $seoMeta] = $this->resolveAuthority(lock: true);
+            [$profile, $variant, $seoMeta, $profileSeoMeta] = $this->resolveAuthority(lock: true);
             $this->assertLiveBaseline($profile, $variant, $seoMeta, $package);
 
-            $liveFingerprintBefore = $this->liveFingerprint($profile, $variant, $seoMeta);
+            $liveFingerprintBefore = $this->liveFingerprint($profile, $variant, $seoMeta, $profileSeoMeta);
             $existing = $this->findExistingExperimentRevision($variant, $packageSha256, $liveFingerprintBefore);
             if ($existing instanceof PersonalityProfileVariantRevision) {
                 return $this->receipt(
@@ -111,7 +115,8 @@ final class MbtiIntpASeoTitleExperimentService
             $profile->refresh();
             $variant->refresh();
             $seoMeta->refresh();
-            $liveFingerprintAfter = $this->liveFingerprint($profile, $variant, $seoMeta);
+            $profileSeoMeta?->refresh();
+            $liveFingerprintAfter = $this->liveFingerprint($profile, $variant, $seoMeta, $profileSeoMeta);
             if (! hash_equals($liveFingerprintBefore, $liveFingerprintAfter)) {
                 throw new RuntimeException('Live public authority changed while creating the inactive draft revision.');
             }
@@ -170,7 +175,6 @@ final class MbtiIntpASeoTitleExperimentService
             'measurement.insufficient_evidence_state' => 'INCONCLUSIVE',
             'authority_baseline.source' => 'production_public_api_readonly',
             'authority_baseline.captured_at' => '2026-08-10',
-            'authority_baseline.public_projection_sha256' => self::PUBLIC_PROJECTION_SHA256,
         ];
         foreach ($expectedScalarValues as $path => $expected) {
             if (data_get($package, $path) !== $expected) {
@@ -247,6 +251,10 @@ final class MbtiIntpASeoTitleExperimentService
             throw new RuntimeException('Package live authority baseline does not match the locked contract.');
         }
 
+        if (preg_match('/^[a-f0-9]{64}$/', (string) data_get($package, 'authority_baseline.public_projection_sha256')) !== 1) {
+            throw new RuntimeException('Package complete public projection fingerprint is invalid.');
+        }
+
         $negativeGuarantees = (array) ($package['negative_guarantees'] ?? []);
         $expectedNegativeGuarantees = [
             'production_write',
@@ -278,7 +286,7 @@ final class MbtiIntpASeoTitleExperimentService
     }
 
     /**
-     * @return array{PersonalityProfile, PersonalityProfileVariant, PersonalityProfileVariantSeoMeta}
+     * @return array{PersonalityProfile, PersonalityProfileVariant, PersonalityProfileVariantSeoMeta, PersonalityProfileSeoMeta|null}
      */
     private function resolveAuthority(bool $lock = false): array
     {
@@ -321,7 +329,18 @@ final class MbtiIntpASeoTitleExperimentService
             throw new RuntimeException('Target INTP-A SEO meta authority was not found.');
         }
 
-        return [$profile, $variant, $seoMeta];
+        $profileSeoQuery = PersonalityProfileSeoMeta::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->where('profile_id', (int) $profile->id);
+        if ($lock) {
+            $profileSeoQuery->lockForUpdate();
+        }
+        $profileSeoMeta = $profileSeoQuery->first();
+        $profile->setRelation('seoMeta', $profileSeoMeta);
+        $variant->setRelation('seoMeta', $seoMeta);
+
+        return [$profile, $variant, $seoMeta, $profileSeoMeta];
     }
 
     /**
@@ -362,6 +381,12 @@ final class MbtiIntpASeoTitleExperimentService
 
         if ($actual !== $expected) {
             throw new RuntimeException('Target INTP-A live authority baseline drifted; refusing the experiment draft.');
+        }
+
+        $expectedProjectionFingerprint = (string) data_get($package, 'authority_baseline.public_projection_sha256');
+        $actualProjectionFingerprint = $this->publicProjectionFingerprint($profile, $variant);
+        if (! hash_equals($expectedProjectionFingerprint, $actualProjectionFingerprint)) {
+            throw new RuntimeException('Target INTP-A complete public authority drifted; refusing the experiment draft.');
         }
     }
 
@@ -448,6 +473,7 @@ final class MbtiIntpASeoTitleExperimentService
         PersonalityProfile $profile,
         PersonalityProfileVariant $variant,
         PersonalityProfileVariantSeoMeta $seoMeta,
+        ?PersonalityProfileSeoMeta $profileSeoMeta,
     ): string {
         $variant->loadMissing(['sections' => static fn ($query) => $query->orderBy('sort_order')->orderBy('id')]);
         $profile->loadMissing(['sections' => static fn ($query) => $query->orderBy('sort_order')->orderBy('id')]);
@@ -471,6 +497,12 @@ final class MbtiIntpASeoTitleExperimentService
                 'og_image_url', 'twitter_title', 'twitter_description', 'twitter_image_url', 'robots',
                 'jsonld_overrides_json',
             ]),
+            'profile_seo_meta' => $profileSeoMeta?->only([
+                'org_id', 'seo_title', 'seo_description', 'canonical_url', 'og_title', 'og_description',
+                'og_image_url', 'twitter_title', 'twitter_description', 'twitter_image_url', 'robots',
+                'jsonld_overrides_json',
+            ]),
+            'complete_public_projection_sha256' => $this->publicProjectionFingerprint($profile, $variant),
             'profile_sections' => $profile->sections->map->only([
                 'section_key', 'title', 'render_variant', 'body_md', 'body_html', 'payload_json',
                 'sort_order', 'is_enabled',
@@ -486,6 +518,42 @@ final class MbtiIntpASeoTitleExperimentService
         }
 
         return hash('sha256', $encoded);
+    }
+
+    private function publicProjectionFingerprint(
+        PersonalityProfile $profile,
+        PersonalityProfileVariant $variant,
+    ): string {
+        $projection = $this->publicProjectionService->buildForPublicPersonalityRoute(
+            $profile,
+            $variant,
+            'public_variant',
+        );
+        $canonical = $this->canonicalize($projection);
+        $encoded = json_encode($canonical, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE);
+        if (! is_string($encoded)) {
+            throw new RuntimeException('Unable to fingerprint the complete public projection.');
+        }
+
+        return hash('sha256', $encoded);
+    }
+
+    private function canonicalize(mixed $value): mixed
+    {
+        if (! is_array($value)) {
+            return $value;
+        }
+
+        if (array_is_list($value)) {
+            return array_map(fn (mixed $item): mixed => $this->canonicalize($item), $value);
+        }
+
+        ksort($value, SORT_STRING);
+        foreach ($value as $key => $item) {
+            $value[$key] = $this->canonicalize($item);
+        }
+
+        return $value;
     }
 
     /**

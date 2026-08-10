@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Tests\Feature\Console;
 
 use App\Models\PersonalityProfile;
+use App\Models\PersonalityProfileSeoMeta;
 use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantRevision;
 use App\Models\PersonalityProfileVariantSection;
 use App\Models\PersonalityProfileVariantSeoMeta;
+use App\Services\Mbti\MbtiPublicProjectionService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
@@ -28,6 +30,8 @@ final class PersonalityMbtiIntpASeoTitleExperimentCommandTest extends TestCase
     private const CURRENT_DESCRIPTION = '了解 INTP-A 的分析建模、可能性探索和独立解题、适合与不适合的场景、A/T 差异、职业、关系、压力应对、常见误解与 FAQ。内容仅用于自我理解和成长复盘。';
 
     private const APPROVAL = 'I authorize one inactive staging CMS revision for the zh-CN INTP-A seo_title experiment. No production, live SEO metadata, publish, indexability, sitemap, llms, search, or deploy write is authorized.';
+
+    private ?string $authorityBoundPackagePath = null;
 
     public function test_dry_run_validates_one_target_without_writes(): void
     {
@@ -188,6 +192,45 @@ final class PersonalityMbtiIntpASeoTitleExperimentCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
     }
 
+    public function test_complete_public_authority_drift_fails_closed_before_first_write(): void
+    {
+        [$profile] = $this->createAuthority();
+        $profile->update(['subtitle' => 'Drifted public subtitle']);
+
+        [$exitCode, $receipt] = $this->runCommand(['--dry-run' => true]);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($receipt['ok']);
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_idempotent_rerun_rejects_inherited_profile_seo_drift(): void
+    {
+        [$profile] = $this->createAuthority();
+        $writeOptions = [
+            '--write' => true,
+            '--draft-only' => true,
+            '--no-publish' => true,
+            '--no-indexability-change' => true,
+            '--no-sitemap' => true,
+            '--no-llms' => true,
+            '--no-search-release' => true,
+        ];
+
+        [$firstExit] = $this->runCommand($writeOptions);
+        PersonalityProfileSeoMeta::query()->create([
+            'org_id' => 0,
+            'profile_id' => (int) $profile->id,
+            'og_image_url' => 'https://cdn.example.test/drifted-profile-og.png',
+        ]);
+        [$secondExit, $secondReceipt] = $this->runCommand($writeOptions);
+
+        $this->assertSame(0, $firstExit);
+        $this->assertSame(1, $secondExit);
+        $this->assertFalse($secondReceipt['ok']);
+        $this->assertSame(1, PersonalityProfileVariantRevision::query()->count());
+    }
+
     public function test_extra_change_field_fails_closed(): void
     {
         $this->createAuthority();
@@ -235,8 +278,8 @@ final class PersonalityMbtiIntpASeoTitleExperimentCommandTest extends TestCase
         $this->beforeApplicationDestroyed(static fn () => File::deleteDirectory($outputDirectory));
 
         $exitCode = Artisan::call('personality:mbti-intp-a-seo-title-experiment', [
-            '--package' => base_path(self::PACKAGE_PATH),
-            '--confirm-package-sha256' => hash_file('sha256', base_path(self::PACKAGE_PATH)),
+            '--package' => $this->authorityBoundPackagePath,
+            '--confirm-package-sha256' => hash_file('sha256', (string) $this->authorityBoundPackagePath),
             '--target-env' => 'staging',
             '--operator-approved' => self::APPROVAL,
             '--allow-testing' => true,
@@ -270,8 +313,8 @@ final class PersonalityMbtiIntpASeoTitleExperimentCommandTest extends TestCase
             ->andReturn(false);
 
         $exitCode = Artisan::call('personality:mbti-intp-a-seo-title-experiment', [
-            '--package' => base_path(self::PACKAGE_PATH),
-            '--confirm-package-sha256' => hash_file('sha256', base_path(self::PACKAGE_PATH)),
+            '--package' => $this->authorityBoundPackagePath,
+            '--confirm-package-sha256' => hash_file('sha256', (string) $this->authorityBoundPackagePath),
             '--target-env' => 'staging',
             '--operator-approved' => self::APPROVAL,
             '--allow-testing' => true,
@@ -332,7 +375,7 @@ final class PersonalityMbtiIntpASeoTitleExperimentCommandTest extends TestCase
      */
     private function runCommand(array $options, ?string $packagePath = null): array
     {
-        $packagePath ??= base_path(self::PACKAGE_PATH);
+        $packagePath ??= $this->authorityBoundPackagePath ?? base_path(self::PACKAGE_PATH);
         $output = sys_get_temp_dir().'/fm-intp-a-seo-title-receipt-'.Str::random(12).'.json';
         $options = array_merge([
             '--package' => $packagePath,
@@ -358,7 +401,8 @@ final class PersonalityMbtiIntpASeoTitleExperimentCommandTest extends TestCase
      */
     private function package(): array
     {
-        $package = json_decode((string) File::get(base_path(self::PACKAGE_PATH)), true);
+        $packagePath = $this->authorityBoundPackagePath ?? base_path(self::PACKAGE_PATH);
+        $package = json_decode((string) File::get($packagePath), true);
         $this->assertIsArray($package);
 
         return $package;
@@ -431,6 +475,45 @@ final class PersonalityMbtiIntpASeoTitleExperimentCommandTest extends TestCase
             ],
         ]);
 
+        $this->bindPackageToFixtureAuthority($profile, $variant);
+
         return [$profile, $variant, $seoMeta];
+    }
+
+    private function bindPackageToFixtureAuthority(
+        PersonalityProfile $profile,
+        PersonalityProfileVariant $variant,
+    ): void {
+        $projection = app(MbtiPublicProjectionService::class)->buildForPublicPersonalityRoute(
+            $profile,
+            $variant,
+            'public_variant',
+        );
+        $canonical = $this->canonicalize($projection);
+        $encoded = json_encode($canonical, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE);
+        $this->assertIsString($encoded);
+
+        $package = json_decode((string) File::get(base_path(self::PACKAGE_PATH)), true);
+        $this->assertIsArray($package);
+        $package['authority_baseline']['public_projection_sha256'] = hash('sha256', $encoded);
+        $this->authorityBoundPackagePath = $this->writeTemporaryPackage($package);
+    }
+
+    private function canonicalize(mixed $value): mixed
+    {
+        if (! is_array($value)) {
+            return $value;
+        }
+
+        if (array_is_list($value)) {
+            return array_map(fn (mixed $item): mixed => $this->canonicalize($item), $value);
+        }
+
+        ksort($value, SORT_STRING);
+        foreach ($value as $key => $item) {
+            $value[$key] = $this->canonicalize($item);
+        }
+
+        return $value;
     }
 }
