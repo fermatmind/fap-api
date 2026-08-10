@@ -1,0 +1,32 @@
+{
+  "schema_version": "public-topic-graph-g03-governed-review.v1",
+  "source_repository": "fermatmind/fap-web",
+  "source_pr": 2040,
+  "source_merge_commit": "5466522801be6f71d01f0af96a495a84bddd059f",
+  "source_artifacts": {
+    "query_owner_parent_next_step_sha256": "452f802993b7c3468876de94209e4486f3c441c1a8b1a0f12220806f4c35b3a0",
+    "public_edge_registry_sha256": "2c99d0ba87db7d854b35275f5ed07d2468a49decc273b6e3aafc3654d7103655",
+    "governed_review_summary_sha256": "79b65bc75bf6d27077f2a160a2cd09c1d0be95d8264e0db72a59d2d72b3814bf"
+  },
+  "owner_rows": 422,
+  "edge_rows": 4805,
+  "approved_non_career_candidates": 3268,
+  "held_non_career_candidates": 1255,
+  "career_blocked_candidates": 282,
+  "neutral_global_home_cross_locale_approvals": 102,
+  "approved_relation_counts": {
+    "breadcrumb": 755,
+    "learn_more": 1956,
+    "take_assessment": 557
+  },
+  "approved_relation_allowlist": [
+    "breadcrumb",
+    "learn_more",
+    "take_assessment"
+  ],
+  "career_review_state": "BLOCKED_WAITING_ON_C06",
+  "career_proposed_active_state": false,
+  "career_publication_allowed": false,
+  "authority_claimed_by_fixture": false,
+  "production_imported": false
+}

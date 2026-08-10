@@ -104001,7 +104001,7 @@
     "depends_on": [
       "PUBLIC-TOPIC-GRAPH-AUDIT-CLOSEOUT-01"
     ],
-    "status": "in_progress",
+    "status": "local_checks_passed_ready_to_push",
     "commit_sha": null,
     "pr_url": null,
     "prior_implementation": {
@@ -104023,7 +104023,7 @@
       },
       "focused_contract": {
         "status": "passed",
-        "evidence": "PublicTopicEdgeApiTest passed 8 tests / 47 assertions, including explicit empty authority metadata, stable ordering and deduplication, invalid relation and locale rejection, private/noindex/stale/canonical mismatch fail-closed behavior, edge cache invalidation, and forced WAITING_ON_C06 Career state."
+        "evidence": "PublicTopicEdgeApiTest passed 12 tests / 71 assertions, including the exact locale query contract, explicit empty authority metadata, database-unavailable 503 fail-closed behavior, stable ordering and deduplication, exact G03 relation and fixture binding, explicit cross-locale approval, private/noindex/stale source and target canonical rejection, cache invalidation, and dual Career gates."
       },
       "review_governance": {
         "status": "passed",
@@ -104035,7 +104035,7 @@
       },
       "route_and_style": {
         "status": "passed",
-        "evidence": "The complete API route inventory resolved the named GET /api/v0.5/public-topic-edges route; scoped Pint passed all nine PHP files and each changed PHP file passed syntax validation."
+        "evidence": "The complete API route inventory resolved the named GET /api/v0.5/public-topic-edges route; scoped Pint passed all five changed PHP files."
       },
       "dependency_security": {
         "status": "passed",
@@ -104043,11 +104043,15 @@
       },
       "manifests_and_scope": {
         "status": "passed",
-        "evidence": "PR-train YAML and the exact scoped id parse, state JSON plus generated registry and OpenAPI JSON parse, git diff --check, and the exact fifteen-file manifest allowlist pass. Three unrelated duplicate historical manifest ids already exist on the exact main base; the new id is unique and this PR does not modify those historical entries."
+        "evidence": "PR-train YAML and state JSON parse, the exact ten-file repair scope is allowlisted, the governed fixture is valid UTF-8 JSON, and git diff --check passes. Full-CI-generated Big Five compiled artifacts were restored before staging and are excluded from scope."
+      },
+      "full_ci": {
+        "status": "passed",
+        "evidence": "After restoring the repository-required non-destructive migration down(), bash backend/scripts/ci_verify_mbti.sh passed in one guarded full run, including 1,690 Big Five tests, Enneagram, MBTI, migration safety, dependency security, and webhook/attempt regression gates."
       },
       "github_required_checks": {
-        "status": "passed",
-        "evidence": "Exact head deb12436c422244754c19438ec9b7293ecfb9e61 passed hygiene, supply-chain, content-pack-build-validate, Semgrep blocking secrets, Semgrep OSS, SARIF upload, verify-mbti-v2 (4m01s), verify-mbti-legacy (4m19s), and verify-bigfive (6m12s). verify-staging-parity was correctly skipped. GitHub reports the PR OPEN, CLEAN, non-draft, with no outstanding review decision."
+        "status": "pending_for_repair",
+        "evidence": "Prior implementation PR #3594 passed its required checks at deb12436c422244754c19438ec9b7293ecfb9e61. Fresh required checks remain mandatory for the governed-G03 alignment repair head before merge."
       }
     },
     "failure_reason": null,
@@ -104124,6 +104128,21 @@
         "at": "2026-08-10T07:35:28Z",
         "status": "in_progress",
         "note": "Reconciled PR #3594 as merged at 663cd88ded47bc84b4393c2060140c21fa14b6a1, then started one Authority-scope G03 alignment repair only after fap-web G03 PR #2040 merged at 5466522801be6f71d01f0af96a495a84bddd059f. The repair binds the governed fixture, exact query parameter, relation allowlist, fail-closed unavailable envelope, source canonical readback, and test-only migration up/down. No production migration, CMS import/write, activation, publication, deployment, frontend, sitemap/llms, or Search Channel action is authorized."
+      },
+      {
+        "at": "2026-08-10T07:53:00Z",
+        "status": "local_checks_failed",
+        "note": "The single full ci_verify_mbti run passed the 1,690-test Big Five freeze suite, Enneagram gates, MBTI E2E, and authority checks, then failed only because a destructive dropIfExists implementation in this create migration violated both repository migration-safety gates. The failure was current-scope and no commit, push, production migration, or external write occurred."
+      },
+      {
+        "at": "2026-08-10T07:54:00Z",
+        "status": "local_checks_repairing",
+        "note": "Restored the repository-required non-destructive down() while retaining disposable SQLite up, rollback-command, and re-up validation. Migration safety remains authoritative; no safety test is weakened or bypassed."
+      },
+      {
+        "at": "2026-08-10T08:01:30Z",
+        "status": "local_checks_passed_ready_to_push",
+        "note": "The repaired migration passed 3 safety tests / 2,103 assertions; the Authority/G03/OpenAPI suite passed 25 tests / 438 assertions; the classifier isolation test passed; route, Pint, Composer strict validation/audit, OpenAPI, fixture hashes, deterministic parsing, disposable SQLite up/rollback-command/re-up, and the single guarded full ci_verify_mbti run all passed. No production migration, CMS import/write, activation, publication, deployment, frontend, sitemap/llms, or Search Channel action occurred."
       }
     ]
   },

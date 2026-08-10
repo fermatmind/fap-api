@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('target_type', 64);
             $table->unsignedBigInteger('target_id');
             $table->string('target_locale', 16);
+            $table->boolean('cross_locale_approved')->default(false);
             $table->string('visible_label', 255);
             $table->text('context')->nullable();
             $table->unsignedInteger('position')->default(100);
@@ -39,6 +40,7 @@ return new class extends Migration
             $table->timestamp('valid_until')->nullable();
             $table->unsignedBigInteger('created_by_admin_user_id')->nullable();
             $table->unsignedBigInteger('updated_by_admin_user_id')->nullable();
+            $table->text('source_canonical');
             $table->boolean('target_publication_eligible')->default(false);
             $table->text('target_canonical');
             $table->timestamps();

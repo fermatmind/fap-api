@@ -23,6 +23,21 @@ final class PublicTopicEdgeReadModel
      */
     public function read(string $sourceType, int $sourceId, string $sourceLocale): array
     {
+        try {
+            return $this->readAvailableAuthority($sourceType, $sourceId, $sourceLocale);
+        } catch (\Throwable) {
+            $projection = $this->emptyProjection($sourceType, $sourceId, $sourceLocale);
+            $projection['authority']['reason'] = 'AUTHORITY_UNAVAILABLE';
+
+            return $projection;
+        }
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function readAvailableAuthority(string $sourceType, int $sourceId, string $sourceLocale): array
+    {
         $base = $this->emptyProjection($sourceType, $sourceId, $sourceLocale);
 
         if (PublicTopicEdge::isCareerType($sourceType)) {
@@ -90,7 +105,7 @@ final class PublicTopicEdgeReadModel
             $edge->forceFill($candidate);
             $edge->exists = true;
 
-            $item = $this->projectEligibleEdge($edge);
+            $item = $this->projectEligibleEdge($edge, $source);
             if ($item === null || isset($seen[$item['identity']])) {
                 continue;
             }
@@ -107,7 +122,7 @@ final class PublicTopicEdgeReadModel
     /**
      * @return array<string,mixed>|null
      */
-    private function projectEligibleEdge(PublicTopicEdge $edge): ?array
+    private function projectEligibleEdge(PublicTopicEdge $edge, array $source): ?array
     {
         $evidenceRefs = is_array($edge->evidence_refs)
             ? array_values(array_filter(
@@ -132,17 +147,13 @@ final class PublicTopicEdgeReadModel
             || trim((string) $edge->version) === ''
             || (int) $edge->created_by_admin_user_id <= 0
             || (int) $edge->updated_by_admin_user_id <= 0
-            || $evidenceRefs === []) {
+            || $evidenceRefs === []
+            || ! hash_equals($source['canonical'], rtrim(trim((string) $edge->source_canonical), '/'))) {
             return null;
         }
 
-        $isAlternateLocale = (string) $edge->relation_type === 'alternate_locale';
-        if (! $isAlternateLocale && (string) $edge->source_locale !== (string) $edge->target_locale) {
-            return null;
-        }
-
-        if ($isAlternateLocale && ((string) $edge->source_type !== (string) $edge->target_type
-            || (string) $edge->source_locale === (string) $edge->target_locale)) {
+        if ((string) $edge->source_locale !== (string) $edge->target_locale
+            && ! (bool) $edge->cross_locale_approved) {
             return null;
         }
 
@@ -171,10 +182,12 @@ final class PublicTopicEdgeReadModel
             'source_type' => (string) $edge->source_type,
             'source_id' => (int) $edge->source_id,
             'source_locale' => (string) $edge->source_locale,
+            'source_canonical' => $source['canonical'],
             'relation_type' => (string) $edge->relation_type,
             'target_type' => (string) $edge->target_type,
             'target_id' => (int) $edge->target_id,
             'target_locale' => (string) $edge->target_locale,
+            'cross_locale_approved' => (bool) $edge->cross_locale_approved,
             'visible_label' => (string) $edge->visible_label,
             'context' => filled($edge->context) ? (string) $edge->context : null,
             'position' => (int) $edge->position,
