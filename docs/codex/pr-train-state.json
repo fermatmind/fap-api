@@ -24,8 +24,8 @@
         "status": "pass"
       },
       "github_pr": {
-        "evidence": "PR #3617 opened from exact implementation commit df77f608c6cb45d88a9f7af14401034a7714d6e2; required GitHub checks are pending.",
-        "status": "pending"
+        "evidence": "PR #3617 head eabd2fbdbea815373d678af72a421f08e9c604c4 passed all nine required checks; staging parity was conditionally skipped. GitHub reports MERGEABLE/CLEAN.",
+        "status": "pass"
       },
       "local_validation": {
         "evidence": [
@@ -42,7 +42,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": "df77f608c6cb45d88a9f7af14401034a7714d6e2",
+    "commit_sha": "eabd2fbdbea815373d678af72a421f08e9c604c4",
     "content_authority": "backend_analytics_read_model",
     "database_mutation": false,
     "depends_on": [
@@ -66,7 +66,7 @@
     "repo": "fap-api",
     "scope_type": "measurement_m04_backend_read_model_remediation",
     "search_channel_action": false,
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "title": "MEASUREMENT-M04-BACKEND-READ-MODEL-REMEDIATION-01: repair report-ready and reporting-day semantics",
     "transitions": [
       {
@@ -83,6 +83,11 @@
         "at": "2026-08-10T18:42:00+08:00",
         "status": "github_checks_pending",
         "note": "Committed the exact 10-file scope as df77f608c6cb45d88a9f7af14401034a7714d6e2, pushed the scoped branch, and opened PR #3617. GitHub reports the PR mergeable while required checks run."
+      },
+      {
+        "at": "2026-08-10T18:51:00+08:00",
+        "status": "ready_to_merge",
+        "note": "PR #3617 exact head eabd2fbdbea815373d678af72a421f08e9c604c4 passed all nine required GitHub checks; staging parity was conditionally skipped. GitHub reports MERGEABLE/CLEAN, and the final changed-file scope remains the exact 10-file allowlist. This ledger-only closeout head must pass checks before squash merge."
       }
     ]
   },
