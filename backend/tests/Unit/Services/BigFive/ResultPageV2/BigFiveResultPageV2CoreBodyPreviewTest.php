@@ -256,7 +256,9 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Analytics/MeasurementAttributionDimensions.php',
             'backend/app/Services/Analytics/MeasurementEventContract.php',
             'backend/app/Services/Analytics/MeasurementFunnelReadModel.php',
+            'backend/app/Services/Analytics/ResultReadyEventRecorder.php',
             'backend/app/Services/Attempts/AttemptStartService.php',
+            'backend/app/Services/Attempts/AttemptSubmitPostCommitService.php',
             'backend/app/Services/Attempts/AttemptSubmitSideEffects.php',
         ];
         $blocked = [
@@ -13066,7 +13068,9 @@ DIFF;
             'backend/app/Services/Analytics/MeasurementAttributionDimensions.php',
             'backend/app/Services/Analytics/MeasurementEventContract.php',
             'backend/app/Services/Analytics/MeasurementFunnelReadModel.php',
+            'backend/app/Services/Analytics/ResultReadyEventRecorder.php',
             'backend/app/Services/Attempts/AttemptStartService.php',
+            'backend/app/Services/Attempts/AttemptSubmitPostCommitService.php',
             'backend/app/Services/Attempts/AttemptSubmitSideEffects.php',
         ], true);
     }

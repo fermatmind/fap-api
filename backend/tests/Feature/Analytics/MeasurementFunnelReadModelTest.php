@@ -7,6 +7,7 @@ namespace Tests\Feature\Analytics;
 use App\Services\Analytics\MeasurementFunnelReadModel;
 use App\Services\Attempts\AttemptSubmitSideEffects;
 use App\Support\OrgContext;
+use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -55,12 +56,13 @@ final class MeasurementFunnelReadModelTest extends TestCase
         );
 
         $this->assertTrue($report['ok'] ?? false);
-        $this->assertSame('pass', $report['status'] ?? null);
+        $this->assertSame('warning', $report['status'] ?? null);
         $this->assertSame(2, data_get($report, 'totals.attempt_started_count'));
         $this->assertSame(2, data_get($report, 'totals.test_completed_count'));
         $this->assertSame(1, data_get($report, 'totals.result_ready_count'));
         $this->assertSame(0, data_get($report, 'totals.result_ready_event_count'));
-        $this->assertSame('not_instrumented', data_get($report, 'totals.result_ready_event_coverage_status'));
+        $this->assertSame('partial', data_get($report, 'totals.result_ready_event_coverage_status'));
+        $this->assertContains('result_ready_event_coverage_partial', $report['issues'] ?? []);
         $this->assertSame($before, $this->tableCounts());
 
         $encoded = json_encode($report, JSON_UNESCAPED_SLASHES);
@@ -151,6 +153,53 @@ final class MeasurementFunnelReadModelTest extends TestCase
         $this->assertStringNotContainsString($attemptId, (string) $event->meta_json);
         $this->assertStringNotContainsString('person@example.com', (string) $event->meta_json);
         $this->assertStringNotContainsString('token=secret', (string) $event->meta_json);
+    }
+
+    public function test_read_model_deduplicates_result_ready_events_and_reports_duplicates(): void
+    {
+        $scenario = $this->seedFunnelAnalyticsScenario(74);
+        $attemptId = $scenario['attempt_a'];
+        $occurredAt = CarbonImmutable::parse($scenario['day'].' 08:06:00');
+        $this->insertEvent(74, 'result_ready', $attemptId, $occurredAt);
+        $this->insertEvent(74, 'result_ready', $attemptId, $occurredAt->addSecond());
+
+        $report = app(MeasurementFunnelReadModel::class)->report(
+            $scenario['day'],
+            $scenario['day'],
+            ['MBTI'],
+            ['en'],
+        );
+
+        $this->assertTrue($report['ok'] ?? false);
+        $this->assertSame('warning', $report['status'] ?? null);
+        $this->assertSame(1, data_get($report, 'totals.result_ready_count'));
+        $this->assertSame(1, data_get($report, 'totals.result_ready_event_count'));
+        $this->assertSame(1, data_get($report, 'totals.result_ready_duplicate_event_count'));
+        $this->assertSame('duplicate', data_get($report, 'totals.result_ready_event_coverage_status'));
+        $this->assertContains('result_ready_event_duplicates_detected', $report['issues'] ?? []);
+    }
+
+    public function test_read_model_does_not_treat_equal_but_mismatched_attempt_sets_as_complete(): void
+    {
+        $scenario = $this->seedFunnelAnalyticsScenario(75);
+        $this->insertEvent(
+            75,
+            'result_ready',
+            $scenario['attempt_c'],
+            CarbonImmutable::parse($scenario['day'].' 12:06:00'),
+        );
+
+        $report = app(MeasurementFunnelReadModel::class)->report(
+            $scenario['day'],
+            $scenario['day'],
+            ['MBTI'],
+            ['en'],
+        );
+
+        $this->assertSame(1, data_get($report, 'totals.result_ready_count'));
+        $this->assertSame(1, data_get($report, 'totals.result_ready_event_count'));
+        $this->assertSame('partial', data_get($report, 'totals.result_ready_event_coverage_status'));
+        $this->assertContains('result_ready_event_coverage_partial', $report['issues'] ?? []);
     }
 
     public function test_read_model_blocks_when_a_required_source_table_is_missing(): void

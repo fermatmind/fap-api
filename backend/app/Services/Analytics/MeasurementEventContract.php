@@ -8,7 +8,7 @@ final class MeasurementEventContract
 {
     public const VERSION = 'fermatmind.measurement-events.v1';
 
-    public const RESULT_READY_IMPLEMENTATION = 'contract_only';
+    public const RESULT_READY_IMPLEMENTATION = 'active';
 
     /**
      * Only low-cardinality, non-identifying values from this list may be copied

@@ -128,6 +128,25 @@ class AttemptSubmitIdempotencyTest extends TestCase
         $this->assertSame(1, DB::table('results')->where('attempt_id', $attemptId)->count());
         $this->assertSame(1, DB::table('attempt_answer_sets')->where('attempt_id', $attemptId)->count());
         $this->assertSame(1, DB::table('benefit_consumptions')->where('attempt_id', $attemptId)->count());
+        $this->assertSame(1, DB::table('events')->where('event_code', 'result_ready')->where('attempt_id', $attemptId)->count());
+
+        $resultReadyMeta = json_decode((string) DB::table('events')
+            ->where('event_code', 'result_ready')
+            ->where('attempt_id', $attemptId)
+            ->value('meta_json'), true);
+        $this->assertIsArray($resultReadyMeta);
+        $this->assertSame('ready', $resultReadyMeta['result_state'] ?? null);
+        $this->assertArrayNotHasKey('attempt_id', $resultReadyMeta);
+        $this->assertArrayNotHasKey('user_id', $resultReadyMeta);
+        $this->assertArrayNotHasKey('anon_id', $resultReadyMeta);
+        $this->assertNull(DB::table('events')
+            ->where('event_code', 'result_ready')
+            ->where('attempt_id', $attemptId)
+            ->value('user_id'));
+        $this->assertNull(DB::table('events')
+            ->where('event_code', 'result_ready')
+            ->where('attempt_id', $attemptId)
+            ->value('anon_id'));
 
         $dup = $this->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
@@ -143,5 +162,49 @@ class AttemptSubmitIdempotencyTest extends TestCase
         $this->assertSame(1, DB::table('results')->where('attempt_id', $attemptId)->count());
         $this->assertSame(1, DB::table('attempt_answer_sets')->where('attempt_id', $attemptId)->count());
         $this->assertSame(1, DB::table('benefit_consumptions')->where('attempt_id', $attemptId)->count());
+        $this->assertSame(1, DB::table('events')->where('event_code', 'result_ready')->where('attempt_id', $attemptId)->count());
+
+        DB::table('events')->where('event_code', 'result_ready')->where('attempt_id', $attemptId)->delete();
+
+        $repair = $this->postJson('/api/v0.3/attempts/submit', [
+            'attempt_id' => $attemptId,
+            'answers' => $answers,
+            'duration_ms' => 30000,
+        ], [
+            'X-Org-Id' => (string) $orgId,
+            'Authorization' => 'Bearer '.$token,
+        ]);
+        $repair->assertStatus(200);
+        $repair->assertJson(['ok' => true, 'idempotent' => true]);
+        $this->assertSame(1, DB::table('events')->where('event_code', 'result_ready')->where('attempt_id', $attemptId)->count());
+    }
+
+    public function test_failed_submit_does_not_emit_result_ready(): void
+    {
+        $this->seedScales();
+        [$orgId, $token] = $this->seedOrgWithToken();
+        $this->grantScaleForOrg($orgId, 'DEMO_ANSWERS');
+
+        $start = $this->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'DEMO_ANSWERS',
+        ], [
+            'X-Org-Id' => (string) $orgId,
+            'Authorization' => 'Bearer '.$token,
+        ]);
+        $start->assertStatus(200);
+        $attemptId = (string) $start->json('attempt_id');
+
+        $failed = $this->postJson('/api/v0.3/attempts/submit', [
+            'attempt_id' => $attemptId,
+            'answers' => [],
+            'duration_ms' => 30000,
+        ], [
+            'X-Org-Id' => (string) $orgId,
+            'Authorization' => 'Bearer '.$token,
+        ]);
+
+        $failed->assertStatus(422);
+        $this->assertSame(0, DB::table('results')->where('attempt_id', $attemptId)->count());
+        $this->assertSame(0, DB::table('events')->where('event_code', 'result_ready')->where('attempt_id', $attemptId)->count());
     }
 }

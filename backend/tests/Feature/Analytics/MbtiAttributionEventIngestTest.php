@@ -12,6 +12,28 @@ final class MbtiAttributionEventIngestTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_public_ingest_rejects_server_authoritative_result_ready(): void
+    {
+        config()->set('fap.events.ingest_token', 'ingest_test_token');
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ingest_test_token',
+        ])->postJson('/api/v0.3/analytics/mbti-attribution-events', [
+            'eventName' => 'result_ready',
+            'anonymousId' => 'anon_forged_result_ready',
+            'path' => '/en/tests/mbti-personality-test-16-personality-types',
+            'payload' => [
+                'scale_code' => 'MBTI',
+                'form_code' => 'mbti_93',
+                'locale' => 'en',
+            ],
+        ]);
+
+        $response->assertStatus(422);
+        $response->assertJsonPath('error_code', 'INVALID_EVENT_NAME');
+        $this->assertSame(0, DB::table('events')->where('event_code', 'result_ready')->count());
+    }
+
     public function test_ingest_endpoint_persists_mbti_attribution_event_with_envelope_payload(): void
     {
         config()->set('fap.events.ingest_token', 'ingest_test_token');
