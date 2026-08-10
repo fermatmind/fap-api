@@ -103903,7 +103903,7 @@
     "base": "main",
     "branch": "codex/career-cold-cache-discoverability-gate-02",
     "title": "CAREER-COLD-CACHE-DISCOVERABILITY-GATE-02: make Career cold-start activation cohort-complete",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "depends_on": [],
     "commit_sha": "9885ee5226f7020eaea15b9c42dea1df063414c3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3592",
@@ -103919,6 +103919,10 @@
       "syntax_and_manifests": {
         "status": "passed",
         "evidence": "PHP syntax, Composer strict validation, YAML parsing, JSON parsing, git diff --check, and exact seven-file scope validation passed."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "Exact implementation/PR-status head 80929367f04b92f9673b57814f903fa2f12a3db1 passed hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep OSS, Semgrep blocking secrets, and SARIF upload; conditional staging parity was skipped as designed."
       }
     },
     "failure_reason": null,
@@ -103955,6 +103959,11 @@
         "at": "2026-08-10T12:49:00+08:00",
         "status": "github_checks_pending",
         "note": "PR #3592 opened from the exact scoped branch. Required GitHub checks are pending; production recovery, deployment, cache warming, publication, sitemap/llms mutation, and Search Channel actions remain unexecuted."
+      },
+      {
+        "at": "2026-08-10T13:00:00+08:00",
+        "status": "ready_to_merge",
+        "note": "All registered required checks passed on head 80929367f04b92f9673b57814f903fa2f12a3db1, GitHub reports CLEAN, origin/main remains at the exact base, and the final diff remains limited to the seven manifest paths. This metadata transition itself requires fresh exact-head checks before merge."
       }
     ]
   },
