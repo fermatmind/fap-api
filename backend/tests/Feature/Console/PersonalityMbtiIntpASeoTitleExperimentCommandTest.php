@@ -48,6 +48,21 @@ final class PersonalityMbtiIntpASeoTitleExperimentCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
     }
 
+    public function test_dry_run_normalizes_the_staging_canonical_for_the_authority_fingerprint_only(): void
+    {
+        $this->createAuthority();
+        config(['app.frontend_url' => 'https://staging.fermatmind.com']);
+
+        [$exitCode, $receipt] = $this->runCommand(['--dry-run' => true]);
+
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($receipt['ok']);
+        $this->assertSame('planned', $receipt['status']);
+        $this->assertFalse($receipt['writes_committed']);
+        $this->assertSame(0, $receipt['live_projection_changes']);
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
     public function test_write_creates_one_inactive_revision_and_preserves_live_authority(): void
     {
         [, $variant, $seoMeta] = $this->createAuthority();

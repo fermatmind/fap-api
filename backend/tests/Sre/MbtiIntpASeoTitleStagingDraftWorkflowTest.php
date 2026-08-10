@@ -29,6 +29,11 @@ final class MbtiIntpASeoTitleStagingDraftWorkflowTest extends TestCase
             'cmp "$RUNNER_TEMP/public-before.json" "$RUNNER_TEMP/public-after.json"',
             $workflow,
         );
+        $this->assertStringContainsString(
+            'if ! php artisan personality:mbti-intp-a-seo-title-experiment',
+            $workflow,
+        );
+        $this->assertStringContainsString("errors\n            }' \"\$dry_run\" >&2 || true", $workflow);
 
         $captureOffset = strpos($workflow, '- name: Capture staging public projection before draft');
         $writeOffset = strpos($workflow, '- name: Execute dry-run, create inactive draft, and read back');

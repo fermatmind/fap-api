@@ -198,13 +198,24 @@ jobs:
           dry_run="$(mktemp)"
           trap 'rm -f "$dry_run"' EXIT
 
-          php artisan personality:mbti-intp-a-seo-title-experiment \
+          if ! php artisan personality:mbti-intp-a-seo-title-experiment \
             --package="$package" \
             --confirm-package-sha256="$EXPECTED_PACKAGE_SHA256" \
             --target-env=staging \
             --operator-approved="$approval" \
             --dry-run \
-            --json > "$dry_run"
+            --json > "$dry_run"; then
+            jq -c '{
+              ok,
+              status,
+              writes_committed,
+              revision_created_count,
+              idempotent_count,
+              live_projection_changes,
+              errors
+            }' "$dry_run" >&2 || true
+            exit 1
+          fi
           jq -e '
             .ok == true and .writes_committed == false and
             .revision_created_count == 0 and .live_projection_changes == 0
