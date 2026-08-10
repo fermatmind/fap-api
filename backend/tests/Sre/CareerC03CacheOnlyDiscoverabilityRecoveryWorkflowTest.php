@@ -94,7 +94,10 @@ final class CareerC03CacheOnlyDiscoverabilityRecoveryWorkflowTest extends TestCa
             'public_recovered_incomplete_transfer_count',
             'public_other_transport_failure_count',
             'public_non_200_count',
-            'del(.detail_readback.network_attempt_count,.detail_readback.transport_retry_count,.detail_readback.recovered_transport_failure_count,.detail_readback.recovered_incomplete_transfer_count)',
+            'surface_diagnostics: $public.surface_diagnostics',
+            'shared_surface_readback: $public.shared_surface_readback',
+            '.shared_surface_readback',
+            '.surface_diagnostics |= with_entries',
             "'https://fermatmind.com/sitemap.xml'",
             "'https://fermatmind.com/llms.txt'",
             "'https://fermatmind.com/llms-full.txt'",
@@ -114,6 +117,17 @@ final class CareerC03CacheOnlyDiscoverabilityRecoveryWorkflowTest extends TestCa
         self::assertStringNotContainsString('supervisorctl', $controlPlane);
         self::assertStringNotContainsString('indexnow', strtolower($controlPlane));
         self::assertStringNotContainsString('googleapis', strtolower($controlPlane));
+
+        foreach ([
+            'jobs_en jobs_zh directory_en directory_zh sitemap_source sitemap llms llms_full',
+            '--write-out $\'%{http_code}\\t%{num_retries}\\t%{time_total}\'',
+            'shared-surface-status.tsv',
+            'PUBLIC_SHARED_TRANSPORT_INCOMPLETE',
+            'PUBLIC_SHARED_TRANSPORT_TIMEOUT',
+            'PUBLIC_SHARED_HTTP_5XX',
+        ] as $contract) {
+            self::assertStringContainsString($contract, $workflow);
+        }
 
         foreach ([
             'for round in 1 2; do',

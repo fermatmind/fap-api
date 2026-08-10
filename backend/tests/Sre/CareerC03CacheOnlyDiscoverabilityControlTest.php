@@ -158,6 +158,19 @@ final class CareerC03CacheOnlyDiscoverabilityControlTest extends TestCase
             self::assertSame('PASS_PUBLIC_CONVERGED', $receipt['status']);
             self::assertTrue($receipt['converged']);
             self::assertSame([], $receipt['surface_mismatches']);
+            self::assertSame(
+                ['jobs', 'directory', 'sitemap_source', 'sitemap', 'llms', 'llms_full'],
+                array_keys($receipt['surface_diagnostics']),
+            );
+            self::assertTrue($receipt['surface_diagnostics']['jobs']['matches_expected']);
+            self::assertSame(1, $receipt['surface_diagnostics']['jobs']['slug_count']);
+            self::assertSame(2, $receipt['surface_diagnostics']['jobs']['row_count']);
+            self::assertMatchesRegularExpression('/^[a-f0-9]{64}$/D', $receipt['surface_diagnostics']['jobs']['slug_set_sha256']);
+            self::assertMatchesRegularExpression('/^[a-f0-9]{64}$/D', $receipt['surface_diagnostics']['jobs']['row_set_sha256']);
+            self::assertSame('ok', $receipt['surface_diagnostics']['jobs']['transport_class']);
+            self::assertSame('within_5s', $receipt['surface_diagnostics']['jobs']['latency_class']);
+            self::assertSame(6, $receipt['shared_surface_readback']['surface_count']);
+            self::assertSame(8, $receipt['shared_surface_readback']['request_count']);
             self::assertSame(0, $receipt['private_path_leak_count']);
             self::assertSame(4, $receipt['detail_readback']['network_attempt_count']);
             self::assertSame(0, $receipt['detail_readback']['transport_retry_count']);
@@ -183,8 +196,65 @@ final class CareerC03CacheOnlyDiscoverabilityControlTest extends TestCase
             self::assertSame('HOLD_PUBLIC_DRIFT', $receipt['status']);
             self::assertFalse($receipt['converged']);
             self::assertSame(['jobs'], $receipt['surface_mismatches']);
+            self::assertFalse($receipt['surface_diagnostics']['jobs']['matches_expected']);
+            self::assertTrue($receipt['surface_diagnostics']['directory']['matches_expected']);
+            self::assertSame(0, $receipt['surface_diagnostics']['jobs']['locales']['en']['count']);
         } finally {
             $this->removeFixture($directory);
+        }
+    }
+
+    #[Test]
+    public function public_verify_classifies_shared_surface_retry_latency_and_terminal_transport(): void
+    {
+        [$arguments, $directory] = $this->publicFixture();
+        file_put_contents($arguments[12], implode("\n", [
+            "jobs_en\t200\t0\t1\t6200",
+            "jobs_zh\t200\t0\t0\t900",
+            "directory_en\t200\t0\t0\t700",
+            "directory_zh\t200\t0\t0\t800",
+            "sitemap_source\t200\t0\t0\t1100",
+            "sitemap\t200\t0\t0\t1200",
+            "llms\t200\t0\t0\t1300",
+            "llms_full\t200\t18\t2\t61000",
+        ])."\n");
+
+        try {
+            [$exit, $receipt] = $this->runPublicVerify($arguments);
+
+            self::assertSame(2, $exit);
+            self::assertSame('recovered_retry', $receipt['surface_diagnostics']['jobs']['transport_class']);
+            self::assertSame('within_20s', $receipt['surface_diagnostics']['jobs']['latency_class']);
+            self::assertSame('terminal_incomplete_transfer', $receipt['surface_diagnostics']['llms_full']['transport_class']);
+            self::assertSame('bounded_retry_window', $receipt['surface_diagnostics']['llms_full']['latency_class']);
+            self::assertFalse($receipt['surface_diagnostics']['llms_full']['matches_expected']);
+            self::assertSame(1, $receipt['shared_surface_readback']['recovered_retry_count']);
+            self::assertSame(1, $receipt['shared_surface_readback']['terminal_transport_failure_count']);
+            self::assertSame(1, $receipt['shared_surface_readback']['incomplete_transfer_count']);
+        } finally {
+            $this->removeFixture($directory);
+        }
+    }
+
+    #[Test]
+    public function public_verify_rejects_unknown_or_duplicate_shared_surface_status_ids(): void
+    {
+        foreach (['unknown_surface', 'jobs_en'] as $replacement) {
+            [$arguments, $directory] = $this->publicFixture();
+            $rows = file($arguments[12], FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+            self::assertIsArray($rows);
+            $rows[7] = $replacement."\t200\t0\t0\t1000";
+            file_put_contents($arguments[12], implode("\n", $rows)."\n");
+
+            try {
+                [$exit, $receipt] = $this->runPublicVerify($arguments);
+
+                self::assertSame(1, $exit);
+                self::assertSame('HOLD_CONTROL_FAILED', $receipt['status']);
+                self::assertSame('SHARED_SURFACE_STATUS_ROW_INVALID', $receipt['safe_failure_code']);
+            } finally {
+                $this->removeFixture($directory);
+            }
         }
     }
 
@@ -421,6 +491,7 @@ final class CareerC03CacheOnlyDiscoverabilityControlTest extends TestCase
             'llms.txt',
             'llms-full.txt',
             'detail-status.tsv',
+            'shared-surface-status.tsv',
         ] as $name) {
             $paths[] = $directory.'/'.$name;
         }
@@ -452,6 +523,17 @@ final class CareerC03CacheOnlyDiscoverabilityControlTest extends TestCase
             "2\t{$en}\t200\t0\t1\t0",
             "2\t{$zh}\t200\t0\t1\t0",
         ])."\n");
+        $sharedSurfaceStatus = $paths[10];
+        file_put_contents($sharedSurfaceStatus, implode("\n", [
+            "jobs_en\t200\t0\t0\t900",
+            "jobs_zh\t200\t0\t0\t1000",
+            "directory_en\t200\t0\t0\t1100",
+            "directory_zh\t200\t0\t0\t1200",
+            "sitemap_source\t200\t0\t0\t1300",
+            "sitemap\t200\t0\t0\t1400",
+            "llms\t200\t0\t0\t1500",
+            "llms_full\t200\t0\t0\t1600",
+        ])."\n");
 
         return [[
             'control',
@@ -466,6 +548,7 @@ final class CareerC03CacheOnlyDiscoverabilityControlTest extends TestCase
             $llms,
             $llmsFull,
             $detailStatus,
+            $sharedSurfaceStatus,
         ], $directory];
     }
 

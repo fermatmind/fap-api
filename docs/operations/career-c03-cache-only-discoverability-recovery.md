@@ -19,6 +19,14 @@ The inspection must contain a unique list of receipt-derived public EN/ZH Career
 
 Recovered transport failures are diagnostic and may pass. A terminal transport failure fails closed. Receipt aggregates distinguish recovered transport errors, recovered `curl(18)`, terminal `curl(18)`, final timeouts, other transport failures, 5xx and non-200 responses. Recovered-retry diagnostic counters are excluded from cache pre-state and rollback identity hashes.
 
+## Public surface diagnostic receipt
+
+The fixed shared-surface allowlist is `jobs`, `directory`, `sitemap_source`, `sitemap`, `llms` and `llms_full`. The same bounded public GETs already used by C03 emit runner-temporary status rows under opaque fixed IDs. Requests remain paired at maximum concurrency two, use HTTPS GET without redirects, retain the existing 10-second connect and 60-second request bounds, and keep at most two bounded curl retries.
+
+Every incident-closeout and verify receipt exposes `surface_diagnostics` with exactly those six keys. Each entry contains a `matches_expected` boolean, bilingual slug/row counts and set SHA-256 values, plus a sanitized transport and latency class. `shared_surface_readback` contains only aggregate counts and classifications. Neither object contains URLs, response bodies, cache keys, topology, raw elapsed timings or curl diagnostics. Terminal transport/HTTP failure is fail closed; a recovered bounded retry may pass. Transport, retry and latency classifications are excluded from the semantic pre-state and rollback identity SHA.
+
+Use the per-surface booleans as the sole public-drift locator. If a fresh latest-main verify returns `PASS_C03_REVERIFIED_NO_APPLY_REQUIRED`, do not run `apply` and continue to the independent PR5 truth rescan. If it returns `PASS_RECOVERY_REQUIRED`, stop and review only the fixed surfaces whose `matches_expected` value is false before seeking separate apply authorization.
+
 ## Fixed sequence
 
 ### 1. `incident_closeout`
@@ -54,7 +62,7 @@ gh workflow run career-c03-cache-only-discoverability-recovery.yml \
 The authority inventory and current published cohort are derived from the exact C02 authority artifact; no inventory or cohort counts are hardcoded. The phase compares exact bilingual Career sets for authority, detail coverage, jobs, directory, sitemap source, sitemap, `llms.txt` and `llms-full.txt`, plus two bounded public detail readback rounds.
 
 - `PASS_C03_REVERIFIED_NO_APPLY_REQUIRED`: C03 is PASS with zero production writes. Do not run `apply`.
-- `PASS_RECOVERY_REQUIRED`: C03 remains HOLD. Copy the exact one-time approval phrase and receipt lineage into `apply`.
+- `PASS_RECOVERY_REQUIRED`: C03 remains HOLD. The receipt identifies the exact fixed-allowlist surface drift; do not run `apply` without separate production-write authorization.
 - `HOLD_PUBLIC_READBACK_FAILED`: stop on terminal transport, HTTP, private-leak or set-drift failure. The sanitized receipt contains aggregate counts and zero-write facts only; it contains no URL, body, topology, cache key or approval phrase.
 - Any HOLD status: stop. C03 remains HOLD and automatic retry is forbidden.
 
@@ -114,8 +122,8 @@ bash -n scripts/operations/career_c03_bounded_public_readback.sh
 composer validate --strict
 ```
 
-From the repository root, also parse the workflow YAML, validate the exact six-file scope, and run `git diff --check`.
+From the repository root, also parse the workflow YAML, validate the exact five-file scope, and run `git diff --check`.
 
 ## Repository rule impact
 
-This adds a one-incident control-plane recovery entry only. Career content, publication and public API authority remain backend/CMS-authoritative. There is no frontend fallback, runtime authority change, deployment change, migration change, or PR-train manifest/state change.
+This adds read-only diagnostic evidence to the existing one-incident control plane only. Career content, publication and public API authority remain backend/CMS-authoritative. There is no frontend fallback, runtime authority change, deployment change, migration change, or PR-train manifest/state change.

@@ -26,6 +26,15 @@ final class CareerC03CacheOnlyDiscoverabilityControl
 
     private const LOCALES = ['en', 'zh-CN'];
 
+    private const PUBLIC_SURFACE_TRANSPORT_IDS = [
+        'jobs' => ['jobs_en', 'jobs_zh'],
+        'directory' => ['directory_en', 'directory_zh'],
+        'sitemap_source' => ['sitemap_source'],
+        'sitemap' => ['sitemap'],
+        'llms' => ['llms'],
+        'llms_full' => ['llms_full'],
+    ];
+
     private const MIGRATION = '2026_08_10_060000_create_public_topic_edges_table';
 
     private const SEO_CACHE_KEYS = [
@@ -82,15 +91,17 @@ final class CareerC03CacheOnlyDiscoverabilityControl
     /** @param list<string> $paths */
     private static function runPublicVerify(array $paths): int
     {
-        if (count($paths) !== 10) {
+        if (count($paths) !== 11) {
             throw new CareerC03ControlFailure('PUBLIC_VERIFY_INPUT_COUNT_INVALID');
         }
 
         [$inspectPath, $jobsEnPath, $jobsZhPath, $directoryEnPath, $directoryZhPath,
-            $sitemapSourcePath, $sitemapXmlPath, $llmsPath, $llmsFullPath, $detailStatusPath] = $paths;
+            $sitemapSourcePath, $sitemapXmlPath, $llmsPath, $llmsFullPath, $detailStatusPath,
+            $sharedSurfaceStatusPath] = $paths;
         $inspection = self::jsonFile($inspectPath, 'INSPECTION_INPUT_INVALID');
         $expectedRows = self::stringList($inspection['expected_rows'] ?? null, 'EXPECTED_ROWS_INVALID');
         $expected = self::snapshotFromRows($expectedRows, 'EXPECTED');
+        $sharedSurfaceReadback = self::sharedSurfaceStatus($sharedSurfaceStatusPath);
 
         $actual = [
             'jobs' => self::surfaceSnapshotFromRows(array_merge(
@@ -108,10 +119,18 @@ final class CareerC03CacheOnlyDiscoverabilityControl
         ];
 
         $mismatches = [];
+        $surfaceDiagnostics = [];
         foreach ($actual as $surface => $snapshot) {
-            if (! self::sameSnapshot($expected, $snapshot)) {
+            $matchesExpected = self::sameSnapshot($expected, $snapshot)
+                && (($sharedSurfaceReadback['surfaces'][$surface]['terminal'] ?? true) === false);
+            if (! $matchesExpected) {
                 $mismatches[] = $surface;
             }
+            $surfaceDiagnostics[$surface] = array_merge(
+                ['matches_expected' => $matchesExpected],
+                self::safeSnapshot($snapshot),
+                (array) ($sharedSurfaceReadback['surfaces'][$surface] ?? []),
+            );
         }
 
         $detail = self::detailStatus($detailStatusPath, (array) ($inspection['expected_urls'] ?? []));
@@ -130,6 +149,9 @@ final class CareerC03CacheOnlyDiscoverabilityControl
         }
 
         $converged = $mismatches === []
+            && $sharedSurfaceReadback['terminal_transport_failure_count'] === 0
+            && $sharedSurfaceReadback['server_error_count'] === 0
+            && $sharedSurfaceReadback['non_200_count'] === 0
             && $detail['terminal_transport_failure_count'] === 0
             && $detail['timeout_count'] === 0
             && $detail['server_error_count'] === 0
@@ -143,6 +165,8 @@ final class CareerC03CacheOnlyDiscoverabilityControl
             'converged' => $converged,
             'expected' => self::safeSnapshot($expected),
             'surface_mismatches' => $mismatches,
+            'surface_diagnostics' => $surfaceDiagnostics,
+            'shared_surface_readback' => array_diff_key($sharedSurfaceReadback, ['surfaces' => true]),
             'detail_readback' => $detail,
             'non_career_url_set_sha256' => $nonCareer,
             'private_path_leak_count' => $privateLeakCount,
@@ -956,6 +980,137 @@ final class CareerC03CacheOnlyDiscoverabilityControl
         if (getenv('CAREER_C03_CACHE_APPLY_AUTHORIZED') !== '1') {
             throw new CareerC03ControlFailure('APPLY_NOT_AUTHORIZED');
         }
+    }
+
+    /** @return array<string, mixed> */
+    private static function sharedSurfaceStatus(string $path): array
+    {
+        $expectedIds = [];
+        foreach (self::PUBLIC_SURFACE_TRANSPORT_IDS as $ids) {
+            foreach ($ids as $id) {
+                $expectedIds[$id] = false;
+            }
+        }
+
+        $rows = [];
+        foreach (preg_split('/\R/', trim(self::fileBytes($path, 'SHARED_SURFACE_STATUS_INVALID'))) ?: [] as $line) {
+            if ($line === '') {
+                continue;
+            }
+            $parts = explode("\t", $line);
+            if (count($parts) !== 5) {
+                throw new CareerC03ControlFailure('SHARED_SURFACE_STATUS_ROW_INVALID');
+            }
+            [$id, $code, $curlExit, $retryCount, $elapsedMs] = $parts;
+            if (! array_key_exists($id, $expectedIds) || $expectedIds[$id] === true
+                || preg_match('/^[0-9]{3}$/D', $code) !== 1
+                || preg_match('/^[0-9]{1,3}$/D', $curlExit) !== 1
+                || preg_match('/^[0-2]$/D', $retryCount) !== 1
+                || preg_match('/^[0-9]{1,6}$/D', $elapsedMs) !== 1) {
+                throw new CareerC03ControlFailure('SHARED_SURFACE_STATUS_ROW_INVALID');
+            }
+            $status = (int) $code;
+            $exit = (int) $curlExit;
+            $retries = (int) $retryCount;
+            $latency = (int) $elapsedMs;
+            if ($exit > 255 || $latency > 200000 || ($exit === 0 && $status === 0)) {
+                throw new CareerC03ControlFailure('SHARED_SURFACE_STATUS_TUPLE_INVALID');
+            }
+            $expectedIds[$id] = true;
+            $rows[$id] = [
+                'status' => $status,
+                'exit' => $exit,
+                'retries' => $retries,
+                'elapsed_ms' => $latency,
+            ];
+        }
+        if (in_array(false, $expectedIds, true)) {
+            throw new CareerC03ControlFailure('SHARED_SURFACE_STATUS_INCOMPLETE');
+        }
+
+        $surfaces = [];
+        foreach (self::PUBLIC_SURFACE_TRANSPORT_IDS as $surface => $ids) {
+            $surfaceRows = [];
+            foreach ($ids as $id) {
+                $surfaceRows[] = $rows[$id];
+            }
+            $surfaces[$surface] = self::summarizeSharedSurfaceStatus($surfaceRows);
+        }
+        $summary = self::summarizeSharedSurfaceStatus(array_values($rows));
+        $summary['surface_count'] = count($surfaces);
+        $summary['surfaces'] = $surfaces;
+
+        return $summary;
+    }
+
+    /** @param list<array{status: int, exit: int, retries: int, elapsed_ms: int}> $rows @return array<string, mixed> */
+    private static function summarizeSharedSurfaceStatus(array $rows): array
+    {
+        $transportRetries = 0;
+        $recoveredRetries = 0;
+        $terminalTransportFailures = 0;
+        $incompleteTransfers = 0;
+        $timeouts = 0;
+        $otherTransportFailures = 0;
+        $serverErrors = 0;
+        $non200 = 0;
+        $maxElapsedMs = 0;
+        foreach ($rows as $row) {
+            $transportRetries += $row['retries'];
+            $maxElapsedMs = max($maxElapsedMs, $row['elapsed_ms']);
+            if ($row['exit'] === 0 && $row['status'] === 200 && $row['retries'] > 0) {
+                $recoveredRetries++;
+            }
+            if ($row['status'] >= 500) {
+                $serverErrors++;
+            } elseif ($row['status'] !== 200 && $row['status'] !== 0) {
+                $non200++;
+            } elseif ($row['exit'] !== 0) {
+                $terminalTransportFailures++;
+                if ($row['exit'] === 18) {
+                    $incompleteTransfers++;
+                } elseif ($row['exit'] === 28) {
+                    $timeouts++;
+                } else {
+                    $otherTransportFailures++;
+                }
+            }
+        }
+
+        $transportClass = match (true) {
+            $incompleteTransfers > 0 => 'terminal_incomplete_transfer',
+            $timeouts > 0 => 'terminal_timeout',
+            $otherTransportFailures > 0 => 'terminal_other_transport',
+            $serverErrors > 0 => 'http_5xx',
+            $non200 > 0 => 'http_non_200',
+            $recoveredRetries > 0 => 'recovered_retry',
+            default => 'ok',
+        };
+
+        return [
+            'request_count' => count($rows),
+            'transport_class' => $transportClass,
+            'latency_class' => self::latencyClass($maxElapsedMs),
+            'transport_retry_count' => $transportRetries,
+            'recovered_retry_count' => $recoveredRetries,
+            'terminal_transport_failure_count' => $terminalTransportFailures,
+            'incomplete_transfer_count' => $incompleteTransfers,
+            'timeout_count' => $timeouts,
+            'other_transport_failure_count' => $otherTransportFailures,
+            'server_error_count' => $serverErrors,
+            'non_200_count' => $non200,
+            'terminal' => $terminalTransportFailures + $serverErrors + $non200 > 0,
+        ];
+    }
+
+    private static function latencyClass(int $elapsedMs): string
+    {
+        return match (true) {
+            $elapsedMs <= 5000 => 'within_5s',
+            $elapsedMs <= 20000 => 'within_20s',
+            $elapsedMs <= 60000 => 'within_60s',
+            default => 'bounded_retry_window',
+        };
     }
 
     /** @return array<string, mixed> */
