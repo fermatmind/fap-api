@@ -51,16 +51,75 @@ final class BigFiveReportUnlockRolloutGate
 
     private function inScope(object $attempt): bool
     {
-        $formCode = trim((string) data_get($attempt->answers_summary_json ?? [], 'meta.form_code', ''));
-        if ($formCode === '') {
-            $questionCount = (int) ($attempt->question_count ?? 0);
-            $formCode = in_array($questionCount, [90, 120], true) ? 'big5_'.$questionCount : '';
-        }
+        $formCode = $this->resolveFormCode($attempt);
 
         return strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'BIG5_OCEAN'
             && in_array(trim((string) ($attempt->org_id ?? '')), $this->list('allowed_tenant_ids'), true)
             && in_array($formCode, $this->list('allowed_form_codes'), true)
             && in_array(trim((string) ($attempt->locale ?? '')), $this->list('allowed_locales'), true);
+    }
+
+    private function resolveFormCode(object $attempt): ?string
+    {
+        $explicit = trim((string) data_get($attempt->answers_summary_json ?? [], 'meta.form_code', ''));
+        $explicitFormCode = $explicit !== '' ? $this->canonicalizeFormCode($explicit) : null;
+        if ($explicit !== '' && $explicitFormCode === null) {
+            return null;
+        }
+
+        $resolvedSignals = array_values(array_unique(array_filter([
+            $explicitFormCode,
+            $this->matchFormCodeBy('dir_version', trim((string) ($attempt->dir_version ?? ''))),
+            $this->matchFormCodeBy('question_count', (int) ($attempt->question_count ?? 0)),
+        ], static fn (?string $value): bool => $value !== null)));
+
+        return count($resolvedSignals) === 1 ? $resolvedSignals[0] : null;
+    }
+
+    private function canonicalizeFormCode(string $formCode): ?string
+    {
+        $normalized = strtolower(trim($formCode));
+        foreach ($this->forms() as $canonical => $config) {
+            if ($normalized === strtolower($canonical)) {
+                return $canonical;
+            }
+
+            $aliases = is_array($config['aliases'] ?? null) ? $config['aliases'] : [];
+            foreach ($aliases as $alias) {
+                if ($normalized === strtolower(trim((string) $alias))) {
+                    return $canonical;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private function matchFormCodeBy(string $field, string|int $value): ?string
+    {
+        if ($value === '' || $value === 0) {
+            return null;
+        }
+
+        $matches = [];
+        foreach ($this->forms() as $formCode => $config) {
+            $configuredValue = $field === 'question_count'
+                ? (int) ($config[$field] ?? 0)
+                : trim((string) ($config[$field] ?? ''));
+            if ($configuredValue === $value) {
+                $matches[] = $formCode;
+            }
+        }
+
+        return count($matches) === 1 ? $matches[0] : null;
+    }
+
+    /** @return array<string, array<string, mixed>> */
+    private function forms(): array
+    {
+        $forms = config('content_packs.big5_forms.forms', []);
+
+        return is_array($forms) ? $forms : [];
     }
 
     /** @return list<string> */
