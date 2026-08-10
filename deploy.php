@@ -318,6 +318,7 @@ function deployCanSudoWwwData(): bool
     if ($canSudo === null) {
         $canSudo = trim(run('sudo -n -u www-data -- true 2>/dev/null && echo yes || echo no')) === 'yes';
     }
+
     return $canSudo;
 }
 
@@ -550,8 +551,16 @@ task('guard:career-runtime-projection-authority', function () {
         return;
     }
 
+    if (! deployCanSudoWwwData()) {
+        throw new \RuntimeException('Career runtime projection gate requires the application runtime identity.');
+    }
+
     run(sprintf(
-        'FM_CAREER_COLD_CACHE_GATE_EXECUTE=1 {{bin/php}} %s authority',
+        <<<'BASH'
+php_bin="$(command -v {{bin/php}})"
+test -n "$php_bin"
+sudo -n -u www-data -- env FM_CAREER_COLD_CACHE_GATE_EXECUTE=1 "$php_bin" %s authority
+BASH,
         deployPlaceholderPathArg('{{release_path}}', 'backend/scripts/deploy/verify_career_cold_cache_discoverability.php'),
     ));
 });
