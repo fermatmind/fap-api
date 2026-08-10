@@ -44,7 +44,7 @@
         "evidence": "Approved Window 3 product-truth contract SHA 3d9bef9549374007cedb5859cd14a90566020d5322ff47a12764bc6504269857 and source manifest SHA ba7b58afaa1228c445e138d5d5d5e5fa90db7f5222dfea19ee493be536a3b2ae are available.",
         "status": "pass"
       },
-      "github_pr": { "evidence": "PR #3609 exact head 50a142b9b78979bd9435976f0fac30af731784f9 passed hygiene, supply-chain, content-pack, Code Scanning, and both MBTI jobs. verify-bigfive exposed two pre-existing negative ScalesLookupController classifier contracts that the first repair had bypassed; the narrowed exact-diff repair is locally validated and fresh checks are pending.", "status": "pending" },
+      "github_pr": { "evidence": "PR #3609 exact implementation/repair head 5dd47511210018c176152f07cd42e75a5bd8192b passed hygiene, supply-chain, content-pack, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep OSS, blocking secret scan, and SARIF upload. Staging parity was skipped by workflow; GitHub reports the PR clean and mergeable. The final ledger-only head must rerun required checks before merge.", "status": "pass" },
       "local_validation": {
         "evidence": [
           "Latest-main focused product, commerce, report, history, SEO, and migration contracts passed: 35 tests / 1630 assertions.",
@@ -60,9 +60,9 @@
         "status": "pass"
       }
     },
-    "commit_sha": "15ffa84eb79df3bce14046e694afa602f8815b3f",
+    "commit_sha": "5dd47511210018c176152f07cd42e75a5bd8192b",
     "depends_on": [],
-    "failure_reason": "CI run 31375548308 verify-bigfive failed two classifier negative controls; the repair restores fail-closed line classification and allows only the SHA-fingerprinted Catalog controller diff.",
+    "failure_reason": null,
     "local_cleanup_executed": false,
     "merged_at": null,
     "name": "Converge six-assessment public product truth",
@@ -77,7 +77,7 @@
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_type": "assessment_catalog_fact_authority_convergence",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "title": "ASSESSMENT-CATALOG-FACT-AUTHORITY-CONVERGENCE-01: converge six-assessment public product truth",
     "transitions": [
       {
@@ -109,6 +109,11 @@
         "at": "2026-08-10T17:50:00+08:00",
         "status": "github_checks_repairing",
         "note": "CI run 31375548308 passed every completed required lane except verify-bigfive. Its 1688 passing tests exposed two failed legacy negative controls because the first Catalog classifier repair allowed ScalesLookupController.php by path before its fail-closed line classifier. The narrowed repair removes that controller from the file allowlist and accepts only the exact SHA-256 fingerprint of this PR's controller diff; empty or adjacent unsafe controller changes remain blocking. Four focused contracts pass with 12 assertions."
+      },
+      {
+        "at": "2026-08-10T18:00:00+08:00",
+        "status": "ready_to_merge",
+        "note": "Exact implementation/repair head 5dd47511210018c176152f07cd42e75a5bd8192b passed all required GitHub checks, including verify-bigfive and both MBTI lanes. GitHub reports CLEAN mergeability; final scope review remains exactly 32 allowlisted files with no production write, migration execution, deployment, CMS mutation, publication, or Search Channel action. The ledger-only closeout head must pass checks before squash merge."
       }
     ]
   },
