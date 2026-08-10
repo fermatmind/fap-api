@@ -103540,7 +103540,7 @@
     "branch": "codex/riasec-result-v2-production-snapshot-smoke-02",
     "title": "RIASEC-RESULT-V2-PRODUCTION-SNAPSHOT-SMOKE-02: bind immutable v0_2 content and read-only smoke",
     "depends_on": ["RIASEC-RESULT-V2-PRODUCTION-RUNTIME-02"],
-    "status": "github_checks_pending",
+    "status": "github_checks_repairing",
     "commit_sha": "d9c380701d889831794bbc94b120b078519f60ed",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3500",
     "checks": {
@@ -104031,11 +104031,11 @@
       },
       "manifests_and_scope": {
         "status": "passed",
-        "evidence": "PR-train YAML and the exact scoped id parse, state JSON plus generated registry JSON parse, git diff --check, and the exact fourteen-file manifest allowlist pass. Three unrelated duplicate historical manifest ids already exist on the exact main base; the new id is unique and this PR does not modify those historical entries."
+        "evidence": "PR-train YAML and the exact scoped id parse, state JSON plus generated registry and OpenAPI JSON parse, git diff --check, and the exact fifteen-file manifest allowlist pass. Three unrelated duplicate historical manifest ids already exist on the exact main base; the new id is unique and this PR does not modify those historical entries."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "PR #3594 opened from validated implementation commit 98c573c06b1b5a8297ecd7e1b266867b0db6da2c; required checks are pending."
+        "status": "repairing",
+        "evidence": "Exact head f9d24a48a73738b360630dbf54029a1d4a7bf6fd passed hygiene, supply-chain, content-pack-build-validate, Semgrep blocking secrets, Semgrep OSS, and SARIF upload, but verify-mbti-v2 and verify-mbti-legacy failed because the newly named public route was not yet reflected in the generated OpenAPI snapshot. The same-scope snapshot repair now passes export_openapi --check and OpenApiDiffTest (2 tests / 6 assertions); fresh exact-head checks are required."
       }
     },
     "failure_reason": null,
@@ -104077,6 +104077,16 @@
         "at": "2026-08-10T14:51:00+08:00",
         "status": "github_checks_pending",
         "note": "PR #3594 opened after the exact validated fourteen-file implementation commit was pushed. Required checks are pending; no production migration, CMS write, publication, deploy, Career activation, or discoverability mutation occurred."
+      },
+      {
+        "at": "2026-08-10T15:02:00+08:00",
+        "status": "github_checks_failed",
+        "note": "verify-mbti-v2 and verify-mbti-legacy failed on exact head f9d24a48a73738b360630dbf54029a1d4a7bf6fd while hygiene, supply-chain, content-pack-build-validate, and security scans passed. Diagnosis reproduced an OpenAPI snapshot drift containing only the new GET /api/v0.5/public-topic-edges route."
+      },
+      {
+        "at": "2026-08-10T15:05:00+08:00",
+        "status": "github_checks_repairing",
+        "note": "Generated the same-scope OpenAPI snapshot, then export_openapi --check and OpenApiDiffTest passed 2 tests / 6 assertions. The manifest scope is expanded only by that generated contract file; fresh required checks remain mandatory."
       }
     ]
   },

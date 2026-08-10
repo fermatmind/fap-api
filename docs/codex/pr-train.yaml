@@ -48922,6 +48922,7 @@ prs:
       - backend/tests/Feature/V0_5/PublicTopicEdgeApiTest.php
       - backend/tests/Architecture/ReviewPolicyRegistryTest.php
       - backend/docs/seo/public-topic-edge-authority-contract.md
+      - backend/docs/contracts/openapi.snapshot.json
       - docs/operations/generated/solo-owner-review-surface-registry.v1.json
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
@@ -48936,6 +48937,8 @@ prs:
       - cd backend && vendor/bin/pint --test routes/api.php app/Models/PublicTopicEdge.php app/Http/Controllers/API/V0_5/Cms/PublicTopicEdgeController.php app/Services/Cms/PublicTopicEdgeAuthorityResolver.php app/Services/Cms/PublicTopicEdgeReadModel.php app/Services/ReviewGovernance/ReviewPolicyRegistry.php database/migrations/2026_08_10_060000_create_public_topic_edges_table.php tests/Feature/V0_5/PublicTopicEdgeApiTest.php tests/Architecture/ReviewPolicyRegistryTest.php
       - cd backend && composer validate --strict
       - cd backend && composer audit
+      - cd backend && bash scripts/export_openapi.sh --check
+      - cd backend && php artisan test tests/Feature/OpenApiDiffTest.php --no-ansi
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - exact changed-file scope validation

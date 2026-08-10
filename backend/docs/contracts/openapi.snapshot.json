@@ -4851,6 +4851,26 @@
                 ]
             }
         },
+        "/api/v0.5/public-topic-edges": {
+            "get": {
+                "operationId": "api.v0_5.public_topic_edges.index",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\PublicTopicEdgeController",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\PublicApiCacheHeaders",
+                    "App\\Http\\Middleware\\RecordPublicContentRuntime"
+                ],
+                "x-laravel-name": "api.v0_5.public_topic_edges.index"
+            }
+        },
         "/api/v0.5/research": {
             "get": {
                 "operationId": "get_api_v0_5_research",
