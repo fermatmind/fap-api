@@ -1,0 +1,77 @@
+{
+  "schema_version": "personality.mbti-seo-title-production-promotion.v1",
+  "promotion_id": "zh-intp-a-seo-title-production-20260810-v1",
+  "target": {
+    "org_id": 0,
+    "framework": "MBTI",
+    "locale": "zh-CN",
+    "runtime_type_code": "INTP-A",
+    "route": "/zh/personality/intp-a"
+  },
+  "change": {
+    "field": "personality_profile_variant_seo_meta.seo_title",
+    "current": "INTP-A 人格特点：分析建模、可能性探索和独立解题 | FermatMind",
+    "proposed": "INTP-A 是什么？人格特点、优势盲点与适合场景 | FermatMind"
+  },
+  "staging_evidence": {
+    "experiment_package_sha256": "809a86d39744bf13c8aa5c43eeaa5f12ec9116c5cd6f6a8af68eea551aa8dc96",
+    "workflow_run_id": "31395530368",
+    "workflow_receipt_sha256": "d5bdc286f156f7b07f4694b0dc702461eeb64f1fdd359d0cfc42b22beef1d57a",
+    "revision_snapshot_sha256": "ec74c351c92498fec3714368bceb9b3f2674f07b2c9e5b313b9826461faab7be"
+  },
+  "production_baseline": {
+    "profile": {
+      "title": "INTP - 逻辑学家",
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true
+    },
+    "variant": {
+      "is_published": true
+    },
+    "seo_meta": {
+      "seo_title": "INTP-A 人格特点：分析建模、可能性探索和独立解题 | FermatMind",
+      "seo_description": "了解 INTP-A 的分析建模、可能性探索和独立解题、适合与不适合的场景、A/T 差异、职业、关系、压力应对、常见误解与 FAQ。内容仅用于自我理解和成长复盘。",
+      "canonical_url": "https://fermatmind.com/zh/personality/intp-a",
+      "og_title": "INTP-A 人格特点：分析建模、可能性探索和独立解题 | FermatMind",
+      "og_description": "了解 INTP-A 的分析建模、可能性探索和独立解题、适合与不适合的场景、A/T 差异、职业、关系、压力应对、常见误解与 FAQ。内容仅用于自我理解和成长复盘。",
+      "og_image_url": null,
+      "twitter_title": "INTP-A 人格特点：分析建模、可能性探索和独立解题 | FermatMind",
+      "twitter_description": "了解 INTP-A 的分析建模、可能性探索和独立解题、适合与不适合的场景、A/T 差异、职业、关系、压力应对、常见误解与 FAQ。内容仅用于自我理解和成长复盘。",
+      "twitter_image_url": null,
+      "robots": "index,follow",
+      "jsonld_overrides_json": {
+        "url": "https://fermatmind.com/zh/personality/intp-a",
+        "name": "INTP-A 人格特点",
+        "description": "了解 INTP-A 的分析建模、可能性探索和独立解题、适合与不适合的场景、A/T 差异、职业、关系、压力应对、常见误解与 FAQ。内容仅用于自我理解和成长复盘。"
+      }
+    }
+  },
+  "allowed_public_projection_changes": [
+    "seo_meta.seo_title",
+    "seo_surface_v1.title",
+    "seo_surface_v1.metadata_fingerprint",
+    "mbti_public_projection_v1.seo.title"
+  ],
+  "negative_guarantees": {
+    "description_change": false,
+    "h1_change": false,
+    "content_change": false,
+    "faq_change": false,
+    "internal_link_change": false,
+    "og_twitter_change": false,
+    "canonical_change": false,
+    "robots_change": false,
+    "json_ld_change": false,
+    "publication_change": false,
+    "indexability_change": false,
+    "discoverability_change": false,
+    "sitemap_change": false,
+    "llms_change": false,
+    "search_channel_change": false
+  },
+  "rollback_policy": {
+    "live_qa_failure": "restore_previous_title_and_append_rolled_back_marker",
+    "automatic_repromotion_after_rollback": false
+  }
+}

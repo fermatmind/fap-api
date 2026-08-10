@@ -1302,6 +1302,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $allowed = [
             'backend/app/Console/Commands/PersonalityMbtiIntpASeoTitleExperiment.php',
             'backend/app/Services/Cms/MbtiIntpASeoTitleExperimentService.php',
+            'backend/app/Console/Commands/PersonalityMbtiIntpASeoTitleProductionPromotion.php',
+            'backend/app/Services/Cms/MbtiIntpASeoTitleProductionPromotionService.php',
         ];
         $blocked = [
             'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
@@ -9706,6 +9708,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityMbtiIntpASeoTitleExperiment.php',
             'backend/app/Services/Cms/MbtiIntpASeoTitleExperimentService.php',
+            'backend/app/Console/Commands/PersonalityMbtiIntpASeoTitleProductionPromotion.php',
+            'backend/app/Services/Cms/MbtiIntpASeoTitleProductionPromotionService.php',
         ], true);
     }
 
