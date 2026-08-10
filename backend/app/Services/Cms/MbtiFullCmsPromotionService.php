@@ -212,7 +212,7 @@ final class MbtiFullCmsPromotionService
         }
 
         $snapshotKey = $kind === 'profile' ? self::PROFILE_SNAPSHOT_KEY : self::AT_SNAPSHOT_KEY;
-        $revision = $this->latestRevision($target['model'], $target['id']);
+        $revision = $this->latestRevision($target['model'], $target['id'], $snapshotKey);
         $snapshot = $revision instanceof Model && is_array($revision->getAttribute('snapshot_json'))
             ? $revision->getAttribute('snapshot_json')
             : [];
@@ -320,16 +320,26 @@ final class MbtiFullCmsPromotionService
         return $profile instanceof PersonalityProfile ? $profile : null;
     }
 
-    private function latestRevision(string $model, int $targetId): PersonalityProfileRevision|PersonalityProfileVariantRevision|null
-    {
+    private function latestRevision(
+        string $model,
+        int $targetId,
+        string $snapshotKey,
+    ): PersonalityProfileRevision|PersonalityProfileVariantRevision|null {
         $query = $model === 'profile'
             ? PersonalityProfileRevision::query()->where('profile_id', $targetId)
             : PersonalityProfileVariantRevision::query()->where('personality_profile_variant_id', $targetId);
-        $revision = $query->orderByDesc('revision_no')->orderByDesc('id')->first();
+        foreach ($query->orderByDesc('revision_no')->orderByDesc('id')->get() as $revision) {
+            $snapshot = is_array($revision->snapshot_json) ? $revision->snapshot_json : [];
+            if (! is_array($snapshot[$snapshotKey] ?? null)) {
+                continue;
+            }
 
-        return $revision instanceof PersonalityProfileRevision || $revision instanceof PersonalityProfileVariantRevision
-            ? $revision
-            : null;
+            return $revision instanceof PersonalityProfileRevision || $revision instanceof PersonalityProfileVariantRevision
+                ? $revision
+                : null;
+        }
+
+        return null;
     }
 
     /** @param array<string,mixed> $payload @return array<string,mixed> */

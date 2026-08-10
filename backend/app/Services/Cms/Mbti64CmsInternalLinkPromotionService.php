@@ -345,7 +345,11 @@ final class Mbti64CmsInternalLinkPromotionService
             if ($lock) {
                 $revisionQuery->lockForUpdate();
             }
-            $latest = $revisionQuery->first();
+            $latest = $revisionQuery->get()->first(static function ($revision): bool {
+                $snapshot = is_array($revision->snapshot_json) ? $revision->snapshot_json : [];
+
+                return is_array($snapshot[self::SNAPSHOT_KEY] ?? null);
+            });
             $snapshot = $latest instanceof PersonalityProfileVariantRevision
                 && is_array($latest->snapshot_json)
                 ? $latest->snapshot_json

@@ -48,8 +48,11 @@ final class PersonalityMbtiIntpASeoTitleExperiment extends Command
         $outputPath = null;
 
         try {
+            $input = $this->validatedInput();
             $outputPath = $this->prepareOutputPath();
-            $summary = $this->guardedRun($service);
+            $summary = $input['write']
+                ? $service->write($input['package'], $input['package_sha256'], $input['target_environment'])
+                : $service->plan($input['package'], $input['package_sha256'], $input['target_environment']);
         } catch (RuntimeException $exception) {
             $summary = $this->failureSummary('runtime_error', $exception->getMessage());
         } catch (Throwable) {
@@ -75,9 +78,14 @@ final class PersonalityMbtiIntpASeoTitleExperiment extends Command
     }
 
     /**
-     * @return array<string, mixed>
+     * @return array{
+     *   write: bool,
+     *   package: array<string, mixed>,
+     *   package_sha256: string,
+     *   target_environment: string
+     * }
      */
-    private function guardedRun(MbtiIntpASeoTitleExperimentService $service): array
+    private function validatedInput(): array
     {
         $dryRun = (bool) $this->option('dry-run');
         $write = (bool) $this->option('write');
@@ -116,9 +124,12 @@ final class PersonalityMbtiIntpASeoTitleExperiment extends Command
             throw new RuntimeException('Package must be a JSON object.');
         }
 
-        return $write
-            ? $service->write($package, $packageSha256, $targetEnvironment)
-            : $service->plan($package, $packageSha256, $targetEnvironment);
+        return [
+            'write' => $write,
+            'package' => $package,
+            'package_sha256' => $packageSha256,
+            'target_environment' => $targetEnvironment,
+        ];
     }
 
     private function guardRuntimeEnvironment(): void
@@ -167,9 +178,17 @@ final class PersonalityMbtiIntpASeoTitleExperiment extends Command
         if (File::isDirectory($resolved)) {
             throw new RuntimeException('--output must name a writable file, not a directory.');
         }
+        if (File::exists($resolved)) {
+            throw new RuntimeException('--output must name a new receipt file and must not overwrite an existing path.');
+        }
 
         File::ensureDirectoryExists(dirname($resolved));
-        if (File::put($resolved, '') === false || ! File::isFile($resolved) || ! is_writable($resolved)) {
+        $handle = @fopen($resolved, 'x');
+        if ($handle === false) {
+            throw new RuntimeException('--output could not be prepared as a writable receipt file.');
+        }
+        fclose($handle);
+        if (! File::isFile($resolved) || ! is_writable($resolved)) {
             throw new RuntimeException('--output could not be prepared as a writable receipt file.');
         }
 

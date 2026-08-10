@@ -187,6 +187,35 @@ final class PersonalityMbtiIntpASeoTitleExperimentCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
     }
 
+    public function test_invalid_command_guard_does_not_touch_existing_output_path(): void
+    {
+        $this->createAuthority();
+        $output = sys_get_temp_dir().'/fm-intp-a-seo-title-existing-receipt-'.Str::random(12).'.json';
+        File::put($output, 'sentinel');
+        $this->beforeApplicationDestroyed(static fn () => File::delete($output));
+
+        $exitCode = Artisan::call('personality:mbti-intp-a-seo-title-experiment', [
+            '--package' => base_path(self::PACKAGE_PATH),
+            '--confirm-package-sha256' => hash_file('sha256', base_path(self::PACKAGE_PATH)),
+            '--target-env' => 'staging',
+            '--operator-approved' => 'invalid approval',
+            '--allow-testing' => true,
+            '--write' => true,
+            '--draft-only' => true,
+            '--no-publish' => true,
+            '--no-indexability-change' => true,
+            '--no-sitemap' => true,
+            '--no-llms' => true,
+            '--no-search-release' => true,
+            '--json' => true,
+            '--output' => $output,
+        ]);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('sentinel', File::get($output));
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
     /**
      * @param  array<string, mixed>  $options
      * @return array{int, array<string, mixed>}
