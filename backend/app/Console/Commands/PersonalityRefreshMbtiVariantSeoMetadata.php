@@ -8,8 +8,11 @@ use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantSeoMeta;
 use App\Services\Cms\MbtiPersonalityVariantSeoMetadataService;
+use App\Services\Cms\MbtiSeoFieldOverrideRevisionService;
+use App\Services\Cms\PersonalityPublicReadModelCache;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use RuntimeException;
 
 final class PersonalityRefreshMbtiVariantSeoMetadata extends Command
 {
@@ -22,8 +25,11 @@ final class PersonalityRefreshMbtiVariantSeoMetadata extends Command
 
     protected $description = 'Refresh MBTI personality variant SEO metadata without changing profile content, sections, publication state, canonical, or robots.';
 
-    public function handle(MbtiPersonalityVariantSeoMetadataService $metadataService): int
-    {
+    public function handle(
+        MbtiPersonalityVariantSeoMetadataService $metadataService,
+        MbtiSeoFieldOverrideRevisionService $overrideService,
+        PersonalityPublicReadModelCache $readModelCache,
+    ): int {
         $locales = $this->selectedLocales();
         $types = $this->selectedTypes();
         $dryRun = (bool) $this->option('dry-run');
@@ -37,11 +43,15 @@ final class PersonalityRefreshMbtiVariantSeoMetadata extends Command
             'variants_scanned' => 0,
             'metadata_changes' => 0,
             'writes_committed' => 0,
+            'protected_override_count' => 0,
+            'protected_fields' => [],
+            'cache_invalidations' => 0,
             'missing_variants' => [],
             'sample_changes' => [],
         ];
 
         $seen = [];
+        $plans = [];
         $profiles = PersonalityProfile::query()
             ->withoutGlobalScopes()
             ->where('org_id', 0)
@@ -57,11 +67,8 @@ final class PersonalityRefreshMbtiVariantSeoMetadata extends Command
 
         foreach ($profiles as $profile) {
             foreach ($profile->variants as $variant) {
-                if (! $variant instanceof PersonalityProfileVariant) {
-                    continue;
-                }
-
-                if (! in_array((string) $variant->variant_code, ['A', 'T'], true)) {
+                if (! $variant instanceof PersonalityProfileVariant
+                    || ! in_array((string) $variant->variant_code, ['A', 'T'], true)) {
                     continue;
                 }
 
@@ -69,37 +76,51 @@ final class PersonalityRefreshMbtiVariantSeoMetadata extends Command
                 $seen[(string) $profile->locale.'|'.$runtimeTypeCode] = true;
                 $summary['variants_scanned']++;
 
+                $seoMeta = $variant->seoMeta;
+                $override = $seoMeta instanceof PersonalityProfileVariantSeoMeta
+                    ? $overrideService->resolve($profile, $variant, $seoMeta)
+                    : $this->emptyOverride();
+                if ($override['protected_fields'] !== []) {
+                    $summary['protected_override_count']++;
+                    $summary['protected_fields'] = array_values(array_unique([
+                        ...$summary['protected_fields'],
+                        ...$override['protected_fields'],
+                    ]));
+                }
+
                 $desired = $metadataService->build(
                     $runtimeTypeCode,
                     (string) $profile->locale,
                     $this->profileTypeName($profile),
                 );
-
-                if (! $this->metadataNeedsRefresh($variant, $desired)) {
-                    continue;
+                foreach ($override['protected_fields'] as $protectedField) {
+                    unset($desired[$protectedField]);
                 }
 
-                $summary['metadata_changes']++;
-                if (count($summary['sample_changes']) < 8) {
-                    $summary['sample_changes'][] = [
-                        'locale' => (string) $profile->locale,
-                        'runtime_type_code' => $runtimeTypeCode,
-                        'seo_title' => $desired['seo_title'],
-                    ];
+                $needsRefresh = $this->metadataNeedsRefresh($seoMeta, $desired);
+                if ($needsRefresh) {
+                    $summary['metadata_changes']++;
+                    if (count($summary['sample_changes']) < 8) {
+                        $summary['sample_changes'][] = [
+                            'locale' => (string) $profile->locale,
+                            'runtime_type_code' => $runtimeTypeCode,
+                            'seo_title' => $desired['seo_title'] ?? (string) $seoMeta?->seo_title,
+                        ];
+                    }
                 }
 
-                if ($dryRun) {
-                    continue;
-                }
-
-                DB::transaction(function () use ($variant, $desired): void {
-                    PersonalityProfileVariantSeoMeta::query()->updateOrCreate(
-                        ['personality_profile_variant_id' => (int) $variant->id],
-                        $desired,
-                    );
-                });
-
-                $summary['writes_committed']++;
+                $plans[] = [
+                    'profile_id' => (int) $profile->id,
+                    'variant_id' => (int) $variant->id,
+                    'locale' => (string) $profile->locale,
+                    'runtime_type_code' => $runtimeTypeCode,
+                    'profile_type_name' => $this->profileTypeName($profile),
+                    'desired' => $desired,
+                    'protected_fields' => $override['protected_fields'],
+                    'marker_snapshot_sha256' => $override['marker_snapshot_sha256'],
+                    'current' => $this->currentMetadata($seoMeta),
+                    'needs_refresh' => $needsRefresh,
+                ];
             }
         }
 
@@ -117,18 +138,97 @@ final class PersonalityRefreshMbtiVariantSeoMetadata extends Command
             }
         }
 
-        $this->emitSummary($summary);
-
+        sort($summary['protected_fields']);
         if ($assertComplete && $summary['missing_variants'] !== []) {
+            $this->emitSummary($summary);
+
             return self::FAILURE;
         }
+
+        if (! $dryRun) {
+            DB::transaction(function () use (
+                $plans,
+                $metadataService,
+                $overrideService,
+                $readModelCache,
+                &$summary,
+            ): void {
+                foreach ($plans as $plan) {
+                    $profile = PersonalityProfile::query()
+                        ->withoutGlobalScopes()
+                        ->whereKey($plan['profile_id'])
+                        ->lockForUpdate()
+                        ->firstOrFail();
+                    $variant = PersonalityProfileVariant::query()
+                        ->withoutGlobalScopes()
+                        ->whereKey($plan['variant_id'])
+                        ->lockForUpdate()
+                        ->firstOrFail();
+                    $seoMeta = PersonalityProfileVariantSeoMeta::query()
+                        ->withoutGlobalScopes()
+                        ->where('personality_profile_variant_id', (int) $variant->id)
+                        ->lockForUpdate()
+                        ->first();
+
+                    $override = $seoMeta instanceof PersonalityProfileVariantSeoMeta
+                        ? $overrideService->resolve($profile, $variant, $seoMeta, lock: true)
+                        : $this->emptyOverride();
+                    $desired = $metadataService->build(
+                        (string) $variant->runtime_type_code,
+                        (string) $profile->locale,
+                        $this->profileTypeName($profile),
+                    );
+                    foreach ($override['protected_fields'] as $protectedField) {
+                        unset($desired[$protectedField]);
+                    }
+
+                    if ($plan['protected_fields'] !== $override['protected_fields']
+                        || $plan['marker_snapshot_sha256'] !== $override['marker_snapshot_sha256']
+                        || $plan['current'] !== $this->currentMetadata($seoMeta)
+                        || $plan['desired'] !== $desired) {
+                        throw new RuntimeException('MBTI variant SEO metadata authority drifted after planning; no writes were committed.');
+                    }
+
+                    if (! $plan['needs_refresh']) {
+                        continue;
+                    }
+
+                    PersonalityProfileVariantSeoMeta::query()->updateOrCreate(
+                        ['personality_profile_variant_id' => (int) $variant->id],
+                        $desired,
+                    );
+                    if (! $readModelCache->forgetType(
+                        (string) $variant->runtime_type_code,
+                        (string) $profile->locale,
+                        0,
+                        PersonalityProfile::SCALE_CODE_MBTI,
+                    )) {
+                        throw new RuntimeException('MBTI personality public read-model cache invalidation failed; database writes were rolled back.');
+                    }
+
+                    $summary['writes_committed']++;
+                    $summary['cache_invalidations']++;
+                }
+            }, 3);
+        }
+
+        $this->emitSummary($summary);
 
         return self::SUCCESS;
     }
 
-    /**
-     * @return list<string>
-     */
+    /** @return array{status:string,protected_fields:list<string>,marker_revision_id:null,marker_snapshot_sha256:null} */
+    private function emptyOverride(): array
+    {
+        return [
+            'status' => 'none',
+            'protected_fields' => [],
+            'marker_revision_id' => null,
+            'marker_snapshot_sha256' => null,
+        ];
+    }
+
+    /** @return list<string> */
     private function selectedLocales(): array
     {
         $input = array_map('strval', (array) $this->option('locale'));
@@ -150,9 +250,7 @@ final class PersonalityRefreshMbtiVariantSeoMetadata extends Command
         return $locales;
     }
 
-    /**
-     * @return list<string>
-     */
+    /** @return list<string> */
     private function selectedTypes(): array
     {
         $input = array_map('strval', (array) $this->option('type'));
@@ -173,14 +271,9 @@ final class PersonalityRefreshMbtiVariantSeoMetadata extends Command
         return $types;
     }
 
-    /**
-     * @param  array<string, string>  $desired
-     */
-    private function metadataNeedsRefresh(PersonalityProfileVariant $variant, array $desired): bool
+    /** @param array<string,string> $desired */
+    private function metadataNeedsRefresh(?PersonalityProfileVariantSeoMeta $current, array $desired): bool
     {
-        $variant->loadMissing('seoMeta');
-        $current = $variant->seoMeta;
-
         if (! $current instanceof PersonalityProfileVariantSeoMeta) {
             return true;
         }
@@ -194,6 +287,16 @@ final class PersonalityRefreshMbtiVariantSeoMetadata extends Command
         return false;
     }
 
+    /** @return array<string,mixed>|null */
+    private function currentMetadata(?PersonalityProfileVariantSeoMeta $seoMeta): ?array
+    {
+        return $seoMeta?->only([
+            'personality_profile_variant_id', 'seo_title', 'seo_description', 'canonical_url',
+            'og_title', 'og_description', 'og_image_url', 'twitter_title', 'twitter_description',
+            'twitter_image_url', 'robots', 'jsonld_overrides_json',
+        ]);
+    }
+
     private function profileTypeName(PersonalityProfile $profile): ?string
     {
         $typeName = trim((string) ($profile->type_name ?? ''));
@@ -201,9 +304,7 @@ final class PersonalityRefreshMbtiVariantSeoMetadata extends Command
         return $typeName !== '' ? $typeName : null;
     }
 
-    /**
-     * @param  array<string, mixed>  $summary
-     */
+    /** @param array<string,mixed> $summary */
     private function emitSummary(array $summary): void
     {
         if ((bool) $this->option('json')) {
@@ -218,6 +319,9 @@ final class PersonalityRefreshMbtiVariantSeoMetadata extends Command
         $this->line('variants_scanned='.$summary['variants_scanned']);
         $this->line('metadata_changes='.$summary['metadata_changes']);
         $this->line('writes_committed='.$summary['writes_committed']);
+        $this->line('protected_override_count='.$summary['protected_override_count']);
+        $this->line('protected_fields='.json_encode($summary['protected_fields'], JSON_UNESCAPED_SLASHES));
+        $this->line('cache_invalidations='.$summary['cache_invalidations']);
         $this->line('missing_variants='.count((array) $summary['missing_variants']));
     }
 }

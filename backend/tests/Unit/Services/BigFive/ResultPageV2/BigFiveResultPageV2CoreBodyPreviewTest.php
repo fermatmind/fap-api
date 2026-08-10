@@ -1291,6 +1291,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $changed = [
             'backend/app/Console/Commands/PersonalityRefreshMbtiVariantSeoMetadata.php',
             'backend/app/Services/Cms/MbtiPersonalityVariantSeoMetadataService.php',
+            'backend/app/Services/Cms/MbtiSeoFieldOverrideRevisionService.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -9696,6 +9697,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityRefreshMbtiVariantSeoMetadata.php',
             'backend/app/Services/Cms/MbtiPersonalityVariantSeoMetadataService.php',
+            'backend/app/Services/Cms/MbtiSeoFieldOverrideRevisionService.php',
         ], true);
     }
 
