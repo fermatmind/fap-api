@@ -1,0 +1,497 @@
+{
+  "schema": "fermatmind.github-actions-lifecycle.v1",
+  "generated_at": "2026-08-10T00:00:00+08:00",
+  "inventory_base_sha": "c8015fac05ae544c8730adac6e18f387c76b2e33",
+  "repository": "fermatmind/fap-api",
+  "workflow_file_count": 82,
+  "phase_1_active_count": 14,
+  "target_active_count_after_convergence": 10,
+  "policy": {
+    "retired_remote_state": "disabled",
+    "retired_source_retention": "retain until convergence PR removes closed contracts",
+    "production_mutation_workflows_must_use_environment": "production",
+    "temporary_project_workflows_must_have_closeout_owner": true
+  },
+  "active_workflows": [
+    {
+      "path": ".github/workflows/backend-greenfield-current-baseline.yml",
+      "lifecycle": "long_term",
+      "reason": "Current-published disaster-recovery export and verification."
+    },
+    {
+      "path": ".github/workflows/backend-production-ops-queue-control.yml",
+      "lifecycle": "long_term",
+      "reason": "Protected queue topology control until generic ops convergence."
+    },
+    {
+      "path": ".github/workflows/backend-production-ops-runtime-recovery.yml",
+      "lifecycle": "long_term",
+      "reason": "Protected bounded runtime recovery until generic ops convergence."
+    },
+    {
+      "path": ".github/workflows/backend-production-release-discovery.yml",
+      "lifecycle": "long_term",
+      "reason": "Read-only exact release discovery for deploy readiness."
+    },
+    {
+      "path": ".github/workflows/backend-production-verify-only.yml",
+      "lifecycle": "long_term",
+      "reason": "Read-only production verification."
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "lifecycle": "long_term",
+      "reason": "Required pull-request and main CI."
+    },
+    {
+      "path": ".github/workflows/codeql.yml",
+      "lifecycle": "long_term",
+      "reason": "Code scanning and security checks."
+    },
+    {
+      "path": ".github/workflows/content-promotion-automation.yml",
+      "lifecycle": "long_term",
+      "reason": "Trusted exact-package content promotion."
+    },
+    {
+      "path": ".github/workflows/deploy-production.yml",
+      "lifecycle": "long_term",
+      "reason": "Protected exact-SHA production deployment."
+    },
+    {
+      "path": ".github/workflows/deploy.yml",
+      "lifecycle": "long_term",
+      "reason": "Automatic staging deployment."
+    },
+    {
+      "path": ".github/workflows/career-1046-publication-control.yml",
+      "lifecycle": "temporary_project",
+      "reason": "Active Career 1046 rollout control; retire after rollout closeout."
+    },
+    {
+      "path": ".github/workflows/career-1046-rollout-zero-write-preflight.yml",
+      "lifecycle": "temporary_project",
+      "reason": "Active Career 1046 zero-write preflight; retire after rollout closeout."
+    },
+    {
+      "path": ".github/workflows/mbti-intp-a-seo-title-production-promotion.yml",
+      "lifecycle": "temporary_project",
+      "reason": "Active MBTI title experiment production closeout."
+    },
+    {
+      "path": ".github/workflows/mbti-intp-a-seo-title-staging-draft.yml",
+      "lifecycle": "temporary_project",
+      "reason": "Active MBTI title experiment staging evidence."
+    }
+  ],
+  "retired_workflows": [
+    {
+      "path": ".github/workflows/backend-production-bootstrap-password-auth-diagnostic.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/backend-production-bootstrap-ssh-key-authorization.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/backend-production-failed-release-quarantine.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/backend-production-incomplete-release-cleanup.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/backend-production-nginx-recovery.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/backend-production-ops-shared-config-migration.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/backend-production-ops-shared-residue-recovery.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/backend-production-ops-shared-validation-process-recovery.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/backend-production-required-queue-runtime-control.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/backend-production-shared-permissions-provisioning.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/backend-production-supervisor-read-only-sudo-control.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/backend-production-supervisor-root-bootstrap.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/big-five-114-production-indexability-promotion.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/big-five-124-production-cms-import.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/big-five-124-runtime-content-integrity-repair.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/big-five-en-domain-production-cms-import.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/big-five-zh-content-only-production-publish.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/big-five-zh-facet-production-cms-import.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/career-c03-cache-only-discoverability-recovery.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/career-detail-production-cache-repair.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/career-runtime-authority-permission-preflight.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/career-runtime-authority-permission-repair.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/career-search-entry-batch-apply-production-ops.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/career-search-entry-batch-cache-refresh-production-ops.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/career-search-entry-batch-cache-refresh-recovery-preflight.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/career-search-entry-batch-cache-refresh-resume-execute-failure-diagnostic-eligibility-recovery.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/career-search-entry-batch-cache-refresh-resume-execute-failure-diagnostic.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/career-search-entry-batch-cache-refresh-resume-preflight-diagnostic.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/career-search-entry-batch-cache-refresh-resume.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/career-search-entry-batch-review-production-ops.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/career-search-entry-cache-permission-diagnostic.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/career-search-entry-cache-permission-repair.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/career-search-entry-cache-post-readback-diagnostic.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/career-search-entry-cache-thin-source-diagnostic.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/career-search-entry-post-authority-cache-refresh.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/career-search-entry-thin-authority-repair.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/codex-autofix.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/content-release-revalidation-config-cache.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/content-release-revalidation-dotenv-recovery.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/enneagram-90-cms-production-ops.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/enneagram-cms-production-ops.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/enneagram-en13-evidence-production-ops.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/enneagram-llms-txt-production-ops.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/enneagram-pr23-cache-only-resume.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/enneagram-search-indexnow-production-submit.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/enneagram-search-queue-production-enqueue.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/enneagram-search-queue-production-inspect.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/enneagram-url-truth-production-ops.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/mbti-comp-runtime46-production-ops.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/mbti-comparison-english-publish-diagnostic.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/mbti-comparison-english-publish-live-qa.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/mbti-cross-publish51-cache-closeout-recovery.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/mbti-cross-publish51-production-ops.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/mbti-index52-projection-repair-preflight.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/mbti-result-english-runtime-capability-phase-provenance-diagnostic.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/mbti-result-english-runtime-capability-preflight.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/mbti-result-english-runtime-capability-provenance-diagnostic.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/mbti-target-authority-draft-receipt.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/release-train.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/seo-13-article-atomic-promotion-production-ops.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/seo-13-article-discoverability-cache-refresh-production-ops.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/seo-13-article-draft-production-ops.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/seo-13-article-release-closeout-production-ops.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/seo-13-article-revalidation-production-ops.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/seo-13-article-review-approval-production-ops.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/seo-13-article-schema-release-production-ops.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/seo-13-bigfive-authority-label-bootstrap-production-ops.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    },
+    {
+      "path": ".github/workflows/seo-13-legacy-metadata-bootstrap-production-ops.yml",
+      "lifecycle": "retired",
+      "remote_action": "disable",
+      "reason": "One-time migration, repair, diagnostic, or completed campaign control; immutable run history remains in GitHub and git history."
+    }
+  ]
+}
