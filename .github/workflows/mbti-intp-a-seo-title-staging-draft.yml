@@ -162,7 +162,7 @@ jobs:
           [[ "$api_origin" =~ ^https://[A-Za-z0-9.-]+$ ]]
           curl -fsS --connect-timeout 5 --max-time 20 \
             "${api_origin}/api/v0.5/personality/intp-a?locale=zh-CN&scale_code=MBTI" \
-            | jq -S -c '.mbti_public_projection_v1' > "$RUNNER_TEMP/public-before.json"
+            | jq -S -j -c '.mbti_public_projection_v1' > "$RUNNER_TEMP/public-before.json"
           jq -e '.runtime_type_code == "INTP-A" and .seo.title != null' "$RUNNER_TEMP/public-before.json" >/dev/null
           package="backend/docs/seo/personality/experiments/zh-intp-a-seo-title-v1.json"
           expected_projection_sha="$(jq -r '.authority_baseline.public_projection_sha256' "$package")"
@@ -233,7 +233,7 @@ jobs:
           api_origin="$(printf '%s\n' "$HEALTHCHECK_URL" | awk -F/ '{print $1"//"$3}')"
           curl -fsS --connect-timeout 5 --max-time 20 \
             "${api_origin}/api/v0.5/personality/intp-a?locale=zh-CN&scale_code=MBTI" \
-            | jq -S -c '.mbti_public_projection_v1' > "$RUNNER_TEMP/public-after.json"
+            | jq -S -j -c '.mbti_public_projection_v1' > "$RUNNER_TEMP/public-after.json"
           cmp "$RUNNER_TEMP/public-before.json" "$RUNNER_TEMP/public-after.json"
 
           command_receipt_sha="$(sha256sum "$RUNNER_TEMP/command-receipt.json" | awk '{print $1}')"
