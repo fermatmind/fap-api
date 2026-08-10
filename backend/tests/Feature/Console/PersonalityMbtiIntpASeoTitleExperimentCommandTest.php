@@ -7,6 +7,7 @@ namespace Tests\Feature\Console;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantRevision;
+use App\Models\PersonalityProfileVariantSection;
 use App\Models\PersonalityProfileVariantSeoMeta;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
@@ -109,6 +110,17 @@ final class PersonalityMbtiIntpASeoTitleExperimentCommandTest extends TestCase
     public function test_idempotent_rerun_rejects_live_authority_drift(): void
     {
         [, $variant] = $this->createAuthority();
+        $section = PersonalityProfileVariantSection::query()->create([
+            'org_id' => 0,
+            'personality_profile_variant_id' => (int) $variant->id,
+            'section_key' => 'core_snapshot',
+            'render_variant' => 'cards',
+            'body_md' => 'Stable body.',
+            'body_html' => '<p>Stable body.</p>',
+            'payload_json' => ['items' => [['title' => 'Stable item']]],
+            'sort_order' => 10,
+            'is_enabled' => true,
+        ]);
         $writeOptions = [
             '--write' => true,
             '--draft-only' => true,
@@ -120,7 +132,7 @@ final class PersonalityMbtiIntpASeoTitleExperimentCommandTest extends TestCase
         ];
 
         [$firstExit] = $this->runCommand($writeOptions);
-        $variant->update(['nickname' => 'Drifted nickname']);
+        $section->update(['payload_json' => ['items' => [['title' => 'Drifted item']]]]);
         [$secondExit, $secondReceipt] = $this->runCommand($writeOptions);
 
         $this->assertSame(0, $firstExit);

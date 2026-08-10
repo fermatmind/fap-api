@@ -467,10 +467,12 @@ final class MbtiIntpASeoTitleExperimentService
                 'jsonld_overrides_json',
             ]),
             'profile_sections' => $profile->sections->map->only([
-                'section_key', 'heading', 'body_md', 'body_html', 'sort_order', 'is_enabled',
+                'section_key', 'title', 'render_variant', 'body_md', 'body_html', 'payload_json',
+                'sort_order', 'is_enabled',
             ])->values()->all(),
             'variant_sections' => $variant->sections->map->only([
-                'section_key', 'heading', 'body_md', 'body_html', 'sort_order',
+                'section_key', 'render_variant', 'body_md', 'body_html', 'payload_json',
+                'sort_order', 'is_enabled',
             ])->values()->all(),
         ];
         $encoded = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE);
