@@ -252,9 +252,12 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     public function test_runtime_freeze_classifier_ignores_measurement_instrumentation_files(): void
     {
         $allowed = [
+            'backend/app/Console/Commands/MeasurementFailureCohortsReportCommand.php',
             'backend/app/Console/Commands/MeasurementFunnelReportCommand.php',
             'backend/app/Services/Analytics/MeasurementAttributionDimensions.php',
             'backend/app/Services/Analytics/MeasurementEventContract.php',
+            'backend/app/Services/Analytics/MeasurementFailureCohortReadModel.php',
+            'backend/app/Services/Analytics/MeasurementFailureEventContract.php',
             'backend/app/Services/Analytics/MeasurementFunnelReadModel.php',
             'backend/app/Services/Analytics/ResultReadyEventRecorder.php',
             'backend/app/Services/Attempts/AttemptStartService.php',
@@ -267,6 +270,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+
+        $controller = 'backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php';
+        $controllerChangedLines = $this->measurementFailureAttributionControllerChangedLines();
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            [$controller],
+            '',
+            '',
+            attributionControllerChangedLines: $controllerChangedLines,
+        ));
+        $this->assertSame([$controller], $this->mbtiImpactingRuntimeChanges(
+            [$controller],
+            '',
+            '',
+            attributionControllerChangedLines: [...$controllerChangedLines, '+        $unsafe = $payload;'],
+        ));
     }
 
     public function test_runtime_freeze_classifier_ignores_english_parity_program_scanner_files(): void
@@ -8815,6 +8833,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                         $attributionControllerChangedLines ?? (
                             $repoRoot !== '' && $baseRef !== ''
                                 ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                            : []
+                        )
+                    )
+                    || $this->attributionControllerDiffIsMeasurementFailureOnly(
+                        $attributionControllerChangedLines ?? (
+                            $repoRoot !== '' && $baseRef !== ''
+                                ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
                                 : []
                         )
                     )
@@ -13112,9 +13137,12 @@ DIFF;
     private function isMeasurementInstrumentationFile(string $file): bool
     {
         return in_array($file, [
+            'backend/app/Console/Commands/MeasurementFailureCohortsReportCommand.php',
             'backend/app/Console/Commands/MeasurementFunnelReportCommand.php',
             'backend/app/Services/Analytics/MeasurementAttributionDimensions.php',
             'backend/app/Services/Analytics/MeasurementEventContract.php',
+            'backend/app/Services/Analytics/MeasurementFailureCohortReadModel.php',
+            'backend/app/Services/Analytics/MeasurementFailureEventContract.php',
             'backend/app/Services/Analytics/MeasurementFunnelReadModel.php',
             'backend/app/Services/Analytics/ResultReadyEventRecorder.php',
             'backend/app/Services/Attempts/AttemptStartService.php',
@@ -13309,6 +13337,77 @@ DIFF;
         ];
 
         return array_values($changedLines) === $allowed;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function attributionControllerDiffIsMeasurementFailureOnly(array $changedLines): bool
+    {
+        return array_values($changedLines) === $this->measurementFailureAttributionControllerChangedLines();
+    }
+
+    /** @return list<string> */
+    private function measurementFailureAttributionControllerChangedLines(): array
+    {
+        return [
+            '+use App\Services\Analytics\MeasurementFailureEventContract;',
+            "+        'stage',",
+            "+        'stage_detail',",
+            "+        'status_group',",
+            "+        'status_code',",
+            "+        'error_code',",
+            "+        'error_class',",
+            "+        'request_id',",
+            "+        'route',",
+            "+        'device_class',",
+            "+        'browser_class',",
+            "+        'endpoint_class',",
+            "+        'retry_bucket',",
+            "+        'questions_load_failure',",
+            "+        'submit_failure',",
+            "+            'payload.stage' => ['nullable', 'string', 'max:64'],",
+            "+            'payload.stage_detail' => ['nullable', 'string', 'max:64'],",
+            "+            'payload.status_group' => ['nullable', 'string', 'max:32'],",
+            "+            'payload.status_code' => ['nullable', 'integer', 'min:0', 'max:599'],",
+            "+            'payload.error_code' => ['nullable', 'string', 'max:64'],",
+            "+            'payload.error_class' => ['nullable', 'string', 'max:64'],",
+            "+            'payload.request_id' => ['nullable', 'string', 'max:128', 'regex:/\\A[A-Za-z0-9._:-]+\\z/'],",
+            "+            'payload.route' => ['nullable', 'string', 'max:512', 'regex:/\\A\\/[^\\r\\n]*\\z/'],",
+            "+            'payload.device_class' => ['nullable', 'string', 'max:32'],",
+            "+            'payload.browser_class' => ['nullable', 'string', 'max:32'],",
+            "+            'payload.endpoint_class' => ['nullable', 'string', 'max:32'],",
+            "+            'payload.retry_bucket' => ['nullable', 'string', 'max:32'],",
+            '+        $isFailureMeasurementEvent = MeasurementFailureEventContract::isFailureEvent($eventName);',
+            '-        $meta = [',
+            '+        $meta = $isFailureMeasurementEvent ? MeasurementFailureEventContract::sanitizeProperties($payload) : [',
+            "-        \$locale = \$this->normalizeOptionalString(\$payload['locale'] ?? \$payload['lang'] ?? null, 16)",
+            "-            ?? (\$path !== '' && str_starts_with(\$path, '/zh') ? 'zh' : 'en');",
+            '+        $locale = $isFailureMeasurementEvent',
+            "+            ? (string) (\$meta['locale'] ?? 'unknown')",
+            "+            : (\$this->normalizeOptionalString(\$payload['locale'] ?? \$payload['lang'] ?? null, 16)",
+            "+                ?? (\$path !== '' && str_starts_with(\$path, '/zh') ? 'zh' : 'en'));",
+            '-        $scaleCode = $this->normalizeOptionalString(',
+            "-            \$payload['scale_code']",
+            "-                ?? \$payload['scaleCode']",
+            "-                ?? \$payload['scale_id']",
+            '-                ?? null,',
+            '-            64',
+            "-        ) ?? 'MBTI';",
+            '+        $scaleCode = $isFailureMeasurementEvent',
+            "+            ? (string) (\$meta['scale_code'] ?? 'unknown')",
+            '+            : ($this->normalizeOptionalString(',
+            "+                \$payload['scale_code']",
+            "+                    ?? \$payload['scaleCode']",
+            "+                    ?? \$payload['scale_id']",
+            '+                    ?? null,',
+            '+                64',
+            "+            ) ?? 'MBTI');",
+            "+        if (\$isFailureMeasurementEvent && SchemaBaseline::hasColumn('events', 'request_id')) {",
+            "+            \$attributes['request_id'] = \$this->normalizeOptionalString(\$payload['request_id'] ?? null, 128);",
+            '+        }',
+            '+',
+        ];
     }
 
     /**

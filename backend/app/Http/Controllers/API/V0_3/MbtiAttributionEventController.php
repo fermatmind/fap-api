@@ -6,6 +6,7 @@ namespace App\Http\Controllers\API\V0_3;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Services\Analytics\MeasurementFailureEventContract;
 use App\Support\SchemaBaseline;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -83,6 +84,18 @@ final class MbtiAttributionEventController extends Controller
         'target_test',
         'scale_id',
         'form_id',
+        'stage',
+        'stage_detail',
+        'status_group',
+        'status_code',
+        'error_code',
+        'error_class',
+        'request_id',
+        'route',
+        'device_class',
+        'browser_class',
+        'endpoint_class',
+        'retry_bucket',
     ];
 
     /**
@@ -108,6 +121,8 @@ final class MbtiAttributionEventController extends Controller
         'article_to_test_click',
         'start_test',
         'complete_test',
+        'questions_load_failure',
+        'submit_failure',
     ];
 
     /**
@@ -205,6 +220,18 @@ final class MbtiAttributionEventController extends Controller
             'payload.target_test' => ['nullable', 'string', 'max:512', 'regex:/\A[^\r\n]*\z/'],
             'payload.scale_id' => ['nullable', 'string', 'max:64', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
             'payload.form_id' => ['nullable', 'string', 'max:64', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
+            'payload.stage' => ['nullable', 'string', 'max:64'],
+            'payload.stage_detail' => ['nullable', 'string', 'max:64'],
+            'payload.status_group' => ['nullable', 'string', 'max:32'],
+            'payload.status_code' => ['nullable', 'integer', 'min:0', 'max:599'],
+            'payload.error_code' => ['nullable', 'string', 'max:64'],
+            'payload.error_class' => ['nullable', 'string', 'max:64'],
+            'payload.request_id' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
+            'payload.route' => ['nullable', 'string', 'max:512', 'regex:/\A\/[^\r\n]*\z/'],
+            'payload.device_class' => ['nullable', 'string', 'max:32'],
+            'payload.browser_class' => ['nullable', 'string', 'max:32'],
+            'payload.endpoint_class' => ['nullable', 'string', 'max:32'],
+            'payload.retry_bucket' => ['nullable', 'string', 'max:32'],
             'anonymousId' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
             'path' => ['nullable', 'string', 'max:512', 'regex:/\A\/[^\r\n]*\z/'],
             'timestamp' => ['nullable', 'date'],
@@ -220,6 +247,7 @@ final class MbtiAttributionEventController extends Controller
         }
 
         $payload = is_array($data['payload'] ?? null) ? $data['payload'] : [];
+        $isFailureMeasurementEvent = MeasurementFailureEventContract::isFailureEvent($eventName);
         $path = $this->normalizeOptionalString($data['path'] ?? null, 2048) ?? '/';
         $isSeoConversionEvent = $this->isSeoPrivacyIngest($request)
             || $this->isSeoConversionEvent($eventName, $payload);
@@ -237,7 +265,7 @@ final class MbtiAttributionEventController extends Controller
             64
         );
 
-        $meta = [
+        $meta = $isFailureMeasurementEvent ? MeasurementFailureEventContract::sanitizeProperties($payload) : [
             'entry_surface' => $this->normalizeOptionalString($payload['entry_surface'] ?? null, 128) ?? 'unknown',
             'source_page_type' => $this->normalizeOptionalString($payload['source_page_type'] ?? null, 64) ?? 'unknown',
             'target_action' => $this->normalizeOptionalString($payload['target_action'] ?? null, 128),
@@ -267,17 +295,21 @@ final class MbtiAttributionEventController extends Controller
             ];
         }
 
-        $locale = $this->normalizeOptionalString($payload['locale'] ?? $payload['lang'] ?? null, 16)
-            ?? ($path !== '' && str_starts_with($path, '/zh') ? 'zh' : 'en');
+        $locale = $isFailureMeasurementEvent
+            ? (string) ($meta['locale'] ?? 'unknown')
+            : ($this->normalizeOptionalString($payload['locale'] ?? $payload['lang'] ?? null, 16)
+                ?? ($path !== '' && str_starts_with($path, '/zh') ? 'zh' : 'en'));
 
         $orgId = $this->resolveOrgId($request);
-        $scaleCode = $this->normalizeOptionalString(
-            $payload['scale_code']
-                ?? $payload['scaleCode']
-                ?? $payload['scale_id']
-                ?? null,
-            64
-        ) ?? 'MBTI';
+        $scaleCode = $isFailureMeasurementEvent
+            ? (string) ($meta['scale_code'] ?? 'unknown')
+            : ($this->normalizeOptionalString(
+                $payload['scale_code']
+                    ?? $payload['scaleCode']
+                    ?? $payload['scale_id']
+                    ?? null,
+                64
+            ) ?? 'MBTI');
 
         $attributes = [
             'id' => (string) Str::uuid(),
@@ -294,6 +326,10 @@ final class MbtiAttributionEventController extends Controller
             'created_at' => now(),
             'updated_at' => now(),
         ];
+
+        if ($isFailureMeasurementEvent && SchemaBaseline::hasColumn('events', 'request_id')) {
+            $attributes['request_id'] = $this->normalizeOptionalString($payload['request_id'] ?? null, 128);
+        }
 
         if (SchemaBaseline::hasColumn('events', 'scale_code_v2')) {
             $attributes['scale_code_v2'] = $scaleCode;

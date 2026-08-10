@@ -14,6 +14,10 @@ final class FunnelEventTaxonomy
 
     public const TEST_SUBMIT = 'test_submit';
 
+    public const QUESTIONS_LOAD_FAILURE = 'questions_load_failure';
+
+    public const SUBMIT_FAILURE = 'submit_failure';
+
     public const RESULT_READY = 'result_ready';
 
     public const RESULT_VIEW = 'result_view';
@@ -50,6 +54,8 @@ final class FunnelEventTaxonomy
         self::TEST_START,
         self::QUESTION_ANSWER,
         self::TEST_SUBMIT,
+        self::QUESTIONS_LOAD_FAILURE,
+        self::SUBMIT_FAILURE,
         self::RESULT_READY,
         self::RESULT_VIEW,
         self::CHECKOUT_START,
