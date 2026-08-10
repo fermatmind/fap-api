@@ -4,6 +4,7 @@ namespace App\Services\Attempts;
 
 use App\Jobs\GenerateReportSnapshotJob;
 use App\Models\Attempt;
+use App\Services\Analytics\ResultReadyEventRecorder;
 use App\Services\Observability\ClinicalComboTelemetry;
 use App\Services\Observability\Sds20Telemetry;
 use App\Support\OrgContext;
@@ -57,6 +58,10 @@ class AttemptSubmitPostCommitService
                 $actorUserId,
                 $actorAnonId,
                 is_array($postCommitCtx) ? $postCommitCtx : []
+            );
+            app(ResultReadyEventRecorder::class)->record(
+                $ctx,
+                $attemptId,
             );
         }
 

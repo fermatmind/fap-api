@@ -139,11 +139,7 @@ final class MeasurementFunnelReadModel
 
         $finalRows = $this->finalizeRows($rows);
         $totals = $this->totals($finalRows);
-        $coverage = $this->coverageStatus(
-            $totals['result_ready_count'],
-            $totals['result_ready_event_count'],
-            $totals['result_ready_duplicate_event_count'],
-        );
+        $coverage = $this->overallCoverageStatus($finalRows, $totals['result_ready_duplicate_event_count']);
 
         if ($coverage === 'partial') {
             $issues[] = 'result_ready_event_coverage_partial';
@@ -243,8 +239,10 @@ final class MeasurementFunnelReadModel
         ksort($rows);
         $final = [];
         foreach ($rows as $row) {
-            $truth = count((array) ($row['result_ready_ids'] ?? []));
-            $events = count((array) ($row['result_ready_event_ids'] ?? []));
+            $truthIds = (array) ($row['result_ready_ids'] ?? []);
+            $eventIds = (array) ($row['result_ready_event_ids'] ?? []);
+            $truth = count($truthIds);
+            $events = count($eventIds);
             $duplicates = max(0, (int) ($row['result_ready_event_rows'] ?? 0) - $events);
             $final[] = [
                 'report_date' => (string) $row['report_date'],
@@ -255,7 +253,7 @@ final class MeasurementFunnelReadModel
                     'result_ready_count' => $truth,
                     'result_ready_event_count' => $events,
                     'result_ready_duplicate_event_count' => $duplicates,
-                    'result_ready_event_coverage_status' => $this->coverageStatus($truth, $events, $duplicates),
+                    'result_ready_event_coverage_status' => $this->coverageStatus($truthIds, $eventIds, $duplicates),
                 ],
             ];
         }
@@ -285,7 +283,11 @@ final class MeasurementFunnelReadModel
         return $totals;
     }
 
-    private function coverageStatus(int $truth, int $events, int $duplicates): string
+    /**
+     * @param  array<string, bool>  $truthIds
+     * @param  array<string, bool>  $eventIds
+     */
+    private function coverageStatus(array $truthIds, array $eventIds, int $duplicates): string
     {
         if (MeasurementEventContract::RESULT_READY_IMPLEMENTATION !== 'active') {
             return 'not_instrumented';
@@ -294,7 +296,29 @@ final class MeasurementFunnelReadModel
             return 'duplicate';
         }
 
-        return $truth === $events ? 'complete' : 'partial';
+        return array_diff_key($truthIds, $eventIds) === [] && array_diff_key($eventIds, $truthIds) === []
+            ? 'complete'
+            : 'partial';
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $rows
+     */
+    private function overallCoverageStatus(array $rows, int $duplicates): string
+    {
+        if (MeasurementEventContract::RESULT_READY_IMPLEMENTATION !== 'active') {
+            return 'not_instrumented';
+        }
+        if ($duplicates > 0) {
+            return 'duplicate';
+        }
+        foreach ($rows as $row) {
+            if (data_get($row, 'metrics.result_ready_event_coverage_status') === 'partial') {
+                return 'partial';
+            }
+        }
+
+        return 'complete';
     }
 
     /**

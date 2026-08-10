@@ -14,6 +14,8 @@ final class FunnelEventTaxonomy
 
     public const TEST_SUBMIT = 'test_submit';
 
+    public const RESULT_READY = 'result_ready';
+
     public const RESULT_VIEW = 'result_view';
 
     public const CHECKOUT_START = 'checkout_start';
@@ -48,6 +50,7 @@ final class FunnelEventTaxonomy
         self::TEST_START,
         self::QUESTION_ANSWER,
         self::TEST_SUBMIT,
+        self::RESULT_READY,
         self::RESULT_VIEW,
         self::CHECKOUT_START,
         self::ORDER_CREATED,

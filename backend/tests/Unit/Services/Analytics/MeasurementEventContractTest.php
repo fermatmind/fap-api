@@ -24,7 +24,7 @@ final class MeasurementEventContractTest extends TestCase
         self::assertIsArray($resultReady);
         self::assertSame('backend_result_state', $resultReady['producer_authority'] ?? null);
         self::assertSame('server_only', $resultReady['exposure'] ?? null);
-        self::assertSame('contract_only', $resultReady['implementation'] ?? null);
+        self::assertSame('active', $resultReady['implementation'] ?? null);
         self::assertSame('distinct_internal_attempt', $resultReady['deduplication'] ?? null);
         self::assertContains('result_state', $resultReady['allowed_properties'] ?? []);
         self::assertContains('answers_or_score_detail', $resultReady['forbidden_data_classes'] ?? []);
