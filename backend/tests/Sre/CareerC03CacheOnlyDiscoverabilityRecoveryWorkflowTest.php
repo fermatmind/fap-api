@@ -120,7 +120,10 @@ final class CareerC03CacheOnlyDiscoverabilityRecoveryWorkflowTest extends TestCa
 
         foreach ([
             'jobs_en jobs_zh directory_en directory_zh sitemap_source sitemap llms llms_full',
-            '--write-out $\'%{http_code}\\t%{num_retries}\\t%{time_total}\'',
+            '--write-out $\'%{http_code}\\t%{time_total}\'',
+            'for attempt in 1 2 3; do',
+            'total_elapsed_ms=$((total_elapsed_ms + elapsed_ms))',
+            'total_elapsed_ms=$((total_elapsed_ms + 2000))',
             'shared-surface-status.tsv',
             'PUBLIC_SHARED_TRANSPORT_INCOMPLETE',
             'PUBLIC_SHARED_TRANSPORT_TIMEOUT',
@@ -128,6 +131,7 @@ final class CareerC03CacheOnlyDiscoverabilityRecoveryWorkflowTest extends TestCa
         ] as $contract) {
             self::assertStringContainsString($contract, $workflow);
         }
+        self::assertStringNotContainsString('%{num_retries}', $workflow);
 
         foreach ([
             'for round in 1 2; do',
