@@ -104201,7 +104201,7 @@
     "base": "main",
     "branch": "codex/career-1046-truth-rescan-06",
     "title": "CAREER-1046-TRUTH-RESCAN-06: verify Engineering Publication and Production truth",
-    "status": "no_go_evidence_ready_pending_github_checks",
+    "status": "ready_to_merge_no_go",
     "depends_on": [
       "CAREER-COLD-CACHE-DISCOVERABILITY-GATE-02"
     ],
@@ -104237,12 +104237,12 @@
         "evidence": "finalize and validate produced exactly manifest.v1.json, source-receipts.v1.json, and target-readback.v1.csv. Verdict is NO_GO; manifest SHA-256 is 896a297eba19e3ada14010eae8d521c471fce4d4d617e36ac29e82661e080ef4, source receipt SHA-256 is d2907fc3ba9de0044c01487fce527dd671381ef8be87d72f5b407a8f65409b1d, and CSV SHA-256 is aa3b1591f7c2cb2fdaa29ed50b1fb7f19d6d479504bb84d38db139595f262de5. No response body, approval phrase, secret, cache key, private path, or infrastructure topology is retained."
       },
       "github_pr": {
-        "status": "draft_evidence_complete",
-        "evidence": "PR #3619 remains Draft while the complete c801 NO_GO evidence commit and fresh required checks are finalized. Under the declared lifecycle it may be marked ready and merged only after all required checks pass; PR6 production execution remains prohibited after merge."
+        "status": "ready_to_merge",
+        "evidence": "PR #3619 has complete formal NO_GO evidence and all required checks passed on the exact evidence head. It may be marked ready and squash merged under policy; PR6 production execution remains prohibited after merge."
       },
       "github_checks": {
-        "status": "pending_after_no_go_evidence",
-        "evidence": "Fresh required checks are required on the exact c801 evidence head. The complete formal NO_GO permits PR5 merge after checks pass but keeps pr6_allowed=false for this verdict."
+        "status": "passed",
+        "evidence": "Exact evidence head 0932d61be4142c7dbb63874da55bbd6aca3a88de passed hygiene, supply-chain, content-pack validation, Big Five, MBTI v2, MBTI legacy, blocking/non-blocking Semgrep, and Semgrep OSS; staging parity skipped by policy. GitHub reported no failed checks."
       }
     },
     "lineage": {
@@ -104370,9 +104370,14 @@
         "at": "2026-08-10T15:58:05Z",
         "status": "no_go_evidence_ready_pending_github_checks",
         "note": "After a two-minute stable-main guard, exact c8015fac closeout run 31404596553 passed, pre run 31404898744 passed, two scan rounds completed, and post run 31406086532 passed with no receipt drift or production writes. A discarded first scan exposed and drove the same-scope semantic non-200 continuation repair; focused tests then passed 11 tests / 67 assertions and the repaired scan completed both rounds. Identical llms-full references remained diagnostic-only. Twenty-four targets per round failed the detail API indexability contract, so finalize/validate emitted formal NO_GO and PR6 production execution remains prohibited."
+      },
+      {
+        "at": "2026-08-10T16:10:51Z",
+        "status": "ready_to_merge_no_go",
+        "note": "All nine applicable required checks passed on exact evidence head 0932d61be4142c7dbb63874da55bbd6aca3a88de and staging parity skipped by policy. The complete NO_GO evidence authorizes PR5 squash merge but keeps CAREER_LINK_PUBLICATION_GATE CLOSED and prohibits PR6 production execution."
       }
     ],
-    "updated_at": "2026-08-10T15:58:05Z"
+    "updated_at": "2026-08-10T16:10:51Z"
   },
   "CAREER-1046-PUBLICATION-CONTROL-03": {
     "id": "CAREER-1046-PUBLICATION-CONTROL-03",
