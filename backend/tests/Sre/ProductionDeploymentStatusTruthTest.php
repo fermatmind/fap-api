@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Sre;
 
 use PHPUnit\Framework\Attributes\DataProvider;
+use Symfony\Component\Process\Process;
 use Tests\TestCase;
 
 final class ProductionDeploymentStatusTruthTest extends TestCase
@@ -353,6 +354,12 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertSame(2, substr_count($deploy, 'PRODUCTION_PUBLIC_PROBE_MAX_TIME_SECONDS=10'));
         $this->assertSame(2, substr_count($deploy, 'PRODUCTION_PUBLIC_PROBE_RETRY_DELAYS=(2 5)'));
         $this->assertSame(2, substr_count($deploy, '429|502|503|504) return 75'));
+        $this->assertSame(2, substr_count($deploy, 'if ! raw="$(curl -sS \\'));
+        $this->assertSame(2, substr_count($deploy, 'PROBE_STAGE=public_health'));
+        $this->assertSame(2, substr_count($deploy, 'PROBE_STAGE=public_flags'));
+        $this->assertSame(4, substr_count($deploy, 'PROBE_STAGE=public_bigfive'));
+        $this->assertSame(2, substr_count($deploy, 'PROBE_STAGE=public_bigfive_contract'));
+        $this->assertStringNotContainsString('local url="$1" raw rc', $deploy);
         $this->assertSame(2, substr_count($deploy, '[ "$PROBE_STATUS" = "404" ]'));
         $this->assertSame(2, substr_count($deploy, '${PUBLIC_API_ORIGIN}/api/v0.3/flags'));
         $this->assertSame(2, substr_count(
@@ -376,6 +383,8 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringContainsString('curl -sS --connect-timeout 3 --max-time 10', $publicBusinessCommand);
         $this->assertStringContainsString('PRODUCTION_PUBLIC_PROBE_ATTEMPTS=3', $publicBusinessCommand);
         $this->assertStringContainsString('429|502|503|504) return 75', $publicBusinessCommand);
+        $this->assertStringContainsString('if ! raw="$(curl -sS', $publicBusinessCommand);
+        $this->assertStringNotContainsString('set +e; raw=', $publicBusinessCommand);
         $this->assertStringContainsString('case "$attempt" in 1) sleep 2 ;; 2) sleep 5', $publicBusinessCommand);
         $this->assertStringContainsString('Public DNS business evidence failed after 3 attempts', $publicBusinessCommand);
         $this->assertStringContainsString('PROBE_STAGE=public_health', $publicBusinessCommand);
@@ -392,6 +401,86 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringContainsString('[ "$PROBE_STATUS" = "404" ]', $publicBusinessCommand);
         $this->assertStringContainsString('personality_public_content_asset_v1.source_hash', $publicBusinessCommand);
         $this->assertStringNotContainsString('--resolve', $publicBusinessCommand);
+    }
+
+    public function test_pre_deploy_public_probe_retries_a_transport_failure_without_errexit_leakage(): void
+    {
+        $deploy = strstr($this->workflow(), '  deploy-production:') ?: '';
+        $step = $this->between(
+            $deploy,
+            '- name: Verify production health evidence baseline',
+            '- name: Revalidate live Career public-cache summary before activation'
+        );
+        $script = $this->workflowRunScript($step);
+        $temporaryDirectory = sys_get_temp_dir().'/production-public-probe-'.bin2hex(random_bytes(6));
+        mkdir($temporaryDirectory, 0700, true);
+
+        $scriptPath = $temporaryDirectory.'/probe.sh';
+        $counterPath = $temporaryDirectory.'/curl-count';
+        $sleepPath = $temporaryDirectory.'/sleep-calls';
+        file_put_contents($scriptPath, $script);
+        file_put_contents($counterPath, "0\n");
+        file_put_contents($sleepPath, '');
+        file_put_contents($temporaryDirectory.'/curl', <<<'BASH'
+#!/usr/bin/env bash
+set -euo pipefail
+count="$(tr -d '\r\n' < "$PROBE_COUNTER_FILE")"
+count=$((count + 1))
+printf '%s\n' "$count" > "$PROBE_COUNTER_FILE"
+url="${!#}"
+if [ "$count" -eq 2 ]; then
+  exit 28
+fi
+case "$url" in
+  */api/healthz)
+    printf '{}\n404'
+    ;;
+  */api/v0.3/flags)
+    printf '{"ok":true}\n200'
+    ;;
+  */api/v0.5/personality-content-assets/big_five/hub/big-five\?locale=zh-CN)
+    printf '{"ok":true,"personality_public_content_asset_v1":{"source_hash":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}}\n200'
+    ;;
+  *)
+    exit 64
+    ;;
+esac
+BASH);
+        file_put_contents($temporaryDirectory.'/jq', <<<'BASH'
+#!/usr/bin/env bash
+cat >/dev/null
+BASH);
+        file_put_contents($temporaryDirectory.'/sleep', <<<'BASH'
+#!/usr/bin/env bash
+printf '%s\n' "$*" >> "$PROBE_SLEEP_FILE"
+BASH);
+        foreach ([$scriptPath, $temporaryDirectory.'/curl', $temporaryDirectory.'/jq', $temporaryDirectory.'/sleep'] as $path) {
+            chmod($path, 0700);
+        }
+
+        try {
+            $process = new Process(
+                ['bash', $scriptPath],
+                $temporaryDirectory,
+                [
+                    'HEALTHCHECK_URL' => 'https://api.example.test/api/healthz',
+                    'PATH' => $temporaryDirectory.':'.getenv('PATH'),
+                    'PROBE_COUNTER_FILE' => $counterPath,
+                    'PROBE_SLEEP_FILE' => $sleepPath,
+                ],
+            );
+            $process->setTimeout(10);
+            $process->run();
+
+            $this->assertTrue($process->isSuccessful(), $process->getErrorOutput());
+            $this->assertSame('5', trim((string) file_get_contents($counterPath)));
+            $this->assertSame('2', trim((string) file_get_contents($sleepPath)));
+        } finally {
+            foreach (glob($temporaryDirectory.'/*') ?: [] as $path) {
+                unlink($path);
+            }
+            rmdir($temporaryDirectory);
+        }
     }
 
     public function test_auto_mode_is_fail_closed_to_a_cumulative_code_only_lane(): void
@@ -784,6 +873,18 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
     private function workflow(): string
     {
         return (string) file_get_contents(dirname(__DIR__, 3).'/.github/workflows/deploy-production.yml');
+    }
+
+    private function workflowRunScript(string $step): string
+    {
+        $marker = "        run: |\n";
+        $offset = strpos($step, $marker);
+        $this->assertIsInt($offset);
+        $script = substr($step, $offset + strlen($marker));
+        $script = preg_replace('/^ {10}/m', '', $script);
+        $this->assertIsString($script);
+
+        return rtrim($script)."\n";
     }
 
     private function between(string $source, string $start, string $end): string
