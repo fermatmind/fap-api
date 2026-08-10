@@ -43,7 +43,7 @@
         "evidence": "Approved Window 3 product-truth contract SHA 3d9bef9549374007cedb5859cd14a90566020d5322ff47a12764bc6504269857 and source manifest SHA ba7b58afaa1228c445e138d5d5d5e5fa90db7f5222dfea19ee493be536a3b2ae are available.",
         "status": "pass"
       },
-      "github_pr": { "evidence": null, "status": "pending" },
+      "github_pr": { "evidence": "PR #3609 opened from the exact scoped branch; required checks are pending.", "status": "pending" },
       "local_validation": {
         "evidence": [
           "Latest-main focused product, commerce, report, history, SEO, and migration contracts passed: 35 tests / 1630 assertions.",
@@ -72,11 +72,11 @@
       "no Hub, landing, sitemap, llms, Search Channel, or experiment change",
       "no MBTI org-scoped Pro, Gift, or Credit SKU deactivation"
     ],
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3609",
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_type": "assessment_catalog_fact_authority_convergence",
-    "status": "github_pr_pending",
+    "status": "github_checks_pending",
     "title": "ASSESSMENT-CATALOG-FACT-AUTHORITY-CONVERGENCE-01: converge six-assessment public product truth",
     "transitions": [
       {
@@ -88,6 +88,11 @@
         "at": "2026-08-10T17:24:00+08:00",
         "status": "github_pr_pending",
         "note": "Implementation and locally validated ledger were committed as b2a1e942a5842050fc87467bd8bf63ee2b4e5cb1. Push, PR creation, required checks, merge, and cleanup remain pending."
+      },
+      {
+        "at": "2026-08-10T17:26:00+08:00",
+        "status": "github_checks_pending",
+        "note": "PR #3609 opened from codex/assessment-catalog-fact-authority-convergence-01. Required GitHub checks and exact-head review remain pending."
       }
     ]
   },
