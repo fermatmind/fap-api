@@ -24,7 +24,7 @@
         "status": "pass"
       },
       "github_pr": {
-        "evidence": null,
+        "evidence": "PR #3617 opened from exact implementation commit df77f608c6cb45d88a9f7af14401034a7714d6e2; required GitHub checks are pending.",
         "status": "pending"
       },
       "local_validation": {
@@ -42,7 +42,7 @@
       }
     },
     "cms_mutation": false,
-    "commit_sha": null,
+    "commit_sha": "df77f608c6cb45d88a9f7af14401034a7714d6e2",
     "content_authority": "backend_analytics_read_model",
     "database_mutation": false,
     "depends_on": [
@@ -59,14 +59,14 @@
       "no GA4 taxonomy or M05 attribution/failure-cohort change",
       "no frontend, CMS, experiment, publication, or Search Channel change"
     ],
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3617",
     "production_write_execution": false,
     "publish_allowed": false,
     "remote_branch_deleted": false,
     "repo": "fap-api",
     "scope_type": "measurement_m04_backend_read_model_remediation",
     "search_channel_action": false,
-    "status": "local_validation_passed",
+    "status": "github_checks_pending",
     "title": "MEASUREMENT-M04-BACKEND-READ-MODEL-REMEDIATION-01: repair report-ready and reporting-day semantics",
     "transitions": [
       {
@@ -78,6 +78,11 @@
         "at": "2026-08-10T18:30:00+08:00",
         "status": "local_validation_passed",
         "note": "Implemented independent submitted report_ready semantics and explicit Asia/Shanghai reporting dates over UTC half-open storage windows. Focused and legacy regressions passed 34 tests / 177 assertions; the complete guarded verifier passed every gate, including Big Five 1691 tests / 196731 assertions and Personality 95 / 5761. Pint, PHP syntax, config parsing, 232-route inventory, JSON/YAML, diff, privacy, and exact 10-file scope checks passed. No refresh write, historical backfill, schema change, production migration, deployment, GA4 taxonomy, M05, CMS, frontend, experiment, publication, or Search Channel action occurred."
+      },
+      {
+        "at": "2026-08-10T18:42:00+08:00",
+        "status": "github_checks_pending",
+        "note": "Committed the exact 10-file scope as df77f608c6cb45d88a9f7af14401034a7714d6e2, pushed the scoped branch, and opened PR #3617. GitHub reports the PR mergeable while required checks run."
       }
     ]
   },
