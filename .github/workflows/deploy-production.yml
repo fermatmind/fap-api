@@ -368,7 +368,7 @@ jobs:
                     }
                     ;;
                   backend/scripts/deploy/bounded_candidate_public_dns_control.php)
-                    EXPECTED_BOUNDED_PUBLIC_DNS_CONTROL_SHA256="5e3b3aa09f971a7b0706a0835a72007eacaa5b2582c37a97898119a1b524784b"
+                    EXPECTED_BOUNDED_PUBLIC_DNS_CONTROL_SHA256="3c1f415ea400a07cf45839d22aa143a195a7f46c740e53bc011618d7d3717476"
                     test "$(sha256sum "$path" | awk '{print $1}')" = \
                       "$EXPECTED_BOUNDED_PUBLIC_DNS_CONTROL_SHA256" || {
                       CODE_ONLY_SCOPE=false
@@ -832,12 +832,12 @@ jobs:
           release_id="standard-363bbba54f7c"
           staging_run_id="31384127889"
           candidate_recipe_sha256="e27282825c2074e56067e6ec4cb9a8a3951ad8d4207c0c3f598fc93a1d02128b"
-          wrapper_sha256="5e3b3aa09f971a7b0706a0835a72007eacaa5b2582c37a97898119a1b524784b"
+          wrapper_sha256="3c1f415ea400a07cf45839d22aa143a195a7f46c740e53bc011618d7d3717476"
           wrapper_path="backend/scripts/deploy/bounded_candidate_public_dns_control.php"
-          incident_run_id="31397650099"
-          incident_artifact_name="backend-production-incident-diagnostic-31397650099-1"
-          incident_artifact_digest="sha256:4bd544410f69855d589b5305276a5fac6dd1df26907e4cc7fb1b8abdabd41d79"
-          incident_receipt_sha256="7977e008407dea54299c922357b800c584a0f0c18ae73a8662e03615a6757729"
+          incident_run_id="31412587123"
+          incident_artifact_name="backend-production-incident-diagnostic-31412587123-1"
+          incident_artifact_digest="sha256:e65daa75e6d41cbc17bd3af562139c4b065e3ee2e0f7a26287ce59741d9e62c5"
+          incident_receipt_sha256="545e551950568777a7a8de5b102dc5d6455b6f470639b842bbeead8dd12520a9"
 
           echo "enabled=false" >> "$GITHUB_OUTPUT"
           if [ "$DEPLOY_SHA" != "$candidate_sha" ]; then

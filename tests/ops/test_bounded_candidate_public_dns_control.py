@@ -22,12 +22,12 @@ STAGING_RUN_ID = "31384127889"
 CANDIDATE_RECIPE_SHA256 = (
     "e27282825c2074e56067e6ec4cb9a8a3951ad8d4207c0c3f598fc93a1d02128b"
 )
-INCIDENT_RUN_ID = "31397650099"
+INCIDENT_RUN_ID = "31412587123"
 INCIDENT_ARTIFACT_DIGEST = (
-    "sha256:4bd544410f69855d589b5305276a5fac6dd1df26907e4cc7fb1b8abdabd41d79"
+    "sha256:e65daa75e6d41cbc17bd3af562139c4b065e3ee2e0f7a26287ce59741d9e62c5"
 )
 INCIDENT_RECEIPT_SHA256 = (
-    "7977e008407dea54299c922357b800c584a0f0c18ae73a8662e03615a6757729"
+    "545e551950568777a7a8de5b102dc5d6455b6f470639b842bbeead8dd12520a9"
 )
 
 
@@ -214,6 +214,115 @@ echo "worker namespace ok\\n";
 
         self.assertEqual(0, result.returncode, result.stderr)
         self.assertEqual("worker namespace ok", result.stdout.strip())
+
+    def test_wrapper_task_resolves_all_candidate_helpers_in_production_namespace(self):
+        task_start = self.wrapper.index("task('guard:public-dns-health'")
+        worker_source = self.wrapper[: self.wrapper.index("$candidateSha =")]
+        worker_source += self.wrapper[task_start:]
+        worker_source = worker_source.removeprefix("<?php\n\n")
+        worker_source = worker_source.replace(
+            "declare(strict_types=1);\n\n",
+            "",
+            1,
+        )
+        harness = """<?php
+declare(strict_types=1);
+
+namespace Deployer {
+    final class TestHost
+    {
+        public function getAlias(): string
+        {
+            return 'production';
+        }
+    }
+
+    function currentHost(): TestHost
+    {
+        return new TestHost();
+    }
+
+    function deployHttpsUrlArg(string $host, string $path): string
+    {
+        $GLOBALS['https_url_calls'] = ($GLOBALS['https_url_calls'] ?? 0) + 1;
+
+        return deployShellArg("https://{$host}{$path}");
+    }
+
+    function deploySafeHost(string $host, string $label): string
+    {
+        $GLOBALS['safe_host_calls'] = ($GLOBALS['safe_host_calls'] ?? 0) + 1;
+
+        return $host;
+    }
+
+    function deployShellArg(string $value): string
+    {
+        $GLOBALS['shell_arg_calls'] = ($GLOBALS['shell_arg_calls'] ?? 0) + 1;
+
+        return escapeshellarg($value);
+    }
+
+    function get(string $name): mixed
+    {
+        if ($name === 'healthcheck_host') {
+            return 'api.example.test';
+        }
+
+        throw new \\RuntimeException("unexpected setting: {$name}");
+    }
+
+    function run(string $command): void
+    {
+        $GLOBALS['bounded_public_dns_command'] = $command;
+    }
+
+    function task(string $name, callable $callback): void
+    {
+        $GLOBALS['bounded_public_dns_task'] = $callback;
+    }
+}
+
+namespace {
+""" + worker_source + """
+
+($GLOBALS['bounded_public_dns_task'])();
+
+if (($GLOBALS['safe_host_calls'] ?? 0) !== 1) {
+    throw new \\RuntimeException('deploySafeHost was not resolved exactly once');
+}
+if (($GLOBALS['https_url_calls'] ?? 0) !== 3) {
+    throw new \\RuntimeException('deployHttpsUrlArg was not resolved exactly three times');
+}
+if (($GLOBALS['shell_arg_calls'] ?? 0) < 3) {
+    throw new \\RuntimeException('deployShellArg was not resolved');
+}
+if (! str_contains(
+    (string) ($GLOBALS['bounded_public_dns_command'] ?? ''),
+    'https://api.example.test/api/v0.3/flags'
+)) {
+    throw new \\RuntimeException('production command was not assembled');
+}
+
+echo "production worker namespace ok\n";
+}
+"""
+
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            harness_path = Path(temporary_directory) / "production-worker-harness.php"
+            harness_path.write_text(harness, encoding="utf-8")
+            result = subprocess.run(
+                ["php", str(harness_path)],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+            )
+
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertEqual(
+            "production worker namespace ok",
+            result.stdout.strip(),
+        )
 
     def test_wrapper_uses_the_exact_current_retry_command_builder(self):
         deployer = DEPLOYER.read_text(encoding="utf-8")

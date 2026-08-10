@@ -3,6 +3,9 @@
 declare(strict_types=1);
 
 use function Deployer\currentHost;
+use function Deployer\deployHttpsUrlArg;
+use function Deployer\deploySafeHost;
+use function Deployer\deployShellArg;
 use function Deployer\get;
 use function Deployer\run;
 use function Deployer\task;
