@@ -249,7 +249,7 @@ final class CareerRuntimePublishProjectionLookupTest extends TestCase
         $this->assertFalse($lookup->releaseGatePass('accountants-and-auditors'));
     }
 
-    public function test_it_discards_cached_detail_payloads_when_the_requested_locale_is_not_published(): void
+    public function test_it_withholds_cached_detail_payloads_without_destroying_them_when_the_requested_locale_is_not_published(): void
     {
         $visibility = Mockery::mock(CareerRuntimePublishProjectionVisibility::class);
         $visibility->shouldReceive('itemForSlug')
@@ -263,7 +263,11 @@ final class CareerRuntimePublishProjectionLookupTest extends TestCase
         Cache::forever($cacheKey, ['identity' => ['canonical_slug' => 'actors']]);
 
         $this->assertNull($cache->jobDetailPayload('actors', 'zh-CN'));
-        $this->assertFalse(Cache::has($cacheKey));
+        $this->assertTrue(Cache::has($cacheKey));
+        $this->assertSame(
+            ['identity' => ['canonical_slug' => 'actors']],
+            Cache::get($cacheKey),
+        );
     }
 
     public function test_it_filters_job_index_items_before_activating_the_requested_locale_snapshot(): void
