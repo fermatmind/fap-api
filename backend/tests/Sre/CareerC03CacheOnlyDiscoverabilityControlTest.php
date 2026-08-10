@@ -159,6 +159,10 @@ final class CareerC03CacheOnlyDiscoverabilityControlTest extends TestCase
             self::assertTrue($receipt['converged']);
             self::assertSame([], $receipt['surface_mismatches']);
             self::assertSame(0, $receipt['private_path_leak_count']);
+            self::assertSame(4, $receipt['detail_readback']['network_attempt_count']);
+            self::assertSame(0, $receipt['detail_readback']['transport_retry_count']);
+            self::assertSame(0, $receipt['detail_readback']['recovered_transport_failure_count']);
+            self::assertSame(0, $receipt['detail_readback']['terminal_transport_failure_count']);
             self::assertSame(0, $receipt['cache_write_count']);
             self::assertSame(0, $receipt['database_write_count']);
         } finally {
@@ -197,6 +201,113 @@ final class CareerC03CacheOnlyDiscoverabilityControlTest extends TestCase
             self::assertSame('HOLD_PUBLIC_DRIFT', $receipt['status']);
             self::assertFalse($receipt['converged']);
             self::assertSame(1, $receipt['private_path_leak_count']);
+        } finally {
+            $this->removeFixture($directory);
+        }
+    }
+
+    #[Test]
+    public function public_verify_accepts_a_recovered_incomplete_transfer(): void
+    {
+        [$arguments, $directory] = $this->publicFixture();
+        $en = 'https://fermatmind.com/en/career/jobs/example-job';
+        $zh = 'https://fermatmind.com/zh/career/jobs/example-job';
+        file_put_contents($arguments[11], implode("\n", [
+            "1\t{$en}\t200\t0\t2\t18",
+            "1\t{$zh}\t200\t0\t1\t0",
+            "2\t{$en}\t200\t0\t1\t0",
+            "2\t{$zh}\t200\t0\t1\t0",
+        ])."\n");
+
+        try {
+            [$exit, $receipt] = $this->runPublicVerify($arguments);
+
+            self::assertSame(0, $exit);
+            self::assertSame('PASS_PUBLIC_CONVERGED', $receipt['status']);
+            self::assertSame(5, $receipt['detail_readback']['network_attempt_count']);
+            self::assertSame(1, $receipt['detail_readback']['transport_retry_count']);
+            self::assertSame(1, $receipt['detail_readback']['recovered_transport_failure_count']);
+            self::assertSame(1, $receipt['detail_readback']['recovered_incomplete_transfer_count']);
+            self::assertSame(0, $receipt['detail_readback']['terminal_transport_failure_count']);
+            self::assertSame(0, $receipt['detail_readback']['incomplete_transfer_count']);
+        } finally {
+            $this->removeFixture($directory);
+        }
+    }
+
+    #[Test]
+    public function public_verify_holds_on_a_terminal_incomplete_transfer(): void
+    {
+        [$arguments, $directory] = $this->publicFixture();
+        $en = 'https://fermatmind.com/en/career/jobs/example-job';
+        $zh = 'https://fermatmind.com/zh/career/jobs/example-job';
+        file_put_contents($arguments[11], implode("\n", [
+            "1\t{$en}\t000\t18\t2\t18",
+            "1\t{$zh}\t200\t0\t1\t0",
+            "2\t{$en}\t200\t0\t1\t0",
+            "2\t{$zh}\t200\t0\t1\t0",
+        ])."\n");
+
+        try {
+            [$exit, $receipt] = $this->runPublicVerify($arguments);
+
+            self::assertSame(2, $exit);
+            self::assertSame('HOLD_PUBLIC_DRIFT', $receipt['status']);
+            self::assertSame(1, $receipt['detail_readback']['terminal_transport_failure_count']);
+            self::assertSame(1, $receipt['detail_readback']['incomplete_transfer_count']);
+            self::assertSame(0, $receipt['detail_readback']['timeout_count']);
+            self::assertSame(0, $receipt['detail_readback']['other_transport_failure_count']);
+        } finally {
+            $this->removeFixture($directory);
+        }
+    }
+
+    #[Test]
+    public function public_verify_classifies_timeout_other_transport_and_http_failures_without_retry(): void
+    {
+        [$arguments, $directory] = $this->publicFixture();
+        $en = 'https://fermatmind.com/en/career/jobs/example-job';
+        $zh = 'https://fermatmind.com/zh/career/jobs/example-job';
+        file_put_contents($arguments[11], implode("\n", [
+            "1\t{$en}\t000\t28\t2\t28",
+            "1\t{$zh}\t000\t7\t2\t7",
+            "2\t{$en}\t500\t0\t1\t0",
+            "2\t{$zh}\t200\t0\t1\t0",
+        ])."\n");
+
+        try {
+            [$exit, $receipt] = $this->runPublicVerify($arguments);
+
+            self::assertSame(2, $exit);
+            self::assertSame(2, $receipt['detail_readback']['terminal_transport_failure_count']);
+            self::assertSame(1, $receipt['detail_readback']['timeout_count']);
+            self::assertSame(1, $receipt['detail_readback']['other_transport_failure_count']);
+            self::assertSame(1, $receipt['detail_readback']['server_error_count']);
+            self::assertSame(0, $receipt['detail_readback']['non_200_count']);
+        } finally {
+            $this->removeFixture($directory);
+        }
+    }
+
+    #[Test]
+    public function public_verify_rejects_an_invalid_retry_tuple(): void
+    {
+        [$arguments, $directory] = $this->publicFixture();
+        $en = 'https://fermatmind.com/en/career/jobs/example-job';
+        $zh = 'https://fermatmind.com/zh/career/jobs/example-job';
+        file_put_contents($arguments[11], implode("\n", [
+            "1\t{$en}\t200\t0\t2\t0",
+            "1\t{$zh}\t200\t0\t1\t0",
+            "2\t{$en}\t200\t0\t1\t0",
+            "2\t{$zh}\t200\t0\t1\t0",
+        ])."\n");
+
+        try {
+            [$exit, $receipt] = $this->runPublicVerify($arguments);
+
+            self::assertSame(1, $exit);
+            self::assertSame('HOLD_CONTROL_FAILED', $receipt['status']);
+            self::assertSame('DETAIL_STATUS_RETRY_INVALID', $receipt['safe_failure_code']);
         } finally {
             $this->removeFixture($directory);
         }
@@ -336,10 +447,10 @@ final class CareerC03CacheOnlyDiscoverabilityControlTest extends TestCase
         file_put_contents($llms, $publicText);
         file_put_contents($llmsFull, $publicText);
         file_put_contents($detailStatus, implode("\n", [
-            "1\t{$en}\t200\t0",
-            "1\t{$zh}\t200\t0",
-            "2\t{$en}\t200\t0",
-            "2\t{$zh}\t200\t0",
+            "1\t{$en}\t200\t0\t1\t0",
+            "1\t{$zh}\t200\t0\t1\t0",
+            "2\t{$en}\t200\t0\t1\t0",
+            "2\t{$zh}\t200\t0\t1\t0",
         ])."\n");
 
         return [[

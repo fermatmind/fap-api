@@ -130,6 +130,7 @@ final class CareerC03CacheOnlyDiscoverabilityControl
         }
 
         $converged = $mismatches === []
+            && $detail['terminal_transport_failure_count'] === 0
             && $detail['timeout_count'] === 0
             && $detail['server_error_count'] === 0
             && $detail['non_200_count'] === 0
@@ -961,7 +962,13 @@ final class CareerC03CacheOnlyDiscoverabilityControl
     private static function detailStatus(string $path, array $expectedUrls): array
     {
         $expected = array_fill_keys(array_map('strval', $expectedUrls), [1 => false, 2 => false]);
+        $transportRetries = 0;
+        $recoveredTransportFailures = 0;
+        $recoveredIncompleteTransfers = 0;
+        $terminalTransportFailures = 0;
+        $incompleteTransfers = 0;
         $timeouts = 0;
+        $otherTransportFailures = 0;
         $serverErrors = 0;
         $non200 = 0;
         foreach (preg_split('/\R/', trim(self::fileBytes($path, 'DETAIL_STATUS_INVALID'))) ?: [] as $line) {
@@ -969,19 +976,47 @@ final class CareerC03CacheOnlyDiscoverabilityControl
                 continue;
             }
             $parts = explode("\t", $line);
-            if (count($parts) !== 4) {
+            if (count($parts) !== 6) {
                 throw new CareerC03ControlFailure('DETAIL_STATUS_ROW_INVALID');
             }
-            [$round, $url, $code, $curlExit] = $parts;
+            [$round, $url, $code, $curlExit, $attemptCount, $firstCurlExit] = $parts;
+            if (preg_match('/^[12]$/', $round) !== 1
+                || preg_match('/^[0-9]{3}$/', $code) !== 1
+                || preg_match('/^[0-9]{1,3}$/', $curlExit) !== 1
+                || preg_match('/^[12]$/', $attemptCount) !== 1
+                || preg_match('/^[0-9]{1,3}$/', $firstCurlExit) !== 1) {
+                throw new CareerC03ControlFailure('DETAIL_STATUS_ROW_INVALID');
+            }
             $roundNumber = (int) $round;
             if (! isset($expected[$url][$roundNumber]) || $expected[$url][$roundNumber] === true) {
                 throw new CareerC03ControlFailure('DETAIL_STATUS_IDENTITY_INVALID');
             }
             $exit = (int) $curlExit;
+            $attempts = (int) $attemptCount;
+            $firstExit = (int) $firstCurlExit;
+            if ($exit > 255 || $firstExit > 255
+                || ($attempts === 1 && $firstExit !== $exit)
+                || ($attempts === 2 && $firstExit === 0)) {
+                throw new CareerC03ControlFailure('DETAIL_STATUS_RETRY_INVALID');
+            }
             $status = (int) $code;
             $expected[$url][$roundNumber] = true;
+            if ($attempts === 2) {
+                $transportRetries++;
+                if ($exit === 0) {
+                    $recoveredTransportFailures++;
+                    $recoveredIncompleteTransfers += $firstExit === 18 ? 1 : 0;
+                }
+            }
             if ($exit !== 0) {
-                $timeouts++;
+                $terminalTransportFailures++;
+                if ($exit === 18) {
+                    $incompleteTransfers++;
+                } elseif ($exit === 28) {
+                    $timeouts++;
+                } else {
+                    $otherTransportFailures++;
+                }
             } elseif ($status >= 500) {
                 $serverErrors++;
             } elseif ($status !== 200) {
@@ -998,7 +1033,14 @@ final class CareerC03CacheOnlyDiscoverabilityControl
             'url_count' => count($expected),
             'round_count' => 2,
             'request_count' => count($expected) * 2,
+            'network_attempt_count' => (count($expected) * 2) + $transportRetries,
+            'transport_retry_count' => $transportRetries,
+            'recovered_transport_failure_count' => $recoveredTransportFailures,
+            'recovered_incomplete_transfer_count' => $recoveredIncompleteTransfers,
+            'terminal_transport_failure_count' => $terminalTransportFailures,
+            'incomplete_transfer_count' => $incompleteTransfers,
             'timeout_count' => $timeouts,
+            'other_transport_failure_count' => $otherTransportFailures,
             'server_error_count' => $serverErrors,
             'non_200_count' => $non200,
         ];
