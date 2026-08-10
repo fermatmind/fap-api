@@ -69,6 +69,28 @@ final class MeasurementEventContract
             'deduplication' => 'distinct_internal_attempt',
             'key_event_eligible' => true,
         ],
+        'questions_load_failure' => [
+            'producer_authority' => 'browser_observation',
+            'trigger' => 'an eligible public assessment question request fails before a confirmed usable response',
+            'exposure' => 'public_ingest_privacy_sanitized',
+            'delivery' => 'at_least_once',
+            'deduplication' => 'distinct_internal_attempt_when_exactly_correlated',
+            'key_event_eligible' => false,
+            'allowed_properties' => MeasurementFailureEventContract::ALLOWED_PROPERTIES,
+            'forbidden_data_classes' => MeasurementFailureEventContract::FORBIDDEN_DATA_CLASSES,
+            'failure_contract_version' => MeasurementFailureEventContract::VERSION,
+        ],
+        'submit_failure' => [
+            'producer_authority' => 'browser_observation',
+            'trigger' => 'an eligible assessment start or submit request fails before durable submission',
+            'exposure' => 'public_ingest_privacy_sanitized',
+            'delivery' => 'at_least_once',
+            'deduplication' => 'distinct_internal_attempt_when_exactly_correlated',
+            'key_event_eligible' => false,
+            'allowed_properties' => MeasurementFailureEventContract::ALLOWED_PROPERTIES,
+            'forbidden_data_classes' => MeasurementFailureEventContract::FORBIDDEN_DATA_CLASSES,
+            'failure_contract_version' => MeasurementFailureEventContract::VERSION,
+        ],
         'result_ready' => [
             'producer_authority' => 'backend_result_state',
             'trigger' => 'a valid result is durably persisted after attempt submission',
@@ -178,8 +200,8 @@ final class MeasurementEventContract
 
         return array_merge($definition, [
             'event_name' => $canonical,
-            'allowed_properties' => self::ALLOWED_PROPERTIES,
-            'forbidden_data_classes' => self::FORBIDDEN_DATA_CLASSES,
+            'allowed_properties' => $definition['allowed_properties'] ?? self::ALLOWED_PROPERTIES,
+            'forbidden_data_classes' => $definition['forbidden_data_classes'] ?? self::FORBIDDEN_DATA_CLASSES,
         ]);
     }
 }
