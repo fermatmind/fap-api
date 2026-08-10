@@ -103992,6 +103992,85 @@
       }
     ]
   },
+  "PUBLIC-TOPIC-GRAPH-AUTHORITY-CONTRACT-01": {
+    "id": "PUBLIC-TOPIC-GRAPH-AUTHORITY-CONTRACT-01",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/public-topic-graph-authority-contract-01",
+    "title": "PUBLIC-TOPIC-GRAPH-AUTHORITY-CONTRACT-01: expose CMS-authoritative public topic edges",
+    "depends_on": [
+      "PUBLIC-TOPIC-GRAPH-AUDIT-CLOSEOUT-01"
+    ],
+    "status": "local_validation_passed",
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "dependency": {
+        "status": "passed",
+        "evidence": "fap-web PR #2024 merged as 8aaf49c16dd514b64f3f58d55f594c1c0a085950; Window 6 G03 registry handoff, A01, P03-P05, and R04 are versioned. C06 remains required only for Career activation, not this non-Career contract."
+      },
+      "career_gate": {
+        "status": "closed",
+        "evidence": "CAREER_LINK_PUBLICATION_GATE remains CLOSED; every Career source or target is excluded from the public projection until a current C06 PASS."
+      },
+      "focused_contract": {
+        "status": "passed",
+        "evidence": "PublicTopicEdgeApiTest passed 8 tests / 47 assertions, including explicit empty authority metadata, stable ordering and deduplication, invalid relation and locale rejection, private/noindex/stale/canonical mismatch fail-closed behavior, edge cache invalidation, and forced WAITING_ON_C06 Career state."
+      },
+      "review_governance": {
+        "status": "passed",
+        "evidence": "ReviewPolicyRegistryTest passed 11 tests / 361 assertions: public_topic_edge is registered as a private-only R1 CMS review surface, the generated registry matches, every new review marker is annotated, and public reviewer identity exposure remains zero."
+      },
+      "route_and_style": {
+        "status": "passed",
+        "evidence": "The complete API route inventory resolved the named GET /api/v0.5/public-topic-edges route; scoped Pint passed all nine PHP files and each changed PHP file passed syntax validation."
+      },
+      "dependency_security": {
+        "status": "passed",
+        "evidence": "composer validate --strict passed and composer audit reported no security vulnerability advisories."
+      },
+      "manifests_and_scope": {
+        "status": "passed",
+        "evidence": "PR-train YAML and the exact scoped id parse, state JSON plus generated registry JSON parse, git diff --check, and the exact fourteen-file manifest allowlist pass. Three unrelated duplicate historical manifest ids already exist on the exact main base; the new id is unique and this PR does not modify those historical entries."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-08-10T13:55:00+08:00",
+        "status": "in_progress",
+        "note": "Started from exact fap-api origin/main 4ad35bd2b15448569a3bafc6bd27f6ad115dc014 in an isolated worktree after PR1 merge, sync, cleanup, and post-merge verification. No production migration, CMS write, publication, deploy, Career activation, or discoverability mutation is authorized in this PR."
+      },
+      {
+        "at": "2026-08-10T14:18:00+08:00",
+        "status": "local_validation_environment_failed",
+        "note": "The first focused test command exited before route registration because the isolated worktree had no local Composer vendor directory. No test assertion ran and no code defect was indicated; a worktree-local ignored dependency copy was generated from the existing repository dependencies before retry."
+      },
+      {
+        "at": "2026-08-10T14:32:00+08:00",
+        "status": "local_validation_passed",
+        "note": "Focused API contracts passed 8 tests / 48 assertions. PHP syntax, scoped Pint, complete API route inventory, Composer strict validation and audit, YAML/JSON parsing, exact scoped files, and diff checks passed. No production migration, CMS write, publication, deploy, Career activation, sitemap/llms mutation, or Search Channel action occurred."
+      },
+      {
+        "at": "2026-08-10T14:36:00+08:00",
+        "status": "cached_diff_failed",
+        "note": "The first staged diff check found three trailing Markdown hard-break spaces in the contract document header. The issue was limited to formatting; no commit or push occurred."
+      },
+      {
+        "at": "2026-08-10T14:37:00+08:00",
+        "status": "local_validation_passed",
+        "note": "Replaced the three Markdown hard breaks with blank lines and reran the cached diff gate successfully."
+      },
+      {
+        "at": "2026-08-10T14:45:00+08:00",
+        "status": "local_validation_passed",
+        "note": "Final architecture review registered public_topic_edge under the solo-owner CMS review policy and removed admin actor and database row ids from the public projection. Focused API plus review-governance tests pass 19 tests / 408 assertions; generated registry parity and the exact fourteen-file scope pass."
+      }
+    ]
+  },
   "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-02": {
     "id": "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-02",
     "repo": "fap-api",

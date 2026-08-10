@@ -79,6 +79,7 @@ use App\Http\Controllers\API\V0_5\Cms\MediaLibraryController;
 use App\Http\Controllers\API\V0_5\Cms\PersonalityController;
 use App\Http\Controllers\API\V0_5\Cms\PersonalityDesktopCloneController;
 use App\Http\Controllers\API\V0_5\Cms\PersonalityPublicContentAssetController;
+use App\Http\Controllers\API\V0_5\Cms\PublicTopicEdgeController;
 use App\Http\Controllers\API\V0_5\Cms\ResearchReportController;
 use App\Http\Controllers\API\V0_5\Cms\SupportArticleController;
 use App\Http\Controllers\API\V0_5\Cms\TopicController;
@@ -715,6 +716,8 @@ Route::prefix('v0.5')->group(function () {
     });
 
     Route::middleware([PublicApiCacheHeaders::class, RecordPublicContentRuntime::class])->group(function () {
+        Route::get('/public-topic-edges', PublicTopicEdgeController::class)
+            ->name('api.v0_5.public_topic_edges.index');
         Route::get('/landing-surfaces/{surfaceKey}', [LandingSurfaceController::class, 'show']);
         Route::get('/media-assets', [MediaLibraryController::class, 'index']);
         Route::get('/media-assets/{assetKey}', [MediaLibraryController::class, 'show']);

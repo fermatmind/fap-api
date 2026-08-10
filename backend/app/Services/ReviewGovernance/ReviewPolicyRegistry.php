@@ -16,6 +16,7 @@ use LogicException;
  * @review-surface interpretation_guide
  * @review-surface research_report
  * @review-surface editorial_review
+ * @review-surface public_topic_edge
  * @review-surface personality_public_content_asset
  * @review-surface personality_public_content_asset_revision_review
  * @review-surface big_five_v2_editorial_revision
@@ -48,6 +49,7 @@ final class ReviewPolicyRegistry
         ['interpretation_guide', 'cms', 'R1', 'App\\Models\\InterpretationGuide', 'normalized_review_contract_v1', false, 'SOLO-OWNER-CMS-REVIEW-02'],
         ['research_report', 'cms', 'R4', 'App\\Models\\ResearchReport', 'normalized_review_contract_v1', true, 'SOLO-OWNER-CMS-REVIEW-02'],
         ['editorial_review', 'cms', 'R1', 'App\\Models\\EditorialReview', 'private_only', false, 'SOLO-OWNER-CMS-REVIEW-02'],
+        ['public_topic_edge', 'cms', 'R1', 'App\\Models\\PublicTopicEdge', 'private_only', false, 'PUBLIC-TOPIC-GRAPH-AUTHORITY-CONTRACT-01'],
         ['personality_public_content_asset', 'personality', 'R1', 'App\\Models\\PersonalityPublicContentAsset', 'normalized_review_contract_v1', false, 'SOLO-OWNER-PERSONALITY-REVIEW-03'],
         ['personality_public_content_asset_revision_review', 'personality', 'R1', 'App\\Models\\PersonalityPublicContentAssetRevisionReview', 'private_only', false, 'SOLO-OWNER-PERSONALITY-REVIEW-03'],
         ['big_five_v2_editorial_revision', 'personality', 'R1', 'App\\Models\\BigFiveV2EditorialRevision', 'private_only', false, 'SOLO-OWNER-PERSONALITY-REVIEW-03'],

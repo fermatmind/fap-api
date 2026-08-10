@@ -24,6 +24,7 @@ final class ReviewPolicyRegistryTest extends TestCase
         'interpretation_guide',
         'research_report',
         'editorial_review',
+        'public_topic_edge',
         'personality_public_content_asset',
         'personality_public_content_asset_revision_review',
         'big_five_v2_editorial_revision',

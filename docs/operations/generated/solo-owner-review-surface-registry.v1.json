@@ -2,7 +2,7 @@
     "schema_version": "review-policy-registry.v1",
     "review_mode": "solo_owner",
     "review_source": "owner_operator_attestation",
-    "surface_count": 37,
+    "surface_count": 38,
     "surfaces": [
         {
             "surface_id": "article",
@@ -147,6 +147,22 @@
             "external_evidence_required": false,
             "migration_pr": "SOLO-OWNER-CMS-REVIEW-02",
             "adapter_status": "compact_attestation_adapter_active"
+        },
+        {
+            "surface_id": "public_topic_edge",
+            "domain": "cms",
+            "risk_tier": "R1",
+            "authority_layer": "CMS/backend",
+            "current_model_or_service": "App\\Models\\PublicTopicEdge",
+            "review_mode": "solo_owner",
+            "compact_attestation_supported": true,
+            "same_actor_allowed": true,
+            "step_up_required": false,
+            "production_execution_separate": true,
+            "public_projection": "private_only",
+            "external_evidence_required": false,
+            "migration_pr": "PUBLIC-TOPIC-GRAPH-AUTHORITY-CONTRACT-01",
+            "adapter_status": "policy_registered_adapter_pending"
         },
         {
             "surface_id": "personality_public_content_asset",
