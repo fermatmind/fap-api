@@ -29,6 +29,8 @@ No scan or generated verdict evidence may be created until a verifiable pre-C03 
 
 The first execution window on `92e372f8b6adb775a90765d40a6ceaf339717105` reached this boundary. Verify run `31382701613` rejected the historical closeout because its control-plane SHA differed. Same-main read-only closeout run `31382787907` then reported two incomplete public transfers and emitted `HOLD_CONTROL_INCOMPLETE` with `automatic_retry_allowed=false`. Both controls reported zero writes, so no scan snapshot or finalized evidence was produced.
 
+The bounded transport repair merged in PR #3624 as `4c3f775151ad62b6750e7d45319d75aa49adf8b2`. A new same-main read-only closeout run `31387930639` then emitted `PASS_INCIDENT_CLOSED` with zero retries, transport failures, HTTP failures, private leakage, or writes. The required pre-C03 verify run `31388220236` did not emit the scan-authorizing status: it emitted `PASS_RECOVERY_REQUIRED` with `public_converged=false`, even though the authority remained 342/684, the published cohort and detail coverage remained the same 30/60 set, the internal job/directory/sitemap-source checks were converged, the detail repair target count was zero, and all transport/HTTP/private/write counts were zero. This scope explicitly forbids `apply` and requires a stop on recovery-required, so scan, post-verify and finalize were not run. `origin/main` also advanced to `53917f63469b603104e68e2129011fa0d92de5fa` before any scan began; no temporary scan snapshot exists and PR6 remains prohibited.
+
 ## Runner interface
 
 ```bash
