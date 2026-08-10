@@ -441,7 +441,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             $this->assertStringContainsString($boundary, $workflow);
         }
 
-        $expectedWrapperSha = '274701f9b23afe61987376de6867ab723c9ed38638a0e89bd4b45a6e35445658';
+        $expectedWrapperSha = '5e3b3aa09f971a7b0706a0835a72007eacaa5b2582c37a97898119a1b524784b';
         $this->assertSame(
             $expectedWrapperSha,
             hash_file('sha256', dirname(__DIR__, 3).'/'.$wrapperPath)
@@ -452,6 +452,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         );
 
         $this->assertStringContainsString('require $candidateRecipe;', $wrapper);
+        $this->assertStringContainsString('use function Deployer\\currentHost;', $wrapper);
         $this->assertSame(1, substr_count($wrapper, "task('"));
         $this->assertStringContainsString("task('guard:public-dns-health'", $wrapper);
         $this->assertStringContainsString('PRODUCTION_PUBLIC_PROBE_ATTEMPTS=3', $wrapper);

@@ -1,6 +1,7 @@
 import hashlib
 import re
 import subprocess
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -149,6 +150,70 @@ class BoundedCandidatePublicDnsControlTest(unittest.TestCase):
             "--resolve",
         ):
             self.assertNotIn(forbidden, self.wrapper)
+
+    def test_wrapper_task_resolves_current_host_in_deployer_worker_namespace(self):
+        task_start = self.wrapper.index("task('guard:public-dns-health'")
+        worker_source = self.wrapper[: self.wrapper.index("$candidateSha =")]
+        worker_source += self.wrapper[task_start:]
+        worker_source = worker_source.removeprefix("<?php\n\n")
+        worker_source = worker_source.replace(
+            "declare(strict_types=1);\n\n",
+            "",
+            1,
+        )
+        harness = """<?php
+declare(strict_types=1);
+
+namespace Deployer {
+    final class TestHost
+    {
+        public function getAlias(): string
+        {
+            return 'staging';
+        }
+    }
+
+    function currentHost(): TestHost
+    {
+        return new TestHost();
+    }
+
+    function get(string $name): mixed
+    {
+        throw new \\RuntimeException('get must not run for staging');
+    }
+
+    function run(string $command): void
+    {
+        throw new \\RuntimeException('run must not execute for staging');
+    }
+
+    function task(string $name, callable $callback): void
+    {
+        $GLOBALS['bounded_public_dns_task'] = $callback;
+    }
+}
+
+namespace {
+""" + worker_source + """
+
+($GLOBALS['bounded_public_dns_task'])();
+echo "worker namespace ok\\n";
+}
+"""
+
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            harness_path = Path(temporary_directory) / "worker-harness.php"
+            harness_path.write_text(harness, encoding="utf-8")
+            result = subprocess.run(
+                ["php", str(harness_path)],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+            )
+
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertEqual("worker namespace ok", result.stdout.strip())
 
     def test_wrapper_uses_the_exact_current_retry_command_builder(self):
         deployer = DEPLOYER.read_text(encoding="utf-8")
