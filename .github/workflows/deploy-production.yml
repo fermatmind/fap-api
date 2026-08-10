@@ -368,7 +368,7 @@ jobs:
                     }
                     ;;
                   backend/scripts/deploy/bounded_candidate_public_dns_control.php)
-                    EXPECTED_BOUNDED_PUBLIC_DNS_CONTROL_SHA256="274701f9b23afe61987376de6867ab723c9ed38638a0e89bd4b45a6e35445658"
+                    EXPECTED_BOUNDED_PUBLIC_DNS_CONTROL_SHA256="5e3b3aa09f971a7b0706a0835a72007eacaa5b2582c37a97898119a1b524784b"
                     test "$(sha256sum "$path" | awk '{print $1}')" = \
                       "$EXPECTED_BOUNDED_PUBLIC_DNS_CONTROL_SHA256" || {
                       CODE_ONLY_SCOPE=false
@@ -832,7 +832,7 @@ jobs:
           release_id="standard-363bbba54f7c"
           staging_run_id="31384127889"
           candidate_recipe_sha256="e27282825c2074e56067e6ec4cb9a8a3951ad8d4207c0c3f598fc93a1d02128b"
-          wrapper_sha256="274701f9b23afe61987376de6867ab723c9ed38638a0e89bd4b45a6e35445658"
+          wrapper_sha256="5e3b3aa09f971a7b0706a0835a72007eacaa5b2582c37a97898119a1b524784b"
           wrapper_path="backend/scripts/deploy/bounded_candidate_public_dns_control.php"
           incident_run_id="31397650099"
           incident_artifact_name="backend-production-incident-diagnostic-31397650099-1"

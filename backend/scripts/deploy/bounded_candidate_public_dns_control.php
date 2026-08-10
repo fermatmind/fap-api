@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use function Deployer\currentHost;
 use function Deployer\get;
 use function Deployer\run;
 use function Deployer\task;
