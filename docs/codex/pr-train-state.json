@@ -104001,8 +104001,8 @@
     "depends_on": [
       "PUBLIC-TOPIC-GRAPH-AUDIT-CLOSEOUT-01"
     ],
-    "status": "github_checks_repairing",
-    "commit_sha": "66c15389bbdc16568e21c6922143be2e4ce52ded",
+    "status": "ready_to_merge",
+    "commit_sha": "deb12436c422244754c19438ec9b7293ecfb9e61",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3594",
     "checks": {
       "dependency": {
@@ -104038,8 +104038,8 @@
         "evidence": "PR-train YAML and the exact scoped id parse, state JSON plus generated registry and OpenAPI JSON parse, git diff --check, and the exact fifteen-file manifest allowlist pass. Three unrelated duplicate historical manifest ids already exist on the exact main base; the new id is unique and this PR does not modify those historical entries."
       },
       "github_required_checks": {
-        "status": "repairing",
-        "evidence": "Exact head 66c15389bbdc16568e21c6922143be2e4ce52ded passed hygiene, supply-chain, content-pack-build-validate, Semgrep blocking secrets, Semgrep OSS, SARIF upload, verify-mbti-v2, and verify-mbti-legacy. verify-bigfive failed only because its branch-diff freeze classifier had no precise exclusion for the six independent public topic edge runtime paths. The same-scope repair adds an exact five-file plus exact three-route-line classifier contract with negative coverage; the formerly failing runtime-path and new classifier tests pass 2 tests / 27 assertions locally. Fresh exact-head checks are required."
+        "status": "passed",
+        "evidence": "Exact head deb12436c422244754c19438ec9b7293ecfb9e61 passed hygiene, supply-chain, content-pack-build-validate, Semgrep blocking secrets, Semgrep OSS, SARIF upload, verify-mbti-v2 (4m01s), verify-mbti-legacy (4m19s), and verify-bigfive (6m12s). verify-staging-parity was correctly skipped. GitHub reports the PR OPEN, CLEAN, non-draft, with no outstanding review decision."
       }
     },
     "failure_reason": null,
@@ -104106,6 +104106,11 @@
         "at": "2026-08-10T15:20:00+08:00",
         "status": "github_checks_repairing",
         "note": "Added a precise classifier isolation contract for exactly five public topic edge authority files and exactly the three added API route lines, including negative coverage that rejects any extra route mutation. The formerly failing runtime-path test plus the new classifier test pass 2 tests / 27 assertions; the manifest allowlist is expanded only by this freeze test file."
+      },
+      {
+        "at": "2026-08-10T15:31:00+08:00",
+        "status": "ready_to_merge",
+        "note": "Exact head deb12436c422244754c19438ec9b7293ecfb9e61 passed every required GitHub check, including verify-bigfive, both MBTI lanes, content-pack validation, hygiene, supply-chain, and security scanning. Scope revalidation remains exactly sixteen allowlisted files; Career publication remains CLOSED and no production write occurred."
       }
     ]
   },
