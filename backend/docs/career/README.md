@@ -534,6 +534,14 @@ Rollout apply rules:
 - no Search Channel or URL submission in rollout tasks;
 - preserve rollback group and batch id.
 
+Signed rollout receipts have two separate validity meanings. Their bounded
+`expires_at` window controls whether a receipt may authorize a new action. A
+completed `promoted_success` receipt whose signature and bound payload remain
+authentic is durable historical publication evidence after that window closes.
+Runtime materialization may use that durable fact only together with the latest
+database `index_state`; a later rollback, quarantine, or candidate state remains
+conservative and cannot be reopened by an older successful receipt.
+
 Candidate-prep may create only official candidate records when explicitly
 approved. Runtime promotion may only promote approved clean-delta slugs from
 candidate/published-candidate state to public/published state.

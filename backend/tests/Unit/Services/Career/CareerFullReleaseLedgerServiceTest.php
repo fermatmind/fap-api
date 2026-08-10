@@ -421,7 +421,7 @@ final class CareerFullReleaseLedgerServiceTest extends TestCase
         $this->assertArrayNotHasKey('explicit_rollout_batch', (array) ($member['evidence_refs'] ?? []));
     }
 
-    public function test_stale_signed_rollout_batch_execution_is_ignored_by_default_projection_authority(): void
+    public function test_expired_but_authentic_rollout_batch_execution_remains_durable_projection_authority(): void
     {
         $baseLedger = app(CareerFullReleaseLedgerService::class)->build()->toArray();
         $baseMember = collect((array) ($baseLedger['members'] ?? []))
@@ -454,6 +454,75 @@ final class CareerFullReleaseLedgerServiceTest extends TestCase
             'rollback_required' => false,
             'quarantine_required' => false,
         ], sign: true, signedAt: new DateTimeImmutable('-30 days', new DateTimeZone('UTC')), expiresAt: new DateTimeImmutable('-16 days', new DateTimeZone('UTC')));
+
+        $report = json_decode((string) File::get(storage_path('app/private/career_canonical_rollout_batch_executions/stale-signed-success.json')), true);
+        $this->assertIsArray($report);
+        $this->assertTrue(app(CareerRolloutReportAuthoritySigner::class)->isAuthentic($report));
+        $this->assertFalse(app(CareerRolloutReportAuthoritySigner::class)->isTrusted($report));
+
+        $projected = app(CareerFullReleaseLedgerProjectionService::class)->build();
+        $ledger = $projected[CareerFullReleaseLedgerProjectionService::LEDGER_FILENAME] ?? [];
+        $member = collect((array) ($ledger['members'] ?? []))->firstWhere('canonical_slug', $slug);
+
+        $this->assertIsArray($member);
+        $this->assertSame('public_detail_indexable', $member['release_cohort'] ?? null);
+        $this->assertSame(
+            'current_explicit_batch_only',
+            data_get($member, 'evidence_refs.explicit_rollout_batch.scope')
+        );
+    }
+
+    public function test_expired_authentic_rollout_receipt_does_not_override_current_candidate_state(): void
+    {
+        $baseLedger = app(CareerFullReleaseLedgerService::class)->build()->toArray();
+        $baseMember = collect((array) ($baseLedger['members'] ?? []))
+            ->first(static fn (array $member): bool => in_array($member['release_cohort'] ?? '', ['review_needed', 'family_handoff'], true));
+
+        $this->assertIsArray($baseMember);
+        $slug = (string) $baseMember['canonical_slug'];
+
+        $this->materializeIndexedOccupation($slug, 'promotion_candidate');
+        $this->writeSuccessfulRolloutExecutionReport(
+            filename: 'expired-candidate-success.json',
+            slug: $slug,
+            signedAt: new DateTimeImmutable('-30 days', new DateTimeZone('UTC')),
+            expiresAt: new DateTimeImmutable('-16 days', new DateTimeZone('UTC')),
+        );
+
+        $projected = app(CareerFullReleaseLedgerProjectionService::class)->build();
+        $ledger = $projected[CareerFullReleaseLedgerProjectionService::LEDGER_FILENAME] ?? [];
+        $member = collect((array) ($ledger['members'] ?? []))->firstWhere('canonical_slug', $slug);
+
+        $this->assertIsArray($member);
+        $this->assertSame('public_detail_conservative', $member['release_cohort'] ?? null);
+        $this->assertSame('promotion_candidate', $member['current_index_state'] ?? null);
+        $this->assertSame('trust_limited', $member['public_index_state'] ?? null);
+    }
+
+    public function test_expired_tampered_rollout_receipt_is_not_projection_authority(): void
+    {
+        $baseLedger = app(CareerFullReleaseLedgerService::class)->build()->toArray();
+        $baseMember = collect((array) ($baseLedger['members'] ?? []))
+            ->first(static fn (array $member): bool => in_array($member['release_cohort'] ?? '', ['review_needed', 'family_handoff'], true));
+
+        $this->assertIsArray($baseMember);
+        $slug = (string) $baseMember['canonical_slug'];
+
+        $this->materializeIndexedOccupation($slug);
+        $this->writeSuccessfulRolloutExecutionReport(
+            filename: 'expired-tampered-success.json',
+            slug: $slug,
+            signedAt: new DateTimeImmutable('-30 days', new DateTimeZone('UTC')),
+            expiresAt: new DateTimeImmutable('-16 days', new DateTimeZone('UTC')),
+        );
+
+        $path = storage_path('app/private/career_canonical_rollout_batch_executions/expired-tampered-success.json');
+        $report = json_decode((string) File::get($path), true);
+        $this->assertIsArray($report);
+        $report['promoted_locale_rows'] = 4;
+        File::put($path, (string) json_encode($report, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+
+        $this->assertFalse(app(CareerRolloutReportAuthoritySigner::class)->isAuthentic($report));
 
         $projected = app(CareerFullReleaseLedgerProjectionService::class)->build();
         $ledger = $projected[CareerFullReleaseLedgerProjectionService::LEDGER_FILENAME] ?? [];
@@ -518,5 +587,36 @@ final class CareerFullReleaseLedgerServiceTest extends TestCase
             $dir.DIRECTORY_SEPARATOR.$filename,
             (string) json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT)
         );
+    }
+
+    private function writeSuccessfulRolloutExecutionReport(
+        string $filename,
+        string $slug,
+        DateTimeImmutable $signedAt,
+        DateTimeImmutable $expiresAt,
+    ): void {
+        $this->writeRolloutExecutionReport($filename, [
+            'status' => 'promoted_success',
+            'batch_id' => 'career_80_delta_canonical_001',
+            'promoted_slugs' => [$slug],
+            'promoted_locale_rows' => 2,
+            'dry_run' => false,
+            'writes_database' => true,
+            'write_verified' => true,
+            'persistence_check' => [
+                'expected' => 2,
+                'found_published' => 2,
+                'not_published_count' => 0,
+            ],
+            'post_promotion_validation' => [
+                'status' => 'pass',
+            ],
+            'release_gate' => [
+                'release_gate_pass_count' => 2,
+                'release_gate_blocked_count' => 0,
+            ],
+            'rollback_required' => false,
+            'quarantine_required' => false,
+        ], sign: true, signedAt: $signedAt, expiresAt: $expiresAt);
     }
 }

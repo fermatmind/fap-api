@@ -73,7 +73,7 @@ final class CareerVerifiedRolloutBatchSlugAuthority
         $remediationAttempted = (bool) data_get($payload, 'remediation.attempted', false);
 
         return ($payload['status'] ?? null) === 'promoted_success'
-            && $this->rolloutReportAuthoritySigner->isTrusted($payload)
+            && $this->rolloutReportAuthoritySigner->isAuthentic($payload)
             && ($payload['dry_run'] ?? null) === false
             && ($payload['writes_database'] ?? null) === true
             && ($payload['write_verified'] ?? null) === true
