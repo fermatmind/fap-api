@@ -820,7 +820,14 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             'pending atomic candidate repair and rollback protection.',
             $source
         );
-        $this->assertSame(6, substr_count($source, 'read_career_public_cache_summary_sha256)"'));
+        $this->assertSame(4, substr_count($source, 'read_career_public_cache_summary_sha256)"'));
+        $this->assertSame(2, substr_count(
+            $source,
+            'curl --http1.1 --connect-timeout 3 --max-time 10 -fsS'
+        ));
+        $this->assertStringNotContainsString('--retry-all-errors', $source);
+        $this->assertStringNotContainsString('third_career_summary_sha256', $source);
+        $this->assertStringNotContainsString('third_live_summary_sha256', $source);
         $this->assertStringContainsString(
             'backend/scripts/deploy/career_candidate_exact_cache_bootstrap.php',
             $source

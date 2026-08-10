@@ -171,10 +171,10 @@ class ScaleLookupHealthcheckRetryTest(unittest.TestCase):
 
         self.assertIn("within('{{current_path}}/backend'", task)
         self.assertIn("bash scripts/deploy/verify_scale_lookup.sh", task)
-        self.assertIn("'SCALE_LOOKUP_ATTEMPTS' => '3'", task)
-        self.assertIn("'SCALE_LOOKUP_RETRY_DELAY_SECONDS' => '2'", task)
-        self.assertIn("'SCALE_LOOKUP_CONNECT_TIMEOUT_SECONDS' => '5'", task)
-        self.assertIn("'SCALE_LOOKUP_MAX_TIME_SECONDS' => '40'", task)
+        self.assertIn("'SCALE_LOOKUP_ATTEMPTS' => '1'", task)
+        self.assertIn("'SCALE_LOOKUP_RETRY_DELAY_SECONDS' => '0'", task)
+        self.assertIn("'SCALE_LOOKUP_CONNECT_TIMEOUT_SECONDS' => '3'", task)
+        self.assertIn("'SCALE_LOOKUP_MAX_TIME_SECONDS' => '10'", task)
         self.assertNotIn("curl -fsS", task)
 
 

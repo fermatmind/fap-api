@@ -45,7 +45,9 @@ class BackendProductionVerifyOnlyWorkflowTest(unittest.TestCase):
     def test_approval_permissions_environment_and_concurrency_are_fail_closed(self):
         self.assertRegex(self.raw, r"(?ms)^permissions:\n\s+contents: read\n\nconcurrency:")
         self.assertIn("environment: production", self.raw)
+        self.assertIn("group: deploy-${{ github.repository }}-production", self.raw)
         self.assertIn("cancel-in-progress: false", self.raw)
+        self.assertNotIn("group: backend-production-verify-only", self.raw)
         self.assertIn('[[ "$EXPECTED_RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]', self.run_text)
         self.assertIn('[[ "$RELEASE_NAME" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]', self.run_text)
         self.assertIn(
@@ -118,10 +120,18 @@ class BackendProductionVerifyOnlyWorkflowTest(unittest.TestCase):
         for slug in slugs:
             self.assertIn(slug, self.raw)
         self.assertIn("backend/scripts/deploy/verify_scale_lookup.sh", self.raw)
-        self.assertIn("SCALE_LOOKUP_ATTEMPTS=3", self.raw)
-        self.assertIn("SCALE_LOOKUP_MAX_TIME_SECONDS=40", self.raw)
+        self.assertIn("SCALE_LOOKUP_ATTEMPTS=1", self.raw)
+        self.assertIn("SCALE_LOOKUP_RETRY_DELAY_SECONDS=0", self.raw)
+        self.assertIn("SCALE_LOOKUP_CONNECT_TIMEOUT_SECONDS=3", self.raw)
+        self.assertIn("SCALE_LOOKUP_MAX_TIME_SECONDS=10", self.raw)
         self.assertIn('test "$scale_lookup_count" -eq 5', self.raw)
         self.assertNotIn("$current_release/backend/scripts/deploy/verify_scale_lookup.sh", self.raw)
+
+    def test_remote_public_probes_are_single_attempt_with_tight_timeouts(self):
+        self.assertNotIn("--connect-timeout 5", self.remote_body)
+        self.assertNotRegex(self.remote_body, r"--max-time (?:20|30|40)")
+        self.assertGreaterEqual(self.remote_body.count("--connect-timeout 3"), 7)
+        self.assertGreaterEqual(self.remote_body.count("--max-time 10"), 7)
 
     def test_artifact_contract_is_safe_and_retained_for_thirty_days(self):
         self.assertIn(
