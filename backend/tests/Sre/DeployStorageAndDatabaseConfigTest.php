@@ -640,6 +640,16 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString("task('guard:career-runtime-projection-authority'", $source);
         $this->assertStringContainsString("in_array(deployMode(), ['code_only', 'candidate_only'], true)", $source);
         $this->assertStringContainsString('verify_career_cold_cache_discoverability.php', $source);
+        $this->assertStringContainsString('if (! deployCanSudoWwwData()) {', $source);
+        $this->assertStringContainsString(
+            'Career runtime projection gate requires the application runtime identity.',
+            $source
+        );
+        $this->assertStringContainsString('php_bin="$(command -v {{bin/php}})"', $source);
+        $this->assertStringContainsString(
+            'sudo -n -u www-data -- env FM_CAREER_COLD_CACHE_GATE_EXECUTE=1 "$php_bin" %s authority',
+            $source
+        );
         $this->assertStringContainsString("'artisan:migrate-schema-only',\n    'guard:career-runtime-projection-authority'", $source);
         $this->assertStringContainsString("task('guard:career-detail-cache-coverage'", $source);
         $this->assertStringContainsString('if (deploySkipsAuthorityMutations()) {', $source);
