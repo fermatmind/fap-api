@@ -103996,18 +103996,26 @@
     "id": "PUBLIC-TOPIC-GRAPH-AUTHORITY-CONTRACT-01",
     "repo": "fap-api",
     "base": "main",
-    "branch": "codex/public-topic-graph-authority-contract-01",
+    "branch": "codex/public-topic-graph-authority-g03-alignment-01",
     "title": "PUBLIC-TOPIC-GRAPH-AUTHORITY-CONTRACT-01: expose CMS-authoritative public topic edges",
     "depends_on": [
       "PUBLIC-TOPIC-GRAPH-AUDIT-CLOSEOUT-01"
     ],
     "status": "ready_to_merge",
-    "commit_sha": "deb12436c422244754c19438ec9b7293ecfb9e61",
-    "pr_url": "https://github.com/fermatmind/fap-api/pull/3594",
+    "commit_sha": "4c1891252f0a07e61b941c4959131f00fb475a8d",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3605",
+    "prior_implementation": {
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/3594",
+      "head_sha": "deb12436c422244754c19438ec9b7293ecfb9e61",
+      "merge_commit": "663cd88ded47bc84b4393c2060140c21fa14b6a1",
+      "merged_at": "2026-08-10T06:58:53Z",
+      "remote_branch_deleted": true,
+      "local_branch_absent": true
+    },
     "checks": {
       "dependency": {
         "status": "passed",
-        "evidence": "fap-web PR #2024 merged as 8aaf49c16dd514b64f3f58d55f594c1c0a085950; Window 6 G03 registry handoff, A01, P03-P05, and R04 are versioned. C06 remains required only for Career activation, not this non-Career contract."
+        "evidence": "fap-web G03 PR #2040 merged as 5466522801be6f71d01f0af96a495a84bddd059f after governing all 422 owner rows and 4,805 candidates. The exact non-Career relation allowlist and 282-row Career hold are now prerequisites for this alignment repair."
       },
       "career_gate": {
         "status": "closed",
@@ -104015,7 +104023,7 @@
       },
       "focused_contract": {
         "status": "passed",
-        "evidence": "PublicTopicEdgeApiTest passed 8 tests / 47 assertions, including explicit empty authority metadata, stable ordering and deduplication, invalid relation and locale rejection, private/noindex/stale/canonical mismatch fail-closed behavior, edge cache invalidation, and forced WAITING_ON_C06 Career state."
+        "evidence": "PublicTopicEdgeApiTest passed 12 tests / 71 assertions, including the exact locale query contract, explicit empty authority metadata, database-unavailable 503 fail-closed behavior, stable ordering and deduplication, exact G03 relation and fixture binding, explicit cross-locale approval, private/noindex/stale source and target canonical rejection, cache invalidation, and dual Career gates."
       },
       "review_governance": {
         "status": "passed",
@@ -104027,7 +104035,7 @@
       },
       "route_and_style": {
         "status": "passed",
-        "evidence": "The complete API route inventory resolved the named GET /api/v0.5/public-topic-edges route; scoped Pint passed all nine PHP files and each changed PHP file passed syntax validation."
+        "evidence": "The complete API route inventory resolved the named GET /api/v0.5/public-topic-edges route; scoped Pint passed all five changed PHP files."
       },
       "dependency_security": {
         "status": "passed",
@@ -104035,11 +104043,15 @@
       },
       "manifests_and_scope": {
         "status": "passed",
-        "evidence": "PR-train YAML and the exact scoped id parse, state JSON plus generated registry and OpenAPI JSON parse, git diff --check, and the exact fifteen-file manifest allowlist pass. Three unrelated duplicate historical manifest ids already exist on the exact main base; the new id is unique and this PR does not modify those historical entries."
+        "evidence": "PR-train YAML and state JSON parse, the exact ten-file repair scope is allowlisted, the governed fixture is valid UTF-8 JSON, and git diff --check passes. Full-CI-generated Big Five compiled artifacts were restored before staging and are excluded from scope."
+      },
+      "full_ci": {
+        "status": "passed",
+        "evidence": "After restoring the repository-required non-destructive migration down(), bash backend/scripts/ci_verify_mbti.sh passed in one guarded full run, including 1,690 Big Five tests, Enneagram, MBTI, migration safety, dependency security, and webhook/attempt regression gates."
       },
       "github_required_checks": {
         "status": "passed",
-        "evidence": "Exact head deb12436c422244754c19438ec9b7293ecfb9e61 passed hygiene, supply-chain, content-pack-build-validate, Semgrep blocking secrets, Semgrep OSS, SARIF upload, verify-mbti-v2 (4m01s), verify-mbti-legacy (4m19s), and verify-bigfive (6m12s). verify-staging-parity was correctly skipped. GitHub reports the PR OPEN, CLEAN, non-draft, with no outstanding review decision."
+        "evidence": "Exact repair head 4c1891252f0a07e61b941c4959131f00fb475a8d passed all 9 required checks: hygiene, supply-chain, content-pack-build-validate, Semgrep blocking, Semgrep OSS, SARIF upload, verify-mbti-v2 (4m26s), verify-mbti-legacy (4m18s), and verify-bigfive (5m54s). verify-staging-parity was correctly skipped; GitHub reports the PR mergeable."
       }
     },
     "failure_reason": null,
@@ -104111,6 +104123,41 @@
         "at": "2026-08-10T15:31:00+08:00",
         "status": "ready_to_merge",
         "note": "Exact head deb12436c422244754c19438ec9b7293ecfb9e61 passed every required GitHub check, including verify-bigfive, both MBTI lanes, content-pack validation, hygiene, supply-chain, and security scanning. Scope revalidation remains exactly sixteen allowlisted files; Career publication remains CLOSED and no production write occurred."
+      },
+      {
+        "at": "2026-08-10T07:35:28Z",
+        "status": "in_progress",
+        "note": "Reconciled PR #3594 as merged at 663cd88ded47bc84b4393c2060140c21fa14b6a1, then started one Authority-scope G03 alignment repair only after fap-web G03 PR #2040 merged at 5466522801be6f71d01f0af96a495a84bddd059f. The repair binds the governed fixture, exact query parameter, relation allowlist, fail-closed unavailable envelope, source canonical readback, and test-only migration up/down. No production migration, CMS import/write, activation, publication, deployment, frontend, sitemap/llms, or Search Channel action is authorized."
+      },
+      {
+        "at": "2026-08-10T07:53:00Z",
+        "status": "local_checks_failed",
+        "note": "The single full ci_verify_mbti run passed the 1,690-test Big Five freeze suite, Enneagram gates, MBTI E2E, and authority checks, then failed only because a destructive dropIfExists implementation in this create migration violated both repository migration-safety gates. The failure was current-scope and no commit, push, production migration, or external write occurred."
+      },
+      {
+        "at": "2026-08-10T07:54:00Z",
+        "status": "local_checks_repairing",
+        "note": "Restored the repository-required non-destructive down() while retaining disposable SQLite up, rollback-command, and re-up validation. Migration safety remains authoritative; no safety test is weakened or bypassed."
+      },
+      {
+        "at": "2026-08-10T08:01:30Z",
+        "status": "local_checks_passed_ready_to_push",
+        "note": "The repaired migration passed 3 safety tests / 2,103 assertions; the Authority/G03/OpenAPI suite passed 25 tests / 438 assertions; the classifier isolation test passed; route, Pint, Composer strict validation/audit, OpenAPI, fixture hashes, deterministic parsing, disposable SQLite up/rollback-command/re-up, and the single guarded full ci_verify_mbti run all passed. No production migration, CMS import/write, activation, publication, deployment, frontend, sitemap/llms, or Search Channel action occurred."
+      },
+      {
+        "at": "2026-08-10T08:03:36Z",
+        "status": "local_checks_passed_ready_to_push",
+        "note": "Rebased the two scoped repair commits cleanly onto latest origin/main a2bb1ea9497deba080063ece1fa14f8bb3f50505 after concurrent PRs #3600 and #3601 merged. Post-rebase Authority/G03/OpenAPI tests passed 25 tests / 442 assertions, classifier isolation passed 1 test / 3 assertions, OpenAPI remained current, and the exact scope diff stayed clean."
+      },
+      {
+        "at": "2026-08-10T08:04:42Z",
+        "status": "github_checks_pending",
+        "note": "Opened repair PR #3605 after the exact validated scope was pushed. Required checks are pending; no production migration, CMS import/write, edge activation/publication, deployment, frontend, sitemap/llms, or Search Channel action occurred."
+      },
+      {
+        "at": "2026-08-10T08:13:50Z",
+        "status": "ready_to_merge",
+        "note": "Exact repair head 4c1891252f0a07e61b941c4959131f00fb475a8d passed every required GitHub check with 9 successes, 1 policy-correct skip, and 0 failures or pending checks. Final scope is the exact governed-G03 Authority repair; Career remains closed and no controlled production action occurred."
       }
     ]
   },

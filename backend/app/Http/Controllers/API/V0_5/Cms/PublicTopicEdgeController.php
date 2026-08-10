@@ -22,15 +22,20 @@ final class PublicTopicEdgeController extends Controller
                 Rule::in(array_merge(PublicTopicEdge::PUBLIC_ENTITY_TYPES, PublicTopicEdge::CAREER_ENTITY_TYPES)),
             ],
             'source_id' => ['required', 'integer', 'min:1'],
-            'source_locale' => ['required', 'string', Rule::in(PublicTopicEdge::SUPPORTED_LOCALES)],
+            'locale' => ['required', 'string', Rule::in(PublicTopicEdge::SUPPORTED_LOCALES)],
         ]);
 
+        $projection = $readModel->read(
+            (string) $validated['source_type'],
+            (int) $validated['source_id'],
+            (string) $validated['locale'],
+        );
+
         return response()
-            ->json($readModel->read(
-                (string) $validated['source_type'],
-                (int) $validated['source_id'],
-                (string) $validated['source_locale'],
-            ))
+            ->json(
+                $projection,
+                data_get($projection, 'authority.reason') === 'AUTHORITY_UNAVAILABLE' ? 503 : 200,
+            )
             ->header('Cache-Control', 'no-store');
     }
 }

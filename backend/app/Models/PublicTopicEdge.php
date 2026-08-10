@@ -15,12 +15,9 @@ final class PublicTopicEdge extends Model
     public const SUPPORTED_LOCALES = ['en', 'zh-CN'];
 
     public const RELATION_TYPES = [
-        'alternate_locale',
-        'parent',
-        'related',
-        'supporting_evidence',
+        'breadcrumb',
+        'learn_more',
         'take_assessment',
-        'next_step',
     ];
 
     public const PUBLIC_ENTITY_TYPES = [
@@ -49,6 +46,7 @@ final class PublicTopicEdge extends Model
         'target_type',
         'target_id',
         'target_locale',
+        'cross_locale_approved',
         'visible_label',
         'context',
         'position',
@@ -63,6 +61,7 @@ final class PublicTopicEdge extends Model
         'valid_until',
         'created_by_admin_user_id',
         'updated_by_admin_user_id',
+        'source_canonical',
         'target_publication_eligible',
         'target_canonical',
     ];
@@ -72,6 +71,7 @@ final class PublicTopicEdge extends Model
         'source_id' => 'integer',
         'target_id' => 'integer',
         'position' => 'integer',
+        'cross_locale_approved' => 'boolean',
         'active' => 'boolean',
         'proposed_active_state' => 'boolean',
         'publication_allowed' => 'boolean',
@@ -88,6 +88,15 @@ final class PublicTopicEdge extends Model
     protected static function booted(): void
     {
         self::saving(static function (self $edge): void {
+            $entityTypes = array_merge(self::PUBLIC_ENTITY_TYPES, self::CAREER_ENTITY_TYPES);
+            if (! in_array((string) $edge->source_type, $entityTypes, true)
+                || ! in_array((string) $edge->target_type, $entityTypes, true)
+                || ! in_array((string) $edge->relation_type, self::RELATION_TYPES, true)
+                || ! in_array((string) $edge->source_locale, self::SUPPORTED_LOCALES, true)
+                || ! in_array((string) $edge->target_locale, self::SUPPORTED_LOCALES, true)) {
+                throw new \DomainException('Public topic edge type, relation, or locale is not allowlisted.');
+            }
+
             if (! self::isCareerType((string) $edge->source_type)
                 && ! self::isCareerType((string) $edge->target_type)) {
                 return;
