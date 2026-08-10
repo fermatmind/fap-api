@@ -1,0 +1,112 @@
+{
+  "schema_version": "fermatmind.riasec_landing_product_funnel_baseline.v1",
+  "experiment_id": "FERMATMIND-EN-RIASEC-CMS-EXPERIMENT-01",
+  "capture_status": "pending_preapply_production_read",
+  "captured_at": null,
+  "active_backend_revision": null,
+  "date_window": {
+    "from": "2026-07-13",
+    "to": "2026-08-09"
+  },
+  "filters": {
+    "org_id": 0,
+    "surface_key": "test_detail_holland_career_interest_test_riasec",
+    "canonical_path": "/en/tests/holland-career-interest-test-riasec",
+    "scale_code": "RIASEC",
+    "form_codes": [
+      "riasec_60",
+      "riasec_140"
+    ],
+    "locale": "en",
+    "environment": "production"
+  },
+  "required_sources": {
+    "landing_and_product_funnel": {
+      "authority": "analytics_seo_conversion_daily exact date/org/canonical/scale/form/locale aggregate",
+      "query_contract": {
+        "table": "analytics_seo_conversion_daily",
+        "date_column": "day",
+        "date_filter": "2026-07-13..2026-08-09 inclusive",
+        "fixed_filters": {
+          "org_id": 0,
+          "url": "/en/tests/holland-career-interest-test-riasec",
+          "lang": "en",
+          "scale_id": "RIASEC"
+        },
+        "form_filter": [
+          "riasec_60",
+          "riasec_140"
+        ],
+        "group_by": "form_id",
+        "aggregates": {
+          "landing_view": "SUM(landing_pv_count)",
+          "test_start": "SUM(start_test_count)",
+          "test_complete": "SUM(complete_test_count)",
+          "riasec_result_view": "SUM(view_result_count)"
+        }
+      },
+      "report_sha256": null,
+      "status": "pending"
+    },
+    "attempt_result_funnel": {
+      "authority": "analytics:measurement-funnel-report --from=2026-07-13 --to=2026-08-09 --scale=RIASEC --locale=en --json",
+      "report_sha256": null,
+      "status": "pending"
+    },
+    "failure_cohorts": {
+      "authority": "analytics:measurement-failure-cohorts-report --from=2026-07-13 --to=2026-08-09 --scale=RIASEC --form=riasec_60 --form=riasec_140 --locale=en --json",
+      "report_sha256": null,
+      "status": "pending"
+    }
+  },
+  "total_source_mappings": {
+    "landing_view": {
+      "source": "landing_and_product_funnel",
+      "json_path": "$.totals.landing_view",
+      "aggregation": "sum both fixed form rows"
+    },
+    "test_start_by_form_code": {
+      "source": "landing_and_product_funnel",
+      "json_path": "$.by_form_code.{form_code}.test_start",
+      "aggregation": "exact fixed form row"
+    },
+    "test_complete_by_form_code": {
+      "source": "landing_and_product_funnel",
+      "json_path": "$.by_form_code.{form_code}.test_complete",
+      "aggregation": "exact fixed form row"
+    },
+    "riasec_result_view_by_form_code": {
+      "source": "landing_and_product_funnel",
+      "json_path": "$.by_form_code.{form_code}.riasec_result_view",
+      "aggregation": "exact fixed form row"
+    },
+    "questions_load_failure": {
+      "source": "failure_cohorts",
+      "json_path": "$.cohorts.questions_load_failure.failed_attempt_count",
+      "aggregation": "privacy-safe distinct failed attempts"
+    },
+    "submit_failure": {
+      "source": "failure_cohorts",
+      "json_path": "$.cohorts.submit_failure.failed_attempt_count",
+      "aggregation": "privacy-safe distinct failed attempts"
+    }
+  },
+  "reconciliation_rules": {
+    "attempt_result_funnel": "coverage and attempt-level reconciliation only; never substitutes for a declared baseline total",
+    "missing_or_mismatched_source": "fail_closed"
+  },
+  "totals": {
+    "landing_view": null,
+    "test_start_by_form_code": null,
+    "test_complete_by_form_code": null,
+    "riasec_result_view_by_form_code": null,
+    "questions_load_failure": null,
+    "submit_failure": null
+  },
+  "read_only": true,
+  "database_write_count": 0,
+  "cms_write_count": 0,
+  "issues": [
+    "production_read_only_capture_pending"
+  ]
+}

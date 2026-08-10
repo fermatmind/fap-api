@@ -1,0 +1,44 @@
+{
+  "schema_version": "fermatmind.riasec_landing_cms_experiment_manifest.v1",
+  "experiment_id": "FERMATMIND-EN-RIASEC-CMS-EXPERIMENT-01",
+  "surface_key": "test_detail_holland_career_interest_test_riasec",
+  "locale": "en",
+  "source_public_api": "https://api.fermatmind.com/api/v0.5/landing-surfaces/test_detail_holland_career_interest_test_riasec?locale=en",
+  "captured_raw_response_sha256": "f934781aba6090587f00157bb9c58729dae1fe7f2dead4847ed549d4c99676d6",
+  "files": {
+    "current_public_readback.json": "e995ea8f3881436f3451f37bc8f87f091d68a3e3b7e0f022a1c6ed416eaf43e0",
+    "target_internal_update.json": "064b9e15eb8eae102623306487c4b63635b7500a32925706f14688158734e3f1",
+    "product_funnel_baseline.json": "f2015a6b2df3ecdd2372e1cd02598426ad473d11b7a91cc0f8a1178ed4161ac7",
+    "measurement_plan.json": "b02d779b4b4e07af0fd94bc088fda5104df09472ccccb974c1bfc036a1197709",
+    "t0_receipt.json": "89a9e473d38d701daa323272368c0739cdcefa488c285a1422b3ff82e2241ec9"
+  },
+  "target_package_sha256": "064b9e15eb8eae102623306487c4b63635b7500a32925706f14688158734e3f1",
+  "allowed_changed_fields": [
+    "title",
+    "description",
+    "payload_json.hero_copy",
+    "payload_json.seo_title",
+    "payload_json.seo_description",
+    "payload_json.aeo_answer_block",
+    "payload_json.claim_risk_notes",
+    "payload_json.h1_or_hero_title",
+    "payload_json.primary_cta_label",
+    "payload_json.methodology_boundary_note"
+  ],
+  "required_unchanged_fields": [
+    "surface_key",
+    "locale",
+    "schema_version",
+    "status",
+    "is_public",
+    "is_indexable",
+    "published_at",
+    "scheduled_at",
+    "page_blocks",
+    "payload_json.approved_internal_link_targets"
+  ],
+  "production_cms_write_authorized_by_user": false,
+  "production_cms_write_authorization_status": "pending_fresh_production_preflight",
+  "application_deploy_authorized": false,
+  "discoverability_change_authorized": false
+}
