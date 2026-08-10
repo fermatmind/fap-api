@@ -104201,7 +104201,7 @@
     "base": "main",
     "branch": "codex/career-1046-truth-rescan-06",
     "title": "CAREER-1046-TRUTH-RESCAN-06: verify Engineering Publication and Production truth",
-    "status": "draft_hold_production_evidence",
+    "status": "draft_checks_passed_hold_production_evidence",
     "depends_on": [
       "CAREER-COLD-CACHE-DISCOVERABILITY-GATE-02"
     ],
@@ -104231,6 +104231,10 @@
       "github_pr": {
         "status": "draft_hold",
         "evidence": "Draft PR #3619 opened with merge prohibited until complete pre/post PASS C03 receipts and finalized generated evidence exist."
+      },
+      "github_checks": {
+        "status": "passed_on_draft_head",
+        "evidence": "CI run 31383436575 passed hygiene, supply-chain, content-pack/10k capacity, Big Five, MBTI v2, and MBTI legacy gates on Draft head 699ae41243d1d0bc1bead1caf1d1d96101679556; staging parity was correctly skipped. Code Scanning run 31383436643 passed both Semgrep jobs."
       }
     },
     "lineage": {
@@ -104279,9 +104283,14 @@
         "at": "2026-08-10T11:24:54Z",
         "status": "draft_hold_production_evidence",
         "note": "Opened Draft PR #3619 with the validated read-only runner, tests, runbook, and exact HOLD lineage. Merge and PR6 remain prohibited pending a complete stable C03 receipt window and finalized evidence."
+      },
+      {
+        "at": "2026-08-10T11:34:53Z",
+        "status": "draft_checks_passed_hold_production_evidence",
+        "note": "All applicable CI and Code Scanning jobs passed on Draft head 699ae41243d1d0bc1bead1caf1d1d96101679556. Passing code checks do not override the missing PASS pre/post C03 receipts; the PR remains Draft/HOLD and unmergeable by policy."
       }
     ],
-    "updated_at": "2026-08-10T11:24:54Z"
+    "updated_at": "2026-08-10T11:34:53Z"
   },
   "CAREER-1046-PUBLICATION-CONTROL-03": {
     "id": "CAREER-1046-PUBLICATION-CONTROL-03",
