@@ -100,6 +100,14 @@ final class FreemiumLocalePolicy
                 $policy['paywall_allowed'] = false;
                 $policy['order_creation_allowed'] = false;
             }
+        } elseif ($policy['policy'] === 'free_only') {
+            $policy['english_free_active'] = $policy['locale_family'] === 'en';
+            $policy['sku'] = null;
+            $policy['upgrade_sku'] = null;
+            $policy['price_cents'] = null;
+            $policy['currency'] = null;
+            $policy['paywall_allowed'] = false;
+            $policy['order_creation_allowed'] = false;
         }
 
         return $policy;
@@ -111,16 +119,16 @@ final class FreemiumLocalePolicy
      */
     public function filterSkuItems(array $items, string $scaleCode, ?string $locale): array
     {
-        if ($this->stringOrNull($locale) === null) {
-            return array_values($items);
-        }
-
         $policy = $this->resolve($scaleCode, $locale);
         if (! (bool) ($policy['applies'] ?? false)) {
             return array_values($items);
         }
 
         if (! (bool) ($policy['paywall_allowed'] ?? false)) {
+            return [];
+        }
+
+        if ($this->stringOrNull($locale) === null) {
             return [];
         }
 
@@ -151,9 +159,12 @@ final class FreemiumLocalePolicy
      */
     public function grantsFullFree(array $policy): bool
     {
+        $policyName = (string) ($policy['policy'] ?? '');
+        $freePolicyActive = $policyName === 'free_only'
+            || ($policyName === 'free_until' && (bool) ($policy['english_free_active'] ?? false));
+
         return (bool) ($policy['applies'] ?? false)
-            && (string) ($policy['policy'] ?? '') === 'free_until'
-            && (bool) ($policy['english_free_active'] ?? false)
+            && $freePolicyActive
             && (string) ($policy['report_access_level'] ?? '') === 'full'
             && ! (bool) ($policy['paywall_allowed'] ?? false)
             && (array) ($policy['stop_conditions'] ?? []) === [];

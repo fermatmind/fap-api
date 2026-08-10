@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\Schema;
 
 class Pr19CommerceSeeder extends Seeder
 {
+    private const FREE_ONLY_SCALE_CODES = [
+        'MBTI',
+        'BIG5_OCEAN',
+        'ENNEAGRAM',
+        'RIASEC',
+        'IQ_RAVEN',
+        'EQ_60',
+    ];
+
     public function run(): void
     {
         if (! Schema::hasTable('skus')) {
@@ -86,77 +95,7 @@ class Pr19CommerceSeeder extends Seeder
             DB::table('skus')->updateOrInsert(['sku' => $sku], $payload);
         }
 
-        if (Schema::hasTable('scales_registry')) {
-            $catalog = app(SkuCatalog::class);
-            $targets = [
-                'MBTI' => [
-                    'report_benefit_code' => 'MBTI_REPORT_FULL',
-                    'credit_benefit_code' => 'MBTI_CREDIT',
-                ],
-                'BIG5_OCEAN' => [
-                    'report_benefit_code' => 'BIG5_FULL_REPORT',
-                    'credit_benefit_code' => 'BIG5_FULL_REPORT',
-                ],
-                'CLINICAL_COMBO_68' => [
-                    'report_benefit_code' => 'CLINICAL_COMBO_68_PRO',
-                    'credit_benefit_code' => 'CLINICAL_COMBO_68_PRO',
-                ],
-                'SDS_20' => [
-                    'report_benefit_code' => 'SDS_20_FULL',
-                    'credit_benefit_code' => 'SDS_20_FULL',
-                ],
-                'EQ_60' => [
-                    'report_benefit_code' => null,
-                    'credit_benefit_code' => null,
-                ],
-            ];
-
-            foreach ($targets as $scaleCode => $benefits) {
-                $scale = DB::table('scales_registry')->where('org_id', 0)->where('code', $scaleCode)->first();
-                if (! $scale) {
-                    continue;
-                }
-
-                $commercial = $scale->commercial_json ?? null;
-                if (is_string($commercial)) {
-                    $decoded = json_decode($commercial, true);
-                    $commercial = is_array($decoded) ? $decoded : null;
-                }
-                if (! is_array($commercial)) {
-                    $commercial = [];
-                }
-
-                $offers = $this->buildOffersFromSkus($catalog->listActiveSkus($scaleCode));
-                $defaultEffective = $catalog->defaultEffectiveSku($scaleCode);
-                $defaultAnchor = $catalog->defaultAnchorSku($scaleCode);
-
-                $commercial['report_benefit_code'] = $benefits['report_benefit_code'];
-                $commercial['credit_benefit_code'] = $benefits['credit_benefit_code'];
-                if ($scaleCode !== 'EQ_60' && $defaultEffective) {
-                    $commercial['report_unlock_sku'] = $defaultEffective;
-                }
-                if ($scaleCode !== 'EQ_60' && $defaultAnchor) {
-                    $commercial['upgrade_sku_anchor'] = $defaultAnchor;
-                }
-                if ($scaleCode === 'EQ_60') {
-                    $commercial['price_tier'] = 'FREE';
-                    $commercial['offers'] = [];
-                    unset($commercial['report_unlock_sku'], $commercial['upgrade_sku_anchor']);
-                } elseif (count($offers) > 0) {
-                    $commercial['offers'] = $offers;
-                }
-
-                $payload = json_encode($commercial, JSON_UNESCAPED_UNICODE);
-
-                DB::table('scales_registry')
-                    ->where('org_id', 0)
-                    ->where('code', $scaleCode)
-                    ->update([
-                        'commercial_json' => $payload,
-                        'updated_at' => $now,
-                    ]);
-            }
-        }
+        $this->syncRegistryCommerce($now);
 
         $this->command?->info('Pr19CommerceSeeder completed.');
     }
@@ -195,6 +134,96 @@ class Pr19CommerceSeeder extends Seeder
         }
 
         return $rows;
+    }
+
+    private function syncRegistryCommerce(mixed $now): void
+    {
+        $catalog = app(SkuCatalog::class);
+        $paidTargets = [
+            'CLINICAL_COMBO_68' => [
+                'report_benefit_code' => 'CLINICAL_COMBO_68_PRO',
+                'credit_benefit_code' => 'CLINICAL_COMBO_68_PRO',
+            ],
+            'SDS_20' => [
+                'report_benefit_code' => 'SDS_20_FULL',
+                'credit_benefit_code' => 'SDS_20_FULL',
+            ],
+        ];
+
+        foreach (['scales_registry', 'scales_registry_v2'] as $table) {
+            if (! Schema::hasTable($table)) {
+                continue;
+            }
+
+            foreach (self::FREE_ONLY_SCALE_CODES as $scaleCode) {
+                DB::table($table)
+                    ->where('org_id', 0)
+                    ->where('code', $scaleCode)
+                    ->update([
+                        'commercial_json' => json_encode(
+                            $this->freeCommercialContract(),
+                            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+                        ),
+                        'updated_at' => $now,
+                    ]);
+            }
+
+            foreach ($paidTargets as $scaleCode => $benefits) {
+                $scale = DB::table($table)->where('org_id', 0)->where('code', $scaleCode)->first();
+                if (! $scale) {
+                    continue;
+                }
+
+                $commercial = $scale->commercial_json ?? null;
+                if (is_string($commercial)) {
+                    $decoded = json_decode($commercial, true);
+                    $commercial = is_array($decoded) ? $decoded : null;
+                }
+                if (! is_array($commercial)) {
+                    $commercial = [];
+                }
+
+                $offers = $this->buildOffersFromSkus($catalog->listActiveSkus($scaleCode));
+                $defaultEffective = $catalog->defaultEffectiveSku($scaleCode);
+                $defaultAnchor = $catalog->defaultAnchorSku($scaleCode);
+
+                $commercial['report_benefit_code'] = $benefits['report_benefit_code'];
+                $commercial['credit_benefit_code'] = $benefits['credit_benefit_code'];
+                if ($defaultEffective) {
+                    $commercial['report_unlock_sku'] = $defaultEffective;
+                }
+                if ($defaultAnchor) {
+                    $commercial['upgrade_sku_anchor'] = $defaultAnchor;
+                }
+                if (count($offers) > 0) {
+                    $commercial['offers'] = $offers;
+                }
+
+                DB::table($table)
+                    ->where('org_id', 0)
+                    ->where('code', $scaleCode)
+                    ->update([
+                        'commercial_json' => json_encode($commercial, JSON_UNESCAPED_UNICODE),
+                        'updated_at' => $now,
+                    ]);
+            }
+        }
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function freeCommercialContract(): array
+    {
+        return [
+            'price_tier' => 'FREE',
+            'report_benefit_code' => null,
+            'credit_benefit_code' => null,
+            'report_unlock_sku' => null,
+            'upgrade_sku' => null,
+            'upgrade_sku_anchor' => null,
+            'offers' => [],
+        ];
     }
 
     private function buildOffersFromSkus(array $items): array

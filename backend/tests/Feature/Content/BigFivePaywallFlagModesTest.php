@@ -71,7 +71,7 @@ final class BigFivePaywallFlagModesTest extends TestCase
         $this->assertNull($resp->json('upgrade_sku_effective'));
     }
 
-    public function test_full_mode_requires_big5_entitlement_for_full_report_access(): void
+    public function test_registry_paywall_drift_cannot_reenable_big5_paid_access(): void
     {
         $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
         $this->seedBigFiveWithPaywallMode('full');
@@ -79,7 +79,6 @@ final class BigFivePaywallFlagModesTest extends TestCase
         $anonId = 'anon_big5_paywall_full';
         $token = $this->issueAnonToken($anonId);
         $attemptId = $this->createSubmittedBigFiveAttemptWithResult($anonId);
-        $this->enableBigFiveCommerceForAttempt($attemptId);
         $headers = [
             'X-Anon-Id' => $anonId,
             'Authorization' => 'Bearer '.$token,
@@ -89,76 +88,37 @@ final class BigFivePaywallFlagModesTest extends TestCase
 
         $resp->assertStatus(200);
         $resp->assertJson([
-            'locked' => true,
-            'access_level' => 'free',
-            'variant' => 'free',
-        ]);
-
-        $allowed = array_map('strval', (array) $resp->json('modules_allowed'));
-        $this->assertContains('big5_core', $allowed);
-        $this->assertNotContains('big5_full', $allowed);
-        $this->assertNotContains('big5_action_plan', $allowed);
-        $this->assertNotSame([], (array) $resp->json('offers'));
-
-        $access = $this->withHeaders($headers)->getJson('/api/v0.3/attempts/'.$attemptId.'/report-access');
-        $access->assertStatus(200);
-        $access->assertJsonPath('access_state', 'locked');
-        $access->assertJsonPath('report_state', 'ready');
-        $access->assertJsonPath('unlock_stage', 'locked');
-        $access->assertJsonPath('payload.access_level', 'free');
-        $access->assertJsonPath('payload.variant', 'free');
-
-        $history = $this->withHeaders($headers)->getJson('/api/v0.3/me/attempts?scale=BIG5_OCEAN');
-        $history->assertStatus(200);
-        $history->assertJsonPath('items.0.access_summary.access_state', 'locked');
-        $this->assertNotSame('full', $history->json('items.0.access_summary.access_level'));
-        $this->assertNotSame('full', $history->json('items.0.access_summary.variant'));
-
-        $pdf = $this->withHeaders($headers)->get('/api/v0.3/attempts/'.$attemptId.'/report.pdf?inline=1');
-        $pdf->assertStatus(200);
-        $pdf->assertHeader('X-Report-Variant', 'free');
-        $pdf->assertHeader('X-Report-Locked', 'true');
-
-        /** @var EntitlementManager $entitlements */
-        $entitlements = app(EntitlementManager::class);
-        $grant = $entitlements->grantAttemptUnlock(
-            0,
-            null,
-            $anonId,
-            'BIG5_FULL_REPORT',
-            $attemptId,
-            'order_big5_paywall_full',
-            'attempt',
-            null,
-            ['big5_full', 'big5_action_plan']
-        );
-        $this->assertTrue((bool) ($grant['ok'] ?? false));
-
-        $unlocked = $this->withHeaders($headers)->getJson('/api/v0.3/attempts/'.$attemptId.'/report');
-        $unlocked->assertStatus(200);
-        $unlocked->assertJson([
             'locked' => false,
             'access_level' => 'full',
             'variant' => 'full',
         ]);
 
-        $unlockedAllowed = array_map('strval', (array) $unlocked->json('modules_allowed'));
-        $this->assertContains('big5_core', $unlockedAllowed);
-        $this->assertContains('big5_full', $unlockedAllowed);
-        $this->assertContains('big5_action_plan', $unlockedAllowed);
+        $allowed = array_map('strval', (array) $resp->json('modules_allowed'));
+        $this->assertContains('big5_core', $allowed);
+        $this->assertContains('big5_full', $allowed);
+        $this->assertContains('big5_action_plan', $allowed);
+        $this->assertSame([], (array) $resp->json('offers'));
+        $this->assertNull($resp->json('upgrade_sku'));
+        $this->assertNull($resp->json('upgrade_sku_effective'));
 
-        $unlockedAccess = $this->withHeaders($headers)->getJson('/api/v0.3/attempts/'.$attemptId.'/report-access');
-        $unlockedAccess->assertStatus(200);
-        $unlockedAccess->assertJsonPath('access_state', 'ready');
-        $unlockedAccess->assertJsonPath('unlock_stage', 'full');
-        $unlockedAccess->assertJsonPath('payload.access_level', 'full');
-        $unlockedAccess->assertJsonPath('payload.variant', 'full');
+        $access = $this->withHeaders($headers)->getJson('/api/v0.3/attempts/'.$attemptId.'/report-access');
+        $access->assertStatus(200);
+        $access->assertJsonPath('access_state', 'ready');
+        $access->assertJsonPath('report_state', 'ready');
+        $access->assertJsonPath('unlock_stage', 'full');
+        $access->assertJsonPath('payload.access_level', 'full');
+        $access->assertJsonPath('payload.variant', 'full');
 
-        $unlockedHistory = $this->withHeaders($headers)->getJson('/api/v0.3/me/attempts?scale=BIG5_OCEAN');
-        $unlockedHistory->assertStatus(200);
-        $unlockedHistory->assertJsonPath('items.0.access_summary.access_state', 'ready');
-        $unlockedHistory->assertJsonPath('items.0.access_summary.access_level', 'full');
-        $unlockedHistory->assertJsonPath('items.0.access_summary.variant', 'full');
+        $history = $this->withHeaders($headers)->getJson('/api/v0.3/me/attempts?scale=BIG5_OCEAN');
+        $history->assertStatus(200);
+        $history->assertJsonPath('items.0.access_summary.access_state', 'ready');
+        $history->assertJsonPath('items.0.access_summary.access_level', 'full');
+        $history->assertJsonPath('items.0.access_summary.variant', 'full');
+
+        $pdf = $this->withHeaders($headers)->get('/api/v0.3/attempts/'.$attemptId.'/report.pdf?inline=1');
+        $pdf->assertStatus(200);
+        $pdf->assertHeader('X-Report-Variant', 'full');
+        $pdf->assertHeader('X-Report-Locked', 'false');
     }
 
     private function seedBigFiveWithPaywallMode(string $mode): void

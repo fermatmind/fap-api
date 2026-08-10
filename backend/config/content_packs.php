@@ -74,6 +74,7 @@ return [
         'forms' => [
             'mbti_144' => [
                 'dir_version' => 'MBTI-CN-v0.3',
+                'question_count' => 144,
                 'aliases' => [
                     '144',
                     'standard_144',
@@ -93,6 +94,7 @@ return [
             ],
             'mbti_93' => [
                 'dir_version' => 'MBTI-CN-v0.3-form-93',
+                'question_count' => 93,
                 'aliases' => [
                     '93',
                     'standard_93',
@@ -258,6 +260,39 @@ return [
                 'question_count' => 60,
                 'form_kind' => 'standard',
                 'aliases' => [],
+                'public' => [
+                    'label' => [
+                        'zh' => '60题标准版',
+                        'en' => '60-question standard version',
+                    ],
+                    'short_label' => [
+                        'zh' => '60题',
+                        'en' => '60 questions',
+                    ],
+                    'estimated_minutes' => 10,
+                ],
+            ],
+        ],
+    ],
+    'iq_forms' => [
+        'default_form_code' => 'IQ_OWNER_ORIGINAL_30',
+        'forms' => [
+            'IQ_OWNER_ORIGINAL_30' => [
+                'dir_version' => 'IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO',
+                'question_count' => 30,
+                'form_kind' => 'matrix_reasoning',
+                'aliases' => [],
+                'public' => [
+                    'label' => [
+                        'zh' => '30题正式版',
+                        'en' => '30-question official version',
+                    ],
+                    'short_label' => [
+                        'zh' => '30题',
+                        'en' => '30 questions',
+                    ],
+                    'estimated_minutes' => 20,
+                ],
             ],
         ],
     ],

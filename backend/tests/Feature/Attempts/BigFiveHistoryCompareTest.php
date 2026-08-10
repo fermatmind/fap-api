@@ -164,7 +164,7 @@ final class BigFiveHistoryCompareTest extends TestCase
         $response->assertJsonPath('items.1.share_summary.enabled', true);
     }
 
-    public function test_me_attempts_big5_locked_rows_do_not_expose_paid_facet_summary(): void
+    public function test_me_attempts_big5_free_only_authority_overrides_stale_locked_projection(): void
     {
         (new ScaleRegistrySeeder)->run();
         (new Pr19CommerceSeeder)->run();
@@ -220,10 +220,10 @@ final class BigFiveHistoryCompareTest extends TestCase
         ])->getJson('/api/v0.3/me/attempts?scale=BIG5_OCEAN');
 
         $response->assertStatus(200);
-        $response->assertJsonPath('items.0.access_summary.access_state', 'locked');
-        $response->assertJsonPath('items.0.access_summary.access_level', 'free');
-        $response->assertJsonPath('items.0.access_summary.variant', 'free');
-        $response->assertJsonMissingPath('items.0.top_facets_summary_v1');
+        $response->assertJsonPath('items.0.access_summary.access_state', 'ready');
+        $response->assertJsonPath('items.0.access_summary.access_level', 'full');
+        $response->assertJsonPath('items.0.access_summary.variant', 'full');
+        $response->assertJsonPath('items.0.top_facets_summary_v1.items.0.key', 'O5');
         $response->assertJsonPath('items.0.quality_summary.level', 'A');
         $response->assertJsonPath('items.0.norms_summary.status', 'CALIBRATED');
         $response->assertJsonPath('items.0.share_summary.enabled', true);

@@ -67,7 +67,7 @@ final class PublicScaleFormsProjector
             ];
         }
 
-        return count($projected) > 1 ? $projected : [];
+        return $projected;
     }
 
     /**
@@ -85,6 +85,20 @@ final class PublicScaleFormsProjector
     }
 
     /**
+     * @param  array<string,mixed>  $registryRow
+     */
+    public function defaultEstimatedMinutes(array $registryRow, string $locale = 'zh-CN'): int
+    {
+        foreach ($this->projectForRegistryRow($registryRow, $locale) as $form) {
+            if (($form['is_default'] ?? false) === true) {
+                return $this->positiveInt($form['estimated_minutes'] ?? null);
+            }
+        }
+
+        return 0;
+    }
+
+    /**
      * @return array<string,mixed>
      */
     private function formsConfigForScale(string $scaleCode): array
@@ -94,6 +108,8 @@ final class PublicScaleFormsProjector
             'BIG5_OCEAN' => 'content_packs.big5_forms',
             'ENNEAGRAM' => 'content_packs.enneagram_forms',
             'RIASEC' => 'content_packs.riasec_forms',
+            'IQ_RAVEN' => 'content_packs.iq_forms',
+            'EQ_60' => 'content_packs.eq60_forms',
             default => null,
         };
 

@@ -23,6 +23,12 @@ final class BigFiveWebhookIdempotencyTest extends TestCase
     {
         (new ScaleRegistrySeeder)->run();
         (new Pr19CommerceSeeder)->run();
+
+        // Exercise legacy paid-webhook idempotency in isolation. The seeded
+        // public assessment contract intentionally leaves this SKU inactive.
+        DB::table('skus')
+            ->where('sku', 'SKU_BIG5_FULL_REPORT_299')
+            ->update(['is_active' => true]);
     }
 
     private function createBigFiveAttemptWithResult(string $anonId): string

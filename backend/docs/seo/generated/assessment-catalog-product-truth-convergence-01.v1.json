@@ -1,0 +1,31 @@
+{
+  "schema_version": "assessment_catalog_product_truth_convergence.v1",
+  "status": "ASSESSMENT_CATALOG_FACT_AUTHORITY_CONVERGENCE_01_CODE_COMPLETE",
+  "source": {
+    "product_truth_contract_sha256": "3d9bef9549374007cedb5859cd14a90566020d5322ff47a12764bc6504269857",
+    "source_manifest_sha256": "ba7b58afaa1228c445e138d5d5d5e5fa90db7f5222dfea19ee493be536a3b2ae"
+  },
+  "public_commercial": {
+    "price_tier": "FREE",
+    "paywall_mode": "free_only",
+    "report_access_level": "full",
+    "report_unlock_sku": null,
+    "upgrade_sku": null,
+    "offers": [],
+    "blur_others": false,
+    "teaser_percent": 0
+  },
+  "scales": [
+    {"scale_code":"MBTI","default_form_code":"mbti_144","forms":[{"form_code":"mbti_144","questions":144,"minutes":15},{"form_code":"mbti_93","questions":93,"minutes":10}]},
+    {"scale_code":"BIG5_OCEAN","default_form_code":"big5_120","forms":[{"form_code":"big5_120","questions":120,"minutes":15},{"form_code":"big5_90","questions":90,"minutes":11}]},
+    {"scale_code":"ENNEAGRAM","default_form_code":"enneagram_likert_105","forms":[{"form_code":"enneagram_likert_105","questions":105,"minutes":12},{"form_code":"enneagram_forced_choice_144","questions":144,"minutes":18}]},
+    {"scale_code":"RIASEC","default_form_code":"riasec_60","forms":[{"form_code":"riasec_60","questions":60,"minutes":8},{"form_code":"riasec_140","questions":140,"minutes":18}]},
+    {"scale_code":"IQ_RAVEN","default_form_code":"IQ_OWNER_ORIGINAL_30","forms":[{"form_code":"IQ_OWNER_ORIGINAL_30","questions":30,"minutes":20}]},
+    {"scale_code":"EQ_60","default_form_code":"eq_60","forms":[{"form_code":"eq_60","questions":60,"minutes":10}]}
+  ],
+  "sku_boundary": {
+    "retire": "attempt_scoped_report_unlock_only",
+    "preserve_active": ["MBTI_PRO_MONTH_599","MBTI_PRO_YEAR_1999","MBTI_GIFT_PACK_2990","MBTI_CREDIT"]
+  },
+  "production_activation": "DEFERRED_SEPARATELY_CONTROLLED"
+}

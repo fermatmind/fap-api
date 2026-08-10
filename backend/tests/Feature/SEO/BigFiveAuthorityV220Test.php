@@ -9,23 +9,23 @@ class BigFiveAuthorityV220Test extends TestCase
 {
     private const DIR = 'generated/big-five-authority-v2/big5-authority-v2-test-landing-20';
 
-    public function test_package_workflow_passes_with_two_landings_and_closed_release_gates(): void
+    public function test_historical_package_fails_closed_after_product_authority_convergence(): void
     {
-        $result = $this->runGate(expectSuccess: true);
+        $result = $this->runGate();
 
-        $this->assertTrue($result['ok'], json_encode($result['issues'], JSON_UNESCAPED_UNICODE));
-        $this->assertSame('pass', $result['status']);
+        $this->assertFalse($result['ok']);
+        $this->assertSame('fail', $result['status']);
         $this->assertSame(2, $result['expected_page_count']);
         $this->assertSame(2, $result['observed_final_page_count']);
         $this->assertSame(2, $result['observed_locale_pair_count']);
-        $this->assertTrue($result['backend_product_authority_verified']);
+        $this->assertFalse($result['backend_product_authority_verified']);
         $this->assertSame([
             '/en/tests/big-five-personality-test-ocean-model',
             '/zh/tests/big-five-personality-test-ocean-model',
         ], $result['canonical_paths']);
         $this->assertTrue($result['raw_failures_preserved']);
         $this->assertTrue($result['skeptical_review_accounted']);
-        $this->assertTrue($result['automated_gate_passed']);
+        $this->assertFalse($result['automated_gate_passed']);
         $this->assertFalse($result['human_review_passed']);
         $this->assertFalse($result['publish_allowed']);
         $this->assertFalse($result['schema_eligible']);
@@ -42,7 +42,8 @@ class BigFiveAuthorityV220Test extends TestCase
             'visible_sources_incomplete',
         ], $result['package_checks']['raw']['issue_codes']);
         $this->assertTrue($result['package_checks']['repaired']['editorial_ok']);
-        $this->assertTrue($result['package_checks']['final']['editorial_ok']);
+        $this->assertFalse($result['package_checks']['final']['editorial_ok']);
+        $this->assertContains('backend_product_authority_drift', $result['package_checks']['final']['issue_codes']);
     }
 
     public function test_final_landings_preserve_product_evidence_privacy_and_navigation_contracts(): void

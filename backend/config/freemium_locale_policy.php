@@ -29,8 +29,8 @@ return [
             'locales' => [
                 'en' => [
                     'locale_family' => 'en',
-                    'policy' => 'free_until',
-                    'free_until' => '2026-12-31',
+                    'policy' => 'free_only',
+                    'free_until' => null,
                     'report_access_level' => ReportAccess::REPORT_ACCESS_FULL,
                     'free_modules' => [
                         ReportAccess::MODULE_CORE_FREE,
@@ -48,23 +48,22 @@ return [
                 ],
                 'zh-CN' => [
                     'locale_family' => 'zh',
-                    'policy' => 'cny_199_unlock',
+                    'policy' => 'free_only',
                     'free_until' => null,
-                    'report_access_level' => ReportAccess::REPORT_ACCESS_FREE,
+                    'report_access_level' => ReportAccess::REPORT_ACCESS_FULL,
                     'free_modules' => [
                         ReportAccess::MODULE_CORE_FREE,
-                    ],
-                    'paid_modules' => [
                         ReportAccess::MODULE_CORE_FULL,
                         ReportAccess::MODULE_CAREER,
                         ReportAccess::MODULE_RELATIONSHIPS,
                     ],
-                    'sku' => 'MBTI_REPORT_FULL_199',
-                    'upgrade_sku' => 'MBTI_REPORT_FULL',
-                    'price_cents' => 199,
-                    'currency' => 'CNY',
-                    'paywall_allowed' => true,
-                    'order_creation_allowed' => true,
+                    'paid_modules' => [],
+                    'sku' => null,
+                    'upgrade_sku' => null,
+                    'price_cents' => null,
+                    'currency' => null,
+                    'paywall_allowed' => false,
+                    'order_creation_allowed' => false,
                 ],
             ],
         ],

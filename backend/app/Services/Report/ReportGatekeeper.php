@@ -104,6 +104,7 @@ class ReportGatekeeper
             $forceFreeOnly
         );
         $freeFullReportMode = $this->accessResolver->freeFullReportModeEnabled($scaleCode);
+        $freeOnlyGrantsFull = $forceFreeOnly && $this->accessResolver->freeOnlyGrantsFullAccess($scaleCode);
         $localeGrantsFullFree = $this->freemiumLocalePolicy()->grantsFullFree($localePolicy);
         $hasEntitlementFullAccess = (bool) ($accessState['has_entitlement_full_access'] ?? false);
         $hasAccess = (bool) ($accessState['has_full_access'] ?? false) || $localeGrantsFullFree;
@@ -111,9 +112,9 @@ class ReportGatekeeper
         return [
             'ok' => true,
             'locked' => ! $hasAccess,
-            'access_source' => $this->resolveAccessSource($freeFullReportMode, $localeGrantsFullFree, $hasEntitlementFullAccess),
+            'access_source' => $this->resolveAccessSource($freeFullReportMode, $freeOnlyGrantsFull, $localeGrantsFullFree, $hasEntitlementFullAccess),
             'free_full_report_mode' => $freeFullReportMode,
-            'paywall_suppressed' => $freeFullReportMode,
+            'paywall_suppressed' => $freeFullReportMode || $freeOnlyGrantsFull || $localeGrantsFullFree,
         ];
     }
 
@@ -194,12 +195,13 @@ class ReportGatekeeper
             $forceFreeOnly
         );
         $freeFullReportMode = $this->accessResolver->freeFullReportModeEnabled($scaleCode);
+        $freeOnlyGrantsFull = $forceFreeOnly && $this->accessResolver->freeOnlyGrantsFullAccess($scaleCode);
         $localeGrantsFullFree = $this->freemiumLocalePolicy()->grantsFullFree($localePolicy);
         $hasEntitlementFullAccess = (bool) ($accessState['has_entitlement_full_access'] ?? false);
-        $accessSource = $this->resolveAccessSource($freeFullReportMode, $localeGrantsFullFree, $hasEntitlementFullAccess);
-        $paywallSuppressed = $freeFullReportMode;
+        $accessSource = $this->resolveAccessSource($freeFullReportMode, $freeOnlyGrantsFull, $localeGrantsFullFree, $hasEntitlementFullAccess);
+        $paywallSuppressed = $freeFullReportMode || $freeOnlyGrantsFull || $localeGrantsFullFree;
         $hasFullAccess = (bool) ($accessState['has_full_access'] ?? false) || $localeGrantsFullFree;
-        if ($freeFullReportMode) {
+        if ($paywallSuppressed) {
             [$paywall, $viewPolicy] = $this->suppressPaywall($paywall, $viewPolicy);
         }
 
@@ -952,11 +954,16 @@ class ReportGatekeeper
 
     private function resolveAccessSource(
         bool $freeFullReportMode,
+        bool $freeOnlyGrantsFull,
         bool $localeGrantsFullFree,
         bool $hasEntitlementFullAccess
     ): string {
         if ($freeFullReportMode) {
             return 'free_full_report_mode';
+        }
+
+        if ($freeOnlyGrantsFull) {
+            return 'scale_free_only';
         }
 
         if ($localeGrantsFullFree) {
