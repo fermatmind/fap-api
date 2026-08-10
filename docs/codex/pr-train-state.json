@@ -44,7 +44,7 @@
         "evidence": "Approved Window 3 product-truth contract SHA 3d9bef9549374007cedb5859cd14a90566020d5322ff47a12764bc6504269857 and source manifest SHA ba7b58afaa1228c445e138d5d5d5e5fa90db7f5222dfea19ee493be536a3b2ae are available.",
         "status": "pass"
       },
-      "github_pr": { "evidence": "PR #3609 exact head 58db5d6865d4ee4c7ce3ee04edd94d362a5cd782 passed hygiene, supply-chain, content-pack, Code Scanning, and both MBTI jobs. The sole verify-bigfive classifier failure is repaired at 15ffa84eb79df3bce14046e694afa602f8815b3f; fresh checks are pending.", "status": "pending" },
+      "github_pr": { "evidence": "PR #3609 exact head 50a142b9b78979bd9435976f0fac30af731784f9 passed hygiene, supply-chain, content-pack, Code Scanning, and both MBTI jobs. verify-bigfive exposed two pre-existing negative ScalesLookupController classifier contracts that the first repair had bypassed; the narrowed exact-diff repair is locally validated and fresh checks are pending.", "status": "pending" },
       "local_validation": {
         "evidence": [
           "Latest-main focused product, commerce, report, history, SEO, and migration contracts passed: 35 tests / 1630 assertions.",
@@ -62,7 +62,7 @@
     },
     "commit_sha": "15ffa84eb79df3bce14046e694afa602f8815b3f",
     "depends_on": [],
-    "failure_reason": null,
+    "failure_reason": "CI run 31375548308 verify-bigfive failed two classifier negative controls; the repair restores fail-closed line classification and allows only the SHA-fingerprinted Catalog controller diff.",
     "local_cleanup_executed": false,
     "merged_at": null,
     "name": "Converge six-assessment public product truth",
@@ -104,6 +104,11 @@
         "at": "2026-08-10T17:39:00+08:00",
         "status": "github_checks_pending",
         "note": "The exact five-path Catalog classifier repair passed the branch-diff, allowlist, and adjacent-runtime negative contracts: 3 tests / 8 assertions. Pint, JSON/YAML parsing, git diff --check, and exact repair scope passed. Repair commit is 15ffa84eb79df3bce14046e694afa602f8815b3f; fresh required checks remain pending."
+      },
+      {
+        "at": "2026-08-10T17:50:00+08:00",
+        "status": "github_checks_repairing",
+        "note": "CI run 31375548308 passed every completed required lane except verify-bigfive. Its 1688 passing tests exposed two failed legacy negative controls because the first Catalog classifier repair allowed ScalesLookupController.php by path before its fail-closed line classifier. The narrowed repair removes that controller from the file allowlist and accepts only the exact SHA-256 fingerprint of this PR's controller diff; empty or adjacent unsafe controller changes remain blocking. Four focused contracts pass with 12 assertions."
       }
     ]
   },
