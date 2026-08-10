@@ -70,7 +70,7 @@ final class MeasurementFunnelReadModelTest extends TestCase
         $this->assertStringContainsString('article_detail', $encoded);
         $this->assertStringContainsString('google', $encoded);
         $this->assertStringContainsString('mini_program', $encoded);
-        foreach ([$attemptId, 'private search phrase', 'person@example.com', 'token=secret', '/en/tests/private'] as $forbidden) {
+        foreach ([$attemptId, 'start_mbti_test', 'private search phrase', 'person@example.com', 'token=secret', '/en/tests/private'] as $forbidden) {
             $this->assertStringNotContainsString($forbidden, $encoded);
         }
     }
@@ -143,12 +143,12 @@ final class MeasurementFunnelReadModelTest extends TestCase
             'locale',
             'entry_surface',
             'source_page_type',
-            'target_action',
             'organic_channel',
             'device_class',
             'result_state',
         ], array_keys($meta));
         $this->assertSame('article_detail', $meta['entry_surface'] ?? null);
+        $this->assertArrayNotHasKey('target_action', $meta);
         $this->assertArrayNotHasKey('attempt_id', $meta);
         $this->assertStringNotContainsString($attemptId, (string) $event->meta_json);
         $this->assertStringNotContainsString('person@example.com', (string) $event->meta_json);

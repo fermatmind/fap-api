@@ -27,7 +27,6 @@ final class MeasurementAttributionDimensions
                 128,
             ),
             'source_page_type' => $this->dimension($meta['source_page_type'] ?? null, 64),
-            'target_action' => $this->dimension($meta['target_action'] ?? null, 128),
             'organic_channel' => $this->organicChannel($meta, $row['channel'] ?? null),
             'device_class' => $this->deviceClass($row['client_platform'] ?? null),
             'result_state' => in_array($resultState, ['ready', 'invalid', 'unknown'], true)
@@ -48,7 +47,6 @@ final class MeasurementAttributionDimensions
             'locale',
             'entry_surface',
             'source_page_type',
-            'target_action',
             'organic_channel',
             'device_class',
         ]));
