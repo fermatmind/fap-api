@@ -351,8 +351,6 @@ final class SecurityGuardrailsTest extends TestCase
         $repoRoot = dirname(base_path());
         $workflowPaths = [
             '.github/workflows/deploy-production.yml',
-            '.github/workflows/career-content-production-dry-run.yml',
-            '.github/workflows/career-content-production-import.yml',
         ];
         $pinnedSshAgent = 'webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555';
 
@@ -499,6 +497,29 @@ final class SecurityGuardrailsTest extends TestCase
             $missing,
             "fm token middlewares must enforce revoked/expired token checks.\n".implode("\n", $missing)
         );
+    }
+
+    public function test_active_workflows_do_not_reference_retired_tencent_runtime_hosts(): void
+    {
+        $repoRoot = dirname(base_path());
+
+        foreach ([
+            '.github/workflows/mbti-comp-runtime46-staging-dry-run.yml',
+            '.github/workflows/career-detail-staging-cache-repair.yml',
+            '.github/workflows/career-content-production-dry-run.yml',
+            '.github/workflows/career-content-production-import.yml',
+        ] as $retiredWorkflow) {
+            $this->assertFileDoesNotExist($repoRoot.'/'.$retiredWorkflow);
+        }
+
+        foreach (glob($repoRoot.'/.github/workflows/*.{yml,yaml}', GLOB_BRACE) ?: [] as $workflowPath) {
+            $source = file_get_contents($workflowPath);
+            $this->assertIsString($source);
+
+            foreach (['49.235.131.248', '122.51.23.191', '49.234.55.28'] as $retiredHost) {
+                $this->assertStringNotContainsString($retiredHost, $source, $workflowPath);
+            }
+        }
     }
 
     public function test_content_pack_error_contract_does_not_leak_internal_reason(): void

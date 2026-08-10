@@ -21,15 +21,16 @@ Both modes require:
 - the exact current Career runtime projection SHA-256;
 - the workflow-generated exact operator approval sentence.
 
-The production Environment provides a dedicated, pinned read-only source identity:
+The production Environment uses the current, pinned Alibaba production API deployment identity:
 
-- `GREENFIELD_SOURCE_SSH_KNOWN_HOSTS`
-- `GREENFIELD_SOURCE_USER`
-- `GREENFIELD_SOURCE_PORT`
-- `GREENFIELD_SOURCE_HOST`
-- `GREENFIELD_SOURCE_PATH`
+- `SSH_KNOWN_HOSTS`
+- `PRODUCTION_DEPLOY_USER`
+- `PRODUCTION_DEPLOY_PORT`
+- `PRODUCTION_DEPLOY_HOST`
+- `PRODUCTION_DEPLOY_PATH`
+- `PRODUCTION_RETIRED_DEPLOY_HOST`
 
-Source topology and host pinning are intentionally separate from generic production deployment SSH secrets. The workflow reuses only the existing non-interactive production SSH identity because the source server already authorizes that deployment key; it does not reuse the deploy host, port, user, path, or known-host set. Baseline export therefore remains bound to the verified current-published source while deployment targets move between cloud providers, and changing the Greenfield source topology cannot redirect or authorize a production deployment.
+The baseline source is the active Alibaba production API release. The workflow fails closed if the current deploy host matches `PRODUCTION_RETIRED_DEPLOY_HOST`, so retaining the retired-host secret remains a safety control rather than a runtime dependency. The exact active revision and latest control-plane SHA continue to bind every export.
 
 `preflight` builds and verifies the package without downloading media. It uploads only a sanitized receipt containing the package identity, dataset counts, Career projection summary, public-media count/size summary, and the opaque public-media host-set SHA-256.
 

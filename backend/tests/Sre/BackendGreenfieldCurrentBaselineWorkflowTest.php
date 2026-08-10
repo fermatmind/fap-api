@@ -23,11 +23,13 @@ final class BackendGreenfieldCurrentBaselineWorkflowTest extends TestCase
             'test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"',
             'I explicitly approve SELECT-only production Greenfield current-baseline',
             'secrets.SSH_PRIVATE_KEY',
-            'secrets.GREENFIELD_SOURCE_SSH_KNOWN_HOSTS',
-            'secrets.GREENFIELD_SOURCE_USER',
-            'secrets.GREENFIELD_SOURCE_PORT',
-            'secrets.GREENFIELD_SOURCE_HOST',
-            'secrets.GREENFIELD_SOURCE_PATH',
+            'secrets.SSH_KNOWN_HOSTS',
+            'secrets.PRODUCTION_DEPLOY_USER',
+            'secrets.PRODUCTION_DEPLOY_PORT',
+            'secrets.PRODUCTION_DEPLOY_HOST',
+            'secrets.PRODUCTION_RETIRED_DEPLOY_HOST',
+            'secrets.PRODUCTION_DEPLOY_PATH',
+            'test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"',
             'retention-days: 3',
             'persist-credentials: false',
         ] as $contract) {
@@ -35,13 +37,13 @@ final class BackendGreenfieldCurrentBaselineWorkflowTest extends TestCase
         }
 
         foreach ([
-            'secrets.SSH_KNOWN_HOSTS',
-            'secrets.PRODUCTION_DEPLOY_USER',
-            'secrets.PRODUCTION_DEPLOY_PORT',
-            'secrets.PRODUCTION_DEPLOY_HOST',
-            'secrets.PRODUCTION_DEPLOY_PATH',
-        ] as $genericDeploySecret) {
-            $this->assertStringNotContainsString($genericDeploySecret, $source);
+            'secrets.GREENFIELD_SOURCE_SSH_KNOWN_HOSTS',
+            'secrets.GREENFIELD_SOURCE_USER',
+            'secrets.GREENFIELD_SOURCE_PORT',
+            'secrets.GREENFIELD_SOURCE_HOST',
+            'secrets.GREENFIELD_SOURCE_PATH',
+        ] as $retiredSourceSecret) {
+            $this->assertStringNotContainsString($retiredSourceSecret, $source);
         }
     }
 
