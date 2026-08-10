@@ -379,6 +379,11 @@ final class MbtiIntpASeoTitleExperimentService
             ],
         ];
 
+        // On a variant route, variant.type_name overlays profile.type_name. The
+        // complete public projection fingerprint below binds the visible value;
+        // the shadowed base-profile storage value is not public-route authority.
+        unset($expected['profile']['type_name'], $actual['profile']['type_name']);
+
         $normalizedExpected = $this->canonicalize($expected);
         $normalizedActual = $this->canonicalize($this->normalizeStagingAuthorityUrls($actual, $expected));
         if ($normalizedActual !== $normalizedExpected) {

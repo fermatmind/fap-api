@@ -83,6 +83,19 @@ final class PersonalityMbtiIntpASeoTitleExperimentCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
     }
 
+    public function test_dry_run_uses_the_variant_projection_instead_of_the_shadowed_profile_type_name(): void
+    {
+        [$profile] = $this->createAuthority();
+        $profile->update(['type_name' => 'Shadowed staging base type name']);
+
+        [$exitCode, $receipt] = $this->runCommand(['--dry-run' => true]);
+
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($receipt['ok']);
+        $this->assertSame('planned', $receipt['status']);
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
     public function test_write_creates_one_inactive_revision_and_preserves_live_authority(): void
     {
         [, $variant, $seoMeta] = $this->createAuthority();
