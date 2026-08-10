@@ -96,6 +96,29 @@ final class PersonalityMbtiIntpASeoTitleExperimentCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
     }
 
+    public function test_dry_run_fingerprints_the_same_visible_sections_as_the_public_api(): void
+    {
+        [, $variant] = $this->createAuthority();
+        PersonalityProfileVariantSection::query()->create([
+            'org_id' => 0,
+            'personality_profile_variant_id' => (int) $variant->id,
+            'section_key' => 'career_fit',
+            'render_variant' => 'premium_teaser',
+            'body_md' => 'Not part of the public projection.',
+            'body_html' => '<p>Not part of the public projection.</p>',
+            'payload_json' => null,
+            'sort_order' => 999,
+            'is_enabled' => true,
+        ]);
+
+        [$exitCode, $receipt] = $this->runCommand(['--dry-run' => true]);
+
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($receipt['ok']);
+        $this->assertSame('planned', $receipt['status']);
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
     public function test_write_creates_one_inactive_revision_and_preserves_live_authority(): void
     {
         [, $variant, $seoMeta] = $this->createAuthority();
