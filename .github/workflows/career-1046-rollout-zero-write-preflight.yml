@@ -153,25 +153,34 @@ jobs:
           [[ "$public_api_base_url" =~ ^https://[A-Za-z0-9.-]+$ ]]
 
           printf -v q_deploy_path '%q' "$DEPLOY_PATH"
+          printf -v q_expected_control_plane_sha '%q' "$EXPECTED_CONTROL_PLANE_SHA"
           printf -v q_expected_release_sha '%q' "$EXPECTED_RELEASE_SHA"
           printf -v q_expected_release_name '%q' "$EXPECTED_RELEASE_NAME"
           printf -v q_expected_manifest_sha256 '%q' "$EXPECTED_MANIFEST_SHA256"
+          printf -v q_workflow_run_id '%q' "$GITHUB_RUN_ID"
+          printf -v q_workflow_run_attempt '%q' "$GITHUB_RUN_ATTEMPT"
           printf -v q_public_api_base_url '%q' "$public_api_base_url"
           printf -v q_public_web_base_url '%q' "$public_web_base_url"
 
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -o ServerAliveInterval=20 -o ServerAliveCountMax=30 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "DEPLOY_PATH=$q_deploy_path EXPECTED_RELEASE_SHA=$q_expected_release_sha EXPECTED_RELEASE_NAME=$q_expected_release_name EXPECTED_MANIFEST_SHA256=$q_expected_manifest_sha256 PUBLIC_API_BASE_URL=$q_public_api_base_url PUBLIC_WEB_BASE_URL=$q_public_web_base_url bash -s" \
+            "DEPLOY_PATH=$q_deploy_path EXPECTED_CONTROL_PLANE_SHA=$q_expected_control_plane_sha EXPECTED_RELEASE_SHA=$q_expected_release_sha EXPECTED_RELEASE_NAME=$q_expected_release_name EXPECTED_MANIFEST_SHA256=$q_expected_manifest_sha256 WORKFLOW_RUN_ID=$q_workflow_run_id WORKFLOW_RUN_ATTEMPT=$q_workflow_run_attempt PUBLIC_API_BASE_URL=$q_public_api_base_url PUBLIC_WEB_BASE_URL=$q_public_web_base_url bash -s" \
             < backend/scripts/career/career_1046_rollout_preflight.sh \
             > artifacts/career-1046-rollout-zero-write-preflight.json
 
           jq -e \
+            --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
             --arg release "$EXPECTED_RELEASE_SHA" \
             --arg release_name "$EXPECTED_RELEASE_NAME" \
             --arg manifest "$EXPECTED_MANIFEST_SHA256" \
+            --arg run_id "$GITHUB_RUN_ID" \
+            --arg run_attempt "$GITHUB_RUN_ATTEMPT" \
             '.schema_version == "career.1046_rollout.zero_write_preflight.v1"
-             and (.status == "PASS_ZERO_WRITE_PREFLIGHT_CAPTURED" or .status == "HOLD_ZERO_WRITE_PREFLIGHT_INCOMPLETE")
+             and .status == "PASS_ZERO_WRITE_PREFLIGHT_CAPTURED"
+             and .control_plane_sha == $control
+             and .workflow_run_id == ($run_id | tonumber)
+             and .workflow_run_attempt == ($run_attempt | tonumber)
              and .release.sha == $release
              and .release.name == $release_name
              and .authority_manifest.sha256 == $manifest
@@ -188,7 +197,8 @@ jobs:
              and .negative_guarantees.search_channel_action == false
              and .negative_guarantees.remote_file_write == false
              and .apply_authorized == false
-             and .writes_committed == false' \
+             and .writes_committed == false
+             and .automatic_retry_allowed == false' \
             artifacts/career-1046-rollout-zero-write-preflight.json >/dev/null
 
       - name: Upload immutable zero-write evidence

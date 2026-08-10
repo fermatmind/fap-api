@@ -29,6 +29,11 @@ final class Career1046RolloutZeroWritePreflightWorkflowTest extends TestCase
             'secrets.SSH_PRIVATE_KEY',
             'StrictHostKeyChecking=yes',
             'backend/scripts/career/career_1046_rollout_preflight.sh',
+            'EXPECTED_CONTROL_PLANE_SHA=$q_expected_control_plane_sha',
+            'WORKFLOW_RUN_ID=$q_workflow_run_id',
+            'WORKFLOW_RUN_ATTEMPT=$q_workflow_run_attempt',
+            '.status == "PASS_ZERO_WRITE_PREFLIGHT_CAPTURED"',
+            '.automatic_retry_allowed == false',
             'if: always()',
         ] as $required) {
             $this->assertStringContainsString($required, $workflow);
@@ -42,6 +47,12 @@ final class Career1046RolloutZeroWritePreflightWorkflowTest extends TestCase
 
         foreach ([
             'career.1046_rollout.zero_write_preflight.v1',
+            'EXPECTED_CONTROL_PLANE_SHA',
+            'WORKFLOW_RUN_ID',
+            'WORKFLOW_RUN_ATTEMPT',
+            'control_plane_sha: $control_plane_sha',
+            'workflow_run_id: $workflow_run_id',
+            'workflow_run_attempt: $workflow_run_attempt',
             'detail-ready-1046-rollout-manifest.v1.json',
             '.current_public_detail_count == 30',
             '.clean_delta_count == 1016',
@@ -75,6 +86,7 @@ final class Career1046RolloutZeroWritePreflightWorkflowTest extends TestCase
             'remote_file_write: false',
             'apply_authorized: false',
             'writes_committed: false',
+            'automatic_retry_allowed: false',
         ] as $required) {
             $this->assertStringContainsString($required, $runner);
         }

@@ -53828,7 +53828,20 @@
     ],
     "status": "merged",
     "authorized_by_user": "2026-07-04 attached /goal IQ-V1-FIVE-PR-TRAIN-EXECUTION-01 explicitly authorized this five-PR train plus manifest/state registration for missing entries.",
-    "checks": {},
+    "checks": {
+      "focused_publication_control": {
+        "status": "passed",
+        "evidence": "Career1046RolloutZeroWritePreflightWorkflowTest and Career1046PublicationControlWorkflowTest passed 9 tests / 194 assertions."
+      },
+      "style_syntax_and_manifests": {
+        "status": "passed",
+        "evidence": "Scoped Pint, PHP syntax, Bash syntax, actionlint, Composer strict validation, workflow/manifest YAML parsing, state JSON parsing, git diff --check, and the exact nine-path scope gate passed."
+      },
+      "additional_command_diagnostic": {
+        "status": "pre_existing_outside_scope",
+        "evidence": "The optional rollout/ledger/projection command diagnostic passed 35 of 36 tests and 27,128 assertions. The unchanged CareerExecuteCanonicalRolloutBatchTest cold-cache case fails before invoking the command because it reads an intentionally unwarmed job-index cache; the same isolated test also fails and neither the test nor cache service is changed by this PR."
+      }
+    },
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
@@ -103887,7 +103900,7 @@
     "branch": "codex/en-parity-w4-riasec-authority-promotion-repair-01",
     "title": "EN-PARITY-W4-RIASEC-AUTHORITY-PROMOTION-REPAIR-01: bind and promote exact 1550-row RIASEC English authority",
     "depends_on": [],
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "commit_sha": "711f8954092b81dc8a0cac2422f3feba676f148a",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3512",
     "checks": {
@@ -104188,13 +104201,30 @@
     "base": "main",
     "branch": "codex/career-1046-publication-control-03",
     "title": "CAREER-1046-PUBLICATION-CONTROL-03: add protected exact-authority Career 1046 promotion",
-    "status": "planned",
+    "status": "github_checks_pending",
     "depends_on": [
       "CAREER-COLD-CACHE-DISCOVERABILITY-GATE-02"
     ],
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": {},
+    "commit_sha": "80abb18a22ee14bd7382eaa23317dc859be1f29a",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3628",
+    "checks": {
+      "focused_publication_control": {
+        "status": "passed",
+        "evidence": "Career1046RolloutZeroWritePreflightWorkflowTest and Career1046PublicationControlWorkflowTest passed 9 tests / 194 assertions."
+      },
+      "style_syntax_and_manifests": {
+        "status": "passed",
+        "evidence": "Scoped Pint, PHP syntax, Bash syntax, actionlint, Composer strict validation, workflow/manifest YAML parsing, state JSON parsing, git diff --check, and the exact nine-path scope gate passed."
+      },
+      "additional_command_diagnostic": {
+        "status": "pre_existing_outside_scope",
+        "evidence": "The optional rollout/ledger/projection command diagnostic passed 35 of 36 tests and 27,128 assertions. The unchanged CareerExecuteCanonicalRolloutBatchTest cold-cache case fails before invoking the command because it reads an intentionally unwarmed job-index cache; the same isolated test also fails and neither the test nor cache service is changed by this PR."
+      },
+      "github_required_checks": {
+        "status": "passed",
+        "evidence": "PR #3628 head 020a3459280246dc8ee7fd7a21b853e64ea724c4 passed hygiene, supply-chain, content-pack validation, Big Five, MBTI v2, MBTI legacy, and blocking/non-blocking Semgrep checks; GitHub reports CLEAN and MERGEABLE."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -104204,8 +104234,29 @@
         "at": "2026-08-10T12:30:00+08:00",
         "status": "planned",
         "note": "Initialized from the operator-supplied plan and remains dependency-blocked pending CAREER-COLD-CACHE-DISCOVERABILITY-GATE-02 plus the recovery-versus-new-publication evidence decision."
+      },
+      {
+        "at": "2026-08-10T20:34:00+08:00",
+        "status": "in_progress",
+        "note": "Dependency PR #3592 is merged. Read-only C03 closeout receipt 31387930639 proves the materialized authority inventory is 342/684 while the published/public cohort remains 30/60, so this scope is explicitly the new protected 1046 publication path, not disaster recovery. Implementation started in the isolated branch at exact origin/main 53917f63469b603104e68e2129011fa0d92de5fa; no workflow dispatch, production write, deploy, migration, cache warm, sitemap/llms, or Search Channel action occurred."
+      },
+      {
+        "at": "2026-08-10T21:03:53+08:00",
+        "status": "local_validation_passed",
+        "note": "All manifest-required local checks passed and the diff is exactly the nine allowlisted paths. The protected workflow provides read-only verify, one exact receipt-bound apply, and read-only ambiguous-run assessment; no workflow was dispatched and no production action occurred."
+      },
+      {
+        "at": "2026-08-10T21:06:40+08:00",
+        "status": "github_checks_pending",
+        "note": "PR #3628 opened from implementation commit 80abb18a22ee14bd7382eaa23317dc859be1f29a after rebasing onto exact origin/main 1116ec76ea62b09c6acaba68ff23115c6e72dbe4. Required GitHub checks are pending; no production action occurred."
+      },
+      {
+        "at": "2026-08-10T21:15:04+08:00",
+        "status": "ready_to_merge",
+        "note": "All registered required checks passed on head 020a3459280246dc8ee7fd7a21b853e64ea724c4, GitHub reports CLEAN and MERGEABLE, origin/main remains the exact PR base, and the final diff remains limited to the nine manifest paths. This metadata transition requires fresh exact-head checks before merge."
       }
-    ]
+    ],
+    "updated_at": "2026-08-10T21:15:04+08:00"
   },
   "PUBLIC-TOPIC-GRAPH-AUTHORITY-CONTRACT-01": {
     "id": "PUBLIC-TOPIC-GRAPH-AUTHORITY-CONTRACT-01",

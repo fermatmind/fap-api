@@ -1975,7 +1975,7 @@ prs:
     base: main
     branch: codex/career-detail-deploy-slo-repair-01
     title: "CAREER-DETAIL-DEPLOY-SLO-REPAIR-01: gate deploys and repair Career detail cache coverage"
-    status: in_progress
+    status: ready_to_merge
     depends_on:
       - CAREER-DETAIL-ATOMIC-EXPOSURE-01
     train_scope: career_detail_deploy_slo_repair
@@ -49007,9 +49007,55 @@ prs:
     base: main
     branch: codex/career-1046-publication-control-03
     title: "CAREER-1046-PUBLICATION-CONTROL-03: add protected exact-authority Career 1046 promotion"
-    status: planned
+    status: in_progress
     depends_on:
       - CAREER-COLD-CACHE-DISCOVERABILITY-GATE-02
+    train_scope: career_1046_exact_authority_publication_control
+    risk_level: p0_protected_production_publication_control
+    scope:
+      - Strengthen the existing zero-write preflight so only a complete PASS receipt can authorize the publication control.
+      - Add read-only verify, one-batch apply, and read-only ambiguous-run assessment modes behind the production Environment gate.
+      - Bind exact latest-main control plane, active revision/release, immutable 30 plus 1016 manifest, preflight and verify receipts, before projection, contiguous batch set, rollback group, and failure policy.
+      - Require the AA canary first, then only the next contiguous 10, 25, 50, or 100 manifest slugs.
+      - Materialize the full release ledger before the runtime projection and verify actual loader readback after a successful batch.
+      - Emit sanitized immutable receipts with no automatic retry and keep Task 3 discoverability rebuild separate.
+    allowed_paths:
+      - .github/workflows/career-1046-rollout-zero-write-preflight.yml
+      - .github/workflows/career-1046-publication-control.yml
+      - backend/scripts/career/career_1046_rollout_preflight.sh
+      - backend/scripts/operations/career_1046_publication_control.php
+      - backend/tests/Sre/Career1046RolloutZeroWritePreflightWorkflowTest.php
+      - backend/tests/Sre/Career1046PublicationControlWorkflowTest.php
+      - docs/operations/career-1046-publication-control.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Dispatch any workflow, mutate production, deploy, run migrations, warm sitemap/llms, submit a sitemap, request indexing, or perform a Search Channel action in this PR.
+      - Change Career publication eligibility, invent a replacement 1046 cohort, infer authority from search-entry review, or treat a receipt as content authority.
+      - Automatically retry an ambiguous publication run or publish a non-contiguous/out-of-order delta batch.
+      - Expose hostnames, credentials, private paths, database identities, raw projection rows, or content bodies in receipts.
+    validation:
+      - cd backend && php artisan test tests/Sre/Career1046RolloutZeroWritePreflightWorkflowTest.php tests/Sre/Career1046PublicationControlWorkflowTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test scripts/operations/career_1046_publication_control.php tests/Sre/Career1046RolloutZeroWritePreflightWorkflowTest.php tests/Sre/Career1046PublicationControlWorkflowTest.php
+      - php -l backend/scripts/operations/career_1046_publication_control.php
+      - bash -n backend/scripts/career/career_1046_rollout_preflight.sh
+      - actionlint .github/workflows/career-1046-rollout-zero-write-preflight.yml .github/workflows/career-1046-publication-control.yml
+      - cd backend && composer validate --strict
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); YAML.load_file('.github/workflows/career-1046-rollout-zero-write-preflight.yml'); YAML.load_file('.github/workflows/career-1046-publication-control.yml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - exact changed-file scope validation
+      - git diff --check
+      - git diff --cached --check
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    deploy_allowed: false
+    repository_rule_impact: adds a protected exact-authority production publication workflow without changing Career content authority, eligibility, public API behavior, or Task 3 discoverability ownership
 
   - id: PUBLIC-TOPIC-GRAPH-AUTHORITY-CONTRACT-01
     repo: fap-api

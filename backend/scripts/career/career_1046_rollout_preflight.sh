@@ -4,9 +4,12 @@ set -Eeuo pipefail
 
 required_env=(
   DEPLOY_PATH
+  EXPECTED_CONTROL_PLANE_SHA
   EXPECTED_RELEASE_SHA
   EXPECTED_RELEASE_NAME
   EXPECTED_MANIFEST_SHA256
+  WORKFLOW_RUN_ID
+  WORKFLOW_RUN_ATTEMPT
   PUBLIC_API_BASE_URL
   PUBLIC_WEB_BASE_URL
 )
@@ -17,9 +20,12 @@ done
 
 [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
 [[ "$DEPLOY_PATH" != *".."* ]]
+[[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
 [[ "$EXPECTED_RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]
 [[ "$EXPECTED_RELEASE_NAME" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]
 [[ "$EXPECTED_MANIFEST_SHA256" =~ ^[0-9a-f]{64}$ ]]
+[[ "$WORKFLOW_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+[[ "$WORKFLOW_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
 [[ "$PUBLIC_API_BASE_URL" =~ ^https://[A-Za-z0-9.-]+$ ]]
 [[ "$PUBLIC_WEB_BASE_URL" =~ ^https://[A-Za-z0-9.-]+$ ]]
 
@@ -258,10 +264,13 @@ fi
 checked_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
 jq -n \
   --arg status "$status" \
+  --arg control_plane_sha "$EXPECTED_CONTROL_PLANE_SHA" \
   --arg release_sha "$EXPECTED_RELEASE_SHA" \
   --arg release_name "$EXPECTED_RELEASE_NAME" \
   --arg manifest_sha256 "$observed_manifest_sha256" \
   --arg checked_at "$checked_at" \
+  --argjson workflow_run_id "$WORKFLOW_RUN_ID" \
+  --argjson workflow_run_attempt "$WORKFLOW_RUN_ATTEMPT" \
   --argjson authority_exit_code "$authority_exit_code" \
   --argjson authority_valid "$authority_valid" \
   --argjson authority "$authority_summary" \
@@ -292,6 +301,9 @@ jq -n \
     schema_version: "career.1046_rollout.zero_write_preflight.v1",
     status: $status,
     checked_at: $checked_at,
+    control_plane_sha: $control_plane_sha,
+    workflow_run_id: $workflow_run_id,
+    workflow_run_attempt: $workflow_run_attempt,
     release: {
       sha: $release_sha,
       name: $release_name,
@@ -356,5 +368,6 @@ jq -n \
       raw_log_read: false
     },
     apply_authorized: false,
-    writes_committed: false
+    writes_committed: false,
+    automatic_retry_allowed: false
   }'

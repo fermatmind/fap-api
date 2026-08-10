@@ -1,0 +1,630 @@
+name: Career 1046 Publication Control
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Read-only verify, one exact publication apply, or read-only incident assessment
+        required: true
+        type: choice
+        options: [verify, apply, incident_assessment]
+      batch_kind:
+        description: AA canary or one contiguous manifest batch
+        required: true
+        type: choice
+        options: [canary, batch]
+      failure_policy:
+        description: Receipt-bound remediation policy if post-commit validation fails
+        required: true
+        type: choice
+        options: [rollback, quarantine]
+      expected_control_plane_sha:
+        description: Exact latest main SHA containing this control plane
+        required: true
+        type: string
+      expected_active_revision:
+        description: Exact active production backend revision
+        required: true
+        type: string
+      expected_active_release_name:
+        description: Exact active production release directory name
+        required: true
+        type: string
+      expected_manifest_sha256:
+        description: Exact immutable 30 plus 1016 rollout manifest SHA-256
+        required: true
+        default: b570ec0cdda65278aa543431886b3529d072de8d67a8e79f1cafbb1c4c8dfc0e
+        type: string
+      batch_id:
+        description: Unique receipt-bound batch identity
+        required: true
+        type: string
+      batch_slugs:
+        description: Exact comma-separated next contiguous manifest slugs
+        required: true
+        type: string
+      expected_batch_slug_set_sha256:
+        description: SHA-256 of sorted unique batch slugs with newline framing
+        required: true
+        type: string
+      expected_rollback_group_sha256:
+        description: Exact rollback group SHA-256; must equal the batch slug-set SHA
+        required: true
+        type: string
+      preflight_run_id:
+        description: Successful Career 1046 zero-write preflight run
+        required: false
+        type: string
+      preflight_run_attempt:
+        description: Exact preflight run attempt
+        required: false
+        type: string
+      expected_preflight_receipt_sha256:
+        description: Exact preflight receipt SHA-256
+        required: false
+        type: string
+      expected_preflight_artifact_digest:
+        description: Exact GitHub artifact digest for the preflight receipt
+        required: false
+        type: string
+      verify_run_id:
+        description: Successful publication verify run required by apply
+        required: false
+        type: string
+      verify_run_attempt:
+        description: Exact publication verify run attempt
+        required: false
+        type: string
+      expected_verify_receipt_sha256:
+        description: Exact publication verify receipt SHA-256
+        required: false
+        type: string
+      expected_verify_artifact_digest:
+        description: Exact GitHub artifact digest for the publication verify receipt
+        required: false
+        type: string
+      expected_before_projection_sha256:
+        description: Exact materialized projection bytes bound by verify/apply/assessment
+        required: false
+        type: string
+      failed_apply_run_id:
+        description: Ambiguous or failed apply run assessed read-only
+        required: false
+        type: string
+      failed_apply_run_attempt:
+        description: Exact failed apply run attempt
+        required: false
+        type: string
+      expected_failed_apply_receipt_sha256:
+        description: Exact failed apply receipt SHA-256
+        required: false
+        type: string
+      expected_failed_apply_artifact_digest:
+        description: Exact GitHub artifact digest for the failed apply receipt
+        required: false
+        type: string
+      operator_approval_phrase:
+        description: Exact verify-receipt phrase; apply only
+        required: false
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.repository }}-production
+  cancel-in-progress: false
+
+jobs:
+  control:
+    name: Verify or execute one exact Career 1046 publication batch
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    environment: production
+    env:
+      MODE: ${{ inputs.mode }}
+      BATCH_KIND: ${{ inputs.batch_kind }}
+      FAILURE_POLICY: ${{ inputs.failure_policy }}
+      CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+      EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+      EXPECTED_ACTIVE_RELEASE_NAME: ${{ inputs.expected_active_release_name }}
+      EXPECTED_MANIFEST_SHA256: ${{ inputs.expected_manifest_sha256 }}
+      BATCH_ID: ${{ inputs.batch_id }}
+      BATCH_SLUGS: ${{ inputs.batch_slugs }}
+      EXPECTED_BATCH_SLUG_SET_SHA256: ${{ inputs.expected_batch_slug_set_sha256 }}
+      EXPECTED_ROLLBACK_GROUP_SHA256: ${{ inputs.expected_rollback_group_sha256 }}
+      PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
+      PREFLIGHT_RUN_ATTEMPT: ${{ inputs.preflight_run_attempt }}
+      EXPECTED_PREFLIGHT_RECEIPT_SHA256: ${{ inputs.expected_preflight_receipt_sha256 }}
+      EXPECTED_PREFLIGHT_ARTIFACT_DIGEST: ${{ inputs.expected_preflight_artifact_digest }}
+      VERIFY_RUN_ID: ${{ inputs.verify_run_id }}
+      VERIFY_RUN_ATTEMPT: ${{ inputs.verify_run_attempt }}
+      EXPECTED_VERIFY_RECEIPT_SHA256: ${{ inputs.expected_verify_receipt_sha256 }}
+      EXPECTED_VERIFY_ARTIFACT_DIGEST: ${{ inputs.expected_verify_artifact_digest }}
+      EXPECTED_BEFORE_PROJECTION_SHA256: ${{ inputs.expected_before_projection_sha256 }}
+      FAILED_APPLY_RUN_ID: ${{ inputs.failed_apply_run_id }}
+      FAILED_APPLY_RUN_ATTEMPT: ${{ inputs.failed_apply_run_attempt }}
+      EXPECTED_FAILED_APPLY_RECEIPT_SHA256: ${{ inputs.expected_failed_apply_receipt_sha256 }}
+      EXPECTED_FAILED_APPLY_ARTIFACT_DIGEST: ${{ inputs.expected_failed_apply_artifact_digest }}
+      OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Initialize failure-safe receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/career-1046-publication-control.json"
+          printf 'RECEIPT=%s\n' "$receipt" >> "$GITHUB_ENV"
+          jq -n \
+            --arg mode "$MODE" \
+            --arg kind "$BATCH_KIND" \
+            --arg control "$CONTROL_PLANE_SHA" \
+            --arg active "$EXPECTED_ACTIVE_REVISION" \
+            --arg batch "$BATCH_ID" \
+            --arg batch_sha "$EXPECTED_BATCH_SLUG_SET_SHA256" \
+            --arg before "$EXPECTED_BEFORE_PROJECTION_SHA256" \
+            --arg run "$GITHUB_RUN_ID" \
+            --arg attempt "$GITHUB_RUN_ATTEMPT" '
+            {
+              contract_version: "career.1046.publication_control.v1",
+              mode: $mode,
+              status: "HOLD_CONTROL_INCOMPLETE",
+              batch_kind: $kind,
+              control_plane_sha: $control,
+              active_revision: $active,
+              batch_id: $batch,
+              batch_slug_set_sha256: $batch_sha,
+              before_projection_sha256: $before,
+              workflow_run_id: ($run | tonumber),
+              workflow_run_attempt: ($attempt | tonumber),
+              database_write_count: 0,
+              publication_write_count: 0,
+              artifact_write_count: 0,
+              deploy_count: 0,
+              migration_count: 0,
+              sitemap_submission_count: 0,
+              llms_submission_count: 0,
+              search_submission_count: 0,
+              automatic_retry_allowed: false
+            }' > "$receipt"
+
+      - name: Checkout exact control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Validate latest main and immutable runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          runner='backend/scripts/operations/career_1046_publication_control.php'
+          test "$GITHUB_REF" = refs/heads/main
+          [[ "$CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_MANIFEST_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$CONTROL_PLANE_SHA"
+          git cat-file -e "${EXPECTED_ACTIVE_REVISION}^{commit}"
+          git merge-base --is-ancestor "$EXPECTED_ACTIVE_REVISION" "$CONTROL_PLANE_SHA"
+          test -f "$runner"
+          test ! -L "$runner"
+          php -l "$runner" >/dev/null
+          printf 'RUNNER=%s\n' "$runner" >> "$GITHUB_ENV"
+          printf 'RUNNER_SHA256=%s\n' "$(sha256sum "$runner" | awk '{print $1}')" >> "$GITHUB_ENV"
+
+      - name: Validate protected topology and mode-specific inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          numeric='^[1-9][0-9]*$'
+          sha='^[0-9a-f]{64}$'
+          digest='^sha256:[0-9a-f]{64}$'
+          release='^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$'
+          batch_id='^[a-z0-9][a-z0-9._-]{0,127}$'
+          slugs='^[a-z0-9]+(-[a-z0-9]+)*(,[a-z0-9]+(-[a-z0-9]+)*)*$'
+          for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST RETIRED_DEPLOY_HOST DEPLOY_PATH; do
+            test -n "${!name:-}"
+          done
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          test "$DEPLOY_PORT" -ge 1
+          test "$DEPLOY_PORT" -le 65535
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$RETIRED_DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          [[ "$DEPLOY_PATH" != *'/../'* ]]
+          [[ "$EXPECTED_ACTIVE_RELEASE_NAME" =~ $release ]]
+          [[ "$BATCH_ID" =~ $batch_id ]]
+          [[ "$BATCH_SLUGS" =~ $slugs ]]
+          [[ "$EXPECTED_BATCH_SLUG_SET_SHA256" =~ $sha ]]
+          [[ "$EXPECTED_ROLLBACK_GROUP_SHA256" =~ $sha ]]
+          test "$EXPECTED_BATCH_SLUG_SET_SHA256" = "$EXPECTED_ROLLBACK_GROUP_SHA256"
+          case "$MODE" in
+            verify)
+              [[ "$PREFLIGHT_RUN_ID" =~ $numeric ]]
+              [[ "$PREFLIGHT_RUN_ATTEMPT" =~ $numeric ]]
+              [[ "$EXPECTED_PREFLIGHT_RECEIPT_SHA256" =~ $sha ]]
+              [[ "$EXPECTED_PREFLIGHT_ARTIFACT_DIGEST" =~ $digest ]]
+              test -z "$VERIFY_RUN_ID$VERIFY_RUN_ATTEMPT$EXPECTED_VERIFY_RECEIPT_SHA256$EXPECTED_VERIFY_ARTIFACT_DIGEST"
+              test -z "$EXPECTED_BEFORE_PROJECTION_SHA256$FAILED_APPLY_RUN_ID$FAILED_APPLY_RUN_ATTEMPT"
+              test -z "$EXPECTED_FAILED_APPLY_RECEIPT_SHA256$EXPECTED_FAILED_APPLY_ARTIFACT_DIGEST$OPERATOR_APPROVAL_PHRASE"
+              ;;
+            apply)
+              [[ "$PREFLIGHT_RUN_ID" =~ $numeric ]]
+              [[ "$PREFLIGHT_RUN_ATTEMPT" =~ $numeric ]]
+              [[ "$EXPECTED_PREFLIGHT_RECEIPT_SHA256" =~ $sha ]]
+              [[ "$EXPECTED_PREFLIGHT_ARTIFACT_DIGEST" =~ $digest ]]
+              [[ "$VERIFY_RUN_ID" =~ $numeric ]]
+              [[ "$VERIFY_RUN_ATTEMPT" =~ $numeric ]]
+              [[ "$EXPECTED_VERIFY_RECEIPT_SHA256" =~ $sha ]]
+              [[ "$EXPECTED_VERIFY_ARTIFACT_DIGEST" =~ $digest ]]
+              [[ "$EXPECTED_BEFORE_PROJECTION_SHA256" =~ $sha ]]
+              test -n "$OPERATOR_APPROVAL_PHRASE"
+              test -z "$FAILED_APPLY_RUN_ID$FAILED_APPLY_RUN_ATTEMPT$EXPECTED_FAILED_APPLY_RECEIPT_SHA256$EXPECTED_FAILED_APPLY_ARTIFACT_DIGEST"
+              ;;
+            incident_assessment)
+              [[ "$EXPECTED_BEFORE_PROJECTION_SHA256" =~ $sha ]]
+              [[ "$FAILED_APPLY_RUN_ID" =~ $numeric ]]
+              [[ "$FAILED_APPLY_RUN_ATTEMPT" =~ $numeric ]]
+              [[ "$EXPECTED_FAILED_APPLY_RECEIPT_SHA256" =~ $sha ]]
+              [[ "$EXPECTED_FAILED_APPLY_ARTIFACT_DIGEST" =~ $digest ]]
+              test -z "$PREFLIGHT_RUN_ID$PREFLIGHT_RUN_ATTEMPT$EXPECTED_PREFLIGHT_RECEIPT_SHA256$EXPECTED_PREFLIGHT_ARTIFACT_DIGEST"
+              test -z "$VERIFY_RUN_ID$VERIFY_RUN_ATTEMPT$EXPECTED_VERIFY_RECEIPT_SHA256$EXPECTED_VERIFY_ARTIFACT_DIGEST$OPERATOR_APPROVAL_PHRASE"
+              ;;
+            *) exit 2 ;;
+          esac
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Validate immutable preflight and mode lineage
+        shell: bash
+        run: |
+          set -euo pipefail
+          evidence="$RUNNER_TEMP/evidence"
+          mkdir -p "$evidence"
+          validate_run() {
+            local run_id="$1" attempt="$2" path="$3" conclusion="$4"
+            run_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}")"
+            jq -e \
+              --arg control "$CONTROL_PLANE_SHA" \
+              --arg path "$path" \
+              --arg attempt "$attempt" \
+              --arg conclusion "$conclusion" '
+              .event == "workflow_dispatch"
+              and .head_sha == $control
+              and .path == $path
+              and .run_attempt == ($attempt | tonumber)
+              and .status == "completed"
+              and (if $conclusion == "any_terminal" then (.conclusion != null) else .conclusion == $conclusion end)' \
+              <<<"$run_json" >/dev/null
+          }
+          download_artifact() {
+            local run_id="$1" attempt="$2" name="$3" digest="$4" receipt_sha="$5" destination="$6"
+            artifacts="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}/artifacts?per_page=100")"
+            jq -e --arg name "$name" --arg digest "$digest" '
+              [.artifacts[] | select(.name == $name)]
+              | length == 1 and .[0].expired == false and .[0].digest == $digest' \
+              <<<"$artifacts" >/dev/null
+            gh run download "$run_id" --name "$name" --dir "$destination"
+            test "$(sha256sum "$destination/career-1046-publication-control.json" 2>/dev/null | awk '{print $1}')" = "$receipt_sha" \
+              || test "$(sha256sum "$destination/career-1046-rollout-zero-write-preflight.json" 2>/dev/null | awk '{print $1}')" = "$receipt_sha"
+          }
+
+          if [ "$MODE" = verify ] || [ "$MODE" = apply ]; then
+            validate_run "$PREFLIGHT_RUN_ID" "$PREFLIGHT_RUN_ATTEMPT" \
+              '.github/workflows/career-1046-rollout-zero-write-preflight.yml' success
+            preflight_name="career-1046-rollout-zero-write-preflight-${PREFLIGHT_RUN_ID}-${PREFLIGHT_RUN_ATTEMPT}"
+            preflight_dir="$evidence/preflight"
+            mkdir -p "$preflight_dir"
+            download_artifact "$PREFLIGHT_RUN_ID" "$PREFLIGHT_RUN_ATTEMPT" "$preflight_name" \
+              "$EXPECTED_PREFLIGHT_ARTIFACT_DIGEST" "$EXPECTED_PREFLIGHT_RECEIPT_SHA256" "$preflight_dir"
+            preflight="$preflight_dir/career-1046-rollout-zero-write-preflight.json"
+            jq -e \
+              --arg control "$CONTROL_PLANE_SHA" \
+              --arg active "$EXPECTED_ACTIVE_REVISION" \
+              --arg release "$EXPECTED_ACTIVE_RELEASE_NAME" \
+              --arg manifest "$EXPECTED_MANIFEST_SHA256" \
+              --arg run "$PREFLIGHT_RUN_ID" \
+              --arg attempt "$PREFLIGHT_RUN_ATTEMPT" '
+              .schema_version == "career.1046_rollout.zero_write_preflight.v1"
+              and .status == "PASS_ZERO_WRITE_PREFLIGHT_CAPTURED"
+              and .control_plane_sha == $control
+              and .workflow_run_id == ($run | tonumber)
+              and .workflow_run_attempt == ($attempt | tonumber)
+              and .release.sha == $active
+              and .release.name == $release
+              and .authority_manifest.sha256 == $manifest
+              and .production_read_only_observations.aa_projection_truth_review_authority.valid == true
+              and .production_read_only_observations.detail_ready_scan.valid == true
+              and .production_read_only_observations.aa_eligibility.valid == true
+              and .production_read_only_observations.aa_eligibility.summary.blocked_count == 0
+              and .production_read_only_observations.aa_rollout_dry_run.valid == true
+              and .production_read_only_observations.aa_rollout_dry_run.summary.status == "planned"
+              and .production_read_only_observations.aa_rollout_dry_run.summary.writes_database == false
+              and .production_read_only_observations.aa_public_surface.seo_authority_http.en == "200"
+              and .production_read_only_observations.aa_public_surface.seo_authority_http.zh_CN == "200"
+              and .negative_guarantees.database_write == false
+              and .negative_guarantees.publication == false
+              and .negative_guarantees.warm == false
+              and .automatic_retry_allowed == false' "$preflight" >/dev/null
+          fi
+
+          if [ "$MODE" = apply ]; then
+            validate_run "$VERIFY_RUN_ID" "$VERIFY_RUN_ATTEMPT" \
+              '.github/workflows/career-1046-publication-control.yml' success
+            verify_name="career-1046-publication-control-verify-${VERIFY_RUN_ID}-${VERIFY_RUN_ATTEMPT}"
+            verify_dir="$evidence/verify"
+            mkdir -p "$verify_dir"
+            download_artifact "$VERIFY_RUN_ID" "$VERIFY_RUN_ATTEMPT" "$verify_name" \
+              "$EXPECTED_VERIFY_ARTIFACT_DIGEST" "$EXPECTED_VERIFY_RECEIPT_SHA256" "$verify_dir"
+            verify="$verify_dir/career-1046-publication-control.json"
+            jq -e \
+              --arg control "$CONTROL_PLANE_SHA" \
+              --arg active "$EXPECTED_ACTIVE_REVISION" \
+              --arg manifest "$EXPECTED_MANIFEST_SHA256" \
+              --arg kind "$BATCH_KIND" \
+              --arg batch "$BATCH_ID" \
+              --arg batch_sha "$EXPECTED_BATCH_SLUG_SET_SHA256" \
+              --arg rollback "$EXPECTED_ROLLBACK_GROUP_SHA256" \
+              --arg policy "$FAILURE_POLICY" \
+              --arg before "$EXPECTED_BEFORE_PROJECTION_SHA256" \
+              --arg preflight_run "$PREFLIGHT_RUN_ID" \
+              --arg preflight_attempt "$PREFLIGHT_RUN_ATTEMPT" \
+              --arg preflight_sha "$EXPECTED_PREFLIGHT_RECEIPT_SHA256" '
+              .contract_version == "career.1046.publication_control.v1"
+              and .mode == "verify"
+              and (.status == "PASS_CANARY_READY" or .status == "PASS_BATCH_READY")
+              and .control_plane_sha == $control
+              and .active_revision == $active
+              and .manifest_sha256 == $manifest
+              and .batch_kind == $kind
+              and .batch_id == $batch
+              and .batch_slug_set_sha256 == $batch_sha
+              and .rollback_group_sha256 == $rollback
+              and .failure_policy == $policy
+              and .before_projection_sha256 == $before
+              and .preflight_run_id == ($preflight_run | tonumber)
+              and .preflight_run_attempt == ($preflight_attempt | tonumber)
+              and .preflight_receipt_sha256 == $preflight_sha
+              and .database_write_count == 0
+              and .publication_write_count == 0
+              and .automatic_retry_allowed == false' "$verify" >/dev/null
+            expected_phrase="I explicitly approve one Career 1046 ${BATCH_KIND} publication on production for control ${CONTROL_PLANE_SHA}, active ${EXPECTED_ACTIVE_REVISION}, preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT}, preflight receipt ${EXPECTED_PREFLIGHT_RECEIPT_SHA256}, verify run ${VERIFY_RUN_ID} attempt ${VERIFY_RUN_ATTEMPT}, manifest ${EXPECTED_MANIFEST_SHA256}, before projection ${EXPECTED_BEFORE_PROJECTION_SHA256}, batch ${BATCH_ID}, batch slug set ${EXPECTED_BATCH_SLUG_SET_SHA256}, rollback group ${EXPECTED_ROLLBACK_GROUP_SHA256}, failure policy ${FAILURE_POLICY}; execute exactly one SHA-bound batch, materialize ledger then projection, authorize one receipt-bound ${FAILURE_POLICY} remediation only if post-commit validation fails, publish no other slugs, perform no deploy, migration, sitemap, llms, or Search Channel submission, and do not automatically retry an ambiguous run."
+            test "$(jq -r '.expected_apply_approval_phrase' "$verify")" = "$expected_phrase"
+            test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
+          fi
+
+          if [ "$MODE" = incident_assessment ]; then
+            validate_run "$FAILED_APPLY_RUN_ID" "$FAILED_APPLY_RUN_ATTEMPT" \
+              '.github/workflows/career-1046-publication-control.yml' any_terminal
+            failed_name="career-1046-publication-control-apply-${FAILED_APPLY_RUN_ID}-${FAILED_APPLY_RUN_ATTEMPT}"
+            failed_dir="$evidence/failed-apply"
+            mkdir -p "$failed_dir"
+            download_artifact "$FAILED_APPLY_RUN_ID" "$FAILED_APPLY_RUN_ATTEMPT" "$failed_name" \
+              "$EXPECTED_FAILED_APPLY_ARTIFACT_DIGEST" "$EXPECTED_FAILED_APPLY_RECEIPT_SHA256" "$failed_dir"
+            failed="$failed_dir/career-1046-publication-control.json"
+            jq -e \
+              --arg control "$CONTROL_PLANE_SHA" \
+              --arg active "$EXPECTED_ACTIVE_REVISION" \
+              --arg batch "$BATCH_ID" \
+              --arg batch_sha "$EXPECTED_BATCH_SLUG_SET_SHA256" \
+              --arg before "$EXPECTED_BEFORE_PROJECTION_SHA256" '
+              .contract_version == "career.1046.publication_control.v1"
+              and .mode == "apply"
+              and (.status | startswith("HOLD_"))
+              and .control_plane_sha == $control
+              and .active_revision == $active
+              and .batch_id == $batch
+              and .batch_slug_set_sha256 == $batch_sha
+              and .before_projection_sha256 == $before
+              and .automatic_retry_allowed == false' "$failed" >/dev/null
+          fi
+
+      - name: Execute bounded remote control without automatic retry
+        shell: bash
+        run: |
+          set -euo pipefail
+          case "$MODE" in
+            verify) runner_mode=inspect ;;
+            apply) runner_mode=apply ;;
+            incident_assessment) runner_mode=assess ;;
+          esac
+          publication_timestamp="$(date -u +'%Y%m%dT%H%M%SZ')-career1046-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          printf -v q_deploy_path '%q' "$DEPLOY_PATH"
+          printf -v q_active '%q' "$EXPECTED_ACTIVE_REVISION"
+          printf -v q_release '%q' "$EXPECTED_ACTIVE_RELEASE_NAME"
+          printf -v q_manifest '%q' "$EXPECTED_MANIFEST_SHA256"
+          printf -v q_kind '%q' "$BATCH_KIND"
+          printf -v q_batch_id '%q' "$BATCH_ID"
+          printf -v q_batch_slugs '%q' "$BATCH_SLUGS"
+          printf -v q_batch_sha '%q' "$EXPECTED_BATCH_SLUG_SET_SHA256"
+          printf -v q_rollback_sha '%q' "$EXPECTED_ROLLBACK_GROUP_SHA256"
+          printf -v q_policy '%q' "$FAILURE_POLICY"
+          printf -v q_before '%q' "${EXPECTED_BEFORE_PROJECTION_SHA256:-$(printf '0%.0s' {1..64})}"
+          printf -v q_timestamp '%q' "$publication_timestamp"
+          apply_authorized=0
+          if [ "$MODE" = apply ]; then apply_authorized=1; fi
+          set +e
+          result="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -o ServerAliveInterval=20 -o ServerAliveCountMax=3 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "set -euo pipefail; current=\$(readlink -f $q_deploy_path/current); test -d \"\$current/backend\"; test -f \"\$current/REVISION\"; test \"\$(basename \"\$current\")\" = $q_release; test \"\$(tr -d '\r\n' < \"\$current/REVISION\")\" = $q_active; test ! -e $q_deploy_path/.dep/deploy.lock; test \"\$(ps -eo comm=,args= | awk '\$1 == \"php\" && (\$0 ~ /dep(\\.phar)? .* production/ || \$0 ~ /artisan migrate/) {n++} END {print n+0}')\" = 0; CAREER_1046_BACKEND_ROOT=\"\$current/backend\" CAREER_1046_EXPECTED_MANIFEST_SHA256=$q_manifest CAREER_1046_BATCH_KIND=$q_kind CAREER_1046_BATCH_ID=$q_batch_id CAREER_1046_BATCH_SLUGS=$q_batch_slugs CAREER_1046_EXPECTED_BATCH_SLUG_SET_SHA256=$q_batch_sha CAREER_1046_EXPECTED_ROLLBACK_GROUP_SHA256=$q_rollback_sha CAREER_1046_FAILURE_POLICY=$q_policy CAREER_1046_EXPECTED_BEFORE_PROJECTION_SHA256=$q_before CAREER_1046_PUBLICATION_APPLY_AUTHORIZED=$apply_authorized CAREER_1046_PUBLICATION_TIMESTAMP=$q_timestamp php /dev/stdin $runner_mode" \
+            < "$RUNNER")"
+          remote_rc=$?
+          set -e
+          printf 'REMOTE_RC=%s\n' "$remote_rc" >> "$GITHUB_ENV"
+          if jq -e 'type == "object" and .contract_version == "career.1046.publication_control.runner.v1"' \
+            <<<"$result" >/dev/null 2>&1; then
+            printf '%s' "$result" > "$RUNNER_TEMP/career-1046-runner-result.json"
+            printf 'REMOTE_RESULT_VALID=true\n' >> "$GITHUB_ENV"
+          else
+            printf 'REMOTE_RESULT_VALID=false\n' >> "$GITHUB_ENV"
+          fi
+
+      - name: Write immutable publication-control receipt
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${REMOTE_RESULT_VALID:-false}" != true ]; then
+            if [ "$MODE" = apply ]; then
+              status=HOLD_AMBIGUOUS_DISCONNECT
+              next=incident_assessment_only
+            else
+              status=HOLD_REMOTE_CONTROL_FAILED
+              next=rerun_requires_new_evidence
+            fi
+            jq -n \
+              --arg mode "$MODE" \
+              --arg status "$status" \
+              --arg next "$next" \
+              --arg control "$CONTROL_PLANE_SHA" \
+              --arg active "$EXPECTED_ACTIVE_REVISION" \
+              --arg manifest "$EXPECTED_MANIFEST_SHA256" \
+              --arg kind "$BATCH_KIND" \
+              --arg batch "$BATCH_ID" \
+              --arg batch_sha "$EXPECTED_BATCH_SLUG_SET_SHA256" \
+              --arg rollback "$EXPECTED_ROLLBACK_GROUP_SHA256" \
+              --arg policy "$FAILURE_POLICY" \
+              --arg before "$EXPECTED_BEFORE_PROJECTION_SHA256" \
+              --arg runner "${RUNNER_SHA256:-}" \
+              --arg run "$GITHUB_RUN_ID" \
+              --arg attempt "$GITHUB_RUN_ATTEMPT" '
+              {
+                contract_version: "career.1046.publication_control.v1",
+                mode: $mode,
+                status: $status,
+                required_next_action: $next,
+                control_plane_sha: $control,
+                active_revision: $active,
+                manifest_sha256: $manifest,
+                batch_kind: $kind,
+                batch_id: $batch,
+                batch_slug_set_sha256: $batch_sha,
+                rollback_group_sha256: $rollback,
+                failure_policy: $policy,
+                before_projection_sha256: $before,
+                runner_sha256: $runner,
+                workflow_run_id: ($run | tonumber),
+                workflow_run_attempt: ($attempt | tonumber),
+                database_write_count: null,
+                publication_write_count: null,
+                artifact_write_count: null,
+                deploy_count: 0,
+                migration_count: 0,
+                sitemap_submission_count: 0,
+                llms_submission_count: 0,
+                search_submission_count: 0,
+                automatic_retry_allowed: false
+              }' > "$RECEIPT"
+            exit 1
+          fi
+
+          result="$RUNNER_TEMP/career-1046-runner-result.json"
+          jq \
+            --arg control "$CONTROL_PLANE_SHA" \
+            --arg active "$EXPECTED_ACTIVE_REVISION" \
+            --arg release "$EXPECTED_ACTIVE_RELEASE_NAME" \
+            --arg runner "$RUNNER_SHA256" \
+            --arg run "$GITHUB_RUN_ID" \
+            --arg attempt "$GITHUB_RUN_ATTEMPT" \
+            --arg preflight_run "${PREFLIGHT_RUN_ID:-0}" \
+            --arg preflight_attempt "${PREFLIGHT_RUN_ATTEMPT:-0}" \
+            --arg preflight_sha "$EXPECTED_PREFLIGHT_RECEIPT_SHA256" \
+            --arg verify_run "${VERIFY_RUN_ID:-0}" \
+            --arg verify_attempt "${VERIFY_RUN_ATTEMPT:-0}" \
+            --arg verify_sha "$EXPECTED_VERIFY_RECEIPT_SHA256" \
+            --arg failed_run "${FAILED_APPLY_RUN_ID:-0}" \
+            --arg failed_attempt "${FAILED_APPLY_RUN_ATTEMPT:-0}" \
+            --arg failed_sha "$EXPECTED_FAILED_APPLY_RECEIPT_SHA256" '
+            .contract_version = "career.1046.publication_control.v1"
+            | .mode = (if .mode == "inspect" then "verify" elif .mode == "assess" then "incident_assessment" else .mode end)
+            | .control_plane_sha = $control
+            | .active_revision = $active
+            | .active_release_name = $release
+            | .runner_sha256 = $runner
+            | .workflow_run_id = ($run | tonumber)
+            | .workflow_run_attempt = ($attempt | tonumber)
+            | .preflight_run_id = (if ($preflight_run | tonumber) > 0 then ($preflight_run | tonumber) else null end)
+            | .preflight_run_attempt = (if ($preflight_attempt | tonumber) > 0 then ($preflight_attempt | tonumber) else null end)
+            | .preflight_receipt_sha256 = (if $preflight_sha == "" then null else $preflight_sha end)
+            | .verify_run_id = (if ($verify_run | tonumber) > 0 then ($verify_run | tonumber) else null end)
+            | .verify_run_attempt = (if ($verify_attempt | tonumber) > 0 then ($verify_attempt | tonumber) else null end)
+            | .verify_receipt_sha256 = (if $verify_sha == "" then null else $verify_sha end)
+            | .failed_apply_run_id = (if ($failed_run | tonumber) > 0 then ($failed_run | tonumber) else null end)
+            | .failed_apply_run_attempt = (if ($failed_attempt | tonumber) > 0 then ($failed_attempt | tonumber) else null end)
+            | .failed_apply_receipt_sha256 = (if $failed_sha == "" then null else $failed_sha end)' \
+            "$result" > "$RECEIPT"
+
+          if [ "$MODE" = verify ]; then
+            runner_status="$(jq -r '.status' "$RECEIPT")"
+            case "$runner_status" in
+              PASS_CANARY_VERIFY) final_status=PASS_CANARY_READY ;;
+              PASS_BATCH_VERIFY) final_status=PASS_BATCH_READY ;;
+              *) exit 1 ;;
+            esac
+            before="$(jq -r '.before_projection_sha256' "$RECEIPT")"
+            expected_phrase="I explicitly approve one Career 1046 ${BATCH_KIND} publication on production for control ${CONTROL_PLANE_SHA}, active ${EXPECTED_ACTIVE_REVISION}, preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT}, preflight receipt ${EXPECTED_PREFLIGHT_RECEIPT_SHA256}, verify run ${GITHUB_RUN_ID} attempt ${GITHUB_RUN_ATTEMPT}, manifest ${EXPECTED_MANIFEST_SHA256}, before projection ${before}, batch ${BATCH_ID}, batch slug set ${EXPECTED_BATCH_SLUG_SET_SHA256}, rollback group ${EXPECTED_ROLLBACK_GROUP_SHA256}, failure policy ${FAILURE_POLICY}; execute exactly one SHA-bound batch, materialize ledger then projection, authorize one receipt-bound ${FAILURE_POLICY} remediation only if post-commit validation fails, publish no other slugs, perform no deploy, migration, sitemap, llms, or Search Channel submission, and do not automatically retry an ambiguous run."
+            jq --arg status "$final_status" --arg phrase "$expected_phrase" \
+              '.status = $status | .expected_apply_approval_phrase = $phrase' \
+              "$RECEIPT" > "$RECEIPT.tmp"
+            mv "$RECEIPT.tmp" "$RECEIPT"
+          fi
+
+          case "$MODE:$(jq -r '.status' "$RECEIPT")" in
+            verify:PASS_CANARY_READY|verify:PASS_BATCH_READY|apply:PASS_BATCH_PROMOTED|incident_assessment:PASS_APPLY_OBSERVED|incident_assessment:PASS_NO_APPLY_OBSERVED) ;;
+            *) exit 1 ;;
+          esac
+
+      - name: Upload immutable sanitized receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: career-1046-publication-control-${{ inputs.mode }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/career-1046-publication-control.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Publish safe summary
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f "$RECEIPT"
+          receipt_sha256="$(sha256sum "$RECEIPT" | awk '{print $1}')"
+          status="$(jq -r '.status' "$RECEIPT")"
+          batch_size="$(jq -r '.batch_size // 0' "$RECEIPT")"
+          {
+            printf 'status=%s\n' "$status"
+            printf 'mode=%s\n' "$MODE"
+            printf 'batch_kind=%s\n' "$BATCH_KIND"
+            printf 'batch_size=%s\n' "$batch_size"
+            printf 'receipt_sha256=%s\n' "$receipt_sha256"
+            printf 'automatic_retry_allowed=false\n'
+          } >> "$GITHUB_STEP_SUMMARY"
