@@ -1,0 +1,120 @@
+{
+  "schema_version": "personality.mbti-seo-title-experiment.v1",
+  "experiment_id": "zh-intp-a-seo-title-20260810-v1",
+  "framework": "MBTI",
+  "entity_type": "variant",
+  "code": "INTP-A",
+  "locale": "zh-CN",
+  "slug": "intp-a",
+  "title": "INTP-A 是什么？人格特点、优势盲点与适合场景 | FermatMind",
+  "summary": "Single-variable staging draft for query-owner alignment. The package changes only seo_title and does not authorize publication or discoverability changes.",
+  "target": {
+    "org_id": 0,
+    "framework": "MBTI",
+    "locale": "zh-CN",
+    "runtime_type_code": "INTP-A",
+    "route": "/zh/personality/intp-a"
+  },
+  "change": {
+    "field": "personality_profile_variant_seo_meta.seo_title",
+    "current": "INTP-A 人格特点：分析建模、可能性探索和独立解题 | FermatMind",
+    "proposed": "INTP-A 是什么？人格特点、优势盲点与适合场景 | FermatMind"
+  },
+  "seo": {
+    "title": "INTP-A 是什么？人格特点、优势盲点与适合场景 | FermatMind",
+    "description": "UNCHANGED",
+    "og_title": "UNCHANGED",
+    "og_description": "UNCHANGED",
+    "twitter_title": "UNCHANGED",
+    "twitter_description": "UNCHANGED"
+  },
+  "canonical": "https://fermatmind.com/zh/personality/intp-a",
+  "hreflang": {
+    "en": "https://fermatmind.com/en/personality/intp-a",
+    "zh-CN": "https://fermatmind.com/zh/personality/intp-a"
+  },
+  "robots": "UNCHANGED",
+  "launch_state": "published_unchanged",
+  "index_eligible": true,
+  "sitemap_eligible": true,
+  "llms_eligible": true,
+  "sections": [],
+  "faq": [],
+  "media": {},
+  "schema": {},
+  "method_boundary": "Public personality content supports self-understanding and reflection. It is not a diagnostic, hiring, admission, legal, financial, or deterministic outcome tool.",
+  "internal_links": [],
+  "evidence": {
+    "source_objective_id": "FERMATMIND-PERSONALITY-SEO-GRAPH-01-P02-P06",
+    "source_repository": "fermatmind/fap-web",
+    "source_commit": "a931f8cdb3cc6756d225f592be12847676bdfe99",
+    "m01": {
+      "objective_id": "FERMATMIND-MEASUREMENT-M01-GSC-EXPORT-01",
+      "sha256": "9b7c470aa39aff0e6062c41fe5d71e2e8164159747953d42bd032046cc10f691"
+    },
+    "window_04_files": {
+      "personality_cannibalization.csv": "07a153df4fd2b2bb11a639c6fc18d52f3a39988030407a17489b1d6ddd579a91",
+      "personality_gsc_page_query.csv": "1f1b7823d69ce1a309482334469c20df9ddefb21830b1c969ca1f95eb225acba",
+      "personality_source_manifest.json": "c35cf3343c481ff5ce4fa3b11e3d2c4e2202fdb2353ac3b337cdbad668d64b47"
+    },
+    "window": "current28",
+    "window_start": "2026-07-13",
+    "window_end": "2026-08-09",
+    "queries": [
+      {
+        "query": "intp-a",
+        "severity": "HIGH",
+        "intended_owner_impressions": 51,
+        "comparison_page_impressions": 100,
+        "combined_impressions": 151,
+        "combined_clicks": 1
+      },
+      {
+        "query": "intp a",
+        "severity": "MEDIUM",
+        "intended_owner_impressions": 21,
+        "comparison_page_impressions": 70,
+        "combined_impressions": 91,
+        "combined_clicks": 0
+      }
+    ]
+  },
+  "evidence_notes": [
+    "Route locale is derived from backend-authoritative public URLs and is not a GSC language dimension.",
+    "Page-level indexing remains UNKNOWN_PAGE_LEVEL.",
+    "The staging draft does not establish causality or authorize production promotion."
+  ],
+  "source_ledger_refs": [
+    "FERMATMIND-MEASUREMENT-M01-GSC-EXPORT-01",
+    "FERMATMIND-PERSONALITY-SEO-GRAPH-01-P02-P06"
+  ],
+  "model_output_refs": [],
+  "generation_mode": "operator_confirmed_codex_plan",
+  "last_reviewed_at": "2026-08-10",
+  "measurement": {
+    "eligible_only_after_separate_production_promotion": true,
+    "post_window_days": 28,
+    "primary_outcome": "The intended /zh/personality/intp-a page becomes the highest-impression owner for both exact queries.",
+    "insufficient_evidence_state": "INCONCLUSIVE",
+    "page_indexing_state": "UNKNOWN_PAGE_LEVEL"
+  },
+  "negative_guarantees": {
+    "production_write": false,
+    "live_seo_meta_write": false,
+    "publication": false,
+    "active_revision_pointer_change": false,
+    "description_change": false,
+    "h1_change": false,
+    "content_change": false,
+    "faq_change": false,
+    "internal_link_change": false,
+    "og_twitter_change": false,
+    "canonical_change": false,
+    "robots_change": false,
+    "indexability_change": false,
+    "sitemap_change": false,
+    "llms_change": false,
+    "search_channel_change": false,
+    "deployment": false
+  }
+}

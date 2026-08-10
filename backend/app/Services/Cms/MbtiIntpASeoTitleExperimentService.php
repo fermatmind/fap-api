@@ -1,0 +1,451 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Services\Cms;
+
+use App\Models\PersonalityProfile;
+use App\Models\PersonalityProfileVariant;
+use App\Models\PersonalityProfileVariantRevision;
+use App\Models\PersonalityProfileVariantSeoMeta;
+use Illuminate\Support\Facades\DB;
+use RuntimeException;
+
+final class MbtiIntpASeoTitleExperimentService
+{
+    private const SCHEMA_VERSION = 'personality.mbti-seo-title-experiment.v1';
+
+    private const EXPERIMENT_ID = 'zh-intp-a-seo-title-20260810-v1';
+
+    private const TARGET_ROUTE = '/zh/personality/intp-a';
+
+    private const TARGET_RUNTIME_TYPE_CODE = 'INTP-A';
+
+    private const TARGET_FIELD = 'personality_profile_variant_seo_meta.seo_title';
+
+    private const CURRENT_TITLE = 'INTP-A 人格特点：分析建模、可能性探索和独立解题 | FermatMind';
+
+    private const PROPOSED_TITLE = 'INTP-A 是什么？人格特点、优势盲点与适合场景 | FermatMind';
+
+    private const M01_SHA256 = '9b7c470aa39aff0e6062c41fe5d71e2e8164159747953d42bd032046cc10f691';
+
+    private const CANNIBALIZATION_SHA256 = '07a153df4fd2b2bb11a639c6fc18d52f3a39988030407a17489b1d6ddd579a91';
+
+    private const QUERY_PAGE_SHA256 = '1f1b7823d69ce1a309482334469c20df9ddefb21830b1c969ca1f95eb225acba';
+
+    private const SOURCE_MANIFEST_SHA256 = 'c35cf3343c481ff5ce4fa3b11e3d2c4e2202fdb2353ac3b337cdbad668d64b47';
+
+    private const SOURCE_COMMIT = 'a931f8cdb3cc6756d225f592be12847676bdfe99';
+
+    /**
+     * @param  array<string, mixed>  $package
+     * @return array<string, mixed>
+     */
+    public function plan(array $package, string $packageSha256, string $targetEnvironment): array
+    {
+        $this->assertPackage($package, $packageSha256);
+        [$profile, $variant, $seoMeta] = $this->resolveAuthority();
+        $this->assertLiveBaseline($seoMeta);
+
+        $existing = $this->findExistingExperimentRevision($variant, $packageSha256);
+        $liveFingerprint = $this->liveFingerprint($profile, $variant, $seoMeta);
+
+        return $this->receipt(
+            status: $existing instanceof PersonalityProfileVariantRevision ? 'idempotent_existing_draft' : 'planned',
+            targetEnvironment: $targetEnvironment,
+            packageSha256: $packageSha256,
+            revision: $existing,
+            revisionCreatedCount: 0,
+            idempotentCount: $existing instanceof PersonalityProfileVariantRevision ? 1 : 0,
+            writesCommitted: false,
+            liveFingerprintBefore: $liveFingerprint,
+            liveFingerprintAfter: $liveFingerprint,
+        );
+    }
+
+    /**
+     * @param  array<string, mixed>  $package
+     * @return array<string, mixed>
+     */
+    public function write(array $package, string $packageSha256, string $targetEnvironment): array
+    {
+        $this->assertPackage($package, $packageSha256);
+
+        return DB::transaction(function () use ($package, $packageSha256, $targetEnvironment): array {
+            [$profile, $variant, $seoMeta] = $this->resolveAuthority(lock: true);
+            $this->assertLiveBaseline($seoMeta);
+
+            $liveFingerprintBefore = $this->liveFingerprint($profile, $variant, $seoMeta);
+            $existing = $this->findExistingExperimentRevision($variant, $packageSha256);
+            if ($existing instanceof PersonalityProfileVariantRevision) {
+                return $this->receipt(
+                    status: 'idempotent_existing_draft',
+                    targetEnvironment: $targetEnvironment,
+                    packageSha256: $packageSha256,
+                    revision: $existing,
+                    revisionCreatedCount: 0,
+                    idempotentCount: 1,
+                    writesCommitted: false,
+                    liveFingerprintBefore: $liveFingerprintBefore,
+                    liveFingerprintAfter: $liveFingerprintBefore,
+                );
+            }
+
+            $revisionNo = ((int) PersonalityProfileVariantRevision::query()
+                ->where('personality_profile_variant_id', (int) $variant->id)
+                ->max('revision_no')) + 1;
+            $snapshot = $this->snapshot($package, $packageSha256, $liveFingerprintBefore);
+            $revision = PersonalityProfileVariantRevision::query()->create([
+                'personality_profile_variant_id' => (int) $variant->id,
+                'revision_no' => $revisionNo,
+                'snapshot_json' => $snapshot,
+                'note' => self::EXPERIMENT_ID.':'.$packageSha256,
+                'created_by_admin_user_id' => null,
+                'created_at' => now(),
+            ]);
+
+            $profile->refresh();
+            $variant->refresh();
+            $seoMeta->refresh();
+            $liveFingerprintAfter = $this->liveFingerprint($profile, $variant, $seoMeta);
+            if (! hash_equals($liveFingerprintBefore, $liveFingerprintAfter)) {
+                throw new RuntimeException('Live public authority changed while creating the inactive draft revision.');
+            }
+
+            return $this->receipt(
+                status: 'draft_revision_created',
+                targetEnvironment: $targetEnvironment,
+                packageSha256: $packageSha256,
+                revision: $revision,
+                revisionCreatedCount: 1,
+                idempotentCount: 0,
+                writesCommitted: true,
+                liveFingerprintBefore: $liveFingerprintBefore,
+                liveFingerprintAfter: $liveFingerprintAfter,
+            );
+        }, 3);
+    }
+
+    /**
+     * @param  array<string, mixed>  $package
+     */
+    private function assertPackage(array $package, string $packageSha256): void
+    {
+        if (! preg_match('/^[a-f0-9]{64}$/', $packageSha256)) {
+            throw new RuntimeException('Package SHA-256 must be a lowercase 64-character hex string.');
+        }
+
+        $expectedScalarValues = [
+            'schema_version' => self::SCHEMA_VERSION,
+            'experiment_id' => self::EXPERIMENT_ID,
+            'framework' => 'MBTI',
+            'entity_type' => 'variant',
+            'code' => self::TARGET_RUNTIME_TYPE_CODE,
+            'locale' => 'zh-CN',
+            'slug' => 'intp-a',
+            'target.org_id' => 0,
+            'target.framework' => 'MBTI',
+            'target.locale' => 'zh-CN',
+            'target.runtime_type_code' => self::TARGET_RUNTIME_TYPE_CODE,
+            'target.route' => self::TARGET_ROUTE,
+            'change.field' => self::TARGET_FIELD,
+            'change.current' => self::CURRENT_TITLE,
+            'change.proposed' => self::PROPOSED_TITLE,
+            'seo.title' => self::PROPOSED_TITLE,
+            'seo.description' => 'UNCHANGED',
+            'canonical' => 'https://fermatmind.com'.self::TARGET_ROUTE,
+            'robots' => 'UNCHANGED',
+            'evidence.source_repository' => 'fermatmind/fap-web',
+            'evidence.source_commit' => self::SOURCE_COMMIT,
+            'evidence.m01.sha256' => self::M01_SHA256,
+            'evidence.window' => 'current28',
+            'evidence.window_start' => '2026-07-13',
+            'evidence.window_end' => '2026-08-09',
+            'measurement.page_indexing_state' => 'UNKNOWN_PAGE_LEVEL',
+            'measurement.post_window_days' => 28,
+            'measurement.insufficient_evidence_state' => 'INCONCLUSIVE',
+        ];
+        foreach ($expectedScalarValues as $path => $expected) {
+            if (data_get($package, $path) !== $expected) {
+                throw new RuntimeException('Package contract mismatch at '.$path.'.');
+            }
+        }
+
+        $change = $package['change'] ?? null;
+        if (! is_array($change) || array_keys($change) !== ['field', 'current', 'proposed']) {
+            throw new RuntimeException('Package change must contain exactly field, current, and proposed.');
+        }
+
+        $expectedWindowFiles = [
+            'personality_cannibalization.csv' => self::CANNIBALIZATION_SHA256,
+            'personality_gsc_page_query.csv' => self::QUERY_PAGE_SHA256,
+            'personality_source_manifest.json' => self::SOURCE_MANIFEST_SHA256,
+        ];
+        if (data_get($package, 'evidence.window_04_files') !== $expectedWindowFiles) {
+            throw new RuntimeException('Package Window 4 evidence files do not match the exact source hashes.');
+        }
+
+        $expectedQueries = [
+            [
+                'query' => 'intp-a',
+                'severity' => 'HIGH',
+                'intended_owner_impressions' => 51,
+                'comparison_page_impressions' => 100,
+                'combined_impressions' => 151,
+                'combined_clicks' => 1,
+            ],
+            [
+                'query' => 'intp a',
+                'severity' => 'MEDIUM',
+                'intended_owner_impressions' => 21,
+                'comparison_page_impressions' => 70,
+                'combined_impressions' => 91,
+                'combined_clicks' => 0,
+            ],
+        ];
+        if (data_get($package, 'evidence.queries') !== $expectedQueries) {
+            throw new RuntimeException('Package query evidence does not match the exact M01 baseline.');
+        }
+
+        $negativeGuarantees = (array) ($package['negative_guarantees'] ?? []);
+        $expectedNegativeGuarantees = [
+            'production_write',
+            'live_seo_meta_write',
+            'publication',
+            'active_revision_pointer_change',
+            'description_change',
+            'h1_change',
+            'content_change',
+            'faq_change',
+            'internal_link_change',
+            'og_twitter_change',
+            'canonical_change',
+            'robots_change',
+            'indexability_change',
+            'sitemap_change',
+            'llms_change',
+            'search_channel_change',
+            'deployment',
+        ];
+        if (array_keys($negativeGuarantees) !== $expectedNegativeGuarantees) {
+            throw new RuntimeException('Package negative guarantee set is incomplete or out of order.');
+        }
+        foreach ($negativeGuarantees as $name => $value) {
+            if ($value !== false) {
+                throw new RuntimeException('Negative guarantee must remain false: '.(string) $name.'.');
+            }
+        }
+    }
+
+    /**
+     * @return array{PersonalityProfile, PersonalityProfileVariant, PersonalityProfileVariantSeoMeta}
+     */
+    private function resolveAuthority(bool $lock = false): array
+    {
+        $profileQuery = PersonalityProfile::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->where('scale_code', PersonalityProfile::SCALE_CODE_MBTI)
+            ->where('locale', 'zh-CN')
+            ->where('type_code', 'INTP');
+        if ($lock) {
+            $profileQuery->lockForUpdate();
+        }
+        $profile = $profileQuery->first();
+        if (! $profile instanceof PersonalityProfile) {
+            throw new RuntimeException('Target INTP profile authority was not found.');
+        }
+
+        $variantQuery = PersonalityProfileVariant::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->where('personality_profile_id', (int) $profile->id)
+            ->where('runtime_type_code', self::TARGET_RUNTIME_TYPE_CODE);
+        if ($lock) {
+            $variantQuery->lockForUpdate();
+        }
+        $variant = $variantQuery->first();
+        if (! $variant instanceof PersonalityProfileVariant) {
+            throw new RuntimeException('Target INTP-A variant authority was not found.');
+        }
+
+        $seoQuery = PersonalityProfileVariantSeoMeta::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->where('personality_profile_variant_id', (int) $variant->id);
+        if ($lock) {
+            $seoQuery->lockForUpdate();
+        }
+        $seoMeta = $seoQuery->first();
+        if (! $seoMeta instanceof PersonalityProfileVariantSeoMeta) {
+            throw new RuntimeException('Target INTP-A SEO meta authority was not found.');
+        }
+
+        return [$profile, $variant, $seoMeta];
+    }
+
+    private function assertLiveBaseline(PersonalityProfileVariantSeoMeta $seoMeta): void
+    {
+        if (! hash_equals(self::CURRENT_TITLE, trim((string) $seoMeta->seo_title))) {
+            throw new RuntimeException('Target INTP-A seo_title baseline drifted; refusing the experiment draft.');
+        }
+    }
+
+    private function findExistingExperimentRevision(
+        PersonalityProfileVariant $variant,
+        string $packageSha256,
+    ): ?PersonalityProfileVariantRevision {
+        $exact = null;
+
+        foreach (PersonalityProfileVariantRevision::query()
+            ->where('personality_profile_variant_id', (int) $variant->id)
+            ->orderByDesc('revision_no')
+            ->get() as $revision) {
+            if (! $revision instanceof PersonalityProfileVariantRevision) {
+                continue;
+            }
+
+            $snapshot = is_array($revision->snapshot_json) ? $revision->snapshot_json : [];
+            if ((string) ($snapshot['experiment_id'] ?? '') !== self::EXPERIMENT_ID) {
+                continue;
+            }
+
+            if ((string) ($snapshot['package_sha256'] ?? '') !== $packageSha256) {
+                throw new RuntimeException('Experiment id already exists with a different package SHA-256.');
+            }
+
+            if (! hash_equals($this->snapshotSha256($snapshot), (string) ($snapshot['snapshot_sha256'] ?? ''))) {
+                throw new RuntimeException('Existing experiment revision snapshot checksum mismatch.');
+            }
+
+            $exact = $revision;
+            break;
+        }
+
+        return $exact;
+    }
+
+    /**
+     * @param  array<string, mixed>  $package
+     * @return array<string, mixed>
+     */
+    private function snapshot(array $package, string $packageSha256, string $liveFingerprint): array
+    {
+        $snapshot = [
+            'schema_version' => self::SCHEMA_VERSION,
+            'status' => 'inactive_draft',
+            'experiment_id' => self::EXPERIMENT_ID,
+            'package_sha256' => $packageSha256,
+            'target' => $package['target'],
+            'change' => $package['change'],
+            'evidence' => $package['evidence'],
+            'measurement' => $package['measurement'],
+            'negative_guarantees' => $package['negative_guarantees'],
+            'live_authority_fingerprint_before' => $liveFingerprint,
+        ];
+        $snapshot['snapshot_sha256'] = $this->snapshotSha256($snapshot);
+
+        return $snapshot;
+    }
+
+    /**
+     * @param  array<string, mixed>  $snapshot
+     */
+    private function snapshotSha256(array $snapshot): string
+    {
+        unset($snapshot['snapshot_sha256']);
+        $encoded = json_encode($snapshot, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE);
+
+        if (! is_string($encoded)) {
+            throw new RuntimeException('Unable to encode the experiment revision snapshot.');
+        }
+
+        return hash('sha256', $encoded);
+    }
+
+    private function liveFingerprint(
+        PersonalityProfile $profile,
+        PersonalityProfileVariant $variant,
+        PersonalityProfileVariantSeoMeta $seoMeta,
+    ): string {
+        $variant->loadMissing(['sections' => static fn ($query) => $query->orderBy('sort_order')->orderBy('id')]);
+        $profile->loadMissing(['sections' => static fn ($query) => $query->orderBy('sort_order')->orderBy('id')]);
+
+        $payload = [
+            'profile' => $profile->only([
+                'org_id', 'scale_code', 'type_code', 'locale', 'slug', 'title', 'type_name', 'status',
+                'is_public', 'is_indexable', 'published_at',
+            ]),
+            'variant' => $variant->only([
+                'org_id', 'canonical_type_code', 'variant_code', 'runtime_type_code', 'type_name',
+                'nickname', 'is_published', 'published_at',
+            ]),
+            'seo_meta' => $seoMeta->only([
+                'org_id', 'seo_title', 'seo_description', 'canonical_url', 'og_title', 'og_description',
+                'og_image_url', 'twitter_title', 'twitter_description', 'twitter_image_url', 'robots',
+                'jsonld_overrides_json',
+            ]),
+            'profile_sections' => $profile->sections->map->only([
+                'section_key', 'heading', 'body_md', 'body_html', 'sort_order', 'is_enabled',
+            ])->values()->all(),
+            'variant_sections' => $variant->sections->map->only([
+                'section_key', 'heading', 'body_md', 'body_html', 'sort_order',
+            ])->values()->all(),
+        ];
+        $encoded = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE);
+        if (! is_string($encoded)) {
+            throw new RuntimeException('Unable to fingerprint the live public authority.');
+        }
+
+        return hash('sha256', $encoded);
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function receipt(
+        string $status,
+        string $targetEnvironment,
+        string $packageSha256,
+        ?PersonalityProfileVariantRevision $revision,
+        int $revisionCreatedCount,
+        int $idempotentCount,
+        bool $writesCommitted,
+        string $liveFingerprintBefore,
+        string $liveFingerprintAfter,
+    ): array {
+        $snapshot = $revision instanceof PersonalityProfileVariantRevision && is_array($revision->snapshot_json)
+            ? $revision->snapshot_json
+            : [];
+
+        return [
+            'schema_version' => 'personality.mbti-seo-title-experiment-receipt.v1',
+            'ok' => true,
+            'status' => $status,
+            'target_environment' => $targetEnvironment,
+            'package_sha256' => $packageSha256,
+            'target' => [
+                'route' => self::TARGET_ROUTE,
+                'locale' => 'zh-CN',
+                'runtime_type_code' => self::TARGET_RUNTIME_TYPE_CODE,
+            ],
+            'revision_no' => $revision?->revision_no,
+            'revision_snapshot_sha256' => $snapshot['snapshot_sha256'] ?? null,
+            'revision_created_count' => $revisionCreatedCount,
+            'idempotent_count' => $idempotentCount,
+            'writes_committed' => $writesCommitted,
+            'live_projection_changes' => hash_equals($liveFingerprintBefore, $liveFingerprintAfter) ? 0 : 1,
+            'negative_guarantees' => [
+                'production_write' => false,
+                'live_seo_meta_write' => false,
+                'publication' => false,
+                'active_revision_pointer_change' => false,
+                'indexability_change' => false,
+                'sitemap_llms_change' => false,
+                'search_channel_change' => false,
+                'deployment' => false,
+            ],
+            'errors' => [],
+        ];
+    }
+}
