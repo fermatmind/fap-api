@@ -104201,11 +104201,11 @@
     "base": "main",
     "branch": "codex/career-1046-truth-rescan-06",
     "title": "CAREER-1046-TRUTH-RESCAN-06: verify Engineering Publication and Production truth",
-    "status": "no_go_evidence_ready_pending_github_checks",
+    "status": "draft_pending_fresh_exact_main_window",
     "depends_on": [
       "CAREER-COLD-CACHE-DISCOVERABILITY-GATE-02"
     ],
-    "commit_sha": "930c59e7281887608057ef611ed587946248d89c",
+    "commit_sha": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3619",
     "checks": {
       "dependency": {
@@ -104218,31 +104218,31 @@
       },
       "local_focused_validation": {
         "status": "passed",
-        "evidence": "After rebasing #3619 onto exact main b8def9d3087cef60d479b1dcfc2a382c61074e93, Career1046TruthRescan06Test passed 10 tests / 62 assertions. Scoped Pint, runner PHP syntax, Composer strict validation, YAML/state/evidence JSON parsing, offline evidence validate, reliable 60-row CSV parse and formula guard, privacy denylist, exact eight-file manifest allowlist, and diff checks all passed on 2026-08-10."
+        "evidence": "PR #3619 is rebased onto exact main c8015fac05ae544c8730adac6e18f387c76b2e33. The focused scanner and offline validation had passed on the prior head; fresh post-rebase validation and evidence checks are required after rebuilding the window."
       },
       "pre_c03_verify": {
-        "status": "passed_no_apply_required",
-        "evidence": "Read-only verify run 31400555832 attempt 1 on exact main b8def9d3087cef60d479b1dcfc2a382c61074e93 emitted PASS_C03_REVERIFIED_NO_APPLY_REQUIRED. Authority remained 342 unique / 684 localized rows; published cohort and detail coverage were the same 30 unique / 60 localized rows, all six fixed surfaces matched, detail repair target count and all terminal transport, HTTP, private-leak, and production-write counts were zero. Receipt SHA-256 2d3b91693ef819787bf7066d718518bc0a9c163a68b546bda9d15e7b8270658e; artifact digest sha256:feb0890274a8da5d65423aaf98366091b99a8257c0b42176231aa85474079c87."
+        "status": "invalidated_by_main_movement",
+        "evidence": "Historical pre-verify run 31400555832 passed on b8def9d3, but main advanced to 07c00863 during the bracketed window. It cannot authorize a current scan and will not be reused."
       },
       "latest_main_incident_closeout": {
-        "status": "passed",
-        "evidence": "Read-only incident_closeout run 31400145920 attempt 1 on exact control-plane SHA b8def9d3087cef60d479b1dcfc2a382c61074e93 emitted PASS_INCIDENT_CLOSED for active revision 40020ab7ef269ee56ce597e9f2fd2fbb99e83549. Input-boundary validation passed, all six fixed surfaces matched, and detail readback completed with zero terminal transport, timeout, 5xx, non-200, private leakage, or production writes. Receipt SHA-256 19fde3606357e46bc59bac9a8a0d6c039f86428d6306483d24e40744edbe3e9b; artifact digest sha256:ceea88de9c1bccdf37106c02705ac143f72d7df5cfc1459215a28c331e2f3a39."
+        "status": "invalidated_by_main_movement",
+        "evidence": "Historical closeout run 31400145920 passed on b8def9d3, but the complete window is invalid because main advanced to 07c00863 during post-verify. A fresh latest-main closeout is required."
       },
       "stable_window": {
-        "status": "complete_no_go",
-        "evidence": "Exact main b8def9d3087cef60d479b1dcfc2a382c61074e93 remained unchanged through closeout, pre-verify, the 2026-08-10T14:56:39Z to 14:59:07Z two-round scan, post-verify, finalize, and validate. Post run 31401246908 emitted PASS_C03_REVERIFIED_NO_APPLY_REQUIRED with receipt SHA-256 3ac5de891fdc140b6f14988264afbbc70eb8a3cf4330a3f28f9095fab11dbc70 and artifact digest sha256:1fff8231a10ccee0a384a85f360ba7f758efc57ad031e37eeb98de9154554691. Receipt stability had zero drift fields. Each scan round had 30 slugs / 60 localized targets, zero timeout, 5xx, redirect, private leak, or conflicting surface identity. Sitemap and llms were 60 occurrences / 60 unique; llms-full was 120 / 60 with 60 identical repeated references and zero conflicts per round. Twenty-four targets per round failed only the detail API indexability contract, split 12 EN and 12 zh-CN, producing formal NO_GO."
+        "status": "invalidated_main_advanced_during_post_verify",
+        "evidence": "The b8def9d3 scan was internally stable and observed 24 indexability failures per round, but PR #3634 merged as 07c00863e02d332ff173b3dee7f21556867f8ea0 at 2026-08-10T15:01:52Z while post-verify was still running. The old temporary snapshot and generated evidence were discarded. No formal verdict exists until the full latest-main window is rebuilt."
       },
       "generated_evidence": {
-        "status": "passed",
-        "evidence": "finalize and validate produced exactly manifest.v1.json, source-receipts.v1.json, and target-readback.v1.csv. Verdict is NO_GO; manifest SHA-256 is 807e1808bff628920211531e9b4491612b74e14c04e39417f8fb24961ec8c664, source receipt SHA-256 is 2f8ec96436b294d0ac0f191ea7d36e63150befd8c9ef2951adc0938e3f1f7c44, and CSV SHA-256 is aa3b1591f7c2cb2fdaa29ed50b1fb7f19d6d479504bb84d38db139595f262de5. No response body, approval phrase, secret, cache key, private path, or infrastructure topology is retained."
+        "status": "absent_pending_fresh_window",
+        "evidence": "The three b8def9d3 evidence files were removed after detecting main movement inside the window. No stale verdict artifact remains in the branch diff."
       },
       "github_pr": {
-        "status": "draft_evidence_complete",
-        "evidence": "PR #3619 remains Draft while the complete NO_GO evidence commit and fresh required checks are finalized. Under the declared lifecycle it may be marked ready and merged only after all required checks pass; PR6 remains prohibited after merge."
+        "status": "draft_window_restart",
+        "evidence": "PR #3619 remains Draft. The prior evidence head passed required checks, but it cannot merge because its window was invalidated by main movement."
       },
       "github_checks": {
-        "status": "pending_after_no_go_evidence",
-        "evidence": "Fresh required checks are required on the exact evidence head. The complete formal NO_GO permits PR5 merge after checks pass but permanently keeps pr6_allowed=false for this verdict."
+        "status": "passed_on_invalidated_head_fresh_checks_required",
+        "evidence": "All nine applicable checks passed and staging parity skipped on invalidated head 8f89bc1b512314c1ba4fe5793af02e71bf53bd9e. Fresh checks are required after latest-main rebase and final evidence regeneration."
       }
     },
     "lineage": {
@@ -104282,7 +104282,7 @@
         "merge_commit_sha": "4ad35bd2b15448569a3bafc6bd27f6ad115dc014"
       }
     },
-    "failure_reason": "Formal NO_GO: both read-only C03 verify receipts passed with a stable 342/684 authority and 30/60 public cohort, and all public sets and transports were stable. However, 24 of 60 public targets per round failed the detail API indexability contract, split 12 EN and 12 zh-CN, while page metadata and set membership passed. The active revision also lacks C05 and the authority population remains below 1046/2092. Evidence is complete; PR5 may merge after required checks, but PR6 is prohibited and the Career link gate remains CLOSED.",
+    "failure_reason": "No formal verdict: main advanced from b8def9d3 to 07c00863 while post-verify was running, invalidating the otherwise complete read-only window. The temporary scan and generated evidence were discarded. A fresh exact-main closeout, pre-verify, two-round scan, post-verify, finalize, and validate sequence is required; PR6 and all production writes remain prohibited.",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -104350,9 +104350,24 @@
         "at": "2026-08-10T15:04:34Z",
         "status": "no_go_evidence_ready_pending_github_checks",
         "note": "A complete exact-main read-only window closed successfully: closeout run 31400145920 PASS, pre run 31400555832 PASS_C03_REVERIFIED_NO_APPLY_REQUIRED, two complete scan rounds, and post run 31401246908 PASS_C03_REVERIFIED_NO_APPLY_REQUIRED with no receipt drift or production writes. Identical llms-full references were correctly classified as diagnostic-only. Twenty-four targets per round failed the detail API indexability contract, so finalize/validate emitted formal NO_GO. The three safe evidence files are ready; PR6 remains prohibited."
+      },
+      {
+        "at": "2026-08-10T15:19:33Z",
+        "status": "draft_pending_fresh_exact_main_window",
+        "note": "Authoritative merge metadata showed PR #3634 advanced main to 07c00863e02d332ff173b3dee7f21556867f8ea0 at 15:01:52Z while post-verify was still running. Git ref propagation had temporarily returned b8def9d3 during the immediate finalize guard. The prior snapshot and all three generated evidence files were discarded, #3619 was rebased to 07c00863, and the full read-only window must restart."
+      },
+      {
+        "at": "2026-08-10T15:21:30Z",
+        "status": "draft_pending_fresh_exact_main_window",
+        "note": "PR #3635 had already advanced authoritative main to 109609f25ca1583657ca244bf9d9926be5e17ae3 while Git transport briefly returned 07c00863. Dispatch 31403079932 resolved to 109609f2 but carried the older expected SHA, so exact-main validation failed before SSH or production readback. #3619 was rebased again; future guards use the GitHub commits API SHA and validate the workflow head."
+      },
+      {
+        "at": "2026-08-10T15:34:30Z",
+        "status": "draft_pending_fresh_exact_main_window",
+        "note": "A 109609f2 closeout and pre-verify passed and the two-round scan completed, but PR #3636 merged as c8015fac05ae544c8730adac6e18f387c76b2e33 at 15:33:31Z in the seconds between the post-dispatch API guard and workflow ref resolution. Post dispatch 31404250497 resolved to c8015fac and failed its older expected-SHA guard before production readback. The 109609f2 snapshot is invalid and will not be finalized or reused; #3619 was rebased to c8015fac."
       }
     ],
-    "updated_at": "2026-08-10T15:04:34Z"
+    "updated_at": "2026-08-10T15:34:30Z"
   },
   "CAREER-1046-PUBLICATION-CONTROL-03": {
     "id": "CAREER-1046-PUBLICATION-CONTROL-03",

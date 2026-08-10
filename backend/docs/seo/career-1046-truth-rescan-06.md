@@ -61,19 +61,6 @@ The HTTP policy is fixed: credential-free HTTPS GET, redirects disabled, maximum
 
 Semantic mismatches are retained as safe aggregate facts so a successful post-C03 receipt can close the window with a formal `NO_GO`. Repeated text-surface references are informational; only conflicting identity forms or a unique-set mismatch make the text surface unsafe.
 
-## Final read-only window
-
-The completed window is bound to exact main `b8def9d3087cef60d479b1dcfc2a382c61074e93` and active revision `40020ab7ef269ee56ce597e9f2fd2fbb99e83549`:
-
-- incident closeout run `31400145920` emitted `PASS_INCIDENT_CLOSED`;
-- pre-verify run `31400555832` and post-verify run `31401246908` both emitted `PASS_C03_REVERIFIED_NO_APPLY_REQUIRED`;
-- pre/post authority, inventory, published cohort, detail coverage, and target-set identities were stable;
-- both scan rounds completed with 30 unique slugs / 60 locale rows, zero timeout, 5xx, redirect, private leakage, or conflicting text-surface identity;
-- sitemap and llms each exposed 60 occurrences / 60 unique identities; llms-full exposed 120 occurrences / 60 unique identities, with 60 identical repeated references and zero conflicts per round;
-- 24 targets per round failed the public detail API indexability contract, split evenly as 12 English and 12 Chinese targets. HTTP, page canonical, reciprocal hreflang, page robots, identity, and all public-set membership checks otherwise passed.
-
-The finalized verdict is `NO_GO`. The authority population is also only 342/684, the public cohort is 30/60, and the active revision does not contain the C05 cold-start gate, but those shortfalls would be `PARTIALLY_BLOCKED` only if the scan were otherwise safe. The repeated API indexability mismatch is a hard failure, so `NO_GO` takes precedence. The evidence is complete and mergeable under the PR5 lifecycle, but PR6 remains prohibited and the Career link publication gate remains `CLOSED`.
-
 ## Evidence boundary
 
 The repository retains only:
