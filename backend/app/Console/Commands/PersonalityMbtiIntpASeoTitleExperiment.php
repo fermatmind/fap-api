@@ -66,10 +66,7 @@ final class PersonalityMbtiIntpASeoTitleExperiment extends Command
             try {
                 $this->writeOutput($summary, $outputPath);
             } catch (Throwable) {
-                $summary = $this->failureSummary(
-                    'receipt_write_error',
-                    'Unable to write the preflighted receipt destination; inspect protected runtime logs.',
-                );
+                $summary = $this->receiptWriteFailureSummary($summary);
             }
         }
         $this->emitSummary($summary);
@@ -267,5 +264,28 @@ final class PersonalityMbtiIntpASeoTitleExperiment extends Command
                 'message' => $message,
             ]],
         ];
+    }
+
+    /**
+     * Preserve the service transaction truth when only the optional receipt file write fails.
+     *
+     * @param  array<string, mixed>  $summary
+     * @return array<string, mixed>
+     */
+    private function receiptWriteFailureSummary(array $summary): array
+    {
+        $errors = is_array($summary['errors'] ?? null) ? $summary['errors'] : [];
+        $errors[] = [
+            'field' => 'output',
+            'code' => 'receipt_write_error',
+            'message' => 'Unable to write the preflighted receipt destination; inspect protected runtime logs.',
+        ];
+
+        $summary['ok'] = false;
+        $summary['status'] = 'receipt_write_error';
+        $summary['receipt_output_written'] = false;
+        $summary['errors'] = $errors;
+
+        return $summary;
     }
 }

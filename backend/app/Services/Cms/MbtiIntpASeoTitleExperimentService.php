@@ -454,12 +454,17 @@ final class MbtiIntpASeoTitleExperimentService
 
         $payload = [
             'profile' => $profile->only([
-                'org_id', 'scale_code', 'type_code', 'locale', 'slug', 'title', 'type_name', 'status',
-                'is_public', 'is_indexable', 'published_at',
+                'id', 'org_id', 'scale_code', 'type_code', 'canonical_type_code', 'slug', 'locale',
+                'title', 'type_name', 'nickname', 'rarity_text', 'keywords_json', 'subtitle', 'excerpt',
+                'hero_kicker', 'hero_quote', 'hero_summary_md', 'hero_summary_html', 'hero_image_url',
+                'status', 'is_public', 'is_indexable', 'published_at', 'scheduled_at', 'schema_version',
+                'updated_at',
             ]),
             'variant' => $variant->only([
-                'org_id', 'canonical_type_code', 'variant_code', 'runtime_type_code', 'type_name',
-                'nickname', 'is_published', 'published_at',
+                'id', 'org_id', 'personality_profile_id', 'canonical_type_code', 'variant_code',
+                'runtime_type_code', 'type_name', 'nickname', 'rarity_text', 'keywords_json',
+                'hero_summary_md', 'hero_summary_html', 'schema_version', 'is_published', 'published_at',
+                'updated_at',
             ]),
             'seo_meta' => $seoMeta->only([
                 'org_id', 'seo_title', 'seo_description', 'canonical_url', 'og_title', 'og_description',

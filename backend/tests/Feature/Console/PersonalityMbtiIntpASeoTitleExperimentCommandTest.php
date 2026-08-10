@@ -141,6 +141,29 @@ final class PersonalityMbtiIntpASeoTitleExperimentCommandTest extends TestCase
         $this->assertSame(1, PersonalityProfileVariantRevision::query()->count());
     }
 
+    public function test_idempotent_rerun_rejects_public_profile_field_drift(): void
+    {
+        [$profile] = $this->createAuthority();
+        $writeOptions = [
+            '--write' => true,
+            '--draft-only' => true,
+            '--no-publish' => true,
+            '--no-indexability-change' => true,
+            '--no-sitemap' => true,
+            '--no-llms' => true,
+            '--no-search-release' => true,
+        ];
+
+        [$firstExit] = $this->runCommand($writeOptions);
+        $profile->update(['subtitle' => 'Drifted public subtitle']);
+        [$secondExit, $secondReceipt] = $this->runCommand($writeOptions);
+
+        $this->assertSame(0, $firstExit);
+        $this->assertSame(1, $secondExit);
+        $this->assertFalse($secondReceipt['ok']);
+        $this->assertSame(1, PersonalityProfileVariantRevision::query()->count());
+    }
+
     public function test_baseline_drift_fails_closed(): void
     {
         [, , $seoMeta] = $this->createAuthority();
@@ -234,6 +257,44 @@ final class PersonalityMbtiIntpASeoTitleExperimentCommandTest extends TestCase
         $this->assertFalse($receipt['ok']);
         $this->assertSame('runtime_error', $receipt['errors'][0]['code']);
         $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_post_commit_receipt_failure_preserves_committed_transaction_truth(): void
+    {
+        $this->createAuthority();
+        $output = sys_get_temp_dir().'/fm-intp-a-seo-title-failing-receipt-'.Str::random(12).'.json';
+        $this->beforeApplicationDestroyed(static fn () => @unlink($output));
+        File::partialMock()
+            ->shouldReceive('put')
+            ->once()
+            ->andReturn(false);
+
+        $exitCode = Artisan::call('personality:mbti-intp-a-seo-title-experiment', [
+            '--package' => base_path(self::PACKAGE_PATH),
+            '--confirm-package-sha256' => hash_file('sha256', base_path(self::PACKAGE_PATH)),
+            '--target-env' => 'staging',
+            '--operator-approved' => self::APPROVAL,
+            '--allow-testing' => true,
+            '--write' => true,
+            '--draft-only' => true,
+            '--no-publish' => true,
+            '--no-indexability-change' => true,
+            '--no-sitemap' => true,
+            '--no-llms' => true,
+            '--no-search-release' => true,
+            '--json' => true,
+            '--output' => $output,
+        ]);
+        $receipt = json_decode(Artisan::output(), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertIsArray($receipt);
+        $this->assertFalse($receipt['ok']);
+        $this->assertSame('receipt_write_error', $receipt['status']);
+        $this->assertSame('receipt_write_error', $receipt['errors'][0]['code']);
+        $this->assertTrue($receipt['writes_committed']);
+        $this->assertSame(1, $receipt['revision_created_count']);
+        $this->assertSame(1, PersonalityProfileVariantRevision::query()->count());
     }
 
     public function test_invalid_command_guard_does_not_touch_existing_output_path(): void
