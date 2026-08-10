@@ -51,6 +51,28 @@ final class CareerRolloutReportAuthoritySigner
      */
     public function isTrusted(array $payload): bool
     {
+        if (! $this->isAuthentic($payload)) {
+            return false;
+        }
+
+        try {
+            $expiresAt = new DateTimeImmutable($this->stringValue(data_get($payload, 'authority.expires_at')));
+            $now = new DateTimeImmutable('now', new DateTimeZone('UTC'));
+        } catch (Throwable) {
+            return false;
+        }
+
+        return $expiresAt >= $now;
+    }
+
+    /**
+     * Validate an immutable promotion fact without requiring its action window
+     * to remain current. Callers authorizing a new action must use isTrusted().
+     *
+     * @param  array<string, mixed>  $payload
+     */
+    public function isAuthentic(array $payload): bool
+    {
         $authority = $payload['authority'] ?? null;
         if (! is_array($authority) || array_is_list($authority)) {
             return false;
@@ -121,7 +143,7 @@ final class CareerRolloutReportAuthoritySigner
             return false;
         }
 
-        return $expiresAt >= $now;
+        return $expiresAt >= $signedAt;
     }
 
     /**
