@@ -50,7 +50,8 @@ final class PersonalityMbtiIntpASeoTitleExperimentCommandTest extends TestCase
 
     public function test_dry_run_normalizes_the_staging_canonical_for_the_authority_fingerprint_only(): void
     {
-        $this->createAuthority();
+        [, , $seoMeta] = $this->createAuthority();
+        $seoMeta->update(['canonical_url' => 'https://staging.fermatmind.com/zh/personality/intp-a']);
         config(['app.frontend_url' => 'https://staging.fermatmind.com']);
 
         [$exitCode, $receipt] = $this->runCommand(['--dry-run' => true]);
@@ -60,6 +61,25 @@ final class PersonalityMbtiIntpASeoTitleExperimentCommandTest extends TestCase
         $this->assertSame('planned', $receipt['status']);
         $this->assertFalse($receipt['writes_committed']);
         $this->assertSame(0, $receipt['live_projection_changes']);
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_dry_run_ignores_json_object_key_order_without_ignoring_value_drift(): void
+    {
+        [, , $seoMeta] = $this->createAuthority();
+        $seoMeta->update([
+            'jsonld_overrides_json' => [
+                'description' => self::CURRENT_DESCRIPTION,
+                'name' => 'INTP-A 人格特点',
+                'url' => 'https://fermatmind.com/zh/personality/intp-a',
+            ],
+        ]);
+
+        [$exitCode, $receipt] = $this->runCommand(['--dry-run' => true]);
+
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($receipt['ok']);
+        $this->assertSame('planned', $receipt['status']);
         $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
     }
 
@@ -192,6 +212,7 @@ final class PersonalityMbtiIntpASeoTitleExperimentCommandTest extends TestCase
 
         $this->assertSame(1, $exitCode);
         $this->assertFalse($receipt['ok']);
+        $this->assertStringContainsString('seo_meta.seo_title', $receipt['errors'][0]['message']);
         $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
     }
 
@@ -204,6 +225,7 @@ final class PersonalityMbtiIntpASeoTitleExperimentCommandTest extends TestCase
 
         $this->assertSame(1, $exitCode);
         $this->assertFalse($receipt['ok']);
+        $this->assertStringContainsString('seo_meta.canonical_url', $receipt['errors'][0]['message']);
         $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
     }
 

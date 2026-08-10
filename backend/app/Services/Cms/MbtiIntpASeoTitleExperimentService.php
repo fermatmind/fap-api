@@ -379,15 +379,20 @@ final class MbtiIntpASeoTitleExperimentService
             ],
         ];
 
-        if ($actual !== $expected) {
-            throw new RuntimeException('Target INTP-A live authority baseline drifted; refusing the experiment draft.');
+        $normalizedExpected = $this->canonicalize($expected);
+        $normalizedActual = $this->canonicalize($this->normalizeStagingAuthorityUrls($actual, $expected));
+        if ($normalizedActual !== $normalizedExpected) {
+            $paths = $this->differingPaths($normalizedExpected, $normalizedActual);
+            throw new RuntimeException(
+                'Target INTP-A live authority baseline drifted at '.implode(', ', $paths).'; refusing the experiment draft.',
+            );
         }
 
         $expectedProjectionFingerprint = (string) data_get($package, 'authority_baseline.public_projection_sha256');
         $actualProjectionFingerprint = $this->publicProjectionFingerprint(
             $profile,
             $variant,
-            trim((string) $seoMeta->canonical_url),
+            trim((string) data_get($expected, 'seo_meta.canonical_url')),
         );
         if (! hash_equals($expectedProjectionFingerprint, $actualProjectionFingerprint)) {
             throw new RuntimeException('Target INTP-A complete public authority drifted; refusing the experiment draft.');
@@ -568,6 +573,53 @@ final class MbtiIntpASeoTitleExperimentService
         }
 
         return $value;
+    }
+
+    /**
+     * Allow only the exact environment-owned staging host representation. The
+     * package remains bound to the official public authority URL.
+     *
+     * @param  array<string, mixed>  $actual
+     * @param  array<string, mixed>  $expected
+     * @return array<string, mixed>
+     */
+    private function normalizeStagingAuthorityUrls(array $actual, array $expected): array
+    {
+        $stagingUrl = 'https://staging.fermatmind.com'.self::TARGET_ROUTE;
+        $authorityUrl = trim((string) data_get($expected, 'seo_meta.canonical_url'));
+
+        foreach (['seo_meta.canonical_url', 'seo_meta.jsonld_overrides_json.url'] as $path) {
+            if (data_get($actual, $path) === $stagingUrl) {
+                data_set($actual, $path, $authorityUrl);
+            }
+        }
+
+        return $actual;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function differingPaths(mixed $expected, mixed $actual, string $prefix = ''): array
+    {
+        if (! is_array($expected) || ! is_array($actual)) {
+            return $expected === $actual ? [] : [$prefix !== '' ? $prefix : 'authority_baseline'];
+        }
+
+        $paths = [];
+        $keys = array_values(array_unique(array_merge(array_keys($expected), array_keys($actual)), SORT_REGULAR));
+        foreach ($keys as $key) {
+            $path = $prefix === '' ? (string) $key : $prefix.'.'.(string) $key;
+            if (! array_key_exists($key, $expected) || ! array_key_exists($key, $actual)) {
+                $paths[] = $path;
+
+                continue;
+            }
+
+            $paths = array_merge($paths, $this->differingPaths($expected[$key], $actual[$key], $path));
+        }
+
+        return $paths;
     }
 
     /**
