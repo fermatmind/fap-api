@@ -9,6 +9,8 @@ use RuntimeException;
 
 final class SafeArtifactDirectory
 {
+    public const RUNTIME_READER_DIRECTORY_MODE = 02750;
+
     public static function createTemporaryDirectory(string $rootDir, string $finalDir): string
     {
         self::assertSafeRoot($rootDir);
@@ -30,13 +32,17 @@ final class SafeArtifactDirectory
         throw new RuntimeException('failed to create safe temporary artifact directory: '.$finalDir);
     }
 
-    public static function finalize(string $tmpDir, string $finalDir): void
+    public static function finalize(string $tmpDir, string $finalDir, int $finalMode = 0700): void
     {
         if (is_link($tmpDir) || ! is_dir($tmpDir)) {
             throw new RuntimeException('temporary artifact directory is not safe: '.$tmpDir);
         }
 
         self::assertFinalDoesNotExist($finalDir);
+
+        if (! @chmod($tmpDir, $finalMode)) {
+            throw new RuntimeException('failed to apply final artifact directory mode: '.$finalDir);
+        }
 
         if (! @rename($tmpDir, $finalDir)) {
             throw new RuntimeException('failed to finalize artifact output dir: '.$finalDir);

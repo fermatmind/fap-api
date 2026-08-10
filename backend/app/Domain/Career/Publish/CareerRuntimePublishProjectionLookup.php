@@ -452,20 +452,20 @@ final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublish
         $candidates = [];
         foreach ($directories as $directory) {
             $path = $directory.DIRECTORY_SEPARATOR.$filename;
-            if (! is_file($path)) {
-                continue;
-            }
-
-            $payload = json_decode((string) file_get_contents($path), true);
-            if (! is_array($payload)) {
-                continue;
-            }
-
+            clearstatcache(true, $directory);
             clearstatcache(true, $path);
+            $directoryReadable = is_readable($directory);
+            $fileReadable = $directoryReadable && is_file($path) && is_readable($path);
+            $payload = $fileReadable
+                ? json_decode((string) file_get_contents($path), true)
+                : null;
             $candidates[] = [
                 'path' => $path,
-                'mtime' => filemtime($path) ?: 0,
-                'payload' => $payload,
+                'mtime' => $fileReadable
+                    ? (@filemtime($path) ?: 0)
+                    : (@filemtime($directory) ?: 0),
+                'payload' => is_array($payload) ? $payload : null,
+                'valid' => is_array($payload),
             ];
         }
 
@@ -482,6 +482,10 @@ final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublish
             return strcmp((string) $right['path'], (string) $left['path']);
         });
 
-        return $candidates[0]['payload'];
+        // A finalized authority directory that is newer but unreadable or
+        // invalid must never make runtime silently select an older artifact.
+        // The empty-array sentinel keeps hydrate() fail-closed and prevents a
+        // fallback to a potentially stale release ledger.
+        return $candidates[0]['valid'] ? $candidates[0]['payload'] : [];
     }
 }
