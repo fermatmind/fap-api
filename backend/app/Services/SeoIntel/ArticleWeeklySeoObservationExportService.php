@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Schema;
 
 final class ArticleWeeklySeoObservationExportService
 {
-    public const SCHEMA_VERSION = 'article_weekly_seo_observation_export.v2';
+    public const SCHEMA_VERSION = 'article_weekly_seo_observation_export.v3';
 
     public function __construct(
         private readonly ArticleReleaseCloseoutService $closeout,
@@ -32,6 +32,7 @@ final class ArticleWeeklySeoObservationExportService
         string $locale = '',
         int $limit = 25,
     ): array {
+        $explicitSelection = $articleIds !== [];
         $articles = $this->loadArticles($articleIds, $from, $to, $locale, $limit);
         $rows = [];
 
@@ -49,6 +50,14 @@ final class ArticleWeeklySeoObservationExportService
                 'canonical_path' => $canonicalPath,
                 'canonical_url' => $canonicalUrl,
                 'published_at' => optional($article->published_at)->toIso8601String(),
+                'export_eligibility' => [
+                    'selection_mode' => $explicitSelection ? 'explicit_article_ids' : 'default_indexable_scan',
+                    'is_public' => (bool) $article->is_public,
+                    'is_indexable' => (bool) $article->is_indexable,
+                    'status' => (bool) $article->is_indexable
+                        ? 'public_indexable'
+                        : 'explicit_public_non_indexable',
+                ],
                 'release_closeout' => [
                     'decision' => (string) ($closeout['decision'] ?? 'UNKNOWN'),
                     'ok' => (bool) ($closeout['ok'] ?? false),
@@ -80,7 +89,7 @@ final class ArticleWeeklySeoObservationExportService
                 'locale' => $locale,
                 'limit' => $limit,
             ],
-            'summary' => $this->summary($rows),
+            'summary' => $this->summary($rows, $articleIds),
             'articles' => $rows,
             'deferred_actions' => [
                 'content_updates' => 'not_performed_by_this_read_only_export',
@@ -103,7 +112,6 @@ final class ArticleWeeklySeoObservationExportService
             ->with(['seoMeta' => static fn ($relation) => $relation->withoutGlobalScopes()])
             ->where('status', 'published')
             ->where('is_public', true)
-            ->where('is_indexable', true)
             ->where(static function ($lifecycleQuery): void {
                 $lifecycleQuery
                     ->whereNull('lifecycle_state')
@@ -116,7 +124,8 @@ final class ArticleWeeklySeoObservationExportService
         if ($articleIds !== []) {
             $query->whereIn('id', $articleIds);
         } else {
-            $query->whereBetween('published_at', [$from->startOfDay(), $to->endOfDay()])
+            $query->where('is_indexable', true)
+                ->whereBetween('published_at', [$from->startOfDay(), $to->endOfDay()])
                 ->orderByDesc('published_at')
                 ->orderByDesc('id')
                 ->limit(max(1, min($limit, 100)));
@@ -287,22 +296,34 @@ final class ArticleWeeklySeoObservationExportService
 
     /**
      * @param  list<array<string,mixed>>  $rows
+     * @param  list<int>  $requestedArticleIds
      * @return array<string,mixed>
      */
-    private function summary(array $rows): array
+    private function summary(array $rows, array $requestedArticleIds): array
     {
         $decisions = [];
         $clicks = 0;
         $impressions = 0;
+        $returnedArticleIds = [];
+        $explicitNonIndexableCount = 0;
         foreach ($rows as $row) {
             $decision = (string) data_get($row, 'release_closeout.decision', 'UNKNOWN');
             $decisions[$decision] = ($decisions[$decision] ?? 0) + 1;
             $clicks += (int) data_get($row, 'gsc.clicks', 0);
             $impressions += (int) data_get($row, 'gsc.impressions', 0);
+            $returnedArticleIds[] = (int) ($row['article_id'] ?? 0);
+            if (data_get($row, 'export_eligibility.status') === 'explicit_public_non_indexable') {
+                $explicitNonIndexableCount++;
+            }
         }
 
         return [
             'article_count' => count($rows),
+            'requested_article_count' => count($requestedArticleIds),
+            'returned_article_count' => count($rows),
+            'returned_article_ids' => $returnedArticleIds,
+            'missing_requested_article_ids' => array_values(array_diff($requestedArticleIds, $returnedArticleIds)),
+            'explicit_public_non_indexable_count' => $explicitNonIndexableCount,
             'release_closeout_decisions' => $decisions,
             'gsc_clicks' => $clicks,
             'gsc_impressions' => $impressions,

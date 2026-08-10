@@ -60,7 +60,7 @@ final class ArticleWeeklySeoObservationExportCommandTest extends TestCase
         $this->assertSame(0, $exitCode, Artisan::output());
         $this->assertTrue($payload['ok']);
         $this->assertTrue($payload['read_only']);
-        $this->assertSame('article_weekly_seo_observation_export.v2', $payload['schema_version']);
+        $this->assertSame('article_weekly_seo_observation_export.v3', $payload['schema_version']);
         $this->assertSame(1, data_get($payload, 'summary.article_count'));
         $this->assertSame(3, data_get($payload, 'summary.gsc_clicks'));
         $this->assertSame(200, data_get($payload, 'summary.gsc_impressions'));
@@ -122,18 +122,76 @@ final class ArticleWeeklySeoObservationExportCommandTest extends TestCase
         $this->assertContains('expected_slug_mismatch', data_get($payload, 'articles.0.release_closeout.issue_codes'));
     }
 
+    public function test_explicit_selection_returns_public_non_indexable_articles_in_requested_order(): void
+    {
+        $this->createReleasedArticle();
+        $this->createReleasedArticle([
+            'id' => 54,
+            'slug' => 'english-public-non-indexable-article',
+            'locale' => 'en-US',
+            'translation_group_id' => 'tg_article_english_public_non_indexable_2026v1',
+            'source_locale' => 'en-US',
+            'title' => 'English public non-indexable article',
+            'is_indexable' => false,
+            'sitemap_eligible' => false,
+            'llms_eligible' => false,
+        ]);
+        $this->createReleasedArticle([
+            'id' => 55,
+            'slug' => 'english-private-article',
+            'locale' => 'en-US',
+            'translation_group_id' => 'tg_article_english_private_2026v1',
+            'source_locale' => 'en-US',
+            'title' => 'English private article',
+            'is_public' => false,
+            'is_indexable' => false,
+            'sitemap_eligible' => false,
+            'llms_eligible' => false,
+        ]);
+
+        $exitCode = Artisan::call('articles:weekly-seo-observation-export', [
+            '--article-ids' => '54,53,55',
+            '--expected-slugs' => 'english-public-non-indexable-article,gaokao-score-major-shortlist-riasec-checklist,english-private-article',
+            '--from' => '2026-06-19',
+            '--to' => '2026-06-25',
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('article_weekly_seo_observation_export.v3', $payload['schema_version']);
+        $this->assertSame([54, 53], data_get($payload, 'summary.returned_article_ids'));
+        $this->assertSame([55], data_get($payload, 'summary.missing_requested_article_ids'));
+        $this->assertSame(3, data_get($payload, 'summary.requested_article_count'));
+        $this->assertSame(2, data_get($payload, 'summary.returned_article_count'));
+        $this->assertSame(1, data_get($payload, 'summary.explicit_public_non_indexable_count'));
+        $this->assertSame('explicit_article_ids', data_get($payload, 'articles.0.export_eligibility.selection_mode'));
+        $this->assertFalse(data_get($payload, 'articles.0.export_eligibility.is_indexable'));
+        $this->assertSame('explicit_public_non_indexable', data_get($payload, 'articles.0.export_eligibility.status'));
+
+        $defaultExitCode = Artisan::call('articles:weekly-seo-observation-export', [
+            '--from' => '2026-06-19',
+            '--to' => '2026-06-25',
+            '--json' => true,
+        ]);
+
+        $defaultPayload = $this->jsonOutput();
+        $this->assertSame(0, $defaultExitCode, Artisan::output());
+        $this->assertSame([53], data_get($defaultPayload, 'summary.returned_article_ids'));
+        $this->assertSame([], data_get($defaultPayload, 'summary.missing_requested_article_ids'));
+        $this->assertSame('default_indexable_scan', data_get($defaultPayload, 'articles.0.export_eligibility.selection_mode'));
+    }
+
     /**
      * @param  array<string,mixed>  $overrides
      */
     private function createReleasedArticle(array $overrides = []): Article
     {
         /** @var ArticleCategory $category */
-        $category = Model::unguarded(fn (): ArticleCategory => ArticleCategory::query()->withoutGlobalScopes()->create([
-            'org_id' => 0,
-            'slug' => 'career-decision',
-            'name' => '职业决策',
-            'is_active' => true,
-        ]));
+        $category = Model::unguarded(fn (): ArticleCategory => ArticleCategory::query()->withoutGlobalScopes()->firstOrCreate(
+            ['org_id' => 0, 'slug' => 'career-decision'],
+            ['name' => '职业决策', 'is_active' => true],
+        ));
 
         /** @var Article $article */
         $article = Model::unguarded(fn (): Article => Article::query()->withoutGlobalScopes()->create(array_merge([
@@ -164,12 +222,10 @@ final class ArticleWeeklySeoObservationExportCommandTest extends TestCase
         ], $overrides)));
 
         /** @var ArticleTag $tag */
-        $tag = Model::unguarded(fn (): ArticleTag => ArticleTag::query()->withoutGlobalScopes()->create([
-            'org_id' => 0,
-            'slug' => 'riasec',
-            'name' => 'RIASEC',
-            'is_active' => true,
-        ]));
+        $tag = Model::unguarded(fn (): ArticleTag => ArticleTag::query()->withoutGlobalScopes()->firstOrCreate(
+            ['org_id' => 0, 'slug' => 'riasec'],
+            ['name' => 'RIASEC', 'is_active' => true],
+        ));
         DB::table('article_tag_map')->insert([
             'org_id' => 0,
             'article_id' => (int) $article->id,
@@ -184,8 +240,8 @@ final class ArticleWeeklySeoObservationExportCommandTest extends TestCase
             'article_id' => (int) $article->id,
             'source_article_id' => (int) $article->id,
             'translation_group_id' => (string) $article->translation_group_id,
-            'locale' => 'zh-CN',
-            'source_locale' => 'zh-CN',
+            'locale' => (string) $article->locale,
+            'source_locale' => (string) $article->source_locale,
             'revision_number' => 1,
             'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
             'source_version_hash' => (string) $article->source_version_hash,
@@ -203,14 +259,14 @@ final class ArticleWeeklySeoObservationExportCommandTest extends TestCase
         ArticleSeoMeta::query()->withoutGlobalScopes()->create([
             'org_id' => 0,
             'article_id' => (int) $article->id,
-            'locale' => 'zh-CN',
+            'locale' => (string) $article->locale,
             'seo_title' => (string) $article->title,
             'seo_description' => (string) $article->excerpt,
-            'canonical_url' => 'https://fermatmind.com/zh/articles/gaokao-score-major-shortlist-riasec-checklist',
+            'canonical_url' => 'https://fermatmind.com/'.(str_starts_with((string) $article->locale, 'zh') ? 'zh' : 'en').'/articles/'.(string) $article->slug,
             'og_title' => (string) $article->title,
             'og_description' => (string) $article->excerpt,
             'og_image_url' => 'https://api.fermatmind.com/storage/media-library/og.jpg',
-            'robots' => 'index,follow',
+            'robots' => (bool) $article->is_indexable ? 'index,follow' : 'noindex,follow',
             'schema_json' => [
                 'editorial_package_v1' => [
                     'article_schema_enabled' => true,
@@ -223,7 +279,7 @@ final class ArticleWeeklySeoObservationExportCommandTest extends TestCase
                     ],
                 ],
             ],
-            'is_indexable' => true,
+            'is_indexable' => (bool) $article->is_indexable,
         ]);
 
         return $article->fresh(['category', 'tags', 'publishedRevision', 'seoMeta']) ?? $article;
