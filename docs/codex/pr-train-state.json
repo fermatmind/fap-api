@@ -104201,7 +104201,7 @@
     "base": "main",
     "branch": "codex/career-1046-truth-rescan-06",
     "title": "CAREER-1046-TRUTH-RESCAN-06: verify Engineering Publication and Production truth",
-    "status": "draft_hold_c03_recovery_required",
+    "status": "draft_checks_passed_hold_c03_recovery_required",
     "depends_on": [
       "CAREER-COLD-CACHE-DISCOVERABILITY-GATE-02"
     ],
@@ -104237,8 +104237,8 @@
         "evidence": "Draft PR #3619 opened with merge prohibited until complete pre/post PASS C03 receipts and finalized generated evidence exist."
       },
       "github_checks": {
-        "status": "pending_rebased_hold_head",
-        "evidence": "The rebased Draft/HOLD head will require fresh CI and Code Scanning after the exact no-scan production lineage is committed. Prior green checks do not authorize scan, merge, or PR6."
+        "status": "passed_on_rebased_hold_head",
+        "evidence": "CI run 31388873001 passed hygiene, supply-chain, content-pack/10k capacity, Big Five, MBTI v2, and MBTI legacy gates on Draft/HOLD head 911047dad3070ca89349fefebec214f0807b8e0b; staging parity was correctly skipped. Code Scanning run 31388873010 passed Semgrep secrets, SARIF upload, and OSS checks. These green checks do not override PASS_RECOVERY_REQUIRED and do not authorize scan, merge, or PR6. This metadata-only check closeout requires fresh exact-head checks before any future merge."
       }
     },
     "lineage": {
@@ -104309,9 +104309,14 @@
         "at": "2026-08-10T12:34:26Z",
         "status": "draft_hold_c03_recovery_required",
         "note": "Same-main closeout run 31387930639 passed with zero writes, but pre-C03 verify run 31388220236 emitted PASS_RECOVERY_REQUIRED with public_converged=false. All transport/HTTP/private/write counts were zero and no detail repair target was reported. The plan forbids apply and requires stop on this status; no scan snapshot, post verify, finalized evidence, or verdict was generated. origin/main also advanced to 53917f63469b603104e68e2129011fa0d92de5fa before scanning. PR6 remains prohibited."
+      },
+      {
+        "at": "2026-08-10T12:44:05Z",
+        "status": "draft_checks_passed_hold_c03_recovery_required",
+        "note": "All applicable CI and Code Scanning jobs passed on rebased Draft/HOLD head 911047dad3070ca89349fefebec214f0807b8e0b. This validates code and the exact HOLD ledger only; it cannot replace the missing PASS_C03_REVERIFIED_NO_APPLY_REQUIRED receipt, so #3619 remains Draft, unmerged, and prohibited from starting PR6."
       }
     ],
-    "updated_at": "2026-08-10T12:34:26Z"
+    "updated_at": "2026-08-10T12:44:05Z"
   },
   "CAREER-1046-PUBLICATION-CONTROL-03": {
     "id": "CAREER-1046-PUBLICATION-CONTROL-03",
