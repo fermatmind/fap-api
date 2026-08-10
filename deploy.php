@@ -286,23 +286,24 @@ function deployPublicDnsBusinessEvidenceCommand(string $host): string
         .'PROBE_STATUS="${raw##*$\'\n\'}"; PROBE_BODY="${raw%$\'\n\'*}"; '
         .'case "$PROBE_STATUS" in 429|502|503|504) return 75 ;; esac; return 0; }';
     $verifyFunction = 'verify_public_evidence() { '
-        ."production_probe {$healthUrl} || return \$?; "
+        ."PROBE_STAGE=public_health; production_probe {$healthUrl} || return \$?; "
         .'[ "$PROBE_STATUS" = "404" ] || return 1; '
-        ."production_probe {$flagsUrl} || return \$?; "
+        ."PROBE_STAGE=public_flags; production_probe {$flagsUrl} || return \$?; "
         .'[ "$PROBE_STATUS" = "200" ] || return 1; '
-        ."production_probe {$personalityUrl} || return \$?; "
+        ."PROBE_STAGE=public_bigfive; production_probe {$personalityUrl} || return \$?; "
         .'[ "$PROBE_STATUS" = "200" ] '
-        ."&& printf '%s' \"\$PROBE_BODY\" | jq -e {$personalityContract} >/dev/null; }";
+        .'|| return 1; PROBE_STAGE=public_bigfive_contract; '
+        ."printf '%s' \"\$PROBE_BODY\" | jq -e {$personalityContract} >/dev/null; }";
 
-    return 'PRODUCTION_PUBLIC_PROBE_ATTEMPTS=3; PROBE_STATUS=; PROBE_BODY=; '
+    return 'PRODUCTION_PUBLIC_PROBE_ATTEMPTS=3; PROBE_STATUS=; PROBE_BODY=; PROBE_STAGE=not_started; '
         .$probeFunction.'; '.$verifyFunction.'; '
         .'attempt=1; while [ "$attempt" -le "$PRODUCTION_PUBLIC_PROBE_ATTEMPTS" ]; do '
         .'set +e; verify_public_evidence; probe_rc=$?; set -e; '
         .'if [ "$probe_rc" -eq 0 ]; then exit 0; fi; '
         .'if [ "$probe_rc" -ne 75 ]; then '
-        .'echo "Public DNS business evidence failed terminally on attempt ${attempt}" >&2; exit 1; fi; '
+        .'echo "Public DNS business evidence failed terminally on attempt ${attempt}: stage=${PROBE_STAGE} status=${PROBE_STATUS:-none}" >&2; exit 1; fi; '
         .'if [ "$attempt" -eq "$PRODUCTION_PUBLIC_PROBE_ATTEMPTS" ]; then '
-        .'echo "Public DNS business evidence failed after 3 attempts" >&2; exit 1; fi; '
+        .'echo "Public DNS business evidence failed after 3 attempts: stage=${PROBE_STAGE} status=${PROBE_STATUS:-none}" >&2; exit 1; fi; '
         .'case "$attempt" in 1) sleep 2 ;; 2) sleep 5 ;; esac; '
         .'attempt=$((attempt + 1)); done';
 }
