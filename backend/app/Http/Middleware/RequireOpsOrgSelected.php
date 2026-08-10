@@ -26,6 +26,7 @@ class RequireOpsOrgSelected
         'filament.ops.pages.health-checks',
         'filament.ops.pages.queue-monitor',
         'filament.ops.pages.global-search',
+        'filament.ops.pages.riasec-global-cms-apply',
     ];
 
     /**
