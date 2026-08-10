@@ -66,10 +66,9 @@ function boundedPublicDnsBusinessEvidenceCommand(string $host): string
         .'attempt=1; while [ "$attempt" -le "$PRODUCTION_PUBLIC_PROBE_ATTEMPTS" ]; do '
         .'set +e; verify_public_evidence; probe_rc=$?; set -e; '
         .'if [ "$probe_rc" -eq 0 ]; then exit 0; fi; '
-        .'if [ "$probe_rc" -ne 75 ]; then '
-        .'echo "Public DNS business evidence failed terminally on attempt ${attempt}: stage=${PROBE_STAGE} status=${PROBE_STATUS:-none}" >&2; exit 1; fi; '
         .'if [ "$attempt" -eq "$PRODUCTION_PUBLIC_PROBE_ATTEMPTS" ]; then '
-        .'echo "Public DNS business evidence failed after 3 attempts: stage=${PROBE_STAGE} status=${PROBE_STATUS:-none}" >&2; exit 1; fi; '
+        .'echo "Public DNS business evidence failed after 3 attempts: stage=${PROBE_STAGE} status=${PROBE_STATUS:-none} rc=${probe_rc}" >&2; exit 1; fi; '
+        .'echo "Public DNS business evidence retrying after attempt ${attempt}: stage=${PROBE_STAGE} status=${PROBE_STATUS:-none} rc=${probe_rc}" >&2; '
         .'case "$attempt" in 1) sleep 2 ;; 2) sleep 5 ;; esac; '
         .'attempt=$((attempt + 1)); done';
 }
