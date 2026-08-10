@@ -1,0 +1,286 @@
+name: MBTI INTP-A SEO Title Staging Draft
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_control_plane_sha:
+        description: Exact latest main SHA containing the experiment command and package
+        required: true
+        type: string
+      expected_active_revision:
+        description: Exact active staging application SHA; must equal the control-plane SHA
+        required: true
+        type: string
+      expected_package_sha256:
+        description: Exact SHA-256 of the one-record experiment package
+        required: true
+        type: string
+      operator_approval_phrase:
+        description: Exact staging-only inactive-draft authorization phrase
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: deploy-${{ github.repository }}-staging
+  cancel-in-progress: false
+
+jobs:
+  staging-draft:
+    name: Create and read back one inactive staging revision
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: staging
+    env:
+      DEPLOY_USER: ${{ secrets.STAGING_DEPLOY_USER }}
+      DEPLOY_HOST: ${{ secrets.STAGING_DEPLOY_HOST }}
+      DEPLOY_PORT: ${{ secrets.STAGING_DEPLOY_PORT }}
+      DEPLOY_PATH: ${{ secrets.STAGING_DEPLOY_PATH }}
+      HEALTHCHECK_URL: ${{ secrets.STAGING_HEALTHCHECK_URL }}
+      EXPECTED_CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+      EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+      EXPECTED_PACKAGE_SHA256: ${{ inputs.expected_package_sha256 }}
+      OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+
+    steps:
+      - name: Initialize failure-safe receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt_path="$RUNNER_TEMP/mbti-intp-a-seo-title-staging-draft-receipt.json"
+          printf 'RECEIPT_PATH=%s\n' "$receipt_path" >> "$GITHUB_ENV"
+          jq -n '{
+            schema_version: "personality.mbti-seo-title-staging-workflow-receipt.v1",
+            ok: false,
+            status: "workflow_incomplete",
+            revision_created_count: 0,
+            idempotent_count: 0,
+            live_projection_changes: 0,
+            public_api_unchanged: false,
+            production_write: false,
+            publication: false,
+            indexability_change: false,
+            discoverability_change: false,
+            deployment: false
+          }' > "$receipt_path"
+
+      - name: Checkout exact control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 1
+
+      - name: Verify exact main, package, approval, and successful staging deploy
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          package="backend/docs/seo/personality/experiments/zh-intp-a-seo-title-v1.json"
+          test "$GITHUB_REF" = refs/heads/main
+          [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          test "$EXPECTED_ACTIVE_REVISION" = "$EXPECTED_CONTROL_PLANE_SHA"
+          [[ "$EXPECTED_PACKAGE_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          printf '%s  %s\n' "$EXPECTED_PACKAGE_SHA256" "$package" | sha256sum -c -
+
+          expected_phrase="I authorize one inactive staging CMS revision for /zh/personality/intp-a package ${EXPECTED_PACKAGE_SHA256}; no publish, indexability, sitemap, llms, search, deploy, or production write."
+          test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
+
+          runs="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/deploy.yml/runs?branch=main&event=push&status=success&per_page=100")"
+          jq -e --arg sha "$EXPECTED_ACTIVE_REVISION" '
+            any(.workflow_runs[]; .head_sha == $sha and .conclusion == "success")
+          ' <<<"$runs" >/dev/null
+          echo "Exact main, package, authorization, and staging deploy receipt verified."
+
+      - name: Validate protected staging topology
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in DEPLOY_USER DEPLOY_HOST DEPLOY_PORT DEPLOY_PATH HEALTHCHECK_URL; do
+            test -n "${!name:-}"
+          done
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z0-9_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          test "$DEPLOY_PORT" -ge 1
+          test "$DEPLOY_PORT" -le 65535
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          [[ "$DEPLOY_PATH" != *".."* ]]
+          [[ "$HEALTHCHECK_URL" =~ ^https://[A-Za-z0-9.-]+/[^[:space:]]+$ ]]
+          echo "Protected staging topology validated without disclosing values."
+
+      - name: Set up SSH agent without key metadata output
+        shell: bash
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_PRIVATE_KEY"
+          eval "$(ssh-agent -s)" >/dev/null
+          printf 'SSH_AUTH_SOCK=%s\n' "$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
+          printf 'SSH_AGENT_PID=%s\n' "$SSH_AGENT_PID" >> "$GITHUB_ENV"
+          printf '%s\n' "$SSH_PRIVATE_KEY" | ssh-add - >/dev/null 2>&1
+          ssh-add -l >/dev/null 2>&1
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          install -d -m 0700 ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 0600 ~/.ssh/known_hosts
+
+      - name: Verify exact active staging revision
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh -p "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            "$DEPLOY_USER@$DEPLOY_HOST" \
+            "DEPLOY_PATH='$DEPLOY_PATH' EXPECTED_ACTIVE_REVISION='$EXPECTED_ACTIVE_REVISION' bash -s" <<'REMOTE'
+          set -euo pipefail
+          current="$(readlink -f "$DEPLOY_PATH/current")"
+          test -d "$current/backend"
+          test -f "$current/REVISION"
+          test "$(tr -d '\r\n' < "$current/REVISION")" = "$EXPECTED_ACTIVE_REVISION"
+          REMOTE
+          echo "Exact active staging revision verified."
+
+      - name: Capture staging public projection before draft
+        shell: bash
+        run: |
+          set -euo pipefail
+          api_origin="$(printf '%s\n' "$HEALTHCHECK_URL" | awk -F/ '{print $1"//"$3}')"
+          [[ "$api_origin" =~ ^https://[A-Za-z0-9.-]+$ ]]
+          curl -fsS --connect-timeout 5 --max-time 20 \
+            "${api_origin}/api/v0.5/personality/intp-a?locale=zh-CN&scale_code=MBTI" \
+            | jq -S -j -c '.mbti_public_projection_v1' > "$RUNNER_TEMP/public-before.json"
+          jq -e '.runtime_type_code == "INTP-A" and .seo.title != null' "$RUNNER_TEMP/public-before.json" >/dev/null
+          package="backend/docs/seo/personality/experiments/zh-intp-a-seo-title-v1.json"
+          expected_projection_sha="$(jq -r '.authority_baseline.public_projection_sha256' "$package")"
+          [[ "$expected_projection_sha" =~ ^[0-9a-f]{64}$ ]]
+          test "$(sha256sum "$RUNNER_TEMP/public-before.json" | awk '{print $1}')" = "$expected_projection_sha"
+
+      - name: Execute dry-run, create inactive draft, and read back
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh -p "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            "$DEPLOY_USER@$DEPLOY_HOST" \
+            "DEPLOY_PATH='$DEPLOY_PATH' EXPECTED_ACTIVE_REVISION='$EXPECTED_ACTIVE_REVISION' EXPECTED_PACKAGE_SHA256='$EXPECTED_PACKAGE_SHA256' bash -s" \
+            > "$RUNNER_TEMP/command-receipt.json" <<'REMOTE'
+          set -euo pipefail
+          current="$(readlink -f "$DEPLOY_PATH/current")"
+          test "$(tr -d '\r\n' < "$current/REVISION")" = "$EXPECTED_ACTIVE_REVISION"
+          cd "$current/backend"
+          package="docs/seo/personality/experiments/zh-intp-a-seo-title-v1.json"
+          approval='I authorize one inactive staging CMS revision for the zh-CN INTP-A seo_title experiment. No production, live SEO metadata, publish, indexability, sitemap, llms, search, or deploy write is authorized.'
+          dry_run="$(mktemp)"
+          trap 'rm -f "$dry_run"' EXIT
+
+          php artisan personality:mbti-intp-a-seo-title-experiment \
+            --package="$package" \
+            --confirm-package-sha256="$EXPECTED_PACKAGE_SHA256" \
+            --target-env=staging \
+            --operator-approved="$approval" \
+            --dry-run \
+            --json > "$dry_run"
+          jq -e '
+            .ok == true and .writes_committed == false and
+            .revision_created_count == 0 and .live_projection_changes == 0
+          ' "$dry_run" >/dev/null
+
+          php artisan personality:mbti-intp-a-seo-title-experiment \
+            --package="$package" \
+            --confirm-package-sha256="$EXPECTED_PACKAGE_SHA256" \
+            --target-env=staging \
+            --operator-approved="$approval" \
+            --write \
+            --draft-only \
+            --no-publish \
+            --no-indexability-change \
+            --no-sitemap \
+            --no-llms \
+            --no-search-release \
+            --json
+          REMOTE
+
+          jq -e --arg sha "$EXPECTED_PACKAGE_SHA256" '
+            .ok == true and .package_sha256 == $sha and
+            (.revision_created_count == 1 or .idempotent_count == 1) and
+            .live_projection_changes == 0 and
+            .negative_guarantees.production_write == false and
+            .negative_guarantees.live_seo_meta_write == false and
+            .negative_guarantees.publication == false and
+            .negative_guarantees.indexability_change == false and
+            .negative_guarantees.sitemap_llms_change == false and
+            .negative_guarantees.search_channel_change == false and
+            .negative_guarantees.deployment == false
+          ' "$RUNNER_TEMP/command-receipt.json" >/dev/null
+
+      - name: Verify staging public projection is unchanged
+        shell: bash
+        run: |
+          set -euo pipefail
+          api_origin="$(printf '%s\n' "$HEALTHCHECK_URL" | awk -F/ '{print $1"//"$3}')"
+          curl -fsS --connect-timeout 5 --max-time 20 \
+            "${api_origin}/api/v0.5/personality/intp-a?locale=zh-CN&scale_code=MBTI" \
+            | jq -S -j -c '.mbti_public_projection_v1' > "$RUNNER_TEMP/public-after.json"
+          cmp "$RUNNER_TEMP/public-before.json" "$RUNNER_TEMP/public-after.json"
+
+          command_receipt_sha="$(sha256sum "$RUNNER_TEMP/command-receipt.json" | awk '{print $1}')"
+          public_projection_sha="$(sha256sum "$RUNNER_TEMP/public-after.json" | awk '{print $1}')"
+          jq -n \
+            --arg control_sha "$EXPECTED_CONTROL_PLANE_SHA" \
+            --arg package_sha "$EXPECTED_PACKAGE_SHA256" \
+            --arg command_receipt_sha "$command_receipt_sha" \
+            --arg public_projection_sha "$public_projection_sha" \
+            --slurpfile command "$RUNNER_TEMP/command-receipt.json" \
+            '{
+              schema_version: "personality.mbti-seo-title-staging-workflow-receipt.v1",
+              ok: true,
+              status: "staging_inactive_draft_readback_pass",
+              control_plane_sha: $control_sha,
+              active_revision: $control_sha,
+              package_sha256: $package_sha,
+              command_receipt_sha256: $command_receipt_sha,
+              public_projection_sha256: $public_projection_sha,
+              target: $command[0].target,
+              revision_no: $command[0].revision_no,
+              revision_snapshot_sha256: $command[0].revision_snapshot_sha256,
+              revision_created_count: $command[0].revision_created_count,
+              idempotent_count: $command[0].idempotent_count,
+              live_projection_changes: 0,
+              public_api_unchanged: true,
+              production_write: false,
+              publication: false,
+              indexability_change: false,
+              discoverability_change: false,
+              deployment: false
+            }' > "$RECEIPT_PATH"
+
+      - name: Upload sanitized receipt
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: mbti-intp-a-seo-title-staging-draft-receipt
+          path: ${{ runner.temp }}/mbti-intp-a-seo-title-staging-draft-receipt.json
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Stop SSH agent
+        if: always()
+        shell: bash
+        run: |
+          set +e
+          if [ -n "${SSH_AGENT_PID:-}" ]; then
+            ssh-agent -k >/dev/null 2>&1
+          fi

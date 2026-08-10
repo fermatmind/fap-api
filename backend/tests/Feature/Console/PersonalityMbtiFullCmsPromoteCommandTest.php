@@ -182,6 +182,32 @@ final class PersonalityMbtiFullCmsPromoteCommandTest extends TestCase
         self::assertSame(0, PersonalityProfileSection::query()->count());
     }
 
+    public function test_dry_run_ignores_newer_namespaced_intp_a_seo_title_experiment_revision(): void
+    {
+        [$path] = $this->seedAndStage();
+        $variant = PersonalityProfileVariant::query()->where('runtime_type_code', 'INTP-A')->firstOrFail();
+        PersonalityProfileVariantRevision::query()->create([
+            'personality_profile_variant_id' => $variant->id,
+            'revision_no' => 2,
+            'snapshot_json' => [
+                'schema_version' => 'personality.mbti-seo-title-experiment.v1',
+                'status' => 'inactive_draft',
+                'experiment_id' => 'zh-intp-a-seo-title-20260810-v1',
+            ],
+            'note' => 'namespaced inactive SEO title experiment',
+            'created_at' => now(),
+        ]);
+
+        $exitCode = Artisan::call('personality:mbti-full-cms-promote', $this->promotionOptions($path, true));
+        $summary = $this->jsonOutput();
+
+        self::assertSame(0, $exitCode, (string) json_encode($summary, JSON_UNESCAPED_SLASHES));
+        self::assertTrue($summary['ok']);
+        self::assertSame('pass', $summary['status']);
+        self::assertSame(43, $summary['row_count']);
+        self::assertSame(0, PersonalityProfileVariantSeoMeta::query()->count());
+    }
+
     public function test_full_indexability_release_requires_all_exact_public_content_to_be_live(): void
     {
         [$path] = $this->seedAndStage();

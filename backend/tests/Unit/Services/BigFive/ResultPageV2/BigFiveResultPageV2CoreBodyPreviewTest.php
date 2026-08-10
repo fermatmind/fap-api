@@ -1296,6 +1296,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_the_intp_a_seo_title_experiment_writer(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/PersonalityMbtiIntpASeoTitleExperiment.php',
+            'backend/app/Services/Cms/MbtiIntpASeoTitleExperimentService.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_mbti_personality_variant_section_structure_files(): void
     {
         $changed = [
@@ -7417,6 +7431,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isMbtiIntpASeoTitleExperimentFile($file)) {
+                continue;
+            }
+
             if ($this->isMbtiPersonalityVariantSectionStructureFile($file)) {
                 continue;
             }
@@ -9657,6 +9675,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityRefreshMbtiVariantSeoMetadata.php',
             'backend/app/Services/Cms/MbtiPersonalityVariantSeoMetadataService.php',
+        ], true);
+    }
+
+    private function isMbtiIntpASeoTitleExperimentFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityMbtiIntpASeoTitleExperiment.php',
+            'backend/app/Services/Cms/MbtiIntpASeoTitleExperimentService.php',
         ], true);
     }
 

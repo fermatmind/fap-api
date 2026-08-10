@@ -97,6 +97,57 @@ final class PersonalityMbti64CmsInternalLinkPromoteCommandTest extends TestCase
         $this->assertSame(0, ReviewAttestation::query()->count());
     }
 
+    public function test_dry_run_ignores_newer_namespaced_seo_title_experiment_revision(): void
+    {
+        $fixture = $this->seedRevisionCohort();
+        $row = $fixture['rows'][0];
+        PersonalityProfileVariantRevision::query()->create([
+            'personality_profile_variant_id' => $row['target_id'],
+            'revision_no' => 2,
+            'snapshot_json' => [
+                'schema_version' => 'personality.mbti-seo-title-experiment.v1',
+                'status' => 'inactive_draft',
+                'experiment_id' => 'zh-intp-a-seo-title-20260810-v1',
+            ],
+            'note' => 'namespaced inactive SEO title experiment',
+            'created_at' => now(),
+        ]);
+
+        $exit = Artisan::call(
+            'personality:mbti64-cms-internal-link-promote',
+            array_merge(['--dry-run' => true], $fixture['options'])
+        );
+        $payload = $this->jsonOutput();
+
+        $this->assertSame(0, $exit, (string) json_encode($payload, JSON_UNESCAPED_SLASHES));
+        $this->assertTrue($payload['ok']);
+        $this->assertSame($fixture['revision_identity_sha256'], $payload['revision_identity_sha256']);
+        $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
+    }
+
+    public function test_dry_run_rejects_newer_foreign_namespace_revision(): void
+    {
+        $fixture = $this->seedRevisionCohort();
+        $row = $fixture['rows'][0];
+        PersonalityProfileVariantRevision::query()->create([
+            'personality_profile_variant_id' => $row['target_id'],
+            'revision_no' => 2,
+            'snapshot_json' => ['foreign_workflow_draft_v1' => ['status' => 'draft_only']],
+            'note' => 'newer foreign workflow draft',
+            'created_at' => now(),
+        ]);
+
+        $exit = Artisan::call(
+            'personality:mbti64-cms-internal-link-promote',
+            array_merge(['--dry-run' => true], $fixture['options'])
+        );
+        $payload = $this->jsonOutput();
+
+        $this->assertSame(1, $exit);
+        $this->assertFalse($payload['ok']);
+        $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
+    }
+
     public function test_review_binding_is_separate_exact_and_idempotent(): void
     {
         $reviewed = $this->bindReview();

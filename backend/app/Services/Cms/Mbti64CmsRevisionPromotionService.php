@@ -22,6 +22,10 @@ final class Mbti64CmsRevisionPromotionService
 
     private const AGENT_PROJECTION_SNAPSHOT_KEY = 'mbti64_agent_projection_draft_v1';
 
+    private const INTP_A_SEO_EXPERIMENT_SCHEMA_VERSION = 'personality.mbti-seo-title-experiment.v1';
+
+    private const INTP_A_SEO_EXPERIMENT_ID = 'zh-intp-a-seo-title-20260810-v1';
+
     private const AGENT_PROJECTION_ARTIFACT = 'MBTI64-PUBLIC-PROFILE-AGENT-EXPANSION-88-01';
 
     private const AGENT_PROJECTION_VERSION = 'mbti64.agent_expansion_88_recommendations.v1';
@@ -928,8 +932,12 @@ final class Mbti64CmsRevisionPromotionService
 
         foreach ($query->orderByDesc('revision_no')->get() as $revision) {
             $snapshot = is_array($revision->snapshot_json) ? $revision->snapshot_json : [];
+            if (is_array($snapshot[$snapshotKey] ?? null)) {
+                return (int) $revision->revision_no;
+            }
+
             if (is_array($snapshot[self::AGENT_PROJECTION_SNAPSHOT_KEY] ?? null)
-                && ! is_array($snapshot[$snapshotKey] ?? null)) {
+                || $this->isIntpASeoExperimentRevision($snapshot)) {
                 continue;
             }
 
@@ -937,6 +945,13 @@ final class Mbti64CmsRevisionPromotionService
         }
 
         return 0;
+    }
+
+    /** @param array<string,mixed> $snapshot */
+    private function isIntpASeoExperimentRevision(array $snapshot): bool
+    {
+        return ($snapshot['schema_version'] ?? null) === self::INTP_A_SEO_EXPERIMENT_SCHEMA_VERSION
+            && ($snapshot['experiment_id'] ?? null) === self::INTP_A_SEO_EXPERIMENT_ID;
     }
 
     /**

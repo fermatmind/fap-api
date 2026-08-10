@@ -20,6 +20,10 @@ use RuntimeException;
 /** @review-surface mbti_approval_batch */
 final class Mbti64CmsInternalLinkPromotionService
 {
+    private const INTP_A_SEO_EXPERIMENT_SCHEMA_VERSION = 'personality.mbti-seo-title-experiment.v1';
+
+    private const INTP_A_SEO_EXPERIMENT_ID = 'zh-intp-a-seo-title-20260810-v1';
+
     public const ARTIFACT = 'PER02-MBTI-EN64-REVISION-BOUND-INTERNAL-LINK-PROMOTION-V1';
 
     private const SNAPSHOT_KEY = 'mbti64_internal_link_graph_v1';
@@ -345,7 +349,11 @@ final class Mbti64CmsInternalLinkPromotionService
             if ($lock) {
                 $revisionQuery->lockForUpdate();
             }
-            $latest = $revisionQuery->first();
+            $latest = $revisionQuery->get()->first(function ($revision): bool {
+                $snapshot = is_array($revision->snapshot_json) ? $revision->snapshot_json : [];
+
+                return ! $this->isIntpASeoExperimentRevision($snapshot);
+            });
             $snapshot = $latest instanceof PersonalityProfileVariantRevision
                 && is_array($latest->snapshot_json)
                 ? $latest->snapshot_json
@@ -441,6 +449,13 @@ final class Mbti64CmsInternalLinkPromotionService
             'graph_sha256' => $graphSha,
             'cohort_sha256' => $cohortSha,
         ];
+    }
+
+    /** @param array<string,mixed> $snapshot */
+    private function isIntpASeoExperimentRevision(array $snapshot): bool
+    {
+        return ($snapshot['schema_version'] ?? null) === self::INTP_A_SEO_EXPERIMENT_SCHEMA_VERSION
+            && ($snapshot['experiment_id'] ?? null) === self::INTP_A_SEO_EXPERIMENT_ID;
     }
 
     /**

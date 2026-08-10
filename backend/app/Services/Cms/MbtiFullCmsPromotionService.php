@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\DB;
 
 final class MbtiFullCmsPromotionService
 {
+    private const INTP_A_SEO_EXPERIMENT_SCHEMA_VERSION = 'personality.mbti-seo-title-experiment.v1';
+
+    private const INTP_A_SEO_EXPERIMENT_ID = 'zh-intp-a-seo-title-20260810-v1';
+
     private const ARTIFACT = 'MBTI-CMS-APPROVAL-39-EXACT-43-RECORD-REPAIR-APPROVAL-PACKAGE';
 
     private const SOURCE_STATUS = 'approved_for_fail_closed_importer_preflight';
@@ -212,7 +216,7 @@ final class MbtiFullCmsPromotionService
         }
 
         $snapshotKey = $kind === 'profile' ? self::PROFILE_SNAPSHOT_KEY : self::AT_SNAPSHOT_KEY;
-        $revision = $this->latestRevision($target['model'], $target['id']);
+        $revision = $this->latestRevision($target['model'], $target['id'], $snapshotKey);
         $snapshot = $revision instanceof Model && is_array($revision->getAttribute('snapshot_json'))
             ? $revision->getAttribute('snapshot_json')
             : [];
@@ -320,16 +324,33 @@ final class MbtiFullCmsPromotionService
         return $profile instanceof PersonalityProfile ? $profile : null;
     }
 
-    private function latestRevision(string $model, int $targetId): PersonalityProfileRevision|PersonalityProfileVariantRevision|null
-    {
+    private function latestRevision(
+        string $model,
+        int $targetId,
+        string $snapshotKey,
+    ): PersonalityProfileRevision|PersonalityProfileVariantRevision|null {
         $query = $model === 'profile'
             ? PersonalityProfileRevision::query()->where('profile_id', $targetId)
             : PersonalityProfileVariantRevision::query()->where('personality_profile_variant_id', $targetId);
-        $revision = $query->orderByDesc('revision_no')->orderByDesc('id')->first();
+        foreach ($query->orderByDesc('revision_no')->orderByDesc('id')->get() as $revision) {
+            $snapshot = is_array($revision->snapshot_json) ? $revision->snapshot_json : [];
+            if ($this->isIntpASeoExperimentRevision($snapshot)) {
+                continue;
+            }
 
-        return $revision instanceof PersonalityProfileRevision || $revision instanceof PersonalityProfileVariantRevision
-            ? $revision
-            : null;
+            return $revision instanceof PersonalityProfileRevision || $revision instanceof PersonalityProfileVariantRevision
+                ? $revision
+                : null;
+        }
+
+        return null;
+    }
+
+    /** @param array<string,mixed> $snapshot */
+    private function isIntpASeoExperimentRevision(array $snapshot): bool
+    {
+        return ($snapshot['schema_version'] ?? null) === self::INTP_A_SEO_EXPERIMENT_SCHEMA_VERSION
+            && ($snapshot['experiment_id'] ?? null) === self::INTP_A_SEO_EXPERIMENT_ID;
     }
 
     /** @param array<string,mixed> $payload @return array<string,mixed> */
