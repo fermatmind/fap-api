@@ -104201,12 +104201,12 @@
     "base": "main",
     "branch": "codex/career-1046-truth-rescan-06",
     "title": "CAREER-1046-TRUTH-RESCAN-06: verify Engineering Publication and Production truth",
-    "status": "hold_production_evidence",
+    "status": "draft_hold_production_evidence",
     "depends_on": [
       "CAREER-COLD-CACHE-DISCOVERABILITY-GATE-02"
     ],
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3619",
     "checks": {
       "dependency": {
         "status": "passed",
@@ -104227,6 +104227,10 @@
       "latest_main_incident_closeout": {
         "status": "hold_public_readback_incomplete",
         "evidence": "Read-only incident_closeout run 31382787907 attempt 1 passed main/topology/C02/failed-deploy/authority checks, then public readback returned two curl(18) incomplete-transfer errors. The final receipt is HOLD_CONTROL_INCOMPLETE with automatic_retry_allowed=false; receipt SHA-256 958af6a18d45c4e4114ab9f106b832fb9bdd01175a4153200bd8812aafc05171; artifact digest sha256:c80e3b500dcd03fda7ed6b6a8912e947b48e4353a1bc115a0963953b4e1496dd; zero production writes."
+      },
+      "github_pr": {
+        "status": "draft_hold",
+        "evidence": "Draft PR #3619 opened with merge prohibited until complete pre/post PASS C03 receipts and finalized generated evidence exist."
       }
     },
     "lineage": {
@@ -104270,9 +104274,14 @@
         "at": "2026-08-10T11:21:24Z",
         "status": "hold_production_evidence",
         "note": "Run 31382701613 failed closed on old-closeout/current-main lineage before public inspection. A same-main read-only replacement closeout run 31382787907 then failed its public readback with curl(18) and emitted HOLD_CONTROL_INCOMPLETE with automatic_retry_allowed=false. Both controls report zero cache/database/publication/indexability/deploy/migration writes. No PR5 scan snapshot or generated verdict evidence was created; PR6 remains prohibited."
+      },
+      {
+        "at": "2026-08-10T11:24:54Z",
+        "status": "draft_hold_production_evidence",
+        "note": "Opened Draft PR #3619 with the validated read-only runner, tests, runbook, and exact HOLD lineage. Merge and PR6 remain prohibited pending a complete stable C03 receipt window and finalized evidence."
       }
     ],
-    "updated_at": "2026-08-10T11:21:24Z"
+    "updated_at": "2026-08-10T11:24:54Z"
   },
   "CAREER-1046-PUBLICATION-CONTROL-03": {
     "id": "CAREER-1046-PUBLICATION-CONTROL-03",
