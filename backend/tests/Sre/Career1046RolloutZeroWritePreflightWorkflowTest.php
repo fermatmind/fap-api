@@ -27,6 +27,7 @@ final class Career1046RolloutZeroWritePreflightWorkflowTest extends TestCase
             'secrets.PRODUCTION_DEPLOY_HOST',
             'secrets.PRODUCTION_DEPLOY_PATH',
             'secrets.SSH_PRIVATE_KEY',
+            'vars.PRODUCTION_HEALTHCHECK_URL',
             'StrictHostKeyChecking=yes',
             'backend/scripts/career/career_1046_rollout_preflight.sh',
             'EXPECTED_CONTROL_PLANE_SHA=$q_expected_control_plane_sha',
@@ -38,6 +39,8 @@ final class Career1046RolloutZeroWritePreflightWorkflowTest extends TestCase
         ] as $required) {
             $this->assertStringContainsString($required, $workflow);
         }
+
+        $this->assertStringNotContainsString('secrets.PRODUCTION_HEALTHCHECK_URL', $workflow);
     }
 
     public function test_runner_captures_current_authorities_and_has_no_write_path(): void

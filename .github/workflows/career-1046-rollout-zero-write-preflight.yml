@@ -94,7 +94,7 @@ jobs:
       DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
       RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
       DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
-      HEALTHCHECK_URL: ${{ secrets.PRODUCTION_HEALTHCHECK_URL }}
+      HEALTHCHECK_URL: ${{ vars.PRODUCTION_HEALTHCHECK_URL }}
       EXPECTED_CONTROL_PLANE_SHA: ${{ needs.eligibility.outputs.control_plane_sha }}
       EXPECTED_RELEASE_SHA: ${{ needs.eligibility.outputs.release_sha }}
       EXPECTED_RELEASE_NAME: ${{ needs.eligibility.outputs.release_name }}
