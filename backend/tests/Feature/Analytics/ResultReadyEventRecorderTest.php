@@ -78,6 +78,72 @@ final class ResultReadyEventRecorderTest extends TestCase
         $this->assertSame(1, DB::table('events')->where('event_code', 'result_ready')->where('attempt_id', $attemptId)->count());
     }
 
+    public function test_recorder_adds_only_an_exact_backend_resolved_public_article_id(): void
+    {
+        $attemptId = (string) Str::uuid();
+        $occurredAt = CarbonImmutable::parse('2026-08-10 08:30:00');
+        DB::table('articles')->insert([
+            'id' => 53,
+            'org_id' => 0,
+            'slug' => 'personality-types',
+            'locale' => 'en',
+            'title' => 'Personality types',
+            'content_md' => '# Personality types',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => false,
+            'published_at' => $occurredAt->subDay(),
+            'created_at' => $occurredAt->subDay(),
+            'updated_at' => $occurredAt->subDay(),
+        ]);
+        $this->insertAttempt($attemptId, 84, 'en', $occurredAt, $occurredAt->addMinute());
+        DB::table('attempts')->where('id', $attemptId)->update([
+            'answers_summary_json' => json_encode([
+                'meta' => [
+                    'source_page_type' => 'article_detail',
+                    'content_id' => '53',
+                    'source_slug' => 'personality-types',
+                    'landing_path' => '/en/articles/personality-types?utm_source=google',
+                ],
+            ], JSON_THROW_ON_ERROR),
+        ]);
+        $this->insertResult($attemptId, 84, $occurredAt->addMinutes(2));
+        $ctx = new OrgContext;
+        $ctx->set(84, null, 'member', 'internal-anon', OrgContext::KIND_TENANT);
+
+        app(ResultReadyEventRecorder::class)->record($ctx, $attemptId);
+
+        $event = DB::table('events')
+            ->where('event_code', 'result_ready')
+            ->where('attempt_id', $attemptId)
+            ->first();
+        $meta = json_decode((string) ($event->meta_json ?? '{}'), true, flags: JSON_THROW_ON_ERROR);
+        $this->assertSame('53', $meta['source_article_id'] ?? null);
+        $this->assertArrayNotHasKey('source_slug', $meta);
+        $this->assertArrayNotHasKey('landing_path', $meta);
+
+        $mismatchAttemptId = (string) Str::uuid();
+        $this->insertAttempt($mismatchAttemptId, 84, 'en', $occurredAt->addHour(), $occurredAt->addHour()->addMinute());
+        DB::table('attempts')->where('id', $mismatchAttemptId)->update([
+            'answers_summary_json' => json_encode([
+                'meta' => [
+                    'source_page_type' => 'article_detail',
+                    'content_id' => '53',
+                    'source_slug' => 'wrong-slug',
+                    'landing_path' => '/en/articles/personality-types',
+                ],
+            ], JSON_THROW_ON_ERROR),
+        ]);
+        $this->insertResult($mismatchAttemptId, 84, $occurredAt->addHour()->addMinutes(2));
+        app(ResultReadyEventRecorder::class)->record($ctx, $mismatchAttemptId);
+
+        $mismatchMeta = json_decode((string) DB::table('events')
+            ->where('event_code', 'result_ready')
+            ->where('attempt_id', $mismatchAttemptId)
+            ->value('meta_json'), true, flags: JSON_THROW_ON_ERROR);
+        $this->assertArrayNotHasKey('source_article_id', $mismatchMeta);
+    }
+
     public function test_rolled_back_result_cannot_leave_a_result_ready_event(): void
     {
         $attemptId = (string) Str::uuid();

@@ -20,6 +20,7 @@ final class SeoConversionDailyBuilder
         'article_to_test_click' => 'article_to_test_click_count',
         'start_test' => 'start_test_count',
         'complete_test' => 'complete_test_count',
+        'result_ready' => 'result_ready_count',
         'view_result' => 'view_result_count',
     ];
 
@@ -41,9 +42,14 @@ final class SeoConversionDailyBuilder
 
     private readonly AnalyticsTrafficExclusionPolicy $trafficExclusionPolicy;
 
-    public function __construct(?AnalyticsTrafficExclusionPolicy $trafficExclusionPolicy = null)
-    {
+    private readonly PublicArticleAttributionResolver $articleAttribution;
+
+    public function __construct(
+        ?AnalyticsTrafficExclusionPolicy $trafficExclusionPolicy = null,
+        ?PublicArticleAttributionResolver $articleAttribution = null,
+    ) {
         $this->trafficExclusionPolicy = $trafficExclusionPolicy ?? new AnalyticsTrafficExclusionPolicy;
+        $this->articleAttribution = $articleAttribution ?? new PublicArticleAttributionResolver;
     }
 
     /**
@@ -78,7 +84,9 @@ final class SeoConversionDailyBuilder
             }
 
             $seoConversion = is_array($meta['seo_conversion'] ?? null) ? $meta['seo_conversion'] : [];
-            $dimensions = $this->resolveDimensions($seoConversion, $event);
+            $dimensions = $eventCode === 'result_ready'
+                ? $this->resolveResultReadyDimensions($meta, $event)
+                : $this->resolveDimensions($seoConversion, $event);
             if ($dimensions === null) {
                 $skippedRows++;
 
@@ -150,12 +158,14 @@ final class SeoConversionDailyBuilder
                         'url',
                         'source_url',
                         'source_article',
+                        'source_article_id',
                         'target_test',
                         'referrer_host',
                         'landing_pv_count',
                         'article_to_test_click_count',
                         'start_test_count',
                         'complete_test_count',
+                        'result_ready_count',
                         'view_result_count',
                         'last_refreshed_at',
                         'updated_at',
@@ -189,7 +199,7 @@ final class SeoConversionDailyBuilder
         $query = DB::table('events')
             ->whereBetween('occurred_at', [$from, $to])
             ->whereRaw('lower(event_code) in ('.$placeholders.')', $eventCodes)
-            ->select(['id', 'org_id', 'event_code', 'anon_id', 'session_id', 'request_id', 'attempt_id', 'meta_json', 'occurred_at', 'locale']);
+            ->select(['id', 'org_id', 'event_code', 'anon_id', 'session_id', 'request_id', 'attempt_id', 'meta_json', 'occurred_at', 'locale', 'scale_code']);
 
         if ($orgIds !== []) {
             $query->whereIn('org_id', $orgIds);
@@ -223,6 +233,7 @@ final class SeoConversionDailyBuilder
             'source_url' => $sourceUrl,
             'source_url_hash' => $sourceUrl === null ? '' : sha1($sourceUrl),
             'source_article' => $this->normalizeDimension($seoConversion['source_article'] ?? null, 160),
+            'source_article_id' => null,
             'source_article_hash' => sha1($this->normalizeDimension($seoConversion['source_article'] ?? null, 160)),
             'target_test' => $targetTest,
             'target_test_hash' => $targetTest === null ? '' : sha1($targetTest),
@@ -232,6 +243,62 @@ final class SeoConversionDailyBuilder
             'referrer_host' => $referrerHost,
             'referrer_host_hash' => $referrerHost === '' ? '' : sha1($referrerHost),
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $meta
+     * @return array<string,mixed>|null
+     */
+    private function resolveResultReadyDimensions(array $meta, object $event): ?array
+    {
+        $articleId = $this->positiveInteger($meta['source_article_id'] ?? null);
+        $article = $articleId === null
+            ? $this->articleAttributionFromAttempt($event)
+            : $this->articleAttribution->byPublicArticleId($articleId);
+        if ($article === null) {
+            return null;
+        }
+
+        $canonicalPath = $article['canonical_path'];
+        $sourceArticle = $article['slug'];
+
+        return [
+            'org_id' => max(0, (int) ($event->org_id ?? 0)),
+            'url' => $canonicalPath,
+            'url_hash' => sha1($canonicalPath),
+            'lang' => $this->normalizeLang($article['locale']),
+            'page_type' => 'article',
+            'source_url' => $canonicalPath,
+            'source_url_hash' => sha1($canonicalPath),
+            'source_article' => $sourceArticle,
+            'source_article_id' => $article['article_id'],
+            'source_article_hash' => sha1($sourceArticle),
+            'target_test' => null,
+            'target_test_hash' => '',
+            'scale_id' => $this->normalizeDimension($event->scale_code ?? null, 64),
+            'form_id' => $this->normalizeDimension($meta['form_code'] ?? null, 64),
+            'session_id_hash' => '',
+            'referrer_host' => '',
+            'referrer_host_hash' => '',
+        ];
+    }
+
+    /**
+     * @return array{article_id:int,slug:string,locale:string,canonical_path:string}|null
+     */
+    private function articleAttributionFromAttempt(object $event): ?array
+    {
+        $attemptId = trim((string) ($event->attempt_id ?? ''));
+        if ($attemptId === '') {
+            return null;
+        }
+
+        $attempt = DB::table('attempts')
+            ->where('org_id', max(0, (int) ($event->org_id ?? 0)))
+            ->where('id', $attemptId)
+            ->first(['locale', 'answers_summary_json']);
+
+        return $attempt === null ? null : $this->articleAttribution->fromAttempt($attempt);
     }
 
     /**
@@ -266,6 +333,7 @@ final class SeoConversionDailyBuilder
                 'source_url' => $dimensions['source_url'],
                 'source_url_hash' => $dimensions['source_url_hash'],
                 'source_article' => $dimensions['source_article'],
+                'source_article_id' => $dimensions['source_article_id'],
                 'source_article_hash' => $dimensions['source_article_hash'],
                 'target_test' => $dimensions['target_test'],
                 'target_test_hash' => $dimensions['target_test_hash'],
@@ -278,11 +346,24 @@ final class SeoConversionDailyBuilder
                 'article_to_test_click_count' => 0,
                 'start_test_count' => 0,
                 'complete_test_count' => 0,
+                'result_ready_count' => 0,
                 'view_result_count' => 0,
             ];
         }
 
         $rows[$key][$metric] = max(0, (int) ($rows[$key][$metric] ?? 0) + 1);
+    }
+
+    private function positiveInteger(mixed $value): ?int
+    {
+        $candidate = trim((string) $value);
+        if (preg_match('/\A[1-9][0-9]*\z/', $candidate) !== 1) {
+            return null;
+        }
+
+        $integer = filter_var($candidate, FILTER_VALIDATE_INT);
+
+        return is_int($integer) && $integer > 0 ? $integer : null;
     }
 
     private function normalizePublicUrl(mixed $value, bool $allowEmpty = false): ?string

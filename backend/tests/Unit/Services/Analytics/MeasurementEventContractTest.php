@@ -20,6 +20,7 @@ final class MeasurementEventContractTest extends TestCase
             'organic_channel',
             'device_class',
             'result_state',
+            'source_article_id',
         ], MeasurementEventContract::ALLOWED_PROPERTIES);
         self::assertSame('test_start', MeasurementEventContract::canonicalize('start_test'));
         self::assertSame('test_complete', MeasurementEventContract::canonicalize('test_submit'));
@@ -37,6 +38,7 @@ final class MeasurementEventContractTest extends TestCase
         self::assertSame('active', $resultReady['implementation'] ?? null);
         self::assertSame('distinct_internal_attempt', $resultReady['deduplication'] ?? null);
         self::assertContains('result_state', $resultReady['allowed_properties'] ?? []);
+        self::assertContains('source_article_id', $resultReady['allowed_properties'] ?? []);
         self::assertContains('answers_or_score_detail', $resultReady['forbidden_data_classes'] ?? []);
         self::assertNotContains('attempt_id', $resultReady['allowed_properties'] ?? []);
         self::assertNotContains('url', $resultReady['allowed_properties'] ?? []);

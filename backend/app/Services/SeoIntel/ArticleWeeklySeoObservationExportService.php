@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Schema;
 
 final class ArticleWeeklySeoObservationExportService
 {
-    public const SCHEMA_VERSION = 'article_weekly_seo_observation_export.v1';
+    public const SCHEMA_VERSION = 'article_weekly_seo_observation_export.v2';
 
     public function __construct(
         private readonly ArticleReleaseCloseoutService $closeout,
@@ -57,7 +57,7 @@ final class ArticleWeeklySeoObservationExportService
                 ],
                 'observation_windows' => $this->observationWindows($article, $to),
                 'gsc' => $this->gscMetrics($canonicalUrl, $from, $to),
-                'site_conversion' => $this->siteConversionMetrics($canonicalPath, $from, $to),
+                'site_conversion' => $this->siteConversionMetrics((int) $article->id, $canonicalPath, $from, $to),
             ];
         }
 
@@ -233,7 +233,7 @@ final class ArticleWeeklySeoObservationExportService
     /**
      * @return array<string,mixed>
      */
-    private function siteConversionMetrics(string $canonicalPath, CarbonImmutable $from, CarbonImmutable $to): array
+    private function siteConversionMetrics(int $articleId, string $canonicalPath, CarbonImmutable $from, CarbonImmutable $to): array
     {
         if (! Schema::hasTable('analytics_seo_conversion_daily')) {
             return [
@@ -243,31 +243,44 @@ final class ArticleWeeklySeoObservationExportService
                 'article_to_test_click_count' => 0,
                 'start_test_count' => 0,
                 'complete_test_count' => 0,
+                'result_ready_count' => null,
                 'view_result_count' => 0,
             ];
         }
 
-        $row = DB::table('analytics_seo_conversion_daily')
+        $hasSourceArticleId = Schema::hasColumn('analytics_seo_conversion_daily', 'source_article_id');
+        $hasResultReadyCount = Schema::hasColumn('analytics_seo_conversion_daily', 'result_ready_count');
+        $query = DB::table('analytics_seo_conversion_daily')
             ->selectRaw('SUM(landing_pv_count) AS landing_pv_count')
             ->selectRaw('SUM(article_to_test_click_count) AS article_to_test_click_count')
             ->selectRaw('SUM(start_test_count) AS start_test_count')
             ->selectRaw('SUM(complete_test_count) AS complete_test_count')
             ->selectRaw('SUM(view_result_count) AS view_result_count')
             ->whereBetween('day', [$from->toDateString(), $to->toDateString()])
-            ->where(function ($query) use ($canonicalPath): void {
-                $query->where('url', $canonicalPath)
+            ->where(function ($query) use ($articleId, $canonicalPath, $hasSourceArticleId): void {
+                if ($hasSourceArticleId) {
+                    $query->where('source_article_id', $articleId)
+                        ->orWhere('url', $canonicalPath);
+                } else {
+                    $query->where('url', $canonicalPath);
+                }
+                $query
                     ->orWhere('source_article', $canonicalPath)
                     ->orWhere('source_url', $canonicalPath);
-            })
-            ->first();
+            });
+        if ($hasResultReadyCount) {
+            $query->selectRaw('SUM(result_ready_count) AS result_ready_count');
+        }
+        $row = $query->first();
 
         return [
             'table_available' => true,
-            'warnings' => [],
+            'warnings' => $hasResultReadyCount ? [] : ['result_ready_count_unavailable'],
             'landing_pv_count' => (int) ($row->landing_pv_count ?? 0),
             'article_to_test_click_count' => (int) ($row->article_to_test_click_count ?? 0),
             'start_test_count' => (int) ($row->start_test_count ?? 0),
             'complete_test_count' => (int) ($row->complete_test_count ?? 0),
+            'result_ready_count' => $hasResultReadyCount ? (int) ($row->result_ready_count ?? 0) : null,
             'view_result_count' => (int) ($row->view_result_count ?? 0),
         ];
     }
