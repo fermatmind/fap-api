@@ -11,8 +11,9 @@ final class MeasurementEventContract
     public const RESULT_READY_IMPLEMENTATION = 'active';
 
     /**
-     * Only low-cardinality, non-identifying values from this list may be copied
-     * into measurement event metadata or exposed by the aggregate read model.
+     * Only non-identifying values from this list may be copied into measurement
+     * event metadata or exposed by an aggregate read model. source_article_id is
+     * the sole bounded public-CMS identity exception and must be authority-resolved.
      *
      * @var list<string>
      */
@@ -25,6 +26,7 @@ final class MeasurementEventContract
         'organic_channel',
         'device_class',
         'result_state',
+        'source_article_id',
     ];
 
     /**

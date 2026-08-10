@@ -60,7 +60,7 @@ final class ArticleWeeklySeoObservationExportCommandTest extends TestCase
         $this->assertSame(0, $exitCode, Artisan::output());
         $this->assertTrue($payload['ok']);
         $this->assertTrue($payload['read_only']);
-        $this->assertSame('article_weekly_seo_observation_export.v1', $payload['schema_version']);
+        $this->assertSame('article_weekly_seo_observation_export.v2', $payload['schema_version']);
         $this->assertSame(1, data_get($payload, 'summary.article_count'));
         $this->assertSame(3, data_get($payload, 'summary.gsc_clicks'));
         $this->assertSame(200, data_get($payload, 'summary.gsc_impressions'));
@@ -73,6 +73,7 @@ final class ArticleWeeklySeoObservationExportCommandTest extends TestCase
         $this->assertSame(8.08, data_get($payload, 'articles.0.gsc.average_position'));
         $this->assertSame(9, data_get($payload, 'articles.0.site_conversion.landing_pv_count'));
         $this->assertSame(2, data_get($payload, 'articles.0.site_conversion.article_to_test_click_count'));
+        $this->assertSame(1, data_get($payload, 'articles.0.site_conversion.result_ready_count'));
         $this->assertFalse($payload['external_search_submission_attempted']);
         $this->assertFalse($payload['cms_content_write_attempted']);
         $this->assertFalse($payload['publish_attempted']);
@@ -148,7 +149,7 @@ final class ArticleWeeklySeoObservationExportCommandTest extends TestCase
             'translation_status' => Article::TRANSLATION_STATUS_SOURCE,
             'title' => '高考出分后专业太多怎么筛？位次+霍兰德排除清单',
             'excerpt' => '高考出分后，用位次、选科要求、霍兰德职业兴趣测试和排除清单缩小专业范围。',
-            'content_md' => '# 高考出分后专业太多怎么筛？'."\n\n![流程图](https://api.fermatmind.com/storage/media-library/body.png)\n\n正文。",
+            'content_md' => '# 高考出分后专业太多怎么筛？'."\n\n![流程图](https://api.fermatmind.com/storage/media-library/body.png)\n\n".str_repeat('这是用于发布关闭验收的中文正文内容。', 150),
             'content_html' => '<h1>高考出分后专业太多怎么筛？</h1><img src="https://api.fermatmind.com/storage/media-library/body.png">',
             'cover_image_url' => 'https://api.fermatmind.com/storage/media-library/cover.jpg',
             'cover_image_variants' => [
@@ -395,6 +396,7 @@ final class ArticleWeeklySeoObservationExportCommandTest extends TestCase
             'source_url' => $canonicalPath,
             'source_url_hash' => sha1($canonicalPath),
             'source_article' => $canonicalPath,
+            'source_article_id' => 53,
             'source_article_hash' => sha1($canonicalPath),
             'target_test' => '/zh/tests/holland-career-interest-test-riasec',
             'target_test_hash' => sha1('/zh/tests/holland-career-interest-test-riasec'),
@@ -407,6 +409,7 @@ final class ArticleWeeklySeoObservationExportCommandTest extends TestCase
             'article_to_test_click_count' => 2,
             'start_test_count' => 1,
             'complete_test_count' => 1,
+            'result_ready_count' => 1,
             'view_result_count' => 1,
             'created_at' => now(),
             'updated_at' => now(),

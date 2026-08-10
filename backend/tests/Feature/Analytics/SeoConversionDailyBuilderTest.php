@@ -10,11 +10,13 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
+use Tests\Concerns\SeedsFunnelAnalyticsScenario;
 use Tests\TestCase;
 
 final class SeoConversionDailyBuilderTest extends TestCase
 {
     use RefreshDatabase;
+    use SeedsFunnelAnalyticsScenario;
 
     public function test_refresh_aggregates_canonical_seo_conversion_events_by_safe_dimensions(): void
     {
@@ -90,6 +92,91 @@ final class SeoConversionDailyBuilderTest extends TestCase
         $this->assertNotNull($row);
         $this->assertSame(1, (int) $row->article_to_test_click_count);
         $this->assertSame(0, (int) $row->start_test_count);
+    }
+
+    public function test_refresh_aggregates_result_ready_by_backend_resolved_public_article_id(): void
+    {
+        $day = CarbonImmutable::parse('2026-08-10 11:00:00');
+        DB::table('articles')->insert([
+            'id' => 53,
+            'org_id' => 0,
+            'slug' => 'personality-types',
+            'locale' => 'en',
+            'title' => 'Personality types',
+            'content_md' => '# Personality types',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => false,
+            'published_at' => $day->subDay(),
+            'created_at' => $day->subDay(),
+            'updated_at' => $day->subDay(),
+        ]);
+        $this->insertResultReadyEvent($day, '53');
+
+        $result = app(SeoConversionDailyBuilder::class)->refresh($day, $day, [], false);
+
+        $this->assertSame(1, (int) ($result['upserted_rows'] ?? 0));
+        $this->assertSame(0, (int) ($result['skipped_rows'] ?? 0));
+        $row = DB::table('analytics_seo_conversion_daily')->first();
+        $this->assertNotNull($row);
+        $this->assertSame(53, (int) $row->source_article_id);
+        $this->assertSame('personality-types', (string) $row->source_article);
+        $this->assertSame('/en/articles/personality-types', (string) $row->url);
+        $this->assertSame(1, (int) $row->result_ready_count);
+        $this->assertSame(0, (int) $row->view_result_count);
+    }
+
+    public function test_refresh_rejects_unresolved_result_ready_article_identity(): void
+    {
+        $day = CarbonImmutable::parse('2026-08-10 11:30:00');
+        $this->insertResultReadyEvent($day, '999999');
+
+        $result = app(SeoConversionDailyBuilder::class)->refresh($day, $day, [], false);
+
+        $this->assertSame(0, (int) ($result['upserted_rows'] ?? 0));
+        $this->assertSame(1, (int) ($result['skipped_rows'] ?? 0));
+        $this->assertSame(0, DB::table('analytics_seo_conversion_daily')->count());
+    }
+
+    public function test_refresh_backfills_legacy_result_ready_from_locked_attempt_context(): void
+    {
+        $day = CarbonImmutable::parse('2026-08-09 11:00:00');
+        $attemptId = (string) Str::uuid();
+        DB::table('articles')->insert([
+            'id' => 53,
+            'org_id' => 0,
+            'slug' => 'personality-types',
+            'locale' => 'en',
+            'title' => 'Personality types',
+            'content_md' => '# Personality types',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => false,
+            'published_at' => $day->subDay(),
+            'created_at' => $day->subDay(),
+            'updated_at' => $day->subDay(),
+        ]);
+        $this->insertAttempt($attemptId, 84, 'en', $day->subMinutes(5), $day->subMinute());
+        DB::table('attempts')->where('id', $attemptId)->update([
+            'answers_summary_json' => json_encode([
+                'meta' => [
+                    'source_page_type' => 'article_detail',
+                    'content_id' => '53',
+                    'source_slug' => 'personality-types',
+                    'landing_path' => '/en/articles/personality-types?utm_source=google',
+                ],
+            ], JSON_THROW_ON_ERROR),
+        ]);
+        $this->insertResultReadyEvent($day, null, $attemptId, 84);
+
+        $result = app(SeoConversionDailyBuilder::class)->refresh($day, $day, [84], false);
+
+        $this->assertSame(1, (int) ($result['upserted_rows'] ?? 0));
+        $this->assertSame(0, (int) ($result['skipped_rows'] ?? 0));
+        $row = DB::table('analytics_seo_conversion_daily')->first();
+        $this->assertNotNull($row);
+        $this->assertSame(53, (int) $row->source_article_id);
+        $this->assertSame(1, (int) $row->result_ready_count);
     }
 
     public function test_refresh_excludes_smoke_and_codex_probe_seo_conversion_events(): void
@@ -226,6 +313,52 @@ final class SeoConversionDailyBuilderTest extends TestCase
             $row['scale_code_v2'] = (string) ($seoConversion['scale_id'] ?? '');
         }
 
+        if (Schema::hasColumn('events', 'scale_uid')) {
+            $row['scale_uid'] = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
+        }
+
+        DB::table('events')->insert($row);
+    }
+
+    private function insertResultReadyEvent(
+        CarbonImmutable $occurredAt,
+        ?string $sourceArticleId,
+        ?string $attemptId = null,
+        int $orgId = 0,
+    ): void {
+        $meta = [
+            'scale_code' => 'MBTI',
+            'form_code' => 'mbti_144',
+            'locale' => 'en',
+        ];
+        if ($sourceArticleId !== null) {
+            $meta['source_article_id'] = $sourceArticleId;
+        }
+
+        $row = [
+            'id' => (string) Str::uuid(),
+            'event_code' => 'result_ready',
+            'event_name' => 'result_ready',
+            'org_id' => $orgId,
+            'user_id' => null,
+            'anon_id' => null,
+            'session_id' => null,
+            'request_id' => null,
+            'attempt_id' => $attemptId ?? (string) Str::uuid(),
+            'meta_json' => json_encode($meta, JSON_THROW_ON_ERROR),
+            'occurred_at' => $occurredAt,
+            'share_id' => null,
+            'created_at' => $occurredAt,
+            'updated_at' => $occurredAt,
+            'scale_code' => 'MBTI',
+            'channel' => 'web',
+            'region' => 'US',
+            'locale' => 'en',
+        ];
+
+        if (Schema::hasColumn('events', 'scale_code_v2')) {
+            $row['scale_code_v2'] = 'MBTI';
+        }
         if (Schema::hasColumn('events', 'scale_uid')) {
             $row['scale_uid'] = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
         }

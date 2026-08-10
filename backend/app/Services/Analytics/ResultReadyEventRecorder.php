@@ -18,6 +18,7 @@ final class ResultReadyEventRecorder
     public function __construct(
         private readonly EventRecorder $events,
         private readonly MeasurementAttributionDimensions $dimensions,
+        private readonly PublicArticleAttributionResolver $articleAttribution,
     ) {}
 
     public function record(
@@ -69,6 +70,10 @@ final class ResultReadyEventRecorder
                     $this->dimensions->fromAttempt($attempt, 'ready'),
                     array_flip(self::META_PROPERTIES),
                 );
+                $articleAttribution = $this->articleAttribution->fromAttempt($attempt);
+                if ($articleAttribution !== null) {
+                    $safeDimensions['source_article_id'] = (string) $articleAttribution['article_id'];
+                }
                 $this->events->record(
                     FunnelEventTaxonomy::RESULT_READY,
                     null,
