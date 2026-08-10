@@ -1,0 +1,425 @@
+name: Career Runtime Authority Permission Repair
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_control_plane_sha:
+        description: Exact latest main SHA containing this repair control
+        required: true
+        type: string
+      expected_active_revision:
+        description: Exact active production application SHA that must remain active
+        required: true
+        type: string
+      preflight_run_id:
+        description: Exact successful permission preflight run id
+        required: true
+        type: string
+      preflight_run_attempt:
+        description: Exact successful permission preflight run attempt
+        required: true
+        type: string
+      expected_preflight_receipt_sha256:
+        description: Exact SHA256 of the downloaded preflight receipt
+        required: true
+        type: string
+      expected_preflight_artifact_digest:
+        description: Exact GitHub artifact digest in sha256 form
+        required: true
+        type: string
+      operator_approval_phrase:
+        description: Exact receipt-bound one-time metadata repair approval
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: deploy-${{ github.repository }}-production
+  cancel-in-progress: false
+
+jobs:
+  repair:
+    name: Repair and verify exact Career authority reader permissions
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 15
+    env:
+      CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+      EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+      PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
+      PREFLIGHT_RUN_ATTEMPT: ${{ inputs.preflight_run_attempt }}
+      EXPECTED_PREFLIGHT_RECEIPT_SHA256: ${{ inputs.expected_preflight_receipt_sha256 }}
+      EXPECTED_PREFLIGHT_ARTIFACT_DIGEST: ${{ inputs.expected_preflight_artifact_digest }}
+      OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+
+    steps:
+      - name: Initialize failure-safe no-retry receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          jq -n \
+            --arg control_plane_sha "$CONTROL_PLANE_SHA" \
+            --arg active_revision "$EXPECTED_ACTIVE_REVISION" \
+            --arg preflight_run_id "$PREFLIGHT_RUN_ID" \
+            --arg preflight_run_attempt "$PREFLIGHT_RUN_ATTEMPT" \
+            --arg workflow_run_id "$GITHUB_RUN_ID" \
+            --arg workflow_run_attempt "$GITHUB_RUN_ATTEMPT" \
+            '{
+              schema_version: "career.runtime_authority_permission_repair.v1",
+              status: "HOLD_APPLY_INCOMPLETE_NO_RETRY",
+              control_plane_sha: $control_plane_sha,
+              active_revision: $active_revision,
+              preflight_run_id: (
+                if ($preflight_run_id | test("^[1-9][0-9]*$"))
+                then ($preflight_run_id | tonumber)
+                else null
+                end
+              ),
+              preflight_run_attempt: (
+                if ($preflight_run_attempt | test("^[1-9][0-9]*$"))
+                then ($preflight_run_attempt | tonumber)
+                else null
+                end
+              ),
+              workflow_run_id: ($workflow_run_id | tonumber),
+              workflow_run_attempt: ($workflow_run_attempt | tonumber),
+              possible_metadata_write_state: "unknown",
+              content_write_count: 0,
+              database_write_count: 0,
+              cache_write_count: 0,
+              publication_write_count: 0,
+              discoverability_write_count: 0,
+              deploy_count: 0,
+              rollback_count: 0,
+              automatic_retry_allowed: false
+            }' > artifacts/career-runtime-authority-permission-repair.json
+
+      - name: Checkout exact control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Validate exact main and immutable preflight lineage
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          inspector="backend/scripts/deploy/career_runtime_authority_permission_control.sh"
+          [[ "$CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$PREFLIGHT_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+          [[ "$EXPECTED_PREFLIGHT_RECEIPT_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$EXPECTED_PREFLIGHT_ARTIFACT_DIGEST" =~ ^sha256:[0-9a-f]{64}$ ]]
+          test "$GITHUB_REF" = "refs/heads/main"
+          test "$PREFLIGHT_RUN_ID" != "$GITHUB_RUN_ID"
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$CONTROL_PLANE_SHA"
+          git cat-file -e "${EXPECTED_ACTIVE_REVISION}^{commit}"
+          git merge-base --is-ancestor "$EXPECTED_ACTIVE_REVISION" "$CONTROL_PLANE_SHA"
+          test -f "$inspector"
+          test ! -L "$inspector"
+          bash -n "$inspector"
+          inspector_sha256="$(sha256sum "$inspector" | awk '{print $1}')"
+
+          run_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}")"
+          jq -e \
+            --arg sha "$CONTROL_PLANE_SHA" \
+            --argjson attempt "$PREFLIGHT_RUN_ATTEMPT" \
+            '.name == "Career Runtime Authority Permission Preflight"
+             and .path == ".github/workflows/career-runtime-authority-permission-preflight.yml"
+             and .event == "workflow_dispatch"
+             and .head_branch == "main"
+             and .head_sha == $sha
+             and .status == "completed"
+             and .conclusion == "success"
+             and .run_attempt == $attempt' <<<"$run_json" >/dev/null
+
+          artifact_name="career-runtime-authority-permission-preflight-${PREFLIGHT_RUN_ID}-${PREFLIGHT_RUN_ATTEMPT}"
+          artifacts_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}/artifacts?per_page=100")"
+          jq -e \
+            --arg name "$artifact_name" \
+            --arg digest "$EXPECTED_PREFLIGHT_ARTIFACT_DIGEST" \
+            '[.artifacts[] | select(.name == $name)]
+             | length == 1
+             and .[0].expired == false
+             and .[0].digest == $digest' <<<"$artifacts_json" >/dev/null
+
+          evidence_dir="$(mktemp -d)"
+          gh run download "$PREFLIGHT_RUN_ID" --name "$artifact_name" --dir "$evidence_dir"
+          receipt="$evidence_dir/career-runtime-authority-permission-preflight.json"
+          test -f "$receipt"
+          test "$(sha256sum "$receipt" | awk '{print $1}')" = "$EXPECTED_PREFLIGHT_RECEIPT_SHA256"
+          jq -e \
+            --arg control "$CONTROL_PLANE_SHA" \
+            --arg active "$EXPECTED_ACTIVE_REVISION" \
+            --arg inspector "$inspector_sha256" \
+            --argjson run_id "$PREFLIGHT_RUN_ID" \
+            --argjson attempt "$PREFLIGHT_RUN_ATTEMPT" \
+            '.schema_version == "career.runtime_authority_permission_preflight.v1"
+             and .status == "PASS_PERMISSION_REPAIR_REQUIRED"
+             and .control_plane_sha == $control
+             and .active_revision == $active
+             and .inspector_sha256 == $inspector
+             and .workflow_run_id == $run_id
+             and .workflow_run_attempt == $attempt
+             and (.projection_sha256 | test("^[0-9a-f]{64}$"))
+             and (.ledger_sha256 | test("^[0-9a-f]{64}$"))
+             and (.target_set_sha256 | test("^[0-9a-f]{64}$"))
+             and (.snapshot_sha256 | test("^[0-9a-f]{64}$"))
+             and .projection_unique_slug_count > 0
+             and .projection_locale_row_count == (.projection_unique_slug_count * 2)
+             and .ledger_member_count > 0
+             and .repair_target_count >= 1
+             and .repair_target_count <= 4
+             and (.runtime_readable == true or .runtime_readable == false)
+             and .active_revision_unchanged == true
+             and .deploy_lock_absent == true
+             and .deploy_process_absent == true
+             and .remote_write_count == 0
+             and .metadata_write_count == 0
+             and .content_write_count == 0
+             and .database_write_count == 0
+             and .cache_write_count == 0
+             and .publication_write_count == 0
+             and .discoverability_write_count == 0
+             and .deploy_count == 0
+             and .rollback_count == 0' "$receipt" >/dev/null
+
+          later_runs="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/career-runtime-authority-permission-repair.yml/runs?event=workflow_dispatch&per_page=100")"
+          jq -e \
+            --argjson preflight "$PREFLIGHT_RUN_ID" \
+            --argjson current "$GITHUB_RUN_ID" \
+            '[.workflow_runs[] | select(.id > $preflight and .id < $current)] | length == 0' \
+            <<<"$later_runs" >/dev/null
+
+          projection_sha256="$(jq -r '.projection_sha256' "$receipt")"
+          ledger_sha256="$(jq -r '.ledger_sha256' "$receipt")"
+          target_set_sha256="$(jq -r '.target_set_sha256' "$receipt")"
+          snapshot_sha256="$(jq -r '.snapshot_sha256' "$receipt")"
+          repair_target_count="$(jq -r '.repair_target_count' "$receipt")"
+          expected_phrase="I explicitly approve one metadata-only Career runtime authority permission repair on production for control ${CONTROL_PLANE_SHA}, active revision ${EXPECTED_ACTIVE_REVISION}, preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT}, receipt SHA256 ${EXPECTED_PREFLIGHT_RECEIPT_SHA256}, artifact digest ${EXPECTED_PREFLIGHT_ARTIFACT_DIGEST}, target set ${target_set_sha256}, snapshot ${snapshot_sha256}, projection ${projection_sha256}, ledger ${ledger_sha256}, repair targets ${repair_target_count}; chown/chmod only on the exact four receipt-bound nodes, zero content, database, cache, publication, discoverability, deploy, or rollback operation."
+          test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
+
+          {
+            echo "INSPECTOR_SHA256=$inspector_sha256"
+            echo "PROJECTION_SHA256=$projection_sha256"
+            echo "LEDGER_SHA256=$ledger_sha256"
+            echo "TARGET_SET_SHA256=$target_set_sha256"
+            echo "PREFLIGHT_SNAPSHOT_SHA256=$snapshot_sha256"
+            echo "REPAIR_TARGET_COUNT=$repair_target_count"
+            echo "PROJECTION_UNIQUE_SLUG_COUNT=$(jq -r '.projection_unique_slug_count' "$receipt")"
+            echo "PROJECTION_LOCALE_ROW_COUNT=$(jq -r '.projection_locale_row_count' "$receipt")"
+            echo "LEDGER_MEMBER_COUNT=$(jq -r '.ledger_member_count' "$receipt")"
+          } >> "$GITHUB_ENV"
+
+      - name: Validate protected production topology
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST RETIRED_DEPLOY_HOST DEPLOY_PATH; do
+            test -n "${!name:-}"
+          done
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          test "$DEPLOY_PORT" -ge 1
+          test "$DEPLOY_PORT" -le 65535
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$RETIRED_DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          [[ "$DEPLOY_PATH" != *"/../"* ]]
+          echo "Protected production topology validated without disclosing values."
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Mark metadata operation dispatched and prohibit blind retry
+        shell: bash
+        run: |
+          set -euo pipefail
+          jq \
+            '.status = "HOLD_APPLY_DISPATCHED_NO_VERIFIED_READBACK"
+             | .possible_metadata_write_state = "unknown"
+             | .automatic_retry_allowed = false' \
+            artifacts/career-runtime-authority-permission-repair.json \
+            > artifacts/career-runtime-authority-permission-repair.tmp
+          mv artifacts/career-runtime-authority-permission-repair.tmp \
+            artifacts/career-runtime-authority-permission-repair.json
+
+      - name: Apply and verify exact metadata-only repair
+        shell: bash
+        run: |
+          set -euo pipefail
+          inspector="backend/scripts/deploy/career_runtime_authority_permission_control.sh"
+          printf -v q_deploy_path '%q' "$DEPLOY_PATH"
+          printf -v q_deploy_user '%q' "$DEPLOY_USER"
+          printf -v q_active_revision '%q' "$EXPECTED_ACTIVE_REVISION"
+          printf -v q_target_set '%q' "$TARGET_SET_SHA256"
+          printf -v q_snapshot '%q' "$PREFLIGHT_SNAPSHOT_SHA256"
+          printf -v q_projection '%q' "$PROJECTION_SHA256"
+          printf -v q_ledger '%q' "$LEDGER_SHA256"
+          printf -v q_repair_count '%q' "$REPAIR_TARGET_COUNT"
+          printf -v q_root '%q' "$DEPLOY_PATH/shared/backend/storage/app/private"
+
+          result="$({
+            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+              -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+              "DEPLOY_PATH=$q_deploy_path EXPECTED_ACTIVE_REVISION=$q_active_revision CAREER_ROOT=$q_root DEPLOY_ACCOUNT=$q_deploy_user TARGET_SET=$q_target_set SNAPSHOT=$q_snapshot PROJECTION_SHA=$q_projection LEDGER_SHA=$q_ledger REPAIR_COUNT=$q_repair_count sudo -n env DEPLOY_PATH=$q_deploy_path EXPECTED_ACTIVE_REVISION=$q_active_revision CAREER_AUTHORITY_PERMISSION_MODE=apply CAREER_AUTHORITY_PERMISSION_ROOT=$q_root CAREER_AUTHORITY_PERMISSION_OWNER=$q_deploy_user CAREER_AUTHORITY_PERMISSION_GROUP=www-data CAREER_AUTHORITY_PERMISSION_RUNTIME_USER=www-data CAREER_AUTHORITY_PERMISSION_APPLY_CONFIRMATION=true CAREER_AUTHORITY_PERMISSION_EXPECTED_TARGET_SET_SHA256=$q_target_set CAREER_AUTHORITY_PERMISSION_EXPECTED_SNAPSHOT_SHA256=$q_snapshot CAREER_AUTHORITY_PERMISSION_EXPECTED_PROJECTION_SHA256=$q_projection CAREER_AUTHORITY_PERMISSION_EXPECTED_LEDGER_SHA256=$q_ledger CAREER_AUTHORITY_PERMISSION_EXPECTED_REPAIR_TARGET_COUNT=$q_repair_count bash -s" \
+              < "$inspector"
+          })"
+
+          jq -e \
+            --arg projection "$PROJECTION_SHA256" \
+            --arg ledger "$LEDGER_SHA256" \
+            --arg target_set "$TARGET_SET_SHA256" \
+            --argjson writes "$REPAIR_TARGET_COUNT" \
+            '.schema_version == "career.runtime_authority_permission_control.v1"
+             and .status == "PASS_PERMISSION_REPAIR_VERIFIED"
+             and .projection_sha256 == $projection
+             and .ledger_sha256 == $ledger
+             and .target_set_sha256 == $target_set
+             and (.snapshot_sha256 | test("^[0-9a-f]{64}$"))
+             and .repair_target_count == 0
+             and .runtime_readable == true
+             and .metadata_write_count == $writes
+             and .bytes_unchanged == true
+             and .content_write_count == 0
+             and .database_write_count == 0
+             and .cache_write_count == 0
+             and .publication_write_count == 0
+             and .discoverability_write_count == 0' <<<"$result" >/dev/null
+          printf '%s' "$result" > "$RUNNER_TEMP/authority-permission-apply.json"
+          echo "POST_SNAPSHOT_SHA256=$(jq -r '.snapshot_sha256' "$RUNNER_TEMP/authority-permission-apply.json")" >> "$GITHUB_ENV"
+
+          state="$({
+            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+              -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+              "DEPLOY_PATH=$q_deploy_path EXPECTED_ACTIVE_REVISION=$q_active_revision bash -s" <<'REMOTE'
+          set -euo pipefail
+          current_release="$(readlink -f "$DEPLOY_PATH/current")"
+          test -f "$current_release/REVISION"
+          test "$(tr -d '\r\n' < "$current_release/REVISION")" = "$EXPECTED_ACTIVE_REVISION"
+          test ! -e "$DEPLOY_PATH/.dep/deploy.lock"
+          process_count="$(ps -eo comm=,args= | awk '$1 == "php" && ($0 ~ /dep(\.phar)? .* production/ || $0 ~ /artisan migrate/) {n++} END {print n+0}')"
+          test "$process_count" -eq 0
+          printf 'active_revision_unchanged=true\n'
+          printf 'deploy_lock_absent=true\n'
+          printf 'deploy_process_absent=true\n'
+          REMOTE
+          })"
+          test "$state" = $'active_revision_unchanged=true\ndeploy_lock_absent=true\ndeploy_process_absent=true'
+
+      - name: Write verified metadata-only repair receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          jq -n \
+            --arg control_plane_sha "$CONTROL_PLANE_SHA" \
+            --arg active_revision "$EXPECTED_ACTIVE_REVISION" \
+            --arg preflight_run_id "$PREFLIGHT_RUN_ID" \
+            --arg preflight_run_attempt "$PREFLIGHT_RUN_ATTEMPT" \
+            --arg preflight_receipt_sha256 "$EXPECTED_PREFLIGHT_RECEIPT_SHA256" \
+            --arg preflight_artifact_digest "$EXPECTED_PREFLIGHT_ARTIFACT_DIGEST" \
+            --arg inspector_sha256 "$INSPECTOR_SHA256" \
+            --arg projection_sha256 "$PROJECTION_SHA256" \
+            --arg ledger_sha256 "$LEDGER_SHA256" \
+            --arg target_set_sha256 "$TARGET_SET_SHA256" \
+            --arg preflight_snapshot_sha256 "$PREFLIGHT_SNAPSHOT_SHA256" \
+            --arg post_snapshot_sha256 "$POST_SNAPSHOT_SHA256" \
+            --arg workflow_run_id "$GITHUB_RUN_ID" \
+            --arg workflow_run_attempt "$GITHUB_RUN_ATTEMPT" \
+            --argjson projection_unique_slug_count "$PROJECTION_UNIQUE_SLUG_COUNT" \
+            --argjson projection_locale_row_count "$PROJECTION_LOCALE_ROW_COUNT" \
+            --argjson ledger_member_count "$LEDGER_MEMBER_COUNT" \
+            --argjson metadata_write_count "$REPAIR_TARGET_COUNT" \
+            '{
+              schema_version: "career.runtime_authority_permission_repair.v1",
+              status: "PASS_PERMISSION_REPAIR_VERIFIED",
+              control_plane_sha: $control_plane_sha,
+              active_revision: $active_revision,
+              preflight_run_id: ($preflight_run_id | tonumber),
+              preflight_run_attempt: ($preflight_run_attempt | tonumber),
+              preflight_receipt_sha256: $preflight_receipt_sha256,
+              preflight_artifact_digest: $preflight_artifact_digest,
+              inspector_sha256: $inspector_sha256,
+              projection_sha256: $projection_sha256,
+              ledger_sha256: $ledger_sha256,
+              target_set_sha256: $target_set_sha256,
+              preflight_snapshot_sha256: $preflight_snapshot_sha256,
+              post_snapshot_sha256: $post_snapshot_sha256,
+              workflow_run_id: ($workflow_run_id | tonumber),
+              workflow_run_attempt: ($workflow_run_attempt | tonumber),
+              projection_unique_slug_count: $projection_unique_slug_count,
+              projection_locale_row_count: $projection_locale_row_count,
+              ledger_member_count: $ledger_member_count,
+              metadata_write_count: $metadata_write_count,
+              runtime_readable: true,
+              bytes_unchanged: true,
+              active_revision_unchanged: true,
+              deploy_lock_absent: true,
+              deploy_process_absent: true,
+              possible_metadata_write_state: "verified_complete",
+              content_write_count: 0,
+              database_write_count: 0,
+              cache_write_count: 0,
+              publication_write_count: 0,
+              discoverability_write_count: 0,
+              deploy_count: 0,
+              rollback_count: 0,
+              automatic_retry_allowed: false
+            }' > artifacts/career-runtime-authority-permission-repair.json
+
+      - name: Publish safe repair summary
+        if: success()
+        shell: bash
+        run: |
+          {
+            echo "## Career runtime authority permission repair"
+            echo
+            echo "- status: PASS_PERMISSION_REPAIR_VERIFIED"
+            echo "- projection_unique_slugs: $PROJECTION_UNIQUE_SLUG_COUNT"
+            echo "- projection_locale_rows: $PROJECTION_LOCALE_ROW_COUNT"
+            echo "- ledger_members: $LEDGER_MEMBER_COUNT"
+            echo "- metadata_targets_changed: $REPAIR_TARGET_COUNT"
+            echo "- runtime_readable: true"
+            echo "- content_DB_cache_publication_discoverability_writes: 0"
+            echo "- deploy_or_rollback: 0"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload bounded repair receipt
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: career-runtime-authority-permission-repair-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/career-runtime-authority-permission-repair.json
+          if-no-files-found: error
+          retention-days: 30
