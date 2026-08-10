@@ -257,6 +257,32 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $this->assertSame(8, $payload['promoted_count']);
     }
 
+    public function test_foreign_namespace_revision_still_blocks_content_revision(): void
+    {
+        $targets = $this->seedTargets();
+        $packagePath = $this->writePackage($this->validPackage());
+        $this->createDraftRevisions($packagePath);
+        PersonalityProfileVariantRevision::query()->create([
+            'personality_profile_variant_id' => (int) $targets['en|INTJ-A']->id,
+            'revision_no' => 2,
+            'snapshot_json' => ['foreign_workflow_draft_v1' => ['status' => 'draft_only']],
+            'note' => 'newer foreign workflow draft',
+            'created_by_admin_user_id' => null,
+            'created_at' => now(),
+        ]);
+
+        $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', $this->promoteWriteOptions($packagePath));
+        $payload = $this->jsonOutput();
+
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('revision_not_latest_for_target', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertSame(0, PersonalityProfileVariantSeoMeta::query()->count());
+    }
+
     public function test_forbidden_private_route_pattern_is_rejected_before_writes(): void
     {
         $this->seedTargets();

@@ -158,7 +158,7 @@ final class PersonalityMbtiFullCmsPromoteCommandTest extends TestCase
         self::assertNotSame($firstToken, $cache->versionToken('INTJ-A', 'zh-CN', 0, 'MBTI'));
     }
 
-    public function test_a_newer_unapproved_cms_40_revision_fails_closed_without_partial_live_writes(): void
+    public function test_a_newer_unapproved_revision_fails_closed_without_partial_live_writes(): void
     {
         [$path] = $this->seedAndStage();
         $plan = $this->plan($path);
@@ -166,8 +166,8 @@ final class PersonalityMbtiFullCmsPromoteCommandTest extends TestCase
         PersonalityProfileVariantRevision::query()->create([
             'personality_profile_variant_id' => $variant->id,
             'revision_no' => 2,
-            'snapshot_json' => ['mbti_cms_import_40_profile_draft_v1' => ['visibility' => 'draft_only']],
-            'note' => 'newer invalid CMS-40 draft',
+            'snapshot_json' => ['unrelated_newer_revision' => ['status' => 'draft']],
+            'note' => 'newer unrelated draft',
             'created_at' => now(),
         ]);
 
