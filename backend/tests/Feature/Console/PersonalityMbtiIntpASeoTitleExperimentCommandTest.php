@@ -155,6 +155,38 @@ final class PersonalityMbtiIntpASeoTitleExperimentCommandTest extends TestCase
         $this->assertSame(1, PersonalityProfileVariantRevision::query()->count());
     }
 
+    public function test_write_rejects_invalid_receipt_destination_before_database_commit(): void
+    {
+        $this->createAuthority();
+        $outputDirectory = sys_get_temp_dir().'/fm-intp-a-seo-title-receipt-dir-'.Str::random(12);
+        File::ensureDirectoryExists($outputDirectory);
+        $this->beforeApplicationDestroyed(static fn () => File::deleteDirectory($outputDirectory));
+
+        $exitCode = Artisan::call('personality:mbti-intp-a-seo-title-experiment', [
+            '--package' => base_path(self::PACKAGE_PATH),
+            '--confirm-package-sha256' => hash_file('sha256', base_path(self::PACKAGE_PATH)),
+            '--target-env' => 'staging',
+            '--operator-approved' => self::APPROVAL,
+            '--allow-testing' => true,
+            '--write' => true,
+            '--draft-only' => true,
+            '--no-publish' => true,
+            '--no-indexability-change' => true,
+            '--no-sitemap' => true,
+            '--no-llms' => true,
+            '--no-search-release' => true,
+            '--json' => true,
+            '--output' => $outputDirectory,
+        ]);
+        $receipt = json_decode(Artisan::output(), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertIsArray($receipt);
+        $this->assertFalse($receipt['ok']);
+        $this->assertSame('runtime_error', $receipt['errors'][0]['code']);
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
     /**
      * @param  array<string, mixed>  $options
      * @return array{int, array<string, mixed>}

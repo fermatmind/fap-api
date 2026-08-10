@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\File;
 use RuntimeException;
 use Throwable;
 
+/** @review-surface mbti_approval_batch */
 final class PersonalityMbtiIntpASeoTitleExperiment extends Command
 {
     private const CONFIRMATION_PHRASE = 'I authorize one inactive staging CMS revision for the zh-CN INTP-A seo_title experiment. No production, live SEO metadata, publish, indexability, sitemap, llms, search, or deploy write is authorized.';
@@ -44,7 +45,10 @@ final class PersonalityMbtiIntpASeoTitleExperiment extends Command
 
     public function handle(MbtiIntpASeoTitleExperimentService $service): int
     {
+        $outputPath = null;
+
         try {
+            $outputPath = $this->prepareOutputPath();
             $summary = $this->guardedRun($service);
         } catch (RuntimeException $exception) {
             $summary = $this->failureSummary('runtime_error', $exception->getMessage());
@@ -55,7 +59,16 @@ final class PersonalityMbtiIntpASeoTitleExperiment extends Command
             );
         }
 
-        $this->writeOutput($summary);
+        if ($outputPath !== null) {
+            try {
+                $this->writeOutput($summary, $outputPath);
+            } catch (Throwable) {
+                $summary = $this->failureSummary(
+                    'receipt_write_error',
+                    'Unable to write the preflighted receipt destination; inspect protected runtime logs.',
+                );
+            }
+        }
         $this->emitSummary($summary);
 
         return ($summary['ok'] ?? false) === true ? self::SUCCESS : self::FAILURE;
@@ -143,19 +156,34 @@ final class PersonalityMbtiIntpASeoTitleExperiment extends Command
         return $resolved;
     }
 
-    /**
-     * @param  array<string, mixed>  $summary
-     */
-    private function writeOutput(array $summary): void
+    private function prepareOutputPath(): ?string
     {
         $path = trim((string) $this->option('output'));
         if ($path === '') {
-            return;
+            return null;
         }
 
         $resolved = str_starts_with($path, '/') ? $path : base_path($path);
+        if (File::isDirectory($resolved)) {
+            throw new RuntimeException('--output must name a writable file, not a directory.');
+        }
+
         File::ensureDirectoryExists(dirname($resolved));
-        File::put($resolved, $this->encoded($summary).PHP_EOL);
+        if (File::put($resolved, '') === false || ! File::isFile($resolved) || ! is_writable($resolved)) {
+            throw new RuntimeException('--output could not be prepared as a writable receipt file.');
+        }
+
+        return $resolved;
+    }
+
+    /**
+     * @param  array<string, mixed>  $summary
+     */
+    private function writeOutput(array $summary, string $resolved): void
+    {
+        if (File::put($resolved, $this->encoded($summary).PHP_EOL, true) === false) {
+            throw new RuntimeException('Unable to write the sanitized receipt.');
+        }
     }
 
     /**
