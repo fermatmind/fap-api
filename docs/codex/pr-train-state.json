@@ -104002,7 +104002,7 @@
       "PUBLIC-TOPIC-GRAPH-AUDIT-CLOSEOUT-01"
     ],
     "status": "github_checks_pending",
-    "commit_sha": "98c573c06b1b5a8297ecd7e1b266867b0db6da2c",
+    "commit_sha": "60c9643ad8afc83bdca5fbecd7ab97be045f71e0",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3594",
     "checks": {
       "dependency": {
@@ -104020,6 +104020,10 @@
       "review_governance": {
         "status": "passed",
         "evidence": "ReviewPolicyRegistryTest passed 11 tests / 361 assertions: public_topic_edge is registered as a private-only R1 CMS review surface, the generated registry matches, every new review marker is annotated, and public reviewer identity exposure remains zero."
+      },
+      "openapi_contract": {
+        "status": "passed",
+        "evidence": "The generated snapshot contains the named GET /api/v0.5/public-topic-edges route; export_openapi --check passes and OpenApiDiffTest passes 2 tests / 6 assertions."
       },
       "route_and_style": {
         "status": "passed",
@@ -104087,6 +104091,11 @@
         "at": "2026-08-10T15:05:00+08:00",
         "status": "github_checks_repairing",
         "note": "Generated the same-scope OpenAPI snapshot, then export_openapi --check and OpenApiDiffTest passed 2 tests / 6 assertions. The manifest scope is expanded only by that generated contract file; fresh required checks remain mandatory."
+      },
+      {
+        "at": "2026-08-10T15:09:00+08:00",
+        "status": "github_checks_repairing",
+        "note": "origin/main advanced through merged Measurement PR #3593 while CI ran. The three scoped commits rebased cleanly onto exact main b463aaf0378e03eb138c6299afe3662725f14575; post-rebase API, review-governance, and OpenAPI tests pass 21 tests / 420 assertions, scoped Pint and route inventory pass, and exact scope remains fifteen files."
       }
     ]
   },
