@@ -104143,6 +104143,11 @@
         "at": "2026-08-10T08:01:30Z",
         "status": "local_checks_passed_ready_to_push",
         "note": "The repaired migration passed 3 safety tests / 2,103 assertions; the Authority/G03/OpenAPI suite passed 25 tests / 438 assertions; the classifier isolation test passed; route, Pint, Composer strict validation/audit, OpenAPI, fixture hashes, deterministic parsing, disposable SQLite up/rollback-command/re-up, and the single guarded full ci_verify_mbti run all passed. No production migration, CMS import/write, activation, publication, deployment, frontend, sitemap/llms, or Search Channel action occurred."
+      },
+      {
+        "at": "2026-08-10T08:03:36Z",
+        "status": "local_checks_passed_ready_to_push",
+        "note": "Rebased the two scoped repair commits cleanly onto latest origin/main a2bb1ea9497deba080063ece1fa14f8bb3f50505 after concurrent PRs #3600 and #3601 merged. Post-rebase Authority/G03/OpenAPI tests passed 25 tests / 442 assertions, classifier isolation passed 1 test / 3 assertions, OpenAPI remained current, and the exact scope diff stayed clean."
       }
     ]
   },
