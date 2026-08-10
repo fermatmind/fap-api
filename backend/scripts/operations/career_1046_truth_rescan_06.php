@@ -286,15 +286,18 @@ final class Career1046TruthRescan06
             && $slugs === $directories['zh-CN']['slugs']
             && $slugs === $expectedSlugs;
 
-        $surfaceRows = [
-            'sitemap' => self::careerRowsFromText((string) $collections['sitemap']['body']),
-            'llms' => self::careerRowsFromText((string) $collections['llms']['body']),
-            'llms_full' => self::careerRowsFromText((string) $collections['llms_full']['body']),
-        ];
         $expectedRows = self::localeRows($slugs);
+        $surfaceRows = [];
+        $surfaceDiagnostics = [];
+        foreach (['sitemap', 'llms', 'llms_full'] as $surface) {
+            $snapshot = self::textSurfaceSnapshot($surface, (string) $collections[$surface]['body'], $expectedRows);
+            $surfaceRows[$surface] = $snapshot['rows'];
+            unset($snapshot['rows']);
+            $surfaceDiagnostics[$surface] = $snapshot;
+        }
         $surfaceSetMatches = true;
-        foreach ($surfaceRows as $rows) {
-            if ($rows !== $expectedRows) {
+        foreach ($surfaceDiagnostics as $diagnostic) {
+            if (($diagnostic['matches_expected'] ?? false) !== true) {
                 $surfaceSetMatches = false;
             }
         }
@@ -382,6 +385,7 @@ final class Career1046TruthRescan06
             'row_set_sha256' => self::setHash($expectedRows),
             'jobs_directory_receipt_set_match' => $slugSetMatches,
             'surface_set_match' => $surfaceSetMatches,
+            'surface_diagnostics' => $surfaceDiagnostics,
             'private_path_leak_count' => $privateLeakCount,
             'timeout_count' => self::countError($errors, 'timeout'),
             'server_error_count' => self::countError($errors, 'server_error'),
@@ -412,6 +416,7 @@ final class Career1046TruthRescan06
             'server_error_count' => self::countError($errors, 'server_error'),
             'private_path_leak_count' => 0,
             'target_failure_count' => 0,
+            'surface_diagnostics' => [],
             'targets' => [],
         ];
     }
@@ -465,7 +470,6 @@ final class Career1046TruthRescan06
                     'redirect_count' => (int) curl_getinfo($handle, CURLINFO_REDIRECT_COUNT),
                 ];
                 curl_multi_remove_handle($multi, $handle);
-                curl_close($handle);
             }
             curl_multi_close($multi);
 
@@ -595,19 +599,51 @@ final class Career1046TruthRescan06
         return html_entity_decode(trim($match[2]), ENT_QUOTES | ENT_HTML5, 'UTF-8');
     }
 
-    /** @return list<string> */
-    private static function careerRowsFromText(string $text): array
+    /**
+     * @param  list<string>  $expectedRows
+     * @return array{surface:string,occurrence_count:int,unique_identity_count:int,duplicate_reference_count:int,conflicting_identity_count:int,row_set_sha256:string,matches_expected:bool,rows:list<string>}
+     */
+    private static function textSurfaceSnapshot(string $surface, string $text, array $expectedRows): array
     {
         $rows = [];
+        $forms = [];
         foreach (self::urlsFromText($text) as $url) {
-            $path = (string) (parse_url($url, PHP_URL_PATH) ?? '');
+            $parsed = parse_url($url);
+            if (! is_array($parsed)) {
+                continue;
+            }
+            $path = (string) ($parsed['path'] ?? '');
             if (preg_match('#^/(en|zh)/career/jobs/([a-z0-9]+(?:-[a-z0-9]+)*)/?$#D', $path, $match) !== 1) {
                 continue;
             }
-            $rows[] = $match[2].'|'.($match[1] === 'zh' ? 'zh-CN' : 'en');
+            $identity = $match[2].'|'.($match[1] === 'zh' ? 'zh-CN' : 'en');
+            $rows[] = $identity;
+            $forms[$identity][rtrim($url, '.,;')] = true;
         }
 
-        return self::uniqueSorted($rows, 'SURFACE_DUPLICATE_IDENTITY');
+        $uniqueRows = array_values(array_unique($rows));
+        sort($uniqueRows, SORT_STRING);
+        $conflictingIdentities = 0;
+        foreach ($forms as $identity => $identityForms) {
+            [$slug, $locale] = explode('|', $identity, 2);
+            $prefix = $locale === 'zh-CN' ? 'zh' : 'en';
+            $expectedUrl = self::WEB_BASE.'/'.$prefix.'/career/jobs/'.$slug;
+            $urls = array_keys($identityForms);
+            if (count($urls) !== 1 || $urls[0] !== $expectedUrl) {
+                $conflictingIdentities++;
+            }
+        }
+
+        return [
+            'surface' => $surface,
+            'occurrence_count' => count($rows),
+            'unique_identity_count' => count($uniqueRows),
+            'duplicate_reference_count' => count($rows) - count($uniqueRows),
+            'conflicting_identity_count' => $conflictingIdentities,
+            'row_set_sha256' => self::setHash($uniqueRows),
+            'matches_expected' => $uniqueRows === $expectedRows && $conflictingIdentities === 0,
+            'rows' => $uniqueRows,
+        ];
     }
 
     /** @return list<string> */
@@ -721,6 +757,9 @@ final class Career1046TruthRescan06
         $serverErrors = 0;
         $privateLeaks = 0;
         $targetFailures = 0;
+        $duplicateReferences = 0;
+        $conflictingIdentities = 0;
+        $safeSurfaceDiagnostics = [];
         foreach ($rounds as $round) {
             if (! is_array($round)) {
                 $safe = false;
@@ -731,6 +770,30 @@ final class Career1046TruthRescan06
             $serverErrors += (int) ($round['server_error_count'] ?? 0);
             $privateLeaks += (int) ($round['private_path_leak_count'] ?? 0);
             $targetFailures += (int) ($round['target_failure_count'] ?? 0);
+            $surfaceDiagnostics = (array) ($round['surface_diagnostics'] ?? []);
+            if (array_keys($surfaceDiagnostics) !== ['sitemap', 'llms', 'llms_full']) {
+                $safe = false;
+            }
+            foreach (['sitemap', 'llms', 'llms_full'] as $surface) {
+                $diagnostic = $surfaceDiagnostics[$surface] ?? null;
+                if (! is_array($diagnostic)) {
+                    $safe = false;
+
+                    continue;
+                }
+                $duplicateReferences += (int) ($diagnostic['duplicate_reference_count'] ?? 0);
+                $conflictingIdentities += (int) ($diagnostic['conflicting_identity_count'] ?? 0);
+                $safe = $safe && ($diagnostic['matches_expected'] ?? false) === true;
+                $safeSurfaceDiagnostics[$surface][] = [
+                    'round' => (int) ($round['round'] ?? 0),
+                    'occurrence_count' => (int) ($diagnostic['occurrence_count'] ?? 0),
+                    'unique_identity_count' => (int) ($diagnostic['unique_identity_count'] ?? 0),
+                    'duplicate_reference_count' => (int) ($diagnostic['duplicate_reference_count'] ?? 0),
+                    'conflicting_identity_count' => (int) ($diagnostic['conflicting_identity_count'] ?? 0),
+                    'row_set_sha256' => (string) ($diagnostic['row_set_sha256'] ?? ''),
+                    'matches_expected' => ($diagnostic['matches_expected'] ?? false) === true,
+                ];
+            }
             $safe = $safe
                 && ($round['complete'] ?? false) === true
                 && ($round['jobs_directory_receipt_set_match'] ?? false) === true
@@ -738,14 +801,25 @@ final class Career1046TruthRescan06
                 && ($round['family_membership']['locale_consistent'] ?? false) === true
                 && ($round['industry_membership']['locale_consistent'] ?? false) === true;
         }
-        $safe = $safe && $timeout === 0 && $serverErrors === 0 && $privateLeaks === 0 && $targetFailures === 0;
+        $safe = $safe
+            && $timeout === 0
+            && $serverErrors === 0
+            && $privateLeaks === 0
+            && $targetFailures === 0
+            && $conflictingIdentities === 0;
 
         return [
             'safe' => $safe,
+            'scan_status' => (string) ($scan['status'] ?? 'NO_GO_INCOMPLETE'),
+            'aborted' => (bool) ($scan['aborted'] ?? true),
+            'safe_error' => isset($scan['safe_error']) ? self::safeError((string) $scan['safe_error']) : null,
             'timeout_count' => $timeout,
             'server_error_count' => $serverErrors,
             'private_path_leak_count' => $privateLeaks,
             'target_failure_count' => $targetFailures,
+            'duplicate_reference_count' => $duplicateReferences,
+            'conflicting_identity_count' => $conflictingIdentities,
+            'surface_diagnostics' => $safeSurfaceDiagnostics,
             'round_count' => count($rounds),
         ];
     }

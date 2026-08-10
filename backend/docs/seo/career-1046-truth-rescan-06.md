@@ -8,15 +8,15 @@ The final verdict is one of:
 
 - `PASS`: exact 1046 unique slugs, 1046 English targets, 1046 Chinese targets, 2092 localized targets, active C05 cold-start protection, stable receipts, exact public-set equality, and no transport, metadata, or privacy failure.
 - `PARTIALLY_BLOCKED`: the current public cohort is safe and internally consistent, but the required population totals or active C05 gate are incomplete.
-- `NO_GO`: receipt drift, incomplete evidence, timeout/5xx, private leakage, duplicate or locale identity failure, metadata failure, or public-set mismatch.
+- `NO_GO`: receipt drift, incomplete evidence, timeout/5xx, private leakage, authority-row duplication, conflicting URL forms for one identity, locale identity failure, metadata failure, or public-set mismatch.
 
 Every verdict leaves `CAREER_LINK_PUBLICATION_GATE` physically `CLOSED`. A `PASS` only permits the separately scoped next step; this PR never activates an edge or changes publication state.
 
 ## Evidence sequence
 
 1. Lock the exact latest `main` SHA and verify C05 merge `4ad35bd2b15448569a3bafc6bd27f6ad115dc014` is contained.
-2. Dispatch the existing Career C03 cache-only workflow in `verify` mode using incident closeout run `31379780335` attempt `1` and its exact receipt/digest.
-3. Download the successful immutable receipt and verify its GitHub artifact digest and local receipt SHA-256.
+2. Dispatch a fresh read-only C03 `incident_closeout` on that exact main, then bind its exact run, attempt, receipt SHA-256, and artifact digest into a fresh C03 `verify`.
+3. Download the successful immutable pre-scan receipt and verify its GitHub artifact digest and local receipt SHA-256.
 4. Run `scan`. It derives the public cohort from the receipt-bound EN/ZH Jobs and Directory read models, then performs two GET-only rounds across current detail APIs/pages, sitemap, llms, llms-full, family, and industry projections.
 5. Dispatch and download a second C03 `verify` receipt.
 6. Run `finalize`, then `validate`. Commit only the three safe evidence files.
@@ -32,6 +32,8 @@ The first execution window on `92e372f8b6adb775a90765d40a6ceaf339717105` reached
 The bounded transport repair merged in PR #3624 as `4c3f775151ad62b6750e7d45319d75aa49adf8b2`. A new same-main read-only closeout run `31387930639` then emitted `PASS_INCIDENT_CLOSED` with zero retries, transport failures, HTTP failures, private leakage, or writes. The required pre-C03 verify run `31388220236` did not emit the scan-authorizing status: it emitted `PASS_RECOVERY_REQUIRED` with `public_converged=false`, even though the authority remained 342/684, the published cohort and detail coverage remained the same 30/60 set, the internal job/directory/sitemap-source checks were converged, the detail repair target count was zero, and all transport/HTTP/private/write counts were zero. This scope explicitly forbids `apply` and requires a stop on recovery-required, so scan, post-verify and finalize were not run. `origin/main` also advanced to `53917f63469b603104e68e2129011fa0d92de5fa` before any scan began; no temporary scan snapshot exists and PR6 remains prohibited.
 
 The independent six-surface diagnostic and portable shared-readback repair subsequently merged as `058fd37125b532bd716149f2fe2977191136dfa4` and `935584a5f26b05ba987f271529ea3bb5ff02008a`. On the latter exact main, closeout run `31394324050` emitted `PASS_INCIDENT_CLOSED` and pre-verify run `31394772837` emitted `PASS_C03_REVERIFIED_NO_APPLY_REQUIRED`; all six fixed public surfaces matched the expected 30/60 cohort, terminal transport and write counts were zero, and the Career link gate remained `CLOSED`. PR5 then started a temporary scan, which failed closed before retaining any response body or target rows with `SURFACE_DUPLICATE_IDENTITY`. The required post-verify run `31395418526` emitted `HOLD_CONTROL_INCOMPLETE` at its mode-input boundary with `automatic_retry_allowed=false`. Although its visible inputs matched the preceding successful verify, the control contract prohibits an automatic retry. The temporary snapshot is not versioned evidence, `finalize` was not run, #3619 remains Draft/HOLD, and PR6 remains prohibited.
+
+That historical scan classified every repeated Career URL as a duplicate identity. The repaired scanner instead records safe per-surface aggregates for each round: occurrence count, unique identity count, repeated-reference count, conflicting-identity count, unique row-set SHA-256, and expected-set match. An identical sitemap/llms/llms-full URL may appear more than once without changing the unique identity set and is diagnostic only. A Jobs or Directory authority-row duplicate remains a hard failure, as does one identity resolving to multiple host, locale, path, query, slash, or other URL forms. No aggregate contains a URL, response body, cache key, private path, or infrastructure value.
 
 ## Runner interface
 
@@ -56,6 +58,8 @@ php backend/scripts/operations/career_1046_truth_rescan_06.php validate \
 ```
 
 The HTTP policy is fixed: credential-free HTTPS GET, redirects disabled, maximum concurrency two, five-second connect timeout, twenty-second request timeout, two rounds, and a thirty-second inter-round gap. A timeout or 5xx stops further bounded scanning. C03 must already prove complete detail coverage, so the scan does not intentionally create cache misses or serve as a cache warm.
+
+Semantic mismatches are retained as safe aggregate facts so a successful post-C03 receipt can close the window with a formal `NO_GO`. Repeated text-surface references are informational; only conflicting identity forms or a unique-set mismatch make the text surface unsafe.
 
 ## Evidence boundary
 

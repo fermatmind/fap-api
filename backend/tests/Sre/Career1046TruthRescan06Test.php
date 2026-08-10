@@ -128,17 +128,39 @@ final class Career1046TruthRescan06Test extends TestCase
             'zh-CN' => 'https://fermatmind.com/zh/career/jobs/actuaries',
         ], $meta['alternates']);
 
-        $rows = $this->invoke('careerRowsFromText', [
+        $expectedRows = ['actuaries|en', 'actuaries|zh-CN'];
+        $snapshot = $this->invoke('textSurfaceSnapshot', [
+            'llms_full',
             '<loc>https://fermatmind.com/en/career/jobs/actuaries</loc> '
+            .'https://fermatmind.com/en/career/jobs/actuaries '
             .'https://fermatmind.com/zh/career/jobs/actuaries',
+            $expectedRows,
         ]);
-        $this->assertSame(['actuaries|en', 'actuaries|zh-CN'], $rows);
+        $this->assertSame('llms_full', $snapshot['surface']);
+        $this->assertSame(3, $snapshot['occurrence_count']);
+        $this->assertSame(2, $snapshot['unique_identity_count']);
+        $this->assertSame(1, $snapshot['duplicate_reference_count']);
+        $this->assertSame(0, $snapshot['conflicting_identity_count']);
+        $this->assertSame(Career1046TruthRescan06::setHash($expectedRows), $snapshot['row_set_sha256']);
+        $this->assertTrue($snapshot['matches_expected']);
+        $this->assertSame($expectedRows, $snapshot['rows']);
 
-        $this->expectExceptionMessage('SURFACE_DUPLICATE_IDENTITY');
-        $this->invoke('careerRowsFromText', [
+        $conflicting = $this->invoke('textSurfaceSnapshot', [
+            'llms_full',
             'https://fermatmind.com/en/career/jobs/actuaries '
-            .'https://fermatmind.com/en/career/jobs/actuaries',
+            .'https://fermatmind.com/en/career/jobs/actuaries/',
+            ['actuaries|en'],
         ]);
+        $this->assertSame(1, $conflicting['conflicting_identity_count']);
+        $this->assertFalse($conflicting['matches_expected']);
+
+        $foreignHost = $this->invoke('textSurfaceSnapshot', [
+            'llms_full',
+            'https://example.com/en/career/jobs/actuaries',
+            ['actuaries|en'],
+        ]);
+        $this->assertSame(1, $foreignHost['conflicting_identity_count']);
+        $this->assertFalse($foreignHost['matches_expected']);
     }
 
     public function test_directory_duplicate_locale_and_unqualified_rows_fail_closed(): void
@@ -182,6 +204,7 @@ final class Career1046TruthRescan06Test extends TestCase
             'locale_row_count' => 2,
             'jobs_directory_receipt_set_match' => true,
             'surface_set_match' => true,
+            'surface_diagnostics' => $this->surfaceDiagnostics(),
             'private_path_leak_count' => 0,
             'timeout_count' => 0,
             'server_error_count' => 0,
@@ -254,6 +277,7 @@ final class Career1046TruthRescan06Test extends TestCase
                 'complete' => true,
                 'jobs_directory_receipt_set_match' => false,
                 'surface_set_match' => true,
+                'surface_diagnostics' => $this->surfaceDiagnostics(),
                 'family_membership' => ['locale_consistent' => true],
                 'industry_membership' => ['locale_consistent' => true],
                 'timeout_count' => 1,
@@ -264,6 +288,7 @@ final class Career1046TruthRescan06Test extends TestCase
                 'complete' => true,
                 'jobs_directory_receipt_set_match' => true,
                 'surface_set_match' => true,
+                'surface_diagnostics' => $this->surfaceDiagnostics(),
                 'family_membership' => ['locale_consistent' => true],
                 'industry_membership' => ['locale_consistent' => true],
                 'timeout_count' => 0,
@@ -277,6 +302,49 @@ final class Career1046TruthRescan06Test extends TestCase
         $this->assertSame(1, $safety['timeout_count']);
         $this->assertSame(1, $safety['private_path_leak_count']);
         $this->assertSame(1, $safety['target_failure_count']);
+        $this->assertSame(0, $safety['conflicting_identity_count']);
+        $this->assertSame(4, $safety['duplicate_reference_count']);
+    }
+
+    public function test_llms_full_structural_references_are_safe_and_retained_as_per_surface_diagnostics(): void
+    {
+        $diagnostics = $this->surfaceDiagnostics();
+        $diagnostics['sitemap']['occurrence_count'] = 60;
+        $diagnostics['sitemap']['unique_identity_count'] = 60;
+        $diagnostics['llms']['occurrence_count'] = 60;
+        $diagnostics['llms']['unique_identity_count'] = 60;
+        $diagnostics['llms_full']['occurrence_count'] = 120;
+        $diagnostics['llms_full']['unique_identity_count'] = 60;
+        $diagnostics['llms_full']['duplicate_reference_count'] = 60;
+
+        $round = [
+            'complete' => true,
+            'jobs_directory_receipt_set_match' => true,
+            'surface_set_match' => true,
+            'surface_diagnostics' => $diagnostics,
+            'family_membership' => ['locale_consistent' => true],
+            'industry_membership' => ['locale_consistent' => true],
+            'timeout_count' => 0,
+            'server_error_count' => 0,
+            'private_path_leak_count' => 0,
+            'target_failure_count' => 0,
+        ];
+        $safety = $this->invoke('scanSafety', [[
+            'status' => 'SCAN_COMPLETE',
+            'aborted' => false,
+            'rounds' => [
+                ['round' => 1, ...$round],
+                ['round' => 2, ...$round],
+            ],
+        ]]);
+
+        $this->assertTrue($safety['safe']);
+        $this->assertSame(120, $safety['duplicate_reference_count']);
+        $this->assertSame(0, $safety['conflicting_identity_count']);
+        $this->assertSame(120, $safety['surface_diagnostics']['llms_full'][0]['occurrence_count']);
+        $this->assertSame(60, $safety['surface_diagnostics']['llms_full'][0]['unique_identity_count']);
+        $this->assertSame(60, $safety['surface_diagnostics']['llms_full'][0]['duplicate_reference_count']);
+        $this->assertArrayNotHasKey('url', $safety['surface_diagnostics']['llms_full'][0]);
     }
 
     public function test_runner_is_get_only_concurrency_two_and_has_no_production_mutator_calls(): void
@@ -285,6 +353,7 @@ final class Career1046TruthRescan06Test extends TestCase
         $this->assertStringContainsString('private const MAX_CONCURRENCY = 2;', $source);
         $this->assertStringContainsString("'method' => 'GET'", $source);
         $this->assertStringContainsString('CURLOPT_FOLLOWLOCATION => false', $source);
+        $this->assertStringNotContainsString('curl_close(', $source);
         foreach (['Cache::', 'DB::', 'Artisan::call', 'queue:restart', 'deploy.php ', 'migrate --', 'search:submit', 'CURLOPT_POST => true'] as $forbidden) {
             $this->assertStringNotContainsString($forbidden, $source);
         }
@@ -364,6 +433,42 @@ final class Career1046TruthRescan06Test extends TestCase
             'llms_full_member' => true,
             'family_uuid' => null,
             'directory_family_slug' => null,
+        ];
+    }
+
+    /** @return array<string, array<string, bool|int|string>> */
+    private function surfaceDiagnostics(): array
+    {
+        $rowSetSha = Career1046TruthRescan06::setHash(['actuaries|en', 'actuaries|zh-CN']);
+
+        return [
+            'sitemap' => [
+                'surface' => 'sitemap',
+                'occurrence_count' => 2,
+                'unique_identity_count' => 2,
+                'duplicate_reference_count' => 0,
+                'conflicting_identity_count' => 0,
+                'row_set_sha256' => $rowSetSha,
+                'matches_expected' => true,
+            ],
+            'llms' => [
+                'surface' => 'llms',
+                'occurrence_count' => 2,
+                'unique_identity_count' => 2,
+                'duplicate_reference_count' => 0,
+                'conflicting_identity_count' => 0,
+                'row_set_sha256' => $rowSetSha,
+                'matches_expected' => true,
+            ],
+            'llms_full' => [
+                'surface' => 'llms_full',
+                'occurrence_count' => 4,
+                'unique_identity_count' => 2,
+                'duplicate_reference_count' => 2,
+                'conflicting_identity_count' => 0,
+                'row_set_sha256' => $rowSetSha,
+                'matches_expected' => true,
+            ],
         ];
     }
 
