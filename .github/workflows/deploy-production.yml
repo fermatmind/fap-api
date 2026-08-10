@@ -367,6 +367,14 @@ jobs:
                       echo "code-only scope refused an unreviewed immutable sitemap control hash." >&2
                     }
                     ;;
+                  backend/scripts/deploy/bounded_candidate_public_dns_control.php)
+                    EXPECTED_BOUNDED_PUBLIC_DNS_CONTROL_SHA256="274701f9b23afe61987376de6867ab723c9ed38638a0e89bd4b45a6e35445658"
+                    test "$(sha256sum "$path" | awk '{print $1}')" = \
+                      "$EXPECTED_BOUNDED_PUBLIC_DNS_CONTROL_SHA256" || {
+                      CODE_ONLY_SCOPE=false
+                      echo "code-only scope refused an unreviewed bounded public-DNS control hash." >&2
+                    }
+                    ;;
                   backend/scripts/seo/seo_13_article_atomic_promotion_production_ops.sh)
                     EXPECTED_SEO13_PREFLIGHT_RUNNER_SHA256="ceab5aa7d97a27f2d9d5d8f803897296baf00dade2387cd4e59a77884bb0ad26"
                     test "$(sha256sum "$path" | awk '{print $1}')" = \
@@ -812,6 +820,125 @@ jobs:
           echo "helper_path=$control_helper" >> "$GITHUB_OUTPUT"
           echo "receipt_path=$receipt" >> "$GITHUB_OUTPUT"
           echo "Immutable candidate deployment control prepared without changing the candidate tree."
+
+      - name: Prepare bounded candidate public-DNS control
+        id: bounded_public_dns_control
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          candidate_sha="363bbba54f7cac78b9cbb6118c1800dd0c6b7340"
+          release_id="standard-363bbba54f7c"
+          staging_run_id="31384127889"
+          candidate_recipe_sha256="e27282825c2074e56067e6ec4cb9a8a3951ad8d4207c0c3f598fc93a1d02128b"
+          wrapper_sha256="274701f9b23afe61987376de6867ab723c9ed38638a0e89bd4b45a6e35445658"
+          wrapper_path="backend/scripts/deploy/bounded_candidate_public_dns_control.php"
+          incident_run_id="31397650099"
+          incident_artifact_name="backend-production-incident-diagnostic-31397650099-1"
+          incident_artifact_digest="sha256:4bd544410f69855d589b5305276a5fac6dd1df26907e4cc7fb1b8abdabd41d79"
+          incident_receipt_sha256="7977e008407dea54299c922357b800c584a0f0c18ae73a8662e03615a6757729"
+
+          echo "enabled=false" >> "$GITHUB_OUTPUT"
+          if [ "$DEPLOY_SHA" != "$candidate_sha" ]; then
+            echo "Bounded public-DNS control is not required for this release."
+            exit 0
+          fi
+
+          test "$GITHUB_REF" = "refs/heads/main"
+          test "$DEPLOY_MODE" = "standard"
+          test "$RELEASE_ID" = "$release_id"
+          test "$STAGING_RUN_ID" = "$staging_run_id"
+          [[ "$EXPECTED_DEPLOYED_REVISION" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$WORKFLOW_CONTROL_SHA" =~ ^[0-9a-f]{40}$ ]]
+          git fetch --no-tags origin "$WORKFLOW_CONTROL_SHA"
+          git cat-file -e "${WORKFLOW_CONTROL_SHA}^{commit}"
+          git merge-base --is-ancestor "$DEPLOY_SHA" "$WORKFLOW_CONTROL_SHA"
+
+          candidate_tree_before="$(git rev-parse HEAD^{tree})"
+          test "$(git rev-parse HEAD)" = "$candidate_sha"
+          test -z "$(git status --porcelain=v1)"
+          test "$(sha256sum deploy.php | awk '{print $1}')" = "$candidate_recipe_sha256"
+
+          artifact_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${incident_run_id}/artifacts")"
+          artifact_count="$(jq --arg name "$incident_artifact_name" '[.artifacts[] | select(.name == $name)] | length' <<<"$artifact_json")"
+          test "$artifact_count" = "1"
+          observed_artifact_digest="$(jq -r --arg name "$incident_artifact_name" '.artifacts[] | select(.name == $name) | .digest' <<<"$artifact_json")"
+          observed_artifact_expired="$(jq -r --arg name "$incident_artifact_name" '.artifacts[] | select(.name == $name) | .expired' <<<"$artifact_json")"
+          test "$observed_artifact_digest" = "$incident_artifact_digest"
+          test "$observed_artifact_expired" = "false"
+
+          incident_dir="$RUNNER_TEMP/bounded-public-dns-incident"
+          mkdir -p "$incident_dir"
+          gh run download "$incident_run_id" \
+            --repo "$GITHUB_REPOSITORY" \
+            --name "$incident_artifact_name" \
+            --dir "$incident_dir"
+          incident_receipt="$incident_dir/backend-production-incident-diagnostic.json"
+          test -f "$incident_receipt"
+          test "$(sha256sum "$incident_receipt" | awk '{print $1}')" = "$incident_receipt_sha256"
+          jq -e \
+            --arg candidate_sha "$candidate_sha" \
+            --arg release_id "$release_id" \
+            --arg incident_run_id "$incident_run_id" \
+            --arg expected_active_revision "$EXPECTED_DEPLOYED_REVISION" \
+            '
+              .schema_version == "fermatmind.backend-production-incident-diagnostic.v2"
+              and .status == "hold_no_retry"
+              and .deploy_sha == $candidate_sha
+              and .release_id == $release_id
+              and .workflow_run_id == $incident_run_id
+              and .active_revision == $expected_active_revision
+              and .deploy_lock_present == false
+              and .task_evidence.migrate == "success"
+              and .task_evidence.public_dns_guard == "failure"
+              and .task_evidence.symlink == "skipped"
+              and .activation_completed == false
+              and .process_restart_attempted == false
+            ' "$incident_receipt" >/dev/null
+
+          control_wrapper="$RUNNER_TEMP/bounded-candidate-public-dns-control.php"
+          git show "${WORKFLOW_CONTROL_SHA}:${wrapper_path}" > "$control_wrapper"
+          chmod 600 "$control_wrapper"
+          test "$(sha256sum "$control_wrapper" | awk '{print $1}')" = "$wrapper_sha256"
+          php -l "$control_wrapper" >/dev/null
+
+          test "$(git rev-parse HEAD^{tree})" = "$candidate_tree_before"
+          test -z "$(git status --porcelain=v1)"
+
+          receipt="$RUNNER_TEMP/backend-bounded-public-dns-control-receipt.json"
+          jq -n \
+            --arg candidate_sha "$candidate_sha" \
+            --arg control_sha "$WORKFLOW_CONTROL_SHA" \
+            --arg staging_run_id "$staging_run_id" \
+            --arg candidate_recipe_sha256 "$candidate_recipe_sha256" \
+            --arg wrapper_sha256 "$wrapper_sha256" \
+            --arg incident_run_id "$incident_run_id" \
+            --arg incident_artifact_digest "$incident_artifact_digest" \
+            --arg incident_receipt_sha256 "$incident_receipt_sha256" \
+            '{
+              schema_version: "backend-bounded-public-dns-control-receipt.v1",
+              status: "PASS_BOUNDED_PUBLIC_DNS_CONTROL_PREPARED",
+              candidate_sha: $candidate_sha,
+              control_sha: $control_sha,
+              staging_run_id: $staging_run_id,
+              candidate_recipe_sha256: $candidate_recipe_sha256,
+              control_wrapper_sha256: $wrapper_sha256,
+              failed_incident_run_id: $incident_run_id,
+              failed_incident_artifact_digest: $incident_artifact_digest,
+              failed_incident_receipt_sha256: $incident_receipt_sha256,
+              control_mode: "candidate_recipe_with_runner_only_public_dns_override",
+              overridden_tasks: ["guard:public-dns-health"],
+              candidate_tree_unchanged: true,
+              release_overlay: false,
+              remote_control_file_write: false,
+              activation_authorized: false
+            }' > "$receipt"
+
+          echo "enabled=true" >> "$GITHUB_OUTPUT"
+          echo "recipe_path=$control_wrapper" >> "$GITHUB_OUTPUT"
+          echo "receipt_path=$receipt" >> "$GITHUB_OUTPUT"
+          echo "Bounded public-DNS control prepared without changing the candidate tree."
 
       - name: Setup PHP
         uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
@@ -1458,6 +1585,9 @@ jobs:
             deployer_recipe="${{ steps.immutable_candidate_control.outputs.recipe_path }}"
             export IMMUTABLE_CANDIDATE_RECIPE_PATH="$GITHUB_WORKSPACE/deploy.php"
             export IMMUTABLE_SITEMAP_WARM_HELPER_PATH="${{ steps.immutable_candidate_control.outputs.helper_path }}"
+          elif [ "${{ steps.bounded_public_dns_control.outputs.enabled }}" = "true" ]; then
+            deployer_recipe="${{ steps.bounded_public_dns_control.outputs.recipe_path }}"
+            export BOUNDED_PUBLIC_DNS_CANDIDATE_RECIPE_PATH="$GITHUB_WORKSPACE/deploy.php"
           fi
           php "$DEPLOY_TIMING_RUNNER" run \
             --receipt="$DEPLOY_TIMING_RECEIPT" \
@@ -1531,6 +1661,15 @@ jobs:
         with:
           name: backend-immutable-candidate-control-${{ github.run_id }}
           path: ${{ steps.immutable_candidate_control.outputs.receipt_path }}
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Upload bounded public-DNS control receipt
+        if: ${{ always() && steps.bounded_public_dns_control.outputs.enabled == 'true' }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: backend-bounded-public-dns-control-${{ github.run_id }}
+          path: ${{ steps.bounded_public_dns_control.outputs.receipt_path }}
           if-no-files-found: error
           retention-days: 30
 
