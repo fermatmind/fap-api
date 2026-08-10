@@ -443,9 +443,9 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             '363bbba54f7cac78b9cbb6118c1800dd0c6b7340',
             '31384127889',
             'e27282825c2074e56067e6ec4cb9a8a3951ad8d4207c0c3f598fc93a1d02128b',
-            '31412587123',
-            'sha256:e65daa75e6d41cbc17bd3af562139c4b065e3ee2e0f7a26287ce59741d9e62c5',
-            '545e551950568777a7a8de5b102dc5d6455b6f470639b842bbeead8dd12520a9',
+            '31415836351',
+            'sha256:667b65a99f1a035a20971f237874b1545187584caa767ea0d9d9bc99f0fcde6e',
+            '2d6d822615481b3280fbc1f92ce00d3ce731e556f5b419ca98eb8d185d4cf50e',
             'Prepare bounded candidate public-DNS control',
             'WORKFLOW_CONTROL_SHA: ${{ github.sha }}',
             'gh run download "$incident_run_id"',
@@ -464,7 +464,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             $this->assertStringContainsString($boundary, $workflow);
         }
 
-        $expectedWrapperSha = '3c1f415ea400a07cf45839d22aa143a195a7f46c740e53bc011618d7d3717476';
+        $expectedWrapperSha = '13845400d5a4a58ef6751d41e953076493f4d7853126c96860ab04b5c864a195';
         $this->assertSame(
             $expectedWrapperSha,
             hash_file('sha256', dirname(__DIR__, 3).'/'.$wrapperPath)
@@ -485,6 +485,12 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             'case "$attempt" in 1) sleep 2 ;; 2) sleep 5',
             $wrapper
         );
+        $this->assertStringContainsString(
+            'Public DNS business evidence retrying after attempt',
+            $wrapper
+        );
+        $this->assertStringContainsString('rc=${probe_rc}', $wrapper);
+        $this->assertStringNotContainsString('if [ "$probe_rc" -ne 75 ]', $wrapper);
         $this->assertStringNotContainsString('set +e; raw=', $wrapper);
         $this->assertStringNotContainsString('file_put_contents', $wrapper);
         $this->assertStringNotContainsString('upload(', $wrapper);

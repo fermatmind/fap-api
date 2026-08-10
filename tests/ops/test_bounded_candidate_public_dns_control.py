@@ -22,12 +22,12 @@ STAGING_RUN_ID = "31384127889"
 CANDIDATE_RECIPE_SHA256 = (
     "e27282825c2074e56067e6ec4cb9a8a3951ad8d4207c0c3f598fc93a1d02128b"
 )
-INCIDENT_RUN_ID = "31412587123"
+INCIDENT_RUN_ID = "31415836351"
 INCIDENT_ARTIFACT_DIGEST = (
-    "sha256:e65daa75e6d41cbc17bd3af562139c4b065e3ee2e0f7a26287ce59741d9e62c5"
+    "sha256:667b65a99f1a035a20971f237874b1545187584caa767ea0d9d9bc99f0fcde6e"
 )
 INCIDENT_RECEIPT_SHA256 = (
-    "545e551950568777a7a8de5b102dc5d6455b6f470639b842bbeead8dd12520a9"
+    "2d6d822615481b3280fbc1f92ce00d3ce731e556f5b419ca98eb8d185d4cf50e"
 )
 
 
@@ -44,6 +44,40 @@ class BoundedCandidatePublicDnsControlTest(unittest.TestCase):
         start = self.workflow.index(f"- name: {start_name}")
         end = self.workflow.index(f"- name: {end_name}", start)
         return self.workflow[start:end]
+
+    def public_dns_business_command(self) -> str:
+        deployer = DEPLOYER.read_text(encoding="utf-8")
+        builder = deployer[
+            deployer.index("function deployPublicDnsBusinessEvidenceCommand") :
+            deployer.index("function runProductionPublicDnsBusinessEvidence")
+        ]
+        harness = """<?php
+namespace Deployer;
+
+function deployShellArg(string $value): string
+{
+    return escapeshellarg($value);
+}
+
+function deployHttpsUrlArg(string $host, string $path): string
+{
+    return deployShellArg("https://{$host}{$path}");
+}
+
+""" + builder + """
+echo deployPublicDnsBusinessEvidenceCommand('api.example.test');
+"""
+
+        result = subprocess.run(
+            ["php"],
+            cwd=ROOT,
+            input=harness,
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+
+        return result.stdout
 
     def test_candidate_recipe_and_control_wrapper_hashes_are_exact(self):
         candidate_recipe = subprocess.run(
@@ -131,8 +165,10 @@ class BoundedCandidatePublicDnsControlTest(unittest.TestCase):
             'if ! raw="$(curl -sS --connect-timeout 3 --max-time 10',
             "429|502|503|504) return 75",
             'case "$attempt" in 1) sleep 2 ;; 2) sleep 5',
+            "Public DNS business evidence retrying after attempt",
             "Public DNS business evidence failed after 3 attempts",
             "stage=${PROBE_STAGE} status=${PROBE_STATUS:-none}",
+            "rc=${probe_rc}",
             "personality_public_content_asset_v1.source_hash",
         ):
             self.assertIn(expected, self.wrapper)
@@ -148,6 +184,7 @@ class BoundedCandidatePublicDnsControlTest(unittest.TestCase):
             "scp ",
             "rsync ",
             "--resolve",
+            'if [ "$probe_rc" -ne 75 ]',
         ):
             self.assertNotIn(forbidden, self.wrapper)
 
@@ -340,6 +377,76 @@ echo "production worker namespace ok\n";
         )
 
         self.assertEqual(current_builder, wrapper_builder)
+
+    def test_business_contract_failure_is_retried_and_then_passes(self):
+        command = self.public_dns_business_command()
+
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            temporary_path = Path(temporary_directory)
+            counter = temporary_path / "curl-count"
+            counter.write_text("0\n", encoding="utf-8")
+            fake_curl = temporary_path / "curl"
+            fake_curl.write_text(
+                """#!/usr/bin/env bash
+set -euo pipefail
+count=$(cat "$CURL_COUNTER")
+count=$((count + 1))
+printf '%s\n' "$count" > "$CURL_COUNTER"
+url="${!#}"
+case "$url" in
+  */api/healthz) body='{"ok":false}'; status=404 ;;
+  */api/v0.3/flags) body='{"ok":true}'; status=200 ;;
+  *personality-content-assets*)
+    status=200
+    if [ "$count" -le 3 ]; then
+      body='{"ok":true,"personality_public_content_asset_v1":{}}'
+    else
+      body='{"ok":true,"personality_public_content_asset_v1":{"source_hash":"0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"}}'
+    fi
+    ;;
+  *) exit 22 ;;
+esac
+printf '%s\n%s' "$body" "$status"
+""",
+                encoding="utf-8",
+            )
+            fake_sleep = temporary_path / "sleep"
+            fake_sleep.write_text("#!/usr/bin/env bash\nexit 0\n", encoding="utf-8")
+            fake_jq = temporary_path / "jq"
+            fake_jq.write_text(
+                """#!/usr/bin/env bash
+set -euo pipefail
+count=$(cat "$CURL_COUNTER")
+cat >/dev/null
+if [ "$count" -le 3 ]; then
+  exit 1
+fi
+exit 0
+""",
+                encoding="utf-8",
+            )
+            fake_curl.chmod(0o700)
+            fake_sleep.chmod(0o700)
+            fake_jq.chmod(0o700)
+            environment = {
+                "PATH": f"{temporary_path}:/usr/bin:/bin",
+                "CURL_COUNTER": str(counter),
+            }
+            result = subprocess.run(
+                ["bash", "-c", command],
+                cwd=ROOT,
+                env=environment,
+                capture_output=True,
+                text=True,
+            )
+
+            self.assertEqual(0, result.returncode, result.stderr)
+            self.assertEqual("6", counter.read_text(encoding="utf-8").strip())
+            self.assertIn(
+                "retrying after attempt 1: "
+                "stage=public_bigfive_contract status=200 rc=1",
+                result.stderr,
+            )
 
     def test_deploy_uses_runner_recipe_without_changing_release_revision(self):
         deploy_step = self.workflow_step(
