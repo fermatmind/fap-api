@@ -104001,8 +104001,8 @@
     "depends_on": [
       "PUBLIC-TOPIC-GRAPH-AUDIT-CLOSEOUT-01"
     ],
-    "status": "github_checks_pending",
-    "commit_sha": "60c9643ad8afc83bdca5fbecd7ab97be045f71e0",
+    "status": "github_checks_repairing",
+    "commit_sha": "66c15389bbdc16568e21c6922143be2e4ce52ded",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3594",
     "checks": {
       "dependency": {
@@ -104039,7 +104039,7 @@
       },
       "github_required_checks": {
         "status": "repairing",
-        "evidence": "Exact head f9d24a48a73738b360630dbf54029a1d4a7bf6fd passed hygiene, supply-chain, content-pack-build-validate, Semgrep blocking secrets, Semgrep OSS, and SARIF upload, but verify-mbti-v2 and verify-mbti-legacy failed because the newly named public route was not yet reflected in the generated OpenAPI snapshot. The same-scope snapshot repair now passes export_openapi --check and OpenApiDiffTest (2 tests / 6 assertions); fresh exact-head checks are required."
+        "evidence": "Exact head 66c15389bbdc16568e21c6922143be2e4ce52ded passed hygiene, supply-chain, content-pack-build-validate, Semgrep blocking secrets, Semgrep OSS, SARIF upload, verify-mbti-v2, and verify-mbti-legacy. verify-bigfive failed only because its branch-diff freeze classifier had no precise exclusion for the six independent public topic edge runtime paths. The same-scope repair adds an exact five-file plus exact three-route-line classifier contract with negative coverage; the formerly failing runtime-path and new classifier tests pass 2 tests / 27 assertions locally. Fresh exact-head checks are required."
       }
     },
     "failure_reason": null,
@@ -104096,6 +104096,16 @@
         "at": "2026-08-10T15:09:00+08:00",
         "status": "github_checks_repairing",
         "note": "origin/main advanced through merged Measurement PR #3593 while CI ran. The three scoped commits rebased cleanly onto exact main b463aaf0378e03eb138c6299afe3662725f14575; post-rebase API, review-governance, and OpenAPI tests pass 21 tests / 420 assertions, scoped Pint and route inventory pass, and exact scope remains fifteen files."
+      },
+      {
+        "at": "2026-08-10T15:16:00+08:00",
+        "status": "github_checks_failed",
+        "note": "Exact head 66c15389bbdc16568e21c6922143be2e4ce52ded passed every completed required lane except verify-bigfive. Big Five itself remained green through 1,687 tests / 196,790 assertions; the sole failure was the branch-diff freeze classifier treating the six independent public topic edge runtime paths as Big Five result runtime changes."
+      },
+      {
+        "at": "2026-08-10T15:20:00+08:00",
+        "status": "github_checks_repairing",
+        "note": "Added a precise classifier isolation contract for exactly five public topic edge authority files and exactly the three added API route lines, including negative coverage that rejects any extra route mutation. The formerly failing runtime-path test plus the new classifier test pass 2 tests / 27 assertions; the manifest allowlist is expanded only by this freeze test file."
       }
     ]
   },
