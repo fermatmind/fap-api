@@ -41,7 +41,11 @@ final class CareerExportRuntimePublishProjection extends Command
             }
             File::put($path, $encoded.PHP_EOL);
 
-            SafeArtifactDirectory::finalize($tmpDir, $finalDir);
+            SafeArtifactDirectory::finalize(
+                $tmpDir,
+                $finalDir,
+                SafeArtifactDirectory::RUNTIME_READER_DIRECTORY_MODE,
+            );
 
             $payload = [
                 'status' => 'materialized',

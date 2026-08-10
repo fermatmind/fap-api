@@ -61,6 +61,26 @@ final class SafeArtifactDirectoryTest extends TestCase
         }
     }
 
+    public function test_finalize_can_publish_a_runtime_reader_directory_without_world_access(): void
+    {
+        $root = $this->makeRoot();
+        $finalDir = $root.DIRECTORY_SEPARATOR.'release';
+        $tmpDir = SafeArtifactDirectory::createTemporaryDirectory($root, $finalDir);
+        file_put_contents($tmpDir.DIRECTORY_SEPARATOR.'artifact.json', '{"ok":true}');
+
+        SafeArtifactDirectory::finalize(
+            $tmpDir,
+            $finalDir,
+            SafeArtifactDirectory::RUNTIME_READER_DIRECTORY_MODE,
+        );
+
+        clearstatcache(true, $finalDir);
+        $mode = fileperms($finalDir);
+        $this->assertIsInt($mode);
+        $this->assertSame(02750, $mode & 07777);
+        $this->assertFileExists($finalDir.DIRECTORY_SEPARATOR.'artifact.json');
+    }
+
     private function makeRoot(): string
     {
         $root = sys_get_temp_dir().DIRECTORY_SEPARATOR.'safe-artifact-directory-'.bin2hex(random_bytes(6));

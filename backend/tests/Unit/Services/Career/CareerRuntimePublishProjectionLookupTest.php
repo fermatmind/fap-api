@@ -144,7 +144,7 @@ final class CareerRuntimePublishProjectionLookupTest extends TestCase
         $this->assertFalse($lookup->familyHubLive('agricultural-workers-all-other'));
     }
 
-    public function test_it_uses_newest_valid_projection_artifact_instead_of_lexical_directory_order(): void
+    public function test_it_uses_newest_projection_artifact_instead_of_lexical_directory_order(): void
     {
         $this->writeProjection('career_post_rollout_runtime_projection_authority_20260515_65e4fdbd', [
             [
@@ -158,7 +158,6 @@ final class CareerRuntimePublishProjectionLookupTest extends TestCase
                 'release_gate_pass' => false,
             ],
         ], 1_000);
-        $this->writeInvalidProjection('zzzz-invalid-newer-directory', 3_000);
         $this->writeProjection('20260515T064326Z', [
             [
                 'slug' => 'architectural-and-civil-drafters',
@@ -179,6 +178,59 @@ final class CareerRuntimePublishProjectionLookupTest extends TestCase
         $this->assertTrue($lookup->searchVisible('architectural-and-civil-drafters'));
         $this->assertTrue($lookup->robotsIndexable('architectural-and-civil-drafters'));
         $this->assertTrue($lookup->releaseGatePass('architectural-and-civil-drafters'));
+    }
+
+    public function test_it_fails_closed_when_the_newest_projection_artifact_is_invalid(): void
+    {
+        $this->writeProjection('older-valid', [[
+            'slug' => 'actors',
+            'locale' => 'en',
+            'runtime_publish_state' => 'published',
+            'detail_route_enabled' => true,
+            'dataset_visible' => true,
+            'search_visible' => true,
+            'robots_indexable' => true,
+            'release_gate_pass' => true,
+        ]], 1_000);
+        $this->writeInvalidProjection('newer-invalid', 2_000);
+
+        $lookup = app(CareerRuntimePublishProjectionLookup::class);
+
+        $this->assertNull($lookup->itemForSlug('actors', 'en'));
+        $this->assertFalse($lookup->detailRouteEnabled('actors'));
+        $this->assertSame([], $lookup->publicDetailItems());
+    }
+
+    public function test_it_fails_closed_when_the_newest_projection_directory_is_unreadable(): void
+    {
+        $this->writeProjection('older-valid', [[
+            'slug' => 'actors',
+            'locale' => 'en',
+            'runtime_publish_state' => 'published',
+            'detail_route_enabled' => true,
+            'dataset_visible' => true,
+            'search_visible' => true,
+            'robots_indexable' => true,
+            'release_gate_pass' => true,
+        ]], 1_000);
+        $this->writeProjection('newer-unreadable', [], 2_000);
+
+        $unreadableDirectory = storage_path('app/private/career_runtime_publish_projection/newer-unreadable');
+        touch($unreadableDirectory, 2_000);
+        chmod($unreadableDirectory, 0000);
+        clearstatcache(true, $unreadableDirectory);
+
+        try {
+            $this->assertFalse(is_readable($unreadableDirectory));
+
+            $lookup = app(CareerRuntimePublishProjectionLookup::class);
+
+            $this->assertNull($lookup->itemForSlug('actors', 'en'));
+            $this->assertFalse($lookup->detailRouteEnabled('actors'));
+            $this->assertSame([], $lookup->publicDetailItems());
+        } finally {
+            chmod($unreadableDirectory, 0700);
+        }
     }
 
     public function test_it_reloads_projection_visibility_when_newer_materialized_authority_appears(): void

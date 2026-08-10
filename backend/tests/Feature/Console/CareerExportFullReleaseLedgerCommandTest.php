@@ -49,6 +49,9 @@ final class CareerExportFullReleaseLedgerCommandTest extends TestCase
         $artifactPath = $payload['artifacts'][CareerFullReleaseLedgerProjectionService::LEDGER_FILENAME] ?? null;
         $this->assertIsString($artifactPath);
         $this->assertFileExists($artifactPath);
+        $directoryMode = fileperms(dirname($artifactPath));
+        $this->assertIsInt($directoryMode);
+        $this->assertSame(02750, $directoryMode & 07777);
 
         $ledger = json_decode((string) file_get_contents($artifactPath), true);
         $this->assertIsArray($ledger);

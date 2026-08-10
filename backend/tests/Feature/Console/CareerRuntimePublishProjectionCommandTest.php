@@ -42,6 +42,9 @@ final class CareerRuntimePublishProjectionCommandTest extends TestCase
 
         $path = storage_path('app/private/career_runtime_publish_projection/'.$timestamp.'/'.CareerRuntimePublishProjectionExporter::PROJECTION_FILENAME);
         $this->assertFileExists($path);
+        $directoryMode = fileperms(dirname($path));
+        $this->assertIsInt($directoryMode);
+        $this->assertSame(02750, $directoryMode & 07777);
 
         $payload = json_decode((string) file_get_contents($path), true);
         $this->assertSame('career_runtime_publish_projection', $payload['projection_kind'] ?? null);
