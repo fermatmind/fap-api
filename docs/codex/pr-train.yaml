@@ -48893,3 +48893,67 @@ prs:
     status: planned
     depends_on:
       - CAREER-COLD-CACHE-DISCOVERABILITY-GATE-02
+
+  - id: PUBLIC-TOPIC-GRAPH-AUTHORITY-CONTRACT-01
+    repo: fap-api
+    base: main
+    branch: codex/public-topic-graph-authority-contract-01
+    title: "PUBLIC-TOPIC-GRAPH-AUTHORITY-CONTRACT-01: expose CMS-authoritative public topic edges"
+    status: ready_to_merge
+    depends_on:
+      - PUBLIC-TOPIC-GRAPH-AUDIT-CLOSEOUT-01
+    train_scope: cms_authoritative_public_topic_edge_contract
+    risk_level: p1_public_api_authority
+    scope:
+      - Add the CMS/backend-owned public topic edge record and fail-closed public read model.
+      - Validate source and target publication eligibility, locale, relation, canonical, private-path boundaries, ordering, deduplication, validity windows, audit identity, and cache invalidation.
+      - Expose an explicit public API projection with authority metadata and an empty-items response when no eligible edges exist.
+      - Keep every Career source or target projection closed pending a current C06 PASS.
+      - Document the governed G03 owner/parent/next-step handoff and backend repository authority impact.
+    allowed_paths:
+      - AGENTS.md
+      - backend/routes/api.php
+      - backend/database/migrations/2026_08_10_060000_create_public_topic_edges_table.php
+      - backend/app/Models/PublicTopicEdge.php
+      - backend/app/Http/Controllers/API/V0_5/Cms/PublicTopicEdgeController.php
+      - backend/app/Services/Cms/PublicTopicEdgeAuthorityResolver.php
+      - backend/app/Services/Cms/PublicTopicEdgeReadModel.php
+      - backend/app/Services/ReviewGovernance/ReviewPolicyRegistry.php
+      - backend/tests/Feature/V0_5/PublicTopicEdgeApiTest.php
+      - backend/tests/Architecture/ReviewPolicyRegistryTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/seo/public-topic-edge-authority-contract.md
+      - backend/docs/contracts/openapi.snapshot.json
+      - docs/operations/generated/solo-owner-review-surface-registry.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Apply a production migration, import or publish CMS content, activate Career edges, mutate sitemap or llms output, or perform any Search Channel action.
+      - Infer edges or publication from slugs, files, crawler observations, frontend fallback copy, schema, sitemap, or llms presence.
+      - Return private targets, unavailable targets, stale canonicals, or unsupported source and target types.
+    validation:
+      - cd backend && php artisan test tests/Feature/V0_5/PublicTopicEdgeApiTest.php --no-ansi
+      - cd backend && php artisan test tests/Architecture/ReviewPolicyRegistryTest.php --no-ansi
+      - cd backend && php artisan route:list --path=api --except-vendor
+      - cd backend && vendor/bin/pint --test routes/api.php app/Models/PublicTopicEdge.php app/Http/Controllers/API/V0_5/Cms/PublicTopicEdgeController.php app/Services/Cms/PublicTopicEdgeAuthorityResolver.php app/Services/Cms/PublicTopicEdgeReadModel.php app/Services/ReviewGovernance/ReviewPolicyRegistry.php database/migrations/2026_08_10_060000_create_public_topic_edges_table.php tests/Feature/V0_5/PublicTopicEdgeApiTest.php tests/Architecture/ReviewPolicyRegistryTest.php
+      - cd backend && composer validate --strict
+      - cd backend && composer audit
+      - cd backend && bash scripts/export_openapi.sh --check
+      - cd backend && php artisan test tests/Feature/OpenApiDiffTest.php --no-ansi
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - exact changed-file scope validation
+      - git diff --check
+      - git diff --cached --check
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    career_link_publication_gate: CLOSED
+    search_channel_action: false
+    deploy_allowed: false
+    content_authority: fap-api CMS public topic edge records plus current backend publication and canonical truth
+    repository_rule_impact: establishes a backend-authoritative edge projection and forbids frontend completion or Career activation before C06 PASS

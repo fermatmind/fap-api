@@ -6412,6 +6412,43 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', routeChangedLines: $routeChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_public_topic_edge_authority_contract(): void
+    {
+        $allowed = [
+            'backend/app/Http/Controllers/API/V0_5/Cms/PublicTopicEdgeController.php',
+            'backend/app/Models/PublicTopicEdge.php',
+            'backend/app/Services/Cms/PublicTopicEdgeAuthorityResolver.php',
+            'backend/app/Services/Cms/PublicTopicEdgeReadModel.php',
+            'backend/database/migrations/2026_08_10_060000_create_public_topic_edges_table.php',
+            'backend/routes/api.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+        $routeChangedLines = [
+            '+use App\Http\Controllers\API\V0_5\Cms\PublicTopicEdgeController;',
+            "+        Route::get('/public-topic-edges', PublicTopicEdgeController::class)",
+            "+            ->name('api.v0_5.public_topic_edges.index');",
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $allowed,
+            '',
+            '',
+            routeChangedLines: $routeChangedLines,
+        ));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+        $this->assertSame(
+            ['backend/routes/api.php'],
+            $this->mbtiImpactingRuntimeChanges(
+                ['backend/routes/api.php'],
+                '',
+                '',
+                routeChangedLines: [...$routeChangedLines, "+        Route::post('/public-topic-edges', PublicTopicEdgeController::class);"],
+            ),
+        );
+    }
+
     public function test_runtime_freeze_classifier_ignores_payment_unlock_attribution_diagnostics(): void
     {
         $changed = [
@@ -8524,6 +8561,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if (
+                $file === 'backend/routes/api.php'
+                && $this->routeDiffIsPublicTopicEdgeAuthorityContractOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
+            ) {
+                continue;
+            }
+
             if ($file === 'backend/app/Http/Middleware/PublicApiCacheHeaders.php') {
                 continue;
             }
@@ -8677,6 +8721,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isPublicTestMetricsSummaryEndpointFile($file)) {
+                continue;
+            }
+
+            if ($this->isPublicTopicEdgeAuthorityContractFile($file)) {
                 continue;
             }
 
@@ -13124,6 +13172,17 @@ DIFF;
         ], true);
     }
 
+    private function isPublicTopicEdgeAuthorityContractFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_5/Cms/PublicTopicEdgeController.php',
+            'backend/app/Models/PublicTopicEdge.php',
+            'backend/app/Services/Cms/PublicTopicEdgeAuthorityResolver.php',
+            'backend/app/Services/Cms/PublicTopicEdgeReadModel.php',
+            'backend/database/migrations/2026_08_10_060000_create_public_topic_edges_table.php',
+        ], true);
+    }
+
     private function isPaymentUnlockAttributionDiagnosticsFile(string $file): bool
     {
         return $file === 'backend/app/Services/Analytics/PaymentUnlockAttributionDiagnostics.php';
@@ -13365,6 +13424,20 @@ DIFF;
         $allowed = [
             '+use App\Http\Controllers\API\V0_3\PublicTestMetricsSummaryController;',
             "+        Route::get('/public-gateways/test-metrics-summary', PublicTestMetricsSummaryController::class);",
+        ];
+
+        return $changedLines !== [] && array_values($changedLines) === $allowed;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsPublicTopicEdgeAuthorityContractOnly(array $changedLines): bool
+    {
+        $allowed = [
+            '+use App\Http\Controllers\API\V0_5\Cms\PublicTopicEdgeController;',
+            "+        Route::get('/public-topic-edges', PublicTopicEdgeController::class)",
+            "+            ->name('api.v0_5.public_topic_edges.index');",
         ];
 
         return $changedLines !== [] && array_values($changedLines) === $allowed;
