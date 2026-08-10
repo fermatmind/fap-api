@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Career;
 
+use App\Domain\Career\IndexStateValue;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
@@ -304,7 +305,7 @@ final class CareerJobDetailApiTest extends TestCase
             ->assertJsonMissingPath('provenance_meta.compile_refs');
     }
 
-    public function test_docx_baseline_canonical_uses_requested_public_locale_instead_of_job_locale(): void
+    public function test_docx_baseline_uses_requested_locale_and_normalized_indexability_contract(): void
     {
         $this->configurePublicResolutionPlan([
             ['slug' => 'canonical-locale-regression', 'status' => 'already_imported_validated'],
@@ -347,12 +348,16 @@ final class CareerJobDetailApiTest extends TestCase
             ->assertOk()
             ->assertJsonPath('seo_contract.canonical_path', '/en/career/jobs/canonical-locale-regression')
             ->assertJsonPath('seo_contract.canonical_target', '/en/career/jobs/canonical-locale-regression')
+            ->assertJsonPath('seo_contract.index_state', IndexStateValue::INDEXABLE)
+            ->assertJsonPath('seo_contract.index_eligible', true)
             ->assertJsonPath('seo_contract.robots_policy', 'index,follow');
 
         $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/canonical-locale-regression?locale=zh-CN')
             ->assertOk()
             ->assertJsonPath('seo_contract.canonical_path', '/zh/career/jobs/canonical-locale-regression')
             ->assertJsonPath('seo_contract.canonical_target', '/zh/career/jobs/canonical-locale-regression')
+            ->assertJsonPath('seo_contract.index_state', IndexStateValue::INDEXABLE)
+            ->assertJsonPath('seo_contract.index_eligible', true)
             ->assertJsonPath('seo_contract.robots_policy', 'index,follow');
     }
 

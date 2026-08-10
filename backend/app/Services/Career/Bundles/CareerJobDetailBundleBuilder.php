@@ -20,7 +20,6 @@ use App\Services\Career\Review\CareerSearchEntryTierResolver;
 use App\Services\Career\Scoring\CareerWhiteBoxScorePayloadBuilder;
 use App\Services\PublicSurface\SeoSurfaceContractService;
 use App\Services\ReviewGovernance\PublicReviewContract;
-use App\Services\Career\Bundles\CareerJobPublicAllowlist;
 use Illuminate\Support\Arr;
 
 /**
@@ -754,7 +753,7 @@ final class CareerJobDetailBundleBuilder
         ];
         $canonicalPath = $this->canonicalPathForPublicLocale($publicLocale, (string) $job->slug);
         $indexEligible = (bool) $job->is_indexable;
-        $publicIndexState = $indexEligible ? 'index' : 'noindex';
+        $publicIndexState = $indexEligible ? IndexStateValue::INDEXABLE : IndexStateValue::NOINDEX;
         $robotsPolicy = $indexEligible ? 'index,follow' : 'noindex,follow';
         $surface = $this->seoSurfaceContractService->build([
             'metadata_scope' => 'career_protocol_bundle',
