@@ -20,7 +20,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: backend-production-verify-only
+  group: deploy-${{ github.repository }}-production
   cancel-in-progress: false
 
 jobs:
@@ -182,10 +182,10 @@ jobs:
             SCALE_LOOKUP_BASE_URL="$public_api_base_url" \
             SCALE_LOOKUP_SLUG="$slug" \
             SCALE_LOOKUP_USE_RESOLVE=false \
-            SCALE_LOOKUP_ATTEMPTS=3 \
-            SCALE_LOOKUP_RETRY_DELAY_SECONDS=2 \
-            SCALE_LOOKUP_CONNECT_TIMEOUT_SECONDS=5 \
-            SCALE_LOOKUP_MAX_TIME_SECONDS=40 \
+            SCALE_LOOKUP_ATTEMPTS=1 \
+            SCALE_LOOKUP_RETRY_DELAY_SECONDS=0 \
+            SCALE_LOOKUP_CONNECT_TIMEOUT_SECONDS=3 \
+            SCALE_LOOKUP_MAX_TIME_SECONDS=10 \
               bash backend/scripts/deploy/verify_scale_lookup.sh >/dev/null 2>&1
             scale_lookup_count=$((scale_lookup_count + 1))
           done
@@ -375,7 +375,7 @@ jobs:
           deployed_revision_match=true
           last_completed_check="revision_match"
 
-          if ! internal_health="$(curl -fsS --connect-timeout 5 --max-time 20 \
+          if ! internal_health="$(curl -fsS --connect-timeout 3 --max-time 10 \
             --resolve "${healthcheck_host}:443:127.0.0.1" \
             "https://${healthcheck_host}/api/healthz" 2>/dev/null)" \
             || ! jq -e '.ok == true' <<<"$internal_health" >/dev/null 2>&1; then
@@ -384,7 +384,7 @@ jobs:
           internal_health_ok=true
           last_completed_check="internal_health"
 
-          if ! public_health_status="$(curl -sS --connect-timeout 5 --max-time 20 \
+          if ! public_health_status="$(curl -sS --connect-timeout 3 --max-time 10 \
             -o /dev/null -w '%{http_code}' "${public_api_base_url}/api/healthz" 2>/dev/null)" \
             || ! test "$public_health_status" = "404"; then
             fail_check "public_health_policy_404"
@@ -392,7 +392,7 @@ jobs:
           public_health_policy_404=true
           last_completed_check="public_health_policy_404"
 
-          if ! flags_payload="$(curl -fsS --connect-timeout 5 --max-time 30 \
+          if ! flags_payload="$(curl -fsS --connect-timeout 3 --max-time 10 \
             "${public_api_base_url}/api/v0.3/flags" 2>/dev/null)" \
             || ! jq -e 'type == "object"' <<<"$flags_payload" >/dev/null 2>&1; then
             fail_check "flags_api"
@@ -401,7 +401,7 @@ jobs:
           last_completed_check="flags_api"
 
           hub_path='/api/v0.5/personality-content-assets/big_five/hub/big-five?locale=zh-CN'
-          if ! public_hub="$(curl -fsS --connect-timeout 5 --max-time 30 \
+          if ! public_hub="$(curl -fsS --connect-timeout 3 --max-time 10 \
             "${public_api_base_url}${hub_path}" 2>/dev/null)" \
             || ! public_source_hash="$(jq -er '
             select(.ok == true)
@@ -413,7 +413,7 @@ jobs:
           big_five_public_authority=true
           last_completed_check="big_five_public_authority"
 
-          if ! internal_hub="$(curl -fsS --connect-timeout 5 --max-time 30 \
+          if ! internal_hub="$(curl -fsS --connect-timeout 3 --max-time 10 \
             --resolve "${healthcheck_host}:443:127.0.0.1" \
             "https://${healthcheck_host}${hub_path}" 2>/dev/null)" \
             || ! internal_source_hash="$(jq -er '
@@ -432,7 +432,7 @@ jobs:
           personality_source_hash_match=true
           last_completed_check="personality_source_hash_match"
 
-          if ! riasec_60="$(curl -fsS --connect-timeout 5 --max-time 40 \
+          if ! riasec_60="$(curl -fsS --connect-timeout 3 --max-time 10 \
             "${public_api_base_url}/api/v0.3/scales/RIASEC/questions?locale=zh-CN&form_code=riasec_60" 2>/dev/null)" \
             || ! jq -e '.ok == true and .form_code == "riasec_60" and (.questions.items | length) == 60' \
               <<<"$riasec_60" >/dev/null 2>&1; then
@@ -441,7 +441,7 @@ jobs:
           riasec_60_questions=60
           last_completed_check="riasec_60"
 
-          if ! riasec_140="$(curl -fsS --connect-timeout 5 --max-time 40 \
+          if ! riasec_140="$(curl -fsS --connect-timeout 3 --max-time 10 \
             "${public_api_base_url}/api/v0.3/scales/RIASEC/questions?locale=zh-CN&form_code=riasec_140" 2>/dev/null)" \
             || ! jq -e '.ok == true and .form_code == "riasec_140" and (.questions.items | length) == 140' \
               <<<"$riasec_140" >/dev/null 2>&1; then

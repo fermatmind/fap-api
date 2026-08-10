@@ -274,21 +274,37 @@ function deployPublicDnsBusinessEvidenceCommand(string $host): string
         $host,
         '/api/v0.5/personality-content-assets/big_five/hub/big-five?locale=zh-CN'
     );
-    $httpCode = deployShellArg('%{http_code}');
+    $httpCode = deployShellArg("\n%{http_code}");
     $personalityContract = deployShellArg(
         '.ok==true and (.personality_public_content_asset_v1.source_hash | strings | test("^[0-9a-f]{64}$"))'
     );
-    $probe = 'public_health_status="$(curl -sS --connect-timeout 5 --max-time 15 '
-        ."-o /dev/null -w {$httpCode} {$healthUrl} || true)\"; "
-        .'[ "$public_health_status" = "404" ] '
-        ."&& curl -fsS --connect-timeout 5 --max-time 15 {$flagsUrl} >/dev/null "
-        ."&& curl -fsS --connect-timeout 5 --max-time 15 {$personalityUrl} "
-        ."| jq -e {$personalityContract} >/dev/null";
+    $probeFunction = 'production_probe() { '
+        .'url="$1"; set +e; '
+        .'raw="$(curl -sS --connect-timeout 3 --max-time 10 '
+        ."-w {$httpCode} \"\$url\" 2>/dev/null)\"; rc=\$?; set -e; "
+        .'if [ "$rc" -ne 0 ]; then return 75; fi; '
+        .'PROBE_STATUS="${raw##*$\'\n\'}"; PROBE_BODY="${raw%$\'\n\'*}"; '
+        .'case "$PROBE_STATUS" in 429|502|503|504) return 75 ;; esac; return 0; }';
+    $verifyFunction = 'verify_public_evidence() { '
+        ."production_probe {$healthUrl} || return \$?; "
+        .'[ "$PROBE_STATUS" = "404" ] || return 1; '
+        ."production_probe {$flagsUrl} || return \$?; "
+        .'[ "$PROBE_STATUS" = "200" ] || return 1; '
+        ."production_probe {$personalityUrl} || return \$?; "
+        .'[ "$PROBE_STATUS" = "200" ] '
+        ."&& printf '%s' \"\$PROBE_BODY\" | jq -e {$personalityContract} >/dev/null; }";
 
-    return 'attempt=1; while [ "$attempt" -le 10 ]; do '
-        ."if {$probe}; then exit 0; fi; "
-        .'if [ "$attempt" -eq 10 ]; then echo "Public DNS business evidence failed after 10 attempts" >&2; exit 1; fi; '
-        .'attempt=$((attempt + 1)); sleep 3; done';
+    return 'PRODUCTION_PUBLIC_PROBE_ATTEMPTS=3; PROBE_STATUS=; PROBE_BODY=; '
+        .$probeFunction.'; '.$verifyFunction.'; '
+        .'attempt=1; while [ "$attempt" -le "$PRODUCTION_PUBLIC_PROBE_ATTEMPTS" ]; do '
+        .'set +e; verify_public_evidence; probe_rc=$?; set -e; '
+        .'if [ "$probe_rc" -eq 0 ]; then exit 0; fi; '
+        .'if [ "$probe_rc" -ne 75 ]; then '
+        .'echo "Public DNS business evidence failed terminally on attempt ${attempt}" >&2; exit 1; fi; '
+        .'if [ "$attempt" -eq "$PRODUCTION_PUBLIC_PROBE_ATTEMPTS" ]; then '
+        .'echo "Public DNS business evidence failed after 3 attempts" >&2; exit 1; fi; '
+        .'case "$attempt" in 1) sleep 2 ;; 2) sleep 5 ;; esac; '
+        .'attempt=$((attempt + 1)); done';
 }
 
 function runProductionPublicDnsBusinessEvidence(): void
@@ -318,6 +334,7 @@ function deployCanSudoWwwData(): bool
     if ($canSudo === null) {
         $canSudo = trim(run('sudo -n -u www-data -- true 2>/dev/null && echo yes || echo no')) === 'yes';
     }
+
     return $canSudo;
 }
 
@@ -1773,10 +1790,10 @@ task('healthcheck:scale-lookup', function () {
                 'SCALE_LOOKUP_BASE_URL' => "https://{$host}",
                 'SCALE_LOOKUP_SLUG' => $slug,
                 'SCALE_LOOKUP_USE_RESOLVE' => $useResolve ? 'true' : 'false',
-                'SCALE_LOOKUP_ATTEMPTS' => '3',
-                'SCALE_LOOKUP_RETRY_DELAY_SECONDS' => '2',
-                'SCALE_LOOKUP_CONNECT_TIMEOUT_SECONDS' => '5',
-                'SCALE_LOOKUP_MAX_TIME_SECONDS' => '40',
+                'SCALE_LOOKUP_ATTEMPTS' => '1',
+                'SCALE_LOOKUP_RETRY_DELAY_SECONDS' => '0',
+                'SCALE_LOOKUP_CONNECT_TIMEOUT_SECONDS' => '3',
+                'SCALE_LOOKUP_MAX_TIME_SECONDS' => '10',
             ];
             $assignments = [];
 

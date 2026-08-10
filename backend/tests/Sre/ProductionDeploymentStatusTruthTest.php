@@ -323,11 +323,15 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertIsInt($postDeployOffset);
         $this->assertLessThan($deployOffset, $baselineOffset);
         $this->assertLessThan($postDeployOffset, $deployOffset);
+        $this->assertSame(2, substr_count($deploy, 'PRODUCTION_PUBLIC_PROBE_ATTEMPTS=3'));
         $this->assertSame(2, substr_count(
             $deploy,
-            'public_health_status="$(curl -sS --connect-timeout 5 --max-time 15'
+            'PRODUCTION_PUBLIC_PROBE_CONNECT_TIMEOUT_SECONDS=3'
         ));
-        $this->assertSame(2, substr_count($deploy, '[ "$public_health_status" = "404" ]'));
+        $this->assertSame(2, substr_count($deploy, 'PRODUCTION_PUBLIC_PROBE_MAX_TIME_SECONDS=10'));
+        $this->assertSame(2, substr_count($deploy, 'PRODUCTION_PUBLIC_PROBE_RETRY_DELAYS=(2 5)'));
+        $this->assertSame(2, substr_count($deploy, '429|502|503|504) return 75'));
+        $this->assertSame(2, substr_count($deploy, '[ "$PROBE_STATUS" = "404" ]'));
         $this->assertSame(2, substr_count($deploy, '${PUBLIC_API_ORIGIN}/api/v0.3/flags'));
         $this->assertSame(2, substr_count(
             $deploy,
@@ -337,12 +341,9 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
             $deploy,
             '.personality_public_content_asset_v1.source_hash | strings | test("^[0-9a-f]{64}$")'
         ));
-        $this->assertStringContainsString('Production health evidence baseline failed after 10 attempts', $deploy);
-        $this->assertStringContainsString('Post-deploy public business evidence failed after 10 attempts', $deploy);
-        $this->assertStringNotContainsString(
-            'curl -fsS --connect-timeout 5 --max-time 15 "$HEALTHCHECK_URL" | jq -e \'.ok==true\'',
-            $deploy
-        );
+        $this->assertStringContainsString('Production health evidence baseline failed after 3 attempts', $deploy);
+        $this->assertStringContainsString('Post-deploy public business evidence failed after 3 attempts', $deploy);
+        $this->assertStringContainsString('failed terminally on attempt ${attempt}', $deploy);
 
         $this->assertStringContainsString("task('guard:public-dns-health'", $deployer);
         $this->assertStringContainsString("before('deploy:symlink', 'guard:public-dns-health')", $deployer);
@@ -350,14 +351,18 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringContainsString("after('healthcheck:sitemap-source', 'healthcheck:public-dns')", $deployer);
         $this->assertStringContainsString("currentHost()->getAlias() !== 'production'", $deployer);
         $this->assertStringContainsString('deployPublicDnsBusinessEvidenceCommand($host)', $deployer);
-        $this->assertStringContainsString('curl -sS --connect-timeout 5 --max-time 15', $publicBusinessCommand);
+        $this->assertStringContainsString('curl -sS --connect-timeout 3 --max-time 10', $publicBusinessCommand);
+        $this->assertStringContainsString('PRODUCTION_PUBLIC_PROBE_ATTEMPTS=3', $publicBusinessCommand);
+        $this->assertStringContainsString('429|502|503|504) return 75', $publicBusinessCommand);
+        $this->assertStringContainsString('case "$attempt" in 1) sleep 2 ;; 2) sleep 5', $publicBusinessCommand);
+        $this->assertStringContainsString('Public DNS business evidence failed after 3 attempts', $publicBusinessCommand);
         $this->assertStringContainsString("deployHttpsUrlArg(\$host, '/api/healthz')", $publicBusinessCommand);
         $this->assertStringContainsString("deployHttpsUrlArg(\$host, '/api/v0.3/flags')", $publicBusinessCommand);
         $this->assertStringContainsString(
             "'/api/v0.5/personality-content-assets/big_five/hub/big-five?locale=zh-CN'",
             $publicBusinessCommand
         );
-        $this->assertStringContainsString('[ "$public_health_status" = "404" ]', $publicBusinessCommand);
+        $this->assertStringContainsString('[ "$PROBE_STATUS" = "404" ]', $publicBusinessCommand);
         $this->assertStringContainsString('personality_public_content_asset_v1.source_hash', $publicBusinessCommand);
         $this->assertStringNotContainsString('--resolve', $publicBusinessCommand);
     }
