@@ -13,9 +13,21 @@ final class AnalyticsFunnelDailyBuilder
 {
     private readonly AnalyticsTrafficExclusionPolicy $trafficExclusionPolicy;
 
+    private readonly string $reportingTimezone;
+
+    private readonly string $storageTimezone;
+
     public function __construct(?AnalyticsTrafficExclusionPolicy $trafficExclusionPolicy = null)
     {
         $this->trafficExclusionPolicy = $trafficExclusionPolicy ?? new AnalyticsTrafficExclusionPolicy;
+        $this->reportingTimezone = $this->validateTimezone(
+            config('analytics.funnel_daily.reporting_timezone', 'Asia/Shanghai'),
+            'ANALYTICS_FUNNEL_REPORTING_TIMEZONE'
+        );
+        $this->storageTimezone = $this->validateTimezone(
+            config('analytics.funnel_daily.storage_timezone', 'UTC'),
+            'ANALYTICS_STORAGE_TIMEZONE'
+        );
     }
 
     private const SUBMISSION_SUCCESS_STATES = [
@@ -112,7 +124,11 @@ final class AnalyticsFunnelDailyBuilder
      *     org_scope:list<int>,
      *     scale_scope:list<string>,
      *     from:string,
-     *     to:string
+     *     to:string,
+     *     reporting_timezone:string,
+     *     storage_timezone:string,
+     *     window_utc_start:string,
+     *     window_utc_end_exclusive:string
      * }
      */
     public function build(
@@ -121,8 +137,9 @@ final class AnalyticsFunnelDailyBuilder
         array $orgIds = [],
         array $scaleCodes = [],
     ): array {
-        $fromAt = CarbonImmutable::parse($from)->startOfDay();
-        $toAt = CarbonImmutable::parse($to)->endOfDay();
+        $window = $this->reportingWindow($from, $to);
+        $fromAt = CarbonImmutable::parse($window['storage_start'], $this->storageTimezone);
+        $toAt = CarbonImmutable::parse($window['storage_end_exclusive'], $this->storageTimezone);
         $normalizedOrgIds = $this->normalizeOrgIds($orgIds);
         $normalizedScaleCodes = $this->normalizeScaleCodes($scaleCodes);
 
@@ -151,8 +168,58 @@ final class AnalyticsFunnelDailyBuilder
             'attempted_rows' => count($rows),
             'org_scope' => $normalizedOrgIds,
             'scale_scope' => $normalizedScaleCodes,
-            'from' => $fromAt->toDateString(),
-            'to' => $toAt->toDateString(),
+            'from' => $window['from'],
+            'to' => $window['to'],
+            'reporting_timezone' => $window['reporting_timezone'],
+            'storage_timezone' => $window['storage_timezone'],
+            'window_utc_start' => $window['window_utc_start'],
+            'window_utc_end_exclusive' => $window['window_utc_end_exclusive'],
+        ];
+    }
+
+    public function reportingTimezone(): string
+    {
+        return $this->reportingTimezone;
+    }
+
+    public function storageTimezone(): string
+    {
+        return $this->storageTimezone;
+    }
+
+    /**
+     * @return array{
+     *     from:string,
+     *     to:string,
+     *     reporting_timezone:string,
+     *     storage_timezone:string,
+     *     storage_start:string,
+     *     storage_end_exclusive:string,
+     *     window_utc_start:string,
+     *     window_utc_end_exclusive:string
+     * }
+     */
+    public function reportingWindow(\DateTimeInterface $from, \DateTimeInterface $to): array
+    {
+        $fromDay = CarbonImmutable::parse($from->format('Y-m-d'), $this->reportingTimezone)->startOfDay();
+        $toDay = CarbonImmutable::parse($to->format('Y-m-d'), $this->reportingTimezone)->startOfDay();
+
+        if ($fromDay->greaterThan($toDay)) {
+            throw new \InvalidArgumentException('The reporting window start date must be on or before the end date.');
+        }
+
+        $storageStart = $fromDay->setTimezone($this->storageTimezone);
+        $storageEndExclusive = $toDay->addDay()->setTimezone($this->storageTimezone);
+
+        return [
+            'from' => $fromDay->toDateString(),
+            'to' => $toDay->toDateString(),
+            'reporting_timezone' => $this->reportingTimezone,
+            'storage_timezone' => $this->storageTimezone,
+            'storage_start' => $storageStart->toIso8601String(),
+            'storage_end_exclusive' => $storageEndExclusive->toIso8601String(),
+            'window_utc_start' => $storageStart->utc()->toIso8601String(),
+            'window_utc_end_exclusive' => $storageEndExclusive->utc()->toIso8601String(),
         ];
     }
 
@@ -168,6 +235,10 @@ final class AnalyticsFunnelDailyBuilder
      *     scale_scope:list<string>,
      *     from:string,
      *     to:string,
+     *     reporting_timezone:string,
+     *     storage_timezone:string,
+     *     window_utc_start:string,
+     *     window_utc_end_exclusive:string,
      *     dry_run:bool
      * }
      */
@@ -323,7 +394,9 @@ final class AnalyticsFunnelDailyBuilder
                 }
 
                 $dimension = $dimensions[$attemptId];
-                $day = CarbonImmutable::parse($stageAt)->toDateString();
+                $day = $this->parseStorageTimestamp($stageAt)
+                    ->setTimezone($this->reportingTimezone)
+                    ->toDateString();
                 $rowKey = $this->aggregateKey($day, $dimension['org_id'], $dimension['scale_code'], $dimension['locale']);
 
                 if (! isset($rows[$rowKey])) {
@@ -341,7 +414,9 @@ final class AnalyticsFunnelDailyBuilder
             }
 
             $dimension = $dimensions[$attemptId];
-            $day = CarbonImmutable::parse($revenueEntry['paid_at'])->toDateString();
+            $day = $this->parseStorageTimestamp($revenueEntry['paid_at'])
+                ->setTimezone($this->reportingTimezone)
+                ->toDateString();
             $rowKey = $this->aggregateKey($day, $dimension['org_id'], $dimension['scale_code'], $dimension['locale']);
 
             if (! isset($rows[$rowKey])) {
@@ -403,7 +478,8 @@ final class AnalyticsFunnelDailyBuilder
         $query = DB::table('attempts')
             ->whereNotNull('id')
             ->whereNotNull('created_at')
-            ->whereBetween('created_at', [$from, $to])
+            ->where('created_at', '>=', $from)
+            ->where('created_at', '<', $to)
             ->select('id as attempt_id', 'created_at as stage_at');
 
         if ($orgIds !== []) {
@@ -431,7 +507,8 @@ final class AnalyticsFunnelDailyBuilder
         $submittedQuery = DB::table('attempts')
             ->whereNotNull('id')
             ->whereNotNull('submitted_at')
-            ->whereBetween('submitted_at', [$from, $to])
+            ->where('submitted_at', '>=', $from)
+            ->where('submitted_at', '<', $to)
             ->select('id as attempt_id', 'submitted_at as stage_at');
 
         if ($orgIds !== []) {
@@ -454,7 +531,8 @@ final class AnalyticsFunnelDailyBuilder
                     $join->on('submission_stage.attempt_id', '=', 'attempts.id');
                 })
                 ->whereNull('attempts.submitted_at')
-                ->whereBetween('submission_stage.stage_at', [$from, $to])
+                ->where('submission_stage.stage_at', '>=', $from)
+                ->where('submission_stage.stage_at', '<', $to)
                 ->select('attempts.id as attempt_id', 'submission_stage.stage_at');
 
             if ($orgIds !== []) {
@@ -493,7 +571,8 @@ final class AnalyticsFunnelDailyBuilder
             }
 
             $fallbackQuery
-                ->whereBetween('result_stage.stage_at', [$from, $to])
+                ->where('result_stage.stage_at', '>=', $from)
+                ->where('result_stage.stage_at', '<', $to)
                 ->select('attempts.id as attempt_id', 'result_stage.stage_at');
 
             if ($orgIds !== []) {
@@ -540,7 +619,7 @@ final class AnalyticsFunnelDailyBuilder
         }
 
         $this->applyEventAliasFilter($query, FunnelEventTaxonomy::FIRST_RESULT_OR_REPORT_VIEW_ALIASES);
-        $query->havingRaw('MIN(occurred_at) between ? and ?', [$from->toDateTimeString(), $to->toDateTimeString()]);
+        $query->havingRaw('MIN(occurred_at) >= ? and MIN(occurred_at) < ?', [$from->toDateTimeString(), $to->toDateTimeString()]);
 
         return $this->rowsToAttemptMap($query->get()->all(), 'attempt_id', 'stage_at');
     }
@@ -566,7 +645,7 @@ final class AnalyticsFunnelDailyBuilder
             $query->whereIn('org_id', $orgIds);
         }
 
-        $query->havingRaw('MIN(created_at) between ? and ?', [$from->toDateTimeString(), $to->toDateTimeString()]);
+        $query->havingRaw('MIN(created_at) >= ? and MIN(created_at) < ?', [$from->toDateTimeString(), $to->toDateTimeString()]);
 
         return $this->rowsToAttemptMap($query->get()->all(), 'attempt_id', 'stage_at');
     }
@@ -590,7 +669,7 @@ final class AnalyticsFunnelDailyBuilder
             ->select('target_attempt_id as attempt_id')
             ->selectRaw('MIN(paid_at) as stage_at')
             ->groupBy('target_attempt_id')
-            ->havingRaw('MIN(paid_at) between ? and ?', [$from->toDateTimeString(), $to->toDateTimeString()]);
+            ->havingRaw('MIN(paid_at) >= ? and MIN(paid_at) < ?', [$from->toDateTimeString(), $to->toDateTimeString()]);
 
         if ($orgIds !== []) {
             $paidQuery->whereIn('org_id', $orgIds);
@@ -621,7 +700,7 @@ final class AnalyticsFunnelDailyBuilder
 
         $this->applyPaymentSuccessSignalFilter($fallbackQuery);
         $fallbackQuery->havingRaw(
-            'MIN(COALESCE(payment_events.handled_at, payment_events.processed_at)) between ? and ?',
+            'MIN(COALESCE(payment_events.handled_at, payment_events.processed_at)) >= ? and MIN(COALESCE(payment_events.handled_at, payment_events.processed_at)) < ?',
             [$from->toDateTimeString(), $to->toDateTimeString()]
         );
 
@@ -701,7 +780,7 @@ final class AnalyticsFunnelDailyBuilder
             ->select('attempt_id')
             ->selectRaw('MIN(stage_at) as stage_at')
             ->groupBy('attempt_id')
-            ->havingRaw('MIN(stage_at) between ? and ?', [$from->toDateTimeString(), $to->toDateTimeString()]);
+            ->havingRaw('MIN(stage_at) >= ? and MIN(stage_at) < ?', [$from->toDateTimeString(), $to->toDateTimeString()]);
 
         return $this->rowsToAttemptMap($query->get()->all(), 'attempt_id', 'stage_at');
     }
@@ -715,9 +794,10 @@ final class AnalyticsFunnelDailyBuilder
         $map = $this->collectReportSnapshotReadyMap($from, $to, $orgIds);
 
         foreach ($this->collectProjectionAccessReadyMap($from, $to, $orgIds) as $attemptId => $stageAt) {
-            $map[$attemptId] = $stageAt;
+            $map[$attemptId] = $this->minTimestamp($map[$attemptId] ?? null, $stageAt);
         }
 
+        $map = $this->filterReportReadyByAttemptLifecycle($map, $orgIds);
         ksort($map);
 
         return $map;
@@ -737,8 +817,13 @@ final class AnalyticsFunnelDailyBuilder
             ->whereNotNull('attempt_id')
             ->where('attempt_id', '!=', '')
             ->where(function (QueryBuilder $query) use ($from, $to): void {
-                $query->whereBetween('created_at', [$from, $to])
-                    ->orWhereBetween('updated_at', [$from, $to]);
+                $query->where(function (QueryBuilder $range) use ($from, $to): void {
+                    $range->where('created_at', '>=', $from)
+                        ->where('created_at', '<', $to);
+                })->orWhere(function (QueryBuilder $range) use ($from, $to): void {
+                    $range->where('updated_at', '>=', $from)
+                        ->where('updated_at', '<', $to);
+                });
             });
 
         if ($orgIds !== []) {
@@ -766,7 +851,11 @@ final class AnalyticsFunnelDailyBuilder
                 $row->created_at ?? null,
             ]);
 
-            if ($attemptId === '' || $stageAt === null) {
+            if (
+                $attemptId === ''
+                || $stageAt === null
+                || ! $this->timestampBetween($stageAt, $from, $to)
+            ) {
                 continue;
             }
 
@@ -784,52 +873,35 @@ final class AnalyticsFunnelDailyBuilder
      */
     private function collectProjectionAccessReadyMap(CarbonImmutable $from, CarbonImmutable $to, array $orgIds): array
     {
-        foreach (['attempts', 'benefit_grants', 'results', 'unified_access_projections', 'attempt_receipts'] as $table) {
+        foreach (['attempts', 'results', 'unified_access_projections', 'attempt_receipts'] as $table) {
             if (! SchemaBaseline::hasTable($table)) {
                 return [];
             }
         }
 
-        if (! SchemaBaseline::hasColumn('benefit_grants', 'attempt_id')) {
-            return [];
-        }
-
         $receiptAttempts = DB::table('attempt_receipts')
             ->whereNotNull('attempt_id')
             ->where('attempt_id', '!=', '')
+            ->whereIn('receipt_type', ['access_projection_refreshed', 'report_access_ready'])
             ->select('attempt_id')
             ->selectRaw('MIN(COALESCE(recorded_at, occurred_at, created_at, updated_at)) as receipt_at')
             ->groupBy('attempt_id');
 
         $query = DB::table('unified_access_projections')
             ->join('attempts', 'attempts.id', '=', 'unified_access_projections.attempt_id')
-            ->join('benefit_grants', 'benefit_grants.attempt_id', '=', 'attempts.id')
             ->join('results', 'results.attempt_id', '=', 'attempts.id')
             ->joinSub($receiptAttempts, 'ready_receipts', function ($join): void {
                 $join->on('ready_receipts.attempt_id', '=', 'attempts.id');
             })
             ->whereRaw("lower(coalesce(unified_access_projections.access_state, '')) = ?", ['ready'])
             ->whereRaw("lower(coalesce(unified_access_projections.report_state, '')) = ?", ['ready'])
-            ->whereRaw("lower(coalesce(benefit_grants.status, '')) = ?", ['active'])
             ->whereNotNull('unified_access_projections.attempt_id')
             ->where('unified_access_projections.attempt_id', '!=', '')
             ->select('attempts.id as attempt_id')
-            ->selectRaw('MIN(benefit_grants.created_at) as grant_at')
             ->selectRaw('MAX(COALESCE(unified_access_projections.refreshed_at, unified_access_projections.produced_at, unified_access_projections.updated_at, unified_access_projections.created_at)) as projection_at')
             ->selectRaw('MIN(ready_receipts.receipt_at) as receipt_at')
             ->selectRaw('MAX(COALESCE(results.computed_at, results.updated_at, results.created_at)) as result_at')
             ->groupBy('attempts.id');
-
-        if (SchemaBaseline::hasColumn('benefit_grants', 'revoked_at')) {
-            $query->whereNull('benefit_grants.revoked_at');
-        }
-
-        if (SchemaBaseline::hasColumn('benefit_grants', 'expires_at')) {
-            $query->where(function (QueryBuilder $query): void {
-                $query->whereNull('benefit_grants.expires_at')
-                    ->orWhere('benefit_grants.expires_at', '>', now());
-            });
-        }
 
         if ($orgIds !== []) {
             $query->whereIn('attempts.org_id', $orgIds);
@@ -840,7 +912,6 @@ final class AnalyticsFunnelDailyBuilder
         foreach ($query->get() as $row) {
             $attemptId = trim((string) ($row->attempt_id ?? ''));
             $stageAt = $this->maxTimestamp([
-                $row->grant_at ?? null,
                 $row->projection_at ?? null,
                 $row->receipt_at ?? null,
                 $row->result_at ?? null,
@@ -856,6 +927,85 @@ final class AnalyticsFunnelDailyBuilder
         ksort($map);
 
         return $map;
+    }
+
+    /**
+     * @param  array<string,string>  $readyMap
+     * @param  list<int>  $orgIds
+     * @return array<string,string>
+     */
+    private function filterReportReadyByAttemptLifecycle(array $readyMap, array $orgIds): array
+    {
+        if ($readyMap === [] || ! SchemaBaseline::hasTable('attempts')) {
+            return [];
+        }
+
+        $attemptIds = array_keys($readyMap);
+        $attemptsQuery = DB::table('attempts')
+            ->whereIn('id', $attemptIds)
+            ->select('id', 'created_at', 'submitted_at');
+
+        if ($orgIds !== []) {
+            $attemptsQuery->whereIn('org_id', $orgIds);
+        }
+
+        $attempts = $attemptsQuery->get()->keyBy('id');
+        $submissionMap = [];
+
+        if (SchemaBaseline::hasTable('attempt_submissions')) {
+            [$stateSql, $stateBindings] = $this->lowerInSql('state', self::SUBMISSION_SUCCESS_STATES);
+            $submissionMap = $this->rowsToAttemptMap(
+                DB::table('attempt_submissions')
+                    ->whereIn('attempt_id', $attemptIds)
+                    ->whereRaw($stateSql, $stateBindings)
+                    ->select('attempt_id')
+                    ->selectRaw('MIN(COALESCE(finished_at, updated_at, created_at)) as submitted_at')
+                    ->groupBy('attempt_id')
+                    ->get()
+                    ->all(),
+                'attempt_id',
+                'submitted_at'
+            );
+        }
+
+        $validated = [];
+
+        foreach ($readyMap as $attemptId => $readyAt) {
+            $attempt = $attempts->get($attemptId);
+            if ($attempt === null) {
+                continue;
+            }
+
+            $startAt = $this->resolveTimestamp([$attempt->created_at ?? null]);
+            $submitAt = null;
+
+            foreach ([
+                $this->resolveTimestamp([$attempt->submitted_at ?? null]),
+                $submissionMap[$attemptId] ?? null,
+            ] as $candidateSubmitAt) {
+                if (
+                    $candidateSubmitAt === null
+                    || $startAt === null
+                    || $this->timestampBefore($candidateSubmitAt, $startAt)
+                ) {
+                    continue;
+                }
+
+                $submitAt = $this->minTimestamp($submitAt, $candidateSubmitAt);
+            }
+
+            if (
+                $startAt === null
+                || $submitAt === null
+                || $this->timestampBefore($readyAt, $submitAt)
+            ) {
+                continue;
+            }
+
+            $validated[$attemptId] = $readyAt;
+        }
+
+        return $validated;
     }
 
     /**
@@ -880,7 +1030,7 @@ final class AnalyticsFunnelDailyBuilder
         }
 
         $this->applyEventAliasFilter($query, FunnelEventTaxonomy::PDF_DOWNLOAD_ALIASES);
-        $query->havingRaw('MIN(occurred_at) between ? and ?', [$from->toDateTimeString(), $to->toDateTimeString()]);
+        $query->havingRaw('MIN(occurred_at) >= ? and MIN(occurred_at) < ?', [$from->toDateTimeString(), $to->toDateTimeString()]);
 
         return $this->rowsToAttemptMap($query->get()->all(), 'attempt_id', 'stage_at');
     }
@@ -902,7 +1052,8 @@ final class AnalyticsFunnelDailyBuilder
             ->where('shares.attempt_id', '!=', '')
             ->select('shares.attempt_id')
             ->selectRaw('COALESCE(shares.created_at, shares.updated_at) as stage_at')
-            ->whereBetween(DB::raw('COALESCE(shares.created_at, shares.updated_at)'), [$from->toDateTimeString(), $to->toDateTimeString()]);
+            ->where(DB::raw('COALESCE(shares.created_at, shares.updated_at)'), '>=', $from->toDateTimeString())
+            ->where(DB::raw('COALESCE(shares.created_at, shares.updated_at)'), '<', $to->toDateTimeString());
 
         if ($orgIds !== []) {
             $query->whereIn('attempts.org_id', $orgIds);
@@ -950,7 +1101,7 @@ final class AnalyticsFunnelDailyBuilder
             ->select('attempt_id')
             ->selectRaw('MIN(stage_at) as stage_at')
             ->groupBy('attempt_id')
-            ->havingRaw('MIN(stage_at) between ? and ?', [$from->toDateTimeString(), $to->toDateTimeString()]);
+            ->havingRaw('MIN(stage_at) >= ? and MIN(stage_at) < ?', [$from->toDateTimeString(), $to->toDateTimeString()]);
 
         return $this->rowsToAttemptMap($query->get()->all(), 'attempt_id', 'stage_at');
     }
@@ -971,7 +1122,8 @@ final class AnalyticsFunnelDailyBuilder
             ->whereNotNull('target_attempt_id')
             ->where('target_attempt_id', '!=', '')
             ->whereNotNull('paid_at')
-            ->whereBetween('paid_at', [$from, $to])
+            ->where('paid_at', '>=', $from)
+            ->where('paid_at', '<', $to)
             ->select('target_attempt_id as attempt_id', 'paid_at', 'amount_cents');
 
         if ($orgIds !== []) {
@@ -1009,7 +1161,7 @@ final class AnalyticsFunnelDailyBuilder
             ->selectRaw('MIN(COALESCE(payment_events.handled_at, payment_events.processed_at)) as paid_at')
             ->groupBy('orders.order_no', 'orders.target_attempt_id', 'orders.amount_cents')
             ->havingRaw(
-                'MIN(COALESCE(payment_events.handled_at, payment_events.processed_at)) between ? and ?',
+                'MIN(COALESCE(payment_events.handled_at, payment_events.processed_at)) >= ? and MIN(COALESCE(payment_events.handled_at, payment_events.processed_at)) < ?',
                 [$from->toDateTimeString(), $to->toDateTimeString()]
             );
 
@@ -1215,7 +1367,10 @@ final class AnalyticsFunnelDailyBuilder
         $readyAt = $timeline['report_ready'] ?? null;
 
         if ($startAt === null) {
-            return array_fill_keys(self::PRIMARY_STAGE_KEYS, null);
+            $normalized = array_fill_keys(self::PRIMARY_STAGE_KEYS, null);
+            $normalized['report_ready'] = $readyAt;
+
+            return $normalized;
         }
 
         if ($submitAt === null || $this->timestampBefore($submitAt, $startAt)) {
@@ -1224,7 +1379,6 @@ final class AnalyticsFunnelDailyBuilder
             $orderAt = null;
             $paymentAt = null;
             $unlockAt = null;
-            $readyAt = null;
         }
 
         if ($viewAt === null || $submitAt === null || $this->timestampBefore($viewAt, $submitAt)) {
@@ -1232,29 +1386,21 @@ final class AnalyticsFunnelDailyBuilder
             $orderAt = null;
             $paymentAt = null;
             $unlockAt = null;
-            $readyAt = null;
         }
 
         if ($orderAt === null || $viewAt === null || $this->timestampBefore($orderAt, $viewAt)) {
             $orderAt = null;
             $paymentAt = null;
             $unlockAt = null;
-            $readyAt = null;
         }
 
         if ($paymentAt === null || $orderAt === null || $this->timestampBefore($paymentAt, $orderAt)) {
             $paymentAt = null;
             $unlockAt = null;
-            $readyAt = null;
         }
 
         if ($unlockAt === null || $paymentAt === null || $this->timestampBefore($unlockAt, $paymentAt)) {
             $unlockAt = null;
-            $readyAt = null;
-        }
-
-        if ($readyAt === null || $unlockAt === null || $this->timestampBefore($readyAt, $unlockAt)) {
-            $readyAt = null;
         }
 
         return [
@@ -1270,14 +1416,14 @@ final class AnalyticsFunnelDailyBuilder
 
     private function timestampBefore(string $left, string $right): bool
     {
-        return CarbonImmutable::parse($left)->lessThan(CarbonImmutable::parse($right));
+        return $this->parseStorageTimestamp($left)->lessThan($this->parseStorageTimestamp($right));
     }
 
     private function timestampBetween(string $timestamp, CarbonImmutable $from, CarbonImmutable $to): bool
     {
-        $parsed = CarbonImmutable::parse($timestamp);
+        $parsed = $this->parseStorageTimestamp($timestamp);
 
-        return $parsed->greaterThanOrEqualTo($from) && $parsed->lessThanOrEqualTo($to);
+        return $parsed->greaterThanOrEqualTo($from) && $parsed->lessThan($to);
     }
 
     /**
@@ -1373,8 +1519,8 @@ final class AnalyticsFunnelDailyBuilder
     private function isReadySnapshot(object $row): bool
     {
         $status = strtolower(trim((string) ($row->status ?? '')));
-        if (in_array($status, self::READY_SNAPSHOT_STATUSES, true)) {
-            return true;
+        if (! in_array($status, self::READY_SNAPSHOT_STATUSES, true)) {
+            return false;
         }
 
         foreach (['report_full_json', 'report_free_json', 'report_json'] as $column) {
@@ -1411,7 +1557,7 @@ final class AnalyticsFunnelDailyBuilder
             }
 
             try {
-                return CarbonImmutable::parse($candidate)->toIso8601String();
+                return $this->parseStorageTimestamp($candidate)->toIso8601String();
             } catch (\Throwable) {
                 continue;
             }
@@ -1430,7 +1576,7 @@ final class AnalyticsFunnelDailyBuilder
             return $left;
         }
 
-        return CarbonImmutable::parse($left)->lessThanOrEqualTo(CarbonImmutable::parse($right))
+        return $this->parseStorageTimestamp($left)->lessThanOrEqualTo($this->parseStorageTimestamp($right))
             ? $left
             : $right;
     }
@@ -1455,5 +1601,27 @@ final class AnalyticsFunnelDailyBuilder
         }
 
         return $max;
+    }
+
+    private function parseStorageTimestamp(mixed $value): CarbonImmutable
+    {
+        return CarbonImmutable::parse($value, $this->storageTimezone);
+    }
+
+    private function validateTimezone(mixed $value, string $environmentKey): string
+    {
+        $timezone = trim((string) $value);
+        if ($timezone === '') {
+            throw new \InvalidArgumentException($environmentKey.' must name a valid timezone.');
+        }
+
+        try {
+            return (new \DateTimeZone($timezone))->getName();
+        } catch (\Throwable $exception) {
+            throw new \InvalidArgumentException(
+                $environmentKey.' must name a valid timezone.',
+                previous: $exception
+            );
+        }
     }
 }

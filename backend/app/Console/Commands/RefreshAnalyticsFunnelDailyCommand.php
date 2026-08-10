@@ -31,14 +31,17 @@ class RefreshAnalyticsFunnelDailyCommand extends Command
 
     public function handle(): int
     {
-        $from = $this->parseDateOption((string) $this->option('from'), now()->subDays(6)->toDateString());
-        $to = $this->parseDateOption((string) $this->option('to'), now()->toDateString());
+        $reportingNow = now($this->builder->reportingTimezone());
+        $from = $this->parseDateOption((string) $this->option('from'), $reportingNow->subDays(6)->toDateString());
+        $to = $this->parseDateOption((string) $this->option('to'), $reportingNow->toDateString());
 
         if ($from->greaterThan($to)) {
             $this->error('The --from date must be on or before --to.');
 
             return self::FAILURE;
         }
+
+        $window = $this->builder->reportingWindow($from, $to);
 
         $scaleCodes = array_values(array_filter(array_map(
             static fn (mixed $value): string => strtoupper(trim((string) $value)),
@@ -59,6 +62,10 @@ class RefreshAnalyticsFunnelDailyCommand extends Command
             if ($guard !== null) {
                 $this->line('from='.$from->toDateString());
                 $this->line('to='.$to->toDateString());
+                $this->line('reporting_timezone='.$window['reporting_timezone']);
+                $this->line('storage_timezone='.$window['storage_timezone']);
+                $this->line('window_utc_start='.$window['window_utc_start']);
+                $this->line('window_utc_end_exclusive='.$window['window_utc_end_exclusive']);
                 $this->line('org_scope='.(empty($orgIds) ? '*' : implode(',', $orgIds)));
                 $this->line('scale_scope='.(empty($scaleCodes) ? '*' : implode(',', $scaleCodes)));
                 $this->line('dry_run=0');
@@ -78,6 +85,10 @@ class RefreshAnalyticsFunnelDailyCommand extends Command
 
         $this->line('from='.$result['from']);
         $this->line('to='.$result['to']);
+        $this->line('reporting_timezone='.$result['reporting_timezone']);
+        $this->line('storage_timezone='.$result['storage_timezone']);
+        $this->line('window_utc_start='.$result['window_utc_start']);
+        $this->line('window_utc_end_exclusive='.$result['window_utc_end_exclusive']);
         $this->line('org_scope='.(empty($result['org_scope']) ? '*' : implode(',', $result['org_scope'])));
         $this->line('scale_scope='.(empty($result['scale_scope']) ? '*' : implode(',', $result['scale_scope'])));
         $this->line('dry_run='.(($result['dry_run'] ?? false) ? '1' : '0'));
@@ -101,8 +112,8 @@ class RefreshAnalyticsFunnelDailyCommand extends Command
     {
         $candidate = trim($value) !== '' ? trim($value) : $fallback;
 
-        return CarbonImmutable::createFromFormat('Y-m-d', $candidate)?->startOfDay()
-            ?? CarbonImmutable::parse($candidate)->startOfDay();
+        return CarbonImmutable::createFromFormat('!Y-m-d', $candidate, $this->builder->reportingTimezone())?->startOfDay()
+            ?? CarbonImmutable::parse($candidate, $this->builder->reportingTimezone())->startOfDay();
     }
 
     /**

@@ -1,0 +1,48 @@
+{
+  "activation": {
+    "deployment_executed": false,
+    "historical_backfill_executed": false,
+    "production_migration_executed": false,
+    "production_readback_complete": false
+  },
+  "base_sha": "dcaffb3cdac468ca252c41391637b5696cd4c92f",
+  "contract": {
+    "grain": [
+      "day",
+      "org_id",
+      "scale_code",
+      "locale"
+    ],
+    "report_ready": {
+      "commercial_dependencies": [],
+      "dedupe_key": "attempt_id",
+      "required": [
+        "valid_start",
+        "successful_submit",
+        "ready_snapshot_or_complete_ready_projection",
+        "report_ready_at_greater_than_or_equal_to_submitted_at"
+      ]
+    },
+    "reporting_timezone": "Asia/Shanghai",
+    "storage_timezone": "UTC",
+    "window_end": "exclusive",
+    "window_inputs": "inclusive_reporting_dates"
+  },
+  "deferred": [
+    "controlled_production_deployment",
+    "same_window_2026-07-13_2026-08-09_refresh",
+    "production_readback",
+    "m05_m06_m09_progression"
+  ],
+  "generated_at": "2026-08-10T18:20:00+08:00",
+  "non_mutation": {
+    "database_schema_changed": false,
+    "ga4_taxonomy_changed": false,
+    "m05_files_changed": false,
+    "production_write_executed": false
+  },
+  "status": "LOCAL_VALIDATION_COMPLETE_GITHUB_PENDING",
+  "target_post_merge_status": "MEASUREMENT_M04_BACKEND_READ_MODEL_REMEDIATION_01_CODE_COMPLETE",
+  "task_id": "MEASUREMENT-M04-BACKEND-READ-MODEL-REMEDIATION-01",
+  "version": 1
+}
