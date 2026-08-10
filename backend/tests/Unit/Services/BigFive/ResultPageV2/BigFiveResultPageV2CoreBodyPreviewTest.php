@@ -252,9 +252,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     public function test_runtime_freeze_classifier_ignores_measurement_instrumentation_files(): void
     {
         $allowed = [
+            'backend/app/Console/Commands/MeasurementCommerceTruthReportCommand.php',
             'backend/app/Console/Commands/MeasurementFailureCohortsReportCommand.php',
             'backend/app/Console/Commands/MeasurementFunnelReportCommand.php',
             'backend/app/Services/Analytics/MeasurementAttributionDimensions.php',
+            'backend/app/Services/Analytics/MeasurementCommerceTruthReadModel.php',
             'backend/app/Services/Analytics/MeasurementEventContract.php',
             'backend/app/Services/Analytics/MeasurementFailureCohortReadModel.php',
             'backend/app/Services/Analytics/MeasurementFailureEventContract.php',
@@ -13137,9 +13139,11 @@ DIFF;
     private function isMeasurementInstrumentationFile(string $file): bool
     {
         return in_array($file, [
+            'backend/app/Console/Commands/MeasurementCommerceTruthReportCommand.php',
             'backend/app/Console/Commands/MeasurementFailureCohortsReportCommand.php',
             'backend/app/Console/Commands/MeasurementFunnelReportCommand.php',
             'backend/app/Services/Analytics/MeasurementAttributionDimensions.php',
+            'backend/app/Services/Analytics/MeasurementCommerceTruthReadModel.php',
             'backend/app/Services/Analytics/MeasurementEventContract.php',
             'backend/app/Services/Analytics/MeasurementFailureCohortReadModel.php',
             'backend/app/Services/Analytics/MeasurementFailureEventContract.php',
