@@ -65,7 +65,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p artifacts
+          REPAIR_RECEIPT="$RUNNER_TEMP/career-runtime-authority-permission-repair.json"
+          printf 'REPAIR_RECEIPT=%s\n' "$REPAIR_RECEIPT" >> "$GITHUB_ENV"
           jq -n \
             --arg control_plane_sha "$CONTROL_PLANE_SHA" \
             --arg active_revision "$EXPECTED_ACTIVE_REVISION" \
@@ -101,7 +102,7 @@ jobs:
               deploy_count: 0,
               rollback_count: 0,
               automatic_retry_allowed: false
-            }' > artifacts/career-runtime-authority-permission-repair.json
+            }' > "$REPAIR_RECEIPT"
 
       - name: Checkout exact control plane
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
@@ -270,10 +271,10 @@ jobs:
             '.status = "HOLD_APPLY_DISPATCHED_NO_VERIFIED_READBACK"
              | .possible_metadata_write_state = "unknown"
              | .automatic_retry_allowed = false' \
-            artifacts/career-runtime-authority-permission-repair.json \
-            > artifacts/career-runtime-authority-permission-repair.tmp
-          mv artifacts/career-runtime-authority-permission-repair.tmp \
-            artifacts/career-runtime-authority-permission-repair.json
+            "$REPAIR_RECEIPT" \
+            > "$RUNNER_TEMP/career-runtime-authority-permission-repair.tmp"
+          mv "$RUNNER_TEMP/career-runtime-authority-permission-repair.tmp" \
+            "$REPAIR_RECEIPT"
 
       - name: Apply and verify exact metadata-only repair
         shell: bash
@@ -396,7 +397,7 @@ jobs:
               deploy_count: 0,
               rollback_count: 0,
               automatic_retry_allowed: false
-            }' > artifacts/career-runtime-authority-permission-repair.json
+            }' > "$REPAIR_RECEIPT"
 
       - name: Publish safe repair summary
         if: success()
@@ -420,6 +421,6 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: career-runtime-authority-permission-repair-${{ github.run_id }}-${{ github.run_attempt }}
-          path: artifacts/career-runtime-authority-permission-repair.json
+          path: ${{ runner.temp }}/career-runtime-authority-permission-repair.json
           if-no-files-found: error
           retention-days: 30

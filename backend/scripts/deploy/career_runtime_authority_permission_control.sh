@@ -172,7 +172,7 @@ compute_state() {
     and .projection_version == "career.runtime_publish_projection.v1"
     and (.items | type == "array")
     and (.items | length > 0)
-    and ([.items[].locale] | unique | sort) == ["en", "zh-CN"]
+    and ([.items[].locale] | unique | sort) == ["en", "zh"]
     and ([.items[] | (.slug + "|" + .locale)] | unique | length) == (.items | length)
   ' "${selected_files[0]}" >/dev/null || fail "PROJECTION_SCHEMA_INVALID"
   projection_locale_row_count="$(jq -r '.items | length' "${selected_files[0]}")"
