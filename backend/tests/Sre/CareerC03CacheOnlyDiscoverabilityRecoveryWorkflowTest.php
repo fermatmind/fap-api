@@ -62,6 +62,10 @@ final class CareerC03CacheOnlyDiscoverabilityRecoveryWorkflowTest extends TestCa
             'php /dev/stdin inspect',
             'php /dev/stdin apply',
             'php /dev/stdin rollback',
+            'career_c03_input_boundary_control.sh',
+            'bash "$INPUT_BOUNDARY_RUNNER" "$RECEIPT"',
+            'INPUT_BOUNDARY_RUNNER_SHA256',
+            'input_boundary: {checked:true,passed:true,failed_invariant:null,validator_sha256:$input_boundary_runner}',
         ] as $contract) {
             self::assertStringContainsString($contract, $workflow);
         }
@@ -224,6 +228,115 @@ final class CareerC03CacheOnlyDiscoverabilityRecoveryWorkflowTest extends TestCa
         self::assertSame(1, substr_count($workflow, 'status=PASS_C03_REVERIFIED_NO_APPLY_REQUIRED'));
     }
 
+    #[Test]
+    public function input_boundary_validator_reports_every_exact_invariant_without_retaining_input_values(): void
+    {
+        $sha = str_repeat('a', 64);
+        $digest = 'sha256:'.str_repeat('b', 64);
+        $empty = [
+            'INCIDENT_CLOSEOUT_RUN_ID' => '',
+            'INCIDENT_CLOSEOUT_RUN_ATTEMPT' => '',
+            'EXPECTED_INCIDENT_CLOSEOUT_RECEIPT_SHA256' => '',
+            'EXPECTED_INCIDENT_CLOSEOUT_ARTIFACT_DIGEST' => '',
+            'VERIFY_RUN_ID' => '',
+            'VERIFY_RUN_ATTEMPT' => '',
+            'EXPECTED_VERIFY_RECEIPT_SHA256' => '',
+            'EXPECTED_VERIFY_ARTIFACT_DIGEST' => '',
+            'OPERATOR_APPROVAL_PHRASE' => '',
+        ];
+        $valid = [
+            'incident_closeout' => $empty,
+            'verify' => [
+                ...$empty,
+                'INCIDENT_CLOSEOUT_RUN_ID' => '123',
+                'INCIDENT_CLOSEOUT_RUN_ATTEMPT' => '1',
+                'EXPECTED_INCIDENT_CLOSEOUT_RECEIPT_SHA256' => $sha,
+                'EXPECTED_INCIDENT_CLOSEOUT_ARTIFACT_DIGEST' => $digest,
+            ],
+            'apply' => [
+                ...$empty,
+                'INCIDENT_CLOSEOUT_RUN_ID' => '123',
+                'INCIDENT_CLOSEOUT_RUN_ATTEMPT' => '1',
+                'EXPECTED_INCIDENT_CLOSEOUT_RECEIPT_SHA256' => $sha,
+                'EXPECTED_INCIDENT_CLOSEOUT_ARTIFACT_DIGEST' => $digest,
+                'VERIFY_RUN_ID' => '456',
+                'VERIFY_RUN_ATTEMPT' => '1',
+                'EXPECTED_VERIFY_RECEIPT_SHA256' => $sha,
+                'EXPECTED_VERIFY_ARTIFACT_DIGEST' => $digest,
+                'OPERATOR_APPROVAL_PHRASE' => 'sensitive-approval-value',
+            ],
+        ];
+
+        foreach ($valid as $mode => $environment) {
+            $result = $this->runInputBoundary($mode, $environment);
+            self::assertSame(0, $result['exit']);
+            self::assertSame([
+                'checked' => true,
+                'passed' => true,
+                'failed_invariant' => null,
+                'validator_sha256' => str_repeat('c', 64),
+            ], $result['receipt']['input_boundary']);
+            self::assertStringNotContainsString('sensitive-approval-value', json_encode($result['receipt'], JSON_THROW_ON_ERROR));
+        }
+
+        $invalid = [];
+        foreach ($empty as $field => $_value) {
+            $environment = $valid['incident_closeout'];
+            $environment[$field] = 'sensitive-unexpected-value';
+            $invalid[] = ['incident_closeout', $environment, 'incident_closeout.'.strtolower($field).'.must_be_empty'];
+        }
+        foreach ([
+            'INCIDENT_CLOSEOUT_RUN_ID' => ['0', 'verify.incident_closeout_run_id.required_numeric'],
+            'INCIDENT_CLOSEOUT_RUN_ATTEMPT' => ['0', 'verify.incident_closeout_run_attempt.required_numeric'],
+            'EXPECTED_INCIDENT_CLOSEOUT_RECEIPT_SHA256' => ['invalid', 'verify.expected_incident_closeout_receipt_sha256.required_sha256'],
+            'EXPECTED_INCIDENT_CLOSEOUT_ARTIFACT_DIGEST' => ['invalid', 'verify.expected_incident_closeout_artifact_digest.required_digest'],
+            'VERIFY_RUN_ID' => ['sensitive-unexpected-value', 'verify.verify_run_id.must_be_empty'],
+            'VERIFY_RUN_ATTEMPT' => ['sensitive-unexpected-value', 'verify.verify_run_attempt.must_be_empty'],
+            'EXPECTED_VERIFY_RECEIPT_SHA256' => ['sensitive-unexpected-value', 'verify.expected_verify_receipt_sha256.must_be_empty'],
+            'EXPECTED_VERIFY_ARTIFACT_DIGEST' => ['sensitive-unexpected-value', 'verify.expected_verify_artifact_digest.must_be_empty'],
+            'OPERATOR_APPROVAL_PHRASE' => ['sensitive-unexpected-value', 'verify.operator_approval_phrase.must_be_empty'],
+        ] as $field => [$value, $invariant]) {
+            $environment = $valid['verify'];
+            $environment[$field] = $value;
+            $invalid[] = ['verify', $environment, $invariant];
+        }
+        foreach ([
+            'INCIDENT_CLOSEOUT_RUN_ID' => ['0', 'apply.incident_closeout_run_id.required_numeric'],
+            'INCIDENT_CLOSEOUT_RUN_ATTEMPT' => ['0', 'apply.incident_closeout_run_attempt.required_numeric'],
+            'EXPECTED_INCIDENT_CLOSEOUT_RECEIPT_SHA256' => ['invalid', 'apply.expected_incident_closeout_receipt_sha256.required_sha256'],
+            'EXPECTED_INCIDENT_CLOSEOUT_ARTIFACT_DIGEST' => ['invalid', 'apply.expected_incident_closeout_artifact_digest.required_digest'],
+            'VERIFY_RUN_ID' => ['0', 'apply.verify_run_id.required_numeric'],
+            'VERIFY_RUN_ATTEMPT' => ['0', 'apply.verify_run_attempt.required_numeric'],
+            'EXPECTED_VERIFY_RECEIPT_SHA256' => ['invalid', 'apply.expected_verify_receipt_sha256.required_sha256'],
+            'EXPECTED_VERIFY_ARTIFACT_DIGEST' => ['invalid', 'apply.expected_verify_artifact_digest.required_digest'],
+            'OPERATOR_APPROVAL_PHRASE' => ['', 'apply.operator_approval_phrase.required_nonempty'],
+        ] as $field => [$value, $invariant]) {
+            $environment = $valid['apply'];
+            $environment[$field] = $value;
+            $invalid[] = ['apply', $environment, $invariant];
+        }
+
+        foreach ($invalid as [$mode, $environment, $invariant]) {
+            $result = $this->runInputBoundary($mode, $environment);
+            self::assertSame(1, $result['exit'], $invariant);
+            self::assertSame('HOLD_CONTROL_INCOMPLETE', $result['receipt']['status']);
+            self::assertSame('INPUT_BOUNDARY_INVARIANT_FAILED', $result['receipt']['safe_failure_code']);
+            self::assertSame($invariant, $result['receipt']['input_boundary']['failed_invariant']);
+            self::assertFalse($result['receipt']['input_boundary']['passed']);
+            self::assertFalse($result['receipt']['automatic_retry_allowed']);
+            self::assertSame('CLOSED', $result['receipt']['career_link_publication_gate']);
+            $encoded = json_encode($result['receipt'], JSON_THROW_ON_ERROR);
+            self::assertStringNotContainsString('sensitive-', $encoded);
+            self::assertStringNotContainsString('sensitive-', $result['stderr']);
+        }
+
+        $multiple = $valid['verify'];
+        $multiple['INCIDENT_CLOSEOUT_RUN_ID'] = '0';
+        $multiple['INCIDENT_CLOSEOUT_RUN_ATTEMPT'] = '0';
+        $result = $this->runInputBoundary('verify', $multiple);
+        self::assertSame('verify.incident_closeout_run_id.required_numeric', $result['receipt']['input_boundary']['failed_invariant']);
+    }
+
     private function workflow(): string
     {
         return (string) file_get_contents(
@@ -236,6 +349,49 @@ final class CareerC03CacheOnlyDiscoverabilityRecoveryWorkflowTest extends TestCa
         return (string) file_get_contents(
             dirname(__DIR__, 2).'/scripts/operations/career_c03_bounded_public_readback.sh',
         );
+    }
+
+    /** @return array{exit:int,receipt:array<string,mixed>,stderr:string} */
+    private function runInputBoundary(string $mode, array $inputEnvironment): array
+    {
+        $directory = sys_get_temp_dir().'/career-c03-input-boundary-'.bin2hex(random_bytes(8));
+        self::assertTrue(mkdir($directory, 0700));
+        $receipt = $directory.'/receipt.json';
+        file_put_contents($receipt, json_encode([
+            'contract_version' => 'career.c03.cache_only_discoverability_recovery.v1',
+            'mode' => $mode,
+            'status' => 'HOLD_CONTROL_INCOMPLETE',
+            'cache_write_count' => 0,
+            'database_write_count' => 0,
+            'publication_write_count' => 0,
+            'indexability_write_count' => 0,
+            'deploy_count' => 0,
+            'migration_count' => 0,
+            'career_link_publication_gate' => 'CLOSED',
+            'automatic_retry_allowed' => false,
+        ], JSON_THROW_ON_ERROR));
+        $environment = array_merge($_ENV, $inputEnvironment, [
+            'MODE' => $mode,
+            'INPUT_BOUNDARY_RUNNER_SHA256' => str_repeat('c', 64),
+        ]);
+        $process = proc_open(
+            ['bash', dirname(__DIR__, 2).'/scripts/operations/career_c03_input_boundary_control.sh', $receipt],
+            [1 => ['pipe', 'w'], 2 => ['pipe', 'w']],
+            $pipes,
+            dirname(__DIR__, 3),
+            $environment,
+        );
+        self::assertIsResource($process);
+        stream_get_contents($pipes[1]);
+        fclose($pipes[1]);
+        $stderr = stream_get_contents($pipes[2]);
+        fclose($pipes[2]);
+        $exit = proc_close($process);
+        $decoded = json_decode((string) file_get_contents($receipt), true, flags: JSON_THROW_ON_ERROR);
+        unlink($receipt);
+        rmdir($directory);
+
+        return ['exit' => $exit, 'receipt' => $decoded, 'stderr' => $stderr];
     }
 
     /**
