@@ -39,7 +39,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p artifacts
+          PREFLIGHT_RECEIPT="$RUNNER_TEMP/career-runtime-authority-permission-preflight.json"
+          printf 'PREFLIGHT_RECEIPT=%s\n' "$PREFLIGHT_RECEIPT" >> "$GITHUB_ENV"
           jq -n \
             --arg schema_version "career.runtime_authority_permission_preflight.v1" \
             --arg status "HOLD_PREFLIGHT_INCOMPLETE" \
@@ -63,7 +64,7 @@ jobs:
               discoverability_write_count: 0,
               deploy_count: 0,
               rollback_count: 0
-            }' > artifacts/career-runtime-authority-permission-preflight.json
+            }' > "$PREFLIGHT_RECEIPT"
 
       - name: Checkout exact control plane
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
@@ -156,12 +157,41 @@ jobs:
           test "$state" = $'active_revision_unchanged=true\ndeploy_lock_absent=true\ndeploy_process_absent=true'
 
           printf -v q_root '%q' "$DEPLOY_PATH/shared/backend/storage/app/private"
+          set +e
           result="$({
             ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
               -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
               "CAREER_AUTHORITY_PERMISSION_MODE=inspect CAREER_AUTHORITY_PERMISSION_ROOT=$q_root CAREER_AUTHORITY_PERMISSION_OWNER=$q_deploy_user CAREER_AUTHORITY_PERMISSION_GROUP=www-data CAREER_AUTHORITY_PERMISSION_RUNTIME_USER=www-data bash -s" \
               < "$inspector"
           })"
+          inspection_exit="$?"
+          set -e
+          if [ "$inspection_exit" -ne 0 ]; then
+            safe_reason="$(
+              jq -er '
+                select(
+                  .schema_version == "career.runtime_authority_permission_control.v1"
+                  and .status == "HOLD_PERMISSION_CONTROL"
+                )
+                | .reason
+                | select(test("^[A-Z0-9_]+$"))
+              ' <<<"$result" 2>/dev/null || true
+            )"
+            if [ -z "$safe_reason" ]; then
+              safe_reason="INSPECTION_TRANSPORT_OR_OUTPUT_INVALID"
+            fi
+            jq \
+              --arg reason "$safe_reason" \
+              '.status = "HOLD_PREFLIGHT_INSPECTION"
+               | .reason = $reason
+               | .active_revision_unchanged = true
+               | .deploy_lock_absent = true
+               | .deploy_process_absent = true' \
+              "$PREFLIGHT_RECEIPT" > "$RUNNER_TEMP/career-permission-preflight.tmp"
+            mv "$RUNNER_TEMP/career-permission-preflight.tmp" "$PREFLIGHT_RECEIPT"
+            echo "Career authority permission preflight held: $safe_reason" >&2
+            exit 1
+          fi
           jq -e '
             .schema_version == "career.runtime_authority_permission_control.v1"
             and (.status == "PASS_PERMISSION_REPAIR_REQUIRED" or .status == "PASS_ALREADY_RUNTIME_READABLE")
@@ -238,7 +268,7 @@ jobs:
               discoverability_write_count: 0,
               deploy_count: 0,
               rollback_count: 0
-            }' > artifacts/career-runtime-authority-permission-preflight.json
+            }' > "$PREFLIGHT_RECEIPT"
 
       - name: Publish safe preflight summary
         if: success()
@@ -261,6 +291,6 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: career-runtime-authority-permission-preflight-${{ github.run_id }}-${{ github.run_attempt }}
-          path: artifacts/career-runtime-authority-permission-preflight.json
+          path: ${{ runner.temp }}/career-runtime-authority-permission-preflight.json
           if-no-files-found: error
           retention-days: 30

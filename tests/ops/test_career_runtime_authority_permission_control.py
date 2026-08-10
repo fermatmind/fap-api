@@ -67,6 +67,24 @@ class CareerRuntimeAuthorityPermissionControlTest(unittest.TestCase):
         self.assertIn("remote_write_count: 0", self.preflight)
         self.assertIn("metadata_write_count: 0", self.preflight)
         self.assertIn('status "HOLD_PREFLIGHT_INCOMPLETE"', self.preflight)
+        self.assertIn(
+            'PREFLIGHT_RECEIPT="$RUNNER_TEMP/career-runtime-authority-permission-preflight.json"',
+            self.preflight,
+        )
+        self.assertIn(
+            "printf 'PREFLIGHT_RECEIPT=%s\\n' \"$PREFLIGHT_RECEIPT\" >> \"$GITHUB_ENV\"",
+            self.preflight,
+        )
+        self.assertIn(
+            "path: ${{ runner.temp }}/career-runtime-authority-permission-preflight.json",
+            self.preflight,
+        )
+        self.assertNotIn(
+            "> artifacts/career-runtime-authority-permission-preflight.json",
+            self.preflight,
+        )
+        self.assertIn('safe_reason="INSPECTION_TRANSPORT_OR_OUTPUT_INVALID"', self.preflight)
+        self.assertIn('status = "HOLD_PREFLIGHT_INSPECTION"', self.preflight)
 
         for binding in (
             'and .path == ".github/workflows/career-runtime-authority-permission-preflight.yml"',
@@ -87,6 +105,47 @@ class CareerRuntimeAuthorityPermissionControlTest(unittest.TestCase):
         self.assertIn("HOLD_APPLY_DISPATCHED_NO_VERIFIED_READBACK", self.repair)
         self.assertIn("automatic_retry_allowed: false", self.repair)
         self.assertIn("PASS_PERMISSION_REPAIR_VERIFIED", self.repair)
+        self.assertIn(
+            'REPAIR_RECEIPT="$RUNNER_TEMP/career-runtime-authority-permission-repair.json"',
+            self.repair,
+        )
+        self.assertIn(
+            "printf 'REPAIR_RECEIPT=%s\\n' \"$REPAIR_RECEIPT\" >> \"$GITHUB_ENV\"",
+            self.repair,
+        )
+        self.assertIn(
+            "path: ${{ runner.temp }}/career-runtime-authority-permission-repair.json",
+            self.repair,
+        )
+        self.assertNotIn(
+            "> artifacts/career-runtime-authority-permission-repair.json", self.repair
+        )
+
+    def test_failure_receipts_survive_checkout_cleanup(self):
+        for workflow, initialize_name, checkout_name, receipt_name in (
+            (
+                self.preflight,
+                "- name: Initialize failure-safe receipt",
+                "- name: Checkout exact control plane",
+                "career-runtime-authority-permission-preflight.json",
+            ),
+            (
+                self.repair,
+                "- name: Initialize failure-safe no-retry receipt",
+                "- name: Checkout exact control plane",
+                "career-runtime-authority-permission-repair.json",
+            ),
+        ):
+            with self.subTest(receipt_name=receipt_name):
+                initialize_at = workflow.index(initialize_name)
+                checkout_at = workflow.index(checkout_name)
+                self.assertLess(initialize_at, checkout_at)
+                initialize_step = workflow[initialize_at:checkout_at]
+                self.assertIn(f'$RUNNER_TEMP/{receipt_name}', initialize_step)
+                self.assertIn('$GITHUB_ENV', initialize_step)
+                upload_step = workflow[workflow.rindex("- name: Upload") :]
+                self.assertIn("if: always()", upload_step)
+                self.assertIn(f"${{{{ runner.temp }}}}/{receipt_name}", upload_step)
 
     def test_control_is_limited_to_selected_node_metadata(self):
         for prohibited in (
@@ -106,6 +165,10 @@ class CareerRuntimeAuthorityPermissionControlTest(unittest.TestCase):
         self.assertEqual(1, self.script.count('chmod 2750 "${selected_directories[$index]}"'))
         self.assertEqual(1, self.script.count('chmod 0640 "${selected_files[$index]}"'))
         self.assertIn('for index in 0 1; do', self.script)
+        self.assertIn(
+            '([.items[].locale] | unique | sort) == ["en", "zh"]', self.script
+        )
+        self.assertNotIn('== ["en", "zh-CN"]', self.script)
         self.assertIn('.status == "PASS_PERMISSION_REPAIR_REQUIRED"', self.repair)
         self.assertIn("content_write_count:0", self.script)
         self.assertIn("database_write_count:0", self.script)
@@ -144,9 +207,9 @@ class CareerRuntimeAuthorityPermissionControlTest(unittest.TestCase):
                         "projection_version": "career.runtime_publish_projection.v1",
                         "items": [
                             {"slug": "alpha", "locale": "en"},
-                            {"slug": "alpha", "locale": "zh-CN"},
+                            {"slug": "alpha", "locale": "zh"},
                             {"slug": "beta", "locale": "en"},
-                            {"slug": "beta", "locale": "zh-CN"},
+                            {"slug": "beta", "locale": "zh"},
                         ],
                     },
                     sort_keys=True,
