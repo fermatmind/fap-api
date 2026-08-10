@@ -249,6 +249,24 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_measurement_instrumentation_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/MeasurementFunnelReportCommand.php',
+            'backend/app/Services/Analytics/MeasurementAttributionDimensions.php',
+            'backend/app/Services/Analytics/MeasurementEventContract.php',
+            'backend/app/Services/Analytics/MeasurementFunnelReadModel.php',
+            'backend/app/Services/Attempts/AttemptStartService.php',
+            'backend/app/Services/Attempts/AttemptSubmitSideEffects.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_english_parity_program_scanner_files(): void
     {
         $allowed = [
@@ -8640,6 +8658,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isMeasurementInstrumentationFile($file)) {
+                continue;
+            }
+
             if ($this->isSeo10kArticleRecoveryBatchFile($file)) {
                 continue;
             }
@@ -13035,6 +13057,18 @@ DIFF;
     {
         return $file === 'backend/app/Console/Commands/RefreshAnalyticsProviderFreshnessCommand.php'
             || str_starts_with($file, 'backend/app/Services/Analytics/ProviderFreshness/');
+    }
+
+    private function isMeasurementInstrumentationFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/MeasurementFunnelReportCommand.php',
+            'backend/app/Services/Analytics/MeasurementAttributionDimensions.php',
+            'backend/app/Services/Analytics/MeasurementEventContract.php',
+            'backend/app/Services/Analytics/MeasurementFunnelReadModel.php',
+            'backend/app/Services/Attempts/AttemptStartService.php',
+            'backend/app/Services/Attempts/AttemptSubmitSideEffects.php',
+        ], true);
     }
 
     private function isEnglishParityProgramScannerFile(string $file): bool

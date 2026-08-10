@@ -6,6 +6,7 @@ use App\DTO\Attempts\StartAttemptDTO;
 use App\Exceptions\Api\ApiProblemException;
 use App\Models\Attempt;
 use App\Services\Analytics\EventRecorder;
+use App\Services\Analytics\MeasurementAttributionDimensions;
 use App\Services\BigFive\BigFiveFormCatalog;
 use App\Services\Content\BigFivePackLoader;
 use App\Services\Content\ClinicalComboPackLoader;
@@ -402,17 +403,8 @@ class AttemptStartService
         $reused = (bool) ($persisted['reused'] ?? false);
 
         if (! $reused) {
-            $this->eventRecorder()->record('test_start', $ctx->userId(), [
-                'scale_code' => $scaleCode,
-                'scale_code_v2' => $scaleCodeV2,
-                'scale_uid' => $scaleUid,
-                'pack_id' => $packId,
-                'dir_version' => $dirVersion,
-                'content_package_version' => $contentPackageVersion,
-                'form_code' => $resolvedFormCode,
-                'norm_version' => $resolvedNormVersion !== '' ? $resolvedNormVersion : null,
-                'attempt_id' => (string) $attempt->id,
-            ], [
+            $safeDimensions = app(MeasurementAttributionDimensions::class)->fromAttempt($attempt);
+            $this->eventRecorder()->record('test_start', $ctx->userId(), $safeDimensions, [
                 'org_id' => $orgId,
                 'anon_id' => $anonId,
                 'attempt_id' => (string) $attempt->id,
