@@ -1419,6 +1419,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_riasec_global_cms_apply_bridge_files(): void
+    {
+        $allowed = [
+            'backend/app/Filament/Ops/Pages/RiasecGlobalCmsApplyPage.php',
+            'backend/app/Http/Middleware/RequireOpsOrgSelected.php',
+            'backend/app/Services/Ops/RiasecGlobalCmsApplyBridge.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_eq60_compiled_result_exact_package_content_promotion_files(): void
     {
         $changed = [
@@ -7473,6 +7488,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isRiasecGlobalCmsApplyBridgeFile($file)) {
+                continue;
+            }
+
             if ($this->isEq60CompiledResultContentPromotionFile($file)) {
                 continue;
             }
@@ -9765,6 +9784,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/ContentPromotion/Adapters/RiasecContentPromotionAdapter.php',
             'backend/app/Services/ContentPromotion/Eq60CompiledPromotionAuthority.php',
             'backend/app/Services/ContentPromotion/Adapters/Eq60CompiledPromotionAdapter.php',
+        ], true);
+    }
+
+    private function isRiasecGlobalCmsApplyBridgeFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Filament/Ops/Pages/RiasecGlobalCmsApplyPage.php',
+            'backend/app/Http/Middleware/RequireOpsOrgSelected.php',
+            'backend/app/Services/Ops/RiasecGlobalCmsApplyBridge.php',
         ], true);
     }
 
