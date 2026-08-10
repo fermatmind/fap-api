@@ -10,6 +10,29 @@ use Tests\TestCase;
 final class DeployStorageAndDatabaseConfigTest extends TestCase
 {
     #[Test]
+    public function release_storage_is_bounded_and_repository_only_source_is_pruned_before_runtime_setup(): void
+    {
+        $deployer = $this->readRepoFile('deploy.php');
+
+        $this->assertStringContainsString("set('keep_releases', 5);", $deployer);
+        $this->assertStringContainsString("->set('keep_releases', 3)", $deployer);
+        $this->assertStringContainsString("task('release:prune-non-runtime-source'", $deployer);
+        $this->assertStringContainsString(
+            'for relative_path in .agents .github .vscode docs tests backend/tests; do',
+            $deployer,
+        );
+        $this->assertStringContainsString(
+            'release prune refused: release path escaped managed releases',
+            $deployer,
+        );
+        $this->assertStringContainsString('rm -rf -- "\\$target"', $deployer);
+        $this->assertStringContainsString(
+            "after('deploy:update_code', 'release:prune-non-runtime-source');",
+            $deployer,
+        );
+    }
+
+    #[Test]
     public function staging_deployer_healthchecks_the_api_vhost(): void
     {
         $deployer = $this->readRepoFile('deploy.php');

@@ -396,6 +396,7 @@ $stagingHost = host('staging')
     ->set('ops_entry_host', getenv('OPS_ENTRY_HOST_STG') ?: '')
     ->set('nginx_site', '/etc/nginx/sites-enabled/fap-api-staging')
     ->set('php_fpm_service', getenv('PHP_FPM_SERVICE_STG') ?: 'php8.4-fpm')
+    ->set('keep_releases', 3)
     ->set('queue_reload_required', false)
     ->set('env', [
         'SEO_PUBLIC_SITEMAP_AUTHORITY' => getenv('SEO_PUBLIC_SITEMAP_AUTHORITY_STG') ?: 'backend',
@@ -2060,6 +2061,38 @@ PHP;
 });
 
 /**
+ * Repository-only instructions, documentation, and tests are not runtime
+ * inputs. Remove only this fixed allowlist from the new immutable release
+ * before Composer or any activation gate runs.
+ */
+task('release:prune-non-runtime-source', function () {
+    $releasePath = deployPlaceholderPathArg('{{release_path}}');
+    $deployPath = deployPlaceholderPathArg('{{deploy_path}}');
+
+    run(<<<BASH
+set -euo pipefail
+release_path="\$(readlink -f {$releasePath})"
+deploy_path="\$(readlink -f {$deployPath})"
+case "\$release_path" in
+  "\$deploy_path"/releases/*) ;;
+  *) echo "release prune refused: release path escaped managed releases" >&2; exit 1 ;;
+esac
+
+for relative_path in .agents .github .vscode docs tests backend/tests; do
+  target="\$release_path/\$relative_path"
+  if [ -e "\$target" ] || [ -L "\$target" ]; then
+    parent="\$(readlink -f "\$(dirname "\$target")")"
+    case "\$parent" in
+      "\$release_path"|"\$release_path"/*) ;;
+      *) echo "release prune refused: target parent escaped release" >&2; exit 1 ;;
+    esac
+    rm -rf -- "\$target"
+  fi
+done
+BASH);
+});
+
+/**
  * ======================================================
  * Hooks
  * ======================================================
@@ -2073,6 +2106,7 @@ before('deploy:shared', 'fap:seed_shared_content_packages');
 after('deploy:lock', 'fap:write-deploy-lock-metadata');
 after('deploy:unlock', 'fap:remove-deploy-lock-metadata');
 
+after('deploy:update_code', 'release:prune-non-runtime-source');
 after('deploy:vendors', 'bootstrap-cache:clear-release');
 
 after('deploy:shared', 'guard:shared-permissions');
