@@ -125,6 +125,39 @@ final class CareerRuntimeSloAlertingTest extends TestCase
         Http::assertSent(static fn (ClientRequest $request): bool => $request->url() === 'https://api.test/api/v0.5/career/jobs/software-developer?locale=en');
     }
 
+    public function test_lightweight_scheduled_probe_skips_heavyweight_discoverability_generation_routes(): void
+    {
+        config()->set('ops.career_runtime_slo.site_url', 'https://site.test');
+        config()->set('ops.career_runtime_slo.api_url', 'https://api.test');
+        $this->seedReadyDirectoryCache('en');
+        $this->seedReadyDirectoryCache('zh-CN');
+        $this->seedReadyDetailCoverage(['software-developer']);
+
+        Http::fake(function (ClientRequest $request) {
+            $url = $request->url();
+            if (str_contains($url, '/api/v0.5/career/directory')) {
+                return Http::response(['public_truth' => ['public_detail_indexable_count' => 1046], 'items' => [['slug' => 'software-developer']]]);
+            }
+
+            return Http::response('<html>1046 careers</html>');
+        });
+
+        $exit = Artisan::call('career:runtime-slo-check', [
+            '--lightweight' => true,
+            '--json' => true,
+        ]);
+        $output = Artisan::output();
+
+        $this->assertSame(0, $exit, $output);
+        $this->assertStringContainsString('"probe_mode": "lightweight"', $output);
+        Http::assertSentCount(5);
+        Http::assertNotSent(static fn (ClientRequest $request): bool => in_array($request->url(), [
+            'https://site.test/sitemap.xml',
+            'https://site.test/llms.txt',
+            'https://site.test/llms-full.txt',
+        ], true));
+    }
+
     public function test_scheduled_probe_alerts_from_every_published_detail_cache_key_and_keeps_route_smoke(): void
     {
         config()->set('ops.career_runtime_slo.site_url', 'https://site.test');
@@ -195,6 +228,7 @@ final class CareerRuntimeSloAlertingTest extends TestCase
         $this->assertStringContainsString("env('CAREER_RUNTIME_SLO_MINIMUM_DETAIL_TARGET_COUNT', 2092)", $config);
         $this->assertStringContainsString("preg_match('/^[1-9][0-9]*$/D', \$careerDetailMinimumTargetsRaw) !== 1", $config);
         $this->assertStringContainsString('CAREER_RUNTIME_SLO_MINIMUM_DETAIL_TARGET_COUNT must be a positive base-10 integer.', $config);
+        $this->assertStringContainsString('career:runtime-slo-check --lightweight --json', $schedule);
     }
 
     private function seedReadyDirectoryCache(string $locale): void

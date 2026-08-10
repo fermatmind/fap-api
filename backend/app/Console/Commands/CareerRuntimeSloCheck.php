@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Http;
 
 final class CareerRuntimeSloCheck extends Command
 {
-    protected $signature = 'career:runtime-slo-check {--json : Emit JSON output}';
+    protected $signature = 'career:runtime-slo-check
+        {--lightweight : Skip heavyweight frontend sitemap and llms generation routes}
+        {--json : Emit JSON output}';
 
     protected $description = 'Probe public Career runtime surfaces, evaluate the rolling SLO, and alert without mutating authority.';
 
@@ -26,17 +28,24 @@ final class CareerRuntimeSloCheck extends Command
         $site = rtrim((string) config('ops.career_runtime_slo.site_url'), '/');
         $api = rtrim((string) config('ops.career_runtime_slo.api_url'), '/');
         $timeout = max(1, (int) config('ops.career_runtime_slo.timeout_seconds', 8));
+        $lightweight = (bool) $this->option('lightweight');
         $responses = [];
 
-        foreach ([
+        $targets = [
             'api_en' => $api.'/api/v0.5/career/directory?locale=en&page=1&per_page=1',
             'api_zh' => $api.'/api/v0.5/career/directory?locale=zh-CN&page=1&per_page=1',
             'page_en' => $site.'/en/career/jobs',
             'page_zh' => $site.'/zh/career/jobs',
-            'sitemap' => $site.'/sitemap.xml',
-            'llms' => $site.'/llms.txt',
-            'llms_full' => $site.'/llms-full.txt',
-        ] as $name => $url) {
+        ];
+        if (! $lightweight) {
+            $targets = array_merge($targets, [
+                'sitemap' => $site.'/sitemap.xml',
+                'llms' => $site.'/llms.txt',
+                'llms_full' => $site.'/llms-full.txt',
+            ]);
+        }
+
+        foreach ($targets as $name => $url) {
             $started = hrtime(true);
             try {
                 $response = Http::timeout($timeout)->get($url);
@@ -73,7 +82,7 @@ final class CareerRuntimeSloCheck extends Command
             }
         }
 
-        $requiredBodies = ['sitemap', 'llms', 'llms_full'];
+        $requiredBodies = $lightweight ? [] : ['sitemap', 'llms', 'llms_full'];
         $smokeFailed = collect($responses)->contains(static fn (array $response): bool => (int) ($response['status'] ?? 0) !== 200)
             || collect($requiredBodies)->contains(fn (string $key): bool => ! str_contains((string) ($responses[$key]['body'] ?? ''), '/career/jobs'));
         $falseEmpty = $enCount > 0 && (
@@ -106,6 +115,7 @@ final class CareerRuntimeSloCheck extends Command
         ])->all();
         $report = [
             'status' => $evaluation['status'],
+            'probe_mode' => $lightweight ? 'lightweight' : 'full',
             'counts' => ['en' => $enCount, 'zh-CN' => $zhCount],
             'cache' => $cacheStatuses,
             'detail_cache_coverage' => $detailCoverage,
