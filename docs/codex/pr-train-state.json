@@ -89,7 +89,7 @@
       "API-VPAY-01"
     ],
     "status": "github_review_repairing",
-    "commit_sha": "9885ee5226f7020eaea15b9c42dea1df063414c3",
+    "commit_sha": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3466",
     "checks": {
       "official_contract": {
@@ -103903,10 +103903,10 @@
     "base": "main",
     "branch": "codex/career-cold-cache-discoverability-gate-02",
     "title": "CAREER-COLD-CACHE-DISCOVERABILITY-GATE-02: make Career cold-start activation cohort-complete",
-    "status": "local_validation_passed",
+    "status": "github_checks_pending",
     "depends_on": [],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "9885ee5226f7020eaea15b9c42dea1df063414c3",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3592",
     "checks": {
       "focused_tests": {
         "status": "passed",
@@ -103950,6 +103950,11 @@
         "at": "2026-08-10T12:46:00+08:00",
         "status": "commit_created",
         "note": "Scoped implementation commit 9885ee5226f7020eaea15b9c42dea1df063414c3 created from exact origin/main 8f1296ea1e1917caf44ee96b2f7a48b2038c2f28 in the isolated worktree."
+      },
+      {
+        "at": "2026-08-10T12:49:00+08:00",
+        "status": "github_checks_pending",
+        "note": "PR #3592 opened from the exact scoped branch. Required GitHub checks are pending; production recovery, deployment, cache warming, publication, sitemap/llms mutation, and Search Channel actions remain unexecuted."
       }
     ]
   },
