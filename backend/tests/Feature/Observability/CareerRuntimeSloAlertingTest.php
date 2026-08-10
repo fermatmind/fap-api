@@ -131,7 +131,7 @@ final class CareerRuntimeSloAlertingTest extends TestCase
         config()->set('ops.career_runtime_slo.api_url', 'https://api.test');
         $this->seedReadyDirectoryCache('en');
         $this->seedReadyDirectoryCache('zh-CN');
-        $this->seedReadyDetailCoverage(['software-developer']);
+        $this->bindProjection(['software-developer']);
 
         Http::fake(function (ClientRequest $request) {
             $url = $request->url();
@@ -150,11 +150,14 @@ final class CareerRuntimeSloAlertingTest extends TestCase
 
         $this->assertSame(0, $exit, $output);
         $this->assertStringContainsString('"probe_mode": "lightweight"', $output);
-        Http::assertSentCount(5);
+        $this->assertStringContainsString('"status": "not_sampled"', $output);
+        $this->assertStringContainsString('"reason": "lightweight_runtime_probe"', $output);
+        Http::assertSentCount(4);
         Http::assertNotSent(static fn (ClientRequest $request): bool => in_array($request->url(), [
             'https://site.test/sitemap.xml',
             'https://site.test/llms.txt',
             'https://site.test/llms-full.txt',
+            'https://api.test/api/v0.5/career/jobs/software-developer?locale=en',
         ], true));
     }
 

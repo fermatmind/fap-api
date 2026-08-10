@@ -57,28 +57,35 @@ final class CareerRuntimeSloCheck extends Command
 
         $enCount = (int) data_get(json_decode((string) ($responses['api_en']['body'] ?? ''), true), 'public_truth.public_detail_indexable_count', 0);
         $zhCount = (int) data_get(json_decode((string) ($responses['api_zh']['body'] ?? ''), true), 'public_truth.public_detail_indexable_count', 0);
-        $detailInspection = $coverageService->inspect(['en', 'zh-CN']);
-        $detailCoverage = $detailInspection['report'];
         $minimumDetailTargets = max(1, (int) config('ops.career_runtime_slo.minimum_detail_target_count', 2092));
-        $detailSmokeTarget = collect($detailInspection['rows'])->first(
-            static fn (array $row): bool => $row['locale'] === 'en'
-                && $row['classification'] !== 'held_or_unpublished_excluded'
-        );
-        if (is_array($detailSmokeTarget)) {
-            $started = hrtime(true);
-            try {
-                $detail = Http::timeout($timeout)->get(
-                    $api.'/api/v0.5/career/jobs/'.$detailSmokeTarget['slug'],
-                    ['locale' => 'en'],
-                );
-                $responses['detail_route_smoke'] = $this->summarize($detail, (hrtime(true) - $started) / 1_000_000);
-            } catch (\Throwable $throwable) {
-                $responses['detail_route_smoke'] = [
-                    'status' => 0,
-                    'duration_ms' => round((hrtime(true) - $started) / 1_000_000, 3),
-                    'body' => '',
-                    'error' => $throwable::class,
-                ];
+        $detailCoverage = [
+            'contract_version' => 'career.job_detail_cache_coverage.v1',
+            'status' => 'not_sampled',
+            'reason' => 'lightweight_runtime_probe',
+        ];
+        if (! $lightweight) {
+            $detailInspection = $coverageService->inspect(['en', 'zh-CN']);
+            $detailCoverage = $detailInspection['report'];
+            $detailSmokeTarget = collect($detailInspection['rows'])->first(
+                static fn (array $row): bool => $row['locale'] === 'en'
+                    && $row['classification'] !== 'held_or_unpublished_excluded'
+            );
+            if (is_array($detailSmokeTarget)) {
+                $started = hrtime(true);
+                try {
+                    $detail = Http::timeout($timeout)->get(
+                        $api.'/api/v0.5/career/jobs/'.$detailSmokeTarget['slug'],
+                        ['locale' => 'en'],
+                    );
+                    $responses['detail_route_smoke'] = $this->summarize($detail, (hrtime(true) - $started) / 1_000_000);
+                } catch (\Throwable $throwable) {
+                    $responses['detail_route_smoke'] = [
+                        'status' => 0,
+                        'duration_ms' => round((hrtime(true) - $started) / 1_000_000, 3),
+                        'body' => '',
+                        'error' => $throwable::class,
+                    ];
+                }
             }
         }
 
@@ -95,17 +102,22 @@ final class CareerRuntimeSloCheck extends Command
             || (int) $status['age_seconds'] > PublicCareerAuthorityResponseCache::DIRECTORY_CACHE_MAX_AGE_SECONDS
         );
         $lastRebuildMs = (float) collect($cacheStatuses)->max(static fn (array $status): float => (float) ($status['last_rebuild_ms'] ?? 0));
-        $evaluation = $slo->evaluate([
+        $evaluationSnapshot = [
             'false_empty' => $falseEmpty,
             'locale_count_mismatch' => $enCount !== $zhCount,
             'cache_stale' => $cacheStale,
             'last_rebuild_ms' => $lastRebuildMs,
             'smoke_failed' => $smokeFailed,
-            'detail_cache_missing_count' => (int) ($detailCoverage['missing_count'] ?? 0),
-            'detail_cache_broken_count' => (int) ($detailCoverage['broken_count'] ?? 0),
-            'detail_cache_target_count' => (int) ($detailCoverage['eligible_target_count'] ?? 0),
-            'minimum_detail_target_count' => $minimumDetailTargets,
-        ]);
+        ];
+        if (! $lightweight) {
+            $evaluationSnapshot = array_merge($evaluationSnapshot, [
+                'detail_cache_missing_count' => (int) ($detailCoverage['missing_count'] ?? 0),
+                'detail_cache_broken_count' => (int) ($detailCoverage['broken_count'] ?? 0),
+                'detail_cache_target_count' => (int) ($detailCoverage['eligible_target_count'] ?? 0),
+                'minimum_detail_target_count' => $minimumDetailTargets,
+            ]);
+        }
+        $evaluation = $slo->evaluate($evaluationSnapshot);
 
         $probes = collect($responses)->map(static fn (array $response): array => [
             'status' => (int) ($response['status'] ?? 0),
