@@ -257,6 +257,31 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $this->assertSame(8, $payload['promoted_count']);
     }
 
+    public function test_namespaced_seo_field_override_marker_does_not_shadow_content_revision(): void
+    {
+        $targets = $this->seedTargets();
+        $packagePath = $this->writePackage($this->validPackage());
+        $this->createDraftRevisions($packagePath);
+        PersonalityProfileVariantRevision::query()->create([
+            'personality_profile_variant_id' => (int) $targets['en|INTJ-A']->id,
+            'revision_no' => 2,
+            'snapshot_json' => [
+                'schema_version' => 'personality.mbti-seo-field-override.v1',
+                'status' => 'promoted_live',
+            ],
+            'note' => 'namespaced SEO field override marker',
+            'created_by_admin_user_id' => null,
+            'created_at' => now(),
+        ]);
+
+        $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', $this->promoteWriteOptions($packagePath));
+        $payload = $this->jsonOutput();
+
+        $this->assertSame(0, $exitCode, (string) json_encode($payload, JSON_UNESCAPED_SLASHES));
+        $this->assertTrue($payload['ok']);
+        $this->assertSame(8, $payload['promoted_count']);
+    }
+
     public function test_foreign_namespace_revision_still_blocks_content_revision(): void
     {
         $targets = $this->seedTargets();

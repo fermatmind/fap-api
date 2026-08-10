@@ -6,8 +6,13 @@ namespace Tests\Feature\Console;
 
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariant;
+use App\Models\PersonalityProfileVariantRevision;
 use App\Models\PersonalityProfileVariantSeoMeta;
+use App\Services\Cms\MbtiSeoFieldOverrideRevisionService;
+use App\Services\Cms\PersonalityPublicReadModelCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Cache;
+use RuntimeException;
 use Tests\TestCase;
 
 final class PersonalityRefreshMbtiVariantSeoMetadataCommandTest extends TestCase
@@ -110,6 +115,177 @@ final class PersonalityRefreshMbtiVariantSeoMetadataCommandTest extends TestCase
             ->assertExitCode(1);
     }
 
+    public function test_promoted_live_marker_protects_only_seo_title_and_invalidates_cache_for_other_refreshes(): void
+    {
+        $profile = $this->createProfile('zh-CN', 'INTP', '逻辑学家');
+        $variant = $this->createVariant($profile, 'INTP-A');
+        $seoMeta = $this->createSeoMeta($variant, 'Promoted query-owner title');
+        $this->createOverrideMarker(
+            $profile,
+            $variant,
+            $seoMeta,
+            MbtiSeoFieldOverrideRevisionService::STATUS_PROMOTED_LIVE,
+            'Original title',
+            'Promoted query-owner title',
+        );
+        $cache = app(PersonalityPublicReadModelCache::class);
+        $versionBefore = $cache->versionToken('INTP-A', 'zh-CN', 0, PersonalityProfile::SCALE_CODE_MBTI);
+
+        $this->artisan('personality:refresh-mbti-variant-seo-metadata', [
+            '--locale' => ['zh-CN'],
+            '--type' => ['INTP'],
+        ])
+            ->expectsOutputToContain('metadata_changes=1')
+            ->expectsOutputToContain('writes_committed=1')
+            ->expectsOutputToContain('protected_override_count=1')
+            ->expectsOutputToContain('protected_fields=["seo_title"]')
+            ->expectsOutputToContain('cache_invalidations=1')
+            ->assertExitCode(0);
+
+        $seoMeta->refresh();
+        $this->assertSame('Promoted query-owner title', $seoMeta->seo_title);
+        $this->assertSame('INTP-A 逻辑学家人格：特点、适合职业、爱情与稀有度', $seoMeta->og_title);
+        $this->assertNotSame(
+            $versionBefore,
+            $cache->versionToken('INTP-A', 'zh-CN', 0, PersonalityProfile::SCALE_CODE_MBTI),
+        );
+    }
+
+    public function test_latest_rolled_back_marker_releases_seo_title_protection(): void
+    {
+        $profile = $this->createProfile('zh-CN', 'INTP', '逻辑学家');
+        $variant = $this->createVariant($profile, 'INTP-A');
+        $seoMeta = $this->createSeoMeta($variant, 'Original title');
+        $this->createOverrideMarker(
+            $profile,
+            $variant,
+            $seoMeta,
+            MbtiSeoFieldOverrideRevisionService::STATUS_ROLLED_BACK,
+            'Original title',
+            'Promoted query-owner title',
+        );
+
+        $this->artisan('personality:refresh-mbti-variant-seo-metadata', [
+            '--locale' => ['zh-CN'],
+            '--type' => ['INTP'],
+        ])
+            ->expectsOutputToContain('protected_override_count=0')
+            ->expectsOutputToContain('protected_fields=[]')
+            ->expectsOutputToContain('writes_committed=1')
+            ->assertExitCode(0);
+
+        $this->assertSame(
+            'INTP-A 逻辑学家人格：特点、适合职业、爱情与稀有度',
+            (string) $seoMeta->fresh()?->seo_title,
+        );
+    }
+
+    public function test_invalid_marker_checksum_fails_before_any_batch_write(): void
+    {
+        $firstProfile = $this->createProfile('zh-CN', 'ENFP', '竞选者');
+        $firstVariant = $this->createVariant($firstProfile, 'ENFP-A');
+        $firstSeo = $this->createSeoMeta($firstVariant, 'First untouched title');
+
+        $profile = $this->createProfile('zh-CN', 'INTP', '逻辑学家');
+        $variant = $this->createVariant($profile, 'INTP-A');
+        $seoMeta = $this->createSeoMeta($variant, 'Promoted query-owner title');
+        $revision = $this->createOverrideMarker(
+            $profile,
+            $variant,
+            $seoMeta,
+            MbtiSeoFieldOverrideRevisionService::STATUS_PROMOTED_LIVE,
+            'Original title',
+            'Promoted query-owner title',
+        );
+        $snapshot = $revision->snapshot_json;
+        $snapshot['snapshot_sha256'] = str_repeat('0', 64);
+        $revision->forceFill(['snapshot_json' => $snapshot])->save();
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('checksum mismatch');
+        try {
+            $this->artisan('personality:refresh-mbti-variant-seo-metadata', [
+                '--locale' => ['zh-CN'],
+                '--type' => ['ENFP', 'INTP'],
+            ])->run();
+        } finally {
+            $this->assertSame('First untouched title', (string) $firstSeo->fresh()?->seo_title);
+        }
+    }
+
+    public function test_marker_live_value_drift_fails_closed(): void
+    {
+        $profile = $this->createProfile('zh-CN', 'INTP', '逻辑学家');
+        $variant = $this->createVariant($profile, 'INTP-A');
+        $seoMeta = $this->createSeoMeta($variant, 'Unowned pre-change title');
+        $this->createOverrideMarker(
+            $profile,
+            $variant,
+            $seoMeta,
+            MbtiSeoFieldOverrideRevisionService::STATUS_PROMOTED_LIVE,
+            'Original title',
+            'Promoted query-owner title',
+            liveValue: 'Promoted query-owner title',
+        );
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('does not match the live SEO title');
+        $this->artisan('personality:refresh-mbti-variant-seo-metadata', [
+            '--locale' => ['zh-CN'],
+            '--type' => ['INTP'],
+            '--dry-run' => true,
+        ])->run();
+    }
+
+    public function test_marker_target_identity_drift_fails_closed(): void
+    {
+        $profile = $this->createProfile('zh-CN', 'INTP', '逻辑学家');
+        $variant = $this->createVariant($profile, 'INTP-A');
+        $seoMeta = $this->createSeoMeta($variant, 'Promoted query-owner title');
+        $revision = $this->createOverrideMarker(
+            $profile,
+            $variant,
+            $seoMeta,
+            MbtiSeoFieldOverrideRevisionService::STATUS_PROMOTED_LIVE,
+            'Original title',
+            'Promoted query-owner title',
+        );
+        $snapshot = $revision->snapshot_json;
+        $snapshot['target']['runtime_type_code'] = 'INTJ-A';
+        $snapshot['snapshot_sha256'] = app(MbtiSeoFieldOverrideRevisionService::class)->snapshotSha256($snapshot);
+        $revision->forceFill(['snapshot_json' => $snapshot])->save();
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('target identity mismatch');
+        $this->artisan('personality:refresh-mbti-variant-seo-metadata', [
+            '--locale' => ['zh-CN'],
+            '--type' => ['INTP'],
+            '--dry-run' => true,
+        ])->run();
+    }
+
+    public function test_cache_invalidation_failure_rolls_back_metadata_write(): void
+    {
+        $profile = $this->createProfile('zh-CN', 'INTP', '逻辑学家');
+        $variant = $this->createVariant($profile, 'INTP-A');
+        $seoMeta = $this->createSeoMeta($variant, 'Original title');
+        app('cache.store');
+        Cache::shouldReceive('forever')->once()->andThrow(new RuntimeException('cache unavailable'));
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('database writes were rolled back');
+        try {
+            $this->artisan('personality:refresh-mbti-variant-seo-metadata', [
+                '--locale' => ['zh-CN'],
+                '--type' => ['INTP'],
+            ])->run();
+        } finally {
+            $seoMeta->refresh();
+            $this->assertSame('Original title', $seoMeta->seo_title);
+            $this->assertSame('Old description', $seoMeta->seo_description);
+        }
+    }
+
     /**
      * @return array<string, PersonalityProfileVariant>
      */
@@ -196,6 +372,66 @@ final class PersonalityRefreshMbtiVariantSeoMetadataCommandTest extends TestCase
             'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
             'is_published' => true,
             'published_at' => now(),
+        ]);
+    }
+
+    private function createSeoMeta(
+        PersonalityProfileVariant $variant,
+        string $seoTitle,
+    ): PersonalityProfileVariantSeoMeta {
+        return PersonalityProfileVariantSeoMeta::query()->create([
+            'personality_profile_variant_id' => (int) $variant->id,
+            'seo_title' => $seoTitle,
+            'seo_description' => 'Old description',
+            'canonical_url' => '/unchanged',
+            'og_title' => 'Old OG title',
+            'og_description' => 'Old OG description',
+            'og_image_url' => null,
+            'twitter_title' => 'Old Twitter title',
+            'twitter_description' => 'Old Twitter description',
+            'twitter_image_url' => null,
+            'robots' => 'index,follow',
+            'jsonld_overrides_json' => null,
+        ]);
+    }
+
+    private function createOverrideMarker(
+        PersonalityProfile $profile,
+        PersonalityProfileVariant $variant,
+        PersonalityProfileVariantSeoMeta $seoMeta,
+        string $status,
+        string $previous,
+        string $promoted,
+        ?string $liveValue = null,
+    ): PersonalityProfileVariantRevision {
+        $snapshot = [
+            'schema_version' => MbtiSeoFieldOverrideRevisionService::SCHEMA_VERSION,
+            'status' => $status,
+            'promotion_id' => 'test-promotion',
+            'package_sha256' => str_repeat('a', 64),
+            'target' => [
+                'org_id' => 0,
+                'framework' => PersonalityProfile::SCALE_CODE_MBTI,
+                'locale' => (string) $profile->locale,
+                'runtime_type_code' => (string) $variant->runtime_type_code,
+                'route' => '/'.($profile->locale === 'zh-CN' ? 'zh' : 'en').'/personality/'.strtolower((string) $variant->runtime_type_code),
+            ],
+            'change' => [
+                'field' => MbtiSeoFieldOverrideRevisionService::FIELD_SEO_TITLE,
+                'previous' => $previous,
+                'promoted' => $promoted,
+                'live_value' => $liveValue ?? ($status === MbtiSeoFieldOverrideRevisionService::STATUS_PROMOTED_LIVE ? $promoted : $previous),
+            ],
+        ];
+        $snapshot['snapshot_sha256'] = app(MbtiSeoFieldOverrideRevisionService::class)->snapshotSha256($snapshot);
+
+        return PersonalityProfileVariantRevision::query()->create([
+            'personality_profile_variant_id' => (int) $variant->id,
+            'revision_no' => 1,
+            'snapshot_json' => $snapshot,
+            'note' => 'test override marker',
+            'created_by_admin_user_id' => null,
+            'created_at' => now(),
         ]);
     }
 }
