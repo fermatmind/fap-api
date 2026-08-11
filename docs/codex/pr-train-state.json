@@ -105388,7 +105388,7 @@
     "base": "main",
     "branch": "codex/career-1046-root-activation-09",
     "title": "CAREER-1046-ATOMIC-ROOT-ACTIVATION-CONTROL-09: add single root generation activation control",
-    "status": "local_validation_passed",
+    "status": "github_checks_pending",
     "depends_on": [
       "CAREER-1046-PRODUCT-DATA-STAGING-CONTROL-08"
     ],
@@ -105423,8 +105423,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "a728e5f97a1ddaf1ec9d7b468a48f38496e1b2f1",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3668",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -105452,8 +105452,13 @@
         "at": "2026-08-12T05:57:50+08:00",
         "status": "local_validation_passed",
         "note": "Completed local validation. The heavy-guarded ci_verify_mbti master chain exited 0; focused activation, staging and database-reconciliation coverage passed 5 tests plus 6 known missing-.env warnings / 227 assertions; actionlint, Pint, PHP syntax, freeze contract, YAML/JSON parsing, 253-route listing, fresh SQLite migration, exact six-file scope and diff checks passed. Verifier-generated Big Five compiled files were restored. No production or staging workflow was dispatched and no controlled external state was accessed or mutated."
+      },
+      {
+        "at": "2026-08-12T05:59:30+08:00",
+        "status": "github_checks_pending",
+        "note": "Committed the exact six-file implementation as a728e5f97a1ddaf1ec9d7b468a48f38496e1b2f1, pushed the focused branch and opened PR #3668. GitHub reports exactly six allowlisted files and required checks are running. No production or staging workflow was dispatched and no controlled external state was accessed or mutated."
       }
     ],
-    "updated_at": "2026-08-12T05:57:50+08:00"
+    "updated_at": "2026-08-12T05:59:30+08:00"
   }
 }
