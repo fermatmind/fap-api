@@ -140,14 +140,15 @@ Separately authorized, bounded environment readback should verify:
 3. Nginx/PHP-FPM, Supervisor required workers and scheduler;
 4. Redis and RDS connectivity without printing endpoints or credentials;
 5. release counts, journal limits and filesystem headroom;
-6. target-node loopback vhost `GET /api/healthz` returns HTTP `200` with JSON `ok=true`;
-7. the same path from a non-allowlisted public origin remains exactly HTTP `404`—public healthz must never be required to return `200`;
-8. the public flags API returns HTTP `200`;
-9. `GET /api/v0.5/personality-content-assets/big_five/hub/big-five?locale=zh-CN` returns HTTP `200`, JSON `ok=true`, and a lowercase hexadecimal `personality_public_content_asset_v1.source_hash` of exactly 64 characters;
-10. core assessment, Career directory/detail, sitemap source and ops entry remain healthy;
-11. no 5xx/timeout appears in repeated intervals.
+6. the public `GET /up` boot smoke returns HTTP `200`;
+7. target-node loopback vhost `GET /api/healthz` returns HTTP `200` with JSON `ok=true`;
+8. the same path from a non-allowlisted public origin remains exactly HTTP `404`—public healthz must never be required to return `200`;
+9. the public flags API returns HTTP `200`;
+10. `GET /api/v0.5/personality-content-assets/big_five/hub/big-five?locale=zh-CN` returns HTTP `200`, JSON `ok=true`, and a lowercase hexadecimal `personality_public_content_asset_v1.source_hash` of exactly 64 characters;
+11. core assessment, Career directory/detail, sitemap source and ops entry remain healthy;
+12. no 5xx/timeout appears in repeated intervals.
 
-Health evidence must keep loopback/allowlisted internal health separate from public-DNS business evidence. The readback may retain sanitized booleans, status codes and opaque hashes, but must not print response bodies, topology or credentials.
+Health evidence must keep the public `/up` boot smoke, loopback/allowlisted internal health and public-DNS business evidence separate. The readback may retain sanitized booleans, status codes and opaque hashes, but must not print response bodies, topology or credentials.
 
 SSH readback is diagnostic only. Production deploy, database/CMS write, cache warm, service restart, DNS change, secret rotation and resource deletion remain separate controlled actions.
 
