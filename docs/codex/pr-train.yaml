@@ -49293,3 +49293,51 @@ prs:
     deploy_allowed: false
     content_authority: exact generation-bound backend published projection and ledger selected by the validated root active pointer
     repository_rule_impact: removes implicit latest-artifact and database test fallback authority from the public Career runtime reader
+
+  - id: CAREER-RUNTIME-AUTHORITY-BOOTSTRAP-COMPAT-04R
+    repo: fap-api
+    base: main
+    branch: codex/career-bootstrap-pointer-compat-repair-04r
+    title: "CAREER-RUNTIME-AUTHORITY-BOOTSTRAP-COMPAT-04R: bind frozen legacy bytes without rewrite"
+    status: github_checks_pending
+    depends_on:
+      - CAREER-RUNTIME-AUTHORITY-ACTIVE-POINTER-04
+    train_scope: career_generation_bootstrap_legacy_exact_bytes_compatibility
+    risk_level: p1_public_runtime_authority
+    scope:
+      - Add an explicit bootstrap-only legacy_exact_bytes_v1 artifact format for the frozen 342/30 projection and ledger bytes.
+      - Bind exact pointer-declared legacy paths, artifact identities, byte hashes, slug and locale-row sets, public counts, manifest and receipt authority without scanning or rewriting source artifacts.
+      - Keep generation-native artifacts strict and reject legacy lineage, LKG, revocation, traversal, symlink, partial embedded identity, and unbounded source roots.
+    allowed_paths:
+      - backend/app/Domain/Career/Publish/CareerGenerationAuthorityLoader.php
+      - backend/tests/Fixtures/Career/CareerGenerationAuthorityFixture.php
+      - backend/tests/Unit/Services/Career/CareerRuntimePublishProjectionLookupTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Implement or dispatch Task 2 production bootstrap workflow.
+      - Scan legacy directories, select by mtime, rewrite projection or ledger bytes, or accept legacy format after bootstrap lineage begins.
+      - Deploy, migrate, mutate production DB/CMS/cache/artifact/pointer state, publish, warm, change sitemap/llms, or submit Search Channel actions.
+    validation:
+      - cd backend && php artisan test tests/Unit/Services/Career/CareerRuntimePublishProjectionLookupTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/SEO/SitemapSourceApiTest.php tests/Feature/SEO/SitemapSourceCacheTest.php tests/Sre/CareerC03CacheOnlyDiscoverabilityControlTest.php tests/Sre/CareerColdCacheDiscoverabilityGateTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test on every changed PHP file
+      - php -l for every changed PHP file
+      - cd backend && bash scripts/ci_verify_mbti.sh through fermatmind-heavy-guard
+      - parse pr-train JSON and YAML
+      - exact changed-file scope validation
+      - git diff --check and git diff --cached --check
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_read_only_evidence: false
+    production_workflow_dispatched: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: exact pointer-bound legacy source bytes are bootstrap-only; generation-native authority remains the steady-state format
+    repository_rule_impact: closes the post-merge Task 1 incompatibility between immutable frozen legacy bytes and Task 2's no-rewrite bootstrap constraint

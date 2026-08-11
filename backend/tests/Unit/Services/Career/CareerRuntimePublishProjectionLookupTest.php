@@ -167,6 +167,45 @@ final class CareerRuntimePublishProjectionLookupTest extends TestCase
         self::assertNull((new CareerGenerationAuthorityLoader)->activeProjection());
     }
 
+    public function test_explicit_legacy_exact_bytes_bootstrap_binds_existing_artifacts_without_rewriting_them(): void
+    {
+        $document = $this->writeLegacyBootstrapGeneration();
+        $projectionPath = storage_path('app/private/'.$document['payload']['artifacts']['projection']['path']);
+        $ledgerPath = storage_path('app/private/'.$document['payload']['artifacts']['ledger']['path']);
+        $projectionBefore = hash_file('sha256', $projectionPath);
+        $ledgerBefore = hash_file('sha256', $ledgerPath);
+
+        $projection = (new CareerGenerationAuthorityLoader)->activeProjection();
+
+        self::assertIsArray($projection);
+        self::assertSame(2, count($projection['items']));
+        self::assertSame($projectionBefore, hash_file('sha256', $projectionPath));
+        self::assertSame($ledgerBefore, hash_file('sha256', $ledgerPath));
+
+        $document['payload']['artifact_format'] = CareerGenerationAuthorityLoader::ARTIFACT_FORMAT_GENERATION_NATIVE;
+        $this->rehash($document);
+        $this->writeJson($this->root.'/'.CareerGenerationAuthorityLoader::ACTIVE_POINTER_FILENAME, $document);
+        self::assertNull((new CareerGenerationAuthorityLoader)->activeProjection());
+    }
+
+    public function test_legacy_exact_bytes_format_is_bootstrap_only_and_rejects_unbounded_paths(): void
+    {
+        $document = $this->writeLegacyBootstrapGeneration();
+        $document['payload']['artifacts']['projection']['path'] = 'career_runtime_publish_projection/../escape/'.CareerRuntimePublishProjectionExporter::PROJECTION_FILENAME;
+        $this->rehash($document);
+        $this->writeJson($this->root.'/'.CareerGenerationAuthorityLoader::ACTIVE_POINTER_FILENAME, $document);
+        self::assertNull((new CareerGenerationAuthorityLoader)->activeProjection());
+
+        $document = $this->writeLegacyBootstrapGeneration();
+        $document['payload']['lineage']['previous_generation_id'] = 'generation-before-bootstrap';
+        $document['payload']['lineage']['previous_pointer_sha256'] = str_repeat('4', 64);
+        $document['payload']['rollback']['eligible'] = true;
+        $document['payload']['rollback']['previous_generation_id'] = 'generation-before-bootstrap';
+        $this->rehash($document);
+        $this->writeJson($this->root.'/'.CareerGenerationAuthorityLoader::ACTIVE_POINTER_FILENAME, $document);
+        self::assertNull((new CareerGenerationAuthorityLoader)->activeProjection());
+    }
+
     public function test_unauthorized_cohort_shrink_is_rejected(): void
     {
         $previous = $this->writeGeneration('generation-001', [
@@ -290,6 +329,7 @@ final class CareerRuntimePublishProjectionLookupTest extends TestCase
         $this->writeJson($ledgerPath, $ledger);
         $payload = [
             'generation_id' => $generationId,
+            'artifact_format' => CareerGenerationAuthorityLoader::ARTIFACT_FORMAT_GENERATION_NATIVE,
             'artifacts' => [
                 'projection' => [
                     'identity' => 'career-runtime-publish-projection@'.$generationId,
@@ -370,6 +410,80 @@ final class CareerRuntimePublishProjectionLookupTest extends TestCase
             'payload' => $payload,
         ];
         $this->writeJson($generationDir.'/'.CareerGenerationAuthorityLoader::GENERATION_POINTER_FILENAME, $document);
+        $this->writeJson($this->root.'/'.CareerGenerationAuthorityLoader::ACTIVE_POINTER_FILENAME, $document);
+
+        return $document;
+    }
+
+    /** @return array<string, mixed> */
+    private function writeLegacyBootstrapGeneration(): array
+    {
+        $generationId = 'bootstrap-generation-001';
+        $sourceId = 'frozen-342-authority';
+        $projectionRelativePath = 'career_runtime_publish_projection/'.$sourceId.'/'.CareerRuntimePublishProjectionExporter::PROJECTION_FILENAME;
+        $ledgerRelativePath = 'career_release_ledger/'.$sourceId.'/'.CareerFullReleaseLedgerProjectionService::LEDGER_FILENAME;
+        $projectionPath = storage_path('app/private/'.$projectionRelativePath);
+        $ledgerPath = storage_path('app/private/'.$ledgerRelativePath);
+        $projection = [
+            'projection_kind' => 'career_runtime_publish_projection',
+            'projection_version' => 'career.runtime_publish_projection.v1',
+            'source_authority' => 'CareerFullReleaseLedger',
+            'items' => $this->projectionItems(['actors' => 'published']),
+        ];
+        $ledger = [
+            'ledger_kind' => 'career_full_release_ledger',
+            'ledger_version' => 'career.full_release_ledger.v1',
+            'members' => [['canonical_slug' => 'actors']],
+        ];
+        $this->writeJson($projectionPath, $projection);
+        $this->writeJson($ledgerPath, $ledger);
+
+        $authority = [
+            'frozen_manifest_sha256' => str_repeat('1', 64),
+            'target_slug_set_sha256' => CareerGenerationCanonicalJson::setSha256(['actors']),
+            'target_locale_row_set_sha256' => CareerGenerationCanonicalJson::setSha256(['actors|en', 'actors|zh']),
+            'receipt_set_sha256' => str_repeat('2', 64),
+        ];
+        $payload = [
+            'generation_id' => $generationId,
+            'artifact_format' => CareerGenerationAuthorityLoader::ARTIFACT_FORMAT_LEGACY_EXACT_BYTES,
+            'artifacts' => [
+                'projection' => [
+                    'identity' => 'career-runtime-publish-projection@'.$generationId,
+                    'path' => $projectionRelativePath,
+                    'sha256' => hash_file('sha256', $projectionPath),
+                ],
+                'ledger' => [
+                    'identity' => 'career-full-release-ledger@'.$generationId,
+                    'path' => $ledgerRelativePath,
+                    'sha256' => hash_file('sha256', $ledgerPath),
+                ],
+            ],
+            'authority' => $authority,
+            'counts' => ['public_slug_count' => 1, 'public_locale_row_count' => 2],
+            'lineage' => ['previous_generation_id' => null, 'previous_pointer_sha256' => null],
+            'timestamps' => [
+                'created_at' => '2026-08-12T00:00:00Z',
+                'activated_at' => '2026-08-12T00:00:01Z',
+            ],
+            'activation_receipt' => [
+                'identity' => 'activation:'.$generationId,
+                'sha256' => str_repeat('3', 64),
+            ],
+            'rollback' => ['eligible' => false, 'previous_generation_id' => null],
+            'discoverability' => [
+                'sitemap_mutated' => false,
+                'llms_mutated' => false,
+                'search_mutated' => false,
+            ],
+            'revocation_receipt' => null,
+        ];
+        $document = [
+            'schema_version' => CareerGenerationAuthorityLoader::POINTER_SCHEMA_VERSION,
+            'payload_sha256' => CareerGenerationCanonicalJson::sha256($payload),
+            'payload' => $payload,
+        ];
+        $this->writeJson($this->root.'/generations/'.$generationId.'/'.CareerGenerationAuthorityLoader::GENERATION_POINTER_FILENAME, $document);
         $this->writeJson($this->root.'/'.CareerGenerationAuthorityLoader::ACTIVE_POINTER_FILENAME, $document);
 
         return $document;
