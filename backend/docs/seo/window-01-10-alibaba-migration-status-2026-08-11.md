@@ -2,8 +2,9 @@
 
 Status: evidence-backed checkpoint; execution remains open
 Owner: SEO / Growth / Backend / SRE
-Evidence cutoff: 2026-08-11 12:02 CST
-Repository base: `ecc62a386076e29969d6975a2767f11963bb1690`
+Evidence cutoff: 2026-08-11 12:20 CST
+Initial evidence base: `ecc62a386076e29969d6975a2767f11963bb1690`
+Repository `main` at cutoff: `25cbc70f60d2a32901339e7e2469d4ddf196e173`
 
 ## 1. 执行结论
 
@@ -65,9 +66,9 @@ Repository base: `ecc62a386076e29969d6975a2767f11963bb1690`
 | 层 | 版本 / 事实 | 解释 |
 |---|---|---|
 | production active backend | `40020ab7ef269ee56ce597e9f2fd2fbb99e83549` | 当前受控事故证据中的 active revision |
-| repository `main` at capture | `ecc62a386076e29969d6975a2767f11963bb1690` | 含发布 authority 持久化修复，但未证明已 active |
+| repository `main` at cutoff | `25cbc70f60d2a32901339e7e2469d4ddf196e173` | 含发布 authority 与 public-DNS guard 修复，但未证明已 active |
 | failed candidate deploy | `ecc62a386076e29969d6975a2767f11963bb1690` | migration 已执行，activation 被 public-DNS guard 阻止 |
-| guard repair | PR #3645 仍 OPEN；修复 P1 后的新 head checks 正在运行 | 合并后仍需新的 exact-SHA 部署，不自动授权生产写 |
+| guard repair | PR #3645 已 squash merge 为 `25cbc70f60d2a32901339e7e2469d4ddf196e173`；该 control-plane SHA 的 CI/staging 正在运行 | 没有新的 production dispatch；仍需 candidate-bound 部署，不自动授权生产写 |
 
 这意味着数据库 schema 可能已经领先于 active application code。部署恢复前必须重新做 migration status、candidate/active identity、public guard 和 post-activation smoke，不可只看 GitHub `main` 判断生产能力。
 
@@ -316,7 +317,7 @@ English SEO 的报告/closeout 已完成，增长实验未完成。先做 RIASEC
 
 ### 16.3 仍需收尾
 
-- 合并 PR #3645 后，使用新的 exact `main` SHA 重新部署后端，确认 migration/code/active revision 对齐；这是单独受控生产动作。
+- PR #3645 已合并；先等待 exact control-plane SHA `25cbc70f60d2a32901339e7e2469d4ddf196e173` 的 CI/staging 证据，再对仍符合资格的 approved immutable candidate 发起单独受控 production deploy，确认 migration/code/active revision 对齐。
 - 生产部署成功后重新读回 Career、Measurement、Topic Graph 和 RIASEC bridge，不得沿用部署前快照。
 - PostgreSQL RDS 仅保存 Metabase metadata，运行时已禁用，仍需按 `ARCHIVE_AND_RETIRE` 完成归档/退役。
 - 服务器账号密码轮换仍是显式风险尾项。
@@ -329,7 +330,7 @@ English SEO 的报告/closeout 已完成，增长实验未完成。先做 RIASEC
 
 ### P0：恢复生产一致性
 
-1. 等待 DNS guard 修复当前 head 的 required checks 全绿并合并。
+1. 等待 control-plane SHA `25cbc70f60d2a32901339e7e2469d4ddf196e173` 的 CI、Code Scanning 与 staging 证据完成；取证截止时没有 production dispatch。
 2. 发起新的后端 production deploy，绑定 exact approved immutable candidate SHA/release 与同 SHA staging receipt；candidate 必须仍可从当前 `main` 到达，并明确排除所有更新的 `main` commits。
 3. 验证 active revision、migration status、queue/scheduler、Redis/RDS、`/up`、flags、Career directory/detail、sitemap source。
 4. 重新冻结 post-deploy 613/30-or-changed truth；任何 cohort 变化必须有 authority receipt。
