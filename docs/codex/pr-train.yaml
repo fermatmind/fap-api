@@ -49261,6 +49261,7 @@ prs:
       - backend/tests/Feature/SEO/SitemapSourceCacheTest.php
       - backend/tests/Fixtures/Career/CareerGenerationAuthorityFixture.php
       - backend/tests/Unit/Services/Career/CareerRuntimePublishProjectionLookupTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
@@ -49271,6 +49272,7 @@ prs:
       - cd backend && php artisan test tests/Unit/Services/Career/CareerRuntimePublishProjectionLookupTest.php tests/Feature/SEO/SitemapSourceApiTest.php tests/Feature/SEO/SitemapSourceCacheTest.php tests/Sre/CareerC03CacheOnlyDiscoverabilityControlTest.php tests/Sre/CareerColdCacheDiscoverabilityGateTest.php --no-ansi
       - cd backend && php artisan test tests/Feature/Console/CareerRuntimePublishProjectionCommandTest.php --filter=test_export_command_never_writes_the_generation_active_pointer --no-ansi
       - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --no-ansi
       - cd backend && vendor/bin/pint --test on every changed PHP file
       - php -l for every changed PHP file
       - cd backend && bash scripts/ci_verify_mbti.sh through fermatmind-heavy-guard

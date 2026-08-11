@@ -104782,6 +104782,7 @@
       "backend/tests/Feature/SEO/SitemapSourceCacheTest.php",
       "backend/tests/Fixtures/Career/CareerGenerationAuthorityFixture.php",
       "backend/tests/Unit/Services/Career/CareerRuntimePublishProjectionLookupTest.php",
+      "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
       "docs/codex/pr-train.yaml",
       "docs/codex/pr-train-state.json"
     ],
@@ -104800,11 +104801,11 @@
       },
       "scope": {
         "status": "passed",
-        "evidence": "Exact changed-file comparison passed for the 10 allowlisted paths after restoring verifier-generated Big Five compiled artifacts. No route, migration, middleware, workflow, production, CMS/DB/cache/artifact/pointer, sitemap/llms, Search Channel, URL submission, or frontend path changed."
+        "evidence": "Exact changed-file comparison passed for the 11 allowlisted paths after restoring verifier-generated Big Five compiled artifacts. The added Big Five test path changes only its Career runtime-projection ownership classifier and regression fixture. No route, migration, middleware, workflow, production, CMS/DB/cache/artifact/pointer, sitemap/llms, Search Channel, URL submission, or frontend path changed."
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "PR not yet opened."
+        "evidence": "Initial PR head 1278a2a7ec47869a4d96776efa84187cc8e01a48 passed eight jobs but verify-bigfive identified the two new Career generation owner classes as unclassified runtime changes. The exact failing assertion was reproduced and fixed by extending only the existing Career runtime projection classifier; its complete 418-test / 863-assertion file now passes locally. A corrected head will rerun the complete required set before merge."
       }
     },
     "failure_reason": null,
@@ -104837,8 +104838,13 @@
         "at": "2026-08-12T02:07:11+08:00",
         "status": "github_checks_pending",
         "note": "Committed exact implementation head c88eca4604af467693ad01dbc61bfa3bda4d7313, pushed the scoped branch, and opened PR #3661. GitHub reports MERGEABLE while required checks run. The final ledger-only head must pass the full required check set before squash merge; no production workflow or production/discoverability write was dispatched or executed."
+      },
+      {
+        "at": "2026-08-12T02:18:00+08:00",
+        "status": "same_scope_ci_fix_validated",
+        "note": "The initial PR head failed only verify-bigfive because the runtime-freeze classifier did not yet categorize CareerGenerationAuthorityLoader and CareerGenerationCanonicalJson as Career runtime projection owner files. Added those exact paths to the existing classifier and its ownership regression list; the exact failed tests passed 2 / 5 and the complete classifier file passed 418 / 863 locally. No runtime implementation, production workflow, or production/discoverability state changed."
       }
     ],
-    "updated_at": "2026-08-12T02:07:11+08:00"
+    "updated_at": "2026-08-12T02:18:00+08:00"
   }
 }
