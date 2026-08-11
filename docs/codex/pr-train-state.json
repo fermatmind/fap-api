@@ -104859,7 +104859,7 @@
     "base": "main",
     "branch": "codex/career-bootstrap-pointer-compat-repair-04r",
     "title": "CAREER-RUNTIME-AUTHORITY-BOOTSTRAP-COMPAT-04R: bind frozen legacy bytes without rewrite",
-    "status": "local_validation_passed",
+    "status": "github_checks_pending",
     "depends_on": [
       "CAREER-RUNTIME-AUTHORITY-ACTIVE-POINTER-04"
     ],
@@ -104889,12 +104889,12 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "PR not yet opened."
+        "evidence": "PR #3662 opened from exact validated implementation commit 891796a67faf0564f3e4d8ad2a31329197921e58; required checks are pending."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "891796a67faf0564f3e4d8ad2a31329197921e58",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3662",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -104917,8 +104917,13 @@
         "at": "2026-08-12T02:42:01+08:00",
         "status": "local_validation_passed",
         "note": "Focused generation-loader and sitemap/cold-cache regressions passed, followed by the complete ci_verify_mbti.sh chain under the repository heavy guard. Generated Big Five compiled outputs were restored after verification, leaving exactly the five allowlisted repair paths. No production workflow, deploy, migration, DB/CMS/cache/artifact/pointer, publication, sitemap/llms or Search Channel action was executed."
+      },
+      {
+        "at": "2026-08-12T02:44:32+08:00",
+        "status": "github_checks_pending",
+        "note": "Committed the exact five-file repair as 891796a67faf0564f3e4d8ad2a31329197921e58, pushed the focused branch, and opened PR #3662. Required checks must pass before squash merge; no production or discoverability action was executed."
       }
     ],
-    "updated_at": "2026-08-12T02:42:01+08:00"
+    "updated_at": "2026-08-12T02:44:32+08:00"
   }
 }
