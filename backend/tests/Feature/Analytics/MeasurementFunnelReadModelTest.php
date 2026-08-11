@@ -21,6 +21,25 @@ final class MeasurementFunnelReadModelTest extends TestCase
     use RefreshDatabase;
     use SeedsFunnelAnalyticsScenario;
 
+    public function test_reporting_dates_use_the_asia_shanghai_utc_half_open_window(): void
+    {
+        $includedStart = CarbonImmutable::parse('2026-07-12 16:00:00', 'UTC');
+        $includedEnd = CarbonImmutable::parse('2026-08-09 15:59:59', 'UTC');
+        $excludedEnd = CarbonImmutable::parse('2026-08-09 16:00:00', 'UTC');
+        $this->insertAttempt((string) Str::uuid(), 90, 'en', $includedStart, null);
+        $this->insertAttempt((string) Str::uuid(), 90, 'en', $includedEnd, null);
+        $this->insertAttempt((string) Str::uuid(), 90, 'en', $excludedEnd, null);
+
+        $report = app(MeasurementFunnelReadModel::class)->report(90, '2026-07-13', '2026-08-09', ['MBTI'], ['en']);
+
+        $this->assertSame('Asia/Shanghai', $report['reporting_timezone'] ?? null);
+        $this->assertSame('UTC', $report['storage_timezone'] ?? null);
+        $this->assertSame('2026-07-12T16:00:00+00:00', $report['window_utc_start'] ?? null);
+        $this->assertSame('2026-08-09T16:00:00+00:00', $report['window_utc_end_exclusive'] ?? null);
+        $this->assertSame(2, data_get($report, 'totals.attempt_started_count'));
+        $this->assertSame(['2026-07-13', '2026-08-09'], array_values(array_unique(array_column($report['rows'] ?? [], 'report_date'))));
+    }
+
     public function test_read_model_aggregates_backend_truth_with_privacy_safe_dimensions(): void
     {
         $scenario = $this->seedFunnelAnalyticsScenario(71);

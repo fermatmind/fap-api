@@ -18,6 +18,34 @@ final class SeoConversionDailyBuilderTest extends TestCase
     use RefreshDatabase;
     use SeedsFunnelAnalyticsScenario;
 
+    public function test_build_uses_the_asia_shanghai_utc_half_open_window(): void
+    {
+        $payload = [
+            'url' => '/en/tests/holland-career-interest-test-riasec',
+            'lang' => 'en',
+            'page_type' => 'test_detail',
+            'scale_id' => 'RIASEC',
+            'form_id' => '',
+            'session_id' => 'riasec_boundary_session',
+        ];
+        $this->insertSeoEvent(0, 'landing_pv', CarbonImmutable::parse('2026-07-12 16:00:00', 'UTC'), $payload);
+        $this->insertSeoEvent(0, 'landing_pv', CarbonImmutable::parse('2026-08-09 16:00:00', 'UTC'), $payload);
+
+        $result = app(SeoConversionDailyBuilder::class)->build(
+            CarbonImmutable::parse('2026-07-13'),
+            CarbonImmutable::parse('2026-08-09'),
+            [0],
+        );
+
+        $this->assertSame('Asia/Shanghai', $result['reporting_timezone'] ?? null);
+        $this->assertSame('UTC', $result['storage_timezone'] ?? null);
+        $this->assertSame('2026-07-12T16:00:00+00:00', $result['window_utc_start'] ?? null);
+        $this->assertSame('2026-08-09T16:00:00+00:00', $result['window_utc_end_exclusive'] ?? null);
+        $this->assertCount(1, $result['rows'] ?? []);
+        $this->assertSame('2026-07-13', data_get($result, 'rows.0.day'));
+        $this->assertSame(1, data_get($result, 'rows.0.landing_pv_count'));
+    }
+
     public function test_refresh_aggregates_canonical_seo_conversion_events_by_safe_dimensions(): void
     {
         $day = CarbonImmutable::parse('2026-06-09 10:00:00');

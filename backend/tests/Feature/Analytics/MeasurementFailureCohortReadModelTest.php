@@ -19,6 +19,27 @@ final class MeasurementFailureCohortReadModelTest extends TestCase
     use RefreshDatabase;
     use SeedsFunnelAnalyticsScenario;
 
+    public function test_reporting_dates_use_the_asia_shanghai_utc_half_open_window(): void
+    {
+        $included = CarbonImmutable::parse('2026-07-12 16:00:00', 'UTC');
+        $excluded = CarbonImmutable::parse('2026-08-09 16:00:00', 'UTC');
+        $includedAttempt = (string) Str::uuid();
+        $excludedAttempt = (string) Str::uuid();
+        $this->insertAttempt($includedAttempt, 90, 'en', $included, null);
+        $this->insertAttempt($excludedAttempt, 90, 'en', $excluded, null);
+        $this->insertFailureEvent($includedAttempt, $included, 'submit_failure', orgId: 90);
+        $this->insertFailureEvent($excludedAttempt, $excluded, 'submit_failure', orgId: 90);
+
+        $report = app(MeasurementFailureCohortReadModel::class)->report(90, '2026-07-13', '2026-08-09');
+
+        $this->assertSame('Asia/Shanghai', $report['reporting_timezone'] ?? null);
+        $this->assertSame('UTC', $report['storage_timezone'] ?? null);
+        $this->assertSame('2026-07-12T16:00:00+00:00', $report['window_utc_start'] ?? null);
+        $this->assertSame('2026-08-09T16:00:00+00:00', $report['window_utc_end_exclusive'] ?? null);
+        $this->assertSame(1, data_get($report, 'cohorts.submit_failure.eligible_attempt_count'));
+        $this->assertSame(1, data_get($report, 'cohorts.submit_failure.failed_attempt_count'));
+    }
+
     public function test_read_model_uses_distinct_eligible_attempts_retries_and_eventual_success(): void
     {
         $day = CarbonImmutable::parse('2026-08-10 08:00:00');

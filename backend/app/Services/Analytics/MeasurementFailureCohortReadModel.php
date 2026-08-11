@@ -23,6 +23,7 @@ final class MeasurementFailureCohortReadModel
     public function __construct(
         private readonly MeasurementAttributionDimensions $dimensions,
         private readonly AnalyticsTrafficExclusionPolicy $trafficExclusionPolicy,
+        private readonly AnalyticsFunnelDailyBuilder $reportingWindow,
     ) {}
 
     /**
@@ -68,8 +69,9 @@ final class MeasurementFailureCohortReadModel
             return $this->blocked($orgId, $from, $to, $issues);
         }
 
-        $fromAt = $fromDate->startOfDay();
-        $toAt = $toDate->endOfDay();
+        $window = $this->reportingWindow->reportingWindow($fromDate, $toDate);
+        $fromAt = CarbonImmutable::parse($window['storage_start'], $window['storage_timezone']);
+        $toAt = CarbonImmutable::parse($window['storage_end_exclusive'], $window['storage_timezone']);
         $attempts = $this->eligibleAttempts($orgId, $fromAt, $toAt, $filters);
         $resultReadyAt = $this->validResultReadyAt($orgId, $attempts->keys()->all(), $toAt);
         $events = $this->failureEvents($orgId, $fromAt, $toAt, $filters);
@@ -115,6 +117,10 @@ final class MeasurementFailureCohortReadModel
             'issues' => array_values(array_unique($issues)),
             'from' => $fromDate->toDateString(),
             'to' => $toDate->toDateString(),
+            'reporting_timezone' => $window['reporting_timezone'],
+            'storage_timezone' => $window['storage_timezone'],
+            'window_utc_start' => $window['window_utc_start'],
+            'window_utc_end_exclusive' => $window['window_utc_end_exclusive'],
             'org_id' => $orgId,
             'filters' => $filters,
             'source_tables' => self::REQUIRED_TABLES,
@@ -143,7 +149,8 @@ final class MeasurementFailureCohortReadModel
             'started_at',
             'submitted_at',
         ])->where('org_id', $orgId)
-            ->whereBetween('started_at', [$fromAt, $toAt])
+            ->where('started_at', '>=', $fromAt)
+            ->where('started_at', '<', $toAt)
             ->orderBy('id')
             ->get();
 
@@ -175,7 +182,7 @@ final class MeasurementFailureCohortReadModel
                 ->whereIn('attempt_id', $chunk)
                 ->where('is_valid', true)
                 ->whereNotNull('computed_at')
-                ->where('computed_at', '<=', $toAt)
+                ->where('computed_at', '<', $toAt)
                 ->orderBy('computed_at')
                 ->get();
 
@@ -223,7 +230,8 @@ final class MeasurementFailureCohortReadModel
             ])
             ->where('events.org_id', $orgId)
             ->whereIn('events.event_code', MeasurementFailureEventContract::EVENT_NAMES)
-            ->whereBetween('events.occurred_at', [$fromAt, $toAt])
+            ->where('events.occurred_at', '>=', $fromAt)
+            ->where('events.occurred_at', '<', $toAt)
             ->orderBy('events.occurred_at')
             ->orderBy('events.id')
             ->get()
@@ -348,7 +356,9 @@ final class MeasurementFailureCohortReadModel
                 $terminalFailureCount++;
             }
 
-            $date = $first['occurred_at']->toDateString();
+            $date = $first['occurred_at']
+                ->setTimezone($this->reportingWindow->reportingTimezone())
+                ->toDateString();
             $dimensions = (array) $first['dimensions'];
             $dimensions['retry_bucket'] = MeasurementFailureEventContract::retryBucket($attemptRetryCount);
             $key = $eventName.'|'.$date.'|'.json_encode($dimensions);
@@ -431,7 +441,7 @@ final class MeasurementFailureCohortReadModel
 
         usort($candidates, fn (CarbonImmutable $left, CarbonImmutable $right): int => $left->getTimestampMs() <=> $right->getTimestampMs());
         foreach ($candidates as $candidate) {
-            if ($candidate->greaterThan($failureAt) && $candidate->lessThanOrEqualTo($toAt)) {
+            if ($candidate->greaterThan($failureAt) && $candidate->lessThan($toAt)) {
                 return $candidate;
             }
         }
@@ -665,7 +675,7 @@ final class MeasurementFailureCohortReadModel
         }
 
         try {
-            return CarbonImmutable::parse($value);
+            return CarbonImmutable::parse($value, $this->reportingWindow->storageTimezone());
         } catch (Throwable) {
             return null;
         }

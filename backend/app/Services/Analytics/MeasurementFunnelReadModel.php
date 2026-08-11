@@ -21,6 +21,7 @@ final class MeasurementFunnelReadModel
     public function __construct(
         private readonly MeasurementAttributionDimensions $dimensions,
         private readonly AnalyticsTrafficExclusionPolicy $trafficExclusionPolicy,
+        private readonly AnalyticsFunnelDailyBuilder $reportingWindow,
     ) {}
 
     /**
@@ -71,8 +72,9 @@ final class MeasurementFunnelReadModel
             return $this->blocked($orgId, $from, $to, $issues);
         }
 
-        $fromAt = $fromDate->startOfDay();
-        $toAt = $toDate->endOfDay();
+        $window = $this->reportingWindow->reportingWindow($fromDate, $toDate);
+        $fromAt = CarbonImmutable::parse($window['storage_start'], $window['storage_timezone']);
+        $toAt = CarbonImmutable::parse($window['storage_end_exclusive'], $window['storage_timezone']);
         $rows = [];
 
         $attemptQuery = DB::table('attempts')->select([
@@ -87,8 +89,11 @@ final class MeasurementFunnelReadModel
             'submitted_at',
         ])->where('org_id', $orgId)
             ->where(function (Builder $query) use ($fromAt, $toAt): void {
-                $query->whereBetween('started_at', [$fromAt, $toAt])
-                    ->orWhereBetween('submitted_at', [$fromAt, $toAt]);
+                $query->where(function (Builder $started) use ($fromAt, $toAt): void {
+                    $started->where('started_at', '>=', $fromAt)->where('started_at', '<', $toAt);
+                })->orWhere(function (Builder $submitted) use ($fromAt, $toAt): void {
+                    $submitted->where('submitted_at', '>=', $fromAt)->where('submitted_at', '<', $toAt);
+                });
             });
         $this->applyFilters($attemptQuery, $normalizedScales, $normalizedLocales, 'attempts');
 
@@ -117,7 +122,8 @@ final class MeasurementFunnelReadModel
             ->where('results.org_id', $orgId)
             ->where('attempts.org_id', $orgId)
             ->where('results.is_valid', true)
-            ->whereBetween('results.computed_at', [$fromAt, $toAt]);
+            ->where('results.computed_at', '>=', $fromAt)
+            ->where('results.computed_at', '<', $toAt);
         $this->applyFilters($resultQuery, $normalizedScales, $normalizedLocales, 'attempts');
 
         foreach ($resultQuery->orderBy('results.attempt_id')->get() as $result) {
@@ -147,7 +153,8 @@ final class MeasurementFunnelReadModel
             ->where('events.org_id', $orgId)
             ->where('attempts.org_id', $orgId)
             ->where('events.event_code', 'result_ready')
-            ->whereBetween('events.occurred_at', [$fromAt, $toAt]);
+            ->where('events.occurred_at', '>=', $fromAt)
+            ->where('events.occurred_at', '<', $toAt);
         $this->applyFilters($eventQuery, $normalizedScales, $normalizedLocales, 'attempts');
 
         foreach ($eventQuery->orderBy('events.id')->get() as $event) {
@@ -178,6 +185,10 @@ final class MeasurementFunnelReadModel
             'issues' => array_values(array_unique($issues)),
             'from' => $fromDate->toDateString(),
             'to' => $toDate->toDateString(),
+            'reporting_timezone' => $window['reporting_timezone'],
+            'storage_timezone' => $window['storage_timezone'],
+            'window_utc_start' => $window['window_utc_start'],
+            'window_utc_end_exclusive' => $window['window_utc_end_exclusive'],
             'org_id' => $orgId,
             'filters' => [
                 'scale_codes' => $normalizedScales,
@@ -410,12 +421,16 @@ final class MeasurementFunnelReadModel
         }
 
         try {
-            $date = CarbonImmutable::parse($value);
+            $date = CarbonImmutable::parse($value, $this->reportingWindow->storageTimezone());
         } catch (Throwable) {
             return null;
         }
 
-        return $date->betweenIncluded($fromAt, $toAt) ? $date->toDateString() : null;
+        if ($date->lessThan($fromAt) || ! $date->lessThan($toAt)) {
+            return null;
+        }
+
+        return $date->setTimezone($this->reportingWindow->reportingTimezone())->toDateString();
     }
 
     /**
