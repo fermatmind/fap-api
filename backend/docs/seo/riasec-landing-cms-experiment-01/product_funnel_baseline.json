@@ -113,7 +113,7 @@
     "landing_view": {
       "source": "landing_and_product_funnel",
       "json_path": "$.totals.landing_view",
-      "aggregation": "sum both fixed form rows"
+      "aggregation": "independent canonical landing total; form-less landing views are counted exactly once"
     },
     "test_start_by_form_code": {
       "source": "landing_and_product_funnel",

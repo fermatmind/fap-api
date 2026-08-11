@@ -73,6 +73,11 @@ final class RiasecLandingCmsExperiment01Test extends TestCase
         $productBaseline = $this->readJson('product_funnel_baseline.json');
 
         $this->assertSame('FERMATMIND-EN-RIASEC-CMS-EXPERIMENT-01', $measurement['experiment_id'] ?? null);
+        $this->assertSame('test_detail_holland_career_interest_test_riasec', $measurement['surface_key'] ?? null);
+        $this->assertSame('en', $measurement['locale'] ?? null);
+        $this->assertSame('https://fermatmind.com/en/tests/holland-career-interest-test-riasec', $measurement['canonical_url'] ?? null);
+        $this->assertSame('2026-07-13', data_get($measurement, 'baseline.date_start'));
+        $this->assertSame('2026-08-09', data_get($measurement, 'baseline.date_end'));
         $this->assertSame('9b7c470aa39aff0e6062c41fe5d71e2e8164159747953d42bd032046cc10f691', data_get($measurement, 'baseline.m01_joint_source_sha256'));
         $this->assertSame(['T+0', 'T+3', 'T+7', 'T+14', 'T+28'], array_column($measurement['checkpoints'] ?? [], 'label'));
         $this->assertContains('questions_load_failure', $measurement['product_measures'] ?? []);
@@ -169,7 +174,7 @@ final class RiasecLandingCmsExperiment01Test extends TestCase
                 'landing_view' => [
                     'source' => 'landing_and_product_funnel',
                     'json_path' => '$.totals.landing_view',
-                    'aggregation' => 'sum both fixed form rows',
+                    'aggregation' => 'independent canonical landing total; form-less landing views are counted exactly once',
                 ],
                 'test_start_by_form_code' => [
                     'source' => 'landing_and_product_funnel',
