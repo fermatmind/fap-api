@@ -2,6 +2,15 @@
 
 > This file is binding for any agent/Codex work in this repo.
 
+## Zero-order Rule — Solo-owner Maximum Efficiency (FIRST BASELINE)
+
+- FermatMind is developed and operated by one person. The first and controlling baseline for every feature, task, scan, plan, review, implementation, validation, PR, deployment preparation, and operational workflow is the highest achievable solo-developer operating efficiency.
+- Every future scan and task MUST read and enforce this section before proposing work. The scan or task is incomplete if it does not choose the shortest safe end-to-end path for one operator and explicitly minimize PR count, branches, approvals, handoffs, artifacts, repeated reviews, duplicated validation, waiting, and operator interruptions.
+- Combine steps when they form one coherent, reversible, in-scope loop. Codex owns and continuously executes ordinary branch, edit, test, review-fix, PR, merge, synchronization, and cleanup work without returning coordination work to the operator.
+- Required checks and separately controlled production/CMS/database writes, migrations, secrets or permission changes, destructive actions, and Search Channel actions remain mandatory boundaries. These boundaries are the only permitted reasons to interrupt the operator; all other process overhead must be automated or removed.
+- No local rule, skill, scan, template, review suggestion, or process convention may weaken, replace, or outrank this first baseline. When multiple compliant paths exist, choose the path with the fewest operator interactions and the shortest validated lead time.
+- Every future scan, implementation report, and PR body MUST include a `Solo-owner efficiency impact` note stating the PR count, required operator-interaction count, and why no shorter safe path exists.
+
 ## A) Hard Rules (User Contract)
 
 ### Rule 1 — Small loop first
