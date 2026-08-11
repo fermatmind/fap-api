@@ -44,12 +44,16 @@ final class SeoConversionDailyBuilder
 
     private readonly PublicArticleAttributionResolver $articleAttribution;
 
+    private readonly AnalyticsFunnelDailyBuilder $reportingWindow;
+
     public function __construct(
         ?AnalyticsTrafficExclusionPolicy $trafficExclusionPolicy = null,
         ?PublicArticleAttributionResolver $articleAttribution = null,
+        ?AnalyticsFunnelDailyBuilder $reportingWindow = null,
     ) {
         $this->trafficExclusionPolicy = $trafficExclusionPolicy ?? new AnalyticsTrafficExclusionPolicy;
         $this->articleAttribution = $articleAttribution ?? new PublicArticleAttributionResolver;
+        $this->reportingWindow = $reportingWindow ?? new AnalyticsFunnelDailyBuilder;
     }
 
     /**
@@ -58,8 +62,9 @@ final class SeoConversionDailyBuilder
      */
     public function build(\DateTimeInterface $from, \DateTimeInterface $to, array $orgIds = []): array
     {
-        $fromAt = CarbonImmutable::parse($from)->startOfDay();
-        $toAt = CarbonImmutable::parse($to)->endOfDay();
+        $window = $this->reportingWindow->reportingWindow($from, $to);
+        $fromAt = CarbonImmutable::parse($window['storage_start'], $window['storage_timezone']);
+        $toAt = CarbonImmutable::parse($window['storage_end_exclusive'], $window['storage_timezone']);
         $normalizedOrgIds = $this->normalizeOrgIds($orgIds);
         $rows = [];
         $skippedRows = 0;
@@ -109,8 +114,12 @@ final class SeoConversionDailyBuilder
             'rows' => $finalRows,
             'attempted_rows' => count($finalRows),
             'org_scope' => $normalizedOrgIds,
-            'from' => $fromAt->toDateString(),
-            'to' => $toAt->toDateString(),
+            'from' => $window['from'],
+            'to' => $window['to'],
+            'reporting_timezone' => $window['reporting_timezone'],
+            'storage_timezone' => $window['storage_timezone'],
+            'window_utc_start' => $window['window_utc_start'],
+            'window_utc_end_exclusive' => $window['window_utc_end_exclusive'],
             'skipped_rows' => $skippedRows,
         ];
     }
@@ -197,7 +206,8 @@ final class SeoConversionDailyBuilder
         $placeholders = implode(',', array_fill(0, count($eventCodes), '?'));
 
         $query = DB::table('events')
-            ->whereBetween('occurred_at', [$from, $to])
+            ->where('occurred_at', '>=', $from)
+            ->where('occurred_at', '<', $to)
             ->whereRaw('lower(event_code) in ('.$placeholders.')', $eventCodes)
             ->select(['id', 'org_id', 'event_code', 'anon_id', 'session_id', 'request_id', 'attempt_id', 'meta_json', 'occurred_at', 'locale', 'scale_code']);
 
@@ -463,7 +473,9 @@ final class SeoConversionDailyBuilder
         }
 
         try {
-            return CarbonImmutable::parse($value)->toDateString();
+            return CarbonImmutable::parse($value, $this->reportingWindow->storageTimezone())
+                ->setTimezone($this->reportingWindow->reportingTimezone())
+                ->toDateString();
         } catch (\Throwable) {
             return null;
         }

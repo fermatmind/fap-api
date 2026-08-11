@@ -21,6 +21,25 @@ final class MeasurementFunnelReadModelTest extends TestCase
     use RefreshDatabase;
     use SeedsFunnelAnalyticsScenario;
 
+    public function test_reporting_dates_use_the_asia_shanghai_utc_half_open_window(): void
+    {
+        $includedStart = CarbonImmutable::parse('2026-07-12 16:00:00', 'UTC');
+        $includedEnd = CarbonImmutable::parse('2026-08-09 15:59:59', 'UTC');
+        $excludedEnd = CarbonImmutable::parse('2026-08-09 16:00:00', 'UTC');
+        $this->insertAttempt((string) Str::uuid(), 90, 'en', $includedStart, null);
+        $this->insertAttempt((string) Str::uuid(), 90, 'en', $includedEnd, null);
+        $this->insertAttempt((string) Str::uuid(), 90, 'en', $excludedEnd, null);
+
+        $report = app(MeasurementFunnelReadModel::class)->report(90, '2026-07-13', '2026-08-09', ['MBTI'], ['en']);
+
+        $this->assertSame('Asia/Shanghai', $report['reporting_timezone'] ?? null);
+        $this->assertSame('UTC', $report['storage_timezone'] ?? null);
+        $this->assertSame('2026-07-12T16:00:00+00:00', $report['window_utc_start'] ?? null);
+        $this->assertSame('2026-08-09T16:00:00+00:00', $report['window_utc_end_exclusive'] ?? null);
+        $this->assertSame(2, data_get($report, 'totals.attempt_started_count'));
+        $this->assertSame(['2026-07-13', '2026-08-09'], array_values(array_unique(array_column($report['rows'] ?? [], 'report_date'))));
+    }
+
     public function test_read_model_aggregates_backend_truth_with_privacy_safe_dimensions(): void
     {
         $scenario = $this->seedFunnelAnalyticsScenario(71);
@@ -208,6 +227,37 @@ final class MeasurementFunnelReadModelTest extends TestCase
         $this->assertSame(1, data_get($report, 'totals.result_ready_event_count'));
         $this->assertSame('partial', data_get($report, 'totals.result_ready_event_coverage_status'));
         $this->assertContains('result_ready_event_coverage_partial', $report['issues'] ?? []);
+    }
+
+    public function test_read_model_excludes_configured_smoke_attempts_and_probe_anons(): void
+    {
+        $scenario = $this->seedFunnelAnalyticsScenario(76);
+        config()->set('analytics.smoke_attempt_exclusion.attempt_ids', [$scenario['attempt_a']]);
+        config()->set('analytics.smoke_attempt_exclusion.anon_id_prefixes', ['codex_probe_']);
+        DB::table('attempts')->where('id', $scenario['attempt_c'])->update([
+            'anon_id' => 'codex_probe_riasec_baseline',
+        ]);
+        $day = CarbonImmutable::parse($scenario['day'].' 12:00:00');
+        $this->insertResult($scenario['attempt_c'], 76, $day->addMinutes(6));
+        $this->insertEvent(76, 'result_ready', $scenario['attempt_a'], $day->addMinutes(7));
+        $this->insertEvent(76, 'result_ready', $scenario['attempt_c'], $day->addMinutes(8));
+
+        $report = app(MeasurementFunnelReadModel::class)->report(
+            76,
+            $scenario['day'],
+            $scenario['day'],
+            ['MBTI'],
+            ['en'],
+        );
+
+        $this->assertTrue($report['ok'] ?? false);
+        $this->assertSame('pass', $report['status'] ?? null);
+        $this->assertSame(0, $report['row_count'] ?? null, json_encode($report, JSON_THROW_ON_ERROR));
+        $this->assertSame(0, data_get($report, 'totals.attempt_started_count'));
+        $this->assertSame(0, data_get($report, 'totals.test_completed_count'));
+        $this->assertSame(0, data_get($report, 'totals.result_ready_count'));
+        $this->assertSame(0, data_get($report, 'totals.result_ready_event_count'));
+        $this->assertSame('complete', data_get($report, 'totals.result_ready_event_coverage_status'));
     }
 
     public function test_read_model_blocks_when_a_required_source_table_is_missing(): void

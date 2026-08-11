@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Analytics;
 
 use Carbon\CarbonImmutable;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -21,6 +22,8 @@ final class MeasurementFailureCohortReadModel
 
     public function __construct(
         private readonly MeasurementAttributionDimensions $dimensions,
+        private readonly AnalyticsTrafficExclusionPolicy $trafficExclusionPolicy,
+        private readonly AnalyticsFunnelDailyBuilder $reportingWindow,
     ) {}
 
     /**
@@ -66,8 +69,9 @@ final class MeasurementFailureCohortReadModel
             return $this->blocked($orgId, $from, $to, $issues);
         }
 
-        $fromAt = $fromDate->startOfDay();
-        $toAt = $toDate->endOfDay();
+        $window = $this->reportingWindow->reportingWindow($fromDate, $toDate);
+        $fromAt = CarbonImmutable::parse($window['storage_start'], $window['storage_timezone']);
+        $toAt = CarbonImmutable::parse($window['storage_end_exclusive'], $window['storage_timezone']);
         $attempts = $this->eligibleAttempts($orgId, $fromAt, $toAt, $filters);
         $resultReadyAt = $this->validResultReadyAt($orgId, $attempts->keys()->all(), $toAt);
         $events = $this->failureEvents($orgId, $fromAt, $toAt, $filters);
@@ -113,6 +117,10 @@ final class MeasurementFailureCohortReadModel
             'issues' => array_values(array_unique($issues)),
             'from' => $fromDate->toDateString(),
             'to' => $toDate->toDateString(),
+            'reporting_timezone' => $window['reporting_timezone'],
+            'storage_timezone' => $window['storage_timezone'],
+            'window_utc_start' => $window['window_utc_start'],
+            'window_utc_end_exclusive' => $window['window_utc_end_exclusive'],
             'org_id' => $orgId,
             'filters' => $filters,
             'source_tables' => self::REQUIRED_TABLES,
@@ -132,6 +140,7 @@ final class MeasurementFailureCohortReadModel
     {
         $rows = DB::table('attempts')->select([
             'id',
+            'anon_id',
             'scale_code',
             'locale',
             'client_platform',
@@ -140,11 +149,15 @@ final class MeasurementFailureCohortReadModel
             'started_at',
             'submitted_at',
         ])->where('org_id', $orgId)
-            ->whereBetween('started_at', [$fromAt, $toAt])
+            ->where('started_at', '>=', $fromAt)
+            ->where('started_at', '<', $toAt)
             ->orderBy('id')
             ->get();
 
         return $rows->filter(function (object $attempt) use ($filters): bool {
+            if ($this->trafficExclusionPolicy->isExcludedAttemptRow($attempt)) {
+                return false;
+            }
             $safe = $this->attemptDimensions($attempt);
 
             return $this->matches($safe, $filters, ['scale_code', 'form_code', 'locale', 'device_class']);
@@ -169,7 +182,7 @@ final class MeasurementFailureCohortReadModel
                 ->whereIn('attempt_id', $chunk)
                 ->where('is_valid', true)
                 ->whereNotNull('computed_at')
-                ->where('computed_at', '<=', $toAt)
+                ->where('computed_at', '<', $toAt)
                 ->orderBy('computed_at')
                 ->get();
 
@@ -192,20 +205,60 @@ final class MeasurementFailureCohortReadModel
     private function failureEvents(int $orgId, CarbonImmutable $fromAt, CarbonImmutable $toAt, array $filters): Collection
     {
         return DB::table('events')
-            ->select(['id', 'event_code', 'attempt_id', 'meta_json', 'occurred_at', 'scale_code', 'locale', 'client_platform'])
-            ->where('org_id', $orgId)
-            ->whereIn('event_code', MeasurementFailureEventContract::EVENT_NAMES)
-            ->whereBetween('occurred_at', [$fromAt, $toAt])
-            ->orderBy('occurred_at')
-            ->orderBy('id')
+            ->leftJoin('attempts', function (JoinClause $join) use ($orgId): void {
+                $join->on('attempts.id', '=', 'events.attempt_id')
+                    ->where('attempts.org_id', '=', $orgId);
+            })
+            ->select([
+                'events.id',
+                'events.event_code',
+                'events.attempt_id',
+                'events.anon_id',
+                'events.session_id',
+                'events.request_id',
+                'events.meta_json',
+                'events.occurred_at',
+                'events.scale_code',
+                'events.locale',
+                'events.client_platform',
+                'attempts.id as correlated_attempt_id',
+                'attempts.anon_id as correlated_attempt_anon_id',
+                'attempts.scale_code as correlated_attempt_scale_code',
+                'attempts.locale as correlated_attempt_locale',
+                'attempts.client_platform as correlated_attempt_client_platform',
+                'attempts.answers_summary_json as correlated_attempt_answers_summary_json',
+            ])
+            ->where('events.org_id', $orgId)
+            ->whereIn('events.event_code', MeasurementFailureEventContract::EVENT_NAMES)
+            ->where('events.occurred_at', '>=', $fromAt)
+            ->where('events.occurred_at', '<', $toAt)
+            ->orderBy('events.occurred_at')
+            ->orderBy('events.id')
             ->get()
             ->map(function (object $event): array {
                 $meta = $this->decodeArray($event->meta_json ?? null);
+                $correlatedAttempt = (object) [
+                    'id' => $event->correlated_attempt_id ?? null,
+                    'anon_id' => $event->correlated_attempt_anon_id ?? null,
+                    'scale_code' => $event->correlated_attempt_scale_code ?? null,
+                    'locale' => $event->correlated_attempt_locale ?? null,
+                    'client_platform' => $event->correlated_attempt_client_platform ?? null,
+                    'answers_summary_json' => $event->correlated_attempt_answers_summary_json ?? null,
+                ];
+                if (
+                    $this->trafficExclusionPolicy->isExcludedSeoConversionEvent($event, $meta)
+                    || $this->trafficExclusionPolicy->isExcludedAttemptRow($correlatedAttempt)
+                ) {
+                    return [];
+                }
                 $safe = MeasurementFailureEventContract::sanitizeProperties(array_merge($meta, [
                     'scale_code' => $meta['scale_code'] ?? $event->scale_code ?? null,
                     'locale' => $meta['locale'] ?? $event->locale ?? null,
                     'device_class' => $meta['device_class'] ?? $this->eventDeviceClass($event->client_platform ?? null),
                 ]));
+                if (($event->correlated_attempt_id ?? null) !== null) {
+                    $safe = $this->mergeEventDimensions($safe, $this->attemptDimensions($correlatedAttempt));
+                }
 
                 return [
                     'event_id' => (string) $event->id,
@@ -215,6 +268,7 @@ final class MeasurementFailureCohortReadModel
                     'dimensions' => $safe,
                 ];
             })
+            ->filter(static fn (array $event): bool => $event !== [])
             ->filter(fn (array $event): bool => $event['occurred_at'] instanceof CarbonImmutable)
             ->filter(fn (array $event): bool => $this->matches((array) $event['dimensions'], $filters))
             ->values();
@@ -302,7 +356,9 @@ final class MeasurementFailureCohortReadModel
                 $terminalFailureCount++;
             }
 
-            $date = $first['occurred_at']->toDateString();
+            $date = $first['occurred_at']
+                ->setTimezone($this->reportingWindow->reportingTimezone())
+                ->toDateString();
             $dimensions = (array) $first['dimensions'];
             $dimensions['retry_bucket'] = MeasurementFailureEventContract::retryBucket($attemptRetryCount);
             $key = $eventName.'|'.$date.'|'.json_encode($dimensions);
@@ -385,7 +441,7 @@ final class MeasurementFailureCohortReadModel
 
         usort($candidates, fn (CarbonImmutable $left, CarbonImmutable $right): int => $left->getTimestampMs() <=> $right->getTimestampMs());
         foreach ($candidates as $candidate) {
-            if ($candidate->greaterThan($failureAt) && $candidate->lessThanOrEqualTo($toAt)) {
+            if ($candidate->greaterThan($failureAt) && $candidate->lessThan($toAt)) {
                 return $candidate;
             }
         }
@@ -619,7 +675,7 @@ final class MeasurementFailureCohortReadModel
         }
 
         try {
-            return CarbonImmutable::parse($value);
+            return CarbonImmutable::parse($value, $this->reportingWindow->storageTimezone());
         } catch (Throwable) {
             return null;
         }

@@ -23,6 +23,14 @@ final class RiasecGlobalCmsApplyPage extends Page
 
     public string $targetPackageJson = '';
 
+    public string $baselineReceiptJson = '';
+
+    public string $landingAndProductFunnelJson = '';
+
+    public string $attemptResultFunnelJson = '';
+
+    public string $failureCohortsJson = '';
+
     public string $expectedDeployedSha = '';
 
     public string $expectedReleaseId = '';
@@ -51,7 +59,7 @@ final class RiasecGlobalCmsApplyPage extends Page
     public function preflightExactPackage(RiasecGlobalCmsApplyBridge $bridge): void
     {
         $actorAdminId = $this->authorizeOwner();
-        $this->validateEvidence();
+        $this->validateEvidence(requiresBaseline: true);
         $this->preflightFingerprint = '';
         $this->operatorApprovalPhrase = '';
 
@@ -59,6 +67,10 @@ final class RiasecGlobalCmsApplyPage extends Page
             $this->receipt = $bridge->preflight(
                 $this->beforeSnapshotJson,
                 $this->targetPackageJson,
+                $this->baselineReceiptJson,
+                $this->landingAndProductFunnelJson,
+                $this->attemptResultFunnelJson,
+                $this->failureCohortsJson,
                 $actorAdminId,
                 $this->expectedDeployedSha,
                 $this->expectedReleaseId,
@@ -74,12 +86,16 @@ final class RiasecGlobalCmsApplyPage extends Page
     public function applyExactPackage(RiasecGlobalCmsApplyBridge $bridge): void
     {
         $actorAdminId = $this->authorizeOwner();
-        $this->validateEvidence(requiresAuthorization: true);
+        $this->validateEvidence(requiresAuthorization: true, requiresBaseline: true);
 
         try {
             $this->receipt = $bridge->apply(
                 $this->beforeSnapshotJson,
                 $this->targetPackageJson,
+                $this->baselineReceiptJson,
+                $this->landingAndProductFunnelJson,
+                $this->attemptResultFunnelJson,
+                $this->failureCohortsJson,
                 $actorAdminId,
                 $this->expectedDeployedSha,
                 $this->expectedReleaseId,
@@ -154,7 +170,7 @@ final class RiasecGlobalCmsApplyPage extends Page
         return (int) $user->getAuthIdentifier();
     }
 
-    private function validateEvidence(bool $requiresAuthorization = false): void
+    private function validateEvidence(bool $requiresAuthorization = false, bool $requiresBaseline = false): void
     {
         $rules = [
             'beforeSnapshotJson' => ['required', 'string', 'max:50000'],
@@ -162,6 +178,12 @@ final class RiasecGlobalCmsApplyPage extends Page
             'expectedDeployedSha' => ['required', 'regex:/^[0-9a-f]{40}$/'],
             'expectedReleaseId' => ['required', 'regex:/^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/'],
         ];
+        if ($requiresBaseline) {
+            $rules['baselineReceiptJson'] = ['required', 'string', 'max:100000'];
+            $rules['landingAndProductFunnelJson'] = ['required', 'string', 'max:500000'];
+            $rules['attemptResultFunnelJson'] = ['required', 'string', 'max:2000000'];
+            $rules['failureCohortsJson'] = ['required', 'string', 'max:2000000'];
+        }
         if ($requiresAuthorization) {
             $rules['preflightFingerprint'] = ['required', 'regex:/^[0-9a-f]{64}$/'];
             $rules['operatorApprovalPhrase'] = ['required', 'string', 'max:1000'];

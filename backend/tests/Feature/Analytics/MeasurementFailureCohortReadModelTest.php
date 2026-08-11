@@ -19,6 +19,27 @@ final class MeasurementFailureCohortReadModelTest extends TestCase
     use RefreshDatabase;
     use SeedsFunnelAnalyticsScenario;
 
+    public function test_reporting_dates_use_the_asia_shanghai_utc_half_open_window(): void
+    {
+        $included = CarbonImmutable::parse('2026-07-12 16:00:00', 'UTC');
+        $excluded = CarbonImmutable::parse('2026-08-09 16:00:00', 'UTC');
+        $includedAttempt = (string) Str::uuid();
+        $excludedAttempt = (string) Str::uuid();
+        $this->insertAttempt($includedAttempt, 90, 'en', $included, null);
+        $this->insertAttempt($excludedAttempt, 90, 'en', $excluded, null);
+        $this->insertFailureEvent($includedAttempt, $included, 'submit_failure', orgId: 90);
+        $this->insertFailureEvent($excludedAttempt, $excluded, 'submit_failure', orgId: 90);
+
+        $report = app(MeasurementFailureCohortReadModel::class)->report(90, '2026-07-13', '2026-08-09');
+
+        $this->assertSame('Asia/Shanghai', $report['reporting_timezone'] ?? null);
+        $this->assertSame('UTC', $report['storage_timezone'] ?? null);
+        $this->assertSame('2026-07-12T16:00:00+00:00', $report['window_utc_start'] ?? null);
+        $this->assertSame('2026-08-09T16:00:00+00:00', $report['window_utc_end_exclusive'] ?? null);
+        $this->assertSame(1, data_get($report, 'cohorts.submit_failure.eligible_attempt_count'));
+        $this->assertSame(1, data_get($report, 'cohorts.submit_failure.failed_attempt_count'));
+    }
+
     public function test_read_model_uses_distinct_eligible_attempts_retries_and_eventual_success(): void
     {
         $day = CarbonImmutable::parse('2026-08-10 08:00:00');
@@ -155,6 +176,29 @@ final class MeasurementFailureCohortReadModelTest extends TestCase
         $this->assertNull(data_get($noMatch, 'cohorts.submit_failure.eligible_failure_rate'));
     }
 
+    public function test_form_filter_uses_the_correlated_attempt_when_the_failure_event_omits_form_code(): void
+    {
+        $day = CarbonImmutable::parse('2026-08-10 08:00:00');
+        $attemptId = (string) Str::uuid();
+        $this->insertAttempt($attemptId, 83, 'en', $day, null);
+        DB::table('attempts')->where('id', $attemptId)->update([
+            'answers_summary_json' => json_encode(['meta' => ['form_code' => 'mbti_93']]),
+        ]);
+        $this->insertFailureEvent($attemptId, $day->addHour(), 'submit_failure', orgId: 83);
+        $event = DB::table('events')->where('attempt_id', $attemptId)->first();
+        $meta = json_decode((string) $event->meta_json, true, flags: JSON_THROW_ON_ERROR);
+        unset($meta['form_code']);
+        DB::table('events')->where('id', $event->id)->update([
+            'meta_json' => json_encode($meta, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),
+        ]);
+
+        $report = app(MeasurementFailureCohortReadModel::class)->report(83, '2026-08-10', '2026-08-10', [
+            'form_code' => ['mbti_93'],
+        ]);
+
+        $this->assertSame(1, data_get($report, 'cohorts.submit_failure.failed_attempt_count'));
+    }
+
     public function test_sparse_rows_use_complementary_suppression(): void
     {
         $day = CarbonImmutable::parse('2026-08-10 08:00:00');
@@ -170,6 +214,31 @@ final class MeasurementFailureCohortReadModelTest extends TestCase
         $this->assertTrue((bool) data_get($report, 'rows.0.suppressed'));
         $this->assertNull(data_get($report, 'rows.0.metrics'));
         $this->assertSame('minimum_cohort_or_complementary_suppression', data_get($report, 'rows.0.suppression_reason'));
+    }
+
+    public function test_read_model_excludes_configured_smoke_attempts_and_probe_events(): void
+    {
+        $day = CarbonImmutable::parse('2026-08-10 08:00:00');
+        $configuredAttemptId = (string) Str::uuid();
+        $probeAttemptId = (string) Str::uuid();
+        $legitimateAttemptId = (string) Str::uuid();
+        foreach ([$configuredAttemptId, $probeAttemptId, $legitimateAttemptId] as $attemptId) {
+            $this->insertAttempt($attemptId, 86, 'en', $day, null);
+            $this->insertFailureEvent($attemptId, $day->addHour(), 'submit_failure', orgId: 86);
+        }
+        DB::table('attempts')->where('id', $probeAttemptId)->update([
+            'anon_id' => 'codex_probe_riasec_baseline',
+        ]);
+        config()->set('analytics.smoke_attempt_exclusion.attempt_ids', [$configuredAttemptId]);
+        config()->set('analytics.smoke_attempt_exclusion.anon_id_prefixes', ['codex_probe_']);
+
+        $report = app(MeasurementFailureCohortReadModel::class)->report(86, '2026-08-10', '2026-08-10');
+
+        $this->assertTrue($report['ok'] ?? false);
+        $this->assertSame(1, data_get($report, 'cohorts.submit_failure.eligible_attempt_count'), json_encode($report, JSON_THROW_ON_ERROR));
+        $this->assertSame(1, data_get($report, 'cohorts.submit_failure.failed_attempt_count'));
+        $this->assertSame(0, data_get($report, 'cohorts.submit_failure.unattributed_failure_event_count'));
+        $this->assertSame(1, data_get($report, 'cohorts.submit_failure.failure_event_count'));
     }
 
     public function test_empty_data_is_success_but_invalid_filters_and_missing_tables_are_blocked(): void

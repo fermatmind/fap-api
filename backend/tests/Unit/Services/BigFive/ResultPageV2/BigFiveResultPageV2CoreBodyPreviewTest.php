@@ -1428,6 +1428,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Filament/Ops/Pages/RiasecGlobalCmsApplyPage.php',
             'backend/app/Http/Middleware/RequireOpsOrgSelected.php',
             'backend/app/Services/Ops/RiasecGlobalCmsApplyBridge.php',
+            'backend/app/Services/Ops/RiasecProductBaselineEvidence.php',
         ];
         $blocked = [
             'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
@@ -9799,6 +9800,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Filament/Ops/Pages/RiasecGlobalCmsApplyPage.php',
             'backend/app/Http/Middleware/RequireOpsOrgSelected.php',
             'backend/app/Services/Ops/RiasecGlobalCmsApplyBridge.php',
+            'backend/app/Services/Ops/RiasecProductBaselineEvidence.php',
         ], true);
     }
 
