@@ -10,8 +10,11 @@ use Illuminate\Support\Facades\DB;
 use JsonException;
 use RuntimeException;
 
+/** @review-surface riasec_content_release_review */
 final class RiasecGlobalCmsApplyBridge
 {
+    private const AUTHORIZATION_TTL_SECONDS = 900;
+
     public const EXPERIMENT_ID = 'FERMATMIND-EN-RIASEC-CMS-EXPERIMENT-01';
 
     public const SURFACE_KEY = 'test_detail_holland_career_interest_test_riasec';
@@ -47,23 +50,83 @@ final class RiasecGlobalCmsApplyBridge
     /**
      * @return array<string,mixed>
      */
-    public function preflight(string $beforeSnapshotJson, string $targetPackageJson): array
-    {
+    public function preflight(
+        string $beforeSnapshotJson,
+        string $targetPackageJson,
+        int $actorAdminId,
+        string $expectedDeployedSha,
+        string $expectedReleaseId,
+    ): array {
         $package = $this->validatedPackage($beforeSnapshotJson, $targetPackageJson);
         $this->assertGlobalAuthorityContext();
+        $this->assertActor($actorAdminId);
+        session()->forget($this->authorizationSessionKey($actorAdminId, 'apply'));
+        $this->assertRuntimeIdentity($expectedDeployedSha, $expectedReleaseId);
 
         $surface = $this->findSurface();
         $current = $this->surfaceSnapshot($surface);
 
         if ($this->same($current, $package['target_surface'])) {
-            $status = 'already_applied';
-        } elseif ($this->same($current, $package['before_surface'])) {
-            $status = 'ready_to_apply';
-        } else {
+            return $this->issueAuthorization(
+                'apply',
+                $actorAdminId,
+                $expectedDeployedSha,
+                $expectedReleaseId,
+                $this->receipt('already_applied', $surface, $package['changed_paths']),
+            );
+        }
+        if (! $this->same($current, $package['before_surface'])) {
             throw new RuntimeException('Pre-apply surface drift detected. No write was performed.');
         }
 
-        return $this->receipt($status, $surface, $package['changed_paths']);
+        return $this->issueAuthorization(
+            'apply',
+            $actorAdminId,
+            $expectedDeployedSha,
+            $expectedReleaseId,
+            $this->receipt('ready_to_apply', $surface, $package['changed_paths']),
+        );
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function preflightRollback(
+        string $beforeSnapshotJson,
+        string $targetPackageJson,
+        int $actorAdminId,
+        string $expectedDeployedSha,
+        string $expectedReleaseId,
+    ): array {
+        $package = $this->validatedPackage($beforeSnapshotJson, $targetPackageJson);
+        $this->assertGlobalAuthorityContext();
+        $this->assertActor($actorAdminId);
+        session()->forget($this->authorizationSessionKey($actorAdminId, 'rollback'));
+        $this->assertRuntimeIdentity($expectedDeployedSha, $expectedReleaseId);
+
+        $surface = $this->findSurface();
+        $current = $this->surfaceSnapshot($surface);
+
+        if ($this->same($current, $package['before_surface'])) {
+            return $this->issueAuthorization(
+                'rollback',
+                $actorAdminId,
+                $expectedDeployedSha,
+                $expectedReleaseId,
+                $this->receipt('already_rolled_back', $surface, $package['changed_paths']),
+            );
+        }
+        if (! $this->same($current, $package['target_surface'])) {
+            throw new RuntimeException('Pre-rollback surface drift detected. No write was performed.');
+        }
+
+        return $this->issueAuthorization(
+            'rollback',
+            $actorAdminId,
+            $expectedDeployedSha,
+            $expectedReleaseId,
+            $this->receipt('ready_to_rollback', $surface, $package['changed_paths']),
+        );
     }
 
     /**
@@ -74,18 +137,30 @@ final class RiasecGlobalCmsApplyBridge
         string $beforeSnapshotJson,
         string $targetPackageJson,
         int $actorAdminId,
+        string $expectedDeployedSha,
+        string $expectedReleaseId,
+        string $preflightFingerprint,
+        string $operatorApprovalPhrase,
         array $requestContext = [],
     ): array {
         $package = $this->validatedPackage($beforeSnapshotJson, $targetPackageJson);
         $this->assertGlobalAuthorityContext();
         $this->assertActor($actorAdminId);
+        $authorization = $this->consumeAuthorization(
+            'apply',
+            $actorAdminId,
+            $expectedDeployedSha,
+            $expectedReleaseId,
+            $preflightFingerprint,
+            $operatorApprovalPhrase,
+        );
 
-        return DB::transaction(function () use ($package, $actorAdminId, $requestContext): array {
+        return DB::transaction(function () use ($package, $actorAdminId, $requestContext, $authorization): array {
             $surface = $this->findSurface(lockForUpdate: true);
             $current = $this->surfaceSnapshot($surface);
 
             if ($this->same($current, $package['target_surface'])) {
-                $this->recordAudit('riasec_global_cms_apply_idempotent', $actorAdminId, $requestContext, 'already_applied');
+                $this->recordAudit('riasec_global_cms_apply_idempotent', $actorAdminId, $requestContext, 'already_applied', $authorization);
 
                 return $this->receipt('already_applied', $surface, $package['changed_paths']);
             }
@@ -102,7 +177,7 @@ final class RiasecGlobalCmsApplyBridge
                 throw new RuntimeException('Post-apply readback mismatch. The transaction was rolled back.');
             }
 
-            $this->recordAudit('riasec_global_cms_apply', $actorAdminId, $requestContext, 'applied');
+            $this->recordAudit('riasec_global_cms_apply', $actorAdminId, $requestContext, 'applied', $authorization);
 
             return $this->receipt('applied', $surface, $package['changed_paths']);
         }, 3);
@@ -116,18 +191,30 @@ final class RiasecGlobalCmsApplyBridge
         string $beforeSnapshotJson,
         string $targetPackageJson,
         int $actorAdminId,
+        string $expectedDeployedSha,
+        string $expectedReleaseId,
+        string $preflightFingerprint,
+        string $operatorApprovalPhrase,
         array $requestContext = [],
     ): array {
         $package = $this->validatedPackage($beforeSnapshotJson, $targetPackageJson);
         $this->assertGlobalAuthorityContext();
         $this->assertActor($actorAdminId);
+        $authorization = $this->consumeAuthorization(
+            'rollback',
+            $actorAdminId,
+            $expectedDeployedSha,
+            $expectedReleaseId,
+            $preflightFingerprint,
+            $operatorApprovalPhrase,
+        );
 
-        return DB::transaction(function () use ($package, $actorAdminId, $requestContext): array {
+        return DB::transaction(function () use ($package, $actorAdminId, $requestContext, $authorization): array {
             $surface = $this->findSurface(lockForUpdate: true);
             $current = $this->surfaceSnapshot($surface);
 
             if ($this->same($current, $package['before_surface'])) {
-                $this->recordAudit('riasec_global_cms_rollback_idempotent', $actorAdminId, $requestContext, 'already_rolled_back');
+                $this->recordAudit('riasec_global_cms_rollback_idempotent', $actorAdminId, $requestContext, 'already_rolled_back', $authorization);
 
                 return $this->receipt('already_rolled_back', $surface, $package['changed_paths']);
             }
@@ -144,7 +231,7 @@ final class RiasecGlobalCmsApplyBridge
                 throw new RuntimeException('Rollback readback mismatch. The transaction was rolled back.');
             }
 
-            $this->recordAudit('riasec_global_cms_rollback', $actorAdminId, $requestContext, 'rolled_back');
+            $this->recordAudit('riasec_global_cms_rollback', $actorAdminId, $requestContext, 'rolled_back', $authorization);
 
             return $this->receipt('rolled_back', $surface, $package['changed_paths']);
         }, 3);
@@ -235,6 +322,166 @@ final class RiasecGlobalCmsApplyBridge
         }
     }
 
+    private function assertRuntimeIdentity(string $expectedDeployedSha, string $expectedReleaseId): void
+    {
+        if (
+            preg_match('/^[0-9a-f]{40}$/', $expectedDeployedSha) !== 1
+            || preg_match('/^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/', $expectedReleaseId) !== 1
+        ) {
+            throw new RuntimeException('Exact deployed SHA and release identity are required.');
+        }
+
+        $actualSha = '';
+        $actualReleaseId = '';
+        if (app()->environment('testing')) {
+            $actualSha = trim((string) config('app.riasec_global_cms_test_runtime_revision', ''));
+            $actualReleaseId = trim((string) config('app.riasec_global_cms_test_release_id', ''));
+        }
+        if ($actualSha === '' && $actualReleaseId === '') {
+            $revisionPath = base_path('../REVISION');
+            $releaseRoot = realpath(base_path('..'));
+            $actualSha = is_file($revisionPath) ? trim((string) file_get_contents($revisionPath)) : '';
+            $actualReleaseId = is_string($releaseRoot) ? basename($releaseRoot) : '';
+        }
+
+        if (
+            ! hash_equals($expectedDeployedSha, $actualSha)
+            || ! hash_equals($expectedReleaseId, $actualReleaseId)
+        ) {
+            throw new RuntimeException('Active backend REVISION or release identity does not match the authorization.');
+        }
+    }
+
+    /**
+     * @param  array<string,mixed>  $receipt
+     * @return array<string,mixed>
+     */
+    private function issueAuthorization(
+        string $action,
+        int $actorAdminId,
+        string $deployedSha,
+        string $releaseId,
+        array $receipt,
+    ): array {
+        $issuedAt = now()->getTimestamp();
+        $authorization = [
+            'action' => $action,
+            'actor_admin_id' => $actorAdminId,
+            'deployed_sha' => $deployedSha,
+            'release_id' => $releaseId,
+            'experiment_id' => self::EXPERIMENT_ID,
+            'surface_key' => self::SURFACE_KEY,
+            'locale' => self::LOCALE,
+            'org_id' => self::ORG_ID,
+            'before_snapshot_sha256' => self::BEFORE_SNAPSHOT_SHA256,
+            'target_package_sha256' => self::TARGET_PACKAGE_SHA256,
+            'surface_updated_at' => $receipt['updated_at'] ?? null,
+            'issued_at' => $issuedAt,
+            'expires_at' => $issuedAt + self::AUTHORIZATION_TTL_SECONDS,
+        ];
+        $fingerprint = hash('sha256', (string) json_encode(
+            $this->canonicalize($authorization),
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR,
+        ));
+        $authorization['preflight_fingerprint'] = $fingerprint;
+        session()->put($this->authorizationSessionKey($actorAdminId, $action), $authorization);
+
+        return $receipt + [
+            'authorization_action' => $action,
+            'deployed_sha' => $deployedSha,
+            'release_id' => $releaseId,
+            'preflight_fingerprint' => $fingerprint,
+            'preflight_expires_at' => gmdate('c', $authorization['expires_at']),
+            'operator_approval_phrase' => $this->expectedApprovalPhrase($action, $deployedSha, $releaseId, $fingerprint),
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function consumeAuthorization(
+        string $action,
+        int $actorAdminId,
+        string $deployedSha,
+        string $releaseId,
+        string $preflightFingerprint,
+        string $operatorApprovalPhrase,
+    ): array {
+        $sessionKey = $this->authorizationSessionKey($actorAdminId, $action);
+        $authorization = session()->get($sessionKey);
+        if (! is_array($authorization)) {
+            throw new RuntimeException('A fresh exact preflight is required before this mutation.');
+        }
+
+        $storedFingerprint = trim((string) ($authorization['preflight_fingerprint'] ?? ''));
+        $unsigned = $authorization;
+        unset($unsigned['preflight_fingerprint']);
+        $computedFingerprint = hash('sha256', (string) json_encode(
+            $this->canonicalize($unsigned),
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR,
+        ));
+        $now = now()->getTimestamp();
+        $expectedPhrase = $this->expectedApprovalPhrase($action, $deployedSha, $releaseId, $storedFingerprint);
+
+        if (
+            preg_match('/^[0-9a-f]{64}$/', $preflightFingerprint) !== 1
+            || ! hash_equals($computedFingerprint, $storedFingerprint)
+            || ! hash_equals($storedFingerprint, $preflightFingerprint)
+            || ($authorization['action'] ?? null) !== $action
+            || ($authorization['actor_admin_id'] ?? null) !== $actorAdminId
+            || ($authorization['deployed_sha'] ?? null) !== $deployedSha
+            || ($authorization['release_id'] ?? null) !== $releaseId
+            || ($authorization['experiment_id'] ?? null) !== self::EXPERIMENT_ID
+            || ($authorization['surface_key'] ?? null) !== self::SURFACE_KEY
+            || ($authorization['locale'] ?? null) !== self::LOCALE
+            || ($authorization['org_id'] ?? null) !== self::ORG_ID
+            || ($authorization['before_snapshot_sha256'] ?? null) !== self::BEFORE_SNAPSHOT_SHA256
+            || ($authorization['target_package_sha256'] ?? null) !== self::TARGET_PACKAGE_SHA256
+            || ! is_int($authorization['issued_at'] ?? null)
+            || ! is_int($authorization['expires_at'] ?? null)
+            || $authorization['issued_at'] > $now
+            || $authorization['expires_at'] < $now
+            || $authorization['expires_at'] - $authorization['issued_at'] !== self::AUTHORIZATION_TTL_SECONDS
+            || ! hash_equals($expectedPhrase, $operatorApprovalPhrase)
+        ) {
+            throw new RuntimeException('Fresh exact preflight authorization does not match.');
+        }
+
+        $this->assertRuntimeIdentity($deployedSha, $releaseId);
+        session()->forget($sessionKey);
+        $authorization['operator_approval_phrase_sha256'] = hash('sha256', $operatorApprovalPhrase);
+
+        return $authorization;
+    }
+
+    private function authorizationSessionKey(int $actorAdminId, string $action): string
+    {
+        return 'riasec_global_cms_authorization.'.$actorAdminId.'.'.$action;
+    }
+
+    private function expectedApprovalPhrase(
+        string $action,
+        string $deployedSha,
+        string $releaseId,
+        string $preflightFingerprint,
+    ): string {
+        $direction = $action === 'rollback'
+            ? 'target SHA256 '.self::TARGET_PACKAGE_SHA256.' to before SHA256 '.self::BEFORE_SNAPSHOT_SHA256
+            : 'before SHA256 '.self::BEFORE_SNAPSHOT_SHA256.' to target SHA256 '.self::TARGET_PACKAGE_SHA256;
+
+        return sprintf(
+            'I explicitly approve one production CMS %s for experiment %s, deployed SHA %s, release %s, surface %s, locale %s, org 0, %s, preflight %s.',
+            $action,
+            self::EXPERIMENT_ID,
+            $deployedSha,
+            $releaseId,
+            self::SURFACE_KEY,
+            self::LOCALE,
+            $direction,
+            $preflightFingerprint,
+        );
+    }
+
     private function findSurface(bool $lockForUpdate = false): LandingSurface
     {
         $query = LandingSurface::query()
@@ -309,6 +556,7 @@ final class RiasecGlobalCmsApplyBridge
         int $actorAdminId,
         array $requestContext,
         string $result,
+        array $authorization,
     ): void {
         $meta = [
             'experiment_id' => self::EXPERIMENT_ID,
@@ -318,6 +566,10 @@ final class RiasecGlobalCmsApplyBridge
             'locale' => self::LOCALE,
             'org_id' => self::ORG_ID,
             'result' => $result,
+            'deployed_sha' => $authorization['deployed_sha'],
+            'release_id' => $authorization['release_id'],
+            'preflight_fingerprint' => $authorization['preflight_fingerprint'],
+            'operator_approval_phrase_sha256' => $authorization['operator_approval_phrase_sha256'],
         ];
 
         DB::table('audit_logs')->insert([
