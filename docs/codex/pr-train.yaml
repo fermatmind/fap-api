@@ -49402,7 +49402,7 @@ prs:
     base: main
     branch: codex/career-publication-index-reconciliation-preflight-06a
     title: "CAREER-PUBLICATION-INDEX-RECONCILIATION-PREFLIGHT-06A: add exact SELECT-only difference control"
-    status: github_checks_pending
+    status: merged
     depends_on:
       - CAREER-CURRENT-GENERATION-POINTER-BOOTSTRAP-05
     train_scope: career_publication_index_reconciliation_select_only_preflight
@@ -49451,3 +49451,59 @@ prs:
     deploy_allowed: false
     content_authority: frozen manifest and authentic signed receipt set remain authority; this PR adds only an unexecuted SELECT-only DB difference control
     repository_rule_impact: creates the immutable preflight evidence contract required by the separately scoped exact reconciliation apply
+
+  - id: CAREER-PUBLICATION-INDEX-RECONCILIATION-APPLY-06B
+    repo: fap-api
+    base: main
+    branch: codex/career-publication-index-reconciliation-apply-06b
+    title: "CAREER-PUBLICATION-INDEX-RECONCILIATION-APPLY-06B: add exact receipt-bound transaction control"
+    status: github_checks_pending
+    depends_on:
+      - CAREER-PUBLICATION-INDEX-RECONCILIATION-PREFLIGHT-06A
+    train_scope: career_publication_index_reconciliation_exact_apply_control
+    risk_level: p0_production_database_write_control
+    scope:
+      - Add one protected manual-dispatch-only apply workflow bound to a fresh successful immutable Task 3A preflight receipt and GitHub artifact digest.
+      - Revalidate the frozen baseline 30, receipt-covered delta 1016, target 1046, exact active release and current DB state hash immediately before write.
+      - Permit only append-only index_states inserts for mismatching exact receipt-covered slugs inside one database transaction with one attempt.
+      - Require in-transaction post-write readback of exact matching 1016, zero missing/outside-target, and byte-stable baseline 30 state authority.
+      - Upload only sanitized immutable runner-side receipts with ambiguous transport outcomes fail-closed and no automatic retry.
+    allowed_paths:
+      - .github/workflows/career-publication-index-reconciliation-apply-production-ops.yml
+      - backend/scripts/operations/career_publication_index_reconciliation_apply.php
+      - backend/tests/Sre/CareerPublicationIndexReconciliationApplyWorkflowTest.php
+      - docs/operations/career-publication-index-reconciliation-apply-control.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Dispatch this workflow, trigger staging, SSH to production, or read/write production DB, CMS, cache, artifacts, pointers, sitemap, llms or Search Channel state during this PR.
+      - Add database updates/deletes, baseline/outside-target writes, broad or free-form SQL, user-provided slug lists, deploy, migration, restart, warm, repair, cleanup, rollback or automatic retry.
+      - Implement Task 4 or any later candidate, staging, activation, public verification, discoverability, monitoring or debt scope.
+    validation:
+      - cd backend && php artisan test tests/Sre/CareerPublicationIndexReconciliationApplyWorkflowTest.php tests/Sre/CareerPublicationIndexReconciliationPreflightWorkflowTest.php tests/Sre/Career1046CurrentStateFreezeContractTest.php --no-ansi
+      - actionlint .github/workflows/career-publication-index-reconciliation-apply-production-ops.yml
+      - cd backend && vendor/bin/pint --test scripts/operations/career_publication_index_reconciliation_apply.php tests/Sre/CareerPublicationIndexReconciliationApplyWorkflowTest.php
+      - php -l for every changed PHP file
+      - php backend/scripts/operations/verify_career_1046_current_state_freeze.php
+      - cd backend && bash scripts/ci_verify_mbti.sh through fermatmind-heavy-guard
+      - parse workflow, pr-train JSON and YAML
+      - exact changed-file scope and forbidden production action validation
+      - git diff --check and git diff --cached --check
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    workflow_policy_change: true
+    production_write_execution: false
+    production_read_only_evidence: false
+    production_workflow_dispatched: false
+    staging_workflow_dispatched: false
+    database_mutation: false
+    cms_mutation: false
+    cache_mutation: false
+    artifact_mutation: false
+    pointer_mutation: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: frozen manifest, authentic signed receipt set and fresh Task 3A receipt remain authority; this PR adds only an unexecuted exact apply control
+    repository_rule_impact: creates the separately controlled transaction lane required before immutable 1046 candidate generation
