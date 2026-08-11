@@ -105028,7 +105028,7 @@
     "base": "main",
     "branch": "codex/career-publication-index-reconciliation-preflight-06a",
     "title": "CAREER-PUBLICATION-INDEX-RECONCILIATION-PREFLIGHT-06A: add exact SELECT-only difference control",
-    "status": "github_checks_pending",
+    "status": "merged",
     "depends_on": [
       "CAREER-CURRENT-GENERATION-POINTER-BOOTSTRAP-05"
     ],
@@ -105058,16 +105058,17 @@
         "evidence": "The six-path allowlist contains one manual SELECT-only workflow, one pure-read streamed runner, its SRE test, operator documentation and the two train ledgers. No apply, route, migration, middleware, runtime reader, CMS/content, cache, pointer, frontend or discoverability implementation is included."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "PR #3664 opened from exact validated implementation commit 194f3edd5126b64123cd902537fe0962a8269097; required checks are pending."
+        "status": "passed",
+        "evidence": "Final exact head 789056f525d280c6f51f0eb07f610fd2a73ef6d7 passed hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep blocking secrets, Semgrep OSS and the non-blocking SARIF upload. Staging parity was correctly skipped; GitHub reported MERGEABLE/CLEAN with exactly six allowlisted files."
       }
     },
     "failure_reason": null,
-    "commit_sha": "194f3edd5126b64123cd902537fe0962a8269097",
+    "commit_sha": "789056f525d280c6f51f0eb07f610fd2a73ef6d7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3664",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-08-12T03:57:10+08:00",
+    "merge_commit_sha": "9c65481dc55a37d6285fe88f185eb9e081bc9733",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "workflow_policy_change": true,
     "production_write_execution": false,
     "production_read_only_evidence": false,
@@ -105102,8 +105103,92 @@
         "at": "2026-08-12T03:47:52+08:00",
         "status": "github_checks_pending",
         "note": "Committed the exact six-file implementation as 194f3edd5126b64123cd902537fe0962a8269097, pushed the focused branch and opened PR #3664. GitHub reports MERGEABLE with the exact six allowlisted files while required checks initialize. No production or staging workflow was dispatched and no controlled external state was read or mutated."
+      },
+      {
+        "at": "2026-08-12T03:57:10+08:00",
+        "status": "merged",
+        "note": "PR #3664 final head 789056f525d280c6f51f0eb07f610fd2a73ef6d7 passed the complete required check set and squash merged as 9c65481dc55a37d6285fe88f185eb9e081bc9733. origin/main contains the merge, GitHub auto-deleted the remote branch, and the local branch was deleted after the isolated train worktree moved to Task 3B. No production or staging workflow was dispatched and no production or discoverability state was read or mutated."
       }
     ],
-    "updated_at": "2026-08-12T03:47:52+08:00"
+    "updated_at": "2026-08-12T03:57:10+08:00"
+  },
+  "CAREER-PUBLICATION-INDEX-RECONCILIATION-APPLY-06B": {
+    "id": "CAREER-PUBLICATION-INDEX-RECONCILIATION-APPLY-06B",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-publication-index-reconciliation-apply-06b",
+    "title": "CAREER-PUBLICATION-INDEX-RECONCILIATION-APPLY-06B: add exact receipt-bound transaction control",
+    "status": "local_verified",
+    "depends_on": [
+      "CAREER-PUBLICATION-INDEX-RECONCILIATION-PREFLIGHT-06A"
+    ],
+    "allowed_paths": [
+      ".github/workflows/career-publication-index-reconciliation-apply-production-ops.yml",
+      "backend/scripts/operations/career_publication_index_reconciliation_apply.php",
+      "backend/tests/Sre/CareerPublicationIndexReconciliationApplyWorkflowTest.php",
+      "docs/operations/career-publication-index-reconciliation-apply-control.md",
+      "docs/codex/pr-train.yaml",
+      "docs/codex/pr-train-state.json"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "Task 3B of the continuous Career 1046 goal authorizes implementing and merging this exact apply control plane only; workflow dispatch, SSH and every production/staging mutation remain forbidden."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "Task 3A PR #3664 final head 789056f525d280c6f51f0eb07f610fd2a73ef6d7 passed all required checks and squash merged as 9c65481dc55a37d6285fe88f185eb9e081bc9733; this branch starts from that exact origin/main."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "The heavy-guarded full backend/scripts/ci_verify_mbti.sh chain exited 0, including Big Five 1693 tests / 196735 assertions and the complete MBTI/security/migration/queue gates. Final focused apply/preflight/freeze coverage passed 10 tests plus 2 known missing-.env warnings / 1317 assertions; actionlint, Pint --test, PHP syntax, frozen contract verification, workflow/train YAML and JSON parsing, 232-route listing, fresh in-memory SQLite migration, exact six-path scope and diff checks passed."
+      },
+      "scope": {
+        "status": "passed",
+        "evidence": "The six-path allowlist contains one manual apply workflow, one narrow streamed transaction runner, its SRE test, operator documentation and the two train ledgers. No route, migration, middleware, public runtime, CMS/content, cache, pointer, candidate, frontend or discoverability implementation is included."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": "PR has not yet been opened."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "workflow_policy_change": true,
+    "production_write_execution": false,
+    "production_read_only_evidence": false,
+    "production_workflow_dispatched": false,
+    "staging_workflow_dispatched": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "cache_mutation": false,
+    "artifact_mutation": false,
+    "pointer_mutation": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "url_submission": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-08-12T03:57:10+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started Task 3B from exact merged Task 3A origin/main 9c65481dc55a37d6285fe88f185eb9e081bc9733. Scope is an unexecuted protected apply workflow, its streamed narrow transaction runner, focused test, operations document and ledgers only. No workflow was dispatched; no SSH, production/staging read, deploy, migration, DB/CMS/cache/artifact/pointer, publication, sitemap/llms or Search Channel action was executed."
+      },
+      {
+        "at": "2026-08-12T04:06:38+08:00",
+        "status": "implementation_in_progress",
+        "note": "Implemented a fresh immutable Task 3A receipt and artifact-digest gate, exact current-state drift binding, one-attempt transaction, append-only exact-delta index_states allowlist, baseline row-hash preservation and in-transaction 1016/30 post-write readback. Initial focused tests pass 10 tests / 1301 assertions with actionlint, Pint and PHP syntax green. Full repository validation is next. No workflow was dispatched and no controlled external state was accessed."
+      },
+      {
+        "at": "2026-08-12T04:16:40+08:00",
+        "status": "local_validation_passed",
+        "note": "Completed local validation. The heavy-guarded ci_verify_mbti master chain exited 0; final focused apply/preflight/freeze coverage passed 10 tests plus 2 known missing-.env warnings / 1317 assertions; actionlint, Pint, PHP syntax, freeze contract, YAML/JSON parsing, 232-route listing, fresh SQLite migration, exact six-file scope and diff checks passed. Verifier-generated Big Five compiled files were restored. No production or staging workflow was dispatched."
+      }
+    ],
+    "updated_at": "2026-08-12T04:16:40+08:00"
   }
 }
