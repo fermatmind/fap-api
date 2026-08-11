@@ -104681,5 +104681,71 @@
       }
     ],
     "updated_at": "2026-08-08T10:15:21+08:00"
+  },
+  "CAREER-1046-CURRENT-STATE-FREEZE-CONTRACT-00": {
+    "id": "CAREER-1046-CURRENT-STATE-FREEZE-CONTRACT-00",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-1046-current-state-freeze-00",
+    "title": "CAREER-1046-CURRENT-STATE-FREEZE-CONTRACT-00: freeze 30/1016/1046 authority evidence",
+    "status": "local_validation_passed",
+    "depends_on": [],
+    "allowed_paths": [
+      "backend/docs/career/contracts/career-1046-current-state-freeze.v1.json",
+      "backend/scripts/operations/verify_career_1046_current_state_freeze.php",
+      "backend/tests/Sre/Career1046CurrentStateFreezeContractTest.php",
+      "docs/codex/pr-train.yaml",
+      "docs/codex/pr-train-state.json"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The 2026-08-12 Career 1046 generation-bound continuous goal explicitly authorizes exact manifest/state initialization and this zero-write Task 0 contract PR."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "Production SELECT-only zero-write run 31515295236 attempt 1 succeeded on active SHA 42c35458ff24f00e3b22b4e0c8bc0bff98a40a5d with receipt SHA-256 59d992de3043af791343eb0d025e33377a9d2b8db6b56504adfd41c2538a57cb and artifact digest sha256:c4dc998f211bb73fb8585ba8e2b5e5fc48ced7e1e1b44f12f49794dc3a26fd8f."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "Focused contract tests passed 2 tests / 16 assertions. The offline validator returned PASS_FROZEN_ZERO_WRITE_CONTRACT with receipt coverage 1016, DB latest-index missing 1016, writes 0, and production_apply_allowed=false. Scoped Pint, PHP syntax, JSON/YAML parsing, and git diff checks passed."
+      },
+      "scope": {
+        "status": "passed",
+        "evidence": "Exact changed-file comparison passed for the five card-allowlisted paths. Routes, migrations, runtime readers, workflows, production state, CMS/DB/cache/artifact/pointer state, sitemap, llms, Search Channel, and frontend files remain untouched."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_workflow_dispatched": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "url_submission": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-08-12T00:00:00+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started Task 0 from exact origin/main 42c35458ff24f00e3b22b4e0c8bc0bff98a40a5d in an isolated clean worktree. The contract is offline and read-only; no production workflow, SSH action, deploy, migration, database/CMS/cache/artifact/pointer write, publication, sitemap/llms mutation, Search Channel action, or URL submission occurred."
+      },
+      {
+        "at": "2026-08-12T01:17:34+08:00",
+        "status": "local_validation_passed",
+        "note": "Focused tests passed 2 tests / 16 assertions; the offline validator, scoped Pint, PHP syntax, JSON/YAML parsing, exact five-path scope comparison, and diff checks passed. Runtime acceptance commands are not applicable to this generated-contract-only PR. No production workflow was dispatched and no production or discoverability write occurred."
+      }
+    ],
+    "updated_at": "2026-08-12T01:17:34+08:00"
   }
 }
