@@ -278,6 +278,33 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
         }
     }
 
+    public function test_deploy_lock_fails_closed_before_any_pointer_write(): void
+    {
+        $current = Career1046RootGenerationActivation::inspectCurrentAndRollback($this->expected);
+        $generation = Career1046RootGenerationActivation::inspectStagedGeneration($this->expected);
+        $activePath = $current['active_path'];
+        $before = hash_file('sha256', $activePath);
+        File::ensureDirectoryExists($this->root.'/.dep');
+        File::put($this->root.'/.dep/deploy.lock', "locked\n");
+
+        try {
+            Career1046RootGenerationActivation::activate(
+                $this->expected,
+                $current,
+                $generation,
+                $this->database,
+                str_repeat('f', 64),
+            );
+            self::fail('A deploy lock must fail closed before activation writes.');
+        } catch (Career1046RootActivationFailure $failure) {
+            self::assertSame('DEPLOY_LOCK_PRESENT', $failure->safeCode);
+        }
+
+        self::assertSame($before, hash_file('sha256', $activePath));
+        self::assertFileDoesNotExist($this->privateRoot.'/career_generation_authority/generations/'
+            .$this->expected['generation_id'].'/generation-pointer.json');
+    }
+
     public function test_workflow_is_manual_receipt_bound_single_pointer_only_and_keeps_discoverability_closed(): void
     {
         $workflow = $this->repoFile('.github/workflows/career-1046-root-generation-activation-production-ops.yml');
@@ -302,6 +329,8 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
             'PASS_PREFLIGHT_ACTIVATION_ELIGIBLE',
             'PASS_APPLY_ROOT_GENERATION_ACTIVATED',
             'ROLLBACK_AUTHORITY_UNREADABLE',
+            'DEPLOY_LOCK_PRESENT',
+            'CONFLICTING_AUTHORITY_PROCESS_PRESENT',
             'career.1046.root_generation_activation.v1',
             'receipt_covered_count == 1016',
             'matching_count == 1016',
@@ -336,6 +365,9 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
         ] as $forbidden) {
             self::assertStringNotContainsString($forbidden, $combined);
         }
+
+        self::assertGreaterThanOrEqual(2, substr_count($workflow, 'git fetch --no-tags origin main:refs/remotes/origin/main'));
+        self::assertSame(2, substr_count($runner, 'self::assertNoConflictingOperation($expected);'));
     }
 
     /** @return array<string, mixed> */

@@ -427,6 +427,13 @@ jobs:
             printf -v "q_${key}" '%q' "$value"
           done
 
+          # Close the control-plane race after all evidence preparation and
+          # immediately before the only command that can reach production.
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$GITHUB_SHA" = "$EXPECTED_CONTROL_PLANE_SHA"
+
           set +e
           timeout --signal=TERM --kill-after=5s 180s \
             ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \

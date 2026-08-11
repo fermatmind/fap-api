@@ -167,6 +167,41 @@ final class Career1046RootGenerationActivation
         }
     }
 
+    /** @param array<string, mixed> $expected */
+    private static function assertNoConflictingOperation(array $expected): void
+    {
+        $deployRoot = dirname((string) $expected['active_release_link']);
+        $lockPath = $deployRoot.'/.dep/deploy.lock';
+        if (is_link($lockPath) || file_exists($lockPath)) {
+            throw new Career1046RootActivationFailure('DEPLOY_LOCK_PRESENT');
+        }
+
+        foreach (glob('/proc/[0-9]*/cmdline') ?: [] as $cmdlinePath) {
+            $pid = (int) basename(dirname($cmdlinePath));
+            if ($pid <= 0 || $pid === getmypid()) {
+                continue;
+            }
+            $raw = @file_get_contents($cmdlinePath);
+            if (! is_string($raw) || $raw === '') {
+                continue;
+            }
+            $parts = array_values(array_filter(explode("\0", $raw), static fn (string $part): bool => $part !== ''));
+            $command = basename((string) ($parts[0] ?? ''));
+            $arguments = implode(' ', $parts);
+            $phpConflict = $command === 'php' && (
+                preg_match('/dep(?:\.phar)? .* production/', $arguments) === 1
+                || preg_match('/artisan migrate(?:\s|$)/', $arguments) === 1
+                || preg_match('/queue:(?:restart|reload-workers)(?:\s|$)/', $arguments) === 1
+                || preg_match('/career_.*(?:apply|activation|staging)/', $arguments) === 1
+            );
+            $composerConflict = $command === 'composer'
+                && preg_match('/(?:^|\s)install(?:\s|$)/', $arguments) === 1;
+            if ($phpConflict || $composerConflict) {
+                throw new Career1046RootActivationFailure('CONFLICTING_AUTHORITY_PROCESS_PRESENT');
+            }
+        }
+    }
+
     /** @param array<string, mixed> $expected @return array<string, mixed> */
     public static function inspectCurrentAndRollback(array $expected): array
     {
@@ -441,6 +476,7 @@ final class Career1046RootGenerationActivation
         $activeCandidate = $current['authority_root'].'/.active-generation.json.candidate.'
             .$expected['workflow_run_id'].'.'.$expected['workflow_run_attempt'];
 
+        self::assertNoConflictingOperation($expected);
         if (is_link($immutablePath) || file_exists($immutablePath)) {
             throw new Career1046RootActivationFailure('IMMUTABLE_POINTER_ALREADY_EXISTS');
         }
@@ -478,6 +514,7 @@ final class Career1046RootGenerationActivation
         );
         self::assertActiveRelease($expected);
         self::assertGenerationDocumentReadback($expected, $generation);
+        self::assertNoConflictingOperation($expected);
 
         $activeNow = self::readContainedFile((string) $current['authority_root'], (string) $current['active_path'], 256_000);
         if (! hash_equals((string) $current['active_sha256_before'], hash('sha256', $activeNow))) {

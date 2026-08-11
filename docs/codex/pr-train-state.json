@@ -105411,7 +105411,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "All three review-fix heavy-guarded full backend/scripts/ci_verify_mbti.sh runs exited 0 after the initial full pass. Final focused activation/staging/reconciliation/loader coverage passed 5 tests plus 18 known missing-.env warnings / 279 assertions; the activation test itself passed with 76 assertions and exercised strict canonical lineage plus corrupt rollback-artifact refusal. actionlint, Pint --test, PHP syntax, frozen contract verification, train YAML/JSON parsing, 253-line route listing, fresh SQLite migration, exact six-path scope and diff checks passed."
+        "evidence": "All four review-fix heavy-guarded full backend/scripts/ci_verify_mbti.sh runs exited 0 after the initial full pass. Final focused activation coverage passed 4 tests plus 4 known missing-.env warnings / 85 assertions, including fail-closed deploy-lock coverage; the earlier combined activation/staging/reconciliation/loader suite passed 5 tests plus 18 known warnings / 279 assertions. actionlint, Pint --test, PHP syntax, frozen contract verification, train YAML/JSON parsing, 253-line route listing, fresh SQLite migration, exact six-path scope and diff checks passed."
       },
       "scope": {
         "status": "passed",
@@ -105472,8 +105472,13 @@
         "at": "2026-08-12T06:55:48+08:00",
         "status": "review_fix_validated",
         "note": "The latest current-head Codex review identified that byte-identical previous pointer files did not alone prove their bound projection and ledger remained rollback-readable. The activation control now boots the exact active Laravel release before inspection and requires CareerGenerationAuthorityLoader::loadStrict to validate the active/immutable pointer pair and both bound rollback artifacts. A hash-corrupted rollback projection regression fails closed as ROLLBACK_AUTHORITY_UNREADABLE before activation. The focused suite passed 5 tests plus 18 known missing-.env warnings / 279 assertions and the complete heavy-guarded ci_verify_mbti chain exited 0 again. Generated Big Five compiled files were restored. No workflow was dispatched and no controlled external state was accessed or mutated."
+      },
+      {
+        "at": "2026-08-12T07:09:52+08:00",
+        "status": "review_fix_validated",
+        "note": "The current-head Codex review identified two final mutation-boundary races. The workflow now refetches origin/main and requires the exact control-plane SHA immediately before SSH, while the runner repeats deploy-lock and competing-process inspection before the immutable pointer write and again immediately before the root rename. A deploy-lock regression proves fail-closed behavior before either pointer write. Focused coverage passed 4 tests plus 4 known missing-.env warnings / 85 assertions; actionlint, Pint, PHP syntax and freeze verification passed; the complete heavy-guarded ci_verify_mbti chain exited 0. Generated Big Five compiled files were restored. No workflow was dispatched and no SSH or controlled external state was accessed or mutated."
       }
     ],
-    "updated_at": "2026-08-12T06:55:48+08:00"
+    "updated_at": "2026-08-12T07:09:52+08:00"
   }
 }
