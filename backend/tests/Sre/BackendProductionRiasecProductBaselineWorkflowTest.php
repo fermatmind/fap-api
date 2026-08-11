@@ -75,6 +75,9 @@ final class BackendProductionRiasecProductBaselineWorkflowTest extends TestCase
             "'/en/tests/holland-career-interest-test-riasec'",
             "'/take'",
             '$sourcePath === $canonicalPath',
+            '$landingSessionHashes',
+            '$normalizeSessionHash',
+            'session linked to canonical landing_pv',
             "DB::table('events')",
             'SCOPED_SOURCE_RECONCILIATION_FAILED',
             "'scoped_source_reconciliation' => 'exact'",
@@ -110,6 +113,7 @@ final class BackendProductionRiasecProductBaselineWorkflowTest extends TestCase
         foreach (['cat "$run_dir/remote.stderr"', 'getMessage()', 'set -x'] as $secretRisk) {
             $this->assertStringNotContainsString($secretRisk, $remote);
         }
+        $this->assertStringNotContainsString('$urlPath === $takePath || $sourcePath === $canonicalPath', $remote);
     }
 
     #[Test]

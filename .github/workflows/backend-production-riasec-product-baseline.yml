@@ -300,6 +300,16 @@ jobs:
               };
               $canonicalPath = '/en/tests/holland-career-interest-test-riasec';
               $takePath = $canonicalPath.'/take';
+              $normalizeSessionHash = static function (mixed $value): string {
+                  if (! is_scalar($value)) {
+                      return '';
+                  }
+                  $session = trim((string) $value);
+                  $session = preg_replace('/[\x00-\x1F\x7F]+/', '', $session) ?? '';
+                  $session = mb_substr($session, 0, 160);
+
+                  return $session === '' ? '' : hash('sha256', $session);
+              };
               $trafficExclusion = $app->make(AnalyticsTrafficExclusionPolicy::class);
               $scopedSourceEventCount = 0;
               $sourceEvents = DB::table('events')
@@ -324,6 +334,25 @@ jobs:
                       'scale_code',
                   ])
                   ->get();
+              $landingSessionHashes = [];
+              foreach ($sourceEvents as $event) {
+                  $meta = json_decode((string) ($event->meta_json ?? ''), true);
+                  $meta = is_array($meta) ? $meta : [];
+                  if ($trafficExclusion->isExcludedSeoConversionEvent($event, $meta)) {
+                      continue;
+                  }
+                  $seo = is_array($meta['seo_conversion'] ?? null) ? $meta['seo_conversion'] : [];
+                  $eventCode = strtolower(trim((string) ($event->event_code ?? '')));
+                  $lang = strtolower(trim((string) ($seo['lang'] ?? $event->locale ?? '')));
+                  $urlPath = $normalizeApprovedPath($seo['url'] ?? null);
+                  if ($eventCode !== 'landing_pv' || $lang !== 'en' || $urlPath !== $canonicalPath) {
+                      continue;
+                  }
+                  $sessionHash = $normalizeSessionHash($seo['session_id'] ?? $event->session_id ?? null);
+                  if ($sessionHash !== '') {
+                      $landingSessionHashes[$sessionHash] = true;
+                  }
+              }
               foreach ($sourceEvents as $event) {
                   $meta = json_decode((string) ($event->meta_json ?? ''), true);
                   $meta = is_array($meta) ? $meta : [];
@@ -340,14 +369,14 @@ jobs:
                   $form = trim((string) ($seo['form_id'] ?? $meta['form_code'] ?? ''));
                   $urlPath = $normalizeApprovedPath($seo['url'] ?? null);
                   $sourcePath = $normalizeApprovedPath($seo['source_url'] ?? null);
+                  $sessionHash = $normalizeSessionHash($seo['session_id'] ?? $event->session_id ?? null);
+                  $downstreamAttributed = $sourcePath === $canonicalPath
+                      || ($sessionHash !== '' && isset($landingSessionHashes[$sessionHash]));
                   $isScoped = match ($eventCode) {
                       'landing_pv' => $urlPath === $canonicalPath,
-                      'start_test', 'complete_test' => $scale === 'RIASEC'
+                      'start_test', 'complete_test', 'view_result' => $scale === 'RIASEC'
                           && in_array($form, $forms, true)
-                          && ($urlPath === $takePath || $sourcePath === $canonicalPath),
-                      'view_result' => $scale === 'RIASEC'
-                          && in_array($form, $forms, true)
-                          && ($urlPath === $canonicalPath || $urlPath === $takePath || $sourcePath === $canonicalPath),
+                          && $downstreamAttributed,
                       default => false,
                   };
                   if ($isScoped) {
@@ -362,7 +391,9 @@ jobs:
                   $urlPath = $normalizeApprovedPath($row['url'] ?? null);
                   $sourcePath = $normalizeApprovedPath($row['source_url'] ?? null);
                   $landingAttributed = $urlPath === $canonicalPath;
-                  $downstreamAttributed = $urlPath === $takePath || $sourcePath === $canonicalPath;
+                  $sessionHash = (string) ($row['session_id_hash'] ?? '');
+                  $downstreamAttributed = $sourcePath === $canonicalPath
+                      || ($sessionHash !== '' && isset($landingSessionHashes[$sessionHash]));
                   if ($landingAttributed) {
                       $landingView += (int) ($row['landing_pv_count'] ?? 0);
                   }
@@ -386,8 +417,8 @@ jobs:
                   if ($downstreamAttributed) {
                       $byForm[$form]['test_start'] += (int) ($row['start_test_count'] ?? 0);
                       $byForm[$form]['test_complete'] += (int) ($row['complete_test_count'] ?? 0);
+                      $byForm[$form]['riasec_result_view'] += (int) ($row['view_result_count'] ?? 0);
                   }
-                  $byForm[$form]['riasec_result_view'] += (int) ($row['view_result_count'] ?? 0);
               }
               $scopedProjectedEventCount = $landingView;
               foreach ($byForm as $formTotals) {
@@ -429,9 +460,9 @@ jobs:
                       'approved_absolute_origins' => ['https://fermatmind.com'],
                       'event_path_attribution' => [
                           'landing_pv' => 'url canonical_path; form_id is not required',
-                          'start_test' => 'url take_path or source_url canonical_path',
-                          'complete_test' => 'url take_path or source_url canonical_path',
-                          'view_result' => 'url canonical_path, url take_path, or source_url canonical_path',
+                          'start_test' => 'source_url canonical_path or session linked to canonical landing_pv',
+                          'complete_test' => 'source_url canonical_path or session linked to canonical landing_pv',
+                          'view_result' => 'source_url canonical_path or session linked to canonical landing_pv',
                       ],
                       'lang' => 'en',
                       'scale_id' => 'RIASEC',
