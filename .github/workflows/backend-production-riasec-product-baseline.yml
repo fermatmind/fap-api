@@ -403,6 +403,10 @@ jobs:
                   'status' => 'pass',
                   'from' => '2026-07-13',
                   'to' => '2026-08-09',
+                  'reporting_timezone' => $reportingWindow['reporting_timezone'],
+                  'storage_timezone' => $reportingWindow['storage_timezone'],
+                  'window_utc_start' => $reportingWindow['window_utc_start'],
+                  'window_utc_end_exclusive' => $reportingWindow['window_utc_end_exclusive'],
                   'org_id' => 0,
                   'authority' => [
                       'source_table' => 'events',
