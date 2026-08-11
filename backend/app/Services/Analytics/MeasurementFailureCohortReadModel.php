@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Analytics;
 
 use Carbon\CarbonImmutable;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -197,16 +198,41 @@ final class MeasurementFailureCohortReadModel
     private function failureEvents(int $orgId, CarbonImmutable $fromAt, CarbonImmutable $toAt, array $filters): Collection
     {
         return DB::table('events')
-            ->select(['id', 'event_code', 'attempt_id', 'anon_id', 'session_id', 'request_id', 'meta_json', 'occurred_at', 'scale_code', 'locale', 'client_platform'])
-            ->where('org_id', $orgId)
-            ->whereIn('event_code', MeasurementFailureEventContract::EVENT_NAMES)
-            ->whereBetween('occurred_at', [$fromAt, $toAt])
-            ->orderBy('occurred_at')
-            ->orderBy('id')
+            ->leftJoin('attempts', function (JoinClause $join) use ($orgId): void {
+                $join->on('attempts.id', '=', 'events.attempt_id')
+                    ->where('attempts.org_id', '=', $orgId);
+            })
+            ->select([
+                'events.id',
+                'events.event_code',
+                'events.attempt_id',
+                'events.anon_id',
+                'events.session_id',
+                'events.request_id',
+                'events.meta_json',
+                'events.occurred_at',
+                'events.scale_code',
+                'events.locale',
+                'events.client_platform',
+                'attempts.id as correlated_attempt_id',
+                'attempts.anon_id as correlated_attempt_anon_id',
+            ])
+            ->where('events.org_id', $orgId)
+            ->whereIn('events.event_code', MeasurementFailureEventContract::EVENT_NAMES)
+            ->whereBetween('events.occurred_at', [$fromAt, $toAt])
+            ->orderBy('events.occurred_at')
+            ->orderBy('events.id')
             ->get()
             ->map(function (object $event): array {
                 $meta = $this->decodeArray($event->meta_json ?? null);
-                if ($this->trafficExclusionPolicy->isExcludedSeoConversionEvent($event, $meta)) {
+                $correlatedAttempt = (object) [
+                    'id' => $event->correlated_attempt_id ?? null,
+                    'anon_id' => $event->correlated_attempt_anon_id ?? null,
+                ];
+                if (
+                    $this->trafficExclusionPolicy->isExcludedSeoConversionEvent($event, $meta)
+                    || $this->trafficExclusionPolicy->isExcludedAttemptRow($correlatedAttempt)
+                ) {
                     return [];
                 }
                 $safe = MeasurementFailureEventContract::sanitizeProperties(array_merge($meta, [

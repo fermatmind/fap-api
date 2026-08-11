@@ -185,9 +185,6 @@ final class MeasurementFailureCohortReadModelTest extends TestCase
         DB::table('attempts')->where('id', $probeAttemptId)->update([
             'anon_id' => 'codex_probe_riasec_baseline',
         ]);
-        DB::table('events')->where('attempt_id', $probeAttemptId)->update([
-            'anon_id' => 'codex_probe_riasec_baseline',
-        ]);
         config()->set('analytics.smoke_attempt_exclusion.attempt_ids', [$configuredAttemptId]);
         config()->set('analytics.smoke_attempt_exclusion.anon_id_prefixes', ['codex_probe_']);
 
