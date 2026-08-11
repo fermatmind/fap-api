@@ -105208,7 +105208,7 @@
     "base": "main",
     "branch": "codex/career-1046-immutable-candidate-07",
     "title": "CAREER-1046-IMMUTABLE-CANDIDATE-07: generate exact manifest-filtered product candidate",
-    "status": "implementation_in_progress",
+    "status": "github_checks_pending",
     "depends_on": [
       "CAREER-PUBLICATION-INDEX-RECONCILIATION-APPLY-06B"
     ],
@@ -105242,8 +105242,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "3165c5f081579e8af9f76d5d6ce7a0a0d9c5c4a7",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3666",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -105271,8 +105271,13 @@
         "at": "2026-08-12T04:43:20+08:00",
         "status": "local_validation_passed",
         "note": "Implemented and validated exact 1046/2092 candidate generation, deterministic same-generation product artifacts, discoverability-closed projection output and local no-clobber materialization. The heavy-guarded CI master chain exited 0; focused tests passed 5 / 29; Pint, syntax, frozen verifier, route listing, fresh SQLite migration, ledger parsing, exact five-file scope and diff checks passed. Generated Big Five compiled files were restored to origin/main bytes. No workflow was dispatched and no controlled external state was accessed or mutated."
+      },
+      {
+        "at": "2026-08-12T04:45:02+08:00",
+        "status": "github_checks_pending",
+        "note": "Committed the exact five-file implementation as 3165c5f081579e8af9f76d5d6ce7a0a0d9c5c4a7, pushed the focused branch and opened PR #3666. Required checks must pass before squash merge. No production or staging workflow was dispatched and no controlled external state was accessed or mutated."
       }
     ],
-    "updated_at": "2026-08-12T04:43:20+08:00"
+    "updated_at": "2026-08-12T04:45:02+08:00"
   }
 }
