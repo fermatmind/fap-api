@@ -1,4 +1,5 @@
 name: Deploy API Production
+run-name: Deploy API Production ${{ inputs.expected_release_sha }} staging-${{ inputs.staging_run_id }}
 
 on:
   workflow_dispatch:

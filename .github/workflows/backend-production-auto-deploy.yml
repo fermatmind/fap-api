@@ -1,0 +1,242 @@
+name: Backend Production Auto Deploy
+
+on:
+  workflow_run:
+    workflows: ["Deploy Application"]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  actions: write
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: deploy-${{ github.repository }}-production-auto-dispatch
+  cancel-in-progress: false
+
+jobs:
+  dispatch-production:
+    name: Dispatch exact staged main release
+    if: >-
+      ${{
+        github.event.workflow_run.status == 'completed' &&
+        github.event.workflow_run.conclusion == 'success' &&
+        github.event.workflow_run.event == 'push' &&
+        github.event.workflow_run.head_branch == 'main' &&
+        github.event.workflow_run.head_repository.full_name == github.repository
+      }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Validate exact staging and merged main identity
+        id: release
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const stagingRunId = Number(context.payload.workflow_run.id);
+            if (!Number.isSafeInteger(stagingRunId) || stagingRunId <= 0) {
+              core.setFailed('Automatic production dispatch requires a valid staging run id.');
+              return;
+            }
+
+            const staging = (await github.rest.actions.getWorkflowRun({
+              owner,
+              repo,
+              run_id: stagingRunId,
+            })).data;
+            const deploySha = String(staging.head_sha || '');
+            const expectedRepository = `${owner}/${repo}`;
+            if (
+              staging.name !== 'Deploy Application' ||
+              staging.path !== '.github/workflows/deploy.yml' ||
+              staging.status !== 'completed' ||
+              staging.conclusion !== 'success' ||
+              staging.event !== 'push' ||
+              staging.head_branch !== 'main' ||
+              staging.head_repository?.full_name !== expectedRepository ||
+              !/^[0-9a-f]{40}$/.test(deploySha)
+            ) {
+              core.setFailed('Automatic production dispatch rejected non-exact staging evidence.');
+              return;
+            }
+
+            const main = await github.rest.repos.getBranch({ owner, repo, branch: 'main' });
+            if (main.data.commit.sha !== deploySha) {
+              core.setOutput('skip', 'true');
+              core.notice('Skipping superseded staging success; a newer main release owns production promotion.');
+              return;
+            }
+
+            const associatedPulls = await github.paginate(
+              github.rest.repos.listPullRequestsAssociatedWithCommit,
+              { owner, repo, commit_sha: deploySha, per_page: 100 },
+            );
+            const mergedMainPulls = associatedPulls.filter((pull) => (
+              pull.base?.ref === 'main' &&
+              Boolean(pull.merged_at) &&
+              pull.merge_commit_sha === deploySha
+            ));
+            if (mergedMainPulls.length !== 1) {
+              core.setFailed(
+                `Automatic production dispatch requires exactly one merged main PR; found ${mergedMainPulls.length}.`,
+              );
+              return;
+            }
+
+            const expectedRunTitle = `Deploy API Production ${deploySha} staging-${stagingRunId}`;
+            const productionRuns = await github.paginate(
+              github.rest.actions.listWorkflowRuns,
+              {
+                owner,
+                repo,
+                workflow_id: 'deploy-production.yml',
+                event: 'workflow_dispatch',
+                per_page: 100,
+              },
+            );
+            if (productionRuns.some((run) => run.display_title === expectedRunTitle)) {
+              core.setOutput('skip', 'true');
+              core.notice('Exact staging run already has a production dispatch; automatic retry is refused.');
+              return;
+            }
+
+            core.setOutput('skip', 'false');
+            core.setOutput('deploy_sha', deploySha);
+            core.setOutput('staging_run_id', String(stagingRunId));
+            core.setOutput('release_id', `standard-${deploySha.slice(0, 12)}`);
+            core.setOutput('merged_pr', String(mergedMainPulls[0].number));
+
+      - name: Check out exact staged main
+        if: steps.release.outputs.skip != 'true'
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ steps.release.outputs.deploy_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Resolve latest successful active production receipt
+        if: steps.release.outputs.skip != 'true'
+        id: active_run
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const runs = await github.paginate(
+              github.rest.actions.listWorkflowRuns,
+              {
+                owner,
+                repo,
+                workflow_id: 'deploy-production.yml',
+                status: 'success',
+                per_page: 100,
+              },
+            );
+            for (const run of runs) {
+              const jobs = await github.paginate(
+                github.rest.actions.listJobsForWorkflowRun,
+                { owner, repo, run_id: run.id, per_page: 100 },
+              );
+              const activated = jobs.some((job) => (
+                job.conclusion === 'success' &&
+                (job.steps || []).some((step) => (
+                  step.name === 'Record production release candidate' && step.conclusion === 'success'
+                ))
+              ));
+              if (!activated) continue;
+
+              core.setOutput('run_id', String(run.id));
+              core.setOutput('run_attempt', String(run.run_attempt));
+              return;
+            }
+            core.setFailed('Automatic production dispatch could not resolve an active production receipt.');
+
+      - name: Verify active revision receipt and cumulative no-migration scope
+        if: steps.release.outputs.skip != 'true'
+        id: active
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ACTIVE_RUN_ID: ${{ steps.active_run.outputs.run_id }}
+          ACTIVE_RUN_ATTEMPT: ${{ steps.active_run.outputs.run_attempt }}
+          DEPLOY_SHA: ${{ steps.release.outputs.deploy_sha }}
+        run: |
+          set -euo pipefail
+          [[ "$ACTIVE_RUN_ID" =~ ^[0-9]+$ ]]
+          [[ "$ACTIVE_RUN_ATTEMPT" =~ ^[0-9]+$ ]]
+          [[ "$DEPLOY_SHA" =~ ^[0-9a-f]{40}$ ]]
+
+          receipt_dir="$RUNNER_TEMP/backend-production-active-receipt"
+          mkdir -p "$receipt_dir"
+          gh run download "$ACTIVE_RUN_ID" \
+            --pattern "backend-production-deploy-progress-${ACTIVE_RUN_ID}-*" \
+            --dir "$receipt_dir"
+          mapfile -t receipt_files < <(find "$receipt_dir" -type f -name 'deployer-progress.json' -print)
+          test "${#receipt_files[@]}" -eq 1
+          receipt_file="${receipt_files[0]}"
+          active_sha="$(jq -er \
+            --arg run_id "$ACTIVE_RUN_ID" \
+            --arg run_attempt "$ACTIVE_RUN_ATTEMPT" '
+              select(
+                .schema_version == "fermatmind.deployer-progress.v1"
+                and .environment == "production"
+                and .workflow_run_id == $run_id
+                and .workflow_run_attempt == $run_attempt
+                and .status == "completed"
+                and (.sha | type == "string" and test("^[0-9a-f]{40}$"))
+              )
+              | .sha
+            ' "$receipt_file")"
+          git cat-file -e "${active_sha}^{commit}"
+          git merge-base --is-ancestor "$active_sha" "$DEPLOY_SHA"
+          test "$active_sha" != "$DEPLOY_SHA"
+          test -n "$(git diff --no-renames --name-only "$active_sha" "$DEPLOY_SHA")"
+          test -z "$(git diff --no-renames --name-only "$active_sha" "$DEPLOY_SHA" -- backend/database/migrations)"
+          echo "active_sha=$active_sha" >> "$GITHUB_OUTPUT"
+
+      - name: Dispatch exact standard production release
+        if: steps.release.outputs.skip != 'true'
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        env:
+          DEPLOY_SHA: ${{ steps.release.outputs.deploy_sha }}
+          STAGING_RUN_ID: ${{ steps.release.outputs.staging_run_id }}
+          RELEASE_ID: ${{ steps.release.outputs.release_id }}
+          MERGED_PR: ${{ steps.release.outputs.merged_pr }}
+          ACTIVE_SHA: ${{ steps.active.outputs.active_sha }}
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const deploySha = process.env.DEPLOY_SHA;
+            const stagingRunId = process.env.STAGING_RUN_ID;
+            const releaseId = process.env.RELEASE_ID;
+            const approvalPhrase = [
+              'I explicitly approve bounded backend production deploy for exact SHA',
+              deploySha + ',',
+              'excluding all newer main commits, release',
+              releaseId + '.',
+            ].join(' ');
+            await github.rest.actions.createWorkflowDispatch({
+              owner,
+              repo,
+              workflow_id: 'deploy-production.yml',
+              ref: 'main',
+              inputs: {
+                expected_release_sha: deploySha,
+                staging_run_id: stagingRunId,
+                release_id: releaseId,
+                operator_approval_phrase: approvalPhrase,
+                deploy_mode: 'standard',
+              },
+            });
+
+            await core.summary
+              .addHeading('Backend production auto deploy')
+              .addRaw(`Dispatched exact staged main SHA ${deploySha}.`)
+              .addEOL()
+              .addRaw(`Staging run: ${stagingRunId}.`)
+              .addEOL()
+              .addRaw(`Merged PR: #${process.env.MERGED_PR}.`)
+              .addEOL()
+              .addRaw(`Verified active ancestor: ${process.env.ACTIVE_SHA}.`)
+              .write();
