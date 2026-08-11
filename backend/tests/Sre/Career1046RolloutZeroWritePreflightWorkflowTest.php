@@ -81,6 +81,8 @@ final class Career1046RolloutZeroWritePreflightWorkflowTest extends TestCase
             'locale_row_set_sha256',
             'target_missing_valid_display_slugs',
             'target_missing_union_detail_slugs',
+            '--slurpfile authority_evidence',
+            'summary: $authority_evidence[0]',
             'aa_projection_truth_review_authority',
             '--dry-run --no-audit-write --json',
             '/api/v0.5/career/jobs?locale=en',
@@ -106,6 +108,7 @@ final class Career1046RolloutZeroWritePreflightWorkflowTest extends TestCase
         }
 
         foreach ([
+            '--argjson authority_evidence "$authority_evidence_summary"',
             ' --apply',
             'career:warm-public-authority-cache',
             'php artisan migrate',
