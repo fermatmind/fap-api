@@ -1,0 +1,630 @@
+name: Backend Production RIASEC Product Baseline
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_control_plane_sha:
+        description: "Exact latest main control-plane SHA"
+        required: true
+        type: string
+      expected_active_revision:
+        description: "Exact active backend production REVISION"
+        required: true
+        type: string
+      release_id:
+        description: "Exact active managed release identifier"
+        required: true
+        type: string
+      operator_approval_phrase:
+        description: "Exact SELECT-only production RIASEC baseline approval"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.repository }}-production
+  cancel-in-progress: false
+
+jobs:
+  baseline:
+    name: Capture fixed org-0 RIASEC product baseline without writes
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: production
+    env:
+      EXPECTED_CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+      EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+      RELEASE_ID: ${{ inputs.release_id }}
+      OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+      RECEIPT_FILE_NAME: backend-production-riasec-product-baseline-receipt.json
+
+    steps:
+      - name: Initialize failure-safe sanitized receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/riasec-product-baseline"
+          checked_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          jq -n \
+            --arg control_plane_sha "$EXPECTED_CONTROL_PLANE_SHA" \
+            --arg active_revision "$EXPECTED_ACTIVE_REVISION" \
+            --arg release_id "$RELEASE_ID" \
+            --arg checked_at "$checked_at" \
+            '{
+              schema_version: "fermatmind.production-riasec-product-baseline.v1",
+              status: "FAIL_PRODUCTION_RIASEC_PRODUCT_BASELINE",
+              control_plane_sha: $control_plane_sha,
+              active_revision: $active_revision,
+              release_id: $release_id,
+              checked_at: $checked_at,
+              failed_check: "checkout_control_plane",
+              source_report_sha256: {},
+              source_health: {},
+              totals: null,
+              negative_guarantees: {
+                deploy: false,
+                migration: false,
+                database_write: false,
+                cms_write: false,
+                cache_write: false,
+                publication: false,
+                discoverability_change: false,
+                queue_action: false,
+                process_restart: false,
+                remote_file_write: false,
+                raw_log_read: false,
+                search_submit: false
+              },
+              writes_committed: false
+            }' > "$RUNNER_TEMP/$RECEIPT_FILE_NAME"
+
+      - name: Check out exact main control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Validate immutable SELECT-only inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/$RECEIPT_FILE_NAME"
+          receipt_tmp="${receipt}.tmp"
+          jq '.failed_check = "immutable_inputs"' "$receipt" > "$receipt_tmp"
+          mv "$receipt_tmp" "$receipt"
+          test "$GITHUB_REF" = "refs/heads/main"
+          [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$RELEASE_ID" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]
+          expected="I explicitly approve SELECT-only production RIASEC product baseline for active SHA ${EXPECTED_ACTIVE_REVISION} release ${RELEASE_ID} control SHA ${EXPECTED_CONTROL_PLANE_SHA} date window 2026-07-13 through 2026-08-09 org 0."
+          test "$OPERATOR_APPROVAL_PHRASE" = "$expected"
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          git cat-file -e "${EXPECTED_ACTIVE_REVISION}^{commit}"
+          git merge-base --is-ancestor "$EXPECTED_ACTIVE_REVISION" "$EXPECTED_CONTROL_PLANE_SHA"
+
+      - name: Set up pinned production SSH identity
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Validate protected production topology
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/$RECEIPT_FILE_NAME"
+          receipt_tmp="${receipt}.tmp"
+          jq '.failed_check = "production_topology"' "$receipt" > "$receipt_tmp"
+          mv "$receipt_tmp" "$receipt"
+          test -n "$SSH_KNOWN_HOSTS"
+          for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST RETIRED_DEPLOY_HOST DEPLOY_PATH; do
+            test -n "${!name:-}"
+          done
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          test "$DEPLOY_PORT" -ge 1
+          test "$DEPLOY_PORT" -le 65535
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$RETIRED_DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          [[ "$DEPLOY_PATH" != *".."* ]]
+          install -d -m 0700 ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 0600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Stream fixed SELECT-only reports without remote files
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/$RECEIPT_FILE_NAME"
+          receipt_tmp="${receipt}.tmp"
+          jq '.failed_check = "select_only_reports"' "$receipt" > "$receipt_tmp"
+          mv "$receipt_tmp" "$receipt"
+          run_dir="$RUNNER_TEMP/riasec-product-baseline"
+          mkdir -p artifacts
+          printf -v q_deploy_path '%q' "$DEPLOY_PATH"
+          printf -v q_active_revision '%q' "$EXPECTED_ACTIVE_REVISION"
+          printf -v q_release_id '%q' "$RELEASE_ID"
+          set +e
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "DEPLOY_PATH=$q_deploy_path EXPECTED_ACTIVE_REVISION=$q_active_revision RELEASE_ID=$q_release_id php" \
+            > "$run_dir/combined.json" 2> "$run_dir/remote.stderr" <<'PHP'
+          <?php
+          declare(strict_types=1);
+
+          use App\Services\Analytics\AnalyticsTrafficExclusionPolicy;
+          use App\Services\Analytics\MeasurementFailureCohortReadModel;
+          use App\Services\Analytics\MeasurementFunnelReadModel;
+          use App\Services\Analytics\SeoConversionDailyBuilder;
+          use Carbon\CarbonImmutable;
+          use Illuminate\Contracts\Console\Kernel;
+          use Illuminate\Support\Facades\DB;
+
+          function fail_closed(string $code): never
+          {
+              fwrite(STDERR, $code.PHP_EOL);
+              exit(1);
+          }
+
+          $deployPath = (string) getenv('DEPLOY_PATH');
+          $expectedRevision = (string) getenv('EXPECTED_ACTIVE_REVISION');
+          $expectedRelease = (string) getenv('RELEASE_ID');
+          if (! preg_match('#^/[A-Za-z0-9._/-]+$#', $deployPath)
+              || str_contains($deployPath, '..')
+              || ! preg_match('/^[0-9a-f]{40}$/', $expectedRevision)
+              || ! preg_match('/^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/', $expectedRelease)) {
+              fail_closed('INVALID_FIXED_INPUT');
+          }
+
+          $current = realpath($deployPath.'/current');
+          if ($current === false || basename($current) !== $expectedRelease) {
+              fail_closed('ACTIVE_RELEASE_MISMATCH');
+          }
+          $revisionFile = $current.'/REVISION';
+          if (! is_file($revisionFile) || trim((string) file_get_contents($revisionFile)) !== $expectedRevision) {
+              fail_closed('ACTIVE_REVISION_MISMATCH');
+          }
+          $runtime = $current.'/backend';
+          if (! is_file($runtime.'/vendor/autoload.php') || ! is_file($runtime.'/bootstrap/app.php')) {
+              fail_closed('ACTIVE_RUNTIME_MISSING');
+          }
+
+          require $runtime.'/vendor/autoload.php';
+          $app = require $runtime.'/bootstrap/app.php';
+          $app->make(Kernel::class)->bootstrap();
+          $connection = DB::connection();
+
+          $reportFailure = null;
+          try {
+              $connection->statement('SET TRANSACTION READ ONLY');
+              $connection->beginTransaction();
+
+              $forms = ['riasec_60', 'riasec_140'];
+              $byForm = [];
+              foreach ($forms as $form) {
+                  $byForm[$form] = [
+                      'test_start' => 0,
+                      'test_complete' => 0,
+                      'riasec_result_view' => 0,
+                  ];
+              }
+              $seoBuild = $app->make(SeoConversionDailyBuilder::class)->build(
+                  CarbonImmutable::parse('2026-07-13'),
+                  CarbonImmutable::parse('2026-08-09'),
+                  [0],
+              );
+              $landingView = 0;
+              $matchedSourceRows = 0;
+              $normalizeApprovedPath = static function (mixed $value): ?string {
+                  $candidate = trim((string) $value);
+                  if ($candidate === '') {
+                      return null;
+                  }
+                  $parts = parse_url($candidate);
+                  if (! is_array($parts)
+                      || array_key_exists('fragment', $parts)
+                      || array_key_exists('user', $parts)
+                      || array_key_exists('pass', $parts)
+                      || array_key_exists('port', $parts)) {
+                      return null;
+                  }
+                  $host = strtolower((string) ($parts['host'] ?? ''));
+                  $scheme = strtolower((string) ($parts['scheme'] ?? ''));
+                  if ($host !== '' && ($host !== 'fermatmind.com' || $scheme !== 'https')) {
+                      return null;
+                  }
+                  if ($host === '' && $scheme !== '') {
+                      return null;
+                  }
+                  $path = (string) ($parts['path'] ?? '');
+                  if (! str_starts_with($path, '/')) {
+                      return null;
+                  }
+
+                  return rtrim((string) preg_replace('#/+#', '/', $path), '/') ?: '/';
+              };
+              $canonicalPath = '/en/tests/holland-career-interest-test-riasec';
+              $takePath = $canonicalPath.'/take';
+              $trafficExclusion = $app->make(AnalyticsTrafficExclusionPolicy::class);
+              $scopedSourceEventCount = 0;
+              $sourceEvents = DB::table('events')
+                  ->where('org_id', 0)
+                  ->whereBetween('occurred_at', [
+                      CarbonImmutable::parse('2026-07-13')->startOfDay(),
+                      CarbonImmutable::parse('2026-08-09')->endOfDay(),
+                  ])
+                  ->whereRaw('lower(event_code) in (?,?,?,?)', [
+                      'landing_pv',
+                      'start_test',
+                      'complete_test',
+                      'view_result',
+                  ])
+                  ->select([
+                      'org_id',
+                      'event_code',
+                      'anon_id',
+                      'session_id',
+                      'request_id',
+                      'attempt_id',
+                      'meta_json',
+                      'locale',
+                      'scale_code',
+                  ])
+                  ->get();
+              foreach ($sourceEvents as $event) {
+                  $meta = json_decode((string) ($event->meta_json ?? ''), true);
+                  $meta = is_array($meta) ? $meta : [];
+                  if ($trafficExclusion->isExcludedSeoConversionEvent($event, $meta)) {
+                      continue;
+                  }
+                  $seo = is_array($meta['seo_conversion'] ?? null) ? $meta['seo_conversion'] : [];
+                  $eventCode = strtolower(trim((string) ($event->event_code ?? '')));
+                  $scale = trim((string) ($seo['scale_id'] ?? $event->scale_code ?? ''));
+                  $lang = strtolower(trim((string) ($seo['lang'] ?? $event->locale ?? '')));
+                  if ($lang !== 'en') {
+                      continue;
+                  }
+                  $form = trim((string) ($seo['form_id'] ?? $meta['form_code'] ?? ''));
+                  $urlPath = $normalizeApprovedPath($seo['url'] ?? null);
+                  $sourcePath = $normalizeApprovedPath($seo['source_url'] ?? null);
+                  $isScoped = match ($eventCode) {
+                      'landing_pv' => $urlPath === $canonicalPath,
+                      'start_test', 'complete_test' => $scale === 'RIASEC'
+                          && in_array($form, $forms, true)
+                          && ($urlPath === $takePath || $sourcePath === $canonicalPath),
+                      'view_result' => $scale === 'RIASEC'
+                          && in_array($form, $forms, true)
+                          && ($urlPath === $canonicalPath || $urlPath === $takePath || $sourcePath === $canonicalPath),
+                      default => false,
+                  };
+                  if ($isScoped) {
+                      $scopedSourceEventCount++;
+                  }
+              }
+              foreach ((array) ($seoBuild['rows'] ?? []) as $row) {
+                  if (($row['org_id'] ?? null) !== 0
+                      || ($row['lang'] ?? null) !== 'en') {
+                      continue;
+                  }
+                  $urlPath = $normalizeApprovedPath($row['url'] ?? null);
+                  $sourcePath = $normalizeApprovedPath($row['source_url'] ?? null);
+                  $landingAttributed = $urlPath === $canonicalPath;
+                  $downstreamAttributed = $urlPath === $takePath || $sourcePath === $canonicalPath;
+                  if ($landingAttributed) {
+                      $landingView += (int) ($row['landing_pv_count'] ?? 0);
+                  }
+                  if (($row['scale_id'] ?? null) !== 'RIASEC') {
+                      if ($landingAttributed) {
+                          $matchedSourceRows++;
+                      }
+                      continue;
+                  }
+                  $form = (string) ($row['form_id'] ?? '');
+                  if (! array_key_exists($form, $byForm)) {
+                      if ($landingAttributed) {
+                          $matchedSourceRows++;
+                      }
+                      continue;
+                  }
+                  if (! $landingAttributed && ! $downstreamAttributed) {
+                      continue;
+                  }
+                  $matchedSourceRows++;
+                  if ($downstreamAttributed) {
+                      $byForm[$form]['test_start'] += (int) ($row['start_test_count'] ?? 0);
+                      $byForm[$form]['test_complete'] += (int) ($row['complete_test_count'] ?? 0);
+                  }
+                  $byForm[$form]['riasec_result_view'] += (int) ($row['view_result_count'] ?? 0);
+              }
+              $scopedProjectedEventCount = $landingView;
+              foreach ($byForm as $formTotals) {
+                  $scopedProjectedEventCount += array_sum($formTotals);
+              }
+              if ($scopedProjectedEventCount !== $scopedSourceEventCount) {
+                  $reportFailure = 'SCOPED_SOURCE_RECONCILIATION_FAILED';
+                  throw new RuntimeException();
+              }
+              $landing = [
+                  'schema_version' => 'fermatmind.riasec-landing-product-funnel.v1',
+                  'ok' => true,
+                  'status' => 'pass',
+                  'from' => '2026-07-13',
+                  'to' => '2026-08-09',
+                  'org_id' => 0,
+                  'authority' => [
+                      'source_table' => 'events',
+                      'source_builder' => SeoConversionDailyBuilder::class,
+                      'materialized_table_used' => false,
+                      'unscoped_builder_skipped_rows' => (int) ($seoBuild['skipped_rows'] ?? 0),
+                      'scoped_source_event_count' => $scopedSourceEventCount,
+                      'scoped_projected_event_count' => $scopedProjectedEventCount,
+                      'scoped_source_reconciliation' => 'exact',
+                      'matched_source_rows' => $matchedSourceRows,
+                  ],
+                  'filters' => [
+                      'canonical_path' => '/en/tests/holland-career-interest-test-riasec',
+                      'take_path' => '/en/tests/holland-career-interest-test-riasec/take',
+                      'url_identity_policy' => 'root_relative_or_exact_https_fermatmind_origin_then_normalized_path',
+                      'approved_absolute_origins' => ['https://fermatmind.com'],
+                      'event_path_attribution' => [
+                          'landing_pv' => 'url canonical_path; form_id is not required',
+                          'start_test' => 'url take_path or source_url canonical_path',
+                          'complete_test' => 'url take_path or source_url canonical_path',
+                          'view_result' => 'url canonical_path, url take_path, or source_url canonical_path',
+                      ],
+                      'lang' => 'en',
+                      'scale_id' => 'RIASEC',
+                      'form_ids' => $forms,
+                  ],
+                  'totals' => ['landing_view' => $landingView],
+                  'by_form_code' => $byForm,
+                  'issues' => [],
+                  'read_only' => true,
+              ];
+
+              $funnel = $app->make(MeasurementFunnelReadModel::class)->report(
+                  0,
+                  '2026-07-13',
+                  '2026-08-09',
+                  ['RIASEC'],
+                  ['en'],
+              );
+              $funnelRows = array_values(array_filter(
+                  (array) ($funnel['rows'] ?? []),
+                  static fn (array $row): bool => in_array(
+                      data_get($row, 'dimensions.form_code'),
+                      $forms,
+                      true,
+                  ),
+              ));
+              $funnelMetrics = [
+                  'attempt_started_count',
+                  'test_completed_count',
+                  'result_ready_count',
+                  'result_ready_event_count',
+                  'result_ready_duplicate_event_count',
+              ];
+              $funnelTotals = array_fill_keys($funnelMetrics, 0);
+              foreach ($funnelRows as $row) {
+                  foreach ($funnelMetrics as $metric) {
+                      $funnelTotals[$metric] += (int) data_get($row, 'metrics.'.$metric, 0);
+                  }
+              }
+              $coverage = $funnelTotals['result_ready_duplicate_event_count'] > 0 ? 'duplicate' : 'complete';
+              if ($coverage === 'complete') {
+                  foreach ($funnelRows as $row) {
+                      if (data_get($row, 'metrics.result_ready_event_coverage_status') === 'partial') {
+                          $coverage = 'partial';
+                          break;
+                      }
+                  }
+              }
+              $funnelIssues = array_values(array_diff(
+                  (array) ($funnel['issues'] ?? []),
+                  ['result_ready_event_coverage_partial', 'result_ready_event_duplicates_detected'],
+              ));
+              if ($coverage === 'partial') {
+                  $funnelIssues[] = 'result_ready_event_coverage_partial';
+              } elseif ($coverage === 'duplicate') {
+                  $funnelIssues[] = 'result_ready_event_duplicates_detected';
+              }
+              $funnel['filters']['form_codes'] = $forms;
+              $funnel['rows'] = $funnelRows;
+              $funnel['row_count'] = count($funnelRows);
+              $funnel['totals'] = $funnelTotals + ['result_ready_event_coverage_status' => $coverage];
+              $funnel['issues'] = array_values(array_unique($funnelIssues));
+              $funnel['status'] = $funnel['issues'] === [] ? 'pass' : 'warning';
+              $failure = $app->make(MeasurementFailureCohortReadModel::class)->report(
+                  0,
+                  '2026-07-13',
+                  '2026-08-09',
+                  [
+                      'scale_code' => ['RIASEC'],
+                      'form_code' => $forms,
+                      'locale' => ['en'],
+                  ],
+              );
+              foreach ([$funnel, $failure] as $report) {
+                  if (($report['ok'] ?? false) !== true
+                      || ($report['read_only'] ?? false) !== true
+                      || ($report['org_id'] ?? null) !== 0
+                      || ($report['from'] ?? null) !== '2026-07-13'
+                      || ($report['to'] ?? null) !== '2026-08-09') {
+                      $reportFailure = 'REPORT_CONTRACT_MISMATCH';
+                      throw new RuntimeException();
+                  }
+              }
+              if (($funnel['status'] ?? null) !== 'pass'
+                  || ($funnel['issues'] ?? null) !== []
+                  || ! in_array(($failure['status'] ?? null), ['pass', 'empty'], true)
+                  || ($failure['issues'] ?? null) !== []) {
+                  $reportFailure = 'REPORT_HEALTH_UNACCEPTABLE';
+                  throw new RuntimeException();
+              }
+
+              $payload = [
+                  'schema_version' => 'fermatmind.production-riasec-product-baseline-source.v1',
+                  'active_revision' => $expectedRevision,
+                  'release_id' => $expectedRelease,
+                  'captured_at' => gmdate('Y-m-d\TH:i:s\Z'),
+                  'landing_and_product_funnel' => $landing,
+                  'attempt_result_funnel' => $funnel,
+                  'failure_cohorts' => $failure,
+                  'negative_guarantees' => [
+                      'database_write' => false,
+                      'cms_write' => false,
+                      'remote_file_write' => false,
+                  ],
+                  'writes_committed' => false,
+              ];
+              $json = json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+          } catch (Throwable) {
+              $reportFailure ??= 'SELECT_ONLY_REPORT_FAILED';
+          } finally {
+              if ($connection->transactionLevel() > 0) {
+                  $connection->rollBack();
+              }
+          }
+
+          if ($reportFailure !== null) {
+              fail_closed($reportFailure);
+          }
+
+          fwrite(STDOUT, $json.PHP_EOL);
+          PHP
+          remote_status="$?"
+          set -e
+          if [ "$remote_status" -ne 0 ]; then
+            safe_code="$(grep -E '^(INVALID_FIXED_INPUT|ACTIVE_RELEASE_MISMATCH|ACTIVE_REVISION_MISMATCH|ACTIVE_RUNTIME_MISSING|SCOPED_SOURCE_RECONCILIATION_FAILED|REPORT_CONTRACT_MISMATCH|REPORT_HEALTH_UNACCEPTABLE|SELECT_ONLY_REPORT_FAILED)$' "$run_dir/remote.stderr" | tail -n 1 || true)"
+            test -n "$safe_code" || safe_code="PRODUCTION_RIASEC_BASELINE_REMOTE_FAILED"
+            echo "::error::$safe_code"
+            exit 1
+          fi
+          test ! -s "$run_dir/remote.stderr"
+          jq -e '
+            .schema_version == "fermatmind.production-riasec-product-baseline-source.v1"
+            and .active_revision == env.EXPECTED_ACTIVE_REVISION
+            and .release_id == env.RELEASE_ID
+            and .landing_and_product_funnel.ok == true
+            and .landing_and_product_funnel.status == "pass"
+            and .landing_and_product_funnel.issues == []
+            and .landing_and_product_funnel.read_only == true
+            and .attempt_result_funnel.ok == true
+            and .attempt_result_funnel.status == "pass"
+            and .attempt_result_funnel.issues == []
+            and .attempt_result_funnel.read_only == true
+            and .failure_cohorts.ok == true
+            and (.failure_cohorts.status == "pass" or .failure_cohorts.status == "empty")
+            and .failure_cohorts.issues == []
+            and .failure_cohorts.read_only == true
+            and .negative_guarantees.database_write == false
+            and .negative_guarantees.cms_write == false
+            and .negative_guarantees.remote_file_write == false
+            and .writes_committed == false
+          ' "$run_dir/combined.json" >/dev/null
+          jq -S '.landing_and_product_funnel' "$run_dir/combined.json" > artifacts/landing-and-product-funnel.json
+          jq -S '.attempt_result_funnel' "$run_dir/combined.json" > artifacts/attempt-result-funnel.json
+          jq -S '.failure_cohorts' "$run_dir/combined.json" > artifacts/failure-cohorts.json
+
+      - name: Finalize sanitized immutable receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/$RECEIPT_FILE_NAME"
+          receipt_tmp="${receipt}.tmp"
+          run_dir="$RUNNER_TEMP/riasec-product-baseline"
+          landing_sha="$(sha256sum artifacts/landing-and-product-funnel.json | awk '{print $1}')"
+          funnel_sha="$(sha256sum artifacts/attempt-result-funnel.json | awk '{print $1}')"
+          failure_sha="$(sha256sum artifacts/failure-cohorts.json | awk '{print $1}')"
+          captured_at="$(jq -er '.captured_at' "$run_dir/combined.json")"
+          totals="$(jq -c '{
+            landing_view: .landing_and_product_funnel.totals.landing_view,
+            test_start_by_form_code: {
+              riasec_60: .landing_and_product_funnel.by_form_code.riasec_60.test_start,
+              riasec_140: .landing_and_product_funnel.by_form_code.riasec_140.test_start
+            },
+            test_complete_by_form_code: {
+              riasec_60: .landing_and_product_funnel.by_form_code.riasec_60.test_complete,
+              riasec_140: .landing_and_product_funnel.by_form_code.riasec_140.test_complete
+            },
+            riasec_result_view_by_form_code: {
+              riasec_60: .landing_and_product_funnel.by_form_code.riasec_60.riasec_result_view,
+              riasec_140: .landing_and_product_funnel.by_form_code.riasec_140.riasec_result_view
+            },
+            questions_load_failure: .failure_cohorts.cohorts.questions_load_failure.failed_attempt_count,
+            submit_failure: .failure_cohorts.cohorts.submit_failure.failed_attempt_count
+          }' "$run_dir/combined.json")"
+          jq \
+            --arg captured_at "$captured_at" \
+            --arg landing_sha "$landing_sha" \
+            --arg funnel_sha "$funnel_sha" \
+            --arg failure_sha "$failure_sha" \
+            --argjson source_health "$(jq -c '{
+              landing_and_product_funnel: (.landing_and_product_funnel | {ok, status, issues}),
+              attempt_result_funnel: (.attempt_result_funnel | {ok, status, issues}),
+              failure_cohorts: (.failure_cohorts | {ok, status, issues})
+            }' "$run_dir/combined.json")" \
+            --argjson totals "$totals" \
+            '.status = "PASS_PRODUCTION_RIASEC_PRODUCT_BASELINE"
+             | .checked_at = $captured_at
+             | .failed_check = null
+             | .source_report_sha256 = {
+                 landing_and_product_funnel: $landing_sha,
+                 attempt_result_funnel: $funnel_sha,
+                 failure_cohorts: $failure_sha
+               }
+             | .source_health = $source_health
+             | .totals = $totals' \
+            "$receipt" > "$receipt_tmp"
+          mv "$receipt_tmp" "$receipt"
+
+      - name: Remove runner-temporary raw captures
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f "$RUNNER_TEMP/riasec-product-baseline/remote.stderr" \
+            "$RUNNER_TEMP/riasec-product-baseline/combined.json"
+
+      - name: Stage sanitized receipt for artifact upload
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          cp "$RUNNER_TEMP/$RECEIPT_FILE_NAME" artifacts/backend-production-riasec-product-baseline-receipt.json
+
+      - name: Upload sanitized receipt
+        if: ${{ always() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: backend-production-riasec-product-baseline-receipt-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/backend-production-riasec-product-baseline-receipt.json
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload privacy-safe source reports
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: backend-production-riasec-product-baseline-reports-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            artifacts/landing-and-product-funnel.json
+            artifacts/attempt-result-funnel.json
+            artifacts/failure-cohorts.json
+          if-no-files-found: error
+          retention-days: 7
