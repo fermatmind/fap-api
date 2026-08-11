@@ -12,7 +12,7 @@ use Throwable;
 
 final class MeasurementFailureCohortReadModel
 {
-    public const SCHEMA_VERSION = 'fermatmind.measurement-failure-cohorts.v1';
+    public const SCHEMA_VERSION = 'fermatmind.measurement-failure-cohorts.v2';
 
     public const TASK = 'FERMATMIND-SEO-MEASUREMENT-FAILURE-COHORTS-01';
 
@@ -27,11 +27,15 @@ final class MeasurementFailureCohortReadModel
      * @param  array<string, list<string>>  $requestedFilters
      * @return array<string, mixed>
      */
-    public function report(string $from, string $to, array $requestedFilters = []): array
+    public function report(int $orgId, string $from, string $to, array $requestedFilters = []): array
     {
         $fromDate = $this->date($from);
         $toDate = $this->date($to);
         $issues = [];
+
+        if ($orgId < 0) {
+            $issues[] = 'org_id_invalid';
+        }
 
         if ($fromDate === null) {
             $issues[] = 'from_date_invalid';
@@ -59,14 +63,14 @@ final class MeasurementFailureCohortReadModel
         }
 
         if ($issues !== [] || $fromDate === null || $toDate === null || $filters === false) {
-            return $this->blocked($from, $to, $issues);
+            return $this->blocked($orgId, $from, $to, $issues);
         }
 
         $fromAt = $fromDate->startOfDay();
         $toAt = $toDate->endOfDay();
-        $attempts = $this->eligibleAttempts($fromAt, $toAt, $filters);
-        $resultReadyAt = $this->validResultReadyAt($attempts->keys()->all(), $toAt);
-        $events = $this->failureEvents($fromAt, $toAt, $filters);
+        $attempts = $this->eligibleAttempts($orgId, $fromAt, $toAt, $filters);
+        $resultReadyAt = $this->validResultReadyAt($orgId, $attempts->keys()->all(), $toAt);
+        $events = $this->failureEvents($orgId, $fromAt, $toAt, $filters);
         $eventDimensionFiltersActive = $this->eventDimensionFiltersActive($filters);
 
         if ($eventDimensionFiltersActive) {
@@ -109,6 +113,7 @@ final class MeasurementFailureCohortReadModel
             'issues' => array_values(array_unique($issues)),
             'from' => $fromDate->toDateString(),
             'to' => $toDate->toDateString(),
+            'org_id' => $orgId,
             'filters' => $filters,
             'source_tables' => self::REQUIRED_TABLES,
             'minimum_cohort_size' => MeasurementFailureEventContract::MINIMUM_COHORT_SIZE,
@@ -123,7 +128,7 @@ final class MeasurementFailureCohortReadModel
      * @param  array<string, list<string>>  $filters
      * @return Collection<string, object>
      */
-    private function eligibleAttempts(CarbonImmutable $fromAt, CarbonImmutable $toAt, array $filters): Collection
+    private function eligibleAttempts(int $orgId, CarbonImmutable $fromAt, CarbonImmutable $toAt, array $filters): Collection
     {
         $rows = DB::table('attempts')->select([
             'id',
@@ -134,7 +139,8 @@ final class MeasurementFailureCohortReadModel
             'answers_summary_json',
             'started_at',
             'submitted_at',
-        ])->whereBetween('started_at', [$fromAt, $toAt])
+        ])->where('org_id', $orgId)
+            ->whereBetween('started_at', [$fromAt, $toAt])
             ->orderBy('id')
             ->get();
 
@@ -149,7 +155,7 @@ final class MeasurementFailureCohortReadModel
      * @param  list<string>  $attemptIds
      * @return array<string, CarbonImmutable>
      */
-    private function validResultReadyAt(array $attemptIds, CarbonImmutable $toAt): array
+    private function validResultReadyAt(int $orgId, array $attemptIds, CarbonImmutable $toAt): array
     {
         if ($attemptIds === []) {
             return [];
@@ -159,6 +165,7 @@ final class MeasurementFailureCohortReadModel
         foreach (array_chunk($attemptIds, 500) as $chunk) {
             $rows = DB::table('results')
                 ->select(['attempt_id', 'computed_at'])
+                ->where('org_id', $orgId)
                 ->whereIn('attempt_id', $chunk)
                 ->where('is_valid', true)
                 ->whereNotNull('computed_at')
@@ -182,10 +189,11 @@ final class MeasurementFailureCohortReadModel
      * @param  array<string, list<string>>  $filters
      * @return Collection<int, array<string, mixed>>
      */
-    private function failureEvents(CarbonImmutable $fromAt, CarbonImmutable $toAt, array $filters): Collection
+    private function failureEvents(int $orgId, CarbonImmutable $fromAt, CarbonImmutable $toAt, array $filters): Collection
     {
         return DB::table('events')
             ->select(['id', 'event_code', 'attempt_id', 'meta_json', 'occurred_at', 'scale_code', 'locale', 'client_platform'])
+            ->where('org_id', $orgId)
             ->whereIn('event_code', MeasurementFailureEventContract::EVENT_NAMES)
             ->whereBetween('occurred_at', [$fromAt, $toAt])
             ->orderBy('occurred_at')
@@ -636,7 +644,7 @@ final class MeasurementFailureCohortReadModel
      * @param  list<string>  $issues
      * @return array<string, mixed>
      */
-    private function blocked(string $from, string $to, array $issues): array
+    private function blocked(int $orgId, string $from, string $to, array $issues): array
     {
         return [
             'schema_version' => self::SCHEMA_VERSION,
@@ -648,6 +656,7 @@ final class MeasurementFailureCohortReadModel
             'issues' => array_values(array_unique($issues)),
             'from' => $from,
             'to' => $to,
+            'org_id' => $orgId >= 0 ? $orgId : null,
             'rows' => [],
             'cohorts' => [],
             'read_only' => true,

@@ -40,7 +40,7 @@ final class MeasurementFailureCohortReadModelTest extends TestCase
         $this->insertFailureEvent($attemptIds[0], $day->addHour()->addMinutes(5), 'submit_failure');
 
         $before = $this->tableCounts();
-        $report = app(MeasurementFailureCohortReadModel::class)->report('2026-08-10', '2026-08-10');
+        $report = app(MeasurementFailureCohortReadModel::class)->report(81, '2026-08-10', '2026-08-10');
 
         $this->assertTrue($report['ok'] ?? false);
         $this->assertSame('warning', $report['status'] ?? null);
@@ -75,9 +75,9 @@ final class MeasurementFailureCohortReadModelTest extends TestCase
         $day = CarbonImmutable::parse('2026-08-10 08:00:00');
         $attemptId = (string) Str::uuid();
         $this->insertAttempt($attemptId, 82, 'en', $day->addHours(2), null);
-        $this->insertFailureEvent($attemptId, $day->addHour(), 'questions_load_failure');
+        $this->insertFailureEvent($attemptId, $day->addHour(), 'questions_load_failure', orgId: 82);
 
-        $report = app(MeasurementFailureCohortReadModel::class)->report('2026-08-10', '2026-08-10');
+        $report = app(MeasurementFailureCohortReadModel::class)->report(82, '2026-08-10', '2026-08-10');
 
         $this->assertSame(1, data_get($report, 'cohorts.questions_load_failure.eventual_success_attempt_count'));
         $this->assertSame(0, data_get($report, 'cohorts.questions_load_failure.terminal_failure_attempt_count'));
@@ -89,9 +89,9 @@ final class MeasurementFailureCohortReadModelTest extends TestCase
         $day = CarbonImmutable::parse('2026-08-10 08:00:00');
         $attemptId = (string) Str::uuid();
         $this->insertAttempt($attemptId, 82, 'en', $day, null);
-        $this->insertFailureEvent(null, $day->addHour(), 'questions_load_failure');
+        $this->insertFailureEvent(null, $day->addHour(), 'questions_load_failure', orgId: 82);
 
-        $report = app(MeasurementFailureCohortReadModel::class)->report('2026-08-10', '2026-08-10');
+        $report = app(MeasurementFailureCohortReadModel::class)->report(82, '2026-08-10', '2026-08-10');
 
         $this->assertSame('warning', $report['status'] ?? null);
         $this->assertSame(1, data_get($report, 'cohorts.questions_load_failure.eligible_attempt_count'));
@@ -106,9 +106,9 @@ final class MeasurementFailureCohortReadModelTest extends TestCase
         $day = CarbonImmutable::parse('2026-08-10 08:00:00');
         $attemptId = (string) Str::uuid();
         $this->insertAttempt($attemptId, 83, 'en', $day, $day->addHours(2));
-        $this->insertFailureEvent($attemptId, $day->addHour(), 'submit_failure');
+        $this->insertFailureEvent($attemptId, $day->addHour(), 'submit_failure', orgId: 83);
 
-        $report = app(MeasurementFailureCohortReadModel::class)->report('2026-08-10', '2026-08-10', [
+        $report = app(MeasurementFailureCohortReadModel::class)->report(83, '2026-08-10', '2026-08-10', [
             'status_group' => ['server_5xx'],
         ]);
 
@@ -129,7 +129,7 @@ final class MeasurementFailureCohortReadModelTest extends TestCase
         DB::table('attempts')->where('id', $attemptId)->update([
             'answers_summary_json' => json_encode(['meta' => ['form_code' => 'mbti_93']]),
         ]);
-        $this->insertFailureEvent($attemptId, $day->addHour(), 'submit_failure');
+        $this->insertFailureEvent($attemptId, $day->addHour(), 'submit_failure', orgId: 83);
 
         $matchingFilters = [
             'scale_code' => 'MBTI',
@@ -142,13 +142,13 @@ final class MeasurementFailureCohortReadModelTest extends TestCase
             'error_class' => 'server_error',
         ];
         foreach ($matchingFilters as $field => $value) {
-            $report = app(MeasurementFailureCohortReadModel::class)->report('2026-08-10', '2026-08-10', [
+            $report = app(MeasurementFailureCohortReadModel::class)->report(83, '2026-08-10', '2026-08-10', [
                 $field => [$value],
             ]);
             $this->assertSame(1, data_get($report, 'cohorts.submit_failure.failed_attempt_count'), $field);
         }
 
-        $noMatch = app(MeasurementFailureCohortReadModel::class)->report('2026-08-10', '2026-08-10', [
+        $noMatch = app(MeasurementFailureCohortReadModel::class)->report(83, '2026-08-10', '2026-08-10', [
             'browser_class' => ['firefox'],
         ]);
         $this->assertSame(0, data_get($noMatch, 'cohorts.submit_failure.failed_attempt_count'));
@@ -161,10 +161,10 @@ final class MeasurementFailureCohortReadModelTest extends TestCase
         foreach (range(1, 6) as $index) {
             $attemptId = (string) Str::uuid();
             $this->insertAttempt($attemptId, 84, 'en', $day, null);
-            $this->insertFailureEvent($attemptId, $day->addHour(), 'submit_failure', $index === 6 ? 'safari' : 'chrome');
+            $this->insertFailureEvent($attemptId, $day->addHour(), 'submit_failure', $index === 6 ? 'safari' : 'chrome', 84);
         }
 
-        $report = app(MeasurementFailureCohortReadModel::class)->report('2026-08-10', '2026-08-10');
+        $report = app(MeasurementFailureCohortReadModel::class)->report(84, '2026-08-10', '2026-08-10');
 
         $this->assertSame(1, $report['row_count'] ?? null);
         $this->assertTrue((bool) data_get($report, 'rows.0.suppressed'));
@@ -174,18 +174,18 @@ final class MeasurementFailureCohortReadModelTest extends TestCase
 
     public function test_empty_data_is_success_but_invalid_filters_and_missing_tables_are_blocked(): void
     {
-        $empty = app(MeasurementFailureCohortReadModel::class)->report('2026-08-10', '2026-08-10');
+        $empty = app(MeasurementFailureCohortReadModel::class)->report(999, '2026-08-10', '2026-08-10');
         $this->assertTrue($empty['ok'] ?? false);
         $this->assertSame('empty', $empty['status'] ?? null);
 
-        $invalid = app(MeasurementFailureCohortReadModel::class)->report('2026-08-10', '2026-08-10', [
+        $invalid = app(MeasurementFailureCohortReadModel::class)->report(999, '2026-08-10', '2026-08-10', [
             'browser_class' => ['private browser'],
         ]);
         $this->assertFalse($invalid['ok'] ?? true);
         $this->assertContains('filter_invalid', $invalid['issues'] ?? []);
 
         Schema::drop('events');
-        $missing = app(MeasurementFailureCohortReadModel::class)->report('2026-08-10', '2026-08-10');
+        $missing = app(MeasurementFailureCohortReadModel::class)->report(999, '2026-08-10', '2026-08-10');
         $this->assertFalse($missing['ok'] ?? true);
         $this->assertContains('events_missing', $missing['issues'] ?? []);
     }
@@ -195,21 +195,25 @@ final class MeasurementFailureCohortReadModelTest extends TestCase
         $day = CarbonImmutable::parse('2026-08-10 08:00:00');
         $attemptId = (string) Str::uuid();
         $this->insertAttempt($attemptId, 85, 'en', $day, null);
-        $this->insertFailureEvent($attemptId, $day->addHour(), 'submit_failure');
+        $this->insertFailureEvent($attemptId, $day->addHour(), 'submit_failure', orgId: 85);
         $before = $this->databaseSnapshot();
         $exitCode = Artisan::call('analytics:measurement-failure-cohorts-report', [
             '--from' => '2026-08-10',
             '--to' => '2026-08-10',
+            '--org' => '85',
             '--scale' => ['MBTI'],
             '--json' => true,
         ]);
         $this->assertSame(0, $exitCode);
-        $this->assertStringContainsString('"read_only": true', Artisan::output());
+        $output = Artisan::output();
+        $this->assertStringContainsString('"read_only": true', $output);
+        $this->assertStringContainsString('"org_id": 85', $output);
         $this->assertSame($before, $this->databaseSnapshot());
 
         $invalidExitCode = Artisan::call('analytics:measurement-failure-cohorts-report', [
             '--from' => '2026-08-11',
             '--to' => '2026-08-10',
+            '--org' => '85',
             '--json' => true,
         ]);
         $this->assertSame(1, $invalidExitCode);
@@ -217,13 +221,52 @@ final class MeasurementFailureCohortReadModelTest extends TestCase
         $this->assertSame($before, $this->databaseSnapshot());
     }
 
-    private function insertFailureEvent(?string $attemptId, CarbonImmutable $occurredAt, string $eventName, string $browserClass = 'chrome'): void
+    public function test_report_and_command_require_an_exact_organization_scope(): void
     {
+        $day = CarbonImmutable::parse('2026-08-10 08:00:00');
+        $globalAttemptId = (string) Str::uuid();
+        $tenantAttemptId = (string) Str::uuid();
+        $this->insertAttempt($globalAttemptId, 0, 'en', $day, null);
+        $this->insertAttempt($tenantAttemptId, 81, 'en', $day, null);
+        $this->insertFailureEvent($globalAttemptId, $day->addHour(), 'submit_failure', orgId: 0);
+        $this->insertFailureEvent($tenantAttemptId, $day->addHour(), 'submit_failure', orgId: 81);
+
+        $global = app(MeasurementFailureCohortReadModel::class)->report(0, '2026-08-10', '2026-08-10');
+        $tenant = app(MeasurementFailureCohortReadModel::class)->report(81, '2026-08-10', '2026-08-10');
+
+        $this->assertSame(0, $global['org_id'] ?? null);
+        $this->assertSame(1, data_get($global, 'cohorts.submit_failure.eligible_attempt_count'));
+        $this->assertSame(1, data_get($global, 'cohorts.submit_failure.failed_attempt_count'));
+        $this->assertSame(81, $tenant['org_id'] ?? null);
+        $this->assertSame(1, data_get($tenant, 'cohorts.submit_failure.eligible_attempt_count'));
+        $this->assertSame(1, data_get($tenant, 'cohorts.submit_failure.failed_attempt_count'));
+
+        $exitCode = Artisan::call('analytics:measurement-failure-cohorts-report', [
+            '--from' => '2026-08-10',
+            '--to' => '2026-08-10',
+            '--json' => true,
+        ]);
+        $this->assertSame(1, $exitCode);
+        $this->assertStringContainsString('org_id_invalid', Artisan::output());
+
+        $invalid = app(MeasurementFailureCohortReadModel::class)->report(-1, '2026-08-10', '2026-08-10');
+        $this->assertFalse($invalid['ok'] ?? true);
+        $this->assertNull($invalid['org_id'] ?? null);
+        $this->assertContains('org_id_invalid', $invalid['issues'] ?? []);
+    }
+
+    private function insertFailureEvent(
+        ?string $attemptId,
+        CarbonImmutable $occurredAt,
+        string $eventName,
+        string $browserClass = 'chrome',
+        int $orgId = 81,
+    ): void {
         $row = [
             'id' => (string) Str::uuid(),
             'event_code' => $eventName,
             'event_name' => $eventName,
-            'org_id' => 81,
+            'org_id' => $orgId,
             'anon_id' => 'anon-private',
             'request_id' => 'request-private',
             'attempt_id' => $attemptId,

@@ -13,6 +13,7 @@ final class MeasurementFailureCohortsReportCommand extends Command
     protected $signature = 'analytics:measurement-failure-cohorts-report
         {--from= : Required inclusive report date, YYYY-MM-DD}
         {--to= : Required inclusive report date, YYYY-MM-DD}
+        {--org= : Required non-negative organization id}
         {--scale=* : Optional repeatable scale-code filter}
         {--form=* : Optional repeatable form-code filter}
         {--locale=* : Optional repeatable locale filter}
@@ -23,12 +24,30 @@ final class MeasurementFailureCohortsReportCommand extends Command
         {--error=* : Optional repeatable safe error-class filter}
         {--json : Emit machine-readable JSON}';
 
-    protected $description = 'Read privacy-safe assessment failure cohorts without database or external writes.';
+    protected $description = 'Read organization-scoped privacy-safe assessment failure cohorts without database or external writes.';
 
     public function handle(MeasurementFailureCohortReadModel $readModel): int
     {
+        $orgId = $this->orgId();
+        if ($orgId === null) {
+            $this->emit([
+                'schema_version' => MeasurementFailureCohortReadModel::SCHEMA_VERSION,
+                'task' => MeasurementFailureCohortReadModel::TASK,
+                'ok' => false,
+                'status' => 'blocked',
+                'issues' => ['org_id_invalid'],
+                'org_id' => null,
+                'rows' => [],
+                'cohorts' => [],
+                'read_only' => true,
+            ]);
+
+            return self::FAILURE;
+        }
+
         try {
             $report = $readModel->report(
+                $orgId,
                 (string) $this->option('from'),
                 (string) $this->option('to'),
                 [
@@ -49,12 +68,21 @@ final class MeasurementFailureCohortsReportCommand extends Command
                 'ok' => false,
                 'status' => 'blocked',
                 'issues' => ['measurement_failure_cohort_read_failed'],
+                'org_id' => $orgId,
                 'rows' => [],
                 'cohorts' => [],
                 'read_only' => true,
             ];
         }
 
+        $this->emit($report);
+
+        return ($report['ok'] ?? false) === true ? self::SUCCESS : self::FAILURE;
+    }
+
+    /** @param array<string, mixed> $report */
+    private function emit(array $report): void
+    {
         if ((bool) $this->option('json')) {
             $this->line((string) json_encode(
                 $report,
@@ -87,8 +115,15 @@ final class MeasurementFailureCohortsReportCommand extends Command
                 $this->line('issue='.(string) $issue);
             }
         }
+    }
 
-        return ($report['ok'] ?? false) === true ? self::SUCCESS : self::FAILURE;
+    private function orgId(): ?int
+    {
+        $value = filter_var(trim((string) $this->option('org')), FILTER_VALIDATE_INT, [
+            'options' => ['min_range' => 0],
+        ]);
+
+        return is_int($value) ? $value : null;
     }
 
     /** @return list<string> */
