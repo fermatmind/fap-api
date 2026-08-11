@@ -105411,7 +105411,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "The review-fix heavy-guarded full backend/scripts/ci_verify_mbti.sh chain exited 0 after the initial full pass. Focused activation/staging/reconciliation/loader coverage passed 5 tests plus 18 known missing-.env warnings / 275 assertions; the activation test itself passed with 72 assertions. actionlint, Pint --test, PHP syntax, frozen contract verification, train YAML/JSON parsing, 253-line route listing, fresh SQLite migration, exact six-path scope and diff checks passed."
+        "evidence": "Both review-fix heavy-guarded full backend/scripts/ci_verify_mbti.sh runs exited 0 after the initial full pass. Final focused activation/staging/reconciliation/loader coverage passed 5 tests plus 18 known missing-.env warnings / 277 assertions; the activation test itself passed with 74 assertions and exercised strict canonical lineage. actionlint, Pint --test, PHP syntax, frozen contract verification, train YAML/JSON parsing, 253-line route listing, fresh SQLite migration, exact six-path scope and diff checks passed."
       },
       "scope": {
         "status": "passed",
@@ -105462,8 +105462,13 @@
         "at": "2026-08-12T06:19:13+08:00",
         "status": "review_fixes_validated",
         "note": "Repaired all three current-head review findings: the pointer now uses the loader's projection/ledger descriptor identities and paths, carries created_at plus activation:<generation> identity, and publishes a byte-identical immutable generation pointer before exactly one root pointer switch. The focused loader-backed suite passed 5 tests plus 18 known missing-.env warnings / 275 assertions, and the complete heavy-guarded ci_verify_mbti chain exited 0 again. Generated Big Five compiled files were restored. No workflow was dispatched and no SSH or controlled external state was accessed or mutated."
+      },
+      {
+        "at": "2026-08-12T06:37:54+08:00",
+        "status": "review_fix_validated",
+        "note": "The current-head Codex review identified that strict lineage validation compares the canonical previous-pointer document hash while the activation control used the raw-byte drift hash. The runner now preserves the raw hash for exact pre-switch drift checks and writes the canonical document hash into lineage/rollback. A deliberately pretty-printed bootstrap pointer proves the hashes differ, and CareerGenerationAuthorityLoader::loadStrict validates the complete lineage. The focused suite passed 5 tests plus 18 known missing-.env warnings / 277 assertions and the complete heavy-guarded ci_verify_mbti chain exited 0 again. Generated Big Five compiled files were restored. No workflow was dispatched and no controlled external state was accessed or mutated."
       }
     ],
-    "updated_at": "2026-08-12T06:19:13+08:00"
+    "updated_at": "2026-08-12T06:37:54+08:00"
   }
 }

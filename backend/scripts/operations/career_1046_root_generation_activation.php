@@ -178,6 +178,7 @@ final class Career1046RootGenerationActivation
             throw new Career1046RootActivationFailure('PREVIOUS_POINTER_SHA256_MISMATCH');
         }
         $active = self::decodePointer($activeRaw, 'ACTIVE_POINTER_INVALID');
+        $activeCanonicalSha256 = self::canonicalSha($active);
         $payload = $active['payload'];
         $counts = $payload['counts'] ?? null;
         $discoverability = $payload['discoverability'] ?? null;
@@ -202,6 +203,7 @@ final class Career1046RootGenerationActivation
             'active_path' => $activePath,
             'active_sha256_before' => $activeSha256,
             'active_sha256_after' => $activeSha256,
+            'previous_pointer_canonical_sha256' => $activeCanonicalSha256,
             'rollback_pointer_sha256' => hash('sha256', $rollbackRaw),
             'previous_generation_id' => $expected['previous_generation_id'],
         ];
@@ -404,7 +406,7 @@ final class Career1046RootGenerationActivation
         array $database,
         string $preflightSha,
     ): array {
-        $pointer = self::pointerDocument($expected, $generation, $database, $preflightSha);
+        $pointer = self::pointerDocument($expected, $current, $generation, $database, $preflightSha);
         $bytes = self::canonicalJson($pointer)."\n";
         $pointerSha = hash('sha256', $bytes);
         $suffix = $expected['workflow_run_id'].'.'.$expected['workflow_run_attempt'];
@@ -528,8 +530,13 @@ final class Career1046RootGenerationActivation
     }
 
     /** @return array<string, mixed> */
-    public static function pointerDocument(array $expected, array $generation, array $database, string $preflightSha): array
-    {
+    public static function pointerDocument(
+        array $expected,
+        array $current,
+        array $generation,
+        array $database,
+        string $preflightSha,
+    ): array {
         $generationId = (string) $expected['generation_id'];
         $artifactDefinitions = [
             'candidate_receipt' => ['candidate-receipt.json', 'career-1046-candidate-receipt@'.$generationId],
@@ -566,7 +573,7 @@ final class Career1046RootGenerationActivation
             ],
             'lineage' => [
                 'previous_generation_id' => $expected['previous_generation_id'],
-                'previous_pointer_sha256' => $expected['previous_pointer_sha256'],
+                'previous_pointer_sha256' => $current['previous_pointer_canonical_sha256'],
             ],
             'timestamps' => [
                 'created_at' => $expected['activation_timestamp'],
@@ -590,7 +597,7 @@ final class Career1046RootGenerationActivation
             'rollback' => [
                 'eligible' => true,
                 'previous_generation_id' => $expected['previous_generation_id'],
-                'previous_pointer_sha256' => $expected['previous_pointer_sha256'],
+                'previous_pointer_sha256' => $current['previous_pointer_canonical_sha256'],
                 'pointer_path' => 'generations/'.$expected['previous_generation_id'].'/generation-pointer.json',
             ],
             'discoverability' => [

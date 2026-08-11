@@ -23,6 +23,8 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
 
     private string $privateRoot;
 
+    private string $originalStoragePath;
+
     /** @var array<string, mixed> */
     private array $expected;
 
@@ -34,6 +36,8 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
         parent::setUp();
 
         $this->root = sys_get_temp_dir().'/career-1046-root-activation-'.bin2hex(random_bytes(8));
+        $this->originalStoragePath = $this->app->storagePath();
+        $this->app->useStoragePath($this->root.'/storage');
         $this->privateRoot = $this->root.'/storage/app/private';
         $release = $this->root.'/releases/release-1046';
         File::ensureDirectoryExists($release.'/backend');
@@ -43,25 +47,79 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
         $previous = 'career-current-342-30-bootstrap-v1';
         File::ensureDirectoryExists($authorityRoot.'/generations/'.$previous);
 
+        $fixture = $this->candidateFixture();
+        $candidate = (new Career1046ImmutableCandidateGenerator)->generate(...$fixture);
+        $baseline = $fixture['baselineAuthoritySlugs'];
+        $previousLedger = $fixture['ledger'];
+        $previousLedger['public_resolution']['rows'] = array_values(array_filter(
+            $previousLedger['public_resolution']['rows'],
+            static fn (array $row): bool => in_array($row['source_slug'], $baseline, true),
+        ));
+        $previousProjection = (new CareerRuntimePublishProjectionService)->buildFromLedgerArray($previousLedger);
+        $projectionRelativePath = 'career_runtime_publish_projection/'.$previous.'/career-runtime-publish-projection.json';
+        $ledgerRelativePath = 'career_release_ledger/'.$previous.'/career-full-release-ledger.json';
+        File::ensureDirectoryExists(dirname($this->privateRoot.'/'.$projectionRelativePath));
+        File::ensureDirectoryExists(dirname($this->privateRoot.'/'.$ledgerRelativePath));
+        $projectionBytes = CareerGenerationCanonicalJson::encode($previousProjection)."\n";
+        $ledgerBytes = CareerGenerationCanonicalJson::encode($previousLedger)."\n";
+        File::put($this->privateRoot.'/'.$projectionRelativePath, $projectionBytes);
+        File::put($this->privateRoot.'/'.$ledgerRelativePath, $ledgerBytes);
+        $localeRows = [];
+        foreach ($baseline as $slug) {
+            $localeRows[] = $slug.'|en';
+            $localeRows[] = $slug.'|zh';
+        }
         $payload = [
             'generation_id' => $previous,
+            'artifact_format' => 'legacy_exact_bytes_v1',
+            'artifacts' => [
+                'projection' => [
+                    'identity' => 'career-runtime-publish-projection@'.$previous,
+                    'path' => $projectionRelativePath,
+                    'sha256' => hash('sha256', $projectionBytes),
+                ],
+                'ledger' => [
+                    'identity' => 'career-full-release-ledger@'.$previous,
+                    'path' => $ledgerRelativePath,
+                    'sha256' => hash('sha256', $ledgerBytes),
+                ],
+            ],
+            'authority' => [
+                'frozen_manifest_sha256' => Career1046ImmutableCandidateGenerator::MANIFEST_SHA256,
+                'target_slug_set_sha256' => CareerGenerationCanonicalJson::setSha256($baseline),
+                'target_locale_row_set_sha256' => CareerGenerationCanonicalJson::setSha256($localeRows),
+                'receipt_set_sha256' => Career1046ImmutableCandidateGenerator::RECEIPT_SET_SHA256,
+            ],
             'counts' => ['public_slug_count' => 30, 'public_locale_row_count' => 60],
+            'lineage' => ['previous_generation_id' => null, 'previous_pointer_sha256' => null],
+            'timestamps' => [
+                'created_at' => '2026-08-11T00:00:00Z',
+                'activated_at' => '2026-08-11T00:00:00Z',
+            ],
+            'activation_receipt' => [
+                'identity' => 'activation:'.$previous,
+                'sha256' => str_repeat('9', 64),
+            ],
+            'rollback' => ['eligible' => false, 'previous_generation_id' => null],
             'discoverability' => [
                 'sitemap_mutated' => false,
                 'llms_mutated' => false,
                 'search_mutated' => false,
             ],
+            'revocation_receipt' => null,
         ];
         $pointer = [
             'schema_version' => 'career.generation_pointer.v1',
             'payload_sha256' => hash('sha256', CareerGenerationCanonicalJson::encode($payload)),
             'payload' => $payload,
         ];
-        $pointerBytes = CareerGenerationCanonicalJson::encode($pointer)."\n";
+        $pointerBytes = json_encode(
+            $pointer,
+            JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE,
+        )."\n";
         File::put($authorityRoot.'/active-generation.json', $pointerBytes);
         File::put($authorityRoot.'/generations/'.$previous.'/generation-pointer.json', $pointerBytes);
 
-        $candidate = (new Career1046ImmutableCandidateGenerator)->generate(...$this->candidateFixture());
         $generationRoot = $authorityRoot.'/generations/'.$candidate['generation_id'];
         File::ensureDirectoryExists($generationRoot);
         $documentHashes = [];
@@ -107,6 +165,7 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
 
     protected function tearDown(): void
     {
+        $this->app->useStoragePath($this->originalStoragePath);
         if (is_link($this->root.'/current')) {
             unlink($this->root.'/current');
         }
@@ -163,15 +222,24 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
         );
         self::assertSame('2026-08-12T00:00:00Z', $active['payload']['timestamps']['created_at']);
         self::assertSame('2026-08-12T00:00:00Z', $active['payload']['timestamps']['activated_at']);
+        self::assertNotSame(
+            $this->expected['previous_pointer_sha256'],
+            $active['payload']['lineage']['previous_pointer_sha256'],
+        );
+        $previousDocument = json_decode(
+            (string) file_get_contents($this->privateRoot.'/career_generation_authority/generations/'
+                .$this->expected['previous_generation_id'].'/generation-pointer.json'),
+            true,
+            512,
+            JSON_THROW_ON_ERROR,
+        );
+        self::assertSame(
+            CareerGenerationCanonicalJson::sha256($previousDocument),
+            $active['payload']['lineage']['previous_pointer_sha256'],
+        );
 
         $loader = new CareerGenerationAuthorityLoader;
-        $loadFromPointer = new \ReflectionMethod($loader, 'loadFromPointer');
-        $loaded = $loadFromPointer->invoke(
-            $loader,
-            $this->privateRoot.'/career_generation_authority',
-            $activePath,
-            false,
-        );
+        $loaded = $loader->loadStrict();
         self::assertSame($this->expected['generation_id'], $loaded['pointer']['generation_id']);
         self::assertCount(2092, $loaded['projection']['items']);
     }
