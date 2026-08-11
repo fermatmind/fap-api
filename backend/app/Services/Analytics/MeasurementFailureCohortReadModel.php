@@ -21,6 +21,7 @@ final class MeasurementFailureCohortReadModel
 
     public function __construct(
         private readonly MeasurementAttributionDimensions $dimensions,
+        private readonly AnalyticsTrafficExclusionPolicy $trafficExclusionPolicy,
     ) {}
 
     /**
@@ -132,6 +133,7 @@ final class MeasurementFailureCohortReadModel
     {
         $rows = DB::table('attempts')->select([
             'id',
+            'anon_id',
             'scale_code',
             'locale',
             'client_platform',
@@ -145,6 +147,9 @@ final class MeasurementFailureCohortReadModel
             ->get();
 
         return $rows->filter(function (object $attempt) use ($filters): bool {
+            if ($this->trafficExclusionPolicy->isExcludedAttemptRow($attempt)) {
+                return false;
+            }
             $safe = $this->attemptDimensions($attempt);
 
             return $this->matches($safe, $filters, ['scale_code', 'form_code', 'locale', 'device_class']);
@@ -192,7 +197,7 @@ final class MeasurementFailureCohortReadModel
     private function failureEvents(int $orgId, CarbonImmutable $fromAt, CarbonImmutable $toAt, array $filters): Collection
     {
         return DB::table('events')
-            ->select(['id', 'event_code', 'attempt_id', 'meta_json', 'occurred_at', 'scale_code', 'locale', 'client_platform'])
+            ->select(['id', 'event_code', 'attempt_id', 'anon_id', 'session_id', 'request_id', 'meta_json', 'occurred_at', 'scale_code', 'locale', 'client_platform'])
             ->where('org_id', $orgId)
             ->whereIn('event_code', MeasurementFailureEventContract::EVENT_NAMES)
             ->whereBetween('occurred_at', [$fromAt, $toAt])
@@ -201,6 +206,9 @@ final class MeasurementFailureCohortReadModel
             ->get()
             ->map(function (object $event): array {
                 $meta = $this->decodeArray($event->meta_json ?? null);
+                if ($this->trafficExclusionPolicy->isExcludedSeoConversionEvent($event, $meta)) {
+                    return [];
+                }
                 $safe = MeasurementFailureEventContract::sanitizeProperties(array_merge($meta, [
                     'scale_code' => $meta['scale_code'] ?? $event->scale_code ?? null,
                     'locale' => $meta['locale'] ?? $event->locale ?? null,
@@ -215,6 +223,7 @@ final class MeasurementFailureCohortReadModel
                     'dimensions' => $safe,
                 ];
             })
+            ->filter(static fn (array $event): bool => $event !== [])
             ->filter(fn (array $event): bool => $event['occurred_at'] instanceof CarbonImmutable)
             ->filter(fn (array $event): bool => $this->matches((array) $event['dimensions'], $filters))
             ->values();

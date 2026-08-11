@@ -172,6 +172,34 @@ final class MeasurementFailureCohortReadModelTest extends TestCase
         $this->assertSame('minimum_cohort_or_complementary_suppression', data_get($report, 'rows.0.suppression_reason'));
     }
 
+    public function test_read_model_excludes_configured_smoke_attempts_and_probe_events(): void
+    {
+        $day = CarbonImmutable::parse('2026-08-10 08:00:00');
+        $configuredAttemptId = (string) Str::uuid();
+        $probeAttemptId = (string) Str::uuid();
+        $legitimateAttemptId = (string) Str::uuid();
+        foreach ([$configuredAttemptId, $probeAttemptId, $legitimateAttemptId] as $attemptId) {
+            $this->insertAttempt($attemptId, 86, 'en', $day, null);
+            $this->insertFailureEvent($attemptId, $day->addHour(), 'submit_failure', orgId: 86);
+        }
+        DB::table('attempts')->where('id', $probeAttemptId)->update([
+            'anon_id' => 'codex_probe_riasec_baseline',
+        ]);
+        DB::table('events')->where('attempt_id', $probeAttemptId)->update([
+            'anon_id' => 'codex_probe_riasec_baseline',
+        ]);
+        config()->set('analytics.smoke_attempt_exclusion.attempt_ids', [$configuredAttemptId]);
+        config()->set('analytics.smoke_attempt_exclusion.anon_id_prefixes', ['codex_probe_']);
+
+        $report = app(MeasurementFailureCohortReadModel::class)->report(86, '2026-08-10', '2026-08-10');
+
+        $this->assertTrue($report['ok'] ?? false);
+        $this->assertSame(1, data_get($report, 'cohorts.submit_failure.eligible_attempt_count'), json_encode($report, JSON_THROW_ON_ERROR));
+        $this->assertSame(1, data_get($report, 'cohorts.submit_failure.failed_attempt_count'));
+        $this->assertSame(0, data_get($report, 'cohorts.submit_failure.unattributed_failure_event_count'));
+        $this->assertSame(1, data_get($report, 'cohorts.submit_failure.failure_event_count'));
+    }
+
     public function test_empty_data_is_success_but_invalid_filters_and_missing_tables_are_blocked(): void
     {
         $empty = app(MeasurementFailureCohortReadModel::class)->report(999, '2026-08-10', '2026-08-10');

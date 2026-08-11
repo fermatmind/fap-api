@@ -20,6 +20,7 @@ final class MeasurementFunnelReadModel
 
     public function __construct(
         private readonly MeasurementAttributionDimensions $dimensions,
+        private readonly AnalyticsTrafficExclusionPolicy $trafficExclusionPolicy,
     ) {}
 
     /**
@@ -76,6 +77,7 @@ final class MeasurementFunnelReadModel
 
         $attemptQuery = DB::table('attempts')->select([
             'id',
+            'anon_id',
             'scale_code',
             'locale',
             'client_platform',
@@ -91,6 +93,9 @@ final class MeasurementFunnelReadModel
         $this->applyFilters($attemptQuery, $normalizedScales, $normalizedLocales, 'attempts');
 
         foreach ($attemptQuery->orderBy('id')->get() as $attempt) {
+            if ($this->trafficExclusionPolicy->isExcludedAttemptRow($attempt)) {
+                continue;
+            }
             $aggregateDimensions = $this->dimensions->aggregateDimensions($this->dimensions->fromAttempt($attempt));
             $this->markStage($rows, $attempt->started_at ?? null, $aggregateDimensions, 'attempt_started_ids', (string) $attempt->id, $fromAt, $toAt);
             $this->markStage($rows, $attempt->submitted_at ?? null, $aggregateDimensions, 'test_completed_ids', (string) $attempt->id, $fromAt, $toAt);
@@ -101,6 +106,7 @@ final class MeasurementFunnelReadModel
             ->select([
                 'results.attempt_id',
                 'results.computed_at',
+                'attempts.anon_id',
                 'attempts.submitted_at',
                 'attempts.scale_code',
                 'attempts.locale',
@@ -115,6 +121,9 @@ final class MeasurementFunnelReadModel
         $this->applyFilters($resultQuery, $normalizedScales, $normalizedLocales, 'attempts');
 
         foreach ($resultQuery->orderBy('results.attempt_id')->get() as $result) {
+            if ($this->trafficExclusionPolicy->isExcludedAttemptRow($result)) {
+                continue;
+            }
             $aggregateDimensions = $this->dimensions->aggregateDimensions($this->dimensions->fromAttempt($result, 'ready'));
             if (($result->submitted_at ?? null) === null) {
                 $this->markStage($rows, $result->computed_at ?? null, $aggregateDimensions, 'test_completed_ids', (string) $result->attempt_id, $fromAt, $toAt);
@@ -128,6 +137,7 @@ final class MeasurementFunnelReadModel
                 'events.id',
                 'events.attempt_id',
                 'events.occurred_at',
+                'attempts.anon_id',
                 'attempts.scale_code',
                 'attempts.locale',
                 'attempts.client_platform',
@@ -141,6 +151,9 @@ final class MeasurementFunnelReadModel
         $this->applyFilters($eventQuery, $normalizedScales, $normalizedLocales, 'attempts');
 
         foreach ($eventQuery->orderBy('events.id')->get() as $event) {
+            if ($this->trafficExclusionPolicy->isExcludedAttemptRow($event)) {
+                continue;
+            }
             $aggregateDimensions = $this->dimensions->aggregateDimensions($this->dimensions->fromAttempt($event, 'ready'));
             $this->markStage($rows, $event->occurred_at ?? null, $aggregateDimensions, 'result_ready_event_ids', (string) $event->attempt_id, $fromAt, $toAt);
             $this->incrementStage($rows, $event->occurred_at ?? null, $aggregateDimensions, 'result_ready_event_rows', $fromAt, $toAt);
