@@ -467,6 +467,10 @@ final class RiasecGlobalCmsApplyBridgeTest extends TestCase
             'status' => 'pass',
             'from' => '2026-07-13',
             'to' => '2026-08-09',
+            'reporting_timezone' => 'Asia/Shanghai',
+            'storage_timezone' => 'UTC',
+            'window_utc_start' => '2026-07-12T16:00:00+00:00',
+            'window_utc_end_exclusive' => '2026-08-09T16:00:00+00:00',
             'org_id' => 0,
             'authority' => [
                 'source_table' => 'events',
@@ -479,6 +483,10 @@ final class RiasecGlobalCmsApplyBridgeTest extends TestCase
                 'matched_source_rows' => 0,
             ],
             'filters' => [
+                'reporting_timezone' => 'Asia/Shanghai',
+                'storage_timezone' => 'UTC',
+                'window_utc_start' => '2026-07-12T16:00:00+00:00',
+                'window_utc_end_exclusive' => '2026-08-09T16:00:00+00:00',
                 'canonical_path' => '/en/tests/holland-career-interest-test-riasec',
                 'take_path' => '/en/tests/holland-career-interest-test-riasec/take',
                 'url_identity_policy' => 'root_relative_or_exact_https_fermatmind_origin_then_normalized_path',
@@ -508,6 +516,10 @@ final class RiasecGlobalCmsApplyBridgeTest extends TestCase
             'issues' => [],
             'from' => '2026-07-13',
             'to' => '2026-08-09',
+            'reporting_timezone' => 'Asia/Shanghai',
+            'storage_timezone' => 'UTC',
+            'window_utc_start' => '2026-07-12T16:00:00+00:00',
+            'window_utc_end_exclusive' => '2026-08-09T16:00:00+00:00',
             'org_id' => 0,
             'filters' => [
                 'scale_codes' => ['RIASEC'],
@@ -547,6 +559,10 @@ final class RiasecGlobalCmsApplyBridgeTest extends TestCase
             'issues' => [],
             'from' => '2026-07-13',
             'to' => '2026-08-09',
+            'reporting_timezone' => 'Asia/Shanghai',
+            'storage_timezone' => 'UTC',
+            'window_utc_start' => '2026-07-12T16:00:00+00:00',
+            'window_utc_end_exclusive' => '2026-08-09T16:00:00+00:00',
             'org_id' => 0,
             'filters' => [
                 'scale_code' => ['RIASEC'],

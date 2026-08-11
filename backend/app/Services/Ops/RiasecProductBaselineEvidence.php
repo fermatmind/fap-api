@@ -26,6 +26,14 @@ final class RiasecProductBaselineEvidence
 
     private const TO = '2026-08-09';
 
+    private const REPORTING_TIMEZONE = 'Asia/Shanghai';
+
+    private const STORAGE_TIMEZONE = 'UTC';
+
+    private const WINDOW_UTC_START = '2026-07-12T16:00:00+00:00';
+
+    private const WINDOW_UTC_END_EXCLUSIVE = '2026-08-09T16:00:00+00:00';
+
     private const MAX_AGE_SECONDS = 7200;
 
     /** @var list<string> */
@@ -162,6 +170,10 @@ final class RiasecProductBaselineEvidence
     private function assertLanding(array $report): array
     {
         $filters = [
+            'reporting_timezone' => self::REPORTING_TIMEZONE,
+            'storage_timezone' => self::STORAGE_TIMEZONE,
+            'window_utc_start' => self::WINDOW_UTC_START,
+            'window_utc_end_exclusive' => self::WINDOW_UTC_END_EXCLUSIVE,
             'canonical_path' => '/en/tests/holland-career-interest-test-riasec',
             'take_path' => '/en/tests/holland-career-interest-test-riasec/take',
             'url_identity_policy' => 'root_relative_or_exact_https_fermatmind_origin_then_normalized_path',
@@ -322,6 +334,10 @@ final class RiasecProductBaselineEvidence
             && ($report['issues'] ?? null) === []
             && ($report['from'] ?? null) === self::FROM
             && ($report['to'] ?? null) === self::TO
+            && ($report['reporting_timezone'] ?? null) === self::REPORTING_TIMEZONE
+            && ($report['storage_timezone'] ?? null) === self::STORAGE_TIMEZONE
+            && ($report['window_utc_start'] ?? null) === self::WINDOW_UTC_START
+            && ($report['window_utc_end_exclusive'] ?? null) === self::WINDOW_UTC_END_EXCLUSIVE
             && ($report['org_id'] ?? null) === 0
             && ($report['read_only'] ?? null) === true;
     }
