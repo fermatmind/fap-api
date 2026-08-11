@@ -141,8 +141,9 @@ final class RiasecLandingCmsExperiment01Test extends TestCase
             $productBaseline['total_source_mappings'] ?? null,
         );
 
-        $this->assertContains($receipt['status'] ?? null, ['pending_apply', 'live_readback_pass', 'rolled_back']);
-        if (($receipt['status'] ?? null) === 'pending_apply') {
+        $receiptStatus = $receipt['status'] ?? null;
+        $this->assertContains($receiptStatus, ['pending_apply', 'live_readback_pass', 'rolled_back']);
+        if ($receiptStatus === 'pending_apply') {
             $this->assertNull($receipt['applied_at'] ?? null);
             $this->assertNull($receipt['readback_passed_at'] ?? null);
             $this->assertNull($receipt['rolled_back_at'] ?? null);
@@ -153,6 +154,12 @@ final class RiasecLandingCmsExperiment01Test extends TestCase
             foreach ($measurement['checkpoints'] ?? [] as $checkpoint) {
                 $this->assertNull($checkpoint['due_at'] ?? null);
             }
+        }
+
+        $baselineStatus = $productBaseline['capture_status'] ?? null;
+        $this->assertContains($baselineStatus, ['pending_preapply_production_read', 'frozen_preapply_production_read']);
+        if ($baselineStatus === 'pending_preapply_production_read') {
+            $this->assertSame('pending_apply', $receiptStatus);
             $this->assertSame('pending_preapply_production_read', $productBaseline['capture_status'] ?? null);
             $this->assertNull(data_get($measurement, 'baseline.product_funnel_source_sha256'));
             foreach ($productBaseline['required_sources'] ?? [] as $source) {
@@ -164,7 +171,7 @@ final class RiasecLandingCmsExperiment01Test extends TestCase
         }
 
         $this->assertSame('frozen_preapply_production_read', $productBaseline['capture_status'] ?? null);
-        $this->absoluteTimestamp($productBaseline['captured_at'] ?? null);
+        $capturedAt = $this->absoluteTimestamp($productBaseline['captured_at'] ?? null);
         $this->assertMatchesRegularExpression('/^[0-9a-f]{40}$/', (string) ($productBaseline['active_backend_revision'] ?? ''));
         $this->assertSame([], $productBaseline['issues'] ?? null);
         $this->assertSame(
@@ -185,8 +192,13 @@ final class RiasecLandingCmsExperiment01Test extends TestCase
         $this->assertIsInt(data_get($productBaseline, 'totals.questions_load_failure'));
         $this->assertIsInt(data_get($productBaseline, 'totals.submit_failure'));
 
+        if ($receiptStatus === 'pending_apply') {
+            return;
+        }
+
         $this->assertSame('064b9e15eb8eae102623306487c4b63635b7500a32925706f14688158734e3f1', $receipt['target_package_sha256'] ?? null);
         $appliedAt = $this->absoluteTimestamp($receipt['applied_at'] ?? null);
+        $this->assertGreaterThanOrEqual($capturedAt->getTimestamp(), $appliedAt->getTimestamp());
         $this->assertBridgeAudit($receipt['bridge_apply_audit'] ?? null, 'riasec_global_cms_apply', 'applied', $appliedAt);
         $this->assertSame(
             $productBaseline['active_backend_revision'] ?? null,
@@ -206,7 +218,8 @@ final class RiasecLandingCmsExperiment01Test extends TestCase
         $this->assertRiasecCtaHref((string) data_get($receipt, 'rendered_readback.default_cta_href'), 'riasec_60');
         $this->assertRiasecCtaHref((string) data_get($receipt, 'rendered_readback.enhanced_cta_href'), 'riasec_140');
 
-        if (($receipt['status'] ?? null) === 'live_readback_pass') {
+        if ($receiptStatus === 'live_readback_pass') {
+            $this->assertSame([], $receipt['issues'] ?? null);
             $readbackPassedAt = $this->absoluteTimestamp($receipt['readback_passed_at'] ?? null);
             $this->assertGreaterThanOrEqual(
                 $appliedAt->getTimestamp(),
