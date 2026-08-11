@@ -97,7 +97,14 @@ final class Career1046RootGenerationActivation
 
             $preflightSha = self::assertApplyAuthorization($expected, $database);
             self::assertActiveRelease($expected);
-            $result = self::activate($expected, $current, $generation, $database, $preflightSha);
+            $result = self::activate(
+                $expected,
+                $current,
+                $generation,
+                $database,
+                $preflightSha,
+                static fn (): array => self::inspectDatabaseAuthority($expected, $app),
+            );
             self::emit(self::successReceipt($mode, $expected, $result, $generation, $database));
 
             return 0;
@@ -458,6 +465,7 @@ final class Career1046RootGenerationActivation
      * @param  array<string, mixed>  $current
      * @param  array<string, mixed>  $generation
      * @param  array<string, mixed>  $database
+     * @param  callable(): array<string, mixed>  $databaseRevalidator
      * @return array<string, mixed>
      */
     public static function activate(
@@ -466,6 +474,7 @@ final class Career1046RootGenerationActivation
         array $generation,
         array $database,
         string $preflightSha,
+        callable $databaseRevalidator,
     ): array {
         $pointer = self::pointerDocument($expected, $current, $generation, $database, $preflightSha);
         $bytes = self::canonicalJson($pointer)."\n";
@@ -515,6 +524,17 @@ final class Career1046RootGenerationActivation
         self::assertActiveRelease($expected);
         self::assertGenerationDocumentReadback($expected, $generation);
         self::assertNoConflictingOperation($expected);
+        $databaseNow = $databaseRevalidator();
+        if (($databaseNow['receipt_covered_count'] ?? null) !== 1016
+            || ($databaseNow['matching_count'] ?? null) !== 1016
+            || ($databaseNow['missing_or_mismatching_count'] ?? null) !== 0
+            || ($databaseNow['outside_target_count'] ?? null) !== 0
+            || ! hash_equals(
+                (string) ($database['current_state_sha256'] ?? ''),
+                (string) ($databaseNow['current_state_sha256'] ?? ''),
+            )) {
+            throw new Career1046RootActivationFailure('DATABASE_AUTHORITY_CHANGED_BEFORE_SWITCH');
+        }
 
         $activeNow = self::readContainedFile((string) $current['authority_root'], (string) $current['active_path'], 256_000);
         if (! hash_equals((string) $current['active_sha256_before'], hash('sha256', $activeNow))) {

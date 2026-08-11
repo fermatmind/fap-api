@@ -187,6 +187,7 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
             $generation,
             $this->database,
             str_repeat('f', 64),
+            fn (): array => $this->database,
         );
 
         self::assertSame($before, $result['active_sha256_before']);
@@ -294,6 +295,7 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
                 $generation,
                 $this->database,
                 str_repeat('f', 64),
+                fn (): array => $this->database,
             );
             self::fail('A deploy lock must fail closed before activation writes.');
         } catch (Career1046RootActivationFailure $failure) {
@@ -302,6 +304,33 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
 
         self::assertSame($before, hash_file('sha256', $activePath));
         self::assertFileDoesNotExist($this->privateRoot.'/career_generation_authority/generations/'
+            .$this->expected['generation_id'].'/generation-pointer.json');
+    }
+
+    public function test_database_authority_drift_fails_before_root_pointer_switch(): void
+    {
+        $current = Career1046RootGenerationActivation::inspectCurrentAndRollback($this->expected);
+        $generation = Career1046RootGenerationActivation::inspectStagedGeneration($this->expected);
+        $activePath = $current['active_path'];
+        $before = hash_file('sha256', $activePath);
+        $drifted = [...$this->database, 'current_state_sha256' => str_repeat('0', 64)];
+
+        try {
+            Career1046RootGenerationActivation::activate(
+                $this->expected,
+                $current,
+                $generation,
+                $this->database,
+                str_repeat('f', 64),
+                static fn (): array => $drifted,
+            );
+            self::fail('Late database authority drift must fail before the root pointer switch.');
+        } catch (Career1046RootActivationFailure $failure) {
+            self::assertSame('DATABASE_AUTHORITY_CHANGED_BEFORE_SWITCH', $failure->safeCode);
+        }
+
+        self::assertSame($before, hash_file('sha256', $activePath));
+        self::assertFileExists($this->privateRoot.'/career_generation_authority/generations/'
             .$this->expected['generation_id'].'/generation-pointer.json');
     }
 
@@ -331,6 +360,7 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
             'ROLLBACK_AUTHORITY_UNREADABLE',
             'DEPLOY_LOCK_PRESENT',
             'CONFLICTING_AUTHORITY_PROCESS_PRESENT',
+            'DATABASE_AUTHORITY_CHANGED_BEFORE_SWITCH',
             'career.1046.root_generation_activation.v1',
             'receipt_covered_count == 1016',
             'matching_count == 1016',

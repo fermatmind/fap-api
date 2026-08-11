@@ -66,7 +66,7 @@
     "repo": "fap-api",
     "scope_type": "measurement_m04_backend_read_model_remediation",
     "search_channel_action": false,
-    "status": "ready_to_merge",
+    "status": "github_checks_pending",
     "title": "MEASUREMENT-M04-BACKEND-READ-MODEL-REMEDIATION-01: repair report-ready and reporting-day semantics",
     "transitions": [
       {
@@ -105411,15 +105411,15 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "All four review-fix heavy-guarded full backend/scripts/ci_verify_mbti.sh runs exited 0 after the initial full pass. Final focused activation coverage passed 4 tests plus 4 known missing-.env warnings / 85 assertions, including fail-closed deploy-lock coverage; the earlier combined activation/staging/reconciliation/loader suite passed 5 tests plus 18 known warnings / 279 assertions. actionlint, Pint --test, PHP syntax, frozen contract verification, train YAML/JSON parsing, 253-line route listing, fresh SQLite migration, exact six-path scope and diff checks passed."
+        "evidence": "All five review-fix heavy-guarded full backend/scripts/ci_verify_mbti.sh runs exited 0 after the initial full pass. Final focused activation coverage passed 5 tests plus 5 known missing-.env warnings / 90 assertions, including fail-closed database-authority drift and deploy-lock coverage; the earlier combined activation/staging/reconciliation/loader suite passed 5 tests plus 18 known warnings / 279 assertions. actionlint, Pint --test, PHP syntax, frozen contract verification, train YAML/JSON parsing, 253-line route listing, fresh SQLite migration, exact six-path scope and diff checks passed."
       },
       "scope": {
         "status": "passed",
         "evidence": "Exactly six allowlisted paths contain one protected manual workflow, one narrow single-root-pointer runner, its executable SRE test, operator documentation and two train ledgers. No route, migration, DB/CMS write implementation, cache warm, public reader, frontend or discoverability release is included."
       },
       "github_required_checks": {
-        "status": "passed",
-        "evidence": "PR #3668 implementation head 941961c219cb1f2fb4fe0486885f60e45bc90544 passed hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, Semgrep SARIF upload and Semgrep OSS; verify-staging-parity was correctly skipped. Current-head review produced no unresolved thread after both mutation-boundary findings were fixed and resolved."
+        "status": "pending",
+        "evidence": "The prior implementation and ledger heads passed every required check, but exact-head review found a final database-authority drift window before the root switch. Fresh checks are required after the same-scope fix."
       }
     },
     "failure_reason": null,
@@ -105482,8 +105482,18 @@
         "at": "2026-08-12T07:18:46+08:00",
         "status": "ready_to_merge",
         "note": "PR #3668 implementation head 941961c219cb1f2fb4fe0486885f60e45bc90544 passed every required GitHub check; staging parity was correctly skipped. Current-head review has no unresolved thread after both mutation-boundary findings were fixed and resolved. Exact six-path scope is clean. No production or staging workflow was dispatched and no SSH or controlled external state was accessed or mutated."
+      },
+      {
+        "at": "2026-08-12T07:27:55+08:00",
+        "status": "review_fix_in_progress",
+        "note": "Exact-head review found that an out-of-band database authority writer could commit after the initial SELECT-only inspection but before the root rename. The same Task 6 scope now repeats the exact 1016/1016 SELECT-only authority read immediately before switching and requires the identical current-state SHA. Fresh focused, full local and GitHub validation are mandatory. No workflow was dispatched and no SSH or controlled external state was accessed or mutated."
+      },
+      {
+        "at": "2026-08-12T07:36:16+08:00",
+        "status": "review_fix_validated",
+        "note": "The activation runner now repeats the complete SELECT-only database authority inspection immediately before the root rename and requires exact 1016/1016 coverage, zero missing/mismatch/outside rows and the identical canonical current-state SHA observed at preflight. A database-drift regression proves the root pointer remains unchanged. Focused coverage passed 5 tests plus 5 known missing-.env warnings / 90 assertions; actionlint, Pint, PHP syntax, freeze verification, YAML/JSON parsing and diff checks passed; the complete heavy-guarded ci_verify_mbti chain exited 0. Generated Big Five compiled files were restored. No workflow was dispatched and no SSH or controlled external state was accessed or mutated."
       }
     ],
-    "updated_at": "2026-08-12T07:18:46+08:00"
+    "updated_at": "2026-08-12T07:36:16+08:00"
   }
 }
