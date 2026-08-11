@@ -256,6 +256,18 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
             self::assertSame('STAGED_DOCUMENT_READBACK_MISMATCH', $failure->safeCode);
         }
 
+        $rollbackProjectionPath = $this->privateRoot.'/career_runtime_publish_projection/'
+            .$this->expected['previous_generation_id'].'/career-runtime-publish-projection.json';
+        $rollbackProjectionBytes = (string) file_get_contents($rollbackProjectionPath);
+        File::append($rollbackProjectionPath, "\n");
+        try {
+            Career1046RootGenerationActivation::inspectCurrentAndRollback($this->expected);
+            self::fail('Unreadable rollback authority artifacts must fail closed.');
+        } catch (Career1046RootActivationFailure $failure) {
+            self::assertSame('ROLLBACK_AUTHORITY_UNREADABLE', $failure->safeCode);
+        }
+        File::put($rollbackProjectionPath, $rollbackProjectionBytes);
+
         File::delete($this->privateRoot.'/career_generation_authority/generations/'
             .$this->expected['previous_generation_id'].'/generation-pointer.json');
         try {
@@ -289,6 +301,7 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
             'group: deploy-${{ github.repository }}-production',
             'PASS_PREFLIGHT_ACTIVATION_ELIGIBLE',
             'PASS_APPLY_ROOT_GENERATION_ACTIVATED',
+            'ROLLBACK_AUTHORITY_UNREADABLE',
             'career.1046.root_generation_activation.v1',
             'receipt_covered_count == 1016',
             'matching_count == 1016',

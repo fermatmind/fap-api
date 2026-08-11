@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace FermatMind\Operations;
 
+use App\Domain\Career\Publish\CareerGenerationAuthorityLoader;
 use App\Domain\Career\Publish\CareerVerifiedRolloutBatchSlugAuthority;
 use App\Models\IndexState;
 use App\Models\Occupation;
 use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
@@ -81,9 +83,10 @@ final class Career1046RootGenerationActivation
             }
             $expected = self::expectedAuthority($mode);
             self::assertActiveRelease($expected);
+            $app = self::bootstrapApplication($expected);
             $current = self::inspectCurrentAndRollback($expected);
             $generation = self::inspectStagedGeneration($expected);
-            $database = self::inspectDatabaseAuthority($expected);
+            $database = self::inspectDatabaseAuthority($expected, $app);
             self::assertNoPointerCandidateResidue($current, $expected);
 
             if ($mode === 'preflight') {
@@ -196,6 +199,20 @@ final class Career1046RootGenerationActivation
             throw new Career1046RootActivationFailure('PREVIOUS_ROLLBACK_POINTER_INCOMPLETE');
         }
         self::decodePointer($rollbackRaw, 'PREVIOUS_ROLLBACK_POINTER_INVALID');
+        $runtimePrivateRoot = realpath(storage_path('app/private'));
+        $expectedPrivateRoot = realpath((string) $expected['private_root']);
+        if (! is_string($runtimePrivateRoot) || ! is_string($expectedPrivateRoot)
+            || ! hash_equals($expectedPrivateRoot, $runtimePrivateRoot)) {
+            throw new Career1046RootActivationFailure('ROLLBACK_LOADER_ROOT_MISMATCH');
+        }
+        try {
+            $rollbackAuthority = (new CareerGenerationAuthorityLoader)->loadStrict();
+        } catch (Throwable) {
+            throw new Career1046RootActivationFailure('ROLLBACK_AUTHORITY_UNREADABLE');
+        }
+        if (($rollbackAuthority['pointer']['generation_id'] ?? null) !== $expected['previous_generation_id']) {
+            throw new Career1046RootActivationFailure('ROLLBACK_AUTHORITY_GENERATION_MISMATCH');
+        }
 
         return [
             'authority_root' => $authorityRoot,
@@ -205,6 +222,7 @@ final class Career1046RootGenerationActivation
             'active_sha256_after' => $activeSha256,
             'previous_pointer_canonical_sha256' => $activeCanonicalSha256,
             'rollback_pointer_sha256' => hash('sha256', $rollbackRaw),
+            'rollback_authority_validated' => true,
             'previous_generation_id' => $expected['previous_generation_id'],
         ];
     }
@@ -284,12 +302,20 @@ final class Career1046RootGenerationActivation
     }
 
     /** @param array<string, mixed> $expected @return array<string, mixed> */
-    private static function inspectDatabaseAuthority(array $expected): array
+    private static function bootstrapApplication(array $expected): Application
     {
         $backendRoot = (string) $expected['backend_root'];
         require_once $backendRoot.'/vendor/autoload.php';
         $app = require $backendRoot.'/bootstrap/app.php';
         $app->make(Kernel::class)->bootstrap();
+
+        return $app;
+    }
+
+    /** @param array<string, mixed> $expected @return array<string, mixed> */
+    private static function inspectDatabaseAuthority(array $expected, Application $app): array
+    {
+        $backendRoot = (string) $expected['backend_root'];
         require_once $backendRoot.'/scripts/operations/career_publication_index_reconciliation_preflight.php';
 
         $verbs = [];
@@ -635,6 +661,7 @@ final class Career1046RootGenerationActivation
             'active_pointer_sha256_before' => $current['active_sha256_before'],
             'active_pointer_sha256_after' => $current['active_sha256_after'],
             'rollback_pointer_sha256' => $current['rollback_pointer_sha256'],
+            'rollback_authority_validated' => $current['rollback_authority_validated'],
             'staging_receipt_sha256' => $expected['staging_receipt_sha256'],
             'staging_artifact_digest' => $expected['staging_artifact_digest'],
             'candidate_receipt_sha256' => $generation['candidate_receipt_sha256'],
