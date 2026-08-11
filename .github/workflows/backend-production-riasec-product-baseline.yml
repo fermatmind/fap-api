@@ -11,10 +11,6 @@ on:
         description: "Exact active backend production REVISION"
         required: true
         type: string
-      release_id:
-        description: "Exact active managed release identifier"
-        required: true
-        type: string
       operator_approval_phrase:
         description: "Exact SELECT-only production RIASEC baseline approval"
         required: true
@@ -36,7 +32,6 @@ jobs:
     env:
       EXPECTED_CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
       EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
-      RELEASE_ID: ${{ inputs.release_id }}
       OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
       DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
       DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
@@ -55,14 +50,13 @@ jobs:
           jq -n \
             --arg control_plane_sha "$EXPECTED_CONTROL_PLANE_SHA" \
             --arg active_revision "$EXPECTED_ACTIVE_REVISION" \
-            --arg release_id "$RELEASE_ID" \
             --arg checked_at "$checked_at" \
             '{
               schema_version: "fermatmind.production-riasec-product-baseline.v1",
               status: "FAIL_PRODUCTION_RIASEC_PRODUCT_BASELINE",
               control_plane_sha: $control_plane_sha,
               active_revision: $active_revision,
-              release_id: $release_id,
+              release_id: null,
               checked_at: $checked_at,
               failed_check: "checkout_control_plane",
               source_report_sha256: {},
@@ -103,8 +97,7 @@ jobs:
           test "$GITHUB_REF" = "refs/heads/main"
           [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
           [[ "$EXPECTED_ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]
-          [[ "$RELEASE_ID" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]
-          expected="I explicitly approve SELECT-only production RIASEC product baseline for active SHA ${EXPECTED_ACTIVE_REVISION} release ${RELEASE_ID} control SHA ${EXPECTED_CONTROL_PLANE_SHA} date window 2026-07-13 through 2026-08-09 org 0."
+          expected="I explicitly approve SELECT-only production RIASEC product baseline for active SHA ${EXPECTED_ACTIVE_REVISION} control SHA ${EXPECTED_CONTROL_PLANE_SHA} date window 2026-07-13 through 2026-08-09 org 0."
           test "$OPERATOR_APPROVAL_PHRASE" = "$expected"
           git fetch --no-tags origin main:refs/remotes/origin/main
           test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
@@ -158,11 +151,10 @@ jobs:
           mkdir -p artifacts
           printf -v q_deploy_path '%q' "$DEPLOY_PATH"
           printf -v q_active_revision '%q' "$EXPECTED_ACTIVE_REVISION"
-          printf -v q_release_id '%q' "$RELEASE_ID"
           set +e
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "DEPLOY_PATH=$q_deploy_path EXPECTED_ACTIVE_REVISION=$q_active_revision RELEASE_ID=$q_release_id php" \
+            "DEPLOY_PATH=$q_deploy_path EXPECTED_ACTIVE_REVISION=$q_active_revision php" \
             > "$run_dir/combined.json" 2> "$run_dir/remote.stderr" <<'PHP'
           <?php
           declare(strict_types=1);
@@ -184,17 +176,22 @@ jobs:
 
           $deployPath = (string) getenv('DEPLOY_PATH');
           $expectedRevision = (string) getenv('EXPECTED_ACTIVE_REVISION');
-          $expectedRelease = (string) getenv('RELEASE_ID');
           if (! preg_match('#^/[A-Za-z0-9._/-]+$#', $deployPath)
               || str_contains($deployPath, '..')
-              || ! preg_match('/^[0-9a-f]{40}$/', $expectedRevision)
-              || ! preg_match('/^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/', $expectedRelease)) {
+              || ! preg_match('/^[0-9a-f]{40}$/', $expectedRevision)) {
               fail_closed('INVALID_FIXED_INPUT');
           }
 
+          $releasesRoot = realpath($deployPath.'/releases');
           $current = realpath($deployPath.'/current');
-          if ($current === false || basename($current) !== $expectedRelease) {
-              fail_closed('ACTIVE_RELEASE_MISMATCH');
+          if ($releasesRoot === false
+              || $current === false
+              || dirname($current) !== $releasesRoot) {
+              fail_closed('ACTIVE_RELEASE_PATH_INVALID');
+          }
+          $activeRelease = basename($current);
+          if (! preg_match('/^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/', $activeRelease)) {
+              fail_closed('ACTIVE_RELEASE_IDENTITY_INVALID');
           }
           $revisionFile = $current.'/REVISION';
           if (! is_file($revisionFile) || trim((string) file_get_contents($revisionFile)) !== $expectedRevision) {
@@ -559,7 +556,7 @@ jobs:
               $payload = [
                   'schema_version' => 'fermatmind.production-riasec-product-baseline-source.v1',
                   'active_revision' => $expectedRevision,
-                  'release_id' => $expectedRelease,
+                  'release_id' => $activeRelease,
                   'captured_at' => gmdate('Y-m-d\TH:i:s\Z'),
                   'landing_and_product_funnel' => $landing,
                   'attempt_result_funnel' => $funnel,
@@ -589,7 +586,7 @@ jobs:
           remote_status="$?"
           set -e
           if [ "$remote_status" -ne 0 ]; then
-            safe_code="$(grep -E '^(INVALID_FIXED_INPUT|ACTIVE_RELEASE_MISMATCH|ACTIVE_REVISION_MISMATCH|ACTIVE_RUNTIME_MISSING|SCOPED_SOURCE_RECONCILIATION_FAILED|REPORT_CONTRACT_MISMATCH|REPORT_HEALTH_UNACCEPTABLE|SELECT_ONLY_REPORT_FAILED)$' "$run_dir/remote.stderr" | tail -n 1 || true)"
+            safe_code="$(grep -E '^(INVALID_FIXED_INPUT|ACTIVE_RELEASE_PATH_INVALID|ACTIVE_RELEASE_IDENTITY_INVALID|ACTIVE_REVISION_MISMATCH|ACTIVE_RUNTIME_MISSING|SCOPED_SOURCE_RECONCILIATION_FAILED|REPORT_CONTRACT_MISMATCH|REPORT_HEALTH_UNACCEPTABLE|SELECT_ONLY_REPORT_FAILED)$' "$run_dir/remote.stderr" | tail -n 1 || true)"
             test -n "$safe_code" || safe_code="PRODUCTION_RIASEC_BASELINE_REMOTE_FAILED"
             echo "::error::$safe_code"
             exit 1
@@ -598,7 +595,7 @@ jobs:
           jq -e '
             .schema_version == "fermatmind.production-riasec-product-baseline-source.v1"
             and .active_revision == env.EXPECTED_ACTIVE_REVISION
-            and .release_id == env.RELEASE_ID
+            and (.release_id | test("^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"))
             and .landing_and_product_funnel.ok == true
             and .landing_and_product_funnel.status == "pass"
             and .landing_and_product_funnel.issues == []
@@ -631,6 +628,7 @@ jobs:
           funnel_sha="$(sha256sum artifacts/attempt-result-funnel.json | awk '{print $1}')"
           failure_sha="$(sha256sum artifacts/failure-cohorts.json | awk '{print $1}')"
           captured_at="$(jq -er '.captured_at' "$run_dir/combined.json")"
+          release_id="$(jq -er '.release_id | select(test("^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"))' "$run_dir/combined.json")"
           totals="$(jq -c '{
             landing_view: .landing_and_product_funnel.totals.landing_view,
             test_start_by_form_code: {
@@ -650,6 +648,7 @@ jobs:
           }' "$run_dir/combined.json")"
           jq \
             --arg captured_at "$captured_at" \
+            --arg release_id "$release_id" \
             --arg landing_sha "$landing_sha" \
             --arg funnel_sha "$funnel_sha" \
             --arg failure_sha "$failure_sha" \
@@ -661,6 +660,7 @@ jobs:
             --argjson totals "$totals" \
             '.status = "PASS_PRODUCTION_RIASEC_PRODUCT_BASELINE"
              | .checked_at = $captured_at
+             | .release_id = $release_id
              | .failed_check = null
              | .source_report_sha256 = {
                  landing_and_product_funnel: $landing_sha,

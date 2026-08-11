@@ -23,6 +23,7 @@ final class BackendProductionRiasecProductBaselineWorkflowTest extends TestCase
             'test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"',
             'test "$EXPECTED_ACTIVE_REVISION" = "$EXPECTED_CONTROL_PLANE_SHA"',
             'I explicitly approve SELECT-only production RIASEC product baseline',
+            'active SHA ${EXPECTED_ACTIVE_REVISION} control SHA ${EXPECTED_CONTROL_PLANE_SHA}',
             'date window 2026-07-13 through 2026-08-09 org 0.',
             '^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$',
             'secrets.SSH_PRIVATE_KEY',
@@ -37,6 +38,10 @@ final class BackendProductionRiasecProductBaselineWorkflowTest extends TestCase
             'retention-days: 7',
         ] as $contract) {
             $this->assertStringContainsString($contract, $source);
+        }
+
+        foreach (['inputs.release_id', 'env.RELEASE_ID', '$RELEASE_ID', ' release ${RELEASE_ID}'] as $operatorGuess) {
+            $this->assertStringNotContainsString($operatorGuess, $source);
         }
     }
 
@@ -66,6 +71,11 @@ final class BackendProductionRiasecProductBaselineWorkflowTest extends TestCase
             "->where('occurred_at', '>=', \$windowStart)",
             "->where('occurred_at', '<', \$windowEndExclusive)",
             '$runtime = $current.\'/backend\'',
+            '$releasesRoot = realpath($deployPath.\'/releases\')',
+            'dirname($current) !== $releasesRoot',
+            '$activeRelease = basename($current)',
+            "preg_match('/^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/', \$activeRelease)",
+            "'release_id' => \$activeRelease",
             'require $runtime.\'/vendor/autoload.php\'',
             '$normalizeApprovedPath',
             'for ($decodePass = 0; $decodePass < 5; $decodePass++)',
@@ -141,6 +151,8 @@ final class BackendProductionRiasecProductBaselineWorkflowTest extends TestCase
             'raw_log_read: false',
             'search_submit: false',
             'writes_committed: false',
+            'release_id: null',
+            '| .release_id = $release_id',
             'if: ${{ always() }}',
             'RECEIPT_FILE_NAME: backend-production-riasec-product-baseline-receipt.json',
             'cp "$RUNNER_TEMP/$RECEIPT_FILE_NAME" artifacts/backend-production-riasec-product-baseline-receipt.json',
