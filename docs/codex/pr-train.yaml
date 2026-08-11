@@ -49457,7 +49457,7 @@ prs:
     base: main
     branch: codex/career-publication-index-reconciliation-apply-06b
     title: "CAREER-PUBLICATION-INDEX-RECONCILIATION-APPLY-06B: add exact receipt-bound transaction control"
-    status: github_checks_pending
+    status: merged
     depends_on:
       - CAREER-PUBLICATION-INDEX-RECONCILIATION-PREFLIGHT-06A
     train_scope: career_publication_index_reconciliation_exact_apply_control
@@ -49507,3 +49507,56 @@ prs:
     deploy_allowed: false
     content_authority: frozen manifest, authentic signed receipt set and fresh Task 3A receipt remain authority; this PR adds only an unexecuted exact apply control
     repository_rule_impact: creates the separately controlled transaction lane required before immutable 1046 candidate generation
+
+  - id: CAREER-1046-IMMUTABLE-CANDIDATE-07
+    repo: fap-api
+    base: main
+    branch: codex/career-1046-immutable-candidate-07
+    title: "CAREER-1046-IMMUTABLE-CANDIDATE-07: generate exact manifest-filtered product candidate"
+    status: github_checks_pending
+    depends_on:
+      - CAREER-PUBLICATION-INDEX-RECONCILIATION-APPLY-06B
+    train_scope: career_exact_1046_2092_immutable_candidate_generator
+    risk_level: p1_offline_public_authority_candidate
+    scope:
+      - Add one offline generator that accepts only the frozen manifest, exact baseline 30 authority, exact database-matching receipt 1016 authority, target ledger/projection and complete EN/ZH detail rows.
+      - Emit one deterministic generation-native candidate containing projection, ledger, EN/ZH detail, EN/ZH directory, generation manifest, hashes and a zero-action candidate receipt.
+      - Require exact 1046 slugs, 2092 locale rows, 1046/2092 published counts, zero missing/duplicate/outside-target and the frozen target set hashes.
+      - Permit optional local no-clobber immutable candidate materialization with exact byte readback and no active pointer.
+    allowed_paths:
+      - backend/app/Domain/Career/Publish/Career1046ImmutableCandidateGenerator.php
+      - backend/tests/Unit/Domain/Career/Publish/Career1046ImmutableCandidateGeneratorTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/operations/career-1046-immutable-candidate-control.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Accept 1048/2096, either frozen forbidden slug, any non-manifest slug, duplicate or incomplete locale rows, or receipt-covered slugs without exact DB authority.
+      - Write an active pointer, publish, warm, dispatch production/staging workflows, deploy, migrate, mutate DB/CMS/cache, or release sitemap/llms/Search state.
+      - Implement Task 5 staging, Task 6 activation, Task 7 public verification/discoverability, Task 8 monitoring or Task 9 debt audit.
+    validation:
+      - cd backend && php artisan test tests/Unit/Domain/Career/Publish/Career1046ImmutableCandidateGeneratorTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Domain/Career/Publish/Career1046ImmutableCandidateGenerator.php tests/Unit/Domain/Career/Publish/Career1046ImmutableCandidateGeneratorTest.php
+      - php -l for every changed PHP file
+      - php backend/scripts/operations/verify_career_1046_current_state_freeze.php
+      - parse pr-train JSON and YAML
+      - exact six-file scope and forbidden action validation
+      - git diff --check and git diff --cached --check
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    workflow_policy_change: false
+    production_write_execution: false
+    production_read_only_evidence: false
+    production_workflow_dispatched: false
+    staging_workflow_dispatched: false
+    database_mutation: false
+    cms_mutation: false
+    cache_mutation: false
+    artifact_mutation: false
+    pointer_mutation: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: frozen manifest plus exact baseline and reconciled receipt-covered database authority inputs; candidate bytes are not active public authority
+    repository_rule_impact: adds only an offline exact-set candidate boundary for the separately controlled staging and activation tasks

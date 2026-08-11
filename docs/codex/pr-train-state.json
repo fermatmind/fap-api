@@ -105118,7 +105118,7 @@
     "base": "main",
     "branch": "codex/career-publication-index-reconciliation-apply-06b",
     "title": "CAREER-PUBLICATION-INDEX-RECONCILIATION-APPLY-06B: add exact receipt-bound transaction control",
-    "status": "github_checks_pending",
+    "status": "merged",
     "depends_on": [
       "CAREER-PUBLICATION-INDEX-RECONCILIATION-PREFLIGHT-06A"
     ],
@@ -105148,16 +105148,17 @@
         "evidence": "The six-path allowlist contains one manual apply workflow, one narrow streamed transaction runner, its SRE test, operator documentation and the two train ledgers. No route, migration, middleware, public runtime, CMS/content, cache, pointer, candidate, frontend or discoverability implementation is included."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "PR has not yet been opened."
+        "status": "passed",
+        "evidence": "Final exact head 249f67b7aad74db9ac1fa79911ba06955db94b3b passed hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep blocking secrets, Semgrep OSS and the non-blocking SARIF upload. Staging parity was correctly skipped; GitHub reported MERGEABLE/CLEAN with exactly six allowlisted files."
       }
     },
     "failure_reason": null,
-    "commit_sha": "f827c4a1e697b6e681d57ab171c35357e751e04d",
+    "commit_sha": "249f67b7aad74db9ac1fa79911ba06955db94b3b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3665",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-08-12T04:27:42+08:00",
+    "merge_commit_sha": "2eeea56d6f0ca8192e3b5a3a7a13f3414399ba3e",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "workflow_policy_change": true,
     "production_write_execution": false,
     "production_read_only_evidence": false,
@@ -105192,8 +105193,97 @@
         "at": "2026-08-12T04:18:31+08:00",
         "status": "github_checks_pending",
         "note": "Committed the exact six-file implementation as f827c4a1e697b6e681d57ab171c35357e751e04d, pushed the focused branch and opened PR #3665. Required checks must pass before squash merge. No production or staging workflow was dispatched and no controlled external state was accessed or mutated."
+      },
+      {
+        "at": "2026-08-12T04:27:42+08:00",
+        "status": "merged",
+        "note": "PR #3665 final head 249f67b7aad74db9ac1fa79911ba06955db94b3b passed the complete required check set and squash merged as 2eeea56d6f0ca8192e3b5a3a7a13f3414399ba3e. origin/main contains the merge, the remote branch disappeared during cleanup, and the local branch was deleted after the isolated train worktree moved to Task 4. No production or staging workflow was dispatched and no production or discoverability state was read or mutated."
       }
     ],
-    "updated_at": "2026-08-12T04:18:31+08:00"
+    "updated_at": "2026-08-12T04:27:42+08:00"
+  },
+  "CAREER-1046-IMMUTABLE-CANDIDATE-07": {
+    "id": "CAREER-1046-IMMUTABLE-CANDIDATE-07",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-1046-immutable-candidate-07",
+    "title": "CAREER-1046-IMMUTABLE-CANDIDATE-07: generate exact manifest-filtered product candidate",
+    "status": "github_checks_pending",
+    "depends_on": [
+      "CAREER-PUBLICATION-INDEX-RECONCILIATION-APPLY-06B"
+    ],
+    "allowed_paths": [
+      "backend/app/Domain/Career/Publish/Career1046ImmutableCandidateGenerator.php",
+      "backend/tests/Unit/Domain/Career/Publish/Career1046ImmutableCandidateGeneratorTest.php",
+      "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+      "docs/operations/career-1046-immutable-candidate-control.md",
+      "docs/codex/pr-train.yaml",
+      "docs/codex/pr-train-state.json"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "Task 4 of the continuous Career 1046 goal authorizes this offline exact candidate generator only; production/staging workflow dispatch, SSH, remote staging, pointer activation and discoverability remain forbidden."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "Task 3B PR #3665 final head 249f67b7aad74db9ac1fa79911ba06955db94b3b passed all required checks and squash merged as 2eeea56d6f0ca8192e3b5a3a7a13f3414399ba3e; this branch starts from that exact origin/main."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "The heavy-guarded full backend/scripts/ci_verify_mbti.sh chain exited 0, including Big Five 1693 tests / 196735 assertions and all MBTI/security/migration/queue gates. Focused candidate coverage passed 5 tests / 29 assertions; the exact runtime-freeze classifier regressions pass 2 tests / 5 assertions with only the known missing-.env warnings; Pint --test, PHP syntax, frozen contract verification, train YAML/JSON parsing, 253-line route listing, fresh SQLite migration, exact six-path scope and git diff --check passed."
+      },
+      "scope": {
+        "status": "passed",
+        "evidence": "Exactly six allowlisted paths contain the offline candidate generator, focused unit test, the existing runtime-freeze classifier registration required by CI, operator contract and two train ledgers. No workflow, route, migration, command registration, public reader, CMS/content, pointer, frontend or discoverability implementation is included."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": "PR has not yet been opened."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "3165c5f081579e8af9f76d5d6ce7a0a0d9c5c4a7",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3666",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "workflow_policy_change": false,
+    "production_write_execution": false,
+    "production_read_only_evidence": false,
+    "production_workflow_dispatched": false,
+    "staging_workflow_dispatched": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "cache_mutation": false,
+    "artifact_mutation": false,
+    "pointer_mutation": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "url_submission": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-08-12T04:27:42+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started Task 4 from exact merged Task 3B origin/main 2eeea56d6f0ca8192e3b5a3a7a13f3414399ba3e. Scope is an offline manifest-filtered immutable candidate generator, focused test, operator contract and ledgers only. No workflow was dispatched; no SSH, production/staging read, deploy, migration, DB/CMS/cache/artifact/pointer, publication, sitemap/llms or Search Channel action was executed."
+      },
+      {
+        "at": "2026-08-12T04:43:20+08:00",
+        "status": "local_validation_passed",
+        "note": "Implemented and validated exact 1046/2092 candidate generation, deterministic same-generation product artifacts, discoverability-closed projection output and local no-clobber materialization. The heavy-guarded CI master chain exited 0; focused tests passed 5 / 29; Pint, syntax, frozen verifier, route listing, fresh SQLite migration, ledger parsing, exact five-file scope and diff checks passed. Generated Big Five compiled files were restored to origin/main bytes. No workflow was dispatched and no controlled external state was accessed or mutated."
+      },
+      {
+        "at": "2026-08-12T04:45:02+08:00",
+        "status": "github_checks_pending",
+        "note": "Committed the exact five-file implementation as 3165c5f081579e8af9f76d5d6ce7a0a0d9c5c4a7, pushed the focused branch and opened PR #3666. Required checks must pass before squash merge. No production or staging workflow was dispatched and no controlled external state was accessed or mutated."
+      },
+      {
+        "at": "2026-08-12T04:55:12+08:00",
+        "status": "github_checks_pending",
+        "note": "GitHub verify-bigfive exposed one same-scope classifier registration gap: the new offline candidate generator appeared as an unclassified backend/app path. Added only the exact generator path to the existing Career runtime-projection classifier and its explicit fixture list. The two focused classifier tests pass 5 assertions with only known missing-.env warnings, candidate tests remain 5 / 29 and Pint passes. Both MBTI jobs were already green; no external state was accessed or mutated."
+      }
+    ],
+    "updated_at": "2026-08-12T04:55:12+08:00"
   }
 }
