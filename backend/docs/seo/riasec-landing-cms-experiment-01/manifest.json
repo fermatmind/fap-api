@@ -8,9 +8,9 @@
   "files": {
     "current_public_readback.json": "e995ea8f3881436f3451f37bc8f87f091d68a3e3b7e0f022a1c6ed416eaf43e0",
     "target_internal_update.json": "064b9e15eb8eae102623306487c4b63635b7500a32925706f14688158734e3f1",
-    "product_funnel_baseline.json": "570a1f0c76a122d510a1de300d5b4f7a8591ec15d904493fd71606b443303638",
-    "measurement_plan.json": "65faf9be541b97b8738f5a4c12cc31588129c5de4223670d1cef72af540f6d43",
-    "t0_receipt.json": "89a9e473d38d701daa323272368c0739cdcefa488c285a1422b3ff82e2241ec9"
+    "product_funnel_baseline.json": "8179e8243ba5da60943249ba1768963d3ae58a2e8cea5077d5df699df56f5f8a",
+    "measurement_plan.json": "0991d431411f7650d81eb46f11bfdeec111f0203bd413acd14fc8b2b6cda9bef",
+    "t0_receipt.json": "68af205ef783372fff79ff37ea9740220054a2981e7aac9031c439763068dd30"
   },
   "target_package_sha256": "064b9e15eb8eae102623306487c4b63635b7500a32925706f14688158734e3f1",
   "allowed_changed_fields": [
@@ -37,8 +37,8 @@
     "page_blocks",
     "payload_json.approved_internal_link_targets"
   ],
-  "production_cms_write_authorized_by_user": false,
-  "production_cms_write_authorization_status": "pending_fresh_production_preflight",
+  "production_cms_write_authorized_by_user": true,
+  "production_cms_write_authorization_status": "applied_exact_preflight_live_readback_pass",
   "application_deploy_authorized": false,
   "discoverability_change_authorized": false
 }

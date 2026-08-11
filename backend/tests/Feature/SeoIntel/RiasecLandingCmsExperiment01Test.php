@@ -249,18 +249,18 @@ final class RiasecLandingCmsExperiment01Test extends TestCase
 
         $this->assertSame('frozen_preapply_production_read', $productBaseline['capture_status'] ?? null);
         $capturedAt = $this->absoluteTimestamp($productBaseline['captured_at'] ?? null);
-        $this->assertSame('2026-08-11T12:20:01Z', $productBaseline['captured_at'] ?? null);
-        $this->assertSame('6a76cf16a1162b93b4a47b4e681efe647a21c013', $productBaseline['active_backend_revision'] ?? null);
+        $this->assertSame('2026-08-11T13:39:22Z', $productBaseline['captured_at'] ?? null);
+        $this->assertSame('da8810b218f9ca1acbb7dabdaaa993cd14b31c48', $productBaseline['active_backend_revision'] ?? null);
         $this->assertSame([
             'workflow_name' => 'Backend Production RIASEC Product Baseline',
             'workflow_file' => '.github/workflows/backend-production-riasec-product-baseline.yml',
-            'run_id' => 31490673495,
+            'run_id' => 31497245765,
             'run_attempt' => 1,
-            'control_plane_sha' => '6a76cf16a1162b93b4a47b4e681efe647a21c013',
-            'active_release_id' => 'standard-6a76cf16a116-31489724464-1',
+            'control_plane_sha' => 'da8810b218f9ca1acbb7dabdaaa993cd14b31c48',
+            'active_release_id' => 'standard-da8810b218f9-31495516845-1',
             'receipt_schema_version' => 'fermatmind.production-riasec-product-baseline.v1',
             'receipt_status' => 'PASS_PRODUCTION_RIASEC_PRODUCT_BASELINE',
-            'receipt_sha256' => 'ab133c8a7e7054c1f1ac827888ebc42dbbc41b069ef86d67adfe5ccf8ec7d20a',
+            'receipt_sha256' => 'fba196b82eab5e496a5a77baa0acff9eafa68775fc74aff723451d2d63adf261',
         ], $productBaseline['capture_evidence'] ?? null);
         $this->assertSame([
             'deploy' => false,
@@ -371,8 +371,8 @@ final class RiasecLandingCmsExperiment01Test extends TestCase
     {
         $manifest = $this->readJson('manifest.json');
         $this->assertSame('064b9e15eb8eae102623306487c4b63635b7500a32925706f14688158734e3f1', $manifest['target_package_sha256'] ?? null);
-        $this->assertFalse($manifest['production_cms_write_authorized_by_user'] ?? true);
-        $this->assertSame('pending_fresh_production_preflight', $manifest['production_cms_write_authorization_status'] ?? null);
+        $this->assertTrue($manifest['production_cms_write_authorized_by_user'] ?? false);
+        $this->assertSame('applied_exact_preflight_live_readback_pass', $manifest['production_cms_write_authorization_status'] ?? null);
         $this->assertFalse($manifest['application_deploy_authorized'] ?? true);
         $this->assertFalse($manifest['discoverability_change_authorized'] ?? true);
         $this->assertSame([
@@ -396,7 +396,7 @@ final class RiasecLandingCmsExperiment01Test extends TestCase
 
         $this->assertStringContainsString('RiasecGlobalCmsApplyBridge', $readme);
         $this->assertStringContainsString('/ops/riasec-global-cms-apply', $readme);
-        $this->assertStringContainsString('pending_fresh_production_preflight', $this->readFile('manifest.json'));
+        $this->assertStringContainsString('applied_exact_preflight_live_readback_pass', $this->readFile('manifest.json'));
         $this->assertStringContainsString('exact active backend `REVISION` and managed release-directory identity', $readme);
         $this->assertStringContainsString('session-bound `preflight_fingerprint`', $readme);
         $this->assertStringContainsString('15-minute lifetime', $readme);
