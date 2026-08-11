@@ -30,6 +30,7 @@ final class Career1046RolloutZeroWritePreflightWorkflowTest extends TestCase
             'vars.PRODUCTION_HEALTHCHECK_URL',
             'StrictHostKeyChecking=yes',
             'backend/scripts/career/career_1046_rollout_preflight.sh',
+            'career_1046_authority_evidence.php',
             'EXPECTED_CONTROL_PLANE_SHA=$q_expected_control_plane_sha',
             'WORKFLOW_RUN_ID=$q_workflow_run_id',
             'WORKFLOW_RUN_ATTEMPT=$q_workflow_run_attempt',
@@ -50,6 +51,7 @@ final class Career1046RolloutZeroWritePreflightWorkflowTest extends TestCase
 
         foreach ([
             'career.1046_rollout.zero_write_preflight.v1',
+            'career.1046_rollout.authority_evidence.v1',
             'EXPECTED_CONTROL_PLANE_SHA',
             'WORKFLOW_RUN_ID',
             'WORKFLOW_RUN_ATTEMPT',
@@ -70,6 +72,15 @@ final class Career1046RolloutZeroWritePreflightWorkflowTest extends TestCase
             'CareerFullReleaseLedgerProjectionService::class',
             'CareerRuntimePublishProjectionService::class',
             'CareerCanonicalRuntimeTruthExporter::class',
+            'exact_authority_evidence',
+            'missing_delta_slugs',
+            'database_index_state',
+            'projection_sha256',
+            'ledger_sha256',
+            'slug_set_sha256',
+            'locale_row_set_sha256',
+            'target_missing_valid_display_slugs',
+            'target_missing_union_detail_slugs',
             'aa_projection_truth_review_authority',
             '--dry-run --no-audit-write --json',
             '/api/v0.5/career/jobs?locale=en',
@@ -122,6 +133,56 @@ final class Career1046RolloutZeroWritePreflightWorkflowTest extends TestCase
         $this->assertStringContainsString('apply_allowed: false', $runner);
         $this->assertStringContainsString('rollout_apply_allowed: false', $runner);
         $this->assertStringNotContainsString('explicitly approve production apply', strtolower($runner));
+    }
+
+    public function test_exact_authority_evidence_is_set_bound_and_strictly_read_only(): void
+    {
+        $runner = $this->repoFile('backend/scripts/operations/career_1046_authority_evidence.php');
+
+        foreach ([
+            'career.1046_rollout.authority_evidence.v1',
+            'CareerVerifiedRolloutBatchSlugAuthority::class',
+            'CareerDetailReadyPublicationCandidateScanner::class',
+            'missing_delta_slugs',
+            'outside_target_slugs',
+            'covered_receipts_currently_match',
+            'full_delta_receipt_and_db_match',
+            'target_locale_row_set_sha256',
+            'projection_sha256',
+            'ledger_sha256',
+            'slug_set_sha256',
+            'locale_row_set_sha256',
+            'target_missing_valid_display_slugs',
+            'raw_display_asset_row_deficit_vs_target',
+            'valid_display_gap_covered_by_alternative_detail_slugs',
+            'target_missing_union_detail_slugs',
+            'display_gap_blocks_target_detail',
+            'database_write_count',
+            'artifact_write_count',
+            'cache_write_count',
+            'publication_write_count',
+            'automatic_retry_allowed',
+        ] as $required) {
+            $this->assertStringContainsString($required, $runner);
+        }
+
+        foreach ([
+            '->create(',
+            '->update(',
+            '->delete(',
+            '::insert(',
+            '::upsert(',
+            'File::put(',
+            'Storage::put(',
+            'Artisan::call(',
+            ' --apply',
+            'queue:restart',
+            'deploy:symlink',
+            'indexnow',
+            'googleapis',
+        ] as $forbidden) {
+            $this->assertStringNotContainsString($forbidden, $runner);
+        }
     }
 
     private function repoFile(string $path): string
