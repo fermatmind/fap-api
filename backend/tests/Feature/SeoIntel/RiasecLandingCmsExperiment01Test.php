@@ -87,7 +87,14 @@ final class RiasecLandingCmsExperiment01Test extends TestCase
         $this->assertNotContains('result_load_failure', $measurement['product_measures'] ?? []);
         $this->assertFalse($measurement['discoverability_change_authorized'] ?? true);
         $this->assertFalse($measurement['application_deploy_authorized'] ?? true);
-        $this->assertSame(['from' => '2026-07-13', 'to' => '2026-08-09'], $productBaseline['date_window'] ?? null);
+        $this->assertSame([
+            'from' => '2026-07-13',
+            'to' => '2026-08-09',
+            'reporting_timezone' => 'Asia/Shanghai',
+            'storage_timezone' => 'UTC',
+            'window_utc_start' => '2026-07-12T16:00:00+00:00',
+            'window_utc_end_exclusive' => '2026-08-09T16:00:00+00:00',
+        ], $productBaseline['date_window'] ?? null);
         $this->assertSame([
             'org_id' => 0,
             'surface_key' => 'test_detail_holland_career_interest_test_riasec',
@@ -111,6 +118,10 @@ final class RiasecLandingCmsExperiment01Test extends TestCase
                 'materialized_table_used' => false,
                 'date_column' => 'occurred_at',
                 'date_filter' => '2026-07-13..2026-08-09 inclusive',
+                'reporting_timezone' => 'Asia/Shanghai',
+                'storage_timezone' => 'UTC',
+                'window_utc_start' => '2026-07-12T16:00:00+00:00',
+                'window_utc_end_exclusive' => '2026-08-09T16:00:00+00:00',
                 'fixed_filters' => [
                     'org_id' => 0,
                     'canonical_path' => '/en/tests/holland-career-interest-test-riasec',
