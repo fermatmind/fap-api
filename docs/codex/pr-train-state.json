@@ -104804,16 +104804,17 @@
         "evidence": "Exact changed-file comparison passed for the 11 allowlisted paths after restoring verifier-generated Big Five compiled artifacts. The added Big Five test path changes only its Career runtime-projection ownership classifier and regression fixture. No route, migration, middleware, workflow, production, CMS/DB/cache/artifact/pointer, sitemap/llms, Search Channel, URL submission, or frontend path changed."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "Initial PR head 1278a2a7ec47869a4d96776efa84187cc8e01a48 passed eight jobs but verify-bigfive identified the two new Career generation owner classes as unclassified runtime changes. The exact failing assertion was reproduced and fixed by extending only the existing Career runtime projection classifier; its complete 418-test / 863-assertion file now passes locally. A corrected head will rerun the complete required set before merge."
+        "status": "passed",
+        "evidence": "Corrected exact head 3cf1ad697536fa3e4e41a1ab10a1d10b454583d0 passed hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep blocking secrets, Semgrep OSS, and the non-blocking SARIF upload; staging parity was correctly skipped. GitHub reported MERGEABLE/CLEAN before merge."
       }
     },
     "failure_reason": null,
-    "commit_sha": "c88eca4604af467693ad01dbc61bfa3bda4d7313",
+    "commit_sha": "3cf1ad697536fa3e4e41a1ab10a1d10b454583d0",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3661",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-08-12T02:27:10+08:00",
+    "merge_commit_sha": "d9cfab3b55adb02c2709d03ac0772d7130e410f5",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_workflow_dispatched": false,
     "database_mutation": false,
@@ -104843,8 +104844,81 @@
         "at": "2026-08-12T02:18:00+08:00",
         "status": "same_scope_ci_fix_validated",
         "note": "The initial PR head failed only verify-bigfive because the runtime-freeze classifier did not yet categorize CareerGenerationAuthorityLoader and CareerGenerationCanonicalJson as Career runtime projection owner files. Added those exact paths to the existing classifier and its ownership regression list; the exact failed tests passed 2 / 5 and the complete classifier file passed 418 / 863 locally. No runtime implementation, production workflow, or production/discoverability state changed."
+      },
+      {
+        "at": "2026-08-12T02:27:10+08:00",
+        "status": "merged",
+        "note": "PR #3661 exact head 3cf1ad697536fa3e4e41a1ab10a1d10b454583d0 passed the full required check set and merged as d9cfab3b55adb02c2709d03ac0772d7130e410f5. origin/main contains the merge; the isolated train worktree moved directly to the repair branch, the local task branch was deleted, and GitHub had already deleted the remote branch. The gh merge command's only non-zero follow-up was its attempted checkout of main already owned by the user's primary worktree; merge and cleanup facts were verified independently. No production workflow or production/discoverability write was executed."
       }
     ],
-    "updated_at": "2026-08-12T02:18:00+08:00"
+    "updated_at": "2026-08-12T02:27:10+08:00"
+  },
+  "CAREER-RUNTIME-AUTHORITY-BOOTSTRAP-COMPAT-04R": {
+    "id": "CAREER-RUNTIME-AUTHORITY-BOOTSTRAP-COMPAT-04R",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-bootstrap-pointer-compat-repair-04r",
+    "title": "CAREER-RUNTIME-AUTHORITY-BOOTSTRAP-COMPAT-04R: bind frozen legacy bytes without rewrite",
+    "status": "local_validation_passed",
+    "depends_on": [
+      "CAREER-RUNTIME-AUTHORITY-ACTIVE-POINTER-04"
+    ],
+    "allowed_paths": [
+      "backend/app/Domain/Career/Publish/CareerGenerationAuthorityLoader.php",
+      "backend/tests/Fixtures/Career/CareerGenerationAuthorityFixture.php",
+      "backend/tests/Unit/Services/Career/CareerRuntimePublishProjectionLookupTest.php",
+      "docs/codex/pr-train.yaml",
+      "docs/codex/pr-train-state.json"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The continuous Career 1046 goal authorizes same-scope fixes discovered during the train; this repair is required before Task 2 because the frozen legacy projection and ledger bytes cannot be rewritten."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "Task 1 PR #3661 merged as d9cfab3b55adb02c2709d03ac0772d7130e410f5 after all required checks passed; this branch starts from that exact origin/main."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "CareerRuntimePublishProjectionLookupTest passed 12 tests / 35 assertions; sitemap and cold-cache regression coverage passed 45 tests / 775 assertions with SQLite, array cache and 1024M memory; the guarded full backend/scripts/ci_verify_mbti.sh completed successfully, including Big Five 1693 tests / 196735 assertions. Pint, PHP syntax, JSON/YAML parsing, exact five-file scope and diff checks are also green."
+      },
+      "scope": {
+        "status": "passed",
+        "evidence": "The five-path allowlist is limited to the existing generation loader, its fixture and focused test, plus train ledgers. No workflow, route, migration, middleware, production, DB/CMS/cache/artifact/pointer, discoverability, or frontend path is in scope."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": "PR not yet opened."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_workflow_dispatched": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "url_submission": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-08-12T02:33:00+08:00",
+        "status": "implementation_in_progress",
+        "note": "Post-merge Task 2 design review proved the frozen 342/30 legacy bytes lack generation-native embedded fields while Task 2 forbids rewriting them. Started a separate same-scope repair that permits only an explicit bootstrap-only exact-byte format with pointer-declared bounded paths, SHA and derived set/count validation; generation-native lineage remains strict. No Task 2 workflow is implemented or dispatched, and no production or discoverability action is executed."
+      },
+      {
+        "at": "2026-08-12T02:42:01+08:00",
+        "status": "local_validation_passed",
+        "note": "Focused generation-loader and sitemap/cold-cache regressions passed, followed by the complete ci_verify_mbti.sh chain under the repository heavy guard. Generated Big Five compiled outputs were restored after verification, leaving exactly the five allowlisted repair paths. No production workflow, deploy, migration, DB/CMS/cache/artifact/pointer, publication, sitemap/llms or Search Channel action was executed."
+      }
+    ],
+    "updated_at": "2026-08-12T02:42:01+08:00"
   }
 }

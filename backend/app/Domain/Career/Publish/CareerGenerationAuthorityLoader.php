@@ -18,6 +18,10 @@ final class CareerGenerationAuthorityLoader
 
     public const GENERATION_POINTER_FILENAME = 'generation-pointer.json';
 
+    public const ARTIFACT_FORMAT_GENERATION_NATIVE = 'generation_native_v1';
+
+    public const ARTIFACT_FORMAT_LEGACY_EXACT_BYTES = 'legacy_exact_bytes_v1';
+
     private const MAX_POINTER_BYTES = 256_000;
 
     private const MAX_ARTIFACT_BYTES = 64_000_000;
@@ -68,14 +72,17 @@ final class CareerGenerationAuthorityLoader
         $document = $this->readJsonFile($root, $pointerPath, self::MAX_POINTER_BYTES);
         $pointer = $this->validatePointerDocument($document);
         $generationId = (string) $pointer['generation_id'];
+        $artifactFormat = (string) $pointer['artifact_format'];
 
         $projectionDescriptor = $this->artifactDescriptor(
+            root: $root,
             pointer: $pointer,
             key: 'projection',
             expectedIdentity: 'career-runtime-publish-projection@'.$generationId,
             expectedPath: 'generations/'.$generationId.'/'.CareerRuntimePublishProjectionExporter::PROJECTION_FILENAME,
         );
         $ledgerDescriptor = $this->artifactDescriptor(
+            root: $root,
             pointer: $pointer,
             key: 'ledger',
             expectedIdentity: 'career-full-release-ledger@'.$generationId,
@@ -97,7 +104,7 @@ final class CareerGenerationAuthorityLoader
             );
         }
 
-        $projectionState = $this->validateProjection($projection, $pointer);
+        $projectionState = $this->validateProjection($projection, $pointer, $artifactFormat);
         $this->validateAuthorityIdentity($pointer, $projectionState, $ledgerState);
 
         if ($validateLineage) {
@@ -129,6 +136,13 @@ final class CareerGenerationAuthorityLoader
         }
 
         $generationId = $this->requiredIdentity($payload['generation_id'] ?? null, 'generation_id');
+        $artifactFormat = $payload['artifact_format'] ?? null;
+        if (! in_array($artifactFormat, [
+            self::ARTIFACT_FORMAT_GENERATION_NATIVE,
+            self::ARTIFACT_FORMAT_LEGACY_EXACT_BYTES,
+        ], true)) {
+            throw new RuntimeException('career_generation_artifact_format_invalid');
+        }
         foreach (['frozen_manifest_sha256', 'target_slug_set_sha256', 'target_locale_row_set_sha256', 'receipt_set_sha256'] as $key) {
             $this->requiredSha256(data_get($payload, 'authority.'.$key), $key);
         }
@@ -172,32 +186,61 @@ final class CareerGenerationAuthorityLoader
         if (data_get($payload, 'rollback.eligible') !== ($previousGenerationId !== null)) {
             throw new RuntimeException('career_generation_pointer_rollback_eligibility_invalid');
         }
+        if ($artifactFormat === self::ARTIFACT_FORMAT_LEGACY_EXACT_BYTES) {
+            if ($previousGenerationId !== null
+                || data_get($payload, 'artifacts.projection_lkg') !== null
+                || data_get($payload, 'revocation_receipt') !== null) {
+                throw new RuntimeException('career_generation_legacy_artifact_format_bootstrap_only');
+            }
+        }
 
         return $payload;
     }
 
-    /** @return array{identity:string,path:string,sha256:string} */
-    private function artifactDescriptor(array $pointer, string $key, string $expectedIdentity, string $expectedPath): array
-    {
+    /** @return array{identity:string,path:string,sha256:string,root:string} */
+    private function artifactDescriptor(
+        string $root,
+        array $pointer,
+        string $key,
+        string $expectedIdentity,
+        string $expectedPath,
+    ): array {
         $descriptor = data_get($pointer, 'artifacts.'.$key);
+        $format = (string) ($pointer['artifact_format'] ?? '');
+        $path = is_array($descriptor) ? ($descriptor['path'] ?? null) : null;
+        $artifactRoot = $root;
+        $pathValid = $path === $expectedPath;
+        if ($format === self::ARTIFACT_FORMAT_LEGACY_EXACT_BYTES) {
+            $legacyRoot = $key === 'projection'
+                ? 'career_runtime_publish_projection'
+                : 'career_release_ledger';
+            $filename = $key === 'projection'
+                ? CareerRuntimePublishProjectionExporter::PROJECTION_FILENAME
+                : CareerFullReleaseLedgerProjectionService::LEDGER_FILENAME;
+            $pathValid = is_string($path)
+                && preg_match('#^'.preg_quote($legacyRoot, '#').'/[A-Za-z0-9][A-Za-z0-9._-]{0,127}/'.preg_quote($filename, '#').'$#', $path) === 1;
+            $artifactRoot = storage_path('app/private');
+        }
         if (! is_array($descriptor)
             || ($descriptor['identity'] ?? null) !== $expectedIdentity
-            || ($descriptor['path'] ?? null) !== $expectedPath) {
+            || ! $pathValid) {
             throw new RuntimeException('career_generation_'.$key.'_identity_invalid');
         }
 
         return [
             'identity' => $expectedIdentity,
-            'path' => $expectedPath,
+            'path' => (string) $path,
             'sha256' => $this->requiredSha256($descriptor['sha256'] ?? null, $key.'_sha256'),
+            'root' => $artifactRoot,
         ];
     }
 
-    /** @param array{identity:string,path:string,sha256:string} $descriptor */
+    /** @param array{identity:string,path:string,sha256:string,root:string} $descriptor */
     private function readBoundArtifact(string $root, array $descriptor): array
     {
-        $path = $root.DIRECTORY_SEPARATOR.$descriptor['path'];
-        $raw = $this->readFile($root, $path, self::MAX_ARTIFACT_BYTES);
+        $artifactRoot = $descriptor['root'];
+        $path = $artifactRoot.DIRECTORY_SEPARATOR.$descriptor['path'];
+        $raw = $this->readFile($artifactRoot, $path, self::MAX_ARTIFACT_BYTES);
         if (! hash_equals($descriptor['sha256'], hash('sha256', $raw))) {
             throw new RuntimeException('career_generation_artifact_hash_mismatch');
         }
@@ -231,11 +274,12 @@ final class CareerGenerationAuthorityLoader
             'identity' => $primaryDescriptor['identity'],
             'path' => $expectedPath,
             'sha256' => $primaryDescriptor['sha256'],
+            'root' => $root,
         ]);
     }
 
     /** @return array{slug_count:int,slug_set_sha256:string,locale_row_count:int,locale_row_set_sha256:string,public_slug_count:int,public_locale_row_count:int,public_slugs:list<string>} */
-    private function validateProjection(array $projection, array $pointer): array
+    private function validateProjection(array $projection, array $pointer, string $artifactFormat): array
     {
         $generationId = (string) $pointer['generation_id'];
         if (($projection['projection_kind'] ?? null) !== CareerRuntimePublishProjectionService::PROJECTION_KIND
@@ -243,11 +287,21 @@ final class CareerGenerationAuthorityLoader
             || ($projection['source_authority'] ?? null) !== 'CareerFullReleaseLedger') {
             throw new RuntimeException('career_generation_projection_kind_invalid');
         }
-        if (($projection['generation_id'] ?? null) !== $generationId
-            || ($projection['artifact_identity'] ?? null) !== 'career-runtime-publish-projection@'.$generationId) {
-            throw new RuntimeException('career_generation_projection_generation_mismatch');
+        if ($artifactFormat === self::ARTIFACT_FORMAT_GENERATION_NATIVE) {
+            if (($projection['generation_id'] ?? null) !== $generationId
+                || ($projection['artifact_identity'] ?? null) !== 'career-runtime-publish-projection@'.$generationId) {
+                throw new RuntimeException('career_generation_projection_generation_mismatch');
+            }
+            $this->validateEmbeddedAuthority($projection, $pointer, 'projection');
+        } elseif (array_key_exists('generation_id', $projection)
+            || array_key_exists('artifact_identity', $projection)
+            || array_key_exists('generation_authority', $projection)) {
+            if (($projection['generation_id'] ?? null) !== $generationId
+                || ($projection['artifact_identity'] ?? null) !== 'career-runtime-publish-projection@'.$generationId) {
+                throw new RuntimeException('career_generation_projection_generation_mismatch');
+            }
+            $this->validateEmbeddedAuthority($projection, $pointer, 'projection');
         }
-        $this->validateEmbeddedAuthority($projection, $pointer, 'projection');
 
         $items = $projection['items'] ?? null;
         if (! is_array($items) || $items === []) {
@@ -318,11 +372,22 @@ final class CareerGenerationAuthorityLoader
     private function validateLedger(array $ledger, array $pointer): array
     {
         $generationId = (string) $pointer['generation_id'];
-        if (($ledger['generation_id'] ?? null) !== $generationId
-            || ($ledger['artifact_identity'] ?? null) !== 'career-full-release-ledger@'.$generationId) {
-            throw new RuntimeException('career_generation_ledger_generation_mismatch');
+        $artifactFormat = (string) $pointer['artifact_format'];
+        if ($artifactFormat === self::ARTIFACT_FORMAT_GENERATION_NATIVE) {
+            if (($ledger['generation_id'] ?? null) !== $generationId
+                || ($ledger['artifact_identity'] ?? null) !== 'career-full-release-ledger@'.$generationId) {
+                throw new RuntimeException('career_generation_ledger_generation_mismatch');
+            }
+            $this->validateEmbeddedAuthority($ledger, $pointer, 'ledger');
+        } elseif (array_key_exists('generation_id', $ledger)
+            || array_key_exists('artifact_identity', $ledger)
+            || array_key_exists('generation_authority', $ledger)) {
+            if (($ledger['generation_id'] ?? null) !== $generationId
+                || ($ledger['artifact_identity'] ?? null) !== 'career-full-release-ledger@'.$generationId) {
+                throw new RuntimeException('career_generation_ledger_generation_mismatch');
+            }
+            $this->validateEmbeddedAuthority($ledger, $pointer, 'ledger');
         }
-        $this->validateEmbeddedAuthority($ledger, $pointer, 'ledger');
         if (($ledger['ledger_kind'] ?? null) !== CareerFullReleaseLedgerService::LEDGER_KIND) {
             throw new RuntimeException('career_generation_ledger_kind_invalid');
         }
@@ -389,7 +454,11 @@ final class CareerGenerationAuthorityLoader
             throw new RuntimeException('career_generation_previous_pointer_hash_mismatch');
         }
         $previous = $this->loadFromPointer($root, $previousPointerPath, false);
-        $previousProjection = $this->validateProjection($previous['projection'], $previous['pointer']);
+        $previousProjection = $this->validateProjection(
+            $previous['projection'],
+            $previous['pointer'],
+            (string) $previous['pointer']['artifact_format'],
+        );
 
         $removedPublicSlugs = array_values(array_diff(
             $previousProjection['public_slugs'],
@@ -417,6 +486,7 @@ final class CareerGenerationAuthorityLoader
             'identity' => 'career-generation-revocations@'.$generationId,
             'path' => $expectedPath,
             'sha256' => $this->requiredSha256($descriptor['sha256'] ?? null, 'revocation_receipt_sha256'),
+            'root' => $root,
         ]);
         if (($receipt['schema_version'] ?? null) !== self::REVOCATION_SCHEMA_VERSION
             || ($receipt['from_generation_id'] ?? null) !== data_get($pointer, 'lineage.previous_generation_id')

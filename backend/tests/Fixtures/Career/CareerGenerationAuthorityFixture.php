@@ -76,6 +76,7 @@ final class CareerGenerationAuthorityFixture
 
         $payload = [
             'generation_id' => $generationId,
+            'artifact_format' => CareerGenerationAuthorityLoader::ARTIFACT_FORMAT_GENERATION_NATIVE,
             'artifacts' => [
                 'projection' => [
                     'identity' => 'career-runtime-publish-projection@'.$generationId,
