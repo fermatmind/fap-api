@@ -98,6 +98,14 @@ final class RiasecLandingCmsExperiment01Test extends TestCase
         $this->assertSame('analytics_seo_conversion_daily', data_get($productBaseline, 'required_sources.landing_and_product_funnel.query_contract.table'));
         $this->assertSame('form_id', data_get($productBaseline, 'required_sources.landing_and_product_funnel.query_contract.group_by'));
         $this->assertSame(
+            'analytics:measurement-funnel-report --from=2026-07-13 --to=2026-08-09 --org=0 --scale=RIASEC --locale=en --json',
+            data_get($productBaseline, 'required_sources.attempt_result_funnel.authority'),
+        );
+        $this->assertSame(
+            'analytics:measurement-failure-cohorts-report --from=2026-07-13 --to=2026-08-09 --org=0 --scale=RIASEC --form=riasec_60 --form=riasec_140 --locale=en --json',
+            data_get($productBaseline, 'required_sources.failure_cohorts.authority'),
+        );
+        $this->assertSame(
             [
                 'landing_view' => [
                     'source' => 'landing_and_product_funnel',
