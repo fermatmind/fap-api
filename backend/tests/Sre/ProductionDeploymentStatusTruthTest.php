@@ -331,10 +331,10 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $deploy = strstr($workflow, '  deploy-production:') ?: '';
         $deploy = strstr($deploy, '  production-incident-diagnostic:', true) ?: $deploy;
         $deployer = (string) file_get_contents(dirname(__DIR__, 3).'/deploy.php');
-        $publicBusinessCommand = $this->between(
+        $publicBusinessRunner = $this->between(
             $deployer,
-            'function deployPublicDnsBusinessEvidenceCommand',
-            'function runProductionPublicDnsBusinessEvidence'
+            'function runProductionPublicDnsBusinessEvidence',
+            'function deploySystemdServiceArg'
         );
 
         $baselineOffset = strpos($deploy, '- name: Verify production health evidence baseline');
@@ -379,28 +379,16 @@ final class ProductionDeploymentStatusTruthTest extends TestCase
         $this->assertStringContainsString("task('healthcheck:public-dns'", $deployer);
         $this->assertStringContainsString("after('healthcheck:sitemap-source', 'healthcheck:public-dns')", $deployer);
         $this->assertStringContainsString("currentHost()->getAlias() !== 'production'", $deployer);
-        $this->assertStringContainsString('deployPublicDnsBusinessEvidenceCommand($host)', $deployer);
-        $this->assertStringContainsString('curl -sS --connect-timeout 3 --max-time 10', $publicBusinessCommand);
-        $this->assertStringContainsString('PRODUCTION_PUBLIC_PROBE_ATTEMPTS=3', $publicBusinessCommand);
-        $this->assertStringContainsString('429|502|503|504) return 75', $publicBusinessCommand);
-        $this->assertStringContainsString('if ! raw="$(curl -sS', $publicBusinessCommand);
-        $this->assertStringNotContainsString('set +e; raw=', $publicBusinessCommand);
-        $this->assertStringContainsString('case "$attempt" in 1) sleep 2 ;; 2) sleep 5', $publicBusinessCommand);
-        $this->assertStringContainsString('Public DNS business evidence failed after 3 attempts', $publicBusinessCommand);
-        $this->assertStringContainsString('PROBE_STAGE=public_health', $publicBusinessCommand);
-        $this->assertStringContainsString('PROBE_STAGE=public_flags', $publicBusinessCommand);
-        $this->assertStringContainsString('PROBE_STAGE=public_bigfive', $publicBusinessCommand);
-        $this->assertStringContainsString('PROBE_STAGE=public_bigfive_contract', $publicBusinessCommand);
-        $this->assertStringContainsString('stage=${PROBE_STAGE} status=${PROBE_STATUS:-none}', $publicBusinessCommand);
-        $this->assertStringContainsString("deployHttpsUrlArg(\$host, '/api/healthz')", $publicBusinessCommand);
-        $this->assertStringContainsString("deployHttpsUrlArg(\$host, '/api/v0.3/flags')", $publicBusinessCommand);
+        $this->assertStringContainsString("'PUBLIC_DNS_PROBE_ATTEMPTS' => '3'", $publicBusinessRunner);
+        $this->assertStringContainsString("'PUBLIC_DNS_PROBE_RETRY_DELAYS_SECONDS' => '2 5'", $publicBusinessRunner);
+        $this->assertStringContainsString("'PUBLIC_DNS_PROBE_CONNECT_TIMEOUT_SECONDS' => '3'", $publicBusinessRunner);
+        $this->assertStringContainsString("'PUBLIC_DNS_PROBE_MAX_TIME_SECONDS' => '10'", $publicBusinessRunner);
         $this->assertStringContainsString(
-            "'/api/v0.5/personality-content-assets/big_five/hub/big-five?locale=zh-CN'",
-            $publicBusinessCommand
+            "deployPlaceholderPathArg('{{release_path}}', 'backend/scripts/deploy/verify_public_dns_business_evidence.sh')",
+            $publicBusinessRunner
         );
-        $this->assertStringContainsString('[ "$PROBE_STATUS" = "404" ]', $publicBusinessCommand);
-        $this->assertStringContainsString('personality_public_content_asset_v1.source_hash', $publicBusinessCommand);
-        $this->assertStringNotContainsString('--resolve', $publicBusinessCommand);
+        $this->assertStringNotContainsString('bash -lc', $publicBusinessRunner);
+        $this->assertStringNotContainsString('curl ', $publicBusinessRunner);
     }
 
     public function test_pre_deploy_public_probe_retries_a_transport_failure_without_errexit_leakage(): void

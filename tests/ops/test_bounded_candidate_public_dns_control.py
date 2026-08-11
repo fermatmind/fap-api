@@ -16,6 +16,13 @@ WRAPPER = (
     / "deploy"
     / "bounded_candidate_public_dns_control.php"
 )
+HELPER = (
+    ROOT
+    / "backend"
+    / "scripts"
+    / "deploy"
+    / "verify_public_dns_business_evidence.sh"
+)
 
 CANDIDATE_SHA = "363bbba54f7cac78b9cbb6118c1800dd0c6b7340"
 STAGING_RUN_ID = "31384127889"
@@ -45,40 +52,6 @@ class BoundedCandidatePublicDnsControlTest(unittest.TestCase):
         end = self.workflow.index(f"- name: {end_name}", start)
         return self.workflow[start:end]
 
-    def public_dns_business_command(self) -> str:
-        deployer = DEPLOYER.read_text(encoding="utf-8")
-        builder = deployer[
-            deployer.index("function deployPublicDnsBusinessEvidenceCommand") :
-            deployer.index("function runProductionPublicDnsBusinessEvidence")
-        ]
-        harness = """<?php
-namespace Deployer;
-
-function deployShellArg(string $value): string
-{
-    return escapeshellarg($value);
-}
-
-function deployHttpsUrlArg(string $host, string $path): string
-{
-    return deployShellArg("https://{$host}{$path}");
-}
-
-""" + builder + """
-echo deployPublicDnsBusinessEvidenceCommand('api.example.test');
-"""
-
-        result = subprocess.run(
-            ["php"],
-            cwd=ROOT,
-            input=harness,
-            capture_output=True,
-            text=True,
-            check=True,
-        )
-
-        return result.stdout
-
     def test_candidate_recipe_and_control_wrapper_hashes_are_exact(self):
         candidate_recipe = subprocess.run(
             ["git", "show", f"{CANDIDATE_SHA}:deploy.php"],
@@ -97,14 +70,17 @@ echo deployPublicDnsBusinessEvidenceCommand('api.example.test');
             "Setup PHP",
         )
         wrapper_match = re.search(r'wrapper_sha256="([0-9a-f]{64})"', step)
+        helper_match = re.search(r'helper_sha256="([0-9a-f]{64})"', step)
         classifier_match = re.search(
             r'EXPECTED_BOUNDED_PUBLIC_DNS_CONTROL_SHA256="([0-9a-f]{64})"',
             self.workflow,
         )
 
         self.assertIsNotNone(wrapper_match)
+        self.assertIsNotNone(helper_match)
         self.assertIsNotNone(classifier_match)
         self.assertEqual(sha256(WRAPPER), wrapper_match.group(1))
+        self.assertEqual(sha256(HELPER), helper_match.group(1))
         self.assertEqual(sha256(WRAPPER), classifier_match.group(1))
 
     def test_prepare_step_binds_candidate_staging_and_failed_incident(self):
@@ -132,6 +108,9 @@ echo deployPublicDnsBusinessEvidenceCommand('api.example.test');
             '.task_evidence.symlink == "skipped"',
             '.activation_completed == false',
             'git show "${WORKFLOW_CONTROL_SHA}:${wrapper_path}"',
+            'git show "${WORKFLOW_CONTROL_SHA}:${helper_path}"',
+            "public_dns_helper_sha256: $helper_sha256",
+            "echo \"helper_path=$control_helper\" >> \"$GITHUB_OUTPUT\"",
             "backend-bounded-public-dns-control-receipt.v1",
             'overridden_tasks: ["guard:public-dns-health"]',
             "candidate_tree_unchanged: true",
@@ -158,18 +137,17 @@ echo deployPublicDnsBusinessEvidenceCommand('api.example.test');
         )
 
         for expected in (
-            "/api/healthz",
-            "/api/v0.3/flags",
-            "/api/v0.5/personality-content-assets/big_five/hub/big-five?locale=zh-CN",
-            "PRODUCTION_PUBLIC_PROBE_ATTEMPTS=3",
-            'if ! raw="$(curl -sS --connect-timeout 3 --max-time 10',
-            "429|502|503|504) return 75",
-            'case "$attempt" in 1) sleep 2 ;; 2) sleep 5',
-            "Public DNS business evidence retrying after attempt",
-            "Public DNS business evidence failed after 3 attempts",
-            "stage=${PROBE_STAGE} status=${PROBE_STATUS:-none}",
-            "rc=${probe_rc}",
-            "personality_public_content_asset_v1.source_hash",
+            "BOUNDED_PUBLIC_DNS_HELPER_SHA256",
+            "BOUNDED_PUBLIC_DNS_HELPER_PATH",
+            "PUBLIC_DNS_PROBE_ATTEMPTS' => '3'",
+            "PUBLIC_DNS_PROBE_RETRY_DELAYS_SECONDS' => '2 5'",
+            "PUBLIC_DNS_PROBE_CONNECT_TIMEOUT_SECONDS' => '3'",
+            "PUBLIC_DNS_PROBE_MAX_TIME_SECONDS' => '10'",
+            "base64_encode",
+            "| base64 -d",
+            "| env ",
+            "bash -s",
+            "bash -o pipefail -c",
         ):
             self.assertIn(expected, self.wrapper)
 
@@ -184,13 +162,15 @@ echo deployPublicDnsBusinessEvidenceCommand('api.example.test');
             "scp ",
             "rsync ",
             "--resolve",
-            'if [ "$probe_rc" -ne 75 ]',
+            "curl ",
+            "bash -lc",
         ):
             self.assertNotIn(forbidden, self.wrapper)
 
     def test_wrapper_task_resolves_current_host_in_deployer_worker_namespace(self):
         task_start = self.wrapper.index("task('guard:public-dns-health'")
         worker_source = self.wrapper[: self.wrapper.index("$candidateSha =")]
+        worker_source += "\n$publicDnsHelperPayload = base64_encode('test helper');\n\n"
         worker_source += self.wrapper[task_start:]
         worker_source = worker_source.removeprefix("<?php\n\n")
         worker_source = worker_source.replace(
@@ -255,6 +235,7 @@ echo "worker namespace ok\\n";
     def test_wrapper_task_resolves_all_candidate_helpers_in_production_namespace(self):
         task_start = self.wrapper.index("task('guard:public-dns-health'")
         worker_source = self.wrapper[: self.wrapper.index("$candidateSha =")]
+        worker_source += "\n$publicDnsHelperPayload = base64_encode('test helper');\n\n"
         worker_source += self.wrapper[task_start:]
         worker_source = worker_source.removeprefix("<?php\n\n")
         worker_source = worker_source.replace(
@@ -277,13 +258,6 @@ namespace Deployer {
     function currentHost(): TestHost
     {
         return new TestHost();
-    }
-
-    function deployHttpsUrlArg(string $host, string $path): string
-    {
-        $GLOBALS['https_url_calls'] = ($GLOBALS['https_url_calls'] ?? 0) + 1;
-
-        return deployShellArg("https://{$host}{$path}");
     }
 
     function deploySafeHost(string $host, string $label): string
@@ -328,17 +302,26 @@ namespace {
 if (($GLOBALS['safe_host_calls'] ?? 0) !== 1) {
     throw new \\RuntimeException('deploySafeHost was not resolved exactly once');
 }
-if (($GLOBALS['https_url_calls'] ?? 0) !== 3) {
-    throw new \\RuntimeException('deployHttpsUrlArg was not resolved exactly three times');
-}
-if (($GLOBALS['shell_arg_calls'] ?? 0) < 3) {
+if (($GLOBALS['shell_arg_calls'] ?? 0) < 6) {
     throw new \\RuntimeException('deployShellArg was not resolved');
 }
 if (! str_contains(
     (string) ($GLOBALS['bounded_public_dns_command'] ?? ''),
-    'https://api.example.test/api/v0.3/flags'
+    'https://api.example.test'
+)) {
+    throw new \\RuntimeException('production base URL was not assembled');
+}
+if (! str_contains(
+    (string) ($GLOBALS['bounded_public_dns_command'] ?? ''),
+    '| base64 -d | env '
 )) {
     throw new \\RuntimeException('production command was not assembled');
+}
+if (! str_contains(
+    (string) ($GLOBALS['bounded_public_dns_command'] ?? ''),
+    'bash -o pipefail -c'
+)) {
+    throw new \\RuntimeException('production command does not fail closed on pipeline errors');
 }
 
 echo "production worker namespace ok\n";
@@ -361,26 +344,17 @@ echo "production worker namespace ok\n";
             result.stdout.strip(),
         )
 
-    def test_wrapper_uses_the_exact_current_retry_command_builder(self):
-        deployer = DEPLOYER.read_text(encoding="utf-8")
-        current_builder = deployer[
-            deployer.index("function deployPublicDnsBusinessEvidenceCommand") :
-            deployer.index("function runProductionPublicDnsBusinessEvidence")
-        ].strip()
-        wrapper_builder = self.wrapper[
-            self.wrapper.index("function boundedPublicDnsBusinessEvidenceCommand") :
-            self.wrapper.index("$candidateSha =")
-        ].strip()
-        wrapper_builder = wrapper_builder.replace(
-            "boundedPublicDnsBusinessEvidenceCommand",
-            "deployPublicDnsBusinessEvidenceCommand",
+    def test_wrapper_uses_the_exact_current_public_dns_helper(self):
+        helper_match = re.search(
+            r"const BOUNDED_PUBLIC_DNS_HELPER_SHA256 = '([0-9a-f]{64})';",
+            self.wrapper,
         )
 
-        self.assertEqual(current_builder, wrapper_builder)
+        self.assertIsNotNone(helper_match)
+        self.assertEqual(sha256(HELPER), helper_match.group(1))
+        self.assertIn(f'helper_sha256="{sha256(HELPER)}"', self.workflow)
 
-    def test_business_contract_failure_is_retried_and_then_passes(self):
-        command = self.public_dns_business_command()
-
+    def test_business_contract_failure_is_terminal_without_retry(self):
         with tempfile.TemporaryDirectory() as temporary_directory:
             temporary_path = Path(temporary_directory)
             counter = temporary_path / "curl-count"
@@ -431,22 +405,27 @@ exit 0
             environment = {
                 "PATH": f"{temporary_path}:/usr/bin:/bin",
                 "CURL_COUNTER": str(counter),
+                "PUBLIC_DNS_PROBE_BASE_URL": "https://api.example.test",
+                "PUBLIC_DNS_PROBE_ATTEMPTS": "3",
+                "PUBLIC_DNS_PROBE_RETRY_DELAYS_SECONDS": "0 0",
+                "PUBLIC_DNS_PROBE_CONNECT_TIMEOUT_SECONDS": "3",
+                "PUBLIC_DNS_PROBE_MAX_TIME_SECONDS": "10",
             }
             result = subprocess.run(
-                ["bash", "-c", command],
+                ["bash", str(HELPER)],
                 cwd=ROOT,
                 env=environment,
                 capture_output=True,
                 text=True,
             )
 
-            self.assertEqual(0, result.returncode, result.stderr)
-            self.assertEqual("6", counter.read_text(encoding="utf-8").strip())
+            self.assertEqual(1, result.returncode, result.stderr)
+            self.assertEqual("3", counter.read_text(encoding="utf-8").strip())
             self.assertIn(
-                "retrying after attempt 1: "
-                "stage=public_bigfive_contract status=200 rc=1",
+                "failed terminally: stage=public_bigfive_contract status=200 rc=1",
                 result.stderr,
             )
+            self.assertNotIn("retrying", result.stderr)
 
     def test_deploy_uses_runner_recipe_without_changing_release_revision(self):
         deploy_step = self.workflow_step(
@@ -459,6 +438,7 @@ exit 0
             'elif [ "${{ steps.bounded_public_dns_control.outputs.enabled }}" = "true" ]',
             'deployer_recipe="${{ steps.bounded_public_dns_control.outputs.recipe_path }}"',
             'BOUNDED_PUBLIC_DNS_CANDIDATE_RECIPE_PATH="$GITHUB_WORKSPACE/deploy.php"',
+            'BOUNDED_PUBLIC_DNS_HELPER_PATH="${{ steps.bounded_public_dns_control.outputs.helper_path }}"',
             'php /tmp/dep.phar "$DEPLOY_TASK" production -f "$deployer_recipe"',
             '--revision "$DEPLOY_SHA"',
         ):

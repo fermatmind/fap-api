@@ -368,7 +368,7 @@ jobs:
                     }
                     ;;
                   backend/scripts/deploy/bounded_candidate_public_dns_control.php)
-                    EXPECTED_BOUNDED_PUBLIC_DNS_CONTROL_SHA256="13845400d5a4a58ef6751d41e953076493f4d7853126c96860ab04b5c864a195"
+                    EXPECTED_BOUNDED_PUBLIC_DNS_CONTROL_SHA256="164c99cbed3f04ba91d2446547cbf24d06455b162d7ca75b0be239cd6054d82f"
                     test "$(sha256sum "$path" | awk '{print $1}')" = \
                       "$EXPECTED_BOUNDED_PUBLIC_DNS_CONTROL_SHA256" || {
                       CODE_ONLY_SCOPE=false
@@ -832,8 +832,10 @@ jobs:
           release_id="standard-363bbba54f7c"
           staging_run_id="31384127889"
           candidate_recipe_sha256="e27282825c2074e56067e6ec4cb9a8a3951ad8d4207c0c3f598fc93a1d02128b"
-          wrapper_sha256="13845400d5a4a58ef6751d41e953076493f4d7853126c96860ab04b5c864a195"
+          helper_sha256="84274c505f7506c087c694cd0fbde5258e07b39742818824f0344e255f820dd5"
+          wrapper_sha256="164c99cbed3f04ba91d2446547cbf24d06455b162d7ca75b0be239cd6054d82f"
           wrapper_path="backend/scripts/deploy/bounded_candidate_public_dns_control.php"
+          helper_path="backend/scripts/deploy/verify_public_dns_business_evidence.sh"
           incident_run_id="31415836351"
           incident_artifact_name="backend-production-incident-diagnostic-31415836351-1"
           incident_artifact_digest="sha256:667b65a99f1a035a20971f237874b1545187584caa767ea0d9d9bc99f0fcde6e"
@@ -898,10 +900,14 @@ jobs:
             ' "$incident_receipt" >/dev/null
 
           control_wrapper="$RUNNER_TEMP/bounded-candidate-public-dns-control.php"
+          control_helper="$RUNNER_TEMP/verify-public-dns-business-evidence.sh"
           git show "${WORKFLOW_CONTROL_SHA}:${wrapper_path}" > "$control_wrapper"
-          chmod 600 "$control_wrapper"
+          git show "${WORKFLOW_CONTROL_SHA}:${helper_path}" > "$control_helper"
+          chmod 600 "$control_wrapper" "$control_helper"
           test "$(sha256sum "$control_wrapper" | awk '{print $1}')" = "$wrapper_sha256"
+          test "$(sha256sum "$control_helper" | awk '{print $1}')" = "$helper_sha256"
           php -l "$control_wrapper" >/dev/null
+          bash -n "$control_helper"
 
           test "$(git rev-parse HEAD^{tree})" = "$candidate_tree_before"
           test -z "$(git status --porcelain=v1)"
@@ -912,6 +918,7 @@ jobs:
             --arg control_sha "$WORKFLOW_CONTROL_SHA" \
             --arg staging_run_id "$staging_run_id" \
             --arg candidate_recipe_sha256 "$candidate_recipe_sha256" \
+            --arg helper_sha256 "$helper_sha256" \
             --arg wrapper_sha256 "$wrapper_sha256" \
             --arg incident_run_id "$incident_run_id" \
             --arg incident_artifact_digest "$incident_artifact_digest" \
@@ -923,6 +930,7 @@ jobs:
               control_sha: $control_sha,
               staging_run_id: $staging_run_id,
               candidate_recipe_sha256: $candidate_recipe_sha256,
+              public_dns_helper_sha256: $helper_sha256,
               control_wrapper_sha256: $wrapper_sha256,
               failed_incident_run_id: $incident_run_id,
               failed_incident_artifact_digest: $incident_artifact_digest,
@@ -937,6 +945,7 @@ jobs:
 
           echo "enabled=true" >> "$GITHUB_OUTPUT"
           echo "recipe_path=$control_wrapper" >> "$GITHUB_OUTPUT"
+          echo "helper_path=$control_helper" >> "$GITHUB_OUTPUT"
           echo "receipt_path=$receipt" >> "$GITHUB_OUTPUT"
           echo "Bounded public-DNS control prepared without changing the candidate tree."
 
@@ -1588,6 +1597,7 @@ jobs:
           elif [ "${{ steps.bounded_public_dns_control.outputs.enabled }}" = "true" ]; then
             deployer_recipe="${{ steps.bounded_public_dns_control.outputs.recipe_path }}"
             export BOUNDED_PUBLIC_DNS_CANDIDATE_RECIPE_PATH="$GITHUB_WORKSPACE/deploy.php"
+            export BOUNDED_PUBLIC_DNS_HELPER_PATH="${{ steps.bounded_public_dns_control.outputs.helper_path }}"
           fi
           php "$DEPLOY_TIMING_RUNNER" run \
             --receipt="$DEPLOY_TIMING_RECEIPT" \

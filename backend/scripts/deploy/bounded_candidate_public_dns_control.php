@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use function Deployer\currentHost;
-use function Deployer\deployHttpsUrlArg;
 use function Deployer\deploySafeHost;
 use function Deployer\deployShellArg;
 use function Deployer\get;
@@ -12,6 +11,7 @@ use function Deployer\task;
 
 const BOUNDED_PUBLIC_DNS_CANDIDATE_SHA = '363bbba54f7cac78b9cbb6118c1800dd0c6b7340';
 const BOUNDED_PUBLIC_DNS_CANDIDATE_RECIPE_SHA256 = 'e27282825c2074e56067e6ec4cb9a8a3951ad8d4207c0c3f598fc93a1d02128b';
+const BOUNDED_PUBLIC_DNS_HELPER_SHA256 = '84274c505f7506c087c694cd0fbde5258e07b39742818824f0344e255f820dd5';
 
 /**
  * This runner-side control recipe is never copied into the immutable release.
@@ -33,46 +33,6 @@ function boundedPublicDnsControlFile(string $environmentName, string $expectedSh
     return $path;
 }
 
-function boundedPublicDnsBusinessEvidenceCommand(string $host): string
-{
-    $healthUrl = deployHttpsUrlArg($host, '/api/healthz');
-    $flagsUrl = deployHttpsUrlArg($host, '/api/v0.3/flags');
-    $personalityUrl = deployHttpsUrlArg(
-        $host,
-        '/api/v0.5/personality-content-assets/big_five/hub/big-five?locale=zh-CN'
-    );
-    $httpCode = deployShellArg("\n%{http_code}");
-    $personalityContract = deployShellArg(
-        '.ok==true and (.personality_public_content_asset_v1.source_hash | strings | test("^[0-9a-f]{64}$"))'
-    );
-    $probeFunction = 'production_probe() { '
-        .'url="$1"; PROBE_STATUS=; PROBE_BODY=; '
-        .'if ! raw="$(curl -sS --connect-timeout 3 --max-time 10 '
-        ."-w {$httpCode} \"\$url\" 2>/dev/null)\"; then return 75; fi; "
-        .'PROBE_STATUS="${raw##*$\'\n\'}"; PROBE_BODY="${raw%$\'\n\'*}"; '
-        .'case "$PROBE_STATUS" in 429|502|503|504) return 75 ;; esac; return 0; }';
-    $verifyFunction = 'verify_public_evidence() { '
-        ."PROBE_STAGE=public_health; production_probe {$healthUrl} || return \$?; "
-        .'[ "$PROBE_STATUS" = "404" ] || return 1; '
-        ."PROBE_STAGE=public_flags; production_probe {$flagsUrl} || return \$?; "
-        .'[ "$PROBE_STATUS" = "200" ] || return 1; '
-        ."PROBE_STAGE=public_bigfive; production_probe {$personalityUrl} || return \$?; "
-        .'[ "$PROBE_STATUS" = "200" ] '
-        .'|| return 1; PROBE_STAGE=public_bigfive_contract; '
-        ."printf '%s' \"\$PROBE_BODY\" | jq -e {$personalityContract} >/dev/null; }";
-
-    return 'PRODUCTION_PUBLIC_PROBE_ATTEMPTS=3; PROBE_STATUS=; PROBE_BODY=; PROBE_STAGE=not_started; '
-        .$probeFunction.'; '.$verifyFunction.'; '
-        .'attempt=1; while [ "$attempt" -le "$PRODUCTION_PUBLIC_PROBE_ATTEMPTS" ]; do '
-        .'set +e; verify_public_evidence; probe_rc=$?; set -e; '
-        .'if [ "$probe_rc" -eq 0 ]; then exit 0; fi; '
-        .'if [ "$attempt" -eq "$PRODUCTION_PUBLIC_PROBE_ATTEMPTS" ]; then '
-        .'echo "Public DNS business evidence failed after 3 attempts: stage=${PROBE_STAGE} status=${PROBE_STATUS:-none} rc=${probe_rc}" >&2; exit 1; fi; '
-        .'echo "Public DNS business evidence retrying after attempt ${attempt}: stage=${PROBE_STAGE} status=${PROBE_STATUS:-none} rc=${probe_rc}" >&2; '
-        .'case "$attempt" in 1) sleep 2 ;; 2) sleep 5 ;; esac; '
-        .'attempt=$((attempt + 1)); done';
-}
-
 $candidateSha = trim((string) getenv('DEPLOY_SHA'));
 if (! hash_equals(BOUNDED_PUBLIC_DNS_CANDIDATE_SHA, $candidateSha)) {
     throw new \RuntimeException('Bounded public-DNS control is restricted to the reviewed candidate SHA.');
@@ -82,14 +42,37 @@ $candidateRecipe = boundedPublicDnsControlFile(
     'BOUNDED_PUBLIC_DNS_CANDIDATE_RECIPE_PATH',
     BOUNDED_PUBLIC_DNS_CANDIDATE_RECIPE_SHA256,
 );
+$publicDnsHelper = boundedPublicDnsControlFile(
+    'BOUNDED_PUBLIC_DNS_HELPER_PATH',
+    BOUNDED_PUBLIC_DNS_HELPER_SHA256,
+);
+$publicDnsHelperPayload = base64_encode((string) file_get_contents($publicDnsHelper));
 
 require $candidateRecipe;
 
-task('guard:public-dns-health', function (): void {
+task('guard:public-dns-health', function () use ($publicDnsHelperPayload): void {
     if (currentHost()->getAlias() !== 'production') {
         return;
     }
 
     $host = deploySafeHost((string) get('healthcheck_host'), 'healthcheck_host');
-    run('bash -lc '.deployShellArg(boundedPublicDnsBusinessEvidenceCommand($host)));
+    $environment = [
+        'PUBLIC_DNS_PROBE_BASE_URL' => "https://{$host}",
+        'PUBLIC_DNS_PROBE_ATTEMPTS' => '3',
+        'PUBLIC_DNS_PROBE_RETRY_DELAYS_SECONDS' => '2 5',
+        'PUBLIC_DNS_PROBE_CONNECT_TIMEOUT_SECONDS' => '3',
+        'PUBLIC_DNS_PROBE_MAX_TIME_SECONDS' => '10',
+    ];
+    $assignments = [];
+
+    foreach ($environment as $name => $value) {
+        $assignments[] = $name.'='.deployShellArg($value);
+    }
+
+    $streamCommand = 'printf %s '.deployShellArg($publicDnsHelperPayload)
+        .' | base64 -d'
+        .' | env '.implode(' ', $assignments)
+        .' bash -s';
+
+    run('bash -o pipefail -c '.deployShellArg($streamCommand));
 });
