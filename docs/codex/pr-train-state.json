@@ -105298,7 +105298,7 @@
     "base": "main",
     "branch": "codex/career-1046-product-data-staging-08",
     "title": "CAREER-1046-PRODUCT-DATA-STAGING-CONTROL-08: add exact same-generation product staging control",
-    "status": "github_checks_pending",
+    "status": "merged",
     "depends_on": [
       "CAREER-1046-IMMUTABLE-CANDIDATE-07"
     ],
@@ -105328,16 +105328,17 @@
         "evidence": "The six-path allowlist contains one protected manual workflow, one standalone immutable-directory runner, its executable SRE test, operator documentation and two train ledgers. No route, migration, public reader, CMS/content, active pointer, frontend or discoverability implementation is included."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "PR has not yet been opened."
+        "status": "passed",
+        "evidence": "Final exact head 062981c3edf4491e4c3da261dc5bb2ade48295d2 passed hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep blocking secrets, Semgrep OSS and the non-blocking SARIF upload. Staging parity was correctly skipped; GitHub reported MERGEABLE/CLEAN with exactly six allowlisted files."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "commit_sha": "062981c3edf4491e4c3da261dc5bb2ade48295d2",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3667",
+    "merged_at": "2026-08-12T05:35:53+08:00",
+    "merge_commit_sha": "cd728e22eb3b11e428b2eb8884b62a155943e14f",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "workflow_policy_change": true,
     "production_write_execution": false,
     "production_read_only_evidence": false,
@@ -105372,8 +105373,87 @@
         "at": "2026-08-12T05:27:10+08:00",
         "status": "github_checks_pending",
         "note": "Committed the exact six-file implementation as e573027537f6cfaa67a238c69fa262ba8a0ec850, pushed the focused branch and opened PR #3667. GitHub reports exactly six allowlisted files and required checks are running. No production or staging workflow was dispatched and no controlled external state was accessed or mutated."
+      },
+      {
+        "at": "2026-08-12T05:35:53+08:00",
+        "status": "merged",
+        "note": "PR #3667 final head 062981c3edf4491e4c3da261dc5bb2ade48295d2 passed the complete required check set and squash merged as cd728e22eb3b11e428b2eb8884b62a155943e14f. origin/main contains the merge, the remote branch disappeared during cleanup, and the local branch was deleted after the isolated train worktree moved to Task 6. No production or staging workflow was dispatched and no production or discoverability state was read or mutated."
       }
     ],
-    "updated_at": "2026-08-12T05:27:10+08:00"
+    "updated_at": "2026-08-12T05:35:53+08:00"
+  },
+  "CAREER-1046-ATOMIC-ROOT-ACTIVATION-CONTROL-09": {
+    "id": "CAREER-1046-ATOMIC-ROOT-ACTIVATION-CONTROL-09",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-1046-root-activation-09",
+    "title": "CAREER-1046-ATOMIC-ROOT-ACTIVATION-CONTROL-09: add single root generation activation control",
+    "status": "local_validation_passed",
+    "depends_on": [
+      "CAREER-1046-PRODUCT-DATA-STAGING-CONTROL-08"
+    ],
+    "allowed_paths": [
+      ".github/workflows/career-1046-root-generation-activation-production-ops.yml",
+      "backend/scripts/operations/career_1046_root_generation_activation.php",
+      "backend/tests/Sre/Career1046RootGenerationActivationWorkflowTest.php",
+      "docs/operations/career-1046-root-generation-activation-control.md",
+      "docs/codex/pr-train.yaml",
+      "docs/codex/pr-train-state.json"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "Task 6 of the continuous Career 1046 goal authorizes implementing and merging this exact atomic root activation control only; workflow dispatch, SSH and every production/staging read or mutation remain forbidden."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "Task 5 PR #3667 final head 062981c3edf4491e4c3da261dc5bb2ade48295d2 passed all required checks and squash merged as cd728e22eb3b11e428b2eb8884b62a155943e14f; this branch starts from that exact origin/main."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "The heavy-guarded full backend/scripts/ci_verify_mbti.sh chain exited 0, including Big Five 1693 tests / 196735 assertions and all MBTI/security/migration/queue gates. Focused activation/staging/reconciliation coverage passed 5 tests plus 6 known missing-.env warnings / 227 assertions; actionlint, Pint --test, PHP syntax, frozen contract verification, train YAML/JSON parsing, 253-line route listing, fresh SQLite migration, exact six-path scope and diff checks passed."
+      },
+      "scope": {
+        "status": "passed",
+        "evidence": "Exactly six allowlisted paths contain one protected manual workflow, one narrow single-root-pointer runner, its executable SRE test, operator documentation and two train ledgers. No route, migration, DB/CMS write implementation, cache warm, public reader, frontend or discoverability release is included."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": "PR has not yet been opened."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "workflow_policy_change": true,
+    "production_write_execution": false,
+    "production_read_only_evidence": false,
+    "production_workflow_dispatched": false,
+    "staging_workflow_dispatched": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "cache_mutation": false,
+    "artifact_mutation": false,
+    "pointer_mutation": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "url_submission": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-08-12T05:35:53+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started Task 6 from exact merged Task 5 origin/main cd728e22eb3b11e428b2eb8884b62a155943e14f. Scope is an unexecuted protected single-root-pointer activation workflow, narrow runner, focused test, operations document and ledgers only. No workflow was dispatched; no SSH, production/staging read, deploy, migration, DB/CMS/cache/artifact/pointer, publication, sitemap/llms or Search action was executed."
+      },
+      {
+        "at": "2026-08-12T05:57:50+08:00",
+        "status": "local_validation_passed",
+        "note": "Completed local validation. The heavy-guarded ci_verify_mbti master chain exited 0; focused activation, staging and database-reconciliation coverage passed 5 tests plus 6 known missing-.env warnings / 227 assertions; actionlint, Pint, PHP syntax, freeze contract, YAML/JSON parsing, 253-route listing, fresh SQLite migration, exact six-file scope and diff checks passed. Verifier-generated Big Five compiled files were restored. No production or staging workflow was dispatched and no controlled external state was accessed or mutated."
+      }
+    ],
+    "updated_at": "2026-08-12T05:57:50+08:00"
   }
 }

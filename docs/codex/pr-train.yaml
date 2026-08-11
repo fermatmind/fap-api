@@ -49566,7 +49566,7 @@ prs:
     base: main
     branch: codex/career-1046-product-data-staging-08
     title: "CAREER-1046-PRODUCT-DATA-STAGING-CONTROL-08: add exact same-generation product staging control"
-    status: github_checks_pending
+    status: merged
     depends_on:
       - CAREER-1046-IMMUTABLE-CANDIDATE-07
     train_scope: career_exact_1046_same_generation_product_data_staging_control
@@ -49615,3 +49615,59 @@ prs:
     deploy_allowed: false
     content_authority: frozen manifest plus exact Task 4 candidate artifact and current-generation pointer bytes; staged bytes remain inactive
     repository_rule_impact: adds only an unexecuted protected immutable product-data staging lane for a separately controlled activation task
+
+  - id: CAREER-1046-ATOMIC-ROOT-ACTIVATION-CONTROL-09
+    repo: fap-api
+    base: main
+    branch: codex/career-1046-root-activation-09
+    title: "CAREER-1046-ATOMIC-ROOT-ACTIVATION-CONTROL-09: add single root generation activation control"
+    status: local_validation_passed
+    depends_on:
+      - CAREER-1046-PRODUCT-DATA-STAGING-CONTROL-08
+    train_scope: career_exact_1046_single_atomic_root_generation_activation_control
+    risk_level: p0_production_root_pointer_activation_control
+    scope:
+      - Add one protected manual preflight/apply workflow bound to exact latest main, exact active SHA/release, exact successful Task 5 staging receipt/artifact and current 342/30 pointer bytes.
+      - Revalidate SELECT-only database receipt authority at exactly 1016 covered and 1016 matching with zero missing, mismatch or outside-target rows, plus exact staged 1046/2092 product bytes.
+      - Require a complete byte-identical immutable previous-generation rollback pointer and closed sitemap, llms and Search state before either phase.
+      - Permit apply to create one adjacent no-clobber pointer candidate and perform exactly one atomic root active-generation pointer switch, with exact readback and sanitized indeterminate receipt handling.
+    allowed_paths:
+      - .github/workflows/career-1046-root-generation-activation-production-ops.yml
+      - backend/scripts/operations/career_1046_root_generation_activation.php
+      - backend/tests/Sre/Career1046RootGenerationActivationWorkflowTest.php
+      - docs/operations/career-1046-root-generation-activation-control.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Dispatch this workflow, establish SSH, or read/write any production or staging state during this PR.
+      - Switch multiple unbound pointers, modify DB/CMS/cache/generation documents, regenerate the candidate, warm, deploy, migrate, restart, publish, release sitemap/llms/Search, or submit URLs.
+      - Add automatic retry, cleanup or rollback, or infer activation success after ambiguous transport.
+      - Implement Task 7 public verification/discoverability, Task 8 monitoring or Task 9 debt audit.
+    validation:
+      - cd backend && php artisan test tests/Sre/Career1046RootGenerationActivationWorkflowTest.php --no-ansi
+      - actionlint .github/workflows/career-1046-root-generation-activation-production-ops.yml
+      - cd backend && vendor/bin/pint --test scripts/operations/career_1046_root_generation_activation.php tests/Sre/Career1046RootGenerationActivationWorkflowTest.php
+      - php -l for every changed PHP file
+      - php backend/scripts/operations/verify_career_1046_current_state_freeze.php
+      - cd backend && bash scripts/ci_verify_mbti.sh through fermatmind-heavy-guard
+      - parse workflow, pr-train JSON and YAML
+      - exact six-file scope and forbidden production action validation
+      - git diff --check and git diff --cached --check
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    workflow_policy_change: true
+    production_write_execution: false
+    production_read_only_evidence: false
+    production_workflow_dispatched: false
+    staging_workflow_dispatched: false
+    database_mutation: false
+    cms_mutation: false
+    cache_mutation: false
+    artifact_mutation: false
+    pointer_mutation: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: frozen manifest, exact Task 5 immutable generation bytes, current database receipt authority and current/rollback pointer bytes; this PR adds only an unexecuted activation control
+    repository_rule_impact: adds one separately protected atomic root-generation activation lane while keeping discoverability release separately controlled
