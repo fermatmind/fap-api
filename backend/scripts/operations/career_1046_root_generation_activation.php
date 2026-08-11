@@ -536,6 +536,7 @@ final class Career1046RootGenerationActivation
             throw new Career1046RootActivationFailure('DATABASE_AUTHORITY_CHANGED_BEFORE_SWITCH');
         }
 
+        self::assertNoConflictingOperation($expected);
         $activeNow = self::readContainedFile((string) $current['authority_root'], (string) $current['active_path'], 256_000);
         if (! hash_equals((string) $current['active_sha256_before'], hash('sha256', $activeNow))) {
             throw new Career1046RootActivationFailure('ACTIVE_POINTER_CHANGED_BEFORE_SWITCH');

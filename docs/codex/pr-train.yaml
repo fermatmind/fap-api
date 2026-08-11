@@ -49630,7 +49630,7 @@ prs:
       - Add one protected manual preflight/apply workflow bound to exact latest main, exact active SHA/release, exact successful Task 5 staging receipt/artifact and current 342/30 pointer bytes.
       - Revalidate SELECT-only database receipt authority at exactly 1016 covered and 1016 matching with zero missing, mismatch or outside-target rows, plus exact staged 1046/2092 product bytes; repeat the database read immediately before the root switch and require the same state hash.
       - Require a complete byte-identical immutable previous-generation rollback pointer whose bound projection and ledger pass the existing strict runtime loader, plus closed sitemap, llms and Search state before either phase.
-      - Refetch and require exact latest main immediately before the only production-reachable command, and repeat deploy-lock plus competing-process guards at both pointer-write boundaries.
+      - Refetch and require exact latest main immediately before the only production-reachable command, and repeat deploy-lock plus competing-process guards at both pointer-write boundaries and again after the final database read immediately before the root rename.
       - Permit apply to publish one immutable generation-local loader-contract pointer, bind lineage to the previous pointer's canonical JSON hash while retaining raw-byte drift evidence, create one adjacent no-clobber root candidate and perform exactly one atomic root active-generation pointer switch, with byte-identical readback and sanitized indeterminate receipt handling.
     allowed_paths:
       - .github/workflows/career-1046-root-generation-activation-production-ops.yml
