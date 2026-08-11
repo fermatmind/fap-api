@@ -49183,3 +49183,56 @@ prs:
     deploy_allowed: false
     content_authority: fap-api CMS public topic edge records plus current backend publication and canonical truth
     repository_rule_impact: establishes a backend-authoritative edge projection and forbids frontend completion or Career activation before C06 PASS
+
+  - id: CAREER-1046-CURRENT-STATE-FREEZE-CONTRACT-00
+    repo: fap-api
+    base: main
+    branch: codex/career-1046-current-state-freeze-00
+    title: "CAREER-1046-CURRENT-STATE-FREEZE-CONTRACT-00: freeze 30/1016/1046 authority evidence"
+    status: ready_to_merge
+    depends_on: []
+    external_dependencies:
+      - Successful production SELECT-only zero-write evidence run 31515295236 attempt 1
+      - Receipt SHA-256 59d992de3043af791343eb0d025e33377a9d2b8db6b56504adfd41c2538a57cb
+      - Artifact digest sha256:c4dc998f211bb73fb8585ba8e2b5e5fc48ced7e1e1b44f12f49794dc3a26fd8f
+    train_scope: career_1046_generation_current_state_freeze_contract
+    risk_level: p1_read_only_authority_contract
+    scope:
+      - Freeze the exact 30 baseline, 1016 receipt-covered delta, 1046 target, and 2092 locale-row evidence as a machine-readable contract.
+      - Bind the evidence run, receipt, artifact, manifest, target-set, current materialized projection/ledger, and public-state hashes and counts.
+      - Add an offline read-only validator and focused fail-closed tests for hash, count, database-state, and zero-write boundaries.
+      - Record that production remains at 30 public slugs, receipts do not prove DB latest index state, and the 1048/2096 regenerated output is not activatable authority.
+    allowed_paths:
+      - backend/docs/career/contracts/career-1046-current-state-freeze.v1.json
+      - backend/scripts/operations/verify_career_1046_current_state_freeze.php
+      - backend/tests/Sre/Career1046CurrentStateFreezeContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change runtime readers, routes, database state, migrations, public APIs, projection/ledger bytes, sitemap, llms, Search Channel, or frontend behavior.
+      - Generate or activate a candidate, write an active pointer, dispatch a workflow, deploy, publish, warm, reconcile DB state, or treat receipts as current DB authority.
+    validation:
+      - cd backend && php artisan test tests/Sre/Career1046CurrentStateFreezeContractTest.php --no-ansi
+      - cd backend && php scripts/operations/verify_career_1046_current_state_freeze.php
+      - cd backend && vendor/bin/pint --test scripts/operations/verify_career_1046_current_state_freeze.php tests/Sre/Career1046CurrentStateFreezeContractTest.php
+      - php -l backend/scripts/operations/verify_career_1046_current_state_freeze.php
+      - php -l backend/tests/Sre/Career1046CurrentStateFreezeContractTest.php
+      - jq empty backend/docs/career/contracts/career-1046-current-state-freeze.v1.json docs/codex/pr-train-state.json
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - exact changed-file scope validation
+      - git diff --check
+      - git diff --cached --check
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_read_only_evidence: false
+    production_workflow_dispatched: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: frozen successful run 31515295236 evidence; current public authority remains the backend published projection
+    repository_rule_impact: adds an offline immutable evidence contract only and leaves all runtime, production, and discoverability authority unchanged
