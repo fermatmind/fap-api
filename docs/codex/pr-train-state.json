@@ -104938,7 +104938,7 @@
     "base": "main",
     "branch": "codex/career-current-generation-pointer-bootstrap-05",
     "title": "CAREER-CURRENT-GENERATION-POINTER-BOOTSTRAP-05: add exact 342/30 production pointer control",
-    "status": "github_checks_pending",
+    "status": "merged",
     "depends_on": [
       "CAREER-RUNTIME-AUTHORITY-BOOTSTRAP-COMPAT-04R"
     ],
@@ -104968,16 +104968,17 @@
         "evidence": "The six-path allowlist contains one manual workflow, one streamed standalone runner, its SRE test, operator documentation and the two train ledgers. No route, migration, middleware, application runtime, CMS/content, cache, frontend or discoverability implementation is included."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "PR #3663 opened from exact validated implementation commit c102e64737f1e3c2e5bb19d5d40e6bb8db6dba4e; required checks are pending."
+        "status": "passed",
+        "evidence": "Final exact head 314a999055389c30b6c521d97a8737be13854ce9 passed all nine GitHub checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep blocking secrets, Semgrep OSS and the non-blocking SARIF upload. Staging parity was correctly skipped; GitHub reported MERGEABLE/CLEAN with exactly six allowlisted files."
       }
     },
     "failure_reason": null,
-    "commit_sha": "c102e64737f1e3c2e5bb19d5d40e6bb8db6dba4e",
+    "commit_sha": "314a999055389c30b6c521d97a8737be13854ce9",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3663",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-08-12T03:30:08+08:00",
+    "merge_commit_sha": "2aad4c1b5ff0ba638c9ee03a8db249cef522b173",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "workflow_policy_change": true,
     "production_write_execution": false,
     "production_read_only_evidence": false,
@@ -105012,8 +105013,92 @@
         "at": "2026-08-12T03:20:53+08:00",
         "status": "github_checks_pending",
         "note": "Committed the exact six-file implementation as c102e64737f1e3c2e5bb19d5d40e6bb8db6dba4e, pushed the focused branch and opened PR #3663. Required checks must pass before squash merge. No production or staging workflow was dispatched and no controlled external state was read or mutated."
+      },
+      {
+        "at": "2026-08-12T03:30:08+08:00",
+        "status": "merged",
+        "note": "PR #3663 final head 314a999055389c30b6c521d97a8737be13854ce9 passed the complete required check set and squash merged as 2aad4c1b5ff0ba638c9ee03a8db249cef522b173. origin/main contains the merge, GitHub auto-deleted the remote branch, and the local branch was deleted after the isolated train worktree moved to Task 3A. No production or staging workflow was dispatched and no production or discoverability state was read or mutated."
       }
     ],
-    "updated_at": "2026-08-12T03:20:53+08:00"
+    "updated_at": "2026-08-12T03:30:08+08:00"
+  },
+  "CAREER-PUBLICATION-INDEX-RECONCILIATION-PREFLIGHT-06A": {
+    "id": "CAREER-PUBLICATION-INDEX-RECONCILIATION-PREFLIGHT-06A",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-publication-index-reconciliation-preflight-06a",
+    "title": "CAREER-PUBLICATION-INDEX-RECONCILIATION-PREFLIGHT-06A: add exact SELECT-only difference control",
+    "status": "local_validation_passed",
+    "depends_on": [
+      "CAREER-CURRENT-GENERATION-POINTER-BOOTSTRAP-05"
+    ],
+    "allowed_paths": [
+      ".github/workflows/career-publication-index-reconciliation-preflight-production-ops.yml",
+      "backend/scripts/operations/career_publication_index_reconciliation_preflight.php",
+      "backend/tests/Sre/CareerPublicationIndexReconciliationPreflightWorkflowTest.php",
+      "docs/operations/career-publication-index-reconciliation-preflight-control.md",
+      "docs/codex/pr-train.yaml",
+      "docs/codex/pr-train-state.json"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "Task 3A of the continuous Career 1046 goal authorizes implementing and merging this SELECT-only control plane only; workflow dispatch, SSH and every production/staging mutation remain forbidden."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "Task 2 PR #3663 merged as 2aad4c1b5ff0ba638c9ee03a8db249cef522b173 after all required checks passed; this branch starts from that exact origin/main."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "The guarded full backend/scripts/ci_verify_mbti.sh chain passed with exit code 0. Final canonical-set and frozen-contract tests passed 7 tests / 105 assertions; actionlint, Pint --test, PHP syntax, frozen zero-write contract verification, workflow/train YAML and JSON parsing, 232-route listing, fresh in-memory SQLite migration, exact six-path scope and diff checks passed."
+      },
+      "scope": {
+        "status": "passed",
+        "evidence": "The six-path allowlist contains one manual SELECT-only workflow, one pure-read streamed runner, its SRE test, operator documentation and the two train ledgers. No apply, route, migration, middleware, runtime reader, CMS/content, cache, pointer, frontend or discoverability implementation is included."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": "PR not yet opened."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "workflow_policy_change": true,
+    "production_write_execution": false,
+    "production_read_only_evidence": false,
+    "production_workflow_dispatched": false,
+    "staging_workflow_dispatched": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "cache_mutation": false,
+    "artifact_mutation": false,
+    "pointer_mutation": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "url_submission": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-08-12T03:30:08+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started Task 3A from exact merged Task 2 origin/main 2aad4c1b5ff0ba638c9ee03a8db249cef522b173. Scope is an unexecuted protected SELECT-only workflow, its streamed pure-read runner, focused test, operations document and ledgers only. No workflow was dispatched; no SSH, production/staging read, deploy, migration, DB/CMS/cache/artifact/pointer, publication, sitemap/llms or Search Channel action was executed."
+      },
+      {
+        "at": "2026-08-12T03:37:20+08:00",
+        "status": "implementation_in_progress",
+        "note": "Implemented exact canonical hashes for baseline, delta, target, authentic receipts, covered, missing, outside-target, baseline-overlap and all current DB latest-state cohorts. The runner uses only Eloquent SELECTs, rejects ambiguous latest timestamp ties, emits no row bodies or slugs, and has no apply mode. Focused fixtures pass 7 / 103; full repository validation is next. No production or staging workflow was dispatched."
+      },
+      {
+        "at": "2026-08-12T03:46:30+08:00",
+        "status": "local_validation_passed",
+        "note": "Completed local validation. The heavy-guarded ci_verify_mbti master chain exited 0; final focused tests passed 7 / 105; actionlint, Pint, PHP syntax, freeze contract, YAML/JSON parsing, 232-route listing, fresh SQLite migration, exact six-file scope and diff checks passed. A SQL listener now requires at least one observed query and an exact SELECT-only verb set before success. Verifier-generated Big Five compiled files were restored. No production or staging workflow was dispatched."
+      }
+    ],
+    "updated_at": "2026-08-12T03:46:30+08:00"
   }
 }

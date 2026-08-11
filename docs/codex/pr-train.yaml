@@ -49347,7 +49347,7 @@ prs:
     base: main
     branch: codex/career-current-generation-pointer-bootstrap-05
     title: "CAREER-CURRENT-GENERATION-POINTER-BOOTSTRAP-05: add exact 342/30 production pointer control"
-    status: github_checks_pending
+    status: merged
     depends_on:
       - CAREER-RUNTIME-AUTHORITY-BOOTSTRAP-COMPAT-04R
     train_scope: career_current_342_30_generation_pointer_bootstrap_control
@@ -49396,3 +49396,58 @@ prs:
     deploy_allowed: false
     content_authority: frozen backend projection and ledger remain byte authority; this PR adds only an unexecuted pointer-bootstrap control plane
     repository_rule_impact: introduces the separately controlled production bootstrap lane required by the generation-bound runtime reader
+
+  - id: CAREER-PUBLICATION-INDEX-RECONCILIATION-PREFLIGHT-06A
+    repo: fap-api
+    base: main
+    branch: codex/career-publication-index-reconciliation-preflight-06a
+    title: "CAREER-PUBLICATION-INDEX-RECONCILIATION-PREFLIGHT-06A: add exact SELECT-only difference control"
+    status: local_validation_passed
+    depends_on:
+      - CAREER-CURRENT-GENERATION-POINTER-BOOTSTRAP-05
+    train_scope: career_publication_index_reconciliation_select_only_preflight
+    risk_level: p1_production_read_only_evidence
+    scope:
+      - Add one protected manual-dispatch-only SELECT-only production workflow with no apply mode.
+      - Bind latest main, exact active release, frozen baseline/delta/target sets, authentic 1016 receipt authority, and a canonical hash of every current DB latest-state row.
+      - Emit canonical set hashes for covered, missing, outside-target, baseline-overlap, matching, mismatching, missing-occupation, missing-state and latest-state-tie cohorts.
+      - Upload only sanitized immutable runner-side receipts on success or failure, with no automatic retry or repair.
+    allowed_paths:
+      - .github/workflows/career-publication-index-reconciliation-preflight-production-ops.yml
+      - backend/scripts/operations/career_publication_index_reconciliation_preflight.php
+      - backend/tests/Sre/CareerPublicationIndexReconciliationPreflightWorkflowTest.php
+      - docs/operations/career-publication-index-reconciliation-preflight-control.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Dispatch this workflow, trigger staging, SSH to production, or read/write production DB, CMS, cache, artifacts, pointers, sitemap, llms or Search Channel state during this PR.
+      - Add an apply mode, transaction write, broad/free-form SQL, deploy, migration, restart, warm, publication, discoverability change, repair, automatic retry, cleanup or rollback.
+      - Implement Task 3B reconciliation apply or any later candidate, staging, activation, verification, discoverability, monitoring or debt scope.
+    validation:
+      - cd backend && php artisan test tests/Sre/CareerPublicationIndexReconciliationPreflightWorkflowTest.php tests/Sre/Career1046CurrentStateFreezeContractTest.php --no-ansi
+      - actionlint .github/workflows/career-publication-index-reconciliation-preflight-production-ops.yml
+      - cd backend && vendor/bin/pint --test scripts/operations/career_publication_index_reconciliation_preflight.php tests/Sre/CareerPublicationIndexReconciliationPreflightWorkflowTest.php
+      - php -l for every changed PHP file
+      - php backend/scripts/operations/verify_career_1046_current_state_freeze.php
+      - cd backend && bash scripts/ci_verify_mbti.sh through fermatmind-heavy-guard
+      - parse workflow, pr-train JSON and YAML
+      - exact changed-file scope and forbidden production action validation
+      - git diff --check and git diff --cached --check
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    workflow_policy_change: true
+    production_write_execution: false
+    production_read_only_evidence: false
+    production_workflow_dispatched: false
+    staging_workflow_dispatched: false
+    database_mutation: false
+    cms_mutation: false
+    cache_mutation: false
+    artifact_mutation: false
+    pointer_mutation: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: frozen manifest and authentic signed receipt set remain authority; this PR adds only an unexecuted SELECT-only DB difference control
+    repository_rule_impact: creates the immutable preflight evidence contract required by the separately scoped exact reconciliation apply
