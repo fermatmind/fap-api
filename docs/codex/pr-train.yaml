@@ -49526,6 +49526,7 @@ prs:
     allowed_paths:
       - backend/app/Domain/Career/Publish/Career1046ImmutableCandidateGenerator.php
       - backend/tests/Unit/Domain/Career/Publish/Career1046ImmutableCandidateGeneratorTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/operations/career-1046-immutable-candidate-control.md
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
@@ -49539,7 +49540,7 @@ prs:
       - php -l for every changed PHP file
       - php backend/scripts/operations/verify_career_1046_current_state_freeze.php
       - parse pr-train JSON and YAML
-      - exact five-file scope and forbidden action validation
+      - exact six-file scope and forbidden action validation
       - git diff --check and git diff --cached --check
     stop_if_changed_files_outside_scope: true
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }

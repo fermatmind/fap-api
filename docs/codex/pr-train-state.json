@@ -105215,6 +105215,7 @@
     "allowed_paths": [
       "backend/app/Domain/Career/Publish/Career1046ImmutableCandidateGenerator.php",
       "backend/tests/Unit/Domain/Career/Publish/Career1046ImmutableCandidateGeneratorTest.php",
+      "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
       "docs/operations/career-1046-immutable-candidate-control.md",
       "docs/codex/pr-train.yaml",
       "docs/codex/pr-train-state.json"
@@ -105230,11 +105231,11 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "The heavy-guarded full backend/scripts/ci_verify_mbti.sh chain exited 0, including Big Five 1693 tests / 196735 assertions and all MBTI/security/migration/queue gates. Focused candidate coverage passed 5 tests / 29 assertions; Pint --test, PHP syntax, frozen contract verification, train YAML/JSON parsing, 253-line route listing, fresh SQLite migration, exact five-path scope and git diff --check passed."
+        "evidence": "The heavy-guarded full backend/scripts/ci_verify_mbti.sh chain exited 0, including Big Five 1693 tests / 196735 assertions and all MBTI/security/migration/queue gates. Focused candidate coverage passed 5 tests / 29 assertions; the exact runtime-freeze classifier regressions pass 2 tests / 5 assertions with only the known missing-.env warnings; Pint --test, PHP syntax, frozen contract verification, train YAML/JSON parsing, 253-line route listing, fresh SQLite migration, exact six-path scope and git diff --check passed."
       },
       "scope": {
         "status": "passed",
-        "evidence": "Exactly five allowlisted paths contain the offline candidate generator, focused unit test, operator contract and two train ledgers. No workflow, route, migration, command registration, public reader, CMS/content, pointer, frontend or discoverability implementation is included."
+        "evidence": "Exactly six allowlisted paths contain the offline candidate generator, focused unit test, the existing runtime-freeze classifier registration required by CI, operator contract and two train ledgers. No workflow, route, migration, command registration, public reader, CMS/content, pointer, frontend or discoverability implementation is included."
       },
       "github_required_checks": {
         "status": "pending",
@@ -105276,8 +105277,13 @@
         "at": "2026-08-12T04:45:02+08:00",
         "status": "github_checks_pending",
         "note": "Committed the exact five-file implementation as 3165c5f081579e8af9f76d5d6ce7a0a0d9c5c4a7, pushed the focused branch and opened PR #3666. Required checks must pass before squash merge. No production or staging workflow was dispatched and no controlled external state was accessed or mutated."
+      },
+      {
+        "at": "2026-08-12T04:55:12+08:00",
+        "status": "github_checks_pending",
+        "note": "GitHub verify-bigfive exposed one same-scope classifier registration gap: the new offline candidate generator appeared as an unclassified backend/app path. Added only the exact generator path to the existing Career runtime-projection classifier and its explicit fixture list. The two focused classifier tests pass 5 assertions with only known missing-.env warnings, candidate tests remain 5 / 29 and Pint passes. Both MBTI jobs were already green; no external state was accessed or mutated."
       }
     ],
-    "updated_at": "2026-08-12T04:45:02+08:00"
+    "updated_at": "2026-08-12T04:55:12+08:00"
   }
 }
