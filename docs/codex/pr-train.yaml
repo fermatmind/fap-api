@@ -49299,7 +49299,7 @@ prs:
     base: main
     branch: codex/career-bootstrap-pointer-compat-repair-04r
     title: "CAREER-RUNTIME-AUTHORITY-BOOTSTRAP-COMPAT-04R: bind frozen legacy bytes without rewrite"
-    status: github_checks_pending
+    status: merged
     depends_on:
       - CAREER-RUNTIME-AUTHORITY-ACTIVE-POINTER-04
     train_scope: career_generation_bootstrap_legacy_exact_bytes_compatibility
@@ -49341,3 +49341,58 @@ prs:
     deploy_allowed: false
     content_authority: exact pointer-bound legacy source bytes are bootstrap-only; generation-native authority remains the steady-state format
     repository_rule_impact: closes the post-merge Task 1 incompatibility between immutable frozen legacy bytes and Task 2's no-rewrite bootstrap constraint
+
+  - id: CAREER-CURRENT-GENERATION-POINTER-BOOTSTRAP-05
+    repo: fap-api
+    base: main
+    branch: codex/career-current-generation-pointer-bootstrap-05
+    title: "CAREER-CURRENT-GENERATION-POINTER-BOOTSTRAP-05: add exact 342/30 production pointer control"
+    status: github_checks_pending
+    depends_on:
+      - CAREER-RUNTIME-AUTHORITY-BOOTSTRAP-COMPAT-04R
+    train_scope: career_current_342_30_generation_pointer_bootstrap_control
+    risk_level: p1_production_pointer_control
+    scope:
+      - Add one manual-dispatch-only production workflow with strictly separated SELECT-only zero-write preflight and exact receipt-bound apply modes.
+      - Bind latest main, exact active release, frozen 342/684 materialized authority, exact 30/60 published cohort, unique source path identities, absent deploy activity and absent pointer state.
+      - Allow apply to create only the immutable bootstrap generation pointer and atomic root active pointer from no-clobber candidates without changing projection or ledger bytes.
+      - Always upload sanitized receipts and preserve indeterminate or partially committed state without automatic retry, cleanup or rollback.
+    allowed_paths:
+      - .github/workflows/career-current-generation-pointer-bootstrap-production-ops.yml
+      - backend/scripts/operations/career_current_generation_pointer_bootstrap.php
+      - backend/tests/Sre/CareerCurrentGenerationPointerBootstrapWorkflowTest.php
+      - docs/operations/career-current-generation-pointer-bootstrap-control.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Dispatch preflight or apply, trigger staging, SSH to production, or read/write production DB, CMS, cache, artifacts, pointers, sitemap, llms or Search Channel state during this PR.
+      - Deploy, migrate, restart, warm, publish, rewrite the frozen projection/ledger, select by mtime, scan for fallback authority, automatically retry, clean up or roll back.
+      - Implement Task 3 reconciliation or later candidate/activation/discoverability controls.
+    validation:
+      - cd backend && php artisan test tests/Sre/CareerCurrentGenerationPointerBootstrapWorkflowTest.php tests/Sre/Career1046CurrentStateFreezeContractTest.php --no-ansi
+      - actionlint .github/workflows/career-current-generation-pointer-bootstrap-production-ops.yml
+      - cd backend && vendor/bin/pint --test scripts/operations/career_current_generation_pointer_bootstrap.php tests/Sre/CareerCurrentGenerationPointerBootstrapWorkflowTest.php
+      - php -l for every changed PHP file
+      - php backend/scripts/operations/verify_career_1046_current_state_freeze.php
+      - cd backend && bash scripts/ci_verify_mbti.sh through fermatmind-heavy-guard
+      - parse workflow, pr-train JSON and YAML
+      - exact changed-file scope and forbidden production action validation
+      - git diff --check and git diff --cached --check
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    workflow_policy_change: true
+    production_write_execution: false
+    production_read_only_evidence: false
+    production_workflow_dispatched: false
+    staging_workflow_dispatched: false
+    database_mutation: false
+    cms_mutation: false
+    cache_mutation: false
+    artifact_mutation: false
+    pointer_mutation: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: frozen backend projection and ledger remain byte authority; this PR adds only an unexecuted pointer-bootstrap control plane
+    repository_rule_impact: introduces the separately controlled production bootstrap lane required by the generation-bound runtime reader

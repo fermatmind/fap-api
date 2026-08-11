@@ -104859,7 +104859,7 @@
     "base": "main",
     "branch": "codex/career-bootstrap-pointer-compat-repair-04r",
     "title": "CAREER-RUNTIME-AUTHORITY-BOOTSTRAP-COMPAT-04R: bind frozen legacy bytes without rewrite",
-    "status": "github_checks_pending",
+    "status": "merged",
     "depends_on": [
       "CAREER-RUNTIME-AUTHORITY-ACTIVE-POINTER-04"
     ],
@@ -104888,16 +104888,17 @@
         "evidence": "The five-path allowlist is limited to the existing generation loader, its fixture and focused test, plus train ledgers. No workflow, route, migration, middleware, production, DB/CMS/cache/artifact/pointer, discoverability, or frontend path is in scope."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "PR #3662 opened from exact validated implementation commit 891796a67faf0564f3e4d8ad2a31329197921e58; required checks are pending."
+        "status": "passed",
+        "evidence": "Final exact head 49b78f73dfd742244a86faca86319ce892e9e6e3 passed all nine GitHub checks: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep blocking secrets, Semgrep OSS and the non-blocking SARIF upload. Staging parity was correctly skipped; GitHub reported MERGEABLE/CLEAN with exactly five allowlisted files."
       }
     },
     "failure_reason": null,
-    "commit_sha": "891796a67faf0564f3e4d8ad2a31329197921e58",
+    "commit_sha": "49b78f73dfd742244a86faca86319ce892e9e6e3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3662",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-08-12T02:54:22+08:00",
+    "merge_commit_sha": "d1cda50e7127cf029c7d611625825cc6d3092b44",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_workflow_dispatched": false,
     "database_mutation": false,
@@ -104922,8 +104923,97 @@
         "at": "2026-08-12T02:44:32+08:00",
         "status": "github_checks_pending",
         "note": "Committed the exact five-file repair as 891796a67faf0564f3e4d8ad2a31329197921e58, pushed the focused branch, and opened PR #3662. Required checks must pass before squash merge; no production or discoverability action was executed."
+      },
+      {
+        "at": "2026-08-12T02:54:22+08:00",
+        "status": "merged",
+        "note": "PR #3662 final head 49b78f73dfd742244a86faca86319ce892e9e6e3 passed the complete required set and squash merged as d1cda50e7127cf029c7d611625825cc6d3092b44. origin/main contains the merge, GitHub auto-deleted the remote branch, the local repair branch was deleted after switching the isolated train worktree to Task 2, and no production or discoverability action was executed."
       }
     ],
-    "updated_at": "2026-08-12T02:44:32+08:00"
+    "updated_at": "2026-08-12T02:54:22+08:00"
+  },
+  "CAREER-CURRENT-GENERATION-POINTER-BOOTSTRAP-05": {
+    "id": "CAREER-CURRENT-GENERATION-POINTER-BOOTSTRAP-05",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-current-generation-pointer-bootstrap-05",
+    "title": "CAREER-CURRENT-GENERATION-POINTER-BOOTSTRAP-05: add exact 342/30 production pointer control",
+    "status": "github_checks_pending",
+    "depends_on": [
+      "CAREER-RUNTIME-AUTHORITY-BOOTSTRAP-COMPAT-04R"
+    ],
+    "allowed_paths": [
+      ".github/workflows/career-current-generation-pointer-bootstrap-production-ops.yml",
+      "backend/scripts/operations/career_current_generation_pointer_bootstrap.php",
+      "backend/tests/Sre/CareerCurrentGenerationPointerBootstrapWorkflowTest.php",
+      "docs/operations/career-current-generation-pointer-bootstrap-control.md",
+      "docs/codex/pr-train.yaml",
+      "docs/codex/pr-train-state.json"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "Task 2 of the continuous Career 1046 goal authorizes implementing and merging this control plane only; it explicitly forbids dispatching preflight/apply or performing production, staging or discoverability actions."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "Task 1 PR #3661 merged as d9cfab3b55adb02c2709d03ac0772d7130e410f5 and compatibility repair PR #3662 merged as d1cda50e7127cf029c7d611625825cc6d3092b44; this branch starts from that exact origin/main."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "The guarded full backend/scripts/ci_verify_mbti.sh chain passed with exit code 0. Focused pointer/freeze tests passed 5 tests / 100 assertions; actionlint, Pint --test, both PHP syntax checks, frozen zero-write contract verification, workflow/train YAML and JSON parsing, 232-route listing, fresh in-memory SQLite migration, exact six-path scope and git diff --check all passed."
+      },
+      "scope": {
+        "status": "passed",
+        "evidence": "The six-path allowlist contains one manual workflow, one streamed standalone runner, its SRE test, operator documentation and the two train ledgers. No route, migration, middleware, application runtime, CMS/content, cache, frontend or discoverability implementation is included."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": "PR #3663 opened from exact validated implementation commit c102e64737f1e3c2e5bb19d5d40e6bb8db6dba4e; required checks are pending."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "c102e64737f1e3c2e5bb19d5d40e6bb8db6dba4e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3663",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "workflow_policy_change": true,
+    "production_write_execution": false,
+    "production_read_only_evidence": false,
+    "production_workflow_dispatched": false,
+    "staging_workflow_dispatched": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "cache_mutation": false,
+    "artifact_mutation": false,
+    "pointer_mutation": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "url_submission": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-08-12T02:54:22+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started Task 2 from exact merged compatibility repair origin/main d1cda50e7127cf029c7d611625825cc6d3092b44. Scope is an unexecuted manual pointer-bootstrap workflow, its streamed runner, focused test, operations document and ledgers only. No workflow was dispatched; no SSH, production/staging read, deploy, migration, DB/CMS/cache/artifact/pointer, publication, sitemap/llms or Search Channel action was executed."
+      },
+      {
+        "at": "2026-08-12T03:10:02+08:00",
+        "status": "implementation_in_progress",
+        "note": "Implemented strict SELECT-only and apply phases. The runner uniquely selects the frozen source bytes by SHA without mtime, validates 342/684/30/60 authority, rejects pointer/candidate/symlink conflicts, and applies only no-clobber candidates plus immutable/active atomic pointer renames with full readback. Executable fixtures pass 5 / 100 with shared-storage symlink topology; full repository validation is next. No production or staging workflow was dispatched."
+      },
+      {
+        "at": "2026-08-12T03:19:22+08:00",
+        "status": "local_validation_passed",
+        "note": "Completed local validation. The heavy-guarded ci_verify_mbti master chain exited 0; focused tests passed 5 / 100; actionlint, Pint, PHP syntax, freeze contract, YAML/JSON parsing, 232-route listing, fresh SQLite migration, exact six-file scope and diff checks passed. The verifier-generated Big Five compiled files were restored to origin/main bytes. No workflow was dispatched and no production, staging or discoverability action was executed."
+      },
+      {
+        "at": "2026-08-12T03:20:53+08:00",
+        "status": "github_checks_pending",
+        "note": "Committed the exact six-file implementation as c102e64737f1e3c2e5bb19d5d40e6bb8db6dba4e, pushed the focused branch and opened PR #3663. Required checks must pass before squash merge. No production or staging workflow was dispatched and no controlled external state was read or mutated."
+      }
+    ],
+    "updated_at": "2026-08-12T03:20:53+08:00"
   }
 }
