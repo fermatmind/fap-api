@@ -105411,7 +105411,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "All five review-fix heavy-guarded full backend/scripts/ci_verify_mbti.sh runs exited 0 after the initial full pass. Final focused activation coverage passed 5 tests plus 5 known missing-.env warnings / 90 assertions, including fail-closed database-authority drift and deploy-lock coverage; the earlier combined activation/staging/reconciliation/loader suite passed 5 tests plus 18 known warnings / 279 assertions. actionlint, Pint --test, PHP syntax, frozen contract verification, train YAML/JSON parsing, 253-line route listing, fresh SQLite migration, exact six-path scope and diff checks passed."
+        "evidence": "All six review-fix heavy-guarded full backend/scripts/ci_verify_mbti.sh runs exited 0 after the initial full pass. Final focused activation coverage passed 5 tests plus 5 known missing-.env warnings / 91 assertions, including explicit final-database-read then conflict-guard ordering, fail-closed database-authority drift and deploy-lock coverage; the earlier combined activation/staging/reconciliation/loader suite passed 5 tests plus 18 known warnings / 279 assertions. actionlint, Pint --test, PHP syntax, frozen contract verification, train YAML/JSON parsing, 253-line route listing, fresh SQLite migration, exact six-path scope and diff checks passed."
       },
       "scope": {
         "status": "passed",
@@ -105419,11 +105419,11 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "The prior implementation and ledger heads passed every required check, but exact-head review found a final database-authority drift window before the root switch. Fresh checks are required after the same-scope fix."
+        "evidence": "Head 826b9e22318aefa0b0c6e7c164ba15fb7585f69b passed every required check, but exact-head review found that the final database read itself reopened a conflict-process window before the root rename. Fresh checks are required after the same-scope fix."
       }
     },
     "failure_reason": null,
-    "commit_sha": "941961c219cb1f2fb4fe0486885f60e45bc90544",
+    "commit_sha": "032c25f1e5262e8da00e6e8bbb097e841edafb78",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3668",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -105492,8 +105492,18 @@
         "at": "2026-08-12T07:36:16+08:00",
         "status": "review_fix_validated",
         "note": "The activation runner now repeats the complete SELECT-only database authority inspection immediately before the root rename and requires exact 1016/1016 coverage, zero missing/mismatch/outside rows and the identical canonical current-state SHA observed at preflight. A database-drift regression proves the root pointer remains unchanged. Focused coverage passed 5 tests plus 5 known missing-.env warnings / 90 assertions; actionlint, Pint, PHP syntax, freeze verification, YAML/JSON parsing and diff checks passed; the complete heavy-guarded ci_verify_mbti chain exited 0. Generated Big Five compiled files were restored. No workflow was dispatched and no SSH or controlled external state was accessed or mutated."
+      },
+      {
+        "at": "2026-08-12T07:49:30+08:00",
+        "status": "review_fix_in_progress",
+        "note": "Exact-head review found that a conflicting deploy, migration or authority process could start during the final database revalidation. The runner now repeats the conflict guard after that read and immediately before active-pointer drift readback and rename. The ledger is also being rebound from the obsolete implementation SHA to the final post-fix implementation head. Fresh focused, full local and GitHub validation are mandatory. No workflow was dispatched and no SSH or controlled external state was accessed or mutated."
+      },
+      {
+        "at": "2026-08-12T07:57:10+08:00",
+        "status": "review_fix_validated",
+        "note": "Final implementation commit 032c25f1e5262e8da00e6e8bbb097e841edafb78 repeats the conflict guard after the final database read and immediately before active-pointer drift readback/rename. Focused coverage passed 5 tests plus 5 known missing-.env warnings / 91 assertions, including an explicit ordering assertion; actionlint, Pint, PHP syntax, freeze verification, YAML/JSON parsing and diff checks passed; the complete heavy-guarded ci_verify_mbti chain exited 0. Generated Big Five compiled files were restored. The ledger commit_sha now binds this actual post-fix implementation commit. No workflow was dispatched and no SSH or controlled external state was accessed or mutated."
       }
     ],
-    "updated_at": "2026-08-12T07:36:16+08:00"
+    "updated_at": "2026-08-12T07:57:10+08:00"
   }
 }
