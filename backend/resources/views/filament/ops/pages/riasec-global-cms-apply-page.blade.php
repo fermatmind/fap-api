@@ -16,7 +16,7 @@
 
         <x-filament-ops::ops-section
             title="Frozen evidence"
-            description="Bind the active backend identity and paste the exact raw JSON bytes from PR #3608. Whitespace and the final newline are part of each SHA-256 identity. Evidence bodies are never written to audit logs."
+            description="Bind the active backend identity, paste the exact package JSON from PR #3608, and paste a production baseline receipt captured within the last two hours plus its three exact source reports. Whitespace and the final newline are part of every SHA-256 identity. Evidence bodies are never written to audit logs."
         >
             <div class="mb-6 grid gap-6 lg:grid-cols-2">
                 <label class="block">
@@ -76,6 +76,60 @@
                 </label>
             </div>
 
+            <div class="mt-6 grid gap-6 lg:grid-cols-2">
+                <label class="block">
+                    <span class="ops-control-label">backend-production-riasec-product-baseline-receipt.json</span>
+                    <textarea
+                        class="mt-2 block min-h-64 w-full rounded-lg border-gray-300 bg-white font-mono text-xs shadow-sm dark:border-white/10 dark:bg-white/5"
+                        rows="16"
+                        wire:model.defer="baselineReceiptJson"
+                        spellcheck="false"
+                    ></textarea>
+                    @error('baselineReceiptJson')
+                        <span class="mt-1 block text-sm text-danger-600">{{ $message }}</span>
+                    @enderror
+                </label>
+
+                <label class="block">
+                    <span class="ops-control-label">landing-and-product-funnel.json</span>
+                    <textarea
+                        class="mt-2 block min-h-64 w-full rounded-lg border-gray-300 bg-white font-mono text-xs shadow-sm dark:border-white/10 dark:bg-white/5"
+                        rows="16"
+                        wire:model.defer="landingAndProductFunnelJson"
+                        spellcheck="false"
+                    ></textarea>
+                    @error('landingAndProductFunnelJson')
+                        <span class="mt-1 block text-sm text-danger-600">{{ $message }}</span>
+                    @enderror
+                </label>
+
+                <label class="block">
+                    <span class="ops-control-label">attempt-result-funnel.json</span>
+                    <textarea
+                        class="mt-2 block min-h-64 w-full rounded-lg border-gray-300 bg-white font-mono text-xs shadow-sm dark:border-white/10 dark:bg-white/5"
+                        rows="16"
+                        wire:model.defer="attemptResultFunnelJson"
+                        spellcheck="false"
+                    ></textarea>
+                    @error('attemptResultFunnelJson')
+                        <span class="mt-1 block text-sm text-danger-600">{{ $message }}</span>
+                    @enderror
+                </label>
+
+                <label class="block">
+                    <span class="ops-control-label">failure-cohorts.json</span>
+                    <textarea
+                        class="mt-2 block min-h-64 w-full rounded-lg border-gray-300 bg-white font-mono text-xs shadow-sm dark:border-white/10 dark:bg-white/5"
+                        rows="16"
+                        wire:model.defer="failureCohortsJson"
+                        spellcheck="false"
+                    ></textarea>
+                    @error('failureCohortsJson')
+                        <span class="mt-1 block text-sm text-danger-600">{{ $message }}</span>
+                    @enderror
+                </label>
+            </div>
+
             <label class="mt-6 block">
                 <span class="ops-control-label">Fresh exact operator approval phrase</span>
                 <textarea
@@ -121,6 +175,9 @@
                     ['label' => 'Preflight fingerprint', 'value' => data_get($receipt, 'preflight_fingerprint', '-')],
                     ['label' => 'Preflight expires', 'value' => data_get($receipt, 'preflight_expires_at', '-')],
                     ['label' => 'Required approval phrase', 'value' => data_get($receipt, 'operator_approval_phrase', '-')],
+                    ['label' => 'Baseline receipt SHA-256', 'value' => data_get($receipt, 'production_baseline.receipt_sha256', '-')],
+                    ['label' => 'Baseline control SHA', 'value' => data_get($receipt, 'production_baseline.control_plane_sha', '-')],
+                    ['label' => 'Baseline checked at', 'value' => data_get($receipt, 'production_baseline.checked_at', '-')],
                     ['label' => 'Updated at', 'value' => data_get($receipt, 'updated_at', '-')],
                     ['label' => 'Changed paths', 'value' => implode(', ', (array) data_get($receipt, 'changed_paths', []))],
                     ['label' => 'Discoverability change', 'value' => data_get($receipt, 'discoverability_change_triggered') ? 'yes' : 'no'],

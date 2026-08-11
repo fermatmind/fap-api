@@ -45,6 +45,7 @@ final class RiasecGlobalCmsApplyBridge
 
     public function __construct(
         private readonly OrgContext $orgContext,
+        private readonly RiasecProductBaselineEvidence $baselineEvidence,
     ) {}
 
     /**
@@ -53,11 +54,23 @@ final class RiasecGlobalCmsApplyBridge
     public function preflight(
         string $beforeSnapshotJson,
         string $targetPackageJson,
+        string $baselineReceiptJson,
+        string $landingAndProductFunnelJson,
+        string $attemptResultFunnelJson,
+        string $failureCohortsJson,
         int $actorAdminId,
         string $expectedDeployedSha,
         string $expectedReleaseId,
     ): array {
         $package = $this->validatedPackage($beforeSnapshotJson, $targetPackageJson);
+        $baselineEvidence = $this->baselineEvidence->validate(
+            $baselineReceiptJson,
+            $landingAndProductFunnelJson,
+            $attemptResultFunnelJson,
+            $failureCohortsJson,
+            $expectedDeployedSha,
+            $expectedReleaseId,
+        );
         $this->assertGlobalAuthorityContext();
         $this->assertActor($actorAdminId);
         session()->forget($this->authorizationSessionKey($actorAdminId, 'apply'));
@@ -73,6 +86,7 @@ final class RiasecGlobalCmsApplyBridge
                 $expectedDeployedSha,
                 $expectedReleaseId,
                 $this->receipt('already_applied', $surface, $package['changed_paths']),
+                $baselineEvidence,
             );
         }
         if (! $this->same($current, $package['before_surface'])) {
@@ -85,6 +99,7 @@ final class RiasecGlobalCmsApplyBridge
             $expectedDeployedSha,
             $expectedReleaseId,
             $this->receipt('ready_to_apply', $surface, $package['changed_paths']),
+            $baselineEvidence,
         );
     }
 
@@ -136,6 +151,10 @@ final class RiasecGlobalCmsApplyBridge
     public function apply(
         string $beforeSnapshotJson,
         string $targetPackageJson,
+        string $baselineReceiptJson,
+        string $landingAndProductFunnelJson,
+        string $attemptResultFunnelJson,
+        string $failureCohortsJson,
         int $actorAdminId,
         string $expectedDeployedSha,
         string $expectedReleaseId,
@@ -144,6 +163,14 @@ final class RiasecGlobalCmsApplyBridge
         array $requestContext = [],
     ): array {
         $package = $this->validatedPackage($beforeSnapshotJson, $targetPackageJson);
+        $baselineEvidence = $this->baselineEvidence->validate(
+            $baselineReceiptJson,
+            $landingAndProductFunnelJson,
+            $attemptResultFunnelJson,
+            $failureCohortsJson,
+            $expectedDeployedSha,
+            $expectedReleaseId,
+        );
         $this->assertGlobalAuthorityContext();
         $this->assertActor($actorAdminId);
         $authorization = $this->consumeAuthorization(
@@ -153,6 +180,7 @@ final class RiasecGlobalCmsApplyBridge
             $expectedReleaseId,
             $preflightFingerprint,
             $operatorApprovalPhrase,
+            $baselineEvidence,
         );
 
         return DB::transaction(function () use ($package, $actorAdminId, $requestContext, $authorization): array {
@@ -362,6 +390,7 @@ final class RiasecGlobalCmsApplyBridge
         string $deployedSha,
         string $releaseId,
         array $receipt,
+        ?array $baselineEvidence = null,
     ): array {
         $issuedAt = now()->getTimestamp();
         $authorization = [
@@ -379,6 +408,9 @@ final class RiasecGlobalCmsApplyBridge
             'issued_at' => $issuedAt,
             'expires_at' => $issuedAt + self::AUTHORIZATION_TTL_SECONDS,
         ];
+        if ($baselineEvidence !== null) {
+            $authorization['production_baseline'] = $baselineEvidence;
+        }
         $fingerprint = hash('sha256', (string) json_encode(
             $this->canonicalize($authorization),
             JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR,
@@ -393,7 +425,7 @@ final class RiasecGlobalCmsApplyBridge
             'preflight_fingerprint' => $fingerprint,
             'preflight_expires_at' => gmdate('c', $authorization['expires_at']),
             'operator_approval_phrase' => $this->expectedApprovalPhrase($action, $deployedSha, $releaseId, $fingerprint),
-        ];
+        ] + ($baselineEvidence === null ? [] : ['production_baseline' => $baselineEvidence]);
     }
 
     /**
@@ -406,6 +438,7 @@ final class RiasecGlobalCmsApplyBridge
         string $releaseId,
         string $preflightFingerprint,
         string $operatorApprovalPhrase,
+        ?array $baselineEvidence = null,
     ): array {
         $sessionKey = $this->authorizationSessionKey($actorAdminId, $action);
         $authorization = session()->get($sessionKey);
@@ -437,6 +470,8 @@ final class RiasecGlobalCmsApplyBridge
             || ($authorization['org_id'] ?? null) !== self::ORG_ID
             || ($authorization['before_snapshot_sha256'] ?? null) !== self::BEFORE_SNAPSHOT_SHA256
             || ($authorization['target_package_sha256'] ?? null) !== self::TARGET_PACKAGE_SHA256
+            || ($action === 'apply' && ! $this->same($authorization['production_baseline'] ?? null, $baselineEvidence))
+            || ($action === 'rollback' && array_key_exists('production_baseline', $authorization))
             || ! is_int($authorization['issued_at'] ?? null)
             || ! is_int($authorization['expires_at'] ?? null)
             || $authorization['issued_at'] > $now
@@ -571,6 +606,9 @@ final class RiasecGlobalCmsApplyBridge
             'preflight_fingerprint' => $authorization['preflight_fingerprint'],
             'operator_approval_phrase_sha256' => $authorization['operator_approval_phrase_sha256'],
         ];
+        if (is_array($authorization['production_baseline'] ?? null)) {
+            $meta['production_baseline'] = $authorization['production_baseline'];
+        }
 
         DB::table('audit_logs')->insert([
             'org_id' => self::ORG_ID,
