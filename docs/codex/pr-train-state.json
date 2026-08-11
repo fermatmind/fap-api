@@ -105028,7 +105028,7 @@
     "base": "main",
     "branch": "codex/career-publication-index-reconciliation-preflight-06a",
     "title": "CAREER-PUBLICATION-INDEX-RECONCILIATION-PREFLIGHT-06A: add exact SELECT-only difference control",
-    "status": "local_validation_passed",
+    "status": "github_checks_pending",
     "depends_on": [
       "CAREER-CURRENT-GENERATION-POINTER-BOOTSTRAP-05"
     ],
@@ -105059,12 +105059,12 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "PR not yet opened."
+        "evidence": "PR #3664 opened from exact validated implementation commit 194f3edd5126b64123cd902537fe0962a8269097; required checks are pending."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "194f3edd5126b64123cd902537fe0962a8269097",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3664",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -105097,8 +105097,13 @@
         "at": "2026-08-12T03:46:30+08:00",
         "status": "local_validation_passed",
         "note": "Completed local validation. The heavy-guarded ci_verify_mbti master chain exited 0; final focused tests passed 7 / 105; actionlint, Pint, PHP syntax, freeze contract, YAML/JSON parsing, 232-route listing, fresh SQLite migration, exact six-file scope and diff checks passed. A SQL listener now requires at least one observed query and an exact SELECT-only verb set before success. Verifier-generated Big Five compiled files were restored. No production or staging workflow was dispatched."
+      },
+      {
+        "at": "2026-08-12T03:47:52+08:00",
+        "status": "github_checks_pending",
+        "note": "Committed the exact six-file implementation as 194f3edd5126b64123cd902537fe0962a8269097, pushed the focused branch and opened PR #3664. GitHub reports MERGEABLE with the exact six allowlisted files while required checks initialize. No production or staging workflow was dispatched and no controlled external state was read or mutated."
       }
     ],
-    "updated_at": "2026-08-12T03:46:30+08:00"
+    "updated_at": "2026-08-12T03:47:52+08:00"
   }
 }
