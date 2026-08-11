@@ -216,6 +216,10 @@ final class MeasurementFailureCohortReadModel
                 'events.client_platform',
                 'attempts.id as correlated_attempt_id',
                 'attempts.anon_id as correlated_attempt_anon_id',
+                'attempts.scale_code as correlated_attempt_scale_code',
+                'attempts.locale as correlated_attempt_locale',
+                'attempts.client_platform as correlated_attempt_client_platform',
+                'attempts.answers_summary_json as correlated_attempt_answers_summary_json',
             ])
             ->where('events.org_id', $orgId)
             ->whereIn('events.event_code', MeasurementFailureEventContract::EVENT_NAMES)
@@ -228,6 +232,10 @@ final class MeasurementFailureCohortReadModel
                 $correlatedAttempt = (object) [
                     'id' => $event->correlated_attempt_id ?? null,
                     'anon_id' => $event->correlated_attempt_anon_id ?? null,
+                    'scale_code' => $event->correlated_attempt_scale_code ?? null,
+                    'locale' => $event->correlated_attempt_locale ?? null,
+                    'client_platform' => $event->correlated_attempt_client_platform ?? null,
+                    'answers_summary_json' => $event->correlated_attempt_answers_summary_json ?? null,
                 ];
                 if (
                     $this->trafficExclusionPolicy->isExcludedSeoConversionEvent($event, $meta)
@@ -240,6 +248,9 @@ final class MeasurementFailureCohortReadModel
                     'locale' => $meta['locale'] ?? $event->locale ?? null,
                     'device_class' => $meta['device_class'] ?? $this->eventDeviceClass($event->client_platform ?? null),
                 ]));
+                if (($event->correlated_attempt_id ?? null) !== null) {
+                    $safe = $this->mergeEventDimensions($safe, $this->attemptDimensions($correlatedAttempt));
+                }
 
                 return [
                     'event_id' => (string) $event->id,

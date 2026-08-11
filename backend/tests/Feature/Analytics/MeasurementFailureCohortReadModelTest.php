@@ -155,6 +155,29 @@ final class MeasurementFailureCohortReadModelTest extends TestCase
         $this->assertNull(data_get($noMatch, 'cohorts.submit_failure.eligible_failure_rate'));
     }
 
+    public function test_form_filter_uses_the_correlated_attempt_when_the_failure_event_omits_form_code(): void
+    {
+        $day = CarbonImmutable::parse('2026-08-10 08:00:00');
+        $attemptId = (string) Str::uuid();
+        $this->insertAttempt($attemptId, 83, 'en', $day, null);
+        DB::table('attempts')->where('id', $attemptId)->update([
+            'answers_summary_json' => json_encode(['meta' => ['form_code' => 'mbti_93']]),
+        ]);
+        $this->insertFailureEvent($attemptId, $day->addHour(), 'submit_failure', orgId: 83);
+        $event = DB::table('events')->where('attempt_id', $attemptId)->first();
+        $meta = json_decode((string) $event->meta_json, true, flags: JSON_THROW_ON_ERROR);
+        unset($meta['form_code']);
+        DB::table('events')->where('id', $event->id)->update([
+            'meta_json' => json_encode($meta, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),
+        ]);
+
+        $report = app(MeasurementFailureCohortReadModel::class)->report(83, '2026-08-10', '2026-08-10', [
+            'form_code' => ['mbti_93'],
+        ]);
+
+        $this->assertSame(1, data_get($report, 'cohorts.submit_failure.failed_attempt_count'));
+    }
+
     public function test_sparse_rows_use_complementary_suppression(): void
     {
         $day = CarbonImmutable::parse('2026-08-10 08:00:00');
