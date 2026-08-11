@@ -104769,7 +104769,7 @@
     "base": "main",
     "branch": "codex/career-runtime-authority-active-pointer-04",
     "title": "CAREER-RUNTIME-AUTHORITY-ACTIVE-POINTER-04: require generation-bound public authority",
-    "status": "local_validation_passed",
+    "status": "github_checks_pending",
     "depends_on": [
       "CAREER-1046-CURRENT-STATE-FREEZE-CONTRACT-00"
     ],
@@ -104808,8 +104808,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "c88eca4604af467693ad01dbc61bfa3bda4d7313",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3661",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -104832,8 +104832,13 @@
         "at": "2026-08-12T02:03:45+08:00",
         "status": "local_validation_passed",
         "note": "Implemented a fail-closed root active generation pointer with immutable projection/ledger identity, canonical hashes, frozen authority bindings, exact prior lineage, same-generation LKG, and per-slug removal receipts. Focused tests passed 55 / 803 plus exporter 1 / 2; the guarded complete verifier passed every gate, including Big Five 1693 / 196735, Enneagram 14 / 12452, and Personality 95 / 5761. Scoped syntax, Pint, JSON/YAML, exact allowlist, privacy, and diff checks passed. The only externally started main staging workflow was observed read-only and not dispatched or operated by this task; no production or discoverability write occurred."
+      },
+      {
+        "at": "2026-08-12T02:07:11+08:00",
+        "status": "github_checks_pending",
+        "note": "Committed exact implementation head c88eca4604af467693ad01dbc61bfa3bda4d7313, pushed the scoped branch, and opened PR #3661. GitHub reports MERGEABLE while required checks run. The final ledger-only head must pass the full required check set before squash merge; no production workflow or production/discoverability write was dispatched or executed."
       }
     ],
-    "updated_at": "2026-08-12T02:03:45+08:00"
+    "updated_at": "2026-08-12T02:07:11+08:00"
   }
 }
