@@ -22,14 +22,27 @@
   },
   "required_sources": {
     "landing_and_product_funnel": {
-      "authority": "analytics_seo_conversion_daily exact date/org/canonical/scale/form/locale aggregate",
+      "authority": "SeoConversionDailyBuilder::build SELECT-only projection from authoritative events for the exact date/org/canonical/scale/form/locale scope",
       "query_contract": {
-        "table": "analytics_seo_conversion_daily",
-        "date_column": "day",
+        "source_table": "events",
+        "source_builder": "App\\Services\\Analytics\\SeoConversionDailyBuilder::build",
+        "materialized_table_used": false,
+        "date_column": "occurred_at",
         "date_filter": "2026-07-13..2026-08-09 inclusive",
         "fixed_filters": {
           "org_id": 0,
-          "url": "/en/tests/holland-career-interest-test-riasec",
+          "canonical_path": "/en/tests/holland-career-interest-test-riasec",
+          "take_path": "/en/tests/holland-career-interest-test-riasec/take",
+          "url_identity_policy": "root_relative_or_exact_https_fermatmind_origin_then_normalized_path",
+          "approved_absolute_origins": [
+            "https://fermatmind.com"
+          ],
+          "accepted_url_examples": [
+            "/en/tests/holland-career-interest-test-riasec",
+            "https://fermatmind.com/en/tests/holland-career-interest-test-riasec",
+            "/en/tests/holland-career-interest-test-riasec/take",
+            "https://fermatmind.com/en/tests/holland-career-interest-test-riasec/take"
+          ],
           "lang": "en",
           "scale_id": "RIASEC"
         },
@@ -37,24 +50,56 @@
           "riasec_60",
           "riasec_140"
         ],
-        "group_by": "form_id",
-        "aggregates": {
-          "landing_view": "SUM(landing_pv_count)",
-          "test_start": "SUM(start_test_count)",
-          "test_complete": "SUM(complete_test_count)",
-          "riasec_result_view": "SUM(view_result_count)"
-        }
+        "group_by": "builder safe dimensions followed by fixed event-path attribution and form_id aggregation",
+        "event_path_attribution": {
+          "landing_pv": "url canonical_path",
+          "start_test": "url take_path or source_url canonical_path",
+          "complete_test": "url take_path or source_url canonical_path",
+          "view_result": "url canonical_path, url take_path, or source_url canonical_path"
+        },
+        "event_metric_map": {
+          "landing_pv": "landing_view",
+          "start_test": "test_start",
+          "complete_test": "test_complete",
+          "view_result": "riasec_result_view"
+        },
+        "skipped_source_rows_required": 0
       },
+      "health_contract": {
+        "ok": true,
+        "allowed_statuses": [
+          "pass"
+        ],
+        "issues": []
+      },
+      "report_health": null,
       "report_sha256": null,
       "status": "pending"
     },
     "attempt_result_funnel": {
-      "authority": "analytics:measurement-funnel-report --from=2026-07-13 --to=2026-08-09 --org=0 --scale=RIASEC --locale=en --json",
+      "authority": "MeasurementFunnelReadModel::report for 2026-07-13..2026-08-09/org=0/scale=RIASEC/locale=en followed by an exact riasec_60+riasec_140 form_code projection with recomputed totals and coverage health",
+      "health_contract": {
+        "ok": true,
+        "allowed_statuses": [
+          "pass"
+        ],
+        "issues": []
+      },
+      "report_health": null,
       "report_sha256": null,
       "status": "pending"
     },
     "failure_cohorts": {
       "authority": "analytics:measurement-failure-cohorts-report --from=2026-07-13 --to=2026-08-09 --org=0 --scale=RIASEC --form=riasec_60 --form=riasec_140 --locale=en --json",
+      "health_contract": {
+        "ok": true,
+        "allowed_statuses": [
+          "pass",
+          "empty"
+        ],
+        "issues": []
+      },
+      "report_health": null,
       "report_sha256": null,
       "status": "pending"
     }

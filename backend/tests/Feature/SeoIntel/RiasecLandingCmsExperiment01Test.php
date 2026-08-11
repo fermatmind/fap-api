@@ -82,12 +82,16 @@ final class RiasecLandingCmsExperiment01Test extends TestCase
         $this->assertNotContains('result_load_failure', $measurement['product_measures'] ?? []);
         $this->assertFalse($measurement['discoverability_change_authorized'] ?? true);
         $this->assertFalse($measurement['application_deploy_authorized'] ?? true);
-        $this->assertSame('2026-07-13', data_get($productBaseline, 'date_window.from'));
-        $this->assertSame('2026-08-09', data_get($productBaseline, 'date_window.to'));
-        $this->assertSame(0, data_get($productBaseline, 'filters.org_id'));
-        $this->assertSame('RIASEC', data_get($productBaseline, 'filters.scale_code'));
-        $this->assertSame(['riasec_60', 'riasec_140'], data_get($productBaseline, 'filters.form_codes'));
-        $this->assertSame('en', data_get($productBaseline, 'filters.locale'));
+        $this->assertSame(['from' => '2026-07-13', 'to' => '2026-08-09'], $productBaseline['date_window'] ?? null);
+        $this->assertSame([
+            'org_id' => 0,
+            'surface_key' => 'test_detail_holland_career_interest_test_riasec',
+            'canonical_path' => '/en/tests/holland-career-interest-test-riasec',
+            'scale_code' => 'RIASEC',
+            'form_codes' => ['riasec_60', 'riasec_140'],
+            'locale' => 'en',
+            'environment' => 'production',
+        ], $productBaseline['filters'] ?? null);
         $this->assertTrue($productBaseline['read_only'] ?? false);
         $this->assertSame(0, $productBaseline['database_write_count'] ?? null);
         $this->assertSame(0, $productBaseline['cms_write_count'] ?? null);
@@ -95,10 +99,60 @@ final class RiasecLandingCmsExperiment01Test extends TestCase
             ['landing_and_product_funnel', 'attempt_result_funnel', 'failure_cohorts'],
             array_keys($productBaseline['required_sources'] ?? []),
         );
-        $this->assertSame('analytics_seo_conversion_daily', data_get($productBaseline, 'required_sources.landing_and_product_funnel.query_contract.table'));
-        $this->assertSame('form_id', data_get($productBaseline, 'required_sources.landing_and_product_funnel.query_contract.group_by'));
         $this->assertSame(
-            'analytics:measurement-funnel-report --from=2026-07-13 --to=2026-08-09 --org=0 --scale=RIASEC --locale=en --json',
+            [
+                'source_table' => 'events',
+                'source_builder' => 'App\\Services\\Analytics\\SeoConversionDailyBuilder::build',
+                'materialized_table_used' => false,
+                'date_column' => 'occurred_at',
+                'date_filter' => '2026-07-13..2026-08-09 inclusive',
+                'fixed_filters' => [
+                    'org_id' => 0,
+                    'canonical_path' => '/en/tests/holland-career-interest-test-riasec',
+                    'take_path' => '/en/tests/holland-career-interest-test-riasec/take',
+                    'url_identity_policy' => 'root_relative_or_exact_https_fermatmind_origin_then_normalized_path',
+                    'approved_absolute_origins' => ['https://fermatmind.com'],
+                    'accepted_url_examples' => [
+                        '/en/tests/holland-career-interest-test-riasec',
+                        'https://fermatmind.com/en/tests/holland-career-interest-test-riasec',
+                        '/en/tests/holland-career-interest-test-riasec/take',
+                        'https://fermatmind.com/en/tests/holland-career-interest-test-riasec/take',
+                    ],
+                    'lang' => 'en',
+                    'scale_id' => 'RIASEC',
+                ],
+                'form_filter' => ['riasec_60', 'riasec_140'],
+                'group_by' => 'builder safe dimensions followed by fixed event-path attribution and form_id aggregation',
+                'event_path_attribution' => [
+                    'landing_pv' => 'url canonical_path',
+                    'start_test' => 'url take_path or source_url canonical_path',
+                    'complete_test' => 'url take_path or source_url canonical_path',
+                    'view_result' => 'url canonical_path, url take_path, or source_url canonical_path',
+                ],
+                'event_metric_map' => [
+                    'landing_pv' => 'landing_view',
+                    'start_test' => 'test_start',
+                    'complete_test' => 'test_complete',
+                    'view_result' => 'riasec_result_view',
+                ],
+                'skipped_source_rows_required' => 0,
+            ],
+            data_get($productBaseline, 'required_sources.landing_and_product_funnel.query_contract'),
+        );
+        $this->assertSame(
+            ['ok' => true, 'allowed_statuses' => ['pass'], 'issues' => []],
+            data_get($productBaseline, 'required_sources.landing_and_product_funnel.health_contract'),
+        );
+        $this->assertSame(
+            ['ok' => true, 'allowed_statuses' => ['pass'], 'issues' => []],
+            data_get($productBaseline, 'required_sources.attempt_result_funnel.health_contract'),
+        );
+        $this->assertSame(
+            ['ok' => true, 'allowed_statuses' => ['pass', 'empty'], 'issues' => []],
+            data_get($productBaseline, 'required_sources.failure_cohorts.health_contract'),
+        );
+        $this->assertSame(
+            'MeasurementFunnelReadModel::report for 2026-07-13..2026-08-09/org=0/scale=RIASEC/locale=en followed by an exact riasec_60+riasec_140 form_code projection with recomputed totals and coverage health',
             data_get($productBaseline, 'required_sources.attempt_result_funnel.authority'),
         );
         $this->assertSame(
@@ -165,6 +219,7 @@ final class RiasecLandingCmsExperiment01Test extends TestCase
             foreach ($productBaseline['required_sources'] ?? [] as $source) {
                 $this->assertSame('pending', $source['status'] ?? null);
                 $this->assertNull($source['report_sha256'] ?? null);
+                $this->assertNull($source['report_health'] ?? null);
             }
 
             return;
@@ -181,6 +236,13 @@ final class RiasecLandingCmsExperiment01Test extends TestCase
         foreach ($productBaseline['required_sources'] ?? [] as $source) {
             $this->assertSame('captured', $source['status'] ?? null);
             $this->assertMatchesRegularExpression('/^[0-9a-f]{64}$/', (string) ($source['report_sha256'] ?? ''));
+            $health = $source['report_health'] ?? null;
+            $this->assertIsArray($health);
+            $this->assertTrue($health['ok'] ?? false);
+            $this->assertContains($health['status'] ?? null, data_get($source, 'health_contract.allowed_statuses', []));
+            $this->assertSame([], $health['issues'] ?? null);
+            $this->assertSame(data_get($source, 'health_contract.ok'), $health['ok'] ?? null);
+            $this->assertSame(data_get($source, 'health_contract.issues'), $health['issues'] ?? null);
         }
         $this->assertIsInt(data_get($productBaseline, 'totals.landing_view'));
         foreach (['test_start_by_form_code', 'test_complete_by_form_code', 'riasec_result_view_by_form_code'] as $metric) {
@@ -264,6 +326,13 @@ final class RiasecLandingCmsExperiment01Test extends TestCase
         $this->assertSame('pending_fresh_production_preflight', $manifest['production_cms_write_authorization_status'] ?? null);
         $this->assertFalse($manifest['application_deploy_authorized'] ?? true);
         $this->assertFalse($manifest['discoverability_change_authorized'] ?? true);
+        $this->assertSame([
+            'current_public_readback.json',
+            'target_internal_update.json',
+            'product_funnel_baseline.json',
+            'measurement_plan.json',
+            't0_receipt.json',
+        ], array_keys($manifest['files'] ?? []));
 
         foreach ($manifest['files'] ?? [] as $name => $expectedSha) {
             $path = base_path(self::ROOT.'/'.$name);
@@ -316,9 +385,23 @@ final class RiasecLandingCmsExperiment01Test extends TestCase
     {
         $parts = parse_url($href);
         $this->assertIsArray($parts);
+
+        if (array_key_exists('host', $parts)) {
+            $this->assertSame('https', $parts['scheme'] ?? null);
+            $this->assertSame('fermatmind.com', strtolower((string) ($parts['host'] ?? '')));
+            foreach (['port', 'user', 'pass'] as $forbiddenAuthorityPart) {
+                $this->assertArrayNotHasKey($forbiddenAuthorityPart, $parts);
+            }
+        } else {
+            $this->assertStringStartsWith('/', $href);
+            foreach (['scheme', 'host', 'port', 'user', 'pass'] as $forbiddenRelativePart) {
+                $this->assertArrayNotHasKey($forbiddenRelativePart, $parts);
+            }
+        }
+
+        $this->assertArrayNotHasKey('fragment', $parts);
         $this->assertSame('/en/tests/holland-career-interest-test-riasec/take', $parts['path'] ?? null);
-        parse_str((string) ($parts['query'] ?? ''), $query);
-        $this->assertSame($expectedForm, $query['form'] ?? null);
+        $this->assertSame('form='.rawurlencode($expectedForm), $parts['query'] ?? null);
     }
 
     /** @param list<array<string, mixed>> $checkpoints */
