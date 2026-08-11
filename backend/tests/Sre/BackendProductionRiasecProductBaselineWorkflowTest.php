@@ -75,9 +75,12 @@ final class BackendProductionRiasecProductBaselineWorkflowTest extends TestCase
             "'/en/tests/holland-career-interest-test-riasec'",
             "'/take'",
             '$sourcePath === $canonicalPath',
-            '$landingSessionHashes',
+            '$landingSessionFirstAt',
             '$normalizeSessionHash',
-            'session linked to canonical landing_pv',
+            'session linked to preceding canonical landing_pv',
+            "'occurred_at'",
+            '$landingSessionFirstAt[$sessionHash]->lte($eventAt)',
+            'LANDING_SOURCE_RECONCILIATION_FAILED',
             "DB::table('events')",
             'SCOPED_SOURCE_RECONCILIATION_FAILED',
             "'scoped_source_reconciliation' => 'exact'",
@@ -97,11 +100,11 @@ final class BackendProductionRiasecProductBaselineWorkflowTest extends TestCase
             $this->assertStringContainsString($contract, $remote);
         }
 
-        $landingCount = strpos($remote, '$landingView +=');
-        $formGuard = strpos($remote, 'if (! array_key_exists($form, $byForm))');
-        $this->assertNotFalse($landingCount);
-        $this->assertNotFalse($formGuard);
-        $this->assertLessThan($formGuard, $landingCount);
+        $landingBranch = strpos($remote, "if (\$eventCode === 'landing_pv')");
+        $downstreamMetric = strpos($remote, '$metric = match ($eventCode)');
+        $this->assertNotFalse($landingBranch);
+        $this->assertNotFalse($downstreamMetric);
+        $this->assertLessThan($downstreamMetric, $landingBranch);
 
         foreach ([
             'php artisan', 'sudo ', 'supervisorctl', 'systemctl', 'service ', 'redis-cli',

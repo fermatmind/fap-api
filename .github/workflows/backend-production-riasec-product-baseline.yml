@@ -255,6 +255,7 @@ jobs:
                   }
               }
               $landingView = 0;
+              $builderLandingView = 0;
               $matchedSourceRows = 0;
               $normalizeApprovedPath = static function (mixed $value): ?string {
                   $candidate = trim((string) $value);
@@ -330,11 +331,12 @@ jobs:
                       'request_id',
                       'attempt_id',
                       'meta_json',
+                      'occurred_at',
                       'locale',
                       'scale_code',
                   ])
                   ->get();
-              $landingSessionHashes = [];
+              $landingSessionFirstAt = [];
               foreach ($sourceEvents as $event) {
                   $meta = json_decode((string) ($event->meta_json ?? ''), true);
                   $meta = is_array($meta) ? $meta : [];
@@ -350,7 +352,11 @@ jobs:
                   }
                   $sessionHash = $normalizeSessionHash($seo['session_id'] ?? $event->session_id ?? null);
                   if ($sessionHash !== '') {
-                      $landingSessionHashes[$sessionHash] = true;
+                      $landingAt = CarbonImmutable::parse((string) $event->occurred_at, 'UTC');
+                      if (! isset($landingSessionFirstAt[$sessionHash])
+                          || $landingAt->lt($landingSessionFirstAt[$sessionHash])) {
+                          $landingSessionFirstAt[$sessionHash] = $landingAt;
+                      }
                   }
               }
               foreach ($sourceEvents as $event) {
@@ -370,8 +376,11 @@ jobs:
                   $urlPath = $normalizeApprovedPath($seo['url'] ?? null);
                   $sourcePath = $normalizeApprovedPath($seo['source_url'] ?? null);
                   $sessionHash = $normalizeSessionHash($seo['session_id'] ?? $event->session_id ?? null);
+                  $eventAt = CarbonImmutable::parse((string) $event->occurred_at, 'UTC');
                   $downstreamAttributed = $sourcePath === $canonicalPath
-                      || ($sessionHash !== '' && isset($landingSessionHashes[$sessionHash]));
+                      || ($sessionHash !== ''
+                          && isset($landingSessionFirstAt[$sessionHash])
+                          && $landingSessionFirstAt[$sessionHash]->lte($eventAt));
                   $isScoped = match ($eventCode) {
                       'landing_pv' => $urlPath === $canonicalPath,
                       'start_test', 'complete_test', 'view_result' => $scale === 'RIASEC'
@@ -381,6 +390,17 @@ jobs:
                   };
                   if ($isScoped) {
                       $scopedSourceEventCount++;
+                      $matchedSourceRows++;
+                      if ($eventCode === 'landing_pv') {
+                          $landingView++;
+                      } else {
+                          $metric = match ($eventCode) {
+                              'start_test' => 'test_start',
+                              'complete_test' => 'test_complete',
+                              'view_result' => 'riasec_result_view',
+                          };
+                          $byForm[$form][$metric]++;
+                      }
                   }
               }
               foreach ((array) ($seoBuild['rows'] ?? []) as $row) {
@@ -389,36 +409,14 @@ jobs:
                       continue;
                   }
                   $urlPath = $normalizeApprovedPath($row['url'] ?? null);
-                  $sourcePath = $normalizeApprovedPath($row['source_url'] ?? null);
                   $landingAttributed = $urlPath === $canonicalPath;
-                  $sessionHash = (string) ($row['session_id_hash'] ?? '');
-                  $downstreamAttributed = $sourcePath === $canonicalPath
-                      || ($sessionHash !== '' && isset($landingSessionHashes[$sessionHash]));
                   if ($landingAttributed) {
-                      $landingView += (int) ($row['landing_pv_count'] ?? 0);
+                      $builderLandingView += (int) ($row['landing_pv_count'] ?? 0);
                   }
-                  if (($row['scale_id'] ?? null) !== 'RIASEC') {
-                      if ($landingAttributed) {
-                          $matchedSourceRows++;
-                      }
-                      continue;
-                  }
-                  $form = (string) ($row['form_id'] ?? '');
-                  if (! array_key_exists($form, $byForm)) {
-                      if ($landingAttributed) {
-                          $matchedSourceRows++;
-                      }
-                      continue;
-                  }
-                  if (! $landingAttributed && ! $downstreamAttributed) {
-                      continue;
-                  }
-                  $matchedSourceRows++;
-                  if ($downstreamAttributed) {
-                      $byForm[$form]['test_start'] += (int) ($row['start_test_count'] ?? 0);
-                      $byForm[$form]['test_complete'] += (int) ($row['complete_test_count'] ?? 0);
-                      $byForm[$form]['riasec_result_view'] += (int) ($row['view_result_count'] ?? 0);
-                  }
+              }
+              if ($builderLandingView !== $landingView) {
+                  $reportFailure = 'LANDING_SOURCE_RECONCILIATION_FAILED';
+                  throw new RuntimeException();
               }
               $scopedProjectedEventCount = $landingView;
               foreach ($byForm as $formTotals) {
@@ -460,9 +458,9 @@ jobs:
                       'approved_absolute_origins' => ['https://fermatmind.com'],
                       'event_path_attribution' => [
                           'landing_pv' => 'url canonical_path; form_id is not required',
-                          'start_test' => 'source_url canonical_path or session linked to canonical landing_pv',
-                          'complete_test' => 'source_url canonical_path or session linked to canonical landing_pv',
-                          'view_result' => 'source_url canonical_path or session linked to canonical landing_pv',
+                          'start_test' => 'source_url canonical_path or session linked to preceding canonical landing_pv',
+                          'complete_test' => 'source_url canonical_path or session linked to preceding canonical landing_pv',
+                          'view_result' => 'source_url canonical_path or session linked to preceding canonical landing_pv',
                       ],
                       'lang' => 'en',
                       'scale_id' => 'RIASEC',

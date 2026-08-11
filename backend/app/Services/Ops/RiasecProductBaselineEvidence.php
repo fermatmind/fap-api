@@ -180,9 +180,9 @@ final class RiasecProductBaselineEvidence
             'approved_absolute_origins' => ['https://fermatmind.com'],
             'event_path_attribution' => [
                 'landing_pv' => 'url canonical_path; form_id is not required',
-                'start_test' => 'source_url canonical_path or session linked to canonical landing_pv',
-                'complete_test' => 'source_url canonical_path or session linked to canonical landing_pv',
-                'view_result' => 'source_url canonical_path or session linked to canonical landing_pv',
+                'start_test' => 'source_url canonical_path or session linked to preceding canonical landing_pv',
+                'complete_test' => 'source_url canonical_path or session linked to preceding canonical landing_pv',
+                'view_result' => 'source_url canonical_path or session linked to preceding canonical landing_pv',
             ],
             'lang' => 'en',
             'scale_id' => 'RIASEC',
