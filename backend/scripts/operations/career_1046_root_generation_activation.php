@@ -57,6 +57,7 @@ final class Career1046RootGenerationActivation
         'production_write_execution' => false,
         'candidate_file_write_count' => 0,
         'pointer_write_count' => 0,
+        'root_pointer_switch_count' => 0,
         'write_state' => 'none',
         'writes_committed' => false,
     ];
@@ -69,6 +70,7 @@ final class Career1046RootGenerationActivation
             'production_write_execution' => false,
             'candidate_file_write_count' => 0,
             'pointer_write_count' => 0,
+            'root_pointer_switch_count' => 0,
             'write_state' => 'none',
             'writes_committed' => false,
         ];
@@ -405,16 +407,95 @@ final class Career1046RootGenerationActivation
         $pointer = self::pointerDocument($expected, $generation, $database, $preflightSha);
         $bytes = self::canonicalJson($pointer)."\n";
         $pointerSha = hash('sha256', $bytes);
-        $candidate = $current['authority_root'].'/.active-generation.json.candidate.'
+        $suffix = $expected['workflow_run_id'].'.'.$expected['workflow_run_attempt'];
+        $immutablePath = $generation['generation_root'].'/generation-pointer.json';
+        $immutableCandidate = $generation['generation_root'].'/.generation-pointer.json.candidate.'.$suffix;
+        $activeCandidate = $current['authority_root'].'/.active-generation.json.candidate.'
             .$expected['workflow_run_id'].'.'.$expected['workflow_run_attempt'];
 
+        if (is_link($immutablePath) || file_exists($immutablePath)) {
+            throw new Career1046RootActivationFailure('IMMUTABLE_POINTER_ALREADY_EXISTS');
+        }
+        self::writePointerCandidate(
+            $generation['generation_root'],
+            $immutableCandidate,
+            $bytes,
+            $pointerSha,
+            'immutable_pointer_candidate',
+        );
+        $activeNow = self::readContainedFile((string) $current['authority_root'], (string) $current['active_path'], 256_000);
+        if (! hash_equals((string) $current['active_sha256_before'], hash('sha256', $activeNow))) {
+            throw new Career1046RootActivationFailure('ACTIVE_POINTER_CHANGED_BEFORE_IMMUTABLE_POINTER');
+        }
+        if (is_link($immutablePath) || file_exists($immutablePath) || ! rename($immutableCandidate, $immutablePath)) {
+            throw new Career1046RootActivationFailure('IMMUTABLE_POINTER_COMMIT_FAILED');
+        }
+        self::$writeState['pointer_write_count'] = 1;
+        self::$writeState['write_state'] = 'immutable_pointer_committed';
+        self::$writeState['writes_committed'] = true;
+        if (! hash_equals($pointerSha, hash('sha256', self::readContainedFile(
+            (string) $generation['generation_root'],
+            $immutablePath,
+            256_000,
+        )))) {
+            throw new Career1046RootActivationFailure('IMMUTABLE_POINTER_READBACK_FAILED');
+        }
+
+        self::writePointerCandidate(
+            (string) $current['authority_root'],
+            $activeCandidate,
+            $bytes,
+            $pointerSha,
+            'root_pointer_candidate',
+        );
+        self::assertActiveRelease($expected);
+        self::assertGenerationDocumentReadback($expected, $generation);
+
+        $activeNow = self::readContainedFile((string) $current['authority_root'], (string) $current['active_path'], 256_000);
+        if (! hash_equals((string) $current['active_sha256_before'], hash('sha256', $activeNow))) {
+            throw new Career1046RootActivationFailure('ACTIVE_POINTER_CHANGED_BEFORE_SWITCH');
+        }
+        self::$writeState['write_state'] = 'root_pointer_switch_started';
+        if (! rename($activeCandidate, (string) $current['active_path'])) {
+            throw new Career1046RootActivationFailure('ROOT_POINTER_SWITCH_FAILED');
+        }
+        self::$writeState['pointer_write_count'] = 2;
+        self::$writeState['root_pointer_switch_count'] = 1;
+        self::$writeState['write_state'] = 'root_pointer_switched';
+        $activeAfter = self::readContainedFile((string) $current['authority_root'], (string) $current['active_path'], 256_000);
+        $immutableAfter = self::readContainedFile(
+            (string) $generation['generation_root'],
+            $immutablePath,
+            256_000,
+        );
+        if (! hash_equals($pointerSha, hash('sha256', $activeAfter))
+            || ! hash_equals($bytes, $activeAfter)
+            || ! hash_equals($activeAfter, $immutableAfter)) {
+            throw new Career1046RootActivationFailure('ACTIVATED_POINTER_READBACK_FAILED');
+        }
+
+        return [
+            ...$current,
+            'active_sha256_after' => $pointerSha,
+            'activated_pointer_sha256' => $pointerSha,
+            'immutable_pointer_sha256' => $pointerSha,
+        ];
+    }
+
+    private static function writePointerCandidate(
+        string $root,
+        string $candidate,
+        string $bytes,
+        string $pointerSha,
+        string $writeState,
+    ): void {
         self::$writeState['production_write_execution'] = true;
-        self::$writeState['write_state'] = 'pointer_candidate_started';
+        self::$writeState['write_state'] = $writeState;
         $handle = fopen($candidate, 'x');
         if ($handle === false) {
             throw new Career1046RootActivationFailure('POINTER_CANDIDATE_CREATE_FAILED');
         }
-        self::$writeState['candidate_file_write_count'] = 1;
+        self::$writeState['candidate_file_write_count']++;
         try {
             if (fwrite($handle, $bytes) !== strlen($bytes) || ! fflush($handle)) {
                 throw new Career1046RootActivationFailure('POINTER_CANDIDATE_WRITE_FAILED');
@@ -426,41 +507,46 @@ final class Career1046RootGenerationActivation
             fclose($handle);
         }
         if (! chmod($candidate, 0640)
-            || ! hash_equals($pointerSha, hash('sha256', self::readContainedFile((string) $current['authority_root'], $candidate, 256_000)))) {
+            || ! hash_equals($pointerSha, hash('sha256', self::readContainedFile($root, $candidate, 256_000)))) {
             throw new Career1046RootActivationFailure('POINTER_CANDIDATE_READBACK_FAILED');
         }
+    }
 
-        $activeNow = self::readContainedFile((string) $current['authority_root'], (string) $current['active_path'], 256_000);
-        if (! hash_equals((string) $current['active_sha256_before'], hash('sha256', $activeNow))) {
-            throw new Career1046RootActivationFailure('ACTIVE_POINTER_CHANGED_BEFORE_SWITCH');
+    /** @param array<string, mixed> $expected @param array<string, mixed> $generation */
+    private static function assertGenerationDocumentReadback(array $expected, array $generation): void
+    {
+        foreach ($expected['document_hashes'] as $filename => $sha256) {
+            $raw = self::readContainedFile(
+                (string) $generation['generation_root'],
+                $generation['generation_root'].'/'.$filename,
+                268_435_456,
+            );
+            if (! hash_equals((string) $sha256, hash('sha256', $raw))) {
+                throw new Career1046RootActivationFailure('STAGED_DOCUMENT_DRIFT_BEFORE_SWITCH');
+            }
         }
-        self::$writeState['write_state'] = 'root_pointer_switch_started';
-        if (! rename($candidate, (string) $current['active_path'])) {
-            throw new Career1046RootActivationFailure('ROOT_POINTER_SWITCH_FAILED');
-        }
-        self::$writeState['pointer_write_count'] = 1;
-        self::$writeState['write_state'] = 'root_pointer_switched';
-        self::$writeState['writes_committed'] = true;
-        $activeAfter = self::readContainedFile((string) $current['authority_root'], (string) $current['active_path'], 256_000);
-        if (! hash_equals($pointerSha, hash('sha256', $activeAfter)) || ! hash_equals($bytes, $activeAfter)) {
-            throw new Career1046RootActivationFailure('ACTIVATED_POINTER_READBACK_FAILED');
-        }
-
-        return [
-            ...$current,
-            'active_sha256_after' => $pointerSha,
-            'activated_pointer_sha256' => $pointerSha,
-        ];
     }
 
     /** @return array<string, mixed> */
     public static function pointerDocument(array $expected, array $generation, array $database, string $preflightSha): array
     {
+        $generationId = (string) $expected['generation_id'];
+        $artifactDefinitions = [
+            'candidate_receipt' => ['candidate-receipt.json', 'career-1046-candidate-receipt@'.$generationId],
+            'directory_en' => ['career-directory-en.json', 'career-directory-en@'.$generationId],
+            'directory_zh' => ['career-directory-zh.json', 'career-directory-zh@'.$generationId],
+            'ledger' => ['career-full-release-ledger.json', 'career-full-release-ledger@'.$generationId],
+            'detail_en' => ['career-job-details-en.json', 'career-job-details-en@'.$generationId],
+            'detail_zh' => ['career-job-details-zh.json', 'career-job-details-zh@'.$generationId],
+            'projection' => ['career-runtime-publish-projection.json', 'career-runtime-publish-projection@'.$generationId],
+            'generation_manifest' => ['generation-manifest.json', 'career-generation-manifest@'.$generationId],
+        ];
         $artifacts = [];
-        foreach ($generation['document_sha256'] as $filename => $sha256) {
-            $artifacts[$filename] = [
+        foreach ($artifactDefinitions as $key => [$filename, $identity]) {
+            $artifacts[$key] = [
+                'identity' => $identity,
                 'path' => 'generations/'.$expected['generation_id'].'/'.$filename,
-                'sha256' => $sha256,
+                'sha256' => $generation['document_sha256'][$filename],
             ];
         }
         $payload = [
@@ -482,9 +568,12 @@ final class Career1046RootGenerationActivation
                 'previous_generation_id' => $expected['previous_generation_id'],
                 'previous_pointer_sha256' => $expected['previous_pointer_sha256'],
             ],
-            'timestamps' => ['activated_at' => $expected['activation_timestamp']],
+            'timestamps' => [
+                'created_at' => $expected['activation_timestamp'],
+                'activated_at' => $expected['activation_timestamp'],
+            ],
             'activation_receipt' => [
-                'identity' => 'career-1046-root-activation:'.$expected['generation_id'],
+                'identity' => 'activation:'.$expected['generation_id'],
                 'sha256' => $preflightSha,
             ],
             'staging_receipt' => [

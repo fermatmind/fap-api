@@ -141,6 +141,7 @@ jobs:
               production_write_execution: false,
               candidate_file_write_count: 0,
               pointer_write_count: 0,
+              root_pointer_switch_count: 0,
               database_select_only: true,
               database_write_count: 0,
               cms_write_count: 0,
@@ -340,6 +341,7 @@ jobs:
                  and .workflow_run_attempt == $run_attempt
                  and .production_write_execution == false
                  and .pointer_write_count == 0
+                 and .root_pointer_switch_count == 0
                  and .writes_committed == false
                  and .zero_write_guarantee == true
                  and .automatic_retry_allowed == false' "$preflight" >/dev/null
@@ -519,14 +521,16 @@ jobs:
                     and .production_write_execution == false
                     and .candidate_file_write_count == 0
                     and .pointer_write_count == 0
+                    and .root_pointer_switch_count == 0
                     and .active_pointer_sha256_after == $pointer
                     and .writes_committed == false
                     and .zero_write_guarantee == true
                   else
                     .status == "PASS_APPLY_ROOT_GENERATION_ACTIVATED"
                     and .production_write_execution == true
-                    and .candidate_file_write_count == 1
-                    and .pointer_write_count == 1
+                    and .candidate_file_write_count == 2
+                    and .pointer_write_count == 2
+                    and .root_pointer_switch_count == 1
                     and .active_pointer_sha256_after != $pointer
                     and .writes_committed == true
                     and .zero_write_guarantee == false

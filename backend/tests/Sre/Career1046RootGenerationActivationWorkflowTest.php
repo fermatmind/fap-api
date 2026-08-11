@@ -7,6 +7,7 @@ namespace Tests\Sre;
 use App\Console\Commands\CareerPublicResolutionTypeMatrix;
 use App\Domain\Career\Publish\Career1046ImmutableCandidateGenerator;
 use App\Domain\Career\Publish\CareerFullReleaseLedgerService;
+use App\Domain\Career\Publish\CareerGenerationAuthorityLoader;
 use App\Domain\Career\Publish\CareerGenerationCanonicalJson;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use FermatMind\Operations\Career1046RootActivationFailure;
@@ -34,6 +35,10 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
 
         $this->root = sys_get_temp_dir().'/career-1046-root-activation-'.bin2hex(random_bytes(8));
         $this->privateRoot = $this->root.'/storage/app/private';
+        $release = $this->root.'/releases/release-1046';
+        File::ensureDirectoryExists($release.'/backend');
+        File::put($release.'/REVISION', str_repeat('a', 40)."\n");
+        self::assertTrue(symlink($release, $this->root.'/current'));
         $authorityRoot = $this->privateRoot.'/career_generation_authority';
         $previous = 'career-current-342-30-bootstrap-v1';
         File::ensureDirectoryExists($authorityRoot.'/generations/'.$previous);
@@ -69,8 +74,9 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
 
         $this->expected = [
             'mode' => 'apply',
-            'backend_root' => dirname(__DIR__, 2),
+            'backend_root' => $release.'/backend',
             'private_root' => $this->privateRoot,
+            'active_release_link' => $this->root.'/current',
             'control_plane_sha' => str_repeat('a', 40),
             'release_sha' => str_repeat('a', 40),
             'release_name' => 'release-1046',
@@ -101,6 +107,9 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
 
     protected function tearDown(): void
     {
+        if (is_link($this->root.'/current')) {
+            unlink($this->root.'/current');
+        }
         File::deleteDirectory($this->root);
 
         parent::tearDown();
@@ -125,6 +134,10 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
         self::assertNotSame($before, $result['active_sha256_after']);
         self::assertSame($result['active_sha256_after'], hash_file('sha256', $activePath));
         self::assertFileDoesNotExist(dirname($activePath).'/.active-generation.json.candidate.900.1');
+        $immutablePath = $this->privateRoot.'/career_generation_authority/generations/'
+            .$this->expected['generation_id'].'/generation-pointer.json';
+        self::assertFileExists($immutablePath);
+        self::assertSame(hash_file('sha256', $activePath), hash_file('sha256', $immutablePath));
         $active = json_decode((string) file_get_contents($activePath), true, 512, JSON_THROW_ON_ERROR);
         self::assertSame($this->expected['generation_id'], $active['payload']['generation_id']);
         self::assertSame('generation_native_v1', $active['payload']['artifact_format']);
@@ -136,6 +149,31 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
         self::assertFalse($active['payload']['discoverability']['llms_mutated']);
         self::assertFalse($active['payload']['discoverability']['search_mutated']);
         self::assertCount(8, $active['payload']['artifacts']);
+        self::assertSame(
+            'career-runtime-publish-projection@'.$this->expected['generation_id'],
+            $active['payload']['artifacts']['projection']['identity'],
+        );
+        self::assertSame(
+            'career-full-release-ledger@'.$this->expected['generation_id'],
+            $active['payload']['artifacts']['ledger']['identity'],
+        );
+        self::assertSame(
+            'activation:'.$this->expected['generation_id'],
+            $active['payload']['activation_receipt']['identity'],
+        );
+        self::assertSame('2026-08-12T00:00:00Z', $active['payload']['timestamps']['created_at']);
+        self::assertSame('2026-08-12T00:00:00Z', $active['payload']['timestamps']['activated_at']);
+
+        $loader = new CareerGenerationAuthorityLoader;
+        $loadFromPointer = new \ReflectionMethod($loader, 'loadFromPointer');
+        $loaded = $loadFromPointer->invoke(
+            $loader,
+            $this->privateRoot.'/career_generation_authority',
+            $activePath,
+            false,
+        );
+        self::assertSame($this->expected['generation_id'], $loaded['pointer']['generation_id']);
+        self::assertCount(2092, $loaded['projection']['items']);
     }
 
     public function test_tampered_staging_and_incomplete_rollback_fail_closed_before_activation(): void
@@ -188,7 +226,8 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
             'matching_count == 1016',
             'missing_or_mismatching_count == 0',
             'outside_target_count == 0',
-            'pointer_write_count == 1',
+            'pointer_write_count == 2',
+            'root_pointer_switch_count == 1',
             'write_state="indeterminate"',
             'if: always()',
             'automatic_retry_allowed',

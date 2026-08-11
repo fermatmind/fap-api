@@ -16,7 +16,7 @@ Apply additionally requires a fresh successful activation preflight receipt, its
 
 ## One-switch write boundary
 
-Preflight is zero-write. Apply creates one adjacent no-clobber candidate containing the generation-native pointer, reads it back, rechecks the old root pointer immediately before commit, and performs exactly one same-directory atomic `rename` over `active-generation.json`. The new pointer binds all eight immutable documents, frozen authority hashes, 1046/2092 counts, database-state hash, Task 5 receipt/digest, activation preflight receipt, and the complete previous-generation rollback reference.
+Preflight is zero-write. Apply first creates and reads back the immutable `generations/<generation>/generation-pointer.json` required by the runtime loader, then creates the adjacent root candidate, rechecks the active release, all eight generation documents, and the old root pointer immediately before performing exactly one same-directory atomic `rename` over `active-generation.json`. Both pointer files are byte-identical. The pointer uses the runtime loader's exact projection/ledger descriptors, timestamps, activation identity, frozen authority hashes, 1046/2092 counts, database-state hash, Task 5 receipt/digest, and complete previous-generation rollback reference.
 
 No DB/CMS/cache/generation document is changed. The control does not regenerate, warm, deploy, migrate, restart, publish, release sitemap/llms/Search state, or submit Search, IndexNow, GSC, sitemap, or URLs. It has no automatic retry, cleanup, or rollback. If apply transport or receipt validity is ambiguous, the runner-side receipt records an indeterminate write state; operators must not infer whether activation succeeded.
 
