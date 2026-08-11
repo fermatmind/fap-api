@@ -105208,7 +105208,7 @@
     "base": "main",
     "branch": "codex/career-1046-immutable-candidate-07",
     "title": "CAREER-1046-IMMUTABLE-CANDIDATE-07: generate exact manifest-filtered product candidate",
-    "status": "github_checks_pending",
+    "status": "merged",
     "depends_on": [
       "CAREER-PUBLICATION-INDEX-RECONCILIATION-APPLY-06B"
     ],
@@ -105238,16 +105238,17 @@
         "evidence": "Exactly six allowlisted paths contain the offline candidate generator, focused unit test, the existing runtime-freeze classifier registration required by CI, operator contract and two train ledgers. No workflow, route, migration, command registration, public reader, CMS/content, pointer, frontend or discoverability implementation is included."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": "PR has not yet been opened."
+        "status": "passed",
+        "evidence": "Final exact head d8ae7fab78aacf1f40e3872f4d43244edbf0e143 passed hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep blocking secrets, Semgrep OSS and the non-blocking SARIF upload. Staging parity was correctly skipped; GitHub reported MERGEABLE/CLEAN with exactly six allowlisted files."
       }
     },
     "failure_reason": null,
-    "commit_sha": "3165c5f081579e8af9f76d5d6ce7a0a0d9c5c4a7",
+    "commit_sha": "d8ae7fab78aacf1f40e3872f4d43244edbf0e143",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3666",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-08-12T05:03:28+08:00",
+    "merge_commit_sha": "3cc06417bf7a3ca996280a10793155ac9b0795e8",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "workflow_policy_change": false,
     "production_write_execution": false,
     "production_read_only_evidence": false,
@@ -105282,8 +105283,92 @@
         "at": "2026-08-12T04:55:12+08:00",
         "status": "github_checks_pending",
         "note": "GitHub verify-bigfive exposed one same-scope classifier registration gap: the new offline candidate generator appeared as an unclassified backend/app path. Added only the exact generator path to the existing Career runtime-projection classifier and its explicit fixture list. The two focused classifier tests pass 5 assertions with only known missing-.env warnings, candidate tests remain 5 / 29 and Pint passes. Both MBTI jobs were already green; no external state was accessed or mutated."
+      },
+      {
+        "at": "2026-08-12T05:03:28+08:00",
+        "status": "merged",
+        "note": "PR #3666 final head d8ae7fab78aacf1f40e3872f4d43244edbf0e143 passed the complete required check set and squash merged as 3cc06417bf7a3ca996280a10793155ac9b0795e8. origin/main contains the merge, the remote branch disappeared during cleanup, and the local branch was deleted after the isolated train worktree moved to Task 5. No production or staging workflow was dispatched and no production or discoverability state was read or mutated."
       }
     ],
-    "updated_at": "2026-08-12T04:55:12+08:00"
+    "updated_at": "2026-08-12T05:03:28+08:00"
+  },
+  "CAREER-1046-PRODUCT-DATA-STAGING-CONTROL-08": {
+    "id": "CAREER-1046-PRODUCT-DATA-STAGING-CONTROL-08",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-1046-product-data-staging-08",
+    "title": "CAREER-1046-PRODUCT-DATA-STAGING-CONTROL-08: add exact same-generation product staging control",
+    "status": "github_checks_pending",
+    "depends_on": [
+      "CAREER-1046-IMMUTABLE-CANDIDATE-07"
+    ],
+    "allowed_paths": [
+      ".github/workflows/career-1046-product-data-staging-production-ops.yml",
+      "backend/scripts/operations/career_1046_product_data_staging.php",
+      "backend/tests/Sre/Career1046ProductDataStagingWorkflowTest.php",
+      "docs/operations/career-1046-product-data-staging-control.md",
+      "docs/codex/pr-train.yaml",
+      "docs/codex/pr-train-state.json"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "Task 5 of the continuous Career 1046 goal authorizes implementing and merging this exact staging control plane only; workflow dispatch, SSH and every production/staging mutation remain forbidden."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "Task 4 PR #3666 final head d8ae7fab78aacf1f40e3872f4d43244edbf0e143 passed all required checks and squash merged as 3cc06417bf7a3ca996280a10793155ac9b0795e8; this branch starts from that exact origin/main."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "The heavy-guarded full backend/scripts/ci_verify_mbti.sh chain exited 0, including Big Five 1693 tests / 196735 assertions and all MBTI/security/migration/queue gates. Focused staging/candidate coverage passed 8 tests plus 3 known missing-.env warnings / 108 assertions; actionlint, Pint --test, PHP syntax, frozen contract verification, train YAML/JSON parsing, 232-route listing, fresh in-memory SQLite migration, exact six-path scope and diff checks passed."
+      },
+      "scope": {
+        "status": "passed",
+        "evidence": "The six-path allowlist contains one protected manual workflow, one standalone immutable-directory runner, its executable SRE test, operator documentation and two train ledgers. No route, migration, public reader, CMS/content, active pointer, frontend or discoverability implementation is included."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": "PR has not yet been opened."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "workflow_policy_change": true,
+    "production_write_execution": false,
+    "production_read_only_evidence": false,
+    "production_workflow_dispatched": false,
+    "staging_workflow_dispatched": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "cache_mutation": false,
+    "artifact_mutation": false,
+    "pointer_mutation": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "url_submission": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-08-12T05:03:28+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started Task 5 from exact merged Task 4 origin/main 3cc06417bf7a3ca996280a10793155ac9b0795e8. Scope is an unexecuted protected same-generation immutable product-data staging workflow, standalone runner, focused test, operations document and ledgers only. No workflow was dispatched; no SSH, production/staging read, deploy, migration, DB/CMS/cache/artifact/pointer, publication, sitemap/llms or Search action was executed."
+      },
+      {
+        "at": "2026-08-12T05:24:14+08:00",
+        "status": "local_validation_passed",
+        "note": "Completed local validation. The heavy-guarded ci_verify_mbti master chain exited 0; focused staging/candidate coverage passed 8 tests plus 3 known missing-.env warnings / 108 assertions; actionlint, Pint, PHP syntax, freeze contract, YAML/JSON parsing, 232-route listing, fresh SQLite migration, exact six-file scope and diff checks passed. Verifier-generated Big Five compiled files were restored. No workflow was dispatched and no controlled external state was accessed or mutated."
+      },
+      {
+        "at": "2026-08-12T05:26:00+08:00",
+        "status": "github_checks_pending",
+        "note": "The exact six-file implementation is ready for explicit staging, commit, push and PR creation. Required checks must pass before squash merge. No production or staging workflow was dispatched and no controlled external state was accessed or mutated."
+      }
+    ],
+    "updated_at": "2026-08-12T05:26:00+08:00"
   }
 }
