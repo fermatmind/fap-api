@@ -469,7 +469,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             $this->assertStringContainsString($boundary, $workflow);
         }
 
-        $expectedWrapperSha = '082637b0f84f956dbdbcc13870dfc3337b51515ae7f1b8d23eee55f051887b68';
+        $expectedWrapperSha = '164c99cbed3f04ba91d2446547cbf24d06455b162d7ca75b0be239cd6054d82f';
         $this->assertSame(
             $expectedWrapperSha,
             hash_file('sha256', dirname(__DIR__, 3).'/'.$wrapperPath)
@@ -488,6 +488,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString("'PUBLIC_DNS_PROBE_RETRY_DELAYS_SECONDS' => '2 5'", $wrapper);
         $this->assertStringContainsString('| base64 -d', $wrapper);
         $this->assertStringContainsString('| env ', $wrapper);
+        $this->assertStringContainsString('bash -o pipefail -c', $wrapper);
         $this->assertStringContainsString('if ! raw="$(curl', $helper);
         $this->assertStringContainsString('429|502|503|504) return 75', $helper);
         $this->assertStringContainsString('if [ "$probe_rc" -ne 75 ]', $helper);

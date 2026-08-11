@@ -147,6 +147,7 @@ class BoundedCandidatePublicDnsControlTest(unittest.TestCase):
             "| base64 -d",
             "| env ",
             "bash -s",
+            "bash -o pipefail -c",
         ):
             self.assertIn(expected, self.wrapper)
 
@@ -315,6 +316,12 @@ if (! str_contains(
     '| base64 -d | env '
 )) {
     throw new \\RuntimeException('production command was not assembled');
+}
+if (! str_contains(
+    (string) ($GLOBALS['bounded_public_dns_command'] ?? ''),
+    'bash -o pipefail -c'
+)) {
+    throw new \\RuntimeException('production command does not fail closed on pipeline errors');
 }
 
 echo "production worker namespace ok\n";

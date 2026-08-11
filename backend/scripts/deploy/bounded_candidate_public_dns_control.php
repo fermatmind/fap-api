@@ -69,10 +69,10 @@ task('guard:public-dns-health', function () use ($publicDnsHelperPayload): void 
         $assignments[] = $name.'='.deployShellArg($value);
     }
 
-    run(
-        'printf %s '.deployShellArg($publicDnsHelperPayload)
+    $streamCommand = 'printf %s '.deployShellArg($publicDnsHelperPayload)
         .' | base64 -d'
         .' | env '.implode(' ', $assignments)
-        .' bash -s'
-    );
+        .' bash -s';
+
+    run('bash -o pipefail -c '.deployShellArg($streamCommand));
 });
