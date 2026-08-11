@@ -318,7 +318,7 @@ jq -n \
   --argjson workflow_run_attempt "$WORKFLOW_RUN_ATTEMPT" \
   --argjson authority_evidence_exit_code "$authority_evidence_exit_code" \
   --argjson authority_evidence_valid "$authority_evidence_valid" \
-  --argjson authority_evidence "$authority_evidence_summary" \
+  --slurpfile authority_evidence <(printf '%s\n' "$authority_evidence_summary") \
   --argjson authority_exit_code "$authority_exit_code" \
   --argjson authority_valid "$authority_valid" \
   --argjson authority "$authority_summary" \
@@ -369,7 +369,7 @@ jq -n \
       rollout_apply_allowed: false
     },
     production_read_only_observations: {
-      exact_authority_evidence: {exit_code: $authority_evidence_exit_code, valid: $authority_evidence_valid, summary: $authority_evidence},
+      exact_authority_evidence: {exit_code: $authority_evidence_exit_code, valid: $authority_evidence_valid, summary: $authority_evidence[0]},
       aa_projection_truth_review_authority: {exit_code: $authority_exit_code, valid: $authority_valid, summary: $authority},
       detail_ready_scan: {exit_code: $scan_exit_code, valid: $scan_valid, summary: $scan},
       aa_eligibility: {exit_code: $eligibility_exit_code, valid: $eligibility_valid, summary: $eligibility},
