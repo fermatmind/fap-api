@@ -1,0 +1,46 @@
+{
+  "schema_version": "fermatmind.riasec_landing_cms_experiment_t0_receipt.v1",
+  "experiment_id": "FERMATMIND-EN-RIASEC-CMS-EXPERIMENT-01",
+  "status": "live_readback_pass",
+  "surface_key": "test_detail_holland_career_interest_test_riasec",
+  "locale": "en",
+  "target_package_sha256": "064b9e15eb8eae102623306487c4b63635b7500a32925706f14688158734e3f1",
+  "applied_at": "2026-08-11T14:19:15+00:00",
+  "readback_passed_at": "2026-08-11T14:29:14Z",
+  "rolled_back_at": null,
+  "public_api_readback_sha256": "287a2df2d61dc0d48d962d5582ed862fec35b8b9bbab7b2d7f7a2a91bc0823db",
+  "bridge_apply_audit": {
+    "action": "riasec_global_cms_apply",
+    "result": "applied",
+    "target_type": "landing_surface",
+    "target_id": "test_detail_holland_career_interest_test_riasec",
+    "deployed_sha": "da8810b218f9ca1acbb7dabdaaa993cd14b31c48",
+    "release_id": "standard-da8810b218f9-31495516845-1",
+    "preflight_fingerprint": "25e0d718d344735af832ed8be7919df35adba6797b4fe99bf74f9c97fc991752",
+    "operator_approval_phrase_sha256": "48d38a9a70e2bf6d355313376df3a1735b98ccf273152df04d8a9038ce5f566e",
+    "audit_created_at": "2026-08-11T14:19:15+00:00",
+    "audit_record_sha256": "21663dad1bcb20cb9dde576af3bdc10b8ff28d334297d3ac2259d36a61e08cdf"
+  },
+  "bridge_rollback_audit": null,
+  "rendered_readback": {
+    "title": "Free Holland Career Interest Test (RIASEC) | FermatMind",
+    "meta_description": "Explore six RIASEC career-interest dimensions with a free Holland Code test. Choose 60 questions (about 8 minutes) or 140 questions (about 18 minutes). Interests are not aptitude or guaranteed career fit.",
+    "h1": "Free Holland Career Interest Test (RIASEC)",
+    "canonical": "https://fermatmind.com/en/tests/holland-career-interest-test-riasec",
+    "default_cta_href": "/en/tests/holland-career-interest-test-riasec/take?form=riasec_60",
+    "enhanced_cta_href": "/en/tests/holland-career-interest-test-riasec/take?form=riasec_140"
+  },
+  "authority_guardrails": {
+    "status": "published",
+    "is_public": true,
+    "is_indexable": true,
+    "page_blocks_unchanged": true,
+    "canonical_unchanged": true,
+    "sitemap_change_triggered": false,
+    "llms_change_triggered": false,
+    "search_submission_triggered": false,
+    "application_deploy_triggered": false
+  },
+  "rollback_status": "not_needed",
+  "issues": []
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": "fermatmind.riasec_landing_cms_experiment_measurement.v1",
+  "experiment_id": "FERMATMIND-EN-RIASEC-CMS-EXPERIMENT-01",
+  "surface_key": "test_detail_holland_career_interest_test_riasec",
+  "locale": "en",
+  "canonical_url": "https://fermatmind.com/en/tests/holland-career-interest-test-riasec",
+  "baseline": {
+    "window_id": "current28",
+    "date_start": "2026-07-13",
+    "date_end": "2026-08-09",
+    "m01_joint_source_sha256": "9b7c470aa39aff0e6062c41fe5d71e2e8164159747953d42bd032046cc10f691",
+    "product_funnel_source_file": "product_funnel_baseline.json",
+    "product_funnel_source_sha256": "8179e8243ba5da60943249ba1768963d3ae58a2e8cea5077d5df699df56f5f8a",
+    "returned_safe_rows": 4192,
+    "limitation": "Privacy-filtered Search Analytics top rows; missing query/page/market/device rows are UNKNOWN, not zero."
+  },
+  "search_measures": [
+    "exact_query_page_market_device_impressions_clicks_ctr_position",
+    "direct_test_query_owner_share_landing_vs_explainer",
+    "definition_query_owner_guardrail",
+    "brand_nonbrand_only_from_exact_returned_rows"
+  ],
+  "product_measures": [
+    "landing_view",
+    "test_start_by_form_code",
+    "test_complete_by_form_code",
+    "riasec_result_view_by_form_code",
+    "questions_load_failure",
+    "submit_failure"
+  ],
+  "checkpoints": [
+    {
+      "label": "T+0",
+      "due_at": "2026-08-11T14:29:14Z",
+      "purpose": "Bind exact published variant, public API readback, rendered title/H1/canonical, CTA routes, indexability hold, and analytics contract."
+    },
+    {
+      "label": "T+3",
+      "due_at": "2026-08-14T14:29:14Z",
+      "purpose": "Safety and instrumentation only; confirm analytics continuity, mobile rendering, CTA/form routing, and failure guardrails."
+    },
+    {
+      "label": "T+7",
+      "due_at": "2026-08-18T14:29:14Z",
+      "purpose": "Directional query-owner and funnel check; no expansion conclusion."
+    },
+    {
+      "label": "T+14",
+      "due_at": "2026-08-25T14:29:14Z",
+      "purpose": "Interim search/funnel assessment by market and device; hold when evidence is insufficient or confounded."
+    },
+    {
+      "label": "T+28",
+      "due_at": "2026-09-08T14:29:14Z",
+      "purpose": "Compare with the frozen 28-day pre-period and decide keep, revise, rollback, or insufficient data."
+    }
+  ],
+  "decision_boundary": "No EXPAND or STOP verdict before a complete comparable T+28 window; insufficient data is valid.",
+  "discoverability_change_authorized": false,
+  "application_deploy_authorized": false
+}
