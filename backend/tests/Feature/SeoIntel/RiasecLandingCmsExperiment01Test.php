@@ -249,7 +249,34 @@ final class RiasecLandingCmsExperiment01Test extends TestCase
 
         $this->assertSame('frozen_preapply_production_read', $productBaseline['capture_status'] ?? null);
         $capturedAt = $this->absoluteTimestamp($productBaseline['captured_at'] ?? null);
-        $this->assertMatchesRegularExpression('/^[0-9a-f]{40}$/', (string) ($productBaseline['active_backend_revision'] ?? ''));
+        $this->assertSame('2026-08-11T12:20:01Z', $productBaseline['captured_at'] ?? null);
+        $this->assertSame('6a76cf16a1162b93b4a47b4e681efe647a21c013', $productBaseline['active_backend_revision'] ?? null);
+        $this->assertSame([
+            'workflow_name' => 'Backend Production RIASEC Product Baseline',
+            'workflow_file' => '.github/workflows/backend-production-riasec-product-baseline.yml',
+            'run_id' => 31490673495,
+            'run_attempt' => 1,
+            'control_plane_sha' => '6a76cf16a1162b93b4a47b4e681efe647a21c013',
+            'active_release_id' => 'standard-6a76cf16a116-31489724464-1',
+            'receipt_schema_version' => 'fermatmind.production-riasec-product-baseline.v1',
+            'receipt_status' => 'PASS_PRODUCTION_RIASEC_PRODUCT_BASELINE',
+            'receipt_sha256' => 'ab133c8a7e7054c1f1ac827888ebc42dbbc41b069ef86d67adfe5ccf8ec7d20a',
+        ], $productBaseline['capture_evidence'] ?? null);
+        $this->assertSame([
+            'deploy' => false,
+            'migration' => false,
+            'database_write' => false,
+            'cms_write' => false,
+            'cache_write' => false,
+            'publication' => false,
+            'discoverability_change' => false,
+            'queue_action' => false,
+            'process_restart' => false,
+            'remote_file_write' => false,
+            'raw_log_read' => false,
+            'search_submit' => false,
+        ], $productBaseline['negative_guarantees'] ?? null);
+        $this->assertFalse($productBaseline['writes_committed'] ?? true);
         $this->assertSame([], $productBaseline['issues'] ?? null);
         $this->assertSame(
             hash_file('sha256', base_path(self::ROOT.'/product_funnel_baseline.json')),

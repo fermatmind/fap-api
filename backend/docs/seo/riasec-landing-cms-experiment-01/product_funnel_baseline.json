@@ -1,9 +1,20 @@
 {
   "schema_version": "fermatmind.riasec_landing_product_funnel_baseline.v1",
   "experiment_id": "FERMATMIND-EN-RIASEC-CMS-EXPERIMENT-01",
-  "capture_status": "pending_preapply_production_read",
-  "captured_at": null,
-  "active_backend_revision": null,
+  "capture_status": "frozen_preapply_production_read",
+  "captured_at": "2026-08-11T12:20:01Z",
+  "active_backend_revision": "6a76cf16a1162b93b4a47b4e681efe647a21c013",
+  "capture_evidence": {
+    "workflow_name": "Backend Production RIASEC Product Baseline",
+    "workflow_file": ".github/workflows/backend-production-riasec-product-baseline.yml",
+    "run_id": 31490673495,
+    "run_attempt": 1,
+    "control_plane_sha": "6a76cf16a1162b93b4a47b4e681efe647a21c013",
+    "active_release_id": "standard-6a76cf16a116-31489724464-1",
+    "receipt_schema_version": "fermatmind.production-riasec-product-baseline.v1",
+    "receipt_status": "PASS_PRODUCTION_RIASEC_PRODUCT_BASELINE",
+    "receipt_sha256": "ab133c8a7e7054c1f1ac827888ebc42dbbc41b069ef86d67adfe5ccf8ec7d20a"
+  },
   "date_window": {
     "from": "2026-07-13",
     "to": "2026-08-09",
@@ -85,9 +96,13 @@
         ],
         "issues": []
       },
-      "report_health": null,
-      "report_sha256": null,
-      "status": "pending"
+      "report_health": {
+        "ok": true,
+        "status": "pass",
+        "issues": []
+      },
+      "report_sha256": "f14b0ebff6bc2a5268372eaf90dd088e182239a43494186eb2d598d6a4d7da7c",
+      "status": "captured"
     },
     "attempt_result_funnel": {
       "authority": "MeasurementFunnelReadModel::report for 2026-07-13..2026-08-09/org=0/scale=RIASEC/locale=en followed by an exact riasec_60+riasec_140 form_code projection with recomputed totals and coverage health",
@@ -98,9 +113,13 @@
         ],
         "issues": []
       },
-      "report_health": null,
-      "report_sha256": null,
-      "status": "pending"
+      "report_health": {
+        "ok": true,
+        "status": "pass",
+        "issues": []
+      },
+      "report_sha256": "b05b7ca848e9c3925075762e579c6ff00404ddd5844159a836b70f85052b0713",
+      "status": "captured"
     },
     "failure_cohorts": {
       "authority": "analytics:measurement-failure-cohorts-report --from=2026-07-13 --to=2026-08-09 --org=0 --scale=RIASEC --form=riasec_60 --form=riasec_140 --locale=en --json",
@@ -112,9 +131,13 @@
         ],
         "issues": []
       },
-      "report_health": null,
-      "report_sha256": null,
-      "status": "pending"
+      "report_health": {
+        "ok": true,
+        "status": "empty",
+        "issues": []
+      },
+      "report_sha256": "1d3f7d8b01e71305ad07b320f7730146a79edca3de221fbcde5f10305e74a024",
+      "status": "captured"
     }
   },
   "total_source_mappings": {
@@ -154,17 +177,39 @@
     "missing_or_mismatched_source": "fail_closed"
   },
   "totals": {
-    "landing_view": null,
-    "test_start_by_form_code": null,
-    "test_complete_by_form_code": null,
-    "riasec_result_view_by_form_code": null,
-    "questions_load_failure": null,
-    "submit_failure": null
+    "landing_view": 0,
+    "test_start_by_form_code": {
+      "riasec_60": 0,
+      "riasec_140": 0
+    },
+    "test_complete_by_form_code": {
+      "riasec_60": 0,
+      "riasec_140": 0
+    },
+    "riasec_result_view_by_form_code": {
+      "riasec_60": 0,
+      "riasec_140": 0
+    },
+    "questions_load_failure": 0,
+    "submit_failure": 0
   },
   "read_only": true,
   "database_write_count": 0,
   "cms_write_count": 0,
-  "issues": [
-    "production_read_only_capture_pending"
-  ]
+  "negative_guarantees": {
+    "deploy": false,
+    "migration": false,
+    "database_write": false,
+    "cms_write": false,
+    "cache_write": false,
+    "publication": false,
+    "discoverability_change": false,
+    "queue_action": false,
+    "process_restart": false,
+    "remote_file_write": false,
+    "raw_log_read": false,
+    "search_submit": false
+  },
+  "writes_committed": false,
+  "issues": []
 }
