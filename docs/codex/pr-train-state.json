@@ -104688,7 +104688,7 @@
     "base": "main",
     "branch": "codex/career-1046-current-state-freeze-00",
     "title": "CAREER-1046-CURRENT-STATE-FREEZE-CONTRACT-00: freeze 30/1016/1046 authority evidence",
-    "status": "local_validation_passed",
+    "status": "github_checks_pending",
     "depends_on": [],
     "allowed_paths": [
       "backend/docs/career/contracts/career-1046-current-state-freeze.v1.json",
@@ -104720,8 +104720,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "baeabe55a576d358bb78b6fe00df80d175d640bb",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3660",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -104744,8 +104744,13 @@
         "at": "2026-08-12T01:17:34+08:00",
         "status": "local_validation_passed",
         "note": "Focused tests passed 2 tests / 16 assertions; the offline validator, scoped Pint, PHP syntax, JSON/YAML parsing, exact five-path scope comparison, and diff checks passed. Runtime acceptance commands are not applicable to this generated-contract-only PR. No production workflow was dispatched and no production or discoverability write occurred."
+      },
+      {
+        "at": "2026-08-12T01:19:29+08:00",
+        "status": "github_checks_pending",
+        "note": "PR #3660 opened from exact implementation head baeabe55a576d358bb78b6fe00df80d175d640bb. Required GitHub checks and final exact-head scope review remain pending; no production workflow was dispatched and no production or discoverability write occurred."
       }
     ],
-    "updated_at": "2026-08-12T01:17:34+08:00"
+    "updated_at": "2026-08-12T01:19:29+08:00"
   }
 }
