@@ -4,407 +4,418 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Services\Career;
 
+use App\Domain\Career\Publish\CareerFullReleaseLedgerProjectionService;
+use App\Domain\Career\Publish\CareerGenerationAuthorityLoader;
+use App\Domain\Career\Publish\CareerGenerationCanonicalJson;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionExporter;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionLookup;
-use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
-use App\Services\Career\PublicCareerAuthorityResponseCache;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
-use Mockery;
 use Tests\TestCase;
 
 final class CareerRuntimePublishProjectionLookupTest extends TestCase
 {
-    use RefreshDatabase;
-
-    private string $projectionTimestamp = '99999999T999999Z';
-
-    /**
-     * @var list<string>
-     */
-    private array $projectionDirectories = [];
+    private string $root;
 
     protected function setUp(): void
     {
         parent::setUp();
 
+        $this->root = storage_path('app/private/career_generation_authority');
+        File::deleteDirectory($this->root);
         File::deleteDirectory(storage_path('app/private/career_runtime_publish_projection'));
-    }
-
-    public function test_it_reads_materialized_projection_visibility_by_slug_and_locale(): void
-    {
-        $this->writeProjection($this->projectionTimestamp, [
-            [
-                'slug' => 'actors',
-                'locale' => 'en',
-                'public_resolution_type' => 'public_canonical_job',
-                'runtime_publish_state' => 'published',
-                'detail_route_enabled' => true,
-                'dataset_visible' => true,
-                'search_visible' => true,
-                'sitemap_live' => true,
-                'llms_live' => true,
-                'llms_full_live' => true,
-                'canonical_self' => true,
-                'robots_indexable' => true,
-                'release_gate_pass' => true,
-            ],
-            [
-                'slug' => 'software-developers',
-                'locale' => 'en',
-                'public_resolution_type' => 'keep_non_public_with_policy',
-                'runtime_publish_state' => 'quarantined',
-                'detail_route_enabled' => false,
-                'dataset_visible' => false,
-                'search_visible' => false,
-                'sitemap_live' => false,
-                'llms_live' => false,
-                'llms_full_live' => false,
-                'canonical_self' => false,
-                'robots_indexable' => false,
-                'release_gate_pass' => false,
-            ],
-        ]);
-
-        $lookup = app(CareerRuntimePublishProjectionLookup::class);
-
-        $this->assertTrue($lookup->detailRouteEnabled('actors'));
-        $this->assertTrue($lookup->datasetVisible('actors'));
-        $this->assertTrue($lookup->searchVisible('actors'));
-        $this->assertTrue($lookup->robotsIndexable('actors'));
-        $this->assertTrue($lookup->releaseGatePass('actors'));
-        $this->assertNull($lookup->itemForSlug('actors', 'zh-CN'));
-        $this->assertSame(['actors'], array_column($lookup->publicDatasetItems(), 'slug'));
-        $this->assertSame(['actors'], array_column($lookup->publicDetailItems(), 'slug'));
-        $this->assertFalse($lookup->detailRouteEnabled('software-developers'));
-        $this->assertFalse($lookup->datasetVisible('software-developers'));
-        $this->assertFalse($lookup->searchVisible('software-developers'));
-        $this->assertFalse($lookup->robotsIndexable('software-developers'));
-        $this->assertFalse($lookup->releaseGatePass('software-developers'));
-        $this->assertFalse($lookup->familyHubLive('computer-and-information-technology'));
-    }
-
-    public function test_it_returns_one_bilingual_snapshot_for_cache_coverage_iteration(): void
-    {
-        $items = [];
-        foreach (['en', 'zh'] as $locale) {
-            $items[] = [
-                'slug' => 'actors',
-                'locale' => $locale,
-                'runtime_publish_state' => 'published',
-                'detail_route_enabled' => true,
-                'dataset_visible' => true,
-                'search_visible' => true,
-                'robots_indexable' => true,
-                'release_gate_pass' => true,
-            ];
-        }
-        $this->writeProjection($this->projectionTimestamp, $items);
-
-        $snapshot = app(CareerRuntimePublishProjectionLookup::class)
-            ->jobDetailCoverageItems(['en', 'zh-CN']);
-
-        $this->assertSame(['actors|en', 'actors|zh-CN'], array_keys($snapshot));
-        $this->assertSame('en', $snapshot['actors|en']['locale']);
-        $this->assertSame('zh', $snapshot['actors|zh-CN']['locale']);
-    }
-
-    public function test_it_requires_an_explicit_published_family_hub_projection_row(): void
-    {
-        $this->writeProjection($this->projectionTimestamp, [
-            [
-                'slug' => 'data-scientists',
-                'locale' => 'en',
-                'public_resolution_type' => 'public_canonical_job',
-                'runtime_publish_state' => 'published',
-                'detail_route_enabled' => true,
-                'dataset_visible' => true,
-                'search_visible' => true,
-                'sitemap_live' => true,
-                'llms_live' => true,
-                'llms_full_live' => true,
-                'canonical_self' => true,
-                'robots_indexable' => true,
-                'release_gate_pass' => true,
-            ],
-        ]);
-
-        $lookup = app(CareerRuntimePublishProjectionLookup::class);
-
-        $this->assertTrue($lookup->detailRouteEnabled('data-scientists'));
-        $this->assertFalse($lookup->familyHubLive('computer-and-information-technology'));
-    }
-
-    public function test_it_requires_a_published_family_hub_projection_row_for_all_family_slugs(): void
-    {
-        $lookup = app(CareerRuntimePublishProjectionLookup::class);
-
-        $this->assertFalse($lookup->familyHubLive('empty-family'));
-        $this->assertFalse($lookup->familyHubLive('agricultural-workers-all-other'));
-    }
-
-    public function test_it_uses_newest_projection_artifact_instead_of_lexical_directory_order(): void
-    {
-        $this->writeProjection('career_post_rollout_runtime_projection_authority_20260515_65e4fdbd', [
-            [
-                'slug' => 'architectural-and-civil-drafters',
-                'locale' => 'en',
-                'runtime_publish_state' => 'quarantined',
-                'detail_route_enabled' => false,
-                'dataset_visible' => false,
-                'search_visible' => false,
-                'robots_indexable' => false,
-                'release_gate_pass' => false,
-            ],
-        ], 1_000);
-        $this->writeProjection('20260515T064326Z', [
-            [
-                'slug' => 'architectural-and-civil-drafters',
-                'locale' => 'en',
-                'runtime_publish_state' => 'published',
-                'detail_route_enabled' => true,
-                'dataset_visible' => true,
-                'search_visible' => true,
-                'robots_indexable' => true,
-                'release_gate_pass' => true,
-            ],
-        ], 2_000);
-
-        $lookup = app(CareerRuntimePublishProjectionLookup::class);
-
-        $this->assertTrue($lookup->detailRouteEnabled('architectural-and-civil-drafters'));
-        $this->assertTrue($lookup->datasetVisible('architectural-and-civil-drafters'));
-        $this->assertTrue($lookup->searchVisible('architectural-and-civil-drafters'));
-        $this->assertTrue($lookup->robotsIndexable('architectural-and-civil-drafters'));
-        $this->assertTrue($lookup->releaseGatePass('architectural-and-civil-drafters'));
-    }
-
-    public function test_it_fails_closed_when_the_newest_projection_artifact_is_invalid(): void
-    {
-        $this->writeProjection('older-valid', [[
-            'slug' => 'actors',
-            'locale' => 'en',
-            'runtime_publish_state' => 'published',
-            'detail_route_enabled' => true,
-            'dataset_visible' => true,
-            'search_visible' => true,
-            'robots_indexable' => true,
-            'release_gate_pass' => true,
-        ]], 1_000);
-        $this->writeInvalidProjection('newer-invalid', 2_000);
-
-        $lookup = app(CareerRuntimePublishProjectionLookup::class);
-
-        $this->assertNull($lookup->itemForSlug('actors', 'en'));
-        $this->assertFalse($lookup->detailRouteEnabled('actors'));
-        $this->assertSame([], $lookup->publicDetailItems());
-    }
-
-    public function test_it_fails_closed_when_the_newest_projection_directory_is_unreadable(): void
-    {
-        $this->writeProjection('older-valid', [[
-            'slug' => 'actors',
-            'locale' => 'en',
-            'runtime_publish_state' => 'published',
-            'detail_route_enabled' => true,
-            'dataset_visible' => true,
-            'search_visible' => true,
-            'robots_indexable' => true,
-            'release_gate_pass' => true,
-        ]], 1_000);
-        $this->writeProjection('newer-unreadable', [], 2_000);
-
-        $unreadableDirectory = storage_path('app/private/career_runtime_publish_projection/newer-unreadable');
-        touch($unreadableDirectory, 2_000);
-        chmod($unreadableDirectory, 0000);
-        clearstatcache(true, $unreadableDirectory);
-
-        try {
-            $this->assertFalse(is_readable($unreadableDirectory));
-
-            $lookup = app(CareerRuntimePublishProjectionLookup::class);
-
-            $this->assertNull($lookup->itemForSlug('actors', 'en'));
-            $this->assertFalse($lookup->detailRouteEnabled('actors'));
-            $this->assertSame([], $lookup->publicDetailItems());
-        } finally {
-            chmod($unreadableDirectory, 0700);
-        }
-    }
-
-    public function test_it_reloads_projection_visibility_when_newer_materialized_authority_appears(): void
-    {
-        $this->writeProjection('first', [[
-            'slug' => 'actors',
-            'locale' => 'en',
-            'runtime_publish_state' => 'blocked',
-            'detail_route_enabled' => false,
-            'dataset_visible' => false,
-            'search_visible' => false,
-            'robots_indexable' => false,
-            'release_gate_pass' => false,
-        ]], 1_000);
-
-        $lookup = app(CareerRuntimePublishProjectionLookup::class);
-        $this->assertFalse($lookup->detailRouteEnabled('actors'));
-
-        $this->writeProjection('second', [[
-            'slug' => 'actors',
-            'locale' => 'en',
-            'runtime_publish_state' => 'published',
-            'detail_route_enabled' => true,
-            'dataset_visible' => true,
-            'search_visible' => true,
-            'robots_indexable' => true,
-            'release_gate_pass' => true,
-        ]], 2_000);
-
-        $this->assertTrue($lookup->detailRouteEnabled('actors'));
-    }
-
-    public function test_it_does_not_derive_runtime_visibility_from_cached_dataset_payloads(): void
-    {
-        Cache::put(PublicCareerAuthorityResponseCache::DATASET_HUB_CACHE_KEY, [
-            'members' => [
-                [
-                    'canonical_slug' => 'actuaries',
-                    'release_cohort' => 'public_detail_indexable',
-                    'public_index_state' => 'indexable',
-                    'strong_index_decision' => 'strong_index_ready',
-                    'included_in_public_dataset' => true,
-                ],
-                [
-                    'canonical_slug' => 'accountants-and-auditors',
-                    'release_cohort' => 'review_needed',
-                    'public_index_state' => 'noindex',
-                    'strong_index_decision' => 'review_needed',
-                    'included_in_public_dataset' => false,
-                ],
-            ],
-        ]);
-
-        $lookup = app(CareerRuntimePublishProjectionLookup::class);
-
-        $this->assertFalse($lookup->detailRouteEnabled('actuaries'));
-        $this->assertFalse($lookup->datasetVisible('actuaries'));
-        $this->assertFalse($lookup->searchVisible('actuaries'));
-        $this->assertFalse($lookup->robotsIndexable('actuaries'));
-        $this->assertFalse($lookup->releaseGatePass('actuaries'));
-        $this->assertSame([], $lookup->publicDatasetItems());
-        $this->assertSame([], $lookup->publicDetailItems());
-
-        $this->assertFalse($lookup->detailRouteEnabled('accountants-and-auditors'));
-        $this->assertFalse($lookup->datasetVisible('accountants-and-auditors'));
-        $this->assertFalse($lookup->searchVisible('accountants-and-auditors'));
-        $this->assertFalse($lookup->robotsIndexable('accountants-and-auditors'));
-        $this->assertFalse($lookup->releaseGatePass('accountants-and-auditors'));
-    }
-
-    public function test_it_withholds_cached_detail_payloads_without_destroying_them_when_the_requested_locale_is_not_published(): void
-    {
-        $visibility = Mockery::mock(CareerRuntimePublishProjectionVisibility::class);
-        $visibility->shouldReceive('itemForSlug')
-            ->with('actors', 'zh-CN')
-            ->once()
-            ->andReturn(null);
-        $this->app->instance(CareerRuntimePublishProjectionVisibility::class, $visibility);
-
-        $cache = app(PublicCareerAuthorityResponseCache::class);
-        $cacheKey = $cache->jobDetailCacheKey('actors', 'zh-CN');
-        Cache::forever($cacheKey, ['identity' => ['canonical_slug' => 'actors']]);
-
-        $this->assertNull($cache->jobDetailPayload('actors', 'zh-CN'));
-        $this->assertTrue(Cache::has($cacheKey));
-        $this->assertSame(
-            ['identity' => ['canonical_slug' => 'actors']],
-            Cache::get($cacheKey),
-        );
-    }
-
-    public function test_it_filters_job_index_items_before_activating_the_requested_locale_snapshot(): void
-    {
-        $publishedActor = [
-            'runtime_publish_state' => 'published',
-            'detail_route_enabled' => true,
-            'robots_indexable' => true,
-            'release_gate_pass' => true,
-            'dataset_visible' => true,
-        ];
-        $visibility = Mockery::mock(CareerRuntimePublishProjectionVisibility::class);
-        $visibility->shouldReceive('itemForSlug')
-            ->with('actors', 'zh-CN')
-            ->times(3)
-            ->andReturn($publishedActor);
-        $visibility->shouldReceive('itemForSlug')
-            ->with('accountants-and-auditors', 'zh-CN')
-            ->twice()
-            ->andReturn(null);
-        $this->app->instance(CareerRuntimePublishProjectionVisibility::class, $visibility);
-
-        $cache = app(PublicCareerAuthorityResponseCache::class);
-        $cache->publishJobDetailReadModel('actors', 'zh-CN', [
-            'identity' => ['canonical_slug' => 'actors'],
-        ]);
-        $cache->publishJobIndexReadModelsAtomically([
-            'zh-CN' => [
-                'bundle_kind' => 'career_job_index',
-                'bundle_version' => 'career.protocol.job_index.v1',
-                'items' => [
-                    ['identity' => ['canonical_slug' => 'actors']],
-                    ['identity' => ['canonical_slug' => 'accountants-and-auditors']],
-                ],
-            ],
-        ]);
-
-        $payload = $cache->jobIndexPayload('zh-CN');
-
-        $this->assertSame(['actors'], collect($payload['items'])->pluck('identity.canonical_slug')->all());
+        File::deleteDirectory(storage_path('app/private/career_release_ledger'));
     }
 
     protected function tearDown(): void
     {
-        foreach ($this->projectionDirectories as $directory) {
-            File::deleteDirectory($directory);
-        }
+        File::deleteDirectory($this->root);
+        File::deleteDirectory(storage_path('app/private/career_runtime_publish_projection'));
+        File::deleteDirectory(storage_path('app/private/career_release_ledger'));
 
         parent::tearDown();
     }
 
-    /**
-     * @param  list<array<string, mixed>>  $items
-     */
-    private function writeProjection(string $timestamp, array $items, ?int $mtime = null): void
+    public function test_it_reads_only_the_generation_bound_published_projection(): void
     {
-        $dir = storage_path('app/private/career_runtime_publish_projection/'.$timestamp);
-        File::ensureDirectoryExists($dir);
-        $this->projectionDirectories[] = $dir;
-        $path = $dir.DIRECTORY_SEPARATOR.CareerRuntimePublishProjectionExporter::PROJECTION_FILENAME;
-        File::put(
-            $path,
-            (string) json_encode([
-                'projection_kind' => 'career_runtime_publish_projection',
-                'items' => $items,
-            ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT)
-        );
+        $this->writeGeneration('generation-001', [
+            'actors' => 'published',
+            'software-developers' => 'quarantined',
+        ]);
 
-        if ($mtime !== null) {
-            touch($path, $mtime);
-            clearstatcache(true, $path);
+        $lookup = app(CareerRuntimePublishProjectionLookup::class);
+
+        self::assertTrue($lookup->detailRouteEnabled('actors'));
+        self::assertTrue($lookup->datasetVisible('actors'));
+        self::assertTrue($lookup->releaseGatePass('actors'));
+        self::assertNotNull($lookup->itemForSlug('actors', 'zh-CN'));
+        self::assertSame(['actors'], array_column($lookup->publicDatasetItems(), 'slug'));
+        self::assertFalse($lookup->detailRouteEnabled('software-developers'));
+        self::assertNull($lookup->itemForSlug('software-developers'));
+    }
+
+    public function test_invalid_or_absent_pointer_never_scans_legacy_materialized_directories(): void
+    {
+        $legacyDir = storage_path('app/private/career_runtime_publish_projection/newest-by-mtime');
+        File::ensureDirectoryExists($legacyDir);
+        File::put($legacyDir.'/'.CareerRuntimePublishProjectionExporter::PROJECTION_FILENAME, json_encode([
+            'projection_kind' => 'career_runtime_publish_projection',
+            'items' => $this->projectionItems(['actors' => 'published']),
+        ], JSON_THROW_ON_ERROR));
+
+        $lookup = app(CareerRuntimePublishProjectionLookup::class);
+        self::assertNull($lookup->itemForSlug('actors'));
+        self::assertSame([], $lookup->publicDetailItems());
+
+        File::ensureDirectoryExists($this->root);
+        File::put($this->root.'/'.CareerGenerationAuthorityLoader::ACTIVE_POINTER_FILENAME, '{invalid');
+
+        self::assertNull($lookup->itemForSlug('actors'));
+        self::assertSame([], $lookup->publicDatasetItems());
+    }
+
+    public function test_pointer_payload_hash_schema_count_and_set_drift_fail_closed(): void
+    {
+        $document = $this->writeGeneration('generation-001', ['actors' => 'published']);
+
+        foreach ([
+            function (array &$value): void {
+                $value['schema_version'] = 'career.generation_pointer.unknown';
+            },
+            function (array &$value): void {
+                $value['payload']['counts']['public_slug_count'] = 2;
+                $this->rehash($value);
+            },
+            function (array &$value): void {
+                $value['payload']['authority']['target_slug_set_sha256'] = str_repeat('f', 64);
+                $this->rehash($value);
+            },
+            function (array &$value): void {
+                $value['payload_sha256'] = str_repeat('0', 64);
+            },
+        ] as $mutate) {
+            $changed = $document;
+            $mutate($changed);
+            $this->writeJson($this->root.'/'.CareerGenerationAuthorityLoader::ACTIVE_POINTER_FILENAME, $changed);
+
+            self::assertNull((new CareerGenerationAuthorityLoader)->activeProjection());
         }
     }
 
-    private function writeInvalidProjection(string $timestamp, ?int $mtime = null): void
+    public function test_path_traversal_and_symlinked_artifacts_fail_closed(): void
     {
-        $dir = storage_path('app/private/career_runtime_publish_projection/'.$timestamp);
-        File::ensureDirectoryExists($dir);
-        $this->projectionDirectories[] = $dir;
-        $path = $dir.DIRECTORY_SEPARATOR.CareerRuntimePublishProjectionExporter::PROJECTION_FILENAME;
-        File::put($path, '{invalid');
+        $document = $this->writeGeneration('generation-001', ['actors' => 'published']);
+        $document['payload']['artifacts']['projection']['path'] = '../career-runtime-publish-projection.json';
+        $this->rehash($document);
+        $this->writeJson($this->root.'/'.CareerGenerationAuthorityLoader::ACTIVE_POINTER_FILENAME, $document);
+        self::assertNull((new CareerGenerationAuthorityLoader)->activeProjection());
 
-        if ($mtime !== null) {
-            touch($path, $mtime);
-            clearstatcache(true, $path);
+        $document = $this->writeGeneration('generation-002', ['actors' => 'published']);
+        $projectionPath = $this->root.'/'.$document['payload']['artifacts']['projection']['path'];
+        $outside = storage_path('app/testing/career-generation-outside.json');
+        File::ensureDirectoryExists(dirname($outside));
+        File::put($outside, (string) file_get_contents($projectionPath));
+        unlink($projectionPath);
+        symlink($outside, $projectionPath);
+
+        try {
+            self::assertNull((new CareerGenerationAuthorityLoader)->activeProjection());
+        } finally {
+            @unlink($projectionPath);
+            @unlink($outside);
         }
+    }
+
+    public function test_projection_and_ledger_must_bind_the_same_generation_and_slug_set(): void
+    {
+        $document = $this->writeGeneration('generation-001', [
+            'actors' => 'published',
+            'actuaries' => 'blocked',
+        ]);
+        $ledgerPath = $this->root.'/'.$document['payload']['artifacts']['ledger']['path'];
+        $ledger = json_decode((string) file_get_contents($ledgerPath), true, 512, JSON_THROW_ON_ERROR);
+        $ledger['members'] = [['canonical_slug' => 'actors']];
+        $this->writeJson($ledgerPath, $ledger);
+        $document['payload']['artifacts']['ledger']['sha256'] = hash_file('sha256', $ledgerPath);
+        $this->rehash($document);
+        $this->writeJson($this->root.'/'.CareerGenerationAuthorityLoader::ACTIVE_POINTER_FILENAME, $document);
+
+        self::assertNull((new CareerGenerationAuthorityLoader)->activeProjection());
+
+        $document = $this->writeGeneration('generation-002', ['actors' => 'published']);
+        $projectionPath = $this->root.'/'.$document['payload']['artifacts']['projection']['path'];
+        $projection = json_decode((string) file_get_contents($projectionPath), true, 512, JSON_THROW_ON_ERROR);
+        $projection['generation_id'] = 'different-generation';
+        $this->writeJson($projectionPath, $projection);
+        $document['payload']['artifacts']['projection']['sha256'] = hash_file('sha256', $projectionPath);
+        $this->rehash($document);
+        $this->writeJson($this->root.'/'.CareerGenerationAuthorityLoader::ACTIVE_POINTER_FILENAME, $document);
+
+        self::assertNull((new CareerGenerationAuthorityLoader)->activeProjection());
+    }
+
+    public function test_projection_and_ledger_must_embed_the_exact_manifest_authority(): void
+    {
+        $document = $this->writeGeneration('generation-001', ['actors' => 'published']);
+        $document['payload']['authority']['frozen_manifest_sha256'] = str_repeat('9', 64);
+        $this->rehash($document);
+        $this->writeJson(
+            $this->root.'/generations/generation-001/'.CareerGenerationAuthorityLoader::GENERATION_POINTER_FILENAME,
+            $document,
+        );
+        $this->writeJson($this->root.'/'.CareerGenerationAuthorityLoader::ACTIVE_POINTER_FILENAME, $document);
+
+        self::assertNull((new CareerGenerationAuthorityLoader)->activeProjection());
+    }
+
+    public function test_unauthorized_cohort_shrink_is_rejected(): void
+    {
+        $previous = $this->writeGeneration('generation-001', [
+            'actors' => 'published',
+            'actuaries' => 'published',
+        ]);
+        $this->writeGeneration(
+            generationId: 'generation-002',
+            states: ['actors' => 'published', 'actuaries' => 'blocked'],
+            previousDocument: $previous,
+        );
+
+        self::assertNull((new CareerGenerationAuthorityLoader)->activeProjection());
+    }
+
+    public function test_equal_count_cohort_replacement_still_requires_revocation_receipts(): void
+    {
+        $previous = $this->writeGeneration('generation-001', [
+            'actors' => 'published',
+            'actuaries' => 'published',
+        ]);
+        $this->writeGeneration(
+            generationId: 'generation-002',
+            states: ['actors' => 'published', 'software-developers' => 'published'],
+            previousDocument: $previous,
+        );
+
+        self::assertNull((new CareerGenerationAuthorityLoader)->activeProjection());
+    }
+
+    public function test_exact_per_slug_revocation_receipt_allows_an_explicit_shrink(): void
+    {
+        $previous = $this->writeGeneration('generation-001', [
+            'actors' => 'published',
+            'actuaries' => 'published',
+        ]);
+        $this->writeGeneration(
+            generationId: 'generation-002',
+            states: ['actors' => 'published', 'actuaries' => 'blocked'],
+            previousDocument: $previous,
+            revokedSlugs: ['actuaries'],
+        );
+
+        $projection = (new CareerGenerationAuthorityLoader)->activeProjection();
+        self::assertIsArray($projection);
+        self::assertSame(4, count($projection['items']));
+        self::assertTrue(app(CareerRuntimePublishProjectionLookup::class)->detailRouteEnabled('actors'));
+        self::assertFalse(app(CareerRuntimePublishProjectionLookup::class)->detailRouteEnabled('actuaries'));
+    }
+
+    public function test_lkg_is_accepted_only_as_an_exact_same_generation_byte_copy(): void
+    {
+        $document = $this->writeGeneration('generation-001', ['actors' => 'published'], writeLkg: true);
+        $projectionPath = $this->root.'/'.$document['payload']['artifacts']['projection']['path'];
+        File::put($projectionPath, '{corrupt-primary');
+
+        self::assertIsArray((new CareerGenerationAuthorityLoader)->activeProjection());
+
+        $document['payload']['artifacts']['projection_lkg']['identity'] = 'career-runtime-publish-projection@other-generation';
+        $this->rehash($document);
+        $this->writeJson($this->root.'/'.CareerGenerationAuthorityLoader::ACTIVE_POINTER_FILENAME, $document);
+
+        self::assertNull((new CareerGenerationAuthorityLoader)->activeProjection());
+    }
+
+    /**
+     * @param  array<string, string>  $states
+     * @param  list<string>|null  $revokedSlugs
+     * @return array<string, mixed>
+     */
+    private function writeGeneration(
+        string $generationId,
+        array $states,
+        ?array $previousDocument = null,
+        ?array $revokedSlugs = null,
+        bool $writeLkg = false,
+    ): array {
+        $generationDir = $this->root.'/generations/'.$generationId;
+        File::ensureDirectoryExists($generationDir);
+
+        $projection = [
+            'projection_kind' => 'career_runtime_publish_projection',
+            'projection_version' => 'career.runtime_publish_projection.v1',
+            'source_authority' => 'CareerFullReleaseLedger',
+            'generation_id' => $generationId,
+            'artifact_identity' => 'career-runtime-publish-projection@'.$generationId,
+            'items' => $this->projectionItems($states),
+        ];
+        $projectionPath = $generationDir.'/'.CareerRuntimePublishProjectionExporter::PROJECTION_FILENAME;
+        $this->writeJson($projectionPath, $projection);
+
+        $slugs = array_keys($states);
+        sort($slugs, SORT_STRING);
+        $ledger = [
+            'ledger_kind' => 'career_full_release_ledger',
+            'ledger_version' => 'career.full_release_ledger.v1',
+            'generation_id' => $generationId,
+            'artifact_identity' => 'career-full-release-ledger@'.$generationId,
+            'members' => array_map(static fn (string $slug): array => ['canonical_slug' => $slug], $slugs),
+        ];
+        $ledgerPath = $generationDir.'/'.CareerFullReleaseLedgerProjectionService::LEDGER_FILENAME;
+        $this->writeJson($ledgerPath, $ledger);
+
+        $localeRows = [];
+        foreach ($slugs as $slug) {
+            foreach (['en', 'zh'] as $locale) {
+                $localeRows[] = $slug.'|'.$locale;
+            }
+        }
+        $publicSlugs = array_keys(array_filter($states, static fn (string $state): bool => $state === 'published'));
+        $previousGenerationId = data_get($previousDocument, 'payload.generation_id');
+        $authority = [
+            'frozen_manifest_sha256' => str_repeat('1', 64),
+            'target_slug_set_sha256' => CareerGenerationCanonicalJson::setSha256($slugs),
+            'target_locale_row_set_sha256' => CareerGenerationCanonicalJson::setSha256($localeRows),
+            'receipt_set_sha256' => str_repeat('2', 64),
+        ];
+        $projection['generation_authority'] = $authority;
+        $ledger['generation_authority'] = $authority;
+        $this->writeJson($projectionPath, $projection);
+        $this->writeJson($ledgerPath, $ledger);
+        $payload = [
+            'generation_id' => $generationId,
+            'artifacts' => [
+                'projection' => [
+                    'identity' => 'career-runtime-publish-projection@'.$generationId,
+                    'path' => 'generations/'.$generationId.'/'.CareerRuntimePublishProjectionExporter::PROJECTION_FILENAME,
+                    'sha256' => hash_file('sha256', $projectionPath),
+                ],
+                'ledger' => [
+                    'identity' => 'career-full-release-ledger@'.$generationId,
+                    'path' => 'generations/'.$generationId.'/'.CareerFullReleaseLedgerProjectionService::LEDGER_FILENAME,
+                    'sha256' => hash_file('sha256', $ledgerPath),
+                ],
+            ],
+            'authority' => $authority,
+            'counts' => [
+                'public_slug_count' => count($publicSlugs),
+                'public_locale_row_count' => count($publicSlugs) * 2,
+            ],
+            'lineage' => [
+                'previous_generation_id' => $previousGenerationId,
+                'previous_pointer_sha256' => $previousDocument === null
+                    ? null
+                    : CareerGenerationCanonicalJson::sha256($previousDocument),
+            ],
+            'timestamps' => [
+                'created_at' => '2026-08-12T00:00:00Z',
+                'activated_at' => '2026-08-12T00:00:01Z',
+            ],
+            'activation_receipt' => [
+                'identity' => 'activation:'.$generationId,
+                'sha256' => str_repeat('3', 64),
+            ],
+            'rollback' => [
+                'eligible' => $previousGenerationId !== null,
+                'previous_generation_id' => $previousGenerationId,
+            ],
+            'discoverability' => [
+                'sitemap_mutated' => false,
+                'llms_mutated' => false,
+                'search_mutated' => false,
+            ],
+            'revocation_receipt' => null,
+        ];
+
+        if ($writeLkg) {
+            $lkgPath = $generationDir.'/lkg-'.CareerRuntimePublishProjectionExporter::PROJECTION_FILENAME;
+            File::copy($projectionPath, $lkgPath);
+            $payload['artifacts']['projection_lkg'] = [
+                'identity' => 'career-runtime-publish-projection@'.$generationId,
+                'path' => 'generations/'.$generationId.'/lkg-'.CareerRuntimePublishProjectionExporter::PROJECTION_FILENAME,
+                'sha256' => hash_file('sha256', $lkgPath),
+            ];
+        }
+
+        if ($revokedSlugs !== null) {
+            $receipt = [
+                'schema_version' => CareerGenerationAuthorityLoader::REVOCATION_SCHEMA_VERSION,
+                'from_generation_id' => $previousGenerationId,
+                'to_generation_id' => $generationId,
+                'items' => array_map(static fn (string $slug): array => [
+                    'slug' => $slug,
+                    'decision' => 'unpublished',
+                    'receipt_identity' => 'revocation:'.$generationId.':'.$slug,
+                    'approved_at' => '2026-08-12T00:00:00Z',
+                ], $revokedSlugs),
+            ];
+            $receiptPath = $generationDir.'/revocation-receipt.json';
+            $this->writeJson($receiptPath, $receipt);
+            $payload['revocation_receipt'] = [
+                'identity' => 'career-generation-revocations@'.$generationId,
+                'path' => 'generations/'.$generationId.'/revocation-receipt.json',
+                'sha256' => hash_file('sha256', $receiptPath),
+            ];
+        }
+
+        $document = [
+            'schema_version' => CareerGenerationAuthorityLoader::POINTER_SCHEMA_VERSION,
+            'payload_sha256' => CareerGenerationCanonicalJson::sha256($payload),
+            'payload' => $payload,
+        ];
+        $this->writeJson($generationDir.'/'.CareerGenerationAuthorityLoader::GENERATION_POINTER_FILENAME, $document);
+        $this->writeJson($this->root.'/'.CareerGenerationAuthorityLoader::ACTIVE_POINTER_FILENAME, $document);
+
+        return $document;
+    }
+
+    /** @param array<string, string> $states @return list<array<string, mixed>> */
+    private function projectionItems(array $states): array
+    {
+        $items = [];
+        foreach ($states as $slug => $state) {
+            foreach (['en', 'zh'] as $locale) {
+                $published = $state === 'published';
+                $items[] = [
+                    'slug' => $slug,
+                    'locale' => $locale,
+                    'public_resolution_type' => 'public_canonical_job',
+                    'runtime_publish_state' => $state,
+                    'detail_route_enabled' => $published,
+                    'dataset_visible' => $published,
+                    'search_visible' => $published,
+                    'sitemap_live' => false,
+                    'llms_live' => false,
+                    'llms_full_live' => false,
+                    'canonical_self' => $published,
+                    'robots_indexable' => $published,
+                    'release_gate_pass' => $published,
+                ];
+            }
+        }
+
+        return $items;
+    }
+
+    /** @param array<string, mixed> $document */
+    private function rehash(array &$document): void
+    {
+        $document['payload_sha256'] = CareerGenerationCanonicalJson::sha256($document['payload']);
+    }
+
+    /** @param array<string, mixed> $payload */
+    private function writeJson(string $path, array $payload): void
+    {
+        File::ensureDirectoryExists(dirname($path));
+        File::put($path, json_encode(
+            $payload,
+            JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT,
+        )."\n");
     }
 }

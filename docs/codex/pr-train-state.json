@@ -104688,7 +104688,7 @@
     "base": "main",
     "branch": "codex/career-1046-current-state-freeze-00",
     "title": "CAREER-1046-CURRENT-STATE-FREEZE-CONTRACT-00: freeze 30/1016/1046 authority evidence",
-    "status": "ready_to_merge",
+    "status": "merged",
     "depends_on": [],
     "allowed_paths": [
       "backend/docs/career/contracts/career-1046-current-state-freeze.v1.json",
@@ -104716,15 +104716,15 @@
       },
       "github_required_checks": {
         "status": "passed",
-        "evidence": "Exact implementation/ledger head 74775361099b54f66de27e7a44e9d4c187bd964a passed hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep blocking secrets, Semgrep OSS, and SARIF upload; staging parity was conditionally skipped. GitHub reports CLEAN and MERGEABLE. The final ready-to-merge ledger-only head must rerun required checks."
+        "evidence": "Exact final head 39f99a18aed06d14173499a190e09b3549fa57b7 passed hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep blocking secrets, Semgrep OSS, and SARIF upload; staging parity was conditionally skipped. GitHub reported CLEAN and MERGEABLE before merge."
       }
     },
     "failure_reason": null,
-    "commit_sha": "baeabe55a576d358bb78b6fe00df80d175d640bb",
+    "commit_sha": "ffc0138e1abbce85c03c046d56fd4c4da09515af",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3660",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-08-11T17:37:22Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "production_workflow_dispatched": false,
     "database_mutation": false,
@@ -104754,8 +104754,86 @@
         "at": "2026-08-12T01:28:45+08:00",
         "status": "ready_to_merge",
         "note": "Exact head 74775361099b54f66de27e7a44e9d4c187bd964a passed all nine required CI/code-scanning checks; staging parity was conditionally skipped. GitHub reports CLEAN/MERGEABLE and changed files remain the exact five-path allowlist. This ledger-only head must rerun required checks before squash merge. No production or discoverability action occurred."
+      },
+      {
+        "at": "2026-08-12T01:37:22+08:00",
+        "status": "merged",
+        "note": "PR #3660 final head 39f99a18aed06d14173499a190e09b3549fa57b7 passed all nine required checks and was squash-merged as ffc0138e1abbce85c03c046d56fd4c4da09515af. The remote task branch and local Task 0 branch were removed; the shared isolated train worktree continued from exact merged origin/main. No production workflow or production/discoverability write occurred."
       }
     ],
-    "updated_at": "2026-08-12T01:28:45+08:00"
+    "updated_at": "2026-08-12T01:37:22+08:00"
+  },
+  "CAREER-RUNTIME-AUTHORITY-ACTIVE-POINTER-04": {
+    "id": "CAREER-RUNTIME-AUTHORITY-ACTIVE-POINTER-04",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-runtime-authority-active-pointer-04",
+    "title": "CAREER-RUNTIME-AUTHORITY-ACTIVE-POINTER-04: require generation-bound public authority",
+    "status": "local_validation_passed",
+    "depends_on": [
+      "CAREER-1046-CURRENT-STATE-FREEZE-CONTRACT-00"
+    ],
+    "allowed_paths": [
+      "backend/app/Domain/Career/Publish/CareerGenerationAuthorityLoader.php",
+      "backend/app/Domain/Career/Publish/CareerGenerationCanonicalJson.php",
+      "backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionLookup.php",
+      "backend/tests/Feature/Console/CareerRuntimePublishProjectionCommandTest.php",
+      "backend/tests/Feature/SEO/SitemapSourceApiTest.php",
+      "backend/tests/Feature/SEO/SitemapSourceCacheTest.php",
+      "backend/tests/Fixtures/Career/CareerGenerationAuthorityFixture.php",
+      "backend/tests/Unit/Services/Career/CareerRuntimePublishProjectionLookupTest.php",
+      "docs/codex/pr-train.yaml",
+      "docs/codex/pr-train-state.json"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "The 2026-08-12 Career 1046 generation-bound continuous goal explicitly authorizes Task 1 implementation and its complete ordinary PR lifecycle."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "Task 0 PR #3660 merged as ffc0138e1abbce85c03c046d56fd4c4da09515af after all required checks passed; this branch starts from that exact origin/main."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "Generation authority, sitemap, cold-cache, and legacy isolation regressions passed 55 tests / 803 assertions; the exporter zero-active-pointer test passed 1 / 2. The complete guarded ci_verify_mbti.sh passed, including Big Five 1693 / 196735, Enneagram 14 / 12452, Personality 95 / 5761, MBTI E2E, migration, OpenAPI, order-security, dependency-security, webhook/attempt, and queue gates. API route inventory remained 232 and the disposable SQLite baseline reported nothing to migrate. Scoped Pint, PHP syntax, JSON/YAML, exact scope, privacy, and diff checks passed."
+      },
+      "scope": {
+        "status": "passed",
+        "evidence": "Exact changed-file comparison passed for the 10 allowlisted paths after restoring verifier-generated Big Five compiled artifacts. No route, migration, middleware, workflow, production, CMS/DB/cache/artifact/pointer, sitemap/llms, Search Channel, URL submission, or frontend path changed."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": "PR not yet opened."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "production_workflow_dispatched": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "url_submission": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-08-12T01:53:28+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started Task 1 from exact merged Task 0 origin/main ffc0138e1abbce85c03c046d56fd4c4da09515af in the existing isolated train worktree. Scope is the generation-bound loader, public lookup, exact test fixtures, and ledgers only. No production bootstrap workflow is implemented or dispatched, and no production deploy, migration, DB/CMS/cache/artifact/pointer write, publication, warm, sitemap/llms mutation, Search Channel action, URL submission, or frontend fallback change is authorized."
+      },
+      {
+        "at": "2026-08-12T02:03:45+08:00",
+        "status": "local_validation_passed",
+        "note": "Implemented a fail-closed root active generation pointer with immutable projection/ledger identity, canonical hashes, frozen authority bindings, exact prior lineage, same-generation LKG, and per-slug removal receipts. Focused tests passed 55 / 803 plus exporter 1 / 2; the guarded complete verifier passed every gate, including Big Five 1693 / 196735, Enneagram 14 / 12452, and Personality 95 / 5761. Scoped syntax, Pint, JSON/YAML, exact allowlist, privacy, and diff checks passed. The only externally started main staging workflow was observed read-only and not dispatched or operated by this task; no production or discoverability write occurred."
+      }
+    ],
+    "updated_at": "2026-08-12T02:03:45+08:00"
   }
 }

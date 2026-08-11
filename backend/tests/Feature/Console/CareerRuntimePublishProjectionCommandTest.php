@@ -7,6 +7,7 @@ namespace Tests\Feature\Console;
 use App\Console\Commands\CareerFinalizeCanonicalRuntimeTruth;
 use App\Console\Commands\CareerPublicResolutionTypeMatrix;
 use App\Domain\Career\Publish\CareerCanonicalRuntimeTruthExporter;
+use App\Domain\Career\Publish\CareerGenerationAuthorityLoader;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionExporter;
 use Illuminate\Support\Facades\File;
 use Tests\TestCase;
@@ -49,6 +50,29 @@ final class CareerRuntimePublishProjectionCommandTest extends TestCase
         $payload = json_decode((string) file_get_contents($path), true);
         $this->assertSame('career_runtime_publish_projection', $payload['projection_kind'] ?? null);
         $this->assertSame(2, (int) data_get($payload, 'counts.published'));
+    }
+
+    public function test_export_command_never_writes_the_generation_active_pointer(): void
+    {
+        $ledgerPath = $this->writeLedgerArtifact([
+            [
+                'source_slug' => 'actors',
+                'public_resolution_type' => CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB,
+                'public_eligible' => true,
+                'indexability' => 'indexable',
+            ],
+        ]);
+        $timestamp = 'runtime-projection-no-pointer-'.strtolower(str()->random(8));
+        $pointerPath = storage_path('app/private/career_generation_authority/'.CareerGenerationAuthorityLoader::ACTIVE_POINTER_FILENAME);
+        File::delete($pointerPath);
+
+        $this->artisan('career:export-runtime-publish-projection', [
+            '--ledger' => $ledgerPath,
+            '--timestamp' => $timestamp,
+            '--json' => true,
+        ])->assertExitCode(0);
+
+        $this->assertFileDoesNotExist($pointerPath);
     }
 
     public function test_validate_command_blocks_invalid_projection_artifact(): void
