@@ -12,7 +12,7 @@ use Throwable;
 
 final class MeasurementFunnelReadModel
 {
-    public const SCHEMA_VERSION = 'fermatmind.measurement-funnel.v1';
+    public const SCHEMA_VERSION = 'fermatmind.measurement-funnel.v2';
 
     public const TASK = 'MEASUREMENT-INSTRUMENTATION-01';
 
@@ -27,11 +27,15 @@ final class MeasurementFunnelReadModel
      * @param  list<string>  $locales
      * @return array<string, mixed>
      */
-    public function report(string $from, string $to, array $scaleCodes = [], array $locales = []): array
+    public function report(int $orgId, string $from, string $to, array $scaleCodes = [], array $locales = []): array
     {
         $fromDate = $this->date($from);
         $toDate = $this->date($to);
         $issues = [];
+
+        if ($orgId < 0) {
+            $issues[] = 'org_id_invalid';
+        }
 
         if ($fromDate === null) {
             $issues[] = 'from_date_invalid';
@@ -63,7 +67,7 @@ final class MeasurementFunnelReadModel
         }
 
         if ($issues !== [] || $fromDate === null || $toDate === null) {
-            return $this->blocked($from, $to, $issues);
+            return $this->blocked($orgId, $from, $to, $issues);
         }
 
         $fromAt = $fromDate->startOfDay();
@@ -79,10 +83,11 @@ final class MeasurementFunnelReadModel
             'answers_summary_json',
             'started_at',
             'submitted_at',
-        ])->where(function (Builder $query) use ($fromAt, $toAt): void {
-            $query->whereBetween('started_at', [$fromAt, $toAt])
-                ->orWhereBetween('submitted_at', [$fromAt, $toAt]);
-        });
+        ])->where('org_id', $orgId)
+            ->where(function (Builder $query) use ($fromAt, $toAt): void {
+                $query->whereBetween('started_at', [$fromAt, $toAt])
+                    ->orWhereBetween('submitted_at', [$fromAt, $toAt]);
+            });
         $this->applyFilters($attemptQuery, $normalizedScales, $normalizedLocales, 'attempts');
 
         foreach ($attemptQuery->orderBy('id')->get() as $attempt) {
@@ -103,6 +108,8 @@ final class MeasurementFunnelReadModel
                 'attempts.channel',
                 'attempts.answers_summary_json',
             ])
+            ->where('results.org_id', $orgId)
+            ->where('attempts.org_id', $orgId)
             ->where('results.is_valid', true)
             ->whereBetween('results.computed_at', [$fromAt, $toAt]);
         $this->applyFilters($resultQuery, $normalizedScales, $normalizedLocales, 'attempts');
@@ -127,6 +134,8 @@ final class MeasurementFunnelReadModel
                 'attempts.channel',
                 'attempts.answers_summary_json',
             ])
+            ->where('events.org_id', $orgId)
+            ->where('attempts.org_id', $orgId)
             ->where('events.event_code', 'result_ready')
             ->whereBetween('events.occurred_at', [$fromAt, $toAt]);
         $this->applyFilters($eventQuery, $normalizedScales, $normalizedLocales, 'attempts');
@@ -156,6 +165,7 @@ final class MeasurementFunnelReadModel
             'issues' => array_values(array_unique($issues)),
             'from' => $fromDate->toDateString(),
             'to' => $toDate->toDateString(),
+            'org_id' => $orgId,
             'filters' => [
                 'scale_codes' => $normalizedScales,
                 'locales' => $normalizedLocales,
@@ -407,7 +417,7 @@ final class MeasurementFunnelReadModel
      * @param  list<string>  $issues
      * @return array<string, mixed>
      */
-    private function blocked(string $from, string $to, array $issues): array
+    private function blocked(int $orgId, string $from, string $to, array $issues): array
     {
         return [
             'schema_version' => self::SCHEMA_VERSION,
@@ -418,6 +428,7 @@ final class MeasurementFunnelReadModel
             'issues' => array_values(array_unique($issues)),
             'from' => $from,
             'to' => $to,
+            'org_id' => $orgId >= 0 ? $orgId : null,
             'rows' => [],
             'read_only' => true,
         ];

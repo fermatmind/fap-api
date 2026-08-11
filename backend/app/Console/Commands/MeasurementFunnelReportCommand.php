@@ -13,16 +13,34 @@ final class MeasurementFunnelReportCommand extends Command
     protected $signature = 'analytics:measurement-funnel-report
         {--from= : Required inclusive report date, YYYY-MM-DD}
         {--to= : Required inclusive report date, YYYY-MM-DD}
+        {--org= : Required non-negative organization id}
         {--scale=* : Optional repeatable scale-code filter}
         {--locale=* : Optional repeatable locale filter}
         {--json : Emit machine-readable JSON}';
 
-    protected $description = 'Read the privacy-safe backend measurement funnel without database or external writes.';
+    protected $description = 'Read an organization-scoped privacy-safe backend measurement funnel without database or external writes.';
 
     public function handle(MeasurementFunnelReadModel $readModel): int
     {
+        $orgId = $this->orgId();
+        if ($orgId === null) {
+            $this->emit([
+                'schema_version' => MeasurementFunnelReadModel::SCHEMA_VERSION,
+                'task' => MeasurementFunnelReadModel::TASK,
+                'ok' => false,
+                'status' => 'blocked',
+                'issues' => ['org_id_invalid'],
+                'org_id' => null,
+                'rows' => [],
+                'read_only' => true,
+            ]);
+
+            return self::FAILURE;
+        }
+
         try {
             $report = $readModel->report(
+                $orgId,
                 (string) $this->option('from'),
                 (string) $this->option('to'),
                 $this->arrayOption('scale'),
@@ -35,11 +53,20 @@ final class MeasurementFunnelReportCommand extends Command
                 'ok' => false,
                 'status' => 'blocked',
                 'issues' => ['measurement_funnel_read_failed'],
+                'org_id' => $orgId,
                 'rows' => [],
                 'read_only' => true,
             ];
         }
 
+        $this->emit($report);
+
+        return ($report['ok'] ?? false) === true ? self::SUCCESS : self::FAILURE;
+    }
+
+    /** @param array<string, mixed> $report */
+    private function emit(array $report): void
+    {
         if ((bool) $this->option('json')) {
             $this->line((string) json_encode(
                 $report,
@@ -62,8 +89,15 @@ final class MeasurementFunnelReportCommand extends Command
                 $this->line('issue='.(string) $issue);
             }
         }
+    }
 
-        return ($report['ok'] ?? false) === true ? self::SUCCESS : self::FAILURE;
+    private function orgId(): ?int
+    {
+        $value = filter_var(trim((string) $this->option('org')), FILTER_VALIDATE_INT, [
+            'options' => ['min_range' => 0],
+        ]);
+
+        return is_int($value) ? $value : null;
     }
 
     /**

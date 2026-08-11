@@ -12,6 +12,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 use Tests\Concerns\SeedsFunnelAnalyticsScenario;
 use Tests\TestCase;
 
@@ -49,6 +50,7 @@ final class MeasurementFunnelReadModelTest extends TestCase
 
         $before = $this->tableCounts();
         $report = app(MeasurementFunnelReadModel::class)->report(
+            71,
             $scenario['day'],
             $scenario['day'],
             ['MBTI'],
@@ -83,17 +85,21 @@ final class MeasurementFunnelReadModelTest extends TestCase
         $exitCode = Artisan::call('analytics:measurement-funnel-report', [
             '--from' => $scenario['day'],
             '--to' => $scenario['day'],
+            '--org' => '72',
             '--scale' => ['MBTI'],
             '--json' => true,
         ]);
 
         $this->assertSame(0, $exitCode);
-        $this->assertStringContainsString('"read_only": true', Artisan::output());
+        $output = Artisan::output();
+        $this->assertStringContainsString('"read_only": true', $output);
+        $this->assertStringContainsString('"org_id": 72', $output);
         $this->assertSame($before, $this->tableCounts());
 
         $invalidExitCode = Artisan::call('analytics:measurement-funnel-report', [
             '--from' => '2026-01-04',
             '--to' => '2026-01-03',
+            '--org' => '72',
             '--json' => true,
         ]);
         $this->assertSame(1, $invalidExitCode);
@@ -164,6 +170,7 @@ final class MeasurementFunnelReadModelTest extends TestCase
         $this->insertEvent(74, 'result_ready', $attemptId, $occurredAt->addSecond());
 
         $report = app(MeasurementFunnelReadModel::class)->report(
+            74,
             $scenario['day'],
             $scenario['day'],
             ['MBTI'],
@@ -190,6 +197,7 @@ final class MeasurementFunnelReadModelTest extends TestCase
         );
 
         $report = app(MeasurementFunnelReadModel::class)->report(
+            75,
             $scenario['day'],
             $scenario['day'],
             ['MBTI'],
@@ -206,12 +214,46 @@ final class MeasurementFunnelReadModelTest extends TestCase
     {
         Schema::drop('events');
 
-        $report = app(MeasurementFunnelReadModel::class)->report('2026-01-03', '2026-01-03');
+        $report = app(MeasurementFunnelReadModel::class)->report(999, '2026-01-03', '2026-01-03');
 
         $this->assertFalse($report['ok'] ?? true);
         $this->assertSame('blocked', $report['status'] ?? null);
         $this->assertContains('events_missing', $report['issues'] ?? []);
         $this->assertSame([], $report['rows'] ?? null);
+    }
+
+    public function test_report_and_command_require_an_exact_organization_scope(): void
+    {
+        $scenario = $this->seedFunnelAnalyticsScenario(0);
+        $day = CarbonImmutable::parse($scenario['day'].' 08:00:00');
+        $tenantAttemptId = (string) Str::uuid();
+        $this->insertAttempt($tenantAttemptId, 81, 'en', $day, null);
+        $this->insertResult($tenantAttemptId, 81, $day->addMinutes(6));
+        $this->insertEvent(81, 'result_ready', $tenantAttemptId, $day->addMinutes(7));
+
+        $global = app(MeasurementFunnelReadModel::class)->report(0, $scenario['day'], $scenario['day'], ['MBTI'], ['en']);
+        $tenant = app(MeasurementFunnelReadModel::class)->report(81, $scenario['day'], $scenario['day'], ['MBTI'], ['en']);
+
+        $this->assertSame(0, $global['org_id'] ?? null);
+        $this->assertSame(2, data_get($global, 'totals.attempt_started_count'));
+        $this->assertSame(1, data_get($global, 'totals.result_ready_count'));
+        $this->assertSame(81, $tenant['org_id'] ?? null);
+        $this->assertSame(1, data_get($tenant, 'totals.attempt_started_count'));
+        $this->assertSame(1, data_get($tenant, 'totals.result_ready_count'));
+        $this->assertSame(1, data_get($tenant, 'totals.result_ready_event_count'));
+
+        $exitCode = Artisan::call('analytics:measurement-funnel-report', [
+            '--from' => $scenario['day'],
+            '--to' => $scenario['day'],
+            '--json' => true,
+        ]);
+        $this->assertSame(1, $exitCode);
+        $this->assertStringContainsString('org_id_invalid', Artisan::output());
+
+        $invalid = app(MeasurementFunnelReadModel::class)->report(-1, $scenario['day'], $scenario['day']);
+        $this->assertFalse($invalid['ok'] ?? true);
+        $this->assertNull($invalid['org_id'] ?? null);
+        $this->assertContains('org_id_invalid', $invalid['issues'] ?? []);
     }
 
     /**
