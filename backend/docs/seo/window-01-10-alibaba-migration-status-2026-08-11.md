@@ -330,7 +330,7 @@ English SEO 的报告/closeout 已完成，增长实验未完成。先做 RIASEC
 ### P0：恢复生产一致性
 
 1. 等待 DNS guard 修复当前 head 的 required checks 全绿并合并。
-2. 从最新 `main` 发起新的 exact-SHA 后端 production deploy。
+2. 发起新的后端 production deploy，绑定 exact approved immutable candidate SHA/release 与同 SHA staging receipt；candidate 必须仍可从当前 `main` 到达，并明确排除所有更新的 `main` commits。
 3. 验证 active revision、migration status、queue/scheduler、Redis/RDS、`/up`、flags、Career directory/detail、sitemap source。
 4. 重新冻结 post-deploy 613/30-or-changed truth；任何 cohort 变化必须有 authority receipt。
 

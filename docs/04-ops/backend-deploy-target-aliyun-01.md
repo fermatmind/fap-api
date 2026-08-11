@@ -42,7 +42,8 @@ Production API 的运行约束：
 
 Production deployment uses protected GitHub Actions + Deployer SSH and must bind:
 
-- latest exact `main` SHA;
+- the exact approved immutable candidate SHA/release and its exact successful staging evidence;
+- candidate reachability from current `main`, while explicitly excluding every newer `main` commit from the deployment;
 - protected `production` Environment identity and secrets;
 - candidate release `REVISION` matching the authorized SHA;
 - candidate/private and public DNS evidence;
@@ -66,7 +67,7 @@ At the 2026-08-11 evidence cutoff:
 | candidate activation | blocked by public-DNS guard before symlink move |
 | DNS guard repair | PR #3645 still open；current head checks running after a P1 repair at evidence cutoff |
 
-Therefore production currently has a possible schema/code split. Do not infer active application behavior from repository `main`. After the guard repair merges, a new exact-SHA protected production deployment and full post-activation readback are required; the previous failed deploy does not authorize an automatic retry.
+Therefore production currently has a possible schema/code split. Do not infer active application behavior from repository `main`. After the guard repair merges, a new protected deployment bound to the approved immutable candidate SHA/release and full post-activation readback are required; the previous failed deploy does not authorize an automatic retry. The deployment must not silently substitute newer `main` commits for the reviewed candidate.
 
 See [FermatMind 窗口 1–10、IQ 与阿里云迁移完成度复核](../../backend/docs/seo/window-01-10-alibaba-migration-status-2026-08-11.md) for the downstream Career, Measurement and SEO implications.
 
@@ -145,7 +146,7 @@ SSH readback is diagnostic only. Production deploy, database/CMS write, cache wa
 
 ## Remaining Closeout
 
-1. Merge the bounded public-DNS guard repair, then execute a new exact-SHA production deployment.
+1. Merge the bounded public-DNS guard repair, then execute a new production deployment bound to the exact approved immutable candidate SHA/release and staging receipt.
 2. Reconcile active code, migrations and public surfaces after activation.
 3. Produce an independent Task 10 release/journald/disk readback receipt.
 4. Archive and retire the Metabase-only PostgreSQL RDS.
