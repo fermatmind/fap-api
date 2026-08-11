@@ -79,6 +79,7 @@ final class RiasecLandingCmsExperiment01Test extends TestCase
         $this->assertSame('2026-07-13', data_get($measurement, 'baseline.date_start'));
         $this->assertSame('2026-08-09', data_get($measurement, 'baseline.date_end'));
         $this->assertSame('9b7c470aa39aff0e6062c41fe5d71e2e8164159747953d42bd032046cc10f691', data_get($measurement, 'baseline.m01_joint_source_sha256'));
+        $this->assertSame(4192, data_get($measurement, 'baseline.returned_safe_rows'));
         $this->assertSame(['T+0', 'T+3', 'T+7', 'T+14', 'T+28'], array_column($measurement['checkpoints'] ?? [], 'label'));
         $this->assertContains('questions_load_failure', $measurement['product_measures'] ?? []);
         $this->assertContains('submit_failure', $measurement['product_measures'] ?? []);
@@ -141,9 +142,9 @@ final class RiasecLandingCmsExperiment01Test extends TestCase
                 'group_by' => 'builder safe dimensions followed by fixed event-path attribution and form_id aggregation',
                 'event_path_attribution' => [
                     'landing_pv' => 'url canonical_path; form_id is not required',
-                    'start_test' => 'url take_path or source_url canonical_path',
-                    'complete_test' => 'url take_path or source_url canonical_path',
-                    'view_result' => 'url canonical_path, url take_path, or source_url canonical_path',
+                    'start_test' => 'source_url canonical_path or session linked to canonical landing_pv',
+                    'complete_test' => 'source_url canonical_path or session linked to canonical landing_pv',
+                    'view_result' => 'source_url canonical_path or session linked to canonical landing_pv',
                 ],
                 'event_metric_map' => [
                     'landing_pv' => 'landing_view',
@@ -153,7 +154,7 @@ final class RiasecLandingCmsExperiment01Test extends TestCase
                 ],
                 'unscoped_builder_skipped_rows' => 'informational_only',
                 'scoped_source_reconciliation' => [
-                    'source' => 'raw non-excluded authoritative events matching the exact event/date/org/lang/path/scale/form stage rules',
+                    'source' => 'raw non-excluded authoritative events matching the exact event/date/org/lang/scale/form rules and the canonical source_url or same-session landing attribution boundary',
                     'projection' => 'sum of landing_view plus both fixed-form start/complete/result totals',
                     'required_delta' => 0,
                 ],
