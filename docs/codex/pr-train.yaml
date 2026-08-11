@@ -49189,7 +49189,7 @@ prs:
     base: main
     branch: codex/career-1046-current-state-freeze-00
     title: "CAREER-1046-CURRENT-STATE-FREEZE-CONTRACT-00: freeze 30/1016/1046 authority evidence"
-    status: ready_to_merge
+    status: merged
     depends_on: []
     external_dependencies:
       - Successful production SELECT-only zero-write evidence run 31515295236 attempt 1
@@ -49236,3 +49236,60 @@ prs:
     deploy_allowed: false
     content_authority: frozen successful run 31515295236 evidence; current public authority remains the backend published projection
     repository_rule_impact: adds an offline immutable evidence contract only and leaves all runtime, production, and discoverability authority unchanged
+
+  - id: CAREER-RUNTIME-AUTHORITY-ACTIVE-POINTER-04
+    repo: fap-api
+    base: main
+    branch: codex/career-runtime-authority-active-pointer-04
+    title: "CAREER-RUNTIME-AUTHORITY-ACTIVE-POINTER-04: require generation-bound public authority"
+    status: github_checks_pending
+    depends_on:
+      - CAREER-1046-CURRENT-STATE-FREEZE-CONTRACT-00
+    train_scope: career_generation_bound_runtime_authority
+    risk_level: p1_public_runtime_authority
+    scope:
+      - Replace mtime/latest-directory and test-database fallback selection with one fail-closed root active generation pointer.
+      - Bind projection and ledger artifact identities and hashes to generation, frozen manifest, target slug and locale-row sets, receipt set, counts, activation identity, lineage, rollback eligibility, and zero discoverability mutation state.
+      - Require immutable pointer identity, exact same-generation LKG bytes, and per-slug revocation receipts whenever a prior public slug leaves the cohort.
+      - Keep projection export materialization candidate-only and update sitemap tests to use exact environment-local generation fixtures.
+    allowed_paths:
+      - backend/app/Domain/Career/Publish/CareerGenerationAuthorityLoader.php
+      - backend/app/Domain/Career/Publish/CareerGenerationCanonicalJson.php
+      - backend/app/Domain/Career/Publish/CareerRuntimePublishProjectionLookup.php
+      - backend/tests/Feature/Console/CareerRuntimePublishProjectionCommandTest.php
+      - backend/tests/Feature/SEO/SitemapSourceApiTest.php
+      - backend/tests/Feature/SEO/SitemapSourceCacheTest.php
+      - backend/tests/Fixtures/Career/CareerGenerationAuthorityFixture.php
+      - backend/tests/Unit/Services/Career/CareerRuntimePublishProjectionLookupTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Implement or dispatch the production pointer bootstrap workflow reserved for Task 2.
+      - Scan legacy projection or ledger directories, choose by mtime, read working revisions or drafts, or treat record existence as public authority.
+      - Deploy, migrate, write production database/CMS/cache/artifact/pointer state, publish, warm, mutate sitemap/llms, submit Search Channel actions, or change frontend fallback behavior.
+    validation:
+      - cd backend && php artisan test tests/Unit/Services/Career/CareerRuntimePublishProjectionLookupTest.php tests/Feature/SEO/SitemapSourceApiTest.php tests/Feature/SEO/SitemapSourceCacheTest.php tests/Sre/CareerC03CacheOnlyDiscoverabilityControlTest.php tests/Sre/CareerColdCacheDiscoverabilityGateTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/Console/CareerRuntimePublishProjectionCommandTest.php --filter=test_export_command_never_writes_the_generation_active_pointer --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test on every changed PHP file
+      - php -l for every changed PHP file
+      - cd backend && bash scripts/ci_verify_mbti.sh through fermatmind-heavy-guard
+      - parse pr-train JSON and YAML
+      - exact changed-file scope validation
+      - git diff --check and git diff --cached --check
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    production_read_only_evidence: false
+    production_workflow_dispatched: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: exact generation-bound backend published projection and ledger selected by the validated root active pointer
+    repository_rule_impact: removes implicit latest-artifact and database test fallback authority from the public Career runtime reader

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Feature\SEO;
 
 use App\Console\Commands\CareerPublicResolutionTypeMatrix;
-use App\Domain\Career\Publish\CareerRuntimePublishProjectionExporter;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
@@ -17,6 +16,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use Tests\Fixtures\Career\CareerGenerationAuthorityFixture;
 use Tests\TestCase;
 
 class SitemapSourceCacheTest extends TestCase
@@ -28,12 +28,14 @@ class SitemapSourceCacheTest extends TestCase
     {
         parent::setUp();
         Cache::flush();
+        File::deleteDirectory(storage_path('app/private/career_generation_authority'));
         app(PublicCareerAuthorityResponseCache::class)->warm();
     }
 
     protected function tearDown(): void
     {
         Carbon::setTestNow();
+        File::deleteDirectory(storage_path('app/private/career_generation_authority'));
         parent::tearDown();
     }
 
@@ -466,16 +468,7 @@ class SitemapSourceCacheTest extends TestCase
 
     private function writeProjectionArtifact(array $items): void
     {
-        $timestamp = str_replace('.', '', sprintf('%.6F', microtime(true)));
-        $directory = storage_path('app/private/career_runtime_publish_projection/zzzzzzzz-sitemap-source-cache-test-'.$timestamp.'-'.strtolower(str()->random(8)));
-
-        File::ensureDirectoryExists($directory);
-        File::put($directory.DIRECTORY_SEPARATOR.CareerRuntimePublishProjectionExporter::PROJECTION_FILENAME, json_encode([
-            'projection_kind' => CareerRuntimePublishProjectionService::PROJECTION_KIND,
-            'projection_version' => CareerRuntimePublishProjectionService::PROJECTION_VERSION,
-            'source_authority' => 'CareerFullReleaseLedger',
-            'items' => $items,
-        ], JSON_THROW_ON_ERROR));
+        CareerGenerationAuthorityFixture::write($items);
 
         app(PublicCareerAuthorityResponseCache::class)->warm();
     }
