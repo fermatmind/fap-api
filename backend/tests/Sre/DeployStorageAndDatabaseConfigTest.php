@@ -438,6 +438,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $workflow = $this->readRepoFile('.github/workflows/deploy-production.yml');
         $wrapperPath = 'backend/scripts/deploy/bounded_candidate_public_dns_control.php';
         $wrapper = $this->readRepoFile($wrapperPath);
+        $helper = $this->readRepoFile('backend/scripts/deploy/verify_public_dns_business_evidence.sh');
 
         foreach ([
             '363bbba54f7cac78b9cbb6118c1800dd0c6b7340',
@@ -453,18 +454,22 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             '.task_evidence.symlink == "skipped"',
             '.activation_completed == false',
             'git show "${WORKFLOW_CONTROL_SHA}:${wrapper_path}"',
+            'git show "${WORKFLOW_CONTROL_SHA}:${helper_path}"',
+            '84274c505f7506c087c694cd0fbde5258e07b39742818824f0344e255f820dd5',
+            'public_dns_helper_sha256: $helper_sha256',
             'candidate_recipe_with_runner_only_public_dns_override',
             'overridden_tasks: ["guard:public-dns-health"]',
             'release_overlay: false',
             'remote_control_file_write: false',
             'activation_authorized: false',
             'BOUNDED_PUBLIC_DNS_CANDIDATE_RECIPE_PATH="$GITHUB_WORKSPACE/deploy.php"',
+            'BOUNDED_PUBLIC_DNS_HELPER_PATH="${{ steps.bounded_public_dns_control.outputs.helper_path }}"',
             'backend-bounded-public-dns-control-receipt.v1',
         ] as $boundary) {
             $this->assertStringContainsString($boundary, $workflow);
         }
 
-        $expectedWrapperSha = '13845400d5a4a58ef6751d41e953076493f4d7853126c96860ab04b5c864a195';
+        $expectedWrapperSha = '082637b0f84f956dbdbcc13870dfc3337b51515ae7f1b8d23eee55f051887b68';
         $this->assertSame(
             $expectedWrapperSha,
             hash_file('sha256', dirname(__DIR__, 3).'/'.$wrapperPath)
@@ -478,20 +483,17 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('use function Deployer\\currentHost;', $wrapper);
         $this->assertSame(1, substr_count($wrapper, "task('"));
         $this->assertStringContainsString("task('guard:public-dns-health'", $wrapper);
-        $this->assertStringContainsString('PRODUCTION_PUBLIC_PROBE_ATTEMPTS=3', $wrapper);
-        $this->assertStringContainsString('if ! raw="$(curl -sS', $wrapper);
-        $this->assertStringContainsString('429|502|503|504) return 75', $wrapper);
-        $this->assertStringContainsString(
-            'case "$attempt" in 1) sleep 2 ;; 2) sleep 5',
-            $wrapper
-        );
-        $this->assertStringContainsString(
-            'Public DNS business evidence retrying after attempt',
-            $wrapper
-        );
-        $this->assertStringContainsString('rc=${probe_rc}', $wrapper);
-        $this->assertStringNotContainsString('if [ "$probe_rc" -ne 75 ]', $wrapper);
-        $this->assertStringNotContainsString('set +e; raw=', $wrapper);
+        $this->assertStringContainsString('BOUNDED_PUBLIC_DNS_HELPER_SHA256', $wrapper);
+        $this->assertStringContainsString("'PUBLIC_DNS_PROBE_ATTEMPTS' => '3'", $wrapper);
+        $this->assertStringContainsString("'PUBLIC_DNS_PROBE_RETRY_DELAYS_SECONDS' => '2 5'", $wrapper);
+        $this->assertStringContainsString('| base64 -d', $wrapper);
+        $this->assertStringContainsString('| env ', $wrapper);
+        $this->assertStringContainsString('if ! raw="$(curl', $helper);
+        $this->assertStringContainsString('429|502|503|504) return 75', $helper);
+        $this->assertStringContainsString('if [ "$probe_rc" -ne 75 ]', $helper);
+        $this->assertStringContainsString('failed terminally:', $helper);
+        $this->assertStringNotContainsString('curl ', $wrapper);
+        $this->assertStringNotContainsString('bash -lc', $wrapper);
         $this->assertStringNotContainsString('file_put_contents', $wrapper);
         $this->assertStringNotContainsString('upload(', $wrapper);
     }
