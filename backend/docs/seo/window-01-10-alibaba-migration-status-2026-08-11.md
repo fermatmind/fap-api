@@ -332,7 +332,7 @@ English SEO 的报告/closeout 已完成，增长实验未完成。先做 RIASEC
 
 1. 等待 control-plane SHA `25cbc70f60d2a32901339e7e2469d4ddf196e173` 的 CI、Code Scanning 与 staging 证据完成；取证截止时没有 production dispatch。
 2. 发起新的后端 production deploy，绑定 exact approved immutable candidate SHA/release 与同 SHA staging receipt；candidate 必须仍可从当前 `main` 到达，并明确排除所有更新的 `main` commits。
-3. 验证 active revision、migration status、queue/scheduler、Redis/RDS、`/up`、flags、Career directory/detail、sitemap source。
+3. 验证 active revision、migration status、queue/scheduler、Redis/RDS；target-node loopback `/api/healthz` 必须为 `200` 且 `ok=true`，非 allowlisted 公网同路径必须严格为 `404`；flags 与 zh-CN Big Five Hub Personality API 必须为 `200`，后者还必须有 64 位小写十六进制 `source_hash`；再读回 Career directory/detail 与 sitemap source。
 4. 重新冻结 post-deploy 613/30-or-changed truth；任何 cohort 变化必须有 authority receipt。
 
 ### P1：关闭依赖链
