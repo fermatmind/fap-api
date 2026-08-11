@@ -124,7 +124,7 @@ final class RiasecLandingCmsExperiment01Test extends TestCase
                 'form_filter' => ['riasec_60', 'riasec_140'],
                 'group_by' => 'builder safe dimensions followed by fixed event-path attribution and form_id aggregation',
                 'event_path_attribution' => [
-                    'landing_pv' => 'url canonical_path',
+                    'landing_pv' => 'url canonical_path; form_id is not required',
                     'start_test' => 'url take_path or source_url canonical_path',
                     'complete_test' => 'url take_path or source_url canonical_path',
                     'view_result' => 'url canonical_path, url take_path, or source_url canonical_path',
@@ -135,7 +135,12 @@ final class RiasecLandingCmsExperiment01Test extends TestCase
                     'complete_test' => 'test_complete',
                     'view_result' => 'riasec_result_view',
                 ],
-                'skipped_source_rows_required' => 0,
+                'unscoped_builder_skipped_rows' => 'informational_only',
+                'scoped_source_reconciliation' => [
+                    'source' => 'raw non-excluded authoritative events matching the exact event/date/org/lang/path/scale/form stage rules',
+                    'projection' => 'sum of landing_view plus both fixed-form start/complete/result totals',
+                    'required_delta' => 0,
+                ],
             ],
             data_get($productBaseline, 'required_sources.landing_and_product_funnel.query_contract'),
         );
