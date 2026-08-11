@@ -68,6 +68,51 @@ grep -q '^career:execute-canonical-rollout-batch' <<<"$artisan_commands"
 rollout_help="$(cd "$backend_dir" && php artisan career:execute-canonical-rollout-batch --help --no-ansi)"
 grep -q -- '--dry-run' <<<"$rollout_help"
 grep -q -- '--no-audit-write' <<<"$rollout_help"
+authority_evidence_runner="$backend_dir/scripts/operations/career_1046_authority_evidence.php"
+test -f "$authority_evidence_runner"
+test ! -L "$authority_evidence_runner"
+php -l "$authority_evidence_runner" >/dev/null
+
+set +e
+authority_evidence_payload="$(
+  cd "$backend_dir" &&
+  timeout 300 env EXPECTED_MANIFEST_SHA256="$EXPECTED_MANIFEST_SHA256" \
+    php -d memory_limit=1024M scripts/operations/career_1046_authority_evidence.php inspect 2>/dev/null
+)"
+authority_evidence_exit_code=$?
+set -e
+authority_evidence_valid=false
+authority_evidence_summary='null'
+if jq -e '
+  .contract_version == "career.1046_rollout.authority_evidence.v1" and
+  .status == "PASS_AUTHORITY_EVIDENCE_CAPTURED" and
+  .read_only == true and
+  .writes_database == false and
+  (.manifest.target_count == 1046) and
+  (.manifest.target_locale_row_set_sha256 | test("^[0-9a-f]{64}$")) and
+  (.authentic_successful_receipts.missing_delta_slugs | type == "array") and
+  (.database_index_state.mismatches | type == "array") and
+  (.current_materialized_authority.projection_sha256 | test("^[0-9a-f]{64}$")) and
+  (.current_materialized_authority.ledger_sha256 | test("^[0-9a-f]{64}$")) and
+  (.current_materialized_authority.projection.slug_set_sha256 | test("^[0-9a-f]{64}$")) and
+  (.current_materialized_authority.projection.locale_row_set_sha256 | test("^[0-9a-f]{64}$")) and
+  (.detail_display_authority.target_missing_valid_display_slugs | type == "array") and
+  (.detail_display_authority.target_missing_union_detail_slugs | type == "array") and
+  .database_write_count == 0 and
+  .artifact_write_count == 0 and
+  .cache_write_count == 0 and
+  .publication_write_count == 0 and
+  .deploy_count == 0 and
+  .migration_count == 0 and
+  .cms_write_count == 0 and
+  .sitemap_write_count == 0 and
+  .llms_write_count == 0 and
+  .search_submission_count == 0 and
+  .automatic_retry_allowed == false
+' <<<"$authority_evidence_payload" >/dev/null 2>&1; then
+  authority_evidence_valid=true
+  authority_evidence_summary="$(jq -c '.' <<<"$authority_evidence_payload")"
+fi
 
 set +e
 authority_payload="$(
@@ -255,7 +300,7 @@ else
 fi
 recommended_batch_count=$(( (1016 + recommended_batch_size - 1) / recommended_batch_size ))
 
-if [[ "$authority_valid" == true && "$scan_valid" == true && "$eligibility_valid" == true && "$rollout_valid" == true ]]; then
+if [[ "$authority_evidence_valid" == true && "$authority_valid" == true && "$scan_valid" == true && "$eligibility_valid" == true && "$rollout_valid" == true ]]; then
   status='PASS_ZERO_WRITE_PREFLIGHT_CAPTURED'
 else
   status='HOLD_ZERO_WRITE_PREFLIGHT_INCOMPLETE'
@@ -271,6 +316,9 @@ jq -n \
   --arg checked_at "$checked_at" \
   --argjson workflow_run_id "$WORKFLOW_RUN_ID" \
   --argjson workflow_run_attempt "$WORKFLOW_RUN_ATTEMPT" \
+  --argjson authority_evidence_exit_code "$authority_evidence_exit_code" \
+  --argjson authority_evidence_valid "$authority_evidence_valid" \
+  --argjson authority_evidence "$authority_evidence_summary" \
   --argjson authority_exit_code "$authority_exit_code" \
   --argjson authority_valid "$authority_valid" \
   --argjson authority "$authority_summary" \
@@ -321,6 +369,7 @@ jq -n \
       rollout_apply_allowed: false
     },
     production_read_only_observations: {
+      exact_authority_evidence: {exit_code: $authority_evidence_exit_code, valid: $authority_evidence_valid, summary: $authority_evidence},
       aa_projection_truth_review_authority: {exit_code: $authority_exit_code, valid: $authority_valid, summary: $authority},
       detail_ready_scan: {exit_code: $scan_exit_code, valid: $scan_valid, summary: $scan},
       aa_eligibility: {exit_code: $eligibility_exit_code, valid: $eligibility_valid, summary: $eligibility},

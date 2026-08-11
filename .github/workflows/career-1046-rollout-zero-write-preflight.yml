@@ -74,6 +74,7 @@ jobs:
           git cat-file -e "${EXPECTED_RELEASE_SHA}^{commit}"
           git merge-base --is-ancestor "$EXPECTED_RELEASE_SHA" origin/main
           test "$(sha256sum backend/docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json | awk '{print $1}')" = "$EXPECTED_MANIFEST_SHA256"
+          php -l backend/scripts/operations/career_1046_authority_evidence.php >/dev/null
 
           {
             echo "control_plane_sha=$EXPECTED_CONTROL_PLANE_SHA"
@@ -186,6 +187,14 @@ jobs:
              and .authority_manifest.sha256 == $manifest
              and .authority_manifest.apply_allowed == false
              and .authority_manifest.rollout_apply_allowed == false
+             and .production_read_only_observations.exact_authority_evidence.valid == true
+             and .production_read_only_observations.exact_authority_evidence.summary.contract_version == "career.1046_rollout.authority_evidence.v1"
+             and .production_read_only_observations.exact_authority_evidence.summary.read_only == true
+             and .production_read_only_observations.exact_authority_evidence.summary.writes_database == false
+             and (.production_read_only_observations.exact_authority_evidence.summary.current_materialized_authority.projection_sha256 | test("^[0-9a-f]{64}$"))
+             and (.production_read_only_observations.exact_authority_evidence.summary.current_materialized_authority.ledger_sha256 | test("^[0-9a-f]{64}$"))
+             and (.production_read_only_observations.exact_authority_evidence.summary.current_materialized_authority.projection.slug_set_sha256 | test("^[0-9a-f]{64}$"))
+             and (.production_read_only_observations.exact_authority_evidence.summary.current_materialized_authority.projection.locale_row_set_sha256 | test("^[0-9a-f]{64}$"))
              and .negative_guarantees.production_apply == false
              and .negative_guarantees.database_write == false
              and .negative_guarantees.cms_write == false
