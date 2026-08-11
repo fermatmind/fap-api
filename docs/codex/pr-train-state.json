@@ -104938,7 +104938,7 @@
     "base": "main",
     "branch": "codex/career-current-generation-pointer-bootstrap-05",
     "title": "CAREER-CURRENT-GENERATION-POINTER-BOOTSTRAP-05: add exact 342/30 production pointer control",
-    "status": "local_validation_passed",
+    "status": "github_checks_pending",
     "depends_on": [
       "CAREER-RUNTIME-AUTHORITY-BOOTSTRAP-COMPAT-04R"
     ],
@@ -104969,12 +104969,12 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "PR not yet opened."
+        "evidence": "PR #3663 opened from exact validated implementation commit c102e64737f1e3c2e5bb19d5d40e6bb8db6dba4e; required checks are pending."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "c102e64737f1e3c2e5bb19d5d40e6bb8db6dba4e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3663",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -105007,8 +105007,13 @@
         "at": "2026-08-12T03:19:22+08:00",
         "status": "local_validation_passed",
         "note": "Completed local validation. The heavy-guarded ci_verify_mbti master chain exited 0; focused tests passed 5 / 100; actionlint, Pint, PHP syntax, freeze contract, YAML/JSON parsing, 232-route listing, fresh SQLite migration, exact six-file scope and diff checks passed. The verifier-generated Big Five compiled files were restored to origin/main bytes. No workflow was dispatched and no production, staging or discoverability action was executed."
+      },
+      {
+        "at": "2026-08-12T03:20:53+08:00",
+        "status": "github_checks_pending",
+        "note": "Committed the exact six-file implementation as c102e64737f1e3c2e5bb19d5d40e6bb8db6dba4e, pushed the focused branch and opened PR #3663. Required checks must pass before squash merge. No production or staging workflow was dispatched and no controlled external state was read or mutated."
       }
     ],
-    "updated_at": "2026-08-12T03:19:22+08:00"
+    "updated_at": "2026-08-12T03:20:53+08:00"
   }
 }
