@@ -104688,7 +104688,7 @@
     "base": "main",
     "branch": "codex/career-1046-current-state-freeze-00",
     "title": "CAREER-1046-CURRENT-STATE-FREEZE-CONTRACT-00: freeze 30/1016/1046 authority evidence",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "depends_on": [],
     "allowed_paths": [
       "backend/docs/career/contracts/career-1046-current-state-freeze.v1.json",
@@ -104715,8 +104715,8 @@
         "evidence": "Exact changed-file comparison passed for the five card-allowlisted paths. Routes, migrations, runtime readers, workflows, production state, CMS/DB/cache/artifact/pointer state, sitemap, llms, Search Channel, and frontend files remain untouched."
       },
       "github_required_checks": {
-        "status": "pending",
-        "evidence": null
+        "status": "passed",
+        "evidence": "Exact implementation/ledger head 74775361099b54f66de27e7a44e9d4c187bd964a passed hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep blocking secrets, Semgrep OSS, and SARIF upload; staging parity was conditionally skipped. GitHub reports CLEAN and MERGEABLE. The final ready-to-merge ledger-only head must rerun required checks."
       }
     },
     "failure_reason": null,
@@ -104749,8 +104749,13 @@
         "at": "2026-08-12T01:19:29+08:00",
         "status": "github_checks_pending",
         "note": "PR #3660 opened from exact implementation head baeabe55a576d358bb78b6fe00df80d175d640bb. Required GitHub checks and final exact-head scope review remain pending; no production workflow was dispatched and no production or discoverability write occurred."
+      },
+      {
+        "at": "2026-08-12T01:28:45+08:00",
+        "status": "ready_to_merge",
+        "note": "Exact head 74775361099b54f66de27e7a44e9d4c187bd964a passed all nine required CI/code-scanning checks; staging parity was conditionally skipped. GitHub reports CLEAN/MERGEABLE and changed files remain the exact five-path allowlist. This ledger-only head must rerun required checks before squash merge. No production or discoverability action occurred."
       }
     ],
-    "updated_at": "2026-08-12T01:19:29+08:00"
+    "updated_at": "2026-08-12T01:28:45+08:00"
   }
 }
