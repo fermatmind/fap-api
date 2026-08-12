@@ -12,7 +12,13 @@ use App\Http\Resources\Career\CareerJobDetailResource;
 use App\Models\IndexState;
 use App\Models\Occupation;
 use App\Services\Career\Bundles\CareerJobDetailBundleBuilder;
+use Illuminate\Cache\Events\CacheFlushing;
+use Illuminate\Cache\Events\ForgettingKey;
+use Illuminate\Cache\Events\WritingKey;
+use Illuminate\Cache\Repository as CacheRepository;
 use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Database\Events\QueryExecuted;
+use Illuminate\Events\Dispatcher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
@@ -121,67 +127,145 @@ final class Career1046ImmutableCandidateArtifactProducer
     }
 
     /** @return array<string, mixed> */
-    public static function produceFromDatabase(): array
+    /**
+     * Execute the same audited transaction used by the streamed production
+     * entrypoint. The optional producer exists only so focused acceptance tests
+     * can exercise the real DB/cache guards without recreating 1046 detail
+     * documents in a second fixture authority.
+     *
+     * @param  null|callable(string, array<string, mixed>): array<string, mixed>  $producer
+     * @return array<string, mixed>
+     */
+    public static function produceFromDatabase(?callable $producer = null): array
     {
         $applicationRoot = self::applicationRoot();
         $app = require $applicationRoot.'/bootstrap/app.php';
         $app->make(Kernel::class)->bootstrap();
         $task3b = self::task3bFromEnvironment();
-        DB::statement('SET TRANSACTION READ ONLY');
+        $connection = DB::connection();
+        if ($connection->getDriverName() === 'mysql') {
+            DB::statement('SET TRANSACTION READ ONLY');
+        } elseif ($connection->getDriverName() !== 'sqlite' || ! $app->environment('testing')) {
+            throw new Career1046ImmutableCandidateArtifactFailure('READ_ONLY_TRANSACTION_UNSUPPORTED');
+        }
 
-        return DB::connection()->transaction(static function () use ($applicationRoot, $task3b): array {
-            $manifestPath = $applicationRoot.'/docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json';
-            $manifest = json_decode((string) file_get_contents($manifestPath), true, 512, JSON_THROW_ON_ERROR);
-            if (! is_array($manifest) || ! is_array($manifest['baseline_slugs'] ?? null) || ! is_array($manifest['delta_slugs'] ?? null)) {
-                throw new Career1046ImmutableCandidateArtifactFailure('FROZEN_MANIFEST_INVALID');
+        $queryVerbs = [];
+        $cacheWriteAttempts = 0;
+        $databaseDispatcher = new Dispatcher($app);
+        $databaseDispatcher->listen(QueryExecuted::class, static function (QueryExecuted $query) use (&$queryVerbs): void {
+            $verb = strtolower((string) strtok(ltrim($query->sql), " \t\r\n"));
+            $queryVerbs[] = $verb;
+            if ($verb !== 'select') {
+                throw new Career1046ImmutableCandidateArtifactFailure('DATABASE_WRITE_ATTEMPT');
             }
-            self::assertTask3bDatabaseState($applicationRoot, $manifest, $task3b);
-            $ledgerEnvelope = app(CareerFullReleaseLedgerProjectionService::class)->build();
-            $ledger = $ledgerEnvelope[CareerFullReleaseLedgerProjectionService::LEDGER_FILENAME] ?? null;
-            if (! is_array($ledger)) {
-                throw new Career1046ImmutableCandidateArtifactFailure('LEDGER_UNAVAILABLE');
-            }
-            $projection = app(CareerRuntimePublishProjectionService::class)->buildFromLedgerArray($ledger);
-            $details = [];
-            $items = is_array($projection['items'] ?? null) ? $projection['items'] : [];
-            foreach ($items as $item) {
-                if (! is_array($item) || ! is_string($item['slug'] ?? null) || ! is_string($item['locale'] ?? null)) {
-                    continue;
-                }
-                $locale = $item['locale'] === 'zh' ? 'zh-CN' : 'en';
-                $bundle = app(CareerJobDetailBundleBuilder::class)->buildBySlug($item['slug'], $locale, $item);
-                if ($bundle === null) {
-                    throw new Career1046ImmutableCandidateArtifactFailure('DETAIL_SOURCE_UNAVAILABLE');
-                }
-                $details[] = [
-                    'slug' => $item['slug'],
-                    'locale' => $item['locale'],
-                    'payload' => (new CareerJobDetailResource($bundle))->toArray(Request::create('/api/v0.5/career/jobs/'.$item['slug'], 'GET', ['locale' => $locale])),
-                ];
-            }
-            $rows = data_get($ledger, 'public_resolution.rows');
-            if (! is_array($rows)) {
-                $rows = is_array($ledger['members'] ?? null) ? $ledger['members'] : [];
-            }
-            $bySlug = [];
-            foreach ($rows as $row) {
-                $slug = is_array($row) ? ($row['source_slug'] ?? $row['canonical_slug'] ?? null) : null;
-                if (is_string($slug)) {
-                    $bySlug[strtolower($slug)] = true;
-                }
-            }
-            $baseline = array_values(array_filter($manifest['baseline_slugs'], static fn (mixed $slug): bool => is_string($slug) && isset($bySlug[strtolower($slug)])));
-            $delta = array_values(array_filter($manifest['delta_slugs'], static fn (mixed $slug): bool => is_string($slug) && isset($bySlug[strtolower($slug)])));
-
-            return self::produceFromSource([
-                'manifest_path' => $manifestPath,
-                'baseline_authority_slugs' => $baseline,
-                'database_matching_receipt_slugs' => $delta,
-                'ledger' => $ledger,
-                'projection' => $projection,
-                'detail_rows' => $details,
-            ], $task3b);
         });
+        $originalDatabaseDispatcher = $connection->getEventDispatcher();
+        $connection->setEventDispatcher($databaseDispatcher);
+
+        $cache = app('cache.store');
+        if (! $cache instanceof CacheRepository) {
+            throw new Career1046ImmutableCandidateArtifactFailure('CACHE_AUDIT_UNAVAILABLE');
+        }
+        $cacheDispatcher = new Dispatcher($app);
+        foreach ([WritingKey::class, ForgettingKey::class, CacheFlushing::class] as $event) {
+            $cacheDispatcher->listen($event, static function () use (&$cacheWriteAttempts): void {
+                $cacheWriteAttempts++;
+                throw new Career1046ImmutableCandidateArtifactFailure('CACHE_WRITE_ATTEMPT');
+            });
+        }
+        $originalCacheDispatcher = $cache->getEventDispatcher();
+        $cache->setEventDispatcher($cacheDispatcher);
+
+        try {
+            $candidate = $connection->transaction(static function () use ($applicationRoot, $task3b, $producer): array {
+                if ($producer !== null) {
+                    return $producer($applicationRoot, $task3b);
+                }
+
+                return self::produceCandidateInsideTransaction($applicationRoot, $task3b);
+            });
+            if ($queryVerbs === [] || array_values(array_unique($queryVerbs)) !== ['select']) {
+                throw new Career1046ImmutableCandidateArtifactFailure('DATABASE_SELECT_ONLY_NOT_PROVEN');
+            }
+            if ($cacheWriteAttempts !== 0) {
+                throw new Career1046ImmutableCandidateArtifactFailure('CACHE_ZERO_WRITE_NOT_PROVEN');
+            }
+            $authority = &$candidate['candidate_receipt']['producer_authority'];
+            if (! is_array($authority)) {
+                throw new Career1046ImmutableCandidateArtifactFailure('CANDIDATE_RECEIPT_INVALID');
+            }
+            $authority['database_query_count'] = count($queryVerbs);
+            $authority['database_query_verbs'] = ['select'];
+            $authority['cache_write_count'] = $cacheWriteAttempts;
+            $candidate['documents']['candidate-receipt.json'] = $candidate['candidate_receipt'];
+
+            return $candidate;
+        } finally {
+            if ($originalDatabaseDispatcher !== null) {
+                $connection->setEventDispatcher($originalDatabaseDispatcher);
+            } else {
+                $connection->unsetEventDispatcher();
+            }
+            if ($originalCacheDispatcher !== null) {
+                $cache->setEventDispatcher($originalCacheDispatcher);
+            }
+        }
+    }
+
+    /** @param array<string, mixed> $task3b @return array<string, mixed> */
+    private static function produceCandidateInsideTransaction(string $applicationRoot, array $task3b): array
+    {
+        $manifestPath = $applicationRoot.'/docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json';
+        $manifest = json_decode((string) file_get_contents($manifestPath), true, 512, JSON_THROW_ON_ERROR);
+        if (! is_array($manifest) || ! is_array($manifest['baseline_slugs'] ?? null) || ! is_array($manifest['delta_slugs'] ?? null)) {
+            throw new Career1046ImmutableCandidateArtifactFailure('FROZEN_MANIFEST_INVALID');
+        }
+        self::assertTask3bDatabaseState($applicationRoot, $manifest, $task3b);
+        $ledgerEnvelope = app(CareerFullReleaseLedgerProjectionService::class)->build(allowCacheWrites: false);
+        $ledger = $ledgerEnvelope[CareerFullReleaseLedgerProjectionService::LEDGER_FILENAME] ?? null;
+        if (! is_array($ledger)) {
+            throw new Career1046ImmutableCandidateArtifactFailure('LEDGER_UNAVAILABLE');
+        }
+        $projection = app(CareerRuntimePublishProjectionService::class)->buildFromLedgerArray($ledger);
+        $details = [];
+        $items = is_array($projection['items'] ?? null) ? $projection['items'] : [];
+        foreach ($items as $item) {
+            if (! is_array($item) || ! is_string($item['slug'] ?? null) || ! is_string($item['locale'] ?? null)) {
+                continue;
+            }
+            $locale = $item['locale'] === 'zh' ? 'zh-CN' : 'en';
+            $bundle = app(CareerJobDetailBundleBuilder::class)->buildBySlug($item['slug'], $locale, $item);
+            if ($bundle === null) {
+                throw new Career1046ImmutableCandidateArtifactFailure('DETAIL_SOURCE_UNAVAILABLE');
+            }
+            $details[] = [
+                'slug' => $item['slug'],
+                'locale' => $item['locale'],
+                'payload' => (new CareerJobDetailResource($bundle))->toArray(Request::create('/api/v0.5/career/jobs/'.$item['slug'], 'GET', ['locale' => $locale])),
+            ];
+        }
+        $rows = data_get($ledger, 'public_resolution.rows');
+        if (! is_array($rows)) {
+            $rows = is_array($ledger['members'] ?? null) ? $ledger['members'] : [];
+        }
+        $bySlug = [];
+        foreach ($rows as $row) {
+            $slug = is_array($row) ? ($row['source_slug'] ?? $row['canonical_slug'] ?? null) : null;
+            if (is_string($slug)) {
+                $bySlug[strtolower($slug)] = true;
+            }
+        }
+        $baseline = array_values(array_filter($manifest['baseline_slugs'], static fn (mixed $slug): bool => is_string($slug) && isset($bySlug[strtolower($slug)])));
+        $delta = array_values(array_filter($manifest['delta_slugs'], static fn (mixed $slug): bool => is_string($slug) && isset($bySlug[strtolower($slug)])));
+
+        return self::produceFromSource([
+            'manifest_path' => $manifestPath,
+            'baseline_authority_slugs' => $baseline,
+            'database_matching_receipt_slugs' => $delta,
+            'ledger' => $ledger,
+            'projection' => $projection,
+            'detail_rows' => $details,
+        ], $task3b);
     }
 
     /** @param array<string, mixed> $task3b */

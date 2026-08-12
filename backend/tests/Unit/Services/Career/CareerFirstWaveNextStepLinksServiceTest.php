@@ -132,6 +132,28 @@ final class CareerFirstWaveNextStepLinksServiceTest extends TestCase
         ));
     }
 
+    public function test_read_only_build_uses_cold_authority_without_writing_active_lkg_or_negative_cache(): void
+    {
+        $this->materializeCurrentFirstWaveFixture();
+        Cache::flush();
+
+        $summary = app(CareerFirstWaveNextStepLinksService::class)
+            ->buildBySlug('accountants-and-auditors', 'en', allowCacheWrites: false)?->toArray();
+
+        $this->assertIsArray($summary);
+        foreach (['active', 'lkg', 'negative'] as $suffix) {
+            $this->assertFalse(Cache::has(
+                CareerFirstWaveNextStepLinksService::CACHE_KEY_PREFIX.':accountants-and-auditors:en:'.$suffix
+            ));
+        }
+
+        $this->assertNull(app(CareerFirstWaveNextStepLinksService::class)
+            ->buildBySlug('unknown-occupation', 'en', allowCacheWrites: false));
+        $this->assertFalse(Cache::has(
+            CareerFirstWaveNextStepLinksService::CACHE_KEY_PREFIX.':unknown-occupation:en:negative'
+        ));
+    }
+
     private function materializeCurrentFirstWaveFixture(): void
     {
         $exitCode = Artisan::call('career:validate-first-wave-publish-ready', [

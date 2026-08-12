@@ -51,11 +51,14 @@ final class CareerFullReleaseLedgerService
     /**
      * @param  list<string>  $additionalSlugs
      */
-    public function build(array $additionalSlugs = [], bool $trustedRolloutAuthority = false): CareerFullReleaseLedger
-    {
+    public function build(
+        array $additionalSlugs = [],
+        bool $trustedRolloutAuthority = false,
+        bool $allowCacheWrites = true,
+    ): CareerFullReleaseLedger {
         $explicitBatchSlugs = $trustedRolloutAuthority ? $this->slugSet($additionalSlugs) : [];
         $firstWaveManifest = $this->firstWaveManifestReader->read();
-        $firstWaveAuditPayload = $this->safeFirstWaveAudit();
+        $firstWaveAuditPayload = $this->safeFirstWaveAudit($allowCacheWrites);
         $firstWaveAudit = $firstWaveAuditPayload['audit'];
         $firstWaveAuditAvailable = (bool) ($firstWaveAuditPayload['available'] ?? false);
         $batchMembers = $this->loadBatchMembers();
@@ -263,11 +266,11 @@ final class CareerFullReleaseLedgerService
     /**
      * @return array{audit: array<string, mixed>, available: bool}
      */
-    private function safeFirstWaveAudit(): array
+    private function safeFirstWaveAudit(bool $allowCacheWrites): array
     {
         try {
             return [
-                'audit' => $this->firstWaveAuditService->build()->toArray(),
+                'audit' => $this->firstWaveAuditService->build($allowCacheWrites)->toArray(),
                 'available' => true,
             ];
         } catch (\Throwable) {

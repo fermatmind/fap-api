@@ -16,11 +16,15 @@ final class CareerFullReleaseLedgerProjectionService
     /**
      * @return array{career-full-release-ledger.json: array<string, mixed>}
      */
-    public function build(): array
+    public function build(bool $allowCacheWrites = true): array
     {
         return [
             self::LEDGER_FILENAME => $this->ledgerService
-                ->build($this->verifiedRolloutBatchSlugAuthority->slugs(), trustedRolloutAuthority: true)
+                ->build(
+                    $this->verifiedRolloutBatchSlugAuthority->slugs(),
+                    trustedRolloutAuthority: true,
+                    allowCacheWrites: $allowCacheWrites,
+                )
                 ->toArray(),
         ];
     }

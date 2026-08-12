@@ -105788,5 +105788,34 @@
     "deploy_allowed": false,
     "transitions": [{"at": "2026-08-12T15:20:00+08:00", "status": "implementation_in_progress", "note": "Started from latest origin/main in an isolated worktree. Scope is the unexecuted Task 7B discoverability-release control plane only. No workflow dispatch, SSH, production/staging access, deploy, migration, CMS, database, cache, pointer, sitemap, llms, Search, IndexNow, GSC, or URL Inspection action occurred."}, {"at": "2026-08-12T15:42:00+08:00", "status": "local_validation_passed", "note": "The exact same-generation permit contract, pointer/document/count/cross-generation fail-closed paths, Task 7A artifact guards, fresh preflight binding, Search hold, and write allowlist pass. Focused Task 7B plus sitemap regression coverage passed 20 tests / 558 assertions; Pint, PHP syntax, actionlint, train YAML/JSON parsing, and diff checks pass. The isolated worktree lacks ignored .env, producing non-failing framework bootstrap warnings only. No workflow dispatch, SSH, production/staging access, or controlled external action occurred."}],
     "updated_at": "2026-08-12T15:42:00+08:00"
+  },
+  "CAREER-1046-IMMUTABLE-CANDIDATE-ACCEPTANCE-REPAIR-07C": {
+    "id": "CAREER-1046-IMMUTABLE-CANDIDATE-ACCEPTANCE-REPAIR-07C",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-1046-immutable-candidate-acceptance-repair-07c",
+    "title": "CAREER-1046-IMMUTABLE-CANDIDATE-ACCEPTANCE-REPAIR-07C: prove SELECT-only cache-zero producer execution",
+    "status": "local_validation_passed",
+    "depends_on": ["CAREER-1046-IMMUTABLE-CANDIDATE-ARTIFACT-PRODUCER-07B"],
+    "allowed_paths": [".github/workflows/career-1046-immutable-candidate-artifact-producer.yml", "backend/app/Domain/Career/Publish/CareerFirstWaveNextStepLinksService.php", "backend/app/Domain/Career/Publish/CareerFirstWaveLaunchReadinessAuditService.php", "backend/app/Domain/Career/Publish/CareerFullReleaseLedgerService.php", "backend/app/Domain/Career/Publish/CareerFullReleaseLedgerProjectionService.php", "backend/scripts/operations/career_1046_immutable_candidate_artifact.php", "backend/tests/Sre/Career1046ImmutableCandidateArtifactProducerTest.php", "backend/tests/Unit/Services/Career/CareerFirstWaveNextStepLinksServiceTest.php", "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php", "docs/operations/career-1046-immutable-candidate-artifact-producer.md", "docs/codex/pr-train.yaml", "docs/codex/pr-train-state.json"],
+    "checks": {
+      "authorization": {"status": "passed", "evidence": "The operator explicitly authorized the two-PR Career 1046 acceptance repair plan; this first PR remains zero-production-execution."},
+      "dependency": {"status": "passed", "evidence": "Task 4B PRs #3671 and #3672 are merged on origin/main."},
+      "focused_execution": {"status": "passed", "evidence": "Real audited producer entry coverage records SELECT-only queries and zero cache writes and fails closed on attempted DB/cache mutations."}
+    },
+    "production_write_execution": false,
+    "production_workflow_dispatched": false,
+    "staging_workflow_dispatched": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "cache_mutation": false,
+    "artifact_mutation": false,
+    "pointer_mutation": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "url_submission": false,
+    "deploy_allowed": false,
+    "transitions": [{"at": "2026-08-12T16:16:00+08:00", "status": "implementation_in_progress", "note": "Started from merged Task 7B origin/main in an isolated worktree. The producer now selects an explicit no-cache-write ledger path and installs runtime DB/cache mutation auditors; focused production-entry and ledger/cache tests pass. No workflow dispatch, SSH, production/staging access, deploy, database, CMS, cache, artifact, pointer, sitemap, llms or Search action occurred."}, {"at": "2026-08-12T16:28:00+08:00", "status": "local_validation_passed", "note": "Real Laravel producer execution proves observed SELECT-only database activity and zero cache mutations, including fail-closed DB/cache mutation probes; 1046/2092, Task 3B hash, streamed dependency, members/canonical_slug, and Task 5 consumer contracts remain green. Focused tests, Pint, PHP syntax, actionlint, YAML/JSON parsing, exact-scope diff checks, Big Five runtime freeze, and the full ci_verify_mbti chain pass. No workflow dispatch, SSH, production/staging access, or controlled external action occurred."}, {"at": "2026-08-12T16:40:00+08:00", "status": "local_validation_passed", "note": "The first CI pass exposed only the runtime-freeze ownership classifier omitting the existing Career launch-readiness audit consumer. The classifier now explicitly covers that Career-only consumer and retains its negative boundary; the exact failed test passes locally. This is the single consolidated same-scope CI repair commit."}],
+    "updated_at": "2026-08-12T16:40:00+08:00"
   }
 }

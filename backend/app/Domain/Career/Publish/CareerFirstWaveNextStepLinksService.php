@@ -36,8 +36,11 @@ final class CareerFirstWaveNextStepLinksService
         private readonly CareerFirstWaveDiscoverabilityManifestService $discoverabilityManifestService,
     ) {}
 
-    public function buildBySlug(string $slug, string $publicLocale = 'zh-CN'): ?CareerFirstWaveNextStepLinksSummary
-    {
+    public function buildBySlug(
+        string $slug,
+        string $publicLocale = 'zh-CN',
+        bool $allowCacheWrites = true,
+    ): ?CareerFirstWaveNextStepLinksSummary {
         $normalizedSlug = strtolower(trim($slug));
         if ($normalizedSlug === '') {
             return null;
@@ -81,27 +84,29 @@ final class CareerFirstWaveNextStepLinksService
             throw $throwable;
         }
 
-        try {
-            if ($summary === null) {
-                Cache::put(
-                    $this->negativeCacheKey($normalizedSlug, $normalizedLocale),
-                    true,
-                    now()->addSeconds(self::NEGATIVE_CACHE_TTL_SECONDS),
-                );
-            } else {
-                $payload = $summary->toArray();
-                Cache::put(
-                    $this->activeCacheKey($normalizedSlug, $normalizedLocale),
-                    $payload,
-                    now()->addSeconds(self::CACHE_TTL_SECONDS),
-                );
-                Cache::forever($this->lkgCacheKey($normalizedSlug, $normalizedLocale), $payload);
-                Cache::forget($this->negativeCacheKey($normalizedSlug, $normalizedLocale));
+        if ($allowCacheWrites) {
+            try {
+                if ($summary === null) {
+                    Cache::put(
+                        $this->negativeCacheKey($normalizedSlug, $normalizedLocale),
+                        true,
+                        now()->addSeconds(self::NEGATIVE_CACHE_TTL_SECONDS),
+                    );
+                } else {
+                    $payload = $summary->toArray();
+                    Cache::put(
+                        $this->activeCacheKey($normalizedSlug, $normalizedLocale),
+                        $payload,
+                        now()->addSeconds(self::CACHE_TTL_SECONDS),
+                    );
+                    Cache::forever($this->lkgCacheKey($normalizedSlug, $normalizedLocale), $payload);
+                    Cache::forget($this->negativeCacheKey($normalizedSlug, $normalizedLocale));
+                }
+            } catch (\Throwable $throwable) {
+                Log::debug('CAREER_NEXT_STEP_CACHE_WRITE_FAILED', [
+                    'exception' => $throwable::class,
+                ]);
             }
-        } catch (\Throwable $throwable) {
-            Log::debug('CAREER_NEXT_STEP_CACHE_WRITE_FAILED', [
-                'exception' => $throwable::class,
-            ]);
         }
 
         return $this->summaryBySlug[$memoKey] = $summary;
