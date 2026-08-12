@@ -60,6 +60,8 @@ final class Career1046RootGenerationActivation
         'candidate_file_write_count' => 0,
         'pointer_write_count' => 0,
         'root_pointer_switch_count' => 0,
+        'database_exclusion_lock_acquired' => false,
+        'database_exclusion_lock_released' => false,
         'write_state' => 'none',
         'writes_committed' => false,
     ];
@@ -73,6 +75,8 @@ final class Career1046RootGenerationActivation
             'candidate_file_write_count' => 0,
             'pointer_write_count' => 0,
             'root_pointer_switch_count' => 0,
+            'database_exclusion_lock_acquired' => false,
+            'database_exclusion_lock_released' => false,
             'write_state' => 'none',
             'writes_committed' => false,
         ];
@@ -104,6 +108,8 @@ final class Career1046RootGenerationActivation
                 $database,
                 $preflightSha,
                 static fn (): array => self::inspectDatabaseAuthority($expected, $app),
+                static fn () => self::acquireDatabaseAuthorityExclusionLock(),
+                static fn () => self::releaseDatabaseAuthorityExclusionLock(),
             );
             self::emit(self::successReceipt($mode, $expected, $result, $generation, $database));
 
@@ -441,6 +447,39 @@ final class Career1046RootGenerationActivation
         ];
     }
 
+    private static function acquireDatabaseAuthorityExclusionLock(): void
+    {
+        $connection = DB::connection();
+        if ($connection->getDriverName() !== 'mysql') {
+            throw new Career1046RootActivationFailure('DATABASE_EXCLUSION_LOCK_UNSUPPORTED');
+        }
+
+        try {
+            $pdo = $connection->getPdo();
+            if ($pdo->exec('SET SESSION lock_wait_timeout = 10') === false
+                || $pdo->exec('LOCK TABLES `occupations` READ, `index_states` READ') === false) {
+                throw new Career1046RootActivationFailure('DATABASE_EXCLUSION_LOCK_FAILED');
+            }
+        } catch (Career1046RootActivationFailure $failure) {
+            throw $failure;
+        } catch (Throwable) {
+            throw new Career1046RootActivationFailure('DATABASE_EXCLUSION_LOCK_FAILED');
+        }
+    }
+
+    private static function releaseDatabaseAuthorityExclusionLock(): void
+    {
+        try {
+            if (DB::connection()->getPdo()->exec('UNLOCK TABLES') === false) {
+                throw new Career1046RootActivationFailure('DATABASE_EXCLUSION_UNLOCK_FAILED');
+            }
+        } catch (Career1046RootActivationFailure $failure) {
+            throw $failure;
+        } catch (Throwable) {
+            throw new Career1046RootActivationFailure('DATABASE_EXCLUSION_UNLOCK_FAILED');
+        }
+    }
+
     /** @param array<string, mixed> $current @param array<string, mixed> $expected */
     private static function assertNoPointerCandidateResidue(array $current, array $expected): void
     {
@@ -475,6 +514,8 @@ final class Career1046RootGenerationActivation
      * @param  array<string, mixed>  $generation
      * @param  array<string, mixed>  $database
      * @param  callable(): array<string, mixed>  $databaseRevalidator
+     * @param  callable(): void  $databaseLockAcquirer
+     * @param  callable(): void  $databaseLockReleaser
      * @return array<string, mixed>
      */
     public static function activate(
@@ -484,6 +525,8 @@ final class Career1046RootGenerationActivation
         array $database,
         string $preflightSha,
         callable $databaseRevalidator,
+        callable $databaseLockAcquirer,
+        callable $databaseLockReleaser,
     ): array {
         $pointer = self::pointerDocument($expected, $current, $generation, $database, $preflightSha);
         $bytes = self::canonicalJson($pointer)."\n";
@@ -533,40 +576,47 @@ final class Career1046RootGenerationActivation
         self::assertActiveRelease($expected);
         self::assertGenerationDocumentReadback($expected, $generation);
         self::assertNoConflictingOperation($expected);
-        $databaseNow = $databaseRevalidator();
-        if (($databaseNow['receipt_covered_count'] ?? null) !== 1016
-            || ($databaseNow['matching_count'] ?? null) !== 1016
-            || ($databaseNow['missing_or_mismatching_count'] ?? null) !== 0
-            || ($databaseNow['outside_target_count'] ?? null) !== 0
-            || ! hash_equals(
-                (string) ($database['current_state_sha256'] ?? ''),
-                (string) ($databaseNow['current_state_sha256'] ?? ''),
-            )) {
-            throw new Career1046RootActivationFailure('DATABASE_AUTHORITY_CHANGED_BEFORE_SWITCH');
-        }
+        $databaseLockAcquirer();
+        self::$writeState['database_exclusion_lock_acquired'] = true;
+        try {
+            $databaseNow = $databaseRevalidator();
+            if (($databaseNow['receipt_covered_count'] ?? null) !== 1016
+                || ($databaseNow['matching_count'] ?? null) !== 1016
+                || ($databaseNow['missing_or_mismatching_count'] ?? null) !== 0
+                || ($databaseNow['outside_target_count'] ?? null) !== 0
+                || ! hash_equals(
+                    (string) ($database['current_state_sha256'] ?? ''),
+                    (string) ($databaseNow['current_state_sha256'] ?? ''),
+                )) {
+                throw new Career1046RootActivationFailure('DATABASE_AUTHORITY_CHANGED_BEFORE_SWITCH');
+            }
 
-        self::assertNoConflictingOperation($expected);
-        $activeNow = self::readContainedFile((string) $current['authority_root'], (string) $current['active_path'], 256_000);
-        if (! hash_equals((string) $current['active_sha256_before'], hash('sha256', $activeNow))) {
-            throw new Career1046RootActivationFailure('ACTIVE_POINTER_CHANGED_BEFORE_SWITCH');
-        }
-        self::$writeState['write_state'] = 'root_pointer_switch_started';
-        if (! rename($activeCandidate, (string) $current['active_path'])) {
-            throw new Career1046RootActivationFailure('ROOT_POINTER_SWITCH_FAILED');
-        }
-        self::$writeState['pointer_write_count'] = 2;
-        self::$writeState['root_pointer_switch_count'] = 1;
-        self::$writeState['write_state'] = 'root_pointer_switched';
-        $activeAfter = self::readContainedFile((string) $current['authority_root'], (string) $current['active_path'], 256_000);
-        $immutableAfter = self::readContainedFile(
-            (string) $generation['generation_root'],
-            $immutablePath,
-            256_000,
-        );
-        if (! hash_equals($pointerSha, hash('sha256', $activeAfter))
-            || ! hash_equals($bytes, $activeAfter)
-            || ! hash_equals($activeAfter, $immutableAfter)) {
-            throw new Career1046RootActivationFailure('ACTIVATED_POINTER_READBACK_FAILED');
+            self::assertNoConflictingOperation($expected);
+            $activeNow = self::readContainedFile((string) $current['authority_root'], (string) $current['active_path'], 256_000);
+            if (! hash_equals((string) $current['active_sha256_before'], hash('sha256', $activeNow))) {
+                throw new Career1046RootActivationFailure('ACTIVE_POINTER_CHANGED_BEFORE_SWITCH');
+            }
+            self::$writeState['write_state'] = 'root_pointer_switch_started';
+            if (! rename($activeCandidate, (string) $current['active_path'])) {
+                throw new Career1046RootActivationFailure('ROOT_POINTER_SWITCH_FAILED');
+            }
+            self::$writeState['pointer_write_count'] = 2;
+            self::$writeState['root_pointer_switch_count'] = 1;
+            self::$writeState['write_state'] = 'root_pointer_switched';
+            $activeAfter = self::readContainedFile((string) $current['authority_root'], (string) $current['active_path'], 256_000);
+            $immutableAfter = self::readContainedFile(
+                (string) $generation['generation_root'],
+                $immutablePath,
+                256_000,
+            );
+            if (! hash_equals($pointerSha, hash('sha256', $activeAfter))
+                || ! hash_equals($bytes, $activeAfter)
+                || ! hash_equals($activeAfter, $immutableAfter)) {
+                throw new Career1046RootActivationFailure('ACTIVATED_POINTER_READBACK_FAILED');
+            }
+        } finally {
+            $databaseLockReleaser();
+            self::$writeState['database_exclusion_lock_released'] = true;
         }
 
         return [

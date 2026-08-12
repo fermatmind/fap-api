@@ -86,7 +86,7 @@ prs:
     base: main
     branch: codex/measurement-m04-backend-read-model-remediation-01
     title: "MEASUREMENT-M04-BACKEND-READ-MODEL-REMEDIATION-01: repair report-ready and reporting-day semantics"
-    status: github_checks_pending
+    status: ready_to_merge
     depends_on:
       - ASSESSMENT-CATALOG-FACT-AUTHORITY-CONVERGENCE-01
     train_scope: measurement_m04_backend_read_model_remediation
@@ -287,7 +287,7 @@ prs:
     base: main
     branch: codex/api-unlock-01-report-entitlement
     title: "API-UNLOCK-01: unify attempt-scoped full-report entitlement contract"
-    status: ready_to_merge
+    status: github_checks_pending
     depends_on: []
     train_scope: three_channel_report_entitlement_contract
     scope:
@@ -49628,9 +49628,9 @@ prs:
     risk_level: p0_production_root_pointer_activation_control
     scope:
       - Add one protected manual preflight/apply workflow bound to exact latest main, exact active SHA/release, exact successful Task 5 staging receipt/artifact and current 342/30 pointer bytes.
-      - Revalidate SELECT-only database receipt authority at exactly 1016 covered and 1016 matching with zero missing, mismatch or outside-target rows, plus exact staged 1046/2092 product bytes; repeat the database read immediately before the root switch and require the same state hash.
+      - Revalidate SELECT-only database receipt authority at exactly 1016 covered and 1016 matching with zero missing, mismatch or outside-target rows, plus exact staged 1046/2092 product bytes; acquire a bounded server-enforced MySQL READ lock on both authority tables before the final database read, hold it through the root switch/readback, and require the same state hash.
       - Require a complete byte-identical immutable previous-generation rollback pointer whose bound projection and ledger pass the existing strict runtime loader, plus closed sitemap, llms and Search state before either phase.
-      - Refetch and require exact latest main immediately before the only production-reachable command, reject every running versioned-PHP artisan career command including database authority writers, and repeat deploy-lock plus competing-process guards at both pointer-write boundaries and again after the final database read immediately before the root rename.
+      - Refetch and require exact latest main immediately before the only production-reachable command, reject every running versioned-PHP artisan career command including database authority writers, repeat deploy-lock plus competing-process guards at both pointer-write boundaries and again after the final database read, and rely on the server-held authority-table lock rather than process scanning alone to close the final database-write race.
       - Permit apply to publish one immutable generation-local loader-contract pointer, bind lineage to the previous pointer's canonical JSON hash while retaining raw-byte drift evidence, create one adjacent no-clobber root candidate and perform exactly one atomic root active-generation pointer switch, with byte-identical readback and sanitized indeterminate receipt handling.
     allowed_paths:
       - .github/workflows/career-1046-root-generation-activation-production-ops.yml

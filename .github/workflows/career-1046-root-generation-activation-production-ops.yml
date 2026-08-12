@@ -142,6 +142,8 @@ jobs:
               candidate_file_write_count: 0,
               pointer_write_count: 0,
               root_pointer_switch_count: 0,
+              database_exclusion_lock_acquired: false,
+              database_exclusion_lock_released: false,
               database_select_only: true,
               database_write_count: 0,
               cms_write_count: 0,
@@ -342,6 +344,8 @@ jobs:
                  and .production_write_execution == false
                  and .pointer_write_count == 0
                  and .root_pointer_switch_count == 0
+                 and .database_exclusion_lock_acquired == false
+                 and .database_exclusion_lock_released == false
                  and .writes_committed == false
                  and .zero_write_guarantee == true
                  and .automatic_retry_allowed == false' "$preflight" >/dev/null
@@ -529,6 +533,8 @@ jobs:
                     and .candidate_file_write_count == 0
                     and .pointer_write_count == 0
                     and .root_pointer_switch_count == 0
+                    and .database_exclusion_lock_acquired == false
+                    and .database_exclusion_lock_released == false
                     and .active_pointer_sha256_after == $pointer
                     and .writes_committed == false
                     and .zero_write_guarantee == true
@@ -538,6 +544,8 @@ jobs:
                     and .candidate_file_write_count == 2
                     and .pointer_write_count == 2
                     and .root_pointer_switch_count == 1
+                    and .database_exclusion_lock_acquired == true
+                    and .database_exclusion_lock_released == true
                     and .active_pointer_sha256_after != $pointer
                     and .writes_committed == true
                     and .zero_write_guarantee == false

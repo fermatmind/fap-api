@@ -180,6 +180,7 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
         $generation = Career1046RootGenerationActivation::inspectStagedGeneration($this->expected);
         $activePath = $current['active_path'];
         $before = hash_file('sha256', $activePath);
+        $databaseLockHeld = false;
 
         $result = Career1046RootGenerationActivation::activate(
             $this->expected,
@@ -187,9 +188,22 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
             $generation,
             $this->database,
             str_repeat('f', 64),
-            fn (): array => $this->database,
+            function () use (&$databaseLockHeld): array {
+                self::assertTrue($databaseLockHeld);
+
+                return $this->database;
+            },
+            function () use (&$databaseLockHeld): void {
+                self::assertFalse($databaseLockHeld);
+                $databaseLockHeld = true;
+            },
+            function () use (&$databaseLockHeld): void {
+                self::assertTrue($databaseLockHeld);
+                $databaseLockHeld = false;
+            },
         );
 
+        self::assertFalse($databaseLockHeld);
         self::assertSame($before, $result['active_sha256_before']);
         self::assertNotSame($before, $result['active_sha256_after']);
         self::assertSame($result['active_sha256_after'], hash_file('sha256', $activePath));
@@ -296,6 +310,8 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
                 $this->database,
                 str_repeat('f', 64),
                 fn (): array => $this->database,
+                static fn () => null,
+                static fn () => null,
             );
             self::fail('A deploy lock must fail closed before activation writes.');
         } catch (Career1046RootActivationFailure $failure) {
@@ -314,6 +330,7 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
         $activePath = $current['active_path'];
         $before = hash_file('sha256', $activePath);
         $drifted = [...$this->database, 'current_state_sha256' => str_repeat('0', 64)];
+        $databaseLockHeld = false;
 
         try {
             Career1046RootGenerationActivation::activate(
@@ -322,13 +339,26 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
                 $generation,
                 $this->database,
                 str_repeat('f', 64),
-                static fn (): array => $drifted,
+                function () use (&$databaseLockHeld, $drifted): array {
+                    self::assertTrue($databaseLockHeld);
+
+                    return $drifted;
+                },
+                function () use (&$databaseLockHeld): void {
+                    self::assertFalse($databaseLockHeld);
+                    $databaseLockHeld = true;
+                },
+                function () use (&$databaseLockHeld): void {
+                    self::assertTrue($databaseLockHeld);
+                    $databaseLockHeld = false;
+                },
             );
             self::fail('Late database authority drift must fail before the root pointer switch.');
         } catch (Career1046RootActivationFailure $failure) {
             self::assertSame('DATABASE_AUTHORITY_CHANGED_BEFORE_SWITCH', $failure->safeCode);
         }
 
+        self::assertFalse($databaseLockHeld);
         self::assertSame($before, hash_file('sha256', $activePath));
         self::assertFileExists($this->privateRoot.'/career_generation_authority/generations/'
             .$this->expected['generation_id'].'/generation-pointer.json');
@@ -386,6 +416,12 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
             'DEPLOY_LOCK_PRESENT',
             'CONFLICTING_AUTHORITY_PROCESS_PRESENT',
             'DATABASE_AUTHORITY_CHANGED_BEFORE_SWITCH',
+            'DATABASE_EXCLUSION_LOCK_FAILED',
+            'DATABASE_EXCLUSION_UNLOCK_FAILED',
+            'LOCK TABLES `occupations` READ, `index_states` READ',
+            'UNLOCK TABLES',
+            'database_exclusion_lock_acquired',
+            'database_exclusion_lock_released',
             'career.1046.root_generation_activation.v1',
             'receipt_covered_count == 1016',
             'matching_count == 1016',
@@ -424,7 +460,7 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
         self::assertGreaterThanOrEqual(2, substr_count($workflow, 'git fetch --no-tags origin main:refs/remotes/origin/main'));
         self::assertSame(3, substr_count($runner, 'self::assertNoConflictingOperation($expected);'));
         self::assertMatchesRegularExpression(
-            '/\$databaseNow = \$databaseRevalidator\(\);.*DATABASE_AUTHORITY_CHANGED_BEFORE_SWITCH.*self::assertNoConflictingOperation\(\$expected\);.*ACTIVE_POINTER_CHANGED_BEFORE_SWITCH/s',
+            '/\$databaseLockAcquirer\(\);.*\$databaseNow = \$databaseRevalidator\(\);.*DATABASE_AUTHORITY_CHANGED_BEFORE_SWITCH.*self::assertNoConflictingOperation\(\$expected\);.*ACTIVE_POINTER_CHANGED_BEFORE_SWITCH.*rename\(\$activeCandidate.*\$databaseLockReleaser\(\);/s',
             $runner,
         );
     }
