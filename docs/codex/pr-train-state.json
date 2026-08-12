@@ -105760,5 +105760,33 @@
     "deploy_allowed": false,
     "transitions": [{"at": "2026-08-12T14:30:00+08:00", "status": "implementation_in_progress", "note": "Started from latest origin/main in an isolated worktree. Scope is limited to suppressing slow-query application-log writes for existing signed, unexpired exact Career verify-only reads while preserving normal, unsigned, forged, expired and non-Career telemetry. No workflow dispatch, SSH, production/staging access, deploy, database, CMS, cache, pointer, sitemap, llms or Search action occurred."}, {"at": "2026-08-12T14:36:46+08:00", "status": "local_validation_passed", "note": "Focused slow-query telemetry coverage proves signed Career directory/detail verifier requests issue no application warning, while unsigned, expired, forged and non-Career requests retain SLOW_QUERY_DETECTED logging. Pint, PHP syntax, YAML/JSON parsing and diff checks pass in the isolated worktree with its own Composer dependencies. No workflow dispatch, SSH, production/staging access or controlled external action occurred."}, {"at": "2026-08-12T14:41:57+08:00", "status": "github_review_repairing", "note": "Exact-head review found a P2 performance issue: non-slow queries should return at the existing threshold guard before resolving the Career authorizer. The guard is now ordered that way; verify-only suppression remains limited to queries that otherwise write SLOW_QUERY_DETECTED."}],
     "updated_at": "2026-08-12T14:41:57+08:00"
+  },
+  "CAREER-1046-DISCOVERABILITY-RELEASE-CONTROL-11B": {
+    "id": "CAREER-1046-DISCOVERABILITY-RELEASE-CONTROL-11B",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-1046-discoverability-release-control",
+    "title": "CAREER-1046-DISCOVERABILITY-RELEASE-CONTROL-11B: release exact Career generation sitemap and llms permit",
+    "status": "local_validation_passed",
+    "depends_on": ["CAREER-1046-PUBLIC-PRODUCT-VERIFY-ZERO-WRITE-FIX-10A"],
+    "allowed_paths": [".github/workflows/career-1046-discoverability-release-control.yml", "backend/app/Domain/Career/Publish/Career1046DiscoverabilityReleaseGate.php", "backend/app/Services/SEO/SitemapGenerator.php", "backend/scripts/operations/career_1046_discoverability_release_control.php", "backend/tests/Sre/Career1046DiscoverabilityReleaseControlTest.php", "docs/operations/career-1046-discoverability-release-control.md", "docs/codex/pr-train.yaml", "docs/codex/pr-train-state.json"],
+    "checks": {
+      "authorization": {"status": "passed", "evidence": "The Career 1046 execution goal authorizes this unexecuted Task 7B control-plane PR; all workflow dispatch and production/staging actions remain forbidden."},
+      "dependency": {"status": "passed", "evidence": "Task 4B, its immediate correction, and Task 7A.1 are merged on origin/main with required checks passing."}
+    },
+    "production_write_execution": false,
+    "production_workflow_dispatched": false,
+    "staging_workflow_dispatched": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "cache_mutation": false,
+    "artifact_mutation": false,
+    "pointer_mutation": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "url_submission": false,
+    "deploy_allowed": false,
+    "transitions": [{"at": "2026-08-12T15:20:00+08:00", "status": "implementation_in_progress", "note": "Started from latest origin/main in an isolated worktree. Scope is the unexecuted Task 7B discoverability-release control plane only. No workflow dispatch, SSH, production/staging access, deploy, migration, CMS, database, cache, pointer, sitemap, llms, Search, IndexNow, GSC, or URL Inspection action occurred."}, {"at": "2026-08-12T15:42:00+08:00", "status": "local_validation_passed", "note": "The exact same-generation permit contract, pointer/document/count/cross-generation fail-closed paths, Task 7A artifact guards, fresh preflight binding, Search hold, and write allowlist pass. Focused Task 7B plus sitemap regression coverage passed 20 tests / 558 assertions; Pint, PHP syntax, actionlint, train YAML/JSON parsing, and diff checks pass. The isolated worktree lacks ignored .env, producing non-failing framework bootstrap warnings only. No workflow dispatch, SSH, production/staging access, or controlled external action occurred."}],
+    "updated_at": "2026-08-12T15:42:00+08:00"
   }
 }

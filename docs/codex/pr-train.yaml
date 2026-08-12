@@ -49841,3 +49841,52 @@ prs:
     deploy_allowed: false
     content_authority: Task 3B receipt-bound database authority plus the frozen manifest; the artifact remains inactive candidate evidence
     repository_rule_impact: closes the producer-to-Task-5 artifact contract without authorizing production execution
+
+  - id: CAREER-1046-DISCOVERABILITY-RELEASE-CONTROL-11B
+    repo: fap-api
+    base: main
+    branch: codex/career-1046-discoverability-release-control
+    title: "CAREER-1046-DISCOVERABILITY-RELEASE-CONTROL-11B: release exact Career generation sitemap and llms permit"
+    status: implementation_in_progress
+    depends_on:
+      - CAREER-1046-PUBLIC-PRODUCT-VERIFY-ZERO-WRITE-FIX-10A
+    train_scope: career_1046_discoverability_release_control
+    risk_level: controlled_discoverability_release
+    scope:
+      - Add the manual protected preflight/apply control and a same-generation runtime permit gate for exactly 1046 Career slugs and 2092 locale rows.
+      - Bind successful unexpired Task 7A evidence, active/immutable pointer bytes, product documents, and the SELECT-only Task 3B authority state.
+    allowed_paths:
+      - .github/workflows/career-1046-discoverability-release-control.yml
+      - backend/app/Domain/Career/Publish/Career1046DiscoverabilityReleaseGate.php
+      - backend/app/Services/SEO/SitemapGenerator.php
+      - backend/scripts/operations/career_1046_discoverability_release_control.php
+      - backend/tests/Sre/Career1046DiscoverabilityReleaseControlTest.php
+      - docs/operations/career-1046-discoverability-release-control.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Dispatch any workflow or access production/staging state while implementing this control.
+      - Modify a generation/root pointer, CMS, product documents, database, cache/warm state, deployment, migration, process, Search, IndexNow, GSC, or URL Inspection.
+    validation:
+      - cd backend && php artisan test tests/Sre/Career1046DiscoverabilityReleaseControlTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Domain/Career/Publish/Career1046DiscoverabilityReleaseGate.php app/Services/SEO/SitemapGenerator.php scripts/operations/career_1046_discoverability_release_control.php tests/Sre/Career1046DiscoverabilityReleaseControlTest.php
+      - actionlint .github/workflows/career-1046-discoverability-release-control.yml
+      - php -l for changed PHP files; parse train YAML/JSON; git diff --check
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    workflow_policy_change: true
+    production_write_execution: false
+    production_read_only_evidence: false
+    production_workflow_dispatched: false
+    staging_workflow_dispatched: false
+    database_mutation: false
+    cms_mutation: false
+    cache_mutation: false
+    artifact_mutation: false
+    pointer_mutation: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: exact Task 7A receipt, active generation pointer, immutable document bytes, and Task 3B database authority; the control remains unexecuted
+    repository_rule_impact: adds a fail-closed same-generation discoverability permit without authorizing execution
