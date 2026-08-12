@@ -7,6 +7,7 @@ use App\Domain\Career\Publish\CareerGenerationCanonicalJson;
 use App\Domain\Career\Publish\CareerVerifiedRolloutBatchSlugAuthority;
 use App\Models\IndexState;
 use App\Models\Occupation;
+use FermatMind\Operations\CareerPublicationIndexReconciliationPreflight;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\DB;
@@ -19,6 +20,7 @@ final class Career1046DiscoverabilityReleaseFailure extends RuntimeException
     }
 }
 
+/** @review-surface career_trust_manifest */
 final class Career1046DiscoverabilityReleaseControl
 {
     public const CONTRACT_VERSION = 'career.1046.discoverability_release_control.v1';
@@ -109,6 +111,9 @@ final class Career1046DiscoverabilityReleaseControl
         if (! hash_equals($expected['control_plane_sha'], $expected['release_sha'])) {
             throw new Career1046DiscoverabilityReleaseFailure('RELEASE_CONTROL_PLANE_SHA_MISMATCH');
         }
+        $expected['preflight_receipt_sha256'] = $mode === 'apply'
+            ? self::sha('CAREER_DISCOVERABILITY_PREFLIGHT_RECEIPT_SHA256')
+            : null;
 
         return $expected;
     }
@@ -219,7 +224,10 @@ final class Career1046DiscoverabilityReleaseControl
         if (getenv('CAREER_DISCOVERABILITY_APPLY_AUTHORIZED') !== '1') {
             throw new Career1046DiscoverabilityReleaseFailure('APPLY_NOT_AUTHORIZED');
         }
-        $preflight = self::sha('CAREER_DISCOVERABILITY_PREFLIGHT_RECEIPT_SHA256');
+        $preflight = $expected['preflight_receipt_sha256'];
+        if (! is_string($preflight)) {
+            throw new Career1046DiscoverabilityReleaseFailure('PREFLIGHT_RECEIPT_INVALID');
+        }
         $phrase = 'I explicitly approve Career 1046 discoverability release for generation '.$expected['generation_id'].' from preflight receipt '.$preflight.'; release exactly 2092 sitemap locale URLs and 1046 llms slugs, keep Search, IndexNow, GSC, and URL Inspection disabled.';
         if (! hash_equals($phrase, self::required('CAREER_DISCOVERABILITY_OPERATOR_APPROVAL_PHRASE'))) {
             throw new Career1046DiscoverabilityReleaseFailure('APPLY_APPROVAL_INVALID');
@@ -234,6 +242,8 @@ final class Career1046DiscoverabilityReleaseControl
         if (file_exists($finalDir) || is_link($finalDir)) {
             throw new Career1046DiscoverabilityReleaseFailure('DISCOVERABILITY_RELEASE_ALREADY_EXISTS');
         }
+        self::$writes['production_write_execution'] = true;
+        self::$writes['write_commit_state'] = 'ambiguous';
         $parent = dirname($finalDir);
         if (! is_dir($parent) && ! mkdir($parent, 0750, true) && ! is_dir($parent)) {
             throw new Career1046DiscoverabilityReleaseFailure('DISCOVERABILITY_RELEASE_PARENT_CREATE_FAILED');
@@ -252,6 +262,7 @@ final class Career1046DiscoverabilityReleaseControl
             }
             self::$writes['discoverability_release_write_count'] = 1;
             self::$writes['writes_committed'] = true;
+            self::$writes['write_commit_state'] = 'committed';
         } catch (Throwable $failure) {
             @unlink($temporary.'/release.json');
             @rmdir($temporary);
@@ -267,6 +278,7 @@ final class Career1046DiscoverabilityReleaseControl
             'control_plane_sha' => $expected['control_plane_sha'], 'release_sha' => $expected['release_sha'], 'release_name_sha256' => hash('sha256', $expected['release_name']),
             'generation_id' => $authority['generation_id'], 'active_pointer_sha256' => $authority['active_pointer_sha256'], 'immutable_pointer_sha256' => $authority['immutable_pointer_sha256'],
             'task7a_run_id' => $expected['task7a_run_id'], 'task7a_run_attempt' => $expected['task7a_run_attempt'], 'task7a_artifact_digest' => $expected['task7a_artifact_digest'], 'task7a_receipt_sha256' => $expected['task7a_receipt_sha256'],
+            'preflight_receipt_sha256' => $expected['preflight_receipt_sha256'],
             'workflow_run_id' => $expected['workflow_run_id'], 'workflow_run_attempt' => $expected['workflow_run_attempt'],
             'database_state_sha256' => $database['current_state_sha256'], 'slug_count' => 1046, 'locale_row_count' => 2092, 'document_sha256' => $authority['document_sha256'],
             ...self::$writes,
@@ -282,7 +294,7 @@ final class Career1046DiscoverabilityReleaseControl
     /** @return array<string, int|bool|string> */
     private static function emptyWrites(): array
     {
-        return ['production_write_execution' => false, 'discoverability_release_write_count' => 0, 'pointer_write_count' => 0, 'database_write_count' => 0, 'cms_write_count' => 0, 'cache_write_count' => 0, 'sitemap_write_count' => 0, 'llms_write_count' => 0, 'search_submission_count' => 0, 'deploy_count' => 0, 'migration_count' => 0, 'restart_count' => 0, 'warm_count' => 0, 'writes_committed' => false, 'automatic_retry_allowed' => false];
+        return ['production_write_execution' => false, 'write_commit_state' => 'confirmed_zero_write', 'discoverability_release_write_count' => 0, 'pointer_write_count' => 0, 'database_write_count' => 0, 'cms_write_count' => 0, 'cache_write_count' => 0, 'sitemap_write_count' => 0, 'llms_write_count' => 0, 'search_submission_count' => 0, 'deploy_count' => 0, 'migration_count' => 0, 'restart_count' => 0, 'warm_count' => 0, 'writes_committed' => false, 'automatic_retry_allowed' => false];
     }
 
     private static function emit(array $receipt): void

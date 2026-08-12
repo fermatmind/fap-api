@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace App\Domain\Career\Publish;
 
 use RuntimeException;
+use Throwable;
 
 /**
  * Reads the separately released Career 1046 sitemap/llms permit.
  *
- * The generation pointer remains immutable and discoverability-closed.  A
- * permit is accepted only for the currently selected 1046 generation and its
- * exact raw pointer/document bytes; all other 1046 states fail closed.
+ * One instance resolves one immutable authority snapshot. The frozen 1046
+ * cohort is withheld on every missing, malformed, or drifted authority state;
+ * Career URLs outside that cohort retain their existing eligibility.
  */
 final class Career1046DiscoverabilityReleaseGate
 {
@@ -25,33 +26,36 @@ final class Career1046DiscoverabilityReleaseGate
 
     public const TARGET_LOCALE_ROW_SET_SHA256 = 'c9878e76c817cc09448c32b1dcba3152b22821af34a31204840eb77a2d65857e';
 
-    /** @return bool Whether this exact 1046 generation is allowed into sitemap and llms. */
+    /** @var null|array{target:array<string,true>,released:array<string,true>,identity:string} */
+    private ?array $snapshot = null;
+
+    private int $validationCount = 0;
+
+    public function __construct(private readonly ?string $authorityRoot = null) {}
+
+    /** @return bool Whether this exact locale row is allowed into sitemap and llms. */
     public function allows(string $slug, string $locale): bool
     {
-        $root = storage_path('app/private/career_generation_authority');
-        if (! is_file($root.'/active-generation.json')) {
-            return true;
-        }
-        try {
-            $activePath = $root.'/active-generation.json';
-            $activeRaw = $this->readFile($root, $activePath);
-            $active = $this->decode($activeRaw);
-            $payload = $active['payload'] ?? null;
-            $generationId = is_array($payload) ? ($payload['generation_id'] ?? null) : null;
-
-            // This gate owns only the Career 1046 generation. Existing
-            // non-1046 authority remains governed by its existing policy.
-            if (! is_string($generationId) || ! str_starts_with($generationId, 'career-1046-')) {
-                return true;
-            }
-
-            $permit = $this->loadPermit($root, $generationId, $activeRaw);
-            $locales = $permit['payload']['released_locale_rows'] ?? null;
-
-            return is_array($locales) && in_array(strtolower($slug).'|'.$this->locale($locale), $locales, true);
-        } catch (RuntimeException) {
+        $snapshot = $this->snapshot();
+        $normalizedSlug = strtolower(trim($slug));
+        if (isset($snapshot['target']['*'])) {
             return false;
         }
+        if (! isset($snapshot['target'][$normalizedSlug])) {
+            return true;
+        }
+
+        return isset($snapshot['released'][$normalizedSlug.'|'.$this->locale($locale)]);
+    }
+
+    public function cacheIdentity(): string
+    {
+        return $this->snapshot()['identity'];
+    }
+
+    public function validationCount(): int
+    {
+        return $this->validationCount;
     }
 
     /**
@@ -61,6 +65,97 @@ final class Career1046DiscoverabilityReleaseGate
      * @param  array<string, mixed>  $permit
      */
     public function validatePermit(string $root, array $permit): void
+    {
+        $activeRaw = $this->readFile($root, $root.'/active-generation.json');
+        $this->validatePermitAgainstActive($root, $permit, $activeRaw, $this->decode($activeRaw));
+    }
+
+    /** @return array{target:array<string,true>,released:array<string,true>,identity:string} */
+    private function snapshot(): array
+    {
+        if ($this->snapshot !== null) {
+            return $this->snapshot;
+        }
+
+        $target = $this->frozenTargetSlugSet();
+        $identity = [
+            'schema_version' => 'career.1046.discoverability_cache_identity.v1',
+            'target_slug_set_sha256' => self::TARGET_SLUG_SET_SHA256,
+            'state' => 'held',
+            'active_pointer_sha256' => null,
+            'permit_sha256' => null,
+        ];
+        $released = [];
+        $root = $this->authorityRoot ?? storage_path('app/private/career_generation_authority');
+
+        try {
+            $activeRaw = $this->readFile($root, $root.'/active-generation.json');
+            $identity['active_pointer_sha256'] = hash('sha256', $activeRaw);
+            $active = $this->decode($activeRaw);
+            $payload = $active['payload'] ?? null;
+            $generationId = is_array($payload) ? ($payload['generation_id'] ?? null) : null;
+            if (! is_string($generationId) || preg_match('/^career-1046-[0-9a-f]{32}$/', $generationId) !== 1) {
+                throw new RuntimeException('career_1046_discoverability_active_generation_invalid');
+            }
+
+            $permitRaw = $this->readFile(
+                $root,
+                $root.'/discoverability-releases/'.$generationId.'/release.json',
+            );
+            $identity['permit_sha256'] = hash('sha256', $permitRaw);
+            $permit = $this->decode($permitRaw);
+            $this->validationCount++;
+            $this->validatePermitAgainstActive($root, $permit, $activeRaw, $active);
+            $rows = $permit['payload']['released_locale_rows'] ?? null;
+            if (! is_array($rows)) {
+                throw new RuntimeException('career_1046_discoverability_locale_rows_invalid');
+            }
+            $released = array_fill_keys($rows, true);
+            $identity['state'] = 'released';
+        } catch (Throwable) {
+            $released = [];
+        }
+
+        return $this->snapshot = [
+            'target' => $target,
+            'released' => $released,
+            'identity' => CareerGenerationCanonicalJson::sha256($identity),
+        ];
+    }
+
+    /** @return array<string, true> */
+    private function frozenTargetSlugSet(): array
+    {
+        try {
+            $manifestRaw = file_get_contents(base_path('docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json'));
+            if (! is_string($manifestRaw)) {
+                throw new RuntimeException('career_1046_discoverability_manifest_unavailable');
+            }
+            $manifest = $this->decode($manifestRaw);
+            $slugs = array_values(array_unique(array_map(
+                static fn (mixed $slug): string => is_string($slug) ? strtolower(trim($slug)) : '',
+                [
+                    ...(is_array($manifest['baseline_slugs'] ?? null) ? $manifest['baseline_slugs'] : []),
+                    ...(is_array($manifest['delta_slugs'] ?? null) ? $manifest['delta_slugs'] : []),
+                ],
+            )));
+            $slugs = array_values(array_filter($slugs, static fn (string $slug): bool => $slug !== ''));
+            sort($slugs, SORT_STRING);
+            if (count($slugs) !== self::TARGET_SLUG_COUNT
+                || ! hash_equals(self::TARGET_SLUG_SET_SHA256, hash('sha256', implode("\n", $slugs)."\n"))) {
+                throw new RuntimeException('career_1046_discoverability_target_manifest_drift');
+            }
+
+            return array_fill_keys($slugs, true);
+        } catch (Throwable) {
+            // A corrupt repository authority is not a reason to expose any
+            // Career URL through this release gate.
+            return ['*' => true];
+        }
+    }
+
+    /** @param array<string, mixed> $permit */
+    private function validatePermitAgainstActive(string $root, array $permit, string $activeRaw, array $active): void
     {
         if (($permit['schema_version'] ?? null) !== self::SCHEMA_VERSION || ! is_array($permit['payload'] ?? null)) {
             throw new RuntimeException('career_1046_discoverability_permit_schema_invalid');
@@ -84,6 +179,8 @@ final class Career1046DiscoverabilityReleaseGate
             || ($payload['locale_row_count'] ?? null) !== self::TARGET_LOCALE_ROW_COUNT
             || ($payload['target_slug_set_sha256'] ?? null) !== self::TARGET_SLUG_SET_SHA256
             || ($payload['target_locale_row_set_sha256'] ?? null) !== self::TARGET_LOCALE_ROW_SET_SHA256
+            || ($payload['sitemap_released'] ?? null) !== true
+            || ($payload['llms_released'] ?? null) !== true
             || ($payload['search_submission_enabled'] ?? null) !== false) {
             throw new RuntimeException('career_1046_discoverability_permit_contract_invalid');
         }
@@ -107,11 +204,9 @@ final class Career1046DiscoverabilityReleaseGate
             || ! hash_equals(self::TARGET_SLUG_SET_SHA256, hash('sha256', implode("\n", $slugs)."\n"))) {
             throw new RuntimeException('career_1046_discoverability_slug_set_drift');
         }
-        $activeRaw = $this->readFile($root, $root.'/active-generation.json');
         if (! hash_equals($payload['active_pointer_sha256'], hash('sha256', $activeRaw))) {
             throw new RuntimeException('career_1046_discoverability_active_pointer_drift');
         }
-        $active = $this->decode($activeRaw);
         $activePayload = $active['payload'] ?? null;
         if (! is_array($activePayload) || ($activePayload['generation_id'] ?? null) !== $generationId) {
             throw new RuntimeException('career_1046_discoverability_generation_drift');
@@ -127,24 +222,12 @@ final class Career1046DiscoverabilityReleaseGate
             throw new RuntimeException('career_1046_discoverability_document_set_invalid');
         }
         foreach ($documents as $filename => $sha256) {
+            $raw = $this->readFile($root, $root.'/generations/'.$generationId.'/'.$filename);
             if (! is_string($sha256) || preg_match('/^[0-9a-f]{64}$/', $sha256) !== 1
-                || ! hash_equals($sha256, hash('sha256', $this->readFile($root, $root.'/generations/'.$generationId.'/'.$filename)))) {
+                || ! hash_equals($sha256, hash('sha256', $raw))) {
                 throw new RuntimeException('career_1046_discoverability_document_drift');
             }
         }
-    }
-
-    /** @return array<string, mixed> */
-    private function loadPermit(string $root, string $generationId, string $activeRaw): array
-    {
-        $path = $root.'/discoverability-releases/'.$generationId.'/release.json';
-        $permit = $this->decode($this->readFile($root, $path));
-        $this->validatePermit($root, $permit);
-        if (! hash_equals((string) $permit['payload']['active_pointer_sha256'], hash('sha256', $activeRaw))) {
-            throw new RuntimeException('career_1046_discoverability_permit_pointer_drift');
-        }
-
-        return $permit;
     }
 
     /** @return array<string, mixed> */

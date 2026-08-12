@@ -20,6 +20,7 @@ class LlmsController extends Controller
     {
         return $this->cachedTextResponse(
             self::LLMS_TXT_CACHE_KEY,
+            $generator->careerDiscoverabilityCacheIdentity(),
             fn () => $this->buildLlmsTxt($generator)
         );
     }
@@ -28,16 +29,19 @@ class LlmsController extends Controller
     {
         return $this->cachedTextResponse(
             self::LLMS_FULL_TXT_CACHE_KEY,
+            $generator->careerDiscoverabilityCacheIdentity(),
             fn () => $this->buildLlmsFullTxt($generator)
         );
     }
 
-    private function cachedTextResponse(string $cacheKey, callable $builder): Response
+    private function cachedTextResponse(string $cacheKey, string $identity, callable $builder): Response
     {
         $body = cache()->get($cacheKey);
-        if (! is_string($body)) {
+        $cachedIdentity = cache()->get($cacheKey.':career-authority-identity');
+        if (! is_string($body) || ! is_string($cachedIdentity) || ! hash_equals($identity, $cachedIdentity)) {
             $body = $builder();
             cache()->put($cacheKey, $body, self::CACHE_TTL_SECONDS);
+            cache()->put($cacheKey.':career-authority-identity', $identity, self::CACHE_TTL_SECONDS);
         }
 
         return response($body, 200, [
