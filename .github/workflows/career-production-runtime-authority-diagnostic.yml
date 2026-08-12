@@ -1,0 +1,248 @@
+name: Career Production Runtime Authority Diagnostic
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_control_plane_sha:
+        description: Exact latest main SHA containing this read-only diagnostic
+        required: true
+        type: string
+      expected_active_revision:
+        description: Exact fresh production active revision
+        required: true
+        type: string
+      operator_approval_phrase:
+        description: Exact zero-write runtime authority diagnostic approval
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: deploy-${{ github.repository }}-production
+  cancel-in-progress: false
+
+jobs:
+  diagnose:
+    name: Diagnose production Career authority as runtime user without writes
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 20
+    env:
+      CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+      EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+      OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+      SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+      GH_TOKEN: ${{ github.token }}
+
+    steps:
+      - name: Initialize sanitized failure receipt before checkout
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/career-production-runtime-authority-diagnostic.json"
+          jq -n \
+            --arg control "$CONTROL_PLANE_SHA" \
+            --arg active "$EXPECTED_ACTIVE_REVISION" \
+            '{
+              contract_version: "career.production_runtime_authority_diagnostic.v1",
+              status: "FAIL_CONTROL_INITIALIZATION",
+              failed_stage: "initialize",
+              control_plane_sha: $control,
+              active_revision: $active,
+              pointer_apply_run_id: 31593321673,
+              pointer_apply_artifact_digest: "sha256:101508066a741afd44d29b4c28bd866b1fa3d4772dfda14c71da71c320c545c7",
+              pointer_apply_receipt_sha256: "e0898f6fbb438495319cf0acc8bd6f808eba18c3f3beeb4a4e7d690312c27bc4",
+              database_write_count: 0, cms_write_count: 0, cache_write_count: 0,
+              pointer_write_count: 0, artifact_write_count: 0, permission_write_count: 0,
+              publication_write_count: 0, discoverability_write_count: 0,
+              migration_count: 0, deployment_count: 0, restart_count: 0,
+              writes_committed: false
+            }' > "$receipt"
+
+      - name: Checkout exact control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Validate exact latest main and immutable pointer apply evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = refs/heads/main
+          [[ "$CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]
+          test "$GITHUB_SHA" = "$CONTROL_PLANE_SHA"
+          test "$(git rev-parse HEAD)" = "$CONTROL_PLANE_SHA"
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse origin/main)" = "$CONTROL_PLANE_SHA"
+          git cat-file -e "${EXPECTED_ACTIVE_REVISION}^{commit}"
+          git merge-base --is-ancestor "$EXPECTED_ACTIVE_REVISION" origin/main
+          expected_phrase="I explicitly approve one zero-write production Career runtime authority diagnostic for control plane ${CONTROL_PLANE_SHA}, active revision ${EXPECTED_ACTIVE_REVISION}, bound to pointer apply run 31593321673; read only the active and immutable pointers plus their exact frozen projection and ledger as www-data, with no file, permission, database, CMS, cache, publication, discoverability, migration, deploy, restart, retry, repair, or rollback action."
+          test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
+
+          run_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/31593321673")"
+          jq -e '
+            .path == ".github/workflows/career-current-generation-pointer-bootstrap-production-ops.yml"
+            and .event == "workflow_dispatch"
+            and .head_branch == "main"
+            and .head_sha == "a2e8ac02d1de5893ba890b76323478321d78a23b"
+            and .run_attempt == 1
+            and .status == "completed"
+            and .conclusion == "success"
+          ' <<<"$run_json" >/dev/null
+          artifact="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/31593321673/artifacts" --jq '.artifacts[] | select(.name == "career-current-generation-pointer-bootstrap-apply-31593321673-1" and .expired == false)')"
+          test "$(jq -r .digest <<<"$artifact")" = "sha256:101508066a741afd44d29b4c28bd866b1fa3d4772dfda14c71da71c320c545c7"
+          evidence_dir="$(mktemp -d)"
+          chmod 700 "$evidence_dir"
+          gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/$(jq -r .id <<<"$artifact")/zip" > "$evidence_dir/evidence.zip"
+          unzip -q "$evidence_dir/evidence.zip" -d "$evidence_dir/unpacked"
+          evidence="$evidence_dir/unpacked/career-current-generation-pointer-bootstrap.json"
+          test "$(sha256sum "$evidence" | awk '{print $1}')" = "e0898f6fbb438495319cf0acc8bd6f808eba18c3f3beeb4a4e7d690312c27bc4"
+          jq -e '
+            .status == "PASS_APPLY_POINTER_BOOTSTRAPPED"
+            and .workflow_run_id == 31593321673
+            and .workflow_run_attempt == 1
+            and .release_sha == "ffc0138e1abbce85c03c046d56fd4c4da09515af"
+            and .generation_id == "career-current-342-30-bootstrap-v1"
+            and .pointer_document_sha256 == "1ebfd2826be9d3b63d810d33050034e3d424c95b3db81fa49b0822c5e6b2ec08"
+            and .authority.projection_sha256 == "397f2a4ec284e9c0a6cd610447541ad4773fa7a7f3045008fab5efb334ec85c6"
+            and .authority.ledger_sha256 == "975b311bb346a090f1add678d5a6d9f1be230f87b223e2c3c829f4c7fd7aac6e"
+            and .authority.slug_count == 342 and .authority.locale_row_count == 684
+            and .authority.published_slug_count == 30 and .authority.published_locale_row_count == 60
+            and .writes_committed == true
+          ' "$evidence" >/dev/null
+          find "$evidence_dir" -type f -exec chmod 600 {} +
+          rm -rf "$evidence_dir"
+
+      - name: Validate protected production topology
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST RETIRED_DEPLOY_HOST DEPLOY_PATH; do
+            test -n "${!name:-}"
+          done
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          test "$DEPLOY_PORT" -ge 1 && test "$DEPLOY_PORT" -le 65535
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$RETIRED_DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          [[ "$DEPLOY_PATH" != *".."* ]]
+
+      - name: Start pinned SSH agent
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        run: |
+          set -euo pipefail
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Run exact runtime-user authority probe without remote writes
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/career-production-runtime-authority-diagnostic.json"
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          printf -v q_active '%q' "$EXPECTED_ACTIVE_REVISION"
+          printf -v q_control '%q' "$CONTROL_PLANE_SHA"
+          set +e
+          timeout --signal=TERM --kill-after=5s 120s \
+            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+              -o ServerAliveInterval=20 -o ServerAliveCountMax=5 \
+              -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+              "set -euo pipefail; current=\$(readlink -f $q_path/current); test -d \"\$current\"; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_active; test ! -e $q_path/.dep/deploy.lock; test \"\$(ps -eo comm=,args= | awk '\$1 == \"php\" && (\$0 ~ /dep(\\.phar)? .* production/ || \$0 ~ /artisan migrate/ || \$0 ~ /queue:reload-workers/) {n++} \$1 == \"composer\" && \$0 ~ /install/ {n++} END {print n+0}')\" = 0; release_name=\$(basename \"\$current\"); [[ \"\$release_name\" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]; release_name_sha=\$(printf '%s' \"\$release_name\" | sha256sum | awk '{print \$1}'); php_bin=\$(command -v php); test -n \"\$php_bin\"; sudo -n -u www-data -- env CAREER_RUNTIME_DIAGNOSTIC_BACKEND_ROOT=\"\$current/backend\" CAREER_RUNTIME_DIAGNOSTIC_CONTROL_PLANE_SHA=$q_control CAREER_RUNTIME_DIAGNOSTIC_ACTIVE_REVISION=$q_active CAREER_RUNTIME_DIAGNOSTIC_RELEASE_NAME_SHA256=\"\$release_name_sha\" \"\$php_bin\" /dev/stdin" \
+              < backend/scripts/operations/career_production_runtime_authority_diagnostic.php \
+              > "$receipt.remote" 2>/dev/null
+          remote_status=$?
+          set -e
+          if jq -e '
+            .contract_version == "career.production_runtime_authority_diagnostic.v1"
+            and (.status == "PASS_RUNTIME_AUTHORITY_READABLE" or .status == "FAIL_RUNTIME_AUTHORITY_DIAGNOSTIC")
+            and (.failed_stage == null or (.failed_stage | test("^[A-Z0-9_]{1,160}$")))
+          ' "$receipt.remote" >/dev/null 2>&1; then
+            mv "$receipt.remote" "$receipt"
+          else
+            jq '.status = "FAIL_REMOTE_OUTCOME_UNCLASSIFIED" | .failed_stage = "REMOTE_TRANSPORT_OR_RECEIPT_INVALID"' \
+              "$receipt" > "$receipt.next"
+            mv "$receipt.next" "$receipt"
+          fi
+          test "$remote_status" -eq 0 || true
+
+      - name: Validate sanitized zero-write receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/career-production-runtime-authority-diagnostic.json"
+          jq -e \
+            --arg control "$CONTROL_PLANE_SHA" \
+            --arg active "$EXPECTED_ACTIVE_REVISION" '
+            .contract_version == "career.production_runtime_authority_diagnostic.v1"
+            and .control_plane_sha == $control
+            and .active_revision == $active
+            and (.active_release_name_sha256 | test("^[0-9a-f]{64}$"))
+            and .pointer_apply_run_id == 31593321673
+            and .pointer_apply_artifact_digest == "sha256:101508066a741afd44d29b4c28bd866b1fa3d4772dfda14c71da71c320c545c7"
+            and .pointer_apply_receipt_sha256 == "e0898f6fbb438495319cf0acc8bd6f808eba18c3f3beeb4a4e7d690312c27bc4"
+            and .generation_id == "career-current-342-30-bootstrap-v1"
+            and .pointer_document_sha256 == "1ebfd2826be9d3b63d810d33050034e3d424c95b3db81fa49b0822c5e6b2ec08"
+            and .projection_sha256 == "397f2a4ec284e9c0a6cd610447541ad4773fa7a7f3045008fab5efb334ec85c6"
+            and .ledger_sha256 == "975b311bb346a090f1add678d5a6d9f1be230f87b223e2c3c829f4c7fd7aac6e"
+            and .database_write_count == 0 and .cms_write_count == 0 and .cache_write_count == 0
+            and .pointer_write_count == 0 and .artifact_write_count == 0 and .permission_write_count == 0
+            and .publication_write_count == 0 and .discoverability_write_count == 0
+            and .migration_count == 0 and .deployment_count == 0 and .restart_count == 0
+            and .writes_committed == false
+          ' "$receipt" >/dev/null
+
+      - name: Publish sanitized diagnostic summary
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/career-production-runtime-authority-diagnostic.json"
+          status="$(jq -r '.status' "$receipt")"
+          stage="$(jq -r '.failed_stage // "none"' "$receipt")"
+          {
+            echo "## Career production runtime authority diagnostic"
+            echo
+            echo "- Status: ${status}"
+            echo "- Stage: ${stage}"
+            echo "- Runtime user: www-data"
+            echo "- Writes committed: false"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload immutable sanitized receipt
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: career-production-runtime-authority-diagnostic-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/career-production-runtime-authority-diagnostic.json
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Enforce diagnostic outcome
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          jq -e '.status == "PASS_RUNTIME_AUTHORITY_READABLE"' \
+            "$RUNNER_TEMP/career-production-runtime-authority-diagnostic.json" >/dev/null
