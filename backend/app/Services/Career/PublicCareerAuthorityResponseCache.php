@@ -257,6 +257,39 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     }
 
     /**
+     * Resolve only an already-readable public payload for protected verification.
+     * This path never promotes legacy state, clears negative cache state, dispatches
+     * a warm, or returns a degraded shell.
+     *
+     * @return array{payload: array<string, mixed>|null, state: 'fresh'|'not_found'|'stale'}
+     */
+    public function jobDetailVerifyOnlyRead(string $slug, string $publicLocale = 'zh-CN'): array
+    {
+        $normalizedSlug = strtolower(trim($slug));
+        if ($normalizedSlug === '') {
+            return ['payload' => null, 'state' => 'not_found'];
+        }
+
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+        $projectionItem = $this->effectiveJobDetailProjectionItem($normalizedSlug, $normalizedLocale);
+        if (! $this->jobDetailProjectionItemIsPublished($projectionItem)) {
+            return ['payload' => null, 'state' => 'not_found'];
+        }
+
+        $readiness = $this->jobDetailCacheReadiness($normalizedSlug, $normalizedLocale);
+        $classification = (string) ($readiness['classification'] ?? '');
+        $payload = is_array($readiness['payload'] ?? null) ? $readiness['payload'] : null;
+        if ($payload === null || ! in_array($classification, ['ready_active', 'ready_lkg', 'legacy_migratable'], true)) {
+            return ['payload' => null, 'state' => 'not_found'];
+        }
+
+        return [
+            'payload' => $this->normalizeJobDetailReviewContract($payload),
+            'state' => $classification === 'ready_active' ? 'fresh' : 'stale',
+        ];
+    }
+
+    /**
      * Inspect the exact active -> LKG -> legacy cache chain without promoting,
      * warming, forgetting, or reading content authority.
      *

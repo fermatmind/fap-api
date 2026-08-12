@@ -17,6 +17,8 @@ final class CareerJobDetailController extends Controller
 
     private const PUBLIC_READ_CACHE_HEADER = 'X-Fermat-Public-Read-Cache';
 
+    private const VERIFY_ONLY_REQUEST_HEADER = 'X-Fermat-Career-Verify-Only';
+
     private const INTERNAL_READER_PAYLOAD_KEYS = [
         'source_id',
         'source_ids',
@@ -53,7 +55,9 @@ final class CareerJobDetailController extends Controller
     public function show(Request $request, string $slug): JsonResponse
     {
         $publicLocale = is_string($request->query('locale')) ? (string) $request->query('locale') : 'zh-CN';
-        $read = $this->responseCache->jobDetailRead($slug, $publicLocale);
+        $read = $request->header(self::VERIFY_ONLY_REQUEST_HEADER) === '1'
+            ? $this->responseCache->jobDetailVerifyOnlyRead($slug, $publicLocale)
+            : $this->responseCache->jobDetailRead($slug, $publicLocale);
         $payload = $read['payload'];
 
         if ($payload === null) {

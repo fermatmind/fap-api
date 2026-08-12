@@ -1,0 +1,44 @@
+# Career 1046 public product verify-only control
+
+## Scope
+
+`Career 1046 Public Product Verify Only` is a protected, manual-dispatch-only production evidence lane. This repository change defines the lane; it does not dispatch it or establish an SSH session.
+
+The lane requires exact latest `main`, an active production release whose SHA equals that control plane, the exact active Career 1046 generation ID, the raw SHA-256 of `active-generation.json`, and an exact operator phrase binding all of those identities. The protected production environment supplies routing and SSH material; receipts never expose those values or raw public payloads.
+
+## Read-only assertions
+
+The streamed runner first proves the active release name, `REVISION`, and checked-in runner SHA. It then reads the root pointer and byte-identical immutable generation pointer, validates the canonical pointer payload hash, frozen 1046 authority hashes, 1046/2092 counts, and closed sitemap/llms/Search flags. The root pointer must bind the exact generation manifest, EN/ZH directory documents, and EN/ZH detail documents by path and raw SHA-256.
+
+The immutable product documents must contain one exact 1046-slug set in each locale and one exact 2092 locale-row set. Every directory row must bind the canonical hash of its same-generation detail payload. Detail requests carry `X-Fermat-Career-Verify-Only: 1`, which selects a fail-closed response-cache read path that never promotes legacy state, clears negative cache state, dispatches a warm, logs cache recovery, or returns a degraded shell. The public API is then read without redirects or retries:
+
+- EN directory: exactly 1046 unique target slugs;
+- ZH directory: exactly 1046 unique target slugs;
+- EN/ZH detail targets: exactly 2092;
+- missing, duplicate, extra, 404, 5xx, timeout, other status, and generation-payload mismatch: all zero.
+
+After all public reads, both active and immutable pointer bytes are read again and must remain byte-identical to the approved pointer SHA. The uploaded receipt contains only release/generation hashes, bounded counts, safe failure codes, and explicit zero-write guarantees. It never stores response bodies, raw paths, topology, SSH diagnostics, or slugs.
+
+## Negative boundary
+
+This lane has no apply mode. It does not repair, warm, rollback, deploy, migrate, restart, mutate DB/CMS/cache/pointers, release sitemap or llms state, submit Search/IndexNow/GSC/URL Inspection requests, or change canonical/noindex/JSON-LD/claims. It has no automatic retry. A timeout, transport error, malformed payload, pointer drift, generation mismatch, missing/duplicate/extra target, or any non-exact count fails closed.
+
+## Repository-only acceptance
+
+Do not dispatch the workflow during this PR. Validate the control plane only:
+
+```bash
+cd backend
+php artisan test tests/Sre/Career1046PublicProductVerifyOnlyWorkflowTest.php --no-ansi
+vendor/bin/pint --test scripts/operations/career_1046_public_product_verify_only.php tests/Sre/Career1046PublicProductVerifyOnlyWorkflowTest.php
+php -l scripts/operations/career_1046_public_product_verify_only.php
+php -l tests/Sre/Career1046PublicProductVerifyOnlyWorkflowTest.php
+```
+
+```bash
+actionlint .github/workflows/career-1046-public-product-verify-only.yml
+php backend/scripts/operations/verify_career_1046_current_state_freeze.php
+ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+git diff --check
+```

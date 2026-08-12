@@ -103,6 +103,39 @@ final class CareerJobDetailReadModel10kTest extends TestCase
         Queue::assertNothingPushed();
     }
 
+    public function test_verify_only_header_fails_closed_without_warm_or_negative_cache_mutation(): void
+    {
+        Queue::fake();
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        Cache::put($cache->jobDetailNegativeKey('one', 'en'), true, 300);
+
+        $this->withHeader('X-Fermat-Career-Verify-Only', '1')
+            ->getJson('/api/v0.5/career/jobs/one?locale=en')
+            ->assertNotFound();
+
+        $this->assertTrue(Cache::has($cache->jobDetailNegativeKey('one', 'en')));
+        $this->assertNull(Cache::get($cache->jobDetailActiveVersionKey('one', 'en')));
+        Queue::assertNothingPushed();
+    }
+
+    public function test_verify_only_header_reads_legacy_payload_without_promoting_it(): void
+    {
+        Queue::fake();
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $legacy = ['identity' => ['canonical_slug' => 'one'], 'legacy' => true];
+        Cache::forever($cache->jobDetailCacheKey('one', 'en'), $legacy);
+
+        $this->withHeader('X-Fermat-Career-Verify-Only', '1')
+            ->getJson('/api/v0.5/career/jobs/one?locale=en')
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
+            ->assertJsonPath('legacy', true);
+
+        $this->assertSame($legacy, Cache::get($cache->jobDetailCacheKey('one', 'en')));
+        $this->assertNull(Cache::get($cache->jobDetailActiveVersionKey('one', 'en')));
+        Queue::assertNothingPushed();
+    }
+
     public function test_legacy_projection_is_promoted_and_reported_as_stale_for_the_current_response(): void
     {
         $cache = app(PublicCareerAuthorityResponseCache::class);
