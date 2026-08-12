@@ -105582,7 +105582,7 @@
     "base": "main",
     "branch": "codex/career-1046-public-product-verify-10",
     "title": "CAREER-1046-PUBLIC-PRODUCT-VERIFY-ONLY-10: add generation-bound public product verification",
-    "status": "local_validation_passed",
+    "status": "github_checks_pending",
     "depends_on": [
       "CAREER-1046-ATOMIC-ROOT-ACTIVATION-CONTROL-09"
     ],
@@ -105620,7 +105620,7 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
+    "commit_sha": "37845ce77d9c2a634b30572ad21e2f3fa7fb59b5",
     "pr_url": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -105649,8 +105649,13 @@
         "at": "2026-08-12T10:29:42+08:00",
         "status": "local_validation_passed",
         "note": "Task 7A implementation and exact nine-path scope passed focused PHPUnit, the complete Career detail read-model test, Pint, php -l, actionlint, workflow/train parsing, route listing, fresh SQLite migration, frozen zero-write verification, git diff checks and the heavy-guarded full ci_verify_mbti chain. Generated Big Five compiler output was explicitly restored before scope validation. No production or staging workflow was dispatched and no SSH or controlled external read/write occurred."
+      },
+      {
+        "at": "2026-08-12T10:30:31+08:00",
+        "status": "github_checks_pending",
+        "note": "Committed the exact nine-path Task 7A implementation as 37845ce77d9c2a634b30572ad21e2f3fa7fb59b5 after explicit staging and cached diff validation. The next action is ordinary branch push and PR creation only; the protected workflow remains undispatched."
       }
     ],
-    "updated_at": "2026-08-12T10:29:42+08:00"
+    "updated_at": "2026-08-12T10:30:31+08:00"
   }
 }
