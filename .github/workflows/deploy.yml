@@ -9,6 +9,7 @@ on:
       - ".github/actions/controlled-operation-gate/action.yml"
       - ".github/scripts/controlled-operation-gate.cjs"
       - ".github/workflows/backend-production-auto-deploy.yml"
+      - ".github/workflows/career-production-runtime-authority-diagnostic.yml"
       - ".github/workflows/career-current-generation-pointer-bootstrap-staging-ops.yml"
       - ".github/workflows/career-staging-authority-artifact-recovery.yml"
       - ".github/workflows/content-promotion-automation.yml"
@@ -16,6 +17,8 @@ on:
       - ".github/workflows/deploy.yml"
       - "backend/tests/Sre/ControlledWorkflowOperationGateTest.php"
       - "backend/tests/Sre/BackendProductionAutoDeployWorkflowTest.php"
+      - "backend/scripts/operations/career_production_runtime_authority_diagnostic.php"
+      - "backend/tests/Sre/CareerProductionRuntimeAuthorityDiagnosticWorkflowTest.php"
       - "backend/tests/Sre/DeployStorageAndDatabaseConfigTest.php"
       - "tests/ops/controlled-operation-gate.test.cjs"
   workflow_dispatch:
