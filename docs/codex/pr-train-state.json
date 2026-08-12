@@ -105769,7 +105769,7 @@
     "title": "CAREER-1046-DISCOVERABILITY-RELEASE-CONTROL-11B: release exact Career generation sitemap and llms permit",
     "status": "local_validation_passed",
     "depends_on": ["CAREER-1046-PUBLIC-PRODUCT-VERIFY-ZERO-WRITE-FIX-10A"],
-    "allowed_paths": [".github/workflows/career-1046-discoverability-release-control.yml", "backend/app/Domain/Career/Publish/Career1046DiscoverabilityReleaseGate.php", "backend/app/Services/SEO/SitemapGenerator.php", "backend/scripts/operations/career_1046_discoverability_release_control.php", "backend/tests/Sre/Career1046DiscoverabilityReleaseControlTest.php", "docs/operations/career-1046-discoverability-release-control.md", "docs/codex/pr-train.yaml", "docs/codex/pr-train-state.json"],
+    "allowed_paths": [".github/workflows/career-1046-discoverability-release-control.yml", "backend/app/Domain/Career/Publish/Career1046DiscoverabilityReleaseGate.php", "backend/app/Services/SEO/SitemapGenerator.php", "backend/scripts/operations/career_1046_discoverability_release_control.php", "backend/tests/Sre/Career1046DiscoverabilityReleaseControlTest.php", "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php", "docs/operations/career-1046-discoverability-release-control.md", "docs/codex/pr-train.yaml", "docs/codex/pr-train-state.json"],
     "checks": {
       "authorization": {"status": "passed", "evidence": "The Career 1046 execution goal authorizes this unexecuted Task 7B control-plane PR; all workflow dispatch and production/staging actions remain forbidden."},
       "dependency": {"status": "passed", "evidence": "Task 4B, its immediate correction, and Task 7A.1 are merged on origin/main with required checks passing."}
