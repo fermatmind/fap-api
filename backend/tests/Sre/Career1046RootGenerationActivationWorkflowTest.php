@@ -508,6 +508,7 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
         }
 
         self::assertGreaterThanOrEqual(2, substr_count($workflow, 'git fetch --no-tags origin main:refs/remotes/origin/main'));
+        self::assertSame(2, substr_count($workflow, 'release_name_sha256 == $release_name_sha256'));
         self::assertGreaterThanOrEqual(3, substr_count($runner, 'self::assertNoConflictingOperation($expected);'));
         self::assertMatchesRegularExpression(
             '/\$databaseLockAcquirer\(\);.*\$databaseNow = \$databaseRevalidator\(\);.*DATABASE_AUTHORITY_CHANGED_BEFORE_SWITCH.*validateCandidateRuntimeAuthority\(\$pointer, \$current\);.*writePointerCandidate\(.*\$immutableCandidate.*rename\(\$immutableCandidate.*writePointerCandidate\(.*\$activeCandidate.*rename\(\$activeCandidate.*\$databaseLockReleaser\(\);/s',

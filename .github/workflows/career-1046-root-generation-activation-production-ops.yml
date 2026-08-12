@@ -233,6 +233,7 @@ jobs:
           jq -e \
             --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
             --arg release "$EXPECTED_RELEASE_SHA" \
+            --arg release_name_sha256 "$(printf '%s' "$EXPECTED_RELEASE_NAME" | sha256sum | awk '{print $1}')" \
             --arg generation "$GENERATION_ID" \
             --arg previous "$EXPECTED_PREVIOUS_GENERATION_ID" \
             --arg pointer "$EXPECTED_PREVIOUS_POINTER_SHA256" \
@@ -244,6 +245,7 @@ jobs:
              and .status == "PASS_APPLY_PRODUCT_DATA_STAGED"
              and .control_plane_sha == $control
              and .release_sha == $release
+             and .release_name_sha256 == $release_name_sha256
              and .generation_id == $generation
              and .previous_generation_id == $previous
              and .previous_pointer_sha256 == $pointer
