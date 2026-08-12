@@ -30,7 +30,6 @@ final class BackendProductionAutoDeployWorkflowTest extends TestCase
             "github.event.workflow_run.head_branch == 'main'",
             'github.event.workflow_run.head_repository.full_name == github.repository',
             'github.rest.actions.getWorkflowRun',
-            "staging.name !== 'Deploy Application'",
             "staging.path !== '.github/workflows/deploy.yml'",
             'staging.head_repository?.full_name !== expectedRepository',
             'main.data.commit.sha !== deploySha',
@@ -82,6 +81,8 @@ final class BackendProductionAutoDeployWorkflowTest extends TestCase
         ] as $forbidden) {
             $this->assertStringNotContainsString($forbidden, $source);
         }
+
+        $this->assertStringNotContainsString("staging.name !== 'Deploy Application'", $source);
     }
 
     #[Test]
