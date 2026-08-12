@@ -694,7 +694,10 @@ final class Top100FrozenCmsBatchAuthority
             'authority_source_package' => 'content-promotion/TOP100/'.Top100FrozenPackage::SUBSCOPE,
             'authority_source_hash' => $target['source_row_sha256'],
             'authority_package_sha256' => $context->packageSha256,
-            'authority_metadata_json' => ['priority' => $target['priority'], 'desired_sha256' => $target['desired_sha256']],
+            'authority_metadata_json' => [
+                'priority' => $target['priority'],
+                'desired_payload_sha256' => $this->articleRevisionPayloadSha256($target),
+            ],
             'title' => $desiredArticle['title'],
             'excerpt' => $desiredArticle['excerpt'],
             'content_md' => $desiredArticle['content_md'],
@@ -724,7 +727,7 @@ final class Top100FrozenCmsBatchAuthority
         return (int) $revision->supersedes_revision_id === (int) $article->published_revision_id
             && (string) $revision->authority_source_hash === (string) $target['source_row_sha256']
             && hash_equals($expectedSourceVersionHash, (string) $revision->source_version_hash)
-            && hash_equals((string) $target['desired_sha256'], (string) data_get($revision->authority_metadata_json, 'desired_sha256', ''))
+            && hash_equals($this->articleRevisionPayloadSha256($target), (string) data_get($revision->authority_metadata_json, 'desired_payload_sha256', ''))
             && hash_equals(PromotionContextFactory::canonicalJson([
                 'title' => $revision->title,
                 'excerpt' => $revision->excerpt,
@@ -738,6 +741,25 @@ final class Top100FrozenCmsBatchAuthority
                 'seo_title' => $desiredSeo['seo_title'] ?? null,
                 'seo_description' => $desiredSeo['seo_description'] ?? null,
             ]));
+    }
+
+    /** @param array<string,mixed> $target */
+    private function articleRevisionPayloadSha256(array $target): string
+    {
+        $article = (array) data_get($target, 'desired.article', []);
+        $seo = (array) data_get($target, 'desired.seo', []);
+
+        return hash('sha256', PromotionContextFactory::canonicalJson([
+            'article' => [
+                'title' => $article['title'] ?? null,
+                'excerpt' => $article['excerpt'] ?? null,
+                'content_md' => $article['content_md'] ?? null,
+            ],
+            'seo' => [
+                'seo_title' => $seo['seo_title'] ?? null,
+                'seo_description' => $seo['seo_description'] ?? null,
+            ],
+        ]));
     }
 
     /** @param list<array<string,mixed>> $reviewTargets */

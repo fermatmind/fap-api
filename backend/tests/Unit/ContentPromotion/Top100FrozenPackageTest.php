@@ -149,17 +149,22 @@ final class Top100FrozenPackageTest extends TestCase
         $article = new Article(['published_revision_id' => 41]);
         $target = [
             'source_row_sha256' => str_repeat('a', 64),
-            'desired_sha256' => str_repeat('b', 64),
             'desired' => [
-                'article' => ['title' => 'Approved title', 'excerpt' => 'Approved excerpt', 'content_md' => 'Approved body'],
-                'seo' => ['seo_title' => 'Approved SEO', 'seo_description' => 'Approved description'],
+                'article' => ['title' => 'Approved title', 'excerpt' => 'Approved excerpt', 'content_md' => 'Approved body', 'working_revision_id' => 777],
+                'seo' => ['seo_title' => 'Approved SEO', 'seo_description' => 'Approved description', 'og_title' => 'Approved SEO'],
+                'revision_statuses' => [777 => ArticleTranslationRevision::STATUS_APPROVED],
             ],
         ];
         $revision = new ArticleTranslationRevision([
             'supersedes_revision_id' => 41,
             'authority_source_hash' => str_repeat('a', 64),
-            'authority_metadata_json' => ['desired_sha256' => str_repeat('b', 64)],
-            'source_version_hash' => hash('sha256', PromotionContextFactory::canonicalJson($target['desired']['article'])),
+            'authority_metadata_json' => ['desired_payload_sha256' => hash('sha256', PromotionContextFactory::canonicalJson([
+                'article' => ['title' => 'Approved title', 'excerpt' => 'Approved excerpt', 'content_md' => 'Approved body'],
+                'seo' => ['seo_title' => 'Approved SEO', 'seo_description' => 'Approved description'],
+            ]))],
+            'source_version_hash' => hash('sha256', PromotionContextFactory::canonicalJson([
+                'title' => 'Approved title', 'excerpt' => 'Approved excerpt', 'content_md' => 'Approved body',
+            ])),
             'title' => 'Approved title',
             'excerpt' => 'Approved excerpt',
             'content_md' => 'Approved body',
@@ -170,6 +175,20 @@ final class Top100FrozenPackageTest extends TestCase
         self::assertTrue($method->invoke($authority, $revision, $article, $target));
         $revision->content_md = 'Concurrent unapproved edit';
         self::assertFalse($method->invoke($authority, $revision, $article, $target));
+    }
+
+    public function test_v2_receipt_schema_accepts_top100_lane_package_and_evidence_fields(): void
+    {
+        $schema = json_decode((string) File::get(dirname(__DIR__, 3).'/docs/schemas/content-promotion-receipt.v2.schema.json'), true, 512, JSON_THROW_ON_ERROR);
+
+        self::assertMatchesRegularExpression('~'.$schema['properties']['lane']['pattern'].'~', 'TOP100');
+        self::assertMatchesRegularExpression('~'.$schema['properties']['package_path']['pattern'].'~', 'content_assets/seo-top100/SEO-TOP100-FROZEN-20260812-v1');
+        foreach (['batch_id', 'target_count', 'planned_changed_count', 'planned_unchanged_count', 'unknown_count',
+            'hold_write_count', 'control_write_count', 'media_mutation_count', 'canonical_mutation_count',
+            'hreflang_mutation_count', 'schema_type_mutation_count', 'deferred_out_of_target_link_source_count',
+            'target_state_sha256', 'approved_prestate_sha256', 'public_api_readback_count', 'live_html_readback_count'] as $property) {
+            self::assertArrayHasKey($property, $schema['properties']);
+        }
     }
 
     private function packageDirectory(): string
