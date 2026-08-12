@@ -168,6 +168,9 @@ final class Career1046DiscoverabilityReleaseControlTest extends TestCase
         ] as $required) {
             self::assertStringContainsString($required, $workflow);
         }
+        $executionStep = substr($workflow, (int) strpos($workflow, '- name: Run exact preflight or apply runner'));
+        self::assertStringContainsString('runner_receipt="$(mktemp', $executionStep);
+        self::assertStringContainsString('fail() { jq --arg stage', $executionStep);
         foreach (['gh api', 'workflow_dispatch', 'Search', 'IndexNow', 'GSC', 'URL Inspection'] as $required) {
             self::assertStringContainsString($required, $workflow.$runner);
         }

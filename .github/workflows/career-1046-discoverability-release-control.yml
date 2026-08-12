@@ -111,8 +111,6 @@ jobs:
         run: |
           set -euo pipefail
           receipt="$RUNNER_TEMP/career-1046-discoverability-release-control.json"
-          runner_receipt="$(mktemp "$RUNNER_TEMP/career-1046-discoverability-runner.XXXXXX")"
-          trap 'rm -f "$runner_receipt"' EXIT
           fail() { jq --arg stage "$1" '.failed_stage=$stage' "$receipt" > "$receipt.next" && mv "$receipt.next" "$receipt"; }
           trap 'fail evidence_validation' ERR
           test "$GITHUB_REF" = refs/heads/main
@@ -162,6 +160,9 @@ jobs:
         run: |
           set -euo pipefail
           receipt="$RUNNER_TEMP/career-1046-discoverability-release-control.json"
+          runner_receipt="$(mktemp "$RUNNER_TEMP/career-1046-discoverability-runner.XXXXXX")"
+          trap 'rm -f "$runner_receipt"' EXIT
+          fail() { jq --arg stage "$1" '.failed_stage=$stage' "$receipt" > "$receipt.next" && mv "$receipt.next" "$receipt"; }
           mkdir -p ~/.ssh; printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts; chmod 600 ~/.ssh/known_hosts
           ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
           for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST RETIRED_DEPLOY_HOST DEPLOY_PATH; do test -n "${!name:-}"; done

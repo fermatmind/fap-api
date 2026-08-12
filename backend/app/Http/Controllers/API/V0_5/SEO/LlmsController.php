@@ -36,13 +36,17 @@ class LlmsController extends Controller
 
     private function cachedTextResponse(string $cacheKey, string $identity, callable $builder): Response
     {
-        $body = cache()->get($cacheKey);
-        $cachedIdentity = cache()->get($cacheKey.':career-authority-identity');
-        if (! is_string($body) || ! is_string($cachedIdentity) || ! hash_equals($identity, $cachedIdentity)) {
-            $body = $builder();
-            cache()->put($cacheKey, $body, self::CACHE_TTL_SECONDS);
-            cache()->put($cacheKey.':career-authority-identity', $identity, self::CACHE_TTL_SECONDS);
-        }
+        $body = cache()->lock($cacheKey.':career-authority-lock', 30)->block(10, function () use ($cacheKey, $identity, $builder): string {
+            $body = cache()->get($cacheKey);
+            $cachedIdentity = cache()->get($cacheKey.':career-authority-identity');
+            if (! is_string($body) || ! is_string($cachedIdentity) || ! hash_equals($identity, $cachedIdentity)) {
+                $body = (string) $builder();
+                cache()->put($cacheKey, $body, self::CACHE_TTL_SECONDS);
+                cache()->put($cacheKey.':career-authority-identity', $identity, self::CACHE_TTL_SECONDS);
+            }
+
+            return $body;
+        });
 
         return response($body, 200, [
             'Content-Type' => 'text/plain; charset=utf-8',

@@ -386,7 +386,7 @@ prs:
     base: main
     branch: codex/api-iap-01-apple-provider
     title: "API-IAP-01: add fail-closed WeChat-routed Apple IAP provider"
-    status: github_review_repairing
+    status: local_validation_passed
     depends_on:
       - API-UNLOCK-01
       - API-VPAY-01
@@ -49752,7 +49752,7 @@ prs:
     base: main
     branch: codex/career-1046-public-product-verify-zero-write-fix
     title: "CAREER-1046-PUBLIC-PRODUCT-VERIFY-ZERO-WRITE-FIX-10A: suppress authenticated verify-only slow-query logs"
-    status: implementation_in_progress
+    status: github_review_repairing
     depends_on:
       - CAREER-1046-PUBLIC-PRODUCT-VERIFY-ONLY-10
     train_scope: career_1046_public_product_verify_zero_write_fix
@@ -49968,11 +49968,13 @@ prs:
       - backend/app/Domain/Career/Publish/Career1046DiscoverabilityReleaseGate.php
       - backend/app/Http/Controllers/API/V0_5/SEO/LlmsController.php
       - backend/app/Http/Controllers/SitemapController.php
+      - backend/app/Services/Cms/Seo13ArticleDiscoverabilityCacheRefreshService.php
       - backend/app/Services/SEO/SitemapCache.php
       - backend/app/Services/SEO/SitemapGenerator.php
       - backend/scripts/operations/career_1046_discoverability_release_control.php
       - backend/tests/Feature/SEO/Career1046DiscoverabilityReleaseCacheTransitionTest.php
       - backend/tests/Feature/SEO/SitemapXmlTest.php
+      - backend/tests/Feature/Console/Seo13ArticleDiscoverabilityCacheRefreshCommandTest.php
       - backend/tests/Sre/Career1046DiscoverabilityReleaseControlTest.php
       - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/operations/career-1046-discoverability-release-control.md
