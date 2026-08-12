@@ -257,7 +257,14 @@ final class Top100FrozenCmsBatchAuthority
         $statuses = (array) ($current['revision_statuses'] ?? []);
         $beforeStatuses = (array) ($before['revision_statuses'] ?? []);
         foreach ($beforeStatuses as $id => $status) {
-            if (($statuses[$id] ?? null) !== $status && (int) $id !== (int) $revision->getKey()) {
+            $currentStatus = $statuses[$id] ?? null;
+            $controlledPriorPublicationDemotion = (int) $id === (int) $beforePublished
+                && $status === ArticleTranslationRevision::STATUS_PUBLISHED
+                && $currentStatus === ArticleTranslationRevision::STATUS_STALE
+                && (int) $published === (int) $revision->getKey();
+            if ($currentStatus !== $status
+                && (int) $id !== (int) $revision->getKey()
+                && ! $controlledPriorPublicationDemotion) {
                 return false;
             }
         }
@@ -1288,7 +1295,9 @@ final class Top100FrozenCmsBatchAuthority
             }
         }
         if (collect($package['targets'])->contains(static fn (array $target): bool => $target['model_kind'] === 'article')) {
-            $this->discoverabilityCache->flushArticleDiscoverabilityCaches(! $rollback);
+            // This exact-package lane must fail closed if the public list generation
+            // cannot advance; preserving the old generation would expose stale titles.
+            $this->discoverabilityCache->flushArticleDiscoverabilityCaches(false);
         }
     }
 
@@ -1317,6 +1326,11 @@ final class Top100FrozenCmsBatchAuthority
                     throw new DomainException('top100_frozen_public_api_projection_invalid');
                 }
             }
+            foreach ($target['internal_links'] as $link) {
+                if (! $this->publicLinkProjected($body, (string) $link['anchor_text'], (string) $link['href'])) {
+                    throw new DomainException('top100_frozen_public_api_link_projection_invalid');
+                }
+            }
         } finally {
             $this->httpKernel->terminate($request, $response);
         }
@@ -1334,6 +1348,11 @@ final class Top100FrozenCmsBatchAuthority
                 throw new DomainException('top100_frozen_live_html_projection_invalid');
             }
         }
+        foreach ($target['internal_links'] as $link) {
+            if (! $this->liveHtmlLinkProjected($body, (string) $link['anchor_text'], (string) $link['href'])) {
+                throw new DomainException('top100_frozen_live_html_link_projection_invalid');
+            }
+        }
         if (preg_match('~<link[^>]+rel=["\']canonical["\'][^>]+href=["\']'.preg_quote((string) $target['url'], '~').'["\']~i', $body) !== 1
             && preg_match('~<link[^>]+href=["\']'.preg_quote((string) $target['url'], '~').'["\'][^>]+rel=["\']canonical["\']~i', $body) !== 1) {
             throw new DomainException('top100_frozen_live_html_canonical_invalid');
@@ -1349,11 +1368,45 @@ final class Top100FrozenCmsBatchAuthority
             $target['patch']['h1'],
             $target['patch']['intro'],
         ], static fn (mixed $value): bool => is_string($value) && $value !== ''));
-        foreach ($target['internal_links'] as $link) {
-            $values[] = (string) $link['href'];
-        }
 
         return array_values(array_unique($values));
+    }
+
+    private function publicLinkProjected(mixed $value, string $anchor, string $href): bool
+    {
+        if (is_string($value)) {
+            return str_contains($value, '['.$anchor.']('.$href.')')
+                || $this->liveHtmlLinkProjected(html_entity_decode($value, ENT_QUOTES | ENT_HTML5, 'UTF-8'), $anchor, $href);
+        }
+        if (! is_array($value)) {
+            return false;
+        }
+
+        $directScalars = array_values(array_filter($value, 'is_string'));
+        if (in_array($anchor, $directScalars, true) && in_array($href, $directScalars, true)) {
+            return true;
+        }
+        foreach ($value as $child) {
+            if ($this->publicLinkProjected($child, $anchor, $href)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function liveHtmlLinkProjected(string $html, string $anchor, string $href): bool
+    {
+        if (preg_match_all("~<a\\b[^>]*\\bhref=[\"']".preg_quote($href, '~')."[\"'][^>]*>(.*?)</a>~is", $html, $matches) < 1) {
+            return false;
+        }
+        foreach ($matches[1] as $innerHtml) {
+            if (trim(html_entity_decode(strip_tags((string) $innerHtml), ENT_QUOTES | ENT_HTML5, 'UTF-8')) === $anchor) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /** @return list<string> */

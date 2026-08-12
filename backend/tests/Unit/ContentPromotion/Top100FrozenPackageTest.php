@@ -89,6 +89,7 @@ final class Top100FrozenPackageTest extends TestCase
         self::assertStringContainsString("(bool) (\$resolved['lock_links'] ?? false)", $authority);
         self::assertStringContainsString('$this->assertPublicApiReadback($target);', $authority);
         self::assertStringContainsString('$this->assertLiveHtmlReadback($target);', $authority);
+        self::assertStringContainsString('$this->discoverabilityCache->flushArticleDiscoverabilityCaches(false);', $authority);
     }
 
     public function test_rollback_guard_accepts_only_pre_draft_or_exact_published_state(): void
@@ -122,6 +123,20 @@ final class Top100FrozenPackageTest extends TestCase
         $projected = (new ReflectionClass($authority))->getMethod('publicValueProjected');
         self::assertTrue($projected->invoke($authority, '中文开头', ['中文开头，其余正文']));
         self::assertFalse($projected->invoke($authority, '不存在', ['中文开头，其余正文']));
+
+        $linkProjected = (new ReflectionClass($authority))->getMethod('publicLinkProjected');
+        self::assertTrue($linkProjected->invoke($authority, [
+            'data' => ['links' => [['href' => '/zh/personality/intp-a-vs-intp-t', 'anchor_text' => '中文链接']]],
+        ], '中文链接', '/zh/personality/intp-a-vs-intp-t'));
+        self::assertTrue($linkProjected->invoke($authority, ['body' => '[中文链接](/zh/personality/intp-a-vs-intp-t)'], '中文链接', '/zh/personality/intp-a-vs-intp-t'));
+        self::assertFalse($linkProjected->invoke($authority, [
+            'data' => ['links' => [['href' => '/zh/personality/intp-a-vs-intp-t', 'anchor_text' => '错误锚文本']]],
+            'unrelated' => '中文链接',
+        ], '中文链接', '/zh/personality/intp-a-vs-intp-t'));
+
+        $htmlLinkProjected = (new ReflectionClass($authority))->getMethod('liveHtmlLinkProjected');
+        self::assertTrue($htmlLinkProjected->invoke($authority, '<a class="link" href="/zh/personality/intp-a-vs-intp-t"><span>中文链接</span></a>', '中文链接', '/zh/personality/intp-a-vs-intp-t'));
+        self::assertFalse($htmlLinkProjected->invoke($authority, '<a href="/zh/personality/intp-a-vs-intp-t">错误锚文本</a><p>中文链接</p>', '中文链接', '/zh/personality/intp-a-vs-intp-t'));
     }
 
     private function packageDirectory(): string
