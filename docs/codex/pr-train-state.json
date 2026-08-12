@@ -43495,7 +43495,7 @@
     "id": "SECURITY-103-API-06",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3669",
     "production_write_execution": false,
     "publish_allowed": false,
     "remote_branch_deleted": false,
@@ -105654,8 +105654,13 @@
         "at": "2026-08-12T10:30:31+08:00",
         "status": "github_checks_pending",
         "note": "Committed the exact nine-path Task 7A implementation as 37845ce77d9c2a634b30572ad21e2f3fa7fb59b5 after explicit staging and cached diff validation. The next action is ordinary branch push and PR creation only; the protected workflow remains undispatched."
+      },
+      {
+        "at": "2026-08-12T10:31:23+08:00",
+        "status": "github_checks_pending",
+        "note": "Pushed the focused branch and opened PR #3669 with authority/runtime boundary, local validation, zero-write production non-execution, deferred scopes and no sidecar issue documented. The protected Task 7A workflow remains undispatched."
       }
     ],
-    "updated_at": "2026-08-12T10:30:31+08:00"
+    "updated_at": "2026-08-12T10:31:23+08:00"
   }
 }
