@@ -105714,7 +105714,7 @@
     "base": "main",
     "branch": "codex/career-1046-immutable-candidate-artifact-producer",
     "title": "CAREER-1046-IMMUTABLE-CANDIDATE-ARTIFACT-PRODUCER-07B: produce Task 5 immutable candidate artifact",
-    "status": "merged",
+    "status": "github_checks_repairing",
     "depends_on": ["CAREER-PUBLICATION-INDEX-RECONCILIATION-APPLY-06B", "CAREER-1046-IMMUTABLE-CANDIDATE-07"],
     "allowed_paths": [".github/workflows/career-1046-immutable-candidate-artifact-producer.yml", "backend/scripts/operations/career_1046_immutable_candidate_artifact.php", "backend/tests/Sre/Career1046ImmutableCandidateArtifactProducerTest.php", "docs/operations/career-1046-immutable-candidate-artifact-producer.md", "docs/codex/pr-train.yaml", "docs/codex/pr-train-state.json"],
     "checks": {"authorization": {"status": "passed", "evidence": "The 2026-08-12 Career 1046 execution goal authorizes this Task 4B control-plane PR only; dispatch and every production/staging action remain forbidden."}, "dependency": {"status": "passed", "evidence": "PRs #3665, #3666, #3667, #3668 and #3669 are merged with required checks passing on origin/main."}},
@@ -105739,7 +105739,7 @@
     "base": "main",
     "branch": "codex/career-1046-public-product-verify-zero-write-fix",
     "title": "CAREER-1046-PUBLIC-PRODUCT-VERIFY-ZERO-WRITE-FIX-10A: suppress authenticated verify-only slow-query logs",
-    "status": "local_validation_passed",
+    "status": "implementation_in_progress",
     "depends_on": ["CAREER-1046-PUBLIC-PRODUCT-VERIFY-ONLY-10"],
     "allowed_paths": ["backend/app/Providers/AppServiceProvider.php", "backend/tests/Feature/SRE/SlowQueryTelemetrySmokeTest.php", "docs/operations/career-1046-public-product-verify-zero-write-fix.md", "docs/codex/pr-train.yaml", "docs/codex/pr-train-state.json"],
     "checks": {
@@ -105795,9 +105795,9 @@
     "base": "main",
     "branch": "codex/career-1046-immutable-candidate-acceptance-repair-07c",
     "title": "CAREER-1046-IMMUTABLE-CANDIDATE-ACCEPTANCE-REPAIR-07C: prove SELECT-only cache-zero producer execution",
-    "status": "implementation_in_progress",
+    "status": "local_validation_passed",
     "depends_on": ["CAREER-1046-IMMUTABLE-CANDIDATE-ARTIFACT-PRODUCER-07B"],
-    "allowed_paths": [".github/workflows/career-1046-immutable-candidate-artifact-producer.yml", "backend/app/Domain/Career/Publish/CareerFirstWaveNextStepLinksService.php", "backend/app/Domain/Career/Publish/CareerFirstWaveLaunchReadinessAuditService.php", "backend/app/Domain/Career/Publish/CareerFullReleaseLedgerService.php", "backend/app/Domain/Career/Publish/CareerFullReleaseLedgerProjectionService.php", "backend/scripts/operations/career_1046_immutable_candidate_artifact.php", "backend/tests/Sre/Career1046ImmutableCandidateArtifactProducerTest.php", "backend/tests/Unit/Services/Career/CareerFirstWaveNextStepLinksServiceTest.php", "docs/operations/career-1046-immutable-candidate-artifact-producer.md", "docs/codex/pr-train.yaml", "docs/codex/pr-train-state.json"],
+    "allowed_paths": [".github/workflows/career-1046-immutable-candidate-artifact-producer.yml", "backend/app/Domain/Career/Publish/CareerFirstWaveNextStepLinksService.php", "backend/app/Domain/Career/Publish/CareerFirstWaveLaunchReadinessAuditService.php", "backend/app/Domain/Career/Publish/CareerFullReleaseLedgerService.php", "backend/app/Domain/Career/Publish/CareerFullReleaseLedgerProjectionService.php", "backend/scripts/operations/career_1046_immutable_candidate_artifact.php", "backend/tests/Sre/Career1046ImmutableCandidateArtifactProducerTest.php", "backend/tests/Unit/Services/Career/CareerFirstWaveNextStepLinksServiceTest.php", "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php", "docs/operations/career-1046-immutable-candidate-artifact-producer.md", "docs/codex/pr-train.yaml", "docs/codex/pr-train-state.json"],
     "checks": {
       "authorization": {"status": "passed", "evidence": "The operator explicitly authorized the two-PR Career 1046 acceptance repair plan; this first PR remains zero-production-execution."},
       "dependency": {"status": "passed", "evidence": "Task 4B PRs #3671 and #3672 are merged on origin/main."},
@@ -105815,7 +105815,7 @@
     "search_channel_action": false,
     "url_submission": false,
     "deploy_allowed": false,
-    "transitions": [{"at": "2026-08-12T16:16:00+08:00", "status": "implementation_in_progress", "note": "Started from merged Task 7B origin/main in an isolated worktree. The producer now selects an explicit no-cache-write ledger path and installs runtime DB/cache mutation auditors; focused production-entry and ledger/cache tests pass. No workflow dispatch, SSH, production/staging access, deploy, database, CMS, cache, artifact, pointer, sitemap, llms or Search action occurred."}, {"at": "2026-08-12T16:28:00+08:00", "status": "local_validation_passed", "note": "Real Laravel producer execution proves observed SELECT-only database activity and zero cache mutations, including fail-closed DB/cache mutation probes; 1046/2092, Task 3B hash, streamed dependency, members/canonical_slug, and Task 5 consumer contracts remain green. Focused tests, Pint, PHP syntax, actionlint, YAML/JSON parsing, exact-scope diff checks, Big Five runtime freeze, and the full ci_verify_mbti chain pass. No workflow dispatch, SSH, production/staging access, or controlled external action occurred."}],
-    "updated_at": "2026-08-12T16:28:00+08:00"
+    "transitions": [{"at": "2026-08-12T16:16:00+08:00", "status": "implementation_in_progress", "note": "Started from merged Task 7B origin/main in an isolated worktree. The producer now selects an explicit no-cache-write ledger path and installs runtime DB/cache mutation auditors; focused production-entry and ledger/cache tests pass. No workflow dispatch, SSH, production/staging access, deploy, database, CMS, cache, artifact, pointer, sitemap, llms or Search action occurred."}, {"at": "2026-08-12T16:28:00+08:00", "status": "local_validation_passed", "note": "Real Laravel producer execution proves observed SELECT-only database activity and zero cache mutations, including fail-closed DB/cache mutation probes; 1046/2092, Task 3B hash, streamed dependency, members/canonical_slug, and Task 5 consumer contracts remain green. Focused tests, Pint, PHP syntax, actionlint, YAML/JSON parsing, exact-scope diff checks, Big Five runtime freeze, and the full ci_verify_mbti chain pass. No workflow dispatch, SSH, production/staging access, or controlled external action occurred."}, {"at": "2026-08-12T16:40:00+08:00", "status": "local_validation_passed", "note": "The first CI pass exposed only the runtime-freeze ownership classifier omitting the existing Career launch-readiness audit consumer. The classifier now explicitly covers that Career-only consumer and retains its negative boundary; the exact failed test passes locally. This is the single consolidated same-scope CI repair commit."}],
+    "updated_at": "2026-08-12T16:40:00+08:00"
   }
 }

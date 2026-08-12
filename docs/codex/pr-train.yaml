@@ -455,7 +455,7 @@ prs:
     base: main
     branch: codex/api-ad-01-rewarded-unlock
     title: "API-AD-01: add residual-risk rewarded-ad report unlock"
-    status: local_validation_passed
+    status: implementation_in_progress
     depends_on:
       - API-UNLOCK-01
     train_scope: rewarded_ad_report_unlock
@@ -465,7 +465,6 @@ prs:
       - Reuse FmTokenAuth, attempt ownership, benefit_grants, EntitlementManager, and unified access projection; no second order, payment, or entitlement ledger is introduced.
       - Keep provider availability disabled by default and IQ hard-disabled.
     allowed_paths:
-      - .github/workflows/career-1046-immutable-candidate-artifact-producer.yml
       - backend/routes/api.php
       - backend/app/Http/Controllers/API/V0_3/AttemptRewardedAdController.php
       - backend/app/Services/Commerce/RewardedAdUnlockService.php
@@ -49799,7 +49798,7 @@ prs:
     base: main
     branch: codex/career-1046-immutable-candidate-artifact-producer
     title: "CAREER-1046-IMMUTABLE-CANDIDATE-ARTIFACT-PRODUCER-07B: produce Task 5 immutable candidate artifact"
-    status: merged
+    status: implementation_in_progress
     depends_on:
       - CAREER-PUBLICATION-INDEX-RECONCILIATION-APPLY-06B
       - CAREER-1046-IMMUTABLE-CANDIDATE-07
@@ -49898,7 +49897,7 @@ prs:
     base: main
     branch: codex/career-1046-immutable-candidate-acceptance-repair-07c
     title: "CAREER-1046-IMMUTABLE-CANDIDATE-ACCEPTANCE-REPAIR-07C: prove SELECT-only cache-zero producer execution"
-    status: implementation_in_progress
+    status: local_validation_passed
     depends_on:
       - CAREER-1046-IMMUTABLE-CANDIDATE-ARTIFACT-PRODUCER-07B
     train_scope: career_1046_immutable_candidate_acceptance_repair
@@ -49908,6 +49907,7 @@ prs:
       - Fail closed on any observed non-SELECT query or cache mutation attempt and emit observed execution counts in the Task 5 candidate receipt.
       - Exercise the real audited producer entry with Laravel, SQLite, cold cache, and positive/negative mutation probes.
     allowed_paths:
+      - .github/workflows/career-1046-immutable-candidate-artifact-producer.yml
       - backend/app/Domain/Career/Publish/CareerFirstWaveNextStepLinksService.php
       - backend/app/Domain/Career/Publish/CareerFirstWaveLaunchReadinessAuditService.php
       - backend/app/Domain/Career/Publish/CareerFullReleaseLedgerService.php
@@ -49915,6 +49915,7 @@ prs:
       - backend/scripts/operations/career_1046_immutable_candidate_artifact.php
       - backend/tests/Sre/Career1046ImmutableCandidateArtifactProducerTest.php
       - backend/tests/Unit/Services/Career/CareerFirstWaveNextStepLinksServiceTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/operations/career-1046-immutable-candidate-artifact-producer.md
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
@@ -49927,7 +49928,7 @@ prs:
       - cd backend && vendor/bin/pint --test app/Domain/Career/Publish/CareerFirstWaveNextStepLinksService.php app/Domain/Career/Publish/CareerFirstWaveLaunchReadinessAuditService.php app/Domain/Career/Publish/CareerFullReleaseLedgerService.php app/Domain/Career/Publish/CareerFullReleaseLedgerProjectionService.php scripts/operations/career_1046_immutable_candidate_artifact.php tests/Sre/Career1046ImmutableCandidateArtifactProducerTest.php tests/Unit/Services/Career/CareerFirstWaveNextStepLinksServiceTest.php
       - actionlint .github/workflows/career-1046-immutable-candidate-artifact-producer.yml
       - bash backend/scripts/ci_verify_mbti.sh
-      - parse pr-train JSON and YAML; PHP syntax; git diff --check and exact eleven-file scope validation
+      - parse pr-train JSON and YAML; PHP syntax; git diff --check and exact twelve-file scope validation
     stop_if_changed_files_outside_scope: true
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     workflow_policy_change: true
