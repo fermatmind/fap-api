@@ -100,7 +100,11 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
             'git merge-base --is-ancestor',
             'SET TRANSACTION READ ONLY',
             "ledger['members']",
+            "canonical_slug']",
             'TASK3B_DATABASE_STATE_DRIFT',
+            'CAREER_1046_APPLICATION_ROOT',
+            'CAREER_1046_STREAMED_EXECUTION',
+            'php /dev/stdin',
             'name: career-1046-immutable-candidate',
             'career-1046-immutable-candidate.json',
         ] as $required) {

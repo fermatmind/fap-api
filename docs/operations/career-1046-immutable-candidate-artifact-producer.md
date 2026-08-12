@@ -1,6 +1,6 @@
 # Career 1046 immutable candidate artifact producer
 
-This is a protected, manual-dispatch-only control-plane workflow. It first validates one successful Task 3B apply receipt, its GitHub artifact digest, exact control-plane SHA, active release identity, 1016 receipt-covered matching publication/index rows, and the immutable database-state hash. It then runs the checked-in producer against the exact active release through a MySQL read-only transaction.
+This is a protected, manual-dispatch-only control-plane workflow. It first validates one successful Task 3B apply receipt, its GitHub artifact digest, exact control-plane SHA, active release identity, 1016 receipt-covered matching publication/index rows, and the immutable database-state hash. It streams the checked-in, checked-out control-plane producer to the exact active release; that release supplies only the Laravel bootstrap and MySQL read-only context, so a historical Task 3B release need not contain this later producer script.
 
 The producer reuses `Career1046ImmutableCandidateGenerator`; it emits exactly one runner-side file, `career-1046-immutable-candidate.json`, uploaded as `career-1046-immutable-candidate`. The file contains one deterministic 1046-slug/2092-locale-row generation, excludes both frozen forbidden slugs, keeps sitemap/llms/Search closed, and carries the Task 3B binding in the candidate receipt. Task 5 validates this exact one-file artifact contract.
 

@@ -88,18 +88,19 @@ final class Career1046ImmutableCandidateArtifactProducer
     /** @return array<string, mixed> */
     public static function produceFromDatabase(): array
     {
-        $app = require dirname(__DIR__, 2).'/bootstrap/app.php';
+        $applicationRoot = self::applicationRoot();
+        $app = require $applicationRoot.'/bootstrap/app.php';
         $app->make(Kernel::class)->bootstrap();
         $task3b = self::task3bFromEnvironment();
         DB::statement('SET TRANSACTION READ ONLY');
 
-        return DB::connection()->transaction(static function () use ($task3b): array {
-            $manifestPath = base_path('docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json');
+        return DB::connection()->transaction(static function () use ($applicationRoot, $task3b): array {
+            $manifestPath = $applicationRoot.'/docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json';
             $manifest = json_decode((string) file_get_contents($manifestPath), true, 512, JSON_THROW_ON_ERROR);
             if (! is_array($manifest) || ! is_array($manifest['baseline_slugs'] ?? null) || ! is_array($manifest['delta_slugs'] ?? null)) {
                 throw new Career1046ImmutableCandidateArtifactFailure('FROZEN_MANIFEST_INVALID');
             }
-            self::assertTask3bDatabaseState($manifest, $task3b);
+            self::assertTask3bDatabaseState($applicationRoot, $manifest, $task3b);
             $ledgerEnvelope = app(CareerFullReleaseLedgerProjectionService::class)->build();
             $ledger = $ledgerEnvelope[CareerFullReleaseLedgerProjectionService::LEDGER_FILENAME] ?? null;
             if (! is_array($ledger)) {
@@ -129,8 +130,9 @@ final class Career1046ImmutableCandidateArtifactProducer
             }
             $bySlug = [];
             foreach ($rows as $row) {
-                if (is_array($row) && is_string($row['source_slug'] ?? null)) {
-                    $bySlug[strtolower($row['source_slug'])] = true;
+                $slug = is_array($row) ? ($row['source_slug'] ?? $row['canonical_slug'] ?? null) : null;
+                if (is_string($slug)) {
+                    $bySlug[strtolower($slug)] = true;
                 }
             }
             $baseline = array_values(array_filter($manifest['baseline_slugs'], static fn (mixed $slug): bool => is_string($slug) && isset($bySlug[strtolower($slug)])));
@@ -171,9 +173,9 @@ final class Career1046ImmutableCandidateArtifactProducer
     }
 
     /** @param array<string, mixed> $manifest @param array<string, mixed> $task3b */
-    private static function assertTask3bDatabaseState(array $manifest, array $task3b): void
+    private static function assertTask3bDatabaseState(string $applicationRoot, array $manifest, array $task3b): void
     {
-        require_once base_path('scripts/operations/career_publication_index_reconciliation_apply.php');
+        require_once $applicationRoot.'/scripts/operations/career_publication_index_reconciliation_apply.php';
         $targetSlugs = array_values(array_unique([...$manifest['baseline_slugs'], ...$manifest['delta_slugs']]));
         sort($targetSlugs, SORT_STRING);
         $occupations = Occupation::query()
@@ -220,6 +222,21 @@ final class Career1046ImmutableCandidateArtifactProducer
         }
     }
 
+    private static function applicationRoot(): string
+    {
+        $configured = trim((string) getenv('CAREER_1046_APPLICATION_ROOT'));
+        $root = $configured === '' ? dirname(__DIR__, 2) : $configured;
+        if (! str_starts_with($root, '/') || str_contains($root, '..') || is_link($root) || ! is_dir($root)) {
+            throw new Career1046ImmutableCandidateArtifactFailure('APPLICATION_ROOT_INVALID');
+        }
+        $real = realpath($root);
+        if (! is_string($real) || ! is_file($real.'/bootstrap/app.php')) {
+            throw new Career1046ImmutableCandidateArtifactFailure('APPLICATION_ROOT_INVALID');
+        }
+
+        return $real;
+    }
+
     /** @return array<string, mixed> */
     private static function task3bFromEnvironment(): array
     {
@@ -238,7 +255,7 @@ final class Career1046ImmutableCandidateArtifactProducer
     }
 }
 
-if (realpath((string) ($_SERVER['SCRIPT_FILENAME'] ?? '')) === __FILE__) {
+if (realpath((string) ($_SERVER['SCRIPT_FILENAME'] ?? '')) === __FILE__ || getenv('CAREER_1046_STREAMED_EXECUTION') === '1') {
     try {
         echo CareerGenerationCanonicalJson::encode(Career1046ImmutableCandidateArtifactProducer::produceFromDatabase())."\n";
     } catch (Career1046ImmutableCandidateArtifactFailure $failure) {
