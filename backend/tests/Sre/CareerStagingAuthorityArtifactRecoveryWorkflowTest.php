@@ -28,6 +28,7 @@ final class CareerStagingAuthorityArtifactRecoveryWorkflowTest extends TestCase
             'PASS_PRODUCTION_FROZEN_AUTHORITY_READ_ONLY',
             'PASS_PREFLIGHT_APPLY_ELIGIBLE',
             'PASS_APPLY_STAGING_FROZEN_AUTHORITY_IMPORTED',
+            'gh run download "$GITHUB_RUN_ID" --repo "$GITHUB_REPOSITORY"',
             'test "$(git rev-parse origin/main)" = "$CONTROL_PLANE_SHA"',
             'test ! -e $q_path/.dep/deploy.lock',
             'EXPECTED_PRODUCTION_ACTIVE_REVISION',
