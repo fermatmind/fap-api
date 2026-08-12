@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       expected_control_plane_sha:
-        description: Exact latest main SHA containing this read-only control
+        description: Exact latest main SHA containing this read-only v2 control
         required: true
         type: string
       expected_active_revision:
@@ -14,6 +14,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 concurrency:
   group: deploy-${{ github.repository }}-production
@@ -21,13 +22,27 @@ concurrency:
 
 jobs:
   preflight:
-    name: Inspect current Career authority reader permissions
+    name: Inspect pointer-bound Career authority permissions
     runs-on: ubuntu-latest
     environment: production
     timeout-minutes: 15
     env:
       CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
       EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+      POINTER_APPLY_RUN_ID: '31593321673'
+      POINTER_APPLY_RUN_ATTEMPT: '1'
+      POINTER_APPLY_ARTIFACT_DIGEST: 'sha256:101508066a741afd44d29b4c28bd866b1fa3d4772dfda14c71da71c320c545c7'
+      POINTER_APPLY_RECEIPT_SHA256: 'e0898f6fbb438495319cf0acc8bd6f808eba18c3f3beeb4a4e7d690312c27bc4'
+      DIAGNOSTIC_RUN_ID: '31627080908'
+      DIAGNOSTIC_RUN_ATTEMPT: '1'
+      DIAGNOSTIC_ARTIFACT_DIGEST: 'sha256:870897b74bbf1cb8fdd07c82a8bddde99209a93ac1d6bc67e31cd94d0579e557'
+      DIAGNOSTIC_RECEIPT_SHA256: 'dabb89d4c42c83a000102ca0ceaae859f70e5c538815434f4cf9d8c5727f6ef4'
+      GENERATION_ID: 'career-current-342-30-bootstrap-v1'
+      POINTER_DOCUMENT_SHA256: '1ebfd2826be9d3b63d810d33050034e3d424c95b3db81fa49b0822c5e6b2ec08'
+      PROJECTION_SHA256_EXPECTED: '397f2a4ec284e9c0a6cd610447541ad4773fa7a7f3045008fab5efb334ec85c6'
+      LEDGER_SHA256_EXPECTED: '975b311bb346a090f1add678d5a6d9f1be230f87b223e2c3c829f4c7fd7aac6e'
+      PROJECTION_PATH_SHA256_EXPECTED: '32e4e5f30b56f96c7fda9b3eff03b02e23a406869d78ed9d223d59f0749586d1'
+      LEDGER_PATH_SHA256_EXPECTED: 'a7501519b6ca3f8c529e0ca2283985bd3900c0b9679c871c2c56197f324e013e'
       DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
       DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
       DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
@@ -41,30 +56,10 @@ jobs:
           set -euo pipefail
           PREFLIGHT_RECEIPT="$RUNNER_TEMP/career-runtime-authority-permission-preflight.json"
           printf 'PREFLIGHT_RECEIPT=%s\n' "$PREFLIGHT_RECEIPT" >> "$GITHUB_ENV"
-          jq -n \
-            --arg schema_version "career.runtime_authority_permission_preflight.v1" \
-            --arg status "HOLD_PREFLIGHT_INCOMPLETE" \
-            --arg control_plane_sha "$CONTROL_PLANE_SHA" \
-            --arg active_revision "$EXPECTED_ACTIVE_REVISION" \
-            --arg workflow_run_id "$GITHUB_RUN_ID" \
-            --arg workflow_run_attempt "$GITHUB_RUN_ATTEMPT" \
-            '{
-              schema_version: $schema_version,
-              status: $status,
-              control_plane_sha: $control_plane_sha,
-              active_revision: $active_revision,
-              workflow_run_id: ($workflow_run_id | tonumber),
-              workflow_run_attempt: ($workflow_run_attempt | tonumber),
-              remote_write_count: 0,
-              metadata_write_count: 0,
-              content_write_count: 0,
-              database_write_count: 0,
-              cache_write_count: 0,
-              publication_write_count: 0,
-              discoverability_write_count: 0,
-              deploy_count: 0,
-              rollback_count: 0
-            }' > "$PREFLIGHT_RECEIPT"
+          jq -n --arg control "$CONTROL_PLANE_SHA" --arg active "$EXPECTED_ACTIVE_REVISION" \
+            --arg run "$GITHUB_RUN_ID" --arg attempt "$GITHUB_RUN_ATTEMPT" \
+            '{schema_version:"career.runtime_authority_pointer_permission_preflight.v2",status:"HOLD_PREFLIGHT_INCOMPLETE",control_plane_sha:$control,active_revision:$active,workflow_run_id:($run|tonumber),workflow_run_attempt:($attempt|tonumber),remote_write_count:0,metadata_write_count:0,content_write_count:0,database_write_count:0,cms_write_count:0,cache_write_count:0,publication_write_count:0,discoverability_write_count:0,migration_count:0,deployment_count:0,restart_count:0,automatic_retry_allowed:false}' \
+            > "$PREFLIGHT_RECEIPT"
 
       - name: Checkout exact control plane
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
@@ -73,12 +68,14 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Validate exact latest main and immutable inspector
+      - name: Validate latest main, migration fence, and immutable lineage
         shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           inspector="backend/scripts/deploy/career_runtime_authority_permission_control.sh"
-          test "$GITHUB_REF" = "refs/heads/main"
+          test "$GITHUB_REF" = refs/heads/main
           [[ "$CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
           [[ "$EXPECTED_ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]
           git fetch --no-tags origin main:refs/remotes/origin/main
@@ -86,28 +83,57 @@ jobs:
           test "$(git rev-parse origin/main)" = "$CONTROL_PLANE_SHA"
           git cat-file -e "${EXPECTED_ACTIVE_REVISION}^{commit}"
           git merge-base --is-ancestor "$EXPECTED_ACTIVE_REVISION" "$CONTROL_PLANE_SHA"
-          test -f "$inspector"
-          test ! -L "$inspector"
+          git diff --quiet "$EXPECTED_ACTIVE_REVISION" "$CONTROL_PLANE_SHA" -- backend/database/migrations
+          test -f "$inspector" && test ! -L "$inspector"
           bash -n "$inspector"
-          echo "INSPECTOR_SHA256=$(sha256sum "$inspector" | awk '{print $1}')" >> "$GITHUB_ENV"
+          INSPECTOR_SHA256="$(sha256sum "$inspector" | awk '{print $1}')"
+          echo "INSPECTOR_SHA256=$INSPECTOR_SHA256" >> "$GITHUB_ENV"
+
+          pointer_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${POINTER_APPLY_RUN_ID}")"
+          jq -e --argjson attempt "$POINTER_APPLY_RUN_ATTEMPT" \
+            '.name == "Career Current Generation Pointer Bootstrap Production Ops" and .event == "workflow_dispatch" and .status == "completed" and .conclusion == "success" and .run_attempt == $attempt' \
+            <<<"$pointer_run" >/dev/null
+          pointer_name="career-current-generation-pointer-bootstrap-apply-${POINTER_APPLY_RUN_ID}-${POINTER_APPLY_RUN_ATTEMPT}"
+          pointer_artifacts="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${POINTER_APPLY_RUN_ID}/artifacts?per_page=100")"
+          jq -e --arg name "$pointer_name" --arg digest "$POINTER_APPLY_ARTIFACT_DIGEST" \
+            '[.artifacts[]|select(.name==$name)]|length==1 and .[0].expired==false and .[0].digest==$digest' <<<"$pointer_artifacts" >/dev/null
+          pointer_dir="$(mktemp -d)"
+          gh run download "$POINTER_APPLY_RUN_ID" --name "$pointer_name" --dir "$pointer_dir"
+          pointer_receipt="$pointer_dir/career-current-generation-pointer-bootstrap.json"
+          test "$(sha256sum "$pointer_receipt" | awk '{print $1}')" = "$POINTER_APPLY_RECEIPT_SHA256"
+          jq -e --arg generation "$GENERATION_ID" --arg pointer "$POINTER_DOCUMENT_SHA256" \
+            --arg projection "$PROJECTION_SHA256_EXPECTED" --arg ledger "$LEDGER_SHA256_EXPECTED" \
+            --arg projection_path "$PROJECTION_PATH_SHA256_EXPECTED" --arg ledger_path "$LEDGER_PATH_SHA256_EXPECTED" \
+            '.status=="PASS_APPLY_POINTER_BOOTSTRAPPED" and .workflow_run_id==31593321673 and .workflow_run_attempt==1 and .generation_id==$generation and .pointer_document_sha256==$pointer and .authority.projection_sha256==$projection and .authority.ledger_sha256==$ledger and .source_artifacts.projection_path_sha256==$projection_path and .source_artifacts.ledger_path_sha256==$ledger_path and .authority.slug_count==342 and .authority.locale_row_count==684 and .authority.published_slug_count==30 and .authority.published_locale_row_count==60 and .source_artifact_write_count==0 and .database_write_count==0 and .cms_write_count==0 and .migration_count==0 and .publication_write_count==0 and .search_submission_count==0' \
+            "$pointer_receipt" >/dev/null
+
+          diagnostic_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${DIAGNOSTIC_RUN_ID}")"
+          jq -e --argjson attempt "$DIAGNOSTIC_RUN_ATTEMPT" \
+            '.name=="Career Production Runtime Authority Diagnostic" and .event=="workflow_dispatch" and .status=="completed" and .conclusion=="failure" and .run_attempt==$attempt' \
+            <<<"$diagnostic_run" >/dev/null
+          diagnostic_name="career-production-runtime-authority-diagnostic-${DIAGNOSTIC_RUN_ID}-${DIAGNOSTIC_RUN_ATTEMPT}"
+          diagnostic_artifacts="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${DIAGNOSTIC_RUN_ID}/artifacts?per_page=100")"
+          jq -e --arg name "$diagnostic_name" --arg digest "$DIAGNOSTIC_ARTIFACT_DIGEST" \
+            '[.artifacts[]|select(.name==$name)]|length==1 and .[0].expired==false and .[0].digest==$digest' <<<"$diagnostic_artifacts" >/dev/null
+          diagnostic_dir="$(mktemp -d)"
+          gh run download "$DIAGNOSTIC_RUN_ID" --name "$diagnostic_name" --dir "$diagnostic_dir"
+          diagnostic_receipt="$diagnostic_dir/career-production-runtime-authority-diagnostic.json"
+          test "$(sha256sum "$diagnostic_receipt" | awk '{print $1}')" = "$DIAGNOSTIC_RECEIPT_SHA256"
+          jq -e --arg active "$EXPECTED_ACTIVE_REVISION" --arg generation "$GENERATION_ID" --arg pointer "$POINTER_DOCUMENT_SHA256" \
+            '.status=="FAIL_RUNTIME_AUTHORITY_DIAGNOSTIC" and .failed_stage=="PROJECTION_UNREADABLE" and .active_revision==$active and .pointer_apply_run_id==31593321673 and .generation_id==$generation and .pointer_document_sha256==$pointer and .database_write_count==0 and .cms_write_count==0 and .cache_write_count==0 and .pointer_write_count==0 and .artifact_write_count==0 and .permission_write_count==0 and .publication_write_count==0 and .discoverability_write_count==0 and .migration_count==0 and .deployment_count==0 and .restart_count==0' \
+            "$diagnostic_receipt" >/dev/null
+          rm -rf -- "$pointer_dir" "$diagnostic_dir"
 
       - name: Validate protected production topology
         shell: bash
         run: |
           set -euo pipefail
-          for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST RETIRED_DEPLOY_HOST DEPLOY_PATH; do
-            test -n "${!name:-}"
-          done
+          for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST RETIRED_DEPLOY_HOST DEPLOY_PATH; do test -n "${!name:-}"; done
           [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
-          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
-          test "$DEPLOY_PORT" -ge 1
-          test "$DEPLOY_PORT" -le 65535
-          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
-          [[ "$RETIRED_DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]] && test "$DEPLOY_PORT" -ge 1 && test "$DEPLOY_PORT" -le 65535
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]] && [[ "$RETIRED_DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
           test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
-          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
-          [[ "$DEPLOY_PATH" != *"/../"* ]]
-          echo "Protected production topology validated without disclosing values."
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]] && [[ "$DEPLOY_PATH" != *"/../"* ]]
 
       - name: Set up SSH
         uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
@@ -124,166 +150,61 @@ jobs:
           mkdir -p ~/.ssh
           printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
-          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
-            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
 
-      - name: Inspect active revision and latest authority artifacts with zero writes
-        id: inspect
+      - name: Inspect exact pointer-bound artifacts with zero writes
         shell: bash
         run: |
           set -euo pipefail
           inspector="backend/scripts/deploy/career_runtime_authority_permission_control.sh"
-          printf -v q_deploy_path '%q' "$DEPLOY_PATH"
-          printf -v q_deploy_user '%q' "$DEPLOY_USER"
-          printf -v q_active_revision '%q' "$EXPECTED_ACTIVE_REVISION"
-
-          state="$({
-            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-              -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-              "DEPLOY_PATH=$q_deploy_path EXPECTED_ACTIVE_REVISION=$q_active_revision bash -s" <<'REMOTE'
-          set -euo pipefail
-          current_release="$(readlink -f "$DEPLOY_PATH/current")"
-          test -d "$current_release"
-          test -f "$current_release/REVISION"
-          test "$(tr -d '\r\n' < "$current_release/REVISION")" = "$EXPECTED_ACTIVE_REVISION"
-          test ! -e "$DEPLOY_PATH/.dep/deploy.lock"
-          process_count="$(ps -eo comm=,args= | awk '$1 == "php" && ($0 ~ /dep(\.phar)? .* production/ || $0 ~ /artisan migrate/) {n++} END {print n+0}')"
-          test "$process_count" -eq 0
-          printf 'active_revision_unchanged=true\n'
-          printf 'deploy_lock_absent=true\n'
-          printf 'deploy_process_absent=true\n'
-          REMOTE
-          })"
-          test "$state" = $'active_revision_unchanged=true\ndeploy_lock_absent=true\ndeploy_process_absent=true'
-
           printf -v q_root '%q' "$DEPLOY_PATH/shared/backend/storage/app/private"
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          printf -v q_user '%q' "$DEPLOY_USER"
+          printf -v q_active '%q' "$EXPECTED_ACTIVE_REVISION"
           set +e
-          result="$({
-            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-              -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-              "CAREER_AUTHORITY_PERMISSION_MODE=inspect CAREER_AUTHORITY_PERMISSION_ROOT=$q_root CAREER_AUTHORITY_PERMISSION_OWNER=$q_deploy_user CAREER_AUTHORITY_PERMISSION_GROUP=www-data CAREER_AUTHORITY_PERMISSION_RUNTIME_USER=www-data bash -s" \
-              < "$inspector"
-          })"
-          inspection_exit="$?"
+          result="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "DEPLOY_PATH=$q_path EXPECTED_ACTIVE_REVISION=$q_active CAREER_AUTHORITY_PERMISSION_MODE=inspect CAREER_AUTHORITY_PERMISSION_ROOT=$q_root CAREER_AUTHORITY_PERMISSION_OWNER=$q_user CAREER_AUTHORITY_PERMISSION_GROUP=www-data CAREER_AUTHORITY_PERMISSION_RUNTIME_USER=www-data bash -s" < "$inspector")"
+          inspection_exit=$?
           set -e
           if [ "$inspection_exit" -ne 0 ]; then
-            safe_reason="$(
-              jq -er '
-                select(
-                  .schema_version == "career.runtime_authority_permission_control.v1"
-                  and .status == "HOLD_PERMISSION_CONTROL"
-                )
-                | .reason
-                | select(test("^[A-Z0-9_]+$"))
-              ' <<<"$result" 2>/dev/null || true
-            )"
-            if [ -z "$safe_reason" ]; then
-              safe_reason="INSPECTION_TRANSPORT_OR_OUTPUT_INVALID"
-            fi
-            jq \
-              --arg reason "$safe_reason" \
-              '.status = "HOLD_PREFLIGHT_INSPECTION"
-               | .reason = $reason
-               | .active_revision_unchanged = true
-               | .deploy_lock_absent = true
-               | .deploy_process_absent = true' \
-              "$PREFLIGHT_RECEIPT" > "$RUNNER_TEMP/career-permission-preflight.tmp"
-            mv "$RUNNER_TEMP/career-permission-preflight.tmp" "$PREFLIGHT_RECEIPT"
-            echo "Career authority permission preflight held: $safe_reason" >&2
+            reason="$(jq -er 'select(.schema_version=="career.runtime_authority_pointer_permission_control.v2" and .status=="HOLD_POINTER_BOUND_PERMISSION_CONTROL")|.reason|select(test("^[A-Z0-9_]+$"))' <<<"$result" 2>/dev/null || true)"
+            test -n "$reason" || reason=INSPECTION_TRANSPORT_OR_OUTPUT_INVALID
+            jq --arg reason "$reason" '.status="HOLD_PREFLIGHT_INSPECTION"|.reason=$reason' "$PREFLIGHT_RECEIPT" > "$RUNNER_TEMP/preflight.tmp"
+            mv "$RUNNER_TEMP/preflight.tmp" "$PREFLIGHT_RECEIPT"
             exit 1
           fi
-          jq -e '
-            .schema_version == "career.runtime_authority_permission_control.v1"
-            and (.status == "PASS_PERMISSION_REPAIR_REQUIRED" or .status == "PASS_ALREADY_RUNTIME_READABLE")
-            and (.projection_sha256 | test("^[0-9a-f]{64}$"))
-            and (.ledger_sha256 | test("^[0-9a-f]{64}$"))
-            and (.target_set_sha256 | test("^[0-9a-f]{64}$"))
-            and (.snapshot_sha256 | test("^[0-9a-f]{64}$"))
-            and .projection_unique_slug_count > 0
-            and .projection_locale_row_count == (.projection_unique_slug_count * 2)
-            and .ledger_member_count > 0
-            and .repair_target_count >= 0
-            and .repair_target_count <= 4
-            and .metadata_write_count == 0
-            and .content_write_count == 0
-            and .database_write_count == 0
-            and .cache_write_count == 0
-            and .publication_write_count == 0
-            and .discoverability_write_count == 0
-          ' <<<"$result" >/dev/null
-          printf '%s' "$result" > "$RUNNER_TEMP/authority-inspection.json"
-          for field in status projection_sha256 ledger_sha256 target_set_sha256 snapshot_sha256 projection_unique_slug_count projection_locale_row_count ledger_member_count repair_target_count runtime_readable; do
-            value="$(jq -r ".${field}" "$RUNNER_TEMP/authority-inspection.json")"
-            echo "${field^^}=$value" >> "$GITHUB_ENV"
+          jq -e --arg generation "$GENERATION_ID" --arg pointer "$POINTER_DOCUMENT_SHA256" \
+            --arg projection "$PROJECTION_SHA256_EXPECTED" --arg ledger "$LEDGER_SHA256_EXPECTED" \
+            --arg projection_path "$PROJECTION_PATH_SHA256_EXPECTED" --arg ledger_path "$LEDGER_PATH_SHA256_EXPECTED" \
+            '.schema_version=="career.runtime_authority_pointer_permission_control.v2" and .status=="PASS_POINTER_BOUND_PERMISSION_REPAIR_REQUIRED" and .generation_id==$generation and .pointer_document_sha256==$pointer and .projection_sha256==$projection and .ledger_sha256==$ledger and .projection_path_sha256==$projection_path and .ledger_path_sha256==$ledger_path and .projection_unique_slug_count==342 and .projection_locale_row_count==684 and .published_slug_count==30 and .published_locale_row_count==60 and .ledger_member_count==342 and .repair_target_count>=1 and .repair_target_count<=4 and .metadata_write_count==0 and .bytes_unchanged==true and .active_revision_unchanged==true and .deploy_lock_absent==true and .deploy_process_absent==true and .migration_process_absent==true and .content_write_count==0 and .database_write_count==0 and .cms_write_count==0 and .cache_write_count==0 and .publication_write_count==0 and .discoverability_write_count==0 and .migration_count==0 and .deployment_count==0 and .restart_count==0 and .automatic_retry_allowed==false' \
+            <<<"$result" >/dev/null
+          printf '%s' "$result" > "$RUNNER_TEMP/inspection.json"
+          for field in status generation_id pointer_document_sha256 projection_path_sha256 ledger_path_sha256 projection_sha256 ledger_sha256 slug_set_sha256 locale_row_set_sha256 target_set_sha256 snapshot_sha256 repair_target_count runtime_readable; do
+            echo "${field^^}=$(jq -r ".${field}" "$RUNNER_TEMP/inspection.json")" >> "$GITHUB_ENV"
           done
-          echo "Inspection completed with zero server writes."
 
-      - name: Write immutable read-only preflight receipt
+      - name: Write immutable v2 preflight receipt
         shell: bash
         run: |
           set -euo pipefail
-          jq -n \
-            --arg schema_version "career.runtime_authority_permission_preflight.v1" \
-            --arg status "$STATUS" \
-            --arg control_plane_sha "$CONTROL_PLANE_SHA" \
-            --arg active_revision "$EXPECTED_ACTIVE_REVISION" \
-            --arg workflow_run_id "$GITHUB_RUN_ID" \
-            --arg workflow_run_attempt "$GITHUB_RUN_ATTEMPT" \
-            --arg inspector_sha256 "$INSPECTOR_SHA256" \
-            --arg projection_sha256 "$PROJECTION_SHA256" \
-            --arg ledger_sha256 "$LEDGER_SHA256" \
-            --arg target_set_sha256 "$TARGET_SET_SHA256" \
-            --arg snapshot_sha256 "$SNAPSHOT_SHA256" \
-            --argjson projection_unique_slug_count "$PROJECTION_UNIQUE_SLUG_COUNT" \
-            --argjson projection_locale_row_count "$PROJECTION_LOCALE_ROW_COUNT" \
-            --argjson ledger_member_count "$LEDGER_MEMBER_COUNT" \
-            --argjson repair_target_count "$REPAIR_TARGET_COUNT" \
-            --argjson runtime_readable "$RUNTIME_READABLE" \
-            '{
-              schema_version: $schema_version,
-              status: $status,
-              control_plane_sha: $control_plane_sha,
-              active_revision: $active_revision,
-              workflow_run_id: ($workflow_run_id | tonumber),
-              workflow_run_attempt: ($workflow_run_attempt | tonumber),
-              inspector_sha256: $inspector_sha256,
-              projection_sha256: $projection_sha256,
-              ledger_sha256: $ledger_sha256,
-              projection_unique_slug_count: $projection_unique_slug_count,
-              projection_locale_row_count: $projection_locale_row_count,
-              ledger_member_count: $ledger_member_count,
-              target_set_sha256: $target_set_sha256,
-              snapshot_sha256: $snapshot_sha256,
-              repair_target_count: $repair_target_count,
-              runtime_readable: $runtime_readable,
-              active_revision_unchanged: true,
-              deploy_lock_absent: true,
-              deploy_process_absent: true,
-              remote_write_count: 0,
-              metadata_write_count: 0,
-              content_write_count: 0,
-              database_write_count: 0,
-              cache_write_count: 0,
-              publication_write_count: 0,
-              discoverability_write_count: 0,
-              deploy_count: 0,
-              rollback_count: 0
-            }' > "$PREFLIGHT_RECEIPT"
-
-      - name: Publish safe preflight summary
-        if: success()
-        shell: bash
-        run: |
+          jq -n --arg control "$CONTROL_PLANE_SHA" --arg active "$EXPECTED_ACTIVE_REVISION" --arg run "$GITHUB_RUN_ID" --arg attempt "$GITHUB_RUN_ATTEMPT" \
+            --arg inspector "$INSPECTOR_SHA256" --arg generation "$GENERATION_ID" --arg pointer "$POINTER_DOCUMENT_SHA256" \
+            --arg projection_path "$PROJECTION_PATH_SHA256" --arg ledger_path "$LEDGER_PATH_SHA256" --arg projection "$PROJECTION_SHA256" --arg ledger "$LEDGER_SHA256" \
+            --arg slug_set "$SLUG_SET_SHA256" --arg locale_set "$LOCALE_ROW_SET_SHA256" --arg target_set "$TARGET_SET_SHA256" --arg snapshot "$SNAPSHOT_SHA256" \
+            --argjson repair_count "$REPAIR_TARGET_COUNT" --argjson runtime_readable "$RUNTIME_READABLE" \
+            '{schema_version:"career.runtime_authority_pointer_permission_preflight.v2",status:"PASS_POINTER_BOUND_PERMISSION_REPAIR_REQUIRED",control_plane_sha:$control,active_revision:$active,workflow_run_id:($run|tonumber),workflow_run_attempt:($attempt|tonumber),inspector_sha256:$inspector,pointer_apply_run_id:31593321673,pointer_apply_run_attempt:1,pointer_apply_artifact_digest:"sha256:101508066a741afd44d29b4c28bd866b1fa3d4772dfda14c71da71c320c545c7",pointer_apply_receipt_sha256:"e0898f6fbb438495319cf0acc8bd6f808eba18c3f3beeb4a4e7d690312c27bc4",diagnostic_run_id:31627080908,diagnostic_run_attempt:1,diagnostic_artifact_digest:"sha256:870897b74bbf1cb8fdd07c82a8bddde99209a93ac1d6bc67e31cd94d0579e557",diagnostic_receipt_sha256:"dabb89d4c42c83a000102ca0ceaae859f70e5c538815434f4cf9d8c5727f6ef4",generation_id:$generation,pointer_document_sha256:$pointer,projection_path_sha256:$projection_path,ledger_path_sha256:$ledger_path,projection_sha256:$projection,ledger_sha256:$ledger,slug_set_sha256:$slug_set,locale_row_set_sha256:$locale_set,projection_unique_slug_count:342,projection_locale_row_count:684,published_slug_count:30,published_locale_row_count:60,ledger_member_count:342,target_set_sha256:$target_set,snapshot_sha256:$snapshot,repair_target_count:$repair_count,runtime_readable:$runtime_readable,active_revision_unchanged:true,deploy_lock_absent:true,deploy_process_absent:true,migration_process_absent:true,remote_write_count:0,metadata_write_count:0,content_write_count:0,database_write_count:0,cms_write_count:0,cache_write_count:0,publication_write_count:0,discoverability_write_count:0,migration_count:0,deployment_count:0,restart_count:0,automatic_retry_allowed:false}' \
+            > "$PREFLIGHT_RECEIPT"
+          receipt_sha="$(sha256sum "$PREFLIGHT_RECEIPT" | awk '{print $1}')"
+          phrase="I approve one pointer-bound Career production metadata repair for control ${CONTROL_PLANE_SHA}, active ${EXPECTED_ACTIVE_REVISION}, preflight ${GITHUB_RUN_ID}/${GITHUB_RUN_ATTEMPT}, receipt ${receipt_sha}, target ${TARGET_SET_SHA256}, snapshot ${SNAPSHOT_SHA256}, pointer ${POINTER_DOCUMENT_SHA256}, projection path ${PROJECTION_PATH_SHA256}, ledger path ${LEDGER_PATH_SHA256}, repair targets ${REPAIR_TARGET_COUNT}; exact metadata only, no retry."
           {
-            echo "## Career runtime authority permission preflight"
+            echo '## Career pointer-bound permission preflight v2'
             echo
-            echo "- status: $STATUS"
-            echo "- projection_unique_slugs: $PROJECTION_UNIQUE_SLUG_COUNT"
-            echo "- projection_locale_rows: $PROJECTION_LOCALE_ROW_COUNT"
-            echo "- ledger_members: $LEDGER_MEMBER_COUNT"
+            echo "- status: PASS_POINTER_BOUND_PERMISSION_REPAIR_REQUIRED"
+            echo "- authority: 342 slugs / 684 locale rows; published 30 / 60"
             echo "- repair_target_count: $REPAIR_TARGET_COUNT"
-            echo "- runtime_readable: $RUNTIME_READABLE"
-            echo "- server_writes: 0"
+            echo "- receipt_sha256: $receipt_sha"
+            echo "- approval_phrase: $phrase"
+            echo '- all writes: 0'
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload immutable preflight receipt

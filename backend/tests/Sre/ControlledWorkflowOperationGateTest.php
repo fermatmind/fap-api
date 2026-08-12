@@ -37,6 +37,9 @@ final class ControlledWorkflowOperationGateTest extends TestCase
             '.github/actions/controlled-operation-gate/action.yml',
             '.github/scripts/controlled-operation-gate.cjs',
             '.github/workflows/backend-production-auto-deploy.yml',
+            '.github/workflows/career-production-runtime-authority-diagnostic.yml',
+            '.github/workflows/career-runtime-authority-permission-preflight.yml',
+            '.github/workflows/career-runtime-authority-permission-repair.yml',
             '.github/workflows/career-current-generation-pointer-bootstrap-staging-ops.yml',
             '.github/workflows/career-staging-authority-artifact-recovery.yml',
             '.github/workflows/content-promotion-automation.yml',
@@ -44,8 +47,12 @@ final class ControlledWorkflowOperationGateTest extends TestCase
             '.github/workflows/deploy.yml',
             'backend/tests/Sre/ControlledWorkflowOperationGateTest.php',
             'backend/tests/Sre/BackendProductionAutoDeployWorkflowTest.php',
+            'backend/scripts/operations/career_production_runtime_authority_diagnostic.php',
+            'backend/scripts/deploy/career_runtime_authority_permission_control.sh',
+            'backend/tests/Sre/CareerProductionRuntimeAuthorityDiagnosticWorkflowTest.php',
             'backend/tests/Sre/DeployStorageAndDatabaseConfigTest.php',
             'tests/ops/controlled-operation-gate.test.cjs',
+            'tests/ops/test_career_runtime_authority_permission_control.py',
         ];
         self::assertSame(1, preg_match('/paths-ignore:\n(?<paths>(?:\s+- "[^"]+"\n)+)/', $staging, $pathIgnore));
         self::assertSame(count($controlOnlyPaths), preg_match_all('/^\s+- "(?<path>[^"]+)"$/m', $pathIgnore['paths'], $paths));
