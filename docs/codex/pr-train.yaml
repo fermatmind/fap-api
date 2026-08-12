@@ -49695,10 +49695,14 @@ prs:
     allowed_paths:
       - .github/workflows/career-1046-public-product-verify-only.yml
       - backend/app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php
+      - backend/app/Http/Middleware/RecordCareerRuntimeSlo.php
+      - backend/app/Http/Middleware/RecordPublicContentRuntime.php
       - backend/app/Services/Career/PublicCareerAuthorityResponseCache.php
       - backend/scripts/operations/career_1046_public_product_verify_only.php
       - backend/tests/Sre/Career1046PublicProductVerifyOnlyWorkflowTest.php
       - backend/tests/Feature/Career/CareerJobDetailReadModel10kTest.php
+      - backend/tests/Feature/Observability/CareerRuntimeSloAlertingTest.php
+      - backend/tests/Feature/Ops/PublicContentRuntimeMetricsTest.php
       - docs/operations/career-1046-public-product-verify-only.md
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
@@ -49709,13 +49713,14 @@ prs:
     validation:
       - cd backend && php artisan test tests/Sre/Career1046PublicProductVerifyOnlyWorkflowTest.php --no-ansi
       - cd backend && php artisan test tests/Feature/Career/CareerJobDetailReadModel10kTest.php --filter=verify_only --no-ansi
+      - cd backend && php artisan test tests/Feature/Observability/CareerRuntimeSloAlertingTest.php tests/Feature/Ops/PublicContentRuntimeMetricsTest.php --filter=verify_only --no-ansi
       - actionlint .github/workflows/career-1046-public-product-verify-only.yml
       - cd backend && vendor/bin/pint --test scripts/operations/career_1046_public_product_verify_only.php tests/Sre/Career1046PublicProductVerifyOnlyWorkflowTest.php
       - php -l for every changed PHP file
       - php backend/scripts/operations/verify_career_1046_current_state_freeze.php
       - cd backend && bash scripts/ci_verify_mbti.sh through fermatmind-heavy-guard
       - parse workflow, pr-train JSON and YAML
-      - exact nine-file scope and forbidden production action validation
+      - exact thirteen-file scope and forbidden production action validation
       - git diff --check and git diff --cached --check
     stop_if_changed_files_outside_scope: true
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }

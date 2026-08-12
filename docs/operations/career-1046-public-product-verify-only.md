@@ -10,7 +10,7 @@ The lane requires exact latest `main`, an active production release whose SHA eq
 
 The streamed runner first proves the active release name, `REVISION`, and checked-in runner SHA. It then reads the root pointer and byte-identical immutable generation pointer, validates the canonical pointer payload hash, frozen 1046 authority hashes, 1046/2092 counts, and closed sitemap/llms/Search flags. The root pointer must bind the exact generation manifest, EN/ZH directory documents, and EN/ZH detail documents by path and raw SHA-256.
 
-The immutable product documents must contain one exact 1046-slug set in each locale and one exact 2092 locale-row set. Every directory row must bind the canonical hash of its same-generation detail payload. Detail requests carry `X-Fermat-Career-Verify-Only: 1`, which selects a fail-closed response-cache read path that never promotes legacy state, clears negative cache state, dispatches a warm, logs cache recovery, or returns a degraded shell. The public API is then read without redirects or retries:
+The immutable product documents must contain one exact 1046-slug set in each locale and one exact 2092 locale-row set. Every directory row must bind the canonical hash of its same-generation detail payload. Every public request carries `X-Fermat-Career-Verify-Only: 1`. The exact header bypasses both public-content runtime metrics and Career directory SLO recording so the evidence read cannot acquire their cache locks or write telemetry. For details, it also selects a fail-closed response-cache read path that never promotes legacy state, clears negative cache state, dispatches a warm, logs cache recovery, or returns a degraded shell. The public API is then read without redirects or retries:
 
 - EN directory: exactly 1046 unique target slugs;
 - ZH directory: exactly 1046 unique target slugs;
@@ -29,8 +29,8 @@ Do not dispatch the workflow during this PR. Validate the control plane only:
 
 ```bash
 cd backend
-php artisan test tests/Sre/Career1046PublicProductVerifyOnlyWorkflowTest.php --no-ansi
-vendor/bin/pint --test scripts/operations/career_1046_public_product_verify_only.php tests/Sre/Career1046PublicProductVerifyOnlyWorkflowTest.php
+php artisan test tests/Sre/Career1046PublicProductVerifyOnlyWorkflowTest.php tests/Feature/Observability/CareerRuntimeSloAlertingTest.php tests/Feature/Ops/PublicContentRuntimeMetricsTest.php --filter='(verify_only|workflow_is_manual_protected_read_only_and_uploads_every_receipt)' --no-ansi
+vendor/bin/pint --test app/Http/Middleware/RecordCareerRuntimeSlo.php app/Http/Middleware/RecordPublicContentRuntime.php scripts/operations/career_1046_public_product_verify_only.php tests/Sre/Career1046PublicProductVerifyOnlyWorkflowTest.php tests/Feature/Observability/CareerRuntimeSloAlertingTest.php tests/Feature/Ops/PublicContentRuntimeMetricsTest.php
 php -l scripts/operations/career_1046_public_product_verify_only.php
 php -l tests/Sre/Career1046PublicProductVerifyOnlyWorkflowTest.php
 ```

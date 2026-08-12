@@ -83,6 +83,17 @@ final class PublicContentRuntimeMetricsTest extends TestCase
         $this->assertSame([], app(PublicContentRuntimeMetricsService::class)->query(60)['items']);
     }
 
+    public function test_career_verify_only_request_bypasses_runtime_metrics_writes(): void
+    {
+        CarbonImmutable::setTestNow('2026-07-13 10:00:00 UTC');
+
+        $this->withHeader('X-Fermat-Career-Verify-Only', '1')
+            ->getJson('/api/v0.5/__runtime-probe?locale=en')
+            ->assertOk();
+
+        $this->assertSame([], app(PublicContentRuntimeMetricsService::class)->query(60)['items']);
+    }
+
     public function test_every_configured_template_exists_and_has_runtime_middleware(): void
     {
         $configured = array_keys((array) config('public_content_observability.routes', []));

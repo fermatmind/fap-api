@@ -60,6 +60,18 @@ final class CareerRuntimeSloAlertingTest extends TestCase
         }
     }
 
+    public function test_verify_only_header_bypasses_directory_slo_writes(): void
+    {
+        $middleware = new RecordCareerRuntimeSlo(app(CareerRuntimeSloService::class));
+        $request = Request::create('/api/v0.5/career/directory?locale=en', 'GET');
+        $request->headers->set('X-Fermat-Career-Verify-Only', '1');
+
+        $response = $middleware->handle($request, static fn (): Response => new Response('{}', 503));
+
+        $this->assertSame(503, $response->getStatusCode());
+        $this->assertSame(0, app(CareerRuntimeSloService::class)->evaluate()['sample_count']);
+    }
+
     public function test_evaluator_enforces_every_runtime_alert_boundary(): void
     {
         $slo = app(CareerRuntimeSloService::class);

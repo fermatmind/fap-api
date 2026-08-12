@@ -12,11 +12,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class RecordCareerRuntimeSlo
 {
+    private const CAREER_VERIFY_ONLY_HEADER = 'X-Fermat-Career-Verify-Only';
+
     public function __construct(private readonly CareerRuntimeSloService $slo) {}
 
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->path() !== 'api/v0.5/career/directory') {
+        if ($request->header(self::CAREER_VERIFY_ONLY_HEADER) === '1'
+            || $request->path() !== 'api/v0.5/career/directory') {
             return $next($request);
         }
 

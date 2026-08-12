@@ -43495,7 +43495,7 @@
     "id": "SECURITY-103-API-06",
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": "https://github.com/fermatmind/fap-api/pull/3669",
+    "pr_url": null,
     "production_write_execution": false,
     "publish_allowed": false,
     "remote_branch_deleted": false,
@@ -105589,10 +105589,14 @@
     "allowed_paths": [
       ".github/workflows/career-1046-public-product-verify-only.yml",
       "backend/app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php",
+      "backend/app/Http/Middleware/RecordCareerRuntimeSlo.php",
+      "backend/app/Http/Middleware/RecordPublicContentRuntime.php",
       "backend/app/Services/Career/PublicCareerAuthorityResponseCache.php",
       "backend/scripts/operations/career_1046_public_product_verify_only.php",
       "backend/tests/Sre/Career1046PublicProductVerifyOnlyWorkflowTest.php",
       "backend/tests/Feature/Career/CareerJobDetailReadModel10kTest.php",
+      "backend/tests/Feature/Observability/CareerRuntimeSloAlertingTest.php",
+      "backend/tests/Feature/Ops/PublicContentRuntimeMetricsTest.php",
       "docs/operations/career-1046-public-product-verify-only.md",
       "docs/codex/pr-train.yaml",
       "docs/codex/pr-train-state.json"
@@ -105608,20 +105612,20 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "Focused PHPUnit passed with 5 tests and 100 assertions; the complete CareerJobDetailReadModel10kTest passed with 13 tests and 132 assertions. Pint passed for all five changed PHP files, every changed PHP file passed php -l, actionlint passed, workflow/train YAML and state JSON parsed, route:list reported 253 routes, a fresh SQLite migrate completed, the frozen authority verifier returned PASS_FROZEN_ZERO_WRITE_CONTRACT with receipt coverage 1016 and writes 0, and heavy-guarded backend/scripts/ci_verify_mbti.sh exited 0 including the Big Five gate with 1693 tests and 196735 assertions. git diff --check passed after generated Big Five compiler output was explicitly restored."
+        "evidence": "Initial focused PHPUnit passed with 5 tests and 100 assertions and the complete CareerJobDetailReadModel10kTest passed with 13 tests and 132 assertions. After review, the combined exact verify-only and telemetry bypass suite passed 7 tests and 105 assertions; the complete Career SLO and public runtime metrics test files passed 18 tests and 165 assertions. Pint passed for all nine changed PHP files, every changed PHP file passed php -l, actionlint passed, workflow/train YAML and state JSON parsed, route:list reported 253 routes, a fresh SQLite migrate completed, the frozen authority verifier returned PASS_FROZEN_ZERO_WRITE_CONTRACT with receipt coverage 1016 and writes 0, and both heavy-guarded backend/scripts/ci_verify_mbti.sh runs exited 0 including Big Five 1693 tests and 196735 assertions. git diff --check passed after generated Big Five compiler output was explicitly restored after each heavy run."
       },
       "scope": {
         "status": "passed",
-        "evidence": "The worktree contains exactly the nine allowlisted paths: one protected manual workflow, one standalone read-only verifier, the exact-header no-warm public detail read path and its behavioral coverage, one executable SRE contract test, one operations document and the two train ledgers. No production/staging workflow was dispatched; no SSH, frontend fallback, migration, repair, warm, rollback, deploy, DB/CMS/cache/artifact/pointer, sitemap/llms or Search mutation occurred."
+        "evidence": "The worktree contains exactly the thirteen allowlisted paths: one protected manual workflow, one standalone read-only verifier, the exact-header no-warm public detail read path, exact-header bypasses for both cache-writing telemetry middlewares with behavioral coverage, one executable SRE contract test, one operations document and the two train ledgers. No production/staging workflow was dispatched; no SSH, frontend fallback, migration, repair, warm, rollback, deploy, DB/CMS/cache/artifact/pointer, sitemap/llms or Search mutation occurred."
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "PR has not been opened."
+        "evidence": "PR #3669 is open. Current-head required checks and a fresh exact-head Codex review remain required after the telemetry zero-write review fix."
       }
     },
     "failure_reason": null,
     "commit_sha": "37845ce77d9c2a634b30572ad21e2f3fa7fb59b5",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3669",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -105659,8 +105663,13 @@
         "at": "2026-08-12T10:31:23+08:00",
         "status": "github_checks_pending",
         "note": "Pushed the focused branch and opened PR #3669 with authority/runtime boundary, local validation, zero-write production non-execution, deferred scopes and no sidecar issue documented. The protected Task 7A workflow remains undispatched."
+      },
+      {
+        "at": "2026-08-12T10:47:24+08:00",
+        "status": "github_checks_pending",
+        "note": "Exact-head Codex review found two valid same-scope issues. Added exact verify-only-header bypasses to both cache-writing telemetry middlewares with behavioral tests so all 2114 public evidence reads remain zero-cache-write, and corrected PR #3669 ownership from the unrelated planned SECURITY-103-API-06 card to this Task 7A card. Focused 7/105, complete telemetry 18/165, Pint, syntax, actionlint, ledgers, diff checks and the heavy-guarded full ci_verify_mbti chain all pass; generated Big Five files were restored. No workflow was dispatched and no SSH or controlled external state was accessed or mutated."
       }
     ],
-    "updated_at": "2026-08-12T10:31:23+08:00"
+    "updated_at": "2026-08-12T10:47:24+08:00"
   }
 }

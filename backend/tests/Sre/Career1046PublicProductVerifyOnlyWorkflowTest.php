@@ -91,8 +91,10 @@ final class Career1046PublicProductVerifyOnlyWorkflowTest extends TestCase
         $runner = $this->repoFile('backend/scripts/operations/career_1046_public_product_verify_only.php');
         $controller = $this->repoFile('backend/app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php');
         $service = $this->repoFile('backend/app/Services/Career/PublicCareerAuthorityResponseCache.php');
+        $publicRuntime = $this->repoFile('backend/app/Http/Middleware/RecordPublicContentRuntime.php');
+        $careerSlo = $this->repoFile('backend/app/Http/Middleware/RecordCareerRuntimeSlo.php');
         $controlPlane = $workflow.$runner;
-        $combined = $workflow.$runner.$controller.$service;
+        $combined = $workflow.$runner.$controller.$service.$publicRuntime.$careerSlo;
 
         foreach ([
             'workflow_dispatch:',
@@ -147,6 +149,7 @@ final class Career1046PublicProductVerifyOnlyWorkflowTest extends TestCase
             self::assertStringNotContainsString($forbidden, $controlPlane);
         }
         self::assertSame(1, substr_count($workflow, 'uses: actions/upload-artifact@'));
+        self::assertSame(2, substr_count($publicRuntime.$careerSlo, "header(self::CAREER_VERIFY_ONLY_HEADER) === '1'"));
         self::assertGreaterThanOrEqual(2, substr_count($workflow, 'git fetch --no-tags origin main:refs/remotes/origin/main'));
 
         $methodStart = strpos($service, 'public function jobDetailVerifyOnlyRead');

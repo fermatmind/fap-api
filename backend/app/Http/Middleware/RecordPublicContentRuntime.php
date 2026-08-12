@@ -13,12 +13,18 @@ use function Illuminate\Support\defer;
 
 final class RecordPublicContentRuntime
 {
+    private const CAREER_VERIFY_ONLY_HEADER = 'X-Fermat-Career-Verify-Only';
+
     public function __construct(
         private readonly PublicContentRuntimeMetricsService $metrics,
     ) {}
 
     public function handle(Request $request, Closure $next): Response
     {
+        if ($request->header(self::CAREER_VERIFY_ONLY_HEADER) === '1') {
+            return $next($request);
+        }
+
         $scope = $this->scope($request);
         if ($scope === null) {
             return $next($request);
