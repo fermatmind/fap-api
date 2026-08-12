@@ -81,7 +81,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     ) {}
 
     /** @return array<string, mixed> */
-    public function directoryReadModelPayload(string $publicLocale = 'zh-CN'): array
+    public function directoryReadModelPayload(string $publicLocale = 'zh-CN', bool $recordCacheState = true): array
     {
         $normalizedLocale = $this->normalizePublicLocale($publicLocale);
         foreach (['active' => $this->directoryActiveVersionKey($normalizedLocale), 'stale' => $this->directoryLkgVersionKey($normalizedLocale)] as $state => $pointerKey) {
@@ -90,7 +90,9 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                 ? Cache::get($this->directoryVersionPayloadKey($normalizedLocale, $version))
                 : null;
             if (is_array($payload)) {
-                $this->logDirectoryCacheState($normalizedLocale, $state === 'active' ? 'hit' : 'stale', $version);
+                if ($recordCacheState) {
+                    $this->logDirectoryCacheState($normalizedLocale, $state === 'active' ? 'hit' : 'stale', $version);
+                }
 
                 return $payload;
             }
@@ -100,12 +102,16 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         // authority on the HTTP request path and is promoted by the next warm command.
         $legacy = Cache::get($this->directoryReadModelCacheKey($normalizedLocale));
         if (is_array($legacy)) {
-            $this->logDirectoryCacheState($normalizedLocale, 'stale', 'legacy-v1');
+            if ($recordCacheState) {
+                $this->logDirectoryCacheState($normalizedLocale, 'stale', 'legacy-v1');
+            }
 
             return $legacy;
         }
 
-        $this->logDirectoryCacheState($normalizedLocale, 'miss', null);
+        if ($recordCacheState) {
+            $this->logDirectoryCacheState($normalizedLocale, 'miss', null);
+        }
 
         throw new \RuntimeException(sprintf('Career directory authority cache is unavailable for locale %s.', $normalizedLocale));
     }

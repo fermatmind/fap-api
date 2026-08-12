@@ -21,13 +21,19 @@ final class CareerDirectoryAuthorityService
     /**
      * @return array<string, mixed>
      */
-    public function payload(string $locale, int $page = 1, int $perPage = 50, ?string $family = null, ?string $query = null): array
-    {
+    public function payload(
+        string $locale,
+        int $page = 1,
+        int $perPage = 50,
+        ?string $family = null,
+        ?string $query = null,
+        bool $recordCacheState = true,
+    ): array {
         $publicLocale = $this->normalizePublicLocale($locale);
         $page = max(1, $page);
         $perPage = min(100, max(1, $perPage));
 
-        $readModel = $this->responseCache->directoryReadModelPayload($publicLocale);
+        $readModel = $this->responseCache->directoryReadModelPayload($publicLocale, $recordCacheState);
         $items = $this->readyIndexableItems(
             is_array($readModel['items'] ?? null) ? $readModel['items'] : [],
         );

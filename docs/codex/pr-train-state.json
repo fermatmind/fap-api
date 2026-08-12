@@ -105589,12 +105589,16 @@
     "allowed_paths": [
       ".github/workflows/career-1046-public-product-verify-only.yml",
       "backend/app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php",
+      "backend/app/Http/Controllers/API/V0_5/Career/CareerDirectoryController.php",
       "backend/app/Http/Middleware/RecordCareerRuntimeSlo.php",
       "backend/app/Http/Middleware/RecordPublicContentRuntime.php",
       "backend/app/Services/Career/PublicCareerAuthorityResponseCache.php",
+      "backend/app/Services/Career/CareerDirectoryAuthorityService.php",
+      "backend/app/Support/Career/CareerVerifyOnlyRequestAuthorizer.php",
       "backend/scripts/operations/career_1046_public_product_verify_only.php",
       "backend/tests/Sre/Career1046PublicProductVerifyOnlyWorkflowTest.php",
       "backend/tests/Feature/Career/CareerJobDetailReadModel10kTest.php",
+      "backend/tests/Feature/Career/CareerDirectoryAuthorityApiTest.php",
       "backend/tests/Feature/Observability/CareerRuntimeSloAlertingTest.php",
       "backend/tests/Feature/Ops/PublicContentRuntimeMetricsTest.php",
       "docs/operations/career-1046-public-product-verify-only.md",
@@ -105612,11 +105616,11 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "Initial focused PHPUnit passed with 5 tests and 100 assertions and the complete CareerJobDetailReadModel10kTest passed with 13 tests and 132 assertions. After review, the combined exact verify-only and telemetry bypass suite passed 7 tests and 105 assertions; the complete Career SLO and public runtime metrics test files passed 18 tests and 165 assertions. Pint passed for all nine changed PHP files, every changed PHP file passed php -l, actionlint passed, workflow/train YAML and state JSON parsed, route:list reported 253 routes, a fresh SQLite migrate completed, the frozen authority verifier returned PASS_FROZEN_ZERO_WRITE_CONTRACT with receipt coverage 1016 and writes 0, and both heavy-guarded backend/scripts/ci_verify_mbti.sh runs exited 0 including Big Five 1693 tests and 196735 assertions. git diff --check passed after generated Big Five compiler output was explicitly restored after each heavy run."
+        "evidence": "Initial focused PHPUnit passed with 5 tests and 100 assertions and the complete CareerJobDetailReadModel10kTest passed with 13 tests and 132 assertions. The final signed verify-only and no-log focused suite passed 8 tests and 114 assertions; the complete four impacted feature files passed 37 tests and 360 assertions. Pint passed for all thirteen changed PHP files, every changed PHP file passed php -l, actionlint passed, workflow/train YAML and state JSON parsed, route:list reported 253 routes, a fresh SQLite migrate completed, the frozen authority verifier returned PASS_FROZEN_ZERO_WRITE_CONTRACT with receipt coverage 1016 and writes 0, and both heavy-guarded backend/scripts/ci_verify_mbti.sh runs exited 0 including Big Five 1693 tests and 196735 assertions. git diff --check passed after generated Big Five compiler output was explicitly restored after each heavy run."
       },
       "scope": {
         "status": "passed",
-        "evidence": "The worktree contains exactly the thirteen allowlisted paths: one protected manual workflow, one standalone read-only verifier, the exact-header no-warm public detail read path, exact-header bypasses for both cache-writing telemetry middlewares with behavioral coverage, one executable SRE contract test, one operations document and the two train ledgers. No production/staging workflow was dispatched; no SSH, frontend fallback, migration, repair, warm, rollback, deploy, DB/CMS/cache/artifact/pointer, sitemap/llms or Search mutation occurred."
+        "evidence": "The worktree contains exactly the seventeen allowlisted paths: one protected manual workflow, one standalone read-only verifier, a short-lived APP_KEY HMAC authorizer restricted to the exact Career directory/detail routes, authorized no-warm/no-log reads, both telemetry bypasses with behavioral coverage, one executable SRE contract test, one operations document and the two train ledgers. No production/staging workflow was dispatched; no SSH, frontend fallback, migration, repair, warm, rollback, deploy, DB/CMS/cache/artifact/pointer, sitemap/llms or Search mutation occurred."
       },
       "github_required_checks": {
         "status": "pending",
@@ -105668,8 +105672,13 @@
         "at": "2026-08-12T10:47:24+08:00",
         "status": "github_checks_pending",
         "note": "Exact-head Codex review found two valid same-scope issues. Added exact verify-only-header bypasses to both cache-writing telemetry middlewares with behavioral tests so all 2114 public evidence reads remain zero-cache-write, and corrected PR #3669 ownership from the unrelated planned SECURITY-103-API-06 card to this Task 7A card. Focused 7/105, complete telemetry 18/165, Pint, syntax, actionlint, ledgers, diff checks and the heavy-guarded full ci_verify_mbti chain all pass; generated Big Five files were restored. No workflow was dispatched and no SSH or controlled external state was accessed or mutated."
+      },
+      {
+        "at": "2026-08-12T11:04:10+08:00",
+        "status": "github_checks_pending",
+        "note": "Second exact-head review correctly rejected the public marker-only telemetry bypass and remaining directory cache-state log. Replaced it with a short-lived APP_KEY HMAC bound to the exact request URI and restricted to Career directory/detail routes; unsigned, expired, forged and non-Career requests keep ordinary telemetry. Authorized directory reads suppress cache-state logging. Final focused coverage passes 8/114 and all four impacted feature files pass 37/360; thirteen-file Pint, PHP syntax, actionlint, freeze, ledger parsing, exact seventeen-path scope and diff checks pass. Per the solo-owner efficiency rule, no third redundant local full-chain run was started after two successful full runs; fresh GitHub required checks remain the final gate. No workflow was dispatched and no SSH or controlled external state was accessed or mutated."
       }
     ],
-    "updated_at": "2026-08-12T10:47:24+08:00"
+    "updated_at": "2026-08-12T11:04:10+08:00"
   }
 }

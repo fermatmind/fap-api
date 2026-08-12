@@ -7,6 +7,7 @@ namespace Tests\Feature\Career;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Jobs\Career\WarmCareerJobDetailProjection;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
+use App\Support\Career\CareerVerifyOnlyRequestAuthorizer;
 use Illuminate\Contracts\Bus\Dispatcher;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
@@ -109,7 +110,7 @@ final class CareerJobDetailReadModel10kTest extends TestCase
         $cache = app(PublicCareerAuthorityResponseCache::class);
         Cache::put($cache->jobDetailNegativeKey('one', 'en'), true, 300);
 
-        $this->withHeader('X-Fermat-Career-Verify-Only', '1')
+        $this->withHeaders($this->verifyOnlyHeaders('/api/v0.5/career/jobs/one?locale=en'))
             ->getJson('/api/v0.5/career/jobs/one?locale=en')
             ->assertNotFound();
 
@@ -125,7 +126,7 @@ final class CareerJobDetailReadModel10kTest extends TestCase
         $legacy = ['identity' => ['canonical_slug' => 'one'], 'legacy' => true];
         Cache::forever($cache->jobDetailCacheKey('one', 'en'), $legacy);
 
-        $this->withHeader('X-Fermat-Career-Verify-Only', '1')
+        $this->withHeaders($this->verifyOnlyHeaders('/api/v0.5/career/jobs/one?locale=en'))
             ->getJson('/api/v0.5/career/jobs/one?locale=en')
             ->assertOk()
             ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
@@ -308,6 +309,22 @@ final class CareerJobDetailReadModel10kTest extends TestCase
             'detail_route_enabled' => true,
             'robots_indexable' => true,
             'release_gate_pass' => true,
+        ];
+    }
+
+    /** @return array<string, string> */
+    private function verifyOnlyHeaders(string $requestUri): array
+    {
+        $timestamp = (string) time();
+
+        return [
+            CareerVerifyOnlyRequestAuthorizer::MARKER_HEADER => '1',
+            CareerVerifyOnlyRequestAuthorizer::TIMESTAMP_HEADER => $timestamp,
+            CareerVerifyOnlyRequestAuthorizer::SIGNATURE_HEADER => hash_hmac(
+                'sha256',
+                CareerVerifyOnlyRequestAuthorizer::signaturePayload($requestUri, $timestamp),
+                (string) config('app.key'),
+            ),
         ];
     }
 }

@@ -93,8 +93,9 @@ final class Career1046PublicProductVerifyOnlyWorkflowTest extends TestCase
         $service = $this->repoFile('backend/app/Services/Career/PublicCareerAuthorityResponseCache.php');
         $publicRuntime = $this->repoFile('backend/app/Http/Middleware/RecordPublicContentRuntime.php');
         $careerSlo = $this->repoFile('backend/app/Http/Middleware/RecordCareerRuntimeSlo.php');
+        $authorizer = $this->repoFile('backend/app/Support/Career/CareerVerifyOnlyRequestAuthorizer.php');
         $controlPlane = $workflow.$runner;
-        $combined = $workflow.$runner.$controller.$service.$publicRuntime.$careerSlo;
+        $combined = $workflow.$runner.$controller.$service.$publicRuntime.$careerSlo.$authorizer;
 
         foreach ([
             'workflow_dispatch:',
@@ -110,6 +111,9 @@ final class Career1046PublicProductVerifyOnlyWorkflowTest extends TestCase
             'career.1046.public_product_verify_only.v1',
             'PASS_PUBLIC_PRODUCT_VERIFY_ONLY',
             'X-Fermat-Career-Verify-Only: 1',
+            'X-Fermat-Career-Verify-Timestamp:',
+            'X-Fermat-Career-Verify-Signature:',
+            'CareerVerifyOnlyRequestAuthorizer',
             'jobDetailVerifyOnlyRead',
             '.counts.directory_en == 1046',
             '.counts.directory_zh == 1046',
@@ -149,7 +153,7 @@ final class Career1046PublicProductVerifyOnlyWorkflowTest extends TestCase
             self::assertStringNotContainsString($forbidden, $controlPlane);
         }
         self::assertSame(1, substr_count($workflow, 'uses: actions/upload-artifact@'));
-        self::assertSame(2, substr_count($publicRuntime.$careerSlo, "header(self::CAREER_VERIFY_ONLY_HEADER) === '1'"));
+        self::assertSame(2, substr_count($publicRuntime.$careerSlo, 'careerVerifyOnly->isAuthorized($request)'));
         self::assertGreaterThanOrEqual(2, substr_count($workflow, 'git fetch --no-tags origin main:refs/remotes/origin/main'));
 
         $methodStart = strpos($service, 'public function jobDetailVerifyOnlyRead');
@@ -319,6 +323,7 @@ final class Career1046PublicProductVerifyOnlyWorkflowTest extends TestCase
                 'CAREER_PUBLIC_VERIFY_WORKFLOW_RUN_ATTEMPT' => '1',
                 'CAREER_PUBLIC_VERIFY_API_BASE_URL' => $fixture['api_base'],
                 'CAREER_PUBLIC_VERIFY_HTTP_FIXTURE_FILE' => $fixture['http_fixture'],
+                'CAREER_PUBLIC_VERIFY_SIGNING_KEY' => 'fixture-signing-key-at-least-32-bytes',
             ],
         );
         self::assertIsResource($process);

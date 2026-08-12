@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use App\Services\Ops\PublicContentRuntimeMetricsService;
+use App\Support\Career\CareerVerifyOnlyRequestAuthorizer;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,15 +14,14 @@ use function Illuminate\Support\defer;
 
 final class RecordPublicContentRuntime
 {
-    private const CAREER_VERIFY_ONLY_HEADER = 'X-Fermat-Career-Verify-Only';
-
     public function __construct(
         private readonly PublicContentRuntimeMetricsService $metrics,
+        private readonly CareerVerifyOnlyRequestAuthorizer $careerVerifyOnly,
     ) {}
 
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->header(self::CAREER_VERIFY_ONLY_HEADER) === '1') {
+        if ($this->careerVerifyOnly->isAuthorized($request)) {
             return $next($request);
         }
 

@@ -10,9 +10,11 @@ use App\Models\Permission;
 use App\Models\PublicContentRuntimeDaily;
 use App\Models\Role;
 use App\Services\Ops\PublicContentRuntimeMetricsService;
+use App\Support\Career\CareerVerifyOnlyRequestAuthorizer;
 use App\Support\Rbac\PermissionNames;
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -83,7 +85,7 @@ final class PublicContentRuntimeMetricsTest extends TestCase
         $this->assertSame([], app(PublicContentRuntimeMetricsService::class)->query(60)['items']);
     }
 
-    public function test_career_verify_only_request_bypasses_runtime_metrics_writes(): void
+    public function test_only_signed_exact_career_verify_request_bypasses_runtime_metrics_writes(): void
     {
         CarbonImmutable::setTestNow('2026-07-13 10:00:00 UTC');
 
@@ -91,7 +93,40 @@ final class PublicContentRuntimeMetricsTest extends TestCase
             ->getJson('/api/v0.5/__runtime-probe?locale=en')
             ->assertOk();
 
-        $this->assertSame([], app(PublicContentRuntimeMetricsService::class)->query(60)['items']);
+        $items = app(PublicContentRuntimeMetricsService::class)->query(60)['items'];
+        $this->assertCount(1, $items);
+        $this->assertSame(1, $items[0]['request_count']);
+
+        $authorizer = app(CareerVerifyOnlyRequestAuthorizer::class);
+        $careerUri = '/api/v0.5/career/jobs/runtime-probe?locale=en';
+        $careerRequest = Request::create($careerUri, 'GET');
+        foreach ($this->verifyOnlyHeaders($careerUri) as $name => $value) {
+            $careerRequest->headers->set($name, $value);
+        }
+        $this->assertTrue($authorizer->isAuthorized($careerRequest));
+
+        $otherUri = '/api/v0.5/__runtime-probe?locale=en';
+        $otherRequest = Request::create($otherUri, 'GET');
+        foreach ($this->verifyOnlyHeaders($otherUri) as $name => $value) {
+            $otherRequest->headers->set($name, $value);
+        }
+        $this->assertFalse($authorizer->isAuthorized($otherRequest));
+    }
+
+    /** @return array<string, string> */
+    private function verifyOnlyHeaders(string $requestUri): array
+    {
+        $timestamp = (string) time();
+
+        return [
+            CareerVerifyOnlyRequestAuthorizer::MARKER_HEADER => '1',
+            CareerVerifyOnlyRequestAuthorizer::TIMESTAMP_HEADER => $timestamp,
+            CareerVerifyOnlyRequestAuthorizer::SIGNATURE_HEADER => hash_hmac(
+                'sha256',
+                CareerVerifyOnlyRequestAuthorizer::signaturePayload($requestUri, $timestamp),
+                (string) config('app.key'),
+            ),
+        ];
     }
 
     public function test_every_configured_template_exists_and_has_runtime_middleware(): void

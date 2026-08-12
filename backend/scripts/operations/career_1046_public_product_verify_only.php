@@ -28,7 +28,7 @@ try {
     $expected = careerPublicVerifyExpected();
     $release = careerPublicVerifyRelease($expected);
     $generation = careerPublicVerifyGeneration($expected, $release);
-    $observed = careerPublicVerifyPublicProducts($expected, $generation);
+    $observed = careerPublicVerifyPublicProducts($expected, $generation, $release);
     $careerPublicVerifyCounts = $observed['counts'];
     careerPublicVerifyStableReadback($expected, $generation);
 
@@ -147,6 +147,7 @@ function careerPublicVerifyRelease(array $expected): array
     return [
         'release_root' => $releaseRoot,
         'authority_root' => $releaseRoot.'/backend/storage/app/private/career_generation_authority',
+        'signing_key' => careerPublicVerifySigningKey($releaseRoot),
     ];
 }
 
@@ -303,8 +304,8 @@ function careerPublicVerifyGeneration(array $expected, array $release): array
     ];
 }
 
-/** @param array<string, mixed> $expected @param array<string, mixed> $generation @return array{counts:array<string,int>} */
-function careerPublicVerifyPublicProducts(array $expected, array $generation): array
+/** @param array<string, mixed> $expected @param array<string, mixed> $generation @param array<string, string> $release @return array{counts:array<string,int>} */
+function careerPublicVerifyPublicProducts(array $expected, array $generation, array $release): array
 {
     $requests = [];
     foreach (['en' => 'en', 'zh' => 'zh-CN'] as $locale => $queryLocale) {
@@ -313,7 +314,7 @@ function careerPublicVerifyPublicProducts(array $expected, array $generation): a
             $requests[$key] = $expected['api_base_url'].'/api/v0.5/career/directory?locale='.$queryLocale.'&per_page=100&page='.$page;
         }
     }
-    $directoryResponses = careerPublicVerifyFetch($requests);
+    $directoryResponses = careerPublicVerifyFetch($requests, $release['signing_key']);
     $observedByLocale = ['en' => [], 'zh' => []];
     $duplicate = 0;
     $directoryHttpErrors = 0;
@@ -369,7 +370,7 @@ function careerPublicVerifyPublicProducts(array $expected, array $generation): a
             $detailRequests[$locale.'|'.$slug] = $expected['api_base_url'].'/api/v0.5/career/jobs/'.$slug.'?locale='.$queryLocale;
         }
     }
-    $detailResponses = careerPublicVerifyFetch($detailRequests);
+    $detailResponses = careerPublicVerifyFetch($detailRequests, $release['signing_key']);
     $http200 = 0;
     $notFound = $directoryNotFound;
     $serverError = $directoryServerError;
@@ -469,7 +470,7 @@ function careerPublicVerifyStableReadback(array $expected, array $generation): v
 }
 
 /** @param array<string, string> $requests @return array<string, array{status:int,body:string,timeout:bool}> */
-function careerPublicVerifyFetch(array $requests): array
+function careerPublicVerifyFetch(array $requests, string $signingKey): array
 {
     $fixturePath = careerPublicVerifySafeEnv('CAREER_PUBLIC_VERIFY_HTTP_FIXTURE_FILE');
     if ($fixturePath !== null) {
@@ -502,7 +503,16 @@ function careerPublicVerifyFetch(array $requests): array
     foreach (array_chunk($requests, CAREER_PUBLIC_VERIFY_HTTP_CONCURRENCY, true) as $batch) {
         $multi = curl_multi_init();
         $handles = [];
+        $timestamp = (string) time();
         foreach ($batch as $key => $url) {
+            $parts = parse_url($url);
+            $requestUri = is_array($parts) && is_string($parts['path'] ?? null)
+                ? $parts['path'].(is_string($parts['query'] ?? null) ? '?'.$parts['query'] : '')
+                : '';
+            if ($requestUri === '') {
+                throw new Career1046PublicVerifyFailure('PUBLIC_REQUEST_URI_INVALID');
+            }
+            $signature = hash_hmac('sha256', "GET\n{$requestUri}\n{$timestamp}", $signingKey);
             $handle = curl_init($url);
             curl_setopt_array($handle, [
                 CURLOPT_RETURNTRANSFER => true,
@@ -513,6 +523,8 @@ function careerPublicVerifyFetch(array $requests): array
                 CURLOPT_HTTPHEADER => [
                     'Accept: application/json',
                     'X-Fermat-Career-Verify-Only: 1',
+                    'X-Fermat-Career-Verify-Timestamp: '.$timestamp,
+                    'X-Fermat-Career-Verify-Signature: '.$signature,
                 ],
                 CURLOPT_USERAGENT => 'FermatMind-Career1046-VerifyOnly/1.0',
             ]);
@@ -543,6 +555,43 @@ function careerPublicVerifyFetch(array $requests): array
     }
 
     return $responses;
+}
+
+function careerPublicVerifySigningKey(string $releaseRoot): string
+{
+    if (careerPublicVerifySafeEnv('CAREER_PUBLIC_VERIFY_HTTP_FIXTURE_FILE') !== null) {
+        return careerPublicVerifyRequiredEnv('CAREER_PUBLIC_VERIFY_SIGNING_KEY');
+    }
+
+    $backendRoot = $releaseRoot.'/backend';
+    $autoload = $backendRoot.'/vendor/autoload.php';
+    $bootstrap = $backendRoot.'/bootstrap/app.php';
+    if (! is_file($autoload) || ! is_file($bootstrap)) {
+        throw new Career1046PublicVerifyFailure('ACTIVE_RELEASE_BOOTSTRAP_UNAVAILABLE');
+    }
+    $previous = getcwd();
+    try {
+        if (! chdir($backendRoot)) {
+            throw new Career1046PublicVerifyFailure('ACTIVE_RELEASE_BOOTSTRAP_UNAVAILABLE');
+        }
+        require_once $autoload;
+        $app = require $bootstrap;
+        $app->make(\Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+        $key = (string) $app['config']->get('app.key', '');
+    } catch (Career1046PublicVerifyFailure $failure) {
+        throw $failure;
+    } catch (Throwable) {
+        throw new Career1046PublicVerifyFailure('ACTIVE_RELEASE_BOOTSTRAP_FAILED');
+    } finally {
+        if (is_string($previous)) {
+            chdir($previous);
+        }
+    }
+    if (strlen($key) < 16) {
+        throw new Career1046PublicVerifyFailure('VERIFY_SIGNING_KEY_INVALID');
+    }
+
+    return $key;
 }
 
 /** @return array<string, int> */
