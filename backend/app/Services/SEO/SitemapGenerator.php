@@ -2,6 +2,7 @@
 
 namespace App\Services\SEO;
 
+use App\Domain\Career\Publish\Career1046DiscoverabilityReleaseGate;
 use App\Models\Article;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
@@ -784,7 +785,16 @@ class SitemapGenerator
 
     private function getCareerJobDetailUrls(): array
     {
-        return $this->getDirectoryAuthorityCareerJobDetailUrls();
+        return array_values(array_filter(
+            $this->getDirectoryAuthorityCareerJobDetailUrls(),
+            static function (array $url): bool {
+                $slug = strtolower(trim((string) ($url['slug'] ?? '')));
+                $parts = explode(':', $slug, 3);
+
+                return count($parts) === 3
+                    && app(Career1046DiscoverabilityReleaseGate::class)->allows($parts[2], $parts[1]);
+            },
+        ));
     }
 
     private function getDirectoryAuthorityCareerJobDetailUrls(): array
