@@ -71,7 +71,7 @@
 - Use squash merge unless the manifest explicitly says otherwise.
 - After merge, delete the remote branch.
 - After merging a PR-train PR, close its state as `merged` in the same workflow whenever possible.
-- If branch protection prevents direct ledger closeout, report the verified merge and cleanup facts and record them in the next same-repository PR-train task that already updates the ledger. Do not open a standalone ledger-only follow-up unless the user explicitly requests it or stale state blocks an active train dependency.
+- If branch protection prevents direct ledger closeout, report the verified merge and cleanup facts and leave that closeout pending. Do not update the previous item from the next task or open a standalone ledger-only follow-up unless the user explicitly requests a separate reconciliation task.
 - If running in a local clone, run `scripts/post_merge_cleanup.sh <branch> [base]`.
 - If running outside a local clone, do not claim local cleanup was executed.
 

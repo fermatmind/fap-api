@@ -28,7 +28,7 @@
 - Do NOT mix multiple loops into one submission.
 - Do NOT break `backend/scripts/ci_verify_mbti.sh` core chain:
   - content pack / report / events funnel must stay green.
-- Draft PR exception: if `backend/scripts/ci_verify_mbti.sh` is already failing on paths clearly unrelated to the current declared PR scope, an active execution goal supplies the authorization to proceed. Prefer a separate minimal baseline-repair PR when it can restore the required check; otherwise Codex may open a draft PR after:
+- Draft PR exception: if `backend/scripts/ci_verify_mbti.sh` is already failing on paths clearly unrelated to the current declared PR scope, an active execution goal supplies the authorization to proceed. Keep the current scope isolated and do not create a baseline-repair sidecar without an explicit request or Controlled lane necessity. Codex may open a draft PR after:
   - the scoped verification commands for the current PR pass
   - the unrelated failing tests are listed in the PR body
   - the PR body states the PR is not mergeable until those failures are fixed
