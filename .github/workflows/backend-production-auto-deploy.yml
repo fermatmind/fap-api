@@ -80,7 +80,6 @@ jobs:
             const deploySha = String(staging.head_sha || '');
             const expectedRepository = `${owner}/${repo}`;
             if (
-              staging.name !== 'Deploy Application' ||
               staging.path !== '.github/workflows/deploy.yml' ||
               staging.status !== 'completed' ||
               staging.conclusion !== 'success' ||

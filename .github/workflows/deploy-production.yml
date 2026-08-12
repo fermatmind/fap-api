@@ -161,11 +161,10 @@ jobs:
                 exit 2
               fi
               if [ -z "$STAGING_RUN_ID" ]; then
-                RUNS_JSON="$(gh run list --workflow deploy.yml --branch main --commit "$DEPLOY_SHA" --status completed --limit 100 --json databaseId,headSha,name,event,status,conclusion)"
+                RUNS_JSON="$(gh run list --workflow deploy.yml --branch main --commit "$DEPLOY_SHA" --status completed --limit 100 --json databaseId,headSha,event,status,conclusion)"
                 STAGING_RUN_ID="$(jq -r --arg deploy_sha "$DEPLOY_SHA" '
                   [.[]
-                   | select(.name == "Deploy Application"
-                       and (.event == "push" or .event == "workflow_dispatch")
+                   | select((.event == "push" or .event == "workflow_dispatch")
                        and .status == "completed"
                        and .conclusion == "success"
                        and .headSha == $deploy_sha)
@@ -525,8 +524,7 @@ jobs:
 
           RUN_JSON="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${STAGING_RUN_ID}")"
           jq -e \
-            '.name == "Deploy Application"
-             and .path == ".github/workflows/deploy.yml"
+            '.path == ".github/workflows/deploy.yml"
              and (.event == "push" or .event == "workflow_dispatch")
              and .status == "completed"
              and .conclusion == "success"
