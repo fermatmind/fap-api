@@ -599,8 +599,8 @@ jobs:
           fi
           evidence="$RUNNER_TEMP/evidence"
           install -d -m 700 "$evidence"
-          gh run download "$GITHUB_RUN_ID" --name "career-staging-authority-recovery-production-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" --dir "$evidence/production"
-          gh run download "$GITHUB_RUN_ID" --name "career-staging-authority-recovery-staging-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" --dir "$evidence/staging"
+          gh run download "$GITHUB_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "career-staging-authority-recovery-production-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" --dir "$evidence/production"
+          gh run download "$GITHUB_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "career-staging-authority-recovery-staging-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" --dir "$evidence/staging"
           chmod 600 "$evidence"/*/*.json
           production="$evidence/production/production-authority.json"
           staging="$evidence/staging/staging-authority.json"
