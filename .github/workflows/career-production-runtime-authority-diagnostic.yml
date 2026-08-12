@@ -57,9 +57,16 @@ jobs:
               failed_stage: "initialize",
               control_plane_sha: $control,
               active_revision: $active,
+              active_release_name_sha256: "0000000000000000000000000000000000000000000000000000000000000000",
+              active_release_identity_observed: false,
+              runtime_identity_switch_available: false,
               pointer_apply_run_id: 31593321673,
               pointer_apply_artifact_digest: "sha256:101508066a741afd44d29b4c28bd866b1fa3d4772dfda14c71da71c320c545c7",
               pointer_apply_receipt_sha256: "e0898f6fbb438495319cf0acc8bd6f808eba18c3f3beeb4a4e7d690312c27bc4",
+              generation_id: "career-current-342-30-bootstrap-v1",
+              pointer_document_sha256: "1ebfd2826be9d3b63d810d33050034e3d424c95b3db81fa49b0822c5e6b2ec08",
+              projection_sha256: "397f2a4ec284e9c0a6cd610447541ad4773fa7a7f3045008fab5efb334ec85c6",
+              ledger_sha256: "975b311bb346a090f1add678d5a6d9f1be230f87b223e2c3c829f4c7fd7aac6e",
               database_write_count: 0, cms_write_count: 0, cache_write_count: 0,
               pointer_write_count: 0, artifact_write_count: 0, permission_write_count: 0,
               publication_write_count: 0, discoverability_write_count: 0,
@@ -160,10 +167,48 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          umask 077
           receipt="$RUNNER_TEMP/career-production-runtime-authority-diagnostic.json"
           printf -v q_path '%q' "$DEPLOY_PATH"
           printf -v q_active '%q' "$EXPECTED_ACTIVE_REVISION"
           printf -v q_control '%q' "$CONTROL_PLANE_SHA"
+
+          set +e
+          runtime_state="$(
+            timeout --signal=TERM --kill-after=5s 60s \
+              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+                -o ServerAliveInterval=20 -o ServerAliveCountMax=2 \
+                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+                "set -euo pipefail; current=\$(readlink -f $q_path/current); test -d \"\$current\"; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_active; test ! -e $q_path/.dep/deploy.lock; test \"\$(ps -eo comm=,args= | awk '\$1 == \"php\" && (\$0 ~ /dep(\\.phar)? .* production/ || \$0 ~ /artisan migrate/ || \$0 ~ /queue:reload-workers/) {n++} \$1 == \"composer\" && \$0 ~ /install/ {n++} END {print n+0}')\" = 0; release_name=\$(basename \"\$current\"); [[ \"\$release_name\" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]; release_name_sha=\$(printf '%s' \"\$release_name\" | sha256sum | awk '{print \$1}'); php_bin=\$(command -v php); test -n \"\$php_bin\"; runtime_switch=false; if sudo -n -u www-data -- \"\$php_bin\" -r 'exit(0);'; then runtime_switch=true; fi; printf '%s %s\\n' \"\$release_name_sha\" \"\$runtime_switch\"" \
+                2>/dev/null
+          )"
+          runtime_state_status=$?
+          set -e
+          if [ "$runtime_state_status" -ne 0 ] \
+            || [[ ! "$runtime_state" =~ ^[0-9a-f]{64}\ (true|false)$ ]]; then
+            jq '.status = "FAIL_RUNTIME_AUTHORITY_DIAGNOSTIC"
+                | .failed_stage = "REMOTE_PREFLIGHT_TRANSPORT_OR_STATE_INVALID"' \
+              "$receipt" > "$receipt.next"
+            mv "$receipt.next" "$receipt"
+            exit 0
+          fi
+          read -r active_release_sha runtime_switch <<<"$runtime_state"
+          jq \
+            --arg release "$active_release_sha" \
+            --argjson runtime_switch "$runtime_switch" \
+            '.active_release_name_sha256 = $release
+             | .active_release_identity_observed = true
+             | .runtime_identity_switch_available = $runtime_switch' \
+            "$receipt" > "$receipt.next"
+          mv "$receipt.next" "$receipt"
+          if [ "$runtime_switch" != true ]; then
+            jq '.status = "FAIL_RUNTIME_AUTHORITY_DIAGNOSTIC"
+                | .failed_stage = "RUNTIME_IDENTITY_SWITCH_UNAVAILABLE"' \
+              "$receipt" > "$receipt.next"
+            mv "$receipt.next" "$receipt"
+            exit 0
+          fi
+
           set +e
           timeout --signal=TERM --kill-after=5s 120s \
             ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
@@ -174,17 +219,32 @@ jobs:
               > "$receipt.remote" 2>/dev/null
           remote_status=$?
           set -e
-          if jq -e '
+          if jq -e \
+            --arg release "$active_release_sha" '
             .contract_version == "career.production_runtime_authority_diagnostic.v1"
             and (.status == "PASS_RUNTIME_AUTHORITY_READABLE" or .status == "FAIL_RUNTIME_AUTHORITY_DIAGNOSTIC")
             and (.failed_stage == null or (.failed_stage | test("^[A-Z0-9_]{1,160}$")))
+            and .active_release_name_sha256 == $release
           ' "$receipt.remote" >/dev/null 2>&1; then
-            mv "$receipt.remote" "$receipt"
+            jq '.active_release_identity_observed = true
+                | .runtime_identity_switch_available = true' \
+              "$receipt.remote" > "$receipt.next"
+            mv "$receipt.next" "$receipt"
           else
-            jq '.status = "FAIL_REMOTE_OUTCOME_UNCLASSIFIED" | .failed_stage = "REMOTE_TRANSPORT_OR_RECEIPT_INVALID"' \
+            failed_stage=RUNTIME_PROBE_RECEIPT_INVALID
+            if [ "$remote_status" -eq 124 ] || [ "$remote_status" -eq 137 ]; then
+              failed_stage=RUNTIME_PROBE_TIMEOUT
+            elif [ "$remote_status" -eq 255 ]; then
+              failed_stage=RUNTIME_PROBE_TRANSPORT_FAILED
+            fi
+            jq \
+              --arg failed_stage "$failed_stage" \
+              '.status = "FAIL_RUNTIME_AUTHORITY_DIAGNOSTIC"
+               | .failed_stage = $failed_stage' \
               "$receipt" > "$receipt.next"
             mv "$receipt.next" "$receipt"
           fi
+          rm -f "$receipt.remote"
           test "$remote_status" -eq 0 || true
 
       - name: Validate sanitized zero-write receipt
@@ -199,6 +259,8 @@ jobs:
             and .control_plane_sha == $control
             and .active_revision == $active
             and (.active_release_name_sha256 | test("^[0-9a-f]{64}$"))
+            and (.active_release_identity_observed == true or .active_release_identity_observed == false)
+            and (.runtime_identity_switch_available == true or .runtime_identity_switch_available == false)
             and .pointer_apply_run_id == 31593321673
             and .pointer_apply_artifact_digest == "sha256:101508066a741afd44d29b4c28bd866b1fa3d4772dfda14c71da71c320c545c7"
             and .pointer_apply_receipt_sha256 == "e0898f6fbb438495319cf0acc8bd6f808eba18c3f3beeb4a4e7d690312c27bc4"
