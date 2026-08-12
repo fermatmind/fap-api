@@ -143,6 +143,10 @@ final class CareerStagingAuthorityArtifactRecoveryWorkflowTest extends TestCase
             '/staging_restore:.*?for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST DEPLOY_PATH SSH_KNOWN_HOSTS.*?if \\[ -n "\\$RETIRED_DEPLOY_HOST" \\]; then/s',
             $workflow,
         );
+        self::assertMatchesRegularExpression(
+            '/staging_restore:.*?\\[\\[ "\\$DEPLOY_USER" =~ \\^\\[A-Za-z0-9_/s',
+            $workflow,
+        );
     }
 
     private function repoFile(string $relative): string
