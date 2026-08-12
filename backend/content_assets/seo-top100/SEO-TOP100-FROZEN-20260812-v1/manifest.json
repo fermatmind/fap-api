@@ -1,0 +1,68 @@
+{
+  "schema_version": "fermatmind.seo_top100_frozen_package.v1",
+  "batch_id": "SEO-TOP100-FROZEN-20260812-v1",
+  "lane": "TOP100",
+  "subscope": "frozen-20260812-v1",
+  "source_sha256": "e4c9788d6fadff53bc33170299971ab57dbff1810ad1fcdb4f97f5f4ee94d150",
+  "expected_row_count": 30,
+  "target_priorities": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    17,
+    18,
+    19,
+    20,
+    21,
+    23,
+    27,
+    31,
+    32,
+    36,
+    42,
+    52,
+    61,
+    83,
+    84
+  ],
+  "family_counts": {
+    "mbti_profile": 6,
+    "mbti_comparison": 3,
+    "enneagram_wing": 12,
+    "big_five": 4,
+    "article": 3,
+    "test_landing": 2
+  },
+  "hold_count": 68,
+  "control_count": 25,
+  "hold_fingerprint_sha256": "414e60dcaec942387a8d9cf29333ed03a7288c59ac448628f4e14ca56a7cae17",
+  "control_fingerprint_sha256": "c2c9b3750d32717ef78a7bc0d3efdc48f0c244aab276f0369bc402822b7bdd12",
+  "payloads": [
+    {
+      "path": "targets.json",
+      "sha256": "16d8d867fa821c0af031657138766c4bb8d88bd91f8acb62dd2555ca86688ef0"
+    }
+  ],
+  "permissions": [],
+  "boundaries": {
+    "media_mutations": 0,
+    "canonical_mutations": 0,
+    "indexability_mutations": 0,
+    "sitemap_mutations": 0,
+    "llms_mutations": 0,
+    "search_mutations": 0
+  },
+  "package_sha256": "cc96a6ceaf6269b3eabba728f8f4153123bc6114e780ae084045858b60a4ff9c"
+}

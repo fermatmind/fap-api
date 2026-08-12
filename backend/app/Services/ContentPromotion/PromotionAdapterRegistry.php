@@ -14,6 +14,7 @@ use App\Services\ContentPromotion\Adapters\MbtiComparisonEnglishPromotionAdapter
 use App\Services\ContentPromotion\Adapters\MbtiResultPromotionAdapter;
 use App\Services\ContentPromotion\Adapters\PersonalityCmsPromotionAdapter;
 use App\Services\ContentPromotion\Adapters\RiasecContentPromotionAdapter;
+use App\Services\ContentPromotion\Adapters\Top100FrozenCmsBatchPromotionAdapter;
 use App\Services\ContentPromotion\Contracts\ExactPackagePromotionAdapter;
 use DomainException;
 
@@ -31,6 +32,7 @@ final class PromotionAdapterRegistry
         RiasecContentPromotionAuthority $riasecAuthority,
         Eq60CompiledPromotionAuthority $eq60Authority,
         EnneagramPrivateResultPromotionAuthority $enneagramPrivateResultAuthority,
+        Top100FrozenCmsBatchAuthority $top100Authority,
         PromotionRollbackSnapshotService $snapshots,
     ) {
         $adapters = [
@@ -45,6 +47,7 @@ final class PromotionAdapterRegistry
             new LegacyAuditIncompatiblePromotionAdapter('w6_iq_legacy', 'W6', 'iq'),
             new Eq60CompiledPromotionAdapter($eq60Authority, $snapshots),
             new CareerJobCmsPromotionAdapter($careerAuthority, $snapshots),
+            new Top100FrozenCmsBatchPromotionAdapter($top100Authority, $snapshots),
         ];
         $this->adapters = [];
         $ids = [];

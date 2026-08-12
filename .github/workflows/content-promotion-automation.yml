@@ -11,7 +11,7 @@ on:
         description: Registered English content lane
         required: true
         type: choice
-        options: [W1, W2, W3, W4, W5, W6, W7, W8]
+        options: [W1, W2, W3, W4, W5, W6, W7, W8, TOP100]
       subscope:
         description: Registered adapter subscope
         required: false
@@ -32,9 +32,28 @@ on:
         description: Exact package row count
         required: true
         type: number
+      execution_mode:
+        description: Full lifecycle, read-only preflight, or apply a previously verified TOP100 preflight
+        required: true
+        default: full
+        type: choice
+        options: [full, preflight, apply]
+      preflight_run_id:
+        description: Successful TOP100 preflight workflow run id required by apply mode
+        required: false
+        type: string
+      preflight_run_attempt:
+        description: Successful TOP100 preflight workflow run attempt required by apply mode
+        required: false
+        type: string
+      expected_preflight_receipt_sha256:
+        description: Exact downloaded preflight receipt file SHA-256 required by apply mode
+        required: false
+        type: string
 
 permissions:
   contents: read
+  actions: read
 
 concurrency:
   group: content-promotion-${{ inputs.lane }}-${{ inputs.subscope || 'default' }}
@@ -63,19 +82,41 @@ jobs:
           PACKAGE_SHA256: ${{ inputs.expected_package_sha256 }}
           RELEASE_POLICY_SHA256: ${{ inputs.release_policy_sha256 }}
           EXPECTED_ROW_COUNT: ${{ inputs.expected_row_count }}
+          EXECUTION_MODE: ${{ inputs.execution_mode }}
+          PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
+          PREFLIGHT_RUN_ATTEMPT: ${{ inputs.preflight_run_attempt }}
+          PREFLIGHT_RECEIPT_SHA256: ${{ inputs.expected_preflight_receipt_sha256 }}
           AUTOMATION_KEY: ${{ secrets.CONTENT_PROMOTION_AUTOMATION_KEY }}
         run: |
           set -euo pipefail
           test "$GITHUB_REF" = refs/heads/main
           [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[a-f0-9]{40}$ ]]
-          [[ "$LANE" =~ ^W[1-8]$ ]]
+          [[ "$LANE" =~ ^(W[1-8]|TOP100)$ ]]
           [[ "$SUBSCOPE" =~ ^$|^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$ ]]
           [[ "$PACKAGE_SHA256" =~ ^[a-f0-9]{64}$ ]]
           [[ "$RELEASE_POLICY_SHA256" =~ ^[a-f0-9]{64}$ ]]
           [[ "$EXPECTED_ROW_COUNT" =~ ^[1-9][0-9]{0,5}$ ]]
-          [[ "$PACKAGE_PATH" =~ ^(content_assets/en-content-parity|content_packs|content_baselines|database/seeders/data)/[A-Za-z0-9._/-]+$ ]]
+          [[ "$PACKAGE_PATH" =~ ^(content_assets/en-content-parity|content_assets/seo-top100/SEO-TOP100-FROZEN-20260812-v1|content_packs|content_baselines|database/seeders/data)(/[A-Za-z0-9._/-]+)?$ ]]
           [[ "$PACKAGE_PATH" != *".."* ]]
           test -d "backend/$PACKAGE_PATH"
+          [[ "$EXECUTION_MODE" =~ ^(full|preflight|apply)$ ]]
+          if [ "$LANE" = TOP100 ]; then
+            test "$PACKAGE_PATH" = content_assets/seo-top100/SEO-TOP100-FROZEN-20260812-v1
+            test "${{ inputs.subscope }}" = frozen-20260812-v1
+            test "$EXPECTED_ROW_COUNT" = 30
+            test "$EXECUTION_MODE" != full
+          else
+            test "$EXECUTION_MODE" = full
+          fi
+          if [ "$EXECUTION_MODE" = apply ]; then
+            [[ "$PREFLIGHT_RUN_ID" =~ ^[1-9][0-9]{0,19}$ ]]
+            [[ "$PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]{0,9}$ ]]
+            [[ "$PREFLIGHT_RECEIPT_SHA256" =~ ^[a-f0-9]{64}$ ]]
+          else
+            test -z "$PREFLIGHT_RUN_ID"
+            test -z "$PREFLIGHT_RUN_ATTEMPT"
+            test -z "$PREFLIGHT_RECEIPT_SHA256"
+          fi
           git fetch --no-tags origin main:refs/remotes/origin/main
           test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
           minimum_executor_sha="8e738763162ff7c1507e28fa30d1b8cb7154de85"
@@ -83,6 +124,26 @@ jobs:
           git merge-base --is-ancestor "$minimum_executor_sha" "$EXPECTED_CONTROL_PLANE_SHA"
           policy="$(jq -cS . backend/config/content_promotion_release_policy.v2.json | tr -d '\n')"
           test "$(printf '%s' "$policy" | sha256sum | awk '{print $1}')" = "$RELEASE_POLICY_SHA256"
+
+      - name: Download exact TOP100 preflight receipt
+        if: inputs.execution_mode == 'apply'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
+          PREFLIGHT_RUN_ATTEMPT: ${{ inputs.preflight_run_attempt }}
+          PREFLIGHT_RECEIPT_SHA256: ${{ inputs.expected_preflight_receipt_sha256 }}
+        run: |
+          set -euo pipefail
+          destination="$RUNNER_TEMP/prior-preflight"
+          gh run view "$PREFLIGHT_RUN_ID" --attempt "$PREFLIGHT_RUN_ATTEMPT" --json conclusion,headSha,event,workflowName \
+            --jq 'select(.conclusion == "success" and .event == "workflow_dispatch" and .workflowName == "Exact Package Content Promotion Automation")' >/dev/null
+          test "$(gh run view "$PREFLIGHT_RUN_ID" --attempt "$PREFLIGHT_RUN_ATTEMPT" --json headSha --jq .headSha)" = "${{ inputs.expected_control_plane_sha }}"
+          gh run download "$PREFLIGHT_RUN_ID" \
+            --name "content-promotion-TOP100-${PREFLIGHT_RUN_ID}-${PREFLIGHT_RUN_ATTEMPT}" \
+            --dir "$destination"
+          test "$(sha256sum "$destination/preflight.json" | awk '{print $1}')" = "$PREFLIGHT_RECEIPT_SHA256"
+          jq -e '.receipt_kind == "content_promotion_preflight_receipt" and .result == "SUCCEEDED" and .lane == "TOP100" and .subscope == "frozen-20260812-v1"' "$destination/preflight.json" >/dev/null
 
       - name: Set up pinned production SSH identity
         uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
@@ -119,6 +180,7 @@ jobs:
           PACKAGE_SHA256: ${{ inputs.expected_package_sha256 }}
           RELEASE_POLICY_SHA256: ${{ inputs.release_policy_sha256 }}
           EXPECTED_ROW_COUNT: ${{ inputs.expected_row_count }}
+          EXECUTION_MODE: ${{ inputs.execution_mode }}
           AUTOMATION_KEY: ${{ secrets.CONTENT_PROMOTION_AUTOMATION_KEY }}
         run: |
           set -euo pipefail
@@ -132,9 +194,15 @@ jobs:
           test "${#AUTOMATION_KEY}" -ge 32
           signature_material="content-promotion-v2|$EXPECTED_CONTROL_PLANE_SHA|$GITHUB_RUN_ID|$GITHUB_RUN_ATTEMPT|$LANE|${SUBSCOPE:--}|$PACKAGE_SHA256|$RELEASE_POLICY_SHA256|$EXPECTED_ROW_COUNT"
           workflow_signature="$(printf '%s' "$signature_material" | openssl dgst -sha256 -hmac "$AUTOMATION_KEY" -binary | xxd -p -c 256)"
+          if [ "$EXECUTION_MODE" = apply ]; then
+            ssh -p "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes "$DEPLOY_USER@$DEPLOY_HOST" \
+              "install -d -m 0700 '$remote_root'"
+            scp -P "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes \
+              "$RUNNER_TEMP/prior-preflight/preflight.json" "$DEPLOY_USER@$DEPLOY_HOST:$remote_root/prior-preflight.json"
+          fi
           set +e
           ssh -p "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes "$DEPLOY_USER@$DEPLOY_HOST" \
-            "DEPLOY_PATH='$DEPLOY_PATH' RECEIPT_ROOT='$remote_root' CONTROL_SHA='$EXPECTED_CONTROL_PLANE_SHA' LANE='$LANE' SUBSCOPE='$SUBSCOPE' PACKAGE_PATH='$PACKAGE_PATH' PACKAGE_SHA='$PACKAGE_SHA256' POLICY_SHA='$RELEASE_POLICY_SHA256' ROW_COUNT='$EXPECTED_ROW_COUNT' RUN_ID='$GITHUB_RUN_ID' RUN_ATTEMPT='$GITHUB_RUN_ATTEMPT' WORKFLOW_SIGNATURE='$workflow_signature' bash -s" <<'REMOTE'
+            "DEPLOY_PATH='$DEPLOY_PATH' RECEIPT_ROOT='$remote_root' CONTROL_SHA='$EXPECTED_CONTROL_PLANE_SHA' LANE='$LANE' SUBSCOPE='$SUBSCOPE' PACKAGE_PATH='$PACKAGE_PATH' PACKAGE_SHA='$PACKAGE_SHA256' POLICY_SHA='$RELEASE_POLICY_SHA256' ROW_COUNT='$EXPECTED_ROW_COUNT' RUN_ID='$GITHUB_RUN_ID' RUN_ATTEMPT='$GITHUB_RUN_ATTEMPT' WORKFLOW_SIGNATURE='$workflow_signature' EXECUTION_MODE='$EXECUTION_MODE' bash -s" <<'REMOTE'
           set -euo pipefail
           current="$(readlink -f "$DEPLOY_PATH/current")"
           test -f "$current/REVISION"
@@ -145,6 +213,9 @@ jobs:
           executor_sha="$(printf '%s\n' \
             app/Console/Commands/ContentPromoteExactPackage.php \
             app/Services/ContentPromotion/ExactPackagePromotionService.php \
+            app/Services/ContentPromotion/Top100FrozenPackage.php \
+            app/Services/ContentPromotion/Top100FrozenCmsBatchAuthority.php \
+            app/Services/ContentPromotion/Adapters/Top100FrozenCmsBatchPromotionAdapter.php \
             config/content_promotion_release_policy.v2.json \
             | xargs sha256sum | sha256sum | awk '{print $1}')"
           export CONTENT_PROMOTION_SOURCE_COMMIT="$CONTROL_SHA"
@@ -188,11 +259,24 @@ jobs:
             test "$(wc -l < "$stdout" | tr -d ' ')" = 1
             jq -e '.ok == true and .result == "SUCCEEDED" and (.receipt_sha256 | test("^[a-f0-9]{64}$"))' "$stdout" >/dev/null
           }
-          run_phase preflight "$RECEIPT_ROOT/preflight.json"
-          run_phase draft-import "$RECEIPT_ROOT/draft-import.json"
-          run_phase publish "$RECEIPT_ROOT/publication.json" "$RECEIPT_ROOT/draft-import.json"
-          run_phase live-qa "$RECEIPT_ROOT/live-qa.json" "$RECEIPT_ROOT/publication.json"
-          jq -e '.result == "SUCCEEDED" and .published_count == .expected_count and .deploy_mutation_count == 0 and .indexability_mutation_count == 0 and .sitemap_mutation_count == 0 and .llms_mutation_count == 0 and .search_mutation_count == 0' "$RECEIPT_ROOT/live-qa.json" >/dev/null
+          if [ "$EXECUTION_MODE" = preflight ]; then
+            run_phase preflight "$RECEIPT_ROOT/preflight.json"
+            jq -e '.result == "SUCCEEDED" and .target_count == 30 and (.target_state_sha256 | test("^[a-f0-9]{64}$")) and (.approved_prestate_sha256 | test("^[a-f0-9]{64}$")) and .unknown_count == 0 and .hold_write_count == 0 and .control_write_count == 0 and .deferred_out_of_target_link_source_count == 46 and .indexability_mutation_count == 0 and .sitemap_mutation_count == 0 and .llms_mutation_count == 0 and .search_mutation_count == 0' "$RECEIPT_ROOT/preflight.json" >/dev/null
+          else
+            if [ "$EXECUTION_MODE" = full ]; then
+              run_phase preflight "$RECEIPT_ROOT/preflight.json"
+              prior_preflight=""
+            else
+              prior_preflight="$RECEIPT_ROOT/prior-preflight.json"
+            fi
+            run_phase draft-import "$RECEIPT_ROOT/draft-import.json" "$prior_preflight"
+            run_phase publish "$RECEIPT_ROOT/publication.json" "$RECEIPT_ROOT/draft-import.json"
+            run_phase live-qa "$RECEIPT_ROOT/live-qa.json" "$RECEIPT_ROOT/publication.json"
+            jq -e '.result == "SUCCEEDED" and .published_count == .expected_count and .deploy_mutation_count == 0 and .indexability_mutation_count == 0 and .sitemap_mutation_count == 0 and .llms_mutation_count == 0 and .search_mutation_count == 0' "$RECEIPT_ROOT/live-qa.json" >/dev/null
+            if [ "$LANE" = TOP100 ]; then
+              jq -e '.public_api_readback_count == 30 and .live_html_readback_count == 30 and .deferred_out_of_target_link_source_count == 46' "$RECEIPT_ROOT/live-qa.json" >/dev/null
+            fi
+          fi
           REMOTE
           remote_status=$?
           set -e
@@ -203,9 +287,16 @@ jobs:
           fi
           scp -P "$DEPLOY_PORT" -o BatchMode=yes -o StrictHostKeyChecking=yes \
             "$DEPLOY_USER@$DEPLOY_HOST:$remote_root/*.json" "$local_receipts/"
-          jq -e '.receipt_kind == "cms_draft_import_receipt" and .published_count == 0' "$local_receipts/draft-import.json" >/dev/null
-          jq -e '.receipt_kind == "cms_publication_receipt" and .published_count == .expected_count' "$local_receipts/publication.json" >/dev/null
-          jq -e '.receipt_kind == "cms_live_qa_receipt" and .published_count == .expected_count' "$local_receipts/live-qa.json" >/dev/null
+          if [ "$EXECUTION_MODE" = preflight ]; then
+            jq -e '.receipt_kind == "content_promotion_preflight_receipt" and .published_count == 0' "$local_receipts/preflight.json" >/dev/null
+          else
+            jq -e '.receipt_kind == "cms_draft_import_receipt" and .published_count == 0' "$local_receipts/draft-import.json" >/dev/null
+            jq -e '.receipt_kind == "cms_publication_receipt" and .published_count == .expected_count' "$local_receipts/publication.json" >/dev/null
+            jq -e '.receipt_kind == "cms_live_qa_receipt" and .published_count == .expected_count' "$local_receipts/live-qa.json" >/dev/null
+            if [ "$LANE" = TOP100 ]; then
+              jq -e '.public_api_readback_count == 30 and .live_html_readback_count == 30 and .deferred_out_of_target_link_source_count == 46' "$local_receipts/live-qa.json" >/dev/null
+            fi
+          fi
 
       - name: Upload immutable redacted receipts
         if: always()

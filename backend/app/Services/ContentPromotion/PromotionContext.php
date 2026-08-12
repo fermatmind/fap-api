@@ -25,7 +25,7 @@ final readonly class PromotionContext
         if (preg_match('/\A[a-f0-9]{64}\z/', $packageSha256) !== 1) {
             throw new DomainException('package_sha256_invalid');
         }
-        if (preg_match('/\AW[1-8]\z/', $lane) !== 1) {
+        if (preg_match('/\A(?:W[1-8]|TOP100)\z/', $lane) !== 1) {
             throw new DomainException('lane_invalid');
         }
         if ($subscope !== null && preg_match('/\A[A-Za-z0-9][A-Za-z0-9._-]{0,63}\z/', $subscope) !== 1) {
