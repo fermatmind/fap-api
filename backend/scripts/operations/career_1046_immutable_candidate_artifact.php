@@ -9,6 +9,8 @@ use App\Domain\Career\Publish\CareerFullReleaseLedgerProjectionService;
 use App\Domain\Career\Publish\CareerGenerationCanonicalJson;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use App\Http\Resources\Career\CareerJobDetailResource;
+use App\Models\IndexState;
+use App\Models\Occupation;
 use App\Services\Career\Bundles\CareerJobDetailBundleBuilder;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Http\Request;
@@ -97,6 +99,7 @@ final class Career1046ImmutableCandidateArtifactProducer
             if (! is_array($manifest) || ! is_array($manifest['baseline_slugs'] ?? null) || ! is_array($manifest['delta_slugs'] ?? null)) {
                 throw new Career1046ImmutableCandidateArtifactFailure('FROZEN_MANIFEST_INVALID');
             }
+            self::assertTask3bDatabaseState($manifest, $task3b);
             $ledgerEnvelope = app(CareerFullReleaseLedgerProjectionService::class)->build();
             $ledger = $ledgerEnvelope[CareerFullReleaseLedgerProjectionService::LEDGER_FILENAME] ?? null;
             if (! is_array($ledger)) {
@@ -120,7 +123,10 @@ final class Career1046ImmutableCandidateArtifactProducer
                     'payload' => (new CareerJobDetailResource($bundle))->toArray(Request::create('/api/v0.5/career/jobs/'.$item['slug'], 'GET', ['locale' => $locale])),
                 ];
             }
-            $rows = is_array(data_get($ledger, 'public_resolution.rows')) ? data_get($ledger, 'public_resolution.rows') : [];
+            $rows = data_get($ledger, 'public_resolution.rows');
+            if (! is_array($rows)) {
+                $rows = is_array($ledger['members'] ?? null) ? $ledger['members'] : [];
+            }
             $bySlug = [];
             foreach ($rows as $row) {
                 if (is_array($row) && is_string($row['source_slug'] ?? null)) {
@@ -161,6 +167,56 @@ final class Career1046ImmutableCandidateArtifactProducer
         }
         if (! is_string($task3b['artifact_digest'] ?? null) || preg_match('/^sha256:[0-9a-f]{64}$/D', $task3b['artifact_digest']) !== 1) {
             throw new Career1046ImmutableCandidateArtifactFailure('TASK3B_ARTIFACT_INVALID');
+        }
+    }
+
+    /** @param array<string, mixed> $manifest @param array<string, mixed> $task3b */
+    private static function assertTask3bDatabaseState(array $manifest, array $task3b): void
+    {
+        require_once base_path('scripts/operations/career_publication_index_reconciliation_apply.php');
+        $targetSlugs = array_values(array_unique([...$manifest['baseline_slugs'], ...$manifest['delta_slugs']]));
+        sort($targetSlugs, SORT_STRING);
+        $occupations = Occupation::query()
+            ->whereIn('canonical_slug', $targetSlugs)
+            ->orderBy('canonical_slug')
+            ->get(['id', 'canonical_slug'])
+            ->map(static fn (Occupation $occupation): array => [
+                'id' => (string) $occupation->id,
+                'canonical_slug' => strtolower(trim((string) $occupation->canonical_slug)),
+            ])
+            ->all();
+        $occupationIds = array_column($occupations, 'id');
+        $states = IndexState::query()
+            ->whereIn('occupation_id', $occupationIds)
+            ->orderBy('occupation_id')
+            ->orderBy('changed_at')
+            ->orderBy('created_at')
+            ->orderBy('id')
+            ->get(['id', 'occupation_id', 'index_state', 'index_eligible', 'canonical_path', 'canonical_target', 'reason_codes', 'changed_at', 'created_at'])
+            ->map(static fn (IndexState $state): array => [
+                'id' => (string) $state->id,
+                'occupation_id' => (string) $state->occupation_id,
+                'index_state' => (string) $state->index_state,
+                'index_eligible' => (bool) $state->index_eligible,
+                'canonical_path' => (string) $state->canonical_path,
+                'canonical_target' => $state->canonical_target === null ? '' : (string) $state->canonical_target,
+                'reason_codes' => is_array($state->reason_codes) ? $state->reason_codes : [],
+                'changed_at' => $state->changed_at instanceof \DateTimeInterface
+                    ? $state->changed_at->format('Y-m-d\\TH:i:s.uP')
+                    : trim((string) $state->changed_at),
+                'created_at' => $state->created_at instanceof \DateTimeInterface
+                    ? $state->created_at->format('Y-m-d\\TH:i:s.uP')
+                    : trim((string) $state->created_at),
+            ])
+            ->all();
+        $analysis = CareerPublicationIndexReconciliationApply::analyze($manifest, $manifest['delta_slugs'], $occupations, $states);
+        $database = $analysis['database_latest_index_state'] ?? null;
+        if (! is_array($database)
+            || ($database['matching_count'] ?? null) !== Career1046ImmutableCandidateGenerator::RECEIPT_COUNT
+            || ($database['missing_or_mismatching_count'] ?? null) !== 0
+            || ($database['latest_state_tie_count'] ?? null) !== 0
+            || ! hash_equals((string) $task3b['database_state_sha256'], (string) ($database['current_state_sha256'] ?? ''))) {
+            throw new Career1046ImmutableCandidateArtifactFailure('TASK3B_DATABASE_STATE_DRIFT');
         }
     }
 

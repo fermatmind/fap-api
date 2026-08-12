@@ -99,6 +99,8 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
             'matching_latest_state_count == 1016',
             'git merge-base --is-ancestor',
             'SET TRANSACTION READ ONLY',
+            "ledger['members']",
+            'TASK3B_DATABASE_STATE_DRIFT',
             'name: career-1046-immutable-candidate',
             'career-1046-immutable-candidate.json',
         ] as $required) {
