@@ -77,7 +77,7 @@ final class Seo13ArticleDiscoverabilityCacheRefreshCommandTest extends TestCase
         $this->assertSame(['sentinel' => true], Cache::get('seo:sitemap-source:v1:fresh'));
     }
 
-    public function test_execute_refreshes_only_six_bounded_cache_keys_after_schema_release(): void
+    public function test_execute_refreshes_only_nine_bounded_cache_keys_after_schema_release(): void
     {
         $this->createCohort();
         $this->releaseSchema();
@@ -114,7 +114,7 @@ final class Seo13ArticleDiscoverabilityCacheRefreshCommandTest extends TestCase
         $this->assertSame(0, $exitCode, Artisan::output());
         $this->assertTrue($payload['ok']);
         $this->assertTrue($payload['production_write_execution']);
-        $this->assertSame(6, $payload['cache_invalidation_count']);
+        $this->assertSame(9, $payload['cache_invalidation_count']);
         $this->assertSame(5, $payload['cache_warm_write_count']);
         $this->assertSame(4, $payload['sitemap_cache_refresh_count']);
         $this->assertSame(2, $payload['llms_cache_refresh_count']);
@@ -149,8 +149,11 @@ final class Seo13ArticleDiscoverabilityCacheRefreshCommandTest extends TestCase
         $this->assertNull(Cache::get('seo:sitemap-source:v1:stale'));
         $this->assertIsString(Cache::get(SitemapCache::XML_CACHE_KEY));
         $this->assertIsString(Cache::get(SitemapCache::ETAG_CACHE_KEY));
+        $this->assertIsString(Cache::get(SitemapCache::IDENTITY_CACHE_KEY));
         $this->assertIsString(Cache::get('seo:llms-txt:v1:body'));
+        $this->assertIsString(Cache::get('seo:llms-txt:v1:body:career-authority-identity'));
         $this->assertIsString(Cache::get('seo:llms-full-txt:v1:body'));
+        $this->assertIsString(Cache::get('seo:llms-full-txt:v1:body:career-authority-identity'));
     }
 
     public function test_execute_fails_before_cache_writes_when_authority_hash_drifts(): void
@@ -316,8 +319,11 @@ final class Seo13ArticleDiscoverabilityCacheRefreshCommandTest extends TestCase
             'seo:sitemap-source:v1:stale',
             SitemapCache::XML_CACHE_KEY,
             SitemapCache::ETAG_CACHE_KEY,
+            SitemapCache::IDENTITY_CACHE_KEY,
             'seo:llms-txt:v1:body',
+            'seo:llms-txt:v1:body:career-authority-identity',
             'seo:llms-full-txt:v1:body',
+            'seo:llms-full-txt:v1:body:career-authority-identity',
         ];
     }
 

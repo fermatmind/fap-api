@@ -20,6 +20,7 @@ class LlmsController extends Controller
     {
         return $this->cachedTextResponse(
             self::LLMS_TXT_CACHE_KEY,
+            $generator->careerDiscoverabilityCacheIdentity(),
             fn () => $this->buildLlmsTxt($generator)
         );
     }
@@ -28,17 +29,24 @@ class LlmsController extends Controller
     {
         return $this->cachedTextResponse(
             self::LLMS_FULL_TXT_CACHE_KEY,
+            $generator->careerDiscoverabilityCacheIdentity(),
             fn () => $this->buildLlmsFullTxt($generator)
         );
     }
 
-    private function cachedTextResponse(string $cacheKey, callable $builder): Response
+    private function cachedTextResponse(string $cacheKey, string $identity, callable $builder): Response
     {
-        $body = cache()->get($cacheKey);
-        if (! is_string($body)) {
-            $body = $builder();
-            cache()->put($cacheKey, $body, self::CACHE_TTL_SECONDS);
-        }
+        $body = cache()->lock($cacheKey.':career-authority-lock', 30)->block(10, function () use ($cacheKey, $identity, $builder): string {
+            $body = cache()->get($cacheKey);
+            $cachedIdentity = cache()->get($cacheKey.':career-authority-identity');
+            if (! is_string($body) || ! is_string($cachedIdentity) || ! hash_equals($identity, $cachedIdentity)) {
+                $body = (string) $builder();
+                cache()->put($cacheKey, $body, self::CACHE_TTL_SECONDS);
+                cache()->put($cacheKey.':career-authority-identity', $identity, self::CACHE_TTL_SECONDS);
+            }
+
+            return $body;
+        });
 
         return response($body, 200, [
             'Content-Type' => 'text/plain; charset=utf-8',

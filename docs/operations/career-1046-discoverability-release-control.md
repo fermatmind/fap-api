@@ -29,9 +29,28 @@ The permit releases exactly 2092 bilingual Career sitemap URLs and 1046 Career
 llms slugs. Search, IndexNow, GSC, URL Inspection, and all active submission
 remain disabled.
 
+`CAREER-1046-DISCOVERABILITY-RELEASE-ACCEPTANCE-REPAIR-11C` strengthens this
+control without executing it. The runner records the verified preflight receipt
+hash in apply evidence, marks write execution before its first filesystem
+mutation, and distinguishes committed from ambiguous write state. The workflow
+keeps its initialized sanitized receipt until a same-directory temporary runner
+receipt has passed the complete contract and lineage checks, then replaces it
+atomically.
+
+Sitemap, `llms.txt`, and `llms-full.txt` retain their existing body cache keys
+and TTLs. A companion identity binds each cached body to the current active
+generation, permit, frozen cohort, and validated document state. Hold-to-release,
+release-to-hold, malformed authority, and cross-generation drift therefore miss
+and rebuild without an apply-time cache mutation. Each build validates one
+authority snapshot and then performs constant-time in-memory locale membership
+checks. Only the frozen 1046 cohort is withheld; unrelated Career authority and
+all other public content keep their existing behavior.
+
 No workflow dispatch, SSH session, production/staging access, deployment, or
 production mutation occurred while adding this control plane.
 
-Solo-owner efficiency impact: one PR; zero required operator interactions for
-this code-only change. A separate protected invocation is required later for
-the intentionally controlled production action.
+Solo-owner efficiency impact: one acceptance-repair PR; zero required operator
+interactions for this code-only change. It batches the runner, workflow, runtime
+gate, cache-transition, and public-contract corrections because no shorter safe
+repair path preserves their shared lineage boundary. A separate protected
+invocation is required later for the intentionally controlled production action.

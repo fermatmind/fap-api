@@ -59,7 +59,13 @@ class SitemapGenerator
         private readonly ScaleDiscoverabilityPolicy $scaleDiscoverabilityPolicy,
         private readonly CareerDatasetPublicationMetadataService $datasetPublicationMetadataService,
         private readonly CareerDirectoryAuthorityService $careerDirectoryAuthorityService,
+        private readonly Career1046DiscoverabilityReleaseGate $career1046DiscoverabilityReleaseGate,
     ) {}
+
+    public function careerDiscoverabilityCacheIdentity(): string
+    {
+        return $this->career1046DiscoverabilityReleaseGate->cacheIdentity();
+    }
 
     public function generate(): array
     {
@@ -787,12 +793,12 @@ class SitemapGenerator
     {
         return array_values(array_filter(
             $this->getDirectoryAuthorityCareerJobDetailUrls(),
-            static function (array $url): bool {
+            function (array $url): bool {
                 $slug = strtolower(trim((string) ($url['slug'] ?? '')));
                 $parts = explode(':', $slug, 3);
 
                 return count($parts) === 3
-                    && app(Career1046DiscoverabilityReleaseGate::class)->allows($parts[2], $parts[1]);
+                    && $this->career1046DiscoverabilityReleaseGate->allows($parts[2], $parts[1]);
             },
         ));
     }

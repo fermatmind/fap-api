@@ -26,8 +26,11 @@ final class Seo13ArticleDiscoverabilityCacheRefreshService
         SitemapSourceController::CACHE_KEY_STALE,
         SitemapCache::XML_CACHE_KEY,
         SitemapCache::ETAG_CACHE_KEY,
+        SitemapCache::IDENTITY_CACHE_KEY,
         'seo:llms-txt:v1:body',
+        'seo:llms-txt:v1:body:career-authority-identity',
         'seo:llms-full-txt:v1:body',
+        'seo:llms-full-txt:v1:body:career-authority-identity',
     ];
 
     /** @var list<string> */
@@ -182,7 +185,11 @@ final class Seo13ArticleDiscoverabilityCacheRefreshService
             (int) ($sitemap['slug_count'] ?? 0),
             (array) ($sitemap['slug_list'] ?? []),
         );
-        $this->sitemapCache->put($xml, $etag);
+        $this->sitemapCache->put(
+            $xml,
+            $etag,
+            $this->sitemapGenerator->careerDiscoverabilityCacheIdentity(),
+        );
 
         $llms = (string) $this->llmsController->llmsTxt($this->sitemapGenerator)->getContent();
         $llmsFull = (string) $this->llmsController->llmsFullTxt($this->sitemapGenerator)->getContent();

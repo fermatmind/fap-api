@@ -3846,6 +3846,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $changed = [
             'backend/app/Http/Controllers/API/V0_5/SEO/SitemapSourceController.php',
+            'backend/app/Http/Controllers/SitemapController.php',
             'backend/app/Services/Career/PublicCareerAuthorityResponseCache.php',
             'backend/app/Services/SEO/SitemapGenerator.php',
             'backend/app/Services/SEO/SitemapCache.php',
@@ -3915,6 +3916,46 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             '',
             '',
             llmsControllerChangedLines: [...$allowed, '+        return all_articles();'],
+        ));
+    }
+
+    public function test_runtime_freeze_classifier_ignores_only_career_authority_llms_cache_identity(): void
+    {
+        $file = 'backend/app/Http/Controllers/API/V0_5/SEO/LlmsController.php';
+        $allowed = [
+            '+            $generator->careerDiscoverabilityCacheIdentity(),',
+            '+            $generator->careerDiscoverabilityCacheIdentity(),',
+            '-    private function cachedTextResponse(string $cacheKey, callable $builder): Response',
+            '+    private function cachedTextResponse(string $cacheKey, string $identity, callable $builder): Response',
+            '-        $body = cache()->get($cacheKey);',
+            '-        if (! is_string($body)) {',
+            '-            $body = $builder();',
+            '-            cache()->put($cacheKey, $body, self::CACHE_TTL_SECONDS);',
+            '-        }',
+            "+        \$body = cache()->lock(\$cacheKey.':career-authority-lock', 30)->block(10, function () use (\$cacheKey, \$identity, \$builder): string {",
+            '+            $body = cache()->get($cacheKey);',
+            "+            \$cachedIdentity = cache()->get(\$cacheKey.':career-authority-identity');",
+            '+            if (! is_string($body) || ! is_string($cachedIdentity) || ! hash_equals($identity, $cachedIdentity)) {',
+            '+                $body = (string) $builder();',
+            '+                cache()->put($cacheKey, $body, self::CACHE_TTL_SECONDS);',
+            "+                cache()->put(\$cacheKey.':career-authority-identity', \$identity, self::CACHE_TTL_SECONDS);",
+            '+            }',
+            '+',
+            '+            return $body;',
+            '+        });',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            [$file],
+            '',
+            '',
+            llmsControllerChangedLines: $allowed,
+        ));
+        $this->assertSame([$file], $this->mbtiImpactingRuntimeChanges(
+            [$file],
+            '',
+            '',
+            llmsControllerChangedLines: [...$allowed, '+        $body .= "unexpected";'],
         ));
     }
 
@@ -8340,6 +8381,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                                 : []
                         )
                     )
+                    || $this->llmsControllerDiffIsCareerAuthorityCacheIdentityOnly(
+                        $llmsControllerChangedLines ?? (
+                            $repoRoot !== '' && $baseRef !== ''
+                                ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                                : []
+                        )
+                    )
                 )
             ) {
                 continue;
@@ -12531,6 +12579,7 @@ DIFF;
     {
         return in_array($file, [
             'backend/app/Http/Controllers/API/V0_5/SEO/SitemapSourceController.php',
+            'backend/app/Http/Controllers/SitemapController.php',
             'backend/app/Services/Career/PublicCareerAuthorityResponseCache.php',
             'backend/app/Services/SEO/BigFiveCanonicalRouteCatalog.php',
             'backend/app/Services/SEO/SeoDiscoverabilityCacheInvalidator.php',
@@ -12598,6 +12647,47 @@ DIFF;
             "+|| str_starts_with(\$path, '/zh/articles/');",
             '-return $isHelp || $isStatic;',
             '+return $isHelp || $isArticle || $isStatic;',
+        ];
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function llmsControllerDiffIsCareerAuthorityCacheIdentityOnly(array $changedLines): bool
+    {
+        $normalized = array_values(array_filter(array_map(
+            static function (string $line): ?string {
+                if (! in_array($line[0] ?? '', ['+', '-'], true)) {
+                    return null;
+                }
+
+                $body = trim(substr($line, 1));
+
+                return $body === '' ? null : $line[0].$body;
+            },
+            $changedLines,
+        )));
+
+        return $normalized === [
+            '+$generator->careerDiscoverabilityCacheIdentity(),',
+            '+$generator->careerDiscoverabilityCacheIdentity(),',
+            '-private function cachedTextResponse(string $cacheKey, callable $builder): Response',
+            '+private function cachedTextResponse(string $cacheKey, string $identity, callable $builder): Response',
+            '-$body = cache()->get($cacheKey);',
+            '-if (! is_string($body)) {',
+            '-$body = $builder();',
+            '-cache()->put($cacheKey, $body, self::CACHE_TTL_SECONDS);',
+            '-}',
+            "+\$body = cache()->lock(\$cacheKey.':career-authority-lock', 30)->block(10, function () use (\$cacheKey, \$identity, \$builder): string {",
+            '+$body = cache()->get($cacheKey);',
+            "+\$cachedIdentity = cache()->get(\$cacheKey.':career-authority-identity');",
+            '+if (! is_string($body) || ! is_string($cachedIdentity) || ! hash_equals($identity, $cachedIdentity)) {',
+            '+$body = (string) $builder();',
+            '+cache()->put($cacheKey, $body, self::CACHE_TTL_SECONDS);',
+            "+cache()->put(\$cacheKey.':career-authority-identity', \$identity, self::CACHE_TTL_SECONDS);",
+            '+}',
+            '+return $body;',
+            '+});',
         ];
     }
 

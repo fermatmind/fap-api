@@ -386,7 +386,7 @@ prs:
     base: main
     branch: codex/api-iap-01-apple-provider
     title: "API-IAP-01: add fail-closed WeChat-routed Apple IAP provider"
-    status: github_review_repairing
+    status: local_validation_passed
     depends_on:
       - API-UNLOCK-01
       - API-VPAY-01
@@ -455,7 +455,7 @@ prs:
     base: main
     branch: codex/api-ad-01-rewarded-unlock
     title: "API-AD-01: add residual-risk rewarded-ad report unlock"
-    status: implementation_in_progress
+    status: local_validation_passed
     depends_on:
       - API-UNLOCK-01
     train_scope: rewarded_ad_report_unlock
@@ -49752,7 +49752,7 @@ prs:
     base: main
     branch: codex/career-1046-public-product-verify-zero-write-fix
     title: "CAREER-1046-PUBLIC-PRODUCT-VERIFY-ZERO-WRITE-FIX-10A: suppress authenticated verify-only slow-query logs"
-    status: implementation_in_progress
+    status: github_review_repairing
     depends_on:
       - CAREER-1046-PUBLIC-PRODUCT-VERIFY-ONLY-10
     train_scope: career_1046_public_product_verify_zero_write_fix
@@ -49947,3 +49947,63 @@ prs:
     deploy_allowed: false
     content_authority: existing Task 3B receipt-bound database authority and frozen manifest; candidate bytes remain inactive
     repository_rule_impact: strengthens execution evidence and cache isolation without authorizing any external or production action
+
+  - id: CAREER-1046-DISCOVERABILITY-RELEASE-ACCEPTANCE-REPAIR-11C
+    repo: fap-api
+    base: main
+    branch: codex/career-1046-discoverability-release-acceptance-repair-11c
+    title: "CAREER-1046-DISCOVERABILITY-RELEASE-ACCEPTANCE-REPAIR-11C: close runner and cache transition contracts"
+    status: implementation_in_progress
+    depends_on:
+      - CAREER-1046-DISCOVERABILITY-RELEASE-CONTROL-11B
+      - CAREER-1046-IMMUTABLE-CANDIDATE-ACCEPTANCE-REPAIR-07C
+    train_scope: career_1046_discoverability_release_acceptance_repair
+    risk_level: controlled_discoverability_release_acceptance_repair
+    scope:
+      - Close the Task 7B runner import, review-surface, receipt-lineage, conservative transport receipt, and write-state contracts in one repair.
+      - Normalize missing, malformed, and drifted generation authority to a frozen-cohort-only hold with one validated in-memory snapshot per build.
+      - Bind existing sitemap and llms body caches to a companion generation/permit identity and prove hold/release/authority-loss transitions through public HTTP.
+    allowed_paths:
+      - .github/workflows/career-1046-discoverability-release-control.yml
+      - backend/app/Domain/Career/Publish/Career1046DiscoverabilityReleaseGate.php
+      - backend/app/Http/Controllers/API/V0_5/SEO/LlmsController.php
+      - backend/app/Http/Controllers/SitemapController.php
+      - backend/app/Services/Cms/Seo13ArticleDiscoverabilityCacheRefreshService.php
+      - backend/app/Services/SEO/SitemapCache.php
+      - backend/app/Services/SEO/SitemapGenerator.php
+      - backend/scripts/operations/career_1046_discoverability_release_control.php
+      - backend/tests/Feature/SEO/Career1046DiscoverabilityReleaseCacheTransitionTest.php
+      - backend/tests/Feature/SEO/SitemapXmlTest.php
+      - backend/tests/Feature/Console/Seo13ArticleDiscoverabilityCacheRefreshCommandTest.php
+      - backend/tests/Sre/Career1046DiscoverabilityReleaseControlTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/operations/career-1046-discoverability-release-control.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Dispatch a workflow or access production/staging while implementing or validating this repair.
+      - Mutate production database, CMS, cache, authority, pointer, deployment, process, Search, IndexNow, GSC, or URL Inspection state.
+    validation:
+      - cd backend && php artisan test tests/Sre/Career1046DiscoverabilityReleaseControlTest.php tests/Feature/SEO/Career1046DiscoverabilityReleaseCacheTransitionTest.php tests/Feature/SEO/SitemapXmlTest.php tests/Feature/SEO/LlmsArticleEligibilityTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test for every changed PHP file
+      - actionlint .github/workflows/career-1046-discoverability-release-control.yml
+      - bash backend/scripts/ci_verify_mbti.sh
+      - review-surface architecture gate, PHP syntax, train YAML/JSON parsing, exact-scope validation, and git diff --check
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    workflow_policy_change: true
+    production_write_execution: false
+    production_read_only_evidence: false
+    production_workflow_dispatched: false
+    staging_workflow_dispatched: false
+    database_mutation: false
+    cms_mutation: false
+    cache_mutation: false
+    artifact_mutation: false
+    pointer_mutation: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: exact Task 7A receipt, active generation pointer, immutable document bytes, Task 3B database authority, and a no-clobber Task 7B permit; control remains unexecuted
+    repository_rule_impact: repairs acceptance evidence and automatic cache invalidation without authorizing any external action

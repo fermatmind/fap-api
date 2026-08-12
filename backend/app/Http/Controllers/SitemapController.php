@@ -17,7 +17,8 @@ class SitemapController extends Controller
             abort(404);
         }
 
-        $cached = $cache->get();
+        $identity = $generator->careerDiscoverabilityCacheIdentity();
+        $cached = $cache->get($identity);
         if ($cached) {
             $xml = $cached['xml'];
             $etag = $cached['etag'];
@@ -29,7 +30,7 @@ class SitemapController extends Controller
                 (array) ($payload['slug_list'] ?? [])
             );
             $xml = (string) ($payload['xml'] ?? '');
-            $cache->put($xml, $etag);
+            $cache->put($xml, $etag, $identity);
         }
 
         $ifNoneMatch = trim((string) $request->header('If-None-Match', ''));
