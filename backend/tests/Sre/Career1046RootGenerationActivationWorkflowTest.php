@@ -447,6 +447,7 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
             'workflow_dispatch:',
             'expected_control_plane_sha:',
             'expected_release_sha:',
+            'release_name_sha256 == $release_name_sha256',
             'staging_run_id:',
             'expected_staging_receipt_sha256:',
             'expected_staging_artifact_digest:',
