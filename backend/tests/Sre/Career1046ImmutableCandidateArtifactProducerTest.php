@@ -122,6 +122,7 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
         $bundle = new Process([PHP_BINARY, $runner, '--emit-streamed-runner']);
         $bundle->mustRun();
         self::assertStringContainsString('Career1046ImmutableCandidateGenerator', $bundle->getOutput());
+        self::assertStringContainsString('CareerGenerationCanonicalJson', $bundle->getOutput());
         self::assertStringContainsString('CareerPublicationIndexReconciliationApply', $bundle->getOutput());
         self::assertStringContainsString('exit(\\FermatMind\\Operations\\Career1046ImmutableCandidateArtifactProducer::main());', $bundle->getOutput());
 

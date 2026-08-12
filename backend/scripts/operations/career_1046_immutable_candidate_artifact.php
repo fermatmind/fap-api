@@ -38,6 +38,7 @@ final class Career1046ImmutableCandidateArtifactProducer
     {
         $root = dirname(__DIR__, 2);
         $sources = [
+            $root.'/app/Domain/Career/Publish/CareerGenerationCanonicalJson.php',
             $root.'/app/Domain/Career/Publish/Career1046ImmutableCandidateGenerator.php',
             $root.'/scripts/operations/career_publication_index_reconciliation_apply.php',
             __FILE__,
@@ -209,7 +210,9 @@ final class Career1046ImmutableCandidateArtifactProducer
     /** @param array<string, mixed> $manifest @param array<string, mixed> $task3b */
     private static function assertTask3bDatabaseState(string $applicationRoot, array $manifest, array $task3b): void
     {
-        require_once $applicationRoot.'/scripts/operations/career_publication_index_reconciliation_apply.php';
+        if (! class_exists(CareerPublicationIndexReconciliationApply::class)) {
+            require_once $applicationRoot.'/scripts/operations/career_publication_index_reconciliation_apply.php';
+        }
         $targetSlugs = array_values(array_unique([...$manifest['baseline_slugs'], ...$manifest['delta_slugs']]));
         sort($targetSlugs, SORT_STRING);
         $occupations = Occupation::query()
