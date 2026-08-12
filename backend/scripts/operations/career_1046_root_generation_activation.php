@@ -541,38 +541,6 @@ final class Career1046RootGenerationActivation
         if (is_link($immutablePath) || file_exists($immutablePath)) {
             throw new Career1046RootActivationFailure('IMMUTABLE_POINTER_ALREADY_EXISTS');
         }
-        self::writePointerCandidate(
-            $generation['generation_root'],
-            $immutableCandidate,
-            $bytes,
-            $pointerSha,
-            'immutable_pointer_candidate',
-        );
-        $activeNow = self::readContainedFile((string) $current['authority_root'], (string) $current['active_path'], 256_000);
-        if (! hash_equals((string) $current['active_sha256_before'], hash('sha256', $activeNow))) {
-            throw new Career1046RootActivationFailure('ACTIVE_POINTER_CHANGED_BEFORE_IMMUTABLE_POINTER');
-        }
-        if (is_link($immutablePath) || file_exists($immutablePath) || ! rename($immutableCandidate, $immutablePath)) {
-            throw new Career1046RootActivationFailure('IMMUTABLE_POINTER_COMMIT_FAILED');
-        }
-        self::$writeState['pointer_write_count'] = 1;
-        self::$writeState['write_state'] = 'immutable_pointer_committed';
-        self::$writeState['writes_committed'] = true;
-        if (! hash_equals($pointerSha, hash('sha256', self::readContainedFile(
-            (string) $generation['generation_root'],
-            $immutablePath,
-            256_000,
-        )))) {
-            throw new Career1046RootActivationFailure('IMMUTABLE_POINTER_READBACK_FAILED');
-        }
-
-        self::writePointerCandidate(
-            (string) $current['authority_root'],
-            $activeCandidate,
-            $bytes,
-            $pointerSha,
-            'root_pointer_candidate',
-        );
         self::assertActiveRelease($expected);
         self::assertGenerationDocumentReadback($expected, $generation);
         self::assertNoConflictingOperation($expected);
@@ -591,6 +559,41 @@ final class Career1046RootGenerationActivation
                 throw new Career1046RootActivationFailure('DATABASE_AUTHORITY_CHANGED_BEFORE_SWITCH');
             }
 
+            self::assertNoConflictingOperation($expected);
+            self::writePointerCandidate(
+                $generation['generation_root'],
+                $immutableCandidate,
+                $bytes,
+                $pointerSha,
+                'immutable_pointer_candidate',
+            );
+            $activeNow = self::readContainedFile((string) $current['authority_root'], (string) $current['active_path'], 256_000);
+            if (! hash_equals((string) $current['active_sha256_before'], hash('sha256', $activeNow))) {
+                throw new Career1046RootActivationFailure('ACTIVE_POINTER_CHANGED_BEFORE_IMMUTABLE_POINTER');
+            }
+            if (is_link($immutablePath) || file_exists($immutablePath) || ! rename($immutableCandidate, $immutablePath)) {
+                throw new Career1046RootActivationFailure('IMMUTABLE_POINTER_COMMIT_FAILED');
+            }
+            self::$writeState['pointer_write_count'] = 1;
+            self::$writeState['write_state'] = 'immutable_pointer_committed';
+            self::$writeState['writes_committed'] = true;
+            if (! hash_equals($pointerSha, hash('sha256', self::readContainedFile(
+                (string) $generation['generation_root'],
+                $immutablePath,
+                256_000,
+            )))) {
+                throw new Career1046RootActivationFailure('IMMUTABLE_POINTER_READBACK_FAILED');
+            }
+
+            self::writePointerCandidate(
+                (string) $current['authority_root'],
+                $activeCandidate,
+                $bytes,
+                $pointerSha,
+                'root_pointer_candidate',
+            );
+            self::assertActiveRelease($expected);
+            self::assertGenerationDocumentReadback($expected, $generation);
             self::assertNoConflictingOperation($expected);
             $activeNow = self::readContainedFile((string) $current['authority_root'], (string) $current['active_path'], 256_000);
             if (! hash_equals((string) $current['active_sha256_before'], hash('sha256', $activeNow))) {

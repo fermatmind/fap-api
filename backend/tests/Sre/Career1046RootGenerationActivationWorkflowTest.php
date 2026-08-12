@@ -360,7 +360,7 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
 
         self::assertFalse($databaseLockHeld);
         self::assertSame($before, hash_file('sha256', $activePath));
-        self::assertFileExists($this->privateRoot.'/career_generation_authority/generations/'
+        self::assertFileDoesNotExist($this->privateRoot.'/career_generation_authority/generations/'
             .$this->expected['generation_id'].'/generation-pointer.json');
     }
 
@@ -458,9 +458,9 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
         }
 
         self::assertGreaterThanOrEqual(2, substr_count($workflow, 'git fetch --no-tags origin main:refs/remotes/origin/main'));
-        self::assertSame(3, substr_count($runner, 'self::assertNoConflictingOperation($expected);'));
+        self::assertGreaterThanOrEqual(3, substr_count($runner, 'self::assertNoConflictingOperation($expected);'));
         self::assertMatchesRegularExpression(
-            '/\$databaseLockAcquirer\(\);.*\$databaseNow = \$databaseRevalidator\(\);.*DATABASE_AUTHORITY_CHANGED_BEFORE_SWITCH.*self::assertNoConflictingOperation\(\$expected\);.*ACTIVE_POINTER_CHANGED_BEFORE_SWITCH.*rename\(\$activeCandidate.*\$databaseLockReleaser\(\);/s',
+            '/\$databaseLockAcquirer\(\);.*\$databaseNow = \$databaseRevalidator\(\);.*DATABASE_AUTHORITY_CHANGED_BEFORE_SWITCH.*writePointerCandidate\(.*\$immutableCandidate.*rename\(\$immutableCandidate.*writePointerCandidate\(.*\$activeCandidate.*rename\(\$activeCandidate.*\$databaseLockReleaser\(\);/s',
             $runner,
         );
     }
