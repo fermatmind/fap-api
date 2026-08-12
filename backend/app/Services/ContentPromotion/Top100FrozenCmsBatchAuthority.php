@@ -851,13 +851,7 @@ final class Top100FrozenCmsBatchAuthority
     private function importMbtiRevision(PromotionContext $context, array $target, array $resolved): int
     {
         $key = 'seo_top100_frozen_20260812_v1';
-        $snapshot = [$key => [
-            'package_sha256' => $context->packageSha256,
-            'priority' => $target['priority'],
-            'source_row_sha256' => $target['source_row_sha256'],
-            'desired_sha256' => $target['desired_sha256'],
-            'desired' => $target['desired'],
-        ]];
+        $snapshot = $this->mbtiRevisionSnapshot($context, $target);
         if ($resolved['kind'] === 'mbti_variant') {
             $model = $resolved['model'];
             $existing = PersonalityProfileVariantRevision::query()->where('personality_profile_variant_id', $model->id)
@@ -899,6 +893,18 @@ final class Top100FrozenCmsBatchAuthority
         ]);
 
         return 1;
+    }
+
+    /** @param array<string,mixed> $target @return array<string,mixed> */
+    private function mbtiRevisionSnapshot(PromotionContext $context, array $target): array
+    {
+        return ['seo_top100_frozen_20260812_v1' => [
+            'package_sha256' => $context->packageSha256,
+            'priority' => $target['priority'],
+            'source_row_sha256' => $target['source_row_sha256'],
+            'desired_sha256' => $target['desired_sha256'],
+            'desired' => $target['desired'],
+        ]];
     }
 
     /** @param list<array{asset:PersonalityPublicContentAsset,revision:PersonalityPublicContentAssetRevision,asset_key:string,source_hash:string}> $targets */
@@ -949,8 +955,8 @@ final class Top100FrozenCmsBatchAuthority
     {
         match ($resolved['kind']) {
             'personality_asset' => $this->publishPersonality($context, $target, $resolved),
-            'mbti_profile', 'mbti_variant' => $this->publishMbtiProfile($target, $resolved),
-            'mbti_comparison' => $this->publishMbtiComparison($target, $resolved),
+            'mbti_profile', 'mbti_variant' => $this->publishMbtiProfile($context, $target, $resolved),
+            'mbti_comparison' => $this->publishMbtiComparison($context, $target, $resolved),
             'article' => $this->publishArticle($context, $target, $resolved),
             'test_landing' => $this->publishLanding($target, $resolved),
             default => throw new DomainException('top100_frozen_publish_kind_invalid'),
@@ -1004,8 +1010,9 @@ final class Top100FrozenCmsBatchAuthority
         return $revision;
     }
 
-    private function publishMbtiProfile(array $target, array $resolved): void
+    private function publishMbtiProfile(PromotionContext $context, array $target, array $resolved): void
     {
+        $this->assertMbtiRevisionMatchesTarget($context, $target, $resolved);
         $content = $target['desired']['content'];
         $seo = $target['desired']['seo'];
         $resolved['model']->forceFill($content)->saveQuietly();
@@ -1013,9 +1020,32 @@ final class Top100FrozenCmsBatchAuthority
         $this->writeMbtiLinks($resolved, $target['desired']['links']);
     }
 
-    private function publishMbtiComparison(array $target, array $resolved): void
+    private function publishMbtiComparison(PromotionContext $context, array $target, array $resolved): void
     {
+        $this->assertMbtiRevisionMatchesTarget($context, $target, $resolved);
         $resolved['section']->forceFill($target['desired'])->saveQuietly();
+    }
+
+    /** @param array{kind:string,model:Model,seo?:Model,section?:Model} $resolved */
+    private function assertMbtiRevisionMatchesTarget(PromotionContext $context, array $target, array $resolved): void
+    {
+        $expected = $this->mbtiRevisionSnapshot($context, $target);
+        $query = $resolved['kind'] === 'mbti_variant'
+            ? PersonalityProfileVariantRevision::query()->where('personality_profile_variant_id', $resolved['model']->getKey())
+            : PersonalityProfileRevision::query()->where('profile_id', $resolved['model']->getKey());
+        $revision = $query->lockForUpdate()->get()->first(
+            static fn (Model $candidate): bool => data_get($candidate->snapshot_json, 'seo_top100_frozen_20260812_v1.package_sha256') === $context->packageSha256
+                && data_get($candidate->snapshot_json, 'seo_top100_frozen_20260812_v1.priority') === $target['priority'],
+        );
+        if (! $revision instanceof Model
+            || (string) $revision->note !== Top100FrozenPackage::BATCH_ID
+            || (int) $revision->created_by_admin_user_id !== $this->ownerActor()
+            || ! hash_equals(
+                PromotionContextFactory::canonicalJson($expected),
+                PromotionContextFactory::canonicalJson((array) $revision->snapshot_json),
+            )) {
+            throw new DomainException('top100_frozen_mbti_revision_invalid');
+        }
     }
 
     private function publishArticle(PromotionContext $context, array $target, array $resolved): void

@@ -95,6 +95,7 @@ final class Top100FrozenPackageTest extends TestCase
         self::assertStringContainsString('$this->discoverabilityCache->flushArticleDiscoverabilityCaches(false);', $authority);
         self::assertStringContainsString('$this->personalityReviewBinder->assertApproved($context, $personalityReviewTargets);', $authority);
         self::assertStringContainsString('$this->assertPersonalityRevisionMatchesTarget($context, $target, $resolved)', $authority);
+        self::assertStringContainsString('$this->assertMbtiRevisionMatchesTarget($context, $target, $resolved);', $authority);
     }
 
     public function test_rollback_guard_accepts_only_pre_draft_or_exact_published_state(): void
