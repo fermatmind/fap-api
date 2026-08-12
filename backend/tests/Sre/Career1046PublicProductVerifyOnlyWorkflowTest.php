@@ -133,6 +133,7 @@ final class Career1046PublicProductVerifyOnlyWorkflowTest extends TestCase
             'jobDetailVerifyOnlyRead',
             'projectDetailPayload($slug, $payload, ! $verifyOnly)',
             'recordCacheState: $recordCacheState',
+            "['message' => 'career verify-only read unavailable.'], 503",
             'ACTIVE_RELEASE_DRIFT_DURING_VERIFY',
             'careerPublicVerifySemanticCanonicalSha',
             '.counts.directory_en == 1046',

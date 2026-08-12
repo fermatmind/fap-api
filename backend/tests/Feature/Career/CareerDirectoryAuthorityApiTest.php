@@ -85,6 +85,21 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
         Log::shouldNotHaveReceived('info');
     }
 
+    public function test_signed_verify_only_directory_failure_returns_bounded_503_without_logging(): void
+    {
+        Log::spy();
+        Cache::shouldReceive('get')->andThrow(new \RuntimeException('cache unavailable'));
+        $requestUri = '/api/v0.5/career/directory?locale=en&per_page=100';
+
+        $this->withHeaders($this->verifyOnlyHeaders($requestUri))
+            ->getJson($requestUri)
+            ->assertStatus(503)
+            ->assertExactJson(['message' => 'career verify-only read unavailable.']);
+
+        Log::shouldNotHaveReceived('info');
+        Log::shouldNotHaveReceived('error');
+    }
+
     public function test_it_filters_by_family_and_query_without_exposing_full_job_index_fields(): void
     {
         $this->createDirectoryOccupation('accountants-and-auditors', 'Accountants and Auditors', '会计师与审计师', 'business-finance', 'Business and Finance');

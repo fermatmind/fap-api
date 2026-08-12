@@ -11,6 +11,7 @@ use App\Services\Career\Review\CareerPilotReviewEvidenceBridge;
 use App\Support\Career\CareerVerifyOnlyRequestAuthorizer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Throwable;
 
 final class CareerJobDetailController extends Controller
 {
@@ -56,19 +57,27 @@ final class CareerJobDetailController extends Controller
     {
         $publicLocale = is_string($request->query('locale')) ? (string) $request->query('locale') : 'zh-CN';
         $verifyOnly = $this->careerVerifyOnly->isAuthorized($request);
-        $read = $verifyOnly
-            ? $this->responseCache->jobDetailVerifyOnlyRead($slug, $publicLocale)
-            : $this->responseCache->jobDetailRead($slug, $publicLocale);
-        $payload = $read['payload'];
+        try {
+            $read = $verifyOnly
+                ? $this->responseCache->jobDetailVerifyOnlyRead($slug, $publicLocale)
+                : $this->responseCache->jobDetailRead($slug, $publicLocale);
+            $payload = $read['payload'];
 
-        if ($payload === null) {
-            return $this->notFoundResponse('career job detail bundle unavailable.');
+            if ($payload === null) {
+                return $this->notFoundResponse('career job detail bundle unavailable.');
+            }
+
+            $payload = $this->reviewEvidenceBridge->projectDetailPayload($slug, $payload, ! $verifyOnly);
+
+            return response()->json($this->projectReaderSafePayload($payload))
+                ->header(self::PUBLIC_READ_CACHE_HEADER, $read['state']);
+        } catch (Throwable $failure) {
+            if (! $verifyOnly) {
+                throw $failure;
+            }
+
+            return response()->json(['message' => 'career verify-only read unavailable.'], 503);
         }
-
-        $payload = $this->reviewEvidenceBridge->projectDetailPayload($slug, $payload, ! $verifyOnly);
-
-        return response()->json($this->projectReaderSafePayload($payload))
-            ->header(self::PUBLIC_READ_CACHE_HEADER, $read['state']);
     }
 
     /**

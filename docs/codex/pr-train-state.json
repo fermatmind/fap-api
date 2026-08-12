@@ -105699,8 +105699,13 @@
         "at": "2026-08-12T11:38:00+08:00",
         "status": "github_review_repairing",
         "note": "Exact-head review found one final public product gap: directory rows were counted by slug without comparing their canonical paths to the active generation. The runner now retains generation-bound EN/ZH paths and fails closed on any public path drift; focused SRE coverage passes 4 tests / 106 assertions."
+      },
+      {
+        "at": "2026-08-12T11:47:00+08:00",
+        "status": "github_review_repairing",
+        "note": "The next exact-head review found that a signed verify-only cache exception could escape into Laravel exception reporting and mutate the application log. Both signed directory and detail controllers now convert any such failure to a bounded 503 while ordinary requests still rethrow; focused directory/detail error-path tests prove no info/error log call."
       }
     ],
-    "updated_at": "2026-08-12T11:38:00+08:00"
+    "updated_at": "2026-08-12T11:47:00+08:00"
   }
 }

@@ -149,6 +149,21 @@ final class CareerJobDetailReadModel10kTest extends TestCase
         Log::shouldNotHaveReceived('info');
     }
 
+    public function test_verify_only_detail_failure_returns_bounded_503_without_logging(): void
+    {
+        Log::spy();
+        Cache::shouldReceive('get')->andThrow(new \RuntimeException('cache unavailable'));
+        $requestUri = '/api/v0.5/career/jobs/one?locale=en';
+
+        $this->withHeaders($this->verifyOnlyHeaders($requestUri))
+            ->getJson($requestUri)
+            ->assertStatus(503)
+            ->assertExactJson(['message' => 'career verify-only read unavailable.']);
+
+        Log::shouldNotHaveReceived('info');
+        Log::shouldNotHaveReceived('error');
+    }
+
     public function test_legacy_projection_is_promoted_and_reported_as_stale_for_the_current_response(): void
     {
         $cache = app(PublicCareerAuthorityResponseCache::class);
