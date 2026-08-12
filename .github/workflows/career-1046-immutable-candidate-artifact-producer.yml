@@ -1,0 +1,97 @@
+name: Career 1046 Immutable Candidate Artifact Producer
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_control_plane_sha: { description: Exact latest main control SHA, required: true, type: string }
+      expected_release_sha: { description: Exact active production release SHA, required: true, type: string }
+      expected_release_name: { description: Exact active production release name, required: true, type: string }
+      task3b_apply_run_id: { description: Successful Task 3B apply run id, required: true, type: string }
+      task3b_apply_run_attempt: { description: Successful Task 3B apply run attempt, required: true, type: string }
+      expected_task3b_control_plane_sha: { description: Exact immutable Task 3B apply control SHA, required: true, type: string }
+      expected_task3b_artifact_digest: { description: Exact Task 3B artifact digest, required: true, type: string }
+      expected_task3b_receipt_sha256: { description: Exact Task 3B receipt file SHA-256, required: true, type: string }
+      expected_task3b_database_state_sha256: { description: Exact Task 3B postwrite DB state SHA-256, required: true, type: string }
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.repository }}-production
+  cancel-in-progress: false
+
+jobs:
+  produce:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    environment: production
+    env:
+      CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+      RELEASE_SHA: ${{ inputs.expected_release_sha }}
+      RELEASE_NAME: ${{ inputs.expected_release_name }}
+      TASK3B_RUN_ID: ${{ inputs.task3b_apply_run_id }}
+      TASK3B_RUN_ATTEMPT: ${{ inputs.task3b_apply_run_attempt }}
+      TASK3B_CONTROL_PLANE_SHA: ${{ inputs.expected_task3b_control_plane_sha }}
+      TASK3B_ARTIFACT_DIGEST: ${{ inputs.expected_task3b_artifact_digest }}
+      TASK3B_RECEIPT_SHA256: ${{ inputs.expected_task3b_receipt_sha256 }}
+      TASK3B_DATABASE_STATE_SHA256: ${{ inputs.expected_task3b_database_state_sha256 }}
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+      SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Bind latest main and successful Task 3B receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha40='^[0-9a-f]{40}$'; sha64='^[0-9a-f]{64}$'; digest='^sha256:[0-9a-f]{64}$'; positive='^[1-9][0-9]*$'; release='^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$'
+          test "$GITHUB_REF" = refs/heads/main
+          [[ "$CONTROL_PLANE_SHA" =~ $sha40 && "$TASK3B_CONTROL_PLANE_SHA" =~ $sha40 && "$RELEASE_SHA" =~ $sha40 && "$RELEASE_NAME" =~ $release && "$TASK3B_RUN_ID" =~ $positive && "$TASK3B_RUN_ATTEMPT" =~ $positive && "$TASK3B_ARTIFACT_DIGEST" =~ $digest && "$TASK3B_RECEIPT_SHA256" =~ $sha64 && "$TASK3B_DATABASE_STATE_SHA256" =~ $sha64 ]]
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$CONTROL_PLANE_SHA"
+          git cat-file -e "${TASK3B_CONTROL_PLANE_SHA}^{commit}"
+          git merge-base --is-ancestor "$TASK3B_CONTROL_PLANE_SHA" "$CONTROL_PLANE_SHA"
+          run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${TASK3B_RUN_ID}")"
+          jq -e --arg sha "$TASK3B_CONTROL_PLANE_SHA" --argjson attempt "$TASK3B_RUN_ATTEMPT" '.event == "workflow_dispatch" and .head_sha == $sha and .head_branch == "main" and .path == ".github/workflows/career-publication-index-reconciliation-apply-production-ops.yml" and .run_attempt == $attempt and .conclusion == "success"' <<<"$run" >/dev/null
+          artifacts="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${TASK3B_RUN_ID}/artifacts?per_page=100")"
+          name="career-publication-index-reconciliation-apply-${TASK3B_RUN_ID}-${TASK3B_RUN_ATTEMPT}"
+          artifact_id="$(jq -er --arg name "$name" --arg digest "$TASK3B_ARTIFACT_DIGEST" '[.artifacts[] | select(.name == $name and .expired == false and .digest == $digest)] | if length == 1 then .[0].id else error("task3b artifact") end' <<<"$artifacts")"
+          mkdir -p "$RUNNER_TEMP/task3b"; gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${artifact_id}/zip" > "$RUNNER_TEMP/task3b/receipt.zip"
+          test "$(unzip -Z1 "$RUNNER_TEMP/task3b/receipt.zip")" = career-publication-index-reconciliation-apply.json
+          unzip -q "$RUNNER_TEMP/task3b/receipt.zip" -d "$RUNNER_TEMP/task3b"
+          receipt="$RUNNER_TEMP/task3b/career-publication-index-reconciliation-apply.json"
+          test "$(sha256sum "$receipt" | awk '{print $1}')" = "$TASK3B_RECEIPT_SHA256"
+          release_name_sha256="$(printf '%s' "$RELEASE_NAME" | sha256sum | awk '{print $1}')"
+          jq -e --arg sha "$TASK3B_CONTROL_PLANE_SHA" --arg release "$RELEASE_SHA" --arg release_name "$release_name_sha256" --arg db "$TASK3B_DATABASE_STATE_SHA256" --argjson run "$TASK3B_RUN_ID" --argjson attempt "$TASK3B_RUN_ATTEMPT" '.contract_version == "career.publication_index_reconciliation_apply.v1" and .status == "PASS_EXACT_RECONCILIATION_APPLY" and .control_plane_sha == $sha and .release_sha == $release and .release_name_sha256 == $release_name and .workflow_run_id == $run and .workflow_run_attempt == $attempt and .receipt_authority.receipt_covered_count == 1016 and .postwrite_readback.matching_latest_state_count == 1016 and .postwrite_readback.matching_latest_state_set_sha256 == "09ec67befe967e1619a40578c47b862743883717b048da802ee7ef3551a0747f" and .postwrite_readback.current_state_sha256 == $db and .database_insert_count >= 0 and .database_insert_count <= 1016 and .database_update_count == 0 and .database_delete_count == 0 and .cms_write_count == 0 and .cache_write_count == 0 and .artifact_write_count == 0 and .sitemap_write_count == 0 and .llms_write_count == 0 and .search_submission_count == 0' "$receipt" >/dev/null
+
+      - uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Generate one SELECT-only candidate bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          install -d -m 700 ~/.ssh; printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts; chmod 600 ~/.ssh/known_hosts
+          for value in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST DEPLOY_PATH; do test -n "${!value:-}"; done
+          runner_sha256="$(sha256sum backend/scripts/operations/career_1046_immutable_candidate_artifact.php | awk '{print $1}')"
+          printf -v q_path '%q' "$DEPLOY_PATH"; printf -v q_release '%q' "$RELEASE_NAME"; printf -v q_release_sha '%q' "$RELEASE_SHA"; printf -v q_task3b_control '%q' "$TASK3B_CONTROL_PLANE_SHA"; printf -v q_runner '%q' "$runner_sha256"
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "set -euo pipefail; release=\$(readlink -f $q_path/releases/$q_release); test \"\$(readlink -f $q_path/current)\" = \"\$release\"; test \"\$(tr -d '\\r\\n' < \"\$release/REVISION\")\" = $q_release_sha; test \"\$(sha256sum \"\$release/backend/scripts/operations/career_1046_immutable_candidate_artifact.php\" | awk '{print \$1}')\" = $q_runner; CAREER_1046_TASK3B_RUN_ID=$TASK3B_RUN_ID CAREER_1046_TASK3B_RUN_ATTEMPT=$TASK3B_RUN_ATTEMPT CAREER_1046_TASK3B_ARTIFACT_DIGEST=$TASK3B_ARTIFACT_DIGEST CAREER_1046_TASK3B_RECEIPT_SHA256=$TASK3B_RECEIPT_SHA256 CAREER_1046_TASK3B_CONTROL_PLANE_SHA=$q_task3b_control CAREER_1046_TASK3B_RELEASE_SHA=$q_release_sha CAREER_1046_TASK3B_RELEASE_NAME_SHA256=\$(printf '%s' $q_release | sha256sum | awk '{print \$1}') CAREER_1046_TASK3B_DATABASE_STATE_SHA256=$TASK3B_DATABASE_STATE_SHA256 php \"\$release/backend/scripts/operations/career_1046_immutable_candidate_artifact.php\"" > "$RUNNER_TEMP/career-1046-immutable-candidate.json"
+          jq -e '.schema_version == "career.1046.immutable_candidate.v1" and .counts.unique_slugs == 1046 and .counts.locale_rows == 2092 and .candidate_receipt.producer_authority.receipt_covered_slug_count == 1016 and .candidate_receipt.producer_authority.production_read_only == true' "$RUNNER_TEMP/career-1046-immutable-candidate.json" >/dev/null
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: career-1046-immutable-candidate
+          path: ${{ runner.temp }}/career-1046-immutable-candidate.json
+          if-no-files-found: error
+          retention-days: 30

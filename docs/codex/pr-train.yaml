@@ -49746,3 +49746,52 @@ prs:
     deploy_allowed: false
     content_authority: exact active generation pointer and its hash-bound immutable 1046/2092 product documents; this PR adds only an unexecuted read-only verifier
     repository_rule_impact: adds one protected evidence-only public product verification lane while keeping discoverability release separately controlled
+
+  - id: CAREER-1046-IMMUTABLE-CANDIDATE-ARTIFACT-PRODUCER-07B
+    repo: fap-api
+    base: main
+    branch: codex/career-1046-immutable-candidate-artifact-producer
+    title: "CAREER-1046-IMMUTABLE-CANDIDATE-ARTIFACT-PRODUCER-07B: produce Task 5 immutable candidate artifact"
+    status: implementation_in_progress
+    depends_on:
+      - CAREER-PUBLICATION-INDEX-RECONCILIATION-APPLY-06B
+      - CAREER-1046-IMMUTABLE-CANDIDATE-07
+    train_scope: career_1046_immutable_candidate_artifact_producer
+    risk_level: p1_protected_production_read_only_evidence_control
+    scope:
+      - Add one protected manual producer that binds the exact successful Task 3B apply receipt and reuses the existing immutable candidate generator.
+      - Emit only the Task 5 one-file `career-1046-immutable-candidate` artifact for the exact frozen 30 + 1016 = 1046 and 2092 locale-row authority set.
+    allowed_paths:
+      - .github/workflows/career-1046-immutable-candidate-artifact-producer.yml
+      - backend/scripts/operations/career_1046_immutable_candidate_artifact.php
+      - backend/tests/Sre/Career1046ImmutableCandidateArtifactProducerTest.php
+      - docs/operations/career-1046-immutable-candidate-artifact-producer.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Dispatch any workflow or write production DB, CMS, Redis/cache, artifact tree, pointer, sitemap, llms, Search, deploy, migration, or release state.
+      - Reimplement the immutable generator, activate a generation, or implement Task 7A.1 or Task 7B.
+    validation:
+      - cd backend && php artisan test tests/Sre/Career1046ImmutableCandidateArtifactProducerTest.php --no-ansi
+      - actionlint .github/workflows/career-1046-immutable-candidate-artifact-producer.yml
+      - php -l backend/scripts/operations/career_1046_immutable_candidate_artifact.php
+      - parse pr-train JSON and YAML
+      - git diff --check and exact six-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    workflow_policy_change: true
+    production_write_execution: false
+    production_read_only_evidence: false
+    production_workflow_dispatched: false
+    staging_workflow_dispatched: false
+    database_mutation: false
+    cms_mutation: false
+    cache_mutation: false
+    artifact_mutation: false
+    pointer_mutation: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: Task 3B receipt-bound database authority plus the frozen manifest; the artifact remains inactive candidate evidence
+    repository_rule_impact: closes the producer-to-Task-5 artifact contract without authorizing production execution

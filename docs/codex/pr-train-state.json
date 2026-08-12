@@ -105707,5 +105707,30 @@
       }
     ],
     "updated_at": "2026-08-12T11:47:00+08:00"
+  },
+  "CAREER-1046-IMMUTABLE-CANDIDATE-ARTIFACT-PRODUCER-07B": {
+    "id": "CAREER-1046-IMMUTABLE-CANDIDATE-ARTIFACT-PRODUCER-07B",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-1046-immutable-candidate-artifact-producer",
+    "title": "CAREER-1046-IMMUTABLE-CANDIDATE-ARTIFACT-PRODUCER-07B: produce Task 5 immutable candidate artifact",
+    "status": "local_validation_passed",
+    "depends_on": ["CAREER-PUBLICATION-INDEX-RECONCILIATION-APPLY-06B", "CAREER-1046-IMMUTABLE-CANDIDATE-07"],
+    "allowed_paths": [".github/workflows/career-1046-immutable-candidate-artifact-producer.yml", "backend/scripts/operations/career_1046_immutable_candidate_artifact.php", "backend/tests/Sre/Career1046ImmutableCandidateArtifactProducerTest.php", "docs/operations/career-1046-immutable-candidate-artifact-producer.md", "docs/codex/pr-train.yaml", "docs/codex/pr-train-state.json"],
+    "checks": {"authorization": {"status": "passed", "evidence": "The 2026-08-12 Career 1046 execution goal authorizes this Task 4B control-plane PR only; dispatch and every production/staging action remain forbidden."}, "dependency": {"status": "passed", "evidence": "PRs #3665, #3666, #3667, #3668 and #3669 are merged with required checks passing on origin/main."}},
+    "production_write_execution": false,
+    "production_workflow_dispatched": false,
+    "staging_workflow_dispatched": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "cache_mutation": false,
+    "artifact_mutation": false,
+    "pointer_mutation": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "url_submission": false,
+    "deploy_allowed": false,
+    "transitions": [{"at": "2026-08-12T12:00:00+08:00", "status": "implementation_in_progress", "note": "Started from latest origin/main in an isolated worktree. Scope is the Task 3B receipt-bound, manual-only, SELECT-only candidate artifact producer and its direct contract coverage. No workflow dispatch, SSH session, production/staging read or mutation, deploy, migration, CMS, cache, pointer, sitemap, llms or Search action occurred."}, {"at": "2026-08-12T13:33:02+08:00", "status": "local_validation_passed", "note": "Focused producer/consumer contract coverage passed 4 tests / 37 assertions. actionlint, Pint, PHP syntax, workflow/train parsing and git diff --check passed. The heavy-guarded ci_verify_mbti master chain completed; its generated Big Five files and CI-only fixture packages were removed from this isolated worktree. Exact six-path scope validation passed. No workflow dispatch, SSH, production/staging access, deploy, migration, CMS, database, cache, pointer, sitemap, llms or Search action occurred."}],
+    "updated_at": "2026-08-12T13:33:02+08:00"
   }
 }
