@@ -46,6 +46,7 @@ final class Top100FrozenCmsBatchAuthority
         private readonly PersonalityPublicAssetReadModelCache $personalityAssetCache,
         private readonly PersonalityPublicReadModelCache $mbtiCache,
         private readonly PersonalityReviewAttestationService $reviews,
+        private readonly PersonalityCmsPromotionReviewBinder $personalityReviewBinder,
         private readonly ArticleBodyHeadingGuard $articleBodyHeadingGuard,
         private readonly ArticlePublishService $articlePublisher,
         private readonly HttpKernel $httpKernel,
@@ -127,6 +128,21 @@ final class Top100FrozenCmsBatchAuthority
     {
         $result = DB::transaction(function () use ($context): array {
             $package = $this->inspect($context, true);
+            $personalityReviewTargets = [];
+            foreach ($package['targets'] as $target) {
+                if ($target['changed'] && $target['model_kind'] === 'personality_asset') {
+                    $resolved = $this->resolve($target, true);
+                    $revision = $this->assertPersonalityRevisionMatchesTarget($context, $target, $resolved);
+                    $personalityReviewTargets[] = [
+                        'asset' => $resolved['model'],
+                        'revision' => $revision,
+                        'asset_key' => $this->assetKey($target),
+                    ];
+                }
+            }
+            if ($personalityReviewTargets !== []) {
+                $this->personalityReviewBinder->assertApproved($context, $personalityReviewTargets);
+            }
             $changed = 0;
             foreach ($package['targets'] as $target) {
                 if (! $target['changed']) {
@@ -945,15 +961,7 @@ final class Top100FrozenCmsBatchAuthority
     {
         /** @var PersonalityPublicContentAsset $asset */
         $asset = $resolved['model'];
-        $revision = PersonalityPublicContentAssetRevision::query()->lockForUpdate()
-            ->where('authority_package_sha256', $context->packageSha256)
-            ->where('authority_asset_key', $this->assetKey($target))->first();
-        if (! $revision instanceof PersonalityPublicContentAssetRevision
-            || (int) $asset->working_revision_id !== (int) $revision->id
-            || ! PersonalityPublicContentAssetRevisionReview::query()->where('revision_id', $revision->id)
-                ->where('decision', PersonalityPublicContentAssetRevisionReview::DECISION_APPROVED)->exists()) {
-            throw new DomainException('top100_frozen_personality_revision_not_approved');
-        }
+        $revision = $this->assertPersonalityRevisionMatchesTarget($context, $target, $resolved);
         $desired = $target['desired'];
         $asset->forceFill([
             'title' => $desired['title'],
@@ -967,6 +975,33 @@ final class Top100FrozenCmsBatchAuthority
             'working_revision_id' => null,
         ])->saveQuietly();
         $revision->forceFill(['workflow_state' => 'published'])->save();
+    }
+
+    /** @param array{kind:string,model:Model,seo?:Model,section?:Model} $resolved */
+    private function assertPersonalityRevisionMatchesTarget(
+        PromotionContext $context,
+        array $target,
+        array $resolved,
+    ): PersonalityPublicContentAssetRevision {
+        /** @var PersonalityPublicContentAsset $asset */
+        $asset = $resolved['model'];
+        $revision = PersonalityPublicContentAssetRevision::query()->lockForUpdate()
+            ->where('authority_package_sha256', $context->packageSha256)
+            ->where('authority_asset_key', $this->assetKey($target))->first();
+        if (! $revision instanceof PersonalityPublicContentAssetRevision
+            || (int) $revision->asset_id !== (int) $asset->id
+            || (int) $asset->working_revision_id !== (int) $revision->id
+            || (string) $revision->workflow_state !== PersonalityPublicContentAssetRevision::STATE_DRAFT
+            || ! hash_equals((string) $target['source_row_sha256'], (string) $revision->source_hash)
+            || ! hash_equals('content-promotion/TOP100/'.Top100FrozenPackage::SUBSCOPE, (string) $revision->source_package)
+            || ! hash_equals(
+                PromotionContextFactory::canonicalJson($this->personalityRevisionSnapshot($target)),
+                PromotionContextFactory::canonicalJson((array) $revision->snapshot_json),
+            )) {
+            throw new DomainException('top100_frozen_personality_revision_not_approved');
+        }
+
+        return $revision;
     }
 
     private function publishMbtiProfile(array $target, array $resolved): void
