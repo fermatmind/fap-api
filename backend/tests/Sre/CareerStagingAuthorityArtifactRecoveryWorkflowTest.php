@@ -126,6 +126,25 @@ final class CareerStagingAuthorityArtifactRecoveryWorkflowTest extends TestCase
         }
     }
 
+    #[Test]
+    public function recovery_uses_the_frozen_authority_set_hash_contract_and_accepts_absent_staging_retired_host(): void
+    {
+        $workflow = $this->repoFile('.github/workflows/career-staging-authority-artifact-recovery.yml');
+        $runner = $this->repoFile('backend/scripts/operations/career_staging_authority_artifact_recovery.php');
+
+        self::assertStringContainsString('array_unique(array_filter(array_map(', $runner);
+        self::assertStringContainsString('strtolower(trim((string) $value))', $runner);
+        self::assertStringContainsString('implode("\\n", $normalized)."\\n"', $runner);
+        self::assertMatchesRegularExpression(
+            '/production_read:.*?for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST RETIRED_DEPLOY_HOST DEPLOY_PATH SSH_KNOWN_HOSTS/s',
+            $workflow,
+        );
+        self::assertMatchesRegularExpression(
+            '/staging_restore:.*?for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST DEPLOY_PATH SSH_KNOWN_HOSTS.*?if \\[ -n "\\$RETIRED_DEPLOY_HOST" \\]; then/s',
+            $workflow,
+        );
+    }
+
     private function repoFile(string $relative): string
     {
         $contents = file_get_contents(dirname(__DIR__, 3).'/'.$relative);
