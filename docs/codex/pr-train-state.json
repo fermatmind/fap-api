@@ -105419,11 +105419,11 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "Fresh required checks and exact-head review are required for final implementation commit df332b201837b5dbdd5070159dcd23604156388f, which acquires and validates the authority-table exclusion lock before either pointer candidate and holds it across both commits/readback."
+        "evidence": "Fresh required checks and exact-head review are required for final implementation commit df332b20123c194d6bef0ffee873b96da02d66d5, which acquires and validates the authority-table exclusion lock before either pointer candidate and holds it across both commits/readback."
       }
     },
     "failure_reason": null,
-    "commit_sha": "df332b201837b5dbdd5070159dcd23604156388f",
+    "commit_sha": "df332b20123c194d6bef0ffee873b96da02d66d5",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3668",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -105531,7 +105531,7 @@
       {
         "at": "2026-08-12T08:55:00+08:00",
         "status": "review_fix_validated",
-        "note": "Final implementation commit df332b201837b5dbdd5070159dcd23604156388f now acquires the MySQL authority-table lock and completes the final exact database validation before creating either pointer candidate, then holds that lock across immutable-pointer commit/readback, root-pointer commit/readback and failure release. Locked database drift leaves both pointer paths uncommitted. Focused coverage passed 6 tests plus 6 known missing-.env warnings / 111 assertions; actionlint, Pint, syntax, freeze and ledgers passed; the complete heavy-guarded ci_verify_mbti chain exited 0. Generated compiled files were restored. No workflow was dispatched and no SSH or controlled external state was accessed or mutated."
+        "note": "Final implementation commit df332b20123c194d6bef0ffee873b96da02d66d5 now acquires the MySQL authority-table lock and completes the final exact database validation before creating either pointer candidate, then holds that lock across immutable-pointer commit/readback, root-pointer commit/readback and failure release. Locked database drift leaves both pointer paths uncommitted. Focused coverage passed 6 tests plus 6 known missing-.env warnings / 111 assertions; actionlint, Pint, syntax, freeze and ledgers passed; the complete heavy-guarded ci_verify_mbti chain exited 0. Generated compiled files were restored. No workflow was dispatched and no SSH or controlled external state was accessed or mutated."
       }
     ],
     "updated_at": "2026-08-12T08:55:00+08:00"
