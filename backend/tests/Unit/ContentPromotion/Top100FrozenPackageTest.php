@@ -143,6 +143,17 @@ final class Top100FrozenPackageTest extends TestCase
         $htmlLinkProjected = (new ReflectionClass($authority))->getMethod('liveHtmlLinkProjected');
         self::assertTrue($htmlLinkProjected->invoke($authority, '<a class="link" href="/zh/personality/intp-a-vs-intp-t"><span>中文链接</span></a>', '中文链接', '/zh/personality/intp-a-vs-intp-t'));
         self::assertFalse($htmlLinkProjected->invoke($authority, '<a href="/zh/personality/intp-a-vs-intp-t">错误锚文本</a><p>中文链接</p>', '中文链接', '/zh/personality/intp-a-vs-intp-t'));
+
+        $replaceIntro = (new ReflectionClass($authority))->getMethod('replaceFirstParagraph');
+        self::assertSame("## 保留标题\n\n新导语\n\n后续正文", $replaceIntro->invoke($authority, "## 保留标题\n\n旧导语\n\n后续正文", '新导语'));
+
+        $htmlDocument = (new ReflectionClass($authority))->getMethod('htmlDocument');
+        [$document, $xpath] = $htmlDocument->invoke($authority, '<html><head><title>旧标题</title></head><body><h1>旧标题</h1><script>{"title":"新标题","intro":"新导语"}</script><p>旧导语</p></body></html>');
+        $xpathText = (new ReflectionClass($authority))->getMethod('xpathTextProjected');
+        $visibleText = (new ReflectionClass($authority))->getMethod('visibleTextProjected');
+        self::assertFalse($xpathText->invoke($authority, $xpath, '//title', '新标题'));
+        self::assertFalse($xpathText->invoke($authority, $xpath, '//h1', '新标题'));
+        self::assertFalse($visibleText->invoke($authority, $document, $xpath, '新导语'));
     }
 
     public function test_article_revision_publish_guard_rejects_post_import_payload_drift(): void

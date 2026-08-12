@@ -26,6 +26,9 @@ use App\Services\Cms\PersonalityPublicReadModelCache;
 use App\Services\Cms\PersonalityReviewAttestationService;
 use App\Services\SEO\SeoDiscoverabilityCacheInvalidator;
 use DomainException;
+use DOMDocument;
+use DOMElement;
+use DOMXPath;
 use Illuminate\Contracts\Http\Kernel as HttpKernel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -1299,9 +1302,20 @@ final class Top100FrozenCmsBatchAuthority
         if ($trimmed === '') {
             return $intro;
         }
-        $offset = strpos($trimmed, "\n\n");
+        $blocks = preg_split('/(\R{2,})/', $trimmed, -1, PREG_SPLIT_DELIM_CAPTURE);
+        if (! is_array($blocks)) {
+            throw new DomainException('top100_frozen_article_intro_parse_failed');
+        }
+        foreach ($blocks as $index => $block) {
+            if ($index % 2 !== 0 || trim($block) === '' || preg_match('/\A\s{0,3}#{1,6}\s+/u', $block) === 1) {
+                continue;
+            }
+            $blocks[$index] = $intro;
 
-        return $offset === false ? $intro : $intro.substr($trimmed, $offset);
+            return implode('', $blocks);
+        }
+
+        return $intro;
     }
 
     /** @param list<array<string,mixed>> $links */
@@ -1437,19 +1451,27 @@ final class Top100FrozenCmsBatchAuthority
         if (! $response->successful()) {
             throw new DomainException('top100_frozen_live_html_status_invalid');
         }
-        $body = html_entity_decode((string) $response->body(), ENT_QUOTES | ENT_HTML5, 'UTF-8');
-        foreach ($this->expectedPublicValues($target) as $value) {
-            if (! str_contains($body, (string) $value)) {
-                throw new DomainException('top100_frozen_live_html_projection_invalid');
-            }
+        $body = (string) $response->body();
+        [$document, $xpath] = $this->htmlDocument($body);
+        if (is_string($target['patch']['seo_title']) && ! $this->xpathTextProjected($xpath, '//title', $target['patch']['seo_title'])) {
+            throw new DomainException('top100_frozen_live_html_title_invalid');
+        }
+        if (is_string($target['patch']['seo_description'])
+            && ! $this->xpathAttributeProjected($xpath, '//meta[translate(@name,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")="description"]', 'content', $target['patch']['seo_description'])) {
+            throw new DomainException('top100_frozen_live_html_description_invalid');
+        }
+        if (is_string($target['patch']['h1']) && ! $this->xpathTextProjected($xpath, '//h1', $target['patch']['h1'])) {
+            throw new DomainException('top100_frozen_live_html_h1_invalid');
+        }
+        if (is_string($target['patch']['intro']) && ! $this->visibleTextProjected($document, $xpath, $target['patch']['intro'])) {
+            throw new DomainException('top100_frozen_live_html_intro_invalid');
         }
         foreach ($target['internal_links'] as $link) {
-            if (! $this->liveHtmlLinkProjected($body, (string) $link['anchor_text'], (string) $link['href'])) {
+            if (! $this->xpathLinkProjected($xpath, (string) $link['anchor_text'], (string) $link['href'])) {
                 throw new DomainException('top100_frozen_live_html_link_projection_invalid');
             }
         }
-        if (preg_match('~<link[^>]+rel=["\']canonical["\'][^>]+href=["\']'.preg_quote((string) $target['url'], '~').'["\']~i', $body) !== 1
-            && preg_match('~<link[^>]+href=["\']'.preg_quote((string) $target['url'], '~').'["\'][^>]+rel=["\']canonical["\']~i', $body) !== 1) {
+        if (! $this->xpathAttributeProjected($xpath, '//link[contains(concat(" ", normalize-space(translate(@rel,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")), " "), " canonical ")]', 'href', (string) $target['url'])) {
             throw new DomainException('top100_frozen_live_html_canonical_invalid');
         }
     }
@@ -1502,6 +1524,73 @@ final class Top100FrozenCmsBatchAuthority
         }
 
         return false;
+    }
+
+    /** @return array{DOMDocument,DOMXPath} */
+    private function htmlDocument(string $html): array
+    {
+        $document = new DOMDocument;
+        $previous = libxml_use_internal_errors(true);
+        try {
+            if (! $document->loadHTML('<?xml encoding="UTF-8">'.$html, LIBXML_NONET | LIBXML_NOERROR | LIBXML_NOWARNING)) {
+                throw new DomainException('top100_frozen_live_html_parse_invalid');
+            }
+        } finally {
+            libxml_clear_errors();
+            libxml_use_internal_errors($previous);
+        }
+
+        return [$document, new DOMXPath($document)];
+    }
+
+    private function xpathTextProjected(DOMXPath $xpath, string $query, string $expected): bool
+    {
+        foreach ($xpath->query($query) ?: [] as $node) {
+            if ($this->normalizedTextContains((string) $node->textContent, $expected)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function xpathAttributeProjected(DOMXPath $xpath, string $query, string $attribute, string $expected): bool
+    {
+        foreach ($xpath->query($query) ?: [] as $node) {
+            if ($node instanceof DOMElement && trim($node->getAttribute($attribute)) === trim($expected)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function xpathLinkProjected(DOMXPath $xpath, string $anchor, string $href): bool
+    {
+        foreach ($xpath->query('//a[@href]') ?: [] as $node) {
+            if ($node instanceof DOMElement && $node->getAttribute('href') === $href
+                && trim(preg_replace('/\s+/u', ' ', (string) $node->textContent) ?? '') === trim($anchor)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function visibleTextProjected(DOMDocument $document, DOMXPath $xpath, string $expected): bool
+    {
+        foreach ($xpath->query('//script|//style|//template|//noscript') ?: [] as $node) {
+            $node->parentNode?->removeChild($node);
+        }
+
+        return $this->normalizedTextContains((string) $document->textContent, $expected);
+    }
+
+    private function normalizedTextContains(string $actual, string $expected): bool
+    {
+        $normalize = static fn (string $value): string => trim(preg_replace('/\s+/u', ' ', html_entity_decode($value, ENT_QUOTES | ENT_HTML5, 'UTF-8')) ?? '');
+
+        return str_contains($normalize($actual), $normalize($expected));
     }
 
     /** @return list<string> */
