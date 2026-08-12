@@ -56,7 +56,7 @@ final class Top100FrozenCmsBatchAuthority
         private readonly SeoDiscoverabilityCacheInvalidator $discoverabilityCache,
     ) {}
 
-    /** @return array{targets:list<array<string,mixed>>,changed_count:int,unchanged_count:int,target_set_sha256:string} */
+    /** @return array{targets:list<array<string,mixed>>,changed_count:int,unchanged_count:int,target_set_sha256:string,deferred_out_of_target_link_source_count:int} */
     public function inspect(PromotionContext $context, bool $lock = false): array
     {
         $package = $this->packages->inspect($context);
@@ -89,6 +89,7 @@ final class Top100FrozenCmsBatchAuthority
             'changed_count' => $changed,
             'unchanged_count' => count($targets) - $changed,
             'target_set_sha256' => $package['target_set_sha256'],
+            'deferred_out_of_target_link_source_count' => (int) $package['deferred_out_of_target_link_source_count'],
         ];
     }
 
