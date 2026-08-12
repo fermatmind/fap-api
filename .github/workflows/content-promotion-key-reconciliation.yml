@@ -199,7 +199,7 @@ jobs:
 
       - name: Upload immutable redacted receipt
         if: always()
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v6
         with:
           name: content-promotion-key-reconciliation-${{ github.run_id }}-${{ github.run_attempt }}
           path: content-promotion-key-reconciliation.json
