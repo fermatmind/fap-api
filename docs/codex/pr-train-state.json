@@ -105411,7 +105411,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "All six review-fix heavy-guarded full backend/scripts/ci_verify_mbti.sh runs exited 0 after the initial full pass. Final focused activation coverage passed 5 tests plus 5 known missing-.env warnings / 91 assertions, including explicit final-database-read then conflict-guard ordering, fail-closed database-authority drift and deploy-lock coverage; the earlier combined activation/staging/reconciliation/loader suite passed 5 tests plus 18 known warnings / 279 assertions. actionlint, Pint --test, PHP syntax, frozen contract verification, train YAML/JSON parsing, 253-line route listing, fresh SQLite migration, exact six-path scope and diff checks passed."
+        "evidence": "All seven review-fix heavy-guarded full backend/scripts/ci_verify_mbti.sh runs exited 0 after the initial full pass. Final focused activation coverage passed 6 tests plus 6 known missing-.env warnings / 96 assertions, including concrete php/php8.4 artisan career authority-writer classification, explicit final-database-read then conflict-guard ordering, fail-closed database-authority drift and deploy-lock coverage; the earlier combined activation/staging/reconciliation/loader suite passed 5 tests plus 18 known warnings / 279 assertions. actionlint, Pint --test, PHP syntax, frozen contract verification, train YAML/JSON parsing, 253-line route listing, fresh SQLite migration, exact six-path scope and diff checks passed."
       },
       "scope": {
         "status": "passed",
@@ -105419,11 +105419,11 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "Head 826b9e22318aefa0b0c6e7c164ba15fb7585f69b passed every required check, but exact-head review found that the final database read itself reopened a conflict-process window before the root rename. Fresh checks are required after the same-scope fix."
+        "evidence": "Head c841a5e9968a859a9fca6c01533e29bf03f1b54c passed every required check, but exact-head review found that the process classifier omitted real artisan career database-authority writers such as career:import-authority-wave. Fresh checks are required after the same-scope fix."
       }
     },
     "failure_reason": null,
-    "commit_sha": "032c25f1e5262e8da00e6e8bbb097e841edafb78",
+    "commit_sha": "9bc13e9edf836e444c68dbb278d1e3928a1b51b6",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3668",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -105502,8 +105502,18 @@
         "at": "2026-08-12T07:57:10+08:00",
         "status": "review_fix_validated",
         "note": "Final implementation commit 032c25f1e5262e8da00e6e8bbb097e841edafb78 repeats the conflict guard after the final database read and immediately before active-pointer drift readback/rename. Focused coverage passed 5 tests plus 5 known missing-.env warnings / 91 assertions, including an explicit ordering assertion; actionlint, Pint, PHP syntax, freeze verification, YAML/JSON parsing and diff checks passed; the complete heavy-guarded ci_verify_mbti chain exited 0. Generated Big Five compiled files were restored. The ledger commit_sha now binds this actual post-fix implementation commit. No workflow was dispatched and no SSH or controlled external state was accessed or mutated."
+      },
+      {
+        "at": "2026-08-12T08:08:30+08:00",
+        "status": "review_fix_in_progress",
+        "note": "Exact-head review found that the conflict classifier did not recognize running artisan career commands such as the transactional index_states writer career:import-authority-wave. The classifier is being tightened to fail closed on every php or versioned-PHP artisan career:* process, with concrete writer and non-career regression cases. Fresh focused, full local and GitHub validation are mandatory and commit_sha will be rebound to the resulting implementation commit. No workflow was dispatched and no SSH or controlled external state was accessed or mutated."
+      },
+      {
+        "at": "2026-08-12T08:14:30+08:00",
+        "status": "review_fix_validated",
+        "note": "Final implementation commit 9bc13e9edf836e444c68dbb278d1e3928a1b51b6 now treats every running php or versioned-PHP artisan career:* command as conflicting, including career:import-authority-wave and career:remediate-canonical-index-state, while regression controls keep route:list and a read-only PHP probe non-conflicting. Focused coverage passed 6 tests plus 6 known missing-.env warnings / 96 assertions; actionlint, Pint, PHP syntax, freeze verification, YAML/JSON parsing and diff checks passed; the complete heavy-guarded ci_verify_mbti chain exited 0. Generated Big Five compiled files were restored and commit_sha binds this exact implementation. No workflow was dispatched and no SSH or controlled external state was accessed or mutated."
       }
     ],
-    "updated_at": "2026-08-12T07:57:10+08:00"
+    "updated_at": "2026-08-12T08:14:30+08:00"
   }
 }
