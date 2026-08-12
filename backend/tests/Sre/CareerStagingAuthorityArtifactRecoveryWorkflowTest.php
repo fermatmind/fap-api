@@ -147,6 +147,10 @@ final class CareerStagingAuthorityArtifactRecoveryWorkflowTest extends TestCase
             '/staging_restore:.*?\\[\\[ "\\$DEPLOY_USER" =~ \\^\\[A-Za-z0-9_\\]\\[A-Za-z0-9_-\\]\\{0,31\\}\\$ \\]\\]/s',
             $workflow,
         );
+        self::assertSame(2, substr_count(
+            $workflow,
+            'gh run download "$GITHUB_RUN_ID" --repo "$GITHUB_REPOSITORY"',
+        ));
     }
 
     private function repoFile(string $relative): string
