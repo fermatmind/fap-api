@@ -58,7 +58,7 @@ final class CareerColdCacheDiscoverabilityGateTest extends TestCase
             ],
         ]);
 
-        $this->expectFailureCode('SITEMAP_AUTHORITY_MISMATCH');
+        $this->expectFailureCode('SITEMAP_DISCOVERABILITY_MISMATCH');
 
         CareerColdCacheDiscoverabilityValidator::validate('post_sitemap', $snapshot);
     }
@@ -90,8 +90,46 @@ final class CareerColdCacheDiscoverabilityGateTest extends TestCase
         self::assertMatchesRegularExpression('/^[a-f0-9]{64}$/', $result['cohort']['slug_set_sha256']);
     }
 
+    #[Test]
+    public function held_discoverability_permit_accepts_an_authoritative_sitemap_without_career_rows(): void
+    {
+        $snapshot = $this->completePreSitemapSnapshot(false);
+        $snapshot['sitemap'] = CareerColdCacheDiscoverabilityValidator::sitemapSnapshot([
+            'ok' => true,
+            'source' => 'backend_sitemap_generator',
+            'items' => [
+                ['loc' => 'https://fermatmind.com/en/tests'],
+                ['loc' => 'https://fermatmind.com/zh/tests'],
+            ],
+        ]);
+
+        $result = CareerColdCacheDiscoverabilityValidator::validate('post_sitemap', $snapshot);
+
+        self::assertSame('pass', $result['status']);
+        self::assertSame(2, $result['cohort']['slug_count']);
+        self::assertSame(4, $result['cohort']['locale_row_count']);
+    }
+
+    #[Test]
+    public function held_discoverability_permit_rejects_an_unreleased_career_url(): void
+    {
+        $snapshot = $this->completePreSitemapSnapshot(false);
+        $snapshot['sitemap'] = CareerColdCacheDiscoverabilityValidator::sitemapSnapshot([
+            'ok' => true,
+            'source' => 'backend_sitemap_generator',
+            'items' => [
+                ['loc' => 'https://fermatmind.com/en/career/jobs/actuaries'],
+                ['loc' => 'https://fermatmind.com/zh/career/jobs/actuaries'],
+            ],
+        ]);
+
+        $this->expectFailureCode('SITEMAP_DISCOVERABILITY_MISMATCH');
+
+        CareerColdCacheDiscoverabilityValidator::validate('post_sitemap', $snapshot);
+    }
+
     /** @return array<string, mixed> */
-    private function completePreSitemapSnapshot(): array
+    private function completePreSitemapSnapshot(bool $discoverabilityReleased = true): array
     {
         $projection = $this->projection();
         $authority = CareerColdCacheDiscoverabilityValidator::authoritySnapshot(
@@ -117,6 +155,10 @@ final class CareerColdCacheDiscoverabilityGateTest extends TestCase
             'authority_artifact_sha256' => str_repeat('b', 64),
             'authority' => $authority,
             'runtime' => CareerColdCacheDiscoverabilityValidator::runtimeSnapshot($runtimeItems),
+            'discoverability' => CareerColdCacheDiscoverabilityValidator::discoverabilitySnapshot(
+                $runtimeItems,
+                static fn (string $slug, string $locale): bool => $discoverabilityReleased,
+            ),
             'coverage' => $this->coverage(4, 4, 'ready'),
             'jobs_en' => CareerColdCacheDiscoverabilityValidator::jobIndexSnapshot(['items' => $jobItems], 'en'),
             'jobs_zh-CN' => CareerColdCacheDiscoverabilityValidator::jobIndexSnapshot(['items' => $jobItems], 'zh-CN'),

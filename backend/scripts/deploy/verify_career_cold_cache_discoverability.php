@@ -105,6 +105,32 @@ final class CareerColdCacheDiscoverabilityValidator
     }
 
     /**
+     * @param  array<string, array<string, mixed>>  $items
+     * @param  callable(string, string): bool  $allows
+     * @return array<string, mixed>
+     */
+    public static function discoverabilitySnapshot(array $items, callable $allows): array
+    {
+        $releasedRows = [];
+        foreach ($items as $item) {
+            if (! is_array($item) || ! self::isPublishedDetailItem($item)) {
+                continue;
+            }
+
+            $slug = self::slug($item);
+            $locale = self::locale((string) ($item['locale'] ?? ''));
+            if ($slug === '' || $locale === null) {
+                self::fail('DISCOVERABILITY_IDENTITY_INVALID');
+            }
+            if ($allows($slug, $locale)) {
+                $releasedRows[$locale][$slug] = true;
+            }
+        }
+
+        return self::snapshotFromLocaleMaps($releasedRows, 'DISCOVERABILITY', true);
+    }
+
+    /**
      * @param  array<string, mixed>  $payload
      * @return array<string, mixed>
      */
@@ -171,7 +197,7 @@ final class CareerColdCacheDiscoverabilityValidator
             $map[$locale][$slug] = true;
         }
 
-        return self::snapshotFromLocaleMaps($map, 'SITEMAP');
+        return self::snapshotFromLocaleMaps($map, 'SITEMAP', true);
     }
 
     /**
@@ -217,9 +243,9 @@ final class CareerColdCacheDiscoverabilityValidator
 
         if ($phase === 'post_sitemap') {
             self::assertSameSnapshot(
-                $authority,
+                self::requiredSnapshot($snapshot, 'discoverability'),
                 self::requiredSnapshot($snapshot, 'sitemap'),
-                'SITEMAP_AUTHORITY_MISMATCH',
+                'SITEMAP_DISCOVERABILITY_MISMATCH',
             );
         }
 
@@ -274,14 +300,14 @@ final class CareerColdCacheDiscoverabilityValidator
      * @param  array<string, array<string, bool>>  $maps
      * @return array<string, mixed>
      */
-    private static function snapshotFromLocaleMaps(array $maps, string $safePrefix): array
+    private static function snapshotFromLocaleMaps(array $maps, string $safePrefix, bool $allowEmpty = false): array
     {
         $localeRows = [];
         $slugSets = [];
         foreach (self::LOCALES as $locale) {
             $slugs = array_keys((array) ($maps[$locale] ?? []));
             sort($slugs, SORT_STRING);
-            if ($slugs === []) {
+            if ($slugs === [] && ! $allowEmpty) {
                 self::fail($safePrefix.'_LOCALE_EMPTY');
             }
             $localeRows[$locale] = array_map(
@@ -408,12 +434,11 @@ final class CareerColdCacheDiscoverabilityRunner
             );
             $app = self::bootstrapApplication();
             $runtimeProjection = $app->make('App\\Domain\\Career\\Publish\\CareerRuntimePublishProjectionLookup');
+            $runtimeItems = $runtimeProjection->jobDetailCoverageItems(['en', 'zh-CN']);
             $snapshot = [
                 'authority_artifact_sha256' => $artifact['sha256'],
                 'authority' => $authority,
-                'runtime' => CareerColdCacheDiscoverabilityValidator::runtimeSnapshot(
-                    $runtimeProjection->jobDetailCoverageItems(['en', 'zh-CN']),
-                ),
+                'runtime' => CareerColdCacheDiscoverabilityValidator::runtimeSnapshot($runtimeItems),
             ];
 
             if ($phase !== 'authority') {
@@ -433,6 +458,11 @@ final class CareerColdCacheDiscoverabilityRunner
             }
 
             if ($phase === 'post_sitemap') {
+                $discoverabilityGate = $app->make('App\\Domain\\Career\\Publish\\Career1046DiscoverabilityReleaseGate');
+                $snapshot['discoverability'] = CareerColdCacheDiscoverabilityValidator::discoverabilitySnapshot(
+                    $runtimeItems,
+                    static fn (string $slug, string $locale): bool => $discoverabilityGate->allows($slug, $locale),
+                );
                 $cacheFacade = 'Illuminate\\Support\\Facades\\Cache';
                 $sitemapController = 'App\\Http\\Controllers\\API\\V0_5\\SEO\\SitemapSourceController';
                 $payload = $cacheFacade::get($sitemapController::CACHE_KEY_FRESH);
