@@ -1,0 +1,565 @@
+name: Career 1046 Root Generation Activation Production Ops
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Zero-write preflight or exact receipt-bound root pointer activation
+        required: true
+        default: preflight
+        type: choice
+        options:
+          - preflight
+          - apply
+      expected_control_plane_sha:
+        description: Exact latest main SHA containing this control plane
+        required: true
+        type: string
+      expected_release_sha:
+        description: Exact active production SHA; must equal the control-plane SHA
+        required: true
+        type: string
+      expected_release_name:
+        description: Exact active production release name
+        required: true
+        type: string
+      staging_run_id:
+        description: Exact successful Task 5 apply run id
+        required: true
+        type: string
+      staging_run_attempt:
+        description: Exact successful Task 5 apply run attempt
+        required: true
+        type: string
+      expected_staging_receipt_sha256:
+        description: Exact downloaded Task 5 apply receipt SHA-256
+        required: true
+        type: string
+      expected_staging_artifact_digest:
+        description: Exact Task 5 receipt artifact digest in sha256 form
+        required: true
+        type: string
+      generation_id:
+        description: Exact staged generation id
+        required: true
+        type: string
+      expected_previous_generation_id:
+        description: Exact active 342/30 generation id
+        required: true
+        type: string
+      expected_previous_pointer_sha256:
+        description: Exact active-generation.json raw SHA-256
+        required: true
+        type: string
+      preflight_run_id:
+        description: Apply only; immutable successful activation preflight run id
+        required: false
+        default: ""
+        type: string
+      preflight_run_attempt:
+        description: Apply only; immutable successful activation preflight run attempt
+        required: false
+        default: ""
+        type: string
+      expected_preflight_receipt_sha256:
+        description: Apply only; exact downloaded activation preflight receipt SHA-256
+        required: false
+        default: ""
+        type: string
+      expected_database_state_sha256:
+        description: Apply only; exact SELECT-only database authority state from preflight
+        required: false
+        default: ""
+        type: string
+      operator_approval_phrase:
+        description: Apply only; exact one-switch activation approval phrase
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.repository }}-production
+  cancel-in-progress: false
+
+jobs:
+  control:
+    name: Validate and atomically switch one root generation pointer
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    environment: production
+    env:
+      MODE: ${{ inputs.mode }}
+      EXPECTED_CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+      EXPECTED_RELEASE_SHA: ${{ inputs.expected_release_sha }}
+      EXPECTED_RELEASE_NAME: ${{ inputs.expected_release_name }}
+      STAGING_RUN_ID: ${{ inputs.staging_run_id }}
+      STAGING_RUN_ATTEMPT: ${{ inputs.staging_run_attempt }}
+      EXPECTED_STAGING_RECEIPT_SHA256: ${{ inputs.expected_staging_receipt_sha256 }}
+      EXPECTED_STAGING_ARTIFACT_DIGEST: ${{ inputs.expected_staging_artifact_digest }}
+      GENERATION_ID: ${{ inputs.generation_id }}
+      EXPECTED_PREVIOUS_GENERATION_ID: ${{ inputs.expected_previous_generation_id }}
+      EXPECTED_PREVIOUS_POINTER_SHA256: ${{ inputs.expected_previous_pointer_sha256 }}
+      PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
+      PREFLIGHT_RUN_ATTEMPT: ${{ inputs.preflight_run_attempt }}
+      EXPECTED_PREFLIGHT_RECEIPT_SHA256: ${{ inputs.expected_preflight_receipt_sha256 }}
+      EXPECTED_DATABASE_STATE_SHA256: ${{ inputs.expected_database_state_sha256 }}
+      OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+      SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+
+    steps:
+      - name: Initialize sanitized failure receipt before checkout
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/career-1046-root-generation-activation.json"
+          jq -n \
+            --arg mode "$MODE" \
+            --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
+            --arg release "$EXPECTED_RELEASE_SHA" \
+            --arg generation "$GENERATION_ID" \
+            --arg run_id "$GITHUB_RUN_ID" \
+            --arg run_attempt "$GITHUB_RUN_ATTEMPT" \
+            '{
+              contract_version: "career.1046.root_generation_activation.v1",
+              mode: $mode,
+              status: "FAIL_CONTROL_INITIALIZATION",
+              failed_stage: "initialize",
+              control_plane_sha: $control,
+              release_sha: $release,
+              generation_id: $generation,
+              workflow_run_id: ($run_id | tonumber),
+              workflow_run_attempt: ($run_attempt | tonumber),
+              production_write_execution: false,
+              candidate_file_write_count: 0,
+              pointer_write_count: 0,
+              root_pointer_switch_count: 0,
+              database_exclusion_lock_acquired: false,
+              database_exclusion_lock_released: false,
+              database_select_only: true,
+              database_write_count: 0,
+              cms_write_count: 0,
+              cache_write_count: 0,
+              generation_document_write_count: 0,
+              deployment_count: 0,
+              migration_count: 0,
+              restart_count: 0,
+              publication_write_count: 0,
+              sitemap_write_count: 0,
+              llms_write_count: 0,
+              search_submission_count: 0,
+              automatic_retry_allowed: false,
+              automatic_cleanup_allowed: false,
+              automatic_rollback_allowed: false,
+              write_state: "none",
+              writes_committed: false,
+              zero_write_guarantee: false
+            }' > "$receipt"
+
+      - name: Checkout exact control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Download and validate exact staging and preflight evidence
+        id: eligibility
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/career-1046-root-generation-activation.json"
+          mark_failure() {
+            jq --arg stage "$1" '.status = "FAIL_CONTROL_ELIGIBILITY" | .failed_stage = $stage' \
+              "$receipt" > "$receipt.next"
+            mv "$receipt.next" "$receipt"
+          }
+          trap 'mark_failure "control_plane_staging_or_preflight_validation"' ERR
+
+          test "$GITHUB_REF" = "refs/heads/main"
+          [[ "$MODE" =~ ^(preflight|apply)$ ]]
+          [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          test "$EXPECTED_RELEASE_SHA" = "$EXPECTED_CONTROL_PLANE_SHA"
+          [[ "$EXPECTED_RELEASE_NAME" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]
+          [[ "$STAGING_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$STAGING_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+          [[ "$EXPECTED_STAGING_RECEIPT_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$EXPECTED_STAGING_ARTIFACT_DIGEST" =~ ^sha256:[0-9a-f]{64}$ ]]
+          [[ "$GENERATION_ID" =~ ^career-1046-[0-9a-f]{32}$ ]]
+          [[ "$EXPECTED_PREVIOUS_GENERATION_ID" =~ ^[A-Za-z0-9][A-Za-z0-9._:@-]{0,127}$ ]]
+          [[ "$EXPECTED_PREVIOUS_POINTER_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$GITHUB_SHA" = "$EXPECTED_CONTROL_PLANE_SHA"
+          php -l backend/scripts/operations/career_1046_root_generation_activation.php >/dev/null
+
+          staging_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${STAGING_RUN_ID}")"
+          jq -e \
+            --arg sha "$EXPECTED_CONTROL_PLANE_SHA" \
+            --argjson attempt "$STAGING_RUN_ATTEMPT" \
+            '.name == "Career 1046 Product Data Staging Production Ops"
+             and .path == ".github/workflows/career-1046-product-data-staging-production-ops.yml"
+             and .event == "workflow_dispatch"
+             and .head_branch == "main"
+             and .head_sha == $sha
+             and .status == "completed"
+             and .conclusion == "success"
+             and .run_attempt == $attempt' <<<"$staging_run" >/dev/null
+          staging_artifact_name="career-1046-product-data-staging-apply-${STAGING_RUN_ID}-${STAGING_RUN_ATTEMPT}"
+          artifacts="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${STAGING_RUN_ID}/artifacts?per_page=100")"
+          staging_artifact_id="$(jq -er \
+            --arg name "$staging_artifact_name" \
+            --arg digest "$EXPECTED_STAGING_ARTIFACT_DIGEST" \
+            '[.artifacts[] | select(.name == $name and .expired == false and .digest == $digest)]
+             | select(length == 1) | .[0].id' <<<"$artifacts")"
+          staging_dir="$(mktemp -d)"
+          gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${staging_artifact_id}/zip" > "$staging_dir/artifact.zip"
+          test "$(unzip -Z1 "$staging_dir/artifact.zip")" = "career-1046-product-data-staging.json"
+          unzip -q "$staging_dir/artifact.zip" -d "$staging_dir/unpacked"
+          staging="$staging_dir/unpacked/career-1046-product-data-staging.json"
+          test "$(sha256sum "$staging" | awk '{print $1}')" = "$EXPECTED_STAGING_RECEIPT_SHA256"
+          jq -e \
+            --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
+            --arg release "$EXPECTED_RELEASE_SHA" \
+            --arg release_name_sha256 "$(printf '%s' "$EXPECTED_RELEASE_NAME" | sha256sum | awk '{print $1}')" \
+            --arg generation "$GENERATION_ID" \
+            --arg previous "$EXPECTED_PREVIOUS_GENERATION_ID" \
+            --arg pointer "$EXPECTED_PREVIOUS_POINTER_SHA256" \
+            --arg artifact "$EXPECTED_STAGING_ARTIFACT_DIGEST" \
+            --argjson run_id "$STAGING_RUN_ID" \
+            --argjson run_attempt "$STAGING_RUN_ATTEMPT" \
+            '.contract_version == "career.1046.product_data_staging.v1"
+             and .mode == "apply"
+             and .status == "PASS_APPLY_PRODUCT_DATA_STAGED"
+             and .control_plane_sha == $control
+             and .release_sha == $release
+             and .release_name_sha256 == $release_name_sha256
+             and .generation_id == $generation
+             and .previous_generation_id == $previous
+             and .previous_pointer_sha256 == $pointer
+             and .active_pointer_sha256_before == $pointer
+             and .active_pointer_sha256_after == $pointer
+             and .workflow_run_id == $run_id
+             and .workflow_run_attempt == $run_attempt
+             and .document_count == 8
+             and (.document_sha256 | keys) == ["candidate-receipt.json", "career-directory-en.json", "career-directory-zh.json", "career-full-release-ledger.json", "career-job-details-en.json", "career-job-details-zh.json", "career-runtime-publish-projection.json", "generation-manifest.json"]
+             and .counts.unique_slugs == 1046
+             and .counts.locale_rows == 2092
+             and .counts.missing == 0
+             and .counts.duplicate == 0
+             and .counts.outside_target == 0
+             and .pointer_write_count == 0
+             and .database_write_count == 0
+             and .cms_write_count == 0
+             and .cache_write_count == 0
+             and .sitemap_write_count == 0
+             and .llms_write_count == 0
+             and .search_submission_count == 0
+             and .writes_committed == true
+             and .automatic_retry_allowed == false' "$staging" >/dev/null
+
+          candidate_receipt_sha256="$(jq -er '.candidate_receipt_sha256 | select(test("^[0-9a-f]{64}$"))' "$staging")"
+          generation_manifest_sha256="$(jq -er '.generation_manifest_sha256 | select(test("^[0-9a-f]{64}$"))' "$staging")"
+          document_hashes_b64="$(jq -cS '.document_sha256' "$staging" | base64 -w0)"
+          activation_timestamp="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          apply_authorized=0
+
+          case "$MODE" in
+            preflight)
+              test -z "$PREFLIGHT_RUN_ID"
+              test -z "$PREFLIGHT_RUN_ATTEMPT"
+              test -z "$EXPECTED_PREFLIGHT_RECEIPT_SHA256"
+              test -z "$EXPECTED_DATABASE_STATE_SHA256"
+              test -z "$OPERATOR_APPROVAL_PHRASE"
+              ;;
+            apply)
+              [[ "$PREFLIGHT_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+              [[ "$PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+              [[ "$EXPECTED_PREFLIGHT_RECEIPT_SHA256" =~ ^[0-9a-f]{64}$ ]]
+              [[ "$EXPECTED_DATABASE_STATE_SHA256" =~ ^[0-9a-f]{64}$ ]]
+              preflight_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}")"
+              jq -e \
+                --arg sha "$EXPECTED_CONTROL_PLANE_SHA" \
+                --argjson attempt "$PREFLIGHT_RUN_ATTEMPT" \
+                '.name == "Career 1046 Root Generation Activation Production Ops"
+                 and .path == ".github/workflows/career-1046-root-generation-activation-production-ops.yml"
+                 and .event == "workflow_dispatch"
+                 and .head_branch == "main"
+                 and .head_sha == $sha
+                 and .status == "completed"
+                 and .conclusion == "success"
+                 and .run_attempt == $attempt' <<<"$preflight_run" >/dev/null
+              preflight_dir="$(mktemp -d)"
+              gh run download "$PREFLIGHT_RUN_ID" \
+                --name "career-1046-root-generation-activation-preflight-${PREFLIGHT_RUN_ID}-${PREFLIGHT_RUN_ATTEMPT}" \
+                --dir "$preflight_dir"
+              preflight="$preflight_dir/career-1046-root-generation-activation.json"
+              test -f "$preflight"
+              test "$(sha256sum "$preflight" | awk '{print $1}')" = "$EXPECTED_PREFLIGHT_RECEIPT_SHA256"
+              jq -e \
+                --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
+                --arg release "$EXPECTED_RELEASE_SHA" \
+                --arg release_name_sha256 "$(printf '%s' "$EXPECTED_RELEASE_NAME" | sha256sum | awk '{print $1}')" \
+                --arg generation "$GENERATION_ID" \
+                --arg previous "$EXPECTED_PREVIOUS_GENERATION_ID" \
+                --arg pointer "$EXPECTED_PREVIOUS_POINTER_SHA256" \
+                --arg staging_receipt "$EXPECTED_STAGING_RECEIPT_SHA256" \
+                --arg staging_artifact "$EXPECTED_STAGING_ARTIFACT_DIGEST" \
+                --arg candidate_receipt "$candidate_receipt_sha256" \
+                --arg generation_manifest "$generation_manifest_sha256" \
+                --arg database_state "$EXPECTED_DATABASE_STATE_SHA256" \
+                --argjson run_id "$PREFLIGHT_RUN_ID" \
+                --argjson run_attempt "$PREFLIGHT_RUN_ATTEMPT" \
+                '.contract_version == "career.1046.root_generation_activation.v1"
+                 and .mode == "preflight"
+                 and .status == "PASS_PREFLIGHT_ACTIVATION_ELIGIBLE"
+                 and .control_plane_sha == $control
+                 and .release_sha == $release
+                 and .release_name_sha256 == $release_name_sha256
+                 and .generation_id == $generation
+                 and .previous_generation_id == $previous
+                 and .previous_pointer_sha256 == $pointer
+                 and .active_pointer_sha256_before == $pointer
+                 and .active_pointer_sha256_after == $pointer
+                 and .rollback_pointer_sha256 == $pointer
+                 and .staging_receipt_sha256 == $staging_receipt
+                 and .staging_artifact_digest == $staging_artifact
+                 and .candidate_receipt_sha256 == $candidate_receipt
+                 and .generation_manifest_sha256 == $generation_manifest
+                 and .database_authority.current_state_sha256 == $database_state
+                 and .database_authority.receipt_covered_count == 1016
+                 and .database_authority.matching_count == 1016
+                 and .database_authority.missing_or_mismatching_count == 0
+                 and .database_authority.outside_target_count == 0
+                 and .workflow_run_id == $run_id
+                 and .workflow_run_attempt == $run_attempt
+                 and .production_write_execution == false
+                 and .pointer_write_count == 0
+                 and .root_pointer_switch_count == 0
+                 and .database_exclusion_lock_acquired == false
+                 and .database_exclusion_lock_released == false
+                 and .writes_committed == false
+                 and .zero_write_guarantee == true
+                 and .automatic_retry_allowed == false' "$preflight" >/dev/null
+              preflight_timestamp="$(jq -er '.activation_timestamp' "$preflight")"
+              test $(( $(date -u +%s) - $(date -u -d "$preflight_timestamp" +%s) )) -ge 0
+              test $(( $(date -u +%s) - $(date -u -d "$preflight_timestamp" +%s) )) -le 21600
+              activation_timestamp="$preflight_timestamp"
+              expected_phrase="I explicitly approve one atomic Career root generation pointer switch to ${GENERATION_ID} from activation preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} receipt ${EXPECTED_PREFLIGHT_RECEIPT_SHA256}, staging run ${STAGING_RUN_ID} attempt ${STAGING_RUN_ATTEMPT} receipt ${EXPECTED_STAGING_RECEIPT_SHA256} artifact ${EXPECTED_STAGING_ARTIFACT_DIGEST}, database state ${EXPECTED_DATABASE_STATE_SHA256}, control plane ${EXPECTED_CONTROL_PLANE_SHA}, active SHA ${EXPECTED_RELEASE_SHA}, release ${EXPECTED_RELEASE_NAME}, previous generation ${EXPECTED_PREVIOUS_GENERATION_ID}, previous pointer ${EXPECTED_PREVIOUS_POINTER_SHA256}; switch exactly one root pointer, keep the previous generation rollback-complete and sitemap, llms, Search closed, and perform no deploy, migration, restart, DB/CMS/cache/publication write, retry, cleanup, or automatic rollback."
+              test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
+              apply_authorized=1
+              ;;
+          esac
+
+          {
+            echo "apply_authorized=$apply_authorized"
+            echo "activation_timestamp=$activation_timestamp"
+            echo "candidate_receipt_sha256=$candidate_receipt_sha256"
+            echo "generation_manifest_sha256=$generation_manifest_sha256"
+            echo "document_hashes_b64=$document_hashes_b64"
+          } >> "$GITHUB_OUTPUT"
+          trap - ERR
+
+      - name: Validate protected production topology
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST RETIRED_DEPLOY_HOST DEPLOY_PATH SSH_KNOWN_HOSTS; do
+            test -n "${!name:-}"
+          done
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          test "$DEPLOY_PORT" -ge 1
+          test "$DEPLOY_PORT" -le 65535
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$RETIRED_DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          [[ "$DEPLOY_PATH" != *".."* ]]
+          echo "Protected production topology validated without disclosing values."
+
+      - name: Start pinned SSH agent
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        run: |
+          set -euo pipefail
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Run zero-write preflight or exact one-pointer activation apply
+        shell: bash
+        env:
+          APPLY_AUTHORIZED: ${{ steps.eligibility.outputs.apply_authorized }}
+          ACTIVATION_TIMESTAMP: ${{ steps.eligibility.outputs.activation_timestamp }}
+          CANDIDATE_RECEIPT_SHA256: ${{ steps.eligibility.outputs.candidate_receipt_sha256 }}
+          GENERATION_MANIFEST_SHA256: ${{ steps.eligibility.outputs.generation_manifest_sha256 }}
+          DOCUMENT_HASHES_B64: ${{ steps.eligibility.outputs.document_hashes_b64 }}
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/career-1046-root-generation-activation.json"
+          remote_receipt="$RUNNER_TEMP/career-1046-root-generation-activation.remote.json"
+          runner_sha256="$(sha256sum backend/scripts/operations/career_1046_root_generation_activation.php | awk '{print $1}')"
+          for pair in \
+            "mode:$MODE" "deploy_path:$DEPLOY_PATH" "control:$EXPECTED_CONTROL_PLANE_SHA" \
+            "release:$EXPECTED_RELEASE_SHA" "release_name:$EXPECTED_RELEASE_NAME" \
+            "run_id:$GITHUB_RUN_ID" "run_attempt:$GITHUB_RUN_ATTEMPT" \
+            "timestamp:$ACTIVATION_TIMESTAMP" "generation:$GENERATION_ID" \
+            "previous:$EXPECTED_PREVIOUS_GENERATION_ID" "pointer:$EXPECTED_PREVIOUS_POINTER_SHA256" \
+            "staging_receipt:$EXPECTED_STAGING_RECEIPT_SHA256" \
+            "staging_artifact:$EXPECTED_STAGING_ARTIFACT_DIGEST" \
+            "candidate_receipt:$CANDIDATE_RECEIPT_SHA256" \
+            "generation_manifest:$GENERATION_MANIFEST_SHA256" \
+            "document_hashes:$DOCUMENT_HASHES_B64" "preflight:$EXPECTED_PREFLIGHT_RECEIPT_SHA256" \
+            "database_state:$EXPECTED_DATABASE_STATE_SHA256" "apply:$APPLY_AUTHORIZED" "runner:$runner_sha256"; do
+            key="${pair%%:*}"
+            value="${pair#*:}"
+            printf -v "q_${key}" '%q' "$value"
+          done
+
+          # Close the control-plane race after all evidence preparation and
+          # immediately before the only command that can reach production.
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$GITHUB_SHA" = "$EXPECTED_CONTROL_PLANE_SHA"
+
+          set +e
+          timeout --signal=TERM --kill-after=5s 180s \
+            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+              -o ServerAliveInterval=20 -o ServerAliveCountMax=8 \
+              -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+              "set -euo pipefail; current=\$(readlink -f $q_deploy_path/current); release=\$(readlink -f $q_deploy_path/releases/$q_release_name); test -n \"\$current\"; test \"\$current\" = \"\$release\"; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_release; test \"\$(sha256sum \"\$current/backend/scripts/operations/career_1046_root_generation_activation.php\" | awk '{print \$1}')\" = $q_runner; test ! -e $q_deploy_path/.dep/deploy.lock; test \"\$(ps -eo comm=,args= | awk '\$1 == \"php\" && (\$0 ~ /dep(\\.phar)? .* production/ || \$0 ~ /artisan migrate/ || \$0 ~ /queue:(restart|reload-workers)/ || \$0 ~ /career_.*(apply|activation|staging)/) {n++} \$1 == \"composer\" && \$0 ~ /install/ {n++} END {print n+0}')\" = 0; CAREER_ACTIVATION_BACKEND_ROOT=\"\$current/backend\" CAREER_ACTIVATION_PRIVATE_ROOT=\"\$current/backend/storage/app/private\" CAREER_ACTIVATION_ACTIVE_RELEASE_LINK=$q_deploy_path/current CAREER_ACTIVATION_CONTROL_PLANE_SHA=$q_control CAREER_ACTIVATION_RELEASE_SHA=$q_release CAREER_ACTIVATION_RELEASE_NAME=$q_release_name CAREER_ACTIVATION_WORKFLOW_RUN_ID=$q_run_id CAREER_ACTIVATION_WORKFLOW_RUN_ATTEMPT=$q_run_attempt CAREER_ACTIVATION_TIMESTAMP=$q_timestamp CAREER_ACTIVATION_GENERATION_ID=$q_generation CAREER_ACTIVATION_PREVIOUS_GENERATION_ID=$q_previous CAREER_ACTIVATION_PREVIOUS_POINTER_SHA256=$q_pointer CAREER_ACTIVATION_STAGING_RECEIPT_SHA256=$q_staging_receipt CAREER_ACTIVATION_STAGING_ARTIFACT_DIGEST=$q_staging_artifact CAREER_ACTIVATION_CANDIDATE_RECEIPT_SHA256=$q_candidate_receipt CAREER_ACTIVATION_GENERATION_MANIFEST_SHA256=$q_generation_manifest CAREER_ACTIVATION_DOCUMENT_HASHES_B64=$q_document_hashes CAREER_ACTIVATION_PREFLIGHT_RECEIPT_SHA256=$q_preflight CAREER_ACTIVATION_EXPECTED_DATABASE_STATE_SHA256=$q_database_state CAREER_ACTIVATION_APPLY_AUTHORIZED=$q_apply php \"\$current/backend/scripts/operations/career_1046_root_generation_activation.php\" $q_mode" \
+              > "$remote_receipt" 2>/dev/null
+          remote_status=$?
+          set -e
+
+          if jq -e \
+            --arg mode "$MODE" \
+            '.contract_version == "career.1046.root_generation_activation.v1"
+             and .mode == $mode
+             and (.status | type == "string")
+             and (.failed_stage == null or (.failed_stage | type == "string"))' \
+            "$remote_receipt" >/dev/null 2>&1; then
+            mv "$remote_receipt" "$receipt"
+          else
+            apply_started=false
+            write_state="none"
+            if [ "$MODE" = apply ]; then
+              apply_started=true
+              write_state="indeterminate"
+            fi
+            jq \
+              --argjson apply_started "$apply_started" \
+              --arg write_state "$write_state" \
+              '.status = "FAIL_REMOTE_OUTCOME_REQUIRES_REVIEW"
+               | .failed_stage = "remote_transport_or_receipt_invalid"
+               | .production_write_execution = $apply_started
+               | .write_state = $write_state
+               | .zero_write_guarantee = false' \
+              "$receipt" > "$receipt.next"
+            mv "$receipt.next" "$receipt"
+          fi
+          exit "$remote_status"
+
+      - name: Validate sanitized activation receipt
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/career-1046-root-generation-activation.json"
+          jq -e \
+            --arg mode "$MODE" \
+            --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
+            --arg release "$EXPECTED_RELEASE_SHA" \
+            --arg generation "$GENERATION_ID" \
+            --arg previous "$EXPECTED_PREVIOUS_GENERATION_ID" \
+            --arg pointer "$EXPECTED_PREVIOUS_POINTER_SHA256" \
+            --arg staging_receipt "$EXPECTED_STAGING_RECEIPT_SHA256" \
+            --arg staging_artifact "$EXPECTED_STAGING_ARTIFACT_DIGEST" \
+            '(.contract_version == "career.1046.root_generation_activation.v1")
+             and (.mode == $mode)
+             and (.control_plane_sha == $control)
+             and (.release_sha == $release)
+             and (.generation_id == $generation)
+             and (.previous_generation_id == $previous)
+             and (.previous_pointer_sha256 == $pointer)
+             and (.active_pointer_sha256_before == $pointer)
+             and (.rollback_pointer_sha256 == $pointer)
+             and (.staging_receipt_sha256 == $staging_receipt)
+             and (.staging_artifact_digest == $staging_artifact)
+             and (.document_count == 8)
+             and (.counts.unique_slugs == 1046)
+             and (.counts.locale_rows == 2092)
+             and (.counts.missing == 0)
+             and (.counts.duplicate == 0)
+             and (.counts.outside_target == 0)
+             and (.database_authority.receipt_covered_count == 1016)
+             and (.database_authority.matching_count == 1016)
+             and (.database_authority.missing_or_mismatching_count == 0)
+             and (.database_authority.outside_target_count == 0)
+             and (.database_select_only == true)
+             and (.database_write_count == 0)
+             and (.cms_write_count == 0)
+             and (.cache_write_count == 0)
+             and (.generation_document_write_count == 0)
+             and (.deployment_count == 0)
+             and (.migration_count == 0)
+             and (.restart_count == 0)
+             and (.publication_write_count == 0)
+             and (.sitemap_write_count == 0)
+             and (.llms_write_count == 0)
+             and (.search_submission_count == 0)
+             and (.automatic_retry_allowed == false)
+             and (.automatic_cleanup_allowed == false)
+             and (.automatic_rollback_allowed == false)
+             and (if $mode == "preflight" then
+                    .status == "PASS_PREFLIGHT_ACTIVATION_ELIGIBLE"
+                    and .production_write_execution == false
+                    and .candidate_file_write_count == 0
+                    and .pointer_write_count == 0
+                    and .root_pointer_switch_count == 0
+                    and .database_exclusion_lock_acquired == false
+                    and .database_exclusion_lock_released == false
+                    and .active_pointer_sha256_after == $pointer
+                    and .writes_committed == false
+                    and .zero_write_guarantee == true
+                  else
+                    .status == "PASS_APPLY_ROOT_GENERATION_ACTIVATED"
+                    and .production_write_execution == true
+                    and .candidate_file_write_count == 2
+                    and .pointer_write_count == 2
+                    and .root_pointer_switch_count == 1
+                    and .database_exclusion_lock_acquired == true
+                    and .database_exclusion_lock_released == true
+                    and .active_pointer_sha256_after != $pointer
+                    and .writes_committed == true
+                    and .zero_write_guarantee == false
+                  end)' "$receipt" >/dev/null
+
+      - name: Upload immutable sanitized activation receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: career-1046-root-generation-activation-${{ inputs.mode }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/career-1046-root-generation-activation.json
+          if-no-files-found: error
+          retention-days: 30
