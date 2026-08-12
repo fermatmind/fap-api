@@ -109,6 +109,8 @@ final class CareerCurrentGenerationPointerBootstrapWorkflowTest extends TestCase
         self::assertTrue($receipt['zero_write_guarantee']);
         self::assertFalse($receipt['production_write_execution']);
         self::assertSame(0, $receipt['pointer_write_count']);
+        self::assertSame('1d5a2ce0af7944a87c02d2ad86e9c8c92e5653996a52727a52253ce6f37c5ddd', $receipt['authority']['slug_set_sha256']);
+        self::assertSame('846801f87034c7b715108859f0b4d8b6426f3038b1f8402d8ff3f54e0f1ef3c3', $receipt['authority']['locale_row_set_sha256']);
         self::assertSame($before, $this->treeHash($this->backendRoot.'/storage/app/private'));
 
         $projectionPath = $this->backendRoot.'/storage/app/private/career_runtime_publish_projection/source-001/career-runtime-publish-projection.json';
@@ -321,10 +323,13 @@ final class CareerCurrentGenerationPointerBootstrapWorkflowTest extends TestCase
     /** @param list<string> $values */
     private function setHash(array $values): string
     {
-        $values = array_values(array_unique($values));
-        sort($values, SORT_STRING);
+        $normalized = array_values(array_unique(array_filter(array_map(
+            static fn (mixed $value): string => strtolower(trim((string) $value)),
+            $values,
+        ))));
+        sort($normalized, SORT_STRING);
 
-        return hash('sha256', $this->canonicalJson($values));
+        return hash('sha256', implode("\n", $normalized)."\n");
     }
 
     private function canonicalJson(mixed $value): string

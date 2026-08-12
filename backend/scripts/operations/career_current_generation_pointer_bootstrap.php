@@ -851,10 +851,13 @@ function sortedKeys(array $values): array
 /** @param list<string> $values */
 function setHash(array $values): string
 {
-    $values = array_values(array_unique($values));
-    sort($values, SORT_STRING);
+    $normalized = array_values(array_unique(array_filter(array_map(
+        static fn (mixed $value): string => strtolower(trim((string) $value)),
+        $values,
+    ))));
+    sort($normalized, SORT_STRING);
 
-    return hash('sha256', canonicalJson($values));
+    return hash('sha256', implode("\n", $normalized)."\n");
 }
 
 function canonicalJson(mixed $value): string
