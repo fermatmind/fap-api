@@ -622,15 +622,15 @@ class AppServiceProvider extends ServiceProvider
                 return;
             }
 
-            $request = request();
-            if ($request instanceof Request
-                && app(CareerVerifyOnlyRequestAuthorizer::class)->isAuthorized($request)) {
-                return;
-            }
-
             $thresholdMs = max(0.0, (float) config('fap.observability.slow_query_ms', 500));
             $sqlMs = max(0.0, (float) ($query->time ?? 0.0));
             if ($sqlMs < $thresholdMs) {
+                return;
+            }
+
+            $request = request();
+            if ($request instanceof Request
+                && app(CareerVerifyOnlyRequestAuthorizer::class)->isAuthorized($request)) {
                 return;
             }
 
