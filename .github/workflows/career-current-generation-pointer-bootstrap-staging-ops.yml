@@ -1,0 +1,409 @@
+name: Career Current Generation Pointer Bootstrap Staging Ops
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: SELECT-only preflight or exact receipt-bound staging pointer apply
+        required: true
+        default: preflight
+        type: choice
+        options:
+          - preflight
+          - apply
+      expected_control_plane_sha:
+        description: Exact latest main SHA containing this staging control
+        required: true
+        type: string
+      failed_staging_run_id:
+        description: Exact failed Deploy Application push run to rerun only after apply
+        required: true
+        type: string
+      preflight_run_id:
+        description: Apply only; successful staging pointer preflight run id
+        required: false
+        default: ""
+        type: string
+      preflight_run_attempt:
+        description: Apply only; successful staging pointer preflight run attempt
+        required: false
+        default: ""
+        type: string
+      expected_preflight_receipt_sha256:
+        description: Apply only; exact preflight receipt SHA-256
+        required: false
+        default: ""
+        type: string
+      expected_preflight_artifact_digest:
+        description: Apply only; exact GitHub preflight artifact digest
+        required: false
+        default: ""
+        type: string
+      expected_active_revision:
+        description: Apply only; exact active staging revision from preflight
+        required: false
+        default: ""
+        type: string
+      expected_release_name_sha256:
+        description: Apply only; sanitized active staging release identity
+        required: false
+        default: ""
+        type: string
+      expected_projection_path_sha256:
+        description: Apply only; deterministic selected projection path identity
+        required: false
+        default: ""
+        type: string
+      expected_ledger_path_sha256:
+        description: Apply only; deterministic selected ledger path identity
+        required: false
+        default: ""
+        type: string
+      operator_approval_phrase:
+        description: Apply only; exact receipt-bound staging pointer approval
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.repository }}-staging
+  cancel-in-progress: false
+
+jobs:
+  control:
+    name: Run isolated staging pointer bootstrap phase
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: staging
+    env:
+      MODE: ${{ inputs.mode }}
+      CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+      FAILED_STAGING_RUN_ID: ${{ inputs.failed_staging_run_id }}
+      PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
+      PREFLIGHT_RUN_ATTEMPT: ${{ inputs.preflight_run_attempt }}
+      PREFLIGHT_RECEIPT_SHA256: ${{ inputs.expected_preflight_receipt_sha256 }}
+      PREFLIGHT_ARTIFACT_DIGEST: ${{ inputs.expected_preflight_artifact_digest }}
+      EXPECTED_ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+      EXPECTED_RELEASE_NAME_SHA256: ${{ inputs.expected_release_name_sha256 }}
+      EXPECTED_PROJECTION_PATH_SHA256: ${{ inputs.expected_projection_path_sha256 }}
+      EXPECTED_LEDGER_PATH_SHA256: ${{ inputs.expected_ledger_path_sha256 }}
+      OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+      GENERATION_ID: career-current-342-30-bootstrap-v1
+      FROZEN_MANIFEST_SHA256: b570ec0cdda65278aa543431886b3529d072de8d67a8e79f1cafbb1c4c8dfc0e
+      FREEZE_CONTRACT_PAYLOAD_SHA256: 23c86542bbe9301f60b101d067ad6c2382982041042eaf4a9faa61886c164f88
+      FREEZE_RECEIPT_SET_SHA256: 504646d8317e30279688d361e0dfbdb3104b11baea93cae21cacb1b6dc7da098
+      PROJECTION_SHA256: 397f2a4ec284e9c0a6cd610447541ad4773fa7a7f3045008fab5efb334ec85c6
+      LEDGER_SHA256: 975b311bb346a090f1add678d5a6d9f1be230f87b223e2c3c829f4c7fd7aac6e
+      SLUG_SET_SHA256: 8b328b2e002875a9f92d4c406981f3c3724f066ee817d2d5bd1a61915e1eddf5
+      LOCALE_ROW_SET_SHA256: 607926991fa51c74d6d6c9606ab3b7f8f35918996006a39c68963c16765d5697
+      DEPLOY_USER: ${{ secrets.STAGING_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.STAGING_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.STAGING_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.STAGING_DEPLOY_PATH }}
+      SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+
+    steps:
+      - name: Initialize sanitized failure receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/career-current-generation-pointer-bootstrap-staging.json"
+          echo "STAGING_POINTER_RECEIPT=$receipt" >> "$GITHUB_ENV"
+          jq -n \
+            --arg mode "$MODE" \
+            --arg control "$CONTROL_PLANE_SHA" \
+            --arg run_id "$GITHUB_RUN_ID" \
+            --arg attempt "$GITHUB_RUN_ATTEMPT" \
+            '{
+              contract_version: "career.current_generation_pointer_bootstrap.staging.v1",
+              mode: $mode,
+              status: "FAIL_CONTROL_INITIALIZATION",
+              failed_stage: "initialize",
+              control_plane_sha: $control,
+              workflow_run_id: ($run_id | tonumber),
+              workflow_run_attempt: ($attempt | tonumber),
+              generation_id: "career-current-342-30-bootstrap-v1",
+              staging_pointer_write_execution: false,
+              pointer_write_count: 0,
+              database_write_count: 0,
+              cms_write_count: 0,
+              cache_write_count: 0,
+              publication_write_count: 0,
+              discoverability_write_count: 0,
+              deployment_count: 0,
+              migration_count: 0,
+              restart_count: 0,
+              staging_rerun_dispatched: false,
+              automatic_pointer_retry_allowed: false,
+              writes_committed: false,
+              write_state: "none"
+            }' > "$receipt"
+
+      - name: Checkout exact control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Validate latest main and immutable evidence
+        id: eligibility
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = "refs/heads/main"
+          [[ "$MODE" =~ ^(preflight|apply)$ ]]
+          [[ "$CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$FAILED_STAGING_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$CONTROL_PLANE_SHA"
+          php -l backend/scripts/operations/career_current_generation_pointer_bootstrap.php >/dev/null
+
+          failed_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${FAILED_STAGING_RUN_ID}")"
+          jq -e \
+            --arg sha "$CONTROL_PLANE_SHA" \
+            '.name == "Deploy Application"
+             and .path == ".github/workflows/deploy.yml"
+             and .event == "push"
+             and .head_branch == "main"
+             and .head_sha == $sha
+             and .status == "completed"
+             and .conclusion == "failure"' <<<"$failed_run" >/dev/null
+          failed_attempt="$(jq -er '.run_attempt' <<<"$failed_run")"
+
+          pointer_timestamp=""
+          if [ "$MODE" = preflight ]; then
+            test -z "$PREFLIGHT_RUN_ID$PREFLIGHT_RUN_ATTEMPT$PREFLIGHT_RECEIPT_SHA256$PREFLIGHT_ARTIFACT_DIGEST"
+            test -z "$EXPECTED_ACTIVE_REVISION$EXPECTED_RELEASE_NAME_SHA256$EXPECTED_PROJECTION_PATH_SHA256$EXPECTED_LEDGER_PATH_SHA256$OPERATOR_APPROVAL_PHRASE"
+            pointer_timestamp="$(date -u '+%Y-%m-%dT%H:%M:%SZ')"
+          else
+            [[ "$PREFLIGHT_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+            [[ "$PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+            [[ "$PREFLIGHT_RECEIPT_SHA256" =~ ^[0-9a-f]{64}$ ]]
+            [[ "$PREFLIGHT_ARTIFACT_DIGEST" =~ ^sha256:[0-9a-f]{64}$ ]]
+            [[ "$EXPECTED_ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]
+            [[ "$EXPECTED_RELEASE_NAME_SHA256" =~ ^[0-9a-f]{64}$ ]]
+            [[ "$EXPECTED_PROJECTION_PATH_SHA256" =~ ^[0-9a-f]{64}$ ]]
+            [[ "$EXPECTED_LEDGER_PATH_SHA256" =~ ^[0-9a-f]{64}$ ]]
+
+            preflight_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}")"
+            jq -e --arg sha "$CONTROL_PLANE_SHA" --argjson attempt "$PREFLIGHT_RUN_ATTEMPT" '
+              .name == "Career Current Generation Pointer Bootstrap Staging Ops"
+              and .path == ".github/workflows/career-current-generation-pointer-bootstrap-staging-ops.yml"
+              and .event == "workflow_dispatch"
+              and .head_branch == "main"
+              and .head_sha == $sha
+              and .status == "completed"
+              and .conclusion == "success"
+              and .run_attempt == $attempt' <<<"$preflight_run" >/dev/null
+
+            artifact_name="career-current-generation-pointer-bootstrap-staging-preflight-${PREFLIGHT_RUN_ID}-${PREFLIGHT_RUN_ATTEMPT}"
+            artifacts="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}/artifacts?per_page=100")"
+            jq -e --arg name "$artifact_name" --arg digest "$PREFLIGHT_ARTIFACT_DIGEST" '
+              [.artifacts[] | select(.name == $name)] | length == 1
+              and .[0].expired == false and .[0].digest == $digest' <<<"$artifacts" >/dev/null
+            evidence_dir="$(mktemp -d)"
+            gh run download "$PREFLIGHT_RUN_ID" --name "$artifact_name" --dir "$evidence_dir"
+            preflight="$evidence_dir/career-current-generation-pointer-bootstrap-staging.json"
+            test "$(sha256sum "$preflight" | awk '{print $1}')" = "$PREFLIGHT_RECEIPT_SHA256"
+            jq -e \
+              --arg control "$CONTROL_PLANE_SHA" \
+              --arg active "$EXPECTED_ACTIVE_REVISION" \
+              --arg release_name_sha "$EXPECTED_RELEASE_NAME_SHA256" \
+              --arg projection_path "$EXPECTED_PROJECTION_PATH_SHA256" \
+              --arg ledger_path "$EXPECTED_LEDGER_PATH_SHA256" \
+              --argjson failed_run "$FAILED_STAGING_RUN_ID" \
+              '.contract_version == "career.current_generation_pointer_bootstrap.staging.v1"
+               and .mode == "preflight"
+               and .status == "PASS_PREFLIGHT_APPLY_ELIGIBLE"
+               and .control_plane_sha == $control
+               and .active_revision == $active
+               and .release_name_sha256 == $release_name_sha
+               and .failed_staging_run_id == $failed_run
+               and .source_artifacts.projection_path_sha256 == $projection_path
+               and .source_artifacts.ledger_path_sha256 == $ledger_path
+               and .source_artifacts.projection_candidate_count >= 1
+               and .source_artifacts.ledger_candidate_count >= 1
+               and .source_artifacts.selection_rule == "relative_path_bytewise_ascending_first_v1"
+               and .pointer_state_before.active_pointer_state == "ABSENT"
+               and .pointer_state_before.generation_pointer_state == "ABSENT"
+               and .staging_pointer_write_execution == false
+               and .writes_committed == false' "$preflight" >/dev/null
+            pointer_timestamp="$(jq -er '.pointer_timestamp' "$preflight")"
+            expected_phrase="I explicitly approve bootstrapping only the staging Career current 342/30 root generation pointer from preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} receipt ${PREFLIGHT_RECEIPT_SHA256} artifact ${PREFLIGHT_ARTIFACT_DIGEST}, control plane ${CONTROL_PLANE_SHA}, active SHA ${EXPECTED_ACTIVE_REVISION}, release identity ${EXPECTED_RELEASE_NAME_SHA256}, projection path ${EXPECTED_PROJECTION_PATH_SHA256}, ledger path ${EXPECTED_LEDGER_PATH_SHA256}, then rerun failed staging run ${FAILED_STAGING_RUN_ID}; create only the immutable and active pointer documents, do not modify projection or ledger bytes, and perform no migration, DB/CMS/cache/publication/sitemap/llms/Search write, manual deploy dispatch, automatic pointer retry, cleanup, or rollback."
+            test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
+          fi
+          {
+            echo "pointer_timestamp=$pointer_timestamp"
+            echo "failed_attempt=$failed_attempt"
+            echo "apply_authorized=$([ "$MODE" = apply ] && echo 1 || echo 0)"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Validate protected staging topology
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST DEPLOY_PATH SSH_KNOWN_HOSTS; do test -n "${!name:-}"; done
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z0-9_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          test "$DEPLOY_PORT" -ge 1 && test "$DEPLOY_PORT" -le 65535
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          [[ "$DEPLOY_PATH" != *".."* ]]
+
+      - name: Start pinned SSH agent
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        run: |
+          set -euo pipefail
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Run SELECT-only preflight or exact receipt-bound apply
+        shell: bash
+        env:
+          POINTER_TIMESTAMP: ${{ steps.eligibility.outputs.pointer_timestamp }}
+          APPLY_AUTHORIZED: ${{ steps.eligibility.outputs.apply_authorized }}
+        run: |
+          set -euo pipefail
+          remote_receipt="$RUNNER_TEMP/staging-pointer.remote.json"
+          printf -v q_deploy_path '%q' "$DEPLOY_PATH"
+          printf -v q_control '%q' "$CONTROL_PLANE_SHA"
+          printf -v q_run_id '%q' "$GITHUB_RUN_ID"
+          printf -v q_attempt '%q' "$GITHUB_RUN_ATTEMPT"
+          printf -v q_generation '%q' "$GENERATION_ID"
+          printf -v q_timestamp '%q' "$POINTER_TIMESTAMP"
+          printf -v q_apply '%q' "$APPLY_AUTHORIZED"
+          printf -v q_preflight '%q' "$PREFLIGHT_RECEIPT_SHA256"
+          printf -v q_projection_path '%q' "$EXPECTED_PROJECTION_PATH_SHA256"
+          printf -v q_ledger_path '%q' "$EXPECTED_LEDGER_PATH_SHA256"
+
+          set +e
+          timeout --signal=TERM --kill-after=5s 120s \
+            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+              -o ServerAliveInterval=20 -o ServerAliveCountMax=5 \
+              -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+              "set -euo pipefail; current=\$(readlink -f $q_deploy_path/current); test -d \"\$current\"; release_name=\$(basename \"\$current\"); [[ \"\$release_name\" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]; release_sha=\$(tr -d '\\r\\n' < \"\$current/REVISION\"); [[ \"\$release_sha\" =~ ^[0-9a-f]{40}$ ]]; CAREER_POINTER_BACKEND_ROOT=\"\$current/backend\" CAREER_POINTER_DEPLOY_PATH=$q_deploy_path CAREER_POINTER_CONTROL_PLANE_SHA=$q_control CAREER_POINTER_EXPECTED_RELEASE_SHA=\"\$release_sha\" CAREER_POINTER_EXPECTED_RELEASE_NAME=\"\$release_name\" CAREER_POINTER_WORKFLOW_RUN_ID=$q_run_id CAREER_POINTER_WORKFLOW_RUN_ATTEMPT=$q_attempt CAREER_POINTER_GENERATION_ID=$q_generation CAREER_POINTER_TIMESTAMP=$q_timestamp CAREER_POINTER_FROZEN_MANIFEST_SHA256=$FROZEN_MANIFEST_SHA256 CAREER_POINTER_FREEZE_CONTRACT_PAYLOAD_SHA256=$FREEZE_CONTRACT_PAYLOAD_SHA256 CAREER_POINTER_RECEIPT_SET_SHA256=$FREEZE_RECEIPT_SET_SHA256 CAREER_POINTER_PROJECTION_SHA256=$PROJECTION_SHA256 CAREER_POINTER_LEDGER_SHA256=$LEDGER_SHA256 CAREER_POINTER_SLUG_SET_SHA256=$SLUG_SET_SHA256 CAREER_POINTER_LOCALE_ROW_SET_SHA256=$LOCALE_ROW_SET_SHA256 CAREER_POINTER_SLUG_COUNT=342 CAREER_POINTER_LOCALE_ROW_COUNT=684 CAREER_POINTER_PUBLISHED_SLUG_COUNT=30 CAREER_POINTER_PUBLISHED_LOCALE_ROW_COUNT=60 CAREER_POINTER_APPLY_AUTHORIZED=$q_apply CAREER_POINTER_PREFLIGHT_RECEIPT_SHA256=$q_preflight CAREER_POINTER_EXPECTED_PROJECTION_PATH_SHA256=$q_projection_path CAREER_POINTER_EXPECTED_LEDGER_PATH_SHA256=$q_ledger_path php /dev/stdin $MODE" \
+              < backend/scripts/operations/career_current_generation_pointer_bootstrap.php \
+              > "$remote_receipt" 2>/dev/null
+          remote_status=$?
+          set -e
+
+          if jq -e '.contract_version == "career.current_generation_pointer_bootstrap.v1"' "$remote_receipt" >/dev/null 2>&1; then
+            jq \
+              --argjson failed_run "$FAILED_STAGING_RUN_ID" \
+              --argjson failed_attempt "${{ steps.eligibility.outputs.failed_attempt }}" \
+              '.contract_version = "career.current_generation_pointer_bootstrap.staging.v1"
+               | .active_revision = .release_sha
+               | .failed_staging_run_id = $failed_run
+               | .failed_staging_run_attempt = $failed_attempt
+               | .staging_pointer_write_execution = .production_write_execution
+               | .authority.locales = {
+                   "en": {"count": 342, "published_count": 30},
+                   "zh-CN": {"count": 342, "published_count": 30}
+                 }
+               | .discoverability_write_count = (.sitemap_write_count + .llms_write_count + .search_submission_count)
+               | .restart_count = 0
+               | .staging_rerun_dispatched = false
+               | .automatic_pointer_retry_allowed = false
+               | del(.production_write_execution)' \
+              "$remote_receipt" > "$STAGING_POINTER_RECEIPT"
+          else
+            jq --argjson apply "$([ "$MODE" = apply ] && echo true || echo false)" '
+              .status = "FAIL_REMOTE_OUTCOME_REQUIRES_REVIEW"
+              | .failed_stage = "remote_transport_or_receipt_invalid"
+              | .staging_pointer_write_execution = $apply
+              | .write_state = (if $apply then "indeterminate" else "none" end)' \
+              "$STAGING_POINTER_RECEIPT" > "$STAGING_POINTER_RECEIPT.next"
+            mv "$STAGING_POINTER_RECEIPT.next" "$STAGING_POINTER_RECEIPT"
+          fi
+          exit "$remote_status"
+
+      - name: Validate sanitized phase receipt
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          # shellcheck disable=SC2016
+          common='(.contract_version == "career.current_generation_pointer_bootstrap.staging.v1")
+            and (.control_plane_sha == $control)
+            and (.failed_staging_run_id == $failed_run)
+            and (.generation_id == "career-current-342-30-bootstrap-v1")
+            and (.authority.slug_count == 342)
+            and (.authority.locale_row_count == 684)
+            and (.authority.published_slug_count == 30)
+            and (.authority.published_locale_row_count == 60)
+            and (.authority.projection_sha256 == "397f2a4ec284e9c0a6cd610447541ad4773fa7a7f3045008fab5efb334ec85c6")
+            and (.authority.ledger_sha256 == "975b311bb346a090f1add678d5a6d9f1be230f87b223e2c3c829f4c7fd7aac6e")
+            and (.authority.locales.en.count == 342)
+            and (.authority.locales.en.published_count == 30)
+            and (.authority.locales."zh-CN".count == 342)
+            and (.authority.locales."zh-CN".published_count == 30)
+            and (.source_artifacts.projection_candidate_count >= 1)
+            and (.source_artifacts.ledger_candidate_count >= 1)
+            and (.source_artifacts.selection_rule == "relative_path_bytewise_ascending_first_v1")
+            and (.database_write_count == 0)
+            and (.cms_write_count == 0)
+            and (.cache_write_count == 0)
+            and (.publication_write_count == 0)
+            and (.discoverability_write_count == 0)
+            and (.deployment_count == 0)
+            and (.migration_count == 0)
+            and (.restart_count == 0)
+            and (.automatic_pointer_retry_allowed == false)'
+          if [ "$MODE" = preflight ]; then
+            jq -e --arg control "$CONTROL_PLANE_SHA" --argjson failed_run "$FAILED_STAGING_RUN_ID" \
+              "$common and .status == \"PASS_PREFLIGHT_APPLY_ELIGIBLE\"
+               and .staging_pointer_write_execution == false
+               and .pointer_write_count == 0
+               and .writes_committed == false" "$STAGING_POINTER_RECEIPT" >/dev/null
+          else
+            jq -e --arg control "$CONTROL_PLANE_SHA" --arg active "$EXPECTED_ACTIVE_REVISION" \
+              --arg release_name_sha "$EXPECTED_RELEASE_NAME_SHA256" --argjson failed_run "$FAILED_STAGING_RUN_ID" \
+              "$common and .status == \"PASS_APPLY_POINTER_BOOTSTRAPPED\"
+               and .active_revision == \$active
+               and .release_name_sha256 == \$release_name_sha
+               and .staging_pointer_write_execution == true
+               and .pointer_write_count == 2
+               and .writes_committed == true
+               and .write_state == \"active_pointer_committed\"" "$STAGING_POINTER_RECEIPT" >/dev/null
+          fi
+          active_revision="$(jq -er '.active_revision | select(test("^[0-9a-f]{40}$"))' "$STAGING_POINTER_RECEIPT")"
+          git cat-file -e "${active_revision}^{commit}"
+          git merge-base --is-ancestor "$active_revision" "$CONTROL_PLANE_SHA"
+
+      - name: Rerun exact failed staging push after verified apply
+        if: success() && inputs.mode == 'apply'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          jq -e '.status == "PASS_APPLY_POINTER_BOOTSTRAPPED" and .writes_committed == true' "$STAGING_POINTER_RECEIPT" >/dev/null
+          gh api --method POST "repos/${GITHUB_REPOSITORY}/actions/runs/${FAILED_STAGING_RUN_ID}/rerun-failed-jobs"
+          jq '.staging_rerun_dispatched = true | .deployment_count = 1' \
+            "$STAGING_POINTER_RECEIPT" > "$STAGING_POINTER_RECEIPT.next"
+          mv "$STAGING_POINTER_RECEIPT.next" "$STAGING_POINTER_RECEIPT"
+
+      - name: Upload immutable sanitized receipt
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: career-current-generation-pointer-bootstrap-staging-${{ inputs.mode }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/career-current-generation-pointer-bootstrap-staging.json
+          if-no-files-found: error
+          retention-days: 90

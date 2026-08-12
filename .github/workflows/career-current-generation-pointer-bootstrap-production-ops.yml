@@ -252,8 +252,9 @@ jobs:
                  and .authority.published_locale_row_count == 60
                  and .source_artifacts.projection_path_sha256 == $projection_path
                  and .source_artifacts.ledger_path_sha256 == $ledger_path
-                 and .source_artifacts.projection_match_count == 1
-                 and .source_artifacts.ledger_match_count == 1
+                 and .source_artifacts.projection_candidate_count >= 1
+                 and .source_artifacts.ledger_candidate_count >= 1
+                 and .source_artifacts.selection_rule == "relative_path_bytewise_ascending_first_v1"
                  and .pointer_state_before.active_pointer_state == "ABSENT"
                  and .pointer_state_before.generation_pointer_state == "ABSENT"
                  and .pointer_state_before.existing_generation_pointer_count == 0
@@ -404,6 +405,9 @@ jobs:
             and (.authority.locale_row_count == 684)
             and (.authority.published_slug_count == 30)
             and (.authority.published_locale_row_count == 60)
+            and (.source_artifacts.projection_candidate_count >= 1)
+            and (.source_artifacts.ledger_candidate_count >= 1)
+            and (.source_artifacts.selection_rule == "relative_path_bytewise_ascending_first_v1")
             and (.database_write_count == 0)
             and (.cms_write_count == 0)
             and (.cache_write_count == 0)
