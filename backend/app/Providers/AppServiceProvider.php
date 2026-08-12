@@ -44,6 +44,7 @@ use App\Services\Content\ContentPacksIndex;
 use App\Services\Content\ContentStore;
 use App\Services\ContentPackResolver;
 use App\Services\Ops\OpsDistributedLimiter;
+use App\Support\Career\CareerVerifyOnlyRequestAuthorizer;
 use App\Support\Logging\RedactProcessor;
 use App\Support\OrgContext;
 use App\Support\Security\ExternalKmsPiiEnvelopeAdapter;
@@ -621,13 +622,18 @@ class AppServiceProvider extends ServiceProvider
                 return;
             }
 
+            $request = request();
+            if ($request instanceof Request
+                && app(CareerVerifyOnlyRequestAuthorizer::class)->isAuthorized($request)) {
+                return;
+            }
+
             $thresholdMs = max(0.0, (float) config('fap.observability.slow_query_ms', 500));
             $sqlMs = max(0.0, (float) ($query->time ?? 0.0));
             if ($sqlMs < $thresholdMs) {
                 return;
             }
 
-            $request = request();
             $route = $this->resolveSlowQueryRoute($request);
             $requestId = $this->resolveSlowQueryRequestId($request);
             $orgId = $this->resolveSlowQueryOrgId($request);

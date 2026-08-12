@@ -49747,6 +49747,52 @@ prs:
     content_authority: exact active generation pointer and its hash-bound immutable 1046/2092 product documents; this PR adds only an unexecuted read-only verifier
     repository_rule_impact: adds one protected evidence-only public product verification lane while keeping discoverability release separately controlled
 
+  - id: CAREER-1046-PUBLIC-PRODUCT-VERIFY-ZERO-WRITE-FIX-10A
+    repo: fap-api
+    base: main
+    branch: codex/career-1046-public-product-verify-zero-write-fix
+    title: "CAREER-1046-PUBLIC-PRODUCT-VERIFY-ZERO-WRITE-FIX-10A: suppress authenticated verify-only slow-query logs"
+    status: implementation_in_progress
+    depends_on:
+      - CAREER-1046-PUBLIC-PRODUCT-VERIFY-ONLY-10
+    train_scope: career_1046_public_product_verify_zero_write_fix
+    risk_level: p1_protected_production_read_only_evidence_control
+    scope:
+      - Suppress only application slow-query log writes for a valid, signed, unexpired Career 1046 verify-only request on its exact directory/detail paths.
+      - Preserve ordinary slow-query telemetry for unsigned, forged, expired, and non-Career requests, without changing public Career payload or authority behavior.
+    allowed_paths:
+      - backend/app/Providers/AppServiceProvider.php
+      - backend/tests/Feature/SRE/SlowQueryTelemetrySmokeTest.php
+      - docs/operations/career-1046-public-product-verify-zero-write-fix.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Dispatch any workflow or access controlled production/staging state.
+      - Disable global slow-query logging, alter public Career payloads, or implement Task 7B.
+    validation:
+      - cd backend && php artisan test tests/Feature/SRE/SlowQueryTelemetrySmokeTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Providers/AppServiceProvider.php tests/Feature/SRE/SlowQueryTelemetrySmokeTest.php
+      - php -l backend/app/Providers/AppServiceProvider.php
+      - parse pr-train JSON and YAML; git diff --check and exact five-file scope validation
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    workflow_policy_change: false
+    production_write_execution: false
+    production_read_only_evidence: false
+    production_workflow_dispatched: false
+    staging_workflow_dispatched: false
+    database_mutation: false
+    cms_mutation: false
+    cache_mutation: false
+    artifact_mutation: false
+    pointer_mutation: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: existing signed verify-only request authority; this PR closes only its slow-query application-log write gap
+    repository_rule_impact: makes the Task 7A zero-write receipt truthful without reducing ordinary observability
+
   - id: CAREER-1046-IMMUTABLE-CANDIDATE-ARTIFACT-PRODUCER-07B
     repo: fap-api
     base: main
