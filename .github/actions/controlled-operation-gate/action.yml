@@ -1,0 +1,65 @@
+name: Controlled operation gate
+description: Elect one exact operation owner before Environment or secret access
+
+inputs:
+  claimed-key:
+    required: true
+  expected-key:
+    required: true
+  workflow-file:
+    required: true
+  receipt-template:
+    required: true
+  match-head-sha:
+    required: false
+    default: "false"
+  event-name:
+    required: false
+    default: workflow_dispatch
+  candidate-marker:
+    required: false
+    default: ""
+
+outputs:
+  decision:
+    value: ${{ steps.gate.outputs.decision }}
+  operation-key:
+    value: ${{ steps.gate.outputs.operation_key }}
+  owner-run-id:
+    value: ${{ steps.gate.outputs.owner_run_id }}
+  owner-run-attempt:
+    value: ${{ steps.gate.outputs.owner_run_attempt }}
+  owner-receipt-artifact-id:
+    value: ${{ steps.gate.outputs.owner_receipt_artifact_id }}
+  owner-receipt-artifact-digest:
+    value: ${{ steps.gate.outputs.owner_receipt_artifact_digest }}
+
+runs:
+  using: composite
+  steps:
+    - name: Elect exact controlled operation owner
+      id: gate
+      uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+      env:
+        CLAIMED_OPERATION_KEY: ${{ inputs.claimed-key }}
+        EXPECTED_OPERATION_KEY: ${{ inputs.expected-key }}
+        OPERATION_WORKFLOW_FILE: ${{ inputs.workflow-file }}
+        OPERATION_RECEIPT_TEMPLATE: ${{ inputs.receipt-template }}
+        OPERATION_MATCH_HEAD_SHA: ${{ inputs.match-head-sha }}
+        OPERATION_EVENT_NAME: ${{ inputs.event-name }}
+        OPERATION_CANDIDATE_MARKER: ${{ inputs.candidate-marker }}
+      with:
+        script: |
+          const { gate } = require(`${process.env.GITHUB_WORKSPACE}/.github/scripts/controlled-operation-gate.cjs`);
+          await gate({
+            github,
+            context,
+            core,
+            claimedKey: process.env.CLAIMED_OPERATION_KEY,
+            expectedKey: process.env.EXPECTED_OPERATION_KEY,
+            workflowFile: process.env.OPERATION_WORKFLOW_FILE,
+            receiptTemplate: process.env.OPERATION_RECEIPT_TEMPLATE,
+            matchHeadSha: process.env.OPERATION_MATCH_HEAD_SHA === 'true',
+            eventName: process.env.OPERATION_EVENT_NAME,
+            candidateMarker: process.env.OPERATION_CANDIDATE_MARKER,
+          });

@@ -1,5 +1,5 @@
 name: Deploy API Production
-run-name: Deploy API Production ${{ inputs.expected_release_sha }} staging-${{ inputs.staging_run_id }}
+run-name: Deploy API Production ${{ inputs.expected_release_sha }} staging-${{ inputs.staging_run_id }} [op:${{ inputs.operation_key }}]
 
 on:
   workflow_dispatch:
@@ -35,6 +35,10 @@ on:
         required: false
         default: ""
         type: string
+      operation_key:
+        description: "Deterministic operation key for this exact production release"
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -50,8 +54,43 @@ env:
   RELEASE_ID: ${{ inputs.release_id }}
 
 jobs:
+  operation-gate:
+    name: Elect production operation owner before Environment access
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      decision: ${{ steps.gate.outputs.decision }}
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - name: Recompute immutable production operation identity
+        id: identity
+        shell: bash
+        env:
+          EXPECTED_RELEASE_SHA: ${{ inputs.expected_release_sha }}
+          STAGING_RUN_ID: ${{ inputs.staging_run_id }}
+          RELEASE_ID: ${{ inputs.release_id }}
+          DEPLOY_MODE: ${{ inputs.deploy_mode }}
+          EXPECTED_DEPLOYED_REVISION: ${{ inputs.expected_deployed_revision }}
+          APPROVED_MIGRATION: ${{ inputs.approved_migration }}
+        run: |
+          set -euo pipefail
+          identity="release_sha=${EXPECTED_RELEASE_SHA}|staging_run=${STAGING_RUN_ID}|release_id=${RELEASE_ID}|mode=${DEPLOY_MODE}|active=${EXPECTED_DEPLOYED_REVISION}|migration=${APPROVED_MIGRATION}"
+          key="$(node .github/scripts/controlled-operation-gate.cjs key --repository "$GITHUB_REPOSITORY" --workflow .github/workflows/deploy-production.yml --scope production-deploy --identity "$identity")"
+          test "${{ inputs.operation_key }}" = "$key"
+          echo "operation_key=$key" >> "$GITHUB_OUTPUT"
+      - name: Gate exact production operation
+        id: gate
+        uses: ./.github/actions/controlled-operation-gate
+        with:
+          claimed-key: ${{ inputs.operation_key }}
+          expected-key: ${{ steps.identity.outputs.operation_key }}
+          workflow-file: deploy-production.yml
+          receipt-template: backend-production-deploy-progress-{run_id}-{run_attempt}
+
   deployment-eligibility:
     name: Resolve production deployment eligibility
+    needs: operation-gate
+    if: needs.operation-gate.outputs.decision == 'execute'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     outputs:

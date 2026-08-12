@@ -1,8 +1,23 @@
 name: Deploy Application
+run-name: Deploy Application ${{ github.event_name }} ${{ github.sha }} [op:${{ inputs.operation_key }}]
 
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - "AGENTS.md"
+      - ".github/actions/controlled-operation-gate/action.yml"
+      - ".github/scripts/controlled-operation-gate.cjs"
+      - ".github/workflows/backend-production-auto-deploy.yml"
+      - ".github/workflows/career-current-generation-pointer-bootstrap-staging-ops.yml"
+      - ".github/workflows/career-staging-authority-artifact-recovery.yml"
+      - ".github/workflows/content-promotion-automation.yml"
+      - ".github/workflows/deploy-production.yml"
+      - ".github/workflows/deploy.yml"
+      - "backend/tests/Sre/ControlledWorkflowOperationGateTest.php"
+      - "backend/tests/Sre/BackendProductionAutoDeployWorkflowTest.php"
+      - "backend/tests/Sre/DeployStorageAndDatabaseConfigTest.php"
+      - "tests/ops/controlled-operation-gate.test.cjs"
   workflow_dispatch:
     inputs:
       release_mode:
@@ -28,6 +43,10 @@ on:
         required: false
         default: ""
         type: string
+      operation_key:
+        description: "Deterministic operation key required for manual controlled dispatch"
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -38,8 +57,47 @@ env:
   MBTI_RUNTIME46_PRODUCTION_BASE_SHA: "781d1636b2c74f5852076a5864b681910a1e0e47"
 
 jobs:
+  operation-gate:
+    name: Elect staging operation owner before Environment access
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      decision: ${{ steps.gate.outputs.decision }}
+      operation_key: ${{ steps.identity.outputs.operation_key }}
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - name: Recompute immutable staging operation identity
+        id: identity
+        shell: bash
+        env:
+          CLAIMED_KEY: ${{ inputs.operation_key }}
+          RELEASE_MODE: ${{ inputs.release_mode || 'main' }}
+          EXPECTED_RELEASE_SHA: ${{ inputs.expected_release_sha }}
+          EXPECTED_BASE_SHA: ${{ inputs.expected_base_sha }}
+        run: |
+          set -euo pipefail
+          identity="event=${GITHUB_EVENT_NAME}|release_mode=${RELEASE_MODE}|sha=${GITHUB_SHA}|expected_release_sha=${EXPECTED_RELEASE_SHA}|expected_base_sha=${EXPECTED_BASE_SHA}"
+          key="$(node .github/scripts/controlled-operation-gate.cjs key --repository "$GITHUB_REPOSITORY" --workflow .github/workflows/deploy.yml --scope staging-deploy --identity "$identity")"
+          if [ "$GITHUB_EVENT_NAME" = workflow_dispatch ]; then
+            test "$CLAIMED_KEY" = "$key"
+          else
+            test -z "$CLAIMED_KEY"
+          fi
+          echo "operation_key=$key" >> "$GITHUB_OUTPUT"
+      - name: Gate exact staging operation
+        id: gate
+        uses: ./.github/actions/controlled-operation-gate
+        with:
+          claimed-key: ${{ steps.identity.outputs.operation_key }}
+          expected-key: ${{ steps.identity.outputs.operation_key }}
+          workflow-file: deploy.yml
+          receipt-template: backend-staging-operation-{operation_key}-{run_id}-{run_attempt}
+          match-head-sha: ${{ github.event_name == 'push' && 'true' || 'false' }}
+
   checks:
     name: Deploy checks (staging)
+    needs: operation-gate
+    if: needs.operation-gate.outputs.decision == 'execute'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     outputs:
@@ -286,8 +344,8 @@ jobs:
 
   deploy:
     name: Deploy (staging)
-    needs: checks
-    if: needs.checks.result == 'success'
+    needs: [operation-gate, checks]
+    if: needs.operation-gate.outputs.decision == 'execute' && needs.checks.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     concurrency:
@@ -959,6 +1017,27 @@ jobs:
           path: artifacts/isolated-staging-receipt.json
           if-no-files-found: error
           retention-days: 90
+
+      - name: Write staging operation owner receipt
+        if: ${{ success() && steps.stale_guard.outputs.skip_deploy != 'true' }}
+        shell: bash
+        env:
+          OPERATION_KEY: ${{ needs.operation-gate.outputs.operation_key }}
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/staging-operation
+          jq -n --arg key "$OPERATION_KEY" --arg sha "$GITHUB_SHA" --argjson run "$GITHUB_RUN_ID" --argjson attempt "$GITHUB_RUN_ATTEMPT" \
+            '{schema:"fermatmind.staging_operation_receipt.v1",operation_key:$key,source_sha:$sha,workflow_run_id:$run,workflow_run_attempt:$attempt,result:"success",environment:"staging"}' \
+            > artifacts/staging-operation/receipt.json
+
+      - name: Upload staging operation owner receipt
+        if: ${{ success() && steps.stale_guard.outputs.skip_deploy != 'true' }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: backend-staging-operation-${{ needs.operation-gate.outputs.operation_key }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/staging-operation/receipt.json
+          if-no-files-found: error
+          retention-days: 30
 
       - name: Stop SSH agent
         if: ${{ always() && steps.stale_guard.outputs.skip_deploy != 'true' }}

@@ -1,4 +1,5 @@
 name: Career Staging Authority Artifact Recovery
+run-name: Career Staging Authority Artifact Recovery ${{ inputs.mode }} [op:${{ inputs.operation_key }}]
 
 on:
   workflow_dispatch:
@@ -42,6 +43,10 @@ on:
         description: Apply only; exact receipt-bound approval phrase
         required: false
         type: string
+      operation_key:
+        description: Deterministic exact recovery operation key
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -72,8 +77,31 @@ env:
   GENERATION_ID: career-current-342-30-bootstrap-v1
 
 jobs:
+  operation_gate:
+    name: Elect recovery owner before Environment access
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      decision: ${{ steps.gate.outputs.decision }}
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - id: identity
+        shell: bash
+        env:
+          IDENTITY: mode=${{ inputs.mode }}|control=${{ inputs.expected_control_plane_sha }}|production=${{ inputs.expected_production_active_revision }}|staging=${{ inputs.expected_staging_active_revision }}|preflight_run=${{ inputs.preflight_run_id }}|preflight_attempt=${{ inputs.preflight_run_attempt }}|preflight_receipt=${{ inputs.expected_preflight_receipt_sha256 }}|preflight_artifact=${{ inputs.expected_preflight_artifact_digest }}
+        run: echo "operation_key=$(node .github/scripts/controlled-operation-gate.cjs key --repository "$GITHUB_REPOSITORY" --workflow .github/workflows/career-staging-authority-artifact-recovery.yml --scope career-staging-authority-recovery --identity "$IDENTITY")" >> "$GITHUB_OUTPUT"
+      - id: gate
+        uses: ./.github/actions/controlled-operation-gate
+        with:
+          claimed-key: ${{ inputs.operation_key }}
+          expected-key: ${{ steps.identity.outputs.operation_key }}
+          workflow-file: career-staging-authority-artifact-recovery.yml
+          receipt-template: career-staging-authority-recovery-${{ inputs.mode }}-{run_id}-{run_attempt}
+
   production_read:
     name: Revalidate and read frozen production authority
+    needs: operation_gate
+    if: needs.operation_gate.outputs.decision == 'execute'
     runs-on: ubuntu-latest
     environment: production
     timeout-minutes: 20
@@ -573,8 +601,9 @@ jobs:
 
   finalize:
     name: Finalize sanitized recovery receipt
-    if: always()
+    if: always() && needs.operation_gate.outputs.decision == 'execute'
     needs:
+      - operation_gate
       - production_read
       - staging_restore
     runs-on: ubuntu-latest
