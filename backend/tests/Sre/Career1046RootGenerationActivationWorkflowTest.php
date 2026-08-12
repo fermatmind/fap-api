@@ -364,6 +364,54 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
             .$this->expected['generation_id'].'/generation-pointer.json');
     }
 
+    public function test_runtime_invalid_candidate_fails_before_either_pointer_write(): void
+    {
+        $projectionPath = $this->privateRoot.'/career_generation_authority/generations/'
+            .$this->expected['generation_id'].'/career-runtime-publish-projection.json';
+        $projection = json_decode((string) file_get_contents($projectionPath), true, 512, JSON_THROW_ON_ERROR);
+        $projection['items'][0]['locale'] = 'fr';
+        $projectionBytes = CareerGenerationCanonicalJson::encode($projection)."\n";
+        File::put($projectionPath, $projectionBytes);
+        $expected = $this->expected;
+        $expected['document_hashes']['career-runtime-publish-projection.json'] = hash('sha256', $projectionBytes);
+        $current = Career1046RootGenerationActivation::inspectCurrentAndRollback($expected);
+        $generation = Career1046RootGenerationActivation::inspectStagedGeneration($expected);
+        $activePath = $current['active_path'];
+        $before = hash_file('sha256', $activePath);
+        $databaseLockHeld = false;
+
+        try {
+            Career1046RootGenerationActivation::activate(
+                $expected,
+                $current,
+                $generation,
+                $this->database,
+                str_repeat('f', 64),
+                function () use (&$databaseLockHeld): array {
+                    self::assertTrue($databaseLockHeld);
+
+                    return $this->database;
+                },
+                function () use (&$databaseLockHeld): void {
+                    self::assertFalse($databaseLockHeld);
+                    $databaseLockHeld = true;
+                },
+                function () use (&$databaseLockHeld): void {
+                    self::assertTrue($databaseLockHeld);
+                    $databaseLockHeld = false;
+                },
+            );
+            self::fail('A candidate rejected by the runtime loader contract must not commit either pointer.');
+        } catch (Career1046RootActivationFailure $failure) {
+            self::assertSame('CANDIDATE_RUNTIME_AUTHORITY_UNREADABLE', $failure->safeCode);
+        }
+
+        self::assertFalse($databaseLockHeld);
+        self::assertSame($before, hash_file('sha256', $activePath));
+        self::assertFileDoesNotExist($generation['generation_root'].'/generation-pointer.json');
+        self::assertFileDoesNotExist(dirname($activePath).'/.active-generation.json.candidate.900.1');
+    }
+
     public function test_conflict_classifier_covers_all_career_artisan_commands_and_versioned_php(): void
     {
         self::assertTrue(Career1046RootGenerationActivation::processCommandIsConflicting([
@@ -418,6 +466,7 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
             'DATABASE_AUTHORITY_CHANGED_BEFORE_SWITCH',
             'DATABASE_EXCLUSION_LOCK_FAILED',
             'DATABASE_EXCLUSION_UNLOCK_FAILED',
+            'CANDIDATE_RUNTIME_AUTHORITY_UNREADABLE',
             'LOCK TABLES `occupations` READ, `index_states` READ',
             'UNLOCK TABLES',
             'database_exclusion_lock_acquired',
@@ -460,7 +509,7 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
         self::assertGreaterThanOrEqual(2, substr_count($workflow, 'git fetch --no-tags origin main:refs/remotes/origin/main'));
         self::assertGreaterThanOrEqual(3, substr_count($runner, 'self::assertNoConflictingOperation($expected);'));
         self::assertMatchesRegularExpression(
-            '/\$databaseLockAcquirer\(\);.*\$databaseNow = \$databaseRevalidator\(\);.*DATABASE_AUTHORITY_CHANGED_BEFORE_SWITCH.*writePointerCandidate\(.*\$immutableCandidate.*rename\(\$immutableCandidate.*writePointerCandidate\(.*\$activeCandidate.*rename\(\$activeCandidate.*\$databaseLockReleaser\(\);/s',
+            '/\$databaseLockAcquirer\(\);.*\$databaseNow = \$databaseRevalidator\(\);.*DATABASE_AUTHORITY_CHANGED_BEFORE_SWITCH.*validateCandidateRuntimeAuthority\(\$pointer, \$current\);.*writePointerCandidate\(.*\$immutableCandidate.*rename\(\$immutableCandidate.*writePointerCandidate\(.*\$activeCandidate.*rename\(\$activeCandidate.*\$databaseLockReleaser\(\);/s',
             $runner,
         );
     }

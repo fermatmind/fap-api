@@ -559,6 +559,7 @@ final class Career1046RootGenerationActivation
                 throw new Career1046RootActivationFailure('DATABASE_AUTHORITY_CHANGED_BEFORE_SWITCH');
             }
 
+            self::validateCandidateRuntimeAuthority($pointer, $current);
             self::assertNoConflictingOperation($expected);
             self::writePointerCandidate(
                 $generation['generation_root'],
@@ -628,6 +629,52 @@ final class Career1046RootGenerationActivation
             'activated_pointer_sha256' => $pointerSha,
             'immutable_pointer_sha256' => $pointerSha,
         ];
+    }
+
+    /** @param array<string, mixed> $pointer @param array<string, mixed> $current */
+    private static function validateCandidateRuntimeAuthority(array $pointer, array $current): void
+    {
+        try {
+            $loader = new CareerGenerationAuthorityLoader;
+            $payload = self::invokeLoaderContract($loader, 'validatePointerDocument', [$pointer]);
+            $generationId = (string) $payload['generation_id'];
+            $root = (string) $current['authority_root'];
+            $projectionDescriptor = self::invokeLoaderContract($loader, 'artifactDescriptor', [
+                $root,
+                $payload,
+                'projection',
+                'career-runtime-publish-projection@'.$generationId,
+                'generations/'.$generationId.'/career-runtime-publish-projection.json',
+            ]);
+            $ledgerDescriptor = self::invokeLoaderContract($loader, 'artifactDescriptor', [
+                $root,
+                $payload,
+                'ledger',
+                'career-full-release-ledger@'.$generationId,
+                'generations/'.$generationId.'/career-full-release-ledger.json',
+            ]);
+            $projection = self::invokeLoaderContract($loader, 'readBoundArtifact', [$root, $projectionDescriptor]);
+            $ledger = self::invokeLoaderContract($loader, 'readBoundArtifact', [$root, $ledgerDescriptor]);
+            $ledgerState = self::invokeLoaderContract($loader, 'validateLedger', [$ledger, $payload]);
+            $projectionState = self::invokeLoaderContract($loader, 'validateProjection', [
+                $projection,
+                $payload,
+                (string) $payload['artifact_format'],
+            ]);
+            self::invokeLoaderContract($loader, 'validateAuthorityIdentity', [$payload, $projectionState, $ledgerState]);
+            self::invokeLoaderContract($loader, 'validateLineage', [$root, $payload, $projectionState]);
+        } catch (Throwable) {
+            throw new Career1046RootActivationFailure('CANDIDATE_RUNTIME_AUTHORITY_UNREADABLE');
+        }
+    }
+
+    /** @param list<mixed> $arguments */
+    private static function invokeLoaderContract(
+        CareerGenerationAuthorityLoader $loader,
+        string $method,
+        array $arguments,
+    ): mixed {
+        return (new \ReflectionMethod($loader, $method))->invokeArgs($loader, $arguments);
     }
 
     private static function writePointerCandidate(
