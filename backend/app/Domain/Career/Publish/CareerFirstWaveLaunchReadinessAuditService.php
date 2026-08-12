@@ -35,7 +35,7 @@ final class CareerFirstWaveLaunchReadinessAuditService
         private readonly CareerFirstWaveNextStepLinksService $nextStepLinksService,
     ) {}
 
-    public function build(): CareerFirstWaveLaunchReadinessAudit
+    public function build(bool $allowCacheWrites = true): CareerFirstWaveLaunchReadinessAudit
     {
         $launchTierSummary = $this->launchTierSummaryService->build()->toArray();
         $readinessSummary = $this->readinessSummaryService->build()->toArray();
@@ -86,7 +86,8 @@ final class CareerFirstWaveLaunchReadinessAuditService
 
             $readiness = $readinessBySlug[$slug] ?? [];
             $lifecycle = $lifecycleBySlug[$slug] ?? [];
-            $nextStepLinks = $this->nextStepLinksService->buildBySlug($slug)?->toArray();
+            $nextStepLinks = $this->nextStepLinksService
+                ->buildBySlug($slug, allowCacheWrites: $allowCacheWrites)?->toArray();
 
             $nextStepLinksCount = (int) data_get($nextStepLinks, 'counts.total', 0);
             $familyHubSupportingRoute = (int) data_get($nextStepLinks, 'counts.family_hub', 0) > 0;

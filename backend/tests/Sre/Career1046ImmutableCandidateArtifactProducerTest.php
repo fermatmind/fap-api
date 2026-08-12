@@ -10,6 +10,8 @@ use App\Domain\Career\Publish\CareerGenerationCanonicalJson;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use FermatMind\Operations\Career1046ImmutableCandidateArtifactFailure;
 use FermatMind\Operations\Career1046ImmutableCandidateArtifactProducer;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Process\Process;
 use Tests\TestCase;
@@ -131,6 +133,55 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
         $lint->mustRun();
     }
 
+    public function test_real_database_entry_records_observed_select_only_and_cache_zero_write(): void
+    {
+        Cache::flush();
+        $cacheBytesBefore = serialize(Cache::getStore()->all());
+
+        $candidate = $this->withTask3bEnvironment(fn (): array => Career1046ImmutableCandidateArtifactProducer::produceFromDatabase(
+            function (string $applicationRoot, array $task3b): array {
+                self::assertDirectoryExists($applicationRoot);
+                DB::select('select 1 as producer_probe');
+                Cache::get('career:producer:read-only-probe');
+
+                return Career1046ImmutableCandidateArtifactProducer::produceFromSource($this->source(), $task3b);
+            }
+        ));
+
+        $authority = $candidate['candidate_receipt']['producer_authority'];
+        self::assertSame(['select'], $authority['database_query_verbs']);
+        self::assertSame(1, $authority['database_query_count']);
+        self::assertSame(0, $authority['cache_write_count']);
+        self::assertSame($cacheBytesBefore, serialize(Cache::getStore()->all()));
+        self::assertSame($candidate['candidate_receipt'], $candidate['documents']['candidate-receipt.json']);
+    }
+
+    public function test_real_database_entry_fails_closed_on_database_or_cache_write_attempt(): void
+    {
+        foreach (['database', 'cache'] as $kind) {
+            try {
+                $this->withTask3bEnvironment(fn (): array => Career1046ImmutableCandidateArtifactProducer::produceFromDatabase(
+                    function (string $applicationRoot, array $task3b) use ($kind): array {
+                        DB::select('select 1 as producer_probe');
+                        if ($kind === 'database') {
+                            DB::statement('create table career_producer_write_probe (id integer)');
+                        } else {
+                            Cache::put('career:producer:write-probe', true, 60);
+                        }
+
+                        return Career1046ImmutableCandidateArtifactProducer::produceFromSource($this->source(), $task3b);
+                    }
+                ));
+                self::fail($kind.' write attempt did not fail closed');
+            } catch (Career1046ImmutableCandidateArtifactFailure $failure) {
+                self::assertSame(
+                    $kind === 'database' ? 'DATABASE_WRITE_ATTEMPT' : 'CACHE_WRITE_ATTEMPT',
+                    $failure->safeCode,
+                );
+            }
+        }
+    }
+
     /** @return array<string, mixed> */
     private function source(): array
     {
@@ -153,5 +204,31 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
     private function task3b(): array
     {
         return ['run_id' => 1, 'run_attempt' => 1, 'artifact_digest' => 'sha256:'.str_repeat('a', 64), 'receipt_sha256' => str_repeat('b', 64), 'control_plane_sha' => str_repeat('c', 40), 'release_sha' => str_repeat('d', 40), 'release_name_sha256' => str_repeat('e', 64), 'database_state_sha256' => str_repeat('f', 64)];
+    }
+
+    private function withTask3bEnvironment(callable $callback): mixed
+    {
+        $task3b = $this->task3b();
+        $environment = [
+            'CAREER_1046_APPLICATION_ROOT' => dirname(__DIR__, 2),
+            'CAREER_1046_TASK3B_RUN_ID' => (string) $task3b['run_id'],
+            'CAREER_1046_TASK3B_RUN_ATTEMPT' => (string) $task3b['run_attempt'],
+            'CAREER_1046_TASK3B_ARTIFACT_DIGEST' => $task3b['artifact_digest'],
+            'CAREER_1046_TASK3B_RECEIPT_SHA256' => $task3b['receipt_sha256'],
+            'CAREER_1046_TASK3B_CONTROL_PLANE_SHA' => $task3b['control_plane_sha'],
+            'CAREER_1046_TASK3B_RELEASE_SHA' => $task3b['release_sha'],
+            'CAREER_1046_TASK3B_RELEASE_NAME_SHA256' => $task3b['release_name_sha256'],
+            'CAREER_1046_TASK3B_DATABASE_STATE_SHA256' => $task3b['database_state_sha256'],
+        ];
+        foreach ($environment as $name => $value) {
+            putenv($name.'='.$value);
+        }
+        try {
+            return $callback();
+        } finally {
+            foreach (array_keys($environment) as $name) {
+                putenv($name);
+            }
+        }
     }
 }
