@@ -25,19 +25,20 @@ The phase:
 - proves latest-main control-plane identity and active-release ancestry;
 - revalidates the immutable freeze contract;
 - proves the current symlink, REVISION, absent deploy lock and absent deployment/migration process;
-- selects exactly one projection and one ledger by fixed byte hash under bounded storage families, never by mtime;
+- selects projection and ledger candidates only when every selected candidate is a root-contained regular non-symlink file with the frozen byte hash and a fully valid authority contract;
+- orders byte-identical candidates by stable bytewise ascending relative path, selects the first, and records the candidate counts, selection rule, and selected path hashes without using mtime or latest-directory inference;
 - validates kind/version/source, full two-locale structure, exact sets and 342/684/30/60 counts;
 - proves there is no active or inactive generation pointer conflict;
 - emits only hashes, counts, booleans and fixed identities in an always-uploaded receipt;
 - performs zero remote writes.
 
-Record the successful run id/attempt, downloaded receipt SHA-256, projection path SHA-256 and ledger path SHA-256. Raw source paths and production topology are not present in the receipt.
+Record the successful run id/attempt, downloaded receipt SHA-256, candidate counts, selection rule, projection path SHA-256 and ledger path SHA-256. Raw source paths and production topology are not present in the receipt.
 
 ## Phase 2: receipt-bound apply
 
 Apply requires a still-latest control-plane SHA and the exact successful preflight from the same SHA, active revision and release. Supply `mode=apply`, the preflight run id/attempt, receipt SHA-256, both path hashes and the exact approval phrase reconstructed by the workflow.
 
-Immediately before each committed rename, the streamed runner revalidates the active release, REVISION, deploy lock/process state, both source byte hashes and absence of the root active pointer. It then:
+Immediately before each committed rename, the streamed runner re-enumerates the bounded candidate sets and revalidates the active release, REVISION, deploy lock/process state, deterministic selected path hashes, candidate counts, selection rule, source byte hashes/contracts and absence of the root active pointer. It then:
 
 1. creates an exclusive no-clobber candidate for the immutable generation pointer;
 2. performs full candidate hash readback and atomically renames it to `generation-pointer.json`;
@@ -50,4 +51,4 @@ The apply does not modify projection or ledger bytes and cannot deploy, migrate,
 
 ## Failure handling
 
-Do not rerun automatically. Preserve every committed rename. Inspect the sanitized receipt and obtain a new exact preflight before any separately authorized recovery. Unknown status, source duplication, symlink, hash/count/set drift, existing pointer, release drift, deploy activity or malformed receipt all fail closed.
+Do not rerun automatically. Preserve every committed rename. Inspect the sanitized receipt and obtain a new exact preflight before any separately authorized recovery. Unknown status, unsafe path/symlink, hash/content/contract/count/set/selected-path drift, existing pointer, release drift, deploy activity or malformed receipt all fail closed. Byte-identical duplicates alone are accepted only through the fixed deterministic selection rule and are never deleted, moved, or rewritten.

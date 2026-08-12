@@ -161,7 +161,7 @@ final class CareerCurrentGenerationPointerBootstrapWorkflowTest extends TestCase
         self::assertSame($activeBefore, hash_file('sha256', $activePath));
     }
 
-    public function test_exact_hash_selection_rejects_duplicate_or_symlink_only_candidates(): void
+    public function test_exact_hash_selection_uses_stable_relative_path_for_byte_identical_candidates(): void
     {
         $source = $this->backendRoot.'/storage/app/private/career_runtime_publish_projection/source-001/career-runtime-publish-projection.json';
         $duplicateDir = $this->backendRoot.'/storage/app/private/career_runtime_publish_projection/source-002';
@@ -169,9 +169,16 @@ final class CareerCurrentGenerationPointerBootstrapWorkflowTest extends TestCase
         File::copy($source, $duplicateDir.'/career-runtime-publish-projection.json');
 
         $duplicate = $this->runControl('preflight');
-        $duplicate->run();
-        self::assertSame(1, $duplicate->getExitCode());
-        self::assertSame('EXACT_ARTIFACT_SELECTION_NOT_UNIQUE', $this->receipt($duplicate)['failed_stage']);
+        $duplicate->mustRun();
+        $receipt = $this->receipt($duplicate);
+        self::assertSame('PASS_PREFLIGHT_APPLY_ELIGIBLE', $receipt['status']);
+        self::assertSame(2, $receipt['source_artifacts']['projection_candidate_count']);
+        self::assertSame(1, $receipt['source_artifacts']['ledger_candidate_count']);
+        self::assertSame('relative_path_bytewise_ascending_first_v1', $receipt['source_artifacts']['selection_rule']);
+        self::assertSame(
+            hash('sha256', 'career_runtime_publish_projection/source-001/career-runtime-publish-projection.json'),
+            $receipt['source_artifacts']['projection_path_sha256'],
+        );
 
         File::deleteDirectory($duplicateDir);
         $symlinkTarget = $this->backendRoot.'/storage/app/private/projection-symlink-target';
@@ -180,7 +187,33 @@ final class CareerCurrentGenerationPointerBootstrapWorkflowTest extends TestCase
         $symlinkOnly = $this->runControl('preflight');
         $symlinkOnly->run();
         self::assertSame(1, $symlinkOnly->getExitCode());
-        self::assertSame('EXACT_ARTIFACT_SELECTION_NOT_UNIQUE', $this->receipt($symlinkOnly)['failed_stage']);
+        self::assertSame('ARTIFACT_PATH_SAFETY_INVALID', $this->receipt($symlinkOnly)['failed_stage']);
+    }
+
+    public function test_apply_rejects_deterministic_selection_drift_from_preflight(): void
+    {
+        $preflight = $this->runControl('preflight');
+        $preflight->mustRun();
+        $receipt = $this->receipt($preflight);
+
+        $source = $this->backendRoot.'/storage/app/private/career_runtime_publish_projection/source-001/career-runtime-publish-projection.json';
+        $earlierDir = $this->backendRoot.'/storage/app/private/career_runtime_publish_projection/source-000';
+        File::ensureDirectoryExists($earlierDir);
+        File::copy($source, $earlierDir.'/career-runtime-publish-projection.json');
+
+        $apply = $this->runControl('apply', [
+            'CAREER_POINTER_APPLY_AUTHORIZED' => '1',
+            'CAREER_POINTER_PREFLIGHT_RECEIPT_SHA256' => str_repeat('4', 64),
+            'CAREER_POINTER_EXPECTED_PROJECTION_PATH_SHA256' => $receipt['source_artifacts']['projection_path_sha256'],
+            'CAREER_POINTER_EXPECTED_LEDGER_PATH_SHA256' => $receipt['source_artifacts']['ledger_path_sha256'],
+        ]);
+        $apply->run();
+
+        self::assertSame(1, $apply->getExitCode());
+        self::assertSame('PREFLIGHT_ARTIFACT_PATH_DRIFT', $this->receipt($apply)['failed_stage']);
+        self::assertFileDoesNotExist(
+            $this->backendRoot.'/storage/app/private/career_generation_authority/active-generation.json',
+        );
     }
 
     public function test_workflow_is_manual_latest_main_receipt_bound_and_never_self_dispatches(): void
@@ -218,6 +251,7 @@ final class CareerCurrentGenerationPointerBootstrapWorkflowTest extends TestCase
             'automatic_retry_allowed: false',
             'automatic_cleanup_allowed: false',
             'automatic_rollback_allowed: false',
+            'relative_path_bytewise_ascending_first_v1',
             'write_state="indeterminate"',
         ] as $required) {
             self::assertStringContainsString($required, $workflow.$runner);

@@ -100,16 +100,18 @@ function inspectCurrentAuthority(array $expected): array
         family: 'career_runtime_publish_projection',
         filename: CAREER_POINTER_PROJECTION_FILE,
         expectedSha256: (string) $expected['projection_sha256'],
+        validator: validateProjection(...),
     );
     $ledger = selectExactArtifact(
         privateRoot: $privateRoot,
         family: 'career_release_ledger',
         filename: CAREER_POINTER_LEDGER_FILE,
         expectedSha256: (string) $expected['ledger_sha256'],
+        validator: validateLedger(...),
     );
 
-    $projectionState = validateProjection($projection['payload']);
-    $ledgerState = validateLedger($ledger['payload']);
+    $projectionState = $projection['contract_state'];
+    $ledgerState = $ledger['contract_state'];
     foreach ([
         'slug_count' => $projectionState['slug_count'],
         'locale_row_count' => $projectionState['locale_row_count'],
@@ -148,10 +150,16 @@ function inspectCurrentAuthority(array $expected): array
 }
 
 /**
- * @return array{path:string,relative_path:string,path_sha256:string,sha256:string,bytes:int,payload:array<string,mixed>}
+ * @param  callable(array<string, mixed>): array<string, mixed>  $validator
+ * @return array{path:string,relative_path:string,path_sha256:string,sha256:string,bytes:int,payload:array<string,mixed>,contract_state:array<string,mixed>,candidate_count:int,selection_rule:string}
  */
-function selectExactArtifact(string $privateRoot, string $family, string $filename, string $expectedSha256): array
-{
+function selectExactArtifact(
+    string $privateRoot,
+    string $family,
+    string $filename,
+    string $expectedSha256,
+    callable $validator,
+): array {
     $root = $privateRoot.'/'.$family;
     assertContainedDirectory($privateRoot, $root);
     $entries = scandir($root);
@@ -169,39 +177,57 @@ function selectExactArtifact(string $privateRoot, string $family, string $filena
         }
         $directory = $root.'/'.$entry;
         $path = $directory.'/'.$filename;
-        if (is_link($directory) || ! is_dir($directory) || is_link($path) || ! is_file($path)) {
+        if (is_link($directory) || is_link($path)) {
+            throw new CareerPointerBootstrapFailure('ARTIFACT_PATH_SAFETY_INVALID');
+        }
+        if (! is_dir($directory) || ! is_file($path)) {
             continue;
         }
+        assertContainedRegularFile($privateRoot, $path);
         $bytes = filesize($path);
         if (! is_int($bytes) || $bytes < 1 || $bytes > CAREER_POINTER_MAX_ARTIFACT_BYTES) {
             continue;
         }
-        $sha256 = hash_file('sha256', $path);
-        if (! is_string($sha256) || ! hash_equals($expectedSha256, $sha256)) {
+        $raw = file_get_contents($path);
+        if (! is_string($raw) || ! hash_equals($expectedSha256, hash('sha256', $raw))) {
             continue;
+        }
+        $payload = json_decode($raw, true);
+        if (! is_array($payload)) {
+            throw new CareerPointerBootstrapFailure('ARTIFACT_READBACK_INVALID');
         }
         $relativePath = $family.'/'.$entry.'/'.$filename;
         $matches[] = [
             'path' => $path,
             'relative_path' => $relativePath,
             'path_sha256' => hash('sha256', $relativePath),
-            'sha256' => $sha256,
+            'sha256' => $expectedSha256,
             'bytes' => $bytes,
+            'payload' => $payload,
+            'contract_state' => $validator($payload),
         ];
     }
 
-    if (count($matches) !== 1) {
-        throw new CareerPointerBootstrapFailure('EXACT_ARTIFACT_SELECTION_NOT_UNIQUE');
+    if ($matches === []) {
+        throw new CareerPointerBootstrapFailure('EXACT_ARTIFACT_NOT_FOUND');
     }
-    $raw = file_get_contents($matches[0]['path']);
-    $payload = is_string($raw) ? json_decode($raw, true) : null;
-    if (! is_string($raw) || ! is_array($payload)
-        || ! hash_equals($expectedSha256, hash('sha256', $raw))) {
-        throw new CareerPointerBootstrapFailure('ARTIFACT_READBACK_INVALID');
+    usort($matches, static fn (array $left, array $right): int => strcmp(
+        (string) $left['relative_path'],
+        (string) $right['relative_path'],
+    ));
+    $selected = $matches[0];
+    foreach ($matches as $match) {
+        if (! hash_equals((string) $selected['sha256'], (string) $match['sha256'])
+            || (int) $selected['bytes'] !== (int) $match['bytes']
+            || ! hash_equals(canonicalJsonSha256($selected['payload']), canonicalJsonSha256($match['payload']))
+            || ! hash_equals(canonicalJsonSha256($selected['contract_state']), canonicalJsonSha256($match['contract_state']))) {
+            throw new CareerPointerBootstrapFailure('ARTIFACT_CANDIDATE_CONTRACT_MISMATCH');
+        }
     }
-    $matches[0]['payload'] = $payload;
+    $selected['candidate_count'] = count($matches);
+    $selected['selection_rule'] = 'relative_path_bytewise_ascending_first_v1';
 
-    return $matches[0];
+    return $selected;
 }
 
 /** @param array<string, mixed> $projection @return array<string, mixed> */
@@ -536,11 +562,27 @@ function atomicRenameNoClobber(string $candidate, string $target, string $expect
 function revalidateBeforeRename(array $expected, array $selected): void
 {
     validateRuntimeBoundary($expected);
+    $fresh = [
+        'projection' => selectExactArtifact(
+            privateRoot: (string) $selected['private_root'],
+            family: 'career_runtime_publish_projection',
+            filename: CAREER_POINTER_PROJECTION_FILE,
+            expectedSha256: (string) $expected['projection_sha256'],
+            validator: validateProjection(...),
+        ),
+        'ledger' => selectExactArtifact(
+            privateRoot: (string) $selected['private_root'],
+            family: 'career_release_ledger',
+            filename: CAREER_POINTER_LEDGER_FILE,
+            expectedSha256: (string) $expected['ledger_sha256'],
+            validator: validateLedger(...),
+        ),
+    ];
     foreach (['projection', 'ledger'] as $key) {
-        $path = (string) $selected[$key]['path'];
-        if (is_link($path) || ! is_file($path)
-            || ! hash_equals((string) $expected[$key.'_sha256'], (string) hash_file('sha256', $path))) {
-            throw new CareerPointerBootstrapFailure('SOURCE_ARTIFACT_DRIFT_BEFORE_RENAME');
+        if (! hash_equals((string) $selected[$key]['path_sha256'], (string) $fresh[$key]['path_sha256'])
+            || (int) $selected[$key]['candidate_count'] !== (int) $fresh[$key]['candidate_count']
+            || (string) $selected[$key]['selection_rule'] !== (string) $fresh[$key]['selection_rule']) {
+            throw new CareerPointerBootstrapFailure('SOURCE_ARTIFACT_SELECTION_DRIFT_BEFORE_RENAME');
         }
     }
     $activePath = $selected['private_root'].'/career_generation_authority/active-generation.json';
@@ -620,8 +662,9 @@ function successReceipt(string $mode, array $expected, array $selected, array $w
         'source_artifacts' => [
             'projection_path_sha256' => $selected['projection']['path_sha256'],
             'ledger_path_sha256' => $selected['ledger']['path_sha256'],
-            'projection_match_count' => 1,
-            'ledger_match_count' => 1,
+            'projection_candidate_count' => $selected['projection']['candidate_count'],
+            'ledger_candidate_count' => $selected['ledger']['candidate_count'],
+            'selection_rule' => $selected['projection']['selection_rule'],
         ],
         'pointer_state_before' => $selected['pointer_state'],
         'pointer_document_sha256' => $selected['pointer_document_sha256'] ?? str_repeat('0', 64),
@@ -778,6 +821,22 @@ function assertResolvedDirectory(string $path): void
     if (is_link($path) || ! is_dir($path) || ! is_string(realpath($path))) {
         throw new CareerPointerBootstrapFailure('DIRECTORY_BOUNDARY_INVALID');
     }
+}
+
+function assertContainedRegularFile(string $root, string $path): void
+{
+    $rootReal = realpath($root);
+    $pathReal = realpath($path);
+    if (! is_string($rootReal) || ! is_string($pathReal) || is_link($path)
+        || ! str_starts_with($pathReal, $rootReal.'/') || ! is_file($pathReal)) {
+        throw new CareerPointerBootstrapFailure('ARTIFACT_PATH_SAFETY_INVALID');
+    }
+}
+
+/** @param array<string, mixed> $value */
+function canonicalJsonSha256(array $value): string
+{
+    return hash('sha256', canonicalJson($value));
 }
 
 /** @param array<string, bool> $values @return list<string> */
