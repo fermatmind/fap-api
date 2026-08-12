@@ -202,9 +202,9 @@ compute_state() {
     && [ "$published_slug_rows" -eq "$expected_published_slug_count" ] \
     && [ "$published_locale_rows" -eq "$expected_published_locale_row_count" ] \
     || fail "PROJECTION_AUTHORITY_COUNT_MISMATCH"
-  [ "$(jq -r '.items[].slug' "$projection_path" | sort -u | awk '{printf "%s\\n",$0}' | sha256sum | awk '{print $1}')" = "$slug_set_sha256_expected" ] \
+  [ "$(jq -r '.items[].slug' "$projection_path" | sort -u | awk '{printf "%s\n",$0}' | sha256sum | awk '{print $1}')" = "$slug_set_sha256_expected" ] \
     || fail "PROJECTION_SLUG_SET_MISMATCH"
-  [ "$(jq -r '.items[] | (.slug + "|" + .locale)' "$projection_path" | tr '[:upper:]' '[:lower:]' | sort -u | awk '{printf "%s\\n",$0}' | sha256sum | awk '{print $1}')" = "$locale_row_set_sha256_expected" ] \
+  [ "$(jq -r '.items[] | (.slug + "|" + .locale)' "$projection_path" | tr '[:upper:]' '[:lower:]' | sort -u | awk '{printf "%s\n",$0}' | sha256sum | awk '{print $1}')" = "$locale_row_set_sha256_expected" ] \
     || fail "PROJECTION_LOCALE_SET_MISMATCH"
 
   jq -e '
@@ -215,7 +215,7 @@ compute_state() {
   ' "$ledger_path" >/dev/null || fail "LEDGER_CONTRACT_INVALID"
   ledger_rows="$(jq -r '[((.public_resolution.rows // .members)[]) | (.source_slug // .canonical_slug // .slug)] | unique | length' "$ledger_path")"
   [ "$ledger_rows" -eq "$expected_slug_count" ] || fail "LEDGER_AUTHORITY_COUNT_MISMATCH"
-  [ "$(jq -r '((.public_resolution.rows // .members)[]) | (.source_slug // .canonical_slug // .slug)' "$ledger_path" | sort -u | awk '{printf "%s\\n",$0}' | sha256sum | awk '{print $1}')" = "$slug_set_sha256_expected" ] \
+  [ "$(jq -r '((.public_resolution.rows // .members)[]) | (.source_slug // .canonical_slug // .slug)' "$ledger_path" | sort -u | awk '{printf "%s\n",$0}' | sha256sum | awk '{print $1}')" = "$slug_set_sha256_expected" ] \
     || fail "LEDGER_SLUG_SET_MISMATCH"
 
   selected_directories=("$projection_dir" "$ledger_dir")
