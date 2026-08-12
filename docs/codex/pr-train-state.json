@@ -105411,7 +105411,7 @@
       },
       "local_validation": {
         "status": "passed",
-        "evidence": "Every review-fix heavy-guarded full backend/scripts/ci_verify_mbti.sh run exited 0 after the initial full pass, including the final runtime-loader validation run. Final focused activation coverage passed 7 tests plus 7 known missing-.env warnings / 121 assertions, proving an invalid candidate locale fails the exact runtime loader contract before either pointer write and locked database drift also leaves both pointer paths uncommitted; the full Big Five gate passed 1693 tests / 196735 assertions. actionlint, Pint --test, PHP syntax, frozen contract verification, train YAML/JSON parsing, 253-line route listing, fresh SQLite migration, exact six-path scope and diff checks passed."
+        "evidence": "Every review-fix heavy-guarded full backend/scripts/ci_verify_mbti.sh run exited 0 after the initial full pass, including the final release-name binding run. Final focused activation coverage passed 7 tests plus 7 known missing-.env warnings / 122 assertions, proving apply requires the preflight release_name_sha256 to match EXPECTED_RELEASE_NAME in addition to release SHA; the full Big Five gate passed 1693 tests / 196735 assertions. actionlint, Pint --test, PHP syntax, frozen contract verification, train YAML/JSON parsing, exact six-path scope and diff checks passed."
       },
       "scope": {
         "status": "passed",
@@ -105419,11 +105419,11 @@
       },
       "github_required_checks": {
         "status": "pending",
-        "evidence": "Fresh required checks and exact-head review are required for final implementation commit 766447d70db152820c9b29dc2c5dfec1b47ba87a, which validates the candidate pointer, projection, ledger, authority and lineage with the runtime loader contract before either pointer candidate."
+        "evidence": "Fresh required checks and exact-head review are required for final implementation commit 9364c1aaab85c2e2b2f435e78a1eff7d94af6fa3, which binds apply to the preflight receipt's exact release SHA and SHA-256 release-name identity."
       }
     },
     "failure_reason": null,
-    "commit_sha": "766447d70db152820c9b29dc2c5dfec1b47ba87a",
+    "commit_sha": "9364c1aaab85c2e2b2f435e78a1eff7d94af6fa3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3668",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -105542,8 +105542,18 @@
         "at": "2026-08-12T09:15:00+08:00",
         "status": "review_fix_validated",
         "note": "Final implementation commit 766447d70db152820c9b29dc2c5dfec1b47ba87a now validates the in-memory candidate pointer plus its hash-bound projection, ledger, authority identity and previous-generation lineage through the exact private validators used by CareerGenerationAuthorityLoader::loadStrict before either pointer candidate. An invalid projection locale regression proves both pointer paths remain absent. Focused coverage passed 7 tests plus 7 known missing-.env warnings / 121 assertions; actionlint, Pint, syntax, freeze and ledgers passed; the complete heavy-guarded ci_verify_mbti chain exited 0. Generated compiled files were restored. No workflow was dispatched and no SSH or controlled external state was accessed or mutated."
+      },
+      {
+        "at": "2026-08-12T09:20:00+08:00",
+        "status": "review_fix_in_progress",
+        "note": "Exact-head review found apply bound the activation preflight to release SHA but not its release-name identity, so two different materializations of the same commit could cross the phase boundary. The apply evidence gate is being tightened to require the preflight release_name_sha256 to equal the current EXPECTED_RELEASE_NAME hash. Fresh focused, full local and GitHub validation are mandatory. No workflow was dispatched and no SSH or controlled external state was accessed or mutated."
+      },
+      {
+        "at": "2026-08-12T09:33:00+08:00",
+        "status": "review_fix_validated",
+        "note": "Final implementation commit 9364c1aaab85c2e2b2f435e78a1eff7d94af6fa3 binds apply to both the preflight release SHA and the SHA-256 of EXPECTED_RELEASE_NAME, preventing a same-commit alternate materialization from crossing the phase boundary. Focused coverage passed 7 tests plus 7 known missing-.env warnings / 122 assertions; actionlint, Pint, PHP syntax, freeze, YAML/JSON and diff checks passed; the complete heavy-guarded ci_verify_mbti chain exited 0, including 1693 Big Five tests / 196735 assertions. Generated compiled files were restored. No workflow was dispatched and no SSH or controlled external state was accessed or mutated."
       }
     ],
-    "updated_at": "2026-08-12T09:15:00+08:00"
+    "updated_at": "2026-08-12T09:33:00+08:00"
   }
 }
