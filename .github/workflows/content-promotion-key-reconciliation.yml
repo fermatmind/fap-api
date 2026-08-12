@@ -1,0 +1,207 @@
+name: Content Promotion Key Reconciliation
+run-name: Content Promotion Key Reconciliation ${{ inputs.mode }} [op:${{ inputs.operation_key }}]
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        required: true
+        type: choice
+        options: [preflight, apply]
+      expected_control_plane_sha:
+        required: true
+        type: string
+      expected_active_sha:
+        required: true
+        type: string
+      preflight_run_id:
+        required: false
+        type: string
+      preflight_run_attempt:
+        required: false
+        type: string
+      expected_preflight_receipt_sha256:
+        required: false
+        type: string
+      authorization_phrase:
+        required: false
+        type: string
+      operation_key:
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: deploy-${{ github.repository }}-production
+  cancel-in-progress: false
+
+jobs:
+  operation_gate:
+    name: Elect key-reconciliation owner before Environment access
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      decision: ${{ steps.gate.outputs.decision }}
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - id: identity
+        shell: bash
+        env:
+          IDENTITY: control=${{ inputs.expected_control_plane_sha }}|active=${{ inputs.expected_active_sha }}|mode=${{ inputs.mode }}|preflight_run=${{ inputs.preflight_run_id }}|preflight_attempt=${{ inputs.preflight_run_attempt }}|preflight_receipt=${{ inputs.expected_preflight_receipt_sha256 }}
+        run: echo "operation_key=$(node .github/scripts/controlled-operation-gate.cjs key --repository "$GITHUB_REPOSITORY" --workflow .github/workflows/content-promotion-key-reconciliation.yml --scope content-promotion-key-reconciliation --identity "$IDENTITY")" >> "$GITHUB_OUTPUT"
+      - id: gate
+        uses: ./.github/actions/controlled-operation-gate
+        with:
+          claimed-key: ${{ inputs.operation_key }}
+          expected-key: ${{ steps.identity.outputs.operation_key }}
+          workflow-file: content-promotion-key-reconciliation.yml
+          receipt-template: content-promotion-key-reconciliation-{run_id}-{run_attempt}
+
+  reconcile:
+    name: Preflight or reconcile content-promotion key
+    needs: operation_gate
+    if: needs.operation_gate.outputs.decision == 'execute'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: production
+    env:
+      MODE: ${{ inputs.mode }}
+      EXPECTED_CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+      EXPECTED_ACTIVE_SHA: ${{ inputs.expected_active_sha }}
+      PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
+      PREFLIGHT_RUN_ATTEMPT: ${{ inputs.preflight_run_attempt }}
+      EXPECTED_PREFLIGHT_RECEIPT_SHA256: ${{ inputs.expected_preflight_receipt_sha256 }}
+      AUTHORIZATION_PHRASE: ${{ inputs.authorization_phrase }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Checkout exact control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 0
+
+      - name: Verify immutable inputs and latest main
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$MODE" =~ ^(preflight|apply)$ ]]
+          [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[a-f0-9]{40}$ ]]
+          [[ "$EXPECTED_ACTIVE_SHA" =~ ^[a-f0-9]{40}$ ]]
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          bash -n backend/scripts/deploy/content_promotion_key_reconciliation.sh
+          if [ "$MODE" = preflight ]; then
+            test -z "$PREFLIGHT_RUN_ID$PREFLIGHT_RUN_ATTEMPT$EXPECTED_PREFLIGHT_RECEIPT_SHA256$AUTHORIZATION_PHRASE"
+          else
+            [[ "$PREFLIGHT_RUN_ID" =~ ^[1-9][0-9]{0,19}$ ]]
+            [[ "$PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]{0,9}$ ]]
+            [[ "$EXPECTED_PREFLIGHT_RECEIPT_SHA256" =~ ^[a-f0-9]{64}$ ]]
+            test -n "$AUTHORIZATION_PHRASE"
+          fi
+
+      - name: Verify required checks are green
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        env:
+          INPUT_CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+        with:
+          script: |
+            const runs = await github.paginate(github.rest.checks.listForRef, {...context.repo, ref: process.env.INPUT_CONTROL_PLANE_SHA, per_page: 100});
+            for (const name of ['content-pack-build-validate','hygiene','supply-chain','verify-bigfive','verify-mbti-legacy','verify-mbti-v2']) {
+              const run = runs.filter((item) => item.name === name).sort((a, b) => Number(b.id) - Number(a.id))[0];
+              if (!run || run.status !== 'completed' || run.conclusion !== 'success') { core.setFailed(`Required check is not green: ${name}.`); return; }
+            }
+
+      - name: Validate immutable preflight receipt
+        if: inputs.mode == 'apply'
+        shell: bash
+        run: |
+          set -euo pipefail
+          run_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}")"
+          jq -e --arg sha "$EXPECTED_CONTROL_PLANE_SHA" --argjson attempt "$PREFLIGHT_RUN_ATTEMPT" '.name == "Content Promotion Key Reconciliation" and .event == "workflow_dispatch" and .status == "completed" and .conclusion == "success" and .head_sha == $sha and .run_attempt == $attempt' <<<"$run_json" >/dev/null
+          dir="$(mktemp -d)"
+          gh run download "$PREFLIGHT_RUN_ID" --name "content-promotion-key-reconciliation-${PREFLIGHT_RUN_ID}-${PREFLIGHT_RUN_ATTEMPT}" --dir "$dir"
+          receipt="$dir/content-promotion-key-reconciliation.json"
+          test "$(sha256sum "$receipt" | awk '{print $1}')" = "$EXPECTED_PREFLIGHT_RECEIPT_SHA256"
+          jq -e --arg control "$EXPECTED_CONTROL_PLANE_SHA" --arg active "$EXPECTED_ACTIVE_SHA" '.ok == true and .mode == "preflight" and .status == "PASS_RECONCILIATION_REQUIRED" and .apply_ready == true and .writes_committed == false and .control_plane_sha == $control and .active_backend_sha == $active and .cms_mutation_count == 0 and .database_mutation_count == 0 and .publication_mutation_count == 0 and .sitemap_mutation_count == 0 and .llms_mutation_count == 0 and .search_mutation_count == 0' "$receipt" >/dev/null
+          cp "$receipt" "$RUNNER_TEMP/preflight.json"
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          install -d -m 0700 ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 0600 ~/.ssh/known_hosts
+
+      - name: Run bounded key reconciliation control
+        shell: bash
+        env:
+          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+          DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+          CONTENT_PROMOTION_AUTOMATION_KEY: ${{ secrets.CONTENT_PROMOTION_AUTOMATION_KEY }}
+        run: |
+          set -euo pipefail
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ && "$DEPLOY_PATH" != *".."* ]]
+          test "${#CONTENT_PROMOTION_AUTOMATION_KEY}" -ge 32
+          source_key_sha="$(printf '%s' "$CONTENT_PROMOTION_AUTOMATION_KEY" | sha256sum | awk '{print $1}')"
+          if [ "$MODE" = apply ]; then
+            expected_env_sha="$(jq -r .env_sha256 "$RUNNER_TEMP/preflight.json")"
+            expected_cache_sha="$(jq -r .config_cache_sha256 "$RUNNER_TEMP/preflight.json")"
+            expected_env_key_sha="$(jq -r .env_key_sha256 "$RUNNER_TEMP/preflight.json")"
+            expected_runtime_key_sha="$(jq -r .runtime_key_sha256 "$RUNNER_TEMP/preflight.json")"
+          else
+            expected_env_sha=""; expected_cache_sha=""; expected_env_key_sha=""; expected_runtime_key_sha=""
+          fi
+          receipt="$RUNNER_TEMP/content-promotion-key-reconciliation.json"
+          set +e
+          {
+            printf 'export MODE=%q\n' "$MODE"
+            printf 'export DEPLOY_PATH=%q\n' "$DEPLOY_PATH"
+            printf 'export EXPECTED_CONTROL_PLANE_SHA=%q\n' "$EXPECTED_CONTROL_PLANE_SHA"
+            printf 'export EXPECTED_ACTIVE_SHA=%q\n' "$EXPECTED_ACTIVE_SHA"
+            printf 'export EXPECTED_SOURCE_KEY_SHA256=%q\n' "$source_key_sha"
+            printf 'export EXPECTED_ENV_SHA256=%q\n' "$expected_env_sha"
+            printf 'export EXPECTED_CONFIG_CACHE_SHA256=%q\n' "$expected_cache_sha"
+            printf 'export EXPECTED_ENV_KEY_SHA256=%q\n' "$expected_env_key_sha"
+            printf 'export EXPECTED_RUNTIME_KEY_SHA256=%q\n' "$expected_runtime_key_sha"
+            printf 'export PREFLIGHT_RUN_ID=%q\n' "$PREFLIGHT_RUN_ID"
+            printf 'export PREFLIGHT_RUN_ATTEMPT=%q\n' "$PREFLIGHT_RUN_ATTEMPT"
+            printf 'export AUTHORIZATION_PHRASE=%q\n' "$AUTHORIZATION_PHRASE"
+            printf 'export CONTENT_PROMOTION_AUTOMATION_KEY=%q\n' "$CONTENT_PROMOTION_AUTOMATION_KEY"
+            cat backend/scripts/deploy/content_promotion_key_reconciliation.sh
+          } | ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "bash -s" > "$receipt"
+          status=$?
+          set -e
+          cp "$receipt" content-promotion-key-reconciliation.json
+          jq -e '.secret_values_output == false' "$receipt" >/dev/null
+          if [ "$status" -ne 0 ]; then jq -e '.ok == false' "$receipt" >/dev/null; exit "$status"; fi
+          if [ "$MODE" = preflight ]; then
+            jq -e '.ok == true and .mode == "preflight" and (.status == "PASS_RECONCILIATION_REQUIRED" or .status == "PASS_ALREADY_ALIGNED") and .writes_committed == false' "$receipt" >/dev/null
+          else
+            jq -e '.ok == true and .mode == "apply" and .status == "PASS_KEY_RECONCILED" and .env_setting_write_count == 1 and .config_cache_rebuild_count == 1 and .cms_mutation_count == 0 and .database_mutation_count == 0 and .career_mutation_count == 0 and .publication_mutation_count == 0 and .sitemap_mutation_count == 0 and .llms_mutation_count == 0 and .search_mutation_count == 0' "$receipt" >/dev/null
+          fi
+
+      - name: Upload immutable redacted receipt
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v6
+        with:
+          name: content-promotion-key-reconciliation-${{ github.run_id }}-${{ github.run_attempt }}
+          path: content-promotion-key-reconciliation.json
+          if-no-files-found: error
+          retention-days: 30

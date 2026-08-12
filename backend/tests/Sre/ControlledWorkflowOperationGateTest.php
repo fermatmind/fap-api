@@ -17,6 +17,7 @@ final class ControlledWorkflowOperationGateTest extends TestCase
             'career-staging-authority-artifact-recovery.yml',
             'career-current-generation-pointer-bootstrap-staging-ops.yml',
             'content-promotion-automation.yml',
+            'content-promotion-key-reconciliation.yml',
         ] as $name) {
             $source = $this->workflow($name);
             self::assertStringContainsString('operation_key:', $source, $name);
@@ -43,14 +44,17 @@ final class ControlledWorkflowOperationGateTest extends TestCase
             '.github/workflows/career-current-generation-pointer-bootstrap-staging-ops.yml',
             '.github/workflows/career-staging-authority-artifact-recovery.yml',
             '.github/workflows/content-promotion-automation.yml',
+            '.github/workflows/content-promotion-key-reconciliation.yml',
             '.github/workflows/deploy-production.yml',
             '.github/workflows/deploy.yml',
             'backend/tests/Sre/ControlledWorkflowOperationGateTest.php',
             'backend/tests/Sre/BackendProductionAutoDeployWorkflowTest.php',
             'backend/scripts/operations/career_production_runtime_authority_diagnostic.php',
             'backend/scripts/deploy/career_runtime_authority_permission_control.sh',
+            'backend/scripts/deploy/content_promotion_key_reconciliation.sh',
             'backend/tests/Sre/CareerProductionRuntimeAuthorityDiagnosticWorkflowTest.php',
             'backend/tests/Sre/DeployStorageAndDatabaseConfigTest.php',
+            'backend/tests/Sre/ContentPromotionKeyReconciliationTest.php',
             'tests/ops/controlled-operation-gate.test.cjs',
             'tests/ops/test_career_runtime_authority_permission_control.py',
         ];
