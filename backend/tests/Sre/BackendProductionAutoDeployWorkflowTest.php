@@ -43,6 +43,7 @@ final class BackendProductionAutoDeployWorkflowTest extends TestCase
             "workflow_id: 'deploy-production.yml'",
             "event: 'workflow_dispatch'",
             'run.display_title === expectedRunTitle',
+            'Automatic production dispatch requires one immutable staging owner receipt.',
             'automatic retry is refused',
             'Check out exact staged main',
             'persist-credentials: false',
@@ -64,6 +65,7 @@ final class BackendProductionAutoDeployWorkflowTest extends TestCase
             'release_id: releaseId',
             'operator_approval_phrase: approvalPhrase',
             "deploy_mode: 'standard'",
+            'operation_key: operationKey',
         ] as $contract) {
             $this->assertStringContainsString($contract, $source);
         }
@@ -90,7 +92,7 @@ final class BackendProductionAutoDeployWorkflowTest extends TestCase
         );
 
         $this->assertStringContainsString(
-            'run-name: Deploy API Production ${{ inputs.expected_release_sha }} staging-${{ inputs.staging_run_id }}',
+            'run-name: Deploy API Production ${{ inputs.expected_release_sha }} staging-${{ inputs.staging_run_id }} [op:${{ inputs.operation_key }}]',
             $production,
         );
         $this->assertStringContainsString('workflow_dispatch:', $production);

@@ -1,4 +1,5 @@
 name: Exact Package Content Promotion Automation
+run-name: Exact Package Content Promotion ${{ inputs.lane }} ${{ inputs.execution_mode }} [op:${{ inputs.operation_key }}]
 
 on:
   workflow_dispatch:
@@ -50,6 +51,10 @@ on:
         description: Exact downloaded preflight receipt file SHA-256 required by apply mode
         required: false
         type: string
+      operation_key:
+        description: Deterministic exact-package operation key
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -60,8 +65,31 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  operation_gate:
+    name: Elect exact-package owner before Environment access
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      decision: ${{ steps.gate.outputs.decision }}
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - id: identity
+        shell: bash
+        env:
+          IDENTITY: control=${{ inputs.expected_control_plane_sha }}|lane=${{ inputs.lane }}|subscope=${{ inputs.subscope }}|package_path=${{ inputs.package_path }}|package_sha=${{ inputs.expected_package_sha256 }}|policy_sha=${{ inputs.release_policy_sha256 }}|rows=${{ inputs.expected_row_count }}|mode=${{ inputs.execution_mode }}|preflight_run=${{ inputs.preflight_run_id }}|preflight_attempt=${{ inputs.preflight_run_attempt }}|preflight_receipt=${{ inputs.expected_preflight_receipt_sha256 }}
+        run: echo "operation_key=$(node .github/scripts/controlled-operation-gate.cjs key --repository "$GITHUB_REPOSITORY" --workflow .github/workflows/content-promotion-automation.yml --scope exact-package-content-promotion --identity "$IDENTITY")" >> "$GITHUB_OUTPUT"
+      - id: gate
+        uses: ./.github/actions/controlled-operation-gate
+        with:
+          claimed-key: ${{ inputs.operation_key }}
+          expected-key: ${{ steps.identity.outputs.operation_key }}
+          workflow-file: content-promotion-automation.yml
+          receipt-template: content-promotion-${{ inputs.lane }}-{run_id}-{run_attempt}
+
   promote:
     name: Promote exact package without deploy or discoverability mutation
+    needs: operation_gate
+    if: needs.operation_gate.outputs.decision == 'execute'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     environment: production

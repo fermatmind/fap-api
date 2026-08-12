@@ -68,6 +68,8 @@ Prefer a repo-compatible default implementation and mark options as optional.
 
 ### Automatic Main Deployment Discipline
 - Every successful exact-`main` staging deployment MUST automatically dispatch exactly one standard backend production deployment for the same immutable SHA and staging run. Ordinary application deployment requires zero operator interactions and MUST NOT ask for a chat approval phrase.
+- Every controlled workflow dispatch must carry a deterministic `operation_key` derived only from public immutable inputs. Its operation gate must run before Environment or secret access; only the elected owner may execute, while duplicate active/success runs attach and failed or ambiguous history fails closed.
+- A second Codex window must claim the same key with `fermatmind-operation-guard` and attach to the existing owner run. It must not independently dispatch, rerun, cancel, replace, retry, clean up, or roll back that operation.
 - The automatic lane MUST deduplicate exact candidate/staging pairs, use the existing protected production workflow, and fail closed on ambiguous staging or merged-PR identity, non-forward history, missing production evidence, or any cumulative migration delta.
 - An automatic production failure MUST NOT retry automatically. Diagnose and repair the same scoped code/workflow issue through the normal PR lifecycle; the next successful `main` staging run supplies the next bounded attempt.
 - Database migrations, CMS/database/content mutations, secrets or permission changes, destructive actions, rollback/recovery, and Search Channel/discoverability writes remain separately controlled and MUST NOT be smuggled through this automatic lane.

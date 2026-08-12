@@ -582,7 +582,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('expected_deployed_revision:', $source);
         $this->assertStringContainsString('approved_migration:', $source);
         $this->assertStringContainsString('deploy_mode must be auto, code_only, candidate_only, schema_only, or standard.', $source);
-        $this->assertSame(3, substr_count($source, 'required: true'));
+        $this->assertSame(4, substr_count($source, 'required: true'));
         $this->assertStringContainsString('actions: read', $source);
         $this->assertStringContainsString('Validate manual exact-SHA approval and staging evidence', $source);
         $this->assertStringNotContainsString("if: github.event_name == 'workflow_dispatch'", $source);

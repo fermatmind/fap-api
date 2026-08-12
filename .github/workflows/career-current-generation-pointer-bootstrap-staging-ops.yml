@@ -1,4 +1,5 @@
 name: Career Current Generation Pointer Bootstrap Staging Ops
+run-name: Career Current Generation Pointer Bootstrap Staging Ops ${{ inputs.mode }} [op:${{ inputs.operation_key }}]
 
 on:
   workflow_dispatch:
@@ -64,6 +65,10 @@ on:
         required: false
         default: ""
         type: string
+      operation_key:
+        description: Deterministic exact pointer-bootstrap operation key
+        required: true
+        type: string
 
 permissions:
   actions: write
@@ -74,8 +79,31 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  operation_gate:
+    name: Elect pointer-bootstrap owner before Environment access
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      decision: ${{ steps.gate.outputs.decision }}
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - id: identity
+        shell: bash
+        env:
+          IDENTITY: mode=${{ inputs.mode }}|control=${{ inputs.expected_control_plane_sha }}|failed_run=${{ inputs.failed_staging_run_id }}|preflight_run=${{ inputs.preflight_run_id }}|preflight_attempt=${{ inputs.preflight_run_attempt }}|preflight_receipt=${{ inputs.expected_preflight_receipt_sha256 }}|preflight_artifact=${{ inputs.expected_preflight_artifact_digest }}|active=${{ inputs.expected_active_revision }}|release=${{ inputs.expected_release_name_sha256 }}|projection_path=${{ inputs.expected_projection_path_sha256 }}|ledger_path=${{ inputs.expected_ledger_path_sha256 }}
+        run: echo "operation_key=$(node .github/scripts/controlled-operation-gate.cjs key --repository "$GITHUB_REPOSITORY" --workflow .github/workflows/career-current-generation-pointer-bootstrap-staging-ops.yml --scope career-pointer-bootstrap --identity "$IDENTITY")" >> "$GITHUB_OUTPUT"
+      - id: gate
+        uses: ./.github/actions/controlled-operation-gate
+        with:
+          claimed-key: ${{ inputs.operation_key }}
+          expected-key: ${{ steps.identity.outputs.operation_key }}
+          workflow-file: career-current-generation-pointer-bootstrap-staging-ops.yml
+          receipt-template: career-current-generation-pointer-bootstrap-staging-${{ inputs.mode }}-{run_id}-{run_attempt}
+
   control:
     name: Run isolated staging pointer bootstrap phase
+    needs: operation_gate
+    if: needs.operation_gate.outputs.decision == 'execute'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     environment: staging

@@ -1,4 +1,5 @@
 name: Backend Production Auto Deploy
+run-name: Backend Production Auto Deploy staging-${{ github.event.workflow_run.id }}
 
 on:
   workflow_run:
@@ -16,10 +17,40 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  operation-gate:
+    name: Elect automatic production dispatcher owner
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      decision: ${{ steps.gate.outputs.decision }}
+      operation_key: ${{ steps.identity.outputs.operation_key }}
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - id: identity
+        shell: bash
+        env:
+          STAGING_RUN_ID: ${{ github.event.workflow_run.id }}
+          STAGING_RUN_ATTEMPT: ${{ github.event.workflow_run.run_attempt }}
+          STAGING_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          identity="staging_run=${STAGING_RUN_ID}|staging_attempt=${STAGING_RUN_ATTEMPT}|sha=${STAGING_SHA}"
+          echo "operation_key=$(node .github/scripts/controlled-operation-gate.cjs key --repository "$GITHUB_REPOSITORY" --workflow .github/workflows/backend-production-auto-deploy.yml --scope production-auto-dispatch --identity "$identity")" >> "$GITHUB_OUTPUT"
+      - id: gate
+        uses: ./.github/actions/controlled-operation-gate
+        with:
+          claimed-key: ${{ steps.identity.outputs.operation_key }}
+          expected-key: ${{ steps.identity.outputs.operation_key }}
+          workflow-file: backend-production-auto-deploy.yml
+          receipt-template: backend-production-auto-dispatch-{operation_key}-{run_id}-{run_attempt}
+          event-name: workflow_run
+          candidate-marker: staging-${{ github.event.workflow_run.id }}
+
   dispatch-production:
     name: Dispatch exact staged main release
+    needs: operation-gate
     if: >-
       ${{
+        needs.operation-gate.outputs.decision == 'execute' &&
         github.event.workflow_run.status == 'completed' &&
         github.event.workflow_run.conclusion == 'success' &&
         github.event.workflow_run.event == 'push' &&
@@ -62,6 +93,20 @@ jobs:
               return;
             }
 
+            const stagingArtifacts = await github.paginate(
+              github.rest.actions.listWorkflowRunArtifacts,
+              { owner, repo, run_id: stagingRunId, per_page: 100 },
+            );
+            const stagingOperationReceipts = stagingArtifacts.filter((artifact) => (
+              !artifact.expired &&
+              /^backend-staging-operation-[0-9a-f]{64}-[0-9]+-[0-9]+$/.test(artifact.name) &&
+              /^sha256:[0-9a-f]{64}$/.test(String(artifact.digest || ''))
+            ));
+            if (stagingOperationReceipts.length !== 1) {
+              core.setFailed('Automatic production dispatch requires one immutable staging owner receipt.');
+              return;
+            }
+
             const main = await github.rest.repos.getBranch({ owner, repo, branch: 'main' });
             if (main.data.commit.sha !== deploySha) {
               core.setOutput('skip', 'true');
@@ -85,7 +130,19 @@ jobs:
               return;
             }
 
-            const expectedRunTitle = `Deploy API Production ${deploySha} staging-${stagingRunId}`;
+            const crypto = require('node:crypto');
+            const sha256 = (value) => crypto.createHash('sha256').update(value, 'utf8').digest('hex');
+            const releaseId = `standard-${deploySha.slice(0, 12)}`;
+            const productionIdentity = `release_sha=${deploySha}|staging_run=${stagingRunId}|release_id=${releaseId}|mode=standard|active=|migration=`;
+            const productionOperationKey = sha256([
+              'fermatmind.operation.v1',
+              `repository=${owner}/${repo}`,
+              'workflow=.github/workflows/deploy-production.yml',
+              'scope=production-deploy',
+              `identity_sha256=${sha256(productionIdentity)}`,
+              '',
+            ].join('\n'));
+            const expectedRunTitle = `Deploy API Production ${deploySha} staging-${stagingRunId} [op:${productionOperationKey}]`;
             const productionRuns = await github.paginate(
               github.rest.actions.listWorkflowRuns,
               {
@@ -105,7 +162,8 @@ jobs:
             core.setOutput('skip', 'false');
             core.setOutput('deploy_sha', deploySha);
             core.setOutput('staging_run_id', String(stagingRunId));
-            core.setOutput('release_id', `standard-${deploySha.slice(0, 12)}`);
+            core.setOutput('release_id', releaseId);
+            core.setOutput('operation_key', productionOperationKey);
             core.setOutput('merged_pr', String(mergedMainPulls[0].number));
 
       - name: Check out exact staged main
@@ -204,12 +262,14 @@ jobs:
           RELEASE_ID: ${{ steps.release.outputs.release_id }}
           MERGED_PR: ${{ steps.release.outputs.merged_pr }}
           ACTIVE_SHA: ${{ steps.active.outputs.active_sha }}
+          OPERATION_KEY: ${{ steps.release.outputs.operation_key }}
         with:
           script: |
             const { owner, repo } = context.repo;
             const deploySha = process.env.DEPLOY_SHA;
             const stagingRunId = process.env.STAGING_RUN_ID;
             const releaseId = process.env.RELEASE_ID;
+            const operationKey = process.env.OPERATION_KEY;
             const approvalPhrase = [
               'I explicitly approve bounded backend production deploy for exact SHA',
               deploySha + ',',
@@ -227,6 +287,7 @@ jobs:
                 release_id: releaseId,
                 operator_approval_phrase: approvalPhrase,
                 deploy_mode: 'standard',
+                operation_key: operationKey,
               },
             });
 
@@ -240,3 +301,23 @@ jobs:
               .addEOL()
               .addRaw(`Verified active ancestor: ${process.env.ACTIVE_SHA}.`)
               .write();
+
+      - name: Write automatic dispatch owner receipt
+        if: steps.release.outputs.skip != 'true'
+        shell: bash
+        env:
+          OPERATION_KEY: ${{ needs.operation-gate.outputs.operation_key }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/production-auto-dispatch"
+          jq -n --arg key "$OPERATION_KEY" --argjson run "$GITHUB_RUN_ID" --argjson attempt "$GITHUB_RUN_ATTEMPT" \
+            '{schema:"fermatmind.production_auto_dispatch_receipt.v1",operation_key:$key,workflow_run_id:$run,workflow_run_attempt:$attempt,result:"dispatched"}' \
+            > "$RUNNER_TEMP/production-auto-dispatch/receipt.json"
+
+      - name: Upload automatic dispatch owner receipt
+        if: steps.release.outputs.skip != 'true'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: backend-production-auto-dispatch-${{ needs.operation-gate.outputs.operation_key }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/production-auto-dispatch/receipt.json
+          if-no-files-found: error
+          retention-days: 30
