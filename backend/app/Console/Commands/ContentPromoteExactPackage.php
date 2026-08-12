@@ -15,7 +15,7 @@ final class ContentPromoteExactPackage extends Command
     protected $signature = 'content:promote-exact-package
         {--package= : Allowlisted backend-authority package directory}
         {--expected-package-sha256= : Exact package SHA-256}
-        {--lane= : English parity lane W1-W8}
+        {--lane= : Registered exact-package lane W1-W8 or TOP100}
         {--subscope= : Optional registered lane subscope}
         {--phase= : preflight, draft-import, publish, or live-qa}
         {--receipt= : New immutable receipt destination}

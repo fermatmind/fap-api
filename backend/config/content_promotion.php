@@ -20,6 +20,7 @@ return [
         'content_packs',
         'content_baselines',
         'database/seeders/data',
+        'content_assets/seo-top100/SEO-TOP100-FROZEN-20260812-v1',
     ],
     // Independent W9 evidence is intentionally outside the frozen producer
     // package. A package may name an exact report here, but cannot self-approve
@@ -40,5 +41,6 @@ return [
         'W6' => ['iq' => 'fail_closed_legacy_audit'],
         'W7' => ['eq' => 'audit_compatible'],
         'W8' => ['career-jobs' => 'audit_compatible'],
+        'TOP100' => ['frozen-20260812-v1' => 'audit_compatible'],
     ],
 ];

@@ -1,0 +1,3328 @@
+{
+  "schema_version": "fermatmind.seo_top100_frozen_targets.v1",
+  "batch_id": "SEO-TOP100-FROZEN-20260812-v1",
+  "source_sha256": "e4c9788d6fadff53bc33170299971ab57dbff1810ad1fcdb4f97f5f4ee94d150",
+  "target_priorities": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    17,
+    18,
+    19,
+    20,
+    21,
+    23,
+    27,
+    31,
+    32,
+    36,
+    42,
+    52,
+    61,
+    83,
+    84
+  ],
+  "targets": [
+    {
+      "priority": 1,
+      "url": "https://fermatmind.com/en/personality/intp-a",
+      "locale": "en",
+      "page_type": "MBTI profile",
+      "action_lane": "CANNIBALIZATION",
+      "confidence": "HIGH",
+      "entity_cluster": "MBTI / 16 personalities",
+      "primary_query_cluster": "intp-a",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "definition/self-understanding",
+      "primary_url_role": "English INTP-A definition owner",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/en/personality/intp",
+        "https://fermatmind.com/en/personality/intp-a-vs-intp-t"
+      ],
+      "forbidden_queries": [
+        "intp a vs intp t",
+        "intp-a vs intp-t differences"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 3,
+          "impressions": 1376,
+          "ctr": "0.2%",
+          "position": 9.6
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 0,
+          "impressions": 282,
+          "ctr": "0.0%",
+          "position": 8.6
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 1,
+          "impressions": 476,
+          "ctr": "0.2%",
+          "position": 10.1
+        },
+        "visible_primary_query": {
+          "clicks": 0,
+          "impressions": 441,
+          "ctr": "0.0%",
+          "position": 8.5
+        },
+        "change_summary": "C+3; I+387.9%; CTR+0.22pp; P-0.9"
+      },
+      "current_title": "INTP-A Personality: Traits, Assertive Pattern, Work and Relationships | FermatMind",
+      "proposed_title": "KEEP — INTP-A Personality: Traits, Assertive Pattern, Work and Relationships | FermatMind",
+      "current_description": "Understand INTP-A: core traits, Assertive stress pattern, work style, relationships, common misreads, strengths, watch-outs, and safe self-understanding boundaries.",
+      "proposed_description": "KEEP — Understand INTP-A: core traits, Assertive stress pattern, work style, relationships, common misreads, strengths, watch-outs, and safe self-understanding boundaries.",
+      "current_H1": "INTP-A Personality",
+      "proposed_H1_or_KEEP": "KEEP — INTP-A Personality",
+      "current_intro_summary": "Role recommendations and work-environment guidance for INTP profiles.",
+      "proposed_intro_or_exact_action": "INTP-A is the Assertive variant of the INTP profile: analytical model-building and possibility exploration remain central, while the A/T label describes a stress-response pattern rather than ability, diagnosis, or guaranteed career fit.",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Define type/variant entity, distinguish preference from ability/diagnosis, cite the site method boundary and only stable public sources.",
+      "author_or_reviewer_requirement": "Named FermatMind editorial/method reviewer in the backend asset/package; no invented credential or person schema.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/en/personality/intp",
+        "https://fermatmind.com/en/personality/intp-a-vs-intp-t"
+      ],
+      "exact_anchor_text": [
+        "INTP-A personality",
+        "INTP-A vs INTP-T differences"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/en/personality/intp-a",
+        "https://fermatmind.com/en/personality/intp-a-vs-intp-t"
+      ],
+      "cannibalization_action": "Assign bare INTP-A definition intent to this profile; comparison page owns explicit A-vs-T intent; rewrite cross-links to make the split explicit.",
+      "current_schema": [
+        "AboutPage",
+        "Answer",
+        "BreadcrumbList",
+        "DefinedTerm",
+        "FAQPage",
+        "WebPage"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "backend personality seo.surface.v1 / public personality bundle",
+      "implementation_surface": "Backend personality SEO/content fields; frontend renderer only",
+      "risk": "MEDIUM — owner reassignment can shift impressions between sibling URLs before clicks stabilize.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/en/personality/intp-a",
+        "canonical": "https://fermatmind.com/en/personality/intp-a",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/personality.xml"
+        ],
+        "hreflang": [
+          {
+            "locale": "en",
+            "href": "https://fermatmind.com/en/personality/intp-a"
+          },
+          {
+            "locale": "zh-CN",
+            "href": "https://fermatmind.com/zh/personality/intp-a"
+          },
+          {
+            "locale": "x-default",
+            "href": "https://fermatmind.com/"
+          }
+        ],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 2,
+      "url": "https://fermatmind.com/zh/personality/intp-a",
+      "locale": "zh",
+      "page_type": "MBTI profile",
+      "action_lane": "CANNIBALIZATION",
+      "confidence": "HIGH",
+      "entity_cluster": "MBTI / 16 personalities",
+      "primary_query_cluster": "intp-a",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "definition/self-understanding",
+      "primary_url_role": "中文 INTP-A 定义页",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/zh/personality/intp",
+        "https://fermatmind.com/zh/personality/intp-a-vs-intp-t"
+      ],
+      "forbidden_queries": [
+        "intp-a 和 intp-t 区别",
+        "intp a vs intp t"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 9,
+          "impressions": 453,
+          "ctr": "2.0%",
+          "position": 8.3
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 16,
+          "impressions": 883,
+          "ctr": "1.8%",
+          "position": 9.3
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 2,
+          "impressions": 108,
+          "ctr": "1.9%",
+          "position": null
+        },
+        "visible_primary_query": {
+          "clicks": 0,
+          "impressions": 49,
+          "ctr": "0.0%",
+          "position": 5.8
+        },
+        "change_summary": "C-7; I-48.7%; CTR+0.18pp; P+1.0"
+      },
+      "current_title": "INTP-A 人格特点：分析建模、可能性探索和独立解题 | FermatMind",
+      "proposed_title": "KEEP — INTP-A 人格特点：分析建模、可能性探索和独立解题 | FermatMind",
+      "current_description": "了解 INTP-A 的分析建模、可能性探索和独立解题、适合与不适合的场景、A/T 差异、职业、关系、压力应对、常见误解与 FAQ。内容仅用于自我理解和成长复盘。",
+      "proposed_description": "KEEP — 了解 INTP-A 的分析建模、可能性探索和独立解题、适合与不适合的场景、A/T 差异、职业、关系、压力应对、常见误解与 FAQ。内容仅用于自我理解和成长复盘。",
+      "current_H1": "INTP-A 人格特点",
+      "proposed_H1_or_KEEP": "KEEP — INTP-A 人格特点",
+      "current_intro_summary": "你像一台安静却高速运转的「思考引擎」：表面云淡风轻，内心不断拆解世界的规则与漏洞。你不善于热闹的表演，却擅长用一个清晰的模型、一个犀利的问题，让别人突然安静下来，重新思考原本习以为常的东西。",
+      "proposed_intro_or_exact_action": "INTP-A 是 INTP 的自信型变体：分析建模、可能性探索和独立解题仍是核心，A/T 只描述压力反应倾向，不代表能力高低、诊断或职业保证。",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Define type/variant entity, distinguish preference from ability/diagnosis, cite the site method boundary and only stable public sources.",
+      "author_or_reviewer_requirement": "Named FermatMind editorial/method reviewer in the backend asset/package; no invented credential or person schema.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/zh/personality/intp",
+        "https://fermatmind.com/zh/personality/intp-a-vs-intp-t"
+      ],
+      "exact_anchor_text": [
+        "INTP-A 人格",
+        "INTP-A 和 INTP-T 的区别"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/zh/personality/intp-a",
+        "https://fermatmind.com/zh/personality/intp-a-vs-intp-t"
+      ],
+      "cannibalization_action": "裸词 INTP-A 归本页；含“区别/对比/vs”的查询归比较页；两页互链但不复用同一主标题与首段答案。",
+      "current_schema": [
+        "AboutPage",
+        "Answer",
+        "BreadcrumbList",
+        "DefinedTerm",
+        "FAQPage",
+        "WebPage"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "backend personality seo.surface.v1 / public personality bundle",
+      "implementation_surface": "Backend personality SEO/content fields; frontend renderer only",
+      "risk": "MEDIUM — owner reassignment can shift impressions between sibling URLs before clicks stabilize.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/zh/personality/intp-a",
+        "canonical": "https://fermatmind.com/zh/personality/intp-a",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/personality.xml"
+        ],
+        "hreflang": [
+          {
+            "locale": "en",
+            "href": "https://fermatmind.com/en/personality/intp-a"
+          },
+          {
+            "locale": "zh-CN",
+            "href": "https://fermatmind.com/zh/personality/intp-a"
+          },
+          {
+            "locale": "x-default",
+            "href": "https://fermatmind.com/"
+          }
+        ],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 3,
+      "url": "https://fermatmind.com/zh/personality/intp-a-vs-intp-t",
+      "locale": "zh",
+      "page_type": "MBTI compare",
+      "action_lane": "CANNIBALIZATION",
+      "confidence": "HIGH",
+      "entity_cluster": "MBTI / 16 personalities",
+      "primary_query_cluster": "intp-a",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "comparative-informational",
+      "primary_url_role": "中文 INTP-A vs INTP-T 比较页",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/zh/personality/intp-a",
+        "https://fermatmind.com/zh/personality/intp-t"
+      ],
+      "forbidden_queries": [
+        "intp-a 是什么",
+        "intp-a 人格"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 14,
+          "impressions": 619,
+          "ctr": "2.3%",
+          "position": 6.5
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 5,
+          "impressions": 333,
+          "ctr": "1.5%",
+          "position": 7.7
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 3,
+          "impressions": 222,
+          "ctr": "1.4%",
+          "position": 6.3
+        },
+        "visible_primary_query": {
+          "clicks": 1,
+          "impressions": 104,
+          "ctr": "1.0%",
+          "position": 4.5
+        },
+        "change_summary": "C+9; I+85.9%; CTR+0.76pp; P+1.1"
+      },
+      "current_title": "INTP-A 和 INTP-T 的区别：逻辑学家 A/T 对比 | FermatMind",
+      "proposed_title": "KEEP — INTP-A 和 INTP-T 的区别：逻辑学家 A/T 对比 | FermatMind",
+      "current_description": "对比 INTP-A 与 INTP-T 的最大区别、快速判断表、容易误判、工作、关系、压力场景、共同点、使用边界和 FAQ。",
+      "proposed_description": "KEEP — 对比 INTP-A 与 INTP-T 的最大区别、快速判断表、容易误判、工作、关系、压力场景、共同点、使用边界和 FAQ。",
+      "current_H1": "INTP-A 和 INTP-T 的区别",
+      "proposed_H1_or_KEEP": "KEEP — INTP-A 和 INTP-T 的区别",
+      "current_intro_summary": "对比 INTP-A 与 INTP-T 的最大区别、快速判断表、容易误判、工作、关系、压力场景、共同点、使用边界和 FAQ。",
+      "proposed_intro_or_exact_action": "KEEP — current intro",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Define type/variant entity, distinguish preference from ability/diagnosis, cite the site method boundary and only stable public sources.",
+      "author_or_reviewer_requirement": "Named FermatMind editorial/method reviewer in the backend asset/package; no invented credential or person schema.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/zh/personality/intp-a",
+        "https://fermatmind.com/zh/personality/intp-t"
+      ],
+      "exact_anchor_text": [
+        "INTP-A 和 INTP-T 的区别",
+        "INTP-A 和 INTP-T 的区别"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/zh/personality/intp-a-vs-intp-t"
+      ],
+      "cannibalization_action": "仅承接显式 A/T 差异、压力与自信模式查询；把单一变体定义查询回链给各自 profile。",
+      "current_schema": [
+        "Answer",
+        "BreadcrumbList",
+        "CollectionPage",
+        "FAQPage",
+        "ItemList"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "backend personality seo.surface.v1 / public personality bundle",
+      "implementation_surface": "Backend personality SEO/content fields; frontend renderer only",
+      "risk": "MEDIUM — owner reassignment can shift impressions between sibling URLs before clicks stabilize.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/zh/personality/intp-a-vs-intp-t",
+        "canonical": "https://fermatmind.com/zh/personality/intp-a-vs-intp-t",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/personality.xml"
+        ],
+        "hreflang": [
+          {
+            "locale": "en",
+            "href": "https://fermatmind.com/en/personality/intp-a-vs-intp-t"
+          },
+          {
+            "locale": "zh-CN",
+            "href": "https://fermatmind.com/zh/personality/intp-a-vs-intp-t"
+          },
+          {
+            "locale": "x-default",
+            "href": "https://fermatmind.com/"
+          }
+        ],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 4,
+      "url": "https://fermatmind.com/zh/articles/mbti-basics",
+      "locale": "zh",
+      "page_type": "Article",
+      "action_lane": "EXECUTE",
+      "confidence": "HIGH",
+      "entity_cluster": "MBTI / 16 personalities",
+      "primary_query_cluster": "mbti是什么",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "informational/problem-solving",
+      "primary_url_role": "中文 MBTI 概念与边界解释页",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/zh/personality",
+        "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types"
+      ],
+      "forbidden_queries": [
+        "免费 MBTI 测试",
+        "开始 MBTI 测试"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 1,
+          "impressions": 599,
+          "ctr": "0.2%",
+          "position": 15.8
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 3,
+          "impressions": 1283,
+          "ctr": "0.2%",
+          "position": 14.3
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 153,
+          "ctr": "0.0%",
+          "position": null
+        },
+        "visible_primary_query": {
+          "clicks": 0,
+          "impressions": 22,
+          "ctr": "0.0%",
+          "position": 12.4
+        },
+        "change_summary": "C-2; I-53.3%; CTR-0.06pp; P-1.5"
+      },
+      "current_title": "MBTI 是什么？16 型人格测试入门指南 | FermatMind",
+      "proposed_title": "KEEP — MBTI 是什么？16 型人格测试入门指南 | FermatMind",
+      "current_description": "从四个维度了解 MBTI 是什么、16 型人格如何阅读，以及测试结果适合怎样用于自我反思。",
+      "proposed_description": "KEEP — 从四个维度了解 MBTI 是什么、16 型人格如何阅读，以及测试结果适合怎样用于自我反思。",
+      "current_H1": "MBTI 性格测试是什么？16 型人格能告诉你什么，不能告诉你什么",
+      "proposed_H1_or_KEEP": "KEEP — MBTI 性格测试是什么？16 型人格能告诉你什么，不能告诉你什么",
+      "current_intro_summary": "MBTI 性格测试可以帮助你观察能量来源、信息获取、决策方式和生活组织偏好，但不能判断能力、诊断心理状态或决定职业。",
+      "proposed_intro_or_exact_action": "KEEP current direct answer; add explicit ownership links only. Article owns “MBTI 是什么”; test page owns “MBTI 测试”.",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Define type/variant entity, distinguish preference from ability/diagnosis, cite the site method boundary and only stable public sources.",
+      "author_or_reviewer_requirement": "CMS author attribution required; reviewer checks source fidelity, claim boundary, and visible/schema parity.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/zh/personality"
+      ],
+      "exact_anchor_text": [
+        "MBTI 是什么",
+        "免费 MBTI 测试"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/zh/articles/mbti-basics",
+        "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types"
+      ],
+      "cannibalization_action": "Protect the declared primary role; supporting pages link to this URL only for the matching intent.",
+      "current_schema": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "fap-api CMS Article + public article SEO/JSON-LD projection",
+      "implementation_surface": "CMS Article SEO/content fields; frontend renderer consumes authority and must not add fallback editorial copy",
+      "risk": "LOW–MEDIUM — metadata/intro change may alter title rendering and ranking; no URL or canonical change.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/zh/articles/mbti-basics",
+        "canonical": "https://fermatmind.com/zh/articles/mbti-basics",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/articles.xml"
+        ],
+        "hreflang": [],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 5,
+      "url": "https://fermatmind.com/zh/personality/enneagram/wings/9w8",
+      "locale": "zh",
+      "page_type": "Enneagram wing",
+      "action_lane": "EXECUTE",
+      "confidence": "HIGH",
+      "entity_cluster": "Enneagram",
+      "primary_query_cluster": "9w8",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "definition/self-understanding",
+      "primary_url_role": "zh Enneagram definition/self-understanding owner for “9w8”",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/zh/personality/enneagram",
+        "https://fermatmind.com/zh/personality/enneagram/type-9"
+      ],
+      "forbidden_queries": [
+        "NONE — preserve the declared primary intent boundary"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 2,
+          "impressions": 78,
+          "ctr": "2.6%",
+          "position": 6.8
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": "0.0%",
+          "position": 5
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 16,
+          "ctr": "0.0%",
+          "position": null
+        },
+        "visible_primary_query": {
+          "clicks": 0,
+          "impressions": 31,
+          "ctr": "0.0%",
+          "position": 7.7
+        },
+        "change_summary": "C+2; I+7700%; CTR+2.56pp; P-1.8"
+      },
+      "current_title": "9w8：以九号稳定为核心的边界发力观察 | FermatMind",
+      "proposed_title": "9w8 人格：第九型核心、边界力量与常见误判 | FermatMind",
+      "current_description": "9w8是证据有限的翼型观察假设，应先确认九号对稳定与连接的关注，再把八号式扎根抵抗、边界发力和保护倾向作为次要修饰。安静后变得强硬不能单独证明9w8；岗位授权、财产责任、危险、训练、反复侵害或权力不平等都可能产生相同顺序。",
+      "proposed_description": "9w8 是以第九型稳定与连接为核心、由第八型边界力量修饰的证据有限翼型假设。了解核心特点、替代解释与使用边界。",
+      "current_H1": "9w8：以九号稳定为核心的边界发力观察",
+      "proposed_H1_or_KEEP": "9w8 人格：第九型核心与边界力量",
+      "current_intro_summary": "9w8是证据有限的翼型观察假设，应先确认九号对稳定与连接的关注，再把八号式扎根抵抗、边界发力和保护倾向作为次要修饰。安静后变得强硬不能单独证明9w8；岗位授权、财产责任、危险、训练、反复侵害或权力不平等都可能产生相同顺序。",
+      "proposed_intro_or_exact_action": "9w8 通常指以第九型对稳定与连接的关注为核心，并可能带有第八型的边界力量与保护倾向。它只是证据有限的翼型假设，安静后变得强硬不能单独证明 9w8。",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Core type remains primary; wing/instinct is explicitly provisional and evidence-limited; no diagnostic or deterministic claim.",
+      "author_or_reviewer_requirement": "Named FermatMind editorial/method reviewer in the backend asset/package; no invented credential or person schema.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/zh/personality/enneagram",
+        "https://fermatmind.com/zh/personality/enneagram/type-9"
+      ],
+      "exact_anchor_text": [
+        "9w8 人格",
+        "9w8 人格"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/zh/personality/enneagram/wings/9w8"
+      ],
+      "cannibalization_action": "Protect the declared primary role; supporting pages link to this URL only for the matching intent.",
+      "current_schema": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "WebPage"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "fap-api PersonalityPublicContentAsset + public personality APIs",
+      "implementation_surface": "Backend public-content asset; Big Five/Enneagram remains text-only with no image proposal",
+      "risk": "LOW–MEDIUM — metadata/intro change may alter title rendering and ranking; no URL or canonical change.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/zh/personality/enneagram/wings/9w8",
+        "canonical": "https://fermatmind.com/zh/personality/enneagram/wings/9w8",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/personality.xml"
+        ],
+        "hreflang": [
+          {
+            "locale": "en",
+            "href": "https://fermatmind.com/en/personality/enneagram/wings/9w8"
+          },
+          {
+            "locale": "zh-CN",
+            "href": "https://fermatmind.com/zh/personality/enneagram/wings/9w8"
+          },
+          {
+            "locale": "x-default",
+            "href": "https://fermatmind.com/en/personality/enneagram/wings/9w8"
+          }
+        ],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 6,
+      "url": "https://fermatmind.com/zh/personality/enneagram/wings/5w6",
+      "locale": "zh",
+      "page_type": "Enneagram wing",
+      "action_lane": "EXECUTE",
+      "confidence": "HIGH",
+      "entity_cluster": "Enneagram",
+      "primary_query_cluster": "5w6",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "definition/self-understanding",
+      "primary_url_role": "zh Enneagram definition/self-understanding owner for “5w6”",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/zh/personality/enneagram",
+        "https://fermatmind.com/zh/personality/enneagram/type-5"
+      ],
+      "forbidden_queries": [
+        "NONE — preserve the declared primary intent boundary"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 63,
+          "ctr": "0.0%",
+          "position": 10.7
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": "0.0%",
+          "position": 1
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 20,
+          "ctr": "0.0%",
+          "position": 6.7
+        },
+        "visible_primary_query": {
+          "clicks": 0,
+          "impressions": 39,
+          "ctr": "0.0%",
+          "position": 7.7
+        },
+        "change_summary": "C+0; I+6200%; CTR 0; P-9.7"
+      },
+      "current_title": "5w6：以第五型为主、关注验证与可靠方法的翼型假设 | FermatMind",
+      "proposed_title": "5w6 人格：第五型核心、验证倾向与常见误判 | FermatMind",
+      "current_description": "5w6 是证据有限的翼型假设：第五型的知识、胜任准备、隐私与精力边界仍是核心，第六型只可能修饰为验证、可靠方法与风险核对。谨慎流程不能证明 5w6，因为合规工作、质量保证、安全岗位、团队规范与问责结构都可能要求同样行为。本页直接比较知识胜任准备精力如何保持核心、验证可靠方法风险如何作为修饰，以及合规质量保证安全岗位如何形成替代解释。",
+      "proposed_description": "5w6 是以第五型知识、胜任与精力边界为核心，由第六型验证和风险核对倾向修饰的证据有限翼型假设。",
+      "current_H1": "5w6：以第五型为主、关注验证与可靠方法的翼型假设",
+      "proposed_H1_or_KEEP": "5w6 人格：第五型核心与验证倾向",
+      "current_intro_summary": "5w6 是证据有限的翼型假设：第五型的知识、胜任准备、隐私与精力边界仍是核心，第六型只可能修饰为验证、可靠方法与风险核对。谨慎流程不能证明 5w6，因为合规工作、质量保证、安全岗位、团队规范与问责结构都可能要求同样行为。本页直接比较知识胜任准备精力如何保持核心、验证可靠方法风险如何作为修饰，以及合规质量保证安全岗位如何形成替代解释。",
+      "proposed_intro_or_exact_action": "5w6 通常指以第五型对知识、胜任和精力边界的关注为核心，并可能由第六型的验证与风险核对倾向修饰。它只是证据有限的翼型假设，谨慎或爱研究不能单独证明 5w6。",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Core type remains primary; wing/instinct is explicitly provisional and evidence-limited; no diagnostic or deterministic claim.",
+      "author_or_reviewer_requirement": "Named FermatMind editorial/method reviewer in the backend asset/package; no invented credential or person schema.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/zh/personality/enneagram",
+        "https://fermatmind.com/zh/personality/enneagram/type-5"
+      ],
+      "exact_anchor_text": [
+        "5w6 人格",
+        "5w6 人格"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/zh/personality/enneagram/wings/5w6"
+      ],
+      "cannibalization_action": "Protect the declared primary role; supporting pages link to this URL only for the matching intent.",
+      "current_schema": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "WebPage"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "fap-api PersonalityPublicContentAsset + public personality APIs",
+      "implementation_surface": "Backend public-content asset; Big Five/Enneagram remains text-only with no image proposal",
+      "risk": "LOW–MEDIUM — metadata/intro change may alter title rendering and ranking; no URL or canonical change.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/zh/personality/enneagram/wings/5w6",
+        "canonical": "https://fermatmind.com/zh/personality/enneagram/wings/5w6",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/personality.xml"
+        ],
+        "hreflang": [
+          {
+            "locale": "en",
+            "href": "https://fermatmind.com/en/personality/enneagram/wings/5w6"
+          },
+          {
+            "locale": "zh-CN",
+            "href": "https://fermatmind.com/zh/personality/enneagram/wings/5w6"
+          },
+          {
+            "locale": "x-default",
+            "href": "https://fermatmind.com/en/personality/enneagram/wings/5w6"
+          }
+        ],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 7,
+      "url": "https://fermatmind.com/zh/personality/enneagram/wings/3w4",
+      "locale": "zh",
+      "page_type": "Enneagram wing",
+      "action_lane": "EXECUTE",
+      "confidence": "HIGH",
+      "entity_cluster": "Enneagram",
+      "primary_query_cluster": "3w4",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "definition/self-understanding",
+      "primary_url_role": "zh Enneagram definition/self-understanding owner for “3w4”",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/zh/personality/enneagram",
+        "https://fermatmind.com/zh/personality/enneagram/type-3"
+      ],
+      "forbidden_queries": [
+        "NONE — preserve the declared primary intent boundary"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 56,
+          "ctr": "0.0%",
+          "position": 8.6
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": "0.0%",
+          "position": 1
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 15,
+          "ctr": "0.0%",
+          "position": null
+        },
+        "visible_primary_query": {
+          "clicks": 0,
+          "impressions": 33,
+          "ctr": "0.0%",
+          "position": 5.1
+        },
+        "change_summary": "C+0; I+5500%; CTR 0; P-7.6"
+      },
+      "current_title": "3w4：以成果为核心、以独特作品为修饰的翼型假设 | FermatMind",
+      "proposed_title": "3w4 人格：第三型核心、独特表达与常见误判 | FermatMind",
+      "current_description": "3w4 是证据有限、以第三型为核心的传统翼型假设：对可见成果的关注，可能受到第四型相邻主题中的独特性、个人表达和理想比较所修饰。作品有辨识度不能证明翼型，专业分工、作品集要求和审美训练也会产生相似结果。",
+      "proposed_description": "3w4 是以第三型成果与价值感为核心、由第四型独特表达和个人意义修饰的证据有限翼型假设。了解边界和替代解释。",
+      "current_H1": "3w4：以成果为核心、以独特作品为修饰的翼型假设",
+      "proposed_H1_or_KEEP": "3w4 人格：第三型核心与独特表达",
+      "current_intro_summary": "3w4 是证据有限、以第三型为核心的传统翼型假设：对可见成果的关注，可能受到第四型相邻主题中的独特性、个人表达和理想比较所修饰。作品有辨识度不能证明翼型，专业分工、作品集要求和审美训练也会产生相似结果。",
+      "proposed_intro_or_exact_action": "3w4 通常指以第三型对成果、价值和有效表现的关注为核心，并可能由第四型的独特表达与个人意义修饰。它只是证据有限的翼型假设，有创意或重形象不能单独证明 3w4。",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Core type remains primary; wing/instinct is explicitly provisional and evidence-limited; no diagnostic or deterministic claim.",
+      "author_or_reviewer_requirement": "Named FermatMind editorial/method reviewer in the backend asset/package; no invented credential or person schema.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/zh/personality/enneagram",
+        "https://fermatmind.com/zh/personality/enneagram/type-3"
+      ],
+      "exact_anchor_text": [
+        "3w4 人格",
+        "3w4 人格"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/zh/personality/enneagram/wings/3w4"
+      ],
+      "cannibalization_action": "Protect the declared primary role; supporting pages link to this URL only for the matching intent.",
+      "current_schema": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "WebPage"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "fap-api PersonalityPublicContentAsset + public personality APIs",
+      "implementation_surface": "Backend public-content asset; Big Five/Enneagram remains text-only with no image proposal",
+      "risk": "LOW–MEDIUM — metadata/intro change may alter title rendering and ranking; no URL or canonical change.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/zh/personality/enneagram/wings/3w4",
+        "canonical": "https://fermatmind.com/zh/personality/enneagram/wings/3w4",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/personality.xml"
+        ],
+        "hreflang": [
+          {
+            "locale": "en",
+            "href": "https://fermatmind.com/en/personality/enneagram/wings/3w4"
+          },
+          {
+            "locale": "zh-CN",
+            "href": "https://fermatmind.com/zh/personality/enneagram/wings/3w4"
+          },
+          {
+            "locale": "x-default",
+            "href": "https://fermatmind.com/en/personality/enneagram/wings/3w4"
+          }
+        ],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 8,
+      "url": "https://fermatmind.com/en/personality/enneagram/wings/3w2",
+      "locale": "en",
+      "page_type": "Enneagram wing",
+      "action_lane": "EXECUTE",
+      "confidence": "HIGH",
+      "entity_cluster": "Enneagram",
+      "primary_query_cluster": "3w2",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "definition/self-understanding",
+      "primary_url_role": "en Enneagram definition/self-understanding owner for “3w2”",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/en/personality/enneagram",
+        "https://fermatmind.com/en/personality/enneagram/type-3"
+      ],
+      "forbidden_queries": [
+        "NONE — preserve the declared primary intent boundary"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 195,
+          "ctr": "0.0%",
+          "position": 9.9
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": "—",
+          "position": null
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 22,
+          "ctr": "0.0%",
+          "position": 9.4
+        },
+        "visible_primary_query": {
+          "clicks": 0,
+          "impressions": 83,
+          "ctr": "0.0%",
+          "position": 8.7
+        },
+        "change_summary": "C+0; I new; CTR 0"
+      },
+      "current_title": "3w2: relational visibility as a core-first wing hypothesis | FermatMind",
+      "proposed_title": "3w2 Personality: Core Type, Relational Visibility and Misreads | FermatMind",
+      "current_description": "The 3w2 wing is a core-first, evidence-limited hypothesis: Type Three attention to valued results may be modified by Two-adjacent connection, usefulness, and audience response. Warm presentation or networking cannot establish a wing because service roles, sales incentives, and collaboration norms can look the same.",
+      "proposed_description": "3w2 is an evidence-limited wing hypothesis: Type Three remains central; Type Two may modify connection and audience awareness. Warmth alone does not establish 3w2.",
+      "current_H1": "3w2: relational visibility as a core-first wing hypothesis",
+      "proposed_H1_or_KEEP": "3w2 Personality: Core Type and Relational Visibility",
+      "current_intro_summary": "The 3w2 wing is a core-first, evidence-limited hypothesis: Type Three attention to valued results may be modified by Two-adjacent connection, usefulness, and audience response. Warm presentation or networking cannot establish a wing because service roles, sales incentives, and collaboration norms can look the same.",
+      "proposed_intro_or_exact_action": "3w2 is an evidence-limited wing hypothesis: Type Three concerns about value and effective performance remain central, while Type Two may modify connection, usefulness, and audience awareness. Warmth or networking alone does not establish 3w2.",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Core type remains primary; wing/instinct is explicitly provisional and evidence-limited; no diagnostic or deterministic claim.",
+      "author_or_reviewer_requirement": "Named FermatMind editorial/method reviewer in the backend asset/package; no invented credential or person schema.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/en/personality/enneagram",
+        "https://fermatmind.com/en/personality/enneagram/type-3"
+      ],
+      "exact_anchor_text": [
+        "3w2 personality",
+        "3w2 personality"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/en/personality/enneagram/wings/3w2"
+      ],
+      "cannibalization_action": "Protect the declared primary role; supporting pages link to this URL only for the matching intent.",
+      "current_schema": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "WebPage"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "fap-api PersonalityPublicContentAsset + public personality APIs",
+      "implementation_surface": "Backend public-content asset; Big Five/Enneagram remains text-only with no image proposal",
+      "risk": "LOW–MEDIUM — metadata/intro change may alter title rendering and ranking; no URL or canonical change.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/en/personality/enneagram/wings/3w2",
+        "canonical": "https://fermatmind.com/en/personality/enneagram/wings/3w2",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/personality.xml"
+        ],
+        "hreflang": [
+          {
+            "locale": "en",
+            "href": "https://fermatmind.com/en/personality/enneagram/wings/3w2"
+          },
+          {
+            "locale": "zh-CN",
+            "href": "https://fermatmind.com/zh/personality/enneagram/wings/3w2"
+          },
+          {
+            "locale": "x-default",
+            "href": "https://fermatmind.com/en/personality/enneagram/wings/3w2"
+          }
+        ],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 9,
+      "url": "https://fermatmind.com/en/personality/enneagram/wings/5w4",
+      "locale": "en",
+      "page_type": "Enneagram wing",
+      "action_lane": "EXECUTE",
+      "confidence": "MEDIUM",
+      "entity_cluster": "Enneagram",
+      "primary_query_cluster": "5w4",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "definition/self-understanding",
+      "primary_url_role": "en Enneagram definition/self-understanding owner for “5w4”",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/en/personality/enneagram",
+        "https://fermatmind.com/en/personality/enneagram/type-5"
+      ],
+      "forbidden_queries": [
+        "NONE — preserve the declared primary intent boundary"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 283,
+          "ctr": "0.0%",
+          "position": 10
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 0,
+          "impressions": 24,
+          "ctr": "0.0%",
+          "position": 9.8
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 85,
+          "ctr": "0.0%",
+          "position": 9.6
+        },
+        "visible_primary_query": {
+          "clicks": 0,
+          "impressions": 17,
+          "ctr": "0.0%",
+          "position": 13.7
+        },
+        "change_summary": "C+0; I+1079%; CTR 0; P-0.2"
+      },
+      "current_title": "5w4: a core-first hypothesis about personal synthesis and meaning | FermatMind",
+      "proposed_title": "5w4 Personality: Core Type, Personal Meaning and Misreads | FermatMind",
+      "current_description": "5w4 is an evidence-limited wing hypothesis: Type Five knowledge, competence, privacy, and capacity concerns remain primary, while Four may modify how ideas receive personal synthesis, meaning, and originality. Distinctive work does not establish 5w4 because creative training, specialization, culture, audience, and project ownership can look similar.",
+      "proposed_description": "5w4 is an evidence-limited wing hypothesis: Type Five remains central; Type Four may modify personal synthesis and meaning. Privacy alone does not establish 5w4.",
+      "current_H1": "5w4: a core-first hypothesis about personal synthesis and meaning",
+      "proposed_H1_or_KEEP": "5w4 Personality: Core Type and Personal Meaning",
+      "current_intro_summary": "5w4 is an evidence-limited wing hypothesis: Type Five knowledge, competence, privacy, and capacity concerns remain primary, while Four may modify how ideas receive personal synthesis, meaning, and originality. Distinctive work does not establish 5w4 because creative training, specialization, culture, audience, and project ownership can look similar.",
+      "proposed_intro_or_exact_action": "5w4 is an evidence-limited wing hypothesis: Type Five concerns about knowledge, competence, and energy boundaries remain central, while Type Four may modify personal synthesis and meaning. Privacy or creativity alone does not establish 5w4.",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Core type remains primary; wing/instinct is explicitly provisional and evidence-limited; no diagnostic or deterministic claim.",
+      "author_or_reviewer_requirement": "Named FermatMind editorial/method reviewer in the backend asset/package; no invented credential or person schema.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/en/personality/enneagram",
+        "https://fermatmind.com/en/personality/enneagram/type-5"
+      ],
+      "exact_anchor_text": [
+        "5w4 personality",
+        "5w4 personality"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/en/personality/enneagram/wings/5w4"
+      ],
+      "cannibalization_action": "Protect the declared primary role; supporting pages link to this URL only for the matching intent.",
+      "current_schema": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "WebPage"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "fap-api PersonalityPublicContentAsset + public personality APIs",
+      "implementation_surface": "Backend public-content asset; Big Five/Enneagram remains text-only with no image proposal",
+      "risk": "LOW–MEDIUM — metadata/intro change may alter title rendering and ranking; no URL or canonical change.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/en/personality/enneagram/wings/5w4",
+        "canonical": "https://fermatmind.com/en/personality/enneagram/wings/5w4",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/personality.xml"
+        ],
+        "hreflang": [
+          {
+            "locale": "en",
+            "href": "https://fermatmind.com/en/personality/enneagram/wings/5w4"
+          },
+          {
+            "locale": "zh-CN",
+            "href": "https://fermatmind.com/zh/personality/enneagram/wings/5w4"
+          },
+          {
+            "locale": "x-default",
+            "href": "https://fermatmind.com/en/personality/enneagram/wings/5w4"
+          }
+        ],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 10,
+      "url": "https://fermatmind.com/zh/articles/big-five-tool-guide",
+      "locale": "zh",
+      "page_type": "Article",
+      "action_lane": "CANNIBALIZATION",
+      "confidence": "HIGH",
+      "entity_cluster": "Big Five",
+      "primary_query_cluster": "大五人格",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "informational/problem-solving",
+      "primary_url_role": "中文大五人格测试使用/分数解读页",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/zh/personality/big-five",
+        "https://fermatmind.com/zh/tests/big-five-personality-test-ocean-model"
+      ],
+      "forbidden_queries": [
+        "大五人格",
+        "免费大五人格测试"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 11,
+          "impressions": 631,
+          "ctr": "1.7%",
+          "position": 8.1
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 7,
+          "impressions": 1570,
+          "ctr": "0.5%",
+          "position": 7.6
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 3,
+          "impressions": 126,
+          "ctr": "2.4%",
+          "position": 7.9
+        },
+        "visible_primary_query": {
+          "clicks": 2,
+          "impressions": 38,
+          "ctr": "5.3%",
+          "position": 10.3
+        },
+        "change_summary": "C+4; I-59.8%; CTR+1.29pp; P-0.5"
+      },
+      "current_title": "大五人格测试工具：怎么用、怎么看分数与边界 | FermatMind",
+      "proposed_title": "大五人格测试怎么用？分数、边界与解读指南 | FermatMind",
+      "current_description": "大五人格测试适合支持结构化自我反思，不应用于诊断、筛选或预测。本文说明测试前、作答时、读报告后的核对方法与产品信息 Unknown 边界。",
+      "proposed_description": "大五人格测试适合结构化自我反思。了解作答、分数解读、比较边界和报告后的验证方法；不用于诊断、筛选或预测。",
+      "current_H1": "大五人格测试工具使用与边界指南",
+      "proposed_H1_or_KEEP": "大五人格测试怎么用：分数、边界与解读指南",
+      "current_intro_summary": "先核对工具、分数与比较依据，再用低风险观察收集吻合与反例；不要让一次人格测试替你判定能力、身份或未来。",
+      "proposed_intro_or_exact_action": "大五人格测试把开放性、尽责性、外倾性、宜人性和神经质转成可比较的自我观察线索；它不能替你判断能力、诊断或未来。先核对量表、分数依据和反例，再决定下一步。",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Name OCEAN dimension/facet relationship, treat scores as continua, expose method/measurement boundary, and remain text-only.",
+      "author_or_reviewer_requirement": "CMS author attribution required; reviewer checks source fidelity, claim boundary, and visible/schema parity.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/zh/personality/big-five",
+        "https://fermatmind.com/zh/tests/big-five-personality-test-ocean-model"
+      ],
+      "exact_anchor_text": [
+        "大五人格测试怎么用",
+        "免费大五人格测试"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/zh/articles/big-five-tool-guide",
+        "https://fermatmind.com/zh/tests/big-five-personality-test-ocean-model"
+      ],
+      "cannibalization_action": "“大五人格”总览归人格 hub，“大五人格测试”行动意图归测试页，“怎么用/分数怎么看/边界”归本文章。",
+      "current_schema": [
+        "NONE"
+      ],
+      "proposed_schema_action_or_KEEP": "BACKEND_PREFLIGHT_ONLY: publish Article + BreadcrumbList fragments only when the CMS supplies explicit eligible, visible facts; otherwise retain fail-closed NONE. Never synthesize eligibility or facts in fap-web.",
+      "authority_layer": "fap-api CMS Article + public article SEO/JSON-LD projection",
+      "implementation_surface": "CMS Article SEO/content fields; frontend renderer consumes authority and must not add fallback editorial copy",
+      "risk": "MEDIUM — owner reassignment can shift impressions between sibling URLs before clicks stabilize.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/zh/articles/big-five-tool-guide",
+        "canonical": "https://fermatmind.com/zh/articles/big-five-tool-guide",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/articles.xml"
+        ],
+        "hreflang": [],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 11,
+      "url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+      "locale": "zh",
+      "page_type": "Test",
+      "action_lane": "EXECUTE",
+      "confidence": "HIGH",
+      "entity_cluster": "MBTI / 16 personalities",
+      "primary_query_cluster": "MBTI测试",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "transactional-assessment",
+      "primary_url_role": "中文 MBTI 测试行动页",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/zh/articles/mbti-basics",
+        "https://fermatmind.com/zh/personality"
+      ],
+      "forbidden_queries": [
+        "MBTI 是什么",
+        "16型人格定义"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 77,
+          "impressions": 3371,
+          "ctr": "2.3%",
+          "position": 7.8
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 44,
+          "impressions": 2817,
+          "ctr": "1.6%",
+          "position": 7.8
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 27,
+          "impressions": 680,
+          "ctr": "4.0%",
+          "position": null
+        },
+        "visible_primary_query": {
+          "clicks": 7,
+          "impressions": 420,
+          "ctr": "1.7%",
+          "position": 8.8
+        },
+        "change_summary": "C+33; I+19.7%; CTR+0.72pp; P-0.0"
+      },
+      "current_title": "免费 MBTI 测试：16 型人格完整结果 | FermatMind",
+      "proposed_title": "KEEP — 免费 MBTI 测试：16 型人格完整结果 | FermatMind",
+      "current_description": "免费完成 MBTI 人格测试，查看 16 型人格结果、偏好维度与后续探索建议。结果用于自我了解，不作诊断或职业保证。",
+      "proposed_description": "KEEP — 免费完成 MBTI 人格测试，查看 16 型人格结果、偏好维度与后续探索建议。结果用于自我了解，不作诊断或职业保证。",
+      "current_H1": "免费 MBTI测试：16 型人格完整结果",
+      "proposed_H1_or_KEEP": "KEEP — 免费 MBTI测试：16 型人格完整结果",
+      "current_intro_summary": "免费完成 MBTI 人格测试，查看 16 型人格结果、偏好维度与后续探索建议。",
+      "proposed_intro_or_exact_action": "KEEP content and CTA; add two ownership links from the concept article and personality hub. Do not change assessment flow.",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Define type/variant entity, distinguish preference from ability/diagnosis, cite the site method boundary and only stable public sources.",
+      "author_or_reviewer_requirement": "Named FermatMind editorial/method reviewer in the backend asset/package; no invented credential or person schema.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/zh/articles/mbti-basics",
+        "https://fermatmind.com/zh/personality"
+      ],
+      "exact_anchor_text": [
+        "免费 MBTI 测试"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types"
+      ],
+      "cannibalization_action": "Protect the declared primary role; supporting pages link to this URL only for the matching intent.",
+      "current_schema": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "SoftwareApplication",
+        "WebPage"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "backend scale/test API + landing_surfaces/page_blocks/SEO lookup",
+      "implementation_surface": "Backend scale/landing authority; frontend assessment renderer and product flow only",
+      "risk": "MEDIUM — copy must not disrupt assessment CTA, start_attempt, or submit_attempt.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+        "canonical": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/tests.xml"
+        ],
+        "hreflang": [
+          {
+            "locale": "en",
+            "href": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types"
+          },
+          {
+            "locale": "zh-CN",
+            "href": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types"
+          },
+          {
+            "locale": "x-default",
+            "href": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types"
+          }
+        ],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 12,
+      "url": "https://fermatmind.com/zh/personality/enneagram/wings/2w1",
+      "locale": "zh",
+      "page_type": "Enneagram wing",
+      "action_lane": "EXECUTE",
+      "confidence": "HIGH",
+      "entity_cluster": "Enneagram",
+      "primary_query_cluster": "2w1",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "definition/self-understanding",
+      "primary_url_role": "zh Enneagram definition/self-understanding owner for “2w1”",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/zh/personality/enneagram",
+        "https://fermatmind.com/zh/personality/enneagram/type-2"
+      ],
+      "forbidden_queries": [
+        "NONE — preserve the declared primary intent boundary"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 54,
+          "ctr": "0.0%",
+          "position": 8.1
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": "0.0%",
+          "position": 8
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": "0.0%",
+          "position": 87
+        },
+        "visible_primary_query": {
+          "clicks": 0,
+          "impressions": 20,
+          "ctr": "0.0%",
+          "position": 5.5
+        },
+        "change_summary": "C+0; I+5300%; CTR 0; P-0.1"
+      },
+      "current_title": "2w1 观察页：原则性服务与同意边界 | FermatMind",
+      "proposed_title": "2w1 人格：第二型核心、原则服务与常见误判 | FermatMind",
+      "current_description": "2w1 是以二号的需要与连接关注为核心、用一号相邻特征解释标准、克制和负责服务的传统次级假设。观察2w1原则服务，应记录标准是否保护同意和质量，而不是把有纪律的照护直接写成翼型证据。",
+      "proposed_description": "2w1 是以第二型连接、被需要与帮助为核心、由第一型原则和改进倾向修饰的证据有限翼型假设。了解边界和替代解释。",
+      "current_H1": "2w1 观察页：原则性服务与同意边界",
+      "proposed_H1_or_KEEP": "2w1 人格：第二型核心与原则服务",
+      "current_intro_summary": "2w1 是以二号的需要与连接关注为核心、用一号相邻特征解释标准、克制和负责服务的传统次级假设。观察2w1原则服务，应记录标准是否保护同意和质量，而不是把有纪律的照护直接写成翼型证据。",
+      "proposed_intro_or_exact_action": "2w1 通常指以第二型对连接、被需要和帮助他人的关注为核心，并可能由第一型的原则与改进倾向修饰。它只是证据有限的翼型假设，热心或守规则不能单独证明 2w1。",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Core type remains primary; wing/instinct is explicitly provisional and evidence-limited; no diagnostic or deterministic claim.",
+      "author_or_reviewer_requirement": "Named FermatMind editorial/method reviewer in the backend asset/package; no invented credential or person schema.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/zh/personality/enneagram",
+        "https://fermatmind.com/zh/personality/enneagram/type-2"
+      ],
+      "exact_anchor_text": [
+        "2w1 人格",
+        "2w1 人格"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/zh/personality/enneagram/wings/2w1"
+      ],
+      "cannibalization_action": "Protect the declared primary role; supporting pages link to this URL only for the matching intent.",
+      "current_schema": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "WebPage"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "fap-api PersonalityPublicContentAsset + public personality APIs",
+      "implementation_surface": "Backend public-content asset; Big Five/Enneagram remains text-only with no image proposal",
+      "risk": "LOW–MEDIUM — metadata/intro change may alter title rendering and ranking; no URL or canonical change.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/zh/personality/enneagram/wings/2w1",
+        "canonical": "https://fermatmind.com/zh/personality/enneagram/wings/2w1",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/personality.xml"
+        ],
+        "hreflang": [
+          {
+            "locale": "en",
+            "href": "https://fermatmind.com/en/personality/enneagram/wings/2w1"
+          },
+          {
+            "locale": "zh-CN",
+            "href": "https://fermatmind.com/zh/personality/enneagram/wings/2w1"
+          },
+          {
+            "locale": "x-default",
+            "href": "https://fermatmind.com/en/personality/enneagram/wings/2w1"
+          }
+        ],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 13,
+      "url": "https://fermatmind.com/zh/personality/enneagram/wings/7w6",
+      "locale": "zh",
+      "page_type": "Enneagram wing",
+      "action_lane": "EXECUTE",
+      "confidence": "HIGH",
+      "entity_cluster": "Enneagram",
+      "primary_query_cluster": "7w6",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "definition/self-understanding",
+      "primary_url_role": "zh Enneagram definition/self-understanding owner for “7w6”",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/zh/personality/enneagram",
+        "https://fermatmind.com/zh/personality/enneagram/type-7"
+      ],
+      "forbidden_queries": [
+        "NONE — preserve the declared primary intent boundary"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 52,
+          "ctr": "0.0%",
+          "position": 7.7
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": "—",
+          "position": null
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": "0.0%",
+          "position": 7.3
+        },
+        "visible_primary_query": {
+          "clicks": 0,
+          "impressions": 24,
+          "ctr": "0.0%",
+          "position": 7.5
+        },
+        "change_summary": "C+0; I new; CTR 0"
+      },
+      "current_title": "7w6：以第七型为主、关注协商、后备方案与共同计划的翼型假设 | FermatMind",
+      "proposed_title": "7w6 人格：第七型核心、后备方案与常见误判 | FermatMind",
+      "current_description": "7w6 是证据有限的翼型假设：第七型选项与群体协商仍以可能性为核心，第六型可能增加后备方案、安心感与共同计划。善于交际或准备预案不能证明 7w6；协调职责、事故响应、团队规范、资金不稳与共同问责都可能要求相同行为。",
+      "proposed_description": "7w6 是以第七型选项、自由与避免受限为核心、由第六型协商和后备方案倾向修饰的证据有限翼型假设。",
+      "current_H1": "7w6：以第七型为主、关注协商、后备方案与共同计划的翼型假设",
+      "proposed_H1_or_KEEP": "7w6 人格：第七型核心与后备方案",
+      "current_intro_summary": "7w6 是证据有限的翼型假设：第七型选项与群体协商仍以可能性为核心，第六型可能增加后备方案、安心感与共同计划。善于交际或准备预案不能证明 7w6；协调职责、事故响应、团队规范、资金不稳与共同问责都可能要求相同行为。",
+      "proposed_intro_or_exact_action": "7w6 通常指以第七型对选项、自由和避免受限的关注为核心，并可能由第六型的协商与后备方案倾向修饰。它只是证据有限的翼型假设，外向或计划多不能单独证明 7w6。",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Core type remains primary; wing/instinct is explicitly provisional and evidence-limited; no diagnostic or deterministic claim.",
+      "author_or_reviewer_requirement": "Named FermatMind editorial/method reviewer in the backend asset/package; no invented credential or person schema.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/zh/personality/enneagram",
+        "https://fermatmind.com/zh/personality/enneagram/type-7"
+      ],
+      "exact_anchor_text": [
+        "7w6 人格",
+        "7w6 人格"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/zh/personality/enneagram/wings/7w6"
+      ],
+      "cannibalization_action": "Protect the declared primary role; supporting pages link to this URL only for the matching intent.",
+      "current_schema": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "WebPage"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "fap-api PersonalityPublicContentAsset + public personality APIs",
+      "implementation_surface": "Backend public-content asset; Big Five/Enneagram remains text-only with no image proposal",
+      "risk": "LOW–MEDIUM — metadata/intro change may alter title rendering and ranking; no URL or canonical change.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/zh/personality/enneagram/wings/7w6",
+        "canonical": "https://fermatmind.com/zh/personality/enneagram/wings/7w6",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/personality.xml"
+        ],
+        "hreflang": [
+          {
+            "locale": "en",
+            "href": "https://fermatmind.com/en/personality/enneagram/wings/7w6"
+          },
+          {
+            "locale": "zh-CN",
+            "href": "https://fermatmind.com/zh/personality/enneagram/wings/7w6"
+          },
+          {
+            "locale": "x-default",
+            "href": "https://fermatmind.com/en/personality/enneagram/wings/7w6"
+          }
+        ],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 14,
+      "url": "https://fermatmind.com/zh/personality/enneagram/wings/6w5",
+      "locale": "zh",
+      "page_type": "Enneagram wing",
+      "action_lane": "EXECUTE",
+      "confidence": "HIGH",
+      "entity_cluster": "Enneagram",
+      "primary_query_cluster": "6w5人格",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "definition/self-understanding",
+      "primary_url_role": "zh Enneagram definition/self-understanding owner for “6w5人格”",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/zh/personality/enneagram",
+        "https://fermatmind.com/zh/personality/enneagram/type-6"
+      ],
+      "forbidden_queries": [
+        "NONE — preserve the declared primary intent boundary"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 60,
+          "ctr": "0.0%",
+          "position": 9.3
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": "—",
+          "position": null
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 11,
+          "ctr": "0.0%",
+          "position": 12.4
+        },
+        "visible_primary_query": {
+          "clicks": 0,
+          "impressions": 23,
+          "ctr": "0.0%",
+          "position": 7.5
+        },
+        "change_summary": "C+0; I new; CTR 0"
+      },
+      "current_title": "6w5：以第六型为主、关注证据、分析与私下准备的翼型假设 | FermatMind",
+      "proposed_title": "6w5 人格：第六型核心、证据分析与常见误判 | FermatMind",
+      "current_description": "6w5 是证据有限的翼型假设：第六型的不确定性、支持、信任与预案仍是核心，相邻类型只可能修饰为证据、分析与私下准备。这种表现不能证明 6w5，因为研究训练、技术评审、保密要求、合规分析与专家岗位都会要求相似行为。本页直接说明第六型不确定支持如何保持核心、证据、分析与私下准备如何作为修饰，以及研究训练、技术评审、保密要求、合规分析与专家岗位如何形成替代解释。",
+      "proposed_description": "6w5 是以第六型安全、可信支持与风险核对为核心、由第五型证据分析和私下准备倾向修饰的证据有限翼型假设。",
+      "current_H1": "6w5：以第六型为主、关注证据、分析与私下准备的翼型假设",
+      "proposed_H1_or_KEEP": "6w5 人格：第六型核心与证据分析",
+      "current_intro_summary": "6w5 是证据有限的翼型假设：第六型的不确定性、支持、信任与预案仍是核心，相邻类型只可能修饰为证据、分析与私下准备。这种表现不能证明 6w5，因为研究训练、技术评审、保密要求、合规分析与专家岗位都会要求相似行为。本页直接说明第六型不确定支持如何保持核心、证据、分析与私下准备如何作为修饰，以及研究训练、技术评审、保密要求、合规分析与专家岗位如何形成替代解释。",
+      "proposed_intro_or_exact_action": "6w5 通常指以第六型对安全、可信支持和风险核对的关注为核心，并可能由第五型的证据分析与私下准备倾向修饰。它只是证据有限的翼型假设，谨慎或内向不能单独证明 6w5。",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Core type remains primary; wing/instinct is explicitly provisional and evidence-limited; no diagnostic or deterministic claim.",
+      "author_or_reviewer_requirement": "Named FermatMind editorial/method reviewer in the backend asset/package; no invented credential or person schema.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/zh/personality/enneagram",
+        "https://fermatmind.com/zh/personality/enneagram/type-6"
+      ],
+      "exact_anchor_text": [
+        "6w5 人格",
+        "6w5 人格"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/zh/personality/enneagram/wings/6w5"
+      ],
+      "cannibalization_action": "Protect the declared primary role; supporting pages link to this URL only for the matching intent.",
+      "current_schema": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "WebPage"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "fap-api PersonalityPublicContentAsset + public personality APIs",
+      "implementation_surface": "Backend public-content asset; Big Five/Enneagram remains text-only with no image proposal",
+      "risk": "LOW–MEDIUM — metadata/intro change may alter title rendering and ranking; no URL or canonical change.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/zh/personality/enneagram/wings/6w5",
+        "canonical": "https://fermatmind.com/zh/personality/enneagram/wings/6w5",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/personality.xml"
+        ],
+        "hreflang": [
+          {
+            "locale": "en",
+            "href": "https://fermatmind.com/en/personality/enneagram/wings/6w5"
+          },
+          {
+            "locale": "zh-CN",
+            "href": "https://fermatmind.com/zh/personality/enneagram/wings/6w5"
+          },
+          {
+            "locale": "x-default",
+            "href": "https://fermatmind.com/en/personality/enneagram/wings/6w5"
+          }
+        ],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 15,
+      "url": "https://fermatmind.com/zh/personality/enfj-a-vs-enfj-t",
+      "locale": "zh",
+      "page_type": "MBTI compare",
+      "action_lane": "CANNIBALIZATION",
+      "confidence": "MEDIUM",
+      "entity_cluster": "MBTI / 16 personalities",
+      "primary_query_cluster": "enfj-t",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "comparative-informational",
+      "primary_url_role": "中文 ENFJ-A vs ENFJ-T 比较页",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/zh/personality/enfj-a",
+        "https://fermatmind.com/zh/personality/enfj-t"
+      ],
+      "forbidden_queries": [
+        "enfj-t 人格",
+        "enfj-a 人格"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 2,
+          "impressions": 122,
+          "ctr": "1.6%",
+          "position": 5.5
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 0,
+          "impressions": 42,
+          "ctr": "0.0%",
+          "position": 8.9
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 1,
+          "impressions": 50,
+          "ctr": "2.0%",
+          "position": 5.3
+        },
+        "visible_primary_query": {
+          "clicks": 0,
+          "impressions": 11,
+          "ctr": "0.0%",
+          "position": 4.1
+        },
+        "change_summary": "C+2; I+190.5%; CTR+1.64pp; P+3.4"
+      },
+      "current_title": "ENFJ-A 和 ENFJ-T 的区别：主人公 A/T 对比 | FermatMind",
+      "proposed_title": "KEEP — ENFJ-A 和 ENFJ-T 的区别：主人公 A/T 对比 | FermatMind",
+      "current_description": "对比 ENFJ-A 与 ENFJ-T 的最大区别、快速判断表、容易误判、工作、关系、压力场景、共同点、使用边界和 FAQ。",
+      "proposed_description": "KEEP — 对比 ENFJ-A 与 ENFJ-T 的最大区别、快速判断表、容易误判、工作、关系、压力场景、共同点、使用边界和 FAQ。",
+      "current_H1": "ENFJ-A 和 ENFJ-T 的区别",
+      "proposed_H1_or_KEEP": "KEEP — ENFJ-A 和 ENFJ-T 的区别",
+      "current_intro_summary": "对比 ENFJ-A 与 ENFJ-T 的最大区别、快速判断表、容易误判、工作、关系、压力场景、共同点、使用边界和 FAQ。",
+      "proposed_intro_or_exact_action": "ENFJ-A 与 ENFJ-T 的核心偏好相同，差别主要在自我确信、压力恢复和反馈后的反复检查；这不是能力、成熟度或诊断差异。",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Define type/variant entity, distinguish preference from ability/diagnosis, cite the site method boundary and only stable public sources.",
+      "author_or_reviewer_requirement": "Named FermatMind editorial/method reviewer in the backend asset/package; no invented credential or person schema.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/zh/personality/enfj-a",
+        "https://fermatmind.com/zh/personality/enfj-t"
+      ],
+      "exact_anchor_text": [
+        "ENFJ-A 和 ENFJ-T 的区别"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/zh/personality/enfj-a-vs-enfj-t"
+      ],
+      "cannibalization_action": "显式 A/T 差异查询归比较页；ENFJ-T 裸词归 /zh/personality/enfj-t；比较页首段先声明共享核心与差异边界。",
+      "current_schema": [
+        "Answer",
+        "BreadcrumbList",
+        "CollectionPage",
+        "FAQPage",
+        "ItemList"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "backend personality seo.surface.v1 / public personality bundle",
+      "implementation_surface": "Backend personality SEO/content fields; frontend renderer only",
+      "risk": "MEDIUM — owner reassignment can shift impressions between sibling URLs before clicks stabilize.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/zh/personality/enfj-a-vs-enfj-t",
+        "canonical": "https://fermatmind.com/zh/personality/enfj-a-vs-enfj-t",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/personality.xml"
+        ],
+        "hreflang": [
+          {
+            "locale": "en",
+            "href": "https://fermatmind.com/en/personality/enfj-a-vs-enfj-t"
+          },
+          {
+            "locale": "zh-CN",
+            "href": "https://fermatmind.com/zh/personality/enfj-a-vs-enfj-t"
+          },
+          {
+            "locale": "x-default",
+            "href": "https://fermatmind.com/"
+          }
+        ],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 17,
+      "url": "https://fermatmind.com/en/personality/enfj-a-vs-enfj-t",
+      "locale": "en",
+      "page_type": "MBTI compare",
+      "action_lane": "EXECUTE",
+      "confidence": "MEDIUM",
+      "entity_cluster": "MBTI / 16 personalities",
+      "primary_query_cluster": "enfj-a vs enfj-t differences",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "comparative-informational",
+      "primary_url_role": "en MBTI / 16 personalities comparative-informational owner for “enfj-a vs enfj-t differences”",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/en/personality"
+      ],
+      "forbidden_queries": [
+        "NONE — preserve the declared primary intent boundary"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 197,
+          "ctr": "0.0%",
+          "position": 7.8
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 0,
+          "impressions": 12,
+          "ctr": "0.0%",
+          "position": 8.1
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 45,
+          "ctr": "0.0%",
+          "position": null
+        },
+        "visible_primary_query": {
+          "clicks": 0,
+          "impressions": 6,
+          "ctr": "0.0%",
+          "position": 10.5
+        },
+        "change_summary": "C+0; I+1542%; CTR 0; P+0.3"
+      },
+      "current_title": "ENFJ-A vs ENFJ-T: Confidence, Stress and Work Style | FermatMind",
+      "proposed_title": "KEEP — ENFJ-A vs ENFJ-T: Confidence, Stress and Work Style | FermatMind",
+      "current_description": "Compare ENFJ-A and ENFJ-T through people leadership, encouragement and shared direction, confidence, stress recovery, feedback style, work rhythm and relationships.",
+      "proposed_description": "KEEP — Compare ENFJ-A and ENFJ-T through people leadership, encouragement and shared direction, confidence, stress recovery, feedback style, work rhythm and relationships.",
+      "current_H1": "ENFJ-A vs ENFJ-T: Key Differences",
+      "proposed_H1_or_KEEP": "KEEP — ENFJ-A vs ENFJ-T: Key Differences",
+      "current_intro_summary": "Compare ENFJ-A and ENFJ-T through people leadership, encouragement and shared direction, confidence, stress recovery, feedback style, work rhythm and relationships.",
+      "proposed_intro_or_exact_action": "ENFJ-A and ENFJ-T share the same ENFJ preference pattern. The practical differences are mainly self-confidence, stress recovery, and post-feedback review—not ability, maturity, or diagnosis.",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Define type/variant entity, distinguish preference from ability/diagnosis, cite the site method boundary and only stable public sources.",
+      "author_or_reviewer_requirement": "Named FermatMind editorial/method reviewer in the backend asset/package; no invented credential or person schema.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/en/personality"
+      ],
+      "exact_anchor_text": [
+        "enfj-a vs enfj-t differences"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/en/personality/enfj-a-vs-enfj-t"
+      ],
+      "cannibalization_action": "Protect the declared primary role; supporting pages link to this URL only for the matching intent.",
+      "current_schema": [
+        "Answer",
+        "BreadcrumbList",
+        "CollectionPage",
+        "FAQPage",
+        "ItemList"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "backend personality seo.surface.v1 / public personality bundle",
+      "implementation_surface": "Backend personality SEO/content fields; frontend renderer only",
+      "risk": "LOW–MEDIUM — metadata/intro change may alter title rendering and ranking; no URL or canonical change.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/en/personality/enfj-a-vs-enfj-t",
+        "canonical": "https://fermatmind.com/en/personality/enfj-a-vs-enfj-t",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/personality.xml"
+        ],
+        "hreflang": [
+          {
+            "locale": "en",
+            "href": "https://fermatmind.com/en/personality/enfj-a-vs-enfj-t"
+          },
+          {
+            "locale": "zh-CN",
+            "href": "https://fermatmind.com/zh/personality/enfj-a-vs-enfj-t"
+          },
+          {
+            "locale": "x-default",
+            "href": "https://fermatmind.com/"
+          }
+        ],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 18,
+      "url": "https://fermatmind.com/zh/personality/big-five/facets/straightforwardness",
+      "locale": "zh",
+      "page_type": "Big Five facet",
+      "action_lane": "EXECUTE",
+      "confidence": "HIGH",
+      "entity_cluster": "Big Five",
+      "primary_query_cluster": "坦率",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "definition/self-understanding",
+      "primary_url_role": "zh Big Five definition/self-understanding owner for “坦率”",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/zh/personality/big-five"
+      ],
+      "forbidden_queries": [
+        "NONE — preserve the declared primary intent boundary"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 63,
+          "ctr": "0.0%",
+          "position": 10.6
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": "0.0%",
+          "position": 12
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 19,
+          "ctr": "0.0%",
+          "position": 7.8
+        },
+        "visible_primary_query": {
+          "clicks": 0,
+          "impressions": 37,
+          "ctr": "0.0%",
+          "position": 9.5
+        },
+        "change_summary": "C+0; I+3050%; CTR 0; P+1.4"
+      },
+      "current_title": "坦率（宜人性）：清楚、非操纵地表达 | FermatMind",
+      "proposed_title": "坦率是什么意思？大五人格宜人性刻面 | FermatMind",
+      "current_description": "坦率反映一个人倾向清楚、非操纵地表达——不等于说出一切、生硬表达或放弃隐私。",
+      "proposed_description": "坦率是宜人性中的一个刻面，描述清楚、非操纵地表达的倾向；它不等于说出一切、生硬表达或放弃隐私。",
+      "current_H1": "坦率（宜人性）：清楚、非操纵地表达",
+      "proposed_H1_or_KEEP": "坦率是什么意思？大五人格宜人性刻面",
+      "current_intro_summary": "坦率反映一个人倾向清楚、非操纵地表达——不等于说出一切、生硬表达或放弃隐私。",
+      "proposed_intro_or_exact_action": "坦率是大五人格宜人性中的一个刻面，描述清楚、非操纵地表达的倾向。它不等于说出一切、生硬表达或放弃隐私，也不能单独判断诚实或道德。",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Name OCEAN dimension/facet relationship, treat scores as continua, expose method/measurement boundary, and remain text-only.",
+      "author_or_reviewer_requirement": "Named FermatMind editorial/method reviewer in the backend asset/package; no invented credential or person schema.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/zh/personality/big-five"
+      ],
+      "exact_anchor_text": [
+        "坦率"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/zh/personality/big-five/facets/straightforwardness"
+      ],
+      "cannibalization_action": "Protect the declared primary role; supporting pages link to this URL only for the matching intent.",
+      "current_schema": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "WebPage"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "fap-api PersonalityPublicContentAsset + public personality APIs",
+      "implementation_surface": "Backend public-content asset; Big Five/Enneagram remains text-only with no image proposal",
+      "risk": "LOW–MEDIUM — metadata/intro change may alter title rendering and ranking; no URL or canonical change.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/zh/personality/big-five/facets/straightforwardness",
+        "canonical": "https://fermatmind.com/zh/personality/big-five/facets/straightforwardness",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/personality.xml"
+        ],
+        "hreflang": [
+          {
+            "locale": "en",
+            "href": "https://fermatmind.com/en/personality/big-five/facets/straightforwardness"
+          },
+          {
+            "locale": "zh-CN",
+            "href": "https://fermatmind.com/zh/personality/big-five/facets/straightforwardness"
+          },
+          {
+            "locale": "x-default",
+            "href": "https://fermatmind.com/en/personality/big-five/facets/straightforwardness"
+          }
+        ],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 19,
+      "url": "https://fermatmind.com/en/personality/big-five/facets/dutifulness",
+      "locale": "en",
+      "page_type": "Big Five facet",
+      "action_lane": "EXECUTE",
+      "confidence": "MEDIUM",
+      "entity_cluster": "Big Five",
+      "primary_query_cluster": "dutifulness",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "definition/self-understanding",
+      "primary_url_role": "en Big Five definition/self-understanding owner for “dutifulness”",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/en/personality/big-five"
+      ],
+      "forbidden_queries": [
+        "NONE — preserve the declared primary intent boundary"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 56,
+          "ctr": "0.0%",
+          "position": 6
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 0,
+          "impressions": 21,
+          "ctr": "0.0%",
+          "position": 6.9
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": "—",
+          "position": null
+        },
+        "visible_primary_query": {
+          "clicks": 0,
+          "impressions": 19,
+          "ctr": "0.0%",
+          "position": 4.7
+        },
+        "change_summary": "C+0; I+166.7%; CTR 0; P+0.9"
+      },
+      "current_title": "Dutifulness: Commitment to Obligations | FermatMind",
+      "proposed_title": "Dutifulness Meaning: Obligations, Rules and Commitments | FermatMind",
+      "current_description": "Dutifulness concerns how strongly promises, rules, and obligations guide action. It is not a measure of morality, obedience, kindness, or whether someone deserves trust.",
+      "proposed_description": "Dutifulness is a Big Five Conscientiousness facet about how promises and obligations guide action. It is not morality, obedience, or guaranteed trustworthiness.",
+      "current_H1": "Dutifulness: Commitment to Obligations",
+      "proposed_H1_or_KEEP": "Dutifulness Meaning: Obligations, Rules and Commitments",
+      "current_intro_summary": "Dutifulness concerns how strongly promises, rules, and obligations guide action. It is not a measure of morality, obedience, kindness, or whether someone deserves trust.",
+      "proposed_intro_or_exact_action": "Dutifulness is a Big Five Conscientiousness facet describing how strongly promises, rules, and obligations guide action. It is not morality, obedience, or guaranteed trustworthiness.",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Name OCEAN dimension/facet relationship, treat scores as continua, expose method/measurement boundary, and remain text-only.",
+      "author_or_reviewer_requirement": "Named FermatMind editorial/method reviewer in the backend asset/package; no invented credential or person schema.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/en/personality/big-five"
+      ],
+      "exact_anchor_text": [
+        "dutifulness"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/en/personality/big-five/facets/dutifulness"
+      ],
+      "cannibalization_action": "Protect the declared primary role; supporting pages link to this URL only for the matching intent.",
+      "current_schema": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "WebPage"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "fap-api PersonalityPublicContentAsset + public personality APIs",
+      "implementation_surface": "Backend public-content asset; Big Five/Enneagram remains text-only with no image proposal",
+      "risk": "LOW–MEDIUM — metadata/intro change may alter title rendering and ranking; no URL or canonical change.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/en/personality/big-five/facets/dutifulness",
+        "canonical": "https://fermatmind.com/en/personality/big-five/facets/dutifulness",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/personality.xml"
+        ],
+        "hreflang": [
+          {
+            "locale": "en",
+            "href": "https://fermatmind.com/en/personality/big-five/facets/dutifulness"
+          },
+          {
+            "locale": "zh-CN",
+            "href": "https://fermatmind.com/zh/personality/big-five/facets/dutifulness"
+          },
+          {
+            "locale": "x-default",
+            "href": "https://fermatmind.com/en/personality/big-five/facets/dutifulness"
+          }
+        ],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 20,
+      "url": "https://fermatmind.com/zh/personality/enneagram/wings/8w9",
+      "locale": "zh",
+      "page_type": "Enneagram wing",
+      "action_lane": "EXECUTE",
+      "confidence": "MEDIUM",
+      "entity_cluster": "Enneagram",
+      "primary_query_cluster": "8w9",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "definition/self-understanding",
+      "primary_url_role": "zh Enneagram definition/self-understanding owner for “8w9”",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/zh/personality/enneagram",
+        "https://fermatmind.com/zh/personality/enneagram/type-8"
+      ],
+      "forbidden_queries": [
+        "NONE — preserve the declared primary intent boundary"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 2,
+          "impressions": 61,
+          "ctr": "3.3%",
+          "position": 7.9
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": "0.0%",
+          "position": 3
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 12,
+          "ctr": "0.0%",
+          "position": 5.8
+        },
+        "visible_primary_query": {
+          "clicks": 0,
+          "impressions": 11,
+          "ctr": "0.0%",
+          "position": 4.6
+        },
+        "change_summary": "C+2; I+6000%; CTR+3.28pp; P-4.9"
+      },
+      "current_title": "8w9：以第八型为主、关注稳态力量、领地与延迟反应的翼型假设 | FermatMind",
+      "proposed_title": "8w9 人格：第八型核心、稳态力量与常见误判 | FermatMind",
+      "current_description": "8w9 是证据有限的翼型假设：第八型自主与稳态力量仍为核心，第九型可能增加领地、耐受与延迟反应。平静权威或有压迫感的存在不能证明 8w9；财产职责、文化克制与恢复需要、资历、安保岗位和缓慢制度流程都可能造成相似表现。",
+      "proposed_description": "8w9 是以第八型自主、边界与控制为核心、由第九型稳态和延迟反应倾向修饰的证据有限翼型假设。",
+      "current_H1": "8w9：以第八型为主、关注稳态力量、领地与延迟反应的翼型假设",
+      "proposed_H1_or_KEEP": "8w9 人格：第八型核心与稳态力量",
+      "current_intro_summary": "8w9 是证据有限的翼型假设：第八型自主与稳态力量仍为核心，第九型可能增加领地、耐受与延迟反应。平静权威或有压迫感的存在不能证明 8w9；财产职责、文化克制与恢复需要、资历、安保岗位和缓慢制度流程都可能造成相似表现。",
+      "proposed_intro_or_exact_action": "8w9 通常指以第八型对自主、边界和控制的关注为核心，并可能由第九型的稳态力量与延迟反应倾向修饰。它只是证据有限的翼型假设，安静强硬或保护欲不能单独证明 8w9。",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Core type remains primary; wing/instinct is explicitly provisional and evidence-limited; no diagnostic or deterministic claim.",
+      "author_or_reviewer_requirement": "Named FermatMind editorial/method reviewer in the backend asset/package; no invented credential or person schema.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/zh/personality/enneagram",
+        "https://fermatmind.com/zh/personality/enneagram/type-8"
+      ],
+      "exact_anchor_text": [
+        "8w9 人格",
+        "8w9 人格"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/zh/personality/enneagram/wings/8w9"
+      ],
+      "cannibalization_action": "Protect the declared primary role; supporting pages link to this URL only for the matching intent.",
+      "current_schema": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "WebPage"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "fap-api PersonalityPublicContentAsset + public personality APIs",
+      "implementation_surface": "Backend public-content asset; Big Five/Enneagram remains text-only with no image proposal",
+      "risk": "LOW–MEDIUM — metadata/intro change may alter title rendering and ranking; no URL or canonical change.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/zh/personality/enneagram/wings/8w9",
+        "canonical": "https://fermatmind.com/zh/personality/enneagram/wings/8w9",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/personality.xml"
+        ],
+        "hreflang": [
+          {
+            "locale": "en",
+            "href": "https://fermatmind.com/en/personality/enneagram/wings/8w9"
+          },
+          {
+            "locale": "zh-CN",
+            "href": "https://fermatmind.com/zh/personality/enneagram/wings/8w9"
+          },
+          {
+            "locale": "x-default",
+            "href": "https://fermatmind.com/en/personality/enneagram/wings/8w9"
+          }
+        ],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 21,
+      "url": "https://fermatmind.com/zh/articles/are-infj-men-rare-or-socially-silenced",
+      "locale": "zh",
+      "page_type": "Article",
+      "action_lane": "EXECUTE",
+      "confidence": "MEDIUM",
+      "entity_cluster": "Editorial knowledge",
+      "primary_query_cluster": "infj男",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "informational/problem-solving",
+      "primary_url_role": "zh Editorial knowledge informational/problem-solving owner for “infj男”",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/zh/articles"
+      ],
+      "forbidden_queries": [
+        "NONE — preserve the declared primary intent boundary"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 6,
+          "impressions": 212,
+          "ctr": "2.8%",
+          "position": 8.4
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 4,
+          "impressions": 115,
+          "ctr": "3.5%",
+          "position": 10.1
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 1,
+          "impressions": 35,
+          "ctr": "2.9%",
+          "position": 7.3
+        },
+        "visible_primary_query": {
+          "clicks": 0,
+          "impressions": 16,
+          "ctr": "0.0%",
+          "position": 8.3
+        },
+        "change_summary": "C+2; I+84.3%; CTR-0.65pp; P+1.7"
+      },
+      "current_title": "INFJ 男性为什么常被认为少见？数据来源与类型误读 | FermatMind",
+      "proposed_title": "INFJ 男生少见吗？数据、性别规范与类型误读 | FermatMind",
+      "current_description": "INFJ 男性真的少见吗？本文区分测试样本、人口比例、性别表达规范和可见度偏差，不把高敏感或情绪克制等同于 INFJ。",
+      "proposed_description": "INFJ 男生是否少见取决于样本与测试工具。本文区分人口比例、测试样本、性别表达规范和可见度偏差，不把高敏感或情绪克制等同于 INFJ。",
+      "current_H1": "INFJ 男性为什么常被认为少见？数据来源、性别规范与类型误读",
+      "proposed_H1_or_KEEP": "INFJ 男生少见吗？数据、性别规范与类型误读",
+      "current_intro_summary": "INFJ 男性的公开比例依赖具体样本与工具；性别规范可能影响表达和可见度，却不能证明大量 INFJ 被隐藏。",
+      "proposed_intro_or_exact_action": "INFJ 男生是否少见，不能只看一张网络比例图；结论取决于抽样、测试工具和性别表达规范造成的可见度偏差。高敏感、安静或情绪克制也不能单独证明 INFJ。",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Answer the named intent directly; every factual claim must be supported by the CMS record or an attributable public source.",
+      "author_or_reviewer_requirement": "CMS author attribution required; reviewer checks source fidelity, claim boundary, and visible/schema parity.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/zh/articles"
+      ],
+      "exact_anchor_text": [
+        "infj男"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/zh/articles/are-infj-men-rare-or-socially-silenced"
+      ],
+      "cannibalization_action": "Protect the declared primary role; supporting pages link to this URL only for the matching intent.",
+      "current_schema": [
+        "Answer",
+        "Article",
+        "BreadcrumbList",
+        "FAQPage",
+        "Person"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "fap-api CMS Article + public article SEO/JSON-LD projection",
+      "implementation_surface": "CMS Article SEO/content fields; frontend renderer consumes authority and must not add fallback editorial copy",
+      "risk": "LOW–MEDIUM — metadata/intro change may alter title rendering and ranking; no URL or canonical change.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/zh/articles/are-infj-men-rare-or-socially-silenced",
+        "canonical": "https://fermatmind.com/zh/articles/are-infj-men-rare-or-socially-silenced",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/articles.xml"
+        ],
+        "hreflang": [],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 23,
+      "url": "https://fermatmind.com/zh/tests/big-five-personality-test-ocean-model",
+      "locale": "zh",
+      "page_type": "Test",
+      "action_lane": "CANNIBALIZATION",
+      "confidence": "MEDIUM",
+      "entity_cluster": "Big Five",
+      "primary_query_cluster": "大五人格测试",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "transactional-assessment",
+      "primary_url_role": "中文大五人格测试行动页",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/zh/personality/big-five",
+        "https://fermatmind.com/zh/articles/big-five-tool-guide"
+      ],
+      "forbidden_queries": [
+        "大五人格是什么",
+        "大五人格分数怎么看"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 1,
+          "impressions": 131,
+          "ctr": "0.8%",
+          "position": 7.8
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 2,
+          "impressions": 310,
+          "ctr": "0.7%",
+          "position": 9.7
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 35,
+          "ctr": "0.0%",
+          "position": null
+        },
+        "visible_primary_query": {
+          "clicks": 0,
+          "impressions": 7,
+          "ctr": "0.0%",
+          "position": 12.4
+        },
+        "change_summary": "C-1; I-57.7%; CTR+0.11pp; P+1.8"
+      },
+      "current_title": "大五人格测试（OCEAN 模型） | FermatMind",
+      "proposed_title": "免费大五人格测试（OCEAN）：120题完整结果 | FermatMind",
+      "current_description": "用一次测评了解开放性、尽责性、外倾性、宜人性与神经质。",
+      "proposed_description": "约15分钟完成120题大五人格测试，查看开放性、尽责性、外倾性、宜人性与神经质结果。用于自我理解，不作诊断或筛选。",
+      "current_H1": "大五人格免费测试",
+      "proposed_H1_or_KEEP": "免费大五人格测试（OCEAN）",
+      "current_intro_summary": "当你希望用约 15 分钟完成 120 题，并获得更清晰的下一步判断时，适合使用这份测评。",
+      "proposed_intro_or_exact_action": "用约15分钟完成120题，获得开放性、尽责性、外倾性、宜人性与神经质五个维度的结果。结果是自我观察线索，不是诊断、能力判断或职业保证。",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Name OCEAN dimension/facet relationship, treat scores as continua, expose method/measurement boundary, and remain text-only.",
+      "author_or_reviewer_requirement": "Named FermatMind editorial/method reviewer in the backend asset/package; no invented credential or person schema.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/zh/personality/big-five",
+        "https://fermatmind.com/zh/articles/big-five-tool-guide"
+      ],
+      "exact_anchor_text": [
+        "免费大五人格测试",
+        "开始大五人格测试"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/zh/tests/big-five-personality-test-ocean-model"
+      ],
+      "cannibalization_action": "行动意图归测试页；概念总览归人格 hub；使用方法与分数边界归工具文章。",
+      "current_schema": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "SoftwareApplication",
+        "WebPage"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "backend scale/test API + landing_surfaces/page_blocks/SEO lookup",
+      "implementation_surface": "Backend scale/landing authority; frontend assessment renderer and product flow only",
+      "risk": "MEDIUM — owner reassignment can shift impressions between sibling URLs before clicks stabilize.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/zh/tests/big-five-personality-test-ocean-model",
+        "canonical": "https://fermatmind.com/zh/tests/big-five-personality-test-ocean-model",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/tests.xml"
+        ],
+        "hreflang": [
+          {
+            "locale": "en",
+            "href": "https://fermatmind.com/en/tests/big-five-personality-test-ocean-model"
+          },
+          {
+            "locale": "zh-CN",
+            "href": "https://fermatmind.com/zh/tests/big-five-personality-test-ocean-model"
+          },
+          {
+            "locale": "x-default",
+            "href": "https://fermatmind.com/en/tests/big-five-personality-test-ocean-model"
+          }
+        ],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 27,
+      "url": "https://fermatmind.com/zh/personality/big-five/neuroticism",
+      "locale": "zh",
+      "page_type": "Big Five",
+      "action_lane": "EXECUTE",
+      "confidence": "MEDIUM",
+      "entity_cluster": "Big Five",
+      "primary_query_cluster": "neuroticism 中文",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "definition/self-understanding",
+      "primary_url_role": "zh Big Five definition/self-understanding owner for “neuroticism 中文”",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/zh/personality/big-five"
+      ],
+      "forbidden_queries": [
+        "NONE — preserve the declared primary intent boundary"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 85,
+          "ctr": "0%",
+          "position": 9.9
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": "—",
+          "position": null
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 67,
+          "ctr": "0%",
+          "position": 9.1
+        },
+        "visible_primary_query": {
+          "clicks": 0,
+          "impressions": 14,
+          "ctr": "0%",
+          "position": 6.3
+        },
+        "change_summary": "新曝光"
+      },
+      "current_title": "神经质（Neuroticism）：情绪敏感度与压力反应的维度 | FermatMind",
+      "proposed_title": "Neuroticism 中文是什么意思？神经质与压力反应 | FermatMind",
+      "current_description": "神经质描述你对压力和负面情绪的敏感程度。这是人格维度的技术术语，不是心理疾病诊断。高神经质不等于情绪不稳定的人，低神经质也不等于无情。",
+      "proposed_description": "Neuroticism 中文常译为神经质或情绪敏感性，描述对压力与负面情绪的敏感程度；它是人格维度，不是心理疾病诊断。",
+      "current_H1": "神经质（Neuroticism）：情绪敏感度与压力反应的维度",
+      "proposed_H1_or_KEEP": "Neuroticism 中文：神经质与压力反应",
+      "current_intro_summary": "神经质描述你对压力和负面情绪的敏感程度。这是人格维度的技术术语，不是心理疾病诊断。高神经质不等于情绪不稳定的人，低神经质也不等于无情。",
+      "proposed_intro_or_exact_action": "Neuroticism 中文常译为“神经质”或“情绪敏感性”，描述一个人对压力和负面情绪的敏感程度。它是连续的人格维度，不是心理疾病诊断。",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Name OCEAN dimension/facet relationship, treat scores as continua, expose method/measurement boundary, and remain text-only.",
+      "author_or_reviewer_requirement": "Named FermatMind editorial/method reviewer in the backend asset/package; no invented credential or person schema.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/zh/personality/big-five"
+      ],
+      "exact_anchor_text": [
+        "neuroticism 中文"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/zh/personality/big-five/neuroticism"
+      ],
+      "cannibalization_action": "Protect the declared primary role; supporting pages link to this URL only for the matching intent.",
+      "current_schema": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "WebPage"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "fap-api PersonalityPublicContentAsset + public personality APIs",
+      "implementation_surface": "Backend public-content asset; Big Five/Enneagram remains text-only with no image proposal",
+      "risk": "LOW–MEDIUM — metadata/intro change may alter title rendering and ranking; no URL or canonical change.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/zh/personality/big-five/neuroticism",
+        "canonical": "https://fermatmind.com/zh/personality/big-five/neuroticism",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/personality.xml"
+        ],
+        "hreflang": [
+          {
+            "locale": "en",
+            "href": "https://fermatmind.com/en/personality/big-five/neuroticism"
+          },
+          {
+            "locale": "zh-CN",
+            "href": "https://fermatmind.com/zh/personality/big-five/neuroticism"
+          },
+          {
+            "locale": "x-default",
+            "href": "https://fermatmind.com/en/personality/big-five/neuroticism"
+          }
+        ],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 31,
+      "url": "https://fermatmind.com/zh/personality/big-five/agreeableness-low",
+      "locale": "zh",
+      "page_type": "Big Five",
+      "action_lane": "EXECUTE",
+      "confidence": "MEDIUM",
+      "entity_cluster": "Big Five",
+      "primary_query_cluster": "低宜人性",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "definition/self-understanding",
+      "primary_url_role": "zh Big Five definition/self-understanding owner for “低宜人性”",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/zh/personality/big-five"
+      ],
+      "forbidden_queries": [
+        "NONE — preserve the declared primary intent boundary"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 38,
+          "ctr": "0%",
+          "position": 6.3
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 0,
+          "impressions": 20,
+          "ctr": "0%",
+          "position": 9.9
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 7,
+          "ctr": "0%",
+          "position": 6.1
+        },
+        "visible_primary_query": {
+          "clicks": 0,
+          "impressions": 11,
+          "ctr": "0%",
+          "position": 6
+        },
+        "change_summary": "I+90%; P+3.6"
+      },
+      "current_title": "较低宜人性：直接表达、竞争取向与自我利益优先 | FermatMind",
+      "proposed_title": "低宜人性是什么意思？直接表达、竞争取向与边界 | FermatMind",
+      "current_description": "宜人性倾向较低的人倾向于优先考虑直接表达、竞争关系和自我利益。这不等于冷漠或冷酷——在竞争激烈或高利害决策场景中，这种倾向可能具有适应价值。",
+      "proposed_description": "低宜人性描述更直接、竞争和优先自我利益的倾向；它不等于冷漠、恶意或缺乏道德，在高利害场景也可能具有适应价值。",
+      "current_H1": "较低宜人性：直接表达、竞争取向与自我利益优先",
+      "proposed_H1_or_KEEP": "低宜人性：直接表达、竞争取向与边界",
+      "current_intro_summary": "宜人性倾向较低的人倾向于优先考虑直接表达、竞争关系和自我利益。这不等于冷漠或冷酷——在竞争激烈或高利害决策场景中，这种倾向可能具有适应价值。",
+      "proposed_intro_or_exact_action": "低宜人性描述更直接、竞争和优先自我利益的倾向。它不等于冷漠、恶意或缺乏道德，在谈判、危机和高利害场景也可能具有适应价值。",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Name OCEAN dimension/facet relationship, treat scores as continua, expose method/measurement boundary, and remain text-only.",
+      "author_or_reviewer_requirement": "Named FermatMind editorial/method reviewer in the backend asset/package; no invented credential or person schema.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/zh/personality/big-five"
+      ],
+      "exact_anchor_text": [
+        "低宜人性"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/zh/personality/big-five/agreeableness-low"
+      ],
+      "cannibalization_action": "Protect the declared primary role; supporting pages link to this URL only for the matching intent.",
+      "current_schema": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "WebPage"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "fap-api PersonalityPublicContentAsset + public personality APIs",
+      "implementation_surface": "Backend public-content asset; Big Five/Enneagram remains text-only with no image proposal",
+      "risk": "LOW–MEDIUM — metadata/intro change may alter title rendering and ranking; no URL or canonical change.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/zh/personality/big-five/agreeableness-low",
+        "canonical": "https://fermatmind.com/zh/personality/big-five/agreeableness-low",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/personality.xml"
+        ],
+        "hreflang": [
+          {
+            "locale": "en",
+            "href": "https://fermatmind.com/en/personality/big-five/agreeableness-low"
+          },
+          {
+            "locale": "zh-CN",
+            "href": "https://fermatmind.com/zh/personality/big-five/agreeableness-low"
+          },
+          {
+            "locale": "x-default",
+            "href": "https://fermatmind.com/en/personality/big-five/agreeableness-low"
+          }
+        ],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 32,
+      "url": "https://fermatmind.com/zh/personality/enneagram/wings/5w4",
+      "locale": "zh",
+      "page_type": "Enneagram wing",
+      "action_lane": "EXECUTE",
+      "confidence": "MEDIUM",
+      "entity_cluster": "Enneagram",
+      "primary_query_cluster": "5w4",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "definition/self-understanding",
+      "primary_url_role": "zh Enneagram definition/self-understanding owner for “5w4”",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/zh/personality/enneagram",
+        "https://fermatmind.com/zh/personality/enneagram/type-5"
+      ],
+      "forbidden_queries": [
+        "NONE — preserve the declared primary intent boundary"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 1,
+          "impressions": 55,
+          "ctr": "1.8%",
+          "position": 5.4
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": "0%",
+          "position": 5
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 21,
+          "ctr": "0%",
+          "position": 5.9
+        },
+        "visible_primary_query": {
+          "clicks": 0,
+          "impressions": 12,
+          "ctr": "0%",
+          "position": 7.6
+        },
+        "change_summary": "I+2650%; P-0.4"
+      },
+      "current_title": "5w4：以第五型为主、关注个人综合与意义的翼型假设 | FermatMind",
+      "proposed_title": "5w4 人格：第五型核心、意义表达与常见误判 | FermatMind",
+      "current_description": "5w4 是证据有限的翼型假设：第五型的知识、胜任准备、隐私与精力边界仍是核心，第四型只可能修饰为个人综合、意义感与原创表达。独特作品不能证明 5w4，因为创意训练、专业细分、文化语境、受众要求与项目署名也会产生相似结果。本页直接比较知识胜任准备隐私如何保持核心、个人综合意义原创如何作为修饰，以及创意训练专业细分文化如何形成替代解释。",
+      "proposed_description": "5w4 是以第五型知识、胜任与精力边界为核心、由第四型个人意义和独特表达修饰的证据有限翼型假设。",
+      "current_H1": "5w4：以第五型为主、关注个人综合与意义的翼型假设",
+      "proposed_H1_or_KEEP": "5w4 人格：第五型核心与意义表达",
+      "current_intro_summary": "5w4 是证据有限的翼型假设：第五型的知识、胜任准备、隐私与精力边界仍是核心，第四型只可能修饰为个人综合、意义感与原创表达。独特作品不能证明 5w4，因为创意训练、专业细分、文化语境、受众要求与项目署名也会产生相似结果。本页直接比较知识胜任准备隐私如何保持核心、个人综合意义原创如何作为修饰，以及创意训练专业细分文化如何形成替代解释。",
+      "proposed_intro_or_exact_action": "5w4 通常指以第五型对知识、胜任和精力边界的关注为核心，并可能由第四型的个人意义与独特表达修饰。它只是证据有限的翼型假设，独处或创作不能单独证明 5w4。",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Core type remains primary; wing/instinct is explicitly provisional and evidence-limited; no diagnostic or deterministic claim.",
+      "author_or_reviewer_requirement": "Named FermatMind editorial/method reviewer in the backend asset/package; no invented credential or person schema.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/zh/personality/enneagram",
+        "https://fermatmind.com/zh/personality/enneagram/type-5"
+      ],
+      "exact_anchor_text": [
+        "5w4 人格",
+        "5w4 人格"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/zh/personality/enneagram/wings/5w4"
+      ],
+      "cannibalization_action": "Protect the declared primary role; supporting pages link to this URL only for the matching intent.",
+      "current_schema": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "WebPage"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "fap-api PersonalityPublicContentAsset + public personality APIs",
+      "implementation_surface": "Backend public-content asset; Big Five/Enneagram remains text-only with no image proposal",
+      "risk": "LOW–MEDIUM — metadata/intro change may alter title rendering and ranking; no URL or canonical change.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/zh/personality/enneagram/wings/5w4",
+        "canonical": "https://fermatmind.com/zh/personality/enneagram/wings/5w4",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/personality.xml"
+        ],
+        "hreflang": [
+          {
+            "locale": "en",
+            "href": "https://fermatmind.com/en/personality/enneagram/wings/5w4"
+          },
+          {
+            "locale": "zh-CN",
+            "href": "https://fermatmind.com/zh/personality/enneagram/wings/5w4"
+          },
+          {
+            "locale": "x-default",
+            "href": "https://fermatmind.com/en/personality/enneagram/wings/5w4"
+          }
+        ],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 36,
+      "url": "https://fermatmind.com/zh/personality/enneagram/wings/4w3",
+      "locale": "zh",
+      "page_type": "Enneagram wing",
+      "action_lane": "EXECUTE",
+      "confidence": "MEDIUM",
+      "entity_cluster": "Enneagram",
+      "primary_query_cluster": "4w3",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "definition/self-understanding",
+      "primary_url_role": "zh Enneagram definition/self-understanding owner for “4w3”",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/zh/personality/enneagram",
+        "https://fermatmind.com/zh/personality/enneagram/type-4"
+      ],
+      "forbidden_queries": [
+        "NONE — preserve the declared primary intent boundary"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 65,
+          "ctr": "0%",
+          "position": 6.3
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": "—",
+          "position": null
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 13,
+          "ctr": "0%",
+          "position": 6.2
+        },
+        "visible_primary_query": {
+          "clicks": 0,
+          "impressions": 13,
+          "ctr": "0%",
+          "position": 6
+        },
+        "change_summary": "新曝光"
+      },
+      "current_title": "4w3：以意义为核心、以可见表达为修饰的翼型假设 | FermatMind",
+      "proposed_title": "4w3 人格：第四型核心、可见表达与常见误判 | FermatMind",
+      "current_description": "4w3 是证据有限、以第四型为核心的传统翼型假设：对身份和意义的关注，可能受到第三型相邻主题中的可见交付、受众认可与适配所修饰。个人品牌不能证明翼型，作品集规则、晋升激励和表达训练都可能形成相似表现。",
+      "proposed_description": "4w3 是以第四型身份、意义与真实感为核心、由第三型可见表达和成果倾向修饰的证据有限翼型假设。",
+      "current_H1": "4w3：以意义为核心、以可见表达为修饰的翼型假设",
+      "proposed_H1_or_KEEP": "4w3 人格：第四型核心与可见表达",
+      "current_intro_summary": "4w3 是证据有限、以第四型为核心的传统翼型假设：对身份和意义的关注，可能受到第三型相邻主题中的可见交付、受众认可与适配所修饰。个人品牌不能证明翼型，作品集规则、晋升激励和表达训练都可能形成相似表现。",
+      "proposed_intro_or_exact_action": "4w3 通常指以第四型对身份、意义和真实感的关注为核心，并可能由第三型的可见表达与成果倾向修饰。它只是证据有限的翼型假设，审美或表现欲不能单独证明 4w3。",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Core type remains primary; wing/instinct is explicitly provisional and evidence-limited; no diagnostic or deterministic claim.",
+      "author_or_reviewer_requirement": "Named FermatMind editorial/method reviewer in the backend asset/package; no invented credential or person schema.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/zh/personality/enneagram",
+        "https://fermatmind.com/zh/personality/enneagram/type-4"
+      ],
+      "exact_anchor_text": [
+        "4w3 人格",
+        "4w3 人格"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/zh/personality/enneagram/wings/4w3"
+      ],
+      "cannibalization_action": "Protect the declared primary role; supporting pages link to this URL only for the matching intent.",
+      "current_schema": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "WebPage"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "fap-api PersonalityPublicContentAsset + public personality APIs",
+      "implementation_surface": "Backend public-content asset; Big Five/Enneagram remains text-only with no image proposal",
+      "risk": "LOW–MEDIUM — metadata/intro change may alter title rendering and ranking; no URL or canonical change.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/zh/personality/enneagram/wings/4w3",
+        "canonical": "https://fermatmind.com/zh/personality/enneagram/wings/4w3",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/personality.xml"
+        ],
+        "hreflang": [
+          {
+            "locale": "en",
+            "href": "https://fermatmind.com/en/personality/enneagram/wings/4w3"
+          },
+          {
+            "locale": "zh-CN",
+            "href": "https://fermatmind.com/zh/personality/enneagram/wings/4w3"
+          },
+          {
+            "locale": "x-default",
+            "href": "https://fermatmind.com/en/personality/enneagram/wings/4w3"
+          }
+        ],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 42,
+      "url": "https://fermatmind.com/zh/personality/enneagram/wings/9w1",
+      "locale": "zh",
+      "page_type": "Enneagram wing",
+      "action_lane": "EXECUTE",
+      "confidence": "MEDIUM",
+      "entity_cluster": "Enneagram",
+      "primary_query_cluster": "9w1人格",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "definition/self-understanding",
+      "primary_url_role": "zh Enneagram definition/self-understanding owner for “9w1人格”",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/zh/personality/enneagram",
+        "https://fermatmind.com/zh/personality/enneagram/type-9"
+      ],
+      "forbidden_queries": [
+        "NONE — preserve the declared primary intent boundary"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 46,
+          "ctr": "0%",
+          "position": 7.2
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": "0%",
+          "position": 8.5
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 6,
+          "ctr": "0%",
+          "position": 9.5
+        },
+        "visible_primary_query": {
+          "clicks": 0,
+          "impressions": 12,
+          "ctr": "0%",
+          "position": 9.4
+        },
+        "change_summary": "I+2200%; P+1.3"
+      },
+      "current_title": "9w1：稳定连接下的原则与秩序修饰假设 | FermatMind",
+      "proposed_title": "9w1 人格：第九型核心、原则秩序与常见误判 | FermatMind",
+      "current_description": "9w1是证据有限的翼型观察假设，以九号的稳定连接倾向为核心，把一号式秩序、公平标准、克制和安静纠正作为可能修饰。礼貌、尽责或重视流程不能证明9w1；合规要求、专业训练、文化表达、完美主义、低职位或报复风险也会造成类似表现。",
+      "proposed_description": "9w1 是以第九型稳定、连接与避免冲突为核心、由第一型原则和秩序倾向修饰的证据有限翼型假设。",
+      "current_H1": "9w1：稳定连接下的原则与秩序修饰假设",
+      "proposed_H1_or_KEEP": "9w1 人格：第九型核心与原则秩序",
+      "current_intro_summary": "9w1是证据有限的翼型观察假设，以九号的稳定连接倾向为核心，把一号式秩序、公平标准、克制和安静纠正作为可能修饰。礼貌、尽责或重视流程不能证明9w1；合规要求、专业训练、文化表达、完美主义、低职位或报复风险也会造成类似表现。",
+      "proposed_intro_or_exact_action": "9w1 通常指以第九型对稳定、连接和避免冲突的关注为核心，并可能由第一型的原则与秩序倾向修饰。它只是证据有限的翼型假设，温和或守规则不能单独证明 9w1。",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Core type remains primary; wing/instinct is explicitly provisional and evidence-limited; no diagnostic or deterministic claim.",
+      "author_or_reviewer_requirement": "Named FermatMind editorial/method reviewer in the backend asset/package; no invented credential or person schema.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/zh/personality/enneagram",
+        "https://fermatmind.com/zh/personality/enneagram/type-9"
+      ],
+      "exact_anchor_text": [
+        "9w1 人格",
+        "9w1 人格"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/zh/personality/enneagram/wings/9w1"
+      ],
+      "cannibalization_action": "Protect the declared primary role; supporting pages link to this URL only for the matching intent.",
+      "current_schema": [
+        "Answer",
+        "BreadcrumbList",
+        "FAQPage",
+        "WebPage"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "fap-api PersonalityPublicContentAsset + public personality APIs",
+      "implementation_surface": "Backend public-content asset; Big Five/Enneagram remains text-only with no image proposal",
+      "risk": "LOW–MEDIUM — metadata/intro change may alter title rendering and ranking; no URL or canonical change.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/zh/personality/enneagram/wings/9w1",
+        "canonical": "https://fermatmind.com/zh/personality/enneagram/wings/9w1",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/personality.xml"
+        ],
+        "hreflang": [
+          {
+            "locale": "en",
+            "href": "https://fermatmind.com/en/personality/enneagram/wings/9w1"
+          },
+          {
+            "locale": "zh-CN",
+            "href": "https://fermatmind.com/zh/personality/enneagram/wings/9w1"
+          },
+          {
+            "locale": "x-default",
+            "href": "https://fermatmind.com/en/personality/enneagram/wings/9w1"
+          }
+        ],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 52,
+      "url": "https://fermatmind.com/zh/personality/istj-a",
+      "locale": "zh",
+      "page_type": "MBTI profile",
+      "action_lane": "EXECUTE",
+      "confidence": "HIGH",
+      "entity_cluster": "MBTI / 16 personalities",
+      "primary_query_cluster": "istj-a",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "definition/self-understanding",
+      "primary_url_role": "zh MBTI / 16 personalities definition/self-understanding owner for “istj-a”",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/zh/personality"
+      ],
+      "forbidden_queries": [
+        "NONE — preserve the declared primary intent boundary"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 3,
+          "impressions": 193,
+          "ctr": "1.6%",
+          "position": 9.5
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 6,
+          "impressions": 535,
+          "ctr": "1.1%",
+          "position": 9.6
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 1,
+          "impressions": 99,
+          "ctr": "1%",
+          "position": 8.1
+        },
+        "visible_primary_query": {
+          "clicks": 2,
+          "impressions": 23,
+          "ctr": "8.7%",
+          "position": 11.9
+        },
+        "change_summary": "C-3; I-63.9%; P+0.0"
+      },
+      "current_title": "ISTJ-A 物流师人格：特点、职业、关系与 A/T 差异 | FermatMind",
+      "proposed_title": "KEEP — ISTJ-A 物流师人格：特点、职业、关系与 A/T 差异 | FermatMind",
+      "current_description": "ISTJ-A 是什么？了解 物流师 的核心特点、适合谁、不适合谁、常见误解、A/T 差异、职业关系压力场景和 FAQ。",
+      "proposed_description": "KEEP — ISTJ-A 是什么？了解 物流师 的核心特点、适合谁、不适合谁、常见误解、A/T 差异、职业关系压力场景和 FAQ。",
+      "current_H1": "ISTJ-A 物流师人格：特点、职业、关系与 A/T 差异 | FermatMind",
+      "proposed_H1_or_KEEP": "ISTJ-A 物流师人格：特点、职业、关系与 A/T 差异",
+      "current_intro_summary": "你像一条安静却牢固的主干线：不喧哗、不抢风头，却悄悄撑起一整套秩序与稳定。只要你接手的事情，你就会按标准、一点点做完，让别人可以放心把背后交给你。",
+      "proposed_intro_or_exact_action": "ISTJ-A 是 ISTJ 的自信型变体：重视事实、秩序、责任和稳定执行，A/T 只描述压力反应倾向，不代表能力、成熟度或职业保证。",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Define type/variant entity, distinguish preference from ability/diagnosis, cite the site method boundary and only stable public sources.",
+      "author_or_reviewer_requirement": "Named FermatMind editorial/method reviewer in the backend asset/package; no invented credential or person schema.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/zh/personality"
+      ],
+      "exact_anchor_text": [
+        "istj-a"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/zh/personality/istj-a"
+      ],
+      "cannibalization_action": "Protect the declared primary role; supporting pages link to this URL only for the matching intent.",
+      "current_schema": [
+        "AboutPage",
+        "Answer",
+        "BreadcrumbList",
+        "DefinedTerm",
+        "FAQPage",
+        "WebPage"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "backend personality seo.surface.v1 / public personality bundle",
+      "implementation_surface": "Backend personality SEO/content fields; frontend renderer only",
+      "risk": "LOW–MEDIUM — metadata/intro change may alter title rendering and ranking; no URL or canonical change.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/zh/personality/istj-a",
+        "canonical": "https://fermatmind.com/zh/personality/istj-a",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/personality.xml"
+        ],
+        "hreflang": [
+          {
+            "locale": "en",
+            "href": "https://fermatmind.com/en/personality/istj-a"
+          },
+          {
+            "locale": "zh-CN",
+            "href": "https://fermatmind.com/zh/personality/istj-a"
+          },
+          {
+            "locale": "x-default",
+            "href": "https://fermatmind.com/"
+          }
+        ],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 61,
+      "url": "https://fermatmind.com/zh/personality/isfp-a",
+      "locale": "zh",
+      "page_type": "MBTI profile",
+      "action_lane": "EXECUTE",
+      "confidence": "HIGH",
+      "entity_cluster": "MBTI / 16 personalities",
+      "primary_query_cluster": "isfp-a",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "definition/self-understanding",
+      "primary_url_role": "zh MBTI / 16 personalities definition/self-understanding owner for “isfp-a”",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/zh/personality"
+      ],
+      "forbidden_queries": [
+        "NONE — preserve the declared primary intent boundary"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 3,
+          "impressions": 326,
+          "ctr": "0.9%",
+          "position": 10.6
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 1,
+          "impressions": 190,
+          "ctr": "0.5%",
+          "position": 8.7
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 1,
+          "impressions": 71,
+          "ctr": "1.4%",
+          "position": null
+        },
+        "visible_primary_query": {
+          "clicks": 1,
+          "impressions": 27,
+          "ctr": "3.7%",
+          "position": 9.2
+        },
+        "change_summary": "I+71.6%; P-1.9"
+      },
+      "current_title": "ISFP-A 探险家人格：特点、职业、关系与 A/T 差异 | FermatMind",
+      "proposed_title": "KEEP — ISFP-A 探险家人格：特点、职业、关系与 A/T 差异 | FermatMind",
+      "current_description": "ISFP-A 是什么？了解 探险家 的核心特点、适合谁、不适合谁、常见误解、A/T 差异、职业关系压力场景和 FAQ。",
+      "proposed_description": "KEEP — ISFP-A 是什么？了解 探险家 的核心特点、适合谁、不适合谁、常见误解、A/T 差异、职业关系压力场景和 FAQ。",
+      "current_H1": "ISFP-A 探险家人格：特点、职业、关系与 A/T 差异 | FermatMind",
+      "proposed_H1_or_KEEP": "ISFP-A 探险家人格：特点、职业、关系与 A/T 差异",
+      "current_intro_summary": "你像一阵轻柔的风：不爱高调登场，却总能悄悄把温暖和美感带进别人的生活。你习惯用行动、细节和陪伴去表达在乎，比起“说得多”，你更相信“做得到”。",
+      "proposed_intro_or_exact_action": "ISFP-A 是 ISFP 的自信型变体：重视真实体验、个人价值和灵活行动，A/T 只描述压力反应倾向，不代表能力、成熟度或职业保证。",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Define type/variant entity, distinguish preference from ability/diagnosis, cite the site method boundary and only stable public sources.",
+      "author_or_reviewer_requirement": "Named FermatMind editorial/method reviewer in the backend asset/package; no invented credential or person schema.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/zh/personality"
+      ],
+      "exact_anchor_text": [
+        "isfp-a"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/zh/personality/isfp-a"
+      ],
+      "cannibalization_action": "Protect the declared primary role; supporting pages link to this URL only for the matching intent.",
+      "current_schema": [
+        "AboutPage",
+        "Answer",
+        "BreadcrumbList",
+        "DefinedTerm",
+        "FAQPage",
+        "WebPage"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "backend personality seo.surface.v1 / public personality bundle",
+      "implementation_surface": "Backend personality SEO/content fields; frontend renderer only",
+      "risk": "LOW–MEDIUM — metadata/intro change may alter title rendering and ranking; no URL or canonical change.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/zh/personality/isfp-a",
+        "canonical": "https://fermatmind.com/zh/personality/isfp-a",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/personality.xml"
+        ],
+        "hreflang": [
+          {
+            "locale": "en",
+            "href": "https://fermatmind.com/en/personality/isfp-a"
+          },
+          {
+            "locale": "zh-CN",
+            "href": "https://fermatmind.com/zh/personality/isfp-a"
+          },
+          {
+            "locale": "x-default",
+            "href": "https://fermatmind.com/"
+          }
+        ],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 83,
+      "url": "https://fermatmind.com/zh/personality/esfj-a",
+      "locale": "zh",
+      "page_type": "MBTI profile",
+      "action_lane": "EXECUTE",
+      "confidence": "MEDIUM",
+      "entity_cluster": "MBTI / 16 personalities",
+      "primary_query_cluster": "esfj-a",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "definition/self-understanding",
+      "primary_url_role": "zh MBTI / 16 personalities definition/self-understanding owner for “esfj-a”",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/zh/personality"
+      ],
+      "forbidden_queries": [
+        "NONE — preserve the declared primary intent boundary"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 1,
+          "impressions": 129,
+          "ctr": "0.8%",
+          "position": 10.6
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 0,
+          "impressions": 70,
+          "ctr": "0%",
+          "position": 12.4
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 20,
+          "ctr": "0%",
+          "position": 8.3
+        },
+        "visible_primary_query": {
+          "clicks": 1,
+          "impressions": 12,
+          "ctr": "8.3%",
+          "position": 10.3
+        },
+        "change_summary": "I+84.3%; P+1.8"
+      },
+      "current_title": "ESFJ-A 执政官人格：特点、职业、关系与 A/T 差异 | FermatMind",
+      "proposed_title": "KEEP — ESFJ-A 执政官人格：特点、职业、关系与 A/T 差异 | FermatMind",
+      "current_description": "ESFJ-A 是什么？了解 执政官 的核心特点、适合谁、不适合谁、常见误解、A/T 差异、职业关系压力场景和 FAQ。",
+      "proposed_description": "KEEP — ESFJ-A 是什么？了解 执政官 的核心特点、适合谁、不适合谁、常见误解、A/T 差异、职业关系压力场景和 FAQ。",
+      "current_H1": "ESFJ-A 执政官人格：特点、职业、关系与 A/T 差异 | FermatMind",
+      "proposed_H1_or_KEEP": "ESFJ-A 执政官人格：特点、职业、关系与 A/T 差异",
+      "current_intro_summary": "你像一位温暖而有条理的「生活总务」：一边照顾每个人的感受，一边让事情稳稳落地。只要有你在，场面就不会乱，细节有人看见，日常会变得更有秩序和温度。",
+      "proposed_intro_or_exact_action": "ESFJ-A 是 ESFJ 的自信型变体：重视关系反馈、现实照顾和可靠协作，A/T 只描述压力反应倾向，不代表能力、成熟度或职业保证。",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Define type/variant entity, distinguish preference from ability/diagnosis, cite the site method boundary and only stable public sources.",
+      "author_or_reviewer_requirement": "Named FermatMind editorial/method reviewer in the backend asset/package; no invented credential or person schema.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/zh/personality"
+      ],
+      "exact_anchor_text": [
+        "esfj-a"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/zh/personality/esfj-a"
+      ],
+      "cannibalization_action": "Protect the declared primary role; supporting pages link to this URL only for the matching intent.",
+      "current_schema": [
+        "AboutPage",
+        "Answer",
+        "BreadcrumbList",
+        "DefinedTerm",
+        "FAQPage",
+        "WebPage"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "backend personality seo.surface.v1 / public personality bundle",
+      "implementation_surface": "Backend personality SEO/content fields; frontend renderer only",
+      "risk": "LOW–MEDIUM — metadata/intro change may alter title rendering and ranking; no URL or canonical change.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/zh/personality/esfj-a",
+        "canonical": "https://fermatmind.com/zh/personality/esfj-a",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/personality.xml"
+        ],
+        "hreflang": [
+          {
+            "locale": "en",
+            "href": "https://fermatmind.com/en/personality/esfj-a"
+          },
+          {
+            "locale": "zh-CN",
+            "href": "https://fermatmind.com/zh/personality/esfj-a"
+          },
+          {
+            "locale": "x-default",
+            "href": "https://fermatmind.com/"
+          }
+        ],
+        "schema_parse_errors": 0
+      }
+    },
+    {
+      "priority": 84,
+      "url": "https://fermatmind.com/zh/personality/esfp",
+      "locale": "zh",
+      "page_type": "MBTI profile",
+      "action_lane": "EXECUTE",
+      "confidence": "MEDIUM",
+      "entity_cluster": "MBTI / 16 personalities",
+      "primary_query_cluster": "esfp",
+      "brand_or_nonbrand": "非品牌",
+      "search_intent": "definition/self-understanding",
+      "primary_url_role": "zh MBTI / 16 personalities definition/self-understanding owner for “esfp”",
+      "supporting_or_competing_urls": [
+        "https://fermatmind.com/zh/personality",
+        "https://fermatmind.com/zh/personality/esfp-a",
+        "https://fermatmind.com/zh/personality/esfp-t"
+      ],
+      "forbidden_queries": [
+        "NONE — preserve the declared primary intent boundary"
+      ],
+      "frozen_GSC_metrics": {
+        "main_2026_07_15_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 22,
+          "ctr": "0%",
+          "position": 19.1
+        },
+        "comparison_2026_06_17_to_2026_07_14": {
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": "—",
+          "position": null
+        },
+        "trend_2026_08_05_to_2026_08_11": {
+          "clicks": 0,
+          "impressions": 18,
+          "ctr": "0%",
+          "position": 14.2
+        },
+        "visible_primary_query": {
+          "clicks": 0,
+          "impressions": 8,
+          "ctr": "0%",
+          "position": 16
+        },
+        "change_summary": "新曝光"
+      },
+      "current_title": "ESFP 人格指南 | FermatMind",
+      "proposed_title": "ESFP 人格：特点、优势、关系与职业方向 | FermatMind",
+      "current_description": "了解 ESFP 的优势、弱项、人际模式和职业方向。",
+      "proposed_description": "了解 ESFP 的核心特点、优势、常见误解、人际模式、工作环境和职业探索边界。人格类型用于自我理解，不作能力或职业保证。",
+      "current_H1": "ESFP 人格指南",
+      "proposed_H1_or_KEEP": "ESFP 人格：特点、优势、关系与职业方向",
+      "current_intro_summary": "基于 ESFP 人格画像的职业建议与工作环境匹配策略。 这类人格通常在目标清晰、反馈可获得、能够持续迭代的环境里更容易稳定发挥。",
+      "proposed_intro_or_exact_action": "ESFP 通常更关注当下体验、现实反馈和与人互动，并倾向用行动回应环境。这个类型标签适合生成自我观察假设，不代表能力高低、诊断或唯一职业方向。",
+      "GEO_answer_block_action": "Use the proposed first paragraph as the direct answer; keep claim boundaries visible, cite only verifiable sources in CMS fields, and avoid unsupported diagnostic/predictive claims.",
+      "entity_and_source_requirements": "Define type/variant entity, distinguish preference from ability/diagnosis, cite the site method boundary and only stable public sources.",
+      "author_or_reviewer_requirement": "Named FermatMind editorial/method reviewer in the backend asset/package; no invented credential or person schema.",
+      "internal_link_source_urls": [
+        "https://fermatmind.com/zh/personality",
+        "https://fermatmind.com/zh/personality/esfp-a",
+        "https://fermatmind.com/zh/personality/esfp-t"
+      ],
+      "exact_anchor_text": [
+        "ESFP 人格",
+        "ESFP 人格",
+        "ESFP 人格"
+      ],
+      "internal_link_target_urls": [
+        "https://fermatmind.com/zh/personality/esfp"
+      ],
+      "cannibalization_action": "Protect the declared primary role; supporting pages link to this URL only for the matching intent.",
+      "current_schema": [
+        "AboutPage",
+        "BreadcrumbList",
+        "DefinedTerm",
+        "WebPage"
+      ],
+      "proposed_schema_action_or_KEEP": "KEEP — structured data already matches visible page type; do not add Product, Offer, Review, AggregateRating, or invented FAQ.",
+      "authority_layer": "backend personality seo.surface.v1 / public personality bundle",
+      "implementation_surface": "Backend personality SEO/content fields; frontend renderer only",
+      "risk": "LOW–MEDIUM — metadata/intro change may alter title rendering and ranking; no URL or canonical change.",
+      "rollback_condition": "Rollback the exact CMS fields only if by D14/D28 the intended owner loses >3 average positions or material clicks while matched controls remain stable; do not rollback for one-day noise.",
+      "D1_check": "Verify HTTP status, index/follow, self-canonical, sitemap membership, exact rendered title/description/H1/intro, valid JSON-LD, and CTA smoke where present.",
+      "D7_check": "Safety gate: no new 5xx/soft-404/noindex/canonical split; changed page and control medians must not show a sitewide cliff.",
+      "D14_check": "Early directional check on owner-query impression share, CTR, position, and landing-page click distribution; do not rollback on noise alone.",
+      "D28_success_metric": "Success = intended owner gains or preserves cluster clicks, avoids >3-position deterioration with stable controls, and conversion events do not degrade.",
+      "HOLD_reason_if_applicable": "N/A",
+      "technical_baseline": {
+        "http_status": 200,
+        "final_url": "https://fermatmind.com/zh/personality/esfp",
+        "canonical": "https://fermatmind.com/zh/personality/esfp",
+        "robots": "index, follow",
+        "sitemap_membership": [
+          "/sitemap.xml",
+          "/sitemaps/personality.xml"
+        ],
+        "hreflang": [
+          {
+            "locale": "en",
+            "href": "https://fermatmind.com/en/personality/esfp"
+          },
+          {
+            "locale": "zh-CN",
+            "href": "https://fermatmind.com/zh/personality/esfp"
+          },
+          {
+            "locale": "x-default",
+            "href": "https://fermatmind.com/"
+          }
+        ],
+        "schema_parse_errors": 0
+      }
+    }
+  ],
+  "hold_fingerprint_sha256": "414e60dcaec942387a8d9cf29333ed03a7288c59ac448628f4e14ca56a7cae17",
+  "control_fingerprint_sha256": "c2c9b3750d32717ef78a7bc0d3efdc48f0c244aab276f0369bc402822b7bdd12"
+}
