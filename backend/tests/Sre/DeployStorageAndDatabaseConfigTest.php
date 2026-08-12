@@ -591,7 +591,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('[[ ! "$RELEASE_ID" =~ ^[A-Za-z0-9._-]{1,80}$ ]]', $source);
         $this->assertStringContainsString('RELEASE_ID="standard-${DEPLOY_SHA:0:12}"', $source);
         $this->assertStringContainsString('gh run list --workflow deploy.yml --branch main --commit "$DEPLOY_SHA" --status completed --limit 100', $source);
-        $this->assertStringContainsString('--json databaseId,headSha,name,event,status,conclusion', $source);
+        $this->assertStringContainsString('--json databaseId,headSha,event,status,conclusion', $source);
         $this->assertStringContainsString('standard deploy could not resolve a successful exact-SHA staging run.', $source);
         $this->assertStringContainsString('standard deploy requires approved_migration to be omitted; do not submit false.', $source);
         $this->assertStringContainsString('I explicitly approve bounded backend production deploy for exact SHA ${DEPLOY_SHA}, excluding all newer main commits, release ${RELEASE_ID}.', $source);
@@ -599,7 +599,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('I explicitly approve bounded backend inactive candidate materialization for exact SHA ${DEPLOY_SHA} using exact staging run ${STAGING_RUN_ID} from active SHA ${EXPECTED_DEPLOYED_REVISION}, excluding all newer main commits, release ${RELEASE_ID}; distinct inactive release path, zero activation.', $source);
         $this->assertStringContainsString('I explicitly approve backend schema-only production deploy for SHA ${DEPLOY_SHA} release ${RELEASE_ID} migration ${APPROVED_MIGRATION}.', $source);
         $this->assertStringContainsString('expected_deployed_revision as a lowercase 40-character deployed REVISION', $source);
-        $this->assertStringContainsString('.name == "Deploy Application"', $source);
+        $this->assertStringNotContainsString('.name == "Deploy Application"', $source);
         $this->assertStringContainsString('.path == ".github/workflows/deploy.yml"', $source);
         $this->assertStringContainsString('.head_branch == "main"', $source);
         $this->assertStringContainsString('STAGING_SHA="$(jq -r \'.head_sha\' <<<"$RUN_JSON")"', $source);
