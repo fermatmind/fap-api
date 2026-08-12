@@ -193,20 +193,29 @@ final class Career1046RootGenerationActivation
                 continue;
             }
             $parts = array_values(array_filter(explode("\0", $raw), static fn (string $part): bool => $part !== ''));
-            $command = basename((string) ($parts[0] ?? ''));
-            $arguments = implode(' ', $parts);
-            $phpConflict = $command === 'php' && (
-                preg_match('/dep(?:\.phar)? .* production/', $arguments) === 1
-                || preg_match('/artisan migrate(?:\s|$)/', $arguments) === 1
-                || preg_match('/queue:(?:restart|reload-workers)(?:\s|$)/', $arguments) === 1
-                || preg_match('/career_.*(?:apply|activation|staging)/', $arguments) === 1
-            );
-            $composerConflict = $command === 'composer'
-                && preg_match('/(?:^|\s)install(?:\s|$)/', $arguments) === 1;
-            if ($phpConflict || $composerConflict) {
+            if (self::processCommandIsConflicting($parts)) {
                 throw new Career1046RootActivationFailure('CONFLICTING_AUTHORITY_PROCESS_PRESENT');
             }
         }
+    }
+
+    /** @param list<string> $parts */
+    public static function processCommandIsConflicting(array $parts): bool
+    {
+        $command = basename((string) ($parts[0] ?? ''));
+        $arguments = implode(' ', $parts);
+        $phpCommand = preg_match('/^php(?:[0-9]+(?:\.[0-9]+)*)?$/', $command) === 1;
+        $phpConflict = $phpCommand && (
+            preg_match('/dep(?:\.phar)? .* production/', $arguments) === 1
+            || preg_match('/\bartisan\s+migrate(?:\s|$)/', $arguments) === 1
+            || preg_match('/\bartisan\s+career:[a-z0-9:_-]+(?:\s|$)/i', $arguments) === 1
+            || preg_match('/queue:(?:restart|reload-workers)(?:\s|$)/', $arguments) === 1
+            || preg_match('/career_.*(?:apply|activation|staging)/', $arguments) === 1
+        );
+        $composerConflict = $command === 'composer'
+            && preg_match('/(?:^|\s)install(?:\s|$)/', $arguments) === 1;
+
+        return $phpConflict || $composerConflict;
     }
 
     /** @param array<string, mixed> $expected @return array<string, mixed> */

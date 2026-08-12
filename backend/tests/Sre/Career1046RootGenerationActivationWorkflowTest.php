@@ -334,6 +334,31 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
             .$this->expected['generation_id'].'/generation-pointer.json');
     }
 
+    public function test_conflict_classifier_covers_all_career_artisan_commands_and_versioned_php(): void
+    {
+        self::assertTrue(Career1046RootGenerationActivation::processCommandIsConflicting([
+            '/usr/bin/php',
+            'artisan',
+            'career:import-authority-wave',
+            '--execute',
+        ]));
+        self::assertTrue(Career1046RootGenerationActivation::processCommandIsConflicting([
+            '/usr/bin/php8.4',
+            '/srv/fap/backend/artisan',
+            'career:remediate-canonical-index-state',
+            '--execute',
+        ]));
+        self::assertFalse(Career1046RootGenerationActivation::processCommandIsConflicting([
+            '/usr/bin/php8.4',
+            'artisan',
+            'route:list',
+        ]));
+        self::assertFalse(Career1046RootGenerationActivation::processCommandIsConflicting([
+            '/usr/bin/php',
+            'scripts/read_only_probe.php',
+        ]));
+    }
+
     public function test_workflow_is_manual_receipt_bound_single_pointer_only_and_keeps_discoverability_closed(): void
     {
         $workflow = $this->repoFile('.github/workflows/career-1046-root-generation-activation-production-ops.yml');
