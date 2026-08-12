@@ -44,6 +44,7 @@ use App\Services\Content\ContentPacksIndex;
 use App\Services\Content\ContentStore;
 use App\Services\ContentPackResolver;
 use App\Services\Ops\OpsDistributedLimiter;
+use App\Support\Career\CareerVerifyOnlyRequestAuthorizer;
 use App\Support\Logging\RedactProcessor;
 use App\Support\OrgContext;
 use App\Support\Security\ExternalKmsPiiEnvelopeAdapter;
@@ -628,6 +629,11 @@ class AppServiceProvider extends ServiceProvider
             }
 
             $request = request();
+            if ($request instanceof Request
+                && app(CareerVerifyOnlyRequestAuthorizer::class)->isAuthorized($request)) {
+                return;
+            }
+
             $route = $this->resolveSlowQueryRoute($request);
             $requestId = $this->resolveSlowQueryRequestId($request);
             $orgId = $this->resolveSlowQueryOrgId($request);
