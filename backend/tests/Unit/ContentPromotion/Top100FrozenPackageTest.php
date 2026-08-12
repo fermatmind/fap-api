@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Unit\ContentPromotion;
 
+use App\Models\Article;
+use App\Models\ArticleTranslationRevision;
 use App\Services\ContentPromotion\PromotionContext;
+use App\Services\ContentPromotion\PromotionContextFactory;
 use App\Services\ContentPromotion\Top100FrozenCmsBatchAuthority;
 use App\Services\ContentPromotion\Top100FrozenPackage;
 use DomainException;
@@ -137,6 +140,36 @@ final class Top100FrozenPackageTest extends TestCase
         $htmlLinkProjected = (new ReflectionClass($authority))->getMethod('liveHtmlLinkProjected');
         self::assertTrue($htmlLinkProjected->invoke($authority, '<a class="link" href="/zh/personality/intp-a-vs-intp-t"><span>中文链接</span></a>', '中文链接', '/zh/personality/intp-a-vs-intp-t'));
         self::assertFalse($htmlLinkProjected->invoke($authority, '<a href="/zh/personality/intp-a-vs-intp-t">错误锚文本</a><p>中文链接</p>', '中文链接', '/zh/personality/intp-a-vs-intp-t'));
+    }
+
+    public function test_article_revision_publish_guard_rejects_post_import_payload_drift(): void
+    {
+        $authority = (new ReflectionClass(Top100FrozenCmsBatchAuthority::class))->newInstanceWithoutConstructor();
+        $method = (new ReflectionClass($authority))->getMethod('articleRevisionMatchesTarget');
+        $article = new Article(['published_revision_id' => 41]);
+        $target = [
+            'source_row_sha256' => str_repeat('a', 64),
+            'desired_sha256' => str_repeat('b', 64),
+            'desired' => [
+                'article' => ['title' => 'Approved title', 'excerpt' => 'Approved excerpt', 'content_md' => 'Approved body'],
+                'seo' => ['seo_title' => 'Approved SEO', 'seo_description' => 'Approved description'],
+            ],
+        ];
+        $revision = new ArticleTranslationRevision([
+            'supersedes_revision_id' => 41,
+            'authority_source_hash' => str_repeat('a', 64),
+            'authority_metadata_json' => ['desired_sha256' => str_repeat('b', 64)],
+            'source_version_hash' => hash('sha256', PromotionContextFactory::canonicalJson($target['desired']['article'])),
+            'title' => 'Approved title',
+            'excerpt' => 'Approved excerpt',
+            'content_md' => 'Approved body',
+            'seo_title' => 'Approved SEO',
+            'seo_description' => 'Approved description',
+        ]);
+
+        self::assertTrue($method->invoke($authority, $revision, $article, $target));
+        $revision->content_md = 'Concurrent unapproved edit';
+        self::assertFalse($method->invoke($authority, $revision, $article, $target));
     }
 
     private function packageDirectory(): string

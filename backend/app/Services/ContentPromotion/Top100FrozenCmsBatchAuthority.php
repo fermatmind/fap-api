@@ -715,9 +715,16 @@ final class Top100FrozenCmsBatchAuthority
     {
         $desiredArticle = (array) data_get($target, 'desired.article', []);
         $desiredSeo = (array) data_get($target, 'desired.seo', []);
+        $expectedSourceVersionHash = hash('sha256', PromotionContextFactory::canonicalJson([
+            'title' => $desiredArticle['title'] ?? null,
+            'excerpt' => $desiredArticle['excerpt'] ?? null,
+            'content_md' => $desiredArticle['content_md'] ?? null,
+        ]));
 
         return (int) $revision->supersedes_revision_id === (int) $article->published_revision_id
             && (string) $revision->authority_source_hash === (string) $target['source_row_sha256']
+            && hash_equals($expectedSourceVersionHash, (string) $revision->source_version_hash)
+            && hash_equals((string) $target['desired_sha256'], (string) data_get($revision->authority_metadata_json, 'desired_sha256', ''))
             && hash_equals(PromotionContextFactory::canonicalJson([
                 'title' => $revision->title,
                 'excerpt' => $revision->excerpt,
@@ -976,7 +983,8 @@ final class Top100FrozenCmsBatchAuthority
             transactionGuard: function (Article $lockedArticle, ArticleTranslationRevision $lockedRevision) use ($context, $target): void {
                 if (! hash_equals($context->packageSha256, (string) $lockedRevision->authority_package_sha256)
                     || ! hash_equals($this->assetKey($target), (string) $lockedRevision->authority_asset_key)
-                    || (string) $lockedRevision->revision_status !== ArticleTranslationRevision::STATUS_APPROVED) {
+                    || (string) $lockedRevision->revision_status !== ArticleTranslationRevision::STATUS_APPROVED
+                    || ! $this->articleRevisionMatchesTarget($lockedRevision, $lockedArticle, $target)) {
                     throw new DomainException('top100_frozen_article_controlled_promotion_lock_invalid');
                 }
                 $this->articleBodyHeadingGuard->assertNoBodyH1((string) $lockedRevision->content_md);
