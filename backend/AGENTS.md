@@ -1,5 +1,10 @@
 # Night PR Train Rules
 
+## Delivery risk applicability
+
+- Fast and Product lane work follows the root `AGENTS.md` one-loop, one-PR, focused-validation defaults. Controlled lane work preserves the applicable backend preflight/apply, receipt, approval, and fail-closed boundaries.
+- PR-train manifest/state and ledger rules apply only when the task explicitly identifies PR-train work. Ordinary backend PRs must not add process-only train metadata.
+
 ## Scope discipline
 - One PR = one scope.
 - Never combine adjacent PR scopes.
@@ -9,10 +14,10 @@
 ## Goal execution standing authorization
 - FermatMind is a solo-developed project. At all times, treat every concrete end-to-end execution goal as continuous execution mode: make safe, reversible, in-scope decisions, record them, and continue without waiting for acknowledgements. This repository-wide working rule does not depend on time of day or unattended execution.
 - A concrete `/goal` or equivalent end-to-end execution instruction for an identified scope is standing authorization for its normal PR lifecycle: branch, scoped implementation, checks, explicit staging, commit, push, PR creation, polling, same-scope CI/review fixes, policy-compliant merge, synchronization, and cleanup. Do not ask again for those actions.
-- The same goal authorizes exact manifest/state initialization for a named task/card and declared dependency completion in dependency order.
-- When a required check is blocked by a defect proven to pre-exist on `main` outside the current PR scope, create and finish a separate minimal ad-hoc baseline-repair PR, then resume the goal. Keep scopes separate and do not request another PR authorization.
+- The same goal authorizes exact manifest/state initialization for an explicitly named PR-train task/card and declared dependency completion in dependency order.
+- When a required check is blocked by a defect proven to pre-exist on `main` outside the current PR scope, report the evidence and keep the current PR isolated. Do not create a sidecar baseline-repair PR unless the user explicitly requests it or a Controlled lane boundary makes the separate repair necessary.
 - Required checks and reviews remain mandatory. Stop only for materially ambiguous scope/authority, non-isolatable user changes, separately controlled production/CMS/database actions, unavailable external permission/review, or a repair that cannot be isolated and validated safely.
-- Do not mark a goal blocked merely because a manifest/state entry, declared dependency, same-scope CI/review fix, wait/poll cycle, or isolated baseline-repair PR is needed. Resolve those autonomously.
+- Do not mark a goal blocked merely because an explicitly applicable manifest/state entry, declared dependency, same-scope CI/review fix, or wait/poll cycle is needed. Resolve those autonomously.
 - This section overrides narrower repeat-authorization requirements below, but not planning-only/read-only instructions or controlled production-publish confirmations.
 
 ## Branch discipline
@@ -35,12 +40,12 @@
 - If a dependency is not merged, do not start the dependent PR. Under an active execution goal, complete or wait for the declared dependency, then continue automatically. Mark `blocked_dependency` and stop only when the dependency requires unavailable external authority or cannot be completed safely.
 
 ## Verification discipline
-- Run all local checks listed in the PR manifest before push.
+- For explicit PR-train work, run all local checks listed in the PR manifest before push. Ordinary work follows the root delivery lane and focused verification rules.
 - For docs-only, rules-only, and generated-contract-only changes, use lightweight validation such as `git diff --check` plus JSON/YAML/focused contract checks when relevant. Do not require full runtime checks unless runtime, API, migration, or scheduler files changed.
 - If local checks fail, do not open a PR.
-- Record failed checks in `docs/codex/pr-train-state.json`.
+- For explicit PR-train work, record a material unresolved check failure in `docs/codex/pr-train-state.json`. Ordinary PRs must not create a ledger entry for a failed check.
 - Never continue to the next PR after a failed check.
-- Draft PR exception: when a local check fails only on behavior clearly outside the current declared PR scope, an active execution goal supplies the required authorization to proceed. Prefer an isolated baseline-repair PR when that can restore the required check; otherwise Codex may open a draft PR for the current scope if all scoped checks pass. The draft PR body must list the failed command, failed tests, why they are outside scope, and state that the PR is not mergeable until required checks are green.
+- Draft PR exception: when a local check fails only on behavior clearly outside the current declared PR scope, an active execution goal supplies the required authorization to proceed. Keep the current scope isolated and do not create a baseline-repair sidecar without an explicit request or Controlled lane necessity. Codex may open a draft PR for the current scope if all scoped checks pass; the body must list the failed command, failed tests, why they are outside scope, and state that the PR is not mergeable until required checks are green.
 - This exception does not allow merging a PR with failed local or GitHub required checks.
 
 ## PR discipline
@@ -66,12 +71,13 @@
 - Use squash merge unless the manifest explicitly says otherwise.
 - After merge, delete the remote branch.
 - After merging a PR-train PR, close its state as `merged` in the same workflow whenever possible.
-- If branch protection prevents direct ledger closeout, use one ledger-only follow-up PR with no new train id.
+- If branch protection prevents direct ledger closeout, report the verified merge and cleanup facts and record them in the next same-repository PR-train task that already updates the ledger. Do not open a standalone ledger-only follow-up unless the user explicitly requests it or stale state blocks an active train dependency.
 - If running in a local clone, run `scripts/post_merge_cleanup.sh <branch> [base]`.
 - If running outside a local clone, do not claim local cleanup was executed.
 
 ## State ledger discipline
-- Record every state transition in `docs/codex/pr-train-state.json`.
+- This section applies only to explicit PR-train work. Ordinary backend PRs must not touch `docs/codex/pr-train-state.json` merely to record process.
+- Update only the current task, normally once before PR creation and once after final merge. Add an intermediate update only for a material failure, hold, or externally visible state that must survive the run.
 - Update at minimum:
   - status
   - commit_sha
@@ -82,7 +88,7 @@
   - remote_branch_deleted
   - local_cleanup_executed
 - Do not create a new PR-train task just to mark the previous task as `merged`.
-- Never advance to the next PR after a failed PR unless the manifest permits it. Under an active execution goal, diagnose, fix, and rerun the current scoped PR without a new user prompt, and record each retry.
+- Never advance to the next PR after a failed PR unless the manifest permits it. Under an active execution goal, diagnose, fix, and rerun the current scoped PR without a new user prompt; record only a material unresolved failure or the final result.
 
 ## Failure policy
 - Do not merge the current PR or advance to an unrelated next PR while any of the following remains unresolved:
@@ -93,7 +99,7 @@
   - review requirement block
   - ambiguous repository state
 - Do not improvise around failures.
-- Under an active execution goal, exhaust safe in-scope diagnosis, retry, same-PR repair, declared dependency completion, and isolated baseline-repair alternatives before stopping. Prefer a clean, evidence-backed hold only after those paths are exhausted.
+- Under an active execution goal, exhaust safe in-scope diagnosis, retry, same-PR repair, and declared dependency completion before stopping. Do not create a baseline-repair sidecar without an explicit request or Controlled lane necessity; otherwise prefer a clean, evidence-backed hold.
 
 ## Local vs cloud execution
 - If operating in a cloud-only environment, remote branch deletion is allowed, but local cleanup must be reported as not executed.
