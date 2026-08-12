@@ -7,6 +7,7 @@ namespace Tests\Feature\Career;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Jobs\Career\WarmCareerJobDetailProjection;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
+use App\Support\Career\CareerVerifyOnlyRequestAuthorizer;
 use Illuminate\Contracts\Bus\Dispatcher;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
@@ -101,6 +102,66 @@ final class CareerJobDetailReadModel10kTest extends TestCase
             ->assertJsonPath('detail_availability_v1.state', 'recovering');
 
         Queue::assertNothingPushed();
+    }
+
+    public function test_verify_only_header_fails_closed_without_warm_or_negative_cache_mutation(): void
+    {
+        Queue::fake();
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        Cache::put($cache->jobDetailNegativeKey('one', 'en'), true, 300);
+
+        $this->withHeaders($this->verifyOnlyHeaders('/api/v0.5/career/jobs/one?locale=en'))
+            ->getJson('/api/v0.5/career/jobs/one?locale=en')
+            ->assertNotFound();
+
+        $this->assertTrue(Cache::has($cache->jobDetailNegativeKey('one', 'en')));
+        $this->assertNull(Cache::get($cache->jobDetailActiveVersionKey('one', 'en')));
+        Queue::assertNothingPushed();
+    }
+
+    public function test_verify_only_header_reads_legacy_payload_without_promoting_it(): void
+    {
+        Queue::fake();
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $legacy = ['identity' => ['canonical_slug' => 'one'], 'legacy' => true];
+        Cache::forever($cache->jobDetailCacheKey('one', 'en'), $legacy);
+
+        $this->withHeaders($this->verifyOnlyHeaders('/api/v0.5/career/jobs/one?locale=en'))
+            ->getJson('/api/v0.5/career/jobs/one?locale=en')
+            ->assertOk()
+            ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
+            ->assertJsonPath('legacy', true);
+
+        $this->assertSame($legacy, Cache::get($cache->jobDetailCacheKey('one', 'en')));
+        $this->assertNull(Cache::get($cache->jobDetailActiveVersionKey('one', 'en')));
+        Queue::assertNothingPushed();
+    }
+
+    public function test_verify_only_job_index_read_suppresses_cache_state_log(): void
+    {
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $cache->publishJobIndexReadModelsAtomically([
+            'en' => ['items' => []],
+        ]);
+        Log::spy();
+
+        $this->assertSame([], $cache->jobIndexPayload('en', recordCacheState: false)['items']);
+        Log::shouldNotHaveReceived('info');
+    }
+
+    public function test_verify_only_detail_failure_returns_bounded_503_without_logging(): void
+    {
+        Log::spy();
+        Cache::shouldReceive('get')->andThrow(new \RuntimeException('cache unavailable'));
+        $requestUri = '/api/v0.5/career/jobs/one?locale=en';
+
+        $this->withHeaders($this->verifyOnlyHeaders($requestUri))
+            ->getJson($requestUri)
+            ->assertStatus(503)
+            ->assertExactJson(['message' => 'career verify-only read unavailable.']);
+
+        Log::shouldNotHaveReceived('info');
+        Log::shouldNotHaveReceived('error');
     }
 
     public function test_legacy_projection_is_promoted_and_reported_as_stale_for_the_current_response(): void
@@ -275,6 +336,22 @@ final class CareerJobDetailReadModel10kTest extends TestCase
             'detail_route_enabled' => true,
             'robots_indexable' => true,
             'release_gate_pass' => true,
+        ];
+    }
+
+    /** @return array<string, string> */
+    private function verifyOnlyHeaders(string $requestUri): array
+    {
+        $timestamp = (string) time();
+
+        return [
+            CareerVerifyOnlyRequestAuthorizer::MARKER_HEADER => '1',
+            CareerVerifyOnlyRequestAuthorizer::TIMESTAMP_HEADER => $timestamp,
+            CareerVerifyOnlyRequestAuthorizer::SIGNATURE_HEADER => hash_hmac(
+                'sha256',
+                CareerVerifyOnlyRequestAuthorizer::signaturePayload($requestUri, $timestamp),
+                (string) config('app.key'),
+            ),
         ];
     }
 }

@@ -49621,7 +49621,7 @@ prs:
     base: main
     branch: codex/career-1046-root-activation-09
     title: "CAREER-1046-ATOMIC-ROOT-ACTIVATION-CONTROL-09: add single root generation activation control"
-    status: ready_to_merge
+    status: merged
     depends_on:
       - CAREER-1046-PRODUCT-DATA-STAGING-CONTROL-08
     train_scope: career_exact_1046_single_atomic_root_generation_activation_control
@@ -49675,3 +49675,74 @@ prs:
     deploy_allowed: false
     content_authority: frozen manifest, exact Task 5 immutable generation bytes, current database receipt authority and current/rollback pointer bytes; this PR adds only an unexecuted activation control
     repository_rule_impact: adds one separately protected atomic root-generation activation lane while keeping discoverability release separately controlled
+
+  - id: CAREER-1046-PUBLIC-PRODUCT-VERIFY-ONLY-10
+    repo: fap-api
+    base: main
+    branch: codex/career-1046-public-product-verify-10
+    title: "CAREER-1046-PUBLIC-PRODUCT-VERIFY-ONLY-10: add generation-bound public product verification"
+    status: github_checks_pending
+    depends_on:
+      - CAREER-1046-ATOMIC-ROOT-ACTIVATION-CONTROL-09
+    train_scope: career_exact_1046_generation_bound_public_product_verify_only
+    risk_level: p1_protected_production_read_only_evidence_control
+    scope:
+      - Add one protected manual verify-only workflow bound to exact latest main, exact active SHA/release, exact active Career 1046 generation and raw root pointer SHA-256.
+      - Require byte-identical active and immutable pointer readback, exact pointer-bound generation manifest and EN/ZH product document hashes, frozen 1046 slug and 2092 locale-row sets, and closed discoverability state.
+      - Read the public API without redirects or retries and require Directory EN 1046, Directory ZH 1046, 2092 EN/ZH detail targets and zero missing, duplicate, extra, 404, 5xx, timeout, other status or generation-payload mismatch.
+      - Add one short-lived APP_KEY HMAC verifier restricted to exact Career directory/detail routes; authorized reads bypass cache-writing telemetry, suppress directory cache logs, and return only already-readable published detail payloads without promotion, warm work, recovery logs or degraded shells.
+      - Upload one immutable sanitized receipt on success or failure containing only hashes, bounded counts, safe failure codes and explicit zero-write guarantees.
+    allowed_paths:
+      - .github/workflows/career-1046-public-product-verify-only.yml
+      - backend/app/Http/Controllers/API/V0_5/Career/CareerDirectoryController.php
+      - backend/app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php
+      - backend/app/Http/Middleware/RecordCareerRuntimeSlo.php
+      - backend/app/Http/Middleware/RecordPublicContentRuntime.php
+      - backend/app/Services/Career/CareerDirectoryAuthorityService.php
+      - backend/app/Services/Career/PublicCareerAuthorityResponseCache.php
+      - backend/app/Services/Career/Review/CareerPilotReviewEvidenceBridge.php
+      - backend/app/Support/Career/CareerVerifyOnlyRequestAuthorizer.php
+      - backend/scripts/operations/career_1046_public_product_verify_only.php
+      - backend/tests/Sre/Career1046PublicProductVerifyOnlyWorkflowTest.php
+      - backend/tests/Feature/Career/CareerDirectoryAuthorityApiTest.php
+      - backend/tests/Feature/Career/CareerJobDetailReadModel10kTest.php
+      - backend/tests/Feature/Observability/CareerRuntimeSloAlertingTest.php
+      - backend/tests/Feature/Ops/PublicContentRuntimeMetricsTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/operations/career-1046-public-product-verify-only.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Dispatch this or any production/staging workflow, establish SSH, or read/write controlled production/staging state during this PR.
+      - Repair, warm, rollback, deploy, migrate, restart, mutate DB/CMS/cache/artifacts/pointers, or release sitemap/llms/Search/discoverability state.
+      - Add retries, expose response bodies/topology/raw paths, change canonical/noindex/JSON-LD/claims, submit URLs, or implement Task 7B, Task 8 or Task 9.
+    validation:
+      - cd backend && php artisan test tests/Sre/Career1046PublicProductVerifyOnlyWorkflowTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/Career/CareerJobDetailReadModel10kTest.php --filter=verify_only --no-ansi
+      - cd backend && php artisan test tests/Feature/Observability/CareerRuntimeSloAlertingTest.php tests/Feature/Ops/PublicContentRuntimeMetricsTest.php --filter=verify_only --no-ansi
+      - actionlint .github/workflows/career-1046-public-product-verify-only.yml
+      - cd backend && vendor/bin/pint --test scripts/operations/career_1046_public_product_verify_only.php tests/Sre/Career1046PublicProductVerifyOnlyWorkflowTest.php
+      - php -l for every changed PHP file
+      - php backend/scripts/operations/verify_career_1046_current_state_freeze.php
+      - cd backend && bash scripts/ci_verify_mbti.sh through fermatmind-heavy-guard
+      - parse workflow, pr-train JSON and YAML
+      - exact nineteen-file scope and forbidden production action validation
+      - git diff --check and git diff --cached --check
+    stop_if_changed_files_outside_scope: true
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    workflow_policy_change: true
+    production_write_execution: false
+    production_read_only_evidence: false
+    production_workflow_dispatched: false
+    staging_workflow_dispatched: false
+    database_mutation: false
+    cms_mutation: false
+    cache_mutation: false
+    artifact_mutation: false
+    pointer_mutation: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: exact active generation pointer and its hash-bound immutable 1046/2092 product documents; this PR adds only an unexecuted read-only verifier
+    repository_rule_impact: adds one protected evidence-only public product verification lane while keeping discoverability release separately controlled

@@ -81,7 +81,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     ) {}
 
     /** @return array<string, mixed> */
-    public function directoryReadModelPayload(string $publicLocale = 'zh-CN'): array
+    public function directoryReadModelPayload(string $publicLocale = 'zh-CN', bool $recordCacheState = true): array
     {
         $normalizedLocale = $this->normalizePublicLocale($publicLocale);
         foreach (['active' => $this->directoryActiveVersionKey($normalizedLocale), 'stale' => $this->directoryLkgVersionKey($normalizedLocale)] as $state => $pointerKey) {
@@ -90,7 +90,9 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                 ? Cache::get($this->directoryVersionPayloadKey($normalizedLocale, $version))
                 : null;
             if (is_array($payload)) {
-                $this->logDirectoryCacheState($normalizedLocale, $state === 'active' ? 'hit' : 'stale', $version);
+                if ($recordCacheState) {
+                    $this->logDirectoryCacheState($normalizedLocale, $state === 'active' ? 'hit' : 'stale', $version);
+                }
 
                 return $payload;
             }
@@ -100,12 +102,16 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
         // authority on the HTTP request path and is promoted by the next warm command.
         $legacy = Cache::get($this->directoryReadModelCacheKey($normalizedLocale));
         if (is_array($legacy)) {
-            $this->logDirectoryCacheState($normalizedLocale, 'stale', 'legacy-v1');
+            if ($recordCacheState) {
+                $this->logDirectoryCacheState($normalizedLocale, 'stale', 'legacy-v1');
+            }
 
             return $legacy;
         }
 
-        $this->logDirectoryCacheState($normalizedLocale, 'miss', null);
+        if ($recordCacheState) {
+            $this->logDirectoryCacheState($normalizedLocale, 'miss', null);
+        }
 
         throw new \RuntimeException(sprintf('Career directory authority cache is unavailable for locale %s.', $normalizedLocale));
     }
@@ -152,8 +158,11 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     /**
      * @return array<string, mixed>
      */
-    public function jobIndexPayload(string $publicLocale = 'zh-CN', bool $includeNonIndexable = false): array
-    {
+    public function jobIndexPayload(
+        string $publicLocale = 'zh-CN',
+        bool $includeNonIndexable = false,
+        bool $recordCacheState = true,
+    ): array {
         $normalizedLocale = $this->normalizePublicLocale($publicLocale);
         foreach ([
             'active' => $this->jobIndexActiveVersionKey($normalizedLocale, $includeNonIndexable),
@@ -164,13 +173,17 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                 ? Cache::get($this->jobIndexVersionPayloadKey($normalizedLocale, $includeNonIndexable, $version))
                 : null;
             if (is_array($payload)) {
-                $this->logJobIndexCacheState($normalizedLocale, $state, $version);
+                if ($recordCacheState) {
+                    $this->logJobIndexCacheState($normalizedLocale, $state, $version);
+                }
 
                 return $payload;
             }
         }
 
-        $this->logJobIndexCacheState($normalizedLocale, 'miss', null);
+        if ($recordCacheState) {
+            $this->logJobIndexCacheState($normalizedLocale, 'miss', null);
+        }
 
         throw new \RuntimeException(sprintf(
             'Career job index authority cache is not warm for locale %s.',
@@ -253,6 +266,39 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                 $projectionItem,
             ),
             'state' => 'degraded',
+        ];
+    }
+
+    /**
+     * Resolve only an already-readable public payload for protected verification.
+     * This path never promotes legacy state, clears negative cache state, dispatches
+     * a warm, or returns a degraded shell.
+     *
+     * @return array{payload: array<string, mixed>|null, state: 'fresh'|'not_found'|'stale'}
+     */
+    public function jobDetailVerifyOnlyRead(string $slug, string $publicLocale = 'zh-CN'): array
+    {
+        $normalizedSlug = strtolower(trim($slug));
+        if ($normalizedSlug === '') {
+            return ['payload' => null, 'state' => 'not_found'];
+        }
+
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+        $projectionItem = $this->effectiveJobDetailProjectionItem($normalizedSlug, $normalizedLocale);
+        if (! $this->jobDetailProjectionItemIsPublished($projectionItem)) {
+            return ['payload' => null, 'state' => 'not_found'];
+        }
+
+        $readiness = $this->jobDetailCacheReadiness($normalizedSlug, $normalizedLocale);
+        $classification = (string) ($readiness['classification'] ?? '');
+        $payload = is_array($readiness['payload'] ?? null) ? $readiness['payload'] : null;
+        if ($payload === null || ! in_array($classification, ['ready_active', 'ready_lkg', 'legacy_migratable'], true)) {
+            return ['payload' => null, 'state' => 'not_found'];
+        }
+
+        return [
+            'payload' => $this->normalizeJobDetailReviewContract($payload),
+            'state' => $classification === 'ready_active' ? 'fresh' : 'stale',
         ];
     }
 

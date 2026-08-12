@@ -105388,7 +105388,7 @@
     "base": "main",
     "branch": "codex/career-1046-root-activation-09",
     "title": "CAREER-1046-ATOMIC-ROOT-ACTIVATION-CONTROL-09: add single root generation activation control",
-    "status": "ready_to_merge",
+    "status": "merged",
     "depends_on": [
       "CAREER-1046-PRODUCT-DATA-STAGING-CONTROL-08"
     ],
@@ -105419,15 +105419,15 @@
       },
       "github_required_checks": {
         "status": "passed",
-        "evidence": "PR #3668 head 9b25b8b41bd615ca825907b0f5b8ff4d2fa2404d passed CI run 31554690903 and Code Scanning run 31554690872: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep blocking secrets, Semgrep SARIF and Semgrep OSS all succeeded; verify-staging-parity was correctly skipped for this pull request. Exact-head Codex review reported no major issues and no unresolved review thread remains."
+        "evidence": "PR #3668 final head f8f83e9cc9cfa1975b548f638e883612c97b44c1 passed CI run 31555195569 and Code Scanning run 31555195517: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-v2, verify-mbti-legacy, Semgrep blocking secrets, Semgrep SARIF and Semgrep OSS all succeeded; verify-staging-parity was correctly skipped. Exact-head Codex review reported no major issues and no unresolved review thread remained."
       }
     },
     "failure_reason": null,
     "commit_sha": "0fd718fa708e0846dd7830ae2dc46a4557aea28a",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/3668",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-08-12T10:03:37+08:00",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "workflow_policy_change": true,
     "production_write_execution": false,
     "production_read_only_evidence": false,
@@ -105567,8 +105567,145 @@
         "at": "2026-08-12T09:54:13+08:00",
         "status": "ready_to_merge",
         "note": "PR #3668 exact head 9b25b8b41bd615ca825907b0f5b8ff4d2fa2404d passed every required GitHub check in CI run 31554690903 and Code Scanning run 31554690872; staging parity was correctly skipped. Exact-head Codex review reported no major issues and all review threads are resolved. The diff remains exactly six allowlisted paths. No production or staging workflow was dispatched and no SSH or controlled external state was accessed or mutated."
+      },
+      {
+        "at": "2026-08-12T10:03:37+08:00",
+        "status": "merged",
+        "note": "PR #3668 final head f8f83e9cc9cfa1975b548f638e883612c97b44c1 passed every required check and exact-head review, then squash merged as add9e7936ee902b050d18b51792aac73d7ff351b. origin/main contains the merge; the remote branch was already absent during cleanup and the local branch was deleted after the isolated train worktree moved to Task 7A. No production or staging workflow was dispatched and no SSH or controlled external state was accessed or mutated."
       }
     ],
-    "updated_at": "2026-08-12T09:54:13+08:00"
+    "updated_at": "2026-08-12T10:03:37+08:00"
+  },
+  "CAREER-1046-PUBLIC-PRODUCT-VERIFY-ONLY-10": {
+    "id": "CAREER-1046-PUBLIC-PRODUCT-VERIFY-ONLY-10",
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/career-1046-public-product-verify-10",
+    "title": "CAREER-1046-PUBLIC-PRODUCT-VERIFY-ONLY-10: add generation-bound public product verification",
+    "status": "github_checks_pending",
+    "depends_on": [
+      "CAREER-1046-ATOMIC-ROOT-ACTIVATION-CONTROL-09"
+    ],
+    "allowed_paths": [
+      ".github/workflows/career-1046-public-product-verify-only.yml",
+      "backend/app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php",
+      "backend/app/Http/Controllers/API/V0_5/Career/CareerDirectoryController.php",
+      "backend/app/Http/Middleware/RecordCareerRuntimeSlo.php",
+      "backend/app/Http/Middleware/RecordPublicContentRuntime.php",
+      "backend/app/Services/Career/PublicCareerAuthorityResponseCache.php",
+      "backend/app/Services/Career/CareerDirectoryAuthorityService.php",
+      "backend/app/Services/Career/Review/CareerPilotReviewEvidenceBridge.php",
+      "backend/app/Support/Career/CareerVerifyOnlyRequestAuthorizer.php",
+      "backend/scripts/operations/career_1046_public_product_verify_only.php",
+      "backend/tests/Sre/Career1046PublicProductVerifyOnlyWorkflowTest.php",
+      "backend/tests/Feature/Career/CareerJobDetailReadModel10kTest.php",
+      "backend/tests/Feature/Career/CareerDirectoryAuthorityApiTest.php",
+      "backend/tests/Feature/Observability/CareerRuntimeSloAlertingTest.php",
+      "backend/tests/Feature/Ops/PublicContentRuntimeMetricsTest.php",
+      "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+      "docs/operations/career-1046-public-product-verify-only.md",
+      "docs/codex/pr-train.yaml",
+      "docs/codex/pr-train-state.json"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "passed",
+        "evidence": "Task 7A of the continuous Career 1046 goal authorizes implementing and merging this exact public product verify-only control; workflow dispatch, SSH and every controlled production/staging read or mutation remain forbidden during the PR."
+      },
+      "dependency": {
+        "status": "passed",
+        "evidence": "Task 6 PR #3668 final head f8f83e9cc9cfa1975b548f638e883612c97b44c1 passed all required checks and exact-head review, then squash merged as add9e7936ee902b050d18b51792aac73d7ff351b; this branch starts from that exact origin/main."
+      },
+      "local_validation": {
+        "status": "passed",
+        "evidence": "Initial focused PHPUnit passed with 5 tests and 100 assertions and the complete CareerJobDetailReadModel10kTest passed with 13 tests and 132 assertions. The final signed verify-only and no-log focused suite passed 8 tests and 114 assertions; the complete four impacted feature files passed 37 tests and 360 assertions. Pint passed for all thirteen changed PHP files, every changed PHP file passed php -l, actionlint passed, workflow/train YAML and state JSON parsed, route:list reported 253 routes, a fresh SQLite migrate completed, the frozen authority verifier returned PASS_FROZEN_ZERO_WRITE_CONTRACT with receipt coverage 1016 and writes 0, and both heavy-guarded backend/scripts/ci_verify_mbti.sh runs exited 0 including Big Five 1693 tests and 196735 assertions. git diff --check passed after generated Big Five compiler output was explicitly restored after each heavy run."
+      },
+      "scope": {
+        "status": "passed",
+        "evidence": "The worktree contains exactly the nineteen allowlisted paths: one protected manual workflow, one standalone read-only verifier, a short-lived APP_KEY HMAC authorizer restricted to the exact Career directory/detail routes, authorized no-warm/no-log reads including review projection, both telemetry bypasses with behavioral coverage, the narrow runtime-freeze ownership registration, one executable SRE contract test, one operations document and the two train ledgers. No production/staging workflow was dispatched; no SSH, frontend fallback, migration, repair, warm, rollback, deploy, DB/CMS/cache/artifact/pointer, sitemap/llms or Search mutation occurred."
+      },
+      "github_required_checks": {
+        "status": "pending",
+        "evidence": "PR #3669 is open. Current-head required checks and a fresh exact-head Codex review remain required after the telemetry zero-write review fix."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "164c9035442818d6d4099135afa39869ea761cb4",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/3669",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "workflow_policy_change": true,
+    "production_write_execution": false,
+    "production_read_only_evidence": false,
+    "production_workflow_dispatched": false,
+    "staging_workflow_dispatched": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "cache_mutation": false,
+    "artifact_mutation": false,
+    "pointer_mutation": false,
+    "publish_allowed": false,
+    "search_channel_action": false,
+    "url_submission": false,
+    "deploy_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-08-12T10:03:37+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started Task 7A from exact merged Task 6 origin/main add9e7936ee902b050d18b51792aac73d7ff351b. Scope is an unexecuted generation-bound public product verify-only workflow, standalone runner, focused test, operations document and ledgers only. No workflow was dispatched; no SSH, production/staging read, repair, warm, rollback, deploy, DB/CMS/cache/artifact/pointer, sitemap/llms or Search action was executed."
+      },
+      {
+        "at": "2026-08-12T10:29:42+08:00",
+        "status": "local_validation_passed",
+        "note": "Task 7A implementation and exact nine-path scope passed focused PHPUnit, the complete Career detail read-model test, Pint, php -l, actionlint, workflow/train parsing, route listing, fresh SQLite migration, frozen zero-write verification, git diff checks and the heavy-guarded full ci_verify_mbti chain. Generated Big Five compiler output was explicitly restored before scope validation. No production or staging workflow was dispatched and no SSH or controlled external read/write occurred."
+      },
+      {
+        "at": "2026-08-12T10:30:31+08:00",
+        "status": "github_checks_pending",
+        "note": "Committed the exact nine-path Task 7A implementation as 37845ce77d9c2a634b30572ad21e2f3fa7fb59b5 after explicit staging and cached diff validation. The next action is ordinary branch push and PR creation only; the protected workflow remains undispatched."
+      },
+      {
+        "at": "2026-08-12T10:31:23+08:00",
+        "status": "github_checks_pending",
+        "note": "Pushed the focused branch and opened PR #3669 with authority/runtime boundary, local validation, zero-write production non-execution, deferred scopes and no sidecar issue documented. The protected Task 7A workflow remains undispatched."
+      },
+      {
+        "at": "2026-08-12T10:47:24+08:00",
+        "status": "github_checks_pending",
+        "note": "Exact-head Codex review found two valid same-scope issues. Added exact verify-only-header bypasses to both cache-writing telemetry middlewares with behavioral tests so all 2114 public evidence reads remain zero-cache-write, and corrected PR #3669 ownership from the unrelated planned SECURITY-103-API-06 card to this Task 7A card. Focused 7/105, complete telemetry 18/165, Pint, syntax, actionlint, ledgers, diff checks and the heavy-guarded full ci_verify_mbti chain all pass; generated Big Five files were restored. No workflow was dispatched and no SSH or controlled external state was accessed or mutated."
+      },
+      {
+        "at": "2026-08-12T11:04:10+08:00",
+        "status": "github_checks_pending",
+        "note": "Second exact-head review correctly rejected the public marker-only telemetry bypass and remaining directory cache-state log. Replaced it with a short-lived APP_KEY HMAC bound to the exact request URI and restricted to Career directory/detail routes; unsigned, expired, forged and non-Career requests keep ordinary telemetry. Authorized directory reads suppress cache-state logging. Final focused coverage passes 8/114 and all four impacted feature files pass 37/360; thirteen-file Pint, PHP syntax, actionlint, freeze, ledger parsing, exact seventeen-path scope and diff checks pass. Per the solo-owner efficiency rule, no third redundant local full-chain run was started after two successful full runs; fresh GitHub required checks remain the final gate. No workflow was dispatched and no SSH or controlled external state was accessed or mutated."
+      },
+      {
+        "at": "2026-08-12T11:15:00+08:00",
+        "status": "github_check_repair",
+        "note": "GitHub verify-bigfive proved the new Career verify-only authorizer was not registered under the existing Career runtime-projection ownership classifier; all 1691 other tests passed. Added exactly that support path to the classifier's existing ownership list and allowlisted the classifier test file, with no runtime behavior expansion."
+      },
+      {
+        "at": "2026-08-12T11:27:16+08:00",
+        "status": "github_review_repairing",
+        "note": "Final exact-head review found five bounded issues. The repair initializes receipts without raw inputs, re-resolves the active release after the public sweep, compares integral float/int JSON values semantically, suppresses review-projection job-index logs for signed verify-only reads, and restores the unrelated API-AD manifest state to origin/main. No production workflow was dispatched and no controlled external state was accessed or mutated."
+      },
+      {
+        "at": "2026-08-12T11:31:00+08:00",
+        "status": "github_checks_pending",
+        "note": "The five-issue repair passes the Task 7A SRE, complete detail read-model and complete review-bridge suites with 29 tests / 322 assertions, the two runtime-freeze ownership tests with 5 assertions, Pint for all 15 changed PHP files, PHP syntax, actionlint, workflow/train parsing, exact 19-file allowlist and diff checks. Fresh GitHub required checks and exact-head review remain the final merge gate; no third redundant local full-chain run was started."
+      },
+      {
+        "at": "2026-08-12T11:38:00+08:00",
+        "status": "github_review_repairing",
+        "note": "Exact-head review found one final public product gap: directory rows were counted by slug without comparing their canonical paths to the active generation. The runner now retains generation-bound EN/ZH paths and fails closed on any public path drift; focused SRE coverage passes 4 tests / 106 assertions."
+      },
+      {
+        "at": "2026-08-12T11:47:00+08:00",
+        "status": "github_review_repairing",
+        "note": "The next exact-head review found that a signed verify-only cache exception could escape into Laravel exception reporting and mutate the application log. Both signed directory and detail controllers now convert any such failure to a bounded 503 while ordinary requests still rethrow; focused directory/detail error-path tests prove no info/error log call."
+      }
+    ],
+    "updated_at": "2026-08-12T11:47:00+08:00"
   }
 }

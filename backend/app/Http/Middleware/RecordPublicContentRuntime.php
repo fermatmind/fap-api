@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use App\Services\Ops\PublicContentRuntimeMetricsService;
+use App\Support\Career\CareerVerifyOnlyRequestAuthorizer;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,10 +16,15 @@ final class RecordPublicContentRuntime
 {
     public function __construct(
         private readonly PublicContentRuntimeMetricsService $metrics,
+        private readonly CareerVerifyOnlyRequestAuthorizer $careerVerifyOnly,
     ) {}
 
     public function handle(Request $request, Closure $next): Response
     {
+        if ($this->careerVerifyOnly->isAuthorized($request)) {
+            return $next($request);
+        }
+
         $scope = $this->scope($request);
         if ($scope === null) {
             return $next($request);

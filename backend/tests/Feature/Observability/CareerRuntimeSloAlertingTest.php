@@ -9,6 +9,7 @@ use App\Http\Middleware\RecordCareerRuntimeSlo;
 use App\Services\Career\CareerJobDetailCacheCoverageService;
 use App\Services\Career\CareerRuntimeSloService;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
+use App\Support\Career\CareerVerifyOnlyRequestAuthorizer;
 use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -28,7 +29,10 @@ final class CareerRuntimeSloAlertingTest extends TestCase
 
     public function test_middleware_records_directory_latency_and_status_for_rolling_slo(): void
     {
-        $middleware = new RecordCareerRuntimeSlo(app(CareerRuntimeSloService::class));
+        $middleware = new RecordCareerRuntimeSlo(
+            app(CareerRuntimeSloService::class),
+            app(CareerVerifyOnlyRequestAuthorizer::class),
+        );
         $request = Request::create('/api/v0.5/career/directory?locale=en', 'GET');
 
         $response = $middleware->handle($request, static fn (): Response => new Response('{}', 503));
@@ -46,7 +50,10 @@ final class CareerRuntimeSloAlertingTest extends TestCase
         $this->assertTrue($lock->get());
 
         try {
-            $middleware = new RecordCareerRuntimeSlo(app(CareerRuntimeSloService::class));
+            $middleware = new RecordCareerRuntimeSlo(
+                app(CareerRuntimeSloService::class),
+                app(CareerVerifyOnlyRequestAuthorizer::class),
+            );
             $request = Request::create('/api/v0.5/career/directory', 'GET');
             $started = hrtime(true);
 
@@ -58,6 +65,39 @@ final class CareerRuntimeSloAlertingTest extends TestCase
         } finally {
             $lock->release();
         }
+    }
+
+    public function test_verify_only_header_bypasses_directory_slo_writes(): void
+    {
+        $middleware = new RecordCareerRuntimeSlo(
+            app(CareerRuntimeSloService::class),
+            app(CareerVerifyOnlyRequestAuthorizer::class),
+        );
+        $request = Request::create('/api/v0.5/career/directory?locale=en', 'GET');
+        foreach ($this->verifyOnlyHeaders('/api/v0.5/career/directory?locale=en') as $name => $value) {
+            $request->headers->set($name, $value);
+        }
+
+        $response = $middleware->handle($request, static fn (): Response => new Response('{}', 503));
+
+        $this->assertSame(503, $response->getStatusCode());
+        $this->assertSame(0, app(CareerRuntimeSloService::class)->evaluate()['sample_count']);
+    }
+
+    /** @return array<string, string> */
+    private function verifyOnlyHeaders(string $requestUri): array
+    {
+        $timestamp = (string) time();
+
+        return [
+            CareerVerifyOnlyRequestAuthorizer::MARKER_HEADER => '1',
+            CareerVerifyOnlyRequestAuthorizer::TIMESTAMP_HEADER => $timestamp,
+            CareerVerifyOnlyRequestAuthorizer::SIGNATURE_HEADER => hash_hmac(
+                'sha256',
+                CareerVerifyOnlyRequestAuthorizer::signaturePayload($requestUri, $timestamp),
+                (string) config('app.key'),
+            ),
+        ];
     }
 
     public function test_evaluator_enforces_every_runtime_alert_boundary(): void

@@ -1,0 +1,292 @@
+name: Career 1046 Public Product Verify Only
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_control_plane_sha:
+        description: Exact latest main SHA containing this verify-only control
+        required: true
+        type: string
+      expected_release_sha:
+        description: Exact active production SHA; must equal the control-plane SHA
+        required: true
+        type: string
+      expected_release_name:
+        description: Exact active production release name
+        required: true
+        type: string
+      expected_generation_id:
+        description: Exact active Career 1046 generation id
+        required: true
+        type: string
+      expected_active_pointer_sha256:
+        description: Exact raw SHA-256 of active-generation.json
+        required: true
+        type: string
+      operator_approval_phrase:
+        description: Exact generation- and pointer-bound read-only approval phrase
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.repository }}-production
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    name: Verify exact active public products without writes
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment: production
+    env:
+      EXPECTED_CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+      EXPECTED_RELEASE_SHA: ${{ inputs.expected_release_sha }}
+      EXPECTED_RELEASE_NAME: ${{ inputs.expected_release_name }}
+      EXPECTED_GENERATION_ID: ${{ inputs.expected_generation_id }}
+      EXPECTED_ACTIVE_POINTER_SHA256: ${{ inputs.expected_active_pointer_sha256 }}
+      OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+      SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+      HEALTHCHECK_URL: ${{ vars.PRODUCTION_HEALTHCHECK_URL }}
+
+    steps:
+      - name: Initialize sanitized immutable receipt before checkout
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/career-1046-public-product-verify-only.json"
+          jq -n \
+            --arg run_id "$GITHUB_RUN_ID" \
+            --arg run_attempt "$GITHUB_RUN_ATTEMPT" \
+            '{
+              contract_version: "career.1046.public_product_verify_only.v1",
+              status: "FAIL_PUBLIC_PRODUCT_VERIFY_ONLY",
+              failed_stage: "initialize",
+              control_plane_sha: null,
+              release_sha: null,
+              release_name_sha256: null,
+              generation_id: null,
+              workflow_run_id: ($run_id | tonumber),
+              workflow_run_attempt: ($run_attempt | tonumber),
+              active_pointer_sha256_before: null,
+              active_pointer_sha256_after: null,
+              immutable_pointer_sha256: null,
+              target_slug_set_sha256: "3b101fb76b5666200c73519c650beb1a5b0b35f47f7592453bf5671920571a18",
+              target_locale_row_set_sha256: "c9878e76c817cc09448c32b1dcba3152b22821af34a31204840eb77a2d65857e",
+              counts: {
+                directory_en: 0, directory_zh: 0, detail_targets: 0, detail_http_200: 0,
+                missing: 0, duplicate: 0, extra: 0, directory_http_error: 0,
+                http_404: 0, http_5xx: 0, timeout: 0, other_http_status: 0,
+                generation_mismatch: 0
+              },
+              production_read_only_evidence: true,
+              repair_count: 0,
+              warm_count: 0,
+              rollback_count: 0,
+              deploy_count: 0,
+              database_write_count: 0,
+              cms_write_count: 0,
+              cache_write_count: 0,
+              pointer_write_count: 0,
+              sitemap_write_count: 0,
+              llms_write_count: 0,
+              search_submission_count: 0,
+              automatic_retry_allowed: false,
+              writes_committed: false
+            }' > "$receipt"
+
+      - name: Checkout exact control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Validate exact latest main and read-only approval
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/career-1046-public-product-verify-only.json"
+          mark_failure() {
+            jq --arg stage "$1" '.failed_stage = $stage' "$receipt" > "$receipt.next"
+            mv "$receipt.next" "$receipt"
+          }
+          trap 'mark_failure "control_plane_or_approval"' ERR
+
+          test "$GITHUB_REF" = "refs/heads/main"
+          [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          test "$EXPECTED_RELEASE_SHA" = "$EXPECTED_CONTROL_PLANE_SHA"
+          [[ "$EXPECTED_RELEASE_NAME" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]
+          [[ "$EXPECTED_GENERATION_ID" =~ ^career-1046-[0-9a-f]{32}$ ]]
+          [[ "$EXPECTED_ACTIVE_POINTER_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          expected="I explicitly approve read-only Career 1046 public product verification for control plane SHA ${EXPECTED_CONTROL_PLANE_SHA} release SHA ${EXPECTED_RELEASE_SHA} release ${EXPECTED_RELEASE_NAME} generation ${EXPECTED_GENERATION_ID} active pointer SHA ${EXPECTED_ACTIVE_POINTER_SHA256}."
+          test "$OPERATOR_APPROVAL_PHRASE" = "$expected"
+
+          jq \
+            --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
+            --arg release "$EXPECTED_RELEASE_SHA" \
+            --arg release_name_sha256 "$(printf '%s' "$EXPECTED_RELEASE_NAME" | sha256sum | awk '{print $1}')" \
+            --arg generation "$EXPECTED_GENERATION_ID" \
+            '.control_plane_sha = $control
+             | .release_sha = $release
+             | .release_name_sha256 = $release_name_sha256
+             | .generation_id = $generation' \
+            "$receipt" > "$receipt.next"
+          mv "$receipt.next" "$receipt"
+
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$GITHUB_SHA" = "$EXPECTED_CONTROL_PLANE_SHA"
+          php -l backend/scripts/operations/career_1046_public_product_verify_only.php >/dev/null
+          jq '.failed_stage = "protected_topology"' "$receipt" > "$receipt.next"
+          mv "$receipt.next" "$receipt"
+
+      - name: Validate protected production topology
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/career-1046-public-product-verify-only.json"
+          mark_failure() {
+            jq --arg stage "$1" '.failed_stage = $stage' "$receipt" > "$receipt.next"
+            mv "$receipt.next" "$receipt"
+          }
+          trap 'mark_failure "protected_topology"' ERR
+          for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST RETIRED_DEPLOY_HOST DEPLOY_PATH SSH_KNOWN_HOSTS HEALTHCHECK_URL; do
+            test -n "${!name:-}"
+          done
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          test "$DEPLOY_PORT" -ge 1
+          test "$DEPLOY_PORT" -le 65535
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$RETIRED_DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          [[ "$DEPLOY_PATH" != *".."* ]]
+          [[ "$HEALTHCHECK_URL" =~ ^https://[A-Za-z0-9.-]+/api/healthz$ ]]
+          jq '.failed_stage = "ssh_setup"' "$receipt" > "$receipt.next"
+          mv "$receipt.next" "$receipt"
+          echo "Protected topology validated without disclosing values."
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/career-1046-public-product-verify-only.json"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+          jq '.failed_stage = "remote_verify_only"' "$receipt" > "$receipt.next"
+          mv "$receipt.next" "$receipt"
+
+      - name: Run exact public product verify-only control
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/career-1046-public-product-verify-only.json"
+          remote_receipt="$RUNNER_TEMP/career-1046-public-product-verify-only.remote.json"
+          ssh_stderr="$RUNNER_TEMP/career-1046-public-product-verify-only.ssh.stderr"
+          public_api_base_url="${HEALTHCHECK_URL%/api/healthz}"
+          [[ "$public_api_base_url" =~ ^https://[A-Za-z0-9.-]+$ ]]
+          runner_sha256="$(sha256sum backend/scripts/operations/career_1046_public_product_verify_only.php | awk '{print $1}')"
+
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
+
+          printf -v q_deploy_path '%q' "$DEPLOY_PATH"
+          printf -v q_control '%q' "$EXPECTED_CONTROL_PLANE_SHA"
+          printf -v q_release '%q' "$EXPECTED_RELEASE_SHA"
+          printf -v q_release_name '%q' "$EXPECTED_RELEASE_NAME"
+          printf -v q_generation '%q' "$EXPECTED_GENERATION_ID"
+          printf -v q_pointer '%q' "$EXPECTED_ACTIVE_POINTER_SHA256"
+          printf -v q_runner '%q' "$runner_sha256"
+          printf -v q_run_id '%q' "$GITHUB_RUN_ID"
+          printf -v q_run_attempt '%q' "$GITHUB_RUN_ATTEMPT"
+          printf -v q_api '%q' "$public_api_base_url"
+
+          set +e
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -o ServerAliveInterval=20 -o ServerAliveCountMax=120 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "CAREER_PUBLIC_VERIFY_DEPLOY_PATH=$q_deploy_path CAREER_PUBLIC_VERIFY_CONTROL_PLANE_SHA=$q_control CAREER_PUBLIC_VERIFY_RELEASE_SHA=$q_release CAREER_PUBLIC_VERIFY_RELEASE_NAME=$q_release_name CAREER_PUBLIC_VERIFY_GENERATION_ID=$q_generation CAREER_PUBLIC_VERIFY_ACTIVE_POINTER_SHA256=$q_pointer CAREER_PUBLIC_VERIFY_RUNNER_SHA256=$q_runner CAREER_PUBLIC_VERIFY_WORKFLOW_RUN_ID=$q_run_id CAREER_PUBLIC_VERIFY_WORKFLOW_RUN_ATTEMPT=$q_run_attempt CAREER_PUBLIC_VERIFY_API_BASE_URL=$q_api php" \
+            < backend/scripts/operations/career_1046_public_product_verify_only.php \
+            > "$remote_receipt" 2> "$ssh_stderr"
+          remote_status=$?
+          set -e
+
+          if jq -e '.contract_version == "career.1046.public_product_verify_only.v1"' "$remote_receipt" >/dev/null 2>&1; then
+            mv "$remote_receipt" "$receipt"
+          fi
+          rm -f "$remote_receipt" "$ssh_stderr"
+          test "$remote_status" -eq 0
+          jq -e \
+            --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
+            --arg release "$EXPECTED_RELEASE_SHA" \
+            --arg release_name_sha256 "$(printf '%s' "$EXPECTED_RELEASE_NAME" | sha256sum | awk '{print $1}')" \
+            --arg generation "$EXPECTED_GENERATION_ID" \
+            --arg pointer "$EXPECTED_ACTIVE_POINTER_SHA256" \
+            --arg run_id "$GITHUB_RUN_ID" \
+            --arg run_attempt "$GITHUB_RUN_ATTEMPT" \
+            '.status == "PASS_PUBLIC_PRODUCT_VERIFY_ONLY"
+             and .control_plane_sha == $control
+             and .release_sha == $release
+             and .release_name_sha256 == $release_name_sha256
+             and .generation_id == $generation
+             and .workflow_run_id == ($run_id | tonumber)
+             and .workflow_run_attempt == ($run_attempt | tonumber)
+             and .active_pointer_sha256_before == $pointer
+             and .active_pointer_sha256_after == $pointer
+             and .immutable_pointer_sha256 == $pointer
+             and .counts.directory_en == 1046
+             and .counts.directory_zh == 1046
+             and .counts.detail_targets == 2092
+             and .counts.detail_http_200 == 2092
+             and .counts.missing == 0
+             and .counts.duplicate == 0
+             and .counts.extra == 0
+             and .counts.directory_http_error == 0
+             and .counts.http_404 == 0
+             and .counts.http_5xx == 0
+             and .counts.timeout == 0
+             and .counts.other_http_status == 0
+             and .counts.generation_mismatch == 0
+             and .production_read_only_evidence == true
+             and .repair_count == 0
+             and .warm_count == 0
+             and .rollback_count == 0
+             and .deploy_count == 0
+             and .database_write_count == 0
+             and .cms_write_count == 0
+             and .cache_write_count == 0
+             and .pointer_write_count == 0
+             and .sitemap_write_count == 0
+             and .llms_write_count == 0
+             and .search_submission_count == 0
+             and .automatic_retry_allowed == false
+             and .writes_committed == false' "$receipt" >/dev/null
+
+      - name: Upload immutable sanitized verify-only receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: career-1046-public-product-verify-only-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/career-1046-public-product-verify-only.json
+          if-no-files-found: error
+          retention-days: 30

@@ -10,9 +10,11 @@ use App\Models\Occupation;
 use App\Models\OccupationCrosswalk;
 use App\Models\OccupationFamily;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
+use App\Support\Career\CareerVerifyOnlyRequestAuthorizer;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
 use Tests\TestCase;
 
@@ -65,6 +67,37 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
             ['arts-media', 'business-finance'],
             collect($response->json('facets.families'))->pluck('slug')->all(),
         );
+    }
+
+    public function test_signed_verify_only_directory_read_does_not_write_cache_state_log(): void
+    {
+        $this->createDirectoryOccupation('actuaries', 'Actuaries', '精算师', 'business-finance', 'Business and Finance');
+        $this->publishRuntimeProjection(['actuaries']);
+        $this->warmDirectoryAuthority();
+        Log::spy();
+        $requestUri = '/api/v0.5/career/directory?locale=en&per_page=100';
+
+        $this->withHeaders($this->verifyOnlyHeaders($requestUri))
+            ->getJson($requestUri)
+            ->assertOk()
+            ->assertJsonPath('pagination.total', 1);
+
+        Log::shouldNotHaveReceived('info');
+    }
+
+    public function test_signed_verify_only_directory_failure_returns_bounded_503_without_logging(): void
+    {
+        Log::spy();
+        Cache::shouldReceive('get')->andThrow(new \RuntimeException('cache unavailable'));
+        $requestUri = '/api/v0.5/career/directory?locale=en&per_page=100';
+
+        $this->withHeaders($this->verifyOnlyHeaders($requestUri))
+            ->getJson($requestUri)
+            ->assertStatus(503)
+            ->assertExactJson(['message' => 'career verify-only read unavailable.']);
+
+        Log::shouldNotHaveReceived('info');
+        Log::shouldNotHaveReceived('error');
     }
 
     public function test_it_filters_by_family_and_query_without_exposing_full_job_index_fields(): void
@@ -251,6 +284,22 @@ final class CareerDirectoryAuthorityApiTest extends TestCase
         ]);
 
         return $occupation;
+    }
+
+    /** @return array<string, string> */
+    private function verifyOnlyHeaders(string $requestUri): array
+    {
+        $timestamp = (string) time();
+
+        return [
+            CareerVerifyOnlyRequestAuthorizer::MARKER_HEADER => '1',
+            CareerVerifyOnlyRequestAuthorizer::TIMESTAMP_HEADER => $timestamp,
+            CareerVerifyOnlyRequestAuthorizer::SIGNATURE_HEADER => hash_hmac(
+                'sha256',
+                CareerVerifyOnlyRequestAuthorizer::signaturePayload($requestUri, $timestamp),
+                (string) config('app.key'),
+            ),
+        ];
     }
 
     private function warmDirectoryAuthority(): void

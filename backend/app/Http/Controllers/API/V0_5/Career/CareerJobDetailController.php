@@ -8,8 +8,10 @@ use App\Http\Controllers\Concerns\RespondsWithNotFound;
 use App\Http\Controllers\Controller;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\Career\Review\CareerPilotReviewEvidenceBridge;
+use App\Support\Career\CareerVerifyOnlyRequestAuthorizer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Throwable;
 
 final class CareerJobDetailController extends Controller
 {
@@ -48,22 +50,34 @@ final class CareerJobDetailController extends Controller
     public function __construct(
         private readonly PublicCareerAuthorityResponseCache $responseCache,
         private readonly CareerPilotReviewEvidenceBridge $reviewEvidenceBridge,
+        private readonly CareerVerifyOnlyRequestAuthorizer $careerVerifyOnly,
     ) {}
 
     public function show(Request $request, string $slug): JsonResponse
     {
         $publicLocale = is_string($request->query('locale')) ? (string) $request->query('locale') : 'zh-CN';
-        $read = $this->responseCache->jobDetailRead($slug, $publicLocale);
-        $payload = $read['payload'];
+        $verifyOnly = $this->careerVerifyOnly->isAuthorized($request);
+        try {
+            $read = $verifyOnly
+                ? $this->responseCache->jobDetailVerifyOnlyRead($slug, $publicLocale)
+                : $this->responseCache->jobDetailRead($slug, $publicLocale);
+            $payload = $read['payload'];
 
-        if ($payload === null) {
-            return $this->notFoundResponse('career job detail bundle unavailable.');
+            if ($payload === null) {
+                return $this->notFoundResponse('career job detail bundle unavailable.');
+            }
+
+            $payload = $this->reviewEvidenceBridge->projectDetailPayload($slug, $payload, ! $verifyOnly);
+
+            return response()->json($this->projectReaderSafePayload($payload))
+                ->header(self::PUBLIC_READ_CACHE_HEADER, $read['state']);
+        } catch (Throwable $failure) {
+            if (! $verifyOnly) {
+                throw $failure;
+            }
+
+            return response()->json(['message' => 'career verify-only read unavailable.'], 503);
         }
-
-        $payload = $this->reviewEvidenceBridge->projectDetailPayload($slug, $payload);
-
-        return response()->json($this->projectReaderSafePayload($payload))
-            ->header(self::PUBLIC_READ_CACHE_HEADER, $read['state']);
     }
 
     /**

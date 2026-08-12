@@ -6,14 +6,17 @@ namespace App\Http\Controllers\API\V0_5\Career;
 
 use App\Http\Controllers\Controller;
 use App\Services\Career\CareerDirectoryAuthorityService;
+use App\Support\Career\CareerVerifyOnlyRequestAuthorizer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Throwable;
 
 final class CareerDirectoryController extends Controller
 {
     public function __construct(
         private readonly CareerDirectoryAuthorityService $directoryAuthority,
+        private readonly CareerVerifyOnlyRequestAuthorizer $careerVerifyOnly,
     ) {}
 
     public function index(Request $request): JsonResponse
@@ -31,12 +34,22 @@ final class CareerDirectoryController extends Controller
             'q' => ['nullable', 'string', 'max:120'],
         ]);
 
-        return response()->json($this->directoryAuthority->payload(
-            locale: isset($validated['locale']) ? (string) $validated['locale'] : 'zh-CN',
-            page: (int) ($validated['page'] ?? 1),
-            perPage: (int) ($validated['per_page'] ?? 50),
-            family: isset($validated['family']) ? (string) $validated['family'] : null,
-            query: isset($validated['q']) ? (string) $validated['q'] : null,
-        ));
+        $verifyOnly = $this->careerVerifyOnly->isAuthorized($request);
+        try {
+            return response()->json($this->directoryAuthority->payload(
+                locale: isset($validated['locale']) ? (string) $validated['locale'] : 'zh-CN',
+                page: (int) ($validated['page'] ?? 1),
+                perPage: (int) ($validated['per_page'] ?? 50),
+                family: isset($validated['family']) ? (string) $validated['family'] : null,
+                query: isset($validated['q']) ? (string) $validated['q'] : null,
+                recordCacheState: ! $verifyOnly,
+            ));
+        } catch (Throwable $failure) {
+            if (! $verifyOnly) {
+                throw $failure;
+            }
+
+            return response()->json(['message' => 'career verify-only read unavailable.'], 503);
+        }
     }
 }
