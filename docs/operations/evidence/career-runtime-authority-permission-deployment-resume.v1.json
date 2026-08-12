@@ -1,0 +1,106 @@
+{
+  "schema_version": "career.runtime_authority_permission_deployment_resume.v1",
+  "status": "PASS_DEPLOYMENT_RESUME_ELIGIBLE",
+  "control_plane_sha": "14edadbd539a5860e9918a86b86172c7ad5ea728",
+  "production_active_revision": "ffc0138e1abbce85c03c046d56fd4c4da09515af",
+  "authority": {
+    "generation_id": "career-current-342-30-bootstrap-v1",
+    "pointer_document_sha256": "1ebfd2826be9d3b63d810d33050034e3d424c95b3db81fa49b0822c5e6b2ec08",
+    "projection_path_sha256": "32e4e5f30b56f96c7fda9b3eff03b02e23a406869d78ed9d223d59f0749586d1",
+    "ledger_path_sha256": "a7501519b6ca3f8c529e0ca2283985bd3900c0b9679c871c2c56197f324e013e",
+    "projection_sha256": "397f2a4ec284e9c0a6cd610447541ad4773fa7a7f3045008fab5efb334ec85c6",
+    "ledger_sha256": "975b311bb346a090f1add678d5a6d9f1be230f87b223e2c3c829f4c7fd7aac6e",
+    "slug_set_sha256": "8b328b2e002875a9f92d4c406981f3c3724f066ee817d2d5bd1a61915e1eddf5",
+    "locale_row_set_sha256": "607926991fa51c74d6d6c9606ab3b7f8f35918996006a39c68963c16765d5697",
+    "slug_count": 342,
+    "locale_row_count": 684,
+    "published_slug_count": 30,
+    "published_locale_row_count": 60
+  },
+  "pointer_apply": {
+    "run_id": 31593321673,
+    "run_attempt": 1,
+    "receipt_sha256": "e0898f6fbb438495319cf0acc8bd6f808eba18c3f3beeb4a4e7d690312c27bc4",
+    "artifact_digest": "sha256:101508066a741afd44d29b4c28bd866b1fa3d4772dfda14c71da71c320c545c7"
+  },
+  "permission_preflight": {
+    "run_id": 31632007949,
+    "run_attempt": 1,
+    "receipt_sha256": "601fe78d122c0cd1cb518f657660dfeed3c8f22afa8629dc7457d29a2035159c",
+    "artifact_digest": "sha256:905781c0709e7aa3449ef234789841d096699f6c2e243a7f529499f7dcf98141",
+    "status": "PASS_POINTER_BOUND_PERMISSION_REPAIR_REQUIRED",
+    "target_set_sha256": "d872a5b26324640b3d167fe3fad8dab2c6ec1f2aff309acdc89b41ace1743546",
+    "metadata_snapshot_sha256": "2d1defcc3869c715d8e685a572f1f6766b213c0968c3912d13ce78de76a4289b",
+    "repair_target_count": 2,
+    "remote_write_count": 0
+  },
+  "permission_apply_and_readback": {
+    "run_id": 31632121047,
+    "run_attempt": 1,
+    "receipt_sha256": "20fa0a5f7a753efb344aa5ed59f91f17144e36f0d69afc74f3d7767451316d56",
+    "artifact_digest": "sha256:00d35700fe49065cf423cfe3ee5d514bfccadf4448b388091e9934fa6023354b",
+    "status": "PASS_POINTER_BOUND_PERMISSION_REPAIR_VERIFIED",
+    "target_set_sha256": "d872a5b26324640b3d167fe3fad8dab2c6ec1f2aff309acdc89b41ace1743546",
+    "preflight_metadata_snapshot_sha256": "2d1defcc3869c715d8e685a572f1f6766b213c0968c3912d13ce78de76a4289b",
+    "post_apply_metadata_snapshot_sha256": "f57c9ad36affd11f718b09c1fdd3406949823d6a7c03b693d610bd0daf0a844c",
+    "metadata_write_count": 2,
+    "repair_target_count_after": 0,
+    "bytes_unchanged": true,
+    "runtime_readable": true,
+    "active_revision_unchanged": true,
+    "deploy_lock_absent": true,
+    "deploy_process_absent": true,
+    "migration_process_absent": true
+  },
+  "strict_loader_readback": {
+    "run_id": 31632228851,
+    "run_attempt": 1,
+    "receipt_sha256": "3c90c300583574444bf62c624c20aa3bcc018699f4d85cb899b846d1fdd2b833",
+    "artifact_digest": "sha256:1af316ffeac00cbab1352e9c952fa796ed087f7a29bb9689ed22527453c1b23f",
+    "runtime_user_is_www_data": true,
+    "active_pointer_readable": true,
+    "immutable_pointer_readable": true,
+    "projection_readable": true,
+    "ledger_readable": true,
+    "loader_strict_readable": true,
+    "diagnostic_terminal_status": "FAIL_RUNTIME_AUTHORITY_DIAGNOSTIC",
+    "diagnostic_terminal_stage": "LOADER_PROJECTION_IDENTITY_INVALID",
+    "diagnostic_contract_observation": "legacy_exact_bytes_v1 emits en/zh while this diagnostic revision post-validates en/zh-CN after loadStrict succeeds",
+    "acceptance_authority": "permission_apply_and_readback"
+  },
+  "duplicate_dispatch_fence": {
+    "cancelled_run_id": 31632126957,
+    "run_attempt": 1,
+    "conclusion": "cancelled",
+    "job_count": 0,
+    "environment_accessed": false,
+    "remote_operation_dispatched": false,
+    "metadata_write_count": 0
+  },
+  "write_guarantees": {
+    "content_write_count": 0,
+    "pointer_write_count": 0,
+    "artifact_write_count": 0,
+    "database_write_count": 0,
+    "cms_write_count": 0,
+    "cache_write_count": 0,
+    "publication_write_count": 0,
+    "discoverability_write_count": 0,
+    "search_submission_count": 0,
+    "migration_count": 0,
+    "deployment_count": 0,
+    "restart_count": 0,
+    "automatic_retry_allowed": false,
+    "automatic_rollback_allowed": false
+  },
+  "workflow_state": {
+    "permission_preflight": "disabled_manually",
+    "permission_apply": "disabled_manually"
+  },
+  "task_3a_through_7b_executed": false,
+  "solo_owner_efficiency_impact": {
+    "task_pr_count": 2,
+    "required_operator_interaction_count": 0,
+    "reason": "The second PR is the minimum non-ignored evidence-only main push needed after the separately controlled metadata apply completed."
+  }
+}
