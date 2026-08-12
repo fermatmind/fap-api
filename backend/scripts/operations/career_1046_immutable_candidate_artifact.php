@@ -34,6 +34,40 @@ final class Career1046ImmutableCandidateArtifactProducer
 {
     public const CONTRACT_VERSION = 'career.1046.immutable_candidate_artifact_producer.v1';
 
+    public static function emitStreamedRunner(): void
+    {
+        $root = dirname(__DIR__, 2);
+        $sources = [
+            $root.'/app/Domain/Career/Publish/Career1046ImmutableCandidateGenerator.php',
+            $root.'/scripts/operations/career_publication_index_reconciliation_apply.php',
+            __FILE__,
+        ];
+        $bundle = "<?php\ndeclare(strict_types=1);\n";
+        foreach ($sources as $sourcePath) {
+            $source = file_get_contents($sourcePath);
+            if (! is_string($source)) {
+                throw new Career1046ImmutableCandidateArtifactFailure('STREAMED_RUNNER_SOURCE_UNREADABLE');
+            }
+            $source = preg_replace('/\\A<\\?php\\s+declare\\(strict_types=1\\);\\s*/', "\n", $source, 1, $openingReplacements);
+            if (! is_string($source) || $openingReplacements !== 1) {
+                throw new Career1046ImmutableCandidateArtifactFailure('STREAMED_RUNNER_SOURCE_INVALID');
+            }
+            if ($sourcePath === __FILE__) {
+                $source = preg_replace('/\\nif \\(realpath\\(\\(string\\) \\(\\$_SERVER\\[\'SCRIPT_FILENAME\'\\] \\?\\? \'\'\\)\\) === __FILE__ \\|\\| getenv\\(\'CAREER_1046_STREAMED_EXECUTION\'\\) === \'1\'\\) \\{[\\s\\S]*\\z/', "\n", $source, 1, $entrypointReplacements);
+            } elseif (str_ends_with($sourcePath, 'career_publication_index_reconciliation_apply.php')) {
+                $source = preg_replace('/\\nif \\(realpath\\(\\(string\\) \\(\\$_SERVER\\[\'SCRIPT_FILENAME\'\\] \\?\\? \'\'\\)\\) === __FILE__ \\|\\| __FILE__ === \'\\/dev\\/stdin\'\\) \\{\\n    exit\\(CareerPublicationIndexReconciliationApply::main\\(\\$argv\\)\\);\\n\\}\\s*\\z/', "\n", $source, 1, $entrypointReplacements);
+            } else {
+                $entrypointReplacements = 1;
+            }
+            if (! is_string($source) || $entrypointReplacements !== 1) {
+                throw new Career1046ImmutableCandidateArtifactFailure('STREAMED_RUNNER_SOURCE_INVALID');
+            }
+            $bundle .= "\n".$source;
+        }
+
+        echo $bundle."\nexit(\\FermatMind\\Operations\\Career1046ImmutableCandidateArtifactProducer::main());\n";
+    }
+
     /** @return array<string, mixed> */
     public static function produceFromSource(array $source, array $task3b): array
     {
@@ -253,16 +287,29 @@ final class Career1046ImmutableCandidateArtifactProducer
             'database_state_sha256' => $read('CAREER_1046_TASK3B_DATABASE_STATE_SHA256'),
         ];
     }
+
+    public static function main(): int
+    {
+        try {
+            echo CareerGenerationCanonicalJson::encode(self::produceFromDatabase())."\n";
+
+            return 0;
+        } catch (Career1046ImmutableCandidateArtifactFailure $failure) {
+            fwrite(STDERR, $failure->safeCode."\n");
+
+            return 1;
+        } catch (Throwable) {
+            fwrite(STDERR, "UNEXPECTED_CONTROL_FAILURE\n");
+
+            return 1;
+        }
+    }
 }
 
 if (realpath((string) ($_SERVER['SCRIPT_FILENAME'] ?? '')) === __FILE__ || getenv('CAREER_1046_STREAMED_EXECUTION') === '1') {
-    try {
-        echo CareerGenerationCanonicalJson::encode(Career1046ImmutableCandidateArtifactProducer::produceFromDatabase())."\n";
-    } catch (Career1046ImmutableCandidateArtifactFailure $failure) {
-        fwrite(STDERR, $failure->safeCode."\n");
-        exit(1);
-    } catch (Throwable) {
-        fwrite(STDERR, "UNEXPECTED_CONTROL_FAILURE\n");
-        exit(1);
+    if (($argv[1] ?? null) === '--emit-streamed-runner') {
+        Career1046ImmutableCandidateArtifactProducer::emitStreamedRunner();
+        exit(0);
     }
+    exit(Career1046ImmutableCandidateArtifactProducer::main());
 }

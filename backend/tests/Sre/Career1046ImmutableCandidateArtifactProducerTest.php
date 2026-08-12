@@ -104,6 +104,7 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
             'TASK3B_DATABASE_STATE_DRIFT',
             'CAREER_1046_APPLICATION_ROOT',
             'CAREER_1046_STREAMED_EXECUTION',
+            '--emit-streamed-runner',
             'php /dev/stdin',
             'name: career-1046-immutable-candidate',
             'career-1046-immutable-candidate.json',
@@ -113,6 +114,20 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
         foreach (['schedule:', 'push:', 'workflow_run:', 'gh workflow run', 'php artisan migrate', 'queue:restart', 'deploy:symlink', 'indexnow', 'sitemap:submit'] as $forbidden) {
             self::assertStringNotContainsString($forbidden, $combined);
         }
+    }
+
+    public function test_it_emits_a_lintable_control_plane_runner_bundle(): void
+    {
+        $runner = dirname(__DIR__, 2).'/scripts/operations/career_1046_immutable_candidate_artifact.php';
+        $bundle = new Process([PHP_BINARY, $runner, '--emit-streamed-runner']);
+        $bundle->mustRun();
+        self::assertStringContainsString('Career1046ImmutableCandidateGenerator', $bundle->getOutput());
+        self::assertStringContainsString('CareerPublicationIndexReconciliationApply', $bundle->getOutput());
+        self::assertStringContainsString('exit(\\FermatMind\\Operations\\Career1046ImmutableCandidateArtifactProducer::main());', $bundle->getOutput());
+
+        $lint = new Process([PHP_BINARY, '-l', '/dev/stdin']);
+        $lint->setInput($bundle->getOutput());
+        $lint->mustRun();
     }
 
     /** @return array<string, mixed> */
