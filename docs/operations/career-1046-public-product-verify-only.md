@@ -12,8 +12,8 @@ The streamed runner first proves the active release name, `REVISION`, and checke
 
 The immutable product documents must contain one exact 1046-slug set in each locale and one exact 2092 locale-row set. Every directory row must bind the canonical hash of its same-generation detail payload. Every public request carries the verify-only marker, current timestamp, and a short-lived APP_KEY HMAC over its exact request URI. Only valid signatures on the exact Career directory/detail paths bypass public-content metrics and Career directory SLO recording; unsigned, expired, forged, or non-Career requests keep normal telemetry. Authorized directory and review-projection index reads suppress cache-state logging. Authorized details select a fail-closed response-cache read path that never promotes legacy state, clears negative cache state, dispatches a warm, logs cache recovery, or returns a degraded shell. Detail comparison treats integral JSON numbers such as `1` and `1.0` as semantically equal while preserving strict comparison for every other value. The public API is then read without redirects or retries:
 
-- EN directory: exactly 1046 unique target slugs;
-- ZH directory: exactly 1046 unique target slugs;
+- EN directory: exactly 1046 unique target slugs with generation-bound canonical paths;
+- ZH directory: exactly 1046 unique target slugs with generation-bound canonical paths;
 - EN/ZH detail targets: exactly 2092;
 - missing, duplicate, extra, 404, 5xx, timeout, other status, and generation-payload mismatch: all zero.
 

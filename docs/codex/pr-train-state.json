@@ -105694,8 +105694,13 @@
         "at": "2026-08-12T11:31:00+08:00",
         "status": "github_checks_pending",
         "note": "The five-issue repair passes the Task 7A SRE, complete detail read-model and complete review-bridge suites with 29 tests / 322 assertions, the two runtime-freeze ownership tests with 5 assertions, Pint for all 15 changed PHP files, PHP syntax, actionlint, workflow/train parsing, exact 19-file allowlist and diff checks. Fresh GitHub required checks and exact-head review remain the final merge gate; no third redundant local full-chain run was started."
+      },
+      {
+        "at": "2026-08-12T11:38:00+08:00",
+        "status": "github_review_repairing",
+        "note": "Exact-head review found one final public product gap: directory rows were counted by slug without comparing their canonical paths to the active generation. The runner now retains generation-bound EN/ZH paths and fails closed on any public path drift; focused SRE coverage passes 4 tests / 106 assertions."
       }
     ],
-    "updated_at": "2026-08-12T11:31:00+08:00"
+    "updated_at": "2026-08-12T11:38:00+08:00"
   }
 }

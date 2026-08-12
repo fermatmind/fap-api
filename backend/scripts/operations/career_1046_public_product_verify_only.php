@@ -227,6 +227,7 @@ function careerPublicVerifyGeneration(array $expected, array $release): array
     }
 
     $detailPayloads = [];
+    $directoryPaths = [];
     $targetSlugs = null;
     foreach (['en', 'zh'] as $locale) {
         $detail = $documents['detail_'.$locale];
@@ -258,12 +259,15 @@ function careerPublicVerifyGeneration(array $expected, array $release): array
         $directorySlugs = [];
         foreach ($directory['items'] as $row) {
             $slug = careerPublicVerifyRequiredSlug(is_array($row) ? ($row['slug'] ?? null) : null);
+            $expectedCanonicalPath = '/'.$locale.'/career/jobs/'.$slug;
             if (isset($directorySlugs[$slug])
                 || ($row['locale'] ?? null) !== $locale
+                || ($row['canonical_path'] ?? null) !== $expectedCanonicalPath
                 || ($row['detail_sha256'] ?? null) !== careerPublicVerifyCanonicalSha($payloads[$slug] ?? null)) {
                 throw new Career1046PublicVerifyFailure('GENERATION_DIRECTORY_DUPLICATE_OR_MISMATCH');
             }
             $directorySlugs[$slug] = true;
+            $directoryPaths[$locale][$slug] = $expectedCanonicalPath;
         }
         $slugs = array_keys($payloads);
         if (array_keys($directorySlugs) !== $slugs) {
@@ -300,6 +304,7 @@ function careerPublicVerifyGeneration(array $expected, array $release): array
         'active_pointer_raw' => $activeRaw,
         'active_pointer_sha256' => $activeSha,
         'target_slugs' => $targetSlugs,
+        'directory_paths' => $directoryPaths,
         'detail_payloads' => $detailPayloads,
     ];
 }
@@ -349,6 +354,9 @@ function careerPublicVerifyPublicProducts(array $expected, array $generation, ar
         }
         foreach ($body['items'] as $item) {
             $slug = careerPublicVerifyRequiredSlug(is_array($item) ? ($item['slug'] ?? null) : null);
+            if (($item['canonical_path'] ?? null) !== ($generation['directory_paths'][$locale][$slug] ?? null)) {
+                throw new Career1046PublicVerifyFailure('PUBLIC_DIRECTORY_CANONICAL_PATH_MISMATCH');
+            }
             if (isset($observedByLocale[$locale][$slug])) {
                 $duplicate++;
             }

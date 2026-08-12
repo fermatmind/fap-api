@@ -85,6 +85,21 @@ final class Career1046PublicProductVerifyOnlyWorkflowTest extends TestCase
         self::assertSame(0, $receipt['rollback_count']);
     }
 
+    public function test_public_directory_canonical_path_drift_fails_closed(): void
+    {
+        $fixture = $this->fixture();
+        $map = json_decode((string) file_get_contents($fixture['http_fixture']), true, 512, JSON_THROW_ON_ERROR);
+        $url = $fixture['api_base'].'/api/v0.5/career/directory?locale=en&per_page=100&page=1';
+        $map[$url]['body']['items'][0]['canonical_path'] = '/en/career/jobs/wrong';
+        file_put_contents($fixture['http_fixture'], json_encode($map, JSON_THROW_ON_ERROR));
+
+        [$status, $receipt] = $this->runControl($fixture);
+
+        self::assertSame(1, $status);
+        self::assertSame('PUBLIC_DIRECTORY_CANONICAL_PATH_MISMATCH', $receipt['failed_stage']);
+        self::assertFalse($receipt['writes_committed']);
+    }
+
     public function test_workflow_is_manual_protected_read_only_and_uploads_every_receipt(): void
     {
         $workflow = $this->repoFile('.github/workflows/career-1046-public-product-verify-only.yml');
@@ -275,7 +290,10 @@ final class Career1046PublicProductVerifyOnlyWorkflowTest extends TestCase
                     'timeout' => false,
                     'body' => [
                         'pagination' => ['page' => $page, 'per_page' => 100, 'total' => 1046, 'total_pages' => 11],
-                        'items' => array_map(static fn (string $slug): array => ['slug' => $slug], $pageSlugs),
+                        'items' => array_map(static fn (string $slug): array => [
+                            'slug' => $slug,
+                            'canonical_path' => '/'.$locale.'/career/jobs/'.$slug,
+                        ], $pageSlugs),
                     ],
                 ];
             }
