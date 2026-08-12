@@ -1,0 +1,662 @@
+name: Career Staging Authority Artifact Recovery
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Zero-write preflight or exact receipt-bound apply
+        required: true
+        type: choice
+        options:
+          - preflight
+          - apply
+      expected_control_plane_sha:
+        description: Exact latest main SHA containing this control
+        required: true
+        type: string
+      expected_production_active_revision:
+        description: Exact production active revision
+        required: true
+        type: string
+      expected_staging_active_revision:
+        description: Exact staging active revision
+        required: true
+        type: string
+      preflight_run_id:
+        description: Apply only; successful recovery preflight run id
+        required: false
+        type: string
+      preflight_run_attempt:
+        description: Apply only; successful recovery preflight run attempt
+        required: false
+        type: string
+      expected_preflight_receipt_sha256:
+        description: Apply only; exact combined preflight receipt SHA-256
+        required: false
+        type: string
+      expected_preflight_artifact_digest:
+        description: Apply only; exact combined preflight artifact digest
+        required: false
+        type: string
+      operator_approval_phrase:
+        description: Apply only; exact receipt-bound approval phrase
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: career-staging-authority-recovery-${{ github.repository }}
+  cancel-in-progress: false
+
+env:
+  MODE: ${{ inputs.mode }}
+  CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+  EXPECTED_PRODUCTION_ACTIVE_REVISION: ${{ inputs.expected_production_active_revision }}
+  EXPECTED_STAGING_ACTIVE_REVISION: ${{ inputs.expected_staging_active_revision }}
+  PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
+  PREFLIGHT_RUN_ATTEMPT: ${{ inputs.preflight_run_attempt }}
+  EXPECTED_PREFLIGHT_RECEIPT_SHA256: ${{ inputs.expected_preflight_receipt_sha256 }}
+  EXPECTED_PREFLIGHT_ARTIFACT_DIGEST: ${{ inputs.expected_preflight_artifact_digest }}
+  OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+  PRODUCTION_POINTER_APPLY_RUN_ID: '31593321673'
+  PRODUCTION_POINTER_APPLY_RUN_ATTEMPT: '1'
+  PRODUCTION_POINTER_APPLY_RECEIPT_SHA256: 'e0898f6fbb438495319cf0acc8bd6f808eba18c3f3beeb4a4e7d690312c27bc4'
+  PRODUCTION_POINTER_APPLY_ARTIFACT_DIGEST: 'sha256:101508066a741afd44d29b4c28bd866b1fa3d4772dfda14c71da71c320c545c7'
+  PROJECTION_SHA256: '397f2a4ec284e9c0a6cd610447541ad4773fa7a7f3045008fab5efb334ec85c6'
+  LEDGER_SHA256: '975b311bb346a090f1add678d5a6d9f1be230f87b223e2c3c829f4c7fd7aac6e'
+  SLUG_SET_SHA256: '8b328b2e002875a9f92d4c406981f3c3724f066ee817d2d5bd1a61915e1eddf5'
+  LOCALE_ROW_SET_SHA256: '607926991fa51c74d6d6c9606ab3b7f8f35918996006a39c68963c16765d5697'
+  GENERATION_ID: career-current-342-30-bootstrap-v1
+
+jobs:
+  production_read:
+    name: Revalidate and read frozen production authority
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 20
+    env:
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+      SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Initialize sanitized production evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/production-authority.json"
+          printf 'PRODUCTION_RECEIPT=%s\n' "$receipt" >> "$GITHUB_ENV"
+          jq -n '{contract_version:"career.staging_authority_artifact_recovery.control.v1",status:"HOLD_PRODUCTION_PHASE_INCOMPLETE",artifact_write_count:0,pointer_write_count:0,database_write_count:0,cms_write_count:0,cache_write_count:0,publication_write_count:0,discoverability_write_count:0,deployment_count:0,migration_count:0,restart_count:0,permission_write_count:0,writes_committed:false}' > "$receipt"
+
+      - name: Checkout exact control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Validate latest main and production pointer apply evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          runner=backend/scripts/operations/career_staging_authority_artifact_recovery.php
+          test "$GITHUB_REF" = refs/heads/main
+          [[ "$CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_PRODUCTION_ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$CONTROL_PLANE_SHA"
+          test -f "$runner"
+          test ! -L "$runner"
+          php -l "$runner" >/dev/null
+
+          apply_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PRODUCTION_POINTER_APPLY_RUN_ID}")"
+          jq -e --arg sha "$PRODUCTION_POINTER_APPLY_RECEIPT_SHA256" --argjson attempt "$PRODUCTION_POINTER_APPLY_RUN_ATTEMPT" '
+            .id == 31593321673
+            and .run_attempt == $attempt
+            and .event == "workflow_dispatch"
+            and .path == ".github/workflows/career-current-generation-pointer-bootstrap-production-ops.yml"
+            and .status == "completed"
+            and .conclusion == "success"
+            and .head_branch == "main"
+          ' <<<"$apply_run" >/dev/null
+          artifact="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PRODUCTION_POINTER_APPLY_RUN_ID}/artifacts" --jq \
+            '.artifacts[] | select(.name == "career-current-generation-pointer-bootstrap-apply-31593321673-1" and .expired == false)')"
+          test "$(jq -r .digest <<<"$artifact")" = "$PRODUCTION_POINTER_APPLY_ARTIFACT_DIGEST"
+          evidence_dir="$(mktemp -d)"
+          chmod 700 "$evidence_dir"
+          gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/$(jq -r .id <<<"$artifact")/zip" > "$evidence_dir/evidence.zip"
+          test "$(unzip -Z1 "$evidence_dir/evidence.zip")" = "career-current-generation-pointer-bootstrap.json"
+          unzip -q "$evidence_dir/evidence.zip" -d "$evidence_dir/unpacked"
+          receipt="$evidence_dir/unpacked/career-current-generation-pointer-bootstrap.json"
+          chmod 600 "$receipt"
+          test "$(sha256sum "$receipt" | awk '{print $1}')" = "$PRODUCTION_POINTER_APPLY_RECEIPT_SHA256"
+          jq -e --arg revision "$EXPECTED_PRODUCTION_ACTIVE_REVISION" --arg projection "$PROJECTION_SHA256" --arg ledger "$LEDGER_SHA256" --arg slugs "$SLUG_SET_SHA256" --arg rows "$LOCALE_ROW_SET_SHA256" '
+            .contract_version == "career.current_generation_pointer_bootstrap.v1"
+            and .mode == "apply"
+            and .status == "PASS_APPLY_POINTER_BOOTSTRAPPED"
+            and .generation_id == "career-current-342-30-bootstrap-v1"
+            and .release_sha == $revision
+            and .authority.projection_sha256 == $projection
+            and .authority.ledger_sha256 == $ledger
+            and .authority.slug_set_sha256 == $slugs
+            and .authority.locale_row_set_sha256 == $rows
+            and .authority.slug_count == 342
+            and .authority.locale_row_count == 684
+            and .authority.published_slug_count == 30
+            and .authority.published_locale_row_count == 60
+            and .source_artifact_write_count == 0
+            and .database_write_count == 0
+            and .cms_write_count == 0
+            and .cache_write_count == 0
+            and .publication_write_count == 0
+            and .sitemap_write_count == 0
+            and .llms_write_count == 0
+            and .search_submission_count == 0
+            and .deployment_count == 0
+            and .migration_count == 0
+          ' "$receipt" >/dev/null
+          rm -rf "$evidence_dir"
+
+      - name: Validate protected production topology
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST RETIRED_DEPLOY_HOST DEPLOY_PATH SSH_KNOWN_HOSTS; do test -n "${!name:-}"; done
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          test "$DEPLOY_PORT" -ge 1 && test "$DEPLOY_PORT" -le 65535
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$RETIRED_DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          [[ "$DEPLOY_PATH" != *"/../"* ]]
+
+      - name: Set up production SSH
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned production known hosts
+        shell: bash
+        run: |
+          set -euo pipefail
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Revalidate production pointer and frozen authority with zero writes
+        shell: bash
+        run: |
+          set -euo pipefail
+          runner=backend/scripts/operations/career_staging_authority_artifact_recovery.php
+          production_receipt="$PRODUCTION_RECEIPT"
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          printf -v q_revision '%q' "$EXPECTED_PRODUCTION_ACTIVE_REVISION"
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "set -euo pipefail; current=\$(readlink -f $q_path/current); test -d \"\$current\"; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_revision; test ! -e $q_path/.dep/deploy.lock; test \"\$(ps -eo comm=,args= | awk '\$1 == \"php\" && (\$0 ~ /dep(\\.phar)? .* production/ || \$0 ~ /artisan migrate/ || \$0 ~ /queue:reload-workers/) {n++} \$1 == \"composer\" && \$0 ~ /install/ {n++} END {print n+0}')\" = 0; CAREER_RECOVERY_PRIVATE_ROOT=\"\$current/backend/storage/app/private\" php /dev/stdin inspect-production" \
+            < "$runner" > "$production_receipt"
+          chmod 600 "$production_receipt"
+          jq -e --arg projection "$PROJECTION_SHA256" --arg ledger "$LEDGER_SHA256" '
+            .contract_version == "career.staging_authority_artifact_recovery.control.v1"
+            and .status == "PASS_PRODUCTION_FROZEN_AUTHORITY_READ_ONLY"
+            and .authority.projection_sha256 == $projection
+            and .authority.ledger_sha256 == $ledger
+            and .artifact_write_count == 0
+            and .pointer_write_count == 0
+            and .database_write_count == 0
+            and .cms_write_count == 0
+            and .cache_write_count == 0
+            and .publication_write_count == 0
+            and .discoverability_write_count == 0
+            and .deployment_count == 0
+            and .migration_count == 0
+            and .restart_count == 0
+            and .permission_write_count == 0
+            and .writes_committed == false
+          ' "$production_receipt" >/dev/null
+
+      - name: Validate apply preflight binding
+        if: inputs.mode == 'apply'
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$PREFLIGHT_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+          [[ "$EXPECTED_PREFLIGHT_RECEIPT_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$EXPECTED_PREFLIGHT_ARTIFACT_DIGEST" =~ ^sha256:[0-9a-f]{64}$ ]]
+          preflight_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}")"
+          jq -e --arg sha "$CONTROL_PLANE_SHA" --argjson attempt "$PREFLIGHT_RUN_ATTEMPT" '
+            .run_attempt == $attempt and .head_sha == $sha and .event == "workflow_dispatch"
+            and .path == ".github/workflows/career-staging-authority-artifact-recovery.yml"
+            and .status == "completed" and .conclusion == "success"
+          ' <<<"$preflight_run" >/dev/null
+          artifact_name="career-staging-authority-recovery-preflight-${PREFLIGHT_RUN_ID}-${PREFLIGHT_RUN_ATTEMPT}"
+          artifact="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}/artifacts" --jq ".artifacts[] | select(.name == \"${artifact_name}\" and .expired == false)")"
+          test "$(jq -r .digest <<<"$artifact")" = "$EXPECTED_PREFLIGHT_ARTIFACT_DIGEST"
+          bound_dir="$(mktemp -d)"; chmod 700 "$bound_dir"
+          gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/$(jq -r .id <<<"$artifact")/zip" > "$bound_dir/preflight.zip"
+          unzip -q "$bound_dir/preflight.zip" -d "$bound_dir/unpacked"
+          preflight="$bound_dir/unpacked/career-staging-authority-artifact-recovery.json"
+          chmod 600 "$preflight"
+          test "$(sha256sum "$preflight" | awk '{print $1}')" = "$EXPECTED_PREFLIGHT_RECEIPT_SHA256"
+          jq -e --arg control "$CONTROL_PLANE_SHA" --arg production "$EXPECTED_PRODUCTION_ACTIVE_REVISION" --arg staging "$EXPECTED_STAGING_ACTIVE_REVISION" '
+            .contract_version == "career.staging_authority_artifact_recovery.v1"
+            and .mode == "preflight" and .status == "PASS_PREFLIGHT_APPLY_ELIGIBLE"
+            and .control_plane_sha == $control
+            and .production_active_revision == $production
+            and .staging_active_revision == $staging
+            and .production_write_count == 0 and .staging_artifact_write_count == 0
+          ' "$preflight" >/dev/null
+          expected_phrase="I explicitly approve one no-clobber staging import of the frozen Career 342/30 projection and ledger from production pointer apply run 31593321673, preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} receipt ${EXPECTED_PREFLIGHT_RECEIPT_SHA256} artifact ${EXPECTED_PREFLIGHT_ARTIFACT_DIGEST}, control plane ${CONTROL_PLANE_SHA}, production active ${EXPECTED_PRODUCTION_ACTIVE_REVISION}, staging active ${EXPECTED_STAGING_ACTIVE_REVISION}; write only the two immutable staging authority artifacts, keep pointers, database, CMS, cache, publication, discoverability, migration, deploy, restart, permissions and infrastructure unchanged, with no retry, fallback, overwrite, cleanup of committed files, or rollback."
+          test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
+          rm -rf "$bound_dir"
+
+      - name: Wait for ephemeral certificate and encrypt exact bytes
+        if: inputs.mode == 'apply'
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 0077
+          runner=backend/scripts/operations/career_staging_authority_artifact_recovery.php
+          transfer="$RUNNER_TEMP/production-transfer"
+          install -d -m 700 "$transfer"
+          trap 'find "$transfer" -type f -exec chmod 600 {} + 2>/dev/null || true; rm -rf "$transfer"' EXIT
+          cert_name="career-staging-authority-recovery-cert-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          cert_id=''
+          for _ in $(seq 1 60); do
+            cert_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/artifacts" --jq ".artifacts[] | select(.name == \"${cert_name}\" and .expired == false) | .id" | head -n1)"
+            test -n "$cert_id" && break
+            sleep 5
+          done
+          test -n "$cert_id"
+          gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${cert_id}/zip" > "$transfer/cert.zip"
+          test "$(unzip -Z1 "$transfer/cert.zip")" = transfer-cert.pem
+          unzip -q "$transfer/cert.zip" -d "$transfer/cert"
+          openssl x509 -in "$transfer/cert/transfer-cert.pem" -noout -checkend 300 >/dev/null
+
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          printf -v q_revision '%q' "$EXPECTED_PRODUCTION_ACTIVE_REVISION"
+          for key in projection ledger; do
+            output="$transfer/${key}.json"
+            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+              "set -euo pipefail; current=\$(readlink -f $q_path/current); test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_revision; test ! -e $q_path/.dep/deploy.lock; test \"\$(ps -eo comm=,args= | awk '\$1 == \"php\" && (\$0 ~ /dep(\\.phar)? .* production/ || \$0 ~ /artisan migrate/ || \$0 ~ /queue:reload-workers/) {n++} \$1 == \"composer\" && \$0 ~ /install/ {n++} END {print n+0}')\" = 0; CAREER_RECOVERY_PRIVATE_ROOT=\"\$current/backend/storage/app/private\" php /dev/stdin export-${key}" \
+              < "$runner" > "$output"
+            chmod 600 "$output"
+          done
+          test "$(sha256sum "$transfer/projection.json" | awk '{print $1}')" = "$PROJECTION_SHA256"
+          test "$(sha256sum "$transfer/ledger.json" | awk '{print $1}')" = "$LEDGER_SHA256"
+          tar --format=ustar -C "$transfer" -cf "$transfer/frozen-authority.tar" projection.json ledger.json
+          chmod 600 "$transfer/frozen-authority.tar"
+          openssl cms -encrypt -binary -aes-256-cbc -outform DER \
+            -in "$transfer/frozen-authority.tar" -out "$RUNNER_TEMP/frozen-authority.cms" "$transfer/cert/transfer-cert.pem"
+          chmod 600 "$RUNNER_TEMP/frozen-authority.cms"
+
+      - name: Upload encrypted transfer only
+        if: inputs.mode == 'apply'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: career-staging-authority-recovery-ciphertext-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/frozen-authority.cms
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Upload sanitized production evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: career-staging-authority-recovery-production-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/production-authority.json
+          if-no-files-found: error
+          retention-days: 30
+
+  staging_restore:
+    name: Inspect or no-clobber import staging authority
+    runs-on: ubuntu-latest
+    environment: staging
+    timeout-minutes: 20
+    env:
+      DEPLOY_USER: ${{ secrets.STAGING_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.STAGING_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.STAGING_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ secrets.STAGING_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.STAGING_DEPLOY_PATH }}
+      SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Initialize sanitized staging evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/staging-authority.json"
+          printf 'STAGING_RECEIPT=%s\n' "$receipt" >> "$GITHUB_ENV"
+          jq -n '{contract_version:"career.staging_authority_artifact_recovery.control.v1",status:"HOLD_STAGING_PHASE_INCOMPLETE",projection_state:"UNKNOWN",ledger_state:"UNKNOWN",candidate_file_write_count:0,artifact_write_count:0,directory_write_count:0,pointer_write_count:0,database_write_count:0,cms_write_count:0,cache_write_count:0,publication_write_count:0,discoverability_write_count:0,deployment_count:0,migration_count:0,restart_count:0,permission_write_count:0,write_state:"none",writes_committed:false,automatic_retry_allowed:false}' > "$receipt"
+
+      - name: Checkout exact control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Validate latest main and protected staging topology
+        shell: bash
+        run: |
+          set -euo pipefail
+          runner=backend/scripts/operations/career_staging_authority_artifact_recovery.php
+          test "$GITHUB_REF" = refs/heads/main
+          [[ "$CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_STAGING_ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$CONTROL_PLANE_SHA"
+          test -f "$runner" && test ! -L "$runner"
+          php -l "$runner" >/dev/null
+          for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST RETIRED_DEPLOY_HOST DEPLOY_PATH SSH_KNOWN_HOSTS; do test -n "${!name:-}"; done
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          test "$DEPLOY_PORT" -ge 1 && test "$DEPLOY_PORT" -le 65535
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$RETIRED_DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
+          [[ "$DEPLOY_PATH" != *"/../"* ]]
+
+      - name: Validate apply preflight binding
+        if: inputs.mode == 'apply'
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$PREFLIGHT_RUN_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
+          [[ "$EXPECTED_PREFLIGHT_RECEIPT_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$EXPECTED_PREFLIGHT_ARTIFACT_DIGEST" =~ ^sha256:[0-9a-f]{64}$ ]]
+          preflight_run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}")"
+          jq -e --arg sha "$CONTROL_PLANE_SHA" --argjson attempt "$PREFLIGHT_RUN_ATTEMPT" '
+            .run_attempt == $attempt and .head_sha == $sha and .event == "workflow_dispatch"
+            and .path == ".github/workflows/career-staging-authority-artifact-recovery.yml"
+            and .status == "completed" and .conclusion == "success"
+          ' <<<"$preflight_run" >/dev/null
+          artifact_name="career-staging-authority-recovery-preflight-${PREFLIGHT_RUN_ID}-${PREFLIGHT_RUN_ATTEMPT}"
+          artifact="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}/artifacts" --jq ".artifacts[] | select(.name == \"${artifact_name}\" and .expired == false)")"
+          test "$(jq -r .digest <<<"$artifact")" = "$EXPECTED_PREFLIGHT_ARTIFACT_DIGEST"
+          bound_dir="$(mktemp -d)"; chmod 700 "$bound_dir"
+          gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/$(jq -r .id <<<"$artifact")/zip" > "$bound_dir/preflight.zip"
+          unzip -q "$bound_dir/preflight.zip" -d "$bound_dir/unpacked"
+          preflight="$bound_dir/unpacked/career-staging-authority-artifact-recovery.json"
+          chmod 600 "$preflight"
+          test "$(sha256sum "$preflight" | awk '{print $1}')" = "$EXPECTED_PREFLIGHT_RECEIPT_SHA256"
+          jq -e --arg control "$CONTROL_PLANE_SHA" --arg production "$EXPECTED_PRODUCTION_ACTIVE_REVISION" --arg staging "$EXPECTED_STAGING_ACTIVE_REVISION" '
+            .contract_version == "career.staging_authority_artifact_recovery.v1"
+            and .mode == "preflight" and .status == "PASS_PREFLIGHT_APPLY_ELIGIBLE"
+            and .control_plane_sha == $control and .production_active_revision == $production
+            and .staging_active_revision == $staging and .production_write_count == 0
+            and .staging_artifact_write_count == 0
+          ' "$preflight" >/dev/null
+          expected_phrase="I explicitly approve one no-clobber staging import of the frozen Career 342/30 projection and ledger from production pointer apply run 31593321673, preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} receipt ${EXPECTED_PREFLIGHT_RECEIPT_SHA256} artifact ${EXPECTED_PREFLIGHT_ARTIFACT_DIGEST}, control plane ${CONTROL_PLANE_SHA}, production active ${EXPECTED_PRODUCTION_ACTIVE_REVISION}, staging active ${EXPECTED_STAGING_ACTIVE_REVISION}; write only the two immutable staging authority artifacts, keep pointers, database, CMS, cache, publication, discoverability, migration, deploy, restart, permissions and infrastructure unchanged, with no retry, fallback, overwrite, cleanup of committed files, or rollback."
+          test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
+          rm -rf "$bound_dir"
+
+      - name: Set up staging SSH
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned staging known hosts
+        shell: bash
+        run: |
+          set -euo pipefail
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
+            || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Inspect staging target with zero writes
+        shell: bash
+        run: |
+          set -euo pipefail
+          runner=backend/scripts/operations/career_staging_authority_artifact_recovery.php
+          staging_receipt="$STAGING_RECEIPT"
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          printf -v q_revision '%q' "$EXPECTED_STAGING_ACTIVE_REVISION"
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "set -euo pipefail; current=\$(readlink -f $q_path/current); test -d \"\$current\"; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_revision; test ! -e $q_path/.dep/deploy.lock; test \"\$(ps -eo comm=,args= | awk '\$1 == \"php\" && (\$0 ~ /dep(\\.phar)? .* staging/ || \$0 ~ /artisan migrate/ || \$0 ~ /queue:reload-workers/) {n++} \$1 == \"composer\" && \$0 ~ /install/ {n++} END {print n+0}')\" = 0; CAREER_RECOVERY_PRIVATE_ROOT=\"\$current/backend/storage/app/private\" php /dev/stdin inspect-staging" \
+            < "$runner" > "$staging_receipt"
+          chmod 600 "$staging_receipt"
+          jq -e '
+            .contract_version == "career.staging_authority_artifact_recovery.control.v1"
+            and (.status == "PASS_STAGING_IMPORT_ELIGIBLE" or .status == "PASS_STAGING_FROZEN_AUTHORITY_PRESENT")
+            and (.projection_state == "ABSENT" or .projection_state == "IDENTICAL")
+            and (.ledger_state == "ABSENT" or .ledger_state == "IDENTICAL")
+            and .artifact_write_count == 0 and .pointer_write_count == 0
+            and .database_write_count == 0 and .cms_write_count == 0 and .cache_write_count == 0
+            and .publication_write_count == 0 and .discoverability_write_count == 0
+            and .deployment_count == 0 and .migration_count == 0 and .restart_count == 0
+            and .permission_write_count == 0 and .writes_committed == false
+          ' "$staging_receipt" >/dev/null
+
+      - name: Generate runner-only one-time transfer certificate
+        if: inputs.mode == 'apply'
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 0077
+          transfer="$RUNNER_TEMP/staging-transfer"
+          install -d -m 700 "$transfer"
+          printf 'TRANSFER_DIR=%s\n' "$transfer" >> "$GITHUB_ENV"
+          openssl req -x509 -newkey rsa:3072 -nodes -days 1 -subj /CN=career-staging-authority-one-time \
+            -keyout "$transfer/transfer-key.pem" -out "$RUNNER_TEMP/transfer-cert.pem" >/dev/null 2>&1
+          chmod 600 "$transfer/transfer-key.pem" "$RUNNER_TEMP/transfer-cert.pem"
+
+      - name: Publish ephemeral public certificate
+        if: inputs.mode == 'apply'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: career-staging-authority-recovery-cert-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/transfer-cert.pem
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Receive, decrypt, validate, and no-clobber import
+        if: inputs.mode == 'apply'
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 0077
+          runner=backend/scripts/operations/career_staging_authority_artifact_recovery.php
+          cleanup_transfer() {
+            status=$?
+            if [ "$status" -ne 0 ]; then
+              jq '.status="FAIL_APPLY_OUTCOME_REQUIRES_REVIEW" | .failed_stage="STAGING_IMPORT_OUTCOME_REQUIRES_REVIEW" | .artifact_write_count=null | .directory_write_count=null | .write_state="indeterminate" | .writes_committed=null' "$STAGING_RECEIPT" > "$RUNNER_TEMP/staging-authority.failure.json" || true
+              if [ -s "$RUNNER_TEMP/staging-authority.failure.json" ]; then mv "$RUNNER_TEMP/staging-authority.failure.json" "$STAGING_RECEIPT"; fi
+            fi
+            find "$TRANSFER_DIR" -type f -exec chmod 600 {} + 2>/dev/null || true
+            rm -rf "$TRANSFER_DIR"
+            return "$status"
+          }
+          trap cleanup_transfer EXIT
+          cipher_name="career-staging-authority-recovery-ciphertext-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          cipher_id=''
+          for _ in $(seq 1 60); do
+            cipher_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/artifacts" --jq ".artifacts[] | select(.name == \"${cipher_name}\" and .expired == false) | .id" | head -n1)"
+            test -n "$cipher_id" && break
+            sleep 5
+          done
+          test -n "$cipher_id"
+          gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${cipher_id}/zip" > "$TRANSFER_DIR/cipher.zip"
+          test "$(unzip -Z1 "$TRANSFER_DIR/cipher.zip")" = frozen-authority.cms
+          unzip -q "$TRANSFER_DIR/cipher.zip" -d "$TRANSFER_DIR/cipher"
+          openssl cms -decrypt -binary -inform DER -recip "$RUNNER_TEMP/transfer-cert.pem" \
+            -inkey "$TRANSFER_DIR/transfer-key.pem" -in "$TRANSFER_DIR/cipher/frozen-authority.cms" \
+            -out "$TRANSFER_DIR/frozen-authority.tar"
+          chmod 600 "$TRANSFER_DIR/frozen-authority.tar"
+          test "$(tar -tf "$TRANSFER_DIR/frozen-authority.tar")" = $'projection.json\nledger.json'
+          tar -xf "$TRANSFER_DIR/frozen-authority.tar" -C "$TRANSFER_DIR"
+          chmod 600 "$TRANSFER_DIR/projection.json" "$TRANSFER_DIR/ledger.json"
+          test "$(sha256sum "$TRANSFER_DIR/projection.json" | awk '{print $1}')" = "$PROJECTION_SHA256"
+          test "$(sha256sum "$TRANSFER_DIR/ledger.json" | awk '{print $1}')" = "$LEDGER_SHA256"
+
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          printf -v q_revision '%q' "$EXPECTED_STAGING_ACTIVE_REVISION"
+          runner_bytes="$(wc -c < "$runner" | tr -d ' ')"
+          artifact_writes=0
+          directory_writes=0
+          for key in projection ledger; do
+            import_receipt="$TRANSFER_DIR/import-${key}.json"
+            { cat "$runner"; cat "$TRANSFER_DIR/${key}.json"; } | \
+              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+                "set -euo pipefail; current=\$(readlink -f $q_path/current); test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_revision; test ! -e $q_path/.dep/deploy.lock; test \"\$(ps -eo comm=,args= | awk '\$1 == \"php\" && (\$0 ~ /dep(\\.phar)? .* staging/ || \$0 ~ /artisan migrate/ || \$0 ~ /queue:reload-workers/) {n++} \$1 == \"composer\" && \$0 ~ /install/ {n++} END {print n+0}')\" = 0; CAREER_RECOVERY_PRIVATE_ROOT=\"\$current/backend/storage/app/private\" CAREER_RECOVERY_WORKFLOW_RUN_ID=$GITHUB_RUN_ID CAREER_RECOVERY_WORKFLOW_RUN_ATTEMPT=$GITHUB_RUN_ATTEMPT CAREER_RECOVERY_RUNNER_BYTES=$runner_bytes php -r '\$n=(int)getenv(\"CAREER_RECOVERY_RUNNER_BYTES\"); \$code=\"\"; while(strlen(\$code)<\$n && !feof(STDIN)){\$code.=fread(STDIN,\$n-strlen(\$code));} if(strlen(\$code)!==\$n){exit(91);} eval(\"?>\".\$code);' -- import-${key}" \
+              > "$import_receipt"
+            chmod 600 "$import_receipt"
+            jq -e --arg key "$key" '
+              .contract_version == "career.staging_authority_artifact_recovery.control.v1"
+              and (.status == "PASS_STAGING_IMPORT_ELIGIBLE" or .status == "PASS_STAGING_FROZEN_AUTHORITY_PRESENT")
+              and (if $key == "projection" then .projection_state == "IDENTICAL" else .ledger_state == "IDENTICAL" end)
+              and .pointer_write_count == 0 and .database_write_count == 0 and .cms_write_count == 0
+              and .cache_write_count == 0 and .publication_write_count == 0
+              and .discoverability_write_count == 0 and .deployment_count == 0
+              and .migration_count == 0 and .restart_count == 0 and .permission_write_count == 0
+            ' "$import_receipt" >/dev/null
+            artifact_writes=$((artifact_writes + $(jq -r .artifact_write_count "$import_receipt")))
+            directory_writes=$((directory_writes + $(jq -r .directory_write_count "$import_receipt")))
+          done
+          test "$artifact_writes" -ge 0 && test "$artifact_writes" -le 2
+          test "$directory_writes" -ge 0 && test "$directory_writes" -le 4
+
+          post="$TRANSFER_DIR/post.json"
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "set -euo pipefail; current=\$(readlink -f $q_path/current); test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_revision; test ! -e $q_path/.dep/deploy.lock; test \"\$(ps -eo comm=,args= | awk '\$1 == \"php\" && (\$0 ~ /dep(\\.phar)? .* staging/ || \$0 ~ /artisan migrate/ || \$0 ~ /queue:reload-workers/) {n++} \$1 == \"composer\" && \$0 ~ /install/ {n++} END {print n+0}')\" = 0; CAREER_RECOVERY_PRIVATE_ROOT=\"\$current/backend/storage/app/private\" php /dev/stdin inspect-staging" \
+            < "$runner" > "$post"
+          chmod 600 "$post"
+          runtime="$TRANSFER_DIR/runtime.json"
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "set -euo pipefail; current=\$(readlink -f $q_path/current); test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_revision; sudo -n -u www-data -- env CAREER_RECOVERY_PRIVATE_ROOT=\"\$current/backend/storage/app/private\" php /dev/stdin inspect-staging" \
+            < "$runner" > "$runtime"
+          chmod 600 "$runtime"
+          jq -e '.status == "PASS_STAGING_FROZEN_AUTHORITY_PRESENT" and .projection_state == "IDENTICAL" and .ledger_state == "IDENTICAL"' "$runtime" >/dev/null
+          jq --argjson writes "$artifact_writes" --argjson dirs "$directory_writes" '
+            .mode = "apply"
+            | .status = "PASS_APPLY_STAGING_FROZEN_AUTHORITY_IMPORTED"
+            | .artifact_write_count = $writes
+            | .directory_write_count = $dirs
+            | .write_state = (if $writes > 0 then "artifacts_committed" else "already_identical" end)
+            | .writes_committed = ($writes > 0)
+            | .runtime_readable = true
+          ' "$post" > "$STAGING_RECEIPT"
+          chmod 600 "$STAGING_RECEIPT"
+
+          cert_name="career-staging-authority-recovery-cert-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          cert_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/artifacts" --jq ".artifacts[] | select(.name == \"${cert_name}\") | .id" | head -n1)"
+          test -n "$cert_id"
+          gh api --method DELETE "repos/${GITHUB_REPOSITORY}/actions/artifacts/${cipher_id}"
+          gh api --method DELETE "repos/${GITHUB_REPOSITORY}/actions/artifacts/${cert_id}"
+
+      - name: Upload sanitized staging evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: career-staging-authority-recovery-staging-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/staging-authority.json
+          if-no-files-found: error
+          retention-days: 30
+
+  finalize:
+    name: Finalize sanitized recovery receipt
+    if: always()
+    needs:
+      - production_read
+      - staging_restore
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Initialize combined failure-safe receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/career-staging-authority-artifact-recovery.json"
+          printf 'FINAL_RECEIPT=%s\n' "$receipt" >> "$GITHUB_ENV"
+          jq -n --arg mode "$MODE" --arg control "$CONTROL_PLANE_SHA" '{contract_version:"career.staging_authority_artifact_recovery.v1",mode:$mode,status:"FAIL_CLOSED",failed_stage:"ENVIRONMENT_PHASE_INCOMPLETE",control_plane_sha:$control,production_write_count:0,staging_artifact_write_count:null,pointer_write_count:0,database_write_count:0,cms_write_count:0,cache_write_count:0,publication_write_count:0,discoverability_write_count:0,deployment_count:0,migration_count:0,restart_count:0,permission_write_count:0,automatic_retry_allowed:false,fallback_allowed:false,overwrite_allowed:false}' > "$receipt"
+
+      - name: Download sanitized environment evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ needs.production_read.result }}" != success ] || [ "${{ needs.staging_restore.result }}" != success ]; then
+            exit 1
+          fi
+          evidence="$RUNNER_TEMP/evidence"
+          install -d -m 700 "$evidence"
+          gh run download "$GITHUB_RUN_ID" --name "career-staging-authority-recovery-production-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" --dir "$evidence/production"
+          gh run download "$GITHUB_RUN_ID" --name "career-staging-authority-recovery-staging-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" --dir "$evidence/staging"
+          chmod 600 "$evidence"/*/*.json
+          production="$evidence/production/production-authority.json"
+          staging="$evidence/staging/staging-authority.json"
+          jq -e '.status == "PASS_PRODUCTION_FROZEN_AUTHORITY_READ_ONLY" and .artifact_write_count == 0' "$production" >/dev/null
+          if [ "$MODE" = preflight ]; then
+            jq -e '(.status == "PASS_STAGING_IMPORT_ELIGIBLE" or .status == "PASS_STAGING_FROZEN_AUTHORITY_PRESENT") and .artifact_write_count == 0' "$staging" >/dev/null
+            final_status=PASS_PREFLIGHT_APPLY_ELIGIBLE
+          else
+            jq -e '.status == "PASS_APPLY_STAGING_FROZEN_AUTHORITY_IMPORTED" and .projection_state == "IDENTICAL" and .ledger_state == "IDENTICAL" and .artifact_write_count >= 0 and .artifact_write_count <= 2' "$staging" >/dev/null
+            final_status=PASS_APPLY_STAGING_FROZEN_AUTHORITY_IMPORTED
+          fi
+          jq -n \
+            --arg mode "$MODE" --arg status "$final_status" --arg control "$CONTROL_PLANE_SHA" \
+            --arg production_revision "$EXPECTED_PRODUCTION_ACTIVE_REVISION" --arg staging_revision "$EXPECTED_STAGING_ACTIVE_REVISION" \
+            --arg production_receipt "$PRODUCTION_POINTER_APPLY_RECEIPT_SHA256" --arg production_artifact "$PRODUCTION_POINTER_APPLY_ARTIFACT_DIGEST" \
+            --arg projection "$PROJECTION_SHA256" --arg ledger "$LEDGER_SHA256" --arg slugs "$SLUG_SET_SHA256" --arg rows "$LOCALE_ROW_SET_SHA256" \
+            --argjson run "$GITHUB_RUN_ID" --argjson attempt "$GITHUB_RUN_ATTEMPT" \
+            --argjson staging_writes "$(jq -r .artifact_write_count "$staging")" \
+            --argjson directory_writes "$(jq -r .directory_write_count "$staging")" \
+            --arg projection_state "$(jq -r .projection_state "$staging")" --arg ledger_state "$(jq -r .ledger_state "$staging")" \
+            '{
+              contract_version: "career.staging_authority_artifact_recovery.v1",
+              mode: $mode,
+              status: $status,
+              control_plane_sha: $control,
+              workflow_run_id: $run,
+              workflow_run_attempt: $attempt,
+              production_active_revision: $production_revision,
+              staging_active_revision: $staging_revision,
+              generation_id: "career-current-342-30-bootstrap-v1",
+              production_pointer_apply: {run_id: 31593321673, run_attempt: 1, receipt_sha256: $production_receipt, artifact_digest: $production_artifact},
+              authority: {projection_sha256: $projection, ledger_sha256: $ledger, slug_set_sha256: $slugs, locale_row_set_sha256: $rows, slug_count: 342, locale_row_count: 684, published_slug_count: 30, published_locale_row_count: 60},
+              staging_projection_state: $projection_state,
+              staging_ledger_state: $ledger_state,
+              production_write_count: 0,
+              staging_artifact_write_count: $staging_writes,
+              staging_directory_write_count: $directory_writes,
+              staging_runtime_readable: ($mode == "apply"),
+              pointer_write_count: 0,
+              database_write_count: 0,
+              cms_write_count: 0,
+              cache_write_count: 0,
+              publication_write_count: 0,
+              discoverability_write_count: 0,
+              deployment_count: 0,
+              migration_count: 0,
+              restart_count: 0,
+              permission_write_count: 0,
+              automatic_retry_allowed: false,
+              fallback_allowed: false,
+              overwrite_allowed: false
+            }' > "$FINAL_RECEIPT"
+
+      - name: Upload immutable sanitized recovery receipt
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: career-staging-authority-recovery-${{ inputs.mode }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/career-staging-authority-artifact-recovery.json
+          if-no-files-found: error
+          retention-days: 30
