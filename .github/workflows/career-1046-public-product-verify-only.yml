@@ -63,19 +63,16 @@ jobs:
           set -euo pipefail
           receipt="$RUNNER_TEMP/career-1046-public-product-verify-only.json"
           jq -n \
-            --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
-            --arg release "$EXPECTED_RELEASE_SHA" \
-            --arg generation "$EXPECTED_GENERATION_ID" \
             --arg run_id "$GITHUB_RUN_ID" \
             --arg run_attempt "$GITHUB_RUN_ATTEMPT" \
             '{
               contract_version: "career.1046.public_product_verify_only.v1",
               status: "FAIL_PUBLIC_PRODUCT_VERIFY_ONLY",
               failed_stage: "initialize",
-              control_plane_sha: $control,
-              release_sha: $release,
+              control_plane_sha: null,
+              release_sha: null,
               release_name_sha256: null,
-              generation_id: $generation,
+              generation_id: null,
               workflow_run_id: ($run_id | tonumber),
               workflow_run_attempt: ($run_attempt | tonumber),
               active_pointer_sha256_before: null,
@@ -132,6 +129,18 @@ jobs:
           [[ "$EXPECTED_ACTIVE_POINTER_SHA256" =~ ^[0-9a-f]{64}$ ]]
           expected="I explicitly approve read-only Career 1046 public product verification for control plane SHA ${EXPECTED_CONTROL_PLANE_SHA} release SHA ${EXPECTED_RELEASE_SHA} release ${EXPECTED_RELEASE_NAME} generation ${EXPECTED_GENERATION_ID} active pointer SHA ${EXPECTED_ACTIVE_POINTER_SHA256}."
           test "$OPERATOR_APPROVAL_PHRASE" = "$expected"
+
+          jq \
+            --arg control "$EXPECTED_CONTROL_PLANE_SHA" \
+            --arg release "$EXPECTED_RELEASE_SHA" \
+            --arg release_name_sha256 "$(printf '%s' "$EXPECTED_RELEASE_NAME" | sha256sum | awk '{print $1}')" \
+            --arg generation "$EXPECTED_GENERATION_ID" \
+            '.control_plane_sha = $control
+             | .release_sha = $release
+             | .release_name_sha256 = $release_name_sha256
+             | .generation_id = $generation' \
+            "$receipt" > "$receipt.next"
+          mv "$receipt.next" "$receipt"
 
           git fetch --no-tags origin main:refs/remotes/origin/main
           test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"

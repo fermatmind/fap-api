@@ -158,8 +158,11 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     /**
      * @return array<string, mixed>
      */
-    public function jobIndexPayload(string $publicLocale = 'zh-CN', bool $includeNonIndexable = false): array
-    {
+    public function jobIndexPayload(
+        string $publicLocale = 'zh-CN',
+        bool $includeNonIndexable = false,
+        bool $recordCacheState = true,
+    ): array {
         $normalizedLocale = $this->normalizePublicLocale($publicLocale);
         foreach ([
             'active' => $this->jobIndexActiveVersionKey($normalizedLocale, $includeNonIndexable),
@@ -170,13 +173,17 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                 ? Cache::get($this->jobIndexVersionPayloadKey($normalizedLocale, $includeNonIndexable, $version))
                 : null;
             if (is_array($payload)) {
-                $this->logJobIndexCacheState($normalizedLocale, $state, $version);
+                if ($recordCacheState) {
+                    $this->logJobIndexCacheState($normalizedLocale, $state, $version);
+                }
 
                 return $payload;
             }
         }
 
-        $this->logJobIndexCacheState($normalizedLocale, 'miss', null);
+        if ($recordCacheState) {
+            $this->logJobIndexCacheState($normalizedLocale, 'miss', null);
+        }
 
         throw new \RuntimeException(sprintf(
             'Career job index authority cache is not warm for locale %s.',

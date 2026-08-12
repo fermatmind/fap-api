@@ -91,11 +91,12 @@ final class Career1046PublicProductVerifyOnlyWorkflowTest extends TestCase
         $runner = $this->repoFile('backend/scripts/operations/career_1046_public_product_verify_only.php');
         $controller = $this->repoFile('backend/app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php');
         $service = $this->repoFile('backend/app/Services/Career/PublicCareerAuthorityResponseCache.php');
+        $reviewBridge = $this->repoFile('backend/app/Services/Career/Review/CareerPilotReviewEvidenceBridge.php');
         $publicRuntime = $this->repoFile('backend/app/Http/Middleware/RecordPublicContentRuntime.php');
         $careerSlo = $this->repoFile('backend/app/Http/Middleware/RecordCareerRuntimeSlo.php');
         $authorizer = $this->repoFile('backend/app/Support/Career/CareerVerifyOnlyRequestAuthorizer.php');
         $controlPlane = $workflow.$runner;
-        $combined = $workflow.$runner.$controller.$service.$publicRuntime.$careerSlo.$authorizer;
+        $combined = $workflow.$runner.$controller.$service.$reviewBridge.$publicRuntime.$careerSlo.$authorizer;
 
         foreach ([
             'workflow_dispatch:',
@@ -115,6 +116,10 @@ final class Career1046PublicProductVerifyOnlyWorkflowTest extends TestCase
             'X-Fermat-Career-Verify-Signature:',
             'CareerVerifyOnlyRequestAuthorizer',
             'jobDetailVerifyOnlyRead',
+            'projectDetailPayload($slug, $payload, ! $verifyOnly)',
+            'recordCacheState: $recordCacheState',
+            'ACTIVE_RELEASE_DRIFT_DURING_VERIFY',
+            'careerPublicVerifySemanticCanonicalSha',
             '.counts.directory_en == 1046',
             '.counts.directory_zh == 1046',
             '.counts.detail_targets == 2092',
@@ -153,6 +158,9 @@ final class Career1046PublicProductVerifyOnlyWorkflowTest extends TestCase
             self::assertStringNotContainsString($forbidden, $controlPlane);
         }
         self::assertSame(1, substr_count($workflow, 'uses: actions/upload-artifact@'));
+        self::assertStringContainsString('control_plane_sha: null', $workflow);
+        self::assertStringContainsString('release_sha: null', $workflow);
+        self::assertStringContainsString('generation_id: null', $workflow);
         self::assertSame(2, substr_count($publicRuntime.$careerSlo, 'careerVerifyOnly->isAuthorized($request)'));
         self::assertGreaterThanOrEqual(2, substr_count($workflow, 'git fetch --no-tags origin main:refs/remotes/origin/main'));
 
@@ -207,6 +215,7 @@ final class Career1046PublicProductVerifyOnlyWorkflowTest extends TestCase
                 $payload = [
                     'identity' => ['canonical_slug' => $slug],
                     'titles' => ['canonical' => $slug.'-'.$locale],
+                    'numeric_equivalence' => 1.0,
                 ];
                 $details[] = ['slug' => $slug, 'locale' => $locale, 'payload' => $payload];
                 $payloads[$locale][$slug] = $payload;

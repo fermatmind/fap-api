@@ -55,7 +55,8 @@ final class CareerJobDetailController extends Controller
     public function show(Request $request, string $slug): JsonResponse
     {
         $publicLocale = is_string($request->query('locale')) ? (string) $request->query('locale') : 'zh-CN';
-        $read = $this->careerVerifyOnly->isAuthorized($request)
+        $verifyOnly = $this->careerVerifyOnly->isAuthorized($request);
+        $read = $verifyOnly
             ? $this->responseCache->jobDetailVerifyOnlyRead($slug, $publicLocale)
             : $this->responseCache->jobDetailRead($slug, $publicLocale);
         $payload = $read['payload'];
@@ -64,7 +65,7 @@ final class CareerJobDetailController extends Controller
             return $this->notFoundResponse('career job detail bundle unavailable.');
         }
 
-        $payload = $this->reviewEvidenceBridge->projectDetailPayload($slug, $payload);
+        $payload = $this->reviewEvidenceBridge->projectDetailPayload($slug, $payload, ! $verifyOnly);
 
         return response()->json($this->projectReaderSafePayload($payload))
             ->header(self::PUBLIC_READ_CACHE_HEADER, $read['state']);

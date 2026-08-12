@@ -105594,6 +105594,7 @@
       "backend/app/Http/Middleware/RecordPublicContentRuntime.php",
       "backend/app/Services/Career/PublicCareerAuthorityResponseCache.php",
       "backend/app/Services/Career/CareerDirectoryAuthorityService.php",
+      "backend/app/Services/Career/Review/CareerPilotReviewEvidenceBridge.php",
       "backend/app/Support/Career/CareerVerifyOnlyRequestAuthorizer.php",
       "backend/scripts/operations/career_1046_public_product_verify_only.php",
       "backend/tests/Sre/Career1046PublicProductVerifyOnlyWorkflowTest.php",
@@ -105621,7 +105622,7 @@
       },
       "scope": {
         "status": "passed",
-        "evidence": "The worktree contains exactly the eighteen allowlisted paths: one protected manual workflow, one standalone read-only verifier, a short-lived APP_KEY HMAC authorizer restricted to the exact Career directory/detail routes, authorized no-warm/no-log reads, both telemetry bypasses with behavioral coverage, the narrow runtime-freeze ownership registration, one executable SRE contract test, one operations document and the two train ledgers. No production/staging workflow was dispatched; no SSH, frontend fallback, migration, repair, warm, rollback, deploy, DB/CMS/cache/artifact/pointer, sitemap/llms or Search mutation occurred."
+        "evidence": "The worktree contains exactly the nineteen allowlisted paths: one protected manual workflow, one standalone read-only verifier, a short-lived APP_KEY HMAC authorizer restricted to the exact Career directory/detail routes, authorized no-warm/no-log reads including review projection, both telemetry bypasses with behavioral coverage, the narrow runtime-freeze ownership registration, one executable SRE contract test, one operations document and the two train ledgers. No production/staging workflow was dispatched; no SSH, frontend fallback, migration, repair, warm, rollback, deploy, DB/CMS/cache/artifact/pointer, sitemap/llms or Search mutation occurred."
       },
       "github_required_checks": {
         "status": "pending",
@@ -105683,8 +105684,18 @@
         "at": "2026-08-12T11:15:00+08:00",
         "status": "github_check_repair",
         "note": "GitHub verify-bigfive proved the new Career verify-only authorizer was not registered under the existing Career runtime-projection ownership classifier; all 1691 other tests passed. Added exactly that support path to the classifier's existing ownership list and allowlisted the classifier test file, with no runtime behavior expansion."
+      },
+      {
+        "at": "2026-08-12T11:27:16+08:00",
+        "status": "github_review_repairing",
+        "note": "Final exact-head review found five bounded issues. The repair initializes receipts without raw inputs, re-resolves the active release after the public sweep, compares integral float/int JSON values semantically, suppresses review-projection job-index logs for signed verify-only reads, and restores the unrelated API-AD manifest state to origin/main. No production workflow was dispatched and no controlled external state was accessed or mutated."
+      },
+      {
+        "at": "2026-08-12T11:31:00+08:00",
+        "status": "github_checks_pending",
+        "note": "The five-issue repair passes the Task 7A SRE, complete detail read-model and complete review-bridge suites with 29 tests / 322 assertions, the two runtime-freeze ownership tests with 5 assertions, Pint for all 15 changed PHP files, PHP syntax, actionlint, workflow/train parsing, exact 19-file allowlist and diff checks. Fresh GitHub required checks and exact-head review remain the final merge gate; no third redundant local full-chain run was started."
       }
     ],
-    "updated_at": "2026-08-12T11:04:10+08:00"
+    "updated_at": "2026-08-12T11:31:00+08:00"
   }
 }

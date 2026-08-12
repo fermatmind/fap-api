@@ -30,7 +30,7 @@ try {
     $generation = careerPublicVerifyGeneration($expected, $release);
     $observed = careerPublicVerifyPublicProducts($expected, $generation, $release);
     $careerPublicVerifyCounts = $observed['counts'];
-    careerPublicVerifyStableReadback($expected, $generation);
+    careerPublicVerifyStableReadback($expected, $generation, $release);
 
     careerPublicVerifyEmit([
         'contract_version' => CAREER_PUBLIC_VERIFY_CONTRACT,
@@ -404,7 +404,7 @@ function careerPublicVerifyPublicProducts(array $expected, array $generation, ar
             $payload = careerPublicVerifyDecode($response['body'], 'PUBLIC_DETAIL_JSON_INVALID');
             $expectedPayload = $generation['detail_payloads'][$locale][$slug] ?? null;
             if (! is_array($expectedPayload)
-                || ! hash_equals(careerPublicVerifyCanonicalSha($expectedPayload), careerPublicVerifyCanonicalSha($payload))) {
+                || ! hash_equals(careerPublicVerifySemanticCanonicalSha($expectedPayload), careerPublicVerifySemanticCanonicalSha($payload))) {
                 $generationMismatch++;
             }
         } catch (Career1046PublicVerifyFailure) {
@@ -449,9 +449,23 @@ function careerPublicVerifyPublicProducts(array $expected, array $generation, ar
     return ['counts' => $counts];
 }
 
-/** @param array<string, mixed> $expected @param array<string, mixed> $generation */
-function careerPublicVerifyStableReadback(array $expected, array $generation): void
+/** @param array<string, mixed> $expected @param array<string, mixed> $generation @param array<string, string> $release */
+function careerPublicVerifyStableReadback(array $expected, array $generation, array $release): void
 {
+    $currentReleaseRoot = realpath($expected['deploy_path'].'/current');
+    if (! is_string($currentReleaseRoot)
+        || ! hash_equals($release['release_root'], $currentReleaseRoot)
+        || basename($currentReleaseRoot) !== $expected['release_name']) {
+        throw new Career1046PublicVerifyFailure('ACTIVE_RELEASE_DRIFT_DURING_VERIFY');
+    }
+    $currentRevision = careerPublicVerifyReadFile(
+        $currentReleaseRoot,
+        $currentReleaseRoot.'/REVISION',
+        128,
+    );
+    if (! hash_equals($expected['release_sha'], trim($currentRevision))) {
+        throw new Career1046PublicVerifyFailure('ACTIVE_RELEASE_DRIFT_DURING_VERIFY');
+    }
     $active = careerPublicVerifyReadFile(
         $generation['authority_root'],
         $generation['active_path'],
@@ -710,6 +724,28 @@ function careerPublicVerifyCanonicalJson(mixed $value): string
         $normalize($value),
         JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE,
     );
+}
+
+function careerPublicVerifySemanticCanonicalSha(mixed $value): string
+{
+    $normalizeNumbers = static function (mixed $item) use (&$normalizeNumbers): mixed {
+        if (is_float($item) && is_finite($item) && $item >= PHP_INT_MIN && $item <= PHP_INT_MAX) {
+            $integer = (int) $item;
+            if ((float) $integer === $item) {
+                return $integer;
+            }
+        }
+        if (! is_array($item)) {
+            return $item;
+        }
+        foreach ($item as $key => $child) {
+            $item[$key] = $normalizeNumbers($child);
+        }
+
+        return $item;
+    };
+
+    return hash('sha256', careerPublicVerifyCanonicalJson($normalizeNumbers($value)));
 }
 
 function careerPublicVerifyRequiredSlug(mixed $value): string

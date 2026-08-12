@@ -137,6 +137,18 @@ final class CareerJobDetailReadModel10kTest extends TestCase
         Queue::assertNothingPushed();
     }
 
+    public function test_verify_only_job_index_read_suppresses_cache_state_log(): void
+    {
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $cache->publishJobIndexReadModelsAtomically([
+            'en' => ['items' => []],
+        ]);
+        Log::spy();
+
+        $this->assertSame([], $cache->jobIndexPayload('en', recordCacheState: false)['items']);
+        Log::shouldNotHaveReceived('info');
+    }
+
     public function test_legacy_projection_is_promoted_and_reported_as_stale_for_the_current_response(): void
     {
         $cache = app(PublicCareerAuthorityResponseCache::class);

@@ -455,7 +455,7 @@ prs:
     base: main
     branch: codex/api-ad-01-rewarded-unlock
     title: "API-AD-01: add residual-risk rewarded-ad report unlock"
-    status: github_checks_pending
+    status: implementation_in_progress
     depends_on:
       - API-UNLOCK-01
     train_scope: rewarded_ad_report_unlock
@@ -49700,6 +49700,7 @@ prs:
       - backend/app/Http/Middleware/RecordPublicContentRuntime.php
       - backend/app/Services/Career/CareerDirectoryAuthorityService.php
       - backend/app/Services/Career/PublicCareerAuthorityResponseCache.php
+      - backend/app/Services/Career/Review/CareerPilotReviewEvidenceBridge.php
       - backend/app/Support/Career/CareerVerifyOnlyRequestAuthorizer.php
       - backend/scripts/operations/career_1046_public_product_verify_only.php
       - backend/tests/Sre/Career1046PublicProductVerifyOnlyWorkflowTest.php
@@ -49725,7 +49726,7 @@ prs:
       - php backend/scripts/operations/verify_career_1046_current_state_freeze.php
       - cd backend && bash scripts/ci_verify_mbti.sh through fermatmind-heavy-guard
       - parse workflow, pr-train JSON and YAML
-      - exact eighteen-file scope and forbidden production action validation
+      - exact nineteen-file scope and forbidden production action validation
       - git diff --check and git diff --cached --check
     stop_if_changed_files_outside_scope: true
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }

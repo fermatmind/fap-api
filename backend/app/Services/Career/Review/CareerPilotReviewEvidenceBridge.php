@@ -6,10 +6,10 @@ namespace App\Services\Career\Review;
 
 use App\Models\ReviewAttestation;
 use App\Services\Career\Bundles\CareerJobPublicAllowlist;
+use App\Services\Career\Dataset\CareerPublishTrackResolver;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\ReviewGovernance\CareerSeoReviewAttestationService;
 use App\Services\ReviewGovernance\ReviewAttestationCanonicalizer;
-use App\Services\Career\Dataset\CareerPublishTrackResolver;
 use Illuminate\Support\Arr;
 
 /**
@@ -160,7 +160,7 @@ final class CareerPilotReviewEvidenceBridge
     }
 
     /** @param array<string,mixed> $payload @return array<string,mixed> */
-    public function projectDetailPayload(string $slug, array $payload): array
+    public function projectDetailPayload(string $slug, array $payload, bool $recordCacheState = true): array
     {
         if (! is_array($payload['trust_manifest'] ?? null)) {
             return $payload;
@@ -170,8 +170,8 @@ final class CareerPilotReviewEvidenceBridge
             ?? self::UNAPPROVED_PROJECTION;
         $currentTargets = $this->refreshTargetCurrencyBySlug([
             strtolower(trim($slug)) => $projection,
-        ]);
-        if (! $this->detailPayloadMatchesProjection($slug, $payload, $projection)
+        ], $recordCacheState);
+        if (! $this->detailPayloadMatchesProjection($slug, $payload, $projection, $recordCacheState)
             || ! ($currentTargets[strtolower(trim($slug))] ?? false)) {
             $projection = self::UNAPPROVED_PROJECTION;
         }
@@ -250,7 +250,7 @@ final class CareerPilotReviewEvidenceBridge
      * @param  array<string,array<string,mixed>>  $projections
      * @return array<string,bool>
      */
-    private function refreshTargetCurrencyBySlug(array $projections): array
+    private function refreshTargetCurrencyBySlug(array $projections, bool $recordCacheState = true): array
     {
         $approvedSlugs = array_keys(array_filter(
             $projections,
@@ -264,7 +264,7 @@ final class CareerPilotReviewEvidenceBridge
             $this->searchEntryQualityEvaluator->resetEvaluationSnapshot();
             $this->searchEntryQualityEvaluator->primePublicationSnapshot($approvedSlugs);
 
-            return $this->currentTargetCurrencyBySlug($projections);
+            return $this->currentTargetCurrencyBySlug($projections, $recordCacheState);
         } catch (\Throwable) {
             return array_fill_keys($approvedSlugs, false);
         }
@@ -279,7 +279,7 @@ final class CareerPilotReviewEvidenceBridge
      * @param  array<string,array<string,mixed>>  $projections
      * @return array<string,bool>
      */
-    private function currentTargetCurrencyBySlug(array $projections): array
+    private function currentTargetCurrencyBySlug(array $projections, bool $recordCacheState = true): array
     {
         $slugs = array_keys(array_filter(
             $projections,
@@ -291,7 +291,7 @@ final class CareerPilotReviewEvidenceBridge
 
         try {
             $publication = $this->searchEntryQualityEvaluator->publicationSnapshot($slugs);
-            $indexItems = $this->exactIndexItems($slugs);
+            $indexItems = $this->exactIndexItems($slugs, $recordCacheState);
         } catch (\Throwable) {
             return array_fill_keys($slugs, false);
         }
@@ -468,8 +468,12 @@ final class CareerPilotReviewEvidenceBridge
     }
 
     /** @param array<string,mixed> $payload @param array<string,mixed> $projection */
-    private function detailPayloadMatchesProjection(string $slug, array $payload, array $projection): bool
-    {
+    private function detailPayloadMatchesProjection(
+        string $slug,
+        array $payload,
+        array $projection,
+        bool $recordCacheState = true,
+    ): bool {
         if (($projection['review_state'] ?? null) !== 'approved') {
             return true;
         }
@@ -485,7 +489,10 @@ final class CareerPilotReviewEvidenceBridge
         }
 
         try {
-            $indexItem = $this->exactIndexItems([strtolower(trim($slug))])[$locale][strtolower(trim($slug))];
+            $indexItem = $this->exactIndexItems(
+                [strtolower(trim($slug))],
+                $recordCacheState,
+            )[$locale][strtolower(trim($slug))];
             $currentTargets = $this->targetPayloads($payload, $indexItem);
         } catch (\Throwable) {
             return false;
@@ -571,11 +578,14 @@ final class CareerPilotReviewEvidenceBridge
     }
 
     /** @param list<string> $slugs @return array<string,array<string,array<string,mixed>>> */
-    private function exactIndexItems(array $slugs): array
+    private function exactIndexItems(array $slugs, bool $recordCacheState = true): array
     {
         $resolved = [];
         foreach (self::LOCALES as $locale) {
-            $payload = $this->responseCache->jobIndexPayload($locale);
+            $payload = $this->responseCache->jobIndexPayload(
+                $locale,
+                recordCacheState: $recordCacheState,
+            );
             $items = is_array($payload['items'] ?? null) ? $payload['items'] : [];
             foreach ($slugs as $slug) {
                 $matches = array_values(array_filter($items, static fn (mixed $item): bool => is_array($item)
