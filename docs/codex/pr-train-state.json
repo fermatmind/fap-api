@@ -105601,6 +105601,7 @@
       "backend/tests/Feature/Career/CareerDirectoryAuthorityApiTest.php",
       "backend/tests/Feature/Observability/CareerRuntimeSloAlertingTest.php",
       "backend/tests/Feature/Ops/PublicContentRuntimeMetricsTest.php",
+      "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
       "docs/operations/career-1046-public-product-verify-only.md",
       "docs/codex/pr-train.yaml",
       "docs/codex/pr-train-state.json"
@@ -105620,7 +105621,7 @@
       },
       "scope": {
         "status": "passed",
-        "evidence": "The worktree contains exactly the seventeen allowlisted paths: one protected manual workflow, one standalone read-only verifier, a short-lived APP_KEY HMAC authorizer restricted to the exact Career directory/detail routes, authorized no-warm/no-log reads, both telemetry bypasses with behavioral coverage, one executable SRE contract test, one operations document and the two train ledgers. No production/staging workflow was dispatched; no SSH, frontend fallback, migration, repair, warm, rollback, deploy, DB/CMS/cache/artifact/pointer, sitemap/llms or Search mutation occurred."
+        "evidence": "The worktree contains exactly the eighteen allowlisted paths: one protected manual workflow, one standalone read-only verifier, a short-lived APP_KEY HMAC authorizer restricted to the exact Career directory/detail routes, authorized no-warm/no-log reads, both telemetry bypasses with behavioral coverage, the narrow runtime-freeze ownership registration, one executable SRE contract test, one operations document and the two train ledgers. No production/staging workflow was dispatched; no SSH, frontend fallback, migration, repair, warm, rollback, deploy, DB/CMS/cache/artifact/pointer, sitemap/llms or Search mutation occurred."
       },
       "github_required_checks": {
         "status": "pending",
@@ -105677,6 +105678,11 @@
         "at": "2026-08-12T11:04:10+08:00",
         "status": "github_checks_pending",
         "note": "Second exact-head review correctly rejected the public marker-only telemetry bypass and remaining directory cache-state log. Replaced it with a short-lived APP_KEY HMAC bound to the exact request URI and restricted to Career directory/detail routes; unsigned, expired, forged and non-Career requests keep ordinary telemetry. Authorized directory reads suppress cache-state logging. Final focused coverage passes 8/114 and all four impacted feature files pass 37/360; thirteen-file Pint, PHP syntax, actionlint, freeze, ledger parsing, exact seventeen-path scope and diff checks pass. Per the solo-owner efficiency rule, no third redundant local full-chain run was started after two successful full runs; fresh GitHub required checks remain the final gate. No workflow was dispatched and no SSH or controlled external state was accessed or mutated."
+      },
+      {
+        "at": "2026-08-12T11:15:00+08:00",
+        "status": "github_check_repair",
+        "note": "GitHub verify-bigfive proved the new Career verify-only authorizer was not registered under the existing Career runtime-projection ownership classifier; all 1691 other tests passed. Added exactly that support path to the classifier's existing ownership list and allowlisted the classifier test file, with no runtime behavior expansion."
       }
     ],
     "updated_at": "2026-08-12T11:04:10+08:00"

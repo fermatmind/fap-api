@@ -49707,6 +49707,7 @@ prs:
       - backend/tests/Feature/Career/CareerJobDetailReadModel10kTest.php
       - backend/tests/Feature/Observability/CareerRuntimeSloAlertingTest.php
       - backend/tests/Feature/Ops/PublicContentRuntimeMetricsTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/operations/career-1046-public-product-verify-only.md
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
@@ -49724,7 +49725,7 @@ prs:
       - php backend/scripts/operations/verify_career_1046_current_state_freeze.php
       - cd backend && bash scripts/ci_verify_mbti.sh through fermatmind-heavy-guard
       - parse workflow, pr-train JSON and YAML
-      - exact seventeen-file scope and forbidden production action validation
+      - exact eighteen-file scope and forbidden production action validation
       - git diff --check and git diff --cached --check
     stop_if_changed_files_outside_scope: true
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
