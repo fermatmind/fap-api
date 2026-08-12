@@ -360,13 +360,15 @@ jobs:
           test "$(git rev-parse origin/main)" = "$CONTROL_PLANE_SHA"
           test -f "$runner" && test ! -L "$runner"
           php -l "$runner" >/dev/null
-          for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST RETIRED_DEPLOY_HOST DEPLOY_PATH SSH_KNOWN_HOSTS; do test -n "${!name:-}"; done
+          for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST DEPLOY_PATH SSH_KNOWN_HOSTS; do test -n "${!name:-}"; done
           [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
           [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
           test "$DEPLOY_PORT" -ge 1 && test "$DEPLOY_PORT" -le 65535
           [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
-          [[ "$RETIRED_DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
-          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+          if [ -n "$RETIRED_DEPLOY_HOST" ]; then
+            [[ "$RETIRED_DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+            test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+          fi
           [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
           [[ "$DEPLOY_PATH" != *"/../"* ]]
 
