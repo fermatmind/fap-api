@@ -167,8 +167,8 @@
                     "escalation_rule": "For safety risk, ongoing distress, hiring/screening use, third-person evaluation, or score-change requests, state the boundary first and point to real-world support or human review.",
                     "id": "eq.agent.playbook.understand_result",
                     "refusal_example": "I cannot use an EQ report to evaluate another person, make medical or mental-health judgments, or support hiring or screening use; I can redirect to self-understanding and low-risk practice.",
-                    "response_policy": "Start from the backend-selected formulation, score signals, and quality status, then invite the user to choose one real-world scene. Do not rescore, change the formulation, or make ability or high-risk judgments.",
-                    "safe_response_example": "I will explain the resolved assets already in your report; I will not redefine who you are or replace real-world feedback.",
+                    "response_policy": "Start from the backend-selected interpretation, score signals, and quality status, then invite the user to choose one real-world scene. Do not rescore, change the interpretation, or make ability or high-risk judgments.",
+                    "safe_response_example": "I will explain the resolved content already in your report; I will not redefine who you are or replace real-world feedback.",
                     "title": "Understand my result"
                 },
                 {
@@ -176,8 +176,8 @@
                     "escalation_rule": "When safety, trauma, high conflict, or strong power imbalance appears, do not push a script; state boundaries and recommend real-world support first.",
                     "id": "eq.agent.playbook.scene_advice",
                     "refusal_example": "If the scene involves an unsafe relationship, threats, ongoing harm, or legal/medical issues, I cannot use the report as a solution plan; real-world support comes first.",
-                    "response_policy": "Use reality-scene, mechanism, and action assets for one user-selected scene only. Avoid generalizing to all relationships or all work settings.",
-                    "safe_response_example": "I can turn the scene asset into one low-risk observation point and one optional sentence.",
+                    "response_policy": "Use reality-scene, mechanism, and action content for one user-selected scene only. Avoid generalizing to all relationships or all work settings.",
+                    "safe_response_example": "I can turn the scene content into one low-risk observation point and one optional sentence.",
                     "title": "Put the result into one scene"
                 },
                 {
@@ -186,7 +186,7 @@
                     "id": "eq.agent.playbook.career_environment",
                     "refusal_example": "I cannot use EQ results to make selection decisions, screen candidates, infer performance, or decide your career path.",
                     "response_policy": "Discuss only environment variables such as interpersonal density, feedback intensity, emotional labor, conflict frequency, recovery autonomy, and collaboration complexity. Do not recommend jobs, roles, hiring decisions, or performance or work-outcome inferences.",
-                    "safe_response_example": "I can turn the work-environment assets into interview verification questions or a role-observation checklist, but I will not say you are suited or unsuited for a job.",
+                    "safe_response_example": "I can turn the work-environment content into interview verification questions or a role-observation checklist, but I will not say you are suited or unsuited for a job.",
                     "title": "Check work-environment variables"
                 },
                 {
@@ -194,7 +194,7 @@
                     "escalation_rule": "When quality is C/D, SPEEDING, or consistency is weak, always prioritize retest boundaries and light observation.",
                     "id": "eq.agent.playbook.low_confidence",
                     "refusal_example": "I will not use a low-confidence result to give a strong profile, career judgment, relationship judgment, or guaranteed practice plan.",
-                    "response_policy": "For low confidence, explain quality limits, retest conditions, and light observations only. Do not give a firm formulation, career judgment, or action promise.",
+                    "response_policy": "For low confidence, explain quality limits, retest conditions, and light observations only. Do not give a definitive profile, career judgment, or action promise.",
                     "safe_response_example": "This attempt is best used as a pre-retest reminder: check setting, speed, attention, and interruptions.",
                     "title": "How to read a low-confidence result"
                 },
@@ -210,77 +210,77 @@
             ],
             "backend_integration_contract": [
                 {
-                    "acceptance": "Assets may enter the report payload only after content lint, content compile, mirror drift checks, canonical fixtures, and report contract tests pass.",
-                    "do_not_overread": "A passing schema means the asset is structurally readable; it does not make the content suitable for medical, personnel, credentialing, or performance decisions.",
+                    "acceptance": "content may enter the report payload only after content lint, content compile, mirror drift checks, canonical fixtures, and report contract tests pass.",
+                    "do_not_overread": "A passing schema means the content is structurally readable; it does not make the content suitable for medical, personnel, credentialing, or performance decisions.",
                     "id": "eq.backend_contract.schema_mapping",
-                    "requirement": "Each EQ asset file must map into compiler-readable content-pack structure while preserving stable asset IDs, locale fields, risk boundaries, and trigger logic.",
+                    "requirement": "Each EQ content file must map into compiler-readable content-pack structure while preserving stable content IDs, locale fields, risk boundaries, and trigger logic.",
                     "title": "Schema mapping"
                 },
                 {
-                    "acceptance": "If assets are missing, locale mismatched, guardrails unsafe, or access state anomalous, the frontend fails closed without showing commerce entry points, technical tags, or rewritten formulations.",
+                    "acceptance": "If content are missing, locale mismatched, guardrails unsafe, or access state anomalous, the frontend fails closed without showing commerce entry points, technical tags, or rewritten interpretations.",
                     "do_not_overread": "The frontend owns interaction and layout; it is not the authority for report content, scores, career judgments, or Agent answers.",
                     "id": "eq.backend_contract.frontend_consumption",
-                    "requirement": "The frontend may render backend resolved assets and UI chrome only. Official report interpretation, scientific boundaries, action guidance, and career-environment variables must not be hardcoded in frontend code.",
+                    "requirement": "The frontend may render backend resolved content and UI chrome only. Official report interpretation, scientific boundaries, action guidance, and career-environment variables must not be hardcoded in frontend code.",
                     "title": "Frontend consumption contract"
                 },
                 {
-                    "acceptance": "Fixtures cover all-free access, low-confidence handling, route selection, resolved assets, SJT planned/unavailable, no access wall, and no raw-tag leakage.",
+                    "acceptance": "Fixtures cover all-free access, low-confidence handling, content selection, resolved content, SJT planned/unavailable, no access wall, and no raw-tag leakage.",
                     "do_not_overread": "A fixture is a contract sample, not a norm sample, user distribution, or validation study.",
                     "id": "eq.backend_contract.canonical_fixtures",
-                    "requirement": "Maintain zh-CN and en payload samples for at least balanced, high_empathy_low_recovery, low_confidence, and one representative route-selection path.",
+                    "requirement": "Maintain zh-CN and en payload samples for at least balanced, high_empathy_low_recovery, low_confidence, and one representative content-selection path.",
                     "title": "Canonical fixtures"
                 },
                 {
                     "acceptance": "When these tests fail, the issue must not be bypassed with frontend fallback, Agent fallback, or static local report copy.",
                     "do_not_overread": "Contract tests protect delivery shape and boundaries; they do not establish clinical, personnel-screening, or objective-capacity-assessment validity.",
                     "id": "eq.backend_contract.contract_tests",
-                    "requirement": "Contract tests must assert that the EQ report payload includes current-version assets, score and dimension summaries, quality explanation, interpretation selection, scientific boundaries, all-free access state, and SJT unavailable state.",
+                    "requirement": "Contract tests must assert that the EQ report payload includes current-version content, score and dimension summaries, quality explanation, interpretation selection, scientific boundaries, all-free access state, and SJT unavailable state.",
                     "title": "Contract tests"
                 },
                 {
-                    "acceptance": "Agent context and runtime responses return read_only=true and explicitly keep can_mutate_report=false, can_mutate_scores=false, can_override_formulation=false, can_enable_sjt=false, and can_expose_raw_technical_tags=false.",
+                    "acceptance": "Agent context and runtime responses return read_only=true and explicitly keep can_mutate_report=false, can_mutate_scores=false, can_override_interpretation=false, can_enable_sjt=false, and can_expose_raw_technical_tags=false.",
                     "do_not_overread": "The Agent is a reflection and explanation aid, not a therapist, personnel evaluator, objective-capacity scorer, or third-party assessment tool.",
                     "id": "eq.backend_contract.agent_readiness",
-                    "requirement": "The Agent may explain only from report_context, resolved_assets, retrieval tags, intent maps, and forbidden-claim metadata. It cannot change scores, change formulations, change sections, enable SJT, create access gates, or replace backend report authority.",
+                    "requirement": "The Agent may explain only from report_context, resolved_content, retrieval tags, intent maps, and forbidden-claim metadata. It cannot change scores, change interpretations, change sections, enable SJT, create access gates, or replace backend report authority.",
                     "title": "Read-only Agent contract"
                 }
             ],
             "career_environment": [
                 {
-                    "do_not_overread": "This is a work-environment variable, not career advice, role-fit evidence, selection evidence, or a performance prediction. It can help you ask better verification questions; the same variable can work very differently across organizations, managers, cultures, and power structures.",
-                    "fit_signal": "Environment cue to observe: when collaboration complexity is high, the point is not to judge a role as good or bad. The point is to see how it may affect communication load, boundaries, and recovery.",
+                    "do_not_overread": "Collaboration complexity cannot prove fit for a type of role.",
+                    "fit_signal": "Observe whether cross-role work has a clear owner, decision right, and deadline.",
                     "id": "collaboration_complexity_high",
                     "interview_question": "Does complex collaboration have a role map, conflict process, and information rhythm?",
                     "label": "Collaboration complexity: high",
                     "level": "high",
                     "meaning": "whether the work requires coordination across multiple goals, roles, interests, and communication styles",
-                    "recovery_condition": "Verify whether there is predictable room for pause, handoff, review, and support.",
+                    "recovery_condition": "Check information handoffs, responsibility boundaries, and escalation paths.",
                     "role_observation_checklist": [
                         "Whether roles and decision rights are clear",
                         "Whether information reaches the right people",
                         "Whether coordination cost is visible"
                     ],
                     "strain_signal": "Possible strain condition: if rules, power differences, support, and recovery space are unclear, high collaboration complexity can still create pressure.",
-                    "team_risk": "When this variable stays invisible, teams often shift emotional coordination, information cleanup, or conflict buffering onto the person most willing to carry it.",
+                    "team_risk": "When collaboration structure is vague, gap-filling and emotional coordination concentrate.",
                     "variable": "collaboration_complexity",
                     "what_to_verify": "Does complex collaboration have a role map, conflict process, and information rhythm? Also observe the actual role, organization culture, management style, power structure, team resources, and your current life context."
                 },
                 {
-                    "do_not_overread": "This is a work-environment variable, not career advice, role-fit evidence, selection evidence, or a performance prediction. It can help you ask better verification questions; the same variable can work very differently across organizations, managers, cultures, and power structures.",
-                    "fit_signal": "Environment cue to observe: when feedback intensity is medium, the point is not to judge a role as good or bad. The point is to see how it may affect communication load, boundaries, and recovery.",
+                    "do_not_overread": "Feedback intensity cannot predict your performance or selection outcome.",
+                    "fit_signal": "Observe feedback frequency, specificity, and room to make corrections.",
                     "id": "feedback_intensity_medium",
                     "interview_question": "Is feedback specific, regular, and able to separate task issues from personal judgment?",
                     "label": "Feedback intensity: medium",
                     "level": "medium",
                     "meaning": "how often the work involves evaluation, revision, review, public comparison, or fast iteration",
-                    "recovery_condition": "Verify whether there is predictable room for pause, handoff, review, and support.",
+                    "recovery_condition": "Check whether feedback names behavior and allows clarification and review.",
                     "role_observation_checklist": [
                         "Whether feedback targets behavior rather than character",
                         "Whether there is time and resource to revise",
                         "Whether comparison or humiliation is used"
                     ],
                     "strain_signal": "Possible strain condition: if rules, power differences, support, and recovery space are unclear, medium feedback intensity can still create pressure.",
-                    "team_risk": "When this variable stays invisible, teams often shift emotional coordination, information cleanup, or conflict buffering onto the person most willing to carry it.",
+                    "team_risk": "When feedback rules are vague, evaluation can turn into guesswork or emotional load.",
                     "variable": "feedback_intensity",
                     "what_to_verify": "Is feedback specific, regular, and able to separate task issues from personal judgment? Also observe the actual role, organization culture, management style, power structure, team resources, and your current life context."
                 }
@@ -337,7 +337,7 @@
                 {
                     "body": "Ask about one specific part of the generated report, such as a scene, action note, or confidence explanation.",
                     "cta_label": "Ask assistant",
-                    "do_not_overread": "The assistant can only explain generated report assets; it cannot change scores, rewrite conclusions, diagnose you, or open unavailable modules.",
+                    "do_not_overread": "The assistant can only explain generated report content; it cannot change scores, rewrite conclusions, diagnose you, or open unavailable modules.",
                     "id": "eq.conversion.agent_entry",
                     "microcopy": "Free reading support; the backend report remains authoritative.",
                     "title": "Ask the result assistant"
@@ -346,9 +346,9 @@
             "core_formulation": {
                 "core_claim": "The result suggests you experience both self-focused and other-focused emotional information as usable, and you see yourself as able to turn that information into steadier communication choices. It still needs calibration against real feedback and specific contexts.",
                 "development_lever": "Translate “overall steadiness” into a repeatable sequence: notice the cue, check the boundary, then choose the communication move.",
-                "do_not_overread": "Do not treat this formulation as a fixed personality type, objective emotional ability, clinical finding, hiring signal, or job-performance prediction; it is an interpretive frame for this 60-item self-report session.",
+                "do_not_overread": "Check this interpretation against real feedback and specific situations; it does not replace behavioral observation.",
                 "evidence_basis": [
-                    "Four dimensions high or upper-stable; no severe gap."
+                    "The four relative dimension positions and response quality support this interpretation; check it against real situations."
                 ],
                 "id": "balanced_integrated",
                 "likely_cost": "A balanced self-view can make recovery, boundaries, and review feel less urgent than they are in long-running or high-demand settings.",
@@ -372,47 +372,47 @@
             },
             "mechanisms": [
                 {
-                    "cost": "The risk is mistaking a smooth self-view for stable ability and missing fatigue, power differences, or relationship history.",
-                    "development_lever": "Development lever: After naming the emotion, add one slowing or recovery step. Use it as a concrete review entry point, not proof of a fixed deficit.",
-                    "do_not_overread": "This is a mechanism hypothesis organized from this self-report session, not causal proof, behavioral prediction, objective ability score, clinical judgment, hiring signal, or job-performance prediction; culture, power differences, safety, relationship history, and context can all change how it appears.",
+                    "cost": "The risk is treating this smooth self-rating as stable ability and missing context around noticing your inner state and making room to recover.",
+                    "development_lever": "Next practice focus: After naming the emotion, add one slowing or recovery step. Use it as a concrete review entry point, not proof of a fixed deficit.",
+                    "do_not_overread": "Check noticing your inner state and making room to recover in a real situation; the SA_ER score combination does not establish cause or ability.",
                     "id": "SA_ER_high_high",
                     "micro_action": "Micro-action: in the next similar scene, add only one step. After naming the emotion, add one slowing or recovery step.",
                     "pair": "SA_ER",
                     "state": "high_high",
-                    "strength": "The useful signal is a more complete chain, so reflection does not have to focus only on deficits.",
+                    "strength": "The useful possibility is a clearer link in noticing your inner state and making room to recover.",
                     "title": "Self-awareness x emotion regulation: coordinated strengths",
-                    "what_it_feels_like": "When both sides feel available, you may connect cues to action more easily, while the actual situation still determines whether that connection holds.",
+                    "what_it_feels_like": "In this self-report, both parts of noticing your inner state and making room to recover feel available; stress and relationship safety may still change what happens.",
                     "why_it_matters": "This mechanism focuses on how noticing your inner state connects to recovery and response. It helps locate which link in the chain needs observation, but it cannot by itself predict real-world behavior."
                 },
                 {
-                    "cost": "The risk is mistaking a smooth self-view for stable ability and missing fatigue, power differences, or relationship history.",
-                    "development_lever": "Development lever: Translate understanding into one small move: acknowledge, ask, or offer options without deciding for them. Use it as a concrete review entry point, not proof of a fixed deficit.",
-                    "do_not_overread": "This is a mechanism hypothesis organized from this self-report session, not causal proof, behavioral prediction, objective ability score, clinical judgment, hiring signal, or job-performance prediction; culture, power differences, safety, relationship history, and context can all change how it appears.",
+                    "cost": "The risk is treating this smooth self-rating as stable ability and missing context around understanding another person and choosing a relational response.",
+                    "development_lever": "Next practice focus: Translate understanding into one small move: acknowledge, ask, or offer options without deciding for them. Use it as a concrete review entry point, not proof of a fixed deficit.",
+                    "do_not_overread": "Check understanding another person and choosing a relational response in a real situation; the EM_RM score combination does not establish cause or ability.",
                     "id": "EM_RM_high_high",
                     "micro_action": "Micro-action: in the next similar scene, add only one step. Translate understanding into one small move: acknowledge, ask, or offer options without deciding for them.",
                     "pair": "EM_RM",
                     "state": "high_high",
-                    "strength": "The useful signal is a more complete chain, so reflection does not have to focus only on deficits.",
+                    "strength": "The useful possibility is a clearer link in understanding another person and choosing a relational response.",
                     "title": "Empathy understanding x relationship management: coordinated strengths",
-                    "what_it_feels_like": "When both sides feel available, you may connect cues to action more easily, while the actual situation still determines whether that connection holds.",
+                    "what_it_feels_like": "In this self-report, both parts of understanding another person and choosing a relational response feel available; stress and relationship safety may still change what happens.",
                     "why_it_matters": "This mechanism focuses on how emotional cues you notice become visible and appropriate relational action. It helps locate which link in the chain needs observation, but it cannot by itself predict real-world behavior."
                 }
             ],
             "personalization_route": {
                 "claim_risk": "medium",
                 "commercial_depth": {
-                    "fallback_strategy": "if selected assets are missing, render formulation + dimension summary + scientific boundary only",
+                    "fallback_strategy": "if selected content are missing, render formulation + dimension summary + scientific boundary only",
                     "first_screen_strategy": "route_headline + evidence label + next best action",
-                    "reader_trust_strategy": "explain why this route was selected without exposing scoring internals"
+                    "reader_trust_strategy": "explain why this reading was selected without exposing scoring internals"
                 },
-                "do_not_overread": "This is a self-report content route used to decide which assets to read first. It is not a scoring rule, fixed identity label, capacity judgment, diagnosis, personnel-screening tool, or career prediction.",
-                "evidence_snapshot_label": "Route evidence: core formulation, relative dimension positions, response-quality signals, and selected assets.",
+                "do_not_overread": "This is a self-report reading order used to decide which content to read first. It is not a scoring rule, fixed identity label, capacity judgment, diagnosis, personnel-screening tool, or career prediction.",
+                "evidence_snapshot_label": "interpretation basis: core interpretation, relative dimension positions, response-quality signals, and selected content.",
                 "formulation_id": "balanced_integrated",
                 "id": "route.eq.balanced_integrated.primary.quality_ab",
                 "next_best_action": "Pick one pressure scene and notice how your steady pattern is maintained.",
                 "priority": 100,
                 "route_headline": "Self-report pattern: Integrated balance",
-                "save_reason": "Save this route so you can compare it with real interactions later.",
+                "save_reason": "Save this result so you can compare it with real interactions later.",
                 "selected_asset_ids": {
                     "action_prescription_id": "integrated_maintenance",
                     "career_environment_ids": [
@@ -454,13 +454,13 @@
                     "schema": "eq60.signal_signature.v1",
                     "strongest_dimension": null
                 },
-                "why_this_feels_specific": "The four dimensions sit relatively evenly; maintain what already works. This is a reading route organized from this response session, not a fixed definition of you.",
-                "why_this_route_exists": "This self-report result mainly shows Integrated balance: the four dimensions sit relatively evenly; maintain what already works. The route prioritizes mechanisms, scenes, and actions that explain this pattern."
+                "why_this_feels_specific": "The four dimensions sit relatively evenly; maintain what already works. This is a reading order organized from this response session, not a fixed definition of you.",
+                "why_this_route_exists": "This self-report result mainly shows Integrated balance: the four dimensions sit relatively evenly; maintain what already works. Start with mechanisms, scenes, and actions that explain this pattern."
             },
             "psychometric_evidence_status": [
                 {
                     "body": "Current standard scores, percentiles, and bands use a provisional norming approach. They describe relative self-report position in the current sample and version, not final global norms, ability ranking, or real-world performance ranking.",
-                    "do_not_overread": "Do not read the current evidence status as a formal ability test, certification, clinical judgment, hiring basis, career prediction, or high-stakes decision evidence.",
+                    "do_not_overread": "Percentiles are relative positions in the current versioned provisional sample.",
                     "id": "eq.evidence.norm_status",
                     "next_validation_step": "Continue expanding samples, stratify by language/region/age and related variables, and publish norm-version notes with interpretation limits.",
                     "status": "provisional",
@@ -469,7 +469,7 @@
                 },
                 {
                     "body": "EQ-60 items, the four-dimension structure, and result-page interpretations have been mapped to self-reported emotional and relational functioning. The current evidence mainly supports content coverage and interpretation boundaries, not formal criterion validation or ability measurement.",
-                    "do_not_overread": "Do not read the current evidence status as a formal ability test, certification, clinical judgment, hiring basis, career prediction, or high-stakes decision evidence.",
+                    "do_not_overread": "Current evidence supports content coverage and interpretation boundaries only.",
                     "id": "eq.evidence.content_validity",
                     "next_validation_step": "Continue review by psychometric, boundary, and localization reviewers for item coverage, dimension assignment, cultural context, and misinterpretation risk.",
                     "status": "preliminary",
@@ -478,7 +478,7 @@
                 },
                 {
                     "body": "Internal consistency should be estimated by language, region, and dimension after sufficient sample accumulation, with version tracking for item and report changes. The current page should not imply completed reliability evidence.",
-                    "do_not_overread": "Do not read the current evidence status as a formal ability test, certification, clinical judgment, hiring basis, career prediction, or high-stakes decision evidence.",
+                    "do_not_overread": "Internal-consistency evidence still needs accumulation by language and dimension.",
                     "id": "eq.evidence.internal_consistency",
                     "next_validation_step": "After sample growth, report alpha/omega or more suitable reliability indices by dimension and inspect the effect of low-quality responses on estimates.",
                     "status": "planned",
@@ -487,7 +487,7 @@
                 },
                 {
                     "body": "The four-dimension model currently serves as the report interpretation framework. Suitable exploratory/confirmatory analyses are still needed to test whether items consistently support SA, ER, EM, and RM.",
-                    "do_not_overread": "Do not read the current evidence status as a formal ability test, certification, clinical judgment, hiring basis, career prediction, or high-stakes decision evidence.",
+                    "do_not_overread": "The four-dimension structure still needs testing in larger samples.",
                     "id": "eq.evidence.factor_structure",
                     "next_validation_step": "Use larger samples to examine EFA/CFA results, item loadings, dimension correlations, and model fit, with separate checks by language version.",
                     "status": "planned",
@@ -496,7 +496,7 @@
                 },
                 {
                     "body": "Test-retest stability still needs observation over appropriate time windows. EQ-60 is self-report, so recent stress, relationship events, and response state may influence results.",
-                    "do_not_overread": "Do not read the current evidence status as a formal ability test, certification, clinical judgment, hiring basis, career prediction, or high-stakes decision evidence.",
+                    "do_not_overread": "Compare trends after 30–90 days or a meaningful life change.",
                     "id": "eq.evidence.test_retest",
                     "next_validation_step": "Compare retests over reasonable windows such as 30–90 days to separate stable self-perception, situational fluctuation, and low-quality response effects.",
                     "status": "planned",
@@ -505,7 +505,7 @@
                 },
                 {
                     "body": "Measurement invariance across Chinese/English versions, regions, and user groups still needs testing. Without invariance evidence, score meanings should not be directly compared across languages or groups.",
-                    "do_not_overread": "Do not read the current evidence status as a formal ability test, certification, clinical judgment, hiring basis, career prediction, or high-stakes decision evidence.",
+                    "do_not_overread": "Scores should not be directly compared across languages or groups.",
                     "id": "eq.evidence.measurement_invariance",
                     "next_validation_step": "Check DIF, item interpretation differences, dimension structure, and score distributions by language and major user group; adjust interpretation where needed rather than forcing equivalence.",
                     "status": "planned",
@@ -514,7 +514,7 @@
                 },
                 {
                     "body": "External-association evidence is not being used to support high-stakes decisions. Future work may only explore links with low-risk indicators such as self-reported recovery, communication satisfaction, or growth-goal completion.",
-                    "do_not_overread": "Do not read the current evidence status as a formal ability test, certification, clinical judgment, hiring basis, career prediction, or high-stakes decision evidence.",
+                    "do_not_overread": "Current results cannot predict relationship, work, or health outcomes.",
                     "id": "eq.evidence.criterion_validity",
                     "next_validation_step": "Design low-risk, non-hiring, non-clinical external-indicator studies and state clearly that association is not prediction or causation.",
                     "status": "planned",
@@ -528,111 +528,114 @@
             },
             "quality_confidence": {
                 "body": "Your response pace and consistency support normal report reading.",
-                "how_to_read": "Start with the core insight and evidence snapshot, then compare the selected scenes with your recent experience.",
+                "how_to_read": "Start with the key finding and supporting scores, then compare the selected scenes with your recent experience.",
                 "id": "eq.quality.level.A",
                 "label": "High interpretation confidence",
                 "retest_note": "If you want to observe change, retest after 30–90 days or after a meaningful life change.",
                 "user_guidance": "You can read the core pattern, dimension summary, and action suggestions while keeping them as self-report interpretation, not ability ranking or external evaluation.",
                 "what_to_hold_lightly": "Specific scores, percentiles, and bands are still estimates within a provisional sample; they are not precise ability rankings, diagnoses, or career judgments.",
-                "what_to_trust": "The relative dimension pattern, selected formulation, and selected scenes can be read with normal confidence.",
+                "what_to_trust": "The relative dimension pattern, selected interpretation, and selected scenes can be read with normal confidence.",
                 "why_this_level": "Speed, repeated choices, extreme/neutral responding, and consistency signals did not show a clear response-quality risk."
             },
             "reality_scenes": [
                 {
-                    "better_move": "Ask for one concrete point first, then decide whether to explain, adjust, or observe further.",
-                    "cost": "If feedback is read as a judgment of you as a person, it can lead to defensiveness, over-explaining, or missing useful information. Do not read “balanced” as stable in every situation.",
-                    "do_not_overread": "This is a scene interpretation based on this EQ-60 self-report session. It is not external observation, an objective ability score, a clinical judgment, hiring screen, career recommendation, or prediction of job performance. Culture, power differences, safety, relationship history, trauma history, and context can all change how it appears. If threat, coercion, violence, severe distress, or a high-risk relationship is involved, prioritize real-world support or qualified help.",
+                    "better_move": "Do one thing: ask for one specific behavior and its impact.",
+                    "context": "When someone identifies a problem, requests a change, or evaluates your work or communication.",
+                    "cost": "If tone becomes the whole message, or task criticism becomes a character judgment, the response can miss the issue.",
+                    "do_not_overread": "If feedback includes humiliation, threat, or coercive power, prioritize safety and support.",
                     "evidence_signals": [
                         "balanced_integrated",
                         "feedback"
                     ],
                     "fallback_scene_id": "feedback",
                     "id": "eq.scene.feedback.balanced_integrated.primary",
-                    "micro_script": "Which part would you most like me to adjust: the outcome, the process, or the way I communicated?",
-                    "reflection_prompt": "Write one fact, one feeling, and one lower-risk next step.",
-                    "reflection_question": "In this scene, what most shaped your response: the information, the other person’s role, relationship safety, or your own recovery space?",
-                    "result_page_depth": "Use in Reality Translation cards, Agent scene follow-ups, and retest comparison; not for behavior prediction.",
+                    "micro_script": "Can you name one specific behavior and the impact it had?",
+                    "reflection_prompt": "Record the specific behavior, actual impact, and one point to clarify.",
+                    "reflection_question": "Which behavior did the other person name, and what judgment did you hear in it?",
+                    "result_page_depth": "For feedback review, not for inferring others’ evaluations or your ability.",
                     "scene_family": "feedback",
-                    "strength": "It can help you separate the information being offered from the emotion it triggers. This is a self-report resource cue, not proof of external ability.",
-                    "tiny_experiment": "Next time this feedback scene appears, note one trigger and one lower-risk response option; do not turn one reaction into a long-term conclusion.",
-                    "title": "Feedback: integrated balance",
-                    "typical_response": "You tend to hold emotion, relationship, and task in view together. In feedback, this should not be read as a prediction of what you will do. It is a way to notice whether facts, relationship signals, pressure, or boundaries get your attention first.",
+                    "strength": "The useful possibility is turning a vague evaluation into discussable facts; verify it against actual feedback exchanges.",
+                    "tiny_experiment": "At the next feedback moment, record only the named behavior and impact before deciding how to respond.",
+                    "title": "Feedback: make the evaluation concrete",
+                    "typical_response": "This response suggests the self-perceived pattern “Integrated balance.” In feedback, check whether you can separate task information from a judgment about you as a person before choosing a response.",
                     "variant": "primary",
-                    "why_this_matters": "This scene turns “integrated but context-sensitive” from an abstract result into an observable everyday moment."
+                    "why_this_matters": "Turns a broad evaluation into one behavior discussion you can verify."
                 },
                 {
-                    "better_move": "Narrow the conflict to one workable issue; if there is threat, humiliation, or coercive pressure, prioritize safety and support.",
-                    "cost": "If treated as a fixed reaction style, it may ignore power differences, safety risks, and the other person’s behavior. Do not read “balanced” as stable in every situation.",
-                    "do_not_overread": "This is a scene interpretation based on this EQ-60 self-report session. It is not external observation, an objective ability score, a clinical judgment, hiring screen, career recommendation, or prediction of job performance. Culture, power differences, safety, relationship history, trauma history, and context can all change how it appears. If threat, coercion, violence, severe distress, or a high-risk relationship is involved, prioritize real-world support or qualified help.",
+                    "better_move": "Do one thing: narrow the dispute to one workable issue; stop the conversation if it is unsafe.",
+                    "context": "When disagreement, sharper tone, mutual defensiveness, or stalled problem-solving appears.",
+                    "cost": "When issues pile up, explanation, defense, or concession can replace actual problem-solving.",
+                    "do_not_overread": "With threat, coercion, violence, or a marked power gap, pausing is appropriate and safety comes first.",
                     "evidence_signals": [
                         "balanced_integrated",
                         "conflict"
                     ],
                     "fallback_scene_id": "conflict",
                     "id": "eq.scene.conflict.balanced_integrated.primary",
-                    "micro_script": "Let’s narrow this to one issue: what needs to be solved first?",
-                    "reflection_prompt": "Write one fact, one feeling, and one lower-risk next step.",
-                    "reflection_question": "In this scene, what most shaped your response: the information, the other person’s role, relationship safety, or your own recovery space?",
-                    "result_page_depth": "Use in Reality Translation cards, Agent scene follow-ups, and retest comparison; not for behavior prediction.",
+                    "micro_script": "Let’s discuss only this issue; if we cannot do that safely now, I am going to pause.",
+                    "reflection_prompt": "Record the current issue, the pause boundary, and one safe next step.",
+                    "reflection_question": "What is the one issue that must be handled now, and are the conditions safe and sufficiently equal?",
+                    "result_page_depth": "For conflict review, not for predicting how you will handle disagreement.",
                     "scene_family": "conflict",
-                    "strength": "This cue can show what you tend to protect first under pressure. This is a self-report resource cue, not proof of external ability.",
-                    "tiny_experiment": "Next time this conflict scene appears, note one trigger and one lower-risk response option; do not turn one reaction into a long-term conclusion.",
-                    "title": "Conflict: integrated balance",
-                    "typical_response": "You tend to hold emotion, relationship, and task in view together. In conflict, this should not be read as a prediction of what you will do. It is a way to notice whether facts, relationship signals, pressure, or boundaries get your attention first.",
+                    "strength": "The useful possibility is identifying the small part that needs handling now, rather than proving who is right.",
+                    "tiny_experiment": "At the next disagreement, write one sentence describing the current issue without adding older grievances.",
+                    "title": "Conflict: narrow the issue and pause when needed",
+                    "typical_response": "This response suggests the self-perceived pattern “Integrated balance.” As conflict rises, check whether you can separate the current dispute, older grievances, and safety concerns instead of solving everything at once.",
                     "variant": "primary",
-                    "why_this_matters": "This scene turns “integrated but context-sensitive” from an abstract result into an observable everyday moment."
+                    "why_this_matters": "Narrows conflict to one issue while preserving the option to pause."
                 },
                 {
-                    "better_move": "Acknowledge the feeling, then name what you can and cannot take on right now.",
-                    "cost": "If empathy is the only focus, another person’s emotional load can become your long-term obligation. Do not read “balanced” as stable in every situation.",
-                    "do_not_overread": "This is a scene interpretation based on this EQ-60 self-report session. It is not external observation, an objective ability score, a clinical judgment, hiring screen, career recommendation, or prediction of job performance. Culture, power differences, safety, relationship history, trauma history, and context can all change how it appears. If threat, coercion, violence, severe distress, or a high-risk relationship is involved, prioritize real-world support or qualified help.",
+                    "better_move": "Do one thing: use one sentence to acknowledge the feeling and state what is and is not within your limit.",
+                    "context": "When someone expects understanding, help, concession, or continued emotional availability.",
+                    "cost": "Expressing understanding without defining a limit can turn temporary help into an open-ended obligation.",
+                    "do_not_overread": "A boundary is not a safety plan; coercion, threat, or violence calls for real-world support.",
                     "evidence_signals": [
                         "balanced_integrated",
                         "relationship_boundary"
                     ],
                     "fallback_scene_id": "relationship_boundary",
                     "id": "eq.scene.relationship_boundary.balanced_integrated.primary",
-                    "micro_script": "I understand this matters to you; what I can take on right now is this part.",
-                    "reflection_prompt": "Write one fact, one feeling, and one lower-risk next step.",
-                    "reflection_question": "In this scene, what most shaped your response: the information, the other person’s role, relationship safety, or your own recovery space?",
-                    "result_page_depth": "Use in Reality Translation cards, Agent scene follow-ups, and retest comparison; not for behavior prediction.",
+                    "micro_script": "I hear that this is painful; what I can do is …, and what I cannot do is ….",
+                    "reflection_prompt": "Record the feeling you understand, what you can do, and what you cannot do.",
+                    "reflection_question": "What are you genuinely willing to carry, and what exceeds your time, responsibility, or safety limit?",
+                    "result_page_depth": "For boundary review, not for judging relationship quality.",
                     "scene_family": "relationship_boundary",
-                    "strength": "It helps you separate care, responsibility, and available capacity. This is a self-report resource cue, not proof of external ability.",
-                    "tiny_experiment": "Next time this relationship boundary scene appears, note one trigger and one lower-risk response option; do not turn one reaction into a long-term conclusion.",
-                    "title": "Relationship boundary: integrated balance",
-                    "typical_response": "You tend to hold emotion, relationship, and task in view together. In relationship boundary, this should not be read as a prediction of what you will do. It is a way to notice whether facts, relationship signals, pressure, or boundaries get your attention first.",
+                    "strength": "The useful possibility is separating care from unlimited responsibility so that support has a clear boundary.",
+                    "tiny_experiment": "Before answering the next request, write down the part you can realistically take on.",
+                    "title": "Relationship boundaries: acknowledge and define the limit",
+                    "typical_response": "This response suggests the self-perceived pattern “Integrated balance.” When another person brings a strong feeling or request, check whether you can acknowledge it while stating what you can and cannot take on.",
                     "variant": "primary",
-                    "why_this_matters": "This scene turns “integrated but context-sensitive” from an abstract result into an observable everyday moment."
+                    "why_this_matters": "Separates care from responsibility and makes the boundary speakable."
                 }
             ],
             "result_page_depth_modules": [
                 {
                     "body": "Start with one “this response pattern suggests” statement, check one evidence point, then choose one low-risk action. Do not treat the report as a personality verdict, ability ranking, or relationship diagnosis.",
                     "id": "eq.depth.how_to_read.default",
-                    "placement": "Core Insight Hero",
+                    "placement": "Key Finding",
                     "title": "How to read this in 30 seconds"
                 },
                 {
-                    "body": "This report reads four self-report dimensions, dimension gaps, response quality, and the selected content route together. It gives structure to interpretation; it does not reduce you to an ability score.",
+                    "body": "This report reads four self-report dimensions, dimension gaps, response quality, and the selected reading order together. It gives structure to interpretation; it does not reduce you to an ability score.",
                     "bullets": [
                         "Dimension signals: self-reported SA / ER / EM / RM positions",
-                        "Gap signal: strongest dimension and current development lever",
+                        "Gap signal: strongest dimension and current next practice focus",
                         "Quality signal: how much interpretation this response pattern can support",
-                        "Route signal: which scenes and actions are worth observing first"
+                        "Observation focus: which scenes and actions are worth checking first"
                     ],
                     "id": "eq.depth.evidence_stack.default",
-                    "placement": "Evidence Snapshot",
+                    "placement": "Supporting Scores",
                     "title": "How to read the evidence",
-                    "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction."
+                    "what_this_does_not_mean": "“How to read the evidence” only organizes this self-report session; it is not ability, diagnosis, hiring, or career-prediction evidence."
                 },
                 {
                     "body": "For the next week, observe three low-risk signals: whose emotion you notice first, whether you can state one boundary, and roughly how long recovery takes afterward. In high-conflict, trauma-related, unsafe, or high-power-difference situations, do not use this report as a substitute for professional support.",
                     "id": "eq.depth.reality_check.default",
-                    "placement": "Reality Translation",
+                    "placement": "Situation Review",
                     "title": "Reality check"
                 },
                 {
-                    "body": "This module treats “balanced integration” as an interpretation route for this self-report result, not as a stable type or ability conclusion.",
+                    "body": "“balanced integration” is one possible reading of this self-report result. Check it against recent examples before deciding whether it fits.",
                     "bullets": [
                         "Score signal: all four dimensions sit in a relatively stable range with no sharp gap.",
                         "your responses suggest you tend to track emotion, facts, and relationship goals together.",
@@ -640,9 +643,9 @@
                     ],
                     "id": "eq.depth.evidence_stack.balanced_integrated",
                     "next_read": "Next, read the reality scenes, career-environment variables, and one low-risk action. Treat them as observation hypotheses, not conclusions.",
-                    "placement": "Evidence Snapshot",
+                    "placement": "Supporting Scores",
                     "title": "How the evidence supports this reading",
-                    "what_this_does_not_mean": "This is a deep-read interpretation based on this self-report result. It is not evidence for every situation, external evaluation, ability testing, clinical or mental-health judgment, hiring decisions, or career prediction."
+                    "what_this_does_not_mean": "“How the evidence supports this reading” only organizes this self-report session; it is not ability, diagnosis, hiring, or career-prediction evidence."
                 }
             ],
             "result_snapshot": {
@@ -656,7 +659,7 @@
                 ],
                 "core_judgment": "Your responses suggest a tendency to track your own state, other people, and the relationship goal at the same time. This is a self-report pattern, not an ability rating or fixed identity claim.",
                 "do_not_overread": "The first screen is a reading entry point for this 60-item self-report session. It is not an external observation, objective ability score, clinical finding, hiring signal, or prediction of job performance.",
-                "evidence_point": "This snapshot is based on the relative dimension pattern, score gaps, response quality, and selected mechanism assets; it reflects this session only.",
+                "evidence_point": "This snapshot is based on the relative dimension pattern, score gaps, response quality, and selected mechanism content; it reflects this session only.",
                 "headline": "Balanced integration pattern",
                 "id": "eq.snapshot.balanced_integrated",
                 "likely_cost": "If others quietly expect you to stabilize the room, that strength can turn into invisible emotional labor.",
@@ -670,21 +673,21 @@
                 "top_strength": "You tend to consider emotion, relationship, and task together instead of optimizing for only one target."
             },
             "scientific_contract": {
-                "do_not_overread": "Read this report as an interpretive sketch from this 60-item self-report session, not as external observation, an objective ability score, a stable personality diagnosis, a hiring signal, a career prediction, or a prediction of job performance.",
-                "non_ability_statement": "EQ-60 is not an emotional-ability test, not MSCEIT, and not a certified emotional-intelligence assessment. It cannot prove true emotional ability, communication ability, or relationship ability. If EQ-SJT is added later, it will only add scenario-choice signals; it will not turn the report into an ability credential.",
+                "do_not_overread": "Read the report as an interpretive sketch of this self-report session, not for clinical diagnosis, hiring, career prediction, job-performance prediction, or evaluation of another person.",
+                "non_ability_statement": "EQ-60 is not an emotional-ability test, MSCEIT, certification, clinical tool, or hiring tool. It cannot prove communication, relationship, or work ability.",
                 "non_clinical_statement": "This report is not for clinical diagnosis, treatment evaluation, medical advice, crisis decisions, or psychological risk assessment. If distress keeps affecting sleep, work, interpersonal safety, or daily functioning, seek qualified professional or real-world support.",
                 "non_hiring_statement": "This result must not be used for hiring, selection, rejection, promotion, role assignment, performance review, team screening, or any high-stakes organizational decision. It should not be used to judge whether another person is suitable for a role.",
-                "norm_status_statement": "Standard scores, percentiles, and bands currently use provisional norms and versioned interpretation. Percentiles provide a relative-position reference within the current sample, not an ability ranking, true-level ranking, final global norm, or career-competitiveness ranking.",
-                "quality_rules_statement": "Interpretation confidence considers response speed, repeated identical choices, extreme choices, neutral choices, and consistency signals. Low-confidence results should be treated primarily as response-quality guidance and retest advice, not as strong profiling, career conclusions, or action prescriptions.",
-                "self_report_statement": "EQ-60 is a self-report assessment: results come from your own descriptions. They are useful for self-understanding and review, but they do not directly prove how you perform in every real situation and cannot replace observer ratings or scenario-task data.",
-                "test_definition": "This report is based on your self-reported responses to 60 items. It organizes how you describe your emotional awareness, emotion regulation, empathic understanding, and relational action tendencies. It explains a self-perception pattern from this response session; it is not external observation, a live behavior record, an objective ability test, or a certification.",
+                "norm_status_statement": "Standard scores, percentiles, and bands use the current version's provisional norms. A percentile is only a relative position in that provisional sample, not a ranking of ability, worth, or career competitiveness.",
+                "quality_rules_statement": "Interpretation confidence considers response speed, repeated identical choices, extreme choices, neutral choices, and consistency signals. Low-confidence results should be treated primarily as response-quality guidance and retest advice, not as strong profiling, career conclusions, or practice recommendations.",
+                "self_report_statement": "EQ-60 is a self-report tool. The result can support reflection, tracking, and review, but it cannot directly prove how you perform in real situations.",
+                "test_definition": "This report comes from your self-descriptions across 60 items. It organizes emotional awareness, regulation, empathic understanding, and relational-action tendencies in this response session; it is not external observation or an objective ability test.",
                 "user_safe_summary": "Use it for self-understanding, relational reflection, low-risk communication practice, and work-environment variable review.",
-                "version_statement": "The report is generated from the item version, scoring version, norm version, and content-asset version. Versioning supports retest comparison, support investigation, and editorial review; it does not mean the result has clinical, hiring, or ability certification."
+                "version_statement": "The report records item, scoring, norm, and content versions for retest comparison and quality tracking; version numbers do not confer clinical, hiring, or ability certification."
             },
             "score_system": {
                 "band_details": {
                     "developing": {
-                        "do_not_overread": "The total-score band is only a report-reading entry. It does not replace dimensions, response quality, evidence status, or scene interpretation, and it is not an ability ranking, diagnosis, or career judgment.",
+                        "do_not_overread": "It describes this session’s self-rating, not how you always act.",
                         "label": "Developing",
                         "meaning": "You have a usable base, but consistency may drop during feedback, pressure, or relational tension.",
                         "practice_focus": "Pick one frequent scene and prepare one response sentence.",
@@ -692,7 +695,7 @@
                         "strength": "You already catch part of the signal and can turn it into a routine."
                     },
                     "foundational": {
-                        "do_not_overread": "The total-score band is only a report-reading entry. It does not replace dimensions, response quality, evidence status, or scene interpretation, and it is not an ability ranking, diagnosis, or career judgment.",
+                        "do_not_overread": "Use this band as a practice starting point, not an ability floor.",
                         "label": "Foundational",
                         "meaning": "The current self-report signal suggests starting with clearer recognition, naming, and reset habits.",
                         "practice_focus": "Name one emotion daily and pair it with one low-cost reset action.",
@@ -700,7 +703,7 @@
                         "strength": "Small repeatable actions can create more stable progress."
                     },
                     "integrated": {
-                        "do_not_overread": "The total-score band is only a report-reading entry. It does not replace dimensions, response quality, evidence status, or scene interpretation, and it is not an ability ranking, diagnosis, or career judgment.",
+                        "do_not_overread": "“Integrated” does not mean no blind spots and is not for career decisions.",
                         "label": "Integrated",
                         "meaning": "The four signals often work together, helping you hold self, others, and the relationship goal in view.",
                         "practice_focus": "Build recovery boundaries so stabilizing others does not become your default duty.",
@@ -708,7 +711,7 @@
                         "strength": "You can systematize strengths into boundaries, repair, and recovery rhythm."
                     },
                     "proficient": {
-                        "do_not_overread": "The total-score band is only a report-reading entry. It does not replace dimensions, response quality, evidence status, or scene interpretation, and it is not an ability ranking, diagnosis, or career judgment.",
+                        "do_not_overread": "“Proficient” is not an ability credential or a duty to stabilize others.",
                         "label": "Proficient",
                         "meaning": "You can usually recognize, regulate, and handle relational signals with good consistency.",
                         "practice_focus": "Move from “I can handle this” to “I choose how to handle this.”",
@@ -716,7 +719,7 @@
                         "strength": "You can turn personal strengths into repeatable communication habits."
                     },
                     "stable": {
-                        "do_not_overread": "The total-score band is only a report-reading entry. It does not replace dimensions, response quality, evidence status, or scene interpretation, and it is not an ability ranking, diagnosis, or career judgment.",
+                        "do_not_overread": "“Stable” can change with pressure and context; it is not trait proof.",
                         "label": "Stable",
                         "meaning": "In many everyday settings, these emotional and relational patterns are easier to use, with specific triggers still visible.",
                         "practice_focus": "Identify one scene where stability drops and review it afterward.",
@@ -785,14 +788,14 @@
             },
             "sjt_bridge": {
                 "available": false,
-                "button_label": "Not available yet",
-                "description": "You are seeing the EQ-60 self-report result. The 16-item EQ-SJT scenario module is still planned and would only serve as a supplemental layer, describing response-choice tendencies in feedback, conflict, boundary, and pressure situations. There is no item entry or integrated report yet.",
-                "do_not_overread": "This module is not open. Do not read the SJT note as meaning that items are available, that validation is complete, or that the module measures true emotional ability.",
+                "button_label": "No scenario-task result",
+                "description": "This report contains the EQ-60 self-report result only; it contains no scenario-task result.",
+                "do_not_overread": "This page provides no scenario-task entry or conclusion.",
                 "id": "eq.sjt_bridge.planned",
                 "status": "planned_unavailable",
-                "title": "Future Scenario Module",
-                "what_it_adds": "It would add signals about scenario choices, responses under pressure, boundary handling, and repair strategies, helping compare self-perception with scenario-choice tendencies.",
-                "what_it_is_not": "It is not MSCEIT, not a certified ability test, not a clinical diagnostic tool, not a hiring screen, and not a career-prediction instrument. It also would not replace the EQ-60 self-report."
+                "title": "Current report scope",
+                "what_it_adds": "There is currently no scenario-task data to interpret.",
+                "what_it_is_not": "This is not MSCEIT and does not provide objective ability evidence."
             }
         },
         "cross_assessment_context": {
@@ -922,36 +925,36 @@
             "personalization_route": {
                 "claim_risk": "medium",
                 "commercial_depth": {
-                    "fallback_strategy": "if selected assets are missing, render formulation + dimension summary + scientific boundary only",
+                    "fallback_strategy": "if selected content are missing, render formulation + dimension summary + scientific boundary only",
                     "first_screen_strategy": "route_headline + evidence label + next best action",
-                    "reader_trust_strategy": "explain why this route was selected without exposing scoring internals"
+                    "reader_trust_strategy": "explain why this reading was selected without exposing scoring internals"
                 },
                 "do_not_overread": {
-                    "en": "This is a self-report content route used to decide which assets to read first. It is not a scoring rule, fixed identity label, capacity judgment, diagnosis, personnel-screening tool, or career prediction.",
-                    "zh-CN": "这是一条自我报告内容路由，用于决定先读哪些资产；它不是评分规则、固定人格标签、能力判断、诊断、人事筛选或职业预测。"
+                    "en": "This is a self-report reading order used to decide which content to read first. It is not a scoring rule, fixed identity label, capacity judgment, diagnosis, personnel-screening tool, or career prediction.",
+                    "zh-CN": "这是一条自我报告阅读顺序，用于决定先读哪些内容；它不是评分规则、固定人格标签、能力判断、诊断、人事筛选或职业预测。"
                 },
                 "formulation_id": "balanced_integrated",
                 "locales": {
                     "en": {
-                        "evidence_snapshot_label": "Route evidence: core formulation, relative dimension positions, response-quality signals, and selected assets.",
+                        "evidence_snapshot_label": "interpretation basis: core interpretation, relative dimension positions, response-quality signals, and selected content.",
                         "next_best_action": "Pick one pressure scene and notice how your steady pattern is maintained.",
                         "route_headline": "Self-report pattern: Integrated balance",
-                        "save_reason": "Save this route so you can compare it with real interactions later.",
-                        "why_this_feels_specific": "The four dimensions sit relatively evenly; maintain what already works. This is a reading route organized from this response session, not a fixed definition of you."
+                        "save_reason": "Save this result so you can compare it with real interactions later.",
+                        "why_this_feels_specific": "The four dimensions sit relatively evenly; maintain what already works. This is a reading order organized from this response session, not a fixed definition of you."
                     },
                     "zh-CN": {
-                        "evidence_snapshot_label": "路线依据：核心 formulation、四维相对位置、质量信号和已选资产。",
+                        "evidence_snapshot_label": "解读依据：核心解读、四维相对位置、质量信号和相关内容。",
                         "next_best_action": "选一个高压场景，观察你的稳定做法如何被保持。",
                         "route_headline": "本次自我报告呈现：均衡整合",
-                        "save_reason": "保存这条路线，之后可用真实互动检验它是否仍然贴近。",
-                        "why_this_feels_specific": "四维相对均衡，适合维护已经可用的节奏；这只是本次作答组织出的阅读路线，不是对你的固定定义。"
+                        "save_reason": "保存本次结果，之后可用真实互动检验它是否仍然贴近。",
+                        "why_this_feels_specific": "四维相对均衡，适合维护已经可用的节奏；这只是本次作答组织出的阅读顺序，不是对你的固定定义。"
                     }
                 },
                 "priority": 100,
                 "route_id": "route.eq.balanced_integrated.primary.quality_ab",
                 "why_this_route_exists": {
-                    "en": "This self-report result mainly shows Integrated balance: the four dimensions sit relatively evenly; maintain what already works. The route prioritizes mechanisms, scenes, and actions that explain this pattern.",
-                    "zh-CN": "本次自评主要呈现均衡整合：四维相对均衡，适合维护已经可用的节奏。路线优先展示能解释这个模式的机制、场景和行动。"
+                    "en": "This self-report result mainly shows Integrated balance: the four dimensions sit relatively evenly; maintain what already works. Start with mechanisms, scenes, and actions that explain this pattern.",
+                    "zh-CN": "本次自评主要呈现均衡整合：四维相对均衡，适合维护已经可用的节奏。建议优先阅读能解释这个模式的机制、场景和行动。"
                 }
             },
             "primary_mechanism_ids": [
