@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Schema;
 
 final class ScaleRegistrySeeder extends Seeder
 {
-    public function run(): void
+    public function run(bool $preserveExistingBigFiveContent = false): void
     {
         if (! Schema::hasTable('scales_registry') || ! Schema::hasTable('scale_slugs')) {
             $this->command?->warn('ScaleRegistrySeeder skipped: missing tables.');
@@ -237,7 +237,7 @@ final class ScaleRegistrySeeder extends Seeder
 
             'is_public' => true,
             'is_active' => true,
-        ]);
+        ], preserveExistingContent: $preserveExistingBigFiveContent);
 
         $writer->syncSlugsForScale($big5);
         $this->command?->info('ScaleRegistrySeeder: BIG5_OCEAN scale upserted.');

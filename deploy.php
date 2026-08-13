@@ -804,7 +804,7 @@ BASH);
 });
 
 task('artisan:scales:seed-default', function () {
-    run('{{bin/php}} '.deployPlaceholderPathArg('{{release_path}}', 'backend/artisan').' fap:scales:seed-default --no-interaction --ansi');
+    run('{{bin/php}} '.deployPlaceholderPathArg('{{release_path}}', 'backend/artisan').' fap:scales:seed-default --preserve-existing-big-five-content --no-interaction --ansi');
 });
 
 task('career:public-authority-cache-verified_unchanged', function () {

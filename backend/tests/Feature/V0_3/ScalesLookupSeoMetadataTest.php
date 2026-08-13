@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\V0_3;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 final class ScalesLookupSeoMetadataTest extends TestCase
@@ -123,5 +124,38 @@ final class ScalesLookupSeoMetadataTest extends TestCase
             'The 120-question full version takes about 15 minutes; the 90-question standard version takes about 11 minutes.',
             $duration['a'] ?? null
         );
+    }
+
+    public function test_default_scale_seed_preserves_existing_big_five_editorial_content_bytes(): void
+    {
+        $existingByTable = [
+            'scales_registry' => json_encode([
+                'zh' => ['when_to_use' => 'production-legacy-content'],
+            ], JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR),
+            'scales_registry_v2' => json_encode([
+                'en' => ['when_to_use' => 'production-v2-content'],
+            ], JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR),
+        ];
+
+        foreach ($existingByTable as $table => $content) {
+            DB::table($table)
+                ->where('org_id', 0)
+                ->where('code', 'BIG5_OCEAN')
+                ->update(['content_i18n_json' => $content]);
+        }
+
+        $this->artisan('fap:scales:seed-default', [
+            '--preserve-existing-big-five-content' => true,
+        ])->assertExitCode(0);
+
+        foreach ($existingByTable as $table => $content) {
+            $this->assertSame(
+                $content,
+                DB::table($table)
+                    ->where('org_id', 0)
+                    ->where('code', 'BIG5_OCEAN')
+                    ->value('content_i18n_json')
+            );
+        }
     }
 }

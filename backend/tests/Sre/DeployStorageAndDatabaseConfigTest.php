@@ -1357,6 +1357,10 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringNotContainsString('landing-surfaces:import-local-baseline', $deployer);
         $this->assertStringNotContainsString('content-pages:import-local-baseline', $deployer);
         $this->assertStringContainsString(
+            'fap:scales:seed-default --preserve-existing-big-five-content --no-interaction --ansi',
+            $deployer,
+        );
+        $this->assertStringContainsString(
             "after('artisan:scales:seed-default', 'guard:career-runtime-projection-authority');",
             $deployer,
         );
