@@ -52,6 +52,14 @@ final class EnneagramRegistryPackLoadTest extends TestCase
         $this->assertCount(9, (array) data_get($pack, 'type_registry.entries'));
         $this->assertCount(15, (array) data_get($pack, 'pair_registry.entries'));
         $this->assertDoesNotMatchRegularExpression('/[\x{3400}-\x{9fff}\x{f900}-\x{faff}]/u', $serialized);
+        $this->assertDoesNotMatchRegularExpression(
+            '/perfect type|ego type|am i (?:a )?(?:size|number) [1-9]|knowledge precipitation|career adaptation|personnel decision-making conclusions|current outline is scattered|central judgments|grading conclusion|default default|staying alive|low-resource hypothesis|self-requirements/i',
+            $serialized,
+        );
+        $this->assertSame(
+            ['The Reformer', 'The Helper', 'The Achiever', 'The Individualist', 'The Investigator', 'The Loyalist', 'The Enthusiast', 'The Challenger', 'The Peacemaker'],
+            collect((array) data_get($pack, 'type_registry.entries'))->pluck('type_name_cn')->all(),
+        );
         $this->assertStringStartsWith('sha256:', (string) ($pack['release_hash'] ?? ''));
         $this->assertNotSame($loader->resolveRegistryReleaseHash(), $loader->resolveRegistryReleaseHash(null, 'en'));
         $this->assertSame([], app(RegistryValidator::class)->validate($pack));
