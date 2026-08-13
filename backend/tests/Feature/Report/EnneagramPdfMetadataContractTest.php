@@ -117,8 +117,8 @@ final class EnneagramPdfMetadataContractTest extends TestCase
      */
     public static function formsProvider(): iterable
     {
-        yield 'e105' => ['enneagram_likert_105', 'E105 标准版', 'e105', 'anon_enneagram_pdf_meta_105'];
-        yield 'fc144' => ['enneagram_forced_choice_144', 'FC144 深度版', 'fc144', 'anon_enneagram_pdf_meta_144'];
+        yield 'e105' => ['enneagram_likert_105', 'E105 五点量表版', 'e105', 'anon_enneagram_pdf_meta_105'];
+        yield 'fc144' => ['enneagram_forced_choice_144', 'FC144 二选一迫选版', 'fc144', 'anon_enneagram_pdf_meta_144'];
     }
 
     private function createSubmittedEnneagramAttempt(string $anonId, string $token, string $formCode): string

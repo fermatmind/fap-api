@@ -288,7 +288,7 @@ final class EnneagramReadReportContractTest extends TestCase
             (string) data_get($projection, 'form.methodology_variant')
         );
         $this->assertSame(
-            $formCode === 'enneagram_likert_105' ? 'standard' : 'deep',
+            $formCode === 'enneagram_likert_105' ? 'likert_response' : 'forced_choice_response',
             (string) data_get($projection, 'classification.precision_level')
         );
         $this->assertSame(
@@ -324,7 +324,7 @@ final class EnneagramReadReportContractTest extends TestCase
         $pages = is_array($reportV2['pages'] ?? null) ? $reportV2['pages'] : [];
         $modules = is_array($reportV2['modules'] ?? null) ? $reportV2['modules'] : [];
         $this->assertCount(5, $pages);
-        $this->assertCount(42, $modules);
+        $this->assertCount(41, $modules);
 
         foreach ($pages as $page) {
             $this->assertIsArray($page);

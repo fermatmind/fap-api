@@ -19,7 +19,7 @@
             "method_key": "e105_standard_methodology",
             "form_variant": "e105",
             "display_context": "result_page",
-            "copy": "The E105 standard version uses Likert intensity responses to form nine-type clue outlines, Top3, Dominance Gap and close-call reading entries within the same question type. It is suitable as a starting point for self-observation, but is not intended for clinical diagnosis, mental health screening, ability measurement, recruitment screening, or stable personality determination; scores can only be read within the context of E105's own question types and scoring.",
+            "copy": "The E105 five-point Likert form uses rating responses to form a full nine-type profile, top three candidates, a leading-candidate gap, and close-call comparison within one scoring context. It is a starting point for self-observation, and its scores are interpreted only within E105.",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
@@ -27,7 +27,7 @@
             "method_key": "fc144_forced_choice_methodology",
             "form_variant": "fc144",
             "display_context": "result_page",
-            "copy": "FC144 uses forced-choice pairing selection to observe the motivational cues that you repeatedly prefer in dilemmas. It is especially suitable as a supplementary observation after close-call. It is not a more accurate version than E105, nor does it replace E105's primary_candidate, Top3, or raw scoring facts; results should be read within the boundaries of FC144's own question types, and cross-form differences cannot be interpreted as personality changes or assessment strengths and weaknesses.",
+            "copy": "The FC144 two-option forced-choice form records relative preference signals across paired choices and can provide another observation after a close-call result. Both forms have the same evidence status. FC144 does not replace E105's primary candidate, top three candidates, or raw scoring facts, and its results are interpreted only within the FC144 scoring context.",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
@@ -35,7 +35,7 @@
             "method_key": "same_model_not_same_score_space",
             "form_variant": "all",
             "display_context": "technical_note",
-            "copy": "E105 and FC144 belong to the same ENNEAGRAM model and interpretation framework, but have different question types, answering tasks, scoring sources and error structures, and are not in the same score space. The system can reuse the result page structure, module order, and security boundaries; the history, sharing, PDF, and retest entrances must also retain the source identification of their respective forms. The page will not directly compare the two sets of values ​​by default, nor will it interpret the differences in the Top 3 across forms as changes in individual status, personality development, or who is more real.",
+            "copy": "E105 and FC144 use the same Enneagram interpretation framework but different response tasks, scoring sources, and error structures, so they do not share a scoring space. History, sharing, PDF, and retest surfaces retain each form's source. The page does not directly compare their values or interpret cross-form differences in the top three candidates as personality change.",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
@@ -43,7 +43,7 @@
             "method_key": "cross_form_compare_blocked",
             "form_variant": "all",
             "display_context": "history",
-            "copy": "Cross-form comparison is turned off by default. Unless there is a verified equivalence mapping in the future, the system will not put E105 and FC144 into the same score comparison semantics; history pages, sharing cards and results review should not generate cross-question conclusions such as \"improvement/decline\", \"healthier/unhealthy\" and \"more accurate this time\".",
+            "copy": "Cross-form comparison is disabled. Unless a validated equivalence mapping becomes available, E105 and FC144 remain in separate scoring contexts, and history, sharing, and result-review surfaces do not infer improvement, decline, health status, or measurement precision from their differences.",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
@@ -51,7 +51,7 @@
             "method_key": "non_diagnostic_boundary",
             "form_variant": "all",
             "display_context": "technical_note",
-            "copy": "This result is only used for personality pattern understanding, self-observation and reflective dialogue. The Enneagram should be considered an evidence-based explanatory tool rather than a well-validated clinical scale, mental health judgment, treatment recommendation, recruitment screening, job matching, competency evaluation, or individual risk assessment. High scores, primary candidates, Top3, close-call, diffuse, and low-quality tips can only be used as explanation hypotheses; if a certain work, team, or relationship situation module is not enabled, it only means that the current product does not open the situational explanation, and it does not mean that the system hides more certain adaptations, risks, or diagnostic conclusions.",
+            "copy": "This result supports personality-pattern reflection, self-observation, and dialogue. Current research does not support treating the Enneagram as a well-validated clinical scale. It is not used for mental-health judgment, treatment recommendations, hiring, job matching, competency evaluation, or individual risk assessment. Scores, leading candidates, close-call, diffuse, and response-quality states remain hypotheses to check against real situations.",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
@@ -59,7 +59,7 @@
             "method_key": "user_confirmed_type_boundary",
             "form_variant": "all",
             "display_context": "observation",
-            "copy": "user_confirmed_type is the self-resonance evidence recorded by the user after observation. It is not a system revision, nor is it a type confirmation from a higher authority. It can be entered into the history record to help mark the user's perspective during subsequent reading; it can only be presented as a self-observation note when shared or viewed back, and will not cover the primary_candidate, Top3, scorer output, or the scoring facts of the original attempt.",
+            "copy": "A user-confirmed type records the user's own resonance after observation. It is not a system rescore or external confirmation. History and sharing surfaces present it only as a self-observation note; it does not overwrite the primary candidate, top three candidates, scorer output, or original scoring facts.",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
@@ -75,7 +75,7 @@
             "method_key": "diffuse_boundary",
             "form_variant": "all",
             "display_context": "result_page",
-            "copy": "Diffuse means that the nine type clues are scattered, or the Top3 has not yet formed a clear enough primary and secondary relationship. It’s not a failed response, it’s not an ineffective system, it’s not a sign of personality disorder or mental health. The page will reduce the tone of certainty of a single number and give priority to the side-by-side reading of Top3, three-center distribution, recent counterexamples and 7-day observation tasks; retesting can only provide another answer sample and cannot automatically correct it to a more stable or realistic type.",
+            "copy": "Diffuse means the nine type signals do not yet form a clear leading pattern. The page lowers certainty about any one number and prioritizes the top three candidates, center distribution, recent counterexamples, and a seven-day observation task. Retesting provides another response sample; it does not automatically correct the result to a particular type.",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
@@ -83,7 +83,7 @@
             "method_key": "close_call_boundary",
             "form_variant": "all",
             "display_context": "result_page",
-            "copy": "close-call means Top1 is close to Top2, and the system will not pretend to be more certain than the data. The page will convert the differences into pair discrimination, counterexample checking and 7-day observation questions; it is not a proof of dual personality, type instability or the need to forcibly choose one from the other.",
+            "copy": "A close-call means the first and second candidates are close. The page turns their differences into side-by-side comparison, counterexample checks, and seven-day observation questions without requiring a forced type decision.",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         }

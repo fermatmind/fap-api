@@ -18,7 +18,7 @@
         {
             "section_key": "test_goal",
             "title": "测试目标",
-            "body": "FermatMind 九型人格测试的目标不是把用户压缩成一个不可改变的号码，也不是宣称已经完成临床级人格测量；它提供一套可阅读、可观察、可反馈的动力结构说明。系统优先交付主候选、Top3、全谱、close-call 与方法边界，再把用户带回现实观察。Technical Note 用来说明这些页面模块怎样从作答信号、解释规则和运营指标中生成，以及哪些结论仍只能作为理论解释或产品假设。",
+            "body": "FermatMind 九型人格测试提供一组可阅读、可观察、可反馈的动力结构假设。系统先展示主候选、前三候选、九型完整轮廓与接近型辨析，再把阅读带回真实情境。技术说明解释这些模块如何由作答信号和解释规则生成，以及哪些内容仍只是理论解释或产品假设。",
             "metric_refs": [],
             "data_status": "available",
             "content_maturity": "p0_ready",
@@ -26,8 +26,8 @@
         },
         {
             "section_key": "e105_fc144_forms",
-            "title": "E105 与 FC144 两个 form",
-            "body": "E105 是标准版入口，用 Likert 强度建立全谱与 Top3；FC144 是 close-call 后的深度辨析 form，用 forced-choice 帮助用户在相近候选之间观察取舍。两者属于同一 ENNEAGRAM 模型，但题型、分数来源和适用问题不同。Technical Note 会把它们放在同一证据层级里说明：FC144 不是更高权威版本，也不用于覆盖 E105 的 primary candidate。",
+            "title": "E105 与 FC144 两种作答形式",
+            "body": "E105 五点量表版通过强度评分形成九型完整轮廓与前三候选；FC144 二选一迫选版通过成对选择记录相对取舍线索。两种题型处在同一证据层级，分数来源和适用问题不同，FC144 不覆盖 E105 的主候选。",
             "metric_refs": [],
             "data_status": "available",
             "content_maturity": "p0_ready",
@@ -35,8 +35,8 @@
         },
         {
             "section_key": "score_space_boundary",
-            "title": "Score space 边界",
-            "body": "E105 的分数来自 Likert 强度，FC144 的分数来自 pairwise choice 的相对偏好。它们都被投影到同一结果壳中，但不默认进入同一数值比较语义。这就是 same model 不等于 same score space 的原因。",
+            "title": "计分空间边界",
+            "body": "E105 的分数来自五点量表强度，FC144 的分数来自成对选择的相对偏好。它们可以进入同一结果结构，但不进入同一数值比较语义。",
             "metric_refs": [
                 "E105_FC144_score_space_boundary"
             ],
@@ -46,8 +46,8 @@
         },
         {
             "section_key": "dominance_gap",
-            "title": "Dominance Gap",
-            "body": "Dominance Gap 描述的是同一 form、同一 score space 内 Top1 与 Top2 的相对差距，用来帮助系统选择 clear、close-call 或 diffuse 的保守语气。E105 与 FC144 的题型和计分单位不同，gap 不能被当成跨表单、跨人群或跨时间的统一尺子；它也不是测量误差范围、统计置信区间、常模排名、外部效度证明或人格确定性。",
+            "title": "主次线索差距",
+            "body": "主次线索差距描述同一题型、同一计分空间内第一候选与第二候选的相对距离，用来选择清晰、接近型辨析或分布较分散的解释语气。E105 与 FC144 的计分单位不同，该差距不能被当成跨题型、跨人群或跨时间的统一尺子；它也不是测量误差范围、统计置信区间、常模排名、外部效度证明或人格确定性。",
             "metric_refs": [
                 "top_gap_distribution"
             ],
@@ -57,8 +57,8 @@
         },
         {
             "section_key": "confidence_band",
-            "title": "Confidence Band",
-            "body": "当前系统会输出 clear、close_call、diffuse、low_quality 等解释范围。它们控制的是结果页语气、模块显隐与推荐动作，而不是宣称某个号码已经被绝对证明。clear 表示本次同一 form 的解释较集中；close_call 表示需要并排阅读；diffuse 表示需要降低单一号码语气；low_quality 表示作答信号不足以支撑强解释。",
+            "title": "解释稳定性",
+            "body": "解释稳定性控制结果页语气、模块显隐与推荐动作。线索清晰表示本次同一题型内的解释较集中；接近型辨析表示需要并排阅读；分布较分散表示需要降低单一号码语气；作答质量边界表示信号不足以支撑强解释。",
             "metric_refs": [
                 "confidence_band_distribution"
             ],
@@ -68,8 +68,8 @@
         },
         {
             "section_key": "close_call",
-            "title": "Close-call",
-            "body": "当 Top1 与 Top2 接近时，系统不会假装自己比数据更确定，而会进入 pair 辨析与 7 天观察任务。close-call 是模糊性治理位，不是改判机制。",
+            "title": "接近型辨析",
+            "body": "当第一候选与第二候选接近时，页面会提供并排比较与 7 天观察任务，不把微小差距写成确定结论。",
             "metric_refs": [
                 "close_call_rate",
                 "misidentification_matrix"
@@ -80,8 +80,8 @@
         },
         {
             "section_key": "diffuse",
-            "title": "Diffuse",
-            "body": "Diffuse 指 profile shape 中多个类型线索同时抬头，Top1 与相邻候选还不足以支持强主型叙述。它是解释范围的降确定性状态，不是失败、无效、人格混乱或低质量作答。系统会把阅读重心从单一号码转向 Top3 的共同主题、三中心分布、与近期生活相反的证据，以及可复查的观察任务；只有这些线索在真实情境中持续出现，才适合继续收窄解释。",
+            "title": "分布较分散",
+            "body": "分布较分散表示多个类型线索同时出现，第一候选与相邻候选还不足以支持强主候选叙述。页面会把阅读重心转向前三候选的共同主题、三中心分布、近期反例和可复查的观察任务。",
             "metric_refs": [
                 "profile_entropy_distribution"
             ],
@@ -91,8 +91,8 @@
         },
         {
             "section_key": "low_quality",
-            "title": "Low-quality",
-            "body": "当真实质量信号触发时，系统会进入 low_quality 边界。P0 里 low_quality 的作用是收窄语气和推荐同 form 重测，而不是给用户贴上不可靠标签。",
+            "title": "作答质量边界",
+            "body": "当质量信号触发时，页面会收窄解释语气，并建议在状态稳定时重测同一题型，而不是给用户贴标签。",
             "metric_refs": [
                 "low_quality_rate",
                 "low_quality_close_call_relation"
@@ -103,8 +103,8 @@
         },
         {
             "section_key": "retake_stability",
-            "title": "Retake Stability",
-            "body": "重测稳定性是后续 Technical Note 会持续跟踪的指标。P0 先公开定义和采集计划，不提前承诺具体稳定率数字。稳定性证据需要区分同一 form 重测、跨 form agreement、短期状态波动和用户反馈；在样本、时间间隔与作答质量不足时，页面不会把一次重测差异解释成人格改变。",
+            "title": "重测稳定性",
+            "body": "技术说明会持续跟踪重测稳定性，但在样本、时间间隔与作答质量证据充分前不承诺稳定率。分析需要区分同一题型重测、跨题型一致程度、短期状态波动和用户反馈；一次重测差异不能解释成人格改变。",
             "metric_refs": [
                 "retake_consistency_index",
                 "top1_stability",
@@ -116,8 +116,8 @@
         },
         {
             "section_key": "e105_fc144_agreement",
-            "title": "E105 / FC144 Agreement",
-            "body": "E105 与 FC144 的 agreement 用于评估双题型在 Top1 或 Top3 上的重叠度，而不是用来证明二者可以直接比较分数。P0 先定义指标与采集方向，后续再基于样本评估是否公开具体指标。agreement 只能说明两个题型在候选排序上的一致程度，不能单独证明九型人格模型的外部效度、临床效度或职业预测能力。",
+            "title": "E105 与 FC144 一致程度",
+            "body": "E105 与 FC144 的一致程度用于观察双题型在第一候选或前三候选上的重叠，不代表两套分数可以直接比较。它只能描述候选排序的一致程度，不能单独证明九型人格模型的外部效度、临床效度或职业预测能力。",
             "metric_refs": [
                 "E105_FC144_agreement",
                 "close_call_conversion"
@@ -128,8 +128,8 @@
         },
         {
             "section_key": "resonance_feedback",
-            "title": "Resonance Feedback",
-            "body": "用户的 Day7 resonance feedback 和 user_confirmed_type 会作为自我观察证据进入历史，用于研究和内容校准，但不会静默覆盖 primary_candidate。用户反馈是观察层，不是系统重判；它可以提示哪些叙述需要降权、补充反例或改写表达，但不能把共鸣感直接等同于测量正确性。",
+            "title": "共鸣反馈",
+            "body": "用户第 7 天的共鸣反馈和自我确认类型会作为自我观察证据进入历史，用于研究和内容校准，但不会静默覆盖主候选。用户反馈是观察层，不是系统重判；它可以提示哪些叙述需要降权、补充反例或改写表达，但不能把共鸣感直接等同于测量正确性。",
             "metric_refs": [
                 "resonance_feedback",
                 "observation_completion_rate"
@@ -141,7 +141,7 @@
         {
             "section_key": "method_boundaries",
             "title": "方法边界",
-            "body": "本测试用于人格模式理解与自我观察，不用于临床诊断、招聘筛选、治疗建议、健康层级硬判或绝对人格定性。wing、arrow、subtype 与发展阶段语言在当前版本只作为解释层或未来模块保留位，不做硬判。Technical Note 的证据层级默认分为：已上线的产品规则、正在采集的运营指标、计划中的稳定性指标、以及仅作理论背景的解释框架；这些层级不能混写成同一种确定性。",
+            "body": "本测试用于人格模式理解与自我观察，不用于临床诊断、招聘筛选、治疗建议、健康层级判断或固定人格定论。当前版本只把翼型、箭头、亚型与发展阶段作为理论背景或未来模块保留位，不作硬判断。技术说明会区分产品规则、采集中的运营指标、计划中的稳定性指标和理论解释框架，不把它们写成同一种确定性。",
             "metric_refs": [],
             "data_status": "available",
             "content_maturity": "p0_ready",
@@ -150,7 +150,7 @@
         {
             "section_key": "privacy",
             "title": "隐私与数据",
-            "body": "公开说明只使用聚合后的方法指标，不公开个人 answer payload、私密 observation 文本或可识别单个用户的反馈记录。share 页面不默认展示 observation 私密内容，user_confirmed_type 也不会被当作系统最终类型。用户反馈、样例内容和 Technical Note 指标都应遵守最小必要、聚合展示和可回溯原则；若某项指标仍处于 planned 或 collecting 状态，页面只说明定义与采集方向，不展示伪造数字。",
+            "body": "公开说明只使用聚合后的方法指标，不公开个人答案、私密观察文本或可识别单个用户的反馈记录。分享页不默认展示私密观察内容，用户确认类型也不会被当作系统最终类型。用户反馈、样例内容和技术说明指标遵守最小必要、聚合展示和可回溯原则；仍在计划或采集中的指标只说明定义与采集方向，不展示虚构数字。",
             "metric_refs": [],
             "data_status": "available",
             "content_maturity": "p0_ready",

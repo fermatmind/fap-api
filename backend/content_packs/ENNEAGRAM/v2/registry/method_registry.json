@@ -19,7 +19,7 @@
             "method_key": "e105_standard_methodology",
             "form_variant": "e105",
             "display_context": "result_page",
-            "copy": "E105 标准版使用 Likert 强度作答，用来形成同一题型内的九型线索轮廓、Top3、Dominance Gap 与 close-call 阅读入口。它适合做自我观察的起点，但不是临床诊断、心理健康筛查、能力测量、招聘筛选或稳定人格定论；分数只能在 E105 自身的题型和计分语境内阅读。",
+            "copy": "E105 五点量表版使用五点量表作答，用来形成同一题型内的九型完整轮廓、前三候选、主次线索差距与接近型辨析入口。它适合作为自我观察的起点；分数只能在 E105 自身的题型和计分语境内阅读。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
@@ -27,7 +27,7 @@
             "method_key": "fc144_forced_choice_methodology",
             "form_variant": "fc144",
             "display_context": "result_page",
-            "copy": "FC144 使用 forced-choice 配对选择，用来观察你在两难取舍中反复偏向的动机线索，尤其适合作为 close-call 后的补充观察。它不是比 E105 更准确的版本，也不会替代 E105 的 primary_candidate、Top3 或原始计分事实；结果应按 FC144 自身题型边界阅读，不能把跨 form 差异解释为人格变化或测评优劣。",
+            "copy": "FC144 二选一迫选版通过成对选择记录两难取舍中的相对动机线索，可作为接近型辨析后的另一份观察材料。两种题型处在同一证据层级，FC144 不替代 E105 的主候选、前三候选或原始计分事实；结果应按 FC144 自身题型边界阅读，不能把跨题型差异解释为人格变化或测评优劣。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
@@ -35,7 +35,7 @@
             "method_key": "same_model_not_same_score_space",
             "form_variant": "all",
             "display_context": "technical_note",
-            "copy": "E105 与 FC144 属于同一 ENNEAGRAM 模型和解释框架，但题型、作答任务、计分来源和误差结构不同，不处在同一 score space。系统可以复用结果页结构、模块顺序和安全边界；历史、分享、PDF 与重测入口也必须保留各自 form 的来源标识。页面不会默认直接比较两套数值高低，也不会把跨 form 的 Top3 差异解读成个体状态变化、人格发展或谁更真实。",
+            "copy": "E105 与 FC144 属于同一九型解释框架，但题型、作答任务、计分来源和误差结构不同，不处在同一计分空间。结果页可以复用结构和安全边界；历史、分享、PDF 与重测入口必须保留各自题型来源。页面不直接比较两套数值高低，也不把跨题型的前三候选差异解读成个体状态变化、人格发展或谁更真实。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
@@ -43,7 +43,7 @@
             "method_key": "cross_form_compare_blocked",
             "form_variant": "all",
             "display_context": "history",
-            "copy": "跨 form 对比默认关闭。除非未来存在经过验证的等值映射，系统不会把 E105 与 FC144 放入同一分数比较语义；历史页、分享卡和结果回看都不应生成“提升/下降”“更健康/更不健康”“这次更准确”这类跨题型结论。",
+            "copy": "跨题型对比默认关闭。除非未来存在经过验证的等值映射，系统不会把 E105 与 FC144 放入同一分数比较语义；历史页、分享卡和结果回看都不生成提升、下降、健康程度或测量精度变化等跨题型结论。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
@@ -51,7 +51,7 @@
             "method_key": "non_diagnostic_boundary",
             "form_variant": "all",
             "display_context": "technical_note",
-            "copy": "本结果只用于人格模式理解、自我观察和反思对话。九型人格在证据基础上应被当作解释工具，而不是已充分验证的临床量表、心理健康判断、治疗建议、招聘筛选、岗位匹配、能力评价或个体风险评估。高分、主候选、Top3、close-call、diffuse 与低质量提示都只能作为解释假设；如果某个工作、团队或关系情境模块未启用，也只表示当前产品没有开放该情境化解释，不表示系统隐藏了更确定的适配、风险或诊断结论。",
+            "copy": "本结果只用于人格模式理解、自我观察和反思对话。现有研究不足以把九型人格当作已充分验证的临床量表；它不用于心理健康判断、治疗建议、招聘筛选、岗位匹配、能力评价或个体风险评估。高分、主候选、前三候选、接近型辨析、分布较分散与作答质量提示都只是需要用真实情境核对的解释假设。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
@@ -59,7 +59,7 @@
             "method_key": "user_confirmed_type_boundary",
             "form_variant": "all",
             "display_context": "observation",
-            "copy": "user_confirmed_type 是用户在观察后记录的自我共鸣证据，不是系统改判，也不是更高权威的类型确认。它可以进入历史记录，帮助后续阅读时标注用户视角；分享或回看时也只能作为自我观察备注呈现，不会覆盖 primary_candidate、Top3、scorer 输出或原始 attempt 的计分事实。",
+            "copy": "用户确认类型是观察后记录的自我共鸣证据，不是系统改判或外部确认。它可以进入历史记录，帮助后续阅读时标注用户视角；分享或回看时只作为自我观察备注呈现，不覆盖主候选、前三候选、计分器输出或原始作答的计分事实。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
@@ -67,7 +67,7 @@
             "method_key": "low_quality_boundary",
             "form_variant": "all",
             "display_context": "result_page",
-            "copy": "当低质量信号触发时，结果仍可阅读，但解释边界会明显收窄。页面只保留轻量观察建议，避免把单次低稳定度作答扩展成确定性类型判断；优先建议在状态更稳定、时间更充足时重测同一题型。切换 form 可以作为另一次观察，但不能被当成规避质量边界、寻找更好答案、证明人格变化或比较分数升降的方法。",
+            "copy": "当作答质量信号触发时，结果仍可阅读，但解释边界会明显收窄。页面只保留轻量观察建议，避免把单次作答扩展成确定性类型判断；优先建议在状态稳定、时间充足时重测同一题型。切换题型只能作为另一份观察材料，不能用于规避质量边界、寻找理想答案、证明人格变化或比较分数升降。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
@@ -75,7 +75,7 @@
             "method_key": "diffuse_boundary",
             "form_variant": "all",
             "display_context": "result_page",
-            "copy": "diffuse 表示九个类型线索较分散，或 Top3 尚未形成足够清晰的主次关系。它不是作答失败，也不是系统无效，更不是人格混乱或心理健康信号。页面会降低单一号码的确定语气，优先引导并排阅读 Top3、三中心分布、近期反例和 7 天观察任务；重测只能提供另一份作答样本，不能自动修正成更稳定或更真实的类型。",
+            "copy": "分布较分散表示九个类型线索尚未形成清晰的主次关系。页面会降低单一号码的确定语气，优先引导并排阅读前三候选、三中心分布、近期反例和 7 天观察任务；重测只提供另一份作答样本，不自动修正为某个类型。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         },
@@ -83,7 +83,7 @@
             "method_key": "close_call_boundary",
             "form_variant": "all",
             "display_context": "result_page",
-            "copy": "close-call 表示 Top1 与 Top2 接近，系统不会假装比数据更确定。页面会把差异转成 pair 辨析、反例检查和 7 天观察问题；它不是双重人格、类型不稳定或需要被强行二选一的证明。",
+            "copy": "接近型辨析表示第一候选与第二候选接近。页面会把差异转成并排比较、反例检查和 7 天观察问题，不要求强行选定一个类型。",
             "content_maturity": "p0_ready",
             "evidence_level": "descriptive"
         }

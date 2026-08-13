@@ -24,7 +24,7 @@ final class EnneagramRegistryPackLoadTest extends TestCase
         $this->assertSame('enneagram_registry_pack_v1_p0_ready_2026_04', data_get($pack, 'manifest.release_id'));
         $this->assertSame('enneagram_type_registry', data_get($pack, 'type_registry.registry_key'));
         $this->assertSame('enneagram_method_registry', data_get($pack, 'method_registry.registry_key'));
-        $this->assertSame('查看 Technical Note v0.1', data_get($uiEntries['technical_note.link_label'] ?? [], 'label'));
+        $this->assertSame('查看技术说明', data_get($uiEntries['technical_note.link_label'] ?? [], 'label'));
         $this->assertSame('clear_sample', data_get($sampleEntries['clear_sample'] ?? [], 'sample_key'));
         $this->assertSame('privacy', data_get($technicalEntries->firstWhere('section_key', 'privacy') ?? [], 'section_key'));
         $this->assertNotSame('', (string) data_get($typeEntries->firstWhere('type_id', '8') ?? [], 'deep_dive.core_desire'));

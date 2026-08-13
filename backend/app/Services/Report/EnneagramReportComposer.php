@@ -40,7 +40,6 @@ final class EnneagramReportComposer
                 'stance_summary',
                 'harmonic_summary',
                 'wing_hint_visual',
-                'methodology_boundary_card',
                 'diffuse_boundary',
                 'low_quality_boundary',
             ],
@@ -85,7 +84,7 @@ final class EnneagramReportComposer
         ],
         'page_5_method_observation_next' => [
             'title' => ['zh' => '方法、观察与下一步', 'en' => 'Method, Observation, and Next Steps'],
-            'purpose' => ['zh' => '输出方法边界、七天观察、样例和 Technical Note 入口。', 'en' => 'Expose method boundaries, seven-day observation, sample report, and the Technical Note entry point.'],
+            'purpose' => ['zh' => '输出方法边界、七天观察、样例和技术说明入口。', 'en' => 'Expose the method boundary, seven-day observation, sample report, and technical note entry point.'],
             'modules' => [
                 'method_boundary',
                 'seven_day_observation',
@@ -483,7 +482,6 @@ final class EnneagramReportComposer
             'stance_summary' => $this->buildUnavailableShapeModule($projectionV2, $indexes, 'stance_summary', 'summary_card', 'dynamics.stance_scores'),
             'harmonic_summary' => $this->buildUnavailableShapeModule($projectionV2, $indexes, 'harmonic_summary', 'summary_card', 'dynamics.harmonic_scores'),
             'wing_hint_visual' => $this->buildWingHintModule($projectionV2, $indexes),
-            'methodology_boundary_card' => $this->buildMethodologyBoundaryModule($projectionV2, $indexes, 'methodology_boundary_card'),
             'diffuse_boundary' => $this->buildDiffuseBoundaryModule($projectionV2, $indexes),
             'low_quality_boundary' => $this->buildLowQualityBoundaryModule($projectionV2, $indexes),
             'work_style_summary' => $this->buildScenarioModule($projectionV2, $indexes, 'work_style_summary', 'scenario_card', [
@@ -575,7 +573,7 @@ final class EnneagramReportComposer
                 ],
             ]),
             'blind_spot_in_relationship' => $this->buildBlindSpotModule($projectionV2, $indexes, 'blind_spot_in_relationship'),
-            'method_boundary' => $this->buildMethodologyBoundaryModule($projectionV2, $indexes, 'method_boundary'),
+            'method_boundary' => $this->buildMethodologyBoundaryModule($projectionV2, $indexes),
             'seven_day_observation' => $this->buildObservationModule($projectionV2, $indexes),
             'resonance_feedback_placeholder' => $this->buildPlaceholderModule($projectionV2, $indexes, 'resonance_feedback_placeholder', 'placeholder_card', 'observation_api_not_shipped'),
             'history_share_retake_placeholder' => $this->buildPlaceholderModule($projectionV2, $indexes, 'history_share_retake_placeholder', 'placeholder_card', 'history_share_surface_not_shipped'),
@@ -618,11 +616,14 @@ final class EnneagramReportComposer
                 'secondary_candidate' => data_get($projectionV2, 'scores.second_candidate'),
                 'confidence_level' => data_get($projectionV2, 'classification.confidence_level'),
                 'interpretation_scope' => $scope,
-                'hard_primary_language' => in_array($scope, ['clear', 'close_call'], true),
+                'hard_primary_language' => $scope === 'clear',
                 'form_badge' => [
                     'label' => (string) ($formBadge['label'] ?? ''),
                     'body' => (string) ($formBadge['body_template'] ?? ''),
                 ],
+                'boundary_note' => $language === 'en'
+                    ? 'Treat this result as a self-observation hypothesis, not a diagnosis, ability rating, job-fit verdict, or hiring decision.'
+                    : '请把本结果作为自我观察假设，不用于诊断、能力评价、职业胜任判断或招聘决策。',
                 'top_candidates' => array_values(array_map(
                     fn (array $row): array => [
                         'type' => (string) ($row['type'] ?? ''),
@@ -730,7 +731,7 @@ final class EnneagramReportComposer
             'visible',
             'all',
             [
-                'title' => $language === 'en' ? 'Nine-type Profile' : '九型全谱轮廓',
+                'title' => $language === 'en' ? 'Full Nine-type Profile' : '九型完整轮廓',
                 'score_axis_label' => $language === 'en' ? 'Relative signals within this response profile' : '答题轮廓内的相对线索',
                 'boundary_note' => $language === 'en'
                     ? 'Scores show only the relative strength of type-related signals in this response. They are not norm rankings, diagnoses, ability ratings, or fixed personality conclusions.'
@@ -769,7 +770,7 @@ final class EnneagramReportComposer
                     : '这里的稳定性来自本次答题轮廓的清晰度、第一与第二候选类型的距离、作答质量信号和解释范围规则。它不是测试准确率、临床效度、人格定论或未来行为预测。',
                 'boundary_note' => $language === 'en'
                     ? 'High stability means only that the leading type signals are more concentrated in this response. Medium stability calls for checking the leading interpretation against real situations. Close-call, diffuse, and low-quality states use more cautious language and point to comparison, observation, or retesting.'
-                    : '高稳定只表示当前答题中主型线索更集中；中等稳定表示可以先阅读主型，但需要用实际情境核对；close_call、diffuse 与 low_quality 表示页面会降低确定语气，并引导辨析、观察或重测。',
+                    : '高稳定只表示当前答题中主候选线索更集中；中等稳定表示可以先阅读主候选，但需要用实际情境核对；接近型辨析、分布较分散和作答质量边界状态会降低确定语气，并引导比较、观察或重测。',
                 'not_for' => ['accuracy_claim', 'external_validity_claim', 'diagnosis', 'personality_verdict', 'prediction'],
                 'level_guide' => [
                     'high_confidence' => $language === 'en' ? 'The leading type signals are relatively concentrated. Read the result as a reasonably stable hypothesis, then check it against real situations.' : '主型线索相对集中，可以把结果作为较稳定的解释假设阅读，但仍需结合真实情境验证。',
@@ -817,15 +818,15 @@ final class EnneagramReportComposer
             'all',
             [
                 'title' => $language === 'en' ? 'Leading-candidate Gap' : '主次线索差距',
-                'subtitle' => $language === 'en' ? 'Compares only the relative distance between the first two candidates within this form.' : '只比较本次同一表单内 Top1 与 Top2 的相对距离。',
+                'subtitle' => $language === 'en' ? 'Compares only the relative distance between the first two candidates within this form.' : '只比较本次同一题型内第一候选与第二候选的相对距离。',
                 'dominance_gap_abs' => data_get($projectionV2, 'classification.dominance_gap_abs'),
                 'dominance_gap_pct' => data_get($projectionV2, 'classification.dominance_gap_pct'),
                 'normalized_gap' => data_get($projectionV2, 'classification.dominance.normalized_gap'),
                 'profile_entropy' => data_get($projectionV2, 'classification.dominance.profile_entropy'),
-                'score_space_note' => $language === 'en' ? 'This gap is meaningful only within the current form and scoring space. E105 and FC144 use different response tasks, scoring units, and candidate-generation rules, so the gap is not a common scale across forms, populations, or time.' : '这个差距只在当前 form、当前计分空间内有意义。E105 与 FC144 的题型、计分单位和候选生成方式不同，不能把 gap 当成跨表单、跨人群或跨时间的统一尺子。',
-                'boundary_note' => $language === 'en' ? 'A larger gap supports a more focused leading-type interpretation; a smaller gap shifts the report toward close-call, diffuse, or observation guidance. It is not a measurement-error range, confidence interval, norm ranking, proof of validity, or measure of personality certainty.' : 'gap 较大时，页面可以用更集中的主型解释；gap 较小时，页面会转向 close-call、diffuse 或观察建议。它不是测量误差范围、统计置信区间、常模排名、外部效度证明或人格确定性。',
+                'score_space_note' => $language === 'en' ? 'This gap is meaningful only within the current form and scoring space. E105 and FC144 use different response tasks, scoring units, and candidate-generation rules, so the gap is not a common scale across forms, populations, or time.' : '这个差距只在当前题型、当前计分空间内有意义。E105 与 FC144 的作答形式、计分单位和候选生成方式不同，不能把差距当成跨题型、跨人群或跨时间的统一尺子。',
+                'boundary_note' => $language === 'en' ? 'A larger gap supports a more focused leading-type interpretation; a smaller gap shifts the report toward close-call, diffuse, or observation guidance. It is not a measurement-error range, confidence interval, norm ranking, proof of validity, or measure of personality certainty.' : '差距较大时，页面可以使用更集中的主候选解释；差距较小时，页面会转向接近型辨析、分布较分散或观察建议。它不是测量误差范围、统计置信区间、常模排名、外部效度证明或人格确定性。',
                 'metric_guide' => [
-                    'dominance_gap_abs' => $language === 'en' ? 'The raw distance between the first two candidates in the current scoring space.' : 'Top1 与 Top2 在当前 score space 中的原始差距，用来判断主次线索是否拉开。',
+                    'dominance_gap_abs' => $language === 'en' ? 'The raw distance between the first two candidates in the current scoring space.' : '第一候选与第二候选在当前计分空间中的原始差距，用来判断主次线索是否拉开。',
                     'dominance_gap_pct' => $language === 'en' ? 'A percentage view used to select the report’s level of caution; it is not an accuracy score.' : '把主次差距换算成百分比读法，便于页面选择解释语气；不是准确率。',
                     'normalized_gap' => $language === 'en' ? 'A standardized distance based on the profile shape, used only by interpretation rules.' : '相对分布形状的标准化差距，只用于内部解释规则。',
                     'profile_entropy' => $language === 'en' ? 'How dispersed the nine type signals are; greater dispersion calls for less certainty about a single leading type.' : '九个类型线索的分散程度；越分散越需要降低单一主型结论的确定语气。',
@@ -1021,7 +1022,7 @@ final class EnneagramReportComposer
      * @param  array<string,mixed>  $indexes
      * @return array<string,mixed>
      */
-    private function buildMethodologyBoundaryModule(array $projectionV2, array $indexes, string $moduleKey): array
+    private function buildMethodologyBoundaryModule(array $projectionV2, array $indexes): array
     {
         $methodKey = $this->formVariant($projectionV2) === 'fc144'
             ? 'fc144_forced_choice_methodology'
@@ -1033,7 +1034,7 @@ final class EnneagramReportComposer
         $badge = is_array($indexes['ui_entries'][$formBadgeKey] ?? null) ? $indexes['ui_entries'][$formBadgeKey] : [];
 
         return $this->module(
-            $moduleKey,
+            'method_boundary',
             'boundary_card',
             'visible',
             $this->formVariant($projectionV2),

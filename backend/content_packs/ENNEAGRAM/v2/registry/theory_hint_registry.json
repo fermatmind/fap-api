@@ -19,9 +19,9 @@
             "theory_key": "wing_hint",
             "visibility_scope": "p0_visible",
             "hard_judgement_allowed": false,
-            "boundary_copy": "邻位牵引只作为同一主型附近的表达色彩提示，不等于正式 wing 判定，也不能替代主型或 Top3 解释。",
-            "user_facing_boundary": "如果你看到主候选左右两侧都有牵引力，可以把它理解为表达方式里可能出现相邻类型的语气、节奏或关注点；这不是系统已经把你判成某个 wing，也不是说明你稳定拥有某个副型。",
-            "interpretation_boundary": "wing hint 只适合帮助阅读“同一主型在表达上可能更靠近哪一侧”，不适合用于诊断、能力评价、健康层级判断、职业筛选或关系风险判断。",
+            "boundary_copy": "邻位牵引只提示相邻类型可能影响表达色彩，不生成正式翼型结论，也不能替代主型或前三候选解释。",
+            "user_facing_boundary": "如果你看到主候选左右两侧都有牵引力，可以把它理解为表达方式里可能出现相邻类型的语气、节奏或关注点；这不是系统已经把你判成某个翼型，也不是说明你稳定拥有某个副型。",
+            "interpretation_boundary": "邻位提示只适合帮助阅读“同一主型在表达上可能更靠近哪一侧”，不适合用于诊断、能力评价、健康层级判断、职业筛选或关系风险判断。",
             "use_for": [
                 "expression_color_hint",
                 "adjacent_type_language",
@@ -41,7 +41,7 @@
             "visibility_scope": "p1_visible",
             "hard_judgement_allowed": false,
             "boundary_copy": "箭头方向位目前只作为未来模块占位，不参与当前结果页解释，也不把箭头写成压力、成长或发展路径判断。",
-            "user_facing_boundary": "当前版本不会根据 arrow 推出你的压力方向、成长方向或固定路径；如果未来展示，也只会作为理论背景提示，并要求结合真实情境验证。",
+            "user_facing_boundary": "当前版本不会根据箭头关系推出你的压力方向、成长方向或固定路径；如果未来展示，也只会作为理论背景提示，并要求结合真实情境验证。",
             "content_maturity": "experimental",
             "evidence_level": "descriptive"
         },
@@ -58,8 +58,8 @@
             "theory_key": "subtype_future_module_placeholder",
             "visibility_scope": "hidden",
             "hard_judgement_allowed": false,
-            "boundary_copy": "subtype 暂不启用，避免在证据不足时提前硬判。",
-            "user_facing_boundary": "当前版本不会给出 instinctual subtype 结论，也不会把生活方式差异误写成正式 subtype 判定。",
+            "boundary_copy": "亚型暂不启用，避免在证据不足时提前硬判。",
+            "user_facing_boundary": "当前版本不会给出本能亚型结论，也不会把生活方式差异误写成正式亚型判定。",
             "content_maturity": "experimental",
             "evidence_level": "descriptive"
         }

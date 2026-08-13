@@ -113,11 +113,11 @@ final class EnneagramPublicProjectionService
         'enneagram_likert_105' => [
             'score_space_version' => 'e105_likert_space.v1',
             'methodology_variant' => 'e105_standard',
-            'precision_level' => 'standard',
+            'precision_level' => 'likert_response',
             'method_boundary_copy_key' => 'enneagram.method_boundary.e105_standard.v1',
             'form_interpretation_boundary' => [
-                'zh' => 'E105 使用 Likert intensity / dominance score space；结果适合建立全谱结构，但不默认与 FC144 直接数值比较。',
-                'en' => 'E105 uses a Likert intensity / dominance score space. It is suitable for establishing the full-profile structure, but it is not directly numerically comparable with FC144 by default.',
+                'zh' => 'E105 采用五点量表作答，在自身计分空间内形成九型完整轮廓；其数值不与 FC144 直接比较。',
+                'en' => 'E105 uses five-point Likert responses to form a full nine-type profile within its own scoring space; its values are not directly compared with FC144.',
             ],
             'score_source' => 'likert_intensity_norm',
             'score_display_key' => 'profile100',
@@ -125,11 +125,11 @@ final class EnneagramPublicProjectionService
         'enneagram_forced_choice_144' => [
             'score_space_version' => 'fc144_forced_choice_space.v1',
             'methodology_variant' => 'fc144_forced_choice',
-            'precision_level' => 'deep',
+            'precision_level' => 'forced_choice_response',
             'method_boundary_copy_key' => 'enneagram.method_boundary.fc144_forced_choice.v1',
             'form_interpretation_boundary' => [
-                'zh' => 'FC144 使用 forced-choice wins / exposures score space；它提高辨析度，但不等于终极判型，也不默认与 E105 直接数值比较。',
-                'en' => 'FC144 uses a forced-choice wins / exposures score space. It increases discrimination, but it is not an ultimate typing form and is not directly numerically comparable with E105 by default.',
+                'zh' => 'FC144 采用二选一迫选作答，在自身计分空间内记录相对取舍线索；其数值不与 E105 直接比较。',
+                'en' => 'FC144 uses two-option forced-choice responses to record relative preference signals within its own scoring space; its values are not directly compared with E105.',
             ],
             'score_source' => 'forced_choice_win_rate_norm',
             'score_display_key' => 'preference100',
@@ -1204,9 +1204,9 @@ final class EnneagramPublicProjectionService
     private function precisionLabel(string $precisionLevel, string $language): string
     {
         return match ($precisionLevel) {
-            'standard' => $language === 'zh' ? '标准辨析度' : 'Standard discrimination',
-            'deep' => $language === 'zh' ? '深度辨析度' : 'Deep discrimination',
-            default => $language === 'zh' ? '辨析度暂不可用' : 'Precision unavailable',
+            'likert_response' => $language === 'zh' ? '五点量表作答' : 'Five-point Likert response',
+            'forced_choice_response' => $language === 'zh' ? '二选一迫选作答' : 'Two-option forced-choice response',
+            default => $language === 'zh' ? '作答形式暂不可用' : 'Response format unavailable',
         };
     }
 

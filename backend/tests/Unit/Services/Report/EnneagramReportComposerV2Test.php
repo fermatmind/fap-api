@@ -47,7 +47,7 @@ final class EnneagramReportComposerV2Test extends TestCase
         $this->assertSame($expectedLocale, data_get($payload, 'report._meta.enneagram_report_v2.locale'));
         $this->assertSame('enneagram.report.v2', data_get($payload, 'report._meta.enneagram_report_v2.schema_version'));
         $this->assertCount(5, (array) data_get($payload, 'report._meta.enneagram_report_v2.pages'));
-        $this->assertCount(42, (array) data_get($payload, 'report._meta.enneagram_report_v2.modules'));
+        $this->assertCount(41, (array) data_get($payload, 'report._meta.enneagram_report_v2.modules'));
         $this->assertSame(
             [
                 'page_1_result_overview',
@@ -60,7 +60,8 @@ final class EnneagramReportComposerV2Test extends TestCase
         );
         $this->assertSame($formCode, data_get($payload, 'report._meta.enneagram_report_v2.form.form_code'));
         $this->assertSame($expectedMethodologyVariant, data_get($payload, 'report._meta.enneagram_report_v2.form.methodology_variant'));
-        $this->assertSame($expectedFormVariant, data_get($this->module($payload, 'methodology_boundary_card'), 'form_variant'));
+        $this->assertSame($expectedFormVariant, data_get($this->module($payload, 'method_boundary'), 'form_variant'));
+        $this->assertSame([], $this->module($payload, 'methodology_boundary_card'));
         $this->assertSame('clear', data_get($this->module($payload, 'instant_summary'), 'content.interpretation_scope'));
         $summaryBody = (string) data_get($this->module($payload, 'instant_summary'), 'content.body');
         $this->assertStringContainsString($expectedLocale === 'en' ? 'explanatory hypothesis' : '解释假设', $summaryBody);
@@ -110,7 +111,6 @@ final class EnneagramReportComposerV2Test extends TestCase
                 'stance_summary',
                 'harmonic_summary',
                 'wing_hint_visual',
-                'methodology_boundary_card',
                 'diffuse_boundary',
                 'low_quality_boundary',
             ],
@@ -217,7 +217,7 @@ final class EnneagramReportComposerV2Test extends TestCase
         $content = (array) data_get($this->module($payload, 'dominance_gap_card'), 'content');
 
         $this->assertSame('主次线索差距', $content['title'] ?? null);
-        $this->assertStringContainsString('当前 form、当前计分空间内有意义', (string) ($content['score_space_note'] ?? ''));
+        $this->assertStringContainsString('当前题型、当前计分空间内有意义', (string) ($content['score_space_note'] ?? ''));
         $this->assertStringContainsString('不是测量误差范围、统计置信区间、常模排名、外部效度证明或人格确定性', (string) ($content['boundary_note'] ?? ''));
         $this->assertStringContainsString('不是准确率', (string) data_get($content, 'metric_guide.dominance_gap_pct'));
         $this->assertSame(
@@ -252,6 +252,63 @@ final class EnneagramReportComposerV2Test extends TestCase
         $this->assertStringNotContainsString('RuntimeException', json_encode($payload, JSON_THROW_ON_ERROR));
     }
 
+    public function test_all_type_state_form_and_locale_combinations_keep_content_and_method_contracts(): void
+    {
+        $forms = [
+            'enneagram_likert_105' => ['zh-CN' => 'E105 五点量表版', 'en' => 'E105 Five-point Likert Form'],
+            'enneagram_forced_choice_144' => ['zh-CN' => 'FC144 二选一迫选版', 'en' => 'FC144 Two-option Forced-choice Form'],
+        ];
+        $states = ['clear', 'close_call', 'diffuse', 'low_quality'];
+
+        foreach (range(1, 9) as $primaryType) {
+            foreach ($states as $expectedState) {
+                foreach ($forms as $formCode => $localeLabels) {
+                    foreach ($localeLabels as $attemptLocale => $expectedFormLabel) {
+                        [$scores, $analysisOverrides, $qualityOverrides] = $this->matrixFixture(
+                            $primaryType,
+                            $expectedState
+                        );
+                        $payload = $this->composeReportV2ForLocale(
+                            $this->syntheticProjectionInput(
+                                $formCode,
+                                $scores,
+                                $analysisOverrides,
+                                $qualityOverrides
+                            ),
+                            $attemptLocale
+                        );
+                        $context = sprintf('type=%d state=%s form=%s locale=%s', $primaryType, $expectedState, $formCode, $attemptLocale);
+                        $modules = (array) data_get($payload, 'report._meta.enneagram_report_v2.modules');
+
+                        $this->assertCount(41, $modules, $context);
+                        $this->assertSame($expectedState, data_get($this->module($payload, 'instant_summary'), 'content.interpretation_scope'), $context);
+                        $this->assertSame($expectedState === 'clear', data_get($this->module($payload, 'instant_summary'), 'content.hard_primary_language'), $context);
+                        $this->assertSame($expectedFormLabel, data_get($this->module($payload, 'instant_summary'), 'content.form_badge.label'), $context);
+                        $this->assertSame($attemptLocale === 'en' ? 'View technical note' : '查看技术说明', data_get($this->module($payload, 'technical_note_link'), 'content.label'), $context);
+                        $this->assertSame(1, collect($modules)->where('module_key', 'method_boundary')->count(), $context);
+                        $this->assertSame(0, collect($modules)->where('module_key', 'methodology_boundary_card')->count(), $context);
+
+                        foreach (['type_deep_dive_summary', 'work_style_summary', 'growth_axis', 'relationship_need'] as $moduleKey) {
+                            $this->assertSame((string) $primaryType, data_get($this->module($payload, $moduleKey), 'content.primary_candidate'), $context.' module='.$moduleKey);
+                        }
+
+                        $visibleContent = json_encode(
+                            collect($modules)->pluck('content')->values()->all(),
+                            JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE
+                        );
+                        $this->assertDoesNotMatchRegularExpression('/(?<![A-Za-z0-9_])T[1-9](?![A-Za-z0-9_])/', $visibleContent, $context);
+                        $this->assertStringNotContainsString('[object Object]', $visibleContent, $context);
+                        $this->assertDoesNotMatchRegularExpression('/深度版|深度辨析|提高辨析度|更准确|更权威|高级版/u', $visibleContent, $context);
+                        $this->assertDoesNotMatchRegularExpression('/Deep (?:Edition|Form|discrimination)|increases discrimination|more accurate|higher authority|advanced version/i', $visibleContent, $context);
+                        if ($attemptLocale === 'zh-CN') {
+                            $this->assertDoesNotMatchRegularExpression('/Top[123]|All9|Confidence Band|Technical Note|(?i:score space|forced-choice|\bform\b)/', $visibleContent, $context);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     public function test_close_call_scope_includes_close_call_card_with_pair_refs(): void
     {
         $payload = $this->composeReportV2(
@@ -279,8 +336,8 @@ final class EnneagramReportComposerV2Test extends TestCase
         $this->assertSame('1_6', data_get($module, 'content.pair.pair_key'));
         $this->assertContains('enneagram_pair_registry:1_6', (array) data_get($module, 'registry_refs'));
         $this->assertSame('close_call', data_get($summary, 'content.interpretation_scope'));
-        $this->assertStringContainsString('并排阅读', (string) data_get($summary, 'content.body'));
-        $this->assertStringContainsString('系统不会把微小分差写成单一主型定论', (string) data_get($summary, 'content.body'));
+        $this->assertStringContainsString('并排比较', (string) data_get($summary, 'content.body'));
+        $this->assertStringContainsString('不急着固定自我标签', (string) data_get($summary, 'content.body'));
     }
 
     public function test_diffuse_scope_includes_diffuse_boundary_module(): void
@@ -306,8 +363,8 @@ final class EnneagramReportComposerV2Test extends TestCase
         $this->assertSame('visible', data_get($module, 'visibility'));
         $this->assertSame('结果分散说明', data_get($module, 'content.title'));
         $this->assertSame('diffuse', data_get($summary, 'content.interpretation_scope'));
-        $this->assertStringContainsString('不适合只围绕一个号码下结论', (string) data_get($summary, 'content.body'));
-        $this->assertStringContainsString('不是失败或无效结果', (string) data_get($summary, 'content.body'));
+        $this->assertStringContainsString('第一候选还不足以单独承载整页解释', (string) data_get($summary, 'content.body'));
+        $this->assertStringContainsString('真实情境', (string) data_get($summary, 'content.body'));
     }
 
     public function test_low_quality_scope_includes_low_quality_boundary_module(): void
@@ -369,7 +426,7 @@ final class EnneagramReportComposerV2Test extends TestCase
         $this->assertSame('retake_same_form_after_quality_check', data_get($module, 'content.recommendation_key'));
         $this->assertSame('form_specific_observation_not_cross_form_verdict', data_get($module, 'content.boundary_kind'));
         $this->assertStringContainsString('重测同一题型', (string) data_get($module, 'content.recommendation_copy'));
-        $this->assertStringContainsString('不能被当成规避质量边界', (string) data_get($module, 'content.recommendation_copy'));
+        $this->assertStringContainsString('不能用于规避质量边界', (string) data_get($module, 'content.recommendation_copy'));
         $this->assertContains('accuracy_ranking', (array) data_get($module, 'content.not_for'));
         $this->assertContains('enneagram_method_registry:low_quality_boundary', (array) data_get($module, 'registry_refs'));
     }
@@ -529,11 +586,50 @@ final class EnneagramReportComposerV2Test extends TestCase
      */
     private function composeReportV2(array $scoreResult): array
     {
+        return $this->composeReportV2ForLocale($scoreResult, 'zh-CN');
+    }
+
+    /**
+     * @param  array<string,mixed>  $scoreResult
+     * @return array<string,mixed>
+     */
+    private function composeReportV2ForLocale(array $scoreResult, string $locale): array
+    {
         $composer = app(EnneagramReportComposer::class);
-        $attempt = new Attempt(['locale' => 'zh-CN']);
+        $attempt = new Attempt(['locale' => $locale]);
         $result = new Result(['result_json' => ['normed_json' => $scoreResult]]);
 
         return $composer->composeVariant($attempt, $result, 'full');
+    }
+
+    /**
+     * @return array{array<string,float>,array<string,mixed>,array<string,mixed>}
+     */
+    private function matrixFixture(int $primaryType, string $state): array
+    {
+        $orderedTypes = array_merge([$primaryType], array_values(array_diff(range(1, 9), [$primaryType])));
+        $scoreShapes = [
+            'clear' => [90.0, 62.0, 52.0, 37.0, 28.0, 24.0, 21.0, 16.0, 13.0],
+            'close_call' => [81.0, 79.0, 47.0, 33.0, 27.0, 23.0, 21.0, 18.0, 17.0],
+            'diffuse' => [52.0, 51.0, 50.0, 49.0, 48.0, 47.0, 46.0, 45.0, 44.0],
+            'low_quality' => [84.0, 68.0, 52.0, 35.0, 28.0, 21.0, 18.0, 16.0, 12.0],
+        ];
+        $scores = [];
+        foreach ($orderedTypes as $index => $type) {
+            $scores['T'.$type] = $scoreShapes[$state][$index];
+        }
+
+        $analysisOverrides = $state === 'close_call'
+            ? [
+                'interpretation_state' => 'mixed_close_call',
+                'close_call_candidates' => ['T'.$orderedTypes[0], 'T'.$orderedTypes[1]],
+            ]
+            : [];
+        $qualityOverrides = $state === 'low_quality'
+            ? ['level' => 'P2', 'flags' => ['speed_too_fast']]
+            : [];
+
+        return [$scores, $analysisOverrides, $qualityOverrides];
     }
 
     /**

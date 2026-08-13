@@ -576,8 +576,8 @@ final class ReportPdfDocumentService
     private function enneagramFormLabel(string $formCode): ?string
     {
         return match (trim($formCode)) {
-            'enneagram_likert_105' => 'E105 标准版',
-            'enneagram_forced_choice_144' => 'FC144 深度版',
+            'enneagram_likert_105' => 'E105 五点量表版',
+            'enneagram_forced_choice_144' => 'FC144 二选一迫选版',
             default => null,
         };
     }
