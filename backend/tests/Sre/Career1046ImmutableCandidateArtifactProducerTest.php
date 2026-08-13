@@ -97,10 +97,95 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
         $runner = file_get_contents(dirname(__DIR__, 2).'/scripts/operations/career_1046_immutable_candidate_artifact.php');
         self::assertIsString($runner);
         self::assertStringContainsString('app(CareerFullReleaseLedgerService::class)->build(', $runner);
-        self::assertStringContainsString('additionalSlugs: self::frozenTargetSlugs($manifest)', $runner);
+        self::assertStringContainsString('additionalSlugs: self::frozenDeltaSlugs($manifest)', $runner);
         self::assertStringContainsString('trustedRolloutAuthority: true', $runner);
         self::assertStringContainsString('allowCacheWrites: false', $runner);
+        self::assertStringContainsString('CareerGenerationAuthorityLoader::class)->loadStrict()', $runner);
+        self::assertStringContainsString('mergeActiveBaselineLedger(', $runner);
         self::assertStringNotContainsString('CareerFullReleaseLedgerProjectionService::class', $runner);
+    }
+
+    public function test_it_preserves_only_the_exact_active_baseline_ledger_and_keeps_delta_rows_fresh(): void
+    {
+        $manifest = $this->manifest();
+        $full = $this->fullLedgerWithOutsideForbiddenMember();
+        $activeRows = array_map(static fn (string $slug): array => [
+            'source_slug' => $slug,
+            'public_resolution_type' => CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB,
+            'public_eligible' => true,
+            'indexability' => 'indexable',
+            'active_baseline_marker' => true,
+        ], $manifest['baseline_slugs']);
+        $active = [
+            'ledger_kind' => CareerFullReleaseLedgerService::LEDGER_KIND,
+            'public_resolution' => ['rows' => $activeRows],
+        ];
+
+        $merged = Career1046ImmutableCandidateArtifactProducer::mergeActiveBaselineLedger($full, $active, $manifest);
+        $rows = collect($merged['members'])->keyBy(static fn (array $row): string => (string) ($row['source_slug'] ?? $row['canonical_slug']));
+
+        foreach ($manifest['baseline_slugs'] as $slug) {
+            self::assertTrue((bool) data_get($rows->get($slug), 'active_baseline_marker', false));
+        }
+        foreach ($manifest['delta_slugs'] as $slug) {
+            self::assertFalse((bool) data_get($rows->get($slug), 'active_baseline_marker', false));
+        }
+
+        $bounded = Career1046ImmutableCandidateArtifactProducer::targetBoundedLedger($merged, $manifest);
+        self::assertSame(1046, array_sum($bounded['counts']['release_counts']));
+        Career1046ImmutableCandidateArtifactProducer::assertCompletePublishedProjection(
+            (new CareerRuntimePublishProjectionService)->buildFromLedgerArray($bounded),
+            $manifest,
+        );
+    }
+
+    public function test_active_baseline_merge_fails_closed_on_missing_or_duplicate_authority(): void
+    {
+        $manifest = $this->manifest();
+        $rows = array_map(static fn (string $slug): array => [
+            'source_slug' => $slug,
+            'public_resolution_type' => CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB,
+            'public_eligible' => true,
+            'indexability' => 'indexable',
+        ], $manifest['baseline_slugs']);
+
+        foreach (['missing', 'duplicate'] as $case) {
+            $activeRows = $rows;
+            $expected = 'ACTIVE_BASELINE_LEDGER_SET_MISMATCH';
+            if ($case === 'missing') {
+                array_pop($activeRows);
+            } else {
+                $activeRows[] = $activeRows[0];
+                $expected = 'ACTIVE_BASELINE_LEDGER_DUPLICATE';
+            }
+            try {
+                Career1046ImmutableCandidateArtifactProducer::mergeActiveBaselineLedger(
+                    $this->fullLedgerWithOutsideForbiddenMember(),
+                    ['ledger_kind' => CareerFullReleaseLedgerService::LEDGER_KIND, 'public_resolution' => ['rows' => $activeRows]],
+                    $manifest,
+                );
+                self::fail($case.' active baseline authority did not fail closed');
+            } catch (Career1046ImmutableCandidateArtifactFailure $failure) {
+                self::assertSame($expected, $failure->safeCode);
+            }
+        }
+    }
+
+    public function test_projection_must_be_the_exact_fully_published_1046_locale_pair_set(): void
+    {
+        $source = $this->source();
+        Career1046ImmutableCandidateArtifactProducer::assertCompletePublishedProjection(
+            $source['projection'],
+            $this->manifest(),
+        );
+
+        $source['projection']['items'][0]['release_gate_pass'] = false;
+        $this->expectException(Career1046ImmutableCandidateArtifactFailure::class);
+        $this->expectExceptionMessage('CANDIDATE_PROJECTION_AUTHORITY_INCOMPLETE');
+        Career1046ImmutableCandidateArtifactProducer::assertCompletePublishedProjection(
+            $source['projection'],
+            $this->manifest(),
+        );
     }
 
     public function test_frozen_target_authority_fails_closed_before_ledger_generation_on_drift(): void
@@ -242,7 +327,7 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
         $runner = file_get_contents(dirname(__DIR__, 2).'/scripts/operations/career_1046_immutable_candidate_artifact.php');
         self::assertIsString($runner);
         self::assertMatchesRegularExpression(
-            "/executeStage\\('ledger'.*assertTask3bDatabaseState.*CareerFullReleaseLedgerService::class.*frozenTargetSlugs.*trustedRolloutAuthority: true.*allowCacheWrites: false/s",
+            "/executeStage\\('ledger'.*assertTask3bDatabaseState.*CareerFullReleaseLedgerService::class.*frozenDeltaSlugs.*trustedRolloutAuthority: true.*allowCacheWrites: false.*CareerGenerationAuthorityLoader::class.*mergeActiveBaselineLedger/s",
             $runner,
         );
     }
@@ -312,6 +397,8 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
             'TARGET_BOUNDED_LEDGER_MISSING',
             'TARGET_BOUNDED_LEDGER_DUPLICATE',
             'TARGET_BOUNDED_LEDGER_COUNTS_INVALID',
+            'ACTIVE_BASELINE_LEDGER_SET_MISMATCH',
+            'CANDIDATE_PROJECTION_AUTHORITY_INCOMPLETE',
             'CANDIDATE_AUTHORITY_CONTRACT_FAILURE',
             'CANDIDATE_INITIALIZATION_STAGE_FAILURE',
             'CANDIDATE_READ_ONLY_TRANSACTION_STAGE_FAILURE',
