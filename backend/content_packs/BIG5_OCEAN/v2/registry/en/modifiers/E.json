@@ -1,0 +1,77 @@
+{
+  "schema": "fap.big5.modifier_trait_pack.v1",
+  "trait_code": "E",
+  "trait_label_zh": "Extraversion",
+  "gradients": {
+    "e_g1": {
+      "percentile_range": [
+        0,
+        19
+      ],
+      "user_label": "deep adduction",
+      "injections": {
+        "hero_summary.headline_extension": "——You are more suitable to observe first, internalize first, and then express selectively.",
+        "domain_deep_dive.intensity_sentence": "High-frequency interactions and high-stimulation contexts will drain your system faster.",
+        "core_portrait.load_sentence": "Your load often comes from entering a context too early, not from a lack of ability.",
+        "norms_comparison.compare_sentence": "This shows that you clearly don’t rely on social stimulation to recharge, and you need a low-noise space.",
+        "action_plan.urgency_sentence": "The key is to prepare important expressions in advance and avoid keeping all boundaries inward."
+      }
+    },
+    "e_g2": {
+      "percentile_range": [
+        20,
+        39
+      ],
+      "user_label": "refrain from entering",
+      "injections": {
+        "hero_summary.headline_extension": "- You can enter the interaction, but you usually don't keep yourself in the foreground.",
+        "domain_deep_dive.intensity_sentence": "You are more willing to increase the intensity of your expression after confirming that the context is safe and the goals are clear.",
+        "core_portrait.load_sentence": "Your energy load mainly comes from forced high-frequency external discharge.",
+        "norms_comparison.compare_sentence": "This is closer to withholding access: not isolation, but selective externalization.",
+        "action_plan.urgency_sentence": "What works best for you is releasing key information earlier rather than forcing yourself to be hilarious."
+      }
+    },
+    "e_g3": {
+      "percentile_range": [
+        40,
+        59
+      ],
+      "user_label": "context change",
+      "injections": {
+        "hero_summary.headline_extension": "——You can interact, but you also need to bring the rhythm back to your own hands.",
+        "domain_deep_dive.intensity_sentence": "The intensity of your expression will vary with the object, your goals, and your sense of security.",
+        "core_portrait.load_sentence": "Your system needs connectivity and stable recycling times.",
+        "norms_comparison.compare_sentence": "You are in the middle of extraversion, which means that interaction is not a gap, nor is it the only driving force.",
+        "action_plan.urgency_sentence": "The next step is to identify which interactions are truly empowering and focus on key connections."
+      }
+    },
+    "e_g4": {
+      "percentile_range": [
+        60,
+        79
+      ],
+      "user_label": "Externalized drive",
+      "injections": {
+        "hero_summary.headline_extension": "- You are more likely to be activated in expression, connection and live feedback.",
+        "domain_deep_dive.intensity_sentence": "After entering the context, you often find direction and a sense of action faster.",
+        "core_portrait.load_sentence": "Your load may come from a full schedule rather than a lack of motivation.",
+        "norms_comparison.compare_sentence": "You are already extroverted in the reference sample, and external feedback has a significant boosting effect on you.",
+        "action_plan.urgency_sentence": "The key is to preserve high-quality interactions while leaving uninterrupted windows for deep tasks."
+      }
+    },
+    "e_g5": {
+      "percentile_range": [
+        80,
+        100
+      ],
+      "user_label": "High interactive activation",
+      "injections": {
+        "hero_summary.headline_extension": "- It's easy for you to get started quickly with people, presence and instant feedback.",
+        "domain_deep_dive.intensity_sentence": "Low feedback and prolonged isolation can significantly depress your energy for action.",
+        "core_portrait.load_sentence": "Your system is very well connected and needs to prevent chronically high stimulus density.",
+        "norms_comparison.compare_sentence": "This is a high extroversion position, where interaction itself is an important source of energy for you.",
+        "action_plan.urgency_sentence": "The most important thing at this time is to manage the pace so that every opportunity does not become a must-participation."
+      }
+    }
+  }
+}

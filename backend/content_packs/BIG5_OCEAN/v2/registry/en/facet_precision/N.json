@@ -1,0 +1,116 @@
+{
+  "schema": "fap.big5.facet_precision_trait_pack.v1",
+  "trait_code": "N",
+  "rules": [
+    {
+      "schema": "fap.big5.facet_precision_rule.v1",
+      "rule_id": "n1_high_spike",
+      "facet_code": "N1",
+      "anomaly_type": "positive_spike",
+      "when": {
+        "domain_percentile_min": 60,
+        "facet_percentile_min": 80,
+        "delta_abs_min": 20,
+        "cross_band_required": true
+      },
+      "priority_weight": 112,
+      "max_show_per_domain": 2,
+      "section_targets": [
+        "facet_details"
+      ],
+      "copy": {
+        "title": "Your high sensitivity first manifests as \"early warning\" rather than collapse on the spot.",
+        "body": "The anxiety-related facets are significantly higher than the domain mean, which shows that the first thing you are pulled up is usually not the exposure of emotions, but the early warning of risks, mistakes, and uncertainties.",
+        "why_it_matters": "It reminds you to treat warnings as signals instead of attributing yourself to \"thinking too much.\""
+      }
+    },
+    {
+      "schema": "fap.big5.facet_precision_rule.v1",
+      "rule_id": "n3_high_spike",
+      "facet_code": "N3",
+      "anomaly_type": "positive_spike",
+      "when": {
+        "domain_percentile_min": 60,
+        "facet_percentile_min": 80,
+        "delta_abs_min": 20,
+        "cross_band_required": true
+      },
+      "priority_weight": 112,
+      "max_show_per_domain": 2,
+      "section_targets": [
+        "facet_details"
+      ],
+      "copy": {
+        "title": "Your load is more like \"chronic sinking\" than a one-time burst.",
+        "body": "The facet related to depression and exhaustion is significantly higher than the domain average, which shows that you are more likely to be slowly drained of your energy in the long-term pull and continuous uncertainty.",
+        "why_it_matters": "This can explain why the battery is still running low on the outside, but the battery is starting to run low on the inside."
+      }
+    },
+    {
+      "schema": "fap.big5.facet_precision_rule.v1",
+      "rule_id": "n5_high_spike",
+      "facet_code": "N5",
+      "anomaly_type": "positive_spike",
+      "when": {
+        "domain_percentile_min": 60,
+        "facet_percentile_min": 80,
+        "delta_abs_min": 20,
+        "cross_band_required": true
+      },
+      "priority_weight": 108,
+      "max_show_per_domain": 2,
+      "section_targets": [
+        "facet_details"
+      ],
+      "copy": {
+        "title": "When the load is too high, you're more likely to want to \"quit right now.\"",
+        "body": "The facet related to impulsive disengagement is significantly higher than the domain mean, indicating that the risk after overload is not to continue making noise, but to suddenly want to cut off, leave, or suspend everything.",
+        "why_it_matters": "It prompts that recovery must be done in advance, because by the time you want to exit immediately, the system has already entered a high load."
+      }
+    },
+    {
+      "schema": "fap.big5.facet_precision_rule.v1",
+      "rule_id": "n4_low_with_n_high",
+      "facet_code": "N4",
+      "anomaly_type": "negative_spike",
+      "when": {
+        "domain_percentile_min": 60,
+        "facet_percentile_max": 25,
+        "delta_abs_min": 20,
+        "cross_band_required": true
+      },
+      "priority_weight": 106,
+      "max_show_per_domain": 2,
+      "section_targets": [
+        "facet_details"
+      ],
+      "copy": {
+        "title": "You are not a typical \"publicly shy sensitive\" person.",
+        "body": "Although domain N is high, the self-awareness-related facets are significantly low, indicating that your high sensitivity is not mainly manifested in being particularly withdrawn in front of others.",
+        "why_it_matters": "This contrast can explain: You may still appear normal externally, but you have already incurred a lot of costs internally."
+      }
+    },
+    {
+      "schema": "fap.big5.facet_precision_rule.v1",
+      "rule_id": "n6_low_with_n_high",
+      "facet_code": "N6",
+      "anomaly_type": "negative_spike",
+      "when": {
+        "domain_percentile_min": 60,
+        "facet_percentile_max": 25,
+        "delta_abs_min": 20,
+        "cross_band_required": true
+      },
+      "priority_weight": 108,
+      "max_show_per_domain": 2,
+      "section_targets": [
+        "facet_details"
+      ],
+      "copy": {
+        "title": "You're not \"brittle\", you're more like \"you can carry it, but it will suddenly drop out after a long time.\"",
+        "body": "Coping-limit vulnerability is significantly lower than the domain average, which means you may not quickly appear unable to cope; more often, you keep going at first and then experience a sudden drop in energy later.",
+        "why_it_matters": "When assessing strain, look beyond outward stability and consider how much recovery capacity remains."
+      }
+    }
+  ]
+}

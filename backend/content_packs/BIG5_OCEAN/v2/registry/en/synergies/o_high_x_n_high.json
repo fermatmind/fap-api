@@ -1,0 +1,46 @@
+{
+  "schema": "fap.big5.synergy_rule.v1",
+  "synergy_id": "o_high_x_n_high",
+  "title": "complexity overload effect",
+  "trigger": {
+    "all": [
+      {
+        "trait": "O",
+        "op": ">=",
+        "value": 70
+      },
+      {
+        "trait": "N",
+        "op": ">=",
+        "value": 70
+      }
+    ]
+  },
+  "priority_weight_formula": "abs(O-50)+abs(N-50)+abs(O-N)*0.5",
+  "priority_hint": 75,
+  "mutex_group": "stress_activation",
+  "mutual_excludes": [
+    "n_high_x_e_low",
+    "c_high_x_n_high"
+  ],
+  "max_show": 2,
+  "section_targets": [
+    {
+      "section_key": "core_portrait",
+      "slot": "synergy_primary",
+      "kind": "callout"
+    },
+    {
+      "section_key": "action_plan",
+      "slot": "synergy_action",
+      "kind": "paragraph"
+    }
+  ],
+  "copy": {
+    "headline": "You will see more possibilities at the same time, and you will be more easily affected by the risks and consequences of these possibilities.",
+    "body": "High openness will expand your understanding of complex situations, and high emotional sensitivity will increase your sense of uncertainty, loss of control, and potential costs. When the two are combined, the problem is not just \"thinking too much\", but that every possibility may enter the system with the weight of risk, turning understanding into a source of load.",
+    "strength_sentence": "This combination makes you more sensitive to subtle changes, long-term consequences and hidden variables, and is suitable for dealing with complex issues that require in-depth judgment.",
+    "risk_sentence": "The price is this: when there is too much information, unclear boundaries, or too open choices, you may first be overwhelmed by the complexity itself.",
+    "action_hook": "Your priority is to separate complex issues into layers: which are real risks and which are just untested possibilities."
+  }
+}

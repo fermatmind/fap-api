@@ -1,0 +1,113 @@
+{
+  "schema": "fap.big5.atomic_trait_pack.v1",
+  "trait_code": "C",
+  "trait_label_zh": "Conscientiousness",
+  "trait_label_user_facing": "Organization and Follow-Through",
+  "bands": {
+    "low": {
+      "slots": {
+        "hero_summary": {
+          "headline": "Your organization and follow-through are low, and you rely more on interests, status, and external structures to activate.",
+          "body_core": "You don't necessarily lack judgment, but continued advancement, detail finishing, and self-discipline will more easily consume you."
+        },
+        "domains_overview": {
+          "snapshot_line": "When conscientiousness is low, you need to break down your goals and start externally, instead of just relying on willpower to maintain them."
+        },
+        "domain_deep_dive": {
+          "definition": "Conscientiousness reflects the tendency to plan, order, self-discipline, carry out responsibilities, and continue to accomplish them.",
+          "strengths": [
+            "Not easily locked into rigid processes",
+            "Flexible to change",
+            "More willing to adjust the rhythm according to the real situation"
+          ],
+          "costs": [
+            "Long-term tasks are prone to interruptions",
+            "Closing and review can easily be delayed",
+            "It is more difficult to make steady progress in low-feedback tasks"
+          ],
+          "daily_life": "It’s often not that you don’t know what to do, but that you need a lighter threshold to start and a clearer external rhythm."
+        },
+        "core_portrait": {
+          "identity": "Your action system relies more on situational pull.",
+          "default_style": "When the task is meaningful, the feedback is clear, and the entrance is small enough, your progress will be significantly smoother."
+        },
+        "norms_comparison": {
+          "relative_meaning": "In the reference sample, your organization and follow-through are relatively low, indicating that continuous execution is not the most natural and labor-saving path."
+        },
+        "action_plan": {
+          "priority_hint": "Your focus is on establishing an externalized push system: smaller next steps, shorter cycles, clearer completion criteria."
+        }
+      }
+    },
+    "mid": {
+      "slots": {
+        "hero_summary": {
+          "headline": "Your organization and follow-through are in the middle, and you can perform it, but it will be affected by the meaning and load of the task.",
+          "body_core": "You can be responsible, plan and complete, but when tasks have low feedback for a long time or have unclear boundaries, endurance will drop significantly."
+        },
+        "domains_overview": {
+          "snapshot_line": "When conscientiousness is in the middle, you have the basic ability to advance, but you need to put key tasks into a stable rhythm."
+        },
+        "domain_deep_dive": {
+          "definition": "Conscientiousness determines how you organize tasks, maintain commitments, manage details, and advance ideas to completion.",
+          "strengths": [
+            "Able to execute stably under clear goals",
+            "Will not blindly pursue the perfect process",
+            "Ability to adjust between schedule and flexibility"
+          ],
+          "costs": [
+            "Ambiguous tasks tend to be slowed down",
+            "Too much parallelism can impair completion rates",
+            "Low-meaning tasks require additional structural support"
+          ],
+          "daily_life": "You usually get the important stuff done, but you need to identify ahead of time which tasks will drain your continuity."
+        },
+        "core_portrait": {
+          "identity": "Your action system has basic order, but it is not suitable for carrying on without feedback for a long time.",
+          "default_style": "You're better suited to maintaining progress with milestones and clear feedback."
+        },
+        "norms_comparison": {
+          "relative_meaning": "In the reference sample, your conscientiousness is close to the middle, indicating that execution is present, but is not automatically stable in all scenarios."
+        },
+        "action_plan": {
+          "priority_hint": "The focus of your actions is to put the most important tasks into a fixed rhythm and reduce the need to rely on on-the-spot status to determine progress."
+        }
+      }
+    },
+    "high": {
+      "slots": {
+        "hero_summary": {
+          "headline": "Your organization and follow-through are relatively high, making it easier to turn goals into plans and continue to complete them.",
+          "body_core": "You usually value commitment, structure and controllable progress, and are more likely to take the initiative to bring things to a conclusion."
+        },
+        "domains_overview": {
+          "snapshot_line": "When conscientiousness is high, your advantage is that you can complete it stably, but the price is that you need to avoid internalizing all responsibilities as a necessity."
+        },
+        "domain_deep_dive": {
+          "definition": "Conscientiousness reflects the intensity of planning, responsibility, self-discipline, detail management and continuous completion.",
+          "strengths": [
+            "Management by objectives is more stable",
+            "Easier to keep promises",
+            "Ability to break complex tasks into executable steps"
+          ],
+          "costs": [
+            "It may be difficult to let go of unfinished items",
+            "Easily impatient with low-quality collaboration",
+            "Need to prevent overcommitment during high-stress periods"
+          ],
+          "daily_life": "You often naturally track progress, check for omissions, and push vague tasks toward concrete results."
+        },
+        "core_portrait": {
+          "identity": "Your action system is more structured and results-oriented.",
+          "default_style": "You'll move forward steadily with plans, standards, and accountability, but you'll also need to leave legitimate room for recovery and adjustment."
+        },
+        "norms_comparison": {
+          "relative_meaning": "In the reference sample, your organization and follow-through are more prominent, indicating that continuous completion and self-management are closer to your natural strengths."
+        },
+        "action_plan": {
+          "priority_hint": "Your actions focus on maintaining high-quality execution while avoiding elevating all tasks to the same level of urgency."
+        }
+      }
+    }
+  }
+}

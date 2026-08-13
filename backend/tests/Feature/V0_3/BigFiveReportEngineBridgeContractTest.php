@@ -64,4 +64,47 @@ final class BigFiveReportEngineBridgeContractTest extends TestCase
             }
         }
     }
+
+    public function test_unsupported_locale_returns_explicit_unavailable_state_without_falling_back_to_chinese(): void
+    {
+        config()->set('big5_report_engine.v2_bridge_enabled', true);
+        $fixture = $this->createCanonicalBigFiveBridgeFixture('anon_big5_bridge_unsupported_locale');
+        $fixture['attempt']->forceFill(['locale' => 'fr-FR'])->save();
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$fixture['token'],
+            'X-Anon-Id' => $fixture['anon_id'],
+        ])->getJson('/api/v0.3/attempts/'.$fixture['attempt_id'].'/report');
+
+        $response->assertOk();
+        $response->assertJsonPath('big5_report_engine_v2.schema_version', 'fap.big5.report.unavailable.v1');
+        $response->assertJsonPath('big5_report_engine_v2.status', 'unavailable');
+        $response->assertJsonPath('big5_report_engine_v2.unavailable_reason', 'unsupported_locale');
+        $this->assertSame($fixture['legacy_sections'], $response->json('report.sections'));
+        $this->assertDoesNotMatchRegularExpression(
+            '/[\x{3400}-\x{9FFF}]/u',
+            json_encode($response->json('big5_report_engine_v2'), JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR),
+        );
+    }
+
+    public function test_english_attempt_returns_full_english_v2_payload_through_the_same_api_bridge(): void
+    {
+        config()->set('big5_report_engine.v2_bridge_enabled', true);
+        $fixture = $this->createCanonicalBigFiveBridgeFixture('anon_big5_bridge_english');
+        $fixture['attempt']->forceFill(['locale' => 'en-US'])->save();
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$fixture['token'],
+            'X-Anon-Id' => $fixture['anon_id'],
+        ])->getJson('/api/v0.3/attempts/'.$fixture['attempt_id'].'/report');
+
+        $response->assertOk();
+        $response->assertJsonPath('big5_report_engine_v2.schema_version', 'fap.big5.report.v1');
+        $response->assertJsonPath('big5_report_engine_v2.locale', 'en-US');
+        $response->assertJsonCount(8, 'big5_report_engine_v2.sections');
+        $this->assertDoesNotMatchRegularExpression(
+            '/[\x{3400}-\x{9FFF}]/u',
+            json_encode($response->json('big5_report_engine_v2'), JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR),
+        );
+    }
 }

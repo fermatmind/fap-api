@@ -1,0 +1,77 @@
+{
+  "schema": "fap.big5.modifier_trait_pack.v1",
+  "trait_code": "N",
+  "trait_label_zh": "Emotional Sensitivity",
+  "gradients": {
+    "n_g1": {
+      "percentile_range": [
+        0,
+        19
+      ],
+      "user_label": "low fluctuation steady state",
+      "injections": {
+        "hero_summary.headline_extension": "- Your system as a whole is less likely to be pushed away from the baseline by short-term tension.",
+        "domain_deep_dive.intensity_sentence": "Most of the time, you won't stall significantly quickly due to ambiguity and uncertainty.",
+        "core_portrait.load_sentence": "You are unlikely to bear a high internal load before others take it seriously.",
+        "norms_comparison.compare_sentence": "This is closer to a low-volatility, low-load emotional baseline.",
+        "action_plan.urgency_sentence": "What you need now is to retain risk sensitivity rather than establish strong recovery protocols."
+      }
+    },
+    "n_g2": {
+      "percentile_range": [
+        20,
+        39
+      ],
+      "user_label": "Mild alert",
+      "injections": {
+        "hero_summary.headline_extension": "——You will notice discomfort, but most of the time you can still get back to your original rhythm relatively quickly.",
+        "domain_deep_dive.intensity_sentence": "You have a sense of relationships and uncertainty, but not enough to consistently dominate the system.",
+        "core_portrait.load_sentence": "Rather than being hyporesponsive, your system is still dominated by homeostasis.",
+        "norms_comparison.compare_sentence": "You're closer to the \"slightly physical, but not significantly higher\" position in the reference sample.",
+        "action_plan.urgency_sentence": "It will be more useful for you to correct in small steps rather than in large withdrawals."
+      }
+    },
+    "n_g3": {
+      "percentile_range": [
+        40,
+        59
+      ],
+      "user_label": "Condition sensitive",
+      "injections": {
+        "hero_summary.headline_extension": "—Your stress response is more likely to intensify in high-pressure contexts, misunderstandings, and unclear boundaries.",
+        "domain_deep_dive.intensity_sentence": "You don’t necessarily show it on the spot, but the cost is already starting to be borne internally.",
+        "core_portrait.load_sentence": "Your sense of the quality of the environment and the tension of the relationship is enough to influence how you enter and advance.",
+        "norms_comparison.compare_sentence": "Your relative position indicates that you are not constantly alert, but you can react faster than most people in certain situations.",
+        "action_plan.urgency_sentence": "Recovery is no longer optional for you, but something worth starting to make conscious arrangements for."
+      }
+    },
+    "n_g4": {
+      "percentile_range": [
+        60,
+        79
+      ],
+      "user_label": "High body sensation warning",
+      "injections": {
+        "hero_summary.headline_extension": "- This means you feel something is wrong sooner and the internal load rises earlier.",
+        "domain_deep_dive.intensity_sentence": "In collaboration with blurred boundaries and repeated pulls, you will experience psychological wear and tear earlier than most people.",
+        "core_portrait.load_sentence": "While others are still saying, “Let’s see first,” you may already be bearing the true costs internally.",
+        "norms_comparison.compare_sentence": "This shows that you are in a significantly more sensitive position in the reference sample. You do not have occasional waves, but you feel the body sensation more naturally and earlier.",
+        "action_plan.urgency_sentence": "For you, recovery is not an accessory action, but a prerequisite for maintaining stable output."
+      }
+    },
+    "n_g5": {
+      "percentile_range": [
+        80,
+        100
+      ],
+      "user_label": "Continuously high alert",
+      "injections": {
+        "hero_summary.headline_extension": "——It is very easy for your system to remain on high alert for a long time, and the cost of recovery will be higher.",
+        "domain_deep_dive.intensity_sentence": "It’s easier to bring external tension back inside for a long time than to let it off naturally after the context is over.",
+        "core_portrait.load_sentence": "Your problem is not that it is occasionally sensitive, but that it may be in a high-load operation mode for a long time.",
+        "norms_comparison.compare_sentence": "In the reference sample, your relative position is enough to constitute an obvious high-load warning.",
+        "action_plan.urgency_sentence": "A recovery mechanism is not a recommendation at this point, but a basic layer of protection that must be in place."
+      }
+    }
+  }
+}

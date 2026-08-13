@@ -1,0 +1,77 @@
+{
+  "schema": "fap.big5.modifier_trait_pack.v1",
+  "trait_code": "O",
+  "trait_label_zh": "Openness to Experience",
+  "gradients": {
+    "o_g1": {
+      "percentile_range": [
+        0,
+        19
+      ],
+      "user_label": "low exploration steady state",
+      "injections": {
+        "hero_summary.headline_extension": "- You prefer to approach problems from a familiar, clear, and verifiable path.",
+        "domain_deep_dive.intensity_sentence": "Novelty on its own is rarely enough to drive you unless it has shown real value.",
+        "core_portrait.load_sentence": "Your system proactively filters overly divergent inputs to preserve stability and certainty.",
+        "norms_comparison.compare_sentence": "This shows that your cognitive approach is clearly more pragmatic and you don't rely much on abstract exploration to gain motivation.",
+        "action_plan.urgency_sentence": "It will be most useful for you to set up low-risk experiments rather than forcing yourself to continually explore the unknown."
+      }
+    },
+    "o_g2": {
+      "percentile_range": [
+        20,
+        39
+      ],
+      "user_label": "Accept with caution",
+      "injections": {
+        "hero_summary.headline_extension": "- You can understand the new perspective, but usually you need to make sure it doesn't disrupt the core order first.",
+        "domain_deep_dive.intensity_sentence": "Rather than being closed to change, you place more emphasis on explanations and evidence before entering.",
+        "core_portrait.load_sentence": "Your exploration load comes primarily from uncertainty, not from learning itself.",
+        "norms_comparison.compare_sentence": "Your position is closer to \"cautious acceptance\" and you will screen before investing.",
+        "action_plan.urgency_sentence": "The next step is to condense new ideas into small-scale verification, rather than changing the original system all at once."
+      }
+    },
+    "o_g3": {
+      "percentile_range": [
+        40,
+        59
+      ],
+      "user_label": "selective exploration",
+      "injections": {
+        "hero_summary.headline_extension": "——When the new perspective is explanatory enough, you will be willing to get closer and absorb it.",
+        "domain_deep_dive.intensity_sentence": "Your interest in a new experience depends on whether it explains a real problem, not on whether it is new or not.",
+        "core_portrait.load_sentence": "Your system can switch between exploration and implementation, but requires clear problem awareness to maintain depth.",
+        "norms_comparison.compare_sentence": "This is more like a selective openness: able to explore and calibrate.",
+        "action_plan.urgency_sentence": "Your focus is on converting valuable interest into an achievable output."
+      }
+    },
+    "o_g4": {
+      "percentile_range": [
+        60,
+        79
+      ],
+      "user_label": "high concept connection",
+      "injections": {
+        "hero_summary.headline_extension": "- You can more easily see structures, metaphors and connections between different systems.",
+        "domain_deep_dive.intensity_sentence": "Complexity and ambiguity will not immediately dissuade you, but may activate your desire for understanding.",
+        "core_portrait.load_sentence": "Your cognitive load often comes from too many possibilities, and you need to proactively prune your priorities.",
+        "norms_comparison.compare_sentence": "You are clearly more open-minded in the reference sample and are more likely to understand the world through conceptual connections.",
+        "action_plan.urgency_sentence": "The key for you is not to add more ideas, but to decide which ones are worthy of execution."
+      }
+    },
+    "o_g5": {
+      "percentile_range": [
+        80,
+        100
+      ],
+      "user_label": "Strong exploration drive",
+      "injections": {
+        "hero_summary.headline_extension": "——It is difficult for you to stay in a single explanation for a long time and you will continue to look for the bigger picture.",
+        "domain_deep_dive.intensity_sentence": "High levels of duplication and too narrow a frame will significantly drain you as your system requires new information and new connections.",
+        "core_portrait.load_sentence": "Your openness itself is not the problem, the real load comes from the lack of closure after infinite expansion.",
+        "norms_comparison.compare_sentence": "This is already significantly more open to exploring and imagining the way your base runs.",
+        "action_plan.urgency_sentence": "The most important thing at this time is to establish a binding agreement to turn creativity into deliverables."
+      }
+    }
+  }
+}

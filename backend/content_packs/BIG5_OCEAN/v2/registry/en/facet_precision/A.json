@@ -1,0 +1,102 @@
+{
+  "schema": "fap.big5.facet_precision_trait_pack.v1",
+  "trait_code": "A",
+  "rules": [
+    {
+      "schema": "fap.big5.facet_precision_rule.v1",
+      "rule_id": "a1_low_with_a_mid",
+      "facet_code": "A1",
+      "anomaly_type": "negative_spike",
+      "when": {
+        "domain_percentile_min": 40,
+        "domain_percentile_max": 65,
+        "facet_percentile_max": 25,
+        "delta_abs_min": 20,
+        "cross_band_required": true
+      },
+      "priority_weight": 112,
+      "max_show_per_domain": 2,
+      "section_targets": [
+        "facet_details"
+      ],
+      "copy": {
+        "title": "It’s not that you’re uncooperative, but that trust starts more slowly.",
+        "body": "When the overall agreeableness is in the middle, the starting point of trust is clearly low, which means that you can cooperate and be willing to be reasonable, but you will not easily assume that others' motives are reliable.",
+        "why_it_matters": "This can separate \"precaution\" from \"unfriendly\" and see your need for risk evidence."
+      }
+    },
+    {
+      "schema": "fap.big5.facet_precision_rule.v1",
+      "rule_id": "a4_high_with_a_mid",
+      "facet_code": "A4",
+      "anomaly_type": "positive_spike",
+      "when": {
+        "domain_percentile_min": 40,
+        "domain_percentile_max": 65,
+        "facet_percentile_min": 80,
+        "delta_abs_min": 20,
+        "cross_band_required": true
+      },
+      "priority_weight": 106,
+      "max_show_per_domain": 2,
+      "section_targets": [
+        "facet_details"
+      ],
+      "copy": {
+        "title": "You tend to preserve relationship warmth during conflict.",
+        "body": "Conflict mediation is significantly higher than overall agreeableness, which shows that you may not give in everywhere, but when faced with disagreements, you will give priority to preventing the relationship from heating up quickly.",
+        "why_it_matters": "This explains why you can hold on to judgment while still being unwilling to push the conflict to the extreme."
+      }
+    },
+    {
+      "schema": "fap.big5.facet_precision_rule.v1",
+      "rule_id": "a_selective_cooperator_split",
+      "facet_code": "A1",
+      "anomaly_type": "negative_spike",
+      "when": {
+        "domain_percentile_min": 40,
+        "domain_percentile_max": 65,
+        "facet_percentile_max": 25,
+        "facets": {
+          "A4": {
+            "facet_percentile_min": 75
+          }
+        },
+        "delta_abs_min": 20,
+        "cross_band_required": true
+      },
+      "priority_weight": 120,
+      "max_show_per_domain": 2,
+      "section_targets": [
+        "facet_details"
+      ],
+      "copy": {
+        "title": "You are a selective collaborator: cooperation is there, trust is slow.",
+        "body": "A low starting point for trust and a high level of conflict mediation indicates that you are willing to maintain the order of cooperation, but will not quickly surrender trust when evidence is insufficient.",
+        "why_it_matters": "This is a classic counter-intuitive discovery: instead of being naively open, your collaboration comes with boundaries and observation periods."
+      }
+    },
+    {
+      "schema": "fap.big5.facet_precision_rule.v1",
+      "rule_id": "a6_high_with_a_low",
+      "facet_code": "A6",
+      "anomaly_type": "positive_spike",
+      "when": {
+        "domain_percentile_max": 40,
+        "facet_percentile_min": 75,
+        "delta_abs_min": 20,
+        "cross_band_required": true
+      },
+      "priority_weight": 110,
+      "max_show_per_domain": 2,
+      "section_targets": [
+        "facet_details"
+      ],
+      "copy": {
+        "title": "Even if it's not overall pandering, you may still be sensitive to vulnerable situations.",
+        "body": "When empathic softness is higher than the low level of agreeableness, it means that you are not necessarily willing to accommodate all relationships, but you will respond to real difficulties and signals of vulnerability.",
+        "why_it_matters": "This avoids misinterpreting low agreeableness as indifference: you might just be more boundary-oriented, rather than unfeeling."
+      }
+    }
+  ]
+}

@@ -49,6 +49,19 @@ final class RegistryValidator
         'gradient_labels.gradients.g3.copy_rule',
         'gradient_labels.gradients.g4.copy_rule',
         'gradient_labels.gradients.g5.copy_rule',
+        'runtime_copy.action_matrix.intro.title',
+        'runtime_copy.action_matrix.intro.body',
+        'runtime_copy.action_matrix.priority_prefix',
+        'runtime_copy.action_matrix.priority_body',
+        'runtime_copy.action_matrix.next_steps_suffix',
+        'runtime_copy.action_matrix.bucket_labels.continue',
+        'runtime_copy.action_matrix.bucket_labels.start',
+        'runtime_copy.action_matrix.bucket_labels.stop',
+        'runtime_copy.action_matrix.bucket_labels.observe',
+        'runtime_copy.facet_details.intro.title',
+        'runtime_copy.facet_details.intro.body',
+        'runtime_copy.facet_details.overflow.title',
+        'runtime_copy.facet_details.overflow.body',
     ];
 
     private const SYNERGY_IDS = [

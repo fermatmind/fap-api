@@ -1,0 +1,112 @@
+{
+  "schema": "fap.big5.facet_precision_trait_pack.v1",
+  "trait_code": "E",
+  "rules": [
+    {
+      "schema": "fap.big5.facet_precision_rule.v1",
+      "rule_id": "e1_high_with_e_low",
+      "facet_code": "E1",
+      "anomaly_type": "positive_spike",
+      "when": {
+        "domain_percentile_max": 40,
+        "facet_percentile_min": 60,
+        "delta_abs_min": 20,
+        "cross_band_required": true
+      },
+      "priority_weight": 112,
+      "max_show_per_domain": 2,
+      "section_targets": [
+        "facet_details"
+      ],
+      "copy": {
+        "title": "You are not socially cold, but the intimacy channel is stronger than the group energy.",
+        "body": "When your overall extroversion is low, but your warmth is not low, it means that you do not lack the ability to connect, but you may not necessarily like high-density social situations.",
+        "why_it_matters": "It can correct the misunderstanding of \"low extroversion = not approachable\"."
+      }
+    },
+    {
+      "schema": "fap.big5.facet_precision_rule.v1",
+      "rule_id": "e2_high_with_e_low",
+      "facet_code": "E2",
+      "anomaly_type": "positive_spike",
+      "when": {
+        "domain_percentile_max": 40,
+        "facet_percentile_min": 60,
+        "delta_abs_min": 20,
+        "cross_band_required": true
+      },
+      "priority_weight": 104,
+      "max_show_per_domain": 2,
+      "section_targets": [
+        "facet_details"
+      ],
+      "copy": {
+        "title": "You are not completely averse to crowds, you just need to choose the right density.",
+        "body": "When group participation is higher than overall extraversion, it means that you can enter the crowd, but you may not be able to withstand sustained high stimulation, high assertion, or fast-paced interactions.",
+        "why_it_matters": "This suggests that social strategies should focus on context density rather than simply labeling introverts."
+      }
+    },
+    {
+      "schema": "fap.big5.facet_precision_rule.v1",
+      "rule_id": "e_warm_but_reserved_split",
+      "facet_codes_all": [
+        "E1",
+        "E2",
+        "E3",
+        "E5"
+      ],
+      "anomaly_type": "compound_split",
+      "when": {
+        "domain_percentile_max": 40,
+        "facets": {
+          "E1": {
+            "facet_percentile_min": 55
+          },
+          "E2": {
+            "facet_percentile_min": 50
+          },
+          "E3": {
+            "facet_percentile_max": 30
+          },
+          "E5": {
+            "facet_percentile_max": 30
+          }
+        },
+        "delta_abs_min": 20,
+        "cross_band_required": true
+      },
+      "priority_weight": 145,
+      "max_show_per_domain": 2,
+      "section_targets": [
+        "facet_details"
+      ],
+      "copy": {
+        "title": "You are not socially awkward, but you are \"able to connect, but don't steal the show.\"",
+        "body": "The warmth and group participation are not low, but the expression and stimulation seeking are low, indicating that you can establish connections and stay in the crowd; what is really reserved is to seize the position, create strong stimulation and high-frequency advancement.",
+        "why_it_matters": "This split can explain the restraint seen from the outside: it is not a weak capacity for connection, but a low need for expression pressure and stimulation."
+      }
+    },
+    {
+      "schema": "fap.big5.facet_precision_rule.v1",
+      "rule_id": "e_stimulation_low_with_e_mid_or_high",
+      "facet_code": "E5",
+      "anomaly_type": "negative_spike",
+      "when": {
+        "domain_percentile_min": 45,
+        "facet_percentile_max": 25,
+        "delta_abs_min": 20,
+        "cross_band_required": true
+      },
+      "priority_weight": 106,
+      "max_show_per_domain": 2,
+      "section_targets": [
+        "facet_details"
+      ],
+      "copy": {
+        "title": "Even if you can release it outside, you don’t necessarily need strong stimulation.",
+        "body": "Sensation seeking is significantly lower than overall extraversion, indicating that you can express, interact, or push forward, but do not necessarily like high noise, high risk, and strong arousal scenarios.",
+        "why_it_matters": "This avoids misinterpreting activity level as stimulus preference."
+      }
+    }
+  ]
+}

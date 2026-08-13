@@ -35,10 +35,9 @@ final class BigFiveReportEngine
      */
     public function generate(array $input): array
     {
-        $registry = $this->registryLoader->load();
-        $this->registryValidator->assertValid($registry);
-
         $context = $this->contextBuilder->fromArray($input);
+        $registry = $this->registryLoader->load($context->locale);
+        $this->registryValidator->assertValid($registry);
         $blocks = $this->atomicBlockResolver->resolve($context, $registry);
         $blocks = $this->modifierInjector->inject($context, $blocks, $registry);
         $synergies = $this->synergyResolutionService->resolve(
@@ -57,7 +56,7 @@ final class BigFiveReportEngine
      */
     public function generateCanonicalNSlice(): array
     {
-        $registry = $this->registryLoader->load();
+        $registry = $this->registryLoader->load('zh-CN');
         $fixture = $registry['fixtures']['canonical_n_slice_sensitive_independent'] ?? [];
 
         return $this->generate(is_array($fixture) ? $fixture : []);

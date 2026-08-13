@@ -1,0 +1,49 @@
+{
+  "schema": "fap.big5.synergy_rule.v1",
+  "synergy_id": "n_high_x_e_low",
+  "title": "internal pressure cooker effect",
+  "trigger": {
+    "all": [
+      {
+        "trait": "N",
+        "op": ">=",
+        "value": 65
+      },
+      {
+        "trait": "E",
+        "op": "<=",
+        "value": 35
+      },
+      {
+        "expr": "abs(N-E) >= 20"
+      }
+    ]
+  },
+  "priority_weight_formula": "abs(N-50)+abs(E-50)+abs(N-E)*0.5",
+  "priority_hint": 100,
+  "mutex_group": "stress_activation",
+  "mutual_excludes": [
+    "o_high_x_n_high",
+    "c_high_x_n_high"
+  ],
+  "max_show": 2,
+  "section_targets": [
+    {
+      "section_key": "core_portrait",
+      "slot": "synergy_primary",
+      "kind": "callout"
+    },
+    {
+      "section_key": "action_plan",
+      "slot": "synergy_action",
+      "kind": "paragraph"
+    }
+  ],
+  "copy": {
+    "headline": "You will feel tension earlier than most people, but you are less likely to bring it out through sustained expression.",
+    "body": "High emotional sensitivity allows stress, misunderstanding and uncertainty to enter the system earlier, while low extroversion makes it less likely that this load will be taken out through immediate expression, social release or high-frequency interaction. The result was not that it lost control on the spot, but that it seemed stable on the outside, but it had begun to operate at high load for a long time inside.",
+    "strength_sentence": "This combination will make you discover the cracks in the environment and relationships earlier than many people, and you will be less likely to blindly enter high-stimulation fields.",
+    "risk_sentence": "The price is: you are more likely to enter a state of \"thinking a lot but delaying entering, being busy internally but not seeing it from the outside\".",
+    "action_hook": "Your key issue is not to force yourself to be more outgoing, but to express your feelings earlier, express boundaries at a lower cost, and arrange recovery more proactively."
+  }
+}

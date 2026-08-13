@@ -1,0 +1,127 @@
+{
+  "schema": "fap.big5.action_rule_pack.v1",
+  "scenario": "workplace",
+  "scenario_title": "Work",
+  "rules": [
+    {
+      "rule_id": "c_work_start_5min_00_15",
+      "trait_code": "C",
+      "bucket": "start",
+      "percentile_min": 0,
+      "percentile_max": 15,
+      "priority_weight": 92,
+      "scenario_tags": [
+        "workplace"
+      ],
+      "difficulty_level": "low",
+      "time_horizon": "today",
+      "title": "Start a 5-minute task",
+      "body": "Cut the tasks that hold you back the most into 5-minute starter blocks, asking yourself only to open materials, write down the first step, or complete a minimal action."
+    },
+    {
+      "rule_id": "c_work_start_20min_16_35",
+      "trait_code": "C",
+      "bucket": "start",
+      "percentile_min": 16,
+      "percentile_max": 35,
+      "priority_weight": 88,
+      "scenario_tags": [
+        "workplace"
+      ],
+      "difficulty_level": "low",
+      "time_horizon": "this_week",
+      "title": "Start a 20-minute task",
+      "body": "Break important but non-urgent tasks into 20-minute activation units instead of asking yourself to push through them all at once."
+    },
+    {
+      "rule_id": "c_work_observe_stage_cadence_36_60",
+      "trait_code": "C",
+      "bucket": "observe",
+      "percentile_min": 36,
+      "percentile_max": 60,
+      "priority_weight": 54,
+      "scenario_tags": [
+        "workplace"
+      ],
+      "difficulty_level": "low",
+      "time_horizon": "two_weeks",
+      "title": "Record whether stage returns exist",
+      "body": "Observe for two consecutive weeks: Which tasks are slowing down because there is no visible stage reward, and which tasks are advancing naturally because the feedback is clear."
+    },
+    {
+      "rule_id": "n_work_stop_hidden_load_60_79",
+      "trait_code": "N",
+      "bucket": "stop",
+      "percentile_min": 60,
+      "percentile_max": 79,
+      "priority_weight": 86,
+      "scenario_tags": [
+        "workplace"
+      ],
+      "difficulty_level": "mid",
+      "time_horizon": "this_week",
+      "title": "Stop silently swallowing excess load",
+      "body": "When it becomes clear that a task, relationship, or rhythm is taking a toll on you, don't continue to keep the cost internally."
+    },
+    {
+      "rule_id": "n_work_observe_trigger_meetings_60_100",
+      "trait_code": "N",
+      "bucket": "observe",
+      "percentile_min": 60,
+      "percentile_max": 100,
+      "priority_weight": 78,
+      "scenario_tags": [
+        "workplace"
+      ],
+      "difficulty_level": "low",
+      "time_horizon": "two_weeks",
+      "title": "Keep track of the types of meetings that consume you the most",
+      "body": "Record for two consecutive weeks: Which meetings are most likely to put you into high load early, whether it is because of vague goals, unclear responsibilities, or repeated pulling."
+    },
+    {
+      "rule_id": "e_work_stop_lower_pressure_70_100",
+      "trait_code": "E",
+      "bucket": "stop",
+      "percentile_min": 70,
+      "percentile_max": 100,
+      "priority_weight": 82,
+      "scenario_tags": [
+        "workplace"
+      ],
+      "difficulty_level": "mid",
+      "time_horizon": "this_week",
+      "title": "Reduce the pressure of expression first, and then advance the conclusion",
+      "body": "When you quickly want to push a conclusion to the forefront, pause for a moment to slow down your speaking speed, turns, and space for confirmation questions before moving forward with your decision."
+    },
+    {
+      "rule_id": "a_work_start_align_goal_before_disagree_00_35",
+      "trait_code": "A",
+      "bucket": "start",
+      "percentile_min": 0,
+      "percentile_max": 35,
+      "priority_weight": 84,
+      "scenario_tags": [
+        "workplace"
+      ],
+      "difficulty_level": "mid",
+      "time_horizon": "this_week",
+      "title": "Align goals first, then express objections",
+      "body": "Before raising objections, clarify the issues you and the other person are trying to resolve before getting into the disagreement itself."
+    },
+    {
+      "rule_id": "o_work_continue_frame_complexity_50_100",
+      "trait_code": "O",
+      "bucket": "continue",
+      "percentile_min": 50,
+      "percentile_max": 100,
+      "priority_weight": 64,
+      "scenario_tags": [
+        "workplace"
+      ],
+      "difficulty_level": "low",
+      "time_horizon": "this_week",
+      "title": "Condensing complexity into a decision-making problem",
+      "body": "Continue to use your understanding of complexity, but at the end of each discussion, wrap it up into the decision question that most needs to be answered at the moment."
+    }
+  ]
+}

@@ -7,6 +7,7 @@ namespace App\Services\BigFive\ReportEngine\Bridge;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\BigFive\ReportEngine\BigFiveReportEngine;
+use App\Services\BigFive\ReportEngine\Registry\UnsupportedRegistryLocale;
 use Illuminate\Support\Facades\Log;
 
 final class BigFiveLiveRuntimeBridge
@@ -38,6 +39,13 @@ final class BigFiveLiveRuntimeBridge
 
         try {
             return $this->engine->generate($context);
+        } catch (UnsupportedRegistryLocale) {
+            return [
+                'schema_version' => 'fap.big5.report.unavailable.v1',
+                'status' => 'unavailable',
+                'unavailable_reason' => 'unsupported_locale',
+                'scale_code' => 'BIG5_OCEAN',
+            ];
         } catch (\Throwable $exception) {
             Log::warning('BIG5_REPORT_ENGINE_V2_BRIDGE_FAILED', [
                 'attempt_id' => (string) ($attempt->id ?? ''),

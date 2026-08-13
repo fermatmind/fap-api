@@ -1,0 +1,98 @@
+{
+  "schema": "fap.big5.report_registry_manifest.v1",
+  "registry_id": "BIG5_OCEAN_v2_report_engine_pr3c_en",
+  "scale_code": "BIG5_OCEAN",
+  "version": "v2",
+  "locale": "en",
+  "scope": "PR3C scenario-bound action matrix rollout; all 5 traits keep PR2 atomic/modifier coverage, PR3A five synergy rollout and PR3B facet precision remain unchanged, action rules now cover four scenario-bound packs",
+  "runtime_contract": "fap.big5.report.v1",
+  "section_skeleton": [
+    "hero_summary",
+    "domains_overview",
+    "domain_deep_dive",
+    "facet_details",
+    "core_portrait",
+    "norms_comparison",
+    "action_plan",
+    "methodology_and_access"
+  ],
+  "traits_in_scope": [
+    "O",
+    "C",
+    "E",
+    "A",
+    "N"
+  ],
+  "coverage": {
+    "atomic_traits": [
+      "O",
+      "C",
+      "E",
+      "A",
+      "N"
+    ],
+    "atomic_bands_per_trait": [
+      "low",
+      "mid",
+      "high"
+    ],
+    "modifier_traits": [
+      "O",
+      "C",
+      "E",
+      "A",
+      "N"
+    ],
+    "modifier_gradients_per_trait": 5,
+    "synergies": [
+      "n_high_x_e_low",
+      "o_high_x_c_low",
+      "o_high_x_n_high",
+      "c_high_x_n_high",
+      "e_high_x_a_low"
+    ],
+    "facet_precision_traits": [
+      "O",
+      "C",
+      "E",
+      "A",
+      "N"
+    ],
+    "action_rule_scope": "scenario-bound action matrix",
+    "action_rule_scenarios": [
+      "workplace",
+      "relationships",
+      "stress_recovery",
+      "personal_growth"
+    ],
+    "action_rule_count": 28,
+    "action_rule_counts_by_scenario": {
+      "workplace": 8,
+      "relationships": 8,
+      "stress_recovery": 6,
+      "personal_growth": 6
+    },
+    "action_matrix_caps": {
+      "per_scenario_per_bucket": 1,
+      "per_scenario": 4,
+      "per_report": 12
+    },
+    "facet_glossary_traits": [
+      "O",
+      "C",
+      "E",
+      "A",
+      "N"
+    ],
+    "facet_glossary_entries": 30,
+    "facet_precision_rules": 22,
+    "facet_precision_caps": {
+      "per_domain": 2,
+      "per_report": 6,
+      "standout_render_cards": 3
+    }
+  },
+  "fixtures": [
+    "fixtures/canonical_n_slice_sensitive_independent.context.json"
+  ]
+}

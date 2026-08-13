@@ -1,0 +1,46 @@
+{
+  "schema": "fap.big5.synergy_rule.v1",
+  "synergy_id": "c_high_x_n_high",
+  "title": "defensive perfectionism",
+  "trigger": {
+    "all": [
+      {
+        "trait": "C",
+        "op": ">=",
+        "value": 70
+      },
+      {
+        "trait": "N",
+        "op": ">=",
+        "value": 70
+      }
+    ]
+  },
+  "priority_weight_formula": "abs(C-50)+abs(N-50)+abs(C-N)*0.5",
+  "priority_hint": 76,
+  "mutex_group": "stress_activation",
+  "mutual_excludes": [
+    "n_high_x_e_low",
+    "o_high_x_n_high"
+  ],
+  "max_show": 2,
+  "section_targets": [
+    {
+      "section_key": "core_portrait",
+      "slot": "synergy_primary",
+      "kind": "callout"
+    },
+    {
+      "section_key": "action_plan",
+      "slot": "synergy_action",
+      "kind": "paragraph"
+    }
+  ],
+  "copy": {
+    "headline": "You tend to do things steadily and carefully, and you are also more likely to feel in advance where things may go wrong.",
+    "body": "High conscientiousness will push you to set standards, control details, and pursue completion quality. High emotional sensitivity will allow the sense of risk and mistakes to enter the system earlier. When the two are combined, execution is not only motivation, but also vigilance: the more you care about getting it right, the easier it is to be caught by the signal that \"it's not stable enough\".",
+    "strength_sentence": "This combination makes you more sensitive to quality, risk and responsibility boundaries, and is suitable for tasks that require reliability and early warning.",
+    "risk_sentence": "The cost is this: You may be handling many tasks to a high standard, resulting in constant tension, double-checking, or difficulty in actually calling it a day.",
+    "action_hook": "Your priority action is to distinguish between what must be of a high standard and what can be good enough."
+  }
+}
