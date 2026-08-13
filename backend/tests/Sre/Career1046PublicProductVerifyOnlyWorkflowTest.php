@@ -100,6 +100,23 @@ final class Career1046PublicProductVerifyOnlyWorkflowTest extends TestCase
         self::assertFalse($receipt['writes_committed']);
     }
 
+    public function test_stale_public_directory_cache_fails_with_actionable_sanitized_stage(): void
+    {
+        $fixture = $this->fixture();
+        $map = json_decode((string) file_get_contents($fixture['http_fixture']), true, 512, JSON_THROW_ON_ERROR);
+        $url = $fixture['api_base'].'/api/v0.5/career/directory?locale=en&per_page=100&page=1';
+        $map[$url]['body']['pagination']['total'] = 30;
+        $map[$url]['body']['pagination']['total_pages'] = 1;
+        file_put_contents($fixture['http_fixture'], json_encode($map, JSON_THROW_ON_ERROR));
+
+        [$status, $receipt] = $this->runControl($fixture);
+
+        self::assertSame(1, $status);
+        self::assertSame('PUBLIC_DIRECTORY_CACHE_NOT_CONVERGED', $receipt['failed_stage']);
+        self::assertSame(0, $receipt['cache_write_count']);
+        self::assertFalse($receipt['writes_committed']);
+    }
+
     public function test_workflow_is_manual_protected_read_only_and_uploads_every_receipt(): void
     {
         $workflow = $this->repoFile('.github/workflows/career-1046-public-product-verify-only.yml');

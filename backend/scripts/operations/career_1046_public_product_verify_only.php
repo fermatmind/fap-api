@@ -345,10 +345,12 @@ function careerPublicVerifyPublicProducts(array $expected, array $generation, ar
             continue;
         }
         $body = careerPublicVerifyDecode($response['body'], 'PUBLIC_DIRECTORY_JSON_INVALID');
+        if (careerPublicVerifyDataGet($body, 'pagination.total') !== CAREER_PUBLIC_VERIFY_TARGET_COUNT
+            || careerPublicVerifyDataGet($body, 'pagination.total_pages') !== 11) {
+            throw new Career1046PublicVerifyFailure('PUBLIC_DIRECTORY_CACHE_NOT_CONVERGED');
+        }
         if (careerPublicVerifyDataGet($body, 'pagination.page') !== $page
             || careerPublicVerifyDataGet($body, 'pagination.per_page') !== 100
-            || careerPublicVerifyDataGet($body, 'pagination.total') !== CAREER_PUBLIC_VERIFY_TARGET_COUNT
-            || careerPublicVerifyDataGet($body, 'pagination.total_pages') !== 11
             || ! is_array($body['items'] ?? null)) {
             throw new Career1046PublicVerifyFailure('PUBLIC_DIRECTORY_PAGINATION_INVALID');
         }
