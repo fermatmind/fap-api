@@ -19,108 +19,78 @@ use Tests\TestCase;
 
 final class BigFiveResultPageV2StagingComposerTest extends TestCase
 {
-    private const GOLDEN_CASES_PATH = 'content_assets/big5/result_page_v2/selector_qa_policy/v0_1/big5_result_page_v2_selector_qa_policy_v0_1_golden_cases.json';
-
-    private const FIXTURE_PATH = 'tests/Fixtures/big5_result_page_v2/pilot_o59_staging_payload_v0_1.payload.json';
-
-    private const ROUTE_DRIVEN_FIXTURE_PATH = 'tests/Fixtures/big5_result_page_v2/route_driven_o59_pilot_payload_v0_1.payload.json';
-
-    /**
-     * @var array<string,mixed>|null
-     */
+    /** @var array<string,mixed>|null */
     private static ?array $routeDrivenO59Envelope = null;
 
-    public function test_o59_pilot_payload_composes_from_selected_refs_and_validates(): void
-    {
-        $envelope = $this->composeO59Envelope();
-        $payload = $envelope[BigFiveResultPageV2Contract::PAYLOAD_KEY] ?? null;
-        $this->assertIsArray($payload);
-
-        $this->assertSame([], app(BigFiveResultPageV2Validator::class)->validateEnvelope($envelope));
-        $this->assertSame(BigFiveV2PilotPayloadComposer::CONTENT_VERSION, $payload['content_version'] ?? null);
-        $this->assertSame(BigFiveV2PilotPayloadComposer::PACKAGE_VERSION, $payload['package_version'] ?? null);
-        $this->assertSame('sensitive_independent_thinker', $payload['canonical_profile_key'] ?? null);
-        $this->assertSame('敏锐的独立思考者', $payload['profile_label_zh'] ?? null);
-        $this->assertSame(BigFiveResultPageV2Contract::MODULE_KEYS, array_map(
-            static fn (array $module): string => (string) $module['module_key'],
-            (array) ($payload['modules'] ?? []),
-        ));
-    }
-
-    public function test_public_payload_filters_internal_trace_and_runtime_flags(): void
-    {
-        $encoded = json_encode(
-            $this->composeO59Envelope()[BigFiveResultPageV2Contract::PAYLOAD_KEY],
-            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR,
-        );
-
-        foreach ([
-            'source_reference',
-            'selector_basis',
-            'qa_notes',
-            'editor_notes',
-            'internal_metadata',
-            'review_status',
-            'production_use_allowed',
-            'runtime_use',
-            'ready_for_pilot',
-            'ready_for_runtime',
-            'ready_for_production',
-            'frontend_fallback',
-            '[object Object]',
-        ] as $forbiddenPublicTerm) {
-            $this->assertStringNotContainsString($forbiddenPublicTerm, $encoded, $forbiddenPublicTerm);
-        }
-    }
-
-    public function test_o59_pilot_payload_contains_selected_available_content_and_pending_placeholders(): void
-    {
-        $payload = $this->composeO59Envelope()[BigFiveResultPageV2Contract::PAYLOAD_KEY];
-        $modulesByKey = [];
-        foreach ((array) ($payload['modules'] ?? []) as $module) {
-            $modulesByKey[(string) ($module['module_key'] ?? '')] = $module;
-        }
-
-        $this->assertSame('敏锐的独立思考者', data_get($modulesByKey, 'module_01_hero.blocks.0.content.label_zh'));
-        $this->assertSame('开放性中位｜优势、代价与使用方式', data_get($modulesByKey, 'module_03_trait_deep_dive.blocks.0.content.title_zh'));
-        $this->assertSame('pending_asset_resolution', data_get($modulesByKey, 'module_04_coupling.blocks.0.content.availability'));
-        $this->assertSame('pending_asset_resolution', data_get($modulesByKey, 'module_06_application_matrix.blocks.0.content.availability'));
-    }
-
-    public function test_fixture_matches_current_composer_output(): void
-    {
-        $this->assertSame($this->composeO59Envelope(), $this->decodeJson(self::FIXTURE_PATH));
-    }
-
-    public function test_o59_route_driven_payload_composes_from_content_asset_lookup_and_validates(): void
+    public function test_route_driven_payload_uses_real_projection_and_validates(): void
     {
         $envelope = $this->composeRouteDrivenO59Envelope();
         $payload = $envelope[BigFiveResultPageV2Contract::PAYLOAD_KEY] ?? null;
         $this->assertIsArray($payload);
 
         $this->assertSame([], app(BigFiveResultPageV2Validator::class)->validateEnvelope($envelope));
-        $this->assertSame(3, data_get($payload, 'projection_v2.domains.O.score'));
-        $this->assertSame(2, data_get($payload, 'projection_v2.domains.E.score'));
-        $this->assertSame('sensitive_independent_thinker', $payload['canonical_profile_key'] ?? null);
+        $this->assertSame('attempt-real-o59', data_get($payload, 'projection_v2.attempt_id'));
+        $this->assertSame('big5-engine-real-v7', data_get($payload, 'projection_v2.result_version'));
+        $this->assertSame('big5_120', data_get($payload, 'projection_v2.form_code'));
+        $this->assertSame('valid', data_get($payload, 'projection_v2.quality_status'));
+        $this->assertSame('CALIBRATED', data_get($payload, 'projection_v2.norm_status'));
+        $this->assertSame('norm-group-real', data_get($payload, 'projection_v2.norm_group_id'));
+        $this->assertSame('norm-v7', data_get($payload, 'projection_v2.norm_version'));
+        $this->assertSame([
+            'O' => ['score' => 59, 'band' => 'mid'],
+            'C' => ['score' => 32, 'band' => 'low'],
+            'E' => ['score' => 20, 'band' => 'low'],
+            'A' => ['score' => 55, 'band' => 'mid'],
+            'N' => ['score' => 68, 'band' => 'high'],
+        ], data_get($payload, 'projection_v2.domains'));
     }
 
-    public function test_o59_route_driven_payload_has_non_pending_content_asset_blocks(): void
+    public function test_composer_emits_only_selected_assets_and_omits_empty_optional_modules(): void
     {
         $payload = $this->composeRouteDrivenO59Envelope()[BigFiveResultPageV2Contract::PAYLOAD_KEY];
-        $modulesByKey = [];
-        foreach ((array) ($payload['modules'] ?? []) as $module) {
-            $modulesByKey[(string) ($module['module_key'] ?? '')] = $module;
+        $modules = $this->modulesByKey($payload);
+
+        $this->assertSame([
+            'module_01_hero',
+            'module_03_trait_deep_dive',
+            'module_04_coupling',
+            'module_05_facet_reframe',
+            'module_06_application_matrix',
+            'module_07_collaboration_manual',
+        ], array_keys($modules));
+        foreach ($modules as $module) {
+            $this->assertNotSame([], $module['blocks'] ?? []);
         }
 
-        $this->assertSame('敏锐的独立思考者', data_get($modulesByKey, 'module_01_hero.blocks.0.content.profile_label_zh'));
-        $this->assertSame('开放性中位：探索与落地之间的现实过滤器', data_get($modulesByKey, 'module_03_trait_deep_dive.blocks.0.content.title_zh'));
-        $this->assertNotSame('pending_asset_resolution', data_get($modulesByKey, 'module_04_coupling.blocks.0.content.availability'));
-        $this->assertSame('n_high_x_o_mid_high', data_get($modulesByKey, 'module_04_coupling.blocks.0.content.coupling_key'));
-        $this->assertNotSame('pending_asset_resolution', data_get($modulesByKey, 'module_05_facet_reframe.blocks.0.content.availability'));
-        $this->assertNotSame('pending_asset_resolution', data_get($modulesByKey, 'module_06_application_matrix.blocks.0.content.availability'));
+        $traits = array_map(
+            static fn (array $block): string => (string) data_get($block, 'content.trait.code'),
+            (array) data_get($modules, 'module_01_hero.blocks', []),
+        );
+        $this->assertSame(['', 'O', 'C', 'E', 'A', 'N'], $traits);
+
+        $applicationScenarios = array_map(
+            static fn (array $block): string => (string) data_get($block, 'content.scenario'),
+            (array) data_get($modules, 'module_06_application_matrix.blocks', []),
+        );
+        $this->assertSame(['workplace', 'relationships', 'stress_recovery', 'personal_growth'], $applicationScenarios);
+        $this->assertSame($applicationScenarios, array_values(array_unique($applicationScenarios)));
+        $this->assertCount(1, (array) data_get($modules, 'module_07_collaboration_manual.blocks', []));
     }
 
-    public function test_o59_route_driven_payload_filters_content_asset_metadata(): void
+    public function test_facet_polarity_is_unique_and_matches_actual_bucket(): void
+    {
+        $payload = $this->composeRouteDrivenO59Envelope()[BigFiveResultPageV2Contract::PAYLOAD_KEY];
+        $blocks = (array) data_get($this->modulesByKey($payload), 'module_05_facet_reframe.blocks', []);
+
+        $actual = [];
+        foreach ($blocks as $block) {
+            $actual[(string) data_get($block, 'content.facet_key')] = (string) data_get($block, 'content.facet_direction');
+        }
+
+        $this->assertSame(['C1' => 'low', 'N1' => 'high'], $actual);
+    }
+
+    public function test_public_payload_has_no_fixture_placeholder_staging_or_unauthorized_percentile(): void
     {
         $encoded = json_encode(
             $this->composeRouteDrivenO59Envelope()[BigFiveResultPageV2Contract::PAYLOAD_KEY],
@@ -128,10 +98,15 @@ final class BigFiveResultPageV2StagingComposerTest extends TestCase
         );
 
         foreach ([
+            'fixture_key',
+            'attempt_big5_o59_pilot_fixture',
+            'pending_asset_resolution',
+            'placeholder',
+            'deferred',
+            'staging_only',
+            'route_matrix_candidate',
             'source_reference',
             'selector_basis',
-            'qa_notes',
-            'editor_notes',
             'internal_metadata',
             'review_status',
             'production_use_allowed',
@@ -142,20 +117,16 @@ final class BigFiveResultPageV2StagingComposerTest extends TestCase
             'frontend_fallback',
             'source_trace',
             'repair_log_refs',
+            '"percentile":',
             '[object Object]',
         ] as $forbiddenPublicTerm) {
             $this->assertStringNotContainsString($forbiddenPublicTerm, $encoded, $forbiddenPublicTerm);
         }
     }
 
-    public function test_route_driven_fixture_matches_current_composer_output(): void
-    {
-        $this->assertSame($this->composeRouteDrivenO59Envelope(), $this->decodeJson(self::ROUTE_DRIVEN_FIXTURE_PATH));
-    }
-
     public function test_missing_selected_ref_fails_closed(): void
     {
-        $input = $this->o59Input();
+        $input = $this->routeDrivenO59Input();
         $selection = new BigFiveV2SelectionResult(
             selectedAssetRefs: [
                 new BigFiveV2SelectedAssetRef(
@@ -181,20 +152,7 @@ final class BigFiveResultPageV2StagingComposerTest extends TestCase
         (new BigFiveV2PilotPayloadComposer)->compose($input, $selection);
     }
 
-    /**
-     * @return array<string,mixed>
-     */
-    private function composeO59Envelope(): array
-    {
-        $input = $this->o59Input();
-        $selection = (new BigFiveV2DeterministicSelector)->select($input);
-
-        return (new BigFiveV2PilotPayloadComposer)->compose($input, $selection);
-    }
-
-    /**
-     * @return array<string,mixed>
-     */
+    /** @return array<string,mixed> */
     private function composeRouteDrivenO59Envelope(): array
     {
         if (self::$routeDrivenO59Envelope !== null) {
@@ -205,11 +163,6 @@ final class BigFiveResultPageV2StagingComposerTest extends TestCase
         $selection = (new BigFiveV2DeterministicSelector)->select($input);
 
         return self::$routeDrivenO59Envelope = (new BigFiveV2PilotPayloadComposer)->compose($input, $selection);
-    }
-
-    private function o59Input(): BigFiveV2SelectorInput
-    {
-        return BigFiveV2SelectorInput::fromGoldenCase($this->o59GoldenCase(), $this->o59RouteRow());
     }
 
     private function routeDrivenO59Input(): BigFiveV2SelectorInput
@@ -229,49 +182,43 @@ final class BigFiveResultPageV2StagingComposerTest extends TestCase
                     'C1' => 24,
                 ],
             ],
-            'quality' => ['level' => 'A'],
-            'norms' => ['status' => 'CALIBRATED'],
+            'quality' => ['level' => 'A', 'flags' => ['CONSISTENT']],
+            'norms' => [
+                'status' => 'CALIBRATED',
+                'group_id' => 'norm-group-real',
+                'norms_version' => 'norm-v7',
+                'percentile_display_allowed' => true,
+            ],
         ]);
         $this->assertNotNull($routeInput);
 
-        return (new BigFiveV2RouteDrivenSelectorInputBuilder)->build($routeInput, $this->o59RouteRow());
-    }
-
-    private function o59RouteRow(): \App\Services\BigFive\ResultPageV2\RouteMatrix\BigFiveV2RouteMatrixRow
-    {
         $result = (new BigFiveV2RouteMatrixParser)->parse();
         $this->assertSame([], $result->errors);
-
         $row = $result->row(BigFiveV2RouteMatrixParser::O59_COMBINATION_KEY);
         $this->assertNotNull($row);
 
-        return $row;
+        return (new BigFiveV2RouteDrivenSelectorInputBuilder)->build(
+            $routeInput,
+            $row,
+            attemptId: 'attempt-real-o59',
+            resultVersion: 'big5-engine-real-v7',
+        );
     }
 
     /**
-     * @return array<string,mixed>
+     * @param  array<string,mixed>  $payload
+     * @return array<string,array<string,mixed>>
      */
-    private function o59GoldenCase(): array
+    private function modulesByKey(array $payload): array
     {
-        foreach ($this->decodeJson(self::GOLDEN_CASES_PATH) as $case) {
-            if (($case['case_key'] ?? null) === 'golden_case_31_o59_canonical_preview') {
-                return $case;
+        $modules = [];
+        foreach ((array) ($payload['modules'] ?? []) as $module) {
+            if (is_array($module)) {
+                $modules[(string) ($module['module_key'] ?? '')] = $module;
             }
         }
+        unset($modules['']);
 
-        $this->fail('O59 canonical golden case is missing.');
-    }
-
-    /**
-     * @return array<int|string,mixed>
-     */
-    private function decodeJson(string $relativePath): array
-    {
-        $json = file_get_contents(base_path($relativePath));
-        $this->assertIsString($json);
-        $decoded = json_decode($json, true, flags: JSON_THROW_ON_ERROR);
-        $this->assertIsArray($decoded);
-
-        return $decoded;
+        return $modules;
     }
 }

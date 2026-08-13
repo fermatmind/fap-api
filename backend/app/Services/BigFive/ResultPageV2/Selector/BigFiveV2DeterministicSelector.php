@@ -32,11 +32,12 @@ final class BigFiveV2DeterministicSelector
             $unresolvedSuppressions,
         ), true);
 
-        $selected = [];
+        $candidatesBySemanticSlot = [];
         $suppressed = [];
         $desiredSlots = array_fill_keys($input->includeSlots, true);
-        $desiredSlotOrder = array_flip($input->includeSlots);
         $desiredRegistries = array_fill_keys($input->includeRegistryKeys, true);
+        $desiredAssetKeys = array_fill_keys($input->includeAssetKeys, true);
+        $desiredAssetOrder = array_flip($input->includeAssetKeys);
 
         foreach ($assets as $asset) {
             $assetKey = (string) ($asset['asset_key'] ?? '');
@@ -50,6 +51,10 @@ final class BigFiveV2DeterministicSelector
                 continue;
             }
 
+            if ($desiredAssetKeys !== [] && ! isset($desiredAssetKeys[$assetKey])) {
+                continue;
+            }
+
             if (! $this->matchesRequestedSlot($asset, $desiredSlots)) {
                 continue;
             }
@@ -58,45 +63,81 @@ final class BigFiveV2DeterministicSelector
                 continue;
             }
 
-            if (! $this->matchesBasicSafety($asset, $input)) {
+            if (! $this->matchesBasicSafety($asset, $input) || ! $this->matchesRuntimeContext($asset, $input)) {
                 continue;
             }
 
-            $selected[] = new BigFiveV2SelectedAssetRef(
-                assetKey: $assetKey,
-                registryKey: (string) ($asset['registry_key'] ?? ''),
-                moduleKey: (string) ($asset['module_key'] ?? ''),
-                blockKey: (string) ($asset['block_key'] ?? ''),
-                slotKey: (string) ($asset['slot_key'] ?? ''),
-                priority: (int) ($asset['priority'] ?? 0),
-                contentSource: (string) ($asset['content_source'] ?? ''),
-            );
+            $semanticSlot = $this->semanticSlot($asset);
+            $candidatesBySemanticSlot[$semanticSlot][] = $asset;
         }
 
-        usort($selected, static function (BigFiveV2SelectedAssetRef $left, BigFiveV2SelectedAssetRef $right) use ($desiredSlotOrder): int {
-            $leftOrder = $desiredSlotOrder[$left->slotKey] ?? PHP_INT_MAX;
-            $rightOrder = $desiredSlotOrder[$right->slotKey] ?? PHP_INT_MAX;
+        $selectedWithOrder = [];
+        foreach ($candidatesBySemanticSlot as $semanticSlot => $candidates) {
+            usort($candidates, fn (array $left, array $right): int => [
+                -$this->specificity($left),
+                -(int) ($left['priority'] ?? 0),
+                (string) ($left['asset_key'] ?? ''),
+            ] <=> [
+                -$this->specificity($right),
+                -(int) ($right['priority'] ?? 0),
+                (string) ($right['asset_key'] ?? ''),
+            ]);
+            $winner = $candidates[0];
+            $winnerKey = (string) ($winner['asset_key'] ?? '');
+            $selectedWithOrder[] = [
+                'order' => $desiredAssetOrder[$winnerKey] ?? PHP_INT_MAX,
+                'semantic_slot' => $semanticSlot,
+                'ref' => new BigFiveV2SelectedAssetRef(
+                    assetKey: $winnerKey,
+                    registryKey: (string) ($winner['registry_key'] ?? ''),
+                    moduleKey: (string) ($winner['module_key'] ?? ''),
+                    blockKey: (string) ($winner['block_key'] ?? ''),
+                    slotKey: (string) ($winner['slot_key'] ?? ''),
+                    priority: (int) ($winner['priority'] ?? 0),
+                    contentSource: (string) ($winner['content_source'] ?? ''),
+                ),
+            ];
+        }
 
-            return [$leftOrder, $left->moduleKey, $left->slotKey, -$left->priority, $left->assetKey]
-                <=> [$rightOrder, $right->moduleKey, $right->slotKey, -$right->priority, $right->assetKey];
+        usort($selectedWithOrder, static function (array $left, array $right): int {
+            /** @var BigFiveV2SelectedAssetRef $leftRef */
+            $leftRef = $left['ref'];
+            /** @var BigFiveV2SelectedAssetRef $rightRef */
+            $rightRef = $right['ref'];
+
+            return [$left['order'], $leftRef->moduleKey, $left['semantic_slot'], $leftRef->assetKey]
+                <=> [$right['order'], $rightRef->moduleKey, $right['semantic_slot'], $rightRef->assetKey];
         });
+        $selected = array_map(static fn (array $winner): BigFiveV2SelectedAssetRef => $winner['ref'], $selectedWithOrder);
+
+        $selectedSemanticSlots = array_fill_keys(array_map(
+            static fn (array $winner): string => (string) $winner['semantic_slot'],
+            $selectedWithOrder,
+        ), true);
+        $missingRequired = array_values(array_filter(
+            $input->requiredSemanticSlots,
+            static fn (string $slot): bool => ! isset($selectedSemanticSlots[$slot]),
+        ));
+        if ($missingRequired !== []) {
+            throw new RuntimeException('Big Five V2 required core asset selection failed: '.implode(', ', $missingRequired));
+        }
+
+        $productionAllowed = (string) app()->environment() === 'production';
 
         return new BigFiveV2SelectionResult(
             selectedAssetRefs: $selected,
             suppressedAssetRefs: $suppressed,
             unresolvedRefSuppressions: $unresolvedSuppressions,
-            pendingSurfaces: ['pdf', 'share_card', 'history', 'compare'],
+            pendingSurfaces: [],
             safetyDecisions: [
                 'scale_code' => $input->scaleCode,
                 'form_code' => $input->formCode,
-                'runtime_use' => 'staging_only',
-                'production_use_allowed' => false,
-                'ready_for_pilot' => false,
-                'ready_for_runtime' => false,
-                'ready_for_production' => false,
+                'runtime_use' => (string) app()->environment(),
+                'production_use_allowed' => $productionAllowed,
                 'consumer_side_body_fallback_allowed' => false,
                 'unresolved_refs_selectable' => false,
-                'body_composition_allowed' => false,
+                'body_composition_allowed' => true,
+                'selection_complete' => true,
             ],
             selectionTraceInternal: [
                 'route_combination_key' => $input->routeRow->combinationKey,
@@ -107,6 +148,8 @@ final class BigFiveV2DeterministicSelector
                 'suppressed_unresolved_asset_count' => count($suppressed),
                 'requested_slot_count' => count($input->includeSlots),
                 'requested_registry_count' => count($input->includeRegistryKeys),
+                'requested_asset_count' => count($input->includeAssetKeys),
+                'semantic_slot_count' => count($candidatesBySemanticSlot),
             ],
         );
     }
@@ -145,6 +188,9 @@ final class BigFiveV2DeterministicSelector
 
                 $referenceType = (string) ($reference['reference_type'] ?? '');
                 $referenceValue = (string) ($reference['reference'] ?? '');
+                if ($enableResolvedCouplingRefs && in_array($referenceType, ['profile_key', 'scenario_key'], true)) {
+                    continue;
+                }
                 if ($enableResolvedCouplingRefs && $referenceType === 'coupling_key') {
                     $resolution = $this->couplingResolver->resolve($referenceValue, 'result_page');
                     if ($resolution->selectable) {
@@ -200,11 +246,247 @@ final class BigFiveV2DeterministicSelector
             return false;
         }
 
-        if (($asset['review_status'] ?? null) === 'production_ready') {
+        return $this->reviewStatusAllowed((string) ($asset['review_status'] ?? ''));
+    }
+
+    private function reviewStatusAllowed(string $status): bool
+    {
+        if ($status === 'production_ready') {
+            return true;
+        }
+
+        if ($status !== 'draft_for_psychometric_review') {
             return false;
         }
 
+        if ((string) app()->environment() !== 'production') {
+            return true;
+        }
+
+        $snapshotId = trim((string) config('big5_result_page_v2.production_release_snapshot_id', ''));
+        $approved = config('big5_result_page_v2.production_approved_release_snapshot_ids', []);
+        if (is_string($approved)) {
+            $approved = explode(',', $approved);
+        }
+
+        return (bool) config('big5_result_page_v2.production_import_gate_passed', false)
+            && $snapshotId !== ''
+            && is_array($approved)
+            && in_array($snapshotId, array_map(static fn (mixed $value): string => trim((string) $value), $approved), true);
+    }
+
+    /**
+     * @param  array<string,mixed>  $asset
+     */
+    private function matchesRuntimeContext(array $asset, BigFiveV2SelectorInput $input): bool
+    {
+        $trigger = (array) ($asset['trigger'] ?? []);
+        foreach ((array) ($trigger['domain_bands'] ?? []) as $trait => $allowedBands) {
+            if (! in_array($input->domainBands[(string) $trait] ?? '', (array) $allowedBands, true)) {
+                return false;
+            }
+        }
+
+        $readingModes = (array) ($asset['reading_modes'] ?? $trigger['reading_mode'] ?? []);
+        if ($readingModes !== [] && ! in_array($input->readingMode, $readingModes, true)) {
+            return false;
+        }
+
+        $scopes = (array) ($trigger['interpretation_scope'] ?? []);
+        $scope = $input->interpretationScope !== '' ? $input->interpretationScope : $input->routeRow->interpretationScope;
+        if ($scopes !== [] && ! in_array($scope, $scopes, true)) {
+            return false;
+        }
+
+        $qualityStatuses = (array) ($trigger['quality_status'] ?? []);
+        if ($qualityStatuses !== [] && ! in_array($input->qualityStatus, $qualityStatuses, true)) {
+            return false;
+        }
+
+        $normStatuses = (array) ($trigger['norm_status'] ?? []);
+        $normStatus = $input->normStatus === 'missing' ? 'unavailable' : $input->normStatus;
+        if ($normStatuses !== [] && ! in_array($normStatus, $normStatuses, true)) {
+            return false;
+        }
+
+        $formCodes = (array) data_get($asset, 'scope.form_codes', []);
+        if ($formCodes !== [] && ! in_array($input->formCode, $formCodes, true)) {
+            return false;
+        }
+
+        if (! $this->matchesFacetSignals($trigger, $input->facetSignals)) {
+            return false;
+        }
+
+        if (! $this->matchesCouplingRoute($trigger, $input)) {
+            return false;
+        }
+
+        if (! $this->matchesScenarioRoute($trigger, $input)) {
+            return false;
+        }
+
+        if (($asset['registry_key'] ?? null) === 'profile_signature_registry') {
+            $encoded = json_encode($asset, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+            if (! str_contains($encoded, $input->routeRow->profileKey)) {
+                return false;
+            }
+        }
+
         return true;
+    }
+
+    /** @param array<string,mixed> $trigger */
+    private function matchesScenarioRoute(array $trigger, BigFiveV2SelectorInput $input): bool
+    {
+        $assetScenarios = array_values(array_filter(array_map('strval', (array) ($trigger['scenario'] ?? []))));
+        if ($assetScenarios === []) {
+            return true;
+        }
+
+        $routeScenarios = $input->scenario !== null && trim($input->scenario) !== ''
+            ? [trim($input->scenario)]
+            : (array) data_get($input->routeRow->toArray(), 'scenario_priorities', []);
+        $aliases = [];
+        foreach ($routeScenarios as $scenario) {
+            foreach (match ((string) $scenario) {
+                'workplace' => ['work'],
+                'relationships' => ['relationship'],
+                'stress_recovery' => ['stress'],
+                'personal_growth' => ['action'],
+                default => [(string) $scenario],
+            } as $alias) {
+                $aliases[$alias] = true;
+            }
+        }
+
+        foreach ($assetScenarios as $assetScenario) {
+            if (isset($aliases[$assetScenario])) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param  array<string,mixed>  $trigger
+     * @param  list<array<string,mixed>>  $signals
+     */
+    private function matchesFacetSignals(array $trigger, array $signals): bool
+    {
+        $patterns = (array) ($trigger['facet_patterns'] ?? []);
+        if ($patterns === []) {
+            return true;
+        }
+
+        foreach ($patterns as $pattern) {
+            if (! is_array($pattern)) {
+                continue;
+            }
+            $facet = strtoupper((string) ($pattern['facet'] ?? ''));
+            foreach ($signals as $signal) {
+                if (strtoupper((string) ($signal['key'] ?? $signal['facet'] ?? '')) !== $facet) {
+                    continue;
+                }
+                $band = $this->facetBand($signal);
+                if ($band !== null && in_array($band, (array) ($pattern['band'] ?? []), true)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /** @param array<string,mixed> $signal */
+    private function facetBand(array $signal): ?string
+    {
+        $bucket = strtolower(trim((string) ($signal['bucket'] ?? '')));
+        if (in_array($bucket, ['very_low', 'low', 'mid', 'high', 'very_high'], true)) {
+            return $bucket;
+        }
+        if (! is_numeric($signal['percentile'] ?? null)) {
+            return null;
+        }
+        $value = (int) $signal['percentile'];
+
+        return match (true) {
+            $value < 20 => 'very_low',
+            $value < 40 => 'low',
+            $value < 60 => 'mid',
+            $value < 80 => 'high',
+            default => 'very_high',
+        };
+    }
+
+    /** @param array<string,mixed> $trigger */
+    private function matchesCouplingRoute(array $trigger, BigFiveV2SelectorInput $input): bool
+    {
+        $keys = (array) ($trigger['coupling_keys'] ?? []);
+        if ($keys === []) {
+            return true;
+        }
+        $routeKeys = array_fill_keys(array_map('strval', (array) data_get($input->routeRow->toArray(), 'primary_coupling_assets', [])), true);
+        foreach ($keys as $key) {
+            $resolution = $this->couplingResolver->resolve((string) $key, 'result_page');
+            if ($resolution->selectable && isset($routeKeys[$resolution->resolvedKey ?? (string) $key])) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /** @param array<string,mixed> $asset */
+    private function semanticSlot(array $asset): string
+    {
+        $module = (string) ($asset['module_key'] ?? '');
+        $registry = (string) ($asset['registry_key'] ?? '');
+        $trigger = (array) ($asset['trigger'] ?? []);
+
+        if ($registry === 'domain_registry') {
+            $trait = (string) array_key_first((array) ($trigger['domain_bands'] ?? []));
+
+            return "{$module}:domain:{$trait}";
+        }
+        if ($registry === 'profile_signature_registry') {
+            return "{$module}:profile";
+        }
+        if ($registry === 'coupling_registry') {
+            $key = (string) (((array) ($trigger['coupling_keys'] ?? []))[0] ?? '');
+            $resolution = $this->couplingResolver->resolve($key, 'result_page');
+
+            return "{$module}:coupling:".($resolution->resolvedKey ?? $key);
+        }
+        if ($registry === 'facet_pattern_registry') {
+            $pattern = (array) (((array) ($trigger['facet_patterns'] ?? []))[0] ?? []);
+
+            return "{$module}:facet:".strtoupper((string) ($pattern['facet'] ?? ''));
+        }
+        if (in_array($registry, ['scenario_registry', 'action_plan_registry'], true)) {
+            return "{$module}:scenario:".(string) (((array) ($trigger['scenario'] ?? []))[0] ?? '');
+        }
+
+        $mutualExclusionGroup = trim((string) ($asset['mutual_exclusion_group'] ?? ''));
+
+        return $mutualExclusionGroup !== '' ? "{$module}:{$mutualExclusionGroup}" : "{$module}:".(string) ($asset['slot_key'] ?? '');
+    }
+
+    /** @param array<string,mixed> $asset */
+    private function specificity(array $asset): int
+    {
+        $trigger = (array) ($asset['trigger'] ?? []);
+        $specificity = 0;
+        foreach ($trigger as $value) {
+            if (is_array($value) && $value !== []) {
+                $specificity += array_is_list($value) ? 1 : count($value);
+            } elseif ($value !== null && $value !== '') {
+                $specificity++;
+            }
+        }
+
+        return $specificity;
     }
 
     /**

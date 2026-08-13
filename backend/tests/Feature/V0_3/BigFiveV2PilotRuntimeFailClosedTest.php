@@ -62,7 +62,7 @@ final class BigFiveV2PilotRuntimeFailClosedTest extends TestCase
         )->once();
     }
 
-    public function test_norm_missing_payload_validation_fails_closed_without_public_score_claims(): void
+    public function test_norm_missing_payload_generation_fails_closed_without_v2(): void
     {
         Log::spy();
         $fixture = $this->authorizedPilotFixture('anon_big5_v2_fail_closed_norm_missing');
@@ -74,7 +74,7 @@ final class BigFiveV2PilotRuntimeFailClosedTest extends TestCase
         $this->assertSame($fixture['legacy_sections'], data_get($payload, 'report.sections'));
         Log::shouldHaveReceived('warning')->with(
             BigFiveV2PilotRuntimeObservability::EVENT,
-            Mockery::on(fn (array $context): bool => $this->safeValidationFailureContext($context)),
+            Mockery::on(fn (array $context): bool => $this->safeGenerationFailureContext($context)),
         )->once();
     }
 

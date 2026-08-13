@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Services\BigFive\ResultPageV2;
 
+use App\Services\BigFive\ResultPageV2\Routing\BigFiveV2RouteDrivenSelectorInputBuilder;
+use App\Services\BigFive\ResultPageV2\Routing\BigFiveV2RouteInput;
 use App\Services\BigFive\ResultPageV2\Routing\BigFiveV2RouteMatrixLookup;
+use App\Services\BigFive\ResultPageV2\Selector\BigFiveV2DeterministicSelector;
+use RuntimeException;
 use Tests\TestCase;
 
 final class BigFiveResultPageV2RouteDrivenGoldenCasesTest extends TestCase
@@ -116,6 +120,73 @@ final class BigFiveResultPageV2RouteDrivenGoldenCasesTest extends TestCase
         $this->assertSame('staging_only', $summary['runtime_use'] ?? null);
         $this->assertFalse((bool) ($summary['production_use_allowed'] ?? true));
         $this->assertFalse((bool) ($summary['production_go'] ?? true));
+    }
+
+    public function test_golden_routes_select_five_exact_core_assets_or_fail_closed_for_degraded_authority(): void
+    {
+        $lookup = new BigFiveV2RouteMatrixLookup;
+
+        foreach ($this->cases() as $case) {
+            $row = $lookup->lookup((string) $case['combination_key']);
+            $this->assertNotNull($row, (string) $case['case_id']);
+            $domainBands = [];
+            $domainScores = [];
+            foreach (['O', 'C', 'E', 'A', 'N'] as $domain) {
+                $band = (string) data_get($row->toArray(), "domain_bands.{$domain}.internal_band");
+                $domainBands[$domain] = $band;
+                $domainScores[$domain] = match ($band) {
+                    'very_low' => 10,
+                    'low' => 30,
+                    'mid' => 50,
+                    'high' => 70,
+                    'very_high' => 90,
+                    default => 50,
+                };
+            }
+
+            $routeInput = new BigFiveV2RouteInput(
+                domainRouteBands: array_map(
+                    static fn (string $band): int => match ($band) {
+                        'very_low' => 1,
+                        'low' => 2,
+                        'mid' => 3,
+                        'high' => 4,
+                        'very_high' => 5,
+                    },
+                    $domainBands,
+                ),
+                combinationKey: (string) $case['combination_key'],
+                displayBandLabels: [],
+                qualityStatus: (string) $case['quality_status'],
+                normStatus: (string) $case['norm_status'],
+                domainScores: $domainScores,
+                domainPercentiles: $domainScores,
+            );
+            $input = (new BigFiveV2RouteDrivenSelectorInputBuilder)->build($routeInput, $row);
+
+            if ($routeInput->qualityStatus !== 'valid' || $routeInput->normStatus === 'missing') {
+                try {
+                    (new BigFiveV2DeterministicSelector)->select($input);
+                    $this->fail("{$case['case_id']} must fail closed");
+                } catch (RuntimeException $exception) {
+                    $this->assertStringContainsString('required core asset selection failed', $exception->getMessage());
+                }
+
+                continue;
+            }
+
+            $selection = (new BigFiveV2DeterministicSelector)->select($input);
+            $core = array_values(array_filter(
+                $selection->selectedAssetRefs,
+                static fn ($ref): bool => $ref->moduleKey === 'module_01_hero'
+                    && $ref->registryKey === 'domain_registry',
+            ));
+            $this->assertCount(5, $core, (string) $case['case_id']);
+            $this->assertSame(
+                array_map(static fn ($ref): string => $ref->assetKey, $core),
+                array_values(array_unique(array_map(static fn ($ref): string => $ref->assetKey, $core))),
+            );
+        }
     }
 
     /**

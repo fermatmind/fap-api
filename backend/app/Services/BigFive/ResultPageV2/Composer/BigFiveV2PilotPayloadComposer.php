@@ -14,9 +14,9 @@ use RuntimeException;
 
 final class BigFiveV2PilotPayloadComposer
 {
-    public const CONTENT_VERSION = 'big5_result_page_v2.pilot_payload.v0_1';
+    public const CONTENT_VERSION = 'big5_result_page_v2.runtime.v2';
 
-    public const PACKAGE_VERSION = 'B5-CONTENT-staging-pilot.v0_1';
+    public const PACKAGE_VERSION = 'big5_result_page_v2_v0_4';
 
     private const SELECTOR_ASSETS_PATH = 'content_assets/big5/result_page_v2/selector_ready_assets/v0_3_p0_full/assets.json';
 
@@ -32,18 +32,6 @@ final class BigFiveV2PilotPayloadComposer
         'module_08_share_save' => 'share_save',
         'module_09_feedback_data_flywheel' => 'feedback_block',
         'module_10_method_privacy' => 'method_boundary',
-    ];
-
-    private const MODULE_REGISTRY_REFS = [
-        'module_00_trust_bar' => ['method_registry:pilot_boundary'],
-        'module_02_quick_understanding' => ['state_scope_registry:pending_asset_resolution'],
-        'module_04_coupling' => ['coupling_registry:pending_asset_resolution'],
-        'module_05_facet_reframe' => ['facet_registry:pending_asset_resolution'],
-        'module_06_application_matrix' => ['scenario_registry:pending_asset_resolution'],
-        'module_07_collaboration_manual' => ['scenario_registry:pending_asset_resolution'],
-        'module_08_share_save' => ['share_safety_registry:pending_asset_resolution'],
-        'module_09_feedback_data_flywheel' => ['state_scope_registry:pending_asset_resolution'],
-        'module_10_method_privacy' => ['method_registry:pilot_boundary'],
     ];
 
     private const METADATA_NEVER_PUBLIC = [
@@ -126,12 +114,6 @@ final class BigFiveV2PilotPayloadComposer
     public function compose(BigFiveV2SelectorInput $input, BigFiveV2SelectionResult $selection): array
     {
         $modules = [];
-        foreach (BigFiveResultPageV2Contract::MODULE_KEYS as $moduleKey) {
-            $modules[$moduleKey] = [
-                'module_key' => $moduleKey,
-                'blocks' => [],
-            ];
-        }
 
         $assetsByKey = $this->selectorAssetsByKey();
         foreach ($selection->selectedAssetRefs as $ref) {
@@ -140,7 +122,19 @@ final class BigFiveV2PilotPayloadComposer
                 throw new RuntimeException("Selected Big Five V2 asset ref does not resolve: {$ref->assetKey}");
             }
 
-            if ($input->enableResolvedCouplingRefs) {
+            $modules[$ref->moduleKey] ??= [
+                'module_key' => $ref->moduleKey,
+                'blocks' => [],
+            ];
+
+            if ($input->enableResolvedCouplingRefs && in_array($ref->registryKey, [
+                'domain_registry',
+                'coupling_registry',
+                'facet_pattern_registry',
+                'profile_signature_registry',
+                'scenario_registry',
+                'action_plan_registry',
+            ], true)) {
                 $modules[$ref->moduleKey]['blocks'][] = $this->blockFromResolvedContentAsset(
                     $ref,
                     $asset,
@@ -158,24 +152,24 @@ final class BigFiveV2PilotPayloadComposer
             $modules[$ref->moduleKey]['blocks'][] = $this->blockFromSelectedRef($ref, $asset, $publicPayload);
         }
 
-        foreach ($modules as $moduleKey => &$module) {
-            if ($module['blocks'] === []) {
-                $module['blocks'][] = $this->pendingBlock($moduleKey);
-            }
-        }
-        unset($module);
+        $modules = array_values(array_filter(array_map(
+            static fn (string $moduleKey): ?array => isset($modules[$moduleKey]) && $modules[$moduleKey]['blocks'] !== []
+                ? $modules[$moduleKey]
+                : null,
+            BigFiveResultPageV2Contract::MODULE_KEYS,
+        )));
+        $modules = $this->deduplicateVisibleContent($modules);
 
         $payload = [
             'schema_version' => BigFiveResultPageV2Contract::SCHEMA_VERSION,
             'payload_key' => BigFiveResultPageV2Contract::PAYLOAD_KEY,
             'scale_code' => BigFiveResultPageV2Contract::SCALE_CODE,
-            'fixture_key' => 'pilot_o59_staging_payload_v0_1',
             'content_version' => self::CONTENT_VERSION,
             'package_version' => self::PACKAGE_VERSION,
             'canonical_profile_key' => $input->routeRow->profileKey,
             'profile_label_zh' => (string) ($input->routeRow->data['nearest_canonical_profile_label_zh'] ?? ''),
             'projection_v2' => $this->projection($input),
-            'modules' => array_values($modules),
+            'modules' => $modules,
         ];
 
         return [
@@ -194,7 +188,11 @@ final class BigFiveV2PilotPayloadComposer
             'block_key' => $ref->blockKey,
             'block_kind' => (string) ($asset['block_kind'] ?? ''),
             'module_key' => $ref->moduleKey,
-            'content' => $this->filterPublicPayload($publicPayload),
+            'content' => $this->contentForBlockKind(
+                (string) ($asset['block_kind'] ?? ''),
+                $this->filterPublicPayload($publicPayload),
+                $asset,
+            ),
             'projection_refs' => $this->projectionRefsForRegistry($ref->registryKey),
             'registry_refs' => ["{$ref->registryKey}:{$ref->assetKey}"],
             'safety_level' => $this->contractSafetyLevel((string) ($asset['safety_level'] ?? '')),
@@ -215,7 +213,11 @@ final class BigFiveV2PilotPayloadComposer
             'block_key' => $ref->blockKey,
             'block_kind' => (string) ($selectorAsset['block_kind'] ?? self::MODULE_BLOCK_KINDS[$ref->moduleKey] ?? ''),
             'module_key' => $ref->moduleKey,
-            'content' => $this->filterPublicPayload($resolved->publicContent),
+            'content' => $this->contentForBlockKind(
+                (string) ($selectorAsset['block_kind'] ?? self::MODULE_BLOCK_KINDS[$ref->moduleKey] ?? ''),
+                $this->filterPublicPayload($resolved->publicContent),
+                $selectorAsset,
+            ),
             'projection_refs' => $this->projectionRefsForRegistry($ref->registryKey),
             'registry_refs' => [
                 $this->publicRegistryKey($ref->registryKey).":{$resolved->assetKey}",
@@ -229,32 +231,78 @@ final class BigFiveV2PilotPayloadComposer
     }
 
     /**
+     * Keep scores exclusively in projection_v2 and avoid repeating deep-dive prose
+     * inside the compact trait-bars block.
+     *
+     * @param  array<string,mixed>  $content
      * @return array<string,mixed>
      */
-    private function pendingBlock(string $moduleKey): array
+    private function contentForBlockKind(string $blockKind, array $content, array $selectorAsset): array
     {
-        $blockKind = self::MODULE_BLOCK_KINDS[$moduleKey] ?? 'method_boundary';
-        $block = [
-            'block_key' => "{$moduleKey}.pilot.pending_asset_resolution.v0_1",
-            'block_kind' => $blockKind,
-            'module_key' => $moduleKey,
-            'content' => [
-                'availability' => 'pending_asset_resolution',
-            ],
-            'projection_refs' => ['interpretation_scope', 'quality_status', 'norm_status'],
-            'registry_refs' => self::MODULE_REGISTRY_REFS[$moduleKey] ?? ['method_registry:pilot_boundary'],
-            'safety_level' => in_array($blockKind, ['trust_bar', 'method_boundary'], true) ? 'boundary' : 'standard',
-            'evidence_level' => 'descriptive',
-            'shareable' => false,
-            'content_source' => 'composer_projection',
-            'fallback_policy' => in_array($blockKind, ['trust_bar', 'method_boundary'], true) ? 'backend_required' : 'omit_block',
-        ];
+        if ($blockKind !== 'trait_bars') {
+            unset($content['module_key']);
 
-        if ($blockKind === 'facet_reframe') {
-            $block['content']['facets'] = [];
+            return $content;
         }
 
-        return $block;
+        $domainBands = (array) data_get($selectorAsset, 'trigger.domain_bands', []);
+        $trait = strtoupper((string) array_key_first($domainBands));
+        $bands = (array) ($domainBands[$trait] ?? []);
+        $band = strtolower((string) ($bands[0] ?? ''));
+
+        return [
+            'trait' => ['code' => $trait],
+            'band' => ['internal_band' => $band],
+        ];
+    }
+
+    /**
+     * A registry asset may repeat a summary as a short body, and profile-scoped
+     * assets may repeat the same boundary copy across modules. Keep the first
+     * visible occurrence and omit later duplicates from the public payload.
+     *
+     * @param  list<array<string,mixed>>  $modules
+     * @return list<array<string,mixed>>
+     */
+    private function deduplicateVisibleContent(array $modules): array
+    {
+        $visibleKeys = array_fill_keys([
+            'title', 'title_zh', 'title_en', 'summary', 'summary_zh', 'summary_en',
+            'body', 'body_zh', 'body_en', 'short_body', 'short_body_zh', 'short_body_en',
+            'benefit', 'benefit_zh', 'benefit_en', 'cost', 'cost_zh', 'cost_en',
+            'action', 'action_zh', 'action_en', 'repair', 'repair_zh', 'repair_en',
+            'common_misread', 'common_misread_zh', 'common_misread_en',
+        ], true);
+        $seen = [];
+
+        $walk = function (array $value) use (&$walk, &$seen, $visibleKeys): array {
+            foreach ($value as $key => $item) {
+                if (is_array($item)) {
+                    $value[$key] = $walk($item);
+
+                    continue;
+                }
+                if (! is_string($item) || ! isset($visibleKeys[(string) $key])) {
+                    continue;
+                }
+
+                $normalized = preg_replace('/\s+/u', '', trim($item));
+                if (! is_string($normalized) || mb_strlen($normalized) < 8) {
+                    continue;
+                }
+                $normalized = mb_strtolower($normalized);
+                if (isset($seen[$normalized])) {
+                    unset($value[$key]);
+
+                    continue;
+                }
+                $seen[$normalized] = true;
+            }
+
+            return $value;
+        };
+
+        return $walk($modules);
     }
 
     /**
@@ -264,19 +312,23 @@ final class BigFiveV2PilotPayloadComposer
     {
         return [
             'schema_version' => BigFiveResultPageV2Contract::PROJECTION_SCHEMA_VERSION,
-            'attempt_id' => 'attempt_big5_o59_pilot_fixture',
-            'result_version' => self::CONTENT_VERSION,
+            'attempt_id' => $input->attemptId,
+            'result_version' => $input->resultVersion,
             'scale_code' => $input->scaleCode,
             'form_code' => $input->formCode,
             'domains' => $this->domains($input),
             'domain_bands' => $input->domainBands,
             'facets' => [],
-            'facet_highlights' => $input->facetSignals,
-            'norm_status' => $input->normStatus === 'available' ? 'CALIBRATED' : 'UNAVAILABLE',
-            'norm_group_id' => $input->normStatus === 'available' ? 'pilot_fixture_norm_group' : null,
-            'norm_version' => $input->normStatus === 'available' ? 'pilot_fixture_norm_v0_1' : null,
+            'facet_highlights' => $this->facetHighlights($input),
+            'norm_status' => match ($input->normStatus) {
+                'available' => 'CALIBRATED',
+                'provisional' => 'PROVISIONAL',
+                default => 'UNAVAILABLE',
+            },
+            'norm_group_id' => $input->normStatus === 'available' ? $input->normGroupId : null,
+            'norm_version' => $input->normStatus === 'available' ? $input->normVersion : null,
             'quality_status' => $input->qualityStatus,
-            'quality_flags' => [],
+            'quality_flags' => $input->qualityFlags,
             'profile_signature' => [
                 'signature_key' => $input->routeRow->profileKey,
                 'label_key' => 'signature.'.$input->routeRow->profileKey,
@@ -286,17 +338,21 @@ final class BigFiveV2PilotPayloadComposer
                 'axis_zh' => (string) ($input->routeRow->data['primary_axis_zh'] ?? ''),
             ],
             'dominant_couplings' => array_map(
-                static fn (string $coupling): array => [
-                    'coupling_key' => $coupling,
-                    'strength' => 'route_matrix_candidate',
-                ],
-                array_values((array) ($input->routeRow->data['primary_coupling_assets'] ?? [])),
+                static fn (string $coupling): array => ['coupling_key' => $coupling],
+                array_values(array_unique(array_filter(array_map(
+                    'strval',
+                    (array) ($input->routeRow->data['primary_coupling_assets'] ?? []),
+                )))),
             ),
-            'interpretation_scope' => in_array($input->routeRow->interpretationScope, BigFiveResultPageV2Contract::INTERPRETATION_SCOPES, true)
-                ? $input->routeRow->interpretationScope
+            'interpretation_scope' => in_array($input->interpretationScope, BigFiveResultPageV2Contract::INTERPRETATION_SCOPES, true)
+                ? $input->interpretationScope
                 : 'high_tension_profile',
-            'confidence_flags' => ['pilot_staging_fixture', 'selector_refs_only'],
-            'safety_flags' => ['non_diagnostic', 'not_type_system', 'staging_only'],
+            'confidence_flags' => array_values(array_filter([
+                $input->qualityStatus !== 'valid' ? 'quality_degraded' : null,
+                $input->normStatus !== 'available' ? 'norm_unavailable' : null,
+            ])),
+            'safety_flags' => ['non_diagnostic', 'not_type_system'],
+            'percentile_display_allowed' => $input->percentileDisplayAllowed,
             'public_fields' => [
                 'domains',
                 'domain_bands',
@@ -320,9 +376,44 @@ final class BigFiveV2PilotPayloadComposer
                 'score' => $input->domainScores[$domain] ?? null,
                 'band' => $input->domainBands[$domain] ?? null,
             ];
+            if ($input->percentileDisplayAllowed && isset($input->domainPercentiles[$domain])) {
+                $domains[$domain]['percentile'] = $input->domainPercentiles[$domain];
+            }
         }
 
         return $domains;
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function facetHighlights(BigFiveV2SelectorInput $input): array
+    {
+        $highlights = [];
+        foreach ($input->facetSignals as $signal) {
+            $key = strtoupper(trim((string) ($signal['key'] ?? $signal['facet'] ?? '')));
+            if ($key === '') {
+                continue;
+            }
+            $bucket = strtolower(trim((string) ($signal['bucket'] ?? '')));
+            if ($bucket === '' && is_numeric($signal['percentile'] ?? null)) {
+                $value = (int) $signal['percentile'];
+                $bucket = match (true) {
+                    $value < 20 => 'very_low',
+                    $value < 40 => 'low',
+                    $value < 60 => 'mid',
+                    $value < 80 => 'high',
+                    default => 'very_high',
+                };
+            }
+            $highlight = ['key' => $key, 'bucket' => $bucket];
+            if ($input->percentileDisplayAllowed && isset($signal['percentile'])) {
+                $highlight['percentile'] = (int) $signal['percentile'];
+            }
+            $highlights[] = $highlight;
+        }
+
+        return $highlights;
     }
 
     /**

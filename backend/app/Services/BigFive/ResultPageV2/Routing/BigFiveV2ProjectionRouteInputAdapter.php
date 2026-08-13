@@ -159,7 +159,31 @@ final class BigFiveV2ProjectionRouteInputAdapter
             normStatus: $normStatus,
             facetRouteSignals: $facetSignals,
             suppressionHints: array_values(array_unique($suppressionHints)),
+            domainScores: $this->integerScoreMap($domainPercentiles),
+            domainPercentiles: $this->integerScoreMap($domainPercentiles),
+            qualityFlags: array_values(array_filter(array_map('strval', (array) ($quality['flags'] ?? [])))),
+            normGroupId: trim((string) ($norms['group_id'] ?? $norms['norm_group_id'] ?? '')),
+            normVersion: trim((string) ($norms['norms_version'] ?? $norms['norm_version'] ?? '')),
+            percentileDisplayEligible: ($norms['percentile_display_allowed'] ?? false) === true,
         );
+    }
+
+    /**
+     * Preserve the existing public 0..100 score authority without exposing route ordinals.
+     *
+     * @param  array<string,mixed>  $scores
+     * @return array<string,int>
+     */
+    private function integerScoreMap(array $scores): array
+    {
+        $mapped = [];
+        foreach (self::DOMAIN_ORDER as $domain) {
+            if (array_key_exists($domain, $scores) && $this->validPercentile($scores[$domain])) {
+                $mapped[$domain] = (int) $scores[$domain];
+            }
+        }
+
+        return $mapped;
     }
 
     /**

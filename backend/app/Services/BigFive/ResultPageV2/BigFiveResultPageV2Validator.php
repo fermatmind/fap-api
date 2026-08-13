@@ -12,19 +12,40 @@ final class BigFiveResultPageV2Validator
      */
     public function validateEnvelope(array $envelope): array
     {
+        return $this->validateEnvelopeWithMode($envelope, false);
+    }
+
+    /**
+     * Runtime/public attachment must use this stricter boundary so a caller
+     * cannot bypass production semantics by changing content_version.
+     *
+     * @param  array<string,mixed>  $envelope
+     * @return list<string>
+     */
+    public function validateProductionEnvelope(array $envelope): array
+    {
+        return $this->validateEnvelopeWithMode($envelope, true);
+    }
+
+    /**
+     * @param  array<string,mixed>  $envelope
+     * @return list<string>
+     */
+    private function validateEnvelopeWithMode(array $envelope, bool $production): array
+    {
         $payload = $envelope[BigFiveResultPageV2Contract::PAYLOAD_KEY] ?? null;
         if (! is_array($payload)) {
             return ['Missing big5_result_page_v2 payload'];
         }
 
-        return $this->validatePayload($payload);
+        return $this->validatePayload($payload, $production);
     }
 
     /**
      * @param  array<string,mixed>  $payload
      * @return list<string>
      */
-    public function validatePayload(array $payload): array
+    public function validatePayload(array $payload, bool $production = false): array
     {
         $errors = [];
         $errors = array_merge($errors, $this->validatePublicFieldBoundary($payload));
@@ -39,8 +60,22 @@ final class BigFiveResultPageV2Validator
             $errors[] = 'big5_result_page_v2.scale_code must be BIG5_OCEAN';
         }
 
+        $strictRuntime = $production;
+        if ($production && (string) ($payload['content_version'] ?? '') !== 'big5_result_page_v2.runtime.v2') {
+            $errors[] = 'Production payload content_version must be big5_result_page_v2.runtime.v2';
+        }
+        if ($strictRuntime) {
+            $this->collectForbiddenKeys($payload, [
+                'fixture_key',
+                'production_use_allowed',
+                'runtime_use',
+                'ready_for_pilot',
+                'ready_for_runtime',
+                'ready_for_production',
+            ], 'big5_result_page_v2', $errors);
+        }
         $projection = is_array($payload['projection_v2'] ?? null) ? $payload['projection_v2'] : [];
-        $errors = array_merge($errors, $this->validateProjection($projection));
+        $errors = array_merge($errors, $this->validateProjection($projection, $strictRuntime));
 
         $scope = (string) ($projection['interpretation_scope'] ?? '');
         $normUnavailable = $this->isNormUnavailable($projection);
@@ -60,7 +95,7 @@ final class BigFiveResultPageV2Validator
                 continue;
             }
 
-            $errors = array_merge($errors, $this->validateModule($module, (int) $index, $scope, $normUnavailable));
+            $errors = array_merge($errors, $this->validateModule($module, (int) $index, $scope, $normUnavailable, $strictRuntime));
             $moduleKey = (string) ($module['module_key'] ?? '');
             if ($moduleKey !== '') {
                 if (in_array($moduleKey, $seenModules, true)) {
@@ -70,10 +105,8 @@ final class BigFiveResultPageV2Validator
             }
         }
 
-        foreach (BigFiveResultPageV2Contract::MODULE_KEYS as $requiredModuleKey) {
-            if (! in_array($requiredModuleKey, $seenModules, true) && $scope !== 'low_quality') {
-                $errors[] = "Missing V2 module {$requiredModuleKey}";
-            }
+        if ($strictRuntime) {
+            $errors = array_merge($errors, $this->validateSemanticContract($payload));
         }
 
         return $errors;
@@ -83,7 +116,7 @@ final class BigFiveResultPageV2Validator
      * @param  array<string,mixed>  $projection
      * @return list<string>
      */
-    private function validateProjection(array $projection): array
+    private function validateProjection(array $projection, bool $strictRuntime): array
     {
         $errors = [];
         if ((string) ($projection['schema_version'] ?? '') !== BigFiveResultPageV2Contract::PROJECTION_SCHEMA_VERSION) {
@@ -97,6 +130,24 @@ final class BigFiveResultPageV2Validator
             if (! array_key_exists($field, $projection)) {
                 $errors[] = "projection_v2 missing {$field}";
             }
+        }
+        if ($strictRuntime && trim((string) ($projection['attempt_id'] ?? '')) === '') {
+            $errors[] = 'projection_v2.attempt_id must be an actual non-empty attempt id';
+        }
+        if ($strictRuntime && str_contains(strtolower((string) ($projection['attempt_id'] ?? '')), 'pilot_fixture')) {
+            $errors[] = 'projection_v2.attempt_id must not use a pilot fixture identity';
+        }
+        if ($strictRuntime && trim((string) ($projection['result_version'] ?? '')) === '') {
+            $errors[] = 'projection_v2.result_version must be an actual non-empty result version';
+        }
+        if ($strictRuntime && ! in_array((string) ($projection['form_code'] ?? ''), ['big5_90', 'big5_120'], true)) {
+            $errors[] = 'projection_v2.form_code must be big5_90 or big5_120';
+        }
+        if ($strictRuntime && ! in_array((string) ($projection['quality_status'] ?? ''), ['valid', 'degraded'], true)) {
+            $errors[] = 'projection_v2.quality_status must be valid or degraded';
+        }
+        if ($strictRuntime && ! in_array((string) ($projection['norm_status'] ?? ''), ['CALIBRATED', 'PROVISIONAL', 'UNAVAILABLE'], true)) {
+            $errors[] = 'projection_v2.norm_status is invalid';
         }
 
         $scope = (string) ($projection['interpretation_scope'] ?? '');
@@ -117,9 +168,40 @@ final class BigFiveResultPageV2Validator
             $errors[] = 'profile_signature.system must not be type';
         }
 
-        if ($this->isNormUnavailable($projection)) {
+        if (! $strictRuntime && $this->isNormUnavailable($projection)) {
             foreach (['domains', 'facets'] as $field) {
                 $this->collectForbiddenKeys((array) ($projection[$field] ?? []), ['score', 'percentile', 'percentiles', 'normal_curve'], "projection_v2.{$field}", $errors);
+            }
+        }
+
+        if ($strictRuntime) {
+            $domains = is_array($projection['domains'] ?? null) ? $projection['domains'] : [];
+            $expectedDomains = ['O', 'C', 'E', 'A', 'N'];
+            if (array_keys($domains) !== $expectedDomains) {
+                $errors[] = 'projection_v2.domains must contain ordered O,C,E,A,N exactly once';
+            }
+            foreach ($expectedDomains as $domain) {
+                $entry = is_array($domains[$domain] ?? null) ? $domains[$domain] : [];
+                $score = $entry['score'] ?? null;
+                if (! is_int($score) || $score < 0 || $score > 100) {
+                    $errors[] = "projection_v2.domains.{$domain}.score must be an integer within 0..100";
+
+                    continue;
+                }
+                $expectedBand = match (true) {
+                    $score < 20 => 'very_low',
+                    $score < 40 => 'low',
+                    $score < 60 => 'mid',
+                    $score < 80 => 'high',
+                    default => 'very_high',
+                };
+                if (($entry['band'] ?? null) !== $expectedBand || ($projection['domain_bands'][$domain] ?? null) !== $expectedBand) {
+                    $errors[] = "projection_v2.domains.{$domain} score/band route mismatch";
+                }
+            }
+
+            if (($projection['percentile_display_allowed'] ?? false) !== true) {
+                $this->collectForbiddenKeys($projection, ['percentile', 'percentiles'], 'projection_v2', $errors);
             }
         }
 
@@ -130,7 +212,7 @@ final class BigFiveResultPageV2Validator
      * @param  array<string,mixed>  $module
      * @return list<string>
      */
-    private function validateModule(array $module, int $index, string $scope, bool $normUnavailable): array
+    private function validateModule(array $module, int $index, string $scope, bool $normUnavailable, bool $strictRuntime): array
     {
         $errors = [];
         $moduleKey = (string) ($module['module_key'] ?? '');
@@ -153,7 +235,7 @@ final class BigFiveResultPageV2Validator
                 continue;
             }
 
-            $errors = array_merge($errors, $this->validateBlock($block, $moduleKey, (int) $blockIndex, $scope, $normUnavailable));
+            $errors = array_merge($errors, $this->validateBlock($block, $moduleKey, (int) $blockIndex, $scope, $normUnavailable, $strictRuntime));
         }
 
         return $errors;
@@ -163,7 +245,7 @@ final class BigFiveResultPageV2Validator
      * @param  array<string,mixed>  $block
      * @return list<string>
      */
-    private function validateBlock(array $block, string $moduleKey, int $blockIndex, string $scope, bool $normUnavailable): array
+    private function validateBlock(array $block, string $moduleKey, int $blockIndex, string $scope, bool $normUnavailable, bool $strictRuntime): array
     {
         $errors = [];
         foreach (['block_key', 'block_kind', 'module_key', 'content', 'projection_refs', 'registry_refs', 'safety_level', 'evidence_level', 'shareable', 'content_source'] as $field) {
@@ -183,6 +265,14 @@ final class BigFiveResultPageV2Validator
             if (! is_array($block[$field] ?? null)) {
                 $errors[] = "{$moduleKey}.blocks.{$blockIndex} {$field} must be an array";
             }
+        }
+
+        $content = is_array($block['content'] ?? null) ? $block['content'] : [];
+        if ($strictRuntime && ! $this->hasMeaningfulContent($content)) {
+            $errors[] = "{$moduleKey}.blocks.{$blockIndex} content must not be empty";
+        }
+        if ($strictRuntime && $this->containsPlaceholder($content)) {
+            $errors[] = "{$moduleKey}.blocks.{$blockIndex} contains placeholder or deferred content";
         }
 
         $blockKind = (string) ($block['block_kind'] ?? '');
@@ -219,6 +309,202 @@ final class BigFiveResultPageV2Validator
         }
 
         return $errors;
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @return list<string>
+     */
+    private function validateSemanticContract(array $payload): array
+    {
+        $errors = [];
+        $seenBlockKeys = [];
+        $seenSemanticSlots = [];
+        $seenVisibleText = [];
+        $traitBarCounts = array_fill_keys(['O', 'C', 'E', 'A', 'N'], 0);
+        $facetPolarities = [];
+        $projection = (array) ($payload['projection_v2'] ?? []);
+        if (($payload['canonical_profile_key'] ?? null) !== data_get($projection, 'profile_signature.signature_key')) {
+            $errors[] = 'canonical profile must match projection profile route';
+        }
+        $facetBuckets = [];
+        foreach ((array) ($projection['facet_highlights'] ?? []) as $highlight) {
+            if (is_array($highlight)) {
+                $key = strtoupper((string) ($highlight['key'] ?? ''));
+                if ($key !== '') {
+                    $facetBuckets[$key] = strtolower((string) ($highlight['bucket'] ?? ''));
+                }
+            }
+        }
+
+        foreach ((array) ($payload['modules'] ?? []) as $module) {
+            if (! is_array($module)) {
+                continue;
+            }
+            foreach ((array) ($module['blocks'] ?? []) as $block) {
+                if (! is_array($block)) {
+                    continue;
+                }
+                $blockKey = (string) ($block['block_key'] ?? '');
+                if ($blockKey !== '') {
+                    if (isset($seenBlockKeys[$blockKey])) {
+                        $errors[] = "Duplicate block_key: {$blockKey}";
+                    }
+                    $seenBlockKeys[$blockKey] = true;
+                }
+
+                $slot = $this->semanticSlot($block);
+                if ($slot !== '') {
+                    if (isset($seenSemanticSlots[$slot])) {
+                        $errors[] = "Multiple candidates for semantic slot: {$slot}";
+                    }
+                    $seenSemanticSlots[$slot] = true;
+                }
+
+                $kind = (string) ($block['block_kind'] ?? '');
+                $content = (array) ($block['content'] ?? []);
+                if (in_array($kind, ['trait_bars', 'trait_deep_dive'], true)) {
+                    $trait = strtoupper((string) data_get($content, 'trait.code', ''));
+                    if ($kind === 'trait_bars' && array_key_exists($trait, $traitBarCounts)) {
+                        $traitBarCounts[$trait]++;
+                    }
+                    $contentBand = strtolower((string) data_get($content, 'band.internal_band', ''));
+                    $projectionBand = strtolower((string) data_get($projection, "domains.{$trait}.band", ''));
+                    if ($trait !== '' && $contentBand !== '' && $contentBand !== $projectionBand) {
+                        $errors[] = "{$kind} {$trait} band does not match projection";
+                    }
+                }
+
+                if ($kind === 'facet_reframe') {
+                    $facet = strtoupper((string) ($content['facet_key'] ?? ''));
+                    $polarity = strtolower((string) ($content['facet_direction'] ?? ''));
+                    if ($facet !== '' && in_array($polarity, ['high', 'low'], true)) {
+                        $facetPolarities[$facet][$polarity] = true;
+                        $bucket = $facetBuckets[$facet] ?? '';
+                        $expected = in_array($bucket, ['high', 'very_high'], true)
+                            ? 'high'
+                            : (in_array($bucket, ['low', 'very_low'], true) ? 'low' : '');
+                        if ($expected === '' || $expected !== $polarity) {
+                            $errors[] = "facet {$facet} polarity does not match projection bucket";
+                        }
+                    }
+                }
+
+                foreach ($this->visibleProse($content) as $text) {
+                    $normalized = $this->normalizeVisibleText($text);
+                    if ($normalized === '') {
+                        continue;
+                    }
+                    if (isset($seenVisibleText[$normalized])) {
+                        $errors[] = 'Duplicate normalized visible content';
+                    }
+                    $seenVisibleText[$normalized] = true;
+                }
+            }
+        }
+
+        foreach ($traitBarCounts as $trait => $count) {
+            if ($count !== 1) {
+                $errors[] = "trait_bars must contain {$trait} exactly once";
+            }
+        }
+        foreach ($facetPolarities as $facet => $polarities) {
+            if (isset($polarities['high'], $polarities['low'])) {
+                $errors[] = "facet {$facet} must not contain both high and low polarity";
+            }
+        }
+
+        return array_values(array_unique($errors));
+    }
+
+    /** @param array<string,mixed> $block */
+    private function semanticSlot(array $block): string
+    {
+        $module = (string) ($block['module_key'] ?? '');
+        $kind = (string) ($block['block_kind'] ?? '');
+        $content = (array) ($block['content'] ?? []);
+
+        return match ($kind) {
+            'trait_bars', 'trait_deep_dive' => "{$module}:{$kind}:".strtoupper((string) data_get($content, 'trait.code', '')),
+            'coupling_cards' => "{$module}:{$kind}:".(string) ($content['coupling_key'] ?? ''),
+            'facet_reframe' => "{$module}:{$kind}:".strtoupper((string) ($content['facet_key'] ?? '')),
+            'application_matrix', 'collaboration_manual' => "{$module}:{$kind}:".(string) ($content['scenario'] ?? ''),
+            default => "{$module}:{$kind}",
+        };
+    }
+
+    /** @param array<int|string,mixed> $content */
+    private function hasMeaningfulContent(array $content): bool
+    {
+        foreach ($content as $value) {
+            if (is_string($value) && trim($value) !== '') {
+                return true;
+            }
+            if ((is_int($value) || is_float($value)) && is_finite((float) $value)) {
+                return true;
+            }
+            if (is_array($value) && $this->hasMeaningfulContent($value)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /** @param array<int|string,mixed> $content */
+    private function containsPlaceholder(array $content): bool
+    {
+        foreach ($content as $value) {
+            if (is_string($value)) {
+                $normalized = strtolower(trim($value));
+                foreach (['pending_asset_resolution', 'placeholder', 'dry-run deferred', 'deferred', '此模块暂未启用', 'this module is not available yet'] as $marker) {
+                    if (str_contains($normalized, strtolower($marker))) {
+                        return true;
+                    }
+                }
+            }
+            if (is_array($value) && $this->containsPlaceholder($value)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param  array<int|string,mixed>  $content
+     * @return list<string>
+     */
+    private function visibleProse(array $content): array
+    {
+        $visibleKeys = [
+            'title', 'title_zh', 'title_en', 'summary', 'summary_zh', 'summary_en',
+            'body', 'body_zh', 'body_en', 'short_body', 'short_body_zh', 'short_body_en',
+            'benefit', 'benefit_zh', 'benefit_en', 'cost', 'cost_zh', 'cost_en',
+            'action', 'action_zh', 'action_en', 'repair', 'repair_zh', 'repair_en',
+            'common_misread', 'common_misread_zh', 'common_misread_en',
+        ];
+        $texts = [];
+        foreach ($content as $key => $value) {
+            if (is_string($value) && in_array((string) $key, $visibleKeys, true) && trim($value) !== '') {
+                $texts[] = $value;
+            }
+            if (is_array($value)) {
+                $texts = [...$texts, ...$this->visibleProse($value)];
+            }
+        }
+
+        return $texts;
+    }
+
+    private function normalizeVisibleText(string $text): string
+    {
+        $normalized = preg_replace('/\s+/u', '', trim($text));
+        if (! is_string($normalized) || mb_strlen($normalized) < 8) {
+            return '';
+        }
+
+        return mb_strtolower($normalized);
     }
 
     /**

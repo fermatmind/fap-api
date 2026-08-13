@@ -16,7 +16,7 @@ use Tests\TestCase;
 
 final class BigFiveResultPageV2RouteDrivenSelectorInputBuilderTest extends TestCase
 {
-    public function test_o59_route_row_builds_selector_input_without_changing_selector_semantics(): void
+    public function test_o59_route_row_builds_exact_selector_input_from_real_scores(): void
     {
         $input = (new BigFiveV2RouteDrivenSelectorInputBuilder)->build($this->o59RouteInput(), $this->o59RouteRow());
 
@@ -36,12 +36,16 @@ final class BigFiveResultPageV2RouteDrivenSelectorInputBuilderTest extends TestC
             'N' => 'high',
         ], $input->domainBands);
         $this->assertSame([
-            'O' => 3,
-            'C' => 2,
-            'E' => 2,
-            'A' => 3,
-            'N' => 4,
+            'O' => 59,
+            'C' => 32,
+            'E' => 20,
+            'A' => 55,
+            'N' => 68,
         ], $input->domainScores);
+        $this->assertSame('high_tension_profile', $input->interpretationScope);
+        $this->assertContains('asset.module_01_hero.domain_registry.o_mid_hero_signal.v0_3', $input->includeAssetKeys);
+        $this->assertContains('asset.module_03_trait_deep_dive.domain_registry.n_high_deep_strategy.v0_3', $input->includeAssetKeys);
+        $this->assertSame($input->includeAssetKeys, array_values(array_unique($input->includeAssetKeys)));
 
         foreach ([
             'profile_signature_registry',
@@ -156,10 +160,7 @@ final class BigFiveResultPageV2RouteDrivenSelectorInputBuilderTest extends TestC
         $result = (new BigFiveV2DeterministicSelector)->select($input);
 
         $this->assertNotSame([], $result->selectedAssetRefs);
-        $this->assertContains('pdf', $result->pendingSurfaces);
-        $this->assertContains('share_card', $result->pendingSurfaces);
-        $this->assertContains('history', $result->pendingSurfaces);
-        $this->assertContains('compare', $result->pendingSurfaces);
+        $this->assertSame([], $result->pendingSurfaces);
 
         $selectedRegistries = array_values(array_unique(array_map(
             static fn (BigFiveV2SelectedAssetRef $ref): string => $ref->registryKey,
@@ -190,7 +191,7 @@ final class BigFiveResultPageV2RouteDrivenSelectorInputBuilderTest extends TestC
             $this->assertStringNotContainsString($forbiddenTerm, $encodedSelectedRefs, $forbiddenTerm);
         }
 
-        $this->assertFalse($result->safetyDecisions['body_composition_allowed']);
+        $this->assertTrue($result->safetyDecisions['body_composition_allowed']);
         $this->assertFalse($result->safetyDecisions['consumer_side_body_fallback_allowed']);
         $this->assertFalse($result->safetyDecisions['production_use_allowed']);
     }
@@ -207,12 +208,12 @@ final class BigFiveResultPageV2RouteDrivenSelectorInputBuilderTest extends TestC
         foreach ([
             'module_04_coupling.coupling_card.o_n.mid_high',
             'module_04_coupling.coupling_card.e_n.low_high',
-            'module_04_coupling.coupling_card.c_e.low_low',
             'module_04_coupling.coupling_card.c_n.low_high',
             'module_04_coupling.coupling_card.a_n.mid_high',
         ] as $slotKey) {
             $this->assertContains($slotKey, $selectedSlots, $slotKey);
         }
+        $this->assertNotContains('module_04_coupling.coupling_card.c_e.low_low', $selectedSlots);
 
         foreach ($result->unresolvedRefSuppressions as $suppression) {
             foreach ((array) ($suppression['references'] ?? []) as $reference) {
@@ -221,7 +222,7 @@ final class BigFiveResultPageV2RouteDrivenSelectorInputBuilderTest extends TestC
         }
     }
 
-    public function test_unresolved_profile_and_scenario_refs_remain_suppressed_for_route_driven_selection(): void
+    public function test_route_driven_content_lookup_refs_are_not_suppressed_as_unresolved(): void
     {
         $input = (new BigFiveV2RouteDrivenSelectorInputBuilder)->build($this->o59RouteInput(), $this->o59RouteRow());
         $result = (new BigFiveV2DeterministicSelector)->select($input);
@@ -236,8 +237,8 @@ final class BigFiveResultPageV2RouteDrivenSelectorInputBuilderTest extends TestC
         }
         unset($suppressedAssetKeys[''], $suppressedTypes['']);
 
-        $this->assertArrayHasKey('profile_key', $suppressedTypes);
-        $this->assertArrayHasKey('scenario_key', $suppressedTypes);
+        $this->assertArrayNotHasKey('profile_key', $suppressedTypes);
+        $this->assertArrayNotHasKey('scenario_key', $suppressedTypes);
         $this->assertArrayNotHasKey('coupling_key', $suppressedTypes);
 
         foreach ($result->selectedAssetRefs as $ref) {
@@ -265,6 +266,16 @@ final class BigFiveResultPageV2RouteDrivenSelectorInputBuilderTest extends TestC
             ],
             includeRegistryKeys: $input->includeRegistryKeys,
             enableResolvedCouplingRefs: $input->enableResolvedCouplingRefs,
+            includeAssetKeys: $input->includeAssetKeys,
+            requiredSemanticSlots: $input->requiredSemanticSlots,
+            domainPercentiles: $input->domainPercentiles,
+            qualityFlags: $input->qualityFlags,
+            attemptId: $input->attemptId,
+            resultVersion: $input->resultVersion,
+            normGroupId: $input->normGroupId,
+            normVersion: $input->normVersion,
+            percentileDisplayAllowed: $input->percentileDisplayAllowed,
+            interpretationScope: $input->interpretationScope,
         );
 
         $result = (new BigFiveV2DeterministicSelector)->select($inputWithUnknownSlot);

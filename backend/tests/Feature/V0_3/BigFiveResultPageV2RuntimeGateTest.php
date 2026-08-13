@@ -6,7 +6,6 @@ namespace Tests\Feature\V0_3;
 
 use App\Services\BigFive\ReportEngine\Bridge\BigFiveLiveRuntimeBridge;
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2Contract;
-use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2TransformerContract;
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2Validator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Log;
@@ -106,6 +105,7 @@ final class BigFiveResultPageV2RuntimeGateTest extends TestCase
         config()->set('big5_result_page_v2.enabled', true);
         config()->set('big5_report_engine.v2_bridge_enabled', true);
         $fixture = $this->createCanonicalBigFiveBridgeFixture('anon_big5_result_page_v2_old_bridge');
+        $this->forceQualityLevel($fixture['result'], 'B');
         $expectedV2 = app(BigFiveLiveRuntimeBridge::class)->build(
             $fixture['attempt'],
             $fixture['result'],
@@ -124,7 +124,7 @@ final class BigFiveResultPageV2RuntimeGateTest extends TestCase
         $this->assertSame($fixture['legacy_sections'], $response->json('report.sections'));
     }
 
-    public function test_norm_unavailable_runtime_payload_suppresses_percentile_and_normal_curve_fields(): void
+    public function test_norm_unavailable_runtime_payload_fails_closed_without_v2(): void
     {
         config()->set('big5_result_page_v2.enabled', true);
         config()->set('big5_report_engine.v2_bridge_enabled', false);
@@ -139,22 +139,16 @@ final class BigFiveResultPageV2RuntimeGateTest extends TestCase
 
         $response->assertOk();
         $payload = $response->json(BigFiveResultPageV2Contract::PAYLOAD_KEY);
-        $this->assertSame([], app(BigFiveResultPageV2Validator::class)->validateEnvelope([
-            BigFiveResultPageV2Contract::PAYLOAD_KEY => $payload,
-        ]));
-        $this->assertSame('norm_unavailable', data_get($payload, 'projection_v2.interpretation_scope'));
-        $this->assertNull(data_get($payload, 'projection_v2.domains.O.score'));
-        $this->assertNull(data_get($payload, 'projection_v2.domains.O.percentile'));
-        $this->assertSame(['domain_bands', 'interpretation_scope', 'safety_flags'], data_get($payload, 'projection_v2.public_fields'));
-        $this->assertFalse($this->containsKeyRecursive((array) $payload, 'normal_curve'));
-        $this->assertFalse($this->containsKeyRecursive((array) $payload, 'show_normal_curve'));
+        $this->assertNull($payload);
+        $this->assertSame($fixture['legacy_sections'], $response->json('report.sections'));
     }
 
-    public function test_low_quality_runtime_payload_outputs_degraded_boundary_safe_modules(): void
+    public function test_low_quality_runtime_payload_fails_closed_without_v2(): void
     {
         config()->set('big5_result_page_v2.enabled', true);
         config()->set('big5_report_engine.v2_bridge_enabled', false);
         $fixture = $this->createCanonicalBigFiveBridgeFixture('anon_big5_result_page_v2_low_quality');
+        $this->forceQualityLevel($fixture['result'], 'D');
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '.$fixture['token'],
@@ -163,42 +157,23 @@ final class BigFiveResultPageV2RuntimeGateTest extends TestCase
 
         $response->assertOk();
         $payload = $response->json(BigFiveResultPageV2Contract::PAYLOAD_KEY);
-        $this->assertSame([], app(BigFiveResultPageV2Validator::class)->validateEnvelope([
-            BigFiveResultPageV2Contract::PAYLOAD_KEY => $payload,
-        ]));
-        $this->assertSame('low_quality', data_get($payload, 'projection_v2.interpretation_scope'));
-        $this->assertSame([
-            'module_00_trust_bar',
-            'module_09_feedback_data_flywheel',
-            'module_10_method_privacy',
-        ], array_map(
-            static fn (array $module): string => (string) $module['module_key'],
-            (array) ($payload['modules'] ?? [])
-        ));
-        foreach ((array) ($payload['modules'] ?? []) as $module) {
-            foreach ((array) ($module['blocks'] ?? []) as $block) {
-                $this->assertContains($block['safety_level'], ['boundary', 'degraded']);
-            }
-        }
+        $this->assertNull($payload);
+        $this->assertSame($fixture['legacy_sections'], $response->json('report.sections'));
     }
 
-    public function test_invalid_runtime_payload_is_omitted_without_breaking_legacy_report(): void
+    public function test_invalid_route_input_is_omitted_without_breaking_legacy_report(): void
     {
         config()->set('big5_result_page_v2.enabled', true);
         config()->set('big5_report_engine.v2_bridge_enabled', false);
-        $this->app->bind(BigFiveResultPageV2TransformerContract::class, static fn (): BigFiveResultPageV2TransformerContract => new class implements BigFiveResultPageV2TransformerContract
-        {
-            public function transform(array $input): array
-            {
-                return [
-                    BigFiveResultPageV2Contract::PAYLOAD_KEY => [
-                        'payload_key' => 'invalid',
-                    ],
-                ];
-            }
-        });
         Log::spy();
         $fixture = $this->createCanonicalBigFiveBridgeFixture('anon_big5_result_page_v2_invalid_omit');
+        $this->forceDomainPercentiles($fixture['result'], [
+            'O' => 101,
+            'C' => 32,
+            'E' => 20,
+            'A' => 55,
+            'N' => 68,
+        ]);
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '.$fixture['token'],
@@ -209,7 +184,7 @@ final class BigFiveResultPageV2RuntimeGateTest extends TestCase
         $this->assertArrayNotHasKey(BigFiveResultPageV2Contract::PAYLOAD_KEY, $response->json());
         $this->assertSame($fixture['legacy_sections'], $response->json('report.sections'));
         Log::shouldHaveReceived('warning')
-            ->with('BIG5_RESULT_PAGE_V2_RUNTIME_PAYLOAD_INVALID', Mockery::type('array'))
+            ->with('BIG5_RESULT_PAGE_V2_RUNTIME_WRAPPER_FAILED', Mockery::type('array'))
             ->once();
     }
 
@@ -253,6 +228,14 @@ final class BigFiveResultPageV2RuntimeGateTest extends TestCase
         $resultJson = is_array($result->result_json) ? $result->result_json : [];
         data_set($resultJson, 'normed_json.norms.status', $normStatus);
         data_set($resultJson, 'normed_json.norms.norm_status', $normStatus);
+        $result->forceFill(['result_json' => $resultJson])->save();
+    }
+
+    /** @param array<string,int> $domainPercentiles */
+    private function forceDomainPercentiles(object $result, array $domainPercentiles): void
+    {
+        $resultJson = is_array($result->result_json) ? $result->result_json : [];
+        data_set($resultJson, 'normed_json.scores_0_100.domains_percentile', $domainPercentiles);
         $result->forceFill(['result_json' => $resultJson])->save();
     }
 
