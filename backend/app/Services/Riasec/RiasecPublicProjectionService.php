@@ -105,7 +105,7 @@ final class RiasecPublicProjectionService
         $formCode = (string) data_get($measurementContract, 'form.form_code', data_get($v1, 'form.form_code', ''));
         $qualityRule = $this->qualityRuleContract->build(array_merge($payload, [
             'form_code' => $formCode,
-            'answer_count' => (int) data_get($measurementContract, 'form.question_count', (int) ($payload['answer_count'] ?? 0)),
+            'answer_count' => (int) ($payload['answer_count'] ?? data_get($measurementContract, 'form.question_count', 0)),
         ]));
         $interpretationRule = $this->interpretationRuleContract->build($payload, $qualityRule);
 
@@ -164,6 +164,11 @@ final class RiasecPublicProjectionService
             'quality' => [
                 'grade' => (string) ($v1['quality_grade'] ?? ''),
                 'flags' => is_array($v1['quality_flags'] ?? null) ? array_values($v1['quality_flags']) : [],
+                'display_v1' => $this->qualityDisplay(
+                    locale: $locale,
+                    grade: (string) ($v1['quality_grade'] ?? ''),
+                    qualityRule: $qualityRule,
+                ),
                 'low_quality_strength' => (string) data_get($measurementContract, 'quality.low_quality_strength', ''),
                 'quality_rule_version' => (string) ($qualityRule['quality_rule_version'] ?? ''),
                 'quality_state' => (string) ($qualityRule['quality_state'] ?? ''),
@@ -517,6 +522,128 @@ final class RiasecPublicProjectionService
         return in_array($normalized, RiasecDeepCopySlotRegistry::STRUCTURAL_DIFFERENCE_STATES, true)
             ? $normalized
             : 'different_emphasis';
+    }
+
+    /**
+     * @param  array<string,mixed>  $qualityRule
+     * @return array<string,mixed>
+     */
+    private function qualityDisplay(string $locale, string $grade, array $qualityRule): array
+    {
+        $isZh = str_starts_with(strtolower($locale), 'zh');
+        $rawGrade = in_array(strtoupper(trim($grade)), ['A', 'B', 'C'], true) ? strtoupper(trim($grade)) : 'C';
+        $normalizedGrade = match ((string) ($qualityRule['quality_state'] ?? '')) {
+            'low_quality', 'retake_recommended' => 'C',
+            'caution' => $rawGrade === 'C' ? 'C' : 'B',
+            default => $rawGrade,
+        };
+        $flags = array_values(array_unique(array_filter(array_map('strval', (array) ($qualityRule['quality_flags'] ?? [])))));
+        if ((bool) ($qualityRule['too_fast'] ?? false)) {
+            $flags[] = 'too_fast';
+        }
+        if ((bool) ($qualityRule['neutral_overuse'] ?? false)) {
+            $flags[] = 'neutral_overuse';
+        }
+        if ((bool) ($qualityRule['missing_items'] ?? false)) {
+            $flags[] = 'missing_items';
+        }
+        $flags = array_values(array_unique($flags));
+
+        $copy = $isZh ? [
+            'headlines' => [
+                'A' => '作答状态稳定，可正常阅读',
+                'B' => '存在轻度作答质量提示，建议结合实际经历谨慎阅读',
+                'C' => '作答质量提示较明显，本次仅作初步线索，建议状态稳定时重测',
+            ],
+            'reasons' => [
+                'attention_133_failed' => '有一道注意力检查题未通过，部分回答可能没有充分反映你的真实偏好。',
+                'attention_137_failed' => '有一道注意力检查题未通过，部分回答可能没有充分反映你的真实偏好。',
+                'low_consistency' => '部分相近题目的回答差异较大，结果的稳定性可能受到影响。',
+                'idealization' => '部分回答可能偏向理想状态，而不是你通常会做出的选择。',
+                'strong_idealization' => '多组回答可能偏向理想状态，而不是你通常会做出的选择。',
+                'broad_agreement' => '较多题目选择了同意或喜欢，各兴趣维度之间的区分度可能不足。',
+                'too_fast' => '作答速度明显偏快，可能没有留出足够时间理解题意。',
+                'neutral_overuse' => '中立选项使用较多，本次结果能够区分出的兴趣差异有限。',
+                'missing_items' => '存在未完成题目，本次结果无法支持完整解读。',
+            ],
+            'improvements' => [
+                'attention_133_failed' => '重测时请逐题阅读，并在不受打扰的环境中作答。',
+                'attention_137_failed' => '重测时请逐题阅读，并在不受打扰的环境中作答。',
+                'low_consistency' => '重测时以平时真实、反复出现的行为为准，不必追求前后看起来一致。',
+                'idealization' => '重测时请选择最接近日常状态的答案，而不是你认为更理想或更受期待的答案。',
+                'strong_idealization' => '重测时请选择最接近日常状态的答案，而不是你认为更理想或更受期待的答案。',
+                'broad_agreement' => '遇到都感兴趣的选项时，可比较自己是否愿意长期、重复地投入这些活动。',
+                'too_fast' => '在时间充足、状态稳定时重新作答，每题先联系一个具体经历再选择。',
+                'neutral_overuse' => '重测时可结合具体经历，尽量区分更接近喜欢还是不喜欢。',
+                'missing_items' => '请完成全部题目后重新生成结果。',
+            ],
+            'boundary' => '质量提示只说明本次作答的可读性，不评价你的能力、人格或个人价值。',
+        ] : [
+            'headlines' => [
+                'A' => 'Your responses are stable enough for a standard reading',
+                'B' => 'A mild response-quality note applies; read the result alongside your real experience',
+                'C' => 'Response-quality concerns limit this result to an initial signal; consider retaking when ready',
+            ],
+            'reasons' => [
+                'attention_133_failed' => 'One attention check was missed, so some answers may not fully reflect your usual preferences.',
+                'attention_137_failed' => 'One attention check was missed, so some answers may not fully reflect your usual preferences.',
+                'low_consistency' => 'Some similar questions received notably different answers, which may reduce result stability.',
+                'idealization' => 'Some answers may reflect an ideal self rather than your usual choices.',
+                'strong_idealization' => 'Several answer patterns may reflect an ideal self rather than your usual choices.',
+                'broad_agreement' => 'You agreed with or liked many items, which may make the interest dimensions less distinct.',
+                'too_fast' => 'The assessment was completed unusually quickly, leaving limited time to consider each item.',
+                'neutral_overuse' => 'Frequent neutral responses limit how clearly this result can distinguish your interests.',
+                'missing_items' => 'Some required items were not completed, so a full reading is not supported.',
+            ],
+            'improvements' => [
+                'attention_133_failed' => 'Retake in a distraction-free setting and read each item fully.',
+                'attention_137_failed' => 'Retake in a distraction-free setting and read each item fully.',
+                'low_consistency' => 'Answer from recurring real-life behavior rather than trying to make every answer look consistent.',
+                'idealization' => 'Choose what is closest to your everyday behavior, not what seems ideal or expected.',
+                'strong_idealization' => 'Choose what is closest to your everyday behavior, not what seems ideal or expected.',
+                'broad_agreement' => 'When many options appeal to you, ask which activities you would willingly repeat over time.',
+                'too_fast' => 'Retake when you have enough time, linking each answer to a concrete experience.',
+                'neutral_overuse' => 'Use concrete experiences to decide whether each activity is closer to appealing or unappealing.',
+                'missing_items' => 'Complete every required item before generating a new result.',
+            ],
+            'boundary' => 'This note concerns the readability of this response set; it does not judge ability, personality, or personal worth.',
+        ];
+
+        $reasons = [];
+        $improvements = [];
+        $attentionFlags = array_values(array_intersect($flags, ['attention_133_failed', 'attention_137_failed']));
+        if (count($attentionFlags) === 2) {
+            $reasons[] = $isZh
+                ? '两道注意力检查题均未通过，部分回答可能没有充分反映你的真实偏好。'
+                : 'Both attention checks were missed, so some answers may not fully reflect your usual preferences.';
+            $improvements[] = $copy['improvements']['attention_133_failed'];
+        }
+        foreach ($flags as $flag) {
+            if (count($attentionFlags) === 2 && in_array($flag, $attentionFlags, true)) {
+                continue;
+            }
+            if (isset($copy['reasons'][$flag])) {
+                $reasons[] = $copy['reasons'][$flag];
+                $improvements[] = $copy['improvements'][$flag];
+            }
+        }
+        if ($normalizedGrade !== 'A' && $reasons === []) {
+            $reasons[] = $isZh
+                ? '本次作答出现了质量提示，因此结果的区分度或稳定性可能有限。'
+                : 'This response set received a quality note, so the result may be less distinct or stable.';
+            $improvements[] = $isZh
+                ? '建议在状态稳定、不受打扰时，结合日常真实经历重新作答。'
+                : 'Consider retaking when settled and free from distractions, answering from everyday experience.';
+        }
+
+        return [
+            'schema_version' => 'riasec.quality_display.v1',
+            'locale' => $isZh ? 'zh-CN' : 'en',
+            'headline' => $copy['headlines'][$normalizedGrade],
+            'reasons' => array_values(array_unique($reasons)),
+            'improvements' => array_values(array_unique($improvements)),
+            'reading_boundary' => $copy['boundary'],
+        ];
     }
 
     /**

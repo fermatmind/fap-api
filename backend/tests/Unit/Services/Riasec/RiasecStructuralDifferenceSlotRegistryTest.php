@@ -217,6 +217,88 @@ final class RiasecStructuralDifferenceSlotRegistryTest extends TestCase
         }
     }
 
+    public function test_quality_display_localizes_reasons_actions_and_boundary_without_raw_flags(): void
+    {
+        $result = new Result;
+        $result->scale_code = 'RIASEC';
+        $result->type_code = 'RIA';
+        $result->scores_pct = ['R' => 80, 'I' => 70, 'A' => 60, 'S' => 50, 'E' => 40, 'C' => 30];
+        $result->result_json = [
+            'top_code' => 'RIA',
+            'form_code' => 'riasec_140',
+            'answer_count' => 140,
+            'quality_grade' => 'C',
+            'quality_flags' => ['idealization', 'low_consistency', 'broad_agreement'],
+            'too_fast' => true,
+            'neutral_overuse' => true,
+        ];
+
+        $zh = data_get($this->projectionService()->buildV2FromResult($result, 'zh-CN'), 'quality.display_v1');
+        $this->assertSame('riasec.quality_display.v1', $zh['schema_version']);
+        $this->assertSame('zh-CN', $zh['locale']);
+        $this->assertStringContainsString('初步线索', $zh['headline']);
+        $this->assertCount(5, $zh['reasons']);
+        $this->assertCount(5, $zh['improvements']);
+        $this->assertStringContainsString('理想状态', implode('', $zh['reasons']));
+        $this->assertStringContainsString('如何', '如何让下次结果更稳定');
+        $this->assertStringContainsString('不评价你的能力、人格或个人价值', $zh['reading_boundary']);
+        $this->assertStringNotContainsString('idealization', json_encode($zh, JSON_UNESCAPED_UNICODE));
+
+        $en = data_get($this->projectionService()->buildV2FromResult($result, 'en'), 'quality.display_v1');
+        $this->assertSame('en', $en['locale']);
+        $this->assertStringContainsString('initial signal', $en['headline']);
+        $this->assertStringContainsString('ideal self', implode('', $en['reasons']));
+        $this->assertDoesNotMatchRegularExpression('/[\x{4e00}-\x{9fff}]/u', json_encode($en, JSON_UNESCAPED_UNICODE));
+    }
+
+    public function test_quality_display_follows_derived_state_and_handles_unknown_attention_and_missing_signals(): void
+    {
+        $base = new Result;
+        $base->scale_code = 'RIASEC';
+        $base->type_code = 'RIA';
+        $base->scores_pct = ['R' => 80, 'I' => 70, 'A' => 60, 'S' => 50, 'E' => 40, 'C' => 30];
+
+        $tooFast = clone $base;
+        $tooFast->result_json = [
+            'top_code' => 'RIA', 'form_code' => 'riasec_140', 'answer_count' => 140,
+            'quality_grade' => 'A', 'too_fast' => true,
+        ];
+        $tooFastProjection = $this->projectionService()->buildV2FromResult($tooFast, 'zh-CN');
+        $this->assertSame('caution', data_get($tooFastProjection, 'quality.quality_state'));
+        $this->assertStringContainsString('轻度', data_get($tooFastProjection, 'quality.display_v1.headline'));
+        $this->assertStringContainsString('速度明显偏快', implode('', data_get($tooFastProjection, 'quality.display_v1.reasons')));
+
+        $unknown = clone $base;
+        $unknown->result_json = [
+            'top_code' => 'RIA', 'form_code' => 'riasec_140', 'answer_count' => 140,
+            'quality_grade' => 'A', 'quality_flags' => ['future_quality_signal'],
+        ];
+        $unknownDisplay = data_get($this->projectionService()->buildV2FromResult($unknown, 'zh-CN'), 'quality.display_v1');
+        $this->assertStringContainsString('轻度', $unknownDisplay['headline']);
+        $this->assertNotEmpty($unknownDisplay['reasons']);
+        $this->assertNotEmpty($unknownDisplay['improvements']);
+        $this->assertStringNotContainsString('future_quality_signal', json_encode($unknownDisplay, JSON_UNESCAPED_UNICODE));
+
+        $attention = clone $base;
+        $attention->result_json = [
+            'top_code' => 'RIA', 'form_code' => 'riasec_140', 'answer_count' => 140,
+            'quality_grade' => 'C', 'quality_flags' => ['attention_133_failed', 'attention_137_failed'],
+        ];
+        $attentionProjection = $this->projectionService()->buildV2FromResult($attention, 'zh-CN');
+        $this->assertSame('low_quality', data_get($attentionProjection, 'quality.quality_state'));
+        $this->assertSame(1, count(data_get($attentionProjection, 'quality.display_v1.reasons')));
+        $this->assertStringContainsString('两道注意力检查题均未通过', data_get($attentionProjection, 'quality.display_v1.reasons.0'));
+
+        $incomplete = clone $base;
+        $incomplete->result_json = [
+            'top_code' => 'RIA', 'form_code' => 'riasec_60', 'answer_count' => 52,
+            'quality_grade' => 'A', 'quality_flags' => [],
+        ];
+        $incompleteProjection = $this->projectionService()->buildV2FromResult($incomplete, 'zh-CN');
+        $this->assertSame('low_quality', data_get($incompleteProjection, 'quality.quality_state'));
+        $this->assertStringContainsString('未完成题目', implode('', data_get($incompleteProjection, 'quality.display_v1.reasons')));
+    }
+
     private function attempt(string $id, string $formCode, int $questionCount): Attempt
     {
         $attempt = new Attempt;
