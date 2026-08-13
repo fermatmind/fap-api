@@ -1357,7 +1357,7 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringNotContainsString('landing-surfaces:import-local-baseline', $deployer);
         $this->assertStringNotContainsString('content-pages:import-local-baseline', $deployer);
         $this->assertStringContainsString(
-            'fap:scales:seed-default --preserve-existing-big-five-content --no-interaction --ansi',
+            'FAP_PRESERVE_EXISTING_BIG5_CMS_CONTENT=1',
             $deployer,
         );
         $this->assertStringContainsString(

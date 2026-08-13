@@ -19,7 +19,7 @@ class ScaleRegistryWriter
         private PublicScaleCatalogCache $publicScaleCatalogCache,
     ) {}
 
-    public function upsertScale(array $payload, bool $preserveExistingContent = false): ScaleRegistryModel
+    public function upsertScale(array $payload): ScaleRegistryModel
     {
         $code = strtoupper(trim((string) ($payload['code'] ?? '')));
         $orgId = (int) ($payload['org_id'] ?? 0);
@@ -37,39 +37,34 @@ class ScaleRegistryWriter
         ], static fn (mixed $slug): bool => trim((string) $slug) !== '')));
 
         if ($this->useV2Table()) {
-            $v2UpdateColumns = [
-                'primary_slug',
-                'slugs_json',
-                'driver_type',
-                'assessment_driver',
-                'default_pack_id',
-                'default_region',
-                'default_locale',
-                'default_dir_version',
-                'capabilities_json',
-                'view_policy_json',
-                'commercial_json',
-                'seo_schema_json',
-                'seo_i18n_json',
-                'content_i18n_json',
-                'report_summary_i18n_json',
-                'is_public',
-                'is_active',
-                'is_indexable',
-                'updated_at',
-            ];
-            if ($preserveExistingContent && $this->scaleExists(self::V2_TABLE, $orgId, $code)) {
-                $v2UpdateColumns = array_values(array_diff($v2UpdateColumns, ['content_i18n_json']));
-            }
-
             DB::table(self::V2_TABLE)->upsert(
                 [$this->buildV2Row($data)],
                 ['org_id', 'code'],
-                $v2UpdateColumns
+                [
+                    'primary_slug',
+                    'slugs_json',
+                    'driver_type',
+                    'assessment_driver',
+                    'default_pack_id',
+                    'default_region',
+                    'default_locale',
+                    'default_dir_version',
+                    'capabilities_json',
+                    'view_policy_json',
+                    'commercial_json',
+                    'seo_schema_json',
+                    'seo_i18n_json',
+                    'content_i18n_json',
+                    'report_summary_i18n_json',
+                    'is_public',
+                    'is_active',
+                    'is_indexable',
+                    'updated_at',
+                ]
             );
         }
 
-        $legacyScale = $this->upsertLegacyIfEligible($data, $preserveExistingContent);
+        $legacyScale = $this->upsertLegacyIfEligible($data);
         if ($legacyScale) {
             $this->invalidatePublicProjection($orgId, $code, $affectedSlugs);
 
@@ -238,7 +233,7 @@ class ScaleRegistryWriter
     /**
      * @param  array<string,mixed>  $data
      */
-    private function upsertLegacyIfEligible(array $data, bool $preserveExistingContent): ?ScaleRegistryModel
+    private function upsertLegacyIfEligible(array $data): ?ScaleRegistryModel
     {
         if (! Schema::hasTable(self::LEGACY_TABLE)) {
             return null;
@@ -260,10 +255,6 @@ class ScaleRegistryWriter
             }
         }
 
-        if ($preserveExistingContent && $this->scaleExists(self::LEGACY_TABLE, $orgId, $code)) {
-            unset($data['content_i18n_json']);
-        }
-
         ScaleRegistryModel::queryByOrgWhitelist([$orgId])->updateOrCreate([
             'code' => $code,
             'org_id' => $orgId,
@@ -282,15 +273,6 @@ class ScaleRegistryWriter
         }
 
         return Schema::hasTable(self::V2_TABLE);
-    }
-
-    private function scaleExists(string $table, int $orgId, string $code): bool
-    {
-        return Schema::hasTable($table)
-            && DB::table($table)
-                ->where('org_id', $orgId)
-                ->where('code', $code)
-                ->exists();
     }
 
     private function nullableString(mixed $value): ?string

@@ -144,9 +144,12 @@ final class ScalesLookupSeoMetadataTest extends TestCase
                 ->update(['content_i18n_json' => $content]);
         }
 
-        $this->artisan('fap:scales:seed-default', [
-            '--preserve-existing-big-five-content' => true,
-        ])->assertExitCode(0);
+        putenv('FAP_PRESERVE_EXISTING_BIG5_CMS_CONTENT=1');
+        try {
+            $this->artisan('fap:scales:seed-default')->assertExitCode(0);
+        } finally {
+            putenv('FAP_PRESERVE_EXISTING_BIG5_CMS_CONTENT');
+        }
 
         foreach ($existingByTable as $table => $content) {
             $this->assertSame(

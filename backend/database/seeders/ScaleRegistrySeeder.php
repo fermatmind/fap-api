@@ -6,11 +6,12 @@ namespace Database\Seeders;
 
 use App\Services\Scale\ScaleRegistryWriter;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 final class ScaleRegistrySeeder extends Seeder
 {
-    public function run(bool $preserveExistingBigFiveContent = false): void
+    public function run(): void
     {
         if (! Schema::hasTable('scales_registry') || ! Schema::hasTable('scale_slugs')) {
             $this->command?->warn('ScaleRegistrySeeder skipped: missing tables.');
@@ -178,7 +179,7 @@ final class ScaleRegistrySeeder extends Seeder
         $big5Content['en']['how_it_works'][0] = 'Choose either the 120-question full version (about 15 minutes) or the 90-question standard version (about 11 minutes), then complete it in one focused session.';
         $big5Content['en']['faq'][0]['a'] = 'The 120-question full version takes about 15 minutes; the 90-question standard version takes about 11 minutes.';
 
-        $big5 = $writer->upsertScale([
+        $big5Payload = [
             'code' => 'BIG5_OCEAN',
             'org_id' => 0,
             'primary_slug' => 'big-five-personality-test-ocean-model',
@@ -237,7 +238,15 @@ final class ScaleRegistrySeeder extends Seeder
 
             'is_public' => true,
             'is_active' => true,
-        ], preserveExistingContent: $preserveExistingBigFiveContent);
+        ];
+
+        $big5 = DB::transaction(function () use ($big5Payload, $writer) {
+            $preservedBigFiveContent = $this->bigFiveContentToPreserve();
+            $scale = $writer->upsertScale($big5Payload);
+            $this->restoreBigFiveContent($preservedBigFiveContent);
+
+            return $scale;
+        });
 
         $writer->syncSlugsForScale($big5);
         $this->command?->info('ScaleRegistrySeeder: BIG5_OCEAN scale upserted.');
@@ -729,6 +738,47 @@ final class ScaleRegistrySeeder extends Seeder
 
         $writer->syncSlugsForScale($eq60);
         $this->command?->info('ScaleRegistrySeeder: EQ_60 scale upserted.');
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function bigFiveContentToPreserve(): array
+    {
+        if (getenv('FAP_PRESERVE_EXISTING_BIG5_CMS_CONTENT') !== '1') {
+            return [];
+        }
+
+        $contentByTable = [];
+        foreach (['scales_registry', 'scales_registry_v2'] as $table) {
+            if (! Schema::hasTable($table)) {
+                continue;
+            }
+
+            $row = DB::table($table)
+                ->where('org_id', 0)
+                ->where('code', 'BIG5_OCEAN')
+                ->lockForUpdate()
+                ->first(['content_i18n_json']);
+            if ($row !== null) {
+                $contentByTable[$table] = $row->content_i18n_json;
+            }
+        }
+
+        return $contentByTable;
+    }
+
+    /**
+     * @param  array<string, mixed>  $contentByTable
+     */
+    private function restoreBigFiveContent(array $contentByTable): void
+    {
+        foreach ($contentByTable as $table => $content) {
+            DB::table($table)
+                ->where('org_id', 0)
+                ->where('code', 'BIG5_OCEAN')
+                ->update(['content_i18n_json' => $content]);
+        }
     }
 
     /**
