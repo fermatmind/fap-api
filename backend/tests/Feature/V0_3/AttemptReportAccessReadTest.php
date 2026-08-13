@@ -831,7 +831,7 @@ final class AttemptReportAccessReadTest extends TestCase
             ->assertJsonPath('unlock_options.0.available', false)
             ->assertJsonPath('unlock_options.1.method', 'self_purchase')
             ->assertJsonPath('unlock_options.1.available', false)
-            ->assertJsonPath('unlock_options.1.price_cents', null)
+            ->assertJsonPath('unlock_options.1.price_cents', 199)
             ->assertJsonPath('unlock_options.2.method', 'gift_purchase')
             ->assertJsonPath('unlock_options.2.available', false);
 
