@@ -16,10 +16,12 @@ final class EnneagramReportComposerV2Test extends TestCase
     public function test_composer_emits_v2_report_payload_with_five_pages_for_both_forms(
         string $formCode,
         string $expectedFormVariant,
-        string $expectedMethodologyVariant
+        string $expectedMethodologyVariant,
+        string $attemptLocale,
+        string $expectedLocale
     ): void {
         $composer = app(EnneagramReportComposer::class);
-        $attempt = new Attempt(['locale' => 'zh-CN']);
+        $attempt = new Attempt(['locale' => $attemptLocale]);
         $result = new Result([
             'result_json' => [
                 'normed_json' => $this->syntheticProjectionInput($formCode, [
@@ -39,8 +41,13 @@ final class EnneagramReportComposerV2Test extends TestCase
         $payload = $composer->composeVariant($attempt, $result, 'full');
 
         $this->assertTrue((bool) ($payload['ok'] ?? false));
+        $this->assertSame($expectedLocale, data_get($payload, 'report.locale'));
+        $this->assertSame($expectedLocale, data_get($payload, 'report._meta.enneagram_public_projection_v1.locale'));
+        $this->assertSame($expectedLocale, data_get($payload, 'report._meta.enneagram_public_projection_v2.locale'));
+        $this->assertSame($expectedLocale, data_get($payload, 'report._meta.enneagram_report_v2.locale'));
         $this->assertSame('enneagram.report.v2', data_get($payload, 'report._meta.enneagram_report_v2.schema_version'));
         $this->assertCount(5, (array) data_get($payload, 'report._meta.enneagram_report_v2.pages'));
+        $this->assertCount(42, (array) data_get($payload, 'report._meta.enneagram_report_v2.modules'));
         $this->assertSame(
             [
                 'page_1_result_overview',
@@ -55,11 +62,20 @@ final class EnneagramReportComposerV2Test extends TestCase
         $this->assertSame($expectedMethodologyVariant, data_get($payload, 'report._meta.enneagram_report_v2.form.methodology_variant'));
         $this->assertSame($expectedFormVariant, data_get($this->module($payload, 'methodology_boundary_card'), 'form_variant'));
         $this->assertSame('clear', data_get($this->module($payload, 'instant_summary'), 'content.interpretation_scope'));
-        $this->assertStringContainsString('解释假设', (string) data_get($this->module($payload, 'instant_summary'), 'content.body'));
-        $this->assertStringContainsString('不是对人格的绝对标签或诊断结论', (string) data_get($this->module($payload, 'instant_summary'), 'content.body'));
+        $summaryBody = (string) data_get($this->module($payload, 'instant_summary'), 'content.body');
+        $this->assertStringContainsString($expectedLocale === 'en' ? 'explanatory hypothesis' : '解释假设', $summaryBody);
+        $this->assertStringContainsString($expectedLocale === 'en' ? 'rather than an absolute label or diagnostic conclusion' : '不是对人格的绝对标签或诊断结论', $summaryBody);
         $this->assertStringStartsWith('sha256:', (string) data_get($payload, 'report._meta.enneagram_report_v2.registry.registry_release_hash'));
         $this->assertNotSame('', (string) data_get($payload, 'report._meta.enneagram_report_v2.provenance.interpretation_context_id'));
         $this->assertSame('enneagram_report_engine.v2', data_get($payload, 'report._meta.enneagram_report_v2.provenance.report_engine_version'));
+
+        foreach ((array) data_get($payload, 'report._meta.enneagram_report_v2.modules') as $module) {
+            $this->assertSame(
+                $expectedLocale,
+                (string) data_get($module, 'content.locale'),
+                'Module locale mismatch: '.(string) data_get($module, 'module_key', 'unknown')
+            );
+        }
     }
 
     public function test_page_1_contains_required_modules(): void
@@ -497,12 +513,14 @@ final class EnneagramReportComposerV2Test extends TestCase
     }
 
     /**
-     * @return iterable<string,array{string,string,string}>
+     * @return iterable<string,array{string,string,string,string,string}>
      */
     public static function formProvider(): iterable
     {
-        yield 'e105' => ['enneagram_likert_105', 'e105', 'e105_standard'];
-        yield 'fc144' => ['enneagram_forced_choice_144', 'fc144', 'fc144_forced_choice'];
+        yield 'e105 zh' => ['enneagram_likert_105', 'e105', 'e105_standard', 'zh-CN', 'zh'];
+        yield 'e105 en' => ['enneagram_likert_105', 'e105', 'e105_standard', 'en', 'en'];
+        yield 'fc144 zh' => ['enneagram_forced_choice_144', 'fc144', 'fc144_forced_choice', 'zh-CN', 'zh'];
+        yield 'fc144 en' => ['enneagram_forced_choice_144', 'fc144', 'fc144_forced_choice', 'en', 'en'];
     }
 
     /**

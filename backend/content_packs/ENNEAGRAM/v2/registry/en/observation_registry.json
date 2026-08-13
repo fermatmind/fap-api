@@ -1,0 +1,307 @@
+{
+    "id": "enneagram_observation_registry_v1_en",
+    "schema_version": "fap.enneagram.observation_registry.v1",
+    "registry_key": "enneagram_observation_registry",
+    "locale": "en",
+    "form_variant": "all",
+    "context_mode": "individual",
+    "status": "published",
+    "version": "v1",
+    "release_id": "enneagram_registry_pack_v1_p0_ready_2026_04_en",
+    "content_release_hash": "sha256:pending_loader_resolution",
+    "content_snapshot_hash": null,
+    "content_maturity": "p0_ready",
+    "evidence_level": "descriptive",
+    "preview_enabled": true,
+    "fallback_policy": "fallback_to_generic",
+    "entries": [
+        {
+            "day": 1,
+            "phase": "core_motivation_observation",
+            "title": "Day 1｜Remember only one trigger point",
+            "prompt": "Today, just choose a scene that makes you noticeably tense, want to push forward, want to explain, want to get closer, want to control, or want to move away. Write what happened and what you did first, without rushing to analyze the numbers.",
+            "example": "For example: someone denies the plan in a meeting. Do you want to add facts, prove yourself, and confirm risks first, or do you want to prevent the situation from becoming tense? Remember only one true episode.",
+            "user_input_schema": {
+                "type": "object",
+                "fields": {
+                    "trigger_scene": {
+                        "type": "enum",
+                        "options": [
+                            "work",
+                            "relationship",
+                            "pressure",
+                            "alone",
+                            "other"
+                        ]
+                    },
+                    "trigger_description": {
+                        "type": "text",
+                        "max_length": 280
+                    },
+                    "automatic_reaction": {
+                        "type": "enum",
+                        "options": [
+                            "push",
+                            "withdraw",
+                            "please",
+                            "control",
+                            "explain",
+                            "freeze",
+                            "reframe",
+                            "other"
+                        ]
+                    }
+                }
+            },
+            "analytics_event_key": "enneagram_observation_day1_started",
+            "suggested_next_action": "observe_7_days",
+            "boundary_copy": "This step only collects fragments of reality and does not regard single responses as type proof.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "day": 2,
+            "phase": "core_motivation_observation",
+            "title": "Day 2｜Look at what you are maintaining",
+            "prompt": "Think back to an uncomfortable moment today: Did you care more about being right, recognized, needed, safe, bounded, free, true expression, or calm? Choose only the closest one and write a sentence of evidence.",
+            "example": "For example: When something is not done as expected, are you uncomfortable more like worrying that it is not right, that you are not seen, that the relationship has become cold, or that your space has been compressed?",
+            "user_input_schema": {
+                "type": "object",
+                "fields": {
+                    "core_fear_selection": {
+                        "type": "enum",
+                        "options": [
+                            "correctness",
+                            "recognition",
+                            "being_needed",
+                            "safety",
+                            "boundary",
+                            "freedom",
+                            "authenticity",
+                            "harmony",
+                            "other"
+                        ]
+                    },
+                    "evidence_sentence": {
+                        "type": "text",
+                        "max_length": 280
+                    }
+                }
+            },
+            "analytics_event_key": "enneagram_observation_day2_pattern_logged",
+            "suggested_next_action": "observe_7_days",
+            "boundary_copy": "These are just motivational clues for the day and do not require a final answer to be found in one go.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "day": 3,
+            "phase": "day3_feedback",
+            "title": "Day 3｜Light review of the previous three days",
+            "prompt": "No need to stereotype yourself. Just look back at the first three days: Which type of motivation appears slightly more often in the clues? If it's not clear, choose it unclearly and write down a real scene that you can look back on.",
+            "example": "If you are close-calling, treat Top1 and Top2 as two candidate hypotheses and observe them side by side; this feedback only records evidence and does not require forced selection of one of the two.",
+            "user_input_schema": {
+                "type": "object",
+                "fields": {
+                    "more_like": {
+                        "type": "enum",
+                        "options": [
+                            "top1",
+                            "top2",
+                            "unclear",
+                            "other"
+                        ]
+                    },
+                    "evidence_sentence": {
+                        "type": "text",
+                        "max_length": 280
+                    },
+                    "confidence_self_rating": {
+                        "type": "integer",
+                        "min": 1,
+                        "max": 5
+                    },
+                    "scene_type": {
+                        "type": "enum",
+                        "options": [
+                            "work",
+                            "relationship",
+                            "pressure",
+                            "alone",
+                            "other"
+                        ]
+                    }
+                }
+            },
+            "analytics_event_key": "enneagram_day3_feedback_submitted",
+            "suggested_next_action": "read_top3",
+            "boundary_copy": "Day3 feedback will only be entered into the self-observation record and will not rewrite the measurement scores, primary type candidates, or results page explanations.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "day": 4,
+            "phase": "pressure_reaction_observation",
+            "title": "Day 4｜Look at the first step under pressure",
+            "prompt": "Today, observe the first step after stress arises: fight, explain, retreat, please, transfer, control, numb, find someone to confirm, or something else? Only record the first step and how to recover later.",
+            "example": "For example: When things start to get out of control, do you want to straighten the boundaries first, find out more information, or stabilize the situation first?",
+            "user_input_schema": {
+                "type": "object",
+                "fields": {
+                    "stress_reaction": {
+                        "type": "enum",
+                        "options": [
+                            "fight",
+                            "explain",
+                            "withdraw",
+                            "please",
+                            "distract",
+                            "control",
+                            "numb",
+                            "confirm",
+                            "other"
+                        ]
+                    },
+                    "scene": {
+                        "type": "text",
+                        "max_length": 280
+                    },
+                    "recovered_how": {
+                        "type": "text",
+                        "max_length": 280
+                    }
+                }
+            },
+            "analytics_event_key": "enneagram_observation_day4_cost_logged",
+            "suggested_next_action": "observe_7_days",
+            "boundary_copy": "This is a stress script observation only and does not correspond to developmental stage, medical status, or clinical judgment.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "day": 5,
+            "phase": "pressure_reaction_observation",
+            "title": "Day 5｜Needs in relationship friction",
+            "prompt": "Choose a relationship with minor friction and record whether you would rather be understood, recognized, have boundaries respected, promised, needed, or let the situation settle down. Just write about your own needs and behaviors.",
+            "example": "For example: When the other person’s words make you uncomfortable, what do you want to protect first, your relationship position, dignity, security, boundaries, or your sense of calm?",
+            "user_input_schema": {
+                "type": "object",
+                "fields": {
+                    "relationship_need": {
+                        "type": "enum",
+                        "options": [
+                            "understood",
+                            "recognized",
+                            "boundary_respected",
+                            "reassured",
+                            "needed",
+                            "harmony",
+                            "other"
+                        ]
+                    },
+                    "what_you_did": {
+                        "type": "text",
+                        "max_length": 280
+                    },
+                    "what_you_wanted_to_say": {
+                        "type": "text",
+                        "max_length": 280
+                    }
+                }
+            },
+            "analytics_event_key": "enneagram_observation_day5_relationship_logged",
+            "suggested_next_action": "observe_7_days",
+            "boundary_copy": "What is observed is your interaction needs, not who is right or wrong in the relationship.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "day": 6,
+            "phase": "pressure_reaction_observation",
+            "title": "Day 6｜Look at a low-usage resource",
+            "prompt": "Just look at one less natural resource today: asking for help, saying no, expressing anger, relaxing and enjoying, acknowledging a need, establishing rules, showing initiative, stopping to feel, or taking on conflict.",
+            "example": "It’s not about whether you can do it, but whether it always appears a step later in a real scene. Just write a sentence of evidence.",
+            "user_input_schema": {
+                "type": "object",
+                "fields": {
+                    "blind_spot_observed": {
+                        "type": "enum",
+                        "options": [
+                            "help_seeking",
+                            "refusal",
+                            "anger_expression",
+                            "enjoyment",
+                            "need_admission",
+                            "rule_setting",
+                            "visibility",
+                            "feeling_pause",
+                            "conflict_ownership",
+                            "other"
+                        ]
+                    },
+                    "evidence_sentence": {
+                        "type": "text",
+                        "max_length": 280
+                    }
+                }
+            },
+            "analytics_event_key": "enneagram_observation_day6_work_logged",
+            "suggested_next_action": "read_top3",
+            "boundary_copy": "Blind spot only represents low resource usage, does not represent a defect, nor is it a hard judgment by the system.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "day": 7,
+            "phase": "day7_resonance",
+            "title": "Day 7｜Deep Resonance Voting",
+            "prompt": "Look back on the week and don't ask which number was better, just which explanations are more relevant to your daily motivations. You can choose Top1, Top2, Top3, Others or Still Not Sure, and write a sentence of evidence that can be reviewed.",
+            "example": "If it still wobbles, it's not a failure. You can remain unsure, continue reading the Top3, or choose to retest the same question type or FC144 for supplementary observation if needed.",
+            "user_input_schema": {
+                "type": "object",
+                "fields": {
+                    "final_resonance": {
+                        "type": "enum",
+                        "options": [
+                            "top1",
+                            "top2",
+                            "top3",
+                            "other",
+                            "still_uncertain"
+                        ]
+                    },
+                    "user_confirmed_type": {
+                        "type": "enum",
+                        "options": [
+                            "1",
+                            "2",
+                            "3",
+                            "4",
+                            "5",
+                            "6",
+                            "7",
+                            "8",
+                            "9",
+                            null
+                        ]
+                    },
+                    "wants_fc144": {
+                        "type": "boolean"
+                    },
+                    "wants_retake_same_form": {
+                        "type": "boolean"
+                    },
+                    "user_disagreed_reason": {
+                        "type": "text",
+                        "max_length": 280
+                    }
+                }
+            },
+            "analytics_event_key": "enneagram_day7_feedback_submitted",
+            "suggested_next_action": "observe_7_days",
+            "boundary_copy": "Day7 resonance feedback only records your self-observation evidence and does not trigger a re-judgment by the system, nor will the result be silently rewritten into a new primary type.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        }
+    ]
+}

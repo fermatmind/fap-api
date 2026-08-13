@@ -127,6 +127,7 @@ final class EnneagramReportComposer
         if ($locale === '') {
             $locale = 'zh-CN';
         }
+        $language = $this->normalizeLanguage($locale);
 
         $scoreResult = $this->extractScoreResult($result);
         if ($scoreResult === []) {
@@ -148,6 +149,7 @@ final class EnneagramReportComposer
             'report' => [
                 'schema_version' => 'enneagram.report.v1',
                 'scale_code' => 'ENNEAGRAM',
+                'locale' => $language,
                 'variant' => $variant,
                 'primary_type' => (string) ($projection['primary_type'] ?? ''),
                 'primary_label' => (string) ($projection['primary_label'] ?? ''),
@@ -265,7 +267,7 @@ final class EnneagramReportComposer
         $language = $this->normalizeLanguage($locale);
 
         try {
-            $pack = $this->loadValidatedRegistryPack();
+            $pack = $this->loadValidatedRegistryPack($language);
             $indexes = $this->indexRegistryPack($pack);
             $pages = $this->buildPages($projectionV2, $indexes, $language);
             $modules = [];
@@ -280,6 +282,7 @@ final class EnneagramReportComposer
             return [
                 'schema_version' => self::REPORT_V2_SCHEMA,
                 'scale_code' => 'ENNEAGRAM',
+                'locale' => $language,
                 'form' => [
                     'form_code' => data_get($projectionV2, 'form.form_code'),
                     'form_kind' => data_get($projectionV2, 'form.form_kind'),
@@ -339,6 +342,7 @@ final class EnneagramReportComposer
         foreach (array_keys(self::PAGE_SPECS) as $pageKey) {
             $pages[] = [
                 'page_key' => $pageKey,
+                'locale' => $language,
                 'title' => $this->pageSpec($pageKey, 'title', $language),
                 'purpose' => $this->pageSpec($pageKey, 'purpose', $language),
                 'modules' => [],
@@ -350,6 +354,7 @@ final class EnneagramReportComposer
         return [
             'schema_version' => self::REPORT_V2_SCHEMA,
             'scale_code' => 'ENNEAGRAM',
+            'locale' => $language,
             'form' => [
                 'form_code' => data_get($projectionV2, 'form.form_code'),
                 'form_kind' => data_get($projectionV2, 'form.form_kind'),
@@ -389,9 +394,9 @@ final class EnneagramReportComposer
     /**
      * @return array<string,mixed>
      */
-    private function loadValidatedRegistryPack(): array
+    private function loadValidatedRegistryPack(string $language): array
     {
-        $pack = $this->packLoader->loadRegistryPack();
+        $pack = $this->packLoader->loadRegistryPack(null, $language);
         $errors = $this->registryValidator->validate($pack);
         if ($errors !== []) {
             throw new RuntimeException('ENNEAGRAM registry pack invalid: '.implode(' | ', $errors));
@@ -447,6 +452,7 @@ final class EnneagramReportComposer
 
             $pages[] = [
                 'page_key' => $pageKey,
+                'locale' => $language,
                 'title' => $this->pageSpec($pageKey, 'title', $language),
                 'purpose' => $this->pageSpec($pageKey, 'purpose', $language),
                 'modules' => $modules,
@@ -465,15 +471,15 @@ final class EnneagramReportComposer
      */
     private function buildModule(string $moduleKey, array $projectionV2, array $indexes, string $language): array
     {
-        return match ($moduleKey) {
+        $module = match ($moduleKey) {
             'instant_summary' => $this->buildInstantSummaryModule($projectionV2, $indexes, $language),
             'top3_cards' => $this->buildTop3CardsModule($projectionV2, $indexes),
-            'all9_profile' => $this->buildAll9ProfileModule($projectionV2),
-            'confidence_band_card' => $this->buildConfidenceBandModule($projectionV2, $indexes),
-            'dominance_gap_card' => $this->buildDominanceGapModule($projectionV2, $indexes),
+            'all9_profile' => $this->buildAll9ProfileModule($projectionV2, $language),
+            'confidence_band_card' => $this->buildConfidenceBandModule($projectionV2, $indexes, $language),
+            'dominance_gap_card' => $this->buildDominanceGapModule($projectionV2, $indexes, $language),
             'close_call_card' => $this->buildCloseCallModule($projectionV2, $indexes),
             'blind_spot_card' => $this->buildBlindSpotModule($projectionV2, $indexes, 'blind_spot_card'),
-            'center_summary' => $this->buildCenterSummaryModule($projectionV2, $indexes),
+            'center_summary' => $this->buildCenterSummaryModule($projectionV2, $indexes, $language),
             'stance_summary' => $this->buildUnavailableShapeModule($projectionV2, $indexes, 'stance_summary', 'summary_card', 'dynamics.stance_scores'),
             'harmonic_summary' => $this->buildUnavailableShapeModule($projectionV2, $indexes, 'harmonic_summary', 'summary_card', 'dynamics.harmonic_scores'),
             'wing_hint_visual' => $this->buildWingHintModule($projectionV2, $indexes),
@@ -578,6 +584,12 @@ final class EnneagramReportComposer
             'technical_note_link' => $this->buildTechnicalNoteModule($projectionV2, $indexes),
             default => $this->buildPlaceholderModule($projectionV2, $indexes, $moduleKey, 'placeholder_card', 'module_builder_not_implemented'),
         };
+
+        $content = is_array($module['content'] ?? null) ? $module['content'] : [];
+        $content['locale'] = $language;
+        $module['content'] = $content;
+
+        return $module;
     }
 
     /**
@@ -710,7 +722,7 @@ final class EnneagramReportComposer
      * @param  array<string,mixed>  $projectionV2
      * @return array<string,mixed>
      */
-    private function buildAll9ProfileModule(array $projectionV2): array
+    private function buildAll9ProfileModule(array $projectionV2, string $language): array
     {
         return $this->module(
             'all9_profile',
@@ -718,9 +730,11 @@ final class EnneagramReportComposer
             'visible',
             'all',
             [
-                'title' => '九型全谱轮廓',
-                'score_axis_label' => '答题轮廓内的相对线索',
-                'boundary_note' => '分数只表示本次答题中各类型线索的相对强弱，不是常模排名、诊断标签、能力评价或固定人格定论。',
+                'title' => $language === 'en' ? 'Nine-type Profile' : '九型全谱轮廓',
+                'score_axis_label' => $language === 'en' ? 'Relative signals within this response profile' : '答题轮廓内的相对线索',
+                'boundary_note' => $language === 'en'
+                    ? 'Scores show only the relative strength of type-related signals in this response. They are not norm rankings, diagnoses, ability ratings, or fixed personality conclusions.'
+                    : '分数只表示本次答题中各类型线索的相对强弱，不是常模排名、诊断标签、能力评价或固定人格定论。',
                 'not_for' => ['norm_comparison', 'diagnosis', 'ability_rating', 'personality_verdict'],
                 'items' => array_values((array) data_get($projectionV2, 'scores.all9_profile', [])),
             ],
@@ -736,7 +750,7 @@ final class EnneagramReportComposer
      * @param  array<string,mixed>  $indexes
      * @return array<string,mixed>
      */
-    private function buildConfidenceBandModule(array $projectionV2, array $indexes): array
+    private function buildConfidenceBandModule(array $projectionV2, array $indexes, string $language): array
     {
         return $this->module(
             'confidence_band_card',
@@ -744,21 +758,25 @@ final class EnneagramReportComposer
             'visible',
             'all',
             [
-                'title' => '解释稳定性',
-                'subtitle' => '这张卡说明本次结果适合用多确定的语气阅读。',
+                'title' => $language === 'en' ? 'Interpretation Stability' : '解释稳定性',
+                'subtitle' => $language === 'en' ? 'How cautiously to read this result.' : '这张卡说明本次结果适合用多确定的语气阅读。',
                 'confidence_level' => data_get($projectionV2, 'classification.confidence_level'),
                 'confidence_label' => data_get($projectionV2, 'classification.confidence_label'),
                 'interpretation_scope' => data_get($projectionV2, 'classification.interpretation_scope'),
                 'interpretation_reason' => data_get($projectionV2, 'classification.interpretation_reason'),
-                'reader_guidance' => '这里的稳定性来自本次答题轮廓的清晰度、第一与第二候选类型的距离、作答质量信号和解释范围规则。它不是测试准确率、临床效度、人格定论或未来行为预测。',
-                'boundary_note' => '高稳定只表示当前答题中主型线索更集中；中等稳定表示可以先阅读主型，但需要用实际情境核对；close_call、diffuse 与 low_quality 表示页面会降低确定语气，并引导辨析、观察或重测。',
+                'reader_guidance' => $language === 'en'
+                    ? 'This stability level reflects the clarity of this response profile, the distance between the first two candidates, response-quality signals, and interpretation rules. It is not a measure of test accuracy or clinical validity, a personality verdict, or a prediction of future behavior.'
+                    : '这里的稳定性来自本次答题轮廓的清晰度、第一与第二候选类型的距离、作答质量信号和解释范围规则。它不是测试准确率、临床效度、人格定论或未来行为预测。',
+                'boundary_note' => $language === 'en'
+                    ? 'High stability means only that the leading type signals are more concentrated in this response. Medium stability calls for checking the leading interpretation against real situations. Close-call, diffuse, and low-quality states use more cautious language and point to comparison, observation, or retesting.'
+                    : '高稳定只表示当前答题中主型线索更集中；中等稳定表示可以先阅读主型，但需要用实际情境核对；close_call、diffuse 与 low_quality 表示页面会降低确定语气，并引导辨析、观察或重测。',
                 'not_for' => ['accuracy_claim', 'external_validity_claim', 'diagnosis', 'personality_verdict', 'prediction'],
                 'level_guide' => [
-                    'high_confidence' => '主型线索相对集中，可以把结果作为较稳定的解释假设阅读，但仍需结合真实情境验证。',
-                    'medium_confidence' => '主型线索可读，但相邻候选或情境差异仍可能影响解释，应把结果当作需要核对的工作假设。',
-                    'close_call' => '两个或多个类型线索接近，重点应放在差异辨析，而不是急着固定一个号码。',
-                    'diffuse' => '多种类型线索分散，结果更适合作为观察清单，不适合强行给出单一身份结论。',
-                    'low_quality' => '作答质量信号不足时，页面只保留边界解释和重测建议，不应解读为人格判断。',
+                    'high_confidence' => $language === 'en' ? 'The leading type signals are relatively concentrated. Read the result as a reasonably stable hypothesis, then check it against real situations.' : '主型线索相对集中，可以把结果作为较稳定的解释假设阅读，但仍需结合真实情境验证。',
+                    'medium_confidence' => $language === 'en' ? 'The leading type is readable, but nearby candidates or situational differences may affect the interpretation. Treat it as a working hypothesis to verify.' : '主型线索可读，但相邻候选或情境差异仍可能影响解释，应把结果当作需要核对的工作假设。',
+                    'close_call' => $language === 'en' ? 'Two or more type signals are close. Compare their differences instead of rushing to fix one number as your identity.' : '两个或多个类型线索接近，重点应放在差异辨析，而不是急着固定一个号码。',
+                    'diffuse' => $language === 'en' ? 'Signals are spread across several types. Use the result as an observation list rather than forcing a single identity conclusion.' : '多种类型线索分散，结果更适合作为观察清单，不适合强行给出单一身份结论。',
+                    'low_quality' => $language === 'en' ? 'When response-quality signals are insufficient, the report retains only interpretation boundaries and retest guidance. Do not read it as a personality judgment.' : '作答质量信号不足时，页面只保留边界解释和重测建议，不应解读为人格判断。',
                 ],
                 'quality_level' => data_get($projectionV2, 'classification.quality_level'),
                 'low_quality_status' => data_get($projectionV2, 'classification.low_quality_status'),
@@ -790,7 +808,7 @@ final class EnneagramReportComposer
      * @param  array<string,mixed>  $indexes
      * @return array<string,mixed>
      */
-    private function buildDominanceGapModule(array $projectionV2, array $indexes): array
+    private function buildDominanceGapModule(array $projectionV2, array $indexes, string $language): array
     {
         return $this->module(
             'dominance_gap_card',
@@ -798,19 +816,19 @@ final class EnneagramReportComposer
             'visible',
             'all',
             [
-                'title' => '主次线索差距',
-                'subtitle' => '只比较本次同一表单内 Top1 与 Top2 的相对距离。',
+                'title' => $language === 'en' ? 'Leading-candidate Gap' : '主次线索差距',
+                'subtitle' => $language === 'en' ? 'Compares only the relative distance between the first two candidates within this form.' : '只比较本次同一表单内 Top1 与 Top2 的相对距离。',
                 'dominance_gap_abs' => data_get($projectionV2, 'classification.dominance_gap_abs'),
                 'dominance_gap_pct' => data_get($projectionV2, 'classification.dominance_gap_pct'),
                 'normalized_gap' => data_get($projectionV2, 'classification.dominance.normalized_gap'),
                 'profile_entropy' => data_get($projectionV2, 'classification.dominance.profile_entropy'),
-                'score_space_note' => '这个差距只在当前 form、当前计分空间内有意义。E105 与 FC144 的题型、计分单位和候选生成方式不同，不能把 gap 当成跨表单、跨人群或跨时间的统一尺子。',
-                'boundary_note' => 'gap 较大时，页面可以用更集中的主型解释；gap 较小时，页面会转向 close-call、diffuse 或观察建议。它不是测量误差范围、统计置信区间、常模排名、外部效度证明或人格确定性。',
+                'score_space_note' => $language === 'en' ? 'This gap is meaningful only within the current form and scoring space. E105 and FC144 use different response tasks, scoring units, and candidate-generation rules, so the gap is not a common scale across forms, populations, or time.' : '这个差距只在当前 form、当前计分空间内有意义。E105 与 FC144 的题型、计分单位和候选生成方式不同，不能把 gap 当成跨表单、跨人群或跨时间的统一尺子。',
+                'boundary_note' => $language === 'en' ? 'A larger gap supports a more focused leading-type interpretation; a smaller gap shifts the report toward close-call, diffuse, or observation guidance. It is not a measurement-error range, confidence interval, norm ranking, proof of validity, or measure of personality certainty.' : 'gap 较大时，页面可以用更集中的主型解释；gap 较小时，页面会转向 close-call、diffuse 或观察建议。它不是测量误差范围、统计置信区间、常模排名、外部效度证明或人格确定性。',
                 'metric_guide' => [
-                    'dominance_gap_abs' => 'Top1 与 Top2 在当前 score space 中的原始差距，用来判断主次线索是否拉开。',
-                    'dominance_gap_pct' => '把主次差距换算成百分比读法，便于页面选择解释语气；不是准确率。',
-                    'normalized_gap' => '相对分布形状的标准化差距，只用于内部解释规则。',
-                    'profile_entropy' => '九个类型线索的分散程度；越分散越需要降低单一主型结论的确定语气。',
+                    'dominance_gap_abs' => $language === 'en' ? 'The raw distance between the first two candidates in the current scoring space.' : 'Top1 与 Top2 在当前 score space 中的原始差距，用来判断主次线索是否拉开。',
+                    'dominance_gap_pct' => $language === 'en' ? 'A percentage view used to select the report’s level of caution; it is not an accuracy score.' : '把主次差距换算成百分比读法，便于页面选择解释语气；不是准确率。',
+                    'normalized_gap' => $language === 'en' ? 'A standardized distance based on the profile shape, used only by interpretation rules.' : '相对分布形状的标准化差距，只用于内部解释规则。',
+                    'profile_entropy' => $language === 'en' ? 'How dispersed the nine type signals are; greater dispersion calls for less certainty about a single leading type.' : '九个类型线索的分散程度；越分散越需要降低单一主型结论的确定语气。',
                 ],
                 'not_for' => ['cross_form_comparison', 'norm_ranking', 'measurement_error_interval', 'validity_proof', 'personality_verdict'],
                 'unavailable' => data_get($projectionV2, '_meta.unavailable.classification', []),
@@ -922,7 +940,7 @@ final class EnneagramReportComposer
      * @param  array<string,mixed>  $indexes
      * @return array<string,mixed>
      */
-    private function buildCenterSummaryModule(array $projectionV2, array $indexes): array
+    private function buildCenterSummaryModule(array $projectionV2, array $indexes, string $language): array
     {
         $centerEntries = array_values(array_filter(
             (array) ($indexes['group_entries'] ?? []),
@@ -951,8 +969,8 @@ final class EnneagramReportComposer
                 'status' => 'unavailable',
                 'interpretation_scope' => 'unavailable',
                 'reason' => data_get($projectionV2, '_meta.unavailable.dynamics.center_scores.reason'),
-                'availability_note' => '当前公开结果页不把作答轮廓换算为中心分数或中心判定；以下内容只保留理论边界和观察问题。',
-                'boundary_note' => '中心组来自九型理论语言，可用于整理注意力线索，但不能作为诊断、健康层级、能力评价或固定人格分类。',
+                'availability_note' => $language === 'en' ? 'The public report does not convert this response profile into center scores or a center classification. The content below retains only theory boundaries and observation questions.' : '当前公开结果页不把作答轮廓换算为中心分数或中心判定；以下内容只保留理论边界和观察问题。',
+                'boundary_note' => $language === 'en' ? 'The center grouping comes from Enneagram theory and can help organize attention patterns. It is not a diagnosis, health-level judgment, ability rating, or fixed personality classification.' : '中心组来自九型理论语言，可用于整理注意力线索，但不能作为诊断、健康层级、能力评价或固定人格分类。',
                 'not_for' => ['center_classification', 'diagnosis', 'health_level_judgement', 'ability_rating'],
                 'groups' => $groups,
             ],

@@ -1,0 +1,76 @@
+{
+    "id": "enneagram_sample_report_registry_v1_en",
+    "schema_version": "fap.enneagram.sample_report_registry.v1",
+    "registry_key": "enneagram_sample_report_registry",
+    "locale": "en",
+    "form_variant": "all",
+    "context_mode": "individual",
+    "status": "published",
+    "version": "v1",
+    "release_id": "enneagram_registry_pack_v1_p0_ready_2026_04_en",
+    "content_release_hash": "sha256:pending_loader_resolution",
+    "content_snapshot_hash": null,
+    "content_maturity": "p0_ready",
+    "evidence_level": "descriptive",
+    "preview_enabled": true,
+    "fallback_policy": "optional",
+    "entries": {
+        "clear_sample": {
+            "sample_key": "clear_sample",
+            "sample_type": "clear",
+            "form_code": "enneagram_likert_105",
+            "interpretation_scope": "clear",
+            "projection_fixture_id": "enneagram_clear_sample_fixture",
+            "report_snapshot_ref": null,
+            "public_url_slug": "enneagram-clear-sample",
+            "top_types": [
+                "8",
+                "3",
+                "1"
+            ],
+            "short_summary": "The reading example shows how the results page simultaneously presents Top3, method boundaries, and observable tone when the primary candidate is relatively clear; it is not a norm, a standard answer, or a conclusion template that users should apply.",
+            "page_1_preview": "This reading example identifies No. 8 as the primary candidate, and suggests that No. 3 and No. 1 may also explain part of the results style: focusing on dominance as well as results and quality. Readers should focus on how the page retains the top 3 leads, rather than interpreting the sample numbers as a more mature, healthy, or ideal combination of types.",
+            "method_boundary": "The example only illustrates how a clear results page is organized: how to put together primary candidates, adjacent explanations, and observation reminders. It does not provide scoring reference, personality conclusion, recruitment screening basis, clinical judgment or cross-form numerical comparison, nor can it replace the user's own report payload.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        "close_call_sample": {
+            "sample_key": "close_call_sample",
+            "sample_type": "close_call",
+            "form_code": "enneagram_likert_105",
+            "interpretation_scope": "close_call",
+            "projection_fixture_id": "enneagram_close_call_sample_fixture",
+            "report_snapshot_ref": null,
+            "public_url_slug": "enneagram-close-call-sample",
+            "top_types": [
+                "4",
+                "5",
+                "9"
+            ],
+            "short_summary": "The reading example shows how the results page delivers Top1 and Top2 similarities, key differences, and follow-up observation tasks side-by-side during close-call; it is not a forced-choice answer key or a change rule.",
+            "page_1_preview": "This reading sample reads No. 4 and No. 5 side by side: both may be adducted on the surface, but it is necessary to continue to observe which type of clues is more stable in terms of emotional meaning and cognitive space. The focus of the example is how close-call reduces the tone of the assertion, rather than telling the reader that they must choose a certain number when the scores are similar.",
+            "method_boundary": "The close-call example only shows how uncertainty is converted into pair parsing and observation tasks. It does not compare which of different forms is more accurate, does not interpret the Top1/Top2 gap as diagnostic evidence, and does not allow sample conclusions to overwrite the Top3, resonance or quality status of the real attempt.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        "diffuse_sample": {
+            "sample_key": "diffuse_sample",
+            "sample_type": "diffuse",
+            "form_code": "enneagram_likert_105",
+            "interpretation_scope": "diffuse",
+            "projection_fixture_id": "enneagram_diffuse_sample_fixture",
+            "report_snapshot_ref": null,
+            "public_url_slug": "enneagram-diffuse-sample",
+            "top_types": [
+                "9",
+                "6",
+                "2"
+            ],
+            "short_summary": "The reading sample shows how the results page weakens the single-number tone when the distribution is dispersed, and shifts the reading focus back to Top3, three centers, answer quality, and observable tasks; it is not a corrected answer for low-quality answers.",
+            "page_1_preview": "A more reliable way to read this sample reading is to read 9, 6, and 2 together and observe how the clues of relationship, security, and tranquility appear together. The examples are deliberately left vague, reminding the reader to examine the situation, response status, and recurring behavioral cues first, rather than rushing to write a number into its final type.",
+            "method_boundary": "The diffuse example only illustrates how the diffuse results page should control the intensity of interpretation: Prioritize Structure, Top3, and Observation tasks. It is not intended for use in diagnosis, career decisions, mental health judgments, or quality remediation, nor does it demonstrate that retesting will automatically result in a more realistic phenotype.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        }
+    }
+}

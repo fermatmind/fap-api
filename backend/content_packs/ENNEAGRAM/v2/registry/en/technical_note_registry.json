@@ -1,0 +1,160 @@
+{
+    "id": "enneagram_technical_note_registry_v1_en",
+    "schema_version": "fap.enneagram.technical_note_registry.v1",
+    "registry_key": "enneagram_technical_note_registry",
+    "locale": "en",
+    "form_variant": "all",
+    "context_mode": "individual",
+    "status": "published",
+    "version": "v1",
+    "release_id": "enneagram_registry_pack_v1_p0_ready_2026_04_en",
+    "content_release_hash": "sha256:pending_loader_resolution",
+    "content_snapshot_hash": null,
+    "content_maturity": "p0_ready",
+    "evidence_level": "descriptive",
+    "preview_enabled": true,
+    "fallback_policy": "required",
+    "entries": [
+        {
+            "section_key": "test_goal",
+            "title": "Test target",
+            "body": "The goal of the FermatMind Enneagram Test is not to compress users into an immutable number, nor to claim to have completed clinical-grade personality measurement; it provides a set of dynamic structure descriptions that are readable, observable, and feedbackable. The system gives priority to delivering primary candidates, Top3, full spectrum, close-call and method boundaries, and then brings users back to reality for observation. Technical Note is used to explain how these page modules are generated from answer signals, interpretation rules and operational indicators, and which conclusions can only be used as theoretical explanations or product hypotheses.",
+            "metric_refs": [],
+            "data_status": "available",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "section_key": "e105_fc144_forms",
+            "title": "E105 and FC144 two forms",
+            "body": "E105 is the standard version entry, which uses Likert intensity to establish the full spectrum and Top3; FC144 is the in-depth analysis form after close-call, and uses forced-choice to help users choose between similar candidates. Both belong to the same ENNEAGRAM model, but have different question types, score sources, and applicable questions. The Technical Note would put them in the same level of evidence to explain: FC144 is not a higher authoritative version, nor is it intended to be a primary candidate to cover E105.",
+            "metric_refs": [],
+            "data_status": "available",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "section_key": "score_space_boundary",
+            "title": "Score space boundary",
+            "body": "The score for E105 is derived from Likert intensity, and the score for FC144 is derived from relative preference of pairwise choice. They are both projected into the same result shell, but do not default into the same numerical comparison semantics. This is why same model is not equal to same score space.",
+            "metric_refs": [
+                "E105_FC144_score_space_boundary"
+            ],
+            "data_status": "available",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "section_key": "dominance_gap",
+            "title": "Dominance Gap",
+            "body": "Dominance Gap describes the relative gap between Top1 and Top2 in the same form and the same score space, and is used to help the system choose a conservative tone of clear, close-call or diffuse. E105 is different from the question types and scoring units of FC144. The gap cannot be used as a unified ruler across forms, groups, or time; nor is it a measurement error range, statistical confidence interval, norm ranking, external validity proof, or personality certainty.",
+            "metric_refs": [
+                "top_gap_distribution"
+            ],
+            "data_status": "available",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "section_key": "confidence_band",
+            "title": "Confidence Band",
+            "body": "The current system will output clear, close_call, diffuse, low_quality and other explanation ranges. They control the tone of the results page, the visibility of modules, and recommended actions, rather than claiming that a certain number has been absolutely proven. clear means that the explanations of the same form this time are more concentrated; close_call means that they need to be read side by side; diffuse means that the tone of a single number needs to be reduced; low_quality means that the answer signal is not enough to support strong explanations.",
+            "metric_refs": [
+                "confidence_band_distribution"
+            ],
+            "data_status": "available",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "section_key": "close_call",
+            "title": "Close-call",
+            "body": "When Top1 and Top2 are close, the system will not pretend to be more certain than the data, but will enter the task of pair analysis and 7-day observation. close-call is a ambiguity management bit, not a judgment modification mechanism.",
+            "metric_refs": [
+                "close_call_rate",
+                "misidentification_matrix"
+            ],
+            "data_status": "collecting",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "section_key": "diffuse",
+            "title": "Diffuse",
+            "body": "Diffuse refers to the simultaneous emergence of multiple type clues in the profile shape, and Top1 and adjacent candidates are not enough to support a strong primary type narrative. It is a state of reduced certainty in the scope of interpretation, not failure, ineffectiveness, confusion, or low-quality responses. The system will shift the reading focus from a single number to the Top 3 common themes, three-center distribution, evidence contrary to recent life, and repeatable observation tasks; only if these clues continue to appear in real situations are they suitable to continue to narrow the interpretation.",
+            "metric_refs": [
+                "profile_entropy_distribution"
+            ],
+            "data_status": "available",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "section_key": "low_quality",
+            "title": "Low-quality",
+            "body": "When a true quality signal triggers, the system enters the low_quality boundary. The function of low_quality in P0 is to narrow the tone and recommend retesting the same form, rather than labeling users unreliable.",
+            "metric_refs": [
+                "low_quality_rate",
+                "low_quality_close_call_relation"
+            ],
+            "data_status": "collecting",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "section_key": "retake_stability",
+            "title": "Retake Stability",
+            "body": "Test-retest stability is an indicator that will be tracked in subsequent Technical Notes. P0 first discloses the definition and collection plan, and does not commit to specific stability rate figures in advance. Stability evidence needs to distinguish between retests of the same form, cross-form agreement, short-term status fluctuations, and user feedback; when the sample, time interval, and answer quality are insufficient, the page will not interpret a retest difference as a personality change.",
+            "metric_refs": [
+                "retake_consistency_index",
+                "top1_stability",
+                "top3_stability"
+            ],
+            "data_status": "planned",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "section_key": "e105_fc144_agreement",
+            "title": "E105 / FC144 Agreement",
+            "body": "The agreement between E105 and FC144 is used to evaluate the overlap between the two question types on Top1 or Top3, rather than proving that the scores can be directly compared between the two. P0 first defines indicators and collection directions, and then evaluates whether to disclose specific indicators based on samples. Agreement can only show the degree of agreement between the two question types in the ranking of candidates, and cannot independently prove the external validity, clinical validity or career prediction ability of the Enneagram model.",
+            "metric_refs": [
+                "E105_FC144_agreement",
+                "close_call_conversion"
+            ],
+            "data_status": "planned",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "section_key": "resonance_feedback",
+            "title": "Resonance Feedback",
+            "body": "The user's Day7 resonance feedback and user_confirmed_type will be entered into the history as self-observation evidence for research and content calibration, but will not silently overwrite the primary_candidate. User feedback is an observation layer, not a re-judgment by the system; it can prompt which narratives need to be downgraded, add counterexamples, or rewrite expressions, but it cannot directly equate resonance with measurement accuracy.",
+            "metric_refs": [
+                "resonance_feedback",
+                "observation_completion_rate"
+            ],
+            "data_status": "collecting",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "section_key": "method_boundaries",
+            "title": "method boundaries",
+            "body": "This test is used for understanding personality patterns and self-observation, and is not used for clinical diagnosis, recruitment screening, treatment recommendations, hard judgments on health levels, or absolute personality characterization. Wing, arrow, subtype and development stage languages ​​are only reserved as interpretation layers or future modules in the current version, and no hard judgment will be made. Technical Note's evidence levels are by default divided into: launched product rules, operational indicators being collected, planned stability indicators, and an explanation framework that is only a theoretical background; these levels cannot be mixed into the same certainty.",
+            "metric_refs": [],
+            "data_status": "available",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "section_key": "privacy",
+            "title": "Privacy and data",
+            "body": "Public instructions only use aggregated method metrics and do not expose individual answer payloads, private observation text, or feedback records that can identify individual users. The share page does not display observation private content by default, and user_confirmed_type will not be regarded as the final type of the system. User feedback, sample content, and Technical Note indicators should all comply with the principles of minimum necessity, aggregate display, and traceability; if an indicator is still in the planned or collecting state, the page will only explain the definition and collection direction, and will not display forged numbers.",
+            "metric_refs": [],
+            "data_status": "available",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        }
+    ]
+}

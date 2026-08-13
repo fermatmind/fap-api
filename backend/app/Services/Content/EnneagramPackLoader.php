@@ -60,14 +60,24 @@ final class EnneagramPackLoader
         return $this->compiledDir($version).DIRECTORY_SEPARATOR.ltrim($file, DIRECTORY_SEPARATOR);
     }
 
-    public function registryRoot(?string $version = null): string
+    public function registryRoot(?string $version = null, ?string $locale = null): string
     {
-        return $this->registryReleaseResolver->runtimeRegistryRoot($version);
+        $runtimeRoot = $this->registryReleaseResolver->runtimeRegistryRoot($version);
+        if ($locale === null || trim($locale) === '' || $this->normalizeLocale($locale) !== 'en') {
+            return $runtimeRoot;
+        }
+
+        $activeEnglishRoot = $runtimeRoot.DIRECTORY_SEPARATOR.'en';
+        if (is_file($activeEnglishRoot.DIRECTORY_SEPARATOR.'manifest.json')) {
+            return $activeEnglishRoot;
+        }
+
+        return $this->registryReleaseResolver->repoFallbackRegistryRoot($version).DIRECTORY_SEPARATOR.'en';
     }
 
-    public function registryPath(string $file, ?string $version = null): string
+    public function registryPath(string $file, ?string $version = null, ?string $locale = null): string
     {
-        return $this->registryRoot($version).DIRECTORY_SEPARATOR.ltrim($file, DIRECTORY_SEPARATOR);
+        return $this->registryRoot($version, $locale).DIRECTORY_SEPARATOR.ltrim($file, DIRECTORY_SEPARATOR);
     }
 
     public function normalizeLocale(string $locale): string
@@ -176,11 +186,11 @@ final class EnneagramPackLoader
     /**
      * @return array<string,mixed>
      */
-    public function loadRegistryManifest(?string $version = null): array
+    public function loadRegistryManifest(?string $version = null, ?string $locale = null): array
     {
-        $decoded = $this->readRegistryJson('manifest.json', $version);
+        $decoded = $this->readRegistryJson('manifest.json', $version, $locale);
         if (! is_array($decoded)) {
-            throw new \RuntimeException('ENNEAGRAM registry manifest missing or invalid: '.$this->registryPath('manifest.json', $version));
+            throw new \RuntimeException('ENNEAGRAM registry manifest missing or invalid: '.$this->registryPath('manifest.json', $version, $locale));
         }
 
         return $decoded;
@@ -189,22 +199,22 @@ final class EnneagramPackLoader
     /**
      * @return array<string,mixed>
      */
-    public function loadRegistryPack(?string $version = null): array
+    public function loadRegistryPack(?string $version = null, ?string $locale = null): array
     {
-        $manifest = $this->loadRegistryManifest($version);
+        $manifest = $this->loadRegistryManifest($version, $locale);
         $registries = [];
         foreach (self::REGISTRY_FILE_MAP as $registryKey => $file) {
-            $decoded = $this->readRegistryJson($file, $version);
+            $decoded = $this->readRegistryJson($file, $version, $locale);
             if (! is_array($decoded)) {
-                throw new \RuntimeException("ENNEAGRAM registry file missing or invalid for {$registryKey}: ".$this->registryPath($file, $version));
+                throw new \RuntimeException("ENNEAGRAM registry file missing or invalid for {$registryKey}: ".$this->registryPath($file, $version, $locale));
             }
             $registries[$registryKey] = $decoded;
         }
 
-        $releaseHash = $this->resolveRegistryReleaseHash($version);
+        $releaseHash = $this->resolveRegistryReleaseHash($version, $locale);
 
         return [
-            'root' => $this->registryRoot($version),
+            'root' => $this->registryRoot($version, $locale),
             'manifest' => $manifest,
             'release_hash' => $releaseHash,
             'registries' => $registries,
@@ -225,19 +235,19 @@ final class EnneagramPackLoader
     /**
      * @return array<string,mixed>|null
      */
-    public function readRegistryJson(string $file, ?string $version = null): ?array
+    public function readRegistryJson(string $file, ?string $version = null, ?string $locale = null): ?array
     {
-        return $this->readJson($this->registryPath($file, $version));
+        return $this->readJson($this->registryPath($file, $version, $locale));
     }
 
-    public function resolveRegistryReleaseHash(?string $version = null): string
+    public function resolveRegistryReleaseHash(?string $version = null, ?string $locale = null): string
     {
         $files = array_merge(['manifest.json'], array_values(self::REGISTRY_FILE_MAP));
         sort($files);
 
         $rows = [];
         foreach ($files as $file) {
-            $path = $this->registryPath($file, $version);
+            $path = $this->registryPath($file, $version, $locale);
             if (! is_file($path)) {
                 return '';
             }

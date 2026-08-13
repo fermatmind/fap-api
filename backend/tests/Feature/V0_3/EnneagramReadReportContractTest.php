@@ -22,11 +22,13 @@ final class EnneagramReadReportContractTest extends TestCase
     public function test_enneagram_result_report_and_access_expose_formal_public_projection(
         string $formCode,
         int $questionCount,
+        string $attemptLocale,
+        string $expectedLocale,
         string $anonId
     ): void {
         (new ScaleRegistrySeeder)->run();
 
-        [$attemptId, $anonId, $token] = $this->createSubmittedEnneagramAttempt($anonId, $formCode);
+        [$attemptId, $anonId, $token] = $this->createSubmittedEnneagramAttempt($anonId, $formCode, $attemptLocale);
         $stored = Result::query()->where('attempt_id', $attemptId)->firstOrFail();
         $storedComputedAt = (string) data_get($stored->result_json, 'computed_at');
 
@@ -44,8 +46,10 @@ final class EnneagramReadReportContractTest extends TestCase
         $result->assertJsonPath('enneagram_form_v1.question_count', $questionCount);
         $result->assertJsonPath('enneagram_public_projection_v1.schema_version', 'enneagram.public_projection.v1');
         $result->assertJsonPath('enneagram_public_projection_v1.scale_code', 'ENNEAGRAM');
+        $result->assertJsonPath('enneagram_public_projection_v1.locale', $expectedLocale);
         $result->assertJsonPath('enneagram_public_projection_v2.schema_version', 'enneagram.public_projection.v2');
         $result->assertJsonPath('enneagram_public_projection_v2.scale_code', 'ENNEAGRAM');
+        $result->assertJsonPath('enneagram_public_projection_v2.locale', $expectedLocale);
         $result->assertJsonPath('enneagram_public_projection_v2.form.form_code', $formCode);
         $result->assertJsonPath('enneagram_public_projection_v2.form.question_count', $questionCount);
         $result->assertJsonPath('enneagram_public_projection_v2.methodology.cross_form_comparable', false);
@@ -89,12 +93,17 @@ final class EnneagramReadReportContractTest extends TestCase
         $report->assertJsonPath('locked', false);
         $report->assertJsonPath('access_level', 'full');
         $report->assertJsonPath('variant', 'full');
+        $report->assertJsonPath('locale', $expectedLocale);
         $report->assertJsonPath('report.schema_version', 'enneagram.report.v1');
         $report->assertJsonPath('report.scale_code', 'ENNEAGRAM');
+        $report->assertJsonPath('report.locale', $expectedLocale);
         $report->assertJsonPath('enneagram_form_v1.form_code', $formCode);
         $report->assertJsonPath('enneagram_public_projection_v1.schema_version', 'enneagram.public_projection.v1');
+        $report->assertJsonPath('enneagram_public_projection_v1.locale', $expectedLocale);
         $report->assertJsonPath('enneagram_public_projection_v2.schema_version', 'enneagram.public_projection.v2');
+        $report->assertJsonPath('enneagram_public_projection_v2.locale', $expectedLocale);
         $report->assertJsonPath('enneagram_report_v2.schema_version', 'enneagram.report.v2');
+        $report->assertJsonPath('enneagram_report_v2.locale', $expectedLocale);
         $report->assertJsonCount(5, 'enneagram_report_v2.pages');
         $report->assertJsonPath('report._meta.enneagram_public_projection_v2.schema_version', 'enneagram.public_projection.v2');
         $report->assertJsonPath('report._meta.enneagram_report_v2.schema_version', 'enneagram.report.v2');
@@ -117,6 +126,11 @@ final class EnneagramReadReportContractTest extends TestCase
             $report->json('enneagram_public_projection_v2.methodology.compare_compatibility_group')
         );
         $this->assertNotSame('', (string) $report->json('enneagram_report_v2.registry.registry_release_hash'));
+        $this->assertReportLocaleContract((array) $report->json('enneagram_report_v2'), $expectedLocale);
+        $this->assertSame(
+            (string) data_get($report->json('report.ranked_types'), '0.type_code'),
+            (string) $report->json('report.primary_type')
+        );
         $this->assertDatabaseHas('events', [
             'event_code' => 'enneagram_report_viewed',
             'attempt_id' => $attemptId,
@@ -166,24 +180,26 @@ final class EnneagramReadReportContractTest extends TestCase
     }
 
     /**
-     * @return iterable<string,array{string,int,string}>
+     * @return iterable<string,array{string,int,string,string,string}>
      */
     public static function enneagramFormsProvider(): iterable
     {
-        yield '105 likert' => ['enneagram_likert_105', 105, 'enneagram_read_report_105'];
-        yield '144 forced choice' => ['enneagram_forced_choice_144', 144, 'enneagram_read_report_144'];
+        yield '105 likert zh' => ['enneagram_likert_105', 105, 'zh-CN', 'zh', 'enneagram_read_report_105_zh'];
+        yield '105 likert en' => ['enneagram_likert_105', 105, 'en', 'en', 'enneagram_read_report_105_en'];
+        yield '144 forced choice zh' => ['enneagram_forced_choice_144', 144, 'zh-CN', 'zh', 'enneagram_read_report_144_zh'];
+        yield '144 forced choice en' => ['enneagram_forced_choice_144', 144, 'en', 'en', 'enneagram_read_report_144_en'];
     }
 
     /**
      * @return array{string,string,string}
      */
-    private function createSubmittedEnneagramAttempt(string $anonId, string $formCode): array
+    private function createSubmittedEnneagramAttempt(string $anonId, string $formCode, string $locale = 'zh-CN'): array
     {
         $token = $this->issueAnonToken($anonId);
         $start = $this->withHeaders(['X-Anon-Id' => $anonId])->postJson('/api/v0.3/attempts/start', [
             'scale_code' => 'ENNEAGRAM',
             'anon_id' => $anonId,
-            'locale' => 'zh-CN',
+            'locale' => $locale,
             'region' => 'CN_MAINLAND',
             'form_code' => $formCode,
         ]);
@@ -296,5 +312,50 @@ final class EnneagramReadReportContractTest extends TestCase
             ['clear', 'close_call', 'diffuse', 'low_quality']
         );
         $this->assertNotSame('', (string) data_get($projection, 'classification.interpretation_reason'));
+    }
+
+    /**
+     * @param  array<string,mixed>  $reportV2
+     */
+    private function assertReportLocaleContract(array $reportV2, string $expectedLocale): void
+    {
+        $this->assertSame($expectedLocale, (string) ($reportV2['locale'] ?? ''));
+
+        $pages = is_array($reportV2['pages'] ?? null) ? $reportV2['pages'] : [];
+        $modules = is_array($reportV2['modules'] ?? null) ? $reportV2['modules'] : [];
+        $this->assertCount(5, $pages);
+        $this->assertCount(42, $modules);
+
+        foreach ($pages as $page) {
+            $this->assertIsArray($page);
+            $this->assertSame($expectedLocale, (string) ($page['locale'] ?? ''));
+        }
+
+        foreach ($modules as $module) {
+            $this->assertIsArray($module);
+            $content = is_array($module['content'] ?? null) ? $module['content'] : [];
+            $this->assertSame(
+                $expectedLocale,
+                (string) ($content['locale'] ?? ''),
+                'Module locale mismatch: '.(string) ($module['module_key'] ?? 'unknown')
+            );
+
+            if ($expectedLocale === 'en') {
+                $encoded = json_encode($content, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+                $this->assertDoesNotMatchRegularExpression(
+                    '/[\x{3400}-\x{9fff}\x{f900}-\x{faff}]/u',
+                    $encoded,
+                    'English module contains CJK: '.(string) ($module['module_key'] ?? 'unknown')
+                );
+            }
+        }
+
+        if ($expectedLocale === 'zh') {
+            $instantSummary = collect($modules)->firstWhere('module_key', 'instant_summary');
+            $this->assertMatchesRegularExpression(
+                '/[\x{3400}-\x{9fff}\x{f900}-\x{faff}]/u',
+                (string) data_get($instantSummary, 'content.body')
+            );
+        }
     }
 }

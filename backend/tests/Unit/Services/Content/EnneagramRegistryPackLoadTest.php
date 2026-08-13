@@ -40,6 +40,23 @@ final class EnneagramRegistryPackLoadTest extends TestCase
         $this->assertSame([], $errors);
     }
 
+    public function test_english_registry_files_are_complete_valid_and_cjk_free(): void
+    {
+        $loader = app(EnneagramPackLoader::class);
+        $pack = $loader->loadRegistryPack(null, 'en');
+        $serialized = json_encode($pack['registries'], JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+
+        $this->assertSame(['en'], data_get($pack, 'manifest.locales'));
+        $this->assertSame('en', data_get($pack, 'type_registry.locale'));
+        $this->assertSame('en', data_get($pack, 'method_registry.locale'));
+        $this->assertCount(9, (array) data_get($pack, 'type_registry.entries'));
+        $this->assertCount(15, (array) data_get($pack, 'pair_registry.entries'));
+        $this->assertDoesNotMatchRegularExpression('/[\x{3400}-\x{9fff}\x{f900}-\x{faff}]/u', $serialized);
+        $this->assertStringStartsWith('sha256:', (string) ($pack['release_hash'] ?? ''));
+        $this->assertNotSame($loader->resolveRegistryReleaseHash(), $loader->resolveRegistryReleaseHash(null, 'en'));
+        $this->assertSame([], app(RegistryValidator::class)->validate($pack));
+    }
+
     public function test_registry_validator_rejects_unsupported_scientific_boundary_claims(): void
     {
         $loader = app(EnneagramPackLoader::class);

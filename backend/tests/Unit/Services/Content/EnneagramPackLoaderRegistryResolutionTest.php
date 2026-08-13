@@ -20,6 +20,7 @@ final class EnneagramPackLoaderRegistryResolutionTest extends TestCase
         $loader = app(EnneagramPackLoader::class);
 
         $this->assertSame(base_path('content_packs/ENNEAGRAM/v2/registry'), $loader->registryRoot());
+        $this->assertSame(base_path('content_packs/ENNEAGRAM/v2/registry/en'), $loader->registryRoot(null, 'en'));
         $this->assertSame(
             'enneagram_registry_pack_v1_p0_ready_2026_04',
             data_get($loader->loadRegistryManifest(), 'release_id')
@@ -49,6 +50,33 @@ final class EnneagramPackLoaderRegistryResolutionTest extends TestCase
         $this->assertSame($fixtureRoot, $pack['root']);
         $this->assertSame('test_active_registry_release', data_get($pack, 'manifest.release_id'));
         $this->assertStringStartsWith('sha256:', (string) $pack['release_hash']);
+    }
+
+    public function test_english_registry_uses_active_locale_slot_or_repo_fallback(): void
+    {
+        $loader = app(EnneagramPackLoader::class);
+        $releaseId = (string) Str::uuid();
+        $fixtureRoot = $this->makeRegistryFixture('test_active_registry_without_english');
+        File::deleteDirectory($fixtureRoot.'/en');
+
+        DB::table('content_pack_releases')->insert($this->releaseRow($releaseId, $fixtureRoot));
+        DB::table('content_pack_activations')->updateOrInsert(
+            ['pack_id' => 'ENNEAGRAM', 'pack_version' => 'v2'],
+            [
+                'release_id' => $releaseId,
+                'activated_at' => now(),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        );
+
+        $this->assertSame($fixtureRoot, $loader->registryRoot());
+        $this->assertSame(base_path('content_packs/ENNEAGRAM/v2/registry/en'), $loader->registryRoot(null, 'en'));
+        $this->assertSame('en', data_get($loader->loadRegistryPack(null, 'en'), 'manifest.locales.0'));
+
+        File::copyDirectory(base_path('content_packs/ENNEAGRAM/v2/registry/en'), $fixtureRoot.'/en');
+
+        $this->assertSame($fixtureRoot.'/en', $loader->registryRoot(null, 'en'));
     }
 
     private function makeRegistryFixture(string $releaseId): string

@@ -640,6 +640,7 @@ class AttemptReadController extends Controller
             }
             $responsePayload['enneagram_public_projection_v1'] = $projection;
             $responsePayload['enneagram_public_projection_v2'] = $projectionV2;
+            $responsePayload['locale'] = (string) ($projection['locale'] ?? $projectionV2['locale'] ?? '');
             $reportV2 = data_get($responsePayload, 'report._meta.enneagram_report_v2');
             if (is_array($reportV2)) {
                 $responsePayload['enneagram_report_v2'] = $reportV2;

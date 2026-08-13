@@ -1,0 +1,67 @@
+{
+    "id": "enneagram_theory_hint_registry_v1_en",
+    "schema_version": "fap.enneagram.theory_hint_registry.v1",
+    "registry_key": "enneagram_theory_hint_registry",
+    "locale": "en",
+    "form_variant": "all",
+    "context_mode": "individual",
+    "status": "published",
+    "version": "v1",
+    "release_id": "enneagram_registry_pack_v1_p0_ready_2026_04_en",
+    "content_release_hash": "sha256:pending_loader_resolution",
+    "content_snapshot_hash": null,
+    "content_maturity": "experimental",
+    "evidence_level": "descriptive",
+    "preview_enabled": true,
+    "fallback_policy": "optional",
+    "entries": [
+        {
+            "theory_key": "wing_hint",
+            "visibility_scope": "p0_visible",
+            "hard_judgement_allowed": false,
+            "boundary_copy": "Adjacent traction is only used as an expressive color cue near the same primary type, and is not equivalent to formal wing determination, nor can it replace the primary type or Top3 interpretation.",
+            "user_facing_boundary": "If you see traction on the left and right sides of the primary candidate, you can understand it as the possibility of adjacent types of tone, rhythm or focus in the expression; this does not mean that the system has judged you as a certain wing, nor does it mean that you have a certain subtype.",
+            "interpretation_boundary": "The wing hint is only suitable for helping to read \"which side of the same primary type may be closer in expression\", and is not suitable for diagnosis, ability evaluation, health level judgment, career screening or relationship risk judgment.",
+            "use_for": [
+                "expression_color_hint",
+                "adjacent_type_language",
+                "self_observation_prompt"
+            ],
+            "not_for": [
+                "hard_wing_classification",
+                "subtype_or_instinct_claim",
+                "personality_verdict",
+                "clinical_or_hiring_decision"
+            ],
+            "content_maturity": "experimental",
+            "evidence_level": "theory_based"
+        },
+        {
+            "theory_key": "arrow_growth_reference_placeholder",
+            "visibility_scope": "p1_visible",
+            "hard_judgement_allowed": false,
+            "boundary_copy": "The arrow direction bit is currently only used as a placeholder for future modules and does not participate in the interpretation of the current results page, nor does the arrow be written as a judgment of pressure, growth or development path.",
+            "user_facing_boundary": "The current version will not deduce your pressure direction, growth direction or fixed path based on the arrow; if it is displayed in the future, it will only serve as a theoretical background prompt and require verification in real situations.",
+            "content_maturity": "experimental",
+            "evidence_level": "descriptive"
+        },
+        {
+            "theory_key": "level_spectrum_placeholder",
+            "visibility_scope": "p1_visible",
+            "hard_judgement_allowed": false,
+            "boundary_copy": "The state spectrum bits are only used for self-calibration and are not equivalent to hard judgment on the development stage.",
+            "user_facing_boundary": "The system will not directly mark you into a fixed state level; currently it only provides three observation frames: stable, daily, and stressed.",
+            "content_maturity": "experimental",
+            "evidence_level": "descriptive"
+        },
+        {
+            "theory_key": "subtype_future_module_placeholder",
+            "visibility_scope": "hidden",
+            "hard_judgement_allowed": false,
+            "boundary_copy": "subtype is temporarily disabled to avoid early hard judgment when evidence is insufficient.",
+            "user_facing_boundary": "The current version does not give instinctual subtype conclusions, nor does it miswrite lifestyle differences as formal subtype determinations.",
+            "content_maturity": "experimental",
+            "evidence_level": "descriptive"
+        }
+    ]
+}

@@ -1,0 +1,91 @@
+{
+    "id": "enneagram_method_registry_v1_en",
+    "schema_version": "fap.enneagram.method_registry.v1",
+    "registry_key": "enneagram_method_registry",
+    "locale": "en",
+    "form_variant": "all",
+    "context_mode": "individual",
+    "status": "published",
+    "version": "v1",
+    "release_id": "enneagram_registry_pack_v1_p0_ready_2026_04_en",
+    "content_release_hash": "sha256:pending_loader_resolution",
+    "content_snapshot_hash": null,
+    "content_maturity": "p0_ready",
+    "evidence_level": "descriptive",
+    "preview_enabled": true,
+    "fallback_policy": "required",
+    "entries": [
+        {
+            "method_key": "e105_standard_methodology",
+            "form_variant": "e105",
+            "display_context": "result_page",
+            "copy": "The E105 standard version uses Likert intensity responses to form nine-type clue outlines, Top3, Dominance Gap and close-call reading entries within the same question type. It is suitable as a starting point for self-observation, but is not intended for clinical diagnosis, mental health screening, ability measurement, recruitment screening, or stable personality determination; scores can only be read within the context of E105's own question types and scoring.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "method_key": "fc144_forced_choice_methodology",
+            "form_variant": "fc144",
+            "display_context": "result_page",
+            "copy": "FC144 uses forced-choice pairing selection to observe the motivational cues that you repeatedly prefer in dilemmas. It is especially suitable as a supplementary observation after close-call. It is not a more accurate version than E105, nor does it replace E105's primary_candidate, Top3, or raw scoring facts; results should be read within the boundaries of FC144's own question types, and cross-form differences cannot be interpreted as personality changes or assessment strengths and weaknesses.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "method_key": "same_model_not_same_score_space",
+            "form_variant": "all",
+            "display_context": "technical_note",
+            "copy": "E105 and FC144 belong to the same ENNEAGRAM model and interpretation framework, but have different question types, answering tasks, scoring sources and error structures, and are not in the same score space. The system can reuse the result page structure, module order, and security boundaries; the history, sharing, PDF, and retest entrances must also retain the source identification of their respective forms. The page will not directly compare the two sets of values ​​by default, nor will it interpret the differences in the Top 3 across forms as changes in individual status, personality development, or who is more real.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "method_key": "cross_form_compare_blocked",
+            "form_variant": "all",
+            "display_context": "history",
+            "copy": "Cross-form comparison is turned off by default. Unless there is a verified equivalence mapping in the future, the system will not put E105 and FC144 into the same score comparison semantics; history pages, sharing cards and results review should not generate cross-question conclusions such as \"improvement/decline\", \"healthier/unhealthy\" and \"more accurate this time\".",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "method_key": "non_diagnostic_boundary",
+            "form_variant": "all",
+            "display_context": "technical_note",
+            "copy": "This result is only used for personality pattern understanding, self-observation and reflective dialogue. The Enneagram should be considered an evidence-based explanatory tool rather than a well-validated clinical scale, mental health judgment, treatment recommendation, recruitment screening, job matching, competency evaluation, or individual risk assessment. High scores, primary candidates, Top3, close-call, diffuse, and low-quality tips can only be used as explanation hypotheses; if a certain work, team, or relationship situation module is not enabled, it only means that the current product does not open the situational explanation, and it does not mean that the system hides more certain adaptations, risks, or diagnostic conclusions.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "method_key": "user_confirmed_type_boundary",
+            "form_variant": "all",
+            "display_context": "observation",
+            "copy": "user_confirmed_type is the self-resonance evidence recorded by the user after observation. It is not a system revision, nor is it a type confirmation from a higher authority. It can be entered into the history record to help mark the user's perspective during subsequent reading; it can only be presented as a self-observation note when shared or viewed back, and will not cover the primary_candidate, Top3, scorer output, or the scoring facts of the original attempt.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "method_key": "low_quality_boundary",
+            "form_variant": "all",
+            "display_context": "result_page",
+            "copy": "When triggered by low-quality signals, the results are still readable, but the interpretation boundaries are significantly narrowed. The page only retains light observation suggestions to avoid extending a single low-stability answer into a deterministic type of judgment; it gives priority to suggestions for retesting the same question type when the state is more stable and time is more sufficient. Switching forms can serve as another observation, but should not be used as a way to circumvent quality boundaries, find better answers, demonstrate personality changes, or compare score gains and losses.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "method_key": "diffuse_boundary",
+            "form_variant": "all",
+            "display_context": "result_page",
+            "copy": "Diffuse means that the nine type clues are scattered, or the Top3 has not yet formed a clear enough primary and secondary relationship. It’s not a failed response, it’s not an ineffective system, it’s not a sign of personality disorder or mental health. The page will reduce the tone of certainty of a single number and give priority to the side-by-side reading of Top3, three-center distribution, recent counterexamples and 7-day observation tasks; retesting can only provide another answer sample and cannot automatically correct it to a more stable or realistic type.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "method_key": "close_call_boundary",
+            "form_variant": "all",
+            "display_context": "result_page",
+            "copy": "close-call means Top1 is close to Top2, and the system will not pretend to be more certain than the data. The page will convert the differences into pair discrimination, counterexample checking and 7-day observation questions; it is not a proof of dual personality, type instability or the need to forcibly choose one from the other.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        }
+    ]
+}
