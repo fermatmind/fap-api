@@ -55,6 +55,15 @@ final class ExactPackagePromotionServiceTop100BindingTest extends TestCase
             $this->invokePublishRollbackErrorCode($safe),
         );
 
+        $personalityReview = new DomainException(
+            'top100_publish_failed_rollback_succeeded',
+            previous: new DomainException('personality_promotion_review_evidence_invalid'),
+        );
+        self::assertSame(
+            'top100_personality_promotion_review_evidence_invalid_rollback_succeeded',
+            $this->invokePublishRollbackErrorCode($personalityReview),
+        );
+
         $unsafe = new RuntimeException('SQLSTATE[23000]: private database detail');
         self::assertSame(
             'top100_publish_failed_rollback_succeeded',
