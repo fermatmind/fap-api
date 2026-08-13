@@ -14,6 +14,17 @@ require_once dirname(__DIR__, 2).'/scripts/deploy/verify_career_cold_cache_disco
 final class CareerColdCacheDiscoverabilityGateTest extends TestCase
 {
     #[Test]
+    public function deploy_runner_reads_the_root_active_generation_instead_of_latest_legacy_mtime(): void
+    {
+        $source = (string) file_get_contents(dirname(__DIR__, 2).'/scripts/deploy/verify_career_cold_cache_discoverability.php');
+
+        self::assertStringContainsString("CareerGenerationAuthorityLoader')->loadStrict()", $source);
+        self::assertStringContainsString("['pointer']['artifacts']['projection']['sha256']", $source);
+        self::assertStringNotContainsString("career_runtime_publish_projection';", $source);
+        self::assertStringNotContainsString('filemtime(', $source);
+    }
+
+    #[Test]
     public function missing_projection_artifact_fails_closed(): void
     {
         $this->expectFailureCode('AUTHORITY_ARTIFACT_MISSING');
