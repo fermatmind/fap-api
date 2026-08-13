@@ -104,7 +104,7 @@ const verifyBackendProductAuthority = async () => {
     && benefitRules.includes('ReportAccess::MODULE_BIG5_FULL')
     && benefitRules.includes('ReportAccess::MODULE_BIG5_ACTION_PLAN')
     && Array.isArray(skuRows)
-    && skuRows.some((row) => row?.scale_code === 'BIG5_OCEAN' && row?.is_active === true && row?.modules_included?.includes('big5_full') && row?.modules_included?.includes('big5_action_plan'));
+    && !skuRows.some((row) => row?.scale_code === 'BIG5_OCEAN' && row?.is_active === true && row?.modules_included?.includes('big5_full') && row?.modules_included?.includes('big5_action_plan'));
 };
 
 const validateFinal = (candidate, ledger, backendProductAuthorityVerified) => {
