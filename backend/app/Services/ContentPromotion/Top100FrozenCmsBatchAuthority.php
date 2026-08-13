@@ -477,7 +477,10 @@ final class Top100FrozenCmsBatchAuthority
 
         return match ($resolved['kind']) {
             'personality_asset' => [
-                'mutable' => $this->attributes($model, ['title', 'summary', 'content_sections_json', 'seo_json', 'internal_links_json', 'source_package', 'source_hash', 'published_revision_id', 'working_revision_id']),
+                'mutable' => [
+                    ...$this->attributes($model, ['title', 'summary', 'content_sections_json', 'seo_json', 'internal_links_json', 'source_package', 'source_hash', 'published_revision_id', 'working_revision_id']),
+                    'working_revision' => $this->personalityWorkingRevisionState($model),
+                ],
                 'protected' => $this->attributes($model, ['org_id', 'framework', 'entity_type', 'entity_key', 'slug', 'locale', 'robots', 'canonical_json', 'hreflang_json', 'faq_json', 'schema_json', 'method_boundary_json', 'evidence_notes_json', 'authority_json', 'is_public', 'index_eligible', 'sitemap_eligible', 'llms_eligible', 'launch_state']),
             ],
             'mbti_profile', 'mbti_variant' => [
@@ -811,8 +814,7 @@ final class Top100FrozenCmsBatchAuthority
         $created = 0;
         if ($existing instanceof PersonalityPublicContentAssetRevision) {
             if ((int) $existing->asset_id !== (int) $asset->id
-                || ! in_array((string) $existing->workflow_state, [PersonalityPublicContentAssetRevision::STATE_DRAFT, 'published'], true)
-                || ! in_array($asset->working_revision_id, [null, $existing->id], true)) {
+                || ! in_array((string) $existing->workflow_state, [PersonalityPublicContentAssetRevision::STATE_DRAFT, 'published'], true)) {
                 throw new DomainException('top100_frozen_personality_revision_collision');
             }
             $snapshotMatches = (string) $existing->source_hash === (string) $target['source_row_sha256']
@@ -821,7 +823,8 @@ final class Top100FrozenCmsBatchAuthority
                     PromotionContextFactory::canonicalJson($snapshot),
                 );
             if (! $snapshotMatches) {
-                if ($asset->working_revision_id !== null || (string) $existing->workflow_state !== PersonalityPublicContentAssetRevision::STATE_DRAFT) {
+                if ((int) $asset->working_revision_id === (int) $existing->id
+                    || (string) $existing->workflow_state !== PersonalityPublicContentAssetRevision::STATE_DRAFT) {
                     throw new DomainException('top100_frozen_personality_revision_recovery_drift');
                 }
                 PersonalityPublicContentAssetRevisionReview::query()->where('revision_id', $existing->id)->delete();
@@ -830,9 +833,6 @@ final class Top100FrozenCmsBatchAuthority
             }
         }
         if (! $existing instanceof PersonalityPublicContentAssetRevision) {
-            if ($asset->working_revision_id !== null) {
-                throw new DomainException('top100_frozen_personality_foreign_working_revision');
-            }
             $existing = PersonalityPublicContentAssetRevision::query()->create([
                 'asset_id' => $asset->id,
                 'revision_no' => ((int) PersonalityPublicContentAssetRevision::query()->where('asset_id', $asset->id)->max('revision_no')) + 1,
@@ -989,6 +989,10 @@ final class Top100FrozenCmsBatchAuthority
         /** @var PersonalityPublicContentAsset $asset */
         $asset = $resolved['model'];
         $revision = $this->assertPersonalityRevisionMatchesTarget($context, $target, $resolved);
+        $preservedWorkingRevisionId = $this->preservedPersonalityWorkingRevisionId($target, $asset, $revision);
+        if ((int) $asset->working_revision_id !== (int) $revision->id) {
+            $asset->forceFill(['working_revision_id' => $revision->id])->saveQuietly();
+        }
         $desired = $target['desired'];
         $asset->forceFill([
             'title' => $desired['title'],
@@ -999,7 +1003,7 @@ final class Top100FrozenCmsBatchAuthority
             'source_package' => 'content-promotion/TOP100/'.Top100FrozenPackage::SUBSCOPE,
             'source_hash' => $target['source_row_sha256'],
             'published_revision_id' => $revision->id,
-            'working_revision_id' => null,
+            'working_revision_id' => $preservedWorkingRevisionId,
         ])->saveQuietly();
         $revision->forceFill(['workflow_state' => 'published'])->save();
     }
@@ -1017,7 +1021,6 @@ final class Top100FrozenCmsBatchAuthority
             ->where('authority_asset_key', $this->assetKey($target))->first();
         if (! $revision instanceof PersonalityPublicContentAssetRevision
             || (int) $revision->asset_id !== (int) $asset->id
-            || (int) $asset->working_revision_id !== (int) $revision->id
             || (string) $revision->workflow_state !== PersonalityPublicContentAssetRevision::STATE_DRAFT
             || ! hash_equals((string) $target['source_row_sha256'], (string) $revision->source_hash)
             || ! hash_equals('content-promotion/TOP100/'.Top100FrozenPackage::SUBSCOPE, (string) $revision->source_package)
@@ -1027,8 +1030,65 @@ final class Top100FrozenCmsBatchAuthority
             )) {
             throw new DomainException('top100_frozen_personality_revision_not_approved');
         }
+        $this->preservedPersonalityWorkingRevisionId($target, $asset, $revision);
 
         return $revision;
+    }
+
+    private function preservedPersonalityWorkingRevisionId(
+        array $target,
+        PersonalityPublicContentAsset $asset,
+        PersonalityPublicContentAssetRevision $packageRevision,
+    ): ?int {
+        $workingRevisionId = $asset->working_revision_id === null ? null : (int) $asset->working_revision_id;
+        if ($workingRevisionId === null || $workingRevisionId === (int) $packageRevision->id) {
+            return null;
+        }
+        $expectedWorkingRevisionId = (int) data_get($target, 'current.mutable.working_revision_id', 0);
+        $expectedWorkingRevisionState = data_get($target, 'current.mutable.working_revision');
+        $workingRevision = PersonalityPublicContentAssetRevision::query()->lockForUpdate()
+            ->where('asset_id', $asset->id)->whereKey($workingRevisionId)->first();
+        if ($expectedWorkingRevisionId !== $workingRevisionId
+            || ! is_array($expectedWorkingRevisionState)
+            || ! $workingRevision instanceof PersonalityPublicContentAssetRevision
+            || ! hash_equals(
+                PromotionContextFactory::canonicalJson($expectedWorkingRevisionState),
+                PromotionContextFactory::canonicalJson($this->personalityRevisionState($workingRevision)),
+            )) {
+            throw new DomainException('top100_frozen_personality_foreign_working_revision_drift');
+        }
+
+        return $workingRevisionId;
+    }
+
+    /** @return array<string,mixed>|null */
+    private function personalityWorkingRevisionState(PersonalityPublicContentAsset $asset): ?array
+    {
+        if ($asset->working_revision_id === null) {
+            return null;
+        }
+        $revision = PersonalityPublicContentAssetRevision::query()
+            ->where('asset_id', $asset->id)->whereKey($asset->working_revision_id)->first();
+        if (! $revision instanceof PersonalityPublicContentAssetRevision) {
+            throw new DomainException('top100_frozen_personality_working_revision_invalid');
+        }
+
+        return $this->personalityRevisionState($revision);
+    }
+
+    /** @return array<string,mixed> */
+    private function personalityRevisionState(PersonalityPublicContentAssetRevision $revision): array
+    {
+        return [
+            'id' => (int) $revision->id,
+            'asset_id' => (int) $revision->asset_id,
+            'workflow_state' => (string) $revision->workflow_state,
+            'authority_asset_key' => $revision->authority_asset_key,
+            'authority_package_sha256' => $revision->authority_package_sha256,
+            'source_package' => (string) $revision->source_package,
+            'source_hash' => (string) $revision->source_hash,
+            'snapshot_sha256' => hash('sha256', PromotionContextFactory::canonicalJson((array) $revision->snapshot_json)),
+        ];
     }
 
     private function publishMbtiProfile(PromotionContext $context, array $target, array $resolved): void
@@ -1142,7 +1202,7 @@ final class Top100FrozenCmsBatchAuthority
         // Draft pointers and immutable revision statuses may change during the
         // non-public import phase. Public/editorial fields and every protected
         // boundary must remain exact until publication begins.
-        foreach ([['mutable', 'working_revision_id'], ['mutable', 'revision_statuses'], ['mutable', 'article', 'working_revision_id']] as $path) {
+        foreach ([['mutable', 'working_revision_id'], ['mutable', 'working_revision'], ['mutable', 'revision_statuses'], ['mutable', 'article', 'working_revision_id']] as $path) {
             data_forget($actual, implode('.', $path));
             data_forget($expected, implode('.', $path));
         }
@@ -1191,7 +1251,9 @@ final class Top100FrozenCmsBatchAuthority
         if (! $asset instanceof PersonalityPublicContentAsset) {
             throw new DomainException('top100_frozen_rollback_target_missing');
         }
-        $asset->forceFill($mutable)->saveQuietly();
+        $assetMutable = $mutable;
+        unset($assetMutable['working_revision']);
+        $asset->forceFill($assetMutable)->saveQuietly();
         $assetKey = 'seo-top100-frozen:'.str_pad((string) ((int) ($row['priority'] ?? 0)), 3, '0', STR_PAD_LEFT).':'.(string) ($row['url_sha256'] ?? '');
         $packageRevision = PersonalityPublicContentAssetRevision::query()
             ->where('authority_package_sha256', (string) ($row['package_sha256'] ?? ''))
