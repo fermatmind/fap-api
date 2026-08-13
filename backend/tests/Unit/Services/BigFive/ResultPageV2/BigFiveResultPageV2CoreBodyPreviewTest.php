@@ -5607,6 +5607,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/content_packs/ENNEAGRAM/v2/registry/theory_hint_registry.json',
             'backend/content_packs/ENNEAGRAM/v2/registry/type_registry.json',
             'backend/content_packs/ENNEAGRAM/v2/registry/ui_copy_registry.json',
+            'backend/content_packs/ENNEAGRAM/v2/registry/en/manifest.json',
+            'backend/content_packs/ENNEAGRAM/v2/registry/en/type_registry.json',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -5615,6 +5617,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     public function test_runtime_freeze_classifier_ignores_enneagram_result_page_runtime_contract_files(): void
     {
         $changed = [
+            'backend/app/Services/Content/EnneagramPackLoader.php',
             'backend/app/Services/Enneagram/EnneagramPublicProjectionService.php',
             'backend/app/Services/Report/EnneagramReportComposer.php',
         ];
@@ -12020,12 +12023,13 @@ DIFF;
 
     private function isEnneagramResultPageRegistryContentAssetFile(string $file): bool
     {
-        return preg_match('#^backend/content_packs/ENNEAGRAM/v2/registry/[a-z_]+_registry\\.json$#', $file) === 1;
+        return preg_match('#^backend/content_packs/ENNEAGRAM/v2/registry/(?:en/)?(?:manifest|[a-z_]+_registry)\\.json$#', $file) === 1;
     }
 
     private function isEnneagramResultPageRuntimeContractFile(string $file): bool
     {
         return in_array($file, [
+            'backend/app/Services/Content/EnneagramPackLoader.php',
             'backend/app/Services/Enneagram/EnneagramPublicProjectionService.php',
             'backend/app/Services/Report/EnneagramReportComposer.php',
         ], true);
