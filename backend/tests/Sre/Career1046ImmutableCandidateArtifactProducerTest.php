@@ -211,7 +211,8 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
         $activeRows = array_map(static fn (string $slug): array => ['source_slug' => $slug], $manifest['baseline_slugs']);
         $projection = $this->activeBaselineProjection($manifest);
         foreach ($projection['items'] as &$item) {
-            unset($item['detail_route_enabled'], $item['robots_indexable']);
+            $item['detail_route_enabled'] = false;
+            $item['robots_indexable'] = false;
         }
         unset($item);
 
@@ -241,6 +242,42 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
         } catch (Career1046ImmutableCandidateArtifactFailure $failure) {
             self::assertSame('CANDIDATE_PROJECTION_AUTHORITY_INCOMPLETE', $failure->safeCode);
         }
+    }
+
+    public function test_task3b_target_authority_overrides_stale_general_ledger_cohorts_for_the_exact_delta_only(): void
+    {
+        $manifest = $this->manifest();
+        $full = $this->fullLedgerWithOutsideForbiddenMember();
+        $deltaSlug = $manifest['delta_slugs'][0];
+        foreach ($full['members'] as &$row) {
+            if (($row['canonical_slug'] ?? null) === $deltaSlug) {
+                $row['public_resolution_type'] = CareerPublicResolutionTypeMatrix::BLOCKED_UNTIL_GOVERNANCE_APPROVAL;
+                $row['public_eligible'] = false;
+                $row['indexability'] = 'noindex';
+                $row['public_index_state'] = 'noindex';
+                $row['release_cohort'] = 'blocked';
+            }
+        }
+        unset($row);
+        $activeRows = array_map(static fn (string $slug): array => ['source_slug' => $slug], $manifest['baseline_slugs']);
+
+        $merged = Career1046ImmutableCandidateArtifactProducer::mergeActiveBaselineLedger(
+            $full,
+            ['ledger_kind' => CareerFullReleaseLedgerService::LEDGER_KIND, 'members' => $activeRows],
+            $this->activeBaselineProjection($manifest),
+            $this->activePointer(CareerGenerationAuthorityLoader::ARTIFACT_FORMAT_LEGACY_EXACT_BYTES),
+            $manifest,
+        );
+        $bounded = Career1046ImmutableCandidateArtifactProducer::targetBoundedLedger($merged, $manifest);
+        $delta = collect($bounded['members'])->firstWhere('canonical_slug', $deltaSlug);
+
+        self::assertSame(CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB, $delta['public_resolution_type']);
+        self::assertTrue($delta['public_eligible']);
+        self::assertSame('indexable', $delta['public_index_state']);
+        Career1046ImmutableCandidateArtifactProducer::assertCompletePublishedProjection(
+            (new CareerRuntimePublishProjectionService)->buildFromLedgerArray($bounded),
+            $manifest,
+        );
     }
 
     public function test_projection_must_be_the_exact_fully_published_1046_locale_pair_set(): void
