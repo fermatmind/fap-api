@@ -22,7 +22,7 @@ final class Eq60V5ReportContractTest extends TestCase
 {
     use RefreshDatabase;
 
-    private const REPORT_VERSION = 'eq_report_v5_assets_professional_review_v1';
+    private const REPORT_VERSION = 'eq_report_v5_semantic_guard_v2';
 
     /**
      * @return array<string,array{case_id:string,locale:string,file:string,formulation:string,action:string}>
@@ -114,11 +114,15 @@ final class Eq60V5ReportContractTest extends TestCase
             (string) data_get($fixture, 'report.interpretation.route_id'),
             (string) data_get($fixture, 'report.asset_refs.personalization_route_id')
         );
-        $this->assertSame(
-            (string) data_get($fixture, 'report.interpretation.route_id'),
-            (string) data_get($fixture, 'report.assets.personalization_route.id')
-        );
-        $this->assertNotSame('', (string) data_get($fixture, 'report.assets.personalization_route.route_headline'));
+        if ($formulation === 'low_confidence_result') {
+            $this->assertSame([], (array) data_get($fixture, 'report.assets.personalization_route'));
+        } else {
+            $this->assertSame(
+                (string) data_get($fixture, 'report.interpretation.route_id'),
+                (string) data_get($fixture, 'report.assets.personalization_route.id')
+            );
+            $this->assertNotSame('', (string) data_get($fixture, 'report.assets.personalization_route.route_headline'));
+        }
     }
 
     public function test_high_empathy_low_recovery_contract_has_resolved_v5_assets(): void
@@ -174,10 +178,114 @@ final class Eq60V5ReportContractTest extends TestCase
         $this->assertSame('quality_low_overrides_dimension_pattern', (string) data_get($fixture, 'report.interpretation.signal_signature.match_pattern'));
         $this->assertSame('low', (string) data_get($fixture, 'report.quality.confidence_label'));
         $this->assertSame([], (array) data_get($fixture, 'report.interpretation.primary_mechanism_ids'));
+        $this->assertSame([], (array) data_get($fixture, 'report.interpretation.primary_scene_ids'));
+        $this->assertSame([], (array) data_get($fixture, 'report.interpretation.primary_scene_variant_ids'));
+        $this->assertSame([], (array) data_get($fixture, 'report.interpretation.career_environment_ids'));
+        $this->assertSame([], (array) data_get($fixture, 'report.interpretation.dimension_ranking.strongest.codes'));
+        $this->assertSame('suppressed', (string) data_get($fixture, 'report.interpretation.dimension_ranking.strongest.status'));
+        $this->assertSame([], (array) data_get($fixture, 'report.interpretation.dimension_ranking.development.codes'));
+        $this->assertSame('suppressed', (string) data_get($fixture, 'report.interpretation.dimension_ranking.development.status'));
+        $this->assertNull(data_get($fixture, 'report.interpretation.strongest_dimension'));
+        $this->assertNull(data_get($fixture, 'report.interpretation.development_lever'));
+        $this->assertSame([], (array) data_get($fixture, 'report.interpretation.signal_signature.dimension_states'));
+        $this->assertSame([], (array) data_get($fixture, 'report.interpretation.personalization_route'));
+        $this->assertSame([], (array) data_get($fixture, 'report.cross_assessment_context'));
+        $this->assertSame([], (array) data_get($fixture, 'report.assets.mechanisms'));
+        $this->assertSame([], (array) data_get($fixture, 'report.assets.reality_scenes'));
+        $this->assertSame([], (array) data_get($fixture, 'report.assets.career_environment'));
+        $this->assertSame([], (array) data_get($fixture, 'report.assets.result_page_depth_modules'));
+        $this->assertSame([], (array) data_get($fixture, 'report.assets.sjt_bridge'));
+        $this->assertSame([], (array) data_get($fixture, 'report.assets.cross_assessment_context'));
+        $this->assertSame([], (array) data_get($fixture, 'report.assets.agent_dialogue_playbooks'));
+        $this->assertSame([], (array) data_get($fixture, 'report.assets.backend_integration_contract'));
+        $this->assertSame([], (array) data_get($fixture, 'report.assets.personalization_route'));
+        $this->assertSame([
+            'eq.conversion.save_report',
+            'eq.conversion.retest_reminder',
+        ], array_column((array) data_get($fixture, 'report.assets.commercial_conversion_actions'), 'id'));
         $this->assertNotSame('high_empathy_low_recovery', (string) data_get($fixture, 'report.assets.core_formulation.id'));
         $this->assertNotSame('balanced_integrated', (string) data_get($fixture, 'report.assets.core_formulation.id'));
         $this->assertSame('eq.snapshot.low_confidence_result', (string) data_get($fixture, 'report.assets.result_snapshot.id'));
         $this->assertSame('eq.quality.level.C', (string) data_get($fixture, 'report.assets.quality_confidence.id'));
+    }
+
+    public function test_dimension_ranking_reports_full_and_partial_ties_without_fixed_order_fallback(): void
+    {
+        $this->prepareEqContent();
+
+        $allEqual = $this->canonicalFixtureFromScore('EQ60_ALL_EQUAL_RANKING_SYNTHETIC', 'zh-CN', $this->rankingScore([
+            'SA' => [113, 81],
+            'ER' => [113, 81],
+            'EM' => [113, 81],
+            'RM' => [113, 81],
+        ]));
+        $this->assertSame('tie', (string) data_get($allEqual, 'report.interpretation.dimension_ranking.strongest.status'));
+        $this->assertSame(['SA', 'ER', 'EM', 'RM'], (array) data_get($allEqual, 'report.interpretation.dimension_ranking.strongest.codes'));
+        $this->assertSame('tie', (string) data_get($allEqual, 'report.interpretation.dimension_ranking.development.status'));
+        $this->assertSame(['SA', 'ER', 'EM', 'RM'], (array) data_get($allEqual, 'report.interpretation.dimension_ranking.development.codes'));
+        $this->assertNull(data_get($allEqual, 'report.interpretation.strongest_dimension'));
+        $this->assertNull(data_get($allEqual, 'report.interpretation.development_lever'));
+
+        $partialTie = $this->canonicalFixtureFromScore('EQ60_PARTIAL_TIE_RANKING_SYNTHETIC', 'en', $this->rankingScore([
+            'SA' => [120, 90],
+            'ER' => [119, 90],
+            'EM' => [100, 50],
+            'RM' => [80, 10],
+        ]));
+        $this->assertSame('tie', (string) data_get($partialTie, 'report.interpretation.dimension_ranking.strongest.status'));
+        $this->assertSame(['SA', 'ER'], (array) data_get($partialTie, 'report.interpretation.dimension_ranking.strongest.codes'));
+        $this->assertSame('unique', (string) data_get($partialTie, 'report.interpretation.dimension_ranking.development.status'));
+        $this->assertSame(['RM'], (array) data_get($partialTie, 'report.interpretation.dimension_ranking.development.codes'));
+        $this->assertNull(data_get($partialTie, 'report.interpretation.strongest_dimension'));
+        $this->assertSame('RM', (string) data_get($partialTie, 'report.interpretation.development_lever'));
+    }
+
+    public function test_dimension_ranking_keeps_legacy_scalars_for_unique_ranking(): void
+    {
+        $this->prepareEqContent();
+
+        $fixture = $this->canonicalFixtureFromScore('EQ60_UNIQUE_RANKING_SYNTHETIC', 'zh-CN', $this->rankingScore([
+            'SA' => [120, 90],
+            'ER' => [110, 70],
+            'EM' => [100, 50],
+            'RM' => [80, 10],
+        ]));
+
+        $this->assertSame(['codes' => ['SA'], 'status' => 'unique'], (array) data_get($fixture, 'report.interpretation.dimension_ranking.strongest'));
+        $this->assertSame(['codes' => ['RM'], 'status' => 'unique'], (array) data_get($fixture, 'report.interpretation.dimension_ranking.development'));
+        $this->assertSame('SA', (string) data_get($fixture, 'report.interpretation.strongest_dimension'));
+        $this->assertSame('RM', (string) data_get($fixture, 'report.interpretation.development_lever'));
+    }
+
+    public function test_dimension_ranking_falls_back_to_one_complete_metric_and_can_be_unavailable(): void
+    {
+        $this->prepareEqContent();
+
+        $fallbackScore = $this->rankingScore([
+            'SA' => [80, 90],
+            'ER' => [90, 70],
+            'EM' => [100, 50],
+            'RM' => [110, 10],
+        ]);
+        unset($fallbackScore['scores']['ER']['percentile']);
+        $fallback = $this->canonicalFixtureFromScore('EQ60_RANKING_FALLBACK_SYNTHETIC', 'en', $fallbackScore);
+        $this->assertSame(['codes' => ['RM'], 'status' => 'unique'], (array) data_get($fallback, 'report.interpretation.dimension_ranking.strongest'));
+        $this->assertSame(['codes' => ['SA'], 'status' => 'unique'], (array) data_get($fallback, 'report.interpretation.dimension_ranking.development'));
+
+        $unavailableScore = $this->rankingScore([
+            'SA' => [80, 90],
+            'ER' => [90, 70],
+            'EM' => [100, 50],
+            'RM' => [110, 10],
+        ]);
+        foreach (['SA', 'ER', 'EM', 'RM'] as $code) {
+            $unavailableScore['scores'][$code] = ['level' => 'competent'];
+        }
+        $unavailable = $this->canonicalFixtureFromScore('EQ60_RANKING_UNAVAILABLE_SYNTHETIC', 'zh-CN', $unavailableScore);
+        $this->assertSame(['codes' => [], 'status' => 'unavailable'], (array) data_get($unavailable, 'report.interpretation.dimension_ranking.strongest'));
+        $this->assertSame(['codes' => [], 'status' => 'unavailable'], (array) data_get($unavailable, 'report.interpretation.dimension_ranking.development'));
+        $this->assertNull(data_get($unavailable, 'report.interpretation.strongest_dimension'));
+        $this->assertNull(data_get($unavailable, 'report.interpretation.development_lever'));
     }
 
     public function test_quality_runtime_speeding_flag_forces_low_confidence_even_when_level_is_not_cd(): void
@@ -473,24 +581,29 @@ final class Eq60V5ReportContractTest extends TestCase
         $this->assertSame('planned', (string) data_get($fixture, 'report.next_module.status'));
         $this->assertSame(self::REPORT_VERSION, (string) data_get($fixture, 'report.methodology.report_version'));
         $this->assertNotSame('', (string) data_get($fixture, 'report.asset_refs.result_snapshot_id'));
-        $this->assertCount(7, (array) data_get($fixture, 'report.asset_refs.commercial_conversion_ids'));
+        $lowConfidence = (string) data_get($fixture, 'report.interpretation.core_formulation_id') === 'low_confidence_result';
+        $this->assertCount($lowConfidence ? 2 : 7, (array) data_get($fixture, 'report.asset_refs.commercial_conversion_ids'));
         $this->assertNotSame('', (string) data_get($fixture, 'report.asset_refs.quality_confidence_id'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.asset_refs.psychometric_evidence_ids'));
         $depthModuleIds = (array) data_get($fixture, 'report.asset_refs.result_page_depth_module_ids');
-        $this->assertSame([
+        $this->assertSame($lowConfidence ? [] : [
             'eq.depth.how_to_read.default',
             'eq.depth.evidence_stack.default',
             'eq.depth.reality_check.default',
         ], array_slice($depthModuleIds, 0, 3));
-        $this->assertContains((string) data_get($fixture, 'report.interpretation.result_page_depth_module_id'), $depthModuleIds);
+        if (! $lowConfidence) {
+            $this->assertContains((string) data_get($fixture, 'report.interpretation.result_page_depth_module_id'), $depthModuleIds);
+        }
         $this->assertNotEmpty((array) data_get($fixture, 'report.assets.result_snapshot'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.assets.commercial_conversion_actions'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.assets.quality_confidence'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.assets.psychometric_evidence_status'));
-        $this->assertCount(4, (array) data_get($fixture, 'report.assets.result_page_depth_modules'));
-        $this->assertNotSame('', (string) data_get($fixture, 'report.assets.result_page_depth_modules.0.title'));
-        $this->assertNotSame('', (string) data_get($fixture, 'report.assets.result_page_depth_modules.0.body'));
-        $this->assertNotEmpty((array) data_get($fixture, 'report.assets.score_system.band_details'));
+        $this->assertCount($lowConfidence ? 0 : 4, (array) data_get($fixture, 'report.assets.result_page_depth_modules'));
+        if (! $lowConfidence) {
+            $this->assertNotSame('', (string) data_get($fixture, 'report.assets.result_page_depth_modules.0.title'));
+            $this->assertNotSame('', (string) data_get($fixture, 'report.assets.result_page_depth_modules.0.body'));
+            $this->assertNotEmpty((array) data_get($fixture, 'report.assets.score_system.band_details'));
+        }
     }
 
     /**
@@ -745,6 +858,35 @@ final class Eq60V5ReportContractTest extends TestCase
                 'EM' => ['raw_sum' => 62, 'std_score' => 119, 'percentile' => 84, 'level' => 'exceptional'],
                 'RM' => ['raw_sum' => 57, 'std_score' => 110, 'percentile' => 71, 'level' => 'proficient'],
             ],
+            'report' => [],
+            'report_tags' => [],
+        ];
+    }
+
+    /**
+     * @param  array<string,array{0:int|float,1:int|float}>  $dimensions
+     * @return array<string,mixed>
+     */
+    private function rankingScore(array $dimensions): array
+    {
+        $scores = [
+            'global' => ['raw_sum' => 200, 'std_score' => 105, 'percentile' => 60, 'level' => 'competent'],
+        ];
+        foreach (['SA', 'ER', 'EM', 'RM'] as $code) {
+            [$standardScore, $percentile] = $dimensions[$code];
+            $scores[$code] = [
+                'raw_sum' => $standardScore,
+                'std_score' => $standardScore,
+                'percentile' => $percentile,
+                'level' => $percentile >= 75 ? 'exceptional' : ($percentile <= 25 ? 'baseline' : 'competent'),
+            ];
+        }
+
+        return [
+            'quality' => ['level' => 'A', 'flags' => []],
+            'norms' => ['status' => 'PROVISIONAL'],
+            'version_snapshot' => ['engine_version' => 'v1.0_normed_validity'],
+            'scores' => $scores,
             'report' => [],
             'report_tags' => [],
         ];

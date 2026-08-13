@@ -11,6 +11,8 @@ use App\Services\Eq\EqCrossAssessmentContextGuard;
 
 final class Eq60ReportComposer
 {
+    private const DIMENSION_RANKING_EPSILON = 0.00001;
+
     private const LOW_CONFIDENCE_FLAGS = [
         'SPEEDING',
         'VERY_SHORT_DURATION',
@@ -153,7 +155,9 @@ final class Eq60ReportComposer
             ? (array) data_get($reportAssets, 'assets.personalization_routes')
             : [];
         $interpretation = $this->buildV5Interpretation($v5Scores, $quality, $routeMatrix);
-        $crossAssessmentContext = $this->crossAssessmentContextGuard->build($attempt, $result);
+        $crossAssessmentContext = (string) ($interpretation['core_formulation_id'] ?? '') === 'low_confidence_result'
+            ? []
+            : $this->crossAssessmentContextGuard->build($attempt, $result);
         $assetRefs = $this->buildV5AssetRefs($interpretation, $quality, $crossAssessmentContext);
         $resolvedAssets = $this->resolveV5Assets($reportAssets, $locale, $interpretation, $quality, $crossAssessmentContext);
         $legacyCompat = $this->buildLegacyCompat($sections, $compatFree, $compatPaid, $score);
@@ -207,7 +211,7 @@ final class Eq60ReportComposer
                 'methodology' => [
                     'norm_status' => strtolower(trim((string) data_get($score, 'norms.status', 'provisional'))) ?: 'provisional',
                     'scoring_version' => (string) data_get($score, 'version_snapshot.engine_version', 'v1.0_normed_validity'),
-                    'report_version' => 'eq_report_v5_assets_professional_review_v1',
+                    'report_version' => 'eq_report_v5_semantic_guard_v2',
                     'content_version' => Eq60PackLoader::PACK_ID.'/'.$version,
                 ],
                 'generated_at' => now()->toISOString(),
@@ -397,10 +401,12 @@ final class Eq60ReportComposer
     private function buildV5Interpretation(array $scores, array $quality, array $routeMatrix = []): array
     {
         $dimensionScores = is_array($scores['dimensions'] ?? null) ? $scores['dimensions'] : [];
-        $strongest = $this->rankDimension($dimensionScores, true);
-        $developmentLever = $this->rankDimension($dimensionScores, false);
         $qualityLevel = strtoupper(trim((string) ($quality['level'] ?? '')));
-        $formulationId = $this->selectCoreFormulation($dimensionScores, $qualityLevel, $this->isLowConfidenceQuality($quality));
+        $lowConfidence = $this->isLowConfidenceQuality($quality);
+        $formulationId = $this->selectCoreFormulation($dimensionScores, $qualityLevel, $lowConfidence);
+        $dimensionRanking = $this->dimensionRanking($dimensionScores, $lowConfidence);
+        $strongest = $this->uniqueRankedDimension($dimensionRanking['strongest']);
+        $developmentLever = $this->uniqueRankedDimension($dimensionRanking['development']);
         $route = $this->selectPersonalizationRoute($routeMatrix, $formulationId, $dimensionScores, $quality);
         $selectedAssetIds = $this->selectedAssetIds($route, $formulationId, $dimensionScores, $developmentLever);
         if ((array) ($selectedAssetIds['scene_variant_ids'] ?? []) === []) {
@@ -423,6 +429,7 @@ final class Eq60ReportComposer
             'core_formulation_id' => $formulationId,
             'strongest_dimension' => $strongest,
             'development_lever' => $developmentLever,
+            'dimension_ranking' => $dimensionRanking,
             'primary_mechanism_ids' => $selectedAssetIds['mechanism_ids'],
             'primary_scene_ids' => $selectedAssetIds['scene_ids'],
             'primary_scene_variant_ids' => $selectedAssetIds['scene_variant_ids'],
@@ -430,7 +437,7 @@ final class Eq60ReportComposer
             'action_prescription_id' => $selectedAssetIds['action_prescription_id'],
             'result_page_depth_module_id' => $selectedAssetIds['result_page_depth_module_id'],
             'selected_asset_ids' => $selectedAssetIds,
-            'personalization_route' => $this->publicPersonalizationRoute($route),
+            'personalization_route' => $lowConfidence ? [] : $this->publicPersonalizationRoute($route),
         ];
     }
 
@@ -647,11 +654,15 @@ final class Eq60ReportComposer
         $selectedDepthModule = trim((string) ($selected['result_page_depth_module_id'] ?? $selected['result_snapshot'] ?? ''));
 
         if ($formulationId === 'low_confidence_result') {
-            $selectedCore = 'low_confidence_result';
-            $selectedMechanisms = [];
-            $selectedScenes = ['pressure_recovery', 'feedback'];
-            $selectedCareer = ['autonomy_recovery_high'];
-            $selectedAction = 'retest_reflection';
+            return [
+                'core_formulation_id' => 'low_confidence_result',
+                'mechanism_ids' => [],
+                'scene_ids' => [],
+                'scene_variant_ids' => [],
+                'career_environment_ids' => [],
+                'action_prescription_id' => 'retest_reflection',
+                'result_page_depth_module_id' => '',
+            ];
         }
 
         if (! in_array($selectedCore, $this->coreFormulationIds(), true)) {
@@ -835,8 +846,10 @@ final class Eq60ReportComposer
         array $route
     ): array {
         $dimensionStates = [];
-        foreach (['SA', 'ER', 'EM', 'RM'] as $code) {
-            $dimensionStates[$code] = $this->dimensionState($dimensionScores, $code);
+        if ($formulationId !== 'low_confidence_result') {
+            foreach (['SA', 'ER', 'EM', 'RM'] as $code) {
+                $dimensionStates[$code] = $this->dimensionState($dimensionScores, $code);
+            }
         }
 
         $matchPattern = $formulationId === 'low_confidence_result'
@@ -1067,12 +1080,14 @@ final class Eq60ReportComposer
      */
     private function buildV5AssetRefs(array $interpretation, array $quality, array $crossAssessmentContext): array
     {
+        $lowConfidence = (string) ($interpretation['core_formulation_id'] ?? '') === 'low_confidence_result';
+
         return [
             'personalization_route_id' => (string) ($interpretation['route_id'] ?? ''),
             'signal_signature' => is_array($interpretation['signal_signature'] ?? null) ? $interpretation['signal_signature'] : [],
             'selected_asset_ids' => is_array($interpretation['selected_asset_ids'] ?? null) ? $interpretation['selected_asset_ids'] : [],
             'scientific_contract_id' => 'eq.scientific_contract.default',
-            'score_system_id' => 'eq.score_system.default',
+            'score_system_id' => $lowConfidence ? '' : 'eq.score_system.default',
             'core_formulation_id' => (string) ($interpretation['core_formulation_id'] ?? ''),
             'quality_explanation_asset_id' => (string) ($quality['explanation_asset_id'] ?? ''),
             'mechanism_ids' => array_values(array_map('strval', (array) ($interpretation['primary_mechanism_ids'] ?? []))),
@@ -1080,11 +1095,14 @@ final class Eq60ReportComposer
             'scene_variant_ids' => array_values(array_map('strval', (array) ($interpretation['primary_scene_variant_ids'] ?? []))),
             'career_environment_ids' => array_values(array_map('strval', (array) ($interpretation['career_environment_ids'] ?? []))),
             'action_prescription_id' => (string) ($interpretation['action_prescription_id'] ?? ''),
-            'cross_assessment_context_ids' => array_values(array_map('strval', (array) ($crossAssessmentContext['context_asset_ids'] ?? []))),
-            'cross_assessment_boundary_id' => (string) ($crossAssessmentContext['boundary_asset_id'] ?? ''),
-            'sjt_bridge_id' => 'eq.sjt_bridge.planned',
+            'cross_assessment_context_ids' => $lowConfidence ? [] : array_values(array_map('strval', (array) ($crossAssessmentContext['context_asset_ids'] ?? []))),
+            'cross_assessment_boundary_id' => $lowConfidence ? '' : (string) ($crossAssessmentContext['boundary_asset_id'] ?? ''),
+            'sjt_bridge_id' => $lowConfidence ? '' : 'eq.sjt_bridge.planned',
             'result_snapshot_id' => 'eq.snapshot.'.(string) ($interpretation['core_formulation_id'] ?? ''),
-            'commercial_conversion_ids' => [
+            'commercial_conversion_ids' => $lowConfidence ? [
+                'eq.conversion.save_report',
+                'eq.conversion.retest_reminder',
+            ] : [
                 'eq.conversion.save_report',
                 'eq.conversion.email_revisit',
                 'eq.conversion.pdf_export',
@@ -1104,14 +1122,14 @@ final class Eq60ReportComposer
                 'eq.evidence.criterion_validity',
             ],
             'result_page_depth_module_ids' => $this->resultPageDepthModuleIds($interpretation),
-            'agent_playbook_ids' => [
+            'agent_playbook_ids' => $lowConfidence ? [] : [
                 'eq.agent.playbook.understand_result',
                 'eq.agent.playbook.scene_advice',
                 'eq.agent.playbook.career_environment',
                 'eq.agent.playbook.low_confidence',
                 'eq.agent.playbook.unsupported_hiring',
             ],
-            'backend_integration_contract_ids' => [
+            'backend_integration_contract_ids' => $lowConfidence ? [] : [
                 'eq.backend_contract.schema_mapping',
                 'eq.backend_contract.frontend_consumption',
                 'eq.backend_contract.canonical_fixtures',
@@ -1147,6 +1165,7 @@ final class Eq60ReportComposer
         $agentAssets = (array) data_get($docs, 'agent_dialogue_playbooks.assets', []);
         $backendContractAssets = (array) data_get($docs, 'backend_integration_contract.assets', []);
         $formulationId = (string) ($interpretation['core_formulation_id'] ?? '');
+        $lowConfidence = $formulationId === 'low_confidence_result';
         $actionId = (string) ($interpretation['action_prescription_id'] ?? '');
         $snapshotId = 'eq.snapshot.'.$formulationId;
         if (! isset($snapshotAssets[$snapshotId])) {
@@ -1205,7 +1224,10 @@ final class Eq60ReportComposer
             }
         }
         $conversionActions = [];
-        foreach ([
+        $conversionIds = $lowConfidence ? [
+            'eq.conversion.save_report',
+            'eq.conversion.retest_reminder',
+        ] : [
             'eq.conversion.save_report',
             'eq.conversion.email_revisit',
             'eq.conversion.pdf_export',
@@ -1213,7 +1235,8 @@ final class Eq60ReportComposer
             'eq.conversion.retest_reminder',
             'eq.conversion.related_tests',
             'eq.conversion.agent_entry',
-        ] as $id) {
+        ];
+        foreach ($conversionIds as $id) {
             $asset = $this->localizedAsset((array) ($conversionAssets[$id] ?? []), $locale);
             if ($asset !== []) {
                 $conversionActions[] = array_merge(['id' => $id], $asset);
@@ -1252,13 +1275,14 @@ final class Eq60ReportComposer
         }
 
         $agentPlaybooks = [];
-        foreach ([
+        $agentPlaybookIds = $lowConfidence ? [] : [
             'eq.agent.playbook.understand_result',
             'eq.agent.playbook.scene_advice',
             'eq.agent.playbook.career_environment',
             'eq.agent.playbook.low_confidence',
             'eq.agent.playbook.unsupported_hiring',
-        ] as $id) {
+        ];
+        foreach ($agentPlaybookIds as $id) {
             $asset = $this->localizedAsset((array) ($agentAssets[$id] ?? []), $locale);
             if ($asset !== []) {
                 $agentPlaybooks[] = array_merge(['id' => $id], $asset);
@@ -1266,7 +1290,7 @@ final class Eq60ReportComposer
         }
 
         $backendIntegrationContract = [];
-        foreach ([
+        foreach ($lowConfidence ? [] : [
             'eq.backend_contract.schema_mapping',
             'eq.backend_contract.frontend_consumption',
             'eq.backend_contract.canonical_fixtures',
@@ -1283,7 +1307,7 @@ final class Eq60ReportComposer
             'result_snapshot' => $resultSnapshot,
             'commercial_conversion_actions' => $conversionActions,
             'scientific_contract' => $this->localizedAsset((array) ($scientificAssets['eq.scientific_contract.default'] ?? []), $locale),
-            'score_system' => $this->localizedScoreSystem((array) ($docs['score_system'] ?? []), $locale),
+            'score_system' => $lowConfidence ? [] : $this->localizedScoreSystem((array) ($docs['score_system'] ?? []), $locale),
             'core_formulation' => array_merge(
                 ['id' => $formulationId],
                 $this->localizedAsset((array) data_get($docs, 'core_formulations.formulations.'.$formulationId, []), $locale)
@@ -1295,11 +1319,11 @@ final class Eq60ReportComposer
                 ['id' => $actionId],
                 $this->localizedAsset((array) data_get($docs, 'action_prescriptions.prescriptions.'.$actionId, []), $locale)
             ),
-            'sjt_bridge' => array_merge(
+            'sjt_bridge' => $lowConfidence ? [] : array_merge(
                 ['id' => 'eq.sjt_bridge.planned', 'available' => false],
                 $this->localizedAsset((array) ($sjtAssets['eq.sjt_bridge.planned'] ?? []), $locale)
             ),
-            'cross_assessment_context' => $this->resolveCrossAssessmentAssets($crossContextAssets, $locale, $crossAssessmentContext),
+            'cross_assessment_context' => $lowConfidence ? [] : $this->resolveCrossAssessmentAssets($crossContextAssets, $locale, $crossAssessmentContext),
             'quality' => [
                 'explanation_asset_id' => (string) ($quality['explanation_asset_id'] ?? ''),
                 'confidence_label' => (string) ($quality['confidence_label'] ?? ''),
@@ -1312,7 +1336,7 @@ final class Eq60ReportComposer
             'result_page_depth_modules' => $resultPageDepthModules,
             'agent_dialogue_playbooks' => $agentPlaybooks,
             'backend_integration_contract' => $backendIntegrationContract,
-            'personalization_route' => [
+            'personalization_route' => $lowConfidence ? [] : [
                 'id' => (string) ($interpretation['route_id'] ?? ''),
                 'signal_signature' => is_array($interpretation['signal_signature'] ?? null) ? $interpretation['signal_signature'] : [],
                 'selected_asset_ids' => is_array($interpretation['selected_asset_ids'] ?? null) ? $interpretation['selected_asset_ids'] : [],
@@ -1375,6 +1399,10 @@ final class Eq60ReportComposer
      */
     private function resultPageDepthModuleIds(array $interpretation): array
     {
+        if ((string) ($interpretation['core_formulation_id'] ?? '') === 'low_confidence_result') {
+            return [];
+        }
+
         $ids = [
             'eq.depth.how_to_read.default',
             'eq.depth.evidence_stack.default',
@@ -1564,19 +1592,75 @@ final class Eq60ReportComposer
     /**
      * @param  array<string,array<string,mixed>>  $dimensionScores
      */
-    private function rankDimension(array $dimensionScores, bool $highest): ?string
+    private function dimensionRanking(array $dimensionScores, bool $suppressed): array
     {
-        $ranked = [];
-        foreach (['SA', 'ER', 'EM', 'RM'] as $code) {
-            $node = is_array($dimensionScores[$code] ?? null) ? $dimensionScores[$code] : [];
-            $ranked[$code] = $this->nullableNumber($node['percentile'] ?? null)
-                ?? $this->nullableNumber($node['standard_score'] ?? null)
-                ?? $this->nullableNumber($node['raw_score'] ?? null)
-                ?? 0;
+        if ($suppressed) {
+            return [
+                'strongest' => ['status' => 'suppressed', 'codes' => []],
+                'development' => ['status' => 'suppressed', 'codes' => []],
+            ];
         }
 
-        $highest ? arsort($ranked) : asort($ranked);
-        $code = array_key_first($ranked);
+        $values = [];
+        foreach (['percentile', 'standard_score', 'raw_score'] as $metric) {
+            $candidate = [];
+            foreach (['SA', 'ER', 'EM', 'RM'] as $code) {
+                $node = is_array($dimensionScores[$code] ?? null) ? $dimensionScores[$code] : [];
+                $value = $this->nullableNumber($node[$metric] ?? null);
+                if ($value === null) {
+                    $candidate = [];
+                    break;
+                }
+                $candidate[$code] = (float) $value;
+            }
+            if (count($candidate) === 4) {
+                $values = $candidate;
+                break;
+            }
+        }
+
+        if ($values === []) {
+            return [
+                'strongest' => ['status' => 'unavailable', 'codes' => []],
+                'development' => ['status' => 'unavailable', 'codes' => []],
+            ];
+        }
+
+        return [
+            'strongest' => $this->rankingNode($values, max($values)),
+            'development' => $this->rankingNode($values, min($values)),
+        ];
+    }
+
+    /**
+     * @param  array<string,float>  $values
+     * @return array{status:string,codes:list<string>}
+     */
+    private function rankingNode(array $values, float $target): array
+    {
+        $codes = [];
+        foreach (['SA', 'ER', 'EM', 'RM'] as $code) {
+            if (isset($values[$code]) && abs($values[$code] - $target) <= self::DIMENSION_RANKING_EPSILON) {
+                $codes[] = $code;
+            }
+        }
+
+        return [
+            'status' => count($codes) === 1 ? 'unique' : 'tie',
+            'codes' => $codes,
+        ];
+    }
+
+    /**
+     * @param  array{status:string,codes:list<string>}  $ranking
+     */
+    private function uniqueRankedDimension(array $ranking): ?string
+    {
+        if (($ranking['status'] ?? '') !== 'unique') {
+            return null;
+        }
+
+        $code = $ranking['codes'][0] ?? null;
 
         return is_string($code) && $code !== '' ? $code : null;
     }

@@ -188,7 +188,13 @@ final class Eq60GoldenCasesTest extends TestCase
                     'golden case v5 formulation asset mismatch: '.$caseId
                 );
                 $this->assertNotSame('', (string) data_get($fullReport, 'report.assets.core_formulation.title'));
-                $this->assertNotEmpty((array) data_get($fullReport, 'report.interpretation.primary_scene_ids'));
+                if ($expectedFormulation === 'low_confidence_result') {
+                    $this->assertSame([], (array) data_get($fullReport, 'report.interpretation.primary_scene_ids'));
+                    $this->assertSame([], (array) data_get($fullReport, 'report.assets.reality_scenes'));
+                    $this->assertSame([], (array) data_get($fullReport, 'report.assets.career_environment'));
+                } else {
+                    $this->assertNotEmpty((array) data_get($fullReport, 'report.interpretation.primary_scene_ids'));
+                }
                 $this->assertNotSame('', (string) data_get($fullReport, 'report.interpretation.action_prescription_id'));
             }
         }

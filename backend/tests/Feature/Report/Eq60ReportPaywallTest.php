@@ -86,7 +86,7 @@ final class Eq60ReportPaywallTest extends TestCase
         $this->assertSame('planned', (string) data_get($gate, 'report.next_module.status'));
         $this->assertFalse((bool) data_get($gate, 'report.next_module.available', true));
         $this->assertSame('provisional', (string) data_get($gate, 'report.methodology.norm_status'));
-        $this->assertSame('eq_report_v5_assets_professional_review_v1', (string) data_get($gate, 'report.methodology.report_version'));
+        $this->assertSame('eq_report_v5_semantic_guard_v2', (string) data_get($gate, 'report.methodology.report_version'));
         $this->assertNotSame('', (string) data_get($gate, 'report.asset_refs.core_formulation_id'));
         $this->assertNotSame('', (string) data_get($gate, 'report.asset_refs.action_prescription_id'));
         $this->assertNotSame('', (string) data_get($gate, 'report.asset_refs.result_snapshot_id'));
@@ -299,9 +299,16 @@ final class Eq60ReportPaywallTest extends TestCase
         $scorer = app(Eq60ScorerV1NormedValidity::class);
 
         $answers = [];
-        for ($i = 1; $i <= 60; $i++) {
-            $answers[$i] = 'C';
+        foreach ($loader->loadGoldenCases('v1') as $case) {
+            if ((string) ($case['case_id'] ?? '') !== 'EQ60_BALANCED_HIGH_ZH') {
+                continue;
+            }
+            foreach ((array) ($case['answers_by_qid'] ?? []) as $qid => $answer) {
+                $answers[(int) $qid] = (string) $answer;
+            }
+            break;
         }
+        $this->assertCount(60, $answers);
 
         return $scorer->score(
             $answers,

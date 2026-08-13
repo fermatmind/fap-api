@@ -791,6 +791,17 @@ final class EqAgentContextApiTest extends TestCase
             $this->assertContains('clinical_diagnosis', (array) $response->json('intent_context.forbidden_claim_ids'));
             $this->assertNotEmpty((array) $response->json('resolved_assets.action_prescription'));
             $this->assertSame('retest_reflection', (string) $response->json('resolved_assets.action_prescription.id'));
+            $this->assertSame([], (array) $response->json('report_context.interpretation.primary_mechanism_ids'));
+            $this->assertSame([], (array) $response->json('report_context.interpretation.primary_scene_ids'));
+            $this->assertSame([], (array) $response->json('report_context.interpretation.primary_scene_variant_ids'));
+            $this->assertSame([], (array) $response->json('report_context.interpretation.career_environment_ids'));
+            $this->assertSame([], (array) $response->json('report_context.interpretation.signal_signature.dimension_states'));
+            $this->assertSame([], (array) $response->json('resolved_assets.mechanisms'));
+            $this->assertSame([], (array) $response->json('resolved_assets.reality_scenes'));
+            $this->assertSame([], (array) $response->json('resolved_assets.career_environment'));
+            $this->assertSame([], (array) $response->json('resolved_assets.agent_dialogue_playbooks'));
+            $this->assertSame([], (array) $response->json('resolved_assets.personalization_route'));
+            $this->assertSame([], (array) $response->json('resolved_assets.conversion_agent_entry'));
         }
     }
 
@@ -972,9 +983,16 @@ final class EqAgentContextApiTest extends TestCase
         $scorer = app(Eq60ScorerV1NormedValidity::class);
 
         $answers = [];
-        for ($i = 1; $i <= 60; $i++) {
-            $answers[$i] = 'C';
+        foreach ($loader->loadGoldenCases('v1') as $case) {
+            if ((string) ($case['case_id'] ?? '') !== 'EQ60_BALANCED_HIGH_ZH') {
+                continue;
+            }
+            foreach ((array) ($case['answers_by_qid'] ?? []) as $qid => $answer) {
+                $answers[(int) $qid] = (string) $answer;
+            }
+            break;
         }
+        $this->assertCount(60, $answers);
 
         return $scorer->score(
             $answers,
