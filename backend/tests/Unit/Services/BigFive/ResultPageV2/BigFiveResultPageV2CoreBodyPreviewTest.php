@@ -185,6 +185,25 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $changed);
     }
 
+    public function test_runtime_freeze_classifier_ignores_chinese_mbti_result_science_authority_files(): void
+    {
+        $allowed = [
+            'backend/app/PersonalityCms/DesktopClone/PersonalityVariantCloneContentValidator.php',
+            'backend/app/Services/Cms/PersonalityDesktopCloneContentService.php',
+            'backend/app/Services/Mbti/MbtiPublicProjectionService.php',
+            'backend/app/Support/Mbti/MbtiZhResultContentPolicy.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame(
+            ['backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php'],
+            $this->mbtiImpactingRuntimeChanges([
+                ...$allowed,
+                'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+            ], '', ''),
+        );
+    }
+
     public function test_runtime_freeze_classifier_ignores_only_greenfield_baseline_transfer_files(): void
     {
         $allowed = [
@@ -7762,6 +7781,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isMbtiZhResultScienceAuthorityFile($file)) {
+                continue;
+            }
+
             if ($this->isMbtiPersonalityEnglishVariantSectionEnrichmentFile($file)) {
                 continue;
             }
@@ -10308,6 +10331,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Support/Mbti/MbtiCanonicalSectionRegistry.php',
             'backend/app/Services/Mbti/Adapters/MbtiPersonalityProfileAuthoritySourceAdapter.php',
+        ], true);
+    }
+
+    private function isMbtiZhResultScienceAuthorityFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/PersonalityCms/DesktopClone/PersonalityVariantCloneContentValidator.php',
+            'backend/app/Services/Cms/PersonalityDesktopCloneContentService.php',
+            'backend/app/Services/Mbti/MbtiPublicProjectionService.php',
+            'backend/app/Support/Mbti/MbtiZhResultContentPolicy.php',
         ], true);
     }
 
