@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Services\Scale\ScaleRegistryWriter;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 final class ScaleRegistrySeeder extends Seeder
@@ -151,8 +152,34 @@ final class ScaleRegistrySeeder extends Seeder
 
         $big5PackId = 'BIG5_OCEAN';
         $big5DirVersion = 'v1';
+        $big5Content = $this->catalogContent(
+            enTitle: 'Big Five Personality Test (OCEAN Model)',
+            zhTitle: '大五人格测试（OCEAN 模型）',
+            enDescription: 'Measure your Openness, Conscientiousness, Extraversion, Agreeableness, and Neuroticism in one assessment.',
+            zhDescription: '用一次测评了解开放性、尽责性、外倾性、宜人性与神经质。',
+            questions: 120,
+            minutes: 15,
+            cardVisual: 'bars_ocean',
+            cardTone: 'editorial',
+            cardSeed: 'big-five',
+            cardDensity: 'regular',
+            enTagline: 'Trait distribution profile',
+            zhTagline: '特质分布画像',
+            priority: 95,
+            rating: 0,
+            enExcerpt: 'Explore your current pattern across five continuous trait dimensions and use the scores as a reference for self-observation and growth planning.',
+            zhExcerpt: '了解你在五个连续特质维度上的当前分布，并将分数作为自我观察与成长规划的参考。',
+            enSeoCopy: 'This report describes five continuous trait dimensions for self-observation. FermatMind does not currently publish specific reliability, validity, norm, or percentile evidence for this assessment.',
+            zhSeoCopy: '该报告描述五个连续特质维度，供自我观察参考；费马测试当前未公开本测评的具体信度、效度、常模或百分位证据。'
+        );
+        $big5Content['zh']['when_to_use'] = '120题完整版约15分钟，90题标准版约11分钟；可根据希望的题量与细度选择版本。';
+        $big5Content['zh']['how_it_works'][0] = '选择120题完整版（约15分钟）或90题标准版（约11分钟），并在一次专注会话中完成。';
+        $big5Content['zh']['faq'][0]['a'] = '120题完整版约15分钟，90题标准版约11分钟。';
+        $big5Content['en']['when_to_use'] = 'Choose the 120-question full version (about 15 minutes) or the 90-question standard version (about 11 minutes) based on the depth you want.';
+        $big5Content['en']['how_it_works'][0] = 'Choose either the 120-question full version (about 15 minutes) or the 90-question standard version (about 11 minutes), then complete it in one focused session.';
+        $big5Content['en']['faq'][0]['a'] = 'The 120-question full version takes about 15 minutes; the 90-question standard version takes about 11 minutes.';
 
-        $big5 = $writer->upsertScale([
+        $big5Payload = [
             'code' => 'BIG5_OCEAN',
             'org_id' => 0,
             'primary_slug' => 'big-five-personality-test-ocean-model',
@@ -207,30 +234,19 @@ final class ScaleRegistrySeeder extends Seeder
                     'og_image_url' => 'https://api.fermatmind.com/static/share/mbti_square_600x600.png',
                 ],
             ],
-            'content_i18n_json' => $this->catalogContent(
-                enTitle: 'Big Five Personality Test (OCEAN Model)',
-                zhTitle: '大五人格测试（OCEAN 模型）',
-                enDescription: 'Measure your Openness, Conscientiousness, Extraversion, Agreeableness, and Neuroticism in one assessment.',
-                zhDescription: '用一次测评了解开放性、尽责性、外倾性、宜人性与神经质。',
-                questions: 120,
-                minutes: 15,
-                cardVisual: 'bars_ocean',
-                cardTone: 'editorial',
-                cardSeed: 'big-five',
-                cardDensity: 'regular',
-                enTagline: 'Trait distribution profile',
-                zhTagline: '特质分布画像',
-                priority: 95,
-                rating: 0,
-                enExcerpt: 'Explore your current pattern across five continuous trait dimensions and use the scores as a reference for self-observation and growth planning.',
-                zhExcerpt: '了解你在五个连续特质维度上的当前分布，并将分数作为自我观察与成长规划的参考。',
-                enSeoCopy: 'This report describes five continuous trait dimensions for self-observation. FermatMind does not currently publish specific reliability, validity, norm, or percentile evidence for this assessment.',
-                zhSeoCopy: '该报告描述五个连续特质维度，供自我观察参考；费马测试当前未公开本测评的具体信度、效度、常模或百分位证据。'
-            ),
+            'content_i18n_json' => $big5Content,
 
             'is_public' => true,
             'is_active' => true,
-        ]);
+        ];
+
+        $big5 = DB::transaction(function () use ($big5Payload, $writer) {
+            $preservedBigFiveContent = $this->bigFiveContentToPreserve();
+            $scale = $writer->upsertScale($big5Payload);
+            $this->restoreBigFiveContent($preservedBigFiveContent);
+
+            return $scale;
+        });
 
         $writer->syncSlugsForScale($big5);
         $this->command?->info('ScaleRegistrySeeder: BIG5_OCEAN scale upserted.');
@@ -722,6 +738,47 @@ final class ScaleRegistrySeeder extends Seeder
 
         $writer->syncSlugsForScale($eq60);
         $this->command?->info('ScaleRegistrySeeder: EQ_60 scale upserted.');
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function bigFiveContentToPreserve(): array
+    {
+        if (getenv('FAP_PRESERVE_EXISTING_BIG5_CMS_CONTENT') !== '1') {
+            return [];
+        }
+
+        $contentByTable = [];
+        foreach (['scales_registry', 'scales_registry_v2'] as $table) {
+            if (! Schema::hasTable($table)) {
+                continue;
+            }
+
+            $row = DB::table($table)
+                ->where('org_id', 0)
+                ->where('code', 'BIG5_OCEAN')
+                ->lockForUpdate()
+                ->first(['content_i18n_json']);
+            if ($row !== null) {
+                $contentByTable[$table] = $row->content_i18n_json;
+            }
+        }
+
+        return $contentByTable;
+    }
+
+    /**
+     * @param  array<string, mixed>  $contentByTable
+     */
+    private function restoreBigFiveContent(array $contentByTable): void
+    {
+        foreach ($contentByTable as $table => $content) {
+            DB::table($table)
+                ->where('org_id', 0)
+                ->where('code', 'BIG5_OCEAN')
+                ->update(['content_i18n_json' => $content]);
+        }
     }
 
     /**
