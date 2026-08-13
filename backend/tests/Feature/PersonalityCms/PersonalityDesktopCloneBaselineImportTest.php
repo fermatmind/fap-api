@@ -83,6 +83,25 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
             ->assertExitCode(0);
     }
 
+    public function test_exact_release_rejects_a_non_published_pre_state(): void
+    {
+        $this->seedZhVariantsForAllMbtiBaseTypes();
+        $this->artisan('personality:import-desktop-clone-baseline', [
+            '--locale' => ['zh-CN'],
+            '--status' => 'published',
+            '--upsert' => true,
+            '--source-dir' => '../content_baselines/personality_clone',
+        ])->assertExitCode(0);
+
+        PersonalityProfileVariantCloneContent::query()->firstOrFail()->forceFill([
+            'status' => PersonalityProfileVariantCloneContent::STATUS_DRAFT,
+        ])->save();
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('must already be published');
+        app(MbtiZhResultContentReleaseService::class)->dryRun();
+    }
+
     public function test_import_publishes_32_full_code_zh_clone_content_with_compatibility_fields_and_is_idempotent(): void
     {
         $this->seedZhVariantsForAllMbtiBaseTypes();

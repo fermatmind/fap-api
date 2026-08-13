@@ -259,6 +259,9 @@ final class MbtiZhResultContentReleaseService
             if (! $record) {
                 throw new RuntimeException('Current clone record missing for '.$row['full_code']);
             }
+            if ($record->status !== PersonalityProfileVariantCloneContent::STATUS_PUBLISHED) {
+                throw new RuntimeException('Current clone record must already be published for '.$row['full_code'].'.');
+            }
             $targets[] = ['row' => $row, 'variant' => $variant, 'record' => $record];
         }
         $preState = array_map(static fn (array $target): array => [

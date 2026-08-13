@@ -165,8 +165,13 @@ jobs:
           rollback_set_hash="$(jq -r .rollback_revision_set_hash artifacts/promotion-dry-run.json)"
           jq -e --arg package "$EXPECTED_PACKAGE_HASH" --arg pre "$pre_state_hash" '.ok == true and .package_hash == $package and .pre_state_hash == $pre and .record_count == 32' artifacts/promotion-dry-run.json >/dev/null
 
+          promotion_result_ok=1
+          set +e
           "${ssh_base[@]}" "$remote php artisan personality:mbti-zh-result-content-release --stage=promote --package-hash='$EXPECTED_PACKAGE_HASH' --pre-state-hash='$pre_state_hash' --revision-set-hash='$revision_set_hash' $write_flags --no-interaction --no-ansi" | tee artifacts/promotion.json
-          jq -e '.ok == true and .committed == true and .record_count == 32 and .publication_changed == false and .indexability_changed == false and .sitemap_mutated == false and .llms_mutated == false and .search_release_mutated == false and .deploy_mutated == false' artifacts/promotion.json >/dev/null
+          promotion_status="${PIPESTATUS[0]}"
+          set -e
+          test "$promotion_status" -eq 0 || promotion_result_ok=0
+          jq -e '.ok == true and .committed == true and .record_count == 32 and .publication_changed == false and .indexability_changed == false and .sitemap_mutated == false and .llms_mutated == false and .search_release_mutated == false and .deploy_mutated == false' artifacts/promotion.json >/dev/null || promotion_result_ok=0
 
           readback_ok=1
           "${ssh_base[@]}" "$remote php artisan personality:mbti-zh-result-content-release --stage=readback --package-hash='$EXPECTED_PACKAGE_HASH' --no-interaction --no-ansi" | tee artifacts/database-readback.json || readback_ok=0
@@ -185,6 +190,10 @@ jobs:
           done
           jq -s --arg package "$EXPECTED_PACKAGE_HASH" '{schema:"mbti_zh_result_public_readback.v1",package_hash:$package,record_count:length,disabled_slot_count:(map(.disabled_slots)|add),unique_source_hashes:(map(.source_hash)|unique|length),revision_nos:(map({key:.full_code,value:.revision_no})|from_entries),ok:(length==32 and (map(.package_hash)|unique)==[$package] and (map(.source_hash)|unique|length)==32)}' "$public_rows" > artifacts/public-readback.json
           jq -e '.ok == true and .record_count == 32 and .disabled_slot_count == 224 and .unique_source_hashes == 32' artifacts/public-readback.json >/dev/null || readback_ok=0
+
+          if [ "$promotion_result_ok" -ne 1 ] && [ "$readback_ok" -eq 1 ]; then
+            jq -n '{schema:"mbti_zh_result_promotion_recovery.v1",promotion_result_ambiguous:true,exact_database_and_public_readback_passed:true,action:"accept_committed_exact_package"}' > artifacts/promotion-recovery.json
+          fi
 
           if [ "$readback_ok" -ne 1 ]; then
             "${ssh_base[@]}" "$remote php artisan personality:mbti-zh-result-content-release --stage=rollback --package-hash='$EXPECTED_PACKAGE_HASH' --pre-state-hash='$pre_state_hash' --revision-set-hash='$rollback_set_hash' $write_flags --no-interaction --no-ansi" | tee artifacts/rollback.json
