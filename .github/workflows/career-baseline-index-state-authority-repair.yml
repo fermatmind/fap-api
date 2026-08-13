@@ -163,7 +163,7 @@ jobs:
         run: |
           set -euo pipefail
           jq -n --arg mode "$MODE" --arg control "$CONTROL_PLANE_SHA" --arg active "$ACTIVE_REVISION" '{
-            contract_version: "career.baseline_index_state_authority_repair.v1",
+            contract_version: "career.baseline_index_state_authority_repair.v2",
             mode: $mode,
             status: "HOLD_BASELINE_AUTHORITY_REPAIR",
             safe_code: "CONTROL_INITIALIZATION",
@@ -201,7 +201,7 @@ jobs:
           git cat-file -e "${ACTIVE_REVISION}^{commit}"
           git merge-base --is-ancestor "$ACTIVE_REVISION" "$CONTROL_PLANE_SHA"
           test "$(git diff --name-only "$ACTIVE_REVISION..$CONTROL_PLANE_SHA" -- backend/database/migrations | wc -l | tr -d ' ')" = 0
-          test "$(sha256sum backend/docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json | awk '{print $1}')" = b570ec0cdda65278aa543431886b3529d072de8d67a8e79f1cafbb1c4c8dfc0e
+          test "$(sha256sum backend/docs/seo/generated/detail-ready-1046-rollout-manifest.v2.json | awk '{print $1}')" = ef4d43eeaa0300534b36fd77d7806bcbe065de1fb13f158ceda1517f259207c5
           php -l backend/scripts/operations/career_baseline_index_state_authority_repair.php >/dev/null
 
           validate_run() {
@@ -261,7 +261,7 @@ jobs:
               test "$DELTA_STATE_SHA256" = 53ea7077bc46eb8e1da6df1da911000f805c8245b5d575de86e3263aea3220f4
               download_receipt "$PREFLIGHT_RUN_ID" "$PREFLIGHT_RUN_ATTEMPT" "$PREFLIGHT_RECEIPT_SHA256" "$PREFLIGHT_ARTIFACT_DIGEST" "$RUNNER_TEMP/preflight"
               preflight="$RUNNER_TEMP/preflight/unpacked/career-baseline-index-state-authority-repair.json"
-              jq -e --arg control "$CONTROL_PLANE_SHA" --arg active "$ACTIVE_REVISION" --arg baseline "$BASELINE_STATE_SHA256" --arg delta "$DELTA_STATE_SHA256" --arg targets "$REPAIR_TARGET_SET_SHA256" --argjson count "$REPAIR_TARGET_COUNT" '.contract_version == "career.baseline_index_state_authority_repair.v1" and .mode == "preflight" and .status == "PASS_BASELINE_REPAIR_REQUIRED" and .control_plane_sha == $control and .active_revision == $active and .baseline.current_state_sha256 == $baseline and .delta.current_state_sha256 == $delta and .baseline.repair_target_count == $count and .baseline.repair_target_set_sha256 == $targets and .baseline.latest_state_tie_count == 0 and .delta.latest_state_tie_count == 0 and .writes_committed == false and .automatic_retry_allowed == false' "$preflight" >/dev/null
+              jq -e --arg control "$CONTROL_PLANE_SHA" --arg active "$ACTIVE_REVISION" --arg baseline "$BASELINE_STATE_SHA256" --arg delta "$DELTA_STATE_SHA256" --arg targets "$REPAIR_TARGET_SET_SHA256" --argjson count "$REPAIR_TARGET_COUNT" '.contract_version == "career.baseline_index_state_authority_repair.v2" and .mode == "preflight" and .status == "PASS_BASELINE_REPAIR_REQUIRED" and .control_plane_sha == $control and .active_revision == $active and .baseline.current_state_sha256 == $baseline and .delta.current_state_sha256 == $delta and .baseline.repair_target_count == $count and .baseline.repair_target_set_sha256 == $targets and .baseline.latest_state_tie_count == 0 and .delta.latest_state_tie_count == 0 and .writes_committed == false and .automatic_retry_allowed == false' "$preflight" >/dev/null
               ;;
           esac
           if [ "$MODE" = apply ]; then
@@ -274,7 +274,7 @@ jobs:
             [[ "$APPLY_RECEIPT_SHA256" =~ $sha && "$APPLY_ARTIFACT_DIGEST" =~ $digest ]]
             download_receipt "$APPLY_RUN_ID" "$APPLY_RUN_ATTEMPT" "$APPLY_RECEIPT_SHA256" "$APPLY_ARTIFACT_DIGEST" "$RUNNER_TEMP/apply"
             apply="$RUNNER_TEMP/apply/unpacked/career-baseline-index-state-authority-repair.json"
-            jq -e --arg control "$CONTROL_PLANE_SHA" --arg active "$ACTIVE_REVISION" --arg preflight "$PREFLIGHT_RECEIPT_SHA256" --argjson count "$REPAIR_TARGET_COUNT" '.contract_version == "career.baseline_index_state_authority_repair.v1" and .mode == "apply" and .status == "PASS_BASELINE_REPAIR_APPLIED" and .control_plane_sha == $control and .active_revision == $active and .preflight_lineage.receipt_sha256 == $preflight and .database_insert_count == $count and .database_update_count == 0 and .database_delete_count == 0 and .database_transaction_committed == true and .writes_committed == true and .baseline.matching_count == 30 and .baseline.repair_target_count == 0' "$apply" >/dev/null
+            jq -e --arg control "$CONTROL_PLANE_SHA" --arg active "$ACTIVE_REVISION" --arg preflight "$PREFLIGHT_RECEIPT_SHA256" --argjson count "$REPAIR_TARGET_COUNT" '.contract_version == "career.baseline_index_state_authority_repair.v2" and .mode == "apply" and .status == "PASS_BASELINE_REPAIR_APPLIED" and .control_plane_sha == $control and .active_revision == $active and .preflight_lineage.receipt_sha256 == $preflight and .database_insert_count == $count and .database_update_count == 0 and .database_delete_count == 0 and .database_transaction_committed == true and .writes_committed == true and .baseline.matching_count == 30 and .baseline.repair_target_count == 0' "$apply" >/dev/null
           fi
 
       - name: Validate protected production topology
@@ -324,7 +324,7 @@ jobs:
             < backend/scripts/operations/career_baseline_index_state_authority_repair.php > "$remote" 2>/dev/null
           status=$?
           set -e
-          if jq -e '.contract_version == "career.baseline_index_state_authority_repair.v1" and (.status | type == "string")' "$remote" >/dev/null 2>&1; then
+          if jq -e '.contract_version == "career.baseline_index_state_authority_repair.v2" and (.status | type == "string")' "$remote" >/dev/null 2>&1; then
             mv "$remote" "$receipt"
           else
             jq '.status = "HOLD_BASELINE_AUTHORITY_REPAIR" | .safe_code = "REMOTE_OUTCOME_AMBIGUOUS" | .writes_committed = null' "$receipt" > "$receipt.next"
@@ -338,7 +338,7 @@ jobs:
         run: |
           set -euo pipefail
           receipt="$RUNNER_TEMP/career-baseline-index-state-authority-repair.json"
-          jq -e --arg mode "$MODE" --arg control "$CONTROL_PLANE_SHA" --arg active "$ACTIVE_REVISION" '.contract_version == "career.baseline_index_state_authority_repair.v1" and .mode == $mode and .control_plane_sha == $control and .active_revision == $active and .authority.generation_id == "career-current-342-30-bootstrap-v1" and .authority.pointer_document_sha256 == "1ebfd2826be9d3b63d810d33050034e3d424c95b3db81fa49b0822c5e6b2ec08" and .authority.projection_sha256 == "397f2a4ec284e9c0a6cd610447541ad4773fa7a7f3045008fab5efb334ec85c6" and .authority.ledger_sha256 == "975b311bb346a090f1add678d5a6d9f1be230f87b223e2c3c829f4c7fd7aac6e" and .authority.slug_count == 342 and .authority.locale_row_count == 684 and .authority.published_slug_count == 30 and .authority.published_slug_set_sha256 == "39cc766fb18c85d385b83f0ac1f56a8b97d46481d3e9a12de0588abbaf640060" and .authority.published_locale_row_count == 60 and .authority.published_locale_row_set_sha256 == "a42b2c69562ee7ea463d8190572f3b9f8244a633e1616d73b2122c3119ecfbee" and .manifest.baseline_count == 30 and .manifest.delta_count == 1016 and .manifest.target_count == 1046 and .delta.current_state_sha256 == "53ea7077bc46eb8e1da6df1da911000f805c8245b5d575de86e3263aea3220f4" and .delta.matching_count == 0 and .delta.missing_or_mismatching_count == 1016 and .baseline.latest_state_tie_count == 0 and .delta.latest_state_tie_count == 0 and .database_update_count == 0 and .database_delete_count == 0 and .cms_write_count == 0 and .cache_write_count == 0 and .pointer_write_count == 0 and .artifact_write_count == 0 and .publication_write_count == 0 and .discoverability_write_count == 0 and .migration_count == 0 and .deployment_count == 0 and .restart_count == 0 and .sitemap_write_count == 0 and .llms_write_count == 0 and .search_submission_count == 0 and .automatic_retry_allowed == false and .automatic_rollback_allowed == false' "$receipt" >/dev/null
+          jq -e --arg mode "$MODE" --arg control "$CONTROL_PLANE_SHA" --arg active "$ACTIVE_REVISION" '.contract_version == "career.baseline_index_state_authority_repair.v2" and .mode == $mode and .control_plane_sha == $control and .active_revision == $active and .authority.generation_id == "career-current-342-30-bootstrap-v1" and .authority.pointer_document_sha256 == "1ebfd2826be9d3b63d810d33050034e3d424c95b3db81fa49b0822c5e6b2ec08" and .authority.projection_sha256 == "397f2a4ec284e9c0a6cd610447541ad4773fa7a7f3045008fab5efb334ec85c6" and .authority.ledger_sha256 == "975b311bb346a090f1add678d5a6d9f1be230f87b223e2c3c829f4c7fd7aac6e" and .authority.slug_count == 342 and .authority.locale_row_count == 684 and .authority.published_slug_count == 30 and .authority.published_slug_set_sha256 == "39cc766fb18c85d385b83f0ac1f56a8b97d46481d3e9a12de0588abbaf640060" and .authority.published_locale_row_count == 60 and .authority.published_locale_row_set_sha256 == "a42b2c69562ee7ea463d8190572f3b9f8244a633e1616d73b2122c3119ecfbee" and .manifest.baseline_count == 30 and .manifest.delta_count == 1016 and .manifest.target_count == 1046 and .delta.current_state_sha256 == "53ea7077bc46eb8e1da6df1da911000f805c8245b5d575de86e3263aea3220f4" and .delta.matching_count == 0 and .delta.missing_or_mismatching_count == 1016 and .baseline.latest_state_tie_count == 0 and .delta.latest_state_tie_count == 0 and .database_update_count == 0 and .database_delete_count == 0 and .cms_write_count == 0 and .cache_write_count == 0 and .pointer_write_count == 0 and .artifact_write_count == 0 and .publication_write_count == 0 and .discoverability_write_count == 0 and .migration_count == 0 and .deployment_count == 0 and .restart_count == 0 and .sitemap_write_count == 0 and .llms_write_count == 0 and .search_submission_count == 0 and .automatic_retry_allowed == false and .automatic_rollback_allowed == false' "$receipt" >/dev/null
           case "$MODE" in
             preflight) jq -e '(.status == "PASS_BASELINE_REPAIR_REQUIRED" or .status == "PASS_BASELINE_ALREADY_EXACT") and .database_select_only == true and .database_insert_count == 0 and .writes_committed == false and ((.status == "PASS_BASELINE_REPAIR_REQUIRED" and .baseline.repair_target_count >= 1 and .baseline.repair_target_count <= 30) or (.status == "PASS_BASELINE_ALREADY_EXACT" and .baseline.repair_target_count == 0))' "$receipt" >/dev/null ;;
             apply) jq -e --argjson count "$REPAIR_TARGET_COUNT" '.status == "PASS_BASELINE_REPAIR_APPLIED" and .database_insert_count == $count and .database_transaction_committed == true and .writes_committed == true and .baseline.preserved_count == 30 and .baseline.matching_count == 30 and .baseline.repair_target_count == 0' "$receipt" >/dev/null ;;

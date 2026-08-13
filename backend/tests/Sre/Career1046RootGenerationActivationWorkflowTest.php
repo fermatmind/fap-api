@@ -472,7 +472,7 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
             'UNLOCK TABLES',
             'database_exclusion_lock_acquired',
             'database_exclusion_lock_released',
-            'career.1046.root_generation_activation.v1',
+            'career.1046.root_generation_activation.v2',
             'receipt_covered_count == 1016',
             'matching_count == 1016',
             'missing_or_mismatching_count == 0',
@@ -519,7 +519,7 @@ final class Career1046RootGenerationActivationWorkflowTest extends TestCase
     /** @return array<string, mixed> */
     private function candidateFixture(): array
     {
-        $manifestPath = dirname(__DIR__, 2).'/docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json';
+        $manifestPath = dirname(__DIR__, 2).'/docs/seo/generated/detail-ready-1046-rollout-manifest.v2.json';
         $manifest = json_decode((string) file_get_contents($manifestPath), true, 512, JSON_THROW_ON_ERROR);
         $baseline = $manifest['baseline_slugs'];
         $receipts = $manifest['delta_slugs'];

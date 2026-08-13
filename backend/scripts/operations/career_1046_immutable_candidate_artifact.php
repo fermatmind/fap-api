@@ -38,7 +38,7 @@ final class Career1046ImmutableCandidateArtifactFailure extends RuntimeException
  */
 final class Career1046ImmutableCandidateArtifactProducer
 {
-    public const CONTRACT_VERSION = 'career.1046.immutable_candidate_artifact_producer.v1';
+    public const CONTRACT_VERSION = 'career.1046.immutable_candidate_artifact_producer.v2';
 
     public static function emitStreamedRunner(): void
     {
@@ -215,7 +215,7 @@ final class Career1046ImmutableCandidateArtifactProducer
     /** @param array<string, mixed> $task3b @return array<string, mixed> */
     private static function produceCandidateInsideTransaction(string $applicationRoot, array $task3b): array
     {
-        $manifestPath = $applicationRoot.'/docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json';
+        $manifestPath = $applicationRoot.'/docs/seo/generated/detail-ready-1046-rollout-manifest.v2.json';
         $manifest = json_decode((string) file_get_contents($manifestPath), true, 512, JSON_THROW_ON_ERROR);
         if (! is_array($manifest) || ! is_array($manifest['baseline_slugs'] ?? null) || ! is_array($manifest['delta_slugs'] ?? null)) {
             throw new Career1046ImmutableCandidateArtifactFailure('FROZEN_MANIFEST_INVALID');

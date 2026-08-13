@@ -24,7 +24,7 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
     {
         $candidate = Career1046ImmutableCandidateArtifactProducer::produceFromSource($this->source(), $this->task3b());
         self::assertSame($candidate, Career1046ImmutableCandidateArtifactProducer::produceFromSource($this->source(), $this->task3b()));
-        self::assertSame('career.1046.immutable_candidate.v1', $candidate['schema_version']);
+        self::assertSame('career.1046.immutable_candidate.v2', $candidate['schema_version']);
         self::assertSame(1046, $candidate['counts']['unique_slugs']);
         self::assertSame(2092, $candidate['counts']['locale_rows']);
         self::assertSame($candidate['candidate_receipt'], $candidate['documents']['candidate-receipt.json']);
@@ -185,7 +185,7 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
     /** @return array<string, mixed> */
     private function source(): array
     {
-        $manifestPath = dirname(__DIR__, 2).'/docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json';
+        $manifestPath = dirname(__DIR__, 2).'/docs/seo/generated/detail-ready-1046-rollout-manifest.v2.json';
         $manifest = json_decode((string) file_get_contents($manifestPath), true, 512, JSON_THROW_ON_ERROR);
         $slugs = [...$manifest['baseline_slugs'], ...$manifest['delta_slugs']];
         sort($slugs, SORT_STRING);

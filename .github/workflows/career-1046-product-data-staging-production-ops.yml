@@ -123,7 +123,7 @@ jobs:
             --arg run_id "$GITHUB_RUN_ID" \
             --arg run_attempt "$GITHUB_RUN_ATTEMPT" \
             '{
-              contract_version: "career.1046.product_data_staging.v1",
+              contract_version: "career.1046.product_data_staging.v2",
               mode: $mode,
               status: "FAIL_CONTROL_INITIALIZATION",
               failed_stage: "initialize",
@@ -219,7 +219,7 @@ jobs:
           test "$(wc -c < "$candidate")" -le 268435456
           jq -e \
             --arg generation "$GENERATION_ID" \
-            '.schema_version == "career.1046.immutable_candidate.v1"
+            '.schema_version == "career.1046.immutable_candidate.v2"
              and .generation_id == $generation
              and .counts.unique_slugs == 1046
              and .counts.locale_rows == 2092
@@ -275,7 +275,7 @@ jobs:
                 --arg artifact "$EXPECTED_CANDIDATE_ARTIFACT_DIGEST" \
                 --argjson run_id "$PREFLIGHT_RUN_ID" \
                 --argjson run_attempt "$PREFLIGHT_RUN_ATTEMPT" \
-                '.contract_version == "career.1046.product_data_staging.v1"
+                '.contract_version == "career.1046.product_data_staging.v2"
                  and .mode == "preflight"
                  and .status == "PASS_PREFLIGHT_STAGE_ELIGIBLE"
                  and .control_plane_sha == $control
@@ -378,7 +378,7 @@ jobs:
 
           if jq -e \
             --arg mode "$MODE" \
-            '.contract_version == "career.1046.product_data_staging.v1"
+            '.contract_version == "career.1046.product_data_staging.v2"
              and .mode == $mode
              and (.status | type == "string")
              and (.failed_stage == null or (.failed_stage | type == "string"))' \
@@ -420,7 +420,7 @@ jobs:
             --arg bundle "$EXPECTED_CANDIDATE_BUNDLE_SHA256" \
             --arg candidate_receipt "$EXPECTED_CANDIDATE_RECEIPT_SHA256" \
             --arg artifact "$EXPECTED_CANDIDATE_ARTIFACT_DIGEST" \
-            '(.contract_version == "career.1046.product_data_staging.v1")
+            '(.contract_version == "career.1046.product_data_staging.v2")
              and (.mode == $mode)
              and (.control_plane_sha == $control)
              and (.release_sha == $release)

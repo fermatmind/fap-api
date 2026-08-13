@@ -22,9 +22,9 @@ final class CareerPublicationIndexReconciliationApplyFailure extends RuntimeExce
 
 final class CareerPublicationIndexReconciliationApply
 {
-    public const CONTRACT_VERSION = 'career.publication_index_reconciliation_apply.v1';
+    public const CONTRACT_VERSION = 'career.publication_index_reconciliation_apply.v2';
 
-    public const MANIFEST_SHA256 = 'b570ec0cdda65278aa543431886b3529d072de8d67a8e79f1cafbb1c4c8dfc0e';
+    public const MANIFEST_SHA256 = 'ef4d43eeaa0300534b36fd77d7806bcbe065de1fb13f158ceda1517f259207c5';
 
     public const BASELINE_SET_SHA256 = '39cc766fb18c85d385b83f0ac1f56a8b97d46481d3e9a12de0588abbaf640060';
 
@@ -34,7 +34,7 @@ final class CareerPublicationIndexReconciliationApply
 
     public const EMPTY_SET_SHA256 = '01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b';
 
-    private const MANIFEST_PATH = 'docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json';
+    private const MANIFEST_PATH = 'docs/seo/generated/detail-ready-1046-rollout-manifest.v2.json';
 
     private const TARGET_INDEX_STATE = 'indexed';
 

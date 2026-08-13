@@ -64,7 +64,7 @@ jobs:
       EXPECTED_PREFLIGHT_ARTIFACT_DIGEST: ${{ inputs.expected_preflight_artifact_digest }}
       EXPECTED_CURRENT_DB_STATE_SHA256: ${{ inputs.expected_current_db_state_sha256 }}
       OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
-      FROZEN_MANIFEST_SHA256: b570ec0cdda65278aa543431886b3529d072de8d67a8e79f1cafbb1c4c8dfc0e
+      FROZEN_MANIFEST_SHA256: ef4d43eeaa0300534b36fd77d7806bcbe065de1fb13f158ceda1517f259207c5
       BASELINE_SET_SHA256: 39cc766fb18c85d385b83f0ac1f56a8b97d46481d3e9a12de0588abbaf640060
       RECEIPT_SET_SHA256: 09ec67befe967e1619a40578c47b862743883717b048da802ee7ef3551a0747f
       TARGET_SET_SHA256: 3b101fb76b5666200c73519c650beb1a5b0b35f47f7592453bf5671920571a18
@@ -92,7 +92,7 @@ jobs:
             --arg run_id "$GITHUB_RUN_ID" \
             --arg run_attempt "$GITHUB_RUN_ATTEMPT" \
             '{
-              contract_version: "career.publication_index_reconciliation_apply.v1",
+              contract_version: "career.publication_index_reconciliation_apply.v2",
               mode: "apply",
               status: "FAIL_APPLY_INITIALIZATION",
               failed_stage: "initialize",
@@ -150,7 +150,7 @@ jobs:
           test "$GITHUB_SHA" = "$CONTROL_PLANE_SHA"
           git cat-file -e "${EXPECTED_RELEASE_SHA}^{commit}"
           git merge-base --is-ancestor "$EXPECTED_RELEASE_SHA" "$CONTROL_PLANE_SHA"
-          test "$(sha256sum backend/docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json | awk '{print $1}')" = "$FROZEN_MANIFEST_SHA256"
+          test "$(sha256sum backend/docs/seo/generated/detail-ready-1046-rollout-manifest.v2.json | awk '{print $1}')" = "$FROZEN_MANIFEST_SHA256"
           php -l backend/scripts/operations/career_publication_index_reconciliation_apply.php >/dev/null
 
       - name: Validate fresh immutable preflight receipt and artifact digest
@@ -197,7 +197,7 @@ jobs:
             --arg run_id "$PREFLIGHT_RUN_ID" \
             --arg attempt "$PREFLIGHT_RUN_ATTEMPT" \
             --arg current "$EXPECTED_CURRENT_DB_STATE_SHA256" '
-            .contract_version == "career.publication_index_reconciliation_preflight.v1"
+            .contract_version == "career.publication_index_reconciliation_preflight.v2"
             and .mode == "preflight"
             and .status == "PASS_SELECT_ONLY_RECONCILIATION_PREFLIGHT"
             and .control_plane_sha == $control
@@ -205,7 +205,7 @@ jobs:
             and .release_name_sha256 == $release_name_sha
             and .workflow_run_id == ($run_id | tonumber)
             and .workflow_run_attempt == ($attempt | tonumber)
-            and .manifest_sha256 == "b570ec0cdda65278aa543431886b3529d072de8d67a8e79f1cafbb1c4c8dfc0e"
+            and .manifest_sha256 == "ef4d43eeaa0300534b36fd77d7806bcbe065de1fb13f158ceda1517f259207c5"
             and .manifest.baseline_count == 30
             and .manifest.baseline_set_sha256 == "39cc766fb18c85d385b83f0ac1f56a8b97d46481d3e9a12de0588abbaf640060"
             and .manifest.delta_count == 1016
@@ -299,7 +299,7 @@ jobs:
           set -e
 
           if jq -e '
-            .contract_version == "career.publication_index_reconciliation_apply.v1"
+            .contract_version == "career.publication_index_reconciliation_apply.v2"
             and .mode == "apply"
             and (.status | type == "string")' "$remote_receipt" >/dev/null 2>&1; then
             mv "$remote_receipt" "$receipt"
@@ -332,7 +332,7 @@ jobs:
             --arg current "$EXPECTED_CURRENT_DB_STATE_SHA256" \
             --arg run_id "$GITHUB_RUN_ID" \
             --arg run_attempt "$GITHUB_RUN_ATTEMPT" '
-            .contract_version == "career.publication_index_reconciliation_apply.v1"
+            .contract_version == "career.publication_index_reconciliation_apply.v2"
             and .mode == "apply"
             and .status == "PASS_EXACT_RECONCILIATION_APPLY"
             and .control_plane_sha == $control
@@ -346,7 +346,7 @@ jobs:
             and .before_database_latest_index_state.current_state_sha256 == $current
             and .workflow_run_id == ($run_id | tonumber)
             and .workflow_run_attempt == ($run_attempt | tonumber)
-            and .manifest_sha256 == "b570ec0cdda65278aa543431886b3529d072de8d67a8e79f1cafbb1c4c8dfc0e"
+            and .manifest_sha256 == "ef4d43eeaa0300534b36fd77d7806bcbe065de1fb13f158ceda1517f259207c5"
             and .manifest.baseline_count == 30
             and .manifest.baseline_set_sha256 == "39cc766fb18c85d385b83f0ac1f56a8b97d46481d3e9a12de0588abbaf640060"
             and .manifest.delta_count == 1016

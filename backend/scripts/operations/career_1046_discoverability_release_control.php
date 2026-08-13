@@ -23,7 +23,7 @@ final class Career1046DiscoverabilityReleaseFailure extends RuntimeException
 /** @review-surface career_trust_manifest */
 final class Career1046DiscoverabilityReleaseControl
 {
-    public const CONTRACT_VERSION = 'career.1046.discoverability_release_control.v1';
+    public const CONTRACT_VERSION = 'career.1046.discoverability_release_control.v2';
 
     /** @var array<string, int|bool|string> */
     private static array $writes = [];
@@ -198,7 +198,7 @@ final class Career1046DiscoverabilityReleaseControl
         DB::listen(static function (QueryExecuted $query) use (&$verbs): void {
             $verbs[] = strtolower((string) strtok(ltrim($query->sql), " \t\r\n"));
         });
-        $manifestRaw = self::read($expected['backend_root'], $expected['backend_root'].'/docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json');
+        $manifestRaw = self::read($expected['backend_root'], $expected['backend_root'].'/docs/seo/generated/detail-ready-1046-rollout-manifest.v2.json');
         $manifest = self::decode($manifestRaw, 'DATABASE_MANIFEST_INVALID');
         $delta = $manifest['delta_slugs'] ?? null;
         if (! is_array($delta)) {
