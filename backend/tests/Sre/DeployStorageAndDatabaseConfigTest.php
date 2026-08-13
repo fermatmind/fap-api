@@ -149,8 +149,19 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             '[[ "$DEPLOY_USER" =~ ^[A-Za-z0-9_][A-Za-z0-9_-]{0,31}$ ]]',
             'Protected staging topology validation passed without disclosing values.',
             '- name: Set up SSH agent without key metadata output',
-            'printf \'%s\\n\' "$SSH_PRIVATE_KEY" | ssh-add - >/dev/null 2>&1',
-            'ssh-add -l >/dev/null 2>&1',
+            'host_identity="$RUNNER_TEMP/staging-host-identity"',
+            'install -m 600 /dev/null "$host_identity"',
+            'DEPLOY_IDENTITY_FILE_STG=%s',
+            'printf \'  IdentityFile %s\\n\' "$host_identity"',
+            'printf \'  IdentitiesOnly yes\\n\'',
+            'printf \'  ForwardAgent no\\n\'',
+            'printf \'%s\\n\' "$STAGING_REPO_READ_SSH_KEY" | ssh-add - >/dev/null 2>&1',
+            'grep -Fxc "$STAGING_REPO_READ_KEY_FINGERPRINT"',
+            '- name: Verify forwarded staging repository read access',
+            'ssh -A -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10',
+            "GIT_SSH_COMMAND='ssh -o BatchMode=yes -o IdentitiesOnly=no -o StrictHostKeyChecking=yes' git ls-remote git@github.com:fermatmind/fap-api.git HEAD >/dev/null",
+            'repository_read_verified:true',
+            'remote_private_key_persisted:false',
             '- name: Stop SSH agent',
             'ssh-agent -k >/dev/null 2>&1 || true',
             'SSH and deploy-root preflight passed without disclosing topology.',
@@ -182,6 +193,31 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
             '[[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]',
             $workflow,
         );
+    }
+
+    #[Test]
+    public function staging_repository_read_uses_a_dedicated_forwarded_read_only_identity(): void
+    {
+        $deployer = $this->readRepoFile('deploy.php');
+        $workflow = $this->readRepoFile('.github/workflows/deploy.yml');
+
+        $this->assertStringContainsString('->setForwardAgent(true)', $deployer);
+        $this->assertSame(1, substr_count($deployer, '->setForwardAgent(true)'));
+        $this->assertStringContainsString(
+            "->set('git_ssh_command', 'ssh -o BatchMode=yes -o IdentitiesOnly=no -o StrictHostKeyChecking=yes')",
+            $deployer,
+        );
+        $this->assertStringContainsString(
+            'STAGING_REPO_READ_SSH_KEY: ${{ secrets.STAGING_REPO_READ_SSH_KEY }}',
+            $workflow,
+        );
+        $this->assertStringContainsString('STAGING_REPO_READ_VERIFIED=true', $workflow);
+        $this->assertStringNotContainsString(
+            'printf \'%s\\n\' "$SSH_PRIVATE_KEY" | ssh-add -',
+            $workflow,
+        );
+        $this->assertStringNotContainsString('StrictHostKeyChecking=no', $workflow);
+        $this->assertStringNotContainsString('curl -k', $workflow);
     }
 
     #[Test]
