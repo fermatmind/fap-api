@@ -97,6 +97,10 @@ final class Top100FrozenPackageTest extends TestCase
         self::assertStringContainsString('$this->assertPersonalityRevisionMatchesTarget($context, $target, $resolved)', $authority);
         self::assertStringContainsString('$this->assertMbtiRevisionMatchesTarget($context, $target, $resolved);', $authority);
         self::assertStringContainsString("'deferred_out_of_target_link_source_count' => (int) \$package['deferred_out_of_target_link_source_count']", $authority);
+        self::assertStringContainsString("\$target['slug'] === 'big-five-personality-test-ocean-model'", $authority);
+        self::assertStringContainsString("'is_indexable' => false", $authority);
+        self::assertStringContainsString("'created_from_missing' => \$target['model_kind'] === 'test_landing' && \$target['model_id'] === 0", $authority);
+        self::assertStringContainsString('top100_frozen_created_landing_rollback_identity_invalid', $authority);
     }
 
     public function test_rollback_guard_accepts_only_pre_draft_or_exact_published_state(): void
