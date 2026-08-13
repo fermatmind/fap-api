@@ -752,7 +752,8 @@ function careerPublicVerifyGenerationBindingSha(array $payload, string $slug, st
         || ($payload['bundle_version'] ?? null) !== 'career.protocol.job_detail.v1'
         || ($identity['canonical_slug'] ?? null) !== $slug
         || ! is_string($identity['occupation_uuid'] ?? null)
-        || preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/', $identity['occupation_uuid']) !== 1
+        || (preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/', $identity['occupation_uuid']) !== 1
+            && $identity['occupation_uuid'] !== 'career_job:'.$slug)
         || ($seo['canonical_path'] ?? null) !== $canonicalPath
         || ($seo['canonical_target'] ?? null) !== $canonicalPath
         || careerPublicVerifyDataGet($payload, 'display_surface_v1.page.locale') !== $publicLocale) {

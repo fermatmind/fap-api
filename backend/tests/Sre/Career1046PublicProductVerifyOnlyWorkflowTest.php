@@ -258,9 +258,11 @@ final class Career1046PublicProductVerifyOnlyWorkflowTest extends TestCase
         ];
         $details = [];
         $payloads = ['en' => [], 'zh' => []];
-        foreach ($slugs as $slug) {
+        foreach ($slugs as $index => $slug) {
             $uuidHex = substr(hash('sha256', $slug), 0, 32);
-            $occupationUuid = substr($uuidHex, 0, 8).'-'.substr($uuidHex, 8, 4).'-4'.substr($uuidHex, 13, 3).'-8'.substr($uuidHex, 17, 3).'-'.substr($uuidHex, 20, 12);
+            $occupationUuid = $index === 0
+                ? 'career_job:'.$slug
+                : substr($uuidHex, 0, 8).'-'.substr($uuidHex, 8, 4).'-7'.substr($uuidHex, 13, 3).'-8'.substr($uuidHex, 17, 3).'-'.substr($uuidHex, 20, 12);
             foreach (['en', 'zh'] as $locale) {
                 $payload = [
                     'bundle_kind' => 'career_job_detail',
