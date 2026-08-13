@@ -19,6 +19,7 @@ final class ControlledWorkflowOperationGateTest extends TestCase
             'content-promotion-automation.yml',
             'content-promotion-key-reconciliation.yml',
             'career-baseline-index-state-authority-repair.yml',
+            'career-baseline-set-identity-diagnostic.yml',
         ] as $name) {
             $source = $this->workflow($name);
             self::assertStringContainsString('operation_key:', $source, $name);
@@ -45,6 +46,7 @@ final class ControlledWorkflowOperationGateTest extends TestCase
             '.github/workflows/career-current-generation-pointer-bootstrap-staging-ops.yml',
             '.github/workflows/career-staging-authority-artifact-recovery.yml',
             '.github/workflows/career-baseline-index-state-authority-repair.yml',
+            '.github/workflows/career-baseline-set-identity-diagnostic.yml',
             '.github/workflows/content-promotion-automation.yml',
             '.github/workflows/content-promotion-key-reconciliation.yml',
             '.github/workflows/deploy-production.yml',
@@ -55,11 +57,14 @@ final class ControlledWorkflowOperationGateTest extends TestCase
             'backend/scripts/deploy/career_runtime_authority_permission_control.sh',
             'backend/scripts/deploy/content_promotion_key_reconciliation.sh',
             'backend/scripts/operations/career_baseline_index_state_authority_repair.php',
+            'backend/scripts/operations/career_baseline_set_identity_diagnostic.php',
             'backend/tests/Sre/CareerProductionRuntimeAuthorityDiagnosticWorkflowTest.php',
             'backend/tests/Sre/DeployStorageAndDatabaseConfigTest.php',
             'backend/tests/Sre/ContentPromotionKeyReconciliationTest.php',
             'backend/tests/Sre/CareerBaselineIndexStateAuthorityRepairTest.php',
+            'backend/tests/Sre/CareerBaselineSetIdentityDiagnosticTest.php',
             'docs/operations/career-baseline-index-state-authority-repair.md',
+            'docs/operations/career-baseline-set-identity-diagnostic.md',
             'tests/ops/controlled-operation-gate.test.cjs',
             'tests/ops/test_career_runtime_authority_permission_control.py',
         ];
