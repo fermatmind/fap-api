@@ -59,7 +59,7 @@ return new class extends Migration
         array $modules,
         ?string $anchorSku
     ): void {
-        $existing = DB::table('skus')->where('org_id', 0)->where('sku', $sku)->first();
+        $existing = DB::table('skus')->where('sku', $sku)->first();
         $meta = $this->json($existing->meta_json ?? null);
         unset($meta['deprecated'], $meta['historical_only']);
         $meta['effective_default'] = true;
@@ -88,7 +88,7 @@ return new class extends Migration
         ];
 
         if ($existing !== null) {
-            DB::table('skus')->where('org_id', 0)->where('sku', $sku)->update($values);
+            DB::table('skus')->where('sku', $sku)->update($values);
 
             return;
         }
@@ -98,7 +98,7 @@ return new class extends Migration
 
     private function retireHistoricalSku(string $sku): void
     {
-        $row = DB::table('skus')->where('org_id', 0)->where('sku', $sku)->first();
+        $row = DB::table('skus')->where('sku', $sku)->first();
         if ($row === null) {
             return;
         }
@@ -108,7 +108,7 @@ return new class extends Migration
         $meta['offer'] = false;
         $meta['deprecated'] = true;
         $meta['historical_only'] = true;
-        DB::table('skus')->where('org_id', 0)->where('sku', $sku)->update([
+        DB::table('skus')->where('sku', $sku)->update([
             'is_active' => false,
             'meta_json' => json_encode($meta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
             'updated_at' => now(),
@@ -117,7 +117,7 @@ return new class extends Migration
 
     private function updateAnchor(string $anchorSku, string $effectiveSku): void
     {
-        $row = DB::table('skus')->where('org_id', 0)->where('sku', $anchorSku)->first();
+        $row = DB::table('skus')->where('sku', $anchorSku)->first();
         if ($row === null) {
             return;
         }
@@ -126,7 +126,7 @@ return new class extends Migration
         $meta['anchor'] = true;
         $meta['effective_sku'] = $effectiveSku;
         $meta['offer'] = false;
-        DB::table('skus')->where('org_id', 0)->where('sku', $anchorSku)->update([
+        DB::table('skus')->where('sku', $anchorSku)->update([
             'price_cents' => 199,
             'meta_json' => json_encode($meta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
             'updated_at' => now(),
