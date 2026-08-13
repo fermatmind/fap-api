@@ -234,6 +234,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         );
     }
 
+    public function test_runtime_freeze_classifier_ignores_article_cover_batch_orchestration_files(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/SeoAgentReplaceArticleCovers.php',
+            'backend/app/Services/Cms/ArticleCoverBatchReplacer.php',
+            'backend/app/Services/Cms/ArticleCoverBatchVerifier.php',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Service.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_analytics_provider_freshness_files(): void
     {
         $allowed = [
@@ -7927,6 +7942,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isArticleCoverBatchOrchestrationFile($file)) {
+                continue;
+            }
+
             if ($this->isArticleInlineImageUrlReplacerFile($file)) {
                 continue;
             }
@@ -10817,6 +10836,15 @@ DIFF;
         return in_array($file, [
             'backend/app/Console/Commands/ArticleUpdateImageMetadata.php',
             'backend/app/Services/Cms/ArticleImageMetadataUpdater.php',
+        ], true);
+    }
+
+    private function isArticleCoverBatchOrchestrationFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/SeoAgentReplaceArticleCovers.php',
+            'backend/app/Services/Cms/ArticleCoverBatchReplacer.php',
+            'backend/app/Services/Cms/ArticleCoverBatchVerifier.php',
         ], true);
     }
 
