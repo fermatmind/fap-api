@@ -2417,7 +2417,7 @@ final class RiasecDeepCopySlotRegistry
                 'ability_or_skill_inference',
             ],
             'required_boundaries' => $this->requiredBoundaries(),
-            'user_visible_boundary' => '140Q 是工作日常情境线索，不改写 60Q，不比较 raw score，也不输出岗位结论。',
+            'user_visible_boundary' => '140Q 是工作日常情境线索，不改写 60Q，不比较原始分数，也不输出岗位结论。',
             'evidence_level' => 'expert_reviewed',
             'source_status' => 'reviewed_content_copy',
             'review_status' => 'approved_for_staging',

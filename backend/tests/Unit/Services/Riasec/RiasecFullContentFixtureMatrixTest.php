@@ -17,7 +17,7 @@ final class RiasecFullContentFixtureMatrixTest extends TestCase
 {
     public function test_frozen_runtime_assets_parse_and_pass_editorial_hygiene_scan(): void
     {
-        $manifestPath = base_path('content_assets/riasec/qa/result_content_freeze.v1.2026-08-13-r5.json');
+        $manifestPath = base_path('content_assets/riasec/qa/result_content_freeze.v1.2026-08-13-r6.json');
         $manifest = json_decode((string) file_get_contents($manifestPath), true, 512, JSON_THROW_ON_ERROR);
         $baseManifest = json_decode((string) file_get_contents(base_path($manifest['base_manifest'])), true, 512, JSON_THROW_ON_ERROR);
         $this->assertSame($manifest['base_package_sha256'], $baseManifest['package_sha256']);
@@ -536,8 +536,20 @@ final class RiasecFullContentFixtureMatrixTest extends TestCase
         $this->assertFalse((bool) data_get($projection, 'structural_difference.raw_score_delta_allowed'));
         $this->assertFalse((bool) data_get($projection, 'structural_difference.raw_scores_used_for_selection'));
         $this->assertSame('tension', data_get($projection, 'structural_difference.layer_states.environment'));
+        $this->assertSame(
+            '60Q 与 140Q 只能读作线索强调不同，不比较原始分数，不输出优劣或覆盖判断。',
+            data_get($projection, 'structural_difference.public_copy_boundary')
+        );
         $this->assertArrayNotHasKey('raw_scores_delta', $projection);
         $this->assertArrayNotHasKey('domains_delta', $projection);
+
+        foreach ((array) data_get($projection, 'deep_content_slots_v1.slots', []) as $slot) {
+            if (($slot['slot_group'] ?? null) !== '140q_layer_copy') {
+                continue;
+            }
+
+            $this->assertStringNotContainsString('raw score', strtolower((string) ($slot['user_visible_boundary'] ?? '')));
+        }
 
         $environmentSlot = $this->firstSlotForModuleAndState($projection, '140q_context_cards', [
             'layer' => 'environment',
