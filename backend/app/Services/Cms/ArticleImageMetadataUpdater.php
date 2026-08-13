@@ -52,7 +52,9 @@ final class ArticleImageMetadataUpdater
             }
         }
 
-        $metadata = $this->readResolvedMetadata($metadataPath, $errors);
+        $metadata = is_array($options['resolved_metadata_payload'] ?? null)
+            ? (array) $options['resolved_metadata_payload']
+            : $this->readResolvedMetadata($metadataPath, $errors);
         $normalized = $this->normalizeResolvedMetadata($metadata, $errors);
         $articles = $this->resolveArticles($articleIds);
         $this->validateArticleLock($articles, $articleIds, $translationGroupId, $errors);
