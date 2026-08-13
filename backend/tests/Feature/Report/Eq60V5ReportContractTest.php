@@ -389,6 +389,32 @@ final class Eq60V5ReportContractTest extends TestCase
         );
     }
 
+    public function test_result_page_depth_copy_does_not_expose_internal_route_language(): void
+    {
+        $this->prepareEqContent();
+
+        $compiledPath = base_path('content_packs/EQ_60/v1/compiled/report_assets.compiled.json');
+        $compiled = json_decode((string) File::get($compiledPath), true, 512, JSON_THROW_ON_ERROR);
+        $assets = (array) data_get($compiled, 'assets.result_page_depth_modules.assets', []);
+
+        foreach ($assets as $assetId => $asset) {
+            foreach (['zh-CN', 'en'] as $locale) {
+                $copy = json_encode(
+                    (array) data_get($asset, $locale, []),
+                    JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+                ) ?: '';
+
+                foreach (['内容路线', '路线信号', '解释路线', 'Route signal', 'interpretation route'] as $forbidden) {
+                    $this->assertStringNotContainsString(
+                        $forbidden,
+                        $copy,
+                        $assetId.' '.$locale.' exposed internal report language'
+                    );
+                }
+            }
+        }
+    }
+
     public function test_eq_v5_payload_has_no_user_visible_paywall_runtime_contract(): void
     {
         $this->prepareEqContent();
