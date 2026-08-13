@@ -42,12 +42,16 @@ final class Career1046ImmutableCandidateArtifactProducer
 
     /** @var array<string, string> */
     private const STAGE_FAILURE_CODES = [
+        'initialization' => 'CANDIDATE_INITIALIZATION_STAGE_FAILURE',
+        'read_only_transaction' => 'CANDIDATE_READ_ONLY_TRANSACTION_STAGE_FAILURE',
+        'audit_initialization' => 'CANDIDATE_AUDIT_INITIALIZATION_STAGE_FAILURE',
         'ledger' => 'CANDIDATE_LEDGER_STAGE_FAILURE',
         'projection' => 'CANDIDATE_PROJECTION_STAGE_FAILURE',
         'detail_bundle' => 'CANDIDATE_DETAIL_BUNDLE_STAGE_FAILURE',
         'resource_transform' => 'CANDIDATE_RESOURCE_TRANSFORM_STAGE_FAILURE',
         'generator' => 'CANDIDATE_GENERATOR_STAGE_FAILURE',
         'serialization' => 'CANDIDATE_SERIALIZATION_STAGE_FAILURE',
+        'audit_finalization' => 'CANDIDATE_AUDIT_FINALIZATION_STAGE_FAILURE',
     ];
 
     public static function emitStreamedRunner(): void
@@ -154,52 +158,64 @@ final class Career1046ImmutableCandidateArtifactProducer
      */
     public static function produceFromDatabase(?callable $producer = null): array
     {
-        $applicationRoot = self::applicationRoot();
-        $app = require $applicationRoot.'/bootstrap/app.php';
-        $app->make(Kernel::class)->bootstrap();
-        $task3b = self::task3bFromEnvironment();
-        $connection = DB::connection();
-        if ($connection->getDriverName() === 'mysql') {
-            DB::statement('SET TRANSACTION READ ONLY');
-        } elseif ($connection->getDriverName() !== 'sqlite' || ! $app->environment('testing')) {
-            throw new Career1046ImmutableCandidateArtifactFailure('READ_ONLY_TRANSACTION_UNSUPPORTED');
-        }
+        [$applicationRoot, $app, $task3b, $connection, $cache] = self::executeStage(
+            'initialization',
+            static function (): array {
+                $applicationRoot = self::applicationRoot();
+                $app = require $applicationRoot.'/bootstrap/app.php';
+                $app->make(Kernel::class)->bootstrap();
+                $task3b = self::task3bFromEnvironment();
+                $connection = DB::connection();
+                $cache = app('cache.store');
+                if (! $cache instanceof CacheRepository) {
+                    throw new Career1046ImmutableCandidateArtifactFailure('CACHE_AUDIT_UNAVAILABLE');
+                }
+
+                return [$applicationRoot, $app, $task3b, $connection, $cache];
+            },
+        );
 
         $queryVerbs = [];
         $cacheWriteAttempts = 0;
-        $databaseDispatcher = new Dispatcher($app);
-        $databaseDispatcher->listen(QueryExecuted::class, static function (QueryExecuted $query) use (&$queryVerbs): void {
-            $verb = strtolower((string) strtok(ltrim($query->sql), " \t\r\n"));
-            $queryVerbs[] = $verb;
-            if ($verb !== 'select') {
-                throw new Career1046ImmutableCandidateArtifactFailure('DATABASE_WRITE_ATTEMPT');
-            }
-        });
-        $originalDatabaseDispatcher = $connection->getEventDispatcher();
-        $connection->setEventDispatcher($databaseDispatcher);
+        [$originalDatabaseDispatcher, $originalCacheDispatcher] = self::executeStage(
+            'audit_initialization',
+            static function () use ($app, $cache, $connection, &$cacheWriteAttempts, &$queryVerbs): array {
+                $databaseDispatcher = new Dispatcher($app);
+                $databaseDispatcher->listen(QueryExecuted::class, static function (QueryExecuted $query) use (&$queryVerbs): void {
+                    $verb = strtolower((string) strtok(ltrim($query->sql), " \t\r\n"));
+                    $queryVerbs[] = $verb;
+                    if ($verb !== 'select') {
+                        throw new Career1046ImmutableCandidateArtifactFailure('DATABASE_WRITE_ATTEMPT');
+                    }
+                });
+                $originalDatabaseDispatcher = $connection->getEventDispatcher();
+                $connection->setEventDispatcher($databaseDispatcher);
 
-        $cache = app('cache.store');
-        if (! $cache instanceof CacheRepository) {
-            throw new Career1046ImmutableCandidateArtifactFailure('CACHE_AUDIT_UNAVAILABLE');
-        }
-        $cacheDispatcher = new Dispatcher($app);
-        foreach ([WritingKey::class, ForgettingKey::class, CacheFlushing::class] as $event) {
-            $cacheDispatcher->listen($event, static function () use (&$cacheWriteAttempts): void {
-                $cacheWriteAttempts++;
-                throw new Career1046ImmutableCandidateArtifactFailure('CACHE_WRITE_ATTEMPT');
-            });
-        }
-        $originalCacheDispatcher = $cache->getEventDispatcher();
-        $cache->setEventDispatcher($cacheDispatcher);
+                $cacheDispatcher = new Dispatcher($app);
+                foreach ([WritingKey::class, ForgettingKey::class, CacheFlushing::class] as $event) {
+                    $cacheDispatcher->listen($event, static function () use (&$cacheWriteAttempts): void {
+                        $cacheWriteAttempts++;
+                        throw new Career1046ImmutableCandidateArtifactFailure('CACHE_WRITE_ATTEMPT');
+                    });
+                }
+                $originalCacheDispatcher = $cache->getEventDispatcher();
+                $cache->setEventDispatcher($cacheDispatcher);
+
+                return [$originalDatabaseDispatcher, $originalCacheDispatcher];
+            },
+        );
 
         try {
-            $candidate = $connection->transaction(static function () use ($applicationRoot, $task3b, $producer): array {
-                if ($producer !== null) {
-                    return $producer($applicationRoot, $task3b);
-                }
+            $candidate = self::executeStage(
+                'read_only_transaction',
+                static fn (): array => self::runReadOnlyTransaction($app, $connection, static function () use ($applicationRoot, $task3b, $producer): array {
+                    if ($producer !== null) {
+                        return $producer($applicationRoot, $task3b);
+                    }
 
-                return self::produceCandidateInsideTransaction($applicationRoot, $task3b);
-            });
+                    return self::produceCandidateInsideTransaction($applicationRoot, $task3b);
+                }),
+            );
             if ($queryVerbs === [] || array_values(array_unique($queryVerbs)) !== ['select']) {
                 throw new Career1046ImmutableCandidateArtifactFailure('DATABASE_SELECT_ONLY_NOT_PROVEN');
             }
@@ -217,14 +233,57 @@ final class Career1046ImmutableCandidateArtifactProducer
 
             return $candidate;
         } finally {
-            if ($originalDatabaseDispatcher !== null) {
-                $connection->setEventDispatcher($originalDatabaseDispatcher);
-            } else {
-                $connection->unsetEventDispatcher();
+            self::executeStage('audit_finalization', static function () use ($cache, $connection, $originalCacheDispatcher, $originalDatabaseDispatcher): void {
+                if ($originalDatabaseDispatcher !== null) {
+                    $connection->setEventDispatcher($originalDatabaseDispatcher);
+                } else {
+                    $connection->unsetEventDispatcher();
+                }
+                if ($originalCacheDispatcher !== null) {
+                    $cache->setEventDispatcher($originalCacheDispatcher);
+                }
+            });
+        }
+    }
+
+    /**
+     * Start the MySQL transaction in read-only mode atomically. The previous
+     * `SET TRANSACTION READ ONLY` followed by Laravel's separate transaction
+     * open left an unclassified driver boundary before the audit lifecycle.
+     */
+    private static function runReadOnlyTransaction(mixed $app, mixed $connection, callable $operation): array
+    {
+        if ($connection->getDriverName() === 'sqlite' && $app->environment('testing')) {
+            return $connection->transaction($operation, 1);
+        }
+        if ($connection->getDriverName() !== 'mysql') {
+            throw new Career1046ImmutableCandidateArtifactFailure('READ_ONLY_TRANSACTION_UNSUPPORTED');
+        }
+
+        $pdo = $connection->getPdo();
+        if ($pdo->inTransaction()) {
+            throw new Career1046ImmutableCandidateArtifactFailure('READ_ONLY_TRANSACTION_ALREADY_ACTIVE');
+        }
+        $originalReadPdo = $connection->getRawReadPdo();
+        $connection->setReadPdo($pdo);
+        try {
+            $pdo->exec('START TRANSACTION READ ONLY');
+            try {
+                $candidate = $operation();
+                if (! $pdo->commit()) {
+                    throw new Career1046ImmutableCandidateArtifactFailure('READ_ONLY_TRANSACTION_COMMIT_FAILED');
+                }
+
+                return $candidate;
+            } catch (Throwable $failure) {
+                if ($pdo->inTransaction()) {
+                    $pdo->rollBack();
+                }
+
+                throw $failure;
             }
-            if ($originalCacheDispatcher !== null) {
-                $cache->setEventDispatcher($originalCacheDispatcher);
-            }
+        } finally {
+            $connection->setReadPdo($originalReadPdo);
         }
     }
 
@@ -623,7 +682,7 @@ final class Career1046ImmutableCandidateArtifactProducer
 
             return 1;
         } catch (Throwable) {
-            fwrite(STDERR, "CANDIDATE_CONTROL_FAILURE\n");
+            fwrite(STDERR, "CANDIDATE_INITIALIZATION_STAGE_FAILURE\n");
 
             return 1;
         }
