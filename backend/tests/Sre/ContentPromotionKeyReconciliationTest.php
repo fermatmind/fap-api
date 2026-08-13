@@ -103,6 +103,8 @@ PHP);
         }
         self::assertStringContainsString('controlled-operation-gate', $workflow);
         self::assertStringContainsString('Validate immutable preflight receipt', $workflow);
+        self::assertStringContainsString('.path == ".github/workflows/content-promotion-key-reconciliation.yml"', $workflow);
+        self::assertStringNotContainsString('.name == "Content Promotion Key Reconciliation"', $workflow);
         self::assertStringContainsString('secrets.CONTENT_PROMOTION_AUTOMATION_KEY', $workflow);
         self::assertStringContainsString('environment: production', $workflow);
         $combined = $script."\n".$workflow;
