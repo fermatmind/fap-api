@@ -102,7 +102,7 @@ final class Eq60V5ReportContractTest extends TestCase
         $fixture = $this->canonicalFixture($caseId, $locale);
         $this->maybeUpdateFixture($file, $fixture);
 
-        $this->assertSame($this->withoutResolvedAssetPayload($this->loadFixture($file)), $this->withoutResolvedAssetPayload($fixture));
+        $this->assertSame($this->loadFixture($file), $fixture);
         $this->assertCommonV5Contract($fixture);
         $this->assertSame($formulation, (string) data_get($fixture, 'report.interpretation.core_formulation_id'));
         $this->assertStringStartsWith('route.eq.', (string) data_get($fixture, 'report.interpretation.route_id'));
@@ -666,19 +666,6 @@ final class Eq60V5ReportContractTest extends TestCase
         $report['generated_at'] = '2026-05-21T00:00:00.000000Z';
 
         return $report;
-    }
-
-    /**
-     * @param  array<string,mixed>  $fixture
-     * @return array<string,mixed>
-     */
-    private function withoutResolvedAssetPayload(array $fixture): array
-    {
-        unset($fixture['report']['asset_refs']);
-        unset($fixture['report']['assets']);
-        unset($fixture['report']['interpretation']);
-
-        return $fixture;
     }
 
     /**

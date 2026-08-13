@@ -106,14 +106,14 @@
             "core_formulation": {
                 "core_claim": "The main message is not “which type you are.” It is that this session does not provide enough reliable signal for detailed interpretation. Possible reasons include very fast responding, overly uniform answers, or an unstable response state.",
                 "development_lever": "Retake in a steadier, less distracted state; before retaking, recall two or three real situations.",
-                "do_not_overread": "Do not treat this formulation as a fixed personality type, objective emotional ability, clinical finding, hiring signal, or job-performance prediction; it is an interpretive frame for this 60-item self-report session.",
+                "do_not_overread": "Check this interpretation against real feedback and specific situations; it does not replace behavioral observation.",
                 "evidence_basis": [
-                    "Quality C/D or severe response-quality flags."
+                    "The four relative dimension positions and response quality support this interpretation; check it against real situations."
                 ],
                 "id": "low_confidence_result",
                 "likely_cost": "Avoid using this result for relationship, career, or self-labeling decisions.",
-                "one_liner": "The response-quality signal suggests this result is best treated as a preliminary reference, not a strong formulation.",
-                "primary_strength": "You can still use the scientific boundary and dimension definitions for light reflection.",
+                "one_liner": "The response-quality signal suggests this result is best treated as a preliminary reference, not a strong interpretation.",
+                "primary_strength": "A possibility to verify from this response: You can still use the scientific boundary and dimension definitions for light reflection.",
                 "share_line": "This result has low interpretation confidence; retaking before reading detailed interpretation is recommended.",
                 "title": "Result status: Low interpretation confidence"
             },
@@ -123,7 +123,7 @@
             "psychometric_evidence_status": [
                 {
                     "body": "Current standard scores, percentiles, and bands use a provisional norming approach. They describe relative self-report position in the current sample and version, not final global norms, ability ranking, or real-world performance ranking.",
-                    "do_not_overread": "Do not read the current evidence status as a formal ability test, certification, clinical judgment, hiring basis, career prediction, or high-stakes decision evidence.",
+                    "do_not_overread": "Percentiles are relative positions in the current versioned provisional sample.",
                     "id": "eq.evidence.norm_status",
                     "next_validation_step": "Continue expanding samples, stratify by language/region/age and related variables, and publish norm-version notes with interpretation limits.",
                     "status": "provisional",
@@ -132,7 +132,7 @@
                 },
                 {
                     "body": "EQ-60 items, the four-dimension structure, and result-page interpretations have been mapped to self-reported emotional and relational functioning. The current evidence mainly supports content coverage and interpretation boundaries, not formal criterion validation or ability measurement.",
-                    "do_not_overread": "Do not read the current evidence status as a formal ability test, certification, clinical judgment, hiring basis, career prediction, or high-stakes decision evidence.",
+                    "do_not_overread": "Current evidence supports content coverage and interpretation boundaries only.",
                     "id": "eq.evidence.content_validity",
                     "next_validation_step": "Continue review by psychometric, boundary, and localization reviewers for item coverage, dimension assignment, cultural context, and misinterpretation risk.",
                     "status": "preliminary",
@@ -141,7 +141,7 @@
                 },
                 {
                     "body": "Internal consistency should be estimated by language, region, and dimension after sufficient sample accumulation, with version tracking for item and report changes. The current page should not imply completed reliability evidence.",
-                    "do_not_overread": "Do not read the current evidence status as a formal ability test, certification, clinical judgment, hiring basis, career prediction, or high-stakes decision evidence.",
+                    "do_not_overread": "Internal-consistency evidence still needs accumulation by language and dimension.",
                     "id": "eq.evidence.internal_consistency",
                     "next_validation_step": "After sample growth, report alpha/omega or more suitable reliability indices by dimension and inspect the effect of low-quality responses on estimates.",
                     "status": "planned",
@@ -150,7 +150,7 @@
                 },
                 {
                     "body": "The four-dimension model currently serves as the report interpretation framework. Suitable exploratory/confirmatory analyses are still needed to test whether items consistently support SA, ER, EM, and RM.",
-                    "do_not_overread": "Do not read the current evidence status as a formal ability test, certification, clinical judgment, hiring basis, career prediction, or high-stakes decision evidence.",
+                    "do_not_overread": "The four-dimension structure still needs testing in larger samples.",
                     "id": "eq.evidence.factor_structure",
                     "next_validation_step": "Use larger samples to examine EFA/CFA results, item loadings, dimension correlations, and model fit, with separate checks by language version.",
                     "status": "planned",
@@ -159,7 +159,7 @@
                 },
                 {
                     "body": "Test-retest stability still needs observation over appropriate time windows. EQ-60 is self-report, so recent stress, relationship events, and response state may influence results.",
-                    "do_not_overread": "Do not read the current evidence status as a formal ability test, certification, clinical judgment, hiring basis, career prediction, or high-stakes decision evidence.",
+                    "do_not_overread": "Compare trends after 30–90 days or a meaningful life change.",
                     "id": "eq.evidence.test_retest",
                     "next_validation_step": "Compare retests over reasonable windows such as 30–90 days to separate stable self-perception, situational fluctuation, and low-quality response effects.",
                     "status": "planned",
@@ -168,7 +168,7 @@
                 },
                 {
                     "body": "Measurement invariance across Chinese/English versions, regions, and user groups still needs testing. Without invariance evidence, score meanings should not be directly compared across languages or groups.",
-                    "do_not_overread": "Do not read the current evidence status as a formal ability test, certification, clinical judgment, hiring basis, career prediction, or high-stakes decision evidence.",
+                    "do_not_overread": "Scores should not be directly compared across languages or groups.",
                     "id": "eq.evidence.measurement_invariance",
                     "next_validation_step": "Check DIF, item interpretation differences, dimension structure, and score distributions by language and major user group; adjust interpretation where needed rather than forcing equivalence.",
                     "status": "planned",
@@ -177,7 +177,7 @@
                 },
                 {
                     "body": "External-association evidence is not being used to support high-stakes decisions. Future work may only explore links with low-risk indicators such as self-reported recovery, communication satisfaction, or growth-goal completion.",
-                    "do_not_overread": "Do not read the current evidence status as a formal ability test, certification, clinical judgment, hiring basis, career prediction, or high-stakes decision evidence.",
+                    "do_not_overread": "Current results cannot predict relationship, work, or health outcomes.",
                     "id": "eq.evidence.criterion_validity",
                     "next_validation_step": "Design low-risk, non-hiring, non-clinical external-indicator studies and state clearly that association is not prediction or causation.",
                     "status": "planned",
@@ -196,7 +196,7 @@
                 "label": "Limited interpretation confidence",
                 "retest_note": "Retake when conditions are steady, your attention is available, and interruptions are unlikely; no fixed waiting period is required. Read the full interpretation after retesting.",
                 "user_guidance": "Treat the result as an initial signal. Read the quality note and retest guidance first; do not turn this session into a strong personality, career, or action conclusion.",
-                "what_to_hold_lightly": "Core formulation, scenes, career-environment cues, and action prescription should all be held lightly and not used for major decisions.",
+                "what_to_hold_lightly": "core interpretation, scenes, career-environment cues, and next practice focus should all be held lightly and not used for major decisions.",
                 "what_to_trust": "The most reliable message is that the response process needs review and the result should not be used for strong interpretation.",
                 "why_this_level": "Speed, response pattern, or consistency signals suggest lower interpretive stability."
             },
@@ -224,16 +224,16 @@
                 "top_strength": "You completed a record that can be reviewed, but this record needs cautious interpretation."
             },
             "scientific_contract": {
-                "do_not_overread": "Read this report as an interpretive sketch from this 60-item self-report session, not as external observation, an objective ability score, a stable personality diagnosis, a hiring signal, a career prediction, or a prediction of job performance.",
-                "non_ability_statement": "EQ-60 is not an emotional-ability test, not MSCEIT, and not a certified emotional-intelligence assessment. It cannot prove true emotional ability, communication ability, or relationship ability. If EQ-SJT is added later, it will only add scenario-choice signals; it will not turn the report into an ability credential.",
+                "do_not_overread": "Read the report as an interpretive sketch of this self-report session, not for clinical diagnosis, hiring, career prediction, job-performance prediction, or evaluation of another person.",
+                "non_ability_statement": "EQ-60 is not an emotional-ability test, MSCEIT, certification, clinical tool, or hiring tool. It cannot prove communication, relationship, or work ability.",
                 "non_clinical_statement": "This report is not for clinical diagnosis, treatment evaluation, medical advice, crisis decisions, or psychological risk assessment. If distress keeps affecting sleep, work, interpersonal safety, or daily functioning, seek qualified professional or real-world support.",
                 "non_hiring_statement": "This result must not be used for hiring, selection, rejection, promotion, role assignment, performance review, team screening, or any high-stakes organizational decision. It should not be used to judge whether another person is suitable for a role.",
-                "norm_status_statement": "Standard scores, percentiles, and bands currently use provisional norms and versioned interpretation. Percentiles provide a relative-position reference within the current sample, not an ability ranking, true-level ranking, final global norm, or career-competitiveness ranking.",
-                "quality_rules_statement": "Interpretation confidence considers response speed, repeated identical choices, extreme choices, neutral choices, and consistency signals. Low-confidence results should be treated primarily as response-quality guidance and retest advice, not as strong profiling, career conclusions, or action prescriptions.",
-                "self_report_statement": "EQ-60 is a self-report assessment: results come from your own descriptions. They are useful for self-understanding and review, but they do not directly prove how you perform in every real situation and cannot replace observer ratings or scenario-task data.",
-                "test_definition": "This report is based on your self-reported responses to 60 items. It organizes how you describe your emotional awareness, emotion regulation, empathic understanding, and relational action tendencies. It explains a self-perception pattern from this response session; it is not external observation, a live behavior record, an objective ability test, or a certification.",
+                "norm_status_statement": "Standard scores, percentiles, and bands use the current version's provisional norms. A percentile is only a relative position in that provisional sample, not a ranking of ability, worth, or career competitiveness.",
+                "quality_rules_statement": "Interpretation confidence considers response speed, repeated identical choices, extreme choices, neutral choices, and consistency signals. Low-confidence results should be treated primarily as response-quality guidance and retest advice, not as strong profiling, career conclusions, or practice recommendations.",
+                "self_report_statement": "EQ-60 is a self-report tool. The result can support reflection, tracking, and review, but it cannot directly prove how you perform in real situations.",
+                "test_definition": "This report comes from your self-descriptions across 60 items. It organizes emotional awareness, regulation, empathic understanding, and relational-action tendencies in this response session; it is not external observation or an objective ability test.",
                 "user_safe_summary": "Use it for self-understanding, relational reflection, low-risk communication practice, and work-environment variable review.",
-                "version_statement": "The report is generated from the item version, scoring version, norm version, and content-asset version. Versioning supports retest comparison, support investigation, and editorial review; it does not mean the result has clinical, hiring, or ability certification."
+                "version_statement": "The report records item, scoring, norm, and content versions for retest comparison and quality tracking; version numbers do not confer clinical, hiring, or ability certification."
             },
             "score_system": [],
             "sjt_bridge": []
