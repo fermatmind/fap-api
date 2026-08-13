@@ -513,9 +513,9 @@ task('career:repair-published-detail-cache-coverage', function () {
         throw new \RuntimeException('Career detail cache repair is supported only for staging or production.');
     }
 
-    $maximumRepairsRaw = trim((string) (getenv('DEPLOY_CAREER_DETAIL_MAXIMUM_SYNC_REPAIRS') ?: '250'));
-    if (preg_match('/^[1-9][0-9]*$/D', $maximumRepairsRaw) !== 1 || (int) $maximumRepairsRaw > 250) {
-        throw new \RuntimeException('DEPLOY_CAREER_DETAIL_MAXIMUM_SYNC_REPAIRS must be an integer between 1 and 250.');
+    $maximumRepairsRaw = trim((string) (getenv('DEPLOY_CAREER_DETAIL_MAXIMUM_SYNC_REPAIRS') ?: '2092'));
+    if (preg_match('/^[1-9][0-9]*$/D', $maximumRepairsRaw) !== 1 || (int) $maximumRepairsRaw > 2092) {
+        throw new \RuntimeException('DEPLOY_CAREER_DETAIL_MAXIMUM_SYNC_REPAIRS must be an integer between 1 and 2092.');
     }
 
     $minimumTargets = deployCareerDetailMinimumTargets($hostAlias);

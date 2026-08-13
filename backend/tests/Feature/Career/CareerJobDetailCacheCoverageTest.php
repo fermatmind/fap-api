@@ -540,6 +540,20 @@ final class CareerJobDetailCacheCoverageTest extends TestCase
         $this->assertFalse(Cache::has($cache->jobDetailActiveVersionKey('career-251', 'en')));
     }
 
+    public function test_sync_repair_rejects_a_limit_above_the_exact_1046_locale_cohort(): void
+    {
+        $exit = Artisan::call('career:verify-job-detail-cache-coverage', [
+            '--repair-missing-sync' => true,
+            '--maximum-sync-repairs' => 2093,
+        ]);
+
+        $this->assertSame(1, $exit);
+        $this->assertStringContainsString(
+            '--maximum-sync-repairs must be an integer between 1 and 2092.',
+            Artisan::output(),
+        );
+    }
+
     public function test_production_sync_repair_requires_explicit_confirmation_before_writes(): void
     {
         $this->bindProjection(['one']);

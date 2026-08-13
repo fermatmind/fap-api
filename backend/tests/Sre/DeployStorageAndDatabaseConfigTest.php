@@ -798,7 +798,8 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
         $this->assertStringContainsString('Skipping Career detail cache repair because this isolated release does not mutate Career authority caches.', $source);
         $this->assertStringContainsString("\$hostAlias === 'production'", $source);
         $this->assertStringContainsString("? ' --confirm-production-write'", $source);
-        $this->assertStringContainsString('DEPLOY_CAREER_DETAIL_MAXIMUM_SYNC_REPAIRS must be an integer between 1 and 250.', $source);
+        $this->assertStringContainsString("getenv('DEPLOY_CAREER_DETAIL_MAXIMUM_SYNC_REPAIRS') ?: '2092'", $source);
+        $this->assertStringContainsString('DEPLOY_CAREER_DETAIL_MAXIMUM_SYNC_REPAIRS must be an integer between 1 and 2092.', $source);
         $this->assertStringContainsString('career:verify-job-detail-cache-coverage --repair-missing-sync --locales=en,zh-CN', $source);
         $this->assertStringContainsString('--maximum-sync-repairs=%d --json --no-interaction --no-ansi%s', $source);
         $this->assertStringNotContainsString("before('guard:career-detail-cache-coverage', 'career:repair-published-detail-cache-coverage')", $source);

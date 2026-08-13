@@ -13,6 +13,8 @@ use Throwable;
 
 final class CareerVerifyJobDetailCacheCoverage extends Command
 {
+    private const MAXIMUM_SYNC_REPAIRS = 2092;
+
     protected $signature = 'career:verify-job-detail-cache-coverage
         {--verify-only : Explicitly select the default read-only verification mode}
         {--repair-missing : Queue only missing or broken published targets}
@@ -21,7 +23,7 @@ final class CareerVerifyJobDetailCacheCoverage extends Command
         {--locales=en,zh-CN : Comma-separated public locales}
         {--minimum-targets=0 : Fail when the dynamic eligible target count is below this rollout floor}
         {--batch-size=250 : Maximum stable target rows inspected per repair invocation}
-        {--maximum-sync-repairs=250 : Refuse synchronous repair before writes when more targets are missing or broken}
+        {--maximum-sync-repairs=2092 : Refuse synchronous repair before writes when more targets are missing or broken}
         {--resume-key=default : Durable repair cursor namespace}
         {--reset : Reset the queued or direct repair cursor before processing}
         {--confirm-production-write : Confirm production cache writes for any repair mode}
@@ -234,8 +236,8 @@ final class CareerVerifyJobDetailCacheCoverage extends Command
     private function repairSynchronously(array $inspection, array $locales): int
     {
         $maximumRaw = trim((string) $this->option('maximum-sync-repairs'));
-        if (preg_match('/^[1-9][0-9]*$/D', $maximumRaw) !== 1 || (int) $maximumRaw > 250) {
-            return $this->failCommand('--maximum-sync-repairs must be an integer between 1 and 250.');
+        if (preg_match('/^[1-9][0-9]*$/D', $maximumRaw) !== 1 || (int) $maximumRaw > self::MAXIMUM_SYNC_REPAIRS) {
+            return $this->failCommand('--maximum-sync-repairs must be an integer between 1 and 2092.');
         }
 
         $targets = array_values(array_filter(
