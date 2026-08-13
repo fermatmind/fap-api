@@ -147,7 +147,7 @@ final class Career1046ImmutableCandidateGeneratorTest extends TestCase
      */
     private function fixture(): array
     {
-        $manifestPath = dirname(__DIR__, 5).'/docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json';
+        $manifestPath = dirname(__DIR__, 5).'/docs/seo/generated/detail-ready-1046-rollout-manifest.v2.json';
         $manifest = json_decode((string) file_get_contents($manifestPath), true, 512, JSON_THROW_ON_ERROR);
         $baseline = $manifest['baseline_slugs'];
         $receipts = $manifest['delta_slugs'];
