@@ -29,6 +29,7 @@ final class RiasecReportModuleSelector
             'broad_profile' => $this->applyBroadProfile($modules),
             'near_tie' => $this->applyNearTie($modules),
             'low_clarity' => $this->applyLowClarity($modules),
+            'unavailable' => $this->applyUnavailable($modules),
             default => $modules,
         };
 
@@ -134,6 +135,18 @@ final class RiasecReportModuleSelector
         $modules['hero_activity_chain'] = $this->module('hero_activity_chain', 'collapsed', 'low_clarity_cautious_overview');
         $modules['pair_blend'] = $this->module('pair_blend', 'collapsed', 'low_clarity_pair_blend_secondary_after_dimension_map', 'collapsed_pair_copy_must_read_as_activity_context');
         $modules['occupation_examples'] = $this->module('occupation_examples', 'hidden', 'low_clarity_hides_strong_examples');
+
+        return $modules;
+    }
+
+    private function applyUnavailable(array $modules): array
+    {
+        foreach (array_keys($modules) as $key) {
+            if ($key !== 'six_dimension_map' && $key !== 'history') {
+                $modules[$key] = $this->module($key, 'hidden', 'score_code_mismatch_hides_interpretation');
+            }
+        }
+        $modules['six_dimension_map'] = $this->module('six_dimension_map', 'visible', 'raw_dimension_scores_review_only');
 
         return $modules;
     }

@@ -369,21 +369,21 @@ final class RiasecDeepCopySlotRegistry
                 'question' => '你真正喜欢做的，是哪类工作活动？',
                 'summary' => '这张卡把兴趣拆成更具体的任务活动，帮助区分你喜欢的是问题本身，还是某个职业名带来的想象。',
                 'what_user_sees' => ['更容易吸引你的任务活动', '可能降低兴趣的任务活动', '值得先观察的一个小任务'],
-                'layer_state' => 'agreement',
+                'layer_state' => '140q_completed_state',
             ]),
             'environment_card' => $this->layer140qSlot('140q_environment_card_copy', 'environment_card', [
                 'title' => '工作环境卡',
                 'question' => '这些活动出现在哪种环境里，你仍然有兴趣？',
                 'summary' => '同一个任务在不同环境里感受会不同。环境卡帮助把任务兴趣和工作日常拆开。',
                 'what_user_sees' => ['安静深研 vs 真实反馈', '合作支持 vs 结果导向', '开放表达 vs 流程约束'],
-                'layer_state' => 'agreement',
+                'layer_state' => '140q_completed_state',
             ]),
             'role_responsibility_card' => $this->layer140qSlot('140q_role_card_copy', 'role_responsibility_card', [
                 'title' => '角色责任卡',
                 'question' => '你愿意在工作里承担哪种责任？',
                 'summary' => '喜欢一个任务，不等于喜欢它所在岗位的责任。角色卡帮助看见你想定义问题、表达答案、支持理解、推动落地，还是守住流程。',
                 'what_user_sees' => ['定义问题', '表达答案', '支持理解', '推动落地', '守住流程'],
-                'layer_state' => 'agreement',
+                'layer_state' => '140q_completed_state',
             ]),
             'layer_agreement' => $this->layer140qSlot('140q_layer_agreement_copy', 'layer_agreement', [
                 'title' => '任务、环境和角色线索大体一致',
@@ -734,7 +734,7 @@ final class RiasecDeepCopySlotRegistry
             ]),
             'correct_reading' => $this->structuralDifferenceSlot('correct_reading', [
                 'title' => '正确读法',
-                'summary' => '先看两次结果中仍然重叠的活动线索，再看任务、环境和角色责任各自需要观察的部分。排序接近时，也要把 near-tie 当作阅读边界。',
+                'summary' => '先看两次结果中仍然重叠的活动线索，再看任务、环境和角色责任各自需要观察的部分。排序接近时，也要把近似并列当作阅读边界。',
                 'structural_difference_state' => 'near_tie_shift',
             ]),
             'forbidden_reading' => $this->structuralDifferenceSlot('forbidden_reading', [
@@ -816,7 +816,7 @@ final class RiasecDeepCopySlotRegistry
             ]),
             'no_score_mutation_boundary' => $this->aspirationSlot('no_score_mutation_boundary', [
                 'title' => '不改写测评结果',
-                'summary' => '愿望不会覆盖 measured Holland Code，也不会改变 RIASEC 分数、报告快照、分享内容或 PDF 内容。',
+                'summary' => '愿望不会覆盖本次测得的霍兰德代码，也不会改变 RIASEC 分数、报告快照、分享内容或 PDF 内容。',
                 'aspirations_state' => 'not_provided',
             ]),
         ], $this->aspirationAssetSlots());
@@ -873,7 +873,7 @@ final class RiasecDeepCopySlotRegistry
             ]),
             'record_preferred_direction_boundary' => $this->disagreePathSlot('record_preferred_direction_boundary', [
                 'title' => '记录偏好方向的边界',
-                'summary' => '你可以记录更想探索的方向；它只作为偏好线索保存，不覆盖 measured Holland Code，不重算六维分数。',
+                'summary' => '你可以记录更想探索的方向；它只作为偏好线索保存，不覆盖本次测得的霍兰德代码，不重算六维分数。',
                 'disagree_state' => 'save_feedback_only',
             ]),
             'feedback_no_mutation_boundary' => $this->disagreePathSlot('feedback_no_mutation_boundary', [
@@ -883,7 +883,7 @@ final class RiasecDeepCopySlotRegistry
             ]),
             'next_step' => $this->disagreePathSlot('next_step', [
                 'title' => '下一步',
-                'summary' => '先检查作答质量和 near-tie，再选择重测、保存偏好方向，或做一个小实验观察具体活动。',
+                'summary' => '先检查作答质量和 近似并列，再选择重测、保存偏好方向，或做一个小实验观察具体活动。',
                 'disagree_state' => 'save_feedback_only',
             ]),
         ], $this->disagreePathAssetSlots());
@@ -1980,7 +1980,7 @@ final class RiasecDeepCopySlotRegistry
             'canonical_unordered_top3_key' => (string) ($slot['top3_key'] ?? ''),
             'strategy_label' => implode('-', $shorts).'三线索观察',
             'activity_chain' => '按顺序观察：先'.$first['action'].'；再'.$second['action'].'；最后'.$third['action'].'。',
-            'core_reading' => '这组 top3 说明 '.implode('、', $labels).' 三类兴趣活动在本次作答中相对靠前。'.$orderedCode.' 只给出阅读顺序：'.$first['label'].' 是优先观察入口，'.$second['label'].' 和 '.$third['label'].' 是补充观察入口；它不能推断人格身份、能力水平或职业结论。',
+            'core_reading' => '这组前三个兴趣维度说明 '.implode('、', $labels).' 三类兴趣活动在本次作答中相对靠前。'.$orderedCode.' 只给出阅读顺序：'.$first['label'].' 是优先观察入口，'.$second['label'].' 和 '.$third['label'].' 是补充观察入口；它不能推断人格身份、能力水平或职业结论。',
             'positive_value' => '这组内容的价值，是把 '.$first['label'].'关注'.$first['focus'].'；'.$second['label'].'关注'.$second['focus'].'；'.$third['label'].'关注'.$third['focus'].' 拆成可观察的小任务。先看哪一位，只表示先从哪类活动收集证据；它们提供探索问题，不提供岗位答案。',
             'first_experiment' => '用 30 分钟做一次低风险观察：先加入'.$first['short'].'动作，再加入'.$second['short'].'动作，最后加入'.$third['short'].'动作；只记录哪个部分更想继续。',
             'ordered_code_handling' => $orderedCode.' 是本次测量的有序三字码：第一位 '.$first['label'].' 作为优先观察入口，第二位 '.$second['label'].' 和第三位 '.$third['label'].' 作为补充观察入口；排序改变先问什么、后验证什么，不等于固定身份、能力或职业答案。',
@@ -2562,7 +2562,7 @@ final class RiasecDeepCopySlotRegistry
                 'ability_or_skill_inference',
                 'qualification_judgment',
             ],
-            'user_visible_boundary' => '愿望只校准探索问题，不覆盖 measured Holland Code，不改变 RIASEC 分数，也不形成职业结论。',
+            'user_visible_boundary' => '愿望只校准探索问题，不覆盖本次测得的霍兰德代码，不改变 RIASEC 分数，也不形成职业结论。',
             'validation_questions_only' => true,
             'aspiration_override_allowed' => false,
             'aspiration_replaces_measured_result_allowed' => false,
@@ -2585,7 +2585,7 @@ final class RiasecDeepCopySlotRegistry
                 'job_fit',
                 'raw_feedback_public_exposure',
             ],
-            'user_visible_boundary' => '不认同结果只影响探索路径，不修改 measured Holland Code、RIASEC 分数、报告快照、分享或 PDF。',
+            'user_visible_boundary' => '不认同结果只影响探索路径，不修改 本次测得的霍兰德代码、RIASEC 分数、报告快照、分享或 PDF。',
             'next_steps_only' => true,
             'feedback_replaces_measured_result_allowed' => false,
             'result_override_allowed' => false,

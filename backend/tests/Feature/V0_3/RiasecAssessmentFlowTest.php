@@ -116,6 +116,8 @@ final class RiasecAssessmentFlowTest extends TestCase
         $readback->assertJsonPath('riasec_public_projection_v2.measurement_evidence.quality_rule_version', 'riasec_quality_rule_spec_v2');
         $readback->assertJsonPath('riasec_public_projection_v2.measurement_evidence.interpretation_rule_version', 'riasec_interpretation_rule_spec_v2');
         $readback->assertJsonPath('riasec_public_projection_v2.measurement_evidence.snapshot_bound', false);
+        $readback->assertJsonPath('riasec_public_projection_v2.result_summary_v1.snapshot_bound', true);
+        $readback->assertJsonPath('riasec_public_projection_v2.result_summary_v1.snapshot_scope', 'persisted_result');
         $readback->assertJsonPath('riasec_public_projection_v2.quality.quality_state', 'normal');
         $readback->assertJsonPath('riasec_public_projection_v2.quality.score_mutation_allowed', false);
         $readback->assertJsonPath('riasec_public_projection_v2.quality.measured_holland_code_mutation_allowed', false);
@@ -194,7 +196,11 @@ final class RiasecAssessmentFlowTest extends TestCase
         $report->assertJsonPath('riasec_public_projection_v2.exploration_feedback_overlay_v0_1.claim_boundary.feedback_changes_measured_holland_code', false);
         $report->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.snapshot_bound', true);
         $report->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.internal_snapshot_id_public_exposure_allowed', false);
-        $report->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.faq_markdown_reference_available', true);
+        $report->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.faq_markdown_reference_available', false);
+        $report->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.disabled_reason', 'editorial_gate_failed_fail_closed');
+        $report->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.disabled_reader_surfaces.0', 'faq_markdown_reference');
+        $report->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.disabled_reader_surfaces.1', 'professional_method_boundary');
+        $report->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.disabled_reader_surfaces.2', 'history_cross_form');
         $report->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.surfaces.2.surface', 'pdf_personal');
         $report->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.surfaces.2.pdf_surface_mode', 'compact_snapshot_pdf');
         $report->assertJsonPath('riasec_public_projection_v2.lifecycle_copy_v1.surfaces.2.pdf_density_mode', 'compact_boundary_once');
@@ -254,8 +260,8 @@ final class RiasecAssessmentFlowTest extends TestCase
         $history->assertJsonPath('items.0.riasec_public_projection_v2.lifecycle_copy_v1.surfaces.4.history_summary_mode', 'same_form_snapshot_overlap');
         $history->assertJsonPath('items.0.riasec_public_projection_v2.lifecycle_copy_v1.surfaces.4.stable_identity_claim_allowed', false);
         $history->assertJsonPath('items.0.riasec_public_projection_v2.lifecycle_copy_v1.surfaces.4.history_raw_delta_allowed', false);
-        $history->assertJsonPath('items.0.riasec_public_projection_v2.lifecycle_copy_v1.surfaces.5.surface', 'history_cross_form');
-        $history->assertJsonPath('items.0.riasec_public_projection_v2.lifecycle_copy_v1.surfaces.5.history_summary_mode', 'cross_form_emphasis_difference');
+        $history->assertJsonPath('items.0.riasec_public_projection_v2.lifecycle_copy_v1.surfaces.5.surface', 'low_quality_share');
+        $history->assertJsonPath('items.0.riasec_public_projection_v2.lifecycle_copy_v1.disabled_reader_surfaces.2', 'history_cross_form');
         $history->assertJsonPath('history_compare.current_compare_policy_v1.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
     }
 
@@ -432,12 +438,13 @@ final class RiasecAssessmentFlowTest extends TestCase
             static fn (array $slot): string => (string) data_get($slot, 'slot_id'),
             (array) $readback->json('riasec_public_projection_v2.deep_content_slots_v1.slots')
         );
-        $this->assertContains('140q_task_card_copy:R_task_agreement', $slotIds);
-        $this->assertContains('140q_environment_card_copy:R_environment_agreement', $slotIds);
-        $this->assertContains('140q_role_card_copy:R_role_agreement', $slotIds);
+        $this->assertNotContains('140q_task_card_copy:R_task_agreement', $slotIds);
+        $this->assertNotContains('140q_environment_card_copy:R_environment_agreement', $slotIds);
+        $this->assertNotContains('140q_role_card_copy:R_role_agreement', $slotIds);
         $this->assertContains('140q_task_card_copy:task_activity_card', $slotIds);
         $this->assertContains('140q_environment_card_copy:environment_card', $slotIds);
         $this->assertContains('140q_role_card_copy:role_responsibility_card', $slotIds);
+        $this->assertNotContains('140q_layer_agreement_copy:layer_agreement', $slotIds);
         $this->assertContains('structural_difference_copy:summary', $slotIds);
     }
 
@@ -534,7 +541,13 @@ final class RiasecAssessmentFlowTest extends TestCase
             $this->assertNotSame('', (string) data_get($slot, 'source_status'));
             $this->assertNotSame([], data_get($slot, 'content'));
             if ((string) data_get($slot, 'slot_key') === 'dimension_deep_copy') {
-                $this->assertNotSame('', (string) data_get($slot, 'content.medium_score_reading'));
+                $selectedDetailKey = (string) data_get($slot, 'selection_v1.selected_detail_key');
+                $this->assertContains($selectedDetailKey, ['high_score_reading', 'medium_score_reading', 'low_score_safe_reading']);
+                $this->assertNotSame('', (string) data_get($slot, 'content.'.$selectedDetailKey));
+                $this->assertCount(1, array_intersect(
+                    ['high_score_reading', 'medium_score_reading', 'low_score_safe_reading'],
+                    array_keys((array) data_get($slot, 'content'))
+                ));
             }
             $slotIds[] = (string) data_get($slot, 'slot_id');
         }

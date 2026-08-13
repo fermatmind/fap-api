@@ -22,13 +22,18 @@ final class RiasecInterpretationRuleContract
      */
     public function build(array $payload, ?array $qualitySummary = null): array
     {
+        $scoresValid = $this->hasCompleteValidScores($payload);
         $scores = $this->scores($payload);
         $ranked = $this->rankScores($scores);
         $qualityState = $this->qualityState($payload, $qualitySummary);
         $helpers = $this->helpers($ranked, $scores);
-        $nearTieState = $this->nearTieState($ranked, $helpers, $qualityState);
+        $exactTieState = $scoresValid ? $this->exactTieState($ranked, $helpers, $qualityState) : ['state' => 'none', 'dimensions' => [], 'groups' => [], 'position' => 'none'];
+        $nearTieState = $scoresValid && $exactTieState['state'] === 'none'
+            ? $this->nearTieState($ranked, $helpers, $qualityState)
+            : ['state' => 'none', 'dimensions' => [], 'threshold_rule' => 'adjacent_gap_lt_5_points_provisional'];
         $profileShape = $this->profileShape($helpers, $nearTieState, $qualityState);
         $alternateCode = $this->alternateCode($ranked, $nearTieState, $qualityState);
+        $tieDisplay = $this->tieDisplay($ranked, $helpers, $nearTieState, $alternateCode, $qualityState, $exactTieState, $scoresValid);
 
         return [
             'interpretation_rule_version' => self::VERSION,
@@ -38,6 +43,7 @@ final class RiasecInterpretationRuleContract
             'near_tie_state' => $nearTieState,
             'alternate_code' => $alternateCode,
             'alternate_code_reason' => $alternateCode['reason'],
+            'tie_display_v1' => $tieDisplay,
             'top_code_confidence' => $this->topCodeConfidence($profileShape, $helpers, $qualityState),
             'reading_strength' => $this->readingStrength($profileShape, $qualityState),
             'result_page_strategy' => $this->resultPageStrategy($profileShape),
@@ -46,6 +52,48 @@ final class RiasecInterpretationRuleContract
             'field_authority' => $this->fieldAuthority(),
             'score_interpretation_helpers' => $helpers,
         ];
+    }
+
+    private function hasCompleteValidScores(array $payload): bool
+    {
+        $source = is_array($payload['scores_0_100'] ?? null) ? $payload['scores_0_100'] : [];
+        foreach (self::DIMENSIONS as $dimension) {
+            if (! array_key_exists($dimension, $source) || ! is_numeric($source[$dimension])) {
+                return false;
+            }
+            $score = (float) $source[$dimension];
+            if (! is_finite($score) || $score < 0 || $score > 100) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function exactTieState(array $ranked, array $helpers, string $qualityState): array
+    {
+        if ($qualityState === 'low_quality') {
+            return ['state' => 'none', 'dimensions' => [], 'groups' => [], 'position' => 'none'];
+        }
+
+        $groups = [];
+        for ($start = 0; $start < count($ranked);) {
+            $end = $start + 1;
+            while ($end < count($ranked) && $this->scoreGap($ranked, $start, $end) === 0.0) {
+                $end++;
+            }
+            if ($end - $start > 1 && $start <= 2) {
+                $groups[] = $this->rankedDimensions($ranked, $start, $end - $start);
+            }
+            $start = $end;
+        }
+        if ($groups === []) {
+            return ['state' => 'none', 'dimensions' => [], 'groups' => [], 'position' => 'none'];
+        }
+
+        $dimensions = array_values(array_merge(...$groups));
+
+        return ['state' => 'exact_tie', 'dimensions' => $dimensions, 'groups' => $groups, 'position' => 'exact_groups'];
     }
 
     /**
@@ -185,6 +233,44 @@ final class RiasecInterpretationRuleContract
             static fn (array $row): string => $row['type'],
             array_slice($ranked, $offset, $length)
         ));
+    }
+
+    /**
+     * @param  list<array{type:string,score:float}>  $ranked
+     * @param  array<string,mixed>  $helpers
+     * @param  array{state:string,dimensions:list<string>,threshold_rule:string}  $nearTieState
+     * @param  array{show:bool,codes:list<string>,reason:?string,display_boundary:string}  $alternateCode
+     * @return array<string,mixed>
+     */
+    private function tieDisplay(array $ranked, array $helpers, array $nearTieState, array $alternateCode, string $qualityState, array $exactTieState, bool $scoresValid): array
+    {
+        $base = [
+            'schema_version' => 'riasec.tie_display.v1',
+            'kind' => 'none',
+            'position' => 'none',
+            'dimensions' => [],
+            'groups' => [],
+            'ordered_code' => implode('', $this->rankedDimensions($ranked, 0, 3)),
+            'alternate_codes' => [],
+            'threshold_rule' => 'exact_gap_eq_0_or_adjacent_gap_lt_5_points_provisional',
+            'ordering_precision_claim_allowed' => false,
+        ];
+        if ($qualityState === 'low_quality' || ! $scoresValid) {
+            return $base;
+        }
+        if (($exactTieState['state'] ?? 'none') === 'exact_tie') {
+            return array_merge($base, ['kind' => 'exact_tie', 'position' => $exactTieState['position'], 'dimensions' => $exactTieState['dimensions'], 'groups' => $exactTieState['groups']]);
+        }
+        if ($nearTieState['state'] !== 'none') {
+            return array_merge($base, [
+                'kind' => 'near_tie',
+                'position' => $nearTieState['state'],
+                'dimensions' => $nearTieState['dimensions'],
+                'alternate_codes' => $alternateCode['show'] ? $alternateCode['codes'] : [],
+            ]);
+        }
+
+        return $base;
     }
 
     /**
@@ -353,6 +439,7 @@ final class RiasecInterpretationRuleContract
             'near_tie_state' => 'backend_owned',
             'alternate_code' => 'backend_owned',
             'alternate_code_reason' => 'backend_owned',
+            'tie_display_v1' => 'backend_owned',
             'top_code_confidence' => 'backend_owned',
             'reading_strength' => 'backend_owned',
             'interpretation_rule_version' => 'backend_owned',

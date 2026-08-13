@@ -76,6 +76,7 @@ final class RiasecPublicProjectionService
                 'raw_score_delta_allowed' => false,
                 'cross_form_interpretation' => 'emphasis_difference_only',
             ],
+            'dimension_score_band_contract_v1' => data_get($measurementContract, 'scoring.interpretation_band_contract', []),
             'measurement_contract_v1' => $measurementContract,
             'compare_policy_v1' => $comparePolicy,
             'enhanced_breakdown' => [
@@ -89,9 +90,17 @@ final class RiasecPublicProjectionService
     /**
      * @return array<string,mixed>
      */
-    public function buildV2FromResult(Result $result, string $locale = 'zh-CN', bool $snapshotBound = false): array
-    {
+    public function buildV2FromResult(
+        Result $result,
+        string $locale = 'zh-CN',
+        bool $snapshotBound = false,
+        bool $resultSummaryBound = false,
+    ): array {
         $payload = is_array($result->result_json ?? null) ? $result->result_json : [];
+        $rawDimensionScores = is_array($result->scores_pct ?? null) ? $result->scores_pct : [];
+        if ($rawDimensionScores === [] && is_array($payload['scores_0_100'] ?? null)) {
+            $rawDimensionScores = $payload['scores_0_100'];
+        }
         $v1 = $this->buildFromResult($result, $locale);
         $measurementContract = is_array($v1['measurement_contract_v1'] ?? null)
             ? $v1['measurement_contract_v1']
@@ -105,11 +114,31 @@ final class RiasecPublicProjectionService
         $formCode = (string) data_get($measurementContract, 'form.form_code', data_get($v1, 'form.form_code', ''));
         $qualityRule = $this->qualityRuleContract->build(array_merge($payload, [
             'form_code' => $formCode,
-            'answer_count' => (int) data_get($measurementContract, 'form.question_count', (int) ($payload['answer_count'] ?? 0)),
+            'answer_count' => (int) ($payload['answer_count'] ?? data_get($measurementContract, 'form.question_count', 0)),
         ]));
-        $interpretationRule = $this->interpretationRuleContract->build($payload, $qualityRule);
+        $interpretationRulePayload = $payload;
+        $interpretationRulePayload['scores_0_100'] = $this->hasCompleteValidDimensionScores($rawDimensionScores) ? $rawDimensionScores : [];
+        $interpretationRule = $this->interpretationRuleContract->build($interpretationRulePayload, $qualityRule);
+        if ((string) data_get($interpretationRule, 'tie_display_v1.ordered_code') !== (string) ($v1['top_code'] ?? '')) {
+            data_set($interpretationRule, 'profile_shape', 'unavailable');
+            data_set($interpretationRule, 'near_tie_state.state', 'none');
+            data_set($interpretationRule, 'near_tie_state.dimensions', []);
+            data_set($interpretationRule, 'alternate_code.show', false);
+            data_set($interpretationRule, 'alternate_code.codes', []);
+            data_set($interpretationRule, 'alternate_code.reason', null);
+            data_set($interpretationRule, 'alternate_code_reason', null);
+            data_set($interpretationRule, 'tie_display_v1.kind', 'none');
+            data_set($interpretationRule, 'tie_display_v1.position', 'none');
+            data_set($interpretationRule, 'tie_display_v1.dimensions', []);
+            data_set($interpretationRule, 'tie_display_v1.groups', []);
+            data_set($interpretationRule, 'tie_display_v1.alternate_codes', []);
+            data_set($interpretationRule, 'tie_display_v1.ordered_code', (string) ($v1['top_code'] ?? ''));
+            data_set($interpretationRule, 'tie_display_v1.unavailable_reason', 'score_code_mismatch');
+            data_set($interpretationRule, 'validation_status', 'score_code_mismatch_unavailable');
+        }
 
         $projection = [
+            '_dimension_scores_complete' => $this->hasCompleteValidDimensionScores($rawDimensionScores),
             'schema_version' => 'riasec.public_projection.v2',
             'scale_code' => 'RIASEC',
             'locale' => str_starts_with(strtolower($locale), 'zh') ? 'zh-CN' : 'en',
@@ -133,6 +162,7 @@ final class RiasecPublicProjectionService
                 'raw_score_delta_allowed' => false,
                 'cross_form_interpretation' => 'emphasis_difference_only',
             ],
+            'dimension_score_band_contract_v1' => data_get($v1, 'dimension_score_band_contract_v1', []),
             'structural_difference' => $this->structuralDifferencePolicy($formCode, $qualityRule['quality_state'] ?? 'normal', $payload, $comparePolicy),
             'measurement_evidence' => [
                 'measurement_contract_version' => (string) ($measurementContract['schema_version'] ?? RiasecMeasurementContract::SCHEMA_VERSION),
@@ -164,6 +194,11 @@ final class RiasecPublicProjectionService
             'quality' => [
                 'grade' => (string) ($v1['quality_grade'] ?? ''),
                 'flags' => is_array($v1['quality_flags'] ?? null) ? array_values($v1['quality_flags']) : [],
+                'display_v1' => $this->qualityDisplay(
+                    locale: $locale,
+                    grade: (string) ($v1['quality_grade'] ?? ''),
+                    qualityRule: $qualityRule,
+                ),
                 'low_quality_strength' => (string) data_get($measurementContract, 'quality.low_quality_strength', ''),
                 'quality_rule_version' => (string) ($qualityRule['quality_rule_version'] ?? ''),
                 'quality_state' => (string) ($qualityRule['quality_state'] ?? ''),
@@ -174,7 +209,7 @@ final class RiasecPublicProjectionService
                 'score_mutation_allowed' => false,
                 'measured_holland_code_mutation_allowed' => false,
             ],
-            'interpretation_state' => $this->publicInterpretationState($interpretationRule),
+            'interpretation_state' => $this->publicInterpretationState($interpretationRule, $locale),
             'indices' => [
                 'clarity_index' => (float) ($v1['clarity_index'] ?? 0),
                 'breadth_index' => (float) ($v1['breadth_index'] ?? 0),
@@ -192,10 +227,90 @@ final class RiasecPublicProjectionService
         ];
         $projection['module_visibility_policy'] = $this->moduleSelector->build($projection);
         $projection['deep_content_slots_v1'] = $this->deepContentSlotsEnvelope($projection, $locale);
+        if ($snapshotBound || $resultSummaryBound) {
+            $projection['result_summary_v1'] = $this->resultSummary($projection, $locale, true);
+        }
         $projection['exploration_feedback_overlay_v0_1'] = $this->feedbackOverlay->build($result, $projection, $snapshotBound, $locale);
         $projection['lifecycle_copy_v1'] = $this->lifecycleCopy->runtimeLifecycleCopyContract($snapshotBound, $locale);
+        unset($projection['_dimension_scores_complete']);
 
         return $projection;
+    }
+
+    /** @return array<string,mixed> */
+    private function resultSummary(array $projection, string $locale, bool $snapshotBound): array
+    {
+        $isZh = str_starts_with(strtolower($locale), 'zh');
+        $tie = (array) data_get($projection, 'interpretation_state.tie_display_v1', []);
+        $quality = (array) data_get($projection, 'quality.display_v1', []);
+        $highlights = [];
+        $copy = $this->summaryDimensionCopy($isZh);
+        $dimensionRows = collect((array) data_get($projection, 'scores.dimensions', []))
+            ->keyBy(static fn (array $dimension): string => (string) ($dimension['code'] ?? ''));
+        foreach (str_split((string) data_get($projection, 'holland_code.code', '')) as $code) {
+            $dimension = (array) $dimensionRows->get($code, []);
+            $score = $dimension['score'] ?? null;
+            if (! is_numeric($score) || ! isset($copy[$code])) {
+                continue;
+            }
+            $band = (float) $score < 34 ? 'low' : ((float) $score < 67 ? 'medium' : 'high');
+            $highlights[] = [
+                'dimension_code' => $code,
+                'label' => (string) ($dimension['label'] ?? $code),
+                'text' => $copy[$code][$band],
+            ];
+        }
+
+        $qualityParts = array_values(array_filter([
+            trim((string) ($quality['headline'] ?? '')),
+            trim((string) data_get($quality, 'reasons.0', '')),
+            trim((string) data_get($quality, 'improvements.0', '')),
+        ]));
+
+        return [
+            'schema_version' => 'riasec.result_summary.v1',
+            'locale' => $isZh ? 'zh-CN' : 'en',
+            'estimated_read_seconds' => 180,
+            'snapshot_bound' => $snapshotBound,
+            'snapshot_scope' => (bool) data_get($projection, 'measurement_evidence.snapshot_bound', false)
+                ? 'report_snapshot'
+                : 'persisted_result',
+            'headline' => $isZh ? '你的兴趣结果摘要' : 'Your interest result summary',
+            'ranking_display' => (string) data_get($tie, 'display_copy.headline', data_get($projection, 'holland_code.code', '')),
+            'tie_note' => (string) data_get($tie, 'display_copy.note', ''),
+            'quality_summary' => implode($isZh ? '；' : '; ', $qualityParts),
+            'highlights' => array_slice($highlights, 0, 3),
+            'next_step' => $isZh
+                ? '选择前三个兴趣维度中的一个，安排一次 15–30 分钟的低风险活动，记录你是否愿意继续。'
+                : 'Choose one of the first three interest dimensions for a 15–30 minute low-risk activity, then note whether you want to continue.',
+            'boundary' => $isZh
+                ? '结果只描述本次职业兴趣线索，不代表能力、人格身份、职业匹配或未来结果。'
+                : 'This result describes career-interest signals from this response only; it is not an ability, identity, career-match, or outcome conclusion.',
+        ];
+    }
+
+    /** @return array<string,string> */
+    private function summaryDimensionCopy(bool $isZh): array
+    {
+        if ($isZh) {
+            return [
+                'R' => ['high' => '动手操作和处理具体对象是本次较突出的兴趣线索，可优先安排一次实作任务验证。', 'medium' => '你对实作活动有一定兴趣，是否投入往往取决于工具、目标和现场条件。', 'low' => '实作活动本次排序较后；这不代表做不到，可在确有需要时用短任务核对体验。'],
+                'I' => ['high' => '追问原因和分析证据是本次较突出的兴趣线索，可用一个真实问题检验持续投入感。', 'medium' => '你对研究分析有一定兴趣，问题难度和探索空间可能影响投入程度。', 'low' => '研究分析本次排序较后；先观察你在具体问题上是否仍愿意查证和推理。'],
+                'A' => ['high' => '表达想法和创造形式是本次较突出的兴趣线索，可用一次小型创作检验。', 'medium' => '你对创意表达有一定兴趣，自主空间和表达媒介可能影响体验。', 'low' => '创意表达本次排序较后；不妨用一个轻量作品核对真实感受。'],
+                'S' => ['high' => '理解、支持或帮助他人是本次较突出的兴趣线索，可从一次真实协作中验证。', 'medium' => '你对助人互动有一定兴趣，关系距离和互动方式可能影响投入程度。', 'low' => '助人互动本次排序较后；可区分不喜欢持续互动，还是更偏好特定对象和方式。'],
+                'E' => ['high' => '推动目标和组织行动是本次较突出的兴趣线索，可用一次小型发起或协调任务验证。', 'medium' => '你对推动事情有一定兴趣，目标意义和自主权可能影响投入程度。', 'low' => '推动与影响活动本次排序较后；可观察你是否更愿意贡献方案而非主导过程。'],
+                'C' => ['high' => '整理信息和维护流程是本次较突出的兴趣线索，可用一次结构化任务验证。', 'medium' => '你对秩序和流程有一定兴趣，规则是否清晰、是否有改进空间可能影响体验。', 'low' => '规则化任务本次排序较后；可区分对重复流程的排斥与对清晰结构的实际需要。'],
+            ];
+        }
+
+        return [
+            'R' => ['high' => 'Hands-on work stands out here; test it with one practical task.', 'medium' => 'Your interest in practical work may depend on the tools, goal, and setting.', 'low' => 'Practical work ranks lower here; a short task can still clarify the experience.'],
+            'I' => ['high' => 'Questioning and evidence analysis stand out here; test them on a real problem.', 'medium' => 'Your interest in analysis may depend on the problem and room to explore.', 'low' => 'Analysis ranks lower here; notice whether a concrete question still draws you into investigation.'],
+            'A' => ['high' => 'Creative expression stands out here; test it through a small original piece.', 'medium' => 'Your interest in expression may depend on autonomy and the medium.', 'low' => 'Creative expression ranks lower here; a lightweight piece can clarify your response.'],
+            'S' => ['high' => 'Understanding and supporting people stand out here; test this in real collaboration.', 'medium' => 'Your interest in helping may depend on the relationship and interaction style.', 'low' => 'Helping activity ranks lower here; distinguish sustained interaction from support in specific settings.'],
+            'E' => ['high' => 'Advancing goals and organizing action stand out here; test them in a small initiative.', 'medium' => 'Your interest in driving action may depend on purpose and autonomy.', 'low' => 'Influence activity ranks lower here; notice whether contributing ideas feels better than leading.'],
+            'C' => ['high' => 'Organizing information and processes stands out here; test it in a structured task.', 'medium' => 'Your interest in structure may depend on clear rules and room to improve them.', 'low' => 'Routine structure ranks lower here; separate repetition from a genuine need for clarity.'],
+        ];
     }
 
     /**
@@ -210,8 +325,15 @@ final class RiasecPublicProjectionService
         $modulePolicy = is_array($projection['module_visibility_policy'] ?? null) ? $projection['module_visibility_policy'] : [];
 
         $slots = [];
-        foreach ($this->deepCopySlots->dimensionSlots() as $slot) {
-            $this->appendRenderableSlot($slots, $slot, 'six_dimension_map', $modulePolicy, $locale);
+        foreach ($this->selectedDimensionSlots($projection) as $slot) {
+            $this->appendRenderableSlot(
+                $slots,
+                $slot,
+                'six_dimension_map',
+                $modulePolicy,
+                $locale,
+                (bool) data_get($slot, 'selection_v1.is_top_three', false) ? 'visible' : 'collapsed'
+            );
         }
 
         $top3Key = $this->selectedTop3Key($topCode);
@@ -386,6 +508,87 @@ final class RiasecPublicProjectionService
     }
 
     /**
+     * @param  array<string,mixed>  $projection
+     * @return list<array<string,mixed>>
+     */
+    private function selectedDimensionSlots(array $projection): array
+    {
+        $qualityState = (string) data_get($projection, 'quality.quality_state', 'normal');
+        if (in_array($qualityState, ['low_quality', 'retake_recommended'], true)) {
+            return [];
+        }
+        if (($projection['_dimension_scores_complete'] ?? false) !== true) {
+            return [];
+        }
+
+        $scoreRows = array_values(array_filter(
+            (array) data_get($projection, 'scores.dimensions', []),
+            static fn (mixed $row): bool => is_array($row) && in_array((string) ($row['code'] ?? ''), RiasecDeepCopySlotRegistry::DIMENSIONS, true)
+        ));
+        usort($scoreRows, static function (array $left, array $right): int {
+            $scoreOrder = ((float) ($right['score'] ?? 0)) <=> ((float) ($left['score'] ?? 0));
+            if ($scoreOrder !== 0) {
+                return $scoreOrder;
+            }
+
+            return array_search((string) ($left['code'] ?? ''), RiasecDeepCopySlotRegistry::DIMENSIONS, true)
+                <=> array_search((string) ($right['code'] ?? ''), RiasecDeepCopySlotRegistry::DIMENSIONS, true);
+        });
+        $ranks = [];
+        $previousScore = null;
+        $previousRank = 0;
+        foreach ($scoreRows as $index => $row) {
+            $score = (float) ($row['score'] ?? 0);
+            $rank = $previousScore !== null && abs($previousScore - $score) < 0.000001 ? $previousRank : $index + 1;
+            $ranks[(string) $row['code']] = $rank;
+            $previousScore = $score;
+            $previousRank = $rank;
+        }
+
+        $slots = [];
+        foreach ($scoreRows as $row) {
+            $dimensionCode = (string) $row['code'];
+            $score = max(0.0, min(100.0, (float) ($row['score'] ?? 0)));
+            [$scoreBand, $selectedDetailKey] = $score >= 67
+                ? ['high', 'high_score_reading']
+                : ($score >= 34 ? ['medium', 'medium_score_reading'] : ['low', 'low_score_safe_reading']);
+            $slot = $this->deepCopySlots->resolveDimensionSlot($dimensionCode);
+            if (($slot[$selectedDetailKey] ?? null) === null || trim((string) $slot[$selectedDetailKey]) === '') {
+                continue;
+            }
+            $slot['selection_v1'] = [
+                'schema_version' => 'riasec.dimension_interpretation_selection.v1',
+                'dimension_code' => $dimensionCode,
+                'rank' => $ranks[$dimensionCode],
+                'is_top_three' => $ranks[$dimensionCode] <= 3,
+                'score_band' => $scoreBand,
+                'selected_detail_key' => $selectedDetailKey,
+            ];
+            $slots[] = $slot;
+        }
+
+        return $slots;
+    }
+
+    /**
+     * @param  array<string,mixed>  $scores
+     */
+    private function hasCompleteValidDimensionScores(array $scores): bool
+    {
+        foreach (RiasecDeepCopySlotRegistry::DIMENSIONS as $dimension) {
+            if (! array_key_exists($dimension, $scores) || ! is_numeric($scores[$dimension])) {
+                return false;
+            }
+            $score = (float) $scores[$dimension];
+            if (! is_finite($score) || $score < 0 || $score > 100) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * @return list<array<string,mixed>>
      */
     private function selected140qDimensionLayerSlots(string $topCode, string $formCode, string $qualityState, array $structuralDifferencePolicy): array
@@ -404,11 +607,17 @@ final class RiasecPublicProjectionService
             ? $structuralDifferencePolicy['layer_states']
             : [];
 
-        return [
-            $this->deepCopySlots->resolve140qDimensionLayerSlot($dimensionCode, 'task', $this->normalize140qSelectionLayerState((string) ($layerStates['task'] ?? 'agreement'))),
-            $this->deepCopySlots->resolve140qDimensionLayerSlot($dimensionCode, 'environment', $this->normalize140qSelectionLayerState((string) ($layerStates['environment'] ?? 'agreement'))),
-            $this->deepCopySlots->resolve140qDimensionLayerSlot($dimensionCode, 'role', $this->normalize140qSelectionLayerState((string) ($layerStates['role'] ?? 'agreement'))),
-        ];
+        $selected = [];
+        foreach (['task', 'environment', 'role'] as $layer) {
+            $state = $this->normalize140qSelectionLayerState((string) ($layerStates[$layer] ?? 'unavailable'));
+            if (! in_array($state, ['agreement', 'tension'], true)) {
+                continue;
+            }
+
+            $selected[] = $this->deepCopySlots->resolve140qDimensionLayerSlot($dimensionCode, $layer, $state);
+        }
+
+        return $selected;
     }
 
     private function selectedTop3Key(string $topCode): ?string
@@ -437,9 +646,21 @@ final class RiasecPublicProjectionService
             $layerStates = is_array($structuralDifferencePolicy['layer_states'] ?? null)
                 ? $structuralDifferencePolicy['layer_states']
                 : [];
-            $aggregateLayerState = in_array('tension', array_values($layerStates), true) ? 'layer_tension' : 'layer_agreement';
+            $normalizedLayerStates = array_map(
+                fn (string $layer): string => $this->normalize140qSelectionLayerState((string) ($layerStates[$layer] ?? 'unavailable')),
+                ['task', 'environment', 'role']
+            );
+            $hasCompleteExplicitStates = count(array_filter(
+                $normalizedLayerStates,
+                static fn (string $state): bool => in_array($state, ['agreement', 'tension'], true)
+            )) === 3;
 
-            return ['task_activity_card', 'environment_card', 'role_responsibility_card', $aggregateLayerState];
+            $selected = ['task_activity_card', 'environment_card', 'role_responsibility_card'];
+            if ($hasCompleteExplicitStates) {
+                $selected[] = in_array('tension', $normalizedLayerStates, true) ? 'layer_tension' : 'layer_agreement';
+            }
+
+            return $selected;
         }
 
         return ['layer_unavailable', '140q_cta'];
@@ -464,7 +685,7 @@ final class RiasecPublicProjectionService
                 ? $this->normalizeStructuralDifferenceState((string) data_get($payload, 'structural_difference_state', data_get($comparePolicy, 'structural_difference_state', 'different_emphasis')))
                 : 'cross_form_not_comparable',
             'basis' => 'task_environment_role_emphasis_only',
-            'selection_rule' => 'explicit_layer_state_or_default_agreement_without_score_delta',
+            'selection_rule' => 'explicit_layer_state_or_unavailable_without_score_delta',
             'score_comparison_allowed' => false,
             'raw_score_delta_allowed' => false,
             'raw_scores_used_for_selection' => false,
@@ -475,9 +696,9 @@ final class RiasecPublicProjectionService
             'result_override_allowed' => false,
             'code_conversion_allowed' => false,
             'layer_states' => [
-                'task' => $this->normalize140qSelectionLayerState((string) ($layerStates['task'] ?? data_get($payload, 'task_layer_state', 'agreement'))),
-                'environment' => $this->normalize140qSelectionLayerState((string) ($layerStates['environment'] ?? data_get($payload, 'environment_layer_state', 'agreement'))),
-                'role' => $this->normalize140qSelectionLayerState((string) ($layerStates['role'] ?? data_get($payload, 'role_layer_state', 'agreement'))),
+                'task' => $this->normalize140qSelectionLayerState((string) ($layerStates['task'] ?? data_get($payload, 'task_layer_state', 'unavailable'))),
+                'environment' => $this->normalize140qSelectionLayerState((string) ($layerStates['environment'] ?? data_get($payload, 'environment_layer_state', 'unavailable'))),
+                'role' => $this->normalize140qSelectionLayerState((string) ($layerStates['role'] ?? data_get($payload, 'role_layer_state', 'unavailable'))),
             ],
             'public_copy_boundary' => '60Q 与 140Q 只能读作线索强调不同，不比较 raw score，不输出优劣或覆盖判断。',
         ];
@@ -489,7 +710,7 @@ final class RiasecPublicProjectionService
 
         return in_array($normalized, ['agreement', 'tension', 'unavailable', 'insufficient_quality', 'not_applicable_60q_only'], true)
             ? $normalized
-            : 'agreement';
+            : 'unavailable';
     }
 
     private function normalizeStructuralDifferenceState(string $state): string
@@ -499,6 +720,128 @@ final class RiasecPublicProjectionService
         return in_array($normalized, RiasecDeepCopySlotRegistry::STRUCTURAL_DIFFERENCE_STATES, true)
             ? $normalized
             : 'different_emphasis';
+    }
+
+    /**
+     * @param  array<string,mixed>  $qualityRule
+     * @return array<string,mixed>
+     */
+    private function qualityDisplay(string $locale, string $grade, array $qualityRule): array
+    {
+        $isZh = str_starts_with(strtolower($locale), 'zh');
+        $rawGrade = in_array(strtoupper(trim($grade)), ['A', 'B', 'C'], true) ? strtoupper(trim($grade)) : 'C';
+        $normalizedGrade = match ((string) ($qualityRule['quality_state'] ?? '')) {
+            'low_quality', 'retake_recommended' => 'C',
+            'caution' => $rawGrade === 'C' ? 'C' : 'B',
+            default => $rawGrade,
+        };
+        $flags = array_values(array_unique(array_filter(array_map('strval', (array) ($qualityRule['quality_flags'] ?? [])))));
+        if ((bool) ($qualityRule['too_fast'] ?? false)) {
+            $flags[] = 'too_fast';
+        }
+        if ((bool) ($qualityRule['neutral_overuse'] ?? false)) {
+            $flags[] = 'neutral_overuse';
+        }
+        if ((bool) ($qualityRule['missing_items'] ?? false)) {
+            $flags[] = 'missing_items';
+        }
+        $flags = array_values(array_unique($flags));
+
+        $copy = $isZh ? [
+            'headlines' => [
+                'A' => '作答状态稳定，可正常阅读',
+                'B' => '存在轻度作答质量提示，建议结合实际经历谨慎阅读',
+                'C' => '作答质量提示较明显，本次仅作初步线索，建议状态稳定时重测',
+            ],
+            'reasons' => [
+                'attention_133_failed' => '有一道注意力检查题未通过，部分回答可能没有充分反映你的真实偏好。',
+                'attention_137_failed' => '有一道注意力检查题未通过，部分回答可能没有充分反映你的真实偏好。',
+                'low_consistency' => '部分相近题目的回答差异较大，结果的稳定性可能受到影响。',
+                'idealization' => '部分回答可能偏向理想状态，而不是你通常会做出的选择。',
+                'strong_idealization' => '多组回答可能偏向理想状态，而不是你通常会做出的选择。',
+                'broad_agreement' => '较多题目选择了同意或喜欢，各兴趣维度之间的区分度可能不足。',
+                'too_fast' => '作答速度明显偏快，可能没有留出足够时间理解题意。',
+                'neutral_overuse' => '中立选项使用较多，本次结果能够区分出的兴趣差异有限。',
+                'missing_items' => '存在未完成题目，本次结果无法支持完整解读。',
+            ],
+            'improvements' => [
+                'attention_133_failed' => '重测时请逐题阅读，并在不受打扰的环境中作答。',
+                'attention_137_failed' => '重测时请逐题阅读，并在不受打扰的环境中作答。',
+                'low_consistency' => '重测时以平时真实、反复出现的行为为准，不必追求前后看起来一致。',
+                'idealization' => '重测时请选择最接近日常状态的答案，而不是你认为更理想或更受期待的答案。',
+                'strong_idealization' => '重测时请选择最接近日常状态的答案，而不是你认为更理想或更受期待的答案。',
+                'broad_agreement' => '遇到都感兴趣的选项时，可比较自己是否愿意长期、重复地投入这些活动。',
+                'too_fast' => '在时间充足、状态稳定时重新作答，每题先联系一个具体经历再选择。',
+                'neutral_overuse' => '重测时可结合具体经历，尽量区分更接近喜欢还是不喜欢。',
+                'missing_items' => '请完成全部题目后重新生成结果。',
+            ],
+            'boundary' => '质量提示只说明本次作答的可读性，不评价你的能力、人格或个人价值。',
+        ] : [
+            'headlines' => [
+                'A' => 'Your responses are stable enough for a standard reading',
+                'B' => 'A mild response-quality note applies; read the result alongside your real experience',
+                'C' => 'Response-quality concerns limit this result to an initial signal; consider retaking when ready',
+            ],
+            'reasons' => [
+                'attention_133_failed' => 'One attention check was missed, so some answers may not fully reflect your usual preferences.',
+                'attention_137_failed' => 'One attention check was missed, so some answers may not fully reflect your usual preferences.',
+                'low_consistency' => 'Some similar questions received notably different answers, which may reduce result stability.',
+                'idealization' => 'Some answers may reflect an ideal self rather than your usual choices.',
+                'strong_idealization' => 'Several answer patterns may reflect an ideal self rather than your usual choices.',
+                'broad_agreement' => 'You agreed with or liked many items, which may make the interest dimensions less distinct.',
+                'too_fast' => 'The assessment was completed unusually quickly, leaving limited time to consider each item.',
+                'neutral_overuse' => 'Frequent neutral responses limit how clearly this result can distinguish your interests.',
+                'missing_items' => 'Some required items were not completed, so a full reading is not supported.',
+            ],
+            'improvements' => [
+                'attention_133_failed' => 'Retake in a distraction-free setting and read each item fully.',
+                'attention_137_failed' => 'Retake in a distraction-free setting and read each item fully.',
+                'low_consistency' => 'Answer from recurring real-life behavior rather than trying to make every answer look consistent.',
+                'idealization' => 'Choose what is closest to your everyday behavior, not what seems ideal or expected.',
+                'strong_idealization' => 'Choose what is closest to your everyday behavior, not what seems ideal or expected.',
+                'broad_agreement' => 'When many options appeal to you, ask which activities you would willingly repeat over time.',
+                'too_fast' => 'Retake when you have enough time, linking each answer to a concrete experience.',
+                'neutral_overuse' => 'Use concrete experiences to decide whether each activity is closer to appealing or unappealing.',
+                'missing_items' => 'Complete every required item before generating a new result.',
+            ],
+            'boundary' => 'This note concerns the readability of this response set; it does not judge ability, personality, or personal worth.',
+        ];
+
+        $reasons = [];
+        $improvements = [];
+        $attentionFlags = array_values(array_intersect($flags, ['attention_133_failed', 'attention_137_failed']));
+        if (count($attentionFlags) === 2) {
+            $reasons[] = $isZh
+                ? '两道注意力检查题均未通过，部分回答可能没有充分反映你的真实偏好。'
+                : 'Both attention checks were missed, so some answers may not fully reflect your usual preferences.';
+            $improvements[] = $copy['improvements']['attention_133_failed'];
+        }
+        foreach ($flags as $flag) {
+            if (count($attentionFlags) === 2 && in_array($flag, $attentionFlags, true)) {
+                continue;
+            }
+            if (isset($copy['reasons'][$flag])) {
+                $reasons[] = $copy['reasons'][$flag];
+                $improvements[] = $copy['improvements'][$flag];
+            }
+        }
+        if ($normalizedGrade !== 'A' && $reasons === []) {
+            $reasons[] = $isZh
+                ? '本次作答出现了质量提示，因此结果的区分度或稳定性可能有限。'
+                : 'This response set received a quality note, so the result may be less distinct or stable.';
+            $improvements[] = $isZh
+                ? '建议在状态稳定、不受打扰时，结合日常真实经历重新作答。'
+                : 'Consider retaking when settled and free from distractions, answering from everyday experience.';
+        }
+
+        return [
+            'schema_version' => 'riasec.quality_display.v1',
+            'locale' => $isZh ? 'zh-CN' : 'en',
+            'headline' => $copy['headlines'][$normalizedGrade],
+            'reasons' => array_values(array_unique($reasons)),
+            'improvements' => array_values(array_unique($improvements)),
+            'reading_boundary' => $copy['boundary'],
+        ];
     }
 
     /**
@@ -522,11 +865,11 @@ final class RiasecPublicProjectionService
     {
         $slots = [];
         $profileShape = (string) ($interpretationState['profile_shape'] ?? '');
-        if ($profileShape !== '') {
+        if ($profileShape !== '' && $profileShape !== 'unavailable') {
             $slots[] = $this->deepCopySlots->resolveInterpretationStateCopySlot('profile_shape_copy', $profileShape);
         }
 
-        $confidenceState = $this->confidenceCopyState($interpretationState, $qualityState);
+        $confidenceState = $profileShape === 'unavailable' ? null : $this->confidenceCopyState($interpretationState, $qualityState);
         if ($confidenceState !== null) {
             $slots[] = $this->deepCopySlots->resolveInterpretationStateCopySlot('top_code_confidence_copy', $confidenceState);
         }
@@ -580,8 +923,6 @@ final class RiasecPublicProjectionService
     {
         $contentKeys = [
             'title',
-            'summary',
-            'body',
             'core_drive',
             'positive_value',
             'real_world_cost',
@@ -589,7 +930,6 @@ final class RiasecPublicProjectionService
             'medium_score_reading',
             'low_score_safe_reading',
             'work_activity_examples',
-            'possible_drains',
             'common_misread',
             'action_advice',
             'pair_label',
@@ -622,9 +962,28 @@ final class RiasecPublicProjectionService
             'what_user_sees',
             'button_label',
             'selection_basis',
+            'summary',
+            'body',
         ];
         $content = [];
+        $selection = is_array($slot['selection_v1'] ?? null) ? $slot['selection_v1'] : null;
+        $layerContentKey = match ((string) ($slot['layer'] ?? '')) {
+            'task' => 'task_activity_card',
+            'environment' => 'environment_card',
+            'role' => 'role_responsibility_card',
+            default => null,
+        };
         foreach ($contentKeys as $key) {
+            if ($layerContentKey !== null && in_array($key, ['task_activity_card', 'environment_card', 'role_responsibility_card'], true) && $key !== $layerContentKey) {
+                continue;
+            }
+            if (
+                $selection !== null
+                && in_array($key, ['high_score_reading', 'medium_score_reading', 'low_score_safe_reading'], true)
+                && $key !== ($selection['selected_detail_key'] ?? null)
+            ) {
+                continue;
+            }
             if (array_key_exists($key, $slot) && $slot[$key] !== null && $slot[$key] !== '' && $slot[$key] !== []) {
                 $content[$key] = $slot[$key];
             }
@@ -646,6 +1005,7 @@ final class RiasecPublicProjectionService
             'locale' => (string) ($slot['locale'] ?? (str_starts_with(strtolower($locale), 'zh') ? 'zh-CN' : 'en')),
             'frontend_fallback_allowed' => false,
             'fallback_behavior' => (string) ($slot['fallback_behavior'] ?? 'omit_module'),
+            'selection_v1' => $selection,
             'applicability' => [
                 'form_codes' => array_values((array) ($slot['applicable_form_codes'] ?? [])),
                 'profile_shapes' => array_values((array) ($slot['applicable_profile_shapes'] ?? [])),
@@ -784,8 +1144,12 @@ final class RiasecPublicProjectionService
      * @param  array<string,mixed>  $interpretationRule
      * @return array<string,mixed>
      */
-    private function publicInterpretationState(array $interpretationRule): array
+    private function publicInterpretationState(array $interpretationRule, string $locale): array
     {
+        $tieDisplay = is_array($interpretationRule['tie_display_v1'] ?? null) ? $interpretationRule['tie_display_v1'] : [];
+        $tieDisplay['locale'] = str_starts_with(strtolower($locale), 'zh') ? 'zh-CN' : 'en';
+        $tieDisplay['display_copy'] = $this->tieDisplayCopy($tieDisplay, $locale);
+
         return [
             'interpretation_rule_version' => (string) ($interpretationRule['interpretation_rule_version'] ?? ''),
             'profile_shape' => (string) ($interpretationRule['profile_shape'] ?? ''),
@@ -794,6 +1158,7 @@ final class RiasecPublicProjectionService
             'near_tie_state' => is_array($interpretationRule['near_tie_state'] ?? null) ? $interpretationRule['near_tie_state'] : [],
             'alternate_code' => is_array($interpretationRule['alternate_code'] ?? null) ? $interpretationRule['alternate_code'] : [],
             'alternate_code_reason' => $interpretationRule['alternate_code_reason'] ?? null,
+            'tie_display_v1' => $tieDisplay,
             'top_code_confidence' => is_array($interpretationRule['top_code_confidence'] ?? null) ? $interpretationRule['top_code_confidence'] : [],
             'reading_strength' => (string) ($interpretationRule['reading_strength'] ?? ''),
             'result_page_strategy' => is_array($interpretationRule['result_page_strategy'] ?? null) ? $interpretationRule['result_page_strategy'] : [],
@@ -801,5 +1166,69 @@ final class RiasecPublicProjectionService
             'validation_status' => (string) ($interpretationRule['validation_status'] ?? ''),
             'field_authority' => is_array($interpretationRule['field_authority'] ?? null) ? $interpretationRule['field_authority'] : [],
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $tieDisplay
+     * @return array<string,string>
+     */
+    private function tieDisplayCopy(array $tieDisplay, string $locale): array
+    {
+        $isZh = str_starts_with(strtolower($locale), 'zh');
+        $kind = (string) ($tieDisplay['kind'] ?? 'none');
+        $dimensions = array_values(array_filter(array_map('strval', (array) ($tieDisplay['dimensions'] ?? []))));
+        $groups = array_values(array_filter(array_map(
+            static fn ($group): array => array_values(array_filter(array_map('strval', is_array($group) ? $group : []))),
+            (array) ($tieDisplay['groups'] ?? [])
+        )));
+        $code = (string) ($tieDisplay['ordered_code'] ?? '');
+        $joined = $isZh ? implode('、', $dimensions) : $this->englishJoin($dimensions);
+        $position = (string) ($tieDisplay['position'] ?? 'none');
+        if (($tieDisplay['unavailable_reason'] ?? null) === 'score_code_mismatch') {
+            return [
+                'headline' => $isZh ? '本次结果暂不可解释' : 'This result cannot be interpreted yet',
+                'note' => $isZh ? '分数顺序与结果代码不一致，已隐藏解释内容；六维分数仍可供核对。' : 'The score order and result code do not agree, so interpretive content is hidden; the six dimension scores remain available for review.',
+                'boundary' => $isZh ? '请重新检查结果；不要根据本页推断兴趣排序、能力或职业结论。' : 'Please check the result again; do not infer an interest order, ability, or career conclusion from this page.',
+            ];
+        }
+
+        return match ($kind) {
+            'exact_tie' => [
+                'headline' => $this->exactTieHeadline($code, $dimensions, $groups, $position, $isZh),
+                'note' => $isZh ? '这些维度本次得分相同，字母顺序不代表高低。' : 'These dimensions have the same score; their letter order does not indicate a difference.',
+                'boundary' => $isZh ? '并列只描述本次兴趣分数，不代表能力、人格身份或职业结论。' : 'The tie describes this interest score only; it is not an ability, identity, or career conclusion.',
+            ],
+            'near_tie' => [
+                'headline' => $isZh ? $code.'（'.$joined.'接近）' : $code.' ('.$joined.' are close)',
+                'note' => $isZh ? '这些维度分数接近，不宜据此强调先后顺序。' : 'These scores are close, so the order should not be emphasized.',
+                'boundary' => $isZh ? '这是解释用的暂定阅读阈值，不是统计显著性或测量误差结论，也不产生第二个测量结果。' : 'This is a provisional reading threshold, not a statistical-significance or measurement-error conclusion, and it does not create a second measured result.',
+            ],
+            default => [
+                'headline' => $code,
+                'note' => '',
+                'boundary' => '',
+            ],
+        };
+    }
+
+    private function englishJoin(array $items): string
+    {
+        if (count($items) <= 1) {
+            return (string) ($items[0] ?? '');
+        }
+        if (count($items) === 2) {
+            return $items[0].' and '.$items[1];
+        }
+
+        return implode(', ', array_slice($items, 0, -1)).', and '.$items[array_key_last($items)];
+    }
+
+    private function exactTieHeadline(string $code, array $dimensions, array $groups, string $position, bool $isZh): string
+    {
+        $groupLabels = array_map(fn (array $group): string => $isZh ? implode('/', $group) : $this->englishJoin($group), $groups);
+
+        return $isZh
+            ? $code.'（并列：'.implode('；', $groupLabels).'）'
+            : $code.' (tied groups: '.implode('; ', $groupLabels).')';
     }
 }

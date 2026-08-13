@@ -158,6 +158,290 @@ final class RiasecStructuralDifferenceSlotRegistryTest extends TestCase
         $this->assertSame('task_environment_role_emphasis_only', $summarySlot['selection_basis']);
     }
 
+    public function test_140q_projection_fails_closed_when_layer_states_are_missing_or_invalid(): void
+    {
+        $cases = [
+            'EAR' => [
+                'scores' => ['E' => 63, 'A' => 58, 'R' => 55, 'I' => 50, 'S' => 47, 'C' => 42],
+                'breakdown' => ['activity_E' => 63, 'env_E' => 83, 'role_E' => 42, 'role_R' => 67, 'role_S' => 67],
+            ],
+            'ICA' => [
+                'scores' => ['I' => 66, 'C' => 62, 'A' => 58, 'R' => 50, 'S' => 45, 'E' => 40],
+                'breakdown' => ['activity_I' => 77, 'env_I' => 8, 'env_C' => 75, 'role_I' => 50, 'role_A' => 83],
+            ],
+            'AIC' => [
+                'scores' => ['A' => 64, 'I' => 61, 'C' => 59, 'R' => 52, 'S' => 50, 'E' => 38],
+                'breakdown' => ['activity_A' => 64, 'env_A' => 33, 'env_C' => 67, 'env_I' => 67, 'env_R' => 67, 'env_S' => 67, 'role_A' => 50, 'role_I' => 83],
+            ],
+        ];
+
+        foreach ($cases as $topCode => $case) {
+            $result = new Result;
+            $result->scale_code = 'RIASEC';
+            $result->type_code = $topCode;
+            $result->scores_pct = $case['scores'];
+            $result->result_json = array_merge($case['breakdown'], [
+                'top_code' => $topCode,
+                'form_code' => 'riasec_140',
+                'answer_count' => 140,
+                'task_layer_state' => 'unknown_state',
+            ]);
+
+            $service = $this->projectionService();
+            $v1 = $service->buildFromResult($result);
+            $projection = $service->buildV2FromResult($result);
+
+            foreach ($case['breakdown'] as $key => $value) {
+                $path = str_starts_with($key, 'activity_')
+                    ? 'activity.'.substr($key, 9)
+                    : (str_starts_with($key, 'env_') ? 'environment.'.substr($key, 4) : 'role.'.substr($key, 5));
+                $this->assertSame((float) $value, data_get($v1, 'enhanced_breakdown.'.$path));
+            }
+
+            $this->assertSame([
+                'task' => 'unavailable',
+                'environment' => 'unavailable',
+                'role' => 'unavailable',
+            ], data_get($projection, 'structural_difference.layer_states'));
+
+            $slotIds = array_column((array) data_get($projection, 'deep_content_slots_v1.slots', []), 'slot_id');
+            $this->assertNotContains('140q_layer_agreement_copy:layer_agreement', $slotIds);
+            $this->assertNotContains('140q_tension_copy:layer_tension', $slotIds);
+            $this->assertEmpty(array_filter(
+                $slotIds,
+                static fn (string $slotId): bool => str_contains($slotId, '_agreement') || str_contains($slotId, '_tension')
+            ));
+            $this->assertContains('140q_task_card_copy:task_activity_card', $slotIds);
+            $this->assertContains('140q_environment_card_copy:environment_card', $slotIds);
+            $this->assertContains('140q_role_card_copy:role_responsibility_card', $slotIds);
+        }
+    }
+
+    public function test_quality_display_localizes_reasons_actions_and_boundary_without_raw_flags(): void
+    {
+        $result = new Result;
+        $result->scale_code = 'RIASEC';
+        $result->type_code = 'RIA';
+        $result->scores_pct = ['R' => 80, 'I' => 70, 'A' => 60, 'S' => 50, 'E' => 40, 'C' => 30];
+        $result->result_json = [
+            'top_code' => 'RIA',
+            'form_code' => 'riasec_140',
+            'answer_count' => 140,
+            'quality_grade' => 'C',
+            'quality_flags' => ['idealization', 'low_consistency', 'broad_agreement'],
+            'too_fast' => true,
+            'neutral_overuse' => true,
+        ];
+
+        $zh = data_get($this->projectionService()->buildV2FromResult($result, 'zh-CN'), 'quality.display_v1');
+        $this->assertSame('riasec.quality_display.v1', $zh['schema_version']);
+        $this->assertSame('zh-CN', $zh['locale']);
+        $this->assertStringContainsString('初步线索', $zh['headline']);
+        $this->assertCount(5, $zh['reasons']);
+        $this->assertCount(5, $zh['improvements']);
+        $this->assertStringContainsString('理想状态', implode('', $zh['reasons']));
+        $this->assertStringContainsString('如何', '如何让下次结果更稳定');
+        $this->assertStringContainsString('不评价你的能力、人格或个人价值', $zh['reading_boundary']);
+        $this->assertStringNotContainsString('idealization', json_encode($zh, JSON_UNESCAPED_UNICODE));
+
+        $en = data_get($this->projectionService()->buildV2FromResult($result, 'en'), 'quality.display_v1');
+        $this->assertSame('en', $en['locale']);
+        $this->assertStringContainsString('initial signal', $en['headline']);
+        $this->assertStringContainsString('ideal self', implode('', $en['reasons']));
+        $this->assertDoesNotMatchRegularExpression('/[\x{4e00}-\x{9fff}]/u', json_encode($en, JSON_UNESCAPED_UNICODE));
+    }
+
+    public function test_quality_display_follows_derived_state_and_handles_unknown_attention_and_missing_signals(): void
+    {
+        $base = new Result;
+        $base->scale_code = 'RIASEC';
+        $base->type_code = 'RIA';
+        $base->scores_pct = ['R' => 80, 'I' => 70, 'A' => 60, 'S' => 50, 'E' => 40, 'C' => 30];
+
+        $tooFast = clone $base;
+        $tooFast->result_json = [
+            'top_code' => 'RIA', 'form_code' => 'riasec_140', 'answer_count' => 140,
+            'quality_grade' => 'A', 'too_fast' => true,
+        ];
+        $tooFastProjection = $this->projectionService()->buildV2FromResult($tooFast, 'zh-CN');
+        $this->assertSame('caution', data_get($tooFastProjection, 'quality.quality_state'));
+        $this->assertStringContainsString('轻度', data_get($tooFastProjection, 'quality.display_v1.headline'));
+        $this->assertStringContainsString('速度明显偏快', implode('', data_get($tooFastProjection, 'quality.display_v1.reasons')));
+
+        $unknown = clone $base;
+        $unknown->result_json = [
+            'top_code' => 'RIA', 'form_code' => 'riasec_140', 'answer_count' => 140,
+            'quality_grade' => 'A', 'quality_flags' => ['future_quality_signal'],
+        ];
+        $unknownDisplay = data_get($this->projectionService()->buildV2FromResult($unknown, 'zh-CN'), 'quality.display_v1');
+        $this->assertStringContainsString('轻度', $unknownDisplay['headline']);
+        $this->assertNotEmpty($unknownDisplay['reasons']);
+        $this->assertNotEmpty($unknownDisplay['improvements']);
+        $this->assertStringNotContainsString('future_quality_signal', json_encode($unknownDisplay, JSON_UNESCAPED_UNICODE));
+
+        $attention = clone $base;
+        $attention->result_json = [
+            'top_code' => 'RIA', 'form_code' => 'riasec_140', 'answer_count' => 140,
+            'quality_grade' => 'C', 'quality_flags' => ['attention_133_failed', 'attention_137_failed'],
+        ];
+        $attentionProjection = $this->projectionService()->buildV2FromResult($attention, 'zh-CN');
+        $this->assertSame('low_quality', data_get($attentionProjection, 'quality.quality_state'));
+        $this->assertSame(1, count(data_get($attentionProjection, 'quality.display_v1.reasons')));
+        $this->assertStringContainsString('两道注意力检查题均未通过', data_get($attentionProjection, 'quality.display_v1.reasons.0'));
+
+        $incomplete = clone $base;
+        $incomplete->result_json = [
+            'top_code' => 'RIA', 'form_code' => 'riasec_60', 'answer_count' => 52,
+            'quality_grade' => 'A', 'quality_flags' => [],
+        ];
+        $incompleteProjection = $this->projectionService()->buildV2FromResult($incomplete, 'zh-CN');
+        $this->assertSame('low_quality', data_get($incompleteProjection, 'quality.quality_state'));
+        $this->assertStringContainsString('未完成题目', implode('', data_get($incompleteProjection, 'quality.display_v1.reasons')));
+    }
+
+    public function test_dimension_projection_selects_one_backend_owned_score_band_and_prioritizes_top_three(): void
+    {
+        $result = new Result;
+        $result->scale_code = 'RIASEC';
+        $result->type_code = 'RIA';
+        $result->scores_pct = ['R' => 90, 'I' => 75, 'A' => 67, 'S' => 67, 'E' => 34, 'C' => 20];
+        $result->result_json = [
+            'top_code' => 'RIA', 'form_code' => 'riasec_60', 'answer_count' => 60,
+            'quality_grade' => 'A', 'quality_flags' => [],
+        ];
+
+        $projection = $this->projectionService()->buildV2FromResult($result, 'zh-CN');
+        $bandContract = data_get($projection, 'dimension_score_band_contract_v1');
+        $this->assertSame('riasec.dimension_score_band.v1', $bandContract['schema_version']);
+        $this->assertSame('criterion_referenced_normalized_score_range', $bandContract['method']);
+        $this->assertSame('equal_width_normalized_response_scale_ranges', $bandContract['descriptive_basis']);
+        $this->assertFalse($bandContract['percentile_interpretation_allowed']);
+        $this->assertFalse($bandContract['normative_interpretation_allowed']);
+        $this->assertSame(67, data_get($bandContract, 'thresholds.high.min_inclusive'));
+        $slots = array_values(array_filter(
+            (array) data_get($projection, 'deep_content_slots_v1.slots'),
+            static fn (array $slot): bool => ($slot['slot_key'] ?? null) === 'dimension_deep_copy'
+        ));
+
+        $this->assertCount(6, $slots);
+        $expected = [
+            'R' => [1, true, 'high', 'high_score_reading'],
+            'I' => [2, true, 'high', 'high_score_reading'],
+            'A' => [3, true, 'high', 'high_score_reading'],
+            'S' => [3, true, 'high', 'high_score_reading'],
+            'E' => [5, false, 'medium', 'medium_score_reading'],
+            'C' => [6, false, 'low', 'low_score_safe_reading'],
+        ];
+        foreach ($slots as $slot) {
+            $code = (string) data_get($slot, 'selection_v1.dimension_code');
+            [$rank, $isTopThree, $band, $detailKey] = $expected[$code];
+            $this->assertSame($rank, data_get($slot, 'selection_v1.rank'));
+            $this->assertSame($isTopThree, data_get($slot, 'selection_v1.is_top_three'));
+            $this->assertSame($band, data_get($slot, 'selection_v1.score_band'));
+            $this->assertSame($detailKey, data_get($slot, 'selection_v1.selected_detail_key'));
+            $this->assertSame($isTopThree ? 'visible' : 'collapsed', $slot['slot_visibility']);
+            $this->assertArrayHasKey($detailKey, $slot['content']);
+            $this->assertCount(1, array_intersect(
+                ['high_score_reading', 'medium_score_reading', 'low_score_safe_reading'],
+                array_keys($slot['content'])
+            ));
+        }
+
+        $lowQualityPayload = $result->result_json;
+        $lowQualityPayload['answer_count'] = 52;
+        $result->result_json = $lowQualityPayload;
+        $lowQualityProjection = $this->projectionService()->buildV2FromResult($result, 'zh-CN');
+        $this->assertEmpty(array_filter(
+            (array) data_get($lowQualityProjection, 'deep_content_slots_v1.slots'),
+            static fn (array $slot): bool => ($slot['slot_key'] ?? null) === 'dimension_deep_copy'
+        ));
+
+        foreach ([['R' => 101], ['R' => -1], ['R' => 'not-a-score']] as $invalid) {
+            $invalidResult = clone $result;
+            $invalidPayload = $invalidResult->result_json;
+            $invalidPayload['answer_count'] = 60;
+            $invalidResult->result_json = $invalidPayload;
+            $invalidResult->scores_pct = array_merge(['R' => 90, 'I' => 75, 'A' => 67, 'S' => 60, 'E' => 34, 'C' => 20], $invalid);
+            $invalidProjection = $this->projectionService()->buildV2FromResult($invalidResult, 'zh-CN');
+            $this->assertEmpty(array_filter(
+                (array) data_get($invalidProjection, 'deep_content_slots_v1.slots'),
+                static fn (array $slot): bool => ($slot['slot_key'] ?? null) === 'dimension_deep_copy'
+            ));
+        }
+
+        foreach ([[33.99, 'low'], [34, 'medium'], [66.99, 'medium'], [67, 'high']] as [$score, $expectedBand]) {
+            $boundaryResult = clone $result;
+            $boundaryPayload = $boundaryResult->result_json;
+            $boundaryPayload['answer_count'] = 60;
+            $boundaryResult->result_json = $boundaryPayload;
+            $boundaryResult->scores_pct = ['R' => (float) $score, 'I' => 90, 'A' => 80, 'S' => 70, 'E' => 60, 'C' => 50];
+            $boundaryProjection = $this->projectionService()->buildV2FromResult($boundaryResult, 'zh-CN');
+            $rSlot = collect((array) data_get($boundaryProjection, 'deep_content_slots_v1.slots'))
+                ->firstWhere('slot_id', 'dimension_deep_copy:R');
+            $this->assertSame($expectedBand, data_get($rSlot, 'selection_v1.score_band'));
+        }
+
+        $missingDimension = clone $result;
+        $missingDimension->scores_pct = ['R' => 90, 'I' => 75, 'A' => 67, 'S' => 60, 'E' => 34];
+        $completePayload = $missingDimension->result_json;
+        $completePayload['answer_count'] = 60;
+        $missingDimension->result_json = $completePayload;
+        $missingProjection = $this->projectionService()->buildV2FromResult($missingDimension, 'zh-CN');
+        $this->assertEmpty(array_filter(
+            (array) data_get($missingProjection, 'deep_content_slots_v1.slots'),
+            static fn (array $slot): bool => ($slot['slot_key'] ?? null) === 'dimension_deep_copy'
+        ));
+    }
+
+    public function test_public_tie_display_is_localized_for_exact_near_and_no_tie_states(): void
+    {
+        $cases = [
+            [['S' => 80, 'C' => 80, 'E' => 70, 'R' => 40, 'I' => 30, 'A' => 20], 'exact_tie', '并列', 'same score'],
+            [['R' => 80, 'I' => 77, 'A' => 68, 'S' => 40, 'E' => 30, 'C' => 20], 'near_tie', '接近', 'are close'],
+            [['R' => 90, 'I' => 70, 'A' => 50, 'S' => 40, 'E' => 30, 'C' => 20], 'none', 'RIA', 'RIA'],
+        ];
+        foreach ($cases as [$scores, $kind, $zhText, $enText]) {
+            $orderedCode = implode('', array_slice(array_keys($scores), 0, 3));
+            $result = new Result;
+            $result->scale_code = 'RIASEC';
+            $result->type_code = $orderedCode;
+            $result->scores_pct = $scores;
+            $result->result_json = ['scores_0_100' => $scores, 'top_code' => $orderedCode, 'form_code' => 'riasec_60', 'answer_count' => 60, 'quality_grade' => 'A'];
+            $zh = $this->projectionService()->buildV2FromResult($result, 'zh-CN');
+            $en = $this->projectionService()->buildV2FromResult($result, 'en');
+            $this->assertSame($kind, data_get($zh, 'interpretation_state.tie_display_v1.kind'));
+            $this->assertStringContainsString($zhText, data_get($zh, 'interpretation_state.tie_display_v1.display_copy.headline'));
+            $this->assertStringContainsString($enText, data_get($en, 'interpretation_state.tie_display_v1.display_copy.headline').data_get($en, 'interpretation_state.tie_display_v1.display_copy.note'));
+        }
+
+        $invalid = new Result;
+        $invalid->scale_code = 'RIASEC';
+        $invalid->type_code = 'RIC';
+        $invalid->scores_pct = ['R' => 90, 'I' => 80, 'C' => 70, 'A' => 50, 'S' => 40, 'E' => 30];
+        $invalid->result_json = ['top_code' => 'RIC', 'form_code' => 'riasec_60', 'answer_count' => 60, 'quality_grade' => 'A'];
+        $projection = $this->projectionService()->buildV2FromResult($invalid, 'zh-CN');
+        $this->assertSame('none', data_get($projection, 'interpretation_state.tie_display_v1.kind'));
+        $this->assertSame('RIC', data_get($projection, 'interpretation_state.tie_display_v1.display_copy.headline'));
+
+        $mismatch = clone $invalid;
+        $mismatch->scores_pct = ['R' => 80, 'I' => 77, 'A' => 68, 'S' => 40, 'E' => 30, 'C' => 20];
+        $mismatchProjection = $this->projectionService()->buildV2FromResult($mismatch, 'zh-CN');
+        $this->assertSame('score_code_mismatch_unavailable', data_get($mismatchProjection, 'interpretation_state.validation_status'));
+        $this->assertSame('none', data_get($mismatchProjection, 'interpretation_state.near_tie_state.state'));
+        $this->assertFalse(data_get($mismatchProjection, 'interpretation_state.alternate_code.show'));
+        $this->assertSame('本次结果暂不可解释', data_get($mismatchProjection, 'interpretation_state.tie_display_v1.display_copy.headline'));
+        $this->assertSame('visible', collect(data_get($mismatchProjection, 'module_visibility_policy.modules'))->firstWhere('key', 'six_dimension_map')['visibility']);
+        $this->assertSame('hidden', collect(data_get($mismatchProjection, 'module_visibility_policy.modules'))->firstWhere('key', 'activity_explorer')['visibility']);
+        $this->assertEmpty(array_filter(
+            (array) data_get($mismatchProjection, 'deep_content_slots_v1.slots'),
+            static fn (array $slot): bool => ($slot['slot_key'] ?? '') === 'near_tie_alternate_code_copy'
+        ));
+        $this->assertEmpty(array_filter(
+            (array) data_get($mismatchProjection, 'deep_content_slots_v1.slots'),
+            static fn (array $slot): bool => ($slot['slot_key'] ?? '') === 'top_code_confidence_copy'
+        ));
+    }
+
     private function attempt(string $id, string $formCode, int $questionCount): Attempt
     {
         $attempt = new Attempt;

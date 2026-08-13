@@ -337,7 +337,9 @@ class AttemptReadController extends Controller
         $riasecProjectionV2 = $scaleCode === 'RIASEC'
             ? $this->riasecPublicProjectionService->buildV2FromResult(
                 $result,
-                (string) ($attempt?->locale ?? config('content_packs.default_locale', 'zh-CN'))
+                (string) ($attempt?->locale ?? config('content_packs.default_locale', 'zh-CN')),
+                false,
+                true
             )
             : [];
 
@@ -660,7 +662,9 @@ class AttemptReadController extends Controller
             if (! is_array($projectionV2)) {
                 $projectionV2 = $this->riasecPublicProjectionService->buildV2FromResult(
                     $result,
-                    (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN'))
+                    (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN')),
+                    false,
+                    true
                 );
             }
             $responsePayload['riasec_public_projection_v1'] = $projection;

@@ -50,6 +50,46 @@ final class RiasecInterpretationRuleContractTest extends TestCase
         $this->assertNoForbiddenClaims($state);
     }
 
+    public function test_exact_and_near_ties_are_explicit_without_ordering_precision_claims(): void
+    {
+        $exact = (new RiasecInterpretationRuleContract)->build([
+            'scores_0_100' => ['S' => 80, 'C' => 80, 'E' => 70, 'R' => 40, 'I' => 30, 'A' => 20],
+        ]);
+        $this->assertSame('exact_tie', data_get($exact, 'tie_display_v1.kind'));
+        $this->assertSame('exact_groups', data_get($exact, 'tie_display_v1.position'));
+        $this->assertSame(['S', 'C'], data_get($exact, 'tie_display_v1.dimensions'));
+        $this->assertFalse(data_get($exact, 'tie_display_v1.ordering_precision_claim_allowed'));
+        $this->assertSame('none', $exact['near_tie_state']['state']);
+        $this->assertFalse($exact['alternate_code']['show']);
+
+        $near = (new RiasecInterpretationRuleContract)->build([
+            'scores_0_100' => ['R' => 80, 'I' => 77, 'A' => 68, 'S' => 40, 'E' => 30, 'C' => 20],
+        ]);
+        $this->assertSame('near_tie', data_get($near, 'tie_display_v1.kind'));
+        $this->assertSame(['R', 'I'], data_get($near, 'tie_display_v1.dimensions'));
+        $this->assertSame(['IRA'], data_get($near, 'tie_display_v1.alternate_codes'));
+        $this->assertFalse(data_get($near, 'tie_display_v1.ordering_precision_claim_allowed'));
+
+        $boundary = (new RiasecInterpretationRuleContract)->build([
+            'scores_0_100' => ['R' => 90, 'I' => 80, 'A' => 70, 'S' => 70, 'E' => 30, 'C' => 20],
+        ]);
+        $this->assertSame('exact_tie', data_get($boundary, 'tie_display_v1.kind'));
+        $this->assertSame('exact_groups', data_get($boundary, 'tie_display_v1.position'));
+        $this->assertSame(['A', 'S'], data_get($boundary, 'tie_display_v1.dimensions'));
+
+        $multiple = (new RiasecInterpretationRuleContract)->build([
+            'scores_0_100' => ['R' => 90, 'I' => 90, 'A' => 80, 'S' => 80, 'E' => 30, 'C' => 20],
+        ]);
+        $this->assertSame('exact_groups', data_get($multiple, 'tie_display_v1.position'));
+        $this->assertSame([['R', 'I'], ['A', 'S']], data_get($multiple, 'tie_display_v1.groups'));
+
+        $extendedThird = (new RiasecInterpretationRuleContract)->build([
+            'scores_0_100' => ['R' => 90, 'I' => 80, 'A' => 70, 'S' => 70, 'E' => 70, 'C' => 20],
+        ]);
+        $this->assertSame('exact_groups', data_get($extendedThird, 'tie_display_v1.position'));
+        $this->assertSame([['A', 'S', 'E']], data_get($extendedThird, 'tie_display_v1.groups'));
+    }
+
     public function test_broad_profile_routes_to_activity_filter_first_before_near_tie(): void
     {
         $state = (new RiasecInterpretationRuleContract)->build([
