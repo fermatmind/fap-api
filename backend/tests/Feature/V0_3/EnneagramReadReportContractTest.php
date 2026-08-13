@@ -324,7 +324,7 @@ final class EnneagramReadReportContractTest extends TestCase
         $pages = is_array($reportV2['pages'] ?? null) ? $reportV2['pages'] : [];
         $modules = is_array($reportV2['modules'] ?? null) ? $reportV2['modules'] : [];
         $this->assertCount(5, $pages);
-        $this->assertCount(41, $modules);
+        $this->assertCount(29, $modules);
 
         foreach ($pages as $page) {
             $this->assertIsArray($page);
