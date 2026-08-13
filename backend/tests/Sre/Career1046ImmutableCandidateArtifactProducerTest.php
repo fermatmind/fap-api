@@ -116,12 +116,16 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
     public function test_each_unexpected_producer_stage_failure_maps_to_one_sanitized_allowlisted_code(): void
     {
         $stages = [
+            'initialization' => 'CANDIDATE_INITIALIZATION_STAGE_FAILURE',
+            'read_only_transaction' => 'CANDIDATE_READ_ONLY_TRANSACTION_STAGE_FAILURE',
+            'audit_initialization' => 'CANDIDATE_AUDIT_INITIALIZATION_STAGE_FAILURE',
             'ledger' => 'CANDIDATE_LEDGER_STAGE_FAILURE',
             'projection' => 'CANDIDATE_PROJECTION_STAGE_FAILURE',
             'detail_bundle' => 'CANDIDATE_DETAIL_BUNDLE_STAGE_FAILURE',
             'resource_transform' => 'CANDIDATE_RESOURCE_TRANSFORM_STAGE_FAILURE',
             'generator' => 'CANDIDATE_GENERATOR_STAGE_FAILURE',
             'serialization' => 'CANDIDATE_SERIALIZATION_STAGE_FAILURE',
+            'audit_finalization' => 'CANDIDATE_AUDIT_FINALIZATION_STAGE_FAILURE',
         ];
 
         foreach ($stages as $stage => $expected) {
@@ -157,6 +161,42 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
         } catch (Career1046ImmutableCandidateArtifactFailure $failure) {
             self::assertSame('CANDIDATE_STAGE_INVALID', $failure->safeCode);
         }
+    }
+
+    public function test_mysql_read_only_transaction_is_atomic_uses_one_pdo_and_restores_the_read_handle(): void
+    {
+        [$method, $app, $connection, $pdo, $originalReadPdo] = $this->mysqlReadOnlyTransactionHarness();
+
+        $result = $method->invoke(null, $app, $connection, static function () use ($connection, $pdo): array {
+            self::assertSame($pdo, $connection->readPdo);
+            self::assertTrue($pdo->inTransaction());
+
+            return ['candidate' => true];
+        });
+
+        self::assertSame(['candidate' => true], $result);
+        self::assertSame(['START TRANSACTION READ ONLY'], $pdo->statements);
+        self::assertTrue($pdo->committed);
+        self::assertFalse($pdo->inTransaction());
+        self::assertSame($originalReadPdo, $connection->readPdo);
+    }
+
+    public function test_mysql_read_only_transaction_rolls_back_and_restores_the_read_handle_on_failure(): void
+    {
+        [$method, $app, $connection, $pdo, $originalReadPdo] = $this->mysqlReadOnlyTransactionHarness();
+
+        try {
+            $method->invoke(null, $app, $connection, static fn (): never => throw new \Error('sensitive driver detail'));
+            self::fail('transaction failure did not fail closed');
+        } catch (\ReflectionException $failure) {
+            throw $failure;
+        } catch (\Error $failure) {
+            self::assertSame('sensitive driver detail', $failure->getMessage());
+        }
+
+        self::assertTrue($pdo->rolledBack);
+        self::assertFalse($pdo->inTransaction());
+        self::assertSame($originalReadPdo, $connection->readPdo);
     }
 
     public function test_ledger_stage_contains_the_production_database_state_reconciliation_read(): void
@@ -235,13 +275,17 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
             'TARGET_BOUNDED_LEDGER_DUPLICATE',
             'TARGET_BOUNDED_LEDGER_COUNTS_INVALID',
             'CANDIDATE_AUTHORITY_CONTRACT_FAILURE',
+            'CANDIDATE_INITIALIZATION_STAGE_FAILURE',
+            'CANDIDATE_READ_ONLY_TRANSACTION_STAGE_FAILURE',
+            'CANDIDATE_AUDIT_INITIALIZATION_STAGE_FAILURE',
             'CANDIDATE_LEDGER_STAGE_FAILURE',
             'CANDIDATE_PROJECTION_STAGE_FAILURE',
             'CANDIDATE_DETAIL_BUNDLE_STAGE_FAILURE',
             'CANDIDATE_RESOURCE_TRANSFORM_STAGE_FAILURE',
             'CANDIDATE_GENERATOR_STAGE_FAILURE',
             'CANDIDATE_SERIALIZATION_STAGE_FAILURE',
-            'CANDIDATE_CONTROL_FAILURE',
+            'CANDIDATE_AUDIT_FINALIZATION_STAGE_FAILURE',
+            'START TRANSACTION READ ONLY',
             'CAREER_1046_APPLICATION_ROOT',
             'CAREER_1046_STREAMED_EXECUTION',
             '--emit-streamed-runner',
@@ -254,7 +298,9 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
         foreach (['schedule:', 'push:', 'workflow_run:', 'gh workflow run', 'php artisan migrate', 'queue:restart', 'deploy:symlink', 'indexnow', 'sitemap:submit'] as $forbidden) {
             self::assertStringNotContainsString($forbidden, $combined);
         }
-        self::assertStringNotContainsString('UNEXPECTED_CONTROL_FAILURE', $runner);
+        foreach (['UNEXPECTED_CONTROL_FAILURE', 'CANDIDATE_CONTROL_FAILURE', "statement('SET TRANSACTION READ ONLY')"] as $removed) {
+            self::assertStringNotContainsString($removed, $runner);
+        }
     }
 
     public function test_it_emits_a_lintable_control_plane_runner_bundle(): void
@@ -319,6 +365,91 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
                 );
             }
         }
+    }
+
+    /** @return array{\ReflectionMethod, object, object, object, object} */
+    private function mysqlReadOnlyTransactionHarness(): array
+    {
+        $pdo = new class
+        {
+            public bool $active = false;
+
+            public bool $committed = false;
+
+            public bool $rolledBack = false;
+
+            /** @var list<string> */
+            public array $statements = [];
+
+            public function inTransaction(): bool
+            {
+                return $this->active;
+            }
+
+            public function exec(string $statement): int
+            {
+                $this->statements[] = $statement;
+                $this->active = true;
+
+                return 0;
+            }
+
+            public function commit(): bool
+            {
+                $this->active = false;
+                $this->committed = true;
+
+                return true;
+            }
+
+            public function rollBack(): bool
+            {
+                $this->active = false;
+                $this->rolledBack = true;
+
+                return true;
+            }
+        };
+        $originalReadPdo = new \stdClass;
+        $connection = new class($pdo, $originalReadPdo)
+        {
+            public function __construct(public object $pdo, public object $readPdo) {}
+
+            public function getDriverName(): string
+            {
+                return 'mysql';
+            }
+
+            public function getPdo(): object
+            {
+                return $this->pdo;
+            }
+
+            public function getRawReadPdo(): object
+            {
+                return $this->readPdo;
+            }
+
+            public function setReadPdo(object $pdo): void
+            {
+                $this->readPdo = $pdo;
+            }
+        };
+        $app = new class
+        {
+            public function environment(string $environment): bool
+            {
+                return false;
+            }
+        };
+
+        return [
+            new \ReflectionMethod(Career1046ImmutableCandidateArtifactProducer::class, 'runReadOnlyTransaction'),
+            $app,
+            $connection,
+            $pdo,
+            $originalReadPdo,
+        ];
     }
 
     /** @return array<string, mixed> */
