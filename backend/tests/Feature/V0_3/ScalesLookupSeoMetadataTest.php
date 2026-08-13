@@ -71,4 +71,57 @@ final class ScalesLookupSeoMetadataTest extends TestCase
         $this->assertStringNotContainsString('招聘筛选', $serializedFaq);
         $this->assertStringNotContainsString('职业保证', $serializedFaq);
     }
+
+    public function test_big_five_lookup_keeps_form_minutes_and_zh_content_in_sync(): void
+    {
+        $response = $this->getJson('/api/v0.3/scales/lookup?slug=big-five-personality-test-ocean-model&locale=zh')
+            ->assertOk()
+            ->assertJsonPath('forms.0.form_code', 'big5_120')
+            ->assertJsonPath('forms.0.question_count', 120)
+            ->assertJsonPath('forms.0.estimated_minutes', 15)
+            ->assertJsonPath('forms.1.form_code', 'big5_90')
+            ->assertJsonPath('forms.1.question_count', 90)
+            ->assertJsonPath('forms.1.estimated_minutes', 11)
+            ->assertJsonPath(
+                'content_i18n_json.zh.when_to_use',
+                '120题完整版约15分钟，90题标准版约11分钟；可根据希望的题量与细度选择版本。'
+            )
+            ->assertJsonPath(
+                'content_i18n_json.zh.how_it_works.0',
+                '选择120题完整版（约15分钟）或90题标准版（约11分钟），并在一次专注会话中完成。'
+            );
+
+        $faq = $response->json('content_i18n_json.zh.faq');
+        $duration = collect($faq)->firstWhere('q', '需要多久？');
+
+        $this->assertSame('120题完整版约15分钟，90题标准版约11分钟。', $duration['a'] ?? null);
+    }
+
+    public function test_big_five_lookup_keeps_form_minutes_and_en_content_in_sync(): void
+    {
+        $response = $this->getJson('/api/v0.3/scales/lookup?slug=big-five-personality-test-ocean-model&locale=en')
+            ->assertOk()
+            ->assertJsonPath('forms.0.form_code', 'big5_120')
+            ->assertJsonPath('forms.0.question_count', 120)
+            ->assertJsonPath('forms.0.estimated_minutes', 15)
+            ->assertJsonPath('forms.1.form_code', 'big5_90')
+            ->assertJsonPath('forms.1.question_count', 90)
+            ->assertJsonPath('forms.1.estimated_minutes', 11)
+            ->assertJsonPath(
+                'content_i18n_json.en.when_to_use',
+                'Choose the 120-question full version (about 15 minutes) or the 90-question standard version (about 11 minutes) based on the depth you want.'
+            )
+            ->assertJsonPath(
+                'content_i18n_json.en.how_it_works.0',
+                'Choose either the 120-question full version (about 15 minutes) or the 90-question standard version (about 11 minutes), then complete it in one focused session.'
+            );
+
+        $faq = $response->json('content_i18n_json.en.faq');
+        $duration = collect($faq)->firstWhere('q', 'How long does it take?');
+
+        $this->assertSame(
+            'The 120-question full version takes about 15 minutes; the 90-question standard version takes about 11 minutes.',
+            $duration['a'] ?? null
+        );
+    }
 }
