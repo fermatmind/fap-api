@@ -136,6 +136,7 @@ env_dir="$(dirname "$env_file")"
 env_candidate="$(mktemp "$env_dir/.content-promotion-env.XXXXXX")"
 cache_dir="$(dirname "$cache_file")"
 cache_candidate="$(mktemp "$cache_dir/.content-promotion-config.XXXXXX.php")"
+rm -f "$cache_candidate"
 cleanup() { rm -f "$env_candidate" "$cache_candidate"; }
 trap cleanup EXIT
 

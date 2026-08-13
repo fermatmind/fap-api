@@ -41,6 +41,9 @@ final class ContentPromotionKeyReconciliationTest extends TestCase
         File::put($release.'/backend/artisan', <<<'PHP'
 <?php
 $target = getenv('APP_CONFIG_CACHE') ?: __DIR__.'/bootstrap/cache/config.php';
+if (file_exists($target)) {
+    exit(5);
+}
 $key = getenv('CONTENT_PROMOTION_AUTOMATION_KEY') ?: '';
 file_put_contents($target, '<?php return '.var_export(['content_promotion' => ['workflow_identity_key' => $key]], true).';');
 PHP);
