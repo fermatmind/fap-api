@@ -285,7 +285,9 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
             'CANDIDATE_GENERATOR_STAGE_FAILURE',
             'CANDIDATE_SERIALIZATION_STAGE_FAILURE',
             'CANDIDATE_AUDIT_FINALIZATION_STAGE_FAILURE',
+            'APPLICATION_AUTOLOAD_INVALID',
             'START TRANSACTION READ ONLY',
+            'vendor/autoload.php',
             'CAREER_1046_APPLICATION_ROOT',
             'CAREER_1046_STREAMED_EXECUTION',
             '--emit-streamed-runner',
@@ -316,6 +318,20 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
         $lint = new Process([PHP_BINARY, '-l', '/dev/stdin']);
         $lint->setInput($bundle->getOutput());
         $lint->mustRun();
+    }
+
+    public function test_fresh_php_process_loads_release_autoloader_before_laravel_bootstrap(): void
+    {
+        $script = dirname(__DIR__, 2).'/scripts/operations/career_1046_immutable_candidate_artifact.php';
+        $applicationRoot = dirname(__DIR__, 2);
+        $probe = 'require $argv[1]; '
+            .'$method = new ReflectionMethod(FermatMind\\Operations\\Career1046ImmutableCandidateArtifactProducer::class, "bootstrapApplication"); '
+            .'$app = $method->invoke(null, $argv[2]); echo get_class($app);';
+        $process = new Process([PHP_BINARY, '-r', $probe, $script, $applicationRoot]);
+        $process->mustRun();
+
+        self::assertSame('Illuminate\\Foundation\\Application', $process->getOutput());
+        self::assertSame('', $process->getErrorOutput());
     }
 
     public function test_real_database_entry_records_observed_select_only_and_cache_zero_write(): void

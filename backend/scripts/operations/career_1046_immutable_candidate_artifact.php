@@ -162,8 +162,7 @@ final class Career1046ImmutableCandidateArtifactProducer
             'initialization',
             static function (): array {
                 $applicationRoot = self::applicationRoot();
-                $app = require $applicationRoot.'/bootstrap/app.php';
-                $app->make(Kernel::class)->bootstrap();
+                $app = self::bootstrapApplication($applicationRoot);
                 $task3b = self::task3bFromEnvironment();
                 $connection = DB::connection();
                 $cache = app('cache.store');
@@ -627,6 +626,25 @@ final class Career1046ImmutableCandidateArtifactProducer
         }
 
         return $real;
+    }
+
+    /**
+     * The streamed runner starts in a fresh PHP process, unlike artisan and
+     * PHPUnit. Load the active release's Composer autoloader before requiring
+     * Laravel's bootstrap file so Application and provider classes exist.
+     */
+    private static function bootstrapApplication(string $applicationRoot): mixed
+    {
+        $autoloadPath = $applicationRoot.'/vendor/autoload.php';
+        if (! is_file($autoloadPath) || is_link($autoloadPath)) {
+            throw new Career1046ImmutableCandidateArtifactFailure('APPLICATION_AUTOLOAD_INVALID');
+        }
+        require_once $autoloadPath;
+
+        $app = require $applicationRoot.'/bootstrap/app.php';
+        $app->make(Kernel::class)->bootstrap();
+
+        return $app;
     }
 
     /** @return array<string, mixed> */
