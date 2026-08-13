@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace FermatMind\Operations;
 
 use App\Domain\Career\Publish\Career1046ImmutableCandidateGenerator;
-use App\Domain\Career\Publish\CareerFullReleaseLedgerProjectionService;
+use App\Domain\Career\Publish\CareerFullReleaseLedgerService;
 use App\Domain\Career\Publish\CareerGenerationCanonicalJson;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use App\Http\Resources\Career\CareerJobDetailResource;
@@ -296,11 +296,11 @@ final class Career1046ImmutableCandidateArtifactProducer
         }
         $ledger = self::executeStage('ledger', static function () use ($applicationRoot, $manifest, $task3b): array {
             self::assertTask3bDatabaseState($applicationRoot, $manifest, $task3b);
-            $ledgerEnvelope = app(CareerFullReleaseLedgerProjectionService::class)->build(allowCacheWrites: false);
-            $fullLedger = $ledgerEnvelope[CareerFullReleaseLedgerProjectionService::LEDGER_FILENAME] ?? null;
-            if (! is_array($fullLedger)) {
-                throw new Career1046ImmutableCandidateArtifactFailure('LEDGER_UNAVAILABLE');
-            }
+            $fullLedger = app(CareerFullReleaseLedgerService::class)->build(
+                additionalSlugs: self::frozenTargetSlugs($manifest),
+                trustedRolloutAuthority: true,
+                allowCacheWrites: false,
+            )->toArray();
 
             return self::targetBoundedLedger($fullLedger, $manifest);
         });
@@ -367,29 +367,13 @@ final class Career1046ImmutableCandidateArtifactProducer
      */
     public static function targetBoundedLedger(array $fullLedger, array $manifest): array
     {
-        $baseline = self::frozenSlugSet($manifest['baseline_slugs'] ?? null, 'BASELINE');
-        $delta = self::frozenSlugSet($manifest['delta_slugs'] ?? null, 'DELTA');
-        $target = array_values(array_unique([...$baseline, ...$delta]));
-        sort($target, SORT_STRING);
+        $target = self::frozenTargetSlugs($manifest);
         $localeRows = [];
         foreach ($target as $slug) {
             $localeRows[] = $slug.'|en';
             $localeRows[] = $slug.'|zh';
         }
         sort($localeRows, SORT_STRING);
-        if (count($baseline) !== Career1046ImmutableCandidateGenerator::BASELINE_COUNT
-            || count($delta) !== Career1046ImmutableCandidateGenerator::RECEIPT_COUNT
-            || count($target) !== Career1046ImmutableCandidateGenerator::TARGET_COUNT
-            || count($localeRows) !== Career1046ImmutableCandidateGenerator::TARGET_LOCALE_ROW_COUNT
-            || ! hash_equals(Career1046ImmutableCandidateGenerator::BASELINE_SET_SHA256, CareerGenerationCanonicalJson::setSha256($baseline))
-            || ! hash_equals(Career1046ImmutableCandidateGenerator::RECEIPT_SET_SHA256, CareerGenerationCanonicalJson::setSha256($delta))
-            || ! hash_equals(Career1046ImmutableCandidateGenerator::TARGET_SET_SHA256, CareerGenerationCanonicalJson::setSha256($target))
-            || ! hash_equals(Career1046ImmutableCandidateGenerator::TARGET_LOCALE_ROW_SET_SHA256, CareerGenerationCanonicalJson::setSha256($localeRows))) {
-            throw new Career1046ImmutableCandidateArtifactFailure('FROZEN_TARGET_AUTHORITY_INVALID');
-        }
-        if (array_intersect(Career1046ImmutableCandidateGenerator::FORBIDDEN_SLUGS, $target) !== []) {
-            throw new Career1046ImmutableCandidateArtifactFailure('FROZEN_TARGET_CONTAINS_FORBIDDEN');
-        }
         if (($fullLedger['ledger_kind'] ?? null) !== \App\Domain\Career\Publish\CareerFullReleaseLedgerService::LEDGER_KIND
             || ($fullLedger['ledger_version'] ?? null) !== \App\Domain\Career\Publish\CareerFullReleaseLedgerService::LEDGER_VERSION
             || ($fullLedger['scope'] ?? null) !== \App\Domain\Career\Publish\CareerFullReleaseLedgerService::SCOPE) {
@@ -457,6 +441,45 @@ final class Career1046ImmutableCandidateArtifactProducer
         ];
 
         return $bounded;
+    }
+
+    /**
+     * Task 4B runs before product staging and root activation, so historical
+     * promotion execution files cannot be the authority for this candidate.
+     * The exact frozen target is already bound to the successful Task 3B DB
+     * receipt; pass that set into the existing ledger service as this one
+     * candidate's explicit trusted batch and still recompute every ledger gate.
+     *
+     * @param  array<string, mixed>  $manifest
+     * @return list<string>
+     */
+    public static function frozenTargetSlugs(array $manifest): array
+    {
+        $baseline = self::frozenSlugSet($manifest['baseline_slugs'] ?? null, 'BASELINE');
+        $delta = self::frozenSlugSet($manifest['delta_slugs'] ?? null, 'DELTA');
+        $target = array_values(array_unique([...$baseline, ...$delta]));
+        sort($target, SORT_STRING);
+        $localeRows = [];
+        foreach ($target as $slug) {
+            $localeRows[] = $slug.'|en';
+            $localeRows[] = $slug.'|zh';
+        }
+        sort($localeRows, SORT_STRING);
+        if (count($baseline) !== Career1046ImmutableCandidateGenerator::BASELINE_COUNT
+            || count($delta) !== Career1046ImmutableCandidateGenerator::RECEIPT_COUNT
+            || count($target) !== Career1046ImmutableCandidateGenerator::TARGET_COUNT
+            || count($localeRows) !== Career1046ImmutableCandidateGenerator::TARGET_LOCALE_ROW_COUNT
+            || ! hash_equals(Career1046ImmutableCandidateGenerator::BASELINE_SET_SHA256, CareerGenerationCanonicalJson::setSha256($baseline))
+            || ! hash_equals(Career1046ImmutableCandidateGenerator::RECEIPT_SET_SHA256, CareerGenerationCanonicalJson::setSha256($delta))
+            || ! hash_equals(Career1046ImmutableCandidateGenerator::TARGET_SET_SHA256, CareerGenerationCanonicalJson::setSha256($target))
+            || ! hash_equals(Career1046ImmutableCandidateGenerator::TARGET_LOCALE_ROW_SET_SHA256, CareerGenerationCanonicalJson::setSha256($localeRows))) {
+            throw new Career1046ImmutableCandidateArtifactFailure('FROZEN_TARGET_AUTHORITY_INVALID');
+        }
+        if (array_intersect(Career1046ImmutableCandidateGenerator::FORBIDDEN_SLUGS, $target) !== []) {
+            throw new Career1046ImmutableCandidateArtifactFailure('FROZEN_TARGET_CONTAINS_FORBIDDEN');
+        }
+
+        return $target;
     }
 
     /** @return list<string> */
