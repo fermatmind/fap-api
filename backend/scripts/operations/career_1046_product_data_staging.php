@@ -33,6 +33,25 @@ $writeState = [
 ];
 $mode = trim((string) ($argv[1] ?? ''));
 
+if ($mode === 'candidate-receipt-sha256') {
+    try {
+        $raw = file_get_contents('php://stdin');
+        if (! is_string($raw) || $raw === '' || strlen($raw) > CAREER_STAGING_MAX_BUNDLE_BYTES) {
+            throw new Career1046StagingFailure('CANDIDATE_BUNDLE_BYTES_INVALID');
+        }
+        $bundle = json_decode($raw, true, 512, JSON_THROW_ON_ERROR);
+        $receipt = is_array($bundle) ? ($bundle['candidate_receipt'] ?? null) : null;
+        if (! is_array($receipt)) {
+            throw new Career1046StagingFailure('CANDIDATE_RECEIPT_INVALID');
+        }
+        echo stagingCanonicalSha256($receipt).PHP_EOL;
+        exit(0);
+    } catch (Throwable) {
+        fwrite(STDERR, "CANDIDATE_RECEIPT_HASH_FAILURE\n");
+        exit(1);
+    }
+}
+
 try {
     if (! in_array($mode, ['preflight', 'apply'], true)) {
         throw new Career1046StagingFailure('MODE_INVALID');
