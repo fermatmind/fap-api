@@ -6,6 +6,7 @@ namespace FermatMind\Operations;
 
 use App\Domain\Career\Publish\Career1046ImmutableCandidateGenerator;
 use App\Domain\Career\Publish\CareerFullReleaseLedgerService;
+use App\Domain\Career\Publish\CareerGenerationAuthorityLoader;
 use App\Domain\Career\Publish\CareerGenerationCanonicalJson;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use App\Http\Resources\Career\CareerJobDetailResource;
@@ -297,10 +298,16 @@ final class Career1046ImmutableCandidateArtifactProducer
         $ledger = self::executeStage('ledger', static function () use ($applicationRoot, $manifest, $task3b): array {
             self::assertTask3bDatabaseState($applicationRoot, $manifest, $task3b);
             $fullLedger = app(CareerFullReleaseLedgerService::class)->build(
-                additionalSlugs: self::frozenTargetSlugs($manifest),
+                additionalSlugs: self::frozenDeltaSlugs($manifest),
                 trustedRolloutAuthority: true,
                 allowCacheWrites: false,
             )->toArray();
+            $activeAuthority = app(CareerGenerationAuthorityLoader::class)->loadStrict();
+            $fullLedger = self::mergeActiveBaselineLedger(
+                $fullLedger,
+                is_array($activeAuthority['ledger'] ?? null) ? $activeAuthority['ledger'] : [],
+                $manifest,
+            );
 
             return self::targetBoundedLedger($fullLedger, $manifest);
         });
@@ -308,6 +315,7 @@ final class Career1046ImmutableCandidateArtifactProducer
             'projection',
             static fn (): array => app(CareerRuntimePublishProjectionService::class)->buildFromLedgerArray($ledger),
         );
+        self::assertCompletePublishedProjection($projection, $manifest);
         $details = [];
         $items = is_array($projection['items'] ?? null) ? $projection['items'] : [];
         foreach ($items as $item) {
@@ -482,6 +490,128 @@ final class Career1046ImmutableCandidateArtifactProducer
         return $target;
     }
 
+    /** @param array<string, mixed> $manifest @return list<string> */
+    public static function frozenDeltaSlugs(array $manifest): array
+    {
+        self::frozenTargetSlugs($manifest);
+
+        return self::frozenSlugSet($manifest['delta_slugs'] ?? null, 'DELTA');
+    }
+
+    /**
+     * Task 3B is the exact DB authority for the 1016 delta rows. The existing
+     * active generation remains the immutable authority for the preserved 30
+     * baseline rows until Task 6 atomically changes the root. Reuse only those
+     * exact baseline ledger rows; all other candidate rows still come from the
+     * freshly recomputed DB-backed ledger.
+     *
+     * @param  array<string, mixed>  $fullLedger
+     * @param  array<string, mixed>  $activeLedger
+     * @param  array<string, mixed>  $manifest
+     * @return array<string, mixed>
+     */
+    public static function mergeActiveBaselineLedger(array $fullLedger, array $activeLedger, array $manifest): array
+    {
+        $baseline = self::frozenSlugSet($manifest['baseline_slugs'] ?? null, 'BASELINE');
+        self::frozenTargetSlugs($manifest);
+        if (($activeLedger['ledger_kind'] ?? null) !== CareerFullReleaseLedgerService::LEDGER_KIND) {
+            throw new Career1046ImmutableCandidateArtifactFailure('ACTIVE_BASELINE_LEDGER_IDENTITY_INVALID');
+        }
+
+        $activeRows = data_get($activeLedger, 'public_resolution.rows');
+        if (! is_array($activeRows) || $activeRows === []) {
+            $activeRows = $activeLedger['members'] ?? null;
+        }
+        $fullRows = data_get($fullLedger, 'public_resolution.rows');
+        $fullRowsPath = is_array($fullRows) && $fullRows !== [];
+        if (! $fullRowsPath) {
+            $fullRows = $fullLedger['members'] ?? null;
+        }
+        if (! is_array($activeRows) || ! array_is_list($activeRows) || ! is_array($fullRows) || ! array_is_list($fullRows)) {
+            throw new Career1046ImmutableCandidateArtifactFailure('ACTIVE_BASELINE_LEDGER_ROWS_INVALID');
+        }
+
+        $baselineLookup = array_fill_keys($baseline, true);
+        $activeBySlug = [];
+        foreach ($activeRows as $row) {
+            if (! is_array($row)) {
+                throw new Career1046ImmutableCandidateArtifactFailure('ACTIVE_BASELINE_LEDGER_ROWS_INVALID');
+            }
+            $slug = strtolower(trim((string) ($row['source_slug'] ?? $row['canonical_slug'] ?? $row['slug'] ?? '')));
+            if (! isset($baselineLookup[$slug])) {
+                continue;
+            }
+            if (isset($activeBySlug[$slug])) {
+                throw new Career1046ImmutableCandidateArtifactFailure('ACTIVE_BASELINE_LEDGER_DUPLICATE');
+            }
+            $activeBySlug[$slug] = $row;
+        }
+        $activeSlugs = array_keys($activeBySlug);
+        sort($activeSlugs, SORT_STRING);
+        if ($activeSlugs !== $baseline) {
+            throw new Career1046ImmutableCandidateArtifactFailure('ACTIVE_BASELINE_LEDGER_SET_MISMATCH');
+        }
+
+        $merged = [];
+        $replaced = [];
+        foreach ($fullRows as $row) {
+            if (! is_array($row)) {
+                throw new Career1046ImmutableCandidateArtifactFailure('FULL_LEDGER_ROW_INVALID');
+            }
+            $slug = strtolower(trim((string) ($row['source_slug'] ?? $row['canonical_slug'] ?? $row['slug'] ?? '')));
+            if (isset($activeBySlug[$slug])) {
+                if (isset($replaced[$slug])) {
+                    throw new Career1046ImmutableCandidateArtifactFailure('TARGET_BOUNDED_LEDGER_DUPLICATE');
+                }
+                $merged[] = $activeBySlug[$slug];
+                $replaced[$slug] = true;
+            } else {
+                $merged[] = $row;
+            }
+        }
+        $replacedSlugs = array_keys($replaced);
+        sort($replacedSlugs, SORT_STRING);
+        if ($replacedSlugs !== $baseline) {
+            throw new Career1046ImmutableCandidateArtifactFailure('ACTIVE_BASELINE_LEDGER_REPLACEMENT_INCOMPLETE');
+        }
+
+        if ($fullRowsPath) {
+            $fullLedger['public_resolution']['rows'] = $merged;
+        } else {
+            $fullLedger['members'] = $merged;
+        }
+
+        return $fullLedger;
+    }
+
+    /** @param array<string, mixed> $projection @param array<string, mixed> $manifest */
+    public static function assertCompletePublishedProjection(array $projection, array $manifest): void
+    {
+        $target = self::frozenTargetSlugs($manifest);
+        $expected = [];
+        foreach ($target as $slug) {
+            foreach (CareerRuntimePublishProjectionService::LOCALES as $locale) {
+                $expected[] = $slug.'|'.$locale;
+            }
+        }
+        sort($expected, SORT_STRING);
+        $actual = [];
+        foreach (($projection['items'] ?? []) as $item) {
+            if (! is_array($item)
+                || ($item['runtime_publish_state'] ?? null) !== CareerRuntimePublishProjectionService::STATE_PUBLISHED
+                || ($item['detail_route_enabled'] ?? null) !== true
+                || ($item['robots_indexable'] ?? null) !== true
+                || ($item['release_gate_pass'] ?? null) !== true) {
+                throw new Career1046ImmutableCandidateArtifactFailure('CANDIDATE_PROJECTION_AUTHORITY_INCOMPLETE');
+            }
+            $actual[] = (string) ($item['slug'] ?? '').'|'.(string) ($item['locale'] ?? '');
+        }
+        sort($actual, SORT_STRING);
+        if ($actual !== $expected) {
+            throw new Career1046ImmutableCandidateArtifactFailure('CANDIDATE_PROJECTION_AUTHORITY_INCOMPLETE');
+        }
+    }
+
     /** @return list<string> */
     private static function frozenSlugSet(mixed $values, string $field): array
     {
@@ -517,6 +647,13 @@ final class Career1046ImmutableCandidateArtifactProducer
             : [];
         foreach ($rows as $row) {
             $cohort = $row['release_cohort'] ?? null;
+            if ((! is_string($cohort) || $cohort === '')
+                && ($row['public_resolution_type'] ?? null) === \App\Console\Commands\CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB
+                && ($row['public_eligible'] ?? false) === true) {
+                $cohort = in_array($row['indexability'] ?? null, ['indexable', 'index'], true)
+                    ? 'public_detail_indexable'
+                    : 'public_detail_conservative';
+            }
             if (is_string($cohort) && $cohort !== '') {
                 $releaseCounts[$cohort] = (int) ($releaseCounts[$cohort] ?? 0) + 1;
             }
