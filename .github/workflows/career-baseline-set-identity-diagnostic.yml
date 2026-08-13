@@ -1,0 +1,233 @@
+name: Career Baseline Set Identity Diagnostic
+run-name: Career Baseline Set Identity Diagnostic [op:${{ inputs.operation_key }}]
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_control_plane_sha:
+        description: Exact latest main control-plane SHA
+        required: true
+        type: string
+      expected_active_revision:
+        description: Exact active production application SHA
+        required: true
+        type: string
+      expected_active_release_name:
+        description: Exact active production release name
+        required: true
+        type: string
+      authorization_phrase:
+        description: Exact workflow-defined zero-write diagnostic phrase
+        required: true
+        type: string
+      operation_key:
+        description: Deterministic controlled-operation key
+        required: true
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.repository }}-production
+  cancel-in-progress: false
+
+jobs:
+  operation_gate:
+    name: Elect diagnostic owner before Environment access
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      decision: ${{ steps.gate.outputs.decision }}
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - id: identity
+        shell: bash
+        env:
+          IDENTITY: control=${{ inputs.expected_control_plane_sha }}|active=${{ inputs.expected_active_revision }}|release=${{ inputs.expected_active_release_name }}|pointer_apply=31593321673:1|failed_preflight=31658052357:1
+        run: |
+          set -euo pipefail
+          key="$(node .github/scripts/controlled-operation-gate.cjs key --repository "$GITHUB_REPOSITORY" --workflow .github/workflows/career-baseline-set-identity-diagnostic.yml --scope career-baseline-set-identity-diagnostic --identity "$IDENTITY")"
+          echo "operation_key=$key" >> "$GITHUB_OUTPUT"
+      - id: gate
+        uses: ./.github/actions/controlled-operation-gate
+        with:
+          claimed-key: ${{ inputs.operation_key }}
+          expected-key: ${{ steps.identity.outputs.operation_key }}
+          workflow-file: career-baseline-set-identity-diagnostic.yml
+          receipt-template: career-baseline-set-identity-diagnostic-{run_id}-{run_attempt}
+
+  diagnostic:
+    name: Diagnose exact pointer-bound set identities
+    needs: operation_gate
+    if: needs.operation_gate.outputs.decision == 'execute'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: production
+    env:
+      CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+      ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+      ACTIVE_RELEASE_NAME: ${{ inputs.expected_active_release_name }}
+      AUTHORIZATION_PHRASE: ${{ inputs.authorization_phrase }}
+      GH_TOKEN: ${{ github.token }}
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+      SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+
+    steps:
+      - name: Initialize sanitized zero-write receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          jq -n '{
+            contract_version: "career.baseline_set_identity_diagnostic.v1",
+            status: "HOLD_POINTER_BOUND_SET_IDENTITY_DIAGNOSTIC",
+            safe_code: "CONTROL_INITIALIZATION",
+            database_insert_count: 0, database_update_count: 0, database_delete_count: 0,
+            database_transaction_committed: false, cms_write_count: 0, cache_write_count: 0,
+            pointer_write_count: 0, artifact_write_count: 0, publication_write_count: 0,
+            discoverability_write_count: 0, migration_count: 0, deployment_count: 0,
+            restart_count: 0, sitemap_write_count: 0, llms_write_count: 0,
+            search_submission_count: 0, writes_committed: false,
+            automatic_retry_allowed: false, automatic_rollback_allowed: false
+          }' > "$RUNNER_TEMP/career-baseline-set-identity-diagnostic.json"
+
+      - name: Checkout exact control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Validate latest main and immutable lineage
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$ACTIVE_RELEASE_NAME" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]
+          test "$GITHUB_REF" = refs/heads/main
+          test "$GITHUB_SHA" = "$CONTROL_PLANE_SHA"
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$CONTROL_PLANE_SHA"
+          git cat-file -e "${ACTIVE_REVISION}^{commit}"
+          git merge-base --is-ancestor "$ACTIVE_REVISION" "$CONTROL_PLANE_SHA"
+          test "$(git diff --name-only "$ACTIVE_REVISION..$CONTROL_PLANE_SHA" -- backend/database/migrations | wc -l | tr -d ' ')" = 0
+          test "$(sha256sum backend/docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json | awk '{print $1}')" = b570ec0cdda65278aa543431886b3529d072de8d67a8e79f1cafbb1c4c8dfc0e
+          php -l backend/scripts/operations/career_baseline_set_identity_diagnostic.php >/dev/null
+
+          verify_artifact() {
+            local run_id="$1" path="$2" conclusion="$3" head="$4" name="$5" digest="$6" receipt_sha="$7" file="$8" destination="$9"
+            run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}")"
+            jq -e --arg path "$path" --arg conclusion "$conclusion" --arg head "$head" '
+              .path == $path and .event == "workflow_dispatch" and .head_branch == "main"
+              and .head_sha == $head and .run_attempt == 1 and .status == "completed" and .conclusion == $conclusion
+            ' <<<"$run" >/dev/null
+            mkdir -p "$destination"
+            artifacts="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}/artifacts?per_page=100")"
+            id="$(jq -er --arg name "$name" --arg digest "$digest" '[.artifacts[] | select(.name == $name and .expired == false and .digest == $digest)] | if length == 1 then .[0].id else error("artifact lineage") end' <<<"$artifacts")"
+            gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${id}/zip" > "$destination/evidence.zip"
+            unzip -q "$destination/evidence.zip" -d "$destination/unpacked"
+            test "$(sha256sum "$destination/unpacked/$file" | awk '{print $1}')" = "$receipt_sha"
+          }
+          verify_artifact 31593321673 .github/workflows/career-current-generation-pointer-bootstrap-production-ops.yml success a2e8ac02d1de5893ba890b76323478321d78a23b career-current-generation-pointer-bootstrap-apply-31593321673-1 sha256:101508066a741afd44d29b4c28bd866b1fa3d4772dfda14c71da71c320c545c7 e0898f6fbb438495319cf0acc8bd6f808eba18c3f3beeb4a4e7d690312c27bc4 career-current-generation-pointer-bootstrap.json "$RUNNER_TEMP/task2"
+          jq -e '.status == "PASS_APPLY_POINTER_BOOTSTRAPPED" and .generation_id == "career-current-342-30-bootstrap-v1" and .pointer_document_sha256 == "1ebfd2826be9d3b63d810d33050034e3d424c95b3db81fa49b0822c5e6b2ec08" and .authority.projection_sha256 == "397f2a4ec284e9c0a6cd610447541ad4773fa7a7f3045008fab5efb334ec85c6" and .authority.ledger_sha256 == "975b311bb346a090f1add678d5a6d9f1be230f87b223e2c3c829f4c7fd7aac6e" and .authority.slug_count == 342 and .authority.locale_row_count == 684 and .authority.published_slug_count == 30 and .authority.published_locale_row_count == 60' "$RUNNER_TEMP/task2/unpacked/career-current-generation-pointer-bootstrap.json" >/dev/null
+          verify_artifact 31658052357 .github/workflows/career-baseline-index-state-authority-repair.yml failure 2477fca59c46787f30538139e0061b4f862ae8cc career-baseline-index-state-authority-repair-31658052357-1 sha256:8f21e85da865c7ad2f755b0c8a1d9bc4ff6d070c90b51f20a36e57cf0bceeca8 3ade81e20267e5d4b1c089a4caeedfe6319876f13b61b5c6959c1291e07f760e career-baseline-index-state-authority-repair.json "$RUNNER_TEMP/failed"
+          jq -e '.status == "HOLD_BASELINE_AUTHORITY_REPAIR" and .safe_code == "POINTER_BOUND_PUBLIC_AUTHORITY_INVALID" and .writes_committed == false and .database_transaction_committed == false and .automatic_retry_allowed == false' "$RUNNER_TEMP/failed/unpacked/career-baseline-index-state-authority-repair.json" >/dev/null
+
+          expected="I authorize one zero-write production Career pointer-bound baseline set identity diagnostic for control plane ${CONTROL_PLANE_SHA}, active revision ${ACTIVE_REVISION}, release ${ACTIVE_RELEASE_NAME}; read exact active and immutable pointer-bound projection and ledger, signed receipt authority, and latest index states; output only sanitized counts, SHA-256 identities, booleans, and classifications; no DB/CMS/cache/pointer/artifact/publication/discoverability/migration/deploy/restart/sitemap/llms/Search write."
+          test "$AUTHORIZATION_PHRASE" = "$expected"
+
+      - name: Validate protected production topology
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST RETIRED_DEPLOY_HOST DEPLOY_PATH SSH_KNOWN_HOSTS; do test -n "${!name:-}"; done
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]; test "$DEPLOY_PORT" -ge 1; test "$DEPLOY_PORT" -le 65535
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ && "$RETIRED_DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ && "$DEPLOY_PATH" != *".."* ]]
+
+      - name: Start pinned SSH agent
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        run: |
+          set -euo pipefail
+          install -d -m 0700 ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 0600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Execute exact production zero-write diagnostic
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/career-baseline-set-identity-diagnostic.json"
+          remote="$RUNNER_TEMP/career-baseline-set-identity-diagnostic.remote.json"
+          printf -v q_path '%q' "$DEPLOY_PATH"; printf -v q_release '%q' "$ACTIVE_RELEASE_NAME"
+          printf -v q_active '%q' "$ACTIVE_REVISION"; printf -v q_control '%q' "$CONTROL_PLANE_SHA"
+          printf -v q_run '%q' "$GITHUB_RUN_ID"; printf -v q_attempt '%q' "$GITHUB_RUN_ATTEMPT"
+          set +e
+          timeout --signal=TERM --kill-after=10s 300s ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -o ServerAliveInterval=20 -o ServerAliveCountMax=12 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "set -euo pipefail; current=\$(readlink -f $q_path/current); release=\$(readlink -f $q_path/releases/$q_release); test -n \"\$current\"; test \"\$current\" = \"\$release\"; test \"\$(tr -d '\r\n' < \"\$current/REVISION\")\" = $q_active; test ! -e $q_path/.dep/deploy.lock; test \"\$(ps -eo comm=,args= | awk '\$1 == \"php\" && (\$0 ~ /dep(\\.phar)? .* production/ || \$0 ~ /artisan migrate/ || \$0 ~ /queue:reload-workers/ || \$0 ~ /career_(baseline|publication|1046|generation|discoverability)/) {n++} \$1 == \"composer\" && \$0 ~ /install/ {n++} END {print n+0}')\" = 0; CAREER_SET_DIAGNOSTIC_BACKEND_ROOT=\"\$current/backend\" CAREER_SET_DIAGNOSTIC_CONTROL_PLANE_SHA=$q_control CAREER_SET_DIAGNOSTIC_ACTIVE_REVISION=$q_active CAREER_SET_DIAGNOSTIC_RELEASE_NAME=$q_release CAREER_SET_DIAGNOSTIC_RUN_ID=$q_run CAREER_SET_DIAGNOSTIC_RUN_ATTEMPT=$q_attempt php /dev/stdin inspect" \
+            < backend/scripts/operations/career_baseline_set_identity_diagnostic.php > "$remote" 2>/dev/null
+          status=$?
+          set -e
+          if jq -e '.contract_version == "career.baseline_set_identity_diagnostic.v1" and (.status | type == "string")' "$remote" >/dev/null 2>&1; then
+            mv "$remote" "$receipt"
+          else
+            jq '.status = "HOLD_POINTER_BOUND_SET_IDENTITY_DIAGNOSTIC" | .safe_code = "REMOTE_OUTCOME_AMBIGUOUS"' "$receipt" > "$receipt.next"
+            mv "$receipt.next" "$receipt"
+          fi
+          if [ "$status" -ne 0 ]; then exit "$status"; fi
+
+      - name: Validate sanitized diagnostic receipt
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/career-baseline-set-identity-diagnostic.json"
+          jq -e --arg control "$CONTROL_PLANE_SHA" --arg active "$ACTIVE_REVISION" '
+            .contract_version == "career.baseline_set_identity_diagnostic.v1"
+            and .status == "PASS_POINTER_BOUND_SET_IDENTITY_DIAGNOSTIC"
+            and .control_plane_sha == $control and .active_revision == $active
+            and .authority.generation_id == "career-current-342-30-bootstrap-v1"
+            and .authority.pointer_document_sha256 == "1ebfd2826be9d3b63d810d33050034e3d424c95b3db81fa49b0822c5e6b2ec08"
+            and .authority.projection_sha256 == "397f2a4ec284e9c0a6cd610447541ad4773fa7a7f3045008fab5efb334ec85c6"
+            and .authority.ledger_sha256 == "975b311bb346a090f1add678d5a6d9f1be230f87b223e2c3c829f4c7fd7aac6e"
+            and .raw_projection.slug.count == 342 and .raw_projection.locale_row.count == 684
+            and .actual_published.count == 30 and .actual_published_locale_rows.count == 60
+            and .target.count == 1046 and .target.set_sha256 == "3b101fb76b5666200c73519c650beb1a5b0b35f47f7592453bf5671920571a18"
+            and .target_locale_rows.count == 2092 and .target_locale_rows.set_sha256 == "c9878e76c817cc09448c32b1dcba3152b22821af34a31204840eb77a2d65857e"
+            and .actual_to_target.contained == true and .actual_to_target.outside.count == 0 and .actual_to_target.forbidden.count == 0
+            and (.primary_classification | IN("CONTROL_CALCULATION_ERROR", "PROJECTION_PUBLISHED_SET_INVALID", "MANIFEST_BASELINE_PARTITION_STALE", "RECEIPT_DELTA_PARTITION_MISMATCH", "IDENTITIES_EXACT"))
+            and .database_select_only == true and .database_insert_count == 0 and .database_update_count == 0 and .database_delete_count == 0
+            and .database_transaction_committed == false and .cms_write_count == 0 and .cache_write_count == 0
+            and .pointer_write_count == 0 and .artifact_write_count == 0 and .publication_write_count == 0
+            and .discoverability_write_count == 0 and .migration_count == 0 and .deployment_count == 0
+            and .restart_count == 0 and .sitemap_write_count == 0 and .llms_write_count == 0
+            and .search_submission_count == 0 and .writes_committed == false
+            and .automatic_retry_allowed == false and .automatic_rollback_allowed == false
+          ' "$receipt" >/dev/null
+          if jq -e '.findings.raw_loader_set_mismatch == true or .findings.projection_published_set_invalid == true' "$receipt" >/dev/null; then
+            exit 1
+          fi
+
+      - name: Upload immutable sanitized receipt
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: career-baseline-set-identity-diagnostic-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/career-baseline-set-identity-diagnostic.json
+          if-no-files-found: error
+          retention-days: 90
