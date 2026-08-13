@@ -117,6 +117,9 @@ final class ExactPackagePromotionService
             if (preg_match('/\Atop100_frozen_[a-z0-9_]{1,58}\z/', $message) === 1) {
                 return $message.'_rollback_succeeded';
             }
+            if (preg_match('/\Apersonality_promotion_[a-z0-9_]{1,44}\z/', $message) === 1) {
+                return 'top100_'.$message.'_rollback_succeeded';
+            }
         }
 
         return 'top100_publish_failed_rollback_succeeded';
