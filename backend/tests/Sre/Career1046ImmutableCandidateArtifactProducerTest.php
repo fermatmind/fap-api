@@ -113,6 +113,62 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
         }
     }
 
+    public function test_each_unexpected_producer_stage_failure_maps_to_one_sanitized_allowlisted_code(): void
+    {
+        $stages = [
+            'ledger' => 'CANDIDATE_LEDGER_STAGE_FAILURE',
+            'projection' => 'CANDIDATE_PROJECTION_STAGE_FAILURE',
+            'detail_bundle' => 'CANDIDATE_DETAIL_BUNDLE_STAGE_FAILURE',
+            'resource_transform' => 'CANDIDATE_RESOURCE_TRANSFORM_STAGE_FAILURE',
+            'generator' => 'CANDIDATE_GENERATOR_STAGE_FAILURE',
+            'serialization' => 'CANDIDATE_SERIALIZATION_STAGE_FAILURE',
+        ];
+
+        foreach ($stages as $stage => $expected) {
+            try {
+                Career1046ImmutableCandidateArtifactProducer::executeStage(
+                    $stage,
+                    static fn (): never => throw new \Error('sensitive exception detail'),
+                );
+                self::fail($stage.' did not fail closed');
+            } catch (Career1046ImmutableCandidateArtifactFailure $failure) {
+                self::assertSame($expected, $failure->safeCode);
+                self::assertSame($expected, $failure->getMessage());
+                self::assertStringNotContainsString('sensitive', $failure->getMessage());
+            }
+        }
+    }
+
+    public function test_stage_classification_preserves_existing_fixed_failure_codes_and_rejects_unknown_stages(): void
+    {
+        try {
+            Career1046ImmutableCandidateArtifactProducer::executeStage(
+                'ledger',
+                static fn (): never => throw new Career1046ImmutableCandidateArtifactFailure('TARGET_BOUNDED_LEDGER_MISSING'),
+            );
+            self::fail('existing fixed failure was not preserved');
+        } catch (Career1046ImmutableCandidateArtifactFailure $failure) {
+            self::assertSame('TARGET_BOUNDED_LEDGER_MISSING', $failure->safeCode);
+        }
+
+        try {
+            Career1046ImmutableCandidateArtifactProducer::executeStage('unknown', static fn (): bool => true);
+            self::fail('unknown stage did not fail closed');
+        } catch (Career1046ImmutableCandidateArtifactFailure $failure) {
+            self::assertSame('CANDIDATE_STAGE_INVALID', $failure->safeCode);
+        }
+    }
+
+    public function test_ledger_stage_contains_the_production_database_state_reconciliation_read(): void
+    {
+        $runner = file_get_contents(dirname(__DIR__, 2).'/scripts/operations/career_1046_immutable_candidate_artifact.php');
+        self::assertIsString($runner);
+        self::assertMatchesRegularExpression(
+            "/executeStage\\('ledger'.*assertTask3bDatabaseState.*CareerFullReleaseLedgerProjectionService::class/s",
+            $runner,
+        );
+    }
+
     public function test_task5_real_consumer_accepts_the_producer_output_without_manual_assembly(): void
     {
         $candidate = Career1046ImmutableCandidateArtifactProducer::produceFromSource($this->source(), $this->task3b());
@@ -179,6 +235,12 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
             'TARGET_BOUNDED_LEDGER_DUPLICATE',
             'TARGET_BOUNDED_LEDGER_COUNTS_INVALID',
             'CANDIDATE_AUTHORITY_CONTRACT_FAILURE',
+            'CANDIDATE_LEDGER_STAGE_FAILURE',
+            'CANDIDATE_PROJECTION_STAGE_FAILURE',
+            'CANDIDATE_DETAIL_BUNDLE_STAGE_FAILURE',
+            'CANDIDATE_RESOURCE_TRANSFORM_STAGE_FAILURE',
+            'CANDIDATE_GENERATOR_STAGE_FAILURE',
+            'CANDIDATE_SERIALIZATION_STAGE_FAILURE',
             'CANDIDATE_CONTROL_FAILURE',
             'CAREER_1046_APPLICATION_ROOT',
             'CAREER_1046_STREAMED_EXECUTION',

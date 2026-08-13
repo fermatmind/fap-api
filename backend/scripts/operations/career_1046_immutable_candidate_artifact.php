@@ -40,6 +40,16 @@ final class Career1046ImmutableCandidateArtifactProducer
 {
     public const CONTRACT_VERSION = 'career.1046.immutable_candidate_artifact_producer.v2';
 
+    /** @var array<string, string> */
+    private const STAGE_FAILURE_CODES = [
+        'ledger' => 'CANDIDATE_LEDGER_STAGE_FAILURE',
+        'projection' => 'CANDIDATE_PROJECTION_STAGE_FAILURE',
+        'detail_bundle' => 'CANDIDATE_DETAIL_BUNDLE_STAGE_FAILURE',
+        'resource_transform' => 'CANDIDATE_RESOURCE_TRANSFORM_STAGE_FAILURE',
+        'generator' => 'CANDIDATE_GENERATOR_STAGE_FAILURE',
+        'serialization' => 'CANDIDATE_SERIALIZATION_STAGE_FAILURE',
+    ];
+
     public static function emitStreamedRunner(): void
     {
         $root = dirname(__DIR__, 2);
@@ -85,18 +95,20 @@ final class Career1046ImmutableCandidateArtifactProducer
             }
         }
 
-        try {
-            $candidate = (new Career1046ImmutableCandidateGenerator)->generate(
-                (string) $source['manifest_path'],
-                is_array($source['baseline_authority_slugs']) ? $source['baseline_authority_slugs'] : [],
-                is_array($source['database_matching_receipt_slugs']) ? $source['database_matching_receipt_slugs'] : [],
-                is_array($source['ledger']) ? $source['ledger'] : [],
-                is_array($source['projection']) ? $source['projection'] : [],
-                is_array($source['detail_rows']) ? $source['detail_rows'] : [],
-            );
-        } catch (RuntimeException) {
-            throw new Career1046ImmutableCandidateArtifactFailure('CANDIDATE_AUTHORITY_CONTRACT_FAILURE');
-        }
+        $candidate = self::executeStage('generator', static function () use ($source): array {
+            try {
+                return (new Career1046ImmutableCandidateGenerator)->generate(
+                    (string) $source['manifest_path'],
+                    is_array($source['baseline_authority_slugs']) ? $source['baseline_authority_slugs'] : [],
+                    is_array($source['database_matching_receipt_slugs']) ? $source['database_matching_receipt_slugs'] : [],
+                    is_array($source['ledger']) ? $source['ledger'] : [],
+                    is_array($source['projection']) ? $source['projection'] : [],
+                    is_array($source['detail_rows']) ? $source['detail_rows'] : [],
+                );
+            } catch (RuntimeException) {
+                throw new Career1046ImmutableCandidateArtifactFailure('CANDIDATE_AUTHORITY_CONTRACT_FAILURE');
+            }
+        });
 
         $binding = [
             'contract_version' => self::CONTRACT_VERSION,
@@ -224,14 +236,20 @@ final class Career1046ImmutableCandidateArtifactProducer
         if (! is_array($manifest) || ! is_array($manifest['baseline_slugs'] ?? null) || ! is_array($manifest['delta_slugs'] ?? null)) {
             throw new Career1046ImmutableCandidateArtifactFailure('FROZEN_MANIFEST_INVALID');
         }
-        self::assertTask3bDatabaseState($applicationRoot, $manifest, $task3b);
-        $ledgerEnvelope = app(CareerFullReleaseLedgerProjectionService::class)->build(allowCacheWrites: false);
-        $fullLedger = $ledgerEnvelope[CareerFullReleaseLedgerProjectionService::LEDGER_FILENAME] ?? null;
-        if (! is_array($fullLedger)) {
-            throw new Career1046ImmutableCandidateArtifactFailure('LEDGER_UNAVAILABLE');
-        }
-        $ledger = self::targetBoundedLedger($fullLedger, $manifest);
-        $projection = app(CareerRuntimePublishProjectionService::class)->buildFromLedgerArray($ledger);
+        $ledger = self::executeStage('ledger', static function () use ($applicationRoot, $manifest, $task3b): array {
+            self::assertTask3bDatabaseState($applicationRoot, $manifest, $task3b);
+            $ledgerEnvelope = app(CareerFullReleaseLedgerProjectionService::class)->build(allowCacheWrites: false);
+            $fullLedger = $ledgerEnvelope[CareerFullReleaseLedgerProjectionService::LEDGER_FILENAME] ?? null;
+            if (! is_array($fullLedger)) {
+                throw new Career1046ImmutableCandidateArtifactFailure('LEDGER_UNAVAILABLE');
+            }
+
+            return self::targetBoundedLedger($fullLedger, $manifest);
+        });
+        $projection = self::executeStage(
+            'projection',
+            static fn (): array => app(CareerRuntimePublishProjectionService::class)->buildFromLedgerArray($ledger),
+        );
         $details = [];
         $items = is_array($projection['items'] ?? null) ? $projection['items'] : [];
         foreach ($items as $item) {
@@ -239,14 +257,22 @@ final class Career1046ImmutableCandidateArtifactProducer
                 continue;
             }
             $locale = $item['locale'] === 'zh' ? 'zh-CN' : 'en';
-            $bundle = app(CareerJobDetailBundleBuilder::class)->buildBySlug($item['slug'], $locale, $item);
+            $bundle = self::executeStage(
+                'detail_bundle',
+                static fn () => app(CareerJobDetailBundleBuilder::class)->buildBySlug($item['slug'], $locale, $item),
+            );
             if ($bundle === null) {
                 throw new Career1046ImmutableCandidateArtifactFailure('DETAIL_SOURCE_UNAVAILABLE');
             }
             $details[] = [
                 'slug' => $item['slug'],
                 'locale' => $item['locale'],
-                'payload' => (new CareerJobDetailResource($bundle))->toArray(Request::create('/api/v0.5/career/jobs/'.$item['slug'], 'GET', ['locale' => $locale])),
+                'payload' => self::executeStage(
+                    'resource_transform',
+                    static fn (): array => (new CareerJobDetailResource($bundle))->toArray(
+                        Request::create('/api/v0.5/career/jobs/'.$item['slug'], 'GET', ['locale' => $locale]),
+                    ),
+                ),
             ];
         }
         $rows = data_get($ledger, 'public_resolution.rows');
@@ -561,10 +587,35 @@ final class Career1046ImmutableCandidateArtifactProducer
         ];
     }
 
+    /**
+     * Collapse an unexpected throwable at a known producer boundary to one
+     * allowlisted code. Existing fixed producer failures remain intact.
+     */
+    public static function executeStage(string $stage, callable $operation): mixed
+    {
+        $safeCode = self::STAGE_FAILURE_CODES[$stage] ?? null;
+        if (! is_string($safeCode)) {
+            throw new Career1046ImmutableCandidateArtifactFailure('CANDIDATE_STAGE_INVALID');
+        }
+
+        try {
+            return $operation();
+        } catch (Career1046ImmutableCandidateArtifactFailure $failure) {
+            throw $failure;
+        } catch (Throwable) {
+            throw new Career1046ImmutableCandidateArtifactFailure($safeCode);
+        }
+    }
+
     public static function main(): int
     {
         try {
-            echo CareerGenerationCanonicalJson::encode(self::produceFromDatabase())."\n";
+            $candidate = self::produceFromDatabase();
+            $encoded = self::executeStage(
+                'serialization',
+                static fn (): string => CareerGenerationCanonicalJson::encode($candidate),
+            );
+            echo $encoded."\n";
 
             return 0;
         } catch (Career1046ImmutableCandidateArtifactFailure $failure) {
