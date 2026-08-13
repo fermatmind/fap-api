@@ -1241,8 +1241,8 @@ final class Top100FrozenCmsBatchAuthority
         }
         $deleted = LandingSurface::query()->withoutGlobalScopes()
             ->where('org_id', 0)->where('surface_key', $surfaceKey)->where('locale', $locale)->delete();
-        if ($deleted !== 1) {
-            throw new DomainException('top100_frozen_created_landing_rollback_missing');
+        if ($deleted > 1) {
+            throw new DomainException('top100_frozen_created_landing_rollback_ambiguous');
         }
     }
 
