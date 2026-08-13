@@ -12,6 +12,7 @@ use App\Services\Mbti\Adapters\MbtiReportAuthoritySourceAdapter;
 use App\Support\CanonicalFrontendUrl;
 use App\Support\Mbti\MbtiAxisStrengthBand;
 use App\Support\Mbti\MbtiPublicTypeIdentity;
+use App\Support\Mbti\MbtiZhResultContentPolicy;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 final class MbtiPublicProjectionService
@@ -69,7 +70,12 @@ final class MbtiPublicProjectionService
                 ]
             );
 
-        return $this->personalizationService->applyToProjection($projection, is_array($personalization) ? $personalization : []);
+        $projection = $this->personalizationService->applyToProjection(
+            $projection,
+            is_array($personalization) ? $personalization : [],
+        );
+
+        return MbtiZhResultContentPolicy::normalizeProjection($projection, $locale);
     }
 
     /**
@@ -219,6 +225,7 @@ final class MbtiPublicProjectionService
         $canonicalTypeCode = strtoupper(trim((string) ($summary['canonical_type_16'] ?? '')));
 
         return [
+            'locale' => $this->normalizeLocale($locale),
             'runtime_type_code' => $runtimeTypeCode,
             'canonical_type_code' => $canonicalTypeCode !== '' ? $canonicalTypeCode : null,
             'display_type' => $this->nullableText($summary['display_type'] ?? null),
@@ -504,7 +511,10 @@ final class MbtiPublicProjectionService
             ? $projection['seo']['jsonld']
             : [];
 
-        return $projection;
+        return MbtiZhResultContentPolicy::normalizeProjection(
+            $projection,
+            (string) ($authority['locale'] ?? 'en'),
+        );
     }
 
     private function resolvePublicRouteSlug(

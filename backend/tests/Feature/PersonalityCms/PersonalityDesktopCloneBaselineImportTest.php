@@ -68,7 +68,7 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
         $this->assertSame('ENFJ-T', data_get($enfjTContent, 'content_json.hero.profile_identity.code'));
         $this->assertSame('主人公型', data_get($enfjTContent, 'content_json.hero.profile_identity.name'));
         $this->assertSame('温柔引路人', data_get($enfjTContent, 'content_json.hero.profile_identity.nickname'));
-        $this->assertSame('约 2–5%', data_get($enfjTContent, 'content_json.hero.profile_identity.rarity'));
+        $this->assertNull(data_get($enfjTContent, 'content_json.hero.profile_identity.rarity'));
         $this->assertSame([
             '共情',
             '愿景感',
@@ -152,6 +152,8 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
             'https://assets.fermatmind.com/static/mbti/desktop-clone/intj-a/hero-illustration.svg',
             data_get($intjAClone->asset_slots_json, '0.asset_ref.url'),
         );
+        $this->assertNull(data_get($intjAClone->asset_slots_json, '0.alt'));
+        $this->assertSame('人格类型插图', data_get($intjAClone->asset_slots_json, '0.label'));
 
         $this->artisan('personality:import-desktop-clone-baseline', [
             '--locale' => ['zh-CN'],
