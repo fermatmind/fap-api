@@ -185,7 +185,7 @@ final class Career1046DiscoverabilityReleaseControlTest extends TestCase
     /** @return array{root:string,generation:string,slugs:list<string>,permit:array<string,mixed>} */
     private function fixture(bool $withPermit = true): array
     {
-        $manifest = json_decode((string) file_get_contents($this->repoPath('backend/docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json')), true, 512, JSON_THROW_ON_ERROR);
+        $manifest = json_decode((string) file_get_contents($this->repoPath('backend/docs/seo/generated/detail-ready-1046-rollout-manifest.v2.json')), true, 512, JSON_THROW_ON_ERROR);
         $slugs = array_values(array_unique([...$manifest['baseline_slugs'], ...$manifest['delta_slugs']]));
         sort($slugs, SORT_STRING);
         $rows = [];
@@ -251,7 +251,7 @@ final class Career1046DiscoverabilityReleaseControlTest extends TestCase
         config(['database.default' => 'sqlite', 'database.connections.sqlite.database' => $database]);
         DB::purge('sqlite');
         Artisan::call('migrate:fresh', ['--force' => true]);
-        $manifest = json_decode((string) file_get_contents($this->repoPath('backend/docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json')), true, 512, JSON_THROW_ON_ERROR);
+        $manifest = json_decode((string) file_get_contents($this->repoPath('backend/docs/seo/generated/detail-ready-1046-rollout-manifest.v2.json')), true, 512, JSON_THROW_ON_ERROR);
         $slugs = $manifest['delta_slugs'];
         $now = '2026-08-12 00:00:00';
         DB::table('occupation_families')->insert(['id' => 'runner-family', 'canonical_slug' => 'runner-family', 'title_en' => 'Runner', 'title_zh' => 'Runner', 'created_at' => $now, 'updated_at' => $now]);
@@ -273,7 +273,7 @@ final class Career1046DiscoverabilityReleaseControlTest extends TestCase
 
     private function writeRunnerRolloutReceipt(): void
     {
-        $manifest = json_decode((string) file_get_contents($this->repoPath('backend/docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json')), true, 512, JSON_THROW_ON_ERROR);
+        $manifest = json_decode((string) file_get_contents($this->repoPath('backend/docs/seo/generated/detail-ready-1046-rollout-manifest.v2.json')), true, 512, JSON_THROW_ON_ERROR);
         $slugs = $manifest['delta_slugs'];
         $payload = [
             'status' => 'promoted_success', 'batch_id' => 'runner-1046', 'promoted_slugs' => $slugs,

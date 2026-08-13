@@ -187,8 +187,8 @@ final class Career1046ProductDataStagingWorkflowTest extends TestCase
             'test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"',
             'PASS_PREFLIGHT_STAGE_ELIGIBLE',
             'PASS_APPLY_PRODUCT_DATA_STAGED',
-            'career.1046.product_data_staging.v1',
-            'career.1046.immutable_candidate.v1',
+            'career.1046.product_data_staging.v2',
+            'career.1046.immutable_candidate.v2',
             'unique_slugs == 1046',
             'locale_rows == 2092',
             'group: deploy-${{ github.repository }}-production',
@@ -227,7 +227,7 @@ final class Career1046ProductDataStagingWorkflowTest extends TestCase
     /** @return array<string, mixed> */
     private function candidateFixture(): array
     {
-        $manifestPath = dirname(__DIR__, 2).'/docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json';
+        $manifestPath = dirname(__DIR__, 2).'/docs/seo/generated/detail-ready-1046-rollout-manifest.v2.json';
         $manifest = json_decode((string) file_get_contents($manifestPath), true, 512, JSON_THROW_ON_ERROR);
         $baseline = $manifest['baseline_slugs'];
         $receipts = $manifest['delta_slugs'];

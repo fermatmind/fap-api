@@ -25,11 +25,11 @@ final class Career1046RootActivationFailure extends RuntimeException
 
 final class Career1046RootGenerationActivation
 {
-    public const CONTRACT_VERSION = 'career.1046.root_generation_activation.v1';
+    public const CONTRACT_VERSION = 'career.1046.root_generation_activation.v2';
 
     public const POINTER_SCHEMA = 'career.generation_pointer.v1';
 
-    public const MANIFEST_SHA256 = 'b570ec0cdda65278aa543431886b3529d072de8d67a8e79f1cafbb1c4c8dfc0e';
+    public const MANIFEST_SHA256 = 'ef4d43eeaa0300534b36fd77d7806bcbe065de1fb13f158ceda1517f259207c5';
 
     public const BASELINE_SET_SHA256 = '39cc766fb18c85d385b83f0ac1f56a8b97d46481d3e9a12de0588abbaf640060';
 
@@ -320,7 +320,7 @@ final class Career1046RootGenerationActivation
             || ! self::candidateAuthorityMatches($manifest['authority'] ?? null)
             || ! self::manifestDiscoverabilityClosed($manifest['discoverability'] ?? null)
             || ! hash_equals((string) $expected['generation_manifest_sha256'], self::canonicalSha($manifest))
-            || ($receipt['schema_version'] ?? null) !== 'career.1046.immutable_candidate.v1'
+            || ($receipt['schema_version'] ?? null) !== 'career.1046.immutable_candidate.v2'
             || ($receipt['generation_id'] ?? null) !== $expected['generation_id']
             || ($receipt['counts'] ?? null) != self::targetCounts()
             || ! self::candidateAuthorityMatches($receipt['authority'] ?? null)
@@ -379,7 +379,7 @@ final class Career1046RootGenerationActivation
         DB::listen(static function (QueryExecuted $query) use (&$verbs): void {
             $verbs[] = strtolower((string) strtok(ltrim($query->sql), " \t\r\n"));
         });
-        $manifestPath = $backendRoot.'/docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json';
+        $manifestPath = $backendRoot.'/docs/seo/generated/detail-ready-1046-rollout-manifest.v2.json';
         $manifestRaw = file_get_contents($manifestPath);
         $manifest = is_string($manifestRaw) ? json_decode($manifestRaw, true) : null;
         if (! is_string($manifestRaw) || ! is_array($manifest)

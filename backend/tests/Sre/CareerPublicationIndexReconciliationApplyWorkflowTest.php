@@ -30,7 +30,7 @@ final class CareerPublicationIndexReconciliationApplyWorkflowTest extends TestCa
     {
         parent::setUp();
 
-        $bytes = file_get_contents(dirname(__DIR__, 2).'/docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json');
+        $bytes = file_get_contents(dirname(__DIR__, 2).'/docs/seo/generated/detail-ready-1046-rollout-manifest.v2.json');
         self::assertIsString($bytes);
         self::assertSame(CareerPublicationIndexReconciliationApply::MANIFEST_SHA256, hash('sha256', $bytes));
         $manifest = json_decode($bytes, true, flags: JSON_THROW_ON_ERROR);

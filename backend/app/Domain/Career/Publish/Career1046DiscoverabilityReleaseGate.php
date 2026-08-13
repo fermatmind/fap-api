@@ -26,6 +26,8 @@ final class Career1046DiscoverabilityReleaseGate
 
     public const TARGET_LOCALE_ROW_SET_SHA256 = 'c9878e76c817cc09448c32b1dcba3152b22821af34a31204840eb77a2d65857e';
 
+    public const MANIFEST_SHA256 = 'ef4d43eeaa0300534b36fd77d7806bcbe065de1fb13f158ceda1517f259207c5';
+
     /** @var null|array{target:array<string,true>,released:array<string,true>,identity:string} */
     private ?array $snapshot = null;
 
@@ -127,8 +129,8 @@ final class Career1046DiscoverabilityReleaseGate
     private function frozenTargetSlugSet(): array
     {
         try {
-            $manifestRaw = file_get_contents(base_path('docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json'));
-            if (! is_string($manifestRaw)) {
+            $manifestRaw = file_get_contents(base_path('docs/seo/generated/detail-ready-1046-rollout-manifest.v2.json'));
+            if (! is_string($manifestRaw) || ! hash_equals(self::MANIFEST_SHA256, hash('sha256', $manifestRaw))) {
                 throw new RuntimeException('career_1046_discoverability_manifest_unavailable');
             }
             $manifest = $this->decode($manifestRaw);

@@ -25,9 +25,9 @@ final class CareerBaselineIndexStateAuthorityRepairFailure extends RuntimeExcept
 
 final class CareerBaselineIndexStateAuthorityRepair
 {
-    public const CONTRACT_VERSION = 'career.baseline_index_state_authority_repair.v1';
+    public const CONTRACT_VERSION = 'career.baseline_index_state_authority_repair.v2';
 
-    public const MANIFEST_SHA256 = 'b570ec0cdda65278aa543431886b3529d072de8d67a8e79f1cafbb1c4c8dfc0e';
+    public const MANIFEST_SHA256 = 'ef4d43eeaa0300534b36fd77d7806bcbe065de1fb13f158ceda1517f259207c5';
 
     public const BASELINE_SET_SHA256 = '39cc766fb18c85d385b83f0ac1f56a8b97d46481d3e9a12de0588abbaf640060';
 
@@ -49,7 +49,7 @@ final class CareerBaselineIndexStateAuthorityRepair
 
     public const LEDGER_SHA256 = '975b311bb346a090f1add678d5a6d9f1be230f87b223e2c3c829f4c7fd7aac6e';
 
-    private const MANIFEST_PATH = 'docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json';
+    private const MANIFEST_PATH = 'docs/seo/generated/detail-ready-1046-rollout-manifest.v2.json';
 
     private const PROMOTION_REASON = 'canonical_rollout_batch_promotion';
 
@@ -59,6 +59,22 @@ final class CareerBaselineIndexStateAuthorityRepair
     public static function setHash(array $values): string
     {
         return hash('sha256', implode("\n", self::normalizedList($values))."\n");
+    }
+
+    /** @param list<string> $values */
+    public static function identitySetHash(array $values): string
+    {
+        $identities = [];
+        foreach ($values as $value) {
+            $identity = trim($value);
+            if ($identity !== '') {
+                $identities[$identity] = true;
+            }
+        }
+        $identities = array_keys($identities);
+        sort($identities, SORT_STRING);
+
+        return hash('sha256', implode("\n", $identities)."\n");
     }
 
     /**
@@ -605,7 +621,7 @@ final class CareerBaselineIndexStateAuthorityRepair
         if (count($slugList) !== 342 || count($rowList) !== 684
             || count($publishedSlugList) !== 30 || count($publishedRowList) !== 60
             || ! hash_equals(self::BASELINE_SET_SHA256, self::setHash($publishedSlugList))
-            || ! hash_equals(self::BASELINE_LOCALE_ROW_SET_SHA256, self::setHash($publishedRowList))) {
+            || ! hash_equals(self::BASELINE_LOCALE_ROW_SET_SHA256, self::identitySetHash($publishedRowList))) {
             throw new CareerBaselineIndexStateAuthorityRepairFailure('POINTER_BOUND_PUBLIC_AUTHORITY_INVALID');
         }
 

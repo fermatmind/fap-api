@@ -6,7 +6,7 @@
 
 The generator accepts only:
 
-- the repository frozen manifest whose raw SHA-256 is `b570ec0cdda65278aa543431886b3529d072de8d67a8e79f1cafbb1c4c8dfc0e`;
+- the repository frozen manifest whose raw SHA-256 is `ef4d43eeaa0300534b36fd77d7806bcbe065de1fb13f158ceda1517f259207c5`;
 - an exact baseline-authority slug set of 30;
 - an exact database-matching receipt slug set of 1016;
 - one full-release ledger containing the exact target set;

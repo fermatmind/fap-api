@@ -129,7 +129,7 @@ jobs:
             --arg run_id "$GITHUB_RUN_ID" \
             --arg run_attempt "$GITHUB_RUN_ATTEMPT" \
             '{
-              contract_version: "career.1046.root_generation_activation.v1",
+              contract_version: "career.1046.root_generation_activation.v2",
               mode: $mode,
               status: "FAIL_CONTROL_INITIALIZATION",
               failed_stage: "initialize",
@@ -240,7 +240,7 @@ jobs:
             --arg artifact "$EXPECTED_STAGING_ARTIFACT_DIGEST" \
             --argjson run_id "$STAGING_RUN_ID" \
             --argjson run_attempt "$STAGING_RUN_ATTEMPT" \
-            '.contract_version == "career.1046.product_data_staging.v1"
+            '.contract_version == "career.1046.product_data_staging.v2"
              and .mode == "apply"
              and .status == "PASS_APPLY_PRODUCT_DATA_STAGED"
              and .control_plane_sha == $control
@@ -322,7 +322,7 @@ jobs:
                 --arg database_state "$EXPECTED_DATABASE_STATE_SHA256" \
                 --argjson run_id "$PREFLIGHT_RUN_ID" \
                 --argjson run_attempt "$PREFLIGHT_RUN_ATTEMPT" \
-                '.contract_version == "career.1046.root_generation_activation.v1"
+                '.contract_version == "career.1046.root_generation_activation.v2"
                  and .mode == "preflight"
                  and .status == "PASS_PREFLIGHT_ACTIVATION_ELIGIBLE"
                  and .control_plane_sha == $control
@@ -454,7 +454,7 @@ jobs:
 
           if jq -e \
             --arg mode "$MODE" \
-            '.contract_version == "career.1046.root_generation_activation.v1"
+            '.contract_version == "career.1046.root_generation_activation.v2"
              and .mode == $mode
              and (.status | type == "string")
              and (.failed_stage == null or (.failed_stage | type == "string"))' \
@@ -495,7 +495,7 @@ jobs:
             --arg pointer "$EXPECTED_PREVIOUS_POINTER_SHA256" \
             --arg staging_receipt "$EXPECTED_STAGING_RECEIPT_SHA256" \
             --arg staging_artifact "$EXPECTED_STAGING_ARTIFACT_DIGEST" \
-            '(.contract_version == "career.1046.root_generation_activation.v1")
+            '(.contract_version == "career.1046.root_generation_activation.v2")
              and (.mode == $mode)
              and (.control_plane_sha == $control)
              and (.release_sha == $release)

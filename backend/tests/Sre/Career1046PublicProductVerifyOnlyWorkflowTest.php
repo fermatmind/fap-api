@@ -124,7 +124,7 @@ final class Career1046PublicProductVerifyOnlyWorkflowTest extends TestCase
             'test "$EXPECTED_RELEASE_SHA" = "$EXPECTED_CONTROL_PLANE_SHA"',
             'I explicitly approve read-only Career 1046 public product verification',
             'StrictHostKeyChecking=yes',
-            'career.1046.public_product_verify_only.v1',
+            'career.1046.public_product_verify_only.v2',
             'PASS_PUBLIC_PRODUCT_VERIFY_ONLY',
             'X-Fermat-Career-Verify-Only: 1',
             'X-Fermat-Career-Verify-Timestamp:',
@@ -205,7 +205,7 @@ final class Career1046PublicProductVerifyOnlyWorkflowTest extends TestCase
         copy($this->repoPath('backend/scripts/operations/career_1046_public_product_verify_only.php'), $releaseRoot.$scriptRelative);
         symlink($releaseRoot, $deployPath.'/current');
 
-        $manifestPath = $this->repoPath('backend/docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json');
+        $manifestPath = $this->repoPath('backend/docs/seo/generated/detail-ready-1046-rollout-manifest.v2.json');
         $manifest = json_decode((string) file_get_contents($manifestPath), true, 512, JSON_THROW_ON_ERROR);
         $baseline = $manifest['baseline_slugs'];
         $receipts = $manifest['delta_slugs'];

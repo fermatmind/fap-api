@@ -28,7 +28,7 @@ final class CareerBaselineIndexStateAuthorityRepairTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $bytes = file_get_contents(dirname(__DIR__, 2).'/docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json');
+        $bytes = file_get_contents(dirname(__DIR__, 2).'/docs/seo/generated/detail-ready-1046-rollout-manifest.v2.json');
         self::assertIsString($bytes);
         self::assertSame(CareerBaselineIndexStateAuthorityRepair::MANIFEST_SHA256, hash('sha256', $bytes));
         $manifest = json_decode($bytes, true, flags: JSON_THROW_ON_ERROR);
@@ -53,6 +53,24 @@ final class CareerBaselineIndexStateAuthorityRepairTest extends TestCase
         self::assertSame(0, $analysis['baseline']['matching_count']);
         self::assertSame(1016, $analysis['delta']['latest_state_missing_count']);
         self::assertSame(0, $analysis['delta']['latest_state_tie_count']);
+    }
+
+    public function test_locale_row_identity_hash_preserves_canonical_locale_case(): void
+    {
+        $rows = [];
+        foreach ($this->baseline as $slug) {
+            $rows[] = $slug.'|en';
+            $rows[] = $slug.'|zh-CN';
+        }
+
+        self::assertSame(
+            CareerBaselineIndexStateAuthorityRepair::BASELINE_LOCALE_ROW_SET_SHA256,
+            CareerBaselineIndexStateAuthorityRepair::identitySetHash($rows),
+        );
+        self::assertNotSame(
+            CareerBaselineIndexStateAuthorityRepair::BASELINE_LOCALE_ROW_SET_SHA256,
+            CareerBaselineIndexStateAuthorityRepair::setHash($rows),
+        );
     }
 
     public function test_exact_baseline_is_already_repaired_and_delta_snapshot_is_unchanged(): void

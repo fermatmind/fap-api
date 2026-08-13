@@ -8,7 +8,7 @@ The workflow may restore publication/index authority only for the frozen 1016-sl
 
 ## Frozen authority
 
-- manifest SHA-256: `b570ec0cdda65278aa543431886b3529d072de8d67a8e79f1cafbb1c4c8dfc0e`
+- manifest SHA-256: `ef4d43eeaa0300534b36fd77d7806bcbe065de1fb13f158ceda1517f259207c5`
 - baseline 30 set SHA-256: `39cc766fb18c85d385b83f0ac1f56a8b97d46481d3e9a12de0588abbaf640060`
 - receipt/delta 1016 set SHA-256: `09ec67befe967e1619a40578c47b862743883717b048da802ee7ef3551a0747f`
 - target 1046 set SHA-256: `3b101fb76b5666200c73519c650beb1a5b0b35f47f7592453bf5671920571a18`

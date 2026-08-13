@@ -9,9 +9,9 @@ use RuntimeException;
 
 final class Career1046ImmutableCandidateGenerator
 {
-    public const SCHEMA_VERSION = 'career.1046.immutable_candidate.v1';
+    public const SCHEMA_VERSION = 'career.1046.immutable_candidate.v2';
 
-    public const MANIFEST_SHA256 = 'b570ec0cdda65278aa543431886b3529d072de8d67a8e79f1cafbb1c4c8dfc0e';
+    public const MANIFEST_SHA256 = 'ef4d43eeaa0300534b36fd77d7806bcbe065de1fb13f158ceda1517f259207c5';
 
     public const BASELINE_SET_SHA256 = '39cc766fb18c85d385b83f0ac1f56a8b97d46481d3e9a12de0588abbaf640060';
 
