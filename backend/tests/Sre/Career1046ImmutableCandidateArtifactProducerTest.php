@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Sre;
 
 use App\Console\Commands\CareerPublicResolutionTypeMatrix;
+use App\Domain\Career\Publish\Career1046ImmutableCandidateGenerator;
 use App\Domain\Career\Publish\CareerFullReleaseLedgerService;
 use App\Domain\Career\Publish\CareerGenerationCanonicalJson;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
@@ -41,6 +42,75 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
         $binding['database_state_sha256'] = 'invalid';
         $this->expectException(Career1046ImmutableCandidateArtifactFailure::class);
         Career1046ImmutableCandidateArtifactProducer::produceFromSource($this->source(), $binding);
+    }
+
+    public function test_it_derives_an_exact_target_bounded_ledger_and_recomputes_counts(): void
+    {
+        $manifest = $this->manifest();
+        $fullLedger = $this->fullLedgerWithOutsideForbiddenMember();
+
+        $bounded = Career1046ImmutableCandidateArtifactProducer::targetBoundedLedger($fullLedger, $manifest);
+        $slugs = array_column($bounded['members'], 'canonical_slug');
+
+        self::assertSame('career_exact_1046', $bounded['scope']);
+        self::assertCount(1046, $slugs);
+        self::assertSame(array_values(array_unique($slugs)), $slugs);
+        self::assertSame([], array_values(array_intersect(
+            Career1046ImmutableCandidateGenerator::FORBIDDEN_SLUGS,
+            $slugs,
+        )));
+        self::assertSame([
+            'target_slug_count' => 1046,
+            'target_locale_row_count' => 2092,
+            'missing_count' => 0,
+            'duplicate_count' => 0,
+            'forbidden_count' => 0,
+            'outside_target_count' => 0,
+            'target_slug_set_sha256' => Career1046ImmutableCandidateGenerator::TARGET_SET_SHA256,
+            'target_locale_row_set_sha256' => Career1046ImmutableCandidateGenerator::TARGET_LOCALE_ROW_SET_SHA256,
+        ], $bounded['target_boundary']);
+        self::assertSame(1046, $bounded['counts']['tracking_counts']['tracked_total_occupations']);
+        self::assertSame(0, $bounded['counts']['tracking_counts']['missing_occupations']);
+        self::assertTrue($bounded['counts']['tracking_counts']['tracking_complete']);
+        self::assertSame(1046, array_sum($bounded['counts']['release_counts']));
+    }
+
+    public function test_target_bounded_ledger_rejects_identity_missing_or_duplicate_drift(): void
+    {
+        $manifest = $this->manifest();
+        foreach (['identity', 'missing', 'duplicate'] as $case) {
+            $ledger = $this->fullLedgerWithOutsideForbiddenMember();
+            if ($case === 'identity') {
+                $ledger['ledger_version'] = 'drifted';
+                $expected = 'FULL_LEDGER_IDENTITY_INVALID';
+            } elseif ($case === 'missing') {
+                array_shift($ledger['members']);
+                $expected = 'TARGET_BOUNDED_LEDGER_MISSING';
+            } else {
+                $ledger['members'][] = $ledger['members'][0];
+                $expected = 'TARGET_BOUNDED_LEDGER_DUPLICATE';
+            }
+            try {
+                Career1046ImmutableCandidateArtifactProducer::targetBoundedLedger($ledger, $manifest);
+                self::fail($case.' target ledger did not fail closed');
+            } catch (Career1046ImmutableCandidateArtifactFailure $failure) {
+                self::assertSame($expected, $failure->safeCode);
+            }
+        }
+    }
+
+    public function test_it_maps_generator_runtime_details_to_one_sanitized_authority_code(): void
+    {
+        $source = $this->source();
+        array_pop($source['ledger']['public_resolution']['rows']);
+
+        try {
+            Career1046ImmutableCandidateArtifactProducer::produceFromSource($source, $this->task3b());
+            self::fail('invalid candidate source did not fail closed');
+        } catch (Career1046ImmutableCandidateArtifactFailure $failure) {
+            self::assertSame('CANDIDATE_AUTHORITY_CONTRACT_FAILURE', $failure->safeCode);
+            self::assertStringNotContainsString('set_mismatch', $failure->getMessage());
+        }
     }
 
     public function test_task5_real_consumer_accepts_the_producer_output_without_manual_assembly(): void
@@ -104,6 +174,12 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
             "ledger['members']",
             "canonical_slug']",
             'TASK3B_DATABASE_STATE_DRIFT',
+            'targetBoundedLedger',
+            'TARGET_BOUNDED_LEDGER_MISSING',
+            'TARGET_BOUNDED_LEDGER_DUPLICATE',
+            'TARGET_BOUNDED_LEDGER_COUNTS_INVALID',
+            'CANDIDATE_AUTHORITY_CONTRACT_FAILURE',
+            'CANDIDATE_CONTROL_FAILURE',
             'CAREER_1046_APPLICATION_ROOT',
             'CAREER_1046_STREAMED_EXECUTION',
             '--emit-streamed-runner',
@@ -116,6 +192,7 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
         foreach (['schedule:', 'push:', 'workflow_run:', 'gh workflow run', 'php artisan migrate', 'queue:restart', 'deploy:symlink', 'indexnow', 'sitemap:submit'] as $forbidden) {
             self::assertStringNotContainsString($forbidden, $combined);
         }
+        self::assertStringNotContainsString('UNEXPECTED_CONTROL_FAILURE', $runner);
     }
 
     public function test_it_emits_a_lintable_control_plane_runner_bundle(): void
@@ -186,7 +263,7 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
     private function source(): array
     {
         $manifestPath = dirname(__DIR__, 2).'/docs/seo/generated/detail-ready-1046-rollout-manifest.v2.json';
-        $manifest = json_decode((string) file_get_contents($manifestPath), true, 512, JSON_THROW_ON_ERROR);
+        $manifest = $this->manifest();
         $slugs = [...$manifest['baseline_slugs'], ...$manifest['delta_slugs']];
         sort($slugs, SORT_STRING);
         $ledger = ['ledger_kind' => CareerFullReleaseLedgerService::LEDGER_KIND, 'ledger_version' => 'candidate.v1', 'scope' => 'career_exact_1046', 'public_resolution' => ['rows' => array_map(static fn (string $slug): array => ['source_slug' => $slug, 'public_resolution_type' => CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB, 'public_eligible' => true, 'indexability' => 'indexable'], $slugs)]];
@@ -198,6 +275,66 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
         }
 
         return ['manifest_path' => $manifestPath, 'baseline_authority_slugs' => $manifest['baseline_slugs'], 'database_matching_receipt_slugs' => $manifest['delta_slugs'], 'ledger' => $ledger, 'projection' => (new CareerRuntimePublishProjectionService)->buildFromLedgerArray($ledger), 'detail_rows' => $details];
+    }
+
+    /** @return array<string, mixed> */
+    private function manifest(): array
+    {
+        $path = dirname(__DIR__, 2).'/docs/seo/generated/detail-ready-1046-rollout-manifest.v2.json';
+
+        return json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
+    }
+
+    /** @return array<string, mixed> */
+    private function fullLedgerWithOutsideForbiddenMember(): array
+    {
+        $manifest = $this->manifest();
+        $target = [...$manifest['baseline_slugs'], ...$manifest['delta_slugs']];
+        sort($target, SORT_STRING);
+        $members = array_map(static fn (string $slug): array => [
+            'member_kind' => 'career_rollout_batch_additional',
+            'canonical_slug' => $slug,
+            'batch_origin' => 'canonical_rollout_batch_executor',
+            'current_crosswalk_mode' => null,
+            'public_resolution_type' => CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB,
+            'public_eligible' => true,
+            'indexability' => 'indexable',
+            'release_cohort' => 'public_detail_indexable',
+            'review_queue_status' => null,
+            'override_applied' => false,
+        ], $target);
+        $members[] = [
+            'member_kind' => 'career_tracked_occupation',
+            'canonical_slug' => 'software-developers',
+            'batch_origin' => 'first_wave_manifest',
+            'current_crosswalk_mode' => null,
+            'public_resolution_type' => CareerPublicResolutionTypeMatrix::KEEP_NON_PUBLIC_WITH_POLICY,
+            'public_eligible' => false,
+            'indexability' => 'noindex',
+            'release_cohort' => 'blocked',
+            'review_queue_status' => null,
+            'override_applied' => false,
+        ];
+
+        return [
+            'ledger_kind' => CareerFullReleaseLedgerService::LEDGER_KIND,
+            'ledger_version' => CareerFullReleaseLedgerService::LEDGER_VERSION,
+            'scope' => CareerFullReleaseLedgerService::SCOPE,
+            'counts' => [
+                'tracking_counts' => [
+                    'expected_total_occupations' => 2786,
+                    'tracked_total_occupations' => 1047,
+                    'missing_occupations' => 1739,
+                    'tracking_complete' => false,
+                    'first_wave_members' => 1,
+                    'batch_members' => 1046,
+                    'first_wave_audit_available' => true,
+                ],
+                'release_counts' => ['public_detail_indexable' => 1046, 'blocked' => 1],
+                'ops_handoff_counts' => ['review_queue_total' => 0, 'override_applied_total' => 0],
+            ],
+            'members' => $members,
+        ];
     }
 
     /** @return array<string, mixed> */
