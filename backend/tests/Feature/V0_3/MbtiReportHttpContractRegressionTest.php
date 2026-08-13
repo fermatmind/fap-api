@@ -100,7 +100,7 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
         return $attemptId;
     }
 
-    public function test_free_only_mbti_report_http_contract_includes_full_mbti_fields_without_upsell(): void
+    public function test_locked_mbti_report_http_contract_includes_preview_and_199_upsell(): void
     {
         $this->seedScales();
 
@@ -116,17 +116,17 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
         $resp->assertStatus(200);
         $resp->assertJson([
             'ok' => true,
-            'locked' => false,
-            'access_level' => 'full',
-            'variant' => 'full',
+            'locked' => true,
+            'access_level' => 'free',
+            'variant' => 'free',
         ]);
         $this->assertStableMbtiEnvelope($resp);
 
         $cta = (array) $resp->json('cta');
-        $this->assertFalse((bool) $cta['visible']);
-        $this->assertSame('none', $cta['kind']);
-        $this->assertNull($cta['target_sku']);
-        $this->assertNull($cta['target_sku_effective']);
+        $this->assertTrue((bool) $cta['visible']);
+        $this->assertSame('upsell', $cta['kind']);
+        $this->assertSame('MBTI_REPORT_FULL', $cta['target_sku']);
+        $this->assertSame('MBTI_REPORT_FULL_199', $cta['target_sku_effective']);
         $this->assertStableMbtiPublicSummaryV1(
             (array) $resp->json('mbti_public_summary_v1'),
             'ENFP-T',
@@ -140,14 +140,14 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
             'T'
         );
         $this->assertStableMbtiPreviewContractV1((array) $resp->json('mbti_preview_v1'));
-        $resp->assertJsonPath('mbti_preview_v1.mode', 'none');
-        $resp->assertJsonPath('mbti_access_hub_v1.access_state', 'ready')
+        $resp->assertJsonPath('mbti_preview_v1.mode', 'module_preview');
+        $resp->assertJsonPath('mbti_access_hub_v1.access_state', 'locked')
             ->assertJsonPath('mbti_access_hub_v1.report_access.can_view_report', true)
             ->assertJsonPath('mbti_access_hub_v1.report_access.attempt_id', $attemptId)
             ->assertJsonPath('mbti_access_hub_v1.report_access.order_no', null)
             ->assertJsonPath('mbti_access_hub_v1.report_access.report_url', "/api/v0.3/attempts/{$attemptId}/report")
             ->assertJsonPath('mbti_access_hub_v1.report_access.source', 'report_gate')
-            ->assertJsonPath('mbti_access_hub_v1.pdf_access.can_download_pdf', true)
+            ->assertJsonPath('mbti_access_hub_v1.pdf_access.can_download_pdf', false)
             ->assertJsonPath('mbti_access_hub_v1.pdf_access.report_pdf_url', "/api/v0.3/attempts/{$attemptId}/report.pdf")
             ->assertJsonPath('mbti_access_hub_v1.pdf_access.source', 'attempt_pdf')
             ->assertJsonPath('mbti_access_hub_v1.recovery.can_lookup_order', true)
