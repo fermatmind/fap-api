@@ -6825,6 +6825,30 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_only_bigfive_v2_locale_registry_runtime_files(): void
+    {
+        $allowed = [
+            'backend/app/Services/BigFive/ReportEngine/BigFiveReportEngine.php',
+            'backend/app/Services/BigFive/ReportEngine/Bridge/BigFiveLiveRuntimeBridge.php',
+            'backend/app/Services/BigFive/ReportEngine/Registry/RegistryLoader.php',
+            'backend/app/Services/BigFive/ReportEngine/Registry/RegistryValidator.php',
+            'backend/app/Services/BigFive/ReportEngine/Registry/UnsupportedRegistryLocale.php',
+            'backend/app/Services/BigFive/ReportEngine/Resolver/ActionMatrixResolver.php',
+            'backend/app/Services/BigFive/ReportEngine/SectionInstructionAssembler.php',
+            'backend/content_packs/BIG5_OCEAN/v2/registry/en/manifest.json',
+            'backend/content_packs/BIG5_OCEAN/v2/registry/en/atomic/O.json',
+            'backend/content_packs/BIG5_OCEAN/v2/registry/en/shared/runtime_copy.json',
+            'backend/content_packs/BIG5_OCEAN/v2/registry/shared/runtime_copy.json',
+        ];
+        $blocked = [
+            'backend/app/Services/BigFive/BigFivePublicProjectionService.php',
+            'backend/content_packs/BIG5_OCEAN/v2/registry/fr/manifest.json',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges([...$allowed, ...$blocked], '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_w2_en_parity_result_draft_package(): void
     {
         $allowed = [
@@ -8784,6 +8808,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isBigFiveV2EnParityDraftCatalogFile($file)) {
+                continue;
+            }
+
+            if ($this->isBigFiveV2LocaleRegistryRuntimeFile($file)) {
                 continue;
             }
 
@@ -13171,6 +13199,25 @@ DIFF;
     private function isBigFiveV2EnParityDraftCatalogFile(string $file): bool
     {
         return $file === 'backend/content_packs/BIG5_OCEAN/v2/drafts/en_parity/result_page_v2_en_asset_catalog_draft.v1.json';
+    }
+
+    private function isBigFiveV2LocaleRegistryRuntimeFile(string $file): bool
+    {
+        if (in_array($file, [
+            'backend/app/Services/BigFive/ReportEngine/BigFiveReportEngine.php',
+            'backend/app/Services/BigFive/ReportEngine/Bridge/BigFiveLiveRuntimeBridge.php',
+            'backend/app/Services/BigFive/ReportEngine/Registry/RegistryLoader.php',
+            'backend/app/Services/BigFive/ReportEngine/Registry/RegistryValidator.php',
+            'backend/app/Services/BigFive/ReportEngine/Registry/UnsupportedRegistryLocale.php',
+            'backend/app/Services/BigFive/ReportEngine/Resolver/ActionMatrixResolver.php',
+            'backend/app/Services/BigFive/ReportEngine/SectionInstructionAssembler.php',
+            'backend/content_packs/BIG5_OCEAN/v2/registry/shared/runtime_copy.json',
+        ], true)) {
+            return true;
+        }
+
+        return $file === 'backend/content_packs/BIG5_OCEAN/v2/registry/en/manifest.json'
+            || preg_match('#^backend/content_packs/BIG5_OCEAN/v2/registry/en/(action_rules|atomic|facet_glossary|facet_precision|fixtures|modifiers|shared|synergies)/[A-Za-z0-9_.-]+\.json$#', $file) === 1;
     }
 
     private function isBigFiveW2EnParityResultDraftPackageFile(string $file): bool

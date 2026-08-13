@@ -1,0 +1,77 @@
+{
+  "schema": "fap.big5.modifier_trait_pack.v1",
+  "trait_code": "A",
+  "trait_label_zh": "Agreeableness",
+  "gradients": {
+    "a_g1": {
+      "percentile_range": [
+        0,
+        19
+      ],
+      "user_label": "strong boundary judgment",
+      "injections": {
+        "hero_summary.headline_extension": "——It is easier for you to first consider whether the problem is reasonable and then whether the relationship is comfortable.",
+        "domain_deep_dive.intensity_sentence": "Tolerance levels drop significantly when you feel unfair or ineffective.",
+        "core_portrait.load_sentence": "Your relationship load comes from having to maintain a façade.",
+        "norms_comparison.compare_sentence": "This shows that your boundaries and judgment are clearly stronger than relationship compliance.",
+        "action_plan.urgency_sentence": "The key is to translate a clear position into audible expression, not to weaken judgment."
+      }
+    },
+    "a_g2": {
+      "percentile_range": [
+        20,
+        39
+      ],
+      "user_label": "low compliance cooperation",
+      "injections": {
+        "hero_summary.headline_extension": "- You are willing to cooperate, but less willing to sacrifice core judgment for the sake of the relationship.",
+        "domain_deep_dive.intensity_sentence": "You will observe whether the other party is fair and reliable before deciding how much to invest.",
+        "core_portrait.load_sentence": "Your system doesn't like vague concessions or overly tactful packaging of issues.",
+        "norms_comparison.compare_sentence": "This is closer to low-accommodation cooperation: able to cooperate, but needs reasons and boundaries.",
+        "action_plan.urgency_sentence": "The next step is to make the rejection specific so that the other party can only feel the attitude but not the standard."
+      }
+    },
+    "a_g3": {
+      "percentile_range": [
+        40,
+        59
+      ],
+      "user_label": "Balanced collaboration",
+      "injections": {
+        "hero_summary.headline_extension": "——You can take care of relationships and retain your own judgment.",
+        "domain_deep_dive.intensity_sentence": "Your level of cooperation will vary with the quality of the object and the fairness of the interaction.",
+        "core_portrait.load_sentence": "Your relationship load comes primarily from delayed boundary expression, not from a lack of empathy.",
+        "norms_comparison.compare_sentence": "You are in the middle of the reference sample, more like a balanced collaboration than an unconditional concession.",
+        "action_plan.urgency_sentence": "The key for you is to make it clear earlier what you can talk about and what you can't continue to commit to."
+      }
+    },
+    "a_g4": {
+      "percentile_range": [
+        60,
+        79
+      ],
+      "user_label": "High cooperation to undertake",
+      "injections": {
+        "hero_summary.headline_extension": "- It’s easier for you to understand others first and try to reduce relationship friction.",
+        "domain_deep_dive.intensity_sentence": "You naturally pay attention to atmosphere, feel, and collaboration costs.",
+        "core_portrait.load_sentence": "Your burden may come from taking other people's difficulties onto yourself too early.",
+        "norms_comparison.compare_sentence": "You have been more cooperative in the reference sample, and your understanding and acceptance are obvious advantages.",
+        "action_plan.urgency_sentence": "The key is to bring your own needs into the discussion, rather than just optimizing the feelings of others."
+      }
+    },
+    "a_g5": {
+      "percentile_range": [
+        80,
+        100
+      ],
+      "user_label": "Maintaining strong relationships",
+      "injections": {
+        "hero_summary.headline_extension": "– It’s easy for you to prioritize relationships, feelings, and the overall atmosphere.",
+        "domain_deep_dive.intensity_sentence": "Conflict and disappointing others will occupy you more than most people.",
+        "core_portrait.load_sentence": "Your system is very good at taking over, and you also need to be clear about which responsibilities do not belong to you.",
+        "norms_comparison.compare_sentence": "This is a high agreeable placement, and relationship maintenance can easily become your default response.",
+        "action_plan.urgency_sentence": "The most important thing at this point is to practice gentle but clear rejection to protect the long-term quality of the collaboration."
+      }
+    }
+  }
+}

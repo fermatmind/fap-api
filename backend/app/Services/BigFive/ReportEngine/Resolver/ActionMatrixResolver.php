@@ -30,7 +30,7 @@ final class ActionMatrixResolver
 
             $selectedByScenario[$scenario] = [
                 'scenario_key' => $scenario,
-                'title' => (string) ($pack['scenario_title'] ?? $this->titleForScenario($scenario)),
+                'title' => (string) ($pack['scenario_title'] ?? $scenario),
                 'selected_rules' => $this->selectScenarioRules($context, $scenario, $pack['rules']),
             ];
         }
@@ -193,16 +193,5 @@ final class ActionMatrixResolver
         }
 
         return $top;
-    }
-
-    private function titleForScenario(string $scenario): string
-    {
-        return match ($scenario) {
-            'workplace' => '工作场景',
-            'relationships' => '关系场景',
-            'stress_recovery' => '压力恢复',
-            'personal_growth' => '个人成长',
-            default => $scenario,
-        };
     }
 }

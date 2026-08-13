@@ -1,0 +1,77 @@
+{
+  "schema": "fap.big5.modifier_trait_pack.v1",
+  "trait_code": "C",
+  "trait_label_zh": "Conscientiousness",
+  "gradients": {
+    "c_g1": {
+      "percentile_range": [
+        0,
+        19
+      ],
+      "user_label": "low structure initiation",
+      "injections": {
+        "hero_summary.headline_extension": "—Initiation, sequencing, and closing require significant involvement of external structures.",
+        "domain_deep_dive.intensity_sentence": "When missions lack immediate feedback, your follow-through system can easily slow down.",
+        "core_portrait.load_sentence": "Your load comes not from not knowing the goal, but from continually keeping the goal in the foreground.",
+        "norms_comparison.compare_sentence": "This shows that your execution stability is significantly lower than the middle of the reference sample, and you need the environment to help you take over the rhythm.",
+        "action_plan.urgency_sentence": "Make one thing a priority: narrow down today’s next step to one that can be started in ten minutes."
+      }
+    },
+    "c_g2": {
+      "percentile_range": [
+        20,
+        39
+      ],
+      "user_label": "Low endurance follow-through",
+      "injections": {
+        "hero_summary.headline_extension": "——You can do things, but continued advancement depends more on status, meaning and external beats.",
+        "domain_deep_dive.intensity_sentence": "It’s not that you can’t be responsible, but low feedback and long-term tasks will consume endurance faster.",
+        "core_portrait.load_sentence": "Your operational load comes primarily from long-term maintenance of order, not short-term bursts.",
+        "norms_comparison.compare_sentence": "This is closer to low endurance follow-through: it can be started, but the system needs to help you keep renewing it.",
+        "action_plan.urgency_sentence": "For you, the key to regaining momentum is an external checklist, a fixed cadence, and shorter completion cycles."
+      }
+    },
+    "c_g3": {
+      "percentile_range": [
+        40,
+        59
+      ],
+      "user_label": "situational execution",
+      "injections": {
+        "hero_summary.headline_extension": "——You have basic execution ability, but it will be clearly affected by the quality of the task.",
+        "domain_deep_dive.intensity_sentence": "When your goals are clear and feedback is timely, your progress will be more stable.",
+        "core_portrait.load_sentence": "Your system is not designed to push all tasks into the same priority.",
+        "norms_comparison.compare_sentence": "You are in the middle of the reference sample, more like a situational performer than a low performer or a high control type.",
+        "action_plan.urgency_sentence": "The next step is to establish fixed entrances to key tasks to reduce on-the-fly decisions."
+      }
+    },
+    "c_g4": {
+      "percentile_range": [
+        60,
+        79
+      ],
+      "user_label": "Stable and responsible",
+      "injections": {
+        "hero_summary.headline_extension": "——It’s easier for you to turn your commitments into plans and keep tracking them to completion.",
+        "domain_deep_dive.intensity_sentence": "As long as your goals are reasonable, you can usually use structure and accountability to get things done.",
+        "core_portrait.load_sentence": "Your load may come from overcommitment rather than a lack of execution.",
+        "norms_comparison.compare_sentence": "You are already significantly higher in the reference sample, and execution stability is an advantage you can rely on.",
+        "action_plan.urgency_sentence": "The next step for you is not to work harder, but to distinguish which tasks deserve high standards."
+      }
+    },
+    "c_g5": {
+      "percentile_range": [
+        80,
+        100
+      ],
+      "user_label": "High control finish",
+      "injections": {
+        "hero_summary.headline_extension": "——You will strongly pursue order, standards and a sense of completion.",
+        "domain_deep_dive.intensity_sentence": "Unfinished work, low standards, and out-of-control progress will occupy your attention more than most.",
+        "core_portrait.load_sentence": "Your system is very good at advancing, and it is easy to experience adjustable items as must be completed.",
+        "norms_comparison.compare_sentence": "This is a high conscientiousness position, where a sense of responsibility and control can easily become your default drive.",
+        "action_plan.urgency_sentence": "The most important thing at this time is to grade the tasks and allow some things to be only good enough."
+      }
+    }
+  }
+}

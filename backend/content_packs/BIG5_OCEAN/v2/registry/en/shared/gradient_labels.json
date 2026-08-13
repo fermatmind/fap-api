@@ -1,0 +1,46 @@
+{
+  "schema": "fap.big5.shared_gradient_labels.v1",
+  "gradients": {
+    "g1": {
+      "range": [
+        0,
+        19
+      ],
+      "label": "significantly lower",
+      "copy_rule": "Emphasize this dimension less as a default entry and give low-cost compensation strategies."
+    },
+    "g2": {
+      "range": [
+        20,
+        39
+      ],
+      "label": "slightly low",
+      "copy_rule": "It emphasizes that the ability exists but the natural drive is weak, and it is suitable to be supported by structure and contexts."
+    },
+    "g3": {
+      "range": [
+        40,
+        59
+      ],
+      "label": "middle section",
+      "copy_rule": "Emphasis on situationality, adjustability, and context recognition."
+    },
+    "g4": {
+      "range": [
+        60,
+        79
+      ],
+      "label": "slightly high",
+      "copy_rule": "Emphasize that this dimension has become an obvious resource, while also prompting the corresponding costs."
+    },
+    "g5": {
+      "range": [
+        80,
+        100
+      ],
+      "label": "clearly high",
+      "copy_rule": "Emphasize high-intensity running styles and provide boundaries, closing, or recovery strategies."
+    }
+  },
+  "voice_anchor": "The modifier must be injected into the entire sentence to add intensity and action focus, without word-level substitution."
+}

@@ -1,0 +1,134 @@
+{
+  "schema": "fap.big5.facet_precision_trait_pack.v1",
+  "trait_code": "C",
+  "rules": [
+    {
+      "schema": "fap.big5.facet_precision_rule.v1",
+      "rule_id": "c1_high_with_c_low",
+      "facet_code": "C1",
+      "anomaly_type": "positive_spike",
+      "when": {
+        "domain_percentile_max": 45,
+        "facet_percentile_min": 75,
+        "delta_abs_min": 20,
+        "cross_band_required": true
+      },
+      "priority_weight": 112,
+      "max_show_per_domain": 2,
+      "section_targets": [
+        "facet_details"
+      ],
+      "copy": {
+        "title": "It’s not that you are incompetent, it’s that the endurance structure has not kept up with your sense of competence.",
+        "body": "When the overall conscientiousness is low, the sense of competence is significantly higher, which shows that you know that you can understand and deal with the problem, but the continuous promotion system may not be equally stable.",
+        "why_it_matters": "This can separate \"I clearly know how to do it, why can't I finish it\" from the issue of ability."
+      }
+    },
+    {
+      "schema": "fap.big5.facet_precision_rule.v1",
+      "rule_id": "c2_high_with_c_low",
+      "facet_code": "C2",
+      "anomaly_type": "positive_spike",
+      "when": {
+        "domain_percentile_max": 45,
+        "facet_percentile_min": 75,
+        "delta_abs_min": 20,
+        "cross_band_required": true
+      },
+      "priority_weight": 108,
+      "max_show_per_domain": 2,
+      "section_targets": [
+        "facet_details"
+      ],
+      "copy": {
+        "title": "You are not a chaotic type with low conscientiousness, but you need order to maintain a sense of control.",
+        "body": "A sense of order is higher than overall conscientiousness, indicating that you may care about structure, lists, and boundaries, but you may not necessarily be able to continuously transform these structures into completion.",
+        "why_it_matters": "This suggests that operational improvements should not start with “trying harder” but rather with reducing structural maintenance costs."
+      }
+    },
+    {
+      "schema": "fap.big5.facet_precision_rule.v1",
+      "rule_id": "c5_low_with_c_low",
+      "facet_code": "C5",
+      "anomaly_type": "negative_spike",
+      "when": {
+        "domain_percentile_max": 45,
+        "facet_percentile_max": 25,
+        "delta_abs_min": 20,
+        "cross_band_required": true
+      },
+      "priority_weight": 112,
+      "max_show_per_domain": 2,
+      "section_targets": [
+        "facet_details"
+      ],
+      "copy": {
+        "title": "What really holds you back is often self-discipline rather than understanding the task.",
+        "body": "When the delayed-feedback persistence is significantly lower than the overall level, the task is easy to be interrupted at the stage of no feedback, fatigue or uncertainty. This does not mean that you do not know the goal.",
+        "why_it_matters": "This deviation can help position the problem as pacing and feedback rather than personality evaluation."
+      }
+    },
+    {
+      "schema": "fap.big5.facet_precision_rule.v1",
+      "rule_id": "c4_low_with_c_low",
+      "facet_code": "C4",
+      "anomaly_type": "negative_spike",
+      "when": {
+        "domain_percentile_max": 45,
+        "facet_percentile_max": 25,
+        "delta_abs_min": 20,
+        "cross_band_required": true
+      },
+      "priority_weight": 104,
+      "max_show_per_domain": 2,
+      "section_targets": [
+        "facet_details"
+      ],
+      "copy": {
+        "title": "You don’t necessarily lack a sense of responsibility, but you may lack the fuel to be continuously driven by your goals.",
+        "body": "Achievement advancement is significantly low, indicating that external standards, rankings, or higher levels of completion do not necessarily naturally drive your long-term investment.",
+        "why_it_matters": "This can explain why it is difficult for you to start stably with a target slogan alone."
+      }
+    },
+    {
+      "schema": "fap.big5.facet_precision_rule.v1",
+      "rule_id": "c_order_maintainer_split",
+      "facet_codes_all": [
+        "C1",
+        "C2",
+        "C4",
+        "C5"
+      ],
+      "anomaly_type": "compound_split",
+      "when": {
+        "domain_percentile_max": 45,
+        "facets": {
+          "C1": {
+            "facet_percentile_min": 75
+          },
+          "C2": {
+            "facet_percentile_min": 75
+          },
+          "C4": {
+            "facet_percentile_max": 30
+          },
+          "C5": {
+            "facet_percentile_max": 30
+          }
+        },
+        "delta_abs_min": 20,
+        "cross_band_required": true
+      },
+      "priority_weight": 145,
+      "max_show_per_domain": 2,
+      "section_targets": [
+        "facet_details"
+      ],
+      "copy": {
+        "title": "It’s not that you are low on responsibility; you can establish order, but sustaining follow-through is harder.",
+        "body": "The sense of competence and order are clearly high, but the achievement striving and delayed-feedback persistence are clearly low, which shows that you can understand the task and want to put the structure in place; the real loss occurs in the long-term execution and continuous pull stage.",
+        "why_it_matters": "This is a high-value split: it separates \"ability/order\" from \"follow-through/sustainability\" to avoid misinterpreting a low total score as overall looseness."
+      }
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "schema": "fap.big5.action_rule_pack.v1",
+  "scenario": "personal_growth",
+  "scenario_title": "Personal Growth",
+  "rules": [
+    {
+      "rule_id": "c_gro_start_20min_task_16_35",
+      "trait_code": "C",
+      "bucket": "start",
+      "percentile_min": 16,
+      "percentile_max": 35,
+      "priority_weight": 86,
+      "scenario_tags": [
+        "personal_growth"
+      ],
+      "difficulty_level": "low",
+      "time_horizon": "this_week",
+      "title": "Break growth tasks into 20-minute units",
+      "body": "Divide the things you want to learn, practice, and improve into 20-minute units, and let the growth tasks enter the schedule first instead of stopping in the plan."
+    },
+    {
+      "rule_id": "c_gro_start_5min_task_00_15",
+      "trait_code": "C",
+      "bucket": "start",
+      "percentile_min": 0,
+      "percentile_max": 15,
+      "priority_weight": 90,
+      "scenario_tags": [
+        "personal_growth"
+      ],
+      "difficulty_level": "low",
+      "time_horizon": "today",
+      "title": "Do the growth task for 5 minutes first",
+      "body": "When you know it's important but hard to get started, just do it for 5 minutes without having to prove you can last a full round."
+    },
+    {
+      "rule_id": "o_gro_continue_meaningful_exploration_50_100",
+      "trait_code": "O",
+      "bucket": "continue",
+      "percentile_min": 50,
+      "percentile_max": 100,
+      "priority_weight": 68,
+      "scenario_tags": [
+        "personal_growth"
+      ],
+      "difficulty_level": "low",
+      "time_horizon": "this_month",
+      "title": "Reserve meaningful exploration time",
+      "body": "Continue to reserve time for exploration that allows you to understand the world, renew your experiences, or form new connections, but give it a clear boundary."
+    },
+    {
+      "rule_id": "o_gro_stop_endless_option_expansion_50_100",
+      "trait_code": "O",
+      "bucket": "stop",
+      "percentile_min": 50,
+      "percentile_max": 100,
+      "priority_weight": 72,
+      "scenario_tags": [
+        "personal_growth"
+      ],
+      "difficulty_level": "mid",
+      "time_horizon": "this_week",
+      "title": "Stop unlimited expansion option",
+      "body": "When a growth decision is clear enough, don't delay actually getting in by continuing to look at more possibilities."
+    },
+    {
+      "rule_id": "e_gro_start_low_cost_expression_00_35",
+      "trait_code": "E",
+      "bucket": "start",
+      "percentile_min": 0,
+      "percentile_max": 35,
+      "priority_weight": 78,
+      "scenario_tags": [
+        "personal_growth"
+      ],
+      "difficulty_level": "low",
+      "time_horizon": "this_week",
+      "title": "Create low-cost expression exercises",
+      "body": "Choose a low-stakes scenario each week and express a true preference, a disagreement, or a need without waiting until you are fully ready to express it."
+    },
+    {
+      "rule_id": "a_gro_start_disagree_without_rupture_00_35",
+      "trait_code": "A",
+      "bucket": "start",
+      "percentile_min": 0,
+      "percentile_max": 35,
+      "priority_weight": 80,
+      "scenario_tags": [
+        "personal_growth"
+      ],
+      "difficulty_level": "mid",
+      "time_horizon": "this_week",
+      "title": "Practice \"Don't Comply, But Don't Tear\"",
+      "body": "Practice expressing disagreements clearly rather than cutting them off coldly: talk about shared goals first, then the parts you disagree with."
+    }
+  ]
+}

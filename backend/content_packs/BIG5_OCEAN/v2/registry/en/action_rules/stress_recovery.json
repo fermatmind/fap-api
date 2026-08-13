@@ -1,0 +1,97 @@
+{
+  "schema": "fap.big5.action_rule_pack.v1",
+  "scenario": "stress_recovery",
+  "scenario_title": "Stress Recovery",
+  "rules": [
+    {
+      "rule_id": "n_rec_start_10min_reset_60_79",
+      "trait_code": "N",
+      "bucket": "start",
+      "percentile_min": 60,
+      "percentile_max": 79,
+      "priority_weight": 94,
+      "scenario_tags": [
+        "stress_recovery"
+      ],
+      "difficulty_level": "low",
+      "time_horizon": "today",
+      "title": "Start 10-minute disengagement recovery",
+      "body": "Every time you clearly feel that the load is being stretched, physically disengage for 10 minutes first, and do not continue to carry it while exerting pressure."
+    },
+    {
+      "rule_id": "n_rec_start_protected_reset_block_80_100",
+      "trait_code": "N",
+      "bucket": "start",
+      "percentile_min": 80,
+      "percentile_max": 100,
+      "priority_weight": 98,
+      "scenario_tags": [
+        "stress_recovery"
+      ],
+      "difficulty_level": "mid",
+      "time_horizon": "this_week",
+      "title": "Schedule a protected recovery window",
+      "body": "If your system is in a state of high alert for a long time, please treat the recovery period as a schedule that cannot be diverted at will, rather than waiting to make up for it after everything is over."
+    },
+    {
+      "rule_id": "n_rec_stop_micro_stimulation_60_100",
+      "trait_code": "N",
+      "bucket": "stop",
+      "percentile_min": 60,
+      "percentile_max": 100,
+      "priority_weight": 90,
+      "scenario_tags": [
+        "stress_recovery"
+      ],
+      "difficulty_level": "mid",
+      "time_horizon": "this_week",
+      "title": "Stop brushing and restore at the same time",
+      "body": "Don't scroll through messages and recover at the same time when you're under high load; for you, that's not relaxing, but a different kind of stimulation that continues to hold up the system."
+    },
+    {
+      "rule_id": "n_rec_observe_real_vs_predicted_cost_40_100",
+      "trait_code": "N",
+      "bucket": "observe",
+      "percentile_min": 40,
+      "percentile_max": 100,
+      "priority_weight": 70,
+      "scenario_tags": [
+        "stress_recovery"
+      ],
+      "difficulty_level": "low",
+      "time_horizon": "two_weeks",
+      "title": "Compare expected cost to actual cost",
+      "body": "Record for two consecutive weeks: What is the bad outcome you are worried about and what is the cost of it actually happening, to help the system return to the facts from the rehearsal."
+    },
+    {
+      "rule_id": "e_rec_stop_stimulation_after_conflict_70_100",
+      "trait_code": "E",
+      "bucket": "stop",
+      "percentile_min": 70,
+      "percentile_max": 100,
+      "priority_weight": 84,
+      "scenario_tags": [
+        "stress_recovery"
+      ],
+      "difficulty_level": "mid",
+      "time_horizon": "today",
+      "title": "After the conflict, leave the high-stimulation area first",
+      "body": "When a conflict has just ended, do not immediately switch to a new highly interactive or stimulating context; let the system slow down first, and then decide whether to continue communication."
+    },
+    {
+      "rule_id": "c_rec_start_smallest_restart_step_00_35",
+      "trait_code": "C",
+      "bucket": "start",
+      "percentile_min": 0,
+      "percentile_max": 35,
+      "priority_weight": 76,
+      "scenario_tags": [
+        "stress_recovery"
+      ],
+      "difficulty_level": "low",
+      "time_horizon": "today",
+      "title": "Only perform minimal restart actions after recovery",
+      "body": "After recovery, don't ask yourself to return to full efficiency immediately. Only do a minimal restart action, such as opening a file, listing three items, or completing the first step."
+    }
+  ]
+}

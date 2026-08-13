@@ -628,7 +628,7 @@ final class BigFiveResultPageV2RuntimeWrapper
                 : (is_array(data_get($responsePayload, 'report._meta.big5_public_projection_v1'))
                     ? data_get($responsePayload, 'report._meta.big5_public_projection_v1')
                     : []),
-            'big5_report_engine_v2' => is_array($responsePayload[BigFiveLiveRuntimeBridge::RESPONSE_KEY] ?? null)
+            'big5_report_engine_v2' => data_get($responsePayload, BigFiveLiveRuntimeBridge::RESPONSE_KEY.'.schema_version') === 'fap.big5.report.v1'
                 ? $responsePayload[BigFiveLiveRuntimeBridge::RESPONSE_KEY]
                 : [],
             'scores_json' => is_array($result->scores_json) ? $result->scores_json : [],

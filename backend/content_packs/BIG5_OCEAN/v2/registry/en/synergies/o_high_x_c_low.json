@@ -1,0 +1,46 @@
+{
+  "schema": "fap.big5.synergy_rule.v1",
+  "synergy_id": "o_high_x_c_low",
+  "title": "Complex understanding × follow-through friction",
+  "trigger": {
+    "all": [
+      {
+        "trait": "O",
+        "op": ">=",
+        "value": 70
+      },
+      {
+        "trait": "C",
+        "op": "<=",
+        "value": 35
+      },
+      {
+        "expr": "abs(O-C) >= 25"
+      }
+    ]
+  },
+  "priority_weight_formula": "abs(O-50)+abs(C-50)+abs(O-C)*0.5",
+  "priority_hint": 80,
+  "mutex_group": "execution_friction",
+  "mutual_excludes": [],
+  "max_show": 2,
+  "section_targets": [
+    {
+      "section_key": "core_portrait",
+      "slot": "synergy_primary",
+      "kind": "callout"
+    },
+    {
+      "section_key": "action_plan",
+      "slot": "synergy_action",
+      "kind": "paragraph"
+    }
+  ],
+  "copy": {
+    "headline": "You can see a lot of possibilities, but you don't necessarily necessarily condense them into a sustainable path.",
+    "body": "High openness will allow you to quickly see the layers, variables, and alternative explanations behind the problem, while low conscientiousness will make it easier for long-term dismantling, scheduling, closing, and repeated execution to slow down. The result is: the understanding runs ahead of the execution system, many branches have been opened in the brain, but the advancement of reality requires additional structures to keep up.",
+    "strength_sentence": "This combination makes it less likely that you will be trapped by a single answer, and is more suitable for discovering new questions that cannot be explained by the old framework.",
+    "risk_sentence": "The price is: the more complex the idea, the more likely it is that it will remain between conception, revision and starting over due to the lack of a closing mechanism.",
+    "action_hook": "Your priority action is not to reduce ideas, but to set next steps, cutoff points, and completion criteria for your most valuable ideas."
+  }
+}

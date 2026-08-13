@@ -39,7 +39,7 @@ final class SectionInstructionAssembler
      */
     public function assemble(ReportContext $context, array $blocksBySection, array $synergies, array $facetAnomalies, array $actionMatrix, array $registry): array
     {
-        $blocksBySection['action_plan'] = $this->actionPlanBlocks($actionMatrix);
+        $blocksBySection['action_plan'] = $this->actionPlanBlocks($actionMatrix, $registry);
 
         foreach (array_slice($synergies, 0, 2) as $index => $synergy) {
             $sectionKey = $index === 0 ? 'core_portrait' : 'action_plan';
@@ -92,8 +92,9 @@ final class SectionInstructionAssembler
      * @param  array<string,mixed>  $actionMatrix
      * @return list<ResolvedBlock>
      */
-    private function actionPlanBlocks(array $actionMatrix): array
+    private function actionPlanBlocks(array $actionMatrix, array $registry): array
     {
+        $copy = is_array($registry['shared']['runtime_copy'] ?? null) ? $registry['shared']['runtime_copy'] : [];
         $scenarios = is_array($actionMatrix['scenarios'] ?? null) ? $actionMatrix['scenarios'] : [];
         $topScenario = (string) ($actionMatrix['top_priority_scenario'] ?? '');
         $topScenarioPayload = null;
@@ -112,8 +113,8 @@ final class SectionInstructionAssembler
                 component: 'BigFiveActionMatrixIntro',
                 blockId: 'action_matrix_intro_v1',
                 resolvedCopy: [
-                    'title' => '行动建议会按场景落地，而不是把人格分数翻译成泛泛提醒。',
-                    'body' => '这里会把当前分值命中的动作按工作、关系、压力恢复和个人成长拆开，并固定放入继续、开始、停止、观察四类动作，帮助你先做最有现实价值的一步。',
+                    'title' => (string) data_get($copy, 'action_matrix.intro.title', ''),
+                    'body' => (string) data_get($copy, 'action_matrix.intro.body', ''),
                 ],
                 provenance: $this->provenanceRecorder->record(actionRefs: ['action_rules/*']),
                 analytics: ['slot' => 'action_matrix_intro'],
@@ -127,8 +128,8 @@ final class SectionInstructionAssembler
                 component: 'BigFiveActionMatrixTopPriority',
                 blockId: "action_matrix_top_priority_{$topScenario}",
                 resolvedCopy: [
-                    'title' => '优先场景：'.(string) ($topScenarioPayload['title'] ?? $topScenario),
-                    'body' => '这组动作在当前分值结构中命中数量和优先级更高，适合作为这份报告的行动入口。',
+                    'title' => (string) data_get($copy, 'action_matrix.priority_prefix', '').(string) ($topScenarioPayload['title'] ?? $topScenario),
+                    'body' => (string) data_get($copy, 'action_matrix.priority_body', ''),
                     'scenario_key' => $topScenario,
                 ],
                 provenance: $this->provenanceRecorder->record(actionRefs: ["action_rules/{$topScenario}.json"]),
@@ -153,7 +154,7 @@ final class SectionInstructionAssembler
                 }
                 $items[] = [
                     'bucket' => $bucket,
-                    'label' => $this->bucketLabel($bucket),
+                    'label' => (string) data_get($copy, "action_matrix.bucket_labels.{$bucket}", $bucket),
                     'rule_id' => (string) ($rule['rule_id'] ?? ''),
                     'title' => (string) ($rule['title'] ?? ''),
                     'body' => (string) ($rule['body'] ?? ''),
@@ -172,7 +173,7 @@ final class SectionInstructionAssembler
                 component: 'BigFiveActionMatrixScenarioBullets',
                 blockId: "action_matrix_scenario_{$scenarioKey}",
                 resolvedCopy: [
-                    'title' => "{$title}｜下一步动作",
+                    'title' => $title.(string) data_get($copy, 'action_matrix.next_steps_suffix', ''),
                     'scenario_key' => $scenarioKey,
                     'items' => $items,
                 ],
@@ -188,17 +189,6 @@ final class SectionInstructionAssembler
         return $blocks;
     }
 
-    private function bucketLabel(string $bucket): string
-    {
-        return match ($bucket) {
-            'continue' => '继续',
-            'start' => '开始',
-            'stop' => '停止',
-            'observe' => '观察',
-            default => $bucket,
-        };
-    }
-
     /**
      * @param  list<FacetAnomalyMatch>  $facetAnomalies
      * @param  array<string,mixed>  $registry
@@ -206,6 +196,7 @@ final class SectionInstructionAssembler
      */
     private function facetDetailsBlocks(ReportContext $context, array $facetAnomalies, array $registry): array
     {
+        $copy = is_array($registry['shared']['runtime_copy'] ?? null) ? $registry['shared']['runtime_copy'] : [];
         $blocks = [
             new ResolvedBlock(
                 blockUid: 'facet_details.precision_intro',
@@ -213,8 +204,8 @@ final class SectionInstructionAssembler
                 component: 'BigFiveFacetPrecisionIntro',
                 blockId: 'facet_precision_intro_v1',
                 resolvedCopy: [
-                    'title' => '细分维度不是 30 个分数的列表，而是结构性偏离的线索。',
-                    'body' => '这里会优先展开那些明显高于或低于所属维度的 facet：它们往往解释“你为什么不是表面总分看起来的那一种人”，也能帮助区分能力、动机、表达和恢复成本。',
+                    'title' => (string) data_get($copy, 'facet_details.intro.title', ''),
+                    'body' => (string) data_get($copy, 'facet_details.intro.body', ''),
                 ],
                 provenance: $this->provenanceRecorder->record(facetRefs: ['facet_glossary/*']),
                 analytics: ['slot' => 'facet_precision_intro'],
@@ -261,8 +252,8 @@ final class SectionInstructionAssembler
                 component: 'BigFiveFacetAnomalyOverflowCallout',
                 blockId: 'facet_anomaly_overflow_v1',
                 resolvedCopy: [
-                    'title' => '还有一些结构性偏离被记录，但不在主卡中展开。',
-                    'body' => '为避免把 facet_details 变成过长列表，报告只展开前三条最值得优先阅读的异常，其余命中会保留在 engine_decisions 中供后续渲染或分析使用。',
+                    'title' => (string) data_get($copy, 'facet_details.overflow.title', ''),
+                    'body' => (string) data_get($copy, 'facet_details.overflow.body', ''),
                     'items' => $overflow,
                 ],
                 provenance: $this->provenanceRecorder->record(facetRefs: array_map(

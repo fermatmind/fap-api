@@ -1,0 +1,28 @@
+{
+  "schema": "fap.big5.runtime_copy.v1",
+  "action_matrix": {
+    "intro": {
+      "title": "Action guidance is organized by real-life context, not reduced to generic reminders from personality scores.",
+      "body": "Your matched actions are grouped into work, relationships, stress recovery, and personal growth, then sorted into continue, start, stop, and observe so you can begin with the most useful next step."
+    },
+    "priority_prefix": "Priority context: ",
+    "priority_body": "This context has the strongest combination of matched actions and priority weights, making it a practical entry point for this report.",
+    "next_steps_suffix": " | Next steps",
+    "bucket_labels": {
+      "continue": "Continue",
+      "start": "Start",
+      "stop": "Stop",
+      "observe": "Observe"
+    }
+  },
+  "facet_details": {
+    "intro": {
+      "title": "Facets are not merely a list of 30 scores; they reveal meaningful departures from the broader trait pattern.",
+      "body": "This section highlights facets that sit clearly above or below their parent domain. These differences can explain why the overall score does not tell the whole story and help separate motivation, expression, and recovery cost without treating a score as ability."
+    },
+    "overflow": {
+      "title": "Additional facet differences were detected but are not expanded in the main cards.",
+      "body": "To keep this section focused, the report expands the three highest-priority patterns. Other matches remain in engine_decisions for compatible rendering or analysis."
+    }
+  }
+}

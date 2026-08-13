@@ -25,9 +25,9 @@ final class RegistryLoader
     /**
      * @return array<string,mixed>
      */
-    public function load(): array
+    public function load(?string $locale = null): array
     {
-        $root = $this->registryPath ?? base_path('content_packs/BIG5_OCEAN/v2/registry');
+        $root = $this->registryRoot($locale);
         $atomic = [];
         $modifiers = [];
         $facetGlossary = [];
@@ -68,8 +68,25 @@ final class RegistryLoader
                 'trait_labels' => $this->readJson($root.'/shared/trait_labels.json'),
                 'band_labels' => $this->readJson($root.'/shared/band_labels.json'),
                 'gradient_labels' => $this->readJson($root.'/shared/gradient_labels.json'),
+                'runtime_copy' => $this->readJson($root.'/shared/runtime_copy.json'),
             ],
         ];
+    }
+
+    private function registryRoot(?string $locale): string
+    {
+        $root = $this->registryPath ?? base_path('content_packs/BIG5_OCEAN/v2/registry');
+        $normalized = strtolower(trim((string) $locale));
+
+        if ($normalized === '' || $normalized === 'zh' || str_starts_with($normalized, 'zh-')) {
+            return $root;
+        }
+
+        if ($normalized === 'en' || str_starts_with($normalized, 'en-')) {
+            return $root.'/en';
+        }
+
+        throw new UnsupportedRegistryLocale("Big Five report engine registry unavailable for locale: {$locale}");
     }
 
     /**

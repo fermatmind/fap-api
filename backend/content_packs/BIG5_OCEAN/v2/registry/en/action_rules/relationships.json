@@ -1,0 +1,127 @@
+{
+  "schema": "fap.big5.action_rule_pack.v1",
+  "scenario": "relationships",
+  "scenario_title": "Relationships",
+  "rules": [
+    {
+      "rule_id": "a_rel_start_boundary_sentence_00_35",
+      "trait_code": "A",
+      "bucket": "start",
+      "percentile_min": 0,
+      "percentile_max": 35,
+      "priority_weight": 88,
+      "scenario_tags": [
+        "relationships"
+      ],
+      "difficulty_level": "mid",
+      "time_horizon": "this_week",
+      "title": "Practice a low-cost boundary expression",
+      "body": "Prepare a boundary sentence in advance: It’s not that I disagree with you as a person, I just disagree with the way this matter is being done."
+    },
+    {
+      "rule_id": "a_rel_stop_win_point_00_35",
+      "trait_code": "A",
+      "bucket": "stop",
+      "percentile_min": 0,
+      "percentile_max": 35,
+      "priority_weight": 84,
+      "scenario_tags": [
+        "relationships"
+      ],
+      "difficulty_level": "mid",
+      "time_horizon": "this_week",
+      "title": "Stop focusing on winning, regardless of relationship support",
+      "body": "When you have made your point clear, don't continue to push the other person into a defensive position; first make sure the other person can still catch it."
+    },
+    {
+      "rule_id": "e_rel_start_one_true_sentence_00_35",
+      "trait_code": "E",
+      "bucket": "start",
+      "percentile_min": 0,
+      "percentile_max": 35,
+      "priority_weight": 90,
+      "scenario_tags": [
+        "relationships"
+      ],
+      "difficulty_level": "low",
+      "time_horizon": "this_week",
+      "title": "Tell me your true thoughts first",
+      "body": "Before you are ready to continue to remain silent, say something true but not necessarily complete, so that there is an entrance in the relationship that can continue to catch you."
+    },
+    {
+      "rule_id": "e_rel_stop_speed_as_pressure_70_100",
+      "trait_code": "E",
+      "bucket": "stop",
+      "percentile_min": 70,
+      "percentile_max": 100,
+      "priority_weight": 90,
+      "scenario_tags": [
+        "relationships"
+      ],
+      "difficulty_level": "mid",
+      "time_horizon": "this_week",
+      "title": "Stop putting pressure on relationships with speed",
+      "body": "When you quickly want to finish talking about a problem, characterize it, or push forward the results, give the other party some time to sort things out first to avoid the speed itself becoming pressure."
+    },
+    {
+      "rule_id": "n_rel_observe_discomfort_before_withdrawal_60_100",
+      "trait_code": "N",
+      "bucket": "observe",
+      "percentile_min": 60,
+      "percentile_max": 100,
+      "priority_weight": 80,
+      "scenario_tags": [
+        "relationships"
+      ],
+      "difficulty_level": "low",
+      "time_horizon": "two_weeks",
+      "title": "Identify the source of discomfort first, then back off",
+      "body": "When you want to withdraw directly, first mark whether the discomfort comes from being misunderstood, having boundaries touched, or from an increased sense of loss of control."
+    },
+    {
+      "rule_id": "n_rel_continue_name_need_before_escalation_60_100",
+      "trait_code": "N",
+      "bucket": "continue",
+      "percentile_min": 60,
+      "percentile_max": 100,
+      "priority_weight": 76,
+      "scenario_tags": [
+        "relationships"
+      ],
+      "difficulty_level": "low",
+      "time_horizon": "this_week",
+      "title": "First name the need, then talk about right and wrong",
+      "body": "Continue to translate high somatosensory into understandable needs, such as my need for clearer timing, boundaries, or responses, rather than jumping straight into who is right and who is wrong."
+    },
+    {
+      "rule_id": "o_rel_continue_hold_two_interpretations_50_100",
+      "trait_code": "O",
+      "bucket": "continue",
+      "percentile_min": 50,
+      "percentile_max": 100,
+      "priority_weight": 66,
+      "scenario_tags": [
+        "relationships"
+      ],
+      "difficulty_level": "low",
+      "time_horizon": "this_week",
+      "title": "Reserve both interpretations before jumping to conclusions",
+      "body": "Continue to use your ability to understand complex motivations, but before characterizing the other person, keep two possible explanations in mind to avoid using complexity only to amplify worries."
+    },
+    {
+      "rule_id": "c_rel_stop_wait_for_perfect_timing_00_35",
+      "trait_code": "C",
+      "bucket": "stop",
+      "percentile_min": 0,
+      "percentile_max": 35,
+      "priority_weight": 74,
+      "scenario_tags": [
+        "relationships"
+      ],
+      "difficulty_level": "mid",
+      "time_horizon": "this_week",
+      "title": "Stop waiting for the perfect time to communicate",
+      "body": "If something has been consuming you repeatedly, don’t wait for the right moment; start it with a small sentence instead of waiting until the emotions build up and finish it all at once."
+    }
+  ]
+}
