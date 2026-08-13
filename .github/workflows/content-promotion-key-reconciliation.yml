@@ -121,7 +121,7 @@ jobs:
         run: |
           set -euo pipefail
           run_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}")"
-          jq -e --arg sha "$EXPECTED_CONTROL_PLANE_SHA" --argjson attempt "$PREFLIGHT_RUN_ATTEMPT" '.name == "Content Promotion Key Reconciliation" and .event == "workflow_dispatch" and .status == "completed" and .conclusion == "success" and .head_sha == $sha and .run_attempt == $attempt' <<<"$run_json" >/dev/null
+          jq -e --arg sha "$EXPECTED_CONTROL_PLANE_SHA" --argjson attempt "$PREFLIGHT_RUN_ATTEMPT" '.path == ".github/workflows/content-promotion-key-reconciliation.yml" and .event == "workflow_dispatch" and .status == "completed" and .conclusion == "success" and .head_sha == $sha and .run_attempt == $attempt' <<<"$run_json" >/dev/null
           dir="$(mktemp -d)"
           gh run download "$PREFLIGHT_RUN_ID" --name "content-promotion-key-reconciliation-${PREFLIGHT_RUN_ID}-${PREFLIGHT_RUN_ATTEMPT}" --dir "$dir"
           receipt="$dir/content-promotion-key-reconciliation.json"
