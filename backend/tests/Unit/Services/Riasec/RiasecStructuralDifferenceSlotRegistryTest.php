@@ -299,6 +299,100 @@ final class RiasecStructuralDifferenceSlotRegistryTest extends TestCase
         $this->assertStringContainsString('未完成题目', implode('', data_get($incompleteProjection, 'quality.display_v1.reasons')));
     }
 
+    public function test_dimension_projection_selects_one_backend_owned_score_band_and_prioritizes_top_three(): void
+    {
+        $result = new Result;
+        $result->scale_code = 'RIASEC';
+        $result->type_code = 'RIA';
+        $result->scores_pct = ['R' => 90, 'I' => 75, 'A' => 67, 'S' => 67, 'E' => 34, 'C' => 20];
+        $result->result_json = [
+            'top_code' => 'RIA', 'form_code' => 'riasec_60', 'answer_count' => 60,
+            'quality_grade' => 'A', 'quality_flags' => [],
+        ];
+
+        $projection = $this->projectionService()->buildV2FromResult($result, 'zh-CN');
+        $bandContract = data_get($projection, 'dimension_score_band_contract_v1');
+        $this->assertSame('riasec.dimension_score_band.v1', $bandContract['schema_version']);
+        $this->assertSame('criterion_referenced_normalized_score_range', $bandContract['method']);
+        $this->assertSame('equal_width_normalized_response_scale_ranges', $bandContract['descriptive_basis']);
+        $this->assertFalse($bandContract['percentile_interpretation_allowed']);
+        $this->assertFalse($bandContract['normative_interpretation_allowed']);
+        $this->assertSame(67, data_get($bandContract, 'thresholds.high.min_inclusive'));
+        $slots = array_values(array_filter(
+            (array) data_get($projection, 'deep_content_slots_v1.slots'),
+            static fn (array $slot): bool => ($slot['slot_key'] ?? null) === 'dimension_deep_copy'
+        ));
+
+        $this->assertCount(6, $slots);
+        $expected = [
+            'R' => [1, true, 'high', 'high_score_reading'],
+            'I' => [2, true, 'high', 'high_score_reading'],
+            'A' => [3, true, 'high', 'high_score_reading'],
+            'S' => [3, true, 'high', 'high_score_reading'],
+            'E' => [5, false, 'medium', 'medium_score_reading'],
+            'C' => [6, false, 'low', 'low_score_safe_reading'],
+        ];
+        foreach ($slots as $slot) {
+            $code = (string) data_get($slot, 'selection_v1.dimension_code');
+            [$rank, $isTopThree, $band, $detailKey] = $expected[$code];
+            $this->assertSame($rank, data_get($slot, 'selection_v1.rank'));
+            $this->assertSame($isTopThree, data_get($slot, 'selection_v1.is_top_three'));
+            $this->assertSame($band, data_get($slot, 'selection_v1.score_band'));
+            $this->assertSame($detailKey, data_get($slot, 'selection_v1.selected_detail_key'));
+            $this->assertSame($isTopThree ? 'visible' : 'collapsed', $slot['slot_visibility']);
+            $this->assertArrayHasKey($detailKey, $slot['content']);
+            $this->assertCount(1, array_intersect(
+                ['high_score_reading', 'medium_score_reading', 'low_score_safe_reading'],
+                array_keys($slot['content'])
+            ));
+        }
+
+        $lowQualityPayload = $result->result_json;
+        $lowQualityPayload['answer_count'] = 52;
+        $result->result_json = $lowQualityPayload;
+        $lowQualityProjection = $this->projectionService()->buildV2FromResult($result, 'zh-CN');
+        $this->assertEmpty(array_filter(
+            (array) data_get($lowQualityProjection, 'deep_content_slots_v1.slots'),
+            static fn (array $slot): bool => ($slot['slot_key'] ?? null) === 'dimension_deep_copy'
+        ));
+
+        foreach ([['R' => 101], ['R' => -1], ['R' => 'not-a-score']] as $invalid) {
+            $invalidResult = clone $result;
+            $invalidPayload = $invalidResult->result_json;
+            $invalidPayload['answer_count'] = 60;
+            $invalidResult->result_json = $invalidPayload;
+            $invalidResult->scores_pct = array_merge(['R' => 90, 'I' => 75, 'A' => 67, 'S' => 60, 'E' => 34, 'C' => 20], $invalid);
+            $invalidProjection = $this->projectionService()->buildV2FromResult($invalidResult, 'zh-CN');
+            $this->assertEmpty(array_filter(
+                (array) data_get($invalidProjection, 'deep_content_slots_v1.slots'),
+                static fn (array $slot): bool => ($slot['slot_key'] ?? null) === 'dimension_deep_copy'
+            ));
+        }
+
+        foreach ([[33.99, 'low'], [34, 'medium'], [66.99, 'medium'], [67, 'high']] as [$score, $expectedBand]) {
+            $boundaryResult = clone $result;
+            $boundaryPayload = $boundaryResult->result_json;
+            $boundaryPayload['answer_count'] = 60;
+            $boundaryResult->result_json = $boundaryPayload;
+            $boundaryResult->scores_pct = ['R' => (float) $score, 'I' => 90, 'A' => 80, 'S' => 70, 'E' => 60, 'C' => 50];
+            $boundaryProjection = $this->projectionService()->buildV2FromResult($boundaryResult, 'zh-CN');
+            $rSlot = collect((array) data_get($boundaryProjection, 'deep_content_slots_v1.slots'))
+                ->firstWhere('slot_id', 'dimension_deep_copy:R');
+            $this->assertSame($expectedBand, data_get($rSlot, 'selection_v1.score_band'));
+        }
+
+        $missingDimension = clone $result;
+        $missingDimension->scores_pct = ['R' => 90, 'I' => 75, 'A' => 67, 'S' => 60, 'E' => 34];
+        $completePayload = $missingDimension->result_json;
+        $completePayload['answer_count'] = 60;
+        $missingDimension->result_json = $completePayload;
+        $missingProjection = $this->projectionService()->buildV2FromResult($missingDimension, 'zh-CN');
+        $this->assertEmpty(array_filter(
+            (array) data_get($missingProjection, 'deep_content_slots_v1.slots'),
+            static fn (array $slot): bool => ($slot['slot_key'] ?? null) === 'dimension_deep_copy'
+        ));
+    }
+
     private function attempt(string $id, string $formCode, int $questionCount): Attempt
     {
         $attempt = new Attempt;

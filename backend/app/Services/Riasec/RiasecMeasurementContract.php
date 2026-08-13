@@ -42,6 +42,19 @@ final class RiasecMeasurementContract
                     : 'raw_sum_per_dimension_min10_max50_to_0_100',
                 'raw_score_delta_allowed' => false,
                 'cross_form_raw_delta_allowed' => false,
+                'interpretation_band_contract' => [
+                    'schema_version' => 'riasec.dimension_score_band.v1',
+                    'score_space_versions' => [self::STANDARD_60_SCORE_SPACE, self::ENHANCED_140_SCORE_SPACE],
+                    'method' => 'criterion_referenced_normalized_score_range',
+                    'descriptive_basis' => 'equal_width_normalized_response_scale_ranges',
+                    'percentile_interpretation_allowed' => false,
+                    'normative_interpretation_allowed' => false,
+                    'thresholds' => [
+                        'low' => ['min_inclusive' => 0, 'max_exclusive' => 34],
+                        'medium' => ['min_inclusive' => 34, 'max_exclusive' => 67],
+                        'high' => ['min_inclusive' => 67, 'max_inclusive' => 100],
+                    ],
+                ],
             ],
             'quality' => [
                 'low_quality_strength' => $isEnhanced ? 'caution_flags_available' : 'not_available_for_strong_low_quality',

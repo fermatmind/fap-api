@@ -76,6 +76,7 @@ final class RiasecPublicProjectionService
                 'raw_score_delta_allowed' => false,
                 'cross_form_interpretation' => 'emphasis_difference_only',
             ],
+            'dimension_score_band_contract_v1' => data_get($measurementContract, 'scoring.interpretation_band_contract', []),
             'measurement_contract_v1' => $measurementContract,
             'compare_policy_v1' => $comparePolicy,
             'enhanced_breakdown' => [
@@ -92,6 +93,10 @@ final class RiasecPublicProjectionService
     public function buildV2FromResult(Result $result, string $locale = 'zh-CN', bool $snapshotBound = false): array
     {
         $payload = is_array($result->result_json ?? null) ? $result->result_json : [];
+        $rawDimensionScores = is_array($result->scores_pct ?? null) ? $result->scores_pct : [];
+        if ($rawDimensionScores === [] && is_array($payload['scores_0_100'] ?? null)) {
+            $rawDimensionScores = $payload['scores_0_100'];
+        }
         $v1 = $this->buildFromResult($result, $locale);
         $measurementContract = is_array($v1['measurement_contract_v1'] ?? null)
             ? $v1['measurement_contract_v1']
@@ -110,6 +115,7 @@ final class RiasecPublicProjectionService
         $interpretationRule = $this->interpretationRuleContract->build($payload, $qualityRule);
 
         $projection = [
+            '_dimension_scores_complete' => $this->hasCompleteValidDimensionScores($rawDimensionScores),
             'schema_version' => 'riasec.public_projection.v2',
             'scale_code' => 'RIASEC',
             'locale' => str_starts_with(strtolower($locale), 'zh') ? 'zh-CN' : 'en',
@@ -133,6 +139,7 @@ final class RiasecPublicProjectionService
                 'raw_score_delta_allowed' => false,
                 'cross_form_interpretation' => 'emphasis_difference_only',
             ],
+            'dimension_score_band_contract_v1' => data_get($v1, 'dimension_score_band_contract_v1', []),
             'structural_difference' => $this->structuralDifferencePolicy($formCode, $qualityRule['quality_state'] ?? 'normal', $payload, $comparePolicy),
             'measurement_evidence' => [
                 'measurement_contract_version' => (string) ($measurementContract['schema_version'] ?? RiasecMeasurementContract::SCHEMA_VERSION),
@@ -199,6 +206,7 @@ final class RiasecPublicProjectionService
         $projection['deep_content_slots_v1'] = $this->deepContentSlotsEnvelope($projection, $locale);
         $projection['exploration_feedback_overlay_v0_1'] = $this->feedbackOverlay->build($result, $projection, $snapshotBound, $locale);
         $projection['lifecycle_copy_v1'] = $this->lifecycleCopy->runtimeLifecycleCopyContract($snapshotBound, $locale);
+        unset($projection['_dimension_scores_complete']);
 
         return $projection;
     }
@@ -215,8 +223,15 @@ final class RiasecPublicProjectionService
         $modulePolicy = is_array($projection['module_visibility_policy'] ?? null) ? $projection['module_visibility_policy'] : [];
 
         $slots = [];
-        foreach ($this->deepCopySlots->dimensionSlots() as $slot) {
-            $this->appendRenderableSlot($slots, $slot, 'six_dimension_map', $modulePolicy, $locale);
+        foreach ($this->selectedDimensionSlots($projection) as $slot) {
+            $this->appendRenderableSlot(
+                $slots,
+                $slot,
+                'six_dimension_map',
+                $modulePolicy,
+                $locale,
+                (bool) data_get($slot, 'selection_v1.is_top_three', false) ? 'visible' : 'collapsed'
+            );
         }
 
         $top3Key = $this->selectedTop3Key($topCode);
@@ -388,6 +403,87 @@ final class RiasecPublicProjectionService
         }
 
         return $pairs;
+    }
+
+    /**
+     * @param  array<string,mixed>  $projection
+     * @return list<array<string,mixed>>
+     */
+    private function selectedDimensionSlots(array $projection): array
+    {
+        $qualityState = (string) data_get($projection, 'quality.quality_state', 'normal');
+        if (in_array($qualityState, ['low_quality', 'retake_recommended'], true)) {
+            return [];
+        }
+        if (($projection['_dimension_scores_complete'] ?? false) !== true) {
+            return [];
+        }
+
+        $scoreRows = array_values(array_filter(
+            (array) data_get($projection, 'scores.dimensions', []),
+            static fn (mixed $row): bool => is_array($row) && in_array((string) ($row['code'] ?? ''), RiasecDeepCopySlotRegistry::DIMENSIONS, true)
+        ));
+        usort($scoreRows, static function (array $left, array $right): int {
+            $scoreOrder = ((float) ($right['score'] ?? 0)) <=> ((float) ($left['score'] ?? 0));
+            if ($scoreOrder !== 0) {
+                return $scoreOrder;
+            }
+
+            return array_search((string) ($left['code'] ?? ''), RiasecDeepCopySlotRegistry::DIMENSIONS, true)
+                <=> array_search((string) ($right['code'] ?? ''), RiasecDeepCopySlotRegistry::DIMENSIONS, true);
+        });
+        $ranks = [];
+        $previousScore = null;
+        $previousRank = 0;
+        foreach ($scoreRows as $index => $row) {
+            $score = (float) ($row['score'] ?? 0);
+            $rank = $previousScore !== null && abs($previousScore - $score) < 0.000001 ? $previousRank : $index + 1;
+            $ranks[(string) $row['code']] = $rank;
+            $previousScore = $score;
+            $previousRank = $rank;
+        }
+
+        $slots = [];
+        foreach ($scoreRows as $row) {
+            $dimensionCode = (string) $row['code'];
+            $score = max(0.0, min(100.0, (float) ($row['score'] ?? 0)));
+            [$scoreBand, $selectedDetailKey] = $score >= 67
+                ? ['high', 'high_score_reading']
+                : ($score >= 34 ? ['medium', 'medium_score_reading'] : ['low', 'low_score_safe_reading']);
+            $slot = $this->deepCopySlots->resolveDimensionSlot($dimensionCode);
+            if (($slot[$selectedDetailKey] ?? null) === null || trim((string) $slot[$selectedDetailKey]) === '') {
+                continue;
+            }
+            $slot['selection_v1'] = [
+                'schema_version' => 'riasec.dimension_interpretation_selection.v1',
+                'dimension_code' => $dimensionCode,
+                'rank' => $ranks[$dimensionCode],
+                'is_top_three' => $ranks[$dimensionCode] <= 3,
+                'score_band' => $scoreBand,
+                'selected_detail_key' => $selectedDetailKey,
+            ];
+            $slots[] = $slot;
+        }
+
+        return $slots;
+    }
+
+    /**
+     * @param  array<string,mixed>  $scores
+     */
+    private function hasCompleteValidDimensionScores(array $scores): bool
+    {
+        foreach (RiasecDeepCopySlotRegistry::DIMENSIONS as $dimension) {
+            if (! array_key_exists($dimension, $scores) || ! is_numeric($scores[$dimension])) {
+                return false;
+            }
+            $score = (float) $scores[$dimension];
+            if (! is_finite($score) || $score < 0 || $score > 100) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -769,7 +865,15 @@ final class RiasecPublicProjectionService
             'selection_basis',
         ];
         $content = [];
+        $selection = is_array($slot['selection_v1'] ?? null) ? $slot['selection_v1'] : null;
         foreach ($contentKeys as $key) {
+            if (
+                $selection !== null
+                && in_array($key, ['high_score_reading', 'medium_score_reading', 'low_score_safe_reading'], true)
+                && $key !== ($selection['selected_detail_key'] ?? null)
+            ) {
+                continue;
+            }
             if (array_key_exists($key, $slot) && $slot[$key] !== null && $slot[$key] !== '' && $slot[$key] !== []) {
                 $content[$key] = $slot[$key];
             }
@@ -791,6 +895,7 @@ final class RiasecPublicProjectionService
             'locale' => (string) ($slot['locale'] ?? (str_starts_with(strtolower($locale), 'zh') ? 'zh-CN' : 'en')),
             'frontend_fallback_allowed' => false,
             'fallback_behavior' => (string) ($slot['fallback_behavior'] ?? 'omit_module'),
+            'selection_v1' => $selection,
             'applicability' => [
                 'form_codes' => array_values((array) ($slot['applicable_form_codes'] ?? [])),
                 'profile_shapes' => array_values((array) ($slot['applicable_profile_shapes'] ?? [])),
