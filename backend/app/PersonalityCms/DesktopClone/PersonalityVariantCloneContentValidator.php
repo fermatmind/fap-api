@@ -55,7 +55,7 @@ final class PersonalityVariantCloneContentValidator
             'content.hero.profile_identity.code' => ['required', 'string'],
             'content.hero.profile_identity.name' => ['required', 'string'],
             'content.hero.profile_identity.nickname' => ['required', 'string'],
-            'content.hero.profile_identity.rarity' => ['required', 'string'],
+            'content.hero.profile_identity.rarity' => ['present', 'nullable', 'string'],
             'content.hero.profile_identity.keywords' => ['required', 'array', 'size:6'],
             'content.hero.profile_identity.keywords.*' => ['required', 'string'],
             'content.intro' => ['required', 'array'],

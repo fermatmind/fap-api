@@ -97,7 +97,7 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             ->assertJsonPath('content.hero.profile_identity.code', 'INFJ-A')
             ->assertJsonPath('content.hero.profile_identity.name', 'name infj-a')
             ->assertJsonPath('content.hero.profile_identity.nickname', 'nickname infj-a')
-            ->assertJsonPath('content.hero.profile_identity.rarity', '约 2–5%')
+            ->assertJsonPath('content.hero.profile_identity.rarity', null)
             ->assertJsonPath('content.hero.profile_identity.keywords.0', 'keyword 1 infj-a')
             ->assertJsonPath('content.intro.paragraphs.0', 'intro paragraph 1 infj-a')
             ->assertJsonPath('content.traits.summaryPane.title', 'traits title infj-a')
@@ -149,6 +149,8 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             ->assertJsonPath('asset_slots.0.slot_id', PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_HERO_ILLUSTRATION)
             ->assertJsonPath('asset_slots.0.status', PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER)
             ->assertJsonPath('asset_slots.0.asset_ref', null)
+            ->assertJsonPath('asset_slots.0.label', '人格类型插图')
+            ->assertJsonPath('asset_slots.0.alt', '')
             ->assertJsonPath('asset_slots.1.slot_id', PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_TRAITS_ILLUSTRATION)
             ->assertJsonPath('asset_slots.1.status', PersonalityDesktopCloneAssetSlotSupport::STATUS_READY)
             ->assertJsonPath('asset_slots.1.asset_ref.provider', PersonalityDesktopCloneAssetSlotSupport::ASSET_PROVIDER_CDN)
@@ -261,7 +263,8 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             ->assertJsonPath('asset_slots.0.slot_id', PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_HERO_ILLUSTRATION)
             ->assertJsonPath('asset_slots.0.status', PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER)
             ->assertJsonPath('asset_slots.1.slot_id', PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_TRAITS_ILLUSTRATION)
-            ->assertJsonPath('asset_slots.1.label', 'Traits ready')
+            ->assertJsonPath('asset_slots.1.label', '偏好维度插图')
+            ->assertJsonPath('asset_slots.1.alt', '')
             ->assertJsonPath('asset_slots.1.status', PersonalityDesktopCloneAssetSlotSupport::STATUS_READY)
             ->assertJsonPath('asset_slots.1.asset_ref.path', 'mbti/desktop/traits/infj-a/canonical.webp');
 
@@ -351,7 +354,7 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             ->assertJsonPath('content.hero.profile_identity.code', 'ENFJ-T')
             ->assertJsonPath('content.hero.profile_identity.name', '主人公型')
             ->assertJsonPath('content.hero.profile_identity.nickname', '温柔引路人')
-            ->assertJsonPath('content.hero.profile_identity.rarity', '约 2–5%')
+            ->assertJsonPath('content.hero.profile_identity.rarity', null)
             ->assertJsonPath('content.hero.profile_identity.keywords', [
                 '共情',
                 '愿景感',
