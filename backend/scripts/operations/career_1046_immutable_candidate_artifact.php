@@ -306,6 +306,7 @@ final class Career1046ImmutableCandidateArtifactProducer
             $fullLedger = self::mergeActiveBaselineLedger(
                 $fullLedger,
                 is_array($activeAuthority['ledger'] ?? null) ? $activeAuthority['ledger'] : [],
+                is_array($activeAuthority['projection'] ?? null) ? $activeAuthority['projection'] : [],
                 $manifest,
             );
 
@@ -507,11 +508,16 @@ final class Career1046ImmutableCandidateArtifactProducer
      *
      * @param  array<string, mixed>  $fullLedger
      * @param  array<string, mixed>  $activeLedger
+     * @param  array<string, mixed>  $activeProjection
      * @param  array<string, mixed>  $manifest
      * @return array<string, mixed>
      */
-    public static function mergeActiveBaselineLedger(array $fullLedger, array $activeLedger, array $manifest): array
-    {
+    public static function mergeActiveBaselineLedger(
+        array $fullLedger,
+        array $activeLedger,
+        array $activeProjection,
+        array $manifest,
+    ): array {
         $baseline = self::frozenSlugSet($manifest['baseline_slugs'] ?? null, 'BASELINE');
         self::frozenTargetSlugs($manifest);
         if (($activeLedger['ledger_kind'] ?? null) !== CareerFullReleaseLedgerService::LEDGER_KIND) {
@@ -532,6 +538,7 @@ final class Career1046ImmutableCandidateArtifactProducer
         }
 
         $baselineLookup = array_fill_keys($baseline, true);
+        self::activePublishedBaselineProjection($activeProjection, $baseline);
         $activeBySlug = [];
         foreach ($activeRows as $row) {
             if (! is_array($row)) {
@@ -544,7 +551,16 @@ final class Career1046ImmutableCandidateArtifactProducer
             if (isset($activeBySlug[$slug])) {
                 throw new Career1046ImmutableCandidateArtifactFailure('ACTIVE_BASELINE_LEDGER_DUPLICATE');
             }
-            $activeBySlug[$slug] = $row;
+            // The bootstrap generation deliberately preserves legacy ledger
+            // bytes. Its active projection is the authority for public state.
+            $activeBySlug[$slug] = [
+                ...$row,
+                'public_resolution_type' => \App\Console\Commands\CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB,
+                'public_eligible' => true,
+                'indexability' => 'indexable',
+                'public_index_state' => 'indexable',
+                'release_cohort' => 'public_detail_indexable',
+            ];
         }
         $activeSlugs = array_keys($activeBySlug);
         sort($activeSlugs, SORT_STRING);
@@ -582,6 +598,52 @@ final class Career1046ImmutableCandidateArtifactProducer
         }
 
         return $fullLedger;
+    }
+
+    /**
+     * @param  array<string, mixed>  $activeProjection
+     * @param  list<string>  $baseline
+     * @return array<string, array<string, array<string, mixed>>>
+     */
+    private static function activePublishedBaselineProjection(array $activeProjection, array $baseline): array
+    {
+        $items = $activeProjection['items'] ?? null;
+        if (! is_array($items) || ! array_is_list($items)) {
+            throw new Career1046ImmutableCandidateArtifactFailure('CANDIDATE_PROJECTION_AUTHORITY_INCOMPLETE');
+        }
+        $baselineLookup = array_fill_keys($baseline, true);
+        $bySlug = [];
+        foreach ($items as $item) {
+            if (! is_array($item)) {
+                throw new Career1046ImmutableCandidateArtifactFailure('CANDIDATE_PROJECTION_AUTHORITY_INCOMPLETE');
+            }
+            $slug = strtolower(trim((string) ($item['slug'] ?? '')));
+            if (! isset($baselineLookup[$slug])) {
+                continue;
+            }
+            $locale = trim((string) ($item['locale'] ?? ''));
+            if (! in_array($locale, CareerRuntimePublishProjectionService::LOCALES, true)
+                || isset($bySlug[$slug][$locale])
+                || ($item['public_resolution_type'] ?? null) !== \App\Console\Commands\CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB
+                || ($item['runtime_publish_state'] ?? null) !== CareerRuntimePublishProjectionService::STATE_PUBLISHED
+                || ($item['detail_route_enabled'] ?? null) !== true
+                || ($item['robots_indexable'] ?? null) !== true
+                || ($item['release_gate_pass'] ?? null) !== true) {
+                throw new Career1046ImmutableCandidateArtifactFailure('CANDIDATE_PROJECTION_AUTHORITY_INCOMPLETE');
+            }
+            $bySlug[$slug][$locale] = $item;
+        }
+        foreach ($baseline as $slug) {
+            $locales = array_keys($bySlug[$slug] ?? []);
+            sort($locales, SORT_STRING);
+            $expected = CareerRuntimePublishProjectionService::LOCALES;
+            sort($expected, SORT_STRING);
+            if ($locales !== $expected) {
+                throw new Career1046ImmutableCandidateArtifactFailure('CANDIDATE_PROJECTION_AUTHORITY_INCOMPLETE');
+            }
+        }
+
+        return $bySlug;
     }
 
     /** @param array<string, mixed> $projection @param array<string, mixed> $manifest */
