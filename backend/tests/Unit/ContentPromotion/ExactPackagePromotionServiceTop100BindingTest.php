@@ -9,6 +9,7 @@ use App\Services\ContentPromotion\ExactPackagePromotionService;
 use App\Services\ContentPromotion\PromotionContext;
 use DomainException;
 use ReflectionClass;
+use RuntimeException;
 use Tests\TestCase;
 
 final class ExactPackagePromotionServiceTop100BindingTest extends TestCase
@@ -41,6 +42,32 @@ final class ExactPackagePromotionServiceTop100BindingTest extends TestCase
                 self::assertSame('top100_publish_prestate_drift', $exception->getMessage());
             }
         }
+    }
+
+    public function test_publish_rollback_preserves_only_safe_top100_domain_error_codes(): void
+    {
+        $safe = new DomainException(
+            'top100_publish_failed_rollback_succeeded',
+            previous: new DomainException('top100_frozen_article_revision_not_approved'),
+        );
+        self::assertSame(
+            'top100_frozen_article_revision_not_approved_rollback_succeeded',
+            $this->invokePublishRollbackErrorCode($safe),
+        );
+
+        $unsafe = new RuntimeException('SQLSTATE[23000]: private database detail');
+        self::assertSame(
+            'top100_publish_failed_rollback_succeeded',
+            $this->invokePublishRollbackErrorCode($unsafe),
+        );
+    }
+
+    private function invokePublishRollbackErrorCode(\Throwable $throwable): string
+    {
+        $service = (new ReflectionClass(ExactPackagePromotionService::class))->newInstanceWithoutConstructor();
+        $method = (new ReflectionClass($service))->getMethod('top100PublishRollbackErrorCode');
+
+        return $method->invoke($service, $throwable);
     }
 
     private function invokeBinding(ExactPackagePromotionAdapter $adapter, string $approved): void

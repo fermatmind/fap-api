@@ -101,12 +101,25 @@ final class ExactPackagePromotionService
             $adapter->rollback($context, $rollbackReference);
 
             throw new DomainException(
-                str_starts_with($throwable->getMessage(), 'top100_publish_prestate_drift')
-                    ? 'top100_publish_prestate_drift_rollback_succeeded'
-                    : 'top100_publish_failed_rollback_succeeded',
+                $this->top100PublishRollbackErrorCode($throwable),
                 previous: $throwable,
             );
         }
+    }
+
+    private function top100PublishRollbackErrorCode(Throwable $throwable): string
+    {
+        for ($current = $throwable; $current !== null; $current = $current->getPrevious()) {
+            $message = $current->getMessage();
+            if ($message === 'top100_publish_prestate_drift') {
+                return 'top100_publish_prestate_drift_rollback_succeeded';
+            }
+            if (preg_match('/\Atop100_frozen_[a-z0-9_]{1,58}\z/', $message) === 1) {
+                return $message.'_rollback_succeeded';
+            }
+        }
+
+        return 'top100_publish_failed_rollback_succeeded';
     }
 
     /** @param array{receipt:array<string,mixed>,sha256:string,path:string} $previous */
