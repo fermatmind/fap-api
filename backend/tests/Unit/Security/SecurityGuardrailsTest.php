@@ -371,8 +371,11 @@ final class SecurityGuardrailsTest extends TestCase
 
         $this->assertStringNotContainsString('webfactory/ssh-agent@', $deploy);
         $this->assertStringContainsString('SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}', $deploy);
-        $this->assertStringContainsString('printf \'%s\\n\' "$SSH_PRIVATE_KEY" | ssh-add - >/dev/null 2>&1', $deploy);
-        $this->assertStringContainsString('ssh-add -l >/dev/null 2>&1', $deploy);
+        $this->assertStringContainsString('STAGING_REPO_READ_SSH_KEY: ${{ secrets.STAGING_REPO_READ_SSH_KEY }}', $deploy);
+        $this->assertStringContainsString('printf \'%s\\n\' "$SSH_PRIVATE_KEY" > "$host_identity"', $deploy);
+        $this->assertStringContainsString('printf \'%s\\n\' "$STAGING_REPO_READ_SSH_KEY" | ssh-add - >/dev/null 2>&1', $deploy);
+        $this->assertStringContainsString('ssh-add -l -E sha256', $deploy);
+        $this->assertStringNotContainsString('printf \'%s\\n\' "$SSH_PRIVATE_KEY" | ssh-add -', $deploy);
         $this->assertStringContainsString('ssh-agent -k >/dev/null 2>&1 || true', $deploy);
         $this->assertDoesNotMatchRegularExpression('/ssh-keyscan/', $deploy);
         $this->assertMatchesRegularExpression('/SSH_KNOWN_HOSTS/', $deploy);

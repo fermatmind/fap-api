@@ -397,6 +397,7 @@ jobs:
       OPS_HOST: ${{ secrets.STAGING_OPS_HOST }}
       SSH_RETRY_ATTEMPTS: "3"
       SSH_RETRY_DELAY_SECONDS: "10"
+      STAGING_REPO_READ_KEY_FINGERPRINT: "SHA256:QEePUNkup9dvBt8Ar1sO8W9yeIv3BS+YlNdAb3FXFz0"
 
     steps:
       - name: Checkout code
@@ -536,15 +537,31 @@ jobs:
         shell: bash
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          STAGING_REPO_READ_SSH_KEY: ${{ secrets.STAGING_REPO_READ_SSH_KEY }}
         run: |
           set -euo pipefail
           test -n "$SSH_PRIVATE_KEY"
+          test -n "$STAGING_REPO_READ_SSH_KEY"
+          host_identity="$RUNNER_TEMP/staging-host-identity"
+          install -m 600 /dev/null "$host_identity"
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$host_identity"
+          printf 'DEPLOY_IDENTITY_FILE_STG=%s\n' "$host_identity" >> "$GITHUB_ENV"
+          install -d -m 700 ~/.ssh
+          {
+            printf 'Host %s\n' "$DEPLOY_HOST"
+            printf '  IdentityFile %s\n' "$host_identity"
+            printf '  IdentitiesOnly yes\n'
+            printf '  ForwardAgent no\n'
+          } > ~/.ssh/config
+          chmod 600 ~/.ssh/config
           eval "$(ssh-agent -s)" >/dev/null
           printf 'SSH_AUTH_SOCK=%s\n' "$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
           printf 'SSH_AGENT_PID=%s\n' "$SSH_AGENT_PID" >> "$GITHUB_ENV"
-          printf '%s\n' "$SSH_PRIVATE_KEY" | ssh-add - >/dev/null 2>&1
-          ssh-add -l >/dev/null 2>&1
-          echo "SSH agent key presence verified without disclosing key metadata."
+          printf '%s\n' "$STAGING_REPO_READ_SSH_KEY" | ssh-add - >/dev/null 2>&1
+          fingerprints="$(ssh-add -l -E sha256 | awk '{print $2}')"
+          test "$(wc -l <<<"$fingerprints" | tr -d ' ')" -eq 1
+          test "$(grep -Fxc "$STAGING_REPO_READ_KEY_FINGERPRINT" <<<"$fingerprints")" -eq 1
+          echo "Dedicated runner host identity and repository-read agent identity verified without disclosing key metadata."
 
       - name: Install pinned SSH known_hosts
         if: steps.stale_guard.outputs.skip_deploy != 'true'
@@ -597,6 +614,17 @@ jobs:
           ssh_retry true
           ssh_retry "test -d '$DEPLOY_PATH'"
           echo "SSH and deploy-root preflight passed without disclosing topology."
+
+      - name: Verify forwarded staging repository read access
+        if: steps.stale_guard.outputs.skip_deploy != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh -A -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "GIT_TERMINAL_PROMPT=0 GIT_SSH_COMMAND='ssh -o BatchMode=yes -o IdentitiesOnly=no -o StrictHostKeyChecking=yes' git ls-remote git@github.com:fermatmind/fap-api.git HEAD >/dev/null"
+          echo "STAGING_REPO_READ_VERIFIED=true" >> "$GITHUB_ENV"
+          echo "Forwarded staging repository read access verified without persisting key material remotely."
 
       - name: Queue reload capability preflight
         if: steps.stale_guard.outputs.skip_deploy != 'true'
@@ -1043,9 +1071,10 @@ jobs:
           OPERATION_KEY: ${{ needs.operation-gate.outputs.operation_key }}
         run: |
           set -euo pipefail
+          test "${STAGING_REPO_READ_VERIFIED:-}" = "true"
           mkdir -p artifacts/staging-operation
-          jq -n --arg key "$OPERATION_KEY" --arg sha "$GITHUB_SHA" --argjson run "$GITHUB_RUN_ID" --argjson attempt "$GITHUB_RUN_ATTEMPT" \
-            '{schema:"fermatmind.staging_operation_receipt.v1",operation_key:$key,source_sha:$sha,workflow_run_id:$run,workflow_run_attempt:$attempt,result:"success",environment:"staging"}' \
+          jq -n --arg key "$OPERATION_KEY" --arg sha "$GITHUB_SHA" --arg fingerprint "$STAGING_REPO_READ_KEY_FINGERPRINT" --argjson run "$GITHUB_RUN_ID" --argjson attempt "$GITHUB_RUN_ATTEMPT" \
+            '{schema:"fermatmind.staging_operation_receipt.v1",operation_key:$key,source_sha:$sha,workflow_run_id:$run,workflow_run_attempt:$attempt,result:"success",environment:"staging",repository_read_verified:true,repository_read_key_fingerprint:$fingerprint,agent_forwarded:true,remote_private_key_persisted:false}' \
             > artifacts/staging-operation/receipt.json
 
       - name: Upload staging operation owner receipt
