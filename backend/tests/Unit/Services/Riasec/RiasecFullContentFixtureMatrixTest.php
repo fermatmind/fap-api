@@ -17,11 +17,10 @@ final class RiasecFullContentFixtureMatrixTest extends TestCase
 {
     public function test_frozen_runtime_assets_parse_and_pass_editorial_hygiene_scan(): void
     {
-        $manifestPath = base_path('content_assets/riasec/qa/result_content_freeze.v1.2026-08-13-r4.json');
+        $manifestPath = base_path('content_assets/riasec/qa/result_content_freeze.v1.2026-08-13-r5.json');
         $manifest = json_decode((string) file_get_contents($manifestPath), true, 512, JSON_THROW_ON_ERROR);
         $baseManifest = json_decode((string) file_get_contents(base_path($manifest['base_manifest'])), true, 512, JSON_THROW_ON_ERROR);
         $this->assertSame($manifest['base_package_sha256'], $baseManifest['package_sha256']);
-        $manifest['files'] = array_merge((array) $baseManifest['files'], (array) $manifest['added_files']);
         $this->assertCount($manifest['effective_file_count'], $manifest['files']);
         $packageLines = '';
 
@@ -383,6 +382,43 @@ final class RiasecFullContentFixtureMatrixTest extends TestCase
                 $this->assertStringContainsString($orderedCode.' 是本次测量的有序三字码', (string) data_get($heroSlot, 'content.ordered_code_handling'));
                 $this->assertStringContainsString('不能推断人格身份、能力水平或职业结论', (string) data_get($heroSlot, 'content.core_reading'));
                 $this->assertStringContainsString('不提供岗位答案', (string) data_get($heroSlot, 'content.positive_value'));
+            }
+        }
+    }
+
+    public function test_result_summary_matrix_is_complete_localized_and_bounded(): void
+    {
+        $service = app(RiasecPublicProjectionService::class);
+        $results = [];
+        foreach (self::TARGET_ORDERED_MATRIX as $orderedCodes) {
+            foreach ($orderedCodes as $orderedCode) {
+                $results[] = $this->resultForOrderedCode($orderedCode);
+            }
+        }
+        $results[] = $this->resultFor140qLayerTension();
+
+        foreach ($results as $result) {
+            foreach ([['zh-CN', 900], ['en', 500]] as [$locale, $limit]) {
+                $summary = $service->buildV2FromResult($result, $locale, true)['result_summary_v1'];
+                $this->assertSame('riasec.result_summary.v1', $summary['schema_version']);
+                $this->assertTrue($summary['snapshot_bound']);
+                $this->assertCount(3, $summary['highlights']);
+                $this->assertCount(3, array_unique(array_column($summary['highlights'], 'dimension_code')));
+                foreach ($summary['highlights'] as $highlight) {
+                    $this->assertMatchesRegularExpression('/^[RIASEC]$/', $highlight['dimension_code']);
+                    $this->assertNotSame('', trim($highlight['label']));
+                    $this->assertNotSame('', trim($highlight['text']));
+                }
+
+                $strings = [];
+                array_walk_recursive($summary, static function (mixed $value) use (&$strings): void {
+                    if (is_string($value)) {
+                        $strings[] = $value;
+                    }
+                });
+                $text = implode($locale === 'zh-CN' ? '' : ' ', $strings);
+                $length = $locale === 'zh-CN' ? mb_strlen($text) : str_word_count($text);
+                $this->assertLessThanOrEqual($limit, $length);
             }
         }
     }

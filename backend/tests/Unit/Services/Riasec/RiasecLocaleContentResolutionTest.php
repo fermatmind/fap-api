@@ -72,6 +72,59 @@ final class RiasecLocaleContentResolutionTest extends TestCase
         }
     }
 
+    public function test_result_summary_is_snapshot_bound_localized_and_within_three_minute_limits(): void
+    {
+        $service = app(RiasecPublicProjectionService::class);
+        $this->assertArrayNotHasKey('result_summary_v1', $service->buildV2FromResult($this->resultFixture(), 'zh-CN', false));
+        $zh = $service->buildV2FromResult($this->resultFixture(), 'zh-CN', true)['result_summary_v1'];
+        $en = $service->buildV2FromResult($this->resultFixture(), 'en-US', true)['result_summary_v1'];
+
+        foreach ([[$zh, 'zh-CN'], [$en, 'en']] as [$summary, $locale]) {
+            $this->assertSame('riasec.result_summary.v1', $summary['schema_version']);
+            $this->assertSame($locale, $summary['locale']);
+            $this->assertSame(180, $summary['estimated_read_seconds']);
+            $this->assertTrue($summary['snapshot_bound']);
+            $this->assertNotSame('', $summary['headline']);
+            $this->assertNotSame('', $summary['ranking_display']);
+            $this->assertNotSame('', $summary['quality_summary']);
+            $this->assertNotSame('', $summary['next_step']);
+            $this->assertNotSame('', $summary['boundary']);
+            $this->assertCount(3, $summary['highlights']);
+            $this->assertSame(['I', 'A', 'S'], array_column($summary['highlights'], 'dimension_code'));
+        }
+
+        $zhText = implode('', $this->summaryStrings($zh));
+        $enText = implode(' ', $this->summaryStrings($en));
+        $this->assertLessThanOrEqual(900, mb_strlen($zhText));
+        $this->assertLessThanOrEqual(500, str_word_count($enText));
+        $this->assertDoesNotMatchRegularExpression('/[\x{4e00}-\x{9fff}]/u', $enText);
+    }
+
+    public function test_same_band_summary_highlights_remain_dimension_specific_and_concise(): void
+    {
+        $service = app(RiasecPublicProjectionService::class);
+        foreach ([
+            ['SEC', ['S' => 60, 'E' => 59, 'C' => 58, 'R' => 20, 'I' => 19, 'A' => 18]],
+            ['ACE', ['A' => 30, 'C' => 29, 'E' => 28, 'R' => 20, 'I' => 19, 'S' => 18]],
+        ] as [$code, $scores]) {
+            $result = $this->resultFixture();
+            $result->type_code = $code;
+            $result->scores_pct = $scores;
+            $result->result_json = array_merge((array) $result->result_json, [
+                'top_code' => $code,
+                'primary_type' => $code[0],
+                'secondary_type' => $code[1],
+                'tertiary_type' => $code[2],
+            ]);
+            $highlights = $service->buildV2FromResult($result, 'zh-CN', true)['result_summary_v1']['highlights'];
+            $texts = array_column($highlights, 'text');
+            $this->assertCount(3, array_unique($texts));
+            foreach ($texts as $text) {
+                $this->assertLessThanOrEqual(60, mb_strlen($text));
+            }
+        }
+    }
+
     /**
      * @return array<string,mixed>
      */
@@ -103,5 +156,18 @@ final class RiasecLocaleContentResolutionTest extends TestCase
                 'quality_flags' => [],
             ],
         ]);
+    }
+
+    /** @return list<string> */
+    private function summaryStrings(array $value): array
+    {
+        $strings = [];
+        array_walk_recursive($value, static function (mixed $item) use (&$strings): void {
+            if (is_string($item)) {
+                $strings[] = $item;
+            }
+        });
+
+        return $strings;
     }
 }

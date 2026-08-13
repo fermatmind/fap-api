@@ -90,8 +90,12 @@ final class RiasecPublicProjectionService
     /**
      * @return array<string,mixed>
      */
-    public function buildV2FromResult(Result $result, string $locale = 'zh-CN', bool $snapshotBound = false): array
-    {
+    public function buildV2FromResult(
+        Result $result,
+        string $locale = 'zh-CN',
+        bool $snapshotBound = false,
+        bool $resultSummaryBound = false,
+    ): array {
         $payload = is_array($result->result_json ?? null) ? $result->result_json : [];
         $rawDimensionScores = is_array($result->scores_pct ?? null) ? $result->scores_pct : [];
         if ($rawDimensionScores === [] && is_array($payload['scores_0_100'] ?? null)) {
@@ -223,11 +227,90 @@ final class RiasecPublicProjectionService
         ];
         $projection['module_visibility_policy'] = $this->moduleSelector->build($projection);
         $projection['deep_content_slots_v1'] = $this->deepContentSlotsEnvelope($projection, $locale);
+        if ($snapshotBound || $resultSummaryBound) {
+            $projection['result_summary_v1'] = $this->resultSummary($projection, $locale, true);
+        }
         $projection['exploration_feedback_overlay_v0_1'] = $this->feedbackOverlay->build($result, $projection, $snapshotBound, $locale);
         $projection['lifecycle_copy_v1'] = $this->lifecycleCopy->runtimeLifecycleCopyContract($snapshotBound, $locale);
         unset($projection['_dimension_scores_complete']);
 
         return $projection;
+    }
+
+    /** @return array<string,mixed> */
+    private function resultSummary(array $projection, string $locale, bool $snapshotBound): array
+    {
+        $isZh = str_starts_with(strtolower($locale), 'zh');
+        $tie = (array) data_get($projection, 'interpretation_state.tie_display_v1', []);
+        $quality = (array) data_get($projection, 'quality.display_v1', []);
+        $highlights = [];
+        $copy = $this->summaryDimensionCopy($isZh);
+        $dimensionRows = collect((array) data_get($projection, 'scores.dimensions', []))
+            ->keyBy(static fn (array $dimension): string => (string) ($dimension['code'] ?? ''));
+        foreach (str_split((string) data_get($projection, 'holland_code.code', '')) as $code) {
+            $dimension = (array) $dimensionRows->get($code, []);
+            $score = $dimension['score'] ?? null;
+            if (! is_numeric($score) || ! isset($copy[$code])) {
+                continue;
+            }
+            $band = (float) $score < 34 ? 'low' : ((float) $score < 67 ? 'medium' : 'high');
+            $highlights[] = [
+                'dimension_code' => $code,
+                'label' => (string) ($dimension['label'] ?? $code),
+                'text' => $copy[$code][$band],
+            ];
+        }
+
+        $qualityParts = array_values(array_filter([
+            trim((string) ($quality['headline'] ?? '')),
+            trim((string) data_get($quality, 'reasons.0', '')),
+            trim((string) data_get($quality, 'improvements.0', '')),
+        ]));
+
+        return [
+            'schema_version' => 'riasec.result_summary.v1',
+            'locale' => $isZh ? 'zh-CN' : 'en',
+            'estimated_read_seconds' => 180,
+            'snapshot_bound' => $snapshotBound,
+            'snapshot_scope' => (bool) data_get($projection, 'measurement_evidence.snapshot_bound', false)
+                ? 'report_snapshot'
+                : 'persisted_result',
+            'headline' => $isZh ? '你的兴趣结果摘要' : 'Your interest result summary',
+            'ranking_display' => (string) data_get($tie, 'display_copy.headline', data_get($projection, 'holland_code.code', '')),
+            'tie_note' => (string) data_get($tie, 'display_copy.note', ''),
+            'quality_summary' => implode($isZh ? '；' : '; ', $qualityParts),
+            'highlights' => array_slice($highlights, 0, 3),
+            'next_step' => $isZh
+                ? '选择前三个兴趣维度中的一个，安排一次 15–30 分钟的低风险活动，记录你是否愿意继续。'
+                : 'Choose one of the first three interest dimensions for a 15–30 minute low-risk activity, then note whether you want to continue.',
+            'boundary' => $isZh
+                ? '结果只描述本次职业兴趣线索，不代表能力、人格身份、职业匹配或未来结果。'
+                : 'This result describes career-interest signals from this response only; it is not an ability, identity, career-match, or outcome conclusion.',
+        ];
+    }
+
+    /** @return array<string,string> */
+    private function summaryDimensionCopy(bool $isZh): array
+    {
+        if ($isZh) {
+            return [
+                'R' => ['high' => '动手操作和处理具体对象是本次较突出的兴趣线索，可优先安排一次实作任务验证。', 'medium' => '你对实作活动有一定兴趣，是否投入往往取决于工具、目标和现场条件。', 'low' => '实作活动本次排序较后；这不代表做不到，可在确有需要时用短任务核对体验。'],
+                'I' => ['high' => '追问原因和分析证据是本次较突出的兴趣线索，可用一个真实问题检验持续投入感。', 'medium' => '你对研究分析有一定兴趣，问题难度和探索空间可能影响投入程度。', 'low' => '研究分析本次排序较后；先观察你在具体问题上是否仍愿意查证和推理。'],
+                'A' => ['high' => '表达想法和创造形式是本次较突出的兴趣线索，可用一次小型创作检验。', 'medium' => '你对创意表达有一定兴趣，自主空间和表达媒介可能影响体验。', 'low' => '创意表达本次排序较后；不妨用一个轻量作品核对真实感受。'],
+                'S' => ['high' => '理解、支持或帮助他人是本次较突出的兴趣线索，可从一次真实协作中验证。', 'medium' => '你对助人互动有一定兴趣，关系距离和互动方式可能影响投入程度。', 'low' => '助人互动本次排序较后；可区分不喜欢持续互动，还是更偏好特定对象和方式。'],
+                'E' => ['high' => '推动目标和组织行动是本次较突出的兴趣线索，可用一次小型发起或协调任务验证。', 'medium' => '你对推动事情有一定兴趣，目标意义和自主权可能影响投入程度。', 'low' => '推动与影响活动本次排序较后；可观察你是否更愿意贡献方案而非主导过程。'],
+                'C' => ['high' => '整理信息和维护流程是本次较突出的兴趣线索，可用一次结构化任务验证。', 'medium' => '你对秩序和流程有一定兴趣，规则是否清晰、是否有改进空间可能影响体验。', 'low' => '规则化任务本次排序较后；可区分对重复流程的排斥与对清晰结构的实际需要。'],
+            ];
+        }
+
+        return [
+            'R' => ['high' => 'Hands-on work stands out here; test it with one practical task.', 'medium' => 'Your interest in practical work may depend on the tools, goal, and setting.', 'low' => 'Practical work ranks lower here; a short task can still clarify the experience.'],
+            'I' => ['high' => 'Questioning and evidence analysis stand out here; test them on a real problem.', 'medium' => 'Your interest in analysis may depend on the problem and room to explore.', 'low' => 'Analysis ranks lower here; notice whether a concrete question still draws you into investigation.'],
+            'A' => ['high' => 'Creative expression stands out here; test it through a small original piece.', 'medium' => 'Your interest in expression may depend on autonomy and the medium.', 'low' => 'Creative expression ranks lower here; a lightweight piece can clarify your response.'],
+            'S' => ['high' => 'Understanding and supporting people stand out here; test this in real collaboration.', 'medium' => 'Your interest in helping may depend on the relationship and interaction style.', 'low' => 'Helping activity ranks lower here; distinguish sustained interaction from support in specific settings.'],
+            'E' => ['high' => 'Advancing goals and organizing action stand out here; test them in a small initiative.', 'medium' => 'Your interest in driving action may depend on purpose and autonomy.', 'low' => 'Influence activity ranks lower here; notice whether contributing ideas feels better than leading.'],
+            'C' => ['high' => 'Organizing information and processes stands out here; test it in a structured task.', 'medium' => 'Your interest in structure may depend on clear rules and room to improve them.', 'low' => 'Routine structure ranks lower here; separate repetition from a genuine need for clarity.'],
+        ];
     }
 
     /**
