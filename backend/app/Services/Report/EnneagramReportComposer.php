@@ -32,16 +32,9 @@ final class EnneagramReportComposer
                 'top3_cards',
                 'type_deep_dive_summary',
                 'all9_profile',
-                'confidence_band_card',
-                'dominance_gap_card',
                 'close_call_card',
                 'blind_spot_card',
-                'center_summary',
-                'stance_summary',
-                'harmonic_summary',
                 'wing_hint_visual',
-                'diffuse_boundary',
-                'low_quality_boundary',
             ],
         ],
         'page_2_work_reality' => [
@@ -54,12 +47,11 @@ final class EnneagramReportComposer
                 'leadership_pattern',
                 'managed_by_others',
                 'workplace_trigger_points',
-                'context_mode_placeholder',
             ],
         ],
         'page_3_growth_spectrum' => [
             'title' => ['zh' => '成长光谱', 'en' => 'Growth Spectrum'],
-            'purpose' => ['zh' => '输出成长轴、代价表达、恢复动作和 theory placeholders。', 'en' => 'Expose growth axis, cost expression, recovery action, and theory placeholders.'],
+            'purpose' => ['zh' => '输出成长轴、代价表达、压力信号和恢复动作。', 'en' => 'Expose the growth axis, cost expression, stress signals, and recovery actions.'],
             'modules' => [
                 'growth_axis',
                 'strength_expression',
@@ -67,7 +59,6 @@ final class EnneagramReportComposer
                 'stress_trigger',
                 'recovery_action',
                 'state_spectrum',
-                'arrow_growth_reference_placeholder',
             ],
         ],
         'page_4_relationship_conflict' => [
@@ -79,7 +70,6 @@ final class EnneagramReportComposer
                 'misread_by_others',
                 'conflict_script',
                 'communication_manual',
-                'blind_spot_in_relationship',
             ],
         ],
         'page_5_method_observation_next' => [
@@ -88,8 +78,6 @@ final class EnneagramReportComposer
             'modules' => [
                 'method_boundary',
                 'seven_day_observation',
-                'resonance_feedback_placeholder',
-                'history_share_retake_placeholder',
                 'form_recommendation',
                 'sample_report_link',
                 'technical_note_link',
@@ -485,32 +473,28 @@ final class EnneagramReportComposer
             'diffuse_boundary' => $this->buildDiffuseBoundaryModule($projectionV2, $indexes),
             'low_quality_boundary' => $this->buildLowQualityBoundaryModule($projectionV2, $indexes),
             'work_style_summary' => $this->buildScenarioModule($projectionV2, $indexes, 'work_style_summary', 'scenario_card', [
-                'content.summary_ref' => 'deep_dive.work_mechanism',
+                'content.summary_ref' => 'work_summary',
                 'content.list_group_refs' => [
                     ['label_key' => 'ideal_environment', 'ref' => 'work_pack.ideal_environment'],
                 ],
             ]),
             'type_deep_dive_summary' => $this->buildTypeDeepDiveSummaryModule($projectionV2, $indexes),
             'collaboration_strengths' => $this->buildScenarioModule($projectionV2, $indexes, 'collaboration_strengths', 'scenario_card', [
-                'content.summary_ref' => 'work_summary',
                 'content.list_group_refs' => [
                     ['label_key' => 'work_strengths', 'ref' => 'work_pack.work_strengths'],
                 ],
             ]),
             'collaboration_friction' => $this->buildScenarioModule($projectionV2, $indexes, 'collaboration_friction', 'scenario_card', [
-                'content.summary_ref' => 'internal_tension',
                 'content.list_group_refs' => [
                     ['label_key' => 'work_friction_points', 'ref' => 'work_pack.work_friction_points'],
                 ],
             ]),
             'leadership_pattern' => $this->buildScenarioModule($projectionV2, $indexes, 'leadership_pattern', 'scenario_card', [
-                'content.summary_ref' => 'deep_dive.work_mechanism',
                 'content.list_group_refs' => [
                     ['label_key' => 'leadership_pattern', 'ref' => 'work_pack.leadership_pattern'],
                 ],
             ]),
             'managed_by_others' => $this->buildScenarioModule($projectionV2, $indexes, 'managed_by_others', 'scenario_card', [
-                'content.summary_ref' => 'relationship_summary',
                 'content.list_group_refs' => [
                     ['label_key' => 'collaboration_manual', 'ref' => 'work_pack.collaboration_manual'],
                     ['label_key' => 'managed_by_others', 'ref' => 'work_pack.managed_by_others'],
@@ -522,20 +506,14 @@ final class EnneagramReportComposer
                 ],
             ]),
             'context_mode_placeholder' => $this->buildPlaceholderModule($projectionV2, $indexes, 'context_mode_placeholder', 'placeholder_card', 'workplace_context_mode_not_enabled'),
-            'growth_axis' => $this->buildTypeDrivenModule($projectionV2, $indexes, 'growth_axis', 'summary_card', 'growth_summary', [
-                'detail_label' => 'growth_principle',
-                'deep_dive_detail' => 'deep_dive.growth_principle',
-                'list_group_refs' => [
-                    ['label_key' => 'growth_strengths', 'ref' => 'growth_pack.growth_strengths'],
-                ],
-            ]),
+            'growth_axis' => $this->buildTypeDrivenModule($projectionV2, $indexes, 'growth_axis', 'summary_card', 'growth_summary'),
             'strength_expression' => $this->buildGroupOverlayModule($projectionV2, $indexes, 'strength_expression', 'strength_expression', [
                 ['label_key' => 'growth_strengths', 'ref' => 'growth_pack.growth_strengths'],
             ]),
             'cost_expression' => $this->buildGroupOverlayModule($projectionV2, $indexes, 'cost_expression', 'cost_expression', [
                 ['label_key' => 'growth_costs', 'ref' => 'growth_pack.growth_costs'],
             ]),
-            'stress_trigger' => $this->buildTypeDrivenModule($projectionV2, $indexes, 'stress_trigger', 'summary_card', 'deep_dive.stress_signal', [
+            'stress_trigger' => $this->buildTypeDrivenModule($projectionV2, $indexes, 'stress_trigger', 'summary_card', '', [
                 'list_group_refs' => [
                     ['label_key' => 'early_warning_signs', 'ref' => 'growth_pack.early_warning_signs'],
                 ],
@@ -544,30 +522,28 @@ final class EnneagramReportComposer
             'state_spectrum' => $this->buildStateModule($projectionV2, $indexes, 'state_spectrum'),
             'arrow_growth_reference_placeholder' => $this->buildTheoryModule($projectionV2, $indexes, 'arrow_growth_reference_placeholder', 'placeholder_card'),
             'relationship_need' => $this->buildScenarioModule($projectionV2, $indexes, 'relationship_need', 'scenario_card', [
-                'content.summary_ref' => 'deep_dive.relationship_script',
+                'content.summary_ref' => 'relationship_summary',
                 'content.list_group_refs' => [
                     ['label_key' => 'partner_facing_notes', 'ref' => 'relationship_pack.partner_facing_notes'],
                 ],
             ]),
-            'relationship_strengths' => $this->buildTypeDrivenModule($projectionV2, $indexes, 'relationship_strengths', 'summary_card', 'relationship_summary', [
+            'relationship_strengths' => $this->buildTypeDrivenModule($projectionV2, $indexes, 'relationship_strengths', 'summary_card', '', [
                 'list_group_refs' => [
                     ['label_key' => 'relationship_strengths', 'ref' => 'relationship_pack.relationship_strengths'],
                 ],
             ]),
-            'misread_by_others' => $this->buildTypeDrivenModule($projectionV2, $indexes, 'misread_by_others', 'summary_card', 'deep_dive.misread_by_others', [
+            'misread_by_others' => $this->buildTypeDrivenModule($projectionV2, $indexes, 'misread_by_others', 'summary_card', '', [
                 'list_group_refs' => [
                     ['label_key' => 'relationship_traps', 'ref' => 'relationship_pack.relationship_traps'],
                 ],
             ]),
             'conflict_script' => $this->buildScenarioModule($projectionV2, $indexes, 'conflict_script', 'scenario_card', [
-                'content.summary_ref' => 'deep_dive.conflict_pattern',
                 'content.list_group_refs' => [
                     ['label_key' => 'conflict_trigger_points', 'ref' => 'relationship_pack.conflict_trigger_points'],
                     ['label_key' => 'repair_language', 'ref' => 'relationship_pack.repair_language'],
                 ],
             ]),
             'communication_manual' => $this->buildScenarioModule($projectionV2, $indexes, 'communication_manual', 'scenario_card', [
-                'content.summary_ref' => 'surface_impression',
                 'content.list_group_refs' => [
                     ['label_key' => 'communication_manual', 'ref' => 'relationship_pack.communication_manual'],
                 ],
@@ -666,10 +642,6 @@ final class EnneagramReportComposer
                 'type_name_en' => $entry['type_name_en'] ?? null,
                 'core_logic' => $entry['core_logic'] ?? null,
                 'surface_impression' => $entry['surface_impression'] ?? null,
-                'validation_hook' => $entry['validation_hook'] ?? null,
-                'work_summary' => $entry['work_summary'] ?? null,
-                'growth_summary' => $entry['growth_summary'] ?? null,
-                'relationship_summary' => $entry['relationship_summary'] ?? null,
             ];
         }
 
@@ -706,10 +678,7 @@ final class EnneagramReportComposer
                 'type_name_cn' => $typeEntry['type_name_cn'] ?? null,
                 'type_name_en' => $typeEntry['type_name_en'] ?? null,
                 'short_title' => $typeEntry['short_title'] ?? null,
-                'core_desire' => data_get($typeEntry, 'deep_dive.core_desire'),
-                'core_fear' => data_get($typeEntry, 'deep_dive.core_fear'),
-                'defense_pattern' => data_get($typeEntry, 'deep_dive.defense_pattern'),
-                'self_misread' => data_get($typeEntry, 'deep_dive.self_misread'),
+                'internal_tension' => $typeEntry['internal_tension'] ?? null,
                 'validation_hook' => $typeEntry['validation_hook'] ?? null,
             ],
             ['scores.primary_candidate'],
@@ -737,7 +706,15 @@ final class EnneagramReportComposer
                     ? 'Scores show only the relative strength of type-related signals in this response. They are not norm rankings, diagnoses, ability ratings, or fixed personality conclusions.'
                     : '分数只表示本次答题中各类型线索的相对强弱，不是常模排名、诊断标签、能力评价或固定人格定论。',
                 'not_for' => ['norm_comparison', 'diagnosis', 'ability_rating', 'personality_verdict'],
-                'items' => array_values((array) data_get($projectionV2, 'scores.all9_profile', [])),
+                'items' => array_values(array_map(
+                    static fn (array $item): array => [
+                        'type' => (string) ($item['type'] ?? ''),
+                        'display_score' => $item['display_score'] ?? null,
+                        'candidate_role' => (string) ($item['candidate_role'] ?? ''),
+                        'score_source' => $item['score_source'] ?? null,
+                    ],
+                    (array) data_get($projectionV2, 'scores.all9_profile', [])
+                )),
             ],
             ['scores.all9_profile'],
             [],
@@ -893,20 +870,20 @@ final class EnneagramReportComposer
     {
         $primaryType = (string) data_get($projectionV2, 'scores.primary_candidate', '');
         $typeEntry = $this->typeEntry($indexes, $primaryType);
-        $reason = data_get($projectionV2, '_meta.unavailable.dynamics.blind_spot_type.reason');
+        $copy = trim((string) ($typeEntry['blind_spot_copy'] ?? ''));
 
         return $this->module(
             $moduleKey,
-            'placeholder_card',
-            'unavailable',
+            'summary_card',
+            $copy !== '' ? 'visible' : 'unavailable',
             'all',
             [
-                'status' => 'unavailable',
-                'reason' => $reason,
+                'status' => $copy !== '' ? 'available' : 'unavailable',
+                'body' => $copy !== '' ? $copy : null,
                 'blind_spot_link' => $typeEntry['blind_spot_link'] ?? null,
                 'primary_candidate' => $primaryType !== '' ? $primaryType : null,
             ],
-            ['dynamics.blind_spot_type'],
+            ['scores.primary_candidate'],
             $primaryType !== '' ? ['enneagram_type_registry:'.$primaryType] : [],
             [],
             $this->entryMeta($typeEntry, $this->registryMeta($indexes, 'enneagram_type_registry'))
@@ -1241,7 +1218,6 @@ final class EnneagramReportComposer
                 'group_ref' => $groupRef,
                 'group_type' => $entry['group_type'] ?? null,
                 'group_key' => $entry['group_key'] ?? null,
-                'description' => $entry['description'] ?? null,
                 'value' => $entry[$field] ?? null,
             ];
         }
@@ -1277,27 +1253,14 @@ final class EnneagramReportComposer
         $content = match ($moduleKey) {
             'recovery_action' => [
                 'recovery_action' => $stateEntry['recovery_action'] ?? null,
-                'type_recovery_action' => data_get($typeEntry, 'deep_dive.recovery_action'),
-                'growth_principle' => data_get($typeEntry, 'deep_dive.growth_principle'),
-                'thirty_day_experiment' => data_get($typeEntry, 'deep_dive.thirty_day_experiment'),
                 'list_groups' => $this->typePackListGroups($typeEntry, [
                     ['label_key' => 'recovery_protocol', 'ref' => 'growth_pack.recovery_protocol'],
-                    ['label_key' => 'small_experiments', 'ref' => 'growth_pack.small_experiments'],
                 ]),
-                'disclaimer' => $stateEntry['disclaimer'] ?? null,
             ],
             default => [
                 'stable_expression' => data_get($typeEntry, 'growth_pack.state_spectrum_copy.stable_expression') ?? $stateEntry['stable_expression'] ?? null,
                 'average_expression' => data_get($typeEntry, 'growth_pack.state_spectrum_copy.default_expression') ?? $stateEntry['average_expression'] ?? null,
                 'strained_expression' => data_get($typeEntry, 'growth_pack.state_spectrum_copy.strained_expression') ?? $stateEntry['strained_expression'] ?? null,
-                'recovery_action' => $stateEntry['recovery_action'] ?? null,
-                'stress_signal' => data_get($typeEntry, 'deep_dive.stress_signal'),
-                'growth_principle' => data_get($typeEntry, 'deep_dive.growth_principle'),
-                'thirty_day_experiment' => data_get($typeEntry, 'deep_dive.thirty_day_experiment'),
-                'list_groups' => $this->typePackListGroups($typeEntry, [
-                    ['label_key' => 'early_warning_signs', 'ref' => 'growth_pack.early_warning_signs'],
-                ]),
-                'disclaimer' => $stateEntry['disclaimer'] ?? null,
             ],
         };
 
@@ -1346,6 +1309,9 @@ final class EnneagramReportComposer
                 }
 
                 $items[] = ['title' => $title, 'body' => $body];
+                if (count($items) === 2) {
+                    break;
+                }
             }
 
             if ($items === []) {
@@ -1596,6 +1562,7 @@ final class EnneagramReportComposer
         array $policyRefs,
         array $meta
     ): array {
+        $content = $this->compactDisplayContent($moduleKey, $content);
         $state = $this->normalizeModuleState((string) ($content['interpretation_scope'] ?? ''), $content);
         $projectionRefs = $dataRefs;
 
@@ -1617,6 +1584,53 @@ final class EnneagramReportComposer
             ],
             'fallback_policy' => $meta['fallback_policy'] ?? 'fallback_to_generic',
         ];
+    }
+
+    /**
+     * Keep the full scientific/use disclaimer in method_boundary and the single
+     * short overview boundary in instant_summary. Other modules may retain only
+     * limits that are specific to the claim they make.
+     *
+     * @param  array<string,mixed>  $content
+     * @return array<string,mixed>
+     */
+    private function compactDisplayContent(string $moduleKey, array $content): array
+    {
+        if (in_array($moduleKey, ['method_boundary', 'instant_summary'], true)) {
+            return $content;
+        }
+
+        $walk = function (mixed $value) use (&$walk): mixed {
+            if (is_array($value)) {
+                $compacted = [];
+                foreach ($value as $key => $item) {
+                    if ($key === 'disclaimer') {
+                        continue;
+                    }
+                    $compacted[$key] = $walk($item);
+                }
+
+                return $compacted;
+            }
+
+            if (! is_string($value) || trim($value) === '') {
+                return $value;
+            }
+
+            $sentences = preg_split('/(?<=[。！？.!?])\s*/u', trim($value), -1, PREG_SPLIT_NO_EMPTY) ?: [];
+            $sentences = array_values(array_filter($sentences, static function (string $sentence): bool {
+                return preg_match(
+                    '/不是(?:诊断|医学|心理健康)|不用于(?:诊断|招聘|人员)|不能单独推出(?:职业|岗位|绩效|人员)|not (?:a )?diagnosis|not used for (?:diagnosis|hiring)|does not establish (?:career|competence|performance)|cannot replace evidence of (?:ability|experience)/iu',
+                    $sentence
+                ) !== 1;
+            }));
+
+            $separator = preg_match('/[\x{3400}-\x{9fff}]/u', $value) === 1 ? '' : ' ';
+
+            return trim(implode($separator, $sentences));
+        };
+
+        return $walk($content);
     }
 
     /**

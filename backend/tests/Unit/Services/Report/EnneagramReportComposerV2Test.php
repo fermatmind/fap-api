@@ -47,7 +47,7 @@ final class EnneagramReportComposerV2Test extends TestCase
         $this->assertSame($expectedLocale, data_get($payload, 'report._meta.enneagram_report_v2.locale'));
         $this->assertSame('enneagram.report.v2', data_get($payload, 'report._meta.enneagram_report_v2.schema_version'));
         $this->assertCount(5, (array) data_get($payload, 'report._meta.enneagram_report_v2.pages'));
-        $this->assertCount(41, (array) data_get($payload, 'report._meta.enneagram_report_v2.modules'));
+        $this->assertCount(29, (array) data_get($payload, 'report._meta.enneagram_report_v2.modules'));
         $this->assertSame(
             [
                 'page_1_result_overview',
@@ -103,19 +103,85 @@ final class EnneagramReportComposerV2Test extends TestCase
                 'top3_cards',
                 'type_deep_dive_summary',
                 'all9_profile',
-                'confidence_band_card',
-                'dominance_gap_card',
                 'close_call_card',
                 'blind_spot_card',
-                'center_summary',
-                'stance_summary',
-                'harmonic_summary',
                 'wing_hint_visual',
-                'diffuse_boundary',
-                'low_quality_boundary',
             ],
             $pageModules
         );
+    }
+
+    public function test_report_density_contract_removes_placeholders_and_repeated_disclaimers(): void
+    {
+        $payload = $this->composeReportV2($this->syntheticProjectionInput('enneagram_likert_105', [
+            'T3' => 89.0,
+            'T8' => 62.0,
+            'T1' => 55.0,
+            'T6' => 37.0,
+            'T2' => 28.0,
+            'T7' => 24.0,
+            'T4' => 21.0,
+            'T5' => 16.0,
+            'T9' => 13.0,
+        ]));
+
+        $pages = (array) data_get($payload, 'report._meta.enneagram_report_v2.pages');
+        $modules = (array) data_get($payload, 'report._meta.enneagram_report_v2.modules');
+        $this->assertSame([7, 6, 6, 5, 5], array_map(
+            static fn (array $page): int => count((array) ($page['modules'] ?? [])),
+            $pages
+        ));
+
+        $removed = [
+            'confidence_band_card', 'dominance_gap_card', 'center_summary', 'stance_summary', 'harmonic_summary',
+            'diffuse_boundary', 'low_quality_boundary', 'context_mode_placeholder',
+            'arrow_growth_reference_placeholder', 'resonance_feedback_placeholder',
+            'history_share_retake_placeholder', 'blind_spot_in_relationship',
+        ];
+        $moduleKeys = collect($modules)->pluck('module_key')->all();
+        $this->assertNotContains('placeholder', collect($modules)->pluck('visibility')->all());
+        $this->assertNotContains('placeholder_card', collect($modules)->pluck('kind')->all());
+        foreach ($removed as $moduleKey) {
+            $this->assertNotContains($moduleKey, $moduleKeys);
+        }
+
+        foreach ($modules as $module) {
+            $moduleKey = (string) ($module['module_key'] ?? '');
+            if (! in_array($moduleKey, ['method_boundary', 'instant_summary'], true)) {
+                $this->assertArrayNotHasKey('disclaimer', (array) ($module['content'] ?? []), $moduleKey);
+            }
+            foreach ((array) data_get($module, 'content.list_groups', []) as $group) {
+                $this->assertLessThanOrEqual(2, count((array) ($group['items'] ?? [])), $moduleKey);
+            }
+        }
+
+        $seenLongCopy = [];
+        $collectStrings = function (mixed $value) use (&$collectStrings): array {
+            if (is_string($value)) {
+                return mb_strlen(trim($value)) >= 36 ? [trim($value)] : [];
+            }
+            if (! is_array($value)) {
+                return [];
+            }
+
+            return array_reduce(
+                array_values($value),
+                static fn (array $carry, mixed $item): array => array_merge($carry, $collectStrings($item)),
+                []
+            );
+        };
+        foreach ($modules as $module) {
+            $moduleKey = (string) ($module['module_key'] ?? '');
+            if (in_array($moduleKey, ['method_boundary', 'instant_summary'], true)) {
+                continue;
+            }
+            foreach ($collectStrings((array) ($module['content'] ?? [])) as $copy) {
+                $this->assertArrayNotHasKey($copy, $seenLongCopy, 'Repeated long copy in '.$moduleKey.' and '.($seenLongCopy[$copy] ?? 'unknown'));
+                $seenLongCopy[$copy] = $moduleKey;
+            }
+        }
+
+        $this->assertSame(1, collect($modules)->where('module_key', 'method_boundary')->count());
     }
 
     public function test_all9_profile_module_labels_scores_as_relative_profile_signals(): void
@@ -140,11 +206,11 @@ final class EnneagramReportComposerV2Test extends TestCase
         $this->assertStringContainsString('不是常模排名、诊断标签、能力评价或固定人格定论', (string) data_get($module, 'content.boundary_note'));
         $this->assertSame(['norm_comparison', 'diagnosis', 'ability_rating', 'personality_verdict'], data_get($module, 'content.not_for'));
         $this->assertCount(9, $items);
-        $this->assertSame('答题轮廓内的相对线索', $first['score_interpretation_label'] ?? null);
-        $this->assertSame('这不是常模分数、诊断标签、能力评价或固定人格定论。', $first['score_boundary_note'] ?? null);
+        $this->assertArrayNotHasKey('score_interpretation_label', $first);
+        $this->assertArrayNotHasKey('score_boundary_note', $first);
     }
 
-    public function test_center_summary_is_theory_boundary_not_center_classification(): void
+    public function test_unavailable_center_is_omitted_and_blind_spot_has_observation_value(): void
     {
         $payload = $this->composeReportV2($this->syntheticProjectionInput('enneagram_likert_105', [
             'T8' => 88.0,
@@ -158,21 +224,14 @@ final class EnneagramReportComposerV2Test extends TestCase
             'T4' => 14.0,
         ]));
 
-        $module = $this->module($payload, 'center_summary');
-
-        $this->assertSame('unavailable', data_get($module, 'state'));
-        $this->assertSame('unavailable', data_get($module, 'content.status'));
-        $this->assertStringContainsString('不把作答轮廓换算为中心分数或中心判定', (string) data_get($module, 'content.availability_note'));
-        $this->assertStringContainsString('不能作为诊断、健康层级、能力评价或固定人格分类', (string) data_get($module, 'content.boundary_note'));
-        $this->assertSame(
-            ['center_classification', 'diagnosis', 'health_level_judgement', 'ability_rating'],
-            data_get($module, 'content.not_for')
-        );
-        $this->assertCount(3, (array) data_get($module, 'content.groups'));
-        $this->assertStringContainsString('不把当前作答直接换算成中心分数或中心判定', (string) data_get($module, 'content.groups.0.availability_note'));
+        $this->assertSame([], $this->module($payload, 'center_summary'));
+        $blindSpot = $this->module($payload, 'blind_spot_card');
+        $this->assertSame('visible', data_get($blindSpot, 'visibility'));
+        $this->assertSame('available', data_get($blindSpot, 'content.status'));
+        $this->assertStringContainsString('观察', (string) data_get($blindSpot, 'content.body'));
     }
 
-    public function test_confidence_band_card_frames_confidence_as_interpretation_stability_not_accuracy(): void
+    public function test_redundant_confidence_and_gap_cards_are_not_emitted(): void
     {
         $payload = $this->composeReportV2($this->syntheticProjectionInput('enneagram_likert_105', [
             'T3' => 89.0,
@@ -186,44 +245,8 @@ final class EnneagramReportComposerV2Test extends TestCase
             'T9' => 13.0,
         ]));
 
-        $module = $this->module($payload, 'confidence_band_card');
-        $content = (array) data_get($module, 'content');
-        $encoded = json_encode($content, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
-
-        $this->assertSame('解释稳定性', $content['title'] ?? null);
-        $this->assertSame('较稳定的解释线索', $content['confidence_label'] ?? null);
-        $this->assertStringContainsString('本次答题轮廓的清晰度', (string) ($content['reader_guidance'] ?? ''));
-        $this->assertStringContainsString('它不是测试准确率、临床效度、人格定论或未来行为预测', (string) ($content['reader_guidance'] ?? ''));
-        $this->assertStringContainsString('较稳定的解释假设', (string) data_get($content, 'level_guide.high_confidence'));
-        $this->assertSame(['accuracy_claim', 'external_validity_claim', 'diagnosis', 'personality_verdict', 'prediction'], $content['not_for'] ?? null);
-        $this->assertStringNotContainsString('高置信结果', $encoded);
-        $this->assertStringNotContainsString('中等置信结果', $encoded);
-    }
-
-    public function test_dominance_gap_card_marks_gap_as_same_form_score_space_signal(): void
-    {
-        $payload = $this->composeReportV2($this->syntheticProjectionInput('enneagram_likert_105', [
-            'T3' => 89.0,
-            'T8' => 62.0,
-            'T1' => 55.0,
-            'T6' => 37.0,
-            'T2' => 28.0,
-            'T7' => 24.0,
-            'T4' => 21.0,
-            'T5' => 16.0,
-            'T9' => 13.0,
-        ]));
-
-        $content = (array) data_get($this->module($payload, 'dominance_gap_card'), 'content');
-
-        $this->assertSame('主次线索差距', $content['title'] ?? null);
-        $this->assertStringContainsString('当前题型、当前计分空间内有意义', (string) ($content['score_space_note'] ?? ''));
-        $this->assertStringContainsString('不是测量误差范围、统计置信区间、常模排名、外部效度证明或人格确定性', (string) ($content['boundary_note'] ?? ''));
-        $this->assertStringContainsString('不是准确率', (string) data_get($content, 'metric_guide.dominance_gap_pct'));
-        $this->assertSame(
-            ['cross_form_comparison', 'norm_ranking', 'measurement_error_interval', 'validity_proof', 'personality_verdict'],
-            $content['not_for'] ?? null
-        );
+        $this->assertSame([], $this->module($payload, 'confidence_band_card'));
+        $this->assertSame([], $this->module($payload, 'dominance_gap_card'));
     }
 
     public function test_unavailable_v2_report_uses_public_error_code_without_registry_exception_details(): void
@@ -280,7 +303,7 @@ final class EnneagramReportComposerV2Test extends TestCase
                         $context = sprintf('type=%d state=%s form=%s locale=%s', $primaryType, $expectedState, $formCode, $attemptLocale);
                         $modules = (array) data_get($payload, 'report._meta.enneagram_report_v2.modules');
 
-                        $this->assertCount(41, $modules, $context);
+                        $this->assertCount(29, $modules, $context);
                         $this->assertSame($expectedState, data_get($this->module($payload, 'instant_summary'), 'content.interpretation_scope'), $context);
                         $this->assertSame($expectedState === 'clear', data_get($this->module($payload, 'instant_summary'), 'content.hard_primary_language'), $context);
                         $this->assertSame($expectedFormLabel, data_get($this->module($payload, 'instant_summary'), 'content.form_badge.label'), $context);
@@ -340,7 +363,7 @@ final class EnneagramReportComposerV2Test extends TestCase
         $this->assertStringContainsString('不急着固定自我标签', (string) data_get($summary, 'content.body'));
     }
 
-    public function test_diffuse_scope_includes_diffuse_boundary_module(): void
+    public function test_diffuse_scope_uses_the_single_overview_boundary(): void
     {
         $payload = $this->composeReportV2(
             $this->syntheticProjectionInput('enneagram_likert_105', [
@@ -356,18 +379,15 @@ final class EnneagramReportComposerV2Test extends TestCase
             ])
         );
 
-        $module = $this->module($payload, 'diffuse_boundary');
         $summary = $this->module($payload, 'instant_summary');
 
-        $this->assertSame('diffuse', data_get($module, 'state'));
-        $this->assertSame('visible', data_get($module, 'visibility'));
-        $this->assertSame('结果分散说明', data_get($module, 'content.title'));
+        $this->assertSame([], $this->module($payload, 'diffuse_boundary'));
         $this->assertSame('diffuse', data_get($summary, 'content.interpretation_scope'));
         $this->assertStringContainsString('第一候选还不足以单独承载整页解释', (string) data_get($summary, 'content.body'));
         $this->assertStringContainsString('真实情境', (string) data_get($summary, 'content.body'));
     }
 
-    public function test_low_quality_scope_includes_low_quality_boundary_module(): void
+    public function test_low_quality_scope_uses_the_single_overview_boundary(): void
     {
         $payload = $this->composeReportV2(
             $this->syntheticProjectionInput('enneagram_forced_choice_144', [
@@ -386,16 +406,9 @@ final class EnneagramReportComposerV2Test extends TestCase
             ])
         );
 
-        $module = $this->module($payload, 'low_quality_boundary');
         $summary = $this->module($payload, 'instant_summary');
 
-        $this->assertSame('low_quality', data_get($module, 'state'));
-        $this->assertSame('visible', data_get($module, 'visibility'));
-        $this->assertSame('triggered_operational_signal', data_get($module, 'content.low_quality_status'));
-        $this->assertSame(['speed_too_fast'], data_get($module, 'content.qc_flags'));
-        $this->assertStringContainsString('不是在责备作答者', (string) data_get($module, 'content.body'));
-        $this->assertSame('retest_same_form_when_stable', data_get($module, 'content.recommended_action'));
-        $this->assertContains('hiring_screening', data_get($module, 'content.not_for'));
+        $this->assertSame([], $this->module($payload, 'low_quality_boundary'));
         $this->assertSame('low_quality', data_get($summary, 'content.interpretation_scope'));
         $this->assertStringContainsString('作答信号显示解释边界需要放宽', (string) data_get($summary, 'content.body'));
         $this->assertStringContainsString('不适合用来确认主型', (string) data_get($summary, 'content.body'));
@@ -472,30 +485,33 @@ final class EnneagramReportComposerV2Test extends TestCase
 
         $summary = $this->module($payload, 'type_deep_dive_summary');
         $this->assertSame('8', data_get($summary, 'content.primary_candidate'));
-        $this->assertNotSame('', (string) data_get($summary, 'content.core_desire'));
-        $this->assertNotSame('', (string) data_get($summary, 'content.core_fear'));
-        $this->assertNotSame('', (string) data_get($summary, 'content.defense_pattern'));
+        $this->assertNotSame('', (string) data_get($summary, 'content.internal_tension'));
+        $this->assertNotSame('', (string) data_get($summary, 'content.validation_hook'));
+        $this->assertNull(data_get($summary, 'content.growth_experiment'));
+        $this->assertNull(data_get($summary, 'content.core_desire'));
+        $this->assertNull(data_get($summary, 'content.core_fear'));
+        $this->assertNull(data_get($summary, 'content.defense_pattern'));
 
         $work = $this->module($payload, 'work_style_summary');
         $this->assertNotSame('', (string) data_get($work, 'content.type_summary'));
         $this->assertGreaterThanOrEqual(1, count((array) data_get($work, 'content.list_groups', [])));
 
         $stress = $this->module($payload, 'stress_trigger');
-        $this->assertNotSame('', (string) data_get($stress, 'content.value'));
+        $this->assertNull(data_get($stress, 'content.value'));
         $this->assertGreaterThanOrEqual(1, count((array) data_get($stress, 'content.list_groups', [])));
 
         $recovery = $this->module($payload, 'recovery_action');
-        $this->assertNotSame('', (string) data_get($recovery, 'content.type_recovery_action'));
-        $this->assertNotSame('', (string) data_get($recovery, 'content.growth_principle'));
-        $this->assertNotSame('', (string) data_get($recovery, 'content.thirty_day_experiment'));
-        $this->assertGreaterThanOrEqual(2, count((array) data_get($recovery, 'content.list_groups', [])));
+        $this->assertNull(data_get($recovery, 'content.type_recovery_action'));
+        $this->assertNull(data_get($recovery, 'content.growth_principle'));
+        $this->assertNull(data_get($recovery, 'content.thirty_day_experiment'));
+        $this->assertCount(1, (array) data_get($recovery, 'content.list_groups', []));
 
         $relationship = $this->module($payload, 'relationship_need');
         $this->assertNotSame('', (string) data_get($relationship, 'content.type_summary'));
         $this->assertGreaterThanOrEqual(1, count((array) data_get($relationship, 'content.list_groups', [])));
 
         $conflict = $this->module($payload, 'conflict_script');
-        $this->assertNotSame('', (string) data_get($conflict, 'content.type_summary'));
+        $this->assertNull(data_get($conflict, 'content.type_summary'));
         $this->assertGreaterThanOrEqual(2, count((array) data_get($conflict, 'content.list_groups', [])));
     }
 
@@ -517,27 +533,27 @@ final class EnneagramReportComposerV2Test extends TestCase
 
         $workStrengths = $this->module($payload, 'collaboration_strengths');
         $this->assertSame('work_strengths', data_get($workStrengths, 'content.list_groups.0.label_key'));
-        $this->assertGreaterThanOrEqual(4, count((array) data_get($workStrengths, 'content.list_groups.0.items', [])));
+        $this->assertCount(2, (array) data_get($workStrengths, 'content.list_groups.0.items', []));
 
         $workTriggers = $this->module($payload, 'workplace_trigger_points');
         $this->assertSame('workplace_trigger_points', data_get($workTriggers, 'content.list_groups.0.label_key'));
-        $this->assertGreaterThanOrEqual(2, count((array) data_get($workTriggers, 'content.list_groups.0.items', [])));
+        $this->assertCount(2, (array) data_get($workTriggers, 'content.list_groups.0.items', []));
 
         $growthCosts = $this->module($payload, 'cost_expression');
         $this->assertSame('growth_costs', data_get($growthCosts, 'content.list_groups.0.label_key'));
-        $this->assertGreaterThanOrEqual(4, count((array) data_get($growthCosts, 'content.list_groups.0.items', [])));
+        $this->assertCount(2, (array) data_get($growthCosts, 'content.list_groups.0.items', []));
 
         $state = $this->module($payload, 'state_spectrum');
         $this->assertNotSame('', (string) data_get($state, 'content.stable_expression'));
-        $this->assertSame('early_warning_signs', data_get($state, 'content.list_groups.0.label_key'));
+        $this->assertNull(data_get($state, 'content.list_groups'));
 
         $relationshipStrengths = $this->module($payload, 'relationship_strengths');
         $this->assertSame('relationship_strengths', data_get($relationshipStrengths, 'content.list_groups.0.label_key'));
-        $this->assertGreaterThanOrEqual(4, count((array) data_get($relationshipStrengths, 'content.list_groups.0.items', [])));
+        $this->assertCount(2, (array) data_get($relationshipStrengths, 'content.list_groups.0.items', []));
 
         $communication = $this->module($payload, 'communication_manual');
         $this->assertSame('communication_manual', data_get($communication, 'content.list_groups.0.label_key'));
-        $this->assertGreaterThanOrEqual(3, count((array) data_get($communication, 'content.list_groups.0.items', [])));
+        $this->assertCount(2, (array) data_get($communication, 'content.list_groups.0.items', []));
     }
 
     public function test_sample_report_module_exposes_preview_fields_from_registry(): void
