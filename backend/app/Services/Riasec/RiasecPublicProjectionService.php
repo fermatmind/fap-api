@@ -404,11 +404,17 @@ final class RiasecPublicProjectionService
             ? $structuralDifferencePolicy['layer_states']
             : [];
 
-        return [
-            $this->deepCopySlots->resolve140qDimensionLayerSlot($dimensionCode, 'task', $this->normalize140qSelectionLayerState((string) ($layerStates['task'] ?? 'agreement'))),
-            $this->deepCopySlots->resolve140qDimensionLayerSlot($dimensionCode, 'environment', $this->normalize140qSelectionLayerState((string) ($layerStates['environment'] ?? 'agreement'))),
-            $this->deepCopySlots->resolve140qDimensionLayerSlot($dimensionCode, 'role', $this->normalize140qSelectionLayerState((string) ($layerStates['role'] ?? 'agreement'))),
-        ];
+        $selected = [];
+        foreach (['task', 'environment', 'role'] as $layer) {
+            $state = $this->normalize140qSelectionLayerState((string) ($layerStates[$layer] ?? 'unavailable'));
+            if (! in_array($state, ['agreement', 'tension'], true)) {
+                continue;
+            }
+
+            $selected[] = $this->deepCopySlots->resolve140qDimensionLayerSlot($dimensionCode, $layer, $state);
+        }
+
+        return $selected;
     }
 
     private function selectedTop3Key(string $topCode): ?string
@@ -437,9 +443,21 @@ final class RiasecPublicProjectionService
             $layerStates = is_array($structuralDifferencePolicy['layer_states'] ?? null)
                 ? $structuralDifferencePolicy['layer_states']
                 : [];
-            $aggregateLayerState = in_array('tension', array_values($layerStates), true) ? 'layer_tension' : 'layer_agreement';
+            $normalizedLayerStates = array_map(
+                fn (string $layer): string => $this->normalize140qSelectionLayerState((string) ($layerStates[$layer] ?? 'unavailable')),
+                ['task', 'environment', 'role']
+            );
+            $hasCompleteExplicitStates = count(array_filter(
+                $normalizedLayerStates,
+                static fn (string $state): bool => in_array($state, ['agreement', 'tension'], true)
+            )) === 3;
 
-            return ['task_activity_card', 'environment_card', 'role_responsibility_card', $aggregateLayerState];
+            $selected = ['task_activity_card', 'environment_card', 'role_responsibility_card'];
+            if ($hasCompleteExplicitStates) {
+                $selected[] = in_array('tension', $normalizedLayerStates, true) ? 'layer_tension' : 'layer_agreement';
+            }
+
+            return $selected;
         }
 
         return ['layer_unavailable', '140q_cta'];
@@ -464,7 +482,7 @@ final class RiasecPublicProjectionService
                 ? $this->normalizeStructuralDifferenceState((string) data_get($payload, 'structural_difference_state', data_get($comparePolicy, 'structural_difference_state', 'different_emphasis')))
                 : 'cross_form_not_comparable',
             'basis' => 'task_environment_role_emphasis_only',
-            'selection_rule' => 'explicit_layer_state_or_default_agreement_without_score_delta',
+            'selection_rule' => 'explicit_layer_state_or_unavailable_without_score_delta',
             'score_comparison_allowed' => false,
             'raw_score_delta_allowed' => false,
             'raw_scores_used_for_selection' => false,
@@ -475,9 +493,9 @@ final class RiasecPublicProjectionService
             'result_override_allowed' => false,
             'code_conversion_allowed' => false,
             'layer_states' => [
-                'task' => $this->normalize140qSelectionLayerState((string) ($layerStates['task'] ?? data_get($payload, 'task_layer_state', 'agreement'))),
-                'environment' => $this->normalize140qSelectionLayerState((string) ($layerStates['environment'] ?? data_get($payload, 'environment_layer_state', 'agreement'))),
-                'role' => $this->normalize140qSelectionLayerState((string) ($layerStates['role'] ?? data_get($payload, 'role_layer_state', 'agreement'))),
+                'task' => $this->normalize140qSelectionLayerState((string) ($layerStates['task'] ?? data_get($payload, 'task_layer_state', 'unavailable'))),
+                'environment' => $this->normalize140qSelectionLayerState((string) ($layerStates['environment'] ?? data_get($payload, 'environment_layer_state', 'unavailable'))),
+                'role' => $this->normalize140qSelectionLayerState((string) ($layerStates['role'] ?? data_get($payload, 'role_layer_state', 'unavailable'))),
             ],
             'public_copy_boundary' => '60Q 与 140Q 只能读作线索强调不同，不比较 raw score，不输出优劣或覆盖判断。',
         ];
@@ -489,7 +507,7 @@ final class RiasecPublicProjectionService
 
         return in_array($normalized, ['agreement', 'tension', 'unavailable', 'insufficient_quality', 'not_applicable_60q_only'], true)
             ? $normalized
-            : 'agreement';
+            : 'unavailable';
     }
 
     private function normalizeStructuralDifferenceState(string $state): string

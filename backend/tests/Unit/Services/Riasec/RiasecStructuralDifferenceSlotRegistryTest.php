@@ -158,6 +158,65 @@ final class RiasecStructuralDifferenceSlotRegistryTest extends TestCase
         $this->assertSame('task_environment_role_emphasis_only', $summarySlot['selection_basis']);
     }
 
+    public function test_140q_projection_fails_closed_when_layer_states_are_missing_or_invalid(): void
+    {
+        $cases = [
+            'EAR' => [
+                'scores' => ['E' => 63, 'A' => 58, 'R' => 55, 'I' => 50, 'S' => 47, 'C' => 42],
+                'breakdown' => ['activity_E' => 63, 'env_E' => 83, 'role_E' => 42, 'role_R' => 67, 'role_S' => 67],
+            ],
+            'ICA' => [
+                'scores' => ['I' => 66, 'C' => 62, 'A' => 58, 'R' => 50, 'S' => 45, 'E' => 40],
+                'breakdown' => ['activity_I' => 77, 'env_I' => 8, 'env_C' => 75, 'role_I' => 50, 'role_A' => 83],
+            ],
+            'AIC' => [
+                'scores' => ['A' => 64, 'I' => 61, 'C' => 59, 'R' => 52, 'S' => 50, 'E' => 38],
+                'breakdown' => ['activity_A' => 64, 'env_A' => 33, 'env_C' => 67, 'env_I' => 67, 'env_R' => 67, 'env_S' => 67, 'role_A' => 50, 'role_I' => 83],
+            ],
+        ];
+
+        foreach ($cases as $topCode => $case) {
+            $result = new Result;
+            $result->scale_code = 'RIASEC';
+            $result->type_code = $topCode;
+            $result->scores_pct = $case['scores'];
+            $result->result_json = array_merge($case['breakdown'], [
+                'top_code' => $topCode,
+                'form_code' => 'riasec_140',
+                'answer_count' => 140,
+                'task_layer_state' => 'unknown_state',
+            ]);
+
+            $service = $this->projectionService();
+            $v1 = $service->buildFromResult($result);
+            $projection = $service->buildV2FromResult($result);
+
+            foreach ($case['breakdown'] as $key => $value) {
+                $path = str_starts_with($key, 'activity_')
+                    ? 'activity.'.substr($key, 9)
+                    : (str_starts_with($key, 'env_') ? 'environment.'.substr($key, 4) : 'role.'.substr($key, 5));
+                $this->assertSame((float) $value, data_get($v1, 'enhanced_breakdown.'.$path));
+            }
+
+            $this->assertSame([
+                'task' => 'unavailable',
+                'environment' => 'unavailable',
+                'role' => 'unavailable',
+            ], data_get($projection, 'structural_difference.layer_states'));
+
+            $slotIds = array_column((array) data_get($projection, 'deep_content_slots_v1.slots', []), 'slot_id');
+            $this->assertNotContains('140q_layer_agreement_copy:layer_agreement', $slotIds);
+            $this->assertNotContains('140q_tension_copy:layer_tension', $slotIds);
+            $this->assertEmpty(array_filter(
+                $slotIds,
+                static fn (string $slotId): bool => str_contains($slotId, '_agreement') || str_contains($slotId, '_tension')
+            ));
+            $this->assertContains('140q_task_card_copy:task_activity_card', $slotIds);
+            $this->assertContains('140q_environment_card_copy:environment_card', $slotIds);
+            $this->assertContains('140q_role_card_copy:role_responsibility_card', $slotIds);
+        }
+    }
+
     private function attempt(string $id, string $formCode, int $questionCount): Attempt
     {
         $attempt = new Attempt;

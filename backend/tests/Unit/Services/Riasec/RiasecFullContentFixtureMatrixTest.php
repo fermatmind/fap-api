@@ -366,7 +366,7 @@ final class RiasecFullContentFixtureMatrixTest extends TestCase
         $this->assertFalse((bool) data_get($projection, 'form.raw_score_delta_allowed'));
         $this->assertSame('emphasis_difference_only', data_get($projection, 'form.cross_form_interpretation'));
         $this->assertSame('task_environment_role_emphasis_only', data_get($projection, 'structural_difference.basis'));
-        $this->assertSame('explicit_layer_state_or_default_agreement_without_score_delta', data_get($projection, 'structural_difference.selection_rule'));
+        $this->assertSame('explicit_layer_state_or_unavailable_without_score_delta', data_get($projection, 'structural_difference.selection_rule'));
         $this->assertFalse((bool) data_get($projection, 'structural_difference.raw_score_delta_allowed'));
         $this->assertFalse((bool) data_get($projection, 'structural_difference.raw_scores_used_for_selection'));
         $this->assertSame('tension', data_get($projection, 'structural_difference.layer_states.environment'));
