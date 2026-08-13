@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class PersonalityDesktopCloneMediaAssetBaselineTest extends TestCase
 {
-    public function test_mbti_desktop_clone_baseline_has_ready_media_library_backed_slots(): void
+    public function test_mbti_desktop_clone_baseline_disables_all_slots_but_preserves_source_media(): void
     {
         $clone = $this->decodeJson(base_path('../content_baselines/personality_clone/mbti_desktop_clone.zh-CN.json'));
         $mediaRows = collect($this->decodeJson(base_path('../content_baselines/media_assets/mbti_desktop_clone_assets.v1.json')))
@@ -31,20 +31,16 @@ final class PersonalityDesktopCloneMediaAssetBaselineTest extends TestCase
                 $assetKey = sprintf('mbti.desktop_clone.%s.%s', $fullCodeSlug, $slotId);
                 $path = sprintf('/static/mbti/desktop-clone/%s/%s.svg', $fullCodeSlug, $slotId);
 
-                $this->assertSame(PersonalityDesktopCloneAssetSlotSupport::STATUS_READY, $slot['status'] ?? null, $assetKey);
+                $this->assertSame(PersonalityDesktopCloneAssetSlotSupport::STATUS_DISABLED, $slot['status'] ?? null, $assetKey);
                 $this->assertSame($assetKey, data_get($slot, 'meta.media_library_asset_key'));
-                $this->assertSame(PersonalityDesktopCloneAssetSlotSupport::ASSET_PROVIDER_CDN, data_get($slot, 'assetRef.provider'));
-                $this->assertSame($path, data_get($slot, 'assetRef.path'));
-                $this->assertSame('https://assets.fermatmind.com'.$path, data_get($slot, 'assetRef.url'));
-                $this->assertStringStartsWith('sha256:', (string) data_get($slot, 'assetRef.checksum'));
-                $this->assertNotSame('', trim((string) ($slot['alt'] ?? '')));
+                $this->assertNull($slot['assetRef'] ?? null);
+                $this->assertSame('', $slot['alt'] ?? null);
 
                 $this->assertTrue($mediaRows->has($assetKey), $assetKey);
                 $media = $mediaRows->get($assetKey);
                 $this->assertSame($path, $media['path'] ?? null);
                 $this->assertSame('https://assets.fermatmind.com'.$path, $media['url'] ?? null);
                 $this->assertSame('image/svg+xml', $media['mime_type'] ?? null);
-                $this->assertSame($slot['alt'], $media['alt'] ?? null);
                 $this->assertFileExists(base_path('public'.$path), $path);
             }
         }

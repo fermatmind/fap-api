@@ -8,6 +8,7 @@ use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariantCloneContent;
 use App\PersonalityCms\DesktopClone\PersonalityDesktopCloneAssetSlotSupport;
 use App\Repositories\PersonalityVariantCloneContentRepository;
+use App\Support\Mbti\MbtiReportAccessPolicy;
 use App\Support\Mbti\MbtiZhResultContentPolicy;
 
 final class PersonalityDesktopCloneContentService
@@ -59,6 +60,8 @@ final class PersonalityDesktopCloneContentService
         $assetSlots = PersonalityDesktopCloneAssetSlotSupport::normalizeAssetSlots(
             is_array($record->asset_slots_json) ? $record->asset_slots_json : [],
         );
+        $isFreeFull = $locale === 'zh-CN' && MbtiReportAccessPolicy::grantsFreeFull(PersonalityProfile::SCALE_CODE_MBTI);
+        $meta = is_array($record->meta_json) ? $record->meta_json : [];
 
         return [
             'template_key' => (string) $record->template_key,
@@ -66,7 +69,7 @@ final class PersonalityDesktopCloneContentService
             'full_code' => (string) $variant->runtime_type_code,
             'base_code' => $baseCode,
             'locale' => (string) $profile->locale,
-            'content' => $this->redactPublicContent($content),
+            'content' => $isFreeFull ? $this->unlockPublicContent($content) : $this->redactPublicContent($content),
             'asset_slots' => MbtiZhResultContentPolicy::normalizeAssetSlots($assetSlots, $locale),
             '_meta' => [
                 'authority_source' => 'personality_profile_variant_clone_contents',
@@ -77,6 +80,10 @@ final class PersonalityDesktopCloneContentService
                 'variant_id' => (int) $variant->id,
                 'profile_id' => (int) $profile->id,
                 'published_at' => $record->published_at?->toISOString(),
+                'package_id' => $meta['package_id'] ?? null,
+                'package_hash' => $meta['package_hash'] ?? null,
+                'source_hash' => $meta['source_hash'] ?? null,
+                'revision_no' => isset($meta['revision_no']) ? (int) $meta['revision_no'] : null,
             ],
         ];
     }
@@ -115,6 +122,50 @@ final class PersonalityDesktopCloneContentService
             }
 
             $content['chapters'][$chapterKey] = $chapter;
+        }
+
+        return $content;
+    }
+
+    /**
+     * @param  array<string, mixed>  $content
+     * @return array<string, mixed>
+     */
+    private function unlockPublicContent(array $content): array
+    {
+        foreach (['career', 'growth', 'relationships'] as $chapterKey) {
+            if (! is_array($content['chapters'][$chapterKey] ?? null)) {
+                continue;
+            }
+
+            foreach (['lockedBlocks', 'visibleBlocks'] as $blockKey) {
+                foreach ((array) ($content['chapters'][$chapterKey][$blockKey] ?? []) as $blockIndex => $block) {
+                    if (! is_array($block)) {
+                        continue;
+                    }
+                    $block['is_locked'] = false;
+                    foreach ((array) ($block['blurredItems'] ?? []) as $itemIndex => $item) {
+                        if (is_array($item)) {
+                            $item['is_locked'] = false;
+                            $block['blurredItems'][$itemIndex] = $item;
+                        }
+                    }
+                    $content['chapters'][$chapterKey][$blockKey][$blockIndex] = $block;
+                }
+            }
+
+            foreach ($this->premiumInsightModuleKeys($chapterKey) as $moduleKey) {
+                if (! is_array($content['chapters'][$chapterKey][$moduleKey] ?? null)) {
+                    continue;
+                }
+                $content['chapters'][$chapterKey][$moduleKey]['is_locked'] = false;
+                foreach ((array) ($content['chapters'][$chapterKey][$moduleKey]['items'] ?? []) as $itemIndex => $item) {
+                    if (is_array($item)) {
+                        $item['is_locked'] = false;
+                        $content['chapters'][$chapterKey][$moduleKey]['items'][$itemIndex] = $item;
+                    }
+                }
+            }
         }
 
         return $content;

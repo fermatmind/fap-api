@@ -4,6 +4,7 @@ namespace App\Services\Report\Resolvers;
 
 use App\Services\Commerce\EntitlementManager;
 use App\Services\Report\ReportAccess;
+use App\Support\Mbti\MbtiReportAccessPolicy;
 
 class AccessResolver
 {
@@ -120,6 +121,10 @@ class AccessResolver
     public function freeFullReportModeEnabled(string $scaleCode): bool
     {
         $scaleCode = strtoupper(trim($scaleCode));
+        if ($scaleCode === ReportAccess::SCALE_MBTI) {
+            return MbtiReportAccessPolicy::grantsFreeFull($scaleCode);
+        }
+
         $container = \Illuminate\Container\Container::getInstance();
         if (! $container || ! $container->bound('config')) {
             return false;

@@ -35,7 +35,7 @@ final class MbtiPublicProjectionService
 
         $authority = $this->baseRuntimeAuthorityFromSummary($summary, $locale);
 
-        if ($identity instanceof MbtiPublicTypeIdentity) {
+        if ($identity instanceof MbtiPublicTypeIdentity && $this->normalizeLocale($locale) !== 'zh-CN') {
             $fallbackAuthority = (new MbtiReportAuthoritySourceAdapter(
                 $this->arrayOrEmpty($reportPayload['report'] ?? null),
                 'report.v0_3.public_fallback'
@@ -49,6 +49,10 @@ final class MbtiPublicProjectionService
                 $locale,
                 $orgId
             );
+        } elseif ($identity instanceof MbtiPublicTypeIdentity) {
+            $authority['_meta']['authority_source'] = 'runtime_science_identity';
+            $authority['_meta']['result_narrative_authority'] = 'personality_profile_variant_clone_contents';
+            $authority['_meta']['result_narrative_template_key'] = 'mbti_desktop_clone_v1';
         }
 
         $projection = $this->finalizeProjection(

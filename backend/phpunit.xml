@@ -26,6 +26,7 @@
     <php>
         <ini name="memory_limit" value="1024M"/>
         <env name="APP_ENV" value="testing"/>
+        <env name="MBTI_REPORT_ACCESS_MODE" value="paid_unlock"/>
         <env name="APP_KEY" value="fap_api_phpunit_test_key_32bytes"/>
         <env name="APP_CONFIG_CACHE" value="bootstrap/cache/config-testing.php"/>
         <env name="APP_MAINTENANCE_DRIVER" value="file"/>

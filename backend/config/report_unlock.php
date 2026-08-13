@@ -12,6 +12,7 @@ $csv = static fn (string $key, string $default = ''): array => array_values(arra
 
 return [
     'contract_version' => 'report_unlock.v1',
+    'mbti_access_mode' => env('MBTI_REPORT_ACCESS_MODE', 'free_full'),
     'benefit' => 'full_report',
     'scope' => 'attempt',
     'currency' => 'CNY',
