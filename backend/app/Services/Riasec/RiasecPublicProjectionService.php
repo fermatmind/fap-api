@@ -700,7 +700,7 @@ final class RiasecPublicProjectionService
                 'environment' => $this->normalize140qSelectionLayerState((string) ($layerStates['environment'] ?? data_get($payload, 'environment_layer_state', 'unavailable'))),
                 'role' => $this->normalize140qSelectionLayerState((string) ($layerStates['role'] ?? data_get($payload, 'role_layer_state', 'unavailable'))),
             ],
-            'public_copy_boundary' => '60Q 与 140Q 只能读作线索强调不同，不比较 raw score，不输出优劣或覆盖判断。',
+            'public_copy_boundary' => '60Q 与 140Q 只能读作线索强调不同，不比较原始分数，不输出优劣或覆盖判断。',
         ];
     }
 
