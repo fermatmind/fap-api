@@ -33,6 +33,17 @@ final class CareerColdCacheDiscoverabilityGateTest extends TestCase
     }
 
     #[Test]
+    public function product_visible_candidate_requires_discoverability_to_remain_held_until_release(): void
+    {
+        $projection = $this->projection();
+        $projection['items'][0]['sitemap_live'] = true;
+
+        $this->expectFailureCode('AUTHORITY_PUBLISHED_SURFACE_FLAGS_MISALIGNED');
+
+        CareerColdCacheDiscoverabilityValidator::authoritySnapshot($projection, str_repeat('a', 64));
+    }
+
+    #[Test]
     public function cold_detail_cache_blocks_before_directory_or_sitemap_activation(): void
     {
         $snapshot = $this->completePreSitemapSnapshot();
@@ -193,8 +204,8 @@ final class CareerColdCacheDiscoverabilityGateTest extends TestCase
                     'release_gate_pass' => true,
                     'dataset_visible' => true,
                     'search_visible' => true,
-                    'sitemap_live' => true,
-                    'llms_live' => true,
+                    'sitemap_live' => false,
+                    'llms_live' => false,
                 ];
             }
         }

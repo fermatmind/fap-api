@@ -69,8 +69,13 @@ final class CareerColdCacheDiscoverabilityValidator
             if (! self::isPublishedDetailItem($item)) {
                 continue;
             }
-            foreach (['dataset_visible', 'search_visible', 'sitemap_live', 'llms_live'] as $field) {
+            foreach (['dataset_visible', 'search_visible'] as $field) {
                 if (($item[$field] ?? false) !== true) {
+                    self::fail('AUTHORITY_PUBLISHED_SURFACE_FLAGS_MISALIGNED');
+                }
+            }
+            foreach (['sitemap_live', 'llms_live'] as $field) {
+                if (($item[$field] ?? true) !== false) {
                     self::fail('AUTHORITY_PUBLISHED_SURFACE_FLAGS_MISALIGNED');
                 }
             }
