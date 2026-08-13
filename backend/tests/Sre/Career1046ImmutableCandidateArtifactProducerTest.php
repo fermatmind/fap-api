@@ -75,6 +75,44 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
         self::assertSame(1046, array_sum($bounded['counts']['release_counts']));
     }
 
+    public function test_it_uses_the_exact_frozen_target_as_the_pre_activation_trusted_batch(): void
+    {
+        $manifest = $this->manifest();
+        $target = Career1046ImmutableCandidateArtifactProducer::frozenTargetSlugs($manifest);
+        $sortedTarget = $target;
+        sort($sortedTarget, SORT_STRING);
+
+        self::assertCount(1046, $target);
+        self::assertSame($target, array_values(array_unique($target)));
+        self::assertSame($sortedTarget, $target);
+        self::assertSame(
+            Career1046ImmutableCandidateGenerator::TARGET_SET_SHA256,
+            CareerGenerationCanonicalJson::setSha256($target),
+        );
+        self::assertSame([], array_values(array_intersect(
+            Career1046ImmutableCandidateGenerator::FORBIDDEN_SLUGS,
+            $target,
+        )));
+
+        $runner = file_get_contents(dirname(__DIR__, 2).'/scripts/operations/career_1046_immutable_candidate_artifact.php');
+        self::assertIsString($runner);
+        self::assertStringContainsString('app(CareerFullReleaseLedgerService::class)->build(', $runner);
+        self::assertStringContainsString('additionalSlugs: self::frozenTargetSlugs($manifest)', $runner);
+        self::assertStringContainsString('trustedRolloutAuthority: true', $runner);
+        self::assertStringContainsString('allowCacheWrites: false', $runner);
+        self::assertStringNotContainsString('CareerFullReleaseLedgerProjectionService::class', $runner);
+    }
+
+    public function test_frozen_target_authority_fails_closed_before_ledger_generation_on_drift(): void
+    {
+        $manifest = $this->manifest();
+        array_pop($manifest['delta_slugs']);
+
+        $this->expectException(Career1046ImmutableCandidateArtifactFailure::class);
+        $this->expectExceptionMessage('FROZEN_TARGET_AUTHORITY_INVALID');
+        Career1046ImmutableCandidateArtifactProducer::frozenTargetSlugs($manifest);
+    }
+
     public function test_target_bounded_ledger_rejects_identity_missing_or_duplicate_drift(): void
     {
         $manifest = $this->manifest();
@@ -204,7 +242,7 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
         $runner = file_get_contents(dirname(__DIR__, 2).'/scripts/operations/career_1046_immutable_candidate_artifact.php');
         self::assertIsString($runner);
         self::assertMatchesRegularExpression(
-            "/executeStage\\('ledger'.*assertTask3bDatabaseState.*CareerFullReleaseLedgerProjectionService::class/s",
+            "/executeStage\\('ledger'.*assertTask3bDatabaseState.*CareerFullReleaseLedgerService::class.*frozenTargetSlugs.*trustedRolloutAuthority: true.*allowCacheWrites: false/s",
             $runner,
         );
     }
