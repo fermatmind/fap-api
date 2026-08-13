@@ -15,7 +15,7 @@ return [
     'benefit' => 'full_report',
     'scope' => 'attempt',
     'currency' => 'CNY',
-    'price_cents' => 499,
+    'price_cents' => 199,
     'rollout_scales' => array_values(array_filter(array_map(
         static fn (mixed $value): string => strtoupper(trim((string) $value)),
         explode(',', (string) env('REPORT_UNLOCK_ROLLOUT_SCALES', 'MBTI'))
@@ -26,21 +26,29 @@ return [
     ))),
     'gift_request_ttl_hours' => (int) env('REPORT_UNLOCK_GIFT_REQUEST_TTL_HOURS', 72),
     'sku_by_scale' => [
-        'MBTI' => env('REPORT_UNLOCK_MBTI_SKU', 'MBTI_REPORT_FULL'),
-        'BIG5_OCEAN' => env('REPORT_UNLOCK_BIG5_SKU', 'SKU_BIG5_FULL_REPORT_499'),
+        'MBTI' => 'MBTI_REPORT_FULL_199',
+        'BIG5_OCEAN' => 'SKU_BIG5_FULL_REPORT_199',
+        'LOCAL_REPORT' => 'WEAPP_LOCAL_REPORT_FULL_199',
     ],
     'products' => [
         'MBTI' => [
-            'sku' => env('REPORT_UNLOCK_MBTI_SKU', 'MBTI_REPORT_FULL'),
+            'sku' => 'MBTI_REPORT_FULL_199',
             'benefit_code' => 'MBTI_REPORT_FULL',
-            'price_cents' => 499,
+            'price_cents' => 199,
             'currency' => 'CNY',
             'scope' => 'attempt',
         ],
         'BIG5_OCEAN' => [
-            'sku' => env('REPORT_UNLOCK_BIG5_SKU', 'SKU_BIG5_FULL_REPORT_499'),
+            'sku' => 'SKU_BIG5_FULL_REPORT_199',
             'benefit_code' => 'BIG5_FULL_REPORT',
-            'price_cents' => 499,
+            'price_cents' => 199,
+            'currency' => 'CNY',
+            'scope' => 'attempt',
+        ],
+        'LOCAL_REPORT' => [
+            'sku' => 'WEAPP_LOCAL_REPORT_FULL_199',
+            'benefit_code' => 'WEAPP_LOCAL_REPORT_FULL',
+            'price_cents' => 199,
             'currency' => 'CNY',
             'scope' => 'attempt',
         ],

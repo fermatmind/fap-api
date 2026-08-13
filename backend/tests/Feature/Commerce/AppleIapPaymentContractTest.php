@@ -90,7 +90,7 @@ final class AppleIapPaymentContractTest extends TestCase
             'X-Channel' => 'wechat_miniapp',
         ];
         $payload = [
-            'sku' => 'MBTI_REPORT_FULL',
+            'sku' => 'MBTI_REPORT_FULL_199',
             'quantity' => 1,
             'target_attempt_id' => $attemptId,
             'idempotency_key' => 'idem-apple-iap-1',
@@ -114,7 +114,7 @@ final class AppleIapPaymentContractTest extends TestCase
         $signDataJson = (string) $created->json('pay.params.signData');
         $signData = json_decode($signDataJson, true, flags: JSON_THROW_ON_ERROR);
         $this->assertSame(0, $signData['env']);
-        $this->assertSame(499, $signData['goodsPrice']);
+        $this->assertSame(199, $signData['goodsPrice']);
         $this->assertSame('CNY', $signData['currencyType']);
         $this->assertSame('mbti-report-full', $signData['productId']);
         $this->assertSame(
@@ -139,12 +139,12 @@ final class AppleIapPaymentContractTest extends TestCase
 
         config()->set('payments.apple_iap.app_key', 'rotated-production-app-key');
         config()->set('payments.apple_iap.offer_id', 'offer-test-v2');
-        config()->set('payments.apple_iap.sku', 'MBTI_REPORT_FULL_V2');
+        config()->set('payments.apple_iap.sku', 'MBTI_REPORT_FULL_199_V2');
         config()->set('payments.apple_iap.product_id', 'mbti-report-full-v2');
         config()->set('payments.apple_iap.price_cents', 999);
-        config()->set('report_unlock.sku_by_scale.MBTI', 'MBTI_REPORT_FULL_V2');
+        config()->set('report_unlock.sku_by_scale.MBTI', 'MBTI_REPORT_FULL_199_V2');
         config()->set('report_unlock.price_cents', 999);
-        DB::table('skus')->where('sku', 'MBTI_REPORT_FULL')->delete();
+        DB::table('skus')->where('sku', 'MBTI_REPORT_FULL_199')->delete();
         $duplicate = $this->withHeaders($headers)->postJson('/api/v0.3/orders/apple_iap', $payload);
         $duplicate->assertOk();
         $this->assertSame($orderNo, (string) $duplicate->json('order_no'));
@@ -215,7 +215,7 @@ final class AppleIapPaymentContractTest extends TestCase
             'X-Channel' => 'wechat_miniapp',
         ];
         $payload = [
-            'sku' => 'MBTI_REPORT_FULL',
+            'sku' => 'MBTI_REPORT_FULL_199',
             'quantity' => 1,
             'target_attempt_id' => $firstAttemptId,
             'idempotency_key' => 'idem-apple-iap-race',
@@ -226,7 +226,7 @@ final class AppleIapPaymentContractTest extends TestCase
             0,
             null,
             'anon_apple_iap_race',
-            'MBTI_REPORT_FULL',
+            'MBTI_REPORT_FULL_199',
             1,
             $firstAttemptId,
             AppleIapGateway::PROVIDER,
@@ -282,7 +282,7 @@ final class AppleIapPaymentContractTest extends TestCase
             'X-Channel' => 'wechat_miniapp',
         ];
         $payload = [
-            'sku' => 'MBTI_REPORT_FULL',
+            'sku' => 'MBTI_REPORT_FULL_199',
             'quantity' => 1,
             'target_attempt_id' => $attemptId,
             'idempotency_key' => 'idem-apple-iap-historical-settlement',
@@ -300,7 +300,7 @@ final class AppleIapPaymentContractTest extends TestCase
         $externalOrderNo = (string) ($signData['outTradeNo'] ?? '');
         $this->assertNotSame('', $externalOrderNo);
 
-        DB::table('skus')->where('sku', 'MBTI_REPORT_FULL')->delete();
+        DB::table('skus')->where('sku', 'MBTI_REPORT_FULL_199')->delete();
         $retry = $this->withHeaders($headers)->postJson('/api/v0.3/orders/apple_iap', $payload);
         $retry->assertOk()->assertJsonPath('order_no', $orderNo);
         Http::fake([
@@ -310,7 +310,7 @@ final class AppleIapPaymentContractTest extends TestCase
             ]),
             'https://api.weixin.qq.com/xpay/query_order*' => Http::sequence()
                 ->push($this->appleQueryResponse($externalOrderNo))
-                ->push($this->appleQueryResponse($externalOrderNo, 8, 499, 1700000200)),
+                ->push($this->appleQueryResponse($externalOrderNo, 8, 199, 1700000200)),
         ]);
 
         $settled = app(AppleIapPaymentService::class)->handleCallback($this->signedCallbackRequest([
@@ -322,8 +322,8 @@ final class AppleIapPaymentContractTest extends TestCase
             'GoodsInfo' => [
                 'ProductId' => 'mbti-report-full',
                 'Quantity' => 1,
-                'OrigPrice' => 499,
-                'ActualPrice' => 499,
+                'OrigPrice' => 199,
+                'ActualPrice' => 199,
                 'Attach' => $orderNo,
             ],
         ]));
@@ -364,7 +364,7 @@ final class AppleIapPaymentContractTest extends TestCase
             'X-Channel' => 'wechat_miniapp',
         ];
         $created = $this->withHeaders($headers)->postJson('/api/v0.3/orders/apple_iap', [
-            'sku' => 'MBTI_REPORT_FULL',
+            'sku' => 'MBTI_REPORT_FULL_199',
             'quantity' => 1,
             'target_attempt_id' => $attemptId,
             'idempotency_key' => 'idem-apple-iap-callback',
@@ -385,8 +385,8 @@ final class AppleIapPaymentContractTest extends TestCase
             'GoodsInfo' => [
                 'ProductId' => 'mbti-report-full',
                 'Quantity' => 1,
-                'OrigPrice' => 499,
-                'ActualPrice' => 499,
+                'OrigPrice' => 199,
+                'ActualPrice' => 199,
                 'Attach' => $orderNo,
             ],
         ];
@@ -399,7 +399,7 @@ final class AppleIapPaymentContractTest extends TestCase
 
         config()->set('payments.apple_iap.app_key', 'rotated-production-app-key');
         config()->set('payments.apple_iap.offer_id', 'offer-test-v2');
-        config()->set('payments.apple_iap.sku', 'MBTI_REPORT_FULL_V2');
+        config()->set('payments.apple_iap.sku', 'MBTI_REPORT_FULL_199_V2');
         config()->set('payments.apple_iap.product_id', 'mbti-report-full-v2');
         config()->set('payments.apple_iap.price_cents', 999);
         Http::fake([
@@ -415,13 +415,13 @@ final class AppleIapPaymentContractTest extends TestCase
                 ->push($this->appleQueryResponse($externalOrderNo))
                 ->push($this->appleQueryResponse($externalOrderNo, 8, 100, 1700000100))
                 ->push($this->appleQueryResponse($externalOrderNo, 8, 100, 1700000100))
-                ->push($this->appleQueryResponse($externalOrderNo, 8, 499, 1700000200))
-                ->push($this->appleQueryResponse($externalOrderNo, 8, 499, 1700000200))
+                ->push($this->appleQueryResponse($externalOrderNo, 8, 199, 1700000200))
+                ->push($this->appleQueryResponse($externalOrderNo, 8, 199, 1700000200))
                 ->push($this->appleQueryResponse($externalOrderNo, 8, 100, 1700000100))
                 ->push($this->appleQueryResponse($externalOrderNo)),
         ]);
 
-        DB::table('skus')->where('sku', 'MBTI_REPORT_FULL')->update([
+        DB::table('skus')->where('sku', 'MBTI_REPORT_FULL_199')->update([
             'benefit_code' => 'MBTI_REPORT_CHANGED_AFTER_SALE',
             'scope' => 'account',
             'meta_json' => json_encode([
@@ -505,7 +505,7 @@ final class AppleIapPaymentContractTest extends TestCase
             ->assertOk()
             ->assertJsonPath('provider_status', 8);
         $this->assertSame(4, DB::table('payment_events')->where('provider', AppleIapGateway::PROVIDER)->count());
-        $this->assertSame(499, DB::table('orders')->where('order_no', $orderNo)->value('refund_amount_cents'));
+        $this->assertSame(199, DB::table('orders')->where('order_no', $orderNo)->value('refund_amount_cents'));
 
         $providedGoodsNotificationsBeforeStalePayment = Http::recorded(
             static fn (ClientRequest $request): bool => str_contains($request->url(), '/xpay/notify_provide_goods')
@@ -522,7 +522,7 @@ final class AppleIapPaymentContractTest extends TestCase
             ->assertOk()
             ->assertJsonPath('provider_status', 8);
         $this->assertSame(4, DB::table('payment_events')->where('provider', AppleIapGateway::PROVIDER)->count());
-        $this->assertSame(499, DB::table('orders')->where('order_no', $orderNo)->value('refund_amount_cents'));
+        $this->assertSame(199, DB::table('orders')->where('order_no', $orderNo)->value('refund_amount_cents'));
 
         $this->withHeaders($headers)
             ->postJson('/api/v0.3/orders/'.$orderNo.'/apple-iap/reconcile')
@@ -559,7 +559,7 @@ final class AppleIapPaymentContractTest extends TestCase
             'X-Anon-Id' => 'anon_apple_iap',
         ];
         $created = $this->withHeaders($headers)->postJson('/api/v0.3/orders/apple_iap', [
-            'sku' => 'MBTI_REPORT_FULL',
+            'sku' => 'MBTI_REPORT_FULL_199',
             'target_attempt_id' => $attemptId,
             'idempotency_key' => 'idem-apple-iap-query-guards',
             'wx_login_code' => 'wx-login-apple-contract',
@@ -580,8 +580,8 @@ final class AppleIapPaymentContractTest extends TestCase
                         'status' => 2,
                         'order_type' => 0,
                         'env_type' => 1,
-                        'order_fee' => 499,
-                        'paid_fee' => 499,
+                        'order_fee' => 199,
+                        'paid_fee' => 199,
                     ],
                 ])
                 ->push([
@@ -591,8 +591,8 @@ final class AppleIapPaymentContractTest extends TestCase
                         'status' => 2,
                         'order_type' => 0,
                         'env_type' => 1,
-                        'order_fee' => 499,
-                        'paid_fee' => 499,
+                        'order_fee' => 199,
+                        'paid_fee' => 199,
                     ],
                 ])
                 ->push([
@@ -602,8 +602,8 @@ final class AppleIapPaymentContractTest extends TestCase
                         'status' => 2,
                         'order_type' => 7,
                         'env_type' => 2,
-                        'order_fee' => 499,
-                        'paid_fee' => 499,
+                        'order_fee' => 199,
+                        'paid_fee' => 199,
                     ],
                 ])
                 ->push($this->appleQueryResponse($externalOrderNo, 8, 0))
@@ -617,8 +617,8 @@ final class AppleIapPaymentContractTest extends TestCase
             'GoodsInfo' => [
                 'ProductId' => 'mbti-report-full',
                 'Quantity' => 1,
-                'OrigPrice' => 499,
-                'ActualPrice' => 499,
+                'OrigPrice' => 199,
+                'ActualPrice' => 199,
                 'Attach' => $orderNo,
             ],
         ];
@@ -653,9 +653,9 @@ final class AppleIapPaymentContractTest extends TestCase
     {
         config()->set('payments.providers.apple_iap.enabled', true);
         config()->set('report_unlock.providers.apple_iap.available', true);
-        config()->set('report_unlock.price_cents', 499);
+        config()->set('report_unlock.price_cents', 199);
         config()->set('report_unlock.currency', 'CNY');
-        config()->set('report_unlock.sku_by_scale.MBTI', 'MBTI_REPORT_FULL');
+        config()->set('report_unlock.sku_by_scale.MBTI', 'MBTI_REPORT_FULL_199');
         config()->set('payments.apple_iap', [
             'app_id' => 'wx-test-app',
             'app_secret' => 'wx-test-secret',
@@ -665,8 +665,8 @@ final class AppleIapPaymentContractTest extends TestCase
             'environment' => 0,
             'mode' => 'short_series_goods',
             'product_id' => 'mbti-report-full',
-            'sku' => 'MBTI_REPORT_FULL',
-            'price_cents' => 499,
+            'sku' => 'MBTI_REPORT_FULL_199',
+            'price_cents' => 199,
             'http_timeout_seconds' => 2,
         ]);
     }
@@ -717,14 +717,14 @@ final class AppleIapPaymentContractTest extends TestCase
 
     private function seedSku(): void
     {
-        DB::table('skus')->updateOrInsert(['sku' => 'MBTI_REPORT_FULL'], [
+        DB::table('skus')->updateOrInsert(['sku' => 'MBTI_REPORT_FULL_199'], [
             'org_id' => 0,
             'scale_code' => 'MBTI',
             'kind' => 'report_unlock',
             'unit_qty' => 1,
             'benefit_code' => 'MBTI_REPORT_FULL',
             'scope' => 'attempt',
-            'price_cents' => 499,
+            'price_cents' => 199,
             'currency' => 'CNY',
             'is_active' => true,
             'meta_json' => null,
@@ -780,7 +780,7 @@ final class AppleIapPaymentContractTest extends TestCase
     private function appleQueryResponse(
         string $externalOrderNo,
         int $status = 2,
-        int $refundAmount = 499,
+        int $refundAmount = 199,
         int $updateTime = 1700000100
     ): array {
         $isRefund = $status === 8;
@@ -795,8 +795,8 @@ final class AppleIapPaymentContractTest extends TestCase
                 'status' => $status,
                 'order_type' => $isRefund ? 8 : 7,
                 'env_type' => 1,
-                'order_fee' => 499,
-                'paid_fee' => 499,
+                'order_fee' => 199,
+                'paid_fee' => 199,
                 'refund_fee' => $isRefund ? $refundAmount : null,
                 'paid_time' => 1700000000,
                 'update_time' => $isRefund ? $updateTime : 1700000050,

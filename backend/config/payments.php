@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+$sharedWechatReportProductId = 'FullReport199';
+$sharedWechatReportPriceCents = 199;
+$mbtiReportSku = 'MBTI_REPORT_FULL_199';
+
 return [
     'provider_priority' => [
         'CN_MAINLAND' => [
@@ -80,13 +84,16 @@ return [
         'callback_token' => env('WECHAT_MINI_VIRTUAL_CALLBACK_TOKEN', ''),
         'environment' => (int) env('WECHAT_MINI_VIRTUAL_ENVIRONMENT', 1),
         'mode' => env('WECHAT_MINI_VIRTUAL_MODE', 'short_series_goods'),
-        'product_id' => env('WECHAT_MINI_VIRTUAL_PRODUCT_ID', ''),
-        'sku' => env('WECHAT_MINI_VIRTUAL_SKU', 'MBTI_REPORT_FULL'),
-        'price_cents' => (int) env('WECHAT_MINI_VIRTUAL_PRICE_CENTS', 499),
+        'product_id' => $sharedWechatReportProductId,
+        'sku' => $mbtiReportSku,
+        'price_cents' => $sharedWechatReportPriceCents,
         'http_timeout_seconds' => (int) env('WECHAT_MINI_VIRTUAL_HTTP_TIMEOUT_SECONDS', 8),
         'products' => [
             'BIG5_OCEAN' => [
-                'product_id' => env('WECHAT_MINI_VIRTUAL_BIG5_PRODUCT_ID', 'BigFive'),
+                'product_id' => $sharedWechatReportProductId,
+            ],
+            'LOCAL_REPORT' => [
+                'product_id' => $sharedWechatReportProductId,
             ],
         ],
     ],
@@ -101,13 +108,16 @@ return [
         'callback_token' => env('APPLE_IAP_WECHAT_CALLBACK_TOKEN', ''),
         'environment' => 0,
         'mode' => env('APPLE_IAP_WECHAT_MODE', 'short_series_goods'),
-        'product_id' => env('APPLE_IAP_WECHAT_PRODUCT_ID', ''),
-        'sku' => env('APPLE_IAP_WECHAT_SKU', 'MBTI_REPORT_FULL'),
-        'price_cents' => (int) env('APPLE_IAP_WECHAT_PRICE_CENTS', 499),
+        'product_id' => $sharedWechatReportProductId,
+        'sku' => $mbtiReportSku,
+        'price_cents' => $sharedWechatReportPriceCents,
         'http_timeout_seconds' => (int) env('APPLE_IAP_WECHAT_HTTP_TIMEOUT_SECONDS', 8),
         'products' => [
             'BIG5_OCEAN' => [
-                'product_id' => env('APPLE_IAP_WECHAT_BIG5_PRODUCT_ID', 'BigFive'),
+                'product_id' => $sharedWechatReportProductId,
+            ],
+            'LOCAL_REPORT' => [
+                'product_id' => $sharedWechatReportProductId,
             ],
         ],
     ],

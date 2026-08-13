@@ -504,39 +504,61 @@ class PaymentWebhookHandlerCore
                 $outcome['error_message'] = 'target_attempt_id is required for report_unlock.';
             } else {
                 $snapshotMeta = is_array($ctx['snapshot_meta'] ?? null) ? $ctx['snapshot_meta'] : [];
-                try {
-                    $this->reportSnapshots->seedPendingSnapshot($orgId, $attemptId, $orderNo !== '' ? $orderNo : null, [
-                        'scale_code' => (string) ($snapshotMeta['scale_code'] ?? ''),
-                        'scale_code_v2' => (string) ($snapshotMeta['scale_code_v2'] ?? ''),
-                        'scale_uid' => (string) ($snapshotMeta['scale_uid'] ?? ''),
-                        'pack_id' => (string) ($snapshotMeta['pack_id'] ?? ''),
-                        'dir_version' => (string) ($snapshotMeta['dir_version'] ?? ''),
-                        'scoring_spec_version' => (string) ($snapshotMeta['scoring_spec_version'] ?? ''),
-                    ]);
-
-                    $outcome['snapshot_job_ctx'] = [
-                        'org_id' => $orgId,
-                        'attempt_id' => $attemptId,
-                        'trigger_source' => 'payment',
-                        'order_no' => $orderNo !== '' ? $orderNo : null,
-                    ];
-                    $outcome['pdf_job_ctx'] = [
-                        'org_id' => $orgId,
-                        'attempt_id' => $attemptId,
-                        'trigger_source' => 'payment_unlock',
-                        'order_no' => $orderNo !== '' ? $orderNo : null,
-                    ];
-
+                $isLocalReportSession = strtoupper(trim((string) ($snapshotMeta['scale_code'] ?? ''))) === 'LOCAL_REPORT';
+                if (! $isLocalReportSession) {
                     try {
-                        $this->emitScaleUnlockTelemetry(
-                            $orgId,
-                            $attemptId,
-                            $provider,
-                            $providerEventId,
-                            $orderNo !== '' ? $orderNo : null
-                        );
+                        $this->reportSnapshots->seedPendingSnapshot($orgId, $attemptId, $orderNo !== '' ? $orderNo : null, [
+                            'scale_code' => (string) ($snapshotMeta['scale_code'] ?? ''),
+                            'scale_code_v2' => (string) ($snapshotMeta['scale_code_v2'] ?? ''),
+                            'scale_uid' => (string) ($snapshotMeta['scale_uid'] ?? ''),
+                            'pack_id' => (string) ($snapshotMeta['pack_id'] ?? ''),
+                            'dir_version' => (string) ($snapshotMeta['dir_version'] ?? ''),
+                            'scoring_spec_version' => (string) ($snapshotMeta['scoring_spec_version'] ?? ''),
+                        ]);
+
+                        $outcome['snapshot_job_ctx'] = [
+                            'org_id' => $orgId,
+                            'attempt_id' => $attemptId,
+                            'trigger_source' => 'payment',
+                            'order_no' => $orderNo !== '' ? $orderNo : null,
+                        ];
+                        $outcome['pdf_job_ctx'] = [
+                            'org_id' => $orgId,
+                            'attempt_id' => $attemptId,
+                            'trigger_source' => 'payment_unlock',
+                            'order_no' => $orderNo !== '' ? $orderNo : null,
+                        ];
+
+                        try {
+                            $this->emitScaleUnlockTelemetry(
+                                $orgId,
+                                $attemptId,
+                                $provider,
+                                $providerEventId,
+                                $orderNo !== '' ? $orderNo : null
+                            );
+                        } catch (\Throwable $e) {
+                            Log::warning('PAYMENT_WEBHOOK_UNLOCK_TELEMETRY_FAILED', [
+                                'provider' => $provider,
+                                'provider_event_id' => $providerEventId,
+                                'order_no' => $orderNo,
+                                'org_id' => $orgId,
+                                'attempt_id' => $attemptId,
+                                'error_message' => SensitiveDiagnosticRedactor::redactString($e->getMessage()),
+                            ]);
+                        }
+
+                        if (! $this->isCrisisAttempt($orgId, $attemptId)) {
+                            $this->queueBigFiveUnlockEmail(
+                                $orgId,
+                                $attemptId,
+                                $orderNo,
+                                is_string($ctx['event_user_id'] ?? null) ? (string) $ctx['event_user_id'] : null,
+                                is_array($ctx['event_meta'] ?? null) ? (array) $ctx['event_meta'] : []
+                            );
+                        }
                     } catch (\Throwable $e) {
-                        Log::warning('PAYMENT_WEBHOOK_UNLOCK_TELEMETRY_FAILED', [
+                        Log::error('PAYMENT_WEBHOOK_POST_COMMIT_SEED_SNAPSHOT_FAILED', [
                             'provider' => $provider,
                             'provider_event_id' => $providerEventId,
                             'order_no' => $orderNo,
@@ -544,29 +566,10 @@ class PaymentWebhookHandlerCore
                             'attempt_id' => $attemptId,
                             'error_message' => SensitiveDiagnosticRedactor::redactString($e->getMessage()),
                         ]);
+                        $outcome['ok'] = false;
+                        $outcome['error_code'] = 'SEED_SNAPSHOT_FAILED';
+                        $outcome['error_message'] = 'report snapshot preparation failed.';
                     }
-
-                    if (! $this->isCrisisAttempt($orgId, $attemptId)) {
-                        $this->queueBigFiveUnlockEmail(
-                            $orgId,
-                            $attemptId,
-                            $orderNo,
-                            is_string($ctx['event_user_id'] ?? null) ? (string) $ctx['event_user_id'] : null,
-                            is_array($ctx['event_meta'] ?? null) ? (array) $ctx['event_meta'] : []
-                        );
-                    }
-                } catch (\Throwable $e) {
-                    Log::error('PAYMENT_WEBHOOK_POST_COMMIT_SEED_SNAPSHOT_FAILED', [
-                        'provider' => $provider,
-                        'provider_event_id' => $providerEventId,
-                        'order_no' => $orderNo,
-                        'org_id' => $orgId,
-                        'attempt_id' => $attemptId,
-                        'error_message' => SensitiveDiagnosticRedactor::redactString($e->getMessage()),
-                    ]);
-                    $outcome['ok'] = false;
-                    $outcome['error_code'] = 'SEED_SNAPSHOT_FAILED';
-                    $outcome['error_message'] = 'report snapshot preparation failed.';
                 }
             }
         } else {

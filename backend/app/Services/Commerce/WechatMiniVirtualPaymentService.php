@@ -80,6 +80,23 @@ final class WechatMiniVirtualPaymentService
             && ($contract === null || $expectedSku === '' || strtoupper(trim($sku)) !== $expectedSku)) {
             return $this->error('SKU_NOT_SUPPORTED', 'sku is not supported by this provider.', 422);
         }
+        if ($scale === 'LOCAL_REPORT') {
+            $benefitCode = strtoupper(trim((string) ($contract['benefit_code'] ?? '')));
+            $alreadyGranted = $benefitCode !== '' && DB::table('benefit_grants')
+                ->where('org_id', $orgId)
+                ->where('attempt_id', trim($targetAttemptId))
+                ->where('benefit_code', $benefitCode)
+                ->where('status', 'active')
+                ->exists();
+            if ($alreadyGranted) {
+                return $this->error('REPORT_ALREADY_FULL', 'report already has full access.', 409);
+            }
+
+            return [
+                'ok' => true,
+                'historical_idempotent_retry' => $historicalAppleRetry,
+            ];
+        }
         $rolloutScales = array_map(
             static fn (mixed $value): string => strtoupper(trim((string) $value)),
             (array) config('report_unlock.rollout_scales', [ReportAccess::SCALE_MBTI])

@@ -78,9 +78,9 @@ final class ReportGiftPurchaseContractTest extends TestCase
             ->assertOk()
             ->assertJsonPath('gift.status', 'pending')
             ->assertJsonPath('gift.scale_code', 'MBTI')
-            ->assertJsonPath('gift.price_cents', 499)
+            ->assertJsonPath('gift.price_cents', 199)
             ->assertJsonPath('gift.currency', 'CNY')
-            ->assertJsonPath('gift.display_price', '¥4.99')
+            ->assertJsonPath('gift.display_price', '¥1.99')
             ->assertJsonMissingPath('gift.target_attempt_id')
             ->assertJsonMissingPath('gift.recipient_user_id')
             ->assertJsonMissingPath('gift.recipient_anon_id')
@@ -104,7 +104,7 @@ final class ReportGiftPurchaseContractTest extends TestCase
     {
         config()->set('report_unlock.big5_rollout.mode', 'allowlist_only');
         config()->set('report_unlock.big5_rollout.allowed_anon_ids', ['anon_big5_gift_recipient']);
-        config()->set('payments.wechat_mini_virtual.products.BIG5_OCEAN.product_id', 'BigFive');
+        config()->set('payments.wechat_mini_virtual.products.BIG5_OCEAN.product_id', 'FullReport199');
         $this->seedBigFiveSku();
         $this->enableBigFivePaywall();
 
@@ -128,12 +128,12 @@ final class ReportGiftPurchaseContractTest extends TestCase
             ->assertOk();
         $orderNo = (string) $purchased->json('order_no');
         $signData = json_decode((string) $purchased->json('pay.params.signData'), true, flags: JSON_THROW_ON_ERROR);
-        $this->assertSame('BigFive', (string) $signData['productId']);
-        $this->assertSame(499, (int) $signData['goodsPrice']);
+        $this->assertSame('FullReport199', (string) $signData['productId']);
+        $this->assertSame(199, (int) $signData['goodsPrice']);
         $this->assertSame(0, DB::table('benefit_grants')->where('attempt_id', $attemptId)->count());
 
         $payload = $this->paidCallbackPayload($orderNo, (string) $signData['outTradeNo']);
-        $payload['GoodsInfo']['ProductId'] = 'BigFive';
+        $payload['GoodsInfo']['ProductId'] = 'FullReport199';
         $handled = app(WechatMiniVirtualPaymentService::class)
             ->handleCallback($this->signedCallbackRequest($payload));
         $this->assertTrue((bool) ($handled['ok'] ?? false));
@@ -278,9 +278,9 @@ final class ReportGiftPurchaseContractTest extends TestCase
                     'order_id' => (string) $signData['outTradeNo'],
                     'wx_order_id' => 'wx-gift-provider-trade',
                     'status' => 8,
-                    'order_fee' => 499,
-                    'paid_fee' => 499,
-                    'refund_fee' => 499,
+                    'order_fee' => 199,
+                    'paid_fee' => 199,
+                    'refund_fee' => 199,
                     'paid_time' => 1700000000,
                     'update_time' => 1700000100,
                 ],
@@ -362,9 +362,9 @@ final class ReportGiftPurchaseContractTest extends TestCase
                     'order_id' => (string) $signData['outTradeNo'],
                     'wx_order_id' => 'wx-gift-provider-trade',
                     'status' => 8,
-                    'order_fee' => 499,
-                    'paid_fee' => 499,
-                    'refund_fee' => 499,
+                    'order_fee' => 199,
+                    'paid_fee' => 199,
+                    'refund_fee' => 199,
                     'paid_time' => 1700000000,
                     'update_time' => 1700000100,
                 ],
@@ -1072,7 +1072,7 @@ final class ReportGiftPurchaseContractTest extends TestCase
         config()->set('payments.providers.wechat_mini_virtual.enabled', true);
         config()->set('report_unlock.providers.wechat_mini_virtual.available', true);
         config()->set('report_unlock.providers.gift_purchase.available', true);
-        config()->set('report_unlock.price_cents', 499);
+        config()->set('report_unlock.price_cents', 199);
         config()->set('report_unlock.currency', 'CNY');
         config()->set('report_unlock.sku_by_scale.MBTI', 'MBTI_REPORT_FULL');
         config()->set('payments.wechat_mini_virtual', [
@@ -1085,7 +1085,7 @@ final class ReportGiftPurchaseContractTest extends TestCase
             'mode' => 'short_series_goods',
             'product_id' => 'mbti-report-full-sandbox',
             'sku' => 'MBTI_REPORT_FULL',
-            'price_cents' => 499,
+            'price_cents' => 199,
             'http_timeout_seconds' => 2,
         ]);
     }
@@ -1141,7 +1141,7 @@ final class ReportGiftPurchaseContractTest extends TestCase
             'unit_qty' => 1,
             'benefit_code' => 'MBTI_REPORT_FULL',
             'scope' => 'attempt',
-            'price_cents' => 499,
+            'price_cents' => 199,
             'currency' => 'CNY',
             'is_active' => true,
             'meta_json' => null,
@@ -1152,14 +1152,14 @@ final class ReportGiftPurchaseContractTest extends TestCase
 
     private function seedBigFiveSku(): void
     {
-        DB::table('skus')->updateOrInsert(['sku' => 'SKU_BIG5_FULL_REPORT_499'], [
+        DB::table('skus')->updateOrInsert(['sku' => 'SKU_BIG5_FULL_REPORT_199'], [
             'org_id' => 0,
             'scale_code' => 'BIG5_OCEAN',
             'kind' => 'report_unlock',
             'unit_qty' => 1,
             'benefit_code' => 'BIG5_FULL_REPORT',
             'scope' => 'attempt',
-            'price_cents' => 499,
+            'price_cents' => 199,
             'currency' => 'CNY',
             'is_active' => true,
             'meta_json' => null,
@@ -1175,7 +1175,7 @@ final class ReportGiftPurchaseContractTest extends TestCase
         $capabilities = json_decode((string) $scale->capabilities_json, true, flags: JSON_THROW_ON_ERROR);
         $commercial = json_decode((string) $scale->commercial_json, true, flags: JSON_THROW_ON_ERROR);
         $capabilities['paywall_mode'] = 'full';
-        $commercial['report_unlock_sku'] = 'SKU_BIG5_FULL_REPORT_499';
+        $commercial['report_unlock_sku'] = 'SKU_BIG5_FULL_REPORT_199';
         $commercial['report_benefit_code'] = 'BIG5_FULL_REPORT';
         DB::table('scales_registry')->where('org_id', 0)->where('code', 'BIG5_OCEAN')->update([
             'capabilities_json' => json_encode($capabilities, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),
@@ -1198,8 +1198,8 @@ final class ReportGiftPurchaseContractTest extends TestCase
             'effective_sku' => 'MBTI_REPORT_FULL',
             'quantity' => 1,
             'target_attempt_id' => $attemptId,
-            'amount_cents' => 499,
-            'amount_total' => 499,
+            'amount_cents' => 199,
+            'amount_total' => 199,
             'amount_refunded' => 0,
             'currency' => 'CNY',
             'status' => 'fulfilled',
@@ -1274,9 +1274,9 @@ final class ReportGiftPurchaseContractTest extends TestCase
                     'order_id' => $providerOrderNo,
                     'wx_order_id' => 'wx-gift-provider-trade-'.$suffix,
                     'status' => 8,
-                    'order_fee' => 499,
-                    'paid_fee' => 499,
-                    'refund_fee' => 499,
+                    'order_fee' => 199,
+                    'paid_fee' => 199,
+                    'refund_fee' => 199,
                     'paid_time' => 1700000000,
                     'update_time' => 1700000100,
                 ],
@@ -1334,8 +1334,8 @@ final class ReportGiftPurchaseContractTest extends TestCase
             'GoodsInfo' => [
                 'ProductId' => 'mbti-report-full-sandbox',
                 'Quantity' => 1,
-                'OrigPrice' => 499,
-                'ActualPrice' => 499,
+                'OrigPrice' => 199,
+                'ActualPrice' => 199,
                 'Attach' => $orderNo,
             ],
         ];
