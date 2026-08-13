@@ -1,0 +1,355 @@
+name: Career Baseline Index State Authority Repair
+run-name: Career Baseline Index State Authority Repair ${{ inputs.mode }} [op:${{ inputs.operation_key }}]
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Zero-write preflight, one receipt-bound append-only apply, or apply-bound readback
+        required: true
+        type: choice
+        options: [preflight, apply, readback]
+      expected_control_plane_sha:
+        description: Exact latest main control-plane SHA
+        required: true
+        type: string
+      expected_active_revision:
+        description: Exact active production application SHA
+        required: true
+        type: string
+      expected_active_release_name:
+        description: Exact active production release name
+        required: true
+        type: string
+      preflight_run_id:
+        description: Apply/readback only; fresh preflight run id
+        required: false
+        default: ""
+        type: string
+      preflight_run_attempt:
+        description: Apply/readback only; preflight run attempt
+        required: false
+        default: ""
+        type: string
+      expected_preflight_receipt_sha256:
+        description: Apply/readback only; exact preflight receipt SHA-256
+        required: false
+        default: ""
+        type: string
+      expected_preflight_artifact_digest:
+        description: Apply/readback only; exact preflight artifact digest
+        required: false
+        default: ""
+        type: string
+      expected_baseline_state_sha256:
+        description: Apply/readback only; exact baseline latest-state snapshot SHA-256
+        required: false
+        default: ""
+        type: string
+      expected_delta_state_sha256:
+        description: Apply/readback only; exact unchanged delta latest-state snapshot SHA-256
+        required: false
+        default: ""
+        type: string
+      expected_repair_target_count:
+        description: Apply/readback only; exact preflight repair target count
+        required: false
+        default: ""
+        type: string
+      expected_repair_target_set_sha256:
+        description: Apply/readback only; exact preflight repair target set SHA-256
+        required: false
+        default: ""
+        type: string
+      apply_run_id:
+        description: Readback only; successful apply run id
+        required: false
+        default: ""
+        type: string
+      apply_run_attempt:
+        description: Readback only; successful apply run attempt
+        required: false
+        default: ""
+        type: string
+      expected_apply_receipt_sha256:
+        description: Readback only; exact apply receipt SHA-256
+        required: false
+        default: ""
+        type: string
+      expected_apply_artifact_digest:
+        description: Readback only; exact apply artifact digest
+        required: false
+        default: ""
+        type: string
+      authorization_phrase:
+        description: Apply only; exact workflow-generated receipt-bound phrase
+        required: false
+        default: ""
+        type: string
+      operation_key:
+        description: Deterministic controlled-operation key
+        required: true
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.repository }}-production
+  cancel-in-progress: false
+
+jobs:
+  operation_gate:
+    name: Elect baseline-repair owner before Environment access
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      decision: ${{ steps.gate.outputs.decision }}
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - id: identity
+        shell: bash
+        env:
+          IDENTITY: control=${{ inputs.expected_control_plane_sha }}|active=${{ inputs.expected_active_revision }}|release=${{ inputs.expected_active_release_name }}|mode=${{ inputs.mode }}|preflight=${{ inputs.preflight_run_id }}:${{ inputs.preflight_run_attempt }}:${{ inputs.expected_preflight_receipt_sha256 }}:${{ inputs.expected_preflight_artifact_digest }}|baseline=${{ inputs.expected_baseline_state_sha256 }}|delta=${{ inputs.expected_delta_state_sha256 }}|targets=${{ inputs.expected_repair_target_count }}:${{ inputs.expected_repair_target_set_sha256 }}|apply=${{ inputs.apply_run_id }}:${{ inputs.apply_run_attempt }}:${{ inputs.expected_apply_receipt_sha256 }}:${{ inputs.expected_apply_artifact_digest }}
+        run: |
+          set -euo pipefail
+          key="$(node .github/scripts/controlled-operation-gate.cjs key --repository "$GITHUB_REPOSITORY" --workflow .github/workflows/career-baseline-index-state-authority-repair.yml --scope career-baseline-index-state-authority-repair --identity "$IDENTITY")"
+          echo "operation_key=$key" >> "$GITHUB_OUTPUT"
+      - id: gate
+        uses: ./.github/actions/controlled-operation-gate
+        with:
+          claimed-key: ${{ inputs.operation_key }}
+          expected-key: ${{ steps.identity.outputs.operation_key }}
+          workflow-file: career-baseline-index-state-authority-repair.yml
+          receipt-template: career-baseline-index-state-authority-repair-{run_id}-{run_attempt}
+
+  control:
+    name: Execute exact baseline authority phase
+    needs: operation_gate
+    if: needs.operation_gate.outputs.decision == 'execute'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    environment: production
+    env:
+      MODE: ${{ inputs.mode }}
+      CONTROL_PLANE_SHA: ${{ inputs.expected_control_plane_sha }}
+      ACTIVE_REVISION: ${{ inputs.expected_active_revision }}
+      ACTIVE_RELEASE_NAME: ${{ inputs.expected_active_release_name }}
+      PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
+      PREFLIGHT_RUN_ATTEMPT: ${{ inputs.preflight_run_attempt }}
+      PREFLIGHT_RECEIPT_SHA256: ${{ inputs.expected_preflight_receipt_sha256 }}
+      PREFLIGHT_ARTIFACT_DIGEST: ${{ inputs.expected_preflight_artifact_digest }}
+      BASELINE_STATE_SHA256: ${{ inputs.expected_baseline_state_sha256 }}
+      DELTA_STATE_SHA256: ${{ inputs.expected_delta_state_sha256 }}
+      REPAIR_TARGET_COUNT: ${{ inputs.expected_repair_target_count }}
+      REPAIR_TARGET_SET_SHA256: ${{ inputs.expected_repair_target_set_sha256 }}
+      APPLY_RUN_ID: ${{ inputs.apply_run_id }}
+      APPLY_RUN_ATTEMPT: ${{ inputs.apply_run_attempt }}
+      APPLY_RECEIPT_SHA256: ${{ inputs.expected_apply_receipt_sha256 }}
+      APPLY_ARTIFACT_DIGEST: ${{ inputs.expected_apply_artifact_digest }}
+      AUTHORIZATION_PHRASE: ${{ inputs.authorization_phrase }}
+      GH_TOKEN: ${{ github.token }}
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+      SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+
+    steps:
+      - name: Initialize sanitized failure receipt before checkout
+        shell: bash
+        run: |
+          set -euo pipefail
+          jq -n --arg mode "$MODE" --arg control "$CONTROL_PLANE_SHA" --arg active "$ACTIVE_REVISION" '{
+            contract_version: "career.baseline_index_state_authority_repair.v1",
+            mode: $mode,
+            status: "HOLD_BASELINE_AUTHORITY_REPAIR",
+            safe_code: "CONTROL_INITIALIZATION",
+            control_plane_sha: $control,
+            active_revision: $active,
+            database_insert_count: 0, database_update_count: 0, database_delete_count: 0,
+            database_transaction_committed: false, cms_write_count: 0, cache_write_count: 0,
+            pointer_write_count: 0, artifact_write_count: 0, publication_write_count: 0,
+            discoverability_write_count: 0, migration_count: 0, deployment_count: 0,
+            restart_count: 0, sitemap_write_count: 0, llms_write_count: 0,
+            search_submission_count: 0, writes_committed: false,
+            automatic_retry_allowed: false, automatic_rollback_allowed: false
+          }' > "$RUNNER_TEMP/career-baseline-index-state-authority-repair.json"
+
+      - name: Checkout exact control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Validate latest main, active ancestry, and immutable incident lineage
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$MODE" =~ ^(preflight|apply|readback)$ ]]
+          [[ "$CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$ACTIVE_RELEASE_NAME" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]
+          test "$GITHUB_REF" = refs/heads/main
+          test "$GITHUB_SHA" = "$CONTROL_PLANE_SHA"
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$CONTROL_PLANE_SHA"
+          test "$(git rev-parse origin/main)" = "$CONTROL_PLANE_SHA"
+          git cat-file -e "${ACTIVE_REVISION}^{commit}"
+          git merge-base --is-ancestor "$ACTIVE_REVISION" "$CONTROL_PLANE_SHA"
+          test "$(git diff --name-only "$ACTIVE_REVISION..$CONTROL_PLANE_SHA" -- backend/database/migrations | wc -l | tr -d ' ')" = 0
+          test "$(sha256sum backend/docs/seo/generated/detail-ready-1046-rollout-manifest.v1.json | awk '{print $1}')" = b570ec0cdda65278aa543431886b3529d072de8d67a8e79f1cafbb1c4c8dfc0e
+          php -l backend/scripts/operations/career_baseline_index_state_authority_repair.php >/dev/null
+
+          validate_run() {
+            local run_id="$1" path="$2" conclusion="$3" head="$4" attempt="$5"
+            gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}" | jq -e --arg path "$path" --arg conclusion "$conclusion" --arg head "$head" --argjson attempt "$attempt" '
+              .path == $path and .event == "workflow_dispatch" and .head_branch == "main"
+              and .head_sha == $head and .run_attempt == $attempt
+              and .status == "completed" and .conclusion == $conclusion' >/dev/null
+          }
+          validate_run 31593321673 .github/workflows/career-current-generation-pointer-bootstrap-production-ops.yml success a2e8ac02d1de5893ba890b76323478321d78a23b 1
+          validate_run 31651168339 .github/workflows/career-publication-index-reconciliation-preflight-production-ops.yml success 3aa6318227400b23a128cbe135fd290dcf386e92 1
+          validate_run 31651231779 .github/workflows/career-publication-index-reconciliation-apply-production-ops.yml failure 3aa6318227400b23a128cbe135fd290dcf386e92 1
+
+          verify_artifact() {
+            local run_id="$1" name="$2" digest="$3" receipt_sha="$4" file="$5" destination="$6"
+            mkdir -p "$destination"
+            artifacts="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}/artifacts?per_page=100")"
+            artifact_id="$(jq -er --arg name "$name" --arg digest "$digest" '[.artifacts[] | select(.name == $name and .expired == false and .digest == $digest)] | if length == 1 then .[0].id else error("artifact lineage") end' <<<"$artifacts")"
+            gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${artifact_id}/zip" > "$destination/evidence.zip"
+            unzip -q "$destination/evidence.zip" -d "$destination/unpacked"
+            test "$(sha256sum "$destination/unpacked/$file" | awk '{print $1}')" = "$receipt_sha"
+          }
+          verify_artifact 31593321673 career-current-generation-pointer-bootstrap-apply-31593321673-1 sha256:101508066a741afd44d29b4c28bd866b1fa3d4772dfda14c71da71c320c545c7 e0898f6fbb438495319cf0acc8bd6f808eba18c3f3beeb4a4e7d690312c27bc4 career-current-generation-pointer-bootstrap.json "$RUNNER_TEMP/task2"
+          jq -e '.status == "PASS_APPLY_POINTER_BOOTSTRAPPED" and .generation_id == "career-current-342-30-bootstrap-v1" and .pointer_document_sha256 == "1ebfd2826be9d3b63d810d33050034e3d424c95b3db81fa49b0822c5e6b2ec08" and .authority.projection_sha256 == "397f2a4ec284e9c0a6cd610447541ad4773fa7a7f3045008fab5efb334ec85c6" and .authority.ledger_sha256 == "975b311bb346a090f1add678d5a6d9f1be230f87b223e2c3c829f4c7fd7aac6e" and .authority.slug_count == 342 and .authority.locale_row_count == 684 and .authority.published_slug_count == 30 and .authority.published_locale_row_count == 60' "$RUNNER_TEMP/task2/unpacked/career-current-generation-pointer-bootstrap.json" >/dev/null
+          verify_artifact 31651168339 career-publication-index-reconciliation-preflight-31651168339-1 sha256:2b3f92521db8ca3400ba98bb774018bffdcc2f8619f389ef0ed63fb789ac34e0 11c3a9dd4dcdb6b96bfeadde87cff855509a153916f3434a9f20cbb6f5d07e32 career-publication-index-reconciliation-preflight.json "$RUNNER_TEMP/task3a"
+          jq -e '.status == "PASS_SELECT_ONLY_RECONCILIATION_PREFLIGHT" and .database_latest_index_state.current_state_sha256 == "53ea7077bc46eb8e1da6df1da911000f805c8245b5d575de86e3263aea3220f4" and .database_latest_index_state.matching_count == 0 and .database_latest_index_state.missing_or_mismatching_count == 1016 and .writes_committed == false' "$RUNNER_TEMP/task3a/unpacked/career-publication-index-reconciliation-preflight.json" >/dev/null
+          verify_artifact 31651231779 career-publication-index-reconciliation-apply-31651231779-1 sha256:7b95906ec46d050492deae3742efecda37c133b8a8ea3ed56db2eef2219de69a 7017f6b288e06eeda0580e6057aee2d375976bea85a83190c32d7d2db4d38eed career-publication-index-reconciliation-apply.json "$RUNNER_TEMP/task3b"
+          jq -e '.status == "HOLD_EXACT_RECONCILIATION_APPLY" and .safe_code == "PREWRITE_AUTHORITY_NOT_EXACT" and .writes_committed == false and .database_transaction_committed == false and .automatic_retry_allowed == false' "$RUNNER_TEMP/task3b/unpacked/career-publication-index-reconciliation-apply.json" >/dev/null
+
+      - name: Validate phase inputs and receipt lineage
+        shell: bash
+        run: |
+          set -euo pipefail
+          numeric='^[1-9][0-9]*$'; sha='^[0-9a-f]{64}$'; digest='^sha256:[0-9a-f]{64}$'
+          download_receipt() {
+            local run_id="$1" attempt="$2" receipt_sha="$3" artifact_digest="$4" destination="$5"
+            run_json="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}")"
+            jq -e --arg control "$CONTROL_PLANE_SHA" --argjson attempt "$attempt" '.path == ".github/workflows/career-baseline-index-state-authority-repair.yml" and .event == "workflow_dispatch" and .head_branch == "main" and .head_sha == $control and .run_attempt == $attempt and .status == "completed" and .conclusion == "success"' <<<"$run_json" >/dev/null
+            completed="$(jq -er .updated_at <<<"$run_json")"
+            test "$(( $(date -u +%s) - $(date -u -d "$completed" +%s) ))" -le 21600
+            mkdir -p "$destination"
+            artifacts="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}/artifacts?per_page=100")"
+            id="$(jq -er --arg name "career-baseline-index-state-authority-repair-${run_id}-${attempt}" --arg digest "$artifact_digest" '[.artifacts[] | select(.name == $name and .expired == false and .digest == $digest)] | if length == 1 then .[0].id else error("artifact lineage") end' <<<"$artifacts")"
+            gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${id}/zip" > "$destination/evidence.zip"
+            unzip -q "$destination/evidence.zip" -d "$destination/unpacked"
+            test "$(sha256sum "$destination/unpacked/career-baseline-index-state-authority-repair.json" | awk '{print $1}')" = "$receipt_sha"
+          }
+          case "$MODE" in
+            preflight)
+              test -z "$PREFLIGHT_RUN_ID$PREFLIGHT_RUN_ATTEMPT$PREFLIGHT_RECEIPT_SHA256$PREFLIGHT_ARTIFACT_DIGEST$BASELINE_STATE_SHA256$DELTA_STATE_SHA256$REPAIR_TARGET_COUNT$REPAIR_TARGET_SET_SHA256$APPLY_RUN_ID$APPLY_RUN_ATTEMPT$APPLY_RECEIPT_SHA256$APPLY_ARTIFACT_DIGEST$AUTHORIZATION_PHRASE"
+              ;;
+            apply|readback)
+              [[ "$PREFLIGHT_RUN_ID" =~ $numeric && "$PREFLIGHT_RUN_ATTEMPT" =~ $numeric ]]
+              [[ "$PREFLIGHT_RECEIPT_SHA256" =~ $sha && "$PREFLIGHT_ARTIFACT_DIGEST" =~ $digest ]]
+              [[ "$BASELINE_STATE_SHA256" =~ $sha && "$DELTA_STATE_SHA256" =~ $sha ]]
+              [[ "$REPAIR_TARGET_COUNT" =~ ^([1-9]|[12][0-9]|30)$ && "$REPAIR_TARGET_SET_SHA256" =~ $sha ]]
+              test "$DELTA_STATE_SHA256" = 53ea7077bc46eb8e1da6df1da911000f805c8245b5d575de86e3263aea3220f4
+              download_receipt "$PREFLIGHT_RUN_ID" "$PREFLIGHT_RUN_ATTEMPT" "$PREFLIGHT_RECEIPT_SHA256" "$PREFLIGHT_ARTIFACT_DIGEST" "$RUNNER_TEMP/preflight"
+              preflight="$RUNNER_TEMP/preflight/unpacked/career-baseline-index-state-authority-repair.json"
+              jq -e --arg control "$CONTROL_PLANE_SHA" --arg active "$ACTIVE_REVISION" --arg baseline "$BASELINE_STATE_SHA256" --arg delta "$DELTA_STATE_SHA256" --arg targets "$REPAIR_TARGET_SET_SHA256" --argjson count "$REPAIR_TARGET_COUNT" '.contract_version == "career.baseline_index_state_authority_repair.v1" and .mode == "preflight" and .status == "PASS_BASELINE_REPAIR_REQUIRED" and .control_plane_sha == $control and .active_revision == $active and .baseline.current_state_sha256 == $baseline and .delta.current_state_sha256 == $delta and .baseline.repair_target_count == $count and .baseline.repair_target_set_sha256 == $targets and .baseline.latest_state_tie_count == 0 and .delta.latest_state_tie_count == 0 and .writes_committed == false and .automatic_retry_allowed == false' "$preflight" >/dev/null
+              ;;
+          esac
+          if [ "$MODE" = apply ]; then
+            test -z "$APPLY_RUN_ID$APPLY_RUN_ATTEMPT$APPLY_RECEIPT_SHA256$APPLY_ARTIFACT_DIGEST"
+            expected="I explicitly approve one append-only production Career baseline-30 index-state repair for control plane ${CONTROL_PLANE_SHA}, active revision ${ACTIVE_REVISION}, release ${ACTIVE_RELEASE_NAME}, preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT}, receipt ${PREFLIGHT_RECEIPT_SHA256}, artifact ${PREFLIGHT_ARTIFACT_DIGEST}, baseline state ${BASELINE_STATE_SHA256}, unchanged delta state ${DELTA_STATE_SHA256}, exact repair target count ${REPAIR_TARGET_COUNT} set ${REPAIR_TARGET_SET_SHA256}; insert only exact baseline index_states rows in one transaction, no update/delete/delta/outside-target/CMS/cache/pointer/artifact/publication/discoverability/migration/deploy/restart/sitemap/llms/Search action, no retry or rollback."
+            test "$AUTHORIZATION_PHRASE" = "$expected"
+          elif [ "$MODE" = readback ]; then
+            test -z "$AUTHORIZATION_PHRASE"
+            [[ "$APPLY_RUN_ID" =~ $numeric && "$APPLY_RUN_ATTEMPT" =~ $numeric ]]
+            [[ "$APPLY_RECEIPT_SHA256" =~ $sha && "$APPLY_ARTIFACT_DIGEST" =~ $digest ]]
+            download_receipt "$APPLY_RUN_ID" "$APPLY_RUN_ATTEMPT" "$APPLY_RECEIPT_SHA256" "$APPLY_ARTIFACT_DIGEST" "$RUNNER_TEMP/apply"
+            apply="$RUNNER_TEMP/apply/unpacked/career-baseline-index-state-authority-repair.json"
+            jq -e --arg control "$CONTROL_PLANE_SHA" --arg active "$ACTIVE_REVISION" --arg preflight "$PREFLIGHT_RECEIPT_SHA256" --argjson count "$REPAIR_TARGET_COUNT" '.contract_version == "career.baseline_index_state_authority_repair.v1" and .mode == "apply" and .status == "PASS_BASELINE_REPAIR_APPLIED" and .control_plane_sha == $control and .active_revision == $active and .preflight_lineage.receipt_sha256 == $preflight and .database_insert_count == $count and .database_update_count == 0 and .database_delete_count == 0 and .database_transaction_committed == true and .writes_committed == true and .baseline.matching_count == 30 and .baseline.repair_target_count == 0' "$apply" >/dev/null
+          fi
+
+      - name: Validate protected production topology
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST RETIRED_DEPLOY_HOST DEPLOY_PATH SSH_KNOWN_HOSTS; do test -n "${!name:-}"; done
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]; test "$DEPLOY_PORT" -ge 1; test "$DEPLOY_PORT" -le 65535
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ && "$RETIRED_DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ && "$DEPLOY_PATH" != *".."* ]]
+
+      - name: Start pinned SSH agent
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        run: |
+          set -euo pipefail
+          install -d -m 0700 ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 0600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Execute exact production phase without automatic retry
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/career-baseline-index-state-authority-repair.json"
+          remote="$RUNNER_TEMP/career-baseline-index-state-authority-repair.remote.json"
+          printf -v q_path '%q' "$DEPLOY_PATH"; printf -v q_release '%q' "$ACTIVE_RELEASE_NAME"
+          printf -v q_active '%q' "$ACTIVE_REVISION"; printf -v q_control '%q' "$CONTROL_PLANE_SHA"
+          printf -v q_mode '%q' "$MODE"; printf -v q_run '%q' "$GITHUB_RUN_ID"; printf -v q_attempt '%q' "$GITHUB_RUN_ATTEMPT"
+          printf -v q_preflight_run '%q' "$PREFLIGHT_RUN_ID"; printf -v q_preflight_attempt '%q' "$PREFLIGHT_RUN_ATTEMPT"
+          printf -v q_preflight_receipt '%q' "$PREFLIGHT_RECEIPT_SHA256"; printf -v q_preflight_artifact '%q' "$PREFLIGHT_ARTIFACT_DIGEST"
+          printf -v q_baseline '%q' "$BASELINE_STATE_SHA256"; printf -v q_delta '%q' "$DELTA_STATE_SHA256"
+          printf -v q_target_count '%q' "$REPAIR_TARGET_COUNT"; printf -v q_target_set '%q' "$REPAIR_TARGET_SET_SHA256"
+          printf -v q_apply_run '%q' "$APPLY_RUN_ID"; printf -v q_apply_attempt '%q' "$APPLY_RUN_ATTEMPT"
+          printf -v q_apply_receipt '%q' "$APPLY_RECEIPT_SHA256"; printf -v q_apply_artifact '%q' "$APPLY_ARTIFACT_DIGEST"
+          command_mode=inspect; if [ "$MODE" = apply ]; then command_mode=apply; fi
+          set +e
+          timeout --signal=TERM --kill-after=10s 300s ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -o ServerAliveInterval=20 -o ServerAliveCountMax=12 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "set -euo pipefail; current=\$(readlink -f $q_path/current); release=\$(readlink -f $q_path/releases/$q_release); test -n \"\$current\"; test \"\$current\" = \"\$release\"; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_active; test ! -e $q_path/.dep/deploy.lock; test \"\$(ps -eo comm=,args= | awk '\$1 == \"php\" && (\$0 ~ /dep(\\.phar)? .* production/ || \$0 ~ /artisan migrate/ || \$0 ~ /queue:reload-workers/ || \$0 ~ /career_(baseline_index_state_authority_repair|publication_index_reconciliation)/) {n++} \$1 == \"composer\" && \$0 ~ /install/ {n++} END {print n+0}')\" = 0; CAREER_BASELINE_REPAIR_MODE=$q_mode CAREER_BASELINE_REPAIR_BACKEND_ROOT=\"\$current/backend\" CAREER_BASELINE_REPAIR_CONTROL_PLANE_SHA=$q_control CAREER_BASELINE_REPAIR_ACTIVE_REVISION=$q_active CAREER_BASELINE_REPAIR_RELEASE_NAME=$q_release CAREER_BASELINE_REPAIR_RUN_ID=$q_run CAREER_BASELINE_REPAIR_RUN_ATTEMPT=$q_attempt CAREER_BASELINE_REPAIR_PREFLIGHT_RUN_ID=$q_preflight_run CAREER_BASELINE_REPAIR_PREFLIGHT_RUN_ATTEMPT=$q_preflight_attempt CAREER_BASELINE_REPAIR_PREFLIGHT_RECEIPT_SHA256=$q_preflight_receipt CAREER_BASELINE_REPAIR_PREFLIGHT_ARTIFACT_DIGEST=$q_preflight_artifact CAREER_BASELINE_REPAIR_EXPECTED_BASELINE_STATE_SHA256=$q_baseline CAREER_BASELINE_REPAIR_EXPECTED_DELTA_STATE_SHA256=$q_delta CAREER_BASELINE_REPAIR_EXPECTED_TARGET_COUNT=$q_target_count CAREER_BASELINE_REPAIR_EXPECTED_TARGET_SET_SHA256=$q_target_set CAREER_BASELINE_REPAIR_APPLY_RUN_ID=$q_apply_run CAREER_BASELINE_REPAIR_APPLY_RUN_ATTEMPT=$q_apply_attempt CAREER_BASELINE_REPAIR_APPLY_RECEIPT_SHA256=$q_apply_receipt CAREER_BASELINE_REPAIR_APPLY_ARTIFACT_DIGEST=$q_apply_artifact php /dev/stdin $command_mode" \
+            < backend/scripts/operations/career_baseline_index_state_authority_repair.php > "$remote" 2>/dev/null
+          status=$?
+          set -e
+          if jq -e '.contract_version == "career.baseline_index_state_authority_repair.v1" and (.status | type == "string")' "$remote" >/dev/null 2>&1; then
+            mv "$remote" "$receipt"
+          else
+            jq '.status = "HOLD_BASELINE_AUTHORITY_REPAIR" | .safe_code = "REMOTE_OUTCOME_AMBIGUOUS" | .writes_committed = null' "$receipt" > "$receipt.next"
+            mv "$receipt.next" "$receipt"
+          fi
+          if [ "$status" -ne 0 ]; then exit "$status"; fi
+
+      - name: Validate sanitized phase receipt
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt="$RUNNER_TEMP/career-baseline-index-state-authority-repair.json"
+          jq -e --arg mode "$MODE" --arg control "$CONTROL_PLANE_SHA" --arg active "$ACTIVE_REVISION" '.contract_version == "career.baseline_index_state_authority_repair.v1" and .mode == $mode and .control_plane_sha == $control and .active_revision == $active and .authority.generation_id == "career-current-342-30-bootstrap-v1" and .authority.pointer_document_sha256 == "1ebfd2826be9d3b63d810d33050034e3d424c95b3db81fa49b0822c5e6b2ec08" and .authority.projection_sha256 == "397f2a4ec284e9c0a6cd610447541ad4773fa7a7f3045008fab5efb334ec85c6" and .authority.ledger_sha256 == "975b311bb346a090f1add678d5a6d9f1be230f87b223e2c3c829f4c7fd7aac6e" and .authority.slug_count == 342 and .authority.locale_row_count == 684 and .authority.published_slug_count == 30 and .authority.published_slug_set_sha256 == "39cc766fb18c85d385b83f0ac1f56a8b97d46481d3e9a12de0588abbaf640060" and .authority.published_locale_row_count == 60 and .authority.published_locale_row_set_sha256 == "a42b2c69562ee7ea463d8190572f3b9f8244a633e1616d73b2122c3119ecfbee" and .manifest.baseline_count == 30 and .manifest.delta_count == 1016 and .manifest.target_count == 1046 and .delta.current_state_sha256 == "53ea7077bc46eb8e1da6df1da911000f805c8245b5d575de86e3263aea3220f4" and .delta.matching_count == 0 and .delta.missing_or_mismatching_count == 1016 and .baseline.latest_state_tie_count == 0 and .delta.latest_state_tie_count == 0 and .database_update_count == 0 and .database_delete_count == 0 and .cms_write_count == 0 and .cache_write_count == 0 and .pointer_write_count == 0 and .artifact_write_count == 0 and .publication_write_count == 0 and .discoverability_write_count == 0 and .migration_count == 0 and .deployment_count == 0 and .restart_count == 0 and .sitemap_write_count == 0 and .llms_write_count == 0 and .search_submission_count == 0 and .automatic_retry_allowed == false and .automatic_rollback_allowed == false' "$receipt" >/dev/null
+          case "$MODE" in
+            preflight) jq -e '(.status == "PASS_BASELINE_REPAIR_REQUIRED" or .status == "PASS_BASELINE_ALREADY_EXACT") and .database_select_only == true and .database_insert_count == 0 and .writes_committed == false and ((.status == "PASS_BASELINE_REPAIR_REQUIRED" and .baseline.repair_target_count >= 1 and .baseline.repair_target_count <= 30) or (.status == "PASS_BASELINE_ALREADY_EXACT" and .baseline.repair_target_count == 0))' "$receipt" >/dev/null ;;
+            apply) jq -e --argjson count "$REPAIR_TARGET_COUNT" '.status == "PASS_BASELINE_REPAIR_APPLIED" and .database_insert_count == $count and .database_transaction_committed == true and .writes_committed == true and .baseline.preserved_count == 30 and .baseline.matching_count == 30 and .baseline.repair_target_count == 0' "$receipt" >/dev/null ;;
+            readback) jq -e '.status == "PASS_BASELINE_AUTHORITY_EXACT" and .database_select_only == true and .database_insert_count == 0 and .database_transaction_committed == false and .writes_committed == false and .baseline.preserved_count == 30 and .baseline.matching_count == 30 and .baseline.repair_target_count == 0' "$receipt" >/dev/null ;;
+          esac
+
+      - name: Upload immutable sanitized receipt
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: career-baseline-index-state-authority-repair-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/career-baseline-index-state-authority-repair.json
+          if-no-files-found: error
+          retention-days: 90
