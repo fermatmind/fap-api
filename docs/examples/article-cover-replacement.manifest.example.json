@@ -1,0 +1,33 @@
+{
+  "schema_version": "article-cover-replacement.v1",
+  "batch_id": "example-bilingual-cover-batch-2026-08-13",
+  "groups": [
+    {
+      "translation_group_id": "article-123",
+      "slug": "example-article",
+      "source_image": "/absolute/path/outside-repository/example-article.png",
+      "asset_key": "article.example-article.cover.v1",
+      "allow_ensure_seo_meta_baseline": false,
+      "locales": {
+        "zh-CN": {
+          "article_id": 123,
+          "alt": "描述文章主题的中文替代文本",
+          "canonical": "https://fermatmind.com/zh/articles/example-article",
+          "robots": "noindex,nofollow",
+          "is_indexable": false,
+          "sitemap_eligible": false,
+          "llms_eligible": false
+        },
+        "en": {
+          "article_id": 456,
+          "alt": "English alternative text describing the article cover",
+          "canonical": "https://fermatmind.com/en/articles/example-article",
+          "robots": "noindex,nofollow",
+          "is_indexable": false,
+          "sitemap_eligible": false,
+          "llms_eligible": false
+        }
+      }
+    }
+  ]
+}

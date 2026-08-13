@@ -57,6 +57,104 @@ final class SeoImageBundleImporter
     }
 
     /**
+     * Plan one cover supplied directly by the batch cover replacement manifest.
+     *
+     * @param  array<string,mixed>  $options
+     * @return array<string,mixed>
+     */
+    public function planCoverAsset(array $options): array
+    {
+        return $this->runCoverAsset($options, true);
+    }
+
+    /**
+     * Import one cover supplied directly by the batch cover replacement manifest.
+     *
+     * @param  array<string,mixed>  $options
+     * @return array<string,mixed>
+     */
+    public function importCoverAsset(array $options): array
+    {
+        return $this->runCoverAsset($options, false);
+    }
+
+    /**
+     * @param  array<string,mixed>  $options
+     * @return array<string,mixed>
+     */
+    private function runCoverAsset(array $options, bool $dryRun): array
+    {
+        $sourcePath = trim((string) ($options['source_path'] ?? ''));
+        $realPath = $sourcePath !== '' ? realpath($sourcePath) : false;
+        $translationGroupId = trim((string) ($options['translation_group_id'] ?? ''));
+        $assetKey = strtolower(trim((string) ($options['asset_key'] ?? '')));
+        $altText = $this->normalizeAltText($options['alt_text'] ?? null);
+        $errors = [];
+        $warnings = [];
+
+        if ($realPath === false || ! is_file($realPath)) {
+            $errors[] = $this->issue('source_path', 'source_file_missing', 'Image source file does not exist.');
+        }
+        if ($translationGroupId === '') {
+            $errors[] = $this->issue('translation_group_id', 'translation_group_id_required', 'translation_group_id is required.');
+        }
+        if (! preg_match('/^article\.[a-z0-9][a-z0-9.-]*\.v[0-9]+$/', $assetKey)) {
+            $errors[] = $this->issue('asset_key', 'asset_key_invalid', 'Asset key must match article.<topic>.<role>.vN.');
+        }
+        if ($altText === '' || mb_strlen($altText) > 255) {
+            $errors[] = $this->issue('alt_text', 'alt_text_invalid', 'Alt text is required and must be <= 255 characters.');
+        }
+
+        $file = $realPath === false ? [] : $this->validateImageFile(
+            $realPath,
+            'source_path',
+            1600,
+            900,
+            false,
+            $errors,
+            $warnings,
+        );
+        if ($errors !== []) {
+            return $this->summary(false, $dryRun, 'will_skip', dirname($sourcePath), $translationGroupId, [], [], $errors, $warnings);
+        }
+
+        $asset = [
+            'field' => 'cover',
+            'asset_key' => $assetKey,
+            'role' => 'cover',
+            'source_file' => basename((string) $realPath),
+            'path' => $realPath,
+            'alt_text' => $altText,
+            'caption' => null,
+            'credit' => null,
+            'intended_usage' => ['article_cover', 'article_card', 'og', 'twitter'],
+            'provenance' => [
+                'source' => 'operator_provided_batch_manifest',
+                'competitor_asset' => false,
+            ],
+            'alt_text_localized' => is_array($options['alt_text'] ?? null) ? $options['alt_text'] : null,
+            'file' => $file,
+        ];
+        $plan = $this->assetPlan($asset, (bool) ($options['allow_update_existing'] ?? true), $errors, $warnings);
+        if ((bool) ($options['require_media_runtime'] ?? false)) {
+            $this->validateMediaRuntimeReadyForResolvedPackage($errors);
+        }
+        if ($errors !== []) {
+            return $this->summary(false, $dryRun, 'will_skip', dirname((string) $realPath), $translationGroupId, [$plan], [], $errors, $warnings);
+        }
+
+        if ($dryRun) {
+            return $this->summary(true, true, 'would_import_media_assets', dirname((string) $realPath), $translationGroupId, [$plan], $this->resolvedMetadataFromPlans([$plan], ['zh-CN', 'en'], true), [], $warnings);
+        }
+
+        $written = $this->writeAsset($plan);
+        $resolved = $this->resolvedMetadataFromPlans([$written], ['zh-CN', 'en'], false);
+        $this->validateResolvedMetadataReadyForCms($resolved, $errors);
+
+        return $this->summary($errors === [], false, $errors === [] ? 'imported_media_assets' : 'media_asset_cdn_not_ready', dirname((string) $realPath), $translationGroupId, [$written], $resolved, $errors, $warnings);
+    }
+
+    /**
      * @param  array<string,mixed>  $options
      * @return array<string,mixed>
      */

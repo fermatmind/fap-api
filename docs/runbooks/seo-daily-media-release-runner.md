@@ -112,3 +112,51 @@ php artisan media-assets:seo-release-cleanup \
 ```
 
 Deletion is intentionally held. Do not delete half-failed assets without a separate reviewed operator approval.
+
+## Existing Bilingual Article Cover Batch
+
+For an image-only replacement on existing published bilingual articles, use the
+batch runner instead of manually invoking the single-group commands. Start from
+[`docs/examples/article-cover-replacement.manifest.example.json`](../examples/article-cover-replacement.manifest.example.json)
+and validate its shape against
+[`docs/examples/article-cover-replacement.manifest.schema.json`](../examples/article-cover-replacement.manifest.schema.json).
+Keep real source image paths outside the repository.
+
+Dry-run is the default and performs a complete cohort preflight before any
+Media Library or article write:
+
+```bash
+php artisan seo-agent:replace-article-covers \
+  --manifest=/absolute/path/article-cover-replacement.json \
+  --dry-run \
+  --receipt=/absolute/path/cover-batch-dry-run-receipt.json
+```
+
+The dry-run receipt emits `manifest_sha256` and
+`authorization.required_confirmation_phrase`. Execute only with those exact
+values and all holds:
+
+```bash
+php artisan seo-agent:replace-article-covers \
+  --manifest=/absolute/path/article-cover-replacement.json \
+  --execute \
+  --actor=solo-owner \
+  --reason=approved-bilingual-article-cover-refresh \
+  --confirm-manifest-sha256=<dry-run-manifest-sha256> \
+  --confirm-execution='EXECUTE ARTICLE COVER BATCH <dry-run-manifest-sha256>' \
+  --no-publish --no-schema --no-hreflang --no-search \
+  --no-sitemap-llms-change --no-revalidation \
+  --receipt=/absolute/path/cover-batch-execute-receipt.json
+```
+
+If any target lacks `article_seo_meta`, both the group manifest and command must
+opt in: set `allow_ensure_seo_meta_baseline=true` on that group and add
+`--allow-ensure-seo-meta-baseline`. The manifest canonical and discoverability
+state are then locked and re-read after the image update. The command never
+publishes, enables schema/hreflang, changes sitemap/llms eligibility, submits a
+search channel, or triggers revalidation.
+
+The execute receipt reports `passed`, `failed`, or `partial`. A `partial` result
+means at least one durable write committed or public API/HTML cache verification
+did not converge within the bounded polling window; use the per-group and
+verification results for safe resume rather than treating it as success.
