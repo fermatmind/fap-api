@@ -20,14 +20,14 @@
         "pressure_difference": "在压力下，你更常进入纠错、确认、抽离、讨好、强硬、转移，还是先把局面压平？",
         "relationship_difference": "在关系里，你更想被怎样对待：被理解、被认可、被需要、被尊重边界、被承诺，还是先别起冲突？",
         "work_difference": "在任务推进里，你更优先守的是质量、结果、风险、空间、主导权，还是整体平稳？",
-        "observation_question": "未来 7 天只记录具体情境、触发点、第一反应和事后复盘：在关键场景里，你更先守住标准、关系位置、安全、边界、自由、结果、真实感，还是整体平稳？同时记录反例：哪些场景看起来像某个候选类型，但真正驱动你的并不是它的核心关注点。close-call 是并排辨析入口，不是强制二选一，也不能推出诊断、招聘筛选、能力评价或职业决定。"
+        "observation_question": "未来 7 天只记录具体情境、触发点、第一反应和事后复盘：在关键场景里，你更先守住标准、关系位置、安全、边界、自由、结果、真实感，还是整体平稳？同时记录反例：哪些场景看起来像某个候选类型，但真正驱动你的并不是它的核心关注点。接近型辨析 是并排辨析入口，不是强制二选一，也不能推出诊断、招聘筛选、能力评价或职业决定。"
     },
     "entries": [
         {
             "pair_key": "1_3",
             "type_a": "1",
             "type_b": "3",
-            "shared_surface_similarity": "表面上都可能认真、有目标感，差异常出现在标准与成果谁先被优先处理。 close-call 只表示候选解释相近，需要回到近期情境并排观察。",
+            "shared_surface_similarity": "表面上都可能认真、有目标感，差异常出现在标准与成果谁先被优先处理。接近型辨析只表示候选解释相近，需要回到近期情境并排观察。",
             "core_motivation_difference": {
                 "1": "候选 1 号更可能围绕标准、责任和把事情做对组织注意力。",
                 "3": "候选 3 号更可能围绕成果、效率和可见价值组织注意力。"
@@ -50,7 +50,7 @@
             },
             "seven_day_observation_question": "接下来 7 天只记录具体情境：当你紧张、推进或退后时，更像候选 1 号的“标准、责任和把事情做对”，还是候选 3 号的“成果、效率和可见价值”？",
             "resonance_feedback_prompt": "请选择更有共鸣的候选线索，也可以标记两者都不像；低共鸣会降低解释确定性，不会被系统主型叙事覆盖。",
-            "short_compare_copy": "close-call 只能说明 1 号与 3 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
+            "short_compare_copy": "接近型辨析只能说明 1 号与 3 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
             "content_maturity": "p0_ready",
             "evidence_level": "theory_based",
             "fallback_policy": "fallback_to_generic"
@@ -59,7 +59,7 @@
             "pair_key": "1_6",
             "type_a": "1",
             "type_b": "6",
-            "shared_surface_similarity": "表面上都可能谨慎负责，差异常出现在先守原则标准还是先核验安全风险。 close-call 只表示候选解释相近，需要回到近期情境并排观察。",
+            "shared_surface_similarity": "表面上都可能谨慎负责，差异常出现在先守原则标准还是先核验安全风险。接近型辨析只表示候选解释相近，需要回到近期情境并排观察。",
             "core_motivation_difference": {
                 "1": "候选 1 号更可能围绕标准、责任和把事情做对组织注意力。",
                 "6": "候选 6 号更可能围绕安全、信任和风险预判组织注意力。"
@@ -82,7 +82,7 @@
             },
             "seven_day_observation_question": "接下来 7 天只记录具体情境：当你紧张、推进或退后时，更像候选 1 号的“标准、责任和把事情做对”，还是候选 6 号的“安全、信任和风险预判”？",
             "resonance_feedback_prompt": "请选择更有共鸣的候选线索，也可以标记两者都不像；低共鸣会降低解释确定性，不会被系统主型叙事覆盖。",
-            "short_compare_copy": "close-call 只能说明 1 号与 6 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
+            "short_compare_copy": "接近型辨析只能说明 1 号与 6 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
             "content_maturity": "p0_ready",
             "evidence_level": "theory_based",
             "fallback_policy": "fallback_to_generic"
@@ -91,7 +91,7 @@
             "pair_key": "1_8",
             "type_a": "1",
             "type_b": "8",
-            "shared_surface_similarity": "表面上都可能直接、有边界，差异常出现在先校准规则正当性还是先保护主动权。 close-call 只表示候选解释相近，需要回到近期情境并排观察。",
+            "shared_surface_similarity": "表面上都可能直接、有边界，差异常出现在先校准规则正当性还是先保护主动权。接近型辨析只表示候选解释相近，需要回到近期情境并排观察。",
             "core_motivation_difference": {
                 "1": "候选 1 号更可能围绕标准、责任和把事情做对组织注意力。",
                 "8": "候选 8 号更可能围绕边界、主动权和保护重要事物组织注意力。"
@@ -114,7 +114,7 @@
             },
             "seven_day_observation_question": "接下来 7 天只记录具体情境：当你紧张、推进或退后时，更像候选 1 号的“标准、责任和把事情做对”，还是候选 8 号的“边界、主动权和保护重要事物”？",
             "resonance_feedback_prompt": "请选择更有共鸣的候选线索，也可以标记两者都不像；低共鸣会降低解释确定性，不会被系统主型叙事覆盖。",
-            "short_compare_copy": "close-call 只能说明 1 号与 8 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
+            "short_compare_copy": "接近型辨析只能说明 1 号与 8 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
             "content_maturity": "p0_ready",
             "evidence_level": "theory_based",
             "fallback_policy": "fallback_to_generic"
@@ -123,7 +123,7 @@
             "pair_key": "2_3",
             "type_a": "2",
             "type_b": "3",
-            "shared_surface_similarity": "表面上都可能外向投入、重视回应，差异常出现在关系照顾与成果呈现谁更牵动情绪。 close-call 只表示候选解释相近，需要回到近期情境并排观察。",
+            "shared_surface_similarity": "表面上都可能外向投入、重视回应，差异常出现在关系照顾与成果呈现谁更牵动情绪。接近型辨析只表示候选解释相近，需要回到近期情境并排观察。",
             "core_motivation_difference": {
                 "2": "候选 2 号更可能围绕关系需要、被需要和照顾回应组织注意力。",
                 "3": "候选 3 号更可能围绕成果、效率和可见价值组织注意力。"
@@ -146,7 +146,7 @@
             },
             "seven_day_observation_question": "接下来 7 天只记录具体情境：当你紧张、推进或退后时，更像候选 2 号的“关系需要、被需要和照顾回应”，还是候选 3 号的“成果、效率和可见价值”？",
             "resonance_feedback_prompt": "请选择更有共鸣的候选线索，也可以标记两者都不像；低共鸣会降低解释确定性，不会被系统主型叙事覆盖。",
-            "short_compare_copy": "close-call 只能说明 2 号与 3 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
+            "short_compare_copy": "接近型辨析只能说明 2 号与 3 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
             "content_maturity": "p0_ready",
             "evidence_level": "theory_based",
             "fallback_policy": "fallback_to_generic"
@@ -155,7 +155,7 @@
             "pair_key": "2_9",
             "type_a": "2",
             "type_b": "9",
-            "shared_surface_similarity": "表面上都可能温和照顾他人，差异常出现在主动靠近支持还是先维持关系平稳。 close-call 只表示候选解释相近，需要回到近期情境并排观察。",
+            "shared_surface_similarity": "表面上都可能温和照顾他人，差异常出现在主动靠近支持还是先维持关系平稳。接近型辨析只表示候选解释相近，需要回到近期情境并排观察。",
             "core_motivation_difference": {
                 "2": "候选 2 号更可能围绕关系需要、被需要和照顾回应组织注意力。",
                 "9": "候选 9 号更可能围绕安稳、协调和降低冲突强度组织注意力。"
@@ -178,7 +178,7 @@
             },
             "seven_day_observation_question": "接下来 7 天只记录具体情境：当你紧张、推进或退后时，更像候选 2 号的“关系需要、被需要和照顾回应”，还是候选 9 号的“安稳、协调和降低冲突强度”？",
             "resonance_feedback_prompt": "请选择更有共鸣的候选线索，也可以标记两者都不像；低共鸣会降低解释确定性，不会被系统主型叙事覆盖。",
-            "short_compare_copy": "close-call 只能说明 2 号与 9 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
+            "short_compare_copy": "接近型辨析只能说明 2 号与 9 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
             "content_maturity": "p0_ready",
             "evidence_level": "theory_based",
             "fallback_policy": "fallback_to_generic"
@@ -187,7 +187,7 @@
             "pair_key": "3_7",
             "type_a": "3",
             "type_b": "7",
-            "shared_surface_similarity": "表面上都可能快、外向、机会导向，差异常出现在成果压力与选择空间谁更影响决策。 close-call 只表示候选解释相近，需要回到近期情境并排观察。",
+            "shared_surface_similarity": "表面上都可能快、外向、机会导向，差异常出现在成果压力与选择空间谁更影响决策。接近型辨析只表示候选解释相近，需要回到近期情境并排观察。",
             "core_motivation_difference": {
                 "3": "候选 3 号更可能围绕成果、效率和可见价值组织注意力。",
                 "7": "候选 7 号更可能围绕可能性、选择和保持活力组织注意力。"
@@ -210,7 +210,7 @@
             },
             "seven_day_observation_question": "接下来 7 天只记录具体情境：当你紧张、推进或退后时，更像候选 3 号的“成果、效率和可见价值”，还是候选 7 号的“可能性、选择和保持活力”？",
             "resonance_feedback_prompt": "请选择更有共鸣的候选线索，也可以标记两者都不像；低共鸣会降低解释确定性，不会被系统主型叙事覆盖。",
-            "short_compare_copy": "close-call 只能说明 3 号与 7 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
+            "short_compare_copy": "接近型辨析只能说明 3 号与 7 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
             "content_maturity": "p0_ready",
             "evidence_level": "theory_based",
             "fallback_policy": "fallback_to_generic"
@@ -219,7 +219,7 @@
             "pair_key": "3_8",
             "type_a": "3",
             "type_b": "8",
-            "shared_surface_similarity": "表面上都可能强势推进，差异常出现在可见成就与权责边界谁更需要被守住。 close-call 只表示候选解释相近，需要回到近期情境并排观察。",
+            "shared_surface_similarity": "表面上都可能强势推进，差异常出现在可见成就与权责边界谁更需要被守住。接近型辨析只表示候选解释相近，需要回到近期情境并排观察。",
             "core_motivation_difference": {
                 "3": "候选 3 号更可能围绕成果、效率和可见价值组织注意力。",
                 "8": "候选 8 号更可能围绕边界、主动权和保护重要事物组织注意力。"
@@ -242,7 +242,7 @@
             },
             "seven_day_observation_question": "接下来 7 天只记录具体情境：当你紧张、推进或退后时，更像候选 3 号的“成果、效率和可见价值”，还是候选 8 号的“边界、主动权和保护重要事物”？",
             "resonance_feedback_prompt": "请选择更有共鸣的候选线索，也可以标记两者都不像；低共鸣会降低解释确定性，不会被系统主型叙事覆盖。",
-            "short_compare_copy": "close-call 只能说明 3 号与 8 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
+            "short_compare_copy": "接近型辨析只能说明 3 号与 8 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
             "content_maturity": "p0_ready",
             "evidence_level": "theory_based",
             "fallback_policy": "fallback_to_generic"
@@ -251,7 +251,7 @@
             "pair_key": "4_5",
             "type_a": "4",
             "type_b": "5",
-            "shared_surface_similarity": "表面上都可能内收、重视独处，差异常出现在情绪意义与认知空间谁更先被保护。 close-call 只表示候选解释相近，需要回到近期情境并排观察。",
+            "shared_surface_similarity": "表面上都可能内收、重视独处，差异常出现在情绪意义与认知空间谁更先被保护。接近型辨析只表示候选解释相近，需要回到近期情境并排观察。",
             "core_motivation_difference": {
                 "4": "候选 4 号更可能围绕独特感、真实表达和情绪意义组织注意力。",
                 "5": "候选 5 号更可能围绕理解、空间和资源保存组织注意力。"
@@ -274,7 +274,7 @@
             },
             "seven_day_observation_question": "接下来 7 天只记录具体情境：当你紧张、推进或退后时，更像候选 4 号的“独特感、真实表达和情绪意义”，还是候选 5 号的“理解、空间和资源保存”？",
             "resonance_feedback_prompt": "请选择更有共鸣的候选线索，也可以标记两者都不像；低共鸣会降低解释确定性，不会被系统主型叙事覆盖。",
-            "short_compare_copy": "close-call 只能说明 4 号与 5 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
+            "short_compare_copy": "接近型辨析只能说明 4 号与 5 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
             "content_maturity": "p0_ready",
             "evidence_level": "theory_based",
             "fallback_policy": "fallback_to_generic"
@@ -283,7 +283,7 @@
             "pair_key": "4_9",
             "type_a": "4",
             "type_b": "9",
-            "shared_surface_similarity": "表面上都可能柔和、慢热，差异常出现在表达独特感与降低冲突强度谁更主导。 close-call 只表示候选解释相近，需要回到近期情境并排观察。",
+            "shared_surface_similarity": "表面上都可能柔和、慢热，差异常出现在表达独特感与降低冲突强度谁更主导。接近型辨析只表示候选解释相近，需要回到近期情境并排观察。",
             "core_motivation_difference": {
                 "4": "候选 4 号更可能围绕独特感、真实表达和情绪意义组织注意力。",
                 "9": "候选 9 号更可能围绕安稳、协调和降低冲突强度组织注意力。"
@@ -306,7 +306,7 @@
             },
             "seven_day_observation_question": "接下来 7 天只记录具体情境：当你紧张、推进或退后时，更像候选 4 号的“独特感、真实表达和情绪意义”，还是候选 9 号的“安稳、协调和降低冲突强度”？",
             "resonance_feedback_prompt": "请选择更有共鸣的候选线索，也可以标记两者都不像；低共鸣会降低解释确定性，不会被系统主型叙事覆盖。",
-            "short_compare_copy": "close-call 只能说明 4 号与 9 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
+            "short_compare_copy": "接近型辨析只能说明 4 号与 9 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
             "content_maturity": "p0_ready",
             "evidence_level": "theory_based",
             "fallback_policy": "fallback_to_generic"
@@ -315,7 +315,7 @@
             "pair_key": "5_6",
             "type_a": "5",
             "type_b": "6",
-            "shared_surface_similarity": "表面上都可能谨慎、分析和保留，差异常出现在保存资源与核验安全谁更先启动。 close-call 只表示候选解释相近，需要回到近期情境并排观察。",
+            "shared_surface_similarity": "表面上都可能谨慎、分析和保留，差异常出现在保存资源与核验安全谁更先启动。接近型辨析只表示候选解释相近，需要回到近期情境并排观察。",
             "core_motivation_difference": {
                 "5": "候选 5 号更可能围绕理解、空间和资源保存组织注意力。",
                 "6": "候选 6 号更可能围绕安全、信任和风险预判组织注意力。"
@@ -338,7 +338,7 @@
             },
             "seven_day_observation_question": "接下来 7 天只记录具体情境：当你紧张、推进或退后时，更像候选 5 号的“理解、空间和资源保存”，还是候选 6 号的“安全、信任和风险预判”？",
             "resonance_feedback_prompt": "请选择更有共鸣的候选线索，也可以标记两者都不像；低共鸣会降低解释确定性，不会被系统主型叙事覆盖。",
-            "short_compare_copy": "close-call 只能说明 5 号与 6 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
+            "short_compare_copy": "接近型辨析只能说明 5 号与 6 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
             "content_maturity": "p0_ready",
             "evidence_level": "theory_based",
             "fallback_policy": "fallback_to_generic"
@@ -347,7 +347,7 @@
             "pair_key": "5_9",
             "type_a": "5",
             "type_b": "9",
-            "shared_surface_similarity": "表面上都可能安静、退后一步，差异常出现在保存认知资源与维持外部平稳谁更明显。 close-call 只表示候选解释相近，需要回到近期情境并排观察。",
+            "shared_surface_similarity": "表面上都可能安静、退后一步，差异常出现在保存认知资源与维持外部平稳谁更明显。接近型辨析只表示候选解释相近，需要回到近期情境并排观察。",
             "core_motivation_difference": {
                 "5": "候选 5 号更可能围绕理解、空间和资源保存组织注意力。",
                 "9": "候选 9 号更可能围绕安稳、协调和降低冲突强度组织注意力。"
@@ -370,7 +370,7 @@
             },
             "seven_day_observation_question": "接下来 7 天只记录具体情境：当你紧张、推进或退后时，更像候选 5 号的“理解、空间和资源保存”，还是候选 9 号的“安稳、协调和降低冲突强度”？",
             "resonance_feedback_prompt": "请选择更有共鸣的候选线索，也可以标记两者都不像；低共鸣会降低解释确定性，不会被系统主型叙事覆盖。",
-            "short_compare_copy": "close-call 只能说明 5 号与 9 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
+            "short_compare_copy": "接近型辨析只能说明 5 号与 9 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
             "content_maturity": "p0_ready",
             "evidence_level": "theory_based",
             "fallback_policy": "fallback_to_generic"
@@ -379,7 +379,7 @@
             "pair_key": "6_1",
             "type_a": "6",
             "type_b": "1",
-            "shared_surface_similarity": "表面上都可能负责、警觉和重视规则，差异常出现在风险核验与原则校准谁更优先。 close-call 只表示候选解释相近，需要回到近期情境并排观察。",
+            "shared_surface_similarity": "表面上都可能负责、警觉和重视规则，差异常出现在风险核验与原则校准谁更优先。接近型辨析只表示候选解释相近，需要回到近期情境并排观察。",
             "core_motivation_difference": {
                 "1": "候选 1 号更可能围绕标准、责任和把事情做对组织注意力。",
                 "6": "候选 6 号更可能围绕安全、信任和风险预判组织注意力。"
@@ -402,7 +402,7 @@
             },
             "seven_day_observation_question": "接下来 7 天只记录具体情境：当你紧张、推进或退后时，更像候选 6 号的“安全、信任和风险预判”，还是候选 1 号的“标准、责任和把事情做对”？",
             "resonance_feedback_prompt": "请选择更有共鸣的候选线索，也可以标记两者都不像；低共鸣会降低解释确定性，不会被系统主型叙事覆盖。",
-            "short_compare_copy": "close-call 只能说明 6 号与 1 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
+            "short_compare_copy": "接近型辨析只能说明 6 号与 1 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
             "content_maturity": "p0_ready",
             "evidence_level": "theory_based",
             "fallback_policy": "fallback_to_generic"
@@ -411,7 +411,7 @@
             "pair_key": "6_9",
             "type_a": "6",
             "type_b": "9",
-            "shared_surface_similarity": "表面上都可能谨慎、避免贸然行动，差异常出现在风险预判与降低冲突强度谁更主导。 close-call 只表示候选解释相近，需要回到近期情境并排观察。",
+            "shared_surface_similarity": "表面上都可能谨慎、避免贸然行动，差异常出现在风险预判与降低冲突强度谁更主导。接近型辨析只表示候选解释相近，需要回到近期情境并排观察。",
             "core_motivation_difference": {
                 "6": "候选 6 号更可能围绕安全、信任和风险预判组织注意力。",
                 "9": "候选 9 号更可能围绕安稳、协调和降低冲突强度组织注意力。"
@@ -434,7 +434,7 @@
             },
             "seven_day_observation_question": "接下来 7 天只记录具体情境：当你紧张、推进或退后时，更像候选 6 号的“安全、信任和风险预判”，还是候选 9 号的“安稳、协调和降低冲突强度”？",
             "resonance_feedback_prompt": "请选择更有共鸣的候选线索，也可以标记两者都不像；低共鸣会降低解释确定性，不会被系统主型叙事覆盖。",
-            "short_compare_copy": "close-call 只能说明 6 号与 9 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
+            "short_compare_copy": "接近型辨析只能说明 6 号与 9 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
             "content_maturity": "p0_ready",
             "evidence_level": "theory_based",
             "fallback_policy": "fallback_to_generic"
@@ -443,7 +443,7 @@
             "pair_key": "7_3",
             "type_a": "7",
             "type_b": "3",
-            "shared_surface_similarity": "表面上都可能积极、快节奏，差异常出现在探索可能性与形成可见成果谁更牵动你。 close-call 只表示候选解释相近，需要回到近期情境并排观察。",
+            "shared_surface_similarity": "表面上都可能积极、快节奏，差异常出现在探索可能性与形成可见成果谁更牵动你。接近型辨析只表示候选解释相近，需要回到近期情境并排观察。",
             "core_motivation_difference": {
                 "3": "候选 3 号更可能围绕成果、效率和可见价值组织注意力。",
                 "7": "候选 7 号更可能围绕可能性、选择和保持活力组织注意力。"
@@ -466,7 +466,7 @@
             },
             "seven_day_observation_question": "接下来 7 天只记录具体情境：当你紧张、推进或退后时，更像候选 7 号的“可能性、选择和保持活力”，还是候选 3 号的“成果、效率和可见价值”？",
             "resonance_feedback_prompt": "请选择更有共鸣的候选线索，也可以标记两者都不像；低共鸣会降低解释确定性，不会被系统主型叙事覆盖。",
-            "short_compare_copy": "close-call 只能说明 7 号与 3 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
+            "short_compare_copy": "接近型辨析只能说明 7 号与 3 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
             "content_maturity": "p0_ready",
             "evidence_level": "theory_based",
             "fallback_policy": "fallback_to_generic"
@@ -475,7 +475,7 @@
             "pair_key": "8_1",
             "type_a": "8",
             "type_b": "1",
-            "shared_surface_similarity": "表面上都可能有力量、讲边界，差异常出现在保护主动权与校准正当性谁更优先。 close-call 只表示候选解释相近，需要回到近期情境并排观察。",
+            "shared_surface_similarity": "表面上都可能有力量、讲边界，差异常出现在保护主动权与校准正当性谁更优先。接近型辨析只表示候选解释相近，需要回到近期情境并排观察。",
             "core_motivation_difference": {
                 "1": "候选 1 号更可能围绕标准、责任和把事情做对组织注意力。",
                 "8": "候选 8 号更可能围绕边界、主动权和保护重要事物组织注意力。"
@@ -498,7 +498,7 @@
             },
             "seven_day_observation_question": "接下来 7 天只记录具体情境：当你紧张、推进或退后时，更像候选 8 号的“边界、主动权和保护重要事物”，还是候选 1 号的“标准、责任和把事情做对”？",
             "resonance_feedback_prompt": "请选择更有共鸣的候选线索，也可以标记两者都不像；低共鸣会降低解释确定性，不会被系统主型叙事覆盖。",
-            "short_compare_copy": "close-call 只能说明 8 号与 1 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
+            "short_compare_copy": "接近型辨析只能说明 8 号与 1 号两个候选都值得观察，应并排观察；它不是二选一判型，也不能推出诊断、招聘筛选或职业决定。",
             "content_maturity": "p0_ready",
             "evidence_level": "theory_based",
             "fallback_policy": "fallback_to_generic"

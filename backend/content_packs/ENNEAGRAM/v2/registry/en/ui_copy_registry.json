@@ -20,27 +20,27 @@
             "body_template": "This answer presents a relatively concentrated primary candidate, which can be used to sort out recent common motivations, attention and coping methods. Please treat this result as an observable, retrospective explanatory hypothesis rather than an absolute label or diagnostic conclusion on personality."
         },
         "instant_summary.close_call": {
-            "title_template": "Currently more like close-call profile",
-            "body_template": "The distance between Top1 and Top2 in this answer is relatively close, and it is more suitable to read the two explanation clues side by side: compare their specific differences in stress initiation points, relationship expectations, work advancement and conflict reactions, and at the same time look for counterexamples: which recent scenes do not resemble one of them. In the next seven days, I will only record specific situations, trigger points, first reactions, and review afterwards, and do not rush to fix my own label. The system will not write a small difference into a single primary type conclusion, nor will it regard a close-call as a diagnosis, recruitment screening, ability evaluation or career decision."
+            "title_template": "The leading candidates need close-call comparison",
+            "body_template": "The first two candidates are close in this response. Compare their stress triggers, relationship expectations, work patterns, and conflict reactions side by side, and look for recent situations that contradict either candidate. For the next seven days, record the situation, trigger, first reaction, and later reflection without fixing a personality label."
         },
         "instant_summary.diffuse": {
             "title_template": "The current outline is scattered",
-            "body_template": "The distribution of answers this time is relatively scattered, indicating that multiple types of clues appear at the same time. Top1 is not enough to carry a whole page of explanations alone, and it is not suitable to draw conclusions around only one number for the time being. It is recommended that you first read Top3, the three central prompts and the observation tasks side by side, and record which motivations appear repeatedly in real situations and which are just accidental states; please treat the results as a list of structural clues, not failed or invalid results, nor personality conclusions."
+            "body_template": "Signals are spread across several types, so the first candidate does not support a single-type conclusion. Read the top three candidates, center cues, and observation task together, then record which motivations recur in real situations and which appear only occasionally."
         },
         "instant_summary.low_quality": {
             "title_template": "The current result has a quality boundary",
             "body_template": "The results are still readable this time, but the response signal shows that the boundaries of interpretation need to be relaxed: it is more suitable for helping you look back at which questions, situations, or states affected your choices, and is not suitable for confirming the primary type, evaluating personality stability, or inferring ability. This prompt does not blame the respondent, nor does it mean that you are not serious; it only shows that the answer sheet does not provide an interpretable signal to the system. A more prudent next step is to retest the same question type when your attention and state are more stable; switching to another form can only be used as a supplementary observation and cannot be regarded as finding better answers or comparing across question types."
         },
         "form_badge.e105": {
-            "label": "E105 Standard Edition",
-            "body_template": "It is suitable to establish a full spectrum and Top3 reading first; historical comparison and sharing only use the context of E105's own question type, and the scores are not mixed with FC144."
+            "label": "E105 Five-point Likert Form",
+            "body_template": "Uses five-point Likert responses to form a full nine-type profile and top three candidates; scores are interpreted only within the E105 scoring context."
         },
         "form_badge.fc144": {
-            "label": "FC144 Deep Edition",
-            "body_template": "Uses forced-choice question types to observe trade-off cues; it can supplement close-call reading, but is not a more authoritative version, and scores are not directly comparable to E105."
+            "label": "FC144 Two-option Forced-choice Form",
+            "body_template": "Uses two-option forced-choice responses to observe relative preference signals; scores are interpreted only within the FC144 scoring context."
         },
         "close_call_card.title": {
-            "label": "Top1 vs Top2 analysis"
+            "label": "First-vs-second candidate comparison"
         },
         "diffuse_boundary.title": {
             "label": "Explanation of scatter in results"
@@ -49,7 +49,7 @@
             "label": "Quality Boundary Description"
         },
         "technical_note.link_label": {
-            "label": "View Technical Note v0.1",
+            "label": "View technical note",
             "body_template": "Explain the level of evidence, known limitations, form boundaries, indicator status, and privacy handling methods of this test; do not package the Enneagram results into diagnosis, recruitment screening, treatment recommendations, or definitive personality certification."
         },
         "observation.assign_cta": {
