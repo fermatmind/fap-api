@@ -1018,7 +1018,6 @@ final class EnneagramReportComposer
             [
                 'form_badge' => [
                     'label' => $badge['label'] ?? null,
-                    'body' => $badge['body_template'] ?? null,
                 ],
                 'methodology_copy' => $method['copy'] ?? null,
                 'score_space_boundary' => $sameModel['copy'] ?? null,
@@ -1414,7 +1413,7 @@ final class EnneagramReportComposer
             'observe_before_retake' => 'diffuse_boundary',
             default => 'same_model_not_same_score_space',
         };
-        $recommendationMethod = is_array($indexes['method_entries'][$methodKey] ?? null)
+        $recommendationMethod = $recommendation !== 'stay_with_current_form' && is_array($indexes['method_entries'][$methodKey] ?? null)
             ? $indexes['method_entries'][$methodKey]
             : [];
 
@@ -1434,7 +1433,7 @@ final class EnneagramReportComposer
                 'not_for' => ['cross_form_score_comparison', 'accuracy_ranking', 'replacement_result', 'personality_change_claim'],
             ],
             ['classification.interpretation_scope', 'form.form_code', 'form.methodology_variant'],
-            ['enneagram_method_registry:'.$methodKey],
+            $recommendationMethod !== [] ? ['enneagram_method_registry:'.$methodKey] : [],
             [],
             $recommendationMethod !== [] ? $this->entryMeta($recommendationMethod, $this->registryMeta($indexes, 'enneagram_method_registry')) : $this->registryMeta($indexes, 'enneagram_method_registry')
         );

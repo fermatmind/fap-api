@@ -172,10 +172,7 @@ final class EnneagramReportComposerV2Test extends TestCase
         };
         foreach ($modules as $module) {
             $moduleKey = (string) ($module['module_key'] ?? '');
-            if (in_array($moduleKey, ['method_boundary', 'instant_summary'], true)) {
-                continue;
-            }
-            foreach ($collectStrings((array) ($module['content'] ?? [])) as $copy) {
+            foreach (array_unique($collectStrings((array) ($module['content'] ?? []))) as $copy) {
                 $this->assertArrayNotHasKey($copy, $seenLongCopy, 'Repeated long copy in '.$moduleKey.' and '.($seenLongCopy[$copy] ?? 'unknown'));
                 $seenLongCopy[$copy] = $moduleKey;
             }
@@ -442,6 +439,27 @@ final class EnneagramReportComposerV2Test extends TestCase
         $this->assertStringContainsString('不能用于规避质量边界', (string) data_get($module, 'content.recommendation_copy'));
         $this->assertContains('accuracy_ranking', (array) data_get($module, 'content.not_for'));
         $this->assertContains('enneagram_method_registry:low_quality_boundary', (array) data_get($module, 'registry_refs'));
+    }
+
+    public function test_default_form_recommendation_does_not_repeat_global_method_boundary(): void
+    {
+        $payload = $this->composeReportV2($this->syntheticProjectionInput('enneagram_forced_choice_144', [
+            'T5' => 84.0,
+            'T6' => 60.0,
+            'T4' => 48.0,
+            'T1' => 35.0,
+            'T2' => 28.0,
+            'T3' => 21.0,
+            'T7' => 18.0,
+            'T8' => 16.0,
+            'T9' => 12.0,
+        ]));
+
+        $module = $this->module($payload, 'form_recommendation');
+
+        $this->assertSame('stay_with_current_form', data_get($module, 'content.recommendation_key'));
+        $this->assertNull(data_get($module, 'content.recommendation_copy'));
+        $this->assertSame([], data_get($module, 'registry_refs'));
     }
 
     public function test_v2_modules_expose_p0_ready_registry_provenance(): void
