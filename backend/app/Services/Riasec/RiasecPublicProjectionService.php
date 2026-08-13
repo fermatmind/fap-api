@@ -112,7 +112,26 @@ final class RiasecPublicProjectionService
             'form_code' => $formCode,
             'answer_count' => (int) ($payload['answer_count'] ?? data_get($measurementContract, 'form.question_count', 0)),
         ]));
-        $interpretationRule = $this->interpretationRuleContract->build($payload, $qualityRule);
+        $interpretationRulePayload = $payload;
+        $interpretationRulePayload['scores_0_100'] = $this->hasCompleteValidDimensionScores($rawDimensionScores) ? $rawDimensionScores : [];
+        $interpretationRule = $this->interpretationRuleContract->build($interpretationRulePayload, $qualityRule);
+        if ((string) data_get($interpretationRule, 'tie_display_v1.ordered_code') !== (string) ($v1['top_code'] ?? '')) {
+            data_set($interpretationRule, 'profile_shape', 'unavailable');
+            data_set($interpretationRule, 'near_tie_state.state', 'none');
+            data_set($interpretationRule, 'near_tie_state.dimensions', []);
+            data_set($interpretationRule, 'alternate_code.show', false);
+            data_set($interpretationRule, 'alternate_code.codes', []);
+            data_set($interpretationRule, 'alternate_code.reason', null);
+            data_set($interpretationRule, 'alternate_code_reason', null);
+            data_set($interpretationRule, 'tie_display_v1.kind', 'none');
+            data_set($interpretationRule, 'tie_display_v1.position', 'none');
+            data_set($interpretationRule, 'tie_display_v1.dimensions', []);
+            data_set($interpretationRule, 'tie_display_v1.groups', []);
+            data_set($interpretationRule, 'tie_display_v1.alternate_codes', []);
+            data_set($interpretationRule, 'tie_display_v1.ordered_code', (string) ($v1['top_code'] ?? ''));
+            data_set($interpretationRule, 'tie_display_v1.unavailable_reason', 'score_code_mismatch');
+            data_set($interpretationRule, 'validation_status', 'score_code_mismatch_unavailable');
+        }
 
         $projection = [
             '_dimension_scores_complete' => $this->hasCompleteValidDimensionScores($rawDimensionScores),
@@ -186,7 +205,7 @@ final class RiasecPublicProjectionService
                 'score_mutation_allowed' => false,
                 'measured_holland_code_mutation_allowed' => false,
             ],
-            'interpretation_state' => $this->publicInterpretationState($interpretationRule),
+            'interpretation_state' => $this->publicInterpretationState($interpretationRule, $locale),
             'indices' => [
                 'clarity_index' => (float) ($v1['clarity_index'] ?? 0),
                 'breadth_index' => (float) ($v1['breadth_index'] ?? 0),
@@ -763,11 +782,11 @@ final class RiasecPublicProjectionService
     {
         $slots = [];
         $profileShape = (string) ($interpretationState['profile_shape'] ?? '');
-        if ($profileShape !== '') {
+        if ($profileShape !== '' && $profileShape !== 'unavailable') {
             $slots[] = $this->deepCopySlots->resolveInterpretationStateCopySlot('profile_shape_copy', $profileShape);
         }
 
-        $confidenceState = $this->confidenceCopyState($interpretationState, $qualityState);
+        $confidenceState = $profileShape === 'unavailable' ? null : $this->confidenceCopyState($interpretationState, $qualityState);
         if ($confidenceState !== null) {
             $slots[] = $this->deepCopySlots->resolveInterpretationStateCopySlot('top_code_confidence_copy', $confidenceState);
         }
@@ -1034,8 +1053,12 @@ final class RiasecPublicProjectionService
      * @param  array<string,mixed>  $interpretationRule
      * @return array<string,mixed>
      */
-    private function publicInterpretationState(array $interpretationRule): array
+    private function publicInterpretationState(array $interpretationRule, string $locale): array
     {
+        $tieDisplay = is_array($interpretationRule['tie_display_v1'] ?? null) ? $interpretationRule['tie_display_v1'] : [];
+        $tieDisplay['locale'] = str_starts_with(strtolower($locale), 'zh') ? 'zh-CN' : 'en';
+        $tieDisplay['display_copy'] = $this->tieDisplayCopy($tieDisplay, $locale);
+
         return [
             'interpretation_rule_version' => (string) ($interpretationRule['interpretation_rule_version'] ?? ''),
             'profile_shape' => (string) ($interpretationRule['profile_shape'] ?? ''),
@@ -1044,6 +1067,7 @@ final class RiasecPublicProjectionService
             'near_tie_state' => is_array($interpretationRule['near_tie_state'] ?? null) ? $interpretationRule['near_tie_state'] : [],
             'alternate_code' => is_array($interpretationRule['alternate_code'] ?? null) ? $interpretationRule['alternate_code'] : [],
             'alternate_code_reason' => $interpretationRule['alternate_code_reason'] ?? null,
+            'tie_display_v1' => $tieDisplay,
             'top_code_confidence' => is_array($interpretationRule['top_code_confidence'] ?? null) ? $interpretationRule['top_code_confidence'] : [],
             'reading_strength' => (string) ($interpretationRule['reading_strength'] ?? ''),
             'result_page_strategy' => is_array($interpretationRule['result_page_strategy'] ?? null) ? $interpretationRule['result_page_strategy'] : [],
@@ -1051,5 +1075,69 @@ final class RiasecPublicProjectionService
             'validation_status' => (string) ($interpretationRule['validation_status'] ?? ''),
             'field_authority' => is_array($interpretationRule['field_authority'] ?? null) ? $interpretationRule['field_authority'] : [],
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $tieDisplay
+     * @return array<string,string>
+     */
+    private function tieDisplayCopy(array $tieDisplay, string $locale): array
+    {
+        $isZh = str_starts_with(strtolower($locale), 'zh');
+        $kind = (string) ($tieDisplay['kind'] ?? 'none');
+        $dimensions = array_values(array_filter(array_map('strval', (array) ($tieDisplay['dimensions'] ?? []))));
+        $groups = array_values(array_filter(array_map(
+            static fn ($group): array => array_values(array_filter(array_map('strval', is_array($group) ? $group : []))),
+            (array) ($tieDisplay['groups'] ?? [])
+        )));
+        $code = (string) ($tieDisplay['ordered_code'] ?? '');
+        $joined = $isZh ? implode('、', $dimensions) : $this->englishJoin($dimensions);
+        $position = (string) ($tieDisplay['position'] ?? 'none');
+        if (($tieDisplay['unavailable_reason'] ?? null) === 'score_code_mismatch') {
+            return [
+                'headline' => $isZh ? '本次结果暂不可解释' : 'This result cannot be interpreted yet',
+                'note' => $isZh ? '分数顺序与结果代码不一致，已隐藏解释内容；六维分数仍可供核对。' : 'The score order and result code do not agree, so interpretive content is hidden; the six dimension scores remain available for review.',
+                'boundary' => $isZh ? '请重新检查结果；不要根据本页推断兴趣排序、能力或职业结论。' : 'Please check the result again; do not infer an interest order, ability, or career conclusion from this page.',
+            ];
+        }
+
+        return match ($kind) {
+            'exact_tie' => [
+                'headline' => $this->exactTieHeadline($code, $dimensions, $groups, $position, $isZh),
+                'note' => $isZh ? '这些维度本次得分相同，字母顺序不代表高低。' : 'These dimensions have the same score; their letter order does not indicate a difference.',
+                'boundary' => $isZh ? '并列只描述本次兴趣分数，不代表能力、人格身份或职业结论。' : 'The tie describes this interest score only; it is not an ability, identity, or career conclusion.',
+            ],
+            'near_tie' => [
+                'headline' => $isZh ? $code.'（'.$joined.'接近）' : $code.' ('.$joined.' are close)',
+                'note' => $isZh ? '这些维度分数接近，不宜据此强调先后顺序。' : 'These scores are close, so the order should not be emphasized.',
+                'boundary' => $isZh ? '这是解释用的暂定阅读阈值，不是统计显著性或测量误差结论，也不产生第二个测量结果。' : 'This is a provisional reading threshold, not a statistical-significance or measurement-error conclusion, and it does not create a second measured result.',
+            ],
+            default => [
+                'headline' => $code,
+                'note' => '',
+                'boundary' => '',
+            ],
+        };
+    }
+
+    private function englishJoin(array $items): string
+    {
+        if (count($items) <= 1) {
+            return (string) ($items[0] ?? '');
+        }
+        if (count($items) === 2) {
+            return $items[0].' and '.$items[1];
+        }
+
+        return implode(', ', array_slice($items, 0, -1)).', and '.$items[array_key_last($items)];
+    }
+
+    private function exactTieHeadline(string $code, array $dimensions, array $groups, string $position, bool $isZh): string
+    {
+        $groupLabels = array_map(fn (array $group): string => $isZh ? implode('/', $group) : $this->englishJoin($group), $groups);
+
+        return $isZh
+            ? $code.'（并列：'.implode('；', $groupLabels).'）'
+            : $code.' (tied groups: '.implode('; ', $groupLabels).')';
     }
 }

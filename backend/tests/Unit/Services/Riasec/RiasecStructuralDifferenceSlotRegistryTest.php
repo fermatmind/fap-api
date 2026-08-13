@@ -393,6 +393,55 @@ final class RiasecStructuralDifferenceSlotRegistryTest extends TestCase
         ));
     }
 
+    public function test_public_tie_display_is_localized_for_exact_near_and_no_tie_states(): void
+    {
+        $cases = [
+            [['S' => 80, 'C' => 80, 'E' => 70, 'R' => 40, 'I' => 30, 'A' => 20], 'exact_tie', '并列', 'same score'],
+            [['R' => 80, 'I' => 77, 'A' => 68, 'S' => 40, 'E' => 30, 'C' => 20], 'near_tie', '接近', 'are close'],
+            [['R' => 90, 'I' => 70, 'A' => 50, 'S' => 40, 'E' => 30, 'C' => 20], 'none', 'RIA', 'RIA'],
+        ];
+        foreach ($cases as [$scores, $kind, $zhText, $enText]) {
+            $orderedCode = implode('', array_slice(array_keys($scores), 0, 3));
+            $result = new Result;
+            $result->scale_code = 'RIASEC';
+            $result->type_code = $orderedCode;
+            $result->scores_pct = $scores;
+            $result->result_json = ['scores_0_100' => $scores, 'top_code' => $orderedCode, 'form_code' => 'riasec_60', 'answer_count' => 60, 'quality_grade' => 'A'];
+            $zh = $this->projectionService()->buildV2FromResult($result, 'zh-CN');
+            $en = $this->projectionService()->buildV2FromResult($result, 'en');
+            $this->assertSame($kind, data_get($zh, 'interpretation_state.tie_display_v1.kind'));
+            $this->assertStringContainsString($zhText, data_get($zh, 'interpretation_state.tie_display_v1.display_copy.headline'));
+            $this->assertStringContainsString($enText, data_get($en, 'interpretation_state.tie_display_v1.display_copy.headline').data_get($en, 'interpretation_state.tie_display_v1.display_copy.note'));
+        }
+
+        $invalid = new Result;
+        $invalid->scale_code = 'RIASEC';
+        $invalid->type_code = 'RIC';
+        $invalid->scores_pct = ['R' => 90, 'I' => 80, 'C' => 70, 'A' => 50, 'S' => 40, 'E' => 30];
+        $invalid->result_json = ['top_code' => 'RIC', 'form_code' => 'riasec_60', 'answer_count' => 60, 'quality_grade' => 'A'];
+        $projection = $this->projectionService()->buildV2FromResult($invalid, 'zh-CN');
+        $this->assertSame('none', data_get($projection, 'interpretation_state.tie_display_v1.kind'));
+        $this->assertSame('RIC', data_get($projection, 'interpretation_state.tie_display_v1.display_copy.headline'));
+
+        $mismatch = clone $invalid;
+        $mismatch->scores_pct = ['R' => 80, 'I' => 77, 'A' => 68, 'S' => 40, 'E' => 30, 'C' => 20];
+        $mismatchProjection = $this->projectionService()->buildV2FromResult($mismatch, 'zh-CN');
+        $this->assertSame('score_code_mismatch_unavailable', data_get($mismatchProjection, 'interpretation_state.validation_status'));
+        $this->assertSame('none', data_get($mismatchProjection, 'interpretation_state.near_tie_state.state'));
+        $this->assertFalse(data_get($mismatchProjection, 'interpretation_state.alternate_code.show'));
+        $this->assertSame('本次结果暂不可解释', data_get($mismatchProjection, 'interpretation_state.tie_display_v1.display_copy.headline'));
+        $this->assertSame('visible', collect(data_get($mismatchProjection, 'module_visibility_policy.modules'))->firstWhere('key', 'six_dimension_map')['visibility']);
+        $this->assertSame('hidden', collect(data_get($mismatchProjection, 'module_visibility_policy.modules'))->firstWhere('key', 'activity_explorer')['visibility']);
+        $this->assertEmpty(array_filter(
+            (array) data_get($mismatchProjection, 'deep_content_slots_v1.slots'),
+            static fn (array $slot): bool => ($slot['slot_key'] ?? '') === 'near_tie_alternate_code_copy'
+        ));
+        $this->assertEmpty(array_filter(
+            (array) data_get($mismatchProjection, 'deep_content_slots_v1.slots'),
+            static fn (array $slot): bool => ($slot['slot_key'] ?? '') === 'top_code_confidence_copy'
+        ));
+    }
+
     private function attempt(string $id, string $formCode, int $questionCount): Attempt
     {
         $attempt = new Attempt;
