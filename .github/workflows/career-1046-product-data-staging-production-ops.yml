@@ -230,7 +230,7 @@ jobs:
              and .candidate_receipt.active_pointer_written == false
              and .candidate_receipt.published == false
              and .candidate_receipt.warmed == false' "$candidate" >/dev/null
-          receipt_sha="$(jq -cS '.candidate_receipt' "$candidate" | sha256sum | awk '{print $1}')"
+          receipt_sha="$(php -d memory_limit=512M backend/scripts/operations/career_1046_product_data_staging.php candidate-receipt-sha256 < "$candidate")"
           test "$receipt_sha" = "$EXPECTED_CANDIDATE_RECEIPT_SHA256"
 
           apply_authorized=0

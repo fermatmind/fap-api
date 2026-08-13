@@ -139,6 +139,31 @@ final class Career1046ProductDataStagingWorkflowTest extends TestCase
         self::assertSame($activeBefore, hash_file('sha256', $activePath));
     }
 
+    public function test_workflow_receipt_hash_uses_the_same_float_preserving_canonicalizer_as_the_runner(): void
+    {
+        $receipt = ['ratio' => 0.0, 'count' => 0];
+        $bundle = ['candidate_receipt' => $receipt];
+        $bundleBytes = CareerGenerationCanonicalJson::encode($bundle)."\n";
+
+        self::assertNotSame(
+            hash('sha256', '{"count":0,"ratio":0}'),
+            CareerGenerationCanonicalJson::sha256($receipt),
+        );
+
+        $process = new Process([
+            PHP_BINARY,
+            dirname(__DIR__, 2).'/scripts/operations/career_1046_product_data_staging.php',
+            'candidate-receipt-sha256',
+        ]);
+        $process->setInput($bundleBytes);
+        $process->mustRun();
+
+        self::assertSame(
+            CareerGenerationCanonicalJson::sha256($receipt),
+            trim($process->getOutput()),
+        );
+    }
+
     public function test_tampered_bundle_and_staging_residue_fail_closed_without_writes(): void
     {
         $before = $this->treeHash($this->privateRoot);
@@ -189,6 +214,7 @@ final class Career1046ProductDataStagingWorkflowTest extends TestCase
             'PASS_APPLY_PRODUCT_DATA_STAGED',
             'career.1046.product_data_staging.v2',
             'career.1046.immutable_candidate.v2',
+            'candidate-receipt-sha256',
             'unique_slugs == 1046',
             'locale_rows == 2092',
             'group: deploy-${{ github.repository }}-production',
