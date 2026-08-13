@@ -414,7 +414,10 @@ function careerPublicVerifyPublicProducts(array $expected, array $generation, ar
             $payload = careerPublicVerifyDecode($response['body'], 'PUBLIC_DETAIL_JSON_INVALID');
             $expectedPayload = $generation['detail_payloads'][$locale][$slug] ?? null;
             if (! is_array($expectedPayload)
-                || ! hash_equals(careerPublicVerifySemanticCanonicalSha($expectedPayload), careerPublicVerifySemanticCanonicalSha($payload))) {
+                || ! hash_equals(
+                    careerPublicVerifyGenerationBindingSha($expectedPayload, $slug, $locale),
+                    careerPublicVerifyGenerationBindingSha($payload, $slug, $locale),
+                )) {
                 $generationMismatch++;
             }
         } catch (Career1046PublicVerifyFailure) {
@@ -736,26 +739,33 @@ function careerPublicVerifyCanonicalJson(mixed $value): string
     );
 }
 
-function careerPublicVerifySemanticCanonicalSha(mixed $value): string
+/** @param array<string, mixed> $payload */
+function careerPublicVerifyGenerationBindingSha(array $payload, string $slug, string $locale): string
 {
-    $normalizeNumbers = static function (mixed $item) use (&$normalizeNumbers): mixed {
-        if (is_float($item) && is_finite($item) && $item >= PHP_INT_MIN && $item <= PHP_INT_MAX) {
-            $integer = (int) $item;
-            if ((float) $integer === $item) {
-                return $integer;
-            }
-        }
-        if (! is_array($item)) {
-            return $item;
-        }
-        foreach ($item as $key => $child) {
-            $item[$key] = $normalizeNumbers($child);
-        }
+    $publicLocale = $locale === 'zh' ? 'zh-CN' : 'en';
+    $canonicalPath = '/'.$locale.'/career/jobs/'.$slug;
+    $identity = $payload['identity'] ?? null;
+    $seo = $payload['seo_contract'] ?? null;
+    if (! is_array($identity)
+        || ! is_array($seo)
+        || ($payload['bundle_kind'] ?? null) !== 'career_job_detail'
+        || ($payload['bundle_version'] ?? null) !== 'career.protocol.job_detail.v1'
+        || ($identity['canonical_slug'] ?? null) !== $slug
+        || ! is_string($identity['occupation_uuid'] ?? null)
+        || preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/', $identity['occupation_uuid']) !== 1
+        || ($seo['canonical_path'] ?? null) !== $canonicalPath
+        || ($seo['canonical_target'] ?? null) !== $canonicalPath
+        || careerPublicVerifyDataGet($payload, 'display_surface_v1.page.locale') !== $publicLocale) {
+        throw new Career1046PublicVerifyFailure('PUBLIC_DETAIL_GENERATION_BINDING_INVALID');
+    }
 
-        return $item;
-    };
-
-    return hash('sha256', careerPublicVerifyCanonicalJson($normalizeNumbers($value)));
+    return careerPublicVerifyCanonicalSha([
+        'bundle_kind' => $payload['bundle_kind'],
+        'bundle_version' => $payload['bundle_version'],
+        'identity' => $identity,
+        'seo_contract' => $seo,
+        'public_locale' => $publicLocale,
+    ]);
 }
 
 function careerPublicVerifyRequiredSlug(mixed $value): string

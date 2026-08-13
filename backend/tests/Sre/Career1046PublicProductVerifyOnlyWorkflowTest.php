@@ -58,11 +58,8 @@ final class Career1046PublicProductVerifyOnlyWorkflowTest extends TestCase
             'timeout' => false,
             'body' => ['message' => 'not found'],
         ];
-        $map[$fixture['api_base'].'/api/v0.5/career/jobs/'.$slugs[1].'?locale=en'] = [
-            'status' => 200,
-            'timeout' => false,
-            'body' => ['identity' => ['canonical_slug' => $slugs[1]], 'titles' => ['canonical' => 'drifted']],
-        ];
+        $driftUrl = $fixture['api_base'].'/api/v0.5/career/jobs/'.$slugs[1].'?locale=en';
+        $map[$driftUrl]['body']['identity']['occupation_uuid'] = 'ffffffff-ffff-4fff-8fff-ffffffffffff';
         $map[$fixture['api_base'].'/api/v0.5/career/jobs/'.$slugs[2].'?locale=zh-CN'] = [
             'status' => 0,
             'timeout' => true,
@@ -83,6 +80,24 @@ final class Career1046PublicProductVerifyOnlyWorkflowTest extends TestCase
         self::assertSame(0, $receipt['warm_count']);
         self::assertSame(0, $receipt['repair_count']);
         self::assertSame(0, $receipt['rollback_count']);
+    }
+
+    public function test_runtime_projection_enrichment_does_not_create_false_generation_drift(): void
+    {
+        $fixture = $this->fixture();
+        $map = json_decode((string) file_get_contents($fixture['http_fixture']), true, 512, JSON_THROW_ON_ERROR);
+        $url = $fixture['api_base'].'/api/v0.5/career/jobs/'.$fixture['slugs'][0].'?locale=en';
+        $map[$url]['body']['titles']['canonical'] = 'runtime-localized-title';
+        $map[$url]['body']['provenance_meta'] = ['public_source' => 'runtime-redacted'];
+        $map[$url]['body']['search_entry_tier'] = 'runtime-enriched';
+        $map[$url]['body']['search_entry_authority'] = ['review_state' => 'runtime-enriched'];
+        file_put_contents($fixture['http_fixture'], json_encode($map, JSON_THROW_ON_ERROR));
+
+        [$status, $receipt] = $this->runControl($fixture);
+
+        self::assertSame(0, $status);
+        self::assertSame('PASS_PUBLIC_PRODUCT_VERIFY_ONLY', $receipt['status']);
+        self::assertSame(0, $receipt['counts']['generation_mismatch']);
     }
 
     public function test_public_directory_canonical_path_drift_fails_closed(): void
@@ -152,7 +167,7 @@ final class Career1046PublicProductVerifyOnlyWorkflowTest extends TestCase
             'recordCacheState: $recordCacheState',
             "['message' => 'career verify-only read unavailable.'], 503",
             'ACTIVE_RELEASE_DRIFT_DURING_VERIFY',
-            'careerPublicVerifySemanticCanonicalSha',
+            'careerPublicVerifyGenerationBindingSha',
             '.counts.directory_en == 1046',
             '.counts.directory_zh == 1046',
             '.counts.detail_targets == 2092',
@@ -244,10 +259,24 @@ final class Career1046PublicProductVerifyOnlyWorkflowTest extends TestCase
         $details = [];
         $payloads = ['en' => [], 'zh' => []];
         foreach ($slugs as $slug) {
+            $uuidHex = substr(hash('sha256', $slug), 0, 32);
+            $occupationUuid = substr($uuidHex, 0, 8).'-'.substr($uuidHex, 8, 4).'-4'.substr($uuidHex, 13, 3).'-8'.substr($uuidHex, 17, 3).'-'.substr($uuidHex, 20, 12);
             foreach (['en', 'zh'] as $locale) {
                 $payload = [
-                    'identity' => ['canonical_slug' => $slug],
+                    'bundle_kind' => 'career_job_detail',
+                    'bundle_version' => 'career.protocol.job_detail.v1',
+                    'identity' => [
+                        'canonical_slug' => $slug,
+                        'occupation_uuid' => $occupationUuid,
+                    ],
                     'titles' => ['canonical' => $slug.'-'.$locale],
+                    'seo_contract' => [
+                        'canonical_path' => '/'.$locale.'/career/jobs/'.$slug,
+                        'canonical_target' => '/'.$locale.'/career/jobs/'.$slug,
+                    ],
+                    'display_surface_v1' => [
+                        'page' => ['locale' => $locale === 'zh' ? 'zh-CN' : 'en'],
+                    ],
                     'numeric_equivalence' => 1.0,
                 ];
                 $details[] = ['slug' => $slug, 'locale' => $locale, 'payload' => $payload];
