@@ -427,12 +427,12 @@ final class CareerColdCacheDiscoverabilityRunner
         $phase = trim((string) ($argv[1] ?? ''));
 
         try {
-            $artifact = self::latestProjectionArtifact();
+            $app = self::bootstrapApplication();
+            $artifact = self::activeProjectionArtifact($app);
             $authority = CareerColdCacheDiscoverabilityValidator::authoritySnapshot(
                 $artifact['payload'],
                 $artifact['sha256'],
             );
-            $app = self::bootstrapApplication();
             $runtimeProjection = $app->make('App\\Domain\\Career\\Publish\\CareerRuntimePublishProjectionLookup');
             $runtimeItems = $runtimeProjection->jobDetailCoverageItems(['en', 'zh-CN']);
             $snapshot = [
@@ -486,46 +486,23 @@ final class CareerColdCacheDiscoverabilityRunner
     }
 
     /** @return array{payload: array<string, mixed>, sha256: string} */
-    private static function latestProjectionArtifact(): array
+    private static function activeProjectionArtifact(object $app): array
     {
-        $root = dirname(__DIR__, 2).'/storage/app/private/career_runtime_publish_projection';
-        $directories = is_dir($root) ? glob($root.'/*', GLOB_ONLYDIR) : false;
-        if (! is_array($directories) || $directories === []) {
-            throw new CareerColdCacheDiscoverabilityFailure('AUTHORITY_ARTIFACT_MISSING');
+        try {
+            $loaded = $app->make('App\\Domain\\Career\\Publish\\CareerGenerationAuthorityLoader')->loadStrict();
+        } catch (Throwable) {
+            throw new CareerColdCacheDiscoverabilityFailure('ACTIVE_GENERATION_AUTHORITY_INVALID');
         }
 
-        $candidates = [];
-        foreach ($directories as $directory) {
-            $path = $directory.'/career-runtime-publish-projection.json';
-            if (! is_file($path)) {
-                continue;
-            }
-            $bytes = file_get_contents($path);
-            $payload = is_string($bytes) ? json_decode($bytes, true) : null;
-            if (! is_array($payload)) {
-                continue;
-            }
-            clearstatcache(true, $path);
-            $candidates[] = [
-                'path' => $path,
-                'mtime' => filemtime($path) ?: 0,
-                'payload' => $payload,
-                'sha256' => hash('sha256', $bytes),
-            ];
+        $projection = $loaded['projection'] ?? null;
+        $sha256 = $loaded['pointer']['artifacts']['projection']['sha256'] ?? null;
+        if (! is_array($projection) || ! is_string($sha256) || preg_match('/^[a-f0-9]{64}$/D', $sha256) !== 1) {
+            throw new CareerColdCacheDiscoverabilityFailure('ACTIVE_GENERATION_AUTHORITY_INVALID');
         }
-
-        if ($candidates === []) {
-            throw new CareerColdCacheDiscoverabilityFailure('AUTHORITY_ARTIFACT_MISSING');
-        }
-        usort($candidates, static function (array $left, array $right): int {
-            $mtime = $right['mtime'] <=> $left['mtime'];
-
-            return $mtime !== 0 ? $mtime : strcmp((string) $right['path'], (string) $left['path']);
-        });
 
         return [
-            'payload' => $candidates[0]['payload'],
-            'sha256' => $candidates[0]['sha256'],
+            'payload' => $projection,
+            'sha256' => $sha256,
         ];
     }
 
