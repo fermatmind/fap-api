@@ -78,7 +78,9 @@ final class MbtiZhResultContentPolicy
 
             $slotId = trim((string) ($slot['slot_id'] ?? $slot['id'] ?? ''));
             $slot['label'] = self::ASSET_LABELS[$slotId] ?? '人格结果插图';
-            // The clone illustrations repeat adjacent text and are decorative.
+            // The committed SVGs are decorative and are intentionally not consumed by zh-CN runtime.
+            $slot['status'] = 'disabled';
+            $slot['asset_ref'] = null;
             $slot['alt'] = '';
             $slots[$index] = $slot;
         }
@@ -190,6 +192,7 @@ final class MbtiZhResultContentPolicy
                 [
                     '费马心理',
                     'FermatMind的',
+                    '把把',
                     '它让成长从口号变成可重复的方法。',
                     '不爱空喊口号',
                     '你常见的贡献不是喊口号，而是先定模型、边界和风险顺序，再安排执行。',
@@ -198,6 +201,7 @@ final class MbtiZhResultContentPolicy
                 [
                     '费马测试 / FermatMind',
                     'FermatMind 的',
+                    '把',
                     '可观察的证据是：能指出触发点、说明下一次要调整的动作，并在类似场景复查结果。',
                     '更偏好用实际行动表达立场',
                     '你常见的贡献，可以从具体行为观察：先定模型、边界和风险顺序，再安排执行。',

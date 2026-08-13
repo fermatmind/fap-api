@@ -354,6 +354,7 @@ final class AttemptReportAccessReadTest extends TestCase
 
     public function test_mbti_report_access_promotes_to_full_ready_when_free_full_report_mode_is_enabled(): void
     {
+        config()->set('report_unlock.mbti_access_mode', 'free_full');
         config()->set('fap.features.free_full_report_mode', true);
         config()->set('fap.free_full_report_assessments', ['MBTI']);
 
@@ -378,6 +379,7 @@ final class AttemptReportAccessReadTest extends TestCase
             ->assertJsonPath('unlock_stage', 'full')
             ->assertJsonPath('unlock_source', 'none')
             ->assertJsonPath('access_source', 'free_full_report_mode')
+            ->assertJsonPath('access_mode', 'free_full')
             ->assertJsonPath('free_full_report_mode', true)
             ->assertJsonPath('paywall_suppressed', true)
             ->assertJsonPath('payload.locked', false)

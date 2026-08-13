@@ -54,6 +54,7 @@ use App\Services\Riasec\RiasecPublicFormSummaryBuilder;
 use App\Services\Riasec\RiasecPublicProjectionService;
 use App\Services\Scale\ScaleCodeResponseProjector;
 use App\Support\Logging\SensitiveDiagnosticRedactor;
+use App\Support\Mbti\MbtiReportAccessPolicy;
 use App\Support\OrgContext;
 use App\Support\SchemaBaseline;
 use Illuminate\Database\QueryException;
@@ -1202,6 +1203,9 @@ class AttemptReadController extends Controller
             $responsePayload['full_report_entitlement_v1'] = $fullReportEntitlement;
         }
         $responsePayload['access_source'] = $payloadJson['access_source'];
+        if ($scaleCode === ReportAccess::SCALE_MBTI) {
+            $responsePayload['access_mode'] = MbtiReportAccessPolicy::mode();
+        }
         $responsePayload['free_full_report_mode'] = $payloadJson['free_full_report_mode'];
         $responsePayload['paywall_suppressed'] = $payloadJson['paywall_suppressed'];
         $inviteSnapshotFailureCode = null;
@@ -1631,6 +1635,7 @@ class AttemptReadController extends Controller
             'unlock_stage' => ReportAccess::UNLOCK_STAGE_FULL,
             'unlock_source' => ReportAccess::UNLOCK_SOURCE_NONE,
             'access_source' => trim($accessSource) !== '' ? $accessSource : 'free_full_report_mode',
+            ...($scaleCode === ReportAccess::SCALE_MBTI ? ['access_mode' => MbtiReportAccessPolicy::mode()] : []),
             'free_full_report_mode' => true,
             'paywall_suppressed' => true,
             'upgrade_sku' => null,
@@ -1662,6 +1667,10 @@ class AttemptReadController extends Controller
 
     private function freeFullReportModeEnabledForScale(string $scaleCode): bool
     {
+        if (strtoupper(trim($scaleCode)) === ReportAccess::SCALE_MBTI) {
+            return MbtiReportAccessPolicy::grantsFreeFull($scaleCode);
+        }
+
         if (! (bool) config('fap.features.free_full_report_mode', false)) {
             return false;
         }

@@ -7,7 +7,9 @@ namespace Tests\Feature\PersonalityCms;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantCloneContent;
+use App\Models\PersonalityProfileVariantRevision;
 use App\PersonalityCms\DesktopClone\PersonalityDesktopCloneAssetSlotSupport;
+use App\Services\Cms\MbtiZhResultContentReleaseService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
@@ -15,6 +17,71 @@ use Tests\TestCase;
 final class PersonalityDesktopCloneBaselineImportTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function test_exact_zh_package_draft_promotion_readback_and_rollback_are_revision_bound(): void
+    {
+        $this->seedZhVariantsForAllMbtiBaseTypes();
+        $this->artisan('personality:import-desktop-clone-baseline', [
+            '--locale' => ['zh-CN'],
+            '--status' => 'published',
+            '--upsert' => true,
+            '--source-dir' => '../content_baselines/personality_clone',
+        ])->assertExitCode(0);
+
+        $service = app(MbtiZhResultContentReleaseService::class);
+        $dryRun = $service->dryRun();
+        $draft = $service->writeDraft($dryRun['package_hash'], $dryRun['pre_state_hash'], 1);
+
+        $this->assertSame(64, PersonalityProfileVariantRevision::query()->count());
+        $promotion = $service->promotionDryRun();
+        $this->assertSame($draft['candidate_revision_set_hash'], $promotion['candidate_revision_set_hash']);
+        $service->promote($promotion['package_hash'], $promotion['pre_state_hash'], $promotion['candidate_revision_set_hash']);
+
+        $readback = $service->readback($promotion['package_hash']);
+        $this->assertTrue($readback['ok']);
+        $this->assertSame(224, $readback['disabled_slot_count']);
+
+        $rollback = $service->rollback(
+            $promotion['package_hash'],
+            $dryRun['pre_state_hash'],
+            $promotion['rollback_revision_set_hash'],
+        );
+        $this->assertTrue($rollback['committed']);
+    }
+
+    public function test_exact_release_command_requires_the_controlled_write_boundary(): void
+    {
+        $this->seedZhVariantsForAllMbtiBaseTypes();
+        $this->artisan('personality:import-desktop-clone-baseline', [
+            '--locale' => ['zh-CN'],
+            '--status' => 'published',
+            '--upsert' => true,
+            '--source-dir' => '../content_baselines/personality_clone',
+        ])->assertExitCode(0);
+
+        $plan = app(MbtiZhResultContentReleaseService::class)->dryRun();
+        $arguments = [
+            '--stage' => 'draft',
+            '--package-hash' => $plan['package_hash'],
+            '--pre-state-hash' => $plan['pre_state_hash'],
+            '--admin-user-id' => 1,
+        ];
+        $this->artisan('personality:mbti-zh-result-content-release', $arguments)
+            ->expectsOutputToContain('--production-content-write-authorized is required')
+            ->assertExitCode(1);
+
+        $this->artisan('personality:mbti-zh-result-content-release', [
+            ...$arguments,
+            '--production-content-write-authorized' => true,
+            '--no-publication-change' => true,
+            '--no-indexability-change' => true,
+            '--no-sitemap' => true,
+            '--no-llms' => true,
+            '--no-search-release' => true,
+        ])
+            ->expectsOutputToContain('"stage": "draft_write"')
+            ->assertExitCode(0);
+    }
 
     public function test_import_publishes_32_full_code_zh_clone_content_with_compatibility_fields_and_is_idempotent(): void
     {
@@ -139,7 +206,7 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
 
         $this->assertSame(PersonalityDesktopCloneAssetSlotSupport::allowedSlotIds(), $slotIds);
         $this->assertSame(
-            7,
+            0,
             collect((array) $intjAClone->asset_slots_json)
                 ->where('status', PersonalityDesktopCloneAssetSlotSupport::STATUS_READY)
                 ->count(),
@@ -148,10 +215,9 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
             'mbti.desktop_clone.intj-a.hero-illustration',
             data_get($intjAClone->asset_slots_json, '0.meta.media_library_asset_key'),
         );
-        $this->assertSame(
-            'https://assets.fermatmind.com/static/mbti/desktop-clone/intj-a/hero-illustration.svg',
-            data_get($intjAClone->asset_slots_json, '0.asset_ref.url'),
-        );
+        $this->assertNull(data_get($intjAClone->asset_slots_json, '0.asset_ref'));
+        // The legacy importer canonicalizes blank alt text to null at rest; the
+        // public zh-CN contract projects it as an exact empty string.
         $this->assertNull(data_get($intjAClone->asset_slots_json, '0.alt'));
         $this->assertSame('人格类型插图', data_get($intjAClone->asset_slots_json, '0.label'));
 

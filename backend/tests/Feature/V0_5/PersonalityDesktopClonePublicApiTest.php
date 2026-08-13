@@ -147,14 +147,13 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             ->assertJsonPath('content.chapters.growth.traits_unlock.items.0.label', 'growth trait 1 infj-a')
             ->assertJsonPath('content.chapters.relationships.traits_unlock.items.0.label', 'relationships trait 1 infj-a')
             ->assertJsonPath('asset_slots.0.slot_id', PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_HERO_ILLUSTRATION)
-            ->assertJsonPath('asset_slots.0.status', PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER)
+            ->assertJsonPath('asset_slots.0.status', PersonalityDesktopCloneAssetSlotSupport::STATUS_DISABLED)
             ->assertJsonPath('asset_slots.0.asset_ref', null)
             ->assertJsonPath('asset_slots.0.label', '人格类型插图')
             ->assertJsonPath('asset_slots.0.alt', '')
             ->assertJsonPath('asset_slots.1.slot_id', PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_TRAITS_ILLUSTRATION)
-            ->assertJsonPath('asset_slots.1.status', PersonalityDesktopCloneAssetSlotSupport::STATUS_READY)
-            ->assertJsonPath('asset_slots.1.asset_ref.provider', PersonalityDesktopCloneAssetSlotSupport::ASSET_PROVIDER_CDN)
-            ->assertJsonPath('asset_slots.1.asset_ref.path', 'mbti/desktop/traits/infj-a/v1.webp')
+            ->assertJsonPath('asset_slots.1.status', PersonalityDesktopCloneAssetSlotSupport::STATUS_DISABLED)
+            ->assertJsonPath('asset_slots.1.asset_ref', null)
             ->assertJsonPath('_meta.authority_source', 'personality_profile_variant_clone_contents')
             ->assertJsonPath('_meta.route_mode', 'full_code_exact')
             ->assertJsonPath('_meta.public_route_type', '32-type');
@@ -261,12 +260,14 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
         $response = $this->getJson('/api/v0.5/personality/infj-a/desktop-clone?locale=zh-CN')
             ->assertOk()
             ->assertJsonPath('asset_slots.0.slot_id', PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_HERO_ILLUSTRATION)
-            ->assertJsonPath('asset_slots.0.status', PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER)
+            ->assertJsonPath('asset_slots.0.status', PersonalityDesktopCloneAssetSlotSupport::STATUS_DISABLED)
+            ->assertJsonPath('asset_slots.0.asset_ref', null)
+            ->assertJsonPath('asset_slots.0.alt', '')
             ->assertJsonPath('asset_slots.1.slot_id', PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_TRAITS_ILLUSTRATION)
             ->assertJsonPath('asset_slots.1.label', '偏好维度插图')
             ->assertJsonPath('asset_slots.1.alt', '')
-            ->assertJsonPath('asset_slots.1.status', PersonalityDesktopCloneAssetSlotSupport::STATUS_READY)
-            ->assertJsonPath('asset_slots.1.asset_ref.path', 'mbti/desktop/traits/infj-a/canonical.webp');
+            ->assertJsonPath('asset_slots.1.status', PersonalityDesktopCloneAssetSlotSupport::STATUS_DISABLED)
+            ->assertJsonPath('asset_slots.1.asset_ref', null);
 
         $assetSlots = $response->json('asset_slots');
         $this->assertIsArray($assetSlots);

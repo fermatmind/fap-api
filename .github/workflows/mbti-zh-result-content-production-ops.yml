@@ -1,0 +1,205 @@
+name: MBTI ZH Result Content Production Ops
+run-name: MBTI ZH Result Content ${{ inputs.mode }} [op:${{ inputs.operation_key }}]
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Read-only exact-package plan or the complete draft, promotion, readback lifecycle
+        required: true
+        default: dry_run
+        type: choice
+        options: [dry_run, write]
+      expected_control_plane_sha:
+        description: Exact deployed latest-main fap-api SHA
+        required: true
+        type: string
+      expected_release_name:
+        description: Exact active production release name
+        required: true
+        type: string
+      expected_package_hash:
+        description: Exact compiled 32-row package SHA-256
+        required: true
+        type: string
+      actor_admin_user_id:
+        description: Exact solo-owner admin user ID recorded on immutable revisions
+        required: true
+        default: "1"
+        type: string
+      operator_approval_phrase:
+        description: Exact write authorization; empty for dry_run
+        required: false
+        default: ""
+        type: string
+      operation_key:
+        description: Deterministic controlled-operation key
+        required: true
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: mbti-zh-result-content-production-ops
+  cancel-in-progress: false
+
+jobs:
+  operation_gate:
+    name: Elect exact-package owner before Environment access
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      decision: ${{ steps.gate.outputs.decision }}
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - id: identity
+        shell: bash
+        env:
+          IDENTITY: control=${{ inputs.expected_control_plane_sha }}|release=${{ inputs.expected_release_name }}|package=${{ inputs.expected_package_hash }}|actor=${{ inputs.actor_admin_user_id }}|mode=${{ inputs.mode }}
+        run: echo "operation_key=$(node .github/scripts/controlled-operation-gate.cjs key --repository "$GITHUB_REPOSITORY" --workflow .github/workflows/mbti-zh-result-content-production-ops.yml --scope mbti-zh-result-content --identity "$IDENTITY")" >> "$GITHUB_OUTPUT"
+      - id: gate
+        uses: ./.github/actions/controlled-operation-gate
+        with:
+          claimed-key: ${{ inputs.operation_key }}
+          expected-key: ${{ steps.identity.outputs.operation_key }}
+          workflow-file: mbti-zh-result-content-production-ops.yml
+          receipt-template: mbti-zh-result-content-${{ inputs.mode }}-{run_id}-{run_attempt}
+
+  operate:
+    needs: operation_gate
+    if: needs.operation_gate.outputs.decision == 'execute'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: production
+    concurrency:
+      group: deploy-${{ github.repository }}-production
+      cancel-in-progress: false
+    env:
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+      MODE: ${{ inputs.mode }}
+      EXPECTED_SHA: ${{ inputs.expected_control_plane_sha }}
+      EXPECTED_RELEASE_NAME: ${{ inputs.expected_release_name }}
+      EXPECTED_PACKAGE_HASH: ${{ inputs.expected_package_hash }}
+      ACTOR_ADMIN_USER_ID: ${{ inputs.actor_admin_user_id }}
+      OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+    steps:
+      - name: Checkout exact control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 0
+
+      - name: Validate immutable operation contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = refs/heads/main
+          [[ "$EXPECTED_SHA" =~ ^[a-f0-9]{40}$ ]]
+          [[ "$EXPECTED_RELEASE_NAME" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]
+          [[ "$EXPECTED_PACKAGE_HASH" =~ ^[a-f0-9]{64}$ ]]
+          [[ "$ACTOR_ADMIN_USER_ID" =~ ^[1-9][0-9]*$ ]]
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+          test "$(git rev-parse origin/main)" = "$EXPECTED_SHA"
+          case "$MODE" in
+            dry_run)
+              test -z "$OPERATOR_APPROVAL_PHRASE"
+              ;;
+            write)
+              expected_phrase="I explicitly approve MBTI zh 32-result content promotion for SHA ${EXPECTED_SHA} release ${EXPECTED_RELEASE_NAME} package ${EXPECTED_PACKAGE_HASH} actor ${ACTOR_ADMIN_USER_ID}; create immutable candidate and rollback revisions, atomically publish exactly 32 clone records, and restore the exact pre-state on failed readback; no deploy, SEO publication, indexability, sitemap, llms, or Search Channel changes."
+              test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
+              ;;
+            *) exit 2 ;;
+          esac
+
+      - name: Set up pinned production SSH identity
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          for name in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST RETIRED_DEPLOY_HOST DEPLOY_PATH SSH_KNOWN_HOSTS; do test -n "${!name:-}"; done
+          [[ "$DEPLOY_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]{0,31}$ ]]
+          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
+          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$RETIRED_DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ && "$DEPLOY_PATH" != *".."* ]]
+          install -d -m 0700 ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 0600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Execute exact package lifecycle
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          remote="cd '$DEPLOY_PATH/current/backend' &&"
+          ssh_base=(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST")
+          "${ssh_base[@]}" "set -euo pipefail; current=\$(readlink -f '$DEPLOY_PATH/current'); test \"\$(basename \"\$current\")\" = '$EXPECTED_RELEASE_NAME'; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = '$EXPECTED_SHA'; test ! -e '$DEPLOY_PATH/.dep/deploy.lock'"
+          "${ssh_base[@]}" "$remote php artisan personality:mbti-zh-result-content-release --stage=dry-run --no-interaction --no-ansi" | tee artifacts/dry-run.json
+          jq -e --arg package "$EXPECTED_PACKAGE_HASH" '.ok == true and .record_count == 32 and .package_hash == $package and .writes == false and .discoverability_changes == false' artifacts/dry-run.json >/dev/null
+          if [ "$MODE" = dry_run ]; then
+            exit 0
+          fi
+
+          pre_state_hash="$(jq -r .pre_state_hash artifacts/dry-run.json)"
+          write_flags='--production-content-write-authorized --no-publication-change --no-indexability-change --no-sitemap --no-llms --no-search-release'
+          "${ssh_base[@]}" "$remote php artisan personality:mbti-zh-result-content-release --stage=draft --package-hash='$EXPECTED_PACKAGE_HASH' --pre-state-hash='$pre_state_hash' --admin-user-id='$ACTOR_ADMIN_USER_ID' $write_flags --no-interaction --no-ansi" | tee artifacts/draft.json
+          jq -e '.ok == true and .stage == "draft_write" and .record_count == 32 and (.candidate_revision_set_hash | test("^[a-f0-9]{64}$")) and (.rollback_revision_set_hash | test("^[a-f0-9]{64}$"))' artifacts/draft.json >/dev/null
+
+          "${ssh_base[@]}" "$remote php artisan personality:mbti-zh-result-content-release --stage=promotion-dry-run --no-interaction --no-ansi" | tee artifacts/promotion-dry-run.json
+          revision_set_hash="$(jq -r .candidate_revision_set_hash artifacts/promotion-dry-run.json)"
+          rollback_set_hash="$(jq -r .rollback_revision_set_hash artifacts/promotion-dry-run.json)"
+          jq -e --arg package "$EXPECTED_PACKAGE_HASH" --arg pre "$pre_state_hash" '.ok == true and .package_hash == $package and .pre_state_hash == $pre and .record_count == 32' artifacts/promotion-dry-run.json >/dev/null
+
+          "${ssh_base[@]}" "$remote php artisan personality:mbti-zh-result-content-release --stage=promote --package-hash='$EXPECTED_PACKAGE_HASH' --pre-state-hash='$pre_state_hash' --revision-set-hash='$revision_set_hash' $write_flags --no-interaction --no-ansi" | tee artifacts/promotion.json
+          jq -e '.ok == true and .committed == true and .record_count == 32 and .publication_changed == false and .indexability_changed == false and .sitemap_mutated == false and .llms_mutated == false and .search_release_mutated == false and .deploy_mutated == false' artifacts/promotion.json >/dev/null
+
+          readback_ok=1
+          "${ssh_base[@]}" "$remote php artisan personality:mbti-zh-result-content-release --stage=readback --package-hash='$EXPECTED_PACKAGE_HASH' --no-interaction --no-ansi" | tee artifacts/database-readback.json || readback_ok=0
+          jq -e '.ok == true and .record_count == 32 and .disabled_slot_count == 224' artifacts/database-readback.json >/dev/null || readback_ok=0
+          public_rows="$RUNNER_TEMP/mbti-public-rows.jsonl"
+          : > "$public_rows"
+          for base in ENFJ ENFP ENTJ ENTP ESFJ ESFP ESTJ ESTP INFJ INFP INTJ INTP ISFJ ISFP ISTJ ISTP; do
+            for axis in A T; do
+              code="${base}-${axis}"
+              slug="$(tr '[:upper:]' '[:lower:]' <<<"$code")"
+              curl --retry 3 --retry-all-errors --retry-delay 2 -fsS --connect-timeout 5 --max-time 30 "https://api.fermatmind.com/api/v0.5/personality/${slug}/desktop-clone?locale=zh-CN" \
+                | jq -c --arg code "$code" --arg package "$EXPECTED_PACKAGE_HASH" '
+                    select(.ok == true and .full_code == $code and ._meta.package_hash == $package and (._meta.source_hash | test("^[a-f0-9]{64}$")) and (._meta.revision_no > 0) and (.asset_slots | length) == 7 and ([.asset_slots[] | select(.status == "disabled" and .asset_ref == null and .alt == "")] | length) == 7)
+                    | {full_code, package_hash: ._meta.package_hash, source_hash: ._meta.source_hash, revision_no: ._meta.revision_no, disabled_slots: 7}' >> "$public_rows" || readback_ok=0
+            done
+          done
+          jq -s --arg package "$EXPECTED_PACKAGE_HASH" '{schema:"mbti_zh_result_public_readback.v1",package_hash:$package,record_count:length,disabled_slot_count:(map(.disabled_slots)|add),unique_source_hashes:(map(.source_hash)|unique|length),revision_nos:(map({key:.full_code,value:.revision_no})|from_entries),ok:(length==32 and (map(.package_hash)|unique)==[$package] and (map(.source_hash)|unique|length)==32)}' "$public_rows" > artifacts/public-readback.json
+          jq -e '.ok == true and .record_count == 32 and .disabled_slot_count == 224 and .unique_source_hashes == 32' artifacts/public-readback.json >/dev/null || readback_ok=0
+
+          if [ "$readback_ok" -ne 1 ]; then
+            "${ssh_base[@]}" "$remote php artisan personality:mbti-zh-result-content-release --stage=rollback --package-hash='$EXPECTED_PACKAGE_HASH' --pre-state-hash='$pre_state_hash' --revision-set-hash='$rollback_set_hash' $write_flags --no-interaction --no-ansi" | tee artifacts/rollback.json
+            jq -e '.ok == true and .committed == true and .record_count == 32' artifacts/rollback.json >/dev/null
+            echo 'Promotion readback failed; exact pre-state was restored.' >&2
+            exit 1
+          fi
+
+          jq -n --arg sha "$EXPECTED_SHA" --arg release "$EXPECTED_RELEASE_NAME" --arg package "$EXPECTED_PACKAGE_HASH" --arg pre "$pre_state_hash" --arg revisions "$revision_set_hash" '{schema:"mbti_zh_result_content_production_receipt.v1",ok:true,release_sha:$sha,release_name:$release,package_hash:$package,pre_state_hash:$pre,candidate_revision_set_hash:$revisions,record_count:32,disabled_slot_count:224,database_write_count:32,immutable_revision_set_count:64,public_api_readback_count:32,rollback_performed:false,deploy_mutation_count:0,indexability_mutation_count:0,sitemap_mutation_count:0,llms_mutation_count:0,search_channel_action_count:0}' > artifacts/receipt.json
+
+      - name: Upload sanitized production receipt
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: mbti-zh-result-content-${{ inputs.mode }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/
+          if-no-files-found: error
+          retention-days: 90
