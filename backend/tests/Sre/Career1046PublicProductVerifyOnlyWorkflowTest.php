@@ -91,6 +91,8 @@ final class Career1046PublicProductVerifyOnlyWorkflowTest extends TestCase
         $map[$url]['body']['provenance_meta'] = ['public_source' => 'runtime-redacted'];
         $map[$url]['body']['search_entry_tier'] = 'runtime-enriched';
         $map[$url]['body']['search_entry_authority'] = ['review_state' => 'runtime-enriched'];
+        $map[$url]['body']['seo_contract']['index_state'] = 'index';
+        $map[$url]['body']['seo_contract']['metadata_fingerprint'] = str_repeat('f', 40);
         file_put_contents($fixture['http_fixture'], json_encode($map, JSON_THROW_ON_ERROR));
 
         [$status, $receipt] = $this->runControl($fixture);

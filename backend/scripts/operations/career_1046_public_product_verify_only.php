@@ -764,7 +764,8 @@ function careerPublicVerifyGenerationBindingSha(array $payload, string $slug, st
         'bundle_kind' => $payload['bundle_kind'],
         'bundle_version' => $payload['bundle_version'],
         'identity' => $identity,
-        'seo_contract' => $seo,
+        'canonical_path' => $seo['canonical_path'],
+        'canonical_target' => $seo['canonical_target'],
         'public_locale' => $publicLocale,
     ]);
 }
