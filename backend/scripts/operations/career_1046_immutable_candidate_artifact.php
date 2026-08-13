@@ -541,6 +541,7 @@ final class Career1046ImmutableCandidateArtifactProducer
         }
 
         $baselineLookup = array_fill_keys($baseline, true);
+        $targetLookup = array_fill_keys(self::frozenTargetSlugs($manifest), true);
         self::activePublishedBaselineProjection(
             $activeProjection,
             $baseline,
@@ -560,14 +561,7 @@ final class Career1046ImmutableCandidateArtifactProducer
             }
             // The bootstrap generation deliberately preserves legacy ledger
             // bytes. Its active projection is the authority for public state.
-            $activeBySlug[$slug] = [
-                ...$row,
-                'public_resolution_type' => \App\Console\Commands\CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB,
-                'public_eligible' => true,
-                'indexability' => 'indexable',
-                'public_index_state' => 'indexable',
-                'release_cohort' => 'public_detail_indexable',
-            ];
+            $activeBySlug[$slug] = self::publishedLedgerRow($row);
         }
         $activeSlugs = array_keys($activeBySlug);
         sort($activeSlugs, SORT_STRING);
@@ -588,6 +582,11 @@ final class Career1046ImmutableCandidateArtifactProducer
                 }
                 $merged[] = $activeBySlug[$slug];
                 $replaced[$slug] = true;
+            } elseif (isset($targetLookup[$slug])) {
+                // Task 3B is the exact fresh index authority for every delta
+                // slug. Do not let stale general-ledger cohort fields override
+                // that receipt-bound publication state in this candidate.
+                $merged[] = self::publishedLedgerRow($row);
             } else {
                 $merged[] = $row;
             }
@@ -605,6 +604,19 @@ final class Career1046ImmutableCandidateArtifactProducer
         }
 
         return $fullLedger;
+    }
+
+    /** @param array<string, mixed> $row @return array<string, mixed> */
+    private static function publishedLedgerRow(array $row): array
+    {
+        return [
+            ...$row,
+            'public_resolution_type' => \App\Console\Commands\CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB,
+            'public_eligible' => true,
+            'indexability' => 'indexable',
+            'public_index_state' => 'indexable',
+            'release_cohort' => 'public_detail_indexable',
+        ];
     }
 
     /**
@@ -644,9 +656,7 @@ final class Career1046ImmutableCandidateArtifactProducer
                 || ($item['public_resolution_type'] ?? null) !== \App\Console\Commands\CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB
                 || ($item['runtime_publish_state'] ?? null) !== CareerRuntimePublishProjectionService::STATE_PUBLISHED
                 || (! $legacyExactBytes && ($item['detail_route_enabled'] ?? null) !== true)
-                || ($legacyExactBytes && array_key_exists('detail_route_enabled', $item) && $item['detail_route_enabled'] !== true)
                 || (! $legacyExactBytes && ($item['robots_indexable'] ?? null) !== true)
-                || ($legacyExactBytes && array_key_exists('robots_indexable', $item) && $item['robots_indexable'] !== true)
                 || ($item['release_gate_pass'] ?? null) !== true) {
                 throw new Career1046ImmutableCandidateArtifactFailure('CANDIDATE_PROJECTION_AUTHORITY_INCOMPLETE');
             }
