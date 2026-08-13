@@ -225,6 +225,11 @@ final class Top100FrozenCmsBatchAuthority
             'package_sha256' => $context->packageSha256,
             'before_sha256' => $target['before_sha256'],
             'desired_sha256' => $target['desired_sha256'],
+            'created_from_missing' => $target['model_kind'] === 'test_landing' && $target['model_id'] === 0,
+            'landing_surface_key' => $target['model_kind'] === 'test_landing'
+                ? 'test_detail_'.str_replace('-', '_', (string) $target['slug'])
+                : null,
+            'landing_surface_locale' => $target['model_kind'] === 'test_landing' ? $target['locale'] : null,
             'before' => $target['current'],
             'desired' => $target['desired'],
         ];
@@ -446,6 +451,18 @@ final class Top100FrozenCmsBatchAuthority
             $query->lockForUpdate();
         }
         $surface = $query->first();
+        if (! $surface instanceof LandingSurface && $target['slug'] === 'big-five-personality-test-ocean-model') {
+            $surface = new LandingSurface([
+                'org_id' => 0,
+                'surface_key' => $key,
+                'locale' => $target['locale'],
+                'schema_version' => 'seo-top100-frozen.v1',
+                'status' => LandingSurface::STATUS_PUBLISHED,
+                'is_public' => true,
+                'is_indexable' => false,
+                'published_at' => null,
+            ]);
+        }
         if (! $surface instanceof LandingSurface) {
             throw new DomainException('top100_frozen_landing_target_invalid');
         }
@@ -656,6 +673,7 @@ final class Top100FrozenCmsBatchAuthority
         }
         if ($target['patch']['intro'] !== null) {
             $payload['intro'] = $target['patch']['intro'];
+            $payload['hero_copy'] = $target['patch']['intro'];
         }
         $payload['internal_links'] = $this->mergeLinks((array) ($payload['internal_links'] ?? []), $target['internal_links']);
         $current['payload_json'] = $payload;
@@ -1130,9 +1148,25 @@ final class Top100FrozenCmsBatchAuthority
             'mbti_variant' => $this->restoreMbti($id, true, $mutable),
             'mbti_comparison' => $this->restoreComparison($id, $mutable),
             'article' => $this->restoreArticle($id, $mutable, $row),
-            'test_landing' => $this->restoreSimple(LandingSurface::class, $id, $mutable),
+            'test_landing' => ($row['created_from_missing'] ?? false) === true
+                ? $this->removeCreatedLanding($row)
+                : $this->restoreSimple(LandingSurface::class, $id, $mutable),
             default => throw new DomainException('top100_frozen_rollback_kind_invalid'),
         };
+    }
+
+    private function removeCreatedLanding(array $row): void
+    {
+        $surfaceKey = (string) ($row['landing_surface_key'] ?? '');
+        $locale = (string) ($row['landing_surface_locale'] ?? '');
+        if ($surfaceKey !== 'test_detail_big_five_personality_test_ocean_model' || $locale !== 'zh-CN') {
+            throw new DomainException('top100_frozen_created_landing_rollback_identity_invalid');
+        }
+        $deleted = LandingSurface::query()->withoutGlobalScopes()
+            ->where('org_id', 0)->where('surface_key', $surfaceKey)->where('locale', $locale)->delete();
+        if ($deleted !== 1) {
+            throw new DomainException('top100_frozen_created_landing_rollback_missing');
+        }
     }
 
     private function restorePersonality(int $id, array $mutable, array $row): void
