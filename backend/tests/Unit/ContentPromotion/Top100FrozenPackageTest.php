@@ -101,6 +101,9 @@ final class Top100FrozenPackageTest extends TestCase
         self::assertStringContainsString("'is_indexable' => false", $authority);
         self::assertStringContainsString("'created_from_missing' => \$target['model_kind'] === 'test_landing' && \$target['model_id'] === 0", $authority);
         self::assertStringContainsString('top100_frozen_created_landing_rollback_identity_invalid', $authority);
+        self::assertStringNotContainsString("throw new DomainException('top100_frozen_article_foreign_working_revision');", $authority);
+        self::assertStringContainsString('top100_frozen_article_foreign_working_revision_drift', $authority);
+        self::assertStringContainsString("'working_revision_id' => \$preservedWorkingRevisionId", $authority);
     }
 
     public function test_rollback_guard_accepts_only_pre_draft_or_exact_published_state(): void
