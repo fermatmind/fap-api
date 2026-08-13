@@ -2,7 +2,7 @@
     "schema": "eq_60.report_assets.compiled.v1",
     "pack_id": "EQ_60",
     "pack_version": "v1",
-    "generated_at": "2026-07-29T13:05:34.657680Z",
+    "generated_at": "2026-08-13T02:37:00.456345Z",
     "assets": {
         "scientific_contract": {
             "schema": "eq60.report_assets.scientific_contract.v1",
@@ -18052,12 +18052,12 @@
                     "zh-CN": {
                         "title": "复测前的自我回顾",
                         "why_this_matters": "低置信结果主要支持复测准备，不支持行为改变结论。",
-                        "do_today": "记录本次作答环境，并在更稳定、不被打断时复测。",
-                        "script": "我会轻读本次结果，在条件更稳定时复测。",
+                        "do_today": "记录本次作答环境；在环境稳定、注意力充足且不受打断时可重新作答，无需等待固定周期。",
+                        "script": "我会轻读本次结果，在条件更稳定时重新作答，不需要等待固定周期。",
                         "seven_day_plan": [
                             {
                                 "day": 1,
-                                "practice": "记录本次作答环境，并在条件更稳定时复测。"
+                                "practice": "记录本次作答环境，并在条件更稳定时重新作答；无需等待固定周期。"
                             }
                         ],
                         "common_failure": "最常见失败不是不会做，而是等到情绪已经很满才想起来做。",
@@ -18068,12 +18068,12 @@
                     "en": {
                         "title": "Reflect Before Retesting",
                         "why_this_matters": "This low-confidence session mainly supports retest preparation, not behavior-change conclusions.",
-                        "do_today": "Record the response context and retake in a steadier, uninterrupted setting.",
-                        "script": "I will hold this session lightly and retake it when conditions are steadier.",
+                        "do_today": "Record the response context and retake when conditions are steady, your attention is available, and interruptions are unlikely; no fixed waiting period is required.",
+                        "script": "I will hold this session lightly and retake it when conditions are steadier, without waiting for a fixed interval.",
                         "seven_day_plan": [
                             {
                                 "day": 1,
-                                "practice": "Record the response context, then retake when conditions are steadier."
+                                "practice": "Record the response context, then retake when conditions are steadier; no fixed waiting period is required."
                             }
                         ],
                         "common_failure": "The common failure is not lack of knowledge. It is remembering the tool only after the emotion is already high.",
@@ -22078,7 +22078,7 @@
                     },
                     "en": {
                         "question": "When should I retest?",
-                        "answer": "For normal reflection, 4–8 weeks gives change more room to appear. If confidence was low, retest when your state is steadier.",
+                        "answer": "For a normally interpretable result, retest after 30–90 days or after a meaningful life change. If response quality was low, retake as soon as conditions are steady and your attention is available; no fixed waiting period is required.",
                         "do_not_overread": "FAQ is navigation and education, not a personal diagnosis."
                     }
                 },
@@ -26007,7 +26007,7 @@
                         "likely_cost": "如果长期默认由你来稳定局面，这种优势可能变成不易被看见的情绪劳动。",
                         "minimal_action": "下一次协调关系时，先提出一个共同规则，而不是直接承担稳定全场的责任。",
                         "share_safe_sentence": "本次结果提醒我：我可以稳定关系，但不必独自维护整个关系系统。",
-                        "continue_path": "保存报告，7 天后复测；如果 Agent 入口可用，只用它追问一个具体场景。",
+                        "continue_path": "保存报告；如需观察变化，建议在 30–90 天后或经历明显生活变化后复测。",
                         "conversion_actions": [
                             "save_report",
                             "email_revisit",
@@ -26030,7 +26030,7 @@
                         "likely_cost": "If others quietly expect you to stabilize the room, that strength can turn into invisible emotional labor.",
                         "minimal_action": "In the next coordination moment, suggest one shared rule before taking responsibility for steadying the whole situation.",
                         "share_safe_sentence": "This result reminds me: I can steady a relationship without maintaining the whole system alone.",
-                        "continue_path": "Save the report, retest later, or use the Agent for one specific scene if that entry is available.",
+                        "continue_path": "Save the report; to observe change, retest after 30–90 days or after a meaningful life change.",
                         "conversion_actions": [
                             "save_report",
                             "email_revisit",
@@ -26066,7 +26066,7 @@
                         "likely_cost": "当边界和恢复没有跟上时，你可能在离开场景后仍继续消化别人的压力。",
                         "minimal_action": "用一句话把共情和边界放在一起：“我理解这很难，我现在能先陪你梳理十分钟。”",
                         "share_safe_sentence": "本次结果提醒我：理解别人，不等于替别人承受全部情绪。",
-                        "continue_path": "保存报告，7 天后复测；如果 Agent 入口可用，只用它追问一个具体场景。",
+                        "continue_path": "保存报告；如需观察变化，建议在 30–90 天后或经历明显生活变化后复测。",
                         "conversion_actions": [
                             "save_report",
                             "email_revisit",
@@ -26089,7 +26089,7 @@
                         "likely_cost": "When boundary and recovery do not keep pace, you may still be processing someone else’s stress after the moment has passed.",
                         "minimal_action": "Pair empathy with a limit: “I get that this is hard. I can help you think it through for ten minutes.”",
                         "share_safe_sentence": "This result reminds me: understanding someone does not mean carrying all of their emotion.",
-                        "continue_path": "Save the report, retest later, or use the Agent for one specific scene if that entry is available.",
+                        "continue_path": "Save the report; to observe change, retest after 30–90 days or after a meaningful life change.",
                         "conversion_actions": [
                             "save_report",
                             "email_revisit",
@@ -26125,7 +26125,7 @@
                         "likely_cost": "如果没有暂停动作，觉察可能变成反复分析，而不是帮助你更稳地回应。",
                         "minimal_action": "在反馈或冲突前先插入一个短暂停顿：“我听到了，我需要两分钟整理再回应。”",
                         "share_safe_sentence": "本次结果提醒我：看见情绪之后，还需要一个可执行的暂停动作。",
-                        "continue_path": "保存报告，7 天后复测；如果 Agent 入口可用，只用它追问一个具体场景。",
+                        "continue_path": "保存报告；如需观察变化，建议在 30–90 天后或经历明显生活变化后复测。",
                         "conversion_actions": [
                             "save_report",
                             "email_revisit",
@@ -26148,7 +26148,7 @@
                         "likely_cost": "Without a pause behavior, awareness can become rumination rather than a steadier response.",
                         "minimal_action": "Before feedback or conflict, insert a short pause: “I hear you. I need two minutes to sort this out before I respond.”",
                         "share_safe_sentence": "This result reminds me: noticing emotion still needs a practical pause.",
-                        "continue_path": "Save the report, retest later, or use the Agent for one specific scene if that entry is available.",
+                        "continue_path": "Save the report; to observe change, retest after 30–90 days or after a meaningful life change.",
                         "conversion_actions": [
                             "save_report",
                             "email_revisit",
@@ -26184,7 +26184,7 @@
                         "likely_cost": "别人可能把你的克制理解成距离感，尤其当他们期待先被理解时。",
                         "minimal_action": "给建议前先补一句：“我听起来你现在更担心的是……对吗？”",
                         "share_safe_sentence": "本次结果提醒我：稳定不必等于少回应。",
-                        "continue_path": "保存报告，7 天后复测；如果 Agent 入口可用，只用它追问一个具体场景。",
+                        "continue_path": "保存报告；如需观察变化，建议在 30–90 天后或经历明显生活变化后复测。",
                         "conversion_actions": [
                             "save_report",
                             "email_revisit",
@@ -26207,7 +26207,7 @@
                         "likely_cost": "Others may read restraint as distance, especially when they hope to feel understood first.",
                         "minimal_action": "Before advice, add one check: “It sounds like the main worry is… is that right?”",
                         "share_safe_sentence": "This result reminds me: steadiness can include more visible responsiveness.",
-                        "continue_path": "Save the report, retest later, or use the Agent for one specific scene if that entry is available.",
+                        "continue_path": "Save the report; to observe change, retest after 30–90 days or after a meaningful life change.",
                         "conversion_actions": [
                             "save_report",
                             "email_revisit",
@@ -26243,7 +26243,7 @@
                         "likely_cost": "如果自我需求长期后置，你可能事后才发现自己已经超出了承受范围。",
                         "minimal_action": "用“我需要……，同时我也愿意……”开头，把自己放进关系里。",
                         "share_safe_sentence": "本次结果提醒我：维护关系时，我也需要在场。",
-                        "continue_path": "保存报告，7 天后复测；如果 Agent 入口可用，只用它追问一个具体场景。",
+                        "continue_path": "保存报告；如需观察变化，建议在 30–90 天后或经历明显生活变化后复测。",
                         "conversion_actions": [
                             "save_report",
                             "email_revisit",
@@ -26266,7 +26266,7 @@
                         "likely_cost": "If your own needs stay unnamed for too long, you may notice your limit only after it has been crossed.",
                         "minimal_action": "Start with “I need…, and I’m also willing to…” so your own position stays in the conversation.",
                         "share_safe_sentence": "This result reminds me: keeping a relationship alive should still include me.",
-                        "continue_path": "Save the report, retest later, or use the Agent for one specific scene if that entry is available.",
+                        "continue_path": "Save the report; to observe change, retest after 30–90 days or after a meaningful life change.",
                         "conversion_actions": [
                             "save_report",
                             "email_revisit",
@@ -26302,7 +26302,7 @@
                         "likely_cost": "如果修复动作缺位，清楚表达可能被对方体验成生硬或封闭。",
                         "minimal_action": "冲突后先说：“刚才那样说可能让你不舒服，我想补充我的本意。”",
                         "share_safe_sentence": "本次结果提醒我：清楚表达之后，还可以补一个修复动作。",
-                        "continue_path": "保存报告，7 天后复测；如果 Agent 入口可用，只用它追问一个具体场景。",
+                        "continue_path": "保存报告；如需观察变化，建议在 30–90 天后或经历明显生活变化后复测。",
                         "conversion_actions": [
                             "save_report",
                             "email_revisit",
@@ -26325,7 +26325,7 @@
                         "likely_cost": "Without a repair move, clear expression may land as rigid or closed.",
                         "minimal_action": "After tension, try: “The way I said that may have landed badly. I want to add what I meant.”",
                         "share_safe_sentence": "This result reminds me: after clarity, repair can still be added.",
-                        "continue_path": "Save the report, retest later, or use the Agent for one specific scene if that entry is available.",
+                        "continue_path": "Save the report; to observe change, retest after 30–90 days or after a meaningful life change.",
                         "conversion_actions": [
                             "save_report",
                             "email_revisit",
@@ -26361,7 +26361,7 @@
                         "likely_cost": "如果你太快进入解决问题，别人可能觉得感受还没被听见。",
                         "minimal_action": "先确认一句感受，再转向分工：“我知道这让人烦，我们先定下一步。”",
                         "share_safe_sentence": "本次结果提醒我：稳定协作也需要先留出一点情绪空间。",
-                        "continue_path": "保存报告，7 天后复测；如果 Agent 入口可用，只用它追问一个具体场景。",
+                        "continue_path": "保存报告；如需观察变化，建议在 30–90 天后或经历明显生活变化后复测。",
                         "conversion_actions": [
                             "save_report",
                             "email_revisit",
@@ -26384,7 +26384,7 @@
                         "likely_cost": "If you move to solutions too quickly, others may feel the emotion was skipped.",
                         "minimal_action": "Acknowledge emotion before assigning next steps: “I know this is frustrating. Let’s define the next move.”",
                         "share_safe_sentence": "This result reminds me: steady collaboration still needs a little room for feeling.",
-                        "continue_path": "Save the report, retest later, or use the Agent for one specific scene if that entry is available.",
+                        "continue_path": "Save the report; to observe change, retest after 30–90 days or after a meaningful life change.",
                         "conversion_actions": [
                             "save_report",
                             "email_revisit",
@@ -26420,7 +26420,7 @@
                         "likely_cost": "如果没有收尾和恢复，你可能把场景里的紧张延续到很久之后。",
                         "minimal_action": "强情绪场景结束后，用三句话收尾：我感到了什么、这是谁的责任、我现在先做什么。",
                         "share_safe_sentence": "本次结果提醒我：敏感可以是线索，不必变成负担。",
-                        "continue_path": "保存报告，7 天后复测；如果 Agent 入口可用，只用它追问一个具体场景。",
+                        "continue_path": "保存报告；如需观察变化，建议在 30–90 天后或经历明显生活变化后复测。",
                         "conversion_actions": [
                             "save_report",
                             "email_revisit",
@@ -26443,7 +26443,7 @@
                         "likely_cost": "Without a closing and recovery step, tension from the scene may continue long after it ends.",
                         "minimal_action": "After an intense moment, close with three lines: what I felt, whose responsibility this is, and what I will do first.",
                         "share_safe_sentence": "This result reminds me: sensitivity can be information without becoming a burden.",
-                        "continue_path": "Save the report, retest later, or use the Agent for one specific scene if that entry is available.",
+                        "continue_path": "Save the report; to observe change, retest after 30–90 days or after a meaningful life change.",
                         "conversion_actions": [
                             "save_report",
                             "email_revisit",
@@ -26479,7 +26479,7 @@
                         "likely_cost": "如果直接把结果理解成能力标签，反而会降低后续练习的空间。",
                         "minimal_action": "未来 7 天只做一件事：每天一次记录“场景、情绪词、我当时做了什么”。",
                         "share_safe_sentence": "本次结果提醒我：先建立观察语言，再谈改变。",
-                        "continue_path": "保存报告，7 天后复测；如果 Agent 入口可用，只用它追问一个具体场景。",
+                        "continue_path": "保存报告；如需观察变化，建议在 30–90 天后或经历明显生活变化后复测。",
                         "conversion_actions": [
                             "save_report",
                             "email_revisit",
@@ -26502,7 +26502,7 @@
                         "likely_cost": "If the result is treated as an ability label, it may reduce the space for learning and review.",
                         "minimal_action": "For the next seven days, do one thing: once a day, note the scene, one emotion word, and what you did.",
                         "share_safe_sentence": "This result reminds me: build observation language before trying to change everything.",
-                        "continue_path": "Save the report, retest later, or use the Agent for one specific scene if that entry is available.",
+                        "continue_path": "Save the report; to observe change, retest after 30–90 days or after a meaningful life change.",
                         "conversion_actions": [
                             "save_report",
                             "email_revisit",
@@ -26538,11 +26538,10 @@
                         "likely_cost": "如果把低置信结果当作正式结论，可能会误读自己的真实体验。",
                         "minimal_action": "在状态稳定、时间充足时复测；复测前先想一个最近真实发生的反馈或冲突场景。",
                         "share_safe_sentence": "本次结果提醒我：低置信记录适合复测，不适合下结论。",
-                        "continue_path": "保存报告，7 天后复测；如果 Agent 入口可用，只用它追问一个具体场景。",
+                        "continue_path": "保存报告；在环境稳定、注意力充足且不受打断时可重新作答，无需等待固定周期。",
                         "conversion_actions": [
                             "save_report",
-                            "retest_reminder",
-                            "talk_to_agent"
+                            "retest_reminder"
                         ],
                         "do_not_overread": "首屏只是本次 60 题自我报告的阅读入口，不替代完整报告，也不是外部观察、客观能力分、临床结论、招聘信号或工作表现预测。"
                     },
@@ -26559,11 +26558,10 @@
                         "likely_cost": "Treating a low-confidence result as a firm conclusion may distort your understanding of your own experience.",
                         "minimal_action": "Retake when you have enough time and a steadier setting; before that, recall one recent feedback or conflict scene.",
                         "share_safe_sentence": "This result reminds me: a low-confidence record is for retesting, not conclusion-making.",
-                        "continue_path": "Save the report, retest later, or use the Agent for one specific scene if that entry is available.",
+                        "continue_path": "Save the report; retake when conditions are steady, your attention is available, and interruptions are unlikely. No fixed waiting period is required.",
                         "conversion_actions": [
                             "save_report",
-                            "retest_reminder",
-                            "talk_to_agent"
+                            "retest_reminder"
                         ],
                         "do_not_overread": "The first screen is a reading entry point for this 60-item self-report session. It is not an external observation, objective ability score, clinical finding, hiring signal, or prediction of job performance."
                     },
@@ -26896,7 +26894,7 @@
                         "label": "高解释置信度",
                         "body": "本次作答节奏和一致性支持正常阅读报告。",
                         "user_guidance": "可以阅读核心模式、维度摘要和行动建议，但仍应把它们理解为本次自我报告的解释，不是能力排名或外部评价。",
-                        "retest_note": "如果你想观察变化，可在经历新情境或完成一段练习后再复测；不需要立即重复作答。",
+                        "retest_note": "如果你想观察变化，建议在 30–90 天后或经历明显生活变化后复测。",
                         "why_this_level": "作答速度、连续相同选择、极端/中立选择和一致性线索未显示明显质量风险。",
                         "how_to_read": "先看核心洞察和证据快照，再结合现实场景判断哪些描述与近期经验相符。",
                         "what_to_trust": "可以较稳定地参考维度间的相对强弱、主要 formulation 和已选场景。",
@@ -26906,7 +26904,7 @@
                         "label": "High interpretation confidence",
                         "body": "Your response pace and consistency support normal report reading.",
                         "user_guidance": "You can read the core pattern, dimension summary, and action suggestions while keeping them as self-report interpretation, not ability ranking or external evaluation.",
-                        "retest_note": "If you want to observe change, retake after new experiences or a period of practice; there is no need to retake immediately.",
+                        "retest_note": "If you want to observe change, retest after 30–90 days or after a meaningful life change.",
                         "why_this_level": "Speed, repeated choices, extreme/neutral responding, and consistency signals did not show a clear response-quality risk.",
                         "how_to_read": "Start with the core insight and evidence snapshot, then compare the selected scenes with your recent experience.",
                         "what_to_trust": "The relative dimension pattern, selected formulation, and selected scenes can be read with normal confidence.",
@@ -26926,7 +26924,7 @@
                         "label": "正常解释置信度",
                         "body": "本次结果整体可读，但部分回答可能受当时状态或理解方式影响。",
                         "user_guidance": "适合参考主要方向和较明显的维度差异；不要过度解释细小分数差。",
-                        "retest_note": "如果结果与你的实际体验差距较大，可在状态更稳定、时间更充足时复测。",
+                        "retest_note": "如果你想比较正常结果的变化，建议在 30–90 天后或经历明显生活变化后复测。",
                         "why_this_level": "质量线索总体可接受，但仍提示报告应按区间和趋势阅读，而不是按精确分数阅读。",
                         "how_to_read": "优先看重复出现的主题：哪个维度更突出、哪个场景更贴近、哪条行动建议最容易低风险尝试。",
                         "what_to_trust": "可以参考核心模式、四维摘要和场景提示的主要方向。",
@@ -26936,7 +26934,7 @@
                         "label": "Standard interpretation confidence",
                         "body": "The result is readable overall, though some answers may reflect your state or interpretation at the time.",
                         "user_guidance": "Use the broad direction and clearer dimension gaps; avoid over-reading small score differences.",
-                        "retest_note": "If the result feels far from your lived experience, retake in a steadier state with enough time.",
+                        "retest_note": "To compare change in a normally interpretable result, retest after 30–90 days or after a meaningful life change.",
                         "why_this_level": "Quality signals are generally acceptable, but the report should still be read as ranges and tendencies rather than precise scores.",
                         "how_to_read": "Look for repeated themes: which dimension stands out, which scene feels closest, and which suggestion is low-risk to try.",
                         "what_to_trust": "You can use the main direction of the core pattern, four-dimension summary, and scene translation.",
@@ -26956,7 +26954,7 @@
                         "label": "有限解释置信度",
                         "body": "本次作答质量只支持谨慎阅读。",
                         "user_guidance": "请把结果当作初步线索，优先阅读质量说明和复测建议；不要据此形成强人格、职业或行动结论。",
-                        "retest_note": "建议在更稳定、不被打断、时间更充足的状态下复测，再阅读完整解释。",
+                        "retest_note": "在环境稳定、注意力充足且不受打断时可重新作答，无需等待固定周期；复测后再阅读完整解释。",
                         "why_this_level": "作答速度、选择模式或一致性线索提示解释稳定性下降。",
                         "how_to_read": "先确认本次作答是否过快、过于集中或受情绪/环境影响；其他内容只作轻量参考。",
                         "what_to_trust": "最可靠的信息是：本次作答过程需要复盘，结果不适合直接用作强解释。",
@@ -26966,7 +26964,7 @@
                         "label": "Limited interpretation confidence",
                         "body": "This response quality supports cautious reading only.",
                         "user_guidance": "Treat the result as an initial signal. Read the quality note and retest guidance first; do not turn this session into a strong personality, career, or action conclusion.",
-                        "retest_note": "Retake in a steadier, uninterrupted setting with enough time before reading the full interpretation.",
+                        "retest_note": "Retake when conditions are steady, your attention is available, and interruptions are unlikely; no fixed waiting period is required. Read the full interpretation after retesting.",
                         "why_this_level": "Speed, response pattern, or consistency signals suggest lower interpretive stability.",
                         "how_to_read": "First ask whether the session was rushed, overly patterned, or affected by mood or environment; use other content only as light reference.",
                         "what_to_trust": "The most reliable message is that the response process needs review and the result should not be used for strong interpretation.",
@@ -26986,7 +26984,7 @@
                         "label": "低解释置信度",
                         "body": "本次作答质量不支持强解释。",
                         "user_guidance": "不要用这次结果得出人格结论、职业结论、关系判断或行动处方；它更适合作为复测准备提示。",
-                        "retest_note": "建议暂时停止阅读深层报告，在状态稳定、时间充足、没有干扰时重新作答。",
+                        "retest_note": "建议暂时停止阅读深层报告；在环境稳定、注意力充足且不受打断时可重新作答，无需等待固定周期。",
                         "why_this_level": "质量线索显示本次结果可能明显受速度、重复模式、极端/中立选择或一致性问题影响。",
                         "how_to_read": "只阅读质量说明、科学边界和复测准备；其他模块不应作为当前结论。",
                         "what_to_trust": "可以相信的是“本次结果置信度不足”这一提示，而不是具体画像或建议。",
@@ -26996,7 +26994,7 @@
                         "label": "Low interpretation confidence",
                         "body": "This response quality does not support strong interpretation.",
                         "user_guidance": "Do not use this session to draw a personality conclusion, career conclusion, relationship judgment, or action prescription. Treat it mainly as preparation for retaking.",
-                        "retest_note": "Pause deeper reading and retake when you have enough time, fewer interruptions, and a steadier state.",
+                        "retest_note": "Pause deeper reading and retake when conditions are steady, your attention is available, and interruptions are unlikely; no fixed waiting period is required.",
                         "why_this_level": "Quality signals suggest the result may have been strongly affected by speed, repeated patterns, extreme/neutral responding, or consistency issues.",
                         "how_to_read": "Read only the quality note, scientific boundary, and retest preparation; other modules should not be treated as current conclusions.",
                         "what_to_trust": "The trustworthy message is that interpretation confidence is too low, not the specific profile or recommendation.",
