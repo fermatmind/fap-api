@@ -1,0 +1,507 @@
+{
+    "id": "enneagram_pair_registry_v1_en",
+    "schema_version": "fap.enneagram.pair_registry.v1",
+    "registry_key": "enneagram_pair_registry",
+    "locale": "en",
+    "form_variant": "all",
+    "context_mode": "individual",
+    "status": "published",
+    "version": "v1",
+    "release_id": "enneagram_registry_pack_v1_p0_ready_2026_04_en",
+    "content_release_hash": "sha256:pending_loader_resolution",
+    "content_snapshot_hash": null,
+    "content_maturity": "p0_ready",
+    "evidence_level": "theory_based",
+    "preview_enabled": true,
+    "fallback_policy": "fallback_to_generic",
+    "fallback_template": {
+        "same_surface": "Both may explain some of the similarities in surface style, but the disagreement is usually not about appearance, but about which type of attention is activated first in stressful situations.",
+        "motivation_difference": "Please go back to the core motivation: What do you care more about: standards, relationship position, safety, boundaries, freedom, results, authenticity, or a sense of stability?",
+        "pressure_difference": "Under pressure, do you more often correct, confirm, disengage, please, toughen, deflect, or calm the situation first?",
+        "relationship_difference": "In a relationship, how would you rather be treated: to be understood, recognized, needed, to have boundaries respected, to be committed, or to put an end to conflict first?",
+        "work_difference": "When advancing tasks, what do you give more priority to: quality, results, risk, space, dominance, or overall stability?",
+        "observation_question": "In the next 7 days, only specific situations, trigger points, first reactions and post-event reviews will be recorded: In key scenes, do you give priority to standards, relationship position, safety, boundaries, freedom, results, sense of reality, or overall stability? Also note counterexamples: scenarios that look like candidates for a certain type, but what really drives you is not its core focus. Close-call is a side-by-side analysis portal. It is not a forced choice, nor can it lead to diagnosis, recruitment screening, ability evaluation or career decision."
+    },
+    "entries": [
+        {
+            "pair_key": "1_3",
+            "type_a": "1",
+            "type_b": "3",
+            "shared_surface_similarity": "On the surface, both may be serious and have a sense of purpose. The difference often occurs in who gets priority first in terms of standards or results. close-call only means that the candidate explanations are similar and you need to go back to the recent situation and observe them side by side.",
+            "core_motivation_difference": {
+                "1": "Candidate 1 is more likely to organize attention around standards, accountability, and getting things done right.",
+                "3": "Candidate 3 is more likely to organize attention around results, efficiency, and visible value."
+            },
+            "fear_difference": {
+                "1": "Candidate 1's stress cues might be deviations, lapses in responsibility, unfairness, or a disordered process.",
+                "3": "Stress cues for Candidate 3 might be that efforts are fruitless, undervalued, or goals are out of focus."
+            },
+            "stress_reaction_difference": {
+                "1": "Candidate 1 may correct mistakes, tighten standards, and raise self-requirements more often under pressure.",
+                "3": "Candidate 3s may be more likely to speed up, adapt to expectations, and prioritize delivering visible results when under pressure."
+            },
+            "relationship_difference": {
+                "1": "Candidate 1 may value principles, propriety, reliability and mutual responsibility in relationships.",
+                "3": "Candidate No. 3 may value being recognized, trusted, and having visible returns on investment in relationships."
+            },
+            "work_difference": {
+                "1": "Candidate 1 may more often look at rules, quality, and risk to see if they make sense in a work situation. This is not a conclusion about job ability or career suitability.",
+                "3": "Candidate 3 may look first to goals, results, and external feedback more often in work situations. This is not a conclusion about job ability or career suitability."
+            },
+            "seven_day_observation_question": "For the next seven days, only record specific situations: When you tense up, push forward, or step back, are you more like Candidate 1’s “standards, responsibility, and getting things done right” or Candidate 3’s “results, efficiency, and visible value”?",
+            "resonance_feedback_prompt": "Please choose the more resonant candidate clue, or mark it as neither. Low resonance will reduce the interpretation certainty and will not be covered by the system's main narrative.",
+            "short_compare_copy": "Close-call can only show that both candidates No. 1 and No. 3 are worthy of observation and should be observed side by side; it is not a two-choice judgment type, and it cannot infer diagnosis, recruitment screening or career decisions.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "theory_based",
+            "fallback_policy": "fallback_to_generic"
+        },
+        {
+            "pair_key": "1_6",
+            "type_a": "1",
+            "type_b": "6",
+            "shared_surface_similarity": "On the surface, they may both be cautious and responsible, but the difference often arises in whether to adhere to principles and standards first or to verify safety risks first. close-call only means that the candidate explanations are similar and you need to go back to the recent situation and observe them side by side.",
+            "core_motivation_difference": {
+                "1": "Candidate 1 is more likely to organize attention around standards, accountability, and getting things done right.",
+                "6": "Candidate 6s are more likely to organize their attention around safety, trust, and risk anticipation."
+            },
+            "fear_difference": {
+                "1": "Candidate 1's stress cues might be deviations, lapses in responsibility, unfairness, or a disordered process.",
+                "6": "Stress cues for Candidate 6s might be shaky commitments, unclear risks, or inconsistencies in authority and rules."
+            },
+            "stress_reaction_difference": {
+                "1": "Candidate 1 may correct mistakes, tighten standards, and raise self-requirements more often under pressure.",
+                "6": "Candidate No. 6 may be more likely to repeatedly check, prepare plans, and seek credible evidence under pressure."
+            },
+            "relationship_difference": {
+                "1": "Candidate 1 may value principles, propriety, reliability and mutual responsibility in relationships.",
+                "6": "Candidate 6s may value stable commitment, transparent information, and verifiable reliability in relationships."
+            },
+            "work_difference": {
+                "1": "Candidate 1 may more often look at rules, quality, and risk to see if they make sense in a work situation. This is not a conclusion about job ability or career suitability.",
+                "6": "Candidate 6s may more often look at risks, responsibilities, and backup plans first in work situations. This is not a conclusion about job ability or career suitability."
+            },
+            "seven_day_observation_question": "For the next 7 days, only record specific situations: When you tense up, push forward, or step back, are you more like Candidate 1’s “standards, responsibility, and getting things done right” or Candidate 6’s “safety, trust, and risk awareness”?",
+            "resonance_feedback_prompt": "Please choose the more resonant candidate clue, or mark it as neither. Low resonance will reduce the interpretation certainty and will not be covered by the system's main narrative.",
+            "short_compare_copy": "Close-call can only mean that both candidates No. 1 and No. 6 are worthy of observation and should be observed side by side; it is not a two-choice judgment type, and it cannot infer diagnosis, recruitment screening or career decisions.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "theory_based",
+            "fallback_policy": "fallback_to_generic"
+        },
+        {
+            "pair_key": "1_8",
+            "type_a": "1",
+            "type_b": "8",
+            "shared_surface_similarity": "On the surface, both may be direct and have boundaries, and the difference often arises in whether to calibrate the legitimacy of the rules first or to protect the initiative first. close-call only means that the candidate explanations are similar and you need to go back to the recent situation and observe them side by side.",
+            "core_motivation_difference": {
+                "1": "Candidate 1 is more likely to organize attention around standards, accountability, and getting things done right.",
+                "8": "Candidate 8s are more likely to organize their attention around boundaries, taking initiative, and protecting what matters."
+            },
+            "fear_difference": {
+                "1": "Candidate 1's stress cues might be deviations, lapses in responsibility, unfairness, or a disordered process.",
+                "8": "Stress cues for Candidate 8s might be being controlled, having boundaries crossed, or having important boundaries interpreted by others."
+            },
+            "stress_reaction_difference": {
+                "1": "Candidate 1 may correct mistakes, tighten standards, and raise self-requirements more often under pressure.",
+                "8": "Candidate 8s may more often increase their intensity, clear obstacles, and clear boundaries between responsibilities under pressure."
+            },
+            "relationship_difference": {
+                "1": "Candidate 1 may value principles, propriety, reliability and mutual responsibility in relationships.",
+                "8": "Candidate 8s may value candor, a sense of strength, clear boundaries, and mutual respect in relationships."
+            },
+            "work_difference": {
+                "1": "Candidate 1 may more often look at rules, quality, and risk to see if they make sense in a work situation. This is not a conclusion about job ability or career suitability.",
+                "8": "Candidate No. 8 may first look at authority, responsibility, decision-making authority, and whether they can advance directly in a work situation. This is not a conclusion about job ability or career suitability."
+            },
+            "seven_day_observation_question": "Keep track of only specific situations for the next seven days: When you tense up, push forward, or step back, are you more like Candidate 1’s “standards, responsibility, and getting things right,” or Candidate 8’s “boundaries, initiative, and protecting what’s important?”",
+            "resonance_feedback_prompt": "Please choose the more resonant candidate clue, or mark it as neither. Low resonance will reduce the interpretation certainty and will not be covered by the system's main narrative.",
+            "short_compare_copy": "Close-call can only show that both candidates No. 1 and No. 8 are worthy of observation and should be observed side by side; it is not a two-or-one judgment type, and it cannot infer diagnosis, recruitment screening, or career decisions.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "theory_based",
+            "fallback_policy": "fallback_to_generic"
+        },
+        {
+            "pair_key": "2_3",
+            "type_a": "2",
+            "type_b": "3",
+            "shared_surface_similarity": "On the surface, both may be extroverted and responsive, but the difference often occurs in who is more emotionally involved in relationship care and performance presentation. close-call only means that the candidate explanations are similar and you need to go back to the recent situation and observe them side by side.",
+            "core_motivation_difference": {
+                "2": "Candidate 2 is more likely to organize attention around relational needs, being needed, and caring responses.",
+                "3": "Candidate 3 is more likely to organize attention around results, efficiency, and visible value."
+            },
+            "fear_difference": {
+                "2": "Stress cues for Candidate 2 might be investment not being seen, relationships being under-responsive, or boundaries being blurred.",
+                "3": "Stress cues for Candidate 3 might be that efforts are fruitless, undervalued, or goals are out of focus."
+            },
+            "stress_reaction_difference": {
+                "2": "Candidate 2 may be more likely to increase caregiving, prompt contributions, and expect clear responses when under pressure.",
+                "3": "Candidate 3s may be more likely to speed up, adapt to expectations, and prioritize delivering visible results when under pressure."
+            },
+            "relationship_difference": {
+                "2": "Candidate 2 may value warmth, mutual need, being remembered, and being responded to in a relationship.",
+                "3": "Candidate No. 3 may value being recognized, trusted, and having visible returns on investment in relationships."
+            },
+            "work_difference": {
+                "2": "Candidate 2 may more often first look at who needs support in a work situation and how to maintain relationship momentum. This is not a conclusion about job ability or career suitability.",
+                "3": "Candidate 3 may look first to goals, results, and external feedback more often in work situations. This is not a conclusion about job ability or career suitability."
+            },
+            "seven_day_observation_question": "Keep track of only specific situations for the next 7 days: When you tense, push forward, or step back, are you more like Candidate 2’s “relationship needs, being needed, and caring responses,” or Candidate 3’s “results, effectiveness, and visible value?”",
+            "resonance_feedback_prompt": "Please choose the more resonant candidate clue, or mark it as neither. Low resonance will reduce the interpretation certainty and will not be covered by the system's main narrative.",
+            "short_compare_copy": "Close-call can only mean that both candidates No. 2 and No. 3 are worthy of observation and should be observed side by side; it is not a two-choice judgment type, and it cannot infer diagnosis, recruitment screening or career decisions.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "theory_based",
+            "fallback_policy": "fallback_to_generic"
+        },
+        {
+            "pair_key": "2_9",
+            "type_a": "2",
+            "type_b": "9",
+            "shared_surface_similarity": "On the surface, both may be gentle and caring for others, but the difference often occurs in taking the initiative to provide support or maintaining a stable relationship first. close-call only means that the candidate explanations are similar and you need to go back to the recent situation and observe them side by side.",
+            "core_motivation_difference": {
+                "2": "Candidate 2 is more likely to organize attention around relational needs, being needed, and caring responses.",
+                "9": "Candidate Nines are more likely to organize their attention around stabilization, coordination, and reducing the intensity of conflict."
+            },
+            "fear_difference": {
+                "2": "Stress cues for Candidate 2 might be investment not being seen, relationships being under-responsive, or boundaries being blurred.",
+                "9": "Candidate Number 9's stress cues may be escalating conflicts, stretched relationships, or excessive outside rhythms."
+            },
+            "stress_reaction_difference": {
+                "2": "Candidate 2 may be more likely to increase caregiving, prompt contributions, and expect clear responses when under pressure.",
+                "9": "Under pressure, candidate No. 9 may more often downplay differences, delay statements, and maintain stability first."
+            },
+            "relationship_difference": {
+                "2": "Candidate 2 may value warmth, mutual need, being remembered, and being responded to in a relationship.",
+                "9": "Candidate 9s may value a gentle pace in a relationship, being allowed to express slowly, and not being pushed into confrontation."
+            },
+            "work_difference": {
+                "2": "Candidate 2 may more often first look at who needs support in a work situation and how to maintain relationship momentum. This is not a conclusion about job ability or career suitability.",
+                "9": "Candidate No. 9 may more often first look at whether all parties are aligned and whether the rhythm is sustainable in a work situation. This is not a conclusion about job ability or career suitability."
+            },
+            "seven_day_observation_question": "Keep track of only specific situations for the next 7 days: when you tense, push forward, or pull back, are you more like Candidate 2’s “relationship needing, being wanted, and caring responses,” or Candidate 9’s “settling, attuning, and reducing conflict intensity”?",
+            "resonance_feedback_prompt": "Please choose the more resonant candidate clue, or mark it as neither. Low resonance will reduce the interpretation certainty and will not be covered by the system's main narrative.",
+            "short_compare_copy": "Close-call can only show that both candidates No. 2 and No. 9 are worthy of observation and should be observed side by side; it is not a two-or-one judgment type, and it cannot infer diagnosis, recruitment screening, or career decisions.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "theory_based",
+            "fallback_policy": "fallback_to_generic"
+        },
+        {
+            "pair_key": "3_7",
+            "type_a": "3",
+            "type_b": "7",
+            "shared_surface_similarity": "On the surface, both may be fast, extroverted, and opportunity-oriented, but the difference often appears in who has more influence on decision-making in the performance pressure and choice space. close-call only means that the candidate explanations are similar and you need to go back to the recent situation and observe them side by side.",
+            "core_motivation_difference": {
+                "3": "Candidate 3 is more likely to organize attention around results, efficiency, and visible value.",
+                "7": "Candidate Sevens are more likely to organize their attention around possibilities, options, and staying alive."
+            },
+            "fear_difference": {
+                "3": "Stress cues for Candidate 3 might be that efforts are fruitless, undervalued, or goals are out of focus.",
+                "7": "Stress cues for Candidate 7s may be options being closed, being stuck for a long time, or having a lack of outlets for heavy issues."
+            },
+            "stress_reaction_difference": {
+                "3": "Candidate 3s may be more likely to speed up, adapt to expectations, and prioritize delivering visible results when under pressure.",
+                "7": "Candidate Sevens may be more likely to open up new options, shift attention, and lighten the pace to reduce discomfort when under pressure."
+            },
+            "relationship_difference": {
+                "3": "Candidate No. 3 may value being recognized, trusted, and having visible returns on investment in relationships.",
+                "7": "Candidate Sevens may value space, ease, shared exploration, and not being overly restrictive in relationships."
+            },
+            "work_difference": {
+                "3": "Candidate 3 may look first to goals, results, and external feedback more often in work situations. This is not a conclusion about job ability or career suitability.",
+                "7": "Candidate 7s may more often look first at opportunities, ideas, and future scalability in work situations. This is not a conclusion about job ability or career suitability."
+            },
+            "seven_day_observation_question": "Keep track of only specific situations for the next seven days: when you tense up, push forward, or step back, is it more like the “results, efficiency, and visible value” of Candidate 3, or the “possibility, options, and staying alive” of Candidate 7?",
+            "resonance_feedback_prompt": "Please choose the more resonant candidate clue, or mark it as neither. Low resonance will reduce the interpretation certainty and will not be covered by the system's main narrative.",
+            "short_compare_copy": "Close-call can only mean that both candidates No. 3 and No. 7 are worthy of observation and should be observed side by side; it is not a two-choice judgment type, and it cannot infer diagnosis, recruitment screening or career decisions.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "theory_based",
+            "fallback_policy": "fallback_to_generic"
+        },
+        {
+            "pair_key": "3_8",
+            "type_a": "3",
+            "type_b": "8",
+            "shared_surface_similarity": "On the surface, both may push forward forcefully, but differences often arise in visible achievements and who needs to be guarded more about the boundaries of authority and responsibility. close-call only means that the candidate explanations are similar and you need to go back to the recent situation and observe them side by side.",
+            "core_motivation_difference": {
+                "3": "Candidate 3 is more likely to organize attention around results, efficiency, and visible value.",
+                "8": "Candidate 8s are more likely to organize their attention around boundaries, taking initiative, and protecting what matters."
+            },
+            "fear_difference": {
+                "3": "Stress cues for Candidate 3 might be that efforts are fruitless, undervalued, or goals are out of focus.",
+                "8": "Stress cues for Candidate 8s might be being controlled, having boundaries crossed, or having important boundaries interpreted by others."
+            },
+            "stress_reaction_difference": {
+                "3": "Candidate 3s may be more likely to speed up, adapt to expectations, and prioritize delivering visible results when under pressure.",
+                "8": "Candidate 8s may more often increase their intensity, clear obstacles, and clear boundaries between responsibilities under pressure."
+            },
+            "relationship_difference": {
+                "3": "Candidate No. 3 may value being recognized, trusted, and having visible returns on investment in relationships.",
+                "8": "Candidate 8s may value candor, a sense of strength, clear boundaries, and mutual respect in relationships."
+            },
+            "work_difference": {
+                "3": "Candidate 3 may look first to goals, results, and external feedback more often in work situations. This is not a conclusion about job ability or career suitability.",
+                "8": "Candidate No. 8 may first look at authority, responsibility, decision-making authority, and whether they can advance directly in a work situation. This is not a conclusion about job ability or career suitability."
+            },
+            "seven_day_observation_question": "Keep track of only specific situations for the next seven days: When you tense up, push forward, or step back, are you more like the “results, efficiency, and visible value” of Candidate 3, or the “boundaries, initiative, and protecting what matters” of Candidate 8?",
+            "resonance_feedback_prompt": "Please choose the more resonant candidate clue, or mark it as neither. Low resonance will reduce the interpretation certainty and will not be covered by the system's main narrative.",
+            "short_compare_copy": "Close-call can only show that both candidates No. 3 and No. 8 are worthy of observation and should be observed side by side; it is not a two-choice judgment type, and it cannot infer diagnosis, recruitment screening, or career decisions.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "theory_based",
+            "fallback_policy": "fallback_to_generic"
+        },
+        {
+            "pair_key": "4_5",
+            "type_a": "4",
+            "type_b": "5",
+            "shared_surface_similarity": "On the surface, both may be inward-looking and value solitude. The difference often appears in who is protected first in emotional meaning and cognitive space. close-call only means that the candidate explanations are similar and you need to go back to the recent situation and observe them side by side.",
+            "core_motivation_difference": {
+                "4": "Candidate 4 is more likely to organize attention around a sense of uniqueness, authentic expression, and emotional meaning.",
+                "5": "Candidate 5s are more likely to organize their attention around comprehension, space, and resource conservation."
+            },
+            "fear_difference": {
+                "4": "Candidate 4's stress cues may be expressions being smoothed out, important feelings going unheard, or being trivialized.",
+                "5": "Candidate 5's stress cues may be a lack of information, space being invaded, or resources being overused."
+            },
+            "stress_reaction_difference": {
+                "4": "Candidate 4s may more often intensify feelings, search for meaning, and distance themselves under stress.",
+                "5": "Candidate Fives may more often withdraw, analyse, reduce exposure and conserve energy under stress."
+            },
+            "relationship_difference": {
+                "4": "Candidate 4 may value being understood in detail, expressed authentically, and differences respected in relationships.",
+                "5": "Candidate 5s may value respecting boundaries, giving space, and interacting with clear messages in relationships."
+            },
+            "work_difference": {
+                "4": "Candidate 4 may more often first look at whether the matter is meaningful and whether personal expression can be retained in a work situation. This is not a conclusion about job ability or career suitability.",
+                "5": "Candidate No. 5 may first check whether the information is sufficient and whether the input is controllable in a work situation. This is not a conclusion about job ability or career suitability."
+            },
+            "seven_day_observation_question": "Keep track of only specific situations for the next seven days: when you tense, push forward, or step back, is it more like Candidate 4’s “sense of uniqueness, authentic expression, and emotional significance” or Candidate 5’s “understanding, space, and conservation of resources”?",
+            "resonance_feedback_prompt": "Please choose the more resonant candidate clue, or mark it as neither. Low resonance will reduce the interpretation certainty and will not be covered by the system's main narrative.",
+            "short_compare_copy": "Close-call can only mean that both candidates No. 4 and No. 5 are worthy of observation and should be observed side by side; it is not a two-or-one judgment type, and it cannot infer diagnosis, recruitment screening or career decisions.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "theory_based",
+            "fallback_policy": "fallback_to_generic"
+        },
+        {
+            "pair_key": "4_9",
+            "type_a": "4",
+            "type_b": "9",
+            "shared_surface_similarity": "Both may be soft and slow-heated on the surface. The difference often occurs in who is more dominant in expressing a sense of uniqueness and reducing the intensity of conflict. close-call only means that the candidate explanations are similar and you need to go back to the recent situation and observe them side by side.",
+            "core_motivation_difference": {
+                "4": "Candidate 4 is more likely to organize attention around a sense of uniqueness, authentic expression, and emotional meaning.",
+                "9": "Candidate Nines are more likely to organize their attention around stabilization, coordination, and reducing the intensity of conflict."
+            },
+            "fear_difference": {
+                "4": "Candidate 4's stress cues may be expressions being smoothed out, important feelings going unheard, or being trivialized.",
+                "9": "Candidate Number 9's stress cues may be escalating conflicts, stretched relationships, or excessive outside rhythms."
+            },
+            "stress_reaction_difference": {
+                "4": "Candidate 4s may more often intensify feelings, search for meaning, and distance themselves under stress.",
+                "9": "Under pressure, candidate No. 9 may more often downplay differences, delay statements, and maintain stability first."
+            },
+            "relationship_difference": {
+                "4": "Candidate 4 may value being understood in detail, expressed authentically, and differences respected in relationships.",
+                "9": "Candidate 9s may value a gentle pace in a relationship, being allowed to express slowly, and not being pushed into confrontation."
+            },
+            "work_difference": {
+                "4": "Candidate 4 may more often first look at whether the matter is meaningful and whether personal expression can be retained in a work situation. This is not a conclusion about job ability or career suitability.",
+                "9": "Candidate No. 9 may more often first look at whether all parties are aligned and whether the rhythm is sustainable in a work situation. This is not a conclusion about job ability or career suitability."
+            },
+            "seven_day_observation_question": "Keep track of only specific situations for the next seven days: when you tense up, push forward, or step back, is it more like Candidate 4’s “sense of uniqueness, authentic expression, and emotional significance” or Candidate 9’s “steadiness, coordination, and reduced intensity of conflict”?",
+            "resonance_feedback_prompt": "Please choose the more resonant candidate clue, or mark it as neither. Low resonance will reduce the interpretation certainty and will not be covered by the system's main narrative.",
+            "short_compare_copy": "Close-call can only show that both candidates No. 4 and No. 9 are worthy of observation and should be observed side by side; it is not a two-or-one judgment type, and it cannot infer diagnosis, recruitment screening, or career decisions.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "theory_based",
+            "fallback_policy": "fallback_to_generic"
+        },
+        {
+            "pair_key": "5_6",
+            "type_a": "5",
+            "type_b": "6",
+            "shared_surface_similarity": "On the surface, both may be cautious, analytical, and reserved. The difference often occurs in who starts first to save resources or verify safety. close-call only means that the candidate explanations are similar and you need to go back to the recent situation and observe them side by side.",
+            "core_motivation_difference": {
+                "5": "Candidate 5s are more likely to organize their attention around comprehension, space, and resource conservation.",
+                "6": "Candidate 6s are more likely to organize their attention around safety, trust, and risk anticipation."
+            },
+            "fear_difference": {
+                "5": "Candidate 5's stress cues may be a lack of information, space being invaded, or resources being overused.",
+                "6": "Stress cues for Candidate 6s might be shaky commitments, unclear risks, or inconsistencies in authority and rules."
+            },
+            "stress_reaction_difference": {
+                "5": "Candidate Fives may more often withdraw, analyse, reduce exposure and conserve energy under stress.",
+                "6": "Candidate No. 6 may be more likely to repeatedly check, prepare plans, and seek credible evidence under pressure."
+            },
+            "relationship_difference": {
+                "5": "Candidate 5s may value respecting boundaries, giving space, and interacting with clear messages in relationships.",
+                "6": "Candidate 6s may value stable commitment, transparent information, and verifiable reliability in relationships."
+            },
+            "work_difference": {
+                "5": "Candidate No. 5 may first check whether the information is sufficient and whether the input is controllable in a work situation. This is not a conclusion about job ability or career suitability.",
+                "6": "Candidate 6s may more often look at risks, responsibilities, and backup plans first in work situations. This is not a conclusion about job ability or career suitability."
+            },
+            "seven_day_observation_question": "Keep track of only specific situations for the next seven days: When you tense up, push forward, or step back, are you more like Candidate 5’s “understanding, space, and conservation of resources,” or Candidate 6’s “safety, trust, and risk anticipation”?",
+            "resonance_feedback_prompt": "Please choose the more resonant candidate clue, or mark it as neither. Low resonance will reduce the interpretation certainty and will not be covered by the system's main narrative.",
+            "short_compare_copy": "Close-call can only show that both candidates No. 5 and No. 6 are worthy of observation and should be observed side by side; it is not a two-or-one judgment type, and it cannot infer diagnosis, recruitment screening, or career decisions.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "theory_based",
+            "fallback_policy": "fallback_to_generic"
+        },
+        {
+            "pair_key": "5_9",
+            "type_a": "5",
+            "type_b": "9",
+            "shared_surface_similarity": "On the surface, both may be quiet and take a step back. The difference is often more obvious between conserving cognitive resources and maintaining external stability. close-call only means that the candidate explanations are similar and you need to go back to the recent situation and observe them side by side.",
+            "core_motivation_difference": {
+                "5": "Candidate 5s are more likely to organize their attention around comprehension, space, and resource conservation.",
+                "9": "Candidate Nines are more likely to organize their attention around stabilization, coordination, and reducing the intensity of conflict."
+            },
+            "fear_difference": {
+                "5": "Candidate 5's stress cues may be a lack of information, space being invaded, or resources being overused.",
+                "9": "Candidate Number 9's stress cues may be escalating conflicts, stretched relationships, or excessive outside rhythms."
+            },
+            "stress_reaction_difference": {
+                "5": "Candidate Fives may more often withdraw, analyse, reduce exposure and conserve energy under stress.",
+                "9": "Under pressure, candidate No. 9 may more often downplay differences, delay statements, and maintain stability first."
+            },
+            "relationship_difference": {
+                "5": "Candidate 5s may value respecting boundaries, giving space, and interacting with clear messages in relationships.",
+                "9": "Candidate 9s may value a gentle pace in a relationship, being allowed to express slowly, and not being pushed into confrontation."
+            },
+            "work_difference": {
+                "5": "Candidate No. 5 may first check whether the information is sufficient and whether the input is controllable in a work situation. This is not a conclusion about job ability or career suitability.",
+                "9": "Candidate No. 9 may more often first look at whether all parties are aligned and whether the rhythm is sustainable in a work situation. This is not a conclusion about job ability or career suitability."
+            },
+            "seven_day_observation_question": "Keep track of only specific situations for the next seven days: when you tense, push forward, or step back, is it more like the \"understanding, space, and resource conservation\" of Candidate 5, or the \"stabilization, coordination, and de-escalation of conflict\" of Candidate 9?",
+            "resonance_feedback_prompt": "Please choose the more resonant candidate clue, or mark it as neither. Low resonance will reduce the interpretation certainty and will not be covered by the system's main narrative.",
+            "short_compare_copy": "Close-call can only show that both candidates No. 5 and No. 9 are worthy of observation and should be observed side by side; it is not a two-or-one judgment type, and it cannot infer diagnosis, recruitment screening, or career decisions.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "theory_based",
+            "fallback_policy": "fallback_to_generic"
+        },
+        {
+            "pair_key": "6_1",
+            "type_a": "6",
+            "type_b": "1",
+            "shared_surface_similarity": "On the surface, both may be responsible, vigilant, and respectful of rules. The difference often arises in who takes priority in risk verification and principle calibration. close-call only means that the candidate explanations are similar and you need to go back to the recent situation and observe them side by side.",
+            "core_motivation_difference": {
+                "1": "Candidate 1 is more likely to organize attention around standards, accountability, and getting things done right.",
+                "6": "Candidate 6s are more likely to organize their attention around safety, trust, and risk anticipation."
+            },
+            "fear_difference": {
+                "1": "Candidate 1's stress cues might be deviations, lapses in responsibility, unfairness, or a disordered process.",
+                "6": "Stress cues for Candidate 6s might be shaky commitments, unclear risks, or inconsistencies in authority and rules."
+            },
+            "stress_reaction_difference": {
+                "1": "Candidate 1 may correct mistakes, tighten standards, and raise self-requirements more often under pressure.",
+                "6": "Candidate No. 6 may be more likely to repeatedly check, prepare plans, and seek credible evidence under pressure."
+            },
+            "relationship_difference": {
+                "1": "Candidate 1 may value principles, propriety, reliability and mutual responsibility in relationships.",
+                "6": "Candidate 6s may value stable commitment, transparent information, and verifiable reliability in relationships."
+            },
+            "work_difference": {
+                "1": "Candidate 1 may more often look at rules, quality, and risk to see if they make sense in a work situation. This is not a conclusion about job ability or career suitability.",
+                "6": "Candidate 6s may more often look at risks, responsibilities, and backup plans first in work situations. This is not a conclusion about job ability or career suitability."
+            },
+            "seven_day_observation_question": "For the next seven days, only record specific situations: When you tense up, push forward, or step back, are you more like Candidate 6’s “safety, trust, and risk awareness,” or Candidate 1’s “standards, responsibility, and getting things done right?”",
+            "resonance_feedback_prompt": "Please choose the more resonant candidate clue, or mark it as neither. Low resonance will reduce the interpretation certainty and will not be covered by the system's main narrative.",
+            "short_compare_copy": "Close-call can only mean that both candidates No. 6 and No. 1 are worthy of observation and should be observed side by side; it is not a two-or-one judgment type, and it cannot infer diagnosis, recruitment screening or career decisions.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "theory_based",
+            "fallback_policy": "fallback_to_generic"
+        },
+        {
+            "pair_key": "6_9",
+            "type_a": "6",
+            "type_b": "9",
+            "shared_surface_similarity": "On the surface, both may be cautious and avoid rash actions. The difference often occurs in who is more dominant in risk prediction and reducing conflict intensity. close-call only means that the candidate explanations are similar and you need to go back to the recent situation and observe them side by side.",
+            "core_motivation_difference": {
+                "6": "Candidate 6s are more likely to organize their attention around safety, trust, and risk anticipation.",
+                "9": "Candidate Nines are more likely to organize their attention around stabilization, coordination, and reducing the intensity of conflict."
+            },
+            "fear_difference": {
+                "6": "Stress cues for Candidate 6s might be shaky commitments, unclear risks, or inconsistencies in authority and rules.",
+                "9": "Candidate Number 9's stress cues may be escalating conflicts, stretched relationships, or excessive outside rhythms."
+            },
+            "stress_reaction_difference": {
+                "6": "Candidate No. 6 may be more likely to repeatedly check, prepare plans, and seek credible evidence under pressure.",
+                "9": "Under pressure, candidate No. 9 may more often downplay differences, delay statements, and maintain stability first."
+            },
+            "relationship_difference": {
+                "6": "Candidate 6s may value stable commitment, transparent information, and verifiable reliability in relationships.",
+                "9": "Candidate 9s may value a gentle pace in a relationship, being allowed to express slowly, and not being pushed into confrontation."
+            },
+            "work_difference": {
+                "6": "Candidate 6s may more often look at risks, responsibilities, and backup plans first in work situations. This is not a conclusion about job ability or career suitability.",
+                "9": "Candidate No. 9 may more often first look at whether all parties are aligned and whether the rhythm is sustainable in a work situation. This is not a conclusion about job ability or career suitability."
+            },
+            "seven_day_observation_question": "For the next seven days, only record specific situations: When you tense up, push forward, or step back, are you more like the \"security, trust, and risk anticipation\" of Candidate 6, or the \"stability, coordination, and de-escalation of conflict\" of Candidate 9?",
+            "resonance_feedback_prompt": "Please choose the more resonant candidate clue, or mark it as neither. Low resonance will reduce the interpretation certainty and will not be covered by the system's main narrative.",
+            "short_compare_copy": "Close-call can only mean that both candidates No. 6 and No. 9 are worthy of observation and should be observed side by side; it is not a two-or-one judgment type, and it cannot infer diagnosis, recruitment screening, or career decisions.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "theory_based",
+            "fallback_policy": "fallback_to_generic"
+        },
+        {
+            "pair_key": "7_3",
+            "type_a": "7",
+            "type_b": "3",
+            "shared_surface_similarity": "On the surface, both may be active and fast-paced. The difference often appears in who is more interested in exploring possibilities and forming visible results. close-call only means that the candidate explanations are similar and you need to go back to the recent situation and observe them side by side.",
+            "core_motivation_difference": {
+                "3": "Candidate 3 is more likely to organize attention around results, efficiency, and visible value.",
+                "7": "Candidate Sevens are more likely to organize their attention around possibilities, options, and staying alive."
+            },
+            "fear_difference": {
+                "3": "Stress cues for Candidate 3 might be that efforts are fruitless, undervalued, or goals are out of focus.",
+                "7": "Stress cues for Candidate 7s may be options being closed, being stuck for a long time, or having a lack of outlets for heavy issues."
+            },
+            "stress_reaction_difference": {
+                "3": "Candidate 3s may be more likely to speed up, adapt to expectations, and prioritize delivering visible results when under pressure.",
+                "7": "Candidate Sevens may be more likely to open up new options, shift attention, and lighten the pace to reduce discomfort when under pressure."
+            },
+            "relationship_difference": {
+                "3": "Candidate No. 3 may value being recognized, trusted, and having visible returns on investment in relationships.",
+                "7": "Candidate Sevens may value space, ease, shared exploration, and not being overly restrictive in relationships."
+            },
+            "work_difference": {
+                "3": "Candidate 3 may look first to goals, results, and external feedback more often in work situations. This is not a conclusion about job ability or career suitability.",
+                "7": "Candidate 7s may more often look first at opportunities, ideas, and future scalability in work situations. This is not a conclusion about job ability or career suitability."
+            },
+            "seven_day_observation_question": "Keep track of only specific situations for the next seven days: When you tense up, push forward, or step back, is it more like the “possibility, options, and staying alive” of Candidate 7, or the “results, efficiency, and visible value” of Candidate 3?",
+            "resonance_feedback_prompt": "Please choose the more resonant candidate clue, or mark it as neither. Low resonance will reduce the interpretation certainty and will not be covered by the system's main narrative.",
+            "short_compare_copy": "Close-call can only mean that both candidates No. 7 and No. 3 are worthy of observation and should be observed side by side; it is not a two-choice judgment type, nor can it infer diagnosis, recruitment screening or career decisions.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "theory_based",
+            "fallback_policy": "fallback_to_generic"
+        },
+        {
+            "pair_key": "8_1",
+            "type_a": "8",
+            "type_b": "1",
+            "shared_surface_similarity": "On the surface, both may have strength and boundaries, but the difference often arises in who takes priority between protecting the initiative and calibrating legitimacy. close-call only means that the candidate explanations are similar and you need to go back to the recent situation and observe them side by side.",
+            "core_motivation_difference": {
+                "1": "Candidate 1 is more likely to organize attention around standards, accountability, and getting things done right.",
+                "8": "Candidate 8s are more likely to organize their attention around boundaries, taking initiative, and protecting what matters."
+            },
+            "fear_difference": {
+                "1": "Candidate 1's stress cues might be deviations, lapses in responsibility, unfairness, or a disordered process.",
+                "8": "Stress cues for Candidate 8s might be being controlled, having boundaries crossed, or having important boundaries interpreted by others."
+            },
+            "stress_reaction_difference": {
+                "1": "Candidate 1 may correct mistakes, tighten standards, and raise self-requirements more often under pressure.",
+                "8": "Candidate 8s may more often increase their intensity, clear obstacles, and clear boundaries between responsibilities under pressure."
+            },
+            "relationship_difference": {
+                "1": "Candidate 1 may value principles, propriety, reliability and mutual responsibility in relationships.",
+                "8": "Candidate 8s may value candor, a sense of strength, clear boundaries, and mutual respect in relationships."
+            },
+            "work_difference": {
+                "1": "Candidate 1 may more often look at rules, quality, and risk to see if they make sense in a work situation. This is not a conclusion about job ability or career suitability.",
+                "8": "Candidate No. 8 may first look at authority, responsibility, decision-making authority, and whether they can advance directly in a work situation. This is not a conclusion about job ability or career suitability."
+            },
+            "seven_day_observation_question": "Keep track of only specific situations for the next seven days: When you tense up, push forward, or step back, are you more like Candidate 8’s “boundaries, initiative, and protecting what’s important,” or Candidate 1’s “standards, responsibility, and getting things right”?",
+            "resonance_feedback_prompt": "Please choose the more resonant candidate clue, or mark it as neither. Low resonance will reduce the interpretation certainty and will not be covered by the system's main narrative.",
+            "short_compare_copy": "Close-call can only mean that both candidates No. 8 and No. 1 are worthy of observation and should be observed side by side; it is not a two-or-one judgment type, and it cannot infer diagnosis, recruitment screening, or career decisions.",
+            "content_maturity": "p0_ready",
+            "evidence_level": "theory_based",
+            "fallback_policy": "fallback_to_generic"
+        }
+    ]
+}

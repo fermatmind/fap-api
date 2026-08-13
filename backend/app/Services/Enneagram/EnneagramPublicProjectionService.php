@@ -241,6 +241,7 @@ final class EnneagramPublicProjectionService
         return [
             'schema_version' => 'enneagram.public_projection.v1',
             'scale_code' => 'ENNEAGRAM',
+            'locale' => $language,
             'form_code' => trim((string) ($scoreResult['form_code'] ?? '')),
             'score_method' => trim((string) ($scoreResult['score_method'] ?? '')),
             'primary_type' => $primaryType,
@@ -309,6 +310,7 @@ final class EnneagramPublicProjectionService
         return [
             'schema_version' => self::PROJECTION_V2_SCHEMA,
             'scale_code' => 'ENNEAGRAM',
+            'locale' => $language,
             'form' => [
                 'form_code' => $form['form_code'] ?? null,
                 'form_kind' => $form['form_kind'] ?? null,
