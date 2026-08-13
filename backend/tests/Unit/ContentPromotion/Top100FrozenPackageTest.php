@@ -6,6 +6,7 @@ namespace Tests\Unit\ContentPromotion;
 
 use App\Models\Article;
 use App\Models\ArticleTranslationRevision;
+use App\Models\PersonalityPublicContentAssetRevision;
 use App\Services\ContentPromotion\PromotionContext;
 use App\Services\ContentPromotion\PromotionContextFactory;
 use App\Services\ContentPromotion\Top100FrozenCmsBatchAuthority;
@@ -104,6 +105,10 @@ final class Top100FrozenPackageTest extends TestCase
         self::assertStringNotContainsString("throw new DomainException('top100_frozen_article_foreign_working_revision');", $authority);
         self::assertStringContainsString('top100_frozen_article_foreign_working_revision_drift', $authority);
         self::assertStringContainsString("'working_revision_id' => \$preservedWorkingRevisionId", $authority);
+        self::assertStringNotContainsString("throw new DomainException('top100_frozen_personality_foreign_working_revision');", $authority);
+        self::assertStringContainsString('top100_frozen_personality_foreign_working_revision_drift', $authority);
+        self::assertStringContainsString("'working_revision' => \$this->personalityWorkingRevisionState(\$model)", $authority);
+        self::assertStringContainsString("unset(\$assetMutable['working_revision']);", $authority);
     }
 
     public function test_rollback_guard_accepts_only_pre_draft_or_exact_published_state(): void
@@ -197,6 +202,31 @@ final class Top100FrozenPackageTest extends TestCase
         self::assertTrue($method->invoke($authority, $revision, $article, $target));
         $revision->content_md = 'Concurrent unapproved edit';
         self::assertFalse($method->invoke($authority, $revision, $article, $target));
+    }
+
+    public function test_personality_working_revision_state_binds_identity_status_and_snapshot(): void
+    {
+        $authority = (new ReflectionClass(Top100FrozenCmsBatchAuthority::class))->newInstanceWithoutConstructor();
+        $method = (new ReflectionClass($authority))->getMethod('personalityRevisionState');
+        $revision = new PersonalityPublicContentAssetRevision([
+            'asset_id' => 41,
+            'workflow_state' => PersonalityPublicContentAssetRevision::STATE_DRAFT,
+            'authority_asset_key' => 'other-controlled-operation',
+            'authority_package_sha256' => str_repeat('a', 64),
+            'source_package' => 'other/package',
+            'source_hash' => str_repeat('b', 64),
+            'snapshot_json' => ['title' => 'Concurrent working draft'],
+        ]);
+        $revision->id = 73;
+
+        $state = $method->invoke($authority, $revision);
+        self::assertSame(73, $state['id']);
+        self::assertSame(41, $state['asset_id']);
+        self::assertSame(PersonalityPublicContentAssetRevision::STATE_DRAFT, $state['workflow_state']);
+        self::assertSame(hash('sha256', PromotionContextFactory::canonicalJson(['title' => 'Concurrent working draft'])), $state['snapshot_sha256']);
+
+        $revision->workflow_state = 'published';
+        self::assertNotSame($state, $method->invoke($authority, $revision));
     }
 
     public function test_v2_receipt_schema_accepts_top100_lane_package_and_evidence_fields(): void
