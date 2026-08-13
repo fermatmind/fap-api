@@ -85,14 +85,18 @@ final class Career1046ImmutableCandidateArtifactProducer
             }
         }
 
-        $candidate = (new Career1046ImmutableCandidateGenerator)->generate(
-            (string) $source['manifest_path'],
-            is_array($source['baseline_authority_slugs']) ? $source['baseline_authority_slugs'] : [],
-            is_array($source['database_matching_receipt_slugs']) ? $source['database_matching_receipt_slugs'] : [],
-            is_array($source['ledger']) ? $source['ledger'] : [],
-            is_array($source['projection']) ? $source['projection'] : [],
-            is_array($source['detail_rows']) ? $source['detail_rows'] : [],
-        );
+        try {
+            $candidate = (new Career1046ImmutableCandidateGenerator)->generate(
+                (string) $source['manifest_path'],
+                is_array($source['baseline_authority_slugs']) ? $source['baseline_authority_slugs'] : [],
+                is_array($source['database_matching_receipt_slugs']) ? $source['database_matching_receipt_slugs'] : [],
+                is_array($source['ledger']) ? $source['ledger'] : [],
+                is_array($source['projection']) ? $source['projection'] : [],
+                is_array($source['detail_rows']) ? $source['detail_rows'] : [],
+            );
+        } catch (RuntimeException) {
+            throw new Career1046ImmutableCandidateArtifactFailure('CANDIDATE_AUTHORITY_CONTRACT_FAILURE');
+        }
 
         $binding = [
             'contract_version' => self::CONTRACT_VERSION,
@@ -222,10 +226,11 @@ final class Career1046ImmutableCandidateArtifactProducer
         }
         self::assertTask3bDatabaseState($applicationRoot, $manifest, $task3b);
         $ledgerEnvelope = app(CareerFullReleaseLedgerProjectionService::class)->build(allowCacheWrites: false);
-        $ledger = $ledgerEnvelope[CareerFullReleaseLedgerProjectionService::LEDGER_FILENAME] ?? null;
-        if (! is_array($ledger)) {
+        $fullLedger = $ledgerEnvelope[CareerFullReleaseLedgerProjectionService::LEDGER_FILENAME] ?? null;
+        if (! is_array($fullLedger)) {
             throw new Career1046ImmutableCandidateArtifactFailure('LEDGER_UNAVAILABLE');
         }
+        $ledger = self::targetBoundedLedger($fullLedger, $manifest);
         $projection = app(CareerRuntimePublishProjectionService::class)->buildFromLedgerArray($ledger);
         $details = [];
         $items = is_array($projection['items'] ?? null) ? $projection['items'] : [];
@@ -266,6 +271,187 @@ final class Career1046ImmutableCandidateArtifactProducer
             'projection' => $projection,
             'detail_rows' => $details,
         ], $task3b);
+    }
+
+    /**
+     * Preserve the complete SELECT-only ledger as the upstream calculation, then
+     * derive the one immutable candidate authority accepted by Tasks 5-7B.
+     *
+     * @param  array<string, mixed>  $fullLedger
+     * @param  array<string, mixed>  $manifest
+     * @return array<string, mixed>
+     */
+    public static function targetBoundedLedger(array $fullLedger, array $manifest): array
+    {
+        $baseline = self::frozenSlugSet($manifest['baseline_slugs'] ?? null, 'BASELINE');
+        $delta = self::frozenSlugSet($manifest['delta_slugs'] ?? null, 'DELTA');
+        $target = array_values(array_unique([...$baseline, ...$delta]));
+        sort($target, SORT_STRING);
+        $localeRows = [];
+        foreach ($target as $slug) {
+            $localeRows[] = $slug.'|en';
+            $localeRows[] = $slug.'|zh';
+        }
+        sort($localeRows, SORT_STRING);
+        if (count($baseline) !== Career1046ImmutableCandidateGenerator::BASELINE_COUNT
+            || count($delta) !== Career1046ImmutableCandidateGenerator::RECEIPT_COUNT
+            || count($target) !== Career1046ImmutableCandidateGenerator::TARGET_COUNT
+            || count($localeRows) !== Career1046ImmutableCandidateGenerator::TARGET_LOCALE_ROW_COUNT
+            || ! hash_equals(Career1046ImmutableCandidateGenerator::BASELINE_SET_SHA256, CareerGenerationCanonicalJson::setSha256($baseline))
+            || ! hash_equals(Career1046ImmutableCandidateGenerator::RECEIPT_SET_SHA256, CareerGenerationCanonicalJson::setSha256($delta))
+            || ! hash_equals(Career1046ImmutableCandidateGenerator::TARGET_SET_SHA256, CareerGenerationCanonicalJson::setSha256($target))
+            || ! hash_equals(Career1046ImmutableCandidateGenerator::TARGET_LOCALE_ROW_SET_SHA256, CareerGenerationCanonicalJson::setSha256($localeRows))) {
+            throw new Career1046ImmutableCandidateArtifactFailure('FROZEN_TARGET_AUTHORITY_INVALID');
+        }
+        if (array_intersect(Career1046ImmutableCandidateGenerator::FORBIDDEN_SLUGS, $target) !== []) {
+            throw new Career1046ImmutableCandidateArtifactFailure('FROZEN_TARGET_CONTAINS_FORBIDDEN');
+        }
+        if (($fullLedger['ledger_kind'] ?? null) !== \App\Domain\Career\Publish\CareerFullReleaseLedgerService::LEDGER_KIND
+            || ($fullLedger['ledger_version'] ?? null) !== \App\Domain\Career\Publish\CareerFullReleaseLedgerService::LEDGER_VERSION
+            || ($fullLedger['scope'] ?? null) !== \App\Domain\Career\Publish\CareerFullReleaseLedgerService::SCOPE) {
+            throw new Career1046ImmutableCandidateArtifactFailure('FULL_LEDGER_IDENTITY_INVALID');
+        }
+
+        $rows = data_get($fullLedger, 'public_resolution.rows');
+        if (! is_array($rows) || $rows === []) {
+            $rows = $fullLedger['members'] ?? null;
+        }
+        if (! is_array($rows) || ! array_is_list($rows)) {
+            throw new Career1046ImmutableCandidateArtifactFailure('FULL_LEDGER_ROWS_INVALID');
+        }
+
+        $targetLookup = array_fill_keys($target, true);
+        $boundedBySlug = [];
+        foreach ($rows as $row) {
+            if (! is_array($row)) {
+                throw new Career1046ImmutableCandidateArtifactFailure('FULL_LEDGER_ROW_INVALID');
+            }
+            $rawSlug = $row['source_slug'] ?? $row['canonical_slug'] ?? $row['slug'] ?? null;
+            if (! is_string($rawSlug)) {
+                throw new Career1046ImmutableCandidateArtifactFailure('FULL_LEDGER_ROW_INVALID');
+            }
+            $slug = strtolower(trim($rawSlug));
+            if ($slug === '' || $slug !== $rawSlug || preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/D', $slug) !== 1) {
+                throw new Career1046ImmutableCandidateArtifactFailure('FULL_LEDGER_ROW_INVALID');
+            }
+            if (! isset($targetLookup[$slug])) {
+                continue;
+            }
+            if (isset($boundedBySlug[$slug])) {
+                throw new Career1046ImmutableCandidateArtifactFailure('TARGET_BOUNDED_LEDGER_DUPLICATE');
+            }
+            $boundedBySlug[$slug] = $row;
+        }
+
+        $boundedSlugs = array_keys($boundedBySlug);
+        sort($boundedSlugs, SORT_STRING);
+        if ($boundedSlugs !== $target) {
+            throw new Career1046ImmutableCandidateArtifactFailure('TARGET_BOUNDED_LEDGER_MISSING');
+        }
+        if (array_intersect(Career1046ImmutableCandidateGenerator::FORBIDDEN_SLUGS, $boundedSlugs) !== []) {
+            throw new Career1046ImmutableCandidateArtifactFailure('TARGET_BOUNDED_LEDGER_FORBIDDEN');
+        }
+
+        $boundedRows = array_map(static fn (string $slug): array => $boundedBySlug[$slug], $boundedSlugs);
+        $bounded = $fullLedger;
+        unset($bounded['public_resolution']);
+        $bounded['scope'] = 'career_exact_1046';
+        $bounded['members'] = $boundedRows;
+        $bounded['counts'] = self::targetBoundedLedgerCounts($boundedRows, $fullLedger['counts'] ?? null);
+        if (array_sum($bounded['counts']['release_counts']) !== Career1046ImmutableCandidateGenerator::TARGET_COUNT) {
+            throw new Career1046ImmutableCandidateArtifactFailure('TARGET_BOUNDED_LEDGER_COUNTS_INVALID');
+        }
+        $bounded['target_boundary'] = [
+            'target_slug_count' => count($boundedSlugs),
+            'target_locale_row_count' => count($localeRows),
+            'missing_count' => 0,
+            'duplicate_count' => 0,
+            'forbidden_count' => 0,
+            'outside_target_count' => 0,
+            'target_slug_set_sha256' => Career1046ImmutableCandidateGenerator::TARGET_SET_SHA256,
+            'target_locale_row_set_sha256' => Career1046ImmutableCandidateGenerator::TARGET_LOCALE_ROW_SET_SHA256,
+        ];
+
+        return $bounded;
+    }
+
+    /** @return list<string> */
+    private static function frozenSlugSet(mixed $values, string $field): array
+    {
+        if (! is_array($values) || ! array_is_list($values)) {
+            throw new Career1046ImmutableCandidateArtifactFailure('FROZEN_'.$field.'_INVALID');
+        }
+        $set = [];
+        foreach ($values as $value) {
+            if (! is_string($value) || preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/D', $value) !== 1 || isset($set[$value])) {
+                throw new Career1046ImmutableCandidateArtifactFailure('FROZEN_'.$field.'_INVALID');
+            }
+            $set[$value] = true;
+        }
+        $slugs = array_keys($set);
+        sort($slugs, SORT_STRING);
+
+        return $slugs;
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $rows
+     * @return array<string, mixed>
+     */
+    private static function targetBoundedLedgerCounts(array $rows, mixed $sourceCounts): array
+    {
+        $source = is_array($sourceCounts) ? $sourceCounts : [];
+        $sourceTracking = is_array($source['tracking_counts'] ?? null) ? $source['tracking_counts'] : [];
+        $releaseCounts = is_array($source['release_counts'] ?? null)
+            ? array_fill_keys(array_keys($source['release_counts']), 0)
+            : [];
+        $opsCounts = is_array($source['ops_handoff_counts'] ?? null)
+            ? array_fill_keys(array_keys($source['ops_handoff_counts']), 0)
+            : [];
+        foreach ($rows as $row) {
+            $cohort = $row['release_cohort'] ?? null;
+            if (is_string($cohort) && $cohort !== '') {
+                $releaseCounts[$cohort] = (int) ($releaseCounts[$cohort] ?? 0) + 1;
+            }
+            if (($row['review_queue_status'] ?? null) === 'queued') {
+                $opsCounts['review_queue_total'] = (int) ($opsCounts['review_queue_total'] ?? 0) + 1;
+            }
+            foreach (['family_handoff', 'review_needed', 'explorer_only'] as $name) {
+                if ($cohort === $name) {
+                    $opsCounts[$name.'_total'] = (int) ($opsCounts[$name.'_total'] ?? 0) + 1;
+                }
+            }
+            if (($row['override_applied'] ?? null) === true) {
+                $opsCounts['override_applied_total'] = (int) ($opsCounts['override_applied_total'] ?? 0) + 1;
+            }
+            if (($row['current_crosswalk_mode'] ?? null) === 'unmapped') {
+                $opsCounts['unmapped_total'] = (int) ($opsCounts['unmapped_total'] ?? 0) + 1;
+            }
+        }
+        ksort($releaseCounts, SORT_STRING);
+        ksort($opsCounts, SORT_STRING);
+        $firstWaveMembers = count(array_filter(
+            $rows,
+            static fn (array $row): bool => in_array(
+                $row['batch_origin'] ?? null,
+                ['first_wave_manifest', 'b71x_excluded_first_wave'],
+                true,
+            ),
+        ));
+
+        return [
+            'tracking_counts' => [
+                'expected_total_occupations' => Career1046ImmutableCandidateGenerator::TARGET_COUNT,
+                'tracked_total_occupations' => Career1046ImmutableCandidateGenerator::TARGET_COUNT,
+                'missing_occupations' => 0,
+                'tracking_complete' => true,
+                'first_wave_members' => $firstWaveMembers,
+                'batch_members' => Career1046ImmutableCandidateGenerator::TARGET_COUNT - $firstWaveMembers,
+                'first_wave_audit_available' => (bool) ($sourceTracking['first_wave_audit_available'] ?? false),
+            ],
+            'release_counts' => $releaseCounts,
+            'ops_handoff_counts' => $opsCounts,
+        ];
     }
 
     /** @param array<string, mixed> $task3b */
@@ -386,7 +572,7 @@ final class Career1046ImmutableCandidateArtifactProducer
 
             return 1;
         } catch (Throwable) {
-            fwrite(STDERR, "UNEXPECTED_CONTROL_FAILURE\n");
+            fwrite(STDERR, "CANDIDATE_CONTROL_FAILURE\n");
 
             return 1;
         }
