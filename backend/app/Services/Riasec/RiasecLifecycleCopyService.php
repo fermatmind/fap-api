@@ -147,6 +147,21 @@ final class RiasecLifecycleCopyService
         $normalizedLocale = $this->normalizeLocale($locale);
         $contract = $this->lifecycleCopyContract($snapshotBound, $normalizedLocale);
 
+        if ($normalizedLocale === 'zh-CN') {
+            $contract['faq_markdown_reference_available'] = false;
+            $contract['professional_method_boundary_asset_id'] = '';
+            $contract['surfaces'] = array_values(array_filter(
+                (array) ($contract['surfaces'] ?? []),
+                static fn (array $surface): bool => ($surface['surface'] ?? null) !== 'history_cross_form'
+            ));
+            $contract['disabled_reader_surfaces'] = [
+                'faq_markdown_reference',
+                'professional_method_boundary',
+                'history_cross_form',
+            ];
+            $contract['disabled_reason'] = 'editorial_gate_failed_fail_closed';
+        }
+
         if ($normalizedLocale !== 'en' || $this->runtimeAssetsAvailable($normalizedLocale)) {
             return $contract;
         }

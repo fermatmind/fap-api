@@ -15,6 +15,52 @@ use Tests\TestCase;
 
 final class RiasecFullContentFixtureMatrixTest extends TestCase
 {
+    public function test_frozen_runtime_assets_parse_and_pass_editorial_hygiene_scan(): void
+    {
+        $manifestPath = base_path('content_assets/riasec/qa/result_content_freeze.v1.2026-08-13-r4.json');
+        $manifest = json_decode((string) file_get_contents($manifestPath), true, 512, JSON_THROW_ON_ERROR);
+        $baseManifest = json_decode((string) file_get_contents(base_path($manifest['base_manifest'])), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame($manifest['base_package_sha256'], $baseManifest['package_sha256']);
+        $manifest['files'] = array_merge((array) $baseManifest['files'], (array) $manifest['added_files']);
+        $this->assertCount($manifest['effective_file_count'], $manifest['files']);
+        $packageLines = '';
+
+        foreach ((array) ($manifest['files'] ?? []) as $relativePath => $expectedSha) {
+            $path = base_path((string) $relativePath);
+            $this->assertFileExists($path);
+            $this->assertSame($expectedSha, hash_file('sha256', $path), 'Frozen asset SHA drifted: '.$relativePath);
+            $raw = (string) file_get_contents($path);
+            $packageLines .= $expectedSha.'  backend/'.$relativePath."\n";
+
+            if (str_ends_with((string) $relativePath, '.jsonl')) {
+                foreach (array_filter(explode("\n", $raw), static fn (string $line): bool => trim($line) !== '') as $line) {
+                    json_decode($line, true, 512, JSON_THROW_ON_ERROR);
+                }
+            } elseif (str_ends_with((string) $relativePath, '.json')) {
+                json_decode($raw, true, 512, JSON_THROW_ON_ERROR);
+            }
+
+            foreach ([
+                '。；', '不比较 ，', 'TODO', 'TBD', 'placeholder',
+                '前三个兴趣维度 说明', '覆盖 本次', '替换 本次', '当前 本次',
+                '把 近似并列 当作', '近似并列 和', '不同表单 原始', '代码 或',
+                '而不是谁更准，而不是直接改写结果', '。 当前',
+            ] as $forbidden) {
+                $this->assertStringNotContainsString($forbidden, $raw, 'Editorial hygiene failure in '.$relativePath);
+            }
+        }
+
+        $this->assertSame($manifest['package_sha256'], hash('sha256', $packageLines));
+        $this->assertSame('PASS', data_get($manifest, 'gates.scientific_boundary_scan'));
+        $this->assertSame('PASS', data_get($manifest, 'gates.runtime_visible_copy_scan'));
+        $this->assertSame('PASS', data_get($manifest, 'gates.independent_editorial_review'));
+        $this->assertSame([
+            'faq_markdown_reference',
+            'professional_method_boundary',
+            'history_cross_form',
+        ], $manifest['intentional_fail_closed_surfaces']);
+    }
+
     private const TARGET_ORDERED_MATRIX = [
         'R_I_A' => ['RIA', 'RAI', 'IRA'],
         'R_I_S' => ['RIS', 'RSI', 'IRS'],
@@ -182,6 +228,16 @@ final class RiasecFullContentFixtureMatrixTest extends TestCase
         $this->assertFalse($lifecycleContract['raw_feedback_public_exposure_allowed']);
         $this->assertFalse($lifecycleContract['internal_snapshot_id_public_exposure_allowed']);
 
+        $runtimeLifecycle = $lifecycle->runtimeLifecycleCopyContract(true, 'zh-CN');
+        $this->assertFalse($runtimeLifecycle['faq_markdown_reference_available']);
+        $this->assertSame('', $runtimeLifecycle['professional_method_boundary_asset_id']);
+        $this->assertNotContains('history_cross_form', array_column($runtimeLifecycle['surfaces'], 'surface'));
+        $this->assertSame('editorial_gate_failed_fail_closed', $runtimeLifecycle['disabled_reason']);
+        $runtimeSerialized = json_encode($runtimeLifecycle, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+        foreach (['near-tie', '不同 form', 'raw score', 'raw score delta', '能量入口'] as $blockedCopy) {
+            $this->assertStringNotContainsString($blockedCopy, $runtimeSerialized);
+        }
+
         $this->assertCount(6, $lifecycle->technicalNoteSummarySections());
         $this->assertCount(8, $lifecycle->professionalMethodBoundarySections());
 
@@ -345,6 +401,80 @@ final class RiasecFullContentFixtureMatrixTest extends TestCase
             $this->assertArrayHasKey('reviewer', $slot);
             $this->assertNull($slot['reviewer']);
         }
+    }
+
+    public function test_public_result_does_not_repeat_complete_editorial_sentences(): void
+    {
+        $projections = [
+            app(RiasecPublicProjectionService::class)->buildV2FromResult($this->resultForOrderedCode('RIA'), 'zh-CN'),
+            app(RiasecPublicProjectionService::class)->buildV2FromResult($this->resultFor140qLayerTension(), 'zh-CN'),
+        ];
+
+        foreach ($projections as $projection) {
+            $counts = [];
+            foreach ((array) data_get($projection, 'deep_content_slots_v1.slots', []) as $slot) {
+                foreach ((array) ($slot['content'] ?? []) as $value) {
+                    foreach (is_array($value) ? $value : [$value] as $text) {
+                        if (! is_string($text)) {
+                            continue;
+                        }
+                        foreach (preg_split('/(?<=[。！？.!?])\s*/u', $text, -1, PREG_SPLIT_NO_EMPTY) ?: [] as $sentence) {
+                            $sentence = preg_replace('/\s+/u', ' ', trim($sentence)) ?? trim($sentence);
+                            if (mb_strlen($sentence) >= 12 && preg_match('/[。！？.!?]$/u', $sentence) === 1) {
+                                $counts[$sentence] = ($counts[$sentence] ?? 0) + 1;
+                            }
+                        }
+                    }
+                }
+            }
+
+            $duplicates = array_filter(
+                $counts,
+                fn (int $count, string $sentence): bool => $count > 1 && ! $this->isWhitelistedRepeatedTemplate($sentence),
+                ARRAY_FILTER_USE_BOTH
+            );
+            $this->assertSame([], $duplicates, 'A public result must not repeat complete editorial sentences.');
+        }
+
+        $pairSlots = array_values(array_filter(
+            (array) data_get($projections[0], 'deep_content_slots_v1.slots', []),
+            static fn (array $slot): bool => ($slot['module_key'] ?? null) === 'pair_blend'
+        ));
+        $this->assertCount(3, $pairSlots);
+        foreach ($pairSlots as $slot) {
+            $this->assertGreaterThanOrEqual(4, count((array) data_get($slot, 'content.activities_to_validate', [])));
+            $this->assertNotEmpty(data_get($slot, 'content.chemistry'));
+            $this->assertNotEmpty(data_get($slot, 'content.real_world_cost'));
+            $this->assertNotEmpty(data_get($slot, 'content.common_misread'));
+        }
+    }
+
+    private function isWhitelistedRepeatedTemplate(string $sentence): bool
+    {
+        foreach ([
+            '它只说明本次结果中哪些活动值得优先观察',
+            'RIASEC 只提供兴趣活动线索',
+            '高分只提高观察优先级',
+            '它只说明这类活动在当前排序里不靠前',
+            '训练门槛、资源权限、反馈节奏和责任强度',
+            '更稳妥的读法是：它只提示两类活动值得并排验证',
+            '这不是组合身份',
+            '把两个记录放在同一页',
+            '如果要合并观察，只选择一个低风险场景',
+            '第一维与后续维度差距较明显',
+            '六维分布显示一个相对更靠前的兴趣入口',
+            '它只让工作日常线索更具体',
+            '可以先按三字码阅读',
+            '可以先从三字母顺序进入结果',
+            '先做一个',
+            '再做一个',
+        ] as $approvedTemplate) {
+            if (str_contains($sentence, $approvedTemplate)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function test_public_projection_propagates_locale_into_lifecycle_copy(): void

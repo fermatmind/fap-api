@@ -840,8 +840,6 @@ final class RiasecPublicProjectionService
     {
         $contentKeys = [
             'title',
-            'summary',
-            'body',
             'core_drive',
             'positive_value',
             'real_world_cost',
@@ -849,7 +847,6 @@ final class RiasecPublicProjectionService
             'medium_score_reading',
             'low_score_safe_reading',
             'work_activity_examples',
-            'possible_drains',
             'common_misread',
             'action_advice',
             'pair_label',
@@ -882,10 +879,21 @@ final class RiasecPublicProjectionService
             'what_user_sees',
             'button_label',
             'selection_basis',
+            'summary',
+            'body',
         ];
         $content = [];
         $selection = is_array($slot['selection_v1'] ?? null) ? $slot['selection_v1'] : null;
+        $layerContentKey = match ((string) ($slot['layer'] ?? '')) {
+            'task' => 'task_activity_card',
+            'environment' => 'environment_card',
+            'role' => 'role_responsibility_card',
+            default => null,
+        };
         foreach ($contentKeys as $key) {
+            if ($layerContentKey !== null && in_array($key, ['task_activity_card', 'environment_card', 'role_responsibility_card'], true) && $key !== $layerContentKey) {
+                continue;
+            }
             if (
                 $selection !== null
                 && in_array($key, ['high_score_reading', 'medium_score_reading', 'low_score_safe_reading'], true)

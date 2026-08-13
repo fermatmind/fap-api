@@ -1,0 +1,26 @@
+{
+  "schema_version": "riasec.result_content_freeze.v1",
+  "freeze_id": "riasec-result-content-2026-08-13-r4-final",
+  "supersedes": "riasec-result-content-2026-08-13-r3",
+  "status": "qa_pass_fail_closed_release",
+  "hash_algorithm": "sha256",
+  "base_manifest": "content_assets/riasec/qa/result_content_freeze.v1.2026-08-13-r3.json",
+  "base_package_sha256": "08e51e4cee6df2d2206ea90b45943504229e40343b54c5ec4485a2db96349be8",
+  "added_files": {
+    "app/Services/Riasec/RiasecLifecycleCopyService.php": "343671b5a7e5a8c7e9b0718f41e381a33f6b3e921b76704e0a5d4491b8c0a550"
+  },
+  "effective_file_count": 27,
+  "package_sha256": "43dd849f7929a337ec8be10fddd222bd94f1f9f7306befb1e9b513cbec8da0eb",
+  "intentional_fail_closed_surfaces": [
+    "faq_markdown_reference",
+    "professional_method_boundary",
+    "history_cross_form"
+  ],
+  "fail_closed_reason": "editorial_gate_failed_after_two_repair_rounds",
+  "gates": {
+    "runtime_visible_copy_scan": "PASS",
+    "scientific_boundary_scan": "PASS",
+    "independent_editorial_review": "PASS",
+    "independent_review_scope": "fail_closed_visibility_and_remaining_runtime_copy"
+  }
+}

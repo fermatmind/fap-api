@@ -1,0 +1,38 @@
+{
+  "schema_version": "riasec.result_content_freeze.v1",
+  "freeze_id": "riasec-result-content-2026-08-13-r2",
+  "supersedes": "riasec-result-content-2026-08-13-r1",
+  "locale": "zh-CN",
+  "status": "qa_pass",
+  "hash_algorithm": "sha256",
+  "package_sha256": "74600bf11c13e6c6f2f01603450ea3b905cf54c34b39ad76a46c0ea56010088a",
+  "files": {
+    "content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl": "e3461f36b5650d51c538dc6945beb62b653a5cec3a5886d519c1e72a3c4b336f",
+    "content_assets/riasec/activity_task_examples_v1.zh-CN.jsonl": "71ab33481ee2ba5a7172eb3577254787beee0121976fac8d0bc4efaa92ebfb4d",
+    "content_assets/riasec/aspirations_calibration_v1.zh-CN.jsonl": "8b6b8f4ca9e3f40a31f9017efa26761cb25a34ae8f4f158aa3fac61c9a90d049",
+    "content_assets/riasec/dimension_deep_copy_v1.zh-CN.r3.json": "ee238a2b6e5877b3e49b3d45520a841a5f00f9fec94604c88d8c73dfef763d9a",
+    "content_assets/riasec/disagree_path_v1.zh-CN.jsonl": "de9fc1b81cf51cb3de808b4e352a6060942c1582e1e6a3bfb76a4bcb117c6cf8",
+    "content_assets/riasec/feedback_action_lab_v1.zh-CN.jsonl": "a576991e41f8b2c4640d60948d4150cecd0fe249462a2e431a5535b1a597898b",
+    "content_assets/riasec/low_quality_cautious_reading_v1.zh-CN.json": "3c68967f79e158552463668875cff003d821a9302d1659f7f6d9d8ccb1b1762d",
+    "content_assets/riasec/near_tie_alternate_code_copy_v1.zh-CN.json": "6173bdcc0610863f4effc524f839f42f8ad89ab0f131f476e086d6afecb1ac30",
+    "content_assets/riasec/next_exploration_nodes_v1.zh-CN.jsonl": "80de05d79a328f2d96554c20327a9bdaa8c02da108180297b859f7b6ae08b5d0",
+    "content_assets/riasec/occupation_examples_boundary_v1.zh-CN.jsonl": "a94403c1f07e37af9bfb64cd8a107321716499fb52fc5e223870e159eecfcd7a",
+    "content_assets/riasec/pair_blend_15_pairs_v1.zh-CN.jsonl": "f75848ed7e21c80402fa21666703c99f0ae00448039c3a4b3ca93bb707110f9b",
+    "content_assets/riasec/profile_shape_copy_v1.zh-CN.json": "c6a14141cb06f03494c6ed8004dc53e36e934105a474db13a354e6c57cc0ccb0",
+    "content_assets/riasec/top3_code_chain_strategy_v1.zh-CN.jsonl": "add49db2a6ac8e5251d71a59b4f0d955ca72d7296117ca963102fb30a2d4ead7",
+    "content_assets/riasec/top_code_confidence_copy_v1.zh-CN.json": "6db4d7179dd673595e6a899c0f1630252216c8fe6e57dc0f0633c2339919f966",
+    "app/Services/Riasec/RiasecDeepCopySlotRegistry.php": "bbf1dd076b31311e6d078b7fac5d161f076a461c9a957593884301b22251b67c",
+    "app/Services/Riasec/RiasecPublicProjectionService.php": "c6adf4ffb7d4b27db3a4197ff95d5219b2309168a30b300a02550cbf75ce6888"
+  },
+  "approved_repeated_templates": [
+    "dimension reading boundary",
+    "pair-blend validation instructions",
+    "profile readability boundary"
+  ],
+  "gates": {
+    "json_and_jsonl_parse": "PASS",
+    "punctuation_and_placeholder_scan": "PASS",
+    "scientific_boundary_scan": "PASS",
+    "independent_editorial_review": "PASS"
+  }
+}
