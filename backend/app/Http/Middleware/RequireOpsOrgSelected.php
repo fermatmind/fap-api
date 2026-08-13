@@ -40,6 +40,7 @@ class RequireOpsOrgSelected
         'filament.ops.resources.deploys.',
         'filament.ops.resources.results.',
         'filament.ops.resources.reports.',
+        'filament.ops.resources.scale-registries.',
     ];
 
     /**
