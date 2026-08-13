@@ -93,8 +93,8 @@ final class BigFiveResultPageV2RuntimeWrapper
         }
 
         try {
-            $envelope = $this->transformer->transform($this->buildInput($attempt, $result, $responsePayload));
-            $errors = $this->validator->validateEnvelope($envelope);
+            $envelope = $this->buildRouteDrivenEnvelope($attempt, $result, $responsePayload)['envelope'];
+            $errors = $this->validator->validateProductionEnvelope($envelope);
             if ($errors !== []) {
                 Log::warning('BIG5_RESULT_PAGE_V2_RUNTIME_PAYLOAD_INVALID', [
                     'attempt_id' => (string) ($attempt->id ?? ''),
@@ -245,7 +245,7 @@ final class BigFiveResultPageV2RuntimeWrapper
         try {
             $build = $this->buildRouteDrivenEnvelope($attempt, $result, $responsePayload);
             $envelope = $build['envelope'];
-            $errors = $this->validator->validateEnvelope($envelope);
+            $errors = $this->validator->validateProductionEnvelope($envelope);
             if ($errors !== []) {
                 $this->pilotObservability->recordPayloadValidationFailed($attempt, $result, $errors);
                 Log::warning('BIG5_RESULT_PAGE_V2_PILOT_PAYLOAD_INVALID', [
@@ -331,7 +331,7 @@ final class BigFiveResultPageV2RuntimeWrapper
             );
 
             $envelope = $build['envelope'];
-            $errors = $this->validator->validateEnvelope($envelope);
+            $errors = $this->validator->validateProductionEnvelope($envelope);
             if ($errors !== []) {
                 $this->productionTelemetry->recordPayloadValidationFailure($attempt, $result, $errors);
                 Log::warning('BIG5_RESULT_PAGE_V2_PRODUCTION_PAYLOAD_INVALID', [
@@ -501,6 +501,8 @@ final class BigFiveResultPageV2RuntimeWrapper
             routeInput: $routeInput,
             routeRow: $routeRow,
             formCode: $this->resolveFormCode($attempt, $formSummary),
+            attemptId: (string) ($attempt->id ?? ''),
+            resultVersion: $this->resultVersion($result, $responsePayload),
         );
         $selection = (new BigFiveV2DeterministicSelector)->select($input);
         try {
@@ -591,6 +593,21 @@ final class BigFiveResultPageV2RuntimeWrapper
         }
 
         return [];
+    }
+
+    /** @param array<string,mixed> $responsePayload */
+    private function resultVersion(Result $result, array $responsePayload): string
+    {
+        $scoreResult = $this->scoreResult($result);
+
+        return $this->firstNonEmptyString([
+            data_get($scoreResult, 'engine_version'),
+            $result->report_engine_version,
+            $result->scoring_spec_version,
+            data_get($responsePayload, 'big5_public_projection_v1._meta.engine_version'),
+            data_get($responsePayload, 'report._meta.big5_public_projection_v1._meta.engine_version'),
+            data_get($result->result_json, 'engine_version'),
+        ], BigFiveV2PilotPayloadComposer::CONTENT_VERSION);
     }
 
     /**

@@ -11,6 +11,9 @@ final readonly class BigFiveV2RouteInput
      * @param  array<string,string>  $displayBandLabels
      * @param  list<array<string,mixed>>  $facetRouteSignals
      * @param  list<string>  $suppressionHints
+     * @param  array<string,int>  $domainScores
+     * @param  array<string,int>  $domainPercentiles
+     * @param  list<string>  $qualityFlags
      */
     public function __construct(
         public array $domainRouteBands,
@@ -20,6 +23,12 @@ final readonly class BigFiveV2RouteInput
         public string $normStatus,
         public array $facetRouteSignals = [],
         public array $suppressionHints = [],
+        public array $domainScores = [],
+        public array $domainPercentiles = [],
+        public array $qualityFlags = [],
+        public string $normGroupId = '',
+        public string $normVersion = '',
+        public bool $percentileDisplayEligible = false,
     ) {}
 
     /**
@@ -35,6 +44,12 @@ final readonly class BigFiveV2RouteInput
             'norm_status' => $this->normStatus,
             'facet_route_signals' => $this->facetRouteSignals,
             'suppression_hints' => $this->suppressionHints,
+            'domain_scores' => $this->domainScores,
+            'domain_percentiles' => $this->domainPercentiles,
+            'quality_flags' => $this->qualityFlags,
+            'norm_group_id' => $this->normGroupId,
+            'norm_version' => $this->normVersion,
+            'percentile_display_eligible' => $this->percentileDisplayEligible,
         ];
     }
 }

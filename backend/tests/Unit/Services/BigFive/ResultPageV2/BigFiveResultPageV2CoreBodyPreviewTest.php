@@ -6667,6 +6667,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $changed = [
             'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2RuntimeWrapper.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Validator.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -13011,6 +13012,7 @@ DIFF;
     private function isBigFiveV2PilotSupportFile(string $file): bool
     {
         return $file === 'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2RuntimeWrapper.php'
+            || $file === 'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Validator.php'
             || $file === 'backend/app/Services/BigFive/ResultPageV2/BigFiveV2PilotRuntimeObservability.php'
             || preg_match('#^backend/app/Services/BigFive/ResultPageV2/(ContentAssets|RouteMatrix|Selector|Composer|Access|Routing|Pdf|Share|History|Compare|Rollout|Observability)/[A-Za-z0-9_]+\.php$#', $file) === 1;
     }

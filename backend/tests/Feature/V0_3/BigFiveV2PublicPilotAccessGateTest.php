@@ -140,6 +140,9 @@ final class BigFiveV2PublicPilotAccessGateTest extends TestCase
             'public_pilot_allowed_environments' => ['production', 'testing'],
             'public_pilot_production_allowlist_enabled' => true,
             'public_pilot_access_allowed_anon_ids' => [$fixture['anon_id']],
+            'production_import_gate_passed' => true,
+            'production_release_snapshot_id' => 'snapshot_public_pilot_test',
+            'production_approved_release_snapshot_ids' => ['snapshot_public_pilot_test'],
         ]);
 
         $payload = app(BigFiveResultPageV2RuntimeWrapper::class)->appendIfEnabled(

@@ -5,67 +5,74 @@ declare(strict_types=1);
 namespace Tests\Unit\Services\BigFive\ResultPageV2;
 
 use App\Services\BigFive\ResultPageV2\RouteMatrix\BigFiveV2RouteMatrixParser;
+use App\Services\BigFive\ResultPageV2\Routing\BigFiveV2ProjectionRouteInputAdapter;
+use App\Services\BigFive\ResultPageV2\Routing\BigFiveV2RouteDrivenSelectorInputBuilder;
 use App\Services\BigFive\ResultPageV2\Selector\BigFiveV2DeterministicSelector;
 use App\Services\BigFive\ResultPageV2\Selector\BigFiveV2SelectedAssetRef;
 use App\Services\BigFive\ResultPageV2\Selector\BigFiveV2SelectorInput;
+use ReflectionMethod;
+use RuntimeException;
 use Tests\TestCase;
 
 final class BigFiveResultPageV2DeterministicSelectorTest extends TestCase
 {
-    private const GOLDEN_CASES_PATH = 'content_assets/big5/result_page_v2/selector_qa_policy/v0_1/big5_result_page_v2_selector_qa_policy_v0_1_golden_cases.json';
-
-    private const SELECTOR_ASSETS_PATH = 'content_assets/big5/result_page_v2/selector_ready_assets/v0_3_p0_full/assets.json';
-
-    public function test_o59_golden_case_selects_expected_available_asset_refs(): void
+    public function test_route_driven_selector_only_selects_exact_shortlist_winners(): void
     {
-        $result = $this->selector()->select($this->o59Input());
-        $selectedSlots = array_map(
-            static fn (BigFiveV2SelectedAssetRef $ref): string => $ref->slotKey,
+        $input = $this->o59Input();
+        $result = (new BigFiveV2DeterministicSelector)->select($input);
+        $allowed = array_fill_keys($input->includeAssetKeys, true);
+
+        $this->assertNotSame([], $result->selectedAssetRefs);
+        foreach ($result->selectedAssetRefs as $ref) {
+            $this->assertArrayHasKey($ref->assetKey, $allowed, $ref->assetKey);
+        }
+
+        $assetKeys = array_map(
+            static fn (BigFiveV2SelectedAssetRef $ref): string => $ref->assetKey,
             $result->selectedAssetRefs,
         );
-        $expectedAvailableSlots = array_values(array_diff($this->o59ExpectedSlots(), $this->o59ExpectedSuppressedSlots($result)));
-
-        $this->assertSame($expectedAvailableSlots, $selectedSlots);
-        $this->assertCount(count($expectedAvailableSlots), $result->selectedAssetRefs);
-        $this->assertSame('staging_only', $result->safetyDecisions['runtime_use']);
-        $this->assertFalse($result->safetyDecisions['production_use_allowed']);
-        $this->assertFalse($result->safetyDecisions['ready_for_pilot']);
-        $this->assertFalse($result->safetyDecisions['ready_for_runtime']);
-        $this->assertFalse($result->safetyDecisions['ready_for_production']);
+        $this->assertSame($assetKeys, array_values(array_unique($assetKeys)));
+        $this->assertSame([], $result->pendingSurfaces);
+        $this->assertTrue($result->safetyDecisions['body_composition_allowed']);
         $this->assertFalse($result->safetyDecisions['consumer_side_body_fallback_allowed']);
-        $this->assertFalse($result->safetyDecisions['body_composition_allowed']);
+        $this->assertSame('testing', $result->safetyDecisions['runtime_use']);
     }
 
-    public function test_selected_refs_resolve_through_selector_ready_assets_and_do_not_include_unresolved_refs(): void
+    public function test_application_scenario_and_facet_each_have_one_stable_winner(): void
     {
-        $result = $this->selector()->select($this->o59Input());
-        $assetKeys = $this->selectorAssetKeys();
-        $suppressedAssetKeys = $this->suppressedAssetKeys($result);
+        $result = (new BigFiveV2DeterministicSelector)->select($this->o59Input());
+        $applicationSlots = [];
+        $facetSlots = [];
 
         foreach ($result->selectedAssetRefs as $ref) {
-            $this->assertArrayHasKey($ref->assetKey, $assetKeys, $ref->assetKey);
-            $this->assertArrayNotHasKey($ref->assetKey, $suppressedAssetKeys, $ref->assetKey);
-        }
-
-        $this->assertSame(92, count($result->unresolvedRefSuppressions));
-        $this->assertSame(count($suppressedAssetKeys), count($result->unresolvedRefSuppressions));
-        $this->assertSame(count($suppressedAssetKeys), count($result->suppressedAssetRefs));
-        $this->assertSame(
-            array_keys($suppressedAssetKeys),
-            array_map(static fn (array $suppression): string => (string) $suppression['asset_key'], $result->unresolvedRefSuppressions),
-        );
-
-        foreach ($result->unresolvedRefSuppressions as $suppression) {
-            foreach ((array) ($suppression['references'] ?? []) as $reference) {
-                $this->assertContains($reference['reference_type'] ?? null, ['coupling_key', 'profile_key', 'scenario_key']);
+            if ($ref->moduleKey === 'module_06_application_matrix') {
+                $scenario = match (true) {
+                    str_contains($ref->slotKey, '.work_') => 'workplace',
+                    str_contains($ref->slotKey, '.relationship_') => 'relationships',
+                    str_contains($ref->slotKey, '.stress_') => 'stress_recovery',
+                    str_contains($ref->slotKey, '.action_') => 'personal_growth',
+                    default => '',
+                };
+                $applicationSlots[] = $scenario;
+            }
+            if ($ref->moduleKey === 'module_05_facet_reframe') {
+                $facetSlots[] = $ref->slotKey;
             }
         }
+
+        $this->assertSame(['workplace', 'relationships', 'stress_recovery', 'personal_growth'], $applicationSlots);
+        $this->assertSame($applicationSlots, array_values(array_unique($applicationSlots)));
+        $this->assertSame([
+            'module_05_facet_reframe.facet_card.c1.low',
+            'module_05_facet_reframe.facet_card.n1.high',
+        ], $facetSlots);
     }
 
-    public function test_selector_output_contains_refs_and_suppression_only_not_body_payload(): void
+    public function test_selected_refs_do_not_leak_registry_bodies_or_candidate_universe(): void
     {
-        $result = $this->selector()->select($this->o59Input())->toArray();
-        $encodedSelectedRefs = json_encode($result['selected_asset_refs'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+        $input = $this->o59Input();
+        $result = (new BigFiveV2DeterministicSelector)->select($input)->toArray();
+        $encoded = json_encode($result['selected_asset_refs'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
 
         foreach ([
             'body_zh',
@@ -77,181 +84,94 @@ final class BigFiveResultPageV2DeterministicSelectorTest extends TestCase
             'frontend_fallback',
             '[object Object]',
         ] as $forbiddenKeyOrTerm) {
-            $this->assertStringNotContainsString($forbiddenKeyOrTerm, $encodedSelectedRefs, $forbiddenKeyOrTerm);
+            $this->assertStringNotContainsString($forbiddenKeyOrTerm, $encoded, $forbiddenKeyOrTerm);
         }
 
-        $this->assertArrayHasKey('selected_asset_refs', $result);
-        $this->assertArrayHasKey('suppressed_asset_refs', $result);
-        $this->assertArrayHasKey('unresolved_ref_suppressions', $result);
-        $this->assertArrayHasKey('safety_decisions', $result);
-        $this->assertArrayHasKey('selection_trace_internal', $result);
+        $this->assertLessThan(count($input->includeAssetKeys), count($result['selected_asset_refs']));
+        $this->assertSame(count($result['selected_asset_refs']), data_get($result, 'selection_trace_internal.selected_asset_count'));
     }
 
-    public function test_invalid_scale_code_fails_closed_without_selecting_assets(): void
+    public function test_zero_required_core_assets_fails_closed(): void
     {
+        $source = $this->o59Input();
         $input = new BigFiveV2SelectorInput(
             scaleCode: 'MBTI',
-            formCode: 'big5_120',
-            domainBands: ['O' => 'mid', 'C' => 'low', 'E' => 'low', 'A' => 'mid', 'N' => 'high'],
-            domainScores: ['O' => 59, 'C' => 32, 'E' => 20, 'A' => 55, 'N' => 68],
-            facetSignals: [],
-            qualityStatus: 'valid',
-            normStatus: 'available',
-            readingMode: 'quick',
-            scenario: null,
-            routeRow: $this->o59RouteRow(),
-            includeSlots: $this->o59ExpectedSlots(),
-            includeRegistryKeys: ['profile_signature_registry', 'domain_registry', 'coupling_registry', 'scenario_registry'],
+            formCode: $source->formCode,
+            domainBands: $source->domainBands,
+            domainScores: $source->domainScores,
+            facetSignals: $source->facetSignals,
+            qualityStatus: $source->qualityStatus,
+            normStatus: $source->normStatus,
+            readingMode: $source->readingMode,
+            scenario: $source->scenario,
+            routeRow: $source->routeRow,
+            includeSlots: $source->includeSlots,
+            includeRegistryKeys: $source->includeRegistryKeys,
+            enableResolvedCouplingRefs: $source->enableResolvedCouplingRefs,
+            includeAssetKeys: $source->includeAssetKeys,
+            requiredSemanticSlots: $source->requiredSemanticSlots,
+            domainPercentiles: $source->domainPercentiles,
+            qualityFlags: $source->qualityFlags,
+            attemptId: $source->attemptId,
+            resultVersion: $source->resultVersion,
+            normGroupId: $source->normGroupId,
+            normVersion: $source->normVersion,
+            percentileDisplayAllowed: $source->percentileDisplayAllowed,
+            interpretationScope: $source->interpretationScope,
         );
 
-        $result = $this->selector()->select($input);
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('required core asset selection failed');
 
-        $this->assertSame([], $result->selectedAssetRefs);
-        $this->assertFalse($result->safetyDecisions['unresolved_refs_selectable']);
-        $this->assertFalse($result->safetyDecisions['body_composition_allowed']);
+        (new BigFiveV2DeterministicSelector)->select($input);
     }
 
-    public function test_selector_can_select_resolved_canonical_alias_and_supplemental_coupling_refs(): void
+    public function test_review_status_gate_allows_production_ready_and_requires_release_gate_for_drafts(): void
     {
-        $input = new BigFiveV2SelectorInput(
-            scaleCode: 'BIG5_OCEAN',
-            formCode: 'big5_120',
-            domainBands: ['O' => 'mid', 'C' => 'low', 'E' => 'low', 'A' => 'mid', 'N' => 'high'],
-            domainScores: ['O' => 59, 'C' => 32, 'E' => 20, 'A' => 55, 'N' => 68],
-            facetSignals: [],
-            qualityStatus: 'valid',
-            normStatus: 'available',
-            readingMode: 'standard',
-            scenario: null,
-            routeRow: $this->o59RouteRow(),
-            includeSlots: [
-                'module_04_coupling.coupling_card.o_c.high_low',
-                'module_04_coupling.coupling_card.c_e.low_low',
-                'module_04_coupling.coupling_card.o_c.high_high',
-            ],
-            includeRegistryKeys: ['coupling_registry'],
-            enableResolvedCouplingRefs: true,
-        );
+        $selector = new BigFiveV2DeterministicSelector;
+        $method = new ReflectionMethod($selector, 'reviewStatusAllowed');
 
-        $result = $this->selector()->select($input);
+        $this->assertTrue($method->invoke($selector, 'production_ready'));
+        $this->assertTrue($method->invoke($selector, 'draft_for_psychometric_review'));
 
-        $this->assertSame([
-            'asset.module_04_coupling.coupling_registry.o_c_high_low.v0_3',
-            'asset.module_04_coupling.coupling_registry.c_e_low_low.v0_3',
-            'asset.module_04_coupling.coupling_registry.o_c_high_high.v0_3',
-        ], array_map(static fn (BigFiveV2SelectedAssetRef $ref): string => $ref->assetKey, $result->selectedAssetRefs));
+        app()->detectEnvironment(static fn (): string => 'production');
+        try {
+            config()->set('big5_result_page_v2.production_import_gate_passed', false);
+            config()->set('big5_result_page_v2.production_release_snapshot_id', 'release-v0-4');
+            config()->set('big5_result_page_v2.production_approved_release_snapshot_ids', ['release-v0-4']);
+            $this->assertTrue($method->invoke($selector, 'production_ready'));
+            $this->assertFalse($method->invoke($selector, 'draft_for_psychometric_review'));
 
-        foreach ($result->unresolvedRefSuppressions as $suppression) {
-            foreach ((array) ($suppression['references'] ?? []) as $reference) {
-                $this->assertNotSame('coupling_key', $reference['reference_type'] ?? null);
-            }
+            config()->set('big5_result_page_v2.production_import_gate_passed', true);
+            $this->assertTrue($method->invoke($selector, 'draft_for_psychometric_review'));
+        } finally {
+            app()->detectEnvironment(static fn (): string => 'testing');
         }
-
-        $this->assertSame(51, count($result->unresolvedRefSuppressions));
-
-        $this->assertFalse($result->safetyDecisions['unresolved_refs_selectable']);
-        $this->assertFalse($result->safetyDecisions['body_composition_allowed']);
-    }
-
-    private function selector(): BigFiveV2DeterministicSelector
-    {
-        return new BigFiveV2DeterministicSelector;
     }
 
     private function o59Input(): BigFiveV2SelectorInput
     {
-        return BigFiveV2SelectorInput::fromGoldenCase($this->o59GoldenCase(), $this->o59RouteRow());
-    }
+        $routeInput = (new BigFiveV2ProjectionRouteInputAdapter)->fromScoreResult([
+            'scale_code' => 'BIG5_OCEAN',
+            'scores_0_100' => [
+                'domains_percentile' => ['O' => 59, 'C' => 32, 'E' => 20, 'A' => 55, 'N' => 68],
+                'facets_percentile' => ['N1' => 82, 'C1' => 24],
+            ],
+            'quality' => ['level' => 'A'],
+            'norms' => ['status' => 'CALIBRATED'],
+        ]);
+        $this->assertNotNull($routeInput);
 
-    private function o59RouteRow(): \App\Services\BigFive\ResultPageV2\RouteMatrix\BigFiveV2RouteMatrixRow
-    {
-        $result = (new BigFiveV2RouteMatrixParser)->parse();
-        $this->assertSame([], $result->errors);
-
-        $row = $result->row(BigFiveV2RouteMatrixParser::O59_COMBINATION_KEY);
+        $parsed = (new BigFiveV2RouteMatrixParser)->parse();
+        $this->assertSame([], $parsed->errors);
+        $row = $parsed->row(BigFiveV2RouteMatrixParser::O59_COMBINATION_KEY);
         $this->assertNotNull($row);
 
-        return $row;
-    }
-
-    /**
-     * @return array<string,mixed>
-     */
-    private function o59GoldenCase(): array
-    {
-        foreach ($this->decodeJson(self::GOLDEN_CASES_PATH) as $case) {
-            if (($case['case_key'] ?? null) === 'golden_case_31_o59_canonical_preview') {
-                return $case;
-            }
-        }
-
-        $this->fail('O59 canonical golden case is missing.');
-    }
-
-    /**
-     * @return list<string>
-     */
-    private function o59ExpectedSlots(): array
-    {
-        return array_values((array) data_get($this->o59GoldenCase(), 'expected_selection.include_slots'));
-    }
-
-    /**
-     * @return list<string>
-     */
-    private function o59ExpectedSuppressedSlots(\App\Services\BigFive\ResultPageV2\Selector\BigFiveV2SelectionResult $result): array
-    {
-        $suppressedAssetKeys = $this->suppressedAssetKeys($result);
-        $unresolvedSlots = [];
-
-        foreach ($this->decodeJson(self::SELECTOR_ASSETS_PATH) as $asset) {
-            if (isset($suppressedAssetKeys[(string) ($asset['asset_key'] ?? '')])) {
-                $unresolvedSlots[] = (string) ($asset['slot_key'] ?? '');
-            }
-        }
-
-        return array_values(array_intersect($this->o59ExpectedSlots(), $unresolvedSlots));
-    }
-
-    /**
-     * @return array<string,true>
-     */
-    private function selectorAssetKeys(): array
-    {
-        $keys = [];
-        foreach ($this->decodeJson(self::SELECTOR_ASSETS_PATH) as $asset) {
-            $keys[(string) ($asset['asset_key'] ?? '')] = true;
-        }
-        unset($keys['']);
-
-        return $keys;
-    }
-
-    /**
-     * @return array<string,true>
-     */
-    private function suppressedAssetKeys(\App\Services\BigFive\ResultPageV2\Selector\BigFiveV2SelectionResult $result): array
-    {
-        $keys = [];
-        foreach ($result->unresolvedRefSuppressions as $suppression) {
-            $keys[(string) ($suppression['asset_key'] ?? '')] = true;
-        }
-        unset($keys['']);
-        ksort($keys);
-
-        return $keys;
-    }
-
-    /**
-     * @return array<int|string,mixed>
-     */
-    private function decodeJson(string $relativePath): array
-    {
-        $json = file_get_contents(base_path($relativePath));
-        $this->assertIsString($json);
-        $decoded = json_decode($json, true, flags: JSON_THROW_ON_ERROR);
-        $this->assertIsArray($decoded);
-
-        return $decoded;
+        return (new BigFiveV2RouteDrivenSelectorInputBuilder)->build(
+            $routeInput,
+            $row,
+            attemptId: 'attempt-real-o59',
+            resultVersion: 'engine-real-v7',
+        );
     }
 }

@@ -72,7 +72,7 @@ final class BigFiveResultPageV2RouteDrivenFixtureTest extends TestCase
         ], $profiles);
     }
 
-    public function test_route_driven_fixtures_are_validator_clean_and_profile_aligned(): void
+    public function test_historical_route_driven_pilot_fixtures_are_not_production_valid_but_remain_profile_aligned(): void
     {
         $validator = app(BigFiveResultPageV2Validator::class);
 
@@ -81,7 +81,12 @@ final class BigFiveResultPageV2RouteDrivenFixtureTest extends TestCase
             $payload = $envelope[BigFiveResultPageV2Contract::PAYLOAD_KEY] ?? null;
             $this->assertIsArray($payload, $fixtureKey);
 
-            $this->assertSame([], $validator->validateEnvelope($envelope), $fixtureKey);
+            $errors = $validator->validateProductionEnvelope($envelope);
+            $this->assertContains('Forbidden public field big5_result_page_v2.fixture_key', $errors, $fixtureKey);
+            $this->assertTrue(
+                count(array_filter($errors, static fn (string $error): bool => str_contains($error, 'placeholder or deferred'))) > 0,
+                $fixtureKey,
+            );
             $this->assertSame($fixture['profile'], $payload['canonical_profile_key'] ?? null, $fixtureKey);
 
             if (isset($fixture['combination_key'])) {

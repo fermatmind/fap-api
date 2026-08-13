@@ -75,6 +75,7 @@ return [
         explode(',', (string) env('BIG5_RESULT_PAGE_V2_PRODUCTION_DISABLED_RELEASE_SNAPSHOT_IDS', '')),
     ))),
     'production_emergency_disabled' => env('BIG5_RESULT_PAGE_V2_PRODUCTION_EMERGENCY_DISABLED', false),
+    'public_percentile_display_enabled' => env('BIG5_RESULT_PAGE_V2_PUBLIC_PERCENTILE_DISPLAY_ENABLED', false),
     'production_rollout_enabled' => env('BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_ENABLED', false),
     'production_rollout_mode' => env('BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_MODE', 'disabled'),
     'production_rollout_manual_approval_granted' => env('BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_MANUAL_APPROVAL_GRANTED', false),

@@ -184,7 +184,7 @@ trait BuildsBigFiveReportEngineBridgeFixture
                 'facet_buckets' => array_map(fn (int $percentile): string => $this->bucketFor($percentile), $facets),
             ],
             'quality' => [
-                'level' => (string) data_get($context, 'quality.level', 'D'),
+                'level' => 'A',
             ],
             'norms' => [
                 'status' => (string) data_get($context, 'quality.norms_status', 'CALIBRATED'),

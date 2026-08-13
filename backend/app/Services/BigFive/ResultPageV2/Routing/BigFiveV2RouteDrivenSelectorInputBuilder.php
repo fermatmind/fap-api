@@ -29,6 +29,8 @@ final class BigFiveV2RouteDrivenSelectorInputBuilder
         string $scaleCode = 'BIG5_OCEAN',
         string $formCode = 'big5_120',
         ?string $scenario = null,
+        string $attemptId = '',
+        string $resultVersion = '',
     ): BigFiveV2SelectorInput {
         $slots = [];
         $registries = [];
@@ -41,11 +43,23 @@ final class BigFiveV2RouteDrivenSelectorInputBuilder
         $this->includeFacetSlots($routeInput, $readingMode, $suppressed, $slots, $registries);
         $this->includeScenarioSlots($routeRow, $readingMode, $suppressed, $slots, $registries);
 
+        $interpretationScope = $this->effectiveInterpretationScope($routeInput, $routeRow);
+        $assetKeys = $this->matchingAssetKeys(
+            $routeInput,
+            $routeRow,
+            $readingMode,
+            $formCode,
+            $scenario,
+            $interpretationScope,
+            array_keys($slots),
+            array_keys($registries),
+        );
+
         return new BigFiveV2SelectorInput(
             scaleCode: $scaleCode,
             formCode: $formCode,
             domainBands: $domainBands,
-            domainScores: $routeInput->domainRouteBands,
+            domainScores: $routeInput->domainScores,
             facetSignals: $routeInput->facetRouteSignals,
             qualityStatus: $routeInput->qualityStatus,
             normStatus: $routeInput->normStatus,
@@ -55,7 +69,228 @@ final class BigFiveV2RouteDrivenSelectorInputBuilder
             includeSlots: array_keys($slots),
             includeRegistryKeys: array_keys($registries),
             enableResolvedCouplingRefs: true,
+            includeAssetKeys: $assetKeys,
+            requiredSemanticSlots: array_map(
+                static fn (string $trait): string => "module_01_hero:domain:{$trait}",
+                ['O', 'C', 'E', 'A', 'N'],
+            ),
+            domainPercentiles: $routeInput->domainPercentiles,
+            qualityFlags: $routeInput->qualityFlags,
+            attemptId: trim($attemptId),
+            resultVersion: trim($resultVersion),
+            normGroupId: $routeInput->normGroupId,
+            normVersion: $routeInput->normVersion,
+            percentileDisplayAllowed: $routeInput->percentileDisplayEligible
+                && (bool) config('big5_result_page_v2.public_percentile_display_enabled', false),
+            interpretationScope: $interpretationScope,
         );
+    }
+
+    private function effectiveInterpretationScope(BigFiveV2RouteInput $routeInput, BigFiveV2RouteMatrixRow $routeRow): string
+    {
+        if ($routeInput->qualityStatus !== 'valid') {
+            return 'low_quality';
+        }
+
+        if ($routeInput->normStatus === 'missing') {
+            return 'norm_unavailable';
+        }
+
+        if ($routeRow->interpretationScope === 'high_tension_or_mixed') {
+            return data_get($routeRow->toArray(), 'tension_level') === 'high'
+                ? 'high_tension_profile'
+                : 'mixed_signature';
+        }
+        if ($routeRow->interpretationScope === 'balanced_or_diffuse') {
+            return 'balanced_profile';
+        }
+
+        return $routeRow->interpretationScope;
+    }
+
+    /**
+     * Build an ordered shortlist of exact asset identities. The selector revalidates
+     * every candidate and chooses one winner for each semantic slot.
+     *
+     * @param  list<string>  $includeSlots
+     * @param  list<string>  $includeRegistries
+     * @return list<string>
+     */
+    private function matchingAssetKeys(
+        BigFiveV2RouteInput $routeInput,
+        BigFiveV2RouteMatrixRow $routeRow,
+        string $readingMode,
+        string $formCode,
+        ?string $scenario,
+        string $interpretationScope,
+        array $includeSlots,
+        array $includeRegistries,
+    ): array {
+        $slots = array_fill_keys($includeSlots, true);
+        $registries = array_fill_keys($includeRegistries, true);
+        $keys = [];
+
+        foreach ($this->selectorAssets() as $asset) {
+            $assetKey = trim((string) ($asset['asset_key'] ?? ''));
+            if ($assetKey === ''
+                || ! isset($slots[(string) ($asset['slot_key'] ?? '')])
+                || ! isset($registries[(string) ($asset['registry_key'] ?? '')])) {
+                continue;
+            }
+
+            if ($this->assetMatchesContext(
+                $asset,
+                $routeInput,
+                $routeRow,
+                $readingMode,
+                $formCode,
+                $scenario,
+                $interpretationScope,
+            )) {
+                $keys[] = $assetKey;
+            }
+        }
+
+        return array_values(array_unique($keys));
+    }
+
+    /**
+     * @param  array<string,mixed>  $asset
+     */
+    private function assetMatchesContext(
+        array $asset,
+        BigFiveV2RouteInput $routeInput,
+        BigFiveV2RouteMatrixRow $routeRow,
+        string $readingMode,
+        string $formCode,
+        ?string $scenario,
+        string $interpretationScope,
+    ): bool {
+        if (! $this->assetSupportsReadingMode($asset, $readingMode)) {
+            return false;
+        }
+
+        $trigger = (array) ($asset['trigger'] ?? []);
+        foreach ((array) ($trigger['domain_bands'] ?? []) as $trait => $allowedBands) {
+            if (! in_array($this->domainBands($routeInput, $routeRow)[(string) $trait] ?? '', (array) $allowedBands, true)) {
+                return false;
+            }
+        }
+
+        $scopes = (array) ($trigger['interpretation_scope'] ?? []);
+        if ($scopes !== [] && ! in_array($interpretationScope, $scopes, true)) {
+            return false;
+        }
+
+        $qualityStatuses = (array) ($trigger['quality_status'] ?? []);
+        if ($qualityStatuses !== [] && ! in_array($routeInput->qualityStatus, $qualityStatuses, true)) {
+            return false;
+        }
+
+        $normStatuses = (array) ($trigger['norm_status'] ?? []);
+        $normStatus = $routeInput->normStatus === 'missing' ? 'unavailable' : $routeInput->normStatus;
+        if ($normStatuses !== [] && ! in_array($normStatus, $normStatuses, true)) {
+            return false;
+        }
+
+        $formCodes = (array) data_get($asset, 'scope.form_codes', []);
+        if ($formCodes !== [] && ! in_array($formCode, $formCodes, true)) {
+            return false;
+        }
+
+        if (! $this->matchesFacetContext($trigger, $routeInput)) {
+            return false;
+        }
+
+        if (! $this->matchesScenarioContext($trigger, $routeRow, $scenario)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  array<string,mixed>  $trigger
+     */
+    private function matchesFacetContext(array $trigger, BigFiveV2RouteInput $routeInput): bool
+    {
+        $patterns = (array) ($trigger['facet_patterns'] ?? []);
+        if ($patterns === []) {
+            return true;
+        }
+
+        foreach ($patterns as $pattern) {
+            if (! is_array($pattern)) {
+                continue;
+            }
+            $facet = strtoupper(trim((string) ($pattern['facet'] ?? '')));
+            foreach ($routeInput->facetRouteSignals as $signal) {
+                if (strtoupper((string) ($signal['key'] ?? $signal['facet'] ?? '')) !== $facet) {
+                    continue;
+                }
+                $band = $this->facetBand($signal);
+                if ($band !== null && in_array($band, (array) ($pattern['band'] ?? []), true)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param  array<string,mixed>  $signal
+     */
+    private function facetBand(array $signal): ?string
+    {
+        $bucket = strtolower(trim((string) ($signal['bucket'] ?? '')));
+        if (in_array($bucket, ['very_low', 'low', 'mid', 'high', 'very_high'], true)) {
+            return $bucket;
+        }
+
+        $percentile = $signal['percentile'] ?? null;
+        if (! is_numeric($percentile)) {
+            return null;
+        }
+
+        $value = (int) $percentile;
+
+        return match (true) {
+            $value < 20 => 'very_low',
+            $value < 40 => 'low',
+            $value < 60 => 'mid',
+            $value < 80 => 'high',
+            default => 'very_high',
+        };
+    }
+
+    /**
+     * @param  array<string,mixed>  $trigger
+     */
+    private function matchesScenarioContext(array $trigger, BigFiveV2RouteMatrixRow $routeRow, ?string $scenario): bool
+    {
+        $assetScenarios = array_values(array_filter(array_map('strval', (array) ($trigger['scenario'] ?? []))));
+        if ($assetScenarios === []) {
+            return true;
+        }
+
+        $allowed = [];
+        $source = $scenario !== null && trim($scenario) !== ''
+            ? [trim($scenario)]
+            : (array) data_get($routeRow->toArray(), 'scenario_priorities', []);
+        foreach ($source as $routeScenario) {
+            foreach ($this->scenarioAliases((string) $routeScenario) as $alias) {
+                $allowed[$alias] = true;
+            }
+        }
+
+        foreach ($assetScenarios as $assetScenario) {
+            if (isset($allowed[$assetScenario])) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

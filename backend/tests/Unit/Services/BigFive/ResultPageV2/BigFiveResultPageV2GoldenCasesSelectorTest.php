@@ -23,8 +23,11 @@ final class BigFiveResultPageV2GoldenCasesSelectorTest extends TestCase
             $result = $selector->select($input);
 
             $this->assertFalse($result->safetyDecisions['unresolved_refs_selectable']);
-            $this->assertFalse($result->safetyDecisions['body_composition_allowed']);
+            $this->assertTrue($result->safetyDecisions['body_composition_allowed']);
             $this->assertSame(92, count($result->unresolvedRefSuppressions));
+            $this->assertArrayNotHasKey('ready_for_pilot', $result->safetyDecisions);
+            $this->assertArrayNotHasKey('ready_for_runtime', $result->safetyDecisions);
+            $this->assertArrayNotHasKey('ready_for_production', $result->safetyDecisions);
 
             foreach ($result->selectedAssetRefs as $ref) {
                 $this->assertNotSame('', $ref->assetKey);
@@ -40,10 +43,9 @@ final class BigFiveResultPageV2GoldenCasesSelectorTest extends TestCase
 
         $this->assertSame('O3_C2_E2_A3_N4', data_get($result->selectionTraceInternal, 'route_combination_key'));
         $this->assertSame('sensitive_independent_thinker', data_get($result->selectionTraceInternal, 'route_profile_key'));
-        $this->assertSame(6, count($result->selectedAssetRefs));
-        $this->assertFalse($result->safetyDecisions['ready_for_pilot']);
-        $this->assertFalse($result->safetyDecisions['ready_for_runtime']);
-        $this->assertFalse($result->safetyDecisions['ready_for_production']);
+        $this->assertSame([], $result->selectedAssetRefs);
+        $this->assertSame([], $result->pendingSurfaces);
+        $this->assertTrue($result->safetyDecisions['selection_complete']);
     }
 
     private function o59RouteRow(): \App\Services\BigFive\ResultPageV2\RouteMatrix\BigFiveV2RouteMatrixRow
