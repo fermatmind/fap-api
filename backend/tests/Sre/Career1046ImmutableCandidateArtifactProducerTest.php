@@ -7,6 +7,7 @@ namespace Tests\Sre;
 use App\Console\Commands\CareerPublicResolutionTypeMatrix;
 use App\Domain\Career\Publish\Career1046ImmutableCandidateGenerator;
 use App\Domain\Career\Publish\CareerFullReleaseLedgerService;
+use App\Domain\Career\Publish\CareerGenerationAuthorityLoader;
 use App\Domain\Career\Publish\CareerGenerationCanonicalJson;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use FermatMind\Operations\Career1046ImmutableCandidateArtifactFailure;
@@ -122,6 +123,7 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
             $full,
             $active,
             $this->activeBaselineProjection($manifest),
+            $this->activePointer(),
             $manifest,
         );
         $rows = collect($merged['members'])->keyBy(static fn (array $row): string => (string) ($row['source_slug'] ?? $row['canonical_slug']));
@@ -166,6 +168,7 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
                     $this->fullLedgerWithOutsideForbiddenMember(),
                     ['ledger_kind' => CareerFullReleaseLedgerService::LEDGER_KIND, 'public_resolution' => ['rows' => $activeRows]],
                     $this->activeBaselineProjection($manifest),
+                    $this->activePointer(),
                     $manifest,
                 );
                 self::fail($case.' active baseline authority did not fail closed');
@@ -192,12 +195,51 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
                     $this->fullLedgerWithOutsideForbiddenMember(),
                     ['ledger_kind' => CareerFullReleaseLedgerService::LEDGER_KIND, 'members' => $activeRows],
                     $projection,
+                    $this->activePointer(),
                     $manifest,
                 );
                 self::fail($case.' active baseline projection did not fail closed');
             } catch (Career1046ImmutableCandidateArtifactFailure $failure) {
                 self::assertSame('CANDIDATE_PROJECTION_AUTHORITY_INCOMPLETE', $failure->safeCode);
             }
+        }
+    }
+
+    public function test_legacy_exact_bytes_projection_uses_its_published_state_without_inventing_absent_modern_flags(): void
+    {
+        $manifest = $this->manifest();
+        $activeRows = array_map(static fn (string $slug): array => ['source_slug' => $slug], $manifest['baseline_slugs']);
+        $projection = $this->activeBaselineProjection($manifest);
+        foreach ($projection['items'] as &$item) {
+            unset($item['detail_route_enabled'], $item['robots_indexable']);
+        }
+        unset($item);
+
+        $merged = Career1046ImmutableCandidateArtifactProducer::mergeActiveBaselineLedger(
+            $this->fullLedgerWithOutsideForbiddenMember(),
+            ['ledger_kind' => CareerFullReleaseLedgerService::LEDGER_KIND, 'members' => $activeRows],
+            $projection,
+            $this->activePointer(CareerGenerationAuthorityLoader::ARTIFACT_FORMAT_LEGACY_EXACT_BYTES),
+            $manifest,
+        );
+
+        $bounded = Career1046ImmutableCandidateArtifactProducer::targetBoundedLedger($merged, $manifest);
+        Career1046ImmutableCandidateArtifactProducer::assertCompletePublishedProjection(
+            (new CareerRuntimePublishProjectionService)->buildFromLedgerArray($bounded),
+            $manifest,
+        );
+
+        try {
+            Career1046ImmutableCandidateArtifactProducer::mergeActiveBaselineLedger(
+                $this->fullLedgerWithOutsideForbiddenMember(),
+                ['ledger_kind' => CareerFullReleaseLedgerService::LEDGER_KIND, 'members' => $activeRows],
+                $projection,
+                $this->activePointer(),
+                $manifest,
+            );
+            self::fail('generation-native projection accepted missing required flags');
+        } catch (Career1046ImmutableCandidateArtifactFailure $failure) {
+            self::assertSame('CANDIDATE_PROJECTION_AUTHORITY_INCOMPLETE', $failure->safeCode);
         }
     }
 
@@ -668,6 +710,12 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
         }
 
         return ['items' => $items];
+    }
+
+    /** @return array<string, mixed> */
+    private function activePointer(string $artifactFormat = CareerGenerationAuthorityLoader::ARTIFACT_FORMAT_GENERATION_NATIVE): array
+    {
+        return ['artifact_format' => $artifactFormat];
     }
 
     /** @return array<string, mixed> */

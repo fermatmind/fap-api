@@ -307,6 +307,7 @@ final class Career1046ImmutableCandidateArtifactProducer
                 $fullLedger,
                 is_array($activeAuthority['ledger'] ?? null) ? $activeAuthority['ledger'] : [],
                 is_array($activeAuthority['projection'] ?? null) ? $activeAuthority['projection'] : [],
+                is_array($activeAuthority['pointer'] ?? null) ? $activeAuthority['pointer'] : [],
                 $manifest,
             );
 
@@ -509,6 +510,7 @@ final class Career1046ImmutableCandidateArtifactProducer
      * @param  array<string, mixed>  $fullLedger
      * @param  array<string, mixed>  $activeLedger
      * @param  array<string, mixed>  $activeProjection
+     * @param  array<string, mixed>  $activePointer
      * @param  array<string, mixed>  $manifest
      * @return array<string, mixed>
      */
@@ -516,6 +518,7 @@ final class Career1046ImmutableCandidateArtifactProducer
         array $fullLedger,
         array $activeLedger,
         array $activeProjection,
+        array $activePointer,
         array $manifest,
     ): array {
         $baseline = self::frozenSlugSet($manifest['baseline_slugs'] ?? null, 'BASELINE');
@@ -538,7 +541,11 @@ final class Career1046ImmutableCandidateArtifactProducer
         }
 
         $baselineLookup = array_fill_keys($baseline, true);
-        self::activePublishedBaselineProjection($activeProjection, $baseline);
+        self::activePublishedBaselineProjection(
+            $activeProjection,
+            $baseline,
+            (string) ($activePointer['artifact_format'] ?? ''),
+        );
         $activeBySlug = [];
         foreach ($activeRows as $row) {
             if (! is_array($row)) {
@@ -605,8 +612,18 @@ final class Career1046ImmutableCandidateArtifactProducer
      * @param  list<string>  $baseline
      * @return array<string, array<string, array<string, mixed>>>
      */
-    private static function activePublishedBaselineProjection(array $activeProjection, array $baseline): array
-    {
+    private static function activePublishedBaselineProjection(
+        array $activeProjection,
+        array $baseline,
+        string $artifactFormat,
+    ): array {
+        if (! in_array($artifactFormat, [
+            CareerGenerationAuthorityLoader::ARTIFACT_FORMAT_GENERATION_NATIVE,
+            CareerGenerationAuthorityLoader::ARTIFACT_FORMAT_LEGACY_EXACT_BYTES,
+        ], true)) {
+            throw new Career1046ImmutableCandidateArtifactFailure('CANDIDATE_PROJECTION_AUTHORITY_INCOMPLETE');
+        }
+        $legacyExactBytes = $artifactFormat === CareerGenerationAuthorityLoader::ARTIFACT_FORMAT_LEGACY_EXACT_BYTES;
         $items = $activeProjection['items'] ?? null;
         if (! is_array($items) || ! array_is_list($items)) {
             throw new Career1046ImmutableCandidateArtifactFailure('CANDIDATE_PROJECTION_AUTHORITY_INCOMPLETE');
@@ -626,8 +643,10 @@ final class Career1046ImmutableCandidateArtifactProducer
                 || isset($bySlug[$slug][$locale])
                 || ($item['public_resolution_type'] ?? null) !== \App\Console\Commands\CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB
                 || ($item['runtime_publish_state'] ?? null) !== CareerRuntimePublishProjectionService::STATE_PUBLISHED
-                || ($item['detail_route_enabled'] ?? null) !== true
-                || ($item['robots_indexable'] ?? null) !== true
+                || (! $legacyExactBytes && ($item['detail_route_enabled'] ?? null) !== true)
+                || ($legacyExactBytes && array_key_exists('detail_route_enabled', $item) && $item['detail_route_enabled'] !== true)
+                || (! $legacyExactBytes && ($item['robots_indexable'] ?? null) !== true)
+                || ($legacyExactBytes && array_key_exists('robots_indexable', $item) && $item['robots_indexable'] !== true)
                 || ($item['release_gate_pass'] ?? null) !== true) {
                 throw new Career1046ImmutableCandidateArtifactFailure('CANDIDATE_PROJECTION_AUTHORITY_INCOMPLETE');
             }
