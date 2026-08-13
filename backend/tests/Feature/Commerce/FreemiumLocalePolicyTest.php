@@ -53,7 +53,7 @@ final class FreemiumLocalePolicyTest extends TestCase
         $this->assertNotContains('MBTI_REPORT_FULL_199', $skus);
     }
 
-    public function test_chinese_sku_policy_returns_full_free_without_offer(): void
+    public function test_chinese_sku_policy_returns_the_shared_199_offer(): void
     {
         $this->seedScales();
 
@@ -63,17 +63,17 @@ final class FreemiumLocalePolicyTest extends TestCase
             ->assertJsonPath('ok', true)
             ->assertJsonPath('locale_freemium_policy.authority', 'backend')
             ->assertJsonPath('locale_freemium_policy.locale_family', 'zh')
-            ->assertJsonPath('locale_freemium_policy.policy', 'free_only')
-            ->assertJsonPath('locale_freemium_policy.report_access_level', 'full')
-            ->assertJsonPath('locale_freemium_policy.paywall_allowed', false)
-            ->assertJsonPath('locale_freemium_policy.order_creation_allowed', false)
-            ->assertJsonPath('locale_freemium_policy.currency', null)
-            ->assertJsonPath('locale_freemium_policy.price_cents', null)
-            ->assertJsonPath('locale_freemium_policy.sku', null)
-            ->assertJsonPath('locale_freemium_policy.upgrade_sku', null);
+            ->assertJsonPath('locale_freemium_policy.policy', 'paid')
+            ->assertJsonPath('locale_freemium_policy.report_access_level', 'free')
+            ->assertJsonPath('locale_freemium_policy.paywall_allowed', true)
+            ->assertJsonPath('locale_freemium_policy.order_creation_allowed', true)
+            ->assertJsonPath('locale_freemium_policy.currency', 'CNY')
+            ->assertJsonPath('locale_freemium_policy.price_cents', 199)
+            ->assertJsonPath('locale_freemium_policy.sku', 'MBTI_REPORT_FULL_199')
+            ->assertJsonPath('locale_freemium_policy.upgrade_sku', 'MBTI_REPORT_FULL_199');
 
         $items = (array) $response->json('items');
-        $this->assertSame([], $items);
+        $this->assertNotEmpty($items);
     }
 
     public function test_english_mbti_report_is_full_free_with_no_cny_offer(): void
@@ -123,9 +123,9 @@ final class FreemiumLocalePolicyTest extends TestCase
             'target_attempt_id' => $attemptId,
         ]);
 
-        $response->assertStatus(404)
+        $response->assertStatus(422)
             ->assertJsonPath('ok', false)
-            ->assertJsonPath('error_code', 'NOT_FOUND');
+            ->assertJsonPath('error_code', 'LOCALE_POLICY_ORDER_NOT_ALLOWED');
 
         $this->assertSame(0, DB::table('orders')->count());
     }

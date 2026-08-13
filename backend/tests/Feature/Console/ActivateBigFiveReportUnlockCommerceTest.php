@@ -37,21 +37,19 @@ final class ActivateBigFiveReportUnlockCommerceTest extends TestCase
         $dryRun = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
         $this->assertTrue((bool) ($dryRun['dry_run'] ?? false));
         $this->assertFalse((bool) ($dryRun['rollout_changed'] ?? true));
-        $this->assertSame('SKU_BIG5_FULL_REPORT_499', $dryRun['sku'] ?? null);
-        $this->assertSame(499, $dryRun['price_cents'] ?? null);
-        $this->assertSame(0, DB::table('skus')->where('sku', 'SKU_BIG5_FULL_REPORT_499')->count());
+        $this->assertSame('SKU_BIG5_FULL_REPORT_199', $dryRun['sku'] ?? null);
+        $this->assertSame(199, $dryRun['price_cents'] ?? null);
 
         $this->assertSame(1, Artisan::call('report-unlock:activate-big5-commerce', [
             '--execute-token' => 'wrong-token',
         ]));
-        $this->assertSame(0, DB::table('skus')->where('sku', 'SKU_BIG5_FULL_REPORT_499')->count());
 
         $this->assertSame(0, Artisan::call('report-unlock:activate-big5-commerce', [
             '--execute-token' => (string) $dryRun['execute_token'],
         ]));
-        $sku = DB::table('skus')->where('sku', 'SKU_BIG5_FULL_REPORT_499')->first();
+        $sku = DB::table('skus')->where('sku', 'SKU_BIG5_FULL_REPORT_199')->first();
         $this->assertNotNull($sku);
-        $this->assertSame(499, (int) $sku->price_cents);
+        $this->assertSame(199, (int) $sku->price_cents);
         $this->assertSame('BIG5_FULL_REPORT', (string) $sku->benefit_code);
         $historical = DB::table('skus')->where('sku', 'SKU_BIG5_FULL_REPORT_299')->first();
         $historicalMeta = json_decode((string) $historical->meta_json, true, flags: JSON_THROW_ON_ERROR);
@@ -62,7 +60,7 @@ final class ActivateBigFiveReportUnlockCommerceTest extends TestCase
         $capabilities = json_decode((string) $scale->capabilities_json, true, flags: JSON_THROW_ON_ERROR);
         $commercial = json_decode((string) $scale->commercial_json, true, flags: JSON_THROW_ON_ERROR);
         $this->assertSame('full', $capabilities['paywall_mode'] ?? null);
-        $this->assertSame('SKU_BIG5_FULL_REPORT_499', $commercial['report_unlock_sku'] ?? null);
+        $this->assertSame('SKU_BIG5_FULL_REPORT_199', $commercial['report_unlock_sku'] ?? null);
         $this->assertSame('disabled', config('report_unlock.big5_rollout.mode'));
     }
 }

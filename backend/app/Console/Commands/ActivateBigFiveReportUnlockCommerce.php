@@ -12,16 +12,16 @@ final class ActivateBigFiveReportUnlockCommerce extends Command
     protected $signature = 'report-unlock:activate-big5-commerce
         {--execute-token= : Exact token emitted by dry-run}';
 
-    protected $description = 'Dry-run by default; activate the Big Five ¥4.99 SKU and full paywall without changing rollout.';
+    protected $description = 'Dry-run by default; activate the Big Five ¥1.99 SKU and full paywall without changing rollout.';
 
     public function handle(): int
     {
         $evidence = [
             'scale_code' => 'BIG5_OCEAN',
-            'sku' => 'SKU_BIG5_FULL_REPORT_499',
-            'historical_sku' => 'SKU_BIG5_FULL_REPORT_299',
+            'sku' => 'SKU_BIG5_FULL_REPORT_199',
+            'historical_skus' => ['SKU_BIG5_FULL_REPORT_499', 'SKU_BIG5_FULL_REPORT_299'],
             'benefit_code' => 'BIG5_FULL_REPORT',
-            'price_cents' => 499,
+            'price_cents' => 199,
             'currency' => 'CNY',
             'paywall_mode' => 'full',
             'rollout_changed' => false,
@@ -66,12 +66,18 @@ final class ActivateBigFiveReportUnlockCommerce extends Command
                 DB::table('skus')->insert(array_merge($skuValues, ['created_at' => $now]));
             }
 
-            $historical = DB::table('skus')->where('sku', $evidence['historical_sku'])->lockForUpdate()->first();
-            if ($historical !== null) {
+            foreach ($evidence['historical_skus'] as $historicalSku) {
+                $historical = DB::table('skus')->where('sku', $historicalSku)->lockForUpdate()->first();
+                if ($historical === null) {
+                    continue;
+                }
                 $historicalMeta = $this->json($historical->meta_json ?? null);
                 $historicalMeta['effective_default'] = false;
                 $historicalMeta['historical_only'] = true;
-                DB::table('skus')->where('sku', $evidence['historical_sku'])->update([
+                $historicalMeta['deprecated'] = true;
+                $historicalMeta['offer'] = false;
+                DB::table('skus')->where('sku', $historicalSku)->update([
+                    'is_active' => false,
                     'meta_json' => json_encode($historicalMeta, JSON_UNESCAPED_SLASHES),
                     'updated_at' => $now,
                 ]);

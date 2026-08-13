@@ -16,6 +16,15 @@ final class ReportUnlockOptionResolverTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        DB::table('skus')->whereIn('sku', [
+            'MBTI_REPORT_FULL_199',
+            'SKU_BIG5_FULL_REPORT_199',
+        ])->delete();
+    }
+
     public function test_mbti_options_fail_closed_without_exact_sku_or_provider_capability(): void
     {
         config()->set('report_unlock.providers.rewarded_ad.available', false);
@@ -68,17 +77,17 @@ final class ReportUnlockOptionResolverTest extends TestCase
         $this->assertSame('payment', $contract['legacy_unlock_source']);
         $this->assertTrue((bool) data_get($contract, 'unlock_options.0.available'));
         $this->assertTrue((bool) data_get($contract, 'unlock_options.1.available'));
-        $this->assertSame('MBTI_REPORT_FULL', data_get($contract, 'unlock_options.1.sku'));
-        $this->assertSame(499, data_get($contract, 'unlock_options.1.price_cents'));
+        $this->assertSame('MBTI_REPORT_FULL_199', data_get($contract, 'unlock_options.1.sku'));
+        $this->assertSame(199, data_get($contract, 'unlock_options.1.price_cents'));
         $this->assertSame('CNY', data_get($contract, 'unlock_options.1.currency'));
-        $this->assertSame('¥4.99', data_get($contract, 'unlock_options.1.display_price'));
+        $this->assertSame('¥1.99', data_get($contract, 'unlock_options.1.display_price'));
         $this->assertSame(['wechat_mini_virtual'], data_get($contract, 'unlock_options.1.providers'));
         $this->assertTrue((bool) data_get($contract, 'unlock_options.2.available'));
     }
 
     public function test_wrong_price_sku_is_not_exposed_as_an_available_product(): void
     {
-        $this->seedExactSku(199);
+        $this->seedExactSku(299);
         config()->set('report_unlock.providers.wechat_mini_virtual.available', true);
 
         $contract = $this->resolver()->resolve(
@@ -129,7 +138,7 @@ final class ReportUnlockOptionResolverTest extends TestCase
         $this->assertFalse((bool) data_get($iq, 'unlock_options.0.available'));
     }
 
-    public function test_allowlisted_big_five_attempt_exposes_the_499_three_channel_contract(): void
+    public function test_allowlisted_big_five_attempt_exposes_the_199_three_channel_contract(): void
     {
         $attempt = Attempt::create([
             'id' => (string) Str::uuid(),
@@ -167,9 +176,9 @@ final class ReportUnlockOptionResolverTest extends TestCase
         $this->assertSame('enabled', data_get($contract, 'rollout.state'));
         $this->assertTrue((bool) data_get($contract, 'unlock_options.0.available'));
         $this->assertTrue((bool) data_get($contract, 'unlock_options.1.available'));
-        $this->assertSame('SKU_BIG5_FULL_REPORT_499', data_get($contract, 'unlock_options.1.sku'));
-        $this->assertSame(499, data_get($contract, 'unlock_options.1.price_cents'));
-        $this->assertSame('¥4.99', data_get($contract, 'unlock_options.1.display_price'));
+        $this->assertSame('SKU_BIG5_FULL_REPORT_199', data_get($contract, 'unlock_options.1.sku'));
+        $this->assertSame(199, data_get($contract, 'unlock_options.1.price_cents'));
+        $this->assertSame('¥1.99', data_get($contract, 'unlock_options.1.display_price'));
         $this->assertTrue((bool) data_get($contract, 'unlock_options.2.available'));
     }
 
@@ -187,10 +196,10 @@ final class ReportUnlockOptionResolverTest extends TestCase
         return $this->app->make(ReportUnlockOptionResolver::class);
     }
 
-    private function seedExactSku(int $priceCents = 499): void
+    private function seedExactSku(int $priceCents = 199): void
     {
         DB::table('skus')->insert([
-            'sku' => 'MBTI_REPORT_FULL',
+            'sku' => 'MBTI_REPORT_FULL_199',
             'scale_code' => 'MBTI',
             'kind' => 'report_unlock',
             'unit_qty' => 1,
@@ -214,13 +223,13 @@ final class ReportUnlockOptionResolverTest extends TestCase
     private function seedBigFiveSku(): void
     {
         DB::table('skus')->insert([
-            'sku' => 'SKU_BIG5_FULL_REPORT_499',
+            'sku' => 'SKU_BIG5_FULL_REPORT_199',
             'scale_code' => 'BIG5_OCEAN',
             'kind' => 'report_unlock',
             'unit_qty' => 1,
             'benefit_code' => 'BIG5_FULL_REPORT',
             'scope' => 'attempt',
-            'price_cents' => 499,
+            'price_cents' => 199,
             'currency' => 'CNY',
             'is_active' => true,
             'meta_json' => json_encode([

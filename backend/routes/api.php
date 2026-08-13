@@ -17,6 +17,7 @@ use App\Http\Controllers\API\V0_3\ComplianceDsarController;
 use App\Http\Controllers\API\V0_3\EmailCaptureController;
 use App\Http\Controllers\API\V0_3\EmailPreferenceController;
 use App\Http\Controllers\API\V0_3\IqOwnerOriginal30AssetController;
+use App\Http\Controllers\API\V0_3\LocalReportSessionController;
 use App\Http\Controllers\API\V0_3\MbtiAttributionEventController;
 use App\Http\Controllers\API\V0_3\MbtiCompareInviteController;
 use App\Http\Controllers\API\V0_3\MeController as MeV03Controller;
@@ -385,6 +386,9 @@ Route::prefix('v0.3')->middleware([
             ->middleware(\App\Http\Middleware\FmTokenAuth::class);
 
         // 3) Commerce v2 (public with org context)
+        Route::post('/local-report-sessions', [LocalReportSessionController::class, 'store'])
+            ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'throttle:api_attempt_submit'])
+            ->name('api.v0_3.local_report_sessions.store');
         Route::get('/skus', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@listSkus')
             ->name('api.v0_3.skus');
         Route::post('/orders/checkout', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@checkout')

@@ -11,8 +11,6 @@ use Illuminate\Support\Facades\Schema;
 class Pr19CommerceSeeder extends Seeder
 {
     private const FREE_ONLY_SCALE_CODES = [
-        'MBTI',
-        'BIG5_OCEAN',
         'ENNEAGRAM',
         'RIASEC',
         'IQ_RAVEN',
@@ -140,6 +138,14 @@ class Pr19CommerceSeeder extends Seeder
     {
         $catalog = app(SkuCatalog::class);
         $paidTargets = [
+            'MBTI' => [
+                'report_benefit_code' => 'MBTI_REPORT_FULL',
+                'credit_benefit_code' => 'MBTI_REPORT_FULL',
+            ],
+            'BIG5_OCEAN' => [
+                'report_benefit_code' => 'BIG5_FULL_REPORT',
+                'credit_benefit_code' => 'BIG5_FULL_REPORT',
+            ],
             'CLINICAL_COMBO_68' => [
                 'report_benefit_code' => 'CLINICAL_COMBO_68_PRO',
                 'credit_benefit_code' => 'CLINICAL_COMBO_68_PRO',
@@ -182,6 +188,8 @@ class Pr19CommerceSeeder extends Seeder
                 if (! is_array($commercial)) {
                     $commercial = [];
                 }
+                $capabilities = $this->json($scale->capabilities_json ?? null);
+                $viewPolicy = $this->json($scale->view_policy_json ?? null);
 
                 $offers = $this->buildOffersFromSkus($catalog->listActiveSkus($scaleCode));
                 $defaultEffective = $catalog->defaultEffectiveSku($scaleCode);
@@ -191,6 +199,7 @@ class Pr19CommerceSeeder extends Seeder
                 $commercial['credit_benefit_code'] = $benefits['credit_benefit_code'];
                 if ($defaultEffective) {
                     $commercial['report_unlock_sku'] = $defaultEffective;
+                    $viewPolicy['upgrade_sku'] = $defaultEffective;
                 }
                 if ($defaultAnchor) {
                     $commercial['upgrade_sku_anchor'] = $defaultAnchor;
@@ -198,12 +207,16 @@ class Pr19CommerceSeeder extends Seeder
                 if (count($offers) > 0) {
                     $commercial['offers'] = $offers;
                 }
+                $capabilities['paywall_mode'] = 'full';
+                $viewPolicy['blur_others'] = true;
 
                 DB::table($table)
                     ->where('org_id', 0)
                     ->where('code', $scaleCode)
                     ->update([
                         'commercial_json' => json_encode($commercial, JSON_UNESCAPED_UNICODE),
+                        'capabilities_json' => json_encode($capabilities, JSON_UNESCAPED_UNICODE),
+                        'view_policy_json' => json_encode($viewPolicy, JSON_UNESCAPED_UNICODE),
                         'updated_at' => $now,
                     ]);
             }
@@ -224,6 +237,17 @@ class Pr19CommerceSeeder extends Seeder
             'upgrade_sku_anchor' => null,
             'offers' => [],
         ];
+    }
+
+    /** @return array<string,mixed> */
+    private function json(mixed $value): array
+    {
+        if (is_array($value)) {
+            return $value;
+        }
+        $decoded = is_string($value) ? json_decode($value, true) : null;
+
+        return is_array($decoded) ? $decoded : [];
     }
 
     private function buildOffersFromSkus(array $items): array

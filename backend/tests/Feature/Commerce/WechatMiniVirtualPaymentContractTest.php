@@ -49,7 +49,7 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
             0,
             null,
             'anon_vpay_contract',
-            'MBTI_REPORT_FULL',
+            'MBTI_REPORT_FULL_199',
             1,
             $attemptId,
             WechatMiniVirtualGateway::PROVIDER,
@@ -80,7 +80,7 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
         $this->assertTrue((bool) ($result['ok'] ?? false));
         $signDataJson = (string) data_get($result, 'pay.params.signData');
         $signData = json_decode($signDataJson, true, flags: JSON_THROW_ON_ERROR);
-        $this->assertSame(499, $signData['goodsPrice']);
+        $this->assertSame(199, $signData['goodsPrice']);
         $this->assertSame('CNY', $signData['currencyType']);
         $this->assertSame('mbti-report-full-sandbox', $signData['productId']);
         $this->assertMatchesRegularExpression('/^fm[a-zA-Z0-9]{30}$/i', $signData['outTradeNo']);
@@ -105,7 +105,7 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
         );
     }
 
-    public function test_big_five_payment_uses_the_published_product_and_499_contract(): void
+    public function test_big_five_payment_uses_the_shared_199_product_contract(): void
     {
         $this->configureProvider();
         config()->set('report_unlock.big5_rollout.mode', 'allowlist_only');
@@ -120,7 +120,7 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
             null,
             'anon_vpay_big5',
             $attemptId,
-            'SKU_BIG5_FULL_REPORT_499',
+            'SKU_BIG5_FULL_REPORT_199',
             1,
         );
         $this->assertTrue((bool) ($eligibility['ok'] ?? false));
@@ -129,7 +129,7 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
             0,
             null,
             'anon_vpay_big5',
-            'SKU_BIG5_FULL_REPORT_499',
+            'SKU_BIG5_FULL_REPORT_199',
             1,
             $attemptId,
             WechatMiniVirtualGateway::PROVIDER,
@@ -151,8 +151,8 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
         $payment = app(WechatMiniVirtualPaymentService::class)->createPaymentAction($created['order'], 'wx-big5-code');
         $this->assertTrue((bool) ($payment['ok'] ?? false));
         $signData = json_decode((string) data_get($payment, 'pay.params.signData'), true, flags: JSON_THROW_ON_ERROR);
-        $this->assertSame('BigFive', $signData['productId']);
-        $this->assertSame(499, $signData['goodsPrice']);
+        $this->assertSame('mbti-report-full-sandbox', $signData['productId']);
+        $this->assertSame(199, $signData['goodsPrice']);
     }
 
     public function test_callback_signature_and_payload_normalization_are_provider_specific(): void
@@ -164,12 +164,12 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
             'order_no' => $orderNo,
             'org_id' => 0,
             'anon_id' => 'anon_vpay_callback',
-            'sku' => 'MBTI_REPORT_FULL',
-            'item_sku' => 'MBTI_REPORT_FULL',
+            'sku' => 'MBTI_REPORT_FULL_199',
+            'item_sku' => 'MBTI_REPORT_FULL_199',
             'quantity' => 1,
             'target_attempt_id' => (string) Str::uuid(),
-            'amount_cents' => 499,
-            'amount_total' => 499,
+            'amount_cents' => 199,
+            'amount_total' => 199,
             'amount_refunded' => 0,
             'currency' => 'CNY',
             'status' => 'pending',
@@ -197,7 +197,7 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
             'Env' => 1,
             'GoodsInfo' => [
                 'ProductId' => 'mbti-report-full-sandbox',
-                'ActualPrice' => 499,
+                'ActualPrice' => 199,
             ],
             'WeChatPayInfo' => [
                 'TransactionId' => 'wx-provider-trade-1',
@@ -205,7 +205,7 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
             ],
         ]);
         $this->assertSame($orderNo, $normalized['order_no']);
-        $this->assertSame(499, $normalized['amount_cents']);
+        $this->assertSame(199, $normalized['amount_cents']);
         $this->assertSame('CNY', $normalized['currency']);
         $this->assertSame('payment_succeeded', $normalized['event_type']);
 
@@ -248,6 +248,7 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
         $this->configureProvider();
         (new ScaleRegistrySeeder)->run();
         (new Pr19CommerceSeeder)->run();
+        $this->setReportPaywall('MBTI', 'MBTI_REPORT_FULL_199');
         $this->seedSku();
         $attemptId = $this->createAttempt(true);
         $otherAttemptId = $this->createAttempt(true, 'anon_other_vpay');
@@ -265,7 +266,7 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
             'X-Channel' => 'wechat_miniapp',
         ];
         $basePayload = [
-            'sku' => 'MBTI_REPORT_FULL',
+            'sku' => 'MBTI_REPORT_FULL_199',
             'quantity' => 1,
             'target_attempt_id' => $attemptId,
             'idempotency_key' => 'idem-http-vpay-1',
@@ -295,7 +296,7 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
             json_decode((string) $created->json('pay.params.signData'), true, flags: JSON_THROW_ON_ERROR),
             'outTradeNo'
         );
-        $this->assertSame(499, (int) DB::table('orders')->where('order_no', $orderNo)->value('amount_cents'));
+        $this->assertSame(199, (int) DB::table('orders')->where('order_no', $orderNo)->value('amount_cents'));
 
         $duplicateCreate = $this->withHeaders($headers)
             ->postJson('/api/v0.3/orders/wechat_mini_virtual', $basePayload)
@@ -320,8 +321,8 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
             'GoodsInfo' => [
                 'ProductId' => 'mbti-report-full-sandbox',
                 'Quantity' => 1,
-                'OrigPrice' => 499,
-                'ActualPrice' => 499,
+                'OrigPrice' => 199,
+                'ActualPrice' => 199,
                 'Attach' => $orderNo,
             ],
         ];
@@ -361,9 +362,9 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
                     'order_id' => $externalOrderNo,
                     'wx_order_id' => 'wx-http-provider-trade-1',
                     'status' => 8,
-                    'order_fee' => 499,
-                    'paid_fee' => 499,
-                    'refund_fee' => 499,
+                    'order_fee' => 199,
+                    'paid_fee' => 199,
+                    'refund_fee' => 199,
                     'paid_time' => 1700000000,
                     'update_time' => 1700000100,
                 ],
@@ -382,9 +383,9 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
     {
         config()->set('payments.providers.wechat_mini_virtual.enabled', true);
         config()->set('report_unlock.providers.wechat_mini_virtual.available', true);
-        config()->set('report_unlock.price_cents', 499);
+        config()->set('report_unlock.price_cents', 199);
         config()->set('report_unlock.currency', 'CNY');
-        config()->set('report_unlock.sku_by_scale.MBTI', 'MBTI_REPORT_FULL');
+        config()->set('report_unlock.sku_by_scale.MBTI', 'MBTI_REPORT_FULL_199');
         config()->set('payments.wechat_mini_virtual', [
             'app_id' => 'wx-test-app',
             'app_secret' => 'wx-test-secret',
@@ -394,11 +395,11 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
             'environment' => 1,
             'mode' => 'short_series_goods',
             'product_id' => 'mbti-report-full-sandbox',
-            'sku' => 'MBTI_REPORT_FULL',
-            'price_cents' => 499,
+            'sku' => 'MBTI_REPORT_FULL_199',
+            'price_cents' => 199,
             'products' => [
                 'BIG5_OCEAN' => [
-                    'product_id' => 'BigFive',
+                    'product_id' => 'mbti-report-full-sandbox',
                 ],
             ],
             'http_timeout_seconds' => 2,
@@ -457,14 +458,14 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
 
     private function seedSku(): void
     {
-        DB::table('skus')->updateOrInsert(['sku' => 'MBTI_REPORT_FULL'], [
+        DB::table('skus')->updateOrInsert(['sku' => 'MBTI_REPORT_FULL_199'], [
             'org_id' => 0,
             'scale_code' => 'MBTI',
             'kind' => 'report_unlock',
             'unit_qty' => 1,
             'benefit_code' => 'MBTI_REPORT_FULL',
             'scope' => 'attempt',
-            'price_cents' => 499,
+            'price_cents' => 199,
             'currency' => 'CNY',
             'is_active' => true,
             'meta_json' => null,
@@ -475,14 +476,14 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
 
     private function seedBigFiveSku(): void
     {
-        DB::table('skus')->updateOrInsert(['sku' => 'SKU_BIG5_FULL_REPORT_499'], [
+        DB::table('skus')->updateOrInsert(['sku' => 'SKU_BIG5_FULL_REPORT_199'], [
             'org_id' => 0,
             'scale_code' => 'BIG5_OCEAN',
             'kind' => 'report_unlock',
             'unit_qty' => 1,
             'benefit_code' => 'BIG5_FULL_REPORT',
             'scope' => 'attempt',
-            'price_cents' => 499,
+            'price_cents' => 199,
             'currency' => 'CNY',
             'is_active' => true,
             'meta_json' => json_encode(['effective_default' => true]),
@@ -499,6 +500,27 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
         $capabilities['paywall_mode'] = $mode;
         DB::table('scales_registry')->where('org_id', 0)->where('code', 'BIG5_OCEAN')->update([
             'capabilities_json' => json_encode($capabilities, JSON_UNESCAPED_SLASHES),
+            'updated_at' => now(),
+        ]);
+    }
+
+    private function setReportPaywall(string $scaleCode, string $sku): void
+    {
+        $scale = DB::table('scales_registry')->where('org_id', 0)->where('code', $scaleCode)->first();
+        $capabilities = json_decode((string) ($scale->capabilities_json ?? '{}'), true);
+        $commercial = json_decode((string) ($scale->commercial_json ?? '{}'), true);
+        $viewPolicy = json_decode((string) ($scale->view_policy_json ?? '{}'), true);
+        $capabilities = is_array($capabilities) ? $capabilities : [];
+        $commercial = is_array($commercial) ? $commercial : [];
+        $viewPolicy = is_array($viewPolicy) ? $viewPolicy : [];
+        $capabilities['paywall_mode'] = 'full';
+        $commercial['report_unlock_sku'] = $sku;
+        $viewPolicy['upgrade_sku'] = $sku;
+        $viewPolicy['blur_others'] = true;
+        DB::table('scales_registry')->where('org_id', 0)->where('code', $scaleCode)->update([
+            'capabilities_json' => json_encode($capabilities, JSON_UNESCAPED_SLASHES),
+            'commercial_json' => json_encode($commercial, JSON_UNESCAPED_SLASHES),
+            'view_policy_json' => json_encode($viewPolicy, JSON_UNESCAPED_SLASHES),
             'updated_at' => now(),
         ]);
     }

@@ -2226,6 +2226,37 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_unified_local_report_payment_contract(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_3/LocalReportSessionController.php',
+            'backend/database/migrations/2026_08_13_120000_unify_wechat_report_unlock_to_199.php',
+            'backend/routes/api.php',
+        ];
+        $routeChangedLines = [
+            '+use App\Http\Controllers\API\V0_3\LocalReportSessionController;',
+            "+        Route::post('/local-report-sessions', [LocalReportSessionController::class, 'store'])",
+            "+            ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'throttle:api_attempt_submit'])",
+            "+            ->name('api.v0_3.local_report_sessions.store');",
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            routeChangedLines: $routeChangedLines,
+        ));
+        $this->assertSame(
+            ['backend/routes/api.php'],
+            $this->mbtiImpactingRuntimeChanges(
+                ['backend/routes/api.php'],
+                '',
+                '',
+                routeChangedLines: [...$routeChangedLines, "+        Route::delete('/local-report-sessions/{id}', fn () => null);"],
+            ),
+        );
+    }
+
     public function test_runtime_freeze_classifier_ignores_rewarded_ad_unlock_contract_files(): void
     {
         $changed = [
@@ -8615,6 +8646,9 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->routeDiffIsAppleIapPaymentOnly(
                         $routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef)
                     )
+                    || $this->routeDiffIsUnifiedLocalReportPaymentOnly(
+                        $routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef)
+                    )
                 )
             ) {
                 continue;
@@ -9509,8 +9543,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Console/Commands/ActivateBigFiveReportUnlockCommerce.php',
+            'backend/app/Http/Controllers/API/V0_3/LocalReportSessionController.php',
             'backend/app/Services/Commerce/BigFiveReportUnlockRolloutGate.php',
             'backend/app/Services/Commerce/ReportUnlockProductCatalog.php',
+            'backend/database/migrations/2026_08_13_120000_unify_wechat_report_unlock_to_199.php',
             'backend/database/seed_data/skus_big5_ocean.json',
         ], true);
     }
@@ -13828,6 +13864,19 @@ DIFF;
             "+            'App\\\\Http\\\\Controllers\\\\API\\\\V0_3\\\\CommerceController@reconcileAppleIap'",
             '+        )->middleware(\\App\\Http\\Middleware\\FmTokenAuth::class)',
             "+            ->name('api.v0_3.orders.apple_iap.reconcile');",
+        ];
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsUnifiedLocalReportPaymentOnly(array $changedLines): bool
+    {
+        return array_values($changedLines) === [
+            '+use App\Http\Controllers\API\V0_3\LocalReportSessionController;',
+            "+        Route::post('/local-report-sessions', [LocalReportSessionController::class, 'store'])",
+            "+            ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'throttle:api_attempt_submit'])",
+            "+            ->name('api.v0_3.local_report_sessions.store');",
         ];
     }
 

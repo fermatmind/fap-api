@@ -111,7 +111,7 @@ final class PaymentProviderRegistry
 
         return $expectedSku !== ''
             && $expectedSku === $rolloutSku
-            && (int) ($config['price_cents'] ?? 0) === (int) config('report_unlock.price_cents', 499)
+            && (int) ($config['price_cents'] ?? 0) === (int) config('report_unlock.price_cents', 199)
             && strtoupper(trim((string) config('report_unlock.currency', 'CNY'))) === 'CNY'
             && (bool) config('report_unlock.providers.wechat_mini_virtual.available', false);
     }
@@ -137,7 +137,7 @@ final class PaymentProviderRegistry
 
         return $expectedSku !== ''
             && $expectedSku === $rolloutSku
-            && (int) ($config['price_cents'] ?? 0) === (int) config('report_unlock.price_cents', 499)
+            && (int) ($config['price_cents'] ?? 0) === (int) config('report_unlock.price_cents', 199)
             && (int) ($config['price_cents'] ?? 0) >= 100
             && strtoupper(trim((string) config('report_unlock.currency', 'CNY'))) === 'CNY'
             && (bool) config('report_unlock.providers.apple_iap.available', false);
