@@ -691,12 +691,12 @@ final class Top100FrozenCmsBatchAuthority
             ->where('authority_package_sha256', $context->packageSha256)->where('authority_asset_key', $assetKey)->first();
         if ($existing instanceof ArticleTranslationRevision) {
             if ((int) $existing->article_id !== (int) $article->id
-                || ! in_array((string) $existing->revision_status, [ArticleTranslationRevision::STATUS_APPROVED, ArticleTranslationRevision::STATUS_PUBLISHED], true)
-                || ! in_array($article->working_revision_id, [null, $existing->id], true)) {
+                || ! in_array((string) $existing->revision_status, [ArticleTranslationRevision::STATUS_APPROVED, ArticleTranslationRevision::STATUS_PUBLISHED], true)) {
                 throw new DomainException('top100_frozen_article_revision_collision');
             }
             if (! $this->articleRevisionMatchesTarget($existing, $article, $target)) {
-                if ($article->working_revision_id !== null || (string) $existing->revision_status !== ArticleTranslationRevision::STATUS_APPROVED) {
+                if ((int) $article->working_revision_id === (int) $existing->id
+                    || (string) $existing->revision_status !== ArticleTranslationRevision::STATUS_APPROVED) {
                     throw new DomainException('top100_frozen_article_revision_recovery_drift');
                 }
                 $existing->delete();
@@ -709,9 +709,6 @@ final class Top100FrozenCmsBatchAuthority
             }
 
             return 0;
-        }
-        if ($article->working_revision_id !== null) {
-            throw new DomainException('top100_frozen_article_foreign_working_revision');
         }
         $desiredArticle = (array) $target['desired']['article'];
         $desiredSeo = (array) $target['desired']['seo'];
@@ -746,7 +743,9 @@ final class Top100FrozenCmsBatchAuthority
             'reviewed_at' => now(),
             'approved_at' => now(),
         ]);
-        $article->forceFill(['working_revision_id' => $revision->id])->saveQuietly();
+        if ($article->working_revision_id === null) {
+            $article->forceFill(['working_revision_id' => $revision->id])->saveQuietly();
+        }
 
         return 1;
     }
@@ -1078,9 +1077,24 @@ final class Top100FrozenCmsBatchAuthority
         $revision = ArticleTranslationRevision::query()->withoutGlobalScopes()->lockForUpdate()
             ->where('authority_package_sha256', $context->packageSha256)
             ->where('authority_asset_key', $this->assetKey($target))->first();
-        if (! $revision instanceof ArticleTranslationRevision || (int) $article->working_revision_id !== (int) $revision->id
+        if (! $revision instanceof ArticleTranslationRevision
             || (string) $revision->revision_status !== ArticleTranslationRevision::STATUS_APPROVED) {
             throw new DomainException('top100_frozen_article_revision_not_approved');
+        }
+        $workingRevisionId = $article->working_revision_id === null ? null : (int) $article->working_revision_id;
+        $preservedWorkingRevisionId = $workingRevisionId === (int) $revision->id ? null : $workingRevisionId;
+        if ($preservedWorkingRevisionId !== null) {
+            $expectedWorkingRevisionId = (int) data_get($target, 'current.mutable.article.working_revision_id', 0);
+            $expectedWorkingRevisionStatus = (string) data_get($target, 'current.mutable.revision_statuses.'.$preservedWorkingRevisionId, '');
+            $preservedWorkingRevision = ArticleTranslationRevision::query()->withoutGlobalScopes()->lockForUpdate()
+                ->where('article_id', $article->id)->whereKey($preservedWorkingRevisionId)->first();
+            if ($expectedWorkingRevisionId !== $preservedWorkingRevisionId
+                || ! $preservedWorkingRevision instanceof ArticleTranslationRevision
+                || $expectedWorkingRevisionStatus === ''
+                || (string) $preservedWorkingRevision->revision_status !== $expectedWorkingRevisionStatus) {
+                throw new DomainException('top100_frozen_article_foreign_working_revision_drift');
+            }
+            $article->forceFill(['working_revision_id' => $revision->id])->saveQuietly();
         }
         $publishedRevisionId = (int) $article->published_revision_id;
         $this->articlePublisher->promoteExistingWorkingRevision(
@@ -1099,7 +1113,9 @@ final class Top100FrozenCmsBatchAuthority
                 $this->articleBodyHeadingGuard->assertNoBodyH1((string) $lockedRevision->content_md);
             },
         );
-        Article::query()->withoutGlobalScopes()->whereKey($article->id)->update(['working_revision_id' => null]);
+        Article::query()->withoutGlobalScopes()->whereKey($article->id)->update([
+            'working_revision_id' => $preservedWorkingRevisionId,
+        ]);
     }
 
     private function publishLanding(array $target, array $resolved): void
