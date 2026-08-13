@@ -115,12 +115,22 @@ final class Top100FrozenPackageTest extends TestCase
     {
         $authority = (new ReflectionClass(Top100FrozenCmsBatchAuthority::class))->newInstanceWithoutConstructor();
         $method = (new ReflectionClass($authority))->getMethod('rollbackStateIsOwned');
+        $comparable = (new ReflectionClass($authority))->getMethod('rollbackComparable');
         $row = [
-            'before' => ['mutable' => ['title' => 'before', 'working_revision_id' => null]],
-            'desired' => ['title' => 'published', 'working_revision_id' => null],
+            'before' => ['mutable' => ['title' => 'before', 'working_revision_id' => null, 'working_revision' => null]],
+            'desired' => ['title' => 'published', 'working_revision_id' => null, 'working_revision' => null],
         ];
 
-        self::assertTrue($method->invoke($authority, ['current' => ['mutable' => ['title' => 'before', 'working_revision_id' => 31]]], $row));
+        self::assertSame(['title' => 'before'], $comparable->invoke($authority, [
+            'title' => 'before',
+            'working_revision_id' => 31,
+            'working_revision' => ['id' => 31, 'workflow_state' => 'draft'],
+        ]));
+        self::assertTrue($method->invoke($authority, ['current' => ['mutable' => [
+            'title' => 'before',
+            'working_revision_id' => 31,
+            'working_revision' => ['id' => 31, 'workflow_state' => 'draft'],
+        ]]], $row));
         self::assertTrue($method->invoke($authority, ['current' => ['mutable' => ['title' => 'published', 'working_revision_id' => null]]], $row));
         self::assertFalse($method->invoke($authority, ['current' => ['mutable' => ['title' => 'newer edit', 'working_revision_id' => null]]], $row));
     }

@@ -302,6 +302,7 @@ final class Top100FrozenCmsBatchAuthority
     private function rollbackComparable(array $mutable): array
     {
         data_forget($mutable, 'working_revision_id');
+        data_forget($mutable, 'working_revision');
         data_forget($mutable, 'published_revision_id');
         data_forget($mutable, 'revision_statuses');
         data_forget($mutable, 'article.working_revision_id');
