@@ -111,6 +111,21 @@ final class MbtiZhResultContentPolicyTest extends TestCase
         $this->assertStringNotContainsString('它让成长从口号变成可重复的方法', $serialized);
     }
 
+    public function test_zh_desktop_content_replaces_template_slogans_observed_in_production(): void
+    {
+        $content = MbtiZhResultContentPolicy::normalizeDesktopContent([
+            'intro' => '在费马测试 / FermatMind的逻辑模型里',
+            'career' => '你常见的贡献不是喊口号，而是先定模型、边界和风险顺序，再安排执行。',
+        ], 'zh');
+
+        $this->assertSame('在费马测试 / FermatMind 的逻辑模型里', $content['intro']);
+        $this->assertSame(
+            '你常见的贡献，可以从具体行为观察：先定模型、边界和风险顺序，再安排执行。',
+            $content['career'],
+        );
+        $this->assertStringNotContainsString('不是喊口号', json_encode($content, JSON_UNESCAPED_UNICODE) ?: '');
+    }
+
     /** @return array<string, mixed> */
     private function decodeBaseline(string $path): array
     {
