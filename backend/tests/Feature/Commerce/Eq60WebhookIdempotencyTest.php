@@ -21,7 +21,7 @@ final class Eq60WebhookIdempotencyTest extends TestCase
     use RefreshDatabase;
     use SignedBillingWebhook;
 
-    public function test_webhook_replay_is_idempotent_for_eq_unlock(): void
+    public function test_deprecated_eq_sku_replay_is_rejected_without_a_grant(): void
     {
         $this->artisan('content:compile --pack=EQ_60 --pack-version=v1')->assertExitCode(0);
         (new ScaleRegistrySeeder)->run();
@@ -41,26 +41,27 @@ final class Eq60WebhookIdempotencyTest extends TestCase
         ];
 
         $first = $this->postSignedBillingWebhook($payload, ['X-Org-Id' => '0']);
-        $first->assertStatus(200)->assertJsonPath('ok', true);
+        $first->assertStatus(200)
+            ->assertJsonPath('ok', false)
+            ->assertJsonPath('error_code', 'SKU_NOT_FOUND');
 
         $second = $this->postSignedBillingWebhook($payload, ['X-Org-Id' => '0']);
-        $second->assertStatus(200)->assertJson([
-            'ok' => true,
-            'duplicate' => true,
-        ]);
+        $second->assertStatus(200)
+            ->assertJsonPath('ok', false)
+            ->assertJsonPath('error_code', 'SKU_NOT_FOUND');
 
         $this->assertSame(1, DB::table('payment_events')
             ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_eq_webhook_1')
             ->count());
-        $this->assertSame(1, DB::table('benefit_grants')
+        $this->assertSame(0, DB::table('benefit_grants')
             ->where('order_no', $orderNo)
             ->where('attempt_id', $attemptId)
             ->where('benefit_code', 'EQ_60_FULL')
             ->count());
     }
 
-    public function test_scale_mismatch_attempt_is_not_unlocked_for_eq_sku(): void
+    public function test_deprecated_eq_sku_is_rejected_before_scale_matching(): void
     {
         (new ScaleRegistrySeeder)->run();
         (new Pr19CommerceSeeder)->run();
@@ -79,19 +80,19 @@ final class Eq60WebhookIdempotencyTest extends TestCase
 
         $resp = $this->postSignedBillingWebhook($payload, ['X-Org-Id' => '0']);
         $resp->assertStatus(200);
-        $resp->assertJsonPath('error_code', 'ATTEMPT_SCALE_MISMATCH');
+        $resp->assertJsonPath('error_code', 'SKU_NOT_FOUND');
         $resp->assertJsonPath('rejected', true);
-        $resp->assertJsonPath('reject_reason', 'ATTEMPT_SCALE_MISMATCH');
+        $resp->assertJsonPath('reject_reason', 'SKU_NOT_FOUND');
 
         $this->assertSame(0, DB::table('benefit_grants')
             ->where('order_no', $orderNo)
             ->where('attempt_id', $attemptId)
             ->count());
-        $this->assertSame('ATTEMPT_SCALE_MISMATCH', (string) DB::table('payment_events')
+        $this->assertSame('SKU_NOT_FOUND', (string) DB::table('payment_events')
             ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_eq_scale_mismatch_1')
             ->value('last_error_code'));
-        $this->assertSame('ATTEMPT_SCALE_MISMATCH', (string) DB::table('payment_events')
+        $this->assertSame('SKU_NOT_FOUND', (string) DB::table('payment_events')
             ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_eq_scale_mismatch_1')
             ->value('reason'));

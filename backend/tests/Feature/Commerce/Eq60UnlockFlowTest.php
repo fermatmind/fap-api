@@ -22,7 +22,7 @@ final class Eq60UnlockFlowTest extends TestCase
     use RefreshDatabase;
     use SignedBillingWebhook;
 
-    public function test_paid_webhook_unlocks_eq60_full_report(): void
+    public function test_deprecated_paid_webhook_cannot_change_free_eq60_report(): void
     {
         $this->artisan('content:compile --pack=EQ_60 --pack-version=v1')->assertExitCode(0);
         (new ScaleRegistrySeeder)->run();
@@ -43,9 +43,10 @@ final class Eq60UnlockFlowTest extends TestCase
 
         $resp = $this->postSignedBillingWebhook($payload, ['X-Org-Id' => '0']);
         $resp->assertStatus(200);
-        $resp->assertJsonPath('ok', true);
+        $resp->assertJsonPath('ok', false);
+        $resp->assertJsonPath('error_code', 'SKU_NOT_FOUND');
 
-        $this->assertSame(1, DB::table('benefit_grants')
+        $this->assertSame(0, DB::table('benefit_grants')
             ->where('attempt_id', $attemptId)
             ->where('order_no', $orderNo)
             ->where('benefit_code', 'EQ_60_FULL')

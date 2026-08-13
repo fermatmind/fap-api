@@ -371,7 +371,7 @@ final class Eq60V5ReportContractTest extends TestCase
         $this->assertNotSame('', (string) data_get($report, 'assets.personalization_route.route_headline'));
         $this->assertSame('eq.depth.development_path.aware_but_unregulated', (string) data_get($report, 'interpretation.result_page_depth_module_id'));
         $this->assertContains('eq.depth.development_path.aware_but_unregulated', (array) data_get($report, 'asset_refs.result_page_depth_module_ids'));
-        $this->assertSame('Action Prescription', (string) data_get($report, 'assets.result_page_depth_modules.3.placement'));
+        $this->assertSame('Next Practice Focus', (string) data_get($report, 'assets.result_page_depth_modules.3.placement'));
         $this->assertSame('eq.depth.development_path.aware_but_unregulated', (string) data_get($report, 'assets.result_page_depth_modules.3.id'));
     }
 

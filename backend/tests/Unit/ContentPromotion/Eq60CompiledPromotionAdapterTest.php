@@ -12,6 +12,7 @@ use App\Services\ContentPromotion\PromotionAdapterRegistry;
 use App\Services\ContentPromotion\PromotionContext;
 use DomainException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 final class Eq60CompiledPromotionAdapterTest extends TestCase
@@ -20,6 +21,20 @@ final class Eq60CompiledPromotionAdapterTest extends TestCase
 
     public function test_compiled_english_result_content_is_drafted_published_and_rolled_back_without_runtime_activation_or_private_records(): void
     {
+        DB::table('scale_norms_versions')->insert([
+            'id' => '8df7904a-9903-4ecf-89a3-a126215672cc',
+            'scale_code' => 'EQ_60',
+            'norm_id' => 'eq60_en_test',
+            'region' => 'GLOBAL',
+            'locale' => 'en',
+            'version' => 'v1',
+            'group_id' => 'all',
+            'status' => 'calibrated',
+            'is_active' => true,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         $previous = ContentPackRelease::query()->create([
             'id' => '0f8c6fc2-5fdd-4400-bbf7-ae67c6d3158c', 'action' => Eq60CompiledPromotionAuthority::RELEASE_ACTION,
             'region' => 'GLOBAL', 'locale' => 'en', 'dir_alias' => Eq60PackLoader::PACK_VERSION, 'to_pack_id' => Eq60PackLoader::PACK_ID,
