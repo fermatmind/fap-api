@@ -111,9 +111,6 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
         $full = $this->fullLedgerWithOutsideForbiddenMember();
         $activeRows = array_map(static fn (string $slug): array => [
             'source_slug' => $slug,
-            'public_resolution_type' => CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB,
-            'public_eligible' => true,
-            'indexability' => 'indexable',
             'active_baseline_marker' => true,
         ], $manifest['baseline_slugs']);
         $active = [
@@ -121,11 +118,17 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
             'public_resolution' => ['rows' => $activeRows],
         ];
 
-        $merged = Career1046ImmutableCandidateArtifactProducer::mergeActiveBaselineLedger($full, $active, $manifest);
+        $merged = Career1046ImmutableCandidateArtifactProducer::mergeActiveBaselineLedger(
+            $full,
+            $active,
+            $this->activeBaselineProjection($manifest),
+            $manifest,
+        );
         $rows = collect($merged['members'])->keyBy(static fn (array $row): string => (string) ($row['source_slug'] ?? $row['canonical_slug']));
 
         foreach ($manifest['baseline_slugs'] as $slug) {
             self::assertTrue((bool) data_get($rows->get($slug), 'active_baseline_marker', false));
+            self::assertSame('public_detail_indexable', data_get($rows->get($slug), 'release_cohort'));
         }
         foreach ($manifest['delta_slugs'] as $slug) {
             self::assertFalse((bool) data_get($rows->get($slug), 'active_baseline_marker', false));
@@ -162,11 +165,38 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
                 Career1046ImmutableCandidateArtifactProducer::mergeActiveBaselineLedger(
                     $this->fullLedgerWithOutsideForbiddenMember(),
                     ['ledger_kind' => CareerFullReleaseLedgerService::LEDGER_KIND, 'public_resolution' => ['rows' => $activeRows]],
+                    $this->activeBaselineProjection($manifest),
                     $manifest,
                 );
                 self::fail($case.' active baseline authority did not fail closed');
             } catch (Career1046ImmutableCandidateArtifactFailure $failure) {
                 self::assertSame($expected, $failure->safeCode);
+            }
+        }
+    }
+
+    public function test_active_baseline_merge_fails_closed_when_legacy_ledger_is_not_backed_by_exact_published_projection(): void
+    {
+        $manifest = $this->manifest();
+        $activeRows = array_map(static fn (string $slug): array => ['source_slug' => $slug], $manifest['baseline_slugs']);
+
+        foreach (['missing_locale', 'not_published'] as $case) {
+            $projection = $this->activeBaselineProjection($manifest);
+            if ($case === 'missing_locale') {
+                array_pop($projection['items']);
+            } else {
+                $projection['items'][0]['release_gate_pass'] = false;
+            }
+            try {
+                Career1046ImmutableCandidateArtifactProducer::mergeActiveBaselineLedger(
+                    $this->fullLedgerWithOutsideForbiddenMember(),
+                    ['ledger_kind' => CareerFullReleaseLedgerService::LEDGER_KIND, 'members' => $activeRows],
+                    $projection,
+                    $manifest,
+                );
+                self::fail($case.' active baseline projection did not fail closed');
+            } catch (Career1046ImmutableCandidateArtifactFailure $failure) {
+                self::assertSame('CANDIDATE_PROJECTION_AUTHORITY_INCOMPLETE', $failure->safeCode);
             }
         }
     }
@@ -617,6 +647,27 @@ final class Career1046ImmutableCandidateArtifactProducerTest extends TestCase
         $path = dirname(__DIR__, 2).'/docs/seo/generated/detail-ready-1046-rollout-manifest.v2.json';
 
         return json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
+    }
+
+    /** @param array<string, mixed> $manifest @return array<string, mixed> */
+    private function activeBaselineProjection(array $manifest): array
+    {
+        $items = [];
+        foreach ($manifest['baseline_slugs'] as $slug) {
+            foreach (CareerRuntimePublishProjectionService::LOCALES as $locale) {
+                $items[] = [
+                    'slug' => $slug,
+                    'locale' => $locale,
+                    'public_resolution_type' => CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB,
+                    'runtime_publish_state' => CareerRuntimePublishProjectionService::STATE_PUBLISHED,
+                    'detail_route_enabled' => true,
+                    'robots_indexable' => true,
+                    'release_gate_pass' => true,
+                ];
+            }
+        }
+
+        return ['items' => $items];
     }
 
     /** @return array<string, mixed> */
