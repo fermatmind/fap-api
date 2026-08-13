@@ -219,7 +219,7 @@ jobs:
             and .search_submission_count == 0 and .writes_committed == false
             and .automatic_retry_allowed == false and .automatic_rollback_allowed == false
           ' "$receipt" >/dev/null
-          if jq -e '.findings.raw_loader_set_mismatch == true or .primary_classification == "PROJECTION_PUBLISHED_SET_INVALID"' "$receipt" >/dev/null; then
+          if jq -e '.findings.raw_loader_set_mismatch == true or .findings.projection_published_set_invalid == true' "$receipt" >/dev/null; then
             exit 1
           fi
 

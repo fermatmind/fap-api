@@ -197,6 +197,8 @@ final class CareerBaselineSetIdentityDiagnosticTest extends TestCase
         foreach (['CONTROL_CALCULATION_ERROR', 'PROJECTION_PUBLISHED_SET_INVALID', 'MANIFEST_BASELINE_PARTITION_STALE', 'RECEIPT_DELTA_PARTITION_MISMATCH'] as $classification) {
             self::assertStringContainsString($classification, $runner);
         }
+        self::assertStringContainsString('.findings.projection_published_set_invalid == true', $workflow);
+        self::assertStringNotContainsString('.primary_classification == "PROJECTION_PUBLISHED_SET_INVALID"', $workflow);
         foreach (['DB::transaction(', '->create(', '->update(', '->delete(', 'file_put_contents(', 'rename(', 'curl -k', '--insecure'] as $forbidden) {
             self::assertStringNotContainsString($forbidden, $runner.$workflow);
         }
