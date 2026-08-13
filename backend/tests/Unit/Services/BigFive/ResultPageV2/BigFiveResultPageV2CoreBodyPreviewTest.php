@@ -188,9 +188,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     public function test_runtime_freeze_classifier_ignores_chinese_mbti_result_science_authority_files(): void
     {
         $allowed = [
+            'backend/app/Console/Commands/PersonalityMbtiZhResultContentRelease.php',
+            'backend/app/PersonalityCms/DesktopClone/MbtiZhResultContentPackage.php',
             'backend/app/PersonalityCms/DesktopClone/PersonalityVariantCloneContentValidator.php',
+            'backend/app/Services/Cms/MbtiZhResultContentReleaseService.php',
             'backend/app/Services/Cms/PersonalityDesktopCloneContentService.php',
             'backend/app/Services/Mbti/MbtiPublicProjectionService.php',
+            'backend/app/Support/Mbti/MbtiReportAccessPolicy.php',
             'backend/app/Support/Mbti/MbtiZhResultContentPolicy.php',
         ];
 
@@ -10405,9 +10409,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isMbtiZhResultScienceAuthorityFile(string $file): bool
     {
         return in_array($file, [
+            'backend/app/Console/Commands/PersonalityMbtiZhResultContentRelease.php',
+            'backend/app/PersonalityCms/DesktopClone/MbtiZhResultContentPackage.php',
             'backend/app/PersonalityCms/DesktopClone/PersonalityVariantCloneContentValidator.php',
+            'backend/app/Services/Cms/MbtiZhResultContentReleaseService.php',
             'backend/app/Services/Cms/PersonalityDesktopCloneContentService.php',
             'backend/app/Services/Mbti/MbtiPublicProjectionService.php',
+            'backend/app/Support/Mbti/MbtiReportAccessPolicy.php',
             'backend/app/Support/Mbti/MbtiZhResultContentPolicy.php',
         ], true);
     }
