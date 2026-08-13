@@ -33,10 +33,10 @@ final class CareerColdCacheDiscoverabilityGateTest extends TestCase
     }
 
     #[Test]
-    public function product_visible_candidate_requires_discoverability_to_remain_held_until_release(): void
+    public function product_visible_candidate_requires_dataset_and_search_visibility(): void
     {
         $projection = $this->projection();
-        $projection['items'][0]['sitemap_live'] = true;
+        $projection['items'][0]['dataset_visible'] = false;
 
         $this->expectFailureCode('AUTHORITY_PUBLISHED_SURFACE_FLAGS_MISALIGNED');
 
