@@ -104,7 +104,8 @@ final class Eq60ReportPaywallTest extends TestCase
         $this->assertNotSame('', (string) data_get($gate, 'report.assets.career_environment.0.interview_question'));
         $this->assertNotSame('', (string) data_get($gate, 'report.assets.action_prescription.title'));
         $this->assertFalse((bool) data_get($gate, 'report.assets.sjt_bridge.available', true));
-        $this->assertStringContainsString('未来', (string) data_get($gate, 'report.assets.sjt_bridge.title'));
+        $this->assertSame('当前报告范围', (string) data_get($gate, 'report.assets.sjt_bridge.title'));
+        $this->assertStringNotContainsString('未来', json_encode(data_get($gate, 'report.assets.sjt_bridge'), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: '');
         $this->assertStringNotContainsString('SKU_EQ_60_FULL_299', json_encode($gate, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: '');
     }
 

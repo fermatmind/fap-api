@@ -254,12 +254,12 @@
         ],
         "zh-CN": {
           "label": "理解我的结果",
-          "agent_goal": "帮助用户看懂后端已选择的核心 formulation、证据点和发展杠杆。",
+          "agent_goal": "帮助用户看懂后端已选择的核心解读、证据点和下一步练习重点。",
           "safe_opening": "我会先按报告里的核心判断解释，不会重新打分或替换你的结果。"
         },
         "en": {
           "label": "Understand my result",
-          "agent_goal": "Help the user understand the backend-selected formulation, evidence, and development lever.",
+          "agent_goal": "Help the user understand the backend-selected interpretation, evidence, and next practice focus.",
           "safe_opening": "I will explain the core judgment already in your report; I will not rescore or replace it."
         }
       },
@@ -311,13 +311,13 @@
         ],
         "zh-CN": {
           "label": "我下一步怎么练",
-          "agent_goal": "把后端选中的行动处方转成一个短、可执行的练习计划。",
-          "safe_opening": "我会基于报告里的行动处方给你一个练习方式，不会把它当作治疗方案。"
+          "agent_goal": "把后端选中的下一步练习重点转成一个短、可执行的练习计划。",
+          "safe_opening": "我会基于报告里的下一步练习重点给你一个练习方式，不会把它当作治疗方案。"
         },
         "en": {
           "label": "What should I practice next?",
-          "agent_goal": "Turn the backend-selected action prescription into a short, practical practice path.",
-          "safe_opening": "I will use the action prescription in your report as practice guidance, not as treatment."
+          "agent_goal": "Turn the backend-selected next practice focus into a short, practical practice path.",
+          "safe_opening": "I will use the next practice focus in your report as practice guidance, not as treatment."
         }
       },
       "career_environment_fit": {
@@ -375,12 +375,12 @@
         ],
         "zh-CN": {
           "label": "关系或冲突怎么处理",
-          "agent_goal": "围绕一个具体场景调用现实转译和行动处方。",
+          "agent_goal": "围绕一个具体场景调用情境复盘和下一步练习重点。",
           "safe_opening": "我们可以先选一个具体场景处理；如果涉及安全风险，我会先建议你寻求现实支持。"
         },
         "en": {
           "label": "Help with a relationship or conflict",
-          "agent_goal": "Use reality translation and action prescription assets for one specific scene.",
+          "agent_goal": "Use situation review and next practice focus content for one specific scene.",
           "safe_opening": "We can focus on one concrete scene first; if safety risk is involved, I will point you to real support."
         }
       },
@@ -719,11 +719,11 @@
       "routing": "privacy_and_abstraction_boundary",
       "zh-CN": {
         "label": "原始 payload 请求",
-        "agent_action": "不要暴露内部 tag 或调试字段，只解释用户可见资产。"
+        "agent_action": "不要暴露内部 tag 或调试字段，只解释用户可见内容。"
       },
       "en": {
         "label": "Raw payload request",
-        "agent_action": "Do not expose internal tags or debug fields; explain user-visible assets only."
+        "agent_action": "Do not expose internal tags or debug fields; explain user-visible content only."
       }
     }
   },

@@ -195,8 +195,8 @@ final class Eq60V5ReportDeliveryTest extends TestCase
             ->assertJsonPath('ok', true)
             ->assertJsonPath('generating', true)
             ->assertJsonPath('snapshot_error', false)
-            ->assertJsonPath('variant', ReportAccess::VARIANT_FREE)
-            ->assertJsonPath('locked', true);
+            ->assertJsonPath('variant', ReportAccess::VARIANT_FULL)
+            ->assertJsonPath('locked', false);
 
         $this->assertSame([], (array) $response->json('report'));
         $this->assertSame('pending', (string) DB::table('report_snapshots')->where('attempt_id', $attemptId)->value('status'));

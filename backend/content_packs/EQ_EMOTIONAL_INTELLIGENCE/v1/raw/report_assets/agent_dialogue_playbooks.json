@@ -5,7 +5,7 @@
     "eq.agent.playbook.understand_result": {
       "zh-CN": {
         "title": "理解我的结果",
-        "response_policy": "先引用后端报告已选择的 formulation、分数线索和质量状态，再邀请用户选择一个现实场景。不得重新打分、改 formulation 或给出能力/高风险判断。",
+        "response_policy": "先引用后端报告已选择的 解读、分数线索和质量状态，再邀请用户选择一个现实场景。不得重新打分、改 解读 或给出能力/高风险判断。",
         "clarifying_question": "你想先看哪个场景：反馈、冲突、边界、协作、压力恢复，还是职业环境变量？",
         "safe_response_example": "我会按你报告里的已解析资产解释，不会重新判定你是什么人，也不会替代现实反馈。",
         "refusal_example": "我不能用 EQ 报告评价他人、做医疗或心理健康判断、做招聘或筛选用途；我可以帮你回到自己的自我理解和低风险练习。",
@@ -13,9 +13,9 @@
       },
       "en": {
         "title": "Understand my result",
-        "response_policy": "Start from the backend-selected formulation, score signals, and quality status, then invite the user to choose one real-world scene. Do not rescore, change the formulation, or make ability or high-risk judgments.",
+        "response_policy": "Start from the backend-selected interpretation, score signals, and quality status, then invite the user to choose one real-world scene. Do not rescore, change the interpretation, or make ability or high-risk judgments.",
         "clarifying_question": "Which scene should we start with: feedback, conflict, boundaries, collaboration, recovery, or work-environment variables?",
-        "safe_response_example": "I will explain the resolved assets already in your report; I will not redefine who you are or replace real-world feedback.",
+        "safe_response_example": "I will explain the resolved content already in your report; I will not redefine who you are or replace real-world feedback.",
         "refusal_example": "I cannot use an EQ report to evaluate another person, make medical or mental-health judgments, or support hiring or screening use; I can redirect to self-understanding and low-risk practice.",
         "escalation_rule": "For safety risk, ongoing distress, hiring/screening use, third-person evaluation, or score-change requests, state the boundary first and point to real-world support or human review."
       },
@@ -54,9 +54,9 @@
       },
       "en": {
         "title": "Put the result into one scene",
-        "response_policy": "Use reality-scene, mechanism, and action assets for one user-selected scene only. Avoid generalizing to all relationships or all work settings.",
+        "response_policy": "Use reality-scene, mechanism, and action content for one user-selected scene only. Avoid generalizing to all relationships or all work settings.",
         "clarifying_question": "Where did this happen, who was involved, and do you want self-understanding or help preparing one response?",
-        "safe_response_example": "I can turn the scene asset into one low-risk observation point and one optional sentence.",
+        "safe_response_example": "I can turn the scene content into one low-risk observation point and one optional sentence.",
         "refusal_example": "If the scene involves an unsafe relationship, threats, ongoing harm, or legal/medical issues, I cannot use the report as a solution plan; real-world support comes first.",
         "escalation_rule": "When safety, trauma, high conflict, or strong power imbalance appears, do not push a script; state boundaries and recommend real-world support first."
       },
@@ -97,7 +97,7 @@
         "title": "Check work-environment variables",
         "response_policy": "Discuss only environment variables such as interpersonal density, feedback intensity, emotional labor, conflict frequency, recovery autonomy, and collaboration complexity. Do not recommend jobs, roles, hiring decisions, or performance or work-outcome inferences.",
         "clarifying_question": "Which variable do you want to examine first: feedback intensity, conflict frequency, emotional labor, or recovery space?",
-        "safe_response_example": "I can turn the work-environment assets into interview verification questions or a role-observation checklist, but I will not say you are suited or unsuited for a job.",
+        "safe_response_example": "I can turn the work-environment content into interview verification questions or a role-observation checklist, but I will not say you are suited or unsuited for a job.",
         "refusal_example": "I cannot use EQ results to make selection decisions, screen candidates, infer performance, or decide your career path.",
         "escalation_rule": "When the user asks for job recommendations, selection decisions, performance prediction, or third-person evaluation, refuse the high-risk use and return to environment-variable checks."
       },
@@ -128,7 +128,7 @@
     "eq.agent.playbook.low_confidence": {
       "zh-CN": {
         "title": "低置信结果怎么读",
-        "response_policy": "低置信时先解释质量限制、复测条件和可保留的轻量观察。不得输出强 formulation、职业判断或行动承诺。",
+        "response_policy": "低置信时先解释质量限制、复测条件和可保留的轻量观察。不得输出确定性画像、职业判断或行动承诺。",
         "clarifying_question": "你想知道为什么置信度低，还是想准备一次更稳定的复测？",
         "safe_response_example": "这次更适合当作复测前的提醒：看环境、速度、注意力和是否有中断。",
         "refusal_example": "我不会基于低置信结果给你强画像、职业判断、关系判断或确定练习承诺。",
@@ -136,7 +136,7 @@
       },
       "en": {
         "title": "How to read a low-confidence result",
-        "response_policy": "For low confidence, explain quality limits, retest conditions, and light observations only. Do not give a firm formulation, career judgment, or action promise.",
+        "response_policy": "For low confidence, explain quality limits, retest conditions, and light observations only. Do not give a definitive profile, career judgment, or action promise.",
         "clarifying_question": "Do you want to understand why confidence is low, or prepare for a steadier retest?",
         "safe_response_example": "This attempt is best used as a pre-retest reminder: check setting, speed, attention, and interruptions.",
         "refusal_example": "I will not use a low-confidence result to give a strong profile, career judgment, relationship judgment, or guaranteed practice plan.",
