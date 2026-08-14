@@ -133,7 +133,7 @@ emit_state() {
     '{schema_version:$schema,status:$status,generation_id:$generation,active_pointer_sha256:$pointer,permit_sha256:$permit,target_set_sha256:$target,snapshot_sha256:$snapshot,slug_count:1046,locale_row_count:2092,repair_target_count:$repair,runtime_readable:$readable,metadata_write_count:$writes,bytes_unchanged:true,active_revision_unchanged:true,deploy_lock_absent:true,deploy_process_absent:true,migration_process_absent:true,content_write_count:0,database_write_count:0,cms_write_count:0,cache_write_count:0,pointer_write_count:0,sitemap_write_count:0,llms_write_count:0,search_submission_count:0,deployment_count:0,migration_count:0,restart_count:0,automatic_retry_allowed:false}'
 }
 
-case "$mode" in inspect|apply) ;; *) fail MODE_INVALID 2 ;; esac
+case "$mode" in preflight|inspect|apply) ;; *) fail MODE_INVALID 2 ;; esac
 [ -n "$authority_root" ] && [[ "$authority_root" == /*/shared/backend/storage/app/private/career_generation_authority ]] || fail ROOT_INVALID 2
 [[ "$authority_root" != *$'\n'* && "$authority_root" != *"/../"* ]] || fail ROOT_INVALID 2
 [[ "$generation_id" =~ ^career-1046-[0-9a-f]{32}$ ]] || fail GENERATION_INVALID 2
@@ -147,7 +147,7 @@ id -u "$runtime_user" >/dev/null 2>&1 || fail RUNTIME_USER_UNKNOWN 2
 declare -a targets=() modes=() labels=() relatives=()
 compute_state
 
-if [ "$mode" = inspect ]; then
+if [ "$mode" != apply ]; then
   if [ "$repair_target_count" -eq 0 ] && [ "$runtime_readable" = true ]; then
     emit_state PASS_DISCOVERABILITY_PERMIT_ALREADY_RUNTIME_READABLE 0
   else
