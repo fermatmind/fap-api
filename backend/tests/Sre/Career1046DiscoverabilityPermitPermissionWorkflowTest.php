@@ -57,6 +57,8 @@ final class Career1046DiscoverabilityPermitPermissionWorkflowTest extends TestCa
             'search_submission_count:0',
             'automatic_retry_allowed:false',
             'bytes_unchanged:true',
+            '[ "$remote_status" -eq 0 ] || exit "$remote_status"',
+            'career.1046.discoverability_permit_permission_control.v1',
         ] as $required) {
             self::assertStringContainsString($required, $combined);
         }

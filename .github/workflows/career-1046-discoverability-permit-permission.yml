@@ -191,16 +191,27 @@ jobs:
           for key in DEPLOY_PATH ACTIVE MODE GENERATION POINTER DEPLOY_USER; do printf -v "q_$key" '%q' "${!key}"; done
           root="${DEPLOY_PATH}/shared/backend/storage/app/private/career_generation_authority"; printf -v q_root '%q' "$root"
           remote="DEPLOY_PATH=$q_DEPLOY_PATH EXPECTED_ACTIVE_REVISION=$q_ACTIVE CAREER_PERMIT_PERMISSION_MODE=$q_MODE CAREER_PERMIT_PERMISSION_ROOT=$q_root CAREER_PERMIT_PERMISSION_GENERATION_ID=$q_GENERATION CAREER_PERMIT_PERMISSION_POINTER_SHA256=$q_POINTER CAREER_PERMIT_PERMISSION_OWNER=$q_DEPLOY_USER CAREER_PERMIT_PERMISSION_GROUP=www-data CAREER_PERMIT_PERMISSION_RUNTIME_USER=www-data"
+          remote_status=0
+          set +e
           if [ "$MODE" = apply ]; then
             jq '.possible_metadata_write_state="ambiguous"' "$RECEIPT" > "$RECEIPT.next" && mv "$RECEIPT.next" "$RECEIPT"
             for key in TARGET SNAPSHOT PERMIT REPAIR_COUNT; do printf -v "q_$key" '%q' "${!key}"; done
             result="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "sudo -n env $remote CAREER_PERMIT_PERMISSION_APPLY_CONFIRMATION=true CAREER_PERMIT_PERMISSION_EXPECTED_TARGET_SET_SHA256=$q_TARGET CAREER_PERMIT_PERMISSION_EXPECTED_SNAPSHOT_SHA256=$q_SNAPSHOT CAREER_PERMIT_PERMISSION_EXPECTED_PERMIT_SHA256=$q_PERMIT CAREER_PERMIT_PERMISSION_EXPECTED_REPAIR_TARGET_COUNT=$q_REPAIR_COUNT bash -s" < "$script")"
-            jq -e --arg permit "$PERMIT" --argjson writes "$REPAIR_COUNT" '.status=="PASS_DISCOVERABILITY_PERMIT_PERMISSION_REPAIR_VERIFIED" and .permit_sha256==$permit and .repair_target_count==0 and .runtime_readable==true and .metadata_write_count==$writes and .bytes_unchanged==true' <<<"$result" >/dev/null
+            remote_status=$?
           else
             result="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$remote bash -s" < "$script")"
+            remote_status=$?
+          fi
+          set -e
+          if jq -e '.schema_version=="career.1046.discoverability_permit_permission_control.v1" and (.status|type=="string")' <<<"$result" >/dev/null 2>&1; then
+            jq --arg mode "$MODE" --arg control "$CONTROL" --arg active "$ACTIVE" --arg task7b "$TASK7B_RECEIPT_SHA256" --argjson run "$GITHUB_RUN_ID" --argjson attempt "$GITHUB_RUN_ATTEMPT" --arg preflight "$PREFLIGHT_RECEIPT" --argjson remote_status "$remote_status" '. + {mode:$mode,control_plane_sha:$control,active_revision:$active,task7b_receipt_sha256:$task7b,workflow_run_id:$run,workflow_run_attempt:$attempt,preflight_receipt_sha256:(if $preflight=="" then null else $preflight end),possible_metadata_write_state:(if $mode=="apply" and $remote_status!=0 then "ambiguous" elif $mode=="apply" then "verified_complete" else "confirmed_zero_write" end)}' <<<"$result" > "$RECEIPT"
+          fi
+          [ "$remote_status" -eq 0 ] || exit "$remote_status"
+          if [ "$MODE" = apply ]; then
+            jq -e --arg permit "$PERMIT" --argjson writes "$REPAIR_COUNT" '.status=="PASS_DISCOVERABILITY_PERMIT_PERMISSION_REPAIR_VERIFIED" and .permit_sha256==$permit and .repair_target_count==0 and .runtime_readable==true and .metadata_write_count==$writes and .bytes_unchanged==true' <<<"$result" >/dev/null
+          else
             jq -e '.status=="PASS_DISCOVERABILITY_PERMIT_PERMISSION_REPAIR_REQUIRED" and .repair_target_count>=1 and .repair_target_count<=3 and .runtime_readable==false and .metadata_write_count==0 and .bytes_unchanged==true' <<<"$result" >/dev/null
           fi
-          jq --arg mode "$MODE" --arg control "$CONTROL" --arg active "$ACTIVE" --arg task7b "$TASK7B_RECEIPT_SHA256" --argjson run "$GITHUB_RUN_ID" --argjson attempt "$GITHUB_RUN_ATTEMPT" --arg preflight "$PREFLIGHT_RECEIPT" '. + {mode:$mode,control_plane_sha:$control,active_revision:$active,task7b_receipt_sha256:$task7b,workflow_run_id:$run,workflow_run_attempt:$attempt,preflight_receipt_sha256:(if $preflight=="" then null else $preflight end),possible_metadata_write_state:(if $mode=="apply" then "verified_complete" else "confirmed_zero_write" end)}' <<<"$result" > "$RECEIPT"
           if [ "$MODE" = preflight ]; then
             receipt_sha="$(sha256sum "$RECEIPT" | awk '{print $1}')"; target="$(jq -r .target_set_sha256 "$RECEIPT")"; snapshot="$(jq -r .snapshot_sha256 "$RECEIPT")"; permit="$(jq -r .permit_sha256 "$RECEIPT")"; count="$(jq -r .repair_target_count "$RECEIPT")"
             phrase="I explicitly approve one Career 1046 discoverability permit metadata repair from preflight run ${GITHUB_RUN_ID} attempt ${GITHUB_RUN_ATTEMPT} receipt ${receipt_sha}, target ${target}, snapshot ${snapshot}, permit ${permit}; modify exactly ${count} current-generation owner/group/mode targets, preserve file bytes, and perform no other write."
