@@ -152,7 +152,7 @@ jobs:
           else
             [[ "$PREFLIGHT_RUN_ID" =~ ^[1-9][0-9]*$ && "$PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ && "$PREFLIGHT_RECEIPT" =~ ^[0-9a-f]{64}$ && "$PREFLIGHT_DIGEST" =~ ^sha256:[0-9a-f]{64}$ ]]
             prior="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}")"
-            jq -e --arg control "$CONTROL" --argjson attempt "$PREFLIGHT_RUN_ATTEMPT" '.name=="Career 1046 Discoverability Permit Runtime Permission" and .path==".github/workflows/career-1046-discoverability-permit-permission.yml" and .head_sha==$control and .event=="workflow_dispatch" and .status=="completed" and .conclusion=="success" and .run_attempt==$attempt' <<<"$prior" >/dev/null
+            jq -e --arg control "$CONTROL" --argjson attempt "$PREFLIGHT_RUN_ATTEMPT" '(.name|startswith("Career 1046 permit permission preflight [op:")) and .path==".github/workflows/career-1046-discoverability-permit-permission.yml" and .head_sha==$control and .event=="workflow_dispatch" and .status=="completed" and .conclusion=="success" and .run_attempt==$attempt' <<<"$prior" >/dev/null
             preflight_name="career-1046-discoverability-permit-permission-preflight-${PREFLIGHT_RUN_ID}-${PREFLIGHT_RUN_ATTEMPT}"
             prior_artifacts="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}/artifacts?per_page=100")"
             prior_id="$(jq -er --arg name "$preflight_name" --arg digest "$PREFLIGHT_DIGEST" '[.artifacts[]|select(.name==$name and .expired==false and .digest==$digest)]|select(length==1)|.[0].id' <<<"$prior_artifacts")"
