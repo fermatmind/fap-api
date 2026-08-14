@@ -151,7 +151,7 @@ jobs:
           test "$PREFLIGHT_RUN_ID" -lt "$GITHUB_RUN_ID"
           run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}")"
           jq -e --arg control "$CONTROL" --argjson attempt "$PREFLIGHT_RUN_ATTEMPT" '
-            .name == "Career 1046 Display Asset Replacement"
+            (.name | startswith("Career 1046 display asset preflight [op:"))
             and .path == ".github/workflows/career-1046-display-asset-replacement.yml"
             and .event == "workflow_dispatch"
             and .head_branch == "main"
