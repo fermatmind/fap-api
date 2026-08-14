@@ -72,6 +72,7 @@ final class Career1046DiscoverabilityPermitPermissionWorkflowTest extends TestCa
         $control = $this->read('backend/scripts/deploy/career_1046_discoverability_permit_permission_control.sh');
 
         foreach ([
+            'case "$mode" in preflight|inspect|apply)',
             'targets=("$permit_parent" "$permit_generation" "$permit_file")',
             'modes=(2750 2750 640)',
             'chown "$expected_owner:$expected_group" "${targets[$index]}"',
