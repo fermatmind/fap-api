@@ -129,6 +129,10 @@ jobs:
           mkdir -p artifacts
           receipt=artifacts/career-1046-display-asset-replacement.json
           remote_receipt="$RUNNER_TEMP/career-1046-display-asset-remote-receipt.json"
+          ssh_stderr="$RUNNER_TEMP/career-1046-display-asset-ssh-stderr.log"
+          : > "$ssh_stderr"
+          chmod 0600 "$ssh_stderr"
+          trap 'rm -f -- "$ssh_stderr"' EXIT
           jq -n --arg control "$CONTROL" --arg package "$PACKAGE" '{contract_version:"career.1046.display_asset_replacement.v2",mode:"execute",status:"FAIL_DISPLAY_ASSET_REPLACEMENT",failed_stage:"remote_transport",safe_error_code:"REMOTE_TRANSPORT_FAILURE",control_plane_sha:$control,release_sha:$control,package_sha256:$package,production_write_execution:true,write_commit_state:"ambiguous",writes_committed:false,automatic_retry_allowed:false}' > "$receipt"
           printf -v q_path '%q' "$DEPLOY_PATH"
           printf -v q_control '%q' "$CONTROL"
@@ -137,13 +141,48 @@ jobs:
           printf -v q_attempt '%q' "$GITHUB_RUN_ATTEMPT"
           remote_command="set -euo pipefail; current=\$(readlink -f $q_path/current); test -n \"\$current\"; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_control; test ! -e $q_path/.dep/deploy.lock; release_name=\$(basename \"\$current\"); sudo -n -u www-data -- env CAREER_DISPLAY_REPLACEMENT_EXECUTE=1 CAREER_DISPLAY_REPLACEMENT_BACKEND_ROOT=\"\$current/backend\" CAREER_DISPLAY_REPLACEMENT_CONTROL_PLANE_SHA=$q_control CAREER_DISPLAY_REPLACEMENT_RELEASE_SHA=$q_control CAREER_DISPLAY_REPLACEMENT_RELEASE_NAME=\"\$release_name\" CAREER_DISPLAY_REPLACEMENT_PACKAGE_SHA256=$q_package CAREER_DISPLAY_REPLACEMENT_WORKFLOW_RUN_ID=$q_run CAREER_DISPLAY_REPLACEMENT_WORKFLOW_RUN_ATTEMPT=$q_attempt php \"\$current/backend/scripts/operations/career_1046_display_asset_replacement.php\""
           set +e
-          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$remote_command" > "$remote_receipt"
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$remote_command" > "$remote_receipt" 2> "$ssh_stderr"
           ssh_rc=$?
           set -e
-          if [ -s "$remote_receipt" ] && jq -e . "$remote_receipt" >/dev/null 2>&1; then
-            mv "$remote_receipt" "$receipt"
+          if [ "$ssh_rc" -ne 0 ]; then
+            if [ -s "$remote_receipt" ] && jq -e --arg control "$CONTROL" --arg package "$PACKAGE" '
+              .contract_version == "career.1046.display_asset_replacement.v2"
+              and .mode == "execute"
+              and .status == "FAIL_DISPLAY_ASSET_REPLACEMENT"
+              and .control_plane_sha == $control
+              and .release_sha == $control
+              and .package_sha256 == $package
+              and (.safe_error_code | type == "string" and length > 0)
+              and .production_write_execution == true
+              and .automatic_retry_allowed == false
+            ' "$remote_receipt" >/dev/null 2>&1; then
+              mv "$remote_receipt" "$receipt"
+            else
+              safe_error_code=REMOTE_TRANSPORT_FAILURE
+              if grep -Eiq 'host key verification failed|remote host identification has changed' "$ssh_stderr"; then
+                safe_error_code=REMOTE_HOST_KEY_FAILURE
+              elif grep -Eiq 'permission denied|authentication failed' "$ssh_stderr"; then
+                safe_error_code=REMOTE_AUTHENTICATION_FAILURE
+              elif grep -Eiq 'connection timed out|operation timed out' "$ssh_stderr"; then
+                safe_error_code=REMOTE_CONNECTION_TIMEOUT
+              elif grep -Eiq 'connection refused' "$ssh_stderr"; then
+                safe_error_code=REMOTE_CONNECTION_REFUSED
+              elif grep -Eiq 'connection reset|broken pipe' "$ssh_stderr"; then
+                safe_error_code=REMOTE_CONNECTION_RESET
+              elif grep -Eiq 'no route to host|network is unreachable|could not resolve hostname' "$ssh_stderr"; then
+                safe_error_code=REMOTE_NETWORK_FAILURE
+              fi
+              jq --arg safe_error_code "$safe_error_code" '.safe_error_code = $safe_error_code' "$receipt" > "$receipt.tmp"
+              mv "$receipt.tmp" "$receipt"
+            fi
+            exit "$ssh_rc"
           fi
-          test "$ssh_rc" -eq 0
+          if [ ! -s "$remote_receipt" ] || ! jq -e . "$remote_receipt" >/dev/null 2>&1; then
+            jq '.safe_error_code = "REMOTE_RECEIPT_INVALID"' "$receipt" > "$receipt.tmp"
+            mv "$receipt.tmp" "$receipt"
+            exit 1
+          fi
+          mv "$remote_receipt" "$receipt"
           jq -e --arg control "$CONTROL" --arg package "$PACKAGE" '
             .contract_version == "career.1046.display_asset_replacement.v2"
             and .mode == "execute"

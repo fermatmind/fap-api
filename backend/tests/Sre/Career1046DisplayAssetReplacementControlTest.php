@@ -93,6 +93,17 @@ final class Career1046DisplayAssetReplacementControlTest extends TestCase
         self::assertStringNotContainsString('expected_preflight_state_sha256', $workflow);
         self::assertStringNotContainsString('options: [preflight, apply]', $workflow);
         self::assertStringNotContainsString('run_remote_once', $workflow);
+        self::assertStringContainsString('ssh_stderr="$RUNNER_TEMP/career-1046-display-asset-ssh-stderr.log"', $workflow);
+        self::assertStringContainsString('chmod 0600 "$ssh_stderr"', $workflow);
+        self::assertStringContainsString("trap 'rm -f -- \"\$ssh_stderr\"' EXIT", $workflow);
+        self::assertStringContainsString('2> "$ssh_stderr"', $workflow);
+        self::assertStringContainsString('REMOTE_HOST_KEY_FAILURE', $workflow);
+        self::assertStringContainsString('REMOTE_AUTHENTICATION_FAILURE', $workflow);
+        self::assertStringContainsString('REMOTE_CONNECTION_TIMEOUT', $workflow);
+        self::assertStringContainsString('REMOTE_CONNECTION_REFUSED', $workflow);
+        self::assertStringContainsString('REMOTE_CONNECTION_RESET', $workflow);
+        self::assertStringContainsString('REMOTE_NETWORK_FAILURE', $workflow);
+        self::assertStringContainsString('REMOTE_RECEIPT_INVALID', $workflow);
 
         self::assertStringContainsString('$replacement->execute(', $runner);
         self::assertStringContainsString("'idempotent_noop'", $runner);
@@ -119,6 +130,7 @@ final class Career1046DisplayAssetReplacementControlTest extends TestCase
 
         self::assertStringContainsString('rollback_snapshots', $cache);
         self::assertStringContainsString('restorePreparedJobDetailExposurePointers', $cache);
+        self::assertStringContainsString('Prepared detail active pointer drifted before rollback.', $cache);
         self::assertStringContainsString('jobDetailVersionPayloadKey', $cache);
 
         self::assertStringNotContainsString('--retry-all-errors', $validator);

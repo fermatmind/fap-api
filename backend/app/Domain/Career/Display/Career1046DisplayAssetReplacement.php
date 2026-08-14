@@ -204,23 +204,27 @@ final class Career1046DisplayAssetReplacement
             );
         } catch (Throwable $throwable) {
             $compensationFailure = null;
+            $pointerRestoreFailed = false;
             try {
                 if ($pointersActivated) {
                     $this->responseCache->restorePreparedJobDetailExposurePointers($prepared, $rollbackSnapshots);
                 }
             } catch (Throwable $restoreFailure) {
                 $compensationFailure = $restoreFailure;
+                $pointerRestoreFailed = true;
             }
-            try {
-                $this->responseCache->forgetPreparedJobDetailCandidates($prepared);
-            } catch (Throwable $cleanupFailure) {
-                $compensationFailure ??= $cleanupFailure;
-            }
-            if ($databaseCommitted) {
+            if (! $pointerRestoreFailed) {
                 try {
-                    $this->restoreDatabaseRows($plan['before_rows'], $plan['inserts'], $plan['after_rows']);
-                } catch (Throwable $databaseRestoreFailure) {
-                    $compensationFailure ??= $databaseRestoreFailure;
+                    $this->responseCache->forgetPreparedJobDetailCandidates($prepared);
+                } catch (Throwable $cleanupFailure) {
+                    $compensationFailure ??= $cleanupFailure;
+                }
+                if ($databaseCommitted) {
+                    try {
+                        $this->restoreDatabaseRows($plan['before_rows'], $plan['inserts'], $plan['after_rows']);
+                    } catch (Throwable $databaseRestoreFailure) {
+                        $compensationFailure ??= $databaseRestoreFailure;
+                    }
                 }
             }
             if ($compensationFailure instanceof Throwable) {

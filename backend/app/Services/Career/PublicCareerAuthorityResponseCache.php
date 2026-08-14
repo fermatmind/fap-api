@@ -963,11 +963,12 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             $slug = strtolower(trim((string) ($entry['slug'] ?? '')));
             $rawLocale = trim((string) ($entry['locale'] ?? ''));
             $locale = $this->normalizePublicLocale($rawLocale);
+            $version = trim((string) ($entry['version'] ?? ''));
             $key = $slug.'|'.$locale;
-            if ($slug === '' || $rawLocale === '' || ! isset($snapshots[$key])) {
+            if ($slug === '' || $rawLocale === '' || $version === '' || ! isset($snapshots[$key])) {
                 throw new \InvalidArgumentException('Prepared detail rollback snapshot is incomplete.');
             }
-            $targets[$key] = ['slug' => $slug, 'locale' => $locale];
+            $targets[$key] = ['slug' => $slug, 'locale' => $locale, 'version' => $version];
         }
         ksort($targets, SORT_STRING);
         if (count($targets) !== count($preparedEntries)) {
@@ -982,6 +983,15 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
                         throw new \InvalidArgumentException('Prepared detail rollback snapshot is invalid.');
                     }
                 }
+                if (Cache::get($this->jobDetailActiveVersionKey(
+                    $target['slug'],
+                    $target['locale'],
+                )) !== $target['version']) {
+                    throw new \RuntimeException('Prepared detail active pointer drifted before rollback.');
+                }
+            }
+            foreach ($targets as $key => $target) {
+                $snapshot = $snapshots[$key];
                 $slug = $target['slug'];
                 $locale = $target['locale'];
                 $this->restoreCacheValue($this->jobDetailActiveVersionKey($slug, $locale), $snapshot['active']);
