@@ -42,7 +42,7 @@ can_runtime_read() {
     $value = json_decode(file_get_contents($argv[1]), true, 512, JSON_THROW_ON_ERROR);
     $payload = $value["payload"] ?? null;
     exit(is_array($payload)
-      && ($value["schema_version"] ?? null) === "career.1046.discoverability_release_permit.v1"
+      && ($value["schema_version"] ?? null) === "career.1046.discoverability_release.v1"
       && ($payload["generation_id"] ?? null) === $argv[2]
       && ($payload["active_pointer_sha256"] ?? null) === $argv[3]
       && ($payload["immutable_pointer_sha256"] ?? null) === $argv[3]
@@ -87,7 +87,7 @@ compute_state() {
 
   permit_sha256="$(sha256sum "$permit_file" | awk '{print $1}')"
   jq -e --arg generation "$generation_id" --arg pointer "$expected_pointer_sha256" '
-    .schema_version == "career.1046.discoverability_release_permit.v1"
+    .schema_version == "career.1046.discoverability_release.v1"
     and (.payload_sha256 | test("^[0-9a-f]{64}$"))
     and .payload.generation_id == $generation
     and .payload.active_pointer_sha256 == $pointer
