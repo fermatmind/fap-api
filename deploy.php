@@ -126,6 +126,51 @@ function deployShellArg(string $value): string
     return escapeshellarg($value);
 }
 
+function deployIsTransientGitTransportFailure(\Throwable $failure): bool
+{
+    $message = $failure->getMessage();
+
+    foreach ([
+        'Connection closed by',
+        'Connection reset by peer',
+        'Connection timed out',
+        'Could not resolve hostname github.com',
+        'kex_exchange_identification',
+        'ssh_exchange_identification',
+    ] as $marker) {
+        if (str_contains($message, $marker)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/**
+ * Updating the local bare repository is read-only with respect to the active
+ * application release and safe to repeat after a proven transport-only SSH
+ * failure. Authentication, host-key and repository errors remain fail closed.
+ *
+ * @param  array<string, string>  $environment
+ */
+function deployRunGitRemoteUpdateWithBoundedRetry(string $command, array $environment): void
+{
+    for ($attempt = 1; $attempt <= 2; $attempt++) {
+        try {
+            run($command, ['env' => $environment]);
+
+            return;
+        } catch (\Throwable $failure) {
+            if ($attempt === 2 || ! deployIsTransientGitTransportFailure($failure)) {
+                throw $failure;
+            }
+
+            writeln('<comment>Transient repository transport failure; retrying once.</comment>');
+            sleep(5);
+        }
+    }
+}
+
 function deployMode(): string
 {
     $mode = strtolower(trim((string) get('deploy_mode', 'standard')));
@@ -2068,6 +2113,61 @@ for relative_path in .agents .github .vscode docs tests backend/tests; do
   fi
 done
 BASH);
+});
+
+/**
+ * Keep Deployer's archive strategy unchanged while making only its remote
+ * repository refresh resilient to one proven transient SSH transport failure.
+ */
+task('deploy:update_code', function () {
+    $git = get('bin/git');
+    $repository = get('repository');
+    $target = get('target');
+
+    if (empty($repository)) {
+        throw new \Deployer\Exception\ConfigurationException('Missing repository configuration.');
+    }
+
+    $targetWithDir = $target;
+    if (! empty(get('sub_directory'))) {
+        $targetWithDir .= ':{{sub_directory}}';
+    }
+
+    $bare = parse('{{deploy_path}}/.dep/repo');
+    $environment = [
+        'GIT_TERMINAL_PROMPT' => '0',
+        'GIT_SSH_COMMAND' => get('git_ssh_command'),
+    ];
+
+    start:
+    run("[ -d $bare ] || mkdir -p $bare");
+    run("[ -f $bare/HEAD ] || $git clone --mirror $repository $bare 2>&1", ['env' => $environment]);
+
+    cd($bare);
+
+    if (run("$git config --get remote.origin.url") !== $repository) {
+        cd('{{deploy_path}}');
+        run("rm -rf $bare");
+        goto start;
+    }
+
+    deployRunGitRemoteUpdateWithBoundedRetry("$git remote update 2>&1", $environment);
+
+    if (get('update_code_strategy') === 'archive') {
+        run("$git archive $targetWithDir | tar -x -f - -C {{release_path}} 2>&1");
+    } elseif (get('update_code_strategy') === 'clone') {
+        cd('{{release_path}}');
+        run("$git clone -l $bare .");
+        run("$git remote set-url origin $repository", ['env' => $environment]);
+        run("$git checkout --force $target");
+    } else {
+        throw new \Deployer\Exception\ConfigurationException(
+            parse('Unknown update_code_strategy [{{update_code_strategy}}].'),
+        );
+    }
+
+    $revision = escapeshellarg(run("$git rev-list $target -1"));
+    run("echo $revision > {{release_path}}/REVISION");
 });
 
 /**
