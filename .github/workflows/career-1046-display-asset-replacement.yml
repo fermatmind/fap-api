@@ -1,47 +1,16 @@
 name: Career 1046 Display Asset Replacement
-run-name: Career 1046 display asset ${{ inputs.mode }} [op:${{ inputs.operation_key }}]
+run-name: Career 1046 display asset execute [op:${{ inputs.operation_key }}]
 
 on:
   workflow_dispatch:
     inputs:
-      mode:
-        description: Zero-write preflight or exact receipt-bound apply
-        required: true
-        default: preflight
-        type: choice
-        options: [preflight, apply]
       expected_control_plane_sha:
-        description: Exact deployed main SHA containing this workflow and package
+        description: Exact deployed main-ancestor SHA containing this workflow and package
         required: true
         type: string
       expected_package_sha256:
-        description: Exact assets.jsonl SHA-256
+        description: Exact normalized assets.jsonl SHA-256
         required: true
-        type: string
-      preflight_run_id:
-        description: Apply only; successful exact preflight run id
-        required: false
-        default: ""
-        type: string
-      preflight_run_attempt:
-        description: Apply only; exact preflight run attempt
-        required: false
-        default: ""
-        type: string
-      expected_preflight_receipt_sha256:
-        description: Apply only; exact preflight receipt file SHA-256
-        required: false
-        default: ""
-        type: string
-      expected_preflight_state_sha256:
-        description: Apply only; exact zero-write preflight state SHA-256
-        required: false
-        default: ""
-        type: string
-      operator_approval_phrase:
-        description: Apply only; exact receipt-bound authorization phrase
-        required: false
-        default: ""
         type: string
       operation_key:
         description: Deterministic controlled-operation key
@@ -50,7 +19,6 @@ on:
 
 permissions:
   contents: read
-  actions: read
 
 concurrency:
   group: career-1046-display-asset-replacement-production
@@ -68,7 +36,7 @@ jobs:
       - id: identity
         shell: bash
         env:
-          IDENTITY: control=${{ inputs.expected_control_plane_sha }}|package=${{ inputs.expected_package_sha256 }}|mode=${{ inputs.mode }}|preflight_run=${{ inputs.preflight_run_id }}|preflight_attempt=${{ inputs.preflight_run_attempt }}|preflight_receipt=${{ inputs.expected_preflight_receipt_sha256 }}|preflight_state=${{ inputs.expected_preflight_state_sha256 }}
+          IDENTITY: control=${{ inputs.expected_control_plane_sha }}|package=${{ inputs.expected_package_sha256 }}|mode=execute
         run: echo "operation_key=$(node .github/scripts/controlled-operation-gate.cjs key --repository "$GITHUB_REPOSITORY" --workflow .github/workflows/career-1046-display-asset-replacement.yml --scope career-1046-display-asset-replacement --identity "$IDENTITY")" >> "$GITHUB_OUTPUT"
       - id: gate
         uses: ./.github/actions/controlled-operation-gate
@@ -76,14 +44,14 @@ jobs:
           claimed-key: ${{ inputs.operation_key }}
           expected-key: ${{ steps.identity.outputs.operation_key }}
           workflow-file: career-1046-display-asset-replacement.yml
-          receipt-template: career-1046-display-asset-${{ inputs.mode }}-{run_id}-{run_attempt}
+          receipt-template: career-1046-display-asset-execute-{run_id}-{run_attempt}
 
   execute:
-    name: Career 1046 display asset replacement (${{ inputs.mode }})
+    name: Execute Career 1046 replacement once
     needs: operation_gate
     if: needs.operation_gate.outputs.decision == 'execute'
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 180
     environment: production
     steps:
       - name: Check out exact control plane
@@ -93,118 +61,34 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Validate immutable inputs and package
+      - name: Validate immutable main-ancestor package
         shell: bash
         env:
-          MODE: ${{ inputs.mode }}
           CONTROL: ${{ inputs.expected_control_plane_sha }}
           PACKAGE: ${{ inputs.expected_package_sha256 }}
-          PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
-          PREFLIGHT_RUN_ATTEMPT: ${{ inputs.preflight_run_attempt }}
-          PREFLIGHT_RECEIPT: ${{ inputs.expected_preflight_receipt_sha256 }}
-          PREFLIGHT_STATE: ${{ inputs.expected_preflight_state_sha256 }}
-          APPROVAL: ${{ inputs.operator_approval_phrase }}
         run: |
           set -euo pipefail
           test "$GITHUB_REF" = refs/heads/main
-          [[ "$MODE" =~ ^(preflight|apply)$ ]]
           [[ "$CONTROL" =~ ^[a-f0-9]{40}$ ]]
           [[ "$PACKAGE" =~ ^[a-f0-9]{64}$ ]]
           test "$(git rev-parse HEAD)" = "$CONTROL"
           git fetch --no-tags origin main:refs/remotes/origin/main
-          test "$(git rev-parse origin/main)" = "$CONTROL"
+          git merge-base --is-ancestor "$CONTROL" origin/main
           package_path=backend/content_assets/career/workbuddy-1046-display-v1
           test "$(sha256sum "$package_path/assets.jsonl" | awk '{print $1}')" = "$PACKAGE"
-          jq -e --arg package "$PACKAGE" '
-            .contract_version == "career.workbuddy_1046_display_asset_package.v1"
+          delivery_sha="$(sha256sum "$package_path/w12_s3_delivery_report.json" | awk '{print $1}')"
+          jq -e --arg package "$PACKAGE" --arg delivery "$delivery_sha" '
+            .contract_version == "career.workbuddy_1046_display_asset_package.v2"
             and .counts.careers == 1046
             and .counts.locale_rows == 2092
             and .counts.content_blocks == 4184
             and .files[0].sha256 == $package
+            and .files[1].sha256 == $delivery
+            and .source_delivery_report.sha256 == $delivery
+            and .mapping.numeric_rating_statement_residue_count == 0
             and .negative_guarantees.discoverability_change == false
             and .negative_guarantees.search_submission == false
           ' "$package_path/manifest.json" >/dev/null
-          missing_base_path=backend/content_assets/career/missing-12-display-v1
-          missing_base_sha="$(sha256sum "$missing_base_path/assets.jsonl" | awk '{print $1}')"
-          jq -e --arg missing_base "$missing_base_sha" '
-            .contract_version == "career.missing_12_display_asset_package.v1"
-            and .counts.assets == 12
-            and .counts.localized_pages == 24
-            and .counts.component_count_per_asset == 24
-            and .normalization.content_generation == false
-            and .files[0].sha256 == $missing_base
-            and .negative_guarantees.discoverability_change == false
-            and .negative_guarantees.search_submission == false
-          ' "$missing_base_path/manifest.json" >/dev/null
-          if [[ "$MODE" == preflight ]]; then
-            test -z "$PREFLIGHT_RUN_ID$PREFLIGHT_RUN_ATTEMPT$PREFLIGHT_RECEIPT$PREFLIGHT_STATE$APPROVAL"
-          else
-            [[ "$PREFLIGHT_RUN_ID" =~ ^[1-9][0-9]*$ ]]
-            [[ "$PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
-            [[ "$PREFLIGHT_RECEIPT" =~ ^[a-f0-9]{64}$ ]]
-            [[ "$PREFLIGHT_STATE" =~ ^[a-f0-9]{64}$ ]]
-            expected="I explicitly approve one production Career 1046 display asset replacement from preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} receipt ${PREFLIGHT_RECEIPT} state ${PREFLIGHT_STATE}, control plane ${CONTROL}, package ${PACKAGE}; update exactly 1034 existing v4.2 display assets, insert exactly the authorized 12 missing v4.2 display assets, activate exactly 2092 detail cache payloads, preserve URLs, SEO, discoverability and Search state, and execute no Task 3A through 7B, migration, CMS write, deploy or generation-root change."
-            test "$APPROVAL" = "$expected"
-          fi
-
-      - name: Bind exact preflight receipt
-        if: inputs.mode == 'apply'
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-          CONTROL: ${{ inputs.expected_control_plane_sha }}
-          PACKAGE: ${{ inputs.expected_package_sha256 }}
-          PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
-          PREFLIGHT_RUN_ATTEMPT: ${{ inputs.preflight_run_attempt }}
-          PREFLIGHT_RECEIPT: ${{ inputs.expected_preflight_receipt_sha256 }}
-          PREFLIGHT_STATE: ${{ inputs.expected_preflight_state_sha256 }}
-        run: |
-          set -euo pipefail
-          test "$PREFLIGHT_RUN_ID" -lt "$GITHUB_RUN_ID"
-          run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}")"
-          jq -e --arg control "$CONTROL" --argjson attempt "$PREFLIGHT_RUN_ATTEMPT" '
-            (.name | startswith("Career 1046 display asset preflight [op:"))
-            and .path == ".github/workflows/career-1046-display-asset-replacement.yml"
-            and .event == "workflow_dispatch"
-            and .head_branch == "main"
-            and .head_sha == $control
-            and .run_attempt == $attempt
-            and .status == "completed"
-            and .conclusion == "success"
-          ' <<<"$run" >/dev/null
-          destination="$RUNNER_TEMP/preflight"
-          mkdir -p "$destination"
-          gh run download "$PREFLIGHT_RUN_ID" --name "career-1046-display-asset-preflight-${PREFLIGHT_RUN_ID}-${PREFLIGHT_RUN_ATTEMPT}" --dir "$destination"
-          receipt="$destination/career-1046-display-asset-replacement.json"
-          test "$(sha256sum "$receipt" | awk '{print $1}')" = "$PREFLIGHT_RECEIPT"
-          jq -e --arg control "$CONTROL" --arg package "$PACKAGE" --arg state "$PREFLIGHT_STATE" '
-            .contract_version == "career.1046.display_asset_replacement.v1"
-            and .mode == "preflight"
-            and .status == "PASS_PREFLIGHT_DISPLAY_ASSET_REPLACEMENT"
-            and .control_plane_sha == $control
-            and .release_sha == $control
-            and .package_sha256 == $package
-            and .state_sha256 == $state
-            and .package.career_count == 1046
-            and .package.locale_row_count == 2092
-            and .package.content_block_count == 4184
-            and .missing_base_package.asset_count == 12
-            and .missing_base_package.localized_page_count == 24
-            and .missing_base_package.content_generation == false
-            and .authority.target_count == 1046
-            and .authority.changed_count == 1046
-            and .authority.existing_target_count == 1034
-            and .authority.component_order_before_counts["24"] == 1034
-            and .authority.component_order_before_counts["26"] == 0
-            and .authority.component_order_before_counts.missing == 12
-            and .authority.insert_count == 12
-            and .authority.component_order_after_count == 1046
-            and .cache.ready_active_count == 2092
-            and .production_write_execution == false
-            and .write_commit_state == "confirmed_zero_write"
-            and .observed_database_mutation_query_count == 0
-            and .writes_committed == false
-          ' "$receipt" >/dev/null
 
       - name: Set up pinned production SSH identity
         uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
@@ -227,14 +111,11 @@ jobs:
           chmod 0600 ~/.ssh/known_hosts
           ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
 
-      - name: Execute exact production preflight or apply
+      - name: Execute exact production replacement without mutation retry
         shell: bash
         env:
-          MODE: ${{ inputs.mode }}
           CONTROL: ${{ inputs.expected_control_plane_sha }}
           PACKAGE: ${{ inputs.expected_package_sha256 }}
-          PREFLIGHT_RECEIPT: ${{ inputs.expected_preflight_receipt_sha256 }}
-          PREFLIGHT_STATE: ${{ inputs.expected_preflight_state_sha256 }}
           DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
           DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
           DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
@@ -248,133 +129,64 @@ jobs:
           mkdir -p artifacts
           receipt=artifacts/career-1046-display-asset-replacement.json
           remote_receipt="$RUNNER_TEMP/career-1046-display-asset-remote-receipt.json"
-          ssh_stderr="$RUNNER_TEMP/career-1046-display-asset-ssh.stderr"
-          trap 'rm -f -- "$ssh_stderr"' EXIT
-          jq -n --arg mode "$MODE" --arg control "$CONTROL" --arg package "$PACKAGE" \
-            '{contract_version:"career.1046.display_asset_replacement.v1",mode:$mode,status:"FAIL_DISPLAY_ASSET_REPLACEMENT",failed_stage:"remote_transport",safe_error_code:"REMOTE_TRANSPORT_FAILURE",control_plane_sha:$control,release_sha:$control,package_sha256:$package,production_write_execution:($mode=="apply"),write_commit_state:(if $mode=="apply" then "ambiguous" else "confirmed_zero_write" end),writes_committed:false}' > "$receipt"
-          apply=0
-          [[ "$MODE" != apply ]] || apply=1
+          jq -n --arg control "$CONTROL" --arg package "$PACKAGE" '{contract_version:"career.1046.display_asset_replacement.v2",mode:"execute",status:"FAIL_DISPLAY_ASSET_REPLACEMENT",failed_stage:"remote_transport",safe_error_code:"REMOTE_TRANSPORT_FAILURE",control_plane_sha:$control,release_sha:$control,package_sha256:$package,production_write_execution:true,write_commit_state:"ambiguous",writes_committed:false,automatic_retry_allowed:false}' > "$receipt"
           printf -v q_path '%q' "$DEPLOY_PATH"
           printf -v q_control '%q' "$CONTROL"
           printf -v q_package '%q' "$PACKAGE"
-          printf -v q_mode '%q' "$MODE"
-          printf -v q_preflight_receipt '%q' "$PREFLIGHT_RECEIPT"
-          printf -v q_preflight_state '%q' "$PREFLIGHT_STATE"
           printf -v q_run '%q' "$GITHUB_RUN_ID"
           printf -v q_attempt '%q' "$GITHUB_RUN_ATTEMPT"
-          printf -v q_apply '%q' "$apply"
-          remote_command="set -euo pipefail; current=\$(readlink -f $q_path/current); test -n \"\$current\"; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_control; test ! -e $q_path/.dep/deploy.lock; release_name=\$(basename \"\$current\"); sudo -n -u www-data -- env CAREER_DISPLAY_REPLACEMENT_EXECUTE=1 CAREER_DISPLAY_REPLACEMENT_BACKEND_ROOT=\"\$current/backend\" CAREER_DISPLAY_REPLACEMENT_CONTROL_PLANE_SHA=$q_control CAREER_DISPLAY_REPLACEMENT_RELEASE_SHA=$q_control CAREER_DISPLAY_REPLACEMENT_RELEASE_NAME=\"\$release_name\" CAREER_DISPLAY_REPLACEMENT_PACKAGE_SHA256=$q_package CAREER_DISPLAY_REPLACEMENT_PREFLIGHT_RECEIPT_SHA256=$q_preflight_receipt CAREER_DISPLAY_REPLACEMENT_PREFLIGHT_STATE_SHA256=$q_preflight_state CAREER_DISPLAY_REPLACEMENT_WORKFLOW_RUN_ID=$q_run CAREER_DISPLAY_REPLACEMENT_WORKFLOW_RUN_ATTEMPT=$q_attempt CAREER_DISPLAY_REPLACEMENT_APPLY_AUTHORIZED=$q_apply php \"\$current/backend/scripts/operations/career_1046_display_asset_replacement.php\" $q_mode"
-          run_remote_once() {
-            : > "$remote_receipt"
-            : > "$ssh_stderr"
-            chmod 0600 "$ssh_stderr"
-            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$remote_command" \
-              > "$remote_receipt" 2> "$ssh_stderr"
-          }
-          attempt=1
+          remote_command="set -euo pipefail; current=\$(readlink -f $q_path/current); test -n \"\$current\"; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_control; test ! -e $q_path/.dep/deploy.lock; release_name=\$(basename \"\$current\"); sudo -n -u www-data -- env CAREER_DISPLAY_REPLACEMENT_EXECUTE=1 CAREER_DISPLAY_REPLACEMENT_BACKEND_ROOT=\"\$current/backend\" CAREER_DISPLAY_REPLACEMENT_CONTROL_PLANE_SHA=$q_control CAREER_DISPLAY_REPLACEMENT_RELEASE_SHA=$q_control CAREER_DISPLAY_REPLACEMENT_RELEASE_NAME=\"\$release_name\" CAREER_DISPLAY_REPLACEMENT_PACKAGE_SHA256=$q_package CAREER_DISPLAY_REPLACEMENT_WORKFLOW_RUN_ID=$q_run CAREER_DISPLAY_REPLACEMENT_WORKFLOW_RUN_ATTEMPT=$q_attempt php \"\$current/backend/scripts/operations/career_1046_display_asset_replacement.php\""
           set +e
-          run_remote_once
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$remote_command" > "$remote_receipt"
           ssh_rc=$?
           set -e
-          while [ "$MODE" = preflight ] && [ "$ssh_rc" -eq 255 ] && [ ! -s "$remote_receipt" ] && [ "$attempt" -lt 3 ]; do
-            sleep 10
-            attempt=$((attempt + 1))
-            set +e
-            run_remote_once
-            ssh_rc=$?
-            set -e
-          done
-          if [ "$ssh_rc" -ne 0 ]; then
-            if [ -s "$remote_receipt" ] && jq -e --arg mode "$MODE" --arg control "$CONTROL" --arg package "$PACKAGE" '
-              .contract_version == "career.1046.display_asset_replacement.v1"
-              and .mode == $mode
-              and .status == "FAIL_DISPLAY_ASSET_REPLACEMENT"
-              and .control_plane_sha == $control
-              and .release_sha == $control
-              and .package_sha256 == $package
-              and (.safe_error_code | type == "string" and length > 0)
-              and (if $mode == "preflight" then
-                .production_write_execution == false
-                and .write_commit_state == "confirmed_zero_write"
-                and .writes_committed == false
-              else true end)
-            ' "$remote_receipt" >/dev/null; then
-              mv "$remote_receipt" "$receipt"
-            else
-              safe_error_code=REMOTE_TRANSPORT_FAILURE
-              if [ "$ssh_rc" -eq 255 ]; then
-                if grep -Eq 'REMOTE HOST IDENTIFICATION HAS CHANGED|Host key verification failed|No (ED25519|ECDSA|RSA) host key is known|Offending .* key' "$ssh_stderr"; then
-                  safe_error_code=REMOTE_HOST_KEY_FAILURE
-                elif grep -Eq 'Permission denied|Authentication failed|Too many authentication failures' "$ssh_stderr"; then
-                  safe_error_code=REMOTE_AUTHENTICATION_FAILURE
-                elif grep -Eq 'Connection timed out|Operation timed out' "$ssh_stderr"; then
-                  safe_error_code=REMOTE_CONNECTION_TIMEOUT
-                elif grep -Eq 'Connection refused' "$ssh_stderr"; then
-                  safe_error_code=REMOTE_CONNECTION_REFUSED
-                elif grep -Eq 'Connection reset by peer|Connection closed by|kex_exchange_identification:' "$ssh_stderr"; then
-                  safe_error_code=REMOTE_CONNECTION_RESET
-                elif grep -Eq 'Could not resolve hostname|No route to host|Network is unreachable|ssh: connect to host' "$ssh_stderr"; then
-                  safe_error_code=REMOTE_NETWORK_FAILURE
-                fi
-              fi
-              jq --arg safe_error_code "$safe_error_code" '.safe_error_code = $safe_error_code' "$receipt" > "$receipt.next"
-              mv "$receipt.next" "$receipt"
-            fi
-            exit "$ssh_rc"
+          if [ -s "$remote_receipt" ] && jq -e . "$remote_receipt" >/dev/null 2>&1; then
+            mv "$remote_receipt" "$receipt"
           fi
-          test -s "$remote_receipt"
-          mv "$remote_receipt" "$receipt"
-          jq -e --arg mode "$MODE" --arg control "$CONTROL" --arg package "$PACKAGE" '
-            .contract_version == "career.1046.display_asset_replacement.v1"
-            and .mode == $mode
+          test "$ssh_rc" -eq 0
+          jq -e --arg control "$CONTROL" --arg package "$PACKAGE" '
+            .contract_version == "career.1046.display_asset_replacement.v2"
+            and .mode == "execute"
+            and .status == "PASS_EXECUTE_DISPLAY_ASSET_REPLACEMENT"
             and .control_plane_sha == $control
             and .release_sha == $control
             and .package_sha256 == $package
             and .package.career_count == 1046
             and .package.locale_row_count == 2092
             and .package.content_block_count == 4184
-            and .missing_base_package.asset_count == 12
-            and .missing_base_package.localized_page_count == 24
-            and .missing_base_package.content_generation == false
+            and .package.numeric_rating_statement_residue_count == 0
             and .authority.target_count == 1046
-            and .authority.changed_count == 1046
             and .authority.component_order_after_count == 1046
-            and (if $mode == "preflight" then
-              .status == "PASS_PREFLIGHT_DISPLAY_ASSET_REPLACEMENT"
-              and .authority.existing_target_count == 1034
-              and .authority.component_order_before_counts["24"] == 1034
-              and .authority.component_order_before_counts["26"] == 0
-              and .authority.component_order_before_counts.missing == 12
-              and .authority.insert_count == 12
-              and .cache.ready_active_count == 2092
-              and .production_write_execution == false
-              and .write_commit_state == "confirmed_zero_write"
+            and .cache.ready_active_count == 2092
+            and .cache.component_26_count == 2092
+            and .cache.content_match_count == 2092
+            and .cache.career_ai_description_block_sha256 == .package.career_ai_description_block_sha256
+            and .cache.career_path_block_sha256 == .package.career_path_block_sha256
+            and .cache.display_block_aggregate_sha256 == .package.display_block_aggregate_sha256
+            and .production_write_execution == true
+            and .automatic_retry_allowed == false
+            and (if .idempotent_noop then
+              .write_commit_state == "confirmed_zero_write"
               and .writes_committed == false
+              and ([.write_counts[]] | add) == 0
             else
-              .status == "PASS_APPLY_DISPLAY_ASSET_REPLACEMENT"
-              and .write_counts.database_update_count == 1034
-              and .cache.ready_active_count == 2092
-              and .cache.component_26_count == 2092
-              and .cache.content_match_count == 2092
-              and .write_counts.database_insert_count == 12
-              and .write_counts.database_delete_count == 0
-              and .write_counts.cache_pointer_activation_count == 2092
-              and .production_write_execution == true
-              and .write_commit_state == "committed"
+              .write_commit_state == "committed"
               and .writes_committed == true
+              and .write_counts.database_update_count == 1034
+              and .write_counts.database_insert_count == 12
+              and .write_counts.cache_pointer_activation_count == 2092
             end)
           ' "$receipt" >/dev/null
 
       - name: Validate all 2092 public pages
-        if: inputs.mode == 'apply'
         shell: bash
-        run: bash backend/scripts/operations/career_1046_display_asset_live_validate.sh backend/content_assets/career/workbuddy-1046-display-v1/assets.jsonl | tee artifacts/career-1046-display-asset-live-validation.json >/dev/null
+        run: bash backend/scripts/operations/career_1046_display_asset_live_validate.sh backend/content_assets/career/workbuddy-1046-display-v1/assets.jsonl artifacts/career-1046-display-asset-replacement.json | tee artifacts/career-1046-display-asset-live-validation.json >/dev/null
 
       - name: Upload immutable operation receipt
         if: always()
         uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4
         with:
-          name: career-1046-display-asset-${{ inputs.mode }}-${{ github.run_id }}-${{ github.run_attempt }}
+          name: career-1046-display-asset-execute-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
             artifacts/career-1046-display-asset-replacement.json
             artifacts/career-1046-display-asset-live-validation.json

@@ -15,17 +15,20 @@ use Throwable;
 
 final class Career1046DisplayAssetReplacementFailure extends RuntimeException
 {
-    public function __construct(public readonly string $safeCode, ?Throwable $previous = null)
-    {
+    public function __construct(
+        public readonly string $safeCode,
+        ?Throwable $previous = null,
+        public readonly string $writeCommitState = 'confirmed_zero_write',
+    ) {
         parent::__construct($safeCode, 0, $previous);
     }
 }
 
 final class Career1046DisplayAssetReplacement
 {
-    public const CONTRACT_VERSION = 'career.1046.display_asset_replacement.v1';
+    public const CONTRACT_VERSION = 'career.1046.display_asset_replacement.v2';
 
-    public const PACKAGE_CONTRACT_VERSION = 'career.workbuddy_1046_display_asset_package.v1';
+    public const PACKAGE_CONTRACT_VERSION = 'career.workbuddy_1046_display_asset_package.v2';
 
     public const EXPECTED_CAREERS = 1046;
 
@@ -59,55 +62,40 @@ final class Career1046DisplayAssetReplacement
     ) {}
 
     /** @return array<string, mixed> */
-    public function preflight(string $backendRoot, string $expectedPackageSha256): array
+    public function execute(string $backendRoot, string $expectedPackageSha256): array
     {
         $package = $this->loadPackage($backendRoot, $expectedPackageSha256);
         $missingBasePackage = $this->loadMissingBasePackage($backendRoot);
-        $plan = $this->buildPlan($package['rows'], $missingBasePackage['rows']);
-        $cache = $this->cachePreflight($package['slugs']);
+        $plan = $this->buildPlan(
+            $package['rows'],
+            $missingBasePackage['rows'],
+            $package['summary'],
+            $missingBasePackage['summary'],
+        );
 
-        return [
-            'package' => $package['summary'],
-            'missing_base_package' => $missingBasePackage['summary'],
-            'authority' => $plan['summary'],
-            'cache' => $cache,
-            'state_sha256' => self::hashValue([
-                'package_sha256' => $package['summary']['package_sha256'],
-                'missing_base_package_sha256' => $missingBasePackage['summary']['package_sha256'],
-                'before_state_sha256' => $plan['summary']['before_state_sha256'],
-                'after_state_sha256' => $plan['summary']['after_state_sha256'],
-                'cache_state_sha256' => $cache['state_sha256'],
-            ]),
-            'write_counts' => self::zeroWriteCounts(),
-        ];
-    }
+        if ($plan['state'] === 'applied') {
+            $this->assertDatabaseReadback($plan['after_rows']);
+            $cache = $this->assertActiveCacheReadback($package['slugs'], $plan['expected_blocks']);
+            $this->assertCacheAggregates($cache, $package['summary']);
 
-    /**
-     * @return array<string, mixed>
-     */
-    public function apply(
-        string $backendRoot,
-        string $expectedPackageSha256,
-        string $expectedPreflightStateSha256,
-    ): array {
-        $package = $this->loadPackage($backendRoot, $expectedPackageSha256);
-        $missingBasePackage = $this->loadMissingBasePackage($backendRoot);
-        $plan = $this->buildPlan($package['rows'], $missingBasePackage['rows']);
-        $cacheBefore = $this->cachePreflight($package['slugs']);
-        $currentState = self::hashValue([
-            'package_sha256' => $package['summary']['package_sha256'],
-            'missing_base_package_sha256' => $missingBasePackage['summary']['package_sha256'],
-            'before_state_sha256' => $plan['summary']['before_state_sha256'],
-            'after_state_sha256' => $plan['summary']['after_state_sha256'],
-            'cache_state_sha256' => $cacheBefore['state_sha256'],
-        ]);
-        if (! hash_equals($expectedPreflightStateSha256, $currentState)) {
-            throw new Career1046DisplayAssetReplacementFailure('PREFLIGHT_STATE_DRIFT');
+            return $this->result(
+                $package['summary'],
+                $missingBasePackage['summary'],
+                $plan['summary'],
+                $cache,
+                self::zeroWriteCounts(),
+                true,
+            );
         }
+
+        // The internal plan is deliberately complete and zero-write. Cache
+        // readiness is also established before opening the database transaction.
+        $this->cachePreflight($package['slugs']);
 
         $prepared = [];
         $databaseCommitted = false;
         $pointersActivated = false;
+        $rollbackSnapshots = [];
         $databaseUpdateCount = 0;
         $databaseInsertCount = 0;
         try {
@@ -135,6 +123,7 @@ final class Career1046DisplayAssetReplacement
                         ->update([
                             'component_order_json' => self::encodeJson(CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER),
                             'page_payload_json' => $update['after_page_payload_json'],
+                            'metadata_json' => $update['after_metadata_json'],
                             'updated_at' => now(),
                         ]);
                     if ($affected !== 1) {
@@ -181,36 +170,25 @@ final class Career1046DisplayAssetReplacement
                 throw new Career1046DisplayAssetReplacementFailure('CACHE_CANDIDATE_COUNT_MISMATCH');
             }
 
-            $activation = $this->responseCache->activatePreparedJobDetailPayloadsForExposure($prepared);
+            $activation = $this->responseCache->activatePreparedJobDetailPayloadsForExposure($prepared, true);
             if (($activation['status'] ?? null) !== 'pass'
                 || count((array) ($activation['entries'] ?? [])) !== self::EXPECTED_LOCALE_ROWS
                 || ($activation['failures'] ?? []) !== []) {
                 throw new Career1046DisplayAssetReplacementFailure('CACHE_POINTER_ACTIVATION_FAILED');
             }
             $pointersActivated = true;
+            $rollbackSnapshots = (array) ($activation['rollback_snapshots'] ?? []);
 
-            // Every candidate payload was content-verified before activation, and
-            // the activation primitive verifies each active pointer immediately.
-            // Build the receipt from those committed entries so a transient second
-            // cache read cannot turn a successful public commit into an ambiguous
-            // failure after the rollback boundary has passed.
-            $cacheAfter = [
-                'ready_active_count' => count($activation['entries']),
-                'component_26_count' => count($activation['entries']),
-                'content_match_count' => count($prepared),
-                'state_sha256' => self::setHash(array_map(
-                    static fn (array $entry): string => $entry['slug'].'|'.$entry['locale'].'|'.$entry['version'],
-                    $prepared,
-                )),
-            ];
+            $this->assertDatabaseReadback($plan['after_rows']);
+            $cacheAfter = $this->assertActiveCacheReadback($package['slugs'], $plan['expected_blocks']);
+            $this->assertCacheAggregates($cacheAfter, $package['summary']);
 
-            return [
-                'package' => $package['summary'],
-                'missing_base_package' => $missingBasePackage['summary'],
-                'authority' => $plan['summary'],
-                'cache' => $cacheAfter,
-                'state_sha256' => $currentState,
-                'write_counts' => [
+            return $this->result(
+                $package['summary'],
+                $missingBasePackage['summary'],
+                $plan['summary'],
+                $cacheAfter,
+                [
                     'database_update_count' => $databaseUpdateCount,
                     'database_insert_count' => $databaseInsertCount,
                     'database_delete_count' => 0,
@@ -222,28 +200,69 @@ final class Career1046DisplayAssetReplacement
                     'search_submission_count' => 0,
                     'generation_pointer_write_count' => 0,
                 ],
-            ];
+                false,
+            );
         } catch (Throwable $throwable) {
-            if (! $pointersActivated) {
-                $this->responseCache->forgetPreparedJobDetailExposureProjectionSnapshots($prepared);
+            $compensationFailure = null;
+            try {
+                if ($pointersActivated) {
+                    $this->responseCache->restorePreparedJobDetailExposurePointers($prepared, $rollbackSnapshots);
+                }
+            } catch (Throwable $restoreFailure) {
+                $compensationFailure = $restoreFailure;
             }
-            if ($databaseCommitted && ! $pointersActivated) {
+            try {
+                $this->responseCache->forgetPreparedJobDetailCandidates($prepared);
+            } catch (Throwable $cleanupFailure) {
+                $compensationFailure ??= $cleanupFailure;
+            }
+            if ($databaseCommitted) {
                 try {
-                    $this->restoreDatabaseRows($plan['before_rows'], $plan['inserts']);
-                } catch (Throwable $restoreFailure) {
-                    throw new Career1046DisplayAssetReplacementFailure(
-                        'DATABASE_COMPENSATION_FAILED',
-                        $restoreFailure,
-                    );
+                    $this->restoreDatabaseRows($plan['before_rows'], $plan['inserts'], $plan['after_rows']);
+                } catch (Throwable $databaseRestoreFailure) {
+                    $compensationFailure ??= $databaseRestoreFailure;
                 }
             }
-
-            if ($throwable instanceof Career1046DisplayAssetReplacementFailure) {
-                throw $throwable;
+            if ($compensationFailure instanceof Throwable) {
+                throw new Career1046DisplayAssetReplacementFailure(
+                    'REPLACEMENT_COMPENSATION_FAILED',
+                    $compensationFailure,
+                    'ambiguous',
+                );
             }
 
-            throw new Career1046DisplayAssetReplacementFailure('DISPLAY_ASSET_REPLACEMENT_FAILED', $throwable);
+            throw new Career1046DisplayAssetReplacementFailure(
+                $throwable instanceof Career1046DisplayAssetReplacementFailure
+                    ? $throwable->safeCode
+                    : 'DISPLAY_ASSET_REPLACEMENT_FAILED',
+                $throwable,
+                ($databaseCommitted || $prepared !== []) ? 'rolled_back' : 'confirmed_zero_write',
+            );
         }
+    }
+
+    /** @return array<string, mixed> */
+    private function result(
+        array $package,
+        array $missingPackage,
+        array $authority,
+        array $cache,
+        array $writeCounts,
+        bool $idempotentNoop,
+    ): array {
+        return [
+            'package' => $package,
+            'missing_base_package' => $missingPackage,
+            'authority' => $authority,
+            'cache' => $cache,
+            'idempotent_noop' => $idempotentNoop,
+            'state_sha256' => self::hashValue([
+                'package_sha256' => $package['package_sha256'],
+                'authority_sha256' => $authority['after_state_sha256'],
+                'cache_sha256' => $cache['state_sha256'],
+            ]),
+            'write_counts' => $writeCounts,
+        ];
     }
 
     /**
@@ -268,8 +287,12 @@ final class Career1046DisplayAssetReplacement
      * @param  array<string, array<string, mixed>>  $missingBaseRows
      * @return array<string, mixed>
      */
-    private function buildPlan(array $packageRows, array $missingBaseRows): array
-    {
+    private function buildPlan(
+        array $packageRows,
+        array $missingBaseRows,
+        array $packageSummary,
+        array $missingBaseSummary,
+    ): array {
         $slugs = array_keys($packageRows);
         sort($slugs, SORT_STRING);
         $assets = CareerJobDisplayAsset::query()
@@ -292,9 +315,17 @@ final class Career1046DisplayAssetReplacement
         if ($missingSlugs !== [] && $missingSlugs !== $authorizedInsertSlugs) {
             throw new Career1046DisplayAssetReplacementFailure('DISPLAY_ASSET_TARGET_SET_MISMATCH');
         }
-        if (! in_array($assets->count(), [self::EXPECTED_CAREERS - self::EXPECTED_INSERTS, self::EXPECTED_CAREERS], true)) {
-            throw new Career1046DisplayAssetReplacementFailure('DISPLAY_ASSET_TARGET_COUNT_MISMATCH');
-        }
+        $legacyCount = $assets->filter(static fn (CareerJobDisplayAsset $asset): bool => array_values((array) $asset->component_order_json) === CareerDisplayAssetComponentContract::LEGACY_V4_2_ORDER)->count();
+        $currentCount = $assets->filter(static fn (CareerJobDisplayAsset $asset): bool => array_values((array) $asset->component_order_json) === CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER)->count();
+        $authorityState = $this->classifyAuthorityState(
+            $assets->count(),
+            $missingSlugs,
+            $authorizedInsertSlugs,
+            $legacyCount,
+            $currentCount,
+        );
+        $initialState = $authorityState === 'initial';
+        $appliedState = $authorityState === 'applied';
 
         $occupations = Occupation::query()
             ->whereIn('canonical_slug', $missingSlugs)
@@ -320,12 +351,18 @@ final class Career1046DisplayAssetReplacement
 
             $pagePayload = is_array($asset->page_payload_json) ? $asset->page_payload_json : [];
             $afterPagePayload = $this->mergeLocalizedBlocks($pagePayload, $packageRows[$slug]);
+            $afterMetadata = $this->metadataWithReplacementLineage(
+                is_array($asset->metadata_json) ? $asset->metadata_json : [],
+                $packageRows[$slug],
+                $packageSummary,
+            );
             $before = $this->rowSnapshot($asset, $order, $pagePayload);
             $beforeState = $this->rowStateSnapshot($asset, $order, $pagePayload);
             $after = $this->rowStateSnapshot(
                 $asset,
                 CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER,
                 $afterPagePayload,
+                $afterMetadata,
             );
             $beforeRows[$slug] = $before;
             $beforeStates[$slug] = $beforeState;
@@ -333,12 +370,14 @@ final class Career1046DisplayAssetReplacement
             $expectedBlocks[$slug] = $this->localizedBlocksForCache($afterPagePayload);
 
             if ($order !== CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER
-                || ! hash_equals($beforeState['page_payload_sha256'], $after['page_payload_sha256'])) {
+                || ! hash_equals($beforeState['page_payload_sha256'], $after['page_payload_sha256'])
+                || ! hash_equals($beforeState['metadata_sha256'], $after['metadata_sha256'])) {
                 $updates[] = [
                     'id' => (string) $asset->id,
                     'slug' => $slug,
                     'before_state' => $beforeState,
                     'after_page_payload_json' => self::encodeJson($afterPagePayload),
+                    'after_metadata_json' => self::encodeJson($afterMetadata),
                 ];
             }
         }
@@ -352,6 +391,8 @@ final class Career1046DisplayAssetReplacement
                 $occupation,
                 $missingBaseRows[$slug],
                 $packageRows[$slug],
+                $packageSummary,
+                $missingBaseSummary,
             );
             $candidate = new CareerJobDisplayAsset($attributes);
             $afterRows[$slug] = $this->rowStateSnapshot(
@@ -377,8 +418,15 @@ final class Career1046DisplayAssetReplacement
         ksort($afterRows, SORT_STRING);
         ksort($expectedBlocks, SORT_STRING);
         $changedCount = count($updates) + count($inserts);
+        if ($initialState && (count($updates) !== self::EXPECTED_CAREERS - self::EXPECTED_INSERTS || count($inserts) !== self::EXPECTED_INSERTS)) {
+            throw new Career1046DisplayAssetReplacementFailure('INITIAL_REPLACEMENT_PLAN_MISMATCH');
+        }
+        if ($appliedState && $changedCount !== 0) {
+            throw new Career1046DisplayAssetReplacementFailure('APPLIED_REPLACEMENT_STATE_HASH_MISMATCH');
+        }
 
         return [
+            'state' => $appliedState ? 'applied' : 'initial',
             'before_rows' => $beforeRows,
             'after_rows' => $afterRows,
             'expected_blocks' => $expectedBlocks,
@@ -392,8 +440,8 @@ final class Career1046DisplayAssetReplacement
                 'before_state_sha256' => self::hashValue($beforeStates),
                 'after_state_sha256' => self::hashValue($afterRows),
                 'component_order_before_counts' => [
-                    '24' => $assets->filter(static fn (CareerJobDisplayAsset $asset): bool => array_values((array) $asset->component_order_json) === CareerDisplayAssetComponentContract::LEGACY_V4_2_ORDER)->count(),
-                    '26' => $assets->filter(static fn (CareerJobDisplayAsset $asset): bool => array_values((array) $asset->component_order_json) === CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER)->count(),
+                    '24' => $legacyCount,
+                    '26' => $currentCount,
                     'missing' => count($missingSlugs),
                 ],
                 'component_order_after_count' => count($afterRows),
@@ -403,6 +451,31 @@ final class Career1046DisplayAssetReplacement
                 'outside_target_count' => 0,
             ],
         ];
+    }
+
+    /** @param list<string> $missingSlugs @param list<string> $authorizedInsertSlugs */
+    private function classifyAuthorityState(
+        int $assetCount,
+        array $missingSlugs,
+        array $authorizedInsertSlugs,
+        int $legacyCount,
+        int $currentCount,
+    ): string {
+        if ($assetCount === self::EXPECTED_CAREERS - self::EXPECTED_INSERTS
+            && $missingSlugs === $authorizedInsertSlugs
+            && count($missingSlugs) === self::EXPECTED_INSERTS
+            && $legacyCount === self::EXPECTED_CAREERS - self::EXPECTED_INSERTS
+            && $currentCount === 0) {
+            return 'initial';
+        }
+        if ($assetCount === self::EXPECTED_CAREERS
+            && $missingSlugs === []
+            && $legacyCount === 0
+            && $currentCount === self::EXPECTED_CAREERS) {
+            return 'applied';
+        }
+
+        throw new Career1046DisplayAssetReplacementFailure('DISPLAY_ASSET_TARGET_STATE_INVALID');
     }
 
     /**
@@ -440,6 +513,8 @@ final class Career1046DisplayAssetReplacement
         Occupation $occupation,
         array $baseRow,
         array $localizedRows,
+        array $packageSummary,
+        array $missingBaseSummary,
     ): array {
         $payload = $baseRow['asset_payload'] ?? null;
         if (! is_array($payload)
@@ -465,17 +540,42 @@ final class Career1046DisplayAssetReplacement
             'sources_json' => $payload['sources_json'] ?? null,
             'structured_data_json' => $payload['structured_data_json'] ?? null,
             'implementation_contract_json' => $payload['implementation_contract_json'] ?? null,
-            'metadata_json' => [
+            'metadata_json' => $this->metadataWithReplacementLineage([
                 'authority_package' => 'career-missing-12-display-v1',
+                'workbook_sha256' => $missingBaseSummary['source_workbook_sha256'],
+                'workbook_basename' => $missingBaseSummary['source_workbook_basename'],
+                'row_number' => $baseRow['source_workbook_row_number'] ?? null,
+                'command' => 'career:import-selected-display-assets',
+                'mapper_version' => $missingBaseSummary['mapper_version'],
+                'validator_version' => 'career_selected_display_asset_import_v0.1',
                 'source_workbook_row_number' => $baseRow['source_workbook_row_number'] ?? null,
                 'source_workbook_row_sha256' => $baseRow['source_workbook_row_sha256'] ?? null,
                 'normalized_workbook_row_sha256' => $baseRow['normalized_workbook_row_sha256'] ?? null,
                 'asset_payload_sha256' => $baseRow['asset_payload_sha256'] ?? null,
                 'content_generated' => false,
                 'discoverability_changed' => false,
-            ],
+            ], $localizedRows, $packageSummary),
             'import_run_id' => null,
         ];
+    }
+
+    /** @return array<string, mixed> */
+    private function metadataWithReplacementLineage(
+        array $metadata,
+        array $localizedRows,
+        array $packageSummary,
+    ): array {
+        $metadata['replacement_lineage'] = [
+            'contract_version' => self::CONTRACT_VERSION,
+            'package_id' => 'career-workbuddy-1046-display-v1',
+            'package_sha256' => $packageSummary['package_sha256'],
+            'manifest_sha256' => $packageSummary['manifest_sha256'],
+            'delivery_report_sha256' => $packageSummary['delivery_report_sha256'],
+            'source_file_chain_sha256' => $packageSummary['source_file_chain_sha256'],
+            'localized_asset_sha256' => self::hashValue($localizedRows),
+        ];
+
+        return $metadata;
     }
 
     /**
@@ -498,11 +598,14 @@ final class Career1046DisplayAssetReplacement
                 || ! is_array($blocks['career_path_block'] ?? null)) {
                 throw new Career1046DisplayAssetReplacementFailure('PACKAGE_LOCALIZED_BLOCKS_INVALID');
             }
-            $pages[$pageKey]['career_ai_description_block'] = $this->reconcileAiExposureRating(
-                $blocks['career_ai_description_block'],
-                $pages[$pageKey]['ai_impact_table'] ?? null,
-                $locale,
-            );
+            $aiBlock = $blocks['career_ai_description_block'];
+            if (preg_match(
+                '/(?<![0-9])(10|[0-9])(?:\.0)?\s*\/\s*10(?![0-9])/u',
+                self::encodeJson($aiBlock),
+            ) === 1) {
+                throw new Career1046DisplayAssetReplacementFailure('AI_NUMERIC_RATING_RESIDUE');
+            }
+            $pages[$pageKey]['career_ai_description_block'] = $aiBlock;
             $pages[$pageKey]['career_path_block'] = $blocks['career_path_block'];
         }
 
@@ -513,80 +616,6 @@ final class Career1046DisplayAssetReplacement
         }
 
         return $pages;
-    }
-
-    /**
-     * The existing ai_impact_table remains the single numeric rating authority.
-     * A conflicting WorkBuddy introductory rating sentence is removed while the
-     * rest of the reviewed block remains byte-for-byte unchanged.
-     *
-     * @param  array<string, mixed>  $block
-     * @return array<string, mixed>
-     */
-    private function reconcileAiExposureRating(array $block, mixed $aiImpactTable, string $locale): array
-    {
-        $expected = is_array($aiImpactTable) ? (string) ($aiImpactTable['score_normalized'] ?? '') : '';
-        $expectedScore = $this->normalizedAiExposureScore($expected);
-        if ($expectedScore === null || ! is_array($block['body'] ?? null)) {
-            throw new Career1046DisplayAssetReplacementFailure('AI_EXPOSURE_RATING_AUTHORITY_INVALID');
-        }
-        foreach ($block['body'] as $index => $text) {
-            if (! is_string($text)) {
-                throw new Career1046DisplayAssetReplacementFailure('AI_EXPOSURE_BLOCK_BODY_INVALID');
-            }
-            preg_match_all('/(?<![0-9])(10|[0-9])(?:\.0)?\s*\/\s*10(?![0-9])/u', $text, $matches);
-            $conflicts = array_values(array_filter(
-                array_map('intval', $matches[1] ?? []),
-                static fn (int $score): bool => abs($score - $expectedScore) > 0.5,
-            ));
-            if ($conflicts === []) {
-                continue;
-            }
-
-            $paragraphs = explode("\n\n", $text);
-            foreach ($paragraphs as $paragraphIndex => $paragraph) {
-                preg_match_all('/(?<![0-9])(10|[0-9])(?:\.0)?\s*\/\s*10(?![0-9])/u', $paragraph, $paragraphMatches);
-                $paragraphConflicts = array_values(array_filter(
-                    array_map('intval', $paragraphMatches[1] ?? []),
-                    static fn (int $score): bool => abs($score - $expectedScore) > 0.5,
-                ));
-                if ($paragraphConflicts === []) {
-                    continue;
-                }
-                if (! str_starts_with($paragraph, 'FermatMind')) {
-                    throw new Career1046DisplayAssetReplacementFailure('AI_EXPOSURE_RATING_CONFLICT_UNRESOLVED');
-                }
-                $pattern = $locale === 'zh-CN'
-                    ? '/\AFermatMind[^。！？]*[。！？]\s*/u'
-                    : '/\AFermatMind[^.!?]*[.!?]\s*/u';
-                $paragraphs[$paragraphIndex] = preg_replace($pattern, '', $paragraph, 1, $removed) ?? '';
-                if ($removed !== 1 || $paragraphs[$paragraphIndex] === '') {
-                    throw new Career1046DisplayAssetReplacementFailure('AI_EXPOSURE_RATING_CONFLICT_UNRESOLVED');
-                }
-            }
-            $block['body'][$index] = implode("\n\n", $paragraphs);
-            preg_match_all('/(?<![0-9])(10|[0-9])(?:\.0)?\s*\/\s*10(?![0-9])/u', $block['body'][$index], $remainingMatches);
-            foreach (array_map('intval', $remainingMatches[1] ?? []) as $remainingScore) {
-                if (abs($remainingScore - $expectedScore) > 0.5) {
-                    throw new Career1046DisplayAssetReplacementFailure('AI_EXPOSURE_RATING_CONFLICT_UNRESOLVED');
-                }
-            }
-        }
-
-        return $block;
-    }
-
-    private function normalizedAiExposureScore(string $score): ?float
-    {
-        $score = trim($score);
-        if (preg_match('/\A(10|[0-9](?:\.[0-9]+)?)\s*\/\s*10\z/', $score, $match) === 1) {
-            return (float) $match[1];
-        }
-        if (preg_match('/\A(100|[0-9]{1,2}(?:\.[0-9]+)?)\z/', $score, $match) === 1) {
-            return ((float) $match[1]) / 10;
-        }
-
-        return null;
     }
 
     /** @param array<string, mixed> $baseRow */
@@ -640,6 +669,73 @@ final class Career1046DisplayAssetReplacement
     }
 
     /**
+     * @param  list<string>  $slugs
+     * @param  array<string, array<string, array<string, mixed>>>  $expectedBlocks
+     * @return array<string, mixed>
+     */
+    private function assertActiveCacheReadback(array $slugs, array $expectedBlocks): array
+    {
+        $versions = [];
+        $aiHashes = [];
+        $pathHashes = [];
+        foreach (array_chunk($slugs, 50) as $slugChunk) {
+            $snapshot = $this->responseCache->jobDetailPublicationSnapshot($slugChunk, self::LOCALES);
+            foreach ($slugChunk as $slug) {
+                foreach (self::LOCALES as $locale) {
+                    $item = $snapshot[$slug][$locale] ?? null;
+                    $surface = is_array($item) ? data_get($item, 'payload.display_surface_v1') : null;
+                    $content = is_array($surface) ? data_get($surface, 'page.content') : null;
+                    $aiBlock = is_array($content) ? ($content['career_ai_description_block'] ?? null) : null;
+                    $pathBlock = is_array($content) ? ($content['career_path_block'] ?? null) : null;
+                    if (! is_array($item)
+                        || ($item['published'] ?? false) !== true
+                        || ($item['classification'] ?? null) !== 'ready_active'
+                        || ! is_string($item['version'] ?? null)
+                        || data_get($surface, 'component_order') !== CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER
+                        || ! is_array($aiBlock)
+                        || ! is_array($pathBlock)
+                        || self::hashValue($aiBlock) !== self::hashValue($expectedBlocks[$slug][$locale]['career_ai_description_block'] ?? null)
+                        || self::hashValue($pathBlock) !== self::hashValue($expectedBlocks[$slug][$locale]['career_path_block'] ?? null)) {
+                        throw new Career1046DisplayAssetReplacementFailure('ACTIVE_CACHE_FULL_READBACK_MISMATCH');
+                    }
+                    $identity = $slug.'|'.$locale;
+                    $versions[] = $identity.'|'.$item['version'];
+                    $aiHashes[] = $identity.'|'.self::hashValue($aiBlock);
+                    $pathHashes[] = $identity.'|'.self::hashValue($pathBlock);
+                }
+            }
+        }
+        if (count($versions) !== self::EXPECTED_LOCALE_ROWS) {
+            throw new Career1046DisplayAssetReplacementFailure('ACTIVE_CACHE_FULL_READBACK_COUNT_MISMATCH');
+        }
+
+        return [
+            'ready_active_count' => count($versions),
+            'component_26_count' => count($versions),
+            'content_match_count' => count($versions),
+            'career_ai_description_block_sha256' => self::setHash($aiHashes),
+            'career_path_block_sha256' => self::setHash($pathHashes),
+            'display_block_aggregate_sha256' => self::setHash(array_merge($aiHashes, $pathHashes)),
+            'state_sha256' => self::setHash($versions),
+        ];
+    }
+
+    private function assertCacheAggregates(array $cache, array $package): void
+    {
+        foreach ([
+            'career_ai_description_block_sha256',
+            'career_path_block_sha256',
+            'display_block_aggregate_sha256',
+        ] as $key) {
+            if (! is_string($cache[$key] ?? null)
+                || ! is_string($package[$key] ?? null)
+                || ! hash_equals($package[$key], $cache[$key])) {
+                throw new Career1046DisplayAssetReplacementFailure('ACTIVE_CACHE_AGGREGATE_HASH_MISMATCH');
+            }
+        }
+    }
+
+    /**
      * @param  array<string, array<string, mixed>>  $expectedRows
      */
     private function assertDatabaseReadback(array $expectedRows): void
@@ -667,10 +763,11 @@ final class Career1046DisplayAssetReplacement
     /**
      * @param  array<string, array<string, mixed>>  $beforeRows
      * @param  list<array<string, mixed>>  $inserts
+     * @param  array<string, array<string, mixed>>  $afterRows
      */
-    private function restoreDatabaseRows(array $beforeRows, array $inserts): void
+    private function restoreDatabaseRows(array $beforeRows, array $inserts, array $afterRows): void
     {
-        DB::transaction(function () use ($beforeRows, $inserts): void {
+        DB::transaction(function () use ($beforeRows, $inserts, $afterRows): void {
             foreach ($inserts as $insert) {
                 $current = CareerJobDisplayAsset::query()->whereKey($insert['id'])->lockForUpdate()->first();
                 if (! $current instanceof CareerJobDisplayAsset
@@ -686,12 +783,22 @@ final class Career1046DisplayAssetReplacement
                 }
             }
 
-            foreach ($beforeRows as $row) {
+            foreach ($beforeRows as $slug => $row) {
+                $current = CareerJobDisplayAsset::query()->whereKey($row['id'])->lockForUpdate()->first();
+                if (! $current instanceof CareerJobDisplayAsset
+                    || $this->rowStateSnapshot(
+                        $current,
+                        array_values((array) $current->component_order_json),
+                        (array) $current->page_payload_json,
+                    ) !== ($afterRows[$slug] ?? null)) {
+                    throw new Career1046DisplayAssetReplacementFailure('DATABASE_COMPENSATION_UPDATE_STATE_DRIFT');
+                }
                 $affected = DB::table('career_job_display_assets')
                     ->where('id', $row['id'])
                     ->update([
                         'component_order_json' => self::encodeJson($row['component_order']),
                         'page_payload_json' => $row['page_payload_json'],
+                        'metadata_json' => $row['metadata_json'],
                         'updated_at' => $row['updated_at'],
                     ]);
                 if ($affected !== 1) {
@@ -710,6 +817,7 @@ final class Career1046DisplayAssetReplacement
     {
         return $this->rowStateSnapshot($asset, $order, $pagePayload) + [
             'page_payload_json' => self::encodeJson($pagePayload),
+            'metadata_json' => self::encodeJson(is_array($asset->metadata_json) ? $asset->metadata_json : []),
             'updated_at' => $asset->getRawOriginal('updated_at'),
         ];
     }
@@ -719,14 +827,23 @@ final class Career1046DisplayAssetReplacement
      * @param  array<string, mixed>  $pagePayload
      * @return array<string, mixed>
      */
-    private function rowStateSnapshot(CareerJobDisplayAsset $asset, array $order, array $pagePayload): array
-    {
+    private function rowStateSnapshot(
+        CareerJobDisplayAsset $asset,
+        array $order,
+        array $pagePayload,
+        ?array $metadataOverride = null,
+    ): array {
+        $metadata = $metadataOverride ?? (is_array($asset->metadata_json) ? $asset->metadata_json : []);
+        $metadataWithoutReplacement = $metadata;
+        unset($metadataWithoutReplacement['replacement_lineage']);
+
         return [
             'id' => (string) $asset->id,
             'occupation_id' => (string) $asset->occupation_id,
             'slug' => strtolower((string) $asset->canonical_slug),
             'component_order' => $order,
             'page_payload_sha256' => self::hashValue($pagePayload),
+            'metadata_sha256' => self::hashValue($metadata),
             'unchanged_fields_sha256' => self::hashValue([
                 'surface_version' => $asset->surface_version,
                 'asset_version' => $asset->asset_version,
@@ -738,7 +855,7 @@ final class Career1046DisplayAssetReplacement
                 'sources_json' => $asset->sources_json,
                 'structured_data_json' => $asset->structured_data_json,
                 'implementation_contract_json' => $asset->implementation_contract_json,
-                'metadata_json' => $asset->metadata_json,
+                'metadata_json' => $metadataWithoutReplacement,
                 'import_run_id' => $asset->import_run_id,
             ]),
         ];
@@ -762,6 +879,9 @@ final class Career1046DisplayAssetReplacement
             || data_get($manifest, 'counts.localized_pages') !== self::EXPECTED_INSERTS * count(self::LOCALES)
             || data_get($manifest, 'counts.component_count_per_asset') !== count(CareerDisplayAssetComponentContract::LEGACY_V4_2_ORDER)
             || data_get($manifest, 'normalization.content_generation') !== false
+            || preg_match('/\A[a-f0-9]{64}\z/', (string) data_get($manifest, 'source.workbook_sha256')) !== 1
+            || trim((string) data_get($manifest, 'source.workbook_filename')) === ''
+            || trim((string) data_get($manifest, 'source.mapper_version')) === ''
             || data_get($manifest, 'negative_guarantees.discoverability_change') !== false
             || data_get($manifest, 'negative_guarantees.search_submission') !== false
             || data_get($manifest, 'files.0.sha256') !== $assetsSha256) {
@@ -784,6 +904,10 @@ final class Career1046DisplayAssetReplacement
                 || isset($rows[$slug])
                 || preg_match('/\A[0-9]{2}-[0-9]{4}\z/', (string) ($row['expected_soc'] ?? '')) !== 1
                 || preg_match('/\A[0-9]{2}-[0-9]{4}\.[0-9]{2}\z/', (string) ($row['expected_onet'] ?? '')) !== 1
+                || ! is_int($row['source_workbook_row_number'] ?? null)
+                || $row['source_workbook_row_number'] < 1
+                || preg_match('/\A[a-f0-9]{64}\z/', (string) ($row['source_workbook_row_sha256'] ?? '')) !== 1
+                || preg_match('/\A[a-f0-9]{64}\z/', (string) ($row['normalized_workbook_row_sha256'] ?? '')) !== 1
                 || ! is_array($payload)
                 || ! hash_equals($payloadHash, self::hashValue($payload))
                 || array_values((array) ($payload['component_order_json'] ?? [])) !== CareerDisplayAssetComponentContract::LEGACY_V4_2_ORDER
@@ -812,6 +936,8 @@ final class Career1046DisplayAssetReplacement
                 'localized_page_count' => self::EXPECTED_INSERTS * count(self::LOCALES),
                 'slug_set_sha256' => self::setHash(array_keys($rows)),
                 'source_workbook_sha256' => (string) data_get($manifest, 'source.workbook_sha256'),
+                'source_workbook_basename' => (string) data_get($manifest, 'source.workbook_filename'),
+                'mapper_version' => (string) data_get($manifest, 'source.mapper_version'),
                 'content_generation' => false,
             ],
         ];
@@ -844,21 +970,45 @@ final class Career1046DisplayAssetReplacement
         $root = rtrim($backendRoot, '/').'/'.self::PACKAGE_RELATIVE_PATH;
         $manifestPath = $root.'/manifest.json';
         $assetsPath = $root.'/assets.jsonl';
-        if (! is_file($manifestPath) || ! is_file($assetsPath)) {
+        $deliveryReportPath = $root.'/w12_s3_delivery_report.json';
+        if (! is_file($manifestPath) || ! is_file($assetsPath) || ! is_file($deliveryReportPath)) {
             throw new Career1046DisplayAssetReplacementFailure('PACKAGE_FILE_MISSING');
         }
         $manifest = json_decode((string) file_get_contents($manifestPath), true, 512, JSON_THROW_ON_ERROR);
+        $deliveryReportSha256 = hash_file('sha256', $deliveryReportPath);
         if (! is_array($manifest)
             || ($manifest['contract_version'] ?? null) !== self::PACKAGE_CONTRACT_VERSION
             || data_get($manifest, 'counts.careers') !== self::EXPECTED_CAREERS
             || data_get($manifest, 'counts.locale_rows') !== self::EXPECTED_LOCALE_ROWS
             || data_get($manifest, 'counts.content_blocks') !== self::EXPECTED_BLOCKS
+            || data_get($manifest, 'counts.locales') !== self::LOCALES
+            || count((array) ($manifest['files'] ?? [])) !== 2
+            || data_get($manifest, 'files.0.path') !== 'assets.jsonl'
             || data_get($manifest, 'files.0.sha256') !== $expectedPackageSha256
+            || data_get($manifest, 'files.0.row_count') !== self::EXPECTED_LOCALE_ROWS
+            || data_get($manifest, 'files.1.path') !== 'w12_s3_delivery_report.json'
+            || data_get($manifest, 'files.1.sha256') !== $deliveryReportSha256
+            || data_get($manifest, 'source_delivery_report.sha256') !== $deliveryReportSha256
+            || data_get($manifest, 'source_delivery_report.path') !== 'w12_s3_delivery_report.json'
+            || data_get($manifest, 'mapping.numeric_rating_authority') !== 'existing_ai_impact_table'
+            || data_get($manifest, 'mapping.numeric_rating_statement_residue_count') !== 0
+            || data_get($manifest, 'negative_guarantees.content_regeneration') !== false
+            || data_get($manifest, 'negative_guarantees.seo_payload_change') !== false
+            || data_get($manifest, 'negative_guarantees.structured_data_change') !== false
+            || data_get($manifest, 'negative_guarantees.discoverability_change') !== false
+            || data_get($manifest, 'negative_guarantees.search_submission') !== false
             || ! hash_equals($expectedPackageSha256, hash_file('sha256', $assetsPath))) {
             throw new Career1046DisplayAssetReplacementFailure('PACKAGE_MANIFEST_INVALID');
         }
 
         $rows = [];
+        $identities = [];
+        $sourceFiles = [];
+        $sourcePaths = [];
+        $blockHashes = [
+            'career_ai_description_block' => [],
+            'career_path_block' => [],
+        ];
         $handle = fopen($assetsPath, 'rb');
         if ($handle === false) {
             throw new Career1046DisplayAssetReplacementFailure('PACKAGE_UNREADABLE');
@@ -867,14 +1017,54 @@ final class Career1046DisplayAssetReplacement
             $row = json_decode(trim($line), true, 512, JSON_THROW_ON_ERROR);
             $slug = is_array($row) ? strtolower(trim((string) ($row['slug'] ?? ''))) : '';
             $locale = is_array($row) ? trim((string) ($row['locale'] ?? '')) : '';
+            $blocks = is_array($row) ? ($row['blocks'] ?? null) : null;
+            $sources = is_array($row) ? ($row['sources'] ?? null) : null;
+            $identity = $slug.'|'.$locale;
+            $rowKeys = is_array($row) ? array_keys($row) : [];
+            sort($rowKeys, SORT_STRING);
             if (preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $slug) !== 1
                 || ! in_array($locale, self::LOCALES, true)
                 || isset($rows[$slug][$locale])
-                || ! is_array($row['blocks'] ?? null)) {
+                || isset($identities[$identity])
+                || $rowKeys !== ['blocks', 'locale', 'slug', 'sources']
+                || ! is_array($blocks)
+                || ! is_array($sources)) {
                 fclose($handle);
                 throw new Career1046DisplayAssetReplacementFailure('PACKAGE_ROW_INVALID_OR_DUPLICATE');
             }
+
+            ksort($blocks, SORT_STRING);
+            ksort($sources, SORT_STRING);
+            if (array_keys($blocks) !== ['career_ai_description_block', 'career_path_block']
+                || array_keys($sources) !== ['career_ai_description_block', 'career_path_block']
+                || ! $this->packageAiBlockValid($blocks['career_ai_description_block'])
+                || ! $this->packagePathBlockValid($blocks['career_path_block'])) {
+                fclose($handle);
+                throw new Career1046DisplayAssetReplacementFailure('PACKAGE_BLOCK_SCHEMA_INVALID');
+            }
+            foreach (array_keys($blocks) as $blockKey) {
+                $source = $sources[$blockKey];
+                $relativePath = is_array($source) ? trim((string) ($source['relative_path'] ?? '')) : '';
+                $sha256 = is_array($source) ? trim((string) ($source['sha256'] ?? '')) : '';
+                $sourceKeys = is_array($source) ? array_keys($source) : [];
+                sort($sourceKeys, SORT_STRING);
+                $sourceBlock = $blockKey === 'career_ai_description_block' ? '2a' : '2b';
+                if ($relativePath === ''
+                    || preg_match('/\A[a-f0-9]{64}\z/', $sha256) !== 1
+                    || $sourceKeys !== ['relative_path', 'sha256']
+                    || preg_match('/\Aw(?:1|2|3|6|7|8|9|10|11)-s3-output\/'.preg_quote($slug, '/').'_'.$sourceBlock.'_'.preg_quote($locale, '/').'\.json\z/', $relativePath) !== 1
+                    || isset($sourcePaths[$relativePath])) {
+                    fclose($handle);
+                    throw new Career1046DisplayAssetReplacementFailure('PACKAGE_SOURCE_CHAIN_INVALID');
+                }
+                $sourcePaths[$relativePath] = true;
+                $sourceFiles[] = $relativePath.'|'.$sha256;
+                $blockHashes[$blockKey][] = $identity.'|'.self::hashValue($blocks[$blockKey]);
+            }
+            $row['blocks'] = $blocks;
+            $row['sources'] = $sources;
             $rows[$slug][$locale] = $row;
+            $identities[$identity] = true;
         }
         fclose($handle);
         ksort($rows, SORT_STRING);
@@ -890,8 +1080,18 @@ final class Career1046DisplayAssetReplacement
         }
 
         $slugs = array_keys($rows);
-        if (! hash_equals((string) data_get($manifest, 'sets.slug_set_sha256'), self::setHash($slugs))) {
-            throw new Career1046DisplayAssetReplacementFailure('PACKAGE_SLUG_SET_MISMATCH');
+        if (count($identities) !== self::EXPECTED_LOCALE_ROWS
+            || count($sourcePaths) !== self::EXPECTED_BLOCKS
+            || ! hash_equals((string) data_get($manifest, 'sets.slug_set_sha256'), self::setHash($slugs))
+            || ! hash_equals((string) data_get($manifest, 'sets.identity_set_sha256'), self::setHash(array_keys($identities)))
+            || ! hash_equals((string) data_get($manifest, 'sets.source_file_chain_sha256'), self::setHash($sourceFiles))
+            || ! hash_equals((string) data_get($manifest, 'sets.career_ai_description_block_sha256'), self::setHash($blockHashes['career_ai_description_block']))
+            || ! hash_equals((string) data_get($manifest, 'sets.career_path_block_sha256'), self::setHash($blockHashes['career_path_block']))
+            || ! hash_equals((string) data_get($manifest, 'sets.display_block_aggregate_sha256'), self::setHash(array_merge(
+                $blockHashes['career_ai_description_block'],
+                $blockHashes['career_path_block'],
+            )))) {
+            throw new Career1046DisplayAssetReplacementFailure('PACKAGE_SET_OR_SOURCE_CHAIN_MISMATCH');
         }
 
         return [
@@ -905,8 +1105,72 @@ final class Career1046DisplayAssetReplacement
                 'content_block_count' => self::EXPECTED_BLOCKS,
                 'slug_set_sha256' => self::setHash($slugs),
                 'identity_set_sha256' => (string) data_get($manifest, 'sets.identity_set_sha256'),
+                'source_file_chain_sha256' => (string) data_get($manifest, 'sets.source_file_chain_sha256'),
+                'delivery_report_sha256' => $deliveryReportSha256,
+                'career_ai_description_block_sha256' => (string) data_get($manifest, 'sets.career_ai_description_block_sha256'),
+                'career_path_block_sha256' => (string) data_get($manifest, 'sets.career_path_block_sha256'),
+                'display_block_aggregate_sha256' => (string) data_get($manifest, 'sets.display_block_aggregate_sha256'),
+                'numeric_rating_statement_residue_count' => 0,
             ],
         ];
+    }
+
+    /** @param array<string, mixed> $block */
+    private function packageAiBlockValid(array $block): bool
+    {
+        $keys = array_keys($block);
+        sort($keys, SORT_STRING);
+        if (! in_array($keys, [
+            ['body', 'component', 'heading', 'intro'],
+            ['body', 'component', 'heading', 'intro', 'source_key'],
+        ], true)
+            || ($block['component'] ?? null) !== 'CareerAiDescriptionBlock'
+            || trim((string) ($block['heading'] ?? '')) === ''
+            || (array_key_exists('source_key', $block) && trim((string) $block['source_key']) === '')
+            || ! is_array($block['body'] ?? null)
+            || $block['body'] === []) {
+            return false;
+        }
+        foreach ($block['body'] as $body) {
+            if (! is_string($body)
+                || trim($body) === ''
+                || preg_match('/(?<![0-9])(10|[0-9])(?:\.0)?\s*\/\s*10(?![0-9])/u', $body) === 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /** @param array<string, mixed> $block */
+    private function packagePathBlockValid(array $block): bool
+    {
+        $keys = array_keys($block);
+        sort($keys, SORT_STRING);
+        if (! in_array($keys, [
+            ['caveat', 'component', 'heading', 'rows', 'source_key'],
+            ['caveat', 'component', 'heading', 'intro', 'rows', 'source_key'],
+        ], true)
+            || ($block['component'] ?? null) !== 'CareerPathBlock'
+            || trim((string) ($block['heading'] ?? '')) === ''
+            || trim((string) ($block['caveat'] ?? '')) === ''
+            || trim((string) ($block['source_key'] ?? '')) === ''
+            || ! is_array($block['rows'] ?? null)
+            || count($block['rows']) !== 4) {
+            return false;
+        }
+        foreach ($block['rows'] as $row) {
+            if (! is_array($row) || count($row) !== 4) {
+                return false;
+            }
+            foreach ($row as $cell) {
+                if (! is_string($cell) || trim($cell) === '') {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     /** @return array<string, int> */

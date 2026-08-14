@@ -99,7 +99,16 @@ final class Career1046MissingDisplayAssetPackageTest extends TestCase
         ]);
         $service = (new ReflectionClass(Career1046DisplayAssetReplacement::class))->newInstanceWithoutConstructor();
         $method = new \ReflectionMethod($service, 'insertAttributes');
-        $attributes = $method->invoke($service, $baseRow['slug'], $occupation, $baseRow, $localizedRows);
+        [$packageSummary, $missingSummary] = $this->packageSummaries($backendRoot);
+        $attributes = $method->invoke(
+            $service,
+            $baseRow['slug'],
+            $occupation,
+            $baseRow,
+            $localizedRows,
+            $packageSummary,
+            $missingSummary,
+        );
         $asset = new CareerJobDisplayAsset($attributes);
 
         self::assertSame(CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER, $asset->component_order_json);
@@ -115,8 +124,8 @@ final class Career1046MissingDisplayAssetPackageTest extends TestCase
         );
         self::assertSame($localizedRows['zh-CN']['blocks']['career_path_block'], $asset->page_payload_json['page']['zh']['career_path_block']);
         self::assertSame('4/10', $asset->page_payload_json['page']['en']['ai_impact_table']['score_normalized']);
-        self::assertStringNotContainsString('7/10', implode("\n", $asset->page_payload_json['page']['en']['career_ai_description_block']['body']));
-        self::assertStringNotContainsString('7/10', implode("\n", $asset->page_payload_json['page']['zh']['career_ai_description_block']['body']));
+        self::assertDoesNotMatchRegularExpression('/\d+(?:\.0)?\s*\/\s*10/u', implode("\n", $asset->page_payload_json['page']['en']['career_ai_description_block']['body']));
+        self::assertDoesNotMatchRegularExpression('/\d+(?:\.0)?\s*\/\s*10/u', implode("\n", $asset->page_payload_json['page']['zh']['career_ai_description_block']['body']));
         $cacheBlocks = (new ReflectionMethod($service, 'localizedBlocksForCache'))->invoke(
             $service,
             $asset->page_payload_json,
@@ -132,6 +141,11 @@ final class Career1046MissingDisplayAssetPackageTest extends TestCase
         self::assertSame($baseRow['asset_payload']['seo_payload_json'], $asset->seo_payload_json);
         self::assertFalse($asset->metadata_json['content_generated']);
         self::assertFalse($asset->metadata_json['discoverability_changed']);
+        self::assertSame('85549e2181112f58e6e174b35eb4bb5a672a3ed486c57739a7e835786627cc1b', $asset->metadata_json['workbook_sha256']);
+        self::assertSame('第九版.xlsx', $asset->metadata_json['workbook_basename']);
+        self::assertSame($baseRow['source_workbook_row_number'], $asset->metadata_json['row_number']);
+        self::assertSame('career:import-selected-display-assets', $asset->metadata_json['command']);
+        self::assertSame($packageSummary['package_sha256'], $asset->metadata_json['replacement_lineage']['package_sha256']);
     }
 
     public function test_an_authorized_insert_requires_exact_soc_and_onet_crosswalks(): void
@@ -172,6 +186,7 @@ final class Career1046MissingDisplayAssetPackageTest extends TestCase
 
         $service = (new ReflectionClass(Career1046DisplayAssetReplacement::class))->newInstanceWithoutConstructor();
         $method = new ReflectionMethod($service, 'insertAttributes');
+        [$packageSummary, $missingSummary] = $this->packageSummaries($backendRoot);
         foreach ($baseRows as $slug => $baseRow) {
             $occupation = new Occupation([
                 'id' => '00000000-0000-4000-8000-'.substr(hash('sha256', $slug), 0, 12),
@@ -183,34 +198,59 @@ final class Career1046MissingDisplayAssetPackageTest extends TestCase
                 $occupation,
                 $baseRow,
                 $localizedRows[$slug],
+                $packageSummary,
+                $missingSummary,
             ));
             foreach (['en', 'zh'] as $locale) {
-                $expected = (int) $asset->page_payload_json['page'][$locale]['ai_impact_table']['score_normalized'];
                 $body = implode("\n", $asset->page_payload_json['page'][$locale]['career_ai_description_block']['body']);
                 preg_match_all('/(?<![0-9])(10|[0-9])(?:\.0)?\s*\/\s*10(?![0-9])/u', $body, $matches);
-                foreach (array_map('intval', $matches[1] ?? []) as $actual) {
-                    self::assertSame($expected, $actual, $slug.' '.$locale);
-                }
+                self::assertSame([], $matches[1] ?? [], $slug.' '.$locale);
+                self::assertNotEmpty($asset->page_payload_json['page'][$locale]['ai_impact_table']);
             }
         }
     }
 
-    public function test_legacy_zero_to_one_hundred_ai_scores_remain_the_numeric_authority(): void
+    public function test_merge_preserves_historic_ai_impact_table_format_without_parsing_it(): void
     {
         $service = (new ReflectionClass(Career1046DisplayAssetReplacement::class))->newInstanceWithoutConstructor();
-        $method = new ReflectionMethod($service, 'reconcileAiExposureRating');
+        $method = new ReflectionMethod($service, 'mergeLocalizedBlocks');
+        $base = ['page' => [
+            'en' => ['ai_impact_table' => ['score_normalized' => 'historic:82-of-100']],
+            'zh' => ['ai_impact_table' => ['score_normalized' => ['legacy' => 82]]],
+        ]];
+        $localized = [
+            'en' => ['blocks' => [
+                'career_ai_description_block' => ['component' => 'CareerAiDescriptionBlock', 'heading' => 'AI', 'body' => ['Clean body.']],
+                'career_path_block' => ['component' => 'CareerPathBlock', 'heading' => 'Path', 'rows' => [['A', 'B', 'C', 'D']]],
+            ]],
+            'zh-CN' => ['blocks' => [
+                'career_ai_description_block' => ['component' => 'CareerAiDescriptionBlock', 'heading' => 'AI', 'body' => ['正文。']],
+                'career_path_block' => ['component' => 'CareerPathBlock', 'heading' => '路径', 'rows' => [['甲', '乙', '丙', '丁']]],
+            ]],
+        ];
+        $after = $method->invoke($service, $base, $localized);
 
-        $matching = ['body' => ['FermatMind rates this career 8/10. Reviewed explanation.']];
-        self::assertSame(
-            $matching,
-            $method->invoke($service, $matching, ['score_normalized' => '82'], 'en'),
-        );
+        self::assertSame($base['page']['en']['ai_impact_table'], $after['page']['en']['ai_impact_table']);
+        self::assertSame($base['page']['zh']['ai_impact_table'], $after['page']['zh']['ai_impact_table']);
+    }
 
-        $conflicting = ['body' => ['FermatMind rates this career 7/10. Reviewed explanation.']];
-        self::assertSame(
-            ['body' => ['Reviewed explanation.']],
-            $method->invoke($service, $conflicting, ['score_normalized' => '82'], 'en'),
-        );
+    /** @return array{array<string, mixed>, array<string, mixed>} */
+    private function packageSummaries(string $backendRoot): array
+    {
+        $packageRoot = $backendRoot.'/content_assets/career/workbuddy-1046-display-v1';
+        $package = json_decode((string) file_get_contents($packageRoot.'/manifest.json'), true, 512, JSON_THROW_ON_ERROR);
+        $missing = json_decode((string) file_get_contents($backendRoot.'/content_assets/career/missing-12-display-v1/manifest.json'), true, 512, JSON_THROW_ON_ERROR);
+
+        return [[
+            'package_sha256' => $package['files'][0]['sha256'],
+            'manifest_sha256' => hash_file('sha256', $packageRoot.'/manifest.json'),
+            'delivery_report_sha256' => $package['source_delivery_report']['sha256'],
+            'source_file_chain_sha256' => $package['sets']['source_file_chain_sha256'],
+        ], [
+            'source_workbook_sha256' => $missing['source']['workbook_sha256'],
+            'source_workbook_basename' => $missing['source']['workbook_filename'],
+            'mapper_version' => $missing['source']['mapper_version'],
+        ]];
     }
 
     /** @param list<string> $values */

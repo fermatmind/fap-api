@@ -859,10 +859,12 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
      * target cannot be verified or switched.
      *
      * @param  list<array<string, mixed>>  $preparedEntries
-     * @return array{status: string, entries: list<array<string, mixed>>, failures: list<array<string, mixed>>}
+     * @return array{status: string, entries: list<array<string, mixed>>, failures: list<array<string, mixed>>, rollback_snapshots?: array<string, mixed>}
      */
-    public function activatePreparedJobDetailPayloadsForExposure(array $preparedEntries): array
-    {
+    public function activatePreparedJobDetailPayloadsForExposure(
+        array $preparedEntries,
+        bool $retainRollbackSnapshots = false,
+    ): array {
         $entries = [];
         $failures = [];
         if ($preparedEntries === []) {
@@ -934,7 +936,62 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             ];
         }
 
-        return ['status' => 'pass', 'entries' => $activated, 'failures' => []];
+        $result = [
+            'status' => 'pass',
+            'entries' => $activated['entries'],
+            'failures' => [],
+        ];
+        if ($retainRollbackSnapshots) {
+            $result['rollback_snapshots'] = $activated['snapshots'];
+        }
+
+        return $result;
+    }
+
+    /**
+     * Restore the complete active/LKG/negative/legacy pointer state retained by
+     * a successful batch activation. This is intentionally a separate primitive
+     * so callers can compensate a later full-readback failure.
+     *
+     * @param  list<array<string, mixed>>  $preparedEntries
+     * @param  array<string, mixed>  $snapshots
+     */
+    public function restorePreparedJobDetailExposurePointers(array $preparedEntries, array $snapshots): void
+    {
+        $targets = [];
+        foreach ($preparedEntries as $entry) {
+            $slug = strtolower(trim((string) ($entry['slug'] ?? '')));
+            $rawLocale = trim((string) ($entry['locale'] ?? ''));
+            $locale = $this->normalizePublicLocale($rawLocale);
+            $key = $slug.'|'.$locale;
+            if ($slug === '' || $rawLocale === '' || ! isset($snapshots[$key])) {
+                throw new \InvalidArgumentException('Prepared detail rollback snapshot is incomplete.');
+            }
+            $targets[$key] = ['slug' => $slug, 'locale' => $locale];
+        }
+        ksort($targets, SORT_STRING);
+        if (count($targets) !== count($preparedEntries)) {
+            throw new \InvalidArgumentException('Prepared detail rollback targets are invalid.');
+        }
+
+        $this->withJobDetailExposureLocks(array_keys($targets), function () use ($targets, $snapshots): array {
+            foreach ($targets as $key => $target) {
+                $snapshot = $snapshots[$key];
+                foreach (['active', 'lkg', 'negative', 'legacy'] as $name) {
+                    if (! is_array($snapshot[$name] ?? null)) {
+                        throw new \InvalidArgumentException('Prepared detail rollback snapshot is invalid.');
+                    }
+                }
+                $slug = $target['slug'];
+                $locale = $target['locale'];
+                $this->restoreCacheValue($this->jobDetailActiveVersionKey($slug, $locale), $snapshot['active']);
+                $this->restoreCacheValue($this->jobDetailLkgVersionKey($slug, $locale), $snapshot['lkg']);
+                $this->restoreCacheValue($this->jobDetailNegativeKey($slug, $locale), $snapshot['negative']);
+                $this->restoreCacheValue($this->jobDetailCacheKey($slug, $locale), $snapshot['legacy']);
+            }
+
+            return [];
+        });
     }
 
     /**
@@ -956,6 +1013,25 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             }
 
             Cache::forget($this->jobDetailExposureProjectionVersionKey(
+                $slug,
+                $this->normalizePublicLocale($rawLocale),
+                $version,
+            ));
+        }
+    }
+
+    /** @param list<array<string, mixed>> $preparedEntries */
+    public function forgetPreparedJobDetailCandidates(array $preparedEntries): void
+    {
+        $this->forgetPreparedJobDetailExposureProjectionSnapshots($preparedEntries);
+        foreach ($preparedEntries as $entry) {
+            $slug = strtolower(trim((string) ($entry['slug'] ?? '')));
+            $rawLocale = trim((string) ($entry['locale'] ?? ''));
+            $version = trim((string) ($entry['version'] ?? ''));
+            if ($slug === '' || $rawLocale === '' || $version === '') {
+                continue;
+            }
+            Cache::forget($this->jobDetailVersionPayloadKey(
                 $slug,
                 $this->normalizePublicLocale($rawLocale),
                 $version,
@@ -1027,7 +1103,7 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
 
     /**
      * @param  list<array{slug: string, locale: string, version: string}>  $entries
-     * @return list<array<string, mixed>>
+     * @return array{entries: list<array<string, mixed>>, snapshots: array<string, mixed>}
      */
     private function activateStagedJobDetailReadModels(array $entries): array
     {
@@ -1102,13 +1178,16 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
             throw $throwable;
         }
 
-        return array_map(static fn (array $entry): array => [
-            'slug' => $entry['slug'],
-            'locale' => $entry['locale'],
-            'status' => 'ready',
-            'classification' => 'ready_active',
-            'version' => $entry['version'],
-        ], $entries);
+        return [
+            'entries' => array_map(static fn (array $entry): array => [
+                'slug' => $entry['slug'],
+                'locale' => $entry['locale'],
+                'status' => 'ready',
+                'classification' => 'ready_active',
+                'version' => $entry['version'],
+            ], $entries),
+            'snapshots' => $snapshots,
+        ];
     }
 
     /**
