@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Bundles;
 
+use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Domain\Career\Import\RunStatus;
 use App\Domain\Career\IndexStateValue;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\DTO\Career\CareerJobListItemBundle;
-use App\Services\Career\Bundles\CareerJobPublicAllowlist;
 use App\Models\CareerCompileRun;
 use App\Models\CareerJob;
 use App\Models\CareerJobDisplayAsset;
@@ -36,8 +36,6 @@ final class CareerJobListBundleBuilder
     private const DISPLAY_ASSET_TYPE = 'career_job_public_display';
 
     private const DISPLAY_READY_STATUS = 'ready_for_pilot';
-
-    private const DISPLAY_COMPONENT_ORDER_COUNT = 24;
 
     private const DISPLAY_ASSET_BACKED_MANUAL_HOLD_SLUGS = [
         'software-developers',
@@ -980,7 +978,7 @@ final class CareerJobListBundleBuilder
         }
 
         $componentOrder = is_array($asset->component_order_json) ? array_values($asset->component_order_json) : [];
-        if (count($componentOrder) !== self::DISPLAY_COMPONENT_ORDER_COUNT) {
+        if (! CareerDisplayAssetComponentContract::supports($componentOrder)) {
             return null;
         }
 

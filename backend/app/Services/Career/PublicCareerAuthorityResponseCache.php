@@ -800,6 +800,60 @@ final class PublicCareerAuthorityResponseCache implements CareerJobDetailExposur
     }
 
     /**
+     * Stage a replacement payload against the currently published authority.
+     * This writes only an unreachable immutable candidate; active/LKG pointers
+     * remain unchanged until activatePreparedJobDetailPayloadsForExposure().
+     *
+     * @return array<string, mixed>
+     */
+    public function preparePublishedJobDetailReplacement(string $slug, string $publicLocale): array
+    {
+        $normalizedSlug = strtolower(trim($slug));
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+        $projectionItem = $this->effectiveJobDetailProjectionItem($normalizedSlug, $normalizedLocale);
+        if (! $this->jobDetailProjectionItemIsPublished($projectionItem)) {
+            return [
+                'slug' => $normalizedSlug,
+                'locale' => $normalizedLocale,
+                'status' => 'projection_not_exposable',
+                'classification' => 'missing_pointer',
+            ];
+        }
+
+        return $this->prepareJobDetailPayloadForExposure(
+            $normalizedSlug,
+            $normalizedLocale,
+            $projectionItem,
+        );
+    }
+
+    /**
+     * Read back one unreachable immutable replacement candidate before the
+     * batch pointer transaction. This method never promotes or mutates cache
+     * state and exists only to bind the prepared bytes to the expected package.
+     *
+     * @param  array<string, mixed>  $preparedEntry
+     * @return array<string, mixed>|null
+     */
+    public function preparedJobDetailReplacementPayload(array $preparedEntry): ?array
+    {
+        $slug = strtolower(trim((string) ($preparedEntry['slug'] ?? '')));
+        $rawLocale = trim((string) ($preparedEntry['locale'] ?? ''));
+        $version = trim((string) ($preparedEntry['version'] ?? ''));
+        if ($slug === '' || $rawLocale === '' || $version === '') {
+            return null;
+        }
+
+        $payload = Cache::get($this->jobDetailVersionPayloadKey(
+            $slug,
+            $this->normalizePublicLocale($rawLocale),
+            $version,
+        ));
+
+        return is_array($payload) ? $payload : null;
+    }
+
+    /**
      * Atomically activate an already verified batch of immutable detail payloads
      * after database exposure commits. Pointer snapshots are restored if any
      * target cannot be verified or switched.

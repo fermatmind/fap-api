@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Services\Career;
 
+use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
 use App\Models\OccupationCrosswalk;
@@ -102,6 +103,39 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         $this->assertSame('direct', $surface['claim_permissions']['evidence_basis']['crosswalk']);
         $this->assertCount(24, $surface['component_order']);
         $this->assertContains('fermat_decision_card', $surface['component_order']);
+    }
+
+    public function test_it_returns_the_complete_26_component_surface_with_both_workbuddy_blocks(): void
+    {
+        $occupation = $this->createOccupation('actors');
+        $asset = $this->createDisplayAsset($occupation, [
+            'component_order_json' => CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER,
+        ]);
+        $pages = $asset->page_payload_json;
+        foreach (['zh', 'en'] as $locale) {
+            $pages[$locale]['career_ai_description_block'] = [
+                'component' => 'CareerAiDescriptionBlock',
+                'heading' => $locale === 'zh' ? 'AI 职业解读' : 'AI Career Analysis',
+                'body' => [$locale === 'zh' ? '这是完整职业正文。' : 'This is the complete career body.'],
+            ];
+            $pages[$locale]['career_path_block'] = [
+                'component' => 'CareerPathBlock',
+                'heading' => $locale === 'zh' ? '职业发展路径' : 'Career Path',
+                'rows' => [['Entry', '0-2 years', 'Skills', 'Reference']],
+                'caveat' => 'Reference only.',
+                'source_key' => 'career_path_baseline_v1',
+            ];
+        }
+        $asset->forceFill(['page_payload_json' => $pages])->save();
+
+        $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
+
+        $this->assertIsArray($surface);
+        $this->assertSame(CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER, $surface['component_order']);
+        $this->assertSame('演员职业判断', $surface['page']['content']['hero']['title']);
+        $this->assertSame('AI 职业解读', $surface['page']['content']['career_ai_description_block']['heading']);
+        $this->assertSame('职业发展路径', $surface['page']['content']['career_path_block']['heading']);
+        $this->assertArrayHasKey('market_signal_card', $surface['page']['content']);
     }
 
     public function test_it_returns_surface_for_selected_second_pilot_slugs(): void

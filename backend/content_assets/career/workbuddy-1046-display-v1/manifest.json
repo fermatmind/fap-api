@@ -1,0 +1,79 @@
+{
+    "contract_version": "career.workbuddy_1046_display_asset_package.v1",
+    "package_id": "career-workbuddy-1046-display-v1",
+    "source_delivery_report": {
+        "relative_path": "w12-s3-output/w12_s3_delivery_report.json",
+        "sha256": "cdd8cd0169d3e7243751271d24d7f0cd4bd8dea37f34657d3a22afee38307d29"
+    },
+    "counts": {
+        "careers": 1046,
+        "locale_rows": 2092,
+        "content_blocks": 4184,
+        "locales": [
+            "en",
+            "zh-CN"
+        ]
+    },
+    "sets": {
+        "slug_set_sha256": "3b101fb76b5666200c73519c650beb1a5b0b35f47f7592453bf5671920571a18",
+        "identity_set_sha256": "8c3cb5f623d0d58eb029ccd77ff6e3d81730a71ab2de155a5a127917d6e42dff",
+        "source_file_chain_sha256": "2ff91b17fa81ff5fb5513891e7a8b5f1ce4ee1af181d0bf6265925266ff3cf0a"
+    },
+    "files": [
+        {
+            "path": "assets.jsonl",
+            "sha256": "781421d80514f8af7f06d14be3af37c33e7354435a42f6a3acc28183ffd2f0d7",
+            "row_count": 2092
+        }
+    ],
+    "waves": {
+        "w1-s3-output": {
+            "career_count": 49,
+            "block_file_count": 196
+        },
+        "w2-s3-output": {
+            "career_count": 28,
+            "block_file_count": 112
+        },
+        "w3-s3-output": {
+            "career_count": 40,
+            "block_file_count": 160
+        },
+        "w6-s3-output": {
+            "career_count": 55,
+            "block_file_count": 220
+        },
+        "w7-s3-output": {
+            "career_count": 235,
+            "block_file_count": 940
+        },
+        "w8-s3-output": {
+            "career_count": 235,
+            "block_file_count": 940
+        },
+        "w9-s3-output": {
+            "career_count": 235,
+            "block_file_count": 940
+        },
+        "w10-s3-output": {
+            "career_count": 85,
+            "block_file_count": 340
+        },
+        "w11-s3-output": {
+            "career_count": 84,
+            "block_file_count": 336
+        }
+    },
+    "mapping": {
+        "2a": "career_ai_description_block",
+        "2b": "career_path_block",
+        "source_field": "display_section"
+    },
+    "negative_guarantees": {
+        "content_regeneration": false,
+        "seo_payload_change": false,
+        "structured_data_change": false,
+        "discoverability_change": false,
+        "search_submission": false
+    }
+}
