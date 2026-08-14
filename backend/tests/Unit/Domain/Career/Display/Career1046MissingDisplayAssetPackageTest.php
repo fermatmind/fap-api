@@ -183,6 +183,24 @@ final class Career1046MissingDisplayAssetPackageTest extends TestCase
         }
     }
 
+    public function test_legacy_zero_to_one_hundred_ai_scores_remain_the_numeric_authority(): void
+    {
+        $service = (new ReflectionClass(Career1046DisplayAssetReplacement::class))->newInstanceWithoutConstructor();
+        $method = new ReflectionMethod($service, 'reconcileAiExposureRating');
+
+        $matching = ['body' => ['FermatMind rates this career 8/10. Reviewed explanation.']];
+        self::assertSame(
+            $matching,
+            $method->invoke($service, $matching, ['score_normalized' => '82'], 'en'),
+        );
+
+        $conflicting = ['body' => ['FermatMind rates this career 7/10. Reviewed explanation.']];
+        self::assertSame(
+            ['body' => ['Reviewed explanation.']],
+            $method->invoke($service, $conflicting, ['score_normalized' => '82'], 'en'),
+        );
+    }
+
     /** @param list<string> $values */
     private function setHash(array $values): string
     {

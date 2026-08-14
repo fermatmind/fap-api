@@ -496,11 +496,10 @@ final class Career1046DisplayAssetReplacement
     private function reconcileAiExposureRating(array $block, mixed $aiImpactTable, string $locale): array
     {
         $expected = is_array($aiImpactTable) ? (string) ($aiImpactTable['score_normalized'] ?? '') : '';
-        if (preg_match('/\A(10|[0-9])(?:\.0)?\s*\/\s*10\z/', $expected, $expectedMatch) !== 1
-            || ! is_array($block['body'] ?? null)) {
+        $expectedScore = $this->normalizedAiExposureScore($expected);
+        if ($expectedScore === null || ! is_array($block['body'] ?? null)) {
             throw new Career1046DisplayAssetReplacementFailure('AI_EXPOSURE_RATING_AUTHORITY_INVALID');
         }
-        $expectedScore = (int) $expectedMatch[1];
         foreach ($block['body'] as $index => $text) {
             if (! is_string($text)) {
                 throw new Career1046DisplayAssetReplacementFailure('AI_EXPOSURE_BLOCK_BODY_INVALID');
@@ -508,7 +507,7 @@ final class Career1046DisplayAssetReplacement
             preg_match_all('/(?<![0-9])(10|[0-9])(?:\.0)?\s*\/\s*10(?![0-9])/u', $text, $matches);
             $conflicts = array_values(array_filter(
                 array_map('intval', $matches[1] ?? []),
-                static fn (int $score): bool => $score !== $expectedScore,
+                static fn (int $score): bool => abs($score - $expectedScore) > 0.5,
             ));
             if ($conflicts === []) {
                 continue;
@@ -519,7 +518,7 @@ final class Career1046DisplayAssetReplacement
                 preg_match_all('/(?<![0-9])(10|[0-9])(?:\.0)?\s*\/\s*10(?![0-9])/u', $paragraph, $paragraphMatches);
                 $paragraphConflicts = array_values(array_filter(
                     array_map('intval', $paragraphMatches[1] ?? []),
-                    static fn (int $score): bool => $score !== $expectedScore,
+                    static fn (int $score): bool => abs($score - $expectedScore) > 0.5,
                 ));
                 if ($paragraphConflicts === []) {
                     continue;
@@ -538,13 +537,26 @@ final class Career1046DisplayAssetReplacement
             $block['body'][$index] = implode("\n\n", $paragraphs);
             preg_match_all('/(?<![0-9])(10|[0-9])(?:\.0)?\s*\/\s*10(?![0-9])/u', $block['body'][$index], $remainingMatches);
             foreach (array_map('intval', $remainingMatches[1] ?? []) as $remainingScore) {
-                if ($remainingScore !== $expectedScore) {
+                if (abs($remainingScore - $expectedScore) > 0.5) {
                     throw new Career1046DisplayAssetReplacementFailure('AI_EXPOSURE_RATING_CONFLICT_UNRESOLVED');
                 }
             }
         }
 
         return $block;
+    }
+
+    private function normalizedAiExposureScore(string $score): ?float
+    {
+        $score = trim($score);
+        if (preg_match('/\A(10|[0-9](?:\.[0-9]+)?)\s*\/\s*10\z/', $score, $match) === 1) {
+            return (float) $match[1];
+        }
+        if (preg_match('/\A(100|[0-9]{1,2}(?:\.[0-9]+)?)\z/', $score, $match) === 1) {
+            return ((float) $match[1]) / 10;
+        }
+
+        return null;
     }
 
     /** @param array<string, mixed> $baseRow */
