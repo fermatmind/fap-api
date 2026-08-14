@@ -172,7 +172,7 @@ final class Career1046DisplayAssetReplacement
                     }
                     $this->assertPreparedCachePayload(
                         $entry,
-                        $package['rows'][$slug][$locale]['blocks'],
+                        $plan['expected_blocks'][$slug][$locale],
                     );
                     $prepared[] = $entry;
                 }
@@ -308,6 +308,7 @@ final class Career1046DisplayAssetReplacement
         $beforeRows = [];
         $beforeStates = [];
         $afterRows = [];
+        $expectedBlocks = [];
         $updates = [];
         $inserts = [];
         foreach ($assets as $asset) {
@@ -329,6 +330,7 @@ final class Career1046DisplayAssetReplacement
             $beforeRows[$slug] = $before;
             $beforeStates[$slug] = $beforeState;
             $afterRows[$slug] = $after;
+            $expectedBlocks[$slug] = $this->localizedBlocksForCache($afterPagePayload);
 
             if ($order !== CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER
                 || ! hash_equals($beforeState['page_payload_sha256'], $after['page_payload_sha256'])) {
@@ -357,6 +359,7 @@ final class Career1046DisplayAssetReplacement
                 CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER,
                 (array) $candidate->page_payload_json,
             );
+            $expectedBlocks[$slug] = $this->localizedBlocksForCache((array) $candidate->page_payload_json);
             $beforeStates[$slug] = [
                 'slug' => $slug,
                 'absent' => true,
@@ -372,11 +375,13 @@ final class Career1046DisplayAssetReplacement
 
         ksort($beforeStates, SORT_STRING);
         ksort($afterRows, SORT_STRING);
+        ksort($expectedBlocks, SORT_STRING);
         $changedCount = count($updates) + count($inserts);
 
         return [
             'before_rows' => $beforeRows,
             'after_rows' => $afterRows,
+            'expected_blocks' => $expectedBlocks,
             'updates' => $updates,
             'inserts' => $inserts,
             'summary' => [
@@ -398,6 +403,31 @@ final class Career1046DisplayAssetReplacement
                 'outside_target_count' => 0,
             ],
         ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $pagePayload
+     * @return array<string, array<string, array<string, mixed>>>
+     */
+    private function localizedBlocksForCache(array $pagePayload): array
+    {
+        $pages = is_array($pagePayload['page'] ?? null) ? $pagePayload['page'] : $pagePayload;
+        $blocks = [];
+        foreach (self::LOCALES as $locale) {
+            $pageKey = $locale === 'zh-CN' ? 'zh' : 'en';
+            $page = $pages[$pageKey] ?? null;
+            if (! is_array($page)
+                || ! is_array($page['career_ai_description_block'] ?? null)
+                || ! is_array($page['career_path_block'] ?? null)) {
+                throw new Career1046DisplayAssetReplacementFailure('DISPLAY_RECONCILED_BLOCKS_INVALID');
+            }
+            $blocks[$locale] = [
+                'career_ai_description_block' => $page['career_ai_description_block'],
+                'career_path_block' => $page['career_path_block'],
+            ];
+        }
+
+        return $blocks;
     }
 
     /**
