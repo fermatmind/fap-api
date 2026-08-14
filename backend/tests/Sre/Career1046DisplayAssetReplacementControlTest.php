@@ -23,6 +23,8 @@ final class Career1046DisplayAssetReplacementControlTest extends TestCase
         self::assertStringNotContainsString('.name == "Career 1046 Display Asset Replacement"', $workflow);
         self::assertStringContainsString('Validate all 2092 public pages', $workflow);
         self::assertStringContainsString('remote_receipt="$RUNNER_TEMP/career-1046-display-asset-remote-receipt.json"', $workflow);
+        self::assertStringContainsString('ssh_stderr="$RUNNER_TEMP/career-1046-display-asset-ssh.stderr"', $workflow);
+        self::assertStringContainsString("trap 'rm -f -- \"\$ssh_stderr\"' EXIT", $workflow);
         self::assertStringContainsString('run_remote_once()', $workflow);
         self::assertStringContainsString(
             'while [ "$MODE" = preflight ] && [ "$ssh_rc" -eq 255 ] && [ ! -s "$remote_receipt" ] && [ "$attempt" -lt 3 ]; do',
@@ -33,7 +35,16 @@ final class Career1046DisplayAssetReplacementControlTest extends TestCase
         self::assertStringContainsString('.status == "FAIL_DISPLAY_ASSET_REPLACEMENT"', $workflow);
         self::assertStringContainsString('.write_commit_state == "confirmed_zero_write"', $workflow);
         self::assertStringContainsString('mv "$remote_receipt" "$receipt"', $workflow);
+        self::assertStringContainsString('safe_error_code=REMOTE_HOST_KEY_FAILURE', $workflow);
+        self::assertStringContainsString('safe_error_code=REMOTE_AUTHENTICATION_FAILURE', $workflow);
+        self::assertStringContainsString('safe_error_code=REMOTE_CONNECTION_TIMEOUT', $workflow);
+        self::assertStringContainsString('safe_error_code=REMOTE_CONNECTION_REFUSED', $workflow);
+        self::assertStringContainsString('safe_error_code=REMOTE_CONNECTION_RESET', $workflow);
+        self::assertStringContainsString('safe_error_code=REMOTE_NETWORK_FAILURE', $workflow);
+        self::assertStringContainsString('if [ "$ssh_rc" -eq 255 ]; then', $workflow);
+        self::assertStringContainsString("jq --arg safe_error_code \"\$safe_error_code\" '.safe_error_code = \$safe_error_code'", $workflow);
         self::assertSame(3, substr_count($workflow, 'run_remote_once'));
+        self::assertStringNotContainsString('2>/dev/null', $workflow);
         self::assertStringNotContainsString('StrictHostKeyChecking=no', $workflow);
         self::assertStringNotContainsString('curl -k', $workflow);
         self::assertStringContainsString('task_4b_through_7b_executed', $runner);

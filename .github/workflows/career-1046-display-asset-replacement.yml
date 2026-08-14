@@ -230,6 +230,8 @@ jobs:
           mkdir -p artifacts
           receipt=artifacts/career-1046-display-asset-replacement.json
           remote_receipt="$RUNNER_TEMP/career-1046-display-asset-remote-receipt.json"
+          ssh_stderr="$RUNNER_TEMP/career-1046-display-asset-ssh.stderr"
+          trap 'rm -f -- "$ssh_stderr"' EXIT
           jq -n --arg mode "$MODE" --arg control "$CONTROL" --arg package "$PACKAGE" \
             '{contract_version:"career.1046.display_asset_replacement.v1",mode:$mode,status:"FAIL_DISPLAY_ASSET_REPLACEMENT",failed_stage:"remote_transport",safe_error_code:"REMOTE_TRANSPORT_FAILURE",control_plane_sha:$control,release_sha:$control,package_sha256:$package,production_write_execution:($mode=="apply"),write_commit_state:(if $mode=="apply" then "ambiguous" else "confirmed_zero_write" end),writes_committed:false}' > "$receipt"
           apply=0
@@ -246,8 +248,10 @@ jobs:
           remote_command="set -euo pipefail; current=\$(readlink -f $q_path/current); test -n \"\$current\"; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_control; test ! -e $q_path/.dep/deploy.lock; release_name=\$(basename \"\$current\"); sudo -n -u www-data -- env CAREER_DISPLAY_REPLACEMENT_EXECUTE=1 CAREER_DISPLAY_REPLACEMENT_BACKEND_ROOT=\"\$current/backend\" CAREER_DISPLAY_REPLACEMENT_CONTROL_PLANE_SHA=$q_control CAREER_DISPLAY_REPLACEMENT_RELEASE_SHA=$q_control CAREER_DISPLAY_REPLACEMENT_RELEASE_NAME=\"\$release_name\" CAREER_DISPLAY_REPLACEMENT_PACKAGE_SHA256=$q_package CAREER_DISPLAY_REPLACEMENT_PREFLIGHT_RECEIPT_SHA256=$q_preflight_receipt CAREER_DISPLAY_REPLACEMENT_PREFLIGHT_STATE_SHA256=$q_preflight_state CAREER_DISPLAY_REPLACEMENT_WORKFLOW_RUN_ID=$q_run CAREER_DISPLAY_REPLACEMENT_WORKFLOW_RUN_ATTEMPT=$q_attempt CAREER_DISPLAY_REPLACEMENT_APPLY_AUTHORIZED=$q_apply php \"\$current/backend/scripts/operations/career_1046_display_asset_replacement.php\" $q_mode"
           run_remote_once() {
             : > "$remote_receipt"
+            : > "$ssh_stderr"
+            chmod 0600 "$ssh_stderr"
             ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$remote_command" \
-              > "$remote_receipt" 2>/dev/null
+              > "$remote_receipt" 2> "$ssh_stderr"
           }
           attempt=1
           set +e
@@ -278,6 +282,25 @@ jobs:
               else true end)
             ' "$remote_receipt" >/dev/null; then
               mv "$remote_receipt" "$receipt"
+            else
+              safe_error_code=REMOTE_TRANSPORT_FAILURE
+              if [ "$ssh_rc" -eq 255 ]; then
+                if grep -Eq 'REMOTE HOST IDENTIFICATION HAS CHANGED|Host key verification failed|No (ED25519|ECDSA|RSA) host key is known|Offending .* key' "$ssh_stderr"; then
+                  safe_error_code=REMOTE_HOST_KEY_FAILURE
+                elif grep -Eq 'Permission denied|Authentication failed|Too many authentication failures' "$ssh_stderr"; then
+                  safe_error_code=REMOTE_AUTHENTICATION_FAILURE
+                elif grep -Eq 'Connection timed out|Operation timed out' "$ssh_stderr"; then
+                  safe_error_code=REMOTE_CONNECTION_TIMEOUT
+                elif grep -Eq 'Connection refused' "$ssh_stderr"; then
+                  safe_error_code=REMOTE_CONNECTION_REFUSED
+                elif grep -Eq 'Connection reset by peer|Connection closed by|kex_exchange_identification:' "$ssh_stderr"; then
+                  safe_error_code=REMOTE_CONNECTION_RESET
+                elif grep -Eq 'Could not resolve hostname|No route to host|Network is unreachable|ssh: connect to host' "$ssh_stderr"; then
+                  safe_error_code=REMOTE_NETWORK_FAILURE
+                fi
+              fi
+              jq --arg safe_error_code "$safe_error_code" '.safe_error_code = $safe_error_code' "$receipt" > "$receipt.next"
+              mv "$receipt.next" "$receipt"
             fi
             exit "$ssh_rc"
           fi
