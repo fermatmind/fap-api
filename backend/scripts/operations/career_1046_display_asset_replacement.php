@@ -27,7 +27,7 @@ $workflowRunAttempt = $env('CAREER_DISPLAY_REPLACEMENT_WORKFLOW_RUN_ATTEMPT');
 $applyAuthorized = $env('CAREER_DISPLAY_REPLACEMENT_APPLY_AUTHORIZED') === '1';
 
 $receipt = [
-    'contract_version' => Career1046DisplayAssetReplacement::CONTRACT_VERSION,
+    'contract_version' => 'career.1046.display_asset_replacement.v1',
     'mode' => $mode,
     'status' => 'FAIL_DISPLAY_ASSET_REPLACEMENT',
     'failed_stage' => 'initialize',
@@ -80,6 +80,13 @@ $emit = static function (array $value): never {
         || ($value['status'] ?? '') === 'PASS_APPLY_DISPLAY_ASSET_REPLACEMENT' ? 0 : 1);
 };
 
+if ($backendRoot === '' || ! is_file($backendRoot.'/vendor/autoload.php')) {
+    $receipt['safe_error_code'] = 'EXECUTION_CONTRACT_INVALID';
+    $emit($receipt);
+}
+
+require $backendRoot.'/vendor/autoload.php';
+
 try {
     if ($env('CAREER_DISPLAY_REPLACEMENT_EXECUTE') !== '1'
         || ! in_array($mode, ['preflight', 'apply'], true)
@@ -101,7 +108,6 @@ try {
         throw new Career1046DisplayAssetReplacementFailure('APPLY_AUTHORITY_INVALID');
     }
 
-    require $backendRoot.'/vendor/autoload.php';
     $app = require $backendRoot.'/bootstrap/app.php';
     $app->make(Kernel::class)->bootstrap();
     DB::listen(static function (QueryExecuted $query) use (&$receipt): void {
