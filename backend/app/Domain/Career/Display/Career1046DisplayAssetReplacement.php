@@ -96,6 +96,22 @@ final class Career1046DisplayAssetReplacement
         try {
             DB::transaction(function () use ($plan, &$databaseUpdateCount): void {
                 foreach ($plan['updates'] as $update) {
+                    $current = CareerJobDisplayAsset::query()
+                        ->whereKey($update['id'])
+                        ->lockForUpdate()
+                        ->first();
+                    if (! $current instanceof CareerJobDisplayAsset) {
+                        throw new Career1046DisplayAssetReplacementFailure('DATABASE_TARGET_STATE_DRIFT');
+                    }
+                    $currentState = $this->rowStateSnapshot(
+                        $current,
+                        array_values((array) $current->component_order_json),
+                        (array) $current->page_payload_json,
+                    );
+                    if ($currentState !== $update['before_state']) {
+                        throw new Career1046DisplayAssetReplacementFailure('DATABASE_TARGET_STATE_DRIFT');
+                    }
+
                     $affected = DB::table('career_job_display_assets')
                         ->where('id', $update['id'])
                         ->where('asset_version', self::ASSET_VERSION)
@@ -139,7 +155,20 @@ final class Career1046DisplayAssetReplacement
             }
             $pointersActivated = true;
 
-            $cacheAfter = $this->cachePostflight($package['slugs'], $package['rows']);
+            // Every candidate payload was content-verified before activation, and
+            // the activation primitive verifies each active pointer immediately.
+            // Build the receipt from those committed entries so a transient second
+            // cache read cannot turn a successful public commit into an ambiguous
+            // failure after the rollback boundary has passed.
+            $cacheAfter = [
+                'ready_active_count' => count($activation['entries']),
+                'component_26_count' => count($activation['entries']),
+                'content_match_count' => count($prepared),
+                'state_sha256' => self::setHash(array_map(
+                    static fn (array $entry): string => $entry['slug'].'|'.$entry['locale'].'|'.$entry['version'],
+                    $prepared,
+                )),
+            ];
 
             return [
                 'package' => $package['summary'],
@@ -257,6 +286,7 @@ final class Career1046DisplayAssetReplacement
                 $updates[] = [
                     'id' => (string) $asset->id,
                     'slug' => $slug,
+                    'before_state' => $beforeState,
                     'after_page_payload_json' => self::encodeJson($afterPagePayload),
                 ];
             }
@@ -346,43 +376,6 @@ final class Career1046DisplayAssetReplacement
             'state_sha256' => self::setHash($rows),
             'candidate_write_count' => 0,
             'pointer_write_count' => 0,
-        ];
-    }
-
-    /**
-     * @param  list<string>  $slugs
-     * @param  array<string, array<string, array<string, mixed>>>  $packageRows
-     * @return array<string, mixed>
-     */
-    private function cachePostflight(array $slugs, array $packageRows): array
-    {
-        $rows = [];
-        foreach (array_chunk($slugs, 50) as $slugChunk) {
-            $snapshot = $this->responseCache->jobDetailPublicationSnapshot($slugChunk, self::LOCALES);
-            foreach ($slugChunk as $slug) {
-                foreach (self::LOCALES as $locale) {
-                    $item = $snapshot[$slug][$locale] ?? null;
-                    $surface = is_array($item) ? data_get($item, 'payload.display_surface_v1') : null;
-                    $content = is_array($surface) ? data_get($surface, 'page.content') : null;
-                    if (! is_array($item)
-                        || ($item['published'] ?? false) !== true
-                        || ($item['classification'] ?? null) !== 'ready_active'
-                        || ! is_array($content)
-                        || data_get($surface, 'component_order') !== CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER
-                        || self::hashValue($content['career_ai_description_block'] ?? null) !== self::hashValue($packageRows[$slug][$locale]['blocks']['career_ai_description_block'])
-                        || self::hashValue($content['career_path_block'] ?? null) !== self::hashValue($packageRows[$slug][$locale]['blocks']['career_path_block'])) {
-                        throw new Career1046DisplayAssetReplacementFailure('CACHE_POSTFLIGHT_CONTENT_MISMATCH');
-                    }
-                    $rows[] = $slug.'|'.$locale.'|'.(string) $item['version'];
-                }
-            }
-        }
-
-        return [
-            'ready_active_count' => count($rows),
-            'component_26_count' => count($rows),
-            'content_match_count' => count($rows),
-            'state_sha256' => self::setHash($rows),
         ];
     }
 

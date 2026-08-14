@@ -121,6 +121,17 @@ try {
     if ($mode === 'preflight' && $receipt['observed_database_mutation_query_count'] !== 0) {
         throw new Career1046DisplayAssetReplacementFailure('PREFLIGHT_DATABASE_WRITE_OBSERVED');
     }
+    $receipt['package'] = $result['package'];
+    $receipt['authority'] = $result['authority'];
+    $receipt['cache'] = $result['cache'];
+    $receipt['state_sha256'] = $result['state_sha256'];
+    $receipt['write_counts'] = $result['write_counts'];
+    if ($mode === 'apply') {
+        // apply() returns only after the database and all active pointers commit.
+        // Preserve that truth even if a later receipt-contract assertion fails.
+        $receipt['write_commit_state'] = 'committed';
+        $receipt['writes_committed'] = true;
+    }
     if (($result['package']['career_count'] ?? null) !== 1046
         || ($result['package']['locale_row_count'] ?? null) !== 2092
         || ($result['package']['content_block_count'] ?? null) !== 4184
@@ -129,11 +140,6 @@ try {
         throw new Career1046DisplayAssetReplacementFailure('RESULT_COUNT_MISMATCH');
     }
 
-    $receipt['package'] = $result['package'];
-    $receipt['authority'] = $result['authority'];
-    $receipt['cache'] = $result['cache'];
-    $receipt['state_sha256'] = $result['state_sha256'];
-    $receipt['write_counts'] = $result['write_counts'];
     $receipt['failed_stage'] = null;
     if ($mode === 'preflight') {
         $receipt['status'] = 'PASS_PREFLIGHT_DISPLAY_ASSET_REPLACEMENT';
@@ -148,8 +154,6 @@ try {
             throw new Career1046DisplayAssetReplacementFailure('APPLY_READBACK_MISMATCH');
         }
         $receipt['status'] = 'PASS_APPLY_DISPLAY_ASSET_REPLACEMENT';
-        $receipt['write_commit_state'] = 'committed';
-        $receipt['writes_committed'] = true;
     }
 } catch (Throwable $throwable) {
     $receipt['safe_error_code'] = $throwable instanceof Career1046DisplayAssetReplacementFailure

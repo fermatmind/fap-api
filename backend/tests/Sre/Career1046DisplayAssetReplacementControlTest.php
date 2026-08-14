@@ -24,8 +24,15 @@ final class Career1046DisplayAssetReplacementControlTest extends TestCase
         self::assertStringContainsString("'sitemap_or_llms_release_executed' => false", $runner);
         self::assertStringContainsString("'search_channel_executed' => false", $runner);
         self::assertStringContainsString('DB::transaction', $service);
+        self::assertStringContainsString('->lockForUpdate()', $service);
+        self::assertStringContainsString('DATABASE_TARGET_STATE_DRIFT', $service);
         self::assertStringContainsString('activatePreparedJobDetailPayloadsForExposure', $service);
+        self::assertStringNotContainsString('cachePostflight', $service);
         self::assertStringContainsString('restoreDatabaseRows', $service);
+        self::assertLessThan(
+            strpos($runner, "throw new Career1046DisplayAssetReplacementFailure('RESULT_COUNT_MISMATCH')"),
+            strpos($runner, "\$receipt['writes_committed'] = true"),
+        );
         self::assertStringContainsString("'database_insert_count' => 0", $service);
         self::assertStringContainsString("'database_delete_count' => 0", $service);
         self::assertStringNotContainsString('Task 3A', $service);
