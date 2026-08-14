@@ -21,6 +21,7 @@ use App\Http\Controllers\API\V0_3\LocalReportSessionController;
 use App\Http\Controllers\API\V0_3\MbtiAttributionEventController;
 use App\Http\Controllers\API\V0_3\MbtiCompareInviteController;
 use App\Http\Controllers\API\V0_3\MeController as MeV03Controller;
+use App\Http\Controllers\API\V0_3\MembershipController;
 use App\Http\Controllers\API\V0_3\OrgInvitesController;
 use App\Http\Controllers\API\V0_3\OrgsController;
 use App\Http\Controllers\API\V0_3\PublicGatewaySurfaceController;
@@ -389,6 +390,12 @@ Route::prefix('v0.3')->middleware([
         Route::post('/local-report-sessions', [LocalReportSessionController::class, 'store'])
             ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'throttle:api_attempt_submit'])
             ->name('api.v0_3.local_report_sessions.store');
+        Route::get('/membership', [MembershipController::class, 'show'])
+            ->middleware(\App\Http\Middleware\FmTokenAuth::class)
+            ->name('api.v0_3.membership.show');
+        Route::post('/membership-sessions', [MembershipController::class, 'store'])
+            ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'throttle:api_attempt_submit'])
+            ->name('api.v0_3.membership_sessions.store');
         Route::get('/skus', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@listSkus')
             ->name('api.v0_3.skus');
         Route::post('/orders/checkout', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@checkout')

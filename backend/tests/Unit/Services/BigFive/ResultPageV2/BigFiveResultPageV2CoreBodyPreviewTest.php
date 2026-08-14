@@ -2261,6 +2261,43 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         );
     }
 
+    public function test_runtime_freeze_classifier_ignores_mini_program_membership_contract(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_3/MembershipController.php',
+            'backend/app/Services/Commerce/EntitlementManager.php',
+            'backend/app/Services/Commerce/MembershipService.php',
+            'backend/database/migrations/2026_08_13_130000_add_wechat_membership_skus.php',
+            'backend/routes/api.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            routeChangedLines: $this->miniProgramMembershipRouteChangedLines(),
+            entitlementManagerChangedLines: $this->miniProgramMembershipEntitlementManagerChangedLines(),
+        ));
+        $this->assertSame(
+            ['backend/routes/api.php'],
+            $this->mbtiImpactingRuntimeChanges(
+                ['backend/routes/api.php'],
+                '',
+                '',
+                routeChangedLines: [...$this->miniProgramMembershipRouteChangedLines(), "+        Route::delete('/membership', fn () => null);"],
+            ),
+        );
+        $this->assertSame(
+            ['backend/app/Services/Commerce/EntitlementManager.php'],
+            $this->mbtiImpactingRuntimeChanges(
+                ['backend/app/Services/Commerce/EntitlementManager.php'],
+                '',
+                '',
+                entitlementManagerChangedLines: [...$this->miniProgramMembershipEntitlementManagerChangedLines(), '+        return true;'],
+            ),
+        );
+    }
+
     public function test_runtime_freeze_classifier_ignores_rewarded_ad_unlock_contract_files(): void
     {
         $changed = [
@@ -7464,6 +7501,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isMiniProgramMembershipCommerceFile($file)) {
+                continue;
+            }
+
             if ($this->isAssessmentCatalogProductTruthConvergenceFile($file)) {
                 continue;
             }
@@ -8653,6 +8694,9 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->routeDiffIsUnifiedLocalReportPaymentOnly(
                         $routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef)
                     )
+                    || $this->routeDiffIsMiniProgramMembershipOnly(
+                        $routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef)
+                    )
                 )
             ) {
                 continue;
@@ -8660,11 +8704,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
             if (
                 $file === 'backend/app/Services/Commerce/EntitlementManager.php'
-                && $this->entitlementManagerDiffIsRewardedAdUnlockOnly(
-                    $entitlementManagerChangedLines ?? (
-                        $repoRoot !== '' && $baseRef !== ''
-                            ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
-                            : []
+                && (
+                    $this->entitlementManagerDiffIsRewardedAdUnlockOnly(
+                        $entitlementManagerChangedLines ?? (
+                            $repoRoot !== '' && $baseRef !== ''
+                                ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                                : []
+                        )
+                    )
+                    || $this->entitlementManagerDiffIsMiniProgramMembershipOnly(
+                        $entitlementManagerChangedLines ?? (
+                            $repoRoot !== '' && $baseRef !== ''
+                                ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                                : []
+                        )
                     )
                 )
             ) {
@@ -9552,6 +9605,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Commerce/ReportUnlockProductCatalog.php',
             'backend/database/migrations/2026_08_13_120000_unify_wechat_report_unlock_to_199.php',
             'backend/database/seed_data/skus_big5_ocean.json',
+        ], true);
+    }
+
+    private function isMiniProgramMembershipCommerceFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_3/MembershipController.php',
+            'backend/app/Services/Commerce/MembershipService.php',
+            'backend/database/migrations/2026_08_13_130000_add_wechat_membership_skus.php',
         ], true);
     }
 
@@ -16229,6 +16291,31 @@ DIFF;
     }
 
     /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsMiniProgramMembershipOnly(array $changedLines): bool
+    {
+        return $changedLines !== []
+            && $changedLines === $this->miniProgramMembershipRouteChangedLines();
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function miniProgramMembershipRouteChangedLines(): array
+    {
+        return [
+            '+use App\Http\Controllers\API\V0_3\MembershipController;',
+            "+        Route::get('/membership', [MembershipController::class, 'show'])",
+            '+            ->middleware(\App\Http\Middleware\FmTokenAuth::class)',
+            "+            ->name('api.v0_3.membership.show');",
+            "+        Route::post('/membership-sessions', [MembershipController::class, 'store'])",
+            "+            ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'throttle:api_attempt_submit'])",
+            "+            ->name('api.v0_3.membership_sessions.store');",
+        ];
+    }
+
+    /**
      * @return list<string>
      */
     private function rewardedAdUnlockRouteChangedLines(): array
@@ -16271,6 +16358,46 @@ DIFF;
         return $actual === $this->rewardedAdUnlockEntitlementManagerInitialChangedLines()
             || $actual === $this->rewardedAdUnlockEntitlementManagerChangedLines()
             || $actual === $this->rewardedAdUnlockEntitlementManagerRepairChangedLines();
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function entitlementManagerDiffIsMiniProgramMembershipOnly(array $changedLines): bool
+    {
+        return $changedLines !== []
+            && $changedLines === $this->miniProgramMembershipEntitlementManagerChangedLines();
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function miniProgramMembershipEntitlementManagerChangedLines(): array
+    {
+        return [
+            '+        if ($this->isWechatMiniAttempt($orgId, $attemptId)',
+            '+            && app(MembershipService::class)->hasActiveMembership($orgId, $userId, $anonId)) {',
+            '+            return true;',
+            '+        }',
+            '+',
+            '+    private function isWechatMiniAttempt(int $orgId, string $attemptId): bool',
+            '+    {',
+            "+        \$attempt = DB::table('attempts')",
+            "+            ->where('org_id', \$orgId)",
+            "+            ->where('id', \$attemptId)",
+            "+            ->first(['client_platform', 'channel']);",
+            '+        if ($attempt === null) {',
+            '+            return false;',
+            '+        }',
+            '+',
+            "+        \$platform = strtolower(trim((string) (\$attempt->client_platform ?? '')));",
+            "+        \$channel = strtolower(trim((string) (\$attempt->channel ?? '')));",
+            '+',
+            "+        return in_array(\$platform, ['wechat-miniprogram', 'wechat_miniapp'], true)",
+            "+            || in_array(\$channel, ['wechat-miniprogram', 'wechat_miniapp'], true);",
+            '+    }',
+            '+',
+        ];
     }
 
     /**

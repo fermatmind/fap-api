@@ -30,6 +30,9 @@ return [
         'MBTI' => 'MBTI_REPORT_FULL_199',
         'BIG5_OCEAN' => 'SKU_BIG5_FULL_REPORT_199',
         'LOCAL_REPORT' => 'WEAPP_LOCAL_REPORT_FULL_199',
+        'MEMBERSHIP_ANNUAL' => 'WEAPP_MEMBERSHIP_ANNUAL_999',
+        'MEMBERSHIP_LIFETIME' => 'WEAPP_MEMBERSHIP_LIFETIME_1999',
+        'MEMBERSHIP_UPGRADE' => 'WEAPP_MEMBERSHIP_LIFETIME_UPGRADE_999',
     ],
     'products' => [
         'MBTI' => [
@@ -52,6 +55,27 @@ return [
             'price_cents' => 199,
             'currency' => 'CNY',
             'scope' => 'attempt',
+        ],
+        'MEMBERSHIP_ANNUAL' => [
+            'sku' => 'WEAPP_MEMBERSHIP_ANNUAL_999',
+            'benefit_code' => 'FERMAT_MEMBER',
+            'price_cents' => 999,
+            'currency' => 'CNY',
+            'scope' => 'org',
+        ],
+        'MEMBERSHIP_LIFETIME' => [
+            'sku' => 'WEAPP_MEMBERSHIP_LIFETIME_1999',
+            'benefit_code' => 'FERMAT_MEMBER',
+            'price_cents' => 1999,
+            'currency' => 'CNY',
+            'scope' => 'org',
+        ],
+        'MEMBERSHIP_UPGRADE' => [
+            'sku' => 'WEAPP_MEMBERSHIP_LIFETIME_UPGRADE_999',
+            'benefit_code' => 'FERMAT_MEMBER',
+            'price_cents' => 999,
+            'currency' => 'CNY',
+            'scope' => 'org',
         ],
     ],
     'big5_rollout' => [

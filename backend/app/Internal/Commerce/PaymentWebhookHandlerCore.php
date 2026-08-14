@@ -504,7 +504,9 @@ class PaymentWebhookHandlerCore
                 $outcome['error_message'] = 'target_attempt_id is required for report_unlock.';
             } else {
                 $snapshotMeta = is_array($ctx['snapshot_meta'] ?? null) ? $ctx['snapshot_meta'] : [];
-                $isLocalReportSession = strtoupper(trim((string) ($snapshotMeta['scale_code'] ?? ''))) === 'LOCAL_REPORT';
+                $postCommitScale = strtoupper(trim((string) ($snapshotMeta['scale_code'] ?? '')));
+                $isLocalReportSession = $postCommitScale === 'LOCAL_REPORT'
+                    || str_starts_with($postCommitScale, 'MEMBERSHIP_');
                 if (! $isLocalReportSession) {
                     try {
                         $this->reportSnapshots->seedPendingSnapshot($orgId, $attemptId, $orderNo !== '' ? $orderNo : null, [

@@ -305,6 +305,30 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
         $this->assertSame(1, DB::table('orders')->where('order_no', $orderNo)->count());
         $this->assertSame(1, DB::table('payment_attempts')->where('order_no', $orderNo)->count());
 
+        foreach (range(1, 4) as $index) {
+            DB::table('orders')->insert([
+                'id' => (string) Str::uuid(),
+                'order_no' => 'ord_membership_callback_'.$index.'_'.Str::uuid(),
+                'org_id' => 0,
+                'user_id' => null,
+                'anon_id' => 'anon_vpay_contract',
+                'sku' => 'MBTI_REPORT_FULL_199',
+                'item_sku' => 'MBTI_REPORT_FULL_199',
+                'quantity' => 1,
+                'amount_cents' => 199,
+                'amount_total' => 199,
+                'amount_refunded' => 0,
+                'currency' => 'CNY',
+                'status' => 'fulfilled',
+                'payment_state' => 'paid',
+                'grant_state' => 'granted',
+                'provider' => WechatMiniVirtualGateway::PROVIDER,
+                'paid_at' => now()->subMinutes($index),
+                'created_at' => now()->subMinutes($index),
+                'updated_at' => now(),
+            ]);
+        }
+
         $callbackPayload = [
             'ToUserName' => 'gh_contract',
             'FromUserName' => 'openid-http-contract',
@@ -349,6 +373,12 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
         $this->assertStringNotContainsString('access-token-contract', $storedEventPayload);
         $this->assertSame(1, DB::table('benefit_grants')->where('order_no', $orderNo)->where('status', 'active')->count());
         $this->assertSame('fulfilled', (string) DB::table('orders')->where('order_no', $orderNo)->value('status'));
+        $this->assertSame(1, DB::table('benefit_grants')
+            ->where('benefit_code', 'FERMAT_MEMBER')
+            ->where('benefit_ref', 'anon_vpay_contract')
+            ->where('status', 'active')
+            ->where('meta_json', 'like', '%"granted_via":"five_paid_reports"%')
+            ->count());
 
         Http::fake([
             'https://api.weixin.qq.com/cgi-bin/token*' => Http::response([
@@ -377,6 +407,12 @@ final class WechatMiniVirtualPaymentContractTest extends TestCase
             ->assertJsonPath('payment_state', 'refunded')
             ->assertJsonPath('grant_state', 'revoked');
         $this->assertSame(1, DB::table('benefit_grants')->where('order_no', $orderNo)->where('status', 'revoked')->count());
+        $this->assertSame(1, DB::table('benefit_grants')
+            ->where('benefit_code', 'FERMAT_MEMBER')
+            ->where('benefit_ref', 'anon_vpay_contract')
+            ->where('status', 'revoked')
+            ->where('meta_json', 'like', '%"granted_via":"five_paid_reports"%')
+            ->count());
     }
 
     private function configureProvider(): void

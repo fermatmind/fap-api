@@ -48,7 +48,7 @@ final class WechatMiniVirtualPaymentService
             return $this->error('ATTEMPT_REQUIRED', 'target_attempt_id is required.', 422);
         }
         if ($quantity !== 1) {
-            return $this->error('QUANTITY_INVALID', 'virtual report unlock quantity must be 1.', 422);
+            return $this->error('QUANTITY_INVALID', 'virtual purchase quantity must be 1.', 422);
         }
 
         $attempt = DB::table('attempts')
@@ -80,7 +80,19 @@ final class WechatMiniVirtualPaymentService
             && ($contract === null || $expectedSku === '' || strtoupper(trim($sku)) !== $expectedSku)) {
             return $this->error('SKU_NOT_SUPPORTED', 'sku is not supported by this provider.', 422);
         }
+        if (str_starts_with($scale, 'MEMBERSHIP_')) {
+            $planId = $scale === 'MEMBERSHIP_ANNUAL' ? 'annual' : 'lifetime';
+            $offer = app(MembershipService::class)->offer($orgId, $userId, $anonId, $planId);
+            if ($offer === null || strtoupper((string) ($offer['sku'] ?? '')) !== strtoupper(trim($sku))) {
+                return $this->error('MEMBERSHIP_OFFER_CHANGED', 'membership offer has changed; refresh and retry.', 409);
+            }
+
+            return ['ok' => true, 'historical_idempotent_retry' => $historicalAppleRetry];
+        }
         if ($scale === 'LOCAL_REPORT') {
+            if (app(MembershipService::class)->hasActiveMembership($orgId, $userId, $anonId)) {
+                return $this->error('REPORT_ALREADY_FULL', 'membership already includes this report.', 409);
+            }
             $benefitCode = strtoupper(trim((string) ($contract['benefit_code'] ?? '')));
             $alreadyGranted = $benefitCode !== '' && DB::table('benefit_grants')
                 ->where('org_id', $orgId)

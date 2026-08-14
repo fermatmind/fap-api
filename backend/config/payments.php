@@ -95,6 +95,9 @@ return [
             'LOCAL_REPORT' => [
                 'product_id' => $sharedWechatReportProductId,
             ],
+            'MEMBERSHIP_ANNUAL' => ['product_id' => 'Member365'],
+            'MEMBERSHIP_LIFETIME' => ['product_id' => 'MemberForever'],
+            'MEMBERSHIP_UPGRADE' => ['product_id' => 'MemberUpgrade999'],
         ],
     ],
     // WeChat Mini Program iOS virtual payment is routed by WeChat to Apple.
@@ -119,6 +122,9 @@ return [
             'LOCAL_REPORT' => [
                 'product_id' => $sharedWechatReportProductId,
             ],
+            'MEMBERSHIP_ANNUAL' => ['product_id' => 'Member365'],
+            'MEMBERSHIP_LIFETIME' => ['product_id' => 'MemberForever'],
+            'MEMBERSHIP_UPGRADE' => ['product_id' => 'MemberUpgrade999'],
         ],
     ],
 ];
