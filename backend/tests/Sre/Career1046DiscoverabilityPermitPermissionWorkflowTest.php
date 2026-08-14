@@ -75,6 +75,7 @@ final class Career1046DiscoverabilityPermitPermissionWorkflowTest extends TestCa
 
         foreach ([
             'case "$mode" in preflight|inspect|apply)',
+            'career.1046.discoverability_release.v1',
             'targets=("$permit_parent" "$permit_generation" "$permit_file")',
             'modes=(2750 2750 640)',
             'chown "$expected_owner:$expected_group" "${targets[$index]}"',
