@@ -221,6 +221,30 @@ final class DeployStorageAndDatabaseConfigTest extends TestCase
     }
 
     #[Test]
+    public function repository_refresh_retries_one_proven_transient_ssh_failure_without_retrying_auth_errors(): void
+    {
+        $deployer = $this->readRepoFile('deploy.php');
+
+        $this->assertStringContainsString('function deployIsTransientGitTransportFailure', $deployer);
+        $this->assertStringContainsString('function deployRunGitRemoteUpdateWithBoundedRetry', $deployer);
+        $this->assertStringContainsString('for ($attempt = 1; $attempt <= 2; $attempt++)', $deployer);
+        $this->assertStringContainsString("'Connection closed by'", $deployer);
+        $this->assertStringContainsString("'Connection reset by peer'", $deployer);
+        $this->assertStringContainsString("'Connection timed out'", $deployer);
+        $this->assertStringContainsString('! deployIsTransientGitTransportFailure($failure)', $deployer);
+        $this->assertStringContainsString(
+            'Transient repository transport failure; retrying once.',
+            $deployer,
+        );
+        $this->assertStringContainsString(
+            'deployRunGitRemoteUpdateWithBoundedRetry("$git remote update 2>&1", $environment);',
+            $deployer,
+        );
+        $this->assertStringNotContainsString("'Permission denied'", $deployer);
+        $this->assertSame(1, substr_count($deployer, 'task(\'deploy:update_code\''));
+    }
+
+    #[Test]
     public function staging_ops_asset_smoke_accepts_the_same_numeric_prefix_deploy_user_as_the_workflow(): void
     {
         $workflow = $this->readRepoFile('.github/workflows/deploy.yml');
