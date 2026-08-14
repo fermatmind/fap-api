@@ -153,8 +153,8 @@ class CommerceController extends Controller
                 ], 409);
             }
         }
-        // The three-channel MBTI contract is a distinct backend authority
-        // (fixed 499 CNY) from the legacy web-only zh-CN 199 offer.
+        // Virtual-payment SKU and amount come from the server-side product catalog;
+        // non-virtual providers continue through the locale policy below.
         $localePolicyViolation = in_array($provider, ['wechat_mini_virtual', 'apple_iap'], true)
             ? null
             : $this->freemiumLocalePolicyOrderViolation(

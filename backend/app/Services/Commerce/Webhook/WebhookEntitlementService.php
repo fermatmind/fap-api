@@ -3,6 +3,7 @@
 namespace App\Services\Commerce\Webhook;
 
 use App\Internal\Commerce\PaymentWebhookHandlerCore;
+use App\Services\Commerce\MembershipService;
 use App\Services\Commerce\Repair\OrderRepairService;
 use App\Services\Commerce\ReportGiftService;
 use Illuminate\Support\Facades\Cache;
@@ -346,6 +347,7 @@ class WebhookEntitlementService
                             return $refund;
                         }
                         app(ReportGiftService::class)->markRefundedForOrder($order);
+                        $this->refreshMiniMembershipForOrder($order);
                         if ($boundPaymentAttempt !== null) {
                             $this->core->orderManager()->advancePaymentAttempt((string) ($boundPaymentAttempt->id ?? ''), [
                                 'state' => \App\Models\PaymentAttempt::STATE_VERIFIED,
@@ -639,6 +641,11 @@ class WebhookEntitlementService
                             $expiresAt = null;
                             $skuMeta = $this->core->decodeMeta($skuRow->meta_json ?? null);
                             $modulesIncluded = $this->core->normalizeModulesIncluded($skuMeta['modules_included'] ?? null);
+                            $grantMetaPatch = [];
+                            if (is_string($skuMeta['membership_plan'] ?? null)) {
+                                $grantMetaPatch['membership_plan'] = trim((string) $skuMeta['membership_plan']);
+                                $grantMetaPatch['granted_via'] = 'membership_purchase';
+                            }
                             if ($skuMeta !== []) {
                                 $durationDays = isset($skuMeta['duration_days']) ? (int) $skuMeta['duration_days'] : 0;
                                 if ($durationDays > 0) {
@@ -664,7 +671,8 @@ class WebhookEntitlementService
                                     $orderNo,
                                     $scopeOverride,
                                     $expiresAt,
-                                    $modulesIncluded
+                                    $modulesIncluded,
+                                    $grantMetaPatch
                                 );
 
                             if (! ($grant['ok'] ?? false)) {
@@ -740,6 +748,8 @@ class WebhookEntitlementService
                             }
                         }
 
+                        $this->refreshMiniMembershipForOrder($order);
+
                         $this->core->markEventProcessed($provider, $providerEventId);
 
                         return [
@@ -763,6 +773,8 @@ class WebhookEntitlementService
                         return $fulfilled;
                     }
 
+                    $this->refreshMiniMembershipForOrder($order);
+
                     return [
                         'ok' => true,
                         'order_no' => $orderNo,
@@ -776,6 +788,22 @@ class WebhookEntitlementService
         $ctx['post_commit_ctx'] = $postCommitCtx;
 
         return $ctx;
+    }
+
+    private function refreshMiniMembershipForOrder(object $order): void
+    {
+        if (! in_array(strtolower(trim((string) ($order->provider ?? ''))), [
+            'wechat_mini_virtual',
+            'apple_iap',
+        ], true)) {
+            return;
+        }
+
+        app(MembershipService::class)->hasActiveMembership(
+            (int) ($order->org_id ?? 0),
+            isset($order->user_id) && $order->user_id !== null ? (string) $order->user_id : null,
+            isset($order->anon_id) && $order->anon_id !== null ? (string) $order->anon_id : null,
+        );
     }
 
     private function appleSettlementSkuSnapshot(

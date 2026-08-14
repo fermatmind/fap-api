@@ -43,6 +43,11 @@ class EntitlementManager
             return false;
         }
 
+        if ($this->isWechatMiniAttempt($orgId, $attemptId)
+            && app(MembershipService::class)->hasActiveMembership($orgId, $userId, $anonId)) {
+            return true;
+        }
+
         $query = DB::table('benefit_grants')
             ->where('org_id', $orgId)
             ->where('benefit_code', $benefitCode)
@@ -69,6 +74,23 @@ class EntitlementManager
         }
 
         return $query->exists();
+    }
+
+    private function isWechatMiniAttempt(int $orgId, string $attemptId): bool
+    {
+        $attempt = DB::table('attempts')
+            ->where('org_id', $orgId)
+            ->where('id', $attemptId)
+            ->first(['client_platform', 'channel']);
+        if ($attempt === null) {
+            return false;
+        }
+
+        $platform = strtolower(trim((string) ($attempt->client_platform ?? '')));
+        $channel = strtolower(trim((string) ($attempt->channel ?? '')));
+
+        return in_array($platform, ['wechat-miniprogram', 'wechat_miniapp'], true)
+            || in_array($channel, ['wechat-miniprogram', 'wechat_miniapp'], true);
     }
 
     public function grantAttemptUnlock(
