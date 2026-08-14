@@ -41,6 +41,7 @@ final class Career1046DisplayAssetReplacementControlTest extends TestCase
         self::assertStringContainsString('safe_error_code=REMOTE_CONNECTION_REFUSED', $workflow);
         self::assertStringContainsString('safe_error_code=REMOTE_CONNECTION_RESET', $workflow);
         self::assertStringContainsString('safe_error_code=REMOTE_NETWORK_FAILURE', $workflow);
+        self::assertStringContainsString('if [ "$ssh_rc" -eq 255 ]; then', $workflow);
         self::assertStringContainsString("jq --arg safe_error_code \"\$safe_error_code\" '.safe_error_code = \$safe_error_code'", $workflow);
         self::assertSame(3, substr_count($workflow, 'run_remote_once'));
         self::assertStringNotContainsString('2>/dev/null', $workflow);

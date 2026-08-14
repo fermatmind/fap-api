@@ -284,18 +284,20 @@ jobs:
               mv "$remote_receipt" "$receipt"
             else
               safe_error_code=REMOTE_TRANSPORT_FAILURE
-              if grep -Eq 'REMOTE HOST IDENTIFICATION HAS CHANGED|Host key verification failed|No (ED25519|ECDSA|RSA) host key is known|Offending .* key' "$ssh_stderr"; then
-                safe_error_code=REMOTE_HOST_KEY_FAILURE
-              elif grep -Eq 'Permission denied|Authentication failed|Too many authentication failures' "$ssh_stderr"; then
-                safe_error_code=REMOTE_AUTHENTICATION_FAILURE
-              elif grep -Eq 'Connection timed out|Operation timed out' "$ssh_stderr"; then
-                safe_error_code=REMOTE_CONNECTION_TIMEOUT
-              elif grep -Eq 'Connection refused' "$ssh_stderr"; then
-                safe_error_code=REMOTE_CONNECTION_REFUSED
-              elif grep -Eq 'Connection reset by peer|Connection closed by|kex_exchange_identification:' "$ssh_stderr"; then
-                safe_error_code=REMOTE_CONNECTION_RESET
-              elif grep -Eq 'Could not resolve hostname|No route to host|Network is unreachable|ssh: connect to host' "$ssh_stderr"; then
-                safe_error_code=REMOTE_NETWORK_FAILURE
+              if [ "$ssh_rc" -eq 255 ]; then
+                if grep -Eq 'REMOTE HOST IDENTIFICATION HAS CHANGED|Host key verification failed|No (ED25519|ECDSA|RSA) host key is known|Offending .* key' "$ssh_stderr"; then
+                  safe_error_code=REMOTE_HOST_KEY_FAILURE
+                elif grep -Eq 'Permission denied|Authentication failed|Too many authentication failures' "$ssh_stderr"; then
+                  safe_error_code=REMOTE_AUTHENTICATION_FAILURE
+                elif grep -Eq 'Connection timed out|Operation timed out' "$ssh_stderr"; then
+                  safe_error_code=REMOTE_CONNECTION_TIMEOUT
+                elif grep -Eq 'Connection refused' "$ssh_stderr"; then
+                  safe_error_code=REMOTE_CONNECTION_REFUSED
+                elif grep -Eq 'Connection reset by peer|Connection closed by|kex_exchange_identification:' "$ssh_stderr"; then
+                  safe_error_code=REMOTE_CONNECTION_RESET
+                elif grep -Eq 'Could not resolve hostname|No route to host|Network is unreachable|ssh: connect to host' "$ssh_stderr"; then
+                  safe_error_code=REMOTE_NETWORK_FAILURE
+                fi
               fi
               jq --arg safe_error_code "$safe_error_code" '.safe_error_code = $safe_error_code' "$receipt" > "$receipt.next"
               mv "$receipt.next" "$receipt"
