@@ -60,6 +60,7 @@ final class Career1046DiscoverabilityPermitPermissionWorkflowTest extends TestCa
             '[ "$remote_status" -eq 0 ] || exit "$remote_status"',
             'career.1046.discoverability_permit_permission_control.v1',
             '(.runtime_readable|type)=="boolean"',
+            'startswith("Career 1046 permit permission preflight [op:")',
         ] as $required) {
             self::assertStringContainsString($required, $combined);
         }
