@@ -22,6 +22,17 @@ final class Career1046DisplayAssetReplacementControlTest extends TestCase
         self::assertStringContainsString('startswith("Career 1046 display asset preflight [op:")', $workflow);
         self::assertStringNotContainsString('.name == "Career 1046 Display Asset Replacement"', $workflow);
         self::assertStringContainsString('Validate all 2092 public pages', $workflow);
+        self::assertStringContainsString('remote_receipt="$RUNNER_TEMP/career-1046-display-asset-remote-receipt.json"', $workflow);
+        self::assertStringContainsString('run_remote_once()', $workflow);
+        self::assertStringContainsString(
+            'if [ "$MODE" = preflight ] && [ "$ssh_rc" -eq 255 ] && [ ! -s "$remote_receipt" ]; then',
+            $workflow,
+        );
+        self::assertStringContainsString('test "$ssh_rc" -eq 0', $workflow);
+        self::assertStringContainsString('mv "$remote_receipt" "$receipt"', $workflow);
+        self::assertSame(3, substr_count($workflow, 'run_remote_once'));
+        self::assertStringNotContainsString('StrictHostKeyChecking=no', $workflow);
+        self::assertStringNotContainsString('curl -k', $workflow);
         self::assertStringContainsString('task_4b_through_7b_executed', $runner);
         self::assertStringContainsString("'sitemap_or_llms_release_executed' => false", $runner);
         self::assertStringContainsString("'search_channel_executed' => false", $runner);
