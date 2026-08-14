@@ -1,0 +1,48 @@
+{
+    "contract_version": "career.missing_12_display_asset_package.v1",
+    "package_id": "career-missing-12-display-v1",
+    "source": {
+        "workbook_filename": "第九版.xlsx",
+        "sheet": "Career_Assets_v4_1",
+        "workbook_sha256": "85549e2181112f58e6e174b35eb4bb5a672a3ed486c57739a7e835786627cc1b",
+        "mapper_version": "career_selected_display_asset_mapper_v0.1"
+    },
+    "counts": {
+        "assets": 12,
+        "localized_pages": 24,
+        "component_count_per_asset": 24
+    },
+    "normalization": {
+        "version": "career_missing_12_contract_normalization_v1",
+        "counts": {
+            "cta_target_action": 11,
+            "source_page_type": 1,
+            "schema_boundary_wording": 11,
+            "fermatmind_interpretation_source": 12
+        },
+        "content_generation": false,
+        "scope": [
+            "CTA target action normalized to start_riasec_test",
+            "source page type normalized to career_job_detail",
+            "unsafe recruiting-sample wording removed from Occupation schema description",
+            "FermatMind interpretation boundary source label added"
+        ]
+    },
+    "sets": {
+        "slug_set_sha256": "475a5ed102ce79d654fdf86e32737af8cd535210fec18cd4a0df7ff73a1d9f05",
+        "asset_payload_set_sha256": "c88c17dc54acdee58cd6c25664b46a0f78d9cf9c730db16a819214e7da5607a3"
+    },
+    "files": [
+        {
+            "path": "assets.jsonl",
+            "sha256": "e38f9aaa945ab470af204e6279cd7ec9314690defb6e792a615a17457615cfeb",
+            "row_count": 12
+        }
+    ],
+    "negative_guarantees": {
+        "content_regeneration": false,
+        "existing_asset_replacement": false,
+        "discoverability_change": false,
+        "search_submission": false
+    }
+}

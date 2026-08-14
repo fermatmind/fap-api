@@ -44,6 +44,7 @@ $receipt = [
     'write_commit_state' => $mode === 'apply' ? 'ambiguous' : 'confirmed_zero_write',
     'writes_committed' => false,
     'package' => null,
+    'missing_base_package' => null,
     'authority' => null,
     'cache' => null,
     'state_sha256' => null,
@@ -128,6 +129,7 @@ try {
         throw new Career1046DisplayAssetReplacementFailure('PREFLIGHT_DATABASE_WRITE_OBSERVED');
     }
     $receipt['package'] = $result['package'];
+    $receipt['missing_base_package'] = $result['missing_base_package'];
     $receipt['authority'] = $result['authority'];
     $receipt['cache'] = $result['cache'];
     $receipt['state_sha256'] = $result['state_sha256'];
@@ -141,6 +143,9 @@ try {
     if (($result['package']['career_count'] ?? null) !== 1046
         || ($result['package']['locale_row_count'] ?? null) !== 2092
         || ($result['package']['content_block_count'] ?? null) !== 4184
+        || ($result['missing_base_package']['asset_count'] ?? null) !== 12
+        || ($result['missing_base_package']['localized_page_count'] ?? null) !== 24
+        || ($result['missing_base_package']['content_generation'] ?? null) !== false
         || ($result['authority']['target_count'] ?? null) !== 1046
         || ($result['authority']['component_order_after_count'] ?? null) !== 1046) {
         throw new Career1046DisplayAssetReplacementFailure('RESULT_COUNT_MISMATCH');
@@ -154,7 +159,8 @@ try {
         if (($result['cache']['ready_active_count'] ?? null) !== 2092
             || ($result['cache']['component_26_count'] ?? null) !== 2092
             || ($result['cache']['content_match_count'] ?? null) !== 2092
-            || ($result['write_counts']['database_insert_count'] ?? null) !== 0
+            || ($result['write_counts']['database_update_count'] ?? null) !== 1034
+            || ($result['write_counts']['database_insert_count'] ?? null) !== 12
             || ($result['write_counts']['database_delete_count'] ?? null) !== 0
             || ($result['write_counts']['cache_pointer_activation_count'] ?? null) !== 2092) {
             throw new Career1046DisplayAssetReplacementFailure('APPLY_READBACK_MISMATCH');
