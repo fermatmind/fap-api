@@ -19,6 +19,8 @@ final class Career1046DisplayAssetReplacementControlTest extends TestCase
         self::assertStringContainsString('Elect display-asset operation owner before Environment access', $workflow);
         self::assertStringContainsString('expected_preflight_receipt_sha256', $workflow);
         self::assertStringContainsString('expected_preflight_state_sha256', $workflow);
+        self::assertStringContainsString('startswith("Career 1046 display asset preflight [op:")', $workflow);
+        self::assertStringNotContainsString('.name == "Career 1046 Display Asset Replacement"', $workflow);
         self::assertStringContainsString('Validate all 2092 public pages', $workflow);
         self::assertStringContainsString('task_4b_through_7b_executed', $runner);
         self::assertStringContainsString("'sitemap_or_llms_release_executed' => false", $runner);

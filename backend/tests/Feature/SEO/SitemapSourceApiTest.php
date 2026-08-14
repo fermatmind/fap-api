@@ -3,7 +3,9 @@
 namespace Tests\Feature\SEO;
 
 use App\Console\Commands\CareerPublicResolutionTypeMatrix;
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionLookup;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
+use App\Http\Controllers\API\V0_5\SEO\SitemapSourceController;
 use App\Models\CareerJob;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
@@ -135,6 +137,27 @@ class SitemapSourceApiTest extends TestCase
         $this->assertNotContains('https://fermatmind.com/zh/career/jobs/backend-engineer', $locs);
         $this->assertNotContains('https://fermatmind.com/en/career/jobs/software-engineer', $locs);
         $this->assertNotContains('https://fermatmind.com/zh/career/jobs/software-engineer', $locs);
+    }
+
+    public function test_sitemap_source_keeps_urls_released_after_the_frozen_projection_was_built(): void
+    {
+        $this->writeProjectionArtifact([
+            $this->projectionItem('released-after-generation', 'en', overrides: ['sitemap_live' => false]),
+            $this->projectionItem('released-after-generation', 'zh', overrides: ['sitemap_live' => false]),
+            $this->projectionItem('still-quarantined', 'en', CareerRuntimePublishProjectionService::STATE_QUARANTINED),
+        ]);
+
+        $payload = app(SitemapSourceController::class)->buildPayloadFromAuthorityUrls([
+            ['loc' => 'https://fermatmind.com/en/career/jobs/released-after-generation', 'lastmod' => '2026-08-14T00:00:00+00:00'],
+            ['loc' => 'https://fermatmind.com/zh/career/jobs/released-after-generation', 'lastmod' => '2026-08-14T00:00:00+00:00'],
+            ['loc' => 'https://fermatmind.com/en/career/jobs/still-quarantined', 'lastmod' => '2026-08-14T00:00:00+00:00'],
+        ], app(CareerRuntimePublishProjectionLookup::class));
+
+        $locs = collect($payload['items'])->pluck('loc')->all();
+
+        $this->assertContains('https://fermatmind.com/en/career/jobs/released-after-generation', $locs);
+        $this->assertContains('https://fermatmind.com/zh/career/jobs/released-after-generation', $locs);
+        $this->assertNotContains('https://fermatmind.com/en/career/jobs/still-quarantined', $locs);
     }
 
     public function test_sitemap_source_warm_includes_released_zh_big_five_public_content_assets(): void

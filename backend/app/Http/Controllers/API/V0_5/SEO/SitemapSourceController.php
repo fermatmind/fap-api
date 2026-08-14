@@ -194,7 +194,6 @@ class SitemapSourceController extends Controller
         return ($item['public_resolution_type'] ?? null) === CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB
             && ($item['runtime_publish_state'] ?? null) === CareerRuntimePublishProjectionService::STATE_PUBLISHED
             && ($item['detail_route_enabled'] ?? false) === true
-            && ($item['sitemap_live'] ?? false) === true
             && ($item['canonical_self'] ?? false) === true
             && ($item['robots_indexable'] ?? false) === true
             && ($item['release_gate_pass'] ?? false) === true;
