@@ -86,6 +86,7 @@ final class Career1046DisplayAssetReplacementControlTest extends TestCase
         self::assertStringContainsString('DATABASE_COMPENSATION_INSERT_DELETE_FAILED', $service);
         self::assertStringContainsString('AI_EXPOSURE_RATING_CONFLICT_UNRESOLVED', $service);
         self::assertStringContainsString('DISPLAY_INSERT_OCCUPATION_CROSSWALK_MISMATCH', $service);
+        self::assertStringContainsString("\$plan['expected_blocks'][\$slug][\$locale]", $service);
         self::assertLessThan(
             strpos($runner, "throw new Career1046DisplayAssetReplacementFailure('RESULT_COUNT_MISMATCH')"),
             strpos($runner, "\$receipt['writes_committed'] = true"),

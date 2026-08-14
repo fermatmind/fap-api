@@ -117,6 +117,18 @@ final class Career1046MissingDisplayAssetPackageTest extends TestCase
         self::assertSame('4/10', $asset->page_payload_json['page']['en']['ai_impact_table']['score_normalized']);
         self::assertStringNotContainsString('7/10', implode("\n", $asset->page_payload_json['page']['en']['career_ai_description_block']['body']));
         self::assertStringNotContainsString('7/10', implode("\n", $asset->page_payload_json['page']['zh']['career_ai_description_block']['body']));
+        $cacheBlocks = (new ReflectionMethod($service, 'localizedBlocksForCache'))->invoke(
+            $service,
+            $asset->page_payload_json,
+        );
+        self::assertSame(
+            $asset->page_payload_json['page']['en']['career_ai_description_block'],
+            $cacheBlocks['en']['career_ai_description_block'],
+        );
+        self::assertSame(
+            $asset->page_payload_json['page']['zh']['career_ai_description_block'],
+            $cacheBlocks['zh-CN']['career_ai_description_block'],
+        );
         self::assertSame($baseRow['asset_payload']['seo_payload_json'], $asset->seo_payload_json);
         self::assertFalse($asset->metadata_json['content_generated']);
         self::assertFalse($asset->metadata_json['discoverability_changed']);
