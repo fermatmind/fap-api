@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Career\Audit;
 
+use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Domain\Career\Publish\CareerFullReleaseLedgerProjectionService;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\CareerJob;
@@ -32,8 +33,6 @@ final class CareerDetailReadyPublicationCandidateScanner
     private const DISPLAY_ASSET_TYPE = 'career_job_public_display';
 
     private const DISPLAY_READY_STATUS = 'ready_for_pilot';
-
-    private const DISPLAY_COMPONENT_ORDER_COUNT = 24;
 
     public function __construct(
         private readonly CareerRuntimePublishProjectionVisibility $runtimeProjection,
@@ -256,7 +255,7 @@ final class CareerDetailReadyPublicationCandidateScanner
         $pages = is_array($asset->page_payload_json) ? $asset->page_payload_json : [];
         $localizedPages = is_array($pages['page'] ?? null) ? $pages['page'] : $pages;
 
-        return count($componentOrder) === self::DISPLAY_COMPONENT_ORDER_COUNT
+        return CareerDisplayAssetComponentContract::supports($componentOrder)
             && is_array($localizedPages['zh'] ?? null)
             && is_array($localizedPages['en'] ?? null);
     }

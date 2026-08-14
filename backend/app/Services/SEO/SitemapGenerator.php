@@ -2,6 +2,7 @@
 
 namespace App\Services\SEO;
 
+use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Domain\Career\Publish\Career1046DiscoverabilityReleaseGate;
 use App\Models\Article;
 use App\Models\CareerGuide;
@@ -35,8 +36,6 @@ class SitemapGenerator
     private const CAREER_DISPLAY_ASSET_TYPE = 'career_job_public_display';
 
     private const CAREER_DISPLAY_READY_STATUS = 'ready_for_pilot';
-
-    private const CAREER_DISPLAY_COMPONENT_ORDER_COUNT = 24;
 
     private const CAREER_DISPLAY_MANUAL_HOLD_SLUGS = [
         'software-developers',
@@ -956,7 +955,7 @@ class SitemapGenerator
         }
 
         $componentOrder = is_array($asset->component_order_json) ? array_values($asset->component_order_json) : [];
-        if (count($componentOrder) !== self::CAREER_DISPLAY_COMPONENT_ORDER_COUNT) {
+        if (! CareerDisplayAssetComponentContract::supports($componentOrder)) {
             return false;
         }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SEO;
 
+use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
@@ -133,7 +134,7 @@ final class CareerSitemapExposureDirectoryAuthorityTest extends TestCase
             'asset_type' => 'career_job_public_display',
             'asset_role' => 'formal_pilot_master',
             'status' => 'ready_for_pilot',
-            'component_order_json' => range(1, 24),
+            'component_order_json' => CareerDisplayAssetComponentContract::LEGACY_V4_2_ORDER,
             'page_payload_json' => [
                 'zh' => ['hero' => ['title' => $occupation->canonical_title_zh]],
                 'en' => ['hero' => ['title' => $occupation->canonical_title_en]],

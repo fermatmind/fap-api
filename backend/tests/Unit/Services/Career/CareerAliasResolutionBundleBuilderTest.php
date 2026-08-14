@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Services\Career;
 
+use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
 use App\Models\CareerJob;
@@ -549,7 +550,7 @@ final class CareerAliasResolutionBundleBuilderTest extends TestCase
             'asset_type' => 'career_job_public_display',
             'asset_role' => 'formal_pilot_master',
             'status' => 'ready_for_pilot',
-            'component_order_json' => array_map(static fn (int $index): string => 'component_'.$index, range(1, 24)),
+            'component_order_json' => CareerDisplayAssetComponentContract::LEGACY_V4_2_ORDER,
             'page_payload_json' => [
                 'page' => [
                     'zh' => ['hero' => ['title' => $occupation->canonical_title_zh]],

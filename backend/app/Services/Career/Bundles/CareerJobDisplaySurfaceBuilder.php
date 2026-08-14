@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Bundles;
 
+use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\DTO\Career\CareerJobDetailBundle;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
@@ -17,8 +18,6 @@ final class CareerJobDisplaySurfaceBuilder
     private const ASSET_VERSION = 'v4.2';
 
     private const TEMPLATE_VERSION = 'v4.2';
-
-    private const COMPONENT_ORDER_COUNT = 24;
 
     private const MANUAL_HOLD_SLUGS = [
         'software-developers',
@@ -278,14 +277,8 @@ final class CareerJobDisplaySurfaceBuilder
         }
 
         $componentOrder = is_array($asset->component_order_json) ? array_values($asset->component_order_json) : [];
-        if (count($componentOrder) !== self::COMPONENT_ORDER_COUNT) {
+        if (! CareerDisplayAssetComponentContract::supports($componentOrder)) {
             return false;
-        }
-
-        foreach ($componentOrder as $component) {
-            if (! is_string($component) || trim($component) === '') {
-                return false;
-            }
         }
 
         return ! $this->containsProductSchema([
