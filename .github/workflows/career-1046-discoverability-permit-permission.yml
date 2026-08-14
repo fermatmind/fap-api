@@ -1,0 +1,217 @@
+name: Career 1046 Discoverability Permit Runtime Permission
+run-name: Career 1046 permit permission ${{ inputs.mode }} [op:${{ inputs.operation_key }}]
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Zero-write preflight or receipt-bound metadata apply
+        required: true
+        default: preflight
+        type: choice
+        options: [preflight, apply]
+      expected_control_plane_sha:
+        required: true
+        type: string
+      expected_active_revision:
+        required: true
+        type: string
+      preflight_run_id:
+        required: false
+        default: ""
+        type: string
+      preflight_run_attempt:
+        required: false
+        default: ""
+        type: string
+      expected_preflight_receipt_sha256:
+        required: false
+        default: ""
+        type: string
+      expected_preflight_artifact_digest:
+        required: false
+        default: ""
+        type: string
+      operator_approval_phrase:
+        required: false
+        default: ""
+        type: string
+      operation_key:
+        description: Deterministic controlled-operation key
+        required: true
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: career-1046-discoverability-permit-permission-production
+  cancel-in-progress: false
+
+jobs:
+  operation_gate:
+    name: Elect permit-permission operation owner before Environment access
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      decision: ${{ steps.gate.outputs.decision }}
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - id: identity
+        shell: bash
+        env:
+          IDENTITY: control=${{ inputs.expected_control_plane_sha }}|active=${{ inputs.expected_active_revision }}|mode=${{ inputs.mode }}|preflight_run=${{ inputs.preflight_run_id }}|preflight_attempt=${{ inputs.preflight_run_attempt }}|preflight_receipt=${{ inputs.expected_preflight_receipt_sha256 }}
+        run: echo "operation_key=$(node .github/scripts/controlled-operation-gate.cjs key --repository "$GITHUB_REPOSITORY" --workflow .github/workflows/career-1046-discoverability-permit-permission.yml --scope career-1046-discoverability-permit-permission --identity "$IDENTITY")" >> "$GITHUB_OUTPUT"
+      - id: gate
+        uses: ./.github/actions/controlled-operation-gate
+        with:
+          claimed-key: ${{ inputs.operation_key }}
+          expected-key: ${{ steps.identity.outputs.operation_key }}
+          workflow-file: career-1046-discoverability-permit-permission.yml
+          receipt-template: career-1046-discoverability-permit-permission-${{ inputs.mode }}-{run_id}-{run_attempt}
+
+  execute:
+    name: Permit runtime permission (${{ inputs.mode }})
+    needs: operation_gate
+    if: needs.operation_gate.outputs.decision == 'execute'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: production
+    env:
+      MODE: ${{ inputs.mode }}
+      CONTROL: ${{ inputs.expected_control_plane_sha }}
+      ACTIVE: ${{ inputs.expected_active_revision }}
+      PREFLIGHT_RUN_ID: ${{ inputs.preflight_run_id }}
+      PREFLIGHT_RUN_ATTEMPT: ${{ inputs.preflight_run_attempt }}
+      PREFLIGHT_RECEIPT: ${{ inputs.expected_preflight_receipt_sha256 }}
+      PREFLIGHT_DIGEST: ${{ inputs.expected_preflight_artifact_digest }}
+      APPROVAL: ${{ inputs.operator_approval_phrase }}
+      GENERATION: career-1046-512d8e51876c6f48a4f09b88632d1a14
+      POINTER: 3b63a14825334b805a36552600d925aa89a06582be5f5e2f739727d8a1e9e466
+      TASK7B_RUN_ID: '31746747008'
+      TASK7B_RUN_ATTEMPT: '1'
+      TASK7B_ARTIFACT_DIGEST: sha256:c780c89fdeb67faf7478966b55e4514424725f6af4418b0fa147c5ea947fe3ae
+      TASK7B_RECEIPT_SHA256: bc3285d5f91dfc0879bd10479028f192add720cc92504dd0c0dff9bc87e28a87
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+      SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+
+    steps:
+      - name: Initialize failure-safe receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          RECEIPT="$RUNNER_TEMP/career-1046-discoverability-permit-permission.json"
+          echo "RECEIPT=$RECEIPT" >> "$GITHUB_ENV"
+          jq -n --arg mode "$MODE" --arg control "$CONTROL" --arg active "$ACTIVE" \
+            '{schema_version:"career.1046.discoverability_permit_permission_receipt.v1",mode:$mode,status:"HOLD_PERMISSION_CONTROL_INCOMPLETE",control_plane_sha:$control,active_revision:$active,possible_metadata_write_state:"confirmed_zero_write",metadata_write_count:0,content_write_count:0,database_write_count:0,cms_write_count:0,cache_write_count:0,pointer_write_count:0,sitemap_write_count:0,llms_write_count:0,search_submission_count:0,deployment_count:0,migration_count:0,restart_count:0,automatic_retry_allowed:false}' > "$RECEIPT"
+
+      - name: Check out exact control plane
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ inputs.expected_control_plane_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Validate exact main and immutable Task 7B permit lineage
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = refs/heads/main
+          [[ "$MODE" =~ ^(preflight|apply)$ && "$CONTROL" =~ ^[0-9a-f]{40}$ && "$ACTIVE" =~ ^[0-9a-f]{40}$ ]]
+          test "$(git rev-parse HEAD)" = "$CONTROL"
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          test "$(git rev-parse origin/main)" = "$CONTROL"
+          git cat-file -e "${ACTIVE}^{commit}"
+          git merge-base --is-ancestor "$ACTIVE" "$CONTROL"
+          test -f backend/scripts/deploy/career_1046_discoverability_permit_permission_control.sh
+          test ! -L backend/scripts/deploy/career_1046_discoverability_permit_permission_control.sh
+          bash -n backend/scripts/deploy/career_1046_discoverability_permit_permission_control.sh
+
+          run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${TASK7B_RUN_ID}")"
+          jq -e --argjson attempt "$TASK7B_RUN_ATTEMPT" '.name=="Career 1046 Discoverability Release Control" and .path==".github/workflows/career-1046-discoverability-release-control.yml" and .event=="workflow_dispatch" and .status=="completed" and .conclusion=="success" and .run_attempt==$attempt' <<<"$run" >/dev/null
+          name="career-1046-discoverability-release-apply-${TASK7B_RUN_ID}-${TASK7B_RUN_ATTEMPT}"
+          artifacts="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${TASK7B_RUN_ID}/artifacts?per_page=100")"
+          id="$(jq -er --arg name "$name" --arg digest "$TASK7B_ARTIFACT_DIGEST" '[.artifacts[]|select(.name==$name and .expired==false and .digest==$digest)]|select(length==1)|.[0].id' <<<"$artifacts")"
+          evidence="$(mktemp -d)"
+          gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${id}/zip" > "$evidence/artifact.zip"
+          test "$(unzip -Z1 "$evidence/artifact.zip")" = career-1046-discoverability-release-control.json
+          unzip -q "$evidence/artifact.zip" -d "$evidence/unpacked"
+          task7b="$evidence/unpacked/career-1046-discoverability-release-control.json"
+          test "$(sha256sum "$task7b" | awk '{print $1}')" = "$TASK7B_RECEIPT_SHA256"
+          jq -e --arg generation "$GENERATION" --arg pointer "$POINTER" '.status=="PASS_APPLY_DISCOVERABILITY_RELEASE" and .generation_id==$generation and .active_pointer_sha256==$pointer and .immutable_pointer_sha256==$pointer and .slug_count==1046 and .locale_row_count==2092 and .discoverability_release_write_count==1 and .database_write_count==0 and .cms_write_count==0 and .cache_write_count==0 and .pointer_write_count==0 and .sitemap_write_count==0 and .llms_write_count==0 and .search_submission_count==0' "$task7b" >/dev/null
+
+          if [ "$MODE" = preflight ]; then
+            test -z "$PREFLIGHT_RUN_ID$PREFLIGHT_RUN_ATTEMPT$PREFLIGHT_RECEIPT$PREFLIGHT_DIGEST$APPROVAL"
+          else
+            [[ "$PREFLIGHT_RUN_ID" =~ ^[1-9][0-9]*$ && "$PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ && "$PREFLIGHT_RECEIPT" =~ ^[0-9a-f]{64}$ && "$PREFLIGHT_DIGEST" =~ ^sha256:[0-9a-f]{64}$ ]]
+            prior="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}")"
+            jq -e --arg control "$CONTROL" --argjson attempt "$PREFLIGHT_RUN_ATTEMPT" '.name=="Career 1046 Discoverability Permit Runtime Permission" and .path==".github/workflows/career-1046-discoverability-permit-permission.yml" and .head_sha==$control and .event=="workflow_dispatch" and .status=="completed" and .conclusion=="success" and .run_attempt==$attempt' <<<"$prior" >/dev/null
+            preflight_name="career-1046-discoverability-permit-permission-preflight-${PREFLIGHT_RUN_ID}-${PREFLIGHT_RUN_ATTEMPT}"
+            prior_artifacts="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${PREFLIGHT_RUN_ID}/artifacts?per_page=100")"
+            prior_id="$(jq -er --arg name "$preflight_name" --arg digest "$PREFLIGHT_DIGEST" '[.artifacts[]|select(.name==$name and .expired==false and .digest==$digest)]|select(length==1)|.[0].id' <<<"$prior_artifacts")"
+            gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${prior_id}/zip" > "$evidence/preflight.zip"
+            unzip -q "$evidence/preflight.zip" -d "$evidence/preflight"
+            preflight="$evidence/preflight/career-1046-discoverability-permit-permission.json"
+            test "$(sha256sum "$preflight" | awk '{print $1}')" = "$PREFLIGHT_RECEIPT"
+            jq -e --arg control "$CONTROL" --arg active "$ACTIVE" --arg generation "$GENERATION" --arg pointer "$POINTER" '.mode=="preflight" and .status=="PASS_DISCOVERABILITY_PERMIT_PERMISSION_REPAIR_REQUIRED" and .control_plane_sha==$control and .active_revision==$active and .generation_id==$generation and .active_pointer_sha256==$pointer and .slug_count==1046 and .locale_row_count==2092 and .repair_target_count>=1 and .repair_target_count<=3 and .runtime_readable==false and .metadata_write_count==0 and .content_write_count==0 and .database_write_count==0 and .cms_write_count==0 and .cache_write_count==0 and .pointer_write_count==0 and .sitemap_write_count==0 and .llms_write_count==0 and .search_submission_count==0' "$preflight" >/dev/null
+            TARGET="$(jq -r .target_set_sha256 "$preflight")"; SNAPSHOT="$(jq -r .snapshot_sha256 "$preflight")"; PERMIT="$(jq -r .permit_sha256 "$preflight")"; REPAIR_COUNT="$(jq -r .repair_target_count "$preflight")"
+            expected="I explicitly approve one Career 1046 discoverability permit metadata repair from preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} receipt ${PREFLIGHT_RECEIPT}, target ${TARGET}, snapshot ${SNAPSHOT}, permit ${PERMIT}; modify exactly ${REPAIR_COUNT} current-generation owner/group/mode targets, preserve file bytes, and perform no other write."
+            test "$APPROVAL" = "$expected"
+            { echo "TARGET=$TARGET"; echo "SNAPSHOT=$SNAPSHOT"; echo "PERMIT=$PERMIT"; echo "REPAIR_COUNT=$REPAIR_COUNT"; } >> "$GITHUB_ENV"
+          fi
+
+      - name: Set up pinned production SSH identity
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned known hosts
+        shell: bash
+        run: |
+          set -euo pipefail
+          for value in DEPLOY_USER DEPLOY_PORT DEPLOY_HOST RETIRED_DEPLOY_HOST DEPLOY_PATH SSH_KNOWN_HOSTS; do test -n "${!value:-}"; done
+          [[ "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST" && "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ && "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ && "$DEPLOY_PATH" != *".."* ]]
+          install -d -m 0700 ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 0600 ~/.ssh/known_hosts
+          ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
+
+      - name: Run exact zero-write preflight or receipt-bound apply
+        shell: bash
+        run: |
+          set -euo pipefail
+          script=backend/scripts/deploy/career_1046_discoverability_permit_permission_control.sh
+          for key in DEPLOY_PATH ACTIVE MODE GENERATION POINTER DEPLOY_USER; do printf -v "q_$key" '%q' "${!key}"; done
+          root="${DEPLOY_PATH}/shared/backend/storage/app/private/career_generation_authority"; printf -v q_root '%q' "$root"
+          remote="DEPLOY_PATH=$q_DEPLOY_PATH EXPECTED_ACTIVE_REVISION=$q_ACTIVE CAREER_PERMIT_PERMISSION_MODE=$q_MODE CAREER_PERMIT_PERMISSION_ROOT=$q_root CAREER_PERMIT_PERMISSION_GENERATION_ID=$q_GENERATION CAREER_PERMIT_PERMISSION_POINTER_SHA256=$q_POINTER CAREER_PERMIT_PERMISSION_OWNER=$q_DEPLOY_USER CAREER_PERMIT_PERMISSION_GROUP=www-data CAREER_PERMIT_PERMISSION_RUNTIME_USER=www-data"
+          if [ "$MODE" = apply ]; then
+            jq '.possible_metadata_write_state="ambiguous"' "$RECEIPT" > "$RECEIPT.next" && mv "$RECEIPT.next" "$RECEIPT"
+            for key in TARGET SNAPSHOT PERMIT REPAIR_COUNT; do printf -v "q_$key" '%q' "${!key}"; done
+            result="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "sudo -n env $remote CAREER_PERMIT_PERMISSION_APPLY_CONFIRMATION=true CAREER_PERMIT_PERMISSION_EXPECTED_TARGET_SET_SHA256=$q_TARGET CAREER_PERMIT_PERMISSION_EXPECTED_SNAPSHOT_SHA256=$q_SNAPSHOT CAREER_PERMIT_PERMISSION_EXPECTED_PERMIT_SHA256=$q_PERMIT CAREER_PERMIT_PERMISSION_EXPECTED_REPAIR_TARGET_COUNT=$q_REPAIR_COUNT bash -s" < "$script")"
+            jq -e --arg permit "$PERMIT" --argjson writes "$REPAIR_COUNT" '.status=="PASS_DISCOVERABILITY_PERMIT_PERMISSION_REPAIR_VERIFIED" and .permit_sha256==$permit and .repair_target_count==0 and .runtime_readable==true and .metadata_write_count==$writes and .bytes_unchanged==true' <<<"$result" >/dev/null
+          else
+            result="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$remote bash -s" < "$script")"
+            jq -e '.status=="PASS_DISCOVERABILITY_PERMIT_PERMISSION_REPAIR_REQUIRED" and .repair_target_count>=1 and .repair_target_count<=3 and .runtime_readable==false and .metadata_write_count==0 and .bytes_unchanged==true' <<<"$result" >/dev/null
+          fi
+          jq --arg mode "$MODE" --arg control "$CONTROL" --arg active "$ACTIVE" --arg task7b "$TASK7B_RECEIPT_SHA256" --argjson run "$GITHUB_RUN_ID" --argjson attempt "$GITHUB_RUN_ATTEMPT" --arg preflight "$PREFLIGHT_RECEIPT" '. + {mode:$mode,control_plane_sha:$control,active_revision:$active,task7b_receipt_sha256:$task7b,workflow_run_id:$run,workflow_run_attempt:$attempt,preflight_receipt_sha256:(if $preflight=="" then null else $preflight end),possible_metadata_write_state:(if $mode=="apply" then "verified_complete" else "confirmed_zero_write" end)}' <<<"$result" > "$RECEIPT"
+          if [ "$MODE" = preflight ]; then
+            receipt_sha="$(sha256sum "$RECEIPT" | awk '{print $1}')"; target="$(jq -r .target_set_sha256 "$RECEIPT")"; snapshot="$(jq -r .snapshot_sha256 "$RECEIPT")"; permit="$(jq -r .permit_sha256 "$RECEIPT")"; count="$(jq -r .repair_target_count "$RECEIPT")"
+            phrase="I explicitly approve one Career 1046 discoverability permit metadata repair from preflight run ${GITHUB_RUN_ID} attempt ${GITHUB_RUN_ATTEMPT} receipt ${receipt_sha}, target ${target}, snapshot ${snapshot}, permit ${permit}; modify exactly ${count} current-generation owner/group/mode targets, preserve file bytes, and perform no other write."
+            printf 'status: PASS\nreceipt_sha256: %s\napproval_phrase: %s\n' "$receipt_sha" "$phrase" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload sanitized receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: career-1046-discoverability-permit-permission-${{ inputs.mode }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/career-1046-discoverability-permit-permission.json
+          if-no-files-found: error
+          retention-days: 30
