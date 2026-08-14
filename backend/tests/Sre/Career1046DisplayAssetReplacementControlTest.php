@@ -8,6 +8,29 @@ use PHPUnit\Framework\TestCase;
 
 final class Career1046DisplayAssetReplacementControlTest extends TestCase
 {
+    public function test_the_standalone_runner_emits_a_sanitized_receipt_before_composer_is_loaded(): void
+    {
+        $runner = dirname(__DIR__, 3).'/backend/scripts/operations/career_1046_display_asset_replacement.php';
+        $output = [];
+        $status = 0;
+
+        exec(
+            'CAREER_DISPLAY_REPLACEMENT_BACKEND_ROOT= CAREER_DISPLAY_REPLACEMENT_EXECUTE= '
+            .escapeshellarg(PHP_BINARY).' '.escapeshellarg($runner).' preflight 2>&1',
+            $output,
+            $status,
+        );
+
+        self::assertSame(1, $status);
+        $receipt = json_decode(implode("\n", $output), true, 512, JSON_THROW_ON_ERROR);
+        self::assertSame('career.1046.display_asset_replacement.v1', $receipt['contract_version']);
+        self::assertSame('FAIL_DISPLAY_ASSET_REPLACEMENT', $receipt['status']);
+        self::assertSame('EXECUTION_CONTRACT_INVALID', $receipt['safe_error_code']);
+        self::assertFalse($receipt['production_write_execution']);
+        self::assertSame('confirmed_zero_write', $receipt['write_commit_state']);
+        self::assertFalse($receipt['writes_committed']);
+    }
+
     public function test_the_control_plane_is_one_receipt_bound_apply_with_locked_boundaries(): void
     {
         $root = dirname(__DIR__, 3);
