@@ -8,8 +8,10 @@ use App\Domain\Career\Display\Career1046DisplayAssetReplacement;
 use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
+use App\Models\OccupationCrosswalk;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
+use ReflectionMethod;
 
 final class Career1046MissingDisplayAssetPackageTest extends TestCase
 {
@@ -103,11 +105,82 @@ final class Career1046MissingDisplayAssetPackageTest extends TestCase
         self::assertSame(CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER, $asset->component_order_json);
         self::assertSame($baseRow['asset_payload']['page_payload_json']['page']['en']['hero'], $asset->page_payload_json['page']['en']['hero']);
         self::assertSame($baseRow['asset_payload']['page_payload_json']['page']['zh']['definition_block'], $asset->page_payload_json['page']['zh']['definition_block']);
-        self::assertSame($localizedRows['en']['blocks']['career_ai_description_block'], $asset->page_payload_json['page']['en']['career_ai_description_block']);
+        self::assertSame(
+            $localizedRows['en']['blocks']['career_ai_description_block']['heading'],
+            $asset->page_payload_json['page']['en']['career_ai_description_block']['heading'],
+        );
+        self::assertSame(
+            array_slice($localizedRows['en']['blocks']['career_ai_description_block']['body'], 0, 4),
+            array_slice($asset->page_payload_json['page']['en']['career_ai_description_block']['body'], 0, 4),
+        );
         self::assertSame($localizedRows['zh-CN']['blocks']['career_path_block'], $asset->page_payload_json['page']['zh']['career_path_block']);
+        self::assertSame('4/10', $asset->page_payload_json['page']['en']['ai_impact_table']['score_normalized']);
+        self::assertStringNotContainsString('7/10', implode("\n", $asset->page_payload_json['page']['en']['career_ai_description_block']['body']));
+        self::assertStringNotContainsString('7/10', implode("\n", $asset->page_payload_json['page']['zh']['career_ai_description_block']['body']));
         self::assertSame($baseRow['asset_payload']['seo_payload_json'], $asset->seo_payload_json);
         self::assertFalse($asset->metadata_json['content_generated']);
         self::assertFalse($asset->metadata_json['discoverability_changed']);
+    }
+
+    public function test_an_authorized_insert_requires_exact_soc_and_onet_crosswalks(): void
+    {
+        $occupation = new Occupation(['canonical_slug' => 'industrial-engineers']);
+        $occupation->setRelation('crosswalks', collect([
+            new OccupationCrosswalk(['source_system' => 'us_soc', 'source_code' => '17-2112']),
+            new OccupationCrosswalk(['source_system' => 'onet_soc_2019', 'source_code' => '17-2112.00']),
+        ]));
+        $service = (new ReflectionClass(Career1046DisplayAssetReplacement::class))->newInstanceWithoutConstructor();
+        $method = new ReflectionMethod($service, 'assertOccupationCrosswalks');
+
+        $method->invoke($service, $occupation, ['expected_soc' => '17-2112', 'expected_onet' => '17-2112.00']);
+        self::assertTrue(true);
+
+        $this->expectExceptionMessage('DISPLAY_INSERT_OCCUPATION_CROSSWALK_MISMATCH');
+        $method->invoke($service, $occupation, ['expected_soc' => '17-2112', 'expected_onet' => '17-2112.99']);
+    }
+
+    public function test_all_twelve_inserted_assets_have_one_numeric_ai_rating_authority(): void
+    {
+        $backendRoot = dirname(__DIR__, 5);
+        $baseRows = [];
+        foreach (file($backendRoot.'/content_assets/career/missing-12-display-v1/assets.jsonl', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
+            $row = json_decode($line, true, 512, JSON_THROW_ON_ERROR);
+            $baseRows[$row['slug']] = $row;
+        }
+        $localizedRows = [];
+        $handle = fopen($backendRoot.'/content_assets/career/workbuddy-1046-display-v1/assets.jsonl', 'rb');
+        self::assertIsResource($handle);
+        while (($line = fgets($handle)) !== false) {
+            $row = json_decode(trim($line), true, 512, JSON_THROW_ON_ERROR);
+            if (isset($baseRows[$row['slug']])) {
+                $localizedRows[$row['slug']][$row['locale']] = $row;
+            }
+        }
+        fclose($handle);
+
+        $service = (new ReflectionClass(Career1046DisplayAssetReplacement::class))->newInstanceWithoutConstructor();
+        $method = new ReflectionMethod($service, 'insertAttributes');
+        foreach ($baseRows as $slug => $baseRow) {
+            $occupation = new Occupation([
+                'id' => '00000000-0000-4000-8000-'.substr(hash('sha256', $slug), 0, 12),
+                'canonical_slug' => $slug,
+            ]);
+            $asset = new CareerJobDisplayAsset($method->invoke(
+                $service,
+                $slug,
+                $occupation,
+                $baseRow,
+                $localizedRows[$slug],
+            ));
+            foreach (['en', 'zh'] as $locale) {
+                $expected = (int) $asset->page_payload_json['page'][$locale]['ai_impact_table']['score_normalized'];
+                $body = implode("\n", $asset->page_payload_json['page'][$locale]['career_ai_description_block']['body']);
+                preg_match_all('/(?<![0-9])(10|[0-9])(?:\.0)?\s*\/\s*10(?![0-9])/u', $body, $matches);
+                foreach (array_map('intval', $matches[1] ?? []) as $actual) {
+                    self::assertSame($expected, $actual, $slug.' '.$locale);
+                }
+            }
+        }
     }
 
     /** @param list<string> $values */

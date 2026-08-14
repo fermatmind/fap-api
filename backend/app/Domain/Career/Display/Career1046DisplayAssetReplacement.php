@@ -6,6 +6,7 @@ namespace App\Domain\Career\Display;
 
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
+use App\Models\OccupationCrosswalk;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
@@ -297,6 +298,7 @@ final class Career1046DisplayAssetReplacement
 
         $occupations = Occupation::query()
             ->whereIn('canonical_slug', $missingSlugs)
+            ->with('crosswalks')
             ->get()
             ->keyBy(static fn (Occupation $occupation): string => strtolower((string) $occupation->canonical_slug));
         if ($occupations->count() !== count($missingSlugs)) {
@@ -342,6 +344,7 @@ final class Career1046DisplayAssetReplacement
         foreach ($missingSlugs as $slug) {
             /** @var Occupation $occupation */
             $occupation = $occupations->get($slug);
+            $this->assertOccupationCrosswalks($occupation, $missingBaseRows[$slug]);
             $attributes = $this->insertAttributes(
                 $slug,
                 $occupation,
@@ -465,7 +468,11 @@ final class Career1046DisplayAssetReplacement
                 || ! is_array($blocks['career_path_block'] ?? null)) {
                 throw new Career1046DisplayAssetReplacementFailure('PACKAGE_LOCALIZED_BLOCKS_INVALID');
             }
-            $pages[$pageKey]['career_ai_description_block'] = $blocks['career_ai_description_block'];
+            $pages[$pageKey]['career_ai_description_block'] = $this->reconcileAiExposureRating(
+                $blocks['career_ai_description_block'],
+                $pages[$pageKey]['ai_impact_table'] ?? null,
+                $locale,
+            );
             $pages[$pageKey]['career_path_block'] = $blocks['career_path_block'];
         }
 
@@ -476,6 +483,86 @@ final class Career1046DisplayAssetReplacement
         }
 
         return $pages;
+    }
+
+    /**
+     * The existing ai_impact_table remains the single numeric rating authority.
+     * A conflicting WorkBuddy introductory rating sentence is removed while the
+     * rest of the reviewed block remains byte-for-byte unchanged.
+     *
+     * @param  array<string, mixed>  $block
+     * @return array<string, mixed>
+     */
+    private function reconcileAiExposureRating(array $block, mixed $aiImpactTable, string $locale): array
+    {
+        $expected = is_array($aiImpactTable) ? (string) ($aiImpactTable['score_normalized'] ?? '') : '';
+        if (preg_match('/\A(10|[0-9])(?:\.0)?\s*\/\s*10\z/', $expected, $expectedMatch) !== 1
+            || ! is_array($block['body'] ?? null)) {
+            throw new Career1046DisplayAssetReplacementFailure('AI_EXPOSURE_RATING_AUTHORITY_INVALID');
+        }
+        $expectedScore = (int) $expectedMatch[1];
+        foreach ($block['body'] as $index => $text) {
+            if (! is_string($text)) {
+                throw new Career1046DisplayAssetReplacementFailure('AI_EXPOSURE_BLOCK_BODY_INVALID');
+            }
+            preg_match_all('/(?<![0-9])(10|[0-9])(?:\.0)?\s*\/\s*10(?![0-9])/u', $text, $matches);
+            $conflicts = array_values(array_filter(
+                array_map('intval', $matches[1] ?? []),
+                static fn (int $score): bool => $score !== $expectedScore,
+            ));
+            if ($conflicts === []) {
+                continue;
+            }
+
+            $paragraphs = explode("\n\n", $text);
+            foreach ($paragraphs as $paragraphIndex => $paragraph) {
+                preg_match_all('/(?<![0-9])(10|[0-9])(?:\.0)?\s*\/\s*10(?![0-9])/u', $paragraph, $paragraphMatches);
+                $paragraphConflicts = array_values(array_filter(
+                    array_map('intval', $paragraphMatches[1] ?? []),
+                    static fn (int $score): bool => $score !== $expectedScore,
+                ));
+                if ($paragraphConflicts === []) {
+                    continue;
+                }
+                if (! str_starts_with($paragraph, 'FermatMind')) {
+                    throw new Career1046DisplayAssetReplacementFailure('AI_EXPOSURE_RATING_CONFLICT_UNRESOLVED');
+                }
+                $pattern = $locale === 'zh-CN'
+                    ? '/\AFermatMind[^。！？]*[。！？]\s*/u'
+                    : '/\AFermatMind[^.!?]*[.!?]\s*/u';
+                $paragraphs[$paragraphIndex] = preg_replace($pattern, '', $paragraph, 1, $removed) ?? '';
+                if ($removed !== 1 || $paragraphs[$paragraphIndex] === '') {
+                    throw new Career1046DisplayAssetReplacementFailure('AI_EXPOSURE_RATING_CONFLICT_UNRESOLVED');
+                }
+            }
+            $block['body'][$index] = implode("\n\n", $paragraphs);
+            preg_match_all('/(?<![0-9])(10|[0-9])(?:\.0)?\s*\/\s*10(?![0-9])/u', $block['body'][$index], $remainingMatches);
+            foreach (array_map('intval', $remainingMatches[1] ?? []) as $remainingScore) {
+                if ($remainingScore !== $expectedScore) {
+                    throw new Career1046DisplayAssetReplacementFailure('AI_EXPOSURE_RATING_CONFLICT_UNRESOLVED');
+                }
+            }
+        }
+
+        return $block;
+    }
+
+    /** @param array<string, mixed> $baseRow */
+    private function assertOccupationCrosswalks(Occupation $occupation, array $baseRow): void
+    {
+        $expectedSoc = (string) ($baseRow['expected_soc'] ?? '');
+        $expectedOnet = (string) ($baseRow['expected_onet'] ?? '');
+        $socValid = $occupation->crosswalks->contains(
+            static fn (OccupationCrosswalk $crosswalk): bool => $crosswalk->source_system === 'us_soc'
+                && $crosswalk->source_code === $expectedSoc,
+        );
+        $onetValid = $occupation->crosswalks->contains(
+            static fn (OccupationCrosswalk $crosswalk): bool => $crosswalk->source_system === 'onet_soc_2019'
+                && $crosswalk->source_code === $expectedOnet,
+        );
+        if (! $socValid || ! $onetValid) {
+            throw new Career1046DisplayAssetReplacementFailure('DISPLAY_INSERT_OCCUPATION_CROSSWALK_MISMATCH');
+        }
     }
 
     /**
