@@ -249,18 +249,38 @@ jobs:
             ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$remote_command" \
               > "$remote_receipt" 2>/dev/null
           }
+          attempt=1
           set +e
           run_remote_once
           ssh_rc=$?
           set -e
-          if [ "$MODE" = preflight ] && [ "$ssh_rc" -eq 255 ] && [ ! -s "$remote_receipt" ]; then
-            sleep 5
+          while [ "$MODE" = preflight ] && [ "$ssh_rc" -eq 255 ] && [ ! -s "$remote_receipt" ] && [ "$attempt" -lt 3 ]; do
+            sleep 10
+            attempt=$((attempt + 1))
             set +e
             run_remote_once
             ssh_rc=$?
             set -e
+          done
+          if [ "$ssh_rc" -ne 0 ]; then
+            if [ -s "$remote_receipt" ] && jq -e --arg mode "$MODE" --arg control "$CONTROL" --arg package "$PACKAGE" '
+              .contract_version == "career.1046.display_asset_replacement.v1"
+              and .mode == $mode
+              and .status == "FAIL_DISPLAY_ASSET_REPLACEMENT"
+              and .control_plane_sha == $control
+              and .release_sha == $control
+              and .package_sha256 == $package
+              and (.safe_error_code | type == "string" and length > 0)
+              and (if $mode == "preflight" then
+                .production_write_execution == false
+                and .write_commit_state == "confirmed_zero_write"
+                and .writes_committed == false
+              else true end)
+            ' "$remote_receipt" >/dev/null; then
+              mv "$remote_receipt" "$receipt"
+            fi
+            exit "$ssh_rc"
           fi
-          test "$ssh_rc" -eq 0
           test -s "$remote_receipt"
           mv "$remote_receipt" "$receipt"
           jq -e --arg mode "$MODE" --arg control "$CONTROL" --arg package "$PACKAGE" '

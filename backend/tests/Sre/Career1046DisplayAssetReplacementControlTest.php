@@ -25,10 +25,13 @@ final class Career1046DisplayAssetReplacementControlTest extends TestCase
         self::assertStringContainsString('remote_receipt="$RUNNER_TEMP/career-1046-display-asset-remote-receipt.json"', $workflow);
         self::assertStringContainsString('run_remote_once()', $workflow);
         self::assertStringContainsString(
-            'if [ "$MODE" = preflight ] && [ "$ssh_rc" -eq 255 ] && [ ! -s "$remote_receipt" ]; then',
+            'while [ "$MODE" = preflight ] && [ "$ssh_rc" -eq 255 ] && [ ! -s "$remote_receipt" ] && [ "$attempt" -lt 3 ]; do',
             $workflow,
         );
-        self::assertStringContainsString('test "$ssh_rc" -eq 0', $workflow);
+        self::assertStringContainsString('sleep 10', $workflow);
+        self::assertStringContainsString('if [ "$ssh_rc" -ne 0 ]; then', $workflow);
+        self::assertStringContainsString('.status == "FAIL_DISPLAY_ASSET_REPLACEMENT"', $workflow);
+        self::assertStringContainsString('.write_commit_state == "confirmed_zero_write"', $workflow);
         self::assertStringContainsString('mv "$remote_receipt" "$receipt"', $workflow);
         self::assertSame(3, substr_count($workflow, 'run_remote_once'));
         self::assertStringNotContainsString('StrictHostKeyChecking=no', $workflow);
