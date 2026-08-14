@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Domain\Career\Display;
 
 use App\Models\CareerJobDisplayAsset;
+use App\Models\Occupation;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Support\Facades\DB;
+use Ramsey\Uuid\Uuid;
 use RuntimeException;
 use Throwable;
 
@@ -32,11 +34,19 @@ final class Career1046DisplayAssetReplacement
 
     public const PACKAGE_RELATIVE_PATH = 'content_assets/career/workbuddy-1046-display-v1';
 
+    public const MISSING_BASE_PACKAGE_CONTRACT_VERSION = 'career.missing_12_display_asset_package.v1';
+
+    public const MISSING_BASE_PACKAGE_RELATIVE_PATH = 'content_assets/career/missing-12-display-v1';
+
+    public const EXPECTED_INSERTS = 12;
+
     private const SURFACE_VERSION = 'display.surface.v1';
 
     private const ASSET_VERSION = 'v4.2';
 
     private const ASSET_TYPE = 'career_job_public_display';
+
+    private const ASSET_ROLE = 'formal_pilot_master';
 
     private const READY_STATUS = 'ready_for_pilot';
 
@@ -51,15 +61,18 @@ final class Career1046DisplayAssetReplacement
     public function preflight(string $backendRoot, string $expectedPackageSha256): array
     {
         $package = $this->loadPackage($backendRoot, $expectedPackageSha256);
-        $plan = $this->buildPlan($package['rows']);
+        $missingBasePackage = $this->loadMissingBasePackage($backendRoot);
+        $plan = $this->buildPlan($package['rows'], $missingBasePackage['rows']);
         $cache = $this->cachePreflight($package['slugs']);
 
         return [
             'package' => $package['summary'],
+            'missing_base_package' => $missingBasePackage['summary'],
             'authority' => $plan['summary'],
             'cache' => $cache,
             'state_sha256' => self::hashValue([
                 'package_sha256' => $package['summary']['package_sha256'],
+                'missing_base_package_sha256' => $missingBasePackage['summary']['package_sha256'],
                 'before_state_sha256' => $plan['summary']['before_state_sha256'],
                 'after_state_sha256' => $plan['summary']['after_state_sha256'],
                 'cache_state_sha256' => $cache['state_sha256'],
@@ -77,10 +90,12 @@ final class Career1046DisplayAssetReplacement
         string $expectedPreflightStateSha256,
     ): array {
         $package = $this->loadPackage($backendRoot, $expectedPackageSha256);
-        $plan = $this->buildPlan($package['rows']);
+        $missingBasePackage = $this->loadMissingBasePackage($backendRoot);
+        $plan = $this->buildPlan($package['rows'], $missingBasePackage['rows']);
         $cacheBefore = $this->cachePreflight($package['slugs']);
         $currentState = self::hashValue([
             'package_sha256' => $package['summary']['package_sha256'],
+            'missing_base_package_sha256' => $missingBasePackage['summary']['package_sha256'],
             'before_state_sha256' => $plan['summary']['before_state_sha256'],
             'after_state_sha256' => $plan['summary']['after_state_sha256'],
             'cache_state_sha256' => $cacheBefore['state_sha256'],
@@ -93,8 +108,9 @@ final class Career1046DisplayAssetReplacement
         $databaseCommitted = false;
         $pointersActivated = false;
         $databaseUpdateCount = 0;
+        $databaseInsertCount = 0;
         try {
-            DB::transaction(function () use ($plan, &$databaseUpdateCount): void {
+            DB::transaction(function () use ($plan, &$databaseUpdateCount, &$databaseInsertCount): void {
                 foreach ($plan['updates'] as $update) {
                     $current = CareerJobDisplayAsset::query()
                         ->whereKey($update['id'])
@@ -124,6 +140,23 @@ final class Career1046DisplayAssetReplacement
                         throw new Career1046DisplayAssetReplacementFailure('DATABASE_TARGET_UPDATE_FAILED');
                     }
                     $databaseUpdateCount++;
+                }
+
+                foreach ($plan['inserts'] as $insert) {
+                    $conflict = CareerJobDisplayAsset::query()
+                        ->whereKey($insert['id'])
+                        ->orWhere(function ($query) use ($insert): void {
+                            $query->where('canonical_slug', $insert['slug'])
+                                ->where('asset_version', self::ASSET_VERSION);
+                        })
+                        ->lockForUpdate()
+                        ->exists();
+                    if ($conflict) {
+                        throw new Career1046DisplayAssetReplacementFailure('DATABASE_INSERT_TARGET_STATE_DRIFT');
+                    }
+
+                    CareerJobDisplayAsset::query()->create($insert['attributes']);
+                    $databaseInsertCount++;
                 }
 
                 $this->assertDatabaseReadback($plan['after_rows']);
@@ -172,12 +205,13 @@ final class Career1046DisplayAssetReplacement
 
             return [
                 'package' => $package['summary'],
+                'missing_base_package' => $missingBasePackage['summary'],
                 'authority' => $plan['summary'],
                 'cache' => $cacheAfter,
                 'state_sha256' => $currentState,
                 'write_counts' => [
                     'database_update_count' => $databaseUpdateCount,
-                    'database_insert_count' => 0,
+                    'database_insert_count' => $databaseInsertCount,
                     'database_delete_count' => 0,
                     'cache_candidate_write_count' => self::EXPECTED_LOCALE_ROWS * 2,
                     'cache_pointer_activation_count' => self::EXPECTED_LOCALE_ROWS,
@@ -194,7 +228,7 @@ final class Career1046DisplayAssetReplacement
             }
             if ($databaseCommitted && ! $pointersActivated) {
                 try {
-                    $this->restoreDatabaseRows($plan['before_rows']);
+                    $this->restoreDatabaseRows($plan['before_rows'], $plan['inserts']);
                 } catch (Throwable $restoreFailure) {
                     throw new Career1046DisplayAssetReplacementFailure(
                         'DATABASE_COMPENSATION_FAILED',
@@ -230,9 +264,10 @@ final class Career1046DisplayAssetReplacement
 
     /**
      * @param  array<string, array<string, array<string, mixed>>>  $packageRows
+     * @param  array<string, array<string, mixed>>  $missingBaseRows
      * @return array<string, mixed>
      */
-    private function buildPlan(array $packageRows): array
+    private function buildPlan(array $packageRows, array $missingBaseRows): array
     {
         $slugs = array_keys($packageRows);
         sort($slugs, SORT_STRING);
@@ -245,22 +280,34 @@ final class Career1046DisplayAssetReplacement
             ->where('asset_type', self::ASSET_TYPE)
             ->orderBy('canonical_slug')
             ->get();
-        if ($assets->count() !== self::EXPECTED_CAREERS) {
-            throw new Career1046DisplayAssetReplacementFailure('DISPLAY_ASSET_TARGET_COUNT_MISMATCH');
-        }
 
         $assetSlugs = $assets->pluck('canonical_slug')->map(
             static fn (mixed $slug): string => strtolower(trim((string) $slug)),
         )->all();
         sort($assetSlugs, SORT_STRING);
-        if ($assetSlugs !== $slugs) {
+        $missingSlugs = array_values(array_diff($slugs, $assetSlugs));
+        $authorizedInsertSlugs = array_keys($missingBaseRows);
+        sort($authorizedInsertSlugs, SORT_STRING);
+        if ($missingSlugs !== [] && $missingSlugs !== $authorizedInsertSlugs) {
             throw new Career1046DisplayAssetReplacementFailure('DISPLAY_ASSET_TARGET_SET_MISMATCH');
+        }
+        if (! in_array($assets->count(), [self::EXPECTED_CAREERS - self::EXPECTED_INSERTS, self::EXPECTED_CAREERS], true)) {
+            throw new Career1046DisplayAssetReplacementFailure('DISPLAY_ASSET_TARGET_COUNT_MISMATCH');
+        }
+
+        $occupations = Occupation::query()
+            ->whereIn('canonical_slug', $missingSlugs)
+            ->get()
+            ->keyBy(static fn (Occupation $occupation): string => strtolower((string) $occupation->canonical_slug));
+        if ($occupations->count() !== count($missingSlugs)) {
+            throw new Career1046DisplayAssetReplacementFailure('DISPLAY_INSERT_OCCUPATION_MISSING');
         }
 
         $beforeRows = [];
         $beforeStates = [];
         $afterRows = [];
         $updates = [];
+        $inserts = [];
         foreach ($assets as $asset) {
             $slug = strtolower(trim((string) $asset->canonical_slug));
             $order = is_array($asset->component_order_json) ? array_values($asset->component_order_json) : [];
@@ -292,25 +339,109 @@ final class Career1046DisplayAssetReplacement
             }
         }
 
+        foreach ($missingSlugs as $slug) {
+            /** @var Occupation $occupation */
+            $occupation = $occupations->get($slug);
+            $attributes = $this->insertAttributes(
+                $slug,
+                $occupation,
+                $missingBaseRows[$slug],
+                $packageRows[$slug],
+            );
+            $candidate = new CareerJobDisplayAsset($attributes);
+            $afterRows[$slug] = $this->rowStateSnapshot(
+                $candidate,
+                CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER,
+                (array) $candidate->page_payload_json,
+            );
+            $beforeStates[$slug] = [
+                'slug' => $slug,
+                'absent' => true,
+                'occupation_id' => (string) $occupation->id,
+            ];
+            $inserts[] = [
+                'id' => (string) $attributes['id'],
+                'slug' => $slug,
+                'attributes' => $attributes,
+                'after_state' => $afterRows[$slug],
+            ];
+        }
+
+        ksort($beforeStates, SORT_STRING);
+        ksort($afterRows, SORT_STRING);
+        $changedCount = count($updates) + count($inserts);
+
         return [
             'before_rows' => $beforeRows,
             'after_rows' => $afterRows,
             'updates' => $updates,
+            'inserts' => $inserts,
             'summary' => [
-                'target_count' => count($assets),
-                'changed_count' => count($updates),
-                'unchanged_count' => count($assets) - count($updates),
+                'target_count' => count($afterRows),
+                'existing_target_count' => count($assets),
+                'changed_count' => $changedCount,
+                'unchanged_count' => self::EXPECTED_CAREERS - $changedCount,
                 'before_state_sha256' => self::hashValue($beforeStates),
                 'after_state_sha256' => self::hashValue($afterRows),
                 'component_order_before_counts' => [
                     '24' => $assets->filter(static fn (CareerJobDisplayAsset $asset): bool => array_values((array) $asset->component_order_json) === CareerDisplayAssetComponentContract::LEGACY_V4_2_ORDER)->count(),
                     '26' => $assets->filter(static fn (CareerJobDisplayAsset $asset): bool => array_values((array) $asset->component_order_json) === CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER)->count(),
+                    'missing' => count($missingSlugs),
                 ],
-                'component_order_after_count' => count($assets),
-                'insert_count' => 0,
+                'component_order_after_count' => count($afterRows),
+                'insert_count' => count($inserts),
+                'insert_slug_set_sha256' => self::setHash($missingSlugs),
                 'delete_count' => 0,
                 'outside_target_count' => 0,
             ],
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $baseRow
+     * @param  array<string, array<string, mixed>>  $localizedRows
+     * @return array<string, mixed>
+     */
+    private function insertAttributes(
+        string $slug,
+        Occupation $occupation,
+        array $baseRow,
+        array $localizedRows,
+    ): array {
+        $payload = $baseRow['asset_payload'] ?? null;
+        if (! is_array($payload)
+            || array_values((array) ($payload['component_order_json'] ?? [])) !== CareerDisplayAssetComponentContract::LEGACY_V4_2_ORDER
+            || ! is_array($payload['page_payload_json'] ?? null)) {
+            throw new Career1046DisplayAssetReplacementFailure('DISPLAY_INSERT_BASE_ASSET_INVALID');
+        }
+        $pagePayload = $this->mergeLocalizedBlocks($payload['page_payload_json'], $localizedRows);
+
+        return [
+            'id' => Uuid::uuid5(Uuid::NAMESPACE_URL, 'https://fermatmind.com/authority/career/display/v4.2/'.$slug)->toString(),
+            'occupation_id' => (string) $occupation->id,
+            'canonical_slug' => $slug,
+            'surface_version' => self::SURFACE_VERSION,
+            'asset_version' => self::ASSET_VERSION,
+            'template_version' => self::ASSET_VERSION,
+            'asset_type' => self::ASSET_TYPE,
+            'asset_role' => self::ASSET_ROLE,
+            'status' => self::READY_STATUS,
+            'component_order_json' => CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER,
+            'page_payload_json' => $pagePayload,
+            'seo_payload_json' => $payload['seo_payload_json'] ?? null,
+            'sources_json' => $payload['sources_json'] ?? null,
+            'structured_data_json' => $payload['structured_data_json'] ?? null,
+            'implementation_contract_json' => $payload['implementation_contract_json'] ?? null,
+            'metadata_json' => [
+                'authority_package' => 'career-missing-12-display-v1',
+                'source_workbook_row_number' => $baseRow['source_workbook_row_number'] ?? null,
+                'source_workbook_row_sha256' => $baseRow['source_workbook_row_sha256'] ?? null,
+                'normalized_workbook_row_sha256' => $baseRow['normalized_workbook_row_sha256'] ?? null,
+                'asset_payload_sha256' => $baseRow['asset_payload_sha256'] ?? null,
+                'content_generated' => false,
+                'discoverability_changed' => false,
+            ],
+            'import_run_id' => null,
         ];
     }
 
@@ -404,18 +535,39 @@ final class Career1046DisplayAssetReplacement
         }
     }
 
-    /** @param array<string, array<string, mixed>> $beforeRows */
-    private function restoreDatabaseRows(array $beforeRows): void
+    /**
+     * @param  array<string, array<string, mixed>>  $beforeRows
+     * @param  list<array<string, mixed>>  $inserts
+     */
+    private function restoreDatabaseRows(array $beforeRows, array $inserts): void
     {
-        DB::transaction(function () use ($beforeRows): void {
+        DB::transaction(function () use ($beforeRows, $inserts): void {
+            foreach ($inserts as $insert) {
+                $current = CareerJobDisplayAsset::query()->whereKey($insert['id'])->lockForUpdate()->first();
+                if (! $current instanceof CareerJobDisplayAsset
+                    || $this->rowStateSnapshot(
+                        $current,
+                        array_values((array) $current->component_order_json),
+                        (array) $current->page_payload_json,
+                    ) !== $insert['after_state']) {
+                    throw new Career1046DisplayAssetReplacementFailure('DATABASE_COMPENSATION_INSERT_STATE_DRIFT');
+                }
+                if (CareerJobDisplayAsset::query()->whereKey($insert['id'])->delete() !== 1) {
+                    throw new Career1046DisplayAssetReplacementFailure('DATABASE_COMPENSATION_INSERT_DELETE_FAILED');
+                }
+            }
+
             foreach ($beforeRows as $row) {
-                DB::table('career_job_display_assets')
+                $affected = DB::table('career_job_display_assets')
                     ->where('id', $row['id'])
                     ->update([
                         'component_order_json' => self::encodeJson($row['component_order']),
                         'page_payload_json' => $row['page_payload_json'],
                         'updated_at' => $row['updated_at'],
                     ]);
+                if ($affected !== 1) {
+                    throw new Career1046DisplayAssetReplacementFailure('DATABASE_COMPENSATION_UPDATE_FAILED');
+                }
             }
         }, 1);
     }
@@ -461,6 +613,97 @@ final class Career1046DisplayAssetReplacement
                 'import_run_id' => $asset->import_run_id,
             ]),
         ];
+    }
+
+    /** @return array{rows: array<string, array<string, mixed>>, summary: array<string, mixed>} */
+    private function loadMissingBasePackage(string $backendRoot): array
+    {
+        $root = rtrim($backendRoot, '/').'/'.self::MISSING_BASE_PACKAGE_RELATIVE_PATH;
+        $manifestPath = $root.'/manifest.json';
+        $assetsPath = $root.'/assets.jsonl';
+        if (! is_file($manifestPath) || ! is_file($assetsPath)) {
+            throw new Career1046DisplayAssetReplacementFailure('MISSING_BASE_PACKAGE_FILE_MISSING');
+        }
+
+        $manifest = json_decode((string) file_get_contents($manifestPath), true, 512, JSON_THROW_ON_ERROR);
+        $assetsSha256 = hash_file('sha256', $assetsPath);
+        if (! is_array($manifest)
+            || ($manifest['contract_version'] ?? null) !== self::MISSING_BASE_PACKAGE_CONTRACT_VERSION
+            || data_get($manifest, 'counts.assets') !== self::EXPECTED_INSERTS
+            || data_get($manifest, 'counts.localized_pages') !== self::EXPECTED_INSERTS * count(self::LOCALES)
+            || data_get($manifest, 'counts.component_count_per_asset') !== count(CareerDisplayAssetComponentContract::LEGACY_V4_2_ORDER)
+            || data_get($manifest, 'normalization.content_generation') !== false
+            || data_get($manifest, 'negative_guarantees.discoverability_change') !== false
+            || data_get($manifest, 'negative_guarantees.search_submission') !== false
+            || data_get($manifest, 'files.0.sha256') !== $assetsSha256) {
+            throw new Career1046DisplayAssetReplacementFailure('MISSING_BASE_PACKAGE_MANIFEST_INVALID');
+        }
+
+        $rows = [];
+        $payloadHashes = [];
+        $handle = fopen($assetsPath, 'rb');
+        if ($handle === false) {
+            throw new Career1046DisplayAssetReplacementFailure('MISSING_BASE_PACKAGE_UNREADABLE');
+        }
+        while (($line = fgets($handle)) !== false) {
+            $row = json_decode(trim($line), true, 512, JSON_THROW_ON_ERROR);
+            $slug = is_array($row) ? strtolower(trim((string) ($row['slug'] ?? ''))) : '';
+            $payload = is_array($row) ? ($row['asset_payload'] ?? null) : null;
+            $payloadHash = is_array($row) ? (string) ($row['asset_payload_sha256'] ?? '') : '';
+            $pages = is_array($payload) ? data_get($payload, 'page_payload_json.page') : null;
+            if (preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $slug) !== 1
+                || isset($rows[$slug])
+                || preg_match('/\A[0-9]{2}-[0-9]{4}\z/', (string) ($row['expected_soc'] ?? '')) !== 1
+                || preg_match('/\A[0-9]{2}-[0-9]{4}\.[0-9]{2}\z/', (string) ($row['expected_onet'] ?? '')) !== 1
+                || ! is_array($payload)
+                || ! hash_equals($payloadHash, self::hashValue($payload))
+                || array_values((array) ($payload['component_order_json'] ?? [])) !== CareerDisplayAssetComponentContract::LEGACY_V4_2_ORDER
+                || ! is_array($pages)
+                || ! $this->basePackageLocalizedPagesComplete($pages)) {
+                fclose($handle);
+                throw new Career1046DisplayAssetReplacementFailure('MISSING_BASE_PACKAGE_ROW_INVALID');
+            }
+            $rows[$slug] = $row;
+            $payloadHashes[] = $payloadHash;
+        }
+        fclose($handle);
+        ksort($rows, SORT_STRING);
+        if (count($rows) !== self::EXPECTED_INSERTS
+            || ! hash_equals((string) data_get($manifest, 'sets.slug_set_sha256'), self::setHash(array_keys($rows)))
+            || ! hash_equals((string) data_get($manifest, 'sets.asset_payload_set_sha256'), self::setHash($payloadHashes))) {
+            throw new Career1046DisplayAssetReplacementFailure('MISSING_BASE_PACKAGE_SET_INVALID');
+        }
+
+        return [
+            'rows' => $rows,
+            'summary' => [
+                'package_sha256' => $assetsSha256,
+                'manifest_sha256' => hash_file('sha256', $manifestPath),
+                'asset_count' => self::EXPECTED_INSERTS,
+                'localized_page_count' => self::EXPECTED_INSERTS * count(self::LOCALES),
+                'slug_set_sha256' => self::setHash(array_keys($rows)),
+                'source_workbook_sha256' => (string) data_get($manifest, 'source.workbook_sha256'),
+                'content_generation' => false,
+            ],
+        ];
+    }
+
+    /** @param array<string, mixed> $pages */
+    private function basePackageLocalizedPagesComplete(array $pages): bool
+    {
+        foreach (['en', 'zh'] as $locale) {
+            $page = $pages[$locale] ?? null;
+            if (! is_array($page)) {
+                return false;
+            }
+            foreach (['hero', 'definition_block', 'responsibilities_block', 'market_signal_card', 'faq_block'] as $component) {
+                if (! array_key_exists($component, $page) || $page[$component] === null || $page[$component] === [] || $page[$component] === '') {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     /** @return array{rows: array<string, array<string, array<string, mixed>>>, slugs: list<string>, summary: array<string, mixed>} */

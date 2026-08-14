@@ -124,6 +124,18 @@ jobs:
             and .negative_guarantees.discoverability_change == false
             and .negative_guarantees.search_submission == false
           ' "$package_path/manifest.json" >/dev/null
+          missing_base_path=backend/content_assets/career/missing-12-display-v1
+          missing_base_sha="$(sha256sum "$missing_base_path/assets.jsonl" | awk '{print $1}')"
+          jq -e --arg missing_base "$missing_base_sha" '
+            .contract_version == "career.missing_12_display_asset_package.v1"
+            and .counts.assets == 12
+            and .counts.localized_pages == 24
+            and .counts.component_count_per_asset == 24
+            and .normalization.content_generation == false
+            and .files[0].sha256 == $missing_base
+            and .negative_guarantees.discoverability_change == false
+            and .negative_guarantees.search_submission == false
+          ' "$missing_base_path/manifest.json" >/dev/null
           if [[ "$MODE" == preflight ]]; then
             test -z "$PREFLIGHT_RUN_ID$PREFLIGHT_RUN_ATTEMPT$PREFLIGHT_RECEIPT$PREFLIGHT_STATE$APPROVAL"
           else
@@ -131,7 +143,7 @@ jobs:
             [[ "$PREFLIGHT_RUN_ATTEMPT" =~ ^[1-9][0-9]*$ ]]
             [[ "$PREFLIGHT_RECEIPT" =~ ^[a-f0-9]{64}$ ]]
             [[ "$PREFLIGHT_STATE" =~ ^[a-f0-9]{64}$ ]]
-            expected="I explicitly approve one production Career 1046 display asset replacement from preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} receipt ${PREFLIGHT_RECEIPT} state ${PREFLIGHT_STATE}, control plane ${CONTROL}, package ${PACKAGE}; update exactly the existing 1046 v4.2 display assets to 26 components, activate exactly 2092 detail cache payloads, preserve URLs, SEO, discoverability and Search state, and execute no Task 3A through 7B, migration, CMS write, deploy or generation-root change."
+            expected="I explicitly approve one production Career 1046 display asset replacement from preflight run ${PREFLIGHT_RUN_ID} attempt ${PREFLIGHT_RUN_ATTEMPT} receipt ${PREFLIGHT_RECEIPT} state ${PREFLIGHT_STATE}, control plane ${CONTROL}, package ${PACKAGE}; update exactly 1034 existing v4.2 display assets, insert exactly the authorized 12 missing v4.2 display assets, activate exactly 2092 detail cache payloads, preserve URLs, SEO, discoverability and Search state, and execute no Task 3A through 7B, migration, CMS write, deploy or generation-root change."
             test "$APPROVAL" = "$expected"
           fi
 
@@ -176,10 +188,16 @@ jobs:
             and .package.career_count == 1046
             and .package.locale_row_count == 2092
             and .package.content_block_count == 4184
+            and .missing_base_package.asset_count == 12
+            and .missing_base_package.localized_page_count == 24
+            and .missing_base_package.content_generation == false
             and .authority.target_count == 1046
             and .authority.changed_count == 1046
-            and .authority.component_order_before_counts["24"] == 1046
+            and .authority.existing_target_count == 1034
+            and .authority.component_order_before_counts["24"] == 1034
             and .authority.component_order_before_counts["26"] == 0
+            and .authority.component_order_before_counts.missing == 12
+            and .authority.insert_count == 12
             and .authority.component_order_after_count == 1046
             and .cache.ready_active_count == 2092
             and .production_write_execution == false
@@ -315,24 +333,30 @@ jobs:
             and .package.career_count == 1046
             and .package.locale_row_count == 2092
             and .package.content_block_count == 4184
+            and .missing_base_package.asset_count == 12
+            and .missing_base_package.localized_page_count == 24
+            and .missing_base_package.content_generation == false
             and .authority.target_count == 1046
             and .authority.changed_count == 1046
             and .authority.component_order_after_count == 1046
             and (if $mode == "preflight" then
               .status == "PASS_PREFLIGHT_DISPLAY_ASSET_REPLACEMENT"
-              and .authority.component_order_before_counts["24"] == 1046
+              and .authority.existing_target_count == 1034
+              and .authority.component_order_before_counts["24"] == 1034
               and .authority.component_order_before_counts["26"] == 0
+              and .authority.component_order_before_counts.missing == 12
+              and .authority.insert_count == 12
               and .cache.ready_active_count == 2092
               and .production_write_execution == false
               and .write_commit_state == "confirmed_zero_write"
               and .writes_committed == false
             else
               .status == "PASS_APPLY_DISPLAY_ASSET_REPLACEMENT"
-              and .write_counts.database_update_count == 1046
+              and .write_counts.database_update_count == 1034
               and .cache.ready_active_count == 2092
               and .cache.component_26_count == 2092
               and .cache.content_match_count == 2092
-              and .write_counts.database_insert_count == 0
+              and .write_counts.database_insert_count == 12
               and .write_counts.database_delete_count == 0
               and .write_counts.cache_pointer_activation_count == 2092
               and .production_write_execution == true
