@@ -94,7 +94,8 @@ compute_state() {
     and .payload.immutable_pointer_sha256 == $pointer
     and .payload.slug_count == 1046
     and .payload.locale_row_count == 2092
-    and (.payload.released_locale_rows | type == "array" and length == 2092 and unique | length == 2092)
+    and (.payload.released_locale_rows | type == "array" and length == 2092)
+    and ((.payload.released_locale_rows | unique | length) == 2092)
     and (.payload.document_sha256 | type == "object" and length == 5 and all(.[]; test("^[0-9a-f]{64}$")))
     and .payload.sitemap_released == true
     and .payload.llms_released == true

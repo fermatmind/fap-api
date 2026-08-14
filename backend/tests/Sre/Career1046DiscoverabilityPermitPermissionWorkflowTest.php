@@ -80,6 +80,7 @@ final class Career1046DiscoverabilityPermitPermissionWorkflowTest extends TestCa
             '[ "$permit_sha256" = "$before_permit" ]',
             '($payload["slug_count"] ?? null) === 1046',
             '($payload["locale_row_count"] ?? null) === 2092',
+            '((.payload.released_locale_rows | unique | length) == 2092)',
             '($payload["search_submission_enabled"] ?? null) === false',
             '[ "$(stat -c \'%h\' "$permit_file")" = 1 ]',
             '[ ! -L "$permit_file" ]',
