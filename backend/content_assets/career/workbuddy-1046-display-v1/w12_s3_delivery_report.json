@@ -1,0 +1,55 @@
+{
+  "meta": {
+    "task": "W12-S3",
+    "title": "1046 全量交付报告",
+    "date": "2026-08-07",
+    "gate": "Wave 3 → Wave 4"
+  },
+  "content_inventory": {
+    "total_careers": 1046,
+    "fully_complete": 1046,
+    "per_wave": {
+      "w1-s3-output": 49,
+      "w2-s3-output": 28,
+      "w3-s3-output": 40,
+      "w6-s3-output": 55,
+      "w7-s3-output": 235,
+      "w8-s3-output": 235,
+      "w9-s3-output": 235,
+      "w10-s3-output": 85,
+      "w11-s3-output": 84
+    },
+    "files_total": 4184,
+    "2a_zh": 1046,
+    "2a_en": 1046,
+    "2b_zh": 1046,
+    "2b_en": 1046
+  },
+  "quality_validation": {
+    "json_valid": "1046/1046",
+    "placeholder_residues": 0,
+    "ascii_quotes_in_body": 0
+  },
+  "qa_summary": {
+    "W12_S1_full_editorial_avg_pre_fix": 64.0,
+    "W12_S1_full_seo_avg": 85.7,
+    "post_fix_verification": "占位句 0、JSON 1046/1046、全角引号统一、w7/w9 重跑零英文残留",
+    "link_health_full1046": 90.9
+  },
+  "fixes_applied_in_w12": [
+    "w9-s3 7 个 schema 错误文件重生成",
+    "w3-s3 40 个 2b 职级标题截断修复",
+    "w7/w9 整波重跑（470 篇 zh + 470 篇 en）",
+    "w1 模板瘦身（49 篇，24 条签名句清除）",
+    "w8/w10/w11 占位句改写（212 文件）",
+    "w3/w6/w7/w9/w11 残余占位句清零",
+    "w2/w6 ASCII 引号全角化（57 文件 2666 处）",
+    "w12-s2 孤岛清除 + 跨组回填（健康度 90.9）"
+  ],
+  "gate_status": {
+    "1046_careers": "PASS",
+    "25_family_hubs": "PASS",
+    "baseline_freeze": "READY",
+    "wave4_entry": "APPROVED"
+  }
+}

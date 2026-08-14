@@ -39,6 +39,65 @@ function canonicalJson(array $value): string
     return $encoded;
 }
 
+function canonicalize(mixed $value): mixed
+{
+    if (! is_array($value)) {
+        return $value;
+    }
+    if (array_is_list($value)) {
+        return array_map(canonicalize(...), $value);
+    }
+    ksort($value, SORT_STRING);
+    foreach ($value as $key => $item) {
+        $value[$key] = canonicalize($item);
+    }
+
+    return $value;
+}
+
+function hashValue(mixed $value): string
+{
+    return hash('sha256', json_encode(
+        canonicalize($value),
+        JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR,
+    ));
+}
+
+function containsNumericRating(string $value): bool
+{
+    return preg_match('/(?<![0-9])(10|[0-9])(?:\.0)?\s*\/\s*10(?![0-9])/u', $value) === 1;
+}
+
+function removeNumericRatingStatements(string $value, string $locale): string
+{
+    $keptLines = [];
+    foreach (preg_split('/\R/u', $value) ?: [] as $line) {
+        if (! containsNumericRating($line)) {
+            $keptLines[] = $line;
+
+            continue;
+        }
+
+        $segments = preg_split('/(?<=[.!?。！？])\s*/u', $line, -1, PREG_SPLIT_NO_EMPTY) ?: [];
+        $kept = array_values(array_filter(
+            $segments,
+            static fn (string $segment): bool => ! containsNumericRating($segment),
+        ));
+        $normalized = trim(implode($locale === 'en' ? ' ' : '', $kept));
+        if ($normalized !== '') {
+            $keptLines[] = $normalized;
+        }
+    }
+
+    $normalized = trim(implode("\n", $keptLines));
+    $normalized = preg_replace('/\n{3,}/u', "\n\n", $normalized) ?? '';
+    if ($normalized === '' || containsNumericRating($normalized)) {
+        fail('AI body normalization left an empty body or numeric rating statement.');
+    }
+
+    return $normalized;
+}
+
 /** @param list<string> $values */
 function setHash(array $values): string
 {
@@ -101,7 +160,10 @@ function readSource(string $path, string $slug, string $locale, string $block): 
             fail("{$path}: 2a body must be non-empty");
         }
         foreach ($body as $index => $paragraph) {
-            requireNonEmptyString($paragraph, "body.{$index}", $path);
+            $section['body'][$index] = removeNumericRatingStatements(
+                requireNonEmptyString($paragraph, "body.{$index}", $path),
+                $locale,
+            );
         }
     } else {
         $rows = $section['rows'] ?? null;
@@ -137,6 +199,10 @@ if ($sourceRoot === '' || $destination === '' || ! is_dir($sourceRoot)) {
 $rows = [];
 $waveSummary = [];
 $sourceFiles = [];
+$blockHashes = [
+    'career_ai_description_block' => [],
+    'career_path_block' => [],
+];
 foreach (WAVE_COUNTS as $wave => $expectedCareers) {
     $waveRoot = $sourceRoot.'/'.$wave;
     $paths = glob($waveRoot.'/*_2?_*.json') ?: [];
@@ -198,6 +264,9 @@ foreach ($rows as $identity => $row) {
     if (count($rows[$identity]['blocks']) !== 2 || count($rows[$identity]['sources']) !== 2) {
         fail("{$identity}: both 2a and 2b blocks are required");
     }
+    foreach (array_keys($blockHashes) as $blockKey) {
+        $blockHashes[$blockKey][] = $identity.'|'.hashValue($rows[$identity]['blocks'][$blockKey]);
+    }
     $slugs[] = $row['slug'];
 }
 
@@ -223,12 +292,19 @@ fclose($handle);
 
 sort($sourceFiles, SORT_STRING);
 $packageSha = hash_file('sha256', $assetsPath);
+$deliveryReportSource = $sourceRoot.'/w12-s3-output/w12_s3_delivery_report.json';
+$deliveryReportPath = $destination.'/w12_s3_delivery_report.json';
+if (! is_file($deliveryReportSource) || ! copy($deliveryReportSource, $deliveryReportPath)) {
+    fail('Unable to freeze the WorkBuddy delivery report.');
+}
+$deliveryReportSha = hash_file('sha256', $deliveryReportPath);
 $manifest = [
-    'contract_version' => 'career.workbuddy_1046_display_asset_package.v1',
+    'contract_version' => 'career.workbuddy_1046_display_asset_package.v2',
     'package_id' => 'career-workbuddy-1046-display-v1',
     'source_delivery_report' => [
-        'relative_path' => 'w12-s3-output/w12_s3_delivery_report.json',
-        'sha256' => hash_file('sha256', $sourceRoot.'/w12-s3-output/w12_s3_delivery_report.json'),
+        'path' => 'w12_s3_delivery_report.json',
+        'source_relative_path' => 'w12-s3-output/w12_s3_delivery_report.json',
+        'sha256' => $deliveryReportSha,
     ],
     'counts' => [
         'careers' => count($slugs),
@@ -240,17 +316,31 @@ $manifest = [
         'slug_set_sha256' => setHash($slugs),
         'identity_set_sha256' => setHash(array_keys($rows)),
         'source_file_chain_sha256' => hash('sha256', implode("\n", $sourceFiles)."\n"),
+        'career_ai_description_block_sha256' => setHash($blockHashes['career_ai_description_block']),
+        'career_path_block_sha256' => setHash($blockHashes['career_path_block']),
+        'display_block_aggregate_sha256' => setHash(array_merge(
+            $blockHashes['career_ai_description_block'],
+            $blockHashes['career_path_block'],
+        )),
     ],
-    'files' => [[
-        'path' => 'assets.jsonl',
-        'sha256' => $packageSha,
-        'row_count' => count($rows),
-    ]],
+    'files' => [
+        [
+            'path' => 'assets.jsonl',
+            'sha256' => $packageSha,
+            'row_count' => count($rows),
+        ],
+        [
+            'path' => 'w12_s3_delivery_report.json',
+            'sha256' => $deliveryReportSha,
+        ],
+    ],
     'waves' => $waveSummary,
     'mapping' => [
         '2a' => 'career_ai_description_block',
         '2b' => 'career_path_block',
         'source_field' => 'display_section',
+        'numeric_rating_authority' => 'existing_ai_impact_table',
+        'numeric_rating_statement_residue_count' => 0,
     ],
     'negative_guarantees' => [
         'content_regeneration' => false,

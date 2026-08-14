@@ -14,21 +14,17 @@ $env = static function (string $name): string {
     return is_string($value) ? trim($value) : '';
 };
 
-$mode = $argv[1] ?? '';
 $controlPlaneSha = $env('CAREER_DISPLAY_REPLACEMENT_CONTROL_PLANE_SHA');
 $releaseSha = $env('CAREER_DISPLAY_REPLACEMENT_RELEASE_SHA');
 $releaseName = $env('CAREER_DISPLAY_REPLACEMENT_RELEASE_NAME');
 $backendRoot = $env('CAREER_DISPLAY_REPLACEMENT_BACKEND_ROOT');
 $packageSha256 = $env('CAREER_DISPLAY_REPLACEMENT_PACKAGE_SHA256');
-$preflightReceiptSha256 = $env('CAREER_DISPLAY_REPLACEMENT_PREFLIGHT_RECEIPT_SHA256');
-$preflightStateSha256 = $env('CAREER_DISPLAY_REPLACEMENT_PREFLIGHT_STATE_SHA256');
 $workflowRunId = $env('CAREER_DISPLAY_REPLACEMENT_WORKFLOW_RUN_ID');
 $workflowRunAttempt = $env('CAREER_DISPLAY_REPLACEMENT_WORKFLOW_RUN_ATTEMPT');
-$applyAuthorized = $env('CAREER_DISPLAY_REPLACEMENT_APPLY_AUTHORIZED') === '1';
 
 $receipt = [
-    'contract_version' => 'career.1046.display_asset_replacement.v1',
-    'mode' => $mode,
+    'contract_version' => 'career.1046.display_asset_replacement.v2',
+    'mode' => 'execute',
     'status' => 'FAIL_DISPLAY_ASSET_REPLACEMENT',
     'failed_stage' => 'initialize',
     'safe_error_code' => null,
@@ -38,11 +34,10 @@ $receipt = [
     'workflow_run_id' => ctype_digit($workflowRunId) ? (int) $workflowRunId : null,
     'workflow_run_attempt' => ctype_digit($workflowRunAttempt) ? (int) $workflowRunAttempt : null,
     'package_sha256' => $packageSha256,
-    'preflight_receipt_sha256' => $preflightReceiptSha256 !== '' ? $preflightReceiptSha256 : null,
-    'preflight_state_sha256' => $preflightStateSha256 !== '' ? $preflightStateSha256 : null,
-    'production_write_execution' => $mode === 'apply',
-    'write_commit_state' => $mode === 'apply' ? 'ambiguous' : 'confirmed_zero_write',
+    'production_write_execution' => true,
+    'write_commit_state' => 'ambiguous',
     'writes_committed' => false,
+    'idempotent_noop' => false,
     'package' => null,
     'missing_base_package' => null,
     'authority' => null,
@@ -77,8 +72,7 @@ $receipt = [
 
 $emit = static function (array $value): never {
     echo json_encode($value, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR)."\n";
-    exit(($value['status'] ?? '') === 'PASS_PREFLIGHT_DISPLAY_ASSET_REPLACEMENT'
-        || ($value['status'] ?? '') === 'PASS_APPLY_DISPLAY_ASSET_REPLACEMENT' ? 0 : 1);
+    exit(($value['status'] ?? '') === 'PASS_EXECUTE_DISPLAY_ASSET_REPLACEMENT' ? 0 : 1);
 };
 
 if ($backendRoot === '' || ! is_file($backendRoot.'/vendor/autoload.php')) {
@@ -90,87 +84,69 @@ require $backendRoot.'/vendor/autoload.php';
 
 try {
     if ($env('CAREER_DISPLAY_REPLACEMENT_EXECUTE') !== '1'
-        || ! in_array($mode, ['preflight', 'apply'], true)
         || preg_match('/\A[a-f0-9]{40}\z/', $controlPlaneSha) !== 1
         || $releaseSha !== $controlPlaneSha
         || $releaseName === ''
-        || $backendRoot === ''
         || preg_match('/\A[a-f0-9]{64}\z/', $packageSha256) !== 1
         || ! ctype_digit($workflowRunId)
         || ! ctype_digit($workflowRunAttempt)) {
         throw new Career1046DisplayAssetReplacementFailure('EXECUTION_CONTRACT_INVALID');
     }
-    if ($mode === 'preflight' && ($applyAuthorized || $preflightReceiptSha256 !== '' || $preflightStateSha256 !== '')) {
-        throw new Career1046DisplayAssetReplacementFailure('PREFLIGHT_WRITE_AUTHORITY_REFUSED');
-    }
-    if ($mode === 'apply' && (! $applyAuthorized
-        || preg_match('/\A[a-f0-9]{64}\z/', $preflightReceiptSha256) !== 1
-        || preg_match('/\A[a-f0-9]{64}\z/', $preflightStateSha256) !== 1)) {
-        throw new Career1046DisplayAssetReplacementFailure('APPLY_AUTHORITY_INVALID');
-    }
 
     $app = require $backendRoot.'/bootstrap/app.php';
     $app->make(Kernel::class)->bootstrap();
     DB::listen(static function (QueryExecuted $query) use (&$receipt): void {
-        $sql = strtolower(ltrim($query->sql));
-        if (preg_match('/\A(?:insert|update|delete|replace|alter|create|drop|truncate|rename)\b/', $sql) === 1) {
+        if (preg_match('/\A(?:insert|update|delete|replace|alter|create|drop|truncate|rename)\b/', strtolower(ltrim($query->sql))) === 1) {
             $receipt['observed_database_mutation_query_count']++;
         }
     });
 
     /** @var Career1046DisplayAssetReplacement $replacement */
     $replacement = $app->make(Career1046DisplayAssetReplacement::class);
-    $receipt['failed_stage'] = $mode === 'preflight' ? 'preflight' : 'apply';
-    $result = $mode === 'preflight'
-        ? $replacement->preflight($backendRoot, $packageSha256)
-        : $replacement->apply($backendRoot, $packageSha256, $preflightStateSha256);
+    $receipt['failed_stage'] = 'execute';
+    $result = $replacement->execute($backendRoot, $packageSha256);
+    foreach (['package', 'missing_base_package', 'authority', 'cache', 'state_sha256', 'write_counts', 'idempotent_noop'] as $key) {
+        $receipt[$key] = $result[$key];
+    }
 
-    if ($mode === 'preflight' && $receipt['observed_database_mutation_query_count'] !== 0) {
-        throw new Career1046DisplayAssetReplacementFailure('PREFLIGHT_DATABASE_WRITE_OBSERVED');
-    }
-    $receipt['package'] = $result['package'];
-    $receipt['missing_base_package'] = $result['missing_base_package'];
-    $receipt['authority'] = $result['authority'];
-    $receipt['cache'] = $result['cache'];
-    $receipt['state_sha256'] = $result['state_sha256'];
-    $receipt['write_counts'] = $result['write_counts'];
-    if ($mode === 'apply') {
-        // apply() returns only after the database and all active pointers commit.
-        // Preserve that truth even if a later receipt-contract assertion fails.
-        $receipt['write_commit_state'] = 'committed';
-        $receipt['writes_committed'] = true;
-    }
+    $noop = $result['idempotent_noop'] === true;
+    $receipt['write_commit_state'] = $noop ? 'confirmed_zero_write' : 'committed';
+    $receipt['writes_committed'] = ! $noop;
+    $countsValid = $noop
+        ? array_sum($result['write_counts']) === 0
+        : (($result['write_counts']['database_update_count'] ?? null) === 1034
+            && ($result['write_counts']['database_insert_count'] ?? null) === 12
+            && ($result['write_counts']['cache_pointer_activation_count'] ?? null) === 2092);
     if (($result['package']['career_count'] ?? null) !== 1046
         || ($result['package']['locale_row_count'] ?? null) !== 2092
         || ($result['package']['content_block_count'] ?? null) !== 4184
+        || ($result['package']['numeric_rating_statement_residue_count'] ?? null) !== 0
         || ($result['missing_base_package']['asset_count'] ?? null) !== 12
-        || ($result['missing_base_package']['localized_page_count'] ?? null) !== 24
-        || ($result['missing_base_package']['content_generation'] ?? null) !== false
         || ($result['authority']['target_count'] ?? null) !== 1046
-        || ($result['authority']['component_order_after_count'] ?? null) !== 1046) {
-        throw new Career1046DisplayAssetReplacementFailure('RESULT_COUNT_MISMATCH');
+        || ($result['authority']['component_order_after_count'] ?? null) !== 1046
+        || ($result['cache']['ready_active_count'] ?? null) !== 2092
+        || ($result['cache']['component_26_count'] ?? null) !== 2092
+        || ($result['cache']['content_match_count'] ?? null) !== 2092
+        || ($result['cache']['career_ai_description_block_sha256'] ?? null) !== ($result['package']['career_ai_description_block_sha256'] ?? null)
+        || ($result['cache']['career_path_block_sha256'] ?? null) !== ($result['package']['career_path_block_sha256'] ?? null)
+        || ($result['cache']['display_block_aggregate_sha256'] ?? null) !== ($result['package']['display_block_aggregate_sha256'] ?? null)
+        || ! $countsValid) {
+        throw new Career1046DisplayAssetReplacementFailure(
+            'EXECUTE_READBACK_MISMATCH',
+            null,
+            $noop ? 'confirmed_zero_write' : 'committed',
+        );
     }
 
     $receipt['failed_stage'] = null;
-    if ($mode === 'preflight') {
-        $receipt['status'] = 'PASS_PREFLIGHT_DISPLAY_ASSET_REPLACEMENT';
-        $receipt['write_commit_state'] = 'confirmed_zero_write';
-    } else {
-        if (($result['cache']['ready_active_count'] ?? null) !== 2092
-            || ($result['cache']['component_26_count'] ?? null) !== 2092
-            || ($result['cache']['content_match_count'] ?? null) !== 2092
-            || ($result['write_counts']['database_update_count'] ?? null) !== 1034
-            || ($result['write_counts']['database_insert_count'] ?? null) !== 12
-            || ($result['write_counts']['database_delete_count'] ?? null) !== 0
-            || ($result['write_counts']['cache_pointer_activation_count'] ?? null) !== 2092) {
-            throw new Career1046DisplayAssetReplacementFailure('APPLY_READBACK_MISMATCH');
-        }
-        $receipt['status'] = 'PASS_APPLY_DISPLAY_ASSET_REPLACEMENT';
-    }
+    $receipt['status'] = 'PASS_EXECUTE_DISPLAY_ASSET_REPLACEMENT';
 } catch (Throwable $throwable) {
     $receipt['safe_error_code'] = $throwable instanceof Career1046DisplayAssetReplacementFailure
         ? $throwable->safeCode
         : 'UNEXPECTED_CONTROL_FAILURE';
+    if ($throwable instanceof Career1046DisplayAssetReplacementFailure) {
+        $receipt['write_commit_state'] = $throwable->writeCommitState;
+    }
 }
 
 $emit($receipt);

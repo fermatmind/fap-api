@@ -429,6 +429,59 @@ final class CareerExecuteCanonicalRolloutBatchTest extends TestCase
         $this->assertTrue($cache->jobDetailCacheIsReady('actuaries', 'en'));
     }
 
+    public function test_successful_detail_activation_can_restore_every_pointer_and_delete_the_candidate(): void
+    {
+        $publishedProjection = $this->publishedProjection(['actuaries']);
+        $publishedEn = collect($publishedProjection['items'])
+            ->first(fn (array $item): bool => ($item['locale'] ?? null) === 'en');
+        $this->assertIsArray($publishedEn);
+
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $oldVersion = $cache->publishJobDetailReadModel('actuaries', 'en', ['fixture' => 'old']);
+        Cache::forever($cache->jobDetailNegativeKey('actuaries', 'en'), ['fixture' => 'negative']);
+        Cache::forever($cache->jobDetailCacheKey('actuaries', 'en'), ['fixture' => 'legacy']);
+        $prepared = $cache->prepareJobDetailPayloadForExposure('actuaries', 'en', $publishedEn);
+
+        $activation = $cache->activatePreparedJobDetailPayloadsForExposure([$prepared], true);
+
+        $this->assertSame('pass', $activation['status']);
+        $this->assertSame($prepared['version'], $cache->jobDetailCacheReadiness('actuaries', 'en')['version']);
+        $this->assertFalse(Cache::has($cache->jobDetailNegativeKey('actuaries', 'en')));
+        $this->assertFalse(Cache::has($cache->jobDetailCacheKey('actuaries', 'en')));
+
+        $cache->restorePreparedJobDetailExposurePointers([$prepared], $activation['rollback_snapshots']);
+        $cache->forgetPreparedJobDetailCandidates([$prepared]);
+
+        $this->assertSame($oldVersion, Cache::get($cache->jobDetailActiveVersionKey('actuaries', 'en')));
+        $this->assertSame(['fixture' => 'negative'], Cache::get($cache->jobDetailNegativeKey('actuaries', 'en')));
+        $this->assertSame(['fixture' => 'legacy'], Cache::get($cache->jobDetailCacheKey('actuaries', 'en')));
+        $this->assertNull($cache->preparedJobDetailReplacementPayload($prepared));
+    }
+
+    public function test_detail_pointer_rollback_refuses_to_overwrite_a_newer_publication(): void
+    {
+        $publishedProjection = $this->publishedProjection(['actuaries']);
+        $publishedEn = collect($publishedProjection['items'])
+            ->first(fn (array $item): bool => ($item['locale'] ?? null) === 'en');
+        $this->assertIsArray($publishedEn);
+
+        $cache = app(PublicCareerAuthorityResponseCache::class);
+        $cache->publishJobDetailReadModel('actuaries', 'en', ['fixture' => 'old']);
+        $prepared = $cache->prepareJobDetailPayloadForExposure('actuaries', 'en', $publishedEn);
+        $activation = $cache->activatePreparedJobDetailPayloadsForExposure([$prepared], true);
+        $newerVersion = $cache->publishJobDetailReadModel('actuaries', 'en', ['fixture' => 'newer']);
+
+        try {
+            $cache->restorePreparedJobDetailExposurePointers([$prepared], $activation['rollback_snapshots']);
+            self::fail('A drifted active pointer must make rollback fail closed.');
+        } catch (\RuntimeException $exception) {
+            self::assertSame('Prepared detail active pointer drifted before rollback.', $exception->getMessage());
+        }
+
+        self::assertSame($newerVersion, Cache::get($cache->jobDetailActiveVersionKey('actuaries', 'en')));
+        self::assertNotSame($prepared['version'], Cache::get($cache->jobDetailActiveVersionKey('actuaries', 'en')));
+    }
+
     public function test_stale_candidate_cannot_use_lkg_or_legacy_as_first_exposure_authority(): void
     {
         $candidateProjection = $this->candidateProjection(['actuaries']);

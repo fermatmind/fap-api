@@ -1,8 +1,9 @@
 {
-    "contract_version": "career.workbuddy_1046_display_asset_package.v1",
+    "contract_version": "career.workbuddy_1046_display_asset_package.v2",
     "package_id": "career-workbuddy-1046-display-v1",
     "source_delivery_report": {
-        "relative_path": "w12-s3-output/w12_s3_delivery_report.json",
+        "path": "w12_s3_delivery_report.json",
+        "source_relative_path": "w12-s3-output/w12_s3_delivery_report.json",
         "sha256": "cdd8cd0169d3e7243751271d24d7f0cd4bd8dea37f34657d3a22afee38307d29"
     },
     "counts": {
@@ -17,13 +18,20 @@
     "sets": {
         "slug_set_sha256": "3b101fb76b5666200c73519c650beb1a5b0b35f47f7592453bf5671920571a18",
         "identity_set_sha256": "8c3cb5f623d0d58eb029ccd77ff6e3d81730a71ab2de155a5a127917d6e42dff",
-        "source_file_chain_sha256": "2ff91b17fa81ff5fb5513891e7a8b5f1ce4ee1af181d0bf6265925266ff3cf0a"
+        "source_file_chain_sha256": "2ff91b17fa81ff5fb5513891e7a8b5f1ce4ee1af181d0bf6265925266ff3cf0a",
+        "career_ai_description_block_sha256": "8aedf5ad78e12cef0f08971addfbe1efa2f002a44ef8a2a00cf334089533597e",
+        "career_path_block_sha256": "764d62f6a49211d1edb65bc7ae8b19435fdd8070bf3055b6a1ae64dd61edb11a",
+        "display_block_aggregate_sha256": "8ebf2763fe8e564f740affa65a0907e293f43c7faf616b74080109ff764385b0"
     },
     "files": [
         {
             "path": "assets.jsonl",
-            "sha256": "781421d80514f8af7f06d14be3af37c33e7354435a42f6a3acc28183ffd2f0d7",
+            "sha256": "6ee7a409fb4e2f15fed1709bd05fe2f7f28b22136ace589d8c308720520bc9bd",
             "row_count": 2092
+        },
+        {
+            "path": "w12_s3_delivery_report.json",
+            "sha256": "cdd8cd0169d3e7243751271d24d7f0cd4bd8dea37f34657d3a22afee38307d29"
         }
     ],
     "waves": {
@@ -67,7 +75,9 @@
     "mapping": {
         "2a": "career_ai_description_block",
         "2b": "career_path_block",
-        "source_field": "display_section"
+        "source_field": "display_section",
+        "numeric_rating_authority": "existing_ai_impact_table",
+        "numeric_rating_statement_residue_count": 0
     },
     "negative_guarantees": {
         "content_regeneration": false,
