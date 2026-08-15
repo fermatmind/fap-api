@@ -133,13 +133,14 @@ final class CareerCurrentAuthorityExporter
                 $api = [];
                 foreach ($assets as $asset) {
                     $slug = strtolower(trim((string) $asset->canonical_slug));
+                    $isManualHold = in_array($slug, self::MANUAL_HOLD_SLUGS, true);
                     $occupation = Occupation::query()
                         ->with('crosswalks')
                         ->whereKey($asset->occupation_id)
                         ->first();
                     if ($slug === ''
                         || ! $occupation instanceof Occupation
-                        || strtolower(trim((string) $occupation->canonical_slug)) !== $slug
+                        || (! $isManualHold && strtolower(trim((string) $occupation->canonical_slug)) !== $slug)
                         || (string) $asset->occupation_id !== (string) $occupation->id) {
                         throw new CareerCurrentAuthorityExportFailure('ASSET_OCCUPATION_IDENTITY_MISMATCH');
                     }
@@ -149,7 +150,7 @@ final class CareerCurrentAuthorityExporter
                         $identity = $slug.'|'.$locale;
                         $databaseSurface = $this->surfaceBuilder->buildForOccupation($occupation, $locale);
                         $apiRead = $this->responseCache->jobDetailVerifyOnlyRead($slug, $locale);
-                        if (in_array($slug, self::MANUAL_HOLD_SLUGS, true)) {
+                        if ($isManualHold) {
                             if ($databaseSurface !== null
                                 || ($apiRead['state'] ?? null) !== 'not_found'
                                 || ($apiRead['payload'] ?? null) !== null) {
