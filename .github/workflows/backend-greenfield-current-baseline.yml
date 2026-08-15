@@ -58,7 +58,7 @@ jobs:
         if: inputs.mode == 'career-current-authority'
         shell: bash
         env:
-          IDENTITY: release=${{ inputs.expected_active_revision }}|mode=career-current-authority
+          IDENTITY: release=${{ inputs.expected_active_revision }}|projection=${{ inputs.expected_projection_sha256 }}|mode=career-current-authority
         run: echo "operation_key=$(node .github/scripts/controlled-operation-gate.cjs key --repository "$GITHUB_REPOSITORY" --workflow .github/workflows/backend-greenfield-current-baseline.yml --scope career-current-authority-export --identity "$IDENTITY")" >> "$GITHUB_OUTPUT"
       - id: gate
         if: inputs.mode == 'career-current-authority'
@@ -116,10 +116,10 @@ jobs:
           [[ "$EXPECTED_ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]
           if [ "$MODE" = "career-current-authority" ]; then
             test "$EXPECTED_ACTIVE_REVISION" = "$EXPECTED_CONTROL_PLANE_SHA"
-            test -z "$EXPECTED_PROJECTION_SHA256"
+            [[ "$EXPECTED_PROJECTION_SHA256" =~ ^[0-9a-f]{64}$ ]]
             test -z "$EXPECTED_MEDIA_HOST_SET_SHA256"
             [[ "$OPERATION_KEY" =~ ^[0-9a-f]{64}$ ]]
-            expected="I explicitly approve SELECT-only production Career Current authority export for active SHA ${EXPECTED_ACTIVE_REVISION} control SHA ${EXPECTED_CONTROL_PLANE_SHA}."
+            expected="I explicitly approve SELECT-only production Career Current authority export for active SHA ${EXPECTED_ACTIVE_REVISION} control SHA ${EXPECTED_CONTROL_PLANE_SHA} projection SHA256 ${EXPECTED_PROJECTION_SHA256}."
             test "$OPERATOR_APPROVAL_PHRASE" = "$expected"
           elif [ "$MODE" = "export" ]; then
             [[ "$EXPECTED_PROJECTION_SHA256" =~ ^[0-9a-f]{64}$ ]]
@@ -219,9 +219,10 @@ jobs:
           remote_stderr="$RUNNER_TEMP/career-current-authority-export.stderr"
           printf -v q_path '%q' "$DEPLOY_PATH"
           printf -v q_release '%q' "$EXPECTED_ACTIVE_REVISION"
+          printf -v q_projection '%q' "$EXPECTED_PROJECTION_SHA256"
           printf -v q_run '%q' "$GITHUB_RUN_ID"
           printf -v q_attempt '%q' "$GITHUB_RUN_ATTEMPT"
-          remote="set -euo pipefail; current=\$(readlink -f $q_path/current); test -n \"\$current\"; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_release; test ! -e $q_path/.dep/deploy.lock; release_name=\$(basename \"\$current\"); sudo -n -u www-data -- env CAREER_CURRENT_EXPORT_EXECUTE=1 CAREER_CURRENT_EXPORT_BACKEND_ROOT=\"\$current/backend\" CAREER_CURRENT_EXPORT_RELEASE_SHA=$q_release CAREER_CURRENT_EXPORT_RELEASE_NAME=\"\$release_name\" CAREER_CURRENT_EXPORT_WORKFLOW_RUN_ID=$q_run CAREER_CURRENT_EXPORT_WORKFLOW_RUN_ATTEMPT=$q_attempt php"
+          remote="set -euo pipefail; current=\$(readlink -f $q_path/current); test -n \"\$current\"; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_release; test ! -e $q_path/.dep/deploy.lock; release_name=\$(basename \"\$current\"); sudo -n -u www-data -- env CAREER_CURRENT_EXPORT_EXECUTE=1 CAREER_CURRENT_EXPORT_BACKEND_ROOT=\"\$current/backend\" CAREER_CURRENT_EXPORT_RELEASE_SHA=$q_release CAREER_CURRENT_EXPORT_EXPECTED_PROJECTION_SHA256=$q_projection CAREER_CURRENT_EXPORT_RELEASE_NAME=\"\$release_name\" CAREER_CURRENT_EXPORT_WORKFLOW_RUN_ID=$q_run CAREER_CURRENT_EXPORT_WORKFLOW_RUN_ATTEMPT=$q_attempt php"
           set +e
           # shellcheck disable=SC2016
           php -r '
@@ -278,10 +279,11 @@ jobs:
           set -euo pipefail
           dir=artifacts/career-current-authority-export
           assets_sha="$(sha256sum "$dir/assets.jsonl" | awk '{print $1}')"
-          jq -e --arg release "$EXPECTED_ACTIVE_REVISION" --arg assets "$assets_sha" '
+          jq -e --arg release "$EXPECTED_ACTIVE_REVISION" --arg projection "$EXPECTED_PROJECTION_SHA256" --arg assets "$assets_sha" '
             .contract_version == "career.current_authority_export.v1"
             and .status == "PASS_CURRENT_AUTHORITY_EXPORT"
             and .release_sha == $release
+            and .career_runtime_projection_sha256 == $projection
             and .counts.careers == 1046
             and .counts.locale_pages == 2092
             and .counts.public_projection_locale_pages == 2090

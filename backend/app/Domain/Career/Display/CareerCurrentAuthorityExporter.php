@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Career\Display;
 
+use App\Domain\GreenfieldBaseline\GreenfieldBaselineCatalog;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
 use App\Services\Career\Bundles\CareerJobDisplaySurfaceBuilder;
@@ -99,6 +100,18 @@ final class CareerCurrentAuthorityExporter
      */
     public function export(string $backendRoot, array $binding): array
     {
+        $expectedProjectionSha256 = $binding['expected_projection_sha256'] ?? null;
+        if (! is_string($expectedProjectionSha256)
+            || preg_match('/\A[0-9a-f]{64}\z/', $expectedProjectionSha256) !== 1) {
+            throw new CareerCurrentAuthorityExportFailure('CAREER_RUNTIME_PROJECTION_BINDING_INVALID');
+        }
+        $projectionSha256 = $this->currentRuntimeProjectionSha256($backendRoot);
+        if (! hash_equals($expectedProjectionSha256, $projectionSha256)) {
+            throw new CareerCurrentAuthorityExportFailure('CAREER_RUNTIME_PROJECTION_SHA256_MISMATCH');
+        }
+        unset($binding['expected_projection_sha256']);
+        $binding['career_runtime_projection_sha256'] = $projectionSha256;
+
         $connection = DB::connection();
         $cache = app('cache.store');
         if (! $cache instanceof CacheRepository) {
@@ -432,6 +445,28 @@ final class CareerCurrentAuthorityExporter
         } finally {
             $connection->setReadPdo($originalReadPdo);
         }
+    }
+
+    private function currentRuntimeProjectionSha256(string $backendRoot): string
+    {
+        $root = rtrim($backendRoot, '/').'/storage/app/private/career_runtime_publish_projection';
+        $candidates = [];
+        foreach (glob($root.'/*/'.GreenfieldBaselineCatalog::PROJECTION_FILENAME) ?: [] as $path) {
+            if (is_file($path)) {
+                $candidates[] = ['path' => $path, 'mtime' => filemtime($path) ?: 0];
+            }
+        }
+        usort($candidates, static fn (array $left, array $right): int => ($right['mtime'] <=> $left['mtime'])
+            ?: strcmp((string) $right['path'], (string) $left['path']));
+        if ($candidates === []) {
+            throw new CareerCurrentAuthorityExportFailure('CAREER_RUNTIME_PROJECTION_MISSING');
+        }
+        $bytes = file_get_contents((string) $candidates[0]['path']);
+        if (! is_string($bytes) || ! is_array(json_decode($bytes, true))) {
+            throw new CareerCurrentAuthorityExportFailure('CAREER_RUNTIME_PROJECTION_INVALID');
+        }
+
+        return hash('sha256', $bytes);
     }
 
     /** @param array<string,string> $projections */
