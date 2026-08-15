@@ -81,6 +81,7 @@ final class Career1046DisplayAssetReplacementControlTest extends TestCase
         $validator = (string) file_get_contents($root.'/backend/scripts/operations/career_1046_display_asset_live_validate.sh');
 
         self::assertStringContainsString('mode=execute', $workflow);
+        self::assertStringContainsString('group: deploy-${{ github.repository }}-production', $workflow);
         self::assertStringContainsString('Elect display-asset operation owner before Environment access', $workflow);
         self::assertLessThan(strpos($workflow, 'environment: production'), strpos($workflow, 'name: Elect display-asset operation owner'));
         self::assertStringContainsString('git merge-base --is-ancestor "$CONTROL" origin/main', $workflow);

@@ -1,15 +1,17 @@
 name: Backend Greenfield Current Baseline
+run-name: Backend Greenfield Current Baseline ${{ inputs.mode }}${{ inputs.mode == 'career-current-authority' && format(' [op:{0}]', inputs.operation_key) || '' }}
 
 on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "SELECT-only preflight or current-published export"
+        description: "SELECT-only Greenfield baseline or one-time Career Current authority export"
         required: true
         type: choice
         options:
           - preflight
           - export
+          - career-current-authority
       expected_control_plane_sha:
         description: "Exact latest main control-plane SHA"
         required: true
@@ -30,8 +32,13 @@ on:
         description: "Exact SELECT-only Greenfield baseline approval"
         required: true
         type: string
+      operation_key:
+        description: "Required deterministic operation key for career-current-authority only"
+        required: false
+        type: string
 
 permissions:
+  actions: read
   contents: read
 
 concurrency:
@@ -39,8 +46,69 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  operation-gate:
+    name: Elect Career Current export owner before Environment access
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      decision: ${{ steps.decision.outputs.decision }}
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - name: Validate Career Current inputs before owner election
+        if: inputs.mode == 'career-current-authority'
+        shell: bash
+        env:
+          CONTROL: ${{ inputs.expected_control_plane_sha }}
+          RELEASE: ${{ inputs.expected_active_revision }}
+          PROJECTION: ${{ inputs.expected_projection_sha256 }}
+          MEDIA_HOST_SET: ${{ inputs.expected_media_host_set_sha256 }}
+          APPROVAL: ${{ inputs.operator_approval_phrase }}
+          OPERATION_KEY: ${{ inputs.operation_key }}
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = "refs/heads/main"
+          [[ "$CONTROL" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$RELEASE" =~ ^[0-9a-f]{40}$ ]]
+          test "$RELEASE" = "$CONTROL"
+          [[ "$PROJECTION" =~ ^[0-9a-f]{64}$ ]]
+          test -z "$MEDIA_HOST_SET"
+          [[ "$OPERATION_KEY" =~ ^[0-9a-f]{64}$ ]]
+          expected="I explicitly approve SELECT-only production Career Current authority export for active SHA ${RELEASE} control SHA ${CONTROL} projection SHA256 ${PROJECTION}."
+          test "$APPROVAL" = "$expected"
+      - id: identity
+        if: inputs.mode == 'career-current-authority'
+        shell: bash
+        env:
+          IDENTITY: control=${{ inputs.expected_control_plane_sha }}|release=${{ inputs.expected_active_revision }}|projection=${{ inputs.expected_projection_sha256 }}|mode=career-current-authority
+        run: echo "operation_key=$(node .github/scripts/controlled-operation-gate.cjs key --repository "$GITHUB_REPOSITORY" --workflow .github/workflows/backend-greenfield-current-baseline.yml --scope career-current-authority-export --identity "$IDENTITY")" >> "$GITHUB_OUTPUT"
+      - id: gate
+        if: inputs.mode == 'career-current-authority'
+        uses: ./.github/actions/controlled-operation-gate
+        with:
+          claimed-key: ${{ inputs.operation_key }}
+          expected-key: ${{ steps.identity.outputs.operation_key }}
+          workflow-file: backend-greenfield-current-baseline.yml
+          receipt-template: career-current-authority-export-{run_id}-{run_attempt}
+      - id: decision
+        shell: bash
+        env:
+          MODE: ${{ inputs.mode }}
+          GATE_DECISION: ${{ steps.gate.outputs.decision }}
+          OPERATION_KEY: ${{ inputs.operation_key }}
+        run: |
+          set -euo pipefail
+          if [ "$MODE" = "career-current-authority" ]; then
+            test -n "$GATE_DECISION"
+            echo "decision=$GATE_DECISION" >> "$GITHUB_OUTPUT"
+          else
+            test -z "$OPERATION_KEY"
+            echo "decision=execute" >> "$GITHUB_OUTPUT"
+          fi
+
   current-baseline:
     name: Stream current-published baseline without source writes
+    needs: operation-gate
+    if: needs.operation-gate.outputs.decision == 'execute'
     runs-on: ubuntu-latest
     timeout-minutes: 90
     environment: production
@@ -51,6 +119,7 @@ jobs:
       EXPECTED_PROJECTION_SHA256: ${{ inputs.expected_projection_sha256 }}
       EXPECTED_MEDIA_HOST_SET_SHA256: ${{ inputs.expected_media_host_set_sha256 }}
       OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
+      OPERATION_KEY: ${{ inputs.operation_key }}
 
     steps:
       - name: Check out exact main control plane
@@ -65,20 +134,30 @@ jobs:
         run: |
           set -euo pipefail
           test "$GITHUB_REF" = "refs/heads/main"
-          [[ "$MODE" = "preflight" || "$MODE" = "export" ]]
+          [[ "$MODE" = "preflight" || "$MODE" = "export" || "$MODE" = "career-current-authority" ]]
           [[ "$EXPECTED_CONTROL_PLANE_SHA" =~ ^[0-9a-f]{40}$ ]]
           [[ "$EXPECTED_ACTIVE_REVISION" =~ ^[0-9a-f]{40}$ ]]
-          [[ "$EXPECTED_PROJECTION_SHA256" =~ ^[0-9a-f]{64}$ ]]
-          if [ "$MODE" = "export" ]; then
+          if [ "$MODE" = "career-current-authority" ]; then
+            test "$EXPECTED_ACTIVE_REVISION" = "$EXPECTED_CONTROL_PLANE_SHA"
+            [[ "$EXPECTED_PROJECTION_SHA256" =~ ^[0-9a-f]{64}$ ]]
+            test -z "$EXPECTED_MEDIA_HOST_SET_SHA256"
+            [[ "$OPERATION_KEY" =~ ^[0-9a-f]{64}$ ]]
+            expected="I explicitly approve SELECT-only production Career Current authority export for active SHA ${EXPECTED_ACTIVE_REVISION} control SHA ${EXPECTED_CONTROL_PLANE_SHA} projection SHA256 ${EXPECTED_PROJECTION_SHA256}."
+            test "$OPERATOR_APPROVAL_PHRASE" = "$expected"
+          elif [ "$MODE" = "export" ]; then
+            [[ "$EXPECTED_PROJECTION_SHA256" =~ ^[0-9a-f]{64}$ ]]
             [[ "$EXPECTED_MEDIA_HOST_SET_SHA256" =~ ^[0-9a-f]{64}$ ]]
           else
+            [[ "$EXPECTED_PROJECTION_SHA256" =~ ^[0-9a-f]{64}$ ]]
             test -z "$EXPECTED_MEDIA_HOST_SET_SHA256"
           fi
-          expected="I explicitly approve SELECT-only production Greenfield current-baseline ${MODE} for active SHA ${EXPECTED_ACTIVE_REVISION} control SHA ${EXPECTED_CONTROL_PLANE_SHA} projection SHA256 ${EXPECTED_PROJECTION_SHA256}."
-          if [ "$MODE" = "export" ]; then
-            expected="${expected%?} media host-set SHA256 ${EXPECTED_MEDIA_HOST_SET_SHA256}."
+          if [ "$MODE" != "career-current-authority" ]; then
+            expected="I explicitly approve SELECT-only production Greenfield current-baseline ${MODE} for active SHA ${EXPECTED_ACTIVE_REVISION} control SHA ${EXPECTED_CONTROL_PLANE_SHA} projection SHA256 ${EXPECTED_PROJECTION_SHA256}."
+            if [ "$MODE" = "export" ]; then
+              expected="${expected%?} media host-set SHA256 ${EXPECTED_MEDIA_HOST_SET_SHA256}."
+            fi
+            test "$OPERATOR_APPROVAL_PHRASE" = "$expected"
           fi
-          test "$OPERATOR_APPROVAL_PHRASE" = "$expected"
           git fetch --no-tags origin main:refs/remotes/origin/main
           test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL_PLANE_SHA"
           test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"
@@ -92,6 +171,7 @@ jobs:
           extensions: mbstring, intl, curl, json, openssl, fileinfo, pdo, pdo_sqlite, sqlite3, pdo_mysql
 
       - name: Cache Composer
+        if: inputs.mode != 'career-current-authority'
         uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
         with:
           path: |
@@ -102,6 +182,7 @@ jobs:
             ${{ runner.os }}-php84-
 
       - name: Install control-plane dependencies
+        if: inputs.mode != 'career-current-authority'
         working-directory: backend
         shell: bash
         run: |
@@ -144,7 +225,174 @@ jobs:
           ssh-keygen -F "$DEPLOY_HOST" -f ~/.ssh/known_hosts >/dev/null \
             || ssh-keygen -F "[$DEPLOY_HOST]:$DEPLOY_PORT" -f ~/.ssh/known_hosts >/dev/null
 
+      - name: Export one-time Career Current authority
+        if: inputs.mode == 'career-current-authority'
+        shell: bash
+        env:
+          DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+          DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+        run: |
+          set -euo pipefail
+          dir=artifacts/career-current-authority-export
+          mkdir -p "$dir"
+          raw="$RUNNER_TEMP/career-current-authority-export.ndjson"
+          remote_receipt="$RUNNER_TEMP/career-current-authority-export.remote-receipt.json"
+          remote_stderr="$RUNNER_TEMP/career-current-authority-export.stderr"
+          jq -n '{
+            contract_version: "career.current_authority_export.v1",
+            status: "PENDING_CURRENT_AUTHORITY_EXPORT_VALIDATION",
+            production_read_only_requested: true,
+            zero_write_confirmed: false,
+            automatic_retry_allowed: false
+          }' > "$dir/receipt.json"
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          printf -v q_release '%q' "$EXPECTED_ACTIVE_REVISION"
+          printf -v q_projection '%q' "$EXPECTED_PROJECTION_SHA256"
+          printf -v q_run '%q' "$GITHUB_RUN_ID"
+          printf -v q_attempt '%q' "$GITHUB_RUN_ATTEMPT"
+          remote="set -euo pipefail; current=\$(readlink -f $q_path/current); releases=\$(readlink -f $q_path/releases); test -n \"\$current\"; test -n \"\$releases\"; case \"\$current\" in \"\$releases\"/*) ;; *) exit 1 ;; esac; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_release; test ! -e $q_path/.dep/deploy.lock; release_name=\$(basename \"\$current\"); sudo -n -u www-data -- env CAREER_CURRENT_EXPORT_EXECUTE=1 CAREER_CURRENT_EXPORT_BACKEND_ROOT=\"\$current/backend\" CAREER_CURRENT_EXPORT_RELEASE_SHA=$q_release CAREER_CURRENT_EXPORT_EXPECTED_PROJECTION_SHA256=$q_projection CAREER_CURRENT_EXPORT_RELEASE_NAME=\"\$release_name\" CAREER_CURRENT_EXPORT_WORKFLOW_RUN_ID=$q_run CAREER_CURRENT_EXPORT_WORKFLOW_RUN_ATTEMPT=$q_attempt php"
+          set +e
+          # shellcheck disable=SC2016
+          php -r '
+            $source = file_get_contents("backend/scripts/operations/career_current_authority_export.php");
+            if (! is_string($source)) {
+                exit(1);
+            }
+            echo $source;
+          ' | ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -o ServerAliveInterval=15 -o ServerAliveCountMax=4 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$remote" > "$raw" 2> "$remote_stderr"
+          pipeline_status=("${PIPESTATUS[@]}")
+          producer_status="${pipeline_status[0]}"
+          remote_status="${pipeline_status[1]}"
+          set -e
+          if [ "$producer_status" -ne 0 ]; then
+            jq -n '{
+              contract_version: "career.current_authority_export.v1",
+              status: "FAIL_CURRENT_AUTHORITY_EXPORT",
+              safe_error_code: "CAREER_CURRENT_LOCAL_SOURCE_RENDER_FAILED",
+              production_read_only_requested: true,
+              zero_write_confirmed: false,
+              automatic_retry_allowed: false
+            }' > "$dir/receipt.json"
+            echo "::error::CAREER_CURRENT_LOCAL_SOURCE_RENDER_FAILED"
+            exit 1
+          fi
+          if ! head -n 1 "$raw" | jq -e '.kind == "meta" and (.receipt | type == "object")' >/dev/null 2>&1; then
+            jq -n '{
+              contract_version: "career.current_authority_export.v1",
+              status: "FAIL_CURRENT_AUTHORITY_EXPORT",
+              safe_error_code: "CAREER_CURRENT_REMOTE_EXPORT_FAILED",
+              production_read_only_requested: true,
+              zero_write_confirmed: false,
+              automatic_retry_allowed: false
+            }' > "$dir/receipt.json"
+            echo "::error::CAREER_CURRENT_REMOTE_EXPORT_FAILED"
+            exit 1
+          fi
+          head -n 1 "$raw" | jq -S '.receipt' > "$remote_receipt"
+          if [ "$remote_status" -ne 0 ]; then
+            if jq -e '.status == "FAIL_CURRENT_AUTHORITY_EXPORT"' "$remote_receipt" >/dev/null; then
+              safe_code="$(jq -er '.safe_error_code | select(test("^[A-Z0-9_]+$"))' "$remote_receipt" 2>/dev/null || true)"
+              test -n "$safe_code" || safe_code="CAREER_CURRENT_REMOTE_EXPORT_FAILED"
+              cp "$remote_receipt" "$dir/receipt.json"
+            else
+              safe_code="CAREER_CURRENT_REMOTE_STREAM_INTERRUPTED"
+              jq -n --arg safe_error_code "$safe_code" '{
+                contract_version: "career.current_authority_export.v1",
+                status: "FAIL_CURRENT_AUTHORITY_EXPORT",
+                safe_error_code: $safe_error_code,
+                production_read_only_requested: true,
+                zero_write_confirmed: false,
+                automatic_retry_allowed: false
+              }' > "$dir/receipt.json"
+            fi
+            echo "::error::$safe_code"
+            exit 1
+          fi
+          test "$(wc -l < "$raw" | tr -d ' ')" = 1047
+          tail -n +2 "$raw" > "$dir/assets.jsonl"
+          head -n 1 "$raw" | jq -e '.receipt.status == "PASS_CURRENT_AUTHORITY_EXPORT"' >/dev/null
+          head -n 1 "$raw" | jq -S '.manifest' > "$dir/manifest.json"
+
+      - name: Validate Career Current artifact and zero-write receipt
+        if: inputs.mode == 'career-current-authority'
+        shell: bash
+        run: |
+          set -euo pipefail
+          dir=artifacts/career-current-authority-export
+          remote_receipt="$RUNNER_TEMP/career-current-authority-export.remote-receipt.json"
+          assets_sha="$(sha256sum "$dir/assets.jsonl" | awk '{print $1}')"
+          manifest_canonical="$(jq -S -c '.' "$dir/manifest.json")"
+          manifest_sha="$(printf '%s' "$manifest_canonical" | sha256sum | awk '{print $1}')"
+          jq -e --arg release "$EXPECTED_ACTIVE_REVISION" --arg projection "$EXPECTED_PROJECTION_SHA256" --arg assets "$assets_sha" --arg manifest "$manifest_sha" '
+            .contract_version == "career.current_authority_export.v1"
+            and .status == "PASS_CURRENT_AUTHORITY_EXPORT"
+            and .release_sha == $release
+            and .career_runtime_projection_sha256 == $projection
+            and .counts.careers == 1046
+            and .counts.locale_pages == 2092
+            and .counts.public_projection_locale_pages == 2090
+            and .counts.manual_hold_locale_pages == 2
+            and .counts.components_per_page == 26
+            and .counts.numeric_rating_statement_residue_count == 0
+            and .assets_sha256 == $assets
+            and .manifest_sha256 == $manifest
+            and .database_query_count > 0
+            and .database_query_verbs == ["select"]
+            and .database_write_count == 0
+            and .cache_write_count == 0
+            and .pointer_write_count == 0
+            and .discoverability_write_count == 0
+            and .cms_write_count == 0
+            and .sitemap_write_count == 0
+            and .llms_write_count == 0
+            and .search_submission_count == 0
+            and .remote_file_write_count == 0
+            and .database_public_content_sha256 == .active_cache_public_content_sha256
+            and .database_public_content_sha256 == .api_public_content_sha256
+            and .hashes_match == true
+            and .not_repository_authority == true
+          ' "$remote_receipt" >/dev/null
+          jq -e --arg assets "$assets_sha" '
+            .contract_version == "career.current_authority_manifest.v1"
+            and .counts.careers == 1046
+            and .counts.locale_pages == 2092
+            and .counts.public_projection_locale_pages == 2090
+            and .counts.manual_hold_locale_pages == 2
+            and .counts.components_per_page == 26
+            and .files[0].sha256 == $assets
+            and (.exported_field_set_sha256 | keys | length) == 13
+          ' "$dir/manifest.json" >/dev/null
+          test "$(wc -l < "$dir/assets.jsonl" | tr -d ' ')" = 1046
+          jq -e -s 'length == 1046 and ([.[].canonical_slug] | unique | length) == 1046 and all(.[].component_order_json; length == 26)' "$dir/assets.jsonl" >/dev/null
+          cp "$remote_receipt" "$dir/receipt.json"
+
+      - name: Finalize failed Career Current receipt
+        if: failure() && inputs.mode == 'career-current-authority'
+        shell: bash
+        run: |
+          set -euo pipefail
+          dir=artifacts/career-current-authority-export
+          mkdir -p "$dir"
+          rm -f "$dir/assets.jsonl" "$dir/manifest.json"
+          if ! jq -e '
+            .contract_version == "career.current_authority_export.v1"
+            and .status == "FAIL_CURRENT_AUTHORITY_EXPORT"
+            and (.safe_error_code | test("^[A-Z0-9_]+$"))
+          ' "$dir/receipt.json" >/dev/null 2>&1; then
+            jq -n '{
+              contract_version: "career.current_authority_export.v1",
+              status: "FAIL_CURRENT_AUTHORITY_EXPORT",
+              safe_error_code: "CAREER_CURRENT_EXPORT_OR_VALIDATION_FAILED",
+              production_read_only_requested: true,
+              zero_write_confirmed: false,
+              automatic_retry_allowed: false
+            }' > "$dir/receipt.json"
+          fi
+
       - name: Stream source snapshot through stdin without remote files
+        if: inputs.mode != 'career-current-authority'
         shell: bash
         env:
           DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
@@ -189,6 +437,7 @@ jobs:
             "$RUNNER_TEMP/greenfield/source.jsonl" >/dev/null
 
       - name: Build and verify deterministic package
+        if: inputs.mode != 'career-current-authority'
         shell: bash
         env:
           APP_ENV: testing
@@ -243,6 +492,7 @@ jobs:
           ' "$RUNNER_TEMP/greenfield/verify.json" >/dev/null
 
       - name: Emit sanitized immutable receipt
+        if: inputs.mode != 'career-current-authority'
         shell: bash
         run: |
           set -euo pipefail
@@ -286,7 +536,7 @@ jobs:
           fi
 
       - name: Upload preflight receipt
-        if: ${{ inputs.mode == 'preflight' }}
+        if: inputs.mode == 'preflight'
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: backend-greenfield-current-baseline-preflight-${{ github.run_id }}
@@ -295,10 +545,19 @@ jobs:
           retention-days: 3
 
       - name: Upload verified current-published package
-        if: ${{ inputs.mode == 'export' }}
+        if: inputs.mode == 'export'
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: backend-greenfield-current-baseline-export-${{ github.run_id }}
           path: artifacts
+          if-no-files-found: error
+          retention-days: 3
+
+      - name: Upload Career Current authority artifact or failure receipt
+        if: always() && inputs.mode == 'career-current-authority'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: career-current-authority-export-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/career-current-authority-export
           if-no-files-found: error
           retention-days: 3
