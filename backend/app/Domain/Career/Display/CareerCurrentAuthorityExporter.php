@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Career\Display;
 
 use App\Domain\Career\Publish\CareerGenerationAuthorityLoader;
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use App\Models\CareerJobDisplayAsset;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\Career\Review\CareerJobDetailReaderSafeReviewProjector;
@@ -53,6 +54,8 @@ final class CareerCurrentAuthorityExporter
     private const LOCALES = ['en', 'zh-CN'];
 
     private const MANUAL_HOLD_SLUGS = ['software-developers'];
+
+    private const EXPECTED_PUBLIC_LOCALE_PAGES = 2090;
 
     private const DISPLAY_OWNED_PUBLIC_FIELDS = [
         'surface_version',
@@ -118,8 +121,9 @@ final class CareerCurrentAuthorityExporter
      */
     public function export(array $binding): array
     {
-        $projectionSha256 = $this->currentRuntimeProjectionSha256();
-        $binding['career_runtime_projection_sha256'] = $projectionSha256;
+        $runtimeProjection = $this->currentRuntimeProjection();
+        $binding['career_runtime_projection_sha256'] = $runtimeProjection['sha256'];
+        $publishedIdentities = $runtimeProjection['published_identities'];
 
         $connection = DB::connection();
         $cache = app('cache.store');
@@ -151,7 +155,7 @@ final class CareerCurrentAuthorityExporter
         $cache->setEventDispatcher($cacheDispatcher);
 
         try {
-            $documents = $this->readOnlyTransaction(function (): array {
+            $documents = $this->readOnlyTransaction(function () use ($publishedIdentities): array {
                 $assets = CareerJobDisplayAsset::query()
                     ->where('surface_version', self::SURFACE_VERSION)
                     ->where('asset_version', self::ASSET_VERSION)
@@ -186,31 +190,34 @@ final class CareerCurrentAuthorityExporter
                     }
 
                     foreach (self::LOCALES as $locale) {
-                        $identity = $slug.'|'.$locale;
                         $databaseSurface = $this->displayOwnedProjectionFromAsset($asset, $locale);
-                        $apiRead = $this->responseCache->jobDetailVerifyOnlyRead($slug, $locale);
-                        $readiness = $this->responseCache->jobDetailCacheReadiness($slug, $locale);
-                        if (! is_array($databaseSurface)
-                            || ($readiness['classification'] ?? null) !== 'ready_active'
-                            || ! is_array(data_get($readiness, 'payload.display_surface_v1'))
-                            || ($apiRead['state'] ?? null) !== 'fresh'
-                            || ! is_array(data_get($apiRead, 'payload.display_surface_v1'))) {
-                            throw new CareerCurrentAuthorityExportFailure('PUBLIC_CONTENT_PROJECTION_UNAVAILABLE');
-                        }
-                        $database[$identity] = self::hashValue(
+                        $database[] = self::hashValue(
                             $this->readerSafeProjector->project($databaseSurface),
                         );
-                        $activeCache[$identity] = self::hashValue(
-                            $this->readerSafeProjector->project(self::displayOwnedProjection(
-                                (array) data_get($readiness, 'payload.display_surface_v1'),
-                            )),
-                        );
-                        $api[$identity] = self::hashValue(
-                            $this->readerSafeProjector->project(self::displayOwnedProjection(
-                                (array) data_get($apiRead, 'payload.display_surface_v1'),
-                            )),
-                        );
                     }
+                }
+
+                foreach ($publishedIdentities as $identity) {
+                    $slug = $identity['slug'];
+                    $locale = $identity['locale'];
+                    $apiRead = $this->responseCache->jobDetailVerifyOnlyRead($slug, $locale);
+                    $readiness = $this->responseCache->jobDetailCacheReadiness($slug, $locale);
+                    if (($readiness['classification'] ?? null) !== 'ready_active'
+                        || ! is_array(data_get($readiness, 'payload.display_surface_v1'))
+                        || ($apiRead['state'] ?? null) !== 'fresh'
+                        || ! is_array(data_get($apiRead, 'payload.display_surface_v1'))) {
+                        throw new CareerCurrentAuthorityExportFailure('PUBLIC_CONTENT_PROJECTION_UNAVAILABLE');
+                    }
+                    $activeCache[] = self::hashValue(
+                        $this->readerSafeProjector->project(self::displayOwnedProjection(
+                            (array) data_get($readiness, 'payload.display_surface_v1'),
+                        )),
+                    );
+                    $api[] = self::hashValue(
+                        $this->readerSafeProjector->project(self::displayOwnedProjection(
+                            (array) data_get($apiRead, 'payload.display_surface_v1'),
+                        )),
+                    );
                 }
 
                 return $this->buildDocuments($rows, $database, $activeCache, $api);
@@ -306,9 +313,9 @@ final class CareerCurrentAuthorityExporter
         $activeCache = self::projectionHashes($activeCache);
         $api = self::projectionHashes($api);
         if (count($database) !== $expectedProjectionCount
-            || array_keys($database) !== array_keys($activeCache)
-            || array_keys($database) !== array_keys($api)) {
-            throw new CareerCurrentAuthorityExportFailure('PROJECTION_IDENTITY_SET_MISMATCH');
+            || count($activeCache) !== $expectedProjectionCount
+            || count($api) !== $expectedProjectionCount) {
+            throw new CareerCurrentAuthorityExportFailure('PUBLIC_CONTENT_PROJECTION_COUNT_MISMATCH');
         }
         $databaseHash = self::projectionSetHash($database);
         $cacheHash = self::projectionSetHash($activeCache);
@@ -556,7 +563,8 @@ final class CareerCurrentAuthorityExporter
         }
     }
 
-    private function currentRuntimeProjectionSha256(): string
+    /** @return array{sha256:string,published_identities:list<array{slug:string,locale:string}>} */
+    private function currentRuntimeProjection(): array
     {
         try {
             $authority = $this->generationAuthority->loadStrict();
@@ -568,41 +576,102 @@ final class CareerCurrentAuthorityExporter
             throw new CareerCurrentAuthorityExportFailure('CAREER_ACTIVE_GENERATION_PROJECTION_SHA256_INVALID');
         }
 
-        return $sha256;
-    }
-
-    /** @param array<string,string> $projections */
-    private static function projectionSetHash(array $projections): string
-    {
-        ksort($projections, SORT_STRING);
-        $rows = [];
-        foreach ($projections as $identity => $sha256) {
-            $rows[] = ['identity' => $identity, 'content_sha256' => $sha256];
+        $projection = $authority['projection'] ?? null;
+        if (! is_array($projection)) {
+            throw new CareerCurrentAuthorityExportFailure('CAREER_ACTIVE_GENERATION_PROJECTION_UNAVAILABLE');
         }
 
-        return self::hashValue($rows);
+        return [
+            'sha256' => $sha256,
+            'published_identities' => self::publishedProjectionIdentities(
+                $projection,
+                self::EXPECTED_PUBLIC_LOCALE_PAGES,
+                self::EXPECTED_CAREERS - count(self::MANUAL_HOLD_SLUGS),
+            ),
+        ];
     }
 
     /**
-     * @param  array<string,array<string,mixed>|string>  $projections
-     * @return array<string,string>
+     * @return list<array{slug:string,locale:string}>
+     */
+    private static function publishedProjectionIdentities(
+        array $projection,
+        int $expectedLocalePages,
+        int $expectedSlugs,
+    ): array {
+        $items = $projection['items'] ?? null;
+        if (! is_array($items)) {
+            throw new CareerCurrentAuthorityExportFailure('CAREER_ACTIVE_GENERATION_PROJECTION_UNAVAILABLE');
+        }
+
+        $identities = [];
+        $localePairs = [];
+        foreach ($items as $item) {
+            if (! is_array($item)
+                || ($item['runtime_publish_state'] ?? null) !== CareerRuntimePublishProjectionService::STATE_PUBLISHED) {
+                continue;
+            }
+            $slug = $item['slug'] ?? null;
+            $locale = $item['locale'] ?? null;
+            if (! is_string($slug)
+                || preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $slug) !== 1
+                || ! in_array($locale, CareerRuntimePublishProjectionService::LOCALES, true)
+                || in_array($slug, self::MANUAL_HOLD_SLUGS, true)) {
+                throw new CareerCurrentAuthorityExportFailure('PUBLIC_PROJECTION_IDENTITY_SET_INVALID');
+            }
+            $identity = $slug.'|'.$locale;
+            if (isset($identities[$identity])) {
+                throw new CareerCurrentAuthorityExportFailure('PUBLIC_PROJECTION_IDENTITY_SET_INVALID');
+            }
+            $identities[$identity] = [
+                'slug' => $slug,
+                'locale' => $locale === 'en' ? 'en' : 'zh-CN',
+            ];
+            $localePairs[$slug][$locale] = true;
+        }
+
+        if (count($identities) !== $expectedLocalePages || count($localePairs) !== $expectedSlugs) {
+            throw new CareerCurrentAuthorityExportFailure('PUBLIC_PROJECTION_IDENTITY_SET_INVALID');
+        }
+        foreach ($localePairs as $locales) {
+            $resolvedLocales = array_keys($locales);
+            sort($resolvedLocales, SORT_STRING);
+            $expectedLocales = CareerRuntimePublishProjectionService::LOCALES;
+            sort($expectedLocales, SORT_STRING);
+            if ($resolvedLocales !== $expectedLocales) {
+                throw new CareerCurrentAuthorityExportFailure('PUBLIC_PROJECTION_IDENTITY_SET_INVALID');
+            }
+        }
+        ksort($identities, SORT_STRING);
+
+        return array_values($identities);
+    }
+
+    /** @param list<string> $projections */
+    private static function projectionSetHash(array $projections): string
+    {
+        sort($projections, SORT_STRING);
+
+        return self::hashValue($projections);
+    }
+
+    /**
+     * @param  array<array<string,mixed>|string>  $projections
+     * @return list<string>
      */
     private static function projectionHashes(array $projections): array
     {
         $hashes = [];
-        foreach ($projections as $identity => $projection) {
-            if (! is_string($identity) || $identity === '') {
-                throw new CareerCurrentAuthorityExportFailure('PROJECTION_IDENTITY_INVALID');
-            }
+        foreach ($projections as $projection) {
             if (is_string($projection) && preg_match('/\A[0-9a-f]{64}\z/', $projection) === 1) {
-                $hashes[$identity] = $projection;
+                $hashes[] = $projection;
             } elseif (is_array($projection)) {
-                $hashes[$identity] = self::hashValue(self::displayOwnedProjection($projection));
+                $hashes[] = self::hashValue(self::displayOwnedProjection($projection));
             } else {
                 throw new CareerCurrentAuthorityExportFailure('PROJECTION_CONTENT_INVALID');
             }
         }
-        ksort($hashes, SORT_STRING);
+        sort($hashes, SORT_STRING);
 
         return $hashes;
     }

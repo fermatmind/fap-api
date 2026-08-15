@@ -47,6 +47,51 @@ final class CareerCurrentAuthorityExporterTest extends TestCase
         $exporter->buildDocuments($rows, $database, $cache, $database, 1);
     }
 
+    public function test_it_compares_content_hash_multisets_without_comparing_identities(): void
+    {
+        $exporter = $this->exporter();
+        $rows = [$this->row('alpha')];
+        $database = $this->projections(['alpha']);
+        $cache = [
+            'generation-one|en' => $database['alpha|zh-CN'],
+            'generation-two|zh-CN' => $database['alpha|en'],
+        ];
+
+        $documents = $exporter->buildDocuments($rows, $database, $cache, array_reverse($cache, true), 1);
+
+        self::assertTrue($documents['receipt']['hashes_match']);
+        self::assertSame(
+            $documents['receipt']['database_public_content_sha256'],
+            $documents['receipt']['active_cache_public_content_sha256'],
+        );
+    }
+
+    public function test_it_fails_closed_when_a_projection_has_a_missing_content_hash(): void
+    {
+        $exporter = $this->exporter();
+        $rows = [$this->row('alpha')];
+        $database = $this->projections(['alpha']);
+        $cache = $database;
+        array_pop($cache);
+
+        $this->expectException(CareerCurrentAuthorityExportFailure::class);
+        $this->expectExceptionMessage('PUBLIC_CONTENT_PROJECTION_COUNT_MISMATCH');
+        $exporter->buildDocuments($rows, $database, $cache, $database, 1);
+    }
+
+    public function test_it_fails_closed_when_a_same_size_multiset_substitutes_duplicate_content(): void
+    {
+        $exporter = $this->exporter();
+        $rows = [$this->row('alpha')];
+        $database = $this->projections(['alpha']);
+        $cache = $database;
+        $cache['alpha|zh-CN'] = $cache['alpha|en'];
+
+        $this->expectException(CareerCurrentAuthorityExportFailure::class);
+        $this->expectExceptionMessage('PUBLIC_CONTENT_HASH_MISMATCH');
+        $exporter->buildDocuments($rows, $database, $cache, $database, 1);
+    }
+
     public function test_it_ignores_occupation_derived_projection_fields(): void
     {
         $exporter = $this->exporter();
@@ -108,6 +153,45 @@ final class CareerCurrentAuthorityExporterTest extends TestCase
             ['software-developers'],
             $documents['manifest']['structural_contract']['public_projection_excluded_manual_hold_slugs'],
         );
+    }
+
+    public function test_it_resolves_published_generation_identities_as_complete_locale_pairs(): void
+    {
+        $method = (new ReflectionClass(CareerCurrentAuthorityExporter::class))
+            ->getMethod('publishedProjectionIdentities');
+        $identities = $method->invoke(null, [
+            'items' => [
+                ['slug' => 'beta', 'locale' => 'zh', 'runtime_publish_state' => 'published'],
+                ['slug' => 'alpha', 'locale' => 'en', 'runtime_publish_state' => 'published'],
+                ['slug' => 'software-developers', 'locale' => 'en', 'runtime_publish_state' => 'blocked'],
+                ['slug' => 'beta', 'locale' => 'en', 'runtime_publish_state' => 'published'],
+                ['slug' => 'alpha', 'locale' => 'zh', 'runtime_publish_state' => 'published'],
+                ['slug' => 'software-developers', 'locale' => 'zh', 'runtime_publish_state' => 'blocked'],
+            ],
+        ], 4, 2);
+
+        self::assertSame([
+            ['slug' => 'alpha', 'locale' => 'en'],
+            ['slug' => 'alpha', 'locale' => 'zh-CN'],
+            ['slug' => 'beta', 'locale' => 'en'],
+            ['slug' => 'beta', 'locale' => 'zh-CN'],
+        ], $identities);
+    }
+
+    public function test_it_rejects_incomplete_published_generation_locale_pairs(): void
+    {
+        $method = (new ReflectionClass(CareerCurrentAuthorityExporter::class))
+            ->getMethod('publishedProjectionIdentities');
+
+        $this->expectException(CareerCurrentAuthorityExportFailure::class);
+        $this->expectExceptionMessage('PUBLIC_PROJECTION_IDENTITY_SET_INVALID');
+        $method->invoke(null, [
+            'items' => [
+                ['slug' => 'alpha', 'locale' => 'en', 'runtime_publish_state' => 'published'],
+                ['slug' => 'beta', 'locale' => 'en', 'runtime_publish_state' => 'published'],
+                ['slug' => 'beta', 'locale' => 'zh', 'runtime_publish_state' => 'published'],
+            ],
+        ], 3, 2);
     }
 
     public function test_exporter_does_not_read_occupation_authority(): void
