@@ -37,6 +37,8 @@ final class CareerCurrentAuthorityExportWorkflowTest extends TestCase
             '.discoverability_write_count == 0',
             '.database_public_content_sha256 == .active_cache_public_content_sha256',
             '.database_public_content_sha256 == .api_public_content_sha256',
+            'manifest_canonical="$(jq -S -c',
+            'and .manifest_sha256 == $manifest',
             '.counts.public_projection_locale_pages == 2090',
             '.counts.manual_hold_locale_pages == 2',
             'remote_status="${pipeline_status[1]}"',

@@ -300,7 +300,9 @@ jobs:
           dir=artifacts/career-current-authority-export
           remote_receipt="$RUNNER_TEMP/career-current-authority-export.remote-receipt.json"
           assets_sha="$(sha256sum "$dir/assets.jsonl" | awk '{print $1}')"
-          jq -e --arg release "$EXPECTED_ACTIVE_REVISION" --arg projection "$EXPECTED_PROJECTION_SHA256" --arg assets "$assets_sha" '
+          manifest_canonical="$(jq -S -c '.' "$dir/manifest.json")"
+          manifest_sha="$(printf '%s' "$manifest_canonical" | sha256sum | awk '{print $1}')"
+          jq -e --arg release "$EXPECTED_ACTIVE_REVISION" --arg projection "$EXPECTED_PROJECTION_SHA256" --arg assets "$assets_sha" --arg manifest "$manifest_sha" '
             .contract_version == "career.current_authority_export.v1"
             and .status == "PASS_CURRENT_AUTHORITY_EXPORT"
             and .release_sha == $release
@@ -312,6 +314,7 @@ jobs:
             and .counts.components_per_page == 26
             and .counts.numeric_rating_statement_residue_count == 0
             and .assets_sha256 == $assets
+            and .manifest_sha256 == $manifest
             and .database_query_count > 0
             and .database_query_verbs == ["select"]
             and .database_write_count == 0
