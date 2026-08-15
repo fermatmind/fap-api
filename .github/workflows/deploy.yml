@@ -1,392 +1,101 @@
-name: Deploy Application
-run-name: Deploy Application ${{ github.event_name }} ${{ github.sha }} [op:${{ inputs.operation_key }}]
+name: Deploy
 
 on:
-  push:
-    branches: [main]
-    paths-ignore:
-      - "AGENTS.md"
-      - ".github/actions/controlled-operation-gate/action.yml"
-      - ".github/scripts/controlled-operation-gate.cjs"
-      - ".github/workflows/backend-production-auto-deploy.yml"
-      - ".github/workflows/career-production-runtime-authority-diagnostic.yml"
-      - ".github/workflows/career-runtime-authority-permission-preflight.yml"
-      - ".github/workflows/career-runtime-authority-permission-repair.yml"
-      - ".github/workflows/career-1046-discoverability-permit-permission.yml"
-      - ".github/workflows/career-current-generation-pointer-bootstrap-staging-ops.yml"
-      - ".github/workflows/career-staging-authority-artifact-recovery.yml"
-      - ".github/workflows/career-baseline-index-state-authority-repair.yml"
-      - ".github/workflows/career-baseline-set-identity-diagnostic.yml"
-      - ".github/workflows/content-promotion-automation.yml"
-      - ".github/workflows/content-promotion-key-reconciliation.yml"
-      - ".github/workflows/deploy-production.yml"
-      - ".github/workflows/deploy.yml"
-      - "backend/tests/Sre/ControlledWorkflowOperationGateTest.php"
-      - "backend/tests/Sre/BackendProductionAutoDeployWorkflowTest.php"
-      - "backend/scripts/operations/career_production_runtime_authority_diagnostic.php"
-      - "backend/scripts/deploy/career_runtime_authority_permission_control.sh"
-      - "backend/scripts/deploy/career_1046_discoverability_permit_permission_control.sh"
-      - "backend/scripts/deploy/content_promotion_key_reconciliation.sh"
-      - "backend/scripts/operations/career_baseline_index_state_authority_repair.php"
-      - "backend/scripts/operations/career_baseline_set_identity_diagnostic.php"
-      - "backend/tests/Sre/CareerProductionRuntimeAuthorityDiagnosticWorkflowTest.php"
-      - "backend/tests/Sre/DeployStorageAndDatabaseConfigTest.php"
-      - "backend/tests/Sre/Career1046DiscoverabilityPermitPermissionWorkflowTest.php"
-      - "backend/tests/Sre/ContentPromotionKeyReconciliationTest.php"
-      - "backend/tests/Sre/CareerBaselineIndexStateAuthorityRepairTest.php"
-      - "backend/tests/Sre/CareerBaselineSetIdentityDiagnosticTest.php"
-      - "docs/operations/career-baseline-index-state-authority-repair.md"
-      - "docs/operations/career-baseline-set-identity-diagnostic.md"
-      - "tests/ops/controlled-operation-gate.test.cjs"
-      - "tests/ops/test_career_runtime_authority_permission_control.py"
-  workflow_dispatch:
-    inputs:
-      release_mode:
-        description: "main deploys the workflow revision; mbti_runtime46_isolated deploys one exact audited candidate"
-        required: true
-        default: main
-        type: choice
-        options:
-          - main
-          - mbti_runtime46_isolated
-      expected_release_sha:
-        description: "Required exact candidate SHA only for mbti_runtime46_isolated"
-        required: false
-        default: ""
-        type: string
-      expected_base_sha:
-        description: "Required exact production base SHA only for mbti_runtime46_isolated"
-        required: false
-        default: ""
-        type: string
-      operator_approval_phrase:
-        description: "Required exact staging-only approval only for mbti_runtime46_isolated"
-        required: false
-        default: ""
-        type: string
-      operation_key:
-        description: "Deterministic operation key required for manual controlled dispatch"
-        required: true
-        type: string
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
 
 permissions:
-  contents: read
   actions: read
   attestations: read
+  contents: read
+
+concurrency:
+  group: trunk-deploy-${{ github.repository }}
+  cancel-in-progress: false
 
 env:
-  MBTI_RUNTIME46_PRODUCTION_BASE_SHA: "781d1636b2c74f5852076a5864b681910a1e0e47"
+  DEPLOYER_VERSION: "7.5.12"
+  DEPLOYER_SHA256: "b55c6609653e888c672d327c407f8bba6324b9c9cc24f9dcfb3f4b3922760632"
+  DEPLOY_SHA: ${{ github.event.workflow_run.head_sha }}
 
 jobs:
-  operation-gate:
-    name: Elect staging operation owner before Environment access
+  policy:
+    name: Bind successful main CI receipt
     runs-on: ubuntu-latest
     timeout-minutes: 5
     outputs:
-      decision: ${{ steps.gate.outputs.decision }}
-      operation_key: ${{ steps.identity.outputs.operation_key }}
+      deploy: ${{ steps.receipt.outputs.deploy }}
+      classification: ${{ steps.receipt.outputs.classification }}
+      artifact_digest: ${{ steps.artifact.outputs.digest }}
+      config_fingerprint: ${{ steps.receipt.outputs.config_fingerprint }}
     steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
-      - name: Recompute immutable staging operation identity
-        id: identity
+      - name: Refuse non-main, PR, failed, or ambiguous CI runs
         shell: bash
         env:
-          CLAIMED_KEY: ${{ inputs.operation_key }}
-          RELEASE_MODE: ${{ inputs.release_mode || 'main' }}
-          EXPECTED_RELEASE_SHA: ${{ inputs.expected_release_sha }}
-          EXPECTED_BASE_SHA: ${{ inputs.expected_base_sha }}
+          HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
+          CI_EVENT: ${{ github.event.workflow_run.event }}
+          CI_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          CI_RUN_ATTEMPT: ${{ github.event.workflow_run.run_attempt }}
         run: |
           set -euo pipefail
-          identity="event=${GITHUB_EVENT_NAME}|release_mode=${RELEASE_MODE}|sha=${GITHUB_SHA}|expected_release_sha=${EXPECTED_RELEASE_SHA}|expected_base_sha=${EXPECTED_BASE_SHA}"
-          key="$(node .github/scripts/controlled-operation-gate.cjs key --repository "$GITHUB_REPOSITORY" --workflow .github/workflows/deploy.yml --scope staging-deploy --identity "$identity")"
-          if [ "$GITHUB_EVENT_NAME" = workflow_dispatch ]; then
-            test "$CLAIMED_KEY" = "$key"
-          else
-            test -z "$CLAIMED_KEY"
-          fi
-          echo "operation_key=$key" >> "$GITHUB_OUTPUT"
-      - name: Gate exact staging operation
-        id: gate
-        uses: ./.github/actions/controlled-operation-gate
-        with:
-          claimed-key: ${{ steps.identity.outputs.operation_key }}
-          expected-key: ${{ steps.identity.outputs.operation_key }}
-          workflow-file: deploy.yml
-          receipt-template: backend-staging-operation-{operation_key}-{run_id}-{run_attempt}
-          match-head-sha: ${{ github.event_name == 'push' && 'true' || 'false' }}
-
-  checks:
-    name: Deploy checks (staging)
-    needs: operation-gate
-    if: needs.operation-gate.outputs.decision == 'execute'
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    outputs:
-      parity_receipt_verified: ${{ steps.parity.outputs.verified }}
-      parity_receipt_sha: ${{ steps.parity.outputs.sha }}
-      parity_receipt_artifact_digest: ${{ steps.parity.outputs.artifact-digest }}
-      parity_receipt_config_fingerprint: ${{ steps.parity.outputs.config-fingerprint }}
-      parity_receipt_run_id: ${{ steps.parity.outputs.run-id }}
-      parity_receipt_run_attempt: ${{ steps.parity.outputs.run-attempt }}
-    concurrency:
-      group: deploy-checks-${{ github.repository }}-staging-${{ github.event_name == 'workflow_dispatch' && inputs.release_mode == 'mbti_runtime46_isolated' && 'runtime46-isolated' || 'main' }}
-      cancel-in-progress: ${{ github.event_name == 'push' }}
-
-    env:
-      TARGET: staging
-      DEPLOYER_VERSION: "7.5.12"
-      DEPLOYER_SHA256: "b55c6609653e888c672d327c407f8bba6324b9c9cc24f9dcfb3f4b3922760632"
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
-        with:
-          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.release_mode == 'mbti_runtime46_isolated' && inputs.expected_release_sha || github.sha }}
-          fetch-depth: 0
-
-      - name: Validate exact isolated Runtime 46 candidate
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.release_mode == 'mbti_runtime46_isolated' }}
-        shell: bash
-        env:
-          EXPECTED_RELEASE_SHA: ${{ inputs.expected_release_sha }}
-          EXPECTED_BASE_SHA: ${{ inputs.expected_base_sha }}
-          OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
-        run: |
-          set -euo pipefail
-          [[ "$EXPECTED_RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]
-          test "$EXPECTED_BASE_SHA" = "$MBTI_RUNTIME46_PRODUCTION_BASE_SHA"
-          test "$(git rev-parse HEAD)" = "$EXPECTED_RELEASE_SHA"
-          test "$(git rev-list --parents -n 1 HEAD | awk '{print NF}')" -eq 2
-          test "$(git rev-parse HEAD^)" = "$EXPECTED_BASE_SHA"
-          expected_phrase="I explicitly approve isolated MBTI-COMP-RUNTIME-46 staging deploy for SHA ${EXPECTED_RELEASE_SHA} based on production SHA ${EXPECTED_BASE_SHA}; no production deploy or CMS/DB/content write."
-          test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
-          expected_files="$(printf '%s\n' \
-            backend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpPromote.php \
-            backend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpRevision.php \
-            backend/app/Services/Cms/MbtiCompRuntime46IntpPromotionService.php \
-            backend/app/Services/Cms/MbtiFullCmsImportService.php \
-            backend/docs/seo/import-packages/mbti-comp-runtime-46-intp-revision-2026-07-19.json \
-            backend/tests/Feature/Console/PersonalityMbtiCompRuntime46IntpRevisionCommandTest.php)"
-          actual_files="$(git diff --no-renames --name-only "$EXPECTED_BASE_SHA" HEAD | sort)"
-          test "$actual_files" = "$expected_files"
-          test -z "$(git diff --no-renames --diff-filter=D --name-only "$EXPECTED_BASE_SHA" HEAD)"
-          git fetch --no-tags origin main:refs/remotes/origin/main
-          while IFS= read -r path; do
-            test -n "$path"
-            git show "origin/main:$path" | cmp - "$path"
-          done <<<"$expected_files"
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
-        with:
-          php-version: '8.4'
-          coverage: none
-          tools: composer:v2
-          extensions: >
-            mbstring, intl, curl, json, openssl, fileinfo, pdo, pdo_sqlite, sqlite3, pdo_mysql, redis
-
-      - name: Setup Node
-        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
-        with:
-          node-version: '24'
-
-      - name: Install CI guard dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install --no-install-recommends --yes ripgrep
-          rg --version
-
-      - name: CAE gate (config + artifact safety)
-        run: bash backend/scripts/cae_gate.sh
-
-      - name: Cache Composer
-        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
-        with:
-          path: |
-            backend/vendor
-            ~/.composer/cache/files
-          key: ${{ runner.os }}-php84-${{ hashFiles('backend/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php84-
-
-      - name: Prepare Laravel cache dirs (for package:discover)
-        working-directory: backend
-        run: |
-          mkdir -p storage/framework/cache/data
-          mkdir -p storage/framework/views
-          mkdir -p storage/framework/sessions
-          mkdir -p storage/logs
-          mkdir -p storage/app/private/packs_v2_materialized
-          mkdir -p bootstrap/cache
-          chmod -R ug+rwX storage bootstrap/cache || true
-
-      - name: Composer validate (strict)
-        working-directory: backend
-        run: composer validate --strict
-
-      - name: Composer audit
-        working-directory: backend
-        run: composer audit --locked --no-interaction --ignore-unreachable
-
-      - name: Install backend dependencies
-        working-directory: backend
-        run: |
-          composer install --no-interaction --prefer-dist --no-progress
-
-      - name: Preflight - backend vendor autoload exists
-        shell: bash
-        run: |
-          set -euo pipefail
-          test -f backend/vendor/autoload.php
-
-      - name: Verify isolated Runtime 46 focused contract
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.release_mode == 'mbti_runtime46_isolated' }}
-        working-directory: backend
-        run: php artisan test tests/Feature/Console/PersonalityMbtiCompRuntime46IntpRevisionCommandTest.php
-
-      - name: Normalize exact isolated candidate branch-diff baseline
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.release_mode == 'mbti_runtime46_isolated' }}
-        shell: bash
-        env:
-          EXPECTED_RELEASE_SHA: ${{ inputs.expected_release_sha }}
-        run: |
-          set -euo pipefail
-          test "$(git rev-parse HEAD)" = "$EXPECTED_RELEASE_SHA"
-          git update-ref refs/remotes/origin/main "$EXPECTED_RELEASE_SHA"
-          test "$(git merge-base origin/main HEAD)" = "$EXPECTED_RELEASE_SHA"
-
-      - name: Resolve exact-SHA successful CI parity receipt
-        id: parity-artifact
+          test "$GITHUB_RUN_ATTEMPT" = 1
+          test "$CI_RUN_ATTEMPT" = 1
+          test "$HEAD_BRANCH" = main
+          test "$CI_EVENT" = push
+          test "$CI_CONCLUSION" = success
+          [[ "$DEPLOY_SHA" =~ ^[0-9a-f]{40}$ ]]
+      - id: artifact
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:
-          PARITY_EXPECTED_SHA: ${{ github.event_name == 'workflow_dispatch' && inputs.release_mode == 'mbti_runtime46_isolated' && inputs.expected_release_sha || github.sha }}
+          CI_RUN_ID: ${{ github.event.workflow_run.id }}
         with:
           script: |
-            const sha = process.env.PARITY_EXPECTED_SHA;
-            const expectedName = `fap-api-parity-receipt-${sha}`;
-            if (!/^[a-f0-9]{40}$/.test(sha)) {
-              core.setFailed("Parity receipt target must be an exact lowercase SHA");
-              return;
-            }
-
-            const deadline = Date.now() + 12 * 60 * 1000;
-            while (Date.now() < deadline) {
-              const response = await github.rest.actions.listWorkflowRuns({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                workflow_id: "ci.yml",
-                branch: "main",
-                event: "push",
-                head_sha: sha,
-                per_page: 20,
-              });
-              const runs = response.data.workflow_runs.filter(
-                (run) => run.head_sha === sha && run.head_branch === "main" && run.event === "push",
-              );
-              for (const run of runs) {
-                if (run.status !== "completed" || run.conclusion !== "success") continue;
-                const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  run_id: run.id,
-                  per_page: 100,
-                });
-                const matches = artifacts.data.artifacts.filter(
-                  (artifact) => artifact.name === expectedName && !artifact.expired,
-                );
-                if (matches.length !== 1) continue;
-                const artifact = matches[0];
-                if (!/^sha256:[a-f0-9]{64}$/.test(String(artifact.digest || ""))) {
-                  core.setFailed("Parity receipt artifact is missing its immutable digest");
-                  return;
-                }
-                core.setOutput("artifact-id", String(artifact.id));
-                core.setOutput("artifact-digest", artifact.digest);
-                core.setOutput("run-id", String(run.id));
-                core.setOutput("run-attempt", String(run.run_attempt));
-                return;
-              }
-              await new Promise((resolve) => setTimeout(resolve, 15000));
-            }
-            core.setFailed(`No successful exact-SHA CI parity receipt was found for ${sha}`);
-
-      - name: Verify exact-SHA CI parity receipt
-        id: parity
+            const runId = Number(process.env.CI_RUN_ID);
+            const expected = `trunk-validation-${process.env.DEPLOY_SHA}`;
+            const { data } = await github.rest.actions.listWorkflowRunArtifacts({
+              owner: context.repo.owner, repo: context.repo.repo, run_id: runId, per_page: 100,
+            });
+            const matches = data.artifacts.filter((artifact) => artifact.name === expected && !artifact.expired);
+            if (matches.length !== 1) return core.setFailed(`Expected one ${expected} artifact; found ${matches.length}`);
+            if (!/^sha256:[0-9a-f]{64}$/.test(String(matches[0].digest || ""))) return core.setFailed("Validation artifact digest is missing");
+            core.setOutput("id", String(matches[0].id));
+            core.setOutput("digest", matches[0].digest);
+      - id: receipt
+        name: Verify exact-SHA receipt bytes
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
-          PARITY_EXPECTED_SHA: ${{ github.event_name == 'workflow_dispatch' && inputs.release_mode == 'mbti_runtime46_isolated' && inputs.expected_release_sha || github.sha }}
-          PARITY_ARTIFACT_ID: ${{ steps.parity-artifact.outputs.artifact-id }}
-          PARITY_ARTIFACT_DIGEST: ${{ steps.parity-artifact.outputs.artifact-digest }}
-          PARITY_RUN_ID: ${{ steps.parity-artifact.outputs.run-id }}
-          PARITY_RUN_ATTEMPT: ${{ steps.parity-artifact.outputs.run-attempt }}
+          ARTIFACT_ID: ${{ steps.artifact.outputs.id }}
+          EXPECTED_DIGEST: ${{ steps.artifact.outputs.digest }}
+          CI_RUN_ID: ${{ github.event.workflow_run.id }}
         run: |
           set -euo pipefail
-          receipt_root="$RUNNER_TEMP/ci-parity-receipt-${PARITY_EXPECTED_SHA}"
-          receipt_zip="$receipt_root/fap-api-parity-receipt-${PARITY_EXPECTED_SHA}.zip"
-          receipt_name="parity-receipt-${PARITY_EXPECTED_SHA}.json"
-          receipt_path="$receipt_root/$receipt_name"
-          mkdir -p "$receipt_root"
-
-          curl --fail --silent --show-error --location \
-            -H "Authorization: Bearer $GH_TOKEN" \
-            -H "Accept: application/vnd.github+json" \
-            "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/actions/artifacts/$PARITY_ARTIFACT_ID/zip" \
-            --output "$receipt_zip"
-          actual_artifact_digest="sha256:$(sha256sum "$receipt_zip" | awk '{print $1}')"
-          test "$actual_artifact_digest" = "$PARITY_ARTIFACT_DIGEST"
-
-          gh attestation verify "$receipt_zip" \
-            --repo "$GITHUB_REPOSITORY" \
-            --signer-workflow "$GITHUB_REPOSITORY/.github/workflows/ci.yml" \
-            --source-ref refs/heads/main \
-            --source-digest "$PARITY_EXPECTED_SHA"
-
-          mapfile -t receipt_entries < <(unzip -Z1 "$receipt_zip")
-          test "${#receipt_entries[@]}" -eq 1
-          test "${receipt_entries[0]}" = "$receipt_name"
-          unzip -q "$receipt_zip" -d "$receipt_root"
-
-          verified_receipt="$(php backend/scripts/deploy/ci_parity_receipt.php verify \
-            --receipt="$receipt_path" \
-            --expected-repo="$GITHUB_REPOSITORY" \
-            --expected-sha="$PARITY_EXPECTED_SHA" \
-            --expected-run-id="$PARITY_RUN_ID" \
-            --expected-run-attempt="$PARITY_RUN_ATTEMPT")"
-          config_fingerprint="$(jq -er '.config_fingerprint' <<<"$verified_receipt")"
+          zip="$RUNNER_TEMP/validation.zip"
+          curl -fsSL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+            "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID/zip" -o "$zip"
+          test "sha256:$(sha256sum "$zip" | awk '{print $1}')" = "$EXPECTED_DIGEST"
+          unzip -q "$zip" -d "$RUNNER_TEMP/validation"
+          receipt="$RUNNER_TEMP/validation/trunk-validation.json"
+          jq -e --arg sha "$DEPLOY_SHA" --arg run "$CI_RUN_ID" \
+            '.schema_version == "fermatmind.trunk-validation.v1" and .sha == $sha and .ci_run_id == $run and .result == "success"' \
+            "$receipt" >/dev/null
+          classification="$(jq -c .classification "$receipt")"
           {
-            echo "verified=true"
-            echo "sha=$PARITY_EXPECTED_SHA"
-            echo "artifact-digest=$PARITY_ARTIFACT_DIGEST"
-            echo "config-fingerprint=$config_fingerprint"
-            echo "run-id=$PARITY_RUN_ID"
-            echo "run-attempt=$PARITY_RUN_ATTEMPT"
+            echo "deploy=$(jq -r .classification.deploy "$receipt")"
+            echo "classification=$classification"
+            echo "config_fingerprint=$(sha256sum "$receipt" | awk '{print $1}')"
           } >> "$GITHUB_OUTPUT"
 
-  deploy:
-    name: Deploy (staging)
-    needs: [operation-gate, checks]
-    if: needs.operation-gate.outputs.decision == 'execute' && needs.checks.result == 'success'
+  staging:
+    name: Staging exact-SHA deploy and smoke
+    needs: policy
+    if: needs.policy.outputs.deploy == 'true'
     runs-on: ubuntu-latest
-    timeout-minutes: 30
-    concurrency:
-      group: deploy-${{ github.repository }}-staging
-      cancel-in-progress: false
-
-    # 关键：绑定 GitHub Environment，使 secrets.SSH_PRIVATE_KEY 读取到对应环境的 Environment Secret
-    environment:
-      name: staging
-
+    timeout-minutes: 45
+    environment: staging
     env:
       TARGET: staging
-      DEPLOYER_VERSION: "7.5.12"
-      DEPLOYER_SHA256: "b55c6609653e888c672d327c407f8bba6324b9c9cc24f9dcfb3f4b3922760632"
-      CI_PARITY_RECEIPT_VERIFIED: ${{ needs.checks.outputs.parity_receipt_verified }}
-      CI_PARITY_RECEIPT_SHA: ${{ needs.checks.outputs.parity_receipt_sha }}
-      CI_PARITY_RECEIPT_ARTIFACT_DIGEST: ${{ needs.checks.outputs.parity_receipt_artifact_digest }}
-      CI_PARITY_RECEIPT_CONFIG_FINGERPRINT: ${{ needs.checks.outputs.parity_receipt_config_fingerprint }}
-      CI_PARITY_RECEIPT_RUN_ID: ${{ needs.checks.outputs.parity_receipt_run_id }}
-      CI_PARITY_RECEIPT_RUN_ATTEMPT: ${{ needs.checks.outputs.parity_receipt_run_attempt }}
       DEPLOY_USER: ${{ secrets.STAGING_DEPLOY_USER }}
       DEPLOY_PORT: ${{ secrets.STAGING_DEPLOY_PORT }}
       DEPLOY_HOST: ${{ secrets.STAGING_DEPLOY_HOST }}
@@ -398,701 +107,176 @@ jobs:
       HEALTHCHECK_URL: ${{ secrets.STAGING_HEALTHCHECK_URL }}
       AUTH_GUEST_CHECK_URL: ${{ secrets.STAGING_AUTH_GUEST_CHECK_URL }}
       OPS_HOST: ${{ secrets.STAGING_OPS_HOST }}
-      SSH_RETRY_ATTEMPTS: "3"
-      SSH_RETRY_DELAY_SECONDS: "10"
-      STAGING_REPO_READ_KEY_FINGERPRINT: "SHA256:QEePUNkup9dvBt8Ar1sO8W9yeIv3BS+YlNdAb3FXFz0"
-
+      DEPLOY_REVISION: ${{ github.event.workflow_run.head_sha }}
+      DEPLOY_MODE: standard
+      CI_PARITY_RECEIPT_VERIFIED: "true"
+      CI_PARITY_RECEIPT_SHA: ${{ github.event.workflow_run.head_sha }}
+      CI_PARITY_RECEIPT_ARTIFACT_DIGEST: ${{ needs.policy.outputs.artifact_digest }}
+      CI_PARITY_RECEIPT_CONFIG_FINGERPRINT: ${{ needs.policy.outputs.config_fingerprint }}
+      CI_PARITY_RECEIPT_RUN_ID: ${{ github.event.workflow_run.id }}
+      CI_PARITY_RECEIPT_RUN_ATTEMPT: ${{ github.event.workflow_run.run_attempt }}
     steps:
-      - name: Checkout code
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
-          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.release_mode == 'mbti_runtime46_isolated' && inputs.expected_release_sha || github.sha }}
+          ref: ${{ github.event.workflow_run.head_sha }}
           fetch-depth: 0
-
-      - name: Revalidate exact isolated Runtime 46 candidate
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.release_mode == 'mbti_runtime46_isolated' }}
-        shell: bash
-        env:
-          EXPECTED_RELEASE_SHA: ${{ inputs.expected_release_sha }}
-          EXPECTED_BASE_SHA: ${{ inputs.expected_base_sha }}
-          OPERATOR_APPROVAL_PHRASE: ${{ inputs.operator_approval_phrase }}
-        run: |
-          set -euo pipefail
-          test "$(git rev-parse HEAD)" = "$EXPECTED_RELEASE_SHA"
-          test "$EXPECTED_BASE_SHA" = "$MBTI_RUNTIME46_PRODUCTION_BASE_SHA"
-          test "$(git rev-list --parents -n 1 HEAD | awk '{print NF}')" -eq 2
-          test "$(git rev-parse HEAD^)" = "$EXPECTED_BASE_SHA"
-          expected_phrase="I explicitly approve isolated MBTI-COMP-RUNTIME-46 staging deploy for SHA ${EXPECTED_RELEASE_SHA} based on production SHA ${EXPECTED_BASE_SHA}; no production deploy or CMS/DB/content write."
-          test "$OPERATOR_APPROVAL_PHRASE" = "$expected_phrase"
-          expected_files="$(printf '%s\n' \
-            backend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpPromote.php \
-            backend/app/Console/Commands/PersonalityMbtiCompRuntime46IntpRevision.php \
-            backend/app/Services/Cms/MbtiCompRuntime46IntpPromotionService.php \
-            backend/app/Services/Cms/MbtiFullCmsImportService.php \
-            backend/docs/seo/import-packages/mbti-comp-runtime-46-intp-revision-2026-07-19.json \
-            backend/tests/Feature/Console/PersonalityMbtiCompRuntime46IntpRevisionCommandTest.php)"
-          test "$(git diff --no-renames --name-only "$EXPECTED_BASE_SHA" HEAD | sort)" = "$expected_files"
-          test -z "$(git diff --no-renames --diff-filter=D --name-only "$EXPECTED_BASE_SHA" HEAD)"
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
+      - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
         with:
           php-version: '8.4'
           coverage: none
-
-      - name: Prepare Deployer timing producer
-        shell: bash
+      - name: Install pinned Deployer
         run: |
-          set -euo pipefail
-          timing_runner="$RUNNER_TEMP/deployer_task_timing.php"
-          timing_history="$RUNNER_TEMP/download_deployer_timing_history.sh"
-          timing_receipt="$GITHUB_WORKSPACE/artifacts/deployer-task-timing.json"
-          timing_summary="$GITHUB_WORKSPACE/artifacts/deployer-task-timing.md"
-          timing_history_dir="$GITHUB_WORKSPACE/artifacts/deployer-task-timing-history"
-          control_sha="$GITHUB_SHA"
-          git cat-file -e "${control_sha}^{commit}"
-          git show "${control_sha}:backend/scripts/deploy/deployer_task_timing.php" > "$timing_runner"
-          git show "${control_sha}:backend/scripts/deploy/download_deployer_timing_history.sh" > "$timing_history"
-          chmod +x "$timing_runner" "$timing_history"
-          php -l "$timing_runner"
-          bash -n "$timing_history"
-          mkdir -p "$GITHUB_WORKSPACE/artifacts" "$timing_history_dir"
-          deploy_task="deploy"
-          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ] && [ "${{ inputs.release_mode }}" = "mbti_runtime46_isolated" ]; then
-            deploy_task="deploy:code-only"
-          fi
-          deploy_revision="$(git rev-parse HEAD)"
-          php "$timing_runner" skip \
-            --receipt="$timing_receipt" \
-            --environment="$TARGET" \
-            --sha="$deploy_revision" \
-            --run-id="$GITHUB_RUN_ID" \
-            --run-attempt="$GITHUB_RUN_ATTEMPT" \
-            --task="$deploy_task"
-          {
-            echo "DEPLOY_TIMING_RUNNER=$timing_runner"
-            echo "DEPLOY_TIMING_HISTORY=$timing_history"
-            echo "DEPLOY_TIMING_RECEIPT=$timing_receipt"
-            echo "DEPLOY_TIMING_SUMMARY=$timing_summary"
-            echo "DEPLOY_TIMING_HISTORY_DIR=$timing_history_dir"
-          } >> "$GITHUB_ENV"
-
-      - name: Validate protected staging topology
-        shell: bash
-        run: |
-          set -euo pipefail
-          required=(
-            DEPLOY_USER DEPLOY_PORT DEPLOY_HOST DEPLOY_PATH
-            DEPLOY_USER_STG DEPLOY_PORT_STG DEPLOY_HOST_STG DEPLOY_PATH_STG
-            HEALTHCHECK_URL AUTH_GUEST_CHECK_URL OPS_HOST
-          )
-          for name in "${required[@]}"; do
-            if [ -z "${!name:-}" ]; then
-              echo "Protected staging environment secret ${name} is required." >&2
-              exit 2
-            fi
-          done
-          [[ "$DEPLOY_USER" =~ ^[A-Za-z0-9_][A-Za-z0-9_-]{0,31}$ ]]
-          [[ "$DEPLOY_PORT" =~ ^[0-9]{1,5}$ ]]
-          [ "$DEPLOY_PORT" -ge 1 ] && [ "$DEPLOY_PORT" -le 65535 ]
-          [[ "$DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
-          [[ "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]
-          [[ "$DEPLOY_PATH" != *".."* ]]
-          [[ "$HEALTHCHECK_URL" =~ ^https://[A-Za-z0-9.-]+/[^[:space:]]+$ ]]
-          [[ "$AUTH_GUEST_CHECK_URL" =~ ^https://[A-Za-z0-9.-]+/[^[:space:]]+$ ]]
-          [[ "$OPS_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
-          [ "$DEPLOY_USER" = "$DEPLOY_USER_STG" ]
-          [ "$DEPLOY_PORT" = "$DEPLOY_PORT_STG" ]
-          [ "$DEPLOY_HOST" = "$DEPLOY_HOST_STG" ]
-          [ "$DEPLOY_PATH" = "$DEPLOY_PATH_STG" ]
-          echo "Protected staging topology validation passed without disclosing values."
-
-      - name: Skip stale staging deploy
-        id: stale_guard
-        shell: bash
-        run: |
-          set -euo pipefail
-          echo "skip_deploy=false" >> "$GITHUB_OUTPUT"
-
-          if [ "$TARGET" != "staging" ] || [ "$GITHUB_EVENT_NAME" != "push" ]; then
-            exit 0
-          fi
-
-          git fetch --no-tags --depth=1 origin main:refs/remotes/origin/main
-          LATEST_MAIN_SHA="$(git rev-parse origin/main)"
-
-          if [ "$GITHUB_SHA" != "$LATEST_MAIN_SHA" ]; then
-            echo "Skip stale staging deploy: GITHUB_SHA=$GITHUB_SHA latest=$LATEST_MAIN_SHA"
-            echo "skip_deploy=true" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Install Deployer (pinned)
-        if: steps.stale_guard.outputs.skip_deploy != 'true'
-        shell: bash
-        run: |
-          set -euo pipefail
           curl -fsSL -o /tmp/dep.phar "https://github.com/deployphp/deployer/releases/download/v${DEPLOYER_VERSION}/deployer.phar"
           printf '%s  /tmp/dep.phar\n' "$DEPLOYER_SHA256" | sha256sum -c -
-          php /tmp/dep.phar --version
-
-      - name: Set up SSH agent without key metadata output
-        if: steps.stale_guard.outputs.skip_deploy != 'true'
-        shell: bash
+      - name: Configure staging SSH identities
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           STAGING_REPO_READ_SSH_KEY: ${{ secrets.STAGING_REPO_READ_SSH_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
         run: |
           set -euo pipefail
           test -n "$SSH_PRIVATE_KEY"
           test -n "$STAGING_REPO_READ_SSH_KEY"
-          host_identity="$RUNNER_TEMP/staging-host-identity"
-          install -m 600 /dev/null "$host_identity"
-          printf '%s\n' "$SSH_PRIVATE_KEY" > "$host_identity"
-          printf 'DEPLOY_IDENTITY_FILE_STG=%s\n' "$host_identity" >> "$GITHUB_ENV"
           install -d -m 700 ~/.ssh
-          {
-            printf 'Host %s\n' "$DEPLOY_HOST"
-            printf '  IdentityFile %s\n' "$host_identity"
-            printf '  IdentitiesOnly yes\n'
-            printf '  ForwardAgent no\n'
-          } > ~/.ssh/config
-          chmod 600 ~/.ssh/config
+          host_key="$RUNNER_TEMP/staging-host-key"
+          install -m 600 /dev/null "$host_key"
+          printf '%s\n' "$SSH_PRIVATE_KEY" > "$host_key"
+          printf 'DEPLOY_IDENTITY_FILE_STG=%s\n' "$host_key" >> "$GITHUB_ENV"
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
           eval "$(ssh-agent -s)" >/dev/null
-          printf 'SSH_AUTH_SOCK=%s\n' "$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
-          printf 'SSH_AGENT_PID=%s\n' "$SSH_AGENT_PID" >> "$GITHUB_ENV"
+          echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
+          echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
           printf '%s\n' "$STAGING_REPO_READ_SSH_KEY" | ssh-add - >/dev/null 2>&1
-          fingerprints="$(ssh-add -l -E sha256 | awk '{print $2}')"
-          test "$(wc -l <<<"$fingerprints" | tr -d ' ')" -eq 1
-          test "$(grep -Fxc "$STAGING_REPO_READ_KEY_FINGERPRINT" <<<"$fingerprints")" -eq 1
-          echo "Dedicated runner host identity and repository-read agent identity verified without disclosing key metadata."
+      - name: Deploy staging and run repository smoke chain
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$DEPLOY_SHA"
+          php /tmp/dep.phar deploy staging -f deploy.php --revision "$DEPLOY_SHA" \
+            -o release_name="trunk-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}" -o deploy_mode=standard --no-interaction
+      - name: Record staging timing
+        if: always()
+        run: |
+          jq -n --arg sha "$DEPLOY_SHA" --arg run "$GITHUB_RUN_ID" --arg at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            '{schema_version:"fermatmind.trunk-deploy-timing.v1",sha:$sha,phase:"staging",run_id:$run,completed_at:$at}' > staging-timing.json
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        if: always()
+        with:
+          name: trunk-staging-${{ github.event.workflow_run.head_sha }}
+          path: staging-timing.json
+          if-no-files-found: error
+          retention-days: 90
 
-      - name: Install pinned SSH known_hosts
-        if: steps.stale_guard.outputs.skip_deploy != 'true'
-        shell: bash
+  production:
+    name: Production exact-SHA activation, smoke, and LKG fallback
+    needs: [policy, staging]
+    if: needs.staging.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment: production
+    env:
+      TARGET: production
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+      DEPLOY_USER_PROD: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT_PROD: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST_PROD: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      DEPLOY_PATH_PROD: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+      HEALTHCHECK_URL: ${{ vars.PRODUCTION_HEALTHCHECK_URL }}
+      AUTH_GUEST_CHECK_URL: ${{ vars.PRODUCTION_AUTH_GUEST_CHECK_URL }}
+      OPS_HOST: ${{ vars.PRODUCTION_OPS_HOST }}
+      DEPLOY_REVISION: ${{ github.event.workflow_run.head_sha }}
+      DEPLOY_MODE: standard
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          fetch-depth: 0
+      - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
+        with:
+          php-version: '8.4'
+          coverage: none
+      - name: Install pinned Deployer
+        run: |
+          curl -fsSL -o /tmp/dep.phar "https://github.com/deployphp/deployer/releases/download/v${DEPLOYER_VERSION}/deployer.phar"
+          printf '%s  /tmp/dep.phar\n' "$DEPLOYER_SHA256" | sha256sum -c -
+      - name: Start SSH agent without key metadata output
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          eval "$(ssh-agent -s)" >/dev/null
+          echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
+          echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
+          printf '%s\n' "$SSH_PRIVATE_KEY" | ssh-add - >/dev/null 2>&1
+      - name: Install pinned known_hosts
         env:
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
         run: |
-          set -euo pipefail
-          test -n "$SSH_KNOWN_HOSTS"
-          mkdir -p ~/.ssh
+          install -d -m 700 ~/.ssh
           printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
           chmod 600 ~/.ssh/known_hosts
-
-      - name: SSH preflight
-        if: steps.stale_guard.outputs.skip_deploy != 'true'
-        shell: bash
+      - name: Refuse stale or non-forward production activation
+        id: baseline
         run: |
           set -euo pipefail
-
-          ssh_retry() {
-            local attempt
-            local rc
-            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
-            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
-
-            for attempt in $(seq 1 "$max_attempts"); do
-              set +e
-              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$@"
-              rc=$?
-              set -e
-
-              if [ "$rc" -eq 0 ]; then
-                return 0
-              fi
-
-              if [ "$rc" -ne 255 ]; then
-                return "$rc"
-              fi
-
-              if [ "$attempt" -ge "$max_attempts" ]; then
-                return "$rc"
-              fi
-
-              echo "SSH transport attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
-              sleep "$retry_delay"
-            done
-          }
-
-          ssh_retry true
-          ssh_retry "test -d '$DEPLOY_PATH'"
-          echo "SSH and deploy-root preflight passed without disclosing topology."
-
-      - name: Verify forwarded staging repository read access
-        if: steps.stale_guard.outputs.skip_deploy != 'true'
-        shell: bash
-        run: |
-          set -euo pipefail
-          ssh -A -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "GIT_TERMINAL_PROMPT=0 GIT_SSH_COMMAND='ssh -o BatchMode=yes -o IdentitiesOnly=no -o StrictHostKeyChecking=yes' git ls-remote git@github.com:fermatmind/fap-api.git HEAD >/dev/null"
-          echo "STAGING_REPO_READ_VERIFIED=true" >> "$GITHUB_ENV"
-          echo "Forwarded staging repository read access verified without persisting key material remotely."
-
-      - name: Queue reload capability preflight
-        if: steps.stale_guard.outputs.skip_deploy != 'true'
-        shell: bash
-        env:
-          RELEASE_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.release_mode || 'main' }}
-        run: |
-          set -euo pipefail
-          DEPLOY_MODE="standard"
-          if [ "$RELEASE_MODE" = "mbti_runtime46_isolated" ]; then
-            DEPLOY_MODE="code_only"
-          fi
-          export DEPLOY_MODE
-          php /tmp/dep.phar guard:queue-reload-capability "$TARGET" -f deploy.php \
-            --revision "$GITHUB_SHA" \
-            -o deploy_mode="$DEPLOY_MODE" \
-            --no-interaction
-
-      - name: Remote deploy lock guard
-        if: steps.stale_guard.outputs.skip_deploy != 'true'
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          ssh_retry() {
-            local attempt
-            local rc
-            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
-            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
-
-            for attempt in $(seq 1 "$max_attempts"); do
-              set +e
-              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$@"
-              rc=$?
-              set -e
-
-              if [ "$rc" -eq 0 ]; then
-                return 0
-              fi
-
-              if [ "$rc" -ne 255 ]; then
-                return "$rc"
-              fi
-
-              if [ "$attempt" -ge "$max_attempts" ]; then
-                return "$rc"
-              fi
-
-              echo "SSH transport attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
-              sleep "$retry_delay"
-            done
-          }
-
-          ssh_retry "TARGET='$TARGET' DEPLOY_PATH='$DEPLOY_PATH' bash -s" <<'REMOTE'
-          set -euo pipefail
-
-          LOCK="$DEPLOY_PATH/.dep/deploy.lock"
-          META="$DEPLOY_PATH/.dep/deploy.lock.meta.json"
-
-          if [ ! -f "$LOCK" ]; then
-            echo "deploy lock guard: no existing lock"
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+          active="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'")"
+          [[ "$active" =~ ^[0-9a-f]{40}$ ]]
+          git fetch --no-tags origin "$active"
+          if ! git merge-base --is-ancestor "$active" "$DEPLOY_SHA"; then
+            echo "Candidate is older than or divergent from active production; skip out-of-order activation."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-
-          LOCK_MTIME="$(stat -c %Y "$LOCK")"
-          NOW="$(date +%s)"
-          AGE_SECONDS="$((NOW - LOCK_MTIME))"
-
-          echo "deploy lock guard: existing lock detected age_seconds=$AGE_SECONDS"
-          [ -f "$META" ] && echo "deploy lock guard: ownership metadata present" || true
-
-          ACTIVE_PROCESSES="$(ps -eo pid,ppid,user,cmd \
-            | grep -E 'dep deploy|dep worker|deployer|composer install|artisan migrate|queue:reload-workers' \
-            | grep -v grep || true)"
-
-          if [ -n "$ACTIVE_PROCESSES" ]; then
-            echo "deploy lock guard: active deploy-like process exists"
-            exit 1
+          test "$active" != "$DEPLOY_SHA"
+          echo "skip=false" >> "$GITHUB_OUTPUT"
+          echo "active=$active" >> "$GITHUB_OUTPUT"
+      - name: Deploy once and automatically restore LKG after committed smoke failure
+        if: steps.baseline.outputs.skip != 'true'
+        run: |
+          set -euo pipefail
+          release="trunk-${DEPLOY_SHA:0:12}-${GITHUB_RUN_ID}"
+          set +e
+          php /tmp/dep.phar deploy production -f deploy.php --revision "$DEPLOY_SHA" \
+            -o release_name="$release" -o deploy_mode=standard -vvv --no-interaction
+          deploy_rc=$?
+          set -e
+          if [ "$deploy_rc" -eq 0 ]; then exit 0; fi
+          current="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'" || true)"
+          if [ "$current" = "$DEPLOY_SHA" ]; then
+            echo "Production activation committed but smoke failed; restoring previous LKG once."
+            export DEPLOY_SHA='${{ steps.baseline.outputs.active }}'
+            php /tmp/dep.phar rollback production -f deploy.php --no-interaction
+            restored="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'")"
+            test "$restored" = '${{ steps.baseline.outputs.active }}'
           fi
-
-          if [ "$TARGET" = "staging" ] && [ "$AGE_SECONDS" -ge 1800 ]; then
-            echo "deploy lock guard: removing stale staging lock"
-            rm -f "$LOCK" "$META"
-            exit 0
-          fi
-
-          echo "deploy lock guard: lock is not safe to remove automatically"
-          exit 1
-          REMOTE
-
-      - name: Deploy (Deployer)
-        if: steps.stale_guard.outputs.skip_deploy != 'true'
-        shell: bash
+          exit "$deploy_rc"
+      - name: Persist push-to-production timing receipt
+        if: always()
         env:
-          DEPLOYER_NO_INTERACTION: "1"
-          RELEASE_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.release_mode || 'main' }}
-          EXPECTED_RELEASE_SHA: ${{ inputs.expected_release_sha }}
+          PUSHED_AT: ${{ github.event.workflow_run.created_at }}
+          CI_COMPLETED_AT: ${{ github.event.workflow_run.updated_at }}
         run: |
-          set -euo pipefail
-          DEPLOY_TASK="deploy"
-          DEPLOY_REVISION="$GITHUB_SHA"
-          DEPLOY_MODE="standard"
-          if [ "$RELEASE_MODE" = "mbti_runtime46_isolated" ]; then
-            test "$GITHUB_EVENT_NAME" = "workflow_dispatch"
-            test "$(git rev-parse HEAD)" = "$EXPECTED_RELEASE_SHA"
-            DEPLOY_TASK="deploy:code-only"
-            DEPLOY_REVISION="$EXPECTED_RELEASE_SHA"
-            DEPLOY_MODE="code_only"
-          fi
-          export DEPLOY_REVISION DEPLOY_MODE
-          # shellcheck disable=SC2016
-          DEPLOY_LOCK_METADATA="$(php -r '
-          $serverUrl = getenv("GITHUB_SERVER_URL") ?: "https://github.com";
-          $repository = getenv("GITHUB_REPOSITORY") ?: "";
-          $runId = getenv("GITHUB_RUN_ID") ?: "";
-
-          echo json_encode([
-              "env" => getenv("TARGET") ?: "",
-              "run_id" => $runId,
-              "run_attempt" => getenv("GITHUB_RUN_ATTEMPT") ?: "",
-              "sha" => getenv("DEPLOY_REVISION") ?: getenv("GITHUB_SHA") ?: "",
-              "actor" => getenv("GITHUB_ACTOR") ?: "",
-              "workflow" => getenv("GITHUB_WORKFLOW") ?: "",
-              "repository" => $repository,
-              "workflow_url" => rtrim($serverUrl, "/")."/".$repository."/actions/runs/".$runId,
-              "deploy_path" => getenv("DEPLOY_PATH") ?: "",
-              "started_at" => gmdate("Y-m-d\TH:i:s\Z"),
-          ], JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
-          ')"
-          export DEPLOY_LOCK_METADATA
-          export DEPLOY_LOCK_RUN_ID="$GITHUB_RUN_ID"
-          export DEPLOY_LOCK_RUN_ATTEMPT="$GITHUB_RUN_ATTEMPT"
-          php "$DEPLOY_TIMING_RUNNER" run \
-            --receipt="$DEPLOY_TIMING_RECEIPT" \
-            --environment="$TARGET" \
-            --sha="$DEPLOY_REVISION" \
-            --run-id="$GITHUB_RUN_ID" \
-            --run-attempt="$GITHUB_RUN_ATTEMPT" \
-            --deployer-bin=/tmp/dep.phar \
-            --recipe=deploy.php \
-            --task="$DEPLOY_TASK" \
-            -- php /tmp/dep.phar "$DEPLOY_TASK" "$TARGET" -f deploy.php \
-              --revision "$DEPLOY_REVISION" \
-              -o release_name="${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
-              -o deploy_mode="$DEPLOY_MODE" \
-              --no-interaction
-
-      - name: Collect Deployer timing history
-        if: ${{ always() }}
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          "$DEPLOY_TIMING_HISTORY" "$TARGET" "$DEPLOY_TIMING_HISTORY_DIR" 20
-
-      - name: Write Deployer timing summary
-        if: ${{ always() }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          php "$DEPLOY_TIMING_RUNNER" summary \
-            --current="$DEPLOY_TIMING_RECEIPT" \
-            --history-dir="$DEPLOY_TIMING_HISTORY_DIR" \
-            --output="$DEPLOY_TIMING_SUMMARY" \
-            --window=20 \
-            --minimum-samples=3
-          cat "$DEPLOY_TIMING_SUMMARY" >> "$GITHUB_STEP_SUMMARY"
-
-      - name: Upload Deployer timing receipt
-        if: ${{ always() }}
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+          jq -n --arg sha "$DEPLOY_SHA" --arg pushed "$PUSHED_AT" --arg ci "$CI_COMPLETED_AT" \
+            --arg completed "$(date -u +%Y-%m-%dT%H:%M:%SZ)" --arg run "$GITHUB_RUN_ID" \
+            '{schema_version:"fermatmind.trunk-delivery-timing.v1",sha:$sha,pushed_at:$pushed,ci_completed_at:$ci,production_smoke_completed_at:$completed,deploy_run_id:$run}' \
+            > trunk-delivery-timing.json
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        if: always()
         with:
-          name: deployer-task-timing-staging
-          path: |
-            artifacts/deployer-task-timing.json
-            artifacts/deployer-task-timing.md
-          if-no-files-found: error
-          overwrite: true
-          retention-days: 90
-
-      - name: Healthcheck (post deploy)
-        if: steps.stale_guard.outputs.skip_deploy != 'true'
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          ssh_retry() {
-            local attempt
-            local rc
-            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
-            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
-
-            for attempt in $(seq 1 "$max_attempts"); do
-              set +e
-              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$@"
-              rc=$?
-              set -e
-
-              if [ "$rc" -eq 0 ]; then
-                return 0
-              fi
-
-              if [ "$rc" -ne 255 ]; then
-                return "$rc"
-              fi
-
-              if [ "$attempt" -ge "$max_attempts" ]; then
-                return "$rc"
-              fi
-
-              echo "SSH transport attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
-              sleep "$retry_delay"
-            done
-          }
-
-          echo "Staging healthcheck started."
-          HEALTHCHECK_HOST="$(echo "$HEALTHCHECK_URL" | awk -F[/:] '{print $4}')"
-          for _ in 1 2 3 4 5 6 7 8 9 10; do
-            if ssh_retry "curl -fsS --resolve '$HEALTHCHECK_HOST:443:127.0.0.1' 'https://$HEALTHCHECK_HOST/api/healthz' | jq -e '.ok==true'" >/dev/null; then
-              exit 0
-            fi
-            sleep 3
-          done
-          echo "Healthcheck failed"
-          exit 1
-
-      - name: Contract check (auth/guest post deploy)
-        if: steps.stale_guard.outputs.skip_deploy != 'true'
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          ssh_retry() {
-            local attempt
-            local rc
-            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
-            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
-
-            for attempt in $(seq 1 "$max_attempts"); do
-              set +e
-              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$@"
-              rc=$?
-              set -e
-
-              if [ "$rc" -eq 0 ]; then
-                return 0
-              fi
-
-              if [ "$rc" -ne 255 ]; then
-                return "$rc"
-              fi
-
-              if [ "$attempt" -ge "$max_attempts" ]; then
-                return "$rc"
-              fi
-
-              echo "SSH transport attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
-              sleep "$retry_delay"
-            done
-          }
-
-          echo "Staging auth guest contract check started."
-          AUTH_HOST="$(echo "$AUTH_GUEST_CHECK_URL" | awk -F[/:] '{print $4}')"
-          for _ in 1 2 3 4 5; do
-            if ssh_retry "curl -fsS --resolve '$AUTH_HOST:443:127.0.0.1' -H 'Content-Type: application/json' -X POST 'https://$AUTH_HOST/api/v0.3/auth/guest' --data '{\"anon_id\":\"deploy_contract_probe\"}' | jq -e '.ok==true and .anon_id==\"deploy_contract_probe\"'" >/dev/null; then
-              exit 0
-            fi
-            sleep 2
-          done
-          echo "Auth guest contract check failed"
-          exit 1
-
-      - name: Ops entry smoke (post deploy)
-        if: steps.stale_guard.outputs.skip_deploy != 'true'
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          test "$TARGET" = "staging"
-          ASSERT_ROOT_REDIRECT="no"
-
-          ROOT_URL="https://${OPS_HOST}/"
-          ADMIN_URL="https://${OPS_HOST}/admin"
-          OPS_URL="https://${OPS_HOST}/ops"
-          LOGIN_URL="https://${OPS_HOST}/ops/login"
-
-          ssh_remote() {
-            local attempt
-            local rc
-            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
-            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
-
-            for attempt in $(seq 1 "$max_attempts"); do
-              set +e
-              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$1"
-              rc=$?
-              set -e
-
-              if [ "$rc" -eq 0 ]; then
-                return 0
-              fi
-
-              if [ "$rc" -ne 255 ]; then
-                return "$rc"
-              fi
-
-              if [ "$attempt" -ge "$max_attempts" ]; then
-                return "$rc"
-              fi
-
-              echo "SSH transport attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
-              sleep "$retry_delay"
-            done
-          }
-
-          fetch_headers() {
-            local url="$1"
-            ssh_remote "curl -sSI --max-redirs 0 --resolve '${OPS_HOST}:443:127.0.0.1' '${url}'"
-          }
-
-          assert_redirect() {
-            local url="$1"
-            local expected_relative="$2"
-            local headers
-            local location
-            headers="$(fetch_headers "$url")"
-            printf '%s\n' "$headers" | grep -Eq '^HTTP/[0-9.]+ 30[12] '
-            location="$(printf '%s\n' "$headers" | tr -d '\r' | awk 'BEGIN { IGNORECASE = 1 } /^Location:/ { sub(/^Location:[[:space:]]*/, "", $0); print; exit }')"
-            [ -n "$location" ]
-
-            case "$location" in
-              "$expected_relative"|https://"${OPS_HOST}${expected_relative}")
-                return 0
-                ;;
-            esac
-
-            return 1
-          }
-
-          assert_200() {
-            local url="$1"
-            local headers
-            headers="$(fetch_headers "$url")"
-            printf '%s\n' "$headers" | grep -Eq '^HTTP/[0-9.]+ 200 '
-          }
-
-          retry() {
-            local label="$1"
-            local attempts="$2"
-            shift 2
-
-            for _ in $(seq 1 "$attempts"); do
-              if "$@"; then
-                return 0
-              fi
-              sleep 2
-            done
-
-            echo "${label} failed"
-            return 1
-          }
-
-          if [ "$ASSERT_ROOT_REDIRECT" = "yes" ]; then
-            echo "Ops root smoke started."
-            retry "Ops root redirect" 5 assert_redirect "$ROOT_URL" "/ops"
-
-            echo "Ops admin alias smoke started."
-            retry "Ops admin redirect" 5 assert_redirect "$ADMIN_URL" "/ops"
-          fi
-
-          echo "Ops panel smoke started."
-          retry "Ops panel redirect" 5 assert_redirect "$OPS_URL" "/ops/login"
-
-          echo "Ops login smoke started."
-          retry "Ops login 200" 5 assert_200 "$LOGIN_URL"
-
-      - name: Ops asset smoke (post deploy)
-        if: steps.stale_guard.outputs.skip_deploy != 'true'
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          test "$TARGET" = "staging"
-          smoke_runner="$RUNNER_TEMP/verify_ops_asset_smoke.sh"
-          smoke_remote="$RUNNER_TEMP/ops_asset_smoke_remote.sh"
-          control_sha="$GITHUB_SHA"
-          git cat-file -e "${control_sha}^{commit}"
-          git show "${control_sha}:backend/scripts/deploy/verify_ops_asset_smoke.sh" > "$smoke_runner"
-          git show "${control_sha}:backend/scripts/deploy/ops_asset_smoke_remote.sh" > "$smoke_remote"
-          chmod +x "$smoke_runner" "$smoke_remote"
-          bash -n "$smoke_runner"
-          bash -n "$smoke_remote"
-          bash "$smoke_runner" "$smoke_remote" "$GITHUB_WORKSPACE/artifacts/ops-asset-smoke.json"
-
-      - name: Emit exact isolated Runtime 46 staging receipt
-        if: ${{ steps.stale_guard.outputs.skip_deploy != 'true' && github.event_name == 'workflow_dispatch' && inputs.release_mode == 'mbti_runtime46_isolated' }}
-        shell: bash
-        env:
-          EXPECTED_RELEASE_SHA: ${{ inputs.expected_release_sha }}
-          EXPECTED_BASE_SHA: ${{ inputs.expected_base_sha }}
-        run: |
-          set -euo pipefail
-          remote_revision="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\\r\\n' < '$DEPLOY_PATH/current/REVISION'")"
-          test "$remote_revision" = "$EXPECTED_RELEASE_SHA"
-          mkdir -p artifacts
-          patch_sha256="$(git diff --binary "$EXPECTED_BASE_SHA" HEAD | sha256sum | awk '{print $1}')"
-          jq -n \
-            --arg schema_version "mbti-runtime46-isolated-staging.v1" \
-            --arg candidate_sha "$EXPECTED_RELEASE_SHA" \
-            --arg base_sha "$EXPECTED_BASE_SHA" \
-            --arg remote_revision "$remote_revision" \
-            --arg patch_sha256 "$patch_sha256" \
-            '{
-              schema_version: $schema_version,
-              candidate_sha: $candidate_sha,
-              base_sha: $base_sha,
-              remote_revision: $remote_revision,
-              patch_sha256: $patch_sha256,
-              record_scope: "intp-a-vs-intp-t",
-              cms_or_db_write_attempted: false,
-              production_deploy_attempted: false,
-              publication_or_indexability_changed: false,
-              sitemap_llms_search_attempted: false
-            }' > artifacts/isolated-staging-receipt.json
-
-      - name: Upload exact isolated Runtime 46 staging receipt
-        if: ${{ steps.stale_guard.outputs.skip_deploy != 'true' && github.event_name == 'workflow_dispatch' && inputs.release_mode == 'mbti_runtime46_isolated' }}
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
-        with:
-          name: mbti-runtime46-isolated-staging-${{ github.run_id }}
-          path: artifacts/isolated-staging-receipt.json
+          name: trunk-production-${{ github.event.workflow_run.head_sha }}
+          path: trunk-delivery-timing.json
           if-no-files-found: error
           retention-days: 90
 
-      - name: Write staging operation owner receipt
-        if: ${{ success() && steps.stale_guard.outputs.skip_deploy != 'true' }}
-        shell: bash
-        env:
-          OPERATION_KEY: ${{ needs.operation-gate.outputs.operation_key }}
-        run: |
-          set -euo pipefail
-          test "${STAGING_REPO_READ_VERIFIED:-}" = "true"
-          mkdir -p artifacts/staging-operation
-          jq -n --arg key "$OPERATION_KEY" --arg sha "$GITHUB_SHA" --arg fingerprint "$STAGING_REPO_READ_KEY_FINGERPRINT" --argjson run "$GITHUB_RUN_ID" --argjson attempt "$GITHUB_RUN_ATTEMPT" \
-            '{schema:"fermatmind.staging_operation_receipt.v1",operation_key:$key,source_sha:$sha,workflow_run_id:$run,workflow_run_attempt:$attempt,result:"success",environment:"staging",repository_read_verified:true,repository_read_key_fingerprint:$fingerprint,agent_forwarded:true,remote_private_key_persisted:false}' \
-            > artifacts/staging-operation/receipt.json
-
-      - name: Upload staging operation owner receipt
-        if: ${{ success() && steps.stale_guard.outputs.skip_deploy != 'true' }}
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
-        with:
-          name: backend-staging-operation-${{ needs.operation-gate.outputs.operation_key }}-${{ github.run_id }}-${{ github.run_attempt }}
-          path: artifacts/staging-operation/receipt.json
-          if-no-files-found: error
-          retention-days: 30
-
-      - name: Stop SSH agent
-        if: ${{ always() && steps.stale_guard.outputs.skip_deploy != 'true' }}
-        shell: bash
-        run: |
-          if [ -n "${SSH_AGENT_PID:-}" ]; then
-            ssh-agent -k >/dev/null 2>&1 || true
-          fi
+  docs-only:
+    name: Docs-only deployment skip receipt
+    needs: policy
+    if: needs.policy.outputs.deploy != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Validated docs/rules/tests-only SHA; application deployment intentionally skipped."

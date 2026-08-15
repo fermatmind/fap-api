@@ -7,7 +7,7 @@ description: Use for fap-api scope control when Codex must verify changed files,
 Guard fap-api work so Codex changes only the declared files and behavior for the current task.
 
 ## When to use
-- Use before editing, staging, committing, pushing, or preparing a PR in fap-api.
+- Use before editing, staging, committing, or direct-pushing `main` in fap-api.
 - Use when a dirty worktree, broad diff, generated artifact, or accidental source change may affect scope.
 
 ## When not to use
@@ -19,19 +19,18 @@ Guard fap-api work so Codex changes only the declared files and behavior for the
 - Do not stage unrelated dirty files.
 - Do not process Informational findings unless explicitly requested.
 - Do not expose exploit-ready details in public PR titles/bodies.
-- Do not merge unless required checks pass and scope is clean.
+- Do not publish unless focused checks pass and scope is clean; production requires the exact-SHA CI/deploy chain.
 - Do not close security findings unless source/test evidence proves fixed.
 - Stop if active Critical/High/Medium appears during Low/Informational work.
 - Do not weaken previously fixed security boundaries.
-- Required checks for fap-api are hygiene, verify-mbti-v2, and verify-mbti-legacy.
-- Deploy Application must remain green for deploy or runtime-impacting PRs.
+- `ci.yml` classification and focused checks must pass for the exact SHA; deployable paths must complete `deploy.yml`.
 
 ## Standard workflow
 1. Capture the declared scope in concrete paths and behavior.
 2. Inspect current branch, upstream, and `git status --short`.
 3. Compare changed files against the declared scope before staging.
 4. Treat generated artifacts, package files, workflows, configs, routes, controllers, and services as out of scope unless explicitly named.
-5. Stage only path-limited files after all checks pass.
+5. Stage only path-limited files after all checks pass, then push `HEAD:main` from the isolated worktree.
 6. Report any unrelated dirty files without touching them.
 
 ## Acceptance commands
