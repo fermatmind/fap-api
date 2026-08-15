@@ -79,33 +79,6 @@ final class CareerCurrentAuthorityExporterTest extends TestCase
         );
     }
 
-    public function test_it_hashes_the_latest_valid_runtime_projection_for_binding(): void
-    {
-        $root = sys_get_temp_dir().'/career-current-exporter-'.bin2hex(random_bytes(8));
-        $generation = $root.'/storage/app/private/career_runtime_publish_projection/generation-a';
-        self::assertTrue(mkdir($generation, 0700, true));
-        $projection = "{\"schema_version\":\"career.runtime-publish-projection.v1\"}\n";
-        $path = $generation.'/career-runtime-publish-projection.json';
-        self::assertSame(strlen($projection), file_put_contents($path, $projection));
-
-        try {
-            $method = (new ReflectionClass(CareerCurrentAuthorityExporter::class))
-                ->getMethod('currentRuntimeProjectionSha256');
-            self::assertSame(
-                hash('sha256', $projection),
-                $method->invoke($this->exporter(), $root),
-            );
-        } finally {
-            unlink($path);
-            rmdir($generation);
-            rmdir(dirname($generation));
-            rmdir(dirname($generation, 2));
-            rmdir(dirname($generation, 3));
-            rmdir(dirname($generation, 4));
-            rmdir(dirname($generation, 5));
-        }
-    }
-
     private function exporter(): CareerCurrentAuthorityExporter
     {
         return (new ReflectionClass(CareerCurrentAuthorityExporter::class))->newInstanceWithoutConstructor();

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Career\Display;
 
-use App\Domain\GreenfieldBaseline\GreenfieldBaselineCatalog;
+use App\Domain\Career\Publish\CareerGenerationAuthorityLoader;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
 use App\Services\Career\Bundles\CareerJobDisplaySurfaceBuilder;
@@ -93,19 +93,20 @@ final class CareerCurrentAuthorityExporter
         private readonly CareerJobDisplaySurfaceBuilder $surfaceBuilder,
         private readonly PublicCareerAuthorityResponseCache $responseCache,
         private readonly CareerJobDetailReaderSafeReviewProjector $readerSafeProjector,
+        private readonly CareerGenerationAuthorityLoader $generationAuthority,
     ) {}
 
     /**
      * @return array{assets_jsonl:string,manifest:array<string,mixed>,receipt:array<string,mixed>}
      */
-    public function export(string $backendRoot, array $binding): array
+    public function export(array $binding): array
     {
         $expectedProjectionSha256 = $binding['expected_projection_sha256'] ?? null;
         if (! is_string($expectedProjectionSha256)
             || preg_match('/\A[0-9a-f]{64}\z/', $expectedProjectionSha256) !== 1) {
             throw new CareerCurrentAuthorityExportFailure('CAREER_RUNTIME_PROJECTION_BINDING_INVALID');
         }
-        $projectionSha256 = $this->currentRuntimeProjectionSha256($backendRoot);
+        $projectionSha256 = $this->currentRuntimeProjectionSha256();
         if (! hash_equals($expectedProjectionSha256, $projectionSha256)) {
             throw new CareerCurrentAuthorityExportFailure('CAREER_RUNTIME_PROJECTION_SHA256_MISMATCH');
         }
@@ -447,26 +448,19 @@ final class CareerCurrentAuthorityExporter
         }
     }
 
-    private function currentRuntimeProjectionSha256(string $backendRoot): string
+    private function currentRuntimeProjectionSha256(): string
     {
-        $root = rtrim($backendRoot, '/').'/storage/app/private/career_runtime_publish_projection';
-        $candidates = [];
-        foreach (glob($root.'/*/'.GreenfieldBaselineCatalog::PROJECTION_FILENAME) ?: [] as $path) {
-            if (is_file($path)) {
-                $candidates[] = ['path' => $path, 'mtime' => filemtime($path) ?: 0];
-            }
+        try {
+            $authority = $this->generationAuthority->loadStrict();
+        } catch (Throwable) {
+            throw new CareerCurrentAuthorityExportFailure('CAREER_ACTIVE_GENERATION_PROJECTION_UNAVAILABLE');
         }
-        usort($candidates, static fn (array $left, array $right): int => ($right['mtime'] <=> $left['mtime'])
-            ?: strcmp((string) $right['path'], (string) $left['path']));
-        if ($candidates === []) {
-            throw new CareerCurrentAuthorityExportFailure('CAREER_RUNTIME_PROJECTION_MISSING');
-        }
-        $bytes = file_get_contents((string) $candidates[0]['path']);
-        if (! is_string($bytes) || ! is_array(json_decode($bytes, true))) {
-            throw new CareerCurrentAuthorityExportFailure('CAREER_RUNTIME_PROJECTION_INVALID');
+        $sha256 = data_get($authority, 'pointer.artifacts.projection.sha256');
+        if (! is_string($sha256) || preg_match('/\A[0-9a-f]{64}\z/', $sha256) !== 1) {
+            throw new CareerCurrentAuthorityExportFailure('CAREER_ACTIVE_GENERATION_PROJECTION_SHA256_INVALID');
         }
 
-        return hash('sha256', $bytes);
+        return $sha256;
     }
 
     /** @param array<string,string> $projections */

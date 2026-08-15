@@ -37,7 +37,7 @@ try {
 
     /** @var CareerCurrentAuthorityExporter $exporter */
     $exporter = $app->make(CareerCurrentAuthorityExporter::class);
-    $documents = $exporter->export($backendRoot, [
+    $documents = $exporter->export([
         'release_sha' => $releaseSha,
         'expected_projection_sha256' => $expectedProjectionSha256,
         'release_name_sha256' => hash('sha256', $releaseName),
