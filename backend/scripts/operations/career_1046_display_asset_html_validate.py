@@ -91,7 +91,7 @@ def main() -> int:
         "career-display-faq",
         "career-ai-description-block",
         "career-path-block",
-        "career-display-cta",
+        "career-decision-action-block",
     }
     if not required.issubset(parser.test_ids):
         print("web_modules")

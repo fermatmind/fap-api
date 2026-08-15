@@ -73,6 +73,10 @@ validate_target() {
   fi
 
   if ! jq -e --arg slug "$slug" '
+    def nonempty_content:
+      (type == "string" and length > 0)
+      or (type == "array" and length > 0)
+      or (type == "object" and length > 0);
     .identity.canonical_slug == $slug
     and .display_surface_v1.surface_version == "display.surface.v1"
     and .display_surface_v1.asset_version == "v4.2"
@@ -88,8 +92,8 @@ validate_target() {
     ]
     and (.display_surface_v1.page.content.hero | type) == "object"
     and (.display_surface_v1.page.content.fermat_decision_card | type) == "object"
-    and (.display_surface_v1.page.content.definition_block | type) == "object"
-    and (.display_surface_v1.page.content.responsibilities_block | type) == "object"
+    and (.display_surface_v1.page.content.definition_block | nonempty_content)
+    and (.display_surface_v1.page.content.responsibilities_block | nonempty_content)
     and (.display_surface_v1.page.content.career_snapshot_primary_locale | type) == "object"
     and (.display_surface_v1.page.content.faq_block | type) == "object"
     and (.display_surface_v1.page.content.career_ai_description_block.heading | strings | length) > 0

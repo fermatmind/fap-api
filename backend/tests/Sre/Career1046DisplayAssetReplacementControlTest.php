@@ -17,7 +17,7 @@ final class Career1046DisplayAssetReplacementControlTest extends TestCase
         $testIds = [
             'career-display-surface', 'career-display-hero', 'definition-block',
             'responsibilities-block', 'career-snapshot-primary', 'career-display-faq',
-            'career-ai-description-block', 'career-path-block', 'career-display-cta',
+            'career-ai-description-block', 'career-path-block', 'career-decision-action-block',
         ];
         $modules = implode('', array_map(
             static fn (string $id): string => '<section data-testid="'.$id.'">Rendered</section>',
@@ -140,6 +140,11 @@ final class Career1046DisplayAssetReplacementControlTest extends TestCase
         self::assertStringContainsString('jobDetailVersionPayloadKey', $cache);
 
         self::assertStringNotContainsString('--retry-all-errors', $validator);
+        self::assertStringContainsString('def nonempty_content:', $validator);
+        self::assertStringContainsString('definition_block | nonempty_content', $validator);
+        self::assertStringContainsString('responsibilities_block | nonempty_content', $validator);
+        self::assertStringNotContainsString('definition_block | type) == "object"', $validator);
+        self::assertStringNotContainsString('responsibilities_block | type) == "object"', $validator);
         self::assertStringContainsString('api_ai_aggregate_hash', $validator);
         self::assertStringContainsString('category_counts', $validator);
         self::assertStringContainsString('samples:', $validator);
