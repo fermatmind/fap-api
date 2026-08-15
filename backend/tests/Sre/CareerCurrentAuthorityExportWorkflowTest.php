@@ -17,7 +17,7 @@ final class CareerCurrentAuthorityExportWorkflowTest extends TestCase
         foreach ([
             '- career-current-authority',
             'operation_key:',
-            'run-name: Backend Greenfield Current Baseline ${{ inputs.mode }} [op:${{ inputs.operation_key }}]',
+            "run-name: Backend Greenfield Current Baseline \${{ inputs.mode }}\${{ inputs.mode == 'career-current-authority' && format(' [op:{0}]', inputs.operation_key) || '' }}",
             'group: deploy-${{ github.repository }}-production',
             'Validate Career Current inputs before owner election',
             'Elect Career Current export owner before Environment access',
@@ -59,6 +59,7 @@ final class CareerCurrentAuthorityExportWorkflowTest extends TestCase
             'zero_write_confirmed: false',
             'if: always() && inputs.mode == \'career-current-authority\'',
             'retention-days: 3',
+            'test -z "$OPERATION_KEY"',
         ] as $required) {
             self::assertStringContainsString($required, $workflow);
         }

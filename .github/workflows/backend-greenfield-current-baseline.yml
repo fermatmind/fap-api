@@ -1,5 +1,5 @@
 name: Backend Greenfield Current Baseline
-run-name: Backend Greenfield Current Baseline ${{ inputs.mode }} [op:${{ inputs.operation_key }}]
+run-name: Backend Greenfield Current Baseline ${{ inputs.mode }}${{ inputs.mode == 'career-current-authority' && format(' [op:{0}]', inputs.operation_key) || '' }}
 
 on:
   workflow_dispatch:
@@ -94,12 +94,14 @@ jobs:
         env:
           MODE: ${{ inputs.mode }}
           GATE_DECISION: ${{ steps.gate.outputs.decision }}
+          OPERATION_KEY: ${{ inputs.operation_key }}
         run: |
           set -euo pipefail
           if [ "$MODE" = "career-current-authority" ]; then
             test -n "$GATE_DECISION"
             echo "decision=$GATE_DECISION" >> "$GITHUB_OUTPUT"
           else
+            test -z "$OPERATION_KEY"
             echo "decision=execute" >> "$GITHUB_OUTPUT"
           fi
 
