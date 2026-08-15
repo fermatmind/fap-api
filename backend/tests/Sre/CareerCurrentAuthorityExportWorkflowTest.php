@@ -70,13 +70,18 @@ final class CareerCurrentAuthorityExportWorkflowTest extends TestCase
 
         self::assertGreaterThan(
             strpos($workflow, 'jq -e -s \'length == 1046'),
-            strpos($workflow, 'cp "$remote_receipt" "$dir/receipt.json"'),
+            strrpos($workflow, 'cp "$remote_receipt" "$dir/receipt.json"'),
             'The PASS receipt must only become publishable after every runner-side integrity check passes.',
         );
         self::assertStringContainsString(
             'if ! jq -e',
             $workflow,
             'The failure finalizer must preserve an already-sanitized domain failure receipt.',
+        );
+        self::assertSame(
+            2,
+            substr_count($workflow, 'cp "$remote_receipt" "$dir/receipt.json"'),
+            'Both the validated success receipt and a sanitized remote failure receipt must be retained.',
         );
     }
 

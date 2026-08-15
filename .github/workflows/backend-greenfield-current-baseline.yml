@@ -272,6 +272,7 @@ jobs:
             if jq -e '.status == "FAIL_CURRENT_AUTHORITY_EXPORT"' "$remote_receipt" >/dev/null; then
               safe_code="$(jq -er '.safe_error_code | select(test("^[A-Z0-9_]+$"))' "$remote_receipt" 2>/dev/null || true)"
               test -n "$safe_code" || safe_code="CAREER_CURRENT_REMOTE_EXPORT_FAILED"
+              cp "$remote_receipt" "$dir/receipt.json"
             else
               safe_code="CAREER_CURRENT_REMOTE_STREAM_INTERRUPTED"
               jq -n --arg safe_error_code "$safe_code" '{
