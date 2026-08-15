@@ -196,6 +196,8 @@ jobs:
             and .package.numeric_rating_statement_residue_count == 0
             and .authority.target_count == 1046
             and .authority.component_order_after_count == 1046
+            and .authority.occupation_crosswalk_after_count == 24
+            and (.authority.occupation_crosswalk_set_sha256 | test("^[0-9a-f]{64}$"))
             and .cache.ready_active_count == 2092
             and .cache.component_26_count == 2092
             and .cache.content_match_count == 2092
@@ -213,6 +215,7 @@ jobs:
               and .writes_committed == true
               and .write_counts.database_update_count == 1034
               and .write_counts.database_insert_count == 12
+              and .write_counts.occupation_crosswalk_insert_count == 24
               and .write_counts.cache_pointer_activation_count == 2092
             end)
           ' "$receipt" >/dev/null

@@ -46,6 +46,7 @@ $receipt = [
     'write_counts' => [
         'database_update_count' => 0,
         'database_insert_count' => 0,
+        'occupation_crosswalk_insert_count' => 0,
         'database_delete_count' => 0,
         'cache_candidate_write_count' => 0,
         'cache_pointer_activation_count' => 0,
@@ -116,6 +117,7 @@ try {
         ? array_sum($result['write_counts']) === 0
         : (($result['write_counts']['database_update_count'] ?? null) === 1034
             && ($result['write_counts']['database_insert_count'] ?? null) === 12
+            && ($result['write_counts']['occupation_crosswalk_insert_count'] ?? null) === 24
             && ($result['write_counts']['cache_pointer_activation_count'] ?? null) === 2092);
     if (($result['package']['career_count'] ?? null) !== 1046
         || ($result['package']['locale_row_count'] ?? null) !== 2092
@@ -124,6 +126,8 @@ try {
         || ($result['missing_base_package']['asset_count'] ?? null) !== 12
         || ($result['authority']['target_count'] ?? null) !== 1046
         || ($result['authority']['component_order_after_count'] ?? null) !== 1046
+        || ($result['authority']['occupation_crosswalk_after_count'] ?? null) !== 24
+        || preg_match('/\A[0-9a-f]{64}\z/', (string) ($result['authority']['occupation_crosswalk_set_sha256'] ?? '')) !== 1
         || ($result['cache']['ready_active_count'] ?? null) !== 2092
         || ($result['cache']['component_26_count'] ?? null) !== 2092
         || ($result['cache']['content_match_count'] ?? null) !== 2092

@@ -122,6 +122,12 @@ final class Career1046DisplayAssetReplacementControlTest extends TestCase
         self::assertStringContainsString('assertActiveCacheReadback', $service);
         self::assertStringContainsString('restorePreparedJobDetailExposurePointers', $service);
         self::assertStringContainsString('restoreDatabaseRows', $service);
+        self::assertStringContainsString('EXPECTED_CROSSWALK_INSERTS = 24', $service);
+        self::assertStringContainsString('occupationCrosswalkPlan', $service);
+        self::assertStringContainsString('assertOccupationCrosswalkReadback', $service);
+        self::assertStringContainsString('DATABASE_COMPENSATION_CROSSWALK_DELETE_FAILED', $service);
+        self::assertStringContainsString('.write_counts.occupation_crosswalk_insert_count == 24', $workflow);
+        self::assertStringContainsString('.authority.occupation_crosswalk_after_count == 24', $workflow);
         self::assertStringContainsString('AI_NUMERIC_RATING_RESIDUE', $service);
         self::assertStringContainsString("'replacement_lineage'", $service);
         self::assertStringContainsString("'workbook_sha256'", $service);
