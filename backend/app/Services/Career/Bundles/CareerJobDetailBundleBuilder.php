@@ -187,7 +187,16 @@ final class CareerJobDetailBundleBuilder
         $lifecycleOperational = $this->lifecycleOperationalSummaryService->buildForSlug($subjectSlug);
         $conversionClosure = $conversionClosureOverride
             ?? $this->conversionClosureBuilder->buildForSubjectSlug($subjectSlug);
-        $searchEntry = $this->searchEntryTierResolver->resolve($subjectSlug);
+        $searchEntry = $this->searchEntryTierResolver->resolve(
+            slug: $subjectSlug,
+            publicVisibility: true,
+            robotsIndexable: $this->projectionItemAllowsIndexing($exposureProjectionItem)
+                || $this->runtimeProjectionVisibilityAllowsIndexing($subjectSlug),
+            reviewState: (string) ($trustManifest?->reviewer_status ?? 'unknown'),
+            lastReviewedAt: optional($trustManifest?->reviewed_at)->toISOString(),
+            publishTrack: null,
+            contentQualityTier: null,
+        );
 
         return new CareerJobDetailBundle(
             identity: [

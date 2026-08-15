@@ -90,6 +90,15 @@ final class CareerJobDetailBundleBuilderTest extends TestCase
         $this->assertArrayHasKey('metadata_contract_version', (array) data_get($payload, 'seo_contract'));
         $this->assertArrayHasKey('compiler_version', (array) data_get($payload, 'provenance_meta'));
         $this->assertSame($conversionClosureOverride, $payload['conversion_closure']);
+        $this->assertSame('ineligible', $payload['search_entry_tier']);
+        $this->assertSame('approved', data_get($payload, 'search_entry_authority.review_state'));
+        $this->assertTrue((bool) data_get($payload, 'search_entry_authority.public_visibility'));
+        $this->assertTrue((bool) data_get($payload, 'search_entry_authority.robots_indexable'));
+        $this->assertSame('unknown', data_get($payload, 'search_entry_authority.content_quality_tier'));
+        $this->assertContains(
+            'content_quality_tier_unknown',
+            (array) data_get($payload, 'search_entry_authority.reason_codes'),
+        );
     }
 
     public function test_it_returns_null_when_only_mutable_occupation_exists_without_compiled_authority_snapshot(): void

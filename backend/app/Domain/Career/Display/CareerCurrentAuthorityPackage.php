@@ -38,6 +38,8 @@ final class CareerCurrentAuthorityPackage
 
     public const LOCALES = ['en', 'zh-CN'];
 
+    private const MANUAL_HOLD_SLUG = 'software-developers';
+
     private const EXPORTED_FIELDS = [
         'surface_version',
         'asset_version',
@@ -169,6 +171,10 @@ final class CareerCurrentAuthorityPackage
             fclose($handle);
         }
 
+        if (isset($rows[self::MANUAL_HOLD_SLUG])) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_MANUAL_HOLD_INCLUDED');
+        }
+
         if (count($rows) !== self::EXPECTED_CAREERS
             || $localePageCount !== self::EXPECTED_LOCALE_PAGES
             || $numericRatingResidueCount !== 0) {
@@ -243,6 +249,7 @@ final class CareerCurrentAuthorityPackage
             || self::value($manifest, 'structural_contract.asset_type') !== self::ASSET_TYPE
             || self::value($manifest, 'structural_contract.status') !== self::READY_STATUS
             || self::value($manifest, 'structural_contract.component_order') !== CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER
+            || self::value($manifest, 'structural_contract.public_projection_excluded_manual_hold_slugs') !== [self::MANUAL_HOLD_SLUG]
             || self::value($manifest, 'export_evidence.artifact_id') !== 9248668854
             || self::value($manifest, 'export_evidence.artifact_digest') !== 'sha256:2cfb298b90a1c8443254686d659e8bbf78c918e0fbb29960ba007603384223bc'
             || self::value($manifest, 'export_evidence.exporter_result') !== 'pass'
