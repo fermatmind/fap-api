@@ -21,7 +21,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: career-1046-display-asset-replacement-production
+  group: deploy-${{ github.repository }}-production
   cancel-in-progress: false
 
 jobs:

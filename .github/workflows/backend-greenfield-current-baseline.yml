@@ -229,7 +229,7 @@ jobs:
           printf -v q_projection '%q' "$EXPECTED_PROJECTION_SHA256"
           printf -v q_run '%q' "$GITHUB_RUN_ID"
           printf -v q_attempt '%q' "$GITHUB_RUN_ATTEMPT"
-          remote="set -euo pipefail; current=\$(readlink -f $q_path/current); test -n \"\$current\"; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_release; test ! -e $q_path/.dep/deploy.lock; release_name=\$(basename \"\$current\"); sudo -n -u www-data -- env CAREER_CURRENT_EXPORT_EXECUTE=1 CAREER_CURRENT_EXPORT_BACKEND_ROOT=\"\$current/backend\" CAREER_CURRENT_EXPORT_RELEASE_SHA=$q_release CAREER_CURRENT_EXPORT_EXPECTED_PROJECTION_SHA256=$q_projection CAREER_CURRENT_EXPORT_RELEASE_NAME=\"\$release_name\" CAREER_CURRENT_EXPORT_WORKFLOW_RUN_ID=$q_run CAREER_CURRENT_EXPORT_WORKFLOW_RUN_ATTEMPT=$q_attempt php"
+          remote="set -euo pipefail; current=\$(readlink -f $q_path/current); releases=\$(readlink -f $q_path/releases); test -n \"\$current\"; test -n \"\$releases\"; case \"\$current\" in \"\$releases\"/*) ;; *) exit 1 ;; esac; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_release; test ! -e $q_path/.dep/deploy.lock; release_name=\$(basename \"\$current\"); sudo -n -u www-data -- env CAREER_CURRENT_EXPORT_EXECUTE=1 CAREER_CURRENT_EXPORT_BACKEND_ROOT=\"\$current/backend\" CAREER_CURRENT_EXPORT_RELEASE_SHA=$q_release CAREER_CURRENT_EXPORT_EXPECTED_PROJECTION_SHA256=$q_projection CAREER_CURRENT_EXPORT_RELEASE_NAME=\"\$release_name\" CAREER_CURRENT_EXPORT_WORKFLOW_RUN_ID=$q_run CAREER_CURRENT_EXPORT_WORKFLOW_RUN_ATTEMPT=$q_attempt php"
           set +e
           # shellcheck disable=SC2016
           php -r '

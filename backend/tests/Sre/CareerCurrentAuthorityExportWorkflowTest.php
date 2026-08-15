@@ -12,6 +12,7 @@ final class CareerCurrentAuthorityExportWorkflowTest extends TestCase
     {
         self::assertFileDoesNotExist(dirname(__DIR__, 3).'/.github/workflows/career-current-authority-export.yml');
         $workflow = $this->repoFile('.github/workflows/backend-greenfield-current-baseline.yml');
+        $replacementWorkflow = $this->repoFile('.github/workflows/career-1046-display-asset-replacement.yml');
 
         foreach ([
             '- career-current-authority',
@@ -27,6 +28,8 @@ final class CareerCurrentAuthorityExportWorkflowTest extends TestCase
             'CAREER_CURRENT_EXPORT_EXPECTED_PROJECTION_SHA256=$q_projection',
             '.career_runtime_projection_sha256 == $projection',
             'REVISION',
+            'releases=\$(readlink -f',
+            'case \"\$current\" in \"\$releases\"/*)',
             'test ! -e $q_path/.dep/deploy.lock',
             'CAREER_CURRENT_EXPORT_EXECUTE=1',
             'career_current_authority_export.php',
@@ -84,6 +87,11 @@ final class CareerCurrentAuthorityExportWorkflowTest extends TestCase
             2,
             substr_count($workflow, 'cp "$remote_receipt" "$dir/receipt.json"'),
             'Both the validated success receipt and a sanitized remote failure receipt must be retained.',
+        );
+        self::assertStringContainsString(
+            'group: deploy-${{ github.repository }}-production',
+            $replacementWorkflow,
+            'The export and the legacy replacement must serialize through the same production group.',
         );
     }
 
