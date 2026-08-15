@@ -20,6 +20,14 @@ test("classifies cache projections", () => assert.equal(has(["backend/app/Servic
 test("classifies SEO and discoverability", () => assert.equal(has(["backend/app/Console/Commands/SeoWarmSitemap.php"], "seo_discoverability"), true));
 test("classifies deployment infrastructure", () => assert.equal(has([".github/workflows/ci.yml"], "infrastructure_deployment"), true));
 
+test("does not infer cache or SEO runtime work from retired workflow filenames", () => {
+  const result = classifyPaths([
+    ".github/workflows/career-cache-repair.yml",
+    ".github/workflows/seo-indexnow-submit.yml",
+  ]);
+  assert.deepEqual(result.categories, ["infrastructure_deployment"]);
+});
+
 test("mixed scope is the validation union", () => {
   const result = classifyPaths([
     "backend/app/Http/Controllers/API/V0_3/ProfileController.php",

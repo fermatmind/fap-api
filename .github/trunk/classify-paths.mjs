@@ -70,18 +70,22 @@ export function classifyPaths(inputPaths) {
     ]);
 
     const selected = [];
-    if (payment) selected.push("payment");
-    if (cache) selected.push("cache_runtime_projection");
-    if (seo) selected.push("seo_discoverability");
-    if (content) selected.push("content_assets");
-    if (migration) selected.push("backward_compatible_migration");
-    if (infrastructure) selected.push("infrastructure_deployment");
-    if (application && !migration) selected.push("application_code");
     if (testPath) {
-      selected.length = 0;
       selected.push("docs_rules_tests_only");
+    } else if (infrastructure) {
+      // Control-plane filenames often contain domain words such as cache or SEO.
+      // They remain infrastructure changes; domain checks are selected only by
+      // actual runtime/content paths in the same push.
+      selected.push("infrastructure_deployment");
+    } else {
+      if (payment) selected.push("payment");
+      if (cache) selected.push("cache_runtime_projection");
+      if (seo) selected.push("seo_discoverability");
+      if (content) selected.push("content_assets");
+      if (migration) selected.push("backward_compatible_migration");
+      if (application && !migration) selected.push("application_code");
+      if (selected.length === 0 && docsOnly) selected.push("docs_rules_tests_only");
     }
-    if (selected.length === 0 && docsOnly) selected.push("docs_rules_tests_only");
     if (selected.length === 0) selected.push("application_code");
 
     for (const category of selected) {
