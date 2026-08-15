@@ -74,9 +74,8 @@ validate_target() {
 
   if ! jq -e --arg slug "$slug" '
     def nonempty_content:
-      (type == "string" and length > 0)
-      or (type == "array" and length > 0)
-      or (type == "object" and length > 0);
+      (type == "string" or type == "array" or type == "object")
+      and any(..; type == "string" and test("\\S"));
     .identity.canonical_slug == $slug
     and .display_surface_v1.surface_version == "display.surface.v1"
     and .display_surface_v1.asset_version == "v4.2"

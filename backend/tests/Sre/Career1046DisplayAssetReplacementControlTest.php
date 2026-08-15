@@ -141,6 +141,7 @@ final class Career1046DisplayAssetReplacementControlTest extends TestCase
 
         self::assertStringNotContainsString('--retry-all-errors', $validator);
         self::assertStringContainsString('def nonempty_content:', $validator);
+        self::assertStringContainsString('any(..; type == "string" and test("\\\\S"))', $validator);
         self::assertStringContainsString('definition_block | nonempty_content', $validator);
         self::assertStringContainsString('responsibilities_block | nonempty_content', $validator);
         self::assertStringNotContainsString('definition_block | type) == "object"', $validator);
