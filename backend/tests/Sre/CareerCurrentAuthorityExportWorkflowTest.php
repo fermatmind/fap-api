@@ -43,6 +43,10 @@ final class CareerCurrentAuthorityExportWorkflowTest extends TestCase
             'FAIL_CURRENT_AUTHORITY_EXPORT',
             'safe_error_code',
             'CAREER_CURRENT_REMOTE_STREAM_INTERRUPTED',
+            'PENDING_CURRENT_AUTHORITY_EXPORT_VALIDATION',
+            'career-current-authority-export.remote-receipt.json',
+            "if: failure() && inputs.mode == 'career-current-authority'",
+            'CAREER_CURRENT_EXPORT_OR_VALIDATION_FAILED',
             'zero_write_confirmed: false',
             'if: always() && inputs.mode == \'career-current-authority\'',
             'retention-days: 3',
@@ -61,6 +65,12 @@ final class CareerCurrentAuthorityExportWorkflowTest extends TestCase
         ] as $forbidden) {
             self::assertStringNotContainsString($forbidden, $workflow);
         }
+
+        self::assertGreaterThan(
+            strpos($workflow, 'jq -e -s \'length == 1046'),
+            strpos($workflow, 'cp "$remote_receipt" "$dir/receipt.json"'),
+            'The PASS receipt must only become publishable after every runner-side integrity check passes.',
+        );
     }
 
     public function test_exporter_enforces_read_only_database_and_cache_guards(): void

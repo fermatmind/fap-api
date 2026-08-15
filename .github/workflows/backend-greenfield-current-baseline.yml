@@ -215,7 +215,15 @@ jobs:
           dir=artifacts/career-current-authority-export
           mkdir -p "$dir"
           raw="$RUNNER_TEMP/career-current-authority-export.ndjson"
+          remote_receipt="$RUNNER_TEMP/career-current-authority-export.remote-receipt.json"
           remote_stderr="$RUNNER_TEMP/career-current-authority-export.stderr"
+          jq -n '{
+            contract_version: "career.current_authority_export.v1",
+            status: "PENDING_CURRENT_AUTHORITY_EXPORT_VALIDATION",
+            production_read_only_requested: true,
+            zero_write_confirmed: false,
+            automatic_retry_allowed: false
+          }' > "$dir/receipt.json"
           printf -v q_path '%q' "$DEPLOY_PATH"
           printf -v q_release '%q' "$EXPECTED_ACTIVE_REVISION"
           printf -v q_projection '%q' "$EXPECTED_PROJECTION_SHA256"
@@ -259,10 +267,10 @@ jobs:
             echo "::error::CAREER_CURRENT_REMOTE_EXPORT_FAILED"
             exit 1
           fi
-          head -n 1 "$raw" | jq -S '.receipt' > "$dir/receipt.json"
+          head -n 1 "$raw" | jq -S '.receipt' > "$remote_receipt"
           if [ "$remote_status" -ne 0 ]; then
-            if jq -e '.status == "FAIL_CURRENT_AUTHORITY_EXPORT"' "$dir/receipt.json" >/dev/null; then
-              safe_code="$(jq -er '.safe_error_code | select(test("^[A-Z0-9_]+$"))' "$dir/receipt.json" 2>/dev/null || true)"
+            if jq -e '.status == "FAIL_CURRENT_AUTHORITY_EXPORT"' "$remote_receipt" >/dev/null; then
+              safe_code="$(jq -er '.safe_error_code | select(test("^[A-Z0-9_]+$"))' "$remote_receipt" 2>/dev/null || true)"
               test -n "$safe_code" || safe_code="CAREER_CURRENT_REMOTE_EXPORT_FAILED"
             else
               safe_code="CAREER_CURRENT_REMOTE_STREAM_INTERRUPTED"
@@ -289,6 +297,7 @@ jobs:
         run: |
           set -euo pipefail
           dir=artifacts/career-current-authority-export
+          remote_receipt="$RUNNER_TEMP/career-current-authority-export.remote-receipt.json"
           assets_sha="$(sha256sum "$dir/assets.jsonl" | awk '{print $1}')"
           jq -e --arg release "$EXPECTED_ACTIVE_REVISION" --arg projection "$EXPECTED_PROJECTION_SHA256" --arg assets "$assets_sha" '
             .contract_version == "career.current_authority_export.v1"
@@ -317,7 +326,7 @@ jobs:
             and .database_public_content_sha256 == .api_public_content_sha256
             and .hashes_match == true
             and .not_repository_authority == true
-          ' "$dir/receipt.json" >/dev/null
+          ' "$remote_receipt" >/dev/null
           jq -e --arg assets "$assets_sha" '
             .contract_version == "career.current_authority_manifest.v1"
             and .counts.careers == 1046
@@ -330,6 +339,23 @@ jobs:
           ' "$dir/manifest.json" >/dev/null
           test "$(wc -l < "$dir/assets.jsonl" | tr -d ' ')" = 1046
           jq -e -s 'length == 1046 and ([.[].canonical_slug] | unique | length) == 1046 and all(.[].component_order_json; length == 26)' "$dir/assets.jsonl" >/dev/null
+          cp "$remote_receipt" "$dir/receipt.json"
+
+      - name: Finalize failed Career Current receipt
+        if: failure() && inputs.mode == 'career-current-authority'
+        shell: bash
+        run: |
+          set -euo pipefail
+          dir=artifacts/career-current-authority-export
+          mkdir -p "$dir"
+          jq -n '{
+            contract_version: "career.current_authority_export.v1",
+            status: "FAIL_CURRENT_AUTHORITY_EXPORT",
+            safe_error_code: "CAREER_CURRENT_EXPORT_OR_VALIDATION_FAILED",
+            production_read_only_requested: true,
+            zero_write_confirmed: false,
+            automatic_retry_allowed: false
+          }' > "$dir/receipt.json"
 
       - name: Stream source snapshot through stdin without remote files
         if: inputs.mode != 'career-current-authority'
