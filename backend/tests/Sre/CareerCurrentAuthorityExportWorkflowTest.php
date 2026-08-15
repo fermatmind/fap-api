@@ -93,7 +93,9 @@ final class CareerCurrentAuthorityExportWorkflowTest extends TestCase
         $runner = $this->repoFile('backend/scripts/operations/career_current_authority_export.php');
 
         foreach ([
-            'START TRANSACTION READ ONLY',
+            'SET TRANSACTION ISOLATION LEVEL REPEATABLE READ',
+            'SET TRANSACTION READ ONLY',
+            'START TRANSACTION WITH CONSISTENT SNAPSHOT',
             "if (\$verb !== 'select')",
             "'DATABASE_WRITE_ATTEMPT'",
             'WritingKey::class',
@@ -124,6 +126,11 @@ final class CareerCurrentAuthorityExportWorkflowTest extends TestCase
         foreach (['->create(', '->update(', '->delete(', '::insert(', '::upsert(', 'Cache::put(', 'Cache::forget('] as $forbidden) {
             self::assertStringNotContainsString($forbidden, $exporter.$runner);
         }
+
+        self::assertMatchesRegularExpression(
+            '/SET TRANSACTION ISOLATION LEVEL REPEATABLE READ.*SET TRANSACTION READ ONLY.*START TRANSACTION WITH CONSISTENT SNAPSHOT/s',
+            $exporter,
+        );
     }
 
     private function repoFile(string $path): string

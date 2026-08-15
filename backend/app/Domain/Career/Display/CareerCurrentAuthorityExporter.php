@@ -429,7 +429,9 @@ final class CareerCurrentAuthorityExporter
         $originalReadPdo = $connection->getRawReadPdo();
         $connection->setReadPdo($pdo);
         try {
-            $pdo->exec('START TRANSACTION READ ONLY');
+            $pdo->exec('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ');
+            $pdo->exec('SET TRANSACTION READ ONLY');
+            $pdo->exec('START TRANSACTION WITH CONSISTENT SNAPSHOT');
             try {
                 $result = $operation();
                 if (! $pdo->commit()) {
