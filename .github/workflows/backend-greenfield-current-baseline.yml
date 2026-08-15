@@ -348,14 +348,21 @@ jobs:
           set -euo pipefail
           dir=artifacts/career-current-authority-export
           mkdir -p "$dir"
-          jq -n '{
-            contract_version: "career.current_authority_export.v1",
-            status: "FAIL_CURRENT_AUTHORITY_EXPORT",
-            safe_error_code: "CAREER_CURRENT_EXPORT_OR_VALIDATION_FAILED",
-            production_read_only_requested: true,
-            zero_write_confirmed: false,
-            automatic_retry_allowed: false
-          }' > "$dir/receipt.json"
+          rm -f "$dir/assets.jsonl" "$dir/manifest.json"
+          if ! jq -e '
+            .contract_version == "career.current_authority_export.v1"
+            and .status == "FAIL_CURRENT_AUTHORITY_EXPORT"
+            and (.safe_error_code | test("^[A-Z0-9_]+$"))
+          ' "$dir/receipt.json" >/dev/null 2>&1; then
+            jq -n '{
+              contract_version: "career.current_authority_export.v1",
+              status: "FAIL_CURRENT_AUTHORITY_EXPORT",
+              safe_error_code: "CAREER_CURRENT_EXPORT_OR_VALIDATION_FAILED",
+              production_read_only_requested: true,
+              zero_write_confirmed: false,
+              automatic_retry_allowed: false
+            }' > "$dir/receipt.json"
+          fi
 
       - name: Stream source snapshot through stdin without remote files
         if: inputs.mode != 'career-current-authority'

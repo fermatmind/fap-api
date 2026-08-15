@@ -47,6 +47,8 @@ final class CareerCurrentAuthorityExportWorkflowTest extends TestCase
             'career-current-authority-export.remote-receipt.json',
             "if: failure() && inputs.mode == 'career-current-authority'",
             'CAREER_CURRENT_EXPORT_OR_VALIDATION_FAILED',
+            'rm -f "$dir/assets.jsonl" "$dir/manifest.json"',
+            'and (.safe_error_code | test("^[A-Z0-9_]+$"))',
             'zero_write_confirmed: false',
             'if: always() && inputs.mode == \'career-current-authority\'',
             'retention-days: 3',
@@ -70,6 +72,11 @@ final class CareerCurrentAuthorityExportWorkflowTest extends TestCase
             strpos($workflow, 'jq -e -s \'length == 1046'),
             strpos($workflow, 'cp "$remote_receipt" "$dir/receipt.json"'),
             'The PASS receipt must only become publishable after every runner-side integrity check passes.',
+        );
+        self::assertStringContainsString(
+            'if ! jq -e',
+            $workflow,
+            'The failure finalizer must preserve an already-sanitized domain failure receipt.',
         );
     }
 
