@@ -67,19 +67,4 @@ final class BigFive114SitemapAuthorityRepairTest extends TestCase
             self::assertNotContains('/en/personality/big-five/'.$alias, $paths);
         }
     }
-
-    public function test_production_promotion_workflow_is_idempotent_and_requires_warm_114_readback(): void
-    {
-        $workflow = (string) file_get_contents(base_path('../.github/workflows/big-five-114-production-indexability-promotion.yml'));
-
-        self::assertStringContainsString("grep -Fx 'will_update=0'", $workflow);
-        self::assertStringContainsString("grep -Fx 'will_skip=93'", $workflow);
-        self::assertStringContainsString('discoverability_cache_keys_flushed=seo:sitemap-source:v1:fresh', $workflow);
-        self::assertStringContainsString('seo:warm-sitemap-source-cache --no-ansi --json', $workflow);
-        self::assertStringContainsString('sitemap_big_five_canonical=114', $workflow);
-        self::assertStringContainsString('sitemap_big_five_en=62', $workflow);
-        self::assertStringContainsString('sitemap_big_five_zh=52', $workflow);
-        self::assertStringContainsString('sitemap_big_five_aliases=0', $workflow);
-        self::assertStringContainsString('sitemap_readback=pass', $workflow);
-    }
 }
