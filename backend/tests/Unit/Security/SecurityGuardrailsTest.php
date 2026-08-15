@@ -373,7 +373,7 @@ final class SecurityGuardrailsTest extends TestCase
 
         $this->assertIsString($ci);
         $this->assertStringContainsString("push:\n    branches: [main]", $ci);
-        $this->assertStringContainsString("pull_request:\n", $ci);
+        $this->assertStringNotContainsString("pull_request:\n", $ci);
         $this->assertStringNotContainsString("workflow_dispatch:\n", $ci);
         $this->assertStringNotContainsString('branches: ["**"]', $ci);
         foreach (['hygiene:', 'name: supply-chain', 'name: verify-mbti-${{ matrix.mode }}'] as $requiredJob) {
@@ -392,14 +392,16 @@ final class SecurityGuardrailsTest extends TestCase
     public function test_code_scanning_uses_pinned_semgrep_install(): void
     {
         $repoRoot = dirname(base_path());
-        $workflow = file_get_contents($repoRoot.'/.github/workflows/codeql.yml');
+        $workflow = file_get_contents($repoRoot.'/.github/workflows/nightly.yml');
         $this->assertIsString($workflow);
 
         $this->assertMatchesRegularExpression('/SEMGREP_VERSION:\s*"[0-9]+\.[0-9]+\.[0-9]+"/', $workflow);
         $this->assertMatchesRegularExpression('/SEMGREP_SETUPTOOLS_VERSION:\s*"[0-9]+\.[0-9]+\.[0-9]+"/', $workflow);
-        $this->assertStringContainsString('"setuptools==${SEMGREP_SETUPTOOLS_VERSION}"', $workflow);
-        $this->assertStringContainsString('"semgrep==${SEMGREP_VERSION}"', $workflow);
-        $this->assertStringContainsString('semgrep --version | grep -Fx "${SEMGREP_VERSION}"', $workflow);
+        $this->assertStringContainsString('"setuptools==$SEMGREP_SETUPTOOLS_VERSION"', $workflow);
+        $this->assertStringContainsString('"semgrep==$SEMGREP_VERSION"', $workflow);
+        $this->assertStringContainsString('semgrep scan --error', $workflow);
+        $this->assertStringContainsString('github/codeql-action/init@', $workflow);
+        $this->assertStringContainsString('github/codeql-action/analyze@', $workflow);
         $this->assertDoesNotMatchRegularExpression('/pip install[^\n]*--upgrade[^\n]*semgrep/', $workflow);
         $this->assertDoesNotMatchRegularExpression('/pip install[^\n]*\bsemgrep\b(?!==)/', $workflow);
     }

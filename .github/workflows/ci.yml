@@ -3,9 +3,6 @@ name: CI
 on:
   push:
     branches: [main]
-  # Removed by the one-time direct-push cleanup after the transition PR merges.
-  pull_request:
-    branches: [main]
 
 permissions:
   actions: read
@@ -46,11 +43,9 @@ jobs:
         shell: bash
         env:
           PUSH_BEFORE: ${{ github.event.before }}
-          PR_BASE: ${{ github.event.pull_request.base.sha }}
         run: |
           set -euo pipefail
           base_sha="$PUSH_BEFORE"
-          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then base_sha="$PR_BASE"; fi
           [[ "$base_sha" =~ ^[0-9a-f]{40}$ ]]
           if [ "$base_sha" = "0000000000000000000000000000000000000000" ]; then
             echo "Indeterminate/force-push baseline is not deployable." >&2

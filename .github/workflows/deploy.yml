@@ -22,6 +22,12 @@ env:
 jobs:
   policy:
     name: Bind successful main CI receipt
+    if: >-
+      github.event.workflow_run.head_branch == 'main' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.run_attempt == 1 &&
+      github.run_attempt == 1
     runs-on: ubuntu-latest
     timeout-minutes: 5
     outputs:

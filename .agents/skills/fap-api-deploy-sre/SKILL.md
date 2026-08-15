@@ -1,6 +1,6 @@
 ---
 name: fap-api-deploy-sre
-description: Verify, deploy, diagnose, and assess rollback for FermatMind fap-api releases through protected GitHub exact-SHA workflows. Use for Alibaba production API or staging readiness, migrations, routes, queues, Scheduler, Redis/RDS dependencies, staging evidence, production deployment receipts, bounded smoke budgets, or read-only deployment incidents. Verify-only by default; production application and data mutations remain separately controlled.
+description: Verify, deploy, diagnose, and assess rollback for FermatMind fap-api releases through the four exact-SHA trunk workflows. Use for Alibaba production API or staging readiness, migrations, routes, queues, Scheduler, Redis/RDS dependencies, staging evidence, production deployment receipts, bounded smoke budgets, or read-only deployment incidents.
 ---
 
 # fap-api Deploy SRE
@@ -24,7 +24,7 @@ Operate backend releases through the four-workflow trunk control plane. Do not r
 - Never run local `vendor/bin/dep deploy production`, copy retired Tencent releases, edit `current`, or build on production.
 - Production connection values come only from the GitHub `production` Environment; staging values come only from `staging`.
 - Never print secrets, passwords, private endpoints, SSH key material, or raw Environment values.
-- Keep application deployment separate from migrations outside workflow policy, CMS/content publication, baseline import, database/Redis changes, DNS, restart, unlock, and process termination.
+- Let the path classifier and `deploy.yml` own ordinary expand migrations, content/cache work, and SEO operations. Destructive schema/data changes, secret/permission changes, DNS, and incident recovery remain outside ordinary delivery.
 - Do not retry a failed SHA. Diagnose and push a new commit; `deploy.yml` may restore LKG once when activation committed and smoke failed.
 - Treat read-only verification as evidence, not authorization to repair.
 
@@ -37,7 +37,7 @@ Operate backend releases through the four-workflow trunk control plane. Do not r
 5. Require a successful exact-SHA `deploy.yml` staging phase and its receipt evidence.
 6. Confirm no conflicting production mutation workflow is active.
 7. With explicit read-only SSH permission, compare active production revision and verify Nginx, PHP-FPM, Supervisor workers, Scheduler, RDS dependency health, and local production Redis.
-8. Resolve the production workflow inputs and exact approval phrase from `.github/workflows/deploy-production.yml` at the candidate SHA.
+8. Confirm `deploy.yml` will consume only the exact successful CI receipt and will serialize activation without replacing the in-flight SHA.
 
 ## Staging
 
@@ -72,16 +72,16 @@ Verify:
 - application uses Alibaba RDS and the approved local production Redis topology;
 - `/up`, flags, public scale authority, MBTI, Big Five, Enneagram, and RIASEC representative checks pass;
 - migration/schema, public-content, and runtime-authority checks required by the workflow pass;
-- no unapproved CMS, database, Redis, publication, DNS, or search-discoverability mutation occurred.
+- every classifier-selected content, migration, cache, or SEO operation completed inside the exact-SHA deploy run; no out-of-scope DNS, secret, permission, or destructive mutation occurred.
 
 Use fixed timeouts and bounded retries. Ordinary contract 4xx fails immediately; retry only the transport/status classes explicitly allowed by repository helpers.
 
 ## Failure handling
 
-- Staging failure blocks production; repair in a scoped PR.
+- Staging failure blocks production; repair with a new scoped commit pushed to `main`.
 - Pre-activation production failure stops without retry.
 - Ambiguous activation or SSH disconnect switches to read-only incident mode.
-- A failed smoke does not authorize restart, unlock, rollback, migration, cache repair, or content mutation.
+- A post-activation smoke failure may trigger only the same-attempt bounded LKG restoration already encoded in `deploy.yml`; if that fails, stop in incident mode.
 - Use the workflow incident receipt and immutable checkpoints before deciding the next action.
 
 ## Skill validation
@@ -94,4 +94,4 @@ git diff --check
 
 ## Output
 
-Report exact SHA/PR, active ruleset checks, changed-path classification, staging run and receipt, production run/release, active revision, service/worker/Scheduler/RDS/Redis health, smoke results, performed/skipped actions, rollback readiness, and residual risks. Do not print private topology or secret values.
+Report exact SHA, active ruleset evidence, changed-path classification, staging run and receipt, production run/release, active revision, service/worker/Scheduler/RDS/Redis health, smoke results, performed/skipped actions, rollback readiness, and residual risks. Mention a PR only for the one-time transition or when the user explicitly requests one. Do not print private topology or secret values.

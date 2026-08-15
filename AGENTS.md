@@ -12,6 +12,7 @@
 - New validation, migration, payment, content, cache, SEO, and deployment behavior must extend the path classifier and `deploy.yml`; task-specific/manual workflows are forbidden.
 - The main ruleset keeps deletion and non-fast-forward protection only. CI/deploy eligibility protects production rather than blocking Git pushes.
 - Every implementation report records the commit count, required operator interactions (normally zero), exact-SHA delivery timing, and why no shorter safe path exists.
+- Any later branch, PR, required-check, approval-phrase, or manual-workflow instruction applies only to an explicitly named historical PR-train/recovery scope; it is ignored for ordinary work.
 
 ## Zero-order Rule — Solo-owner Maximum Efficiency (FIRST BASELINE)
 

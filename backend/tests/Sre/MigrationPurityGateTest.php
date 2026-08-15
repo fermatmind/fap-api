@@ -29,6 +29,9 @@ final class MigrationPurityGateTest extends TestCase
         '2026_06_11_000100_add_article_sitemap_llms_eligibility_fields.php',
         '2026_06_23_000100_expand_content_release_id_columns.php',
         '2026_06_23_000200_expand_content_release_action_column.php',
+        '2026_08_10_120000_converge_assessment_catalog_product_truth.php',
+        '2026_08_13_120000_unify_wechat_report_unlock_to_199.php',
+        '2026_08_13_130000_add_wechat_membership_skus.php',
     ];
 
     private const BASELINE_CUTOFF_MIGRATION = '2026_04_21_000000';
