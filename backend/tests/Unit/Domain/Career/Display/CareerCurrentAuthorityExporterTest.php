@@ -135,19 +135,20 @@ final class CareerCurrentAuthorityExporterTest extends TestCase
         $exporter->buildDocuments([$row], $projections, $projections, $projections, 1);
     }
 
-    public function test_it_exports_manual_hold_assets_outside_the_public_projection_hash_cohort(): void
+    public function test_it_exports_manual_hold_assets_in_the_full_content_hash_cohort(): void
     {
+        $projections = $this->projections(['software-developers']);
         $documents = $this->exporter()->buildDocuments(
             [$this->row('software-developers')],
-            [],
-            [],
-            [],
+            $projections,
+            $projections,
+            $projections,
             1,
         );
 
         self::assertSame(1, $documents['manifest']['counts']['careers']);
         self::assertSame(2, $documents['manifest']['counts']['locale_pages']);
-        self::assertSame(0, $documents['manifest']['counts']['public_projection_locale_pages']);
+        self::assertSame(2, $documents['manifest']['counts']['public_projection_locale_pages']);
         self::assertSame(2, $documents['manifest']['counts']['manual_hold_locale_pages']);
         self::assertSame(
             ['software-developers'],
@@ -192,6 +193,21 @@ final class CareerCurrentAuthorityExporterTest extends TestCase
                 ['slug' => 'beta', 'locale' => 'zh', 'runtime_publish_state' => 'published'],
             ],
         ], 3, 2);
+    }
+
+    public function test_it_rejects_manual_hold_from_published_generation_identities(): void
+    {
+        $method = (new ReflectionClass(CareerCurrentAuthorityExporter::class))
+            ->getMethod('publishedProjectionIdentities');
+
+        $this->expectException(CareerCurrentAuthorityExportFailure::class);
+        $this->expectExceptionMessage('PUBLIC_PROJECTION_IDENTITY_SET_INVALID');
+        $method->invoke(null, [
+            'items' => [
+                ['slug' => 'software-developers', 'locale' => 'en', 'runtime_publish_state' => 'published'],
+                ['slug' => 'software-developers', 'locale' => 'zh', 'runtime_publish_state' => 'published'],
+            ],
+        ], 2, 1);
     }
 
     public function test_exporter_does_not_read_occupation_authority(): void

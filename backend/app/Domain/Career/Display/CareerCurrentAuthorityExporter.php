@@ -55,8 +55,6 @@ final class CareerCurrentAuthorityExporter
 
     private const MANUAL_HOLD_SLUGS = ['software-developers'];
 
-    private const EXPECTED_PUBLIC_LOCALE_PAGES = 2090;
-
     private const DISPLAY_OWNED_PUBLIC_FIELDS = [
         'surface_version',
         'asset_version',
@@ -177,6 +175,13 @@ final class CareerCurrentAuthorityExporter
                     }
 
                     $rows[] = $this->exportRow($asset, $slug);
+                    foreach (self::LOCALES as $locale) {
+                        $databaseSurface = $this->displayOwnedProjectionFromAsset($asset, $locale);
+                        $database[] = self::hashValue(
+                            $this->readerSafeProjector->project($databaseSurface),
+                        );
+                    }
+
                     if ($isManualHold) {
                         foreach (self::LOCALES as $locale) {
                             $apiRead = $this->responseCache->jobDetailVerifyOnlyRead($slug, $locale);
@@ -187,13 +192,6 @@ final class CareerCurrentAuthorityExporter
                         }
 
                         continue;
-                    }
-
-                    foreach (self::LOCALES as $locale) {
-                        $databaseSurface = $this->displayOwnedProjectionFromAsset($asset, $locale);
-                        $database[] = self::hashValue(
-                            $this->readerSafeProjector->project($databaseSurface),
-                        );
                     }
                 }
 
@@ -308,7 +306,7 @@ final class CareerCurrentAuthorityExporter
         }
 
         $heldSlugs = array_values(array_intersect($slugs, self::MANUAL_HOLD_SLUGS));
-        $expectedProjectionCount = ($expectedCareers - count($heldSlugs)) * 2;
+        $expectedProjectionCount = $expectedCareers * 2;
         $database = self::projectionHashes($database);
         $activeCache = self::projectionHashes($activeCache);
         $api = self::projectionHashes($api);
@@ -585,8 +583,8 @@ final class CareerCurrentAuthorityExporter
             'sha256' => $sha256,
             'published_identities' => self::publishedProjectionIdentities(
                 $projection,
-                self::EXPECTED_PUBLIC_LOCALE_PAGES,
-                self::EXPECTED_CAREERS - count(self::MANUAL_HOLD_SLUGS),
+                self::EXPECTED_LOCALE_PAGES,
+                self::EXPECTED_CAREERS,
             ),
         ];
     }
