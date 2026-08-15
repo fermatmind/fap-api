@@ -334,14 +334,32 @@ jobs:
           printf -v q_run '%q' "$GITHUB_RUN_ID"
           printf -v q_attempt '%q' "$GITHUB_RUN_ATTEMPT"
           remote="set -euo pipefail; current=\$(readlink -f $q_path/current); releases=\$(readlink -f $q_path/releases); test -n \"\$current\"; test -n \"\$releases\"; case \"\$current\" in \"\$releases\"/*) ;; *) exit 1 ;; esac; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_release; test ! -e $q_path/.dep/deploy.lock; release_name=\$(basename \"\$current\"); sudo -n -u www-data -- env CAREER_CURRENT_EXPORT_EXECUTE=1 CAREER_CURRENT_EXPORT_BACKEND_ROOT=\"\$current/backend\" CAREER_CURRENT_EXPORT_RELEASE_SHA=$q_release CAREER_CURRENT_EXPORT_EXPECTED_PROJECTION_SHA256=$q_projection CAREER_CURRENT_EXPORT_RELEASE_NAME=\"\$release_name\" CAREER_CURRENT_EXPORT_WORKFLOW_RUN_ID=$q_run CAREER_CURRENT_EXPORT_WORKFLOW_RUN_ATTEMPT=$q_attempt php"
+          set +e
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -o ServerAliveInterval=15 -o ServerAliveCountMax=4 -p "$DEPLOY_PORT" \
             "$DEPLOY_USER@$DEPLOY_HOST" "$remote" \
             < backend/scripts/operations/career_current_authority_export.php \
             > "$raw" 2> "$remote_stderr"
+          remote_status=$?
+          set -e
+          if ! head -n 1 "$raw" | jq -e '.kind == "meta" and (.receipt | type == "object")' >/dev/null 2>&1; then
+            jq -n '{
+              contract_version: "career.current_authority_export.v1",
+              status: "FAIL_CURRENT_AUTHORITY_EXPORT",
+              safe_error_code: "CAREER_CURRENT_REMOTE_EXPORT_FAILED",
+              production_read_only_requested: true,
+              zero_write_confirmed: false,
+              automatic_retry_allowed: false
+            }' > "$dir/receipt.json"
+            exit 1
+          fi
+          head -n 1 "$raw" | jq -S '.receipt' > "$remote_receipt"
+          if [ "$remote_status" -ne 0 ]; then
+            cp "$remote_receipt" "$dir/receipt.json"
+            exit 1
+          fi
           test "$(wc -l < "$raw" | tr -d ' ')" = 1047
           head -n 1 "$raw" | jq -e '.kind == "meta" and .receipt.status == "PASS_CURRENT_AUTHORITY_EXPORT"' >/dev/null
-          head -n 1 "$raw" | jq -S '.receipt' > "$remote_receipt"
           head -n 1 "$raw" | jq -S '.manifest' > "$dir/manifest.json"
           tail -n +2 "$raw" > "$dir/assets.jsonl"
           assets_sha="$(sha256sum "$dir/assets.jsonl" | awk '{print $1}')"
@@ -383,6 +401,7 @@ jobs:
             "$dir/assets.jsonl" >/dev/null
           cp "$remote_receipt" "$dir/receipt.json"
       - name: Upload Career Current export artifact
+        if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: career-current-authority-export-${{ github.run_id }}-${{ github.run_attempt }}
