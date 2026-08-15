@@ -1,0 +1,93 @@
+name: Recovery
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: diagnose, lkg, or exact_sha
+        required: true
+        type: choice
+        options: [diagnose, lkg, exact_sha]
+      exact_sha:
+        description: Required only for exact_sha recovery
+        required: false
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: recovery-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  recover:
+    name: Incident-only recovery
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment: production
+    env:
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+      DEPLOY_USER_PROD: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT_PROD: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST_PROD: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      DEPLOY_PATH_PROD: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+      MODE: ${{ inputs.mode }}
+      EXACT_SHA: ${{ inputs.exact_sha }}
+      DEPLOYER_VERSION: "7.5.12"
+      DEPLOYER_SHA256: "b55c6609653e888c672d327c407f8bba6324b9c9cc24f9dcfb3f4b3922760632"
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          fetch-depth: 0
+      - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
+        with:
+          php-version: '8.4'
+          coverage: none
+      - name: Start SSH agent without key metadata output
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          eval "$(ssh-agent -s)" >/dev/null
+          echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
+          echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
+          printf '%s\n' "$SSH_PRIVATE_KEY" | ssh-add - >/dev/null 2>&1
+      - name: Install pinned controls
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          curl -fsSL -o /tmp/dep.phar "https://github.com/deployphp/deployer/releases/download/v${DEPLOYER_VERSION}/deployer.phar"
+          printf '%s  /tmp/dep.phar\n' "$DEPLOYER_SHA256" | sha256sum -c -
+      - name: Diagnose or recover
+        shell: bash
+        run: |
+          set -euo pipefail
+          active="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "tr -d '\r\n' < '$DEPLOY_PATH/current/REVISION'")"
+          [[ "$active" =~ ^[0-9a-f]{40}$ ]]
+          case "$MODE" in
+            diagnose)
+              echo "Active revision is a valid exact SHA; no write performed."
+              ;;
+            lkg)
+              export DEPLOY_SHA="$active"
+              php /tmp/dep.phar rollback production -f deploy.php --no-interaction
+              ;;
+            exact_sha)
+              [[ "$EXACT_SHA" =~ ^[0-9a-f]{40}$ ]]
+              git fetch --no-tags origin "$EXACT_SHA"
+              git merge-base --is-ancestor "$EXACT_SHA" origin/main
+              # Exact-SHA recovery is intentionally code-only; schema/content/search writes are forbidden.
+              export DEPLOY_SHA="$EXACT_SHA" DEPLOY_REVISION="$EXACT_SHA" DEPLOY_MODE=code_only
+              php /tmp/dep.phar deploy:code-only production -f deploy.php --revision "$EXACT_SHA" \
+                -o release_name="recovery-${EXACT_SHA:0:12}-${GITHUB_RUN_ID}" -o deploy_mode=code_only --no-interaction
+              ;;
+            *) exit 2 ;;
+          esac

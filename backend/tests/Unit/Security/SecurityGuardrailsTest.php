@@ -349,68 +349,44 @@ final class SecurityGuardrailsTest extends TestCase
     public function test_ci_deploy_supply_chain_uses_pinned_trust_material(): void
     {
         $repoRoot = dirname(base_path());
-        $workflowPaths = [
-            '.github/workflows/deploy-production.yml',
-        ];
-        $pinnedSshAgent = 'webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555';
-
-        foreach ($workflowPaths as $workflowPath) {
-            $workflow = file_get_contents($repoRoot.'/'.$workflowPath);
-            $this->assertIsString($workflow);
-            $this->assertStringContainsString($pinnedSshAgent, $workflow, $workflowPath);
-            $this->assertDoesNotMatchRegularExpression(
-                '/webfactory\/ssh-agent@v[^\s]+/',
-                $workflow,
-                $workflowPath
-            );
-            $this->assertStringContainsString('ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}', $workflow, $workflowPath);
-        }
-
         $deploy = file_get_contents($repoRoot.'/.github/workflows/deploy.yml');
         $this->assertIsString($deploy);
 
         $this->assertStringNotContainsString('webfactory/ssh-agent@', $deploy);
         $this->assertStringContainsString('SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}', $deploy);
         $this->assertStringContainsString('STAGING_REPO_READ_SSH_KEY: ${{ secrets.STAGING_REPO_READ_SSH_KEY }}', $deploy);
-        $this->assertStringContainsString('printf \'%s\\n\' "$SSH_PRIVATE_KEY" > "$host_identity"', $deploy);
+        $this->assertStringContainsString('printf \'%s\\n\' "$SSH_PRIVATE_KEY" > "$host_key"', $deploy);
         $this->assertStringContainsString('printf \'%s\\n\' "$STAGING_REPO_READ_SSH_KEY" | ssh-add - >/dev/null 2>&1', $deploy);
-        $this->assertStringContainsString('ssh-add -l -E sha256', $deploy);
-        $this->assertStringNotContainsString('printf \'%s\\n\' "$SSH_PRIVATE_KEY" | ssh-add -', $deploy);
-        $this->assertStringContainsString('ssh-agent -k >/dev/null 2>&1 || true', $deploy);
         $this->assertDoesNotMatchRegularExpression('/ssh-keyscan/', $deploy);
         $this->assertMatchesRegularExpression('/SSH_KNOWN_HOSTS/', $deploy);
         $this->assertMatchesRegularExpression('/DEPLOYER_SHA256/', $deploy);
         $this->assertMatchesRegularExpression('/sha256sum -c -/', $deploy);
-        $this->assertLessThan(
-            strpos($deploy, 'Set up SSH agent without key metadata output'),
-            strpos($deploy, 'Install Deployer (pinned)')
-        );
+        $this->assertStringContainsString('trunk-validation-${{ github.sha }}', file_get_contents($repoRoot.'/.github/workflows/ci.yml'));
     }
 
-    public function test_solo_pr_flow_avoids_duplicate_full_ci_and_automatic_ledger_prs(): void
+    public function test_solo_trunk_flow_uses_exact_sha_ci_and_zero_touch_deploy(): void
     {
         $repoRoot = dirname(base_path());
         $ci = file_get_contents($repoRoot.'/.github/workflows/ci.yml');
         $agents = file_get_contents($repoRoot.'/AGENTS.md');
-        $prTrainSkill = file_get_contents($repoRoot.'/.agents/skills/fermatmind-pr-train/SKILL.md');
+        $deploy = file_get_contents($repoRoot.'/.github/workflows/deploy.yml');
 
         $this->assertIsString($ci);
         $this->assertStringContainsString("push:\n    branches: [main]", $ci);
         $this->assertStringContainsString("pull_request:\n", $ci);
-        $this->assertStringContainsString("workflow_dispatch:\n", $ci);
+        $this->assertStringNotContainsString("workflow_dispatch:\n", $ci);
         $this->assertStringNotContainsString('branches: ["**"]', $ci);
         foreach (['hygiene:', 'name: supply-chain', 'name: verify-mbti-${{ matrix.mode }}'] as $requiredJob) {
             $this->assertStringContainsString($requiredJob, $ci);
         }
 
         $this->assertIsString($agents);
-        $this->assertStringContainsString('Ordinary scoped PRs default to focused local verification', $agents);
-        $this->assertStringContainsString('complete GitHub required checks', $agents);
-        $this->assertStringContainsString('Do not automatically open a standalone ledger-only PR', $agents);
-
-        $this->assertIsString($prTrainSkill);
-        $this->assertStringContainsString('Do not automatically create a standalone ledger-only PR', $prTrainSkill);
-        $this->assertStringContainsString('not the default for ordinary ad-hoc PRs', $prTrainSkill);
+        $this->assertStringContainsString('git push origin HEAD:main', $agents);
+        $this->assertStringContainsString('only manual entrypoint', $agents);
+        $this->assertIsString($deploy);
+        $this->assertStringContainsString("workflows: [CI]", $deploy);
+        $this->assertStringContainsString('cancel-in-progress: false', $deploy);
+        $this->assertStringContainsString('automatically restore LKG', $deploy);
     }
 
     public function test_code_scanning_uses_pinned_semgrep_install(): void

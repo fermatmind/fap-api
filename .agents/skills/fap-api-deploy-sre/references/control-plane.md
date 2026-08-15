@@ -12,22 +12,19 @@ Do not encode raw addresses or credentials in Skills.
 
 ## Authoritative workflows
 
-- `.github/workflows/ci.yml`: required tests and parity evidence.
-- `.github/workflows/deploy.yml` (`Deploy Application`): staging deployment and staging receipt.
-- `.github/workflows/deploy-production.yml` (`Deploy API Production`): protected exact-SHA production deployment.
-- `.github/workflows/backend-production-verify-only.yml`: bounded read-only production verification.
+- `.github/workflows/ci.yml`: main-push path classification, focused validation, and exact-SHA receipt.
+- `.github/workflows/deploy.yml`: serialized exact-SHA staging, smoke, production, post-activation smoke, and bounded LKG restoration.
+- `.github/workflows/nightly.yml`: full regression, security, content consistency, dependency, and performance checks.
+- `.github/workflows/recovery.yml`: the only manual workflow, reserved for diagnosis/LKG/exact-SHA recovery after automatic restoration fails.
 
 Read workflow source at the exact candidate SHA. It is authoritative for inputs, deploy modes, approval phrases, timeouts, retry budgets, and receipts.
 
-## Required-check discovery
+## CI receipt discovery
 
-1. Query the active ruleset targeting `main`.
-2. Extract required status-check contexts.
-3. Query check runs for the exact SHA.
-4. Select the newest completed run per required context.
-5. Fail closed on missing, pending, skipped where success is required, or non-success conclusions.
-
-Do not copy required-check names into this reference.
+1. Resolve the exact main push SHA and its successful `ci.yml` run.
+2. Require exactly one unexpired `trunk-validation-<SHA>` artifact and verify its GitHub artifact digest.
+3. Verify the receipt schema, SHA, CI run identity, result, and path classification.
+4. Fail closed on missing, ambiguous, expired, wrong-SHA, wrong-run, or non-success evidence.
 
 ## Environment authority
 
@@ -39,11 +36,10 @@ Do not copy required-check names into this reference.
 ## Release chain
 
 ```text
-exact main-contained SHA
-  -> required checks + parity receipt
-  -> Deploy Application staging success
-  -> protected production approval
-  -> immutable release activation
-  -> queue reload and bounded smoke
+exact pushed SHA
+  -> path-aware CI + exact-SHA receipt
+  -> deploy.yml staging success and smoke
+  -> automatic immutable production activation
+  -> bounded smoke and automatic LKG restoration on committed failure
   -> production receipt/release record
 ```

@@ -2,14 +2,25 @@
 
 > This file is binding for any agent/Codex work in this repo.
 
+## Trunk-based zero-touch delivery (controlling repository rule)
+
+- Ordinary work starts in a clean isolated worktree created from the latest `origin/main`. Never modify the user's active workspace, existing worktrees, or uncommitted files.
+- After path-focused validation, commit the scoped change and publish with `git push origin HEAD:main`. Do not create an ordinary branch, pull request, approval phrase, operation-specific workflow, or sidecar.
+- If a concurrent update rejects the push, fetch and rebase onto the new `origin/main`, rerun every affected focused check, and retry. Force-push is forbidden.
+- Follow the exact pushed SHA through `ci.yml`, `deploy.yml`, staging, production, and smoke. A failed SHA may remain on `main` but cannot enter production; diagnose it and repair through a new commit, never an in-place deployment retry.
+- `ci.yml`, `deploy.yml`, `nightly.yml`, and `recovery.yml` are the only workflow entrypoints. `recovery.yml` is the only manual entrypoint and is reserved for a real incident after automatic LKG restoration fails.
+- New validation, migration, payment, content, cache, SEO, and deployment behavior must extend the path classifier and `deploy.yml`; task-specific/manual workflows are forbidden.
+- The main ruleset keeps deletion and non-fast-forward protection only. CI/deploy eligibility protects production rather than blocking Git pushes.
+- Every implementation report records the commit count, required operator interactions (normally zero), exact-SHA delivery timing, and why no shorter safe path exists.
+
 ## Zero-order Rule — Solo-owner Maximum Efficiency (FIRST BASELINE)
 
 - FermatMind is developed and operated by one person. The first and controlling baseline for every feature, task, scan, plan, review, implementation, validation, PR, deployment preparation, and operational workflow is the highest achievable solo-developer operating efficiency.
 - Every future scan and task MUST read and enforce this section before proposing work. The scan or task is incomplete if it does not choose the shortest safe end-to-end path for one operator and explicitly minimize PR count, branches, approvals, handoffs, artifacts, repeated reviews, duplicated validation, waiting, and operator interruptions.
-- Combine steps when they form one coherent, reversible, in-scope loop. Codex owns and continuously executes ordinary branch, edit, test, review-fix, PR, merge, synchronization, and cleanup work without returning coordination work to the operator.
+- Combine steps when they form one coherent, reversible, in-scope loop. Codex owns and continuously executes ordinary worktree, edit, test, commit, push, CI/deploy-fix, synchronization, and cleanup work without returning coordination work to the operator.
 - Required checks and separately controlled CMS/database writes, migrations, secrets or permission changes, destructive actions, and Search Channel actions remain mandatory boundaries. Ordinary application production deployment is not an operator-interruption boundary: it must use the automatic deployment discipline below. These boundaries are the only permitted reasons to interrupt the operator; all other process overhead must be automated or removed.
 - No local rule, skill, scan, template, review suggestion, or process convention may weaken, replace, or outrank this first baseline. When multiple compliant paths exist, choose the path with the fewest operator interactions and the shortest validated lead time.
-- Every future scan, implementation report, and PR body MUST include a `Solo-owner efficiency impact` note stating the PR count, required operator-interaction count, and why no shorter safe path exists.
+- Every future scan and implementation report MUST include a `Solo-owner efficiency impact` note stating the commit count, required operator-interaction count, exact-SHA lead time, and why no shorter safe path exists.
 
 ## Delivery risk lanes
 

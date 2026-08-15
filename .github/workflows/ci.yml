@@ -1,566 +1,264 @@
 name: CI
 
 on:
-  workflow_dispatch:
   push:
     branches: [main]
+  # Removed by the one-time direct-push cleanup after the transition PR merges.
   pull_request:
+    branches: [main]
 
 permissions:
+  actions: read
+  attestations: write
   contents: read
+  id-token: write
 
 concurrency:
-  group: ci-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: ci-${{ github.repository }}-${{ github.sha }}
+  cancel-in-progress: false
 
 jobs:
-  hygiene:
+  classify:
+    name: classify exact SHA
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
+    outputs:
+      base_sha: ${{ steps.classify.outputs.base_sha }}
+      deploy: ${{ steps.classify.outputs.deploy }}
+      application: ${{ steps.classify.outputs.application }}
+      content: ${{ steps.classify.outputs.content }}
+      migration: ${{ steps.classify.outputs.migration }}
+      payment: ${{ steps.classify.outputs.payment }}
+      cache: ${{ steps.classify.outputs.cache }}
+      seo: ${{ steps.classify.outputs.seo }}
+      infrastructure: ${{ steps.classify.outputs.infrastructure }}
+      tests_changed: ${{ steps.classify.outputs.tests_changed }}
+      classification: ${{ steps.classify.outputs.classification }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
-
-      - name: Guard no committed secrets (H-02)
-        run: bash backend/scripts/ci/guard_no_committed_secrets.sh
-
-      - name: CAE gate (config + artifact safety)
-        run: bash backend/scripts/cae_gate.sh
-
-  supply-chain:
-    name: supply-chain
-    needs: hygiene
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - name: Checkout
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
-          php-version: '8.4'
-          coverage: none
-          tools: composer:v2
-          extensions: >
-            mbstring, intl, curl, json, openssl, fileinfo, pdo, pdo_sqlite, sqlite3, pdo_mysql, redis
-
-      - name: Prepare Laravel cache dirs
-        working-directory: backend
-        run: |
-          mkdir -p storage/framework/cache/data
-          mkdir -p storage/framework/views
-          mkdir -p storage/framework/sessions
-          mkdir -p storage/logs
-          mkdir -p storage/app/private/packs_v2_materialized
-          mkdir -p bootstrap/cache
-          chmod -R ug+rwX storage bootstrap/cache || true
-
-      - name: Composer validate (strict)
-        working-directory: backend
-        run: composer validate --strict
-
-      - name: Composer audit
-        working-directory: backend
-        run: composer audit --locked --no-interaction --ignore-unreachable || echo "::warning::composer audit found advisories"
-        continue-on-error: true
-
-  content-pack-build-validate:
-    name: content-pack-build-validate
-    needs:
-      - hygiene
-      - supply-chain
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    env:
-      APP_ENV: testing
-      FAP_PACKS_DRIVER: local
-      FAP_PACKS_ROOT: ${{ github.workspace }}/content_packages
-      FAP_DEFAULT_REGION: CN_MAINLAND
-      FAP_DEFAULT_LOCALE: zh-CN
-      FAP_DEFAULT_PACK_ID: MBTI.cn-mainland.zh-CN.v0.3
-      FAP_DEFAULT_DIR_VERSION: MBTI-CN-v0.3
-      CONTENT_PACKS_INDEX_ARTIFACT_PATH: storage/app/private/content_packs_index/content-packs-index.json
-    steps:
-      - name: Checkout
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
+          fetch-depth: 0
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
-          php-version: '8.4'
-          coverage: none
-          tools: composer:v2
-          extensions: >
-            mbstring, intl, curl, json, openssl, fileinfo, pdo, pdo_sqlite, sqlite3, pdo_mysql, redis
-
-      - name: Cache Composer
-        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
-        with:
-          path: |
-            backend/vendor
-            ~/.composer/cache/files
-          key: ${{ runner.os }}-php84-${{ hashFiles('backend/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php84-
-
-      - name: Prepare Laravel cache dirs
-        working-directory: backend
-        run: |
-          mkdir -p storage/framework/cache/data
-          mkdir -p storage/framework/views
-          mkdir -p storage/framework/sessions
-          mkdir -p storage/logs
-          mkdir -p storage/app/private/content_packs_index
-          mkdir -p storage/app/private/packs_v2_materialized
-          mkdir -p bootstrap/cache
-          chmod -R ug+rwX storage bootstrap/cache || true
-
-      - name: Install backend dependencies
-        working-directory: backend
-        run: composer install --no-interaction --prefer-dist --no-progress
-
-      - name: Ensure Laravel app key
-        working-directory: backend
-        run: |
-          if [ ! -f .env ]; then cp .env.example .env; fi
-          php artisan key:generate --force
-
-      - name: Build content packs index artifact
-        working-directory: backend
-        run: php artisan content-packs:index:build --output="$CONTENT_PACKS_INDEX_ARTIFACT_PATH" --json
-
-      - name: Validate content packs index artifact
-        working-directory: backend
-        run: |
-          php -r '
-          $path = getenv("CONTENT_PACKS_INDEX_ARTIFACT_PATH") ?: "storage/app/private/content_packs_index/content-packs-index.json";
-          $json = json_decode((string) file_get_contents($path), true);
-          if (! is_array($json)) { fwrite(STDERR, "artifact json invalid\n"); exit(1); }
-          if (($json["schema_version"] ?? "") !== "content_packs_index.artifact.v1") { fwrite(STDERR, "artifact schema invalid\n"); exit(1); }
-          if ((int) ($json["summary"]["item_count"] ?? 0) < 1) { fwrite(STDERR, "artifact item_count invalid\n"); exit(1); }
-          foreach (($json["items"] ?? []) as $item) {
-              foreach (["manifest_sha256", "version_sha256", "questions_sha256"] as $key) {
-                  if (! is_string($item[$key] ?? null) || ! preg_match("/^[a-f0-9]{64}$/", $item[$key])) {
-                      fwrite(STDERR, "artifact hash missing: {$key}\n");
-                      exit(1);
-                  }
-              }
-          }
-          echo "artifact ok items=".(int) ($json["summary"]["item_count"] ?? 0).PHP_EOL;
-          '
-          php artisan test --filter=ContentPacksIndexArtifact --no-ansi
-
-      - name: Gate Career 10k capacity and fault resilience
-        working-directory: backend
-        run: php artisan test tests/Feature/Console/CareerDirectory10kOpsWarmValidateCommandTest.php --no-ansi
-
-      - name: Upload content packs index artifact
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
-        with:
-          name: content-packs-index
-          path: backend/storage/app/private/content_packs_index/content-packs-index.json
-          if-no-files-found: error
-          retention-days: 1
-
-  verify-mbti:
-    name: verify-mbti-${{ matrix.mode }}
-    needs:
-      - hygiene
-      - supply-chain
-      - content-pack-build-validate
-    runs-on: ubuntu-latest
-    timeout-minutes: 25
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - mode: legacy
-            FEATURE_SELFCHECK_V2: "false"
-            FEATURE_LEGACY_MBTI_REPORT_PAYLOAD_V2: "false"
-            FEATURE_PAYMENT_WEBHOOK_V2: "false"
-            FEATURE_CONTENT_STORE_V2: "false"
-          - mode: v2
-            FEATURE_SELFCHECK_V2: "true"
-            FEATURE_LEGACY_MBTI_REPORT_PAYLOAD_V2: "true"
-            FEATURE_PAYMENT_WEBHOOK_V2: "true"
-            FEATURE_CONTENT_STORE_V2: "true"
-
-    env:
-      FEATURE_SELFCHECK_V2: ${{ matrix.FEATURE_SELFCHECK_V2 }}
-      FEATURE_LEGACY_MBTI_REPORT_PAYLOAD_V2: ${{ matrix.FEATURE_LEGACY_MBTI_REPORT_PAYLOAD_V2 }}
-      FEATURE_PAYMENT_WEBHOOK_V2: ${{ matrix.FEATURE_PAYMENT_WEBHOOK_V2 }}
-      FEATURE_CONTENT_STORE_V2: ${{ matrix.FEATURE_CONTENT_STORE_V2 }}
-      RUN_BIG5_OCEAN_GATE: "0"
-      CONTENT_PACKS_INDEX_ARTIFACT_ENABLED: "true"
-      CONTENT_PACKS_INDEX_ARTIFACT_PATH: storage/app/private/content_packs_index/content-packs-index.json
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
-        with:
-          php-version: '8.4'
-          coverage: none
-          tools: composer:v2
-          extensions: >
-            mbstring, intl, curl, json, openssl, fileinfo, pdo, pdo_sqlite, sqlite3, pdo_mysql, redis
-
-      - name: Setup Node
-        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
-        with:
-          node-version: '24'
-
-      - name: Install CI guard dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install --no-install-recommends --yes ripgrep
-          rg --version
-
-      - name: Cache Composer
-        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
-        with:
-          path: |
-            backend/vendor
-            ~/.composer/cache/files
-          key: ${{ runner.os }}-php84-${{ hashFiles('backend/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php84-
-
-      - name: Prepare Laravel cache dirs
-        working-directory: backend
-        run: |
-          mkdir -p storage/framework/cache/data
-          mkdir -p storage/framework/views
-          mkdir -p storage/framework/sessions
-          mkdir -p storage/logs
-          mkdir -p storage/app/private/content_packs_index
-          mkdir -p storage/app/private/packs_v2_materialized
-          mkdir -p bootstrap/cache
-          chmod -R ug+rwX storage bootstrap/cache || true
-
-      - name: Install backend dependencies
-        working-directory: backend
-        run: composer install --no-interaction --prefer-dist --no-progress
-
-      - name: Ensure Laravel app key
-        working-directory: backend
-        run: |
-          if [ ! -f .env ]; then cp .env.example .env; fi
-          php artisan key:generate --force
-
-      - name: Enforce mutating-route security guardrails
-        working-directory: backend
-        run: php artisan test tests/Unit/Security/SecurityGuardrailsTest.php tests/Unit/Security/ImmutableGithubActionsTest.php --no-ansi
-
-      - name: Download content packs index artifact
-        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
-        with:
-          name: content-packs-index
-          path: backend/storage/app/private/content_packs_index
-
-      - name: Resolve MBTI smoke impact
-        working-directory: backend
+          node-version: 24
+      - id: classify
+        name: Resolve deterministic before-to-SHA path union
         shell: bash
-        run: |
-          set -euo pipefail
-          while IFS='=' read -r key value; do
-            case "$key" in
-              run_mbti_smoke)
-                if [[ "$value" != "1" ]]; then
-                  echo "Scale impact resolver attempted to disable required MBTI smoke checks." >&2
-                  exit 1
-                fi
-                printf 'RUN_MBTI_SMOKE=%s\n' "$value"
-                ;;
-              scale_scope)
-                printf 'SCALE_SCOPE=%s\n' "$value"
-                ;;
-              reason)
-                printf 'SCALE_IMPACT_REASON=%s\n' "$value"
-                ;;
-            esac
-          done < <(bash scripts/ci/resolve_scale_impact.sh --format env --no-github-output) | tee -a "$GITHUB_ENV"
-
-      - name: Run ci_verify_mbti
-        run: bash ./backend/scripts/ci_verify_mbti.sh
-
-      - name: Upload verify_mbti artifacts (on failure)
-        if: failure()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
-        with:
-          name: ci_verify_mbti_${{ matrix.mode }}
-          path: backend/artifacts/verify_mbti
-          if-no-files-found: ignore
-          retention-days: 7
-
-  verify-staging-parity:
-    name: verify-staging-parity
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs:
-      - hygiene
-      - supply-chain
-      - content-pack-build-validate
-    runs-on: ubuntu-latest
-    timeout-minutes: 25
-    permissions:
-      attestations: write
-      contents: read
-      id-token: write
-    services:
-      mysql:
-        image: mysql:8.0
         env:
-          MYSQL_DATABASE: fap_ci
-          MYSQL_ROOT_PASSWORD: root
-        ports:
-          - "3306:3306"
-        options: >-
-          --health-cmd="mysqladmin ping -h 127.0.0.1 -proot"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=12
-      redis:
-        image: redis:6-alpine
-        ports:
-          - "6379:6379"
-        options: >-
-          --health-cmd="redis-cli ping || exit 1"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=12
-    env:
-      APP_ENV: testing
-      CI_VERIFY_TOPOLOGY: mysql8-redis6
-      CI_VERIFY_PARITY_ONLY: "1"
-      DB_CONNECTION: mysql
-      DB_HOST: 127.0.0.1
-      DB_PORT: 3306
-      DB_DATABASE: fap_ci
-      DB_USERNAME: root
-      DB_PASSWORD: root
-      QUEUE_CONNECTION: redis
-      REDIS_HOST: 127.0.0.1
-      REDIS_PORT: 6379
-      RUN_BIG5_OCEAN_GATE: "1"
-      RUN_ENNEAGRAM_GATE: "1"
-      CONTENT_PACKS_INDEX_ARTIFACT_ENABLED: "true"
-      CONTENT_PACKS_INDEX_ARTIFACT_PATH: storage/app/private/content_packs_index/content-packs-index.json
-    steps:
-      - name: Checkout
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
-        with:
-          php-version: '8.4'
-          coverage: none
-          tools: composer:v2
-          extensions: >-
-            mbstring, intl, curl, json, openssl, fileinfo, pdo, pdo_sqlite, sqlite3, pdo_mysql, redis
-
-      - name: Setup Node
-        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
-        with:
-          node-version: '24'
-
-      - name: Install CI guard dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install --no-install-recommends --yes ripgrep
-          rg --version
-
-      - name: Cache Composer
-        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
-        with:
-          path: |
-            backend/vendor
-            ~/.composer/cache/files
-          key: ${{ runner.os }}-php84-${{ hashFiles('backend/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php84-
-
-      - name: Prepare Laravel cache dirs
-        working-directory: backend
-        run: |
-          mkdir -p storage/framework/cache/data
-          mkdir -p storage/framework/views
-          mkdir -p storage/framework/sessions
-          mkdir -p storage/logs
-          mkdir -p storage/app/private/content_packs_index
-          mkdir -p storage/app/private/packs_v2_materialized
-          mkdir -p bootstrap/cache
-          chmod -R ug+rwX storage bootstrap/cache || true
-
-      - name: Install backend dependencies
-        working-directory: backend
-        run: composer install --no-interaction --prefer-dist --no-progress
-
-      - name: Ensure Laravel app key
-        working-directory: backend
-        run: |
-          if [ ! -f .env ]; then cp .env.example .env; fi
-          php artisan key:generate --force
-
-      - name: Download content packs index artifact
-        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
-        with:
-          name: content-packs-index
-          path: backend/storage/app/private/content_packs_index
-
-      - name: Run MySQL and Redis ci_verify_mbti parity gate
-        run: bash ./backend/scripts/ci_verify_mbti.sh
-
-      - name: Create exact-SHA parity receipt
-        shell: bash
+          PUSH_BEFORE: ${{ github.event.before }}
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
         run: |
           set -euo pipefail
-          receipt_path="$RUNNER_TEMP/parity-receipt-${GITHUB_SHA}.json"
-          php backend/scripts/deploy/ci_parity_receipt.php create \
-            --output="$receipt_path" \
-            --repo="$GITHUB_REPOSITORY" \
-            --sha="$GITHUB_SHA" \
-            --run-id="$GITHUB_RUN_ID" \
-            --run-attempt="$GITHUB_RUN_ATTEMPT"
-          echo "PARITY_RECEIPT_PATH=$receipt_path" >> "$GITHUB_ENV"
-
-      - name: Upload exact-SHA parity receipt
-        id: upload-parity-receipt
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+          base_sha="$PUSH_BEFORE"
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then base_sha="$PR_BASE"; fi
+          [[ "$base_sha" =~ ^[0-9a-f]{40}$ ]]
+          if [ "$base_sha" = "0000000000000000000000000000000000000000" ]; then
+            echo "Indeterminate/force-push baseline is not deployable." >&2
+            exit 1
+          fi
+          git cat-file -e "${base_sha}^{commit}"
+          git merge-base --is-ancestor "$base_sha" "$GITHUB_SHA"
+          git diff --no-renames --name-only -z "$base_sha" "$GITHUB_SHA" > "$RUNNER_TEMP/changed-paths"
+          test -s "$RUNNER_TEMP/changed-paths"
+          node .github/trunk/classify-paths.mjs "$RUNNER_TEMP/changed-paths" > "$RUNNER_TEMP/classification.json"
+          compact="$(jq -c . "$RUNNER_TEMP/classification.json")"
+          {
+            echo "base_sha=$base_sha"
+            echo "deploy=$(jq -r .deploy "$RUNNER_TEMP/classification.json")"
+            echo "application=$(jq -r .flags.application_code "$RUNNER_TEMP/classification.json")"
+            echo "content=$(jq -r .flags.content_assets "$RUNNER_TEMP/classification.json")"
+            echo "migration=$(jq -r .flags.backward_compatible_migration "$RUNNER_TEMP/classification.json")"
+            echo "payment=$(jq -r .flags.payment "$RUNNER_TEMP/classification.json")"
+            echo "cache=$(jq -r .flags.cache_runtime_projection "$RUNNER_TEMP/classification.json")"
+            echo "seo=$(jq -r .flags.seo_discoverability "$RUNNER_TEMP/classification.json")"
+            echo "infrastructure=$(jq -r .flags.infrastructure_deployment "$RUNNER_TEMP/classification.json")"
+            echo "tests_changed=$(jq -r .tests_changed "$RUNNER_TEMP/classification.json")"
+            echo "classification=$compact"
+          } >> "$GITHUB_OUTPUT"
+          cp "$RUNNER_TEMP/classification.json" trunk-path-classification.json
+      - name: Test classifier and migration policy
+        run: node --test .github/trunk/*.test.mjs
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
-          name: fap-api-parity-receipt-${{ github.sha }}
-          path: ${{ env.PARITY_RECEIPT_PATH }}
-          compression-level: 0
+          name: trunk-classification-${{ github.sha }}
+          path: trunk-path-classification.json
           if-no-files-found: error
           retention-days: 30
 
-      - name: Attest exact uploaded parity receipt
-        uses: actions/attest@f7c74d28b9d84cb8768d0b8ca14a4bac6ef463e6 # v4
-        with:
-          subject-name: fap-api-parity-receipt-${{ github.sha }}.zip
-          subject-digest: sha256:${{ steps.upload-parity-receipt.outputs.artifact-digest }}
-
-      - name: Upload parity diagnostics on failure
-        if: failure()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
-        with:
-          name: ci_verify_mbti_mysql8_redis6
-          path: backend/artifacts/verify_mbti
-          if-no-files-found: ignore
-          retention-days: 7
-
-  verify-bigfive:
-    name: verify-bigfive
-    needs:
-      - hygiene
-      - supply-chain
-      - content-pack-build-validate
+  hygiene:
+    name: hygiene
+    needs: classify
     runs-on: ubuntu-latest
-    timeout-minutes: 25
-    env:
-      APP_ENV: testing
-      DB_CONNECTION: sqlite
-      DB_DATABASE: /tmp/fap-ci-bigfive.sqlite
-      QUEUE_CONNECTION: sync
-      FAP_PACKS_DRIVER: local
-      FAP_PACKS_ROOT: ${{ github.workspace }}/content_packages
-      FAP_DEFAULT_REGION: CN_MAINLAND
-      FAP_DEFAULT_LOCALE: zh-CN
-      FAP_DEFAULT_PACK_ID: MBTI.cn-mainland.zh-CN.v0.3
-      FAP_DEFAULT_DIR_VERSION: MBTI-CN-v0.3
-      CONTENT_LOADER_CACHE_STORE: array
-      MBTI_RESPONSE_CACHE_STORE: array
-      CONTENT_PACKS_INDEX_ARTIFACT_ENABLED: "true"
-      CONTENT_PACKS_INDEX_ARTIFACT_PATH: storage/app/private/content_packs_index/content-packs-index.json
+    timeout-minutes: 10
     steps:
-      - name: Checkout
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          fetch-depth: 0
+      - run: bash backend/scripts/ci/guard_no_committed_secrets.sh
+      - run: bash backend/scripts/cae_gate.sh
+      - run: git diff --check ${{ needs.classify.outputs.base_sha }} ${{ github.sha }}
+      - name: Validate workflow source when deployment control changed
+        if: needs.classify.outputs.infrastructure == 'true'
+        run: >-
+          go run github.com/rhysd/actionlint/cmd/actionlint@v1.7.12
+          .github/workflows/ci.yml
+          .github/workflows/deploy.yml
+          .github/workflows/nightly.yml
+          .github/workflows/recovery.yml
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
+  supply-chain:
+    name: supply-chain
+    needs: [classify, hygiene]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
         with:
           php-version: '8.4'
           coverage: none
           tools: composer:v2
-          extensions: >
-            mbstring, intl, curl, json, openssl, fileinfo, pdo, pdo_sqlite, sqlite3, pdo_mysql, redis
+      - working-directory: backend
+        run: composer validate --strict
+      - name: Focused dependency audit
+        if: needs.classify.outputs.application == 'true' || needs.classify.outputs.payment == 'true' || needs.classify.outputs.infrastructure == 'true'
+        working-directory: backend
+        run: composer audit --locked --no-interaction --ignore-unreachable
 
-      - name: Cache Composer
-        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
+  content-pack-build-validate:
+    name: content-pack-build-validate
+    needs: [classify, hygiene]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
+        if: needs.classify.outputs.content == 'true'
         with:
-          path: |
-            backend/vendor
-            ~/.composer/cache/files
-          key: ${{ runner.os }}-php84-${{ hashFiles('backend/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php84-
-
-      - name: Prepare Laravel cache dirs
+          php-version: '8.4'
+          coverage: none
+          tools: composer:v2
+      - name: Validate the current authority pack only
+        if: needs.classify.outputs.content == 'true'
         working-directory: backend
         run: |
-          mkdir -p storage/framework/cache/data
-          mkdir -p storage/framework/views
-          mkdir -p storage/framework/sessions
-          mkdir -p storage/logs
-          mkdir -p storage/app/private/content_packs_index
-          mkdir -p storage/app/private/packs_v2_materialized
-          mkdir -p bootstrap/cache
-          chmod -R ug+rwX storage bootstrap/cache || true
-
-      - name: Install backend dependencies
-        working-directory: backend
-        run: composer install --no-interaction --prefer-dist --no-progress
-
-      - name: Ensure Laravel app key
-        working-directory: backend
-        run: |
-          if [ ! -f .env ]; then cp .env.example .env; fi
+          composer install --no-interaction --prefer-dist --no-progress
+          cp -n .env.example .env || true
           php artisan key:generate --force
+          mkdir -p storage/app/private/content_packs_index
+          php artisan content-packs:index:build --output=storage/app/private/content_packs_index/content-packs-index.json --json
+          php artisan test --filter='(ContentPacksIndexArtifact|ContentLint|ContentCompile)' --no-ansi
+      - if: needs.classify.outputs.content != 'true'
+        run: echo "No content authority path changed."
 
-      - name: Download content packs index artifact
-        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+  verify-mbti:
+    name: verify-mbti-${{ matrix.mode }}
+    needs: [classify, hygiene]
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [legacy, v2]
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
         with:
-          name: content-packs-index
-          path: backend/storage/app/private/content_packs_index
-
-      - name: Verify content packs index artifact is consumable
+          fetch-depth: 0
+      - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
+        if: needs.classify.outputs.deploy == 'true' || needs.classify.outputs.tests_changed == 'true'
+        with:
+          php-version: '8.4'
+          coverage: none
+          tools: composer:v2
+          extensions: mbstring, intl, pdo_sqlite, sqlite3, pdo_mysql, redis
+      - name: Install focused-test dependencies
+        if: needs.classify.outputs.deploy == 'true' || needs.classify.outputs.tests_changed == 'true'
         working-directory: backend
         run: |
-          php -r '
-          require "vendor/autoload.php";
-          $app = require "bootstrap/app.php";
-          $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
-          $driver = (string) config("content_packs.driver", "local");
-          $driver = $driver === "s3" ? "s3" : "local";
-          $root = $driver === "s3" ? (string) config("content_packs.cache_dir", "") : (string) config("content_packs.root", "");
-          $defaults = [
-              "default_pack_id" => (string) config("content_packs.default_pack_id", ""),
-              "default_dir_version" => (string) config("content_packs.default_dir_version", ""),
-              "default_region" => (string) config("content_packs.default_region", ""),
-              "default_locale" => (string) config("content_packs.default_locale", ""),
-              "region_fallbacks" => (array) config("content_packs.region_fallbacks", []),
-              "locale_fallback" => (bool) config("content_packs.locale_fallback", false),
-          ];
-          $artifact = app(App\Services\Content\ContentPacksIndexArtifactStore::class)->readConfigured($root, $driver, $defaults);
-          if (! is_array($artifact) || ! (bool) ($artifact["ok"] ?? false) || count((array) ($artifact["items"] ?? [])) < 1) {
-              fwrite(STDERR, "content packs index artifact is not consumable\n");
-              exit(1);
-          }
-          echo "artifact consumer ok items=".count((array) ($artifact["items"] ?? [])).PHP_EOL;
-          '
+          composer install --no-interaction --prefer-dist --no-progress
+          cp -n .env.example .env || true
+          php artisan key:generate --force
+      - name: Validate expand-only migrations
+        if: needs.classify.outputs.migration == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t migrations < <(git diff --diff-filter=AM --name-only '${{ needs.classify.outputs.base_sha }}' '${{ github.sha }}' -- backend/database/migrations/*.php)
+          test "${#migrations[@]}" -gt 0
+          node .github/trunk/validate-migrations.mjs "${migrations[@]}"
+          cd backend
+          DB_DATABASE="$RUNNER_TEMP/fap-ci.sqlite" bash scripts/ci/prepare_sqlite.sh
+          php artisan migrate --force --no-interaction --ansi
+      - name: Focused runtime contracts
+        if: needs.classify.outputs.deploy == 'true'
+        working-directory: backend
+        env:
+          FEATURE_SELFCHECK_V2: ${{ matrix.mode == 'v2' && 'true' || 'false' }}
+          FEATURE_LEGACY_MBTI_REPORT_PAYLOAD_V2: ${{ matrix.mode == 'v2' && 'true' || 'false' }}
+          FEATURE_PAYMENT_WEBHOOK_V2: ${{ matrix.mode == 'v2' && 'true' || 'false' }}
+          FEATURE_CONTENT_STORE_V2: ${{ matrix.mode == 'v2' && 'true' || 'false' }}
+        run: |
+          php artisan test tests/Unit/Security/SecurityGuardrailsTest.php --no-ansi
+          if [ '${{ needs.classify.outputs.payment }}' = 'true' ]; then php artisan test tests/Feature/Commerce tests/Unit/Services/Commerce --no-ansi; fi
+          if [ '${{ needs.classify.outputs.cache }}' = 'true' ]; then php artisan test --filter='(Cache|Projection|Redis|Fence|Lkg)' --no-ansi; fi
+          if [ '${{ needs.classify.outputs.seo }}' = 'true' ]; then php artisan test --filter='(Seo|Sitemap|Discoverability|IndexNow|Canonical)' --no-ansi; fi
+      - name: Execute changed PHP tests for tests-only and mixed scopes
+        if: matrix.mode == 'legacy' && needs.classify.outputs.tests_changed == 'true'
+        working-directory: backend
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t changed_tests < <(git diff --diff-filter=AM --name-only '${{ needs.classify.outputs.base_sha }}' '${{ github.sha }}' -- 'backend/tests/**/*Test.php' | sed 's#^backend/##')
+          if [ "${#changed_tests[@]}" -gt 0 ]; then php artisan test "${changed_tests[@]}" --no-ansi; fi
+      - if: needs.classify.outputs.deploy != 'true'
+        run: echo "Docs/rules/tests-only scope does not deploy."
 
-      - name: Prepare sqlite baseline
+  verify-bigfive:
+    name: verify-bigfive
+    needs: [classify, hygiene]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
+        if: needs.classify.outputs.content == 'true' || needs.classify.outputs.application == 'true'
+        with:
+          php-version: '8.4'
+          coverage: none
+          tools: composer:v2
+          extensions: mbstring, intl, pdo_sqlite, sqlite3, redis
+      - name: Focused Big Five regression
+        if: needs.classify.outputs.content == 'true' || needs.classify.outputs.application == 'true'
         working-directory: backend
         run: |
+          composer install --no-interaction --prefer-dist --no-progress
+          cp -n .env.example .env || true
+          php artisan key:generate --force
           bash scripts/ci/prepare_sqlite.sh
-          php -d memory_limit=1024M artisan fap:schema:verify
+          php artisan test --filter='(BigFive|Big5|NonMbtiReportContractRegressionTest)' --no-ansi
+      - if: needs.classify.outputs.content != 'true' && needs.classify.outputs.application != 'true'
+        run: echo "Big Five runtime boundary unchanged."
 
-      - name: Run Big Five content and business gates
-        working-directory: backend
+  validation-receipt:
+    name: exact-SHA validation receipt
+    needs: [classify, hygiene, supply-chain, content-pack-build-validate, verify-mbti, verify-bigfive]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Require every selected validation to pass
+        env:
+          RESULTS: ${{ toJSON(needs) }}
+          CLASSIFICATION: ${{ needs.classify.outputs.classification }}
         run: |
-          bash scripts/ci/verify_big5_norms.sh
-          php -d memory_limit=1024M artisan content:lint --pack=BIG5_OCEAN --pack-version=v1
-          php -d memory_limit=1024M artisan content:compile --pack=BIG5_OCEAN --pack-version=v1
-          php -d memory_limit=1024M artisan test --filter '(BigFive|Big5|NonMbtiReportContractRegressionTest)' --no-ansi
+          set -euo pipefail
+          jq -e 'to_entries | all(.value.result == "success")' <<< "$RESULTS" >/dev/null
+          jq -n --arg sha "$GITHUB_SHA" --arg run_id "$GITHUB_RUN_ID" --argjson classification "$CLASSIFICATION" \
+            '{schema_version:"fermatmind.trunk-validation.v1",sha:$sha,ci_run_id:$run_id,result:"success",classification:$classification}' \
+            > trunk-validation.json
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: trunk-validation-${{ github.sha }}
+          path: trunk-validation.json
+          if-no-files-found: error
+          retention-days: 90
