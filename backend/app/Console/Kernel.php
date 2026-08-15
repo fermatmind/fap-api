@@ -27,6 +27,7 @@ use App\Console\Commands\Big5TelemetrySummary;
 use App\Console\Commands\BigFiveExportProductionEquivalentCandidatePayloads;
 use App\Console\Commands\BigFiveImportInactiveCandidateRelease;
 use App\Console\Commands\BigFiveResultPageV2AssetAgentAuditCommand;
+use App\Console\Commands\BigFiveResultPageV2ProductionImportCommand;
 use App\Console\Commands\CareerAlignActorsAuthorityOccupation;
 use App\Console\Commands\CareerAlignCareerAuthorityBatch;
 use App\Console\Commands\CareerAlignD8AuthorityCrosswalks;
@@ -59,14 +60,9 @@ use App\Console\Commands\CareerFullDisplayWorkbookValidator;
 use App\Console\Commands\CareerGenerateCanonicalDeltaRolloutManifest;
 use App\Console\Commands\CareerGenerateCanonicalExpansionManifestTrain;
 use App\Console\Commands\CareerGenerateCanonicalProgressiveRolloutManifest;
-use App\Console\Commands\CareerImportActorsDisplayAsset;
 use App\Console\Commands\CareerImportAuthorityWave;
-use App\Console\Commands\CareerImportDetailReadyReplacementAuthority;
-use App\Console\Commands\CareerImportDetailReadyReplacementAuthoritySource;
 use App\Console\Commands\CareerImportOccupationDirectoryDrafts;
 use App\Console\Commands\CareerImportOccupationDirectoryDryRun;
-use App\Console\Commands\CareerImportSelectedDisplayAssets;
-use App\Console\Commands\CareerNormalizeLegacyDisplayAssets;
 use App\Console\Commands\CareerPlanCanonical2786PublicResolutionPartition;
 use App\Console\Commands\CareerPlanCanonical80CohortReadiness;
 use App\Console\Commands\CareerPlanCanonical80RuntimeCandidatePool;
@@ -206,7 +202,6 @@ use App\Console\Commands\PersonalityTdkRuntimePromotionSearchGateReadinessComman
 use App\Console\Commands\PersonalityWarmPublicReadModels;
 use App\Console\Commands\QualityDailySummary;
 use App\Console\Commands\RefreshCareerAttributionDailyCommand;
-use App\Console\Commands\BigFiveResultPageV2ProductionImportCommand;
 use App\Console\Commands\RiasecResultPageAssetAgentAuditCommand;
 use App\Console\Commands\RiasecResultPageV2ProductionImportCommand;
 use App\Console\Commands\RiasecResultPageV2ProductionSmokeCommand;
@@ -370,14 +365,9 @@ class Kernel extends ConsoleKernel
         CareerAlignD8AuthorityCrosswalks::class,
         CareerAlignSelectedAuthorityCrosswalks::class,
         CareerAlignSelectedOnetCrosswalks::class,
-        CareerImportActorsDisplayAsset::class,
         CareerImportAuthorityWave::class,
-        CareerImportDetailReadyReplacementAuthority::class,
-        CareerImportDetailReadyReplacementAuthoritySource::class,
         CareerImportOccupationDirectoryDrafts::class,
         CareerImportOccupationDirectoryDryRun::class,
-        CareerImportSelectedDisplayAssets::class,
-        CareerNormalizeLegacyDisplayAssets::class,
         CareerPlanCanonical80CohortReadiness::class,
         CareerPlanCanonical80RuntimeCandidatePool::class,
         CareerPlanCanonical80TargetDelta::class,

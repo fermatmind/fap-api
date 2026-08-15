@@ -550,11 +550,17 @@ final class CareerAliasResolutionBundleBuilderTest extends TestCase
             'asset_type' => 'career_job_public_display',
             'asset_role' => 'formal_pilot_master',
             'status' => 'ready_for_pilot',
-            'component_order_json' => CareerDisplayAssetComponentContract::LEGACY_V4_2_ORDER,
+            'component_order_json' => CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER,
             'page_payload_json' => [
                 'page' => [
-                    'zh' => ['hero' => ['title' => $occupation->canonical_title_zh]],
-                    'en' => ['hero' => ['title' => $occupation->canonical_title_en]],
+                    'zh' => array_replace(
+                        array_fill_keys(CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER, []),
+                        ['hero' => ['title' => $occupation->canonical_title_zh]],
+                    ),
+                    'en' => array_replace(
+                        array_fill_keys(CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER, []),
+                        ['hero' => ['title' => $occupation->canonical_title_en]],
+                    ),
                 ],
             ],
             'seo_payload_json' => [],

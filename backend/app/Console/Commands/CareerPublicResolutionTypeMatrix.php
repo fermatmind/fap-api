@@ -37,7 +37,7 @@ final class CareerPublicResolutionTypeMatrix
             self::PUBLIC_CANONICAL_JOB => [
                 'owner' => 'career_display_asset_job_detail',
                 'owner_paths' => [
-                    'app/Console/Commands/CareerImportSelectedDisplayAssets.php',
+                    'app/Domain/Career/Display/CareerCurrentAuthorityPublisher.php',
                     'app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php',
                     'app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php',
                     'app/Console/Commands/CareerValidateSitemapLlmsPublicTypeMatrix.php',

@@ -27,6 +27,8 @@ final class CareerJobDisplaySurfaceBuilder
 
     private const ASSET_TYPE = 'career_job_public_display';
 
+    private const ASSET_ROLE = 'formal_pilot_master';
+
     /** @var list<string> Keys that must never appear in public reader-facing payloads. */
     private const FORBIDDEN_PUBLIC_KEYS = [
         'release_gate',
@@ -130,7 +132,6 @@ final class CareerJobDisplaySurfaceBuilder
         }
 
         $componentOrder = $this->stripForbiddenKeys($asset->component_order_json ?? []);
-        $pageContent = $this->alignPageContentToComponentOrder($pageContent, $componentOrder);
         $pageContent = $this->localizeInternalHrefs($pageContent, $normalizedLocale);
         $claimPermissions = $this->claimPermissions($occupation, $asset, $pageContent);
         if (! $this->hasRequiredClaimPermissionKeys($claimPermissions)) {
@@ -165,34 +166,6 @@ final class CareerJobDisplaySurfaceBuilder
             'structured_data_from_visible_content' => $structuredData,
             'implementation_contract' => $implementationContract,
         ];
-    }
-
-    /**
-     * @param  array<string, mixed>  $pageContent
-     * @param  array<mixed>  $componentOrder
-     * @return array<string, mixed>
-     */
-    private function alignPageContentToComponentOrder(array $pageContent, array $componentOrder): array
-    {
-        foreach ($componentOrder as $component) {
-            if (! is_string($component) || trim($component) === '') {
-                continue;
-            }
-
-            if (array_key_exists($component, $pageContent)) {
-                continue;
-            }
-
-            $pageContent[$component] = [
-                'module_key' => $component,
-                'module_state' => 'pending_reviewed_locale_content',
-                'content_available' => false,
-                'source' => 'component_order_contract',
-                'placeholder_policy' => 'no_cross_locale_editorial_copy_generated',
-            ];
-        }
-
-        return $pageContent;
     }
 
     /**
@@ -234,28 +207,28 @@ final class CareerJobDisplaySurfaceBuilder
     private function readyDisplayAsset(Occupation $occupation, string $canonicalSlug): ?CareerJobDisplayAsset
     {
         if ($occupation->relationLoaded('displayAssets')) {
-            $asset = $occupation->displayAssets
+            $assets = $occupation->displayAssets
                 ->filter(static fn (CareerJobDisplayAsset $candidate): bool => (string) $candidate->canonical_slug === $canonicalSlug
-                    && (string) $candidate->surface_version === self::SURFACE_VERSION
-                    && (string) $candidate->asset_version === self::ASSET_VERSION
-                    && (string) $candidate->template_version === self::TEMPLATE_VERSION
                     && (string) $candidate->status === self::READY_STATUS
-                    && (string) $candidate->asset_type === self::ASSET_TYPE)
-                ->sortByDesc('updated_at')
-                ->first();
+                    && (string) $candidate->asset_type === self::ASSET_TYPE
+                    && (string) $candidate->asset_role === self::ASSET_ROLE)
+                ->values();
 
-            return $asset instanceof CareerJobDisplayAsset ? $asset : null;
+            return $assets->count() === 1 && $assets->first() instanceof CareerJobDisplayAsset
+                ? $assets->first()
+                : null;
         }
 
-        return $occupation->displayAssets()
+        $assets = $occupation->displayAssets()
             ->where('canonical_slug', $canonicalSlug)
-            ->where('surface_version', self::SURFACE_VERSION)
-            ->where('asset_version', self::ASSET_VERSION)
-            ->where('template_version', self::TEMPLATE_VERSION)
             ->where('status', self::READY_STATUS)
             ->where('asset_type', self::ASSET_TYPE)
-            ->orderByDesc('updated_at')
-            ->first();
+            ->where('asset_role', self::ASSET_ROLE)
+            ->get();
+
+        return $assets->count() === 1 && $assets->first() instanceof CareerJobDisplayAsset
+            ? $assets->first()
+            : null;
     }
 
     private function isManualHoldSlug(string $slug): bool
@@ -276,8 +249,15 @@ final class CareerJobDisplaySurfaceBuilder
             return false;
         }
 
+        if ((string) $asset->surface_version !== self::SURFACE_VERSION
+            || (string) $asset->asset_version !== self::ASSET_VERSION
+            || (string) $asset->template_version !== self::TEMPLATE_VERSION) {
+            return false;
+        }
+
         $componentOrder = is_array($asset->component_order_json) ? array_values($asset->component_order_json) : [];
-        if (! CareerDisplayAssetComponentContract::supports($componentOrder)) {
+        if (! CareerDisplayAssetComponentContract::isCurrent($componentOrder)
+            || ! CareerDisplayAssetComponentContract::hasExactCurrentPages((array) $asset->page_payload_json)) {
             return false;
         }
 

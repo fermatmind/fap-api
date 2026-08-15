@@ -77,4 +77,47 @@ final class CareerDisplayAssetComponentContract
     {
         return array_values($order) === self::CURRENT_V4_2_ORDER;
     }
+
+    /** @param array<mixed> $payload */
+    public static function hasExactCurrentPages(array $payload): bool
+    {
+        $pages = is_array($payload['page'] ?? null) ? $payload['page'] : $payload;
+        $allowed = array_merge(self::CURRENT_V4_2_ORDER, ['path', 'secondary_cta']);
+
+        foreach (['en', 'zh'] as $locale) {
+            $page = $pages[$locale] ?? null;
+            if (! is_array($page)
+                || array_diff(self::CURRENT_V4_2_ORDER, array_keys($page)) !== []
+                || array_diff(array_keys($page), $allowed) !== []
+                || array_key_exists('sections', $page)
+                || array_key_exists('content_sections', $page)
+                || self::containsPlaceholder($page)) {
+                return false;
+            }
+        }
+
+        $localeKeys = array_keys($pages);
+        sort($localeKeys, SORT_STRING);
+
+        return $localeKeys === ['en', 'zh'];
+    }
+
+    private static function containsPlaceholder(mixed $value): bool
+    {
+        if (! is_array($value)) {
+            return false;
+        }
+        if (($value['content_available'] ?? null) === false
+            || str_starts_with((string) ($value['module_state'] ?? ''), 'pending_')
+            || ($value['source'] ?? null) === 'component_order_contract') {
+            return true;
+        }
+        foreach ($value as $child) {
+            if (self::containsPlaceholder($child)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

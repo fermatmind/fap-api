@@ -1,0 +1,129 @@
+{
+  "authority_path": "backend/content_assets/career/current",
+  "contract_version": "career.current_authority_manifest.v1",
+  "counts": {
+    "careers": 1046,
+    "components_per_page": 26,
+    "locale_pages": 2092,
+    "manual_hold_locale_pages": 2,
+    "numeric_rating_statement_residue_count": 0,
+    "public_projection_locale_pages": 2092
+  },
+  "excluded_environment_fields": [
+    "id",
+    "occupation_id",
+    "import_run_id",
+    "created_at",
+    "updated_at"
+  ],
+  "export_evidence": {
+    "artifact_digest": "sha256:2cfb298b90a1c8443254686d659e8bbf78c918e0fbb29960ba007603384223bc",
+    "artifact_id": 9248668854,
+    "downloaded_manifest_file_sha256": "0d841962e40885f4dc52bda1501b08ba988a83aef8e56af7790e0fadc80dbc98",
+    "export_receipt_uploaded": false,
+    "exported_assets_sha256": "e901ed5a9321244a7884ccbddcf1eb32d170393048e1d021bfda719ca8de59db",
+    "exported_manifest_canonical_sha256": "ec52bd955d790e0bf86d8222f7f68dcb0d67c3bc35cdc439fafd11e7420344f6",
+    "exporter_result": "pass",
+    "source_release_sha": "243579dd12c863235b8e7790e76e664e02d31de1",
+    "workflow_computed_newline_sha256": "1b88096c7db4e5655555d0eba95e1bbb16f7beb4ef7502b5721c278147a2d4d0",
+    "workflow_conclusion": "failure",
+    "workflow_failure_reason": "runner_manifest_trailing_newline_hash_mismatch",
+    "workflow_run_attempt": 1,
+    "workflow_run_id": 31891058358
+  },
+  "exported_field_set_sha256": {
+    "asset_role": "0a5ecd9b820514764819e2f1d5b02c718fb395da3b75773ac7d7e0aa00ce5a5a",
+    "asset_type": "325b220ae3491e15d878fc4e84fdbb93541ad89f82540c0a2890ca3bac7506ce",
+    "asset_version": "cb64d060df0353e9267e0b659ac505b65de3392598cede684cee8e955700a218",
+    "component_order_json": "61edb9ed4db71009f66e1e29ab5023fb8e1dea42e33861db6cd48c99d6ba72b5",
+    "implementation_contract_json": "4301b5397744685498ad843a4e63f99aeff0365009ab0a5fe117dfb85c0f9347",
+    "metadata_json": "e1938e70439d279f20041272110cda2230e269e50b8746bdaa15c4ff2e6316df",
+    "page_payload_json": "4e3096ae54d09f0d9b8206a1a18b51e680d0f85812492d253f45c6135518e04b",
+    "seo_payload_json": "d8d08bdcc48f35b0fcd60780137cacb467c35a572699711de792e835e574421d",
+    "sources_json": "17eaf4324c9245e7b129c74c031beb505d12f4763920ca83e8325080811fc8e1",
+    "status": "f4e6bca202388be891faa06a1866ba5b58d1443f5b87febecca8717d7d2612ae",
+    "structured_data_json": "248b04fa6b55dd7bcf940b65c0cb9df52c3a3fcf8192fe5a4ea4a61cfcec8a8e",
+    "surface_version": "28a5834df1a6cb0dd2d19a237c1d82b257b03ccddff00356a9851830eae82a37",
+    "template_version": "cb64d060df0353e9267e0b659ac505b65de3392598cede684cee8e955700a218"
+  },
+  "files": [
+    {
+      "path": "assets.jsonl",
+      "row_count": 1046,
+      "sha256": "e901ed5a9321244a7884ccbddcf1eb32d170393048e1d021bfda719ca8de59db"
+    }
+  ],
+  "public_projection_field_set_sha256": {
+    "asset_role": "a962b93312e69cf74242448cbb3bc734adfd0c5b8870150ebe13bc942b028a2c",
+    "asset_type": "8641975ca0b2d30405cbff6814459a60e0ee9801c20892192d1e7f752ebdb8ef",
+    "asset_version": "ed2b374b5ddba26ce11a221269b855c6f947be32403dae782f8d78758b39bd8c",
+    "available_locales": "51f5da66ce0f98dc6e73617b90997751f05b7ac39452e1acedd85f3ac820601f",
+    "component_order": "cecbbfa3ada79eb02d531fbc991c0d23498b5d06499c11d2c47eb3d89fa31588",
+    "implementation_contract": "3c5049cc8694cb8af7ce0a5cb61a69847ec2e77586f00aeaf4135cc0ae6450cc",
+    "page": "832e6390dc7250d0cea5968f19107564b640dcd515ac9692c0c7aad3c67a9c29",
+    "sources": "7dc93b188772b05b753441b2f77d8a1f8a48158594df0574358831e55dab8365",
+    "status": "75aad9c720bf6435962f5e36b1521de680ad4fca3478ddc7c3a1e7e66ed2d7fc",
+    "structured_data_from_visible_content": "6d622cc0f577ca76a43e36ddec650954e977485548b7558aba8dc16b34aec7a0",
+    "surface_version": "9aac92f0414728ed45d249ba20d60d08dc37fc62a81f61c3b6fe05395add527d",
+    "template_version": "ed2b374b5ddba26ce11a221269b855c6f947be32403dae782f8d78758b39bd8c"
+  },
+  "set_hashes": {
+    "full_asset_set_sha256": "8cd685e7d0dd77054532a0f1d63d7da36f2fdb6c60e2d419ee1c48b85d06581e",
+    "public_content_aggregate_sha256": "36dd6b18035537f843b5411260b7a4b7a41e3d62ceec756744f832591d2d1474",
+    "slug_set_sha256": "19a7e22cd0c854276efb3f9d15927bd034e7b2ecd6917fbe841e9dd0632fc988"
+  },
+  "structural_contract": {
+    "asset_type": "career_job_public_display",
+    "asset_version": "v4.2",
+    "component_order": [
+      "breadcrumb",
+      "hero",
+      "fermat_decision_card",
+      "primary_cta",
+      "career_snapshot_primary_locale",
+      "career_snapshot_secondary_locale",
+      "fit_decision_checklist",
+      "riasec_fit_block",
+      "personality_fit_block",
+      "definition_block",
+      "career_ai_description_block",
+      "responsibilities_block",
+      "work_context_block",
+      "market_signal_card",
+      "adjacent_career_comparison_table",
+      "ai_impact_table",
+      "career_risk_cards",
+      "career_path_block",
+      "contract_project_risk_block",
+      "next_steps_block",
+      "faq_block",
+      "related_next_pages",
+      "source_card",
+      "review_validity_card",
+      "boundary_notice",
+      "final_cta"
+    ],
+    "public_projection_excluded_manual_hold_slugs": [
+      "software-developers"
+    ],
+    "status": "ready_for_pilot",
+    "surface_version": "display.surface.v1",
+    "template_version": "v4.2"
+  },
+  "superseded_source_coverage": {
+    "missing_12_component_mismatch_count": 0,
+    "missing_12_component_set_sha256": "a6776aa66632bf2cd431d9af15a967f8ce8759171f793512aa36b610fdeccea8",
+    "missing_12_original_component_count": 576,
+    "workbuddy_block_count": 4184,
+    "workbuddy_block_mismatch_count": 0,
+    "workbuddy_block_set_sha256": "7a462d54f7a46fee56ca670168e06c91d02574cafc3c9e67668c66ad3a5d2ece"
+  },
+  "superseded_sources": {
+    "missing_12_assets_sha256": "e38f9aaa945ab470af204e6279cd7ec9314690defb6e792a615a17457615cfeb",
+    "missing_12_manifest_sha256": "008ad07802ed960cbd0f8dbc22457190b763e443187a3de74e91645f38bfe329",
+    "workbuddy_assets_sha256": "6ee7a409fb4e2f15fed1709bd05fe2f7f28b22136ace589d8c308720520bc9bd",
+    "workbuddy_builder_sha256": "e0be00a5016788bb38a7eafb4c4aa9ac08f1b87dbb093894f77b97635aea3303",
+    "workbuddy_delivery_report_sha256": "cdd8cd0169d3e7243751271d24d7f0cd4bd8dea37f34657d3a22afee38307d29",
+    "workbuddy_manifest_sha256": "4493ec35f98a974f16991724f52b1e6667bc4044c501e92d3954e0dc52d08f51"
+  }
+}
