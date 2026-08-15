@@ -58,6 +58,8 @@ jobs:
       - working-directory: backend
         run: composer audit --locked --no-interaction --ignore-unreachable
       - run: node --test .github/trunk/*.test.mjs
+      - name: Install CI verification tools
+        run: sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends ripgrep
       - run: bash backend/scripts/ci_verify_mbti.sh
       - working-directory: backend
         run: php artisan test --no-ansi
