@@ -75,6 +75,7 @@ final class CareerCurrentAuthorityExporter
         'asset_type',
         'asset_role',
         'status',
+        'subject',
         'available_locales',
         'claim_permissions',
         'page',

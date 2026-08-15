@@ -10,17 +10,18 @@ final class CareerCurrentAuthorityExportWorkflowTest extends TestCase
 {
     public function test_one_time_workflow_is_exact_release_bound_and_environment_protected(): void
     {
-        $workflow = $this->repoFile('.github/workflows/career-current-authority-export.yml');
+        self::assertFileDoesNotExist(dirname(__DIR__, 3).'/.github/workflows/career-current-authority-export.yml');
+        $workflow = $this->repoFile('.github/workflows/backend-greenfield-current-baseline.yml');
 
         foreach ([
-            'expected_release_sha:',
+            '- career-current-authority',
             'operation_key:',
-            'career-current-authority-export-production',
-            'Elect one-time export owner before Environment access',
+            'group: deploy-${{ github.repository }}-production',
+            'Elect Career Current export owner before Environment access',
             'uses: ./.github/actions/controlled-operation-gate',
             'environment: production',
-            'test "$(git rev-parse origin/main)" = "$RELEASE"',
-            'test "$(git rev-parse HEAD)" = "$RELEASE"',
+            'test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"',
+            'test "$EXPECTED_ACTIVE_REVISION" = "$EXPECTED_CONTROL_PLANE_SHA"',
             'REVISION',
             'test ! -e $q_path/.dep/deploy.lock',
             'CAREER_CURRENT_EXPORT_EXECUTE=1',
@@ -32,7 +33,11 @@ final class CareerCurrentAuthorityExportWorkflowTest extends TestCase
             '.discoverability_write_count == 0',
             '.database_public_content_sha256 == .active_cache_public_content_sha256',
             '.database_public_content_sha256 == .api_public_content_sha256',
-            'retention-days: 30',
+            'remote_status="${pipeline_status[1]}"',
+            'FAIL_CURRENT_AUTHORITY_EXPORT',
+            'safe_error_code',
+            'if: always() && inputs.mode == \'career-current-authority\'',
+            'retention-days: 3',
         ] as $required) {
             self::assertStringContainsString($required, $workflow);
         }

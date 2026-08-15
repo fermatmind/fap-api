@@ -38,7 +38,7 @@ final class CareerCurrentAuthorityExporterTest extends TestCase
         $rows = [$this->row('alpha')];
         $database = $this->projections(['alpha']);
         $cache = $database;
-        $cache['alpha|en']['page']['content']['hero'] = ['title' => 'drift'];
+        $cache['alpha|en']['subject']['title'] = 'drift';
 
         $this->expectException(CareerCurrentAuthorityExportFailure::class);
         $this->expectExceptionMessage('PUBLIC_CONTENT_HASH_MISMATCH');
@@ -101,6 +101,7 @@ final class CareerCurrentAuthorityExporterTest extends TestCase
                     'asset_type' => 'career_job_public_display',
                     'asset_role' => 'formal_pilot_master',
                     'status' => 'ready_for_pilot',
+                    'subject' => ['canonical_slug' => $slug, 'title' => $slug],
                     'available_locales' => ['en', 'zh-CN'],
                     'claim_permissions' => [],
                     'page' => ['locale' => $locale, 'content' => ['hero' => ['title' => $slug]]],
