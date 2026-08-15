@@ -19,6 +19,7 @@ final class CareerCurrentAuthorityExportWorkflowTest extends TestCase
             'operation_key:',
             'run-name: Backend Greenfield Current Baseline ${{ inputs.mode }} [op:${{ inputs.operation_key }}]',
             'group: deploy-${{ github.repository }}-production',
+            'Validate Career Current inputs before owner election',
             'Elect Career Current export owner before Environment access',
             'uses: ./.github/actions/controlled-operation-gate',
             'IDENTITY: control=${{ inputs.expected_control_plane_sha }}|release=${{ inputs.expected_active_revision }}|projection=${{ inputs.expected_projection_sha256 }}|mode=career-current-authority',
@@ -93,6 +94,11 @@ final class CareerCurrentAuthorityExportWorkflowTest extends TestCase
             'group: deploy-${{ github.repository }}-production',
             $replacementWorkflow,
             'The export and the legacy replacement must serialize through the same production group.',
+        );
+        self::assertLessThan(
+            strpos($workflow, 'uses: ./.github/actions/controlled-operation-gate'),
+            strpos($workflow, 'Validate Career Current inputs before owner election'),
+            'All dispatch inputs must be validated before the operation owner is elected.',
         );
     }
 

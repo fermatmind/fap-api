@@ -54,6 +54,27 @@ jobs:
       decision: ${{ steps.decision.outputs.decision }}
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - name: Validate Career Current inputs before owner election
+        if: inputs.mode == 'career-current-authority'
+        shell: bash
+        env:
+          CONTROL: ${{ inputs.expected_control_plane_sha }}
+          RELEASE: ${{ inputs.expected_active_revision }}
+          PROJECTION: ${{ inputs.expected_projection_sha256 }}
+          MEDIA_HOST_SET: ${{ inputs.expected_media_host_set_sha256 }}
+          APPROVAL: ${{ inputs.operator_approval_phrase }}
+          OPERATION_KEY: ${{ inputs.operation_key }}
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = "refs/heads/main"
+          [[ "$CONTROL" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$RELEASE" =~ ^[0-9a-f]{40}$ ]]
+          test "$RELEASE" = "$CONTROL"
+          [[ "$PROJECTION" =~ ^[0-9a-f]{64}$ ]]
+          test -z "$MEDIA_HOST_SET"
+          [[ "$OPERATION_KEY" =~ ^[0-9a-f]{64}$ ]]
+          expected="I explicitly approve SELECT-only production Career Current authority export for active SHA ${RELEASE} control SHA ${CONTROL} projection SHA256 ${PROJECTION}."
+          test "$APPROVAL" = "$expected"
       - id: identity
         if: inputs.mode == 'career-current-authority'
         shell: bash
