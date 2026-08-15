@@ -57,6 +57,7 @@ final class Career1046MissingDisplayAssetPackageTest extends TestCase
             self::assertSame($row['asset_payload_sha256'], $this->hashValue($payload));
             self::assertMatchesRegularExpression('/\A[0-9]{2}-[0-9]{4}\z/', $row['expected_soc']);
             self::assertMatchesRegularExpression('/\A[0-9]{2}-[0-9]{4}\.[0-9]{2}\z/', $row['expected_onet']);
+            self::assertNotEmpty($payload['page_payload_json']['page']['en']['hero']['title']);
             foreach (['en', 'zh'] as $locale) {
                 $page = $payload['page_payload_json']['page'][$locale];
                 foreach (['hero', 'definition_block', 'responsibilities_block', 'market_signal_card', 'faq_block'] as $component) {
@@ -148,21 +149,76 @@ final class Career1046MissingDisplayAssetPackageTest extends TestCase
         self::assertSame($packageSummary['package_sha256'], $asset->metadata_json['replacement_lineage']['package_sha256']);
     }
 
-    public function test_an_authorized_insert_requires_exact_soc_and_onet_crosswalks(): void
+    public function test_an_authorized_insert_plans_exact_soc_and_onet_crosswalks_and_accepts_only_exact_applied_state(): void
     {
-        $occupation = new Occupation(['canonical_slug' => 'industrial-engineers']);
+        $baseRow = json_decode((string) file(dirname(__DIR__, 5).'/content_assets/career/missing-12-display-v1/assets.jsonl', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES)[0], true, 512, JSON_THROW_ON_ERROR);
+        $occupation = new Occupation([
+            'id' => '00000000-0000-4000-8000-000000000001',
+            'canonical_slug' => $baseRow['slug'],
+        ]);
+        $occupation->setRelation('crosswalks', collect());
+        $service = (new ReflectionClass(Career1046DisplayAssetReplacement::class))->newInstanceWithoutConstructor();
+        $method = new ReflectionMethod($service, 'occupationCrosswalkPlan');
+        $missingPackageSha256 = (string) hash_file('sha256', dirname(__DIR__, 5).'/content_assets/career/missing-12-display-v1/assets.jsonl');
+
+        $initial = $method->invoke($service, [$baseRow['slug'] => $occupation], [$baseRow['slug'] => $baseRow], true, $missingPackageSha256);
+        self::assertSame([], $initial['before']);
+        self::assertCount(2, $initial['expected']);
+        $insertSnapshots = array_map(
+            static fn (array $attributes): array => [
+                'id' => $attributes['id'],
+                'occupation_id' => $attributes['occupation_id'],
+                'source_system' => $attributes['source_system'],
+                'source_code' => $attributes['source_code'],
+                'source_title' => $attributes['source_title'],
+                'mapping_type' => $attributes['mapping_type'],
+                'confidence_score' => $attributes['confidence_score'],
+                'notes' => $attributes['notes'],
+            ],
+            $initial['inserts'],
+        );
+        usort($insertSnapshots, static fn (array $left, array $right): int => strcmp($left['source_system'], $right['source_system']));
+        self::assertSame($initial['expected'], $insertSnapshots);
+        self::assertSame(['us_soc', 'onet_soc_2019'], array_column($initial['inserts'], 'source_system'));
+        self::assertSame([$baseRow['expected_soc'], $baseRow['expected_onet']], array_column($initial['inserts'], 'source_code'));
+        self::assertSame([$baseRow['asset_payload']['page_payload_json']['page']['en']['hero']['title']], array_values(array_unique(array_column($initial['inserts'], 'source_title'))));
+        self::assertStringContainsString('package_sha256='.$missingPackageSha256, $initial['inserts'][0]['notes']);
+        self::assertStringContainsString('source_workbook_row_sha256='.$baseRow['source_workbook_row_sha256'], $initial['inserts'][0]['notes']);
+
+        $occupation->setRelation('crosswalks', collect(array_map(
+            static fn (array $attributes): OccupationCrosswalk => new OccupationCrosswalk($attributes),
+            $initial['inserts'],
+        )));
+        $applied = $method->invoke($service, [$baseRow['slug'] => $occupation], [$baseRow['slug'] => $baseRow], false, $missingPackageSha256);
+        self::assertSame([], $applied['inserts']);
+        self::assertSame($initial['expected'], $applied['expected']);
+    }
+
+    public function test_partial_or_conflicting_crosswalk_state_fails_closed_before_writes(): void
+    {
+        $baseRow = json_decode((string) file(dirname(__DIR__, 5).'/content_assets/career/missing-12-display-v1/assets.jsonl', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES)[0], true, 512, JSON_THROW_ON_ERROR);
+        $occupation = new Occupation([
+            'id' => '00000000-0000-4000-8000-000000000001',
+            'canonical_slug' => $baseRow['slug'],
+        ]);
         $occupation->setRelation('crosswalks', collect([
-            new OccupationCrosswalk(['source_system' => 'us_soc', 'source_code' => '17-2112']),
-            new OccupationCrosswalk(['source_system' => 'onet_soc_2019', 'source_code' => '17-2112.00']),
+            new OccupationCrosswalk([
+                'id' => '00000000-0000-4000-8000-000000000002',
+                'occupation_id' => $occupation->id,
+                'source_system' => 'us_soc',
+                'source_code' => $baseRow['expected_soc'],
+                'source_title' => 'Conflicting title',
+                'mapping_type' => 'direct_match',
+                'confidence_score' => 1.0,
+                'notes' => 'conflict',
+            ]),
         ]));
         $service = (new ReflectionClass(Career1046DisplayAssetReplacement::class))->newInstanceWithoutConstructor();
-        $method = new ReflectionMethod($service, 'assertOccupationCrosswalks');
+        $method = new ReflectionMethod($service, 'occupationCrosswalkPlan');
+        $missingPackageSha256 = (string) hash_file('sha256', dirname(__DIR__, 5).'/content_assets/career/missing-12-display-v1/assets.jsonl');
 
-        $method->invoke($service, $occupation, ['expected_soc' => '17-2112', 'expected_onet' => '17-2112.00']);
-        self::assertTrue(true);
-
-        $this->expectExceptionMessage('DISPLAY_INSERT_OCCUPATION_CROSSWALK_MISMATCH');
-        $method->invoke($service, $occupation, ['expected_soc' => '17-2112', 'expected_onet' => '17-2112.99']);
+        $this->expectExceptionMessage('DISPLAY_INSERT_OCCUPATION_CROSSWALK_STATE_INVALID');
+        $method->invoke($service, [$baseRow['slug'] => $occupation], [$baseRow['slug'] => $baseRow], true, $missingPackageSha256);
     }
 
     public function test_all_twelve_inserted_assets_have_one_numeric_ai_rating_authority(): void

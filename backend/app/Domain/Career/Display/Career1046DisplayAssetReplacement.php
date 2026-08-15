@@ -44,6 +44,8 @@ final class Career1046DisplayAssetReplacement
 
     public const EXPECTED_INSERTS = 12;
 
+    public const EXPECTED_CROSSWALK_INSERTS = 24;
+
     private const SURFACE_VERSION = 'display.surface.v1';
 
     private const ASSET_VERSION = 'v4.2';
@@ -53,6 +55,8 @@ final class Career1046DisplayAssetReplacement
     private const ASSET_ROLE = 'formal_pilot_master';
 
     private const READY_STATUS = 'ready_for_pilot';
+
+    private const CROSSWALK_NOTES_PREFIX = 'Career 1046 frozen missing-display authority repair';
 
     /** @var list<string> */
     private const LOCALES = ['en', 'zh-CN'];
@@ -75,6 +79,7 @@ final class Career1046DisplayAssetReplacement
 
         if ($plan['state'] === 'applied') {
             $this->assertDatabaseReadback($plan['after_rows']);
+            $this->assertOccupationCrosswalkReadback($plan['expected_crosswalks']);
             $cache = $this->assertActiveCacheReadback($package['slugs'], $plan['expected_blocks']);
             $this->assertCacheAggregates($cache, $package['summary']);
 
@@ -98,8 +103,11 @@ final class Career1046DisplayAssetReplacement
         $rollbackSnapshots = [];
         $databaseUpdateCount = 0;
         $databaseInsertCount = 0;
+        $occupationCrosswalkInsertCount = 0;
         try {
-            DB::transaction(function () use ($plan, &$databaseUpdateCount, &$databaseInsertCount): void {
+            DB::transaction(function () use ($plan, &$databaseUpdateCount, &$databaseInsertCount, &$occupationCrosswalkInsertCount): void {
+                $occupationCrosswalkInsertCount = $this->insertOccupationCrosswalks($plan['crosswalk_inserts']);
+
                 foreach ($plan['updates'] as $update) {
                     $current = CareerJobDisplayAsset::query()
                         ->whereKey($update['id'])
@@ -150,6 +158,7 @@ final class Career1046DisplayAssetReplacement
                 }
 
                 $this->assertDatabaseReadback($plan['after_rows']);
+                $this->assertOccupationCrosswalkReadback($plan['expected_crosswalks']);
             }, 1);
             $databaseCommitted = true;
 
@@ -180,6 +189,7 @@ final class Career1046DisplayAssetReplacement
             $rollbackSnapshots = (array) ($activation['rollback_snapshots'] ?? []);
 
             $this->assertDatabaseReadback($plan['after_rows']);
+            $this->assertOccupationCrosswalkReadback($plan['expected_crosswalks']);
             $cacheAfter = $this->assertActiveCacheReadback($package['slugs'], $plan['expected_blocks']);
             $this->assertCacheAggregates($cacheAfter, $package['summary']);
 
@@ -191,6 +201,7 @@ final class Career1046DisplayAssetReplacement
                 [
                     'database_update_count' => $databaseUpdateCount,
                     'database_insert_count' => $databaseInsertCount,
+                    'occupation_crosswalk_insert_count' => $occupationCrosswalkInsertCount,
                     'database_delete_count' => 0,
                     'cache_candidate_write_count' => self::EXPECTED_LOCALE_ROWS * 2,
                     'cache_pointer_activation_count' => self::EXPECTED_LOCALE_ROWS,
@@ -221,7 +232,13 @@ final class Career1046DisplayAssetReplacement
                 }
                 if ($databaseCommitted) {
                     try {
-                        $this->restoreDatabaseRows($plan['before_rows'], $plan['inserts'], $plan['after_rows']);
+                        $this->restoreDatabaseRows(
+                            $plan['before_rows'],
+                            $plan['inserts'],
+                            $plan['after_rows'],
+                            $plan['crosswalk_inserts'],
+                            $plan['expected_crosswalks'],
+                        );
                     } catch (Throwable $databaseRestoreFailure) {
                         $compensationFailure ??= $databaseRestoreFailure;
                     }
@@ -332,13 +349,19 @@ final class Career1046DisplayAssetReplacement
         $appliedState = $authorityState === 'applied';
 
         $occupations = Occupation::query()
-            ->whereIn('canonical_slug', $missingSlugs)
+            ->whereIn('canonical_slug', $authorizedInsertSlugs)
             ->with('crosswalks')
             ->get()
             ->keyBy(static fn (Occupation $occupation): string => strtolower((string) $occupation->canonical_slug));
-        if ($occupations->count() !== count($missingSlugs)) {
+        if ($occupations->count() !== count($authorizedInsertSlugs)) {
             throw new Career1046DisplayAssetReplacementFailure('DISPLAY_INSERT_OCCUPATION_MISSING');
         }
+        $crosswalkPlan = $this->occupationCrosswalkPlan(
+            $occupations->all(),
+            $missingBaseRows,
+            $initialState,
+            (string) ($missingBaseSummary['package_sha256'] ?? ''),
+        );
 
         $beforeRows = [];
         $beforeStates = [];
@@ -389,7 +412,6 @@ final class Career1046DisplayAssetReplacement
         foreach ($missingSlugs as $slug) {
             /** @var Occupation $occupation */
             $occupation = $occupations->get($slug);
-            $this->assertOccupationCrosswalks($occupation, $missingBaseRows[$slug]);
             $attributes = $this->insertAttributes(
                 $slug,
                 $occupation,
@@ -428,6 +450,12 @@ final class Career1046DisplayAssetReplacement
         if ($appliedState && $changedCount !== 0) {
             throw new Career1046DisplayAssetReplacementFailure('APPLIED_REPLACEMENT_STATE_HASH_MISMATCH');
         }
+        if ($initialState && count($crosswalkPlan['inserts']) !== self::EXPECTED_CROSSWALK_INSERTS) {
+            throw new Career1046DisplayAssetReplacementFailure('INITIAL_CROSSWALK_PLAN_MISMATCH');
+        }
+        if ($appliedState && $crosswalkPlan['inserts'] !== []) {
+            throw new Career1046DisplayAssetReplacementFailure('APPLIED_CROSSWALK_PLAN_MISMATCH');
+        }
 
         return [
             'state' => $appliedState ? 'applied' : 'initial',
@@ -436,13 +464,21 @@ final class Career1046DisplayAssetReplacement
             'expected_blocks' => $expectedBlocks,
             'updates' => $updates,
             'inserts' => $inserts,
+            'crosswalk_inserts' => $crosswalkPlan['inserts'],
+            'expected_crosswalks' => $crosswalkPlan['expected'],
             'summary' => [
                 'target_count' => count($afterRows),
                 'existing_target_count' => count($assets),
                 'changed_count' => $changedCount,
                 'unchanged_count' => self::EXPECTED_CAREERS - $changedCount,
-                'before_state_sha256' => self::hashValue($beforeStates),
-                'after_state_sha256' => self::hashValue($afterRows),
+                'before_state_sha256' => self::hashValue([
+                    'assets' => $beforeStates,
+                    'occupation_crosswalks' => $crosswalkPlan['before'],
+                ]),
+                'after_state_sha256' => self::hashValue([
+                    'assets' => $afterRows,
+                    'occupation_crosswalks' => $crosswalkPlan['expected'],
+                ]),
                 'component_order_before_counts' => [
                     '24' => $legacyCount,
                     '26' => $currentCount,
@@ -451,6 +487,9 @@ final class Career1046DisplayAssetReplacement
                 'component_order_after_count' => count($afterRows),
                 'insert_count' => count($inserts),
                 'insert_slug_set_sha256' => self::setHash($missingSlugs),
+                'occupation_crosswalk_insert_count' => count($crosswalkPlan['inserts']),
+                'occupation_crosswalk_after_count' => count($crosswalkPlan['expected']),
+                'occupation_crosswalk_set_sha256' => self::hashValue($crosswalkPlan['expected']),
                 'delete_count' => 0,
                 'outside_target_count' => 0,
             ],
@@ -622,22 +661,127 @@ final class Career1046DisplayAssetReplacement
         return $pages;
     }
 
-    /** @param array<string, mixed> $baseRow */
-    private function assertOccupationCrosswalks(Occupation $occupation, array $baseRow): void
-    {
-        $expectedSoc = (string) ($baseRow['expected_soc'] ?? '');
-        $expectedOnet = (string) ($baseRow['expected_onet'] ?? '');
-        $socValid = $occupation->crosswalks->contains(
-            static fn (OccupationCrosswalk $crosswalk): bool => $crosswalk->source_system === 'us_soc'
-                && $crosswalk->source_code === $expectedSoc,
-        );
-        $onetValid = $occupation->crosswalks->contains(
-            static fn (OccupationCrosswalk $crosswalk): bool => $crosswalk->source_system === 'onet_soc_2019'
-                && $crosswalk->source_code === $expectedOnet,
-        );
-        if (! $socValid || ! $onetValid) {
-            throw new Career1046DisplayAssetReplacementFailure('DISPLAY_INSERT_OCCUPATION_CROSSWALK_MISMATCH');
+    /**
+     * @param  array<string, Occupation>  $occupations
+     * @param  array<string, array<string, mixed>>  $baseRows
+     * @return array{before: list<array<string, mixed>>, expected: list<array<string, mixed>>, inserts: list<array<string, mixed>>}
+     */
+    private function occupationCrosswalkPlan(
+        array $occupations,
+        array $baseRows,
+        bool $initialState,
+        string $missingBasePackageSha256,
+    ): array {
+        if (preg_match('/\A[0-9a-f]{64}\z/', $missingBasePackageSha256) !== 1) {
+            throw new Career1046DisplayAssetReplacementFailure('CROSSWALK_FROZEN_SOURCE_INVALID');
         }
+        $before = [];
+        $expected = [];
+        $inserts = [];
+        ksort($baseRows, SORT_STRING);
+        foreach ($baseRows as $slug => $baseRow) {
+            $occupation = $occupations[$slug] ?? null;
+            if (! $occupation instanceof Occupation) {
+                throw new Career1046DisplayAssetReplacementFailure('DISPLAY_INSERT_OCCUPATION_MISSING');
+            }
+            $title = trim((string) data_get($baseRow, 'asset_payload.page_payload_json.page.en.hero.title'));
+            $expectedSoc = trim((string) ($baseRow['expected_soc'] ?? ''));
+            $expectedOnet = trim((string) ($baseRow['expected_onet'] ?? ''));
+            $sourceWorkbookRowSha256 = trim((string) ($baseRow['source_workbook_row_sha256'] ?? ''));
+            if ($title === ''
+                || preg_match('/\A[0-9]{2}-[0-9]{4}\z/', $expectedSoc) !== 1
+                || preg_match('/\A[0-9]{2}-[0-9]{4}\.[0-9]{2}\z/', $expectedOnet) !== 1
+                || preg_match('/\A[0-9a-f]{64}\z/', $sourceWorkbookRowSha256) !== 1
+                || ! str_starts_with($expectedOnet, $expectedSoc.'.')) {
+                throw new Career1046DisplayAssetReplacementFailure('CROSSWALK_FROZEN_SOURCE_INVALID');
+            }
+            $notes = self::CROSSWALK_NOTES_PREFIX
+                .' package_sha256='.$missingBasePackageSha256
+                .' source_workbook_row_sha256='.$sourceWorkbookRowSha256;
+
+            $rows = [
+                $this->crosswalkAttributes($slug, $occupation, 'us_soc', $expectedSoc, $title, $notes),
+                $this->crosswalkAttributes($slug, $occupation, 'onet_soc_2019', $expectedOnet, $title, $notes),
+            ];
+            $relevant = $occupation->crosswalks
+                ->filter(static fn (OccupationCrosswalk $crosswalk): bool => in_array($crosswalk->source_system, ['us_soc', 'onet_soc_2019'], true))
+                ->map(fn (OccupationCrosswalk $crosswalk): array => $this->crosswalkSnapshot($crosswalk))
+                ->values()
+                ->all();
+            usort($relevant, static fn (array $left, array $right): int => strcmp($left['source_system'], $right['source_system']));
+            $expectedSnapshots = array_map(fn (array $row): array => $this->crosswalkSnapshot(new OccupationCrosswalk($row)), $rows);
+            usort($expectedSnapshots, static fn (array $left, array $right): int => strcmp($left['source_system'], $right['source_system']));
+            if (($initialState && $relevant !== []) || (! $initialState && $relevant !== $expectedSnapshots)) {
+                throw new Career1046DisplayAssetReplacementFailure('DISPLAY_INSERT_OCCUPATION_CROSSWALK_STATE_INVALID');
+            }
+            array_push($before, ...$relevant);
+            array_push($expected, ...$expectedSnapshots);
+            if ($initialState) {
+                array_push($inserts, ...$rows);
+            }
+        }
+
+        return ['before' => $before, 'expected' => $expected, 'inserts' => $inserts];
+    }
+
+    /** @return array<string, mixed> */
+    private function crosswalkAttributes(
+        string $slug,
+        Occupation $occupation,
+        string $sourceSystem,
+        string $sourceCode,
+        string $title,
+        string $notes,
+    ): array {
+        return [
+            'id' => Uuid::uuid5(Uuid::NAMESPACE_URL, 'https://fermatmind.com/authority/career/crosswalk/'.$slug.'/'.$sourceSystem.'/'.$sourceCode)->toString(),
+            'occupation_id' => (string) $occupation->id,
+            'source_system' => $sourceSystem,
+            'source_code' => $sourceCode,
+            'source_title' => $title,
+            'mapping_type' => 'direct_match',
+            'confidence_score' => 1.0,
+            'notes' => $notes,
+        ];
+    }
+
+    /** @return array<string, mixed> */
+    private function crosswalkSnapshot(OccupationCrosswalk $crosswalk): array
+    {
+        return [
+            'id' => (string) $crosswalk->id,
+            'occupation_id' => (string) $crosswalk->occupation_id,
+            'source_system' => (string) $crosswalk->source_system,
+            'source_code' => (string) $crosswalk->source_code,
+            'source_title' => (string) $crosswalk->source_title,
+            'mapping_type' => (string) $crosswalk->mapping_type,
+            'confidence_score' => (float) $crosswalk->confidence_score,
+            'notes' => (string) $crosswalk->notes,
+        ];
+    }
+
+    /** @param list<array<string, mixed>> $inserts */
+    private function insertOccupationCrosswalks(array $inserts): int
+    {
+        $count = 0;
+        foreach ($inserts as $insert) {
+            $occupation = Occupation::query()->whereKey($insert['occupation_id'])->lockForUpdate()->first();
+            if (! $occupation instanceof Occupation) {
+                throw new Career1046DisplayAssetReplacementFailure('DATABASE_CROSSWALK_OCCUPATION_STATE_DRIFT');
+            }
+            $conflict = OccupationCrosswalk::query()
+                ->where('occupation_id', $insert['occupation_id'])
+                ->where('source_system', $insert['source_system'])
+                ->lockForUpdate()
+                ->exists();
+            if ($conflict) {
+                throw new Career1046DisplayAssetReplacementFailure('DATABASE_CROSSWALK_TARGET_STATE_DRIFT');
+            }
+            OccupationCrosswalk::query()->create($insert);
+            $count++;
+        }
+
+        return $count;
     }
 
     /**
@@ -769,9 +913,14 @@ final class Career1046DisplayAssetReplacement
      * @param  list<array<string, mixed>>  $inserts
      * @param  array<string, array<string, mixed>>  $afterRows
      */
-    private function restoreDatabaseRows(array $beforeRows, array $inserts, array $afterRows): void
-    {
-        DB::transaction(function () use ($beforeRows, $inserts, $afterRows): void {
+    private function restoreDatabaseRows(
+        array $beforeRows,
+        array $inserts,
+        array $afterRows,
+        array $crosswalkInserts,
+        array $expectedCrosswalks,
+    ): void {
+        DB::transaction(function () use ($beforeRows, $inserts, $afterRows, $crosswalkInserts, $expectedCrosswalks): void {
             foreach ($inserts as $insert) {
                 $current = CareerJobDisplayAsset::query()->whereKey($insert['id'])->lockForUpdate()->first();
                 if (! $current instanceof CareerJobDisplayAsset
@@ -809,7 +958,50 @@ final class Career1046DisplayAssetReplacement
                     throw new Career1046DisplayAssetReplacementFailure('DATABASE_COMPENSATION_UPDATE_FAILED');
                 }
             }
+
+            $this->deleteOccupationCrosswalksForCompensation($crosswalkInserts, $expectedCrosswalks);
         }, 1);
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $inserts
+     * @param  list<array<string, mixed>>  $expected
+     */
+    private function deleteOccupationCrosswalksForCompensation(array $inserts, array $expected): void
+    {
+        $this->assertOccupationCrosswalkReadback($expected, true);
+        foreach ($inserts as $insert) {
+            if (OccupationCrosswalk::query()->whereKey($insert['id'])->delete() !== 1) {
+                throw new Career1046DisplayAssetReplacementFailure('DATABASE_COMPENSATION_CROSSWALK_DELETE_FAILED');
+            }
+        }
+        $remaining = OccupationCrosswalk::query()
+            ->whereIn('occupation_id', array_values(array_unique(array_column($expected, 'occupation_id'))))
+            ->whereIn('source_system', ['us_soc', 'onet_soc_2019'])
+            ->count();
+        if ($remaining !== 0) {
+            throw new Career1046DisplayAssetReplacementFailure('DATABASE_COMPENSATION_CROSSWALK_READBACK_FAILED');
+        }
+    }
+
+    /** @param list<array<string, mixed>> $expected */
+    private function assertOccupationCrosswalkReadback(array $expected, bool $lockForUpdate = false): void
+    {
+        $occupationIds = array_values(array_unique(array_column($expected, 'occupation_id')));
+        $query = OccupationCrosswalk::query()
+            ->whereIn('occupation_id', $occupationIds)
+            ->whereIn('source_system', ['us_soc', 'onet_soc_2019']);
+        if ($lockForUpdate) {
+            $query->lockForUpdate();
+        }
+        $actual = $query->get()
+            ->map(fn (OccupationCrosswalk $crosswalk): array => $this->crosswalkSnapshot($crosswalk))
+            ->all();
+        usort($actual, static fn (array $left, array $right): int => strcmp($left['occupation_id'].'|'.$left['source_system'], $right['occupation_id'].'|'.$right['source_system']));
+        usort($expected, static fn (array $left, array $right): int => strcmp($left['occupation_id'].'|'.$left['source_system'], $right['occupation_id'].'|'.$right['source_system']));
+        if ($actual !== $expected || count($actual) !== self::EXPECTED_CROSSWALK_INSERTS) {
+            throw new Career1046DisplayAssetReplacementFailure('DATABASE_CROSSWALK_READBACK_MISMATCH');
+        }
     }
 
     /**
@@ -1183,6 +1375,7 @@ final class Career1046DisplayAssetReplacement
         return [
             'database_update_count' => 0,
             'database_insert_count' => 0,
+            'occupation_crosswalk_insert_count' => 0,
             'database_delete_count' => 0,
             'cache_candidate_write_count' => 0,
             'cache_pointer_activation_count' => 0,
