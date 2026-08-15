@@ -99,7 +99,12 @@ jobs:
       - run: git diff --check ${{ needs.classify.outputs.base_sha }} ${{ github.sha }}
       - name: Validate workflow source when deployment control changed
         if: needs.classify.outputs.infrastructure == 'true'
-        run: go run github.com/rhysd/actionlint/cmd/actionlint@v1.7.12
+        run: >-
+          go run github.com/rhysd/actionlint/cmd/actionlint@v1.7.12
+          .github/workflows/ci.yml
+          .github/workflows/deploy.yml
+          .github/workflows/nightly.yml
+          .github/workflows/recovery.yml
 
   supply-chain:
     name: supply-chain
