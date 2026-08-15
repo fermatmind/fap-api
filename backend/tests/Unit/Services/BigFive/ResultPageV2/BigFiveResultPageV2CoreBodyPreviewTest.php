@@ -1031,23 +1031,6 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
-    public function test_runtime_freeze_classifier_ignores_one_time_career_current_authority_exporter(): void
-    {
-        $allowed = [
-            'backend/app/Domain/Career/Display/CareerCurrentAuthorityExporter.php',
-        ];
-
-        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', ''));
-        $this->assertSame(
-            ['backend/app/Domain/Career/Display/CareerCurrentAuthorityPublisher.php'],
-            $this->mbtiImpactingRuntimeChanges(
-                ['backend/app/Domain/Career/Display/CareerCurrentAuthorityPublisher.php'],
-                '',
-                '',
-            ),
-        );
-    }
-
     public function test_runtime_freeze_classifier_ignores_big_five_career_bridge_read_only_boundary(): void
     {
         $changed = [
@@ -6102,7 +6085,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     public function test_runtime_freeze_classifier_ignores_career_display_surface_builder_changes(): void
     {
         $changed = [
-            'backend/app/Domain/Career/Display/Career1046DisplayAssetReplacement.php',
+            'backend/app/Domain/Career/Display/CareerCurrentAuthorityCacheGateway.php',
+            'backend/app/Domain/Career/Display/CareerCurrentAuthorityPackage.php',
+            'backend/app/Domain/Career/Display/CareerCurrentAuthorityPackageLoader.php',
+            'backend/app/Domain/Career/Display/CareerCurrentAuthorityPublisher.php',
             'backend/app/Domain/Career/Display/CareerDisplayAssetComponentContract.php',
             'backend/app/Http/Controllers/API/V0_5/Cms/CareerJobController.php',
             'backend/app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php',
@@ -7588,10 +7574,6 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isCareerCliArtifactPathGuardFile($file)) {
-                continue;
-            }
-
-            if ($this->isCareerCurrentAuthorityExporterFile($file)) {
                 continue;
             }
 
@@ -9822,11 +9804,6 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isCareerCliArtifactPathGuardFile(string $file): bool
     {
         return $file === 'backend/app/Services/Career/CareerCliArtifactPathGuard.php';
-    }
-
-    private function isCareerCurrentAuthorityExporterFile(string $file): bool
-    {
-        return $file === 'backend/app/Domain/Career/Display/CareerCurrentAuthorityExporter.php';
     }
 
     private function isCareerPublishTrackReconciliationFile(string $file): bool
@@ -12661,7 +12638,10 @@ DIFF;
     private function isCareerDisplaySurfaceFile(string $file): bool
     {
         return in_array($file, [
-            'backend/app/Domain/Career/Display/Career1046DisplayAssetReplacement.php',
+            'backend/app/Domain/Career/Display/CareerCurrentAuthorityCacheGateway.php',
+            'backend/app/Domain/Career/Display/CareerCurrentAuthorityPackage.php',
+            'backend/app/Domain/Career/Display/CareerCurrentAuthorityPackageLoader.php',
+            'backend/app/Domain/Career/Display/CareerCurrentAuthorityPublisher.php',
             'backend/app/Domain/Career/Display/CareerDisplayAssetComponentContract.php',
             'backend/app/Http/Controllers/API/V0_5/Cms/CareerJobController.php',
             'backend/app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php',

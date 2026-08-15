@@ -45,6 +45,8 @@ final class CareerAliasResolutionBundleBuilder
 
     private const DISPLAY_ASSET_TYPE = 'career_job_public_display';
 
+    private const DISPLAY_ASSET_ROLE = 'formal_pilot_master';
+
     private const DISPLAY_READY_STATUS = 'ready_for_pilot';
 
     private const DISPLAY_ASSET_BACKED_MANUAL_HOLD_SLUGS = [
@@ -821,11 +823,9 @@ final class CareerAliasResolutionBundleBuilder
         $assets = CareerJobDisplayAsset::query()
             ->where('occupation_id', $occupation->id)
             ->where('canonical_slug', $subjectSlug)
-            ->where('surface_version', self::DISPLAY_SURFACE_VERSION)
-            ->where('asset_version', self::DISPLAY_ASSET_VERSION)
-            ->where('template_version', self::DISPLAY_ASSET_VERSION)
             ->where('status', self::DISPLAY_READY_STATUS)
             ->where('asset_type', self::DISPLAY_ASSET_TYPE)
+            ->where('asset_role', self::DISPLAY_ASSET_ROLE)
             ->get();
 
         if ($assets->count() !== 1) {
@@ -838,7 +838,11 @@ final class CareerAliasResolutionBundleBuilder
         }
 
         $componentOrder = is_array($asset->component_order_json) ? array_values($asset->component_order_json) : [];
-        if (! CareerDisplayAssetComponentContract::supports($componentOrder)) {
+        if ((string) $asset->surface_version !== self::DISPLAY_SURFACE_VERSION
+            || (string) $asset->asset_version !== self::DISPLAY_ASSET_VERSION
+            || (string) $asset->template_version !== self::DISPLAY_ASSET_VERSION
+            || ! CareerDisplayAssetComponentContract::isCurrent($componentOrder)
+            || ! CareerDisplayAssetComponentContract::hasExactCurrentPages((array) $asset->page_payload_json)) {
             return null;
         }
 
