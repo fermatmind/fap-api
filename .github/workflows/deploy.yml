@@ -279,6 +279,117 @@ jobs:
           if-no-files-found: error
           retention-days: 90
 
+  career-current-export:
+    name: Export Career Current authority once
+    needs: [policy, production]
+    if: needs.production.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    environment: production
+    env:
+      DEPLOY_SHA: ${{ github.event.workflow_run.head_sha }}
+      EXPECTED_PROJECTION_SHA256: 58894c8534673d6cc962d356d6d4987822eacfeb108c4152a68dd4985b15e92f
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          persist-credentials: false
+      - name: Start SSH agent without key metadata output
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          eval "$(ssh-agent -s)" >/dev/null
+          echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
+          echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
+          printf '%s\n' "$SSH_PRIVATE_KEY" | ssh-add - >/dev/null 2>&1
+      - name: Install pinned known_hosts
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+      - name: Stream and validate SELECT-only Career Current export
+        shell: bash
+        run: |
+          set -euo pipefail
+          dir=artifacts/career-current-authority-export
+          raw="$RUNNER_TEMP/career-current-authority-export.ndjson"
+          remote_receipt="$RUNNER_TEMP/career-current-authority-export.receipt.json"
+          remote_stderr="$RUNNER_TEMP/career-current-authority-export.stderr"
+          mkdir -p "$dir"
+          [[ "$DEPLOY_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_PROJECTION_SHA256" =~ ^[0-9a-f]{64}$ ]]
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          printf -v q_release '%q' "$DEPLOY_SHA"
+          printf -v q_projection '%q' "$EXPECTED_PROJECTION_SHA256"
+          printf -v q_run '%q' "$GITHUB_RUN_ID"
+          printf -v q_attempt '%q' "$GITHUB_RUN_ATTEMPT"
+          remote="set -euo pipefail; current=\$(readlink -f $q_path/current); releases=\$(readlink -f $q_path/releases); test -n \"\$current\"; test -n \"\$releases\"; case \"\$current\" in \"\$releases\"/*) ;; *) exit 1 ;; esac; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_release; test ! -e $q_path/.dep/deploy.lock; release_name=\$(basename \"\$current\"); sudo -n -u www-data -- env CAREER_CURRENT_EXPORT_EXECUTE=1 CAREER_CURRENT_EXPORT_BACKEND_ROOT=\"\$current/backend\" CAREER_CURRENT_EXPORT_RELEASE_SHA=$q_release CAREER_CURRENT_EXPORT_EXPECTED_PROJECTION_SHA256=$q_projection CAREER_CURRENT_EXPORT_RELEASE_NAME=\"\$release_name\" CAREER_CURRENT_EXPORT_WORKFLOW_RUN_ID=$q_run CAREER_CURRENT_EXPORT_WORKFLOW_RUN_ATTEMPT=$q_attempt php"
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -o ServerAliveInterval=15 -o ServerAliveCountMax=4 -p "$DEPLOY_PORT" \
+            "$DEPLOY_USER@$DEPLOY_HOST" "$remote" \
+            < backend/scripts/operations/career_current_authority_export.php \
+            > "$raw" 2> "$remote_stderr"
+          test "$(wc -l < "$raw" | tr -d ' ')" = 1047
+          head -n 1 "$raw" | jq -e '.kind == "meta" and .receipt.status == "PASS_CURRENT_AUTHORITY_EXPORT"' >/dev/null
+          head -n 1 "$raw" | jq -S '.receipt' > "$remote_receipt"
+          head -n 1 "$raw" | jq -S '.manifest' > "$dir/manifest.json"
+          tail -n +2 "$raw" > "$dir/assets.jsonl"
+          assets_sha="$(sha256sum "$dir/assets.jsonl" | awk '{print $1}')"
+          manifest_sha="$(jq -S -c '.' "$dir/manifest.json" | sha256sum | awk '{print $1}')"
+          jq -e --arg release "$DEPLOY_SHA" --arg projection "$EXPECTED_PROJECTION_SHA256" \
+            --arg assets "$assets_sha" --arg manifest "$manifest_sha" '
+              .release_sha == $release
+              and .career_runtime_projection_sha256 == $projection
+              and .counts.careers == 1046
+              and .counts.locale_pages == 2092
+              and .counts.components_per_page == 26
+              and .counts.numeric_rating_statement_residue_count == 0
+              and .assets_sha256 == $assets
+              and .manifest_sha256 == $manifest
+              and .database_query_count > 0
+              and .database_query_verbs == ["select"]
+              and .database_write_count == 0
+              and .cache_write_count == 0
+              and .pointer_write_count == 0
+              and .discoverability_write_count == 0
+              and .cms_write_count == 0
+              and .sitemap_write_count == 0
+              and .llms_write_count == 0
+              and .search_submission_count == 0
+              and .remote_file_write_count == 0
+              and .database_public_content_sha256 == .active_cache_public_content_sha256
+              and .database_public_content_sha256 == .api_public_content_sha256
+              and .hashes_match == true
+            ' "$remote_receipt" >/dev/null
+          jq -e --arg assets "$assets_sha" '
+              .contract_version == "career.current_authority_manifest.v1"
+              and .counts.careers == 1046
+              and .counts.locale_pages == 2092
+              and .counts.components_per_page == 26
+              and .files[0].sha256 == $assets
+              and (.exported_field_set_sha256 | keys | length) == 13
+            ' "$dir/manifest.json" >/dev/null
+          jq -e -s 'length == 1046 and ([.[].canonical_slug] | unique | length) == 1046 and all(.[].component_order_json; length == 26)' \
+            "$dir/assets.jsonl" >/dev/null
+          cp "$remote_receipt" "$dir/receipt.json"
+      - name: Upload Career Current export artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: career-current-authority-export-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/career-current-authority-export
+          if-no-files-found: error
+          retention-days: 3
+
   docs-only:
     name: Docs-only deployment skip receipt
     needs: policy
