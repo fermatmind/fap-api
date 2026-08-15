@@ -288,7 +288,7 @@ jobs:
     environment: production
     env:
       DEPLOY_SHA: ${{ github.event.workflow_run.head_sha }}
-      EXPECTED_PROJECTION_SHA256: 58894c8534673d6cc962d356d6d4987822eacfeb108c4152a68dd4985b15e92f
+      EXPECTED_PROJECTION_SHA256: 397f2a4ec284e9c0a6cd610447541ad4773fa7a7f3045008fab5efb334ec85c6
       DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
       DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
       DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
