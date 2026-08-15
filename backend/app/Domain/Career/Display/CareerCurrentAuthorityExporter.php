@@ -6,8 +6,6 @@ namespace App\Domain\Career\Display;
 
 use App\Domain\Career\Publish\CareerGenerationAuthorityLoader;
 use App\Models\CareerJobDisplayAsset;
-use App\Models\Occupation;
-use App\Services\Career\Bundles\CareerJobDisplaySurfaceBuilder;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\Career\Review\CareerJobDetailReaderSafeReviewProjector;
 use Illuminate\Cache\Events\CacheFlushing;
@@ -56,6 +54,43 @@ final class CareerCurrentAuthorityExporter
 
     private const MANUAL_HOLD_SLUGS = ['software-developers'];
 
+    private const DISPLAY_OWNED_PUBLIC_FIELDS = [
+        'surface_version',
+        'asset_version',
+        'template_version',
+        'asset_type',
+        'asset_role',
+        'status',
+        'available_locales',
+        'page',
+        'component_order',
+        'sources',
+        'structured_data_from_visible_content',
+        'implementation_contract',
+    ];
+
+    /** @var list<string> Keys stripped by the public Display surface builder. */
+    private const FORBIDDEN_PUBLIC_KEYS = [
+        'release_gate',
+        'release_gates',
+        'qa_risk',
+        'admin_review_state',
+        'tracking_json',
+        'raw_ai_exposure_score',
+        'truth_metric_id',
+        'trust_manifest_id',
+        'index_state_id',
+        'compile_run_id',
+        'import_run_id',
+        'source_trace_id',
+        'metadata_fingerprint',
+        'fingerprint_seed',
+        'compile_refs',
+        'provenance_meta',
+        'lineage_id',
+        'lineage_json',
+    ];
+
     private const EXPORTED_FIELDS = [
         'surface_version',
         'asset_version',
@@ -73,7 +108,6 @@ final class CareerCurrentAuthorityExporter
     ];
 
     public function __construct(
-        private readonly CareerJobDisplaySurfaceBuilder $surfaceBuilder,
         private readonly PublicCareerAuthorityResponseCache $responseCache,
         private readonly CareerJobDetailReaderSafeReviewProjector $readerSafeProjector,
         private readonly CareerGenerationAuthorityLoader $generationAuthority,
@@ -135,7 +169,7 @@ final class CareerCurrentAuthorityExporter
                     $slug = strtolower(trim((string) $asset->canonical_slug));
                     $isManualHold = in_array($slug, self::MANUAL_HOLD_SLUGS, true);
                     if ($slug === '') {
-                        throw new CareerCurrentAuthorityExportFailure('ASSET_OCCUPATION_IDENTITY_MISMATCH');
+                        throw new CareerCurrentAuthorityExportFailure('ASSET_CANONICAL_SLUG_INVALID');
                     }
 
                     $rows[] = $this->exportRow($asset, $slug);
@@ -151,19 +185,9 @@ final class CareerCurrentAuthorityExporter
                         continue;
                     }
 
-                    $occupation = Occupation::query()
-                        ->with('crosswalks')
-                        ->whereKey($asset->occupation_id)
-                        ->first();
-                    if (! $occupation instanceof Occupation
-                        || strtolower(trim((string) $occupation->canonical_slug)) !== $slug
-                        || (string) $asset->occupation_id !== (string) $occupation->id) {
-                        throw new CareerCurrentAuthorityExportFailure('ASSET_OCCUPATION_IDENTITY_MISMATCH');
-                    }
-
                     foreach (self::LOCALES as $locale) {
                         $identity = $slug.'|'.$locale;
-                        $databaseSurface = $this->surfaceBuilder->buildForOccupation($occupation, $locale);
+                        $databaseSurface = $this->displayOwnedProjectionFromAsset($asset, $locale);
                         $apiRead = $this->responseCache->jobDetailVerifyOnlyRead($slug, $locale);
                         $readiness = $this->responseCache->jobDetailCacheReadiness($slug, $locale);
                         if (! is_array($databaseSurface)
@@ -177,10 +201,14 @@ final class CareerCurrentAuthorityExporter
                             $this->readerSafeProjector->project($databaseSurface),
                         );
                         $activeCache[$identity] = self::hashValue(
-                            $this->readerSafeProjector->project((array) data_get($readiness, 'payload.display_surface_v1')),
+                            $this->readerSafeProjector->project(self::displayOwnedProjection(
+                                (array) data_get($readiness, 'payload.display_surface_v1'),
+                            )),
                         );
                         $api[$identity] = self::hashValue(
-                            $this->readerSafeProjector->project((array) data_get($apiRead, 'payload.display_surface_v1')),
+                            $this->readerSafeProjector->project(self::displayOwnedProjection(
+                                (array) data_get($apiRead, 'payload.display_surface_v1'),
+                            )),
                         );
                     }
                 }
@@ -362,6 +390,114 @@ final class CareerCurrentAuthorityExporter
     }
 
     /** @return array<string,mixed> */
+    private function displayOwnedProjectionFromAsset(CareerJobDisplayAsset $asset, string $locale): array
+    {
+        $localizedPages = $this->localizedPages($asset);
+        $normalizedLocale = $this->normalizeLocale($locale);
+        $pageContent = $localizedPages[$normalizedLocale] ?? null;
+        if (! is_array($pageContent)) {
+            throw new CareerCurrentAuthorityExportFailure('PUBLIC_CONTENT_PROJECTION_UNAVAILABLE');
+        }
+
+        return [
+            'surface_version' => (string) $asset->surface_version,
+            'asset_version' => (string) $asset->asset_version,
+            'template_version' => (string) $asset->template_version,
+            'asset_type' => (string) $asset->asset_type,
+            'asset_role' => (string) $asset->asset_role,
+            'status' => (string) $asset->status,
+            'available_locales' => $this->availableLocales($localizedPages),
+            'page' => [
+                'locale' => $this->publicLocale($normalizedLocale),
+                'content' => $this->stripForbiddenKeys(
+                    $this->localizeInternalHrefs($pageContent, $normalizedLocale),
+                ),
+            ],
+            'component_order' => $this->stripForbiddenKeys(array_values((array) $asset->component_order_json)),
+            'sources' => $this->stripForbiddenKeys((array) $asset->sources_json),
+            'structured_data_from_visible_content' => $this->stripForbiddenKeys((array) $asset->structured_data_json),
+            'implementation_contract' => $this->stripForbiddenKeys((array) $asset->implementation_contract_json),
+        ];
+    }
+
+    /** @return array<string,array<string,mixed>> */
+    private function localizedPages(CareerJobDisplayAsset $asset): array
+    {
+        $payload = is_array($asset->page_payload_json) ? $asset->page_payload_json : [];
+        $pages = is_array($payload['page'] ?? null) ? $payload['page'] : $payload;
+        $normalized = [];
+        foreach ($pages as $locale => $content) {
+            if (is_string($locale) && is_array($content)) {
+                $normalized[$this->normalizeLocale($locale)] = $content;
+            }
+        }
+
+        return $normalized;
+    }
+
+    /** @param array<string,array<string,mixed>> $localizedPages @return list<string> */
+    private function availableLocales(array $localizedPages): array
+    {
+        return array_values(array_map(
+            fn (string $locale): string => $this->publicLocale($locale),
+            array_keys($localizedPages),
+        ));
+    }
+
+    private function normalizeLocale(string $locale): string
+    {
+        return match (strtolower(trim($locale))) {
+            'en', 'en-us', 'en_us' => 'en',
+            default => 'zh',
+        };
+    }
+
+    private function publicLocale(string $normalizedLocale): string
+    {
+        return $normalizedLocale === 'en' ? 'en' : 'zh-CN';
+    }
+
+    /** @param array<string,mixed> $pageContent @return array<string,mixed> */
+    private function localizeInternalHrefs(array $pageContent, string $normalizedLocale): array
+    {
+        $expectedPrefix = $normalizedLocale === 'en' ? '/en/' : '/zh/';
+        $otherPrefix = $normalizedLocale === 'en' ? '/zh/' : '/en/';
+        array_walk_recursive($pageContent, static function (&$value, $key) use ($expectedPrefix, $otherPrefix): void {
+            if ($key !== 'href' || ! is_string($value) || trim($value) === '') {
+                return;
+            }
+            $candidates = preg_split('/\s*\|\s*/', trim($value)) ?: [];
+            foreach ($candidates as $candidate) {
+                if (str_starts_with($candidate, $expectedPrefix)) {
+                    $value = $candidate;
+
+                    return;
+                }
+            }
+            if (str_starts_with($value, $otherPrefix)) {
+                $value = $expectedPrefix.substr($value, strlen($otherPrefix));
+            }
+        });
+
+        return $pageContent;
+    }
+
+    private function stripForbiddenKeys(mixed $value): mixed
+    {
+        if (! is_array($value)) {
+            return $value;
+        }
+        foreach (self::FORBIDDEN_PUBLIC_KEYS as $key) {
+            unset($value[$key]);
+        }
+        foreach ($value as $key => $item) {
+            $value[$key] = $this->stripForbiddenKeys($item);
+        }
+
+        return $value;
+    }
+
+    /** @return array<string,mixed> */
     private function exportRow(CareerJobDisplayAsset $asset, string $slug): array
     {
         return [
@@ -461,7 +597,7 @@ final class CareerCurrentAuthorityExporter
             if (is_string($projection) && preg_match('/\A[0-9a-f]{64}\z/', $projection) === 1) {
                 $hashes[$identity] = $projection;
             } elseif (is_array($projection)) {
-                $hashes[$identity] = self::hashValue($projection);
+                $hashes[$identity] = self::hashValue(self::displayOwnedProjection($projection));
             } else {
                 throw new CareerCurrentAuthorityExportFailure('PROJECTION_CONTENT_INVALID');
             }
@@ -469,6 +605,20 @@ final class CareerCurrentAuthorityExporter
         ksort($hashes, SORT_STRING);
 
         return $hashes;
+    }
+
+    /** @param array<string,mixed> $projection @return array<string,mixed> */
+    private static function displayOwnedProjection(array $projection): array
+    {
+        $owned = [];
+        foreach (self::DISPLAY_OWNED_PUBLIC_FIELDS as $field) {
+            if (! array_key_exists($field, $projection)) {
+                throw new CareerCurrentAuthorityExportFailure('PROJECTION_CONTENT_INVALID');
+            }
+            $owned[$field] = $projection[$field];
+        }
+
+        return $owned;
     }
 
     private static function hashValue(mixed $value): string

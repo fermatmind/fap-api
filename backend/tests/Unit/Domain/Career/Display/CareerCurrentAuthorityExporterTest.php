@@ -40,24 +40,42 @@ final class CareerCurrentAuthorityExporterTest extends TestCase
         $rows = [$this->row('alpha')];
         $database = $this->projections(['alpha']);
         $cache = $database;
-        $cache['alpha|en']['subject']['title'] = 'drift';
+        $cache['alpha|en']['page']['content']['hero']['title'] = 'drift';
 
         $this->expectException(CareerCurrentAuthorityExportFailure::class);
         $this->expectExceptionMessage('PUBLIC_CONTENT_HASH_MISMATCH');
         $exporter->buildDocuments($rows, $database, $cache, $database, 1);
     }
 
-    public function test_it_hashes_unexpected_reader_visible_surface_fields(): void
+    public function test_it_ignores_occupation_derived_projection_fields(): void
     {
         $exporter = $this->exporter();
         $rows = [$this->row('alpha')];
         $database = $this->projections(['alpha']);
         $cache = $database;
-        $cache['alpha|en']['legacy_reader_visible_field'] = ['value' => 'drift'];
+        $cache['alpha|en']['subject']['title'] = 'occupation-derived drift';
+        $cache['alpha|en']['claim_permissions']['warnings'] = ['occupation-derived drift'];
+
+        $documents = $exporter->buildDocuments($rows, $database, $cache, $database, 1);
+
+        self::assertTrue($documents['receipt']['hashes_match']);
+        self::assertSame(
+            $documents['receipt']['database_public_content_sha256'],
+            $documents['receipt']['active_cache_public_content_sha256'],
+        );
+    }
+
+    public function test_it_hashes_display_owned_sources(): void
+    {
+        $exporter = $this->exporter();
+        $rows = [$this->row('alpha')];
+        $database = $this->projections(['alpha']);
+        $api = $database;
+        $api['alpha|zh-CN']['sources']['references'][] = ['title' => 'drift'];
 
         $this->expectException(CareerCurrentAuthorityExportFailure::class);
         $this->expectExceptionMessage('PUBLIC_CONTENT_HASH_MISMATCH');
-        $exporter->buildDocuments($rows, $database, $cache, $database, 1);
+        $exporter->buildDocuments($rows, $database, $database, $api, 1);
     }
 
     public function test_it_rejects_missing_or_misordered_components(): void
@@ -90,6 +108,17 @@ final class CareerCurrentAuthorityExporterTest extends TestCase
             ['software-developers'],
             $documents['manifest']['structural_contract']['public_projection_excluded_manual_hold_slugs'],
         );
+    }
+
+    public function test_exporter_does_not_read_occupation_authority(): void
+    {
+        $source = file_get_contents(__DIR__.'/../../../../../app/Domain/Career/Display/CareerCurrentAuthorityExporter.php');
+
+        self::assertIsString($source);
+        self::assertStringNotContainsString('use App\\Models\\Occupation;', $source);
+        self::assertStringNotContainsString('Occupation::query()', $source);
+        self::assertStringNotContainsString('CareerJobDisplaySurfaceBuilder', $source);
+        self::assertStringNotContainsString('$asset->occupation_id', $source);
     }
 
     private function exporter(): CareerCurrentAuthorityExporter
