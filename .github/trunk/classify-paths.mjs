@@ -54,7 +54,7 @@ export function classifyPaths(inputPaths) {
     ]);
     const content = matches(path, [
       /^(?:content_packages|content_baselines)\//,
-      /^backend\/(?:content_packs|content_packages)\//,
+      /^backend\/(?:content_assets|content_packs|content_packages)\//,
       /(?:content|authority|editorial|import-packages?)\//i,
     ]);
     const migration = /^backend\/database\/migrations\/.+\.php$/.test(path);
