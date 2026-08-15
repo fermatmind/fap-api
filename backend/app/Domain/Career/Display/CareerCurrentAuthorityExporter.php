@@ -122,6 +122,11 @@ final class CareerCurrentAuthorityExporter
         $runtimeProjection = $this->currentRuntimeProjection();
         $binding['career_runtime_projection_sha256'] = $runtimeProjection['sha256'];
         $publishedIdentities = $runtimeProjection['published_identities'];
+        $publishedSlugs = array_values(array_unique(array_column($publishedIdentities, 'slug')));
+        sort($publishedSlugs, SORT_STRING);
+        if (count($publishedSlugs) !== self::EXPECTED_CAREERS) {
+            throw new CareerCurrentAuthorityExportFailure('PUBLIC_PROJECTION_IDENTITY_SET_INVALID');
+        }
 
         $connection = DB::connection();
         $cache = app('cache.store');
@@ -153,8 +158,9 @@ final class CareerCurrentAuthorityExporter
         $cache->setEventDispatcher($cacheDispatcher);
 
         try {
-            $documents = $this->readOnlyTransaction(function () use ($publishedIdentities): array {
+            $documents = $this->readOnlyTransaction(function () use ($publishedIdentities, $publishedSlugs): array {
                 $assets = CareerJobDisplayAsset::query()
+                    ->whereIn('canonical_slug', $publishedSlugs)
                     ->where('surface_version', self::SURFACE_VERSION)
                     ->where('asset_version', self::ASSET_VERSION)
                     ->where('template_version', self::ASSET_VERSION)
@@ -169,7 +175,6 @@ final class CareerCurrentAuthorityExporter
                 $api = [];
                 foreach ($assets as $asset) {
                     $slug = strtolower(trim((string) $asset->canonical_slug));
-                    $isManualHold = in_array($slug, self::MANUAL_HOLD_SLUGS, true);
                     if ($slug === '') {
                         throw new CareerCurrentAuthorityExportFailure('ASSET_CANONICAL_SLUG_INVALID');
                     }
@@ -181,17 +186,15 @@ final class CareerCurrentAuthorityExporter
                             $this->readerSafeProjector->project($databaseSurface),
                         );
                     }
+                }
 
-                    if ($isManualHold) {
-                        foreach (self::LOCALES as $locale) {
-                            $apiRead = $this->responseCache->jobDetailVerifyOnlyRead($slug, $locale);
-                            if (($apiRead['state'] ?? null) !== 'not_found'
-                                || ($apiRead['payload'] ?? null) !== null) {
-                                throw new CareerCurrentAuthorityExportFailure('MANUAL_HOLD_PUBLIC_PROJECTION_DRIFT');
-                            }
+                foreach (self::MANUAL_HOLD_SLUGS as $manualHoldSlug) {
+                    foreach (self::LOCALES as $locale) {
+                        $apiRead = $this->responseCache->jobDetailVerifyOnlyRead($manualHoldSlug, $locale);
+                        if (($apiRead['state'] ?? null) !== 'not_found'
+                            || ($apiRead['payload'] ?? null) !== null) {
+                            throw new CareerCurrentAuthorityExportFailure('MANUAL_HOLD_PUBLIC_PROJECTION_DRIFT');
                         }
-
-                        continue;
                     }
                 }
 
@@ -305,7 +308,7 @@ final class CareerCurrentAuthorityExporter
             throw new CareerCurrentAuthorityExportFailure('LOCALIZED_CONTENT_CONTRACT_MISMATCH');
         }
 
-        $heldSlugs = array_values(array_intersect($slugs, self::MANUAL_HOLD_SLUGS));
+        $heldSlugs = self::MANUAL_HOLD_SLUGS;
         $expectedProjectionCount = $expectedCareers * 2;
         $database = self::projectionHashes($database);
         $activeCache = self::projectionHashes($activeCache);

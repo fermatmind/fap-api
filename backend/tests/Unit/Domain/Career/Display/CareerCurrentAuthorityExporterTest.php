@@ -25,7 +25,7 @@ final class CareerCurrentAuthorityExporterTest extends TestCase
         self::assertSame(2, $first['manifest']['counts']['careers']);
         self::assertSame(4, $first['manifest']['counts']['locale_pages']);
         self::assertSame(4, $first['manifest']['counts']['public_projection_locale_pages']);
-        self::assertSame(0, $first['manifest']['counts']['manual_hold_locale_pages']);
+        self::assertSame(2, $first['manifest']['counts']['manual_hold_locale_pages']);
         self::assertSame(26, $first['manifest']['counts']['components_per_page']);
         self::assertSame(hash('sha256', $first['assets_jsonl']), $first['receipt']['assets_sha256']);
         self::assertStringNotContainsString('occupation_id', $first['assets_jsonl']);
@@ -135,11 +135,11 @@ final class CareerCurrentAuthorityExporterTest extends TestCase
         $exporter->buildDocuments([$row], $projections, $projections, $projections, 1);
     }
 
-    public function test_it_exports_manual_hold_assets_in_the_full_content_hash_cohort(): void
+    public function test_it_records_manual_hold_as_a_verified_exclusion_from_current_authority(): void
     {
-        $projections = $this->projections(['software-developers']);
+        $projections = $this->projections(['alpha']);
         $documents = $this->exporter()->buildDocuments(
-            [$this->row('software-developers')],
+            [$this->row('alpha')],
             $projections,
             $projections,
             $projections,
@@ -154,6 +154,7 @@ final class CareerCurrentAuthorityExporterTest extends TestCase
             ['software-developers'],
             $documents['manifest']['structural_contract']['public_projection_excluded_manual_hold_slugs'],
         );
+        self::assertStringNotContainsString('software-developers', $documents['assets_jsonl']);
     }
 
     public function test_it_resolves_published_generation_identities_as_complete_locale_pairs(): void
@@ -219,6 +220,16 @@ final class CareerCurrentAuthorityExporterTest extends TestCase
         self::assertStringNotContainsString('Occupation::query()', $source);
         self::assertStringNotContainsString('CareerJobDisplaySurfaceBuilder', $source);
         self::assertStringNotContainsString('$asset->occupation_id', $source);
+    }
+
+    public function test_exporter_scopes_display_rows_to_the_published_generation_set(): void
+    {
+        $source = file_get_contents(__DIR__.'/../../../../../app/Domain/Career/Display/CareerCurrentAuthorityExporter.php');
+
+        self::assertIsString($source);
+        self::assertStringContainsString("->whereIn('canonical_slug', \$publishedSlugs)", $source);
+        self::assertStringContainsString('foreach (self::MANUAL_HOLD_SLUGS as $manualHoldSlug)', $source);
+        self::assertStringNotContainsString('$isManualHold', $source);
     }
 
     private function exporter(): CareerCurrentAuthorityExporter
