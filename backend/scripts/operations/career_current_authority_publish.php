@@ -39,7 +39,7 @@ $zeroCounts = [
     'search_submission_count' => 0,
 ];
 $receipt = [
-    'contract_version' => CareerCurrentAuthorityPublisher::CONTRACT_VERSION,
+    'contract_version' => 'career.current_authority_publish.v1',
     'status' => 'FAIL_CURRENT_AUTHORITY_PUBLISH',
     'safe_error_code' => null,
     'release_sha' => $releaseSha,
@@ -96,7 +96,9 @@ try {
         || ! hash_equals($expectedOperationKey, $operationKey)
         || ! ctype_digit($workflowRunId)
         || ! ctype_digit($workflowRunAttempt)) {
-        throw new CareerCurrentAuthorityPublisherFailure('CURRENT_PUBLISH_EXECUTION_CONTRACT_INVALID');
+        $receipt['safe_error_code'] = 'CURRENT_PUBLISH_EXECUTION_CONTRACT_INVALID';
+        $receipt['write_commit_state'] = 'confirmed_zero_write';
+        $emit($receipt);
     }
 
     $app = require $backendRoot.'/bootstrap/app.php';

@@ -11,7 +11,8 @@
   },
   "delivery_evidence": {
     "initial_governance_full_scan_required": true,
-    "required_ci_fix": "career_search_entry_tier_context_wiring"
+    "required_ci_fix": "career_search_entry_tier_context_wiring",
+    "required_publish_fix": "runner_autoload_order"
   },
   "excluded_environment_fields": [
     "id",

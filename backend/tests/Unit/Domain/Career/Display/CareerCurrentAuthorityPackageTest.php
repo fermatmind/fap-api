@@ -30,6 +30,35 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
         self::assertSame('failure', data_get($package, 'manifest.export_evidence.workflow_conclusion'));
     }
 
+    public function test_publish_runner_loads_authority_classes_before_validating_execution_contract(): void
+    {
+        $backendRoot = dirname(__DIR__, 5);
+        $pipes = [];
+        $process = proc_open(
+            [PHP_BINARY, '-d', 'display_errors=0', $backendRoot.'/scripts/operations/career_current_authority_publish.php'],
+            [
+                0 => ['pipe', 'r'],
+                1 => ['pipe', 'w'],
+                2 => ['pipe', 'w'],
+            ],
+            $pipes,
+            $backendRoot,
+            ['CAREER_CURRENT_PUBLISH_BACKEND_ROOT' => $backendRoot],
+        );
+        self::assertIsResource($process);
+        fclose($pipes[0]);
+        $stdout = stream_get_contents($pipes[1]);
+        $stderr = stream_get_contents($pipes[2]);
+        fclose($pipes[1]);
+        fclose($pipes[2]);
+
+        self::assertSame(1, proc_close($process));
+        self::assertSame('', $stderr);
+        $receipt = json_decode($stdout, true, 512, JSON_THROW_ON_ERROR);
+        self::assertSame('FAIL_CURRENT_AUTHORITY_PUBLISH', $receipt['status'] ?? null);
+        self::assertSame('CURRENT_PUBLISH_EXECUTION_CONTRACT_INVALID', $receipt['safe_error_code'] ?? null);
+    }
+
     public function test_current_page_contract_rejects_legacy_unknown_and_placeholder_structures(): void
     {
         $page = array_fill_keys(CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER, ['value' => 'verified']);

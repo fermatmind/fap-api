@@ -240,6 +240,9 @@ final class CareerCurrentAuthorityPackage
             || self::value($manifest, 'counts.public_projection_locale_pages') !== self::EXPECTED_LOCALE_PAGES
             || self::value($manifest, 'counts.components_per_page') !== count(CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER)
             || self::value($manifest, 'counts.numeric_rating_statement_residue_count') !== 0
+            || self::value($manifest, 'delivery_evidence.initial_governance_full_scan_required') !== true
+            || self::value($manifest, 'delivery_evidence.required_ci_fix') !== 'career_search_entry_tier_context_wiring'
+            || self::value($manifest, 'delivery_evidence.required_publish_fix') !== 'runner_autoload_order'
             || self::value($manifest, 'files.0.path') !== 'assets.jsonl'
             || self::value($manifest, 'files.0.row_count') !== self::EXPECTED_CAREERS
             || self::value($manifest, 'files.0.sha256') !== $assetsSha256
