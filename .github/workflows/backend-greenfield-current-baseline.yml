@@ -1,4 +1,5 @@
 name: Backend Greenfield Current Baseline
+run-name: Backend Greenfield Current Baseline ${{ inputs.mode }} [op:${{ inputs.operation_key }}]
 
 on:
   workflow_dispatch:

@@ -8,6 +8,7 @@ use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
 use App\Services\Career\Bundles\CareerJobDisplaySurfaceBuilder;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
+use App\Services\Career\Review\CareerJobDetailReaderSafeReviewProjector;
 use Illuminate\Cache\Events\CacheFlushing;
 use Illuminate\Cache\Events\ForgettingKey;
 use Illuminate\Cache\Events\WritingKey;
@@ -88,6 +89,7 @@ final class CareerCurrentAuthorityExporter
     public function __construct(
         private readonly CareerJobDisplaySurfaceBuilder $surfaceBuilder,
         private readonly PublicCareerAuthorityResponseCache $responseCache,
+        private readonly CareerJobDetailReaderSafeReviewProjector $readerSafeProjector,
     ) {}
 
     /**
@@ -165,9 +167,15 @@ final class CareerCurrentAuthorityExporter
                             || ! is_array(data_get($apiRead, 'payload.display_surface_v1'))) {
                             throw new CareerCurrentAuthorityExportFailure('PUBLIC_CONTENT_PROJECTION_UNAVAILABLE');
                         }
-                        $database[$identity] = self::hashValue($this->contentProjection($databaseSurface));
-                        $activeCache[$identity] = self::hashValue($this->contentProjection((array) data_get($readiness, 'payload.display_surface_v1')));
-                        $api[$identity] = self::hashValue($this->contentProjection((array) data_get($apiRead, 'payload.display_surface_v1')));
+                        $database[$identity] = self::hashValue($this->contentProjection(
+                            $this->readerSafeProjector->project($databaseSurface),
+                        ));
+                        $activeCache[$identity] = self::hashValue($this->contentProjection(
+                            $this->readerSafeProjector->project((array) data_get($readiness, 'payload.display_surface_v1')),
+                        ));
+                        $api[$identity] = self::hashValue($this->contentProjection(
+                            $this->readerSafeProjector->project((array) data_get($apiRead, 'payload.display_surface_v1')),
+                        ));
                     }
                 }
 

@@ -16,6 +16,7 @@ final class CareerCurrentAuthorityExportWorkflowTest extends TestCase
         foreach ([
             '- career-current-authority',
             'operation_key:',
+            'run-name: Backend Greenfield Current Baseline ${{ inputs.mode }} [op:${{ inputs.operation_key }}]',
             'group: deploy-${{ github.repository }}-production',
             'Elect Career Current export owner before Environment access',
             'uses: ./.github/actions/controlled-operation-gate',
@@ -70,6 +71,8 @@ final class CareerCurrentAuthorityExportWorkflowTest extends TestCase
             "'CACHE_WRITE_ATTEMPT'",
             'jobDetailCacheReadiness',
             'jobDetailVerifyOnlyRead',
+            'CareerJobDetailReaderSafeReviewProjector',
+            'readerSafeProjector->project',
             'CURRENT_V4_2_ORDER',
             "'id',",
             "'occupation_id',",
