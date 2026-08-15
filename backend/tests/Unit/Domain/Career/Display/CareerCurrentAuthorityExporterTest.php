@@ -24,6 +24,8 @@ final class CareerCurrentAuthorityExporterTest extends TestCase
         self::assertSame($first, $second);
         self::assertSame(2, $first['manifest']['counts']['careers']);
         self::assertSame(4, $first['manifest']['counts']['locale_pages']);
+        self::assertSame(4, $first['manifest']['counts']['public_projection_locale_pages']);
+        self::assertSame(0, $first['manifest']['counts']['manual_hold_locale_pages']);
         self::assertSame(26, $first['manifest']['counts']['components_per_page']);
         self::assertSame(hash('sha256', $first['assets_jsonl']), $first['receipt']['assets_sha256']);
         self::assertStringNotContainsString('occupation_id', $first['assets_jsonl']);
@@ -55,6 +57,26 @@ final class CareerCurrentAuthorityExporterTest extends TestCase
         $this->expectException(CareerCurrentAuthorityExportFailure::class);
         $this->expectExceptionMessage('COMPONENT_ORDER_MISMATCH');
         $exporter->buildDocuments([$row], $projections, $projections, $projections, 1);
+    }
+
+    public function test_it_exports_manual_hold_assets_outside_the_public_projection_hash_cohort(): void
+    {
+        $documents = $this->exporter()->buildDocuments(
+            [$this->row('software-developers')],
+            [],
+            [],
+            [],
+            1,
+        );
+
+        self::assertSame(1, $documents['manifest']['counts']['careers']);
+        self::assertSame(2, $documents['manifest']['counts']['locale_pages']);
+        self::assertSame(0, $documents['manifest']['counts']['public_projection_locale_pages']);
+        self::assertSame(2, $documents['manifest']['counts']['manual_hold_locale_pages']);
+        self::assertSame(
+            ['software-developers'],
+            $documents['manifest']['structural_contract']['public_projection_excluded_manual_hold_slugs'],
+        );
     }
 
     private function exporter(): CareerCurrentAuthorityExporter

@@ -53,6 +53,8 @@ final class CareerCurrentAuthorityExporter
 
     private const LOCALES = ['en', 'zh-CN'];
 
+    private const MANUAL_HOLD_SLUGS = ['software-developers'];
+
     private const EXPORTED_FIELDS = [
         'surface_version',
         'asset_version',
@@ -158,8 +160,17 @@ final class CareerCurrentAuthorityExporter
                     foreach (self::LOCALES as $locale) {
                         $identity = $slug.'|'.$locale;
                         $databaseSurface = $this->surfaceBuilder->buildForOccupation($occupation, $locale);
-                        $readiness = $this->responseCache->jobDetailCacheReadiness($slug, $locale);
                         $apiRead = $this->responseCache->jobDetailVerifyOnlyRead($slug, $locale);
+                        if (in_array($slug, self::MANUAL_HOLD_SLUGS, true)) {
+                            if ($databaseSurface !== null
+                                || ($apiRead['state'] ?? null) !== 'not_found'
+                                || ($apiRead['payload'] ?? null) !== null) {
+                                throw new CareerCurrentAuthorityExportFailure('MANUAL_HOLD_PUBLIC_PROJECTION_DRIFT');
+                            }
+
+                            continue;
+                        }
+                        $readiness = $this->responseCache->jobDetailCacheReadiness($slug, $locale);
                         if (! is_array($databaseSurface)
                             || ($readiness['classification'] ?? null) !== 'ready_active'
                             || ! is_array(data_get($readiness, 'payload.display_surface_v1'))
@@ -266,7 +277,8 @@ final class CareerCurrentAuthorityExporter
             throw new CareerCurrentAuthorityExportFailure('LOCALIZED_CONTENT_CONTRACT_MISMATCH');
         }
 
-        $expectedProjectionCount = $expectedCareers * 2;
+        $heldSlugs = array_values(array_intersect($slugs, self::MANUAL_HOLD_SLUGS));
+        $expectedProjectionCount = ($expectedCareers - count($heldSlugs)) * 2;
         $database = self::projectionHashes($database);
         $activeCache = self::projectionHashes($activeCache);
         $api = self::projectionHashes($api);
@@ -301,6 +313,8 @@ final class CareerCurrentAuthorityExporter
             'counts' => [
                 'careers' => $expectedCareers,
                 'locale_pages' => $localePageCount,
+                'public_projection_locale_pages' => $expectedProjectionCount,
+                'manual_hold_locale_pages' => count($heldSlugs) * 2,
                 'components_per_page' => count(CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER),
                 'numeric_rating_statement_residue_count' => $numericRatingResidueCount,
             ],
@@ -329,6 +343,7 @@ final class CareerCurrentAuthorityExporter
                 'asset_type' => self::ASSET_TYPE,
                 'status' => self::READY_STATUS,
                 'component_order' => CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER,
+                'public_projection_excluded_manual_hold_slugs' => $heldSlugs,
             ],
         ];
 

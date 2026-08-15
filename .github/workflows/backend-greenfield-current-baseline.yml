@@ -284,6 +284,8 @@ jobs:
             and .release_sha == $release
             and .counts.careers == 1046
             and .counts.locale_pages == 2092
+            and .counts.public_projection_locale_pages == 2090
+            and .counts.manual_hold_locale_pages == 2
             and .counts.components_per_page == 26
             and .counts.numeric_rating_statement_residue_count == 0
             and .assets_sha256 == $assets
@@ -307,6 +309,8 @@ jobs:
             .contract_version == "career.current_authority_manifest.v1"
             and .counts.careers == 1046
             and .counts.locale_pages == 2092
+            and .counts.public_projection_locale_pages == 2090
+            and .counts.manual_hold_locale_pages == 2
             and .counts.components_per_page == 26
             and .files[0].sha256 == $assets
             and (.exported_field_set_sha256 | keys | length) == 13
