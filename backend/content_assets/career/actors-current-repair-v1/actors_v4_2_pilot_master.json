@@ -1,0 +1,1138 @@
+{
+  "asset": {
+    "template_name": "Fermat Career Job Display Template",
+    "template_version": "v4.2",
+    "asset_role": "formal_pilot_master",
+    "asset_type": "career_job_public_display",
+    "public_display_only": true,
+    "slug": "actors",
+    "soc_code": "27-2011",
+    "onet_code": "27-2011.00",
+    "routes": {
+      "zh": "/zh/career/jobs/actors",
+      "en": "/en/career/jobs/actors"
+    },
+    "canonical": {
+      "zh": "https://fermatmind.com/zh/career/jobs/actors",
+      "en": "https://fermatmind.com/en/career/jobs/actors"
+    },
+    "not_included_in_public_display": [
+      "release_gate",
+      "qa_risk",
+      "admin_review_state",
+      "tracking_json",
+      "raw_ai_exposure_score"
+    ]
+  },
+  "seo": {
+    "zh": {
+      "h1": "演员",
+      "subtitle": "Actors",
+      "title": "演员职业指南：怎么入行、收入参考、适合性格与职业风险",
+      "description": "了解演员职业的中国大陆行业生态、收入参考、试镜路径、短剧与演艺市场信号、RIASEC 匹配、性格适配、AI 影响和风险边界。"
+    },
+    "en": {
+      "h1": "Actors",
+      "subtitle": "演员",
+      "title": "Actor Career Guide: Salary, Duties, RIASEC Fit, Market Signals, Risks, and Next Steps",
+      "description": "Explore the actor career path with BLS data, O*NET duties, RIASEC fit, market signals, AI exposure, financial volatility, and practical next steps."
+    }
+  },
+  "component_order": [
+    "breadcrumb",
+    "hero",
+    "fermat_decision_card",
+    "primary_cta",
+    "career_snapshot_primary_locale",
+    "career_snapshot_secondary_locale",
+    "fit_decision_checklist",
+    "riasec_fit_block",
+    "personality_fit_block",
+    "definition_block",
+    "responsibilities_block",
+    "work_context_block",
+    "market_signal_card",
+    "adjacent_career_comparison_table",
+    "ai_impact_table",
+    "career_risk_cards",
+    "contract_project_risk_block",
+    "next_steps_block",
+    "faq_block",
+    "related_next_pages",
+    "source_card",
+    "review_validity_card",
+    "boundary_notice",
+    "final_cta"
+  ],
+  "page": {
+    "zh": {
+      "path": "/zh/career/jobs/actors",
+      "breadcrumb": [
+        "首页",
+        "职业",
+        "职业库",
+        "演员"
+      ],
+      "hero": {
+        "h1": "演员",
+        "subtitle": "Actors",
+        "quick_answer": "演员是把剧本语义、人物关系和情绪节奏转化为镜头或舞台表达的职业。在中国大陆，它处于典型金字塔结构：头部稀缺、腰部不稳、底部高流动。费马把演员视为“艺术表达 + 项目制自我经营”的职业底稿：核心不是“像不像演员”，而是你能否长期承受评价密度、机会波动、训练消耗和不稳定收入。",
+        "primary_cta": {
+          "label": "测我的职业兴趣是否适合演员",
+          "href": "/zh/tests/holland-career-interest-test-riasec"
+        },
+        "secondary_cta": {
+          "label": "用 MBTI / 大五人格交叉判断",
+          "hrefs": [
+            "/zh/tests/mbti-personality-test-16-personality-types",
+            "/zh/tests/big-five-personality-test-ocean-model"
+          ]
+        }
+      },
+      "sections": [
+        {
+          "id": "fermat_quick_fit",
+          "component": "FermatDecisionCard",
+          "heading": "费马快速判断",
+          "fit_title": "更适合你，如果",
+          "fit_items": [
+            "你不只是想被看见，而是愿意反复训练台词、镜头感和情绪转换。",
+            "你能接受试镜失败、角色落选、公开评价和长期不确定性。",
+            "你的 RIASEC 中 A 艺术型较高，同时 E 企业型和 S 社会型不低。",
+            "你愿意把作品、模卡、试镜记录、合同、档期和人脉当作长期职业资产来经营。"
+          ],
+          "caution_title": "需要谨慎，如果",
+          "caution_items": [
+            "你只喜欢舞台感，不想处理试镜、合同、空档期和自我经营。",
+            "你无法承受公开反馈、反复被拒绝或角色被替换。",
+            "你期待稳定收入、清晰路径、固定岗位和温和反馈。",
+            "你只想“被看见”，但不愿意长期训练和复盘。"
+          ]
+        },
+        {
+          "id": "china_snapshot",
+          "component": "CareerSnapshotCard",
+          "heading": "职业快照：中国大陆参考",
+          "rows": [
+            [
+              "职业名称",
+              "演员"
+            ],
+            [
+              "英文名称",
+              "Actors"
+            ],
+            [
+              "所属方向",
+              "娱乐与体育"
+            ],
+            [
+              "SOC 代码",
+              "27-2011"
+            ],
+            [
+              "AI 曝光评分",
+              "7/10，较高"
+            ],
+            [
+              "国内薪资口径",
+              "暂无全国统一的演员单职业官方中位薪资"
+            ],
+            [
+              "可参考行业",
+              "文化、体育和娱乐业"
+            ],
+            [
+              "数据性质",
+              "industry_proxy，行业代理数据，不代表演员个人收入"
+            ],
+            [
+              "职业结构",
+              "项目制、试镜制、强分层、高流动"
+            ],
+            [
+              "主要入口",
+              "院校训练、剧组试镜、横店、短剧、广告、话剧、配音、内容平台"
+            ]
+          ],
+          "body": "国家统计局 2024 年城镇单位工资数据中，“文化、体育和娱乐业”城镇非私营单位年平均工资为 126,040 元，城镇私营单位为 61,669 元，规模以上企业该行业就业人员平均工资为 127,002 元。这些数据只能作为行业参考，不能理解为“演员个人收入”。",
+          "source_key": "nbs_2024_wage"
+        },
+        {
+          "id": "us_bls_snapshot",
+          "component": "CareerSnapshotCard",
+          "heading": "海外参考：美国 BLS 数据",
+          "rows": [
+            [
+              "美国 2024 岗位数",
+              "57,000"
+            ],
+            [
+              "美国 2034 预计岗位数",
+              "57,100"
+            ],
+            [
+              "十年变化",
+              "+200"
+            ],
+            [
+              "就业展望",
+              "整体变化不大，0%"
+            ],
+            [
+              "美国中位时薪",
+              "$23.33 / 小时"
+            ],
+            [
+              "典型学历门槛",
+              "部分大学学习经历，但未必要求完整学位"
+            ],
+            [
+              "工作经验",
+              "暂无硬性要求"
+            ],
+            [
+              "培训要求",
+              "通常需要长期在岗训练"
+            ]
+          ],
+          "body": "美国 BLS 将 Actors 描述为项目制、波动性较高的职业：2024 年中位时薪为 $23.33，岗位数约 57,000，2024–2034 年就业增长预测为 0%，且演员工作常见短期项目、兼职、档期变化和角色间空档。",
+          "source_key": "bls_actors_ooh"
+        },
+        {
+          "id": "fit_decision",
+          "component": "FitDecisionChecklist",
+          "heading": "如何判断自己是否适合演员？",
+          "intro": "不要只问：我有没有表演欲？更重要的是看四个判断维度。",
+          "checks": [
+            {
+              "title": "训练承受",
+              "question": "你能否长期重复练台词、形体、镜头感、情绪转换和角色理解？",
+              "note": "如果你只喜欢“被看见”，但不喜欢反复训练，这个职业会很快消耗你。"
+            },
+            {
+              "title": "反馈承受",
+              "question": "你能否把试镜失败、公开评价、角色落选和被替换，当成职业过程，而不是自我否定？",
+              "note": "演员的反馈密度很高，很多反馈不会温柔。"
+            },
+            {
+              "title": "经营承受",
+              "question": "你能否管理模卡、作品、试镜记录、空档期资金、合同细节和项目机会？",
+              "note": "演员不是只靠表演能力生存，也靠职业材料和机会管理生存。"
+            },
+            {
+              "title": "市场承受",
+              "question": "你能否适应短剧、广告、直播、配音、剧组、文旅演艺和内容平台之间的切换？",
+              "note": "如果你只接受一种理想中的表演形态，现实机会可能不够支撑长期发展。"
+            }
+          ],
+          "cta": {
+            "prompt": "不确定自己的 A / E / S 结构？先测一次 RIASEC。",
+            "label": "开始霍兰德职业兴趣测试",
+            "href": "/zh/tests/holland-career-interest-test-riasec"
+          }
+        },
+        {
+          "id": "riasec_fit",
+          "component": "RIASECFitBlock",
+          "heading": "什么兴趣类型更适合做演员？",
+          "profile": [
+            "艺术型 A 主导",
+            "企业型 E 辅助",
+            "社会型 S 支撑"
+          ],
+          "body": [
+            "艺术型 A 代表角色解释、情绪表达、象征转换和创造性呈现。",
+            "企业型 E 代表试镜竞争、自我展示、机会争取、职业包装和不确定收入下的自我经营。",
+            "社会型 S 代表与导演、演员、经纪、剧组、品牌方和观众之间的协作。",
+            "只具备 A，可能只是有表达欲。A + E + S 同时成立，才更接近可持续演员路径。",
+            "如果你的艺术型很高，但企业型很低，你可能会喜欢表演本身，却被试镜、竞争、项目空档、收入不稳定和自我经营消耗掉。"
+          ]
+        },
+        {
+          "id": "personality_fit",
+          "component": "PersonalityFitBlock",
+          "heading": "性格内向的人可以当演员吗？",
+          "answer": "可以，但要看你的能力结构。演员并不等于“外向的人”。",
+          "traits": [
+            "高开放性：能理解人物、情境和复杂情绪。",
+            "可训练的表达欲：愿意反复练，而不是只靠灵感。",
+            "反馈承受力：能面对落选、否定、公开评价和角色失败。",
+            "恢复速度：被拒绝后还能继续训练、试镜和投递。",
+            "自我管理能力：能维护模卡、作品、档期、合同和人脉。"
+          ],
+          "body": [
+            "外向能帮助试镜、沟通和镜头前能量，但内向者如果具备观察力、角色理解、情绪细腻度和长期训练能力，也可能形成优势。",
+            "费马判断重点不是：你像不像演员；而是：你能否长期承受这份职业的评价密度、机会波动和自我经营压力。"
+          ]
+        },
+        {
+          "id": "definition",
+          "component": "DefinitionBlock",
+          "heading": "演员到底是做什么的？",
+          "body": [
+            "演员不是简单“出镜”或“表演一下”。",
+            "它是一类把剧本、人物关系、身体动作、台词节奏和情绪控制，转化为镜头、舞台、短剧、广告、配音或文旅演艺结果的职业。",
+            "O*NET 将 Actors 定义为在舞台、电视、广播、视频、电影或其他场景中扮演角色，以娱乐、告知或指导观众；其核心任务包括与其他演员协作、用语言和身体动作诠释角色、与导演和剧作人员合作、排练角色、学习人物、参加试镜。",
+            "在中国大陆，演员的入口可能来自院校训练、剧组试镜、横店等影视基地、广告拍摄、短剧项目、话剧舞台、配音棚、内容平台或文旅演艺。但无论入口如何，核心都是一件事：在团队生产中稳定交付可信角色。"
+          ],
+          "source_key": "onet_actors"
+        },
+        {
+          "id": "responsibilities",
+          "component": "ResponsibilitiesBlock",
+          "heading": "演员的日常工作包括什么？",
+          "intro": "演员的日常工作不是只发生在镜头前。它包括准备、试镜、排练、现场协作和作品交付。",
+          "items": [
+            "阅读剧本，理解人物动机、人物关系、情节功能和表演任务。",
+            "参加试镜、围读、排练、走位、定妆、试拍和镜头调度。",
+            "记忆台词，训练声音、形体、表情、节奏和情绪切换。",
+            "按导演、摄影、制片、现场调度和表演对手要求完成角色呈现。",
+            "维护职业材料，包括模卡、简历、试镜片段、作品集、角色履历和可复用表演素材。"
+          ]
+        },
+        {
+          "id": "work_context",
+          "component": "WorkContextBlock",
+          "heading": "演员通常在哪些场景工作？",
+          "contexts": [
+            "影视剧组",
+            "短剧项目",
+            "广告拍摄",
+            "话剧舞台",
+            "配音棚",
+            "文旅演艺",
+            "内容平台",
+            "商业活动",
+            "直播与短视频衍生项目"
+          ],
+          "body": "它通常不是稳定坐班，而是围绕项目、试镜、档期、合同、角色权重和作品传播周期展开。",
+          "entry_table": [
+            [
+              "院校路径",
+              "更强调训练体系、表演基础和长期专业积累"
+            ],
+            [
+              "剧组 / 横店路径",
+              "更强调机会密度、试镜材料和项目适应"
+            ],
+            [
+              "短剧 / 广告路径",
+              "更强调镜头感、快速记忆、情绪爆发和周转效率"
+            ],
+            [
+              "配音 / 内容平台",
+              "更强调声音控制、表达稳定性和个人内容经营"
+            ]
+          ]
+        },
+        {
+          "id": "market_signal",
+          "component": "MarketSignalCard",
+          "heading": "招聘样本提示：短剧演员岗位常见要求",
+          "signal_meta": [
+            [
+              "信号类型",
+              "单条招聘 JD 样本"
+            ],
+            [
+              "捕获时间",
+              "2026-05-02"
+            ],
+            [
+              "有效期",
+              "2026-08-02"
+            ],
+            [
+              "使用边界",
+              "样本信号，不代表行业统计"
+            ]
+          ],
+          "body": "招聘平台样本显示，短剧演员岗位会强调镜头感、情绪爆发力、台词功底、快速记台词、高密度快节奏拍摄、补拍重拍、多机位、普通话、方言加分、宣发互动、守时敬业等要求。该样本只能作为招聘侧信号，不能推导为整个行业的比例结论。",
+          "keywords": [
+            "镜头感",
+            "情绪爆发力",
+            "台词功底",
+            "快速记台词",
+            "短剧节奏",
+            "多机位拍摄",
+            "补拍重拍",
+            "普通话标准",
+            "方言加分",
+            "宣发互动",
+            "守时敬业",
+            "剧组调度"
+          ],
+          "interpretation": "这说明，基础演员岗位不只考验“会不会演”，也考验快速执行、镜头适应、项目配合和高密度拍摄耐受。",
+          "linkedin_note": "LinkedIn 的 2025 技能趋势显示，AI literacy、communication、adaptability、strategic thinking 等技能在多个地区和职能中上升。对演员来说，这些不是“演员专属技能”，但可以成为转向企业培训、内容表现、公关、营销、主持、表达训练等相邻路径的横向能力。",
+          "source_keys": [
+            "zhaopin_short_drama_actor_sample",
+            "linkedin_skills_2025"
+          ]
+        },
+        {
+          "id": "comparison",
+          "component": "AdjacentCareerComparisonTable",
+          "heading": "演员、配音演员、主持人有什么区别？",
+          "rows": [
+            [
+              "演员 vs 配音演员",
+              "演员同时依赖身体、面部、镜头或舞台存在感；配音更依赖声音控制、情绪层次、节奏和录音环境适应",
+              "声音表现强，但不想长期出镜的人"
+            ],
+            [
+              "演员 vs 主持人",
+              "演员的核心是角色塑造；主持人的核心是信息组织、场面控制和传播节奏",
+              "逻辑表达、控场能力和信息组织更强的人"
+            ],
+            [
+              "演员 vs 短视频内容创作者",
+              "演员通常服务于剧本、角色和制作团队；创作者更多承担选题、拍摄、剪辑、分发和粉丝关系管理",
+              "想掌握内容主动权和平台关系的人"
+            ],
+            [
+              "演员 vs 直播主播",
+              "演员追求角色可信度；主播追求实时互动、转化节奏和情绪续航",
+              "能长期实时互动并承受流量波动的人"
+            ]
+          ]
+        },
+        {
+          "id": "ai_impact",
+          "component": "AIImpactTable",
+          "heading": "AI 会不会替代演员？",
+          "score": "7/10，较高",
+          "rows": [
+            [
+              "背景角色",
+              "现场互动"
+            ],
+            [
+              "合成表演",
+              "人格指纹"
+            ],
+            [
+              "重复性镜头",
+              "身体表达"
+            ],
+            [
+              "剪辑辅助",
+              "真实关系反应"
+            ],
+            [
+              "模式化内容生成",
+              "审美判断"
+            ],
+            [
+              "声音/形象部分合成",
+              "即兴调整"
+            ]
+          ],
+          "question": "哪些环节会被加速，哪些判断仍然必须由人承担？",
+          "fermat_view": "演员的风险不是“会不会被 AI 替代”，而是你能否把自己的表达能力升级到 AI 难以批量复制的部分。"
+        },
+        {
+          "id": "career_risks",
+          "component": "CareerRiskCards",
+          "heading": "做演员最大的风险是什么？",
+          "intro": "演员职业具有高不确定性、强二八结构和明显项目制特征。",
+          "career_risks": [
+            "收入不稳定",
+            "项目空档期",
+            "公开评价压力",
+            "角色被替换",
+            "过度依赖一次机会",
+            "AI 改变低复杂度任务"
+          ],
+          "caveat": "这不是收入预测，也不是入行承诺。它只是一个职业探索底稿。"
+        },
+        {
+          "id": "contract_risks",
+          "component": "ContractRiskBlock",
+          "heading": "合同与项目风险",
+          "checks": [
+            "片酬是多少，何时结算？",
+            "是否包含补拍、重拍、配音、宣发互动？",
+            "肖像权、二次剪辑权、宣传素材使用权是否写清楚？",
+            "是否绑定培训、贷款、包装或经纪排他？",
+            "食宿、交通、异地拍摄和加班如何处理？",
+            "未成年人或无经验从业者是否有监护、合同和安全边界？"
+          ],
+          "warning": "警惕只承诺“机会”、但不说明角色类型、工时、补拍、食宿、交通和结算方式的模糊邀约。"
+        },
+        {
+          "id": "next_steps",
+          "component": "NextStepsBlock",
+          "heading": "如果想做演员，下一步该准备什么？",
+          "intro": "如果你想判断自己是否适合演员，不要只凭感觉，建议按这个顺序行动。",
+          "steps": [
+            {
+              "title": "准备职业材料",
+              "items": [
+                "模卡",
+                "个人简历",
+                "45 秒情绪爆发片段",
+                "45 秒生活化自然表演片段",
+                "1 段台词或配音素材"
+              ]
+            },
+            {
+              "title": "建立剧组库",
+              "items": [
+                "剧组类型",
+                "角色要求",
+                "试镜结果",
+                "回访反馈",
+                "失败原因",
+                "重复出现的类型标签"
+              ]
+            },
+            {
+              "title": "做专项训练",
+              "items": [
+                "台词",
+                "镜头感",
+                "情绪转换",
+                "即兴反应",
+                "形体控制",
+                "普通话",
+                "方言或动作能力"
+              ]
+            },
+            {
+              "title": "做风险对冲",
+              "items": [
+                "至少准备 3 个月空档期资金，避免把短期无戏误判为个人能力彻底失败。"
+              ]
+            },
+            {
+              "title": "用测试做交叉验证",
+              "items": [
+                "先用 RIASEC 判断你的 A / E / S 结构，再用 MBTI 或 Big Five 检查你的反馈承受、协作方式、自我驱动和恢复速度。"
+              ]
+            }
+          ],
+          "cta": {
+            "prompt": "把“想做演员”变成可验证的职业判断。",
+            "label": "测量我的职业兴趣",
+            "href": "/zh/tests/holland-career-interest-test-riasec"
+          }
+        },
+        {
+          "id": "faq",
+          "component": "CareerFAQBlock",
+          "heading": "常见问题",
+          "items": [
+            {
+              "question": "普通人想做演员，应该先去横店跑组吗？",
+              "answer": "不建议把“去横店”当成唯一入口。更稳的路径是先准备模卡、试镜片段、基础训练和剧组记录表，再判断自己适合短剧、广告、群演、话剧、配音、院校训练还是内容平台。横店和剧组实践可以提供机会密度，但不能替代表演能力、职业材料、合同判断和长期抗压能力。"
+            },
+            {
+              "question": "没有表演院校背景，可以做演员吗？",
+              "answer": "可以尝试，但不能只靠热情。没有院校背景时，模卡、试镜片段、台词训练、镜头感、作品记录和合同判断会更重要。你需要先用小项目验证自己是否能承受试镜失败、项目空档和持续训练。"
+            },
+            {
+              "question": "演员收入稳定吗？",
+              "answer": "通常不稳定。演员收入高度项目制，受角色权重、剧组预算、平台类型、经纪合约和持续接戏能力影响。中国大陆暂无统一的演员单职业官方中位薪资，因此本页只提供行业代理数据和风险说明。"
+            }
+          ]
+        }
+      ]
+    },
+    "en": {
+      "path": "/en/career/jobs/actors",
+      "breadcrumb": [
+        "Home",
+        "Career",
+        "Career Library",
+        "Actors"
+      ],
+      "hero": {
+        "h1": "Actors",
+        "subtitle": "演员",
+        "quick_answer": "Actors interpret scripted or improvised roles through voice, gesture, movement, timing, and emotional control across film, television, stage, audio, and live media. In the U.S., acting is a project-based occupation with 57,000 jobs in 2024, little-or-no projected growth through 2034, and a median hourly wage of $23.33. FermatMind treats acting as an Artistic-first career that also requires Enterprising self-management, Social collaboration, and emotional recovery speed.",
+        "primary_cta": {
+          "label": "Test whether your career interests fit acting",
+          "href": "/en/tests/holland-career-interest-test-riasec"
+        },
+        "secondary_cta": {
+          "label": "Compare with MBTI and Big Five",
+          "hrefs": [
+            "/en/tests/mbti-personality-test-16-personality-types",
+            "/en/tests/big-five-personality-test-ocean-model"
+          ]
+        }
+      },
+      "sections": [
+        {
+          "id": "fermat_quick_fit",
+          "component": "FermatDecisionCard",
+          "heading": "Fermat Quick Fit",
+          "fit_title": "Acting may fit you if",
+          "fit_items": [
+            "You do not only want to be seen; you are willing to rehearse repeatedly.",
+            "You can treat auditions, rejection, and public feedback as part of the work.",
+            "Your RIASEC profile shows high Artistic drive, with enough Enterprising persistence and Social collaboration.",
+            "You can manage a project-based career: portfolio, self-tapes, contracts, reputation, and periods between roles."
+          ],
+          "caution_title": "Be careful if",
+          "caution_items": [
+            "You want public attention but do not want repeated training.",
+            "You need stable income, predictable schedules, and clear promotion paths.",
+            "You struggle to recover from rejection or public evaluation.",
+            "You want the craft of acting but not the business of acting."
+          ]
+        },
+        {
+          "id": "us_bls_snapshot",
+          "component": "CareerSnapshotCard",
+          "heading": "Career Snapshot: U.S. Reference",
+          "rows": [
+            [
+              "Occupation",
+              "Actors"
+            ],
+            [
+              "SOC Code",
+              "27-2011"
+            ],
+            [
+              "AI Exposure",
+              "7/10, relatively high"
+            ],
+            [
+              "U.S. jobs in 2024",
+              "57,000"
+            ],
+            [
+              "Projected U.S. jobs in 2034",
+              "57,100"
+            ],
+            [
+              "2024–2034 change",
+              "+200"
+            ],
+            [
+              "Job outlook",
+              "Little or no change, 0%"
+            ],
+            [
+              "Median hourly wage",
+              "$23.33 / hour"
+            ],
+            [
+              "Entry education",
+              "Some college, no degree"
+            ],
+            [
+              "Work experience",
+              "None"
+            ],
+            [
+              "Training",
+              "Long-term on-the-job training"
+            ]
+          ],
+          "body": "BLS reports that actors had a median hourly wage of $23.33 in May 2024, held about 57,000 jobs in 2024, and are projected to show little or no employment change from 2024 to 2034. BLS also notes that assignments are often short, part-time work is common, and schedules may vary.",
+          "source_key": "bls_actors_ooh"
+        },
+        {
+          "id": "china_reference",
+          "component": "CareerSnapshotCard",
+          "heading": "Mainland China Reference",
+          "rows": [
+            [
+              "Actor-specific national salary data",
+              "Not available"
+            ],
+            [
+              "Proxy industry",
+              "Culture, sports, and entertainment"
+            ],
+            [
+              "Data type",
+              "industry_proxy"
+            ],
+            [
+              "Main limitation",
+              "Industry average wage does not equal actor income"
+            ],
+            [
+              "Common structure",
+              "Project-based, audition-based, highly segmented, unstable"
+            ]
+          ],
+          "body": "China’s National Bureau of Statistics reports 2024 wage data for the broader culture, sports, and entertainment industry. This should be treated as industry-level reference data, not actor-specific salary data.",
+          "source_key": "nbs_2024_wage"
+        },
+        {
+          "id": "fit_decision",
+          "component": "FitDecisionChecklist",
+          "heading": "How to Decide Whether Acting Fits You",
+          "intro": "Do not ask only: Do I like performing? Use four decision checks.",
+          "checks": [
+            {
+              "title": "Training tolerance",
+              "question": "Can you rehearse lines, movement, camera presence, emotional transitions, and character logic repeatedly?",
+              "note": "If you only enjoy being seen but dislike practice, acting may become exhausting quickly."
+            },
+            {
+              "title": "Rejection tolerance",
+              "question": "Can you treat auditions, callbacks, silence, and role loss as a pipeline rather than personal validation?",
+              "note": "Acting exposes you to dense feedback, and much of it is not gentle."
+            },
+            {
+              "title": "Career management tolerance",
+              "question": "Can you manage your headshot, résumé, reel, audition records, finances, contracts, and relationship network?",
+              "note": "Acting is not only a craft; it is also a self-managed project pipeline."
+            },
+            {
+              "title": "Market resilience",
+              "question": "Can you move between theater, commercials, voice-over, short-form content, film, television, training, and facilitation?",
+              "note": "If you accept only one ideal form of acting work, the market may not give you enough continuity."
+            }
+          ],
+          "cta": {
+            "prompt": "If you are unsure about your Artistic / Enterprising / Social structure, start with RIASEC.",
+            "label": "Start the Holland Career Interest Test",
+            "href": "/en/tests/holland-career-interest-test-riasec"
+          }
+        },
+        {
+          "id": "riasec_fit",
+          "component": "RIASECFitBlock",
+          "heading": "RIASEC Fit",
+          "profile": [
+            "Artistic-primary",
+            "Enterprising-secondary",
+            "Social-support"
+          ],
+          "body": [
+            "Artistic drives role interpretation, emotional range, improvisation, symbolic expression, and performance craft.",
+            "Enterprising appears in auditions, personal branding, networking, negotiation, reputation management, and career packaging.",
+            "Social matters because sustainable acting depends on ensemble trust, director feedback, audience response, and rapid adaptation to production teams.",
+            "High Artistic drive without Enterprising stamina can create creative desire but weak career execution."
+          ]
+        },
+        {
+          "id": "personality_fit",
+          "component": "PersonalityFitBlock",
+          "heading": "Personality Fit",
+          "answer": "Acting favors high Openness, controlled Extraversion, feedback tolerance, and emotional recovery speed.",
+          "body": [
+            "Openness supports imagination, character exploration, and symbolic thinking. Extraversion helps with visibility and audition energy, but introverted actors can succeed when observation, concentration, and emotional precision are strong.",
+            "Conscientiousness is a hidden differentiator. Memorization, punctuality, rehearsal discipline, and repeated self-taping often determine who remains employable."
+          ]
+        },
+        {
+          "id": "definition",
+          "component": "DefinitionBlock",
+          "heading": "What Do Actors Do?",
+          "body": [
+            "Actors play parts in stage, television, radio, video, film, or other settings for entertainment, information, or instruction.",
+            "O*NET describes the role as interpreting serious or comic parts through speech, gesture, and body movement, and lists tasks such as collaborating with other actors, working with directors, rehearsing, learning characters, and attending auditions."
+          ],
+          "source_key": "onet_actors"
+        },
+        {
+          "id": "responsibilities",
+          "component": "ResponsibilitiesBlock",
+          "heading": "Core Responsibilities",
+          "items": [
+            "Study scripts, scene objectives, character motives, and role relationships.",
+            "Attend auditions, casting calls, rehearsals, table reads, camera tests, or blocking sessions.",
+            "Memorize lines, cues, movements, and emotional transitions.",
+            "Perform roles using voice, gesture, facial expression, movement, and timing.",
+            "Collaborate with directors, cast, crew, and production teams."
+          ]
+        },
+        {
+          "id": "work_context",
+          "component": "WorkContextBlock",
+          "heading": "Where Do Actors Work?",
+          "contexts": [
+            "production studios",
+            "theaters",
+            "theme parks",
+            "touring companies",
+            "voice and audio studios",
+            "film and television locations",
+            "commercials",
+            "streaming or digital productions",
+            "training and facilitation settings"
+          ],
+          "body": "Assignments can last from a day to a few months. Some actors also work adjacent jobs to manage income between roles.",
+          "source_key": "bls_actors_ooh"
+        },
+        {
+          "id": "market_signal",
+          "component": "MarketSignalCard",
+          "heading": "What Skills Does the Market Signal?",
+          "signal_meta": [
+            [
+              "Signal type",
+              "Job-posting sample"
+            ],
+            [
+              "Captured at",
+              "2026-05-02"
+            ],
+            [
+              "Expires at",
+              "2026-08-02"
+            ],
+            [
+              "Usage",
+              "Example only, not market-wide statistics"
+            ]
+          ],
+          "body": "A short-drama actor job posting sample from Zhaopin lists requirements such as camera presence, emotional expressiveness, quick script learning, high-density shooting, reshoots, Mandarin clarity, dialect as a plus, publicity interaction, and schedule discipline. This is a sample signal, not an industry-wide percentage.",
+          "keywords": [
+            "camera presence",
+            "emotional expressiveness",
+            "quick script learning",
+            "high-density shooting",
+            "reshoots",
+            "publicity interaction",
+            "Mandarin clarity",
+            "schedule discipline"
+          ],
+          "linkedin_note": "LinkedIn’s 2025 skills trend report identifies AI literacy, communication, adaptability, strategic thinking, and conflict mitigation as rising workforce skills across regions. For actors, these are not actor-specific statistics, but they matter for adjacent paths such as corporate training, content performance, facilitation, public speaking, marketing, and communication-heavy roles.",
+          "source_keys": [
+            "zhaopin_short_drama_actor_sample",
+            "linkedin_skills_2025"
+          ]
+        },
+        {
+          "id": "comparison",
+          "component": "AdjacentCareerComparisonTable",
+          "heading": "Actors Compared With Adjacent Roles",
+          "rows": [
+            [
+              "Actors vs Voice Actors",
+              "Actors rely on body, face, movement, camera or stage presence; voice actors concentrate on vocal control, timing, and audio interpretation.",
+              "People with strong vocal expression who do not want to appear on camera"
+            ],
+            [
+              "Actors vs Announcers",
+              "Actors portray roles; announcers present, host, narrate, or deliver information.",
+              "People with strong information delivery and hosting ability"
+            ],
+            [
+              "Actors vs Content Creators",
+              "Actors often work inside scripts and productions; creators own more of the concept, distribution, and audience relationship.",
+              "People who want more control over content and platform strategy"
+            ],
+            [
+              "Actors vs Corporate Trainers",
+              "Actors perform roles for audiences; trainers convert presence and storytelling into learning outcomes.",
+              "People who want to use performance skills in organizational settings"
+            ]
+          ]
+        },
+        {
+          "id": "ai_impact",
+          "component": "AIImpactTable",
+          "heading": "Will AI Replace Actors?",
+          "score": "7/10, relatively high",
+          "rows": [
+            [
+              "Background roles",
+              "Live interaction"
+            ],
+            [
+              "Synthetic performance",
+              "Personal style"
+            ],
+            [
+              "Repeatable shots",
+              "Physical presence"
+            ],
+            [
+              "Editing assistance",
+              "Real relationship response"
+            ],
+            [
+              "Patterned content generation",
+              "Aesthetic judgment"
+            ],
+            [
+              "Partial voice/image synthesis",
+              "Improvisation"
+            ]
+          ],
+          "question": "Which parts of acting can be accelerated, and which parts still require human judgment?",
+          "fermat_view": "The risk is not only AI replacement. The risk is failing to move your performance value toward what AI cannot cheaply replicate."
+        },
+        {
+          "id": "career_risks",
+          "component": "CareerRiskCards",
+          "heading": "What Are the Biggest Risks of Acting?",
+          "intro": "Acting is financially volatile and reputation-sensitive.",
+          "career_risks": [
+            "short assignments",
+            "periods between roles",
+            "income instability",
+            "public rejection",
+            "typecasting",
+            "overdependence on one breakthrough",
+            "changing AI and platform conditions"
+          ],
+          "caveat": "This page is not an income forecast, casting guarantee, union-access guarantee, or fame prediction."
+        },
+        {
+          "id": "contract_risks",
+          "component": "ContractRiskBlock",
+          "heading": "Contract and Project Risks",
+          "checks": [
+            "What is the rate and when is payment due?",
+            "Is the role union, non-union, paid, deferred-pay, or unpaid?",
+            "Are reshoots, dubbing, publicity, or usage rights included?",
+            "What are the release terms and likeness rights?",
+            "Who covers travel, meals, accommodation, and overtime?",
+            "What records prove the work occurred?"
+          ],
+          "note": "SAG-AFTRA eligibility may come from covered principal or speaking work, covered background work days, or affiliated-union work, but eligibility evidence is reviewed by the union and cannot be assumed from unverifiable work claims.",
+          "source_key": "sag_aftra_eligibility"
+        },
+        {
+          "id": "next_steps",
+          "component": "NextStepsBlock",
+          "heading": "What Should You Prepare Next?",
+          "steps": [
+            {
+              "title": "Build your baseline actor kit",
+              "items": [
+                "headshot",
+                "résumé",
+                "self-tape reel",
+                "voice sample",
+                "two contrasting scenes"
+              ]
+            },
+            {
+              "title": "Track auditions as a pipeline",
+              "items": [
+                "submissions",
+                "callbacks",
+                "booked roles",
+                "feedback",
+                "type-casting signals",
+                "reasons for rejection or repeat interest"
+              ]
+            },
+            {
+              "title": "Train one craft lever for 90 days",
+              "items": [
+                "camera acting",
+                "voice",
+                "dialect",
+                "movement",
+                "improvisation",
+                "audition technique"
+              ]
+            },
+            {
+              "title": "Build income resilience",
+              "items": [
+                "voice-over",
+                "commercials",
+                "theater",
+                "hosting",
+                "content performance",
+                "writing",
+                "directing",
+                "teaching",
+                "corporate facilitation"
+              ]
+            },
+            {
+              "title": "Use tests to cross-check fit",
+              "items": [
+                "Use RIASEC first to test your Artistic / Enterprising / Social structure. Then use MBTI or Big Five to examine feedback tolerance, collaboration style, and recovery after rejection."
+              ]
+            }
+          ],
+          "cta": {
+            "prompt": "Turn “I want to act” into a testable career decision.",
+            "label": "Measure my career interests",
+            "href": "/en/tests/holland-career-interest-test-riasec"
+          }
+        },
+        {
+          "id": "faq",
+          "component": "CareerFAQBlock",
+          "heading": "FAQ",
+          "items": [
+            {
+              "question": "Is acting a good career for creative people?",
+              "answer": "Acting can fit creative people, but creativity alone is not enough. The role also requires rejection tolerance, audition discipline, physical and vocal training, self-promotion, schedule instability management, and the ability to work inside team constraints. A sustainable fit usually combines Artistic drive with Enterprising execution and emotional recovery speed."
+            },
+            {
+              "question": "Do actors need formal training?",
+              "answer": "Formal education is not always required, but training is common. BLS notes that actors often enhance their skills through performing arts classes and years of practice."
+            },
+            {
+              "question": "Is acting financially stable?",
+              "answer": "Usually not. Acting is project-based, and many actors experience variable schedules, short assignments, and periods between roles. BLS also notes that part-time work is common."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "support_components": {
+    "related_next_pages_rules": {
+      "component": "RelatedNextPages",
+      "validation_required": true,
+      "rules": [
+        "final 200",
+        "canonical self",
+        "no noindex",
+        "same locale preferred"
+      ],
+      "render_policy": "If URL fails validation, render as plain text or hide."
+    },
+    "review_validity": {
+      "component": "ReviewValidityCard",
+      "last_reviewed": "2026-05-02",
+      "next_review_due": "2026-08-02",
+      "market_signal_expiry": "2026-08-02",
+      "ai_exposure_display": "7/10, based on central score map"
+    },
+    "boundary_notice": {
+      "component": "BoundaryNotice",
+      "zh": [
+        "职业兴趣测试和人格测试只能帮助你理解工作风格、动机结构和风险承受方式，不能保证试镜成功、角色机会、收入水平、工会资格、经纪资源或行业突破。",
+        "本页用于职业探索，不构成就业承诺、收入预测、合同建议或医疗/心理诊断。"
+      ],
+      "en": [
+        "Career interest tests and personality tests help you understand work style, motivation, and risk tolerance. They do not guarantee casting, income, union eligibility, representation, career access, or long-term employment.",
+        "This page is for career exploration. It is not employment advice, income prediction, contract advice, medical guidance, or psychological diagnosis."
+      ]
+    }
+  },
+  "sources": {
+    "bls_actors_ooh": {
+      "label": "BLS Occupational Outlook Handbook: Actors",
+      "url": "https://www.bls.gov/ooh/entertainment-and-sports/actors.htm",
+      "usage": "U.S. employment, wage, outlook, work pattern, education and training."
+    },
+    "onet_actors": {
+      "label": "O*NET Online: Actors 27-2011.00",
+      "url": "https://www.onetonline.org/link/details/27-2011.00",
+      "usage": "Definition, tasks and responsibilities."
+    },
+    "nbs_2024_wage": {
+      "label": "National Bureau of Statistics of China: 2024 wage data",
+      "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202505/t20250516_1959826.html",
+      "usage": "China culture, sports and entertainment industry proxy wage."
+    },
+    "sag_aftra_eligibility": {
+      "label": "SAG-AFTRA membership eligibility",
+      "url": "https://www.sagaftra.org/membership-benefits/steps-join",
+      "usage": "U.S. union eligibility background."
+    },
+    "zhaopin_short_drama_actor_sample": {
+      "label": "Zhaopin short-drama actor job-posting sample",
+      "url": "https://www.zhaopin.com/jobdetail/CCL1513997570J40874660413.htm",
+      "captured_at": "2026-05-02",
+      "expires_at": "2026-08-02",
+      "usage": "Single JD sample only, not market-wide statistics."
+    },
+    "linkedin_skills_2025": {
+      "label": "LinkedIn Skills on the Rise 2025",
+      "url": "https://www.linkedin.com/business/talent/blog/learning-and-development/skills-on-the-rise",
+      "captured_at": "2026-05-02",
+      "expires_at": "2027-03-26",
+      "usage": "General workforce skill trend, not actor-specific statistics."
+    }
+  },
+  "structured_data_from_visible_content": {
+    "faq_page": {
+      "zh": {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "普通人想做演员，应该先去横店跑组吗？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "不建议把“去横店”当成唯一入口。更稳的路径是先准备模卡、试镜片段、基础训练和剧组记录表，再判断自己适合短剧、广告、群演、话剧、配音、院校训练还是内容平台。横店和剧组实践可以提供机会密度，但不能替代表演能力、职业材料、合同判断和长期抗压能力。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "没有表演院校背景，可以做演员吗？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "可以尝试，但不能只靠热情。没有院校背景时，模卡、试镜片段、台词训练、镜头感、作品记录和合同判断会更重要。你需要先用小项目验证自己是否能承受试镜失败、项目空档和持续训练。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "演员收入稳定吗？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "通常不稳定。演员收入高度项目制，受角色权重、剧组预算、平台类型、经纪合约和持续接戏能力影响。中国大陆暂无统一的演员单职业官方中位薪资，因此本页只提供行业代理数据和风险说明。"
+            }
+          }
+        ]
+      },
+      "en": {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is acting a good career for creative people?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Acting can fit creative people, but creativity alone is not enough. The role also requires rejection tolerance, audition discipline, physical and vocal training, self-promotion, schedule instability management, and the ability to work inside team constraints. A sustainable fit usually combines Artistic drive with Enterprising execution and emotional recovery speed."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do actors need formal training?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Formal education is not always required, but training is common. BLS notes that actors often enhance their skills through performing arts classes and years of practice."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is acting financially stable?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Usually not. Acting is project-based, and many actors experience variable schedules, short assignments, and periods between roles. BLS also notes that part-time work is common."
+            }
+          }
+        ]
+      }
+    },
+    "schema_rules": [
+      "FAQPage only from visible FAQ.",
+      "Occupation schema must not include China industry proxy wage.",
+      "Occupation schema must not include AI Exposure.",
+      "Occupation schema must not include job-posting sample.",
+      "Product schema is not used for career job pages."
+    ]
+  },
+  "implementation_contract": {
+    "component_contract_required": true,
+    "h1_count": 1,
+    "cta_count": 3,
+    "related_links_must_validate": true,
+    "market_signal_must_show_captured_and_expiry": true,
+    "mobile_table_policy": "Render comparison and snapshot tables as stacked cards on narrow screens.",
+    "json_ld_policy": "Derive only from visible page content.",
+    "validation_required_before_sitemap_llms": [
+      "final 200",
+      "canonical self",
+      "no noindex",
+      "public cache",
+      "schema valid",
+      "internal links final 200",
+      "CTA attribution present"
+    ]
+  }
+}

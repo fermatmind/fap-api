@@ -135,6 +135,32 @@ final class CareerCurrentAuthorityExporterTest extends TestCase
         $exporter->buildDocuments([$row], $projections, $projections, $projections, 1);
     }
 
+    public function test_it_rejects_placeholder_components(): void
+    {
+        $row = $this->row('alpha');
+        $row['page_payload_json']['page']['en']['definition_block'] = [
+            'content_available' => false,
+            'module_state' => 'pending_definition_block',
+            'source' => 'component_order_contract',
+        ];
+        $projections = $this->projections(['alpha']);
+
+        $this->expectException(CareerCurrentAuthorityExportFailure::class);
+        $this->expectExceptionMessage('PAGE_COMPONENT_PLACEHOLDER');
+        $this->exporter()->buildDocuments([$row], $projections, $projections, $projections, 1);
+    }
+
+    public function test_it_rejects_legacy_sections_or_unknown_page_keys(): void
+    {
+        $row = $this->row('alpha');
+        $row['page_payload_json']['page']['zh']['sections'] = [['id' => 'definition']];
+        $projections = $this->projections(['alpha']);
+
+        $this->expectException(CareerCurrentAuthorityExportFailure::class);
+        $this->expectExceptionMessage('PAGE_COMPONENT_UNKNOWN');
+        $this->exporter()->buildDocuments([$row], $projections, $projections, $projections, 1);
+    }
+
     public function test_it_records_manual_hold_as_a_verified_exclusion_from_current_authority(): void
     {
         $projections = $this->projections(['alpha']);

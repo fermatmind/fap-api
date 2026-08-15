@@ -292,6 +292,7 @@ final class CareerCurrentAuthorityExporter
                 throw new CareerCurrentAuthorityExportFailure('LOCALE_PAGE_MISMATCH');
             }
             foreach (['en', 'zh'] as $locale) {
+                $this->assertLocalizedPageStructure($pages[$locale]);
                 foreach (CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER as $component) {
                     if (! array_key_exists($component, $pages[$locale])) {
                         throw new CareerCurrentAuthorityExportFailure('PAGE_COMPONENT_MISSING');
@@ -395,6 +396,41 @@ final class CareerCurrentAuthorityExporter
                 'not_repository_authority' => true,
             ],
         ];
+    }
+
+    /** @param array<string,mixed> $page */
+    private function assertLocalizedPageStructure(array $page): void
+    {
+        $allowed = array_merge(
+            CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER,
+            ['path', 'secondary_cta'],
+        );
+        $unknown = array_values(array_diff(array_keys($page), $allowed));
+        if ($unknown !== [] || array_key_exists('sections', $page) || array_key_exists('content_sections', $page)) {
+            throw new CareerCurrentAuthorityExportFailure('PAGE_COMPONENT_UNKNOWN');
+        }
+        if ($this->containsPlaceholder($page)) {
+            throw new CareerCurrentAuthorityExportFailure('PAGE_COMPONENT_PLACEHOLDER');
+        }
+    }
+
+    private function containsPlaceholder(mixed $value): bool
+    {
+        if (! is_array($value)) {
+            return false;
+        }
+        if (($value['content_available'] ?? null) === false
+            || str_starts_with((string) ($value['module_state'] ?? ''), 'pending_')
+            || ($value['source'] ?? null) === 'component_order_contract') {
+            return true;
+        }
+        foreach ($value as $child) {
+            if ($this->containsPlaceholder($child)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /** @return array<string,mixed> */

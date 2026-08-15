@@ -279,10 +279,107 @@ jobs:
           if-no-files-found: error
           retention-days: 90
 
-  career-current-export:
-    name: Export Career Current authority once
+  career-actors-current-repair:
+    name: Repair Actors Current authority once
     needs: [policy, production]
     if: needs.production.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: production
+    env:
+      DEPLOY_SHA: ${{ github.event.workflow_run.head_sha }}
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          persist-credentials: false
+      - name: Start SSH agent without key metadata output
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          eval "$(ssh-agent -s)" >/dev/null
+          echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
+          echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
+          printf '%s\n' "$SSH_PRIVATE_KEY" | ssh-add - >/dev/null 2>&1
+      - name: Install pinned known_hosts
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+      - name: Stream single-slug Actors repair and validate receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          dir=artifacts/career-actors-current-repair
+          receipt="$dir/receipt.json"
+          remote_stderr="$RUNNER_TEMP/career-actors-current-repair.stderr"
+          mkdir -p "$dir"
+          [[ "$DEPLOY_SHA" =~ ^[0-9a-f]{40}$ ]]
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          printf -v q_release '%q' "$DEPLOY_SHA"
+          printf -v q_run '%q' "$GITHUB_RUN_ID"
+          printf -v q_attempt '%q' "$GITHUB_RUN_ATTEMPT"
+          remote="set -euo pipefail; current=\$(readlink -f $q_path/current); releases=\$(readlink -f $q_path/releases); test -n \"\$current\"; test -n \"\$releases\"; case \"\$current\" in \"\$releases\"/*) ;; *) exit 1 ;; esac; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_release; test ! -e $q_path/.dep/deploy.lock; release_name=\$(basename \"\$current\"); sudo -n -u www-data -- env CAREER_ACTORS_REPAIR_EXECUTE=1 CAREER_ACTORS_REPAIR_BACKEND_ROOT=\"\$current/backend\" CAREER_ACTORS_REPAIR_RELEASE_SHA=$q_release CAREER_ACTORS_REPAIR_RELEASE_NAME=\"\$release_name\" CAREER_ACTORS_REPAIR_WORKFLOW_RUN_ID=$q_run CAREER_ACTORS_REPAIR_WORKFLOW_RUN_ATTEMPT=$q_attempt php"
+          set +e
+          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -o ServerAliveInterval=15 -o ServerAliveCountMax=4 -p "$DEPLOY_PORT" \
+            "$DEPLOY_USER@$DEPLOY_HOST" "$remote" \
+            < backend/scripts/operations/career_actors_current_repair.php \
+            > "$receipt" 2> "$remote_stderr"
+          remote_status=$?
+          set -e
+          jq -e 'type == "object" and (.status | type == "string")' "$receipt" >/dev/null
+          test "$remote_status" = 0
+          jq -e --arg release "$DEPLOY_SHA" \
+            --arg source "ea4f66f810f276a9debfd256cd311e1fbdaf989d99df7ea7a277fa7fb4ec90f6" \
+            --arg workbuddy "6ee7a409fb4e2f15fed1709bd05fe2f7f28b22136ace589d8c308720520bc9bd" '
+              .contract_version == "career.actors_current_repair.v1"
+              and .status == "PASS_ACTORS_CURRENT_REPAIR"
+              and .release_sha == $release
+              and .target_slug == "actors"
+              and .source_sha256 == $source
+              and .workbuddy_sha256 == $workbuddy
+              and (.target_page_sha256 | test("^[0-9a-f]{64}$"))
+              and .components_per_page == 26
+              and .locale_page_count == 2
+              and .compensation_state == "not_required"
+              and .write_counts.generation_write_count == 0
+              and .write_counts.discoverability_write_count == 0
+              and .write_counts.occupation_write_count == 0
+              and .write_counts.search_submission_count == 0
+              and (
+                (.state == "repaired"
+                  and .write_counts.database_update_count == 1
+                  and .write_counts.cache_candidate_write_count == 4
+                  and .write_counts.cache_pointer_activation_count == 2)
+                or
+                (.state == "idempotent_noop"
+                  and ([.write_counts[]] | all(. == 0)))
+              )
+            ' "$receipt" >/dev/null
+      - name: Upload Actors repair receipt
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: career-actors-current-repair-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/career-actors-current-repair
+          if-no-files-found: error
+          retention-days: 3
+
+  career-current-export:
+    name: Export Career Current authority once
+    needs: [policy, production, career-actors-current-repair]
+    if: needs.career-actors-current-repair.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 90
     environment: production
