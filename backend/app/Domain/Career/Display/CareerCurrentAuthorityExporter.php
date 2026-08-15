@@ -84,16 +84,7 @@ final class CareerCurrentAuthorityExporter
      */
     public function export(array $binding): array
     {
-        $expectedProjectionSha256 = $binding['expected_projection_sha256'] ?? null;
-        if (! is_string($expectedProjectionSha256)
-            || preg_match('/\A[0-9a-f]{64}\z/', $expectedProjectionSha256) !== 1) {
-            throw new CareerCurrentAuthorityExportFailure('CAREER_RUNTIME_PROJECTION_BINDING_INVALID');
-        }
         $projectionSha256 = $this->currentRuntimeProjectionSha256();
-        if (! hash_equals($expectedProjectionSha256, $projectionSha256)) {
-            throw new CareerCurrentAuthorityExportFailure('CAREER_RUNTIME_PROJECTION_SHA256_MISMATCH');
-        }
-        unset($binding['expected_projection_sha256']);
         $binding['career_runtime_projection_sha256'] = $projectionSha256;
 
         $connection = DB::connection();

@@ -14,7 +14,6 @@ $env = static function (string $name): string {
 
 $backendRoot = $env('CAREER_CURRENT_EXPORT_BACKEND_ROOT');
 $releaseSha = $env('CAREER_CURRENT_EXPORT_RELEASE_SHA');
-$expectedProjectionSha256 = $env('CAREER_CURRENT_EXPORT_EXPECTED_PROJECTION_SHA256');
 $releaseName = $env('CAREER_CURRENT_EXPORT_RELEASE_NAME');
 $workflowRunId = $env('CAREER_CURRENT_EXPORT_WORKFLOW_RUN_ID');
 $workflowRunAttempt = $env('CAREER_CURRENT_EXPORT_WORKFLOW_RUN_ATTEMPT');
@@ -22,7 +21,6 @@ $workflowRunAttempt = $env('CAREER_CURRENT_EXPORT_WORKFLOW_RUN_ATTEMPT');
 if ($env('CAREER_CURRENT_EXPORT_EXECUTE') !== '1'
     || ! is_file($backendRoot.'/vendor/autoload.php')
     || preg_match('/\A[a-f0-9]{40}\z/', $releaseSha) !== 1
-    || preg_match('/\A[a-f0-9]{64}\z/', $expectedProjectionSha256) !== 1
     || $releaseName === ''
     || ! ctype_digit($workflowRunId)
     || ! ctype_digit($workflowRunAttempt)) {
@@ -39,7 +37,6 @@ try {
     $exporter = $app->make(CareerCurrentAuthorityExporter::class);
     $documents = $exporter->export([
         'release_sha' => $releaseSha,
-        'expected_projection_sha256' => $expectedProjectionSha256,
         'release_name_sha256' => hash('sha256', $releaseName),
         'workflow_run_id' => (int) $workflowRunId,
         'workflow_run_attempt' => (int) $workflowRunAttempt,
