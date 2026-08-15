@@ -261,8 +261,20 @@ jobs:
           fi
           head -n 1 "$raw" | jq -S '.receipt' > "$dir/receipt.json"
           if [ "$remote_status" -ne 0 ]; then
-            safe_code="$(jq -er '.safe_error_code | select(test("^[A-Z0-9_]+$"))' "$dir/receipt.json" 2>/dev/null || true)"
-            test -n "$safe_code" || safe_code="CAREER_CURRENT_REMOTE_EXPORT_FAILED"
+            if jq -e '.status == "FAIL_CURRENT_AUTHORITY_EXPORT"' "$dir/receipt.json" >/dev/null; then
+              safe_code="$(jq -er '.safe_error_code | select(test("^[A-Z0-9_]+$"))' "$dir/receipt.json" 2>/dev/null || true)"
+              test -n "$safe_code" || safe_code="CAREER_CURRENT_REMOTE_EXPORT_FAILED"
+            else
+              safe_code="CAREER_CURRENT_REMOTE_STREAM_INTERRUPTED"
+              jq -n --arg safe_error_code "$safe_code" '{
+                contract_version: "career.current_authority_export.v1",
+                status: "FAIL_CURRENT_AUTHORITY_EXPORT",
+                safe_error_code: $safe_error_code,
+                production_read_only_requested: true,
+                zero_write_confirmed: false,
+                automatic_retry_allowed: false
+              }' > "$dir/receipt.json"
+            fi
             echo "::error::$safe_code"
             exit 1
           fi

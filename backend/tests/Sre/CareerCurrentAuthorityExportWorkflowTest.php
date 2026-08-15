@@ -42,6 +42,8 @@ final class CareerCurrentAuthorityExportWorkflowTest extends TestCase
             'remote_status="${pipeline_status[1]}"',
             'FAIL_CURRENT_AUTHORITY_EXPORT',
             'safe_error_code',
+            'CAREER_CURRENT_REMOTE_STREAM_INTERRUPTED',
+            'zero_write_confirmed: false',
             'if: always() && inputs.mode == \'career-current-authority\'',
             'retention-days: 3',
         ] as $required) {
