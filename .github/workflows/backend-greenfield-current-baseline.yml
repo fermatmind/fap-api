@@ -58,7 +58,7 @@ jobs:
         if: inputs.mode == 'career-current-authority'
         shell: bash
         env:
-          IDENTITY: release=${{ inputs.expected_active_revision }}|projection=${{ inputs.expected_projection_sha256 }}|mode=career-current-authority
+          IDENTITY: control=${{ inputs.expected_control_plane_sha }}|release=${{ inputs.expected_active_revision }}|projection=${{ inputs.expected_projection_sha256 }}|mode=career-current-authority
         run: echo "operation_key=$(node .github/scripts/controlled-operation-gate.cjs key --repository "$GITHUB_REPOSITORY" --workflow .github/workflows/backend-greenfield-current-baseline.yml --scope career-current-authority-export --identity "$IDENTITY")" >> "$GITHUB_OUTPUT"
       - id: gate
         if: inputs.mode == 'career-current-authority'

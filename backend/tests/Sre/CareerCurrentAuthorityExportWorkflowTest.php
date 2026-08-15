@@ -21,6 +21,7 @@ final class CareerCurrentAuthorityExportWorkflowTest extends TestCase
             'group: deploy-${{ github.repository }}-production',
             'Elect Career Current export owner before Environment access',
             'uses: ./.github/actions/controlled-operation-gate',
+            'IDENTITY: control=${{ inputs.expected_control_plane_sha }}|release=${{ inputs.expected_active_revision }}|projection=${{ inputs.expected_projection_sha256 }}|mode=career-current-authority',
             'environment: production',
             'test "$(git rev-parse origin/main)" = "$EXPECTED_CONTROL_PLANE_SHA"',
             'test "$EXPECTED_ACTIVE_REVISION" = "$EXPECTED_CONTROL_PLANE_SHA"',
@@ -134,6 +135,9 @@ final class CareerCurrentAuthorityExportWorkflowTest extends TestCase
         foreach (['->create(', '->update(', '->delete(', '::insert(', '::upsert(', 'Cache::put(', 'Cache::forget('] as $forbidden) {
             self::assertStringNotContainsString($forbidden, $exporter.$runner);
         }
+
+        self::assertStringNotContainsString('PUBLIC_CONTENT_FIELDS', $exporter);
+        self::assertStringNotContainsString('contentProjection(', $exporter);
 
         self::assertMatchesRegularExpression(
             '/SET TRANSACTION ISOLATION LEVEL REPEATABLE READ.*SET TRANSACTION READ ONLY.*START TRANSACTION WITH CONSISTENT SNAPSHOT/s',

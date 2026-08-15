@@ -47,6 +47,19 @@ final class CareerCurrentAuthorityExporterTest extends TestCase
         $exporter->buildDocuments($rows, $database, $cache, $database, 1);
     }
 
+    public function test_it_hashes_unexpected_reader_visible_surface_fields(): void
+    {
+        $exporter = $this->exporter();
+        $rows = [$this->row('alpha')];
+        $database = $this->projections(['alpha']);
+        $cache = $database;
+        $cache['alpha|en']['legacy_reader_visible_field'] = ['value' => 'drift'];
+
+        $this->expectException(CareerCurrentAuthorityExportFailure::class);
+        $this->expectExceptionMessage('PUBLIC_CONTENT_HASH_MISMATCH');
+        $exporter->buildDocuments($rows, $database, $cache, $database, 1);
+    }
+
     public function test_it_rejects_missing_or_misordered_components(): void
     {
         $exporter = $this->exporter();

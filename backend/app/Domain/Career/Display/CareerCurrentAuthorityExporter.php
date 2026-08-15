@@ -72,23 +72,6 @@ final class CareerCurrentAuthorityExporter
         'metadata_json',
     ];
 
-    private const PUBLIC_CONTENT_FIELDS = [
-        'surface_version',
-        'asset_version',
-        'template_version',
-        'asset_type',
-        'asset_role',
-        'status',
-        'subject',
-        'available_locales',
-        'claim_permissions',
-        'page',
-        'component_order',
-        'sources',
-        'structured_data_from_visible_content',
-        'implementation_contract',
-    ];
-
     public function __construct(
         private readonly CareerJobDisplaySurfaceBuilder $surfaceBuilder,
         private readonly PublicCareerAuthorityResponseCache $responseCache,
@@ -192,15 +175,15 @@ final class CareerCurrentAuthorityExporter
                             || ! is_array(data_get($apiRead, 'payload.display_surface_v1'))) {
                             throw new CareerCurrentAuthorityExportFailure('PUBLIC_CONTENT_PROJECTION_UNAVAILABLE');
                         }
-                        $database[$identity] = self::hashValue($this->contentProjection(
+                        $database[$identity] = self::hashValue(
                             $this->readerSafeProjector->project($databaseSurface),
-                        ));
-                        $activeCache[$identity] = self::hashValue($this->contentProjection(
+                        );
+                        $activeCache[$identity] = self::hashValue(
                             $this->readerSafeProjector->project((array) data_get($readiness, 'payload.display_surface_v1')),
-                        ));
-                        $api[$identity] = self::hashValue($this->contentProjection(
+                        );
+                        $api[$identity] = self::hashValue(
                             $this->readerSafeProjector->project((array) data_get($apiRead, 'payload.display_surface_v1')),
-                        ));
+                        );
                     }
                 }
 
@@ -399,17 +382,6 @@ final class CareerCurrentAuthorityExporter
             'implementation_contract_json' => is_array($asset->implementation_contract_json) ? $asset->implementation_contract_json : null,
             'metadata_json' => is_array($asset->metadata_json) ? $asset->metadata_json : null,
         ];
-    }
-
-    /** @return array<string,mixed> */
-    private function contentProjection(array $surface): array
-    {
-        $projection = [];
-        foreach (self::PUBLIC_CONTENT_FIELDS as $field) {
-            $projection[$field] = $surface[$field] ?? null;
-        }
-
-        return $projection;
     }
 
     private function readOnlyTransaction(callable $operation): array
