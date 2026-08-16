@@ -28,6 +28,7 @@ final class EnneagramTechnicalNoteService
         $registry = is_array($pack['technical_note_registry'] ?? null) ? $pack['technical_note_registry'] : [];
         $methodRegistry = is_array($pack['method_registry'] ?? null) ? $pack['method_registry'] : [];
         $releaseHash = trim((string) ($pack['release_hash'] ?? ''));
+        $authority = is_array($pack['authority'] ?? null) ? $pack['authority'] : [];
 
         $sections = [];
         foreach ((array) ($registry['entries'] ?? []) as $entry) {
@@ -58,6 +59,11 @@ final class EnneagramTechnicalNoteService
                 'scale_code' => 'ENNEAGRAM',
                 'registry_version' => trim((string) ($manifest['registry_version'] ?? '')),
                 'registry_release_hash' => $releaseHash !== '' ? $releaseHash : null,
+                'canonical_authority_id' => $authority['authority_id'] ?? null,
+                'canonical_release_id' => $authority['release_id'] ?? null,
+                'canonical_source_hash' => $authority['source_hash'] ?? null,
+                'canonical_compiled_hash' => $authority['compiled_hash'] ?? null,
+                'canonical_locale' => $authority['locale'] ?? null,
                 'technical_note_version' => self::TECHNICAL_NOTE_VERSION,
                 'sections' => $sections,
                 'method_boundaries' => $this->methodBoundaries($methodRegistry),

@@ -928,6 +928,43 @@ BASH);
     });
 });
 
+task('enneagram:publish-private-result-authority', function () {
+    within('{{release_path}}/backend', function (): void {
+        run(sprintf(<<<'BASH'
+set -euo pipefail
+previous="$({{bin/php}} artisan packs2:list --pack=%s --pack-version=v2 --active-release-id --no-interaction --no-ansi)"
+if [ -n "$previous" ]; then
+  printf '%%s\n' "$previous" > ../.enneagram-private-result-previous-release
+fi
+timeout 180 {{bin/php}} artisan packs2:publish --pack=%s --pack-version=v2 --activate=1 --source_commit=%s --no-interaction --ansi
+BASH,
+            deployShellArg('ENNEAGRAM_PRIVATE_RESULT'),
+            deployShellArg('ENNEAGRAM_PRIVATE_RESULT'),
+            deployShellArg((string) get('revision')),
+        ));
+    });
+});
+
+task('enneagram:rollback-private-result-authority-on-failure', function () {
+    if (! test('test -r '.deployPlaceholderPathArg('{{release_path}}', 'backend/artisan'))) {
+        return;
+    }
+    within('{{release_path}}/backend', function (): void {
+        run(<<<'BASH'
+set -euo pipefail
+previous_file=../.enneagram-private-result-previous-release
+if [ ! -s "$previous_file" ]; then
+  exit 0
+fi
+previous="$(tr -d '\r\n' < "$previous_file")"
+if [[ ! "$previous" =~ ^[0-9a-fA-F-]{36}$ ]]; then
+  exit 1
+fi
+{{bin/php}} artisan packs2:rollback --pack=ENNEAGRAM_PRIVATE_RESULT --pack-version=v2 --to_release_id="$previous" --no-interaction --ansi
+BASH);
+    });
+});
+
 task('career:public-authority-cache-verified_unchanged', function () {
     writeln('<info>Career public authority cache fingerprint and readability verified unchanged.</info>');
 });
@@ -2278,7 +2315,8 @@ after('artisan:migrate', 'guard:no-pending-migrations');
 after('guard:no-pending-migrations', 'artisan:scales:seed-default');
 after('artisan:scales:seed-default', 'big5:publish-private-result-authority');
 after('big5:publish-private-result-authority', 'riasec:publish-private-result-authority');
-after('riasec:publish-private-result-authority', 'guard:career-runtime-projection-authority');
+after('riasec:publish-private-result-authority', 'enneagram:publish-private-result-authority');
+after('enneagram:publish-private-result-authority', 'guard:career-runtime-projection-authority');
 after('guard:career-runtime-projection-authority', 'career:repair-published-detail-cache-coverage');
 after('career:repair-published-detail-cache-coverage', 'guard:career-detail-cache-coverage');
 after('guard:career-detail-cache-coverage', 'career:warm-public-authority-cache');
@@ -2372,4 +2410,5 @@ after('bootstrap-cache:rebuild-current', 'rollback:healthcheck');
 after('deploy:failed', 'fap:deploy-unlock-owned');
 after('deploy:failed', 'big5:rollback-private-result-authority-on-failure');
 after('deploy:failed', 'riasec:rollback-private-result-authority-on-failure');
+after('deploy:failed', 'enneagram:rollback-private-result-authority-on-failure');
 before('fap:deploy-unlock-owned', 'career:rollback-public-dataset-cache-equivalence');

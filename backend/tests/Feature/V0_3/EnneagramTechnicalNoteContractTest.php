@@ -27,6 +27,8 @@ final class EnneagramTechnicalNoteContractTest extends TestCase
         $response->assertJsonPath('technical_note_v1.metric_definitions.0.data_status', 'currently_operational');
         $response->assertJsonPath('technical_note_v1.metric_definitions.0.data_status_source', 'operational');
         $this->assertStringStartsWith('sha256:', (string) $response->json('technical_note_v1.registry_release_hash'));
+        $this->assertMatchesRegularExpression('/\A[0-9a-f]{64}\z/', (string) $response->json('technical_note_v1.canonical_source_hash'));
+        $this->assertMatchesRegularExpression('/\A[0-9a-f]{64}\z/', (string) $response->json('technical_note_v1.canonical_compiled_hash'));
         $this->assertContains(
             'close_call_rate',
             (array) $response->json('technical_note_v1.data_status_summary.metrics.currently_operational')

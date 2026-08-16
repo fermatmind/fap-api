@@ -48,11 +48,14 @@ final class Packs2Publish extends Command
 
         if (in_array($pack, [
             \App\Services\Content\BigFivePrivateResultCompileService::PACK_ID,
+            \App\Services\Content\EnneagramPrivateResultCompileService::PACK_ID,
             \App\Services\Content\RiasecPrivateResultCompileService::PACK_ID,
         ], true)) {
-            $compiledDir = $pack === \App\Services\Content\RiasecPrivateResultCompileService::PACK_ID
-                ? base_path('content_assets/riasec/compiled')
-                : base_path("content_packs/{$pack}/{$packVersion}/compiled");
+            $compiledDir = match ($pack) {
+                \App\Services\Content\RiasecPrivateResultCompileService::PACK_ID => base_path('content_assets/riasec/compiled'),
+                \App\Services\Content\EnneagramPrivateResultCompileService::PACK_ID => base_path('content_packs/ENNEAGRAM/v2/compiled'),
+                default => base_path("content_packs/{$pack}/{$packVersion}/compiled"),
+            };
             $manifest = json_decode((string) file_get_contents($compiledDir.'/manifest.json'), true);
             $compiledHash = strtolower(trim((string) ($manifest['compiled_hash'] ?? '')));
             $activeReleaseId = DB::table('content_pack_activations')
@@ -77,6 +80,21 @@ final class Packs2Publish extends Command
         if ((int) $this->option('activate') === 1) {
             $publisher->activateRelease((string) ($release['id'] ?? ''));
             $this->info('activated release_id='.(string) ($release['id'] ?? ''));
+            if ($pack === \App\Services\Content\EnneagramPrivateResultCompileService::PACK_ID) {
+                $zh = app(\App\Services\Content\EnneagramPrivateResultPackLoader::class)->load('zh-CN');
+                $en = app(\App\Services\Content\EnneagramPrivateResultPackLoader::class)->load('en');
+                if (data_get($zh, 'authority.release_id') !== ($release['id'] ?? null)
+                    || data_get($zh, 'authority.source_hash') !== data_get($en, 'authority.source_hash')
+                    || data_get($zh, 'authority.compiled_hash') !== data_get($en, 'authority.compiled_hash')) {
+                    throw new \RuntimeException('ENNEAGRAM_PRIVATE_RESULT_ACTIVATION_READBACK_MISMATCH');
+                }
+                $this->line('source_hash='.(string) data_get($zh, 'authority.source_hash'));
+                $this->line('compiled_hash='.(string) data_get($zh, 'authority.compiled_hash'));
+                $this->line('locale_inventory=zh-CN,en');
+                $this->line('form_projection_inventory=e105,fc144');
+                $this->line('interpretation_state_inventory=clear,close_call,diffuse,low_quality');
+                $this->line('surface_inventory=api,report,snapshot,pdf,print,history,compare,share,technical_note,observation,secondary');
+            }
         }
 
         $this->line('release_id='.(string) ($release['id'] ?? ''));

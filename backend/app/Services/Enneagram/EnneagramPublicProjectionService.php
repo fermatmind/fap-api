@@ -280,7 +280,8 @@ final class EnneagramPublicProjectionService
         $classification = $this->buildClassificationV2($policyEvaluation);
         $closeCallPair = $this->buildCloseCallPair($scoreResult, $topTypes, $policyEvaluation);
         $wingHints = $this->buildWingHints($topTypes, $all9Profile);
-        $contentReleaseHash = $this->resolveContentReleaseHash($scoreResult);
+        $privateResultAuthority = $this->canonicalPrivateResultAuthority($locale);
+        $contentReleaseHash = (string) ($privateResultAuthority['source_hash'] ?? '');
         $interpretationContextId = $this->buildInterpretationContextId(
             $scoreResult,
             $form,
@@ -369,13 +370,19 @@ final class EnneagramPublicProjectionService
                 'confidence_policy_version' => self::CONFIDENCE_POLICY_VERSION,
             ],
             'content_binding' => [
+                'canonical_authority_id' => $privateResultAuthority['authority_id'] ?? null,
+                'canonical_release_id' => $privateResultAuthority['release_id'] ?? null,
+                'canonical_source_hash' => $privateResultAuthority['source_hash'] ?? null,
+                'canonical_compiled_hash' => $privateResultAuthority['compiled_hash'] ?? null,
+                'canonical_locale' => $privateResultAuthority['locale'] ?? null,
                 'content_snapshot_id' => null,
                 'content_snapshot_hash' => null,
-                'content_snapshot_status' => 'unavailable_until_registry_pack',
+                'content_snapshot_status' => 'bound_in_immutable_report_snapshot',
                 'content_release_hash' => $contentReleaseHash !== '' ? $contentReleaseHash : null,
-                'content_release_hash_status' => $contentReleaseHash !== '' ? 'resolved_from_result_manifest' : 'unavailable_no_manifest_hash',
+                'content_release_hash_status' => $contentReleaseHash !== '' ? 'resolved_from_canonical_active_release' : 'unavailable_no_active_release',
                 'interpretation_context_id' => $interpretationContextId,
             ],
+            'private_result_authority' => $privateResultAuthority,
             'render_hints' => [
                 'show_primary_type' => true,
                 'show_close_call_card' => $closeCallPair !== null,
@@ -1214,6 +1221,25 @@ final class EnneagramPublicProjectionService
         $entry = data_get($pack, 'ui_copy_registry.entries.'.$key);
 
         return is_array($entry) ? $entry : [];
+    }
+
+    /** @return array<string,mixed> */
+    private function canonicalPrivateResultAuthority(string $locale): array
+    {
+        $loader = $this->packLoader;
+        if ($loader === null && function_exists('app')) {
+            $loader = app(EnneagramPackLoader::class);
+        }
+        if (! $loader instanceof EnneagramPackLoader) {
+            throw new \RuntimeException('ENNEAGRAM_PRIVATE_RESULT_LOADER_UNAVAILABLE');
+        }
+
+        $authority = data_get($loader->loadRegistryPack(null, $locale), 'authority');
+        if (! is_array($authority)) {
+            throw new \RuntimeException('ENNEAGRAM_PRIVATE_RESULT_AUTHORITY_UNAVAILABLE');
+        }
+
+        return $authority;
     }
 
     private function publicTypeCode(string $typeCode): string

@@ -64,7 +64,7 @@ final class EnneagramReadReportContractTest extends TestCase
         $result->assertJsonPath('enneagram_public_projection_v2.classification.quality_level', 'unavailable');
         $result->assertJsonPath(
             'enneagram_public_projection_v2.content_binding.content_snapshot_status',
-            'unavailable_until_registry_pack'
+            'bound_in_immutable_report_snapshot'
         );
         $result->assertJsonPath('enneagram_public_projection_v2.dynamics.center_scores.body', null);
         $result->assertJsonPath(
@@ -74,6 +74,12 @@ final class EnneagramReadReportContractTest extends TestCase
         $this->assertNotSame('', (string) $result->json('enneagram_public_projection_v1.primary_type'));
         $this->assertCount(9, (array) $result->json('enneagram_public_projection_v1.type_vector'));
         $this->assertEnneagramProjectionV2Contract((array) $result->json('enneagram_public_projection_v2'), $formCode);
+        $sourceHash = (string) $result->json('enneagram_private_result_authority.source_hash');
+        $compiledHash = (string) $result->json('enneagram_private_result_authority.compiled_hash');
+        $this->assertMatchesRegularExpression('/\A[0-9a-f]{64}\z/', $sourceHash);
+        $this->assertMatchesRegularExpression('/\A[0-9a-f]{64}\z/', $compiledHash);
+        $result->assertJsonPath('enneagram_public_projection_v2.content_binding.canonical_source_hash', $sourceHash);
+        $result->assertJsonPath('enneagram_public_projection_v2.content_binding.canonical_compiled_hash', $compiledHash);
         $this->assertDatabaseHas('events', [
             'event_code' => 'enneagram_result_viewed',
             'attempt_id' => $attemptId,
@@ -113,6 +119,10 @@ final class EnneagramReadReportContractTest extends TestCase
             'report._meta.enneagram_report_v2.provenance.interpretation_context_id',
             $result->json('enneagram_public_projection_v2.content_binding.interpretation_context_id')
         );
+        $report->assertJsonPath('report._meta.enneagram_private_result_authority.source_hash', $sourceHash);
+        $report->assertJsonPath('report._meta.enneagram_private_result_authority.compiled_hash', $compiledHash);
+        $report->assertJsonPath('report._meta.snapshot_binding_v1.canonical_source_hash', $sourceHash);
+        $report->assertJsonPath('report._meta.snapshot_binding_v1.canonical_compiled_hash', $compiledHash);
         $this->assertSame(
             $result->json('enneagram_public_projection_v1.primary_type'),
             $report->json('enneagram_public_projection_v1.primary_type')

@@ -422,6 +422,10 @@ class AttemptReadController extends Controller
         }
         if ($enneagramProjectionV2 !== []) {
             $responsePayload['enneagram_public_projection_v2'] = $enneagramProjectionV2;
+            $authority = data_get($enneagramProjectionV2, 'private_result_authority');
+            if (is_array($authority)) {
+                $responsePayload['enneagram_private_result_authority'] = $authority;
+            }
         }
         if (is_array($enneagramFormSummary)) {
             $responsePayload['enneagram_form_v1'] = $enneagramFormSummary;

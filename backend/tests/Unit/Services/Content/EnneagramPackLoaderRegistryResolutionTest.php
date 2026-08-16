@@ -5,126 +5,85 @@ declare(strict_types=1);
 namespace Tests\Unit\Services\Content;
 
 use App\Services\Content\EnneagramPackLoader;
+use App\Services\Content\EnneagramPrivateResultCompileService;
+use App\Services\Content\EnneagramPrivateResultPackLoader;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
+use RuntimeException;
 use Tests\TestCase;
 
 final class EnneagramPackLoaderRegistryResolutionTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_loader_registry_root_matches_existing_repo_path_without_active_release(): void
+    public function test_local_runtime_compiles_the_canonical_registry_without_creating_a_release(): void
     {
-        $loader = app(EnneagramPackLoader::class);
+        $pack = app(EnneagramPackLoader::class)->loadRegistryPack(null, 'zh-CN');
 
-        $this->assertSame(base_path('content_packs/ENNEAGRAM/v2/registry'), $loader->registryRoot());
-        $this->assertSame(base_path('content_packs/ENNEAGRAM/v2/registry/en'), $loader->registryRoot(null, 'en'));
-        $this->assertSame(
-            'enneagram_registry_canonical_v2',
-            data_get($loader->loadRegistryManifest(), 'release_id')
-        );
+        $this->assertNull($pack['root']);
+        $this->assertNull(data_get($pack, 'authority.release_id'));
+        $this->assertSame(EnneagramPrivateResultCompileService::AUTHORITY_ID, data_get($pack, 'authority.authority_id'));
+        $this->assertSame('zh-CN', data_get($pack, 'authority.locale'));
+        $this->assertMatchesRegularExpression('/\Asha256:[0-9a-f]{64}\z/', (string) $pack['release_hash']);
+        $this->assertCount(36, data_get($pack, 'pair_registry.entries'));
+        $this->assertSame(0, DB::table('content_pack_releases')->count());
     }
 
-    public function test_loader_reads_alternate_registry_only_when_release_is_explicitly_active(): void
+    public function test_active_immutable_release_is_the_only_runtime_selector_for_both_locales(): void
     {
-        $loader = app(EnneagramPackLoader::class);
-        $releaseId = (string) Str::uuid();
-        $fixtureRoot = $this->makeRegistryFixture('test_active_registry_release');
+        $this->artisan('packs2:publish', [
+            '--pack' => EnneagramPrivateResultCompileService::PACK_ID,
+            '--pack-version' => EnneagramPrivateResultCompileService::PACK_VERSION,
+            '--activate' => 1,
+            '--source_commit' => str_repeat('a', 40),
+        ])->assertSuccessful();
 
-        DB::table('content_pack_releases')->insert($this->releaseRow($releaseId, $fixtureRoot));
-        DB::table('content_pack_activations')->updateOrInsert(
-            ['pack_id' => 'ENNEAGRAM', 'pack_version' => 'v2'],
-            [
-                'release_id' => $releaseId,
-                'activated_at' => now(),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]
-        );
+        $zh = app(EnneagramPrivateResultPackLoader::class)->load('zh-CN');
+        $en = app(EnneagramPrivateResultPackLoader::class)->load('en');
+        $releaseId = DB::table('content_pack_activations')
+            ->where('pack_id', EnneagramPrivateResultCompileService::PACK_ID)
+            ->where('pack_version', EnneagramPrivateResultCompileService::PACK_VERSION)
+            ->value('release_id');
 
-        $pack = $loader->loadRegistryPack();
-
-        $this->assertSame($fixtureRoot, $loader->registryRoot());
-        $this->assertSame($fixtureRoot, $pack['root']);
-        $this->assertSame('test_active_registry_release', data_get($pack, 'manifest.release_id'));
-        $this->assertStringStartsWith('sha256:', (string) $pack['release_hash']);
+        $this->assertNotEmpty($releaseId);
+        $this->assertSame($releaseId, data_get($zh, 'authority.release_id'));
+        $this->assertSame($releaseId, data_get($en, 'authority.release_id'));
+        $this->assertSame(data_get($zh, 'authority.source_hash'), data_get($en, 'authority.source_hash'));
+        $this->assertSame(data_get($zh, 'authority.compiled_hash'), data_get($en, 'authority.compiled_hash'));
+        $this->assertSame('zh-CN', data_get($zh, 'authority.locale'));
+        $this->assertSame('en', data_get($en, 'authority.locale'));
     }
 
-    public function test_english_registry_uses_active_locale_slot_or_repo_fallback(): void
+    public function test_production_runtime_fails_closed_without_an_active_release(): void
     {
-        $loader = app(EnneagramPackLoader::class);
-        $releaseId = (string) Str::uuid();
-        $fixtureRoot = $this->makeRegistryFixture('test_active_registry_without_english');
-        File::deleteDirectory($fixtureRoot.'/en');
+        $previousEnvironment = app()->environment();
+        app()->detectEnvironment(static fn (): string => 'production');
 
-        DB::table('content_pack_releases')->insert($this->releaseRow($releaseId, $fixtureRoot));
-        DB::table('content_pack_activations')->updateOrInsert(
-            ['pack_id' => 'ENNEAGRAM', 'pack_version' => 'v2'],
-            [
-                'release_id' => $releaseId,
-                'activated_at' => now(),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]
-        );
-
-        $this->assertSame($fixtureRoot, $loader->registryRoot());
-        $this->assertSame(base_path('content_packs/ENNEAGRAM/v2/registry/en'), $loader->registryRoot(null, 'en'));
-        $this->assertSame('en', data_get($loader->loadRegistryPack(null, 'en'), 'manifest.locales.0'));
-
-        File::copyDirectory(base_path('content_packs/ENNEAGRAM/v2/registry/en'), $fixtureRoot.'/en');
-
-        $this->assertSame($fixtureRoot.'/en', $loader->registryRoot(null, 'en'));
+        try {
+            app(EnneagramPrivateResultPackLoader::class)->load('zh-CN');
+            $this->fail('Production loader accepted a missing active release.');
+        } catch (RuntimeException $exception) {
+            $this->assertSame('ENNEAGRAM_PRIVATE_RESULT_ACTIVE_RELEASE_MISSING', $exception->getMessage());
+        } finally {
+            app()->detectEnvironment(static fn (): string => $previousEnvironment);
+        }
     }
 
-    private function makeRegistryFixture(string $releaseId): string
+    public function test_active_release_hash_mismatch_fails_closed(): void
     {
-        $root = storage_path('framework/testing/enneagram_pack_loader_registry/'.$releaseId);
-        File::deleteDirectory($root);
-        File::ensureDirectoryExists(dirname($root));
-        File::copyDirectory(base_path('content_packs/ENNEAGRAM/v2/registry'), $root);
+        $this->artisan('packs2:publish', [
+            '--pack' => EnneagramPrivateResultCompileService::PACK_ID,
+            '--pack-version' => EnneagramPrivateResultCompileService::PACK_VERSION,
+            '--activate' => 1,
+        ])->assertSuccessful();
+        $releaseId = DB::table('content_pack_activations')
+            ->where('pack_id', EnneagramPrivateResultCompileService::PACK_ID)
+            ->where('pack_version', EnneagramPrivateResultCompileService::PACK_VERSION)
+            ->value('release_id');
+        DB::table('content_pack_releases')->where('id', $releaseId)->update(['compiled_hash' => str_repeat('0', 64)]);
 
-        $manifestPath = $root.'/manifest.json';
-        $manifest = json_decode((string) File::get($manifestPath), true);
-        $manifest['release_id'] = $releaseId;
-        File::put($manifestPath, json_encode($manifest, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
-
-        return $root;
-    }
-
-    /**
-     * @return array<string,mixed>
-     */
-    private function releaseRow(string $releaseId, string $storagePath): array
-    {
-        $manifestHash = 'sha256:'.hash('sha256', $releaseId);
-
-        return [
-            'id' => $releaseId,
-            'action' => 'enneagram_registry_publish',
-            'region' => 'GLOBAL',
-            'locale' => 'global',
-            'dir_alias' => 'v2',
-            'from_version_id' => null,
-            'to_version_id' => null,
-            'from_pack_id' => null,
-            'to_pack_id' => 'ENNEAGRAM',
-            'status' => 'success',
-            'message' => 'test',
-            'created_by' => 'test',
-            'manifest_hash' => $manifestHash,
-            'compiled_hash' => $manifestHash,
-            'content_hash' => $manifestHash,
-            'norms_version' => null,
-            'git_sha' => null,
-            'pack_version' => 'v2',
-            'manifest_json' => json_encode(['release_id' => $releaseId], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-            'storage_path' => $storagePath,
-            'source_commit' => null,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ];
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('ENNEAGRAM_PRIVATE_RESULT_ACTIVE_RELEASE_BINDING_INVALID');
+        app(EnneagramPrivateResultPackLoader::class)->load('zh-CN');
     }
 }

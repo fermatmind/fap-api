@@ -69,6 +69,8 @@ final class EnneagramPdfMetadataContractTest extends TestCase
         $this->assertNotSame('', (string) $metadata['interpretation_context_id']);
         $this->assertNotSame('', (string) $metadata['content_release_hash']);
         $this->assertNotSame('', (string) $metadata['content_snapshot_status']);
+        $this->assertMatchesRegularExpression('/\A[0-9a-f]{64}\z/', (string) $metadata['canonical_source_hash']);
+        $this->assertMatchesRegularExpression('/\A[0-9a-f]{64}\z/', (string) $metadata['canonical_compiled_hash']);
         $this->assertNotEmpty((array) $metadata['snapshot_binding_v1']);
     }
 

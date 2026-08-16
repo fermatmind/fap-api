@@ -92,9 +92,11 @@ final class EnneagramReportSnapshotBindingTest extends TestCase
             (string) data_get($reportFull, '_meta.snapshot_binding_v1.quality_policy_version')
         );
         $this->assertSame(
-            'unavailable_until_registry_pack',
+            'bound_in_immutable_report_snapshot',
             (string) data_get($reportFull, '_meta.snapshot_binding_v1.content_snapshot_status')
         );
+        $this->assertMatchesRegularExpression('/\A[0-9a-f]{64}\z/', (string) data_get($reportFull, '_meta.snapshot_binding_v1.canonical_source_hash'));
+        $this->assertMatchesRegularExpression('/\A[0-9a-f]{64}\z/', (string) data_get($reportFull, '_meta.snapshot_binding_v1.canonical_compiled_hash'));
 
         /** @var Result $stored */
         $stored = Result::query()->where('attempt_id', $attemptId)->firstOrFail();

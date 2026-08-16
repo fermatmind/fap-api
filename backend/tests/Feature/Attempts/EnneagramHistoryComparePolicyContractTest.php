@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Attempts;
 
+use App\Jobs\GenerateReportSnapshotJob;
+use App\Services\Report\ReportSnapshotStore;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -46,6 +48,14 @@ final class EnneagramHistoryComparePolicyContractTest extends TestCase
         $response->assertJsonPath('history_compare.compare_guard_v1.reason', 'cross_form_score_space_mismatch');
         $response->assertJsonPath('history_compare.compare_guard_v1.copy_key', 'compare.blocked_cross_form');
         $this->assertNotSame('', (string) $response->json('items.0.compare_policy_v1.compare_compatibility_group'));
+        $this->assertSame(
+            $response->json('items.0.enneagram_private_result_authority.source_hash'),
+            $response->json('history_compare.enneagram_private_result_authority.source_hash')
+        );
+        $this->assertSame(
+            $response->json('items.0.enneagram_private_result_authority.compiled_hash'),
+            $response->json('history_compare.enneagram_private_result_authority.compiled_hash')
+        );
     }
 
     private function createSubmittedEnneagramAttempt(string $anonId, string $token, string $formCode, int $durationMs): string
@@ -79,6 +89,8 @@ final class EnneagramHistoryComparePolicyContractTest extends TestCase
 
     private function primeSnapshot(string $attemptId, string $anonId, string $token): void
     {
+        (new GenerateReportSnapshotJob(0, $attemptId, 'submit', null))
+            ->handle(app(ReportSnapshotStore::class));
         $this->withHeaders([
             'Authorization' => 'Bearer '.$token,
             'X-Anon-Id' => $anonId,

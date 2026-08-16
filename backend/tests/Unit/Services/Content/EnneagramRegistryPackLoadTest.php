@@ -61,7 +61,7 @@ final class EnneagramRegistryPackLoadTest extends TestCase
             collect((array) data_get($pack, 'type_registry.entries'))->pluck('type_name_cn')->all(),
         );
         $this->assertStringStartsWith('sha256:', (string) ($pack['release_hash'] ?? ''));
-        $this->assertNotSame($loader->resolveRegistryReleaseHash(), $loader->resolveRegistryReleaseHash(null, 'en'));
+        $this->assertSame($loader->resolveRegistryReleaseHash(), $loader->resolveRegistryReleaseHash(null, 'en'));
         $this->assertSame([], app(RegistryValidator::class)->validate($pack));
     }
 

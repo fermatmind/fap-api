@@ -8,6 +8,7 @@ use App\Models\ReportSnapshot;
 use App\Models\Result;
 use App\Models\Share;
 use App\Services\Cms\PersonalityProfileService;
+use App\Services\Content\EnneagramPackLoader;
 use App\Services\Enneagram\EnneagramPublicFormSummaryBuilder;
 use App\Services\InsightGraph\InsightGraphContractService;
 use App\Services\InsightGraph\PartnerReadContractService;
@@ -42,6 +43,7 @@ class ShareService
         private readonly MbtiPublicProjectionService $mbtiPublicProjectionService,
         private readonly MbtiPublicSummaryV1Builder $mbtiPublicSummaryV1Builder,
         private readonly EnneagramPublicFormSummaryBuilder $enneagramPublicFormSummaryBuilder,
+        private readonly EnneagramPackLoader $enneagramPackLoader,
         private readonly RiasecPublicProjectionService $riasecPublicProjectionService,
         private readonly AnswerSurfaceContractService $answerSurfaceContractService,
         private readonly LandingSurfaceContractService $landingSurfaceContractService,
@@ -474,7 +476,21 @@ class ShareService
         $primary = trim((string) (data_get($projection, 'scores.primary_candidate') ?? data_get($topTypeCards, '0.type', '')));
         $second = trim((string) (data_get($projection, 'scores.second_candidate') ?? data_get($topTypeCards, '1.type', '')));
         $third = trim((string) (data_get($projection, 'scores.third_candidate') ?? data_get($topTypeCards, '2.type', '')));
-        $shareText = $this->resolveEnneagramShareText($locale, $scope, $primary, $second);
+        $shareCopy = data_get($this->enneagramPackLoader->loadRegistryPack(null, $locale), 'surface_registry.entries.share');
+        if (! is_array($shareCopy)
+            || trim((string) ($shareCopy['title'] ?? '')) === ''
+            || trim((string) ($shareCopy['summary'] ?? '')) === '') {
+            throw new \RuntimeException('ENNEAGRAM_PRIVATE_RESULT_SHARE_SURFACE_INCOMPLETE');
+        }
+        $stateCopy = data_get($shareCopy, 'states.'.$scope);
+        if (! is_array($stateCopy)
+            || trim((string) ($stateCopy['title'] ?? '')) === ''
+            || trim((string) ($stateCopy['summary'] ?? '')) === '') {
+            throw new \RuntimeException('ENNEAGRAM_PRIVATE_RESULT_SHARE_STATE_INCOMPLETE');
+        }
+        $shareVariables = ['{primary}' => $primary, '{secondary}' => $second, '{third}' => $third];
+        $shareText = strtr(trim((string) $stateCopy['summary']), $shareVariables);
+        $shareTitle = strtr(trim((string) $stateCopy['title']), $shareVariables);
         $confidenceLevel = trim((string) ($classification['confidence_level'] ?? data_get($projection, 'classification.confidence_level', '')));
         $confidenceLabel = trim((string) (data_get($projection, 'classification.confidence_label') ?? $confidenceLevel));
         $generatedAt = $surface['generated_at'];
@@ -528,6 +544,10 @@ class ShareService
             'compare_compatibility_group' => data_get($projection, 'methodology.compare_compatibility_group')
                 ?? data_get($snapshotBinding, 'compare_compatibility_group'),
             'cross_form_comparable' => false,
+            'canonical_authority_id' => data_get($snapshotBinding, 'canonical_authority_identity'),
+            'canonical_release_id' => data_get($snapshotBinding, 'canonical_release_id'),
+            'canonical_source_hash' => data_get($snapshotBinding, 'canonical_source_hash'),
+            'canonical_compiled_hash' => data_get($snapshotBinding, 'canonical_compiled_hash'),
             'generated_at' => $generatedAt,
             'summary_text' => $shareText,
         ];
@@ -535,7 +555,7 @@ class ShareService
         return [
             'scale_code' => 'ENNEAGRAM',
             'locale' => $locale,
-            'title' => $this->resolveEnneagramShareTitle($locale, $scope, $primary, $second),
+            'title' => $shareTitle,
             'subtitle' => (string) ($formSummary['label'] ?? ($locale === 'zh-CN' ? '九型人格结果摘要' : 'Enneagram result summary')),
             'summary' => $shareText,
             'type_code' => $primary !== '' ? $primary : 'ENNEAGRAM',
@@ -835,38 +855,6 @@ class ShareService
         }
 
         return [];
-    }
-
-    private function resolveEnneagramShareTitle(string $locale, string $scope, string $primary, string $second): string
-    {
-        return match ($scope) {
-            'close_call' => $locale === 'zh-CN'
-                ? sprintf('九型结果摘要｜%s 与 %s 接近', $primary !== '' ? $primary.'号' : '候选', $second !== '' ? $second.'号' : '次候选')
-                : sprintf('Enneagram summary | %s vs %s', $primary !== '' ? 'Type '.$primary : 'Top candidate', $second !== '' ? 'Type '.$second : 'Second candidate'),
-            'diffuse' => $locale === 'zh-CN' ? '九型结果摘要｜分散结构' : 'Enneagram summary | diffuse profile',
-            'low_quality' => $locale === 'zh-CN' ? '九型结果摘要｜解释边界较宽' : 'Enneagram summary | wider interpretation boundary',
-            default => $locale === 'zh-CN'
-                ? sprintf('九型结果摘要｜%s号候选', $primary !== '' ? $primary : '主')
-                : sprintf('Enneagram summary | %s', $primary !== '' ? 'Type '.$primary.' candidate' : 'Top candidate'),
-        };
-    }
-
-    private function resolveEnneagramShareText(string $locale, string $scope, string $primary, string $second): string
-    {
-        return match ($scope) {
-            'close_call' => $locale === 'zh-CN'
-                ? sprintf('我在 FermatMind 的九型结果显示：我可能在 %s 号与 %s 号之间摇摆。报告不会强行给出单一标签，而是保留两型辨析与后续观察线索。', $primary !== '' ? $primary : '主候选', $second !== '' ? $second : '次候选')
-                : sprintf('My FermatMind Enneagram result suggests I may be oscillating between Type %s and Type %s. The report keeps the distinction cautious instead of forcing a single label.', $primary !== '' ? $primary : 'A', $second !== '' ? $second : 'B'),
-            'diffuse' => $locale === 'zh-CN'
-                ? '我在 FermatMind 的九型结果呈现分散结构。系统建议先观察 Top3 和整体分布，而不是急着固定成单一类型。'
-                : 'My FermatMind Enneagram result shows a diffuse pattern. The system suggests watching the Top 3 and the overall profile before fixing on one type.',
-            'low_quality' => $locale === 'zh-CN'
-                ? '我在 FermatMind 的九型结果可以阅读，但系统提示解释边界较宽。它更适合作为初步观察线索，而不是最终定型。'
-                : 'My FermatMind Enneagram result is readable, but the interpretation boundary is wider. It is better used as an observation cue than a final label.',
-            default => $locale === 'zh-CN'
-                ? sprintf('我在 FermatMind 的九型结果显示：当前结果更接近 %s 号倾向。结果清晰度较高，但仍建议把它当成持续观察自己的框架。', $primary !== '' ? $primary : '主候选')
-                : sprintf('My FermatMind Enneagram result currently leans toward Type %s. The signal is relatively clear, but it should still be used as a framework for continued self-observation.', $primary !== '' ? $primary : 'A'),
-        };
     }
 
     /**
@@ -1244,6 +1232,14 @@ class ShareService
             $enneagramPublicSummary = is_array($summary['contract'] ?? null) ? $summary['contract'] : [];
             if ($enneagramPublicSummary !== []) {
                 $payload['enneagram_public_summary_v1'] = $enneagramPublicSummary;
+            }
+            $authority = data_get($publicSafeReport, '_meta.enneagram_private_result_authority');
+            if (is_array($authority)) {
+                $payload['enneagram_private_result_authority'] = $authority;
+            }
+            $snapshotBinding = data_get($publicSafeReport, '_meta.snapshot_binding_v1');
+            if (is_array($snapshotBinding)) {
+                $payload['enneagram_snapshot_binding_v1'] = $snapshotBinding;
             }
             unset($payload['attempt_id'], $payload['org_id'], $payload['content_package_version']);
         } elseif ($scaleCode === 'RIASEC' && $riasecProjection !== []) {

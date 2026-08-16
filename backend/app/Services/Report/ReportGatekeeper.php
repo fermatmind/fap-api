@@ -912,6 +912,17 @@ class ReportGatekeeper
                 'compiled_hash' => '',
             ]);
         }
+        if ($scaleCode === 'ENNEAGRAM' && ! is_array(data_get($report, '_meta.enneagram_private_result_authority'))) {
+            data_set($report, '_meta.enneagram_private_result_authority', [
+                'schema_version' => 'fap.enneagram.private_result_authority.v1',
+                'authority_id' => '',
+                'mode' => 'immutable_legacy_snapshot',
+                'locale' => (string) ($report['locale'] ?? ''),
+                'release_id' => '',
+                'source_hash' => '',
+                'compiled_hash' => '',
+            ]);
+        }
 
         return $report;
     }

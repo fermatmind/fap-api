@@ -212,6 +212,9 @@ final class ReportPdfDocumentService
             'content_snapshot_status' => data_get($reportV2, 'provenance.content_snapshot_status')
                 ?? data_get($projectionV2, 'content_binding.content_snapshot_status')
                 ?? data_get($snapshotBinding, 'content_snapshot_status'),
+            'canonical_release_id' => data_get($snapshotBinding, 'canonical_release_id'),
+            'canonical_source_hash' => data_get($snapshotBinding, 'canonical_source_hash'),
+            'canonical_compiled_hash' => data_get($snapshotBinding, 'canonical_compiled_hash'),
             'snapshot_binding_v1' => $snapshotBinding,
             'compare_compatibility_group' => data_get($projectionV2, 'methodology.compare_compatibility_group')
                 ?? data_get($snapshotBinding, 'compare_compatibility_group'),

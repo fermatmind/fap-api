@@ -53,6 +53,14 @@ final class EnneagramShareSummaryContractTest extends TestCase
         $this->assertCount(9, (array) $response->json('enneagram_public_summary_v1.all9_profile_mini'));
         $this->assertNotSame('', (string) $response->json('enneagram_public_summary_v1.compare_compatibility_group'));
         $this->assertNotSame('', (string) $response->json('enneagram_public_summary_v1.generated_at'));
+        $this->assertSame(
+            $response->json('enneagram_private_result_authority.source_hash'),
+            $response->json('enneagram_public_summary_v1.canonical_source_hash')
+        );
+        $this->assertSame(
+            $response->json('enneagram_private_result_authority.compiled_hash'),
+            $response->json('enneagram_public_summary_v1.canonical_compiled_hash')
+        );
         $this->assertStringContainsString('当前结果更接近 4 号倾向', (string) $response->json('summary'));
         $this->assertPublicSummaryHasNoForbiddenFields((array) $response->json('enneagram_public_summary_v1'));
         $this->assertSame('4', (string) $response->json('type_code'));

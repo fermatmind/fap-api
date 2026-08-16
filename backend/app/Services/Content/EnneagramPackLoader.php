@@ -36,6 +36,7 @@ final class EnneagramPackLoader
         private ?ContentPackV2Resolver $v2Resolver,
         private ContentPathAliasResolver $pathAliasResolver,
         private EnneagramRegistryReleaseResolver $registryReleaseResolver,
+        private EnneagramPrivateResultPackLoader $privateResultPackLoader,
     ) {}
 
     public function packRoot(?string $version = null): string
@@ -189,12 +190,7 @@ final class EnneagramPackLoader
      */
     public function loadRegistryManifest(?string $version = null, ?string $locale = null): array
     {
-        $decoded = $this->readRegistryJson('manifest.json', $version, $locale);
-        if (! is_array($decoded)) {
-            throw new \RuntimeException('ENNEAGRAM registry manifest missing or invalid: '.$this->registryPath('manifest.json', $version, $locale));
-        }
-
-        return $decoded;
+        return $this->privateResultPackLoader->load($this->normalizeLocale((string) ($locale ?? 'zh-CN')))['manifest'];
     }
 
     /**
@@ -202,22 +198,25 @@ final class EnneagramPackLoader
      */
     public function loadRegistryPack(?string $version = null, ?string $locale = null): array
     {
-        $manifest = $this->loadRegistryManifest($version, $locale);
+        $loaded = $this->privateResultPackLoader->load($this->normalizeLocale((string) ($locale ?? 'zh-CN')));
+        $manifest = $loaded['manifest'];
+        $assets = $loaded['assets'];
         $registries = [];
         foreach (self::REGISTRY_FILE_MAP as $registryKey => $file) {
-            $decoded = $this->readRegistryJson($file, $version, $locale);
+            $decoded = $assets[$file] ?? null;
             if (! is_array($decoded)) {
-                throw new \RuntimeException("ENNEAGRAM registry file missing or invalid for {$registryKey}: ".$this->registryPath($file, $version, $locale));
+                throw new \RuntimeException("ENNEAGRAM canonical compiled registry missing or invalid for {$registryKey}.");
             }
             $registries[$registryKey] = $decoded;
         }
 
-        $releaseHash = $this->resolveRegistryReleaseHash($version, $locale);
+        $releaseHash = 'sha256:'.(string) data_get($loaded, 'authority.source_hash');
 
         return [
-            'root' => $this->registryRoot($version, $locale),
+            'root' => null,
             'manifest' => $manifest,
             'release_hash' => $releaseHash,
+            'authority' => $loaded['authority'],
             'registries' => $registries,
             'type_registry' => $registries['enneagram_type_registry'],
             'pair_registry' => $registries['enneagram_pair_registry'],
@@ -239,25 +238,21 @@ final class EnneagramPackLoader
      */
     public function readRegistryJson(string $file, ?string $version = null, ?string $locale = null): ?array
     {
-        return $this->readJson($this->registryPath($file, $version, $locale));
+        $loaded = $this->privateResultPackLoader->load($this->normalizeLocale((string) ($locale ?? 'zh-CN')));
+        if ($file === 'manifest.json') {
+            return $loaded['manifest'];
+        }
+
+        $asset = $loaded['assets'][basename($file)] ?? null;
+
+        return is_array($asset) ? $asset : null;
     }
 
     public function resolveRegistryReleaseHash(?string $version = null, ?string $locale = null): string
     {
-        $files = array_merge(['manifest.json'], array_values(self::REGISTRY_FILE_MAP));
-        sort($files);
+        $loaded = $this->privateResultPackLoader->load($this->normalizeLocale((string) ($locale ?? 'zh-CN')));
 
-        $rows = [];
-        foreach ($files as $file) {
-            $path = $this->registryPath($file, $version, $locale);
-            if (! is_file($path)) {
-                return '';
-            }
-            $raw = File::get($path);
-            $rows[] = $file.':'.hash('sha256', $raw);
-        }
-
-        return 'sha256:'.hash('sha256', implode("\n", $rows));
+        return 'sha256:'.(string) data_get($loaded, 'authority.source_hash');
     }
 
     /**

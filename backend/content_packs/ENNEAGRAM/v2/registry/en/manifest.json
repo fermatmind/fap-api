@@ -2,18 +2,18 @@
     "artifacts": [
         {
             "path": "private_result.compiled.json",
-            "sha256": "af9ca1065ae8f4d18ed72b3341164a40a38c7be3183a03783cb3f1457cc9c24e"
+            "sha256": "633ee039beab41efadacdedd452feedd639551dbb9d043c18e2e0140eaf7a8bb"
         }
     ],
     "authority_id": "FERMATMIND_ENNEAGRAM_PRIVATE_RESULT_CANONICAL",
     "authority_root": "backend/content_packs/ENNEAGRAM/v2/registry",
-    "compiled_hash": "e6283f5fe6ece9cbd1a9fdc86016bd7e02235e3888ee3adb448465f21ced7c68",
+    "compiled_hash": "d34a282a7518fc1f2895a47962ee47a4af95687c13407ba6bccc421888b3942f",
     "compiled_hash_rule": "sha256(canonical JSON of compiled payload excluding compiled_hash)",
     "compiler": {
         "schema": "fap.enneagram.private_result.compiler.v1",
         "version": "1.0.0"
     },
-    "content_hash": "2a63207b9131b085d59dfaf67c0a937de3bad8eb6fd47a31d77ac14d642c86ca",
+    "content_hash": "46381016efb18ef15c6b2b66ca4166c6eb50a9339e277a330e58da1fc57d47d9",
     "content_maturity_values": [
         "scaffold",
         "p0_placeholder",
@@ -243,7 +243,7 @@
                 ],
                 "role": "page, FAQ, share, PDF, print, history, compare, and secondary surface copy",
                 "schema": "fap.enneagram.surface_registry.v1",
-                "sha256": "04b4c99f5a2fe38e046dbb665b34097b411c7326a8a2c061656d4e35f953f2b7"
+                "sha256": "43b20325a84d2b0baac18a8aacd997d69dfdaba3c1cecca78ea8049ef0cffeec"
             },
             {
                 "consumer_surfaces": [
@@ -479,7 +479,7 @@
                 ],
                 "role": "page, FAQ, share, PDF, print, history, compare, and secondary surface copy",
                 "schema": "fap.enneagram.surface_registry.v1",
-                "sha256": "3b893dda356d272c3e88dae49de81860f5814617b5e7b0c450635e646fa14ed8"
+                "sha256": "ee2101758d67e111678076d2303d90a27b2341224b06c606cdfa4fdbaf1159f1"
             },
             {
                 "consumer_surfaces": [
@@ -561,8 +561,8 @@
         ]
     },
     "locale_source_hashes": {
-        "en": "18f72f91470a065d49955af36b80eaa0119f5e5b36cecdab24fcb93487684327",
-        "zh-CN": "b871155a47351589197ae3a21b7233e7cd1207535637786cbdb93082e1d9eff1"
+        "en": "e251bd26762d1efb5edaebae67154bff2e03e72a7ebd975579b81e10cb6e5ebf",
+        "zh-CN": "f1c497131f74f4f9b9fffd0be69a5cb4ee557679de677c082f07d18cb1d35c96"
     },
     "locales": [
         "en"
@@ -799,7 +799,7 @@
             ],
             "role": "page, FAQ, share, PDF, print, history, compare, and secondary surface copy",
             "schema": "fap.enneagram.surface_registry.v1",
-            "sha256": "04b4c99f5a2fe38e046dbb665b34097b411c7326a8a2c061656d4e35f953f2b7"
+            "sha256": "43b20325a84d2b0baac18a8aacd997d69dfdaba3c1cecca78ea8049ef0cffeec"
         },
         {
             "consumer_surfaces": [
@@ -879,7 +879,7 @@
             "sha256": "ca7fc989564154be9a8c60d2cd7feaff0c331adb146ceccedb8ef7274ddb5faf"
         }
     ],
-    "source_hash": "2a63207b9131b085d59dfaf67c0a937de3bad8eb6fd47a31d77ac14d642c86ca",
+    "source_hash": "46381016efb18ef15c6b2b66ca4166c6eb50a9339e277a330e58da1fc57d47d9",
     "source_hash_rule": "sha256(concat(sorted locale/path + NUL + sha256(canonical decoded JSON) + LF))",
     "supported_context_modes": [
         "individual",

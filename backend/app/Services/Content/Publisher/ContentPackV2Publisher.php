@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Content\Publisher;
 
 use App\Services\Content\BigFivePrivateResultCompileService;
+use App\Services\Content\EnneagramPrivateResultCompileService;
 use App\Services\Content\RiasecPrivateResultCompileService;
 use App\Services\Storage\BlobCatalogService;
 use App\Services\Storage\ContentReleaseManifestCatalogService;
@@ -36,10 +37,13 @@ final class ContentPackV2Publisher
             throw new RuntimeException('PACK_ID_OR_VERSION_REQUIRED');
         }
 
-        $sourceCompiledDir = $packId === RiasecPrivateResultCompileService::PACK_ID
-            && $packVersion === RiasecPrivateResultCompileService::PACK_VERSION
-            ? base_path('content_assets/riasec/compiled')
-            : base_path('content_packs/'.$packId.'/'.$packVersion.'/compiled');
+        $sourceCompiledDir = match (true) {
+            $packId === RiasecPrivateResultCompileService::PACK_ID
+                && $packVersion === RiasecPrivateResultCompileService::PACK_VERSION => base_path('content_assets/riasec/compiled'),
+            $packId === EnneagramPrivateResultCompileService::PACK_ID
+                && $packVersion === EnneagramPrivateResultCompileService::PACK_VERSION => base_path('content_packs/ENNEAGRAM/v2/compiled'),
+            default => base_path('content_packs/'.$packId.'/'.$packVersion.'/compiled'),
+        };
         if (! File::isDirectory($sourceCompiledDir)) {
             throw new RuntimeException('COMPILED_DIR_NOT_FOUND: '.$sourceCompiledDir);
         }
@@ -288,6 +292,9 @@ final class ContentPackV2Publisher
         if ($packId === RiasecPrivateResultCompileService::PACK_ID) {
             $this->assertRiasecPrivateResultReleaseValid($release);
         }
+        if ($packId === EnneagramPrivateResultCompileService::PACK_ID) {
+            $this->assertEnneagramPrivateResultReleaseValid($release);
+        }
 
         $activationBeforeReleaseId = trim((string) DB::table('content_pack_activations')
             ->where('pack_id', $packId)
@@ -371,6 +378,32 @@ final class ContentPackV2Publisher
             || ! hash_equals($compiledHash, $computedCompiledHash)
             || ! hash_equals($artifactHash, hash('sha256', (string) $artifactBytes))) {
             throw new RuntimeException('RIASEC_PRIVATE_RESULT_RELEASE_HASH_MISMATCH');
+        }
+    }
+
+    private function assertEnneagramPrivateResultReleaseValid(object $release): void
+    {
+        $root = $this->absoluteStorageRoot(trim((string) ($release->storage_path ?? '')));
+        $compiledDir = is_dir($root.'/compiled') ? $root.'/compiled' : $root;
+        $manifest = json_decode((string) @file_get_contents($compiledDir.'/manifest.json'), true);
+        $artifactBytes = @file_get_contents($compiledDir.'/'.EnneagramPrivateResultCompileService::ARTIFACT_FILENAME);
+        $payload = is_string($artifactBytes) ? json_decode($artifactBytes, true) : null;
+        if (! is_array($manifest) || ! is_array($payload)) {
+            throw new RuntimeException('ENNEAGRAM_PRIVATE_RESULT_RELEASE_PAYLOAD_INVALID');
+        }
+
+        $sourceHash = strtolower(trim((string) ($payload['source_hash'] ?? '')));
+        $compiledHash = strtolower(trim((string) ($payload['compiled_hash'] ?? '')));
+        $unsigned = $payload;
+        unset($unsigned['compiled_hash']);
+        if (($payload['schema'] ?? null) !== EnneagramPrivateResultCompileService::SCHEMA
+            || ($payload['authority_id'] ?? null) !== EnneagramPrivateResultCompileService::AUTHORITY_ID
+            || ($payload['version'] ?? null) !== EnneagramPrivateResultCompileService::PACK_VERSION
+            || ! hash_equals($sourceHash, strtolower(trim((string) ($manifest['source_hash'] ?? ''))))
+            || ! hash_equals($compiledHash, strtolower(trim((string) ($manifest['compiled_hash'] ?? ''))))
+            || ! hash_equals($compiledHash, hash('sha256', $this->canonicalJson($unsigned)))
+            || ! hash_equals(hash('sha256', (string) $artifactBytes), strtolower(trim((string) data_get($manifest, 'artifacts.0.sha256', ''))))) {
+            throw new RuntimeException('ENNEAGRAM_PRIVATE_RESULT_RELEASE_HASH_MISMATCH');
         }
     }
 

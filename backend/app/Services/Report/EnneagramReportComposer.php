@@ -86,6 +86,7 @@ final class EnneagramReportComposer
                 '_meta' => [
                     'enneagram_public_projection_v1' => $projection,
                     'enneagram_public_projection_v2' => $projectionV2,
+                    'enneagram_private_result_authority' => data_get($projectionV2, 'private_result_authority'),
                     'enneagram_report_v2' => $reportV2,
                     'snapshot_binding_v1' => $this->buildSnapshotBinding($projectionV2),
                 ],
@@ -175,6 +176,12 @@ final class EnneagramReportComposer
             'content_snapshot_id' => data_get($projectionV2, 'content_binding.content_snapshot_id'),
             'content_snapshot_hash' => data_get($projectionV2, 'content_binding.content_snapshot_hash'),
             'content_snapshot_status' => data_get($projectionV2, 'content_binding.content_snapshot_status'),
+            'canonical_authority_identity' => data_get($projectionV2, 'private_result_authority.authority_id'),
+            'canonical_release_id' => data_get($projectionV2, 'private_result_authority.release_id'),
+            'canonical_source_hash' => data_get($projectionV2, 'private_result_authority.source_hash'),
+            'canonical_compiled_hash' => data_get($projectionV2, 'private_result_authority.compiled_hash'),
+            'canonical_locale' => data_get($projectionV2, 'private_result_authority.locale'),
+            'canonical_runtime_contract' => data_get($projectionV2, 'private_result_authority.runtime_contract'),
             'compare_compatibility_group' => data_get($projectionV2, 'methodology.compare_compatibility_group'),
             'cross_form_comparable' => data_get($projectionV2, 'methodology.cross_form_comparable'),
         ];
@@ -215,6 +222,9 @@ final class EnneagramReportComposer
                     'registry_release_hash' => data_get($pack, 'release_hash'),
                     'content_maturity' => $this->registryPackContentMaturity($indexes),
                     'release_id' => data_get($pack, 'manifest.release_id'),
+                    'active_release_id' => data_get($pack, 'authority.release_id'),
+                    'source_hash' => data_get($pack, 'authority.source_hash'),
+                    'compiled_hash' => data_get($pack, 'authority.compiled_hash'),
                 ],
                 'classification' => [
                     'interpretation_scope' => data_get($projectionV2, 'classification.interpretation_scope'),
@@ -231,6 +241,10 @@ final class EnneagramReportComposer
                     'content_release_hash' => data_get($projectionV2, 'content_binding.content_release_hash'),
                     'content_snapshot_status' => data_get($projectionV2, 'content_binding.content_snapshot_status'),
                     'registry_release_hash' => data_get($pack, 'release_hash'),
+                    'canonical_authority_id' => data_get($pack, 'authority.authority_id'),
+                    'canonical_release_id' => data_get($pack, 'authority.release_id'),
+                    'canonical_source_hash' => data_get($pack, 'authority.source_hash'),
+                    'canonical_compiled_hash' => data_get($pack, 'authority.compiled_hash'),
                     'close_call_rule_version' => data_get($projectionV2, 'algorithmic_meta.close_call_rule_version'),
                     'confidence_policy_version' => data_get($projectionV2, 'algorithmic_meta.confidence_policy_version'),
                     'quality_policy_version' => data_get($projectionV2, 'algorithmic_meta.quality_policy_version'),
@@ -249,8 +263,7 @@ final class EnneagramReportComposer
                 'exception_class' => $error::class,
                 'exception' => SensitiveDiagnosticRedactor::redactString($error->getMessage()),
             ]);
-
-            return $this->buildUnavailableReportV2($projectionV2, $language);
+            throw new RuntimeException('ENNEAGRAM_PRIVATE_RESULT_ACTIVE_RELEASE_INVALID', previous: $error);
         }
     }
 

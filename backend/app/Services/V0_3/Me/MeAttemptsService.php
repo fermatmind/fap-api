@@ -211,6 +211,9 @@ class MeAttemptsService
         $bigFiveSnapshotReportByAttemptId = $normalizedScaleCode === 'BIG5_OCEAN'
             ? $this->readReadySnapshotReports($orgId, $attemptIds)
             : [];
+        $enneagramSnapshotReportByAttemptId = $normalizedScaleCode === 'ENNEAGRAM'
+            ? $this->readReadySnapshotReports($orgId, $attemptIds)
+            : [];
 
         $items = [];
         foreach ($attemptModels as $attempt) {
@@ -239,6 +242,15 @@ class MeAttemptsService
                     ];
             } elseif (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'ENNEAGRAM') {
                 $presented['enneagram_form_v1'] = $this->enneagramPublicFormSummaryBuilder->summarizeForAttempt($attempt, $result, $locale);
+                $enneagramSnapshotReport = $enneagramSnapshotReportByAttemptId[$attemptId] ?? [];
+                $authority = data_get($enneagramSnapshotReport, '_meta.enneagram_private_result_authority');
+                $presented['enneagram_private_result_authority'] = is_array($authority)
+                    ? $authority
+                    : $this->legacyEnneagramPrivateResultAuthority((string) ($attempt->locale ?? $locale));
+                $snapshotBinding = data_get($enneagramSnapshotReport, '_meta.snapshot_binding_v1');
+                if (is_array($snapshotBinding)) {
+                    $presented['enneagram_snapshot_binding_v1'] = $snapshotBinding;
+                }
             } elseif (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'RIASEC') {
                 $riasecSnapshotReport = $riasecSnapshotReportByAttemptId[$attemptId] ?? [];
                 $presented['riasec_form_v1'] = $this->riasecPublicFormSummaryBuilder->build($attempt, $result);
@@ -291,7 +303,7 @@ class MeAttemptsService
                     ];
             }
         } elseif ($normalizedScaleCode === 'ENNEAGRAM') {
-            $historyCompare = $this->buildEnneagramHistorySummary($attemptModels, $resultByAttemptId);
+            $historyCompare = $this->buildEnneagramHistorySummary($attemptModels, $resultByAttemptId, $enneagramSnapshotReportByAttemptId);
         } elseif ($normalizedScaleCode === 'RIASEC') {
             $historyCompare = $this->buildRiasecHistorySummary($attemptModels, $resultByAttemptId, $riasecSnapshotReportByAttemptId);
         }
@@ -590,7 +602,7 @@ class MeAttemptsService
      * @param  array<string,Result>  $resultByAttemptId
      * @return array<string,mixed>|null
      */
-    private function buildEnneagramHistorySummary(array $attemptModels, array $resultByAttemptId): ?array
+    private function buildEnneagramHistorySummary(array $attemptModels, array $resultByAttemptId, array $snapshotReportByAttemptId = []): ?array
     {
         if ($attemptModels === []) {
             return null;
@@ -612,6 +624,9 @@ class MeAttemptsService
             'current_attempt_id' => $latestId,
             'current_primary_type' => (string) ($latestScore['primary_type'] ?? ''),
             'current_top_types' => is_array($latestScore['top_types'] ?? null) ? array_values($latestScore['top_types']) : [],
+            'enneagram_private_result_authority' => is_array(data_get($snapshotReportByAttemptId[$latestId] ?? [], '_meta.enneagram_private_result_authority'))
+                ? data_get($snapshotReportByAttemptId[$latestId], '_meta.enneagram_private_result_authority')
+                : $this->legacyEnneagramPrivateResultAuthority((string) ($latest->locale ?? '')),
         ];
 
         $payload['current_compare_policy_v1'] = $this->buildEnneagramComparePolicySummary($latest, $resultByAttemptId[$latestId] ?? null);
@@ -715,6 +730,20 @@ class MeAttemptsService
             'authority_id' => '',
             'mode' => 'immutable_legacy_snapshot',
             'locale' => $locale,
+            'source_hash' => '',
+            'compiled_hash' => '',
+        ];
+    }
+
+    /** @return array<string,string> */
+    private function legacyEnneagramPrivateResultAuthority(string $locale): array
+    {
+        return [
+            'schema_version' => 'fap.enneagram.private_result_authority.v1',
+            'authority_id' => '',
+            'mode' => 'immutable_legacy_snapshot',
+            'locale' => $locale,
+            'release_id' => '',
             'source_hash' => '',
             'compiled_hash' => '',
         ];
