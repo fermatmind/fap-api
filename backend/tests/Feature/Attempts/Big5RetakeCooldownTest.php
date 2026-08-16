@@ -25,7 +25,6 @@ final class Big5RetakeCooldownTest extends TestCase
         parent::setUp();
 
         config()->set('fap.big5_retake.enforce_pack_policy', true);
-        config()->set('fap.big5_retake.cooldown_hours', null);
         config()->set('fap.big5_retake.max_attempts_per_30_days', null);
 
         $this->mappedBig5CanaryPath = base_path('content_packs/BIG5_OCEAN_POLICY_CANARY');
@@ -38,7 +37,7 @@ final class Big5RetakeCooldownTest extends TestCase
         parent::tearDown();
     }
 
-    public function test_big5_90_retake_window_limits_are_enforced_by_default_for_same_anon(): void
+    public function test_big5_90_retake_cooldown_is_disabled_by_default_for_same_anon(): void
     {
         (new ScaleRegistrySeeder)->run();
 
@@ -53,12 +52,11 @@ final class Big5RetakeCooldownTest extends TestCase
             'form_code' => 'big5_90',
         ]);
 
-        $response->assertStatus(429);
-        $response->assertJsonPath('error_code', 'RETAKE_COOLDOWN');
-        $response->assertJsonPath('details.form_code', 'big5_90');
+        $response->assertStatus(200);
+        $response->assertJsonPath('form_code', 'big5_90');
     }
 
-    public function test_big5_120_retake_window_limits_are_enforced_by_default_for_same_anon(): void
+    public function test_big5_120_retake_cooldown_is_disabled_by_default_for_same_anon(): void
     {
         (new ScaleRegistrySeeder)->run();
 
@@ -73,12 +71,11 @@ final class Big5RetakeCooldownTest extends TestCase
             'form_code' => 'big5_120',
         ]);
 
-        $response->assertStatus(429);
-        $response->assertJsonPath('error_code', 'RETAKE_COOLDOWN');
-        $response->assertJsonPath('details.form_code', 'big5_120');
+        $response->assertStatus(200);
+        $response->assertJsonPath('form_code', 'big5_120');
     }
 
-    public function test_big5_retake_window_limits_are_enforced_by_default_for_same_user(): void
+    public function test_big5_retake_cooldown_is_disabled_by_default_for_same_user(): void
     {
         (new ScaleRegistrySeeder)->run();
 
@@ -97,9 +94,8 @@ final class Big5RetakeCooldownTest extends TestCase
             'form_code' => 'big5_90',
         ]);
 
-        $response->assertStatus(429);
-        $response->assertJsonPath('error_code', 'RETAKE_COOLDOWN');
-        $response->assertJsonPath('details.form_code', 'big5_90');
+        $response->assertStatus(200);
+        $response->assertJsonPath('form_code', 'big5_90');
     }
 
     public function test_big5_retake_window_limits_can_be_disabled_by_runtime_config(): void
@@ -165,6 +161,7 @@ final class Big5RetakeCooldownTest extends TestCase
     {
         (new ScaleRegistrySeeder)->run();
         config()->set('fap.big5_retake.enforce_pack_policy', true);
+        config()->set('fap.big5_retake.cooldown_hours', null);
 
         $anonId = 'anon_big5_cooldown_restored';
         $this->createAttempt($anonId, now()->subHours(1), 'big5_120');

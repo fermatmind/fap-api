@@ -44,7 +44,8 @@ return [
 
     'big5_retake' => [
         'enforce_pack_policy' => (bool) env('FAP_BIG5_RETAKE_ENFORCE_PACK_POLICY', true),
-        'cooldown_hours' => env('FAP_BIG5_RETAKE_COOLDOWN_HOURS', null),
+        // Retakes may start immediately; the rolling-window abuse limit remains enforced.
+        'cooldown_hours' => 0,
         'max_attempts_per_30_days' => env('FAP_BIG5_RETAKE_MAX_ATTEMPTS_PER_30_DAYS', null),
     ],
 
