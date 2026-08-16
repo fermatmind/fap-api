@@ -22,13 +22,9 @@ final class ContentPathAliasResolver
             return base_path('content_packs');
         }
 
-        if ($packId === 'BIG5_OCEAN') {
-            return base_path('content_packs/BIG5_OCEAN');
-        }
-
         $legacyRelativePath = 'content_packs/'.$packId;
         $alias = $this->findActiveAlias('backend_content_packs', $legacyRelativePath);
-        if (! is_array($alias)) {
+        if (! is_array($alias) || $this->isRetiredBigFiveMirrorAlias($packId, $alias)) {
             return base_path($legacyRelativePath);
         }
 
@@ -85,26 +81,12 @@ final class ContentPathAliasResolver
             ];
         }
 
-        if ($packId === 'BIG5_OCEAN') {
-            $canonicalPath = base_path('content_packs/BIG5_OCEAN/'.$packVersion);
-
-            return [
-                'mode' => $mode,
-                'selected_path' => $canonicalPath,
-                'selected_source' => 'legacy',
-                'legacy_path' => $canonicalPath,
-                'mapped_path' => null,
-                'alias_matched' => false,
-                'fallback_used' => false,
-            ];
-        }
-
         $legacyRelativeRoot = 'content_packs/'.$packId;
         $legacyAbsoluteRoot = base_path($legacyRelativeRoot);
         $legacyVersionPath = $legacyAbsoluteRoot.DIRECTORY_SEPARATOR.$packVersion;
 
         $alias = $this->findActiveAlias('backend_content_packs', $legacyRelativeRoot);
-        if (! is_array($alias)) {
+        if (! is_array($alias) || $this->isRetiredBigFiveMirrorAlias($packId, $alias)) {
             return [
                 'mode' => $mode,
                 'selected_path' => $legacyVersionPath,
@@ -193,6 +175,15 @@ final class ContentPathAliasResolver
         }
 
         return $primaryPath;
+    }
+
+    /**
+     * @param  array{old_path:string,new_path:string}  $alias
+     */
+    private function isRetiredBigFiveMirrorAlias(string $packId, array $alias): bool
+    {
+        return $packId === 'BIG5_OCEAN'
+            && trim($alias['new_path'], '/') === 'content_packs/BIG_FIVE_OCEAN_MODEL';
     }
 
     private function normalizePublishMode(mixed $value): string

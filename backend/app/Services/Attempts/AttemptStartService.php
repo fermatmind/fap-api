@@ -283,11 +283,17 @@ class AttemptStartService
         if (strtoupper($scaleCode) === 'BIG5_OCEAN') {
             $legalCompiled = $this->bigFivePackLoader->readCompiledJson('legal.compiled.json', $dirVersion);
             $legal = is_array($legalCompiled['legal'] ?? null) ? $legalCompiled['legal'] : [];
+            $policyCompiled = $this->bigFivePackLoader->readCompiledJson('policy.compiled.json', $dirVersion);
+            $policy = is_array($policyCompiled['policy'] ?? null) ? $policyCompiled['policy'] : [];
             $disclaimerVersion = trim((string) ($legal['disclaimer_version'] ?? ''));
             $disclaimerHash = trim((string) ($legal['hash'] ?? ''));
             $normalizedLocale = str_starts_with(strtolower($locale), 'zh') ? 'zh-CN' : 'en';
             $disclaimerTexts = is_array($legal['texts'] ?? null) ? $legal['texts'] : [];
             $disclaimerText = trim((string) ($disclaimerTexts[$normalizedLocale] ?? ''));
+            if ($disclaimerText === '') {
+                $policyDisclaimerTexts = is_array($policy['disclaimer'] ?? null) ? $policy['disclaimer'] : [];
+                $disclaimerText = trim((string) ($policyDisclaimerTexts[$normalizedLocale] ?? ''));
+            }
 
             if ($disclaimerVersion === '') {
                 $disclaimerVersion = 'BIG5_OCEAN_'.$dirVersion;
