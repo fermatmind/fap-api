@@ -579,6 +579,10 @@ class ShareService
             return $this->readReadySnapshotReport($attempt);
         }
 
+        if ($scaleCode === 'BIG5_OCEAN') {
+            return $this->resolveBigFiveFreeSnapshotReport($attempt);
+        }
+
         if ($scaleCode !== 'MBTI') {
             return [];
         }
@@ -624,6 +628,45 @@ class ShareService
         ]);
 
         return $this->readReadySnapshotReport($attempt);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function resolveBigFiveFreeSnapshotReport(Attempt $attempt): array
+    {
+        $report = $this->readReadyBigFiveFreeSnapshotReport($attempt);
+        if ($report !== []) {
+            return $report;
+        }
+
+        $this->reportSnapshotStore->createSnapshotForAttempt([
+            'org_id' => (int) ($attempt->org_id ?? 0),
+            'attempt_id' => (string) $attempt->id,
+            'trigger_source' => 'share_surface_sync',
+            'order_no' => null,
+            'org_role' => 'system',
+        ]);
+
+        return $this->readReadyBigFiveFreeSnapshotReport($attempt);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function readReadyBigFiveFreeSnapshotReport(Attempt $attempt): array
+    {
+        $snapshot = ReportSnapshot::query()
+            ->where('org_id', (int) ($attempt->org_id ?? 0))
+            ->where('attempt_id', (string) $attempt->id)
+            ->where('status', 'ready')
+            ->first();
+
+        if (! $snapshot instanceof ReportSnapshot) {
+            return [];
+        }
+
+        return is_array($snapshot->report_free_json) ? $snapshot->report_free_json : [];
     }
 
     /**

@@ -17,6 +17,38 @@ final class BigFiveHistoryCompareTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_me_attempts_big5_keeps_history_compare_null_with_only_one_attempt(): void
+    {
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
+
+        $userId = 8100;
+        $anonId = 'anon_big5_single_history';
+        $this->seedUser($userId);
+        $token = $this->seedFmToken($anonId, $userId);
+        $attemptId = $this->seedBigFiveAttempt(
+            $anonId,
+            (string) $userId,
+            now()->subDay(),
+            120,
+            'big5_120',
+            'v1',
+            'v1',
+            'big5_spec_2026Q1_v1'
+        );
+        $this->seedBigFiveResult(
+            $attemptId,
+            ['O' => 3.5, 'C' => 3.1, 'E' => 3.0, 'A' => 3.6, 'N' => 3.2]
+        );
+
+        $response = $this->withHeaders([
+            'Authorization' => "Bearer {$token}",
+        ])->getJson('/api/v0.3/me/attempts?scale=BIG5_OCEAN');
+
+        $response->assertOk();
+        $response->assertJsonPath('history_compare', null);
+    }
+
     public function test_me_attempts_big5_returns_history_compare_summary(): void
     {
         (new ScaleRegistrySeeder)->run();

@@ -273,17 +273,19 @@ class MeAttemptsService
         $historyCompare = null;
         if ($normalizedScaleCode === 'BIG5_OCEAN') {
             $historyCompare = $this->buildBigFiveHistoryCompare($attemptModels, $resultByAttemptId);
-            $currentAttemptId = (string) ($historyCompare['current_attempt_id'] ?? '');
-            $authority = data_get($bigFiveSnapshotReportByAttemptId[$currentAttemptId] ?? [], '_meta.big5_private_result_authority');
-            $historyCompare['big5_private_result_authority'] = is_array($authority)
-                ? $authority
-                : [
-                    'schema_version' => 'fap.big5.private_result_authority.v1',
-                    'mode' => 'immutable_legacy_snapshot',
-                    'locale' => '',
-                    'source_hash' => '',
-                    'compiled_hash' => '',
-                ];
+            if (is_array($historyCompare)) {
+                $currentAttemptId = (string) ($historyCompare['current_attempt_id'] ?? '');
+                $authority = data_get($bigFiveSnapshotReportByAttemptId[$currentAttemptId] ?? [], '_meta.big5_private_result_authority');
+                $historyCompare['big5_private_result_authority'] = is_array($authority)
+                    ? $authority
+                    : [
+                        'schema_version' => 'fap.big5.private_result_authority.v1',
+                        'mode' => 'immutable_legacy_snapshot',
+                        'locale' => '',
+                        'source_hash' => '',
+                        'compiled_hash' => '',
+                    ];
+            }
         } elseif ($normalizedScaleCode === 'ENNEAGRAM') {
             $historyCompare = $this->buildEnneagramHistorySummary($attemptModels, $resultByAttemptId);
         } elseif ($normalizedScaleCode === 'RIASEC') {

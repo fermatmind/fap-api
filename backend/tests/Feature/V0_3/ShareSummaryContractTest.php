@@ -276,6 +276,9 @@ final class ShareSummaryContractTest extends TestCase
             ->assertJsonPath('partner_read_v1.version', 'partner.read.v1')
             ->assertJsonPath('partner_read_v1.graph_scope', 'public_share_safe')
             ->assertJsonPath('partner_read_v1.read_scope', 'partner_public_read')
+            ->assertJsonPath('big5_private_result_authority.schema_version', 'fap.big5.private_result_authority.v1')
+            ->assertJsonPath('big5_private_result_authority.mode', 'canonical')
+            ->assertJsonPath('big5_public_projection_v1._meta.locked', true)
             ->assertJsonMissingPath('report')
             ->assertJsonMissingPath('result')
             ->assertJsonMissingPath('offers')
@@ -289,11 +292,14 @@ final class ShareSummaryContractTest extends TestCase
             ->assertJsonMissingPath('big5_public_projection_v1.trait_vector.0.percentile')
             ->assertJsonMissingPath('big5_public_projection_v1.trait_vector.0.mean');
 
-        $this->assertSame(['traits.overview', 'traits.why_this_profile'], $response->json('public_surface_v1.continue_reading_keys'));
+        $this->assertSame(['hero_summary', 'domains_overview', 'domain_deep_dive'], $response->json('public_surface_v1.continue_reading_keys'));
+        $this->assertSame(64, strlen((string) $response->json('big5_private_result_authority.source_hash')));
+        $this->assertSame(64, strlen((string) $response->json('big5_private_result_authority.compiled_hash')));
         $this->assertContains('big5_foundation_summary', $response->json('public_surface_v1.discoverability_keys'));
         $this->assertNotContains('comparative', $response->json('public_surface_v1.discoverability_keys'));
         $response->assertJsonCount(0, 'big5_public_projection_v1.facet_vector');
-        $this->assertSame('Openness', $response->json('big5_public_projection_v1.trait_vector.0.label'));
+        $this->assertSame('O', $response->json('big5_public_projection_v1.trait_vector.0.key'));
+        $response->assertJsonMissingPath('big5_public_projection_v1.trait_vector.0.label');
         $this->assertStringContainsString('/share/'.$response->json('share_id'), (string) $response->json('share_url'));
     }
 
