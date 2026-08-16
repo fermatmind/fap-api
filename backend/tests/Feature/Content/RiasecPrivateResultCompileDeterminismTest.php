@@ -25,7 +25,7 @@ final class RiasecPrivateResultCompileDeterminismTest extends TestCase
         $this->assertSame(array_keys(RiasecPrivateResultCompileService::SOURCE_CONTRACT), array_column($first['manifest']['source_files'], 'path'));
         $this->assertSame(['riasec_60', 'riasec_140'], $first['manifest']['coverage']['forms']);
         $this->assertSame(15, $first['manifest']['coverage']['pair_count']);
-        $this->assertSame($first['manifest_bytes'], file_get_contents(base_path('content_assets/riasec/private_result_authority_manifest.json')));
+        $this->assertSame($first['manifest_bytes'], file_get_contents(base_path('content_assets/riasec/compiled/manifest.json')));
         $this->assertSame($first['bytes'], file_get_contents(base_path('content_assets/riasec/compiled/private_result.compiled.json')));
     }
 

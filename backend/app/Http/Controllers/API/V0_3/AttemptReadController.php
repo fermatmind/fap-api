@@ -431,6 +431,10 @@ class AttemptReadController extends Controller
         }
         if ($riasecProjectionV2 !== []) {
             $responsePayload['riasec_public_projection_v2'] = $riasecProjectionV2;
+            $authority = data_get($riasecProjectionV2, 'private_result_authority');
+            if (is_array($authority)) {
+                $responsePayload['riasec_private_result_authority'] = $authority;
+            }
         }
         if (is_array($riasecFormSummary)) {
             $responsePayload['riasec_form_v1'] = $riasecFormSummary;

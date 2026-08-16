@@ -100,6 +100,11 @@ final class RiasecAssessmentFlowTest extends TestCase
         $readback->assertJsonPath('ok', true);
         $readback->assertJsonPath('type_code', 'RIA');
         $readback->assertJsonPath('result.top_code', 'RIA');
+        $readback->assertJsonPath('riasec_private_result_authority.schema_version', 'fap.riasec.private_result_authority.v1');
+        $authoritySourceHash = (string) $readback->json('riasec_private_result_authority.source_hash');
+        $authorityCompiledHash = (string) $readback->json('riasec_private_result_authority.compiled_hash');
+        $this->assertMatchesRegularExpression('/\A[0-9a-f]{64}\z/', $authoritySourceHash);
+        $this->assertMatchesRegularExpression('/\A[0-9a-f]{64}\z/', $authorityCompiledHash);
         $readback->assertJsonPath('riasec_public_projection_v1.top_code', 'RIA');
         $readback->assertJsonPath('riasec_form_v1.form_code', 'riasec_60');
         $readback->assertJsonPath('riasec_form_v1.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
@@ -173,6 +178,10 @@ final class RiasecAssessmentFlowTest extends TestCase
         $report->assertJsonPath('locked', false);
         $report->assertJsonPath('report.schema_version', 'riasec.report.v1');
         $report->assertJsonPath('report.top_code', 'RIA');
+        $report->assertJsonPath('report._meta.riasec_private_result_authority.source_hash', $authoritySourceHash);
+        $report->assertJsonPath('report._meta.riasec_private_result_authority.compiled_hash', $authorityCompiledHash);
+        $report->assertJsonPath('report._meta.snapshot_binding_v1.canonical_source_hash', $authoritySourceHash);
+        $report->assertJsonPath('report._meta.snapshot_binding_v1.canonical_compiled_hash', $authorityCompiledHash);
         $report->assertJsonPath('riasec_public_projection_v1.top_code', 'RIA');
         $report->assertJsonPath('riasec_form_v1.form_code', 'riasec_60');
         $report->assertJsonPath('riasec_form_v1.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
@@ -230,6 +239,8 @@ final class RiasecAssessmentFlowTest extends TestCase
         $share->assertStatus(200);
         $share->assertJsonPath('scale_code', 'RIASEC');
         $share->assertJsonPath('type_code', 'RIA');
+        $share->assertJsonPath('riasec_private_result_authority.source_hash', $authoritySourceHash);
+        $share->assertJsonPath('riasec_private_result_authority.compiled_hash', $authorityCompiledHash);
         $share->assertJsonPath('riasec_public_projection_v1.top_code', 'RIA');
         $share->assertJsonPath('landing_surface_v1.entry_surface', 'riasec_share_entry');
         $share->assertJsonPath('seo_surface_v1.surface_type', 'riasec_share_public_safe');
@@ -250,6 +261,8 @@ final class RiasecAssessmentFlowTest extends TestCase
         $history->assertJsonPath('ok', true);
         $history->assertJsonPath('scale_code', 'RIASEC');
         $history->assertJsonPath('items.0.attempt_id', $attemptId);
+        $history->assertJsonPath('items.0.riasec_private_result_authority.source_hash', $authoritySourceHash);
+        $history->assertJsonPath('items.0.riasec_private_result_authority.compiled_hash', $authorityCompiledHash);
         $history->assertJsonPath('items.0.riasec_form_v1.form_code', 'riasec_60');
         $history->assertJsonPath('items.0.riasec_form_v1.question_count', 60);
         $history->assertJsonPath('items.0.compare_policy_v1.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
@@ -303,6 +316,10 @@ final class RiasecAssessmentFlowTest extends TestCase
         $first->assertJsonPath('report._meta.riasec_public_projection_v2.measurement_evidence.snapshot_bound', true);
         $first->assertJsonPath('report._meta.snapshot_binding_v1.schema_version', 'riasec.snapshot_binding.v1');
         $first->assertJsonPath('report._meta.snapshot_binding_v1.snapshot_bound', true);
+        $authoritySourceHash = (string) $first->json('report._meta.riasec_private_result_authority.source_hash');
+        $authorityCompiledHash = (string) $first->json('report._meta.riasec_private_result_authority.compiled_hash');
+        $this->assertMatchesRegularExpression('/\A[0-9a-f]{64}\z/', $authoritySourceHash);
+        $this->assertMatchesRegularExpression('/\A[0-9a-f]{64}\z/', $authorityCompiledHash);
 
         $snapshot = DB::table('report_snapshots')->where('attempt_id', $attemptId)->first();
         $this->assertNotNull($snapshot);
@@ -342,6 +359,8 @@ final class RiasecAssessmentFlowTest extends TestCase
         ])->getJson("/api/v0.3/attempts/{$attemptId}/share");
         $share->assertStatus(200);
         $share->assertJsonPath('type_code', 'RIA');
+        $share->assertJsonPath('riasec_private_result_authority.source_hash', $authoritySourceHash);
+        $share->assertJsonPath('riasec_private_result_authority.compiled_hash', $authorityCompiledHash);
         $share->assertJsonPath('riasec_public_projection_v1.top_code', 'RIA');
         $share->assertJsonPath('riasec_public_projection_v2.measurement_evidence.snapshot_bound', true);
         $share->assertJsonPath('riasec_snapshot_binding_v1.snapshot_bound', true);
@@ -358,6 +377,8 @@ final class RiasecAssessmentFlowTest extends TestCase
         ])->getJson('/api/v0.3/me/attempts?scale=RIASEC');
         $history->assertStatus(200);
         $history->assertJsonPath('items.0.type_code', 'RIA');
+        $history->assertJsonPath('items.0.riasec_private_result_authority.source_hash', $authoritySourceHash);
+        $history->assertJsonPath('items.0.riasec_private_result_authority.compiled_hash', $authorityCompiledHash);
         $history->assertJsonPath('items.0.riasec_public_projection_v1.top_code', 'RIA');
         $history->assertJsonPath('items.0.riasec_public_projection_v2.measurement_evidence.snapshot_bound', true);
         $history->assertJsonPath('items.0.riasec_snapshot_binding_v1.snapshot_bound', true);
@@ -375,6 +396,8 @@ final class RiasecAssessmentFlowTest extends TestCase
             'Authorization' => 'Bearer '.$token,
         ])->get("/api/v0.3/attempts/{$attemptId}/report.pdf?inline=1");
         $pdf->assertStatus(200);
+        $this->assertSame('application/pdf', $pdf->headers->get('Content-Type'));
+        $this->assertSame($authoritySourceHash, $pdf->headers->get('X-Content-Release-Hash'));
         $this->assertSame('riasec.pdf_surface.v1', $pdf->headers->get('X-Pdf-Surface-Version'));
         $this->assertSame('riasec.report.v1', $pdf->headers->get('X-Report-Schema-Version'));
         $this->assertSame('riasec.public_projection.v2', $pdf->headers->get('X-Projection-Version'));

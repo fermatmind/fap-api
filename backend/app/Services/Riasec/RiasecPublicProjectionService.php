@@ -59,6 +59,9 @@ final class RiasecPublicProjectionService
 
         return [
             'schema' => 'fap.riasec.public_projection.v1',
+            'private_result_authority' => str_starts_with(strtolower($locale), 'zh')
+                ? $this->privateResultSource->authority()
+                : null,
             'top_code' => $topCode,
             'primary_type' => $primary,
             'secondary_type' => $secondary,
@@ -143,6 +146,9 @@ final class RiasecPublicProjectionService
             'schema_version' => 'riasec.public_projection.v2',
             'scale_code' => 'RIASEC',
             'locale' => str_starts_with(strtolower($locale), 'zh') ? 'zh-CN' : 'en',
+            'private_result_authority' => str_starts_with(strtolower($locale), 'zh')
+                ? $this->privateResultSource->authority()
+                : null,
             'holland_code' => [
                 'code' => (string) ($v1['top_code'] ?? ''),
                 'primary_type' => (string) ($v1['primary_type'] ?? ''),

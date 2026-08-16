@@ -35,6 +35,10 @@ final class RiasecLifecycleCopyService
     /** @var array<string,array<string,mixed>> */
     private array $professionalMethodBoundaryCache = [];
 
+    public function __construct(
+        private readonly RiasecPrivateResultSourceRepository $privateResultSource = new RiasecPrivateResultSourceRepository,
+    ) {}
+
     /**
      * @return list<array{title:string,copy:string,section_key:string,data_status:string}>
      */
@@ -321,9 +325,7 @@ final class RiasecLifecycleCopyService
 
     private function faqMarkdownAvailable(string $locale): bool
     {
-        $path = base_path($this->assetPath(self::FAQ_MARKDOWN_ASSET_PATH_TEMPLATE, $locale));
-
-        return is_file($path) && trim((string) file_get_contents($path)) !== '';
+        return false;
     }
 
     private function assetPath(string $template, string $locale): string
@@ -381,11 +383,14 @@ final class RiasecLifecycleCopyService
      */
     private function loadJsonAsset(string $relativePath): array
     {
+        if (str_ends_with($relativePath, '.zh-CN.json')) {
+            return $this->privateResultSource->asset(basename($relativePath));
+        }
+
         $path = base_path($relativePath);
         if (! is_file($path)) {
             return [];
         }
-
         try {
             $decoded = json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
         } catch (\JsonException) {

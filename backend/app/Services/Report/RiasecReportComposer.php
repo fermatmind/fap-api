@@ -70,6 +70,7 @@ final class RiasecReportComposer
                 '_meta' => array_filter([
                     'riasec_public_projection_v1' => $projection,
                     'riasec_public_projection_v2' => $projectionV2,
+                    'riasec_private_result_authority' => data_get($projectionV2, 'private_result_authority'),
                     'snapshot_binding_v1' => $snapshotBound ? $this->buildSnapshotBinding($ctx, $projectionV2) : null,
                     'result_page_v2' => $resultPageV2,
                 ], static fn (mixed $value): bool => $value !== null),
@@ -430,6 +431,12 @@ final class RiasecReportComposer
             'form_code' => data_get($projectionV2, 'form.form_code'),
             'validation_status' => data_get($projectionV2, 'measurement_evidence.validation_status'),
             'deep_content_slots_schema_version' => data_get($projectionV2, 'deep_content_slots_v1.schema_version'),
+            'canonical_authority_identity' => data_get($projectionV2, 'private_result_authority.authority_id'),
+            'canonical_source_hash' => data_get($projectionV2, 'private_result_authority.source_hash'),
+            'canonical_compiled_hash' => data_get($projectionV2, 'private_result_authority.compiled_hash'),
+            'canonical_compiled_schema' => data_get($projectionV2, 'private_result_authority.compiled_schema'),
+            'canonical_compiler_schema' => data_get($projectionV2, 'private_result_authority.compiler_schema'),
+            'canonical_compiler_version' => data_get($projectionV2, 'private_result_authority.compiler_version'),
         ];
     }
 

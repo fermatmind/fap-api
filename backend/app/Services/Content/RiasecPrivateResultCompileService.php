@@ -9,6 +9,10 @@ use RuntimeException;
 
 final class RiasecPrivateResultCompileService
 {
+    public const PACK_ID = 'RIASEC_PRIVATE_RESULT';
+
+    public const PACK_VERSION = 'v1';
+
     public const AUTHORITY_ID = 'FERMATMIND_RIASEC_PRIVATE_RESULT_ZH_CN_CANONICAL';
 
     public const SCHEMA = 'fap.riasec.private_result.compiled.v1';
@@ -85,13 +89,14 @@ final class RiasecPrivateResultCompileService
             'authority_root' => 'backend/content_assets/riasec',
             'scale_code' => 'RIASEC',
             'locale' => 'zh-CN',
+            'version' => self::PACK_VERSION,
             'editable_authority_count' => 1,
             'source_hash_rule' => 'sha256(concat(sorted path + NUL + sha256(canonical decoded JSON) + LF))',
             'compiler' => ['schema' => self::COMPILER_SCHEMA, 'version' => self::COMPILER_VERSION],
             'source_files' => $sourceFiles,
             'source_hash' => $sourceHash,
             'generated' => [
-                'manifest' => 'private_result_authority_manifest.json',
+                'manifest' => 'compiled/manifest.json',
                 'artifact' => 'compiled/'.self::ARTIFACT_FILENAME,
                 'manual_edit_allowed' => false,
             ],
@@ -102,6 +107,8 @@ final class RiasecPrivateResultCompileService
             'authority_id' => self::AUTHORITY_ID,
             'scale_code' => 'RIASEC',
             'locale' => 'zh-CN',
+            'version' => self::PACK_VERSION,
+            'runtime_contract' => 'riasec.report.v1',
             'compiler' => $manifest['compiler'],
             'source_hash' => $sourceHash,
             'coverage' => $coverage,
@@ -109,11 +116,17 @@ final class RiasecPrivateResultCompileService
         ];
         $compiledHash = hash('sha256', $this->canonicalJson($unsignedPayload));
         $payload = $unsignedPayload + ['compiled_hash' => $compiledHash];
+        $bytes = $this->canonicalJson($payload)."\n";
         $manifest['compiled_hash'] = $compiledHash;
+        $manifest['content_hash'] = $sourceHash;
+        $manifest['artifacts'] = [[
+            'path' => self::ARTIFACT_FILENAME,
+            'sha256' => hash('sha256', $bytes),
+        ]];
 
         return [
             'payload' => $payload,
-            'bytes' => $this->canonicalJson($payload)."\n",
+            'bytes' => $bytes,
             'manifest' => $manifest,
             'manifest_bytes' => $this->canonicalJson($manifest)."\n",
             'source_hash' => $sourceHash,
@@ -130,7 +143,7 @@ final class RiasecPrivateResultCompileService
             throw new RuntimeException('Unable to create RIASEC canonical compiled directory.');
         }
 
-        $manifestPath = $this->root().'/private_result_authority_manifest.json';
+        $manifestPath = $compiledDirectory.'/manifest.json';
         $artifactPath = $compiledDirectory.'/'.self::ARTIFACT_FILENAME;
         $this->atomicWrite($manifestPath, $compiled['manifest_bytes']);
         $this->atomicWrite($artifactPath, $compiled['bytes']);
@@ -140,6 +153,21 @@ final class RiasecPrivateResultCompileService
             'compiled_hash' => $compiled['compiled_hash'],
             'manifest_path' => $manifestPath,
             'artifact_path' => $artifactPath,
+        ];
+    }
+
+    /** @return array{ok:bool,pack_id:string,version:string,compiled_dir:string,source_hash:string,compiled_hash:string} */
+    public function compileToPackDirectory(): array
+    {
+        $result = $this->materialize();
+
+        return [
+            'ok' => true,
+            'pack_id' => self::PACK_ID,
+            'version' => self::PACK_VERSION,
+            'compiled_dir' => $this->root().'/compiled',
+            'source_hash' => $result['source_hash'],
+            'compiled_hash' => $result['compiled_hash'],
         ];
     }
 

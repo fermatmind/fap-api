@@ -259,6 +259,10 @@ class MeAttemptsService
                 if ($projectionV2 !== []) {
                     $presented['riasec_public_projection_v2'] = $projectionV2;
                 }
+                $authority = data_get($riasecSnapshotReport, '_meta.riasec_private_result_authority');
+                $presented['riasec_private_result_authority'] = is_array($authority)
+                    ? $authority
+                    : $this->legacyRiasecPrivateResultAuthority((string) ($attempt->locale ?? $locale));
                 $snapshotBinding = data_get($riasecSnapshotReport, '_meta.snapshot_binding_v1');
                 if (is_array($snapshotBinding)) {
                     $presented['riasec_snapshot_binding_v1'] = $snapshotBinding;
@@ -670,6 +674,9 @@ class MeAttemptsService
             'current_top_code' => (string) ($latestScore['top_code'] ?? ''),
             'current_primary_type' => (string) ($latestScore['primary_type'] ?? ''),
             'current_compare_policy_v1' => $this->riasecCompareGuardService->summarizeAttempt($latest, $resultByAttemptId[$latestId] ?? null),
+            'riasec_private_result_authority' => is_array(data_get($snapshotReportByAttemptId[$latestId] ?? [], '_meta.riasec_private_result_authority'))
+                ? data_get($snapshotReportByAttemptId[$latestId], '_meta.riasec_private_result_authority')
+                : $this->legacyRiasecPrivateResultAuthority((string) ($latest->locale ?? '')),
         ];
 
         $previous = $attemptModels[1] ?? null;
@@ -698,6 +705,19 @@ class MeAttemptsService
         }
 
         return $payload;
+    }
+
+    /** @return array<string,string> */
+    private function legacyRiasecPrivateResultAuthority(string $locale): array
+    {
+        return [
+            'schema_version' => 'fap.riasec.private_result_authority.v1',
+            'authority_id' => '',
+            'mode' => 'immutable_legacy_snapshot',
+            'locale' => $locale,
+            'source_hash' => '',
+            'compiled_hash' => '',
+        ];
     }
 
     /**

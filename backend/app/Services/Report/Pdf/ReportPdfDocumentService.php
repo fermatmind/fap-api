@@ -245,6 +245,7 @@ final class ReportPdfDocumentService
             ? data_get($report, '_meta.riasec_public_projection_v2')
             : [];
         $snapshotBinding = $this->extractSnapshotBinding($report);
+        $authority = data_get($report, '_meta.riasec_private_result_authority');
         $formCode = trim((string) (
             data_get($projectionV2, 'form.form_code')
             ?? data_get($snapshotBinding, 'form_code')
@@ -264,11 +265,12 @@ final class ReportPdfDocumentService
             'projection_version' => data_get($projectionV2, 'schema_version'),
             'report_engine_version' => data_get($snapshotBinding, 'report_engine_version'),
             'interpretation_context_id' => null,
-            'content_release_hash' => null,
-            'content_snapshot_status' => null,
+            'content_release_hash' => is_array($authority) ? ($authority['source_hash'] ?? null) : null,
+            'content_snapshot_status' => is_array($authority) ? ($authority['mode'] ?? null) : null,
             'snapshot_binding_v1' => $snapshotBinding,
             'compare_compatibility_group' => data_get($projectionV2, 'form.compare_compatibility_group'),
             'cross_form_comparable' => false,
+            'riasec_private_result_authority' => is_array($authority) ? $authority : [],
         ];
     }
 

@@ -46,8 +46,14 @@ final class Packs2Publish extends Command
             return $compileCode;
         }
 
-        if ($pack === \App\Services\Content\BigFivePrivateResultCompileService::PACK_ID) {
-            $manifest = json_decode((string) file_get_contents(base_path("content_packs/{$pack}/{$packVersion}/compiled/manifest.json")), true);
+        if (in_array($pack, [
+            \App\Services\Content\BigFivePrivateResultCompileService::PACK_ID,
+            \App\Services\Content\RiasecPrivateResultCompileService::PACK_ID,
+        ], true)) {
+            $compiledDir = $pack === \App\Services\Content\RiasecPrivateResultCompileService::PACK_ID
+                ? base_path('content_assets/riasec/compiled')
+                : base_path("content_packs/{$pack}/{$packVersion}/compiled");
+            $manifest = json_decode((string) file_get_contents($compiledDir.'/manifest.json'), true);
             $compiledHash = strtolower(trim((string) ($manifest['compiled_hash'] ?? '')));
             $activeReleaseId = DB::table('content_pack_activations')
                 ->where('pack_id', $pack)

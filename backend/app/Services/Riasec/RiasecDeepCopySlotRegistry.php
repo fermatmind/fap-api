@@ -1241,15 +1241,7 @@ final class RiasecDeepCopySlotRegistry
             return $this->dimensionContentCache;
         }
 
-        $path = dirname(__DIR__, 3).self::DIMENSION_ASSET_PATH;
-        if (! is_file($path)) {
-            return $this->dimensionContentCache = [];
-        }
-
-        $decoded = json_decode((string) file_get_contents($path), true);
-        if (! is_array($decoded)) {
-            return $this->dimensionContentCache = [];
-        }
+        $decoded = $this->privateResultSource->asset(basename(self::DIMENSION_ASSET_PATH));
 
         $dimensions = $decoded['dimensions'] ?? null;
         if (! is_array($dimensions)) {
@@ -1318,14 +1310,8 @@ final class RiasecDeepCopySlotRegistry
             return $this->pairBlendContentCache;
         }
 
-        $path = dirname(__DIR__, 3).self::PAIR_BLEND_ASSET_PATH;
-        if (! is_file($path)) {
-            return $this->pairBlendContentCache = [];
-        }
-
         $slots = [];
-        foreach (file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
-            $decoded = json_decode($line, true);
+        foreach ($this->privateResultSource->asset(basename(self::PAIR_BLEND_ASSET_PATH)) as $decoded) {
             if (! is_array($decoded)) {
                 continue;
             }
@@ -1402,14 +1388,8 @@ final class RiasecDeepCopySlotRegistry
             return $this->top3ChainContentCache;
         }
 
-        $path = dirname(__DIR__, 3).self::TOP3_CHAIN_ASSET_PATH;
-        if (! is_file($path)) {
-            return $this->top3ChainContentCache = [];
-        }
-
         $slots = [];
-        foreach (file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
-            $decoded = json_decode($line, true);
+        foreach ($this->privateResultSource->asset(basename(self::TOP3_CHAIN_ASSET_PATH)) as $decoded) {
             if (! is_array($decoded)) {
                 continue;
             }
@@ -1490,14 +1470,8 @@ final class RiasecDeepCopySlotRegistry
             return $this->layer140qContentCache;
         }
 
-        $path = dirname(__DIR__, 3).self::LAYER_140Q_ASSET_PATH;
-        if (! is_file($path)) {
-            return $this->layer140qContentCache = [];
-        }
-
         $slots = [];
-        foreach (file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
-            $decoded = json_decode($line, true);
+        foreach ($this->privateResultSource->asset(basename(self::LAYER_140Q_ASSET_PATH)) as $decoded) {
             if (! is_array($decoded)) {
                 continue;
             }
@@ -2016,21 +1990,7 @@ final class RiasecDeepCopySlotRegistry
      */
     private function jsonlAssetRows(string $relativePath): array
     {
-        $path = dirname(__DIR__, 3).$relativePath;
-        if (! is_file($path)) {
-            return [];
-        }
-
-        $rows = [];
-        foreach (file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
-            $decoded = json_decode($line, true);
-            if (! is_array($decoded)) {
-                return [];
-            }
-            $rows[] = $decoded;
-        }
-
-        return $rows;
+        return array_values($this->privateResultSource->asset(basename($relativePath)));
     }
 
     /**
@@ -2172,14 +2132,7 @@ final class RiasecDeepCopySlotRegistry
      */
     private function jsonAsset(string $relativePath): array
     {
-        $path = dirname(__DIR__, 3).$relativePath;
-        if (! is_file($path)) {
-            return [];
-        }
-
-        $decoded = json_decode((string) file_get_contents($path), true);
-
-        return is_array($decoded) ? $decoded : [];
+        return $this->privateResultSource->asset(basename($relativePath));
     }
 
     /**

@@ -868,7 +868,7 @@ class ReportGatekeeper
     private function snapshotReportForVariant(object $snapshotRow, string $variant): array
     {
         if (ReportAccess::normalizeVariant($variant) === ReportAccess::VARIANT_FREE) {
-            return $this->markLegacyBigFiveSnapshot(
+            return $this->markLegacyPrivateResultSnapshot(
                 $this->decodeReportJson($snapshotRow->report_free_json ?? null),
                 $snapshotRow,
             );
@@ -876,30 +876,42 @@ class ReportGatekeeper
 
         $report = $this->decodeReportJson($snapshotRow->report_full_json ?? null);
         if ($report !== []) {
-            return $this->markLegacyBigFiveSnapshot($report, $snapshotRow);
+            return $this->markLegacyPrivateResultSnapshot($report, $snapshotRow);
         }
 
-        return $this->markLegacyBigFiveSnapshot(
+        return $this->markLegacyPrivateResultSnapshot(
             $this->decodeReportJson($snapshotRow->report_json ?? null),
             $snapshotRow,
         );
     }
 
     /** @param array<string,mixed> $report @return array<string,mixed> */
-    private function markLegacyBigFiveSnapshot(array $report, object $snapshotRow): array
+    private function markLegacyPrivateResultSnapshot(array $report, object $snapshotRow): array
     {
-        if (strtoupper(trim((string) ($snapshotRow->scale_code ?? ''))) !== 'BIG5_OCEAN'
-            || $report === []
-            || is_array(data_get($report, '_meta.big5_private_result_authority'))) {
+        $scaleCode = strtoupper(trim((string) ($snapshotRow->scale_code ?? '')));
+        if ($report === []) {
             return $report;
         }
-        data_set($report, '_meta.big5_private_result_authority', [
-            'schema_version' => 'fap.big5.private_result_authority.v1',
-            'mode' => 'immutable_legacy_snapshot',
-            'locale' => (string) ($report['locale'] ?? ''),
-            'source_hash' => '',
-            'compiled_hash' => '',
-        ]);
+
+        if ($scaleCode === 'BIG5_OCEAN' && ! is_array(data_get($report, '_meta.big5_private_result_authority'))) {
+            data_set($report, '_meta.big5_private_result_authority', [
+                'schema_version' => 'fap.big5.private_result_authority.v1',
+                'mode' => 'immutable_legacy_snapshot',
+                'locale' => (string) ($report['locale'] ?? ''),
+                'source_hash' => '',
+                'compiled_hash' => '',
+            ]);
+        }
+        if ($scaleCode === 'RIASEC' && ! is_array(data_get($report, '_meta.riasec_private_result_authority'))) {
+            data_set($report, '_meta.riasec_private_result_authority', [
+                'schema_version' => 'fap.riasec.private_result_authority.v1',
+                'authority_id' => '',
+                'mode' => 'immutable_legacy_snapshot',
+                'locale' => (string) ($report['locale'] ?? ''),
+                'source_hash' => '',
+                'compiled_hash' => '',
+            ]);
+        }
 
         return $report;
     }

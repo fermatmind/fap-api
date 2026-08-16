@@ -32,6 +32,7 @@ final class RiasecActivityExplorerService
     public function __construct(
         private readonly ?string $activityTaskAssetPath = null,
         private readonly ?string $occupationExampleAssetPath = null,
+        private readonly RiasecPrivateResultSourceRepository $privateResultSource = new RiasecPrivateResultSourceRepository,
     ) {}
 
     /**
@@ -245,24 +246,16 @@ final class RiasecActivityExplorerService
     {
         static $cache = [];
 
-        $assetPath = $this->activityTaskAssetPath ?? self::ACTIVITY_TASK_ASSET_PATH;
+        $assetPath = $this->activityTaskAssetPath ?? 'canonical:'.self::ACTIVITY_TASK_ASSET_PATH;
         if (array_key_exists($assetPath, $cache)) {
             return $cache[$assetPath];
         }
 
-        $path = $this->resolveAssetPath($assetPath);
-        if (! is_file($path) || ! is_readable($path)) {
-            return $cache[$assetPath] = [];
-        }
-
+        $decodedRows = $this->activityTaskAssetPath === null
+            ? $this->privateResultSource->asset(basename(self::ACTIVITY_TASK_ASSET_PATH))
+            : $this->decodeJsonLinesFile($this->resolveAssetPath($assetPath));
         $rows = [];
-        foreach (file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
-            try {
-                $decoded = json_decode($line, true, 512, JSON_THROW_ON_ERROR);
-            } catch (\JsonException) {
-                return $cache[$assetPath] = [];
-            }
-
+        foreach ($decodedRows as $decoded) {
             if (! is_array($decoded) || ! $this->isValidActivityTaskRow($decoded)) {
                 return $cache[$assetPath] = [];
             }
@@ -396,19 +389,11 @@ final class RiasecActivityExplorerService
             return $cache;
         }
 
-        $path = $this->resolveAssetPath($this->occupationExampleAssetPath ?? self::OCCUPATION_EXAMPLE_ASSET_PATH);
-        if (! is_file($path) || ! is_readable($path)) {
-            return $cache = [];
-        }
-
+        $decodedRows = $this->occupationExampleAssetPath === null
+            ? $this->privateResultSource->asset(basename(self::OCCUPATION_EXAMPLE_ASSET_PATH))
+            : $this->decodeJsonLinesFile($this->resolveAssetPath($this->occupationExampleAssetPath));
         $rowsByDimension = [];
-        foreach (file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
-            try {
-                $decoded = json_decode($line, true, 512, JSON_THROW_ON_ERROR);
-            } catch (\JsonException) {
-                return $cache = [];
-            }
-
+        foreach ($decodedRows as $decoded) {
             if (! is_array($decoded) || ! $this->isValidOccupationExampleRow($decoded)) {
                 return $cache = [];
             }
@@ -506,8 +491,7 @@ final class RiasecActivityExplorerService
     /** @return array<string,array<string,mixed>> */
     private function dimensionContentByCode(): array
     {
-        $path = $this->resolveAssetPath(self::DIMENSION_ASSET_PATH);
-        $decoded = is_file($path) ? json_decode((string) file_get_contents($path), true) : null;
+        $decoded = $this->privateResultSource->asset(basename(self::DIMENSION_ASSET_PATH));
         $rows = is_array($decoded['dimensions'] ?? null) ? $decoded['dimensions'] : [];
         $byCode = [];
         foreach ($rows as $row) {
@@ -534,5 +518,28 @@ final class RiasecActivityExplorerService
         }
 
         return '';
+    }
+
+    /** @return list<array<string,mixed>> */
+    private function decodeJsonLinesFile(string $path): array
+    {
+        if (! is_file($path) || ! is_readable($path)) {
+            return [];
+        }
+
+        $rows = [];
+        foreach (file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
+            try {
+                $decoded = json_decode($line, true, 512, JSON_THROW_ON_ERROR);
+            } catch (\JsonException) {
+                return [];
+            }
+            if (! is_array($decoded)) {
+                return [];
+            }
+            $rows[] = $decoded;
+        }
+
+        return $rows;
     }
 }

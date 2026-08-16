@@ -9,6 +9,7 @@ use App\Services\Content\BigFivePrivateResultCompileService;
 use App\Services\Content\ClinicalComboContentLintService;
 use App\Services\Content\ContentLintService;
 use App\Services\Content\Eq60ContentLintService;
+use App\Services\Content\RiasecPrivateResultCompileService;
 use App\Services\Content\Sds20ContentLintService;
 use Illuminate\Console\Command;
 
@@ -26,7 +27,9 @@ final class ContentLint extends Command
         BigFiveContentLintService $bigFiveLint,
         ClinicalComboContentLintService $clinicalLint,
         Sds20ContentLintService $sds20Lint,
-        Eq60ContentLintService $eq60Lint, BigFivePrivateResultCompileService $bigFivePrivateResultCompile
+        Eq60ContentLintService $eq60Lint,
+        BigFivePrivateResultCompileService $bigFivePrivateResultCompile,
+        RiasecPrivateResultCompileService $riasecPrivateResultCompile,
     ): int {
         $pack = $this->option('pack');
         $version = $this->option('pack-version');
@@ -41,6 +44,21 @@ final class ContentLint extends Command
                 'ok' => true,
                 'pack_id' => BigFivePrivateResultCompileService::PACK_ID,
                 'version' => BigFivePrivateResultCompileService::PACK_VERSION,
+                'source_hash' => $compiled['source_hash'],
+                'compiled_hash' => $compiled['compiled_hash'],
+            ];
+            $result = ['ok' => true, 'packs' => [$single]];
+        } elseif (is_string($pack) && strtoupper(trim($pack)) === RiasecPrivateResultCompileService::PACK_ID) {
+            if (trim((string) $version) !== RiasecPrivateResultCompileService::PACK_VERSION) {
+                $this->error('RIASEC_PRIVATE_RESULT supports only the stable v1 path.');
+
+                return self::FAILURE;
+            }
+            $compiled = $riasecPrivateResultCompile->compile();
+            $single = [
+                'ok' => true,
+                'pack_id' => RiasecPrivateResultCompileService::PACK_ID,
+                'version' => RiasecPrivateResultCompileService::PACK_VERSION,
                 'source_hash' => $compiled['source_hash'],
                 'compiled_hash' => $compiled['compiled_hash'],
             ];

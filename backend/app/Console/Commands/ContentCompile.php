@@ -9,6 +9,7 @@ use App\Services\Content\BigFivePrivateResultCompileService;
 use App\Services\Content\ClinicalComboContentCompileService;
 use App\Services\Content\ContentCompileService;
 use App\Services\Content\Eq60ContentCompileService;
+use App\Services\Content\RiasecPrivateResultCompileService;
 use App\Services\Content\Sds20ContentCompileService;
 use Illuminate\Console\Command;
 
@@ -26,7 +27,9 @@ final class ContentCompile extends Command
         BigFiveContentCompileService $bigFiveCompile,
         ClinicalComboContentCompileService $clinicalCompile,
         Sds20ContentCompileService $sds20Compile,
-        Eq60ContentCompileService $eq60Compile, BigFivePrivateResultCompileService $bigFivePrivateResultCompile
+        Eq60ContentCompileService $eq60Compile,
+        BigFivePrivateResultCompileService $bigFivePrivateResultCompile,
+        RiasecPrivateResultCompileService $riasecPrivateResultCompile,
     ): int {
         $pack = $this->option('pack');
         $version = $this->option('pack-version');
@@ -37,6 +40,14 @@ final class ContentCompile extends Command
                 return self::FAILURE;
             }
             $single = $bigFivePrivateResultCompile->compileToPackDirectory();
+            $result = ['ok' => true, 'packs' => [$single]];
+        } elseif (is_string($pack) && strtoupper(trim($pack)) === RiasecPrivateResultCompileService::PACK_ID) {
+            if (trim((string) $version) !== RiasecPrivateResultCompileService::PACK_VERSION) {
+                $this->error('RIASEC_PRIVATE_RESULT supports only the stable v1 path.');
+
+                return self::FAILURE;
+            }
+            $single = $riasecPrivateResultCompile->compileToPackDirectory();
             $result = ['ok' => true, 'packs' => [$single]];
         } elseif (is_string($pack) && strtoupper(trim($pack)) === 'BIG5_OCEAN') {
             $single = $bigFiveCompile->compile(is_string($version) ? $version : null);

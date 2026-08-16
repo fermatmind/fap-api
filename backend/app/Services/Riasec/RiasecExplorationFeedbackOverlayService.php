@@ -20,6 +20,10 @@ final class RiasecExplorationFeedbackOverlayService
     /** @var list<array<string,mixed>>|null */
     private ?array $nextExplorationNodeRowsCache = null;
 
+    public function __construct(
+        private readonly RiasecPrivateResultSourceRepository $privateResultSource = new RiasecPrivateResultSourceRepository,
+    ) {}
+
     /**
      * @return array<string,mixed>
      */
@@ -305,21 +309,7 @@ final class RiasecExplorationFeedbackOverlayService
      */
     private function jsonlAssetRows(string $relativePath): array
     {
-        $path = dirname(__DIR__, 3).$relativePath;
-        if (! is_file($path)) {
-            return [];
-        }
-
-        $rows = [];
-        foreach (file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
-            $decoded = json_decode($line, true);
-            if (! is_array($decoded)) {
-                return [];
-            }
-            $rows[] = $decoded;
-        }
-
-        return $rows;
+        return array_values($this->privateResultSource->asset(basename($relativePath)));
     }
 
     /**
