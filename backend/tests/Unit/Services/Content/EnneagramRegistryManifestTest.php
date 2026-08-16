@@ -22,17 +22,18 @@ final class EnneagramRegistryManifestTest extends TestCase
         $registryKeys = collect((array) ($manifest['registries'] ?? []))->pluck('registry_key')->all();
 
         $this->assertSame([
-            'enneagram_type_registry',
-            'enneagram_pair_registry',
             'enneagram_group_registry',
+            'enneagram_method_registry',
+            'enneagram_observation_registry',
+            'enneagram_pair_registry',
+            'enneagram_sample_report_registry',
             'enneagram_scenario_registry',
             'enneagram_state_registry',
-            'enneagram_theory_hint_registry',
-            'enneagram_observation_registry',
-            'enneagram_method_registry',
-            'enneagram_ui_copy_registry',
-            'enneagram_sample_report_registry',
+            'enneagram_surface_registry',
             'enneagram_technical_note_registry',
+            'enneagram_theory_hint_registry',
+            'enneagram_type_registry',
+            'enneagram_ui_copy_registry',
         ], $registryKeys);
     }
 }

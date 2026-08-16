@@ -8,6 +8,7 @@ use App\Services\Content\BigFiveContentCompileService;
 use App\Services\Content\BigFivePrivateResultCompileService;
 use App\Services\Content\ClinicalComboContentCompileService;
 use App\Services\Content\ContentCompileService;
+use App\Services\Content\EnneagramPrivateResultCompileService;
 use App\Services\Content\Eq60ContentCompileService;
 use App\Services\Content\RiasecPrivateResultCompileService;
 use App\Services\Content\Sds20ContentCompileService;
@@ -30,6 +31,7 @@ final class ContentCompile extends Command
         Eq60ContentCompileService $eq60Compile,
         BigFivePrivateResultCompileService $bigFivePrivateResultCompile,
         RiasecPrivateResultCompileService $riasecPrivateResultCompile,
+        EnneagramPrivateResultCompileService $enneagramPrivateResultCompile,
     ): int {
         $pack = $this->option('pack');
         $version = $this->option('pack-version');
@@ -40,6 +42,14 @@ final class ContentCompile extends Command
                 return self::FAILURE;
             }
             $single = $bigFivePrivateResultCompile->compileToPackDirectory();
+            $result = ['ok' => true, 'packs' => [$single]];
+        } elseif (is_string($pack) && strtoupper(trim($pack)) === EnneagramPrivateResultCompileService::PACK_ID) {
+            if (trim((string) $version) !== EnneagramPrivateResultCompileService::PACK_VERSION) {
+                $this->error('ENNEAGRAM_PRIVATE_RESULT supports only the stable v2 path.');
+
+                return self::FAILURE;
+            }
+            $single = $enneagramPrivateResultCompile->compileToPackDirectory();
             $result = ['ok' => true, 'packs' => [$single]];
         } elseif (is_string($pack) && strtoupper(trim($pack)) === RiasecPrivateResultCompileService::PACK_ID) {
             if (trim((string) $version) !== RiasecPrivateResultCompileService::PACK_VERSION) {

@@ -1,0 +1,34 @@
+{
+  "schema_version": "fap.enneagram.surface_registry.v1",
+  "registry_key": "enneagram_surface_registry",
+  "id": "ENNEAGRAM.surface.zh-CN.v1",
+  "version": "1.0.0",
+  "locale": "zh-CN",
+  "form_variant": "all",
+  "context_mode": "individual",
+  "status": "published",
+  "content_maturity": "p0_ready",
+  "evidence_level": "descriptive",
+  "fallback_policy": "none",
+  "preview_enabled": false,
+  "release_id": "enneagram_registry_canonical_v2",
+  "content_release_hash": "derived_by_compiler",
+  "content_snapshot_hash": "derived_by_compiler",
+  "entries": {
+    "page_specs": {
+      "page_1_result_overview": {"title": "结果总览", "purpose": "输出当前结果结构、辨析边界和主候选阅读方式。", "modules": ["instant_summary", "top3_cards", "type_deep_dive_summary", "all9_profile", "close_call_card", "blind_spot_card", "wing_hint_visual"]},
+      "page_2_work_reality": {"title": "工作现实", "purpose": "输出工作风格、协作优势、摩擦点和工作触发点。", "modules": ["work_style_summary", "collaboration_strengths", "collaboration_friction", "leadership_pattern", "managed_by_others", "workplace_trigger_points"]},
+      "page_3_growth_spectrum": {"title": "成长光谱", "purpose": "输出成长轴、代价表达、压力信号和恢复动作。", "modules": ["growth_axis", "strength_expression", "cost_expression", "stress_trigger", "recovery_action", "state_spectrum"]},
+      "page_4_relationship_conflict": {"title": "关系与冲突", "purpose": "输出关系需要、冲突脚本和沟通说明书。", "modules": ["relationship_need", "relationship_strengths", "misread_by_others", "conflict_script", "communication_manual"]},
+      "page_5_method_observation_next": {"title": "方法、观察与下一步", "purpose": "输出方法边界、七天观察、样例和技术说明入口。", "modules": ["method_boundary", "seven_day_observation", "form_recommendation", "sample_report_link", "technical_note_link"]}
+    },
+    "faq": {"title": "常见问题", "items": [{"question": "这个结果是在给我定型吗？", "answer": "不是。结果是基于本次作答形成的解释假设，应结合真实情境和持续观察阅读。"}, {"question": "E105 和 FC144 的分数能直接比较吗？", "answer": "不能。两种题型共享同一九型内容模型，但作答任务和计分空间不同。"}]},
+    "technical_note": {"title": "技术说明", "summary": "说明题型、计分空间、解释边界、数据状态和隐私处理，不提供诊断、招聘筛选或确定性人格结论。", "disclaimers": [{"key": "not_diagnostic", "label": "非诊断用途", "copy": "本测试用于人格模式理解与自我观察，不用于临床诊断或治疗建议。"}, {"key": "not_clinical", "label": "非临床效度声明", "copy": "当前版本不声明外部临床效度、准确率或预测能力。"}, {"key": "not_hiring_screening", "label": "非招聘筛选用途", "copy": "本测试不用于招聘、晋升或淘汰判断，也不适合做雇佣筛选工具。"}, {"key": "no_hard_theory_judgement", "label": "非硬判理论层", "copy": "wing、arrow、subtype、health level 在当前版本不作为系统硬判结论。"}, {"key": "no_cross_form_numeric_compare", "label": "跨 form 数值不直比", "copy": "E105 与 FC144 属于同一模型，但分数空间不同，不默认做跨 form 数值比较。"}, {"key": "user_confirmed_type_boundary", "label": "自我观察确认边界", "copy": "user_confirmed_type 只作为自我观察证据保存，不会静默改写系统 primary_candidate。"}]},
+    "share": {"title": "我的九型观察", "summary": "这是一次私有的自我观察结果；类型候选用于反思，不是固定标签。", "method_boundary": "E105 与 FC144 使用不同计分空间，分享内容不展示原始答案或私有识别信息。"},
+    "pdf": {"title": "九型人格私有结果报告", "footer": "仅供自我观察与复盘，不用于诊断、能力评价、招聘或人员决策。"},
+    "print": {"title": "九型人格结果打印版", "footer": "打印内容来自本次结果的 immutable canonical snapshot。"},
+    "history": {"title": "历史结果", "summary": "历史结果按完成时的不可变内容快照展示，不使用当前正文重算。"},
+    "compare": {"title": "结果对比", "summary": "仅比较兼容题型和计分空间内的结果；E105 与 FC144 不做数值直比。"},
+    "secondary": {"missing_payload": "结果正文不完整，当前页面无法安全展示。", "hash_mismatch": "结果内容校验失败，当前页面无法安全展示。"}
+  }
+}

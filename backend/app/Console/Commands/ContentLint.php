@@ -8,6 +8,7 @@ use App\Services\Content\BigFiveContentLintService;
 use App\Services\Content\BigFivePrivateResultCompileService;
 use App\Services\Content\ClinicalComboContentLintService;
 use App\Services\Content\ContentLintService;
+use App\Services\Content\EnneagramPrivateResultCompileService;
 use App\Services\Content\Eq60ContentLintService;
 use App\Services\Content\RiasecPrivateResultCompileService;
 use App\Services\Content\Sds20ContentLintService;
@@ -30,6 +31,7 @@ final class ContentLint extends Command
         Eq60ContentLintService $eq60Lint,
         BigFivePrivateResultCompileService $bigFivePrivateResultCompile,
         RiasecPrivateResultCompileService $riasecPrivateResultCompile,
+        EnneagramPrivateResultCompileService $enneagramPrivateResultCompile,
     ): int {
         $pack = $this->option('pack');
         $version = $this->option('pack-version');
@@ -47,6 +49,15 @@ final class ContentLint extends Command
                 'source_hash' => $compiled['source_hash'],
                 'compiled_hash' => $compiled['compiled_hash'],
             ];
+            $result = ['ok' => true, 'packs' => [$single]];
+        } elseif (is_string($pack) && strtoupper(trim($pack)) === EnneagramPrivateResultCompileService::PACK_ID) {
+            if (trim((string) $version) !== EnneagramPrivateResultCompileService::PACK_VERSION) {
+                $this->error('ENNEAGRAM_PRIVATE_RESULT supports only the stable v2 path.');
+
+                return self::FAILURE;
+            }
+            $compiled = $enneagramPrivateResultCompile->compile();
+            $single = ['ok' => true, 'pack_id' => EnneagramPrivateResultCompileService::PACK_ID, 'version' => EnneagramPrivateResultCompileService::PACK_VERSION, 'source_hash' => $compiled['source_hash'], 'compiled_hash' => $compiled['compiled_hash']];
             $result = ['ok' => true, 'packs' => [$single]];
         } elseif (is_string($pack) && strtoupper(trim($pack)) === RiasecPrivateResultCompileService::PACK_ID) {
             if (trim((string) $version) !== RiasecPrivateResultCompileService::PACK_VERSION) {

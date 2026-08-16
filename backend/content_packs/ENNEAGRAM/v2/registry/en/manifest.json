@@ -1,68 +1,19 @@
 {
-    "schema_version": "fap.enneagram.registry_manifest.v1",
-    "scale_code": "ENNEAGRAM",
-    "registry_version": "enneagram_registry.v1",
-    "release_id": "enneagram_registry_pack_v1_p0_ready_2026_04_en",
-    "content_release_hash": "sha256:pending_loader_resolution",
-    "registries": [
+    "artifacts": [
         {
-            "registry_key": "enneagram_type_registry",
-            "file": "type_registry.json"
-        },
-        {
-            "registry_key": "enneagram_pair_registry",
-            "file": "pair_registry.json"
-        },
-        {
-            "registry_key": "enneagram_group_registry",
-            "file": "group_registry.json"
-        },
-        {
-            "registry_key": "enneagram_scenario_registry",
-            "file": "scenario_registry.json"
-        },
-        {
-            "registry_key": "enneagram_state_registry",
-            "file": "state_registry.json"
-        },
-        {
-            "registry_key": "enneagram_theory_hint_registry",
-            "file": "theory_hint_registry.json"
-        },
-        {
-            "registry_key": "enneagram_observation_registry",
-            "file": "observation_registry.json"
-        },
-        {
-            "registry_key": "enneagram_method_registry",
-            "file": "method_registry.json"
-        },
-        {
-            "registry_key": "enneagram_ui_copy_registry",
-            "file": "ui_copy_registry.json"
-        },
-        {
-            "registry_key": "enneagram_sample_report_registry",
-            "file": "sample_report_registry.json"
-        },
-        {
-            "registry_key": "enneagram_technical_note_registry",
-            "file": "technical_note_registry.json"
+            "path": "private_result.compiled.json",
+            "sha256": "af9ca1065ae8f4d18ed72b3341164a40a38c7be3183a03783cb3f1457cc9c24e"
         }
     ],
-    "locales": [
-        "en"
-    ],
-    "supported_form_variants": [
-        "all",
-        "e105",
-        "fc144"
-    ],
-    "supported_context_modes": [
-        "individual",
-        "workplace",
-        "team"
-    ],
+    "authority_id": "FERMATMIND_ENNEAGRAM_PRIVATE_RESULT_CANONICAL",
+    "authority_root": "backend/content_packs/ENNEAGRAM/v2/registry",
+    "compiled_hash": "e6283f5fe6ece9cbd1a9fdc86016bd7e02235e3888ee3adb448465f21ced7c68",
+    "compiled_hash_rule": "sha256(canonical JSON of compiled payload excluding compiled_hash)",
+    "compiler": {
+        "schema": "fap.enneagram.private_result.compiler.v1",
+        "version": "1.0.0"
+    },
+    "content_hash": "2a63207b9131b085d59dfaf67c0a937de3bad8eb6fd47a31d77ac14d642c86ca",
     "content_maturity_values": [
         "scaffold",
         "p0_placeholder",
@@ -71,11 +22,873 @@
         "experimental",
         "deprecated"
     ],
+    "coverage": {
+        "forms": [
+            "e105",
+            "fc144"
+        ],
+        "groups": [
+            "centers",
+            "stances",
+            "harmonics"
+        ],
+        "interpretation_states": [
+            "clear",
+            "close_call",
+            "diffuse",
+            "low_quality"
+        ],
+        "locales": [
+            "zh-CN",
+            "en"
+        ],
+        "pair_count": 36,
+        "scenarios": [
+            "work",
+            "relationship",
+            "growth",
+            "state",
+            "observation"
+        ],
+        "secondary_surfaces": [
+            "faq",
+            "technical_note",
+            "share",
+            "pdf",
+            "print",
+            "history",
+            "compare",
+            "secondary"
+        ],
+        "types": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+        ]
+    },
+    "editable_authority_count": 1,
     "evidence_level_values": [
         "descriptive",
         "theory_based",
         "data_supported",
         "validated_internal",
         "validated_external"
+    ],
+    "generated": {
+        "artifact": "compiled/private_result.compiled.json",
+        "manifest": "compiled/manifest.json",
+        "manual_edit_allowed": false
+    },
+    "locale": "en",
+    "locale_source_files": {
+        "en": [
+            {
+                "consumer_surfaces": [
+                    "result",
+                    "report"
+                ],
+                "locale": "en",
+                "path": "en/group_registry.json",
+                "registry_key": "enneagram_group_registry",
+                "required_fields": [
+                    "schema_version",
+                    "registry_key",
+                    "locale",
+                    "entries"
+                ],
+                "role": "centers, stances, and harmonics",
+                "schema": "fap.enneagram.group_registry.v1",
+                "sha256": "93ff6b93540ed41184de17a9f047f70c01237204d4a2e959c684eed0ae00399c"
+            },
+            {
+                "consumer_surfaces": [
+                    "result",
+                    "report",
+                    "technical_note",
+                    "compare"
+                ],
+                "locale": "en",
+                "path": "en/method_registry.json",
+                "registry_key": "enneagram_method_registry",
+                "required_fields": [
+                    "schema_version",
+                    "registry_key",
+                    "locale",
+                    "entries"
+                ],
+                "role": "E105 and FC144 method boundaries",
+                "schema": "fap.enneagram.method_registry.v1",
+                "sha256": "2941b24d045e26a9936cb59d94adc1edcafae6a6f0b6e5c2126f4533216785c9"
+            },
+            {
+                "consumer_surfaces": [
+                    "result",
+                    "history"
+                ],
+                "locale": "en",
+                "path": "en/observation_registry.json",
+                "registry_key": "enneagram_observation_registry",
+                "required_fields": [
+                    "schema_version",
+                    "registry_key",
+                    "locale",
+                    "entries"
+                ],
+                "role": "observation workflow copy",
+                "schema": "fap.enneagram.observation_registry.v1",
+                "sha256": "3aedae8c99d56ea52577bdb2b5912f240e7e66b030725c175ae3bfe37d6c31d1"
+            },
+            {
+                "consumer_surfaces": [
+                    "result",
+                    "report",
+                    "pdf",
+                    "history",
+                    "compare",
+                    "share"
+                ],
+                "locale": "en",
+                "path": "en/pair_registry.json",
+                "registry_key": "enneagram_pair_registry",
+                "required_fields": [
+                    "schema_version",
+                    "registry_key",
+                    "locale",
+                    "entries"
+                ],
+                "role": "all 36 close-call comparisons",
+                "schema": "fap.enneagram.pair_registry.v1",
+                "sha256": "7ed760f00a814a74596dda4d5324c43a03d3eb3d61d35c608b803d842f69bf7c"
+            },
+            {
+                "consumer_surfaces": [
+                    "result",
+                    "report"
+                ],
+                "locale": "en",
+                "path": "en/sample_report_registry.json",
+                "registry_key": "enneagram_sample_report_registry",
+                "required_fields": [
+                    "schema_version",
+                    "registry_key",
+                    "locale",
+                    "entries"
+                ],
+                "role": "canonical sample reports",
+                "schema": "fap.enneagram.sample_report_registry.v1",
+                "sha256": "319ecf7fc47508b5380b97f67f3ea8008f054831394395a2ca710136e06e9885"
+            },
+            {
+                "consumer_surfaces": [
+                    "result",
+                    "report"
+                ],
+                "locale": "en",
+                "path": "en/scenario_registry.json",
+                "registry_key": "enneagram_scenario_registry",
+                "required_fields": [
+                    "schema_version",
+                    "registry_key",
+                    "locale",
+                    "entries"
+                ],
+                "role": "work, relationship, growth, and scenario copy",
+                "schema": "fap.enneagram.scenario_registry.v1",
+                "sha256": "ffdbea30aa6306e4324d2d6ad81559225bc24e3d1af818cc82e0cfc692373360"
+            },
+            {
+                "consumer_surfaces": [
+                    "result",
+                    "report"
+                ],
+                "locale": "en",
+                "path": "en/state_registry.json",
+                "registry_key": "enneagram_state_registry",
+                "required_fields": [
+                    "schema_version",
+                    "registry_key",
+                    "locale",
+                    "entries"
+                ],
+                "role": "state spectrum copy",
+                "schema": "fap.enneagram.state_registry.v1",
+                "sha256": "33320c6d66c98ad2cfaef6c8a28186355cccdaa5d4124ba2b89eadd4d675268b"
+            },
+            {
+                "consumer_surfaces": [
+                    "result",
+                    "report",
+                    "faq",
+                    "technical_note",
+                    "share",
+                    "pdf",
+                    "print",
+                    "history",
+                    "compare"
+                ],
+                "locale": "en",
+                "path": "en/surface_registry.json",
+                "registry_key": "enneagram_surface_registry",
+                "required_fields": [
+                    "schema_version",
+                    "registry_key",
+                    "locale",
+                    "entries"
+                ],
+                "role": "page, FAQ, share, PDF, print, history, compare, and secondary surface copy",
+                "schema": "fap.enneagram.surface_registry.v1",
+                "sha256": "04b4c99f5a2fe38e046dbb665b34097b411c7326a8a2c061656d4e35f953f2b7"
+            },
+            {
+                "consumer_surfaces": [
+                    "technical_note",
+                    "result",
+                    "report",
+                    "pdf"
+                ],
+                "locale": "en",
+                "path": "en/technical_note_registry.json",
+                "registry_key": "enneagram_technical_note_registry",
+                "required_fields": [
+                    "schema_version",
+                    "registry_key",
+                    "locale",
+                    "entries"
+                ],
+                "role": "technical note sections",
+                "schema": "fap.enneagram.technical_note_registry.v1",
+                "sha256": "370ba7212808067c520650dd500ab4425fdd34ed6457faf377257d384fd5a2b4"
+            },
+            {
+                "consumer_surfaces": [
+                    "result",
+                    "report"
+                ],
+                "locale": "en",
+                "path": "en/theory_hint_registry.json",
+                "registry_key": "enneagram_theory_hint_registry",
+                "required_fields": [
+                    "schema_version",
+                    "registry_key",
+                    "locale",
+                    "entries"
+                ],
+                "role": "bounded theory hints",
+                "schema": "fap.enneagram.theory_hint_registry.v1",
+                "sha256": "ca07e0784cbb42cb50b73fd5a9da43771a2c4c1f9e0c38795e365d003d622ed7"
+            },
+            {
+                "consumer_surfaces": [
+                    "result",
+                    "report",
+                    "pdf",
+                    "history",
+                    "share"
+                ],
+                "locale": "en",
+                "path": "en/type_registry.json",
+                "registry_key": "enneagram_type_registry",
+                "required_fields": [
+                    "schema_version",
+                    "registry_key",
+                    "locale",
+                    "entries"
+                ],
+                "role": "nine type private-result bodies",
+                "schema": "fap.enneagram.type_registry.v1",
+                "sha256": "6026115290a4c3b8aa8f7d743b12c56bdaef65ea4b02344aeb0ab36f9b93b704"
+            },
+            {
+                "consumer_surfaces": [
+                    "result",
+                    "report"
+                ],
+                "locale": "en",
+                "path": "en/ui_copy_registry.json",
+                "registry_key": "enneagram_ui_copy_registry",
+                "required_fields": [
+                    "schema_version",
+                    "registry_key",
+                    "locale",
+                    "entries"
+                ],
+                "role": "result states and form labels",
+                "schema": "fap.enneagram.ui_copy_registry.v1",
+                "sha256": "ca7fc989564154be9a8c60d2cd7feaff0c331adb146ceccedb8ef7274ddb5faf"
+            }
+        ],
+        "zh-CN": [
+            {
+                "consumer_surfaces": [
+                    "result",
+                    "report"
+                ],
+                "locale": "zh-CN",
+                "path": "group_registry.json",
+                "registry_key": "enneagram_group_registry",
+                "required_fields": [
+                    "schema_version",
+                    "registry_key",
+                    "locale",
+                    "entries"
+                ],
+                "role": "centers, stances, and harmonics",
+                "schema": "fap.enneagram.group_registry.v1",
+                "sha256": "61cfb858e69ff6cf006864e75f145f9e94055acb5e65a7d144f7b638d5f3b396"
+            },
+            {
+                "consumer_surfaces": [
+                    "result",
+                    "report",
+                    "technical_note",
+                    "compare"
+                ],
+                "locale": "zh-CN",
+                "path": "method_registry.json",
+                "registry_key": "enneagram_method_registry",
+                "required_fields": [
+                    "schema_version",
+                    "registry_key",
+                    "locale",
+                    "entries"
+                ],
+                "role": "E105 and FC144 method boundaries",
+                "schema": "fap.enneagram.method_registry.v1",
+                "sha256": "6ce01980ddc2feeead9da8bb034997e4690b395df1e7df6baaf295fcbf2d3613"
+            },
+            {
+                "consumer_surfaces": [
+                    "result",
+                    "history"
+                ],
+                "locale": "zh-CN",
+                "path": "observation_registry.json",
+                "registry_key": "enneagram_observation_registry",
+                "required_fields": [
+                    "schema_version",
+                    "registry_key",
+                    "locale",
+                    "entries"
+                ],
+                "role": "observation workflow copy",
+                "schema": "fap.enneagram.observation_registry.v1",
+                "sha256": "afe88bc3a91c24e59f57d7d0d3d9e0dbc2cb98ee0d67fd0988947fe615bc93bf"
+            },
+            {
+                "consumer_surfaces": [
+                    "result",
+                    "report",
+                    "pdf",
+                    "history",
+                    "compare",
+                    "share"
+                ],
+                "locale": "zh-CN",
+                "path": "pair_registry.json",
+                "registry_key": "enneagram_pair_registry",
+                "required_fields": [
+                    "schema_version",
+                    "registry_key",
+                    "locale",
+                    "entries"
+                ],
+                "role": "all 36 close-call comparisons",
+                "schema": "fap.enneagram.pair_registry.v1",
+                "sha256": "331bc560a0c860583cabc12a5a625cac10ae95fe90ce9d09aef020b0446fe961"
+            },
+            {
+                "consumer_surfaces": [
+                    "result",
+                    "report"
+                ],
+                "locale": "zh-CN",
+                "path": "sample_report_registry.json",
+                "registry_key": "enneagram_sample_report_registry",
+                "required_fields": [
+                    "schema_version",
+                    "registry_key",
+                    "locale",
+                    "entries"
+                ],
+                "role": "canonical sample reports",
+                "schema": "fap.enneagram.sample_report_registry.v1",
+                "sha256": "7b114c694aa4529fb535e6104c065b109b2cdeb81a68431baf7f18dd8c6f1cc3"
+            },
+            {
+                "consumer_surfaces": [
+                    "result",
+                    "report"
+                ],
+                "locale": "zh-CN",
+                "path": "scenario_registry.json",
+                "registry_key": "enneagram_scenario_registry",
+                "required_fields": [
+                    "schema_version",
+                    "registry_key",
+                    "locale",
+                    "entries"
+                ],
+                "role": "work, relationship, growth, and scenario copy",
+                "schema": "fap.enneagram.scenario_registry.v1",
+                "sha256": "71e8fbbcc66e6189c01b70428d963f13095ebe566d192edbb5087f15a5f781dd"
+            },
+            {
+                "consumer_surfaces": [
+                    "result",
+                    "report"
+                ],
+                "locale": "zh-CN",
+                "path": "state_registry.json",
+                "registry_key": "enneagram_state_registry",
+                "required_fields": [
+                    "schema_version",
+                    "registry_key",
+                    "locale",
+                    "entries"
+                ],
+                "role": "state spectrum copy",
+                "schema": "fap.enneagram.state_registry.v1",
+                "sha256": "eb0f9679bf73733bb5a2f268782a4a6b36b41006dafa4f5f595223eb2eb40b0e"
+            },
+            {
+                "consumer_surfaces": [
+                    "result",
+                    "report",
+                    "faq",
+                    "technical_note",
+                    "share",
+                    "pdf",
+                    "print",
+                    "history",
+                    "compare"
+                ],
+                "locale": "zh-CN",
+                "path": "surface_registry.json",
+                "registry_key": "enneagram_surface_registry",
+                "required_fields": [
+                    "schema_version",
+                    "registry_key",
+                    "locale",
+                    "entries"
+                ],
+                "role": "page, FAQ, share, PDF, print, history, compare, and secondary surface copy",
+                "schema": "fap.enneagram.surface_registry.v1",
+                "sha256": "3b893dda356d272c3e88dae49de81860f5814617b5e7b0c450635e646fa14ed8"
+            },
+            {
+                "consumer_surfaces": [
+                    "technical_note",
+                    "result",
+                    "report",
+                    "pdf"
+                ],
+                "locale": "zh-CN",
+                "path": "technical_note_registry.json",
+                "registry_key": "enneagram_technical_note_registry",
+                "required_fields": [
+                    "schema_version",
+                    "registry_key",
+                    "locale",
+                    "entries"
+                ],
+                "role": "technical note sections",
+                "schema": "fap.enneagram.technical_note_registry.v1",
+                "sha256": "6a25d5873ae0689b926b1f62cea41ffeceae261705a733fd20dd6efe4a51347d"
+            },
+            {
+                "consumer_surfaces": [
+                    "result",
+                    "report"
+                ],
+                "locale": "zh-CN",
+                "path": "theory_hint_registry.json",
+                "registry_key": "enneagram_theory_hint_registry",
+                "required_fields": [
+                    "schema_version",
+                    "registry_key",
+                    "locale",
+                    "entries"
+                ],
+                "role": "bounded theory hints",
+                "schema": "fap.enneagram.theory_hint_registry.v1",
+                "sha256": "a0e263c20539bae91eba58edcce0e8af6734a565a2cb6e4652e77cde428e2560"
+            },
+            {
+                "consumer_surfaces": [
+                    "result",
+                    "report",
+                    "pdf",
+                    "history",
+                    "share"
+                ],
+                "locale": "zh-CN",
+                "path": "type_registry.json",
+                "registry_key": "enneagram_type_registry",
+                "required_fields": [
+                    "schema_version",
+                    "registry_key",
+                    "locale",
+                    "entries"
+                ],
+                "role": "nine type private-result bodies",
+                "schema": "fap.enneagram.type_registry.v1",
+                "sha256": "a2b2df85015f50153f7b081cd266b678b851b27a458fe7efd23d9a76b2758897"
+            },
+            {
+                "consumer_surfaces": [
+                    "result",
+                    "report"
+                ],
+                "locale": "zh-CN",
+                "path": "ui_copy_registry.json",
+                "registry_key": "enneagram_ui_copy_registry",
+                "required_fields": [
+                    "schema_version",
+                    "registry_key",
+                    "locale",
+                    "entries"
+                ],
+                "role": "result states and form labels",
+                "schema": "fap.enneagram.ui_copy_registry.v1",
+                "sha256": "3c31f377602036fd3ebe85813ac5b9880788d876cd2a4a913dfe8ec5db4ad35f"
+            }
+        ]
+    },
+    "locale_source_hashes": {
+        "en": "18f72f91470a065d49955af36b80eaa0119f5e5b36cecdab24fcb93487684327",
+        "zh-CN": "b871155a47351589197ae3a21b7233e7cd1207535637786cbdb93082e1d9eff1"
+    },
+    "locales": [
+        "en"
+    ],
+    "migration_inventory": [
+        {
+            "disposition": "missing canonical fields migrated; receipts, QA, and runner metadata excluded",
+            "source": "result_page/1R-A..1R-H"
+        },
+        {
+            "disposition": "missing English pair and secondary-surface fields migrated; candidate envelope excluded",
+            "source": "W5 English parity candidate"
+        },
+        {
+            "disposition": "page specifications, boundary copy, and technical-note disclaimers migrated",
+            "source": "EnneagramReportComposer and EnneagramTechnicalNoteService"
+        },
+        {
+            "disposition": "consumer migration assigned to serial card 3",
+            "source": "fap-web local editorial copy"
+        },
+        {
+            "disposition": "not canonical source; deterministic compiler projections replace editable fixtures",
+            "source": "preview/generated fixtures"
+        }
+    ],
+    "registries": [
+        {
+            "file": "group_registry.json",
+            "registry_key": "enneagram_group_registry"
+        },
+        {
+            "file": "method_registry.json",
+            "registry_key": "enneagram_method_registry"
+        },
+        {
+            "file": "observation_registry.json",
+            "registry_key": "enneagram_observation_registry"
+        },
+        {
+            "file": "pair_registry.json",
+            "registry_key": "enneagram_pair_registry"
+        },
+        {
+            "file": "sample_report_registry.json",
+            "registry_key": "enneagram_sample_report_registry"
+        },
+        {
+            "file": "scenario_registry.json",
+            "registry_key": "enneagram_scenario_registry"
+        },
+        {
+            "file": "state_registry.json",
+            "registry_key": "enneagram_state_registry"
+        },
+        {
+            "file": "surface_registry.json",
+            "registry_key": "enneagram_surface_registry"
+        },
+        {
+            "file": "technical_note_registry.json",
+            "registry_key": "enneagram_technical_note_registry"
+        },
+        {
+            "file": "theory_hint_registry.json",
+            "registry_key": "enneagram_theory_hint_registry"
+        },
+        {
+            "file": "type_registry.json",
+            "registry_key": "enneagram_type_registry"
+        },
+        {
+            "file": "ui_copy_registry.json",
+            "registry_key": "enneagram_ui_copy_registry"
+        }
+    ],
+    "registry_version": "enneagram_registry.v1",
+    "release_id": "enneagram_registry_canonical_v2",
+    "scale_code": "ENNEAGRAM",
+    "schema_version": "fap.enneagram.private_result.canonical_manifest.v1",
+    "source_files": [
+        {
+            "consumer_surfaces": [
+                "result",
+                "report"
+            ],
+            "locale": "en",
+            "path": "en/group_registry.json",
+            "registry_key": "enneagram_group_registry",
+            "required_fields": [
+                "schema_version",
+                "registry_key",
+                "locale",
+                "entries"
+            ],
+            "role": "centers, stances, and harmonics",
+            "schema": "fap.enneagram.group_registry.v1",
+            "sha256": "93ff6b93540ed41184de17a9f047f70c01237204d4a2e959c684eed0ae00399c"
+        },
+        {
+            "consumer_surfaces": [
+                "result",
+                "report",
+                "technical_note",
+                "compare"
+            ],
+            "locale": "en",
+            "path": "en/method_registry.json",
+            "registry_key": "enneagram_method_registry",
+            "required_fields": [
+                "schema_version",
+                "registry_key",
+                "locale",
+                "entries"
+            ],
+            "role": "E105 and FC144 method boundaries",
+            "schema": "fap.enneagram.method_registry.v1",
+            "sha256": "2941b24d045e26a9936cb59d94adc1edcafae6a6f0b6e5c2126f4533216785c9"
+        },
+        {
+            "consumer_surfaces": [
+                "result",
+                "history"
+            ],
+            "locale": "en",
+            "path": "en/observation_registry.json",
+            "registry_key": "enneagram_observation_registry",
+            "required_fields": [
+                "schema_version",
+                "registry_key",
+                "locale",
+                "entries"
+            ],
+            "role": "observation workflow copy",
+            "schema": "fap.enneagram.observation_registry.v1",
+            "sha256": "3aedae8c99d56ea52577bdb2b5912f240e7e66b030725c175ae3bfe37d6c31d1"
+        },
+        {
+            "consumer_surfaces": [
+                "result",
+                "report",
+                "pdf",
+                "history",
+                "compare",
+                "share"
+            ],
+            "locale": "en",
+            "path": "en/pair_registry.json",
+            "registry_key": "enneagram_pair_registry",
+            "required_fields": [
+                "schema_version",
+                "registry_key",
+                "locale",
+                "entries"
+            ],
+            "role": "all 36 close-call comparisons",
+            "schema": "fap.enneagram.pair_registry.v1",
+            "sha256": "7ed760f00a814a74596dda4d5324c43a03d3eb3d61d35c608b803d842f69bf7c"
+        },
+        {
+            "consumer_surfaces": [
+                "result",
+                "report"
+            ],
+            "locale": "en",
+            "path": "en/sample_report_registry.json",
+            "registry_key": "enneagram_sample_report_registry",
+            "required_fields": [
+                "schema_version",
+                "registry_key",
+                "locale",
+                "entries"
+            ],
+            "role": "canonical sample reports",
+            "schema": "fap.enneagram.sample_report_registry.v1",
+            "sha256": "319ecf7fc47508b5380b97f67f3ea8008f054831394395a2ca710136e06e9885"
+        },
+        {
+            "consumer_surfaces": [
+                "result",
+                "report"
+            ],
+            "locale": "en",
+            "path": "en/scenario_registry.json",
+            "registry_key": "enneagram_scenario_registry",
+            "required_fields": [
+                "schema_version",
+                "registry_key",
+                "locale",
+                "entries"
+            ],
+            "role": "work, relationship, growth, and scenario copy",
+            "schema": "fap.enneagram.scenario_registry.v1",
+            "sha256": "ffdbea30aa6306e4324d2d6ad81559225bc24e3d1af818cc82e0cfc692373360"
+        },
+        {
+            "consumer_surfaces": [
+                "result",
+                "report"
+            ],
+            "locale": "en",
+            "path": "en/state_registry.json",
+            "registry_key": "enneagram_state_registry",
+            "required_fields": [
+                "schema_version",
+                "registry_key",
+                "locale",
+                "entries"
+            ],
+            "role": "state spectrum copy",
+            "schema": "fap.enneagram.state_registry.v1",
+            "sha256": "33320c6d66c98ad2cfaef6c8a28186355cccdaa5d4124ba2b89eadd4d675268b"
+        },
+        {
+            "consumer_surfaces": [
+                "result",
+                "report",
+                "faq",
+                "technical_note",
+                "share",
+                "pdf",
+                "print",
+                "history",
+                "compare"
+            ],
+            "locale": "en",
+            "path": "en/surface_registry.json",
+            "registry_key": "enneagram_surface_registry",
+            "required_fields": [
+                "schema_version",
+                "registry_key",
+                "locale",
+                "entries"
+            ],
+            "role": "page, FAQ, share, PDF, print, history, compare, and secondary surface copy",
+            "schema": "fap.enneagram.surface_registry.v1",
+            "sha256": "04b4c99f5a2fe38e046dbb665b34097b411c7326a8a2c061656d4e35f953f2b7"
+        },
+        {
+            "consumer_surfaces": [
+                "technical_note",
+                "result",
+                "report",
+                "pdf"
+            ],
+            "locale": "en",
+            "path": "en/technical_note_registry.json",
+            "registry_key": "enneagram_technical_note_registry",
+            "required_fields": [
+                "schema_version",
+                "registry_key",
+                "locale",
+                "entries"
+            ],
+            "role": "technical note sections",
+            "schema": "fap.enneagram.technical_note_registry.v1",
+            "sha256": "370ba7212808067c520650dd500ab4425fdd34ed6457faf377257d384fd5a2b4"
+        },
+        {
+            "consumer_surfaces": [
+                "result",
+                "report"
+            ],
+            "locale": "en",
+            "path": "en/theory_hint_registry.json",
+            "registry_key": "enneagram_theory_hint_registry",
+            "required_fields": [
+                "schema_version",
+                "registry_key",
+                "locale",
+                "entries"
+            ],
+            "role": "bounded theory hints",
+            "schema": "fap.enneagram.theory_hint_registry.v1",
+            "sha256": "ca07e0784cbb42cb50b73fd5a9da43771a2c4c1f9e0c38795e365d003d622ed7"
+        },
+        {
+            "consumer_surfaces": [
+                "result",
+                "report",
+                "pdf",
+                "history",
+                "share"
+            ],
+            "locale": "en",
+            "path": "en/type_registry.json",
+            "registry_key": "enneagram_type_registry",
+            "required_fields": [
+                "schema_version",
+                "registry_key",
+                "locale",
+                "entries"
+            ],
+            "role": "nine type private-result bodies",
+            "schema": "fap.enneagram.type_registry.v1",
+            "sha256": "6026115290a4c3b8aa8f7d743b12c56bdaef65ea4b02344aeb0ab36f9b93b704"
+        },
+        {
+            "consumer_surfaces": [
+                "result",
+                "report"
+            ],
+            "locale": "en",
+            "path": "en/ui_copy_registry.json",
+            "registry_key": "enneagram_ui_copy_registry",
+            "required_fields": [
+                "schema_version",
+                "registry_key",
+                "locale",
+                "entries"
+            ],
+            "role": "result states and form labels",
+            "schema": "fap.enneagram.ui_copy_registry.v1",
+            "sha256": "ca7fc989564154be9a8c60d2cd7feaff0c331adb146ceccedb8ef7274ddb5faf"
+        }
+    ],
+    "source_hash": "2a63207b9131b085d59dfaf67c0a937de3bad8eb6fd47a31d77ac14d642c86ca",
+    "source_hash_rule": "sha256(concat(sorted locale/path + NUL + sha256(canonical decoded JSON) + LF))",
+    "supported_context_modes": [
+        "individual",
+        "workplace",
+        "team"
+    ],
+    "supported_form_variants": [
+        "all",
+        "e105",
+        "fc144"
     ]
 }

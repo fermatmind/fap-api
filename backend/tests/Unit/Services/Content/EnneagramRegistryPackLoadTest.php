@@ -21,7 +21,7 @@ final class EnneagramRegistryPackLoadTest extends TestCase
 
         $this->assertSame('ENNEAGRAM', data_get($pack, 'manifest.scale_code'));
         $this->assertSame('enneagram_registry.v1', data_get($pack, 'manifest.registry_version'));
-        $this->assertSame('enneagram_registry_pack_v1_p0_ready_2026_04', data_get($pack, 'manifest.release_id'));
+        $this->assertSame('enneagram_registry_canonical_v2', data_get($pack, 'manifest.release_id'));
         $this->assertSame('enneagram_type_registry', data_get($pack, 'type_registry.registry_key'));
         $this->assertSame('enneagram_method_registry', data_get($pack, 'method_registry.registry_key'));
         $this->assertSame('查看技术说明', data_get($uiEntries['technical_note.link_label'] ?? [], 'label'));
@@ -50,7 +50,7 @@ final class EnneagramRegistryPackLoadTest extends TestCase
         $this->assertSame('en', data_get($pack, 'type_registry.locale'));
         $this->assertSame('en', data_get($pack, 'method_registry.locale'));
         $this->assertCount(9, (array) data_get($pack, 'type_registry.entries'));
-        $this->assertCount(15, (array) data_get($pack, 'pair_registry.entries'));
+        $this->assertCount(36, (array) data_get($pack, 'pair_registry.entries'));
         $this->assertDoesNotMatchRegularExpression('/[\x{3400}-\x{9fff}\x{f900}-\x{faff}]/u', $serialized);
         $this->assertDoesNotMatchRegularExpression(
             '/perfect type|ego type|am i (?:a )?(?:size|number) [1-9]|knowledge precipitation|career adaptation|personnel decision-making conclusions|current outline is scattered|central judgments|grading conclusion|default default|staying alive|low-resource hypothesis|self-requirements/i',

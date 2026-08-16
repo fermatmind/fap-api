@@ -1,0 +1,34 @@
+{
+  "schema_version": "fap.enneagram.surface_registry.v1",
+  "registry_key": "enneagram_surface_registry",
+  "id": "ENNEAGRAM.surface.en.v1",
+  "version": "1.0.0",
+  "locale": "en",
+  "form_variant": "all",
+  "context_mode": "individual",
+  "status": "published",
+  "content_maturity": "p0_ready",
+  "evidence_level": "descriptive",
+  "fallback_policy": "none",
+  "preview_enabled": false,
+  "release_id": "enneagram_registry_canonical_v2",
+  "content_release_hash": "derived_by_compiler",
+  "content_snapshot_hash": "derived_by_compiler",
+  "entries": {
+    "page_specs": {
+      "page_1_result_overview": {"title": "Result Overview", "purpose": "Show the current result structure, interpretation boundary, and candidate reading mode.", "modules": ["instant_summary", "top3_cards", "type_deep_dive_summary", "all9_profile", "close_call_card", "blind_spot_card", "wing_hint_visual"]},
+      "page_2_work_reality": {"title": "Work Reality", "purpose": "Show work style, collaboration strengths, friction points, and workplace triggers.", "modules": ["work_style_summary", "collaboration_strengths", "collaboration_friction", "leadership_pattern", "managed_by_others", "workplace_trigger_points"]},
+      "page_3_growth_spectrum": {"title": "Growth Spectrum", "purpose": "Show the growth axis, cost expression, stress signals, and recovery actions.", "modules": ["growth_axis", "strength_expression", "cost_expression", "stress_trigger", "recovery_action", "state_spectrum"]},
+      "page_4_relationship_conflict": {"title": "Relationships and Conflict", "purpose": "Show relationship needs, conflict scripts, and communication guidance.", "modules": ["relationship_need", "relationship_strengths", "misread_by_others", "conflict_script", "communication_manual"]},
+      "page_5_method_observation_next": {"title": "Method, Observation, and Next Steps", "purpose": "Show the method boundary, seven-day observation, sample report, and technical note entry point.", "modules": ["method_boundary", "seven_day_observation", "form_recommendation", "sample_report_link", "technical_note_link"]}
+    },
+    "faq": {"title": "Frequently Asked Questions", "items": [{"question": "Does this result fix my personality type?", "answer": "No. It is a working interpretation based on this response and should be checked against real situations and continued observation."}, {"question": "Can E105 and FC144 scores be compared directly?", "answer": "No. They share one Enneagram content model but use different response tasks and scoring spaces."}]},
+    "technical_note": {"title": "Technical Note", "summary": "Explains forms, score spaces, interpretation boundaries, data status, and privacy handling without making diagnostic, hiring, or deterministic personality claims.", "disclaimers": [{"key": "not_diagnostic", "label": "Not diagnostic", "copy": "This test supports personality-pattern reflection and is not for clinical diagnosis or treatment advice."}, {"key": "not_clinical", "label": "No clinical-validity claim", "copy": "This version makes no claim of external clinical validity, accuracy, or predictive ability."}, {"key": "not_hiring_screening", "label": "Not for hiring", "copy": "This test is not for hiring, promotion, termination, or employment screening."}, {"key": "no_hard_theory_judgement", "label": "No hard theory judgment", "copy": "Wing, arrow, subtype, and health level are not hard system conclusions in this version."}, {"key": "no_cross_form_numeric_compare", "label": "No cross-form numeric comparison", "copy": "E105 and FC144 share one model but use different scoring spaces and are not compared numerically by default."}, {"key": "user_confirmed_type_boundary", "label": "Self-observation boundary", "copy": "user_confirmed_type records self-observation evidence and never silently overwrites the system primary_candidate."}]},
+    "share": {"title": "My Enneagram Observation", "summary": "This is a private self-observation result; type candidates support reflection and are not fixed labels.", "method_boundary": "E105 and FC144 use different scoring spaces. Shared content does not expose raw answers or private identifiers."},
+    "pdf": {"title": "Private Enneagram Result Report", "footer": "For self-observation and reflection only; not for diagnosis, ability assessment, hiring, or personnel decisions."},
+    "print": {"title": "Printable Enneagram Result", "footer": "Printed content comes from the immutable canonical snapshot for this result."},
+    "history": {"title": "Result History", "summary": "Historical results use the immutable content snapshot captured at completion and are not recomputed with current copy."},
+    "compare": {"title": "Result Comparison", "summary": "Compare only results with compatible forms and scoring spaces; E105 and FC144 values are not directly compared."},
+    "secondary": {"missing_payload": "The result content is incomplete and cannot be displayed safely.", "hash_mismatch": "The result content failed integrity validation and cannot be displayed safely."}
+  }
+}

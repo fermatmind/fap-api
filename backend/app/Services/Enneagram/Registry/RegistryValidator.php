@@ -189,6 +189,7 @@ final class RegistryValidator
         'enneagram_group_registry' => 'group_registry.json',
         'enneagram_scenario_registry' => 'scenario_registry.json',
         'enneagram_state_registry' => 'state_registry.json',
+        'enneagram_surface_registry' => 'surface_registry.json',
         'enneagram_theory_hint_registry' => 'theory_hint_registry.json',
         'enneagram_observation_registry' => 'observation_registry.json',
         'enneagram_method_registry' => 'method_registry.json',
@@ -211,7 +212,14 @@ final class RegistryValidator
 
     private const REQUIRED_TYPE_IDS = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
-    private const REQUIRED_PAIR_KEYS = ['1_3', '1_6', '1_8', '2_3', '2_9', '3_7', '3_8', '4_5', '4_9', '5_6', '5_9', '6_9', '6_1', '7_3', '8_1'];
+    private const REQUIRED_PAIR_KEYS = [
+        '1_2', '1_3', '1_4', '1_5', '1_6', '1_7', '1_8', '1_9',
+        '2_3', '2_4', '2_5', '2_6', '2_7', '2_8', '2_9',
+        '3_4', '3_5', '3_6', '3_7', '3_8', '3_9',
+        '4_5', '4_6', '4_7', '4_8', '4_9',
+        '5_6', '5_7', '5_8', '5_9',
+        '6_7', '6_8', '6_9', '7_8', '7_9', '8_9',
+    ];
 
     private const REQUIRED_GROUP_KEYS = [
         'center:body',
@@ -300,6 +308,7 @@ final class RegistryValidator
             $errors = array_merge($errors, $this->validateGroupRegistry((array) ($registries['enneagram_group_registry'] ?? [])));
             $errors = array_merge($errors, $this->validateScenarioRegistry((array) ($registries['enneagram_scenario_registry'] ?? [])));
             $errors = array_merge($errors, $this->validateStateRegistry((array) ($registries['enneagram_state_registry'] ?? [])));
+            $errors = array_merge($errors, $this->validateSurfaceRegistry((array) ($registries['enneagram_surface_registry'] ?? [])));
             $errors = array_merge($errors, $this->validateObservationRegistry((array) ($registries['enneagram_observation_registry'] ?? [])));
             $errors = array_merge($errors, $this->validateMethodRegistry((array) ($registries['enneagram_method_registry'] ?? [])));
             $errors = array_merge($errors, $this->validateTheoryHintRegistry((array) ($registries['enneagram_theory_hint_registry'] ?? [])));
@@ -545,7 +554,7 @@ final class RegistryValidator
         $expected = self::REQUIRED_PAIR_KEYS;
         sort($expected);
         if ($keys !== $expected) {
-            $errors[] = 'Pair registry must include all required P0 pair keys';
+            $errors[] = 'Pair registry must include all 36 canonical pair keys';
         }
         foreach (['same_surface', 'motivation_difference', 'pressure_difference', 'relationship_difference', 'work_difference', 'observation_question'] as $field) {
             if (trim((string) ($fallbackTemplate[$field] ?? '')) === '') {
@@ -697,6 +706,22 @@ final class RegistryValidator
      * @param  array<string,mixed>  $payload
      * @return list<string>
      */
+    private function validateSurfaceRegistry(array $payload): array
+    {
+        $entries = is_array($payload['entries'] ?? null) ? $payload['entries'] : [];
+        $errors = [];
+        foreach (['faq', 'technical_note', 'share', 'pdf', 'print', 'history', 'compare', 'secondary'] as $surface) {
+            if (! is_array($entries[$surface] ?? null)) {
+                $errors[] = "Surface registry missing {$surface}";
+            }
+        }
+        if (count((array) ($entries['page_specs'] ?? [])) !== 5) {
+            $errors[] = 'Surface registry must define five report pages';
+        }
+
+        return $errors;
+    }
+
     private function validateObservationRegistry(array $payload): array
     {
         $entries = is_array($payload['entries'] ?? null) ? $payload['entries'] : [];

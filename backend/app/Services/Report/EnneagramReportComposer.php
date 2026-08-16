@@ -20,71 +20,6 @@ final class EnneagramReportComposer
 
     private const REPORT_V2_ENGINE_VERSION = 'enneagram_report_engine.v2';
 
-    /**
-     * @var array<string,array{title:array{zh:string,en:string},purpose:array{zh:string,en:string},modules:list<string>}>
-     */
-    private const PAGE_SPECS = [
-        'page_1_result_overview' => [
-            'title' => ['zh' => '结果总览', 'en' => 'Result Overview'],
-            'purpose' => ['zh' => '输出当前结果结构、辨析边界和主候选阅读方式。', 'en' => 'Expose the current result structure, interpretation boundary, and candidate reading mode.'],
-            'modules' => [
-                'instant_summary',
-                'top3_cards',
-                'type_deep_dive_summary',
-                'all9_profile',
-                'close_call_card',
-                'blind_spot_card',
-                'wing_hint_visual',
-            ],
-        ],
-        'page_2_work_reality' => [
-            'title' => ['zh' => '工作现实', 'en' => 'Work Reality'],
-            'purpose' => ['zh' => '输出工作风格、协作优势、摩擦点和工作触发点。', 'en' => 'Expose work style, collaboration strengths, friction points, and workplace triggers.'],
-            'modules' => [
-                'work_style_summary',
-                'collaboration_strengths',
-                'collaboration_friction',
-                'leadership_pattern',
-                'managed_by_others',
-                'workplace_trigger_points',
-            ],
-        ],
-        'page_3_growth_spectrum' => [
-            'title' => ['zh' => '成长光谱', 'en' => 'Growth Spectrum'],
-            'purpose' => ['zh' => '输出成长轴、代价表达、压力信号和恢复动作。', 'en' => 'Expose the growth axis, cost expression, stress signals, and recovery actions.'],
-            'modules' => [
-                'growth_axis',
-                'strength_expression',
-                'cost_expression',
-                'stress_trigger',
-                'recovery_action',
-                'state_spectrum',
-            ],
-        ],
-        'page_4_relationship_conflict' => [
-            'title' => ['zh' => '关系与冲突', 'en' => 'Relationships and Conflict'],
-            'purpose' => ['zh' => '输出关系需要、冲突脚本和沟通说明书。', 'en' => 'Expose relationship needs, conflict scripts, and communication guidance.'],
-            'modules' => [
-                'relationship_need',
-                'relationship_strengths',
-                'misread_by_others',
-                'conflict_script',
-                'communication_manual',
-            ],
-        ],
-        'page_5_method_observation_next' => [
-            'title' => ['zh' => '方法、观察与下一步', 'en' => 'Method, Observation, and Next Steps'],
-            'purpose' => ['zh' => '输出方法边界、七天观察、样例和技术说明入口。', 'en' => 'Expose the method boundary, seven-day observation, sample report, and technical note entry point.'],
-            'modules' => [
-                'method_boundary',
-                'seven_day_observation',
-                'form_recommendation',
-                'sample_report_link',
-                'technical_note_link',
-            ],
-        ],
-    ];
-
     public function __construct(
         private readonly EnneagramPublicProjectionService $projectionService,
         private readonly EnneagramPackLoader $packLoader,
@@ -325,19 +260,6 @@ final class EnneagramReportComposer
      */
     private function buildUnavailableReportV2(array $projectionV2, string $language): array
     {
-        $pages = [];
-        foreach (array_keys(self::PAGE_SPECS) as $pageKey) {
-            $pages[] = [
-                'page_key' => $pageKey,
-                'locale' => $language,
-                'title' => $this->pageSpec($pageKey, 'title', $language),
-                'purpose' => $this->pageSpec($pageKey, 'purpose', $language),
-                'modules' => [],
-                'visibility' => 'unavailable',
-                'source_registry_refs' => [],
-            ];
-        }
-
         return [
             'schema_version' => self::REPORT_V2_SCHEMA,
             'scale_code' => 'ENNEAGRAM',
@@ -358,7 +280,7 @@ final class EnneagramReportComposer
                 'confidence_level' => data_get($projectionV2, 'classification.confidence_level'),
                 'interpretation_reason' => data_get($projectionV2, 'classification.interpretation_reason'),
             ],
-            'pages' => $pages,
+            'pages' => [],
             'modules' => [],
             'provenance' => [
                 'projection_version' => data_get($projectionV2, 'algorithmic_meta.projection_version'),
@@ -420,6 +342,7 @@ final class EnneagramReportComposer
             'ui_entries' => is_array($registries['enneagram_ui_copy_registry']['entries'] ?? null) ? $registries['enneagram_ui_copy_registry']['entries'] : [],
             'sample_entries' => is_array($registries['enneagram_sample_report_registry']['entries'] ?? null) ? $registries['enneagram_sample_report_registry']['entries'] : [],
             'technical_entries' => $this->keyListBy($registries['enneagram_technical_note_registry']['entries'] ?? [], 'section_key'),
+            'surface_entries' => is_array($registries['enneagram_surface_registry']['entries'] ?? null) ? $registries['enneagram_surface_registry']['entries'] : [],
         ];
     }
 
@@ -431,17 +354,18 @@ final class EnneagramReportComposer
     private function buildPages(array $projectionV2, array $indexes, string $language): array
     {
         $pages = [];
-        foreach (array_keys(self::PAGE_SPECS) as $pageKey) {
+        $pageSpecs = is_array($indexes['surface_entries']['page_specs'] ?? null) ? $indexes['surface_entries']['page_specs'] : [];
+        foreach ($pageSpecs as $pageKey => $pageSpec) {
             $modules = [];
-            foreach ((array) (self::PAGE_SPECS[$pageKey]['modules'] ?? []) as $moduleKey) {
+            foreach ((array) ($pageSpec['modules'] ?? []) as $moduleKey) {
                 $modules[] = $this->buildModule($moduleKey, $projectionV2, $indexes, $language);
             }
 
             $pages[] = [
                 'page_key' => $pageKey,
                 'locale' => $language,
-                'title' => $this->pageSpec($pageKey, 'title', $language),
-                'purpose' => $this->pageSpec($pageKey, 'purpose', $language),
+                'title' => (string) ($pageSpec['title'] ?? ''),
+                'purpose' => (string) ($pageSpec['purpose'] ?? ''),
                 'modules' => $modules,
                 'visibility' => 'visible',
                 'source_registry_refs' => $this->pageRegistryRefs($modules),
@@ -578,6 +502,7 @@ final class EnneagramReportComposer
         $ui = is_array($indexes['ui_entries'][$uiKey] ?? null) ? $indexes['ui_entries'][$uiKey] : [];
         $formBadgeKey = $this->formVariant($projectionV2) === 'e105' ? 'form_badge.e105' : 'form_badge.fc144';
         $formBadge = is_array($indexes['ui_entries'][$formBadgeKey] ?? null) ? $indexes['ui_entries'][$formBadgeKey] : [];
+        $technicalSurface = is_array($indexes['surface_entries']['technical_note'] ?? null) ? $indexes['surface_entries']['technical_note'] : [];
         $topTypes = array_slice((array) data_get($projectionV2, 'scores.top_types', []), 0, 3);
 
         return $this->module(
@@ -597,9 +522,7 @@ final class EnneagramReportComposer
                     'label' => (string) ($formBadge['label'] ?? ''),
                     'body' => (string) ($formBadge['body_template'] ?? ''),
                 ],
-                'boundary_note' => $language === 'en'
-                    ? 'Treat this result as a self-observation hypothesis, not a diagnosis, ability rating, job-fit verdict, or hiring decision.'
-                    : '请把本结果作为自我观察假设，不用于诊断、能力评价、职业胜任判断或招聘决策。',
+                'boundary_note' => (string) ($technicalSurface['summary'] ?? ''),
                 'top_candidates' => array_values(array_map(
                     fn (array $row): array => [
                         'type' => (string) ($row['type'] ?? ''),
@@ -611,9 +534,9 @@ final class EnneagramReportComposer
                 'locale' => $language,
             ],
             ['scores.primary_candidate', 'scores.second_candidate', 'classification.confidence_level', 'classification.interpretation_scope'],
-            ['enneagram_ui_copy_registry:'.$uiKey, 'enneagram_ui_copy_registry:'.$formBadgeKey],
+            ['enneagram_ui_copy_registry:'.$uiKey, 'enneagram_ui_copy_registry:'.$formBadgeKey, 'enneagram_surface_registry:technical_note'],
             ['classification.interpretation_scope', 'classification.confidence_level'],
-            $this->mergeEntryMeta([$ui, $formBadge], $this->registryMeta($indexes, 'enneagram_ui_copy_registry'))
+            $this->mergeEntryMeta([$ui, $formBadge, $technicalSurface], $this->registryMeta($indexes, 'enneagram_ui_copy_registry'))
         );
     }
 
@@ -1831,21 +1754,6 @@ final class EnneagramReportComposer
         }
 
         return $values[0] ?? 'scaffold';
-    }
-
-    private function pageSpec(string $pageKey, string $field, string $language): string
-    {
-        $spec = self::PAGE_SPECS[$pageKey] ?? null;
-        if (! is_array($spec)) {
-            return $pageKey;
-        }
-
-        $value = $spec[$field] ?? null;
-        if (! is_array($value)) {
-            return $pageKey;
-        }
-
-        return (string) ($value[$language] ?? $value['zh'] ?? $pageKey);
     }
 
     private function normalizeLanguage(string $locale): string

@@ -70,7 +70,7 @@ final class EnneagramTechnicalNoteService
                     'pending_sample' => $this->sectionKeysByStatus($sections, 'pending_sample'),
                     'not_claimed' => ['clinical_validity', 'hiring_screening_suitability', 'cross_form_numeric_equivalence'],
                 ],
-                'disclaimers' => $this->disclaimers(),
+                'disclaimers' => array_values((array) data_get($pack, 'surface_registry.entries.technical_note.disclaimers', [])),
                 'generated_at' => CarbonImmutable::now()->toIso8601String(),
             ],
         ];
@@ -149,44 +149,5 @@ final class EnneagramTechnicalNoteService
         }
 
         return $keys;
-    }
-
-    /**
-     * @return list<array<string,string>>
-     */
-    private function disclaimers(): array
-    {
-        return [
-            [
-                'key' => 'not_diagnostic',
-                'label' => '非诊断用途',
-                'copy' => '本测试用于人格模式理解与自我观察，不用于临床诊断或治疗建议。',
-            ],
-            [
-                'key' => 'not_clinical',
-                'label' => '非临床效度声明',
-                'copy' => '当前版本不声明外部临床效度、准确率或预测能力。',
-            ],
-            [
-                'key' => 'not_hiring_screening',
-                'label' => '非招聘筛选用途',
-                'copy' => '本测试不用于招聘、晋升或淘汰判断，也不适合做雇佣筛选工具。',
-            ],
-            [
-                'key' => 'no_hard_theory_judgement',
-                'label' => '非硬判理论层',
-                'copy' => 'wing、arrow、subtype、health level 在当前版本不作为系统硬判结论。',
-            ],
-            [
-                'key' => 'no_cross_form_numeric_compare',
-                'label' => '跨 form 数值不直比',
-                'copy' => 'E105 与 FC144 属于同一模型，但分数空间不同，不默认做跨 form 数值比较。',
-            ],
-            [
-                'key' => 'user_confirmed_type_boundary',
-                'label' => '自我观察确认边界',
-                'copy' => 'user_confirmed_type 只作为自我观察证据保存，不会静默改写系统 primary_candidate。',
-            ],
-        ];
     }
 }

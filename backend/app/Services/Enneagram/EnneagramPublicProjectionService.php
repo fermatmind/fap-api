@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Enneagram;
 
 use App\Models\Result;
+use App\Services\Content\EnneagramPackLoader;
 
 final class EnneagramPublicProjectionService
 {
@@ -104,7 +105,6 @@ final class EnneagramPublicProjectionService
      *   methodology_variant:string,
      *   precision_level:string,
      *   method_boundary_copy_key:string,
-     *   form_interpretation_boundary:array{en:string,zh:string},
      *   score_source:string,
      *   score_display_key:string
      * }>
@@ -115,10 +115,6 @@ final class EnneagramPublicProjectionService
             'methodology_variant' => 'e105_standard',
             'precision_level' => 'likert_response',
             'method_boundary_copy_key' => 'enneagram.method_boundary.e105_standard.v1',
-            'form_interpretation_boundary' => [
-                'zh' => 'E105 采用五点量表作答，在自身计分空间内形成九型完整轮廓；其数值不与 FC144 直接比较。',
-                'en' => 'E105 uses five-point Likert responses to form a full nine-type profile within its own scoring space; its values are not directly compared with FC144.',
-            ],
             'score_source' => 'likert_intensity_norm',
             'score_display_key' => 'profile100',
         ],
@@ -127,10 +123,6 @@ final class EnneagramPublicProjectionService
             'methodology_variant' => 'fc144_forced_choice',
             'precision_level' => 'forced_choice_response',
             'method_boundary_copy_key' => 'enneagram.method_boundary.fc144_forced_choice.v1',
-            'form_interpretation_boundary' => [
-                'zh' => 'FC144 采用二选一迫选作答，在自身计分空间内记录相对取舍线索；其数值不与 E105 直接比较。',
-                'en' => 'FC144 uses two-option forced-choice responses to record relative preference signals within its own scoring space; its values are not directly compared with E105.',
-            ],
             'score_source' => 'forced_choice_win_rate_norm',
             'score_display_key' => 'preference100',
         ],
@@ -153,6 +145,7 @@ final class EnneagramPublicProjectionService
 
     public function __construct(
         private readonly ?EnneagramFormCatalog $formCatalog = null,
+        private readonly ?EnneagramPackLoader $packLoader = null,
     ) {}
 
     /**
@@ -296,9 +289,8 @@ final class EnneagramPublicProjectionService
             $contentReleaseHash
         );
         $unavailable = $this->buildUnavailableFields($policyEvaluation);
-        $formBoundary = is_array($form['form_interpretation_boundary'] ?? null)
-            ? ($form['form_interpretation_boundary'][$language] ?? $form['form_interpretation_boundary']['zh'] ?? '')
-            : '';
+        $formBadgeKey = (string) ($form['form_code'] ?? '') === 'enneagram_forced_choice_144' ? 'form_badge.fc144' : 'form_badge.e105';
+        $formBoundary = trim((string) ($this->registryUiCopy($formBadgeKey, $locale)['body_template'] ?? ''));
         $methodBoundaryCopyKey = (string) ($form['method_boundary_copy_key'] ?? '');
         $compareGroup = 'ENNEAGRAM:'.(string) ($form['form_code'] ?? 'unknown').':'.(string) ($form['score_space_version'] ?? 'unknown');
         $recommendedFirstAction = $this->recommendedFirstAction(
@@ -760,10 +752,7 @@ final class EnneagramPublicProjectionService
             'precision_level' => $policy['precision_level'] ?? 'unavailable',
             'precision_label' => $this->precisionLabel((string) ($policy['precision_level'] ?? 'unavailable'), $language),
             'method_boundary_copy_key' => $policy['method_boundary_copy_key'] ?? null,
-            'form_interpretation_boundary' => $policy['form_interpretation_boundary'] ?? [
-                'zh' => '当前 form 方法边界未配置。',
-                'en' => 'The current form interpretation boundary is unavailable.',
-            ],
+            'form_interpretation_boundary' => [],
             'score_source' => $policy['score_source'] ?? 'unknown',
             'score_display_key' => $policy['score_display_key'] ?? 'score_norm',
         ];
@@ -1208,6 +1197,23 @@ final class EnneagramPublicProjectionService
             'forced_choice_response' => $language === 'zh' ? '二选一迫选作答' : 'Two-option forced-choice response',
             default => $language === 'zh' ? '作答形式暂不可用' : 'Response format unavailable',
         };
+    }
+
+    /** @return array<string,mixed> */
+    private function registryUiCopy(string $key, string $locale): array
+    {
+        $loader = $this->packLoader;
+        if ($loader === null && function_exists('app')) {
+            $loader = app(EnneagramPackLoader::class);
+        }
+        if (! $loader instanceof EnneagramPackLoader) {
+            return [];
+        }
+
+        $pack = $loader->loadRegistryPack(null, str_starts_with(strtolower($locale), 'en') ? 'en' : 'zh-CN');
+        $entry = data_get($pack, 'ui_copy_registry.entries.'.$key);
+
+        return is_array($entry) ? $entry : [];
     }
 
     private function publicTypeCode(string $typeCode): string

@@ -18,23 +18,9 @@ final class EnneagramPairRegistryScaffoldTest extends TestCase
         $pairKeys = $entries->pluck('pair_key')->sort()->values()->all();
         $fallbackTemplate = (array) data_get($pack, 'pair_registry.fallback_template', []);
 
-        $this->assertSame([
-            '1_3',
-            '1_6',
-            '1_8',
-            '2_3',
-            '2_9',
-            '3_7',
-            '3_8',
-            '4_5',
-            '4_9',
-            '5_6',
-            '5_9',
-            '6_1',
-            '6_9',
-            '7_3',
-            '8_1',
-        ], $pairKeys);
+        $this->assertCount(36, $pairKeys);
+        $this->assertSame('1_2', $pairKeys[0]);
+        $this->assertSame('8_9', $pairKeys[35]);
         $this->assertFalse($entries->contains(fn ($entry): bool => trim((string) ($entry['fallback_policy'] ?? '')) === ''));
         $this->assertFalse($entries->contains(fn ($entry): bool => trim((string) ($entry['short_compare_copy'] ?? '')) === ''));
         $this->assertFalse($entries->contains(fn ($entry): bool => ($entry['content_maturity'] ?? null) !== 'p0_ready'));

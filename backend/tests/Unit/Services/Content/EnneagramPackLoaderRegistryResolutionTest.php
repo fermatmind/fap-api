@@ -22,7 +22,7 @@ final class EnneagramPackLoaderRegistryResolutionTest extends TestCase
         $this->assertSame(base_path('content_packs/ENNEAGRAM/v2/registry'), $loader->registryRoot());
         $this->assertSame(base_path('content_packs/ENNEAGRAM/v2/registry/en'), $loader->registryRoot(null, 'en'));
         $this->assertSame(
-            'enneagram_registry_pack_v1_p0_ready_2026_04',
+            'enneagram_registry_canonical_v2',
             data_get($loader->loadRegistryManifest(), 'release_id')
         );
     }
