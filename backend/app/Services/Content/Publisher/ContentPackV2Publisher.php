@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Content\Publisher;
 
+use App\Services\Content\BigFivePrivateResultCompileService;
 use App\Services\Storage\BlobCatalogService;
 use App\Services\Storage\ContentReleaseManifestCatalogService;
 use App\Services\Storage\ContentReleaseSnapshotCatalogService;
@@ -277,6 +278,9 @@ final class ContentPackV2Publisher
         if ($packId === '' || $packVersion === '') {
             throw new RuntimeException('RELEASE_PACK_CONTEXT_INVALID');
         }
+        if ($packId === BigFivePrivateResultCompileService::PACK_ID) {
+            $this->assertBigFivePrivateResultReleaseValid($release);
+        }
 
         $activationBeforeReleaseId = trim((string) DB::table('content_pack_activations')
             ->where('pack_id', $packId)
@@ -307,6 +311,61 @@ final class ContentPackV2Publisher
                 $release,
             );
         }
+    }
+
+    private function assertBigFivePrivateResultReleaseValid(object $release): void
+    {
+        $root = $this->absoluteStorageRoot(trim((string) ($release->storage_path ?? '')));
+        $compiledDir = is_dir($root.'/compiled') ? $root.'/compiled' : $root;
+        $manifest = json_decode((string) @file_get_contents($compiledDir.'/manifest.json'), true);
+        $artifactBytes = @file_get_contents($compiledDir.'/'.BigFivePrivateResultCompileService::ARTIFACT_FILENAME);
+        $payload = is_string($artifactBytes) ? json_decode($artifactBytes, true) : null;
+        if (! is_array($manifest) || ! is_array($payload)) {
+            throw new RuntimeException('BIG5_PRIVATE_RESULT_RELEASE_PAYLOAD_INVALID');
+        }
+
+        $sourceHash = strtolower(trim((string) ($payload['source_hash'] ?? '')));
+        $compiledHash = strtolower(trim((string) ($payload['compiled_hash'] ?? '')));
+        $artifactHash = strtolower(trim((string) data_get($manifest, 'artifacts.0.sha256', '')));
+        $unsigned = $payload;
+        unset($unsigned['compiled_hash']);
+        $computedCompiledHash = hash('sha256', $this->canonicalJson($unsigned));
+        if (($payload['schema'] ?? null) !== BigFivePrivateResultCompileService::SCHEMA
+            || ! hash_equals($sourceHash, strtolower(trim((string) ($manifest['source_hash'] ?? ''))))
+            || ! hash_equals($compiledHash, strtolower(trim((string) ($manifest['compiled_hash'] ?? ''))))
+            || ! hash_equals($compiledHash, $computedCompiledHash)
+            || ! hash_equals($artifactHash, hash('sha256', $artifactBytes))) {
+            throw new RuntimeException('BIG5_PRIVATE_RESULT_RELEASE_HASH_MISMATCH');
+        }
+    }
+
+    private function canonicalJson(mixed $value): string
+    {
+        if (is_array($value)) {
+            if (! array_is_list($value)) {
+                ksort($value, SORT_STRING);
+            }
+            foreach ($value as $key => $item) {
+                $value[$key] = $this->normalizeCanonicalValue($item);
+            }
+        }
+
+        return json_encode($value, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRESERVE_ZERO_FRACTION);
+    }
+
+    private function normalizeCanonicalValue(mixed $value): mixed
+    {
+        if (! is_array($value)) {
+            return $value;
+        }
+        if (! array_is_list($value)) {
+            ksort($value, SORT_STRING);
+        }
+        foreach ($value as $key => $item) {
+            $value[$key] = $this->normalizeCanonicalValue($item);
+        }
+
+        return $value;
     }
 
     /**

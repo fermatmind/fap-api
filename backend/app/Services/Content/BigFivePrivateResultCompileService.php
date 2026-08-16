@@ -10,6 +10,12 @@ use RuntimeException;
 
 final class BigFivePrivateResultCompileService
 {
+    public const PACK_ID = 'BIG5_OCEAN_PRIVATE_RESULT';
+
+    public const PACK_VERSION = 'v2';
+
+    public const ARTIFACT_FILENAME = 'private_result.compiled.json';
+
     public const SCHEMA = 'fap.big5.private_result.compiled.v1';
 
     public const COMPILER_SCHEMA = 'fap.big5.private_result.compiler.v1';
@@ -86,6 +92,7 @@ final class BigFivePrivateResultCompileService
             'compiler' => $manifest['compiler'],
             'source_hash' => $sourceHash,
             'coverage' => $coverage,
+            'registry_manifest' => $manifest,
             'assets' => $assets,
         ];
         $compiledHash = hash('sha256', $this->canonicalJson($unsignedPayload));
@@ -100,6 +107,50 @@ final class BigFivePrivateResultCompileService
             'source_hash' => $sourceHash,
             'compiled_hash' => $compiledHash,
         ];
+    }
+
+    /**
+     * Materialize the deterministic derived artifact for the existing packs2 publisher.
+     *
+     * @return array{ok:bool,pack_id:string,version:string,compiled_dir:string,source_hash:string,compiled_hash:string}
+     */
+    public function compileToPackDirectory(): array
+    {
+        $compiled = $this->compile();
+        $directory = base_path('content_packs/'.self::PACK_ID.'/'.self::PACK_VERSION.'/compiled');
+        if (! is_dir($directory) && ! mkdir($directory, 0775, true) && ! is_dir($directory)) {
+            throw new RuntimeException("Unable to create Big Five private result compiled directory: {$directory}");
+        }
+
+        $manifest = $compiled['manifest'];
+        $manifest['compiled_hash'] = $compiled['compiled_hash'];
+        $manifest['content_hash'] = $compiled['source_hash'];
+        $manifest['artifacts'] = [[
+            'path' => self::ARTIFACT_FILENAME,
+            'sha256' => hash('sha256', $compiled['bytes']),
+        ]];
+        $manifestBytes = $this->canonicalJson($manifest)."\n";
+
+        $this->atomicWrite($directory.'/'.self::ARTIFACT_FILENAME, $compiled['bytes']);
+        $this->atomicWrite($directory.'/manifest.json', $manifestBytes);
+
+        return [
+            'ok' => true,
+            'pack_id' => self::PACK_ID,
+            'version' => self::PACK_VERSION,
+            'compiled_dir' => $directory,
+            'source_hash' => $compiled['source_hash'],
+            'compiled_hash' => $compiled['compiled_hash'],
+        ];
+    }
+
+    private function atomicWrite(string $path, string $bytes): void
+    {
+        $temporary = $path.'.tmp.'.bin2hex(random_bytes(6));
+        if (file_put_contents($temporary, $bytes, LOCK_EX) !== strlen($bytes) || ! rename($temporary, $path)) {
+            @unlink($temporary);
+            throw new RuntimeException("Unable to write Big Five private result compiled artifact: {$path}");
+        }
     }
 
     /**

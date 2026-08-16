@@ -6,6 +6,7 @@ namespace Tests\Feature\V0_3\Concerns;
 
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Services\BigFive\ReportEngine\Bridge\BigFiveLiveRuntimeBridge;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportGatekeeper;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +18,7 @@ trait BuildsBigFiveReportEngineBridgeFixture
     /**
      * @return array{attempt:Attempt,result:Result,attempt_id:string,anon_id:string,token:string,legacy_sections:list<array<string,mixed>>}
      */
-    private function createCanonicalBigFiveBridgeFixture(string $anonId = 'anon_big5_bridge'): array
+    private function createCanonicalBigFiveBridgeFixture(string $anonId = 'anon_big5_bridge', string $locale = 'zh-CN'): array
     {
         $fixture = $this->canonicalContextFixture();
         $attemptId = (string) Str::uuid();
@@ -32,7 +33,7 @@ trait BuildsBigFiveReportEngineBridgeFixture
             'scale_code_v2' => 'BIG_FIVE_OCEAN_MODEL',
             'scale_version' => 'v0.3',
             'region' => 'CN_MAINLAND',
-            'locale' => 'zh-CN',
+            'locale' => $locale,
             'question_count' => 90,
             'answers_summary_json' => ['meta' => ['form_code' => 'big5_90']],
             'client_platform' => 'test',
@@ -73,7 +74,8 @@ trait BuildsBigFiveReportEngineBridgeFixture
         ]);
 
         $legacySections = $this->legacySections();
-        $this->fakeReportGate($legacySections);
+        $enginePayload = app(BigFiveLiveRuntimeBridge::class)->build($attempt, $result, 'BIG5_OCEAN');
+        $this->fakeReportGate($legacySections, 'BIG5_OCEAN', $enginePayload);
 
         return [
             'attempt' => $attempt,
@@ -197,9 +199,9 @@ trait BuildsBigFiveReportEngineBridgeFixture
     /**
      * @param  list<array<string,mixed>>  $legacySections
      */
-    private function fakeReportGate(array $legacySections, string $scaleCode = 'BIG5_OCEAN'): void
+    private function fakeReportGate(array $legacySections, string $scaleCode = 'BIG5_OCEAN', ?array $enginePayload = null): void
     {
-        $this->mock(ReportGatekeeper::class, function (MockInterface $mock) use ($legacySections, $scaleCode): void {
+        $this->mock(ReportGatekeeper::class, function (MockInterface $mock) use ($legacySections, $scaleCode, $enginePayload): void {
             $mock->shouldReceive('resolve')
                 ->andReturn([
                     'ok' => true,
@@ -215,7 +217,10 @@ trait BuildsBigFiveReportEngineBridgeFixture
                         'schema_version' => strtolower($scaleCode).'.report.v1',
                         'scale_code' => $scaleCode,
                         'sections' => $legacySections,
-                        '_meta' => [],
+                        '_meta' => $enginePayload === null ? [] : [
+                            'big5_private_result_authority' => data_get($enginePayload, '_meta.big5_private_result_authority'),
+                            'big5_report_engine_v2' => $enginePayload,
+                        ],
                     ],
                 ]);
         });

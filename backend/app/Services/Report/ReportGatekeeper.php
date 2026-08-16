@@ -935,15 +935,40 @@ class ReportGatekeeper
     private function snapshotReportForVariant(object $snapshotRow, string $variant): array
     {
         if (ReportAccess::normalizeVariant($variant) === ReportAccess::VARIANT_FREE) {
-            return $this->decodeReportJson($snapshotRow->report_free_json ?? null);
+            return $this->markLegacyBigFiveSnapshot(
+                $this->decodeReportJson($snapshotRow->report_free_json ?? null),
+                $snapshotRow,
+            );
         }
 
         $report = $this->decodeReportJson($snapshotRow->report_full_json ?? null);
         if ($report !== []) {
-            return $report;
+            return $this->markLegacyBigFiveSnapshot($report, $snapshotRow);
         }
 
-        return $this->decodeReportJson($snapshotRow->report_json ?? null);
+        return $this->markLegacyBigFiveSnapshot(
+            $this->decodeReportJson($snapshotRow->report_json ?? null),
+            $snapshotRow,
+        );
+    }
+
+    /** @param array<string,mixed> $report @return array<string,mixed> */
+    private function markLegacyBigFiveSnapshot(array $report, object $snapshotRow): array
+    {
+        if (strtoupper(trim((string) ($snapshotRow->scale_code ?? ''))) !== 'BIG5_OCEAN'
+            || $report === []
+            || is_array(data_get($report, '_meta.big5_private_result_authority'))) {
+            return $report;
+        }
+        data_set($report, '_meta.big5_private_result_authority', [
+            'schema_version' => 'fap.big5.private_result_authority.v1',
+            'mode' => 'immutable_legacy_snapshot',
+            'locale' => (string) ($report['locale'] ?? ''),
+            'source_hash' => '',
+            'compiled_hash' => '',
+        ]);
+
+        return $report;
     }
 
     private function strictSnapshotModeEnabled(): bool

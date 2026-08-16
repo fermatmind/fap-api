@@ -163,9 +163,9 @@ final class BigFiveModulesUnlockFlowTest extends TestCase
         $this->assertContains('big5_full', $beforeAllowed);
         $this->assertContains('big5_action_plan', $beforeAllowed);
         $this->assertSame([], (array) $before->json('offers'));
-        $beforeSections = array_map('strval', (array) array_column((array) $before->json('report.sections'), 'key'));
+        $beforeSections = array_map('strval', (array) array_column((array) $before->json('report.sections'), 'section_key'));
         $this->assertSame(
-            ['traits.overview', 'traits.why_this_profile', 'relationships.interpersonal_style', 'career.work_style', 'growth.next_actions', 'disclaimer_top', 'summary', 'domains_overview', 'facet_table', 'top_facets', 'facets_deepdive', 'action_plan', 'disclaimer'],
+            ['hero_summary', 'domains_overview', 'domain_deep_dive', 'facet_details', 'core_portrait', 'norms_comparison', 'action_plan', 'methodology_and_access'],
             $beforeSections
         );
 
@@ -203,9 +203,9 @@ final class BigFiveModulesUnlockFlowTest extends TestCase
         $offers = (array) $after->json('offers');
         $this->assertSame([], $offers);
 
-        $afterSections = array_map('strval', (array) array_column((array) $after->json('report.sections'), 'key'));
+        $afterSections = array_map('strval', (array) array_column((array) $after->json('report.sections'), 'section_key'));
         $this->assertSame(
-            ['traits.overview', 'traits.why_this_profile', 'relationships.interpersonal_style', 'career.work_style', 'growth.next_actions', 'disclaimer_top', 'summary', 'domains_overview', 'facet_table', 'top_facets', 'facets_deepdive', 'action_plan', 'disclaimer'],
+            ['hero_summary', 'domains_overview', 'domain_deep_dive', 'facet_details', 'core_portrait', 'norms_comparison', 'action_plan', 'methodology_and_access'],
             $afterSections
         );
 

@@ -18,29 +18,17 @@ final class BigFiveGoldenCasesTest extends TestCase
     use RefreshDatabase;
 
     private const EXPECTED_FREE_SECTION_KEYS = [
-        'traits.overview',
-        'traits.why_this_profile',
-        'disclaimer_top',
-        'summary',
+        'hero_summary',
         'domains_overview',
-        'disclaimer',
+        'domain_deep_dive',
+        'facet_details',
+        'core_portrait',
+        'norms_comparison',
+        'action_plan',
+        'methodology_and_access',
     ];
 
-    private const EXPECTED_FULL_SECTION_KEYS = [
-        'traits.overview',
-        'traits.why_this_profile',
-        'relationships.interpersonal_style',
-        'career.work_style',
-        'growth.next_actions',
-        'disclaimer_top',
-        'summary',
-        'domains_overview',
-        'facet_table',
-        'top_facets',
-        'facets_deepdive',
-        'action_plan',
-        'disclaimer',
-    ];
+    private const EXPECTED_FULL_SECTION_KEYS = self::EXPECTED_FREE_SECTION_KEYS;
 
     public function test_golden_cases_scores_and_report_variants_are_stable(): void
     {
@@ -148,7 +136,7 @@ final class BigFiveGoldenCasesTest extends TestCase
             ]);
             $this->assertTrue((bool) ($freeComposed['ok'] ?? false));
             $freeSections = array_map(
-                static fn (array $s): string => (string) ($s['key'] ?? ''),
+                static fn (array $s): string => (string) ($s['section_key'] ?? ''),
                 (array) data_get($freeComposed, 'report.sections', [])
             );
             $this->assertSame(self::EXPECTED_FREE_SECTION_KEYS, $freeSections);
@@ -162,7 +150,7 @@ final class BigFiveGoldenCasesTest extends TestCase
             ]);
             $this->assertTrue((bool) ($fullComposed['ok'] ?? false));
             $fullSections = array_map(
-                static fn (array $s): string => (string) ($s['key'] ?? ''),
+                static fn (array $s): string => (string) ($s['section_key'] ?? ''),
                 (array) data_get($fullComposed, 'report.sections', [])
             );
             $this->assertSame(self::EXPECTED_FULL_SECTION_KEYS, $fullSections);

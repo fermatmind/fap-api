@@ -7,7 +7,6 @@ use App\Models\PersonalityProfile;
 use App\Models\ReportSnapshot;
 use App\Models\Result;
 use App\Models\Share;
-use App\Services\BigFive\BigFivePublicProjectionService;
 use App\Services\Cms\PersonalityProfileService;
 use App\Services\Enneagram\EnneagramPublicFormSummaryBuilder;
 use App\Services\InsightGraph\InsightGraphContractService;
@@ -42,7 +41,6 @@ class ShareService
         private readonly MbtiPrivacyConsentContractService $mbtiPrivacyConsentContractService,
         private readonly MbtiPublicProjectionService $mbtiPublicProjectionService,
         private readonly MbtiPublicSummaryV1Builder $mbtiPublicSummaryV1Builder,
-        private readonly BigFivePublicProjectionService $bigFivePublicProjectionService,
         private readonly EnneagramPublicFormSummaryBuilder $enneagramPublicFormSummaryBuilder,
         private readonly RiasecPublicProjectionService $riasecPublicProjectionService,
         private readonly AnswerSurfaceContractService $answerSurfaceContractService,
@@ -1098,12 +1096,9 @@ class ShareService
         $normalizedScaleCode = strtoupper(trim((string) ($attempt->scale_code ?? $result->scale_code ?? 'MBTI')));
         $normalizedLocale = $this->normalizeLocale((string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN')));
         $big5Projection = $normalizedScaleCode === 'BIG5_OCEAN'
-            ? $this->bigFivePublicProjectionService->buildFromResult(
-                $result,
-                $normalizedLocale,
-                ReportAccess::VARIANT_FREE,
-                true
-            )
+            ? (is_array(data_get($publicSafeReport, '_meta.big5_public_projection_v1'))
+                ? data_get($publicSafeReport, '_meta.big5_public_projection_v1')
+                : [])
             : [];
         $riasecProjection = [];
         $riasecProjectionV2 = [];
@@ -1189,6 +1184,10 @@ class ShareService
             $payload = $this->applyMbtiProjectionAliases($payload);
         } elseif ($scaleCode === 'BIG5_OCEAN' && $big5Projection !== []) {
             $payload['big5_public_projection_v1'] = $big5Projection;
+            $authority = data_get($publicSafeReport, '_meta.big5_private_result_authority');
+            if (is_array($authority)) {
+                $payload['big5_private_result_authority'] = $authority;
+            }
             foreach ([
                 'controlled_narrative_v1',
                 'cultural_calibration_v1',

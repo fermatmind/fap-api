@@ -125,6 +125,28 @@ final class ReportPdfDocumentService
             ];
         }
 
+        if ($scaleCode === 'BIG5_OCEAN') {
+            $authority = data_get($gate, 'report._meta.big5_private_result_authority');
+
+            return [
+                'pdf_surface_version' => 'big5.private_result_pdf.v1',
+                'scale_code' => 'BIG5_OCEAN',
+                'form_code' => null,
+                'form_label' => null,
+                'filename_hint' => $this->fileName('BIG5_OCEAN', (string) $attempt->id),
+                'report_schema_version' => data_get($gate, 'report.schema_version'),
+                'projection_version' => null,
+                'report_engine_version' => null,
+                'interpretation_context_id' => null,
+                'content_release_hash' => is_array($authority) ? ($authority['source_hash'] ?? null) : null,
+                'content_snapshot_status' => is_array($authority) ? ($authority['mode'] ?? null) : null,
+                'snapshot_binding_v1' => [],
+                'compare_compatibility_group' => null,
+                'cross_form_comparable' => null,
+                'big5_private_result_authority' => is_array($authority) ? $authority : [],
+            ];
+        }
+
         if ($scaleCode !== 'ENNEAGRAM') {
             return [
                 'pdf_surface_version' => 'report_pdf.surface.v1',

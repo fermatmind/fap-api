@@ -17,7 +17,7 @@ final class BigFiveDisclaimerContractTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_disclaimer_sections_are_always_present_in_free_and_full_variants(): void
+    public function test_methodology_disclaimer_is_always_present_in_free_and_full_variants(): void
     {
         $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
         $this->artisan('norms:import --scale=BIG5_OCEAN --csv=resources/norms/big5/big5_norm_stats_seed.csv --activate=1')
@@ -105,33 +105,15 @@ final class BigFiveDisclaimerContractTest extends TestCase
      */
     private function assertDisclaimerContract(array $sections): void
     {
-        $keys = array_map(
-            static fn (array $section): string => (string) ($section['key'] ?? ''),
-            $sections
-        );
-
-        $topIndex = array_search('disclaimer_top', $keys, true);
-        $summaryIndex = array_search('summary', $keys, true);
-        $bottomIndex = array_search('disclaimer', $keys, true);
-
-        $this->assertNotFalse($topIndex);
-        $this->assertNotFalse($summaryIndex);
-        $this->assertNotFalse($bottomIndex);
-        $this->assertLessThan((int) $summaryIndex, (int) $topIndex);
-        $this->assertSame(count($keys) - 1, (int) $bottomIndex);
-
-        foreach ($sections as $section) {
-            if (! in_array((string) ($section['key'] ?? ''), ['disclaimer_top', 'disclaimer'], true)) {
-                continue;
-            }
-            $this->assertSame('free', (string) ($section['access_level'] ?? ''));
-            foreach ((array) ($section['blocks'] ?? []) as $block) {
-                $this->assertIsArray($block);
-                $title = (string) ($block['title'] ?? '');
-                $body = (string) ($block['body'] ?? '');
-                $this->assertStringNotContainsString('{{', $title.$body);
-                $this->assertStringNotContainsString('}}', $title.$body);
-            }
-        }
+        $methodology = collect($sections)->firstWhere('section_key', 'methodology_and_access');
+        $this->assertIsArray($methodology);
+        $this->assertNotSame('locked', (string) ($methodology['status'] ?? ''));
+        $blocks = (array) ($methodology['blocks'] ?? []);
+        $this->assertNotEmpty($blocks);
+        $copy = json_encode(array_column($blocks, 'resolved_copy'), JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+        $this->assertStringContainsString('不应被当作诊断', $copy);
+        $this->assertStringContainsString('招聘筛选', $copy);
+        $this->assertStringNotContainsString('{{', $copy);
+        $this->assertStringNotContainsString('}}', $copy);
     }
 }

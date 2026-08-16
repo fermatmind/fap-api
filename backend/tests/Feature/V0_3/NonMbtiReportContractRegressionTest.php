@@ -259,21 +259,16 @@ final class NonMbtiReportContractRegressionTest extends TestCase
         $this->assertMbtiOnlyFieldsAreMissing($locked);
         $this->assertSame(
             [
-                'traits.overview',
-                'traits.why_this_profile',
-                'relationships.interpersonal_style',
-                'career.work_style',
-                'growth.next_actions',
-                'disclaimer_top',
-                'summary',
+                'hero_summary',
                 'domains_overview',
-                'facet_table',
-                'top_facets',
-                'facets_deepdive',
+                'domain_deep_dive',
+                'facet_details',
+                'core_portrait',
+                'norms_comparison',
                 'action_plan',
-                'disclaimer',
+                'methodology_and_access',
             ],
-            array_map('strval', (array) array_column((array) $locked->json('report.sections'), 'key'))
+            array_map('strval', (array) array_column((array) $locked->json('report.sections'), 'section_key'))
         );
         $this->assertSame([], (array) $locked->json('offers'));
 
@@ -308,21 +303,16 @@ final class NonMbtiReportContractRegressionTest extends TestCase
         $this->assertMbtiOnlyFieldsAreMissing($unlocked);
         $this->assertSame(
             [
-                'traits.overview',
-                'traits.why_this_profile',
-                'relationships.interpersonal_style',
-                'career.work_style',
-                'growth.next_actions',
-                'disclaimer_top',
-                'summary',
+                'hero_summary',
                 'domains_overview',
-                'facet_table',
-                'top_facets',
-                'facets_deepdive',
+                'domain_deep_dive',
+                'facet_details',
+                'core_portrait',
+                'norms_comparison',
                 'action_plan',
-                'disclaimer',
+                'methodology_and_access',
             ],
-            array_map('strval', (array) array_column((array) $unlocked->json('report.sections'), 'key'))
+            array_map('strval', (array) array_column((array) $unlocked->json('report.sections'), 'section_key'))
         );
         $this->assertSame([], (array) $unlocked->json('offers'));
     }

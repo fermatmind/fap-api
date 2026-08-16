@@ -42,6 +42,8 @@ final class BigFiveReportEngineBridgeContractTest extends TestCase
         $this->assertNotEmpty($response->json('big5_report_engine_v2.engine_decisions.selected_synergies'));
         $this->assertNotEmpty($response->json('big5_report_engine_v2.engine_decisions.facet_anomalies'));
         $this->assertNotEmpty($response->json('big5_report_engine_v2.action_matrix.scenarios'));
+        $response->assertJsonPath('big5_report_engine_v2._meta.big5_private_result_authority.mode', 'canonical');
+        $this->assertMatchesRegularExpression('/\A[0-9a-f]{64}\z/', (string) $response->json('big5_report_engine_v2._meta.big5_private_result_authority.source_hash'));
         $this->assertSame($fixture['legacy_sections'], $response->json('report.sections'));
         $this->assertSame('big5.public_projection.v1', $response->json('big5_public_projection_v1.schema_version'));
         $this->assertEquals($expectedV2, $response->json('big5_report_engine_v2'));
@@ -52,6 +54,7 @@ final class BigFiveReportEngineBridgeContractTest extends TestCase
         ];
         $snapshotPayload['big5_report_engine_v2']['meta']['attempt_id'] = 'attempt_live_bridge_fixture';
         $snapshotPayload['big5_report_engine_v2']['meta']['result_id'] = 'result_live_bridge_fixture';
+        unset($snapshotPayload['big5_report_engine_v2']['_meta']);
         $this->assertSame($snapshot, $snapshotPayload);
 
         $blocks = collect($response->json('big5_report_engine_v2.sections'))
@@ -71,27 +74,20 @@ final class BigFiveReportEngineBridgeContractTest extends TestCase
         $fixture = $this->createCanonicalBigFiveBridgeFixture('anon_big5_bridge_unsupported_locale');
         $fixture['attempt']->forceFill(['locale' => 'fr-FR'])->save();
 
-        $response = $this->withHeaders([
-            'Authorization' => 'Bearer '.$fixture['token'],
-            'X-Anon-Id' => $fixture['anon_id'],
-        ])->getJson('/api/v0.3/attempts/'.$fixture['attempt_id'].'/report');
-
-        $response->assertOk();
-        $response->assertJsonPath('big5_report_engine_v2.schema_version', 'fap.big5.report.unavailable.v1');
-        $response->assertJsonPath('big5_report_engine_v2.status', 'unavailable');
-        $response->assertJsonPath('big5_report_engine_v2.unavailable_reason', 'unsupported_locale');
-        $this->assertSame($fixture['legacy_sections'], $response->json('report.sections'));
+        $payload = app(BigFiveLiveRuntimeBridge::class)->build($fixture['attempt']->fresh(), $fixture['result'], 'BIG5_OCEAN');
+        $this->assertSame('fap.big5.report.unavailable.v1', $payload['schema_version'] ?? null);
+        $this->assertSame('unavailable', $payload['status'] ?? null);
+        $this->assertSame('unsupported_locale', $payload['unavailable_reason'] ?? null);
         $this->assertDoesNotMatchRegularExpression(
             '/[\x{3400}-\x{9FFF}]/u',
-            json_encode($response->json('big5_report_engine_v2'), JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR),
+            json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR),
         );
     }
 
     public function test_english_attempt_returns_full_english_v2_payload_through_the_same_api_bridge(): void
     {
         config()->set('big5_report_engine.v2_bridge_enabled', true);
-        $fixture = $this->createCanonicalBigFiveBridgeFixture('anon_big5_bridge_english');
-        $fixture['attempt']->forceFill(['locale' => 'en-US'])->save();
+        $fixture = $this->createCanonicalBigFiveBridgeFixture('anon_big5_bridge_english', 'en-US');
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '.$fixture['token'],

@@ -17,7 +17,6 @@ use App\Services\Attempts\AttemptSubmissionService;
 use App\Services\Attempts\InviteUnlock\InviteUnlockDiagnostics;
 use App\Services\Attempts\ResultProcessingTimingService;
 use App\Services\BigFive\BigFivePublicFormSummaryBuilder;
-use App\Services\BigFive\BigFivePublicProjectionService;
 use App\Services\BigFive\ReportEngine\Bridge\BigFiveLiveRuntimeBridge;
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2RuntimeWrapper;
 use App\Services\Commerce\MbtiAccessHubBuilder;
@@ -42,6 +41,7 @@ use App\Services\Mbti\MbtiUserStateOrchestrationService;
 use App\Services\Mbti\MbtiWorkingLifeConsolidationService;
 use App\Services\Observability\ClinicalComboTelemetry;
 use App\Services\Observability\Sds20Telemetry;
+use App\Services\Report\BigFiveReportComposer;
 use App\Services\Report\InviteUnlockSummaryBuilder;
 use App\Services\Report\MbtiPreviewContractBuilder;
 use App\Services\Report\Pdf\ReportPdfDocumentService;
@@ -83,7 +83,7 @@ class AttemptReadController extends Controller
         private ReportGatekeeper $reportGatekeeper,
         private ReportPdfDocumentService $reportPdfDocumentService,
         private ResultPagePdfTokenService $resultPagePdfTokenService,
-        private BigFivePublicProjectionService $bigFivePublicProjectionService,
+        private BigFiveReportComposer $bigFiveReportComposer,
         private BigFivePublicFormSummaryBuilder $bigFivePublicFormSummaryBuilder,
         private EnneagramPublicProjectionService $enneagramPublicProjectionService,
         private EnneagramPublicFormSummaryBuilder $enneagramPublicFormSummaryBuilder,
@@ -111,7 +111,6 @@ class AttemptReadController extends Controller
         private ScaleCodeResponseProjector $responseProjector,
         private ReportSubjectRepository $reportSubjects,
         private AttemptUnlockProjectionRepairService $projectionRepair,
-        private BigFiveLiveRuntimeBridge $bigFiveLiveRuntimeBridge,
         private BigFiveResultPageV2RuntimeWrapper $bigFiveResultPageV2RuntimeWrapper,
     ) {}
 
@@ -304,18 +303,15 @@ class AttemptReadController extends Controller
         $hasBigFiveProjectionFullAccess = $scaleCode === 'BIG5_OCEAN'
             && $attempt instanceof Attempt
             && $this->hasBigFiveFullAccess($request, $orgId, (string) $attempt->id, $readUserId, $readAnonId);
-        $big5Projection = $scaleCode === 'BIG5_OCEAN'
-            ? ($hasBigFiveProjectionFullAccess
-                ? $this->bigFivePublicProjectionService->buildFromResult(
-                    $result,
-                    (string) ($attempt?->locale ?? config('content_packs.default_locale', 'zh-CN'))
-                )
-                : $this->bigFivePublicProjectionService->buildFromResult(
-                    $result,
-                    (string) ($attempt?->locale ?? config('content_packs.default_locale', 'zh-CN')),
-                    ReportAccess::VARIANT_FREE,
-                    true
-                ))
+        $big5Report = $scaleCode === 'BIG5_OCEAN' && $attempt instanceof Attempt
+            ? $this->bigFiveReportComposer->composeVariant(
+                $attempt,
+                $result,
+                $hasBigFiveProjectionFullAccess ? ReportAccess::VARIANT_FULL : ReportAccess::VARIANT_FREE,
+            )
+            : [];
+        $big5Projection = is_array(data_get($big5Report, 'report._meta.big5_public_projection_v1'))
+            ? data_get($big5Report, 'report._meta.big5_public_projection_v1')
             : [];
         $enneagramProjection = $scaleCode === 'ENNEAGRAM'
             ? $this->enneagramPublicProjectionService->buildFromResult(
@@ -394,6 +390,10 @@ class AttemptReadController extends Controller
         ];
         if ($big5Projection !== []) {
             $responsePayload['big5_public_projection_v1'] = $big5Projection;
+            $authority = data_get($big5Report, 'report._meta.big5_private_result_authority');
+            if (is_array($authority)) {
+                $responsePayload['big5_private_result_authority'] = $authority;
+            }
             $controlledNarrative = is_array($big5Projection['controlled_narrative_v1'] ?? null)
                 ? $big5Projection['controlled_narrative_v1']
                 : [];
@@ -588,12 +588,14 @@ class AttemptReadController extends Controller
             }
             $projection = data_get($responsePayload, 'report._meta.big5_public_projection_v1');
             if (! is_array($projection)) {
-                $projection = $this->bigFivePublicProjectionService->buildFromResult(
-                    $result,
-                    (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN')),
-                    strtolower(trim((string) ($gate['variant'] ?? 'free'))),
-                    (bool) ($gate['locked'] ?? false)
-                );
+                $projection = [
+                    'schema_version' => 'big5.public_projection.v1',
+                    'sections' => [],
+                    '_meta' => [
+                        'scale_code' => 'BIG5_OCEAN',
+                        'source' => 'immutable_legacy_snapshot',
+                    ],
+                ];
             }
             $responsePayload['big5_public_projection_v1'] = $projection;
             $controlledNarrative = is_array($projection['controlled_narrative_v1'] ?? null)
@@ -614,7 +616,7 @@ class AttemptReadController extends Controller
             if ($comparative !== []) {
                 $responsePayload['comparative_v1'] = $comparative;
             }
-            $engineV2Payload = $this->bigFiveLiveRuntimeBridge->build($attempt, $result, $scaleCode);
+            $engineV2Payload = data_get($responsePayload, 'report._meta.big5_report_engine_v2');
             if (is_array($engineV2Payload)) {
                 $responsePayload[BigFiveLiveRuntimeBridge::RESPONSE_KEY] = $engineV2Payload;
             }

@@ -89,20 +89,28 @@ final class BigFiveReportBlocksContractTest extends TestCase
         ]);
         $this->assertTrue((bool) ($free['ok'] ?? false));
         $freeSections = (array) data_get($free, 'report.sections', []);
-        $freeKeys = array_values(array_map(static fn (array $s): string => (string) ($s['key'] ?? ''), $freeSections));
+        $freeKeys = array_values(array_map(static fn (array $s): string => (string) ($s['section_key'] ?? ''), $freeSections));
         $this->assertSame(
             [
-                'traits.overview',
-                'traits.why_this_profile',
-                'disclaimer_top',
-                'summary',
+                'hero_summary',
                 'domains_overview',
-                'disclaimer',
+                'domain_deep_dive',
+                'facet_details',
+                'core_portrait',
+                'norms_comparison',
+                'action_plan',
+                'methodology_and_access',
             ],
             $freeKeys
         );
         foreach ($freeSections as $section) {
-            $this->assertNotSame('paid', strtolower((string) ($section['access_level'] ?? 'free')));
+            if (in_array((string) ($section['section_key'] ?? ''), ['hero_summary', 'domains_overview', 'methodology_and_access'], true)) {
+                $this->assertNotSame('locked', (string) ($section['status'] ?? ''));
+                $this->assertNotEmpty($section['blocks'] ?? []);
+            } else {
+                $this->assertSame('locked', (string) ($section['status'] ?? ''));
+                $this->assertSame([], $section['blocks'] ?? null);
+            }
         }
         $this->assertSame('big5.public_projection.v1', (string) data_get($free, 'report._meta.big5_public_projection_v1.schema_version'));
 
@@ -115,22 +123,17 @@ final class BigFiveReportBlocksContractTest extends TestCase
         ]);
         $this->assertTrue((bool) ($full['ok'] ?? false));
         $fullSections = (array) data_get($full, 'report.sections', []);
-        $fullKeys = array_values(array_map(static fn (array $s): string => (string) ($s['key'] ?? ''), $fullSections));
+        $fullKeys = array_values(array_map(static fn (array $s): string => (string) ($s['section_key'] ?? ''), $fullSections));
         $this->assertSame(
             [
-                'traits.overview',
-                'traits.why_this_profile',
-                'relationships.interpersonal_style',
-                'career.work_style',
-                'growth.next_actions',
-                'disclaimer_top',
-                'summary',
+                'hero_summary',
                 'domains_overview',
-                'facet_table',
-                'top_facets',
-                'facets_deepdive',
+                'domain_deep_dive',
+                'facet_details',
+                'core_portrait',
+                'norms_comparison',
                 'action_plan',
-                'disclaimer',
+                'methodology_and_access',
             ],
             $fullKeys
         );
@@ -139,21 +142,16 @@ final class BigFiveReportBlocksContractTest extends TestCase
         $sectionMap = [];
         foreach ($fullSections as $section) {
             $this->assertIsArray($section);
-            $sectionMap[(string) ($section['key'] ?? '')] = $section;
+            $sectionMap[(string) ($section['section_key'] ?? '')] = $section;
             foreach ((array) ($section['blocks'] ?? []) as $block) {
                 $this->assertIsArray($block);
-                $rendered = (string) ($block['title'] ?? '').' '.(string) ($block['body'] ?? '');
-                $this->assertStringNotContainsString('{{', $rendered);
-                $this->assertStringNotContainsString('}}', $rendered);
+                $rendered = json_encode($block['resolved_copy'] ?? [], JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+                $this->assertDoesNotMatchRegularExpression('/\{\{[^}]+\}\}/', $rendered);
             }
         }
 
         $this->assertCount(5, (array) (($sectionMap['domains_overview']['blocks'] ?? [])));
-        $this->assertCount(30, (array) (($sectionMap['facet_table']['blocks'] ?? [])));
-        $this->assertCount(3, (array) (($sectionMap['top_facets']['blocks'] ?? [])));
-
-        $deepCount = count((array) (($sectionMap['facets_deepdive']['blocks'] ?? [])));
-        $this->assertGreaterThanOrEqual(3, $deepCount);
-        $this->assertLessThanOrEqual(6, $deepCount);
+        $this->assertGreaterThanOrEqual(5, count((array) ($sectionMap['facet_details']['blocks'] ?? [])));
+        $this->assertNotEmpty((array) ($sectionMap['methodology_and_access']['blocks'] ?? []));
     }
 }

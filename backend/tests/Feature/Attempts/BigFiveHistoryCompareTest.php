@@ -124,6 +124,8 @@ final class BigFiveHistoryCompareTest extends TestCase
         $response->assertJsonPath('history_compare.domains_delta.O.direction', 'up');
         $response->assertJsonPath('history_compare.domains_delta.E.delta', -0.2);
         $response->assertJsonPath('history_compare.domains_delta.E.direction', 'down');
+        $response->assertJsonPath('history_compare.big5_private_result_authority.mode', 'immutable_legacy_snapshot');
+        $response->assertJsonPath('items.0.big5_private_result_authority.mode', 'immutable_legacy_snapshot');
         $response->assertJsonPath('items.0.attempt_id', $latestAttemptId);
         $response->assertJsonPath('items.0.result_summary.domains_mean.O', 3.5);
         $response->assertJsonPath('items.0.access_summary.access_state', 'ready');

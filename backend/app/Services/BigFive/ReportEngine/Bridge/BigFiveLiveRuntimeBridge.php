@@ -24,10 +24,6 @@ final class BigFiveLiveRuntimeBridge
      */
     public function build(Attempt $attempt, Result $result, string $scaleCode): ?array
     {
-        if (! (bool) config('big5_report_engine.v2_bridge_enabled', false)) {
-            return null;
-        }
-
         if (strtoupper(trim($scaleCode)) !== 'BIG5_OCEAN') {
             return null;
         }

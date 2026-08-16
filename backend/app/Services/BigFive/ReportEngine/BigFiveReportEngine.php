@@ -12,11 +12,12 @@ use App\Services\BigFive\ReportEngine\Resolver\FacetPrecisionResolver;
 use App\Services\BigFive\ReportEngine\Resolver\ModifierInjector;
 use App\Services\BigFive\ReportEngine\Resolver\SynergyCandidateResolver;
 use App\Services\BigFive\ReportEngine\Resolver\SynergyResolutionService;
+use App\Services\Content\BigFivePrivateResultPackLoader;
 
 final class BigFiveReportEngine
 {
     public function __construct(
-        private readonly RegistryLoader $registryLoader = new RegistryLoader,
+        private readonly BigFivePrivateResultPackLoader $privateResultPackLoader,
         private readonly RegistryValidator $registryValidator = new RegistryValidator,
         private readonly ReportContextBuilder $contextBuilder = new ReportContextBuilder,
         private readonly AtomicBlockResolver $atomicBlockResolver = new AtomicBlockResolver,
@@ -36,7 +37,21 @@ final class BigFiveReportEngine
     public function generate(array $input): array
     {
         $context = $this->contextBuilder->fromArray($input);
-        $registry = $this->registryLoader->load($context->locale);
+        $loaded = $this->privateResultPackLoader->load($context->locale);
+        $payload = $this->generateWithRegistry($input, $loaded['registry']);
+        $payload['_meta']['big5_private_result_authority'] = $loaded['authority'];
+
+        return $payload;
+    }
+
+    /**
+     * @param  array<string,mixed>  $input
+     * @param  array<string,mixed>  $registry
+     * @return array<string,mixed>
+     */
+    public function generateWithRegistry(array $input, array $registry): array
+    {
+        $context = $this->contextBuilder->fromArray($input);
         $this->registryValidator->assertValid($registry);
         $blocks = $this->atomicBlockResolver->resolve($context, $registry);
         $blocks = $this->modifierInjector->inject($context, $blocks, $registry);
@@ -56,9 +71,9 @@ final class BigFiveReportEngine
      */
     public function generateCanonicalNSlice(): array
     {
-        $registry = $this->registryLoader->load('zh-CN');
+        $registry = (new RegistryLoader)->load('zh-CN');
         $fixture = $registry['fixtures']['canonical_n_slice_sensitive_independent'] ?? [];
 
-        return $this->generate(is_array($fixture) ? $fixture : []);
+        return $this->generateWithRegistry(is_array($fixture) ? $fixture : [], $registry);
     }
 }

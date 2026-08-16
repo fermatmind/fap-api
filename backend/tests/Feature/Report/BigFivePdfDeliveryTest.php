@@ -153,6 +153,8 @@ final class BigFivePdfDeliveryTest extends TestCase
         $response->assertHeader('X-Report-Scale', 'BIG5_OCEAN');
         $response->assertHeader('X-Report-Variant', 'full');
         $response->assertHeader('X-Report-Locked', 'false');
+        $response->assertHeader('X-Content-Snapshot-Status', 'canonical');
+        $this->assertMatchesRegularExpression('/\A[0-9a-f]{64}\z/', (string) $response->headers->get('X-Content-Release-Hash'));
         $this->assertStringContainsString(
             '.pdf',
             (string) ($response->headers->get('Content-Disposition') ?? '')

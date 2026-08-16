@@ -13,7 +13,7 @@ final class BigFiveReportEngineBridgeFlagTest extends TestCase
     use BuildsBigFiveReportEngineBridgeFixture;
     use RefreshDatabase;
 
-    public function test_flag_off_keeps_live_report_response_without_v2_bridge_field(): void
+    public function test_retired_flag_cannot_disable_canonical_live_report(): void
     {
         config()->set('big5_report_engine.v2_bridge_enabled', false);
         $fixture = $this->createCanonicalBigFiveBridgeFixture('anon_big5_bridge_flag_off');
@@ -24,12 +24,12 @@ final class BigFiveReportEngineBridgeFlagTest extends TestCase
         ])->getJson('/api/v0.3/attempts/'.$fixture['attempt_id'].'/report');
 
         $response->assertOk();
-        $this->assertArrayNotHasKey('big5_report_engine_v2', $response->json());
+        $response->assertJsonPath('big5_report_engine_v2._meta.big5_private_result_authority.mode', 'canonical');
         $this->assertSame($fixture['legacy_sections'], $response->json('report.sections'));
         $this->assertSame('big5.public_projection.v1', $response->json('big5_public_projection_v1.schema_version'));
     }
 
-    public function test_flag_on_skips_v2_bridge_field_when_live_score_context_is_incomplete(): void
+    public function test_existing_snapshot_is_not_recomputed_when_live_score_context_changes(): void
     {
         config()->set('big5_report_engine.v2_bridge_enabled', true);
         $fixture = $this->createCanonicalBigFiveBridgeFixture('anon_big5_bridge_incomplete_context');
@@ -52,7 +52,7 @@ final class BigFiveReportEngineBridgeFlagTest extends TestCase
         ])->getJson('/api/v0.3/attempts/'.$fixture['attempt_id'].'/report');
 
         $response->assertOk();
-        $this->assertArrayNotHasKey('big5_report_engine_v2', $response->json());
+        $response->assertJsonPath('big5_report_engine_v2._meta.big5_private_result_authority.mode', 'canonical');
         $this->assertSame($fixture['legacy_sections'], $response->json('report.sections'));
         $this->assertSame('big5.public_projection.v1', $response->json('big5_public_projection_v1.schema_version'));
     }

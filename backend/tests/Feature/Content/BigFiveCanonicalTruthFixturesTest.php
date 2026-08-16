@@ -19,28 +19,17 @@ final class BigFiveCanonicalTruthFixturesTest extends TestCase
     use RefreshDatabase;
 
     private const PROJECTION_ORDERED_SECTION_KEYS = [
-        'traits.overview',
-        'traits.why_this_profile',
-        'relationships.interpersonal_style',
-        'career.work_style',
-        'growth.next_actions',
+        'hero_summary',
+        'domains_overview',
+        'domain_deep_dive',
+        'facet_details',
+        'core_portrait',
+        'norms_comparison',
+        'action_plan',
+        'methodology_and_access',
     ];
 
-    private const REPORT_SECTION_KEYS = [
-        'traits.overview',
-        'traits.why_this_profile',
-        'relationships.interpersonal_style',
-        'career.work_style',
-        'growth.next_actions',
-        'disclaimer_top',
-        'summary',
-        'domains_overview',
-        'facet_table',
-        'top_facets',
-        'facets_deepdive',
-        'action_plan',
-        'disclaimer',
-    ];
+    private const REPORT_SECTION_KEYS = self::PROJECTION_ORDERED_SECTION_KEYS;
 
     public function test_big5_canonical_truth_fixtures_are_stable_for_120_90_and_degraded_samples(): void
     {
@@ -275,7 +264,7 @@ final class BigFiveCanonicalTruthFixturesTest extends TestCase
         $this->assertSame(
             self::REPORT_SECTION_KEYS,
             array_values(array_map(
-                static fn (array $section): string => (string) ($section['key'] ?? ''),
+                static fn (array $section): string => (string) ($section['section_key'] ?? ''),
                 $reportSections
             ))
         );

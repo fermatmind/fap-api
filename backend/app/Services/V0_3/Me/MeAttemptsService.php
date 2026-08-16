@@ -208,6 +208,9 @@ class MeAttemptsService
         }
 
         $riasecSnapshotReportByAttemptId = $this->riasecSnapshotReportsByAttemptId($orgId, $attemptModels, $resultByAttemptId, $userId, $anonId);
+        $bigFiveSnapshotReportByAttemptId = $normalizedScaleCode === 'BIG5_OCEAN'
+            ? $this->readReadySnapshotReports($orgId, $attemptIds)
+            : [];
 
         $items = [];
         foreach ($attemptModels as $attempt) {
@@ -224,6 +227,16 @@ class MeAttemptsService
                 $presented['mbti_form_v1'] = $this->mbtiPublicFormSummaryBuilder->summarizeForAttempt($attempt, $result, $locale);
             } elseif (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'BIG5_OCEAN') {
                 $presented['big5_form_v1'] = $this->bigFivePublicFormSummaryBuilder->summarizeForAttempt($attempt, $result, $locale);
+                $authority = data_get($bigFiveSnapshotReportByAttemptId[$attemptId] ?? [], '_meta.big5_private_result_authority');
+                $presented['big5_private_result_authority'] = is_array($authority)
+                    ? $authority
+                    : [
+                        'schema_version' => 'fap.big5.private_result_authority.v1',
+                        'mode' => 'immutable_legacy_snapshot',
+                        'locale' => $locale,
+                        'source_hash' => '',
+                        'compiled_hash' => '',
+                    ];
             } elseif (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'ENNEAGRAM') {
                 $presented['enneagram_form_v1'] = $this->enneagramPublicFormSummaryBuilder->summarizeForAttempt($attempt, $result, $locale);
             } elseif (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'RIASEC') {
@@ -260,6 +273,17 @@ class MeAttemptsService
         $historyCompare = null;
         if ($normalizedScaleCode === 'BIG5_OCEAN') {
             $historyCompare = $this->buildBigFiveHistoryCompare($attemptModels, $resultByAttemptId);
+            $currentAttemptId = (string) ($historyCompare['current_attempt_id'] ?? '');
+            $authority = data_get($bigFiveSnapshotReportByAttemptId[$currentAttemptId] ?? [], '_meta.big5_private_result_authority');
+            $historyCompare['big5_private_result_authority'] = is_array($authority)
+                ? $authority
+                : [
+                    'schema_version' => 'fap.big5.private_result_authority.v1',
+                    'mode' => 'immutable_legacy_snapshot',
+                    'locale' => '',
+                    'source_hash' => '',
+                    'compiled_hash' => '',
+                ];
         } elseif ($normalizedScaleCode === 'ENNEAGRAM') {
             $historyCompare = $this->buildEnneagramHistorySummary($attemptModels, $resultByAttemptId);
         } elseif ($normalizedScaleCode === 'RIASEC') {

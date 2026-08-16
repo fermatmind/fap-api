@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Services\Content\BigFiveContentLintService;
+use App\Services\Content\BigFivePrivateResultCompileService;
 use App\Services\Content\ClinicalComboContentLintService;
 use App\Services\Content\ContentLintService;
 use App\Services\Content\Eq60ContentLintService;
@@ -25,11 +26,26 @@ final class ContentLint extends Command
         BigFiveContentLintService $bigFiveLint,
         ClinicalComboContentLintService $clinicalLint,
         Sds20ContentLintService $sds20Lint,
-        Eq60ContentLintService $eq60Lint
+        Eq60ContentLintService $eq60Lint, BigFivePrivateResultCompileService $bigFivePrivateResultCompile
     ): int {
         $pack = $this->option('pack');
         $version = $this->option('pack-version');
-        if (is_string($pack) && strtoupper(trim($pack)) === 'BIG5_OCEAN') {
+        if (is_string($pack) && strtoupper(trim($pack)) === BigFivePrivateResultCompileService::PACK_ID) {
+            if (trim((string) $version) !== BigFivePrivateResultCompileService::PACK_VERSION) {
+                $this->error('BIG5_OCEAN_PRIVATE_RESULT supports only the stable v2 path.');
+
+                return self::FAILURE;
+            }
+            $compiled = $bigFivePrivateResultCompile->compile();
+            $single = [
+                'ok' => true,
+                'pack_id' => BigFivePrivateResultCompileService::PACK_ID,
+                'version' => BigFivePrivateResultCompileService::PACK_VERSION,
+                'source_hash' => $compiled['source_hash'],
+                'compiled_hash' => $compiled['compiled_hash'],
+            ];
+            $result = ['ok' => true, 'packs' => [$single]];
+        } elseif (is_string($pack) && strtoupper(trim($pack)) === 'BIG5_OCEAN') {
             $single = $bigFiveLint->lint(is_string($version) ? $version : null);
             $result = [
                 'ok' => (bool) ($single['ok'] ?? false),

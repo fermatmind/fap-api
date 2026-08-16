@@ -31,7 +31,7 @@ final class BigFiveResultPageV2RuntimeGateTest extends TestCase
 
         $response->assertOk();
         $this->assertArrayNotHasKey(BigFiveResultPageV2Contract::PAYLOAD_KEY, $response->json());
-        $this->assertArrayNotHasKey(BigFiveLiveRuntimeBridge::RESPONSE_KEY, $response->json());
+        $response->assertJsonPath(BigFiveLiveRuntimeBridge::RESPONSE_KEY.'._meta.big5_private_result_authority.mode', 'canonical');
         $this->assertSame($fixture['legacy_sections'], $response->json('report.sections'));
         $this->assertSame('big5.public_projection.v1', $response->json('big5_public_projection_v1.schema_version'));
     }

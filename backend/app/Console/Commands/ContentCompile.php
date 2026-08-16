@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Services\Content\BigFiveContentCompileService;
+use App\Services\Content\BigFivePrivateResultCompileService;
 use App\Services\Content\ClinicalComboContentCompileService;
 use App\Services\Content\ContentCompileService;
 use App\Services\Content\Eq60ContentCompileService;
@@ -25,11 +26,19 @@ final class ContentCompile extends Command
         BigFiveContentCompileService $bigFiveCompile,
         ClinicalComboContentCompileService $clinicalCompile,
         Sds20ContentCompileService $sds20Compile,
-        Eq60ContentCompileService $eq60Compile
+        Eq60ContentCompileService $eq60Compile, BigFivePrivateResultCompileService $bigFivePrivateResultCompile
     ): int {
         $pack = $this->option('pack');
         $version = $this->option('pack-version');
-        if (is_string($pack) && strtoupper(trim($pack)) === 'BIG5_OCEAN') {
+        if (is_string($pack) && strtoupper(trim($pack)) === BigFivePrivateResultCompileService::PACK_ID) {
+            if (trim((string) $version) !== BigFivePrivateResultCompileService::PACK_VERSION) {
+                $this->error('BIG5_OCEAN_PRIVATE_RESULT supports only the stable v2 path.');
+
+                return self::FAILURE;
+            }
+            $single = $bigFivePrivateResultCompile->compileToPackDirectory();
+            $result = ['ok' => true, 'packs' => [$single]];
+        } elseif (is_string($pack) && strtoupper(trim($pack)) === 'BIG5_OCEAN') {
             $single = $bigFiveCompile->compile(is_string($version) ? $version : null);
             $result = [
                 'ok' => (bool) ($single['ok'] ?? false),

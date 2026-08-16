@@ -6,6 +6,7 @@ namespace App\Console\Commands;
 
 use App\Services\Content\Publisher\ContentPackV2Publisher;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 final class Packs2Publish extends Command
 {
@@ -43,6 +44,23 @@ final class Packs2Publish extends Command
         ]);
         if ($compileCode !== 0) {
             return $compileCode;
+        }
+
+        if ($pack === \App\Services\Content\BigFivePrivateResultCompileService::PACK_ID) {
+            $manifest = json_decode((string) file_get_contents(base_path("content_packs/{$pack}/{$packVersion}/compiled/manifest.json")), true);
+            $compiledHash = strtolower(trim((string) ($manifest['compiled_hash'] ?? '')));
+            $activeReleaseId = DB::table('content_pack_activations')
+                ->where('pack_id', $pack)
+                ->where('pack_version', $packVersion)
+                ->value('release_id');
+            $activeHash = is_string($activeReleaseId) && $activeReleaseId !== ''
+                ? strtolower(trim((string) DB::table('content_pack_releases')->where('id', $activeReleaseId)->value('compiled_hash')))
+                : '';
+            if ($compiledHash !== '' && hash_equals($compiledHash, $activeHash)) {
+                $this->info('active canonical private result release already matches compiled hash.');
+
+                return self::SUCCESS;
+            }
         }
 
         $release = $publisher->publishCompiled($pack, $packVersion, [

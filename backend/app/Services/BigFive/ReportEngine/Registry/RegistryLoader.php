@@ -73,6 +73,59 @@ final class RegistryLoader
         ];
     }
 
+    /**
+     * @param  array<string,mixed>  $assets
+     * @return array<string,mixed>
+     */
+    public static function fromCompiledAssets(array $assets, array $manifest = []): array
+    {
+        $read = static function (string $path) use ($assets): array {
+            $value = $assets[$path] ?? null;
+            if (! is_array($value)) {
+                throw new RuntimeException("Big Five private result compiled asset missing: {$path}");
+            }
+
+            return $value;
+        };
+        $atomic = $modifiers = $facetGlossary = $facetPrecision = [];
+        foreach (self::TRAIT_CODES as $traitCode) {
+            $atomic[$traitCode] = $read("atomic/{$traitCode}.json");
+            $modifiers[$traitCode] = $read("modifiers/{$traitCode}.json");
+            $facetGlossary[$traitCode] = $read("facet_glossary/{$traitCode}.json");
+            $facetPrecision[$traitCode] = $read("facet_precision/{$traitCode}.json");
+        }
+        $synergies = [];
+        foreach (self::SYNERGY_IDS as $synergyId) {
+            $synergies[$synergyId] = $read("synergies/{$synergyId}.json");
+        }
+
+        return [
+            'root' => 'immutable_active_release',
+            'manifest' => $manifest,
+            'fixtures' => [],
+            'atomic' => $atomic,
+            'modifiers' => $modifiers,
+            'synergies' => $synergies,
+            'facet_glossary' => $facetGlossary,
+            'facet_precision' => $facetPrecision,
+            'action_rules' => [
+                'workplace' => $read('action_rules/workplace.json'),
+                'relationships' => $read('action_rules/relationships.json'),
+                'stress_recovery' => $read('action_rules/stress_recovery.json'),
+                'personal_growth' => $read('action_rules/personal_growth.json'),
+            ],
+            'shared' => [
+                'section_headlines' => $read('shared/section_headlines.json'),
+                'compare_phrases' => $read('shared/compare_phrases.json'),
+                'methodology' => $read('shared/methodology.json'),
+                'trait_labels' => $read('shared/trait_labels.json'),
+                'band_labels' => $read('shared/band_labels.json'),
+                'gradient_labels' => $read('shared/gradient_labels.json'),
+                'runtime_copy' => $read('shared/runtime_copy.json'),
+            ],
+        ];
+    }
+
     private function registryRoot(?string $locale): string
     {
         $root = $this->registryPath ?? base_path('content_packs/BIG5_OCEAN/v2/registry');

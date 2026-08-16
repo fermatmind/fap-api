@@ -18,29 +18,17 @@ final class BigFiveReportCoverageMatrixTest extends TestCase
     use RefreshDatabase;
 
     private const EXPECTED_FREE_SECTION_KEYS = [
-        'traits.overview',
-        'traits.why_this_profile',
-        'disclaimer_top',
-        'summary',
+        'hero_summary',
         'domains_overview',
-        'disclaimer',
+        'domain_deep_dive',
+        'facet_details',
+        'core_portrait',
+        'norms_comparison',
+        'action_plan',
+        'methodology_and_access',
     ];
 
-    private const EXPECTED_FULL_SECTION_KEYS = [
-        'traits.overview',
-        'traits.why_this_profile',
-        'relationships.interpersonal_style',
-        'career.work_style',
-        'growth.next_actions',
-        'disclaimer_top',
-        'summary',
-        'domains_overview',
-        'facet_table',
-        'top_facets',
-        'facets_deepdive',
-        'action_plan',
-        'disclaimer',
-    ];
+    private const EXPECTED_FULL_SECTION_KEYS = self::EXPECTED_FREE_SECTION_KEYS;
 
     public function test_big5_report_coverage_matrix_is_stable_and_non_empty(): void
     {
@@ -186,19 +174,20 @@ final class BigFiveReportCoverageMatrixTest extends TestCase
 
             $sections = (array) data_get($first, 'report.sections', []);
             $this->assertNotEmpty($sections, (string) $case['name']);
-            $keys = array_values(array_map(static fn (array $s): string => (string) ($s['key'] ?? ''), $sections));
+            $keys = array_values(array_map(static fn (array $s): string => (string) ($s['section_key'] ?? ''), $sections));
 
             if ((string) $case['variant'] === ReportAccess::VARIANT_FREE) {
                 $this->assertSame(self::EXPECTED_FREE_SECTION_KEYS, $keys, (string) $case['name']);
-                $paidKeys = [];
+                $lockedKeys = [];
                 foreach ($sections as $section) {
-                    if (strtolower((string) ($section['access_level'] ?? 'free')) === 'paid') {
-                        $paidKeys[] = (string) ($section['key'] ?? '');
+                    if (($section['status'] ?? null) === 'locked') {
+                        $lockedKeys[] = (string) ($section['section_key'] ?? '');
+                        $this->assertSame([], $section['blocks'] ?? null);
                     }
                 }
                 $this->assertSame(
-                    [],
-                    $paidKeys,
+                    ['domain_deep_dive', 'facet_details', 'core_portrait', 'norms_comparison', 'action_plan'],
+                    $lockedKeys,
                     (string) $case['name']
                 );
             } else {
@@ -208,18 +197,20 @@ final class BigFiveReportCoverageMatrixTest extends TestCase
             $seenBlockIds = [];
             foreach ($sections as $section) {
                 $blocks = (array) ($section['blocks'] ?? []);
-                $this->assertNotEmpty($blocks, (string) $case['name'].' section='.$section['key']);
+                if (($section['status'] ?? null) === 'locked') {
+                    continue;
+                }
+                $this->assertNotEmpty($blocks, (string) $case['name'].' section='.$section['section_key']);
                 foreach ($blocks as $block) {
                     $this->assertIsArray($block, (string) $case['name']);
-                    $id = trim((string) ($block['id'] ?? ''));
+                    $id = trim((string) ($block['block_uid'] ?? ''));
                     if ($id !== '') {
                         $this->assertArrayNotHasKey($id, $seenBlockIds, (string) $case['name'].' duplicate block id='.$id);
                         $seenBlockIds[$id] = true;
                     }
 
-                    $rendered = (string) ($block['title'] ?? '').' '.(string) ($block['body'] ?? '');
-                    $this->assertStringNotContainsString('{{', $rendered, (string) $case['name']);
-                    $this->assertStringNotContainsString('}}', $rendered, (string) $case['name']);
+                    $rendered = json_encode($block['resolved_copy'] ?? [], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+                    $this->assertDoesNotMatchRegularExpression('/\{\{[^}]+\}\}/', $rendered, (string) $case['name']);
                 }
             }
         }

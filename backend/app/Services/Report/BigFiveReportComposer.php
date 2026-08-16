@@ -6,8 +6,8 @@ namespace App\Services\Report;
 
 use App\Models\Attempt;
 use App\Models\Result;
-use App\Services\BigFive\BigFivePublicProjectionService;
-use App\Services\Content\BigFivePackLoader;
+use App\Services\BigFive\ReportEngine\BigFiveReportEngine;
+use App\Services\BigFive\ReportEngine\Bridge\LiveReportContextAdapter;
 use App\Services\Observability\BigFiveTelemetry;
 use App\Services\Template\TemplateContext;
 use App\Services\Template\TemplateEngine;
@@ -26,10 +26,10 @@ final class BigFiveReportComposer
     ];
 
     public function __construct(
-        private readonly BigFivePackLoader $packLoader,
-        private readonly TemplateEngine $templateEngine,
+        private readonly BigFiveReportEngine $reportEngine,
+        private readonly LiveReportContextAdapter $contextAdapter,
         private readonly BigFiveTelemetry $bigFiveTelemetry,
-        private readonly BigFivePublicProjectionService $bigFivePublicProjectionService,
+        private readonly TemplateEngine $templateEngine,
     ) {}
 
     /**
@@ -39,97 +39,25 @@ final class BigFiveReportComposer
     public function composeVariant(Attempt $attempt, Result $result, string $variant, array $ctx = []): array
     {
         $variant = ReportAccess::normalizeVariant($variant);
-        $version = trim((string) ($attempt->dir_version ?? BigFivePackLoader::PACK_VERSION));
-        if ($version === '') {
-            $version = BigFivePackLoader::PACK_VERSION;
-        }
-
-        $copyCompiled = $this->packLoader->readCompiledJson('copy.compiled.json', $version);
-        if (! is_array($copyCompiled)) {
-            return [
-                'ok' => false,
-                'error' => 'REPORT_COPY_COMPILED_MISSING',
-                'message' => 'BIG5_OCEAN compiled copy is missing.',
-                'status' => 500,
-            ];
-        }
-
         $scoreResult = $this->extractScoreResult($result);
-        if (! is_array($scoreResult)) {
-            return [
-                'ok' => false,
-                'error' => 'REPORT_SCORE_RESULT_MISSING',
-                'message' => 'BIG5_OCEAN score result missing.',
-                'status' => 500,
-            ];
-        }
+        $scoreResult = is_array($scoreResult) ? $scoreResult : [];
 
         $locale = trim((string) ($attempt->locale ?? $ctx['locale'] ?? 'zh-CN'));
         if ($locale === '') {
             $locale = 'zh-CN';
         }
 
-        $modulesAllowed = ReportAccess::normalizeModules(is_array($ctx['modules_allowed'] ?? null) ? $ctx['modules_allowed'] : []);
-        if ($modulesAllowed === []) {
-            $modulesAllowed = ReportAccess::defaultModulesAllowedForLocked('BIG5_OCEAN');
-        }
-
-        $domainsPct = is_array($scoreResult['scores_0_100']['domains_percentile'] ?? null)
-            ? $scoreResult['scores_0_100']['domains_percentile']
-            : [];
-        $domainBuckets = is_array($scoreResult['facts']['domain_buckets'] ?? null)
-            ? $scoreResult['facts']['domain_buckets']
-            : [];
-        $facetBuckets = is_array($scoreResult['facts']['facet_buckets'] ?? null)
-            ? $scoreResult['facts']['facet_buckets']
-            : [];
-        $facetsPct = is_array($scoreResult['scores_0_100']['facets_percentile'] ?? null)
-            ? $scoreResult['scores_0_100']['facets_percentile']
-            : [];
-
-        $templateContext = $this->buildTemplateContext($attempt, $scoreResult, $domainsPct, $domainBuckets, $facetsPct, $facetBuckets, $variant, $modulesAllowed);
-        $overallBucket = $this->resolveOverallBucket($domainBuckets);
-
-        $layoutCompiled = $this->packLoader->readCompiledJson('layout.compiled.json', $version);
-        $blocksCompiled = $this->packLoader->readCompiledJson('blocks.compiled.json', $version);
-
-        if (is_array($layoutCompiled) && is_array($blocksCompiled)) {
-            $sections = $this->composeFromLayoutAndBlocks(
-                $layoutCompiled,
-                $blocksCompiled,
-                $copyCompiled,
-                $templateContext,
-                $scoreResult,
-                $locale,
-                $variant,
-                $modulesAllowed,
-                $domainBuckets,
-                $facetBuckets,
-                $overallBucket
-            );
-        } else {
-            $sections = $this->composeLegacyFromCopy(
-                $copyCompiled,
-                $templateContext,
-                $scoreResult,
-                $locale,
-                $variant,
-                $modulesAllowed,
-                $domainBuckets,
-                $facetBuckets,
-                $overallBucket
-            );
-        }
-
         $locked = $variant === ReportAccess::VARIANT_FREE;
-        $publicProjection = $this->bigFivePublicProjectionService->build(
-            $scoreResult,
-            $locale,
-            $variant,
-            $locked
-        );
-        $foundationSections = is_array($publicProjection['sections'] ?? null) ? $publicProjection['sections'] : [];
-        $sections = array_merge($foundationSections, $sections);
+        $context = $this->contextAdapter->adapt($attempt, $result);
+        if (! is_array($context)) {
+            return ['ok' => false, 'error' => 'REPORT_SCORE_CONTEXT_INCOMPLETE', 'message' => 'BIG5_OCEAN score context is incomplete.', 'status' => 500];
+        }
+        $context['locale'] = $locale;
+        $canonical = $this->reportEngine->generate($context);
+        $sections = $this->applyAccessVariant((array) ($canonical['sections'] ?? []), $locked);
+        $canonical['sections'] = $sections;
+        $authority = (array) data_get($canonical, '_meta.big5_private_result_authority', []);
+        $publicProjection = $this->compatibilityProjection($canonical, $scoreResult, $variant, $locked);
 
         $this->bigFiveTelemetry->recordReportComposed(
             (int) ($attempt->org_id ?? 0),
@@ -144,8 +72,8 @@ final class BigFiveReportComposer
             $variant,
             $locked,
             count($sections),
-            (string) ($attempt->pack_id ?? BigFivePackLoader::PACK_ID),
-            (string) ($attempt->dir_version ?? BigFivePackLoader::PACK_VERSION),
+            (string) ($attempt->pack_id ?? 'BIG5_OCEAN'),
+            (string) ($attempt->dir_version ?? ''),
             (string) ($scoreResult['norms']['norms_version'] ?? ''),
             null
         );
@@ -166,9 +94,67 @@ final class BigFiveReportComposer
                 ],
                 '_meta' => [
                     'big5_public_projection_v1' => $publicProjection,
+                    'big5_private_result_authority' => $authority,
+                    'big5_report_engine_v2' => $canonical,
                 ],
                 'generated_at' => now()->toISOString(),
             ],
+        ];
+    }
+
+    /** @param list<array<string,mixed>> $sections @return list<array<string,mixed>> */
+    private function applyAccessVariant(array $sections, bool $locked): array
+    {
+        if (! $locked) {
+            return $sections;
+        }
+        $free = ['hero_summary', 'domains_overview', 'methodology_and_access'];
+
+        return array_map(static function (array $section) use ($free): array {
+            if (! in_array((string) ($section['section_key'] ?? ''), $free, true)) {
+                $section['status'] = 'locked';
+                $section['blocks'] = [];
+            }
+
+            return $section;
+        }, $sections);
+    }
+
+    /** @param array<string,mixed> $canonical @param array<string,mixed> $scoreResult @return array<string,mixed> */
+    private function compatibilityProjection(array $canonical, array $scoreResult, string $variant, bool $locked): array
+    {
+        $domains = (array) data_get($scoreResult, 'scores_0_100.domains_percentile', []);
+        $bands = (array) data_get($scoreResult, 'facts.domain_buckets', []);
+        $traitVector = [];
+        foreach (self::DOMAIN_ORDER as $trait) {
+            $row = ['key' => $trait, 'band' => (string) ($bands[$trait] ?? 'mid')];
+            if (! $locked) {
+                $row['percentile'] = (int) ($domains[$trait] ?? 0);
+            }
+            $traitVector[] = $row;
+        }
+        $facetVector = [];
+        if (! $locked) {
+            foreach ((array) data_get($scoreResult, 'scores_0_100.facets_percentile', []) as $facet => $percentile) {
+                $facetVector[] = [
+                    'key' => (string) $facet,
+                    'domain' => substr((string) $facet, 0, 1),
+                    'percentile' => (int) $percentile,
+                    'bucket' => (string) data_get($scoreResult, 'facts.facet_buckets.'.(string) $facet, 'mid'),
+                ];
+            }
+        }
+
+        return [
+            'schema_version' => 'big5.public_projection.v1',
+            'trait_vector' => $traitVector,
+            'facet_vector' => $facetVector,
+            'trait_bands' => $bands,
+            'dominant_traits' => (array) data_get($canonical, 'engine_decisions.dominant_traits', []),
+            'variant_keys' => [],
+            'sections' => (array) ($canonical['sections'] ?? []),
+            'ordered_section_keys' => array_values(array_map(static fn (array $section): string => (string) ($section['section_key'] ?? ''), (array) ($canonical['sections'] ?? []))),
+            '_meta' => ['scale_code' => 'BIG5_OCEAN', 'variant' => $variant, 'locked' => $locked, 'source' => 'canonical_private_result'],
         ];
     }
 
@@ -938,7 +924,7 @@ final class BigFiveReportComposer
         ];
 
         foreach ($candidates as $candidate) {
-            if (is_array($candidate) && isset($candidate['raw_scores'], $candidate['scores_0_100'])) {
+            if (is_array($candidate) && isset($candidate['scores_0_100'])) {
                 return $candidate;
             }
         }

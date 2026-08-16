@@ -43,18 +43,11 @@ final class BigFiveResultEngineFoundationTest extends TestCase
 
         $resultResponse->assertOk();
         $resultResponse->assertJsonPath('big5_public_projection_v1.schema_version', 'big5.public_projection.v1');
-        $resultResponse->assertJsonPath('big5_public_projection_v1.ordered_section_keys.0', 'traits.overview');
+        $resultResponse->assertJsonPath('big5_public_projection_v1.ordered_section_keys.0', 'hero_summary');
         $resultResponse->assertJsonPath('big5_public_projection_v1.trait_bands.O', 'mid');
         $resultResponse->assertJsonCount(30, 'big5_public_projection_v1.facet_vector');
-        $resultResponse->assertJsonPath('big5_public_projection_v1.facet_vector.0.key', 'N1');
-        $resultResponse->assertJsonPath('big5_public_projection_v1.facet_vector.0.domain', 'N');
-        $resultResponse->assertJsonPath('big5_public_projection_v1.controlled_narrative_v1.version', 'controlled_narrative.v1');
-        $resultResponse->assertJsonPath('big5_public_projection_v1.controlled_narrative_v1.runtime_mode', 'mock');
-        $resultResponse->assertJsonPath('big5_public_projection_v1.cultural_calibration_v1.version', 'cultural_calibration.v1');
-        $resultResponse->assertJsonPath('big5_public_projection_v1.cultural_calibration_v1.cultural_context', 'CN_MAINLAND.zh-CN');
-        $resultResponse->assertJsonPath('big5_public_projection_v1.comparative_v1.version', 'comparative.norming.v1');
-        $this->assertGreaterThan(0, (int) $resultResponse->json('big5_public_projection_v1.comparative_v1.percentile.value'));
-        $this->assertNotSame('', trim((string) $resultResponse->json('big5_public_projection_v1.comparative_v1.norming_source')));
+        $resultResponse->assertJsonPath('big5_private_result_authority.mode', 'canonical');
+        $this->assertMatchesRegularExpression('/\A[0-9a-f]{64}\z/', (string) $resultResponse->json('big5_private_result_authority.source_hash'));
 
         $reportResponse = $this->withHeaders([
             'Authorization' => 'Bearer '.$token,
@@ -66,19 +59,15 @@ final class BigFiveResultEngineFoundationTest extends TestCase
         $reportResponse->assertJsonPath('variant', 'full');
         $reportResponse->assertJsonPath('access_level', 'full');
         $reportResponse->assertJsonPath('big5_public_projection_v1.schema_version', 'big5.public_projection.v1');
-        $reportResponse->assertJsonPath('big5_public_projection_v1.ordered_section_keys.1', 'traits.why_this_profile');
+        $reportResponse->assertJsonPath('big5_public_projection_v1.ordered_section_keys.1', 'domains_overview');
         $reportResponse->assertJsonCount(30, 'big5_public_projection_v1.facet_vector');
         $reportResponse->assertJsonPath('big5_public_projection_v1.facet_vector.0.key', 'N1');
         $reportResponse->assertJsonPath('big5_public_projection_v1.facet_vector.0.domain', 'N');
         $reportResponse->assertJsonPath('report._meta.big5_public_projection_v1.schema_version', 'big5.public_projection.v1');
         $reportResponse->assertJsonCount(30, 'report._meta.big5_public_projection_v1.facet_vector');
-        $reportResponse->assertJsonPath('report._meta.big5_public_projection_v1.controlled_narrative_v1.version', 'controlled_narrative.v1');
-        $reportResponse->assertJsonPath('report._meta.big5_public_projection_v1.cultural_calibration_v1.version', 'cultural_calibration.v1');
-        $reportResponse->assertJsonPath('report._meta.big5_public_projection_v1.comparative_v1.version', 'comparative.norming.v1');
-        $reportResponse->assertJsonPath('report.sections.0.key', 'traits.overview');
-        $reportResponse->assertJsonPath('report.sections.4.key', 'growth.next_actions');
-        $comparativePercentile = (int) $reportResponse->json('big5_public_projection_v1.comparative_v1.percentile.value');
-        $this->assertGreaterThan(0, $comparativePercentile);
+        $reportResponse->assertJsonPath('report._meta.big5_private_result_authority.mode', 'canonical');
+        $reportResponse->assertJsonPath('report.sections.0.section_key', 'hero_summary');
+        $reportResponse->assertJsonPath('report.sections.6.section_key', 'action_plan');
 
         $reportEvent = DB::table('events')
             ->where('event_code', 'report_view')
@@ -87,21 +76,8 @@ final class BigFiveResultEngineFoundationTest extends TestCase
 
         $this->assertNotNull($reportEvent);
         $meta = $this->decodeMeta($reportEvent->meta_json ?? null);
-        $this->assertSame(['traits.overview', 'traits.why_this_profile', 'relationships.interpersonal_style', 'career.work_style', 'growth.next_actions'], array_slice((array) ($meta['ordered_section_keys'] ?? []), 0, 5));
+        $this->assertSame(['hero_summary', 'domains_overview', 'domain_deep_dive', 'facet_details', 'core_portrait'], array_slice((array) ($meta['ordered_section_keys'] ?? []), 0, 5));
         $this->assertArrayHasKey('trait_bands', $meta);
-        $this->assertArrayHasKey('scene_fingerprint', $meta);
-        $this->assertSame('controlled_narrative.v1', (string) ($meta['narrative_contract_version'] ?? ''));
-        $this->assertSame('mock', (string) ($meta['narrative_runtime_mode'] ?? ''));
-        $this->assertSame('zh-CN', (string) ($meta['locale_context'] ?? ''));
-        $this->assertSame('CN_MAINLAND.zh-CN', (string) ($meta['cultural_context'] ?? ''));
-        $this->assertSame('cultural_calibration.v1', (string) ($meta['calibration_contract_version'] ?? ''));
-        $this->assertContains('traits.overview', $meta['calibrated_section_keys'] ?? []);
-        $this->assertSame('comparative.norming.v1', (string) ($meta['comparative_contract_version'] ?? ''));
-        $this->assertNotSame('', trim((string) ($meta['comparative_fingerprint'] ?? '')));
-        $this->assertNotSame('', trim((string) ($meta['norming_version'] ?? '')));
-        $this->assertNotSame('', trim((string) ($meta['norming_scope'] ?? '')));
-        $this->assertNotSame('', trim((string) ($meta['norming_source'] ?? '')));
-        $this->assertSame($comparativePercentile, (int) data_get($meta, 'comparative_v1.percentile.value'));
     }
 
     public function test_big5_paid_mode_locked_report_redacts_projection_until_entitled(): void
@@ -138,11 +114,8 @@ final class BigFiveResultEngineFoundationTest extends TestCase
         $locked->assertJsonMissingPath('big5_public_projection_v1.controlled_narrative_v1');
         $locked->assertJsonMissingPath('big5_public_projection_v1.cultural_calibration_v1');
         $locked->assertJsonMissingPath('big5_public_projection_v1.comparative_v1');
-        $this->assertSame(['traits.overview', 'traits.why_this_profile'], $locked->json('big5_public_projection_v1.ordered_section_keys'));
-        $this->assertNotContains('paid', array_map(
-            static fn (array $section): string => (string) ($section['access_level'] ?? ''),
-            (array) $locked->json('report.sections')
-        ));
+        $this->assertSame('locked', $locked->json('report.sections.2.status'));
+        $this->assertSame([], $locked->json('report.sections.2.blocks'));
 
         app(EntitlementManager::class)->grantAttemptUnlock(
             0,
@@ -171,11 +144,8 @@ final class BigFiveResultEngineFoundationTest extends TestCase
         $full->assertJsonPath('access_level', 'full');
         $full->assertJsonCount(30, 'big5_public_projection_v1.facet_vector');
         $full->assertJsonPath('big5_public_projection_v1.facet_vector.0.key', 'N1');
-        $full->assertJsonPath('big5_public_projection_v1.controlled_narrative_v1.version', 'controlled_narrative.v1');
-        $this->assertContains('paid', array_map(
-            static fn (array $section): string => (string) ($section['access_level'] ?? ''),
-            (array) $full->json('report.sections')
-        ));
+        $full->assertJsonMissingPath('big5_public_projection_v1.controlled_narrative_v1');
+        $this->assertNotEmpty($full->json('report.sections.2.blocks'));
     }
 
     private function seedAttempt(string $anonId): string

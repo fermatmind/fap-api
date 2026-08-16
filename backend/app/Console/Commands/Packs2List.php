@@ -9,7 +9,7 @@ use Illuminate\Console\Command;
 
 final class Packs2List extends Command
 {
-    protected $signature = 'packs2:list {--pack=} {--pack-version=v1} {--limit=20}';
+    protected $signature = 'packs2:list {--pack=} {--pack-version=v1} {--limit=20} {--active-release-id : Output only the active release id}';
 
     protected $description = 'List packs2 releases and active status for a pack/version.';
 
@@ -26,6 +26,12 @@ final class Packs2List extends Command
         }
 
         $items = $publisher->listReleases($pack, $packVersion, $limit);
+        if ((bool) $this->option('active-release-id')) {
+            $active = collect($items)->first(static fn (array $item): bool => (bool) ($item['is_active'] ?? false));
+            $this->line(is_array($active) ? (string) ($active['release_id'] ?? '') : '');
+
+            return self::SUCCESS;
+        }
         if ($items === []) {
             $this->warn("no releases found for pack={$pack} pack_version={$packVersion}");
 
