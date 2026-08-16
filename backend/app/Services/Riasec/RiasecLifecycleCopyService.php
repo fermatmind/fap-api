@@ -325,7 +325,8 @@ final class RiasecLifecycleCopyService
 
     private function faqMarkdownAvailable(string $locale): bool
     {
-        return false;
+        return $locale === 'en'
+            && is_file(base_path($this->assetPath(self::FAQ_MARKDOWN_ASSET_PATH_TEMPLATE, $locale)));
     }
 
     private function assetPath(string $template, string $locale): string
