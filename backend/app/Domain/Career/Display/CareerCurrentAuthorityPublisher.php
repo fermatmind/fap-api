@@ -356,9 +356,7 @@ final class CareerCurrentAuthorityPublisher
                         throw new CareerCurrentAuthorityPublisherFailure('CURRENT_API_READBACK_FAILED');
                     }
                     $this->assertCachedPayload(['payload' => $api['payload']], $targetRows[$slug], $locale, false);
-                    $hashes[] = CareerCurrentAuthorityPackage::hashValue(
-                        $this->readerSafeProjector->project($this->package->publicProjection($targetRows[$slug], $locale)),
-                    );
+                    $hashes[] = $this->package->publicContentHash($targetRows[$slug], $locale);
                 }
             }
         }

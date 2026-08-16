@@ -41,6 +41,7 @@ use App\Console\Commands\CareerCloseoutCanonicalProgressiveCohort;
 use App\Console\Commands\CareerCompileAuthorityWave;
 use App\Console\Commands\CareerCompileRecommendationSubjects;
 use App\Console\Commands\CareerCrosswalkOps;
+use App\Console\Commands\CareerCurrentManifest;
 use App\Console\Commands\CareerExportCanonicalEligibilityDbContext;
 use App\Console\Commands\CareerExportCanonicalEligibilitySurfaceContext;
 use App\Console\Commands\CareerExportCanonicalExpansionManifest;
@@ -403,6 +404,7 @@ class Kernel extends ConsoleKernel
         CareerFullDisplayWorkbookValidator::class,
         CareerCompileAuthorityWave::class,
         CareerCompileRecommendationSubjects::class,
+        CareerCurrentManifest::class,
         CareerCrosswalkOps::class,
         CareerGenerateCanonicalDeltaRolloutManifest::class,
         CareerGenerateCanonicalExpansionManifestTrain::class,

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Career\Display;
 
+use App\Services\Career\Review\CareerJobDetailReaderSafeReviewProjector;
+use JsonException;
 use RuntimeException;
 
 final class CareerCurrentAuthorityPackageFailure extends RuntimeException
@@ -23,8 +25,6 @@ final class CareerCurrentAuthorityPackage
     public const EXPECTED_CAREERS = 1046;
 
     public const EXPECTED_LOCALE_PAGES = 2092;
-
-    public const ASSETS_SHA256 = 'e901ed5a9321244a7884ccbddcf1eb32d170393048e1d021bfda719ca8de59db';
 
     public const SURFACE_VERSION = 'display.surface.v1';
 
@@ -109,28 +109,84 @@ final class CareerCurrentAuthorityPackage
         'lineage_json',
     ];
 
+    private CareerJobDetailReaderSafeReviewProjector $readerSafeProjector;
+
+    public function __construct(?CareerJobDetailReaderSafeReviewProjector $readerSafeProjector = null)
+    {
+        $this->readerSafeProjector = $readerSafeProjector ?? new CareerJobDetailReaderSafeReviewProjector;
+    }
+
     /**
      * @return array{manifest: array<string,mixed>, rows: array<string,array<string,mixed>>, slugs: list<string>, summary: array<string,mixed>}
      */
     public function load(string $backendRoot): array
     {
-        $root = rtrim($backendRoot, '/').'/'.self::RELATIVE_PATH;
-        $assetsPath = $root.'/assets.jsonl';
-        $manifestPath = $root.'/manifest.json';
-        if (! is_file($assetsPath) || ! is_file($manifestPath) || is_link($assetsPath) || is_link($manifestPath)) {
-            throw new CareerCurrentAuthorityPackageFailure('CURRENT_PACKAGE_FILE_MISSING');
-        }
-
-        $manifest = json_decode((string) file_get_contents($manifestPath), true, 512, JSON_THROW_ON_ERROR);
-        if (! is_array($manifest)) {
-            throw new CareerCurrentAuthorityPackageFailure('CURRENT_MANIFEST_INVALID');
-        }
-        $assetsSha256 = hash_file('sha256', $assetsPath);
-        if (! is_string($assetsSha256) || ! hash_equals(self::ASSETS_SHA256, $assetsSha256)) {
+        [$assetsPath, $manifestPath] = $this->packagePaths($backendRoot);
+        $manifest = $this->readManifest($manifestPath);
+        $this->assertManifestContract($manifest);
+        $compiled = $this->compileAssets($assetsPath);
+        $assetsSha256 = $compiled['summary']['assets_sha256'];
+        $declaredAssetsSha256 = (string) self::value($manifest, 'files.0.sha256');
+        if (preg_match('/\A[0-9a-f]{64}\z/', $declaredAssetsSha256) !== 1
+            || ! hash_equals($declaredAssetsSha256, $assetsSha256)) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_ASSETS_HASH_MISMATCH');
         }
-        $this->assertManifest($manifest, $assetsSha256);
+        $expectedManifest = $this->withComputedManifestFields($manifest, $compiled);
+        if (! hash_equals(self::hashValue($expectedManifest), self::hashValue($manifest))) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_ASSET_SET_HASH_MISMATCH');
+        }
 
+        $compiled['manifest'] = $manifest;
+        $compiled['summary']['manifest_sha256'] = hash_file('sha256', $manifestPath);
+        unset($compiled['computed_manifest_fields']);
+
+        return $compiled;
+    }
+
+    /** @return array{manifest: array<string,mixed>, summary: array<string,mixed>} */
+    public function expectedManifest(string $backendRoot): array
+    {
+        [$assetsPath, $manifestPath] = $this->packagePaths($backendRoot);
+        $manifest = $this->readManifest($manifestPath);
+        $this->assertManifestContract($manifest);
+        $compiled = $this->compileAssets($assetsPath);
+
+        return [
+            'manifest' => $this->withComputedManifestFields($manifest, $compiled),
+            'summary' => $compiled['summary'],
+        ];
+    }
+
+    public static function declaredAssetsSha256(string $backendRoot): string
+    {
+        $manifestPath = rtrim($backendRoot, '/').'/'.self::RELATIVE_PATH.'/manifest.json';
+        if (! is_file($manifestPath) || is_link($manifestPath)) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_PACKAGE_FILE_MISSING');
+        }
+        try {
+            $manifest = json_decode((string) file_get_contents($manifestPath), true, 512, JSON_THROW_ON_ERROR);
+        } catch (JsonException) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_MANIFEST_INVALID');
+        }
+        $sha256 = is_array($manifest) ? self::value($manifest, 'files.0.sha256') : null;
+        if (! is_string($sha256) || preg_match('/\A[0-9a-f]{64}\z/', $sha256) !== 1) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_MANIFEST_INVALID');
+        }
+
+        return $sha256;
+    }
+
+    /**
+     * @return array{
+     *   manifest?: array<string,mixed>,
+     *   rows: array<string,array<string,mixed>>,
+     *   slugs: list<string>,
+     *   summary: array<string,mixed>,
+     *   computed_manifest_fields: array<string,mixed>
+     * }
+     */
+    private function compileAssets(string $assetsPath): array
+    {
         $rows = [];
         $orderedRows = [];
         $previousSlug = null;
@@ -193,6 +249,7 @@ final class CareerCurrentAuthorityPackage
             ));
         }
         $publicFieldValues = array_fill_keys(self::DISPLAY_OWNED_PUBLIC_FIELDS, []);
+        $publicContentHashes = [];
         foreach ($rows as $slug => $row) {
             foreach (self::LOCALES as $locale) {
                 $projection = $this->publicProjection($row, $locale);
@@ -203,23 +260,21 @@ final class CareerCurrentAuthorityPackage
                         'value' => $projection[$field],
                     ];
                 }
+                $publicContentHashes[] = $this->publicContentHash($row, $locale);
             }
         }
         $publicFieldHashes = array_map(self::hashValue(...), $publicFieldValues);
-        if ($fieldHashes != ($manifest['exported_field_set_sha256'] ?? null)
-            || $publicFieldHashes != ($manifest['public_projection_field_set_sha256'] ?? null)
-            || ! hash_equals((string) self::value($manifest, 'set_hashes.slug_set_sha256'), self::hashValue($slugs))
-            || ! hash_equals((string) self::value($manifest, 'set_hashes.full_asset_set_sha256'), self::hashValue($orderedRows))) {
-            throw new CareerCurrentAuthorityPackageFailure('CURRENT_ASSET_SET_HASH_MISMATCH');
+        sort($publicContentHashes, SORT_STRING);
+        $assetsSha256 = hash_file('sha256', $assetsPath);
+        if (! is_string($assetsSha256)) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_ASSETS_UNREADABLE');
         }
 
         return [
-            'manifest' => $manifest,
             'rows' => $rows,
             'slugs' => $slugs,
             'summary' => [
                 'assets_sha256' => $assetsSha256,
-                'manifest_sha256' => hash_file('sha256', $manifestPath),
                 'career_count' => count($rows),
                 'locale_page_count' => $localePageCount,
                 'components_per_page' => count(CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER),
@@ -227,25 +282,40 @@ final class CareerCurrentAuthorityPackage
                 'slug_set_sha256' => self::hashValue($slugs),
                 'full_asset_set_sha256' => self::hashValue($orderedRows),
             ],
+            'computed_manifest_fields' => [
+                'counts' => [
+                    'careers' => count($rows),
+                    'components_per_page' => count(CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER),
+                    'locale_pages' => $localePageCount,
+                    'manual_hold_locale_pages' => count(self::LOCALES),
+                    'numeric_rating_statement_residue_count' => $numericRatingResidueCount,
+                    'public_projection_locale_pages' => $localePageCount,
+                ],
+                'files' => [[
+                    'path' => 'assets.jsonl',
+                    'row_count' => count($rows),
+                    'sha256' => $assetsSha256,
+                ]],
+                'exported_field_set_sha256' => $fieldHashes,
+                'public_projection_field_set_sha256' => $publicFieldHashes,
+                'set_hashes' => [
+                    'full_asset_set_sha256' => self::hashValue($orderedRows),
+                    'public_content_aggregate_sha256' => self::hashValue($publicContentHashes),
+                    'slug_set_sha256' => self::hashValue($slugs),
+                ],
+            ],
         ];
     }
 
     /** @param array<string,mixed> $manifest */
-    private function assertManifest(array $manifest, string $assetsSha256): void
+    private function assertManifestContract(array $manifest): void
     {
         if (($manifest['contract_version'] ?? null) !== self::CONTRACT_VERSION
             || ($manifest['authority_path'] ?? null) !== 'backend/content_assets/career/current'
-            || self::value($manifest, 'counts.careers') !== self::EXPECTED_CAREERS
-            || self::value($manifest, 'counts.locale_pages') !== self::EXPECTED_LOCALE_PAGES
-            || self::value($manifest, 'counts.public_projection_locale_pages') !== self::EXPECTED_LOCALE_PAGES
-            || self::value($manifest, 'counts.components_per_page') !== count(CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER)
-            || self::value($manifest, 'counts.numeric_rating_statement_residue_count') !== 0
             || self::value($manifest, 'delivery_evidence.initial_governance_full_scan_required') !== true
             || self::value($manifest, 'delivery_evidence.required_ci_fix') !== 'career_search_entry_tier_context_wiring'
             || self::value($manifest, 'delivery_evidence.required_publish_fix') !== 'runner_autoload_order'
             || self::value($manifest, 'files.0.path') !== 'assets.jsonl'
-            || self::value($manifest, 'files.0.row_count') !== self::EXPECTED_CAREERS
-            || self::value($manifest, 'files.0.sha256') !== $assetsSha256
             || self::value($manifest, 'structural_contract.surface_version') !== self::SURFACE_VERSION
             || self::value($manifest, 'structural_contract.asset_version') !== self::ASSET_VERSION
             || self::value($manifest, 'structural_contract.template_version') !== self::ASSET_VERSION
@@ -260,9 +330,7 @@ final class CareerCurrentAuthorityPackage
             || self::value($manifest, 'superseded_source_coverage.workbuddy_block_count') !== 4184
             || self::value($manifest, 'superseded_source_coverage.workbuddy_block_mismatch_count') !== 0
             || self::value($manifest, 'superseded_source_coverage.missing_12_original_component_count') !== 576
-            || self::value($manifest, 'superseded_source_coverage.missing_12_component_mismatch_count') !== 0
-            || count((array) ($manifest['exported_field_set_sha256'] ?? [])) !== count(self::EXPORTED_FIELDS)
-            || count((array) ($manifest['public_projection_field_set_sha256'] ?? [])) !== count(self::DISPLAY_OWNED_PUBLIC_FIELDS)) {
+            || self::value($manifest, 'superseded_source_coverage.missing_12_component_mismatch_count') !== 0) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_MANIFEST_INVALID');
         }
         foreach ((array) ($manifest['superseded_sources'] ?? []) as $sha256) {
@@ -270,6 +338,48 @@ final class CareerCurrentAuthorityPackage
                 throw new CareerCurrentAuthorityPackageFailure('CURRENT_SUPERSEDED_SOURCE_HASH_INVALID');
             }
         }
+    }
+
+    /**
+     * @param  array<string,mixed>  $manifest
+     * @param  array<string,mixed>  $compiled
+     * @return array<string,mixed>
+     */
+    private function withComputedManifestFields(array $manifest, array $compiled): array
+    {
+        foreach ($compiled['computed_manifest_fields'] as $key => $value) {
+            $manifest[$key] = $value;
+        }
+
+        return $manifest;
+    }
+
+    /** @return array{0:string,1:string} */
+    private function packagePaths(string $backendRoot): array
+    {
+        $root = rtrim($backendRoot, '/').'/'.self::RELATIVE_PATH;
+        $assetsPath = $root.'/assets.jsonl';
+        $manifestPath = $root.'/manifest.json';
+        if (! is_file($assetsPath) || ! is_file($manifestPath) || is_link($assetsPath) || is_link($manifestPath)) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_PACKAGE_FILE_MISSING');
+        }
+
+        return [$assetsPath, $manifestPath];
+    }
+
+    /** @return array<string,mixed> */
+    private function readManifest(string $manifestPath): array
+    {
+        try {
+            $manifest = json_decode((string) file_get_contents($manifestPath), true, 512, JSON_THROW_ON_ERROR);
+        } catch (JsonException) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_MANIFEST_INVALID');
+        }
+        if (! is_array($manifest)) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_MANIFEST_INVALID');
+        }
+
+        return $manifest;
     }
 
     /** @param array<string,mixed> $row */
@@ -329,6 +439,14 @@ final class CareerCurrentAuthorityPackage
             'structured_data_from_visible_content' => $this->stripForbiddenKeys((array) $row['structured_data_json']),
             'implementation_contract' => $this->stripForbiddenKeys((array) $row['implementation_contract_json']),
         ];
+    }
+
+    /** @param array<string,mixed> $row */
+    public function publicContentHash(array $row, string $locale): string
+    {
+        return self::hashValue(
+            $this->readerSafeProjector->project($this->publicProjection($row, $locale)),
+        );
     }
 
     /** @param array<string,mixed> $surface @return array<string,mixed> */
@@ -407,6 +525,20 @@ final class CareerCurrentAuthorityPackage
             self::canonicalize($value),
             JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRESERVE_ZERO_FRACTION | JSON_THROW_ON_ERROR,
         );
+    }
+
+    public static function encodePrettyCanonical(mixed $value): string
+    {
+        $encoded = json_encode(
+            self::canonicalize($value),
+            JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRESERVE_ZERO_FRACTION | JSON_THROW_ON_ERROR,
+        );
+
+        return preg_replace_callback(
+            '/^( +)/m',
+            static fn (array $match): string => str_repeat(' ', intdiv(strlen($match[1]), 2)),
+            $encoded,
+        )."\n";
     }
 
     private static function canonicalize(mixed $value): mixed

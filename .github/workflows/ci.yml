@@ -140,6 +140,7 @@ jobs:
           composer install --no-interaction --prefer-dist --no-progress
           cp -n .env.example .env || true
           php artisan key:generate --force
+          php artisan career:current-manifest
           mkdir -p storage/app/private/content_packs_index
           php artisan content-packs:index:build --output=storage/app/private/content_packs_index/content-packs-index.json --json
           php artisan test --filter='(ContentPacksIndexArtifact|ContentLint|ContentCompile)' --no-ansi

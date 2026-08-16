@@ -85,6 +85,7 @@ if ($backendRoot === '' || ! is_file($backendRoot.'/vendor/autoload.php')) {
 require $backendRoot.'/vendor/autoload.php';
 
 try {
+    $declaredAssetsSha256 = CareerCurrentAuthorityPackage::declaredAssetsSha256($backendRoot);
     $expectedOperationKey = hash(
         'sha256',
         'career-current-authority|'.$releaseSha.'|'.$assetsSha256,
@@ -92,7 +93,7 @@ try {
     if ($env('CAREER_CURRENT_PUBLISH_EXECUTE') !== '1'
         || preg_match('/\A[0-9a-f]{40}\z/', $releaseSha) !== 1
         || $releaseName === ''
-        || ! hash_equals(CareerCurrentAuthorityPackage::ASSETS_SHA256, $assetsSha256)
+        || ! hash_equals($declaredAssetsSha256, $assetsSha256)
         || ! hash_equals($expectedOperationKey, $operationKey)
         || ! ctype_digit($workflowRunId)
         || ! ctype_digit($workflowRunAttempt)) {

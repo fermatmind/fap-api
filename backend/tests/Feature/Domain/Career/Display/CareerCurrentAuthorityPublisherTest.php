@@ -156,7 +156,7 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
             'rows' => ['actors' => $target],
             'slugs' => ['actors'],
             'summary' => [
-                'assets_sha256' => CareerCurrentAuthorityPackage::ASSETS_SHA256,
+                'assets_sha256' => str_repeat('a', 64),
                 'career_count' => 1,
                 'locale_page_count' => 2,
                 'components_per_page' => 26,
