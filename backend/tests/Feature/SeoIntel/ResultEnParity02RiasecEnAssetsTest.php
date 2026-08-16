@@ -87,7 +87,7 @@ final class ResultEnParity02RiasecEnAssetsTest extends TestCase
         $this->assertSame('faq_v1.zh-CN', $contract['faq_asset_id']);
         $this->assertCount(7, $contract['surfaces']);
         $this->assertCount(20, $contract['faq_items']);
-        $this->assertCount(6, $service->technicalNoteSummarySections());
+        $this->assertCount(8, $service->technicalNoteSummarySections());
         $this->assertCount(8, $service->professionalMethodBoundarySections());
     }
 

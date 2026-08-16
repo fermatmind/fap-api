@@ -36,7 +36,7 @@ final class RiasecLifecycleCopyService
     private array $professionalMethodBoundaryCache = [];
 
     /**
-     * @return list<array{title:string,copy:string}>
+     * @return list<array{title:string,copy:string,section_key:string,data_status:string}>
      */
     public function technicalNoteSummarySections(string $locale = self::DEFAULT_LOCALE): array
     {
@@ -58,10 +58,25 @@ final class RiasecLifecycleCopyService
             $sections[] = [
                 'title' => $title,
                 'copy' => $copy,
+                'section_key' => trim((string) ($row['section_key'] ?? '')),
+                'data_status' => trim((string) ($row['data_status'] ?? '')),
             ];
         }
 
         return $sections;
+    }
+
+    /** @return array{method_boundaries:array<string,array<string,string>>,disclaimers:list<array<string,string>>} */
+    public function technicalNoteRuntimeContract(string $locale = self::DEFAULT_LOCALE): array
+    {
+        $asset = $this->technicalNoteSummaryAsset($this->normalizeLocale($locale));
+        $boundaries = is_array($asset['runtime_method_boundaries'] ?? null) ? $asset['runtime_method_boundaries'] : [];
+        $disclaimers = array_values(array_filter(
+            (array) ($asset['runtime_disclaimers'] ?? []),
+            static fn (mixed $row): bool => is_array($row),
+        ));
+
+        return ['method_boundaries' => $boundaries, 'disclaimers' => $disclaimers];
     }
 
     /**

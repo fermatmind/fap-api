@@ -61,46 +61,6 @@ final class RiasecDeepCopySlotRegistry
     /** @var list<string> */
     public const DIMENSIONS = ['R', 'I', 'A', 'S', 'E', 'C'];
 
-    /** @var array<string,array{label:string,short:string,focus:string,action:string}> */
-    private const DIMENSION_READING_LINES = [
-        'R' => [
-            'label' => '实作型',
-            'short' => '实作',
-            'focus' => '真实对象、工具、现场、材料和可见成果',
-            'action' => '接触真实对象、工具或现场条件',
-        ],
-        'I' => [
-            'label' => '研究型',
-            'short' => '研究',
-            'focus' => '问题、证据、机制、变量和解释路径',
-            'action' => '分析问题、证据、变量或解释路径',
-        ],
-        'A' => [
-            'label' => '艺术型',
-            'short' => '表达',
-            'focus' => '表达、风格、叙事、形式和体验',
-            'action' => '尝试表达、风格、叙事或形式处理',
-        ],
-        'S' => [
-            'label' => '社会型',
-            'short' => '支持',
-            'focus' => '真实的人、理解、支持、沟通和协作',
-            'action' => '观察真实人的理解、支持、沟通或协作需求',
-        ],
-        'E' => [
-            'label' => '企业型',
-            'short' => '推进',
-            'focus' => '目标、资源、机会、影响和推进',
-            'action' => '观察目标、资源、机会、影响或推进动作',
-        ],
-        'C' => [
-            'label' => '常规型',
-            'short' => '流程',
-            'focus' => '规则、数据、流程、秩序和可复查记录',
-            'action' => '整理规则、数据、流程、秩序或可复查记录',
-        ],
-    ];
-
     /** @var list<string> */
     public const PAIRS = [
         'R_I', 'R_A', 'R_S', 'R_E', 'R_C',
@@ -211,6 +171,7 @@ final class RiasecDeepCopySlotRegistry
 
     public function __construct(
         private readonly RiasecContentRegistrySlotContract $contract = new RiasecContentRegistrySlotContract,
+        private readonly RiasecPrivateResultSourceRepository $privateResultSource = new RiasecPrivateResultSourceRepository,
     ) {}
 
     /**
@@ -363,62 +324,28 @@ final class RiasecDeepCopySlotRegistry
      */
     public function layer140qSlots(): array
     {
-        return [
-            'task_activity_card' => $this->layer140qSlot('140q_task_card_copy', 'task_activity_card', [
-                'title' => '任务活动卡',
-                'question' => '你真正喜欢做的，是哪类工作活动？',
-                'summary' => '这张卡把兴趣拆成更具体的任务活动，帮助区分你喜欢的是问题本身，还是某个职业名带来的想象。',
-                'what_user_sees' => ['更容易吸引你的任务活动', '可能降低兴趣的任务活动', '值得先观察的一个小任务'],
-                'layer_state' => '140q_completed_state',
-            ]),
-            'environment_card' => $this->layer140qSlot('140q_environment_card_copy', 'environment_card', [
-                'title' => '工作环境卡',
-                'question' => '这些活动出现在哪种环境里，你仍然有兴趣？',
-                'summary' => '同一个任务在不同环境里感受会不同。环境卡帮助把任务兴趣和工作日常拆开。',
-                'what_user_sees' => ['安静深研 vs 真实反馈', '合作支持 vs 结果导向', '开放表达 vs 流程约束'],
-                'layer_state' => '140q_completed_state',
-            ]),
-            'role_responsibility_card' => $this->layer140qSlot('140q_role_card_copy', 'role_responsibility_card', [
-                'title' => '角色责任卡',
-                'question' => '你愿意在工作里承担哪种责任？',
-                'summary' => '喜欢一个任务，不等于喜欢它所在岗位的责任。角色卡帮助看见你想定义问题、表达答案、支持理解、推动落地，还是守住流程。',
-                'what_user_sees' => ['定义问题', '表达答案', '支持理解', '推动落地', '守住流程'],
-                'layer_state' => '140q_completed_state',
-            ]),
-            'layer_agreement' => $this->layer140qSlot('140q_layer_agreement_copy', 'layer_agreement', [
-                'title' => '任务、环境和角色线索大体一致',
-                'summary' => '你的任务活动、工作环境和角色责任线索大体一致。下一步可以选择一个低风险任务进行观察，而不是急着锁定职业名称。',
-                'layer_state' => 'agreement',
-            ]),
-            'layer_tension' => $this->layer140qSlot('140q_tension_copy', 'layer_tension', [
-                'title' => '任务兴趣和工作日常线索有张力',
-                'summary' => '你的任务兴趣和工作日常线索强调了不同层面。更稳妥的读法是：喜欢的任务、可持续的环境、愿意承担的角色责任，需要分开观察。',
-                'layer_state' => 'tension',
-            ]),
-            'layer_unavailable' => $this->layer140qSlot('140q_layer_unavailable_copy', 'layer_unavailable', [
-                'title' => '工作日常三张卡暂不可用',
-                'summary' => '当前 60Q 结果已经可以阅读基础兴趣结构。任务、环境和角色责任三张卡需要完成 140Q 后才会显示；它们只补充工作日常观察角度，不修正或覆盖 60Q。',
-                'applicable_form_codes' => ['riasec_60'],
-                'contextual_detail_only' => true,
-                'overrides_60q_result' => false,
-                'layer_state' => 'not_applicable_60q_only',
-            ]),
-            '140q_cta' => $this->layer140qSlot('140q_cta_copy', '140q_cta', [
-                'title' => '你喜欢的是任务本身，还是这份工作的真实日常？',
-                'summary' => '60Q 已经给出本次兴趣结构。140Q 只是把观察拆到任务、环境和角色责任三层，让你多看工作日常线索；它不是用来修正本次结果的版本，也不会修复、推翻或覆盖 60Q。',
-                'button_label' => '查看 140Q 情境线索',
-                'applicable_form_codes' => ['riasec_60'],
-                'contextual_detail_only' => true,
-                'accuracy_upgrade_claim_allowed' => false,
-                'overrides_60q_result' => false,
-                'layer_state' => 'unavailable',
-            ]),
-            '140q_not_recommended' => $this->layer140qSlot('140q_not_recommended_copy', '140q_not_recommended', [
-                'title' => '暂不建议继续深入版',
-                'summary' => '由于本次作答需要谨慎阅读，暂不展示 140Q 三张卡。建议稍后重测，而不是继续做强解释。',
-                'layer_state' => 'insufficient_quality',
-            ]),
-        ];
+        $slots = [];
+        foreach ((array) $this->privateResultSource->get('generic_slots.layer_140q', []) as $slotName => $content) {
+            if (! is_array($content)) {
+                continue;
+            }
+            $slotKey = match ($slotName) {
+                'task_activity_card' => '140q_task_card_copy',
+                'environment_card' => '140q_environment_card_copy',
+                'role_responsibility_card' => '140q_role_card_copy',
+                'layer_agreement' => '140q_layer_agreement_copy',
+                'layer_tension' => '140q_tension_copy',
+                'layer_unavailable' => '140q_layer_unavailable_copy',
+                '140q_cta' => '140q_cta_copy',
+                '140q_not_recommended' => '140q_not_recommended_copy',
+                default => null,
+            };
+            if ($slotKey !== null) {
+                $slots[$slotName] = $this->layer140qSlot($slotKey, (string) $slotName, $content);
+            }
+        }
+
+        return $slots;
     }
 
     /**
@@ -496,65 +423,15 @@ final class RiasecDeepCopySlotRegistry
      */
     public function lowQualitySlots(): array
     {
-        $slots = [
-            'top_notice' => $this->qualitySlot('low_quality_copy', 'top_notice', [
-                'title' => '这次结果适合谨慎阅读',
-                'summary' => '本次结果可以作为初步兴趣线索，但不适合用三字母代码做强结论。更稳妥的做法是先看六维概览，或稍后在状态更稳定时重测。',
-                'quality_state' => 'low_quality',
-            ]),
-            'user_not_blamed_message' => $this->qualitySlot('low_quality_copy', 'user_not_blamed_message', [
-                'title' => '这不是对你的评价',
-                'summary' => '作答太快、注意力分散、题目想象不清楚、缺题或当时状态不稳定，都可能影响结果的可读性。',
-                'quality_state' => 'low_quality',
-            ]),
-            'what_happened_explanation' => $this->qualitySlot('low_quality_copy', 'what_happened_explanation', [
-                'title' => '为什么要降级阅读',
-                'summary' => '当作答质量或结果清晰度不足时，系统暂不把结果写成强解释，以避免把初步线索误读成固定结论。',
-                'quality_state' => 'low_quality',
-            ]),
-            'hidden_modules_explanation' => $this->qualitySlot('low_quality_copy', 'hidden_modules_explanation', [
-                'title' => '哪些模块会暂时隐藏',
-                'summary' => '本次暂不展示单一活动线索组合、维度组合深解、职业例子、140Q CTA 和强分享卡，只保留六维概览、方法边界和重测建议。',
-                'quality_state' => 'low_quality',
-            ]),
-            'retake_guidance' => $this->qualitySlot('low_quality_copy', 'retake_guidance', [
-                'title' => '下次作答时，试着这样做',
-                'summary' => '只判断你对活动本身是否有兴趣；没有经验时按是否愿意尝试回答；注意力分散时先休息后再完成。',
-                'quality_state' => 'retake_recommended',
-            ]),
-            'share_pdf_boundary' => $this->qualitySlot('low_quality_copy', 'share_pdf_boundary', [
-                'title' => '分享和 PDF 边界',
-                'summary' => '这次结果不适合生成强结论分享卡。个人 PDF 可以保存谨慎阅读版，但公开分享默认不展示 Holland Code、活动线索组合或职业例子。',
-                'quality_state' => 'low_quality',
-            ]),
-            'next_step' => $this->qualitySlot('low_quality_copy', 'next_step', [
-                'title' => '下一步',
-                'summary' => '先保存谨慎阅读版，或稍后在状态更稳定时重测。当前不推荐继续进入更长版本。',
-                'quality_state' => 'retake_recommended',
-            ]),
-            'cautious_reading_notice' => $this->qualitySlot('cautious_reading_copy', 'cautious_reading_notice', [
-                'title' => '轻量参考',
-                'summary' => '本次结果适合放轻阅读。建议先看六维概览，再用一个小实验观察兴趣线索。',
-                'quality_state' => 'caution',
-            ]),
-            'minimal_quality_boundary_60q' => $this->qualitySlot('cautious_reading_copy', 'minimal_quality_boundary_60q', [
-                'title' => '60Q 最小质量边界',
-                'summary' => '60Q 当前只在缺题或完成度不足等明确条件下做强降级；其他较弱信号只用于提示谨慎阅读。',
-                'quality_state' => 'minimal_quality_boundary_60q',
-            ]),
-        ];
-
+        $slots = [];
         foreach ($this->lowQualitySlotsFromAsset() as $slotName => $content) {
-            if (! array_key_exists($slotName, $slots)) {
-                continue;
-            }
-            $slotKey = (string) ($slots[$slotName]['slot_key'] ?? 'low_quality_copy');
-            $slots[$slotName] = $this->qualitySlot($slotKey, $slotName, array_merge($content, [
-                'quality_state' => (string) ($slots[$slotName]['quality_state'] ?? $content['quality_state'] ?? 'low_quality'),
-            ]));
+            $slotKey = in_array($slotName, ['cautious_reading_notice', 'minimal_quality_boundary_60q'], true)
+                ? 'cautious_reading_copy'
+                : 'low_quality_copy';
+            $slots[$slotName] = $this->qualitySlot($slotKey, $slotName, $content);
         }
 
-        return $slots;
+        return array_filter($slots, fn (array $slot): bool => $this->validateSlot($slot) === []);
     }
 
     /**
@@ -632,7 +509,7 @@ final class RiasecDeepCopySlotRegistry
                 'body' => (string) ($row['summary'] ?? ''),
                 'module_policy' => (string) ($row['module_policy'] ?? ''),
                 'content_version' => (string) ($asset['asset_id'] ?? 'profile_shape_copy_v1.zh-CN'),
-                'user_visible_boundary' => 'Profile shape 只说明本次兴趣线索的阅读方式，不是人格身份、职业结论或能力判断。',
+                'user_visible_boundary' => (string) ($asset['user_visible_boundary'] ?? ''),
                 'source_review_status' => (string) ($asset['review_status'] ?? ''),
             ]);
             $slots[(string) $slot['slot_key'].':'.$shape] = $slot;
@@ -665,7 +542,7 @@ final class RiasecDeepCopySlotRegistry
                 'body' => (string) ($row['copy'] ?? ''),
                 'copy' => (string) ($row['copy'] ?? ''),
                 'content_version' => (string) ($asset['asset_id'] ?? 'top_code_confidence_copy_v1.zh-CN'),
-                'user_visible_boundary' => (string) ($asset['user_visible_boundary'] ?? '结果阅读力度只说明线索集中程度，不是准确率、职业前景或能力判断。'),
+                'user_visible_boundary' => (string) ($asset['user_visible_boundary'] ?? ''),
                 'source_review_status' => (string) ($asset['review_status'] ?? ''),
             ]);
             $slots[(string) $slot['slot_key'].':'.$state] = $slot;
@@ -697,7 +574,7 @@ final class RiasecDeepCopySlotRegistry
                 'body' => (string) ($row['copy'] ?? ''),
                 'copy' => (string) ($row['copy'] ?? ''),
                 'content_version' => (string) ($asset['asset_id'] ?? 'near_tie_alternate_code_copy_v1.zh-CN'),
-                'user_visible_boundary' => (string) ($asset['user_visible_boundary'] ?? 'Alternate code 是并读参考，不是新的身份标签或测评分数变化。'),
+                'user_visible_boundary' => (string) ($asset['user_visible_boundary'] ?? ''),
                 'source_review_status' => (string) ($asset['review_status'] ?? ''),
             ]);
             $slots[(string) $slot['slot_key'].':'.$state] = $slot;
@@ -711,43 +588,14 @@ final class RiasecDeepCopySlotRegistry
      */
     public function structuralDifferenceSlots(): array
     {
-        return [
-            'summary' => $this->structuralDifferenceSlot('summary', [
-                'title' => '两次结果强调的兴趣线索不同',
-                'summary' => '60Q 看基础兴趣结构；140Q 看任务、环境和角色责任。两次结果强调不同线索时，更适合把差异读成需要观察的线索，而不是最终结论。',
-                'structural_difference_state' => 'different_emphasis',
-            ]),
-            'task_layer_explanation' => $this->structuralDifferenceSlot('task_layer_explanation', [
-                'title' => '任务活动层',
-                'summary' => '任务活动层关注你更容易被哪些具体活动吸引，例如分析、表达、支持、推动或整理。它不说明能力高低，也不替代基础兴趣结构。',
-                'structural_difference_state' => 'same_structure',
-            ]),
-            'environment_layer_explanation' => $this->structuralDifferenceSlot('environment_layer_explanation', [
-                'title' => '工作环境层',
-                'summary' => '同一类任务出现在不同环境里，感受可能不同。环境层帮助你看见哪些情境更容易支持长期投入。',
-                'structural_difference_state' => 'different_emphasis',
-            ]),
-            'role_layer_explanation' => $this->structuralDifferenceSlot('role_layer_explanation', [
-                'title' => '角色责任层',
-                'summary' => '角色责任层关注你更愿意承担定义问题、表达答案、支持理解、推动落地或守住流程中的哪类责任。',
-                'structural_difference_state' => 'layer_tension',
-            ]),
-            'correct_reading' => $this->structuralDifferenceSlot('correct_reading', [
-                'title' => '正确读法',
-                'summary' => '先看两次结果中仍然重叠的活动线索，再看任务、环境和角色责任各自需要观察的部分。排序接近时，也要把近似并列当作阅读边界。',
-                'structural_difference_state' => 'near_tie_shift',
-            ]),
-            'forbidden_reading' => $this->structuralDifferenceSlot('forbidden_reading', [
-                'title' => '不要这样读',
-                'summary' => '不要把跨表单差异读成某一次结果失效、长表单覆盖短表单、兴趣身份发生转换，或任何分数涨跌结论。',
-                'structural_difference_state' => 'cross_form_not_comparable',
-            ]),
-            'next_validation_step' => $this->structuralDifferenceSlot('next_validation_step', [
-                'title' => '下一步观察',
-                'summary' => '选择一个低风险任务、一个真实环境和一个角色责任进行小实验。记录它们分别更吸引你还是需要调整，再决定是否需要重测。',
-                'structural_difference_state' => 'insufficient_basis',
-            ]),
-        ];
+        $slots = [];
+        foreach ((array) $this->privateResultSource->get('generic_slots.structural_difference', []) as $slotName => $content) {
+            if (is_array($content)) {
+                $slots[$slotName] = $this->structuralDifferenceSlot((string) $slotName, $content);
+            }
+        }
+
+        return $slots;
     }
 
     /**
@@ -778,48 +626,14 @@ final class RiasecDeepCopySlotRegistry
      */
     public function aspirationsSlots(): array
     {
-        return array_merge([
-            'intro' => $this->aspirationSlot('intro', [
-                'title' => '把你原本想探索的方向放到旁边看',
-                'summary' => '你可以记录职业、专业、课程、项目或工作场景。它们只用于生成探索问题，不进入测评分数。',
-                'aspirations_state' => 'not_provided',
-            ]),
-            'input_boundary' => $this->aspirationSlot('input_boundary', [
-                'title' => '输入边界',
-                'summary' => '愿望是探索材料，不是测评答案。系统只会帮助你看这些方向里有哪些活动与当前兴趣线索重叠，哪些现实部分需要观察。',
-                'aspirations_state' => 'not_provided',
-            ]),
-            'overlap_reading' => $this->aspirationSlot('overlap_reading', [
-                'title' => '有活动重叠',
-                'summary' => '这个方向与你当前兴趣结构有活动重叠。下一步是观察这些活动进入真实任务、环境和角色责任后是否仍然吸引你。',
-                'aspirations_state' => 'overlap',
-            ]),
-            'tension_reading' => $this->aspirationSlot('tension_reading', [
-                'title' => '有张力，需要拆开看',
-                'summary' => '这个方向与你当前兴趣结构存在张力。张力不是排除结论，只说明其中的日常任务、环境或角色责任需要先观察。',
-                'aspirations_state' => 'tension',
-            ]),
-            'reality_questions' => $this->aspirationSlot('reality_questions', [
-                'title' => '现实观察问题',
-                'summary' => '先问三个问题：你喜欢的是任务本身还是职业想象；你能接受这个方向的环境约束吗；你愿意承担它的角色责任吗。',
-                'aspirations_state' => 'needs_reality_check',
-            ]),
-            'education_skill_qualification_boundary' => $this->aspirationSlot('education_skill_qualification_boundary', [
-                'title' => '教育、技能、资格和伦理边界',
-                'summary' => '涉及教育要求、专业技能、资格证书、行业法规或伦理责任的方向，必须另行确认训练、作品、证书、监督和现实机会。',
-                'aspirations_state' => 'high_risk_boundary',
-            ]),
-            'next_experiment_prompt' => $this->aspirationSlot('next_experiment_prompt', [
-                'title' => '下一步小实验',
-                'summary' => '选择一个低风险任务，用 15 到 30 分钟观察它是否仍然吸引你。先观察活动，不急着形成职业结论。',
-                'aspirations_state' => 'needs_reality_check',
-            ]),
-            'no_score_mutation_boundary' => $this->aspirationSlot('no_score_mutation_boundary', [
-                'title' => '不改写测评结果',
-                'summary' => '愿望不会覆盖本次测得的霍兰德代码，也不会改变 RIASEC 分数、报告快照、分享内容或 PDF 内容。',
-                'aspirations_state' => 'not_provided',
-            ]),
-        ], $this->aspirationAssetSlots());
+        $slots = [];
+        foreach ((array) $this->privateResultSource->get('generic_slots.aspirations', []) as $slotName => $content) {
+            if (is_array($content)) {
+                $slots[$slotName] = $this->aspirationSlot((string) $slotName, $content);
+            }
+        }
+
+        return array_merge($slots, $this->aspirationAssetSlots());
     }
 
     /**
@@ -850,43 +664,14 @@ final class RiasecDeepCopySlotRegistry
      */
     public function disagreePathSlots(): array
     {
-        return array_merge([
-            'user_not_wrong_message' => $this->disagreePathSlot('user_not_wrong_message', [
-                'title' => '你可以不认同这个结果',
-                'summary' => '不认同结果本身是有效反馈。它会进入探索路径，帮助你检查作答状态、近似并列和活动探索方向。',
-                'disagree_state' => 'disagrees_quality_normal',
-            ]),
-            'possible_reasons' => $this->disagreePathSlot('possible_reasons', [
-                'title' => '可能原因',
-                'summary' => '结果不像你，可能来自按能力作答、职业名想象、前几个维度接近、profile 较宽，或当时状态不稳定。',
-                'disagree_state' => 'disagrees_quality_normal',
-            ]),
-            'retake_when' => $this->disagreePathSlot('retake_when', [
-                'title' => '什么时候适合重测',
-                'summary' => '如果作答时注意力不稳定、题目想象不清楚，或结果质量需要谨慎阅读，稍后重测比手动修正结果更可靠。',
-                'disagree_state' => 'retake_recommended',
-            ]),
-            'experiment_when' => $this->disagreePathSlot('experiment_when', [
-                'title' => '什么时候适合做实验',
-                'summary' => '如果你只是更认同另一个方向，可以选择一个活动做低风险实验。实验记录只帮助探索下一步，不形成职业结论。',
-                'disagree_state' => 'save_feedback_only',
-            ]),
-            'record_preferred_direction_boundary' => $this->disagreePathSlot('record_preferred_direction_boundary', [
-                'title' => '记录偏好方向的边界',
-                'summary' => '你可以记录更想探索的方向；它只作为偏好线索保存，不覆盖本次测得的霍兰德代码，不重算六维分数。',
-                'disagree_state' => 'save_feedback_only',
-            ]),
-            'feedback_no_mutation_boundary' => $this->disagreePathSlot('feedback_no_mutation_boundary', [
-                'title' => '反馈不改分',
-                'summary' => '不认同、收藏、排除和实验反馈都不会修改测评结果、报告快照、默认分享内容或 PDF 内容。',
-                'disagree_state' => 'disagrees_quality_caution',
-            ]),
-            'next_step' => $this->disagreePathSlot('next_step', [
-                'title' => '下一步',
-                'summary' => '先检查作答质量和 近似并列，再选择重测、保存偏好方向，或做一个小实验观察具体活动。',
-                'disagree_state' => 'save_feedback_only',
-            ]),
-        ], $this->disagreePathAssetSlots());
+        $slots = [];
+        foreach ((array) $this->privateResultSource->get('generic_slots.disagree', []) as $slotName => $content) {
+            if (is_array($content)) {
+                $slots[$slotName] = $this->disagreePathSlot((string) $slotName, $content);
+            }
+        }
+
+        return array_merge($slots, $this->disagreePathAssetSlots());
     }
 
     /**
@@ -1437,7 +1222,7 @@ final class RiasecDeepCopySlotRegistry
                 'occupation_matching',
             ],
             'required_boundaries' => $this->requiredBoundaries(),
-            'user_visible_boundary' => '这是职业兴趣线索，不测能力，也不输出具体职业结论。',
+            'user_visible_boundary' => (string) $this->privateResultSource->get('boundaries.dimension'),
             'evidence_level' => 'expert_reviewed',
             'source_status' => 'reviewed_content_copy',
             'review_status' => 'approved_for_production',
@@ -1602,7 +1387,7 @@ final class RiasecDeepCopySlotRegistry
                 'job_fit',
             ],
             'required_boundaries' => $row['required_boundaries'] ?? $this->requiredBoundaries(),
-            'user_visible_boundary' => (string) ($row['user_visible_boundary'] ?? '这是兴趣组合解释，不是人格标签、能力结论或职业结论。'),
+            'user_visible_boundary' => (string) ($row['user_visible_boundary'] ?? $this->privateResultSource->get('boundaries.pair')),
             'fallback_behavior' => 'omit_module',
             'frontend_fallback_allowed' => false,
         ];
@@ -1690,7 +1475,7 @@ final class RiasecDeepCopySlotRegistry
                 'job_fit',
             ],
             'required_boundaries' => $row['required_boundaries'] ?? $this->requiredBoundaries(),
-            'user_visible_boundary' => (string) ($row['user_visible_boundary'] ?? '这是前三兴趣活动线索组合解释，不是人格类型、职业结论或成功预测。'),
+            'user_visible_boundary' => (string) ($row['user_visible_boundary'] ?? $this->privateResultSource->get('boundaries.top3')),
             'fallback_behavior' => 'omit_module',
             'frontend_fallback_allowed' => false,
         ];
@@ -1794,7 +1579,7 @@ final class RiasecDeepCopySlotRegistry
                 $this->requiredBoundaries(),
                 array_values((array) ($row['required_boundaries'] ?? []))
             ))),
-            'user_visible_boundary' => '140Q 是任务、环境和角色责任线索；它只让工作日常观察更具体，不改写 60Q，不比较原始分，也不输出岗位结论。',
+            'user_visible_boundary' => (string) $this->privateResultSource->get('boundaries.layer_140q'),
             'fallback_behavior' => 'omit_module',
             'frontend_fallback_allowed' => false,
         ];
@@ -1839,7 +1624,7 @@ final class RiasecDeepCopySlotRegistry
                 'ability_or_skill_inference',
             ],
             'required_boundaries' => $this->requiredBoundaries(),
-            'user_visible_boundary' => '140Q 是任务、环境和角色责任线索；它只让工作日常观察更具体，不改写 60Q，不比较原始分，也不输出岗位结论。',
+            'user_visible_boundary' => (string) $this->privateResultSource->get('boundaries.layer_140q'),
             'evidence_level' => 'expert_reviewed',
             'source_status' => 'reviewed_content_copy',
             'review_status' => 'content_review',
@@ -1937,7 +1722,7 @@ final class RiasecDeepCopySlotRegistry
                 'job_fit',
             ],
             'required_boundaries' => $this->requiredBoundaries(),
-            'user_visible_boundary' => '这是前三兴趣活动线索组合解释，不是人格类型、职业结论或成功预测。',
+            'user_visible_boundary' => (string) $this->privateResultSource->get('boundaries.top3'),
             'fallback_behavior' => 'omit_module',
             'frontend_fallback_allowed' => false,
         ];
@@ -1961,9 +1746,10 @@ final class RiasecDeepCopySlotRegistry
             return $slot;
         }
 
-        $first = self::DIMENSION_READING_LINES[$orderedDimensions[0]] ?? null;
-        $second = self::DIMENSION_READING_LINES[$orderedDimensions[1]] ?? null;
-        $third = self::DIMENSION_READING_LINES[$orderedDimensions[2]] ?? null;
+        $readingLines = (array) $this->privateResultSource->get('dimension_reading_lines', []);
+        $first = $readingLines[$orderedDimensions[0]] ?? null;
+        $second = $readingLines[$orderedDimensions[1]] ?? null;
+        $third = $readingLines[$orderedDimensions[2]] ?? null;
         if ($first === null || $second === null || $third === null) {
             return $slot;
         }
@@ -1972,28 +1758,42 @@ final class RiasecDeepCopySlotRegistry
         $shorts = [$first['short'], $second['short'], $third['short']];
         $orderedCode = implode('', $orderedDimensions);
         $orderedKey = implode('_', $orderedDimensions);
+        $tokens = [
+            '{code}' => $orderedCode,
+            '{labels}' => implode('、', $labels),
+            '{shorts}' => implode('-', $shorts),
+            '{first_label}' => (string) $first['label'],
+            '{second_label}' => (string) $second['label'],
+            '{third_label}' => (string) $third['label'],
+            '{first_short}' => (string) $first['short'],
+            '{second_short}' => (string) $second['short'],
+            '{third_short}' => (string) $third['short'],
+            '{first_focus}' => (string) $first['focus'],
+            '{second_focus}' => (string) $second['focus'],
+            '{third_focus}' => (string) $third['focus'],
+            '{first_action}' => (string) $first['action'],
+            '{second_action}' => (string) $second['action'],
+            '{third_action}' => (string) $third['action'],
+        ];
+        $templates = (array) $this->privateResultSource->get('top3_ordered_templates', []);
 
         return array_merge($slot, [
             'ordered_code' => $orderedCode,
             'ordered_top3_key' => $orderedKey,
             'ordered_top3_dimensions' => $orderedDimensions,
             'canonical_unordered_top3_key' => (string) ($slot['top3_key'] ?? ''),
-            'strategy_label' => implode('-', $shorts).'三线索观察',
-            'activity_chain' => '按顺序观察：先'.$first['action'].'；再'.$second['action'].'；最后'.$third['action'].'。',
-            'core_reading' => '这组前三个兴趣维度说明 '.implode('、', $labels).' 三类兴趣活动在本次作答中相对靠前。'.$orderedCode.' 只给出阅读顺序：'.$first['label'].' 是优先观察入口，'.$second['label'].' 和 '.$third['label'].' 是补充观察入口；它不能推断人格身份、能力水平或职业结论。',
-            'positive_value' => '这组内容的价值，是把 '.$first['label'].'关注'.$first['focus'].'；'.$second['label'].'关注'.$second['focus'].'；'.$third['label'].'关注'.$third['focus'].' 拆成可观察的小任务。先看哪一位，只表示先从哪类活动收集证据；它们提供探索问题，不提供岗位答案。',
-            'first_experiment' => '用 30 分钟做一次低风险观察：先加入'.$first['short'].'动作，再加入'.$second['short'].'动作，最后加入'.$third['short'].'动作；只记录哪个部分更想继续。',
-            'ordered_code_handling' => $orderedCode.' 是本次测量的有序三字码：第一位 '.$first['label'].' 作为优先观察入口，第二位 '.$second['label'].' 和第三位 '.$third['label'].' 作为补充观察入口；排序改变先问什么、后验证什么，不等于固定身份、能力或职业答案。',
-            'low_risk_validation' => '低风险观察：选择一个能容纳'.$first['short'].'、'.$second['short'].'、'.$third['short'].'线索的小任务，把三个动作分开记录，只看活动偏好和想继续的证据。',
-            'primary_activity_chain' => '先看第一位 '.$first['label'].'：把它当作优先观察入口，寻找与“'.$first['focus'].'”相关的小任务证据。',
-            'secondary_support_line' => '再看第二位 '.$second['label'].'：把它当作补充观察入口，记录“'.$second['focus'].'”是否让任务更吸引你。',
-            'tertiary_stabilizer' => '第三位 '.$third['label'].' 只作补充线索：观察“'.$third['focus'].'”是否帮助你区分更具体的任务条件。',
-            'activity_sequence' => [
-                '优先观察入口：'.$first['action'],
-                '第二观察入口：'.$second['action'],
-                '第三观察入口：'.$third['action'],
-            ],
-            'free_page_teaser' => implode('、', $labels).' 三类兴趣线索可以按 '.$orderedCode.' 的顺序观察，但不急着得出职业答案。',
+            'strategy_label' => strtr((string) ($templates['strategy_label'] ?? ''), $tokens),
+            'activity_chain' => strtr((string) ($templates['activity_chain'] ?? ''), $tokens),
+            'core_reading' => strtr((string) ($templates['core_reading'] ?? ''), $tokens),
+            'positive_value' => strtr((string) ($templates['positive_value'] ?? ''), $tokens),
+            'first_experiment' => strtr((string) ($templates['first_experiment'] ?? ''), $tokens),
+            'ordered_code_handling' => strtr((string) ($templates['ordered_code_handling'] ?? ''), $tokens),
+            'low_risk_validation' => strtr((string) ($templates['low_risk_validation'] ?? ''), $tokens),
+            'primary_activity_chain' => strtr((string) ($templates['primary_activity_chain'] ?? ''), $tokens),
+            'secondary_support_line' => strtr((string) ($templates['secondary_support_line'] ?? ''), $tokens),
+            'tertiary_stabilizer' => strtr((string) ($templates['tertiary_stabilizer'] ?? ''), $tokens),
+            'activity_sequence' => array_map(static fn (string $template): string => strtr($template, $tokens), (array) ($templates['activity_sequence'] ?? [])),
+            'free_page_teaser' => strtr((string) ($templates['free_page_teaser'] ?? ''), $tokens),
         ]);
     }
 
@@ -2044,7 +1844,7 @@ final class RiasecDeepCopySlotRegistry
                 'job_fit',
             ],
             'required_boundaries' => $this->requiredBoundaries(),
-            'user_visible_boundary' => '这是兴趣组合解释，不是人格标签、能力结论或职业结论。',
+            'user_visible_boundary' => (string) $this->privateResultSource->get('boundaries.pair'),
             'fallback_behavior' => 'omit_module',
             'frontend_fallback_allowed' => false,
         ];
@@ -2061,14 +1861,8 @@ final class RiasecDeepCopySlotRegistry
             if (! is_array($row)) {
                 continue;
             }
-            $slotName = match ((string) ($row['slot'] ?? '')) {
-                'top_notice' => 'top_notice',
-                'retake_guidance' => 'retake_guidance',
-                'module_downgrade' => 'hidden_modules_explanation',
-                'share_pdf_note' => 'share_pdf_boundary',
-                default => null,
-            };
-            if ($slotName === null) {
+            $slotName = (string) ($row['slot'] ?? '');
+            if (! in_array($slotName, ['top_notice', 'user_not_blamed_message', 'what_happened_explanation', 'retake_guidance', 'hidden_modules_explanation', 'share_pdf_boundary', 'next_step'], true)) {
                 continue;
             }
             $recommendedActionType = (string) ($row['recommended_action_type'] ?? match ($slotName) {
@@ -2078,10 +1872,13 @@ final class RiasecDeepCopySlotRegistry
                 default => 'cautious_reading_or_retake_only',
             });
             $copyBySlot[$slotName] = [
-                'title' => (string) ($this->lowQualitySlotTitle($slotName)),
+                'title' => (string) ($row['title'] ?? ''),
                 'summary' => (string) ($row['text'] ?? ''),
+                'quality_state' => in_array($slotName, ['retake_guidance', 'next_step'], true)
+                    ? 'retake_recommended'
+                    : 'low_quality',
                 'content_version' => (string) ($asset['asset_id'] ?? 'low_quality_cautious_reading_v1.zh-CN'),
-                'user_visible_boundary' => '质量状态只限制本次结果的阅读强度，不评价用户，也不改变分数或 Holland Code。',
+                'user_visible_boundary' => (string) data_get($asset, 'runtime_copy_boundaries.default', ''),
                 'user_blame_allowed' => false,
                 'upsell_140q_allowed' => false,
                 'strong_interpretation_allowed' => false,
@@ -2098,11 +1895,11 @@ final class RiasecDeepCopySlotRegistry
         }
         if (($states['caution'] ?? '') !== '') {
             $copyBySlot['cautious_reading_notice'] = [
-                'title' => '轻量参考',
+                'title' => (string) data_get($asset, 'runtime_state_titles.caution', ''),
                 'summary' => $states['caution'],
                 'quality_state' => 'caution',
                 'content_version' => (string) ($asset['asset_id'] ?? 'low_quality_cautious_reading_v1.zh-CN'),
-                'user_visible_boundary' => '谨慎阅读只说明本次线索需要观察，不是结果无效，也不是能力判断。',
+                'user_visible_boundary' => (string) data_get($asset, 'runtime_copy_boundaries.caution', ''),
                 'user_blame_allowed' => false,
                 'upsell_140q_allowed' => false,
                 'strong_interpretation_allowed' => false,
@@ -2112,11 +1909,11 @@ final class RiasecDeepCopySlotRegistry
         }
         if (($states['minimal_60q'] ?? '') !== '') {
             $copyBySlot['minimal_quality_boundary_60q'] = [
-                'title' => '60Q 最小质量边界',
+                'title' => (string) data_get($asset, 'runtime_state_titles.minimal_60q', ''),
                 'summary' => $states['minimal_60q'],
                 'quality_state' => 'minimal_quality_boundary_60q',
                 'content_version' => (string) ($asset['asset_id'] ?? 'low_quality_cautious_reading_v1.zh-CN'),
-                'user_visible_boundary' => '60Q 的质量边界只限制阅读方式，不比较 60Q 和 140Q 的正确性。',
+                'user_visible_boundary' => (string) data_get($asset, 'runtime_copy_boundaries.minimal_60q', ''),
                 'user_blame_allowed' => false,
                 'upsell_140q_allowed' => false,
                 'strong_interpretation_allowed' => false,
@@ -2126,17 +1923,6 @@ final class RiasecDeepCopySlotRegistry
         }
 
         return $copyBySlot;
-    }
-
-    private function lowQualitySlotTitle(string $slotName): string
-    {
-        return match ($slotName) {
-            'top_notice' => '这次结果需要谨慎阅读',
-            'retake_guidance' => '稍后重测建议',
-            'hidden_modules_explanation' => '页面会减少强解释',
-            'share_pdf_boundary' => '分享和 PDF 边界',
-            default => '谨慎阅读提示',
-        };
     }
 
     /**
@@ -2343,14 +2129,26 @@ final class RiasecDeepCopySlotRegistry
     private function aspirationStateFromAssetRow(array $row): string
     {
         $domainKey = (string) ($row['domain_key'] ?? '');
-        if (str_contains($domainKey, '想排除') || str_contains($domainKey, '曾经受挫')) {
+        if ($this->containsAny($domainKey, (array) $this->privateResultSource->get('aspiration_state_tokens.tension', []))) {
             return 'tension';
         }
-        if (str_contains($domainKey, '已有机会') || str_contains($domainKey, '正在考虑')) {
+        if ($this->containsAny($domainKey, (array) $this->privateResultSource->get('aspiration_state_tokens.needs_reality_check', []))) {
             return 'needs_reality_check';
         }
 
         return 'overlap';
+    }
+
+    /** @param list<string> $needles */
+    private function containsAny(string $haystack, array $needles): bool
+    {
+        foreach ($needles as $needle) {
+            if ($needle !== '' && str_contains($haystack, $needle)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -2402,13 +2200,13 @@ final class RiasecDeepCopySlotRegistry
             'applicable_quality_states' => ['normal', 'caution'],
             'applicable_codes' => ['any'],
             'slot_name' => $slotName,
-            'layer_focus' => '任务、环境和角色责任情境线索',
-            'science_boundary' => '140Q 只补充任务、环境和角色责任的情境线索；不改写 60Q，不比较原始分，不声称准确度升级，也不输出能力、岗位或组织结论。',
-            'observation_question' => '这条线索需要怎样用低风险任务继续观察？',
-            'contextual_detail_only' => true,
+            'layer_focus' => (string) ($content['question'] ?? $content['summary'] ?? ''),
+            'science_boundary' => (string) $this->privateResultSource->get('boundaries.layer_140q'),
+            'observation_question' => (string) ($content['question'] ?? $content['summary'] ?? ''),
+            'contextual_detail_only' => (bool) ($content['contextual_detail_only'] ?? true),
             'result_mutation_allowed' => false,
             'raw_score_comparison_allowed' => false,
-            'accuracy_upgrade_claim_allowed' => false,
+            'accuracy_upgrade_claim_allowed' => (bool) ($content['accuracy_upgrade_claim_allowed'] ?? false),
             'forbidden_claims' => [
                 '140q_accuracy_claim',
                 '60q_override',
@@ -2417,7 +2215,7 @@ final class RiasecDeepCopySlotRegistry
                 'ability_or_skill_inference',
             ],
             'required_boundaries' => $this->requiredBoundaries(),
-            'user_visible_boundary' => '140Q 是工作日常情境线索，不改写 60Q，不比较原始分数，也不输出岗位结论。',
+            'user_visible_boundary' => (string) $this->privateResultSource->get('boundaries.layer_140q'),
             'evidence_level' => 'expert_reviewed',
             'source_status' => 'reviewed_content_copy',
             'review_status' => 'approved_for_staging',
@@ -2453,7 +2251,7 @@ final class RiasecDeepCopySlotRegistry
                 'score_mutation',
             ],
             'required_boundaries' => $this->requiredBoundaries(),
-            'user_visible_boundary' => '质量状态只限制本次结果的阅读强度，不评价用户，也不改变分数或 Holland Code。',
+            'user_visible_boundary' => (string) $this->privateResultSource->get('boundaries.quality'),
             'evidence_level' => 'expert_reviewed',
             'source_status' => 'reviewed_content_copy',
             'review_status' => 'approved_for_staging',
@@ -2495,7 +2293,7 @@ final class RiasecDeepCopySlotRegistry
                 'ability_or_skill_inference',
             ],
             'required_boundaries' => $this->requiredBoundaries(),
-            'user_visible_boundary' => '这些内容只说明结果阅读方式，不改变分数、Holland Code 或职业结论。',
+            'user_visible_boundary' => (string) $this->privateResultSource->get('boundaries.quality'),
             'evidence_level' => 'expert_reviewed',
             'source_status' => 'reviewed_content_copy',
             'review_status' => 'content_review',
@@ -2532,7 +2330,7 @@ final class RiasecDeepCopySlotRegistry
                 'career_recommendation',
             ],
             'required_boundaries' => $this->requiredBoundaries(),
-            'user_visible_boundary' => '跨表单摘要只说明兴趣线索强调不同；不比较分数，不改写结果，也不形成职业结论。',
+            'user_visible_boundary' => (string) $this->privateResultSource->get('boundaries.structural'),
             'emphasis_difference_only' => true,
             'correctness_ranking_allowed' => false,
             'raw_score_comparison_allowed' => false,
@@ -2562,7 +2360,7 @@ final class RiasecDeepCopySlotRegistry
                 'ability_or_skill_inference',
                 'qualification_judgment',
             ],
-            'user_visible_boundary' => '愿望只校准探索问题，不覆盖本次测得的霍兰德代码，不改变 RIASEC 分数，也不形成职业结论。',
+            'user_visible_boundary' => (string) $this->privateResultSource->get('boundaries.aspirations'),
             'validation_questions_only' => true,
             'aspiration_override_allowed' => false,
             'aspiration_replaces_measured_result_allowed' => false,
@@ -2585,7 +2383,7 @@ final class RiasecDeepCopySlotRegistry
                 'job_fit',
                 'raw_feedback_public_exposure',
             ],
-            'user_visible_boundary' => '不认同结果只影响探索路径，不修改 本次测得的霍兰德代码、RIASEC 分数、报告快照、分享或 PDF。',
+            'user_visible_boundary' => (string) $this->privateResultSource->get('boundaries.disagree'),
             'next_steps_only' => true,
             'feedback_replaces_measured_result_allowed' => false,
             'result_override_allowed' => false,

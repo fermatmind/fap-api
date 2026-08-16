@@ -71,29 +71,60 @@
   "copy_slots": [
     {
       "slot": "top_notice",
+      "title": "这次结果需要谨慎阅读",
       "text": "本次结果需要谨慎阅读。你可以先保留它作为初步兴趣线索，不用把三字母 Code 当成固定身份或职业判断。",
       "strong_interpretation_allowed": false,
       "recommended_action_type": "cautious_reading_or_retake_only"
     },
     {
+      "slot": "user_not_blamed_message",
+      "title": "这不是对你的评价",
+      "text": "作答太快、注意力分散、题目想象不清楚、缺题或当时状态不稳定，都可能影响结果的可读性。",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "cautious_reading_or_retake_only"
+    },
+    {
+      "slot": "what_happened_explanation",
+      "title": "为什么要降级阅读",
+      "text": "当作答质量或结果清晰度不足时，系统暂不把结果写成强解释，以避免把初步线索误读成固定结论。",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "cautious_reading_or_retake_only"
+    },
+    {
       "slot": "retake_guidance",
+      "title": "下次作答时，试着这样做",
       "text": "如果你当时注意力分散、赶时间或对题目想象不清，可以稍后在状态稳定时重测；这只是改善作答条件，不是责备你，也不是要求购买更长版本。",
       "strong_interpretation_allowed": false,
       "recommended_action_type": "retake_when_ready"
     },
     {
-      "slot": "module_downgrade",
+      "slot": "hidden_modules_explanation",
+      "title": "哪些模块会暂时隐藏",
       "text": "页面会减少强解释、职业场景展示和深度组合承接，避免把本次不稳定线索读成方向判断。",
       "strong_interpretation_allowed": false,
       "recommended_action_type": "hide_strong_interpretation"
     },
     {
-      "slot": "share_pdf_note",
+      "slot": "share_pdf_boundary",
+      "title": "分享和 PDF 边界",
       "text": "谨慎阅读结果在分享和 PDF 中应默认展示边界提示，不展示强活动线索组合、职业例子或公开 Holland Code 摘要。",
       "strong_interpretation_allowed": false,
       "recommended_action_type": "safe_private_record_only"
+    },
+    {
+      "slot": "next_step",
+      "title": "下一步",
+      "text": "先保存谨慎阅读版，或稍后在状态更稳定时重测。当前不推荐继续进入更长版本。",
+      "strong_interpretation_allowed": false,
+      "recommended_action_type": "retake_when_ready"
     }
   ],
+  "runtime_copy_boundaries": {
+    "default": "质量状态只限制本次结果的阅读强度，不评价用户，也不改变分数或 Holland Code。",
+    "caution": "谨慎阅读只说明本次线索需要观察，不是结果无效，也不是能力判断。",
+    "minimal_60q": "60Q 的质量边界只限制阅读方式，不比较 60Q 和 140Q 的正确性。"
+  },
+  "runtime_state_titles": {"caution": "轻量参考", "minimal_60q": "60Q 最小质量边界"},
   "upsell_140q_allowed": false,
   "user_blame_allowed": false,
   "strong_interpretation_allowed": false,

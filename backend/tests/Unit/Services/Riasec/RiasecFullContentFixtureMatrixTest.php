@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Services\Riasec;
 
 use App\Models\Result;
+use App\Services\Content\RiasecPrivateResultCompileService;
 use App\Services\Riasec\RiasecActivityExplorerService;
 use App\Services\Riasec\RiasecDeepCopySlotRegistry;
 use App\Services\Riasec\RiasecExplorationFeedbackOverlayService;
@@ -15,27 +16,24 @@ use Tests\TestCase;
 
 final class RiasecFullContentFixtureMatrixTest extends TestCase
 {
-    public function test_frozen_runtime_assets_parse_and_pass_editorial_hygiene_scan(): void
+    public function test_canonical_runtime_sources_parse_and_pass_editorial_hygiene_scan(): void
     {
-        $manifestPath = base_path('content_assets/riasec/qa/result_content_freeze.v1.2026-08-13-r6.json');
-        $manifest = json_decode((string) file_get_contents($manifestPath), true, 512, JSON_THROW_ON_ERROR);
-        $baseManifest = json_decode((string) file_get_contents(base_path($manifest['base_manifest'])), true, 512, JSON_THROW_ON_ERROR);
-        $this->assertSame($manifest['base_package_sha256'], $baseManifest['package_sha256']);
-        $this->assertCount($manifest['effective_file_count'], $manifest['files']);
-        $packageLines = '';
+        $compiled = app(RiasecPrivateResultCompileService::class)->compile();
+        $manifest = $compiled['manifest'];
+        $this->assertSame(RiasecPrivateResultCompileService::AUTHORITY_ID, $manifest['authority_id']);
+        $this->assertSame(1, $manifest['editable_authority_count']);
 
-        foreach ((array) ($manifest['files'] ?? []) as $relativePath => $expectedSha) {
-            $path = base_path((string) $relativePath);
+        foreach ((array) ($manifest['source_files'] ?? []) as $sourceFile) {
+            $relativePath = (string) $sourceFile['path'];
+            $path = base_path('content_assets/riasec/'.$relativePath);
             $this->assertFileExists($path);
-            $this->assertSame($expectedSha, hash_file('sha256', $path), 'Frozen asset SHA drifted: '.$relativePath);
             $raw = (string) file_get_contents($path);
-            $packageLines .= $expectedSha.'  backend/'.$relativePath."\n";
 
-            if (str_ends_with((string) $relativePath, '.jsonl')) {
+            if (str_ends_with($relativePath, '.jsonl')) {
                 foreach (array_filter(explode("\n", $raw), static fn (string $line): bool => trim($line) !== '') as $line) {
                     json_decode($line, true, 512, JSON_THROW_ON_ERROR);
                 }
-            } elseif (str_ends_with((string) $relativePath, '.json')) {
+            } elseif (str_ends_with($relativePath, '.json')) {
                 json_decode($raw, true, 512, JSON_THROW_ON_ERROR);
             }
 
@@ -49,15 +47,8 @@ final class RiasecFullContentFixtureMatrixTest extends TestCase
             }
         }
 
-        $this->assertSame($manifest['package_sha256'], hash('sha256', $packageLines));
-        $this->assertSame('PASS', data_get($manifest, 'gates.scientific_boundary_scan'));
-        $this->assertSame('PASS', data_get($manifest, 'gates.runtime_visible_copy_scan'));
-        $this->assertSame('PASS', data_get($manifest, 'gates.independent_editorial_review'));
-        $this->assertSame([
-            'faq_markdown_reference',
-            'professional_method_boundary',
-            'history_cross_form',
-        ], $manifest['intentional_fail_closed_surfaces']);
+        $this->assertMatchesRegularExpression('/\A[a-f0-9]{64}\z/', $compiled['source_hash']);
+        $this->assertMatchesRegularExpression('/\A[a-f0-9]{64}\z/', $compiled['compiled_hash']);
     }
 
     private const TARGET_ORDERED_MATRIX = [
@@ -237,7 +228,7 @@ final class RiasecFullContentFixtureMatrixTest extends TestCase
             $this->assertStringNotContainsString($blockedCopy, $runtimeSerialized);
         }
 
-        $this->assertCount(6, $lifecycle->technicalNoteSummarySections());
+        $this->assertCount(8, $lifecycle->technicalNoteSummarySections());
         $this->assertCount(8, $lifecycle->professionalMethodBoundarySections());
 
         $this->assertSame('available_static_safe_bridge', data_get($overlay, 'action_lab_v1.status'));

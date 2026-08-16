@@ -93,65 +93,19 @@ final class RiasecTechnicalNoteService
      */
     private function sections(): array
     {
-        $summaryByTitle = [];
-        foreach ($this->lifecycleCopy->technicalNoteSummarySections() as $section) {
-            $summaryByTitle[$section['title']] = $section['copy'];
-        }
-
         $sections = [];
-        $mapping = [
-            '这个测试测什么' => [
-                'section_key' => 'test_goal',
-                'data_status' => 'currently_operational',
-            ],
-            '这个测试不测什么' => [
-                'section_key' => 'measurement_boundary',
-                'data_status' => 'currently_operational',
-            ],
-            '如何读分数' => [
-                'section_key' => 'score_space_boundary',
-                'data_status' => 'currently_operational',
-            ],
-            '60Q 和 140Q 的关系' => [
-                'section_key' => 'riasec_140_context',
-                'data_status' => 'currently_operational',
-            ],
-            '如何读职业例子' => [
-                'section_key' => 'career_examples_boundary',
-                'data_status' => 'partial',
-            ],
-            '反馈如何使用' => [
-                'section_key' => 'feedback_boundary',
-                'data_status' => 'planned',
-            ],
-        ];
-
-        foreach ($mapping as $title => $meta) {
-            $body = trim((string) ($summaryByTitle[$title] ?? ''));
-            if ($body === '') {
+        foreach ($this->lifecycleCopy->technicalNoteSummarySections() as $section) {
+            if ($section['section_key'] === '' || $section['data_status'] === '') {
                 continue;
             }
 
             $sections[] = [
-                'section_key' => $meta['section_key'],
-                'title' => $title,
-                'body' => $body,
-                'data_status' => $meta['data_status'],
+                'section_key' => $section['section_key'],
+                'title' => $section['title'],
+                'body' => $section['copy'],
+                'data_status' => $section['data_status'],
             ];
         }
-
-        $sections[] = [
-            'section_key' => 'quality_boundary',
-            'title' => '质量边界',
-            'body' => '60Q 当前只声明最小答题完成规则，不输出强 low_quality 判断。',
-            'data_status' => 'currently_operational',
-        ];
-        $sections[] = [
-            'section_key' => 'snapshot_boundary',
-            'title' => '报告快照',
-            'body' => '正式报告必须绑定生成时的 snapshot，后续 share、PDF、history 应读取同一份可审计结果。',
-            'data_status' => 'currently_operational',
-        ];
 
         return $sections;
     }
@@ -161,61 +115,7 @@ final class RiasecTechnicalNoteService
      */
     private function methodBoundaries(): array
     {
-        $sourceByKey = [];
-        foreach ($this->lifecycleCopy->professionalMethodBoundarySections() as $section) {
-            $sourceByKey[$section['key']] = $section;
-        }
-
-        return [
-            'career_interest_only' => [
-                'label' => (string) ($sourceByKey['measurement_object']['title'] ?? '测量对象'),
-                'copy' => (string) ($sourceByKey['measurement_object']['body'] ?? ''),
-                'evidence_level' => 'runtime_contract',
-                'content_maturity' => 'v0.1',
-            ],
-            'not_career_recommendation' => [
-                'label' => (string) ($sourceByKey['examples']['title'] ?? '职业例子边界'),
-                'copy' => (string) ($sourceByKey['examples']['body'] ?? ''),
-                'evidence_level' => 'method_boundary',
-                'content_maturity' => 'v0.1',
-            ],
-            'same_scale_not_same_score_space' => [
-                'label' => (string) ($sourceByKey['score_space']['title'] ?? '分数空间'),
-                'copy' => 'riasec_60 与 riasec_140 同属 RIASEC，但 raw score space 不同，不默认比较 raw score delta。',
-                'evidence_level' => 'measurement_contract',
-                'content_maturity' => 'v0.1',
-            ],
-            'riasec_140_contextual_not_more_accurate' => [
-                'label' => (string) ($sourceByKey['forms']['title'] ?? '60Q 与 140Q'),
-                'copy' => '140Q 只能称为工作日常情境化兴趣线索，不能称为更准确答案。',
-                'evidence_level' => 'method_boundary',
-                'content_maturity' => 'v0.1',
-            ],
-            'content_examples_not_registry_match' => [
-                'label' => 'Examples only',
-                'copy' => '没有 reviewed registry source 时，occupation examples 必须标注 content_example_not_registry_match。',
-                'evidence_level' => 'content_boundary',
-                'content_maturity' => 'v0.1',
-            ],
-            'feedback_no_score_mutation' => [
-                'label' => (string) ($sourceByKey['feedback']['title'] ?? '反馈边界'),
-                'copy' => '用户反馈只进入探索层，不会覆盖 measured_holland_code、维度分数或正式报告快照。',
-                'evidence_level' => 'method_boundary',
-                'content_maturity' => 'v0.1',
-            ],
-            'snapshot_bound_report' => [
-                'label' => '正式报告快照绑定',
-                'copy' => '正式报告、share、PDF、history 必须以 snapshot-bound report 为展示依据。',
-                'evidence_level' => 'runtime_contract',
-                'content_maturity' => 'v0.1',
-            ],
-            'quality_boundary_60q_minimal' => [
-                'label' => '60Q 质量边界',
-                'copy' => '60Q 当前没有强 low_quality rule，只能声明 minimal_answer_completion_only。',
-                'evidence_level' => 'measurement_contract',
-                'content_maturity' => 'v0.1',
-            ],
-        ];
+        return $this->lifecycleCopy->technicalNoteRuntimeContract()['method_boundaries'];
     }
 
     /**
@@ -223,37 +123,6 @@ final class RiasecTechnicalNoteService
      */
     private function disclaimers(): array
     {
-        return [
-            [
-                'key' => 'not_ability_or_personality',
-                'label' => '非能力/人格测量',
-                'copy' => 'RIASEC 不测能力、人格、价值观或长期职业结果。',
-            ],
-            [
-                'key' => 'not_hiring_screening',
-                'label' => '非招聘筛选用途',
-                'copy' => 'RIASEC 不用于招聘、晋升、淘汰或雇佣筛选。',
-            ],
-            [
-                'key' => 'no_cross_form_raw_delta',
-                'label' => '不比较跨 form raw delta',
-                'copy' => '60Q 与 140Q 不默认比较 raw score delta。',
-            ],
-            [
-                'key' => 'riasec_140_not_more_accurate',
-                'label' => '140Q 非更准确声明',
-                'copy' => '140Q 只能作为更具体的情境化兴趣线索。',
-            ],
-            [
-                'key' => 'examples_not_matches',
-                'label' => '职业例子不是匹配',
-                'copy' => '职业例子是内容示例，不是职业数据库匹配或岗位推荐。',
-            ],
-            [
-                'key' => 'feedback_overlay_boundary',
-                'label' => '反馈层边界',
-                'copy' => '反馈不会修改 measured_holland_code、分数或正式报告快照。',
-            ],
-        ];
+        return $this->lifecycleCopy->technicalNoteRuntimeContract()['disclaimers'];
     }
 }

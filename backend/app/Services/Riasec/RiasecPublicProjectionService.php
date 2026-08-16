@@ -11,12 +11,12 @@ use App\Services\ReviewGovernance\PublicReviewContract;
 final class RiasecPublicProjectionService
 {
     private const LABELS = [
-        'R' => ['en' => 'Realistic', 'zh-CN' => '现实型'],
-        'I' => ['en' => 'Investigative', 'zh-CN' => '研究型'],
-        'A' => ['en' => 'Artistic', 'zh-CN' => '艺术型'],
-        'S' => ['en' => 'Social', 'zh-CN' => '社会型'],
-        'E' => ['en' => 'Enterprising', 'zh-CN' => '企业型'],
-        'C' => ['en' => 'Conventional', 'zh-CN' => '常规型'],
+        'R' => 'Realistic',
+        'I' => 'Investigative',
+        'A' => 'Artistic',
+        'S' => 'Social',
+        'E' => 'Enterprising',
+        'C' => 'Conventional',
     ];
 
     public function __construct(
@@ -29,6 +29,7 @@ final class RiasecPublicProjectionService
         private readonly RiasecReportModuleSelector $moduleSelector,
         private readonly RiasecDeepCopySlotRegistry $deepCopySlots,
         private readonly PublicReviewContract $publicReviewContract,
+        private readonly RiasecPrivateResultSourceRepository $privateResultSource = new RiasecPrivateResultSourceRepository,
     ) {}
 
     public function buildFromResult(Result $result, string $locale = 'zh-CN'): array
@@ -275,16 +276,16 @@ final class RiasecPublicProjectionService
             'snapshot_scope' => (bool) data_get($projection, 'measurement_evidence.snapshot_bound', false)
                 ? 'report_snapshot'
                 : 'persisted_result',
-            'headline' => $isZh ? '你的兴趣结果摘要' : 'Your interest result summary',
+            'headline' => $isZh ? (string) $this->privateResultSource->get('result_summary.headline') : 'Your interest result summary',
             'ranking_display' => (string) data_get($tie, 'display_copy.headline', data_get($projection, 'holland_code.code', '')),
             'tie_note' => (string) data_get($tie, 'display_copy.note', ''),
             'quality_summary' => implode($isZh ? '；' : '; ', $qualityParts),
             'highlights' => array_slice($highlights, 0, 3),
             'next_step' => $isZh
-                ? '选择前三个兴趣维度中的一个，安排一次 15–30 分钟的低风险活动，记录你是否愿意继续。'
+                ? (string) $this->privateResultSource->get('result_summary.next_step')
                 : 'Choose one of the first three interest dimensions for a 15–30 minute low-risk activity, then note whether you want to continue.',
             'boundary' => $isZh
-                ? '结果只描述本次职业兴趣线索，不代表能力、人格身份、职业匹配或未来结果。'
+                ? (string) $this->privateResultSource->get('result_summary.boundary')
                 : 'This result describes career-interest signals from this response only; it is not an ability, identity, career-match, or outcome conclusion.',
         ];
     }
@@ -293,14 +294,7 @@ final class RiasecPublicProjectionService
     private function summaryDimensionCopy(bool $isZh): array
     {
         if ($isZh) {
-            return [
-                'R' => ['high' => '动手操作和处理具体对象是本次较突出的兴趣线索，可优先安排一次实作任务验证。', 'medium' => '你对实作活动有一定兴趣，是否投入往往取决于工具、目标和现场条件。', 'low' => '实作活动本次排序较后；这不代表做不到，可在确有需要时用短任务核对体验。'],
-                'I' => ['high' => '追问原因和分析证据是本次较突出的兴趣线索，可用一个真实问题检验持续投入感。', 'medium' => '你对研究分析有一定兴趣，问题难度和探索空间可能影响投入程度。', 'low' => '研究分析本次排序较后；先观察你在具体问题上是否仍愿意查证和推理。'],
-                'A' => ['high' => '表达想法和创造形式是本次较突出的兴趣线索，可用一次小型创作检验。', 'medium' => '你对创意表达有一定兴趣，自主空间和表达媒介可能影响体验。', 'low' => '创意表达本次排序较后；不妨用一个轻量作品核对真实感受。'],
-                'S' => ['high' => '理解、支持或帮助他人是本次较突出的兴趣线索，可从一次真实协作中验证。', 'medium' => '你对助人互动有一定兴趣，关系距离和互动方式可能影响投入程度。', 'low' => '助人互动本次排序较后；可区分不喜欢持续互动，还是更偏好特定对象和方式。'],
-                'E' => ['high' => '推动目标和组织行动是本次较突出的兴趣线索，可用一次小型发起或协调任务验证。', 'medium' => '你对推动事情有一定兴趣，目标意义和自主权可能影响投入程度。', 'low' => '推动与影响活动本次排序较后；可观察你是否更愿意贡献方案而非主导过程。'],
-                'C' => ['high' => '整理信息和维护流程是本次较突出的兴趣线索，可用一次结构化任务验证。', 'medium' => '你对秩序和流程有一定兴趣，规则是否清晰、是否有改进空间可能影响体验。', 'low' => '规则化任务本次排序较后；可区分对重复流程的排斥与对清晰结构的实际需要。'],
-            ];
+            return (array) $this->privateResultSource->get('result_summary.dimension_bands', []);
         }
 
         return [
@@ -700,7 +694,7 @@ final class RiasecPublicProjectionService
                 'environment' => $this->normalize140qSelectionLayerState((string) ($layerStates['environment'] ?? data_get($payload, 'environment_layer_state', 'unavailable'))),
                 'role' => $this->normalize140qSelectionLayerState((string) ($layerStates['role'] ?? data_get($payload, 'role_layer_state', 'unavailable'))),
             ],
-            'public_copy_boundary' => '60Q 与 140Q 只能读作线索强调不同，不比较原始分数，不输出优劣或覆盖判断。',
+            'public_copy_boundary' => (string) $this->privateResultSource->get('generic_slots.structural_public_boundary'),
         ];
     }
 
@@ -747,36 +741,7 @@ final class RiasecPublicProjectionService
         }
         $flags = array_values(array_unique($flags));
 
-        $copy = $isZh ? [
-            'headlines' => [
-                'A' => '作答状态稳定，可正常阅读',
-                'B' => '存在轻度作答质量提示，建议结合实际经历谨慎阅读',
-                'C' => '作答质量提示较明显，本次仅作初步线索，建议状态稳定时重测',
-            ],
-            'reasons' => [
-                'attention_133_failed' => '有一道注意力检查题未通过，部分回答可能没有充分反映你的真实偏好。',
-                'attention_137_failed' => '有一道注意力检查题未通过，部分回答可能没有充分反映你的真实偏好。',
-                'low_consistency' => '部分相近题目的回答差异较大，结果的稳定性可能受到影响。',
-                'idealization' => '部分回答可能偏向理想状态，而不是你通常会做出的选择。',
-                'strong_idealization' => '多组回答可能偏向理想状态，而不是你通常会做出的选择。',
-                'broad_agreement' => '较多题目选择了同意或喜欢，各兴趣维度之间的区分度可能不足。',
-                'too_fast' => '作答速度明显偏快，可能没有留出足够时间理解题意。',
-                'neutral_overuse' => '中立选项使用较多，本次结果能够区分出的兴趣差异有限。',
-                'missing_items' => '存在未完成题目，本次结果无法支持完整解读。',
-            ],
-            'improvements' => [
-                'attention_133_failed' => '重测时请逐题阅读，并在不受打扰的环境中作答。',
-                'attention_137_failed' => '重测时请逐题阅读，并在不受打扰的环境中作答。',
-                'low_consistency' => '重测时以平时真实、反复出现的行为为准，不必追求前后看起来一致。',
-                'idealization' => '重测时请选择最接近日常状态的答案，而不是你认为更理想或更受期待的答案。',
-                'strong_idealization' => '重测时请选择最接近日常状态的答案，而不是你认为更理想或更受期待的答案。',
-                'broad_agreement' => '遇到都感兴趣的选项时，可比较自己是否愿意长期、重复地投入这些活动。',
-                'too_fast' => '在时间充足、状态稳定时重新作答，每题先联系一个具体经历再选择。',
-                'neutral_overuse' => '重测时可结合具体经历，尽量区分更接近喜欢还是不喜欢。',
-                'missing_items' => '请完成全部题目后重新生成结果。',
-            ],
-            'boundary' => '质量提示只说明本次作答的可读性，不评价你的能力、人格或个人价值。',
-        ] : [
+        $copy = $isZh ? (array) $this->privateResultSource->get('quality_display', []) : [
             'headlines' => [
                 'A' => 'Your responses are stable enough for a standard reading',
                 'B' => 'A mild response-quality note applies; read the result alongside your real experience',
@@ -812,7 +777,7 @@ final class RiasecPublicProjectionService
         $attentionFlags = array_values(array_intersect($flags, ['attention_133_failed', 'attention_137_failed']));
         if (count($attentionFlags) === 2) {
             $reasons[] = $isZh
-                ? '两道注意力检查题均未通过，部分回答可能没有充分反映你的真实偏好。'
+                ? (string) $this->privateResultSource->get('quality_display.reasons.both_attention_failed')
                 : 'Both attention checks were missed, so some answers may not fully reflect your usual preferences.';
             $improvements[] = $copy['improvements']['attention_133_failed'];
         }
@@ -827,10 +792,10 @@ final class RiasecPublicProjectionService
         }
         if ($normalizedGrade !== 'A' && $reasons === []) {
             $reasons[] = $isZh
-                ? '本次作答出现了质量提示，因此结果的区分度或稳定性可能有限。'
+                ? (string) $this->privateResultSource->get('quality_display.reasons.generic')
                 : 'This response set received a quality note, so the result may be less distinct or stable.';
             $improvements[] = $isZh
-                ? '建议在状态稳定、不受打扰时，结合日常真实经历重新作答。'
+                ? (string) $this->privateResultSource->get('quality_display.improvements.generic')
                 : 'Consider retaking when settled and free from distractions, answering from everyday experience.';
         }
 
@@ -1076,13 +1041,9 @@ final class RiasecPublicProjectionService
      */
     private function dimensionLabels(string $locale): array
     {
-        $key = str_starts_with(strtolower($locale), 'zh') ? 'zh-CN' : 'en';
-        $out = [];
-        foreach (self::LABELS as $dimension => $labels) {
-            $out[$dimension] = $labels[$key] ?? $labels['en'];
-        }
-
-        return $out;
+        return str_starts_with(strtolower($locale), 'zh')
+            ? (array) $this->privateResultSource->get('dimension_labels', [])
+            : self::LABELS;
     }
 
     /**
@@ -1185,23 +1146,25 @@ final class RiasecPublicProjectionService
         $joined = $isZh ? implode('、', $dimensions) : $this->englishJoin($dimensions);
         $position = (string) ($tieDisplay['position'] ?? 'none');
         if (($tieDisplay['unavailable_reason'] ?? null) === 'score_code_mismatch') {
+            $zhCopy = (array) $this->privateResultSource->get('tie_display.score_code_mismatch', []);
+
             return [
-                'headline' => $isZh ? '本次结果暂不可解释' : 'This result cannot be interpreted yet',
-                'note' => $isZh ? '分数顺序与结果代码不一致，已隐藏解释内容；六维分数仍可供核对。' : 'The score order and result code do not agree, so interpretive content is hidden; the six dimension scores remain available for review.',
-                'boundary' => $isZh ? '请重新检查结果；不要根据本页推断兴趣排序、能力或职业结论。' : 'Please check the result again; do not infer an interest order, ability, or career conclusion from this page.',
+                'headline' => $isZh ? (string) ($zhCopy['headline'] ?? '') : 'This result cannot be interpreted yet',
+                'note' => $isZh ? (string) ($zhCopy['note'] ?? '') : 'The score order and result code do not agree, so interpretive content is hidden; the six dimension scores remain available for review.',
+                'boundary' => $isZh ? (string) ($zhCopy['boundary'] ?? '') : 'Please check the result again; do not infer an interest order, ability, or career conclusion from this page.',
             ];
         }
 
         return match ($kind) {
             'exact_tie' => [
                 'headline' => $this->exactTieHeadline($code, $dimensions, $groups, $position, $isZh),
-                'note' => $isZh ? '这些维度本次得分相同，字母顺序不代表高低。' : 'These dimensions have the same score; their letter order does not indicate a difference.',
-                'boundary' => $isZh ? '并列只描述本次兴趣分数，不代表能力、人格身份或职业结论。' : 'The tie describes this interest score only; it is not an ability, identity, or career conclusion.',
+                'note' => $isZh ? (string) $this->privateResultSource->get('tie_display.exact_tie_note') : 'These dimensions have the same score; their letter order does not indicate a difference.',
+                'boundary' => $isZh ? (string) $this->privateResultSource->get('tie_display.exact_tie_boundary') : 'The tie describes this interest score only; it is not an ability, identity, or career conclusion.',
             ],
             'near_tie' => [
-                'headline' => $isZh ? $code.'（'.$joined.'接近）' : $code.' ('.$joined.' are close)',
-                'note' => $isZh ? '这些维度分数接近，不宜据此强调先后顺序。' : 'These scores are close, so the order should not be emphasized.',
-                'boundary' => $isZh ? '这是解释用的暂定阅读阈值，不是统计显著性或测量误差结论，也不产生第二个测量结果。' : 'This is a provisional reading threshold, not a statistical-significance or measurement-error conclusion, and it does not create a second measured result.',
+                'headline' => $isZh ? strtr((string) $this->privateResultSource->get('tie_display.near_tie_headline'), ['{code}' => $code, '{dimensions}' => $joined]) : $code.' ('.$joined.' are close)',
+                'note' => $isZh ? (string) $this->privateResultSource->get('tie_display.near_tie_note') : 'These scores are close, so the order should not be emphasized.',
+                'boundary' => $isZh ? (string) $this->privateResultSource->get('tie_display.near_tie_boundary') : 'This is a provisional reading threshold, not a statistical-significance or measurement-error conclusion, and it does not create a second measured result.',
             ],
             default => [
                 'headline' => $code,
@@ -1228,7 +1191,7 @@ final class RiasecPublicProjectionService
         $groupLabels = array_map(fn (array $group): string => $isZh ? implode('/', $group) : $this->englishJoin($group), $groups);
 
         return $isZh
-            ? $code.'（并列：'.implode('；', $groupLabels).'）'
+            ? strtr((string) $this->privateResultSource->get('tie_display.exact_tie_headline'), ['{code}' => $code, '{groups}' => implode('；', $groupLabels)])
             : $code.' (tied groups: '.implode('; ', $groupLabels).')';
     }
 }

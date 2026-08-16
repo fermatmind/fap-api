@@ -1,0 +1,139 @@
+{
+  "schema_version": "riasec.runtime_surface_copy.v1",
+  "asset_id": "runtime_surface_copy_v1.zh-CN",
+  "locale": "zh-CN",
+  "frontend_fallback_allowed": false,
+  "dimension_labels": {"R": "现实型", "I": "研究型", "A": "艺术型", "S": "社会型", "E": "企业型", "C": "常规型"},
+  "dimension_reading_lines": {
+    "R": {"label": "实作型", "short": "实作", "focus": "真实对象、工具、现场、材料和可见成果", "action": "接触真实对象、工具或现场条件"},
+    "I": {"label": "研究型", "short": "研究", "focus": "问题、证据、机制、变量和解释路径", "action": "分析问题、证据、变量或解释路径"},
+    "A": {"label": "艺术型", "short": "表达", "focus": "表达、风格、叙事、形式和体验", "action": "尝试表达、风格、叙事或形式处理"},
+    "S": {"label": "社会型", "short": "支持", "focus": "真实的人、理解、支持、沟通和协作", "action": "观察真实人的理解、支持、沟通或协作需求"},
+    "E": {"label": "企业型", "short": "推进", "focus": "目标、资源、机会、影响和推进", "action": "观察目标、资源、机会、影响或推进动作"},
+    "C": {"label": "常规型", "short": "流程", "focus": "规则、数据、流程、秩序和可复查记录", "action": "整理规则、数据、流程、秩序或可复查记录"}
+  },
+  "boundaries": {
+    "dimension": "这是职业兴趣线索，不测能力，也不输出具体职业结论。",
+    "pair": "这是兴趣组合解释，不是人格标签、能力结论或职业结论。",
+    "top3": "这是前三兴趣活动线索组合解释，不是人格类型、职业结论或成功预测。",
+    "layer_140q": "140Q 是任务、环境和角色责任线索；它只让工作日常观察更具体，不改写 60Q，不比较原始分，也不输出岗位结论。",
+    "quality": "质量状态只限制本次结果的阅读强度，不评价用户，也不改变分数或 Holland Code。",
+    "structural": "跨表单摘要只说明兴趣线索强调不同；不比较分数，不改写结果，也不形成职业结论。",
+    "aspirations": "愿望只校准探索问题，不覆盖本次测得的霍兰德代码，不改变 RIASEC 分数，也不形成职业结论。",
+    "disagree": "不认同结果只影响探索路径，不修改本次测得的霍兰德代码、RIASEC 分数、报告快照、分享或 PDF。"
+  },
+  "top3_ordered_templates": {
+    "strategy_label": "{shorts}三线索观察",
+    "activity_chain": "按顺序观察：先{first_action}；再{second_action}；最后{third_action}。",
+    "core_reading": "这组前三个兴趣维度说明 {labels} 三类兴趣活动在本次作答中相对靠前。{code} 只给出阅读顺序：{first_label} 是优先观察入口，{second_label} 和 {third_label} 是补充观察入口；它不能推断人格身份、能力水平或职业结论。",
+    "positive_value": "这组内容的价值，是把 {first_label}关注{first_focus}；{second_label}关注{second_focus}；{third_label}关注{third_focus} 拆成可观察的小任务。先看哪一位，只表示先从哪类活动收集证据；它们提供探索问题，不提供岗位答案。",
+    "first_experiment": "用 30 分钟做一次低风险观察：先加入{first_short}动作，再加入{second_short}动作，最后加入{third_short}动作；只记录哪个部分更想继续。",
+    "ordered_code_handling": "{code} 是本次测量的有序三字码：第一位 {first_label} 作为优先观察入口，第二位 {second_label} 和第三位 {third_label} 作为补充观察入口；排序改变先问什么、后验证什么，不等于固定身份、能力或职业答案。",
+    "low_risk_validation": "低风险观察：选择一个能容纳{first_short}、{second_short}、{third_short}线索的小任务，把三个动作分开记录，只看活动偏好和想继续的证据。",
+    "primary_activity_chain": "先看第一位 {first_label}：把它当作优先观察入口，寻找与“{first_focus}”相关的小任务证据。",
+    "secondary_support_line": "再看第二位 {second_label}：把它当作补充观察入口，记录“{second_focus}”是否让任务更吸引你。",
+    "tertiary_stabilizer": "第三位 {third_label} 只作补充线索：观察“{third_focus}”是否帮助你区分更具体的任务条件。",
+    "activity_sequence": ["优先观察入口：{first_action}", "第二观察入口：{second_action}", "第三观察入口：{third_action}"],
+    "free_page_teaser": "{labels} 三类兴趣线索可以按 {code} 的顺序观察，但不急着得出职业答案。"
+  },
+  "aspiration_state_tokens": {
+    "tension": ["想排除", "曾经受挫"],
+    "needs_reality_check": ["已有机会", "正在考虑"]
+  },
+  "result_summary": {
+    "headline": "你的兴趣结果摘要",
+    "next_step": "选择前三个兴趣维度中的一个，安排一次 15–30 分钟的低风险活动，记录你是否愿意继续。",
+    "boundary": "结果只描述本次职业兴趣线索，不代表能力、人格身份、职业匹配或未来结果。",
+    "dimension_bands": {
+      "R": {"high": "动手操作和处理具体对象是本次较突出的兴趣线索，可优先安排一次实作任务验证。", "medium": "你对实作活动有一定兴趣，是否投入往往取决于工具、目标和现场条件。", "low": "实作活动本次排序较后；这不代表做不到，可在确有需要时用短任务核对体验。"},
+      "I": {"high": "追问原因和分析证据是本次较突出的兴趣线索，可用一个真实问题检验持续投入感。", "medium": "你对研究分析有一定兴趣，问题难度和探索空间可能影响投入程度。", "low": "研究分析本次排序较后；先观察你在具体问题上是否仍愿意查证和推理。"},
+      "A": {"high": "表达想法和创造形式是本次较突出的兴趣线索，可用一次小型创作检验。", "medium": "你对创意表达有一定兴趣，自主空间和表达媒介可能影响体验。", "low": "创意表达本次排序较后；不妨用一个轻量作品核对真实感受。"},
+      "S": {"high": "理解、支持或帮助他人是本次较突出的兴趣线索，可从一次真实协作中验证。", "medium": "你对助人互动有一定兴趣，关系距离和互动方式可能影响投入程度。", "low": "助人互动本次排序较后；可区分不喜欢持续互动，还是更偏好特定对象和方式。"},
+      "E": {"high": "推动目标和组织行动是本次较突出的兴趣线索，可用一次小型发起或协调任务验证。", "medium": "你对推动事情有一定兴趣，目标意义和自主权可能影响投入程度。", "low": "推动与影响活动本次排序较后；可观察你是否更愿意贡献方案而非主导过程。"},
+      "C": {"high": "整理信息和维护流程是本次较突出的兴趣线索，可用一次结构化任务验证。", "medium": "你对秩序和流程有一定兴趣，规则是否清晰、是否有改进空间可能影响体验。", "low": "规则化任务本次排序较后；可区分对重复流程的排斥与对清晰结构的实际需要。"}
+    }
+  },
+  "quality_display": {
+    "headlines": {
+      "A": "作答状态稳定，可正常阅读",
+      "B": "存在轻度作答质量提示，建议结合实际经历谨慎阅读",
+      "C": "作答质量提示较明显，本次仅作初步线索，建议状态稳定时重测"
+    },
+    "reasons": {
+      "attention_133_failed": "有一道注意力检查题未通过，部分回答可能没有充分反映你的真实偏好。",
+      "attention_137_failed": "有一道注意力检查题未通过，部分回答可能没有充分反映你的真实偏好。",
+      "low_consistency": "部分相近题目的回答差异较大，结果的稳定性可能受到影响。",
+      "idealization": "部分回答可能偏向理想状态，而不是你通常会做出的选择。",
+      "strong_idealization": "多组回答可能偏向理想状态，而不是你通常会做出的选择。",
+      "broad_agreement": "较多题目选择了同意或喜欢，各兴趣维度之间的区分度可能不足。",
+      "too_fast": "作答速度明显偏快，可能没有留出足够时间理解题意。",
+      "neutral_overuse": "中立选项使用较多，本次结果能够区分出的兴趣差异有限。",
+      "missing_items": "存在未完成题目，本次结果无法支持完整解读。",
+      "both_attention_failed": "两道注意力检查题均未通过，部分回答可能没有充分反映你的真实偏好。",
+      "generic": "本次作答出现了质量提示，因此结果的区分度或稳定性可能有限。"
+    },
+    "improvements": {
+      "attention_133_failed": "重测时请逐题阅读，并在不受打扰的环境中作答。",
+      "attention_137_failed": "重测时请逐题阅读，并在不受打扰的环境中作答。",
+      "low_consistency": "重测时以平时真实、反复出现的行为为准，不必追求前后看起来一致。",
+      "idealization": "重测时请选择最接近日常状态的答案，而不是你认为更理想或更受期待的答案。",
+      "strong_idealization": "重测时请选择最接近日常状态的答案，而不是你认为更理想或更受期待的答案。",
+      "broad_agreement": "遇到都感兴趣的选项时，可比较自己是否愿意长期、重复地投入这些活动。",
+      "too_fast": "在时间充足、状态稳定时重新作答，每题先联系一个具体经历再选择。",
+      "neutral_overuse": "重测时可结合具体经历，尽量区分更接近喜欢还是不喜欢。",
+      "missing_items": "请完成全部题目后重新生成结果。",
+      "generic": "建议在状态稳定、不受打扰时，结合日常真实经历重新作答。"
+    },
+    "boundary": "质量提示只说明本次作答的可读性，不评价你的能力、人格或个人价值。"
+  },
+  "tie_display": {
+    "score_code_mismatch": {"headline": "本次结果暂不可解释", "note": "分数顺序与结果代码不一致，已隐藏解释内容；六维分数仍可供核对。", "boundary": "请重新检查结果；不要根据本页推断兴趣排序、能力或职业结论。"},
+    "exact_tie_note": "这些维度本次得分相同，字母顺序不代表高低。",
+    "exact_tie_boundary": "并列只描述本次兴趣分数，不代表能力、人格身份或职业结论。",
+    "exact_tie_headline": "{code}（并列：{groups}）",
+    "near_tie_headline": "{code}（{dimensions}接近）",
+    "near_tie_note": "这些维度分数接近，不宜据此强调先后顺序。",
+    "near_tie_boundary": "这是解释用的暂定阅读阈值，不是统计显著性或测量误差结论，也不产生第二个测量结果。"
+  },
+  "generic_slots": {
+    "structural_public_boundary": "60Q 与 140Q 只能读作线索强调不同，不比较原始分数，不输出优劣或覆盖判断。",
+    "layer_140q": {
+      "task_activity_card": {"title": "任务活动卡", "question": "你真正喜欢做的，是哪类工作活动？", "summary": "这张卡把兴趣拆成更具体的任务活动，帮助区分你喜欢的是问题本身，还是某个职业名带来的想象。", "what_user_sees": ["更容易吸引你的任务活动", "可能降低兴趣的任务活动", "值得先观察的一个小任务"], "layer_state": "140q_completed_state"},
+      "environment_card": {"title": "工作环境卡", "question": "这些活动出现在哪种环境里，你仍然有兴趣？", "summary": "同一个任务在不同环境里感受会不同。环境卡帮助把任务兴趣和工作日常拆开。", "what_user_sees": ["安静深研 vs 真实反馈", "合作支持 vs 结果导向", "开放表达 vs 流程约束"], "layer_state": "140q_completed_state"},
+      "role_responsibility_card": {"title": "角色责任卡", "question": "你愿意在工作里承担哪种责任？", "summary": "喜欢一个任务，不等于喜欢它所在岗位的责任。角色卡帮助看见你想定义问题、表达答案、支持理解、推动落地，还是守住流程。", "what_user_sees": ["定义问题", "表达答案", "支持理解", "推动落地", "守住流程"], "layer_state": "140q_completed_state"},
+      "layer_agreement": {"title": "任务、环境和角色线索大体一致", "summary": "你的任务活动、工作环境和角色责任线索大体一致。下一步可以选择一个低风险任务进行观察，而不是急着锁定职业名称。", "layer_state": "agreement"},
+      "layer_tension": {"title": "任务兴趣和工作日常线索有张力", "summary": "你的任务兴趣和工作日常线索强调了不同层面。更稳妥的读法是：喜欢的任务、可持续的环境、愿意承担的角色责任，需要分开观察。", "layer_state": "tension"},
+      "layer_unavailable": {"title": "工作日常三张卡暂不可用", "summary": "当前 60Q 结果已经可以阅读基础兴趣结构。任务、环境和角色责任三张卡需要完成 140Q 后才会显示；它们只补充工作日常观察角度，不修正或覆盖 60Q。", "applicable_form_codes": ["riasec_60"], "contextual_detail_only": true, "overrides_60q_result": false, "layer_state": "not_applicable_60q_only"},
+      "140q_cta": {"title": "你喜欢的是任务本身，还是这份工作的真实日常？", "summary": "60Q 已经给出本次兴趣结构。140Q 只是把观察拆到任务、环境和角色责任三层，让你多看工作日常线索；它不是用来修正本次结果的版本，也不会修复、推翻或覆盖 60Q。", "button_label": "查看 140Q 情境线索", "applicable_form_codes": ["riasec_60"], "contextual_detail_only": true, "accuracy_upgrade_claim_allowed": false, "overrides_60q_result": false, "layer_state": "unavailable"},
+      "140q_not_recommended": {"title": "暂不建议继续深入版", "summary": "由于本次作答需要谨慎阅读，暂不展示 140Q 三张卡。建议稍后重测，而不是继续做强解释。", "layer_state": "insufficient_quality"}
+    },
+    "structural_difference": {
+      "summary": {"title": "两次结果强调的兴趣线索不同", "summary": "60Q 看基础兴趣结构；140Q 看任务、环境和角色责任。两次结果强调不同线索时，更适合把差异读成需要观察的线索，而不是最终结论。", "structural_difference_state": "different_emphasis"},
+      "task_layer_explanation": {"title": "任务活动层", "summary": "任务活动层关注你更容易被哪些具体活动吸引，例如分析、表达、支持、推动或整理。它不说明能力高低，也不替代基础兴趣结构。", "structural_difference_state": "same_structure"},
+      "environment_layer_explanation": {"title": "工作环境层", "summary": "同一类任务出现在不同环境里，感受可能不同。环境层帮助你看见哪些情境更容易支持长期投入。", "structural_difference_state": "different_emphasis"},
+      "role_layer_explanation": {"title": "角色责任层", "summary": "角色责任层关注你更愿意承担定义问题、表达答案、支持理解、推动落地或守住流程中的哪类责任。", "structural_difference_state": "layer_tension"},
+      "correct_reading": {"title": "正确读法", "summary": "先看两次结果中仍然重叠的活动线索，再看任务、环境和角色责任各自需要观察的部分。排序接近时，也要把近似并列当作阅读边界。", "structural_difference_state": "near_tie_shift"},
+      "forbidden_reading": {"title": "不要这样读", "summary": "不要把跨表单差异读成某一次结果失效、长表单覆盖短表单、兴趣身份发生转换，或任何分数涨跌结论。", "structural_difference_state": "cross_form_not_comparable"},
+      "next_validation_step": {"title": "下一步观察", "summary": "选择一个低风险任务、一个真实环境和一个角色责任进行小实验。记录它们分别更吸引你还是需要调整，再决定是否需要重测。", "structural_difference_state": "insufficient_basis"}
+    },
+    "aspirations": {
+      "intro": {"title": "把你原本想探索的方向放到旁边看", "summary": "你可以记录职业、专业、课程、项目或工作场景。它们只用于生成探索问题，不进入测评分数。", "aspirations_state": "not_provided"},
+      "input_boundary": {"title": "输入边界", "summary": "愿望是探索材料，不是测评答案。系统只会帮助你看这些方向里有哪些活动与当前兴趣线索重叠，哪些现实部分需要观察。", "aspirations_state": "not_provided"},
+      "overlap_reading": {"title": "有活动重叠", "summary": "这个方向与你当前兴趣结构有活动重叠。下一步是观察这些活动进入真实任务、环境和角色责任后是否仍然吸引你。", "aspirations_state": "overlap"},
+      "tension_reading": {"title": "有张力，需要拆开看", "summary": "这个方向与你当前兴趣结构存在张力。张力不是排除结论，只说明其中的日常任务、环境或角色责任需要先观察。", "aspirations_state": "tension"},
+      "reality_questions": {"title": "现实观察问题", "summary": "先问三个问题：你喜欢的是任务本身还是职业想象；你能接受这个方向的环境约束吗；你愿意承担它的角色责任吗。", "aspirations_state": "needs_reality_check"},
+      "education_skill_qualification_boundary": {"title": "教育、技能、资格和伦理边界", "summary": "涉及教育要求、专业技能、资格证书、行业法规或伦理责任的方向，必须另行确认训练、作品、证书、监督和现实机会。", "aspirations_state": "high_risk_boundary"},
+      "next_experiment_prompt": {"title": "下一步小实验", "summary": "选择一个低风险任务，用 15 到 30 分钟观察它是否仍然吸引你。先观察活动，不急着形成职业结论。", "aspirations_state": "needs_reality_check"},
+      "no_score_mutation_boundary": {"title": "不改写测评结果", "summary": "愿望不会覆盖本次测得的霍兰德代码，也不会改变 RIASEC 分数、报告快照、分享内容或 PDF 内容。", "aspirations_state": "not_provided"}
+    },
+    "disagree": {
+      "user_not_wrong_message": {"title": "你可以不认同这个结果", "summary": "不认同结果本身是有效反馈。它会进入探索路径，帮助你检查作答状态、近似并列和活动探索方向。", "disagree_state": "disagrees_quality_normal"},
+      "possible_reasons": {"title": "可能原因", "summary": "结果不像你，可能来自按能力作答、职业名想象、前几个维度接近、profile 较宽，或当时状态不稳定。", "disagree_state": "disagrees_quality_normal"},
+      "retake_when": {"title": "什么时候适合重测", "summary": "如果作答时注意力不稳定、题目想象不清楚，或结果质量需要谨慎阅读，稍后重测比手动修正结果更可靠。", "disagree_state": "retake_recommended"},
+      "experiment_when": {"title": "什么时候适合做实验", "summary": "如果你只是更认同另一个方向，可以选择一个活动做低风险实验。实验记录只帮助探索下一步，不形成职业结论。", "disagree_state": "save_feedback_only"},
+      "record_preferred_direction_boundary": {"title": "记录偏好方向的边界", "summary": "你可以记录更想探索的方向；它只作为偏好线索保存，不覆盖本次测得的霍兰德代码，不重算六维分数。", "disagree_state": "save_feedback_only"},
+      "feedback_no_mutation_boundary": {"title": "反馈不改分", "summary": "不认同、收藏、排除和实验反馈都不会修改测评结果、报告快照、默认分享内容或 PDF 内容。", "disagree_state": "disagrees_quality_caution"},
+      "next_step": {"title": "下一步", "summary": "先检查作答质量和近似并列，再选择重测、保存偏好方向，或做一个小实验观察具体活动。", "disagree_state": "save_feedback_only"}
+    }
+  }
+}

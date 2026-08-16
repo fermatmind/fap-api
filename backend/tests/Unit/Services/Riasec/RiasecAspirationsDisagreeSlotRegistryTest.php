@@ -202,7 +202,7 @@ final class RiasecAspirationsDisagreeSlotRegistryTest extends TestCase
             $this->assertSame('validation_questions_and_low_risk_experiment', $row['recommended_output']);
             $this->assertSame('overlay_only_does_not_mutate_measured_result', $row['result_binding']);
             $this->assertStringContainsString('探索假设', $row['overlap_reading']);
-            $this->assertStringContainsString('不覆盖当前 measured Holland Code 或分数', $row['overlap_reading']);
+            $this->assertStringContainsString('不覆盖本次测得的霍兰德代码或分数', $row['overlap_reading']);
             $this->assertStringContainsString('不把它当成职业推荐或测评修正', $row['next_low_risk_experiment']);
         }
     }

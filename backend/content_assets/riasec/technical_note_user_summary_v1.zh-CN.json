@@ -7,28 +7,70 @@
   "summary_sections": [
     {
       "title": "这个测试测什么",
-      "copy": "RIASEC 测的是你对不同职业活动的兴趣强度，例如操作、分析、表达、支持、推动、整理。"
+      "copy": "RIASEC 测的是你对不同职业活动的兴趣强度，例如操作、分析、表达、支持、推动、整理。",
+      "section_key": "test_goal",
+      "data_status": "currently_operational"
     },
     {
       "title": "这个测试不测什么",
-      "copy": "它不测能力、人格身份、职业成功、收入、岗位表现或招聘风险。"
+      "copy": "它不测能力、人格身份、职业成功、收入、岗位表现或招聘风险。",
+      "section_key": "measurement_boundary",
+      "data_status": "currently_operational"
     },
     {
       "title": "60Q 和 140Q 的关系",
-      "copy": "60Q 看基础兴趣结构；140Q 拆开任务、环境和角色责任。140Q 更具体，不是更准确，也不推翻 60Q。"
+      "copy": "60Q 看基础兴趣结构；140Q 拆开任务、环境和角色责任。140Q 更具体，不是更准确，也不推翻 60Q。",
+      "section_key": "riasec_140_context",
+      "data_status": "currently_operational"
     },
     {
       "title": "如何读分数",
-      "copy": "0–100 是本表单内兴趣强度换算，不是人群百分位，也不是能力分。"
+      "copy": "0–100 是本表单内兴趣强度换算，不是人群百分位，也不是能力分。",
+      "section_key": "score_space_boundary",
+      "data_status": "currently_operational"
     },
     {
       "title": "如何读职业例子",
-      "copy": "职业例子只说明某些活动可能出现在哪些场景中；没有来源行时必须标注内容示例。"
+      "copy": "职业例子只说明某些活动可能出现在哪些场景中；没有来源行时必须标注内容示例。",
+      "section_key": "career_examples_boundary",
+      "data_status": "partial"
     },
     {
       "title": "反馈如何使用",
-      "copy": "收藏、排除、不认同和实验反馈只影响探索路径，不改测评分数、报告快照或分享内容。"
+      "copy": "收藏、排除、不认同和实验反馈只影响探索路径，不改测评分数、报告快照或分享内容。",
+      "section_key": "feedback_boundary",
+      "data_status": "planned"
+    },
+    {
+      "title": "质量边界",
+      "copy": "60Q 当前只声明最小答题完成规则，不输出强 low_quality 判断。",
+      "section_key": "quality_boundary",
+      "data_status": "currently_operational"
+    },
+    {
+      "title": "报告快照",
+      "copy": "正式报告必须绑定生成时的 snapshot，后续 share、PDF、history 应读取同一份可审计结果。",
+      "section_key": "snapshot_boundary",
+      "data_status": "currently_operational"
     }
+  ],
+  "runtime_method_boundaries": {
+    "career_interest_only": {"label": "测量对象", "copy": "RIASEC 解释职业兴趣活动倾向，不测能力、人格身份、职业价值观、心理状态、收入潜力或职业成功概率。", "evidence_level": "runtime_contract", "content_maturity": "v0.1"},
+    "not_career_recommendation": {"label": "职业例子边界", "copy": "职业例子必须经过活动和任务解释，只能叫内容示例，不得叫 Matches、推荐、排名、岗位适配。", "evidence_level": "method_boundary", "content_maturity": "v0.1"},
+    "same_scale_not_same_score_space": {"label": "分数空间", "copy": "riasec_60 与 riasec_140 同属 RIASEC，但 raw score space 不同，不默认比较 raw score delta。", "evidence_level": "measurement_contract", "content_maturity": "v0.1"},
+    "riasec_140_contextual_not_more_accurate": {"label": "60Q 与 140Q", "copy": "140Q 只能称为工作日常情境化兴趣线索，不能称为更准确答案。", "evidence_level": "method_boundary", "content_maturity": "v0.1"},
+    "content_examples_not_registry_match": {"label": "职业例子边界", "copy": "没有 reviewed registry source 时，occupation examples 必须标注 content_example_not_registry_match。", "evidence_level": "content_boundary", "content_maturity": "v0.1"},
+    "feedback_no_score_mutation": {"label": "反馈边界", "copy": "用户反馈只进入探索层，不会覆盖 measured_holland_code、维度分数或正式报告快照。", "evidence_level": "method_boundary", "content_maturity": "v0.1"},
+    "snapshot_bound_report": {"label": "正式报告快照绑定", "copy": "正式报告、share、PDF、history 必须以 snapshot-bound report 为展示依据。", "evidence_level": "runtime_contract", "content_maturity": "v0.1"},
+    "quality_boundary_60q_minimal": {"label": "60Q 质量边界", "copy": "60Q 当前没有强 low_quality rule，只能声明 minimal_answer_completion_only。", "evidence_level": "measurement_contract", "content_maturity": "v0.1"}
+  },
+  "runtime_disclaimers": [
+    {"key": "not_ability_or_personality", "label": "非能力/人格测量", "copy": "RIASEC 不测能力、人格、价值观或长期职业结果。"},
+    {"key": "not_hiring_screening", "label": "非招聘筛选用途", "copy": "RIASEC 不用于招聘、晋升、淘汰或雇佣筛选。"},
+    {"key": "no_cross_form_raw_delta", "label": "不比较跨 form raw delta", "copy": "60Q 与 140Q 不默认比较 raw score delta。"},
+    {"key": "riasec_140_not_more_accurate", "label": "140Q 非更准确声明", "copy": "140Q 只能作为更具体的情境化兴趣线索。"},
+    {"key": "examples_not_matches", "label": "职业例子不是匹配", "copy": "职业例子是内容示例，不是职业数据库匹配或岗位推荐。"},
+    {"key": "feedback_overlay_boundary", "label": "反馈层边界", "copy": "反馈不会修改 measured_holland_code、分数或正式报告快照。"}
   ],
   "required_boundaries": [
     "interest_evidence_only",
