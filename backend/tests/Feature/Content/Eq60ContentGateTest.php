@@ -291,25 +291,12 @@ final class Eq60ContentGateTest extends TestCase
         $this->assertStringContainsString('not for clinical diagnosis', (string) data_get($seoGeoAsset, 'en.claim_boundary'));
         $this->assertStringNotContainsString('predicts job performance', json_encode($seoGeoAsset, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: '');
 
-        foreach (glob(base_path('content_packs/EQ_60/v1/raw/report_assets/*.json')) ?: [] as $eq60AssetPath) {
-            $mirrorPath = str_replace('/EQ_60/', '/EQ_EMOTIONAL_INTELLIGENCE/', $eq60AssetPath);
-            $this->assertFileExists($mirrorPath);
-            $this->assertSame(
-                hash_file('sha256', $eq60AssetPath),
-                hash_file('sha256', $mirrorPath),
-                'EQ_EMOTIONAL_INTELLIGENCE mirror drift: '.basename($eq60AssetPath)
-            );
-        }
-        foreach (glob(base_path('content_packs/EQ_60/v1/raw/personalization_routes/*.json')) ?: [] as $eq60RoutePath) {
-            $mirrorPath = str_replace('/EQ_60/', '/EQ_EMOTIONAL_INTELLIGENCE/', $eq60RoutePath);
-            $this->assertFileExists($mirrorPath);
-            $this->assertSame(
-                hash_file('sha256', $eq60RoutePath),
-                hash_file('sha256', $mirrorPath),
-                'EQ_EMOTIONAL_INTELLIGENCE route mirror drift: '.basename($eq60RoutePath)
-            );
-        }
-        $this->assertFileExists(base_path('content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json'));
+        $this->assertSame(base_path('content_packs/EQ_60/v1/raw'), $loader->rawDir('v1'));
+        $this->assertFileExists($loader->rawPath('authority.manifest.json', 'v1'));
+        $this->assertStringNotContainsString(
+            'EQ_EMOTIONAL_INTELLIGENCE',
+            (string) file_get_contents($loader->rawPath('authority.manifest.json', 'v1')),
+        );
 
         (new ScaleRegistrySeeder)->run();
 

@@ -1,27 +1,104 @@
 {
-    "schema": "eq_60.compiled.manifest.v1",
+    "schema": "eq_60.compiled.manifest.v2",
+    "authority_id": "FERMATMIND_EQ_60_BILINGUAL_CANONICAL",
     "pack_id": "EQ_60",
     "pack_version": "v1",
-    "compiled_at": "2026-08-13T05:09:19.336574Z",
-    "generated_at": "2026-08-13T05:09:19.336618Z",
-    "content_hash": "9d468b97742830d31c9050930324ac439e5a4c199cda9238804b0164bb9b0075",
-    "compiled_hash": "d11f57958e94578edff9268ab0b01c13ed69334039dbe162f9db549be7729574",
+    "locales": [
+        "zh-CN",
+        "en"
+    ],
+    "source_hash": "f1645cbd8b9c5b5686d2611a22e12a90609a2d64647eb5a5d348d12c2d056de7",
+    "content_hash": "f1645cbd8b9c5b5686d2611a22e12a90609a2d64647eb5a5d348d12c2d056de7",
+    "compiled_hash": "eb848b80018bbfa302273efb1015f3164eca5caf3fc36e23e6077afcead4941b",
+    "source_hash_rule": "sha256(concat(POSIX-byte-sorted relative_path + NUL + sha256(exact UTF-8 LF file bytes) + LF)); this manifest is excluded",
+    "compiled_hash_rule": "sha256(concat(filename-sorted payload_name + NUL + sha256(exact canonical payload bytes including trailing LF) + LF)); compiled manifest is excluded",
     "hashes": {
-        "questions.compiled.json": "3c385b5d26fa80eefa52e54dc260abd93d7af995165fac26e7de792022675f60",
-        "options.compiled.json": "96abc28fec688143fe16b420aedd3516afbf8d3db9824c8c309693646ed568c9",
-        "policy.compiled.json": "190c412d0ec12a0e9b99ddc81e2b8d0a257f0206756a42c3932b5fa7a5dbb76a",
-        "landing.compiled.json": "b6c8bc21499a1d5fd2261b254307587c688a1b5597592df38a59a80b863e51ea",
-        "report.compiled.json": "cc0c4a3c047549b23ca3fc658e8960d4667d27ee9715c6d7ae87ed8dab6cc63d",
-        "report_assets.compiled.json": "d7a7910152406b439a3d77a8ea636892996fdac071d463cdb77d11230247d8a3",
-        "golden_cases.compiled.json": "55c362965da579f94c3fb08355b50586d9dc8d72145ae8bc5db8f601c3a9fc7f"
+        "golden_cases.compiled.json": "1621f9597219cff1e7048b99b7983cc43bee29727a1c22206b57292a8a65d51f",
+        "landing.compiled.json": "717295384db4e0c2b69caa97ea4b4589242fdd4d27d43d5b7c01a38a8d0bfcf9",
+        "options.compiled.json": "f13586fe9650c8f2e7633e2abe8c4fd0a3ee24fffd88a66f799034f7f2400851",
+        "policy.compiled.json": "82e36c97f6cd95575f0d66ac2869205f875dcfdd110b131cbc5fdca487142181",
+        "questions.compiled.json": "a5285bac1292d7cd8b13ea2786dc7c22fa25e490cf9ff837d615191b2430dcee",
+        "report.compiled.json": "8c73d50792a32d56059db45d336088f8a6718aad60c18bcec35215f8080b28ac",
+        "report_assets.compiled.json": "17d88e032838a398a1d5a27390baafc50397eb7760194e5ce9fe652b8bbd7770"
     },
     "compiled_files": [
-        "questions.compiled.json",
+        "golden_cases.compiled.json",
+        "landing.compiled.json",
         "options.compiled.json",
         "policy.compiled.json",
-        "landing.compiled.json",
+        "questions.compiled.json",
         "report.compiled.json",
         "report_assets.compiled.json",
-        "golden_cases.compiled.json"
-    ]
+        "manifest.json"
+    ],
+    "compiled_inventory": [
+        {
+            "path": "golden_cases.compiled.json",
+            "kind": "payload",
+            "included_in_compiled_hash": true,
+            "sha256": "1621f9597219cff1e7048b99b7983cc43bee29727a1c22206b57292a8a65d51f"
+        },
+        {
+            "path": "landing.compiled.json",
+            "kind": "payload",
+            "included_in_compiled_hash": true,
+            "sha256": "717295384db4e0c2b69caa97ea4b4589242fdd4d27d43d5b7c01a38a8d0bfcf9"
+        },
+        {
+            "path": "options.compiled.json",
+            "kind": "payload",
+            "included_in_compiled_hash": true,
+            "sha256": "f13586fe9650c8f2e7633e2abe8c4fd0a3ee24fffd88a66f799034f7f2400851"
+        },
+        {
+            "path": "policy.compiled.json",
+            "kind": "payload",
+            "included_in_compiled_hash": true,
+            "sha256": "82e36c97f6cd95575f0d66ac2869205f875dcfdd110b131cbc5fdca487142181"
+        },
+        {
+            "path": "questions.compiled.json",
+            "kind": "payload",
+            "included_in_compiled_hash": true,
+            "sha256": "a5285bac1292d7cd8b13ea2786dc7c22fa25e490cf9ff837d615191b2430dcee"
+        },
+        {
+            "path": "report.compiled.json",
+            "kind": "payload",
+            "included_in_compiled_hash": true,
+            "sha256": "8c73d50792a32d56059db45d336088f8a6718aad60c18bcec35215f8080b28ac"
+        },
+        {
+            "path": "report_assets.compiled.json",
+            "kind": "payload",
+            "included_in_compiled_hash": true,
+            "sha256": "17d88e032838a398a1d5a27390baafc50397eb7760194e5ce9fe652b8bbd7770"
+        },
+        {
+            "path": "manifest.json",
+            "kind": "manifest",
+            "included_in_compiled_hash": false,
+            "sha256": null
+        }
+    ],
+    "compiler_contract": {
+        "schema": "eq_60.deterministic_compiler.v1",
+        "input": "the exact 29-file source_files allowlist below",
+        "output": "seven canonical payload files plus compiled/manifest.json",
+        "requirements": [
+            "no clock",
+            "no database",
+            "no network",
+            "no random payload data",
+            "no absolute path",
+            "stable source-declared JSON object-key ordering",
+            "stable array ordering",
+            "UTF-8",
+            "LF",
+            "one trailing LF",
+            "candidate validation before atomic directory replacement"
+        ],
+        "compiled_hash_rule": "sha256(concat(filename-sorted payload_name + NUL + sha256(exact canonical payload bytes including trailing LF) + LF)); compiled manifest is excluded",
+        "manual_compiled_edits_allowed": false
+    }
 }

@@ -22,6 +22,10 @@ final class ContentPathAliasResolver
             return base_path('content_packs');
         }
 
+        if ($packId === 'EQ_60' || $packId === 'EQ_EMOTIONAL_INTELLIGENCE' || $packId === 'EQ_GOLEMAN_60') {
+            return base_path('content_packs/EQ_60');
+        }
+
         $legacyRelativePath = 'content_packs/'.$packId;
         $alias = $this->findActiveAlias('backend_content_packs', $legacyRelativePath);
         if (! is_array($alias) || $this->isRetiredBigFiveMirrorAlias($packId, $alias)) {
@@ -75,6 +79,20 @@ final class ContentPathAliasResolver
                 'selected_path' => $defaultPath,
                 'selected_source' => 'legacy',
                 'legacy_path' => $defaultPath,
+                'mapped_path' => null,
+                'alias_matched' => false,
+                'fallback_used' => false,
+            ];
+        }
+
+        if ($packId === 'EQ_60' || $packId === 'EQ_EMOTIONAL_INTELLIGENCE' || $packId === 'EQ_GOLEMAN_60') {
+            $canonicalPath = base_path('content_packs/EQ_60').DIRECTORY_SEPARATOR.$packVersion;
+
+            return [
+                'mode' => 'canonical',
+                'selected_path' => $canonicalPath,
+                'selected_source' => 'canonical_eq_60',
+                'legacy_path' => $canonicalPath,
                 'mapped_path' => null,
                 'alias_matched' => false,
                 'fallback_used' => false,

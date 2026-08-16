@@ -112,6 +112,7 @@
 
 ## Content authority rules
 - CMS/backend is the source of truth for publishable content, operational metadata, mutable media references, public SEO fields, and publishing state.
+- EQ_60 private-result editorial authority is exclusively `backend/content_packs/EQ_60/v1/raw`; zh-CN and en are one bilingual authority and future edits stay in this v1 root. `compiled/` is deterministic generated output, never a hand-edited source. `EQ_EMOTIONAL_INTELLIGENCE` and `EQ_GOLEMAN_60` are identity aliases only and must never select another physical content root. Runtime release activation must preserve immutable inactive/LKG releases and old attempt snapshots.
 - The only editable private Big Five result-body authority is `content_packs/BIG5_OCEAN/v2/registry`, with English assets under its existing `en/` subtree; its `v2` path is stable, quality/tone, composite, facet, norm-evidence, and action copy must remain backend-structured, compiled packages and immutable database releases are derived artifacts, and public Personality/CMS content remains a separate authority.
 - Article content, article SEO, covers, categories/tags, related placement, and publication state must be managed through backend Article resources and APIs.
 - Controlled Codex-assisted new article publish is allowed only through the backend `articles:publish-controlled` command after exact user confirmation, passing preflight gates, required claim-warning acknowledgement, and audit logging.

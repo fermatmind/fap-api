@@ -16,7 +16,7 @@ final class Eq60ContentCompileService
     /**
      * @return array{ok:bool,pack_id:string,version:string,compiled_dir:string,errors:list<array{file:string,line:int,message:string}>,hashes:array<string,string>}
      */
-    public function compile(?string $version = null): array
+    public function compile(?string $version = null, ?string $outputDirectory = null): array
     {
         $version = $this->loader->normalizeVersion($version);
         $lint = $this->lint->lint($version);
@@ -31,26 +31,25 @@ final class Eq60ContentCompileService
             ];
         }
 
-        $compiledDir = $this->loader->compiledDir($version);
-        if (! is_dir($compiledDir)) {
-            File::makeDirectory($compiledDir, 0775, true, true);
+        try {
+            $authorityManifest = $this->loadAndValidateAuthorityManifest($version);
+        } catch (\RuntimeException $exception) {
+            return [
+                'ok' => false,
+                'pack_id' => Eq60PackLoader::PACK_ID,
+                'version' => $version,
+                'compiled_dir' => $outputDirectory ?? $this->loader->repoCompiledDir($version),
+                'errors' => [[
+                    'file' => $this->loader->rawPath('authority.manifest.json', $version),
+                    'line' => 1,
+                    'message' => $exception->getMessage(),
+                ]],
+                'hashes' => [],
+            ];
         }
 
-        foreach ([
-            'questions.compiled.json',
-            'options.compiled.json',
-            'policy.compiled.json',
-            'landing.compiled.json',
-            'report.compiled.json',
-            'report_assets.compiled.json',
-            'golden_cases.compiled.json',
-            'manifest.json',
-        ] as $compiledFile) {
-            $path = $this->loader->compiledPath($compiledFile, $version);
-            if (is_file($path)) {
-                @unlink($path);
-            }
-        }
+        $sourceHash = (string) $authorityManifest['source_hash'];
+        $compiledDir = rtrim($outputDirectory ?? $this->loader->repoCompiledDir($version), DIRECTORY_SEPARATOR);
 
         $questionRows = $this->loader->readCsvWithLines($this->loader->rawPath('questions_eq60_bilingual.csv', $version));
         $questionsZh = [];
@@ -95,7 +94,7 @@ final class Eq60ContentCompileService
         $optionsRaw = $this->loader->readJson($this->loader->rawPath('options_eq60_bilingual.json', $version)) ?? [];
         $codes = array_values(array_map(
             static fn ($code): string => strtoupper(trim((string) $code)),
-            (array) ($optionsRaw['codes'] ?? ['A', 'B', 'C', 'D', 'E'])
+            (array) ($optionsRaw['codes'] ?? [])
         ));
 
         $labelsByLocale = [
@@ -137,7 +136,8 @@ final class Eq60ContentCompileService
                 'schema' => 'eq_60.questions.compiled.v1',
                 'pack_id' => Eq60PackLoader::PACK_ID,
                 'pack_version' => $version,
-                'generated_at' => now()->toISOString(),
+                'authority_id' => (string) $authorityManifest['authority_id'],
+                'source_hash' => $sourceHash,
                 'dimension_codes' => ['SA', 'ER', 'EM', 'RM'],
                 'question_index' => $questionIndex,
                 'questions_doc_by_locale' => [
@@ -157,7 +157,8 @@ final class Eq60ContentCompileService
                 'schema' => 'eq_60.options.compiled.v1',
                 'pack_id' => Eq60PackLoader::PACK_ID,
                 'pack_version' => $version,
-                'generated_at' => now()->toISOString(),
+                'authority_id' => (string) $authorityManifest['authority_id'],
+                'source_hash' => $sourceHash,
                 'codes' => $codes,
                 'labels_by_locale' => $labelsByLocale,
                 'score_map' => $scoreMap,
@@ -167,21 +168,24 @@ final class Eq60ContentCompileService
                 'schema' => 'eq_60.policy.compiled.v2',
                 'pack_id' => Eq60PackLoader::PACK_ID,
                 'pack_version' => $version,
-                'generated_at' => now()->toISOString(),
+                'authority_id' => (string) $authorityManifest['authority_id'],
+                'source_hash' => $sourceHash,
                 'policy' => $normalizedPolicy,
             ],
             'landing.compiled.json' => [
                 'schema' => 'eq_60.landing.compiled.v1',
                 'pack_id' => Eq60PackLoader::PACK_ID,
                 'pack_version' => $version,
-                'generated_at' => now()->toISOString(),
+                'authority_id' => (string) $authorityManifest['authority_id'],
+                'source_hash' => $sourceHash,
                 'landing' => $landingRaw,
             ],
             'report.compiled.json' => [
                 'schema' => 'eq_60.report.compiled.v2',
                 'pack_id' => Eq60PackLoader::PACK_ID,
                 'pack_version' => $version,
-                'generated_at' => now()->toISOString(),
+                'authority_id' => (string) $authorityManifest['authority_id'],
+                'source_hash' => $sourceHash,
                 'layout' => $normalizedLayout,
                 'blocks' => $normalizedBlocks,
                 'variables_allowlist' => $normalizedVariables,
@@ -190,46 +194,61 @@ final class Eq60ContentCompileService
                 'schema' => 'eq_60.report_assets.compiled.v1',
                 'pack_id' => Eq60PackLoader::PACK_ID,
                 'pack_version' => $version,
-                'generated_at' => now()->toISOString(),
+                'authority_id' => (string) $authorityManifest['authority_id'],
+                'source_hash' => $sourceHash,
                 'assets' => $reportAssets,
             ],
             'golden_cases.compiled.json' => [
                 'schema' => 'eq_60.golden_cases.compiled.v2',
                 'pack_id' => Eq60PackLoader::PACK_ID,
                 'pack_version' => $version,
-                'generated_at' => now()->toISOString(),
+                'authority_id' => (string) $authorityManifest['authority_id'],
+                'source_hash' => $sourceHash,
                 'cases' => $goldenCases,
             ],
         ];
 
+        $payloadBytes = [];
         $hashes = [];
         foreach ($files as $name => $payload) {
-            $json = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
-            if (! is_string($json)) {
-                continue;
-            }
+            $bytes = $this->canonicalJson($payload)."\n";
+            $payloadBytes[$name] = $bytes;
+            $hashes[$name] = hash('sha256', $bytes);
+        }
 
-            File::put($this->loader->compiledPath($name, $version), $json."\n");
-            $hashes[$name] = hash('sha256', $json);
+        ksort($hashes, SORT_STRING);
+        $compiledHash = $this->hashMap($hashes);
+        $inventory = [];
+        foreach ((array) $authorityManifest['compiled_inventory'] as $name) {
+            $inventory[] = [
+                'path' => (string) $name,
+                'kind' => $name === 'manifest.json' ? 'manifest' : 'payload',
+                'included_in_compiled_hash' => $name !== 'manifest.json',
+                'sha256' => $name === 'manifest.json' ? null : ($hashes[(string) $name] ?? null),
+            ];
         }
 
         $manifest = [
-            'schema' => 'eq_60.compiled.manifest.v1',
+            'schema' => 'eq_60.compiled.manifest.v2',
+            'authority_id' => (string) $authorityManifest['authority_id'],
             'pack_id' => Eq60PackLoader::PACK_ID,
             'pack_version' => $version,
-            'compiled_at' => now()->toISOString(),
-            'generated_at' => now()->toISOString(),
-            'content_hash' => $this->hashDirectory($this->loader->rawDir($version)),
-            'compiled_hash' => $this->hashMap($hashes),
+            'locales' => ['zh-CN', 'en'],
+            'source_hash' => $sourceHash,
+            'content_hash' => $sourceHash,
+            'compiled_hash' => $compiledHash,
+            'source_hash_rule' => (string) $authorityManifest['source_hash_rule'],
+            'compiled_hash_rule' => (string) data_get($authorityManifest, 'compiler_contract.compiled_hash_rule'),
             'hashes' => $hashes,
-            'compiled_files' => array_keys($files),
+            'compiled_files' => array_values((array) $authorityManifest['compiled_inventory']),
+            'compiled_inventory' => $inventory,
+            'compiler_contract' => (array) $authorityManifest['compiler_contract'],
         ];
 
-        $manifestJson = json_encode($manifest, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
-        if (is_string($manifestJson)) {
-            File::put($this->loader->compiledPath('manifest.json', $version), $manifestJson."\n");
-            $hashes['manifest.json'] = hash('sha256', $manifestJson);
-        }
+        $manifestBytes = $this->canonicalJson($manifest)."\n";
+        $payloadBytes['manifest.json'] = $manifestBytes;
+        $this->materializeAtomically($compiledDir, $payloadBytes, $hashes);
+        $hashes['manifest.json'] = hash('sha256', $manifestBytes);
 
         return [
             'ok' => true,
@@ -238,6 +257,8 @@ final class Eq60ContentCompileService
             'compiled_dir' => $compiledDir,
             'errors' => [],
             'hashes' => $hashes,
+            'source_hash' => $sourceHash,
+            'compiled_hash' => $compiledHash,
         ];
     }
 
@@ -742,14 +763,16 @@ final class Eq60ContentCompileService
             'backend_integration_contract',
         ] as $key) {
             $doc = $this->loader->readJson($this->loader->rawPath('report_assets/'.$key.'.json', $version));
-            if (is_array($doc)) {
-                $assets[$key] = $doc;
+            if (! is_array($doc)) {
+                throw new \RuntimeException('EQ_60 required report asset is missing or invalid: '.$key);
             }
+            $assets[$key] = $doc;
         }
         $routeMatrix = $this->loader->readJson($this->loader->rawPath('personalization_routes/route_matrix.json', $version));
-        if (is_array($routeMatrix)) {
-            $assets['personalization_routes'] = $routeMatrix;
+        if (! is_array($routeMatrix)) {
+            throw new \RuntimeException('EQ_60 required personalization route matrix is missing or invalid.');
         }
+        $assets['personalization_routes'] = $routeMatrix;
 
         return $assets;
     }
@@ -770,18 +793,8 @@ final class Eq60ContentCompileService
             (array) ($raw['allowed'] ?? ($raw['variables'] ?? []))
         ))));
 
-        if ($allowed === []) {
-            $allowed = $required;
-        }
-
-        if ($required === []) {
-            $required = [
-                'scale_code',
-                'attempt_id',
-                'locale',
-                'variant',
-                'quality.level',
-            ];
+        if ($required === [] || $allowed === []) {
+            throw new \RuntimeException('EQ_60 variables allowlist requires non-empty required and allowed fields.');
         }
 
         return [
@@ -889,32 +902,219 @@ final class Eq60ContentCompileService
      */
     private function hashMap(array $hashes): string
     {
-        ksort($hashes);
-        $rows = [];
+        ksort($hashes, SORT_STRING);
+        $chain = '';
         foreach ($hashes as $name => $hash) {
-            $rows[] = $name.':'.$hash;
+            $chain .= $name."\0".$hash."\n";
         }
 
-        return hash('sha256', implode("\n", $rows));
+        return hash('sha256', $chain);
     }
 
-    private function hashDirectory(string $dir): string
+    /** @return array<string,mixed> */
+    private function loadAndValidateAuthorityManifest(string $version): array
     {
-        if (! is_dir($dir)) {
-            return '';
+        $manifestPath = $this->loader->rawPath('authority.manifest.json', $version);
+        $manifest = $this->loader->readJson($manifestPath);
+        if (! is_array($manifest)) {
+            throw new \RuntimeException('EQ_60 raw authority manifest is missing or invalid JSON.');
+        }
+        if (($manifest['schema'] ?? null) !== 'eq_60.raw_authority_manifest.v1'
+            || ($manifest['authority_id'] ?? null) !== 'FERMATMIND_EQ_60_BILINGUAL_CANONICAL'
+            || ($manifest['pack_id'] ?? null) !== Eq60PackLoader::PACK_ID
+            || ($manifest['stable_pack_root'] ?? null) !== 'backend/content_packs/EQ_60/v1'
+            || ($manifest['editable_source_root'] ?? null) !== 'backend/content_packs/EQ_60/v1/raw'
+            || ($manifest['editable_authority_count'] ?? null) !== 1
+            || ($manifest['locales'] ?? null) !== ['zh-CN', 'en']) {
+            throw new \RuntimeException('EQ_60 raw authority identity contract is invalid.');
         }
 
-        $files = File::allFiles($dir);
-        usort($files, static fn (\SplFileInfo $a, \SplFileInfo $b): int => strcmp($a->getPathname(), $b->getPathname()));
+        $declared = [];
+        foreach ((array) ($manifest['source_files'] ?? []) as $entry) {
+            if (! is_array($entry)) {
+                throw new \RuntimeException('EQ_60 raw authority source_files contains a non-object entry.');
+            }
+            $relativePath = trim((string) ($entry['path'] ?? ''));
+            if ($relativePath === '' || str_starts_with($relativePath, '/') || str_contains($relativePath, '..') || isset($declared[$relativePath])) {
+                throw new \RuntimeException('EQ_60 raw authority source path is invalid or duplicated: '.$relativePath);
+            }
+            foreach (['locale', 'schema', 'role', 'required_fields', 'consumer_surfaces', 'sha256'] as $field) {
+                if (! array_key_exists($field, $entry) || $entry[$field] === '' || $entry[$field] === []) {
+                    throw new \RuntimeException('EQ_60 raw authority source contract missing '.$field.': '.$relativePath);
+                }
+            }
+            $declared[$relativePath] = $entry;
+        }
+        if (count($declared) !== 29) {
+            throw new \RuntimeException('EQ_60 raw authority manifest must declare exactly 29 payload files.');
+        }
+        ksort($declared, SORT_STRING);
 
-        $prefix = rtrim($dir, '/\\').DIRECTORY_SEPARATOR;
-        $rows = [];
-        foreach ($files as $file) {
-            $path = $file->getPathname();
-            $rel = str_starts_with($path, $prefix) ? substr($path, strlen($prefix)) : $file->getFilename();
-            $rows[] = $rel.':'.hash_file('sha256', $path);
+        $physical = [];
+        foreach (File::allFiles($this->loader->rawDir($version)) as $file) {
+            $absolutePath = $file->getPathname();
+            $prefix = rtrim($this->loader->rawDir($version), '/\\').DIRECTORY_SEPARATOR;
+            $relativePath = str_replace('\\', '/', substr($absolutePath, strlen($prefix)));
+            if ($relativePath !== 'authority.manifest.json') {
+                $physical[] = $relativePath;
+            }
+        }
+        sort($physical, SORT_STRING);
+        if ($physical !== array_keys($declared)) {
+            throw new \RuntimeException('EQ_60 raw authority physical inventory differs from the 29-file allowlist.');
         }
 
-        return hash('sha256', implode("\n", $rows));
+        $chain = '';
+        foreach ($declared as $relativePath => $entry) {
+            $absolutePath = $this->loader->rawPath($relativePath, $version);
+            $bytes = File::get($absolutePath);
+            if (str_contains($bytes, "\r") || ! mb_check_encoding($bytes, 'UTF-8')) {
+                throw new \RuntimeException('EQ_60 raw source must be UTF-8 with LF newlines: '.$relativePath);
+            }
+            $digest = hash('sha256', $bytes);
+            if (! hash_equals(strtolower((string) $entry['sha256']), $digest)) {
+                throw new \RuntimeException('EQ_60 raw source hash mismatch: '.$relativePath);
+            }
+            $this->validateRequiredFields($relativePath, $absolutePath, (array) $entry['required_fields']);
+            $chain .= $relativePath."\0".$digest."\n";
+        }
+        $sourceHash = hash('sha256', $chain);
+        if (! hash_equals(strtolower((string) ($manifest['source_hash'] ?? '')), $sourceHash)) {
+            throw new \RuntimeException('EQ_60 canonical source_hash mismatch.');
+        }
+
+        $expectedCompiled = [
+            'golden_cases.compiled.json',
+            'landing.compiled.json',
+            'options.compiled.json',
+            'policy.compiled.json',
+            'questions.compiled.json',
+            'report.compiled.json',
+            'report_assets.compiled.json',
+            'manifest.json',
+        ];
+        if (($manifest['compiled_inventory'] ?? null) !== $expectedCompiled) {
+            throw new \RuntimeException('EQ_60 compiled inventory contract must contain the exact eight artifacts.');
+        }
+        foreach (['dimensions', 'global_score', 'dimension_bands_and_maturity', 'tie', 'low_confidence_and_quality_flags', 'personalization_routes', 'result_snapshot', 'mechanism', 'reality_scenes', 'career_environment', 'action_prescription', 'cross_assessment_context', 'provisional_norm_explanation', 'retest_30_90_days', 'non_ability_non_diagnostic_non_hiring', 'agent', 'pdf_history_share_secondary'] as $coverageKey) {
+            if (! data_get($manifest, 'coverage_matrix.'.$coverageKey)) {
+                throw new \RuntimeException('EQ_60 authority coverage matrix missing: '.$coverageKey);
+            }
+        }
+
+        return $manifest;
+    }
+
+    /** @param list<string> $requiredFields */
+    private function validateRequiredFields(string $relativePath, string $absolutePath, array $requiredFields): void
+    {
+        if (str_ends_with($relativePath, '.csv')) {
+            $handle = fopen($absolutePath, 'rb');
+            $headers = $handle === false ? false : fgetcsv($handle, 0, ',', '"', '\\');
+            if (is_resource($handle)) {
+                fclose($handle);
+            }
+            $headers = is_array($headers) ? array_map(static fn ($value): string => trim((string) $value), $headers) : [];
+            foreach ($requiredFields as $field) {
+                if (! in_array($field, $headers, true)) {
+                    throw new \RuntimeException('EQ_60 CSV required column missing: '.$relativePath.'#'.$field);
+                }
+            }
+
+            return;
+        }
+
+        $document = $this->loader->readJson($absolutePath);
+        if (! is_array($document)) {
+            throw new \RuntimeException('EQ_60 raw JSON is invalid: '.$relativePath);
+        }
+        foreach ($requiredFields as $field) {
+            $value = data_get($document, $field);
+            if ($value === null || $value === '' || $value === []) {
+                throw new \RuntimeException('EQ_60 JSON required field missing: '.$relativePath.'#'.$field);
+            }
+        }
+    }
+
+    private function canonicalJson(mixed $value): string
+    {
+        return json_encode(
+            $this->normalizeCanonicalValue($value),
+            JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT
+        );
+    }
+
+    private function normalizeCanonicalValue(mixed $value): mixed
+    {
+        if (! is_array($value)) {
+            return is_string($value) ? str_replace(["\r\n", "\r"], "\n", $value) : $value;
+        }
+        foreach ($value as $key => $item) {
+            $value[$key] = $this->normalizeCanonicalValue($item);
+        }
+
+        return $value;
+    }
+
+    /**
+     * @param  array<string,string>  $files
+     * @param  array<string,string>  $payloadHashes
+     */
+    private function materializeAtomically(string $targetDirectory, array $files, array $payloadHashes): void
+    {
+        if ($targetDirectory === '' || str_contains($targetDirectory, '..') || $targetDirectory === $this->loader->rawDir()) {
+            throw new \RuntimeException('EQ_60 compiled target directory is unsafe.');
+        }
+        $parent = dirname($targetDirectory);
+        if (! is_dir($parent) && ! File::makeDirectory($parent, 0775, true, true)) {
+            throw new \RuntimeException('Unable to create EQ_60 compiled parent directory.');
+        }
+
+        $token = bin2hex(random_bytes(8));
+        $candidate = $parent.DIRECTORY_SEPARATOR.'.'.basename($targetDirectory).'.candidate.'.$token;
+        $backup = $parent.DIRECTORY_SEPARATOR.'.'.basename($targetDirectory).'.backup.'.$token;
+        if (! File::makeDirectory($candidate, 0775, true, true)) {
+            throw new \RuntimeException('Unable to create EQ_60 compiled candidate directory.');
+        }
+
+        try {
+            foreach ($files as $name => $bytes) {
+                if (File::put($candidate.DIRECTORY_SEPARATOR.$name, $bytes, true) !== strlen($bytes)) {
+                    throw new \RuntimeException('Unable to write EQ_60 compiled candidate: '.$name);
+                }
+            }
+            $candidateFiles = array_map(static fn (\SplFileInfo $file): string => $file->getFilename(), File::files($candidate));
+            sort($candidateFiles, SORT_STRING);
+            $expectedFiles = array_keys($files);
+            sort($expectedFiles, SORT_STRING);
+            if ($candidateFiles !== $expectedFiles) {
+                throw new \RuntimeException('EQ_60 compiled candidate inventory validation failed.');
+            }
+            foreach ($payloadHashes as $name => $digest) {
+                if (! hash_equals($digest, hash_file('sha256', $candidate.DIRECTORY_SEPARATOR.$name))) {
+                    throw new \RuntimeException('EQ_60 compiled candidate hash validation failed: '.$name);
+                }
+            }
+
+            $hadTarget = is_dir($targetDirectory);
+            if ($hadTarget && ! rename($targetDirectory, $backup)) {
+                throw new \RuntimeException('Unable to preserve the previous EQ_60 compiled directory.');
+            }
+            if (! rename($candidate, $targetDirectory)) {
+                if ($hadTarget) {
+                    @rename($backup, $targetDirectory);
+                }
+                throw new \RuntimeException('Unable to activate the complete EQ_60 compiled candidate.');
+            }
+            if ($hadTarget) {
+                File::deleteDirectory($backup);
+            }
+        } catch (\Throwable $exception) {
+            File::deleteDirectory($candidate);
+            if (! is_dir($targetDirectory) && is_dir($backup)) {
+                @rename($backup, $targetDirectory);
+            }
+            throw $exception;
+        }
     }
 }

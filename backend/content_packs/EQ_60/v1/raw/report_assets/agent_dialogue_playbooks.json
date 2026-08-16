@@ -207,5 +207,31 @@
         "risk_notes": "Read-only agent playbook. Refuse ability, certification, hiring/screening, medical or mental-health judgment, third-person evaluation, performance or work-outcome inference, paid access, SJT enablement, score changes, and report mutation."
       }
     }
+  },
+  "runtime_copy": {
+    "boundary_response": {
+      "zh-CN": "我只能解释这份自我报告结果，不能把它用于高风险判断、认证结论或替代现实专业支持。下面我会按报告已有资产做安全解释。",
+      "en": "I can only explain this self-report result. I cannot use it for high-risk decisions, certification, or as a substitute for real-world professional support. I will stay within the existing report assets."
+    },
+    "default_response": {
+      "zh-CN": "我会基于当前报告资产解释你的 EQ 结果，不会重新打分或替换报告判断。",
+      "en": "I will explain your EQ result using the current report assets; I will not rescore or replace the report judgment."
+    },
+    "boundary_summary_points": {
+      "zh-CN": ["这份报告只能用于自我理解。", "回复将保留科学边界。", "不会改写分数、画像或模块状态。"],
+      "en": ["This report is for self-understanding only.", "The response keeps the scientific boundary.", "Scores, formulation, and module status are not changed."]
+    },
+    "boundary_follow_up": {
+      "zh-CN": "你想把这个结果放回哪个低风险场景里理解：反馈、冲突、边界、协作还是压力恢复？",
+      "en": "Which low-risk scene should we use to understand this result: feedback, conflict, boundary, collaboration, or recovery?"
+    },
+    "default_follow_up": {
+      "zh-CN": "你想先讨论哪一个现实场景？",
+      "en": "Which real-life scene would you like to discuss first?"
+    },
+    "confidence_prefix": {
+      "zh-CN": "解释置信度：",
+      "en": "Interpretation confidence: "
+    }
   }
 }

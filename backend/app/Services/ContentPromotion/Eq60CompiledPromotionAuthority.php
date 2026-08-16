@@ -77,13 +77,17 @@ final class Eq60CompiledPromotionAuthority
         }
 
         $manifest = $this->decode($this->read($compiledDir, 'manifest.json'), 'eq60_promotion_compiled_manifest_invalid');
-        if (($manifest['schema'] ?? null) !== 'eq_60.compiled.manifest.v1'
+        if (($manifest['schema'] ?? null) !== 'eq_60.compiled.manifest.v2'
             || ($manifest['pack_id'] ?? null) !== Eq60PackLoader::PACK_ID
             || ($manifest['pack_version'] ?? null) !== $version) {
             throw new DomainException('eq60_promotion_compiled_manifest_schema_invalid');
         }
         $hashes = $manifest['hashes'] ?? null;
-        if (! is_array($hashes) || array_keys($hashes) !== self::COMPILED_FILES) {
+        $declaredFiles = is_array($hashes) ? array_keys($hashes) : [];
+        $expectedFiles = self::COMPILED_FILES;
+        sort($declaredFiles, SORT_STRING);
+        sort($expectedFiles, SORT_STRING);
+        if (! is_array($hashes) || $declaredFiles !== $expectedFiles) {
             throw new DomainException('eq60_promotion_compiled_inventory_invalid');
         }
         foreach (self::COMPILED_FILES as $file) {
@@ -93,7 +97,7 @@ final class Eq60CompiledPromotionAuthority
             $canonical = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR);
             if (! hash_equals($canonical."\n", $bytes)
                 || preg_match('/\A[a-f0-9]{64}\z/', $declared) !== 1
-                || ! hash_equals($declared, hash('sha256', $canonical))) {
+                || ! hash_equals($declared, hash('sha256', $bytes))) {
                 throw new DomainException('eq60_promotion_compiled_payload_hash_invalid');
             }
             $hashes[$file] = $declared;
@@ -353,7 +357,7 @@ final class Eq60CompiledPromotionAuthority
      * ensures the compiled payload does not already leak private fields into a
      * public share projection.
      *
-     * @param array{targets:list<array<string,mixed>>,manifest:array<string,mixed>} $package
+     * @param  array{targets:list<array<string,mixed>>,manifest:array<string,mixed>}  $package
      */
     private function assertShareProjectionSchema(array $package): void
     {
@@ -369,7 +373,7 @@ final class Eq60CompiledPromotionAuthority
      * identifiers (attempt_id, report token, user/org/order ids) in any
      * public-facing key.
      *
-     * @param array{targets:list<array<string,mixed>>,manifest:array<string,mixed>} $package
+     * @param  array{targets:list<array<string,mixed>>,manifest:array<string,mixed>}  $package
      */
     private function assertHistoryProjection(array $package): void
     {
@@ -477,11 +481,11 @@ final class Eq60CompiledPromotionAuthority
     private function hashMap(array $hashes): string
     {
         ksort($hashes, SORT_STRING);
-        $rows = [];
+        $chain = '';
         foreach ($hashes as $file => $hash) {
-            $rows[] = $file.':'.$hash;
+            $chain .= $file."\0".$hash."\n";
         }
 
-        return hash('sha256', implode("\n", $rows));
+        return hash('sha256', $chain);
     }
 }

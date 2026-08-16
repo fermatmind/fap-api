@@ -19,9 +19,7 @@ final class Eq60PackLoader
 
     public function packRoot(?string $version = null): string
     {
-        $packBase = $this->pathAliasResolver->resolveBackendPackRoot(self::PACK_ID);
-
-        return rtrim($packBase, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$this->normalizeVersion($version);
+        return base_path('content_packs/EQ_60').DIRECTORY_SEPARATOR.$this->normalizeVersion($version);
     }
 
     public function rawDir(?string $version = null): string
@@ -37,6 +35,11 @@ final class Eq60PackLoader
             return $activePath;
         }
 
+        return $this->packRoot($version).DIRECTORY_SEPARATOR.'compiled';
+    }
+
+    public function repoCompiledDir(?string $version = null): string
+    {
         return $this->packRoot($version).DIRECTORY_SEPARATOR.'compiled';
     }
 

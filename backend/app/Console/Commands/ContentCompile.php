@@ -19,7 +19,8 @@ final class ContentCompile extends Command
     protected $signature = 'content:compile
         {--all : Compile all content packs}
         {--pack= : Compile a single pack_id}
-        {--pack-version= : Compile a specific pack version}';
+        {--pack-version= : Compile a specific pack version}
+        {--output-dir= : Write an EQ_60 candidate to an isolated directory}';
 
     protected $description = 'Compile content packs into normalized runtime artifacts.';
 
@@ -35,6 +36,12 @@ final class ContentCompile extends Command
     ): int {
         $pack = $this->option('pack');
         $version = $this->option('pack-version');
+        $outputDirectory = $this->option('output-dir');
+        if ($outputDirectory !== null && (! is_string($pack) || strtoupper(trim($pack)) !== 'EQ_60')) {
+            $this->error('--output-dir is supported only for EQ_60 deterministic candidate compilation.');
+
+            return self::FAILURE;
+        }
         if (is_string($pack) && strtoupper(trim($pack)) === BigFivePrivateResultCompileService::PACK_ID) {
             if (trim((string) $version) !== BigFivePrivateResultCompileService::PACK_VERSION) {
                 $this->error('BIG5_OCEAN_PRIVATE_RESULT supports only the stable v2 path.');
@@ -78,7 +85,10 @@ final class ContentCompile extends Command
                 'packs' => [$single],
             ];
         } elseif (is_string($pack) && strtoupper(trim($pack)) === 'EQ_60') {
-            $single = $eq60Compile->compile(is_string($version) ? $version : null);
+            $single = $eq60Compile->compile(
+                is_string($version) ? $version : null,
+                is_string($outputDirectory) && trim($outputDirectory) !== '' ? trim($outputDirectory) : null,
+            );
             $result = [
                 'ok' => (bool) ($single['ok'] ?? false),
                 'packs' => [$single],

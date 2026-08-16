@@ -2,7 +2,8 @@
     "schema": "eq_60.report_assets.compiled.v1",
     "pack_id": "EQ_60",
     "pack_version": "v1",
-    "generated_at": "2026-08-13T05:09:19.312205Z",
+    "authority_id": "FERMATMIND_EQ_60_BILINGUAL_CANONICAL",
+    "source_hash": "f1645cbd8b9c5b5686d2611a22e12a90609a2d64647eb5a5d348d12c2d056de7",
     "assets": {
         "scientific_contract": {
             "schema": "eq60.report_assets.scientific_contract.v1",
@@ -27381,6 +27382,32 @@
                         "quality_level": "D"
                     }
                 }
+            },
+            "flag_explanations": {
+                "SPEEDING": {
+                    "zh-CN": "作答速度过快，建议在注意力充足时重新作答。",
+                    "en": "Responses were completed unusually quickly; retake when you have enough time and attention."
+                },
+                "INCONSISTENT": {
+                    "zh-CN": "部分答案的一致性偏低，结果需要谨慎阅读。",
+                    "en": "Some answers were less internally consistent, so interpret this session cautiously."
+                },
+                "LONGSTRING": {
+                    "zh-CN": "连续多题使用了相同选项，结果需要结合当时状态复核。",
+                    "en": "The same option was used across a long run of items; review whether that reflects your experience."
+                },
+                "EXTREME_RESPONSE_BIAS": {
+                    "zh-CN": "极端选项使用较多，建议确认这些选择是否符合真实体验。",
+                    "en": "Extreme options were used often; check whether those choices reflect your experience."
+                },
+                "NEUTRAL_RESPONSE_BIAS": {
+                    "zh-CN": "中立选项使用较多，结果可能不足以区分当前倾向。",
+                    "en": "Neutral options were used often, which may limit how clearly this session distinguishes tendencies."
+                },
+                "UNKNOWN": {
+                    "zh-CN": "检测到其他需要复核的作答质量信号。",
+                    "en": "Another response-quality signal needs review."
+                }
             }
         },
         "psychometric_evidence_status": {
@@ -30787,6 +30814,40 @@
                         ],
                         "risk_notes": "Read-only agent playbook. Refuse ability, certification, hiring/screening, medical or mental-health judgment, third-person evaluation, performance or work-outcome inference, paid access, SJT enablement, score changes, and report mutation."
                     }
+                }
+            },
+            "runtime_copy": {
+                "boundary_response": {
+                    "zh-CN": "我只能解释这份自我报告结果，不能把它用于高风险判断、认证结论或替代现实专业支持。下面我会按报告已有资产做安全解释。",
+                    "en": "I can only explain this self-report result. I cannot use it for high-risk decisions, certification, or as a substitute for real-world professional support. I will stay within the existing report assets."
+                },
+                "default_response": {
+                    "zh-CN": "我会基于当前报告资产解释你的 EQ 结果，不会重新打分或替换报告判断。",
+                    "en": "I will explain your EQ result using the current report assets; I will not rescore or replace the report judgment."
+                },
+                "boundary_summary_points": {
+                    "zh-CN": [
+                        "这份报告只能用于自我理解。",
+                        "回复将保留科学边界。",
+                        "不会改写分数、画像或模块状态。"
+                    ],
+                    "en": [
+                        "This report is for self-understanding only.",
+                        "The response keeps the scientific boundary.",
+                        "Scores, formulation, and module status are not changed."
+                    ]
+                },
+                "boundary_follow_up": {
+                    "zh-CN": "你想把这个结果放回哪个低风险场景里理解：反馈、冲突、边界、协作还是压力恢复？",
+                    "en": "Which low-risk scene should we use to understand this result: feedback, conflict, boundary, collaboration, or recovery?"
+                },
+                "default_follow_up": {
+                    "zh-CN": "你想先讨论哪一个现实场景？",
+                    "en": "Which real-life scene would you like to discuss first?"
+                },
+                "confidence_prefix": {
+                    "zh-CN": "解释置信度：",
+                    "en": "Interpretation confidence: "
                 }
             }
         },
