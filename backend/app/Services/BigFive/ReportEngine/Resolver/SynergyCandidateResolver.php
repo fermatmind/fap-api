@@ -44,6 +44,7 @@ final class SynergyCandidateResolver
                 maxShow: max(1, (int) ($synergy['max_show'] ?? 1)),
                 sectionTargets: array_values(is_array($synergy['section_targets'] ?? null) ? $synergy['section_targets'] : []),
                 copy: is_array($synergy['copy'] ?? null) ? $synergy['copy'] : [],
+                components: array_values(array_map('strval', is_array($synergy['components'] ?? null) ? $synergy['components'] : [])),
             );
         }
 

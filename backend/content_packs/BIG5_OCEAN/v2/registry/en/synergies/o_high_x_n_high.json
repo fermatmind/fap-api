@@ -1,6 +1,7 @@
 {
   "schema": "fap.big5.synergy_rule.v1",
   "synergy_id": "o_high_x_n_high",
+  "components": ["O", "N"],
   "title": "complexity overload effect",
   "trigger": {
     "all": [
@@ -41,6 +42,7 @@
     "body": "High openness will expand your understanding of complex situations, and high emotional sensitivity will increase your sense of uncertainty, loss of control, and potential costs. When the two are combined, the problem is not just \"thinking too much\", but that every possibility may enter the system with the weight of risk, turning understanding into a source of load.",
     "strength_sentence": "This combination makes you more sensitive to subtle changes, long-term consequences and hidden variables, and is suitable for dealing with complex issues that require in-depth judgment.",
     "risk_sentence": "The price is this: when there is too much information, unclear boundaries, or too open choices, you may first be overwhelmed by the complexity itself.",
+    "context_boundary": "This pattern is clearest under uncertainty, ambiguous meaning, or information overload; it may soften when evidence and pace are clear.",
     "action_hook": "Your priority is to separate complex issues into layers: which are real risks and which are just untested possibilities."
   }
 }

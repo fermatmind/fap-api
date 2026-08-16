@@ -10,6 +10,8 @@ use App\Services\BigFive\ReportEngine\Resolver\ActionMatrixResolver;
 use App\Services\BigFive\ReportEngine\Resolver\AtomicBlockResolver;
 use App\Services\BigFive\ReportEngine\Resolver\FacetPrecisionResolver;
 use App\Services\BigFive\ReportEngine\Resolver\ModifierInjector;
+use App\Services\BigFive\ReportEngine\Resolver\NormEvidenceResolver;
+use App\Services\BigFive\ReportEngine\Resolver\QualityPolicyResolver;
 use App\Services\BigFive\ReportEngine\Resolver\SynergyCandidateResolver;
 use App\Services\BigFive\ReportEngine\Resolver\SynergyResolutionService;
 use App\Services\Content\BigFivePrivateResultPackLoader;
@@ -28,6 +30,8 @@ final class BigFiveReportEngine
         private readonly ActionMatrixResolver $actionMatrixResolver = new ActionMatrixResolver,
         private readonly SectionInstructionAssembler $sectionInstructionAssembler = new SectionInstructionAssembler,
         private readonly RuntimePayloadAssembler $runtimePayloadAssembler = new RuntimePayloadAssembler,
+        private readonly QualityPolicyResolver $qualityPolicyResolver = new QualityPolicyResolver,
+        private readonly NormEvidenceResolver $normEvidenceResolver = new NormEvidenceResolver,
     ) {}
 
     /**
@@ -53,17 +57,19 @@ final class BigFiveReportEngine
     {
         $context = $this->contextBuilder->fromArray($input);
         $this->registryValidator->assertValid($registry);
+        $qualityPolicy = $this->qualityPolicyResolver->resolve($context, $registry);
+        $normEvidence = $this->normEvidenceResolver->resolve($context, $qualityPolicy, $registry);
         $blocks = $this->atomicBlockResolver->resolve($context, $registry);
         $blocks = $this->modifierInjector->inject($context, $blocks, $registry);
         $synergies = $this->synergyResolutionService->resolve(
             $this->synergyCandidateResolver->collect($context, $registry),
-            2,
+            3,
         );
-        $facetAnomalies = $this->facetPrecisionResolver->resolve($context, $registry);
-        $actionMatrix = $this->actionMatrixResolver->resolve($context, $registry);
-        $sections = $this->sectionInstructionAssembler->assemble($context, $blocks, $synergies, $facetAnomalies, $actionMatrix, $registry);
+        $facetAnomalies = $this->facetPrecisionResolver->resolve($context, $registry, $qualityPolicy);
+        $actionMatrix = $this->actionMatrixResolver->resolve($context, $registry, $qualityPolicy, $synergies, $facetAnomalies);
+        $sections = $this->sectionInstructionAssembler->assemble($context, $blocks, $synergies, $facetAnomalies, $actionMatrix, $qualityPolicy, $normEvidence, $registry);
 
-        return $this->runtimePayloadAssembler->assemble($context, $sections, $synergies, $facetAnomalies, $actionMatrix);
+        return $this->runtimePayloadAssembler->assemble($context, $sections, $synergies, $facetAnomalies, $actionMatrix, $qualityPolicy, $normEvidence);
     }
 
     /**

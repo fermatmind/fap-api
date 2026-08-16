@@ -17,6 +17,10 @@ final class RuleEvaluator
      */
     public function evaluate(array $rule, ReportContext $context): bool
     {
+        if (($rule['always'] ?? false) === true) {
+            return true;
+        }
+
         if (isset($rule['all']) && is_array($rule['all'])) {
             foreach ($rule['all'] as $child) {
                 if (! is_array($child) || ! $this->evaluate($child, $context)) {

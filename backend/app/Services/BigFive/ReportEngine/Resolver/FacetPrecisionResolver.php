@@ -15,7 +15,7 @@ final class FacetPrecisionResolver
      * @param  array<string,mixed>  $registry
      * @return list<FacetAnomalyMatch>
      */
-    public function resolve(ReportContext $context, array $registry): array
+    public function resolve(ReportContext $context, array $registry, array $qualityPolicy = []): array
     {
         $candidates = [];
 
@@ -30,7 +30,7 @@ final class FacetPrecisionResolver
                     continue;
                 }
 
-                $match = $this->matchRule($context, $traitCode, $rule);
+                $match = $this->matchRule($context, $traitCode, $rule, (int) ($qualityPolicy['min_facet_delta'] ?? 20));
                 if ($match !== null) {
                     $candidates[] = $match;
                 }
@@ -65,7 +65,7 @@ final class FacetPrecisionResolver
     /**
      * @param  array<string,mixed>  $rule
      */
-    private function matchRule(ReportContext $context, string $traitCode, array $rule): ?FacetAnomalyMatch
+    private function matchRule(ReportContext $context, string $traitCode, array $rule, int $policyMinimumDelta): ?FacetAnomalyMatch
     {
         $facetCodes = $this->facetCodes($rule);
         if ($facetCodes === []) {
@@ -88,7 +88,7 @@ final class FacetPrecisionResolver
             $facetWhen = $this->facetWhen($when, $facetCode);
             $facetPercentile = $context->facetPercentile($facetCode);
             $deltaAbs = abs($facetPercentile - $domainPercentile);
-            if (! $this->passesFacetThresholds($facetWhen, $domainPercentile, $facetPercentile, $deltaAbs)) {
+            if (! $this->passesFacetThresholds($facetWhen, $domainPercentile, $facetPercentile, $deltaAbs, $policyMinimumDelta)) {
                 return null;
             }
             if ($deltaAbs > $bestDeltaAbs) {
@@ -97,7 +97,7 @@ final class FacetPrecisionResolver
                 $bestDeltaAbs = $deltaAbs;
             }
         }
-        if (! $this->passesAdditionalFacetConstraints($context, $when, $traitCode, $facetCodes, $domainPercentile)) {
+        if (! $this->passesAdditionalFacetConstraints($context, $when, $traitCode, $facetCodes, $domainPercentile, $policyMinimumDelta)) {
             return null;
         }
 
@@ -158,7 +158,7 @@ final class FacetPrecisionResolver
     /**
      * @param  array<string,mixed>  $when
      */
-    private function passesFacetThresholds(array $when, int $domainPercentile, int $facetPercentile, int $deltaAbs): bool
+    private function passesFacetThresholds(array $when, int $domainPercentile, int $facetPercentile, int $deltaAbs, int $policyMinimumDelta = 20): bool
     {
         if (isset($when['facet_percentile_min']) && $facetPercentile < (int) $when['facet_percentile_min']) {
             return false;
@@ -166,7 +166,7 @@ final class FacetPrecisionResolver
         if (isset($when['facet_percentile_max']) && $facetPercentile > (int) $when['facet_percentile_max']) {
             return false;
         }
-        if ($deltaAbs < (int) ($when['delta_abs_min'] ?? 20)) {
+        if ($deltaAbs < max($policyMinimumDelta, (int) ($when['delta_abs_min'] ?? 20))) {
             return false;
         }
         if (($when['cross_band_required'] ?? false) === true && $this->bandFor($domainPercentile) === $this->bandFor($facetPercentile)) {
@@ -191,7 +191,7 @@ final class FacetPrecisionResolver
      * @param  array<string,mixed>  $when
      * @param  list<string>  $primaryFacetCodes
      */
-    private function passesAdditionalFacetConstraints(ReportContext $context, array $when, string $traitCode, array $primaryFacetCodes, int $domainPercentile): bool
+    private function passesAdditionalFacetConstraints(ReportContext $context, array $when, string $traitCode, array $primaryFacetCodes, int $domainPercentile, int $policyMinimumDelta): bool
     {
         $facets = is_array($when['facets'] ?? null) ? $when['facets'] : [];
         foreach ($facets as $facetCode => $facetWhen) {
@@ -207,7 +207,7 @@ final class FacetPrecisionResolver
             }
             $facetPercentile = $context->facetPercentile($facetCode);
             $deltaAbs = abs($facetPercentile - $domainPercentile);
-            if (! $this->passesFacetThresholds(array_merge($when, $facetWhen), $domainPercentile, $facetPercentile, $deltaAbs)) {
+            if (! $this->passesFacetThresholds(array_merge($when, $facetWhen), $domainPercentile, $facetPercentile, $deltaAbs, $policyMinimumDelta)) {
                 return false;
             }
         }

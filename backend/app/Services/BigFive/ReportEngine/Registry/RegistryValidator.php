@@ -62,6 +62,13 @@ final class RegistryValidator
         'runtime_copy.facet_details.intro.body',
         'runtime_copy.facet_details.overflow.title',
         'runtime_copy.facet_details.overflow.body',
+        'report_policy.quality_grades.A.confidence_mode',
+        'report_policy.quality_grades.B.confidence_mode',
+        'report_policy.quality_grades.C.notice_title',
+        'report_policy.quality_grades.D.notice_title',
+        'report_policy.quality_grades.UNKNOWN.notice_title',
+        'report_policy.norm_evidence.percentile_explanation',
+        'report_policy.norm_evidence.unavailable_explanation',
     ];
 
     private const SYNERGY_IDS = [
@@ -70,6 +77,11 @@ final class RegistryValidator
         'o_high_x_n_high',
         'c_high_x_n_high',
         'e_high_x_a_low',
+        'o_x_c_operating_balance',
+        'e_x_a_social_balance',
+        'c_x_n_load_balance',
+        'o_x_e_exploration_expression',
+        'a_x_n_relational_recovery',
     ];
 
     private const REQUIRED_SYNERGY_COPY_FIELDS = [
@@ -78,6 +90,7 @@ final class RegistryValidator
         'strength_sentence',
         'risk_sentence',
         'action_hook',
+        'context_boundary',
     ];
 
     private const REQUIRED_FACET_GLOSSARY_FIELDS = [
@@ -158,6 +171,14 @@ final class RegistryValidator
                 $errors[] = "Action scenario mismatch for {$scenario}.json";
             }
             $rules = is_array($pack['rules'] ?? null) ? $pack['rules'] : [];
+            $bucketDetails = is_array($pack['bucket_details'] ?? null) ? $pack['bucket_details'] : [];
+            foreach (self::ACTION_BUCKETS as $bucket) {
+                foreach (['why_recommended', 'completion_signal'] as $field) {
+                    if (trim((string) data_get($bucketDetails, "{$bucket}.{$field}", '')) === '') {
+                        $errors[] = "Action scenario {$scenario} bucket {$bucket} missing {$field}";
+                    }
+                }
+            }
             $actionCount += count($rules);
             foreach ($rules as $rule) {
                 if (! is_array($rule)) {
@@ -403,6 +424,10 @@ final class RegistryValidator
                     $errors[] = "Synergy {$synergyId} missing {$key}";
                 }
             }
+            $components = array_values(array_map('strval', is_array($synergy['components'] ?? null) ? $synergy['components'] : []));
+            if (count($components) < 2 || count(array_unique($components)) !== count($components)) {
+                $errors[] = "Synergy {$synergyId} must declare at least two unique components";
+            }
             if (! array_key_exists('priority_weight_formula', $synergy) && ! array_key_exists('priority_weight', $synergy)) {
                 $errors[] = "Synergy {$synergyId} missing priority weight";
             }
@@ -410,8 +435,8 @@ final class RegistryValidator
                 $errors[] = "Synergy {$synergyId} mutex_group must be non-empty";
             }
             $maxShow = (int) ($synergy['max_show'] ?? 0);
-            if ($maxShow < 1 || $maxShow > 2) {
-                $errors[] = "Synergy {$synergyId} max_show must be 1-2";
+            if ($maxShow < 1 || $maxShow > 3) {
+                $errors[] = "Synergy {$synergyId} max_show must be 1-3";
             }
 
             $targets = is_array($synergy['section_targets'] ?? null) ? $synergy['section_targets'] : [];

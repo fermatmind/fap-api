@@ -1,0 +1,34 @@
+{
+  "fixture_id": "quality_d_common_profile",
+  "locale": "en",
+  "scale_code": "BIG5_OCEAN",
+  "form_code": "big5_120",
+  "score_vector": {
+    "domains": {
+      "O": {"percentile": 20, "band": "low", "gradient_id": "o_g2"},
+      "C": {"percentile": 15, "band": "low", "gradient_id": "c_g1"},
+      "E": {"percentile": 46, "band": "mid", "gradient_id": "e_g3"},
+      "A": {"percentile": 19, "band": "low", "gradient_id": "a_g1"},
+      "N": {"percentile": 42, "band": "mid", "gradient_id": "n_g3"}
+    },
+    "facets": {
+      "C1": {"percentile": 82, "domain": "C"},
+      "C2": {"percentile": 85, "domain": "C"},
+      "E5": {"percentile": 8, "domain": "E"},
+      "A6": {"percentile": 80, "domain": "A"}
+    }
+  },
+  "quality": {"level": "D", "flags": ["LOW_RESPONSE_CONSISTENCY"], "norms_status": "CALIBRATED"},
+  "meta": {
+    "norms": {
+      "status": "CALIBRATED",
+      "group_id": "fixture_group",
+      "norms_version": "2026Q1_bootstrap_v1",
+      "source_id": "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE",
+      "match_type": "exact",
+      "sample_n": 120000,
+      "published_at": "2026-02-21T00:00:00Z",
+      "selected_group": {"locale": "en", "region": "GLOBAL", "gender": "ALL", "age_min": 18, "age_max": 60}
+    }
+  }
+}

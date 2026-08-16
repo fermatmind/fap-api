@@ -78,7 +78,7 @@ final class BigFiveCanonicalPrivateResultAuthorityTest extends TestCase
         $this->assertSame(['O', 'C', 'E', 'A', 'N'], $coverage['traits']);
         $this->assertSame(['low', 'mid', 'high'], $coverage['bands']);
         $this->assertSame(30, $coverage['facet_count']);
-        $this->assertSame(5, $coverage['synergy_count']);
+        $this->assertSame(10, $coverage['synergy_count']);
         $this->assertSame(
             ['workplace', 'relationships', 'stress_recovery', 'personal_growth'],
             $coverage['action_scenarios']

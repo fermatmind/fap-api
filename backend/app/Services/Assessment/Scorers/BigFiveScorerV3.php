@@ -300,6 +300,13 @@ final class BigFiveScorerV3
                 'group_id' => (string) ($normResolved['group_id'] ?? 'global_all'),
                 'norms_version' => $normsVersion,
                 'source_id' => $normSourceId,
+                'source_type' => (string) ($normResolved['source_type'] ?? ''),
+                'origin' => (string) ($normResolved['origin'] ?? ''),
+                'match_type' => (string) ($normResolved['match_type'] ?? 'fallback'),
+                'sample_n' => (int) ($normResolved['sample_n'] ?? 0),
+                'published_at' => (string) ($normResolved['published_at'] ?? ''),
+                'selected_group' => (array) ($normResolved['selected_group'] ?? []),
+                'requested_group' => (array) ($normResolved['context'] ?? []),
             ],
             'quality' => $quality,
         ];

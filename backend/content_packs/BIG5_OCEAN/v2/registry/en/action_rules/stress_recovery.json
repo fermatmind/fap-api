@@ -2,6 +2,12 @@
   "schema": "fap.big5.action_rule_pack.v1",
   "scenario": "stress_recovery",
   "scenario_title": "Stress Recovery",
+  "bucket_details": {
+    "continue": {"why_recommended": "The stress-related evidence shows a practice that already lowers load or supports recovery, so that resource should be protected.", "completion_signal": "After two stress events, observe that recovery time did not continue to lengthen."},
+    "start": {"why_recommended": "The matched evidence supports addressing load early with a low-effort, reversible action.", "completion_signal": "Complete the action once and record whether subjective load changed afterward."},
+    "stop": {"why_recommended": "The current pattern may let stimulation or rumination occupy recovery space; removing one amplifier is more direct than adding another task.", "completion_signal": "End one stress-amplifying input or loop and record whether recovery began sooner."},
+    "observe": {"why_recommended": "Recovery improves when triggers, peaks, and decline are separated; the evidence supports establishing a personal baseline first.", "completion_signal": "Record the trigger, peak, and recovery duration for three stress events."}
+  },
   "rules": [
     {
       "rule_id": "n_rec_start_10min_reset_60_79",

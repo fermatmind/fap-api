@@ -43,12 +43,14 @@ final class LiveReportContextAdapter
             ],
             'quality' => [
                 'level' => (string) data_get($scoreResult, 'quality.level', 'D'),
+                'flags' => (array) data_get($scoreResult, 'quality.flags', []),
                 'norms_status' => (string) data_get($scoreResult, 'norms.status', 'MISSING'),
             ],
             'meta' => [
                 'attempt_id' => (string) ($attempt->id ?? ''),
                 'result_id' => (string) ($result->id ?? ''),
                 'bridge_source' => 'live_report',
+                'norms' => (array) ($scoreResult['norms'] ?? []),
             ],
         ];
     }

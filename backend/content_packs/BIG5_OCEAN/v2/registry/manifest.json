@@ -30,19 +30,19 @@
     "source_files": [
         {
             "path": "action_rules/personal_growth.json",
-            "sha256": "0159e4927727178b6a2aecb48697ce178a3a587d44a97603a0359f2ca9e9fb31"
+            "sha256": "a32a02eae9ef3fedc69994962fcb8837bd5c454b43e55b70494a8b1a9542b2cb"
         },
         {
             "path": "action_rules/relationships.json",
-            "sha256": "ce4b2e73d323c6e7d9c7dadc446d0757a599936733a6bca729ee648f35dcf949"
+            "sha256": "fc7a8a196199769ecf906736c71788c05d36c653ddfddb9b3fc32b3f38fcbdf7"
         },
         {
             "path": "action_rules/stress_recovery.json",
-            "sha256": "55c1083ceeec46427145dfa4f6f23e0664de263d7f09ec9c93d2ba0c14e7027f"
+            "sha256": "11ae4f152c21ff3b5505328ebe82c18a16cdbea6aa562725e9fe7ec1275c425f"
         },
         {
             "path": "action_rules/workplace.json",
-            "sha256": "63f3aa8324e434ca368ab5f95a15e39cae3582d6cd11524f7926a4c6b6b8215e"
+            "sha256": "56625508c2c9813e6b74bed98764ec87acd0a1c64e3f9b1812b1094a85588a4a"
         },
         {
             "path": "atomic/A.json",
@@ -141,6 +141,10 @@
             "sha256": "380a19beb4ba67a22e403c14e63e6d92eb4521feef886bb0f3e5f7a984f6bccc"
         },
         {
+            "path": "shared/report_policy.json",
+            "sha256": "d2ae7b21f1e2484b5f58da2db819af4c4e006092f7c777401e4cb2e24281461f"
+        },
+        {
             "path": "shared/runtime_copy.json",
             "sha256": "25a846afc6e6b7948231e26bc8a139fa302aa4d09b322aa96d0b10dc91afb686"
         },
@@ -181,27 +185,223 @@
             "sha256": "d3f3a5a7aa98175c24fddd7acbdf1498d449229f38b63109248a2976fb78f6a6"
         },
         {
+            "path": "synergies/a_x_n_relational_recovery.json",
+            "sha256": "c8876e24ca0bf8c05dd8a4f076e8923d6ceb52b46e15d52f92dccb90319a74c5"
+        },
+        {
             "path": "synergies/c_high_x_n_high.json",
-            "sha256": "f4a8e03e08e70a2ead6af936b580779ebe7e2fd181961669330a9316cac4cff5"
+            "sha256": "b4b84f2022ac6f65d614f9b07d55f3d5b6a22800542ee8457f3e260b00fef339"
+        },
+        {
+            "path": "synergies/c_x_n_load_balance.json",
+            "sha256": "c2d235f4e7c5c0b96bdada1d3bbcf7d6c952166069f2c372ca5631ea578b8689"
         },
         {
             "path": "synergies/e_high_x_a_low.json",
-            "sha256": "67b63a82b6aaf3b9330e29abce8b3566f0274d4f1504386f23c0939c409452cf"
+            "sha256": "f45dae3cd73dcde55f0866f23616f511284bb826f0a589c3d4082a34f1d243f5"
+        },
+        {
+            "path": "synergies/e_x_a_social_balance.json",
+            "sha256": "a875faaee9e08921b8e38689ad100a5dfe28e7ad5c7bd846d4ab6f2d6e3b668f"
         },
         {
             "path": "synergies/n_high_x_e_low.json",
-            "sha256": "8ccab6a966dc46cfedb2ba8734f1ca214b12014db4059c860d34a56ec477f755"
+            "sha256": "3782014b1aa158fa41aef8dae801b636c68c028b4eb73030a65c652f3a1ce0f3"
         },
         {
             "path": "synergies/o_high_x_c_low.json",
-            "sha256": "52cac214152d5b82b9e66300050268a312ed05d8059b7ad853a6e5ab58bbf45d"
+            "sha256": "dcb8dfb8015d6debaacb9ed24616c6be54dbcaddee730fa380f6b8df5996afe5"
         },
         {
             "path": "synergies/o_high_x_n_high.json",
-            "sha256": "9ee69de06fe3f316afcca6f0ae54d752dfdc689435be1532ecbfaf31e6f3983f"
+            "sha256": "e4f789cdda1c5192090aad94495883c7585639f8eb64eca9331c5318bd0d53dc"
+        },
+        {
+            "path": "synergies/o_x_c_operating_balance.json",
+            "sha256": "38f3557f0c0c64b8e2ad26ecb3dfe7fe16cb633aa239d484a2e5d4216854fcb5"
+        },
+        {
+            "path": "synergies/o_x_e_exploration_expression.json",
+            "sha256": "8810fb21e034615cff9466662f94d6c6491e50be4a79a37984b3ee8495a9560b"
         }
     ],
-    "source_hash": "6b107f6779fdaa8fe2c889adc1200943edbc548544b739fa2ac54d00d53deb39",
+    "source_hash": "31b678b9e1e2182f92bc4186dc27060bdfbc182c2127cb9645104d014a54f907",
+    "locale_source_hashes": {
+        "zh-CN": "31b678b9e1e2182f92bc4186dc27060bdfbc182c2127cb9645104d014a54f907",
+        "en": "560703c2450c5a78389a61fa6823c7ff268998a702e0089e553b3a4b7b043390"
+    },
+    "locale_source_files": {
+        "en": [
+            {
+                "path": "en/action_rules/personal_growth.json",
+                "sha256": "793a79308e89aadeef5ca7f15b5d8ae8df387968ffbf40b6e59afe610bbdf269"
+            },
+            {
+                "path": "en/action_rules/relationships.json",
+                "sha256": "2ab7a603c66607c813af04d77a8569f189781d544a264ae5c142d76d33dc466d"
+            },
+            {
+                "path": "en/action_rules/stress_recovery.json",
+                "sha256": "abe5a63bb95ff2c0dda05031cb17dd057c6b83b47c1666a8f21d222f80fac09a"
+            },
+            {
+                "path": "en/action_rules/workplace.json",
+                "sha256": "46e326e463af4af400a458a6706858ef669544292bff063582d0db7b3cfc088c"
+            },
+            {
+                "path": "en/atomic/A.json",
+                "sha256": "50de0780048daea9255de89bc7c345d8b26b5c0ff97e6f7b1cdb906baefbfa8e"
+            },
+            {
+                "path": "en/atomic/C.json",
+                "sha256": "8693512885a89fb029da4073eedcc674e927c356767510310dd58834bdf690b9"
+            },
+            {
+                "path": "en/atomic/E.json",
+                "sha256": "a79b9466ab946c09840f552af24ae119fee018977c9b3f34be21ba261066d2b5"
+            },
+            {
+                "path": "en/atomic/N.json",
+                "sha256": "e5a781a4dcfaa793340f775b77dbf90ea4ca7ea0553901d79bc91be65a0d3503"
+            },
+            {
+                "path": "en/atomic/O.json",
+                "sha256": "149ab17c92273d1a62e8472c789c5be8bc21282a62e4bcae4bbb5cd7a5be934c"
+            },
+            {
+                "path": "en/facet_glossary/A.json",
+                "sha256": "fe356719cb842a58fe68efb749f2d48ef71b16702caad85dd09d4e2d6f160892"
+            },
+            {
+                "path": "en/facet_glossary/C.json",
+                "sha256": "92f105d3fc9775f87085fe0e551d41ce2d6259bb77e5f9f0a856c4af135e8a32"
+            },
+            {
+                "path": "en/facet_glossary/E.json",
+                "sha256": "b67b11492a9d58a5e1c1337f3f305c2ba33962f4277d019cf086bb9c0ab8152a"
+            },
+            {
+                "path": "en/facet_glossary/N.json",
+                "sha256": "d97134db47421dd7c45e1dc5e7418af80ba95f55fd54b492a27564559f52a903"
+            },
+            {
+                "path": "en/facet_glossary/O.json",
+                "sha256": "34ac4eef4f548fb02f098bebb7b50e469fd23a7ac15c7b5c58ab0f43b0d2ed11"
+            },
+            {
+                "path": "en/facet_precision/A.json",
+                "sha256": "8cc0f06bd6fab95ef1ff47f638868484efadd46443f2368c9a2976c51a58c9e6"
+            },
+            {
+                "path": "en/facet_precision/C.json",
+                "sha256": "930a60529f4099bf4c3d36730e653456219d776aad6fccafa68cd77120a5d473"
+            },
+            {
+                "path": "en/facet_precision/E.json",
+                "sha256": "2938ee129fae6d9fd240a9bd574c61466d9c7f2a8a5309f1e6096b15bc5197ad"
+            },
+            {
+                "path": "en/facet_precision/N.json",
+                "sha256": "1fdc975831dbb3c91b4bbbffaa95e03d8dae864c49a230ac8e9775e1dbe424b9"
+            },
+            {
+                "path": "en/facet_precision/O.json",
+                "sha256": "c1aae99246717c4701cc0b0b19eede216687c7a53b2b6b98b716725fc2be1f98"
+            },
+            {
+                "path": "en/modifiers/A.json",
+                "sha256": "d0c6e3fb3a6c74d807a3387fdf44037ac033986d098752eca6b279519a52e7d1"
+            },
+            {
+                "path": "en/modifiers/C.json",
+                "sha256": "e34496d62688c8c6d944b7e9d666bf66cb2f23f0371d1c6f73b08a99bf7d7f20"
+            },
+            {
+                "path": "en/modifiers/E.json",
+                "sha256": "9699cc15ad442846e2873f6e2da68a2851ebf4b23bc84373437efdb19ecd9124"
+            },
+            {
+                "path": "en/modifiers/N.json",
+                "sha256": "aa8bee5ec33dc2cc24d3d267daf0ee8f228fb4509072163c1a46f50bdd093204"
+            },
+            {
+                "path": "en/modifiers/O.json",
+                "sha256": "564f24820a55dbc3521de15d98ed43d6070bfe1771208b52c0f91b13954e0f93"
+            },
+            {
+                "path": "en/shared/band_labels.json",
+                "sha256": "eff9ba1a9034678302f4a56052fa310dea5d7fad8ee7a18b7716409618e89342"
+            },
+            {
+                "path": "en/shared/compare_phrases.json",
+                "sha256": "3b017c77904f84e28bfa1ace853db106312e8cf599289aa963f3dff48ecba949"
+            },
+            {
+                "path": "en/shared/gradient_labels.json",
+                "sha256": "e3a4fea612bf3541ea394a337e4e0423f3c0c6c636ca522d6dc8977c8bbde4a9"
+            },
+            {
+                "path": "en/shared/methodology.json",
+                "sha256": "6508091b15d852ed47ae49fafe664d4a7c8517bee25fcf4ae52030018c304c3b"
+            },
+            {
+                "path": "en/shared/report_policy.json",
+                "sha256": "44ce1047c8c01762db6efe8bac4beb35c23dfaca6a52bd96a3adadf0ada5ca21"
+            },
+            {
+                "path": "en/shared/runtime_copy.json",
+                "sha256": "bb821b42f528ac144ec808b1a1243cad9393d4b21f61f4d69afc358a67b1c5e0"
+            },
+            {
+                "path": "en/shared/section_headlines.json",
+                "sha256": "fe05cf2edf8d833b60a72b1ac1b8ec1b472eac5472657613e2f006596bf43772"
+            },
+            {
+                "path": "en/shared/trait_labels.json",
+                "sha256": "5cdf6f73d1a2016266d9da6baf42efa0bedd7eb776140f1db410e6519fd7d783"
+            },
+            {
+                "path": "en/synergies/a_x_n_relational_recovery.json",
+                "sha256": "c4cce1fc64b6a2d28f554829ab24670e57d2ba6c337a94c8ef9e39fd0878c8da"
+            },
+            {
+                "path": "en/synergies/c_high_x_n_high.json",
+                "sha256": "ca5a5bba736df186cc10fc8bedeec54f3213e61139cb3f3e0a9bdf8496f36f92"
+            },
+            {
+                "path": "en/synergies/c_x_n_load_balance.json",
+                "sha256": "9eb4a8052e3c36bc328569bcfbede7cf1f3d8790473b3de8a8c2605e710138ac"
+            },
+            {
+                "path": "en/synergies/e_high_x_a_low.json",
+                "sha256": "2bf0a5bd199f6c96d84e12dad80b5f0ac50f285dcee1d6f4c4d90b2015c24e56"
+            },
+            {
+                "path": "en/synergies/e_x_a_social_balance.json",
+                "sha256": "e4d4607d73c476b7f97f4d3b2a19621433cc165ea5bd3ec7d5472b070d260a5d"
+            },
+            {
+                "path": "en/synergies/n_high_x_e_low.json",
+                "sha256": "86325de69f314238171f5986bf7b1025487977c2ed1d0550e4a291612ccdb604"
+            },
+            {
+                "path": "en/synergies/o_high_x_c_low.json",
+                "sha256": "32ea610bbd0c501a09aa923864678dd3efd7132192774d7e4833b4141f873f7b"
+            },
+            {
+                "path": "en/synergies/o_high_x_n_high.json",
+                "sha256": "e58bcf84b571ad913e2363994fb46c69ddb6958ccaf18069af185b69818084a7"
+            },
+            {
+                "path": "en/synergies/o_x_c_operating_balance.json",
+                "sha256": "94d3d69118182a0843731852ad34bec9ac7c629734c381c35bf0328c186b5886"
+            },
+            {
+                "path": "en/synergies/o_x_e_exploration_expression.json",
+                "sha256": "ab1b197363e288c53c165236de65c4115d726f9c9f9e941a298be27bc65ec8d8"
+            }
+        ]
+    },
     "coverage": {
         "atomic_traits": [
             "O",
@@ -238,13 +438,18 @@
         "modifier_gradients_per_trait": 5,
         "near_boundary": true,
         "synergies": [
+            "a_x_n_relational_recovery",
+            "c_high_x_n_high",
+            "c_x_n_load_balance",
+            "e_high_x_a_low",
+            "e_x_a_social_balance",
             "n_high_x_e_low",
             "o_high_x_c_low",
             "o_high_x_n_high",
-            "c_high_x_n_high",
-            "e_high_x_a_low"
+            "o_x_c_operating_balance",
+            "o_x_e_exploration_expression"
         ],
-        "synergy_count": 5,
+        "synergy_count": 10,
         "facet_precision_traits": [
             "O",
             "C",
@@ -311,6 +516,7 @@
         ]
     },
     "fixtures": [
-        "fixtures/canonical_n_slice_sensitive_independent.context.json"
+        "fixtures/canonical_n_slice_sensitive_independent.context.json",
+        "fixtures/quality_d_common_profile.context.json"
     ]
 }

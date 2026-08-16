@@ -83,6 +83,7 @@ class NormStatsRepository
             'source_type' => (string) ($version->source_type ?? ''),
             'norms_version' => (string) ($version->version ?? ''),
             'status' => strtoupper((string) ($version->status ?? 'BOOTSTRAP')),
+            'published_at' => optional($version->published_at)->toISOString(),
             'is_active' => (bool) ($version->is_active ?? false),
             'domains' => $domains,
             'facets' => $facets,

@@ -1,0 +1,21 @@
+{
+  "schema": "fap.big5.synergy_rule.v1",
+  "synergy_id": "a_x_n_relational_recovery",
+  "title": "关系让步 × 情绪恢复",
+  "components": ["A", "N"],
+  "trigger": {"always": true},
+  "priority_weight_formula": "abs(A-50)+abs(N-50)+abs(A-N)*0.5",
+  "priority_hint": 30,
+  "mutex_group": "fallback_a_n",
+  "mutual_excludes": [],
+  "max_show": 3,
+  "section_targets": [{"section_key": "core_portrait", "slot": "composite", "kind": "callout"}],
+  "copy": {
+    "headline": "你如何顾及关系，会改变压力在关系里如何累积和恢复。",
+    "body": "宜人性影响让步、信任和冲突方式，情绪性影响摩擦之后的内部反应与恢复速度。两者共同决定你会直接处理、内部消化，还是延后表达。",
+    "strength_sentence": "同时看这两个维度，可以区分真正的平和、策略性克制和带成本的压抑。",
+    "risk_sentence": "只看表面合作可能忽略内部负荷，只看情绪反应也可能忽略关系中的真实边界选择。",
+    "context_boundary": "这组关系在持续合作、亲密关系和边界协商中更明显；一次性低投入互动未必能看出来。",
+    "action_hook": "复盘时同时记录你表达了什么、没有表达什么，以及之后用了多久恢复。"
+  }
+}

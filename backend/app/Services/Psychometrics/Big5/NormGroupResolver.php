@@ -17,7 +17,7 @@ class NormGroupResolver
         $ageBand = $this->resolveAgeBand($ctx);
 
         $candidates = $this->buildDbCandidates($locale, $gender, $ageBand);
-        foreach ($candidates as $groupId) {
+        foreach ($candidates as $candidateIndex => $groupId) {
             $hit = $this->repository->resolveDbGroup($scaleCode, $groupId);
             if ($hit === null) {
                 continue;
@@ -32,6 +32,16 @@ class NormGroupResolver
                 'source_id' => (string) ($hit['source_id'] ?? ''),
                 'source_type' => (string) ($hit['source_type'] ?? ''),
                 'origin' => 'db',
+                'match_type' => $candidateIndex <= 1 ? 'exact' : 'fallback',
+                'sample_n' => $this->minimumSample((array) ($hit['domains'] ?? [])),
+                'published_at' => (string) ($hit['published_at'] ?? ''),
+                'selected_group' => [
+                    'locale' => (string) ($hit['locale'] ?? $locale),
+                    'region' => (string) ($hit['region'] ?? $region),
+                    'gender' => (string) ($hit['gender'] ?? 'ALL'),
+                    'age_min' => (int) ($hit['age_min'] ?? 0),
+                    'age_max' => (int) ($hit['age_max'] ?? 0),
+                ],
                 'domains' => (array) ($hit['domains'] ?? []),
                 'facets' => (array) ($hit['facets'] ?? []),
                 'context' => [
@@ -243,6 +253,8 @@ class NormGroupResolver
             }
         }
 
+        $selectedGroup = is_array($groups[$domainGroupId] ?? null) ? $groups[$domainGroupId] : [];
+
         return [
             'group_id' => $domainGroupId !== '' ? $domainGroupId : ($facetGroupId !== '' ? $facetGroupId : 'global_all'),
             'status' => $status,
@@ -250,10 +262,33 @@ class NormGroupResolver
             'facet_group_id' => $facetGroupId,
             'norms_version' => $normsVersion,
             'source_id' => $sourceId,
-            'source_type' => '',
+            'source_type' => (string) ($selectedGroup['source_type'] ?? ''),
+            'match_type' => $domainGroupId === 'global_all'
+                ? 'global'
+                : ($domainGroupId !== '' && strtolower($domainGroupId) === strtolower((string) ($candidates[0] ?? '')) ? 'exact' : 'fallback'),
+            'sample_n' => $this->minimumSample($domains),
+            'published_at' => (string) ($selectedGroup['published_at'] ?? ''),
+            'selected_group' => [
+                'locale' => (string) ($selectedGroup['locale'] ?? ''),
+                'region' => (string) ($selectedGroup['region'] ?? $selectedGroup['country'] ?? ''),
+                'gender' => (string) ($selectedGroup['gender'] ?? 'ALL'),
+                'age_min' => (int) ($selectedGroup['age_min'] ?? 0),
+                'age_max' => (int) ($selectedGroup['age_max'] ?? 0),
+            ],
             'domains' => $domains,
             'facets' => $facets,
         ];
+    }
+
+    /** @param array<string,array<string,mixed>> $rows */
+    private function minimumSample(array $rows): int
+    {
+        $samples = array_values(array_filter(array_map(
+            static fn (mixed $row): int => is_array($row) ? (int) ($row['sample_n'] ?? 0) : 0,
+            $rows,
+        ), static fn (int $sample): bool => $sample > 0));
+
+        return $samples === [] ? 0 : min($samples);
     }
 
     private function buildCompiledCandidates(string $locale, string $country, string $ageBand, string $gender): array

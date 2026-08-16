@@ -19,6 +19,6 @@ final class SynergyResolutionService
      */
     public function resolve(array $candidates, int $maxShow = 2): array
     {
-        return $this->mutexResolver->resolve($candidates, max(0, min(2, $maxShow)));
+        return $this->mutexResolver->resolve($candidates, max(0, min(3, $maxShow)));
     }
 }

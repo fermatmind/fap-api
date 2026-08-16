@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Services\BigFive\ReportEngine\Resolver;
 
 use App\Services\BigFive\ReportEngine\Contracts\ActionRuleMatch;
+use App\Services\BigFive\ReportEngine\Contracts\FacetAnomalyMatch;
 use App\Services\BigFive\ReportEngine\Contracts\ReportContext;
+use App\Services\BigFive\ReportEngine\Contracts\SynergyMatch;
 
 final class ActionMatrixResolver
 {
@@ -19,7 +21,7 @@ final class ActionMatrixResolver
      * @param  array<string,mixed>  $registry
      * @return array<string,mixed>
      */
-    public function resolve(ReportContext $context, array $registry): array
+    public function resolve(ReportContext $context, array $registry, array $qualityPolicy = [], array $synergies = [], array $facetAnomalies = []): array
     {
         $selectedByScenario = [];
         foreach (self::SCENARIO_ORDER as $scenario) {
@@ -31,7 +33,7 @@ final class ActionMatrixResolver
             $selectedByScenario[$scenario] = [
                 'scenario_key' => $scenario,
                 'title' => (string) ($pack['scenario_title'] ?? $scenario),
-                'selected_rules' => $this->selectScenarioRules($context, $scenario, $pack['rules']),
+                'selected_rules' => $this->selectScenarioRules($context, $scenario, $pack['rules'], (array) ($pack['bucket_details'] ?? []), $qualityPolicy, $synergies, $facetAnomalies),
             ];
         }
 
@@ -40,6 +42,7 @@ final class ActionMatrixResolver
         return [
             'scenarios' => array_values($selectedByScenario),
             'top_priority_scenario' => $this->topPriorityScenario($selectedByScenario),
+            'top_priority_reason' => (string) ($qualityPolicy['action_priority_reason'] ?? ''),
             'caps' => [
                 'per_scenario_per_bucket' => 1,
                 'per_scenario' => 4,
@@ -52,7 +55,7 @@ final class ActionMatrixResolver
      * @param  list<array<string,mixed>>  $rules
      * @return array<string,ActionRuleMatch|null>
      */
-    private function selectScenarioRules(ReportContext $context, string $scenario, array $rules): array
+    private function selectScenarioRules(ReportContext $context, string $scenario, array $rules, array $bucketDetails, array $qualityPolicy, array $synergies, array $facetAnomalies): array
     {
         $candidatesByBucket = array_fill_keys(self::BUCKET_ORDER, []);
         foreach ($rules as $rule) {
@@ -60,8 +63,17 @@ final class ActionMatrixResolver
                 continue;
             }
 
-            $match = $this->matchRule($context, $scenario, $rule);
+            $bucket = (string) ($rule['bucket'] ?? '');
+            $defaults = is_array($bucketDetails[$bucket] ?? null) ? $bucketDetails[$bucket] : [];
+            $match = $this->matchRule($context, $scenario, array_merge($defaults, $rule), $synergies, $facetAnomalies);
             if (! $match instanceof ActionRuleMatch || ! array_key_exists($match->bucket, $candidatesByBucket)) {
+                continue;
+            }
+            $allowedBuckets = array_values(array_map('strval', is_array($qualityPolicy['allowed_action_buckets'] ?? null) ? $qualityPolicy['allowed_action_buckets'] : self::BUCKET_ORDER));
+            if (! in_array($match->bucket, $allowedBuckets, true)) {
+                continue;
+            }
+            if (($qualityPolicy['low_risk_actions_only'] ?? false) === true && $match->difficultyLevel !== 'low') {
                 continue;
             }
 
@@ -81,7 +93,7 @@ final class ActionMatrixResolver
     /**
      * @param  array<string,mixed>  $rule
      */
-    private function matchRule(ReportContext $context, string $scenario, array $rule): ?ActionRuleMatch
+    private function matchRule(ReportContext $context, string $scenario, array $rule, array $synergies, array $facetAnomalies): ?ActionRuleMatch
     {
         $traitCode = (string) ($rule['trait_code'] ?? '');
         $percentile = $context->domainPercentile($traitCode);
@@ -105,7 +117,34 @@ final class ActionMatrixResolver
             title: (string) ($rule['title'] ?? ''),
             body: (string) ($rule['body'] ?? ''),
             priorityWeight: (int) ($rule['priority_weight'] ?? 0),
+            whyRecommended: (string) ($rule['why_recommended'] ?? ''),
+            completionSignal: (string) ($rule['completion_signal'] ?? ''),
+            evidence: [[
+                'type' => 'domain_percentile',
+                'code' => $traitCode,
+                'percentile' => $percentile,
+            ]],
+            relatedInsightRuleIds: $this->relatedSynergyIds($traitCode, $synergies),
+            relatedFacetRuleIds: $this->relatedFacetRuleIds($traitCode, $facetAnomalies),
         );
+    }
+
+    /** @param list<SynergyMatch> $synergies @return list<string> */
+    private function relatedSynergyIds(string $traitCode, array $synergies): array
+    {
+        return array_values(array_map(
+            static fn (SynergyMatch $match): string => $match->synergyId,
+            array_filter($synergies, static fn (mixed $match): bool => $match instanceof SynergyMatch && in_array($traitCode, $match->components, true)),
+        ));
+    }
+
+    /** @param list<FacetAnomalyMatch> $facetAnomalies @return list<string> */
+    private function relatedFacetRuleIds(string $traitCode, array $facetAnomalies): array
+    {
+        return array_values(array_map(
+            static fn (FacetAnomalyMatch $match): string => $match->ruleId,
+            array_filter($facetAnomalies, static fn (mixed $match): bool => $match instanceof FacetAnomalyMatch && $match->domainCode === $traitCode),
+        ));
     }
 
     private function compareMatches(ActionRuleMatch $left, ActionRuleMatch $right): int

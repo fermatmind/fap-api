@@ -1,98 +1,322 @@
 {
-  "schema": "fap.big5.report_registry_manifest.v1",
-  "registry_id": "BIG5_OCEAN_v2_report_engine_pr3c_en",
-  "scale_code": "BIG5_OCEAN",
-  "version": "v2",
-  "locale": "en",
-  "scope": "PR3C scenario-bound action matrix rollout; all 5 traits keep PR2 atomic/modifier coverage, PR3A five synergy rollout and PR3B facet precision remain unchanged, action rules now cover four scenario-bound packs",
-  "runtime_contract": "fap.big5.report.v1",
-  "section_skeleton": [
-    "hero_summary",
-    "domains_overview",
-    "domain_deep_dive",
-    "facet_details",
-    "core_portrait",
-    "norms_comparison",
-    "action_plan",
-    "methodology_and_access"
-  ],
-  "traits_in_scope": [
-    "O",
-    "C",
-    "E",
-    "A",
-    "N"
-  ],
-  "coverage": {
-    "atomic_traits": [
-      "O",
-      "C",
-      "E",
-      "A",
-      "N"
+    "schema": "fap.big5.report_registry_manifest.v1",
+    "registry_id": "BIG5_OCEAN_private_result_canonical_en",
+    "scale_code": "BIG5_OCEAN",
+    "locale": "en",
+    "version": "v2",
+    "scope": "Canonical English private Big Five result authority",
+    "runtime_contract": "fap.big5.report.v1",
+    "section_skeleton": [
+        "hero_summary",
+        "domains_overview",
+        "domain_deep_dive",
+        "facet_details",
+        "core_portrait",
+        "norms_comparison",
+        "action_plan",
+        "methodology_and_access"
     ],
-    "atomic_bands_per_trait": [
-      "low",
-      "mid",
-      "high"
+    "traits_in_scope": [
+        "O",
+        "C",
+        "E",
+        "A",
+        "N"
     ],
-    "modifier_traits": [
-      "O",
-      "C",
-      "E",
-      "A",
-      "N"
-    ],
-    "modifier_gradients_per_trait": 5,
-    "synergies": [
-      "n_high_x_e_low",
-      "o_high_x_c_low",
-      "o_high_x_n_high",
-      "c_high_x_n_high",
-      "e_high_x_a_low"
-    ],
-    "facet_precision_traits": [
-      "O",
-      "C",
-      "E",
-      "A",
-      "N"
-    ],
-    "action_rule_scope": "scenario-bound action matrix",
-    "action_rule_scenarios": [
-      "workplace",
-      "relationships",
-      "stress_recovery",
-      "personal_growth"
-    ],
-    "action_rule_count": 28,
-    "action_rule_counts_by_scenario": {
-      "workplace": 8,
-      "relationships": 8,
-      "stress_recovery": 6,
-      "personal_growth": 6
+    "compiler": {
+        "schema": "fap.big5.private_result.compiler.v1",
+        "version": "1.0.0"
     },
-    "action_matrix_caps": {
-      "per_scenario_per_bucket": 1,
-      "per_scenario": 4,
-      "per_report": 12
-    },
-    "facet_glossary_traits": [
-      "O",
-      "C",
-      "E",
-      "A",
-      "N"
+    "source_files": [
+        {
+            "path": "action_rules/personal_growth.json",
+            "sha256": "793a79308e89aadeef5ca7f15b5d8ae8df387968ffbf40b6e59afe610bbdf269"
+        },
+        {
+            "path": "action_rules/relationships.json",
+            "sha256": "2ab7a603c66607c813af04d77a8569f189781d544a264ae5c142d76d33dc466d"
+        },
+        {
+            "path": "action_rules/stress_recovery.json",
+            "sha256": "abe5a63bb95ff2c0dda05031cb17dd057c6b83b47c1666a8f21d222f80fac09a"
+        },
+        {
+            "path": "action_rules/workplace.json",
+            "sha256": "46e326e463af4af400a458a6706858ef669544292bff063582d0db7b3cfc088c"
+        },
+        {
+            "path": "atomic/A.json",
+            "sha256": "50de0780048daea9255de89bc7c345d8b26b5c0ff97e6f7b1cdb906baefbfa8e"
+        },
+        {
+            "path": "atomic/C.json",
+            "sha256": "8693512885a89fb029da4073eedcc674e927c356767510310dd58834bdf690b9"
+        },
+        {
+            "path": "atomic/E.json",
+            "sha256": "a79b9466ab946c09840f552af24ae119fee018977c9b3f34be21ba261066d2b5"
+        },
+        {
+            "path": "atomic/N.json",
+            "sha256": "e5a781a4dcfaa793340f775b77dbf90ea4ca7ea0553901d79bc91be65a0d3503"
+        },
+        {
+            "path": "atomic/O.json",
+            "sha256": "149ab17c92273d1a62e8472c789c5be8bc21282a62e4bcae4bbb5cd7a5be934c"
+        },
+        {
+            "path": "facet_glossary/A.json",
+            "sha256": "fe356719cb842a58fe68efb749f2d48ef71b16702caad85dd09d4e2d6f160892"
+        },
+        {
+            "path": "facet_glossary/C.json",
+            "sha256": "92f105d3fc9775f87085fe0e551d41ce2d6259bb77e5f9f0a856c4af135e8a32"
+        },
+        {
+            "path": "facet_glossary/E.json",
+            "sha256": "b67b11492a9d58a5e1c1337f3f305c2ba33962f4277d019cf086bb9c0ab8152a"
+        },
+        {
+            "path": "facet_glossary/N.json",
+            "sha256": "d97134db47421dd7c45e1dc5e7418af80ba95f55fd54b492a27564559f52a903"
+        },
+        {
+            "path": "facet_glossary/O.json",
+            "sha256": "34ac4eef4f548fb02f098bebb7b50e469fd23a7ac15c7b5c58ab0f43b0d2ed11"
+        },
+        {
+            "path": "facet_precision/A.json",
+            "sha256": "8cc0f06bd6fab95ef1ff47f638868484efadd46443f2368c9a2976c51a58c9e6"
+        },
+        {
+            "path": "facet_precision/C.json",
+            "sha256": "930a60529f4099bf4c3d36730e653456219d776aad6fccafa68cd77120a5d473"
+        },
+        {
+            "path": "facet_precision/E.json",
+            "sha256": "2938ee129fae6d9fd240a9bd574c61466d9c7f2a8a5309f1e6096b15bc5197ad"
+        },
+        {
+            "path": "facet_precision/N.json",
+            "sha256": "1fdc975831dbb3c91b4bbbffaa95e03d8dae864c49a230ac8e9775e1dbe424b9"
+        },
+        {
+            "path": "facet_precision/O.json",
+            "sha256": "c1aae99246717c4701cc0b0b19eede216687c7a53b2b6b98b716725fc2be1f98"
+        },
+        {
+            "path": "modifiers/A.json",
+            "sha256": "d0c6e3fb3a6c74d807a3387fdf44037ac033986d098752eca6b279519a52e7d1"
+        },
+        {
+            "path": "modifiers/C.json",
+            "sha256": "e34496d62688c8c6d944b7e9d666bf66cb2f23f0371d1c6f73b08a99bf7d7f20"
+        },
+        {
+            "path": "modifiers/E.json",
+            "sha256": "9699cc15ad442846e2873f6e2da68a2851ebf4b23bc84373437efdb19ecd9124"
+        },
+        {
+            "path": "modifiers/N.json",
+            "sha256": "aa8bee5ec33dc2cc24d3d267daf0ee8f228fb4509072163c1a46f50bdd093204"
+        },
+        {
+            "path": "modifiers/O.json",
+            "sha256": "564f24820a55dbc3521de15d98ed43d6070bfe1771208b52c0f91b13954e0f93"
+        },
+        {
+            "path": "shared/band_labels.json",
+            "sha256": "eff9ba1a9034678302f4a56052fa310dea5d7fad8ee7a18b7716409618e89342"
+        },
+        {
+            "path": "shared/compare_phrases.json",
+            "sha256": "3b017c77904f84e28bfa1ace853db106312e8cf599289aa963f3dff48ecba949"
+        },
+        {
+            "path": "shared/gradient_labels.json",
+            "sha256": "e3a4fea612bf3541ea394a337e4e0423f3c0c6c636ca522d6dc8977c8bbde4a9"
+        },
+        {
+            "path": "shared/methodology.json",
+            "sha256": "6508091b15d852ed47ae49fafe664d4a7c8517bee25fcf4ae52030018c304c3b"
+        },
+        {
+            "path": "shared/report_policy.json",
+            "sha256": "44ce1047c8c01762db6efe8bac4beb35c23dfaca6a52bd96a3adadf0ada5ca21"
+        },
+        {
+            "path": "shared/runtime_copy.json",
+            "sha256": "bb821b42f528ac144ec808b1a1243cad9393d4b21f61f4d69afc358a67b1c5e0"
+        },
+        {
+            "path": "shared/section_headlines.json",
+            "sha256": "fe05cf2edf8d833b60a72b1ac1b8ec1b472eac5472657613e2f006596bf43772"
+        },
+        {
+            "path": "shared/trait_labels.json",
+            "sha256": "5cdf6f73d1a2016266d9da6baf42efa0bedd7eb776140f1db410e6519fd7d783"
+        },
+        {
+            "path": "synergies/a_x_n_relational_recovery.json",
+            "sha256": "c4cce1fc64b6a2d28f554829ab24670e57d2ba6c337a94c8ef9e39fd0878c8da"
+        },
+        {
+            "path": "synergies/c_high_x_n_high.json",
+            "sha256": "ca5a5bba736df186cc10fc8bedeec54f3213e61139cb3f3e0a9bdf8496f36f92"
+        },
+        {
+            "path": "synergies/c_x_n_load_balance.json",
+            "sha256": "9eb4a8052e3c36bc328569bcfbede7cf1f3d8790473b3de8a8c2605e710138ac"
+        },
+        {
+            "path": "synergies/e_high_x_a_low.json",
+            "sha256": "2bf0a5bd199f6c96d84e12dad80b5f0ac50f285dcee1d6f4c4d90b2015c24e56"
+        },
+        {
+            "path": "synergies/e_x_a_social_balance.json",
+            "sha256": "e4d4607d73c476b7f97f4d3b2a19621433cc165ea5bd3ec7d5472b070d260a5d"
+        },
+        {
+            "path": "synergies/n_high_x_e_low.json",
+            "sha256": "86325de69f314238171f5986bf7b1025487977c2ed1d0550e4a291612ccdb604"
+        },
+        {
+            "path": "synergies/o_high_x_c_low.json",
+            "sha256": "32ea610bbd0c501a09aa923864678dd3efd7132192774d7e4833b4141f873f7b"
+        },
+        {
+            "path": "synergies/o_high_x_n_high.json",
+            "sha256": "e58bcf84b571ad913e2363994fb46c69ddb6958ccaf18069af185b69818084a7"
+        },
+        {
+            "path": "synergies/o_x_c_operating_balance.json",
+            "sha256": "94d3d69118182a0843731852ad34bec9ac7c629734c381c35bf0328c186b5886"
+        },
+        {
+            "path": "synergies/o_x_e_exploration_expression.json",
+            "sha256": "ab1b197363e288c53c165236de65c4115d726f9c9f9e941a298be27bc65ec8d8"
+        }
     ],
-    "facet_glossary_entries": 30,
-    "facet_precision_rules": 22,
-    "facet_precision_caps": {
-      "per_domain": 2,
-      "per_report": 6,
-      "standout_render_cards": 3
-    }
-  },
-  "fixtures": [
-    "fixtures/canonical_n_slice_sensitive_independent.context.json"
-  ]
+    "source_hash": "560703c2450c5a78389a61fa6823c7ff268998a702e0089e553b3a4b7b043390",
+    "locale_source_hashes": {
+        "zh-CN": "31b678b9e1e2182f92bc4186dc27060bdfbc182c2127cb9645104d014a54f907",
+        "en": "560703c2450c5a78389a61fa6823c7ff268998a702e0089e553b3a4b7b043390"
+    },
+    "coverage": {
+        "atomic_traits": [
+            "O",
+            "C",
+            "E",
+            "A",
+            "N"
+        ],
+        "atomic_bands_per_trait": [
+            "low",
+            "mid",
+            "high"
+        ],
+        "traits": [
+            "O",
+            "C",
+            "E",
+            "A",
+            "N"
+        ],
+        "bands": [
+            "low",
+            "mid",
+            "high"
+        ],
+        "facet_count": 30,
+        "modifier_traits": [
+            "O",
+            "C",
+            "E",
+            "A",
+            "N"
+        ],
+        "modifier_gradients_per_trait": 5,
+        "near_boundary": true,
+        "synergies": [
+            "a_x_n_relational_recovery",
+            "c_high_x_n_high",
+            "c_x_n_load_balance",
+            "e_high_x_a_low",
+            "e_x_a_social_balance",
+            "n_high_x_e_low",
+            "o_high_x_c_low",
+            "o_high_x_n_high",
+            "o_x_c_operating_balance",
+            "o_x_e_exploration_expression"
+        ],
+        "synergy_count": 10,
+        "facet_precision_traits": [
+            "O",
+            "C",
+            "E",
+            "A",
+            "N"
+        ],
+        "action_rule_scope": "scenario-bound action matrix",
+        "action_rule_scenarios": [
+            "workplace",
+            "relationships",
+            "stress_recovery",
+            "personal_growth"
+        ],
+        "action_scenarios": [
+            "workplace",
+            "relationships",
+            "stress_recovery",
+            "personal_growth"
+        ],
+        "action_rule_count": 28,
+        "action_rule_counts_by_scenario": {
+            "workplace": 8,
+            "relationships": 8,
+            "stress_recovery": 6,
+            "personal_growth": 6
+        },
+        "action_matrix_caps": {
+            "per_scenario_per_bucket": 1,
+            "per_scenario": 4,
+            "per_report": 12
+        },
+        "facet_glossary_traits": [
+            "O",
+            "C",
+            "E",
+            "A",
+            "N"
+        ],
+        "facet_glossary_entries": 30,
+        "facet_precision_rules": 22,
+        "facet_precision_caps": {
+            "per_domain": 2,
+            "per_report": 6,
+            "standout_render_cards": 3
+        },
+        "quality_states": [
+            "valid",
+            "low_quality",
+            "norm_unavailable"
+        ],
+        "access_levels": [
+            "free",
+            "full"
+        ],
+        "secondary_surfaces": [
+            "faq",
+            "lifecycle",
+            "share",
+            "pdf",
+            "print",
+            "history",
+            "compare"
+        ]
+    },
+    "fixtures": [
+        "fixtures/canonical_n_slice_sensitive_independent.context.json",
+        "fixtures/quality_d_common_profile.context.json"
+    ]
 }

@@ -32,6 +32,13 @@ final class BigFivePrivateResultAuthorityRuntimeTest extends TestCase
         $this->assertSame('canonical', $authority['mode'] ?? null);
         $this->assertMatchesRegularExpression('/\A[0-9a-f]{64}\z/', (string) ($authority['source_hash'] ?? ''));
         $this->assertMatchesRegularExpression('/\A[0-9a-f]{64}\z/', (string) ($authority['compiled_hash'] ?? ''));
+        $this->assertNotEmpty(data_get($first, 'report.quality.confidence_mode'));
+        $this->assertNotEmpty(data_get($first, 'report.quality.tone_level'));
+        $this->assertCount(3, (array) data_get($first, 'report.composite_insights', []));
+        $this->assertIsArray(data_get($first, 'report.facet_deviations'));
+        $this->assertNotEmpty(data_get($first, 'report.norms.evidence_status'));
+        $this->assertIsArray(data_get($first, 'report.action_matrix.scenarios'));
+        $this->assertNotEmpty(data_get($first, 'report.report_snapshot_identity.attempt_id'));
 
         $fixture['attempt']->forceFill(['dir_version' => 'retired-result-body-must-not-select'])->save();
         $second = $composer->composeVariant($fixture['attempt']->fresh(), $fixture['result'], ReportAccess::VARIANT_FULL);

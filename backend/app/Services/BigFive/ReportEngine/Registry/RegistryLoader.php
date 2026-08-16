@@ -16,6 +16,11 @@ final class RegistryLoader
         'o_high_x_n_high',
         'c_high_x_n_high',
         'e_high_x_a_low',
+        'o_x_c_operating_balance',
+        'e_x_a_social_balance',
+        'c_x_n_load_balance',
+        'o_x_e_exploration_expression',
+        'a_x_n_relational_recovery',
     ];
 
     public function __construct(
@@ -49,6 +54,7 @@ final class RegistryLoader
             'manifest' => $this->readJson($root.'/manifest.json'),
             'fixtures' => [
                 'canonical_n_slice_sensitive_independent' => $this->readJson($root.'/fixtures/canonical_n_slice_sensitive_independent.context.json'),
+                'quality_d_common_profile' => $this->readJson($root.'/fixtures/quality_d_common_profile.context.json'),
             ],
             'atomic' => $atomic,
             'modifiers' => $modifiers,
@@ -69,6 +75,7 @@ final class RegistryLoader
                 'band_labels' => $this->readJson($root.'/shared/band_labels.json'),
                 'gradient_labels' => $this->readJson($root.'/shared/gradient_labels.json'),
                 'runtime_copy' => $this->readJson($root.'/shared/runtime_copy.json'),
+                'report_policy' => $this->readJson($root.'/shared/report_policy.json'),
             ],
         ];
     }
@@ -122,6 +129,7 @@ final class RegistryLoader
                 'band_labels' => $read('shared/band_labels.json'),
                 'gradient_labels' => $read('shared/gradient_labels.json'),
                 'runtime_copy' => $read('shared/runtime_copy.json'),
+                'report_policy' => $read('shared/report_policy.json'),
             ],
         ];
     }

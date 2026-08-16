@@ -1,0 +1,21 @@
+{
+  "schema": "fap.big5.synergy_rule.v1",
+  "synergy_id": "c_x_n_load_balance",
+  "title": "执行结构 × 压力负荷",
+  "components": ["C", "N"],
+  "trigger": {"always": true},
+  "priority_weight_formula": "abs(C-50)+abs(N-50)+abs(C-N)*0.5",
+  "priority_hint": 34,
+  "mutex_group": "fallback_c_n",
+  "mutual_excludes": ["c_high_x_n_high"],
+  "max_show": 3,
+  "section_targets": [{"section_key": "core_portrait", "slot": "composite", "kind": "callout"}],
+  "copy": {
+    "headline": "推进能力和推进时承受的内部负荷，需要同时解读。",
+    "body": "尽责性影响计划、坚持和完成，情绪性影响不确定、错误与压力在内部留下多大反应。相同的产出，可能对应完全不同的恢复成本。",
+    "strength_sentence": "同时看见执行与负荷，可以把可靠表现和可持续表现区分开。",
+    "risk_sentence": "只看完成结果，可能忽略高压维持；只看压力反应，也可能低估已经存在的结构能力。",
+    "context_boundary": "这组关系在截止期、责任模糊和连续高负荷时期更明显；在可控节奏下可能不突出。",
+    "action_hook": "行动建议应同时记录完成信号与恢复成本，而不是只追踪产出。"
+  }
+}

@@ -37,23 +37,29 @@ final class SectionInstructionAssembler
      * @param  array<string,mixed>  $registry
      * @return list<ResolvedSection>
      */
-    public function assemble(ReportContext $context, array $blocksBySection, array $synergies, array $facetAnomalies, array $actionMatrix, array $registry): array
+    public function assemble(ReportContext $context, array $blocksBySection, array $synergies, array $facetAnomalies, array $actionMatrix, array $qualityPolicy, array $normEvidence, array $registry): array
     {
-        $blocksBySection['action_plan'] = $this->actionPlanBlocks($actionMatrix, $registry);
+        $blocksBySection['action_plan'] = $this->actionPlanBlocks($actionMatrix, $qualityPolicy, $registry);
 
-        foreach (array_slice($synergies, 0, 2) as $index => $synergy) {
-            $sectionKey = $index === 0 ? 'core_portrait' : 'action_plan';
-            $slot = $index === 0 ? 'synergy_primary' : 'synergy_action';
+        if (($qualityPolicy['prominent_notice'] ?? false) === true) {
+            $notice = $this->qualityNoticeBlock($qualityPolicy, 'hero');
+            array_unshift($blocksBySection['hero_summary'], $notice);
+            array_unshift($blocksBySection['domain_deep_dive'], $this->qualityNoticeBlock($qualityPolicy, 'body_entry'));
+        }
+
+        foreach (array_slice($synergies, 0, 3) as $index => $synergy) {
+            $sectionKey = 'core_portrait';
+            $slot = 'composite_'.($index + 1);
             $blocksBySection[$sectionKey][] = new ResolvedBlock(
                 blockUid: "{$sectionKey}.synergy.{$synergy->synergyId}.{$slot}",
-                kind: $index === 0 ? 'callout' : 'paragraph',
+                kind: 'callout',
                 component: 'BigFiveSynergyCallout',
                 blockId: "synergy_{$synergy->synergyId}_{$slot}",
-                resolvedCopy: $synergy->copy,
+                resolvedCopy: $this->compositeCopy($context, $synergy, $qualityPolicy),
                 provenance: $this->provenanceRecorder->record(synergyRefs: ["synergies/{$synergy->synergyId}.json"]),
                 analytics: [
                     'synergy_id' => $synergy->synergyId,
-                    'synergy_rank' => $index === 0 ? 'primary' : 'secondary',
+                    'synergy_rank' => $index + 1,
                     'slot' => $slot,
                     'priority_weight' => $synergy->priorityWeight,
                 ],
@@ -61,6 +67,7 @@ final class SectionInstructionAssembler
         }
 
         $blocksBySection['facet_details'] = $this->facetDetailsBlocks($context, $facetAnomalies, $registry);
+        array_unshift($blocksBySection['norms_comparison'], $this->normEvidenceBlock($normEvidence));
 
         $methodology = is_array($registry['shared']['methodology'] ?? null) ? $registry['shared']['methodology'] : [];
         if ($methodology !== []) {
@@ -77,7 +84,10 @@ final class SectionInstructionAssembler
 
         $sections = [];
         foreach (self::SECTION_KEYS as $sectionKey) {
-            $blocks = $blocksBySection[$sectionKey] ?? [];
+            $blocks = array_map(
+                fn (ResolvedBlock $block): ResolvedBlock => $this->withConfidence($block, $qualityPolicy),
+                $blocksBySection[$sectionKey] ?? [],
+            );
             $sections[] = new ResolvedSection(
                 sectionKey: $sectionKey,
                 status: $blocks === [] ? 'not_populated_in_pr1' : 'populated',
@@ -92,7 +102,7 @@ final class SectionInstructionAssembler
      * @param  array<string,mixed>  $actionMatrix
      * @return list<ResolvedBlock>
      */
-    private function actionPlanBlocks(array $actionMatrix, array $registry): array
+    private function actionPlanBlocks(array $actionMatrix, array $qualityPolicy, array $registry): array
     {
         $copy = is_array($registry['shared']['runtime_copy'] ?? null) ? $registry['shared']['runtime_copy'] : [];
         $scenarios = is_array($actionMatrix['scenarios'] ?? null) ? $actionMatrix['scenarios'] : [];
@@ -114,7 +124,7 @@ final class SectionInstructionAssembler
                 blockId: 'action_matrix_intro_v1',
                 resolvedCopy: [
                     'title' => (string) data_get($copy, 'action_matrix.intro.title', ''),
-                    'body' => (string) data_get($copy, 'action_matrix.intro.body', ''),
+                    'body' => (string) ($qualityPolicy['action_intro_body'] ?? data_get($copy, 'action_matrix.intro.body', '')),
                 ],
                 provenance: $this->provenanceRecorder->record(actionRefs: ['action_rules/*']),
                 analytics: ['slot' => 'action_matrix_intro'],
@@ -130,6 +140,7 @@ final class SectionInstructionAssembler
                 resolvedCopy: [
                     'title' => (string) data_get($copy, 'action_matrix.priority_prefix', '').(string) ($topScenarioPayload['title'] ?? $topScenario),
                     'body' => (string) data_get($copy, 'action_matrix.priority_body', ''),
+                    'why_priority' => (string) ($actionMatrix['top_priority_reason'] ?? $qualityPolicy['action_priority_reason'] ?? ''),
                     'scenario_key' => $topScenario,
                 ],
                 provenance: $this->provenanceRecorder->record(actionRefs: ["action_rules/{$topScenario}.json"]),
@@ -160,6 +171,13 @@ final class SectionInstructionAssembler
                     'body' => (string) ($rule['body'] ?? ''),
                     'difficulty_level' => (string) ($rule['difficulty_level'] ?? ''),
                     'time_horizon' => (string) ($rule['time_horizon'] ?? ''),
+                    'time_horizon_label' => (string) data_get($registry, 'shared.report_policy.action_labels.time_horizons.'.(string) ($rule['time_horizon'] ?? ''), ''),
+                    'difficulty_label' => (string) data_get($registry, 'shared.report_policy.action_labels.difficulty_levels.'.(string) ($rule['difficulty_level'] ?? ''), ''),
+                    'why_recommended' => (string) ($rule['why_recommended'] ?? ''),
+                    'completion_signal' => (string) ($rule['completion_signal'] ?? ''),
+                    'evidence' => (array) ($rule['evidence'] ?? []),
+                    'related_insight_rule_ids' => (array) ($rule['related_insight_rule_ids'] ?? []),
+                    'related_facet_rule_ids' => (array) ($rule['related_facet_rule_ids'] ?? []),
                 ];
             }
             if ($items === []) {
@@ -330,5 +348,85 @@ final class SectionInstructionAssembler
             $percentile <= 79 => 'high_mid',
             default => 'high',
         };
+    }
+
+    /** @param array<string,mixed> $qualityPolicy */
+    private function qualityNoticeBlock(array $qualityPolicy, string $slot): ResolvedBlock
+    {
+        return new ResolvedBlock(
+            blockUid: "quality.notice.{$slot}",
+            kind: 'callout',
+            component: 'BigFiveQualityNotice',
+            blockId: "quality_notice_{$slot}",
+            resolvedCopy: [
+                'title' => (string) ($qualityPolicy['notice_title'] ?? ''),
+                'body' => (string) ($qualityPolicy['notice_body'] ?? ''),
+                'why' => (string) ($qualityPolicy['notice_why'] ?? ''),
+                'retest_label' => (string) ($qualityPolicy['retest_label'] ?? ''),
+                'grade' => (string) ($qualityPolicy['grade'] ?? 'UNKNOWN'),
+                'severity' => (string) ($qualityPolicy['notice_severity'] ?? 'warning'),
+            ],
+            provenance: $this->provenanceRecorder->record(['shared/report_policy.json']),
+            analytics: ['slot' => $slot, 'quality_grade' => (string) ($qualityPolicy['grade'] ?? 'UNKNOWN')],
+        );
+    }
+
+    /** @param array<string,mixed> $normEvidence */
+    private function normEvidenceBlock(array $normEvidence): ResolvedBlock
+    {
+        return new ResolvedBlock(
+            blockUid: 'norms_comparison.evidence',
+            kind: 'metric_card',
+            component: 'BigFiveNormEvidenceCard',
+            blockId: 'norm_evidence_v1',
+            resolvedCopy: $normEvidence,
+            provenance: $this->provenanceRecorder->record(['shared/report_policy.json']),
+            analytics: ['status' => (string) ($normEvidence['status'] ?? 'unavailable'), 'match_type' => (string) ($normEvidence['match_type'] ?? '')],
+        );
+    }
+
+    /** @return array<string,mixed> */
+    private function compositeCopy(ReportContext $context, SynergyMatch $synergy, array $qualityPolicy): array
+    {
+        $copy = $synergy->copy;
+        $evidence = [];
+        foreach ($synergy->components as $component) {
+            if (preg_match('/^[OCEAN]$/', $component) === 1) {
+                $evidence[] = ['type' => 'domain', 'code' => $component, 'percentile' => $context->domainPercentile($component), 'band' => $context->domainBand($component)];
+            } elseif ($context->hasFacetPercentile($component)) {
+                $evidence[] = ['type' => 'facet', 'code' => $component, 'percentile' => $context->facetPercentile($component)];
+            }
+        }
+
+        return [
+            'headline' => (string) ($copy['headline'] ?? $synergy->title),
+            'combination' => $synergy->components,
+            'evidence' => $evidence,
+            'mechanism' => (string) ($copy['mechanism'] ?? $copy['body'] ?? ''),
+            'strengths' => (string) ($copy['strengths'] ?? $copy['strength_sentence'] ?? ''),
+            'tradeoffs' => (string) ($copy['tradeoffs'] ?? $copy['risk_sentence'] ?? ''),
+            'context_boundary' => (string) ($copy['context_boundary'] ?? ''),
+            'action_bridge' => (string) ($copy['action_bridge'] ?? $copy['action_hook'] ?? ''),
+            'confidence' => (string) ($qualityPolicy['confidence_mode'] ?? 'low'),
+            'rule_id' => $synergy->synergyId,
+        ];
+    }
+
+    /** @param array<string,mixed> $qualityPolicy */
+    private function withConfidence(ResolvedBlock $block, array $qualityPolicy): ResolvedBlock
+    {
+        return new ResolvedBlock(
+            blockUid: $block->blockUid,
+            kind: $block->kind,
+            component: $block->component,
+            blockId: $block->blockId,
+            resolvedCopy: array_merge($block->resolvedCopy, [
+                'confidence_mode' => (string) ($qualityPolicy['confidence_mode'] ?? 'low'),
+                'tone_level' => (string) ($qualityPolicy['tone_level'] ?? 'cautious'),
+                'interpretation_qualifier' => (string) ($qualityPolicy['interpretation_qualifier'] ?? ''),
+            ]),
+            provenance: $block->provenance,
+            analytics: array_merge($block->analytics, ['quality_grade' => (string) ($qualityPolicy['grade'] ?? 'UNKNOWN')]),
+        );
     }
 }

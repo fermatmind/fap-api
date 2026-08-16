@@ -1,0 +1,21 @@
+{
+  "schema": "fap.big5.synergy_rule.v1",
+  "synergy_id": "o_x_c_operating_balance",
+  "title": "探索范围 × 推进结构",
+  "components": ["O", "C"],
+  "trigger": {"always": true},
+  "priority_weight_formula": "abs(O-50)+abs(C-50)+abs(O-C)*0.5",
+  "priority_hint": 32,
+  "mutex_group": "fallback_o_c",
+  "mutual_excludes": ["o_high_x_c_low"],
+  "max_show": 3,
+  "section_targets": [{"section_key": "core_portrait", "slot": "composite", "kind": "callout"}],
+  "copy": {
+    "headline": "你如何打开可能性，和你如何把可能性变成完成，是同一套工作方式的两端。",
+    "body": "开放性决定你愿意把问题展开到多宽，尽责性决定你会用多少结构收束、排序和完成。两者共同影响你在探索与落地之间的切换成本。",
+    "strength_sentence": "当探索范围与推进结构被有意识地配对时，你更容易既保留新意，又留下可交付结果。",
+    "risk_sentence": "只看其中一个维度，会漏掉想法很多但难收束，或执行稳定却过早关闭替代方案的可能。",
+    "context_boundary": "这组关系在开放式任务、长期项目和需要反复取舍的工作中更明显；在步骤固定的短任务中未必突出。",
+    "action_hook": "下一步应观察自己最常在哪个节点失去平衡：展开、选择、启动，还是收尾。"
+  }
+}

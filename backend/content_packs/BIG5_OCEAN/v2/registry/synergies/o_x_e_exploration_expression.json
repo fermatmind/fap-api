@@ -1,0 +1,21 @@
+{
+  "schema": "fap.big5.synergy_rule.v1",
+  "synergy_id": "o_x_e_exploration_expression",
+  "title": "内部探索 × 外部表达",
+  "components": ["O", "E"],
+  "trigger": {"always": true},
+  "priority_weight_formula": "abs(O-50)+abs(E-50)+abs(O-E)*0.5",
+  "priority_hint": 29,
+  "mutex_group": "fallback_o_e",
+  "mutual_excludes": [],
+  "max_show": 3,
+  "section_targets": [{"section_key": "core_portrait", "slot": "composite", "kind": "callout"}],
+  "copy": {
+    "headline": "产生新想法与把想法带进互动，是两条不同通道。",
+    "body": "开放性影响你在内部探索概念和经验的幅度，外向性影响你把这些内容多快、多频繁地带到外部交流。",
+    "strength_sentence": "区分探索与表达，能解释有些人想得很深却谨慎分享，也能解释边说边想的创造方式。",
+    "risk_sentence": "如果把表达量当作想法量，容易低估安静探索，或高估即时表达背后的成熟度。",
+    "context_boundary": "这组关系在创意协作、公开表达和陌生议题中更明显；独立完成的熟悉任务中影响较小。",
+    "action_hook": "选择与自己表达节奏匹配的输出方式，再检验想法是否真正被他人理解。"
+  }
+}

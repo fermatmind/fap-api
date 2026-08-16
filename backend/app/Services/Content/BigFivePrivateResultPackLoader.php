@@ -29,12 +29,14 @@ final class BigFivePrivateResultPackLoader
             && ! str_starts_with($normalizedLocale, 'en-')) {
             throw new UnsupportedRegistryLocale("Big Five report engine registry unavailable for locale: {$locale}");
         }
-        $registry = ($normalizedLocale === 'en' || str_starts_with($normalizedLocale, 'en-'))
-            ? (new RegistryLoader)->load($locale)
-            : RegistryLoader::fromCompiledAssets(
-                (array) ($compiled['assets'] ?? []),
-                (array) ($compiled['registry_manifest'] ?? []),
-            );
+        $isEnglish = $normalizedLocale === 'en' || str_starts_with($normalizedLocale, 'en-');
+        $assets = $isEnglish
+            ? (array) data_get($compiled, 'locale_assets.en', [])
+            : (array) ($compiled['assets'] ?? []);
+        $registry = RegistryLoader::fromCompiledAssets($assets, (array) ($compiled['registry_manifest'] ?? []));
+        $sourceHash = $isEnglish
+            ? (string) data_get($compiled, 'locale_source_hashes.en', '')
+            : (string) ($compiled['source_hash'] ?? '');
 
         return [
             'registry' => $registry,
@@ -42,7 +44,7 @@ final class BigFivePrivateResultPackLoader
                 'schema_version' => 'fap.big5.private_result_authority.v1',
                 'mode' => 'canonical',
                 'locale' => $locale !== '' ? $locale : 'zh-CN',
-                'source_hash' => (string) $compiled['source_hash'],
+                'source_hash' => $sourceHash,
                 'compiled_hash' => (string) $compiled['compiled_hash'],
             ],
         ];
@@ -95,7 +97,9 @@ final class BigFivePrivateResultPackLoader
             || ! hash_equals($sourceHash, strtolower(trim((string) ($registryManifest['source_hash'] ?? ''))))
             || preg_match('/\A[0-9a-f]{64}\z/', $sourceHash) !== 1
             || preg_match('/\A[0-9a-f]{64}\z/', $compiledHash) !== 1
-            || ! is_array($payload['assets'] ?? null)) {
+            || ! is_array($payload['assets'] ?? null)
+            || ! is_array(data_get($payload, 'locale_assets.en'))
+            || preg_match('/\A[0-9a-f]{64}\z/', (string) data_get($payload, 'locale_source_hashes.en', '')) !== 1) {
             throw new RuntimeException('BIG5_PRIVATE_RESULT_ACTIVE_ARTIFACT_CONTRACT_INVALID');
         }
 

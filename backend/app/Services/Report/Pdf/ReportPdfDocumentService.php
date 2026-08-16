@@ -374,6 +374,8 @@ final class ReportPdfDocumentService
             ?? data_get($result?->result_json, 'quality.level')
             ?? data_get($result?->result_json, 'normed_json.quality.level', '')
         )));
+        $qualityPolicy = is_array($report['quality'] ?? null) ? $report['quality'] : [];
+        $normEvidence = is_array($report['norms'] ?? null) ? $report['norms'] : [];
 
         $pdfBinary = $scaleCode === 'MBTI'
             ? $this->buildMbtiDocument($attempt, $result, $locked, $variant)
@@ -384,7 +386,9 @@ final class ReportPdfDocumentService
                 $variant,
                 $normsStatus,
                 $qualityLevel,
-                $sections
+                $sections,
+                $qualityPolicy,
+                $normEvidence,
             );
         $this->artifactStore->put($path, $pdfBinary);
 
@@ -941,6 +945,8 @@ final class ReportPdfDocumentService
 
     /**
      * @param  list<string>  $sections
+     * @param  array<string,mixed>  $qualityPolicy
+     * @param  array<string,mixed>  $normEvidence
      */
     private function buildDocument(
         string $attemptId,
@@ -949,7 +955,9 @@ final class ReportPdfDocumentService
         string $variant,
         string $normsStatus,
         string $qualityLevel,
-        array $sections
+        array $sections,
+        array $qualityPolicy = [],
+        array $normEvidence = [],
     ): string {
         $normalizedScale = strtoupper($scaleCode);
         $lines = [
@@ -966,6 +974,20 @@ final class ReportPdfDocumentService
         }
         if ($qualityLevel !== '') {
             $lines[] = 'Quality Level: '.strtoupper($qualityLevel);
+        }
+        foreach (['notice_title', 'notice_body', 'notice_why'] as $field) {
+            $value = trim((string) ($qualityPolicy[$field] ?? ''));
+            if ($value !== '') {
+                $lines[] = $value;
+            }
+        }
+        if (($normEvidence['comparison_allowed'] ?? false) === true) {
+            $lines[] = trim((string) ($normEvidence['sample_label'] ?? ''));
+            $lines[] = 'Norm version: '.trim((string) ($normEvidence['norm_version'] ?? ''));
+            $lines[] = 'Sample: '.(int) ($normEvidence['sample_n'] ?? 0);
+            $lines[] = trim((string) ($normEvidence['percentile_explanation'] ?? ''));
+        } else {
+            $lines[] = trim((string) ($normEvidence['unavailable_explanation'] ?? ''));
         }
         if ($sections !== []) {
             $lines[] = 'Sections: '.implode(', ', $sections);

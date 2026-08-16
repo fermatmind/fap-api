@@ -20,6 +20,11 @@ final class ActionRuleMatch
         public readonly string $title,
         public readonly string $body,
         public readonly int $priorityWeight = 0,
+        public readonly string $whyRecommended = '',
+        public readonly string $completionSignal = '',
+        public readonly array $evidence = [],
+        public readonly array $relatedInsightRuleIds = [],
+        public readonly array $relatedFacetRuleIds = [],
     ) {}
 
     /**
@@ -38,6 +43,11 @@ final class ActionRuleMatch
             'title' => $this->title,
             'body' => $this->body,
             'priority_weight' => $this->priorityWeight,
+            'why_recommended' => $this->whyRecommended,
+            'completion_signal' => $this->completionSignal,
+            'evidence' => $this->evidence,
+            'related_insight_rule_ids' => $this->relatedInsightRuleIds,
+            'related_facet_rule_ids' => $this->relatedFacetRuleIds,
         ];
     }
 }

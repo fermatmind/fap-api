@@ -2,6 +2,12 @@
   "schema": "fap.big5.action_rule_pack.v1",
   "scenario": "workplace",
   "scenario_title": "工作场景",
+  "bucket_details": {
+    "continue": {"why_recommended": "当前工作相关维度已有可复用的有效模式，保留它比额外增加新方法更有价值。", "completion_signal": "连续两次任务复盘都能指出这个做法具体帮助了哪一步。"},
+    "start": {"why_recommended": "当前分值命中了工作场景的启动或结构缺口，选择低成本动作可以快速获得反馈。", "completion_signal": "在建议时间范围内完成一次最小动作，并记录它是否降低了启动阻力。"},
+    "stop": {"why_recommended": "当前工作模式可能通过额外负荷维持产出，先停止一个放大成本的习惯更可持续。", "completion_signal": "至少一次在旧习惯出现时主动中止，并记录结果是否因此变差。"},
+    "observe": {"why_recommended": "当前证据更适合先确认工作节奏的真实触发条件，再决定是否改变。", "completion_signal": "记录至少三个具体任务，能区分何时顺畅、何时掉速及对应条件。"}
+  },
   "rules": [
     {
       "rule_id": "c_work_start_5min_00_15",

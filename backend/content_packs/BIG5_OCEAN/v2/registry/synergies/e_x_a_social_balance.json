@@ -1,0 +1,21 @@
+{
+  "schema": "fap.big5.synergy_rule.v1",
+  "synergy_id": "e_x_a_social_balance",
+  "title": "互动能量 × 协作取向",
+  "components": ["E", "A"],
+  "trigger": {"always": true},
+  "priority_weight_formula": "abs(E-50)+abs(A-50)+abs(E-A)*0.5",
+  "priority_hint": 31,
+  "mutex_group": "fallback_e_a",
+  "mutual_excludes": ["e_high_x_a_low"],
+  "max_show": 3,
+  "section_targets": [{"section_key": "core_portrait", "slot": "composite", "kind": "callout"}],
+  "copy": {
+    "headline": "你进入互动的能量，和你在互动中如何处理他人需要，并不是同一件事。",
+    "body": "外向性更多影响互动频率、表达速度和刺激需求，宜人性更多影响信任、协商与冲突处理。两者一起决定你在群体里的存在方式。",
+    "strength_sentence": "分开看这两个维度，有助于识别你是偏主动连接、安静支持、直接协商，还是谨慎保留。",
+    "risk_sentence": "把低互动等同于冷漠，或把高互动等同于合作，都会误读真实关系模式。",
+    "context_boundary": "这组关系在团队讨论、陌生社交和冲突协商中更明显；在熟悉的一对一关系里可能表现不同。",
+    "action_hook": "行动时分别记录互动消耗和协作质量，不用一个标签概括两者。"
+  }
+}

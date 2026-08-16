@@ -112,7 +112,7 @@
 
 ## Content authority rules
 - CMS/backend is the source of truth for publishable content, operational metadata, mutable media references, public SEO fields, and publishing state.
-- The only editable Chinese private Big Five result-body authority is `content_packs/BIG5_OCEAN/v2/registry`; its `v2` path is stable, compiled packages and immutable database releases are derived artifacts, and public Personality/CMS content remains a separate authority.
+- The only editable private Big Five result-body authority is `content_packs/BIG5_OCEAN/v2/registry`, with English assets under its existing `en/` subtree; its `v2` path is stable, quality/tone, composite, facet, norm-evidence, and action copy must remain backend-structured, compiled packages and immutable database releases are derived artifacts, and public Personality/CMS content remains a separate authority.
 - Article content, article SEO, covers, categories/tags, related placement, and publication state must be managed through backend Article resources and APIs.
 - Controlled Codex-assisted new article publish is allowed only through the backend `articles:publish-controlled` command after exact user confirmation, passing preflight gates, required claim-warning acknowledgement, and audit logging.
 - Controlled Codex-assisted promotion of an already-published article's existing SEO update working revision is allowed only through the backend `articles:promote-existing-working-revision` command after exact article/revision/route locks, authenticated preview QA acknowledgement, downstream schema/hreflang/search/sitemap/llms/revalidation holds, passing preflight gates, and audit logging.

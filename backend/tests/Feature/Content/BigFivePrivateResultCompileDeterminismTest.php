@@ -44,5 +44,13 @@ final class BigFivePrivateResultCompileDeterminismTest extends TestCase
             JSON_THROW_ON_ERROR
         );
         $this->assertSame($first['manifest'], $committedManifest);
+
+        $committedEnglishManifest = json_decode(
+            (string) file_get_contents(base_path('content_packs/BIG5_OCEAN/v2/registry/en/manifest.json')),
+            true,
+            512,
+            JSON_THROW_ON_ERROR
+        );
+        $this->assertSame($first['english_manifest'], $committedEnglishManifest);
     }
 }

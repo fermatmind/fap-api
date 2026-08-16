@@ -79,6 +79,19 @@ final class ReportContext
         return array_key_exists('percentile', $facet);
     }
 
+    public function qualityGrade(): string
+    {
+        $grade = strtoupper(trim((string) ($this->quality['level'] ?? '')));
+
+        return in_array($grade, ['A', 'B', 'C', 'D'], true) ? $grade : 'UNKNOWN';
+    }
+
+    /** @return array<string,mixed> */
+    public function normMetadata(): array
+    {
+        return is_array($this->meta['norms'] ?? null) ? $this->meta['norms'] : [];
+    }
+
     /**
      * @return array<string,mixed>
      */

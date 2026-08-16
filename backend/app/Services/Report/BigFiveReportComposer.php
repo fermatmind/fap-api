@@ -85,13 +85,18 @@ final class BigFiveReportComposer
                 'scale_code' => 'BIG5_OCEAN',
                 'variant' => $variant,
                 'sections' => $sections,
-                'norms' => [
+                'norms' => array_merge((array) ($canonical['norm_evidence'] ?? []), [
+                    'evidence_status' => (string) data_get($canonical, 'norm_evidence.status', 'unavailable'),
                     'status' => (string) ($scoreResult['norms']['status'] ?? 'MISSING'),
                     'group_id' => (string) ($scoreResult['norms']['group_id'] ?? 'global_all'),
-                ],
-                'quality' => [
+                ]),
+                'quality' => array_merge((array) ($canonical['quality'] ?? []), [
                     'level' => (string) ($scoreResult['quality']['level'] ?? 'D'),
-                ],
+                ]),
+                'composite_insights' => (array) ($canonical['composite_insights'] ?? []),
+                'facet_deviations' => (array) ($canonical['facet_deviations'] ?? []),
+                'action_matrix' => (array) ($canonical['action_matrix'] ?? []),
+                'report_snapshot_identity' => (array) ($canonical['report_snapshot_identity'] ?? []),
                 '_meta' => [
                     'big5_public_projection_v1' => $publicProjection,
                     'big5_private_result_authority' => $authority,

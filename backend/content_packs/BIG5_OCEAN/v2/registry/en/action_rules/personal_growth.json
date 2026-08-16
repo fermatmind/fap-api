@@ -2,6 +2,12 @@
   "schema": "fap.big5.action_rule_pack.v1",
   "scenario": "personal_growth",
   "scenario_title": "Personal Growth",
+  "bucket_details": {
+    "continue": {"why_recommended": "The current structure already contains a growth method that can compound; stable reuse matters more than chasing novelty.", "completion_signal": "At the end of the period, identify one small, repeated, verifiable improvement."},
+    "start": {"why_recommended": "The matched evidence points to a low-threshold growth experiment that can be tested in a small step.", "completion_signal": "Complete one defined experiment and write down why to continue, adjust, or stop."},
+    "stop": {"why_recommended": "The current pattern may turn growth into extra self-pressure; removing one ineffective demand can restore useful feedback.", "completion_signal": "Drop one untestable or disproportionately costly self-demand."},
+    "observe": {"why_recommended": "The evidence does not justify a large change yet; observing real behavior across contexts is more reliable.", "completion_signal": "Collect three concrete context examples and mark what each supports or contradicts."}
+  },
   "rules": [
     {
       "rule_id": "c_gro_start_20min_task_16_35",

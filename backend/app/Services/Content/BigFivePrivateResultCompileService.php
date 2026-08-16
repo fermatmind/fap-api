@@ -52,7 +52,23 @@ final class BigFivePrivateResultCompileService
             $assets[$relativePath] = $decoded;
         }
 
+        $englishAssets = [];
+        $englishSourceFiles = [];
+        $englishSourceHashInput = '';
+        foreach ($this->sourceFiles('en') as $relativePath => $absolutePath) {
+            $decoded = json_decode((string) file_get_contents($absolutePath), true, 512, JSON_THROW_ON_ERROR);
+            if (! is_array($decoded)) {
+                throw new RuntimeException("Big Five private result English source must be a JSON object or array: {$relativePath}");
+            }
+            $normalized = $this->canonicalJson($decoded);
+            $fileHash = hash('sha256', $normalized);
+            $englishSourceFiles[] = ['path' => "en/{$relativePath}", 'sha256' => $fileHash];
+            $englishSourceHashInput .= $relativePath."\0".$fileHash."\n";
+            $englishAssets[$relativePath] = $decoded;
+        }
+
         $sourceHash = hash('sha256', $sourceHashInput);
+        $englishSourceHash = hash('sha256', $englishSourceHashInput);
         $coverage = $this->coverage($assets);
         $manifest = [
             'schema' => 'fap.big5.report_registry_manifest.v1',
@@ -79,9 +95,22 @@ final class BigFivePrivateResultCompileService
             ],
             'source_files' => $sourceFiles,
             'source_hash' => $sourceHash,
+            'locale_source_hashes' => ['zh-CN' => $sourceHash, 'en' => $englishSourceHash],
+            'locale_source_files' => ['en' => $englishSourceFiles],
             'coverage' => $coverage,
-            'fixtures' => ['fixtures/canonical_n_slice_sensitive_independent.context.json'],
+            'fixtures' => ['fixtures/canonical_n_slice_sensitive_independent.context.json', 'fixtures/quality_d_common_profile.context.json'],
         ];
+        $englishManifest = $manifest;
+        $englishManifest['registry_id'] = 'BIG5_OCEAN_private_result_canonical_en';
+        $englishManifest['locale'] = 'en';
+        $englishManifest['scope'] = 'Canonical English private Big Five result authority';
+        $englishManifest['source_files'] = array_map(static fn (array $row): array => [
+            'path' => preg_replace('/^en\//', '', (string) ($row['path'] ?? '')),
+            'sha256' => (string) ($row['sha256'] ?? ''),
+        ], $englishSourceFiles);
+        $englishManifest['source_hash'] = $englishSourceHash;
+        $englishManifest['locale_source_hashes'] = ['zh-CN' => $sourceHash, 'en' => $englishSourceHash];
+        unset($englishManifest['locale_source_files']);
 
         $unsignedPayload = [
             'schema' => self::SCHEMA,
@@ -94,6 +123,8 @@ final class BigFivePrivateResultCompileService
             'coverage' => $coverage,
             'registry_manifest' => $manifest,
             'assets' => $assets,
+            'locale_assets' => ['en' => $englishAssets],
+            'locale_source_hashes' => ['zh-CN' => $sourceHash, 'en' => $englishSourceHash],
         ];
         $compiledHash = hash('sha256', $this->canonicalJson($unsignedPayload));
         $payload = $unsignedPayload;
@@ -104,6 +135,7 @@ final class BigFivePrivateResultCompileService
             'payload' => $payload,
             'bytes' => $bytes,
             'manifest' => $manifest,
+            'english_manifest' => $englishManifest,
             'source_hash' => $sourceHash,
             'compiled_hash' => $compiledHash,
         ];
@@ -156,9 +188,12 @@ final class BigFivePrivateResultCompileService
     /**
      * @return array<string,string>
      */
-    private function sourceFiles(): array
+    private function sourceFiles(string $locale = 'zh-CN'): array
     {
         $root = $this->registryPath ?? base_path('content_packs/BIG5_OCEAN/v2/registry');
+        if ($locale === 'en') {
+            $root .= '/en';
+        }
         if (! is_dir($root)) {
             throw new RuntimeException("Big Five private result registry is missing: {$root}");
         }
@@ -174,7 +209,7 @@ final class BigFivePrivateResultCompileService
 
             $relativePath = str_replace('\\', '/', substr($file->getPathname(), strlen($root) + 1));
             if ($relativePath === 'manifest.json'
-                || str_starts_with($relativePath, 'en/')
+                || ($locale !== 'en' && str_starts_with($relativePath, 'en/'))
                 || str_starts_with($relativePath, 'fixtures/')
                 || str_contains($relativePath, '/fixtures/')) {
                 continue;
@@ -208,7 +243,12 @@ final class BigFivePrivateResultCompileService
             $facetPrecisionRuleCount += count((array) ($assets["facet_precision/{$trait}.json"]['rules'] ?? []));
         }
 
-        $synergyCount = count(array_filter(array_keys($assets), static fn (string $path): bool => str_starts_with($path, 'synergies/')));
+        $synergyIds = array_values(array_map(
+            static fn (string $path): string => pathinfo($path, PATHINFO_FILENAME),
+            array_filter(array_keys($assets), static fn (string $path): bool => str_starts_with($path, 'synergies/')),
+        ));
+        sort($synergyIds, SORT_STRING);
+        $synergyCount = count($synergyIds);
         $actionRuleCounts = [];
         foreach (['workplace', 'relationships', 'stress_recovery', 'personal_growth'] as $scenario) {
             $actionRuleCounts[$scenario] = count((array) ($assets["action_rules/{$scenario}.json"]['rules'] ?? []));
@@ -226,7 +266,7 @@ final class BigFivePrivateResultCompileService
         ];
         if ($facetCount !== 30
             || $facetPrecisionRuleCount !== 22
-            || $synergyCount !== 5
+            || $synergyCount !== 10
             || $actionRuleCounts !== ['workplace' => 8, 'relationships' => 8, 'stress_recovery' => 6, 'personal_growth' => 6]
             || ! in_array('score.near_boundary', $qualityAssets, true)
             || ! in_array('quality.low_quality', $qualityAssets, true)
@@ -245,7 +285,7 @@ final class BigFivePrivateResultCompileService
             'modifier_traits' => ['O', 'C', 'E', 'A', 'N'],
             'modifier_gradients_per_trait' => 5,
             'near_boundary' => true,
-            'synergies' => ['n_high_x_e_low', 'o_high_x_c_low', 'o_high_x_n_high', 'c_high_x_n_high', 'e_high_x_a_low'],
+            'synergies' => $synergyIds,
             'synergy_count' => $synergyCount,
             'facet_precision_traits' => ['O', 'C', 'E', 'A', 'N'],
             'action_rule_scope' => 'scenario-bound action matrix',

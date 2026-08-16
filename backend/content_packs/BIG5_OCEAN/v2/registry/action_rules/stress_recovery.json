@@ -2,6 +2,12 @@
   "schema": "fap.big5.action_rule_pack.v1",
   "scenario": "stress_recovery",
   "scenario_title": "压力恢复",
+  "bucket_details": {
+    "continue": {"why_recommended": "当前压力相关维度已有能降低负荷或帮助恢复的做法，应先保护这个有效资源。", "completion_signal": "在两次压力事件后都能观察到恢复时间没有继续拉长。"},
+    "start": {"why_recommended": "当前分值提示压力负荷值得用低投入、可逆动作提前处理。", "completion_signal": "完成一次建议动作，并记录前后主观负荷是否有可感知变化。"},
+    "stop": {"why_recommended": "当前模式可能让刺激或反刍持续占用恢复空间，停止一个放大器比增加任务更直接。", "completion_signal": "一次主动结束放大压力的输入或循环，并记录恢复是否提前开始。"},
+    "observe": {"why_recommended": "恢复需要先分清触发、峰值和回落，当前证据支持先建立个人基线。", "completion_signal": "记录三次压力事件的触发、峰值和恢复时长。"}
+  },
   "rules": [
     {
       "rule_id": "n_rec_start_10min_reset_60_79",

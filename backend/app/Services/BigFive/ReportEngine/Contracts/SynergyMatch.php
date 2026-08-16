@@ -10,6 +10,7 @@ final class SynergyMatch
      * @param  array<string,mixed>  $copy
      * @param  list<array<string,mixed>>  $sectionTargets
      * @param  list<string>  $mutualExcludes
+     * @param  list<string>  $components
      */
     public function __construct(
         public readonly string $synergyId,
@@ -20,6 +21,7 @@ final class SynergyMatch
         public readonly int $maxShow,
         public readonly array $sectionTargets,
         public readonly array $copy,
+        public readonly array $components = [],
     ) {}
 
     /**
@@ -33,6 +35,8 @@ final class SynergyMatch
             'priority_weight' => $this->priorityWeight,
             'mutex_group' => $this->mutexGroup,
             'section_targets' => $this->sectionTargets,
+            'components' => $this->components,
+            'copy' => $this->copy,
         ];
     }
 }

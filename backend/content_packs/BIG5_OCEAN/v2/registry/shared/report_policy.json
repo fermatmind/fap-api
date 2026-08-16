@@ -1,0 +1,103 @@
+{
+  "schema": "fap.big5.private_result.report_policy.v1",
+  "quality_grades": {
+    "A": {
+      "confidence_mode": "standard",
+      "tone_level": "normal",
+      "prominent_notice": false,
+      "interpretation_qualifier": "",
+      "norm_mode": "precise",
+      "min_facet_delta": 20,
+      "allowed_action_buckets": ["continue", "start", "stop", "observe"],
+      "low_risk_actions_only": false,
+      "action_priority_reason": "这个场景同时命中了更高权重的维度、组合或 facet 证据，因此先从这里开始更容易形成可观察的反馈。"
+    },
+    "B": {
+      "confidence_mode": "standard",
+      "tone_level": "normal",
+      "prominent_notice": false,
+      "interpretation_qualifier": "",
+      "norm_mode": "precise",
+      "min_facet_delta": 20,
+      "allowed_action_buckets": ["continue", "start", "stop", "observe"],
+      "low_risk_actions_only": false,
+      "action_priority_reason": "这个场景同时命中了更高权重的维度、组合或 facet 证据，因此先从这里开始更容易形成可观察的反馈。"
+    },
+    "C": {
+      "confidence_mode": "cautious",
+      "tone_level": "qualified",
+      "prominent_notice": true,
+      "notice_severity": "caution",
+      "notice_title": "请把这份报告当作需要验证的当前信号",
+      "notice_body": "作答状态可能影响了部分分值。以下解释使用谨慎语气，建议结合近期真实情境观察，不把单次结果当作固定身份。",
+      "notice_why": "系统检测到作答一致性或完成过程中的信号不足以支持强断言。",
+      "retest_label": "状态稳定时重新测试",
+      "interpretation_qualifier": "从当前作答来看，这一解释可能成立；请用真实情境继续验证。",
+      "norm_mode": "provisional",
+      "min_facet_delta": 28,
+      "allowed_action_buckets": ["continue", "start", "stop", "observe"],
+      "low_risk_actions_only": false,
+      "action_priority_reason": "当前证据更支持先观察这个场景；先记录反馈，再决定是否扩大行动。"
+    },
+    "D": {
+      "confidence_mode": "low",
+      "tone_level": "tentative",
+      "prominent_notice": true,
+      "notice_severity": "high",
+      "notice_title": "本次结果置信度较低，建议复测",
+      "notice_body": "当前作答信号不足以支持稳定人格结论。报告只描述这次作答更接近的方向，并保留低风险、可逆和观察型建议。",
+      "notice_why": "作答一致性、完成节奏或有效反应指标未达到可靠解释门槛；这不代表你的人格有问题。",
+      "retest_label": "在更稳定、可连续作答时复测",
+      "interpretation_qualifier": "当前作答可能更接近这一模式，但证据不足以把它视为稳定身份。",
+      "norm_mode": "provisional",
+      "min_facet_delta": 35,
+      "allowed_action_buckets": ["start", "observe"],
+      "low_risk_actions_only": true,
+      "action_intro_body": "由于本次置信度较低，行动区只展示低投入、可逆的“开始”和“观察”；不会为了凑满四类而生成停止或继续建议。",
+      "action_priority_reason": "低置信结果只保留可逆的开始与观察动作；优先场景代表当前证据最值得先记录，而不是强行为处方。"
+    },
+    "UNKNOWN": {
+      "confidence_mode": "low",
+      "tone_level": "tentative",
+      "prominent_notice": true,
+      "notice_severity": "high",
+      "notice_title": "质量状态无法确认，请谨慎阅读并复测",
+      "notice_body": "系统无法证明本次结果的质量等级，因此按最低置信策略展示，不提供确定性身份判断。",
+      "notice_why": "缺少可验证的质量状态。",
+      "retest_label": "重新测试",
+      "interpretation_qualifier": "当前信息只能作为暂定线索，不能视为稳定结论。",
+      "norm_mode": "unavailable",
+      "min_facet_delta": 40,
+      "allowed_action_buckets": ["observe"],
+      "low_risk_actions_only": true,
+      "action_intro_body": "质量状态无法确认时只展示观察动作，不补写其他 bucket。",
+      "action_priority_reason": "质量状态未知时只保留观察动作。"
+    }
+  },
+  "norm_evidence": {
+    "source_labels": {
+      "FERMATMIND_PROD_ZHCN_2026Q1": "费马测试中文有效作答参考样本",
+      "ZH_CN_IPIPNEO120_XU": "中文 IPIP-NEO 120 题研究参考样本",
+      "GLOBAL_IPIPNEO_JOHNSON_ARCHIVE": "全球 IPIP-NEO 开放数据参考样本"
+    },
+    "match_labels": {
+      "exact": "按本次可用条件精确匹配",
+      "fallback": "回退到更宽泛的可用群体",
+      "global": "使用全球默认参考群体"
+    },
+    "status_labels": {
+      "calibrated": "已校准",
+      "provisional": "暂定比较",
+      "unavailable": "比较证据不可用"
+    },
+    "locale_labels": {"zh-CN": "中文（中国大陆）", "en": "英文"},
+    "region_labels": {"CN_MAINLAND": "中国大陆", "GLOBAL": "全球"},
+    "gender_labels": {"ALL": "全部性别", "F": "女性", "M": "男性"},
+    "percentile_explanation": "例如 20 百分位表示当前得分高于参考群体中约 20% 的人，并不代表答对了 20% 或只具备 20% 的能力。",
+    "unavailable_explanation": "当前 runtime 无法同时证明参考样本、版本、样本量和比较群体，因此不展示精确百分位结论。"
+  },
+  "action_labels": {
+    "difficulty_levels": {"low": "低投入", "mid": "中等投入", "high": "较高投入"},
+    "time_horizons": {"today": "今天", "this_week": "本周", "two_weeks": "两周", "this_month": "本月", "ongoing": "持续观察"}
+  }
+}
