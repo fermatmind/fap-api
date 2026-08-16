@@ -1,0 +1,22 @@
+{
+  "schema": "fap.big5.private_result.quality_states.v1",
+  "assets": {
+    "quality.valid": {
+      "title": "结果信号可用",
+      "body": "当前作答信号足以支持维度、侧面与场景解释。"
+    },
+    "quality.low_quality": {
+      "title": "作答信号不足",
+      "body": "作答质量不足时，只展示安全边界、复测建议和最小行动，不展开细化画像、强耦合或复杂建议。",
+      "action": "在状态更稳定、能连续作答时重新完成测试。"
+    },
+    "norm.unavailable": {
+      "title": "常模暂不可用",
+      "body": "当前只展示分数区间与行为倾向，不展示人群排名或相对位置判断。"
+    },
+    "score.near_boundary": {
+      "title": "接近区间边界",
+      "body": "这个分数接近相邻区间，解读时同时保留两侧特征，并优先结合真实场景观察。"
+    }
+  }
+}

@@ -1,10 +1,10 @@
 {
     "schema": "fap.big5.report_registry_manifest.v1",
-    "registry_id": "BIG5_OCEAN_v2_report_engine_pr3c",
+    "registry_id": "BIG5_OCEAN_private_result_canonical",
     "scale_code": "BIG5_OCEAN",
-    "version": "v2",
     "locale": "zh-CN",
-    "scope": "PR3C scenario-bound action matrix rollout; all 5 traits keep PR2 atomic/modifier coverage, PR3A five synergy rollout and PR3B facet precision remain unchanged, action rules now cover four scenario-bound packs",
+    "version": "v2",
+    "scope": "Canonical Chinese private Big Five result authority",
     "runtime_contract": "fap.big5.report.v1",
     "section_skeleton": [
         "hero_summary",
@@ -23,6 +23,185 @@
         "A",
         "N"
     ],
+    "compiler": {
+        "schema": "fap.big5.private_result.compiler.v1",
+        "version": "1.0.0"
+    },
+    "source_files": [
+        {
+            "path": "action_rules/personal_growth.json",
+            "sha256": "0159e4927727178b6a2aecb48697ce178a3a587d44a97603a0359f2ca9e9fb31"
+        },
+        {
+            "path": "action_rules/relationships.json",
+            "sha256": "ce4b2e73d323c6e7d9c7dadc446d0757a599936733a6bca729ee648f35dcf949"
+        },
+        {
+            "path": "action_rules/stress_recovery.json",
+            "sha256": "55c1083ceeec46427145dfa4f6f23e0664de263d7f09ec9c93d2ba0c14e7027f"
+        },
+        {
+            "path": "action_rules/workplace.json",
+            "sha256": "63f3aa8324e434ca368ab5f95a15e39cae3582d6cd11524f7926a4c6b6b8215e"
+        },
+        {
+            "path": "atomic/A.json",
+            "sha256": "f1540953faf8ef102517e7c929a91491b41bac31d812824befdfe02d57d0a4a1"
+        },
+        {
+            "path": "atomic/C.json",
+            "sha256": "075d07190da20581fc08bee2d608749fdad118b9337895b097c85e5007755dae"
+        },
+        {
+            "path": "atomic/E.json",
+            "sha256": "8d5e56cbfaa558cc13c2d80b87735748040b468077ff19eb7ad7496228362ab6"
+        },
+        {
+            "path": "atomic/N.json",
+            "sha256": "7b14a97d6c8c8c8c76917d9499106ac0392cc73c1f23c32681dfad476e89a998"
+        },
+        {
+            "path": "atomic/O.json",
+            "sha256": "eb4c88e5889a817d6d028a0e30cda3319080693c9e2cb560a6d11d9aa740cb5c"
+        },
+        {
+            "path": "facet_glossary/A.json",
+            "sha256": "fd658eca9545e0c4a4cb686e259fcef23691d205d192a57ae1c6950ff2832215"
+        },
+        {
+            "path": "facet_glossary/C.json",
+            "sha256": "c01dd1695a03f9a2a3595462427ea10f09b9f25b096cbfd56fd869e56dee9891"
+        },
+        {
+            "path": "facet_glossary/E.json",
+            "sha256": "da5d0ce853deed46120899e0592f6c5fa978449426b9dad6d117fe08bf237e13"
+        },
+        {
+            "path": "facet_glossary/N.json",
+            "sha256": "8145117e5ce93e84993cfede9292246d28adb0d80efd3acaeffad67d30fa3c98"
+        },
+        {
+            "path": "facet_glossary/O.json",
+            "sha256": "36bce30a2eceeb99a51f3a55ef399cabbfbd8573e1e50189acb614cea7d1d244"
+        },
+        {
+            "path": "facet_precision/A.json",
+            "sha256": "f8f5ca1fcf0c181b6b1ef118191f022c0a8dd27f87504449f73895cb6abd6b68"
+        },
+        {
+            "path": "facet_precision/C.json",
+            "sha256": "dcbaa0fdb0bee17450197bdd60456bca5d717660f1c1bbafab0f5d18faf99436"
+        },
+        {
+            "path": "facet_precision/E.json",
+            "sha256": "6edfb4f085e172451cab02a74c4db39ba703036a02b7477686672b5748bf6053"
+        },
+        {
+            "path": "facet_precision/N.json",
+            "sha256": "c84efac839c3ae16db8dc8e6167b44fe162a85f0dcbc167b2b980d000ca11386"
+        },
+        {
+            "path": "facet_precision/O.json",
+            "sha256": "ac82582eedb0fb88469667a4231b289539313ebcdd4cfd95e1788872d6af4555"
+        },
+        {
+            "path": "modifiers/A.json",
+            "sha256": "773f95929b888cfd96b03ce639bdf532e67fcf9799d9eea2a4e7319f31301522"
+        },
+        {
+            "path": "modifiers/C.json",
+            "sha256": "f52e2a26361abd4f412ed29d2f3a1fd94eed7bd051555ca9c0685437cae3b886"
+        },
+        {
+            "path": "modifiers/E.json",
+            "sha256": "ad2901bf71014d26187e352a671854b3d60a4c9c37f9bda958a00fed24ab6111"
+        },
+        {
+            "path": "modifiers/N.json",
+            "sha256": "a2ad260ac28c21291408af84241e9bc41163b5abd7363b71834331f4a7c219d8"
+        },
+        {
+            "path": "modifiers/O.json",
+            "sha256": "0657d8ba30e4dfcf76ce235eab69b9344ece19a9b3b347bfa203230522d3e68c"
+        },
+        {
+            "path": "shared/band_labels.json",
+            "sha256": "89744d8a874c3a58b9cdae3a946644aacfb6d3ae7d34e498eba92b96cb3ffe33"
+        },
+        {
+            "path": "shared/compare_phrases.json",
+            "sha256": "5b067634ce33e088a05362b8fd66fbcb85a4c190435d98800c1cbde33d87b2ed"
+        },
+        {
+            "path": "shared/gradient_labels.json",
+            "sha256": "7873cb4f8e99f9df5a8e5aff0c94883f76d24be60161eabfab4d4f42ad2826e8"
+        },
+        {
+            "path": "shared/methodology.json",
+            "sha256": "380a19beb4ba67a22e403c14e63e6d92eb4521feef886bb0f3e5f7a984f6bccc"
+        },
+        {
+            "path": "shared/runtime_copy.json",
+            "sha256": "25a846afc6e6b7948231e26bc8a139fa302aa4d09b322aa96d0b10dc91afb686"
+        },
+        {
+            "path": "shared/section_headlines.json",
+            "sha256": "755479a38c559ff29b8f4c8bf496b4e669eb7d1ea651a1a802e9a29607cc776d"
+        },
+        {
+            "path": "shared/trait_labels.json",
+            "sha256": "3df2f1e4296d51ad11e8dcfa8547595d88136d8170e0afec4711ef9d6696992f"
+        },
+        {
+            "path": "surfaces/faq.json",
+            "sha256": "453c2534797c81c9119bc5c2df41e221c5ed1a79893d6b890509f52da65ac83f"
+        },
+        {
+            "path": "surfaces/history_compare.json",
+            "sha256": "5e2423fc10c643ef4d537a4e4189bce2745935054af2581cdaa5dda9f98b7e56"
+        },
+        {
+            "path": "surfaces/lifecycle.json",
+            "sha256": "ec741c4bc9fa412225a1368efbce2438fc302c20491c3e6a9c69b8f69ffd3cbb"
+        },
+        {
+            "path": "surfaces/pdf_print.json",
+            "sha256": "868cb6e425a9982f0eb6f5f81311dc6808a3440e6d31c0eb3efc797917cb4909"
+        },
+        {
+            "path": "surfaces/quality_states.json",
+            "sha256": "7b0a126ae76ecebbb582df02b8e136e0e26608a6ffb6080a3e01b378f4e7e12b"
+        },
+        {
+            "path": "surfaces/secondary.json",
+            "sha256": "3c61d98e8553bba38423dff191ac38c0d65158fa7cfdcd2ffc8d40486f535490"
+        },
+        {
+            "path": "surfaces/share.json",
+            "sha256": "d3f3a5a7aa98175c24fddd7acbdf1498d449229f38b63109248a2976fb78f6a6"
+        },
+        {
+            "path": "synergies/c_high_x_n_high.json",
+            "sha256": "f4a8e03e08e70a2ead6af936b580779ebe7e2fd181961669330a9316cac4cff5"
+        },
+        {
+            "path": "synergies/e_high_x_a_low.json",
+            "sha256": "67b63a82b6aaf3b9330e29abce8b3566f0274d4f1504386f23c0939c409452cf"
+        },
+        {
+            "path": "synergies/n_high_x_e_low.json",
+            "sha256": "8ccab6a966dc46cfedb2ba8734f1ca214b12014db4059c860d34a56ec477f755"
+        },
+        {
+            "path": "synergies/o_high_x_c_low.json",
+            "sha256": "52cac214152d5b82b9e66300050268a312ed05d8059b7ad853a6e5ab58bbf45d"
+        },
+        {
+            "path": "synergies/o_high_x_n_high.json",
+            "sha256": "9ee69de06fe3f316afcca6f0ae54d752dfdc689435be1532ecbfaf31e6f3983f"
+        }
+    ],
+    "source_hash": "6b107f6779fdaa8fe2c889adc1200943edbc548544b739fa2ac54d00d53deb39",
     "coverage": {
         "atomic_traits": [
             "O",
@@ -36,6 +215,19 @@
             "mid",
             "high"
         ],
+        "traits": [
+            "O",
+            "C",
+            "E",
+            "A",
+            "N"
+        ],
+        "bands": [
+            "low",
+            "mid",
+            "high"
+        ],
+        "facet_count": 30,
         "modifier_traits": [
             "O",
             "C",
@@ -44,6 +236,7 @@
             "N"
         ],
         "modifier_gradients_per_trait": 5,
+        "near_boundary": true,
         "synergies": [
             "n_high_x_e_low",
             "o_high_x_c_low",
@@ -51,6 +244,7 @@
             "c_high_x_n_high",
             "e_high_x_a_low"
         ],
+        "synergy_count": 5,
         "facet_precision_traits": [
             "O",
             "C",
@@ -60,6 +254,12 @@
         ],
         "action_rule_scope": "scenario-bound action matrix",
         "action_rule_scenarios": [
+            "workplace",
+            "relationships",
+            "stress_recovery",
+            "personal_growth"
+        ],
+        "action_scenarios": [
             "workplace",
             "relationships",
             "stress_recovery",
@@ -90,7 +290,25 @@
             "per_domain": 2,
             "per_report": 6,
             "standout_render_cards": 3
-        }
+        },
+        "quality_states": [
+            "valid",
+            "low_quality",
+            "norm_unavailable"
+        ],
+        "access_levels": [
+            "free",
+            "full"
+        ],
+        "secondary_surfaces": [
+            "faq",
+            "lifecycle",
+            "share",
+            "pdf",
+            "print",
+            "history",
+            "compare"
+        ]
     },
     "fixtures": [
         "fixtures/canonical_n_slice_sensitive_independent.context.json"

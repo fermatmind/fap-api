@@ -1,0 +1,25 @@
+{
+  "schema": "fap.big5.private_result.lifecycle.v1",
+  "assets": {
+    "lifecycle.workplace": {
+      "title": "先回到工作场景",
+      "body": "从节奏、边界、表达或恢复中选一个本周可验证的入口，只先推进一处。",
+      "primary_asset_ref": "action_rules/workplace.json"
+    },
+    "lifecycle.relationships": {
+      "title": "把理解带回关系里",
+      "body": "选一处最容易反复消耗你的关系场景，练习更早说清需要与边界。",
+      "primary_asset_ref": "action_rules/relationships.json"
+    },
+    "lifecycle.stress_recovery": {
+      "title": "先固定恢复入口",
+      "body": "把恢复前置，选择一个可重复的降噪、退出或复盘入口，先实践两周。",
+      "primary_asset_ref": "action_rules/stress_recovery.json"
+    },
+    "lifecycle.personal_growth": {
+      "title": "只选一个成长入口",
+      "body": "不要一次改变整套模式，先持续实践一个最小动作，2–4 周后再复盘。",
+      "primary_asset_ref": "action_rules/personal_growth.json"
+    }
+  }
+}

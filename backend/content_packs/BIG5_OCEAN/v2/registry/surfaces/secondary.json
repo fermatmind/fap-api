@@ -1,0 +1,32 @@
+{
+  "schema": "fap.big5.private_result.secondary_surfaces.v1",
+  "access_levels": {
+    "free": {
+      "section_refs": [
+        "hero_summary",
+        "domains_overview",
+        "methodology_and_access"
+      ]
+    },
+    "full": {
+      "section_refs": [
+        "hero_summary",
+        "domains_overview",
+        "domain_deep_dive",
+        "facet_details",
+        "core_portrait",
+        "norms_comparison",
+        "action_plan",
+        "methodology_and_access"
+      ]
+    }
+  },
+  "surfaces": {
+    "result": {"asset_refs": ["atomic", "modifiers", "synergies", "facet_precision", "action_rules"]},
+    "pdf": {"asset_refs": ["surfaces/pdf_print.json", "surfaces/quality_states.json"]},
+    "print": {"asset_refs": ["surfaces/pdf_print.json", "surfaces/quality_states.json"]},
+    "history": {"asset_refs": ["surfaces/history_compare.json"]},
+    "compare": {"asset_refs": ["surfaces/history_compare.json", "shared/compare_phrases.json"]},
+    "share": {"asset_refs": ["surfaces/share.json"]}
+  }
+}

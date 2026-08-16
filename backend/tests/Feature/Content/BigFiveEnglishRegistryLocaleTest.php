@@ -17,7 +17,7 @@ final class BigFiveEnglishRegistryLocaleTest extends TestCase
         $zh = $loader->load('zh-CN');
         $en = $loader->load('en-US');
 
-        $this->assertSame($this->shape($zh, ['root']), $this->shape($en, ['root']));
+        $this->assertSame($this->shape($zh, ['root', 'manifest']), $this->shape($en, ['root', 'manifest']));
         $this->assertSame($this->identityMap($zh), $this->identityMap($en));
         $this->assertSame('zh-CN', data_get($zh, 'manifest.locale'));
         $this->assertSame('en', data_get($en, 'manifest.locale'));

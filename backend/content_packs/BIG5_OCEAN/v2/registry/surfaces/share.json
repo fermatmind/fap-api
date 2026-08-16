@@ -1,0 +1,26 @@
+{
+  "schema": "fap.big5.private_result.share.v1",
+  "assets": {
+    "share.summary": {
+      "title": "分享结果摘要",
+      "body": "只分享你愿意公开的概括；详细分数、压力信号、常模位置与私密建议默认不进入分享卡。"
+    },
+    "share.preview": {
+      "title": "分享前先预览",
+      "body": "确认卡片没有超出你的表达边界，再决定是否发送。"
+    }
+  },
+  "allowed_asset_refs": [
+    "hero_summary",
+    "trait_labels",
+    "band_labels",
+    "action_plan.safe_summary"
+  ],
+  "forbidden_fields": [
+    "raw_scores",
+    "facet_scores",
+    "norm_percentiles",
+    "quality_signals",
+    "private_recommendations"
+  ]
+}
