@@ -4,42 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Storage;
 
-use App\Services\Riasec\RiasecResultPageV2ProductionImportExecutor;
-use App\Services\Storage\ContentReleaseManifestCatalogService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 final class ContentReleaseManifestSchemaVersionLengthTest extends TestCase
 {
-    use RefreshDatabase;
-
-    private const MAX_SCHEMA_VERSION_LENGTH = 128;
-
-    public function test_production_import_schema_versions_fit_the_manifest_column_contract(): void
-    {
-        $schemaVersions = [RiasecResultPageV2ProductionImportExecutor::RELEASE_SCHEMA_VERSION];
-
-        foreach ($schemaVersions as $index => $schemaVersion) {
-            $this->assertLessThanOrEqual(self::MAX_SCHEMA_VERSION_LENGTH, strlen($schemaVersion));
-
-            app(ContentReleaseManifestCatalogService::class)->upsertManifest([
-                'manifest_hash' => hash('sha256', 'schema-version-'.$index),
-                'schema_version' => $schemaVersion,
-                'storage_disk' => 'local',
-                'storage_path' => 'private/testing/schema-version-'.$index,
-                'pack_id' => 'RIASEC',
-                'pack_version' => 'result_page_v2',
-                'payload_json' => ['schema_version' => $schemaVersion],
-            ]);
-        }
-
-        $this->assertSame(
-            $schemaVersions,
-            DB::table('content_release_manifests')->orderBy('id')->pluck('schema_version')->all(),
-        );
-    }
-
     public function test_forward_only_migration_widens_the_column_to_the_contract_length(): void
     {
         $migration = file_get_contents(database_path(

@@ -47,7 +47,6 @@ final class NoRuntimeSchemaIntrospectionTest extends TestCase
         'app/Services/Partners/PartnerApiService.php',
         'app/Services/Psychometrics/Eq60/NormGroupResolver.php',
         'app/Services/Psychometrics/Sds/NormGroupResolver.php',
-        'app/Services/Riasec/RiasecResultPageV2ProductionImportExecutor.php',
         'app/Services/Scale/ScaleIdentityResolver.php',
         'app/Services/Scale/ScaleRegistry.php',
         'app/Services/Scale/ScaleRegistryWriter.php',

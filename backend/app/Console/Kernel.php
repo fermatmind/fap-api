@@ -197,9 +197,6 @@ use App\Console\Commands\PersonalityTdkRuntimePromotionSearchGateReadinessComman
 use App\Console\Commands\PersonalityWarmPublicReadModels;
 use App\Console\Commands\QualityDailySummary;
 use App\Console\Commands\RefreshCareerAttributionDailyCommand;
-use App\Console\Commands\RiasecResultPageAssetAgentAuditCommand;
-use App\Console\Commands\RiasecResultPageV2ProductionImportCommand;
-use App\Console\Commands\RiasecResultPageV2ProductionSmokeCommand;
 use App\Console\Commands\SdsPsychometricsReport;
 use App\Console\Commands\SeedScaleRegistry;
 use App\Console\Commands\SeoAgentArticleCmsPublishCanaryCommand;
@@ -337,9 +334,6 @@ class Kernel extends ConsoleKernel
         SdsPsychometricsReport::class,
         Big5AttemptPurge::class,
         Big5TelemetrySummary::class,
-        RiasecResultPageAssetAgentAuditCommand::class,
-        RiasecResultPageV2ProductionImportCommand::class,
-        RiasecResultPageV2ProductionSmokeCommand::class,
         CommerceReconcile::class,
         CommerceCompensatePendingOrders::class,
         CommerceRepairPaidOrders::class,
