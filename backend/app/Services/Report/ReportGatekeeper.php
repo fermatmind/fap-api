@@ -916,6 +916,12 @@ class ReportGatekeeper
         return $report;
     }
 
+    /** @param array<string,mixed> $report @return array<string,mixed> */
+    private function markLegacyBigFiveSnapshot(array $report, object $snapshotRow): array
+    {
+        return $this->markLegacyPrivateResultSnapshot($report, $snapshotRow);
+    }
+
     private function strictSnapshotModeEnabled(): bool
     {
         return (bool) config('fap.features.report_snapshot_strict_v2', false)
