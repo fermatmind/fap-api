@@ -18,16 +18,10 @@ use App\Console\Commands\ArticleUpdateExistingSeoContentPackage;
 use App\Console\Commands\ArticleUpdateImageMetadata;
 use App\Console\Commands\ArticleUpdateTranslationGroupId;
 use App\Console\Commands\ArticleWeeklySeoObservationExport;
-use App\Console\Commands\Batch2ResultPageDryRunGateCommand;
-use App\Console\Commands\Batch2ResultPageReadbackReviewLedgerCommand;
 use App\Console\Commands\Big5AttemptPurge;
 use App\Console\Commands\Big5PsychometricsReport;
 // ✅ 显式注册（更稳，避免自动扫描失效/缓存导致找不到）
 use App\Console\Commands\Big5TelemetrySummary;
-use App\Console\Commands\BigFiveExportProductionEquivalentCandidatePayloads;
-use App\Console\Commands\BigFiveImportInactiveCandidateRelease;
-use App\Console\Commands\BigFiveResultPageV2AssetAgentAuditCommand;
-use App\Console\Commands\BigFiveResultPageV2ProductionImportCommand;
 use App\Console\Commands\CareerAlignActorsAuthorityOccupation;
 use App\Console\Commands\CareerAlignCareerAuthorityBatch;
 use App\Console\Commands\CareerAlignD8AuthorityCrosswalks;
@@ -307,8 +301,6 @@ class Kernel extends ConsoleKernel
         OpsDeployEvent::class,
         OpsHealthzSnapshot::class,
         ArchiveColdData::class,
-        Batch2ResultPageDryRunGateCommand::class,
-        Batch2ResultPageReadbackReviewLedgerCommand::class,
         PaymentsPruneEvents::class,
         SeedScaleRegistry::class,
         SyncScaleSlugs::class,
@@ -328,8 +320,6 @@ class Kernel extends ConsoleKernel
         EnneagramResultPageRenderedQaSmokeHarnessCommand::class,
         EnneagramRollbackInactiveCandidateRelease::class,
         EnneagramRollbackRegistryRelease::class,
-        BigFiveExportProductionEquivalentCandidatePayloads::class,
-        BigFiveImportInactiveCandidateRelease::class,
         NormsImport::class,
         NormsIqImport::class,
         NormsBig5Roll::class,
@@ -347,8 +337,6 @@ class Kernel extends ConsoleKernel
         SdsPsychometricsReport::class,
         Big5AttemptPurge::class,
         Big5TelemetrySummary::class,
-        BigFiveResultPageV2AssetAgentAuditCommand::class,
-        BigFiveResultPageV2ProductionImportCommand::class,
         RiasecResultPageAssetAgentAuditCommand::class,
         RiasecResultPageV2ProductionImportCommand::class,
         RiasecResultPageV2ProductionSmokeCommand::class,

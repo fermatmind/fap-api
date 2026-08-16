@@ -42,7 +42,6 @@ final class EnneagramResultPageOpsAgentRunOrchestrator
         'backend/content_assets/enneagram/result_page/ops_agent_runner/',
         'backend/tests/Feature/Console/EnneagramResultPageOpsRunnerCommandTest.php',
         'backend/tests/Unit/Services/Enneagram/Assets/',
-        'backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php',
     ];
 
     /**

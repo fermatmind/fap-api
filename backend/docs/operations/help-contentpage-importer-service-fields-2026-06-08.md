@@ -35,12 +35,10 @@ This PR updates the backend `content-pages:import-local-baseline` importer so lo
 ```bash
 php -l backend/app/Console/Commands/ContentPagesImportLocalBaseline.php
 php -l backend/tests/Feature/ContentPages/ContentPagePublicApiTest.php
-php -l backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
 python3 -m json.tool backend/docs/help/generated/help-contentpage-importer-service-fields-01.v1.json >/dev/null
 python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
 python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
 cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='ContentPagePublicApiTest::test_help_service_importer_materializes_service_fields_on_draft_rows|ContentPagePublicApiTest::test_help_service_fields_are_first_class_content_page_contracts' --no-ansi
-cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_content_pages_local_baseline_import_package_changes|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi
-git diff --check -- backend/app/Console/Commands/ContentPagesImportLocalBaseline.php backend/tests/Feature/ContentPages/ContentPagePublicApiTest.php backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php backend/docs/help/generated/help-contentpage-importer-service-fields-01.v1.json backend/docs/operations/help-contentpage-importer-service-fields-2026-06-08.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+git diff --check -- backend/app/Console/Commands/ContentPagesImportLocalBaseline.php backend/tests/Feature/ContentPages/ContentPagePublicApiTest.php backend/docs/help/generated/help-contentpage-importer-service-fields-01.v1.json backend/docs/operations/help-contentpage-importer-service-fields-2026-06-08.md
 git diff --cached --check
 ```

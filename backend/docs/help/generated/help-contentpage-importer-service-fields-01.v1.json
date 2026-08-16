@@ -36,11 +36,6 @@
     "expected_indexable_rows": 0,
     "expected_published_rows": 0
   },
-  "runtime_freeze_scope_guard": {
-    "test_file": "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
-    "existing_test": "test_runtime_freeze_classifier_ignores_content_pages_local_baseline_import_package_changes",
-    "changed_runtime_file_allowed": "backend/app/Console/Commands/ContentPagesImportLocalBaseline.php"
-  },
   "no_go_checks": {
     "cms_mutation_performed": false,
     "publish_performed": false,

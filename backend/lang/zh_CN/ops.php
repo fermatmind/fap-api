@@ -1977,7 +1977,6 @@ return [
             'has_order' => '有订单',
             'paid_success' => '支付成功',
             'delivery_status' => '交付状态',
-            'big5_v2_coverage_summary' => '大五 V2 覆盖（:total 份报告）：已附加 :attached（:coverage_rate），fallback :fallback，畸形 :invalid，fallback+畸形率 :fallback_rate。',
             'columns' => [
                 'attempt_id' => 'attempt_id',
                 'order_no' => 'order_no',

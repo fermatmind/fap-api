@@ -8,8 +8,6 @@ use App\Models\PersonalityPublicContentAsset;
 use App\Models\PersonalityPublicContentAssetRevision;
 use App\Services\BigFive\AuthorityV3\Release\BigFiveEn52PackageCompiler;
 use App\Services\BigFive\AuthorityV3\Release\BigFiveEn52Publisher;
-use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2Contract;
-use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2SelectorAssetContract;
 use App\Services\SEO\BigFiveCanonicalRouteCatalog;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -18,6 +16,16 @@ use RuntimeException;
 final class BigFiveEnglishDraftInventory
 {
     public const SCHEMA_VERSION = 'en-parity-w2-big-five-runtime-draft-inventory.v1';
+
+    private const FORBIDDEN_PUBLIC_FIELDS = [
+        'editor_note', 'editor_notes', 'qa_note', 'qa_notes', 'selection_guidance',
+        'import_policy', 'governance_metadata', 'internal_metadata', 'internal_notes',
+        'private_metadata', 'review_status', 'codex_policy', 'replacement_policy',
+        'selection_context', 'type_code', 'canonical_type', 'fixed_type', 'type_name',
+        'user_confirmed_type', 'diagnosis', 'raw_score', 'raw_scores', 'raw_mean',
+        'z', 't', 'standardized_scores', 'score_vector', 'percentile', 'percentiles',
+        'normal_curve', 'domains', 'facets', 'facet_vector', 'domain_vector',
+    ];
 
     private const HISTORICAL_AUTHORITY_PACKAGE_SHA256 = 'fb67edc033e679da3f134b34db30901465c7b44e0585818b23613fab83bf9162';
 
@@ -982,9 +990,7 @@ final class BigFiveEnglishDraftInventory
                 $normalizedKey = preg_replace('/([A-Z]+)([A-Z][a-z])/', '$1_$2', $key);
                 $normalizedKey = preg_replace('/([a-z0-9])([A-Z])/', '$1_$2', (string) $normalizedKey);
                 $normalizedKey = strtolower((string) preg_replace('/[^a-zA-Z0-9]+/', '_', (string) $normalizedKey));
-                if (in_array($normalizedKey, BigFiveResultPageV2SelectorAssetContract::FORBIDDEN_PUBLIC_FIELDS, true)
-                    || in_array($normalizedKey, BigFiveResultPageV2Contract::FORBIDDEN_PUBLIC_FIELDS, true)
-                    || in_array($normalizedKey, BigFiveResultPageV2Contract::SHARE_FORBIDDEN_SCORE_FIELDS, true)
+                if (in_array($normalizedKey, self::FORBIDDEN_PUBLIC_FIELDS, true)
                     || $normalizedKey === 'private_path'
                     || preg_match(
                         '/^(?:answers|attempt(?:_id|_uuid)?|draft_snapshot|generated_authority_package|'

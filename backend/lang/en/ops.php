@@ -1977,7 +1977,6 @@ return [
             'has_order' => 'Has order',
             'paid_success' => 'Paid success',
             'delivery_status' => 'Delivery status',
-            'big5_v2_coverage_summary' => 'Big Five V2 coverage (:total reports): attached :attached (:coverage_rate), fallback :fallback, invalid :invalid, fallback+invalid rate :fallback_rate.',
             'columns' => [
                 'attempt_id' => 'attempt_id',
                 'order_no' => 'order_no',

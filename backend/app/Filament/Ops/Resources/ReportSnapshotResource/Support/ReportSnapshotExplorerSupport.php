@@ -9,7 +9,6 @@ use App\Filament\Ops\Resources\OrderResource;
 use App\Filament\Ops\Resources\ResultResource;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Models\ReportSnapshot;
-use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2ProductionOpsMetrics;
 use App\Services\Commerce\OrderManager;
 use App\Support\SchemaBaseline;
 use Illuminate\Database\Eloquent\Builder;
@@ -742,46 +741,6 @@ final class ReportSnapshotExplorerSupport
     public function indexLookbackDays(): int
     {
         return self::INDEX_LOOKBACK_DAYS;
-    }
-
-    /**
-     * @return array{
-     *     total:int,
-     *     attached:int,
-     *     fallback:int,
-     *     invalid:int,
-     *     disabled_or_not_evaluated_count:int,
-     *     coverage_rate:string,
-     *     fallback_rate:string,
-     *     window_days:int,
-     *     validation_error_count:int,
-     *     latest_audited_at:?string,
-     *     fallback_reasons:array<string,int>,
-     *     invalid_reasons:array<string,int>,
-     *     malformed_rejection_reasons:array<string,int>
-     * }
-     */
-    public function bigFiveResultPageV2CoverageSummary(): array
-    {
-        $metrics = app(BigFiveResultPageV2ProductionOpsMetrics::class)->summarize(self::INDEX_LOOKBACK_DAYS);
-        $summary = (array) ($metrics['metrics'] ?? []);
-        $malformedReasons = (array) ($summary['malformed_rejection_reasons'] ?? []);
-
-        return [
-            'total' => (int) ($summary['total_big5_reports'] ?? 0),
-            'attached' => (int) ($summary['attached_count'] ?? 0),
-            'fallback' => (int) ($summary['fallback_count'] ?? 0),
-            'invalid' => (int) ($summary['invalid_count'] ?? 0),
-            'disabled_or_not_evaluated_count' => (int) ($summary['disabled_or_not_evaluated_count'] ?? 0),
-            'coverage_rate' => (string) ($summary['v2_payload_coverage_rate'] ?? '0.0%'),
-            'fallback_rate' => (string) ($summary['fallback_hit_rate'] ?? '0.0%'),
-            'window_days' => self::INDEX_LOOKBACK_DAYS,
-            'validation_error_count' => (int) ($summary['validation_error_count'] ?? 0),
-            'latest_audited_at' => $summary['latest_audited_at'] ?? null,
-            'fallback_reasons' => (array) ($summary['fallback_reasons'] ?? []),
-            'invalid_reasons' => $malformedReasons,
-            'malformed_rejection_reasons' => $malformedReasons,
-        ];
     }
 
     /**

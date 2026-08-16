@@ -15,20 +15,25 @@ final class BigFivePackIntegrityTest extends TestCase
 
     public function test_big5_runtime_compiled_artifacts_are_present_in_checkout(): void
     {
-        $compiledDir = base_path('content_packs/BIG5_OCEAN/v1/compiled');
         $requiredFiles = [
             'manifest.json',
             'questions.min.compiled.json',
             'questions.compiled.json',
             'policy.compiled.json',
-            'legal.compiled.json',
+            'norms.compiled.json',
+            'facet_index.json',
+            'domain_index.json',
         ];
 
-        foreach ($requiredFiles as $file) {
-            $this->assertTrue(
-                File::exists($compiledDir.'/'.$file),
-                'Missing BIG5_OCEAN runtime compiled artifact: '.$file
-            );
+        foreach (['v1', 'v1-form-90'] as $version) {
+            $compiledDir = base_path("content_packs/BIG5_OCEAN/{$version}/compiled");
+
+            foreach ($requiredFiles as $file) {
+                $this->assertTrue(
+                    File::exists($compiledDir.'/'.$file),
+                    "Missing BIG5_OCEAN {$version} runtime compiled artifact: {$file}"
+                );
+            }
         }
     }
 

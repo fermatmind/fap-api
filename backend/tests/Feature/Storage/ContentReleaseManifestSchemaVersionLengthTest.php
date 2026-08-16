@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Storage;
 
-use App\Services\BigFive\ResultPageV2\Production\BigFiveResultPageV2ProductionImportExecutor;
 use App\Services\Riasec\RiasecResultPageV2ProductionImportExecutor;
 use App\Services\Storage\ContentReleaseManifestCatalogService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -19,10 +18,7 @@ final class ContentReleaseManifestSchemaVersionLengthTest extends TestCase
 
     public function test_production_import_schema_versions_fit_the_manifest_column_contract(): void
     {
-        $schemaVersions = [
-            RiasecResultPageV2ProductionImportExecutor::RELEASE_SCHEMA_VERSION,
-            BigFiveResultPageV2ProductionImportExecutor::RELEASE_SCHEMA,
-        ];
+        $schemaVersions = [RiasecResultPageV2ProductionImportExecutor::RELEASE_SCHEMA_VERSION];
 
         foreach ($schemaVersions as $index => $schemaVersion) {
             $this->assertLessThanOrEqual(self::MAX_SCHEMA_VERSION_LENGTH, strlen($schemaVersion));
@@ -32,7 +28,7 @@ final class ContentReleaseManifestSchemaVersionLengthTest extends TestCase
                 'schema_version' => $schemaVersion,
                 'storage_disk' => 'local',
                 'storage_path' => 'private/testing/schema-version-'.$index,
-                'pack_id' => $index === 0 ? 'RIASEC' : 'BIG5_OCEAN',
+                'pack_id' => 'RIASEC',
                 'pack_version' => 'result_page_v2',
                 'payload_json' => ['schema_version' => $schemaVersion],
             ]);

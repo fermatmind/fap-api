@@ -40,13 +40,7 @@ final class BigFiveContentCompileService
         $facetRows = $this->loader->readCsvWithLines($this->loader->rawPath('facet_map.csv', $version));
         $optionsRows = $this->loader->readCsvWithLines($this->loader->rawPath('options_likert5.csv', $version));
         $normRows = $this->loader->readCsvWithLines($this->loader->rawPath('norm_stats.csv', $version));
-        $copyRows = $this->loader->readCsvWithLines($this->loader->rawPath('bucket_copy.csv', $version));
-        $goldenRows = $this->loader->readCsvWithLines($this->loader->rawPath('golden_cases.csv', $version));
-        $landing = $this->loader->readJson($this->loader->rawPath('landing_i18n.json', $version));
         $policy = $this->loader->readJson($this->loader->rawPath('policy.json', $version));
-        $legal = $this->loader->readJson($this->loader->rawPath('legal/disclaimer.json', $version));
-        $layout = $this->loader->readJson($this->loader->rawPath('report_layout.json', $version));
-        $blocks = $this->readRawBlocks($version);
 
         $facetMap = [];
         foreach ($facetRows as $entry) {
@@ -228,30 +222,6 @@ final class BigFiveContentCompileService
             ];
         }
 
-        $copy = [];
-        foreach ($copyRows as $entry) {
-            $copy[] = (array) ($entry['row'] ?? []);
-        }
-
-        $golden = [];
-        foreach ($goldenRows as $entry) {
-            $row = (array) ($entry['row'] ?? []);
-            $golden[] = [
-                'case_id' => (string) ($row['case_id'] ?? ''),
-                'locale' => (string) ($row['locale'] ?? ''),
-                'country' => (string) ($row['country'] ?? ''),
-                'age_band' => (string) ($row['age_band'] ?? ''),
-                'gender' => (string) ($row['gender'] ?? ''),
-                'time_seconds_total' => (float) ($row['time_seconds_total'] ?? 0),
-                'answers' => json_decode((string) ($row['answers_json'] ?? '[]'), true),
-                'expected_norms_status' => (string) ($row['expected_norms_status'] ?? ''),
-                'expected_domain_buckets' => json_decode((string) ($row['expected_domain_buckets_json'] ?? '{}'), true),
-                'expected_tags' => json_decode((string) ($row['expected_tags_json'] ?? '[]'), true),
-                'expected_free_sections' => array_values(array_filter(array_map('trim', explode(',', (string) ($row['expected_free_sections'] ?? ''))))),
-                'expected_full_sections' => array_values(array_filter(array_map('trim', explode(',', (string) ($row['expected_full_sections'] ?? ''))))),
-            ];
-        }
-
         $questionsPayload = [
             'schema' => 'big5.questions.compiled.v1',
             'pack_id' => BigFivePackLoader::PACK_ID,
@@ -308,48 +278,6 @@ final class BigFiveContentCompileService
                 'pack_version' => $version,
                 'generated_at' => now()->toISOString(),
                 'groups' => $norms['groups'],
-            ],
-            'copy.compiled.json' => [
-                'schema' => 'big5.copy.compiled.v1',
-                'pack_id' => BigFivePackLoader::PACK_ID,
-                'pack_version' => $version,
-                'generated_at' => now()->toISOString(),
-                'rows' => $copy,
-            ],
-            'layout.compiled.json' => [
-                'schema' => 'big5.layout.compiled.v1',
-                'pack_id' => BigFivePackLoader::PACK_ID,
-                'pack_version' => $version,
-                'generated_at' => now()->toISOString(),
-                'layout' => is_array($layout) ? $layout : [],
-            ],
-            'blocks.compiled.json' => [
-                'schema' => 'big5.blocks.compiled.v1',
-                'pack_id' => BigFivePackLoader::PACK_ID,
-                'pack_version' => $version,
-                'generated_at' => now()->toISOString(),
-                'blocks' => $blocks,
-            ],
-            'landing.compiled.json' => [
-                'schema' => 'big5.landing.compiled.v1',
-                'pack_id' => BigFivePackLoader::PACK_ID,
-                'pack_version' => $version,
-                'generated_at' => now()->toISOString(),
-                'landing' => is_array($landing) ? $landing : [],
-            ],
-            'legal.compiled.json' => [
-                'schema' => 'big5.legal.compiled.v1',
-                'pack_id' => BigFivePackLoader::PACK_ID,
-                'pack_version' => $version,
-                'generated_at' => now()->toISOString(),
-                'legal' => $this->buildLegalPayload($legal),
-            ],
-            'golden_cases.compiled.json' => [
-                'schema' => 'big5.golden_cases.compiled.v1',
-                'pack_id' => BigFivePackLoader::PACK_ID,
-                'pack_version' => $version,
-                'generated_at' => now()->toISOString(),
-                'cases' => $golden,
             ],
             'policy.compiled.json' => [
                 'schema' => 'big5.policy.compiled.v1',
@@ -411,43 +339,6 @@ final class BigFiveContentCompileService
         $version = trim((string) $version);
 
         return $version !== '' ? $version : BigFivePackLoader::PACK_VERSION;
-    }
-
-    /**
-     * @return list<array<string,mixed>>
-     */
-    private function readRawBlocks(string $version): array
-    {
-        $dir = $this->loader->rawPath('blocks', $version);
-        if (! is_dir($dir)) {
-            return [];
-        }
-
-        $files = File::files($dir);
-        usort($files, static fn (\SplFileInfo $a, \SplFileInfo $b): int => strcmp($a->getFilename(), $b->getFilename()));
-
-        $all = [];
-        foreach ($files as $file) {
-            $ext = strtolower((string) $file->getExtension());
-            if ($ext !== 'json') {
-                continue;
-            }
-
-            $doc = $this->loader->readJson($file->getPathname());
-            if (! is_array($doc)) {
-                continue;
-            }
-
-            $blocks = is_array($doc['blocks'] ?? null) ? $doc['blocks'] : [];
-            foreach ($blocks as $block) {
-                if (! is_array($block)) {
-                    continue;
-                }
-                $all[] = $block;
-            }
-        }
-
-        return $all;
     }
 
     /**
@@ -640,116 +531,5 @@ final class BigFiveContentCompileService
         }
 
         return trim((string) $value);
-    }
-
-    /**
-     * @param  array<string,mixed>|null  $legal
-     * @return array<string,mixed>
-     */
-    private function buildLegalPayload(?array $legal): array
-    {
-        $legal = is_array($legal) ? $legal : [];
-        $textsNode = is_array($legal['texts'] ?? null) ? $legal['texts'] : [];
-        $texts = [
-            'zh-CN' => trim((string) ($textsNode['zh-CN'] ?? '')),
-            'en' => trim((string) ($textsNode['en'] ?? '')),
-        ];
-
-        $requiredNode = is_array($legal['required_fragments'] ?? null) ? $legal['required_fragments'] : [];
-        $requiredFragments = [
-            'zh-CN' => $this->normalizeStringList($requiredNode['zh-CN'] ?? null),
-            'en' => $this->normalizeStringList($requiredNode['en'] ?? null),
-        ];
-
-        $prohibitedNode = is_array($legal['prohibited_terms'] ?? null) ? $legal['prohibited_terms'] : [];
-        $prohibitedTerms = [
-            'zh-CN' => $this->normalizeStringList($prohibitedNode['zh-CN'] ?? null),
-            'en' => $this->normalizeStringList($prohibitedNode['en'] ?? null),
-        ];
-
-        $scope = $this->normalizeStringList($legal['scope'] ?? null);
-        $hashSource = [
-            'disclaimer_version' => trim((string) ($legal['disclaimer_version'] ?? '')),
-            'effective_date' => trim((string) ($legal['effective_date'] ?? '')),
-            'scope' => $scope,
-            'texts' => $texts,
-        ];
-
-        return [
-            'disclaimer_version' => trim((string) ($legal['disclaimer_version'] ?? '')),
-            'effective_date' => trim((string) ($legal['effective_date'] ?? '')),
-            'scope' => $scope,
-            'hash' => hash('sha256', $this->canonicalJson($hashSource)),
-            'texts' => $texts,
-            'required_fragments' => $requiredFragments,
-            'prohibited_terms' => $prohibitedTerms,
-        ];
-    }
-
-    /**
-     * @return list<string>
-     */
-    private function normalizeStringList(mixed $value): array
-    {
-        if (! is_array($value)) {
-            return [];
-        }
-
-        $out = [];
-        foreach ($value as $item) {
-            $text = trim((string) $item);
-            if ($text === '') {
-                continue;
-            }
-            $out[] = $text;
-        }
-
-        return array_values(array_unique($out));
-    }
-
-    /**
-     * @param  array<string,mixed>  $payload
-     */
-    private function canonicalJson(array $payload): string
-    {
-        ksort($payload);
-
-        foreach ($payload as $key => $value) {
-            if (is_array($value)) {
-                if (array_is_list($value)) {
-                    $payload[$key] = array_map(static function (mixed $item): mixed {
-                        return is_array($item) ? $item : (string) $item;
-                    }, $value);
-                } else {
-                    $payload[$key] = $this->canonicalizeAssoc($value);
-                }
-            }
-        }
-
-        $encoded = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-
-        return is_string($encoded) ? $encoded : '{}';
-    }
-
-    /**
-     * @param  array<string,mixed>  $payload
-     * @return array<string,mixed>
-     */
-    private function canonicalizeAssoc(array $payload): array
-    {
-        ksort($payload);
-        foreach ($payload as $key => $value) {
-            if (is_array($value)) {
-                if (array_is_list($value)) {
-                    $payload[$key] = array_map(static fn (mixed $item): string => trim((string) $item), $value);
-                } else {
-                    $payload[$key] = $this->canonicalizeAssoc($value);
-                }
-            } else {
-                $payload[$key] = trim((string) $value);
-            }
-        }
-
-        return $payload;
     }
 }

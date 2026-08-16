@@ -18,7 +18,6 @@ use App\Services\Attempts\InviteUnlock\InviteUnlockDiagnostics;
 use App\Services\Attempts\ResultProcessingTimingService;
 use App\Services\BigFive\BigFivePublicFormSummaryBuilder;
 use App\Services\BigFive\ReportEngine\Bridge\BigFiveLiveRuntimeBridge;
-use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2RuntimeWrapper;
 use App\Services\Commerce\MbtiAccessHubBuilder;
 use App\Services\Commerce\ReportUnlockOptionResolver;
 use App\Services\Content\EnneagramPackLoader;
@@ -111,7 +110,6 @@ class AttemptReadController extends Controller
         private ScaleCodeResponseProjector $responseProjector,
         private ReportSubjectRepository $reportSubjects,
         private AttemptUnlockProjectionRepairService $projectionRepair,
-        private BigFiveResultPageV2RuntimeWrapper $bigFiveResultPageV2RuntimeWrapper,
     ) {}
 
     /**
@@ -620,7 +618,6 @@ class AttemptReadController extends Controller
             if (is_array($engineV2Payload)) {
                 $responsePayload[BigFiveLiveRuntimeBridge::RESPONSE_KEY] = $engineV2Payload;
             }
-            $responsePayload = $this->bigFiveResultPageV2RuntimeWrapper->appendIfEnabled($attempt, $result, $responsePayload);
         } elseif ($scaleCode === 'ENNEAGRAM') {
             if (is_array($enneagramFormSummary)) {
                 $responsePayload['enneagram_form_v1'] = $enneagramFormSummary;

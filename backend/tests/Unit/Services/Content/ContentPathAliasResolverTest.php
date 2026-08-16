@@ -79,43 +79,33 @@ final class ContentPathAliasResolverTest extends TestCase
         $this->assertSame($this->mappedPath, $resolved);
     }
 
-    public function test_bigfive_loader_reads_pack_root_from_alias_resolver(): void
+    public function test_bigfive_loader_ignores_physical_alias_and_uses_canonical_assessment_pack(): void
     {
+        $canonicalRoot = base_path('content_packs/BIG5_OCEAN');
         $mappedBigFiveRoot = base_path('content_packs/BIG_FIVE_OCEAN_MODEL');
-        $mappedAlreadyExists = is_dir($mappedBigFiveRoot);
-        if (! $mappedAlreadyExists) {
-            File::ensureDirectoryExists($mappedBigFiveRoot.DIRECTORY_SEPARATOR.'v1');
-        }
+        $this->assertSame([], is_dir($mappedBigFiveRoot) ? File::allFiles($mappedBigFiveRoot) : []);
 
-        try {
-            config()->set('scale_identity.content_path_mode', 'dual_prefer_new');
-            DB::table('content_path_aliases')->updateOrInsert(
-                [
-                    'scope' => 'backend_content_packs',
-                    'old_path' => 'content_packs/BIG5_OCEAN',
-                ],
-                [
-                    'new_path' => 'content_packs/BIG_FIVE_OCEAN_MODEL',
-                    'scale_uid' => null,
-                    'is_active' => true,
-                    'updated_at' => now(),
-                    'created_at' => now(),
-                ]
-            );
+        config()->set('scale_identity.content_path_mode', 'dual_prefer_new');
+        DB::table('content_path_aliases')->updateOrInsert(
+            [
+                'scope' => 'backend_content_packs',
+                'old_path' => 'content_packs/BIG5_OCEAN',
+            ],
+            [
+                'new_path' => 'content_packs/BIG_FIVE_OCEAN_MODEL',
+                'scale_uid' => null,
+                'is_active' => true,
+                'updated_at' => now(),
+                'created_at' => now(),
+            ]
+        );
 
-            $loader = new BigFivePackLoader(
-                null,
-                app(ContentPathAliasResolver::class)
-            );
-            $this->assertSame(
-                $mappedBigFiveRoot.DIRECTORY_SEPARATOR.'v1',
-                $loader->packRoot('v1')
-            );
-        } finally {
-            if (! $mappedAlreadyExists) {
-                File::deleteDirectory($mappedBigFiveRoot);
-            }
-        }
+        $loader = new BigFivePackLoader(null, app(ContentPathAliasResolver::class));
+        $this->assertSame($canonicalRoot.DIRECTORY_SEPARATOR.'v1', $loader->packRoot('v1'));
+        $this->assertSame(
+            $canonicalRoot.DIRECTORY_SEPARATOR.'v1',
+            app(ContentPathAliasResolver::class)->resolveBackendPublishSourceDir('BIG5_OCEAN', 'v1')
+        );
     }
 
     public function test_publish_source_dir_legacy_mode_prefers_legacy_path(): void

@@ -40,12 +40,10 @@ final class BigFiveGoldenCasesTest extends TestCase
         $questions = $loader->readCompiledJson('questions.compiled.json', 'v1');
         $norms = $loader->readCompiledJson('norms.compiled.json', 'v1');
         $policyCompiled = $loader->readCompiledJson('policy.compiled.json', 'v1');
-        $golden = $loader->readCompiledJson('golden_cases.compiled.json', 'v1');
 
         $this->assertIsArray($questions);
         $this->assertIsArray($norms);
         $this->assertIsArray($policyCompiled);
-        $this->assertIsArray($golden);
 
         $questionIndex = [];
         foreach ((array) ($questions['question_index'] ?? []) as $qid => $row) {
@@ -62,8 +60,17 @@ final class BigFiveGoldenCasesTest extends TestCase
         /** @var BigFiveReportComposer $composer */
         $composer = app(BigFiveReportComposer::class);
 
-        $cases = is_array($golden['cases'] ?? null) ? $golden['cases'] : [];
-        $this->assertNotEmpty($cases);
+        $cases = [
+            $this->assessmentCase('CASE_MID_ALL3', $questionIndex, 'mid', [
+                'O' => 'mid', 'C' => 'low', 'E' => 'mid', 'A' => 'mid', 'N' => 'mid',
+            ]),
+            $this->assessmentCase('CASE_KEYED_HIGH', $questionIndex, 'high', [
+                'O' => 'high', 'C' => 'high', 'E' => 'high', 'A' => 'high', 'N' => 'high',
+            ]),
+            $this->assessmentCase('CASE_KEYED_LOW', $questionIndex, 'low', [
+                'O' => 'low', 'C' => 'low', 'E' => 'low', 'A' => 'low', 'N' => 'low',
+            ], 'en', 'GLOBAL'),
+        ];
 
         foreach ($cases as $case) {
             $this->assertIsArray($case);
@@ -155,5 +162,47 @@ final class BigFiveGoldenCasesTest extends TestCase
             );
             $this->assertSame(self::EXPECTED_FULL_SECTION_KEYS, $fullSections);
         }
+    }
+
+    /**
+     * @param  array<int,array<string,mixed>>  $questionIndex
+     * @param  array<string,string>  $expectedDomainBuckets
+     * @return array<string,mixed>
+     */
+    private function assessmentCase(
+        string $caseId,
+        array $questionIndex,
+        string $mode,
+        array $expectedDomainBuckets,
+        string $locale = 'zh-CN',
+        string $country = 'CN_MAINLAND'
+    ): array {
+        $answers = [];
+        foreach ($questionIndex as $questionId => $question) {
+            $direction = (int) ($question['direction'] ?? 1);
+            $code = match ($mode) {
+                'high' => $direction === 1 ? 5 : 1,
+                'low' => $direction === 1 ? 1 : 5,
+                default => 3,
+            };
+            $answers[] = ['question_id' => (string) $questionId, 'code' => (string) $code];
+        }
+
+        return [
+            'case_id' => $caseId,
+            'locale' => $locale,
+            'country' => $country,
+            'age_band' => 'all',
+            'gender' => 'ALL',
+            'time_seconds_total' => 420,
+            'answers' => $answers,
+            'expected_norms_status' => 'CALIBRATED',
+            'expected_domain_buckets' => $expectedDomainBuckets,
+            'expected_tags' => array_map(
+                static fn (string $domain, string $bucket): string => 'big5:'.strtolower($domain).'_'.$bucket,
+                array_keys($expectedDomainBuckets),
+                array_values($expectedDomainBuckets),
+            ),
+        ];
     }
 }
