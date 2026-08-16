@@ -494,6 +494,35 @@ final class BigFiveCanonicalTruthFixturesTest extends TestCase
         $this->assertIsString($raw, 'canonical fixture missing: '.$fixturePath);
         $expected = json_decode($raw, true);
         $this->assertIsArray($expected, 'canonical fixture invalid json: '.$fixturePath);
-        $this->assertSame($this->sanitizeForFixture($expected), $actual);
+        // Result copy now belongs to the canonical registry and is covered by
+        // the authority/compile/runtime contract tests. Keep these historical
+        // fixtures focused on assessment facts so a body-authority switch does
+        // not turn PHPUnit's diff renderer into a second result-body contract.
+        $this->assertSame(
+            $this->assessmentTruthProjection($this->sanitizeForFixture($expected)),
+            $this->assessmentTruthProjection($actual),
+        );
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @return array<string,mixed>
+     */
+    private function assessmentTruthProjection(array $payload): array
+    {
+        return [
+            'scenario_id' => data_get($payload, 'scenario_id'),
+            'form_code' => data_get($payload, 'form_code'),
+            'start' => data_get($payload, 'start'),
+            'submit' => data_get($payload, 'submit'),
+            'result_form' => data_get($payload, 'result_payload.big5_form_v1'),
+            'report_form' => data_get($payload, 'report_payload.big5_form_v1'),
+            'report_access' => [
+                'access_state' => data_get($payload, 'report_access_payload.access_state'),
+                'report_state' => data_get($payload, 'report_access_payload.report_state'),
+                'pdf_state' => data_get($payload, 'report_access_payload.pdf_state'),
+            ],
+            'pdf_contract' => data_get($payload, 'pdf_contract'),
+        ];
     }
 }
