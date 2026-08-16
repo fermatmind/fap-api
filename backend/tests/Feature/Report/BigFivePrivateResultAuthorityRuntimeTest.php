@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace Tests\Feature\Report;
 
 use App\Services\Content\BigFivePrivateResultCompileService;
+use App\Services\Content\BigFivePrivateResultPackLoader;
 use App\Services\Report\BigFiveReportComposer;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportGatekeeper;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use RuntimeException;
 use Tests\Feature\V0_3\Concerns\BuildsBigFiveReportEngineBridgeFixture;
 use Tests\TestCase;
 
@@ -84,5 +86,39 @@ final class BigFivePrivateResultAuthorityRuntimeTest extends TestCase
         $this->assertSame('immutable_legacy_snapshot', data_get($marked, '_meta.big5_private_result_authority.mode'));
         $this->assertSame('', data_get($marked, '_meta.big5_private_result_authority.source_hash'));
         $this->assertSame('', data_get($marked, '_meta.big5_private_result_authority.compiled_hash'));
+    }
+
+    public function test_runtime_loader_rejects_manifest_identity_drift(): void
+    {
+        $payload = app(BigFivePrivateResultCompileService::class)->compile()['payload'];
+        $payload['registry_manifest']['source_hash'] = str_repeat('0', 64);
+        $unsigned = $payload;
+        unset($unsigned['compiled_hash']);
+        $payload['compiled_hash'] = hash('sha256', $this->canonicalJson($unsigned));
+
+        $method = new \ReflectionMethod(BigFivePrivateResultPackLoader::class, 'assertValid');
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('BIG5_PRIVATE_RESULT_ACTIVE_ARTIFACT_CONTRACT_INVALID');
+        $method->invoke(app(BigFivePrivateResultPackLoader::class), $payload);
+    }
+
+    private function canonicalJson(mixed $value): string
+    {
+        return json_encode($this->normalize($value), JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRESERVE_ZERO_FRACTION);
+    }
+
+    private function normalize(mixed $value): mixed
+    {
+        if (is_array($value)) {
+            if (! array_is_list($value)) {
+                ksort($value, SORT_STRING);
+            }
+            foreach ($value as $key => $item) {
+                $value[$key] = $this->normalize($item);
+            }
+        }
+
+        return $value;
     }
 }

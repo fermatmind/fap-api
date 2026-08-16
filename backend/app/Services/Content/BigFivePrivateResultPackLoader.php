@@ -84,7 +84,15 @@ final class BigFivePrivateResultPackLoader
     {
         $sourceHash = strtolower(trim((string) ($payload['source_hash'] ?? '')));
         $compiledHash = strtolower(trim((string) ($payload['compiled_hash'] ?? '')));
+        $registryManifest = is_array($payload['registry_manifest'] ?? null)
+            ? $payload['registry_manifest']
+            : [];
         if (($payload['schema'] ?? null) !== BigFivePrivateResultCompileService::SCHEMA
+            || ($payload['scale_code'] ?? null) !== 'BIG5_OCEAN'
+            || ($payload['locale'] ?? null) !== 'zh-CN'
+            || ($payload['version'] ?? null) !== BigFivePrivateResultCompileService::PACK_VERSION
+            || ($registryManifest['schema'] ?? null) !== 'fap.big5.report_registry_manifest.v1'
+            || ! hash_equals($sourceHash, strtolower(trim((string) ($registryManifest['source_hash'] ?? ''))))
             || preg_match('/\A[0-9a-f]{64}\z/', $sourceHash) !== 1
             || preg_match('/\A[0-9a-f]{64}\z/', $compiledHash) !== 1
             || ! is_array($payload['assets'] ?? null)) {
