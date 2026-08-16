@@ -20,7 +20,7 @@ final class SynergyResolutionServiceTest extends TestCase
         $candidates = app(SynergyCandidateResolver::class)->collect($context, $registry);
         $selected = app(SynergyResolutionService::class)->resolve($candidates, 2);
 
-        $this->assertCount(1, $selected);
+        $this->assertCount(2, $selected);
         $this->assertSame('n_high_x_e_low', $selected[0]->synergyId);
         $this->assertSame('stress_activation', $selected[0]->mutexGroup);
         $this->assertSame(['o_high_x_n_high', 'c_high_x_n_high'], $selected[0]->mutualExcludes);
@@ -39,8 +39,11 @@ final class SynergyResolutionServiceTest extends TestCase
         $candidates = app(SynergyCandidateResolver::class)->collect($context, $registry);
         $selected = app(SynergyResolutionService::class)->resolve($candidates, 2);
 
-        $this->assertSame(['n_high_x_e_low', 'o_high_x_c_low', 'o_high_x_n_high'], array_map(static fn ($match): string => $match->synergyId, $candidates));
-        $this->assertSame(['n_high_x_e_low', 'o_high_x_c_low'], array_map(static fn ($match): string => $match->synergyId, $selected));
+        $this->assertSame(
+            ['n_high_x_e_low', 'o_high_x_c_low', 'o_high_x_n_high', 'o_x_c_operating_balance', 'e_x_a_social_balance', 'c_x_n_load_balance', 'o_x_e_exploration_expression', 'a_x_n_relational_recovery'],
+            array_map(static fn ($match): string => $match->synergyId, $candidates)
+        );
+        $this->assertSame(['n_high_x_e_low', 'o_x_e_exploration_expression'], array_map(static fn ($match): string => $match->synergyId, $selected));
         $this->assertCount(2, $selected);
     }
 }

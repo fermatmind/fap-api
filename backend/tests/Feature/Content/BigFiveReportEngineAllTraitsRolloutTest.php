@@ -41,13 +41,17 @@ final class BigFiveReportEngineAllTraitsRolloutTest extends TestCase
         }
     }
 
-    public function test_pr2_trait_rollout_still_keeps_balanced_profiles_without_synergy_or_facet_anomalies(): void
+    public function test_balanced_profiles_still_receive_three_bounded_composites_without_facet_anomalies(): void
     {
         $payload = app(BigFiveReportEngine::class)->generate($this->profiles()['balanced']);
 
-        $this->assertSame([], $payload['engine_decisions']['selected_synergies']);
+        $this->assertCount(3, $payload['engine_decisions']['selected_synergies']);
+        foreach ($payload['engine_decisions']['selected_synergies'] as $synergy) {
+            $this->assertCount(2, $synergy['components']);
+            $this->assertSame('core_portrait', $synergy['render_section']);
+        }
         $this->assertSame([], $payload['engine_decisions']['facet_anomalies']);
-        $this->assertSame('scenario_bound_action_matrix_pr3c', data_get($payload, 'render_hints.limited_rollouts.action_rule_scope'));
+        $this->assertSame(3, data_get($payload, 'render_hints.limited_rollouts.composite_insight_cap'));
     }
 
     /**

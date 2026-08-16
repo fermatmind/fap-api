@@ -29,7 +29,7 @@ final class BigFiveReportEngineActionMatrixRolloutTest extends TestCase
                 if ($rule !== null) {
                     $scenarioCount++;
                     $selectedCount++;
-                    foreach (['scenario_tags', 'bucket', 'difficulty_level', 'time_horizon', 'title', 'body'] as $field) {
+                    foreach (['scenario_tags', 'bucket', 'difficulty_level', 'time_horizon', 'title', 'body', 'why_recommended', 'completion_signal', 'evidence'] as $field) {
                         $this->assertArrayHasKey($field, $rule);
                     }
                 }
@@ -86,11 +86,11 @@ final class BigFiveReportEngineActionMatrixRolloutTest extends TestCase
         $payload = app(BigFiveReportEngine::class)->generateCanonicalNSlice();
 
         $this->assertSame('n_high_x_e_low', data_get($payload, 'engine_decisions.selected_synergies.0.synergy_id'));
-        $this->assertContains('n1_high_spike', array_map(
+        $this->assertContains('n6_low_with_n_high', array_map(
             static fn (array $match): string => $match['rule_id'],
             $payload['engine_decisions']['facet_anomalies']
         ));
-        $this->assertSame('stress_recovery', $payload['action_matrix']['top_priority_scenario']);
+        $this->assertSame('personal_growth', $payload['action_matrix']['top_priority_scenario']);
     }
 
     /**
@@ -98,6 +98,9 @@ final class BigFiveReportEngineActionMatrixRolloutTest extends TestCase
      */
     private function fixture(string $name): array
     {
-        return json_decode((string) file_get_contents(base_path("tests/Fixtures/big5_engine/action_contexts/{$name}.json")), true, flags: JSON_THROW_ON_ERROR);
+        $fixture = json_decode((string) file_get_contents(base_path("tests/Fixtures/big5_engine/action_contexts/{$name}.json")), true, flags: JSON_THROW_ON_ERROR);
+        $fixture['quality'] = ['level' => 'A'];
+
+        return $fixture;
     }
 }

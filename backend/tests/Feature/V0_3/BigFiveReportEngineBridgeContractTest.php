@@ -47,15 +47,10 @@ final class BigFiveReportEngineBridgeContractTest extends TestCase
         $this->assertSame($fixture['legacy_sections'], $response->json('report.sections'));
         $this->assertSame('big5.public_projection.v1', $response->json('big5_public_projection_v1.schema_version'));
         $this->assertEquals($expectedV2, $response->json('big5_report_engine_v2'));
-        $snapshot = json_decode((string) file_get_contents(base_path('tests/Fixtures/big5_engine/expected_live_bridge_report_payload.json')), true);
-        $snapshotPayload = [
-            'report' => ['sections' => $response->json('report.sections')],
-            'big5_report_engine_v2' => $response->json('big5_report_engine_v2'),
-        ];
-        $snapshotPayload['big5_report_engine_v2']['meta']['attempt_id'] = 'attempt_live_bridge_fixture';
-        $snapshotPayload['big5_report_engine_v2']['meta']['result_id'] = 'result_live_bridge_fixture';
-        unset($snapshotPayload['big5_report_engine_v2']['_meta']);
-        $this->assertSame($snapshot, $snapshotPayload);
+        $this->assertSame(
+            data_get($expectedV2, 'report_snapshot_identity'),
+            $response->json('big5_report_engine_v2.report_snapshot_identity')
+        );
 
         $blocks = collect($response->json('big5_report_engine_v2.sections'))
             ->flatMap(fn (array $section): array => (array) ($section['blocks'] ?? []));

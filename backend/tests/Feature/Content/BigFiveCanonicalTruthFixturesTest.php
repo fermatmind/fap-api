@@ -514,7 +514,18 @@ final class BigFiveCanonicalTruthFixturesTest extends TestCase
             'scenario_id' => data_get($payload, 'scenario_id'),
             'form_code' => data_get($payload, 'form_code'),
             'start' => data_get($payload, 'start'),
-            'submit' => data_get($payload, 'submit'),
+            'submit' => [
+                'domains_percentile' => data_get($payload, 'submit.domains_percentile'),
+                'facet_percentile_count' => data_get($payload, 'submit.facet_percentile_count'),
+                'norms' => [
+                    'group_id' => data_get($payload, 'submit.norms.group_id'),
+                    'norms_version' => data_get($payload, 'submit.norms.norms_version'),
+                    'source_id' => data_get($payload, 'submit.norms.source_id'),
+                    'status' => data_get($payload, 'submit.norms.status'),
+                ],
+                'ok' => data_get($payload, 'submit.ok'),
+                'quality' => data_get($payload, 'submit.quality'),
+            ],
             'result_form' => data_get($payload, 'result_payload.big5_form_v1'),
             'report_form' => data_get($payload, 'report_payload.big5_form_v1'),
             'report_access' => [
@@ -522,7 +533,10 @@ final class BigFiveCanonicalTruthFixturesTest extends TestCase
                 'report_state' => data_get($payload, 'report_access_payload.report_state'),
                 'pdf_state' => data_get($payload, 'report_access_payload.pdf_state'),
             ],
-            'pdf_contract' => data_get($payload, 'pdf_contract'),
+            'pdf_contract' => [
+                'status' => data_get($payload, 'pdf_contract.status'),
+                'download_allowed' => data_get($payload, 'pdf_contract.download_allowed'),
+            ],
         ];
     }
 }

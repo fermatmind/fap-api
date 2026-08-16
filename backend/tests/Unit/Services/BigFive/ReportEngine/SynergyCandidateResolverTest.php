@@ -12,6 +12,14 @@ use Tests\TestCase;
 
 final class SynergyCandidateResolverTest extends TestCase
 {
+    private const BASELINE_COMPOSITE_IDS = [
+        'o_x_c_operating_balance',
+        'e_x_a_social_balance',
+        'c_x_n_load_balance',
+        'o_x_e_exploration_expression',
+        'a_x_n_relational_recovery',
+    ];
+
     #[DataProvider('contextProvider')]
     public function test_context_fixtures_collect_expected_synergy_candidates(string $fixtureName): void
     {
@@ -21,7 +29,7 @@ final class SynergyCandidateResolverTest extends TestCase
         $candidates = app(SynergyCandidateResolver::class)->collect(ReportContext::fromArray($fixture), $registry);
 
         $this->assertSame(
-            $fixture['expected_synergy_candidates'],
+            [...$fixture['expected_synergy_candidates'], ...self::BASELINE_COMPOSITE_IDS],
             array_map(static fn ($match): string => $match->synergyId, $candidates),
             $fixtureName
         );

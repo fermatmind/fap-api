@@ -37,7 +37,10 @@ final class BigFiveReportEngineFacetPrecisionRolloutTest extends TestCase
             }
 
             foreach ($section['blocks'] as $block) {
-                $this->assertNotContains($block['kind'], ['metric_card', 'table_row']);
+                $this->assertNotSame('table_row', $block['kind']);
+                if ($block['kind'] === 'metric_card') {
+                    $this->assertSame('BigFiveNormEvidenceCard', $block['component']);
+                }
                 $this->assertStringNotContainsString('facet_anomaly_', (string) $block['block_id']);
             }
         }
@@ -106,8 +109,8 @@ final class BigFiveReportEngineFacetPrecisionRolloutTest extends TestCase
         $payload = app(BigFiveReportEngine::class)->generateCanonicalNSlice();
 
         $ruleIds = array_map(static fn (array $match): string => $match['rule_id'], $payload['engine_decisions']['facet_anomalies']);
-        $this->assertContains('n1_high_spike', $ruleIds);
-        $this->assertContains('n3_high_spike', $ruleIds);
+        $this->assertContains('n6_low_with_n_high', $ruleIds);
+        $this->assertContains('n4_low_with_n_high', $ruleIds);
         $this->assertSame('n_high_x_e_low', data_get($payload, 'engine_decisions.selected_synergies.0.synergy_id'));
     }
 

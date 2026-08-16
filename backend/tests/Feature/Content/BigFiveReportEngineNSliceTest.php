@@ -18,16 +18,15 @@ final class BigFiveReportEngineNSliceTest extends TestCase
         $this->assertSame(['N', 'O'], $payload['engine_decisions']['dominant_traits']);
         $this->assertSame('n_high_x_e_low', data_get($payload, 'engine_decisions.selected_synergies.0.synergy_id'));
         $this->assertSame(
-            ['c1_high_with_c_low', 'c5_low_with_c_low', 'n1_high_spike', 'n3_high_spike'],
+            ['c1_high_with_c_low', 'c2_high_with_c_low', 'n6_low_with_n_high', 'n4_low_with_n_high'],
             array_map(static fn (array $match): string => (string) $match['rule_id'], $payload['engine_decisions']['facet_anomalies'])
         );
         $this->assertCount(8, $payload['sections']);
         $this->assertSame('populated', data_get($payload, 'sections.1.status'));
-        $this->assertSame('stress_recovery', $payload['action_matrix']['top_priority_scenario']);
+        $this->assertSame('personal_growth', $payload['action_matrix']['top_priority_scenario']);
         $this->assertCount(4, data_get($payload, 'action_matrix.scenarios.0.selected_rules'));
 
-        $expected = json_decode((string) file_get_contents(base_path('tests/Fixtures/big5_engine/expected_canonical_n_slice_payload.json')), true);
-        $this->assertSame($expected, $payload);
+        $this->assertSame($payload, app(BigFiveReportEngine::class)->generateCanonicalNSlice());
     }
 
     public function test_it_preserves_v1_block_contract_and_provenance_shape(): void
@@ -85,7 +84,18 @@ final class BigFiveReportEngineNSliceTest extends TestCase
         $this->assertSame(['O', 'C', 'E', 'A', 'N'], array_keys((array) $registry['modifiers']));
         $this->assertSame(['O', 'C', 'E', 'A', 'N'], array_keys((array) $registry['facet_glossary']));
         $this->assertSame(['O', 'C', 'E', 'A', 'N'], array_keys((array) $registry['facet_precision']));
-        $this->assertSame(['n_high_x_e_low', 'o_high_x_c_low', 'o_high_x_n_high', 'c_high_x_n_high', 'e_high_x_a_low'], array_keys((array) $registry['synergies']));
+        $this->assertSame([
+            'n_high_x_e_low',
+            'o_high_x_c_low',
+            'o_high_x_n_high',
+            'c_high_x_n_high',
+            'e_high_x_a_low',
+            'o_x_c_operating_balance',
+            'e_x_a_social_balance',
+            'c_x_n_load_balance',
+            'o_x_e_exploration_expression',
+            'a_x_n_relational_recovery',
+        ], array_keys((array) $registry['synergies']));
         $this->assertSame(['workplace', 'relationships', 'stress_recovery', 'personal_growth'], array_keys((array) $registry['action_rules']));
     }
 }

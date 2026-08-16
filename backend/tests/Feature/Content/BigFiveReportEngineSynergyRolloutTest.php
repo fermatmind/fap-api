@@ -11,22 +11,25 @@ use Tests\TestCase;
 final class BigFiveReportEngineSynergyRolloutTest extends TestCase
 {
     #[DataProvider('singleSynergyProvider')]
-    public function test_single_synergy_renders_primary_only_in_core_portrait(string $fixtureName, string $expectedSynergyId): void
+    public function test_specific_synergy_leads_three_composites_in_core_portrait(string $fixtureName, string $expectedSynergyId): void
     {
-        $payload = app(BigFiveReportEngine::class)->generate($this->fixture($fixtureName));
+        $fixture = $this->fixture($fixtureName);
+        $fixture['quality'] = ['level' => 'A'];
+        $payload = app(BigFiveReportEngine::class)->generate($fixture);
 
-        $this->assertSame([$expectedSynergyId], $this->selectedSynergyIds($payload));
-        $this->assertSame('primary', data_get($payload, 'engine_decisions.selected_synergies.0.render_rank'));
+        $this->assertSame($expectedSynergyId, $this->selectedSynergyIds($payload)[0]);
+        $this->assertCount(3, $this->selectedSynergyIds($payload));
+        $this->assertSame(1, data_get($payload, 'engine_decisions.selected_synergies.0.render_rank'));
         $this->assertSame('core_portrait', data_get($payload, 'engine_decisions.selected_synergies.0.render_section'));
-        $this->assertSame('synergy_primary', data_get($payload, 'engine_decisions.selected_synergies.0.render_slot'));
+        $this->assertSame('composite_1', data_get($payload, 'engine_decisions.selected_synergies.0.render_slot'));
         $this->assertSame([
             [
                 'section_key' => 'core_portrait',
-                'slot' => 'synergy_primary',
+                'slot' => 'composite_1',
                 'kind' => 'callout',
             ],
         ], data_get($payload, 'engine_decisions.selected_synergies.0.section_targets'));
-        $this->assertSame([$expectedSynergyId], $this->sectionSynergyIds($payload, 'core_portrait'));
+        $this->assertSame($this->selectedSynergyIds($payload), $this->sectionSynergyIds($payload, 'core_portrait'));
         $this->assertSame([], $this->sectionSynergyIds($payload, 'action_plan'));
         $this->assertNoSynergyOutsideAllowedSections($payload);
 
@@ -37,21 +40,23 @@ final class BigFiveReportEngineSynergyRolloutTest extends TestCase
         }
     }
 
-    public function test_multi_hit_conflict_keeps_two_synergies_and_only_one_stress_activation_match(): void
+    public function test_multi_hit_conflict_keeps_three_composites_and_only_one_stress_activation_match(): void
     {
-        $payload = app(BigFiveReportEngine::class)->generate($this->fixture('context_multi_hit_conflict'));
+        $fixture = $this->fixture('context_multi_hit_conflict');
+        $fixture['quality'] = ['level' => 'A'];
+        $payload = app(BigFiveReportEngine::class)->generate($fixture);
 
-        $this->assertSame(['n_high_x_e_low', 'o_high_x_c_low'], $this->selectedSynergyIds($payload));
-        $this->assertSame(['primary', 'secondary'], array_map(
-            static fn (array $match): string => (string) $match['render_rank'],
+        $this->assertSame(['n_high_x_e_low', 'o_x_e_exploration_expression', 'c_x_n_load_balance'], $this->selectedSynergyIds($payload));
+        $this->assertSame([1, 2, 3], array_map(
+            static fn (array $match): int => (int) $match['render_rank'],
             $payload['engine_decisions']['selected_synergies']
         ));
-        $this->assertSame(['core_portrait', 'action_plan'], array_map(
+        $this->assertSame(['core_portrait', 'core_portrait', 'core_portrait'], array_map(
             static fn (array $match): string => (string) $match['render_section'],
             $payload['engine_decisions']['selected_synergies']
         ));
-        $this->assertSame(['n_high_x_e_low'], $this->sectionSynergyIds($payload, 'core_portrait'));
-        $this->assertSame(['o_high_x_c_low'], $this->sectionSynergyIds($payload, 'action_plan'));
+        $this->assertSame($this->selectedSynergyIds($payload), $this->sectionSynergyIds($payload, 'core_portrait'));
+        $this->assertSame([], $this->sectionSynergyIds($payload, 'action_plan'));
         $this->assertCount(1, array_filter(
             $payload['engine_decisions']['selected_synergies'],
             static fn (array $match): bool => ($match['mutex_group'] ?? '') === 'stress_activation'
@@ -59,25 +64,24 @@ final class BigFiveReportEngineSynergyRolloutTest extends TestCase
         $this->assertNoSynergyOutsideAllowedSections($payload);
     }
 
-    public function test_balanced_profile_renders_no_synergy_blocks(): void
+    public function test_balanced_profile_renders_three_baseline_composites(): void
     {
-        $payload = app(BigFiveReportEngine::class)->generate($this->fixture('context_balanced_no_synergy'));
+        $fixture = $this->fixture('context_balanced_no_synergy');
+        $fixture['quality'] = ['level' => 'A'];
+        $payload = app(BigFiveReportEngine::class)->generate($fixture);
 
-        $this->assertSame([], $this->selectedSynergyIds($payload));
-        foreach ($payload['sections'] as $section) {
-            $this->assertSame([], array_values(array_filter(
-                (array) $section['blocks'],
-                static fn (array $block): bool => str_starts_with((string) $block['block_uid'], $section['section_key'].'.synergy.')
-            )));
-        }
+        $this->assertCount(3, $this->selectedSynergyIds($payload));
+        $this->assertSame($this->selectedSynergyIds($payload), $this->sectionSynergyIds($payload, 'core_portrait'));
+        $this->assertNoSynergyOutsideAllowedSections($payload);
     }
 
     public function test_canonical_n_slice_still_selects_n_high_e_low(): void
     {
         $payload = app(BigFiveReportEngine::class)->generateCanonicalNSlice();
 
-        $this->assertSame(['n_high_x_e_low'], $this->selectedSynergyIds($payload));
-        $this->assertSame(['n_high_x_e_low'], $this->sectionSynergyIds($payload, 'core_portrait'));
+        $this->assertSame('n_high_x_e_low', $this->selectedSynergyIds($payload)[0]);
+        $this->assertCount(3, $this->selectedSynergyIds($payload));
+        $this->assertSame($this->selectedSynergyIds($payload), $this->sectionSynergyIds($payload, 'core_portrait'));
         $this->assertSame([], $this->sectionSynergyIds($payload, 'action_plan'));
     }
 
