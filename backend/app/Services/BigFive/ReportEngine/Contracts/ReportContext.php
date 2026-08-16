@@ -81,7 +81,7 @@ final class ReportContext
 
     public function qualityGrade(): string
     {
-        $grade = strtoupper(trim((string) ($this->quality['level'] ?? '')));
+        $grade = strtoupper(trim((string) ($this->quality['level'] ?? $this->quality['grade'] ?? '')));
 
         return in_array($grade, ['A', 'B', 'C', 'D'], true) ? $grade : 'UNKNOWN';
     }
