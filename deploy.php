@@ -980,13 +980,14 @@ if [ -z "$previous" ]; then
 fi
 [[ "$previous" =~ ^[0-9a-fA-F-]{36}$ ]]
 printf '%%s\n' "$previous" > ../.eq60-private-result-previous-release
-timeout 180 {{bin/php}} artisan packs2:publish --pack=%s --pack-version=v1 --activate=1 --force-new-release=1 --compare-and-swap=1 --expected-previous-release-id="$previous" --source_commit=%s --no-interaction --ansi
+release_revision="$(tr -d '\r\n' < ../REVISION)"
+[[ "$release_revision" =~ ^[0-9a-f]{40}$ ]]
+timeout 180 {{bin/php}} artisan packs2:publish --pack=%s --pack-version=v1 --activate=1 --force-new-release=1 --compare-and-swap=1 --expected-previous-release-id="$previous" --source_commit="$release_revision" --no-interaction --ansi
 BASH,
             deployShellArg('EQ_60'),
             deployShellArg('EQ_60'),
             deployShellArg('EQ_60'),
             deployShellArg('EQ_60'),
-            deployShellArg((string) get('revision')),
         ));
     });
 });
