@@ -124,13 +124,8 @@ final class Eq60ReportComposer
                 }
             }
 
-            if ($source === 'copy') {
-                $copySection = $this->composeCopySection($sectionKey, $locale, $outputAccessLevel, $moduleCode);
-                if (is_array($copySection)) {
-                    $sections[] = $copySection;
-                }
-
-                continue;
+            if ($source !== 'blocks') {
+                throw new \RuntimeException('EQ_60_NON_CANONICAL_SECTION_SOURCE');
             }
 
             $sectionBlocks = $this->resolveSectionBlocks($reportCompiled, $locale, $sectionConfig, $score);
@@ -152,7 +147,11 @@ final class Eq60ReportComposer
         }
 
         [$compatFree, $compatPaid] = $this->buildCompatBlocks($sections);
-        $v5Scores = $this->buildV5Scores($score, $locale);
+        $v5Scores = $this->buildV5Scores(
+            $score,
+            $locale,
+            (array) data_get($reportAssets, 'assets.score_system', []),
+        );
         $dimensionSummary = array_values((array) ($v5Scores['dimension_summary'] ?? []));
         unset($v5Scores['dimension_summary']);
         $quality = $this->buildV5Quality($score);
@@ -283,14 +282,23 @@ final class Eq60ReportComposer
      * @param  array<string,mixed>  $score
      * @return array<string,mixed>
      */
-    private function buildV5Scores(array $score, string $locale): array
+    private function buildV5Scores(array $score, string $locale, array $scoreSystem): array
     {
-        $global = $this->scoreNode((array) data_get($score, 'scores.global', []), $this->globalScoreLabel($locale));
+        $globalLabel = trim((string) data_get($this->localizedAsset((array) ($scoreSystem['global_index'] ?? []), $locale), 'label'));
+        if ($globalLabel === '') {
+            throw new \RuntimeException('EQ_60_GLOBAL_SCORE_LABEL_MISSING');
+        }
+        $global = $this->scoreNode((array) data_get($score, 'scores.global', []), $globalLabel);
         $dimensions = [];
         $summary = [];
         foreach (['SA', 'ER', 'EM', 'RM'] as $code) {
-            $label = $this->dimensionLabel($code, $locale);
-            $node = $this->scoreNode((array) data_get($score, 'scores.'.$code, []), $label, $label);
+            $dimensionCopy = $this->localizedAsset((array) data_get($scoreSystem, 'dimensions.'.$code, []), $locale);
+            $label = trim((string) ($dimensionCopy['label'] ?? ''));
+            $shortLabel = trim((string) ($dimensionCopy['short_label'] ?? ''));
+            if ($label === '' || $shortLabel === '') {
+                throw new \RuntimeException('EQ_60_DIMENSION_SCORE_LABEL_MISSING');
+            }
+            $node = $this->scoreNode((array) data_get($score, 'scores.'.$code, []), $label, $shortLabel);
             $dimensions[$code] = $node;
             $summary[] = [
                 'code' => $code,
@@ -353,32 +361,6 @@ final class Eq60ReportComposer
             'developing', 'proficient', 'foundational', 'stable', 'integrated' => $sourceBand,
             default => 'stable',
         };
-    }
-
-    private function globalScoreLabel(string $locale): string
-    {
-        return $locale === 'zh-CN'
-            ? '情绪与关系综合指数'
-            : 'Emotional & Relational Functioning Index';
-    }
-
-    private function dimensionLabel(string $code, string $locale): string
-    {
-        $zh = [
-            'SA' => '自我觉察',
-            'ER' => '情绪调节',
-            'EM' => '共情理解',
-            'RM' => '关系管理',
-        ];
-        $en = [
-            'SA' => 'Self-Awareness',
-            'ER' => 'Emotion Regulation',
-            'EM' => 'Empathy',
-            'RM' => 'Relationship Management',
-        ];
-        $map = $locale === 'zh-CN' ? $zh : $en;
-
-        return $map[$code] ?? $code;
     }
 
     /**
@@ -1202,7 +1184,7 @@ final class Eq60ReportComposer
         $actionId = (string) ($interpretation['action_prescription_id'] ?? '');
         $snapshotId = 'eq.snapshot.'.$formulationId;
         if (! isset($snapshotAssets[$snapshotId])) {
-            $snapshotId = 'eq.snapshot.low_confidence_result';
+            throw new \RuntimeException('EQ_60_RESULT_SNAPSHOT_MISSING');
         }
         $resultSnapshot = array_merge(
             ['id' => $snapshotId],
@@ -1213,9 +1195,10 @@ final class Eq60ReportComposer
         foreach ((array) ($interpretation['primary_mechanism_ids'] ?? []) as $idRaw) {
             $id = trim((string) $idRaw);
             $asset = $this->resolveMechanismAsset((array) data_get($docs, 'mechanism_map.pairs', []), $id, $locale);
-            if ($asset !== null) {
-                $mechanisms[] = $asset;
+            if ($asset === null) {
+                throw new \RuntimeException('EQ_60_MECHANISM_ASSET_MISSING');
             }
+            $mechanisms[] = $asset;
         }
 
         $scenes = [];
@@ -1228,33 +1211,28 @@ final class Eq60ReportComposer
             }
             $variantId = trim((string) ($sceneVariantIds[$idx] ?? ''));
             $variantNode = $variantId !== '' ? ($sceneVariantAssets[$variantId] ?? null) : null;
-            if (is_array($variantNode)) {
-                $scenes[] = array_merge(
-                    [
-                        'id' => $variantId,
-                        'scene_family' => (string) ($variantNode['scene_family'] ?? $family),
-                        'variant' => (string) ($variantNode['variant'] ?? 'primary'),
-                        'fallback_scene_id' => $family,
-                    ],
-                    $this->localizedAsset($variantNode, $locale)
-                );
-
-                continue;
+            if (! is_array($variantNode)) {
+                throw new \RuntimeException('EQ_60_SCENE_VARIANT_MISSING');
             }
-
-            $node = data_get($docs, 'reality_translation.scenes.'.$family);
-            if (is_array($node)) {
-                $scenes[] = array_merge(['id' => $family, 'scene_family' => $family, 'variant' => 'generic'], $this->localizedAsset($node, $locale));
-            }
+            $scenes[] = array_merge(
+                [
+                    'id' => $variantId,
+                    'scene_family' => (string) ($variantNode['scene_family'] ?? $family),
+                    'variant' => (string) ($variantNode['variant'] ?? 'primary'),
+                    'fallback_scene_id' => $family,
+                ],
+                $this->localizedAsset($variantNode, $locale)
+            );
         }
 
         $career = [];
         foreach ((array) ($interpretation['career_environment_ids'] ?? []) as $idRaw) {
             $id = trim((string) $idRaw);
             $asset = $this->resolveCareerAsset((array) data_get($docs, 'career_environment.variables', []), $id, $locale);
-            if ($asset !== null) {
-                $career[] = $asset;
+            if ($asset === null) {
+                throw new \RuntimeException('EQ_60_CAREER_ASSET_MISSING');
             }
+            $career[] = $asset;
         }
         $conversionActions = [];
         $conversionIds = $lowConfidence ? [
@@ -1271,9 +1249,10 @@ final class Eq60ReportComposer
         ];
         foreach ($conversionIds as $id) {
             $asset = $this->localizedAsset((array) ($conversionAssets[$id] ?? []), $locale);
-            if ($asset !== []) {
-                $conversionActions[] = array_merge(['id' => $id], $asset);
+            if ($asset === []) {
+                throw new \RuntimeException('EQ_60_CONVERSION_ASSET_MISSING');
             }
+            $conversionActions[] = array_merge(['id' => $id], $asset);
         }
 
         $psychometricEvidence = [];
@@ -1287,24 +1266,26 @@ final class Eq60ReportComposer
             'eq.evidence.criterion_validity',
         ] as $id) {
             $asset = $this->localizedAsset((array) ($evidenceAssets[$id] ?? []), $locale);
-            if ($asset !== []) {
-                $psychometricEvidence[] = array_merge(['id' => $id], $asset);
+            if ($asset === []) {
+                throw new \RuntimeException('EQ_60_EVIDENCE_ASSET_MISSING');
             }
+            $psychometricEvidence[] = array_merge(['id' => $id], $asset);
         }
 
         $resultPageDepthModules = [];
         foreach ($this->resultPageDepthModuleIds($interpretation) as $id) {
             $depthAsset = (array) ($depthAssets[$id] ?? []);
             $asset = $this->localizedAsset($depthAsset, $locale);
-            if ($asset !== []) {
-                $resultPageDepthModules[] = array_merge(
-                    [
-                        'id' => $id,
-                        'placement' => (string) data_get($depthAsset, 'meta.placement', ''),
-                    ],
-                    $asset
-                );
+            if ($asset === []) {
+                throw new \RuntimeException('EQ_60_DEPTH_ASSET_MISSING');
             }
+            $resultPageDepthModules[] = array_merge(
+                [
+                    'id' => $id,
+                    'placement' => (string) data_get($depthAsset, 'meta.placement', ''),
+                ],
+                $asset
+            );
         }
 
         $agentPlaybooks = [];
@@ -1317,9 +1298,10 @@ final class Eq60ReportComposer
         ];
         foreach ($agentPlaybookIds as $id) {
             $asset = $this->localizedAsset((array) ($agentAssets[$id] ?? []), $locale);
-            if ($asset !== []) {
-                $agentPlaybooks[] = array_merge(['id' => $id], $asset);
+            if ($asset === []) {
+                throw new \RuntimeException('EQ_60_AGENT_PLAYBOOK_MISSING');
             }
+            $agentPlaybooks[] = array_merge(['id' => $id], $asset);
         }
 
         $backendIntegrationContract = [];
@@ -1331,9 +1313,10 @@ final class Eq60ReportComposer
             'eq.backend_contract.agent_readiness',
         ] as $id) {
             $asset = $this->localizedAsset((array) ($backendContractAssets[$id] ?? []), $locale);
-            if ($asset !== []) {
-                $backendIntegrationContract[] = array_merge(['id' => $id], $asset);
+            if ($asset === []) {
+                throw new \RuntimeException('EQ_60_BACKEND_CONTRACT_ASSET_MISSING');
             }
+            $backendIntegrationContract[] = array_merge(['id' => $id], $asset);
         }
 
         return [
@@ -1459,7 +1442,7 @@ final class Eq60ReportComposer
      */
     private function resolveMechanismAsset(array $pairs, string $id, string $locale): ?array
     {
-        foreach (['high_high', 'high_low', 'low_high', 'low_low'] as $state) {
+        foreach (['under_pressure_gap', 'high_high', 'high_low', 'low_high', 'low_low', 'mixed'] as $state) {
             $suffix = '_'.$state;
             if (! str_ends_with($id, $suffix)) {
                 continue;
@@ -1526,7 +1509,7 @@ final class Eq60ReportComposer
         $primary = $this->packLoader->normalizeLocale($locale);
         $localized = data_get($route, 'locales.'.$primary);
         if (! is_array($localized)) {
-            $localized = data_get($route, 'locales.'.($primary === 'zh-CN' ? 'en' : 'zh-CN'), []);
+            throw new \RuntimeException('EQ_60_PERSONALIZATION_ROUTE_LOCALE_MISSING');
         }
 
         return [
@@ -1597,7 +1580,7 @@ final class Eq60ReportComposer
     private function localizedAsset(array $asset, string $locale): array
     {
         $primary = $this->packLoader->normalizeLocale($locale);
-        $node = $asset[$primary] ?? ($asset[$primary === 'zh-CN' ? 'en' : 'zh-CN'] ?? []);
+        $node = $asset[$primary] ?? [];
 
         return is_array($node) ? $node : [];
     }
@@ -1647,7 +1630,7 @@ final class Eq60ReportComposer
     {
         $primary = $this->packLoader->normalizeLocale($locale);
 
-        return trim((string) ($node[$primary] ?? ($node[$primary === 'zh-CN' ? 'en' : 'zh-CN'] ?? '')));
+        return trim((string) ($node[$primary] ?? ''));
     }
 
     /**
@@ -1754,31 +1737,6 @@ final class Eq60ReportComposer
     }
 
     /**
-     * @return array<string,mixed>|null
-     */
-    private function composeCopySection(string $sectionKey, string $locale, string $accessLevel, string $moduleCode): ?array
-    {
-        if ($sectionKey !== 'disclaimer_top') {
-            return null;
-        }
-
-        return [
-            'key' => 'disclaimer_top',
-            'title' => $this->resolveSectionTitle('disclaimer_top', $locale),
-            'access_level' => $accessLevel,
-            'module_code' => $moduleCode,
-            'blocks' => [[
-                'id' => 'eq_disclaimer_top',
-                'type' => 'markdown',
-                'title' => '',
-                'content' => $locale === 'zh-CN'
-                    ? '本测评仅供自我探索参考，不构成医疗诊断或治疗建议。'
-                    : 'This assessment is for self-reflection only and is not medical diagnosis or treatment advice.',
-            ]],
-        ];
-    }
-
-    /**
      * @param  array<string,mixed>  $compiled
      * @param  array<string,mixed>  $sectionConfig
      * @param  array<string,mixed>  $score
@@ -1806,40 +1764,35 @@ final class Eq60ReportComposer
         $selectionTags = $this->buildSelectionTagsForSection($sectionConfig, $score);
         $selected = [];
 
-        foreach ($this->localeFallbackOrder($locale) as $candidateLocale) {
-            $localeCandidates = [];
-            foreach ($allBlocks as $block) {
-                if (! is_array($block)) {
-                    continue;
-                }
-
-                $blockSection = trim((string) ($block['section'] ?? $block['section_key'] ?? ''));
-                if ($blockSection !== $sectionKey) {
-                    continue;
-                }
-
-                $blockLocale = $this->packLoader->normalizeLocale((string) ($block['locale'] ?? 'zh-CN'));
-                if ($blockLocale !== $candidateLocale) {
-                    continue;
-                }
-
-                $blockAccessLevel = strtolower(trim((string) ($block['access_level'] ?? 'free')));
-                if ($blockAccessLevel !== $sectionAccessLevel) {
-                    continue;
-                }
-
-                if (! $this->matchBlock($block, $selectionTags)) {
-                    continue;
-                }
-
-                $localeCandidates[] = $block;
+        $candidateLocale = $this->packLoader->normalizeLocale($locale);
+        $localeCandidates = [];
+        foreach ($allBlocks as $block) {
+            if (! is_array($block)) {
+                continue;
             }
 
-            if ($localeCandidates !== []) {
-                $selected = $localeCandidates;
-                break;
+            $blockSection = trim((string) ($block['section'] ?? $block['section_key'] ?? ''));
+            if ($blockSection !== $sectionKey) {
+                continue;
             }
+
+            $blockLocale = $this->packLoader->normalizeLocale((string) ($block['locale'] ?? 'zh-CN'));
+            if ($blockLocale !== $candidateLocale) {
+                continue;
+            }
+
+            $blockAccessLevel = strtolower(trim((string) ($block['access_level'] ?? 'free')));
+            if ($blockAccessLevel !== $sectionAccessLevel) {
+                continue;
+            }
+
+            if (! $this->matchBlock($block, $selectionTags)) {
+                continue;
+            }
+
+            $localeCandidates[] = $block;
         }
+        $selected = $localeCandidates;
 
         if ($selected === []) {
             return [];
@@ -2027,18 +1980,6 @@ final class Eq60ReportComposer
         return strcmp((string) ($a['block_id'] ?? ''), (string) ($b['block_id'] ?? ''));
     }
 
-    /**
-     * @return list<string>
-     */
-    private function localeFallbackOrder(string $locale): array
-    {
-        $normalized = $this->packLoader->normalizeLocale($locale);
-
-        return $normalized === 'zh-CN'
-            ? ['zh-CN', 'en']
-            : ['en', 'zh-CN'];
-    }
-
     private function sectionDimensionMap(string $sectionKey): ?string
     {
         return match ($sectionKey) {
@@ -2155,9 +2096,6 @@ final class Eq60ReportComposer
         $layoutNode = $layoutByKey[$sectionKey] ?? null;
         if (is_array($layoutNode)) {
             $layoutTitle = trim((string) ($locale === 'zh-CN' ? ($layoutNode['title_zh'] ?? '') : ($layoutNode['title_en'] ?? '')));
-            if ($layoutTitle === '') {
-                $layoutTitle = trim((string) ($layoutNode['title_zh'] ?? $layoutNode['title_en'] ?? ''));
-            }
         }
 
         if ($layoutTitle !== '') {

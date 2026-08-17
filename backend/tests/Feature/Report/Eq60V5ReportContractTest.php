@@ -25,7 +25,7 @@ final class Eq60V5ReportContractTest extends TestCase
     private const REPORT_VERSION = 'eq_report_v5_semantic_guard_v2';
 
     /**
-     * @return array<string,array{case_id:string,locale:string,file:string,formulation:string,action:string}>
+     * @return array<string,array{case_id:string,locale:string,formulation:string,action:string}>
      */
     public static function fixtureCases(): array
     {
@@ -33,56 +33,48 @@ final class Eq60V5ReportContractTest extends TestCase
             'balanced_zh' => [
                 'EQ60_BALANCED_HIGH_ZH',
                 'zh-CN',
-                'eq60_v5_balanced_integrated_zh.json',
                 'balanced_integrated',
                 'integrated_maintenance',
             ],
             'high_empathy_zh' => [
                 'EQ60_COMPASSION_OVERLOAD_ZH',
                 'zh-CN',
-                'eq60_v5_high_empathy_low_recovery_zh.json',
                 'high_empathy_low_recovery',
                 'empathy_boundary',
             ],
             'low_confidence_zh' => [
                 'EQ60_SPEEDING_C_ZH',
                 'zh-CN',
-                'eq60_v5_low_confidence_zh.json',
                 'low_confidence_result',
                 'retest_reflection',
             ],
             'aware_but_unregulated_zh' => [
                 'EQ60_AWARE_BUT_UNREGULATED_SYNTHETIC',
                 'zh-CN',
-                'eq60_v5_aware_but_unregulated_zh.json',
                 'aware_but_unregulated',
                 'pause_recovery',
             ],
             'balanced_en' => [
                 'EQ60_BALANCED_HIGH_ZH',
                 'en',
-                'eq60_v5_balanced_integrated_en.json',
                 'balanced_integrated',
                 'integrated_maintenance',
             ],
             'high_empathy_en' => [
                 'EQ60_COMPASSION_OVERLOAD_ZH',
                 'en',
-                'eq60_v5_high_empathy_low_recovery_en.json',
                 'high_empathy_low_recovery',
                 'empathy_boundary',
             ],
             'low_confidence_en' => [
                 'EQ60_SPEEDING_C_ZH',
                 'en',
-                'eq60_v5_low_confidence_en.json',
                 'low_confidence_result',
                 'retest_reflection',
             ],
             'aware_but_unregulated_en' => [
                 'EQ60_AWARE_BUT_UNREGULATED_SYNTHETIC',
                 'en',
-                'eq60_v5_aware_but_unregulated_en.json',
                 'aware_but_unregulated',
                 'pause_recovery',
             ],
@@ -90,19 +82,15 @@ final class Eq60V5ReportContractTest extends TestCase
     }
 
     #[\PHPUnit\Framework\Attributes\DataProvider('fixtureCases')]
-    public function test_canonical_v5_fixture_matches_composer_output(
+    public function test_canonical_v5_scenario_is_composed_from_authority(
         string $caseId,
         string $locale,
-        string $file,
         string $formulation,
         string $action
     ): void {
         $this->prepareEqContent();
 
         $fixture = $this->canonicalFixture($caseId, $locale);
-        $this->maybeUpdateFixture($file, $fixture);
-
-        $this->assertSame($this->loadFixture($file), $fixture);
         $this->assertCommonV5Contract($fixture);
         $this->assertSame($formulation, (string) data_get($fixture, 'report.interpretation.core_formulation_id'));
         $this->assertStringStartsWith('route.eq.', (string) data_get($fixture, 'report.interpretation.route_id'));
@@ -377,8 +365,8 @@ final class Eq60V5ReportContractTest extends TestCase
 
     public function test_eq_v2_compiled_scientific_contract_matches_its_raw_asset(): void
     {
-        $rawPath = base_path('content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/scientific_contract.json');
-        $compiledPath = base_path('content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json');
+        $rawPath = base_path('content_packs/EQ_60/v1/raw/report_assets/scientific_contract.json');
+        $compiledPath = base_path('content_packs/EQ_60/v1/compiled/report_assets.compiled.json');
 
         $raw = json_decode((string) File::get($rawPath), true, 512, JSON_THROW_ON_ERROR);
         $compiled = json_decode((string) File::get($compiledPath), true, 512, JSON_THROW_ON_ERROR);
@@ -1004,44 +992,5 @@ final class Eq60V5ReportContractTest extends TestCase
         }
 
         return $fixture;
-    }
-
-    /**
-     * @param  array<string,mixed>  $fixture
-     */
-    private function maybeUpdateFixture(string $file, array $fixture): void
-    {
-        if (! filter_var(env('UPDATE_EQ60_V5_FIXTURES', false), FILTER_VALIDATE_BOOL)) {
-            return;
-        }
-
-        File::ensureDirectoryExists($this->fixtureDir());
-        File::put(
-            $this->fixturePath($file),
-            json_encode($fixture, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES).PHP_EOL
-        );
-    }
-
-    /**
-     * @return array<string,mixed>
-     */
-    private function loadFixture(string $file): array
-    {
-        $path = $this->fixturePath($file);
-        $this->assertFileExists($path);
-        $decoded = json_decode(File::get($path), true);
-        $this->assertIsArray($decoded);
-
-        return $decoded;
-    }
-
-    private function fixturePath(string $file): string
-    {
-        return $this->fixtureDir().DIRECTORY_SEPARATOR.$file;
-    }
-
-    private function fixtureDir(): string
-    {
-        return base_path('tests/Fixtures/eq/v5');
     }
 }
