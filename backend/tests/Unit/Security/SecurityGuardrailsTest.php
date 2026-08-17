@@ -349,7 +349,9 @@ final class SecurityGuardrailsTest extends TestCase
     public function test_ci_deploy_supply_chain_uses_pinned_trust_material(): void
     {
         $repoRoot = dirname(base_path());
+        $ci = file_get_contents($repoRoot.'/.github/workflows/ci.yml');
         $deploy = file_get_contents($repoRoot.'/.github/workflows/deploy.yml');
+        $this->assertIsString($ci);
         $this->assertIsString($deploy);
 
         $this->assertStringNotContainsString('webfactory/ssh-agent@', $deploy);
@@ -361,7 +363,10 @@ final class SecurityGuardrailsTest extends TestCase
         $this->assertMatchesRegularExpression('/SSH_KNOWN_HOSTS/', $deploy);
         $this->assertMatchesRegularExpression('/DEPLOYER_SHA256/', $deploy);
         $this->assertMatchesRegularExpression('/sha256sum -c -/', $deploy);
-        $this->assertStringContainsString('trunk-validation-${{ github.sha }}', file_get_contents($repoRoot.'/.github/workflows/ci.yml'));
+        $this->assertStringContainsString('trunk-validation-${{ github.sha }}', $ci);
+        $this->assertStringContainsString('name: trunk-classification-${{ github.sha }}', $ci);
+        $this->assertStringContainsString('--slurpfile classification trunk-path-classification.json', $ci);
+        $this->assertStringNotContainsString('RESULTS: ${{ toJSON(needs) }}', $ci);
     }
 
     public function test_solo_trunk_flow_uses_exact_sha_ci_and_zero_touch_deploy(): void
@@ -384,7 +389,7 @@ final class SecurityGuardrailsTest extends TestCase
         $this->assertStringContainsString('git push origin HEAD:main', $agents);
         $this->assertStringContainsString('only manual entrypoint', $agents);
         $this->assertIsString($deploy);
-        $this->assertStringContainsString("workflows: [CI]", $deploy);
+        $this->assertStringContainsString('workflows: [CI]', $deploy);
         $this->assertStringContainsString('cancel-in-progress: false', $deploy);
         $this->assertStringContainsString('automatically restore LKG', $deploy);
     }

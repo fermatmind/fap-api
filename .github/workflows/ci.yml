@@ -242,15 +242,24 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          name: trunk-classification-${{ github.sha }}
       - name: Require every selected validation to pass
         env:
-          RESULTS: ${{ toJSON(needs) }}
-          CLASSIFICATION: ${{ needs.classify.outputs.classification }}
+          CLASSIFY_RESULT: ${{ needs.classify.result }}
+          HYGIENE_RESULT: ${{ needs.hygiene.result }}
+          SUPPLY_CHAIN_RESULT: ${{ needs.supply-chain.result }}
+          CONTENT_PACK_RESULT: ${{ needs.content-pack-build-validate.result }}
+          VERIFY_MBTI_RESULT: ${{ needs.verify-mbti.result }}
+          VERIFY_BIGFIVE_RESULT: ${{ needs.verify-bigfive.result }}
         run: |
           set -euo pipefail
-          jq -e 'to_entries | all(.value.result == "success")' <<< "$RESULTS" >/dev/null
-          jq -n --arg sha "$GITHUB_SHA" --arg run_id "$GITHUB_RUN_ID" --argjson classification "$CLASSIFICATION" \
-            '{schema_version:"fermatmind.trunk-validation.v1",sha:$sha,ci_run_id:$run_id,result:"success",classification:$classification}' \
+          for result in "$CLASSIFY_RESULT" "$HYGIENE_RESULT" "$SUPPLY_CHAIN_RESULT" "$CONTENT_PACK_RESULT" "$VERIFY_MBTI_RESULT" "$VERIFY_BIGFIVE_RESULT"; do
+            test "$result" = success
+          done
+          jq -n --arg sha "$GITHUB_SHA" --arg run_id "$GITHUB_RUN_ID" --slurpfile classification trunk-path-classification.json \
+            '{schema_version:"fermatmind.trunk-validation.v1",sha:$sha,ci_run_id:$run_id,result:"success",classification:$classification[0]}' \
             > trunk-validation.json
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
