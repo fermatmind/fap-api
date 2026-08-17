@@ -595,7 +595,7 @@ class ShareService
             return $this->resolveRiasecSnapshotReport($attempt);
         }
 
-        if ($scaleCode === 'ENNEAGRAM') {
+        if (in_array($scaleCode, ['EQ_60', 'ENNEAGRAM'], true)) {
             return $this->readReadySnapshotReport($attempt);
         }
 
@@ -1227,6 +1227,15 @@ class ShareService
                 if (is_array($big5Projection[$contractKey] ?? null)) {
                     $payload[$contractKey] = $big5Projection[$contractKey];
                 }
+            }
+        } elseif ($scaleCode === 'EQ_60') {
+            $authority = data_get($publicSafeReport, '_meta.eq60_private_result_authority');
+            if (is_array($authority)) {
+                $payload['eq60_private_result_authority'] = $authority;
+            }
+            $snapshotBinding = data_get($publicSafeReport, '_meta.snapshot_binding_v1');
+            if (is_array($snapshotBinding)) {
+                $payload['eq60_snapshot_binding_v1'] = $snapshotBinding;
             }
         } elseif ($scaleCode === 'ENNEAGRAM') {
             $enneagramPublicSummary = is_array($summary['contract'] ?? null) ? $summary['contract'] : [];

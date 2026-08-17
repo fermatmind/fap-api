@@ -285,11 +285,13 @@ class ReportGatekeeper
         $requiresSnapshotBoundReport = $scaleCode === ReportAccess::SCALE_RIASEC
             && $unlockStage !== ReportAccess::UNLOCK_STAGE_PARTIAL
             && $shouldUseSnapshot;
-        $snapshotStrictMode = $scaleCode === ReportAccess::SCALE_ENNEAGRAM
-            || ($scaleCode !== ReportAccess::SCALE_RIASEC && $this->strictSnapshotModeEnabled());
+        $snapshotStrictMode = ($scaleCode === ReportAccess::SCALE_EQ_60 && app()->environment('production'))
+            || $scaleCode === ReportAccess::SCALE_ENNEAGRAM
+            || (! in_array($scaleCode, [ReportAccess::SCALE_EQ_60, ReportAccess::SCALE_RIASEC], true) && $this->strictSnapshotModeEnabled());
         $shouldReadFromSnapshot = $unlockStage !== ReportAccess::UNLOCK_STAGE_PARTIAL
             && ($snapshotStrictMode || $shouldUseSnapshot);
-        $allowLiveBuildFallbackForSnapshot = $scaleCode === ReportAccess::SCALE_EQ_60;
+        $allowLiveBuildFallbackForSnapshot = $scaleCode === ReportAccess::SCALE_EQ_60
+            && ! app()->environment('production');
         if ($requiresSnapshotBoundReport) {
             $snapshotResult = $this->snapshotStore->createSnapshotForAttempt([
                 'org_id' => $effectiveOrgId,
@@ -335,6 +337,12 @@ class ReportGatekeeper
                 ->first();
 
             if ($snapshotStrictMode && ($snapshotRow === null || $forceRefresh) && ! $allowLiveBuildFallbackForSnapshot) {
+                if ($scaleCode === ReportAccess::SCALE_EQ_60 && ! $this->eq60AttemptMatchesActiveRelease($attempt, $result)) {
+                    return $this->serviceUnavailable(
+                        'EQ_60_HISTORICAL_RELEASE_UNAVAILABLE',
+                        'historical EQ_60 content release is unavailable.'
+                    );
+                }
                 $this->enqueueSnapshotBuild($effectiveOrgId, $attempt, $result, $forceRefresh);
 
                 return $this->responsePayload(
@@ -923,6 +931,17 @@ class ReportGatekeeper
                 'compiled_hash' => '',
             ]);
         }
+        if ($scaleCode === 'EQ_60' && ! is_array(data_get($report, '_meta.eq60_private_result_authority'))) {
+            data_set($report, '_meta.eq60_private_result_authority', [
+                'schema_version' => 'fap.eq60.private_result_authority.v1',
+                'authority_id' => '',
+                'mode' => 'immutable_legacy_snapshot',
+                'locale' => (string) ($report['locale'] ?? ''),
+                'release_id' => '',
+                'source_hash' => '',
+                'compiled_hash' => '',
+            ]);
+        }
 
         return $report;
     }
@@ -1011,6 +1030,31 @@ class ReportGatekeeper
                 'error' => $e->getMessage(),
             ]);
         }
+    }
+
+    private function eq60AttemptMatchesActiveRelease(Attempt $attempt, Result $result): bool
+    {
+        $attemptHash = strtolower(trim((string) (
+            data_get($attempt->calculation_snapshot_json, 'eq_60.content_manifest_hash')
+            ?? data_get($result->result_json, 'normed_json.version_snapshot.content_manifest_hash')
+            ?? data_get($result->result_json, 'version_snapshot.content_manifest_hash')
+            ?? data_get($attempt->answers_summary_json, 'pack_release_manifest_hash')
+            ?? ''
+        )));
+        if (preg_match('/\A[0-9a-f]{64}\z/', $attemptHash) !== 1) {
+            return false;
+        }
+
+        try {
+            $authority = app(\App\Services\Content\Eq60PackLoader::class)->authority(
+                (string) ($attempt->dir_version ?? 'v1'),
+                (string) ($attempt->locale ?? 'zh-CN'),
+            );
+        } catch (\Throwable) {
+            return false;
+        }
+
+        return hash_equals($attemptHash, strtolower(trim((string) ($authority['compiled_hash'] ?? ''))));
     }
 
     private function responsePayload(

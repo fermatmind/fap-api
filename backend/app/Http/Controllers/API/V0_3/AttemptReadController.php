@@ -120,6 +120,20 @@ class AttemptReadController extends Controller
         return $this->result($request, $id);
     }
 
+    /** @return array<string,mixed> */
+    private function decodeArray(mixed $value): array
+    {
+        if (is_array($value)) {
+            return $value;
+        }
+        if (! is_string($value) || trim($value) === '') {
+            return [];
+        }
+        $decoded = json_decode($value, true);
+
+        return is_array($decoded) ? $decoded : [];
+    }
+
     /**
      * GET /api/v0.3/attempts/{attempt_id}/submission
      */
@@ -416,6 +430,24 @@ class AttemptReadController extends Controller
         }
         if (is_array($big5FormSummary)) {
             $responsePayload['big5_form_v1'] = $big5FormSummary;
+        }
+        if ($scaleCode === 'EQ_60') {
+            $snapshot = DB::table('report_snapshots')
+                ->where('org_id', $orgId)
+                ->where('attempt_id', $attemptId)
+                ->where('status', 'ready')
+                ->first();
+            $snapshotReport = $snapshot !== null
+                ? $this->decodeArray($snapshot->report_full_json ?? $snapshot->report_json ?? null)
+                : [];
+            $authority = data_get($snapshotReport, '_meta.eq60_private_result_authority');
+            $snapshotBinding = data_get($snapshotReport, '_meta.snapshot_binding_v1');
+            if (is_array($authority)) {
+                $responsePayload['eq60_private_result_authority'] = $authority;
+            }
+            if (is_array($snapshotBinding)) {
+                $responsePayload['eq60_snapshot_binding_v1'] = $snapshotBinding;
+            }
         }
         if ($enneagramProjection !== []) {
             $responsePayload['enneagram_public_projection_v1'] = $enneagramProjection;

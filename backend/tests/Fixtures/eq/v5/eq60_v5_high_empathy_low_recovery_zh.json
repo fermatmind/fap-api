@@ -3,6 +3,37 @@
     "fixture_schema": "eq60.v5.report_contract_fixture.v1",
     "locale": "zh-CN",
     "report": {
+        "_meta": {
+            "eq60_private_result_authority": {
+                "authority_id": "FERMATMIND_EQ_60_BILINGUAL_CANONICAL",
+                "compiled_hash": "eb848b80018bbfa302273efb1015f3164eca5caf3fc36e23e6077afcead4941b",
+                "locale": "zh-CN",
+                "locales": [
+                    "zh-CN",
+                    "en"
+                ],
+                "mode": "local_repo_compiled",
+                "pack_id": "EQ_60",
+                "pack_version": "v1",
+                "release_id": "",
+                "schema_version": "fap.eq60.private_result_authority.v1",
+                "source_hash": "f1645cbd8b9c5b5686d2611a22e12a90609a2d64647eb5a5d348d12c2d056de7"
+            },
+            "snapshot_binding_v1": {
+                "canonical_authority_identity": "FERMATMIND_EQ_60_BILINGUAL_CANONICAL",
+                "canonical_compiled_hash": "eb848b80018bbfa302273efb1015f3164eca5caf3fc36e23e6077afcead4941b",
+                "canonical_payload_sha256": "657dc56abde79fe77b787283447f570bd1a507fa7aafcb0b1ac054230c4003a7",
+                "canonical_release_id": "",
+                "canonical_source_hash": "f1645cbd8b9c5b5686d2611a22e12a90609a2d64647eb5a5d348d12c2d056de7",
+                "form_code": "v0.3",
+                "locale": "zh-CN",
+                "norm_status": "provisional",
+                "norm_version": "bootstrap_v1",
+                "pack_version": "v1",
+                "schema_version": "fap.eq60.snapshot_binding.v1",
+                "scoring_version": "v1.0_normed_validity"
+            }
+        },
         "access": {
             "all_results_free": true,
             "blur": false,
@@ -208,6 +239,18 @@
                     "title": "不支持的高风险用途"
                 }
             ],
+            "agent_runtime_copy": {
+                "boundary_follow_up": "你想把这个结果放回哪个低风险场景里理解：反馈、冲突、边界、协作还是压力恢复？",
+                "boundary_response": "我只能解释这份自我报告结果，不能把它用于高风险判断、认证结论或替代现实专业支持。下面我会按报告已有资产做安全解释。",
+                "boundary_summary_points": [
+                    "这份报告只能用于自我理解。",
+                    "回复将保留科学边界。",
+                    "不会改写分数、画像或模块状态。"
+                ],
+                "confidence_prefix": "解释置信度：",
+                "default_follow_up": "你想先讨论哪一个现实场景？",
+                "default_response": "我会基于当前报告资产解释你的 EQ 结果，不会重新打分或替换报告判断。"
+            },
             "backend_integration_contract": [
                 {
                     "acceptance": "content:lint、content:compile、mirror drift check、canonical fixtures 和 report contract tests 通过后，资产才能进入报告 payload。",
@@ -1358,6 +1401,11 @@
         "measurement_type": "self_report_trait_mixed_ei",
         "methodology": {
             "content_version": "EQ_60/v1",
+            "norm_provenance": {
+                "authority": "existing_eq60_norm_pipeline",
+                "norm_status": "provisional",
+                "norm_version": "bootstrap_v1"
+            },
             "norm_status": "provisional",
             "report_version": "eq_report_v5_semantic_guard_v2",
             "scoring_version": "v1.0_normed_validity"

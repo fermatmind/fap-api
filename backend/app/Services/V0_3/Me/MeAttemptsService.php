@@ -214,6 +214,9 @@ class MeAttemptsService
         $enneagramSnapshotReportByAttemptId = $normalizedScaleCode === 'ENNEAGRAM'
             ? $this->readReadySnapshotReports($orgId, $attemptIds)
             : [];
+        $eq60SnapshotReportByAttemptId = $normalizedScaleCode === 'EQ_60'
+            ? $this->readReadySnapshotReports($orgId, $attemptIds)
+            : [];
 
         $items = [];
         foreach ($attemptModels as $attempt) {
@@ -250,6 +253,24 @@ class MeAttemptsService
                 $snapshotBinding = data_get($enneagramSnapshotReport, '_meta.snapshot_binding_v1');
                 if (is_array($snapshotBinding)) {
                     $presented['enneagram_snapshot_binding_v1'] = $snapshotBinding;
+                }
+            } elseif (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'EQ_60') {
+                $eq60SnapshotReport = $eq60SnapshotReportByAttemptId[$attemptId] ?? [];
+                $authority = data_get($eq60SnapshotReport, '_meta.eq60_private_result_authority');
+                $presented['eq60_private_result_authority'] = is_array($authority)
+                    ? $authority
+                    : [
+                        'schema_version' => 'fap.eq60.private_result_authority.v1',
+                        'authority_id' => '',
+                        'mode' => 'immutable_legacy_snapshot',
+                        'locale' => (string) ($attempt->locale ?? $locale),
+                        'release_id' => '',
+                        'source_hash' => '',
+                        'compiled_hash' => '',
+                    ];
+                $snapshotBinding = data_get($eq60SnapshotReport, '_meta.snapshot_binding_v1');
+                if (is_array($snapshotBinding)) {
+                    $presented['eq60_snapshot_binding_v1'] = $snapshotBinding;
                 }
             } elseif (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'RIASEC') {
                 $riasecSnapshotReport = $riasecSnapshotReportByAttemptId[$attemptId] ?? [];

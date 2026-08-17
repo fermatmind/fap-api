@@ -8,6 +8,7 @@ use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Assessment\Scorers\Eq60ScorerV1NormedValidity;
 use App\Services\Content\Eq60PackLoader;
+use App\Services\Report\Pdf\ReportPdfDocumentService;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -41,6 +42,30 @@ final class Eq60PdfDeliveryTest extends TestCase
         $pdf = (string) $response->getContent();
         $this->assertStringStartsWith('%PDF-1.4', $pdf);
         $this->assertStringContainsString('FermatMind Report', $pdf);
+
+        $attempt = Attempt::query()->findOrFail($attemptId);
+        $result = Result::query()->where('attempt_id', $attemptId)->firstOrFail();
+        $metadata = app(ReportPdfDocumentService::class)->metadata($attempt, [
+            'report' => [
+                'schema_version' => 'eq_60.report.v1',
+                '_meta' => [
+                    'eq60_private_result_authority' => [
+                        'authority_id' => Eq60PackLoader::AUTHORITY_ID,
+                        'mode' => 'active_release',
+                        'release_id' => 'release-1',
+                        'source_hash' => str_repeat('a', 64),
+                        'compiled_hash' => str_repeat('b', 64),
+                    ],
+                    'snapshot_binding_v1' => [
+                        'canonical_payload_sha256' => str_repeat('c', 64),
+                    ],
+                ],
+            ],
+        ], $result);
+        $this->assertSame('release-1', $metadata['canonical_release_id']);
+        $this->assertSame(str_repeat('a', 64), $metadata['canonical_source_hash']);
+        $this->assertSame(str_repeat('b', 64), $metadata['canonical_compiled_hash']);
+        $this->assertSame(str_repeat('c', 64), data_get($metadata, 'snapshot_binding_v1.canonical_payload_sha256'));
     }
 
     private function issueAnonToken(string $anonId): string

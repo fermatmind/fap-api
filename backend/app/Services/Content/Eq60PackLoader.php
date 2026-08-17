@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace App\Services\Content;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use RuntimeException;
 
 final class Eq60PackLoader
 {
+    public const AUTHORITY_ID = 'FERMATMIND_EQ_60_BILINGUAL_CANONICAL';
+
     public const PACK_ID = 'EQ_60';
 
     public const PACK_VERSION = 'v1';
@@ -32,10 +36,44 @@ final class Eq60PackLoader
         $version = $this->normalizeVersion($version);
         $activePath = $this->v2Resolver?->resolveActiveCompiledPath(self::PACK_ID, $version);
         if (is_string($activePath) && $activePath !== '') {
+            $this->assertCompiledRelease($activePath, $version);
+
             return $activePath;
         }
 
+        if (app()->environment('production')) {
+            throw new RuntimeException('EQ_60_ACTIVE_RELEASE_MISSING');
+        }
+
         return $this->packRoot($version).DIRECTORY_SEPARATOR.'compiled';
+    }
+
+    /** @return array<string,mixed> */
+    public function authority(?string $version = null, ?string $locale = null): array
+    {
+        $version = $this->normalizeVersion($version);
+        $compiledDir = $this->compiledDir($version);
+        $manifest = $this->requireManifest($compiledDir, $version);
+        $releaseId = '';
+        if ($compiledDir !== $this->repoCompiledDir($version)) {
+            $releaseId = trim((string) DB::table('content_pack_activations')
+                ->where('pack_id', self::PACK_ID)
+                ->where('pack_version', $version)
+                ->value('release_id'));
+        }
+
+        return [
+            'schema_version' => 'fap.eq60.private_result_authority.v1',
+            'authority_id' => self::AUTHORITY_ID,
+            'mode' => $releaseId !== '' ? 'canonical_active_release' : 'local_repo_compiled',
+            'release_id' => $releaseId,
+            'pack_id' => self::PACK_ID,
+            'pack_version' => $version,
+            'locale' => $this->normalizeLocale((string) ($locale ?? 'zh-CN')),
+            'locales' => ['zh-CN', 'en'],
+            'source_hash' => (string) $manifest['source_hash'],
+            'compiled_hash' => (string) $manifest['compiled_hash'],
+        ];
     }
 
     public function repoCompiledDir(?string $version = null): string
@@ -285,47 +323,12 @@ final class Eq60PackLoader
      */
     public function loadReportAssets(?string $version = null): array
     {
-        $compiled = $this->readCompiledJson('report_assets.compiled.json', $version);
+        $compiled = $this->requireCompiledJson('report_assets.compiled.json', $version);
         if (is_array($compiled) && is_array($compiled['assets'] ?? null)) {
             return $compiled;
         }
 
-        $rawDir = $this->rawPath('report_assets', $version);
-        if (! is_dir($rawDir)) {
-            return [];
-        }
-
-        $assets = [];
-        foreach ([
-            'scientific_contract',
-            'score_system',
-            'core_formulations',
-            'mechanism_map',
-            'reality_translation',
-            'career_environment',
-            'action_prescriptions',
-            'cross_assessment_context',
-            'seo_geo_authority',
-            'sjt_bridge',
-        ] as $key) {
-            $doc = $this->readJson($rawDir.DIRECTORY_SEPARATOR.$key.'.json');
-            if (is_array($doc)) {
-                $assets[$key] = $doc;
-            }
-        }
-        $routeMatrix = $this->readJson($this->rawPath('personalization_routes/route_matrix.json', $version));
-        if (is_array($routeMatrix)) {
-            $assets['personalization_routes'] = $routeMatrix;
-        }
-
-        return $assets === []
-            ? []
-            : [
-                'schema' => 'eq_60.report_assets.compiled.v1',
-                'pack_id' => self::PACK_ID,
-                'pack_version' => $this->normalizeVersion($version),
-                'assets' => $assets,
-            ];
+        throw new RuntimeException('EQ_60_COMPILED_REPORT_ASSETS_INVALID');
     }
 
     public function resolveManifestHash(?string $version = null): string
@@ -447,5 +450,88 @@ final class Eq60PackLoader
         fclose($fp);
 
         return $rows;
+    }
+
+    private function assertCompiledRelease(string $compiledDir, string $version): void
+    {
+        $manifest = $this->requireManifest($compiledDir, $version);
+        $releaseId = trim((string) DB::table('content_pack_activations')
+            ->where('pack_id', self::PACK_ID)
+            ->where('pack_version', $version)
+            ->value('release_id'));
+        $release = $releaseId !== ''
+            ? DB::table('content_pack_releases')->where('id', $releaseId)->first()
+            : null;
+        if ($release === null
+            || strtoupper(trim((string) ($release->to_pack_id ?? ''))) !== self::PACK_ID
+            || trim((string) ($release->pack_version ?? $release->dir_alias ?? '')) !== $version
+            || trim((string) ($release->status ?? '')) !== 'success'
+            || ! hash_equals((string) $manifest['source_hash'], strtolower(trim((string) ($release->content_hash ?? ''))))
+            || ! hash_equals((string) $manifest['compiled_hash'], strtolower(trim((string) ($release->compiled_hash ?? ''))))) {
+            throw new RuntimeException('EQ_60_ACTIVE_RELEASE_BINDING_INVALID');
+        }
+    }
+
+    /** @return array<string,mixed> */
+    private function requireManifest(string $compiledDir, string $version): array
+    {
+        $manifestPath = rtrim($compiledDir, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.'manifest.json';
+        $manifest = $this->readJson($manifestPath);
+        $expectedFiles = [
+            'golden_cases.compiled.json',
+            'landing.compiled.json',
+            'options.compiled.json',
+            'policy.compiled.json',
+            'questions.compiled.json',
+            'report.compiled.json',
+            'report_assets.compiled.json',
+        ];
+        $hashes = is_array($manifest['hashes'] ?? null) ? $manifest['hashes'] : [];
+        $declaredFiles = array_keys($hashes);
+        sort($declaredFiles, SORT_STRING);
+        $physicalFiles = array_map(
+            static fn (\SplFileInfo $file): string => $file->getFilename(),
+            File::files($compiledDir),
+        );
+        sort($physicalFiles, SORT_STRING);
+        $expectedInventory = [...$expectedFiles, 'manifest.json'];
+        sort($expectedInventory, SORT_STRING);
+        if (! is_array($manifest)
+            || ($manifest['schema'] ?? null) !== 'eq_60.compiled.manifest.v2'
+            || ($manifest['authority_id'] ?? null) !== self::AUTHORITY_ID
+            || ($manifest['pack_id'] ?? null) !== self::PACK_ID
+            || ($manifest['pack_version'] ?? null) !== $version
+            || ($manifest['locales'] ?? null) !== ['zh-CN', 'en']
+            || $declaredFiles !== $expectedFiles
+            || $physicalFiles !== $expectedInventory
+            || preg_match('/\A[0-9a-f]{64}\z/', (string) ($manifest['source_hash'] ?? '')) !== 1
+            || preg_match('/\A[0-9a-f]{64}\z/', (string) ($manifest['compiled_hash'] ?? '')) !== 1) {
+            throw new RuntimeException('EQ_60_COMPILED_MANIFEST_INVALID');
+        }
+
+        $chain = '';
+        foreach ($expectedFiles as $file) {
+            $path = rtrim($compiledDir, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$file;
+            if (! is_file($path) || is_link($path)) {
+                throw new RuntimeException('EQ_60_COMPILED_INVENTORY_INCOMPLETE');
+            }
+            $bytes = (string) File::get($path);
+            $hash = hash('sha256', $bytes);
+            if (! hash_equals(strtolower(trim((string) ($hashes[$file] ?? ''))), $hash)) {
+                throw new RuntimeException('EQ_60_COMPILED_PAYLOAD_HASH_MISMATCH');
+            }
+            $payload = json_decode($bytes, true, 512, JSON_THROW_ON_ERROR);
+            if (! is_array($payload)
+                || ($payload['authority_id'] ?? null) !== self::AUTHORITY_ID
+                || ! hash_equals((string) $manifest['source_hash'], (string) ($payload['source_hash'] ?? ''))) {
+                throw new RuntimeException('EQ_60_COMPILED_PAYLOAD_AUTHORITY_INVALID');
+            }
+            $chain .= $file."\0".$hash."\n";
+        }
+        if (! hash_equals((string) $manifest['compiled_hash'], hash('sha256', $chain))) {
+            throw new RuntimeException('EQ_60_COMPILED_HASH_MISMATCH');
+        }
+
+        return $manifest;
     }
 }

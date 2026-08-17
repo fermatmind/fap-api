@@ -606,6 +606,20 @@ final class Eq60V5ReportContractTest extends TestCase
         $this->assertFalse((bool) data_get($fixture, 'report.next_module.available', true));
         $this->assertSame('planned', (string) data_get($fixture, 'report.next_module.status'));
         $this->assertSame(self::REPORT_VERSION, (string) data_get($fixture, 'report.methodology.report_version'));
+        $this->assertSame('fap.eq60.private_result_authority.v1', data_get($fixture, 'report._meta.eq60_private_result_authority.schema_version'));
+        $this->assertSame(Eq60PackLoader::AUTHORITY_ID, data_get($fixture, 'report._meta.eq60_private_result_authority.authority_id'));
+        $this->assertMatchesRegularExpression('/\A[0-9a-f]{64}\z/', (string) data_get($fixture, 'report._meta.eq60_private_result_authority.source_hash'));
+        $this->assertMatchesRegularExpression('/\A[0-9a-f]{64}\z/', (string) data_get($fixture, 'report._meta.eq60_private_result_authority.compiled_hash'));
+        $this->assertSame(
+            data_get($fixture, 'report._meta.eq60_private_result_authority.source_hash'),
+            data_get($fixture, 'report._meta.snapshot_binding_v1.canonical_source_hash'),
+        );
+        $this->assertSame(
+            data_get($fixture, 'report._meta.eq60_private_result_authority.compiled_hash'),
+            data_get($fixture, 'report._meta.snapshot_binding_v1.canonical_compiled_hash'),
+        );
+        $this->assertMatchesRegularExpression('/\A[0-9a-f]{64}\z/', (string) data_get($fixture, 'report._meta.snapshot_binding_v1.canonical_payload_sha256'));
+        $this->assertSame('existing_eq60_norm_pipeline', data_get($fixture, 'report.methodology.norm_provenance.authority'));
         $this->assertNotSame('', (string) data_get($fixture, 'report.asset_refs.result_snapshot_id'));
         $lowConfidence = (string) data_get($fixture, 'report.interpretation.core_formulation_id') === 'low_confidence_result';
         $this->assertCount($lowConfidence ? 2 : 7, (array) data_get($fixture, 'report.asset_refs.commercial_conversion_ids'));

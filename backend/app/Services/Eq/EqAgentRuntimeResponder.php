@@ -145,9 +145,7 @@ final class EqAgentRuntimeResponder
     private function responseText(string $locale, string $message, array $intentContext, array $resolvedAssets, array $detectedClaimIds): string
     {
         if ($detectedClaimIds !== []) {
-            return $locale === 'zh-CN'
-                ? '我只能解释这份自我报告结果，不能把它用于高风险判断、认证结论或替代现实专业支持。下面我会按报告已有资产做安全解释。'
-                : 'I can only explain this self-report result. I cannot use it for high-risk decisions, certification, or as a substitute for real-world professional support. I will stay within the existing report assets.';
+            return $this->requiredRuntimeText($resolvedAssets, 'boundary_response');
         }
 
         $safeOpening = trim((string) ($intentContext['safe_opening'] ?? ''));
@@ -161,9 +159,7 @@ final class EqAgentRuntimeResponder
             return $core;
         }
 
-        return $locale === 'zh-CN'
-            ? '我会基于当前报告资产解释你的 EQ 结果，不会重新打分或替换报告判断。'
-            : 'I will explain your EQ result using the current report assets; I will not rescore or replace the report judgment.';
+        return $this->requiredRuntimeText($resolvedAssets, 'default_response');
     }
 
     /**
@@ -175,9 +171,7 @@ final class EqAgentRuntimeResponder
     private function summaryPoints(string $locale, array $resolvedAssets, array $reportContext, array $detectedClaimIds): array
     {
         if ($detectedClaimIds !== []) {
-            return $locale === 'zh-CN'
-                ? ['这份报告只能用于自我理解。', '回复将保留科学边界。', '不会改写分数、画像或模块状态。']
-                : ['This report is for self-understanding only.', 'The response keeps the scientific boundary.', 'Scores, formulation, and module status are not changed.'];
+            return $this->requiredRuntimeList($resolvedAssets, 'boundary_summary_points');
         }
 
         $snapshot = $this->arrayOrEmpty($resolvedAssets['result_snapshot'] ?? null);
@@ -196,7 +190,7 @@ final class EqAgentRuntimeResponder
         }
         $confidence = trim((string) ($quality['confidence_label'] ?? ''));
         if ($confidence !== '') {
-            $points[] = $locale === 'zh-CN' ? '解释置信度：'.$confidence : 'Interpretation confidence: '.$confidence;
+            $points[] = $this->requiredRuntimeText($resolvedAssets, 'confidence_prefix').$confidence;
         }
 
         return array_slice(array_values(array_unique($points)), 0, 4);
@@ -209,9 +203,7 @@ final class EqAgentRuntimeResponder
     private function followUpQuestion(string $locale, array $resolvedAssets, array $detectedClaimIds): string
     {
         if ($detectedClaimIds !== []) {
-            return $locale === 'zh-CN'
-                ? '你想把这个结果放回哪个低风险场景里理解：反馈、冲突、边界、协作还是压力恢复？'
-                : 'Which low-risk scene should we use to understand this result: feedback, conflict, boundary, collaboration, or recovery?';
+            return $this->requiredRuntimeText($resolvedAssets, 'boundary_follow_up');
         }
 
         foreach ($this->listOrEmpty($resolvedAssets['agent_dialogue_playbooks'] ?? null) as $playbook) {
@@ -221,9 +213,29 @@ final class EqAgentRuntimeResponder
             }
         }
 
-        return $locale === 'zh-CN'
-            ? '你想先讨论哪一个现实场景？'
-            : 'Which real-life scene would you like to discuss first?';
+        return $this->requiredRuntimeText($resolvedAssets, 'default_follow_up');
+    }
+
+    /** @param array<string,mixed> $resolvedAssets */
+    private function requiredRuntimeText(array $resolvedAssets, string $key): string
+    {
+        $value = trim((string) data_get($resolvedAssets, 'agent_runtime_copy.'.$key, ''));
+        if ($value === '') {
+            throw new \RuntimeException('EQ_AGENT_RUNTIME_COPY_MISSING');
+        }
+
+        return $value;
+    }
+
+    /** @param array<string,mixed> $resolvedAssets @return list<string> */
+    private function requiredRuntimeList(array $resolvedAssets, string $key): array
+    {
+        $values = $this->stringList(data_get($resolvedAssets, 'agent_runtime_copy.'.$key));
+        if ($values === []) {
+            throw new \RuntimeException('EQ_AGENT_RUNTIME_COPY_MISSING');
+        }
+
+        return $values;
     }
 
     /**

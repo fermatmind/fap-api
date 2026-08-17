@@ -8,6 +8,9 @@ use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Assessment\Scorers\Eq60ScorerV1NormedValidity;
 use App\Services\Content\Eq60PackLoader;
+use App\Services\Report\ReportSnapshotStore;
+use App\Services\V0_3\ShareService;
+use App\Support\OrgContext;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -29,6 +32,17 @@ final class Eq60HistoryListTest extends TestCase
         $token = $this->seedFmToken($anonId, $userId);
         $attemptId = $this->createEqAttemptWithResult($anonId, (string) $userId);
 
+        $snapshot = app(ReportSnapshotStore::class)->createSnapshotForAttempt([
+            'org_id' => 0,
+            'attempt_id' => $attemptId,
+            'trigger_source' => 'test',
+            'order_no' => null,
+            'user_id' => $userId,
+            'anon_id' => $anonId,
+            'org_role' => 'public',
+        ]);
+        $this->assertTrue((bool) ($snapshot['ok'] ?? false));
+
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '.$token,
         ])->getJson('/api/v0.3/me/attempts?scale=EQ_60');
@@ -38,6 +52,18 @@ final class Eq60HistoryListTest extends TestCase
         $response->assertJsonPath('scale_code', 'EQ_60');
         $response->assertJsonPath('items.0.attempt_id', $attemptId);
         $response->assertJsonPath('items.0.scale_code', 'EQ_60');
+        $response->assertJsonPath('items.0.eq60_private_result_authority.authority_id', Eq60PackLoader::AUTHORITY_ID);
+        $this->assertMatchesRegularExpression('/\A[0-9a-f]{64}\z/', (string) $response->json('items.0.eq60_private_result_authority.source_hash'));
+        $this->assertMatchesRegularExpression('/\A[0-9a-f]{64}\z/', (string) $response->json('items.0.eq60_snapshot_binding_v1.canonical_payload_sha256'));
+
+        $ctx = app(OrgContext::class);
+        $ctx->set(0, $userId, 'public', $anonId);
+        $share = app(ShareService::class)->getOrCreateShare($attemptId, $ctx);
+        $this->assertSame(Eq60PackLoader::AUTHORITY_ID, data_get($share, 'eq60_private_result_authority.authority_id'));
+        $this->assertSame(
+            $response->json('items.0.eq60_snapshot_binding_v1.canonical_payload_sha256'),
+            data_get($share, 'eq60_snapshot_binding_v1.canonical_payload_sha256'),
+        );
     }
 
     private function createEqAttemptWithResult(string $anonId, string $userId): string

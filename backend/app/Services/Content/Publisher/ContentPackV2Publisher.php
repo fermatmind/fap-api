@@ -6,6 +6,7 @@ namespace App\Services\Content\Publisher;
 
 use App\Services\Content\BigFivePrivateResultCompileService;
 use App\Services\Content\EnneagramPrivateResultCompileService;
+use App\Services\Content\Eq60PackLoader;
 use App\Services\Content\RiasecPrivateResultCompileService;
 use App\Services\Storage\BlobCatalogService;
 use App\Services\Storage\ContentReleaseManifestCatalogService;
@@ -37,13 +38,19 @@ final class ContentPackV2Publisher
             throw new RuntimeException('PACK_ID_OR_VERSION_REQUIRED');
         }
 
-        $sourceCompiledDir = match (true) {
-            $packId === RiasecPrivateResultCompileService::PACK_ID
-                && $packVersion === RiasecPrivateResultCompileService::PACK_VERSION => base_path('content_assets/riasec/compiled'),
-            $packId === EnneagramPrivateResultCompileService::PACK_ID
-                && $packVersion === EnneagramPrivateResultCompileService::PACK_VERSION => base_path('content_packs/ENNEAGRAM/v2/compiled'),
-            default => base_path('content_packs/'.$packId.'/'.$packVersion.'/compiled'),
-        };
+        $sourceCompiledDir = trim((string) ($options['source_compiled_dir'] ?? ''));
+        if ($sourceCompiledDir !== '' && $packId !== Eq60PackLoader::PACK_ID) {
+            throw new RuntimeException('SOURCE_COMPILED_DIR_ONLY_SUPPORTED_FOR_EQ_60');
+        }
+        if ($sourceCompiledDir === '') {
+            $sourceCompiledDir = match (true) {
+                $packId === RiasecPrivateResultCompileService::PACK_ID
+                    && $packVersion === RiasecPrivateResultCompileService::PACK_VERSION => base_path('content_assets/riasec/compiled'),
+                $packId === EnneagramPrivateResultCompileService::PACK_ID
+                    && $packVersion === EnneagramPrivateResultCompileService::PACK_VERSION => base_path('content_packs/ENNEAGRAM/v2/compiled'),
+                default => base_path('content_packs/'.$packId.'/'.$packVersion.'/compiled'),
+            };
+        }
         if (! File::isDirectory($sourceCompiledDir)) {
             throw new RuntimeException('COMPILED_DIR_NOT_FOUND: '.$sourceCompiledDir);
         }
@@ -71,6 +78,18 @@ final class ContentPackV2Publisher
         $contentHash = strtolower(trim((string) ($manifest['content_hash'] ?? '')));
         $normsVersion = trim((string) ($manifest['norms_version'] ?? data_get($manifest, 'norms.norms_version', '')));
 
+        $sourceCommit = trim((string) ($options['source_commit'] ?? ''));
+        if ($packId === Eq60PackLoader::PACK_ID) {
+            if (preg_match('/\A[0-9a-f]{40}\z/i', $sourceCommit) !== 1) {
+                throw new RuntimeException('EQ_60_SOURCE_COMMIT_INVALID');
+            }
+            $this->assertEq60PrivateResultCompiledDirectoryValid(
+                $sourceCompiledDir,
+                $compiledHash,
+                $contentHash,
+            );
+        }
+
         $releaseId = (string) Str::uuid();
         $primaryStoragePath = 'private/packs_v2/'.$packId.'/'.$packVersion.'/'.$releaseId;
         $mirrorStoragePath = 'content_packs_v2/'.$packId.'/'.$packVersion.'/'.$releaseId;
@@ -80,7 +99,6 @@ final class ContentPackV2Publisher
 
         $storagePath = $primaryStoragePath;
 
-        $sourceCommit = trim((string) ($options['source_commit'] ?? ''));
         $createdBy = trim((string) ($options['created_by'] ?? 'packs2'));
         if ($createdBy === '') {
             $createdBy = 'packs2';
@@ -122,9 +140,9 @@ final class ContentPackV2Publisher
         return $release;
     }
 
-    public function activateRelease(string $releaseId): void
+    public function activateRelease(string $releaseId, ?string $expectedPreviousReleaseId = null, bool $compareAndSwap = false): void
     {
-        $this->switchActivation($releaseId, 'packs2_activate');
+        $this->switchActivation($releaseId, 'packs2_activate', $expectedPreviousReleaseId, $compareAndSwap);
     }
 
     public function rollbackToRelease(string $packId, string $packVersion, string $toReleaseId): void
@@ -265,8 +283,12 @@ final class ContentPackV2Publisher
         return is_file($root.'/compiled/manifest.json') || is_file($root.'/manifest.json');
     }
 
-    private function switchActivation(string $releaseId, string $reason): void
-    {
+    private function switchActivation(
+        string $releaseId,
+        string $reason,
+        ?string $expectedPreviousReleaseId = null,
+        bool $compareAndSwap = false,
+    ): void {
         $releaseId = trim($releaseId);
         if ($releaseId === '') {
             throw new RuntimeException('RELEASE_ID_REQUIRED');
@@ -295,35 +317,114 @@ final class ContentPackV2Publisher
         if ($packId === EnneagramPrivateResultCompileService::PACK_ID) {
             $this->assertEnneagramPrivateResultReleaseValid($release);
         }
+        if ($packId === Eq60PackLoader::PACK_ID) {
+            $this->assertEq60PrivateResultReleaseValid($release);
+        }
 
-        $activationBeforeReleaseId = trim((string) DB::table('content_pack_activations')
-            ->where('pack_id', $packId)
-            ->where('pack_version', $packVersion)
-            ->value('release_id'));
+        DB::transaction(function () use ($packId, $packVersion, $releaseId, $reason, $release, $expectedPreviousReleaseId, $compareAndSwap): void {
+            $activation = DB::table('content_pack_activations')
+                ->where('pack_id', $packId)
+                ->where('pack_version', $packVersion)
+                ->lockForUpdate()
+                ->first();
+            $activationBeforeReleaseId = trim((string) ($activation->release_id ?? ''));
+            if ($compareAndSwap && $activationBeforeReleaseId !== trim((string) $expectedPreviousReleaseId)) {
+                throw new RuntimeException('ACTIVE_RELEASE_COMPARE_AND_SWAP_MISMATCH');
+            }
 
-        $now = now();
-        DB::table('content_pack_activations')->updateOrInsert(
-            [
-                'pack_id' => $packId,
-                'pack_version' => $packVersion,
-            ],
-            [
-                'release_id' => $releaseId,
-                'activated_at' => $now,
-                'updated_at' => $now,
-                'created_at' => $now,
-            ]
-        );
-
-        if ($activationBeforeReleaseId !== $releaseId) {
-            $this->dualWriteActivationSnapshot(
-                $packId,
-                $packVersion,
-                $activationBeforeReleaseId !== '' ? $activationBeforeReleaseId : null,
-                $releaseId,
-                $reason,
-                $release,
+            $now = now();
+            DB::table('content_pack_activations')->updateOrInsert(
+                ['pack_id' => $packId, 'pack_version' => $packVersion],
+                [
+                    'release_id' => $releaseId,
+                    'activated_at' => $now,
+                    'updated_at' => $now,
+                    'created_at' => $activation === null ? $now : ($activation->created_at ?? $now),
+                ]
             );
+
+            if ($activationBeforeReleaseId !== $releaseId) {
+                $this->dualWriteActivationSnapshot(
+                    $packId,
+                    $packVersion,
+                    $activationBeforeReleaseId !== '' ? $activationBeforeReleaseId : null,
+                    $releaseId,
+                    $reason,
+                    $release,
+                );
+            }
+        }, 3);
+    }
+
+    private function assertEq60PrivateResultReleaseValid(object $release): void
+    {
+        $root = $this->absoluteStorageRoot(trim((string) ($release->storage_path ?? '')));
+        $compiledDir = is_dir($root.'/compiled') ? $root.'/compiled' : $root;
+
+        $this->assertEq60PrivateResultCompiledDirectoryValid(
+            $compiledDir,
+            strtolower(trim((string) ($release->compiled_hash ?? ''))),
+            strtolower(trim((string) ($release->content_hash ?? ''))),
+        );
+    }
+
+    private function assertEq60PrivateResultCompiledDirectoryValid(
+        string $compiledDir,
+        string $expectedCompiledHash,
+        string $expectedSourceHash,
+    ): void {
+        $manifest = json_decode((string) @file_get_contents($compiledDir.'/manifest.json'), true);
+        $expectedFiles = [
+            'golden_cases.compiled.json',
+            'landing.compiled.json',
+            'options.compiled.json',
+            'policy.compiled.json',
+            'questions.compiled.json',
+            'report.compiled.json',
+            'report_assets.compiled.json',
+        ];
+        $hashes = is_array($manifest['hashes'] ?? null) ? $manifest['hashes'] : [];
+        $files = array_keys($hashes);
+        sort($files, SORT_STRING);
+        $physicalFiles = array_map(
+            static fn (\SplFileInfo $file): string => $file->getFilename(),
+            File::files($compiledDir),
+        );
+        sort($physicalFiles, SORT_STRING);
+        $expectedInventory = [...$expectedFiles, 'manifest.json'];
+        sort($expectedInventory, SORT_STRING);
+        if (! is_array($manifest)
+            || ($manifest['schema'] ?? null) !== 'eq_60.compiled.manifest.v2'
+            || ($manifest['authority_id'] ?? null) !== Eq60PackLoader::AUTHORITY_ID
+            || ($manifest['pack_id'] ?? null) !== Eq60PackLoader::PACK_ID
+            || ($manifest['pack_version'] ?? null) !== Eq60PackLoader::PACK_VERSION
+            || ($manifest['locales'] ?? null) !== ['zh-CN', 'en']
+            || $files !== $expectedFiles
+            || $physicalFiles !== $expectedInventory) {
+            throw new RuntimeException('EQ_60_PRIVATE_RESULT_RELEASE_MANIFEST_INVALID');
+        }
+
+        $chain = '';
+        foreach ($expectedFiles as $file) {
+            $bytes = @file_get_contents($compiledDir.'/'.$file);
+            $hash = is_string($bytes) ? hash('sha256', $bytes) : '';
+            if ($hash === '' || ! hash_equals($hash, strtolower(trim((string) ($hashes[$file] ?? ''))))) {
+                throw new RuntimeException('EQ_60_PRIVATE_RESULT_RELEASE_FILE_HASH_MISMATCH');
+            }
+            $payload = json_decode($bytes, true);
+            if (! is_array($payload)
+                || ($payload['authority_id'] ?? null) !== Eq60PackLoader::AUTHORITY_ID
+                || ! hash_equals((string) ($manifest['source_hash'] ?? ''), (string) ($payload['source_hash'] ?? ''))) {
+                throw new RuntimeException('EQ_60_PRIVATE_RESULT_RELEASE_PAYLOAD_INVALID');
+            }
+            $chain .= $file."\0".$hash."\n";
+        }
+
+        $compiledHash = hash('sha256', $chain);
+        if (! hash_equals($compiledHash, strtolower(trim((string) ($manifest['compiled_hash'] ?? ''))))
+            || ! hash_equals($compiledHash, strtolower(trim($expectedCompiledHash)))
+            || ! hash_equals(strtolower(trim((string) ($manifest['source_hash'] ?? ''))), strtolower(trim($expectedSourceHash)))) {
+            throw new RuntimeException('EQ_60_PRIVATE_RESULT_RELEASE_HASH_MISMATCH');
         }
     }
 

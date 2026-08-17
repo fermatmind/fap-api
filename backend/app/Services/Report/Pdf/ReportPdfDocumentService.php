@@ -147,6 +147,32 @@ final class ReportPdfDocumentService
             ];
         }
 
+        if ($scaleCode === 'EQ_60') {
+            $authority = data_get($gate, 'report._meta.eq60_private_result_authority');
+            $snapshotBinding = data_get($gate, 'report._meta.snapshot_binding_v1');
+
+            return [
+                'pdf_surface_version' => 'eq60.private_result_pdf.v1',
+                'scale_code' => 'EQ_60',
+                'form_code' => data_get($snapshotBinding, 'form_code'),
+                'form_label' => null,
+                'filename_hint' => $this->fileName('EQ_60', (string) $attempt->id),
+                'report_schema_version' => data_get($gate, 'report.schema_version'),
+                'projection_version' => null,
+                'report_engine_version' => data_get($gate, 'report.methodology.report_version'),
+                'interpretation_context_id' => data_get($gate, 'report.interpretation.core_formulation_id'),
+                'content_release_hash' => data_get($authority, 'source_hash'),
+                'content_snapshot_status' => data_get($authority, 'mode'),
+                'canonical_release_id' => data_get($authority, 'release_id'),
+                'canonical_source_hash' => data_get($authority, 'source_hash'),
+                'canonical_compiled_hash' => data_get($authority, 'compiled_hash'),
+                'snapshot_binding_v1' => is_array($snapshotBinding) ? $snapshotBinding : [],
+                'compare_compatibility_group' => null,
+                'cross_form_comparable' => null,
+                'eq60_private_result_authority' => is_array($authority) ? $authority : [],
+            ];
+        }
+
         if ($scaleCode !== 'ENNEAGRAM') {
             return [
                 'pdf_surface_version' => 'report_pdf.surface.v1',

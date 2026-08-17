@@ -43,6 +43,8 @@ final class EqAgentContextBuilder
             'scale_code_v2' => $responseCodes['scale_code_v2'],
             'scale_uid' => $responseCodes['scale_uid'],
             'locale' => $resolvedLocale,
+            'private_result_authority' => $this->arrayOrEmpty(data_get($report, '_meta.eq60_private_result_authority')),
+            'snapshot_binding_v1' => $this->arrayOrEmpty(data_get($report, '_meta.snapshot_binding_v1')),
             'report_context' => $this->reportContext($report),
             'resolved_assets' => $this->resolvedAssets($assets),
             'agent_knowledge' => $agentKnowledge,
@@ -105,6 +107,7 @@ final class EqAgentContextBuilder
             'sjt_bridge' => $this->arrayOrEmpty($assets['sjt_bridge'] ?? null),
             'conversion_agent_entry' => $this->conversionAgentEntry($assets),
             'agent_dialogue_playbooks' => $this->listOrEmpty($assets['agent_dialogue_playbooks'] ?? null),
+            'agent_runtime_copy' => $this->arrayOrEmpty($assets['agent_runtime_copy'] ?? null),
             'backend_integration_contract' => $this->listOrEmpty($assets['backend_integration_contract'] ?? null),
             'personalization_route' => $this->arrayOrEmpty($assets['personalization_route'] ?? null),
         ];

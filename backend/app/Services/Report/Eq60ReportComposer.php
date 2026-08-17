@@ -73,7 +73,12 @@ final class Eq60ReportComposer
             ? array_values(array_filter((array) data_get($reportCompiled, 'layout.sections'), 'is_array'))
             : [];
         if ($layoutSections === []) {
-            $layoutSections = $this->defaultSections();
+            return [
+                'ok' => false,
+                'error' => 'REPORT_LAYOUT_INVALID',
+                'message' => 'EQ_60 report layout is incomplete.',
+                'status' => 500,
+            ];
         }
 
         $layoutByKey = [];
@@ -162,60 +167,88 @@ final class Eq60ReportComposer
         $resolvedAssets = $this->resolveV5Assets($reportAssets, $locale, $interpretation, $quality, $crossAssessmentContext);
         $legacyCompat = $this->buildLegacyCompat($sections, $compatFree, $compatPaid, $score);
 
+        $authority = $this->packLoader->authority($version, $locale);
+        $report = [
+            'schema_version' => 'eq_60.report.v2',
+            'scale_code' => 'EQ_60',
+            'eq_report_mode' => 'self_report',
+            'measurement_type' => 'self_report_trait_mixed_ei',
+            'variant' => $variant,
+            'locale' => $locale,
+            'access' => [
+                'all_results_free' => true,
+                'locked' => false,
+                'blur' => false,
+                'paywall' => false,
+            ],
+            'display_contract' => [
+                'schema_version' => 'eq_60.display_contract.v1',
+                'authority' => 'v5_resolved_assets',
+                'user_visible_roots' => ['scores', 'dimension_summary', 'quality', 'interpretation', 'asset_refs', 'assets', 'next_module', 'methodology'],
+                'legacy_compat_user_visible' => false,
+            ],
+            'quality' => $quality,
+            'scores' => $v5Scores,
+            'dimension_summary' => $dimensionSummary,
+            'interpretation' => $interpretation,
+            'cross_assessment_context' => $crossAssessmentContext,
+            'asset_refs' => $assetRefs,
+            'assets' => $resolvedAssets,
+            'legacy_compat' => $legacyCompat,
+            'next_module' => [
+                'available' => false,
+                'module_code' => 'EQ_SJT_16',
+                'status' => 'planned',
+                'cta_asset_id' => 'eq.sjt_bridge.planned',
+            ],
+            'journey_state_contract' => [
+                'version' => 'eq_journey_state.v1',
+                'available' => true,
+                'endpoint' => '/api/v0.3/attempts/{attempt_id}/eq/journey',
+                'persistence' => 'consent_required',
+                'signals' => ['read_depth', 'result_resonance', 'action_completion', 'retest_intent'],
+                'affects_scores' => false,
+                'formal_report_mutation_allowed' => false,
+                'raw_feedback_public_exposure_allowed' => false,
+                'profile_memory_write' => false,
+            ],
+            'methodology' => [
+                'norm_status' => strtolower(trim((string) data_get($score, 'norms.status', 'provisional'))) ?: 'provisional',
+                'scoring_version' => (string) data_get($score, 'version_snapshot.engine_version', 'v1.0_normed_validity'),
+                'report_version' => 'eq_report_v5_semantic_guard_v2',
+                'content_version' => Eq60PackLoader::PACK_ID.'/'.$version,
+                'norm_provenance' => [
+                    'norm_version' => (string) (data_get($score, 'norms.version') ?? data_get($score, 'version_snapshot.norm_version') ?? $attempt->norm_version ?? ''),
+                    'norm_status' => strtolower(trim((string) data_get($score, 'norms.status', 'provisional'))) ?: 'provisional',
+                    'authority' => 'existing_eq60_norm_pipeline',
+                ],
+            ],
+            'generated_at' => now()->toISOString(),
+        ];
+        $canonicalPayload = $report;
+        unset($canonicalPayload['generated_at']);
+        $payloadHash = hash('sha256', json_encode($canonicalPayload, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRESERVE_ZERO_FRACTION));
+        $report['_meta'] = [
+            'eq60_private_result_authority' => $authority,
+            'snapshot_binding_v1' => [
+                'schema_version' => 'fap.eq60.snapshot_binding.v1',
+                'canonical_authority_identity' => $authority['authority_id'],
+                'canonical_release_id' => $authority['release_id'],
+                'canonical_source_hash' => $authority['source_hash'],
+                'canonical_compiled_hash' => $authority['compiled_hash'],
+                'canonical_payload_sha256' => $payloadHash,
+                'locale' => $locale,
+                'form_code' => (string) ($attempt->form_code ?? $attempt->scale_version ?? 'EQ_60'),
+                'pack_version' => $version,
+                'scoring_version' => (string) data_get($score, 'version_snapshot.engine_version', 'v1.0_normed_validity'),
+                'norm_version' => (string) (data_get($score, 'norms.version') ?? data_get($score, 'version_snapshot.norm_version') ?? $attempt->norm_version ?? ''),
+                'norm_status' => strtolower(trim((string) data_get($score, 'norms.status', 'provisional'))) ?: 'provisional',
+            ],
+        ];
+
         return [
             'ok' => true,
-            'report' => [
-                'schema_version' => 'eq_60.report.v2',
-                'scale_code' => 'EQ_60',
-                'eq_report_mode' => 'self_report',
-                'measurement_type' => 'self_report_trait_mixed_ei',
-                'variant' => $variant,
-                'locale' => $locale,
-                'access' => [
-                    'all_results_free' => true,
-                    'locked' => false,
-                    'blur' => false,
-                    'paywall' => false,
-                ],
-                'display_contract' => [
-                    'schema_version' => 'eq_60.display_contract.v1',
-                    'authority' => 'v5_resolved_assets',
-                    'user_visible_roots' => ['scores', 'dimension_summary', 'quality', 'interpretation', 'asset_refs', 'assets', 'next_module', 'methodology'],
-                    'legacy_compat_user_visible' => false,
-                ],
-                'quality' => $quality,
-                'scores' => $v5Scores,
-                'dimension_summary' => $dimensionSummary,
-                'interpretation' => $interpretation,
-                'cross_assessment_context' => $crossAssessmentContext,
-                'asset_refs' => $assetRefs,
-                'assets' => $resolvedAssets,
-                'legacy_compat' => $legacyCompat,
-                'next_module' => [
-                    'available' => false,
-                    'module_code' => 'EQ_SJT_16',
-                    'status' => 'planned',
-                    'cta_asset_id' => 'eq.sjt_bridge.planned',
-                ],
-                'journey_state_contract' => [
-                    'version' => 'eq_journey_state.v1',
-                    'available' => true,
-                    'endpoint' => '/api/v0.3/attempts/{attempt_id}/eq/journey',
-                    'persistence' => 'consent_required',
-                    'signals' => ['read_depth', 'result_resonance', 'action_completion', 'retest_intent'],
-                    'affects_scores' => false,
-                    'formal_report_mutation_allowed' => false,
-                    'raw_feedback_public_exposure_allowed' => false,
-                    'profile_memory_write' => false,
-                ],
-                'methodology' => [
-                    'norm_status' => strtolower(trim((string) data_get($score, 'norms.status', 'provisional'))) ?: 'provisional',
-                    'scoring_version' => (string) data_get($score, 'version_snapshot.engine_version', 'v1.0_normed_validity'),
-                    'report_version' => 'eq_report_v5_semantic_guard_v2',
-                    'content_version' => Eq60PackLoader::PACK_ID.'/'.$version,
-                ],
-                'generated_at' => now()->toISOString(),
-            ],
+            'report' => $report,
         ];
     }
 
@@ -1335,6 +1368,10 @@ final class Eq60ReportComposer
             'psychometric_evidence_status' => $psychometricEvidence,
             'result_page_depth_modules' => $resultPageDepthModules,
             'agent_dialogue_playbooks' => $agentPlaybooks,
+            'agent_runtime_copy' => $this->localizedAgentRuntimeCopy(
+                (array) data_get($docs, 'agent_dialogue_playbooks.runtime_copy', []),
+                $locale,
+            ),
             'backend_integration_contract' => $backendIntegrationContract,
             'personalization_route' => $lowConfidence ? [] : [
                 'id' => (string) ($interpretation['route_id'] ?? ''),
@@ -1501,6 +1538,30 @@ final class Eq60ReportComposer
             'commercial_depth' => is_array($route['commercial_depth'] ?? null) ? $route['commercial_depth'] : [],
             ...(is_array($localized) ? $localized : []),
         ];
+    }
+
+    /** @param array<string,mixed> $copy @return array<string,mixed> */
+    private function localizedAgentRuntimeCopy(array $copy, string $locale): array
+    {
+        $resolved = [];
+        foreach ([
+            'boundary_response',
+            'default_response',
+            'boundary_summary_points',
+            'boundary_follow_up',
+            'default_follow_up',
+            'confidence_prefix',
+        ] as $key) {
+            $value = data_get($copy, $key.'.'.$locale);
+            if ((! is_string($value) && ! is_array($value))
+                || (is_string($value) && trim($value) === '')
+                || (is_array($value) && $value === [])) {
+                throw new \RuntimeException('EQ_60_AGENT_RUNTIME_COPY_MISSING');
+            }
+            $resolved[$key] = $value;
+        }
+
+        return $resolved;
     }
 
     private function routeMatchPatternLabel(mixed $pattern): string
@@ -2086,114 +2147,6 @@ final class Eq60ReportComposer
     }
 
     /**
-     * @return list<array<string,mixed>>
-     */
-    private function defaultSections(): array
-    {
-        return [
-            [
-                'key' => 'disclaimer_top',
-                'source' => 'blocks',
-                'access_level' => 'free',
-                'required_in_variant' => ['free', 'full'],
-                'module_code' => ReportAccess::MODULE_EQ_CORE,
-                'min_blocks' => 1,
-                'max_blocks' => 1,
-            ],
-            [
-                'key' => 'quality_notice',
-                'source' => 'blocks',
-                'access_level' => 'free',
-                'required_in_variant' => ['free', 'full'],
-                'module_code' => ReportAccess::MODULE_EQ_CORE,
-                'min_blocks' => 0,
-                'max_blocks' => 2,
-            ],
-            [
-                'key' => 'global_overview',
-                'source' => 'blocks',
-                'access_level' => 'free',
-                'required_in_variant' => ['free', 'full'],
-                'module_code' => ReportAccess::MODULE_EQ_CORE,
-                'min_blocks' => 1,
-                'max_blocks' => 1,
-            ],
-            [
-                'key' => 'self_awareness',
-                'source' => 'blocks',
-                'access_level' => 'free',
-                'required_in_variant' => ['free', 'full'],
-                'module_code' => ReportAccess::MODULE_EQ_CORE,
-                'min_blocks' => 1,
-                'max_blocks' => 1,
-            ],
-            [
-                'key' => 'emotion_regulation',
-                'source' => 'blocks',
-                'access_level' => 'free',
-                'required_in_variant' => ['free', 'full'],
-                'module_code' => ReportAccess::MODULE_EQ_CORE,
-                'min_blocks' => 1,
-                'max_blocks' => 1,
-            ],
-            [
-                'key' => 'empathy',
-                'source' => 'blocks',
-                'access_level' => 'free',
-                'required_in_variant' => ['free', 'full'],
-                'module_code' => ReportAccess::MODULE_EQ_CORE,
-                'min_blocks' => 1,
-                'max_blocks' => 1,
-            ],
-            [
-                'key' => 'relationship_management',
-                'source' => 'blocks',
-                'access_level' => 'free',
-                'required_in_variant' => ['free', 'full'],
-                'module_code' => ReportAccess::MODULE_EQ_CORE,
-                'min_blocks' => 1,
-                'max_blocks' => 1,
-            ],
-            [
-                'key' => 'cross_quadrant_insight',
-                'source' => 'blocks',
-                'access_level' => 'free',
-                'required_in_variant' => ['free', 'full'],
-                'module_code' => ReportAccess::MODULE_EQ_CROSS_INSIGHTS,
-                'min_blocks' => 1,
-                'max_blocks' => 1,
-            ],
-            [
-                'key' => 'action_plan_14d',
-                'source' => 'blocks',
-                'access_level' => 'free',
-                'required_in_variant' => ['free', 'full'],
-                'module_code' => ReportAccess::MODULE_EQ_GROWTH_PLAN,
-                'min_blocks' => 1,
-                'max_blocks' => 1,
-            ],
-            [
-                'key' => 'methodology',
-                'source' => 'blocks',
-                'access_level' => 'free',
-                'required_in_variant' => ['free', 'full'],
-                'module_code' => ReportAccess::MODULE_EQ_CORE,
-                'min_blocks' => 1,
-                'max_blocks' => 1,
-            ],
-            [
-                'key' => 'disclaimer_bottom',
-                'source' => 'blocks',
-                'access_level' => 'free',
-                'required_in_variant' => ['free', 'full'],
-                'module_code' => ReportAccess::MODULE_EQ_CORE,
-                'min_blocks' => 1,
-                'max_blocks' => 1,
-            ],
-        ];
-    }
-
-    /**
      * @param  array<string,array<string,mixed>>  $layoutByKey
      */
     private function resolveSectionTitle(string $sectionKey, string $locale, array $layoutByKey = []): string
@@ -2211,35 +2164,6 @@ final class Eq60ReportComposer
             return $layoutTitle;
         }
 
-        $titlesZh = [
-            'disclaimer_top' => '重要声明',
-            'quality_notice' => '作答质量提示',
-            'global_overview' => '综合概览',
-            'self_awareness' => '自我情绪认知',
-            'emotion_regulation' => '情绪调节与控制',
-            'empathy' => '同理心与社会感知',
-            'relationship_management' => '社交技能与人际管理',
-            'cross_quadrant_insight' => '交叉洞察长文',
-            'action_plan_14d' => '14 天游程',
-            'methodology' => '方法说明',
-            'disclaimer_bottom' => '结尾提示',
-        ];
-        $titlesEn = [
-            'disclaimer_top' => 'Important Notice',
-            'quality_notice' => 'Response Quality',
-            'global_overview' => 'Overview',
-            'self_awareness' => 'Self-Awareness',
-            'emotion_regulation' => 'Emotion Regulation',
-            'empathy' => 'Social Awareness & Empathy',
-            'relationship_management' => 'Relationship Management',
-            'cross_quadrant_insight' => 'Cross-Quadrant Insight',
-            'action_plan_14d' => '14-Day Plan',
-            'methodology' => 'Methodology',
-            'disclaimer_bottom' => 'Closing Notes',
-        ];
-
-        $map = $locale === 'zh-CN' ? $titlesZh : $titlesEn;
-
-        return (string) ($map[$sectionKey] ?? $sectionKey);
+        throw new \RuntimeException('EQ_60_SECTION_TITLE_MISSING');
     }
 }
