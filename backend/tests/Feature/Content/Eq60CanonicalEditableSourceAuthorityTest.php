@@ -150,6 +150,7 @@ final class Eq60CanonicalEditableSourceAuthorityTest extends TestCase
         $this->assertStringContainsString('EQ_60_NON_CANONICAL_SECTION_SOURCE', $source);
         $this->assertStringContainsString('EQ_60_RESULT_SNAPSHOT_MISSING', $source);
         $this->assertStringContainsString('EQ_60_SCENE_VARIANT_MISSING', $source);
+        $this->assertStringContainsString('requiredLocalizedAsset', $source);
         $this->assertSame(0, preg_match('/[\x{4E00}-\x{9FFF}]{2,}/u', $source));
         $this->assertStringNotContainsString('Emotional & Relational Functioning Index', $source);
     }

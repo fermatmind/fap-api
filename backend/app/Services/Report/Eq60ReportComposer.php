@@ -1188,7 +1188,7 @@ final class Eq60ReportComposer
         }
         $resultSnapshot = array_merge(
             ['id' => $snapshotId],
-            $this->localizedAsset((array) ($snapshotAssets[$snapshotId] ?? []), $locale)
+            $this->requiredLocalizedAsset((array) ($snapshotAssets[$snapshotId] ?? []), $locale, 'RESULT_SNAPSHOT')
         );
 
         $mechanisms = [];
@@ -1214,6 +1214,7 @@ final class Eq60ReportComposer
             if (! is_array($variantNode)) {
                 throw new \RuntimeException('EQ_60_SCENE_VARIANT_MISSING');
             }
+            $localizedScene = $this->requiredLocalizedAsset($variantNode, $locale, 'SCENE_VARIANT');
             $scenes[] = array_merge(
                 [
                     'id' => $variantId,
@@ -1221,7 +1222,7 @@ final class Eq60ReportComposer
                     'variant' => (string) ($variantNode['variant'] ?? 'primary'),
                     'fallback_scene_id' => $family,
                 ],
-                $this->localizedAsset($variantNode, $locale)
+                $localizedScene
             );
         }
 
@@ -1322,22 +1323,22 @@ final class Eq60ReportComposer
         return [
             'result_snapshot' => $resultSnapshot,
             'commercial_conversion_actions' => $conversionActions,
-            'scientific_contract' => $this->localizedAsset((array) ($scientificAssets['eq.scientific_contract.default'] ?? []), $locale),
+            'scientific_contract' => $this->requiredLocalizedAsset((array) ($scientificAssets['eq.scientific_contract.default'] ?? []), $locale, 'SCIENTIFIC_CONTRACT'),
             'score_system' => $lowConfidence ? [] : $this->localizedScoreSystem((array) ($docs['score_system'] ?? []), $locale),
             'core_formulation' => array_merge(
                 ['id' => $formulationId],
-                $this->localizedAsset((array) data_get($docs, 'core_formulations.formulations.'.$formulationId, []), $locale)
+                $this->requiredLocalizedAsset((array) data_get($docs, 'core_formulations.formulations.'.$formulationId, []), $locale, 'CORE_FORMULATION')
             ),
             'mechanisms' => $mechanisms,
             'reality_scenes' => $scenes,
             'career_environment' => $career,
             'action_prescription' => array_merge(
                 ['id' => $actionId],
-                $this->localizedAsset((array) data_get($docs, 'action_prescriptions.prescriptions.'.$actionId, []), $locale)
+                $this->requiredLocalizedAsset((array) data_get($docs, 'action_prescriptions.prescriptions.'.$actionId, []), $locale, 'ACTION_PRESCRIPTION')
             ),
             'sjt_bridge' => $lowConfidence ? [] : array_merge(
                 ['id' => 'eq.sjt_bridge.planned', 'available' => false],
-                $this->localizedAsset((array) ($sjtAssets['eq.sjt_bridge.planned'] ?? []), $locale)
+                $this->requiredLocalizedAsset((array) ($sjtAssets['eq.sjt_bridge.planned'] ?? []), $locale, 'SJT_BRIDGE')
             ),
             'cross_assessment_context' => $lowConfidence ? [] : $this->resolveCrossAssessmentAssets($crossContextAssets, $locale, $crossAssessmentContext),
             'quality' => [
@@ -1346,7 +1347,7 @@ final class Eq60ReportComposer
             ],
             'quality_confidence' => array_merge(
                 ['id' => (string) ($quality['explanation_asset_id'] ?? '')],
-                $this->localizedAsset((array) ($qualityConfidenceAssets[(string) ($quality['explanation_asset_id'] ?? '')] ?? []), $locale)
+                $this->requiredLocalizedAsset((array) ($qualityConfidenceAssets[(string) ($quality['explanation_asset_id'] ?? '')] ?? []), $locale, 'QUALITY_CONFIDENCE')
             ),
             'psychometric_evidence_status' => $psychometricEvidence,
             'result_page_depth_modules' => $resultPageDepthModules,
@@ -1379,10 +1380,8 @@ final class Eq60ReportComposer
                 continue;
             }
 
-            $asset = $this->localizedAsset((array) ($assets[$id] ?? []), $locale);
-            if ($asset !== []) {
-                $cards[] = array_merge(['id' => $id], $asset);
-            }
+            $asset = $this->requiredLocalizedAsset((array) ($assets[$id] ?? []), $locale, 'CROSS_CONTEXT_CARD');
+            $cards[] = array_merge(['id' => $id], $asset);
         }
 
         $boundaryId = trim((string) ($crossAssessmentContext['boundary_asset_id'] ?? 'eq.cross_context.boundary.default'));
@@ -1396,7 +1395,7 @@ final class Eq60ReportComposer
             'source_count' => (int) ($crossAssessmentContext['source_count'] ?? 0),
             'boundary' => array_merge(
                 ['id' => $boundaryId],
-                $this->localizedAsset((array) ($assets[$boundaryId] ?? []), $locale)
+                $this->requiredLocalizedAsset((array) ($assets[$boundaryId] ?? []), $locale, 'CROSS_CONTEXT_BOUNDARY')
             ),
             'cards' => $cards,
         ];
@@ -1453,7 +1452,9 @@ final class Eq60ReportComposer
                 return null;
             }
 
-            return array_merge(['id' => $id, 'pair' => $pair, 'state' => $state], $this->localizedAsset($node, $locale));
+            $localized = $this->localizedAsset($node, $locale);
+
+            return $localized === [] ? null : array_merge(['id' => $id, 'pair' => $pair, 'state' => $state], $localized);
         }
 
         return null;
@@ -1476,7 +1477,9 @@ final class Eq60ReportComposer
                 return null;
             }
 
-            return array_merge(['id' => $id, 'variable' => $variable, 'level' => $level], $this->localizedAsset($node, $locale));
+            $localized = $this->localizedAsset($node, $locale);
+
+            return $localized === [] ? null : array_merge(['id' => $id, 'variable' => $variable, 'level' => $level], $localized);
         }
 
         return null;
@@ -1583,6 +1586,20 @@ final class Eq60ReportComposer
         $node = $asset[$primary] ?? [];
 
         return is_array($node) ? $node : [];
+    }
+
+    /**
+     * @param  array<string,mixed>  $asset
+     * @return array<string,mixed>
+     */
+    private function requiredLocalizedAsset(array $asset, string $locale, string $assetType): array
+    {
+        $localized = $this->localizedAsset($asset, $locale);
+        if ($localized === []) {
+            throw new \RuntimeException('EQ_60_'.$assetType.'_LOCALE_MISSING');
+        }
+
+        return $localized;
     }
 
     /**
