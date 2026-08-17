@@ -102,20 +102,6 @@ use App\Console\Commands\CommerceRepairPostCommitFailed;
 use App\Console\Commands\ContentCompile;
 use App\Console\Commands\ContentLint;
 use App\Console\Commands\ContentReleaseRevalidate;
-use App\Console\Commands\EnneagramActivateInactiveCandidateRelease;
-use App\Console\Commands\EnneagramActivateRegistryRelease;
-use App\Console\Commands\EnneagramExportProductionEquivalentCandidatePayloads;
-use App\Console\Commands\EnneagramImportInactiveCandidateRelease;
-use App\Console\Commands\EnneagramResultPageAgentReadinessCommand;
-use App\Console\Commands\EnneagramResultPageCandidateStagingHarnessCommand;
-use App\Console\Commands\EnneagramResultPageContentBatchCommand;
-use App\Console\Commands\EnneagramResultPageOpsControlPlaneCommand;
-use App\Console\Commands\EnneagramResultPageOpsRunnerCommand;
-use App\Console\Commands\EnneagramResultPageProductionManualGateCommand;
-use App\Console\Commands\EnneagramResultPageRenderedQaSmokeHarnessCommand;
-use App\Console\Commands\EnneagramResultPageReportSidecarIssueCommand;
-use App\Console\Commands\EnneagramRollbackInactiveCandidateRelease;
-use App\Console\Commands\EnneagramRollbackRegistryRelease;
 use App\Console\Commands\Eq60PsychometricsReport;
 use App\Console\Commands\FapEmailLifecycleRollout;
 use App\Console\Commands\FapEmailOutboxSend;
@@ -303,20 +289,6 @@ class Kernel extends ConsoleKernel
         SyncScaleSlugs::class,
         ContentLint::class,
         ContentCompile::class,
-        EnneagramExportProductionEquivalentCandidatePayloads::class,
-        EnneagramActivateInactiveCandidateRelease::class,
-        EnneagramActivateRegistryRelease::class,
-        EnneagramImportInactiveCandidateRelease::class,
-        EnneagramResultPageContentBatchCommand::class,
-        EnneagramResultPageAgentReadinessCommand::class,
-        EnneagramResultPageCandidateStagingHarnessCommand::class,
-        EnneagramResultPageOpsControlPlaneCommand::class,
-        EnneagramResultPageOpsRunnerCommand::class,
-        EnneagramResultPageProductionManualGateCommand::class,
-        EnneagramResultPageReportSidecarIssueCommand::class,
-        EnneagramResultPageRenderedQaSmokeHarnessCommand::class,
-        EnneagramRollbackInactiveCandidateRelease::class,
-        EnneagramRollbackRegistryRelease::class,
         NormsImport::class,
         NormsIqImport::class,
         NormsBig5Roll::class,

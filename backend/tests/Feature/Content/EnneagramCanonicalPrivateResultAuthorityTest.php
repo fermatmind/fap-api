@@ -35,6 +35,28 @@ final class EnneagramCanonicalPrivateResultAuthorityTest extends TestCase
         foreach ($paths as $path) {
             $this->assertFileExists(base_path('content_packs/ENNEAGRAM/v2/registry/'.$path));
         }
+
+        $actualSources = collect(File::allFiles(base_path('content_packs/ENNEAGRAM/v2/registry')))
+            ->map(static fn (\SplFileInfo $file): string => str_replace('\\', '/', $file->getRelativePathname()))
+            ->reject(static fn (string $path): bool => $path === 'manifest.json' || $path === 'en/manifest.json')
+            ->sort()
+            ->values()
+            ->all();
+        sort($paths);
+        $this->assertSame($paths, $actualSources);
+    }
+
+    public function test_locales_are_one_hash_bound_package_with_distinct_provenance(): void
+    {
+        $zhManifest = json_decode(File::get(base_path('content_packs/ENNEAGRAM/v2/registry/manifest.json')), true, flags: JSON_THROW_ON_ERROR);
+        $enManifest = json_decode(File::get(base_path('content_packs/ENNEAGRAM/v2/registry/en/manifest.json')), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertSame('zh-CN', $zhManifest['locale']);
+        $this->assertSame('en', $enManifest['locale']);
+        $this->assertSame($zhManifest['authority_id'], $enManifest['authority_id']);
+        $this->assertSame($zhManifest['release_id'], $enManifest['release_id']);
+        $this->assertSame($zhManifest['source_hash'], $enManifest['source_hash']);
+        $this->assertSame($zhManifest['compiled_hash'], $enManifest['compiled_hash']);
     }
 
     public function test_canonical_coverage_includes_all_required_private_surfaces(): void
@@ -65,5 +87,43 @@ final class EnneagramCanonicalPrivateResultAuthorityTest extends TestCase
         $this->assertStringNotContainsString('FC144 采用二选一迫选作答，在自身计分空间内记录相对取舍线索', $projection);
         $this->assertStringNotContainsString('private function disclaimers', $technical);
         $this->assertStringNotContainsString('本测试用于人格模式理解与自我观察', $technical);
+        $this->assertStringNotContainsString('composeAssetPreview', $composer);
+        $this->assertStringNotContainsString('buildUnavailableReportV2', $composer);
+        $this->assertStringNotContainsString('Services\\Enneagram\\Assets', $composer);
+    }
+
+    public function test_retired_private_result_authorities_and_control_planes_are_absent(): void
+    {
+        $forbiddenPaths = [
+            'content_assets/enneagram/result_page',
+            'content_assets/en-content-parity/W5-enneagram/private-result-content-v2',
+            'content_assets/en-content-parity/W9/enneagram-private-results',
+            'generated/result-page-agents/enneagram',
+            'app/Services/Enneagram/Assets',
+            'app/Services/ContentPromotion/EnneagramPrivateResultPromotionAuthority.php',
+            'app/Services/ContentPromotion/Adapters/EnneagramPrivateResultPromotionAdapter.php',
+            'app/Services/Ops/EnneagramRegistryActivationGateService.php',
+            'scripts/content/build_w5_enneagram_private_result_package.php',
+            'scripts/content/verify_w5_enneagram_private_result_w9.php',
+            'docs/enneagram/result-page-agent-runbook.md',
+            'docs/enneagram/result-page-agent-schema.md',
+            'docs/enneagram/result-page-agent-gates.md',
+        ];
+
+        foreach ($forbiddenPaths as $path) {
+            $this->assertFileDoesNotExist(base_path($path), $path);
+        }
+
+        $kernel = File::get(base_path('app/Console/Kernel.php'));
+        $promotionRegistry = File::get(base_path('app/Services/ContentPromotion/PromotionAdapterRegistry.php'));
+        $promotionConfig = File::get(base_path('config/content_promotion.php'));
+        foreach (['EnneagramResultPage', 'InactiveCandidate', 'ProductionEquivalentCandidate', 'EnneagramActivateRegistryRelease', 'EnneagramRollbackRegistryRelease'] as $symbol) {
+            $this->assertStringNotContainsString($symbol, $kernel);
+        }
+        $this->assertStringNotContainsString('EnneagramPrivateResultPromotion', $promotionRegistry);
+        $this->assertStringNotContainsString('enneagram-results', $promotionConfig);
+
+        $this->assertFileExists(base_path('app/Console/Commands/Packs2Publish.php'));
+        $this->assertFileExists(base_path('app/Console/Commands/Packs2Rollback.php'));
     }
 }

@@ -39,7 +39,7 @@ final class ScanEnglishContentParityProgramCommandTest extends TestCase
             ['id' => 'W3-CAREER-GUIDES', 'status' => 'dry_run_ready'],
         ]];
         $this->writeJson($web.'/docs/seo/generated/en-content-parity-control-master.v2.json', ['lanes' => $lanes]);
-        $duplicateReceipt = ['lane_id' => 'W5', 'subscope' => 'enneagram-results', 'target_status' => 'live_qa_pass', 'package_sha256' => str_repeat('b', 64), 'receipt_paths' => ['receipt.json']];
+        $duplicateReceipt = ['lane_id' => 'W4', 'subscope' => 'riasec', 'target_status' => 'live_qa_pass', 'package_sha256' => str_repeat('b', 64), 'receipt_paths' => ['receipt.json']];
         $this->writeJson($web.'/docs/seo/generated/en-content-parity-control-inputs.v2.json', [
             'lane_manifests' => [],
             'receipt_chains' => [

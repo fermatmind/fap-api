@@ -48,20 +48,19 @@ final class PromotionAdapterCapabilityTest extends TestCase
         $registry = app(PromotionAdapterRegistry::class);
         $capabilities = $registry->capabilitiesByLaneSubscope();
 
-        self::assertCount(12, $capabilities);
-        self::assertCount(12, $registry->capabilities());
+        self::assertCount(11, $capabilities);
+        self::assertCount(11, $registry->capabilities());
         self::assertSame('audit_compatible', $capabilities['W1/mbti-comparisons']);
         self::assertSame('audit_compatible', $capabilities['W1/mbti-results']);
         self::assertSame('audit_compatible', $capabilities['W2/big-five']);
         self::assertSame('audit_compatible', $capabilities['W3/W3-ARTICLES']);
         self::assertSame('audit_compatible', $capabilities['W5/enneagram']);
-        self::assertSame('audit_compatible', $capabilities['W5/enneagram-results']);
-        self::assertSame('audit_compatible', $capabilities['W3/career-guides']);
+        self::assertSame('audit_compatible', $capabilities['W3/W3-CAREER-GUIDES']);
         self::assertSame('audit_compatible', $capabilities['W8/career-jobs']);
         self::assertSame('audit_compatible', $capabilities['W4/riasec']);
         self::assertSame('audit_compatible', $capabilities['W7/eq']);
         self::assertSame('audit_compatible', $capabilities['TOP100/frozen-20260812-v1']);
-        self::assertSame(11, count(array_filter($capabilities, static fn (string $capability): bool => $capability === 'audit_compatible')));
+        self::assertSame(10, count(array_filter($capabilities, static fn (string $capability): bool => $capability === 'audit_compatible')));
         self::assertSame(1, count(array_filter($capabilities, static fn (string $capability): bool => $capability === 'fail_closed_legacy_audit')));
     }
 
