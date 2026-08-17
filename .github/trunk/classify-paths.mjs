@@ -47,7 +47,8 @@ export function classifyPaths(inputPaths) {
       /(^|\/)(?:Cache|Redis|Projection)(\/|\.)/,
       /(?:cache|redis|projection|materiali[sz]ed|active_pointer|lkg)/i,
     ]);
-    const seo = matches(path, [
+    const retiredEqMirror = path.startsWith("backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/");
+    const seo = !retiredEqMirror && matches(path, [
       /(?:^|\/)(?:seo|search|discoverability|sitemap|robots|llms)(?:\/|\.|-|_)/i,
       /(?:canonical|hreflang|indexnow|indexability|gsc)/i,
       /(?:Seo|Search|Discoverability|Sitemap|Robots|Llms)/,

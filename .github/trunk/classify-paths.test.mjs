@@ -21,6 +21,14 @@ test("classifies cache projections", () => assert.equal(has(["backend/app/Servic
 test("classifies SEO and discoverability", () => assert.equal(has(["backend/app/Console/Commands/SeoWarmSitemap.php"], "seo_discoverability"), true));
 test("classifies deployment infrastructure", () => assert.equal(has([".github/workflows/ci.yml"], "infrastructure_deployment"), true));
 
+test("retired EQ mirror cleanup is content-only and cannot trigger search submission", () => {
+  const result = classifyPaths([
+    "backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/seo_geo_authority.json",
+  ]);
+  assert.equal(result.flags.content_assets, true);
+  assert.equal(result.flags.seo_discoverability, false);
+});
+
 test("does not infer cache or SEO runtime work from retired workflow filenames", () => {
   const result = classifyPaths([
     ".github/workflows/career-cache-repair.yml",
