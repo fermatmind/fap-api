@@ -84,7 +84,14 @@ final class CareerCurrentAuthorityPublisher
             }
 
             foreach ($candidatePairs as [$slug, $locale]) {
-                $entry = $this->cache->prepare($slug, $locale);
+                try {
+                    $entry = $this->cache->prepare($slug, $locale);
+                } catch (Throwable $throwable) {
+                    throw new CareerCurrentAuthorityPublisherFailure(
+                        'CURRENT_CACHE_CANDIDATE_PREPARATION_FAILED',
+                        $throwable,
+                    );
+                }
                 if (($entry['status'] ?? null) !== 'ready' || ($entry['classification'] ?? null) !== 'ready_staged') {
                     throw new CareerCurrentAuthorityPublisherFailure('CURRENT_CACHE_CANDIDATE_PREPARATION_FAILED');
                 }
