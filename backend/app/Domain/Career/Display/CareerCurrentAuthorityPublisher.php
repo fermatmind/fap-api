@@ -454,7 +454,7 @@ final class CareerCurrentAuthorityPublisher
     /** @param Collection<int,CareerJobDisplayAsset> $assets */
     private function snapshotModelsHash(Collection $assets): string
     {
-        // Keep compensation hashes deterministic without retaining a second copy of every JSON payload.
+        // Stream deterministic compensation hashes without retaining a second copy of every JSON payload.
         $context = hash_init('sha256');
         hash_update($context, '[');
         foreach ($assets->values() as $index => $asset) {
