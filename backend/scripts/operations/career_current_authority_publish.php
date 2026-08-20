@@ -23,6 +23,14 @@ $operationKey = $env('CAREER_CURRENT_PUBLISH_OPERATION_KEY');
 $workflowRunId = $env('CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ID');
 $workflowRunAttempt = $env('CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ATTEMPT');
 $fullScan = $env('CAREER_CURRENT_PUBLISH_FULL_SCAN') === '1';
+$resourceGuard = [
+    'schema_version' => $env('CAREER_CURRENT_PUBLISH_RESOURCE_GUARD_SCHEMA'),
+    'timeout_seconds' => (int) $env('CAREER_CURRENT_PUBLISH_TIMEOUT_SECONDS'),
+    'nice_adjustment' => (int) $env('CAREER_CURRENT_PUBLISH_NICE_ADJUSTMENT'),
+    'ionice_class' => (int) $env('CAREER_CURRENT_PUBLISH_IONICE_CLASS'),
+    'ionice_priority' => (int) $env('CAREER_CURRENT_PUBLISH_IONICE_PRIORITY'),
+    'memory_limit_mb' => (int) $env('CAREER_CURRENT_PUBLISH_MEMORY_LIMIT_MB'),
+];
 
 $zeroCounts = [
     'database_update_count' => 0,
@@ -49,6 +57,7 @@ $receipt = [
     'workflow_run_id' => ctype_digit($workflowRunId) ? (int) $workflowRunId : null,
     'workflow_run_attempt' => ctype_digit($workflowRunAttempt) ? (int) $workflowRunAttempt : null,
     'full_scan' => $fullScan,
+    'resource_guard' => $resourceGuard,
     'write_commit_state' => 'ambiguous',
     'writes_committed' => false,
     'idempotent_noop' => false,
@@ -96,7 +105,15 @@ try {
         || ! hash_equals($declaredAssetsSha256, $assetsSha256)
         || ! hash_equals($expectedOperationKey, $operationKey)
         || ! ctype_digit($workflowRunId)
-        || ! ctype_digit($workflowRunAttempt)) {
+        || ! ctype_digit($workflowRunAttempt)
+        || $resourceGuard !== [
+            'schema_version' => 'career.current_authority_publish.resource_guard.v1',
+            'timeout_seconds' => 900,
+            'nice_adjustment' => 15,
+            'ionice_class' => 2,
+            'ionice_priority' => 7,
+            'memory_limit_mb' => 1024,
+        ]) {
         $receipt['safe_error_code'] = 'CURRENT_PUBLISH_EXECUTION_CONTRACT_INVALID';
         $receipt['write_commit_state'] = 'confirmed_zero_write';
         $emit($receipt);

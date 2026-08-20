@@ -611,7 +611,7 @@ jobs:
           printf -v q_full_scan '%q' "$FULL_SCAN"
           printf -v q_run '%q' "$GITHUB_RUN_ID"
           printf -v q_attempt '%q' "$GITHUB_RUN_ATTEMPT"
-          remote="set -euo pipefail; current=\$(readlink -f $q_path/current); releases=\$(readlink -f $q_path/releases); test -n \"\$current\"; test -n \"\$releases\"; case \"\$current\" in \"\$releases\"/*) ;; *) exit 1 ;; esac; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_release; test ! -e $q_path/.dep/deploy.lock; release_name=\$(basename \"\$current\"); sudo -n -u www-data -- env CAREER_CURRENT_PUBLISH_EXECUTE=1 CAREER_CURRENT_PUBLISH_BACKEND_ROOT=\"\$current/backend\" CAREER_CURRENT_PUBLISH_RELEASE_SHA=$q_release CAREER_CURRENT_PUBLISH_RELEASE_NAME=\"\$release_name\" CAREER_CURRENT_PUBLISH_ASSETS_SHA256=$q_assets CAREER_CURRENT_PUBLISH_OPERATION_KEY=$q_operation CAREER_CURRENT_PUBLISH_FULL_SCAN=$q_full_scan CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ID=$q_run CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ATTEMPT=$q_attempt php -d memory_limit=1536M"
+          remote="set -euo pipefail; current=\$(readlink -f $q_path/current); releases=\$(readlink -f $q_path/releases); test -n \"\$current\"; test -n \"\$releases\"; case \"\$current\" in \"\$releases\"/*) ;; *) exit 1 ;; esac; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_release; test ! -e $q_path/.dep/deploy.lock; release_name=\$(basename \"\$current\"); sudo -n -u www-data -- env CAREER_CURRENT_PUBLISH_EXECUTE=1 CAREER_CURRENT_PUBLISH_BACKEND_ROOT=\"\$current/backend\" CAREER_CURRENT_PUBLISH_RELEASE_SHA=$q_release CAREER_CURRENT_PUBLISH_RELEASE_NAME=\"\$release_name\" CAREER_CURRENT_PUBLISH_ASSETS_SHA256=$q_assets CAREER_CURRENT_PUBLISH_OPERATION_KEY=$q_operation CAREER_CURRENT_PUBLISH_FULL_SCAN=$q_full_scan CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ID=$q_run CAREER_CURRENT_PUBLISH_WORKFLOW_RUN_ATTEMPT=$q_attempt \"\$current/backend/scripts/deploy/run_career_current_authority_publisher.sh\""
           set +e
           ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
             -o ServerAliveInterval=15 -o ServerAliveCountMax=4 -p "$DEPLOY_PORT" \
@@ -630,6 +630,14 @@ jobs:
               and .assets_sha256 == $assets
               and .operation_key == $operation
               and .full_scan == ($full_scan == 1)
+              and .resource_guard == {
+                "schema_version": "career.current_authority_publish.resource_guard.v1",
+                "timeout_seconds": 900,
+                "nice_adjustment": 15,
+                "ionice_class": 2,
+                "ionice_priority": 7,
+                "memory_limit_mb": 1024
+              }
               and .package.career_count == 1046
               and .package.locale_page_count == 2092
               and .package.components_per_page == 26
