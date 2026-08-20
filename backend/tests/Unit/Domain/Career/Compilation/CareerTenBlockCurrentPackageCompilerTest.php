@@ -49,4 +49,64 @@ final class CareerTenBlockCurrentPackageCompilerTest extends TestCase
             }
         }
     }
+
+    public function test_it_derives_accountants_boundary_notices_from_same_locale_published_authority_only(): void
+    {
+        $package = app(CareerCurrentAuthorityPackage::class)->load(base_path());
+        $compiler = app(CareerTenBlockCurrentPackageCompiler::class);
+        $pages = $package['rows']['accountants-and-auditors']['page_payload_json']['page'];
+
+        $notices = $compiler->deriveAccountantsBoundaryNotices($pages);
+        $first = $compiler->compileAccountantsBoundaryNoticeProjection(base_path());
+        $second = $compiler->compileAccountantsBoundaryNoticeProjection(base_path());
+        $rows = $this->rowsFromAssets($first['assets_bytes']);
+
+        self::assertSame($pages['en']['fermat_decision_card']['caveat'], $notices['en'][0]);
+        self::assertSame($pages['en']['ai_impact_table']['explanation']['en']['boundary'], $notices['en'][1]);
+        self::assertSame($pages['zh']['fermat_decision_card']['caveat'], $notices['zh'][0]);
+        self::assertSame($pages['zh']['ai_impact_table']['explanation']['zh']['boundary'], $notices['zh'][1]);
+        self::assertCount(2, $rows['accountants-and-auditors']['page_payload_json']['page']['en']['boundary_notice']);
+        self::assertCount(2, $rows['accountants-and-auditors']['page_payload_json']['page']['zh']['boundary_notice']);
+        self::assertContains($first['package_diff']['changed_slugs'], [[], ['accountants-and-auditors']]);
+        self::assertContains($first['package_diff']['changed_row_count'], [0, 1]);
+        self::assertContains($first['package_diff']['public_changed_locale_page_count'], [0, 2]);
+        self::assertSame($first['assets_bytes'], $second['assets_bytes']);
+        self::assertSame($first['receipt'], $second['receipt']);
+        foreach ([
+            'health-educators',
+            'dancers',
+            'forging-machine-setters-operators-and-tenders-metal-and-plastic',
+            'veterinarians',
+            'preventive-medicine-physicians',
+        ] as $slug) {
+            self::assertSame(
+                CareerCurrentAuthorityPackage::hashValue($package['rows'][$slug]),
+                CareerCurrentAuthorityPackage::hashValue($rows[$slug]),
+            );
+        }
+    }
+
+    public function test_it_fails_closed_when_a_same_locale_accountants_boundary_source_is_missing(): void
+    {
+        $package = app(CareerCurrentAuthorityPackage::class)->load(base_path());
+        $pages = $package['rows']['accountants-and-auditors']['page_payload_json']['page'];
+        unset($pages['en']['ai_impact_table']['explanation']['en']['boundary']);
+
+        $this->expectException(CareerTenBlockCompileFailure::class);
+        $this->expectExceptionMessage('TEN_BLOCK_ACCOUNTANTS_BOUNDARY_SOURCE_MISSING');
+
+        app(CareerTenBlockCurrentPackageCompiler::class)->deriveAccountantsBoundaryNotices($pages);
+    }
+
+    /** @return array<string,array<string,mixed>> */
+    private function rowsFromAssets(string $assets): array
+    {
+        $rows = [];
+        foreach (explode("\n", trim($assets)) as $line) {
+            $row = json_decode($line, true, 512, JSON_THROW_ON_ERROR);
+            $rows[$row['canonical_slug']] = $row;
+        }
+
+        return $rows;
+    }
 }

@@ -65,6 +65,7 @@ final class CareerCurrentAuthorityPublisher
         $plan = null;
 
         try {
+            $this->assertAccountantsBoundaryNotice($authority['rows']);
             $plan = DB::transaction(fn (): array => $this->applyDatabasePlan($authority['rows']), 1);
             $databaseCommitted = ($plan['write_counts']['database_update_count']
                 + $plan['write_counts']['database_insert_count']
@@ -438,6 +439,29 @@ final class CareerCurrentAuthorityPublisher
                 $read = $this->cache->verifyOnlyRead($slug, $locale);
                 if (($read['state'] ?? null) !== 'not_found' || ($read['payload'] ?? null) !== null) {
                     throw new CareerCurrentAuthorityPublisherFailure('CURRENT_MANUAL_HOLD_PUBLIC_DRIFT');
+                }
+            }
+        }
+    }
+
+    /** @param array<string,array<string,mixed>> $rows */
+    private function assertAccountantsBoundaryNotice(array $rows): void
+    {
+        $row = $rows['accountants-and-auditors'] ?? null;
+        if (! is_array($row)) {
+            return;
+        }
+        $pages = $row['page_payload_json']['page'] ?? $row['page_payload_json'] ?? null;
+        foreach (['en', 'zh'] as $locale) {
+            $notices = is_array($pages) && is_array($pages[$locale] ?? null)
+                ? $pages[$locale]['boundary_notice'] ?? null
+                : null;
+            if (! is_array($notices) || ! array_is_list($notices) || $notices === []) {
+                throw new CareerCurrentAuthorityPublisherFailure('CURRENT_ACCOUNTANTS_BOUNDARY_READBACK_INVALID');
+            }
+            foreach ($notices as $notice) {
+                if (! is_string($notice) || trim($notice) === '') {
+                    throw new CareerCurrentAuthorityPublisherFailure('CURRENT_ACCOUNTANTS_BOUNDARY_READBACK_INVALID');
                 }
             }
         }

@@ -10,6 +10,8 @@ final class CareerTenBlockCurrentPackageCompiler
 {
     public const VERSION = 'career.ten_block.current_package_compiler.v2';
 
+    private const ACCOUNTANTS_SLUG = 'accountants-and-auditors';
+
     public function __construct(
         private readonly CareerTenBlockBatchNormalizer $batchNormalizer,
         private readonly CareerTenBlockCompiler $singleCompiler,
@@ -212,6 +214,129 @@ final class CareerTenBlockCurrentPackageCompiler
                 'forbidden_structured_data_type_count' => 0,
             ],
         ];
+    }
+
+    /**
+     * Deterministically fills the accountants boundary component from already-published,
+     * same-locale authority fields. This intentionally does not read source packages,
+     * templates, or another occupation's projection.
+     *
+     * @return array{assets_bytes:string,manifest_template:array<string,mixed>,receipt:array<string,mixed>,package_diff:array<string,mixed>}
+     */
+    public function compileAccountantsBoundaryNoticeProjection(string $backendRoot): array
+    {
+        $baseline = $this->package->load($backendRoot);
+        $candidateRows = $baseline['rows'];
+        $accountants = $candidateRows[self::ACCOUNTANTS_SLUG] ?? null;
+        if (! is_array($accountants)) {
+            throw new CareerTenBlockCompileFailure('TEN_BLOCK_ACCOUNTANTS_BOUNDARY_TARGET_MISSING');
+        }
+
+        $pages = $accountants['page_payload_json']['page'] ?? null;
+        if (! is_array($pages)) {
+            throw new CareerTenBlockCompileFailure('TEN_BLOCK_ACCOUNTANTS_BOUNDARY_SOURCE_MISSING');
+        }
+        $notices = $this->deriveAccountantsBoundaryNotices($pages);
+        foreach (['en', 'zh'] as $locale) {
+            $candidateRows[self::ACCOUNTANTS_SLUG]['page_payload_json']['page'][$locale]['boundary_notice'] = $notices[$locale];
+        }
+
+        $changedSlugs = [];
+        $publicChangedLocalePages = 0;
+        foreach ($baseline['slugs'] as $slug) {
+            $before = $baseline['rows'][$slug];
+            $after = $candidateRows[$slug];
+            if (! hash_equals(CareerCurrentAuthorityPackage::hashValue($before), CareerCurrentAuthorityPackage::hashValue($after))) {
+                $changedSlugs[] = $slug;
+            }
+            foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
+                if (! hash_equals(
+                    $this->package->publicContentHash($before, $locale),
+                    $this->package->publicContentHash($after, $locale),
+                )) {
+                    $publicChangedLocalePages++;
+                }
+            }
+        }
+        if (($changedSlugs !== [] && $changedSlugs !== [self::ACCOUNTANTS_SLUG])
+            || ! in_array($publicChangedLocalePages, [0, 2], true)
+            || (count($changedSlugs) === 0 && $publicChangedLocalePages !== 0)
+            || (count($changedSlugs) === 1 && $publicChangedLocalePages !== 2)) {
+            throw new CareerTenBlockCompileFailure('TEN_BLOCK_ACCOUNTANTS_BOUNDARY_SCOPE_INVALID');
+        }
+        $this->assertCandidatePublicContract($candidateRows);
+
+        return [
+            'assets_bytes' => implode("\n", array_map(
+                static fn (array $row): string => CareerCurrentAuthorityPackage::encodeCanonical($row),
+                $candidateRows,
+            ))."\n",
+            'manifest_template' => $baseline['manifest'],
+            'receipt' => [
+                'contract_version' => 'career.ten_block.accountants_boundary_projection_receipt.v1',
+                'compiler_version' => self::VERSION,
+                'canonical_slug' => self::ACCOUNTANTS_SLUG,
+                'locale_notice_counts' => [
+                    'en' => count($notices['en']),
+                    'zh-CN' => count($notices['zh']),
+                ],
+                'database_writes' => 0,
+                'cache_writes' => 0,
+                'cms_writes' => 0,
+                'discoverability_writes' => 0,
+                'search_submissions' => 0,
+                'generated_at' => null,
+            ],
+            'package_diff' => [
+                'contract_version' => 'career.ten_block.package_diff_report.v1',
+                'before_career_count' => count($baseline['rows']),
+                'after_career_count' => count($candidateRows),
+                'missing_slug_count' => 0,
+                'extra_slug_count' => 0,
+                'duplicate_slug_count' => 0,
+                'changed_row_count' => count($changedSlugs),
+                'changed_slugs' => $changedSlugs,
+                'public_changed_locale_page_count' => $publicChangedLocalePages,
+                'locale_integrity' => 'PASS',
+                'component_order_integrity' => 'PASS',
+                'manual_hold_integrity' => 'PASS',
+                'canonical_route_inventory_changed' => false,
+                'discoverability_surface_changed' => false,
+                'database_writes' => 0,
+                'cache_writes' => 0,
+                'cms_writes' => 0,
+                'discoverability_writes' => 0,
+                'search_submissions' => 0,
+            ],
+        ];
+    }
+
+    /** @param array<string,mixed> $pages @return array{en:list<string>,zh:list<string>} */
+    public function deriveAccountantsBoundaryNotices(array $pages): array
+    {
+        $notices = [];
+        foreach (['en', 'zh'] as $locale) {
+            $page = $pages[$locale] ?? null;
+            $decision = is_array($page) && is_array($page['fermat_decision_card'] ?? null)
+                ? $page['fermat_decision_card']
+                : [];
+            $aiImpact = is_array($page) && is_array($page['ai_impact_table'] ?? null)
+                ? $page['ai_impact_table']
+                : [];
+            $explanation = is_array($aiImpact['explanation'] ?? null) ? $aiImpact['explanation'] : [];
+            $localeExplanation = is_array($explanation[$locale] ?? null) ? $explanation[$locale] : [];
+            $caveat = $decision['caveat'] ?? null;
+            $boundary = $localeExplanation['boundary'] ?? null;
+            if (! is_string($caveat) || trim($caveat) === '' || ! is_string($boundary) || trim($boundary) === '') {
+                throw new CareerTenBlockCompileFailure('TEN_BLOCK_ACCOUNTANTS_BOUNDARY_SOURCE_MISSING');
+            }
+            $notices[$locale] = array_values(array_unique([trim($caveat), trim($boundary)]));
+            if ($notices[$locale] === []) {
+                throw new CareerTenBlockCompileFailure('TEN_BLOCK_ACCOUNTANTS_BOUNDARY_SOURCE_MISSING');
+            }
+        }
+
+        return $notices;
     }
 
     /** @param array<string,array<string,mixed>> $rows */

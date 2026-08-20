@@ -96,6 +96,24 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
         self::assertFalse($cache->serveStaleActive);
     }
 
+    public function test_it_rejects_accountants_without_a_non_empty_boundary_notice_before_writes(): void
+    {
+        [$authority] = $this->fixture();
+        $authority['rows']['accountants-and-auditors'] = $this->row('accountants-and-auditors', 'Accountants');
+        $authority['slugs'][] = 'accountants-and-auditors';
+        sort($authority['slugs'], SORT_STRING);
+        $authority['summary']['career_count'] = 2;
+        $authority['summary']['locale_page_count'] = 4;
+
+        $this->expectException(CareerCurrentAuthorityPublisherFailure::class);
+        $this->expectExceptionMessage('CURRENT_ACCOUNTANTS_BOUNDARY_READBACK_INVALID');
+
+        $this->publisher(
+            $authority,
+            new FakeCareerCurrentAuthorityCacheGateway(new CareerCurrentAuthorityPackage, $authority['rows']),
+        )->execute(base_path());
+    }
+
     #[DataProvider('compensatedFailureProvider')]
     public function test_it_restores_database_and_cache_boundary_after_post_commit_failure(string $mode): void
     {

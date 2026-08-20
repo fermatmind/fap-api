@@ -18,6 +18,7 @@ final class CareerTenBlockCurrentPackageCompile extends Command
         {--lookup= : Read-only canonical lookup JSON}
         {--evidence-root= : Read-only evidence authority root}
         {--output-root= : Required existing task temp directory}
+        {--accountants-boundary-notice : Compile the accountants same-locale boundary authority projection}
         {--write-current : Atomically install the validated candidate into repository Current authority}';
 
     protected $description = 'Deterministically compile and validate the 1046-row Career Current candidate package';
@@ -33,10 +34,13 @@ final class CareerTenBlockCurrentPackageCompile extends Command
             $lookup = trim((string) $this->option('lookup'));
             $evidenceRoot = trim((string) $this->option('evidence-root'));
             $outputRoot = $this->outputRoot((string) $this->option('output-root'));
-            if ($sourceRoot === '' || $lookup === '' || $evidenceRoot === '') {
+            $accountantsBoundaryNotice = (bool) $this->option('accountants-boundary-notice');
+            if (! $accountantsBoundaryNotice && ($sourceRoot === '' || $lookup === '' || $evidenceRoot === '')) {
                 throw new CareerTenBlockCompileFailure('TEN_BLOCK_COMMAND_INPUT_INVALID');
             }
-            $result = $compiler->compile($sourceRoot, $lookup, $evidenceRoot, base_path());
+            $result = $accountantsBoundaryNotice
+                ? $compiler->compileAccountantsBoundaryNoticeProjection(base_path())
+                : $compiler->compile($sourceRoot, $lookup, $evidenceRoot, base_path());
             $this->write($outputRoot.'/assets.jsonl', $result['assets_bytes']);
             $scratch = $outputRoot.'/.package-backend-'.bin2hex(random_bytes(8));
             $packageRoot = $scratch.'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH;
@@ -58,7 +62,9 @@ final class CareerTenBlockCurrentPackageCompile extends Command
             $result['receipt']['full_asset_set_sha256'] = $validated['summary']['full_asset_set_sha256'];
             $result['receipt']['slug_set_sha256'] = $validated['summary']['slug_set_sha256'];
             $this->writeJson($outputRoot.'/full-compile-receipt.json', $result['receipt']);
-            $this->writeJson($outputRoot.'/field-coverage-report.json', $result['field_coverage']);
+            if (isset($result['field_coverage'])) {
+                $this->writeJson($outputRoot.'/field-coverage-report.json', $result['field_coverage']);
+            }
             $this->writeJson($outputRoot.'/package-diff-report.json', $result['package_diff']);
             $written = false;
             if ((bool) $this->option('write-current')) {
