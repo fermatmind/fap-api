@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Career;
 
+use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Domain\Career\IndexStateValue;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\CareerCompileRun;
@@ -27,32 +28,7 @@ final class CareerJobDetailApiTest extends TestCase
 {
     use RefreshDatabase;
 
-    private const DISPLAY_COMPONENT_ORDER = [
-        'breadcrumb',
-        'hero',
-        'fermat_decision_card',
-        'primary_cta',
-        'career_snapshot_primary_locale',
-        'career_snapshot_secondary_locale',
-        'fit_decision_checklist',
-        'riasec_fit_block',
-        'personality_fit_block',
-        'definition_block',
-        'responsibilities_block',
-        'work_context_block',
-        'market_signal_card',
-        'adjacent_career_comparison_table',
-        'ai_impact_table',
-        'career_risk_cards',
-        'contract_project_risk_block',
-        'next_steps_block',
-        'faq_block',
-        'related_next_pages',
-        'source_card',
-        'review_validity_card',
-        'boundary_notice',
-        'final_cta',
-    ];
+    private const DISPLAY_COMPONENT_ORDER = CareerDisplayAssetComponentContract::LEGACY_V4_2_ORDER;
 
     protected function setUp(): void
     {
@@ -450,14 +426,19 @@ final class CareerJobDetailApiTest extends TestCase
             ->assertJsonPath('display_surface_v1.implementation_contract.authority', 'runtime_publish_projection')
             ->assertJsonPath('display_surface_v1.claim_permissions.integrity_state', 'restricted');
 
-        $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/data-scientists?locale=en')
+        $enResponse = $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/data-scientists?locale=en')
             ->assertOk()
             ->assertJsonPath('seo_contract.index_state', 'indexable')
             ->assertJsonPath('display_surface_v1.page.locale', 'en')
-            ->assertJsonPath('display_surface_v1.page.content.hero.title', 'Data scientist career fit');
+            ->assertJsonPath('display_surface_v1.implementation_contract.authority', 'runtime_publish_projection')
+            ->assertJsonPath('display_surface_v1.claim_permissions.integrity_state', 'restricted');
+        $this->assertNotSame(
+            'Data scientist career fit',
+            $enResponse->json('display_surface_v1.page.content.hero.title'),
+        );
     }
 
-    public function test_zh_display_asset_backed_bundle_allows_shared_english_cta_when_reviewed_zh_content_is_ready(): void
+    public function test_partial_reviewed_zh_display_asset_fails_closed_to_runtime_published_shell(): void
     {
         $this->configurePublicResolutionPlan([
             ['slug' => 'reviewed-zh-display-asset', 'status' => 'already_imported_validated'],
@@ -501,21 +482,19 @@ final class CareerJobDetailApiTest extends TestCase
 
         $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/reviewed-zh-display-asset?locale=zh-CN')
             ->assertOk()
-            ->assertJsonPath('trust_manifest.logic_version', 'career.protocol.job_detail.display_asset_backed.v1')
-            ->assertJsonPath('integrity_summary.integrity_state', 'display_asset_backed')
+            ->assertJsonPath('trust_manifest.logic_version', 'career.protocol.job_detail.runtime_published_shell.v1')
+            ->assertJsonPath('integrity_summary.integrity_state', 'runtime_published_shell')
             ->assertJsonPath('claim_permissions.allow_strong_claim', false)
             ->assertJsonPath('claim_permissions.allow_salary_comparison', false)
-            ->assertJsonPath('seo_contract.reason_codes.0', 'validated_display_asset_backed_release')
+            ->assertJsonPath('seo_contract.reason_codes.0', 'runtime_publish_projection')
             ->assertJsonPath('display_surface_v1.page.locale', 'zh-CN')
-            ->assertJsonPath('display_surface_v1.page.content.hero.title', '展示资产职业')
-            ->assertJsonPath('display_surface_v1.page.content.primary_cta.label', 'Start career fit test')
-            ->assertJsonPath('display_surface_v1.page.content.definition_block.heading', '职业定义')
-            ->assertJsonPath('display_surface_v1.claim_permissions.allow_strong_claim', true)
-            ->assertJsonPath('display_surface_v1.claim_permissions.allow_salary_comparison', true)
-            ->assertJsonPath('display_surface_v1.claim_permissions.integrity_state', 'full');
+            ->assertJsonPath('display_surface_v1.implementation_contract.authority', 'runtime_publish_projection')
+            ->assertJsonPath('display_surface_v1.claim_permissions.allow_strong_claim', false)
+            ->assertJsonPath('display_surface_v1.claim_permissions.allow_salary_comparison', false)
+            ->assertJsonPath('display_surface_v1.claim_permissions.integrity_state', 'restricted');
     }
 
-    public function test_display_asset_surface_aligns_english_module_subset_to_component_order_without_copying_zh_content(): void
+    public function test_legacy_display_asset_does_not_generate_pending_component_placeholders(): void
     {
         $this->configurePublicResolutionPlan([
             ['slug' => 'english-module-subset-display-asset', 'status' => 'already_imported_validated'],
@@ -553,21 +532,15 @@ final class CareerJobDetailApiTest extends TestCase
         $enResponse = $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/english-module-subset-display-asset?locale=en')
             ->assertOk()
             ->assertJsonPath('display_surface_v1.page.locale', 'en')
-            ->assertJsonPath('display_surface_v1.page.content.responsibilities_block.module_state', 'pending_reviewed_locale_content')
-            ->assertJsonPath('display_surface_v1.page.content.responsibilities_block.content_available', false)
-            ->assertJsonPath('display_surface_v1.page.content.responsibilities_block.placeholder_policy', 'no_cross_locale_editorial_copy_generated');
+            ->assertJsonPath('display_surface_v1.implementation_contract.authority', 'runtime_publish_projection')
+            ->assertJsonMissingPath('display_surface_v1.page.content.responsibilities_block.module_state')
+            ->assertJsonMissingPath('display_surface_v1.page.content.responsibilities_block.content_available')
+            ->assertJsonMissingPath('display_surface_v1.page.content.responsibilities_block.placeholder_policy');
 
-        $zhContentKeys = array_keys((array) $zhResponse->json('display_surface_v1.page.content'));
-        $enContentKeys = array_keys((array) $enResponse->json('display_surface_v1.page.content'));
-        sort($zhContentKeys);
-        sort($enContentKeys);
-
-        $expected = self::DISPLAY_COMPONENT_ORDER;
-        sort($expected);
-        $this->assertSame($expected, $zhContentKeys);
-        $this->assertSame($expected, $enContentKeys);
-
+        $zhDisplayContent = json_encode($zhResponse->json('display_surface_v1.page.content'), JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
         $enDisplayContent = json_encode($enResponse->json('display_surface_v1.page.content'), JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
+        $this->assertStringNotContainsString('pending_reviewed_locale_content', $zhDisplayContent);
+        $this->assertStringNotContainsString('pending_reviewed_locale_content', $enDisplayContent);
         $this->assertStringNotContainsString('中文完整展示资产职业', $enDisplayContent);
         $this->assertStringNotContainsString('中文已审内容', $enDisplayContent);
     }
