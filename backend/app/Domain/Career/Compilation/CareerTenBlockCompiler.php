@@ -20,6 +20,7 @@ final class CareerTenBlockCompiler
     public function __construct(
         private readonly CareerTenBlockSchemaDetector $detector,
         private readonly CareerTenBlockNormalizer $normalizer,
+        private readonly CareerEvidenceAuthorityLoader $evidenceLoader,
     ) {}
 
     /** @return array{ir:array<string,mixed>,row:?array<string,mixed>,receipt:array<string,mixed>} */
@@ -43,10 +44,21 @@ final class CareerTenBlockCompiler
             }
         }
         [$baseline, $baselineDigest] = $this->baseline($baselineAssetsPath, $slug);
-        [$evidence, $evidenceDigest, $blockers] = $this->evidence($evidencePath, $slug);
+        [$evidence, $evidenceDigest, $blockers] = $this->evidence($evidencePath, $slug, $blocks);
         $ir = $this->normalizer->normalize($blocks, $detected['profile']);
         $row = $blockers === [] ? $this->candidateRow($baseline, $blocks, $evidence) : null;
         $rowDigest = $row === null ? null : CareerCurrentAuthorityPackage::hashValue($row);
+        $claimKeys = array_fill_keys(array_column($evidence['claims'] ?? [], 'claim_key'), true);
+        $omittedFields = array_values(array_filter([
+            isset($claimKeys['identity.title_zh']) ? null : '$.identity.title_zh',
+            isset($claimKeys['hero.lead']) ? null : '$.page-meta.hero_lead',
+            isset($claimKeys['definition.summary']) ? null : '$.definition.definition',
+            isset($claimKeys['duties.list']) ? null : '$.definition.duties',
+            isset($claimKeys['work_context.summary']) ? null : '$.definition.work_scene',
+            isset($claimKeys['faq.items']) ? null : '$.faq.faq',
+            isset($claimKeys['seo.title']) ? null : '$.page-meta.meta_title',
+            isset($claimKeys['seo.description']) ? null : '$.page-meta.meta_description',
+        ]));
 
         return [
             'ir' => $ir,
@@ -65,7 +77,7 @@ final class CareerTenBlockCompiler
                 'component_count' => count(CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER),
                 'mapped_file_count' => count($blocks),
                 'orphan_fields' => [],
-                'omitted_fields' => [],
+                'omitted_fields' => $omittedFields,
                 'blocked_fields' => $blockers,
                 'claim_blockers' => $blockers,
                 'source_blockers' => $blockers,
@@ -130,43 +142,14 @@ final class CareerTenBlockCompiler
     }
 
     /** @return array{0:array<string,mixed>,1:?string,2:list<array{code:string,field:string}>} */
-    private function evidence(?string $path, string $slug): array
+    private function evidence(?string $path, string $slug, array $blocks): array
     {
         if ($path === null || $path === '') {
             return [[], null, [['code' => 'TEN_BLOCK_EVIDENCE_MISSING', 'field' => 'claim_bindings']]];
         }
-        $evidence = $this->readJsonObject($path, 'TEN_BLOCK_EVIDENCE_INVALID');
-        if (($evidence['contract_version'] ?? null) !== 'career.claim_evidence.fixture.v1'
-            || ($evidence['canonical_slug'] ?? null) !== $slug
-            || ! is_array($evidence['sources'] ?? null)
-            || ! is_array($evidence['claims'] ?? null)
-            || $evidence['sources'] === []
-            || $evidence['claims'] === []
-            || ! is_string($evidence['reviewed_at'] ?? null)
-            || ! is_string($evidence['expires_at'] ?? null)) {
-            throw new CareerTenBlockCompileFailure('TEN_BLOCK_EVIDENCE_INVALID');
-        }
-        foreach ($evidence['sources'] as $source) {
-            if (! is_array($source)
-                || ! is_string($source['source_key'] ?? null)
-                || ! is_string($source['url'] ?? null)
-                || preg_match('/\Ahttps:\/\//', $source['url']) !== 1
-                || ! is_string($source['authority'] ?? null)) {
-                throw new CareerTenBlockCompileFailure('TEN_BLOCK_EVIDENCE_INVALID');
-            }
-        }
-        foreach ($evidence['claims'] as $claim) {
-            if (! is_array($claim)
-                || ! is_string($claim['claim_key'] ?? null)
-                || ! is_string($claim['source_key'] ?? null)
-                || ! is_string($claim['confidence'] ?? null)
-                || ! is_string($claim['captured_at'] ?? null)
-                || ! is_string($claim['expires_at'] ?? null)) {
-                throw new CareerTenBlockCompileFailure('TEN_BLOCK_EVIDENCE_INVALID');
-            }
-        }
+        $evidence = $this->evidenceLoader->load($path, $slug, $blocks);
 
-        return [$evidence, hash_file('sha256', $path) ?: throw new CareerTenBlockCompileFailure('TEN_BLOCK_EVIDENCE_INVALID'), []];
+        return [$evidence, $evidence['digest'], $evidence['blockers']];
     }
 
     /** @param array<string,mixed> $baseline @param array<string,array<string,mixed>> $blocks @param array<string,mixed> $evidence @return array<string,mixed> */
@@ -178,38 +161,62 @@ final class CareerTenBlockCompiler
             static fn (array $item): array => ['answer' => $item['a'], 'question' => $item['q']],
             $blocks['faq.json']['faq'],
         );
+        $claimKeys = array_fill_keys(array_column($evidence['claims'], 'claim_key'), true);
         $zh = $baseline['page_payload_json']['page']['zh'];
-        $zh['hero']['h1'] = $identity['title_zh'];
-        $zh['hero']['title'] = $identity['title_zh'];
-        $zh['hero']['quick_answer'] = $blocks['page-meta.json']['hero_lead'];
-        $zh['definition_block'] = $definition['definition'];
-        $zh['responsibilities_block'] = $definition['duties'];
-        $zh['work_context_block'] = $definition['work_scene'];
-        $zh['faq_block'] = ['items' => $faqItems];
+        if (isset($claimKeys['identity.title_zh'])) {
+            $zh['hero']['h1'] = $identity['title_zh'];
+            $zh['hero']['title'] = $identity['title_zh'];
+        }
+        if (isset($claimKeys['hero.lead'])) {
+            $zh['hero']['quick_answer'] = $blocks['page-meta.json']['hero_lead'];
+        }
+        if (isset($claimKeys['definition.summary'])) {
+            $zh['definition_block'] = $definition['definition'];
+        }
+        if (isset($claimKeys['duties.list'])) {
+            $zh['responsibilities_block'] = $definition['duties'];
+        }
+        if (isset($claimKeys['work_context.summary'])) {
+            $zh['work_context_block'] = $definition['work_scene'];
+        }
+        if (isset($claimKeys['faq.items'])) {
+            $zh['faq_block'] = ['items' => $faqItems];
+        }
         $baseline['page_payload_json']['page']['zh'] = $zh;
-        $baseline['seo_payload_json']['zh']['h1'] = $identity['title_zh'];
-        $baseline['seo_payload_json']['zh']['title'] = $blocks['page-meta.json']['meta_title'];
-        $baseline['seo_payload_json']['zh']['description'] = $blocks['page-meta.json']['meta_description'];
-        $baseline['structured_data_json']['faq_page']['zh'] = [
-            '@context' => 'https://schema.org',
-            '@type' => 'FAQPage',
-            'mainEntity' => array_map(static fn (array $item): array => [
-                '@type' => 'Question',
-                'acceptedAnswer' => ['@type' => 'Answer', 'text' => $item['a']],
-                'name' => $item['q'],
-            ], $blocks['faq.json']['faq']),
-        ];
+        if (isset($claimKeys['identity.title_zh'])) {
+            $baseline['seo_payload_json']['zh']['h1'] = $identity['title_zh'];
+        }
+        if (isset($claimKeys['seo.title'])) {
+            $baseline['seo_payload_json']['zh']['title'] = $blocks['page-meta.json']['meta_title'];
+        }
+        if (isset($claimKeys['seo.description'])) {
+            $baseline['seo_payload_json']['zh']['description'] = $blocks['page-meta.json']['meta_description'];
+        }
+        if (isset($claimKeys['faq.items'])) {
+            $baseline['structured_data_json']['faq_page']['zh'] = [
+                '@context' => 'https://schema.org',
+                '@type' => 'FAQPage',
+                'mainEntity' => array_map(static fn (array $item): array => [
+                    '@type' => 'Question',
+                    'acceptedAnswer' => ['@type' => 'Answer', 'text' => $item['a']],
+                    'name' => $item['q'],
+                ], $blocks['faq.json']['faq']),
+            ];
+        }
         $baseline['sources_json']['references'] = array_map(static fn (array $source): array => [
-            'label' => $source['source_key'],
+            'label' => $source['title'],
+            'source_key' => $source['source_key'],
             'source_type' => $source['authority'],
+            'authority' => $source['authority'],
+            'trust_certification' => $source['trust_certification'],
             'url' => $source['url'],
-            'usage' => $source['usage'] ?? null,
+            'usage' => $source['usage'],
+            'captured_at' => $source['captured_at'],
+            'expires_at' => $source['expires_at'] ?? null,
         ], $evidence['sources']);
         foreach (['en', 'zh'] as $locale) {
-            $baseline['page_payload_json']['page'][$locale]['review_validity_card'] = [
-                'last_reviewed' => $evidence['reviewed_at'],
-                'next_review_due' => $evidence['expires_at'],
-            ];
+            $baseline['page_payload_json']['page'][$locale]['review_validity_card'] = $evidence['review_validity'];
+            $baseline['page_payload_json']['page'][$locale]['claim_permissions'] = $evidence['claim_permissions'];
         }
         $this->assertNoForbiddenKeys($baseline['page_payload_json']);
         $this->assertNoForbiddenKeys($baseline['sources_json']);

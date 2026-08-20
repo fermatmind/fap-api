@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Career\Compilation;
 
+use App\Domain\Career\Compilation\CareerEvidenceAuthorityLoader;
 use App\Domain\Career\Compilation\CareerTenBlockCompileFailure;
 use App\Domain\Career\Compilation\CareerTenBlockCompiler;
 use App\Domain\Career\Compilation\CareerTenBlockInputSchema;
@@ -33,25 +34,7 @@ final class CareerTenBlockCompilerTest extends TestCase
                 'ai_score' => 8,
             ]],
         ], JSON_THROW_ON_ERROR));
-        file_put_contents($this->root.'/evidence.json', json_encode([
-            'contract_version' => 'career.claim_evidence.fixture.v1',
-            'canonical_slug' => 'accountants-and-auditors',
-            'reviewed_at' => '2026-08-20',
-            'expires_at' => '2026-11-20',
-            'sources' => [[
-                'source_key' => 'onet.13-2011.00',
-                'url' => 'https://www.onetonline.org/link/details/13-2011.00',
-                'authority' => 'occupation_fact',
-                'usage' => 'identity and duties',
-            ]],
-            'claims' => [[
-                'claim_key' => 'identity.onet',
-                'source_key' => 'onet.13-2011.00',
-                'confidence' => 'exact_registry_match',
-                'captured_at' => '2026-08-20',
-                'expires_at' => '2026-11-20',
-            ]],
-        ], JSON_THROW_ON_ERROR));
+        $this->writeEvidenceAuthority();
     }
 
     protected function tearDown(): void
@@ -69,8 +52,8 @@ final class CareerTenBlockCompilerTest extends TestCase
 
     public function test_it_dry_compiles_exact_current_shape_deterministically(): void
     {
-        $first = $this->compile($this->root.'/evidence.json');
-        $second = $this->compile($this->root.'/evidence.json');
+        $first = $this->compile($this->root.'/evidence');
+        $second = $this->compile($this->root.'/evidence');
 
         self::assertTrue($first['receipt']['publication_eligible']);
         self::assertSame($first['receipt']['output_row_digest'], $second['receipt']['output_row_digest']);
@@ -81,6 +64,9 @@ final class CareerTenBlockCompilerTest extends TestCase
         self::assertCount(9, $first['row']['structured_data_json']['faq_page']['zh']['mainEntity']);
         self::assertSame(['en', 'zh'], array_keys($first['row']['page_payload_json']['page']));
         self::assertSame(0, $this->forbiddenKeyCount($first['row']));
+        self::assertTrue($first['row']['page_payload_json']['page']['zh']['claim_permissions']['allow_strong_claim']);
+        self::assertFalse($first['row']['page_payload_json']['page']['zh']['claim_permissions']['allow_ai_strategy']);
+        self::assertSame('trusted_public_source', $first['row']['sources_json']['references'][0]['trust_certification']);
         $encoded = CareerCurrentAuthorityPackage::encodeCanonical($first['row']['structured_data_json']);
         foreach (['Article', 'JobPosting', 'Review', 'AggregateRating'] as $forbiddenType) {
             self::assertStringNotContainsString($forbiddenType, $encoded);
@@ -122,7 +108,7 @@ final class CareerTenBlockCompilerTest extends TestCase
 
         $this->expectException(CareerTenBlockCompileFailure::class);
         $this->expectExceptionMessage($safeCode);
-        $this->compile($this->root.'/evidence.json');
+        $this->compile($this->root.'/evidence');
     }
 
     /** @return iterable<string,array{string,string}> */
@@ -144,6 +130,7 @@ final class CareerTenBlockCompilerTest extends TestCase
         $compiler = new CareerTenBlockCompiler(
             new CareerTenBlockSchemaDetector($schema),
             new CareerTenBlockNormalizer,
+            new CareerEvidenceAuthorityLoader,
         );
 
         return $compiler->compile(
@@ -153,6 +140,216 @@ final class CareerTenBlockCompilerTest extends TestCase
             dirname(__DIR__, 5).'/content_assets/career/current/assets.jsonl',
             $evidence,
         );
+    }
+
+    public function test_it_fails_closed_on_claim_source_market_mismatch(): void
+    {
+        $path = $this->root.'/evidence/claim-bindings.jsonl';
+        $claims = array_map(static function (string $line): array {
+            $row = json_decode($line, true, 512, JSON_THROW_ON_ERROR);
+            $row['market'] = 'CN';
+
+            return $row;
+        }, file($path, FILE_IGNORE_NEW_LINES));
+        $this->writeJsonl($path, $claims);
+        $this->refreshEvidenceManifest();
+
+        $this->expectException(CareerTenBlockCompileFailure::class);
+        $this->expectExceptionMessage('TEN_BLOCK_CLAIM_SOURCE_MISMATCH');
+        $this->compile($this->root.'/evidence');
+    }
+
+    public function test_it_fails_closed_on_expired_claim(): void
+    {
+        $path = $this->root.'/evidence/claim-bindings.jsonl';
+        $claims = array_map(static function (string $line): array {
+            $row = json_decode($line, true, 512, JSON_THROW_ON_ERROR);
+            $row['expires_at'] = '2026-08-19';
+
+            return $row;
+        }, file($path, FILE_IGNORE_NEW_LINES));
+        $this->writeJsonl($path, $claims);
+        $this->refreshEvidenceManifest();
+
+        $this->expectException(CareerTenBlockCompileFailure::class);
+        $this->expectExceptionMessage('TEN_BLOCK_CLAIM_EXPIRED');
+        $this->compile($this->root.'/evidence');
+    }
+
+    public function test_it_fails_closed_on_source_period_mismatch(): void
+    {
+        $path = $this->root.'/evidence/claim-bindings.jsonl';
+        $claims = array_map(static function (string $line): array {
+            $row = json_decode($line, true, 512, JSON_THROW_ON_ERROR);
+            $row['effective_period'] = 'different period';
+
+            return $row;
+        }, file($path, FILE_IGNORE_NEW_LINES));
+        $this->writeJsonl($path, $claims);
+        $this->refreshEvidenceManifest();
+
+        $this->expectException(CareerTenBlockCompileFailure::class);
+        $this->expectExceptionMessage('TEN_BLOCK_CLAIM_SOURCE_MISMATCH');
+        $this->compile($this->root.'/evidence');
+    }
+
+    public function test_it_fails_closed_on_missing_source_reference(): void
+    {
+        $path = $this->root.'/evidence/claim-bindings.jsonl';
+        $claims = array_map(static function (string $line): array {
+            $row = json_decode($line, true, 512, JSON_THROW_ON_ERROR);
+            $row['source_keys'] = ['missing.source'];
+
+            return $row;
+        }, file($path, FILE_IGNORE_NEW_LINES));
+        $this->writeJsonl($path, $claims);
+        $this->refreshEvidenceManifest();
+
+        $this->expectException(CareerTenBlockCompileFailure::class);
+        $this->expectExceptionMessage('TEN_BLOCK_CLAIM_SOURCE_MISMATCH');
+        $this->compile($this->root.'/evidence');
+    }
+
+    public function test_proxy_evidence_never_unlocks_strong_or_local_wage_permissions(): void
+    {
+        $sourcePath = $this->root.'/evidence/source-registry.jsonl';
+        $sources = array_map(static function (string $line): array {
+            $row = json_decode($line, true, 512, JSON_THROW_ON_ERROR);
+            $row['authority'] = 'market_sample';
+            $row['trust_certification'] = 'bounded_market_sample';
+
+            return $row;
+        }, file($sourcePath, FILE_IGNORE_NEW_LINES));
+        $this->writeJsonl($sourcePath, $sources);
+        $claimPath = $this->root.'/evidence/claim-bindings.jsonl';
+        $claims = array_map(static function (string $line): array {
+            $row = json_decode($line, true, 512, JSON_THROW_ON_ERROR);
+            $row['proxy'] = true;
+            $row['proxy_boundary'] = 'market sample cannot certify occupation facts or local wages';
+            $row['claim_mode'] = 'market_sample';
+
+            return $row;
+        }, file($claimPath, FILE_IGNORE_NEW_LINES));
+        $this->writeJsonl($claimPath, $claims);
+        $this->refreshEvidenceManifest();
+
+        $result = $this->compile($this->root.'/evidence');
+
+        self::assertTrue($result['receipt']['publication_eligible']);
+        self::assertFalse($result['row']['page_payload_json']['page']['zh']['claim_permissions']['allow_strong_claim']);
+        self::assertFalse($result['row']['page_payload_json']['page']['zh']['claim_permissions']['allow_local_proxy_wage']);
+    }
+
+    public function test_compiler_never_generates_producer_owned_evidence_fields(): void
+    {
+        $result = $this->compile($this->root.'/evidence');
+        $encoded = CareerCurrentAuthorityPackage::encodeCanonical($result);
+
+        self::assertStringNotContainsString('experience_evidence', $encoded);
+        self::assertStringNotContainsString('unique_value_add', $encoded);
+    }
+
+    private function writeEvidenceAuthority(): void
+    {
+        mkdir($this->root.'/evidence');
+        $source = [
+            'contract_version' => 'career.source_registry.v1',
+            'source_key' => 'onet.13-2011.00',
+            'authority' => 'occupation_fact',
+            'trust_certification' => 'trusted_public_source',
+            'publisher' => 'O*NET OnLine',
+            'title' => 'Accountants and Auditors',
+            'url' => 'https://www.onetonline.org/link/details/13-2011.00',
+            'market' => 'US',
+            'locale' => 'en',
+            'claim_kinds' => ['identity', 'duty', 'work_context', 'interpretation'],
+            'captured_at' => '2026-08-20',
+            'effective_period' => 'O*NET 2026 update',
+            'expires_at' => '2027-08-20',
+            'evidence_digest' => hash('sha256', 'fixture O*NET evidence'),
+            'confidence_method' => 'exact occupation code and normalized value digest',
+            'usage' => 'Identity, duties, and work context.',
+        ];
+        $this->writeJsonl($this->root.'/evidence/source-registry.jsonl', [$source]);
+        $blocks = [];
+        $reflection = new ReflectionClass(CareerTenBlockInputSchema::class);
+        foreach (array_keys($reflection->getConstant('FIELDS')) as $file) {
+            $blocks[$file] = json_decode((string) file_get_contents($this->root.'/source/accountants-and-auditors/'.$file), true, 512, JSON_THROW_ON_ERROR);
+        }
+        $claims = [];
+        foreach ([
+            ['identity.title', 'identity', '$.identity.title_en', 'hero'],
+            ['definition.summary', 'identity', '$.definition.definition', 'definition_block'],
+            ['duties.list', 'duty', '$.definition.duties', 'responsibilities_block'],
+            ['faq.items', 'interpretation', '$.faq.faq', 'faq_block'],
+            ['work_context.summary', 'work_context', '$.definition.work_scene', 'work_context_block'],
+        ] as [$key, $kind, $path, $component]) {
+            $segments = explode('.', substr($path, 2));
+            $file = array_shift($segments).'.json';
+            $value = $blocks[$file];
+            foreach ($segments as $segment) {
+                $value = $value[$segment];
+            }
+            $claims[] = [
+                'contract_version' => 'career.claim_binding.v1',
+                'claim_key' => $key,
+                'canonical_slug' => 'accountants-and-auditors',
+                'locale' => 'en',
+                'market' => 'US',
+                'claim_kind' => $kind,
+                'input_jsonpath' => $path,
+                'normalized_value_digest' => CareerCurrentAuthorityPackage::hashValue($value),
+                'component_id' => $component,
+                'authority_output_jsonpath' => '$.page_payload_json.page.zh.'.$component,
+                'source_keys' => ['onet.13-2011.00'],
+                'evidence_basis' => 'exact occupation code and reviewed fixture',
+                'confidence' => 'exact_registry_match',
+                'captured_at' => '2026-08-20',
+                'effective_period' => 'O*NET 2026 update',
+                'expires_at' => '2027-08-20',
+                'proxy' => false,
+                'proxy_boundary' => null,
+                'claim_mode' => 'fact',
+                'review_status' => 'approved',
+                'blocker_codes' => [],
+            ];
+        }
+        $this->writeJsonl($this->root.'/evidence/claim-bindings.jsonl', $claims);
+        file_put_contents($this->root.'/evidence/schema-profile-manifest.json', json_encode([
+            'contract_version' => 'career.evidence.schema_profile_manifest.v1',
+            'profiles' => ['accountants-and-auditors' => [
+                'profile_version' => 'accountants.evidence.v1',
+                'required_claim_keys' => array_column($claims, 'claim_key'),
+            ]],
+        ], JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
+        $this->refreshEvidenceManifest();
+    }
+
+    private function refreshEvidenceManifest(): void
+    {
+        $files = [];
+        foreach ([
+            'source_registry' => 'source-registry.jsonl',
+            'claim_bindings' => 'claim-bindings.jsonl',
+            'schema_profile_manifest' => 'schema-profile-manifest.json',
+        ] as $key => $path) {
+            $files[$key] = ['path' => $path, 'sha256' => hash_file('sha256', $this->root.'/evidence/'.$path)];
+        }
+        file_put_contents($this->root.'/evidence/manifest.json', json_encode([
+            'contract_version' => 'career.evidence.authority.manifest.v1',
+            'evaluation_date' => '2026-08-20',
+            'reviewed_at' => '2026-08-20',
+            'files' => $files,
+        ], JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
+    }
+
+    /** @param list<array<string,mixed>> $rows */
+    private function writeJsonl(string $path, array $rows): void
+    {
+        file_put_contents($path, implode("\n", array_map(
+            static fn (array $row): string => json_encode($row, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),
+            $rows,
+        ))."\n");
     }
 
     private function writeFixture(string $dir): void
