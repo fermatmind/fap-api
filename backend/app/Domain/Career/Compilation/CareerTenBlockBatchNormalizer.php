@@ -12,7 +12,7 @@ final class CareerTenBlockBatchNormalizer
     public function __construct(
         private readonly CareerTenBlockVariantSchema $schema,
         private readonly CareerTenBlockVariantNormalizer $normalizer,
-        private readonly CareerInternalLinkCanonicalizer $linkCanonicalizer,
+        private readonly CareerInternalLinkResolver $linkResolver,
     ) {}
 
     /** @return array{manifest:array<string,mixed>,receipt:array<string,mixed>} */
@@ -44,7 +44,7 @@ final class CareerTenBlockBatchNormalizer
             }
             $profile = $this->schema->detectAndValidate($blocks);
             $profileCounts[$profile] = ($profileCounts[$profile] ?? 0) + 1;
-            $links = $this->linkCanonicalizer->canonicalize(
+            $links = $this->linkResolver->canonicalize(
                 $slug,
                 $blocks['compare-links.json']['internal_links'],
                 $lookup,

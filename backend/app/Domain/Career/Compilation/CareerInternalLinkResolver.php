@@ -6,7 +6,7 @@ namespace App\Domain\Career\Compilation;
 
 use App\Domain\Career\Audit\CareerDetailReadyTargetAuthority;
 
-final class CareerInternalLinkCanonicalizer
+final class CareerInternalLinkResolver
 {
     /**
      * @param  list<array<string,mixed>>  $links

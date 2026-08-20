@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Career\Compilation;
 
-use App\Domain\Career\Compilation\CareerInternalLinkCanonicalizer;
+use App\Domain\Career\Compilation\CareerInternalLinkResolver;
 use App\Domain\Career\Compilation\CareerTenBlockCompileFailure;
 use App\Domain\Career\Compilation\CareerTenBlockVariantNormalizer;
 use App\Domain\Career\Compilation\CareerTenBlockVariantSchema;
@@ -65,7 +65,7 @@ final class CareerTenBlockVariantNormalizerTest extends TestCase
 
     public function test_variant_links_resolve_to_canonical_targets_without_mutating_source_identity(): void
     {
-        $links = (new CareerInternalLinkCanonicalizer)->canonicalize('accountants-and-auditors', [[
+        $links = (new CareerInternalLinkResolver)->canonicalize('accountants-and-auditors', [[
             'slug' => 'health-and-safety-engineers-except-mining-safety-engineers-and-inspectors',
             'title_en' => 'Health and Safety Engineers',
             'source' => 'lookup',
@@ -84,7 +84,7 @@ final class CareerTenBlockVariantNormalizerTest extends TestCase
 
     public function test_unresolved_and_hold_targets_fail_closed_even_with_nofollow(): void
     {
-        $canonicalizer = new CareerInternalLinkCanonicalizer;
+        $canonicalizer = new CareerInternalLinkResolver;
         foreach ([
             ['missing', [], ['missing' => true], 'TEN_BLOCK_INTERNAL_LINK_UNRESOLVED'],
             ['software-developers', ['software-developers' => ['canonical_slug' => 'software-developers']], ['software-developers' => true], 'TEN_BLOCK_INTERNAL_LINK_HOLD_TARGET'],
