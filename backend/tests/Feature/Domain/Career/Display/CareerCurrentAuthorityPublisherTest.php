@@ -78,6 +78,24 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
         self::assertSame('new current title', data_get($inserted->page_payload_json, 'en.hero.title'));
     }
 
+    public function test_full_scan_repairs_active_cache_drift_when_database_is_already_current(): void
+    {
+        [$authority] = $this->fixture();
+        $cache = new FakeCareerCurrentAuthorityCacheGateway(new CareerCurrentAuthorityPackage, $authority['rows']);
+        $publisher = $this->publisher($authority, $cache);
+        $publisher->execute(base_path(), true);
+        $cache->serveStaleActive = true;
+
+        $result = $publisher->execute(base_path(), true);
+
+        self::assertSame(0, $result['write_counts']['database_update_count']);
+        self::assertSame(4, $result['write_counts']['cache_candidate_write_count']);
+        self::assertSame(2, $result['write_counts']['cache_pointer_activation_count']);
+        self::assertSame(2, $result['public_readback']['verified_locale_page_count']);
+        self::assertFalse($result['idempotent_noop']);
+        self::assertFalse($cache->serveStaleActive);
+    }
+
     #[DataProvider('compensatedFailureProvider')]
     public function test_it_restores_database_and_cache_boundary_after_post_commit_failure(string $mode): void
     {
@@ -220,6 +238,8 @@ final class FakeCareerCurrentAuthorityCacheGateway extends CareerCurrentAuthorit
 
     public bool $forgotten = false;
 
+    public bool $serveStaleActive = false;
+
     /** @param array<string,array<string,mixed>> $rows */
     public function __construct(
         private readonly CareerCurrentAuthorityPackage $package,
@@ -257,6 +277,7 @@ final class FakeCareerCurrentAuthorityCacheGateway extends CareerCurrentAuthorit
         foreach ($entries as $entry) {
             $snapshots[$entry['slug'].'|'.$entry['locale']] = ['fixture' => true];
         }
+        $this->serveStaleActive = false;
 
         return ['status' => 'pass', 'entries' => $entries, 'failures' => [], 'rollback_snapshots' => $snapshots];
     }
@@ -280,7 +301,9 @@ final class FakeCareerCurrentAuthorityCacheGateway extends CareerCurrentAuthorit
                     'published' => true,
                     'classification' => $this->mode === 'readback_failure' ? 'missing_pointer' : 'ready_active',
                     'version' => 'active-'.$locale,
-                    'payload' => ['display_surface_v1' => $this->package->publicProjection($this->rows[$slug], $locale)],
+                    'payload' => ['display_surface_v1' => $this->serveStaleActive
+                        ? ['surface_version' => 'drifted']
+                        : $this->package->publicProjection($this->rows[$slug], $locale)],
                 ];
             }
         }

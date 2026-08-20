@@ -70,15 +70,25 @@ final class CareerCurrentAuthorityPublisher
                 + $plan['write_counts']['database_insert_count']
                 + $plan['write_counts']['database_delete_count']) > 0;
 
+            $candidatePairs = [];
             foreach ($plan['changed_slugs'] as $slug) {
                 foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
-                    $entry = $this->cache->prepare($slug, $locale);
-                    if (($entry['status'] ?? null) !== 'ready' || ($entry['classification'] ?? null) !== 'ready_staged') {
-                        throw new CareerCurrentAuthorityPublisherFailure('CURRENT_CACHE_CANDIDATE_PREPARATION_FAILED');
-                    }
-                    $prepared[] = $entry;
-                    $this->assertCachedPayload($entry, $authority['rows'][$slug], $locale, true);
+                    $candidatePairs[$slug.'|'.$locale] = [$slug, $locale];
                 }
+            }
+            if ($fullScan) {
+                foreach ($this->staleCachePairs($authority['slugs'], $authority['rows']) as [$slug, $locale]) {
+                    $candidatePairs[$slug.'|'.$locale] = [$slug, $locale];
+                }
+            }
+
+            foreach ($candidatePairs as [$slug, $locale]) {
+                $entry = $this->cache->prepare($slug, $locale);
+                if (($entry['status'] ?? null) !== 'ready' || ($entry['classification'] ?? null) !== 'ready_staged') {
+                    throw new CareerCurrentAuthorityPublisherFailure('CURRENT_CACHE_CANDIDATE_PREPARATION_FAILED');
+                }
+                $prepared[] = $entry;
+                $this->assertCachedPayload($entry, $authority['rows'][$slug], $locale, true);
             }
 
             if ($prepared !== []) {
@@ -328,18 +338,62 @@ final class CareerCurrentAuthorityPublisher
         $payload = $prepared
             ? $this->cache->preparedPayload($entry)
             : ($entry['payload'] ?? null);
-        $surface = is_array($payload) ? data_get($payload, 'display_surface_v1') : null;
-        if (! is_array($surface)) {
+        if (! is_array($payload) || ! is_array(data_get($payload, 'display_surface_v1'))) {
             throw new CareerCurrentAuthorityPublisherFailure('CURRENT_CACHE_PAYLOAD_MISSING');
         }
-        $expected = $this->readerSafeProjector->project($this->package->publicProjection($row, $locale));
-        $actual = $this->readerSafeProjector->project($this->package->displayOwnedProjection($surface));
-        if (! hash_equals(
-            CareerCurrentAuthorityPackage::hashValue($expected),
-            CareerCurrentAuthorityPackage::hashValue($actual),
-        )) {
+        if (! $this->cachedPayloadMatches($payload, $row, $locale)) {
             throw new CareerCurrentAuthorityPublisherFailure('CURRENT_CACHE_CONTENT_MISMATCH');
         }
+    }
+
+    /** @param array<string,mixed>|null $payload @param array<string,mixed> $row */
+    private function cachedPayloadMatches(?array $payload, array $row, string $locale): bool
+    {
+        $surface = is_array($payload) ? data_get($payload, 'display_surface_v1') : null;
+        if (! is_array($surface)) {
+            return false;
+        }
+        try {
+            $expected = $this->readerSafeProjector->project($this->package->publicProjection($row, $locale));
+            $actual = $this->readerSafeProjector->project($this->package->displayOwnedProjection($surface));
+
+            return hash_equals(
+                CareerCurrentAuthorityPackage::hashValue($expected),
+                CareerCurrentAuthorityPackage::hashValue($actual),
+            );
+        } catch (CareerCurrentAuthorityPackageFailure) {
+            return false;
+        }
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     * @param  array<string,array<string,mixed>>  $targetRows
+     * @return list<array{string,string}>
+     */
+    private function staleCachePairs(array $slugs, array $targetRows): array
+    {
+        $pairs = [];
+        foreach (array_chunk($slugs, 50) as $chunk) {
+            $cache = $this->cache->publicationSnapshot($chunk, CareerCurrentAuthorityPackage::LOCALES);
+            foreach ($chunk as $slug) {
+                foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
+                    $entry = $cache[$slug][$locale] ?? null;
+                    if (! is_array($entry)
+                        || ($entry['published'] ?? null) !== true
+                        || ($entry['classification'] ?? null) !== 'ready_active'
+                        || ! $this->cachedPayloadMatches(
+                            is_array($entry['payload'] ?? null) ? $entry['payload'] : null,
+                            $targetRows[$slug],
+                            $locale,
+                        )) {
+                        $pairs[] = [$slug, $locale];
+                    }
+                }
+            }
+        }
+
+        return $pairs;
     }
 
     /** @param list<string> $slugs @param array<string,array<string,mixed>> $targetRows @return array<string,mixed> */
