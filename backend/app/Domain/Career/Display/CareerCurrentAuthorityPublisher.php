@@ -200,6 +200,10 @@ final class CareerCurrentAuthorityPublisher
     private function cacheCandidatePreparationFailureCode(Throwable $throwable): string
     {
         for ($candidate = $throwable; $candidate instanceof Throwable; $candidate = $candidate->getPrevious()) {
+            $message = strtolower($candidate->getMessage());
+            if (str_contains($message, 'oom command not allowed') || str_contains($message, 'maxmemory')) {
+                return 'CURRENT_CACHE_CAPACITY_EXHAUSTED';
+            }
             $class = strtolower($candidate::class);
             if (str_contains($class, 'redis') || str_contains($class, 'predis')) {
                 return 'CURRENT_CACHE_BACKEND_PREPARATION_FAILED';

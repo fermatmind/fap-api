@@ -116,6 +116,26 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
         self::assertTrue($cache->forgotten);
     }
 
+    public function test_it_classifies_cache_capacity_exhaustion_and_restores_database(): void
+    {
+        [$authority, , $old] = $this->fixture();
+        $cache = new FakeCareerCurrentAuthorityCacheGateway(new CareerCurrentAuthorityPackage, $authority['rows'], 'prepare_capacity_exception');
+
+        try {
+            $this->publisher($authority, $cache)->execute(base_path(), true);
+            self::fail('Expected controlled publisher failure.');
+        } catch (CareerCurrentAuthorityPublisherFailure $failure) {
+            self::assertSame('CURRENT_CACHE_CAPACITY_EXHAUSTED', $failure->safeCode);
+            self::assertSame('rolled_back', $failure->writeCommitState);
+        }
+
+        self::assertSame('old title', data_get(
+            CareerJobDisplayAsset::query()->findOrFail($old['id'])->page_payload_json,
+            'en.hero.title',
+        ));
+        self::assertTrue($cache->forgotten);
+    }
+
     public function test_it_rejects_accountants_without_a_non_empty_boundary_notice_before_writes(): void
     {
         [$authority] = $this->fixture();
@@ -289,6 +309,9 @@ final class FakeCareerCurrentAuthorityCacheGateway extends CareerCurrentAuthorit
     {
         if ($this->mode === 'prepare_exception') {
             throw new \RuntimeException('Synthetic cache infrastructure failure.');
+        }
+        if ($this->mode === 'prepare_capacity_exception') {
+            throw new \RuntimeException("OOM command not allowed when used memory > 'maxmemory'.");
         }
         if ($this->mode === 'prepare_failure') {
             return ['status' => 'blocked', 'classification' => 'missing_pointer'];
