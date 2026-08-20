@@ -105,7 +105,7 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
             $this->publisher($authority, $cache)->execute(base_path(), true);
             self::fail('Expected controlled publisher failure.');
         } catch (CareerCurrentAuthorityPublisherFailure $failure) {
-            self::assertSame('CURRENT_CACHE_CANDIDATE_PREPARATION_FAILED', $failure->safeCode);
+            self::assertSame('CURRENT_CACHE_PREPARATION_RUNTIME_FAILED', $failure->safeCode);
             self::assertSame('rolled_back', $failure->writeCommitState);
         }
 

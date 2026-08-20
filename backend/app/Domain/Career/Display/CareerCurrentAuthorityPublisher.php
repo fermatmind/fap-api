@@ -88,7 +88,7 @@ final class CareerCurrentAuthorityPublisher
                     $entry = $this->cache->prepare($slug, $locale);
                 } catch (Throwable $throwable) {
                     throw new CareerCurrentAuthorityPublisherFailure(
-                        'CURRENT_CACHE_CANDIDATE_PREPARATION_FAILED',
+                        $this->cacheCandidatePreparationFailureCode($throwable),
                         $throwable,
                     );
                 }
@@ -195,6 +195,24 @@ final class CareerCurrentAuthorityPublisher
                 ($databaseCommitted || $prepared !== []) ? 'rolled_back' : 'confirmed_zero_write',
             );
         }
+    }
+
+    private function cacheCandidatePreparationFailureCode(Throwable $throwable): string
+    {
+        for ($candidate = $throwable; $candidate instanceof Throwable; $candidate = $candidate->getPrevious()) {
+            $class = strtolower($candidate::class);
+            if (str_contains($class, 'redis') || str_contains($class, 'predis')) {
+                return 'CURRENT_CACHE_BACKEND_PREPARATION_FAILED';
+            }
+            if ($candidate instanceof \Illuminate\Database\QueryException || $candidate instanceof \PDOException) {
+                return 'CURRENT_CACHE_DATABASE_DEPENDENCY_FAILED';
+            }
+            if ($candidate instanceof \TypeError || $candidate instanceof \ValueError || $candidate instanceof \JsonException) {
+                return 'CURRENT_CACHE_PAYLOAD_BUILD_FAILED';
+            }
+        }
+
+        return 'CURRENT_CACHE_PREPARATION_RUNTIME_FAILED';
     }
 
     /**
