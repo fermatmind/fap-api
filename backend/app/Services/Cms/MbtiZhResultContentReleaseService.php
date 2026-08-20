@@ -38,6 +38,13 @@ final class MbtiZhResultContentReleaseService
         return DB::transaction(function () use ($expectedPackageHash, $expectedPreStateHash, $adminUserId): array {
             $state = $this->resolveState(true);
             $this->assertPlanIdentity($state, $expectedPackageHash, $expectedPreStateHash);
+            if ($state['already_active']) {
+                return [
+                    ...$this->publicPlan($state),
+                    'stage' => 'already_active',
+                    'skipped' => true,
+                ];
+            }
 
             $candidateRevisions = [];
             $rollbackRevisions = [];
@@ -93,6 +100,13 @@ final class MbtiZhResultContentReleaseService
     public function promotionDryRun(): array
     {
         $state = $this->resolveState(false);
+        if ($state['already_active']) {
+            return [
+                ...$this->publicPlan($state),
+                'stage' => 'already_active',
+                'skipped' => true,
+            ];
+        }
         $revisions = $this->resolveRevisionSets($state);
         $receipt = [
             'schema' => 'mbti_zh_result_promotion_receipt.v1',
@@ -123,6 +137,15 @@ final class MbtiZhResultContentReleaseService
 
         return DB::transaction(function () use ($expectedPackageHash, $expectedPreStateHash, $expectedRevisionSetHash): array {
             $state = $this->resolveState(true);
+            if ($state['already_active'] && hash_equals($expectedPackageHash, (string) $state['package']['package_hash'])) {
+                return [
+                    'stage' => 'already_active',
+                    'package_hash' => $expectedPackageHash,
+                    'record_count' => 32,
+                    'committed' => false,
+                    'skipped' => true,
+                ];
+            }
             $this->assertPlanIdentity($state, $expectedPackageHash, $expectedPreStateHash);
             $sets = $this->resolveRevisionSets($state);
             if (! hash_equals($expectedRevisionSetHash, $sets['candidate_revision_set_hash'])) {
@@ -167,7 +190,9 @@ final class MbtiZhResultContentReleaseService
             $row = $target['row'];
             $meta = is_array($record->meta_json) ? $record->meta_json : [];
             if (($meta['package_hash'] ?? null) !== $expectedPackageHash
+                || trim((string) ($meta['package_id'] ?? '')) === ''
                 || ($meta['source_hash'] ?? null) !== $row['source_hash']
+                || (int) ($meta['revision_no'] ?? 0) <= 0
                 || count((array) $record->asset_slots_json) !== 7) {
                 $failures[] = $row['full_code'];
             }
@@ -272,8 +297,32 @@ final class MbtiZhResultContentReleaseService
             'asset_slots_json' => $target['record']->asset_slots_json,
             'meta_json' => $target['record']->meta_json,
         ], $targets);
+        $alreadyActive = collect($targets)->every(static function (array $target) use ($package): bool {
+            $row = $target['row'];
+            $record = $target['record'];
+            $meta = is_array($record->meta_json) ? $record->meta_json : [];
 
-        return ['package' => $package, 'targets' => $targets, 'pre_state_hash' => IdempotencyKey::hashPayload($preState)];
+            return ($meta['package_id'] ?? null) === $package['package_id']
+                && ($meta['package_hash'] ?? null) === $package['package_hash']
+                && ($meta['source_hash'] ?? null) === $row['source_hash']
+                && (int) ($meta['revision_no'] ?? 0) > 0
+                && $record->schema_version === $row['schema_version']
+                && hash_equals(
+                    IdempotencyKey::hashPayload($record->content_json),
+                    IdempotencyKey::hashPayload($row['content_json']),
+                )
+                && count((array) $record->asset_slots_json) === 7
+                && collect((array) $record->asset_slots_json)->every(static fn (array $slot): bool => ($slot['status'] ?? null) === 'disabled'
+                    && ($slot['asset_ref'] ?? null) === null
+                    && in_array($slot['alt'] ?? null, [null, ''], true));
+        });
+
+        return [
+            'package' => $package,
+            'targets' => $targets,
+            'pre_state_hash' => IdempotencyKey::hashPayload($preState),
+            'already_active' => $alreadyActive,
+        ];
     }
 
     /** @param array<string,mixed> $state @return array<string,mixed> */
@@ -288,6 +337,7 @@ final class MbtiZhResultContentReleaseService
             'source_manifest' => $state['package']['source_manifest'],
             'writes' => false,
             'discoverability_changes' => false,
+            'already_active' => $state['already_active'],
         ];
     }
 

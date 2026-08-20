@@ -22,6 +22,11 @@ export function classifyPaths(inputPaths) {
 
   const result = Object.fromEntries(CATEGORIES.map((category) => [category, false]));
   const reasons = Object.fromEntries(CATEGORIES.map((category) => [category, []]));
+  const operations = {
+    mbti_zh_result_authority_release: paths.includes(
+      "backend/content_assets/personality_public/mbti_zh_result_authority_release.v1.json",
+    ),
+  };
   let testsChanged = false;
 
   for (const path of paths) {
@@ -107,6 +112,7 @@ export function classifyPaths(inputPaths) {
     deploy: deploymentCategories.length > 0,
     tests_changed: testsChanged,
     flags: result,
+    operations,
     reasons,
   };
 }

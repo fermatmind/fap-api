@@ -39,6 +39,10 @@ jobs:
       career_current_full_scan: ${{ steps.receipt.outputs.career_current_full_scan }}
       career_current_assets_sha256: ${{ steps.career-current.outputs.assets_sha256 }}
       career_current_operation_key: ${{ steps.career-current.outputs.operation_key }}
+      mbti_zh_result_release: ${{ steps.receipt.outputs.mbti_zh_result_release }}
+      mbti_zh_result_package_hash: ${{ steps.mbti-zh-result.outputs.package_hash }}
+      mbti_zh_result_actor: ${{ steps.mbti-zh-result.outputs.actor }}
+      mbti_zh_result_operation_key: ${{ steps.mbti-zh-result.outputs.operation_key }}
     steps:
       - name: Refuse non-main, PR, failed, or ambiguous CI runs
         shell: bash
@@ -93,12 +97,14 @@ jobs:
           classification="$(jq -c .classification "$receipt")"
           career_current="$(jq -r '[.classification.paths[] | select(. == "backend/content_assets/career/current/assets.jsonl" or . == "backend/content_assets/career/current/manifest.json")] | length > 0' "$receipt")"
           career_current_full_scan="$(jq -r '[.classification.paths[] | select(. == "backend/app/Domain/Career/Display/CareerCurrentAuthorityPackage.php")] | length > 0' "$receipt")"
+          mbti_zh_result_release="$(jq -r '.classification.operations.mbti_zh_result_authority_release == true' "$receipt")"
           {
             echo "deploy=$(jq -r .classification.deploy "$receipt")"
             echo "classification=$classification"
             echo "config_fingerprint=$(sha256sum "$receipt" | awk '{print $1}')"
             echo "career_current=$career_current"
             echo "career_current_full_scan=$career_current_full_scan"
+            echo "mbti_zh_result_release=$mbti_zh_result_release"
           } >> "$GITHUB_OUTPUT"
       - id: career-current
         name: Bind Career Current package operation
@@ -117,6 +123,37 @@ jobs:
           operation_key="$(printf 'career-current-authority|%s|%s' "$DEPLOY_SHA" "$assets_sha256" | sha256sum | awk '{print $1}')"
           {
             echo "assets_sha256=$assets_sha256"
+            echo "operation_key=$operation_key"
+          } >> "$GITHUB_OUTPUT"
+      - id: mbti-zh-result
+        name: Bind exact MBTI zh result authority operation
+        if: steps.receipt.outputs.mbti_zh_result_release == 'true'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          manifest="$RUNNER_TEMP/mbti-zh-result-authority-release.json"
+          curl -fsSL -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" \
+            "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/contents/backend/content_assets/personality_public/mbti_zh_result_authority_release.v1.json?ref=$DEPLOY_SHA" \
+            | jq -r .content | base64 --decode > "$manifest"
+          jq -e '
+            .contract_version == "mbti.zh_result_authority_release.v1"
+            and .package_id == "mbti-zh-result-41755da0ed35dc35"
+            and .package_hash == "41755da0ed35dc35d8ef4de68582506a9615924bfbb3548c037c004f34b520c4"
+            and .locale == "zh-CN"
+            and .template_key == "mbti_desktop_clone_v1"
+            and .record_count == 32
+            and .disabled_slot_count == 224
+            and .admin_actor_user_id == 1
+            and ([.negative_guarantees[]] | all(. == false))
+          ' "$manifest" >/dev/null
+          package_hash="$(jq -r .package_hash "$manifest")"
+          actor="$(jq -r .admin_actor_user_id "$manifest")"
+          operation_key="$(printf 'mbti-zh-result-authority|%s|%s|%s' "$DEPLOY_SHA" "$package_hash" "$actor" | sha256sum | awk '{print $1}')"
+          {
+            echo "package_hash=$package_hash"
+            echo "actor=$actor"
             echo "operation_key=$operation_key"
           } >> "$GITHUB_OUTPUT"
 
@@ -303,6 +340,215 @@ jobs:
         with:
           name: trunk-production-${{ github.event.workflow_run.head_sha }}
           path: trunk-delivery-timing.json
+          if-no-files-found: error
+          retention-days: 90
+
+  mbti-zh-result-publish:
+    name: Publish exact MBTI zh result authority
+    needs: [policy, production]
+    if: needs.production.result == 'success' && needs.policy.outputs.mbti_zh_result_release == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: production
+    env:
+      DEPLOY_SHA: ${{ github.event.workflow_run.head_sha }}
+      PACKAGE_HASH: ${{ needs.policy.outputs.mbti_zh_result_package_hash }}
+      ADMIN_ACTOR: ${{ needs.policy.outputs.mbti_zh_result_actor }}
+      OPERATION_KEY: ${{ needs.policy.outputs.mbti_zh_result_operation_key }}
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+    steps:
+      - name: Start SSH agent without key metadata output
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          eval "$(ssh-agent -s)" >/dev/null
+          echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
+          echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
+          printf '%s\n' "$SSH_PRIVATE_KEY" | ssh-add - >/dev/null 2>&1
+      - name: Install pinned known_hosts
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+      - name: Promote, read back, and recover the exact package
+        shell: bash
+        run: |
+          set -euo pipefail
+          dir=artifacts/mbti-zh-result-authority-publish
+          mkdir -p "$dir"
+          [[ "$DEPLOY_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$PACKAGE_HASH" =~ ^[0-9a-f]{64}$ ]]
+          [[ "$ADMIN_ACTOR" =~ ^[1-9][0-9]*$ ]]
+          [[ "$OPERATION_KEY" =~ ^[0-9a-f]{64}$ ]]
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          printf -v q_release '%q' "$DEPLOY_SHA"
+          ssh_base=(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 -o ServerAliveInterval=15 -o ServerAliveCountMax=4 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST")
+          remote_prefix="set -euo pipefail; current=\$(readlink -f $q_path/current); releases=\$(readlink -f $q_path/releases); test -n \"\$current\"; test -n \"\$releases\"; case \"\$current\" in \"\$releases\"/*) ;; *) exit 1 ;; esac; test \"\$(tr -d '\\r\\n' < \"\$current/REVISION\")\" = $q_release; test ! -e $q_path/.dep/deploy.lock; cd \"\$current/backend\";"
+          flags="--production-content-write-authorized --no-publication-change --no-indexability-change --no-sitemap --no-llms --no-search-release"
+          run_artisan() {
+            "${ssh_base[@]}" "$remote_prefix sudo -n -u www-data -- php artisan personality:mbti-zh-result-content-release $* --no-interaction --no-ansi"
+          }
+          public_rows() {
+            local output="$1"
+            : > "$output"
+            for base in ENFJ ENFP ENTJ ENTP ESFJ ESFP ESTJ ESTP INFJ INFP INTJ INTP ISFJ ISFP ISTJ ISTP; do
+              for axis in A T; do
+                code="${base}-${axis}"
+                slug="$(tr '[:upper:]' '[:lower:]' <<<"$code")"
+                curl --retry 3 --retry-all-errors --retry-delay 2 -fsS --connect-timeout 5 --max-time 30 \
+                  "https://api.fermatmind.com/api/v0.5/personality/${slug}/desktop-clone?locale=zh-CN&org_id=0&scale_code=MBTI" \
+                  | jq -c --arg code "$code" --arg package "$PACKAGE_HASH" '
+                      select(.ok == true
+                        and .full_code == $code
+                        and (._meta.package_id | type == "string" and length > 0)
+                        and ._meta.package_hash == $package
+                        and (._meta.source_hash | test("^[a-f0-9]{64}$"))
+                        and (._meta.revision_no | type == "number" and . > 0)
+                        and (.asset_slots | length) == 7
+                        and ([.asset_slots[] | select(.status == "disabled" and .asset_ref == null and .alt == "")] | length) == 7)
+                      | {full_code,package_id:._meta.package_id,package_hash:._meta.package_hash,source_hash:._meta.source_hash,revision_no:._meta.revision_no,disabled_slots:7}
+                    ' >> "$output"
+              done
+            done
+          }
+          public_snapshot() {
+            local output="$1"
+            : > "$output"
+            for base in ENFJ ENFP ENTJ ENTP ESFJ ESFP ESTJ ESTP INFJ INFP INTJ INTP ISFJ ISFP ISTJ ISTP; do
+              for axis in A T; do
+                code="${base}-${axis}"
+                slug="$(tr '[:upper:]' '[:lower:]' <<<"$code")"
+                digest="$(curl --retry 3 --retry-all-errors --retry-delay 2 -fsS --connect-timeout 5 --max-time 30 \
+                  "https://api.fermatmind.com/api/v0.5/personality/${slug}/desktop-clone?locale=zh-CN&org_id=0&scale_code=MBTI" \
+                  | jq -S -c . | sha256sum | awk '{print $1}')"
+                jq -cn --arg code "$code" --arg digest "$digest" '{full_code:$code,response_sha256:$digest}' >> "$output"
+              done
+            done
+          }
+
+          run_artisan --stage=dry-run | tee "$dir/dry-run.json"
+          jq -e --arg package "$PACKAGE_HASH" '
+            .ok == true and .record_count == 32 and .package_hash == $package
+            and .writes == false and .discoverability_changes == false
+          ' "$dir/dry-run.json" >/dev/null
+          pre_state_hash="$(jq -r .pre_state_hash "$dir/dry-run.json")"
+          already_active="$(jq -r .already_active "$dir/dry-run.json")"
+
+          if [ "$already_active" = true ]; then
+            run_artisan --stage=readback --package-hash="$PACKAGE_HASH" | tee "$dir/database-readback.json"
+            public_rows "$dir/public-rows.jsonl"
+            jq -s --arg package "$PACKAGE_HASH" '
+              {schema:"mbti_zh_result_public_readback.v1",package_hash:$package,record_count:length,
+               disabled_slot_count:(map(.disabled_slots)|add),unique_source_hashes:(map(.source_hash)|unique|length),
+               ok:(length == 32 and (map(.package_hash)|unique) == [$package] and (map(.source_hash)|unique|length) == 32)}
+            ' "$dir/public-rows.jsonl" > "$dir/public-readback.json"
+            jq -e '.ok == true and .record_count == 32 and .disabled_slot_count == 224 and .unique_source_hashes == 32' "$dir/public-readback.json" >/dev/null
+            jq -n --arg sha "$DEPLOY_SHA" --arg package "$PACKAGE_HASH" --arg operation "$OPERATION_KEY" '
+              {contract_version:"mbti.zh_result_authority_publish.v1",status:"PASS_ALREADY_ACTIVE",release_sha:$sha,
+               package_hash:$package,operation_key:$operation,record_count:32,disabled_slot_count:224,
+               public_api_readback_count:32,immutable_revision_count_created:0,rollback_performed:false,
+               negative_guarantees:{publication_eligibility_changed:false,indexability_changed:false,sitemap_mutated:false,llms_mutated:false,search_channel_mutated:false}}
+            ' > "$dir/receipt.json"
+            exit 0
+          fi
+
+          public_snapshot "$dir/public-pre-state.jsonl"
+          rollback_set_hash=""
+          recover_pre_state() {
+            trap - ERR
+            run_artisan --stage=dry-run | tee "$dir/failed-state.json"
+            rollback_performed=false
+            if ! jq -e --arg pre "$pre_state_hash" '.ok == true and .pre_state_hash == $pre and .already_active == false' "$dir/failed-state.json" >/dev/null; then
+              [[ "$rollback_set_hash" =~ ^[0-9a-f]{64}$ ]]
+              run_artisan --stage=rollback --package-hash="$PACKAGE_HASH" --pre-state-hash="$pre_state_hash" --revision-set-hash="$rollback_set_hash" "$flags" | tee "$dir/rollback.json"
+              rollback_performed=true
+            fi
+            run_artisan --stage=dry-run | tee "$dir/rollback-database-readback.json"
+            jq -e --arg pre "$pre_state_hash" '.ok == true and .pre_state_hash == $pre and .already_active == false' "$dir/rollback-database-readback.json" >/dev/null
+            public_snapshot "$dir/public-restored-state.jsonl"
+            diff -u "$dir/public-pre-state.jsonl" "$dir/public-restored-state.jsonl" > "$dir/rollback-public-diff.txt"
+            jq -n --arg sha "$DEPLOY_SHA" --arg package "$PACKAGE_HASH" --arg operation "$OPERATION_KEY" --argjson rollback "$rollback_performed" '
+              {contract_version:"mbti.zh_result_authority_publish.v1",status:"FAIL_ROLLED_BACK",release_sha:$sha,
+               package_hash:$package,operation_key:$operation,record_count:32,rollback_performed:$rollback,
+               database_pre_state_restored:true,public_pre_state_restored:true}
+            ' > "$dir/receipt.json"
+          }
+          trap recover_pre_state ERR
+          run_artisan --stage=draft --package-hash="$PACKAGE_HASH" --pre-state-hash="$pre_state_hash" --admin-user-id="$ADMIN_ACTOR" "$flags" | tee "$dir/draft.json"
+          jq -e '
+            .ok == true and .stage == "draft_write" and .record_count == 32
+            and (.candidate_revisions | length) == 32 and (.rollback_revisions | length) == 32
+            and (.candidate_revision_set_hash | test("^[a-f0-9]{64}$"))
+            and (.rollback_revision_set_hash | test("^[a-f0-9]{64}$"))
+          ' "$dir/draft.json" >/dev/null
+          rollback_set_hash="$(jq -r .rollback_revision_set_hash "$dir/draft.json")"
+
+          run_artisan --stage=promotion-dry-run | tee "$dir/promotion-dry-run.json"
+          revision_set_hash="$(jq -r .candidate_revision_set_hash "$dir/promotion-dry-run.json")"
+          test "$(jq -r .rollback_revision_set_hash "$dir/promotion-dry-run.json")" = "$rollback_set_hash"
+          jq -e --arg package "$PACKAGE_HASH" --arg pre "$pre_state_hash" '
+            .ok == true and .package_hash == $package and .pre_state_hash == $pre and .record_count == 32
+          ' "$dir/promotion-dry-run.json" >/dev/null
+
+          readback_ok=1
+          set +e
+          run_artisan --stage=promote --package-hash="$PACKAGE_HASH" --pre-state-hash="$pre_state_hash" --revision-set-hash="$revision_set_hash" "$flags" | tee "$dir/promotion.json"
+          promotion_status="${PIPESTATUS[0]}"
+          set -e
+          test "$promotion_status" -eq 0 || readback_ok=0
+          jq -e '.ok == true and .committed == true and .record_count == 32' "$dir/promotion.json" >/dev/null || readback_ok=0
+          run_artisan --stage=readback --package-hash="$PACKAGE_HASH" | tee "$dir/database-readback.json" || readback_ok=0
+          jq -e '.ok == true and .record_count == 32 and .disabled_slot_count == 224 and ([.revision_nos[]] | all(. > 0))' "$dir/database-readback.json" >/dev/null || readback_ok=0
+          public_rows "$dir/public-rows.jsonl" || readback_ok=0
+          jq -s --arg package "$PACKAGE_HASH" '
+            {schema:"mbti_zh_result_public_readback.v1",package_hash:$package,record_count:length,
+             disabled_slot_count:(map(.disabled_slots)|add // 0),unique_source_hashes:(map(.source_hash)|unique|length),
+             ok:(length == 32 and (map(.package_hash)|unique) == [$package] and (map(.source_hash)|unique|length) == 32)}
+          ' "$dir/public-rows.jsonl" > "$dir/public-readback.json"
+          jq -e '.ok == true and .record_count == 32 and .disabled_slot_count == 224 and .unique_source_hashes == 32' "$dir/public-readback.json" >/dev/null || readback_ok=0
+
+          if [ "$readback_ok" -ne 1 ]; then
+            recover_pre_state
+            exit 1
+          fi
+
+          trap - ERR
+          jq -n --arg sha "$DEPLOY_SHA" --arg package "$PACKAGE_HASH" --arg operation "$OPERATION_KEY" \
+            --arg pre "$pre_state_hash" --arg revisions "$revision_set_hash" '
+            {contract_version:"mbti.zh_result_authority_publish.v1",status:"PASS_EXACT_AUTHORITY_PUBLISH",release_sha:$sha,
+             package_hash:$package,operation_key:$operation,pre_state_hash:$pre,candidate_revision_set_hash:$revisions,
+             record_count:32,disabled_slot_count:224,public_api_readback_count:32,immutable_revision_count_created:64,
+             rollback_performed:false,
+             negative_guarantees:{publication_eligibility_changed:false,indexability_changed:false,sitemap_mutated:false,llms_mutated:false,search_channel_mutated:false}}
+          ' > "$dir/receipt.json"
+      - name: Validate immutable sanitized receipt
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          receipt=artifacts/mbti-zh-result-authority-publish/receipt.json
+          jq -e --arg sha "$DEPLOY_SHA" --arg package "$PACKAGE_HASH" --arg operation "$OPERATION_KEY" '
+            .contract_version == "mbti.zh_result_authority_publish.v1"
+            and (.status == "PASS_EXACT_AUTHORITY_PUBLISH" or .status == "PASS_ALREADY_ACTIVE")
+            and .release_sha == $sha and .package_hash == $package and .operation_key == $operation
+            and .record_count == 32 and .disabled_slot_count == 224 and .public_api_readback_count == 32
+            and ([.negative_guarantees[]] | all(. == false))
+          ' "$receipt" >/dev/null
+      - name: Upload MBTI zh result authority receipt
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: mbti-zh-result-authority-publish-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/mbti-zh-result-authority-publish
           if-no-files-found: error
           retention-days: 90
 

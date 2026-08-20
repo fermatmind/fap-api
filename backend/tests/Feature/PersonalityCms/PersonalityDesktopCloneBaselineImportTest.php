@@ -41,12 +41,50 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
         $this->assertTrue($readback['ok']);
         $this->assertSame(224, $readback['disabled_slot_count']);
 
+        $revisionCount = PersonalityProfileVariantRevision::query()->count();
+        $activePlan = $service->dryRun();
+        $this->assertTrue($activePlan['already_active']);
+        $skipped = $service->writeDraft($activePlan['package_hash'], $activePlan['pre_state_hash'], 1);
+        $this->assertSame('already_active', $skipped['stage']);
+        $this->assertTrue($skipped['skipped']);
+        $this->assertSame('already_active', $service->promotionDryRun()['stage']);
+        $repeatPromotion = $service->promote(
+            $promotion['package_hash'],
+            $promotion['pre_state_hash'],
+            $promotion['candidate_revision_set_hash'],
+        );
+        $this->assertTrue($repeatPromotion['skipped']);
+        $this->assertSame($revisionCount, PersonalityProfileVariantRevision::query()->count());
+
         $rollback = $service->rollback(
             $promotion['package_hash'],
             $dryRun['pre_state_hash'],
             $promotion['rollback_revision_set_hash'],
         );
         $this->assertTrue($rollback['committed']);
+    }
+
+    public function test_exact_release_readback_rejects_non_positive_revision_number(): void
+    {
+        $this->seedZhVariantsForAllMbtiBaseTypes();
+        $this->artisan('personality:import-desktop-clone-baseline', [
+            '--locale' => ['zh-CN'],
+            '--status' => 'published',
+            '--upsert' => true,
+            '--source-dir' => '../content_baselines/personality_clone',
+        ])->assertExitCode(0);
+
+        $service = app(MbtiZhResultContentReleaseService::class);
+        $plan = $service->dryRun();
+        $draft = $service->writeDraft($plan['package_hash'], $plan['pre_state_hash'], 1);
+        $service->promote($plan['package_hash'], $plan['pre_state_hash'], $draft['candidate_revision_set_hash']);
+
+        $record = PersonalityProfileVariantCloneContent::query()->firstOrFail();
+        $record->forceFill(['meta_json' => [...$record->meta_json, 'revision_no' => 0]])->save();
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Readback failed');
+        $service->readback($plan['package_hash']);
     }
 
     public function test_exact_release_command_requires_the_controlled_write_boundary(): void
