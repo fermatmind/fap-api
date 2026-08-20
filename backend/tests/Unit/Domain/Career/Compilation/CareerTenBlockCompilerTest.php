@@ -64,9 +64,12 @@ final class CareerTenBlockCompilerTest extends TestCase
         self::assertCount(9, $first['row']['structured_data_json']['faq_page']['zh']['mainEntity']);
         self::assertSame(['en', 'zh'], array_keys($first['row']['page_payload_json']['page']));
         self::assertSame(0, $this->forbiddenKeyCount($first['row']));
-        self::assertTrue($first['row']['page_payload_json']['page']['zh']['claim_permissions']['allow_strong_claim']);
-        self::assertFalse($first['row']['page_payload_json']['page']['zh']['claim_permissions']['allow_ai_strategy']);
-        self::assertSame('trusted_public_source', $first['row']['sources_json']['references'][0]['trust_certification']);
+        self::assertTrue($first['receipt']['claim_permissions']['allow_strong_claim']);
+        self::assertFalse($first['receipt']['claim_permissions']['allow_ai_strategy']);
+        self::assertContains('trusted_public_source', array_column(
+            $first['row']['sources_json']['references'],
+            'trust_certification',
+        ));
         $encoded = CareerCurrentAuthorityPackage::encodeCanonical($first['row']['structured_data_json']);
         foreach (['Article', 'JobPosting', 'Review', 'AggregateRating'] as $forbiddenType) {
             self::assertStringNotContainsString($forbiddenType, $encoded);
@@ -236,8 +239,8 @@ final class CareerTenBlockCompilerTest extends TestCase
         $result = $this->compile($this->root.'/evidence');
 
         self::assertTrue($result['receipt']['publication_eligible']);
-        self::assertFalse($result['row']['page_payload_json']['page']['zh']['claim_permissions']['allow_strong_claim']);
-        self::assertFalse($result['row']['page_payload_json']['page']['zh']['claim_permissions']['allow_local_proxy_wage']);
+        self::assertFalse($result['receipt']['claim_permissions']['allow_strong_claim']);
+        self::assertFalse($result['receipt']['claim_permissions']['allow_local_proxy_wage']);
     }
 
     public function test_compiler_never_generates_producer_owned_evidence_fields(): void

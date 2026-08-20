@@ -82,6 +82,7 @@ final class CareerTenBlockCompiler
                 'claim_blockers' => $blockers,
                 'source_blockers' => $blockers,
                 'review_blockers' => $blockers,
+                'claim_permissions' => $evidence['claim_permissions'] ?? null,
                 'internal_link_canonicalization' => ['input' => count($blocks['compare-links.json']['internal_links']), 'rewritten' => 0],
                 'output_row_digest' => $rowDigest,
                 'publication_eligible' => $row !== null,
@@ -203,7 +204,7 @@ final class CareerTenBlockCompiler
                 ], $blocks['faq.json']['faq']),
             ];
         }
-        $baseline['sources_json']['references'] = array_map(static fn (array $source): array => [
+        $evidenceReferences = array_map(static fn (array $source): array => [
             'label' => $source['title'],
             'source_key' => $source['source_key'],
             'source_type' => $source['authority'],
@@ -214,9 +215,20 @@ final class CareerTenBlockCompiler
             'captured_at' => $source['captured_at'],
             'expires_at' => $source['expires_at'] ?? null,
         ], $evidence['sources']);
+        $references = [];
+        foreach (array_merge((array) ($baseline['sources_json']['references'] ?? []), $evidenceReferences) as $reference) {
+            if (! is_array($reference)) {
+                continue;
+            }
+            $key = (string) ($reference['source_key'] ?? $reference['url'] ?? $reference['label'] ?? '');
+            if ($key !== '') {
+                $references[$key] = $reference;
+            }
+        }
+        ksort($references, SORT_STRING);
+        $baseline['sources_json']['references'] = array_values($references);
         foreach (['en', 'zh'] as $locale) {
             $baseline['page_payload_json']['page'][$locale]['review_validity_card'] = $evidence['review_validity'];
-            $baseline['page_payload_json']['page'][$locale]['claim_permissions'] = $evidence['claim_permissions'];
         }
         $this->assertNoForbiddenKeys($baseline['page_payload_json']);
         $this->assertNoForbiddenKeys($baseline['sources_json']);
