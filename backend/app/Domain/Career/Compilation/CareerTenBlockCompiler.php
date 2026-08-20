@@ -66,7 +66,7 @@ final class CareerTenBlockCompiler
             'receipt' => [
                 'contract_version' => 'career.ten_block.compile_receipt.v1',
                 'compiler_version' => 'career.ten_block.compiler.v1',
-                'schema_version' => CareerTenBlockInputSchema::VERSION,
+                'schema_version' => $detected['schema_version'],
                 'input_digest' => $detected['input_digest'],
                 'lookup_digest' => $lookupDigest,
                 'evidence_digest' => $evidenceDigest,

@@ -42,10 +42,10 @@
     "asset_version": "cb64d060df0353e9267e0b659ac505b65de3392598cede684cee8e955700a218",
     "component_order_json": "61edb9ed4db71009f66e1e29ab5023fb8e1dea42e33861db6cd48c99d6ba72b5",
     "implementation_contract_json": "4301b5397744685498ad843a4e63f99aeff0365009ab0a5fe117dfb85c0f9347",
-    "metadata_json": "d200956abbef24babc4d14dbdfe01c1e73a7406c72ff40170e5456f306797dc5",
-    "page_payload_json": "54b3f17d0b38b0e3aa2eee29f2650ad56a3a063b814cb0bc0c1817bf61a57960",
-    "seo_payload_json": "27c0b46e8fec54143848cb54853d562e3eb1a42ff94558378abb18da7ee74db4",
-    "sources_json": "e36271507be8abe58041ea4eed04aac6fea840de0ce940a3a34445cc7d204590",
+    "metadata_json": "5bd4a0ccc40538395bc3ab8b5d8c132466ba6edc7695d46683b52a9f155f3833",
+    "page_payload_json": "6c50f3b7dca34b038e1d487bf8b606306ec2266fcb7773e1b0c78b8412398903",
+    "seo_payload_json": "3d5b2a3259ec26dc680d5cb0adbb37b1666fa9296252a64e5c0e6263ba142721",
+    "sources_json": "099da578e40c55e34b4f92999774ed103b440d8b8ff445895f28c372d3a6b74b",
     "status": "f4e6bca202388be891faa06a1866ba5b58d1443f5b87febecca8717d7d2612ae",
     "structured_data_json": "248b04fa6b55dd7bcf940b65c0cb9df52c3a3fcf8192fe5a4ea4a61cfcec8a8e",
     "surface_version": "28a5834df1a6cb0dd2d19a237c1d82b257b03ccddff00356a9851830eae82a37",
@@ -55,7 +55,7 @@
     {
       "path": "assets.jsonl",
       "row_count": 1046,
-      "sha256": "f0e3db78f72cb677ec86fd9f0feccbb6c38180fff9786a2e11e16b123becaaa6"
+      "sha256": "9df5d12e1a70ede4c179aaff191e76dca5d93f4f51a098d8dfd9e3f7b6c71af4"
     }
   ],
   "public_projection_field_set_sha256": {
@@ -65,16 +65,16 @@
     "available_locales": "51f5da66ce0f98dc6e73617b90997751f05b7ac39452e1acedd85f3ac820601f",
     "component_order": "cecbbfa3ada79eb02d531fbc991c0d23498b5d06499c11d2c47eb3d89fa31588",
     "implementation_contract": "3c5049cc8694cb8af7ce0a5cb61a69847ec2e77586f00aeaf4135cc0ae6450cc",
-    "page": "b82db8428c8fd66f32b7fde8a8b8c49b477a5bfee7cb015d0ce8fa862f0d2cee",
-    "sources": "fdbfe65684a5bef1e263926158fdedf406b3d536a13b27a404084ea5e6e81eca",
+    "page": "3dbfaea50165e18a62f8e7b8869e7aec575eacefc6e95feb3abb3686cb63c3ce",
+    "sources": "94f98c671e60749890f1a2a39903e24679c5d0c684f040e49a61cd5166f410d2",
     "status": "75aad9c720bf6435962f5e36b1521de680ad4fca3478ddc7c3a1e7e66ed2d7fc",
     "structured_data_from_visible_content": "6d622cc0f577ca76a43e36ddec650954e977485548b7558aba8dc16b34aec7a0",
     "surface_version": "9aac92f0414728ed45d249ba20d60d08dc37fc62a81f61c3b6fe05395add527d",
     "template_version": "ed2b374b5ddba26ce11a221269b855c6f947be32403dae782f8d78758b39bd8c"
   },
   "set_hashes": {
-    "full_asset_set_sha256": "f0761f80a9e073e0938bf15fbb22bef378bed7f41133a43fa253b1e4d44ebeca",
-    "public_content_aggregate_sha256": "110c76b1b42b5455b44d49a782f8adc758bdf07fc9aa18df3d7daa7b28f8e937",
+    "full_asset_set_sha256": "3d7c19a6d2a364bdf73b03a27f01b10da6d734722bed0376c0d1b6e7c274e8d3",
+    "public_content_aggregate_sha256": "671ed9f43a111ebb9fcb79d243db5d46d8529cba27b6ae8abec2f6a0c5b17617",
     "slug_set_sha256": "19a7e22cd0c854276efb3f9d15927bd034e7b2ecd6917fbe841e9dd0632fc988"
   },
   "structural_contract": {
@@ -133,20 +133,22 @@
   },
   "ten_block_compilation": {
     "candidate_claim_policy": "exact_bound_or_current_baseline",
-    "compiler_version": "career.ten_block.current_package_compiler.v1",
+    "cohort_digest": "8154cd1ae14c4e3e81169730078c56e8c56b3908446b6d1ae310ffdfdcd097b4",
+    "compiler_version": "career.ten_block.current_package_compiler.v2",
     "contract_version": "career.ten_block.current_package_lineage.v1",
     "discoverability_writes": 0,
-    "evidence_authority_digest": "c4dc4980f555ea632feae51b38ef511631a2e6028dadcb2b58d153cbfc9160a4",
+    "evidence_authority_digest": "540b2ca08b898ced9e80d0008e3e8130e1be82474a5be2c5663cc6084d496b42",
     "input_link_count": 20814,
-    "lookup_digest": "b33525ffc3076527396ecdd5e09c37e8436fac9fea126af4cf5033785c0b3aef",
+    "lookup_digest": "248bc8bd4442d7def9bf3290fff3d2d6159db895cac979723d59be5ef2548929",
     "output_variant_link_count": 0,
     "profile_counts": {
       "career.ten_block.english_keys.v1": 5,
       "career.ten_block.object_table.v1": 102,
       "career.ten_block.standard.v1": 939
     },
-    "schema_profile_manifest_digest": "b71911d156bb20e39eaaceb8713f4da27b63bb4e7efa9e1ed0d8171efc1b2202",
+    "schema_profile_manifest_digest": "b9c32c5d097b06a5d5fe0768a17b7fac0ef4125cf3969fdc2b92dd28aa78f7aa",
     "search_submissions": 0,
+    "selection_report_digest": "fa97441c6d6d74077d53cd2f63e37747706467a9136812c2144df382b1829e7f",
     "source_root_digest": "6ffe0ce3d19488a996960646e956fa222e0db98847f06356aa1d10e756732299",
     "variant_rewrite_count": 859
   }

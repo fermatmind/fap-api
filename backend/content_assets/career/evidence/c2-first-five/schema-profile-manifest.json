@@ -1,0 +1,176 @@
+{
+  "contract_version": "career.evidence.schema_profile_manifest.v1",
+  "profiles": {
+    "accountants-and-auditors": {
+      "discriminators": {
+        "ai_persona_columns": "人群|建议",
+        "ai_tool_columns": "工具|定位|代表能力",
+        "comparison_columns": "职业|区别|AI影响",
+        "industry_table_columns": "行业|需求",
+        "onet_value2": "absent",
+        "risk_path_columns": "路径|风险|说明",
+        "salary_min_max": "both_present"
+      },
+      "field_coverage_count": 98,
+      "input_digest": "c2b75084b4b4c56398062d1d1a6132dee791e701411d3ae1a78491dd01316913",
+      "input_link_count": 27,
+      "input_profile": "career.ten_block.standard.v1",
+      "ir_digest": "232f1498e80924d2cf21047ddb9306ed7b4a7d765096bca6e2f4baa7612d63c4",
+      "output_variant_link_count": 0,
+      "profile_version": "career.evidence.bound.v1",
+      "required_claim_keys": [
+        "definition.summary",
+        "duties.list",
+        "hero.lead",
+        "identity.title_en",
+        "identity.title_zh",
+        "work_context.summary"
+      ],
+      "unsupported_candidate_claim_policy": "omit_or_retain_current_baseline",
+      "variant_rewrite_count": 2
+    },
+    "dancers": {
+      "discriminators": {
+        "ai_persona_columns": "人群|建议",
+        "ai_tool_columns": "工具|定位|代表能力",
+        "comparison_columns": "职业|区别|AI 影响",
+        "industry_table_columns": "行业|需求",
+        "onet_value2": "absent",
+        "risk_path_columns": "路径|风险|说明",
+        "salary_min_max": "nullable"
+      },
+      "field_coverage_count": 99,
+      "input_digest": "98c31acfc3e0cb6421bbdda9f130bcc8845aa08df30c98df367494484beac88f",
+      "input_link_count": 16,
+      "input_profile": "career.ten_block.standard.v1",
+      "ir_digest": "92516980d147cd5111c52485256deea602dae60a75ea018152a84dd6d07d7005",
+      "output_variant_link_count": 0,
+      "profile_version": "career.evidence.bound.v1",
+      "required_claim_keys": [
+        "definition.summary",
+        "duties.list",
+        "hero.lead",
+        "identity.title_en",
+        "identity.title_zh",
+        "work_context.summary"
+      ],
+      "unsupported_candidate_claim_policy": "omit_or_retain_current_baseline",
+      "variant_rewrite_count": 1
+    },
+    "forging-machine-setters-operators-and-tenders-metal-and-plastic": {
+      "discriminators": {
+        "ai_persona_columns": "persona|advice",
+        "ai_tool_columns": "name|desc",
+        "comparison_columns": "occupation|diff",
+        "industry_table_columns": "label|value",
+        "onet_value2": "absent",
+        "risk_path_columns": "label|path",
+        "salary_min_max": "both_present"
+      },
+      "field_coverage_count": 98,
+      "input_digest": "548c5b0ce96462bd71b90da92c9e0576d84b85e572b15f5cfe7c2bbe852930b9",
+      "input_link_count": 71,
+      "input_profile": "career.ten_block.english_keys.v1",
+      "ir_digest": "5a60996648b233674f5b71fd2089ddcfadee90531af4a91a787ca18ac2540de7",
+      "output_variant_link_count": 0,
+      "profile_version": "career.evidence.bound.v1",
+      "required_claim_keys": [
+        "definition.summary",
+        "duties.list",
+        "hero.lead",
+        "identity.title_en",
+        "identity.title_zh",
+        "work_context.summary"
+      ],
+      "unsupported_candidate_claim_policy": "omit_or_retain_current_baseline",
+      "variant_rewrite_count": 0
+    },
+    "health-educators": {
+      "discriminators": {
+        "ai_persona_columns": "人群|建议",
+        "ai_tool_columns": "工具|定位|代表能力",
+        "comparison_columns": "职业|区别|AI 影响",
+        "industry_table_columns": "行业|需求",
+        "onet_value2": "present",
+        "risk_path_columns": "路径|风险|说明",
+        "salary_min_max": "both_present"
+      },
+      "field_coverage_count": 98,
+      "input_digest": "08c0270212e520093c5ed0f8cfc725dbab8598c376ca1e29727b8397e4e63a49",
+      "input_link_count": 14,
+      "input_profile": "career.ten_block.standard.v1",
+      "ir_digest": "f838a648579df704e81918236daa2df6a5c39c0ba6f428511a491a9a9fd5127d",
+      "output_variant_link_count": 0,
+      "profile_version": "career.evidence.bound.v1",
+      "required_claim_keys": [
+        "definition.summary",
+        "duties.list",
+        "hero.lead",
+        "identity.title_en",
+        "identity.title_zh",
+        "work_context.summary"
+      ],
+      "unsupported_candidate_claim_policy": "omit_or_retain_current_baseline",
+      "variant_rewrite_count": 0
+    },
+    "preventive-medicine-physicians": {
+      "discriminators": {
+        "ai_persona_columns": "人群|建议",
+        "ai_tool_columns": "工具|定位|代表能力",
+        "comparison_columns": "职业|区别|AI 影响",
+        "industry_table_columns": "行业|需求",
+        "onet_value2": "absent",
+        "risk_path_columns": "路径|风险|说明",
+        "salary_min_max": "both_present"
+      },
+      "field_coverage_count": 100,
+      "input_digest": "53fe3f5ce144f0875157fb987d48c8ed422b0a9f6f6a439527220ca6c06fd9db",
+      "input_link_count": 13,
+      "input_profile": "career.ten_block.standard.v1",
+      "ir_digest": "d626571ba1b869be6de1f530d97a033de600756939fc24d25914e2c11239b1c7",
+      "output_variant_link_count": 0,
+      "profile_version": "career.evidence.bound.v1",
+      "required_claim_keys": [
+        "definition.summary",
+        "duties.list",
+        "hero.lead",
+        "identity.title_en",
+        "identity.title_zh",
+        "work_context.summary"
+      ],
+      "unsupported_candidate_claim_policy": "omit_or_retain_current_baseline",
+      "variant_rewrite_count": 0
+    },
+    "veterinarians": {
+      "discriminators": {
+        "ai_persona_columns": "人群|建议",
+        "ai_tool_columns": "工具|定位|代表能力",
+        "comparison_columns": "岗位|重心|产出",
+        "industry_table_columns": "行业|需求|备注",
+        "onet_value2": "absent",
+        "risk_path_columns": "风险|可控|说明",
+        "salary_min_max": "both_present"
+      },
+      "field_coverage_count": 99,
+      "input_digest": "8e8fae3484d91ad775765313812612c49b863c9e47ae303c4c2f4da315dfbe26",
+      "input_link_count": 17,
+      "input_profile": "career.ten_block.object_table.v1",
+      "ir_digest": "01f6edace19ddd3f6f7dc5eb55ef70165fed2365a89302e9fc252f5b58336f5c",
+      "output_variant_link_count": 0,
+      "profile_version": "career.evidence.bound.v1",
+      "required_claim_keys": [
+        "definition.summary",
+        "duties.list",
+        "hero.lead",
+        "identity.title_en",
+        "identity.title_zh",
+        "work_context.summary"
+      ],
+      "unsupported_candidate_claim_policy": "omit_or_retain_current_baseline",
+      "variant_rewrite_count": 0
+    }
+  },
+  "schema_version": "career.ten_block.variants.v1",
+  "slug_count": 6,
+  "source_root_digest": "6ffe0ce3d19488a996960646e956fa222e0db98847f06356aa1d10e756732299"
+}

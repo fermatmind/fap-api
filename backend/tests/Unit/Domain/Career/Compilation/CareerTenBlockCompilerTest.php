@@ -10,6 +10,7 @@ use App\Domain\Career\Compilation\CareerTenBlockCompiler;
 use App\Domain\Career\Compilation\CareerTenBlockInputSchema;
 use App\Domain\Career\Compilation\CareerTenBlockNormalizer;
 use App\Domain\Career\Compilation\CareerTenBlockSchemaDetector;
+use App\Domain\Career\Compilation\CareerTenBlockVariantSchema;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -131,7 +132,7 @@ final class CareerTenBlockCompilerTest extends TestCase
     {
         $schema = new CareerTenBlockInputSchema;
         $compiler = new CareerTenBlockCompiler(
-            new CareerTenBlockSchemaDetector($schema),
+            new CareerTenBlockSchemaDetector($schema, new CareerTenBlockVariantSchema),
             new CareerTenBlockNormalizer,
             new CareerEvidenceAuthorityLoader,
         );

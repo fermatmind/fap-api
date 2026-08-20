@@ -1,0 +1,145 @@
+{
+  "cache_writes": 0,
+  "cms_writes": 0,
+  "contract_version": "career.evidence.maturity_selection.v1",
+  "database_writes": 0,
+  "discoverability_writes": 0,
+  "evaluation_date": "2026-08-20",
+  "generated_at": null,
+  "occupation_generation_writes": 0,
+  "scan": {
+    "baseline_assets_sha256": "f0e3db78f72cb677ec86fd9f0feccbb6c38180fff9786a2e11e16b123becaaa6",
+    "control_slugs": [
+      "accountants-and-auditors"
+    ],
+    "lookup_sha256": "248bc8bd4442d7def9bf3290fff3d2d6159db895cac979723d59be5ef2548929",
+    "manual_hold_slugs": [
+      "software-developers"
+    ],
+    "schema_manifest_sha256": "4522c8deaccee0a0680984237fe8f56c97a059a019c8872c07c08da8bfb597ad",
+    "slug_count": 1046,
+    "source_root_digest": "6ffe0ce3d19488a996960646e956fa222e0db98847f06356aa1d10e756732299"
+  },
+  "search_submissions": 0,
+  "selected": [
+    {
+      "difficulty_bucket": "onet_secondary_value",
+      "discriminators": {
+        "ai_persona_columns": "人群|建议",
+        "ai_tool_columns": "工具|定位|代表能力",
+        "comparison_columns": "职业|区别|AI 影响",
+        "industry_table_columns": "行业|需求",
+        "onet_value2": "present",
+        "risk_path_columns": "路径|风险|说明",
+        "salary_min_max": "both_present"
+      },
+      "field_coverage_count": 98,
+      "input_link_count": 14,
+      "input_profile": "career.ten_block.standard.v1",
+      "maturity_score": 98140,
+      "onet_code": "21-1091.00",
+      "slug": "health-educators",
+      "soc_code": "21-1091",
+      "tie_break_digest": "ff885bf956e07dc9ede28c5a6aa5a906207de21698d0a4e303d33dae91e655e2",
+      "variant_rewrite_count": 0
+    },
+    {
+      "difficulty_bucket": "nullable_salary",
+      "discriminators": {
+        "ai_persona_columns": "人群|建议",
+        "ai_tool_columns": "工具|定位|代表能力",
+        "comparison_columns": "职业|区别|AI 影响",
+        "industry_table_columns": "行业|需求",
+        "onet_value2": "absent",
+        "risk_path_columns": "路径|风险|说明",
+        "salary_min_max": "nullable"
+      },
+      "field_coverage_count": 99,
+      "input_link_count": 16,
+      "input_profile": "career.ten_block.standard.v1",
+      "maturity_score": 99135,
+      "onet_code": "27-2031.00",
+      "slug": "dancers",
+      "soc_code": "27-2031",
+      "tie_break_digest": "3d4710bffb55ad6de6d4dafddc154e4c29f3edaf63c60c14e76772fd9811480d",
+      "variant_rewrite_count": 1
+    },
+    {
+      "difficulty_bucket": "english_keys",
+      "discriminators": {
+        "ai_persona_columns": "persona|advice",
+        "ai_tool_columns": "name|desc",
+        "comparison_columns": "occupation|diff",
+        "industry_table_columns": "label|value",
+        "onet_value2": "absent",
+        "risk_path_columns": "label|path",
+        "salary_min_max": "both_present"
+      },
+      "field_coverage_count": 98,
+      "input_link_count": 71,
+      "input_profile": "career.ten_block.english_keys.v1",
+      "maturity_score": 98710,
+      "onet_code": "51-4022.00",
+      "slug": "forging-machine-setters-operators-and-tenders-metal-and-plastic",
+      "soc_code": "51-4022",
+      "tie_break_digest": "a0edbf2b35ef3cf3b1c5424f970ac86b1ed9b5ae471f653678ea2ea72812394d",
+      "variant_rewrite_count": 0
+    },
+    {
+      "difficulty_bucket": "object_table",
+      "discriminators": {
+        "ai_persona_columns": "人群|建议",
+        "ai_tool_columns": "工具|定位|代表能力",
+        "comparison_columns": "岗位|重心|产出",
+        "industry_table_columns": "行业|需求|备注",
+        "onet_value2": "absent",
+        "risk_path_columns": "风险|可控|说明",
+        "salary_min_max": "both_present"
+      },
+      "field_coverage_count": 99,
+      "input_link_count": 17,
+      "input_profile": "career.ten_block.object_table.v1",
+      "maturity_score": 99170,
+      "onet_code": "29-1131.00",
+      "slug": "veterinarians",
+      "soc_code": "29-1131",
+      "tie_break_digest": "e8bd9613d7909383c768be21afef36c9b6fd5a85e86698725828f9b293f094ca",
+      "variant_rewrite_count": 0
+    },
+    {
+      "difficulty_bucket": "standard_core",
+      "discriminators": {
+        "ai_persona_columns": "人群|建议",
+        "ai_tool_columns": "工具|定位|代表能力",
+        "comparison_columns": "职业|区别|AI 影响",
+        "industry_table_columns": "行业|需求",
+        "onet_value2": "absent",
+        "risk_path_columns": "路径|风险|说明",
+        "salary_min_max": "both_present"
+      },
+      "field_coverage_count": 100,
+      "input_link_count": 13,
+      "input_profile": "career.ten_block.standard.v1",
+      "maturity_score": 100130,
+      "onet_code": "29-1229.05",
+      "slug": "preventive-medicine-physicians",
+      "soc_code": "29-1229",
+      "tie_break_digest": "2c4c96e8a7e73801774c31a4901deb081a661c8426551137067eeb1610dceade",
+      "variant_rewrite_count": 0
+    }
+  ],
+  "selected_target_count": 5,
+  "selection_method": {
+    "canonical_lookup_required": true,
+    "difficulty_buckets": [
+      "onet_secondary_value",
+      "nullable_salary",
+      "english_keys",
+      "object_table",
+      "standard_core"
+    ],
+    "score": "field_coverage_count*1000 + input_link_count*10 - variant_rewrite_count*25",
+    "tie_break": "sha256(career-evidence-maturity-v1 NUL canonical_slug)"
+  },
+  "sitemap_writes": 0
+}

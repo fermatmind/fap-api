@@ -1,0 +1,81 @@
+{
+  "baseline_assets_sha256": "f0e3db78f72cb677ec86fd9f0feccbb6c38180fff9786a2e11e16b123becaaa6",
+  "baseline_rows": {
+    "accountants-and-auditors": {
+      "public_content_sha256": {
+        "en": "25eb869fce25c060c3d03fec9f08b9d0ddf9a4860c97603af76efc9d00f49339",
+        "zh-CN": "3f45e1870fa07c67090e200a010b3af7b00d6b2c434b835dd9fd916b97c779d1"
+      },
+      "row_sha256": "40ad0f10aaebb9f76970dd45fcbcc4e396d907d204d7c202dba872435ba5d95e"
+    },
+    "dancers": {
+      "public_content_sha256": {
+        "en": "a1b9b50b1791f198b0385cd09a4850b1e6d8bc549ce5fa51aa61b4207ebb55db",
+        "zh-CN": "dd58c38920bc1ad65dbae036a21de8c94490d1ad660e7f3b269659868a9efd7f"
+      },
+      "row_sha256": "da58b54a93df1e5590f9a46e26ff6bf4c124f4199e0a377e197fa9c8d4f78f68"
+    },
+    "forging-machine-setters-operators-and-tenders-metal-and-plastic": {
+      "public_content_sha256": {
+        "en": "9ef924258137c17c39a9712f87f589457af58e019d549aa1d64644c8666449ed",
+        "zh-CN": "ba656ed480631eefbde7662dc805adb09eae3e888056ae72c0c92c1bdfb4256e"
+      },
+      "row_sha256": "733bbb15f2ace5cc3806eab231b31ae00f867cab8a6885048bfb749a0ebcbed1"
+    },
+    "health-educators": {
+      "public_content_sha256": {
+        "en": "0142680e825464ba8eb50d52c5ab909518c679b513be8d9dd5fc60e0b63819ab",
+        "zh-CN": "90dedc44bbf5835124b33c2e496dcc6ed72633a0b43a822b1c3f17bdd10188f7"
+      },
+      "row_sha256": "cd8e795ae963fbf09759cb5abe2d6569e738aaaac1676143e99ab8f66b803856"
+    },
+    "preventive-medicine-physicians": {
+      "public_content_sha256": {
+        "en": "6f7b0199ba0e5e3b968898c2c825d2cb9b4c7fa13ebaf9b40e52e2b6ac30b276",
+        "zh-CN": "efb9eb508ecdb1f1f59f2f2997797d4b4c6c0a8ebfc38dec73ac455bf01aea85"
+      },
+      "row_sha256": "01c6d300a73efad2b864aaf2dc0691965358ceeb016a28ff49926756e9d78d98"
+    },
+    "veterinarians": {
+      "public_content_sha256": {
+        "en": "f8c7468cd1e15e4cfe79da60f7381903b698455f1483ef1f851e206c08559cb6",
+        "zh-CN": "43561d9b25a2a36e198de34e6efc16e87d4dee5363ddc7840c3684b3beffe148"
+      },
+      "row_sha256": "3a8eae1aa5a26b6a75bcf4d05b09fe901b72b54fcc24d93473a4597bb662c4b2"
+    }
+  },
+  "contract_version": "career.evidence.cohort.v1",
+  "control_slugs": [
+    "accountants-and-auditors"
+  ],
+  "evaluation_date": "2026-08-20",
+  "evidence_bound_slugs": [
+    "accountants-and-auditors",
+    "health-educators",
+    "dancers",
+    "forging-machine-setters-operators-and-tenders-metal-and-plastic",
+    "veterinarians",
+    "preventive-medicine-physicians"
+  ],
+  "expected_baseline_retained_slug_count": 1040,
+  "expected_public_changed_locale_page_count": 10,
+  "manual_hold_slugs": [
+    "software-developers"
+  ],
+  "required_claim_keys": [
+    "definition.summary",
+    "duties.list",
+    "hero.lead",
+    "identity.title_en",
+    "identity.title_zh",
+    "work_context.summary"
+  ],
+  "selection_report_sha256": "fa97441c6d6d74077d53cd2f63e37747706467a9136812c2144df382b1829e7f",
+  "target_slugs": [
+    "health-educators",
+    "dancers",
+    "forging-machine-setters-operators-and-tenders-metal-and-plastic",
+    "veterinarians",
+    "preventive-medicine-physicians"
+  ]
+}

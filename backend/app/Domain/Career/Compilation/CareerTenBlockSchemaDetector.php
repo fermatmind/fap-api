@@ -8,9 +8,12 @@ use JsonException;
 
 final class CareerTenBlockSchemaDetector
 {
-    public function __construct(private readonly CareerTenBlockInputSchema $schema) {}
+    public function __construct(
+        private readonly CareerTenBlockInputSchema $legacySchema,
+        private readonly CareerTenBlockVariantSchema $variantSchema,
+    ) {}
 
-    /** @return array{profile:string,blocks:array<string,array<string,mixed>>,input_digest:string} */
+    /** @return array{profile:string,schema_version:string,blocks:array<string,array<string,mixed>>,input_digest:string} */
     public function detect(string $sourceRoot, string $slug): array
     {
         $slugRoot = realpath(rtrim($sourceRoot, '/').'/'.$slug);
@@ -47,15 +50,37 @@ final class CareerTenBlockSchemaDetector
             if (! is_array($data) || array_is_list($data)) {
                 throw new CareerTenBlockCompileFailure('TEN_BLOCK_TYPE_MISMATCH');
             }
-            $this->schema->assertFile($file, $data);
             $blocks[$file] = $data;
             hash_update($digestContext, $file."\0".$raw."\0");
         }
 
+        $profile = $this->variantSchema->detectAndValidate($blocks);
+        if ($profile === CareerTenBlockVariantSchema::PROFILE_STANDARD && ! $this->hasStandardVariant($blocks)) {
+            foreach ($blocks as $file => $data) {
+                $this->legacySchema->assertFile($file, $data);
+            }
+        }
+
         return [
-            'profile' => CareerTenBlockInputSchema::VERSION,
+            'profile' => $profile,
+            'schema_version' => CareerTenBlockVariantSchema::VERSION,
             'blocks' => $blocks,
             'input_digest' => hash_final($digestContext),
         ];
+    }
+
+    /** @param array<string,array<string,mixed>> $blocks */
+    private function hasStandardVariant(array $blocks): bool
+    {
+        foreach ($blocks['definition.json']['onet_struct'] as $item) {
+            if (is_array($item) && array_key_exists('value2', $item)) {
+                return true;
+            }
+        }
+
+        return ($blocks['page-meta.json']['oc_salary_min'] ?? null) === null
+            || ($blocks['page-meta.json']['oc_salary_max'] ?? null) === null
+            || count($blocks['identity.json']) !== 8
+            || count($blocks['salary.json']) !== 14;
     }
 }

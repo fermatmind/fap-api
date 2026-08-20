@@ -22,6 +22,103 @@ final class CareerEvidenceAuthorityLoader
     private const CLAIM_MODES = ['fact', 'bounded_estimate', 'market_sample', 'interpretation_only'];
 
     /** @return array<string,mixed> */
+    public function cohort(string $root): array
+    {
+        $resolved = realpath($root);
+        if ($resolved === false || ! is_dir($resolved) || is_link($root)) {
+            throw new CareerTenBlockCompileFailure('TEN_BLOCK_EVIDENCE_INVALID');
+        }
+        $manifest = $this->json($resolved.'/manifest.json');
+        $cohortPath = $manifest['files']['cohort']['path'] ?? null;
+        if ($cohortPath !== 'cohort.json'
+            || ! hash_equals(
+                (string) ($manifest['files']['cohort']['sha256'] ?? ''),
+                hash_file('sha256', $resolved.'/cohort.json') ?: '',
+            )) {
+            throw new CareerTenBlockCompileFailure('TEN_BLOCK_EVIDENCE_DIGEST_MISMATCH');
+        }
+        if (($manifest['files']['selection_report']['path'] ?? null) !== 'selection-report.json'
+            || ! hash_equals(
+                (string) ($manifest['files']['selection_report']['sha256'] ?? ''),
+                hash_file('sha256', $resolved.'/selection-report.json') ?: '',
+            )) {
+            throw new CareerTenBlockCompileFailure('TEN_BLOCK_EVIDENCE_DIGEST_MISMATCH');
+        }
+        $cohort = $this->json($resolved.'/cohort.json');
+        $controls = $cohort['control_slugs'] ?? null;
+        $targets = $cohort['target_slugs'] ?? null;
+        $bound = $cohort['evidence_bound_slugs'] ?? null;
+        $holds = $cohort['manual_hold_slugs'] ?? null;
+        $requiredClaimKeys = $cohort['required_claim_keys'] ?? null;
+        $baselineRows = $cohort['baseline_rows'] ?? null;
+        if (($cohort['contract_version'] ?? null) !== 'career.evidence.cohort.v1'
+            || ! is_array($controls) || ! array_is_list($controls) || $controls === []
+            || ! is_array($targets) || ! array_is_list($targets) || $targets === []
+            || ! is_array($bound) || ! array_is_list($bound)
+            || ! is_array($holds) || ! array_is_list($holds)
+            || ! is_array($requiredClaimKeys) || ! array_is_list($requiredClaimKeys) || $requiredClaimKeys === []
+            || ! is_array($baselineRows) || array_is_list($baselineRows)
+            || $bound !== array_values(array_unique(array_merge($controls, $targets)))
+            || array_intersect($bound, $holds) !== []
+            || ! hash_equals(
+                (string) ($cohort['selection_report_sha256'] ?? ''),
+                hash_file('sha256', $resolved.'/selection-report.json') ?: '',
+            )) {
+            throw new CareerTenBlockCompileFailure('TEN_BLOCK_EVIDENCE_COHORT_INVALID');
+        }
+        foreach (array_merge($bound, $holds) as $slug) {
+            if (! is_string($slug) || preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $slug) !== 1) {
+                throw new CareerTenBlockCompileFailure('TEN_BLOCK_EVIDENCE_COHORT_INVALID');
+            }
+        }
+        $baselineSlugs = array_keys($baselineRows);
+        $expectedBaselineSlugs = $bound;
+        sort($baselineSlugs, SORT_STRING);
+        sort($expectedBaselineSlugs, SORT_STRING);
+        if ($baselineSlugs !== $expectedBaselineSlugs) {
+            throw new CareerTenBlockCompileFailure('TEN_BLOCK_EVIDENCE_COHORT_INVALID');
+        }
+        foreach ($baselineRows as $row) {
+            if (! is_array($row)
+                || preg_match('/\A[0-9a-f]{64}\z/', (string) ($row['row_sha256'] ?? '')) !== 1
+                || array_keys($row['public_content_sha256'] ?? []) !== CareerCurrentAuthorityPackage::LOCALES) {
+                throw new CareerTenBlockCompileFailure('TEN_BLOCK_EVIDENCE_COHORT_INVALID');
+            }
+            foreach ($row['public_content_sha256'] as $digest) {
+                if (! is_string($digest) || preg_match('/\A[0-9a-f]{64}\z/', $digest) !== 1) {
+                    throw new CareerTenBlockCompileFailure('TEN_BLOCK_EVIDENCE_COHORT_INVALID');
+                }
+            }
+        }
+        $claimsBySlug = [];
+        foreach ($this->jsonl($resolved.'/claim-bindings.jsonl') as $claim) {
+            $claimSlug = $claim['canonical_slug'] ?? null;
+            $claimKey = $claim['claim_key'] ?? null;
+            if (! is_string($claimSlug) || ! is_string($claimKey)) {
+                throw new CareerTenBlockCompileFailure('TEN_BLOCK_EVIDENCE_COHORT_INVALID');
+            }
+            $claimsBySlug[$claimSlug][] = $claimKey;
+        }
+        $claimSlugs = array_keys($claimsBySlug);
+        $expectedBound = $bound;
+        sort($claimSlugs, SORT_STRING);
+        sort($expectedBound, SORT_STRING);
+        if ($claimSlugs !== $expectedBound) {
+            throw new CareerTenBlockCompileFailure('TEN_BLOCK_EVIDENCE_COHORT_INVALID');
+        }
+        foreach ($bound as $slug) {
+            sort($claimsBySlug[$slug], SORT_STRING);
+            $expected = $requiredClaimKeys;
+            sort($expected, SORT_STRING);
+            if ($claimsBySlug[$slug] !== $expected) {
+                throw new CareerTenBlockCompileFailure('TEN_BLOCK_EVIDENCE_COHORT_INVALID');
+            }
+        }
+
+        return $cohort;
+    }
+
+    /** @return array<string,mixed> */
     public function load(string $root, string $slug, array $blocks): array
     {
         $resolved = realpath($root);
@@ -142,10 +239,12 @@ final class CareerEvidenceAuthorityLoader
         $claims = [];
         $seen = [];
         foreach ($rows as $row) {
+            if (($row['canonical_slug'] ?? null) !== $slug) {
+                continue;
+            }
             $key = $row['claim_key'] ?? null;
             if (($row['contract_version'] ?? null) !== 'career.claim_binding.v1'
                 || ! is_string($key) || isset($seen[$key])
-                || ($row['canonical_slug'] ?? null) !== $slug
                 || ! in_array($row['locale'] ?? null, ['en', 'zh'], true)
                 || ! is_string($row['market'] ?? null)
                 || ! in_array($row['claim_kind'] ?? null, self::CLAIM_KINDS, true)

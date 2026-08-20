@@ -8,11 +8,12 @@ use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 
 final class CareerTenBlockCurrentPackageCompiler
 {
-    public const VERSION = 'career.ten_block.current_package_compiler.v1';
+    public const VERSION = 'career.ten_block.current_package_compiler.v2';
 
     public function __construct(
         private readonly CareerTenBlockBatchNormalizer $batchNormalizer,
         private readonly CareerTenBlockCompiler $singleCompiler,
+        private readonly CareerEvidenceAuthorityLoader $evidenceLoader,
         private readonly CareerCurrentAuthorityPackage $package,
     ) {}
 
@@ -29,47 +30,98 @@ final class CareerTenBlockCurrentPackageCompiler
         if ($profileSlugs !== $baseline['slugs']) {
             throw new CareerTenBlockCompileFailure('TEN_BLOCK_CURRENT_SLUG_SET_MISMATCH');
         }
-        $accountants = $this->singleCompiler->compile(
-            $sourceRoot,
-            'accountants-and-auditors',
-            $lookupPath,
-            rtrim($backendRoot, '/').'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH.'/assets.jsonl',
-            $evidenceRoot,
-        );
-        if ($accountants['row'] === null || ($accountants['receipt']['publication_eligible'] ?? false) !== true) {
-            throw new CareerTenBlockCompileFailure('TEN_BLOCK_REQUIRED_EVIDENCE_BLOCKED');
+        $cohort = $this->evidenceLoader->cohort($evidenceRoot);
+        $boundSlugs = $cohort['evidence_bound_slugs'];
+        $controlSlugs = $cohort['control_slugs'];
+        if (array_diff($boundSlugs, $baseline['slugs']) !== []) {
+            throw new CareerTenBlockCompileFailure('TEN_BLOCK_EVIDENCE_COHORT_INVALID');
+        }
+        $compiled = [];
+        foreach ($boundSlugs as $slug) {
+            $result = $this->singleCompiler->compile(
+                $sourceRoot,
+                $slug,
+                $lookupPath,
+                rtrim($backendRoot, '/').'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH.'/assets.jsonl',
+                $evidenceRoot,
+            );
+            if ($result['row'] === null || ($result['receipt']['publication_eligible'] ?? false) !== true) {
+                throw new CareerTenBlockCompileFailure('TEN_BLOCK_REQUIRED_EVIDENCE_BLOCKED');
+            }
+            $compiled[$slug] = $result;
         }
         $evidenceManifestPath = rtrim($evidenceRoot, '/').'/manifest.json';
         $schemaManifestPath = rtrim($evidenceRoot, '/').'/schema-profile-manifest.json';
         $evidenceAuthorityDigest = $this->fileDigest($evidenceManifestPath, 'TEN_BLOCK_EVIDENCE_INVALID');
         $schemaManifestDigest = $this->fileDigest($schemaManifestPath, 'TEN_BLOCK_EVIDENCE_INVALID');
+        $cohortDigest = $this->fileDigest(rtrim($evidenceRoot, '/').'/cohort.json', 'TEN_BLOCK_EVIDENCE_INVALID');
+        $selectionReportDigest = $this->fileDigest(rtrim($evidenceRoot, '/').'/selection-report.json', 'TEN_BLOCK_EVIDENCE_INVALID');
         $lookupDigest = $this->fileDigest($lookupPath, 'TEN_BLOCK_LOOKUP_INVALID');
         $candidateRows = [];
         $publicChangedLocalePages = 0;
+        $changedRows = 0;
+        $activeClaimBindings = 0;
+        $activeSources = [];
         foreach ($baseline['slugs'] as $slug) {
             $baselineRow = $baseline['rows'][$slug];
-            $candidate = $slug === 'accountants-and-auditors' ? $accountants['row'] : $baselineRow;
-            $profile = $batch['manifest']['profiles'][$slug];
-            $candidate['metadata_json']['ten_block_compilation_v1'] = [
-                'contract_version' => 'career.ten_block.row_lineage.v1',
-                'compiler_version' => self::VERSION,
-                'source_input_digest' => $profile['input_digest'],
-                'schema_profile' => $profile['input_profile'],
-                'normalized_ir_digest' => $profile['ir_digest'],
-                'evidence_authority_digest' => $evidenceAuthorityDigest,
-                'content_application' => $slug === 'accountants-and-auditors'
-                    ? 'exact_claim_binding' : 'current_baseline_retained_missing_claim_bindings',
-                'unsupported_claim_policy' => 'omit_or_retain_current_baseline',
-            ];
+            $candidate = isset($compiled[$slug]) ? $compiled[$slug]['row'] : $baselineRow;
+            if (isset($compiled[$slug])) {
+                $profile = $batch['manifest']['profiles'][$slug];
+                $candidate['metadata_json']['ten_block_compilation_v1'] = [
+                    'contract_version' => 'career.ten_block.row_lineage.v1',
+                    'compiler_version' => self::VERSION,
+                    'source_input_digest' => $profile['input_digest'],
+                    'schema_profile' => $profile['input_profile'],
+                    'normalized_ir_digest' => $profile['ir_digest'],
+                    'evidence_authority_digest' => $evidenceAuthorityDigest,
+                    'content_application' => 'exact_claim_binding',
+                    'unsupported_claim_policy' => 'omit_or_retain_current_baseline',
+                ];
+                $activeClaimBindings += count($compiled[$slug]['receipt']['claim_blockers']) === 0
+                    ? count($cohort['required_claim_keys']) : 0;
+                foreach ($candidate['sources_json']['references'] ?? [] as $source) {
+                    if (is_array($source) && is_string($source['source_key'] ?? null)) {
+                        $activeSources[$source['source_key']] = true;
+                    }
+                }
+            }
             foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
+                $comparisonHash = isset($compiled[$slug])
+                    ? $cohort['baseline_rows'][$slug]['public_content_sha256'][$locale]
+                    : $this->package->publicContentHash($baselineRow, $locale);
                 if (! hash_equals(
-                    $this->package->publicContentHash($baselineRow, $locale),
+                    $comparisonHash,
                     $this->package->publicContentHash($candidate, $locale),
                 )) {
                     $publicChangedLocalePages++;
                 }
             }
+            $comparisonRowHash = isset($compiled[$slug])
+                ? $cohort['baseline_rows'][$slug]['row_sha256']
+                : CareerCurrentAuthorityPackage::hashValue($baselineRow);
+            if (! hash_equals(
+                $comparisonRowHash,
+                CareerCurrentAuthorityPackage::hashValue($candidate),
+            )) {
+                $changedRows++;
+            }
             $candidateRows[$slug] = $candidate;
+        }
+        foreach ($controlSlugs as $slug) {
+            foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
+                if (! hash_equals(
+                    $cohort['baseline_rows'][$slug]['public_content_sha256'][$locale],
+                    $this->package->publicContentHash($candidateRows[$slug], $locale),
+                )) {
+                    throw new CareerTenBlockCompileFailure('TEN_BLOCK_CONTROL_PUBLIC_DRIFT');
+                }
+            }
+        }
+        $expectedChangedPages = $cohort['expected_public_changed_locale_page_count'] ?? null;
+        $expectedRetained = $cohort['expected_baseline_retained_slug_count'] ?? null;
+        if (! is_int($expectedChangedPages) || $publicChangedLocalePages !== $expectedChangedPages
+            || ! is_int($expectedRetained) || count($candidateRows) - count($boundSlugs) !== $expectedRetained) {
+            throw new CareerTenBlockCompileFailure('TEN_BLOCK_COHORT_DIFF_INVALID');
         }
         $assetsBytes = implode("\n", array_map(
             static fn (array $row): string => CareerCurrentAuthorityPackage::encodeCanonical($row),
@@ -83,6 +135,8 @@ final class CareerTenBlockCurrentPackageCompiler
             'lookup_digest' => $lookupDigest,
             'evidence_authority_digest' => $evidenceAuthorityDigest,
             'schema_profile_manifest_digest' => $schemaManifestDigest,
+            'cohort_digest' => $cohortDigest,
+            'selection_report_digest' => $selectionReportDigest,
             'profile_counts' => $batch['receipt']['profile_counts'],
             'input_link_count' => $batch['receipt']['input_link_count'],
             'variant_rewrite_count' => $batch['receipt']['variant_rewrite_count'],
@@ -103,14 +157,16 @@ final class CareerTenBlockCurrentPackageCompiler
                 'lookup_digest' => $lookupDigest,
                 'evidence_authority_digest' => $evidenceAuthorityDigest,
                 'schema_profile_manifest_digest' => $schemaManifestDigest,
+                'cohort_digest' => $cohortDigest,
+                'selection_report_digest' => $selectionReportDigest,
                 'career_count' => count($candidateRows),
                 'locale_page_count' => count($candidateRows) * 2,
                 'components_per_page' => 26,
                 'profile_counts' => $batch['receipt']['profile_counts'],
-                'evidence_bound_slug_count' => 1,
-                'baseline_retained_slug_count' => count($candidateRows) - 1,
-                'active_claim_binding_count' => count($accountants['receipt']['claim_blockers']) === 0 ? 6 : 0,
-                'active_evidence_source_count' => count($accountants['row']['sources_json']['references'] ?? []),
+                'evidence_bound_slug_count' => count($boundSlugs),
+                'baseline_retained_slug_count' => count($candidateRows) - count($boundSlugs),
+                'active_claim_binding_count' => $activeClaimBindings,
+                'active_evidence_source_count' => count($activeSources),
                 'input_link_count' => $batch['receipt']['input_link_count'],
                 'variant_rewrite_count' => $batch['receipt']['variant_rewrite_count'],
                 'unresolved_link_count' => 0,
@@ -132,8 +188,8 @@ final class CareerTenBlockCurrentPackageCompiler
                 'contract_version' => 'career.ten_block.field_coverage_report.v1',
                 'source_field_dispositions' => $batch['receipt']['field_coverage_counts'],
                 'silent_drop_count' => 0,
-                'evidence_bound_slug_count' => 1,
-                'baseline_retained_with_reason_slug_count' => count($candidateRows) - 1,
+                'evidence_bound_slug_count' => count($boundSlugs),
+                'baseline_retained_with_reason_slug_count' => count($candidateRows) - count($boundSlugs),
                 'blocked_count' => 0,
                 'baseline_retention_reason' => 'candidate claims without exact active binding remain on Current baseline authority',
             ],
@@ -144,7 +200,7 @@ final class CareerTenBlockCurrentPackageCompiler
                 'missing_slug_count' => 0,
                 'extra_slug_count' => 0,
                 'duplicate_slug_count' => 0,
-                'changed_row_count' => count($candidateRows),
+                'changed_row_count' => $changedRows,
                 'public_changed_locale_page_count' => $publicChangedLocalePages,
                 'locale_integrity' => 'PASS',
                 'component_order_integrity' => 'PASS',
