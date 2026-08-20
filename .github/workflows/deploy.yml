@@ -95,8 +95,8 @@ jobs:
             '.schema_version == "fermatmind.trunk-validation.v1" and .sha == $sha and .ci_run_id == $run and .result == "success"' \
             "$receipt" >/dev/null
           classification="$(jq -c .classification "$receipt")"
-          career_current="$(jq -r '[.classification.paths[] | select(. == "backend/content_assets/career/current/assets.jsonl" or . == "backend/content_assets/career/current/manifest.json")] | length > 0' "$receipt")"
-          career_current_full_scan="$(jq -r '[.classification.paths[] | select(. == "backend/app/Domain/Career/Display/CareerCurrentAuthorityPackage.php")] | length > 0' "$receipt")"
+          career_current="$(jq -r '[.classification.paths[] | select(. == "backend/content_assets/career/current/assets.jsonl" or . == "backend/content_assets/career/current/manifest.json" or . == "backend/app/Domain/Career/Display/CareerCurrentAuthorityPackage.php" or . == "backend/app/Domain/Career/Display/CareerCurrentAuthorityPublisher.php" or . == "backend/scripts/operations/career_current_authority_publish.php")] | length > 0' "$receipt")"
+          career_current_full_scan="$(jq -r '[.classification.paths[] | select(. == "backend/app/Domain/Career/Display/CareerCurrentAuthorityPackage.php" or . == "backend/app/Domain/Career/Display/CareerCurrentAuthorityPublisher.php" or . == "backend/scripts/operations/career_current_authority_publish.php")] | length > 0' "$receipt")"
           mbti_zh_result_release="$(jq -r '.classification.operations.mbti_zh_result_authority_release == true' "$receipt")"
           {
             echo "deploy=$(jq -r .classification.deploy "$receipt")"

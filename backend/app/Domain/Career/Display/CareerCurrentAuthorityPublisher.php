@@ -186,7 +186,7 @@ final class CareerCurrentAuthorityPublisher
     private function applyDatabasePlan(array $targetRows): array
     {
         $assets = CareerJobDisplayAsset::query()->orderBy('id')->lockForUpdate()->get();
-        $beforeRows = $assets->map(fn (CareerJobDisplayAsset $asset): array => $this->snapshot($asset))->all();
+        $beforeStateSha256 = $this->snapshotModelsHash($assets);
         $bySlug = $assets->groupBy(static fn (CareerJobDisplayAsset $asset): string => strtolower(trim((string) $asset->canonical_slug)));
         $selectedIds = [];
         $updates = [];
@@ -267,7 +267,7 @@ final class CareerCurrentAuthorityPublisher
             ]);
         }
 
-        $afterRows = $this->assertDatabaseReadback($targetRows, true);
+        $afterStateSha256 = $this->assertDatabaseReadback($targetRows, true);
         sort($changedSlugs, SORT_STRING);
 
         return [
@@ -275,10 +275,8 @@ final class CareerCurrentAuthorityPublisher
             'updates' => $updates,
             'inserts' => $inserts,
             'deletes' => $deletes,
-            'before_rows' => $beforeRows,
-            'after_rows' => $afterRows,
-            'before_state_sha256' => $this->snapshotSetHash($beforeRows),
-            'after_state_sha256' => $this->snapshotSetHash($afterRows),
+            'before_state_sha256' => $beforeStateSha256,
+            'after_state_sha256' => $afterStateSha256,
             'write_counts' => [
                 'database_update_count' => count($updates),
                 'database_insert_count' => count($inserts),
@@ -287,8 +285,8 @@ final class CareerCurrentAuthorityPublisher
         ];
     }
 
-    /** @param array<string,array<string,mixed>> $targetRows @return list<array<string,mixed>> */
-    private function assertDatabaseReadback(array $targetRows, bool $lockForUpdate = false): array
+    /** @param array<string,array<string,mixed>> $targetRows */
+    private function assertDatabaseReadback(array $targetRows, bool $lockForUpdate = false): string
     {
         $query = CareerJobDisplayAsset::query()->orderBy('id');
         if ($lockForUpdate) {
@@ -299,7 +297,9 @@ final class CareerCurrentAuthorityPublisher
             throw new CareerCurrentAuthorityPublisherFailure('CURRENT_DATABASE_READBACK_COUNT_MISMATCH');
         }
         $seen = [];
-        $snapshots = [];
+        $hashContext = hash_init('sha256');
+        hash_update($hashContext, '[');
+        $index = 0;
         foreach ($assets as $asset) {
             $slug = strtolower(trim((string) $asset->canonical_slug));
             if (isset($seen[$slug]) || ! isset($targetRows[$slug])
@@ -307,13 +307,19 @@ final class CareerCurrentAuthorityPublisher
                 throw new CareerCurrentAuthorityPublisherFailure('CURRENT_DATABASE_READBACK_STATE_MISMATCH');
             }
             $seen[$slug] = true;
-            $snapshots[] = $this->snapshot($asset);
+            hash_update(
+                $hashContext,
+                ($index === 0 ? '' : ',').CareerCurrentAuthorityPackage::encodeCanonical($this->snapshot($asset)),
+            );
+            $index++;
         }
         if (count($seen) !== count($targetRows)) {
             throw new CareerCurrentAuthorityPublisherFailure('CURRENT_DATABASE_READBACK_SLUG_MISMATCH');
         }
 
-        return $snapshots;
+        hash_update($hashContext, ']');
+
+        return hash_final($hashContext);
     }
 
     /** @param array<string,mixed> $entry @param array<string,mixed> $row */
@@ -445,12 +451,20 @@ final class CareerCurrentAuthorityPublisher
         ];
     }
 
-    /** @param list<array<string,mixed>> $snapshots */
-    private function snapshotSetHash(array $snapshots): string
+    /** @param Collection<int,CareerJobDisplayAsset> $assets */
+    private function snapshotModelsHash(Collection $assets): string
     {
-        usort($snapshots, static fn (array $left, array $right): int => strcmp((string) $left['id'], (string) $right['id']));
+        $context = hash_init('sha256');
+        hash_update($context, '[');
+        foreach ($assets->values() as $index => $asset) {
+            hash_update(
+                $context,
+                ($index === 0 ? '' : ',').CareerCurrentAuthorityPackage::encodeCanonical($this->snapshot($asset)),
+            );
+        }
+        hash_update($context, ']');
 
-        return CareerCurrentAuthorityPackage::hashValue($snapshots);
+        return hash_final($context);
     }
 
     /** @param array<string,mixed> $values @return array<string,mixed> */
@@ -471,10 +485,8 @@ final class CareerCurrentAuthorityPublisher
     private function restoreDatabase(array $plan): void
     {
         DB::transaction(function () use ($plan): void {
-            $current = CareerJobDisplayAsset::query()->orderBy('id')->lockForUpdate()->get()
-                ->map(fn (CareerJobDisplayAsset $asset): array => $this->snapshot($asset))
-                ->all();
-            if (! hash_equals($plan['after_state_sha256'], $this->snapshotSetHash($current))) {
+            $current = CareerJobDisplayAsset::query()->orderBy('id')->lockForUpdate()->get();
+            if (! hash_equals($plan['after_state_sha256'], $this->snapshotModelsHash($current))) {
                 throw new CareerCurrentAuthorityPublisherFailure('CURRENT_COMPENSATION_STATE_DRIFT');
             }
             foreach ($plan['inserts'] as $insert) {
@@ -493,10 +505,8 @@ final class CareerCurrentAuthorityPublisher
             foreach ($plan['deletes'] as $deleted) {
                 DB::table('career_job_display_assets')->insert($this->databaseValues($deleted));
             }
-            $restored = CareerJobDisplayAsset::query()->orderBy('id')->lockForUpdate()->get()
-                ->map(fn (CareerJobDisplayAsset $asset): array => $this->snapshot($asset))
-                ->all();
-            if (! hash_equals($plan['before_state_sha256'], $this->snapshotSetHash($restored))) {
+            $restored = CareerJobDisplayAsset::query()->orderBy('id')->lockForUpdate()->get();
+            if (! hash_equals($plan['before_state_sha256'], $this->snapshotModelsHash($restored))) {
                 throw new CareerCurrentAuthorityPublisherFailure('CURRENT_COMPENSATION_READBACK_FAILED');
             }
         }, 1);

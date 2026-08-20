@@ -104,6 +104,19 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
         self::assertSame(0, array_sum($receipt['write_counts'] ?? []));
     }
 
+    public function test_deploy_binds_publisher_runtime_changes_to_a_full_scan(): void
+    {
+        $workflow = (string) file_get_contents(dirname(__DIR__, 6).'/.github/workflows/deploy.yml');
+
+        foreach ([
+            'backend/app/Domain/Career/Display/CareerCurrentAuthorityPackage.php',
+            'backend/app/Domain/Career/Display/CareerCurrentAuthorityPublisher.php',
+            'backend/scripts/operations/career_current_authority_publish.php',
+        ] as $path) {
+            self::assertGreaterThanOrEqual(2, substr_count($workflow, $path));
+        }
+    }
+
     public function test_current_page_contract_rejects_legacy_unknown_and_placeholder_structures(): void
     {
         $page = array_fill_keys(CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER, ['value' => 'verified']);

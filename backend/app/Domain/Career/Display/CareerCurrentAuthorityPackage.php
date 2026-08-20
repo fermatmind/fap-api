@@ -188,10 +188,24 @@ final class CareerCurrentAuthorityPackage
     private function compileAssets(string $assetsPath): array
     {
         $rows = [];
-        $orderedRows = [];
         $previousSlug = null;
         $localePageCount = 0;
         $numericRatingResidueCount = 0;
+        $fieldHashContexts = [];
+        foreach (self::EXPORTED_FIELDS as $field) {
+            $fieldHashContexts[$field] = hash_init('sha256');
+            hash_update($fieldHashContexts[$field], '[');
+        }
+        $publicFieldHashContexts = [];
+        foreach (self::DISPLAY_OWNED_PUBLIC_FIELDS as $field) {
+            $publicFieldHashContexts[$field] = hash_init('sha256');
+            hash_update($publicFieldHashContexts[$field], '[');
+        }
+        $fullAssetSetHashContext = hash_init('sha256');
+        hash_update($fullAssetSetHashContext, '[');
+        $rowIndex = 0;
+        $publicProjectionIndex = 0;
+        $publicContentHashes = [];
         $handle = fopen($assetsPath, 'rb');
         if ($handle === false) {
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_ASSETS_UNREADABLE');
@@ -219,7 +233,28 @@ final class CareerCurrentAuthorityPackage
                 }
                 $this->assertRow($row, $numericRatingResidueCount);
                 $rows[$slug] = $row;
-                $orderedRows[] = $row;
+                $rowSeparator = $rowIndex === 0 ? '' : ',';
+                hash_update($fullAssetSetHashContext, $rowSeparator.self::encodeCanonical($row));
+                foreach (self::EXPORTED_FIELDS as $field) {
+                    hash_update($fieldHashContexts[$field], $rowSeparator.self::encodeCanonical([
+                        'canonical_slug' => $slug,
+                        'value' => $row[$field] ?? null,
+                    ]));
+                }
+                foreach (self::LOCALES as $locale) {
+                    $projection = $this->publicProjection($row, $locale);
+                    $projectionSeparator = $publicProjectionIndex === 0 ? '' : ',';
+                    foreach (self::DISPLAY_OWNED_PUBLIC_FIELDS as $field) {
+                        hash_update($publicFieldHashContexts[$field], $projectionSeparator.self::encodeCanonical([
+                            'canonical_slug' => $slug,
+                            'locale' => $locale,
+                            'value' => $projection[$field],
+                        ]));
+                    }
+                    $publicContentHashes[] = $this->publicContentHash($row, $locale);
+                    $publicProjectionIndex++;
+                }
+                $rowIndex++;
                 $previousSlug = $slug;
                 $localePageCount += 2;
             }
@@ -239,31 +274,17 @@ final class CareerCurrentAuthorityPackage
 
         $slugs = array_keys($rows);
         $fieldHashes = [];
-        foreach (self::EXPORTED_FIELDS as $field) {
-            $fieldHashes[$field] = self::hashValue(array_map(
-                static fn (array $row): array => [
-                    'canonical_slug' => $row['canonical_slug'],
-                    'value' => $row[$field] ?? null,
-                ],
-                $orderedRows,
-            ));
+        foreach ($fieldHashContexts as $field => $context) {
+            hash_update($context, ']');
+            $fieldHashes[$field] = hash_final($context);
         }
-        $publicFieldValues = array_fill_keys(self::DISPLAY_OWNED_PUBLIC_FIELDS, []);
-        $publicContentHashes = [];
-        foreach ($rows as $slug => $row) {
-            foreach (self::LOCALES as $locale) {
-                $projection = $this->publicProjection($row, $locale);
-                foreach (self::DISPLAY_OWNED_PUBLIC_FIELDS as $field) {
-                    $publicFieldValues[$field][] = [
-                        'canonical_slug' => $slug,
-                        'locale' => $locale,
-                        'value' => $projection[$field],
-                    ];
-                }
-                $publicContentHashes[] = $this->publicContentHash($row, $locale);
-            }
+        $publicFieldHashes = [];
+        foreach ($publicFieldHashContexts as $field => $context) {
+            hash_update($context, ']');
+            $publicFieldHashes[$field] = hash_final($context);
         }
-        $publicFieldHashes = array_map(self::hashValue(...), $publicFieldValues);
+        hash_update($fullAssetSetHashContext, ']');
+        $fullAssetSetSha256 = hash_final($fullAssetSetHashContext);
         sort($publicContentHashes, SORT_STRING);
         $assetsSha256 = hash_file('sha256', $assetsPath);
         if (! is_string($assetsSha256)) {
@@ -280,7 +301,7 @@ final class CareerCurrentAuthorityPackage
                 'components_per_page' => count(CareerDisplayAssetComponentContract::CURRENT_V4_2_ORDER),
                 'numeric_rating_statement_residue_count' => $numericRatingResidueCount,
                 'slug_set_sha256' => self::hashValue($slugs),
-                'full_asset_set_sha256' => self::hashValue($orderedRows),
+                'full_asset_set_sha256' => $fullAssetSetSha256,
             ],
             'computed_manifest_fields' => [
                 'counts' => [
@@ -299,7 +320,7 @@ final class CareerCurrentAuthorityPackage
                 'exported_field_set_sha256' => $fieldHashes,
                 'public_projection_field_set_sha256' => $publicFieldHashes,
                 'set_hashes' => [
-                    'full_asset_set_sha256' => self::hashValue($orderedRows),
+                    'full_asset_set_sha256' => $fullAssetSetSha256,
                     'public_content_aggregate_sha256' => self::hashValue($publicContentHashes),
                     'slug_set_sha256' => self::hashValue($slugs),
                 ],
