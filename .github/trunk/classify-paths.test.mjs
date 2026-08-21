@@ -12,6 +12,26 @@ test("classifies docs, rules, and tests without deployment", () => {
   assert.equal(result.tests_changed, true);
 });
 
+test("keeps repository Skills rules-only when their names contain domain keywords", () => {
+  const result = classifyPaths([
+    ".agents/skills/fap-api-career-canonical-builder/SKILL.md",
+    ".agents/skills/fermatmind-career-editorial-qa/references/review-rubric.md",
+  ]);
+  assert.deepEqual(result.categories, ["docs_rules_tests_only"]);
+  assert.equal(result.deploy, false);
+  assert.equal(result.flags.seo_discoverability, false);
+});
+
+test("classifies the executable path rule with its tests without application deployment", () => {
+  const result = classifyPaths([
+    ".github/trunk/classify-paths.mjs",
+    ".github/trunk/classify-paths.test.mjs",
+  ]);
+  assert.deepEqual(result.categories, ["docs_rules_tests_only"]);
+  assert.equal(result.deploy, false);
+  assert.equal(result.tests_changed, true);
+});
+
 test("classifies application code", () => assert.equal(has(["backend/app/Models/User.php"], "application_code"), true));
 test("classifies content assets", () => assert.equal(has(["backend/content_packs/BIG5/v1/manifest.json"], "content_assets"), true));
 test("classifies Career Current assets", () => assert.equal(has(["backend/content_assets/career/current/assets.jsonl"], "content_assets"), true));

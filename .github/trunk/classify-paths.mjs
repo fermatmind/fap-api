@@ -43,6 +43,7 @@ export function classifyPaths(inputPaths) {
       /(^|\/)(?:tests?|__tests__)\//,
       /(?:Test\.php|\.test\.[cm]?[jt]sx?)$/,
     ]);
+    const executableRulePath = path === ".github/trunk/classify-paths.mjs";
     testsChanged ||= testPath;
     const payment = matches(path, [
       /(^|\/)(?:Commerce|Payments?|Billing|Entitlement)(\/|\.)/i,
@@ -76,7 +77,13 @@ export function classifyPaths(inputPaths) {
     ]);
 
     const selected = [];
-    if (testPath) {
+    if (path.startsWith(".agents/") || executableRulePath) {
+      // Repository Skills are instructions and static helpers. Domain words in
+      // their names or prose must not promote a rules-only change to runtime.
+      // The classifier itself is an executable delivery rule whose tests run
+      // unconditionally; changing it does not change deployed application bits.
+      selected.push("docs_rules_tests_only");
+    } else if (testPath) {
       selected.push("docs_rules_tests_only");
     } else if (infrastructure) {
       // Control-plane filenames often contain domain words such as cache or SEO.
