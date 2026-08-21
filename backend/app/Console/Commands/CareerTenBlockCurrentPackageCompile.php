@@ -64,6 +64,11 @@ final class CareerTenBlockCurrentPackageCompile extends Command
                 throw new CareerTenBlockCompileFailure('TEN_BLOCK_OUTPUT_WRITE_FAILED');
             }
             $this->write($packageRoot.'/assets.jsonl', $result['assets_bytes']);
+            $registrySource = base_path(CareerCurrentAuthorityPackage::RELATIVE_PATH.'/presentation-source-registry.json');
+            if (! is_file($registrySource) || is_link($registrySource)) {
+                throw new CareerTenBlockCompileFailure('PRESENTATION_V1_SOURCE_REGISTRY_MISSING');
+            }
+            $this->write($packageRoot.'/presentation-source-registry.json', (string) file_get_contents($registrySource));
             $this->write(
                 $packageRoot.'/manifest.json',
                 CareerCurrentAuthorityPackage::encodePrettyCanonical($result['manifest_template']),

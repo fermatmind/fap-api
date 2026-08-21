@@ -1,0 +1,132 @@
+{
+  "bls_projections": [
+    {
+      "canonical_slug": "appraisers-of-personal-and-business-property",
+      "data_year": 2024,
+      "effective_at": "2025-08-28",
+      "metrics": {
+        "中位年薪": "$65,420",
+        "就业增长": "4%",
+        "在岗人数": "77,300 人",
+        "年均职位空缺": "6,300 个"
+      },
+      "official_url": "https://www.bls.gov/ooh/business-and-financial/appraisers-and-assessors-of-real-estate.htm",
+      "reviewed_at": "2026-08-21",
+      "source_key": "bls.property-appraisers-and-assessors.2024",
+      "source_scope": "combined_official",
+      "title": "Property Appraisers and Assessors",
+      "valid_through": "2027-08-21"
+    },
+    {
+      "canonical_slug": "customs-brokers",
+      "data_year": 2024,
+      "effective_at": "2025-08-28",
+      "metrics": {
+        "中位年薪": "$78,420",
+        "就业增长": "3%",
+        "在岗人数": "418,000 人",
+        "年均职位空缺": "33,300 个"
+      },
+      "official_url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+      "reviewed_at": "2026-08-21",
+      "source_key": "bls.compliance-officers.2024",
+      "source_scope": "parent_occupation_proxy",
+      "title": "Compliance Officers",
+      "valid_through": "2027-08-21"
+    },
+    {
+      "canonical_slug": "first-line-supervisors-of-helpers-laborers-and-material-movers-hand",
+      "data_year": 2024,
+      "effective_at": "2025-08-28",
+      "metrics": {
+        "中位年薪": "$61,890",
+        "就业增长": "4%",
+        "在岗人数": "609,600 人",
+        "年均职位空缺": "61,300 个"
+      },
+      "official_url": "https://www.bls.gov/ooh/about/data-for-occupations-not-covered-in-detail.htm",
+      "reviewed_at": "2026-08-21",
+      "source_key": "bls.first-line-supervisors-transportation-material-moving-except-aircraft.2024",
+      "source_scope": "combined_official",
+      "title": "First-line supervisors of transportation and material moving workers, except aircraft cargo handling supervisors",
+      "valid_through": "2027-08-21"
+    },
+    {
+      "canonical_slug": "forest-fire-inspectors-and-prevention-specialists",
+      "data_year": 2024,
+      "effective_at": "2025-08-28",
+      "metrics": {
+        "中位年薪": "$52,380",
+        "就业增长": "15%",
+        "在岗人数": "2,900 人",
+        "年均职位空缺": "300 个"
+      },
+      "official_url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+      "reviewed_at": "2026-08-21",
+      "source_key": "bls.forest-fire-inspectors-prevention-specialists.2024",
+      "source_scope": "exact",
+      "title": "Forest fire inspectors and prevention specialists",
+      "valid_through": "2027-08-21"
+    },
+    {
+      "canonical_slug": "forging-machine-setters-operators-and-tenders-metal-and-plastic",
+      "data_year": 2024,
+      "effective_at": "2025-08-28",
+      "metrics": {
+        "中位年薪": "$49,240",
+        "就业增长": "-19%",
+        "在岗人数": "8,800 人",
+        "年均职位空缺": "600 个"
+      },
+      "official_url": "https://www.bls.gov/emp/tables/occupational-projections-and-characteristics.htm",
+      "reviewed_at": "2026-08-21",
+      "source_key": "bls.forging-machine-setters-operators-tenders.2024",
+      "source_scope": "exact",
+      "title": "Forging machine setters, operators, and tenders, metal and plastic",
+      "valid_through": "2027-08-21"
+    }
+  ],
+  "contract_version": "career.presentation_v1.source_registry.v1",
+  "onet_multiple_occupations": [
+    {
+      "canonical_slug": "electrical-and-electronics-engineers",
+      "child_occupations": [
+        {
+          "code": "17-2071.00",
+          "official_url": "https://www.onetonline.org/link/details/17-2071.00",
+          "title": "Electrical Engineers"
+        },
+        {
+          "code": "17-2072.00",
+          "official_url": "https://www.onetonline.org/link/details/17-2072.00",
+          "title": "Electronics Engineers, Except Computer"
+        }
+      ],
+      "effective_at": "2026-01-01",
+      "reviewed_at": "2026-08-21",
+      "scope": "multiple_official_occupations",
+      "summary_soc": "17-2070"
+    },
+    {
+      "canonical_slug": "mathematicians-and-statisticians",
+      "child_occupations": [
+        {
+          "code": "15-2021.00",
+          "official_url": "https://www.onetonline.org/link/details/15-2021.00",
+          "title": "Mathematicians"
+        },
+        {
+          "code": "15-2041.00",
+          "official_url": "https://www.onetonline.org/link/details/15-2041.00",
+          "title": "Statisticians"
+        }
+      ],
+      "effective_at": "2026-01-01",
+      "reviewed_at": "2026-08-21",
+      "scope": "multiple_official_occupations",
+      "summary_soc": "15-2020"
+    }
+  ],
+  "reviewed_at": "2026-08-21",
+  "valid_through": "2027-08-21"
+}

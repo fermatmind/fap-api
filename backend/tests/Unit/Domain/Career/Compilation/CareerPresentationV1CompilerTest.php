@@ -121,6 +121,24 @@ final class CareerPresentationV1CompilerTest extends TestCase
         CareerPresentationV1Contract::assert($presentation);
     }
 
+    public function test_standard_indicator_value_salary_schema_remains_supported_without_output_drift(): void
+    {
+        $package = app(CareerCurrentAuthorityPackage::class)->load(base_path());
+        $actuaries = $package['rows']['actuaries']['metadata_json']['presentation_v1']['zh'];
+
+        self::assertSame(
+            ['$125,770', '22%', '33,600 人', '2,400 个'],
+            array_column(array_slice(data_get($actuaries, 'hero.stats'), 0, 4), 'value'),
+        );
+        self::assertSame(
+            ['salary.bls_table.中位年薪', 'salary.bls_table.就业增长', 'salary.bls_table.在岗人数', 'salary.bls_table.年均职位空缺'],
+            array_map(
+                static fn (array $stat): string => $stat['source_keys'][0],
+                array_slice(data_get($actuaries, 'hero.stats'), 0, 4),
+            ),
+        );
+    }
+
     public function test_contract_rejects_silent_extra_fields(): void
     {
         $package = app(CareerCurrentAuthorityPackage::class)->load(base_path());

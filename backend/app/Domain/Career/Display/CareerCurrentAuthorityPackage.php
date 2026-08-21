@@ -128,6 +128,7 @@ final class CareerCurrentAuthorityPackage
         [$assetsPath, $manifestPath] = $this->packagePaths($backendRoot);
         $manifest = $this->readManifest($manifestPath);
         $this->assertManifestContract($manifest);
+        $this->assertPresentationSourceRegistry($backendRoot, $manifest);
         $compiled = $this->compileAssets($assetsPath);
         $assetsSha256 = $compiled['summary']['assets_sha256'];
         $declaredAssetsSha256 = (string) self::value($manifest, 'files.0.sha256');
@@ -428,6 +429,26 @@ final class CareerCurrentAuthorityPackage
         }
 
         return $manifest;
+    }
+
+    /** @param array<string,mixed> $manifest */
+    private function assertPresentationSourceRegistry(string $backendRoot, array $manifest): void
+    {
+        $declared = self::value($manifest, 'presentation_v1.source_registry');
+        if ($declared === null) {
+            return;
+        }
+        $path = rtrim($backendRoot, '/').'/'.self::RELATIVE_PATH.'/presentation-source-registry.json';
+        if (! is_array($declared)
+            || ($declared['path'] ?? null) !== 'presentation-source-registry.json'
+            || ($declared['onet_multiple_occupation_count'] ?? null) !== 2
+            || ($declared['bls_projection_count'] ?? null) !== 5
+            || ! is_string($declared['sha256'] ?? null)
+            || ! is_file($path)
+            || is_link($path)
+            || ! hash_equals((string) $declared['sha256'], (string) hash_file('sha256', $path))) {
+            throw new CareerCurrentAuthorityPackageFailure('CURRENT_PRESENTATION_SOURCE_REGISTRY_INVALID');
+        }
     }
 
     /** @param array<string,mixed> $row */

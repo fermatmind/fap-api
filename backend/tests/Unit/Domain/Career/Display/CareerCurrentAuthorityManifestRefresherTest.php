@@ -19,6 +19,7 @@ final class CareerCurrentAuthorityManifestRefresherTest extends TestCase
             $backendRoot = $this->temporaryRoot.'/backend';
             @unlink($backendRoot.'/content_assets/career/current/assets.jsonl');
             @unlink($backendRoot.'/content_assets/career/current/manifest.json');
+            @unlink($backendRoot.'/content_assets/career/current/presentation-source-registry.json');
             @rmdir($backendRoot.'/content_assets/career/current');
             @rmdir($backendRoot.'/content_assets/career');
             @rmdir($backendRoot.'/content_assets');
@@ -113,6 +114,7 @@ final class CareerCurrentAuthorityManifestRefresherTest extends TestCase
         self::assertTrue(mkdir($target, 0700, true));
         self::assertTrue(copy($sourceBackendRoot.'/content_assets/career/current/assets.jsonl', $target.'/assets.jsonl'));
         self::assertTrue(copy($sourceBackendRoot.'/content_assets/career/current/manifest.json', $target.'/manifest.json'));
+        self::assertTrue(copy($sourceBackendRoot.'/content_assets/career/current/presentation-source-registry.json', $target.'/presentation-source-registry.json'));
 
         return $backendRoot;
     }

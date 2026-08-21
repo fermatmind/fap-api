@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.fermatmind.com/schemas/career-presentation-source-registry.v1.schema.json",
+  "title": "Career presentation v1 source registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "reviewed_at", "valid_through", "onet_multiple_occupations", "bls_projections"],
+  "properties": {
+    "contract_version": {"const": "career.presentation_v1.source_registry.v1"},
+    "reviewed_at": {"type": "string", "format": "date"},
+    "valid_through": {"type": "string", "format": "date"},
+    "onet_multiple_occupations": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["canonical_slug", "summary_soc", "child_occupations", "scope", "reviewed_at", "effective_at"],
+        "properties": {
+          "canonical_slug": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+          "summary_soc": {"type": "string", "pattern": "^[0-9]{2}-[0-9]{4}$"},
+          "scope": {"const": "multiple_official_occupations"},
+          "reviewed_at": {"type": "string", "format": "date"},
+          "effective_at": {"type": "string", "format": "date"},
+          "child_occupations": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["code", "title", "official_url"],
+              "properties": {
+                "code": {"type": "string", "pattern": "^[0-9]{2}-[0-9]{4}\\.[0-9]{2}$"},
+                "title": {"type": "string", "minLength": 1},
+                "official_url": {"type": "string", "pattern": "^https://www\\.onetonline\\.org/link/details/[0-9]{2}-[0-9]{4}\\.[0-9]{2}$"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "bls_projections": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["canonical_slug", "source_key", "title", "official_url", "source_scope", "data_year", "metrics", "reviewed_at", "effective_at", "valid_through"],
+        "properties": {
+          "canonical_slug": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+          "source_key": {"type": "string", "minLength": 1},
+          "title": {"type": "string", "minLength": 1},
+          "official_url": {"type": "string", "pattern": "^https://www\\.bls\\.gov/"},
+          "source_scope": {"enum": ["exact", "combined_official", "parent_occupation_proxy"]},
+          "data_year": {"const": 2024},
+          "reviewed_at": {"type": "string", "format": "date"},
+          "effective_at": {"type": "string", "format": "date"},
+          "valid_through": {"type": "string", "format": "date"},
+          "metrics": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["中位年薪", "就业增长", "在岗人数", "年均职位空缺"],
+            "properties": {
+              "中位年薪": {"type": "string", "minLength": 1},
+              "就业增长": {"type": "string", "minLength": 1},
+              "在岗人数": {"type": "string", "minLength": 1},
+              "年均职位空缺": {"type": "string", "minLength": 1}
+            }
+          }
+        }
+      }
+    }
+  }
+}
