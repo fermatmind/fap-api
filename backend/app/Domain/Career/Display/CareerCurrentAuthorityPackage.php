@@ -88,6 +88,10 @@ final class CareerCurrentAuthorityPackage
         'implementation_contract',
     ];
 
+    private const OPTIONAL_DISPLAY_OWNED_PUBLIC_FIELDS = [
+        'presentation_v1',
+    ];
+
     private const FORBIDDEN_PUBLIC_KEYS = [
         'release_gate',
         'release_gates',
@@ -201,6 +205,12 @@ final class CareerCurrentAuthorityPackage
             $publicFieldHashContexts[$field] = hash_init('sha256');
             hash_update($publicFieldHashContexts[$field], '[');
         }
+        $optionalPublicFieldHashContexts = [];
+        foreach (self::OPTIONAL_DISPLAY_OWNED_PUBLIC_FIELDS as $field) {
+            $optionalPublicFieldHashContexts[$field] = hash_init('sha256');
+            hash_update($optionalPublicFieldHashContexts[$field], '[');
+        }
+        $optionalPublicFieldsPresent = [];
         $fullAssetSetHashContext = hash_init('sha256');
         hash_update($fullAssetSetHashContext, '[');
         $rowIndex = 0;
@@ -248,8 +258,18 @@ final class CareerCurrentAuthorityPackage
                         hash_update($publicFieldHashContexts[$field], $projectionSeparator.self::encodeCanonical([
                             'canonical_slug' => $slug,
                             'locale' => $locale,
-                            'value' => $projection[$field],
+                            'value' => $projection[$field] ?? null,
                         ]));
+                    }
+                    foreach (self::OPTIONAL_DISPLAY_OWNED_PUBLIC_FIELDS as $field) {
+                        hash_update($optionalPublicFieldHashContexts[$field], $projectionSeparator.self::encodeCanonical([
+                            'canonical_slug' => $slug,
+                            'locale' => $locale,
+                            'value' => $projection[$field] ?? null,
+                        ]));
+                        if (array_key_exists($field, $projection)) {
+                            $optionalPublicFieldsPresent[$field] = true;
+                        }
                     }
                     $publicContentHashes[] = $this->publicContentHash($row, $locale);
                     $publicProjectionIndex++;
@@ -282,6 +302,13 @@ final class CareerCurrentAuthorityPackage
         foreach ($publicFieldHashContexts as $field => $context) {
             hash_update($context, ']');
             $publicFieldHashes[$field] = hash_final($context);
+        }
+        foreach ($optionalPublicFieldHashContexts as $field => $context) {
+            hash_update($context, ']');
+            $digest = hash_final($context);
+            if (isset($optionalPublicFieldsPresent[$field])) {
+                $publicFieldHashes[$field] = $digest;
+            }
         }
         hash_update($fullAssetSetHashContext, ']');
         $fullAssetSetSha256 = hash_final($fullAssetSetHashContext);
@@ -425,6 +452,13 @@ final class CareerCurrentAuthorityPackage
                 $numericRatingResidueCount++;
             }
         }
+        $presentation = $row['metadata_json']['presentation_v1'] ?? null;
+        if ($presentation !== null) {
+            if (! is_array($presentation) || array_keys($presentation) !== ['zh'] || ! is_array($presentation['zh'])) {
+                throw new CareerCurrentAuthorityPackageFailure('CURRENT_PRESENTATION_V1_INVALID');
+            }
+            CareerPresentationV1Contract::assert($presentation['zh']);
+        }
     }
 
     /** @param array<string,mixed> $row @return array<string,mixed> */
@@ -443,7 +477,7 @@ final class CareerCurrentAuthorityPackage
             throw new CareerCurrentAuthorityPackageFailure('CURRENT_LOCALIZED_PAGE_MISSING');
         }
 
-        return [
+        $projection = [
             'surface_version' => $row['surface_version'],
             'asset_version' => $row['asset_version'],
             'template_version' => $row['template_version'],
@@ -460,6 +494,13 @@ final class CareerCurrentAuthorityPackage
             'structured_data_from_visible_content' => $this->stripForbiddenKeys((array) $row['structured_data_json']),
             'implementation_contract' => $this->stripForbiddenKeys((array) $row['implementation_contract_json']),
         ];
+        $presentation = $row['metadata_json']['presentation_v1'][$normalizedLocale] ?? null;
+        if ($normalizedLocale === 'zh' && is_array($presentation)) {
+            CareerPresentationV1Contract::assert($presentation);
+            $projection['presentation_v1'] = $this->stripForbiddenKeys($presentation);
+        }
+
+        return $projection;
     }
 
     /** @param array<string,mixed> $row */
@@ -479,6 +520,11 @@ final class CareerCurrentAuthorityPackage
                 throw new CareerCurrentAuthorityPackageFailure('CURRENT_PUBLIC_PROJECTION_INVALID');
             }
             $owned[$field] = $surface[$field];
+        }
+        foreach (self::OPTIONAL_DISPLAY_OWNED_PUBLIC_FIELDS as $field) {
+            if (array_key_exists($field, $surface)) {
+                $owned[$field] = $surface[$field];
+            }
         }
 
         return $owned;

@@ -64,12 +64,12 @@ final class CareerTenBlockCurrentPackageCompilerTest extends TestCase
         self::assertSame($pages['en']['fermat_decision_card']['caveat'], $notices['en'][0]);
         self::assertSame($pages['en']['ai_impact_table']['explanation']['en']['boundary'], $notices['en'][1]);
         self::assertSame($pages['zh']['fermat_decision_card']['caveat'], $notices['zh'][0]);
-        self::assertSame($pages['zh']['ai_impact_table']['explanation']['zh']['boundary'], $notices['zh'][1]);
+        self::assertSame($pages['en']['ai_impact_table']['explanation']['zh']['boundary'], $notices['zh'][1]);
         self::assertCount(2, $rows['accountants-and-auditors']['page_payload_json']['page']['en']['boundary_notice']);
         self::assertCount(2, $rows['accountants-and-auditors']['page_payload_json']['page']['zh']['boundary_notice']);
         self::assertContains($first['package_diff']['changed_slugs'], [[], ['accountants-and-auditors']]);
         self::assertContains($first['package_diff']['changed_row_count'], [0, 1]);
-        self::assertContains($first['package_diff']['public_changed_locale_page_count'], [0, 2]);
+        self::assertContains($first['package_diff']['public_changed_locale_page_count'], [0, 1, 2]);
         self::assertSame($first['assets_bytes'], $second['assets_bytes']);
         self::assertSame($first['receipt'], $second['receipt']);
         foreach ([

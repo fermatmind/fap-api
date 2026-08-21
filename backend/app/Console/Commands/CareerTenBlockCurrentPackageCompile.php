@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Domain\Career\Compilation\CareerPresentationV1Compiler;
 use App\Domain\Career\Compilation\CareerTenBlockCompileFailure;
 use App\Domain\Career\Compilation\CareerTenBlockCurrentPackageCompiler;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
@@ -19,12 +20,15 @@ final class CareerTenBlockCurrentPackageCompile extends Command
         {--evidence-root= : Read-only evidence authority root}
         {--output-root= : Required existing task temp directory}
         {--accountants-boundary-notice : Compile the accountants same-locale boundary authority projection}
+        {--presentation-v1 : Compile the full zh-CN visual presentation projection}
+        {--design-authority= : Read-only v1.2 visual authority HTML}
         {--write-current : Atomically install the validated candidate into repository Current authority}';
 
     protected $description = 'Deterministically compile and validate the 1046-row Career Current candidate package';
 
     public function handle(
         CareerTenBlockCurrentPackageCompiler $compiler,
+        CareerPresentationV1Compiler $presentationCompiler,
         CareerCurrentAuthorityPackage $package,
     ): int {
         ini_set('memory_limit', '1024M');
@@ -35,12 +39,24 @@ final class CareerTenBlockCurrentPackageCompile extends Command
             $evidenceRoot = trim((string) $this->option('evidence-root'));
             $outputRoot = $this->outputRoot((string) $this->option('output-root'));
             $accountantsBoundaryNotice = (bool) $this->option('accountants-boundary-notice');
-            if (! $accountantsBoundaryNotice && ($sourceRoot === '' || $lookup === '' || $evidenceRoot === '')) {
+            $presentationV1 = (bool) $this->option('presentation-v1');
+            if ($accountantsBoundaryNotice && $presentationV1) {
                 throw new CareerTenBlockCompileFailure('TEN_BLOCK_COMMAND_INPUT_INVALID');
             }
-            $result = $accountantsBoundaryNotice
-                ? $compiler->compileAccountantsBoundaryNoticeProjection(base_path())
-                : $compiler->compile($sourceRoot, $lookup, $evidenceRoot, base_path());
+            if ($presentationV1) {
+                $designAuthority = trim((string) $this->option('design-authority'));
+                if ($sourceRoot === '' || $designAuthority === '') {
+                    throw new CareerTenBlockCompileFailure('TEN_BLOCK_COMMAND_INPUT_INVALID');
+                }
+                $result = $presentationCompiler->compile($sourceRoot, $designAuthority, base_path());
+            } elseif ($accountantsBoundaryNotice) {
+                $result = $compiler->compileAccountantsBoundaryNoticeProjection(base_path());
+            } else {
+                if ($sourceRoot === '' || $lookup === '' || $evidenceRoot === '') {
+                    throw new CareerTenBlockCompileFailure('TEN_BLOCK_COMMAND_INPUT_INVALID');
+                }
+                $result = $compiler->compile($sourceRoot, $lookup, $evidenceRoot, base_path());
+            }
             $this->write($outputRoot.'/assets.jsonl', $result['assets_bytes']);
             $scratch = $outputRoot.'/.package-backend-'.bin2hex(random_bytes(8));
             $packageRoot = $scratch.'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH;

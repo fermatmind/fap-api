@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Services\Career;
 
+use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
@@ -84,6 +85,24 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         $this->assertSame('direct', $surface['claim_permissions']['evidence_basis']['crosswalk']);
         $this->assertCount(26, $surface['component_order']);
         $this->assertContains('fermat_decision_card', $surface['component_order']);
+    }
+
+    public function test_it_exposes_presentation_v1_only_for_the_zh_surface(): void
+    {
+        ini_set('memory_limit', '1024M');
+        $occupation = $this->createOccupation('actuaries');
+        $authority = app(CareerCurrentAuthorityPackage::class)->load(base_path());
+        $presentation = $authority['rows']['actuaries']['metadata_json']['presentation_v1']['zh'];
+        $this->createDisplayAsset($occupation, [
+            'metadata_json' => ['presentation_v1' => ['zh' => $presentation]],
+        ]);
+
+        $zh = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
+        $en = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'en');
+
+        $this->assertSame($presentation, $zh['presentation_v1']);
+        $this->assertArrayNotHasKey('presentation_v1', $en);
+        $this->assertSame(8, data_get($zh, 'presentation_v1.hero.ai_exposure.value'));
     }
 
     public function test_it_returns_the_complete_26_component_surface_with_both_workbuddy_blocks(): void

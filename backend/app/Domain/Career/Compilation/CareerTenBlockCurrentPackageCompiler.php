@@ -259,9 +259,9 @@ final class CareerTenBlockCurrentPackageCompiler
             }
         }
         if (($changedSlugs !== [] && $changedSlugs !== [self::ACCOUNTANTS_SLUG])
-            || ! in_array($publicChangedLocalePages, [0, 2], true)
+            || ! in_array($publicChangedLocalePages, [0, 1, 2], true)
             || (count($changedSlugs) === 0 && $publicChangedLocalePages !== 0)
-            || (count($changedSlugs) === 1 && $publicChangedLocalePages !== 2)) {
+            || (count($changedSlugs) === 1 && $publicChangedLocalePages === 0)) {
             throw new CareerTenBlockCompileFailure('TEN_BLOCK_ACCOUNTANTS_BOUNDARY_SCOPE_INVALID');
         }
         $this->assertCandidatePublicContract($candidateRows);
@@ -320,13 +320,17 @@ final class CareerTenBlockCurrentPackageCompiler
             $decision = is_array($page) && is_array($page['fermat_decision_card'] ?? null)
                 ? $page['fermat_decision_card']
                 : [];
-            $aiImpact = is_array($page) && is_array($page['ai_impact_table'] ?? null)
-                ? $page['ai_impact_table']
-                : [];
-            $explanation = is_array($aiImpact['explanation'] ?? null) ? $aiImpact['explanation'] : [];
-            $localeExplanation = is_array($explanation[$locale] ?? null) ? $explanation[$locale] : [];
             $caveat = $decision['caveat'] ?? null;
-            $boundary = $localeExplanation['boundary'] ?? null;
+            $boundaries = [];
+            foreach ($pages as $candidatePage) {
+                $candidate = is_array($candidatePage)
+                    ? ($candidatePage['ai_impact_table']['explanation'][$locale]['boundary'] ?? null)
+                    : null;
+                if (is_string($candidate) && trim($candidate) !== '') {
+                    $boundaries[trim($candidate)] = true;
+                }
+            }
+            $boundary = count($boundaries) === 1 ? array_key_first($boundaries) : null;
             if (! is_string($caveat) || trim($caveat) === '' || ! is_string($boundary) || trim($boundary) === '') {
                 throw new CareerTenBlockCompileFailure('TEN_BLOCK_ACCOUNTANTS_BOUNDARY_SOURCE_MISSING');
             }

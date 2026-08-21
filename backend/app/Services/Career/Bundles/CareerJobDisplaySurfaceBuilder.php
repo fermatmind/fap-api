@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Career\Bundles;
 
 use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
+use App\Domain\Career\Display\CareerPresentationV1Contract;
 use App\DTO\Career\CareerJobDetailBundle;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
@@ -146,11 +147,26 @@ final class CareerJobDisplaySurfaceBuilder
         $structuredData = $this->stripForbiddenKeys($asset->structured_data_json ?? []);
         $implementationContract = $this->stripForbiddenKeys($asset->implementation_contract_json ?? []);
 
-        if ($this->containsForbiddenPublicKey([$page, $componentOrder, $sources, $structuredData, $implementationContract, $claimPermissions])) {
+        $presentation = $normalizedLocale === 'zh'
+            ? data_get($asset->metadata_json, 'presentation_v1.zh')
+            : null;
+        if ($presentation !== null) {
+            if (! is_array($presentation)) {
+                return null;
+            }
+            try {
+                CareerPresentationV1Contract::assert($presentation);
+            } catch (\Throwable) {
+                return null;
+            }
+            $presentation = $this->stripForbiddenKeys($presentation);
+        }
+
+        if ($this->containsForbiddenPublicKey([$page, $componentOrder, $sources, $structuredData, $implementationContract, $claimPermissions, $presentation])) {
             return null;
         }
 
-        return [
+        $surface = [
             'surface_version' => (string) $asset->surface_version,
             'asset_version' => (string) $asset->asset_version,
             'template_version' => (string) $asset->template_version,
@@ -166,6 +182,11 @@ final class CareerJobDisplaySurfaceBuilder
             'structured_data_from_visible_content' => $structuredData,
             'implementation_contract' => $implementationContract,
         ];
+        if (is_array($presentation)) {
+            $surface['presentation_v1'] = $presentation;
+        }
+
+        return $surface;
     }
 
     /**

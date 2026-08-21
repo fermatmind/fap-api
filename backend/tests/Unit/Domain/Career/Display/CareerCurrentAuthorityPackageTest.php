@@ -29,7 +29,10 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
         self::assertSame(0, data_get($package, 'manifest.superseded_source_coverage.workbuddy_block_mismatch_count'));
         self::assertSame(576, data_get($package, 'manifest.superseded_source_coverage.missing_12_original_component_count'));
         self::assertSame(0, data_get($package, 'manifest.superseded_source_coverage.missing_12_component_mismatch_count'));
-        self::assertCount(12, data_get($package, 'manifest.public_projection_field_set_sha256'));
+        self::assertCount(
+            isset($package['manifest']['presentation_v1']) ? 13 : 12,
+            data_get($package, 'manifest.public_projection_field_set_sha256'),
+        );
         self::assertSame('pass', data_get($package, 'manifest.export_evidence.exporter_result'));
         self::assertSame('failure', data_get($package, 'manifest.export_evidence.workflow_conclusion'));
     }

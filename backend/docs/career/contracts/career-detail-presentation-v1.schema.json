@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fermatmind.com/contracts/career-detail-presentation-v1.schema.json",
+  "title": "Career detail presentation v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "design_authority", "hero", "notices"],
+  "properties": {
+    "contract_version": {"const": "career.detail.presentation.v1"},
+    "design_authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "sha256"],
+      "properties": {
+        "id": {"const": "accountants-career-page-v1.2"},
+        "sha256": {"const": "85c71abac0180a6807222b297e66b0dd611ca79a5cc4bd17db5da416459eafe7"}
+      }
+    },
+    "hero": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title_zh", "title_en", "soc_code", "onet_code", "badges", "lead", "ai_exposure", "stats", "cta"],
+      "properties": {
+        "title_zh": {"type": ["string", "null"], "minLength": 1},
+        "title_en": {"type": ["string", "null"], "minLength": 1},
+        "soc_code": {"type": ["string", "null"], "pattern": "^[0-9]{2}-[0-9]{4}$"},
+        "onet_code": {"type": ["string", "null"], "pattern": "^[0-9]{2}-[0-9]{4}\\.[0-9]{2}$"},
+        "badges": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "prefixItems": [
+            {"$ref": "#/$defs/interest_badge"},
+            {"$ref": "#/$defs/scene_badge"},
+            {"$ref": "#/$defs/risk_badge"}
+          ]
+        },
+        "lead": {"type": ["string", "null"], "minLength": 1},
+        "ai_exposure": {"$ref": "#/$defs/ai_exposure"},
+        "stats": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/stat"},
+          "maxItems": 5
+        },
+        "cta": {"$ref": "#/$defs/cta"}
+      }
+    },
+    "notices": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["snapshot_callout", "salary_boundary", "usage_boundary"],
+      "properties": {
+        "snapshot_callout": {"type": ["string", "null"], "minLength": 1},
+        "salary_boundary": {"type": ["string", "null"], "minLength": 1},
+        "usage_boundary": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      }
+    }
+  },
+  "$defs": {
+    "availability": {"enum": ["published", "missing"]},
+    "badge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["key", "text", "availability"],
+      "properties": {
+        "key": {"enum": ["interest", "scene", "risk"]},
+        "text": {"type": ["string", "null"], "minLength": 1},
+        "availability": {"$ref": "#/$defs/availability"}
+      }
+    },
+    "interest_badge": {"allOf": [{"$ref": "#/$defs/badge"}, {"properties": {"key": {"const": "interest"}}}]},
+    "scene_badge": {"allOf": [{"$ref": "#/$defs/badge"}, {"properties": {"key": {"const": "scene"}}}]},
+    "risk_badge": {"allOf": [{"$ref": "#/$defs/badge"}, {"properties": {"key": {"const": "risk"}}}]},
+    "ai_exposure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "scale", "display_value", "label", "note", "metric_kind", "source_label", "availability"],
+      "properties": {
+        "value": {"type": ["integer", "null"], "minimum": 0, "maximum": 10},
+        "scale": {"const": 10},
+        "display_value": {"type": ["string", "null"], "pattern": "^(10|[0-9])/10$"},
+        "label": {"const": "AI 曝光评分"},
+        "note": {"type": ["string", "null"], "minLength": 1},
+        "metric_kind": {"const": "fermatmind_internal_rubric"},
+        "source_label": {"const": "FermatMind 内部 rubric"},
+        "availability": {"$ref": "#/$defs/availability"}
+      }
+    },
+    "stat": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["key", "value", "label", "source_label", "source_keys", "availability"],
+      "properties": {
+        "key": {"enum": ["us_median_pay", "us_growth", "employment", "annual_openings", "ai_exposure"]},
+        "value": {"type": "string", "minLength": 1},
+        "label": {"type": "string", "minLength": 1},
+        "source_label": {"type": ["string", "null"], "minLength": 1},
+        "source_keys": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1},
+        "availability": {"const": "published"}
+      }
+    },
+    "cta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "href", "availability"],
+      "properties": {
+        "label": {"type": ["string", "null"], "minLength": 1},
+        "href": {"type": ["string", "null"], "minLength": 1},
+        "availability": {"$ref": "#/$defs/availability"}
+      }
+    }
+  }
+}
