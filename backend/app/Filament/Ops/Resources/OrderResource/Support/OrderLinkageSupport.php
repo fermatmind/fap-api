@@ -1261,11 +1261,23 @@ final class OrderLinkageSupport
             return null;
         }
 
+        $legacyOrgId = (int) config('fap.legacy_org_id', 1);
+
         return DB::table('skus')
             ->selectRaw('upper(coalesce(benefit_code, \'\'))')
-            ->whereColumn('skus.org_id', 'orders.org_id')
             ->where('is_active', true)
             ->whereRaw("upper(coalesce(skus.sku, '')) = upper(coalesce(nullif(orders.item_sku, ''), orders.sku, ''))")
+            ->where(function (QueryBuilder $builder) use ($legacyOrgId): void {
+                $builder->whereColumn('skus.org_id', 'orders.org_id')
+                    ->orWhere('skus.org_id', 0);
+
+                if ($legacyOrgId > 0) {
+                    $builder->orWhere('skus.org_id', $legacyOrgId);
+                }
+            })
+            ->orderByRaw(
+                'case when skus.org_id = orders.org_id then 0 when skus.org_id = 0 then 1 else 2 end'
+            )
             ->limit(1);
     }
 

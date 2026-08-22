@@ -309,6 +309,9 @@ final class PaidNoGrantRepairOpsTenantVisibilityAcceptanceTest extends TestCase
             ->first();
 
         $this->assertNotNull($opsRecord);
+        $this->assertNull($opsRecord->latest_benefit_code);
+        $this->assertNull($opsRecord->latest_benefit_status);
+        $this->assertFalse((bool) $opsRecord->has_active_benefit_grant);
 
         $opsSupport = app(OrderLinkageSupport::class);
         $this->assertSame('paid', $opsSupport->paymentStatus($opsRecord)['label']);
@@ -367,6 +370,9 @@ final class PaidNoGrantRepairOpsTenantVisibilityAcceptanceTest extends TestCase
             ->first();
 
         $this->assertNotNull($repairedOpsRecord);
+        $this->assertSame('MBTI_REPORT_FULL', (string) $repairedOpsRecord->latest_benefit_code);
+        $this->assertSame('active', (string) $repairedOpsRecord->latest_benefit_status);
+        $this->assertTrue((bool) $repairedOpsRecord->has_active_benefit_grant);
         $this->assertSame('paid', $opsSupport->paymentStatus($repairedOpsRecord)['label']);
         $this->assertSame('unlocked', $opsSupport->unlockStatus($repairedOpsRecord)['label']);
 
