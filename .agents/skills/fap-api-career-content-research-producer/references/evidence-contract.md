@@ -38,6 +38,15 @@ Allowed transformations are `verbatim_fact`, `normalized`, `calculated`, `combin
 
 Every pointer resolves in the named module. Every numeric leaf and every date/salary/growth/licensing field has a binding. FAQ facts reuse source keys from the originating module.
 
+## Optional compiler compatibility metadata
+
+Research evidence and compiler evidence are separate contracts. When an explicitly scoped compatibility task needs to adapt an already valid research package, read [compiler-evidence-adapter-contract.md](compiler-evidence-adapter-contract.md).
+
+- A mapped source adds explicit `compiler_metadata`; `source_tier` alone never determines compiler authority.
+- A claim adds `compiler_disposition: mapped` plus a complete `compiler_mapping`, or explicitly declares `compiler_disposition: not_compiler_mapped` with a reason.
+- Compiler metadata is ignored by the research validator as compatibility metadata; it does not change research source tier, scope, transformation, RFC 6901 pointer, receipt, unresolved-claim, or deterministic-hash rules.
+- The adapter must prove the research pointer value and compiler input JSONPath value have the same repository canonical digest. It must not infer a mapping from module names, prose, or field names.
+
 ## Coverage and unresolved claims
 
 `module-coverage.json` has `schema_version: career.research-module-coverage.v1` and one row per target slug/module with `slug`, `module`, `populated_field_count`, `bound_claim_count`, and `unresolved_claim_count`. `populated_field_count` is the number of non-null top-level module fields; the validator recomputes all three counts.

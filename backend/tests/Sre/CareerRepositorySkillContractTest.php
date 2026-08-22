@@ -13,6 +13,7 @@ final class CareerRepositorySkillContractTest extends TestCase
     public static function skillProvider(): iterable
     {
         yield 'canonical builder' => ['fap-api-career-canonical-builder'];
+        yield 'content research producer' => ['fap-api-career-content-research-producer'];
         yield 'content orchestrator' => ['fap-api-career-content-orchestrator'];
         yield 'editorial QA' => ['fermatmind-career-editorial-qa'];
     }
@@ -30,10 +31,15 @@ final class CareerRepositorySkillContractTest extends TestCase
     {
         $root = dirname(__DIR__, 3).'/.agents/skills/';
         $builder = (string) file_get_contents($root.'fap-api-career-canonical-builder/SKILL.md');
+        $producer = (string) file_get_contents($root.'fap-api-career-content-research-producer/SKILL.md');
         $orchestrator = (string) file_get_contents($root.'fap-api-career-content-orchestrator/SKILL.md');
         $editorial = (string) file_get_contents($root.'fermatmind-career-editorial-qa/SKILL.md');
 
         self::assertStringContainsString('career:ten-block-current-package-compile', $builder);
+        self::assertStringContainsString('compiler-evidence-adapter-contract.md', $producer);
+        self::assertFileExists(
+            $root.'fap-api-career-content-research-producer/scripts/adapt_research_package_to_compiler_evidence.php',
+        );
         self::assertStringContainsString('fap-api-career-release-authority', $builder.$orchestrator);
         self::assertStringContainsString('fap-api-deploy-sre', $orchestrator);
         self::assertStringContainsString('approved 1046 zh-CN master', $editorial);
@@ -49,6 +55,7 @@ final class CareerRepositorySkillContractTest extends TestCase
             static fn (string $path): string => (string) file_get_contents($path),
             [
                 $root.'fap-api-career-canonical-builder/SKILL.md',
+                $root.'fap-api-career-content-research-producer/SKILL.md',
                 $root.'fap-api-career-content-orchestrator/SKILL.md',
                 $root.'fermatmind-career-editorial-qa/SKILL.md',
             ],

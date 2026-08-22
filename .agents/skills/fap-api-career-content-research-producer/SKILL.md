@@ -41,7 +41,9 @@ Require a non-empty explicit slug/cohort, locale list, primary jurisdiction, res
 python3 scripts/validate_research_package.py <output_root>/<batch_id>
 ```
 
-6. Hand a valid candidate to `fermatmind-career-editorial-qa`. Do not call a compiler, publisher, deployer, CMS, database, cache, or search system from this Skill.
+6. Hand a valid candidate to `fermatmind-career-editorial-qa`. Do not call a publisher, deployer, CMS, database, cache, or search system from this Skill.
+
+For an explicitly authorized research-to-compiler compatibility task only, read [references/compiler-evidence-adapter-contract.md](references/compiler-evidence-adapter-contract.md) and run the Skill-owned adapter after the research validator passes. The adapter may invoke the existing loader and a read-only compiler dry run; it cannot install Current or authorize publication.
 
 ## Responsibility chain
 
@@ -66,7 +68,7 @@ external source research
 ## Hard boundaries
 
 - Do not modify the approved 1046 zh-CN master, Current `assets.jsonl` or `manifest.json`, English translation assets, frontend, runtime/API schema, CMS/database/cache state, sitemap/discoverability/search state, automations, workflows, or Agent definitions.
-- Do not compile or install Current, render pages, publish, deploy, or submit GSC, IndexNow, sitemap, llms, or other search actions.
+- Do not compile or install Current, render pages, publish, deploy, or submit GSC, IndexNow, sitemap, llms, or other search actions. The sole exception is the contract adapter's explicitly scoped, single-slug, read-only dry compile.
 - Do not treat a candidate, validator PASS, QA result, HTTP 200, or database record as published authority.
 - Keep private assessment data, personal data, credentials, cookies, and browser sessions out of research packages.
 
