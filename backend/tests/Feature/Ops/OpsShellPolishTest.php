@@ -84,13 +84,14 @@ final class OpsShellPolishTest extends TestCase
         $this->assertSame('Governance', OrganizationResource::getNavigationGroup());
     }
 
-    public function test_ops_dashboard_stats_keep_severity_and_funnel_contract_visible(): void
+    public function test_ops_dashboard_stats_keep_precision_console_and_funnel_contract_visible(): void
     {
         $theme = (string) file_get_contents(resource_path('css/filament/ops/theme.css'));
 
         $this->assertStringContainsString('--ops-state-danger', $theme);
-        $this->assertStringContainsString('.fi-wi-stats-overview-stat:has(.fi-color-danger)', $theme);
-        $this->assertStringContainsString('border-inline-start-width: 4px', $theme);
+        $this->assertStringContainsString('--ops-electric: #4f7cff;', $theme);
+        $this->assertStringContainsString('border-inline-start-width: 1px;', $theme);
+        $this->assertStringContainsString('background: var(--ops-bg-surface);', $theme);
 
         app()->setLocale('en');
         $this->assertStringContainsString(
@@ -113,9 +114,17 @@ final class OpsShellPolishTest extends TestCase
             $this->assertStringContainsString($token, $theme);
         }
 
-        foreach (['--ops-bg-telemetry: #111827;', '--ops-state-success-signal: #00ff66;', '--ops-border-strong: #b8c0cc;'] as $token) {
+        foreach (['--ops-bg-telemetry: #0a0e13;', '--ops-state-success-signal: #22d3ee;', '--ops-border-strong: #c2cad6;'] as $token) {
             $this->assertStringContainsString($token, $theme);
         }
+
+        foreach (['--ops-electric: #4f7cff;', '--ops-electric-solid: #3b63e6;', '--ops-sidebar-bg: #0a0e13;', '--ops-sidebar-text-active: #e6ecff;'] as $token) {
+            $this->assertStringContainsString($token, $theme);
+        }
+
+        $this->assertStringContainsString('background: var(--ops-sidebar-bg);', $theme);
+        $this->assertStringContainsString('box-shadow: inset 2px 0 0 var(--ops-electric);', $theme);
+        $this->assertStringContainsString('background: var(--ops-bg-editor);', $theme);
 
         $this->assertDoesNotMatchRegularExpression('/letter-spacing:\\s*-/', $theme);
         $this->assertDoesNotMatchRegularExpression('/border-radius:\\s*(1[0-9]|20)px;/', $theme);

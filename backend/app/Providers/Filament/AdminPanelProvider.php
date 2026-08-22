@@ -42,17 +42,17 @@ class AdminPanelProvider extends PanelProvider
                 'gray' => Color::Gray,
                 'info' => '#2563EB',
                 'primary' => [
-                    50 => '239, 246, 255',
-                    100 => '219, 234, 254',
-                    200 => '191, 219, 254',
-                    300 => '147, 197, 253',
-                    400 => '96, 165, 250',
-                    500 => '59, 130, 246',
-                    600 => '37, 99, 235',
-                    700 => '29, 78, 216',
-                    800 => '30, 64, 175',
-                    900 => '30, 58, 138',
-                    950 => '23, 37, 84',
+                    50 => '235, 241, 254',
+                    100 => '199, 214, 255',
+                    200 => '161, 183, 255',
+                    300 => '123, 153, 255',
+                    400 => '79, 124, 255',
+                    500 => '68, 108, 240',
+                    600 => '59, 99, 230',
+                    700 => '47, 84, 201',
+                    800 => '42, 75, 184',
+                    900 => '35, 61, 150',
+                    950 => '24, 42, 105',
                 ],
                 'success' => '#16A34A',
                 'warning' => '#D97706',
@@ -61,6 +61,9 @@ class AdminPanelProvider extends PanelProvider
             ->darkMode(false)
             ->defaultThemeMode(ThemeMode::Light)
             ->theme('ops-theme')
+            ->sidebarWidth('15.5rem')
+            ->collapsedSidebarWidth('4rem')
+            ->sidebarCollapsibleOnDesktop()
             ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
             ->globalSearchFieldSuffix('⌘K')
             ->discoverResources(in: app_path('Filament/Ops/Resources'), for: 'App\\Filament\\Ops\\Resources')
