@@ -949,7 +949,7 @@ final class PaymentRepairEngineTest extends TestCase
 
     private function insertReportUnlockOrder(string $orderNo, string $attemptId, string $anonId, int $orgId = 0): void
     {
-        $this->insertOrder($orderNo, 'MBTI_REPORT_FULL', $attemptId, $anonId, $orgId);
+        $this->insertOrder($orderNo, 'MBTI_REPORT_FULL_199', $attemptId, $anonId, $orgId);
     }
 
     private function insertOrder(string $orderNo, string $sku, ?string $attemptId, string $anonId, int $orgId = 0): void

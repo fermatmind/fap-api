@@ -145,10 +145,13 @@ final class RewardedAdUnlockContractTest extends TestCase
             ->assertJsonPath('report_access.full_report_entitlement_v1.unlock_source', 'rewarded_ad');
         $this->assertNotEmpty($completed->json('grant_id'));
         $this->assertSame(1, DB::table('benefit_grants')->where('attempt_id', $attemptId)->where('status', 'active')->count());
-        $this->assertStringContainsString(
-            '"unlock_source":"rewarded_ad"',
-            (string) DB::table('benefit_grants')->where('attempt_id', $attemptId)->value('meta_json')
+        $grantMeta = json_decode(
+            (string) DB::table('benefit_grants')->where('attempt_id', $attemptId)->value('meta_json'),
+            true,
+            512,
+            JSON_THROW_ON_ERROR
         );
+        $this->assertSame('rewarded_ad', $grantMeta['unlock_source'] ?? null);
 
         $this->withHeaders($headers)
             ->postJson('/api/v0.3/attempts/'.$attemptId.'/rewarded-ad-sessions/'.$sessionId.'/complete', [

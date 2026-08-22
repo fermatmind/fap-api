@@ -54,12 +54,34 @@ final class CareerFoundationSchemaTest extends TestCase
     public function immutable_chain_foreign_keys_do_not_use_cascade_delete(): void
     {
         foreach (['context_snapshots', 'profile_projections', 'projection_lineages', 'recommendation_snapshots', 'transition_paths'] as $table) {
-            $foreignKeys = DB::select("PRAGMA foreign_key_list('{$table}')");
+            $foreignKeys = $this->foreignKeysFor($table);
 
             foreach ($foreignKeys as $foreignKey) {
                 $this->assertNotSame('CASCADE', strtoupper((string) $foreignKey->on_delete), "Immutable table {$table} must not cascade delete");
             }
         }
+    }
+
+    /**
+     * @return list<object>
+     */
+    private function foreignKeysFor(string $table): array
+    {
+        if (DB::getDriverName() === 'sqlite') {
+            return DB::select("PRAGMA foreign_key_list('{$table}')");
+        }
+
+        return DB::select(
+            'select rc.DELETE_RULE as on_delete
+             from information_schema.KEY_COLUMN_USAGE kcu
+             join information_schema.REFERENTIAL_CONSTRAINTS rc
+               on rc.CONSTRAINT_SCHEMA = kcu.CONSTRAINT_SCHEMA
+              and rc.CONSTRAINT_NAME = kcu.CONSTRAINT_NAME
+             where kcu.CONSTRAINT_SCHEMA = database()
+               and kcu.TABLE_NAME = ?
+               and kcu.REFERENCED_TABLE_NAME is not null',
+            [$table],
+        );
     }
 
     #[Test]

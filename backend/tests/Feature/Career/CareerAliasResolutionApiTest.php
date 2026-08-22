@@ -85,7 +85,7 @@ final class CareerAliasResolutionApiTest extends TestCase
             ->assertJsonMissingPath('resolution.occupation.alias_url');
     }
 
-    public function test_it_returns_display_asset_backed_duplicate_alias_without_recommendation_snapshot(): void
+    public function test_it_rejects_display_asset_backed_duplicate_alias_without_recommendation_snapshot(): void
     {
         $occupation = $this->createDisplayAssetBackedOccupation(
             'food-scientists-and-technologists',
@@ -111,15 +111,10 @@ final class CareerAliasResolutionApiTest extends TestCase
 
         $this->getJson('/api/v0.5/career/resolve?q=agricultural-and-food-scientists&locale=en-US')
             ->assertOk()
-            ->assertJsonPath('resolution.resolved_kind', 'occupation')
-            ->assertJsonPath('resolution.occupation.canonical_slug', 'food-scientists-and-technologists')
-            ->assertJsonPath('resolution.occupation.seo_contract.canonical_path', '/career/jobs/food-scientists-and-technologists')
-            ->assertJsonPath('resolution.occupation.seo_contract.index_eligible', true)
-            ->assertJsonPath('resolution.occupation.trust_summary.reviewer_status', 'approved_display_asset')
-            ->assertJsonPath('resolution.occupation.trust_summary.review_state', 'unknown')
-            ->assertJsonPath('resolution.occupation.trust_summary.last_reviewed_at', null)
-            ->assertJsonPath('resolution.occupation.trust_summary.reviewer', null)
-            ->assertJsonMissingPath('resolution.occupation.alias_url');
+            ->assertJsonPath('resolution.resolved_kind', 'none')
+            ->assertJsonMissingPath('resolution.occupation')
+            ->assertJsonMissingPath('resolution.family')
+            ->assertJsonMissingPath('resolution.candidates');
     }
 
     public function test_it_rejects_blocked_duplicate_rows_without_materialized_alias(): void

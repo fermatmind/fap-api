@@ -26,8 +26,8 @@ final class ArticleBaselineImportTest extends TestCase
             '--source-dir' => '../content_baselines/articles',
         ])
             ->expectsOutputToContain('files_found=2')
-            ->expectsOutputToContain('articles_found=45')
-            ->expectsOutputToContain('will_create=45')
+            ->expectsOutputToContain('articles_found=51')
+            ->expectsOutputToContain('will_create=51')
             ->assertExitCode(0);
 
         $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
@@ -41,13 +41,13 @@ final class ArticleBaselineImportTest extends TestCase
             '--source-dir' => '../content_baselines/articles',
         ])
             ->expectsOutputToContain('files_found=2')
-            ->expectsOutputToContain('articles_found=45')
-            ->expectsOutputToContain('will_create=45')
+            ->expectsOutputToContain('articles_found=51')
+            ->expectsOutputToContain('will_create=51')
             ->assertExitCode(0);
 
-        $this->assertSame(45, Article::query()->withoutGlobalScopes()->count());
+        $this->assertSame(51, Article::query()->withoutGlobalScopes()->count());
         $this->assertSame(
-            45,
+            51,
             Article::query()
                 ->withoutGlobalScopes()
                 ->where('status', 'published')
@@ -121,11 +121,11 @@ final class ArticleBaselineImportTest extends TestCase
             '--status' => 'published',
             '--source-dir' => '../content_baselines/articles',
         ])
-            ->expectsOutputToContain('articles_found=45')
-            ->expectsOutputToContain('will_skip=45')
+            ->expectsOutputToContain('articles_found=51')
+            ->expectsOutputToContain('will_skip=51')
             ->assertExitCode(0);
 
-        $this->assertSame(45, Article::query()->withoutGlobalScopes()->count());
+        $this->assertSame(51, Article::query()->withoutGlobalScopes()->count());
     }
 
     public function test_upsert_republishes_existing_published_article_revision_from_baseline(): void

@@ -20,7 +20,6 @@ use App\Services\SEO\SitemapGenerator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
@@ -1930,12 +1929,12 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertOk()
             ->assertHeader('X-Fermat-Public-Read-Cache', 'miss');
 
-        DB::table('personality_profiles')->where('id', $profile->id)->update(['title' => "\xB1\x31"]);
-        $this->getJson('/api/v0.5/personality/intj-a?locale=en')
-            ->assertOk()
-            ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
-            ->assertJsonPath('profile.title', 'INTJ - Architect');
-        DB::table('personality_profiles')->where('id', $profile->id)->update(['title' => 'INTJ - Architect']);
+        $this->withUnavailableDatabase(function (): void {
+            $this->getJson('/api/v0.5/personality/intj-a?locale=en')
+                ->assertOk()
+                ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
+                ->assertJsonPath('profile.title', 'INTJ - Architect');
+        });
 
         $variant->update(['type_name' => 'Updated Architect Assertive']);
         $this->getJson('/api/v0.5/personality/intj-a?locale=en')
@@ -2068,20 +2067,19 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertOk()
             ->assertHeader('X-Fermat-Public-Read-Cache', 'fresh');
 
-        DB::table('personality_public_content_assets')
-            ->where('id', $bigFive->id)
-            ->update(['title' => "\xB1\x31"]);
         app(PersonalityPublicAssetReadModelCache::class)
             ->invalidateCollections('big_five', 'all', 'en', 0, true);
 
-        $this->getJson($bigFivePath)
-            ->assertOk()
-            ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
-            ->assertJsonPath('personality_public_content_asset_v1.title', 'Updated openness');
-        $this->getJson($bigFiveIndex)
-            ->assertOk()
-            ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
-            ->assertJsonPath('items.0.title', 'Updated openness');
+        $this->withUnavailableDatabase(function () use ($bigFivePath, $bigFiveIndex): void {
+            $this->getJson($bigFivePath)
+                ->assertOk()
+                ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
+                ->assertJsonPath('personality_public_content_asset_v1.title', 'Updated openness');
+            $this->getJson($bigFiveIndex)
+                ->assertOk()
+                ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
+                ->assertJsonPath('items.0.title', 'Updated openness');
+        });
 
         $bigFive->update(['is_public' => false]);
 
@@ -2195,15 +2193,15 @@ final class PersonalityPublicApiTest extends TestCase
         self::assertIsArray($initialPayload);
 
         $cache->invalidateCollections('big_five', 'all', 'en', 0, true);
-        Schema::drop('personality_public_content_assets');
+        $this->withUnavailableDatabase(function () use ($path, $initialPayload): void {
+            $this->getJson($path)
+                ->assertOk()
+                ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
+                ->assertExactJson($initialPayload);
 
-        $this->getJson($path)
-            ->assertOk()
-            ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
-            ->assertExactJson($initialPayload);
-
-        Cache::flush();
-        $this->getJson($path)->assertStatus(500);
+            Cache::flush();
+            $this->getJson($path)->assertStatus(500);
+        });
     }
 
     public function test_personality_asset_detail_uses_one_canonical_projection_within_payload_budget(): void
@@ -2430,26 +2428,25 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertJsonMissingPath('items.0.media')
             ->assertJsonMissingPath('items.0.seo.twitter_image_url');
 
-        DB::table('personality_public_content_assets')
-            ->where('id', $asset->id)
-            ->update(['title' => "\xB1\x31"]);
         $cache->invalidateCollections('big_five', 'all', 'en', 0, true);
 
-        $this->getJson($detailPath)
-            ->assertOk()
-            ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
-            ->assertJsonMissingPath('asset')
-            ->assertJsonMissingPath('personality_public_content_asset_v1.content_sections')
-            ->assertJsonMissingPath('personality_public_content_asset_v1.media')
-            ->assertJsonMissingPath('personality_public_content_asset_v1.seo.og_image_url')
-            ->assertJsonMissingPath('personality_public_content_asset_v2.title')
-            ->assertJsonMissingPath('personality_public_content_asset_v2.media_authority');
-        $this->getJson($indexPath)
-            ->assertOk()
-            ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
-            ->assertJsonMissingPath('items.0.content_sections')
-            ->assertJsonMissingPath('items.0.media')
-            ->assertJsonMissingPath('items.0.seo.twitter_image_url');
+        $this->withUnavailableDatabase(function () use ($detailPath, $indexPath): void {
+            $this->getJson($detailPath)
+                ->assertOk()
+                ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
+                ->assertJsonMissingPath('asset')
+                ->assertJsonMissingPath('personality_public_content_asset_v1.content_sections')
+                ->assertJsonMissingPath('personality_public_content_asset_v1.media')
+                ->assertJsonMissingPath('personality_public_content_asset_v1.seo.og_image_url')
+                ->assertJsonMissingPath('personality_public_content_asset_v2.title')
+                ->assertJsonMissingPath('personality_public_content_asset_v2.media_authority');
+            $this->getJson($indexPath)
+                ->assertOk()
+                ->assertHeader('X-Fermat-Public-Read-Cache', 'stale')
+                ->assertJsonMissingPath('items.0.content_sections')
+                ->assertJsonMissingPath('items.0.media')
+                ->assertJsonMissingPath('items.0.seo.twitter_image_url');
+        });
     }
 
     public function test_enneagram_authority_v2_detail_projection_busts_v1_only_cache_versions(): void
@@ -2627,6 +2624,24 @@ final class PersonalityPublicApiTest extends TestCase
             'contract_version' => PersonalityPublicContentAsset::CONTRACT_VERSION_V1,
             'published_at' => now()->subMinute(),
         ], $overrides));
+    }
+
+    private function withUnavailableDatabase(callable $callback): mixed
+    {
+        $defaultConnection = DB::getDefaultConnection();
+        $unavailableConnection = 'personality_public_assets_unavailable';
+        $connection = (array) config('database.connections.'.$defaultConnection);
+        $connection['host'] = '127.0.0.1';
+        $connection['port'] = 1;
+        config(['database.connections.'.$unavailableConnection => $connection]);
+        DB::setDefaultConnection($unavailableConnection);
+
+        try {
+            return $callback();
+        } finally {
+            DB::purge($unavailableConnection);
+            DB::setDefaultConnection($defaultConnection);
+        }
     }
 
     /**

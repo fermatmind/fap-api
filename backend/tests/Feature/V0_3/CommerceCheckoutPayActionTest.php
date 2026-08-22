@@ -582,8 +582,9 @@ final class CommerceCheckoutPayActionTest extends TestCase
 
         $orderNo = 'ord_lookup_alipay_payment_action_1';
         $anonId = 'anon_lookup_alipay_payment_action_1';
-        $this->insertAttempt('attempt_'.$orderNo, $anonId, 'zh-CN');
-        $this->insertPendingOrder($orderNo, 'alipay', $anonId, 'buyer-alipay@example.com');
+        $attemptId = (string) Str::uuid();
+        $this->insertAttempt($attemptId, $anonId, 'zh-CN');
+        $this->insertPendingOrder($orderNo, 'alipay', $anonId, 'buyer-alipay@example.com', $attemptId);
 
         $response = $this->postJson('/api/v0.3/orders/lookup', [
             'order_no' => $orderNo,
@@ -596,7 +597,7 @@ final class CommerceCheckoutPayActionTest extends TestCase
         $response->assertJsonPath('provider', 'alipay');
         $response->assertJsonPath('pay.type', 'html');
         $response->assertJsonPath('checkout_url', null);
-        $response->assertJsonPath('result_url', 'https://web.example.test/zh/result/attempt_'.$orderNo);
+        $response->assertJsonPath('result_url', 'https://web.example.test/zh/result/'.$attemptId);
         $this->assertNotSame('', (string) $response->json('payment_recovery_token'));
         $this->assertStringContainsString('/zh/pay/wait', (string) $response->json('wait_url'));
         $this->assertStringNotContainsString('paymentRecoveryToken=', (string) $response->json('pay.value'));
@@ -614,8 +615,9 @@ final class CommerceCheckoutPayActionTest extends TestCase
 
         $orderNo = 'ord_lookup_alipay_legacy_cache_1';
         $anonId = 'anon_lookup_alipay_legacy_cache_1';
-        $this->insertAttempt('attempt_'.$orderNo, $anonId, 'zh-CN');
-        $this->insertPendingOrder($orderNo, 'alipay', $anonId, 'buyer-legacy-cache@example.com');
+        $attemptId = (string) Str::uuid();
+        $this->insertAttempt($attemptId, $anonId, 'zh-CN');
+        $this->insertPendingOrder($orderNo, 'alipay', $anonId, 'buyer-legacy-cache@example.com', $attemptId);
 
         $legacyToken = 'token_legacy_payment_recovery_1';
         $legacyLaunchUrl = 'https://api.example.test/api/v0.3/orders/'.$orderNo
@@ -775,8 +777,13 @@ final class CommerceCheckoutPayActionTest extends TestCase
         return $this->withHeaders($headers)->postJson('/api/v0.3/orders/checkout', $payload);
     }
 
-    private function insertPendingOrder(string $orderNo, string $provider, string $anonId, ?string $email = null): void
-    {
+    private function insertPendingOrder(
+        string $orderNo,
+        string $provider,
+        string $anonId,
+        ?string $email = null,
+        ?string $targetAttemptId = null,
+    ): void {
         $now = now();
         $row = [
             'id' => (string) Str::uuid(),
@@ -799,7 +806,7 @@ final class CommerceCheckoutPayActionTest extends TestCase
             'device_id' => null,
             'request_id' => 'req_'.$orderNo,
             'created_ip' => null,
-            'target_attempt_id' => 'attempt_'.$orderNo,
+            'target_attempt_id' => $targetAttemptId ?? (string) Str::uuid(),
             'scale_code_v2' => null,
             'scale_uid' => null,
             'external_trade_no' => null,

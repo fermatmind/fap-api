@@ -37,9 +37,9 @@ final class CareerCmsPromotionAdapterTest extends TestCase
         $job = $this->job('first-job');
         $guidePackage = $this->package('guide', $guide);
         $jobPackage = $this->package('job', $job);
-        $guideContext = $this->context($guidePackage, 'W3', 'career-guides');
+        $guideContext = $this->context($guidePackage, 'W3', 'W3-CAREER-GUIDES');
         $jobContext = $this->context($jobPackage, 'W8', 'career-jobs');
-        $guides = app(PromotionAdapterRegistry::class)->resolve('W3', 'career-guides');
+        $guides = app(PromotionAdapterRegistry::class)->resolve('W3', 'W3-CAREER-GUIDES');
         $jobs = app(PromotionAdapterRegistry::class)->resolve('W8', 'career-jobs');
 
         self::assertSame('audit_compatible', $guides->capability());
@@ -82,14 +82,14 @@ final class CareerCmsPromotionAdapterTest extends TestCase
     public function test_career_packages_fail_closed_for_cross_lane_private_claim_and_cjk_input(): void
     {
         $guide = $this->guide('bounded-guide');
-        $adapter = app(PromotionAdapterRegistry::class)->resolve('W3', 'career-guides');
+        $adapter = app(PromotionAdapterRegistry::class)->resolve('W3', 'W3-CAREER-GUIDES');
         foreach ([
             [['snapshot' => ['title' => '中文']], 'career_promotion_cjk_leakage'],
-            [['snapshot' => ['body_md' => 'This guaranteed an outcome.']], 'career_promotion_claim_boundary_invalid'],
+            [['snapshot' => ['body_md' => 'This guaranteed outcome.']], 'career_promotion_claim_boundary_invalid'],
             [['snapshot' => ['body_md' => 'Read /checkout?token=private.']], 'career_promotion_private_payload_invalid'],
         ] as [$override, $error]) {
             try {
-                $adapter->preflight($this->context($this->package('guide', $guide, $override), 'W3', 'career-guides'));
+                $adapter->preflight($this->context($this->package('guide', $guide, $override), 'W3', 'W3-CAREER-GUIDES'));
                 self::fail('Invalid package must fail closed.');
             } catch (DomainException $exception) {
                 self::assertSame($error, $exception->getMessage());
@@ -141,7 +141,7 @@ final class CareerCmsPromotionAdapterTest extends TestCase
         $bytes = json_encode(['assets' => [$row]], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
         File::put($directory.'/assets.json', $bytes);
         $lane = $kind === 'guide' ? 'W3' : 'W8';
-        $subscope = $kind === 'guide' ? 'career-guides' : 'career-jobs';
+        $subscope = $kind === 'guide' ? 'W3-CAREER-GUIDES' : 'career-jobs';
         $manifest = ['schema_version' => 'fermatmind.career_cms_promotion.v2', 'lane' => $lane, 'subscope' => $subscope, 'locale' => 'en', 'permissions' => ['cms_draft_import' => false, 'public_publish' => false, 'indexability' => false, 'sitemap' => false, 'llms' => false, 'search' => false, 'deploy' => false], 'expected_row_count' => 1, 'payloads' => [['path' => 'assets.json', 'sha256' => hash('sha256', $bytes)]]];
         $packageSha = hash('sha256', hash('sha256', PromotionContextFactory::canonicalJson($manifest))."\nassets.json\n".hash('sha256', $bytes)."\n");
         $manifest['package_sha256'] = $packageSha;

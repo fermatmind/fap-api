@@ -288,13 +288,13 @@ final class PaymentWebhookProcessorAtomicityTest extends TestCase
         $seedCalls = 0;
         $snapshotStore->shouldReceive('seedPendingSnapshot')
             ->twice()
-            ->andReturnUsing(function (int $orgId, string $attemptIdArg, ?string $orderNoArg, array $meta) use (&$seedCalls, $realSnapshotStore): void {
+            ->andReturnUsing(function (int $orgId, string $attemptIdArg, ?string $orderNoArg, array $meta) use (&$seedCalls, $realSnapshotStore): bool {
                 $seedCalls++;
                 if ($seedCalls === 1) {
                     throw new \RuntimeException('simulated_seed_snapshot_failure');
                 }
 
-                $realSnapshotStore->seedPendingSnapshot($orgId, $attemptIdArg, $orderNoArg, $meta);
+                return $realSnapshotStore->seedPendingSnapshot($orgId, $attemptIdArg, $orderNoArg, $meta);
             });
         $this->app->instance(ReportSnapshotStore::class, $snapshotStore);
 

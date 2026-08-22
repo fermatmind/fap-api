@@ -639,7 +639,10 @@ final class ArticleImportLocalBaseline extends Command
         if (($article->cover_image_height !== null ? (int) $article->cover_image_height : null) !== ($desired['cover_image_height'] ?? null)) {
             return false;
         }
-        if (($article->cover_image_variants ?? null) !== ($desired['cover_image_variants'] ?? null)) {
+        if (! $this->sameJsonValue(
+            $article->cover_image_variants ?? null,
+            $desired['cover_image_variants'] ?? null,
+        )) {
             return false;
         }
         if ((string) ($article->related_test_slug ?? '') !== (string) ($desired['related_test_slug'] ?? '')) {
@@ -663,7 +666,10 @@ final class ArticleImportLocalBaseline extends Command
         if ($this->currentCategoryName($article) !== ($desired['category'] ?? null)) {
             return false;
         }
-        if ($this->currentTagNames($article) !== ($desired['tags'] ?? [])) {
+        if (! $this->sameStringSet(
+            $this->currentTagNames($article),
+            $desired['tags'] ?? [],
+        )) {
             return false;
         }
         if ((bool) $article->is_indexable !== (bool) $desired['is_indexable']) {
@@ -683,6 +689,44 @@ final class ArticleImportLocalBaseline extends Command
         $currentPublishedAt = $article->published_at?->copy()->utc()->toISOString();
 
         return $desiredPublishedAt === $currentPublishedAt;
+    }
+
+    private function sameJsonValue(mixed $current, mixed $desired): bool
+    {
+        return $this->canonicalizeJsonValue($current) === $this->canonicalizeJsonValue($desired);
+    }
+
+    /**
+     * @param  list<string>  $current
+     * @param  list<string>  $desired
+     */
+    private function sameStringSet(array $current, array $desired): bool
+    {
+        sort($current, SORT_STRING);
+        sort($desired, SORT_STRING);
+
+        return $current === $desired;
+    }
+
+    private function canonicalizeJsonValue(mixed $value): mixed
+    {
+        if (! is_array($value)) {
+            return $value;
+        }
+
+        if (array_is_list($value)) {
+            return array_map(
+                fn (mixed $item): mixed => $this->canonicalizeJsonValue($item),
+                $value,
+            );
+        }
+
+        ksort($value);
+
+        return array_map(
+            fn (mixed $item): mixed => $this->canonicalizeJsonValue($item),
+            $value,
+        );
     }
 
     /**

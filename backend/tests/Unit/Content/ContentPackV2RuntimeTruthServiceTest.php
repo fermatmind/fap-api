@@ -199,7 +199,7 @@ final class ContentPackV2RuntimeTruthServiceTest extends TestCase
             'compiled_hash' => $manifestHash,
             'content_hash' => hash('sha256', 'content|'.$manifestHash),
             'norms_version' => '2026Q1',
-            'source_commit' => 'git-'.$manifestHash,
+            'source_commit' => $manifestHash,
             'payload_json' => ['runtime_truth' => true],
             'sealed_at' => now(),
             'last_verified_at' => now(),

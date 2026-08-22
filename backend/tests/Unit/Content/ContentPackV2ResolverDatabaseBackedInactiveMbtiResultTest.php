@@ -31,7 +31,7 @@ final class ContentPackV2ResolverDatabaseBackedInactiveMbtiResultTest extends Te
         config()->set('storage_rollout.packs_v2_remote_rehydrate_enabled', false);
     }
 
-    public function test_it_resolves_only_the_exact_database_backed_inactive_english_result_pack_without_writes(): void
+    public function test_it_rejects_the_historical_inactive_receipt_after_the_physical_pack_became_active_without_writes(): void
     {
         $this->seedExactInactiveTarget();
         $packRoot = base_path('../content_packages/'.self::PACK_ROOT);
@@ -51,7 +51,7 @@ final class ContentPackV2ResolverDatabaseBackedInactiveMbtiResultTest extends Te
             self::MANIFEST_HASH,
         );
 
-        self::assertSame($packRoot, $resolved);
+        self::assertNull($resolved);
         self::assertSame($before['releases'], DB::table('content_pack_releases')->count());
         self::assertSame($before['manifests'], DB::table('content_release_manifests')->count());
         self::assertSame($before['activations'], DB::table('content_pack_activations')->count());

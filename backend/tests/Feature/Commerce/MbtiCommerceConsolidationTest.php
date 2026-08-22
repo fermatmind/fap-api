@@ -18,7 +18,7 @@ final class MbtiCommerceConsolidationTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_mbti_catalog_keeps_org_skus_but_public_endpoint_exposes_no_assessment_offer(): void
+    public function test_mbti_catalog_keeps_current_report_sku_but_public_endpoint_requires_locale_before_exposing_offer(): void
     {
         $this->seedScales();
 
@@ -31,7 +31,7 @@ final class MbtiCommerceConsolidationTest extends TestCase
             ->all();
 
         $this->assertNotContains('MBTI_REPORT_FULL', $catalogSkus);
-        $this->assertNotContains('MBTI_REPORT_FULL_199', $catalogSkus);
+        $this->assertContains('MBTI_REPORT_FULL_199', $catalogSkus);
         $this->assertNotContains('MBTI_CAREER_99', $catalogSkus);
         $this->assertNotContains('MBTI_RELATIONSHIP_99', $catalogSkus);
         $this->assertContains('MBTI_PRO_MONTH_599', $catalogSkus);
@@ -40,7 +40,10 @@ final class MbtiCommerceConsolidationTest extends TestCase
         $this->assertContains('MBTI_CREDIT', $catalogSkus);
 
         $response = $this->getJson('/api/v0.3/skus?scale=MBTI');
-        $response->assertOk()->assertJsonPath('ok', true);
+        $response->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('locale_freemium_policy.policy', 'locale_required')
+            ->assertJsonPath('locale_freemium_policy.paywall_allowed', false);
 
         $apiSkus = collect((array) $response->json('items'))
             ->map(fn (mixed $item): string => is_array($item) ? (string) ($item['sku'] ?? '') : '')
@@ -51,7 +54,7 @@ final class MbtiCommerceConsolidationTest extends TestCase
         $this->assertSame([], $apiSkus);
     }
 
-    public function test_mbti_report_is_full_free_without_offer(): void
+    public function test_chinese_mbti_report_exposes_the_current_paid_unlock_offer(): void
     {
         $this->seedScales();
 
@@ -66,15 +69,17 @@ final class MbtiCommerceConsolidationTest extends TestCase
 
         $response->assertOk()
             ->assertJsonPath('ok', true)
-            ->assertJsonPath('locked', false)
-            ->assertJsonPath('access_level', 'full')
-            ->assertJsonPath('variant', 'full')
-            ->assertJsonPath('access_source', 'scale_free_only')
-            ->assertJsonPath('paywall_suppressed', true)
-            ->assertJsonPath('upgrade_sku', null)
-            ->assertJsonPath('upgrade_sku_effective', null)
-            ->assertJsonPath('cta.visible', false)
-            ->assertJsonCount(0, 'offers');
+            ->assertJsonPath('locked', true)
+            ->assertJsonPath('access_level', 'free')
+            ->assertJsonPath('variant', 'free')
+            ->assertJsonPath('access_source', 'none')
+            ->assertJsonPath('paywall_suppressed', false)
+            ->assertJsonPath('upgrade_sku', 'MBTI_REPORT_FULL')
+            ->assertJsonPath('upgrade_sku_effective', 'MBTI_REPORT_FULL_199')
+            ->assertJsonPath('cta.visible', true)
+            ->assertJsonPath('locale_freemium_policy.policy', 'paid')
+            ->assertJsonPath('locale_freemium_policy.price_cents', 199)
+            ->assertJsonCount(1, 'offers');
 
         $offerSkus = collect((array) $response->json('offers'))
             ->map(fn (mixed $item): string => is_array($item) ? (string) ($item['sku'] ?? '') : '')
@@ -82,7 +87,7 @@ final class MbtiCommerceConsolidationTest extends TestCase
             ->values()
             ->all();
 
-        $this->assertSame([], $offerSkus);
+        $this->assertSame(['MBTI_REPORT_FULL_199'], $offerSkus);
     }
 
     private function seedScales(): void

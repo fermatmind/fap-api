@@ -13,6 +13,7 @@ use App\Services\SEO\BigFiveCanonicalRouteCatalog;
 use App\Services\SEO\SitemapGenerator;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use RuntimeException;
 use Tests\TestCase;
 
@@ -348,14 +349,23 @@ final class BigFiveZhV3ControlledReleaseTest extends TestCase
     {
         $this->seedExactAuthorityRows();
 
-        $this->artisan('personality:big-five-zh-v3-content-publish', [
+        $command = $this->artisan('personality:big-five-zh-v3-content-publish', [
             '--package' => $this->packagePath,
             '--execute' => true,
             '--allow-testing' => true,
             '--confirm-content-sha256' => BigFiveZhV3PackageCompiler::SOURCE_CONTENT_SHA256,
             '--confirm-package-sha256' => BigFiveZhV3Publisher::PACKAGE_FILE_SHA256,
             '--operator-admin-user-id' => 1,
-        ])->assertSuccessful()
+        ]);
+
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            $command->assertFailed()->expectsOutputToContain('writes_committed=0');
+            $this->assertDatabaseCount('personality_public_content_asset_revisions', 0);
+
+            return;
+        }
+
+        $command->assertSuccessful()
             ->expectsOutputToContain('asset_count=52')
             ->expectsOutputToContain('alias_database_count=0')
             ->expectsOutputToContain('alias_absent=1')

@@ -241,7 +241,7 @@ final class ReportGiftPurchaseContractTest extends TestCase
             ->count());
         $grant = DB::table('benefit_grants')->where('order_no', $orderNo)->first();
         $this->assertSame($recipientAnonId, (string) ($grant->benefit_ref ?? ''));
-        $this->assertStringContainsString('"unlock_source":"gift_purchase"', (string) ($grant->meta_json ?? ''));
+        $this->assertSame('gift_purchase', $this->grantMeta($grant)['unlock_source'] ?? null);
 
         app(WechatMiniVirtualPaymentService::class)
             ->handleCallback($this->signedCallbackRequest($callbackPayload));
@@ -348,8 +348,7 @@ final class ReportGiftPurchaseContractTest extends TestCase
         $this->assertSame(0, DB::table('benefit_grants')->where('order_no', $orderNo)->count());
         $this->assertSame(1, DB::table('benefit_grants')->where('attempt_id', $attemptId)->where('status', 'active')->count());
         $concurrentGrant = DB::table('benefit_grants')->where('attempt_id', $attemptId)->first();
-        $this->assertStringContainsString('"unlock_source":"self_purchase"', (string) ($concurrentGrant->meta_json ?? ''));
-        $this->assertStringNotContainsString('"unlock_source":"gift_purchase"', (string) ($concurrentGrant->meta_json ?? ''));
+        $this->assertSame('self_purchase', $this->grantMeta($concurrentGrant)['unlock_source'] ?? null);
 
         Http::fake([
             'https://api.weixin.qq.com/cgi-bin/token*' => Http::response([
@@ -414,10 +413,7 @@ final class ReportGiftPurchaseContractTest extends TestCase
         $this->assertNotNull($grant);
         $this->assertSame('active', (string) $grant->status);
         $this->assertSame($second['order_no'], (string) $grant->order_no);
-        $this->assertStringContainsString(
-            '"gift_request_id":"'.$second['gift_id'].'"',
-            (string) ($grant->meta_json ?? '')
-        );
+        $this->assertSame($second['gift_id'], $this->grantMeta($grant)['gift_request_id'] ?? null);
         $this->withHeaders($this->headersFor($recipientAnonId))
             ->getJson('/api/v0.3/attempts/'.$attemptId.'/report-access')
             ->assertOk()
@@ -460,7 +456,7 @@ final class ReportGiftPurchaseContractTest extends TestCase
             $attemptId,
             $selfOrderNo,
             'attempt',
-            now()->addHour()->toISOString(),
+            now()->addHour()->toDateTimeString(),
             [],
             ['unlock_source' => 'self_purchase']
         );
@@ -481,7 +477,7 @@ final class ReportGiftPurchaseContractTest extends TestCase
         $this->assertSame('active', (string) $grant->status);
         $this->assertSame($giftOrderNo, (string) $grant->order_no);
         $this->assertNull($grant->expires_at);
-        $this->assertStringContainsString('"unlock_source":"gift_purchase"', (string) ($grant->meta_json ?? ''));
+        $this->assertSame('gift_purchase', $this->grantMeta($grant)['unlock_source'] ?? null);
         $this->withHeaders($this->headersFor($recipientAnonId))
             ->getJson('/api/v0.3/attempts/'.$attemptId.'/report-access')
             ->assertOk()
@@ -840,7 +836,7 @@ final class ReportGiftPurchaseContractTest extends TestCase
             $attemptId,
             $selfOrderNo,
             'attempt',
-            now()->addHour()->toISOString(),
+            now()->addHour()->toDateTimeString(),
             [],
             ['unlock_source' => 'self_purchase']
         );
@@ -878,7 +874,7 @@ final class ReportGiftPurchaseContractTest extends TestCase
         $this->assertSame('active', (string) $grant->status);
         $this->assertSame($giftOrderNo, (string) $grant->order_no);
         $this->assertNull($grant->expires_at);
-        $this->assertStringContainsString('"unlock_source":"gift_purchase"', (string) $grant->meta_json);
+        $this->assertSame('gift_purchase', $this->grantMeta($grant)['unlock_source'] ?? null);
     }
 
     public function test_manual_benefit_revocation_does_not_mislabel_paid_gift_as_refunded(): void
@@ -1361,5 +1357,18 @@ final class ReportGiftPurchaseContractTest extends TestCase
             ['CONTENT_TYPE' => 'application/json'],
             json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR)
         );
+    }
+
+    /** @return array<string,mixed> */
+    private function grantMeta(object $grant): array
+    {
+        $meta = $grant->meta_json ?? null;
+        if (is_array($meta)) {
+            return $meta;
+        }
+
+        return is_string($meta) && trim($meta) !== ''
+            ? (array) json_decode($meta, true, 512, JSON_THROW_ON_ERROR)
+            : [];
     }
 }

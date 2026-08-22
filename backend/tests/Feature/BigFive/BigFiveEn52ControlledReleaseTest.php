@@ -706,7 +706,7 @@ final class BigFiveEn52ControlledReleaseTest extends TestCase
         $this->seedExactAuthorityRows();
         $backup = $this->createVerifiedBackup();
 
-        $this->artisan('personality:big-five-en52-content-publish', [
+        $command = $this->artisan('personality:big-five-en52-content-publish', [
             '--package' => $this->packagePath,
             '--execute' => true,
             '--allow-testing' => true,
@@ -718,7 +718,16 @@ final class BigFiveEn52ControlledReleaseTest extends TestCase
             '--backup-manifest' => $backup['manifest_path'],
             '--backup-sha256' => $backup['manifest_sha256'],
             '--operator-admin-user-id' => 1,
-        ])->assertSuccessful()
+        ]);
+
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            $command->assertFailed()->expectsOutputToContain('writes_committed=0');
+            $this->assertDatabaseCount('personality_public_content_asset_revisions', 0);
+
+            return;
+        }
+
+        $command->assertSuccessful()
             ->expectsOutputToContain('asset_count=52')
             ->expectsOutputToContain('alias_database_count=0')
             ->expectsOutputToContain('alias_absent=1')

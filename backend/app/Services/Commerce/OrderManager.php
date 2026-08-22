@@ -8,6 +8,9 @@ use App\Services\Email\EmailOutboxService;
 use App\Services\Payments\PaymentProviderRegistry;
 use App\Services\Report\ReportAccess;
 use App\Services\Scale\ScaleIdentityWriteProjector;
+use Carbon\CarbonImmutable;
+use DateTimeInterface;
+use DomainException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
@@ -1089,7 +1092,7 @@ class OrderManager
         string $orderNo,
         int $orgId,
         ?string $providerTradeNo = null,
-        ?string $eventAt = null,
+        string|DateTimeInterface|null $eventAt = null,
         ?string $paymentState = null
     ): void {
         $orderNo = trim($orderNo);
@@ -1097,7 +1100,7 @@ class OrderManager
             return;
         }
 
-        $eventTimestamp = ($eventAt !== null && trim($eventAt) !== '') ? $eventAt : now()->toDateTimeString();
+        $eventTimestamp = $this->normalizePaymentTimestamp($eventAt);
         $updates = [
             'updated_at' => now(),
             'last_payment_event_at' => $eventTimestamp,
@@ -1131,12 +1134,13 @@ class OrderManager
         string $orderNo,
         int $orgId,
         ?string $externalTradeNo = null,
-        ?string $paidAt = null
+        string|DateTimeInterface|null $paidAt = null
     ): array {
         $orderNo = trim($orderNo);
         if ($orderNo === '') {
             return $this->badRequest('ORDER_REQUIRED', 'order_no is required.');
         }
+        $paidTimestamp = $this->normalizePaymentTimestamp($paidAt);
 
         $order = DB::table('orders')
             ->where('order_no', $orderNo)
@@ -1153,8 +1157,8 @@ class OrderManager
         }
 
         if (in_array($fromStatus, ['paid', 'fulfilled'], true)) {
-            $this->touchPaymentLedger($orderNo, $orgId, $externalTradeNo, $paidAt, Order::PAYMENT_STATE_PAID);
-            $this->syncPurchasedInviteFromOrder($order, $paidAt);
+            $this->touchPaymentLedger($orderNo, $orgId, $externalTradeNo, $paidTimestamp, Order::PAYMENT_STATE_PAID);
+            $this->syncPurchasedInviteFromOrder($order, $paidTimestamp);
 
             return [
                 'ok' => true,
@@ -1172,13 +1176,13 @@ class OrderManager
             'status' => Order::STATUS_PAID,
             'payment_state' => Order::PAYMENT_STATE_PAID,
             'updated_at' => $now,
-            'last_payment_event_at' => ($paidAt !== null && $paidAt !== '') ? $paidAt : $now,
+            'last_payment_event_at' => $paidTimestamp,
             'closed_at' => null,
             'expired_at' => null,
         ];
 
         if (empty($order->paid_at)) {
-            $updates['paid_at'] = ($paidAt !== null && $paidAt !== '') ? $paidAt : $now;
+            $updates['paid_at'] = $paidTimestamp;
         }
 
         if ($externalTradeNo) {
@@ -1210,7 +1214,7 @@ class OrderManager
         }
 
         $order = DB::table('orders')->where('order_no', $orderNo)->where('org_id', $orgId)->first();
-        $this->syncPurchasedInviteFromOrder($order, $paidAt);
+        $this->syncPurchasedInviteFromOrder($order, $paidTimestamp);
 
         return [
             'ok' => true,
@@ -1721,7 +1725,7 @@ class OrderManager
         return array_replace($normalized, $this->normalizeAttribution($emailCapture));
     }
 
-    private function syncPurchasedInviteFromOrder(?object $order, ?string $paidAt): void
+    private function syncPurchasedInviteFromOrder(?object $order, string|DateTimeInterface|null $paidAt): void
     {
         if (! $order || ! Schema::hasTable('mbti_compare_invites')) {
             return;
@@ -1736,7 +1740,7 @@ class OrderManager
 
         $update = [
             'invitee_order_no' => $this->trimOrNull((string) ($order->order_no ?? '')),
-            'purchased_at' => $paidAt !== null && trim($paidAt) !== '' ? $paidAt : ($order->paid_at ?? now()),
+            'purchased_at' => $this->normalizePaymentTimestamp($paidAt ?? ($order->paid_at ?? null)),
             'status' => 'purchased',
             'updated_at' => now(),
         ];
@@ -1753,9 +1757,9 @@ class OrderManager
     private function ledgerUpdatesForTransition(string $toStatus, object $order, array $context): array
     {
         $updates = [];
-        $transitionedAt = $context['transitioned_at'] ?? now();
+        $transitionedAt = $this->normalizePaymentTimestamp($context['transitioned_at'] ?? null);
         $providerTradeNo = $this->trimOrNull($context['provider_trade_no'] ?? null);
-        $paymentEventAt = $this->trimOrNull($context['last_payment_event_at'] ?? null);
+        $paymentEventAt = $this->timestampOrNull($context['last_payment_event_at'] ?? null);
         $explicitPaymentState = isset($context['payment_state'])
             ? Order::normalizePaymentState((string) $context['payment_state'])
             : null;
@@ -1773,37 +1777,62 @@ class OrderManager
                 break;
             case Order::STATUS_PAID:
                 $updates['payment_state'] = $explicitPaymentState ?? Order::PAYMENT_STATE_PAID;
-                $updates['paid_at'] = $context['paid_at'] ?? ($order->paid_at ?? $transitionedAt);
+                $updates['paid_at'] = $this->normalizePaymentTimestamp($context['paid_at'] ?? ($order->paid_at ?? $transitionedAt));
                 $updates['closed_at'] = null;
                 $updates['expired_at'] = null;
                 $updates['grant_state'] = $this->resolvedGrantState($order);
                 break;
             case Order::STATUS_FULFILLED:
                 $updates['payment_state'] = $explicitPaymentState ?? Order::PAYMENT_STATE_PAID;
-                $updates['fulfilled_at'] = $order->fulfilled_at ?? $transitionedAt;
+                $updates['fulfilled_at'] = $this->normalizePaymentTimestamp($order->fulfilled_at ?? $transitionedAt);
                 break;
             case Order::STATUS_FAILED:
                 $updates['payment_state'] = $explicitPaymentState ?? Order::PAYMENT_STATE_FAILED;
                 break;
             case Order::STATUS_CANCELED:
                 $updates['payment_state'] = $explicitPaymentState ?? Order::PAYMENT_STATE_CANCELED;
-                $updates['closed_at'] = $context['closed_at'] ?? $transitionedAt;
+                $updates['closed_at'] = $this->normalizePaymentTimestamp($context['closed_at'] ?? $transitionedAt);
                 if (($updates['payment_state'] ?? null) === Order::PAYMENT_STATE_EXPIRED) {
-                    $updates['expired_at'] = $context['expired_at'] ?? $transitionedAt;
+                    $updates['expired_at'] = $this->normalizePaymentTimestamp($context['expired_at'] ?? $transitionedAt);
                 }
                 break;
             case 'expired':
                 $updates['payment_state'] = $explicitPaymentState ?? Order::PAYMENT_STATE_EXPIRED;
-                $updates['expired_at'] = $context['expired_at'] ?? $transitionedAt;
-                $updates['closed_at'] = $context['closed_at'] ?? $order->closed_at ?? null;
+                $updates['expired_at'] = $this->normalizePaymentTimestamp($context['expired_at'] ?? $transitionedAt);
+                $updates['closed_at'] = $this->timestampOrNull($context['closed_at'] ?? ($order->closed_at ?? null));
                 break;
             case Order::STATUS_REFUNDED:
                 $updates['payment_state'] = $explicitPaymentState ?? Order::PAYMENT_STATE_REFUNDED;
-                $updates['refunded_at'] = $context['refunded_at'] ?? ($order->refunded_at ?? $transitionedAt);
+                $updates['refunded_at'] = $this->normalizePaymentTimestamp($context['refunded_at'] ?? ($order->refunded_at ?? $transitionedAt));
                 break;
         }
 
         return $updates;
+    }
+
+    private function timestampOrNull(mixed $value): ?CarbonImmutable
+    {
+        if ($value === null || (is_string($value) && trim($value) === '')) {
+            return null;
+        }
+
+        return $this->normalizePaymentTimestamp($value);
+    }
+
+    private function normalizePaymentTimestamp(mixed $value): CarbonImmutable
+    {
+        if ($value === null || (is_string($value) && trim($value) === '')) {
+            return CarbonImmutable::now('UTC');
+        }
+        if (! is_string($value) && ! $value instanceof DateTimeInterface) {
+            throw new DomainException('payment_timestamp_invalid');
+        }
+
+        try {
+            return CarbonImmutable::parse($value)->utc();
+        } catch (\Throwable $exception) {
+            throw new DomainException('payment_timestamp_invalid', previous: $exception);
+        }
     }
 
     private function isDeliveryEligibleOrder(object $order): bool

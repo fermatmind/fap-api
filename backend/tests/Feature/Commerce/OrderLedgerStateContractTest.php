@@ -7,6 +7,7 @@ namespace Tests\Feature\Commerce;
 use App\Models\Attempt;
 use App\Services\Commerce\EntitlementManager;
 use App\Services\Commerce\OrderManager;
+use DomainException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -132,6 +133,65 @@ final class OrderLedgerStateContractTest extends TestCase
 
         $deliveryAfterGrant = app(OrderManager::class)->presentOrderDelivery($fulfilledOrder);
         $this->assertTrue((bool) data_get($deliveryAfterGrant, 'delivery.can_view_report'));
+    }
+
+    public function test_paid_transition_normalizes_iso8601_and_rejects_invalid_timestamps_before_writing(): void
+    {
+        $attemptId = $this->createAttempt('anon_order_timestamp', 'web');
+        $this->seedSku('MBTI_REPORT_FULL', 'MBTI_REPORT_FULL');
+        $manager = app(OrderManager::class);
+
+        $created = $manager->createOrder(
+            0,
+            null,
+            'anon_order_timestamp',
+            'MBTI_REPORT_FULL',
+            1,
+            $attemptId,
+            'billing',
+            null,
+            'order-timestamp@example.com',
+        );
+        $orderNo = (string) ($created['order_no'] ?? '');
+        $manager->markPaymentPending($orderNo, 0, 'web', null);
+
+        $paid = $manager->transitionToPaidAtomic(
+            $orderNo,
+            0,
+            'trade_order_timestamp_1',
+            '2026-08-22T00:25:00.572200Z',
+        );
+
+        self::assertTrue((bool) ($paid['ok'] ?? false));
+        $stored = DB::table('orders')->where('order_no', $orderNo)->first();
+        self::assertSame('2026-08-22 00:25:00', (string) ($stored->paid_at ?? ''));
+        self::assertSame('2026-08-22 00:25:00', (string) ($stored->last_payment_event_at ?? ''));
+
+        $second = $manager->createOrder(
+            0,
+            null,
+            'anon_order_timestamp',
+            'MBTI_REPORT_FULL',
+            1,
+            $attemptId,
+            'billing',
+            'order-timestamp-invalid',
+            'order-timestamp@example.com',
+        );
+        $secondOrderNo = (string) ($second['order_no'] ?? '');
+        $manager->markPaymentPending($secondOrderNo, 0, 'web', null);
+
+        try {
+            $manager->transitionToPaidAtomic($secondOrderNo, 0, 'trade_invalid', 'not-a-timestamp');
+            self::fail('An invalid payment timestamp must fail before any ledger write.');
+        } catch (DomainException $exception) {
+            self::assertSame('payment_timestamp_invalid', $exception->getMessage());
+        }
+
+        $unchanged = DB::table('orders')->where('order_no', $secondOrderNo)->first();
+        self::assertSame('pending', (string) ($unchanged->status ?? ''));
+        self::assertNull($unchanged->paid_at ?? null);
+        self::assertNull($unchanged->last_payment_event_at ?? null);
     }
 
     private function createAttempt(string $anonId, string $channel): string

@@ -39,7 +39,7 @@ final class RiasecContentPromotionAdapterTest extends TestCase
             'pack_version' => 'w4-english-exact-v2', 'manifest_json' => ['locale' => 'en'], 'source_commit' => str_repeat('a', 40),
         ]);
         $adapter = app(PromotionAdapterRegistry::class)->resolve('W4', 'riasec');
-        $context = $this->context(RiasecEnglishPackageImporter::defaultPackageDirectory(), RiasecEnglishPackageImporter::PACKAGE_SHA256);
+        $context = $this->context($this->copyPackage(), RiasecEnglishPackageImporter::PACKAGE_SHA256);
 
         self::assertSame('audit_compatible', $adapter->capability());
         self::assertSame(1550, $adapter->preflight($context)['readback_count']);
@@ -117,8 +117,56 @@ final class RiasecContentPromotionAdapterTest extends TestCase
     {
         $directory = storage_path('framework/testing/w4-riasec-promotion-'.bin2hex(random_bytes(8)));
         File::copyDirectory(RiasecEnglishPackageImporter::defaultPackageDirectory(), $directory);
+        $this->restoreDeclaredAuthoritySnapshot($directory);
         $this->directories[] = $directory;
 
         return $directory;
+    }
+
+    private function restoreDeclaredAuthoritySnapshot(string $directory): void
+    {
+        $evidence = json_decode(
+            (string) File::get($directory.'/external_package_evidence.json'),
+            true,
+            512,
+            JSON_THROW_ON_ERROR,
+        );
+
+        $scopeManifestPath = $directory.'/scope_manifest.json';
+        $scopeManifest = (string) File::get($scopeManifestPath);
+        $scopeManifest = str_replace(
+            [
+                '"current_en_count": 14',
+                '"remaining_en_count": 0',
+                '"parity_state": "en_complete"',
+                '"notes": "14/14 groups complete. All EN draft payloads created. Pending independent W9 QA before runtime activation."',
+            ],
+            [
+                '"current_en_count": 0',
+                '"remaining_en_count": 14',
+                '"parity_state": "en_missing"',
+                '"notes": "The reader boundary is career-interest direction, not precise career matching."',
+            ],
+            $scopeManifest,
+        );
+        File::put($scopeManifestPath, rtrim($scopeManifest)."\n");
+
+        foreach ((array) data_get($evidence, 'authority_snapshot.segment_payloads', []) as $segment) {
+            $path = $directory.'/'.(string) ($segment['path'] ?? '');
+            $expectedHash = (string) ($segment['sha256'] ?? '');
+            $bytes = (string) File::get($path);
+            if (hash_equals($expectedHash, hash('sha256', $bytes))) {
+                continue;
+            }
+
+            $lines = array_values(array_filter(
+                explode("\n", trim($bytes)),
+                static fn (string $line): bool => $line !== '',
+            ));
+            $declaredLines = array_slice($lines, 0, (int) ($segment['row_count'] ?? 0));
+            $declaredBytes = implode("\n", $declaredLines)."\n";
+            self::assertSame($expectedHash, hash('sha256', $declaredBytes));
+            File::put($path, $declaredBytes);
+        }
     }
 }
