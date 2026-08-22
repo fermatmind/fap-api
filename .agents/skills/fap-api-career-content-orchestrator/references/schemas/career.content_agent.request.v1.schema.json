@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fermatmind.com/schemas/career.content_agent.request.v1.schema.json",
+  "title": "Career Content Agent request v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "batch_id", "slugs", "locales", "markets", "jurisdictions", "research_as_of", "source_policy_version", "risk_class", "authorized_content_scope", "output_root", "execution_limits"],
+  "properties": {
+    "contract_version": {"const": "career.content_agent.request.v1"},
+    "batch_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,127}$"},
+    "slugs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"}},
+    "locales": {"type": "array", "minItems": 2, "maxItems": 2, "uniqueItems": true, "items": {"enum": ["en", "zh-CN"]}},
+    "markets": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^(?:[A-Z]{2}|GLOBAL)$"}},
+    "jurisdictions": {
+      "type": "object", "additionalProperties": false, "required": ["primary", "comparison"],
+      "properties": {
+        "primary": {"$ref": "#/$defs/jurisdiction"},
+        "comparison": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/jurisdiction"}}
+      }
+    },
+    "research_as_of": {"type": "string", "format": "date"},
+    "source_policy_version": {"const": "career.source-policy.v1"},
+    "risk_class": {
+      "type": "object", "additionalProperties": false, "required": ["batch_max", "by_slug"],
+      "properties": {
+        "batch_max": {"$ref": "#/$defs/risk"},
+        "by_slug": {
+          "type": "array", "minItems": 1,
+          "items": {
+            "type": "object", "additionalProperties": false, "required": ["slug", "class"],
+            "properties": {"slug": {"type": "string"}, "class": {"$ref": "#/$defs/risk"}}
+          }
+        }
+      }
+    },
+    "authorized_content_scope": {
+      "type": "object", "additionalProperties": false, "required": ["mode", "modules", "slugs", "locales", "markets"],
+      "properties": {
+        "mode": {"enum": ["research_only", "candidate_generation", "c3_6c_single_slug", "c3_6d_batch"]},
+        "modules": {"type": "array", "minItems": 10, "maxItems": 10, "uniqueItems": true, "items": {"enum": ["identity", "definition", "salary", "geo", "ai-impact", "fit-personality", "risk", "compare-links", "faq", "page-meta"]}},
+        "slugs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+        "locales": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["en", "zh-CN"]}},
+        "markets": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}}
+      }
+    },
+    "output_root": {"type": "string", "minLength": 1},
+    "execution_limits": {
+      "type": "object", "additionalProperties": false,
+      "required": ["max_requests_total", "max_requests_per_source", "max_retries_per_request", "max_wall_time_seconds", "max_token_units", "max_external_spend_amount", "cost_currency", "review_due_soon_days"],
+      "properties": {
+        "max_requests_total": {"type": "integer", "minimum": 0},
+        "max_requests_per_source": {"type": "integer", "minimum": 0},
+        "max_retries_per_request": {"type": "integer", "minimum": 0},
+        "max_wall_time_seconds": {"type": "integer", "minimum": 0},
+        "max_token_units": {"type": "integer", "minimum": 0},
+        "max_external_spend_amount": {"type": "number", "minimum": 0},
+        "cost_currency": {"type": "string", "pattern": "^[A-Z]{3}$"},
+        "review_due_soon_days": {"type": "integer", "minimum": 0}
+      }
+    }
+  },
+  "$defs": {
+    "risk": {"enum": ["standard", "regulated", "ymyl_high"]},
+    "jurisdiction": {
+      "type": "object", "additionalProperties": false, "required": ["code", "status"],
+      "properties": {"code": {"type": "string", "pattern": "^(?:[A-Z]{2}|GLOBAL|UNKNOWN)$"}, "status": {"enum": ["known", "unknown"]}}
+    }
+  }
+}

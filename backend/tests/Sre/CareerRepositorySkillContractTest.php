@@ -43,6 +43,17 @@ final class CareerRepositorySkillContractTest extends TestCase
         self::assertStringContainsString('fap-api-career-release-authority', $builder.$orchestrator);
         self::assertStringContainsString('fap-api-deploy-sre', $orchestrator);
         self::assertStringContainsString('approved 1046 zh-CN master', $editorial);
+        self::assertStringContainsString('content-agent-execution-contract.md', $orchestrator);
+        self::assertStringContainsString('gates-risk-lifecycle.md', $producer.$orchestrator.$editorial.$builder);
+        self::assertFileExists(
+            $root.'fap-api-career-content-orchestrator/scripts/validate_content_agent_contract.py',
+        );
+        self::assertFileExists(
+            $root.'fap-api-career-content-orchestrator/references/schemas/career.content_agent.request.v1.schema.json',
+        );
+        self::assertFileExists(
+            $root.'fap-api-career-content-orchestrator/references/schemas/career.content_agent.receipt.v1.schema.json',
+        );
         self::assertStringContainsString('advisory_only', (string) file_get_contents(
             $root.'fermatmind-career-editorial-qa/scripts/ai_trace_probe.py',
         ));

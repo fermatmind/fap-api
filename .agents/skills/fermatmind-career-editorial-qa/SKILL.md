@@ -9,6 +9,8 @@ Review only new Career content or content the user explicitly authorized to chan
 
 Read [references/review-rubric.md](references/review-rubric.md) for the claim and quality rubric. The optional `scripts/ai_trace_probe.py` is a deterministic style signal, not a truth, evidence, visibility, or release gate.
 
+For Career Content Agent execution, apply the orchestrator's [five-gate contract](../fap-api-career-content-orchestrator/references/gates-risk-lifecycle.md): `WARN` and `BLOCKED` are terminal, and `ymyl_high` QA PASS becomes `MANUAL_REVIEW_REQUIRED`. QA never starts an automatic rewrite or authorizes the adapter, compiler, publication, or deployment.
+
 ## Review workflow
 
 1. Lock the reviewed artifact, locale, source set, and authorized edit scope.

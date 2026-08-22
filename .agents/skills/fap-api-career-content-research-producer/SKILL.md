@@ -7,6 +7,8 @@ description: Research new or explicitly authorized fap-api Career content from p
 
 Produce a research candidate, never Career authority. Use this Skill only for a named new Career cohort, an explicitly authorized content update, or a research-only package.
 
+When invoked by Career Content Agent execution, first read the orchestrator's [locked request contract](../fap-api-career-content-orchestrator/references/content-agent-execution-contract.md) and [five-gate contract](../fap-api-career-content-orchestrator/references/gates-risk-lifecycle.md). Those references exclusively own locale/market/jurisdiction separation, risk, budgets, lifecycle, transition, and receipt rules; this Skill owns research-package production only.
+
 ## Required input
 
 Fail closed unless the caller supplies every field:

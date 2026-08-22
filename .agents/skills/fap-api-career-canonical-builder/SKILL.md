@@ -25,6 +25,8 @@ Do not use it to publish, deploy, write CMS/database/cache state, render fronten
 
 Read [references/current-contract.md](references/current-contract.md) before compiling or changing the builder boundary.
 
+For Career Content Agent execution, also read the orchestrator's [Gate 4 contract](../fap-api-career-content-orchestrator/references/gates-risk-lifecycle.md). Run only the existing real single-slug dry compile, return its bound digest and zero-write evidence, and never expose its internal eligibility signal as Agent publication authority.
+
 ## Workflow
 
 1. Read repository rules and identify the exact source root, lookup JSON, evidence root, and baseline Current package.

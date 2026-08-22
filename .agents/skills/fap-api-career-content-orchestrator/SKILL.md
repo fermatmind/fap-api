@@ -9,18 +9,17 @@ Coordinate one explicit, reversible Career content batch. This skill routes work
 
 ## Inputs and output
 
-Require an explicit cohort or slug list, locale scope, source/evidence identity, intended change type, and acceptance condition. Produce a bounded handoff containing input hashes, dry-compile receipt, package diff, QA result, changed paths, and the next repository route.
+For Career Content Agent execution, require a machine-valid `career.content_agent.request.v1` and read [references/content-agent-execution-contract.md](references/content-agent-execution-contract.md). The request locks slug, locale, market, jurisdiction, risk, content scope, output root, research date, source policy, and execution limits before any work. Produce `career.content_agent.receipt.v1`; it is evidence only and grants no release permission.
 
 Do not treat a local state file, candidate PASS, package generation, database record, HTTP 200, or completed QA as production publication.
 
 ## Sequence
 
-1. Confirm the batch scope and preserve approved source copy outside the task.
-2. Use `fap-api-career-canonical-builder` for deterministic dry compile and package diff.
-3. Use `fermatmind-career-editorial-qa` only when the task creates content, changes authorized content, translates content, updates evidence, or performs SEO/editorial optimization.
-4. Stop the candidate on real source, evidence, schema, locale, component, link, or hash blockers. Report the blocker; do not start an automatic rewrite cycle.
-5. Route an approved Current package or Career release change to `fap-api-career-release-authority`.
-6. Deliver the scoped repository change through the normal trunk contract. Use `fap-api-deploy-sre` to follow the exact SHA; the repository classifier decides deploy-skip versus the applicable deployment path.
+1. Validate and hash the locked request with `scripts/validate_content_agent_contract.py`.
+2. Follow the non-skippable five-gate state machine in [references/gates-risk-lifecycle.md](references/gates-risk-lifecycle.md). Only a gate PASS advances; WARN, BLOCKED, manual review, or budget exhaustion stops the chain.
+3. Use the existing research producer, editorial QA, C3.6A-R evidence adapter, and canonical-builder dry compile. Never repair or rewrite a failed candidate automatically.
+4. Validate the final receipt against its schema and the original request. A receipt remains a candidate handoff and cannot call release authority, publisher, deploy, CMS, database/cache, or discoverability systems.
+5. If this contract itself changes in the repository, use `fap-api-deploy-sre` only to follow the pushed exact SHA and classifier-selected deploy-skip receipt. This is delivery observation, never an Agent gate or deploy authorization.
 
 ## Change routing
 
@@ -39,7 +38,8 @@ Do not treat a local state file, candidate PASS, package generation, database re
 - Do not equate QA or Skill PASS with production.
 - Do not create another release guard, workflow, SEO submission path, agent definition, or frontend template.
 - Do not modify the approved 1046 zh-CN master or `career-en-translation` unless the task explicitly scopes that authority.
+- Do not infer locale, market, or jurisdiction from one another. Do not use observation timestamps, latency, token usage, or cost in deterministic business artifact hashes.
 
 ## Handoff contract
 
-Report the exact cohort and locale, source/evidence/package hashes, dry-compile and QA results, package diff, changed paths, selected release lane, exact commit SHA, CI/deploy receipt, and any real blocker. State every content, publisher, CMS/database/cache, and discoverability mutation that was intentionally not performed.
+Report the exact cohort, locale, market, jurisdiction, risk, request/inventory/source-policy hashes, five gate states, lifecycle summary, deterministic candidate/evidence/dry-compile hashes, resource observations, and any real blocker. State `publication_authorized=false`, `current_replacement_authorized=false`, `deploy_authorized=false`, and `search_submission_authorized=false` plus every content, publisher, CMS/database/cache, and discoverability mutation intentionally not performed.
