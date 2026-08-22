@@ -19,7 +19,8 @@ Do not treat a local state file, candidate PASS, package generation, database re
 2. Follow the non-skippable five-gate state machine in [references/gates-risk-lifecycle.md](references/gates-risk-lifecycle.md). Only a gate PASS advances; WARN, BLOCKED, manual review, or budget exhaustion stops the chain.
 3. Use the existing research producer, editorial QA, C3.6A-R evidence adapter, and canonical-builder dry compile. Never repair or rewrite a failed candidate automatically.
 4. Validate the final receipt against its schema and the original request. A receipt remains a candidate handoff and cannot call release authority, publisher, deploy, CMS, database/cache, or discoverability systems.
-5. If this contract itself changes in the repository, use `fap-api-deploy-sre` only to follow the pushed exact SHA and classifier-selected deploy-skip receipt. This is delivery observation, never an Agent gate or deploy authorization.
+5. Execute the locked state machine with `scripts/run_career_content_agent.py`; read [references/agent-harness.md](references/agent-harness.md) for its command and checkpoint contract.
+6. If this contract itself changes in the repository, use `fap-api-deploy-sre` only to follow the pushed exact SHA and classifier-selected deploy-skip receipt. This is delivery observation, never an Agent gate or deploy authorization.
 
 ## Change routing
 
@@ -36,7 +37,7 @@ Do not treat a local state file, candidate PASS, package generation, database re
 - Do not use local desktop task-runner paths as runtime authority.
 - Do not require legacy readiness labels, chat acknowledgements, recurring schedules, or automatic rewrite loops.
 - Do not equate QA or Skill PASS with production.
-- Do not create another release guard, workflow, SEO submission path, agent definition, or frontend template.
+- This Skill may own exactly one controlled Agent profile at `agents/openai.yaml`. Do not create a second Career Content Agent, publishing Agent, automation Agent, release guard, workflow, SEO submission path, or frontend template.
 - Do not modify the approved 1046 zh-CN master or `career-en-translation` unless the task explicitly scopes that authority.
 - Do not infer locale, market, or jurisdiction from one another. Do not use observation timestamps, latency, token usage, or cost in deterministic business artifact hashes.
 

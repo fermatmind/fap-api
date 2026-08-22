@@ -49,6 +49,14 @@ final class CareerRepositorySkillContractTest extends TestCase
             $root.'fap-api-career-content-orchestrator/scripts/validate_content_agent_contract.py',
         );
         self::assertFileExists(
+            $root.'fap-api-career-content-orchestrator/scripts/run_career_content_agent.py',
+        );
+        self::assertFileExists(
+            $root.'fap-api-career-content-orchestrator/agents/openai.yaml',
+        );
+        self::assertStringContainsString('scripts/run_career_content_agent.py', $orchestrator);
+        self::assertStringContainsString('exactly one controlled Agent profile', $orchestrator);
+        self::assertFileExists(
             $root.'fap-api-career-content-orchestrator/references/schemas/career.content_agent.request.v1.schema.json',
         );
         self::assertFileExists(
