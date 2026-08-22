@@ -6,6 +6,7 @@ import fcntl
 import hashlib
 import importlib.util
 import json
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -64,6 +65,10 @@ class CareerContentAgentHarnessTest(unittest.TestCase):
 
     def make_package(self, *, valid_through: str = "2027-12-31", superseding_version: str | None = None) -> None:
         self.package.mkdir(exist_ok=True)
+        career = self.package / "careers" / "health-educators"
+        career.mkdir(parents=True, exist_ok=True)
+        for name in runner.MODULE_FILES:
+            write_json(career / name, {"slug": "health-educators", "module": name.removesuffix(".json")})
         source = {"source_key": "official.fixture", "valid_through": valid_through, "source_version": "v1", "compiler_metadata": {"market": "CN", "locale": "zh-CN"}}
         if superseding_version:
             source["superseding_version"] = superseding_version
@@ -74,17 +79,26 @@ class CareerContentAgentHarnessTest(unittest.TestCase):
             {"slug": "health-educators", "locale": "zh-CN", "jurisdiction": "CN", "source_keys": ["official.fixture"], "module": "ai-impact", "compiler_disposition": "not_compiler_mapped", "compiler_unmapped_reason": "AI unsupported"},
         ]
         (self.package / "claim-bindings.jsonl").write_text("".join(json.dumps(row, sort_keys=True) + "\n" for row in claims), encoding="utf-8")
+        write_json(self.package / "module-coverage.json", {"modules": 10})
+        write_json(self.package / "unresolved-claims.json", [])
+        candidate_rows = [
+            {"path": path.relative_to(self.package).as_posix(), "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
+            for path in sorted(career.iterdir())
+        ]
         write_json(self.package / "research-receipt.json", {
             "counts": {"expired_source_count": int(valid_through < "2026-08-22"), "unresolved_count": 0},
-            "hashes": {"candidate_tree_sha256": hashlib.sha256(b"candidate").hexdigest()},
+            "hashes": {"candidate_tree_sha256": runner.hash_value(candidate_rows)},
             "slugs": ["health-educators"], "locales": ["en", "zh-CN"],
             "jurisdiction": {"primary": "CN", "comparison": ["US"]},
             "research_as_of": "2026-08-22", "source_policy_version": "career.source-policy.v1",
+            "validator_version": "career.research-package-validator.v1",
+            "authorized_content_scope": "research_only",
+            "content_agent_binding": {"mode": "c3_6c_single_slug", "modules": self.request["authorized_content_scope"]["modules"], "slugs": ["health-educators"], "locales": ["en", "zh-CN"], "markets": ["CN", "US"], "jurisdictions": self.request["jurisdictions"]},
             "output_root": str(self.output.resolve()),
         })
 
     def research_report(self, *, ok: bool = True, modules: int = 10) -> dict[str, object]:
-        return {"ok": ok, "counts": {"modules": modules, "sources": 1, "claims": 3, "expired_sources": 0}, "errors": [] if ok else ["fixture_error"], "warnings": []}
+        return {"ok": ok, "validator_version": "career.research-package-validator.v1", "counts": {"modules": modules, "sources": 1, "claims": 3, "expired_sources": 0}, "errors": [] if ok else ["fixture_error"], "warnings": []}
 
     def fake_process(self, command: list[str], cwd: Path | None = None) -> tuple[int, dict[str, object]]:
         if str(runner.RESEARCH_VALIDATOR) in command:
@@ -165,8 +179,160 @@ class CareerContentAgentHarnessTest(unittest.TestCase):
         receipt = read_json(self.package / "research-receipt.json"); receipt["locales"] = ["en", "fr"]
         write_json(self.package / "research-receipt.json", receipt); self.init()
         with mock.patch.object(runner, "run_process_json", side_effect=self.fake_process):
-            with self.assertRaisesRegex(runner.AgentError, "research_request_binding_mismatch"):
-                runner.record_research(self.output, self.package, self.observations)
+            result = runner.record_research(self.output, self.package, self.observations)
+        self.assertEqual(("BLOCKED_RESEARCH", "research_authorized_scope_mismatch"), (result["state"], result["blocker"]))
+
+    def test_receipt_extra_slug_is_blocked_exactly(self) -> None:
+        receipt = read_json(self.package / "research-receipt.json")
+        receipt["slugs"].append("accountants-and-auditors")
+        write_json(self.package / "research-receipt.json", receipt)
+        self.init()
+        self.assertEqual("research_authorized_scope_mismatch", self.research()["blocker"])
+
+    def test_receipt_missing_slug_is_blocked_exactly(self) -> None:
+        receipt = read_json(self.package / "research-receipt.json")
+        receipt["slugs"] = []
+        write_json(self.package / "research-receipt.json", receipt)
+        self.init()
+        self.assertEqual("research_authorized_scope_mismatch", self.research()["blocker"])
+
+    def test_authorized_scope_slug_mismatch_is_blocked_at_request_lock(self) -> None:
+        self.request["authorized_content_scope"]["slugs"] = ["accountants-and-auditors"]
+        write_json(self.request_path, self.request)
+        with self.assertRaises(runner.AgentError):
+            self.init()
+
+    def test_gate1_package_a_cannot_be_substituted_by_package_b(self) -> None:
+        package_b = self.output / "research-package-b"
+        shutil.copytree(self.package, package_b)
+        (package_b / "source-registry.jsonl").write_text('{"different":true}\n', encoding="utf-8")
+        self.reach_evidence()
+        with mock.patch.object(runner, "run_process_json", side_effect=AssertionError("adapter must not run")):
+            result = runner.run_evidence(self.output, package_b, self.source_root, self.lookup, "accountants-and-auditors")
+        self.assertEqual(("BLOCKED_EVIDENCE", "research_package_binding_mismatch"), (result["state"], result["blocker"]))
+
+    def test_gate3_package_outside_locked_output_root_is_blocked(self) -> None:
+        package_b = self.root / "outside-package"
+        shutil.copytree(self.package, package_b)
+        self.reach_evidence()
+        result = runner.run_evidence(self.output, package_b, self.source_root, self.lookup, "accountants-and-auditors")
+        self.assertEqual("research_package_binding_mismatch", result["blocker"])
+
+    def test_registry_drift_after_gate1_is_blocked(self) -> None:
+        self.reach_evidence()
+        (self.package / "source-registry.jsonl").write_text('{"drift":true}\n', encoding="utf-8")
+        self.assertEqual("research_package_binding_mismatch", self.evidence()["blocker"])
+
+    def test_claim_bindings_drift_after_gate1_is_blocked(self) -> None:
+        self.reach_evidence()
+        with (self.package / "claim-bindings.jsonl").open("a", encoding="utf-8") as handle:
+            handle.write('{"drift":true}\n')
+        self.assertEqual("research_package_binding_mismatch", self.evidence()["blocker"])
+
+    def test_career_module_drift_after_gate1_is_blocked(self) -> None:
+        self.reach_evidence()
+        write_json(self.package / "careers/health-educators/identity.json", {"drift": True})
+        self.assertEqual("research_package_binding_mismatch", self.evidence()["blocker"])
+
+    def test_package_symlink_is_blocked_before_editorial(self) -> None:
+        (self.package / "undeclared-link").symlink_to(self.package / "source-registry.jsonl")
+        self.init()
+        result = self.research()
+        self.assertEqual("BLOCKED_RESEARCH", result["state"])
+
+    def test_undeclared_regular_file_is_blocked_before_editorial(self) -> None:
+        (self.package / "extra.txt").write_text("undeclared\n", encoding="utf-8")
+        self.init()
+        self.assertEqual("BLOCKED_RESEARCH", self.research()["state"])
+
+    def test_gate1_validator_toctou_drift_is_blocked(self) -> None:
+        self.init()
+        calls = 0
+        def drifting(command: list[str], cwd: Path | None = None):
+            nonlocal calls
+            result = self.fake_process(command, cwd)
+            if str(runner.RESEARCH_VALIDATOR) in command:
+                calls += 1
+                if calls == 1:
+                    write_json(self.package / "careers/health-educators/identity.json", {"during": "validator"})
+            return result
+        with mock.patch.object(runner, "run_process_json", side_effect=drifting):
+            result = runner.record_research(self.output, self.package, self.observations)
+        self.assertEqual(("BLOCKED_RESEARCH", "research_package_input_drift"), (result["state"], result["blocker"]))
+
+    def test_package_aggregate_uses_path_nul_bytes_nul_contract(self) -> None:
+        lock = runner.research_package_lock(self.package, self.output)
+        digest = hashlib.sha256()
+        for entry in sorted(lock["entry_manifest"], key=lambda row: row["path"]):
+            digest.update(entry["path"].encode("utf-8"))
+            digest.update(b"\0")
+            digest.update((self.package / entry["path"]).read_bytes())
+            digest.update(b"\0")
+        self.assertEqual(digest.hexdigest(), lock["package_aggregate_sha256"])
+
+    def test_source_root_drift_after_gate3_blocks_gate4(self) -> None:
+        self.reach_compile()
+        (self.source_root / "fixture.json").write_text('{"drift":true}\n', encoding="utf-8")
+        result = self.compile()
+        self.assertEqual(("BLOCKED_COMPILE", "compiler_input_binding_mismatch"), (result["state"], result["blocker"]))
+
+    def test_lookup_drift_after_gate3_blocks_gate4(self) -> None:
+        self.reach_compile()
+        write_json(self.lookup, {"drift": True})
+        result = self.compile()
+        self.assertEqual(("BLOCKED_COMPILE", "compiler_input_binding_mismatch"), (result["state"], result["blocker"]))
+
+    def test_adapter_input_toctou_drift_blocks_pass(self) -> None:
+        self.reach_evidence()
+        changed = False
+        def drifting(command: list[str], cwd: Path | None = None):
+            nonlocal changed
+            result = self.fake_process(command, cwd)
+            if str(runner.ADAPTER) in command and not changed:
+                changed = True
+                (self.source_root / "fixture.json").write_text('{"during":"adapter"}\n', encoding="utf-8")
+            return result
+        with mock.patch.object(runner, "run_process_json", side_effect=drifting):
+            result = runner.run_evidence(self.output, self.package, self.source_root, self.lookup, "accountants-and-auditors")
+        self.assertEqual("BLOCKED_EVIDENCE", result["state"])
+
+    def test_compiler_input_toctou_drift_blocks_pass(self) -> None:
+        self.reach_compile()
+        changed = False
+        def drifting(command: list[str], cwd: Path | None = None):
+            nonlocal changed
+            result = self.fake_process(command, cwd)
+            if command[:3] == ["php", "artisan", "career:current-candidate-compile"] and not changed:
+                changed = True
+                write_json(self.lookup, {"during": "compiler"})
+            return result
+        with mock.patch.object(runner, "run_process_json", side_effect=drifting):
+            result = runner.run_compile(self.output, self.source_root, self.lookup)
+        self.assertEqual(("BLOCKED_COMPILE", "compiler_input_binding_mismatch"), (result["state"], result["blocker"]))
+
+    def test_gate3_pass_is_not_reused_after_locked_input_changes(self) -> None:
+        self.reach_compile()
+        (self.package / "source-registry.jsonl").write_text('{"drift":true}\n', encoding="utf-8")
+        result = self.evidence()
+        self.assertEqual("BLOCKED_EVIDENCE", result["state"])
+        self.assertEqual("BLOCKED", runner.load_state(self.output)["completed_gates"][-1]["state"])
+
+    def test_full_pass_repeated_inputs_are_idempotent(self) -> None:
+        self.reach_compile()
+        first_evidence = runner.status(self.output)
+        second_evidence = self.evidence()
+        self.assertEqual(first_evidence, second_evidence)
+        first_compile = self.compile()
+        second_compile = self.compile()
+        self.assertEqual(first_compile, second_compile)
+
+    def test_final_receipt_gate_hashes_are_fully_traceable(self) -> None:
+        self.reach_compile(); self.compile(); runner.finalize(self.output)
+        receipt = read_json(self.output / "career-content-agent-receipt.json")
+        for gate in receipt["gates"]:
+            self.assertEqual(gate["input_hash"], runner.CONTRACT.expected_gate_input_hash(receipt, gate["gate"]))
+        self.assertEqual(receipt["artifact_hashes"]["research_candidate"], receipt["input_bindings"]["research_package"]["package_aggregate_sha256"])
+        self.assertEqual(receipt["artifact_hashes"]["evidence_package"], receipt["input_bindings"]["compiler_inputs"]["evidence_package_digest"])
 
     def test_output_root_escape_is_blocked(self) -> None:
         self.request["output_root"] = str(runner.REPO_ROOT); write_json(self.request_path, self.request)

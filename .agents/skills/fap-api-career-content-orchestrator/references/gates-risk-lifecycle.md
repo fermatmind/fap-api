@@ -10,7 +10,7 @@ Stop states are `BLOCKED_INPUT`, `BLOCKED_SOURCE_ACCESS`, `BLOCKED_RESEARCH`, `W
 
 ## Gate 1 — research producer
 
-Input is the locked request, current 1046 inventory and hash, source policy version/hash, and existing producer. PASS requires: every slug in inventory; exactly 10/10 modules per slug; producer errors 0; expired sources 0; unresolved 0 for C3.6C/C3.6D mode; safe public source access; budgets within limits; and identical research candidate hash for the same locked business input. Blocked/unsafe/indeterminate access yields `BLOCKED_SOURCE_ACCESS`; other failures yield `BLOCKED_RESEARCH`; exceeded resources yield `BUDGET_EXHAUSTED`.
+Input is the locked request, current 1046 inventory and hash, source policy version/hash, and existing producer. Request, authorized scope, receipt, and actual career-directory slugs must be exact unique sets; Agent mode/modules/locales/markets/jurisdictions/date/policy must also match exactly. PASS requires: every slug in inventory; exactly 10/10 modules per slug; a stable declared-file package aggregate across validator execution; producer errors 0; expired sources 0; unresolved 0 for C3.6C/C3.6D mode; safe public source access; budgets within limits; and identical research candidate hash for the same locked business input. Scope mismatch yields `BLOCKED_RESEARCH` / `research_authorized_scope_mismatch`. Blocked/unsafe/indeterminate access yields `BLOCKED_SOURCE_ACCESS`; other failures yield `BLOCKED_RESEARCH`; exceeded resources yield `BUDGET_EXHAUSTED`.
 
 ## Gate 2 — editorial QA
 
@@ -18,11 +18,11 @@ Use only `fermatmind-career-editorial-qa`. `PASS` advances standard/regulated ca
 
 ## Gate 3 — C3.6A-R evidence adapter
 
-PASS requires the exact six existing compiler evidence contract versions, consistent locale/market/jurisdiction/source keys, 100% required compiler-claim coverage, loader cohort PASS, loader single-slug PASS for every requested slug, expired 0, and explicit unresolved/unmapped counts and hashes. The existing single-target adapter runs independently per requested slug and the receipt aggregates per-slug results; no batch boolean substitutes for them. Preserve salary, AI, market-signal, and every unsupported claim as `not_compiler_mapped`; never force it into another field. Failure is `BLOCKED_EVIDENCE`.
+Consume only the canonical research package and complete byte lock recorded by Gate 1. PASS requires the exact six existing compiler evidence contract versions, consistent locale/market/jurisdiction/source keys, 100% required compiler-claim coverage, loader cohort PASS, loader single-slug PASS for every requested slug, expired 0, and explicit unresolved/unmapped counts and hashes. The existing single-target adapter runs independently per requested slug and the receipt aggregates per-slug results; no batch boolean substitutes for them. Preserve salary, AI, market-signal, and every unsupported claim as `not_compiler_mapped`; never force it into another field. A different package path, output-root escape, or byte drift yields `BLOCKED_EVIDENCE` / `research_package_binding_mismatch` without running the adapter.
 
 ## Gate 4 — canonical builder
 
-Invoke the real existing single-slug dry compile without `--write-current`. PASS requires `PASS_TEN_BLOCK_DRY_COMPILE`, 10 source files, 2 locale projections, 26 components per page, blockers 0, candidate row and digest present, deterministic recompilation PASS, and zero Current/runtime/API/database/cache/CMS/sitemap/discoverability/search writes. Expired or superseded evidence cannot enter this gate. Failure is `BLOCKED_COMPILE`.
+Invoke the real existing single-slug dry compile without `--write-current`. It must consume the exact Gate 3 source-root path/tree digest, lookup path/raw digest, and evidence-package digest. PASS requires `PASS_TEN_BLOCK_DRY_COMPILE`, 10 source files, 2 locale projections, 26 components per page, blockers 0, candidate row and digest present, deterministic recompilation PASS, and zero Current/runtime/API/database/cache/CMS/sitemap/discoverability/search writes. Expired or superseded evidence cannot enter this gate. Input drift yields `BLOCKED_COMPILE` / `compiler_input_binding_mismatch` without running the compiler; other failures are `BLOCKED_COMPILE`.
 
 ## Gate 5 — orchestrator receipt
 

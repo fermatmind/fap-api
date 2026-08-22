@@ -4,7 +4,7 @@
   "title": "Career Content Agent receipt v1",
   "type": "object",
   "additionalProperties": false,
-  "required": ["contract_version", "batch_id", "request_hash", "inventory_hash", "source_policy", "adapter_version", "batch_risk", "final_state", "gates", "artifact_hashes", "slug_results", "dimension_binding", "evidence_contract_versions", "dry_compile_status", "counts", "resources", "source_access_blockers", "manual_review", "lifecycle", "permissions", "write_counts"],
+  "required": ["contract_version", "batch_id", "request_hash", "inventory_hash", "source_policy", "adapter_version", "batch_risk", "final_state", "gates", "artifact_hashes", "input_bindings", "slug_results", "dimension_binding", "evidence_contract_versions", "dry_compile_status", "counts", "resources", "source_access_blockers", "manual_review", "lifecycle", "permissions", "write_counts"],
   "properties": {
     "contract_version": {"const": "career.content_agent.receipt.v1"},
     "batch_id": {"type": "string", "minLength": 1},
@@ -29,6 +29,35 @@
       "type": "object", "additionalProperties": false,
       "required": ["research_candidate", "evidence_package", "dry_compile_candidate"],
       "properties": {"research_candidate": {"$ref": "#/$defs/nullableHash"}, "evidence_package": {"$ref": "#/$defs/nullableHash"}, "dry_compile_candidate": {"$ref": "#/$defs/nullableHash"}}
+    },
+    "input_bindings": {
+      "type": "object", "additionalProperties": false,
+      "required": ["research_package", "compiler_inputs"],
+      "properties": {
+        "research_package": {
+          "type": "object", "additionalProperties": false,
+          "required": ["canonical_path", "package_aggregate_sha256", "candidate_tree_sha256", "research_receipt_sha256", "source_registry_sha256", "claim_bindings_sha256", "careers_tree_sha256", "entry_manifest_sha256", "validated_slugs", "validator_version"],
+          "properties": {
+            "canonical_path": {"type": "string", "minLength": 1},
+            "package_aggregate_sha256": {"$ref": "#/$defs/hash"}, "candidate_tree_sha256": {"$ref": "#/$defs/hash"},
+            "research_receipt_sha256": {"$ref": "#/$defs/hash"}, "source_registry_sha256": {"$ref": "#/$defs/hash"},
+            "claim_bindings_sha256": {"$ref": "#/$defs/hash"}, "careers_tree_sha256": {"$ref": "#/$defs/hash"},
+            "entry_manifest_sha256": {"$ref": "#/$defs/hash"},
+            "validated_slugs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+            "validator_version": {"type": "string", "minLength": 1}
+          }
+        },
+        "compiler_inputs": {
+          "type": "object", "additionalProperties": false,
+          "required": ["source_root_canonical_path", "source_root_digest", "lookup_canonical_path", "lookup_digest", "control_slug", "evidence_packages", "evidence_package_digest"],
+          "properties": {
+            "source_root_canonical_path": {"type": "string", "minLength": 1}, "source_root_digest": {"$ref": "#/$defs/hash"},
+            "lookup_canonical_path": {"type": "string", "minLength": 1}, "lookup_digest": {"$ref": "#/$defs/hash"},
+            "control_slug": {"type": "string", "minLength": 1}, "evidence_package_digest": {"$ref": "#/$defs/hash"},
+            "evidence_packages": {"type": "array", "minItems": 1, "items": {"type": "object", "additionalProperties": false, "required": ["slug", "canonical_path", "tree_sha256", "entry_manifest_sha256"], "properties": {"slug": {"type": "string", "minLength": 1}, "canonical_path": {"type": "string", "minLength": 1}, "tree_sha256": {"$ref": "#/$defs/hash"}, "entry_manifest_sha256": {"$ref": "#/$defs/hash"}}}}
+          }
+        }
+      }
     },
     "slug_results": {
       "type": "array", "minItems": 1,

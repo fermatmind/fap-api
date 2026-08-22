@@ -291,14 +291,16 @@ def budget_exceeded(request: dict[str, Any], receipt: dict[str, Any]) -> bool:
 def expected_gate_input_hash(receipt: dict[str, Any], gate_name: str) -> str:
     gates = {gate["gate"]: gate for gate in receipt["gates"]}
     artifacts = receipt["artifact_hashes"]
+    bindings = receipt["input_bindings"]
+    compiler = bindings["compiler_inputs"]
     if gate_name == "research":
         return sha256_value({"request_hash": receipt["request_hash"], "inventory_hash": receipt["inventory_hash"], "source_policy": receipt["source_policy"]})
     if gate_name == "editorial":
         value = {"request_hash": receipt["request_hash"], "research_candidate": artifacts["research_candidate"], "research_output": gates["research"]["output_hash"]}
     elif gate_name == "evidence_adapter":
-        value = {"request_hash": receipt["request_hash"], "research_candidate": artifacts["research_candidate"], "editorial_output": gates["editorial"]["output_hash"], "adapter_version": receipt["adapter_version"]}
+        value = {"request_hash": receipt["request_hash"], "research_package_aggregate": artifacts["research_candidate"], "editorial_output": gates["editorial"]["output_hash"], "adapter_version": receipt["adapter_version"], "source_root_digest": compiler["source_root_digest"], "lookup_digest": compiler["lookup_digest"]}
     elif gate_name == "dry_compile":
-        value = {"request_hash": receipt["request_hash"], "evidence_package": artifacts["evidence_package"], "evidence_output": gates["evidence_adapter"]["output_hash"], "dimension_binding_digest": receipt["dimension_binding"]["binding_digest"]}
+        value = {"request_hash": receipt["request_hash"], "source_root_digest": compiler["source_root_digest"], "lookup_digest": compiler["lookup_digest"], "evidence_package_digest": compiler["evidence_package_digest"], "evidence_output": gates["evidence_adapter"]["output_hash"], "dimension_binding_digest": receipt["dimension_binding"]["binding_digest"]}
     elif gate_name == "orchestrator":
         value = {"request_hash": receipt["request_hash"], "dry_compile_candidate": artifacts["dry_compile_candidate"], "dry_compile_output": gates["dry_compile"]["output_hash"]}
     else:
@@ -312,7 +314,7 @@ def orchestrator_projection_hash(receipt: dict[str, Any]) -> str:
         "contract_version": receipt["contract_version"], "batch_id": receipt["batch_id"],
         "request_hash": receipt["request_hash"], "inventory_hash": receipt["inventory_hash"],
         "source_policy": receipt["source_policy"], "batch_risk": receipt["batch_risk"],
-        "adapter_version": receipt["adapter_version"], "final_state": receipt["final_state"], "gates": gates, "artifact_hashes": receipt["artifact_hashes"],
+        "adapter_version": receipt["adapter_version"], "final_state": receipt["final_state"], "gates": gates, "artifact_hashes": receipt["artifact_hashes"], "input_bindings": receipt["input_bindings"],
         "slug_results": receipt["slug_results"], "dimension_binding": receipt["dimension_binding"],
         "evidence_contract_versions": receipt["evidence_contract_versions"], "dry_compile_status": receipt["dry_compile_status"],
         "counts": receipt["counts"], "source_access_blockers": receipt["source_access_blockers"],
@@ -366,6 +368,15 @@ def validate_receipt(receipt: Any, request: Any, repo_root: Path | None = None) 
         gate = gate_by_name.get(gate_name)
         if gate and gate["state"] == "PASS" and receipt["artifact_hashes"][artifact_name] != gate["output_hash"]:
             errors.append(f"{artifact_name}_gate_hash_mismatch")
+    bindings = receipt.get("input_bindings", {})
+    research_binding = bindings.get("research_package", {}) if isinstance(bindings, dict) else {}
+    compiler_binding = bindings.get("compiler_inputs", {}) if isinstance(bindings, dict) else {}
+    if research_binding.get("package_aggregate_sha256") != receipt["artifact_hashes"]["research_candidate"]:
+        errors.append("research_package_aggregate_binding_mismatch")
+    if sorted(research_binding.get("validated_slugs", [])) != sorted(request["slugs"]):
+        errors.append("research_package_slug_binding_mismatch")
+    if gate_by_name.get("evidence_adapter", {}).get("state") == "PASS" and compiler_binding.get("evidence_package_digest") != receipt["artifact_hashes"]["evidence_package"]:
+        errors.append("compiler_evidence_package_binding_mismatch")
     if gate_by_name.get("orchestrator", {}).get("state") == "PASS" and gate_by_name["orchestrator"]["output_hash"] != orchestrator_projection_hash(receipt):
         errors.append("orchestrator_projection_hash_mismatch")
     non_pass = [gate for gate in gates[:-1] if gate["state"] != "PASS"]

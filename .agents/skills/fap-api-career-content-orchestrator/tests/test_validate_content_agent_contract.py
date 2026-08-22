@@ -66,6 +66,10 @@ class ContentAgentContractTest(unittest.TestCase):
                 {"gate": "orchestrator", "state": "PASS", "input_hash": H[4], "output_hash": H[5]},
             ],
             "artifact_hashes": {"research_candidate": H[1], "evidence_package": H[3], "dry_compile_candidate": H[4]},
+            "input_bindings": {
+                "research_package": {"canonical_path": str(self.output / "research-package"), "package_aggregate_sha256": H[1], "candidate_tree_sha256": H[0], "research_receipt_sha256": H[2], "source_registry_sha256": H[3], "claim_bindings_sha256": H[4], "careers_tree_sha256": H[5], "entry_manifest_sha256": H[0], "validated_slugs": list(request["slugs"]), "validator_version": "career.research-package-validator.v1"},
+                "compiler_inputs": {"source_root_canonical_path": str(self.output / "source"), "source_root_digest": H[2], "lookup_canonical_path": str(self.output / "lookup.json"), "lookup_digest": H[3], "control_slug": "health-educators", "evidence_packages": [{"slug": slug, "canonical_path": str(self.output / f"evidence-{slug}"), "tree_sha256": validator.sha256_value({"slug": slug, "evidence": "fixture"}), "entry_manifest_sha256": H[4]} for slug in request["slugs"]], "evidence_package_digest": H[3]},
+            },
             "slug_results": [{"slug": slug, "evidence_adapter_state": "PASS", "evidence_package_digest": validator.sha256_value({"slug": slug, "evidence": "fixture"}), "dry_compile_state": "PASS", "candidate_row_digest": validator.sha256_value({"slug": slug, "candidate": "fixture"})} for slug in request["slugs"]],
             "dimension_binding": {"claim_rows": 8, "source_rows": 4, "adapter_rows": 8, "binding_digest": H[0], "mismatch_count": 0},
             "evidence_contract_versions": sorted(validator.EVIDENCE_CONTRACTS), "dry_compile_status": "PASS_TEN_BLOCK_DRY_COMPILE",
@@ -77,6 +81,7 @@ class ContentAgentContractTest(unittest.TestCase):
             "write_counts": {key: 0 for key in validator.WRITE_KEYS},
         }
         receipt["artifact_hashes"]["evidence_package"] = validator.evidence_aggregate_hash(receipt["slug_results"])
+        receipt["input_bindings"]["compiler_inputs"]["evidence_package_digest"] = receipt["artifact_hashes"]["evidence_package"]
         receipt["gates"][2]["output_hash"] = receipt["artifact_hashes"]["evidence_package"]
         receipt["artifact_hashes"]["dry_compile_candidate"] = validator.dry_compile_aggregate_hash(receipt["slug_results"])
         receipt["gates"][3]["output_hash"] = receipt["artifact_hashes"]["dry_compile_candidate"]
@@ -118,6 +123,15 @@ class ContentAgentContractTest(unittest.TestCase):
 
     def test_standard_happy_path_five_gates_passes(self) -> None:
         self.assertTrue(validator.validate_receipt(self.receipt(), self.request())["ok"])
+
+    def test_final_receipt_requires_artifact_input_bindings(self) -> None:
+        request = self.request(); receipt = self.receipt(request); del receipt["input_bindings"]
+        self.assert_receipt_error(receipt, request, "$.input_bindings:required")
+
+    def test_gate_hash_rejects_source_root_digest_substitution(self) -> None:
+        request = self.request(); receipt = self.receipt(request)
+        receipt["input_bindings"]["compiler_inputs"]["source_root_digest"] = H[5]
+        self.assert_receipt_error(receipt, request, "gate_composite_input_hash_invalid")
 
     def test_unknown_slug_fails_closed(self) -> None:
         request = self.request(); request["slugs"] = request["authorized_content_scope"]["slugs"] = ["not-a-career"]; request["risk_class"]["by_slug"][0]["slug"] = "not-a-career"

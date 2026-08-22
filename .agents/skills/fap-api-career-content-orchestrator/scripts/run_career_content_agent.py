@@ -11,6 +11,7 @@ import importlib.util
 import json
 import math
 import os
+import stat
 import subprocess
 import sys
 import tempfile
@@ -27,8 +28,16 @@ ADAPTER = RESEARCH_SKILL / "scripts/adapt_research_package_to_compiler_evidence.
 SOURCE_POLICY = RESEARCH_SKILL / "references/source-policy.md"
 BASELINE_ASSETS = REPO_ROOT / "backend/content_assets/career/current/assets.jsonl"
 BACKEND = REPO_ROOT / "backend"
-STATE_VERSION = "career.content_agent.state.v1"
+STATE_VERSION = "career.content_agent.state.v2"
 ADAPTER_VERSION = "career.research.compiler_evidence_adapter.v1"
+MODULE_FILES = (
+    "identity.json", "definition.json", "salary.json", "geo.json", "ai-impact.json",
+    "fit-personality.json", "risk.json", "compare-links.json", "faq.json", "page-meta.json",
+)
+PACKAGE_ROOT_FILES = {
+    "source-registry.jsonl", "claim-bindings.jsonl", "module-coverage.json",
+    "unresolved-claims.json", "research-receipt.json",
+}
 TERMINAL_STATES = {
     "BLOCKED_INPUT", "BLOCKED_SOURCE_ACCESS", "BLOCKED_RESEARCH", "WARN_EDITORIAL",
     "BLOCKED_EDITORIAL", "BLOCKED_EVIDENCE", "BLOCKED_COMPILE",
@@ -77,6 +86,112 @@ def hash_value(value: Any) -> str:
 
 def hash_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def aggregate_files(root: Path, relative_paths: list[str]) -> str:
+    digest = hashlib.sha256()
+    for relative in sorted(relative_paths):
+        digest.update(relative.encode("utf-8"))
+        digest.update(b"\0")
+        digest.update((root / relative).read_bytes())
+        digest.update(b"\0")
+    return digest.hexdigest()
+
+
+def locked_tree(root: Path) -> dict[str, Any]:
+    try:
+        canonical = root.resolve(strict=True)
+    except OSError as exc:
+        raise AgentError("input_tree_unresolvable") from exc
+    if not canonical.is_dir():
+        raise AgentError("input_tree_not_directory")
+    entries: list[dict[str, Any]] = []
+    for current, directories, files in os.walk(canonical, followlinks=False):
+        directories.sort()
+        current_path = Path(current)
+        for name in directories:
+            child = current_path / name
+            mode = child.lstat().st_mode
+            if stat.S_ISLNK(mode) or not stat.S_ISDIR(mode):
+                raise AgentError("input_tree_symlink_or_non_directory")
+        for name in sorted(files):
+            child = current_path / name
+            mode = child.lstat().st_mode
+            if stat.S_ISLNK(mode) or not stat.S_ISREG(mode):
+                raise AgentError("input_tree_symlink_or_non_regular")
+            relative = child.relative_to(canonical).as_posix()
+            raw = child.read_bytes()
+            if not stat.S_ISREG(child.lstat().st_mode):
+                raise AgentError("input_tree_file_drift")
+            entries.append({"path": relative, "sha256": hashlib.sha256(raw).hexdigest(), "size": len(raw)})
+    relative_paths = [entry["path"] for entry in entries]
+    return {
+        "canonical_path": str(canonical),
+        "tree_sha256": aggregate_files(canonical, relative_paths),
+        "entry_manifest": entries,
+        "entry_manifest_sha256": hash_value(entries),
+    }
+
+
+def locked_file(path: Path) -> dict[str, Any]:
+    if path.is_symlink():
+        raise AgentError("input_file_symlink_forbidden")
+    try:
+        canonical = path.resolve(strict=True)
+    except OSError as exc:
+        raise AgentError("input_file_unresolvable") from exc
+    mode = canonical.lstat().st_mode
+    if not stat.S_ISREG(mode):
+        raise AgentError("input_file_not_regular")
+    raw = canonical.read_bytes()
+    if not stat.S_ISREG(canonical.lstat().st_mode):
+        raise AgentError("input_file_drift")
+    return {"canonical_path": str(canonical), "raw_sha256": hashlib.sha256(raw).hexdigest(), "size": len(raw)}
+
+
+def research_package_lock(package: Path, output_root: Path) -> dict[str, Any]:
+    if package.is_symlink():
+        raise AgentError("research_package_symlink_forbidden")
+    tree = locked_tree(package)
+    canonical = Path(tree["canonical_path"])
+    if not canonical.is_relative_to(output_root.resolve(strict=True)):
+        raise AgentError("research_package_outside_locked_root")
+    direct = {entry.name for entry in canonical.iterdir()}
+    if direct != PACKAGE_ROOT_FILES | {"careers"}:
+        raise AgentError("research_package_entry_set_invalid")
+    careers = canonical / "careers"
+    if careers.is_symlink() or not careers.is_dir():
+        raise AgentError("research_package_careers_invalid")
+    slug_dirs = []
+    allowed = set(PACKAGE_ROOT_FILES)
+    for entry in sorted(careers.iterdir(), key=lambda item: item.name):
+        if entry.is_symlink() or not entry.is_dir():
+            raise AgentError("research_package_slug_directory_invalid")
+        slug_dirs.append(entry.name)
+        if {item.name for item in entry.iterdir()} != set(MODULE_FILES):
+            raise AgentError("research_package_module_entry_set_invalid")
+        allowed.update(f"careers/{entry.name}/{name}" for name in MODULE_FILES)
+    manifest_paths = {entry["path"] for entry in tree["entry_manifest"]}
+    if manifest_paths != allowed:
+        raise AgentError("research_package_undeclared_entry")
+    candidate_rows = [
+        {"path": relative, "sha256": hash_file(canonical / relative)}
+        for relative in sorted(path for path in allowed if path.startswith("careers/"))
+    ]
+    careers_paths = [row["path"] for row in candidate_rows]
+    return {
+        "canonical_path": str(canonical),
+        "package_aggregate_sha256": aggregate_files(canonical, sorted(allowed)),
+        "candidate_tree_sha256": hash_value(candidate_rows),
+        "research_receipt_sha256": hash_file(canonical / "research-receipt.json"),
+        "source_registry_sha256": hash_file(canonical / "source-registry.jsonl"),
+        "claim_bindings_sha256": hash_file(canonical / "claim-bindings.jsonl"),
+        "careers_tree_sha256": aggregate_files(canonical, careers_paths),
+        "entry_manifest": tree["entry_manifest"],
+        "entry_manifest_sha256": tree["entry_manifest_sha256"],
+        "validated_slugs": slug_dirs,
+        "validator_version": None,
+    }
 
 
 def read_json(path: Path) -> Any:
@@ -255,6 +370,7 @@ def init_agent(request_path: Path) -> dict[str, Any]:
             "source_policy": {"version": request["source_policy_version"], "hash": hash_file(SOURCE_POLICY)},
             "completed_gates": [], "execution_input_hashes": {},
             "artifact_hashes": {"research_candidate": None, "evidence_package": None, "dry_compile_candidate": None},
+            "input_bindings": {"research_package": None, "compiler_inputs": None},
             "slug_results": [{"slug": slug, "evidence_adapter_state": "NOT_RUN", "evidence_package_digest": None, "dry_compile_state": "NOT_RUN", "candidate_row_digest": None} for slug in sorted(request["slugs"])],
             "dimension_binding": {"claim_rows": 0, "source_rows": 0, "adapter_rows": 0, "binding_digest": hash_value([]), "mismatch_count": 0},
             "evidence_contract_versions": [], "dry_compile_status": None,
@@ -326,6 +442,67 @@ def lifecycle_summary(request: dict[str, Any], sources: list[dict[str, Any]]) ->
             "published_content_mutations": 0}
 
 
+def replace_gate(state: dict[str, Any], gate: dict[str, Any]) -> None:
+    order = ["research", "editorial", "evidence_adapter", "dry_compile", "orchestrator"]
+    index = order.index(gate["gate"])
+    state["completed_gates"] = [
+        existing for existing in state["completed_gates"] if order.index(existing["gate"]) < index
+    ] + [gate]
+
+
+def exact_unique(value: Any, expected: list[str]) -> bool:
+    return (
+        isinstance(value, list)
+        and all(isinstance(item, str) for item in value)
+        and len(value) == len(set(value))
+        and set(value) == set(expected)
+    )
+
+
+def research_scope_matches(request: dict[str, Any], receipt: dict[str, Any], package_slugs: list[str], root: Path) -> bool:
+    scope = request["authorized_content_scope"]
+    binding = receipt.get("content_agent_binding")
+    if not isinstance(binding, dict):
+        return False
+    receipt_jurisdiction = receipt.get("jurisdiction")
+    expected_jurisdiction = {
+        "primary": request["jurisdictions"]["primary"]["code"],
+        "comparison": sorted(row["code"] for row in request["jurisdictions"]["comparison"]),
+    }
+    return all((
+        exact_unique(request["slugs"], package_slugs),
+        exact_unique(scope.get("slugs"), request["slugs"]),
+        exact_unique(receipt.get("slugs"), request["slugs"]),
+        exact_unique(package_slugs, request["slugs"]),
+        exact_unique(receipt.get("locales"), request["locales"]),
+        exact_unique(binding.get("locales"), request["locales"]),
+        exact_unique(binding.get("markets"), request["markets"]),
+        binding.get("jurisdictions") == request["jurisdictions"],
+        receipt_jurisdiction == expected_jurisdiction,
+        receipt.get("research_as_of") == request["research_as_of"],
+        receipt.get("source_policy_version") == request["source_policy_version"],
+        binding.get("mode") == scope["mode"],
+        exact_unique(binding.get("modules"), scope["modules"]),
+        exact_unique(binding.get("slugs"), request["slugs"]),
+        receipt.get("output_root") == str(root.resolve(strict=True)),
+    ))
+
+
+def block_research(root: Path, state: dict[str, Any], execution_hash: str, blocker: str, detail: str,
+                   package_lock: dict[str, Any] | None = None) -> dict[str, Any]:
+    gate = {
+        "gate": "research", "state": "BLOCKED",
+        "input_hash": hash_value({"request_hash": state["request_hash"], "inventory_hash": state["inventory_hash"], "source_policy": state["source_policy"]}),
+        "output_hash": hash_value({"blocked": blocker, "detail": detail}),
+    }
+    replace_gate(state, gate)
+    state["state"], state["blocker"] = "BLOCKED_RESEARCH", blocker
+    state["execution_input_hashes"]["research"] = execution_hash
+    atomic_json(root / "gate-01-research.json", {"execution_input_hash": execution_hash, "error": detail, "research_package_lock": package_lock, "gate": gate})
+    save_state(root, state)
+    return public_status(state)
+
+
 def record_research(root: Path, package: Path, observations_path: Path) -> dict[str, Any]:
     with output_lock(root):
         state = load_state(root)
@@ -334,22 +511,32 @@ def record_research(root: Path, package: Path, observations_path: Path) -> dict[
             return public_status(state)
         require_state(state, "REQUEST_LOCKED")
         request = request_for(state, root)
-        if not package.is_relative_to(root):
-            raise AgentError("research_package_outside_locked_root")
+        try:
+            before_lock = research_package_lock(package, root)
+        except (AgentError, OSError) as exc:
+            return block_research(root, state, execution_hash, "research_package_integrity_mismatch", str(exc))
+        try:
+            receipt = read_json(Path(before_lock["canonical_path"]) / "research-receipt.json")
+        except (OSError, json.JSONDecodeError) as exc:
+            return block_research(root, state, execution_hash, "research_package_integrity_mismatch", str(exc), before_lock)
+        if not research_scope_matches(request, receipt, before_lock["validated_slugs"], root):
+            return block_research(root, state, execution_hash, "research_authorized_scope_mismatch", "research_authorized_scope_mismatch", before_lock)
         first_code, report = run_process_json([sys.executable, str(RESEARCH_VALIDATOR), str(package)])
+        try:
+            middle_lock = research_package_lock(package, root)
+        except (AgentError, OSError) as exc:
+            return block_research(root, state, execution_hash, "research_package_input_drift", str(exc), before_lock)
         second_code, second_report = run_process_json([sys.executable, str(RESEARCH_VALIDATOR), str(package)])
-        receipt = read_json(package / "research-receipt.json")
-        requested_jurisdictions = {request["jurisdictions"]["primary"]["code"], *(row["code"] for row in request["jurisdictions"]["comparison"])}
-        receipt_jurisdiction = receipt.get("jurisdiction", {})
-        comparisons = receipt_jurisdiction.get("comparison", []) if isinstance(receipt_jurisdiction, dict) else []
-        package_jurisdictions = {receipt_jurisdiction.get("primary"), *comparisons} if isinstance(comparisons, list) else set()
-        if (not set(request["slugs"]).issubset(set(receipt.get("slugs", [])))
-            or set(receipt.get("locales", [])) != set(request["locales"])
-            or receipt.get("research_as_of") != request["research_as_of"]
-            or receipt.get("source_policy_version") != request["source_policy_version"]
-            or package_jurisdictions != requested_jurisdictions
-            or Path(receipt.get("output_root", "")).resolve() != root.resolve()):
-            raise AgentError("research_request_binding_mismatch")
+        try:
+            after_lock = research_package_lock(package, root)
+        except (AgentError, OSError) as exc:
+            return block_research(root, state, execution_hash, "research_package_input_drift", str(exc), before_lock)
+        if before_lock != middle_lock or before_lock != after_lock:
+            return block_research(root, state, execution_hash, "research_package_input_drift", "validator_pre_post_hash_mismatch", before_lock)
+        validator_version = report.get("validator_version")
+        if not isinstance(validator_version, str) or not validator_version or receipt.get("validator_version") != validator_version:
+            return block_research(root, state, execution_hash, "research_package_integrity_mismatch", "research_validator_version_mismatch", before_lock)
+        before_lock["validator_version"] = validator_version
         observations = read_json(observations_path)
         resources, blockers = observations_checked(request, observations)
         state["resources"] = resources
@@ -365,8 +552,11 @@ def record_research(root: Path, package: Path, observations_path: Path) -> dict[
         })
         sources = read_jsonl(package / "source-registry.jsonl")
         state["lifecycle"] = lifecycle_summary(request, sources)
-        output_hash = receipt["hashes"]["candidate_tree_sha256"]
+        if receipt.get("hashes", {}).get("candidate_tree_sha256") != before_lock["candidate_tree_sha256"]:
+            return block_research(root, state, execution_hash, "research_package_integrity_mismatch", "candidate_tree_sha256_mismatch", before_lock)
+        output_hash = before_lock["package_aggregate_sha256"]
         state["artifact_hashes"]["research_candidate"] = output_hash
+        state["input_bindings"]["research_package"] = before_lock
         gate = {"gate": "research", "state": "PASS", "input_hash": hash_value({"request_hash": state["request_hash"], "inventory_hash": state["inventory_hash"], "source_policy": state["source_policy"]}), "output_hash": output_hash}
         final = None
         if CONTRACT.budget_exceeded(request, {"resources": resources}):
@@ -377,10 +567,10 @@ def record_research(root: Path, package: Path, observations_path: Path) -> dict[
             gate["state"], final = "BLOCKED", "BLOCKED_RESEARCH"
         elif request["risk_class"]["batch_max"] in {"regulated", "ymyl_high"} and counts["sensitive_claims_without_tier_1_2"]:
             gate["state"], final = "BLOCKED", "BLOCKED_RESEARCH"
-        state["completed_gates"].append(gate)
+        replace_gate(state, gate)
         state["state"] = final or "RESEARCH_PASS"
         state["blocker"] = final
-        checkpoint = {"execution_input_hash": execution_hash, "research_package": str(package.resolve()), "validator": report, "research_receipt_sha256": hash_file(package / "research-receipt.json"), "gate": gate}
+        checkpoint = {"execution_input_hash": execution_hash, "research_package_lock": before_lock, "validator": report, "gate": gate}
         atomic_json(root / "gate-01-research.json", checkpoint)
         save_state(root, state)
         return public_status(state)
@@ -450,15 +640,76 @@ def dimension_binding(request: dict[str, Any], package: Path, adapter_roots: lis
     return {"claim_rows": len(claims), "source_rows": len(sources), "adapter_rows": len(adapter_claims), "binding_digest": hash_value(sorted(rows, key=lambda row: canonical_bytes(row))), "mismatch_count": mismatch}, len(unmapped), misrouted
 
 
+def evidence_gate_input_hash(state: dict[str, Any], compiler: dict[str, Any]) -> str:
+    return hash_value({
+        "request_hash": state["request_hash"],
+        "research_package_aggregate": state["artifact_hashes"]["research_candidate"],
+        "editorial_output": state["completed_gates"][1]["output_hash"],
+        "adapter_version": ADAPTER_VERSION,
+        "source_root_digest": compiler["source_root"]["tree_sha256"],
+        "lookup_digest": compiler["lookup"]["raw_sha256"],
+    })
+
+
+def block_evidence(root: Path, state: dict[str, Any], execution_hash: str, detail: str,
+                   compiler: dict[str, Any] | None = None) -> dict[str, Any]:
+    compiler = compiler or state["input_bindings"].get("compiler_inputs") or {
+        "source_root": {"tree_sha256": "0" * 64}, "lookup": {"raw_sha256": "0" * 64},
+    }
+    gate = {
+        "gate": "evidence_adapter", "state": "BLOCKED",
+        "input_hash": evidence_gate_input_hash(state, compiler),
+        "output_hash": hash_value({"blocked": "research_package_binding_mismatch", "detail": detail}),
+    }
+    replace_gate(state, gate)
+    state["state"], state["blocker"] = "BLOCKED_EVIDENCE", "research_package_binding_mismatch"
+    state["execution_input_hashes"]["evidence_adapter"] = execution_hash
+    state["artifact_hashes"]["evidence_package"] = None
+    for row in state["slug_results"]:
+        row.update({"evidence_adapter_state": "NOT_RUN", "evidence_package_digest": None,
+                    "dry_compile_state": "NOT_RUN", "candidate_row_digest": None})
+    atomic_json(root / "gate-03-evidence.json", {"execution_input_hash": execution_hash, "error": detail, "compiler_input_lock": compiler, "gate": gate})
+    save_state(root, state)
+    return public_status(state)
+
+
+def current_gate3_inputs(package: Path, root: Path, source_root: Path, lookup: Path,
+                         validator_version: str | None = None) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+    package_lock = research_package_lock(package, root)
+    package_lock["validator_version"] = validator_version
+    return package_lock, locked_tree(source_root), locked_file(lookup)
+
+
 def run_evidence(root: Path, package: Path, source_root: Path, lookup: Path, control: str) -> dict[str, Any]:
     with output_lock(root):
         state = load_state(root)
         if "evidence_adapter" not in state["execution_input_hashes"]:
             require_state(state, "EDITORIAL_PASS")
-        execution_hash = command_payload_hash([package, source_root, lookup], {"control_slug": control})
+        request = request_for(state, root)
+        expected_package = state["input_bindings"].get("research_package")
+        try:
+            package_now, source_now, lookup_now = current_gate3_inputs(
+                package, root, source_root, lookup,
+                expected_package["validator_version"] if expected_package is not None else None,
+            )
+        except (AgentError, OSError) as exc:
+            execution_hash = hash_value({"error": str(exc), "control_slug": control})
+            return block_evidence(root, state, execution_hash, str(exc))
+        compiler = {"source_root": source_now, "lookup": lookup_now, "control_slug": control, "evidence_packages": [], "evidence_package_digest": None}
+        execution_hash = hash_value({"research_package": package_now, "source_root": source_now, "lookup": lookup_now, "control_slug": control})
+        if expected_package is None or package_now != expected_package:
+            return block_evidence(root, state, execution_hash, "gate1_research_package_lock_mismatch", compiler)
+        if not research_scope_matches(request, read_json(package / "research-receipt.json"), package_now["validated_slugs"], root):
+            return block_evidence(root, state, execution_hash, "gate1_research_scope_revalidation_mismatch", compiler)
+        recorded_compiler = state["input_bindings"].get("compiler_inputs")
+        if recorded_compiler is not None:
+            stable_recorded = {key: recorded_compiler[key] for key in ("source_root", "lookup", "control_slug")}
+            stable_current = {key: compiler[key] for key in ("source_root", "lookup", "control_slug")}
+            if stable_recorded != stable_current:
+                return block_evidence(root, state, execution_hash, "gate3_locked_compiler_input_changed", compiler)
         if gate_repeat(state, "evidence_adapter", execution_hash):
             return public_status(state)
-        request = request_for(state, root)
+        state["input_bindings"]["compiler_inputs"] = compiler
         adapter_roots = []
         outputs = []
         try:
@@ -467,25 +718,26 @@ def run_evidence(root: Path, package: Path, source_root: Path, lookup: Path, con
                     raise AgentError("adapter_control_target_overlap")
                 output = root / f"evidence-{slug}"
                 output.mkdir(mode=0o700, exist_ok=True)
+                before = current_gate3_inputs(package, root, source_root, lookup, expected_package["validator_version"])
+                if before != (expected_package, source_now, lookup_now):
+                    raise AgentError("adapter_input_toctou_drift")
                 first = run_json(adapter_command(package, source_root, lookup, control, slug, output, request["research_as_of"]), REPO_ROOT)
-                before = {item.name: hash_file(item) for item in output.iterdir() if item.is_file()}
+                if current_gate3_inputs(package, root, source_root, lookup, expected_package["validator_version"]) != before:
+                    raise AgentError("adapter_input_toctou_drift")
+                first_output_lock = locked_tree(output)
                 second = run_json(adapter_command(package, source_root, lookup, control, slug, output, request["research_as_of"]), REPO_ROOT)
-                after = {item.name: hash_file(item) for item in output.iterdir() if item.is_file()}
-                if first.get("status") != "PASS_RESEARCH_COMPILER_EVIDENCE_ADAPTER" or first != second or before != after:
+                if current_gate3_inputs(package, root, source_root, lookup, expected_package["validator_version"]) != before:
+                    raise AgentError("adapter_input_toctou_drift")
+                second_output_lock = locked_tree(output)
+                if first.get("status") != "PASS_RESEARCH_COMPILER_EVIDENCE_ADAPTER" or first != second or first_output_lock != second_output_lock:
                     raise AgentError("adapter_deterministic_rerun_failed")
-                digest = first.get("deterministic_output_hash")
-                if not isinstance(digest, str) or len(digest) != 64:
+                adapter_digest = first.get("deterministic_output_hash")
+                if not isinstance(adapter_digest, str) or len(adapter_digest) != 64:
                     raise AgentError("adapter_digest_missing")
                 adapter_roots.append(output)
-                outputs.append({"slug": slug, "output_root": str(output), "digest": digest, "receipt": first})
+                outputs.append({"slug": slug, "output_root": second_output_lock["canonical_path"], "digest": second_output_lock["tree_sha256"], "adapter_digest": adapter_digest, "entry_manifest_sha256": second_output_lock["entry_manifest_sha256"], "receipt": first})
         except (AgentError, OSError) as exc:
-            state["state"], state["blocker"] = "BLOCKED_EVIDENCE", str(exc)
-            state["execution_input_hashes"]["evidence_adapter"] = execution_hash
-            gate = {"gate": "evidence_adapter", "state": "BLOCKED", "input_hash": hash_value({"request_hash": state["request_hash"], "research_candidate": state["artifact_hashes"]["research_candidate"], "editorial_output": state["completed_gates"][1]["output_hash"], "adapter_version": ADAPTER_VERSION}), "output_hash": hash_value({"blocked": str(exc)})}
-            state["completed_gates"].append(gate)
-            atomic_json(root / "gate-03-evidence.json", {"execution_input_hash": execution_hash, "error": str(exc), "gate": gate})
-            save_state(root, state)
-            return public_status(state)
+            return block_evidence(root, state, execution_hash, str(exc), compiler)
         binding, unmapped, misrouted = dimension_binding(request, package, adapter_roots)
         state["dimension_binding"] = binding
         state["counts"].update({"unmapped": unmapped, "misrouted_unmapped_claims": misrouted,
@@ -496,16 +748,19 @@ def run_evidence(root: Path, package: Path, source_root: Path, lookup: Path, con
         for row, output in zip(state["slug_results"], outputs):
             row.update({"evidence_adapter_state": "PASS", "evidence_package_digest": output["digest"]})
         aggregate = CONTRACT.evidence_aggregate_hash(state["slug_results"])
+        compiler["evidence_packages"] = [{"slug": item["slug"], "canonical_path": item["output_root"], "tree_sha256": item["digest"], "entry_manifest_sha256": item["entry_manifest_sha256"]} for item in outputs]
+        compiler["evidence_package_digest"] = aggregate
+        state["input_bindings"]["compiler_inputs"] = compiler
         state["artifact_hashes"]["evidence_package"] = aggregate
-        gate = {"gate": "evidence_adapter", "state": "PASS", "input_hash": hash_value({"request_hash": state["request_hash"], "research_candidate": state["artifact_hashes"]["research_candidate"], "editorial_output": state["completed_gates"][1]["output_hash"], "adapter_version": ADAPTER_VERSION}), "output_hash": aggregate}
+        gate = {"gate": "evidence_adapter", "state": "PASS", "input_hash": evidence_gate_input_hash(state, compiler), "output_hash": aggregate}
         if binding["mismatch_count"] or misrouted:
             gate["state"], state["state"], state["blocker"] = "BLOCKED", "BLOCKED_EVIDENCE", "dimension_or_unmapped_claim_mismatch"
         else:
             state["state"], state["blocker"] = "EVIDENCE_ADAPTER_PASS", None
         state["execution_input_hashes"]["evidence_adapter"] = execution_hash
         state["evidence_contract_versions"] = EVIDENCE_CONTRACTS
-        state["completed_gates"].append(gate)
-        atomic_json(root / "gate-03-evidence.json", {"execution_input_hash": execution_hash, "per_slug": outputs, "dimension_binding": binding, "gate": gate})
+        replace_gate(state, gate)
+        atomic_json(root / "gate-03-evidence.json", {"execution_input_hash": execution_hash, "research_package_lock": expected_package, "compiler_input_lock": compiler, "per_slug": outputs, "dimension_binding": binding, "gate": gate})
         save_state(root, state)
         return public_status(state)
 
@@ -516,18 +771,80 @@ def compile_command(slug: str, source_root: Path, lookup: Path, evidence: Path, 
             f"--output-root={output}"]
 
 
+def current_gate4_inputs(state: dict[str, Any], source_root: Path, lookup: Path) -> dict[str, Any]:
+    source = locked_tree(source_root)
+    lookup_lock = locked_file(lookup)
+    evidence_packages = []
+    evidence_rows = []
+    for row in state["slug_results"]:
+        evidence = locked_tree(Path(state["output_root"]) / f"evidence-{row['slug']}")
+        evidence_packages.append({
+            "slug": row["slug"], "canonical_path": evidence["canonical_path"],
+            "tree_sha256": evidence["tree_sha256"], "entry_manifest_sha256": evidence["entry_manifest_sha256"],
+        })
+        evidence_rows.append({
+            "slug": row["slug"], "evidence_adapter_state": "PASS",
+            "evidence_package_digest": evidence["tree_sha256"],
+        })
+    return {
+        "source_root": source, "lookup": lookup_lock,
+        "control_slug": state["input_bindings"]["compiler_inputs"]["control_slug"],
+        "evidence_packages": evidence_packages,
+        "evidence_package_digest": CONTRACT.evidence_aggregate_hash(evidence_rows),
+    }
+
+
+def compile_gate_input_hash(state: dict[str, Any], compiler: dict[str, Any]) -> str:
+    return hash_value({
+        "request_hash": state["request_hash"],
+        "source_root_digest": compiler["source_root"]["tree_sha256"],
+        "lookup_digest": compiler["lookup"]["raw_sha256"],
+        "evidence_package_digest": compiler["evidence_package_digest"],
+        "evidence_output": state["completed_gates"][2]["output_hash"],
+        "dimension_binding_digest": state["dimension_binding"]["binding_digest"],
+    })
+
+
+def block_compile(root: Path, state: dict[str, Any], execution_hash: str, detail: str,
+                  compiler: dict[str, Any] | None = None) -> dict[str, Any]:
+    compiler = compiler or state["input_bindings"]["compiler_inputs"]
+    gate = {
+        "gate": "dry_compile", "state": "BLOCKED",
+        "input_hash": compile_gate_input_hash(state, compiler),
+        "output_hash": hash_value({"blocked": "compiler_input_binding_mismatch", "detail": detail}),
+    }
+    replace_gate(state, gate)
+    state["state"], state["blocker"] = "BLOCKED_COMPILE", "compiler_input_binding_mismatch"
+    state["execution_input_hashes"]["dry_compile"] = execution_hash
+    state["artifact_hashes"]["dry_compile_candidate"] = None
+    state["dry_compile_status"] = None
+    for row in state["slug_results"]:
+        row.update({"dry_compile_state": "NOT_RUN", "candidate_row_digest": None})
+    atomic_json(root / "gate-04-dry-compile.json", {"execution_input_hash": execution_hash, "error": detail, "compiler_input_lock": compiler, "gate": gate})
+    save_state(root, state)
+    return public_status(state)
+
+
 def run_compile(root: Path, source_root: Path, lookup: Path) -> dict[str, Any]:
     with output_lock(root):
         state = load_state(root)
         if "dry_compile" not in state["execution_input_hashes"]:
             require_state(state, "EVIDENCE_ADAPTER_PASS")
-        evidence_roots = [root / f"evidence-{row['slug']}" for row in state["slug_results"]]
-        execution_hash = command_payload_hash([source_root, lookup, *evidence_roots], {})
+        expected = state["input_bindings"].get("compiler_inputs")
+        if expected is None:
+            raise AgentError("compiler_input_lock_missing")
+        try:
+            current = current_gate4_inputs(state, source_root, lookup)
+        except (AgentError, OSError) as exc:
+            return block_compile(root, state, hash_value({"error": str(exc)}), str(exc), expected)
+        execution_hash = hash_value(current)
+        if current != expected:
+            return block_compile(root, state, execution_hash, "gate3_compiler_input_lock_mismatch", current)
         if gate_repeat(state, "dry_compile", execution_hash):
             return public_status(state)
         if state["lifecycle"]["expired"] or state["lifecycle"]["source_version_superseded"]:
             blocker = "lifecycle_forbids_dry_compile"
-            gate = {"gate": "dry_compile", "state": "BLOCKED", "input_hash": hash_value({"request_hash": state["request_hash"], "evidence_package": state["artifact_hashes"]["evidence_package"], "evidence_output": state["completed_gates"][2]["output_hash"], "dimension_binding_digest": state["dimension_binding"]["binding_digest"]}), "output_hash": hash_value({"blocked": blocker})}
+            gate = {"gate": "dry_compile", "state": "BLOCKED", "input_hash": compile_gate_input_hash(state, expected), "output_hash": hash_value({"blocked": blocker})}
             state["state"], state["blocker"] = "BLOCKED_COMPILE", blocker
             state["execution_input_hashes"]["dry_compile"] = execution_hash
             state["completed_gates"].append(gate)
@@ -541,9 +858,16 @@ def run_compile(root: Path, source_root: Path, lookup: Path) -> dict[str, Any]:
                 output = root / f"dry-compile-{slug}"
                 output.mkdir(mode=0o700, exist_ok=True)
                 command = compile_command(slug, source_root, lookup, root / f"evidence-{slug}", output)
+                before = current_gate4_inputs(state, source_root, lookup)
+                if before != expected:
+                    raise AgentError("compiler_input_toctou_drift")
                 first = run_json(command, BACKEND)
+                if current_gate4_inputs(state, source_root, lookup) != before:
+                    raise AgentError("compiler_input_toctou_drift")
                 first_digest = hash_file(output / "candidate-row.json") if (output / "candidate-row.json").is_file() else None
                 second = run_json(command, BACKEND)
+                if current_gate4_inputs(state, source_root, lookup) != before:
+                    raise AgentError("compiler_input_toctou_drift")
                 second_digest = hash_file(output / "candidate-row.json") if (output / "candidate-row.json").is_file() else None
                 receipt = first.get("receipt", {})
                 if (first.get("status") != "PASS_TEN_BLOCK_DRY_COMPILE" or first != second or first_digest is None or first_digest != second_digest
@@ -553,35 +877,50 @@ def run_compile(root: Path, source_root: Path, lookup: Path) -> dict[str, Any]:
                 row.update({"dry_compile_state": "PASS", "candidate_row_digest": first_digest})
                 outputs.append({"slug": slug, "output_root": str(output), "candidate_row_digest": first_digest, "receipt": receipt})
         except (AgentError, OSError) as exc:
-            state["state"], state["blocker"] = "BLOCKED_COMPILE", str(exc)
-            state["execution_input_hashes"]["dry_compile"] = execution_hash
-            gate = {"gate": "dry_compile", "state": "BLOCKED", "input_hash": hash_value({"request_hash": state["request_hash"], "evidence_package": state["artifact_hashes"]["evidence_package"], "evidence_output": state["completed_gates"][2]["output_hash"], "dimension_binding_digest": state["dimension_binding"]["binding_digest"]}), "output_hash": hash_value({"blocked": str(exc)})}
-            state["completed_gates"].append(gate)
-            atomic_json(root / "gate-04-dry-compile.json", {"execution_input_hash": execution_hash, "error": str(exc), "gate": gate})
-            save_state(root, state)
-            return public_status(state)
+            return block_compile(root, state, execution_hash, str(exc), expected)
         aggregate = CONTRACT.dry_compile_aggregate_hash(state["slug_results"])
         state["artifact_hashes"]["dry_compile_candidate"] = aggregate
         state["dry_compile_status"] = "PASS_TEN_BLOCK_DRY_COMPILE"
         state["counts"].update({"dry_compile_source_files": 10, "dry_compile_locale_projections": 2,
             "components_per_page": 26, "dry_compile_blockers": 0, "candidate_rows": len(outputs),
             "dry_compile_deterministic_rerun_pass": True})
-        gate = {"gate": "dry_compile", "state": "PASS", "input_hash": hash_value({"request_hash": state["request_hash"], "evidence_package": state["artifact_hashes"]["evidence_package"], "evidence_output": state["completed_gates"][2]["output_hash"], "dimension_binding_digest": state["dimension_binding"]["binding_digest"]}), "output_hash": aggregate}
+        gate = {"gate": "dry_compile", "state": "PASS", "input_hash": compile_gate_input_hash(state, expected), "output_hash": aggregate}
         state["execution_input_hashes"]["dry_compile"] = execution_hash
-        state["completed_gates"].append(gate)
+        replace_gate(state, gate)
         state["state"], state["blocker"] = "DRY_COMPILE_PASS", None
-        atomic_json(root / "gate-04-dry-compile.json", {"execution_input_hash": execution_hash, "per_slug": outputs, "gate": gate})
+        atomic_json(root / "gate-04-dry-compile.json", {"execution_input_hash": execution_hash, "compiler_input_lock": expected, "per_slug": outputs, "gate": gate})
         save_state(root, state)
         return public_status(state)
 
 
 def receipt_from_state(state: dict[str, Any], request: dict[str, Any]) -> dict[str, Any]:
+    research = state["input_bindings"]["research_package"]
+    compiler = state["input_bindings"]["compiler_inputs"]
+    receipt_bindings = {
+        "research_package": {
+            key: research[key] for key in (
+                "canonical_path", "package_aggregate_sha256", "candidate_tree_sha256",
+                "research_receipt_sha256", "source_registry_sha256", "claim_bindings_sha256",
+                "careers_tree_sha256", "entry_manifest_sha256", "validated_slugs", "validator_version",
+            )
+        },
+        "compiler_inputs": {
+            "source_root_canonical_path": compiler["source_root"]["canonical_path"],
+            "source_root_digest": compiler["source_root"]["tree_sha256"],
+            "lookup_canonical_path": compiler["lookup"]["canonical_path"],
+            "lookup_digest": compiler["lookup"]["raw_sha256"],
+            "control_slug": compiler["control_slug"],
+            "evidence_packages": compiler["evidence_packages"],
+            "evidence_package_digest": compiler["evidence_package_digest"],
+        },
+    }
     return {
         "contract_version": "career.content_agent.receipt.v1", "batch_id": request["batch_id"],
         "request_hash": state["request_hash"], "inventory_hash": state["inventory_hash"],
         "source_policy": state["source_policy"], "adapter_version": ADAPTER_VERSION,
         "batch_risk": request["risk_class"]["batch_max"], "final_state": "ORCHESTRATED",
         "gates": list(state["completed_gates"]), "artifact_hashes": state["artifact_hashes"],
+        "input_bindings": receipt_bindings,
         "slug_results": state["slug_results"], "dimension_binding": state["dimension_binding"],
         "evidence_contract_versions": state["evidence_contract_versions"],
         "dry_compile_status": state["dry_compile_status"], "counts": state["counts"],
@@ -656,10 +995,10 @@ def main() -> int:
         else:
             root = resolve_root(args.output_root)
             if args.command in {"status", "resume"}: result = status(root)
-            elif args.command == "record-research": result = record_research(root, args.research_package.resolve(strict=True), args.observations.resolve(strict=True))
-            elif args.command == "record-editorial": result = record_editorial(root, args.result.resolve(strict=True))
-            elif args.command == "run-evidence-adapter": result = run_evidence(root, args.research_package.resolve(strict=True), args.source_root.resolve(strict=True), args.lookup.resolve(strict=True), args.control_slug)
-            elif args.command == "run-dry-compile": result = run_compile(root, args.source_root.resolve(strict=True), args.lookup.resolve(strict=True))
+            elif args.command == "record-research": result = record_research(root, args.research_package, args.observations)
+            elif args.command == "record-editorial": result = record_editorial(root, args.result)
+            elif args.command == "run-evidence-adapter": result = run_evidence(root, args.research_package, args.source_root, args.lookup, args.control_slug)
+            elif args.command == "run-dry-compile": result = run_compile(root, args.source_root, args.lookup)
             elif args.command == "finalize": result = finalize(root)
             else: raise AgentError("unknown_command")
         print(json.dumps(result, ensure_ascii=False, sort_keys=True))
