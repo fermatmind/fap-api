@@ -3248,6 +3248,20 @@
         color: var(--ops-sidebar-text-active);
     }
 
+    .fi-body.fi-panel-ops .fi-sidebar .fi-icon-btn,
+    .fi-body.fi-panel-ops .fi-sidebar-header .fi-icon-btn {
+        background: transparent;
+        color: var(--ops-sidebar-text);
+        box-shadow: none;
+    }
+
+    .fi-body.fi-panel-ops .fi-sidebar .fi-icon-btn:hover,
+    .fi-body.fi-panel-ops .fi-sidebar-header .fi-icon-btn:hover {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--ops-sidebar-text-active);
+        box-shadow: none;
+    }
+
     .fi-body.fi-panel-ops .fi-sidebar-close-overlay {
         background: rgba(10, 14, 19, 0.4);
     }
@@ -3357,6 +3371,18 @@
 
     .fi-body.fi-panel-ops .fi-header > div:last-child {
         gap: 0.5rem;
+    }
+
+    .fi-body.fi-panel-ops .fi-header > div:last-child .fi-ac > .fi-ac-action:not(:first-child) {
+        background: var(--ops-bg-surface);
+        color: var(--ops-text-primary);
+        box-shadow: inset 0 0 0 1px var(--ops-border-default);
+    }
+
+    .fi-body.fi-panel-ops .fi-header > div:last-child .fi-ac > .fi-ac-action:not(:first-child):hover {
+        background: var(--ops-bg-surface-subtle);
+        color: var(--ops-text-primary);
+        box-shadow: inset 0 0 0 1px var(--ops-border-strong);
     }
 
     .fi-body.fi-panel-ops .fi-section,

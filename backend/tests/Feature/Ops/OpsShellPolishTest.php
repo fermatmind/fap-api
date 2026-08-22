@@ -124,6 +124,8 @@ final class OpsShellPolishTest extends TestCase
 
         $this->assertStringContainsString('background: var(--ops-sidebar-bg);', $theme);
         $this->assertStringContainsString('box-shadow: inset 2px 0 0 var(--ops-electric);', $theme);
+        $this->assertStringContainsString('.fi-header > div:last-child .fi-ac > .fi-ac-action:not(:first-child)', $theme);
+        $this->assertStringContainsString('.fi-sidebar-header .fi-icon-btn', $theme);
         $this->assertStringContainsString('background: var(--ops-bg-editor);', $theme);
 
         $this->assertDoesNotMatchRegularExpression('/letter-spacing:\\s*-/', $theme);
