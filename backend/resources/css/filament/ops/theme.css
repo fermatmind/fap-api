@@ -3248,15 +3248,15 @@
         color: var(--ops-sidebar-text-active);
     }
 
-    .fi-body.fi-panel-ops .fi-sidebar .fi-icon-btn,
-    .fi-body.fi-panel-ops .fi-sidebar-header .fi-icon-btn {
+    .fi-body.fi-panel-ops .fi-sidebar .fi-icon-btn.fi-color-gray,
+    .fi-body.fi-panel-ops .fi-sidebar-header .fi-icon-btn.fi-color-gray {
         background: transparent;
         color: var(--ops-sidebar-text);
         box-shadow: none;
     }
 
-    .fi-body.fi-panel-ops .fi-sidebar .fi-icon-btn:hover,
-    .fi-body.fi-panel-ops .fi-sidebar-header .fi-icon-btn:hover {
+    .fi-body.fi-panel-ops .fi-sidebar .fi-icon-btn.fi-color-gray:hover,
+    .fi-body.fi-panel-ops .fi-sidebar-header .fi-icon-btn.fi-color-gray:hover {
         background: rgba(255, 255, 255, 0.05);
         color: var(--ops-sidebar-text-active);
         box-shadow: none;
