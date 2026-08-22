@@ -722,6 +722,7 @@ final class BigFiveEn52ControlledReleaseTest extends TestCase
 
         if (DB::connection()->getDriverName() !== 'sqlite') {
             $command->assertFailed()->expectsOutputToContain('writes_committed=0');
+            unset($command);
             $this->assertDatabaseCount('personality_public_content_asset_revisions', 0);
 
             return;
@@ -734,6 +735,7 @@ final class BigFiveEn52ControlledReleaseTest extends TestCase
             ->expectsOutputToContain('created_revision_count=52')
             ->expectsOutputToContain('writes_committed=1');
 
+        unset($command);
         $this->assertDatabaseCount('personality_public_content_asset_revisions', 52);
     }
 
