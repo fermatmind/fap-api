@@ -441,7 +441,7 @@
     }
 
     .fi-body.fi-panel-ops .ops-data-strip {
-        grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+        grid-template-columns: repeat(7, minmax(0, 1fr));
         background: var(--ops-bg-surface);
         border-color: var(--ops-border-default);
         box-shadow: var(--ops-shadow-surface);
@@ -4873,7 +4873,9 @@
 /* SEO operations: one dense workspace rather than a stack of cards. */
 @layer components {
     .fi-body.fi-panel-ops .ops-seo-workspace {
+        min-width: 0;
         gap: 1.125rem;
+        overflow-x: clip;
     }
 
     .fi-body.fi-panel-ops .ops-seo-page-header {
@@ -4941,7 +4943,7 @@
 
     .fi-body.fi-panel-ops .ops-seo-commandbar {
         display: grid;
-        grid-template-columns: repeat(3, minmax(10.5rem, 0.6fr)) minmax(18rem, 1.4fr) minmax(14rem, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
         align-items: end;
         gap: 0;
         overflow: hidden;
@@ -4998,6 +5000,12 @@
     .fi-body.fi-panel-ops .ops-seo-commandbar__views .ops-saved-views {
         flex-wrap: nowrap;
         overflow-x: auto;
+    }
+
+    .fi-body.fi-panel-ops .ops-seo-commandbar__views,
+    .fi-body.fi-panel-ops .ops-seo-commandbar__contract {
+        grid-column: span 3;
+        border-top: 1px solid var(--ops-border-default);
     }
 
     .fi-body.fi-panel-ops .ops-seo-commandbar__contract span {
@@ -5149,14 +5157,37 @@
         padding: 0.625rem 0.75rem;
     }
 
+    .fi-body.fi-panel-ops .ops-seo-workspace-panel .ops-table-shell {
+        max-width: 100%;
+        overflow-x: auto;
+        overscroll-behavior-inline: contain;
+    }
+
+    .fi-body.fi-panel-ops .ops-seo-inspector {
+        display: grid;
+        min-width: 0;
+        gap: 0.75rem;
+        margin-top: 1rem;
+        padding: 0.875rem;
+        border: 1px solid var(--ops-border-default);
+        border-radius: var(--ops-radius-card);
+        background: color-mix(in srgb, var(--ops-bg-surface) 94%, var(--ops-electric));
+    }
+
+    .fi-body.fi-panel-ops .ops-seo-workspace[data-display-preset='decision'] .ops-seo-field-evidence,
+    .fi-body.fi-panel-ops .ops-seo-workspace[data-display-preset='workflow'] .ops-seo-field-evidence,
+    .fi-body.fi-panel-ops .ops-seo-workspace[data-display-preset='workflow'] .ops-seo-field-scope {
+        display: none;
+    }
+
     @media (max-width: 1279px) {
         .fi-body.fi-panel-ops .ops-seo-commandbar {
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: repeat(4, minmax(0, 1fr));
         }
 
         .fi-body.fi-panel-ops .ops-seo-commandbar__views,
         .fi-body.fi-panel-ops .ops-seo-commandbar__contract {
-            grid-column: span 3;
+            grid-column: span 2;
             border-top: 1px solid var(--ops-border-default);
         }
 
@@ -5192,6 +5223,11 @@
             grid-column: auto;
             border-right: 0;
             border-bottom: 1px solid var(--ops-border-default);
+        }
+
+        .fi-body.fi-panel-ops .ops-seo-commandbar__views,
+        .fi-body.fi-panel-ops .ops-seo-commandbar__contract {
+            grid-column: 1 / -1;
         }
 
         .fi-body.fi-panel-ops .ops-seo-commandbar__contract,

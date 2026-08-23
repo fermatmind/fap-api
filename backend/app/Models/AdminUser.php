@@ -12,6 +12,9 @@ class AdminUser extends Authenticatable implements FilamentUser
 {
     use HasFactory, Notifiable;
 
+    /** @var list<string>|null */
+    private ?array $permissionNameCache = null;
+
     protected $table = 'admin_users';
 
     protected $fillable = [
@@ -59,11 +62,21 @@ class AdminUser extends Authenticatable implements FilamentUser
 
     public function hasPermission(string $permissionName): bool
     {
-        return $this->roles()
-            ->whereHas('permissions', function ($query) use ($permissionName) {
-                $query->where('name', $permissionName);
-            })
-            ->exists();
+        $this->permissionNameCache ??= $this->roles()
+            ->with('permissions:id,name')
+            ->get()
+            ->flatMap(static fn (Role $role) => $role->permissions->pluck('name'))
+            ->unique()
+            ->values()
+            ->all();
+
+        return in_array($permissionName, $this->permissionNameCache, true);
+    }
+
+    public function forgetPermissionCache(): void
+    {
+        $this->permissionNameCache = null;
+        $this->unsetRelation('roles');
     }
 
     public function canAccessPanel(Panel $panel): bool

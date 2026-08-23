@@ -23,6 +23,7 @@ class RbacService
         ]);
 
         $user->roles()->syncWithoutDetaching([$role->id]);
+        $user->forgetPermissionCache();
     }
 
     public function revokeRole(AdminUser $user, string $roleName): void
@@ -37,6 +38,7 @@ class RbacService
         }
 
         $user->roles()->detach([$role->id]);
+        $user->forgetPermissionCache();
     }
 
     /**

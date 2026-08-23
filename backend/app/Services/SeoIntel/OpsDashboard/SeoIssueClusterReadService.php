@@ -197,7 +197,24 @@ final class SeoIssueClusterReadService extends AbstractSeoDashboardReadService
 
                 return $cluster;
             })
-            ->sort(function (array $left, array $right): int {
+            ->sort(function (array $left, array $right) use ($filters): int {
+                $sort = (string) ($filters['sort'] ?? 'priority');
+                if ($sort === 'impact') {
+                    $impact = ((float) data_get($right, 'priority.impact.total', 0)) <=> ((float) data_get($left, 'priority.impact.total', 0));
+                    if ($impact !== 0) {
+                        return $impact;
+                    }
+                } elseif ($sort === 'affected_urls') {
+                    $affected = ((int) $right['affected_url_count']) <=> ((int) $left['affected_url_count']);
+                    if ($affected !== 0) {
+                        return $affected;
+                    }
+                } elseif ($sort === 'newest') {
+                    $newest = strcmp((string) ($right['last_detected_at'] ?? ''), (string) ($left['last_detected_at'] ?? ''));
+                    if ($newest !== 0) {
+                        return $newest;
+                    }
+                }
                 $priority = ((float) data_get($right, 'priority.score', 0)) <=> ((float) data_get($left, 'priority.score', 0));
 
                 return $priority !== 0

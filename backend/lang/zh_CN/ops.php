@@ -1411,6 +1411,9 @@ return [
             'contract_hint' => '页面指标、文章列表、下钻、Saved Views 与 CSV 导出统一使用全局 org_id=0 范围契约。',
             'apply_action' => '应用 SEO 动作',
             'export_report' => '导出报告',
+            'toolbar' => 'SEO 工作区控制栏',
+            'sort' => ['label' => '排序', 'priority' => '优先级', 'impact' => '搜索影响', 'affected_urls' => '受影响 URL', 'newest' => '最新证据'],
+            'display' => ['label' => '显示字段', 'decision' => '决策核心', 'evidence' => '证据审核', 'workflow' => '流程跟踪'],
             'workspace' => [
                 'overview' => '总览',
                 'performance' => '搜索表现',
@@ -1473,7 +1476,7 @@ return [
             ],
             'performance' => [
                 'title' => 'Google 搜索表现',
-                'description' => '只展示已采集到 seo_intel.seo_gsc_daily 的真实记录。',
+                'description' => '只展示已验证的 Google Search Analytics 真实记录。',
                 'not_connected' => '当前时间范围没有 GSC 数据，不展示演示指标。',
                 'clicks' => '点击',
                 'impressions' => '展现',
@@ -1545,10 +1548,11 @@ return [
                 'scopes' => ['single_url' => '单 URL', 'template' => '模板级', 'site' => '站点级', 'external_disconnected' => '外部数据未连接'],
                 'checks' => ['sitemap' => 'Sitemap', 'robots' => 'Robots', 'canonical' => 'Canonical', 'cms_indexability' => 'CMS 可索引性', 'public_html' => '公开 HTML', 'index_evidence' => '可验证索引证据', 'external_source' => '外部数据连接'],
                 'sources' => ['url_truth' => 'URL Truth', 'issue_queue' => '问题队列', 'crawler_logs' => 'Crawler 日志', 'gsc_search_analytics' => 'GSC Search Analytics', 'field_cwv' => 'Field CWV（CrUX/PageSpeed）'],
+                'evidence_available' => '查看支持证据',
             ],
             'execution' => [
                 'title' => 'SEO 问题执行中心',
-                'description' => '发现 → 分派 → 修复 → 验证 → 关闭，状态落在 seo_intel 真实问题记录。',
+                'description' => '发现 → 分派 → 修复 → 验证 → 关闭，状态落在受保护的真实问题记录。',
                 'unavailable' => '当前环境尚未连接 seo_intel 问题队列。',
                 'owner' => '负责人',
                 'first_seen' => '首次发现',
@@ -1568,6 +1572,9 @@ return [
                 'verify_close' => '验证并关闭',
                 'ignore' => '忽略',
                 'reopen' => '重新打开',
+                'assigned' => '已分派',
+                'unassigned' => '未分派',
+                'unmapped_url' => '未映射 URL',
             ],
             'table' => [
                 'query' => '查询词',

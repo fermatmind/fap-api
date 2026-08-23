@@ -39,7 +39,13 @@
         ];
     @endphp
 
-    <div class="ops-shell-page ops-seo-workspace">
+    <div
+        class="ops-shell-page ops-seo-workspace"
+        data-query-budget="{{ \App\Filament\Ops\Pages\SeoOperationsPage::MAX_INITIAL_QUERY_COUNT }}"
+        data-response-budget-ms="{{ \App\Filament\Ops\Pages\SeoOperationsPage::MAX_INITIAL_RESPONSE_MS }}"
+        data-dom-row-budget="{{ \App\Filament\Ops\Pages\SeoOperationsPage::MAX_RENDERED_TABLE_ROWS }}"
+        data-display-preset="{{ $displayPreset }}"
+    >
         <header class="ops-seo-page-header">
             <div class="ops-seo-page-header__copy">
                 <span class="ops-shell-eyebrow">{{ __('ops.custom_pages.seo_operations.eyebrow') }}</span>
@@ -92,7 +98,19 @@
             </section>
         @endif
 
-        <div class="ops-seo-commandbar">
+        <div class="ops-seo-commandbar" role="toolbar" aria-label="{{ __('ops.custom_pages.seo_operations.toolbar') }}">
+            <label class="ops-seo-commandbar__field" for="ops-seo-scope-filter">
+                <span>{{ __('ops.custom_pages.seo_operations.scopes.title') }}</span>
+                <select id="ops-seo-scope-filter" wire:model.live="scopeFilter">
+                    @foreach ([
+                        \App\Services\Ops\SeoContentScopeViewModel::SCOPE_COMBINED => __('ops.custom_pages.seo_operations.scopes.combined'),
+                        \App\Services\Ops\SeoContentScopeViewModel::SCOPE_GLOBAL_ARTICLES => __('ops.custom_pages.seo_operations.scopes.global_articles'),
+                        \App\Services\Ops\SeoContentScopeViewModel::SCOPE_GLOBAL_CAREER => __('ops.custom_pages.seo_operations.scopes.global_career'),
+                    ] as $value => $label)
+                        <option value="{{ $value }}">{{ $label }}</option>
+                    @endforeach
+                </select>
+            </label>
             <label class="ops-seo-commandbar__field" for="ops-seo-type-filter">
                 <span>{{ __('ops.custom_pages.seo_operations.content_type') }}</span>
                 <select id="ops-seo-type-filter" wire:model.live="typeFilter">
@@ -125,6 +143,23 @@
                     @endforeach
                 </select>
             </label>
+            <label class="ops-seo-commandbar__field" for="ops-seo-sort">
+                <span>{{ __('ops.custom_pages.seo_operations.sort.label') }}</span>
+                <select id="ops-seo-sort" wire:model.live="sortBy">
+                    <option value="priority">{{ __('ops.custom_pages.seo_operations.sort.priority') }}</option>
+                    <option value="impact">{{ __('ops.custom_pages.seo_operations.sort.impact') }}</option>
+                    <option value="affected_urls">{{ __('ops.custom_pages.seo_operations.sort.affected_urls') }}</option>
+                    <option value="newest">{{ __('ops.custom_pages.seo_operations.sort.newest') }}</option>
+                </select>
+            </label>
+            <label class="ops-seo-commandbar__field" for="ops-seo-display">
+                <span>{{ __('ops.custom_pages.seo_operations.display.label') }}</span>
+                <select id="ops-seo-display" wire:model.live="displayPreset">
+                    <option value="decision">{{ __('ops.custom_pages.seo_operations.display.decision') }}</option>
+                    <option value="evidence">{{ __('ops.custom_pages.seo_operations.display.evidence') }}</option>
+                    <option value="workflow">{{ __('ops.custom_pages.seo_operations.display.workflow') }}</option>
+                </select>
+            </label>
             @if (\App\Filament\Ops\Support\ContentAccess::canWrite())
                 <label class="ops-seo-commandbar__field" for="ops-seo-bulk-action">
                     <span>{{ __('ops.custom_pages.seo_operations.bulk_action') }}</span>
@@ -148,6 +183,18 @@
                 <span>{{ __('ops.custom_pages.seo_operations.contract_hint') }}</span>
             </div>
         </div>
+
+        <section class="ops-seo-source-strip" aria-label="{{ __('ops.custom_pages.seo_operations.sources.title') }}">
+            @foreach ($dataSources as $source)
+                <div @class(['ops-seo-source', 'ops-seo-source--connected' => !empty($source['connected'])])>
+                    <span class="ops-seo-source__signal" aria-hidden="true"></span>
+                    <div>
+                        <strong>{{ $source['label'] }}</strong>
+                        <p>{{ !empty($source['connected']) ? __('ops.custom_pages.seo_operations.sources.connected') : __('ops.custom_pages.seo_operations.sources.not_connected') }}@if (!empty($source['updated_at'])) · {{ __('ops.custom_pages.seo_operations.sources.updated_at', ['time' => $source['updated_at']]) }}@endif</p>
+                    </div>
+                </div>
+            @endforeach
+        </section>
 
         @if ($activeWorkspace !== 'overview')
         <nav class="ops-seo-related-links" aria-label="{{ __('ops.custom_pages.seo_operations.title') }}">
@@ -322,25 +369,6 @@
                 </div>
             </x-filament-ops::ops-section>
 
-            <x-filament-ops::ops-section :title="__('ops.custom_pages.seo_operations.sources.title')">
-                <div class="ops-seo-source-strip">
-                    @foreach ($dataSources as $source)
-                        <div @class(['ops-seo-source', 'ops-seo-source--connected' => !empty($source['connected'])])>
-                            <span class="ops-seo-source__signal" aria-hidden="true"></span>
-                            <div>
-                                <strong>{{ $source['label'] }}</strong>
-                                <p>
-                                    @if (!empty($source['connected']))
-                                        {{ $source['source'] ?? '' }} · {{ __('ops.custom_pages.seo_operations.sources.updated_at', ['time' => $source['updated_at'] ?? '-']) }}
-                                    @else
-                                        {{ __('ops.custom_pages.seo_operations.sources.not_connected') }}
-                                    @endif
-                                </p>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </x-filament-ops::ops-section>
         @endif
 
         @if ($activeWorkspace === 'technical')
@@ -361,7 +389,7 @@
                 </div>
                 <div class="ops-table-shell"><table class="ops-table"><thead><tr><th>{{ __('ops.custom_pages.seo_operations.technical.check') }}</th><th>{{ __('ops.custom_pages.seo_operations.technical.scope') }}</th><th>{{ __('ops.custom_pages.seo_operations.table.page') }}</th><th>{{ __('ops.custom_pages.seo_operations.technical.root_cause') }}</th><th>{{ __('ops.custom_pages.seo_operations.technical.evidence') }}</th><th>{{ __('ops.custom_pages.common.table.actions') }}</th></tr></thead><tbody>
                     @forelse (($technicalAudit['rows'] ?? []) as $row)
-                        <tr><td>{{ __('ops.custom_pages.seo_operations.technical.checks.'.($row['check'] ?? 'cms_indexability')) }}</td><td>{{ __('ops.custom_pages.seo_operations.technical.scopes.'.($row['scope'] ?? 'site')) }}</td><td>{{ $row['canonical_path'] ?? '-' }}</td><td>{{ $row['root_cause'] ?? '-' }}<br><span class="ops-control-hint">{{ $row['summary'] ?? '-' }}</span></td><td><details><summary>{{ $row['evidence']['source_system'] ?? '-' }}</summary><span class="ops-control-hint">{{ $row['evidence']['evidence_hash'] ?? $row['issue_uid'] }}</span></details></td><td>{{ $row['recommended_action'] ?? '-' }}</td></tr>
+                        <tr><td>{{ __('ops.custom_pages.seo_operations.technical.checks.'.($row['check'] ?? 'cms_indexability')) }}</td><td>{{ __('ops.custom_pages.seo_operations.technical.scopes.'.($row['scope'] ?? 'site')) }}</td><td>{{ $row['canonical_path'] ?? '-' }}</td><td>{{ $this->operatorLabel($row['root_cause'] ?? null) }}<br><span class="ops-control-hint">{{ $row['summary'] ?? '-' }}</span></td><td><details><summary>{{ $this->operatorLabel($row['evidence']['source_system'] ?? null) }}</summary><span class="ops-control-hint">{{ $row['summary'] ?? __('ops.custom_pages.seo_operations.technical.evidence_available') }}</span></details></td><td>{{ $this->operatorLabel($row['recommended_action'] ?? null) }}</td></tr>
                     @empty
                         <tr><td colspan="6">{{ __('ops.custom_pages.seo_operations.technical.empty') }}</td></tr>
                     @endforelse
@@ -406,7 +434,7 @@
                 @if (\App\Filament\Ops\Support\ContentAccess::canWrite())
                     <x-filament-ops::ops-toolbar>
                         <div class="ops-toolbar-inline">
-                            <select wire:model="selectedIssueUid" aria-label="{{ __('ops.custom_pages.seo_operations.execution.issue') }}"><option value="">{{ __('ops.custom_pages.seo_operations.execution.inspect_to_select') }}</option>@foreach ($clusterUrls as $issue)<option value="{{ $issue['issue_uid'] }}">{{ $issue['canonical_path'] ?? $issue['issue_uid'] }}</option>@endforeach</select>
+                            <select wire:model="selectedIssueUid" aria-label="{{ __('ops.custom_pages.seo_operations.execution.issue') }}"><option value="">{{ __('ops.custom_pages.seo_operations.execution.inspect_to_select') }}</option>@foreach ($clusterUrls as $issue)<option value="{{ $issue['issue_uid'] }}">{{ $issue['canonical_path'] ?? __('ops.custom_pages.seo_operations.execution.unmapped_url') }}</option>@endforeach</select>
                             <select wire:model="workflowAction" aria-label="{{ __('ops.custom_pages.common.table.actions') }}"><option value="assign">{{ __('ops.custom_pages.seo_operations.execution.assign_me') }}</option><option value="fixed">{{ __('ops.custom_pages.seo_operations.execution.mark_fixed') }}</option><option value="verify">{{ __('ops.custom_pages.seo_operations.execution.verify_close') }}</option><option value="ignore">{{ __('ops.custom_pages.seo_operations.execution.ignore') }}</option><option value="reopen">{{ __('ops.custom_pages.seo_operations.execution.reopen') }}</option></select>
                             <input wire:model="operatorNote" placeholder="{{ __('ops.custom_pages.seo_operations.execution.operator_note') }}" />
                             <input wire:model="ignoreReason" placeholder="{{ __('ops.custom_pages.seo_operations.execution.reason') }}" />
@@ -417,10 +445,10 @@
                     </x-filament-ops::ops-toolbar>
                     <p class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.execution.verification_hint') }}</p>
                 @endif
-                <div class="ops-table-shell"><table class="ops-table"><thead><tr><th>{{ __('ops.custom_pages.seo_operations.clusters.cluster') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.priority') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.root_cause_scope') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.severity') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.affected_urls') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.evidence') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.status') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.recommendation') }}</th><th>{{ __('ops.custom_pages.common.table.actions') }}</th></tr></thead><tbody>
+                <div class="ops-table-shell"><table class="ops-table"><thead><tr><th>{{ __('ops.custom_pages.seo_operations.clusters.cluster') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.priority') }}</th><th class="ops-seo-field-scope">{{ __('ops.custom_pages.seo_operations.clusters.root_cause_scope') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.severity') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.affected_urls') }}</th><th class="ops-seo-field-evidence">{{ __('ops.custom_pages.seo_operations.clusters.evidence') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.status') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.recommendation') }}</th><th>{{ __('ops.custom_pages.common.table.actions') }}</th></tr></thead><tbody>
                     @forelse ($issueClusters as $cluster)
                         <tr>
-                            <td><strong>{{ $cluster['issue_type'] }}</strong><br><span class="ops-control-hint">{{ $cluster['cluster_uid'] }}</span></td>
+                            <td><strong>{{ $this->operatorLabel($cluster['issue_type']) }}</strong></td>
                             <td>
                                 <strong class="tnum">{{ data_get($cluster, 'priority.score', '-') }}</strong>
                                 <br><span class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.clusters.priority_formula', [
@@ -441,10 +469,10 @@
                                     <br><span class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.clusters.no_gsc_impact') }}</span>
                                 @endif
                             </td>
-                            <td>{{ $cluster['root_cause'] }}<br><span class="ops-control-hint">{{ $cluster['content_type'] }} · {{ $cluster['template'] }} · {{ $cluster['field'] }} · {{ $cluster['source'] }}</span></td>
+                            <td class="ops-seo-field-scope">{{ $this->operatorLabel($cluster['root_cause']) }}<br><span class="ops-control-hint">{{ $this->operatorLabel($cluster['content_type']) }} · {{ $this->operatorLabel($cluster['template']) }} · {{ $this->operatorLabel($cluster['field']) }}</span></td>
                             <td><x-filament.ops.shared.status-pill :state="$cluster['severity']" :label="$cluster['severity']" /></td>
                             <td><span class="tnum">{{ $cluster['affected_url_count'] }}</span><br><span class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.clusters.issue_rows', ['count' => $cluster['issue_count']]) }}</span></td>
-                            <td><span class="tnum">{{ $cluster['evidence_count'] }}</span><br><span class="ops-control-hint">{{ $cluster['summary'] ?? '-' }}</span></td>
+                            <td class="ops-seo-field-evidence"><span class="tnum">{{ $cluster['evidence_count'] }}</span><br><span class="ops-control-hint">{{ $cluster['summary'] ?? '-' }}</span></td>
                             <td>{{ $cluster['status'] }}<br><span class="ops-control-hint">{{ $cluster['first_detected_at'] ?? '-' }} → {{ $cluster['last_detected_at'] ?? '-' }}</span></td>
                             <td>{{ $cluster['recommendation'] ?? '-' }}</td>
                             <td><x-filament::button size="xs" color="gray" type="button" wire:click="inspectIssueCluster('{{ $cluster['cluster_uid'] }}')">{{ __('ops.custom_pages.common.actions.inspect') }}</x-filament::button></td>
@@ -462,10 +490,11 @@
                 @endif
 
                 @if ($selectedClusterUid !== '')
-                    <div class="ops-seo-section-heading"><div><h3>{{ __('ops.custom_pages.seo_operations.clusters.inspector') }}</h3><p>{{ $selectedClusterUid }} · {{ __('ops.custom_pages.seo_operations.clusters.issue_rows', ['count' => $clusterUrlTotal]) }}</p></div></div>
+                    <aside class="ops-seo-inspector" aria-label="{{ __('ops.custom_pages.seo_operations.clusters.inspector') }}">
+                    <div class="ops-seo-section-heading"><div><h3>{{ __('ops.custom_pages.seo_operations.clusters.inspector') }}</h3><p>{{ __('ops.custom_pages.seo_operations.clusters.issue_rows', ['count' => $clusterUrlTotal]) }}</p></div></div>
                     <div class="ops-table-shell"><table class="ops-table"><thead><tr><th>{{ __('ops.custom_pages.seo_operations.table.page') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.type_locale') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.severity') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.status') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.evidence') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.recommendation') }}</th></tr></thead><tbody>
                         @forelse ($clusterUrls as $url)
-                            <tr><td>{{ $url['canonical_path'] ?? '-' }}<br><span class="ops-control-hint">{{ $url['issue_uid'] }}</span></td><td>{{ $url['page_entity_type'] ?? '-' }} · {{ $url['locale'] ?? '-' }}</td><td>{{ $url['severity'] }}</td><td>{{ $url['status'] }} / {{ $url['lifecycle_state'] }}<br><span class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.execution.owner') }} #{{ $url['owner_admin_user_id'] ?? '-' }} · {{ __('ops.custom_pages.seo_operations.execution.sla') }} {{ $url['sla_due_at'] ?? '-' }} · v{{ $url['lock_version'] }}</span><br><span class="ops-control-hint">{{ $url['ignore_reason'] ?? $url['verification_note'] ?? $url['operator_note'] ?? '-' }}</span></td><td><span class="ops-control-hint">{{ $url['evidence_fingerprint'] }}<br>{{ $url['summary'] ?? '-' }}</span></td><td>{{ $url['recommendation'] ?? '-' }}</td></tr>
+                            <tr><td>{{ $url['canonical_path'] ?? '-' }}</td><td>{{ $this->operatorLabel($url['page_entity_type'] ?? null) }} · {{ $url['locale'] ?? '-' }}</td><td>{{ $this->operatorLabel($url['severity']) }}</td><td>{{ $this->operatorLabel($url['status']) }} / {{ $this->operatorLabel($url['lifecycle_state']) }}<br><span class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.execution.owner') }}: {{ empty($url['owner_admin_user_id']) ? __('ops.custom_pages.seo_operations.execution.unassigned') : __('ops.custom_pages.seo_operations.execution.assigned') }} · {{ __('ops.custom_pages.seo_operations.execution.sla') }} {{ $url['sla_due_at'] ?? '-' }}</span><br><span class="ops-control-hint">{{ $url['ignore_reason'] ?? $url['verification_note'] ?? $url['operator_note'] ?? '-' }}</span></td><td><details><summary>{{ __('ops.custom_pages.seo_operations.technical.evidence_available') }}</summary><span class="ops-control-hint">{{ $url['summary'] ?? '-' }}</span></details></td><td>{{ $url['recommendation'] ?? '-' }}</td></tr>
                         @empty
                             <tr><td colspan="6">{{ __('ops.custom_pages.seo_operations.no_issues') }}</td></tr>
                         @endforelse
@@ -477,6 +506,7 @@
                             <button type="button" wire:click="nextClusterUrlPage" @disabled($clusterUrlPage >= $clusterUrlLastPage)>{{ __('pagination.next') }}</button>
                         </nav>
                     @endif
+                    </aside>
                 @endif
             @endif
         </x-filament-ops::ops-section>
@@ -553,7 +583,7 @@
                                             {{ __('ops.custom_pages.common.actions.open') }}
                                         </x-filament::button>
                                         @if (!empty($item['autofix_actions']))
-                                            <span class="ops-control-hint">{{ implode(', ', $item['autofix_actions']) }}</span>
+                                            <span class="ops-control-hint">{{ collect($item['autofix_actions'])->map(fn ($action) => $this->operatorLabel($action))->join(' · ') }}</span>
                                         @endif
                                     </div>
                                 </td>

@@ -25,6 +25,25 @@ class SeoOperationsPage extends Page
 {
     public const ISSUE_QUEUE_PER_PAGE = 25;
 
+    public const MAX_INITIAL_QUERY_COUNT = 45;
+
+    public const MAX_INITIAL_RESPONSE_MS = 1500;
+
+    public const MAX_RENDERED_TABLE_ROWS = 100;
+
+    private const DISPLAY_PRESETS = [
+        'decision' => ['priority', 'scope', 'impact', 'status', 'action'],
+        'evidence' => ['priority', 'scope', 'impact', 'evidence', 'status', 'action'],
+        'workflow' => ['priority', 'impact', 'owner', 'sla', 'status', 'action'],
+    ];
+
+    private const SAVED_VIEWS = [
+        'all' => ['workspace' => 'overview', 'scope' => 'combined', 'type' => 'all', 'issue' => 'all', 'locale' => 'all', 'status' => 'all', 'sort' => 'priority', 'display' => 'decision'],
+        'high_impressions_low_ctr' => ['workspace' => 'opportunities', 'scope' => 'combined', 'type' => 'all', 'issue' => 'all', 'locale' => 'all', 'status' => 'all', 'sort' => 'impact', 'display' => 'evidence'],
+        'global_article_blockers' => ['workspace' => 'execution', 'scope' => SeoContentScopeViewModel::SCOPE_GLOBAL_ARTICLES, 'type' => 'article', 'issue' => SeoOperationsService::ISSUE_GROWTH, 'locale' => 'all', 'status' => 'published', 'sort' => 'priority', 'display' => 'workflow'],
+        'global_career_gaps' => ['workspace' => 'execution', 'scope' => SeoContentScopeViewModel::SCOPE_GLOBAL_CAREER, 'type' => 'all', 'issue' => 'all', 'locale' => 'all', 'status' => 'all', 'sort' => 'affected_urls', 'display' => 'decision'],
+    ];
+
     protected static ?string $navigationIcon = 'heroicon-o-globe-alt';
 
     protected static ?string $navigationGroup = null;
@@ -50,6 +69,13 @@ class SeoOperationsPage extends Page
     public string $activeWorkspace = 'overview';
 
     public string $savedView = 'all';
+
+    public string $sortBy = 'priority';
+
+    public string $displayPreset = 'decision';
+
+    /** @var list<string> */
+    public array $displayFields = self::DISPLAY_PRESETS['decision'];
 
     public int $issueQueuePage = 1;
 
@@ -207,6 +233,29 @@ class SeoOperationsPage extends Page
         $this->refreshDashboard(app(SeoOperationsService::class));
     }
 
+    public function updatedSortBy(): void
+    {
+        $this->issueClusterPage = 1;
+        $this->refreshIssueClusters(app(SeoDashboardApiReadService::class));
+    }
+
+    public function updatedDisplayPreset(): void
+    {
+        $this->displayFields = self::DISPLAY_PRESETS[$this->displayPreset] ?? self::DISPLAY_PRESETS['decision'];
+    }
+
+    public function operatorLabel(mixed $value): string
+    {
+        $label = trim((string) $value);
+        if ($label === '') {
+            return '-';
+        }
+
+        return str_contains($label, ' ')
+            ? $label
+            : str((string) preg_replace('/[^a-z0-9]+/i', ' ', $label))->squish()->headline()->toString();
+    }
+
     public function updatedGscDays(): void
     {
         $this->refreshSeoIntel();
@@ -242,23 +291,20 @@ class SeoOperationsPage extends Page
     public function applySavedView(string $view): void
     {
         $this->issueQueuePage = 1;
-        $this->savedView = $view;
+        $this->issueClusterPage = 1;
+        $this->clusterUrlPage = 1;
+        $this->savedView = array_key_exists($view, self::SAVED_VIEWS) ? $view : 'all';
+        $state = self::SAVED_VIEWS[$this->savedView];
 
-        if ($view === 'high_impressions_low_ctr') {
-            $this->activeWorkspace = 'opportunities';
-        } elseif ($view === 'global_article_blockers') {
-            $this->activeWorkspace = 'execution';
-            $this->scopeFilter = SeoContentScopeViewModel::SCOPE_GLOBAL_ARTICLES;
-            $this->issueFilter = SeoOperationsService::ISSUE_GROWTH;
-        } elseif ($view === 'global_career_gaps') {
-            $this->activeWorkspace = 'execution';
-            $this->scopeFilter = 'global';
-            $this->issueFilter = 'all';
-        } else {
-            $this->activeWorkspace = 'overview';
-            $this->scopeFilter = SeoContentScopeViewModel::SCOPE_COMBINED;
-            $this->issueFilter = 'all';
-        }
+        $this->activeWorkspace = $state['workspace'];
+        $this->scopeFilter = $state['scope'];
+        $this->typeFilter = $state['type'];
+        $this->issueFilter = $state['issue'];
+        $this->localeFilter = $state['locale'];
+        $this->statusFilter = $state['status'];
+        $this->sortBy = $state['sort'];
+        $this->displayPreset = $state['display'];
+        $this->displayFields = self::DISPLAY_PRESETS[$this->displayPreset];
 
         $this->selectedTargets = [];
         $this->refreshDashboard(app(SeoOperationsService::class));
@@ -831,9 +877,9 @@ class SeoOperationsPage extends Page
                 'locale' => $this->gscLocale,
                 'search_type' => $this->gscSearchType,
             ]);
-            $this->opportunityReadModel = $reader->opportunityQueue(25);
+            $this->opportunityReadModel = $reader->opportunityQueue(self::ISSUE_QUEUE_PER_PAGE);
             $this->opportunityQueue = (array) data_get($this->opportunityReadModel, 'recent_rows', []);
-            $this->technicalAudit = $reader->technicalAudits(25);
+            $this->technicalAudit = $reader->technicalAudits(self::ISSUE_QUEUE_PER_PAGE);
             $this->refreshIssueClusters($reader);
             if ($this->selectedClusterUid !== '') {
                 $this->refreshClusterUrls($reader);
@@ -886,7 +932,7 @@ class SeoOperationsPage extends Page
 
     private function refreshIssueClusters(SeoDashboardApiReadService $reader): void
     {
-        $result = $reader->issueClusters(page: $this->issueClusterPage, perPage: self::ISSUE_QUEUE_PER_PAGE);
+        $result = $reader->issueClusters($this->clusterFilters(), page: $this->issueClusterPage, perPage: self::ISSUE_QUEUE_PER_PAGE);
         $this->issueClusters = (array) ($result['rows'] ?? []);
         $this->issueClusterSummary = (array) ($result['summary'] ?? []);
         $this->issueClusterTotal = (int) ($result['total_count'] ?? 0);
@@ -1037,6 +1083,7 @@ class SeoOperationsPage extends Page
 
         $result = $reader->issueClusterUrls(
             $this->selectedClusterUid,
+            $this->clusterFilters(),
             page: $this->clusterUrlPage,
             perPage: self::ISSUE_QUEUE_PER_PAGE,
         );
@@ -1062,7 +1109,7 @@ class SeoOperationsPage extends Page
     {
         try {
             $reader = app(SeoDashboardApiReadService::class);
-            $export = $reader->issueClusterExport();
+            $export = $reader->issueClusterExport($this->clusterFilters());
             $clusters = (array) ($export['clusters'] ?? []);
             $urls = (array) ($export['urls'] ?? []);
 
@@ -1070,6 +1117,20 @@ class SeoOperationsPage extends Page
         } catch (Throwable) {
             return [[], []];
         }
+    }
+
+    /** @return array<string,string> */
+    private function clusterFilters(): array
+    {
+        return array_filter([
+            'page_entity_type' => match ($this->typeFilter) {
+                'guide' => 'career_guide',
+                'job' => 'career_job',
+                default => $this->typeFilter,
+            },
+            'locale' => $this->localeFilter,
+            'sort' => $this->sortBy,
+        ], static fn (string $value): bool => $value !== '' && $value !== 'all');
     }
 
     /**

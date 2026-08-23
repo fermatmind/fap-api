@@ -18,11 +18,13 @@ use App\Models\Role;
 use App\Services\Ops\SeoOperationsService;
 use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
+use App\Support\Rbac\RbacService;
 use Filament\Facades\Filament;
 use Filament\PanelRegistry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -689,6 +691,83 @@ final class SeoOperationsPageTest extends TestCase
         $this->assertSame(3, $page->issueQueuePage);
         $this->assertCount(13, $page->visibleIssueQueue());
         $this->assertCount(63, $page->issueQueue);
+    }
+
+    public function test_saved_views_restore_the_complete_workspace_state(): void
+    {
+        $page = new SeoOperationsPage;
+
+        $page->applySavedView('global_article_blockers');
+
+        $this->assertSame('global_article_blockers', $page->savedView);
+        $this->assertSame('execution', $page->activeWorkspace);
+        $this->assertSame('global_articles', $page->scopeFilter);
+        $this->assertSame('article', $page->typeFilter);
+        $this->assertSame(SeoOperationsService::ISSUE_GROWTH, $page->issueFilter);
+        $this->assertSame('all', $page->localeFilter);
+        $this->assertSame('published', $page->statusFilter);
+        $this->assertSame('priority', $page->sortBy);
+        $this->assertSame('workflow', $page->displayPreset);
+        $this->assertSame(['priority', 'impact', 'owner', 'sla', 'status', 'action'], $page->displayFields);
+
+        $page->applySavedView('global_career_gaps');
+
+        $this->assertSame('global_career', $page->scopeFilter);
+        $this->assertSame('affected_urls', $page->sortBy);
+        $this->assertSame('decision', $page->displayPreset);
+    }
+
+    public function test_seo_workspace_declares_bounded_rendering_and_overflow_contracts(): void
+    {
+        $view = (string) file_get_contents(resource_path('views/filament/ops/pages/seo-operations.blade.php'));
+        $theme = (string) file_get_contents(resource_path('css/filament/ops/theme.css'));
+
+        $this->assertSame(25, SeoOperationsPage::ISSUE_QUEUE_PER_PAGE);
+        $this->assertLessThanOrEqual(45, SeoOperationsPage::MAX_INITIAL_QUERY_COUNT);
+        $this->assertLessThanOrEqual(1500, SeoOperationsPage::MAX_INITIAL_RESPONSE_MS);
+        $this->assertLessThanOrEqual(100, SeoOperationsPage::MAX_RENDERED_TABLE_ROWS);
+        $this->assertStringContainsString('role="toolbar"', $view);
+        $this->assertStringContainsString('data-query-budget=', $view);
+        $this->assertStringContainsString('data-response-budget-ms=', $view);
+        $this->assertStringContainsString('data-dom-row-budget=', $view);
+        $this->assertStringContainsString('wire:model.live="sortBy"', $view);
+        $this->assertStringContainsString('wire:model.live="displayPreset"', $view);
+        $this->assertStringContainsString('.ops-seo-workspace-panel .ops-table-shell', $theme);
+        $this->assertStringContainsString('overflow-x: auto', $theme);
+        $this->assertStringContainsString('overflow-x: clip', $theme);
+    }
+
+    public function test_initial_seo_workspace_response_stays_within_query_and_time_budgets(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        $organization = $this->createOrganization('SEO Performance Budget Org');
+        $queryCount = 0;
+        DB::listen(static function () use (&$queryCount): void {
+            $queryCount++;
+        });
+        $startedAt = hrtime(true);
+
+        $this->withSession($this->opsSession($admin, $organization))
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/seo-operations')
+            ->assertOk();
+
+        $elapsedMs = (hrtime(true) - $startedAt) / 1_000_000;
+        $this->assertLessThanOrEqual(SeoOperationsPage::MAX_INITIAL_QUERY_COUNT, $queryCount);
+        $this->assertLessThanOrEqual(SeoOperationsPage::MAX_INITIAL_RESPONSE_MS, $elapsedMs);
+    }
+
+    public function test_request_permission_cache_is_invalidated_by_role_changes(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        $roleName = (string) $admin->roles()->value('name');
+        $rbac = app(RbacService::class);
+
+        $this->assertTrue($admin->hasPermission(PermissionNames::ADMIN_CONTENT_READ));
+        $rbac->revokeRole($admin, $roleName);
+        $this->assertFalse($admin->hasPermission(PermissionNames::ADMIN_CONTENT_READ));
+        $rbac->grantRole($admin, $roleName);
+        $this->assertTrue($admin->hasPermission(PermissionNames::ADMIN_CONTENT_READ));
     }
 
     private function createOrganization(string $name): Organization

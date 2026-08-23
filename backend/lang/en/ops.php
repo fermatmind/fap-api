@@ -1411,6 +1411,9 @@ return [
             'contract_hint' => 'Page metrics, Article lists, drill-downs, saved views, and CSV exports share the same global org_id=0 scope contract.',
             'apply_action' => 'Apply SEO Action',
             'export_report' => 'Export report',
+            'toolbar' => 'SEO workspace controls',
+            'sort' => ['label' => 'Sort', 'priority' => 'Priority', 'impact' => 'Search impact', 'affected_urls' => 'Affected URLs', 'newest' => 'Newest evidence'],
+            'display' => ['label' => 'Display fields', 'decision' => 'Decision essentials', 'evidence' => 'Evidence review', 'workflow' => 'Workflow tracking'],
             'workspace' => [
                 'overview' => 'Overview',
                 'performance' => 'Search performance',
@@ -1473,7 +1476,7 @@ return [
             ],
             'performance' => [
                 'title' => 'Google Search performance',
-                'description' => 'Only rows collected into seo_intel.seo_gsc_daily are shown.',
+                'description' => 'Only verified Google Search Analytics rows are shown.',
                 'not_connected' => 'No GSC rows are available for this window. No demo metrics are shown.',
                 'clicks' => 'Clicks',
                 'impressions' => 'Impressions',
@@ -1545,10 +1548,11 @@ return [
                 'scopes' => ['single_url' => 'Single URL', 'template' => 'Template', 'site' => 'Site', 'external_disconnected' => 'External source disconnected'],
                 'checks' => ['sitemap' => 'Sitemap', 'robots' => 'Robots', 'canonical' => 'Canonical', 'cms_indexability' => 'CMS indexability', 'public_html' => 'Public HTML', 'index_evidence' => 'Verified index evidence', 'external_source' => 'External source connection'],
                 'sources' => ['url_truth' => 'URL Truth', 'issue_queue' => 'Issue queue', 'crawler_logs' => 'Crawler logs', 'gsc_search_analytics' => 'GSC Search Analytics', 'field_cwv' => 'Field CWV (CrUX/PageSpeed)'],
+                'evidence_available' => 'View supporting evidence',
             ],
             'execution' => [
                 'title' => 'SEO issue execution center',
-                'description' => 'Discover → assign → fix → verify → close, backed by seo_intel issue rows.',
+                'description' => 'Discover → assign → fix → verify → close, backed by protected issue records.',
                 'unavailable' => 'The seo_intel issue queue is not connected in this environment.',
                 'owner' => 'Owner',
                 'first_seen' => 'First seen',
@@ -1568,6 +1572,9 @@ return [
                 'verify_close' => 'Verify & close',
                 'ignore' => 'Ignore',
                 'reopen' => 'Reopen',
+                'assigned' => 'Assigned',
+                'unassigned' => 'Unassigned',
+                'unmapped_url' => 'Unmapped URL',
             ],
             'table' => [
                 'query' => 'Query',
