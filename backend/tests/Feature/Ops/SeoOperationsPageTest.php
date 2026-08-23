@@ -267,6 +267,9 @@ final class SeoOperationsPageTest extends TestCase
             ->assertSee('ops-segmented-control__item', false)
             ->assertDontSee('<select id="ops-seo-issue-filter"', false)
             ->assertSee('Growth diagnostics')
+            ->assertSee('Current query snapshot')
+            ->assertDontSee('vs last week')
+            ->assertDontSee('updated recently')
             ->assertSee('SEO issue queue')
             ->assertSee('Article SEO gaps')
             ->assertSee('Career guide SEO gaps');
@@ -506,6 +509,87 @@ final class SeoOperationsPageTest extends TestCase
         $queue = app(SeoOperationsService::class)->buildIssueQueue([(int) $selectedOrg->id], 'article', 'all');
 
         $this->assertCount(SeoOperationsService::MAX_ISSUE_QUEUE_ITEMS, $queue['items']);
+    }
+
+    public function test_export_report_returns_real_csv_download_with_headers_and_content(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+        ]);
+        $selectedOrg = $this->createOrganization('SEO Export Org');
+
+        $article = Article::query()->create([
+            'org_id' => (int) $selectedOrg->id,
+            'slug' => 'export-article',
+            'locale' => 'en',
+            'title' => '=HYPERLINK("https://example.invalid","x")',
+            'excerpt' => 'Export excerpt',
+            'content_md' => 'Body',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => Carbon::now()->subDay(),
+        ]);
+        // Intentionally leave SEO meta gapped so the article surfaces in the
+        // issue queue and its real title is exported.
+        ArticleSeoMeta::query()->create([
+            'org_id' => (int) $selectedOrg->id,
+            'article_id' => (int) $article->id,
+            'locale' => 'en',
+            'seo_title' => '',
+            'seo_description' => '',
+            'canonical_url' => '',
+            'og_title' => '',
+            'og_description' => '',
+            'og_image_url' => '',
+            'robots' => '',
+            'is_indexable' => true,
+        ]);
+
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        app()->instance('request', Request::create('/ops/seo-operations', 'GET'));
+
+        $context = app(OrgContext::class);
+        $context->set((int) $selectedOrg->id, (int) $admin->id, 'admin');
+        app()->instance(OrgContext::class, $context);
+
+        /** @var \Symfony\Component\HttpFoundation\StreamedResponse $response */
+        $response = Livewire::test(SeoOperationsPage::class)
+            ->instance()
+            ->exportReport();
+
+        $this->assertInstanceOf(\Symfony\Component\HttpFoundation\StreamedResponse::class, $response);
+        $this->assertSame('text/csv; charset=utf-8', $response->headers->get('Content-Type'));
+
+        $disposition = (string) $response->headers->get('Content-Disposition');
+        $this->assertStringContainsString('attachment', $disposition);
+        $this->assertStringContainsString('seo-operations-', $disposition);
+        $this->assertStringContainsString('.csv', $disposition);
+
+        ob_start();
+        $response->sendContent();
+        $body = (string) ob_get_clean();
+
+        $this->assertStringStartsWith("\xEF\xBB\xBF", $body);
+        $this->assertStringContainsString('section,label,value,suffix,tone', $body);
+        $this->assertStringContainsString('issue_queue', $body);
+        $this->assertStringContainsString("'=HYPERLINK", $body);
+        $this->assertStringNotContainsString(',=HYPERLINK', $body);
+        $this->assertStringNotContainsString(',"=HYPERLINK', $body);
+    }
+
+    public function test_export_report_is_forbidden_without_read_permission(): void
+    {
+        $admin = $this->createAdminWithPermissions([]);
+
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        app()->instance('request', Request::create('/ops/seo-operations', 'GET'));
+
+        $page = new SeoOperationsPage;
+
+        $this->expectException(\Illuminate\Auth\Access\AuthorizationException::class);
+
+        $page->exportReport();
     }
 
     private function createOrganization(string $name): Organization

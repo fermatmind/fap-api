@@ -58,6 +58,9 @@ class SeoOperationsPage extends Page
 
     public int $issueQueueElapsedMs = 0;
 
+    /** @var list<array<string, mixed>> */
+    public array $healthBand = [];
+
     public function mount(SeoOperationsService $service): void
     {
         $this->refreshDashboard($service);
@@ -116,6 +119,71 @@ class SeoOperationsPage extends Page
             ->body(__('ops.custom_pages.seo_operations.notifications.applied_body', ['count' => $updatedCount]))
             ->success()
             ->send();
+    }
+
+    public function exportReport(): \Symfony\Component\HttpFoundation\StreamedResponse
+    {
+        if (! ContentAccess::canRead()) {
+            throw new AuthorizationException(__('ops.custom_pages.common.errors.seo_action_forbidden'));
+        }
+
+        // Recompute from the authoritative query so the export always reflects
+        // the current org context and never a stale snapshot.
+        $this->refreshDashboard(app(SeoOperationsService::class));
+
+        $filename = 'seo-operations-'.now()->format('Y-m-d-H-i-s').'.csv';
+
+        $callback = function (): void {
+            $out = fopen('php://output', 'w');
+
+            fwrite($out, "\xEF\xBB\xBF");
+            fputcsv($out, array_map($this->spreadsheetSafeCell(...), ['section', 'label', 'value', 'suffix', 'tone']));
+
+            foreach (['healthBand' => $this->healthBand, 'headlineFields' => $this->headlineFields, 'coverageFields' => $this->coverageFields, 'growthFields' => $this->growthFields] as $section => $rows) {
+                foreach ($rows as $row) {
+                    fputcsv($out, array_map($this->spreadsheetSafeCell(...), [
+                        $section,
+                        (string) ($row['label'] ?? ''),
+                        (string) ($row['value'] ?? ''),
+                        (string) ($row['suffix'] ?? ''),
+                        (string) ($row['tone'] ?? ''),
+                    ]));
+                }
+            }
+
+            fputcsv($out, []);
+            fputcsv($out, array_map($this->spreadsheetSafeCell(...), ['issue_queue', 'title', 'type', 'status', 'scope', 'issues', 'growth_signal']));
+
+            foreach ($this->issueQueue as $item) {
+                fputcsv($out, array_map($this->spreadsheetSafeCell(...), [
+                    'issue_queue',
+                    (string) ($item['title'] ?? ''),
+                    (string) ($item['type'] ?? ''),
+                    (string) ($item['status'] ?? ''),
+                    (string) ($item['scope'] ?? ''),
+                    implode('; ', (array) ($item['issue_labels'] ?? [])),
+                    (string) ($item['growth_signal'] ?? ''),
+                ]));
+            }
+
+            fclose($out);
+        };
+
+        return response()->streamDownload($callback, $filename, [
+            'Content-Type' => 'text/csv; charset=utf-8',
+            'Content-Disposition' => 'attachment; filename="'.$filename.'"',
+        ]);
+    }
+
+    private function spreadsheetSafeCell(mixed $value): mixed
+    {
+        if (! is_string($value)) {
+            return $value;
+        }
+
+        return preg_match('/^(?:\s*[=+\-@]|[\t\r\n])/u', $value) === 1
+            ? "'".$value
+            : $value;
     }
 
     public static function getNavigationGroup(): ?string
@@ -338,6 +406,38 @@ class SeoOperationsPage extends Page
         $issueQueue = $service->buildIssueQueue($currentOrgIds, $this->typeFilter, $this->issueFilter);
         $this->issueQueue = $issueQueue['items'] ?? [];
         $this->issueQueueElapsedMs = (int) ($issueQueue['elapsed_ms'] ?? 0);
+
+        $totalInventory = $articleTotal + $careerTotal;
+        $totalSeoReady = $articleSeoReady + $careerSeoReady;
+        $seoReadinessPct = $totalInventory > 0 ? (int) round(($totalSeoReady / $totalInventory) * 100) : 0;
+        $indexableInventory = $indexableFootprint;
+
+        $this->healthBand = [
+            [
+                'label' => __('ops.custom_pages.seo_operations.health.seo_ready'),
+                'value' => (string) $seoReadinessPct,
+                'suffix' => '%',
+                'tone' => $seoReadinessPct >= 80 ? 'success' : ($seoReadinessPct >= 60 ? 'warning' : 'danger'),
+            ],
+            [
+                'label' => __('ops.custom_pages.seo_operations.health.indexable_inventory'),
+                'value' => (string) $indexableInventory,
+                'suffix' => '/'.((string) $totalInventory),
+                'tone' => 'info',
+            ],
+            [
+                'label' => __('ops.custom_pages.seo_operations.health.blocking_records'),
+                'value' => (string) $publishedDiscoveryBlocked,
+                'suffix' => '',
+                'tone' => $publishedDiscoveryBlocked > 0 ? 'danger' : 'success',
+            ],
+            [
+                'label' => __('ops.custom_pages.seo_operations.health.social_preview_gaps'),
+                'value' => (string) $socialPreviewBlocked,
+                'suffix' => '',
+                'tone' => $socialPreviewBlocked > 0 ? 'warning' : 'success',
+            ],
+        ];
     }
 
     /**

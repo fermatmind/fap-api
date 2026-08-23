@@ -18,6 +18,7 @@ use App\Models\MediaAsset;
 use App\Services\Cms\ArticleTranslationRevisionWorkspace;
 use App\Services\Cms\MediaVariantGenerator;
 use App\Support\PublicMediaUrlGuard;
+use App\Support\SchemaBaseline;
 use Filament\Forms;
 use Filament\Forms\Components\BelongsToManyMultiSelect;
 use Filament\Forms\Form;
@@ -452,6 +453,19 @@ class ArticleResource extends Resource
                     ->description(fn (Article $record): string => ArticleWorkspace::visibilityMeta($record))
                     ->color(fn (string $state): string => StatusBadge::color($state)),
                 OpsTable::locale(label: __('ops.locale_scope.content_locale')),
+                Tables\Columns\IconColumn::make('seo_ready')
+                    ->label(__('ops.resources.articles.seo_ready'))
+                    ->boolean()
+                    ->state(fn (Article $record): bool => self::seoReadyFor($record))
+                    ->trueIcon('heroicon-o-check-circle')
+                    ->falseIcon('heroicon-o-exclamation-triangle')
+                    ->trueColor('success')
+                    ->falseColor('danger'),
+                Tables\Columns\TextColumn::make('author_name')
+                    ->label(__('ops.resources.articles.owner'))
+                    ->searchable()
+                    ->placeholder(__('ops.resources.articles.placeholders.not_set_yet'))
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('source_locale')
                     ->label(__('ops.resources.articles.fields.source_locale'))
                     ->badge()
@@ -500,6 +514,7 @@ class ArticleResource extends Resource
                 'sourceCanonical.workingRevision',
                 'workingRevision',
                 'publishedRevision',
+                'seoMeta',
             ]))
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
@@ -668,6 +683,19 @@ class ArticleResource extends Resource
         }
 
         return Str::limit($hash, 16, '');
+    }
+
+    private static function seoReadyFor(Article $record): bool
+    {
+        if (! SchemaBaseline::hasTable('article_seo_meta')) {
+            return false;
+        }
+
+        static $service;
+
+        $service ??= app(\App\Services\Ops\SeoOperationsService::class);
+
+        return $service->isSeoReady('article', $record);
     }
 
     private static function canRead(): bool

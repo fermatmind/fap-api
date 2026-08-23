@@ -98,6 +98,14 @@
                 </div>
 
                 <x-slot name="actions">
+                    <x-filament::button
+                        color="gray"
+                        tag="button"
+                        type="button"
+                        wire:click="exportReport"
+                    >
+                        {{ __('ops.custom_pages.seo_operations.export_report') }}
+                    </x-filament::button>
                     <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\ContentOverviewPage::getUrl() }}">
                         {{ __('ops.custom_pages.common.nav.overview') }}
                     </x-filament::button>
@@ -125,6 +133,20 @@
                     @endif
                 </x-slot>
             </x-filament-ops::ops-toolbar>
+        </x-filament-ops::ops-section>
+
+        <x-filament-ops::ops-section
+            :title="__('ops.custom_pages.seo_operations.health.title')"
+            :description="__('ops.custom_pages.seo_operations.health.current_snapshot')"
+        >
+            <div class="ops-data-strip">
+                @foreach ($healthBand as $metric)
+                    <div class="ops-metric">
+                        <span class="ops-metric__label">{{ $metric['label'] }}</span>
+                        <span class="ops-metric__value tnum">{{ $metric['value'] }}<small>{{ $metric['suffix'] ?? '' }}</small></span>
+                    </div>
+                @endforeach
+            </div>
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section

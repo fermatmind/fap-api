@@ -47,11 +47,48 @@
             </x-filament-ops::ops-toolbar>
         </x-filament-ops::ops-section>
 
+        {{-- 内容生命周期：草稿 / 审阅中 / 已排期 / 已发布 / 需更新 --}}
+        <x-filament-ops::ops-section
+            :title="__('ops.custom_pages.content_overview.lifecycle.title')"
+            :description="__('ops.custom_pages.content_overview.lifecycle.hint')"
+        >
+            <div class="ops-data-strip" role="list">
+                @foreach ($lifecycleStages as $stage)
+                    <a
+                        href="{{ \App\Filament\Ops\Resources\ArticleResource::getUrl() }}"
+                        class="ops-metric"
+                        role="listitem"
+                        style="text-decoration:none"
+                    >
+                        <span class="ops-metric__value tnum">{{ $stage['count'] }}</span>
+                        <span class="ops-metric__label">{{ $stage['label'] }}</span>
+                    </a>
+                @endforeach
+            </div>
+        </x-filament-ops::ops-section>
+
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.content_overview.health_title')"
             :description="__('ops.custom_pages.content_overview.health_desc')"
         >
             <x-filament-ops::ops-field-grid :fields="$summaryFields" />
+        </x-filament-ops::ops-section>
+
+        {{-- 内容库存：按类型横向条形图 --}}
+        <x-filament-ops::ops-section
+            :title="__('ops.custom_pages.content_overview.inventory.title')"
+        >
+            <div class="ops-inventory-grid">
+                @foreach ($inventoryByType as $item)
+                    <div class="ops-inventory-row">
+                        <span class="ops-inventory-row__label">{{ $item['label'] }}</span>
+                        <span class="ops-inventory-row__bar" aria-hidden="true">
+                            <span class="ops-inventory-row__fill" style="width: {{ $item['percent'] }}%"></span>
+                        </span>
+                        <span class="ops-inventory-row__count tnum">{{ $item['count'] }}</span>
+                    </div>
+                @endforeach
+            </div>
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
