@@ -22,6 +22,11 @@ class OpsDashboard extends Dashboard
 
     protected static bool $isDiscovered = false;
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.group.workspace');
+    }
+
     public static function getNavigationLabel(): string
     {
         return __('ops.nav.dashboard');

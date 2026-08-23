@@ -8,6 +8,8 @@ return [
     ],
 
     'group' => [
+        'workspace' => '工作台',
+        'legacy_content' => 'CONTENT',
         'support' => '支持',
         'sre' => '运行',
         'governance' => '治理',

@@ -42,26 +42,26 @@ class AdminPanelProvider extends PanelProvider
                 'gray' => Color::Gray,
                 'info' => '#2563EB',
                 'primary' => [
-                    50 => '235, 241, 254',
-                    100 => '199, 214, 255',
-                    200 => '161, 183, 255',
-                    300 => '123, 153, 255',
-                    400 => '79, 124, 255',
-                    500 => '68, 108, 240',
-                    600 => '59, 99, 230',
-                    700 => '47, 84, 201',
-                    800 => '42, 75, 184',
-                    900 => '35, 61, 150',
-                    950 => '24, 42, 105',
+                    50 => '241, 242, 255',
+                    100 => '224, 226, 255',
+                    200 => '199, 203, 255',
+                    300 => '165, 171, 250',
+                    400 => '129, 140, 248',
+                    500 => '99, 102, 241',
+                    600 => '79, 91, 213',
+                    700 => '67, 75, 184',
+                    800 => '55, 61, 148',
+                    900 => '49, 54, 117',
+                    950 => '29, 31, 68',
                 ],
                 'success' => '#16A34A',
                 'warning' => '#D97706',
             ])
-            ->font('Instrument Sans')
-            ->darkMode(false)
+            ->font('Inter')
+            ->darkMode(true)
             ->defaultThemeMode(ThemeMode::Light)
             ->theme('ops-theme')
-            ->sidebarWidth('15.5rem')
+            ->sidebarWidth('14.75rem')
             ->collapsedSidebarWidth('4rem')
             ->sidebarCollapsibleOnDesktop()
             ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
@@ -73,7 +73,19 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->navigationGroups([
                 NavigationGroup::make()
+                    ->label(fn (): string => (string) __('ops.group.workspace')),
+                NavigationGroup::make()
                     ->label(fn (): string => (string) __('ops.group.content')),
+                NavigationGroup::make()
+                    ->label(fn (): string => (string) __('ops.group.commerce')),
+                NavigationGroup::make()
+                    ->label(fn (): string => (string) __('ops.group.content_release')),
+                NavigationGroup::make()
+                    ->label(fn (): string => (string) __('ops.group.legacy_content')),
+                NavigationGroup::make()
+                    ->label(fn (): string => (string) __('ops.group.content_overview')),
+                NavigationGroup::make()
+                    ->label(fn (): string => (string) __('ops.group.support')),
                 NavigationGroup::make()
                     ->label(fn (): string => (string) __('ops.group.translation')),
                 NavigationGroup::make()

@@ -8,12 +8,14 @@ use App\Filament\Ops\Pages\ArticlePublishingOpsPage;
 use App\Filament\Ops\Pages\ArticleTranslationOpsPage;
 use App\Filament\Ops\Pages\ContentReleasePage;
 use App\Filament\Ops\Pages\ContentWorkspacePage;
+use App\Filament\Ops\Pages\OpsDashboard;
 use App\Filament\Ops\Pages\PostReleaseObservabilityPage;
 use App\Filament\Ops\Pages\QuestionAnalyticsPage;
 use App\Filament\Ops\Pages\SeoOperationsPage;
 use App\Filament\Ops\Resources\AdminUserResource;
 use App\Filament\Ops\Resources\ArticleResource;
 use App\Filament\Ops\Resources\ContentPageResource;
+use App\Filament\Ops\Resources\DailyGivingRecordResource;
 use App\Filament\Ops\Resources\MediaAssetResource;
 use App\Filament\Ops\Resources\OrganizationResource;
 use App\Filament\Ops\Resources\SupportArticleResource;
@@ -69,6 +71,8 @@ final class OpsShellPolishTest extends TestCase
         $this->assertSame('Content', ContentPageResource::getNavigationGroup());
         $this->assertSame('Content', MediaAssetResource::getNavigationGroup());
         $this->assertSame('Content', ContentWorkspacePage::getNavigationGroup());
+        $this->assertSame('Workspace', OpsDashboard::getNavigationGroup());
+        $this->assertSame('CONTENT', DailyGivingRecordResource::getNavigationGroup());
 
         $this->assertSame('Psychometrics', QuestionAnalyticsPage::getNavigationGroup());
 
@@ -89,7 +93,7 @@ final class OpsShellPolishTest extends TestCase
         $theme = (string) file_get_contents(resource_path('css/filament/ops/theme.css'));
 
         $this->assertStringContainsString('--ops-state-danger', $theme);
-        $this->assertStringContainsString('--ops-electric: #4f7cff;', $theme);
+        $this->assertStringContainsString('--ops-electric: #4f5bd5;', $theme);
         $this->assertStringContainsString('border-inline-start-width: 1px;', $theme);
         $this->assertStringContainsString('background: var(--ops-bg-surface);', $theme);
 
@@ -106,19 +110,23 @@ final class OpsShellPolishTest extends TestCase
         );
     }
 
-    public function test_ops_theme_tokens_keep_industrial_radius_and_tracking_constraints(): void
+    public function test_ops_theme_tokens_match_complete_preview_light_and_dark_contract(): void
     {
         $theme = (string) file_get_contents(resource_path('css/filament/ops/theme.css'));
 
-        foreach (['--ops-radius-input: 8px;', '--ops-radius-button: 8px;', '--ops-radius-card: 8px;', '--ops-radius-overlay: 8px;'] as $token) {
+        foreach (['--ops-radius-input: 7px;', '--ops-radius-button: 7px;', '--ops-radius-card: 10px;', '--ops-radius-overlay: 10px;'] as $token) {
             $this->assertStringContainsString($token, $theme);
         }
 
-        foreach (['--ops-bg-telemetry: #0a0e13;', '--ops-state-success-signal: #22d3ee;', '--ops-border-strong: #c2cad6;'] as $token) {
+        foreach (['--ops-bg-app: #f4f6f9;', '--ops-bg-surface: #ffffff;', '--ops-border-strong: #c8cfda;'] as $token) {
             $this->assertStringContainsString($token, $theme);
         }
 
-        foreach (['--ops-electric: #4f7cff;', '--ops-electric-solid: #3b63e6;', '--ops-sidebar-bg: #0a0e13;', '--ops-sidebar-text-active: #e6ecff;'] as $token) {
+        foreach (['--ops-electric: #4f5bd5;', '--ops-electric-solid: #4f5bd5;', '--ops-sidebar-bg: #0a0e16;', '--ops-sidebar-text-active: #dfe2ff;'] as $token) {
+            $this->assertStringContainsString($token, $theme);
+        }
+
+        foreach (['--ops-bg-app: #0b0e17;', '--ops-bg-surface: #111625;', '--ops-electric: #818cf8;'] as $token) {
             $this->assertStringContainsString($token, $theme);
         }
 
@@ -128,9 +136,25 @@ final class OpsShellPolishTest extends TestCase
         $this->assertStringContainsString('.fi-sidebar-header .fi-icon-btn', $theme);
         $this->assertStringContainsString('background: var(--ops-bg-editor);', $theme);
 
-        $this->assertDoesNotMatchRegularExpression('/letter-spacing:\\s*-/', $theme);
-        $this->assertDoesNotMatchRegularExpression('/border-radius:\\s*(1[0-9]|20)px;/', $theme);
         $this->assertDoesNotMatchRegularExpression('/border-radius:\\s*calc\\(var\\(--ops-radius-card\\)\\s*\\+/', $theme);
+    }
+
+    public function test_complete_preview_shared_workspace_components_render_without_mock_values(): void
+    {
+        $dataStrip = view('filament.ops.components.ops-data-strip', [
+            'metrics' => [['label' => 'Orders', 'value' => 0, 'meta' => 'Production']],
+        ])->render();
+        $notConnected = view('filament.ops.components.ops-not-connected', [
+            'title' => 'Search Console',
+            'description' => 'Not connected',
+        ])->render();
+        $topbarControls = (string) file_get_contents(resource_path('views/filament/ops/hooks/topbar-controls.blade.php'));
+
+        $this->assertStringContainsString('ops-data-strip', $dataStrip);
+        $this->assertStringContainsString('Production', $dataStrip);
+        $this->assertStringContainsString('ops-not-connected', $notConnected);
+        $this->assertStringContainsString('Not connected', $notConnected);
+        $this->assertStringContainsString('x-filament-panels::theme-switcher', $topbarControls);
     }
 
     public function test_ops_custom_selects_reserve_space_for_single_chevron(): void

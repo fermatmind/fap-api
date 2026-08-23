@@ -8,6 +8,8 @@ return [
     ],
 
     'group' => [
+        'workspace' => 'Workspace',
+        'legacy_content' => 'CONTENT',
         'support' => 'Support',
         'sre' => 'Runtime',
         'governance' => 'Governance',

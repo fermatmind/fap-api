@@ -51,6 +51,11 @@ class DailyGivingRecordResource extends Resource
         return 'Daily Giving Records';
     }
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.group.legacy_content');
+    }
+
     public static function getModelLabel(): string
     {
         return 'Daily Giving Record';

@@ -42,6 +42,11 @@ class SelectOrgPage extends Page
         return __('ops.nav.select_org');
     }
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.group.workspace');
+    }
+
     public static function canAccess(): bool
     {
         $guard = (string) config('admin.guard', 'admin');
