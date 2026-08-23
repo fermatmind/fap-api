@@ -33,43 +33,73 @@
 @layer base {
     /* ===== Tokens ===== */
     :root {
-        --ops-bg-app: #f4f6f8;
+        color-scheme: light;
+        --ops-bg-app: #f4f6f9;
         --ops-bg-surface: #ffffff;
-        --ops-bg-surface-subtle: #eef2f6;
-        --ops-bg-telemetry: #0a0e13;
-        --ops-bg-editor: #eceff3;
-        --ops-text-primary: #111820;
-        --ops-text-secondary: #66717f;
-        --ops-text-tertiary: #8a95a3;
-        --ops-border-default: #dde3ea;
-        --ops-border-strong: #c2cad6;
-        --ops-electric: #4f7cff;
-        --ops-electric-solid: #3b63e6;
-        --ops-electric-hover: #2f54c9;
-        --ops-sidebar-bg: #0a0e13;
-        --ops-sidebar-text: #9aa4b2;
-        --ops-sidebar-text-hover: #c2cad6;
-        --ops-sidebar-text-active: #e6ecff;
-        --ops-sidebar-group: #5a6675;
-        --ops-state-success: #10b981;
-        --ops-state-success-signal: #22d3ee;
-        --ops-state-warning: #f59e0b;
-        --ops-state-danger: #ef4444;
-        --ops-state-neutral: #66717f;
-        --ops-radius-input: 8px;
-        --ops-radius-button: 8px;
-        --ops-radius-card: 8px;
-        --ops-radius-overlay: 8px;
+        --ops-bg-surface-subtle: #f7f8fb;
+        --ops-bg-telemetry: #0a0e16;
+        --ops-bg-editor: #f0f3f8;
+        --ops-text-primary: #18202d;
+        --ops-text-secondary: #596579;
+        --ops-text-tertiary: #8791a3;
+        --ops-border-default: #e2e6ed;
+        --ops-border-strong: #c8cfda;
+        --ops-electric: #4f5bd5;
+        --ops-electric-solid: #4f5bd5;
+        --ops-electric-hover: #434db8;
+        --ops-sidebar-bg: #0a0e16;
+        --ops-sidebar-text: #929bad;
+        --ops-sidebar-text-hover: #dce1ea;
+        --ops-sidebar-text-active: #dfe2ff;
+        --ops-sidebar-group: #555e73;
+        --ops-state-success: #0b956c;
+        --ops-state-success-signal: #34d399;
+        --ops-state-warning: #c87813;
+        --ops-state-danger: #d44343;
+        --ops-state-neutral: #8791a3;
+        --ops-state-info: #2d6cdf;
+        --ops-radius-input: 7px;
+        --ops-radius-button: 7px;
+        --ops-radius-card: 10px;
+        --ops-radius-overlay: 10px;
         --ops-radius-badge: 999px;
-        --ops-shadow-surface: none;
-        --ops-shadow-overlay: 0 8px 24px rgba(10, 14, 19, 0.1);
-        --ops-font-page-title: 1.75rem;
-        --ops-font-section-title: 1.25rem;
-        --ops-font-card-title: 1.125rem;
-        --ops-font-body: 0.875rem;
-        --ops-font-meta: 0.75rem;
-        --ops-font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        --ops-font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+        --ops-shadow-surface: 0 8px 28px rgba(20, 32, 55, 0.055);
+        --ops-shadow-overlay: 0 16px 50px rgba(20, 32, 55, 0.14);
+        --ops-font-page-title: 1.5625rem;
+        --ops-font-section-title: 0.8125rem;
+        --ops-font-card-title: 0.75rem;
+        --ops-font-body: 0.8125rem;
+        --ops-font-meta: 0.6875rem;
+        --ops-font-sans: Inter, 'SF Pro Display', 'PingFang SC', system-ui, sans-serif;
+        --ops-font-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+    }
+
+    :root.dark {
+        color-scheme: dark;
+        --ops-bg-app: #0b0e17;
+        --ops-bg-surface: #111625;
+        --ops-bg-surface-subtle: #171d2d;
+        --ops-bg-telemetry: #080b12;
+        --ops-bg-editor: #171d2d;
+        --ops-text-primary: #e9edf7;
+        --ops-text-secondary: #9ba5bb;
+        --ops-text-tertiary: #667087;
+        --ops-border-default: #252c3f;
+        --ops-border-strong: #36405a;
+        --ops-electric: #818cf8;
+        --ops-electric-solid: #818cf8;
+        --ops-electric-hover: #a5b4fc;
+        --ops-sidebar-bg: #080b12;
+        --ops-sidebar-text: #929bad;
+        --ops-sidebar-text-hover: #dce1ea;
+        --ops-sidebar-text-active: #dfe2ff;
+        --ops-state-success: #34d399;
+        --ops-state-warning: #fbbf24;
+        --ops-state-danger: #f87171;
+        --ops-state-neutral: #9ba5bb;
+        --ops-state-info: #60a5fa;
+        --ops-shadow-surface: 0 16px 50px rgba(0, 0, 0, 0.2);
+        --ops-shadow-overlay: 0 24px 70px rgba(0, 0, 0, 0.42);
     }
 
     .fi-body.fi-panel-ops {
@@ -101,73 +131,52 @@
    Light-first, dense operational workspace with persisted dark mode.
    ============================================================ */
 @layer ops-authority {
-    :root {
-        color-scheme: light;
-        --ops-bg-app: #f4f6f9;
-        --ops-bg-surface: #ffffff;
-        --ops-bg-surface-subtle: #f7f8fb;
-        --ops-bg-telemetry: #0a0e16;
-        --ops-bg-editor: #f0f3f8;
-        --ops-text-primary: #18202d;
-        --ops-text-secondary: #596579;
-        --ops-text-tertiary: #8791a3;
-        --ops-border-default: #e2e6ed;
-        --ops-border-strong: #c8cfda;
-        --ops-electric: #4f5bd5;
-        --ops-electric-solid: #4f5bd5;
-        --ops-electric-hover: #434db8;
-        --ops-sidebar-bg: #0a0e16;
-        --ops-sidebar-text: #929bad;
-        --ops-sidebar-text-hover: #dce1ea;
-        --ops-sidebar-text-active: #dfe2ff;
-        --ops-sidebar-group: #555e73;
-        --ops-state-success: #0b956c;
-        --ops-state-success-signal: #34d399;
-        --ops-state-warning: #c87813;
-        --ops-state-danger: #d44343;
-        --ops-state-neutral: #8791a3;
-        --ops-state-info: #2d6cdf;
-        --ops-radius-input: 7px;
-        --ops-radius-button: 7px;
-        --ops-radius-card: 10px;
-        --ops-radius-overlay: 10px;
-        --ops-shadow-surface: 0 8px 28px rgba(20, 32, 55, 0.055);
-        --ops-shadow-overlay: 0 16px 50px rgba(20, 32, 55, 0.14);
-        --ops-font-page-title: 1.5625rem;
-        --ops-font-section-title: 0.8125rem;
-        --ops-font-card-title: 0.75rem;
-        --ops-font-body: 0.8125rem;
-        --ops-font-meta: 0.6875rem;
-        --ops-font-sans: Inter, 'SF Pro Display', 'PingFang SC', system-ui, sans-serif;
-        --ops-font-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+    .ops-topbar-start[data-ops-domain] {
+        min-width: 0;
     }
 
-    :root.dark {
-        color-scheme: dark;
-        --ops-bg-app: #0b0e17;
-        --ops-bg-surface: #111625;
-        --ops-bg-surface-subtle: #171d2d;
-        --ops-bg-telemetry: #080b12;
-        --ops-bg-editor: #171d2d;
-        --ops-text-primary: #e9edf7;
-        --ops-text-secondary: #9ba5bb;
-        --ops-text-tertiary: #667087;
-        --ops-border-default: #252c3f;
-        --ops-border-strong: #36405a;
-        --ops-electric: #818cf8;
-        --ops-electric-solid: #6366f1;
-        --ops-electric-hover: #818cf8;
-        --ops-sidebar-bg: #080b12;
-        --ops-sidebar-text: #929bad;
-        --ops-sidebar-text-hover: #dce1ea;
-        --ops-sidebar-text-active: #dfe2ff;
-        --ops-state-success: #34d399;
-        --ops-state-warning: #fbbf24;
-        --ops-state-danger: #f87171;
-        --ops-state-neutral: #9ba5bb;
-        --ops-state-info: #60a5fa;
-        --ops-shadow-surface: 0 16px 50px rgba(0, 0, 0, 0.2);
-        --ops-shadow-overlay: 0 24px 70px rgba(0, 0, 0, 0.42);
+    .ops-topbar-start[data-ops-domain] .ops-context-bar__eyebrow {
+        color: var(--ops-electric-solid);
+    }
+
+    .ops-card-list {
+        gap: 0;
+        overflow: hidden;
+        border: 1px solid var(--ops-border-default);
+        border-radius: var(--ops-radius-card);
+        background: var(--ops-bg-surface);
+    }
+
+    .ops-card-list > .ops-result-card {
+        border: 0;
+        border-radius: 0;
+    }
+
+    .ops-card-list > .ops-result-card + .ops-result-card {
+        border-top: 1px solid var(--ops-border-default);
+    }
+
+    .ops-card-list > .ops-empty-state {
+        border: 0;
+        border-radius: 0;
+    }
+
+    .ops-field-grid__items {
+        gap: 0;
+        overflow: hidden;
+        border: 1px solid var(--ops-border-default);
+        border-radius: var(--ops-radius-card);
+        background: var(--ops-bg-surface);
+    }
+
+    .ops-field-grid__items > .ops-field-grid__flat-item {
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+    }
+
+    .ops-field-grid__items > .ops-field-grid__flat-item + .ops-field-grid__flat-item {
+        border-left: 1px solid var(--ops-border-default);
     }
 
     .fi-body.fi-panel-ops {
@@ -616,6 +625,39 @@
     .fi-body.fi-panel-ops .ops-action-queue__arrow {
         width: 1rem;
         color: var(--ops-text-tertiary);
+    }
+
+    .fi-body.fi-panel-ops .ops-inline-data-section {
+        overflow: hidden;
+        border: 1px solid var(--ops-border-default);
+        border-radius: var(--ops-radius-card);
+        background: var(--ops-bg-surface);
+        color: var(--ops-text-primary);
+    }
+
+    .fi-body.fi-panel-ops .ops-inline-data-section__header {
+        padding: 1rem 1.125rem 0.75rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-inline-data-section__header h2 {
+        font-size: var(--ops-font-section-title);
+        font-weight: 700;
+    }
+
+    .fi-body.fi-panel-ops .ops-inline-data-section__header p {
+        margin-top: 0.25rem;
+        color: var(--ops-text-secondary);
+        font-size: var(--ops-font-meta);
+    }
+
+    .fi-body.fi-panel-ops .ops-inline-data-section__warning {
+        margin: 0 1.125rem 1rem;
+        padding: 0.75rem 0.875rem;
+        border: 1px solid color-mix(in srgb, var(--ops-state-warning) 35%, var(--ops-border-default));
+        border-radius: var(--ops-radius-input);
+        background: color-mix(in srgb, var(--ops-state-warning) 8%, var(--ops-bg-surface));
+        color: var(--ops-state-warning);
+        font-size: var(--ops-font-meta);
     }
 
     .fi-body.fi-panel-ops .ops-seo-intro.fi-section {
