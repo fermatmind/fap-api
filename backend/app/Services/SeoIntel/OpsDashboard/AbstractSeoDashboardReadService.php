@@ -19,6 +19,8 @@ abstract class AbstractSeoDashboardReadService
         'seo_url_entities',
         'seo_issue_queue',
         'seo_gsc_daily',
+        'seo_gsc_sync_runs',
+        'seo_gsc_data_quality_queue',
         'seo_baidu_landing_daily',
         'seo_consent_daily',
         'seo_event_funnel_daily',

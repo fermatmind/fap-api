@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\SeoIntel\OpsDashboard;
 
+use Illuminate\Support\Facades\Schema;
+
 final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
 {
     /**
@@ -125,7 +127,7 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
      * Read only real GSC rows. An empty result means the connector has not
      * produced data for the selected window; callers must not synthesize it.
      *
-     * @param  array{days?:int,device?:string,country?:string,locale?:string}  $filters
+     * @param  array{days?:int,device?:string,country?:string,locale?:string,search_type?:string}  $filters
      * @return array<string, mixed>
      */
     public function searchPerformance(array $filters = []): array
@@ -139,6 +141,10 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
             if ($value !== '' && $value !== 'all') {
                 $query->where($filter, $value);
             }
+        }
+        $searchType = trim((string) ($filters['search_type'] ?? 'all'));
+        if ($searchType !== '' && $searchType !== 'all') {
+            $query->where('search_type', $searchType);
         }
 
         $rows = $query
@@ -181,8 +187,33 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
             ->values()
             ->all();
 
+        $syncState = $this->gscSyncState();
+        $latestReportDate = $rows->max('report_date');
+        $stale = is_string($latestReportDate)
+            && $latestReportDate < now()->subDays(max(3, (int) config('seo_intel.gsc_data_quality.max_report_age_days', 10)))->toDateString();
+        $state = $rows->isNotEmpty()
+            ? ($stale ? 'stale' : 'connected')
+            : (string) ($syncState['state'] ?? 'disconnected');
+
         return [
-            'connected' => $rows->isNotEmpty(),
+            'connected' => $state === 'connected',
+            'source_connected' => $syncState['last_success_at'] !== null,
+            'data_available' => $rows->isNotEmpty(),
+            'state' => $state,
+            'failure_code' => $syncState['failure_code'] ?? null,
+            'last_success_at' => $syncState['last_success_at'] ?? null,
+            'last_attempt_at' => $syncState['last_attempt_at'] ?? null,
+            'required_environment' => $state === 'disconnected' ? [
+                'SEO_INTEL_ENABLED',
+                'SEO_INTEL_WRITE_ENABLED',
+                'SEO_INTEL_ALLOW_EXTERNAL_API_CALLS',
+                'SEO_INTEL_GSC_ENABLED',
+                'SEO_INTEL_GSC_LIVE_API_ENABLED',
+                'SEO_INTEL_GSC_SYNC_ENABLED',
+                'SEO_INTEL_GSC_PROPERTY_URL',
+                'SEO_INTEL_GSC_AUTH_MODE',
+                'SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON or SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON_PATH',
+            ] : [],
             'source' => 'seo_intel.seo_gsc_daily',
             'window_days' => $days,
             'updated_at' => $this->normalizeTimestamp($rows->max('collected_at')),
@@ -212,6 +243,34 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
                 ])
                 ->values()
                 ->all(),
+        ];
+    }
+
+    /** @return array{state:string,failure_code:?string,last_success_at:?string,last_attempt_at:?string} */
+    private function gscSyncState(): array
+    {
+        $connectionName = $this->connectionName ?? (string) config('seo_intel.connection', 'seo_intel');
+        if (! Schema::connection($connectionName)->hasTable('seo_gsc_sync_runs')) {
+            return ['state' => 'disconnected', 'failure_code' => null, 'last_success_at' => null, 'last_attempt_at' => null];
+        }
+
+        $latest = $this->table('seo_gsc_sync_runs')->orderByDesc('started_at')->first();
+        $lastSuccess = $this->table('seo_gsc_sync_runs')
+            ->where('status', 'success')
+            ->orderByDesc('finished_at')
+            ->first();
+
+        return [
+            'state' => match ((string) ($latest->status ?? '')) {
+                'quality_failed' => 'quality_failed',
+                'failed' => 'sync_failed',
+                'running' => 'syncing',
+                'success' => 'empty',
+                default => 'disconnected',
+            },
+            'failure_code' => isset($latest->failure_code) ? (string) $latest->failure_code : null,
+            'last_success_at' => $this->normalizeTimestamp($lastSuccess->finished_at ?? null),
+            'last_attempt_at' => $this->normalizeTimestamp($latest->finished_at ?? $latest->started_at ?? null),
         ];
     }
 

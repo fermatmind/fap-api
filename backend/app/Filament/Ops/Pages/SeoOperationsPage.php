@@ -61,6 +61,8 @@ class SeoOperationsPage extends Page
 
     public string $gscLocale = 'all';
 
+    public string $gscSearchType = 'all';
+
     public string $selectedIssueUid = '';
 
     public int $selectedLockVersion = -1;
@@ -215,6 +217,11 @@ class SeoOperationsPage extends Page
     }
 
     public function updatedGscLocale(): void
+    {
+        $this->refreshSeoIntel();
+    }
+
+    public function updatedGscSearchType(): void
     {
         $this->refreshSeoIntel();
     }
@@ -816,6 +823,7 @@ class SeoOperationsPage extends Page
                 'device' => $this->gscDevice,
                 'country' => $this->gscCountry,
                 'locale' => $this->gscLocale,
+                'search_type' => $this->gscSearchType,
             ]);
             $this->opportunityQueue = (array) data_get($reader->opportunityQueue(25), 'recent_rows', []);
             $this->refreshIssueClusters($reader);
@@ -824,7 +832,7 @@ class SeoOperationsPage extends Page
             }
             $this->seoIntelAvailable = true;
         } catch (Throwable) {
-            $this->searchPerformance = ['connected' => false, 'totals' => [], 'daily' => [], 'query_page_rows' => []];
+            $this->searchPerformance = ['connected' => false, 'state' => 'unavailable', 'totals' => [], 'daily' => [], 'query_page_rows' => []];
             $this->opportunityQueue = [];
             $this->issueClusters = [];
             $this->issueClusterSummary = [];
@@ -836,10 +844,10 @@ class SeoOperationsPage extends Page
             $this->seoIntelAvailable = false;
         }
 
-        $gscConnected = (bool) ($this->searchPerformance['connected'] ?? false);
+        $gscConnected = (bool) ($this->searchPerformance['source_connected'] ?? $this->searchPerformance['connected'] ?? false);
         $this->dataSources = [
             ['key' => 'cms', 'label' => __('ops.custom_pages.seo_operations.sources.cms'), 'connected' => true, 'source' => 'primary database', 'updated_at' => now()->toAtomString()],
-            ['key' => 'gsc', 'label' => __('ops.custom_pages.seo_operations.sources.gsc'), 'connected' => $gscConnected, 'source' => $gscConnected ? 'seo_intel.seo_gsc_daily' : null, 'updated_at' => $this->searchPerformance['updated_at'] ?? null],
+            ['key' => 'gsc', 'label' => __('ops.custom_pages.seo_operations.sources.gsc'), 'connected' => $gscConnected, 'state' => $this->searchPerformance['state'] ?? 'disconnected', 'source' => ($this->searchPerformance['data_available'] ?? false) ? 'seo_intel.seo_gsc_daily' : null, 'updated_at' => $this->searchPerformance['last_success_at'] ?? $this->searchPerformance['updated_at'] ?? null],
             ['key' => 'cwv', 'label' => __('ops.custom_pages.seo_operations.sources.cwv'), 'connected' => false, 'phase' => __('ops.custom_pages.seo_operations.phase_two')],
             ['key' => 'rank', 'label' => __('ops.custom_pages.seo_operations.sources.rank_tracking'), 'connected' => false, 'phase' => __('ops.custom_pages.seo_operations.phase_two')],
             ['key' => 'ai', 'label' => __('ops.custom_pages.seo_operations.workspace.ai'), 'connected' => false, 'phase' => __('ops.custom_pages.seo_operations.phase_two')],

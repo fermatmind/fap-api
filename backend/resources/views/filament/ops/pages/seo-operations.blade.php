@@ -179,6 +179,12 @@
                         <input wire:model.live.debounce.400ms="gscDevice" placeholder="{{ __('ops.custom_pages.seo_operations.performance.device_placeholder') }}" aria-label="{{ __('ops.custom_pages.seo_operations.performance.device') }}" />
                         <input wire:model.live.debounce.400ms="gscCountry" placeholder="{{ __('ops.custom_pages.seo_operations.performance.country_placeholder') }}" aria-label="{{ __('ops.custom_pages.seo_operations.performance.country') }}" />
                         <input wire:model.live.debounce.400ms="gscLocale" placeholder="{{ __('ops.custom_pages.seo_operations.performance.locale_placeholder') }}" aria-label="{{ __('ops.custom_pages.seo_operations.filters.locale') }}" />
+                        <select wire:model.live="gscSearchType" aria-label="{{ __('ops.custom_pages.seo_operations.performance.search_type') }}">
+                            <option value="all">{{ __('ops.custom_pages.seo_operations.performance.search_type_all') }}</option>
+                            @foreach (['web', 'image', 'video', 'news'] as $searchType)
+                                <option value="{{ $searchType }}">{{ strtoupper($searchType) }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </x-filament-ops::ops-toolbar>
 
@@ -214,7 +220,16 @@
                         </div>
                     @endif
                 @else
-                    <x-filament-ops::ops-not-connected :title="__('ops.custom_pages.seo_operations.performance.source_name')" :description="__('ops.custom_pages.seo_operations.performance.not_connected')" />
+                    <x-filament-ops::ops-not-connected
+                        :title="__('ops.custom_pages.seo_operations.performance.source_name')"
+                        :description="__('ops.custom_pages.seo_operations.performance.states.'.($searchPerformance['state'] ?? 'disconnected'))"
+                    />
+                    @if (!empty($searchPerformance['failure_code']))
+                        <p class="ops-muted">{{ __('ops.custom_pages.seo_operations.performance.failure_code') }}: {{ $searchPerformance['failure_code'] }}</p>
+                    @endif
+                    @if (!empty($searchPerformance['last_success_at']))
+                        <p class="ops-muted">{{ __('ops.custom_pages.seo_operations.performance.last_success') }}: {{ $searchPerformance['last_success_at'] }}</p>
+                    @endif
                 @endif
             </x-filament-ops::ops-section>
         @endif

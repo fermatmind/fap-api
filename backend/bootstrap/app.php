@@ -70,6 +70,14 @@ return Application::configure(basePath: dirname(__DIR__))
                 ->withoutOverlapping(20)
                 ->onOneServer();
         }
+        if ((bool) config('seo_intel.gsc_sync_enabled')) {
+            $window = (int) config('seo_intel.gsc_sync.window_days', 28);
+            $searchTypes = implode(',', (array) config('seo_intel.gsc_sync.search_types', ['web']));
+            $schedule->command("seo-intel:gsc-sync --window={$window} --search-types={$searchTypes} --json")
+                ->dailyAt('05:20')
+                ->withoutOverlapping(120)
+                ->onOneServer();
+        }
         $schedule->command('quality:daily-summary')->dailyAt('03:20')->withoutOverlapping();
         $schedule->command('sds:psychometrics --window=last_7_days')->weeklyOn(1, '04:10')->withoutOverlapping();
         $schedule->command('eq60:psychometrics --window=last_90_days')->weeklyOn(1, '04:20')->withoutOverlapping();

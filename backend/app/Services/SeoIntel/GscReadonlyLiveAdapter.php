@@ -98,7 +98,11 @@ final class GscReadonlyLiveAdapter
             ];
         }
 
-        $token = $this->accessToken();
+        try {
+            $token = $this->accessToken();
+        } catch (Throwable) {
+            return $this->blockedFetch($preflight, 'gsc_authentication_request_failed', true);
+        }
         if ($token === '') {
             return [
                 'status' => 'blocked',
@@ -116,29 +120,46 @@ final class GscReadonlyLiveAdapter
         );
 
         $payload = $this->safeSearchAnalyticsPayload($request);
-        $response = Http::acceptJson()
-            ->withToken($token)
-            ->timeout(max(1, (int) config('seo_intel.gsc_readonly_adapter.timeout_seconds', 10)))
-            ->post($endpoint, $payload);
+        try {
+            $response = Http::acceptJson()
+                ->withToken($token)
+                ->timeout(max(1, (int) config('seo_intel.gsc_readonly_adapter.timeout_seconds', 10)))
+                ->post($endpoint, $payload);
+        } catch (Throwable) {
+            return $this->blockedFetch($preflight, 'gsc_searchanalytics_timeout_or_transport_failure', true);
+        }
 
         if (! $response->successful()) {
+            $issue = match ($response->status()) {
+                401, 403 => 'gsc_authentication_failed',
+                429 => 'gsc_rate_limited',
+                default => 'gsc_searchanalytics_request_failed',
+            };
+
             return [
                 'status' => 'blocked',
                 'rows' => [],
                 'external_calls_attempted' => true,
                 'writes_attempted' => false,
                 'http_status' => $response->status(),
-                'issues' => ['gsc_searchanalytics_request_failed'],
+                'issues' => [$issue],
                 'preflight' => $preflight,
             ];
         }
 
-        $rows = $this->rowsFromResponse($response->json());
+        $rows = $this->rowsFromResponse(
+            $response->json(),
+            (array) ($payload['dimensions'] ?? []),
+            (string) ($payload['type'] ?? 'web'),
+        );
 
         return [
             'status' => 'success',
             'rows' => $rows,
             'rows_seen' => count($rows),
+            'next_start_row' => count($rows) === (int) $payload['rowLimit']
+                ? (int) ($payload['startRow'] ?? 0) + count($rows)
+                : null,
             'external_calls_attempted' => true,
             'writes_attempted' => false,
             'http_status' => $response->status(),
@@ -371,8 +392,11 @@ final class GscReadonlyLiveAdapter
                 is_array($request['dimensions'] ?? null) ? $request['dimensions'] : ['query', 'page'],
                 ['query', 'page', 'country', 'device', 'searchAppearance']
             )),
-            'type' => 'web',
+            'type' => in_array((string) ($request['type'] ?? 'web'), ['web', 'image', 'video', 'news'], true)
+                ? (string) ($request['type'] ?? 'web')
+                : 'web',
             'rowLimit' => $limit,
+            'startRow' => max(0, (int) ($request['startRow'] ?? 0)),
         ];
 
         $filterGroups = $this->safeDimensionFilterGroups($request['dimensionFilterGroups'] ?? null);
@@ -435,16 +459,23 @@ final class GscReadonlyLiveAdapter
     /**
      * @return list<array<string, mixed>>
      */
-    private function rowsFromResponse(mixed $payload): array
+    private function rowsFromResponse(mixed $payload, array $dimensions, string $searchType): array
     {
         $rows = is_array($payload) && is_array($payload['rows'] ?? null) ? $payload['rows'] : [];
 
-        return array_values(array_map(static function (array $row): array {
+        return array_values(array_map(static function (array $row) use ($dimensions, $searchType): array {
             $keys = is_array($row['keys'] ?? null) ? array_values($row['keys']) : [];
+            $dimensionValues = [];
+            foreach ($dimensions as $index => $dimension) {
+                $dimensionValues[(string) $dimension] = isset($keys[$index]) ? (string) $keys[$index] : null;
+            }
 
             return [
-                'query' => isset($keys[0]) ? (string) $keys[0] : null,
-                'page' => isset($keys[1]) ? (string) $keys[1] : null,
+                'query' => $dimensionValues['query'] ?? null,
+                'page' => $dimensionValues['page'] ?? null,
+                'country' => $dimensionValues['country'] ?? null,
+                'device' => $dimensionValues['device'] ?? null,
+                'search_type' => $searchType,
                 'clicks' => (int) ($row['clicks'] ?? 0),
                 'impressions' => (int) ($row['impressions'] ?? 0),
                 'ctr' => isset($row['ctr']) ? (float) $row['ctr'] : null,
@@ -453,5 +484,18 @@ final class GscReadonlyLiveAdapter
                 'row_source' => 'live_gsc_api',
             ];
         }, $rows));
+    }
+
+    /** @return array<string, mixed> */
+    private function blockedFetch(array $preflight, string $issue, bool $externalCallsAttempted): array
+    {
+        return [
+            'status' => 'blocked',
+            'rows' => [],
+            'external_calls_attempted' => $externalCallsAttempted,
+            'writes_attempted' => false,
+            'issues' => [$issue],
+            'preflight' => $preflight,
+        ];
     }
 }

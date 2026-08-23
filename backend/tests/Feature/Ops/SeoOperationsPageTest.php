@@ -359,7 +359,7 @@ final class SeoOperationsPageTest extends TestCase
             ->assertSet('scopeSummary.1.count', 1)
             ->set('statusFilter', 'all')
             ->set('activeWorkspace', 'performance')
-            ->assertSee('No GSC rows are available for this window. No demo metrics are shown.')
+            ->assertSee('The SEO read model is unavailable in this environment.')
             ->assertDontSee('12,840');
     }
 
