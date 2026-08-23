@@ -299,7 +299,16 @@ final class SeoOperationsPageTest extends TestCase
             ->assertSet('growthFields.3.value', '50% (3/6)')
             ->assertCount('issueQueue', 3)
             ->assertSee('Published with discovery blockers')
-            ->assertDontSee('Other Org SEO Article');
+            ->assertDontSee('Other Org SEO Article')
+            ->set('scopeFilter', 'current_org')
+            ->assertCount('issueQueue', 1)
+            ->set('scopeFilter', 'global')
+            ->assertCount('issueQueue', 2)
+            ->set('scopeFilter', 'combined')
+            ->assertCount('issueQueue', 3)
+            ->set('activeWorkspace', 'performance')
+            ->assertSee('No GSC rows are available for this window. No demo metrics are shown.')
+            ->assertDontSee('12,840');
     }
 
     public function test_seo_operations_can_apply_bulk_actions_to_fix_operational_gaps(): void

@@ -94,6 +94,80 @@
     }
 }
 
+/* ============================================================
+   [Article Editor] Sticky lifecycle header
+   ============================================================ */
+@layer components {
+    .fi-body.fi-panel-ops .ops-editor-sticky-header {
+        position: sticky;
+        top: 4rem;
+        z-index: 20;
+        display: grid;
+        gap: 0.75rem;
+        padding-bottom: 0.75rem;
+        background: color-mix(in srgb, var(--ops-bg-app) 94%, transparent);
+        backdrop-filter: blur(10px);
+    }
+
+    .fi-body.fi-panel-ops .ops-editor-status-bar {
+        overflow-x: auto;
+        border: 1px solid var(--ops-border-default);
+        border-radius: var(--ops-radius-card);
+        background: var(--ops-bg-surface);
+        padding: 0.75rem 1rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-editor-status-bar__track {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(8rem, 1fr));
+        min-width: 34rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-editor-status-bar__step {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--ops-text-tertiary);
+        font-size: 0.75rem;
+        font-weight: 650;
+    }
+
+    .fi-body.fi-panel-ops .ops-editor-status-bar__step:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        inset-inline: 2rem 0.75rem;
+        top: 0.75rem;
+        height: 1px;
+        background: var(--ops-border-default);
+    }
+
+    .fi-body.fi-panel-ops .ops-editor-status-bar__dot {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        place-items: center;
+        width: 1.5rem;
+        height: 1.5rem;
+        border: 1px solid var(--ops-border-strong);
+        border-radius: 999px;
+        background: var(--ops-bg-surface);
+        font-size: 0.6875rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-editor-status-bar__step--done,
+    .fi-body.fi-panel-ops .ops-editor-status-bar__step--active {
+        color: var(--ops-text-primary);
+    }
+
+    .fi-body.fi-panel-ops .ops-editor-status-bar__step--done .ops-editor-status-bar__dot,
+    .fi-body.fi-panel-ops .ops-editor-status-bar__step--active .ops-editor-status-bar__dot {
+        border-color: var(--ops-electric-solid);
+        background: var(--ops-electric-solid);
+        color: #fff;
+    }
+}
+
 @layer components {
     .fi-body.fi-panel-ops .fi-layout,
     .fi-body.fi-panel-ops .fi-simple-layout {

@@ -481,6 +481,7 @@ final class SeoOperationsService
             'is_public' => (bool) data_get($record, 'is_public'),
             'is_indexable' => (bool) data_get($record, 'is_indexable'),
             'issue_labels' => array_values(array_map(static fn (array $issue): string => $issue['label'], $issues)),
+            'issue_codes' => array_values(array_map(static fn (array $issue): string => $issue['code'], $issues)),
             'issue_count' => count($issues),
             'autofix_actions' => $autofixActions,
             'growth_signal' => $this->growthSignal($type, $record),

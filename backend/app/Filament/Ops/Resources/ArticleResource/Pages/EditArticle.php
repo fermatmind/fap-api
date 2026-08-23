@@ -40,6 +40,44 @@ class EditArticle extends EditRecord
         return __('ops.resources.articles.edit_subheading');
     }
 
+    public function getHeader(): ?\Illuminate\Contracts\View\View
+    {
+        /** @var Article|null $record */
+        $record = $this->getRecord();
+        $status = $record instanceof Article ? (string) $record->status : 'draft';
+        $isPublic = $record instanceof Article ? (bool) $record->is_public : false;
+        $scheduledAt = $record instanceof Article ? $record->scheduled_at : null;
+
+        $steps = [
+            'draft' => __('ops.status.draft'),
+            'review' => __('ops.status.review'),
+            'scheduled' => __('ops.status.scheduled'),
+            'published' => __('ops.status.published'),
+        ];
+
+        $currentStep = match (true) {
+            $status === 'published' && $isPublic => 'published',
+            $status === 'published' && $scheduledAt !== null => 'scheduled',
+            $status === 'published' => 'published',
+            $isPublic => 'review',
+            $scheduledAt !== null => 'scheduled',
+            default => 'draft',
+        };
+
+        $order = array_keys($steps);
+        $activeIndex = array_search($currentStep, $order, true);
+
+        return view('filament.ops.articles.partials.editor-status-bar', [
+            'actions' => $this->getCachedHeaderActions(),
+            'breadcrumbs' => filament()->hasBreadcrumbs() ? $this->getBreadcrumbs() : [],
+            'heading' => $this->getHeading(),
+            'subheading' => $this->getSubheading(),
+            'steps' => $steps,
+            'currentStep' => $currentStep,
+            'activeIndex' => $activeIndex,
+        ]);
+    }
+
     protected function getHeaderActions(): array
     {
         return [
