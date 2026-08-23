@@ -52,26 +52,28 @@
             :title="__('ops.custom_pages.content_overview.lifecycle.title')"
             :description="__('ops.custom_pages.content_overview.lifecycle.hint')"
         >
-            <div class="ops-data-strip" role="list">
-                @foreach ($lifecycleStages as $stage)
-                    <a
-                        href="{{ \App\Filament\Ops\Resources\ArticleResource::getUrl() }}"
-                        class="ops-metric"
-                        role="listitem"
-                        style="text-decoration:none"
-                    >
-                        <span class="ops-metric__value tnum">{{ $stage['count'] }}</span>
-                        <span class="ops-metric__label">{{ $stage['label'] }}</span>
-                    </a>
-                @endforeach
-            </div>
+            <x-filament-ops::ops-data-strip
+                :label="__('ops.custom_pages.content_overview.lifecycle.title')"
+                :metrics="collect($lifecycleStages)->map(fn (array $stage): array => [
+                    'label' => $stage['label'],
+                    'value' => $stage['count'],
+                    'tone' => $stage['tone'],
+                    'meta' => __('ops.custom_pages.content_overview.fields.current_org_editorial_hint'),
+                ])->all()"
+            />
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.content_overview.health_title')"
             :description="__('ops.custom_pages.content_overview.health_desc')"
         >
-            <x-filament-ops::ops-field-grid :fields="$summaryFields" />
+            <x-filament-ops::ops-data-strip
+                :metrics="collect($summaryFields)->map(fn (array $field): array => [
+                    'label' => $field['label'],
+                    'value' => $field['value'],
+                    'meta' => $field['hint'],
+                ])->all()"
+            />
         </x-filament-ops::ops-section>
 
         {{-- 内容库存：按类型横向条形图 --}}
@@ -95,27 +97,37 @@
             :title="__('ops.custom_pages.content_overview.recent_title')"
             :description="__('ops.custom_pages.content_overview.recent_desc')"
         >
-            <div class="ops-card-list">
-                @forelse ($recentItems as $item)
-                    <x-filament-ops::ops-result-card
-                        :title="$item['title']"
-                        :meta="$item['label'].' | '.$item['meta']"
-                    >
-                        <x-slot name="actions">
-                            <x-filament::button size="xs" color="gray" tag="a" href="{{ $item['url'] }}">
-                                {{ __('ops.custom_pages.common.actions.open') }}
-                            </x-filament::button>
-                        </x-slot>
-                    </x-filament-ops::ops-result-card>
-                @empty
+            @if ($recentItems === [])
                     <x-filament-ops::ops-empty-state
                         :eyebrow="__('ops.custom_pages.content_overview.title')"
                         icon="heroicon-o-clipboard-document-list"
                         :title="__('ops.custom_pages.content_overview.empty_title')"
                         :description="__('ops.custom_pages.content_overview.empty_desc')"
                     />
-                @endforelse
-            </div>
+            @else
+                <div class="ops-table-shell">
+                    <table class="ops-table">
+                        <thead>
+                            <tr>
+                                <th>{{ __('ops.table.record') }}</th>
+                                <th>{{ __('ops.table.scope') }}</th>
+                                <th>{{ __('ops.table.updated') }}</th>
+                                <th aria-label="{{ __('ops.custom_pages.common.actions.open') }}"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($recentItems as $item)
+                                <tr>
+                                    <td><strong>{{ $item['title'] }}</strong></td>
+                                    <td>{{ $item['label'] }}</td>
+                                    <td>{{ $item['meta'] }}</td>
+                                    <td><a class="ops-link" href="{{ $item['url'] }}">{{ __('ops.custom_pages.common.actions.open') }}</a></td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endif
         </x-filament-ops::ops-section>
     </div>
 </x-filament-panels::page>

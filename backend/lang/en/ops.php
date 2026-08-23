@@ -271,6 +271,20 @@ return [
     ],
 
     'widgets' => [
+        'action_queue' => [
+            'title' => 'Action Queue',
+            'description' => 'Real pending facts within the current permission and organization scope.',
+            'failed_jobs' => 'Failed jobs',
+            'failed_jobs_hint' => 'Current failed_jobs backlog',
+            'pending_approvals' => 'Pending approvals',
+            'pending_approvals_hint' => 'Approval records awaiting manual review',
+            'ungranted_orders' => 'Paid without benefit grant',
+            'ungranted_orders_hint' => 'Commerce exceptions for the current organization',
+            'webhook_failures' => 'Webhook failures',
+            'webhook_failures_hint' => 'Signature or processing failures for the current organization',
+            'unavailable' => 'No connected queue',
+            'unavailable_hint' => 'No readable data source is available for the current permissions.',
+        ],
         'commerce_overview' => 'Commerce Overview',
         'service_health_snapshot' => 'Service Health Snapshot',
         'operational_stability' => 'Operational Stability',
@@ -474,6 +488,7 @@ return [
 
     'table' => [
         'record' => 'Record',
+        'scope' => 'Scope',
         'locale' => 'Locale',
         'source_locale' => 'Source',
         'translation_status' => 'Translation',

@@ -7,6 +7,7 @@ namespace App\Filament\Ops\Pages;
 use App\Filament\Ops\Widgets\CommerceKpiWidget;
 use App\Filament\Ops\Widgets\FunnelWidget;
 use App\Filament\Ops\Widgets\HealthzStatusWidget;
+use App\Filament\Ops\Widgets\OpsActionQueueWidget;
 use App\Filament\Ops\Widgets\QueueFailureWidget;
 use App\Filament\Ops\Widgets\TestKpiDailyInlineWidget;
 use App\Filament\Ops\Widgets\TestKpiSummaryWidget;
@@ -39,12 +40,13 @@ class OpsDashboard extends Dashboard
 
     public function getColumns(): int|string|array
     {
-        return 2;
+        return 12;
     }
 
     public function getWidgets(): array
     {
         $widgets = [
+            OpsActionQueueWidget::class,
             QueueFailureWidget::class,
             HealthzStatusWidget::class,
         ];

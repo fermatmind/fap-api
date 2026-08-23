@@ -7,6 +7,7 @@ namespace Tests\Feature\Ops;
 use App\Filament\Ops\Widgets\CommerceKpiWidget;
 use App\Filament\Ops\Widgets\FunnelWidget;
 use App\Filament\Ops\Widgets\HealthzStatusWidget;
+use App\Filament\Ops\Widgets\OpsActionQueueWidget;
 use App\Filament\Ops\Widgets\QueueFailureWidget;
 use App\Filament\Ops\Widgets\TestKpiDailyInlineWidget;
 use App\Filament\Ops\Widgets\TestKpiSummaryWidget;
@@ -64,6 +65,7 @@ final class OpsDashboardOrgContextInheritanceTest extends TestCase
                 ->assertSee(__('ops.widgets.paid_orders_today'))
                 ->assertSee(__('ops.widgets.test_kpi_overview'))
                 ->assertSee(__('ops.widgets.test_kpi_daily_detail'))
+                ->assertSee(__('ops.widgets.action_queue.title'))
                 ->assertSee('MBTI_PERSONALITY_TEST_16_TYPES')
                 ->assertSee('BIG_FIVE_OCEAN_MODEL')
                 ->assertSee('big5-120')
@@ -133,6 +135,7 @@ final class OpsDashboardOrgContextInheritanceTest extends TestCase
         $this->assertFalse(WebhookFailureWidget::isLazy());
         $this->assertFalse(QueueFailureWidget::isLazy());
         $this->assertFalse(HealthzStatusWidget::isLazy());
+        $this->assertFalse(OpsActionQueueWidget::isLazy());
     }
 
     private function insertDailyMetric(

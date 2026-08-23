@@ -271,6 +271,20 @@ return [
     ],
 
     'widgets' => [
+        'action_queue' => [
+            'title' => 'Action Queue',
+            'description' => '仅展示当前权限与组织范围内的真实待处理事实。',
+            'failed_jobs' => '失败任务',
+            'failed_jobs_hint' => 'failed_jobs 当前积压',
+            'pending_approvals' => '待审批',
+            'pending_approvals_hint' => '需要人工审核的审批记录',
+            'ungranted_orders' => '已支付未发放权益',
+            'ungranted_orders_hint' => '当前组织的交易异常',
+            'webhook_failures' => 'Webhook 失败',
+            'webhook_failures_hint' => '当前组织的签名或处理失败',
+            'unavailable' => '尚未连接可用队列',
+            'unavailable_hint' => '当前权限范围内没有可读取的数据源。',
+        ],
         'commerce_overview' => '交易总览',
         'service_health_snapshot' => '服务健康快照',
         'operational_stability' => '运行稳定性',
@@ -474,6 +488,7 @@ return [
 
     'table' => [
         'record' => '记录',
+        'scope' => '范围',
         'locale' => '语言',
         'source_locale' => '源文',
         'translation_status' => '翻译',

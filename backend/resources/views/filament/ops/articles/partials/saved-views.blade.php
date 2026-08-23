@@ -7,21 +7,13 @@
     />
 
     @if (! empty($savedViews))
-        <div class="ops-article-saved-views" role="group" aria-label="{{ __('ops.resources.articles.saved_views.all') }}">
-            @foreach ($savedViews as $view)
-                @php($isActive = ($view['id'] ?? '') === $activeSavedView)
-                <button
-                    type="button"
-                    wire:click="applySavedView('{{ $view['id'] }}')"
-                    wire:key="article-saved-view-{{ $view['id'] }}"
-                    class="ops-article-chip{{ $isActive ? ' ops-article-chip--active' : '' }}"
-                    aria-pressed="{{ $isActive ? 'true' : 'false' }}"
-                    @if (! empty($view['tone'])) data-tone="{{ $view['tone'] }}" @endif
-                >
-                    <span class="ops-article-chip__label">{{ $view['label'] }}</span>
-                    <span class="ops-article-chip__count tnum">{{ $view['count'] }}</span>
-                </button>
-            @endforeach
-        </div>
+        <x-filament-ops::ops-saved-views
+            :views="collect($savedViews)->mapWithKeys(fn (array $view): array => [$view['id'] => [
+                'label' => $view['label'],
+                'count' => $view['count'],
+            ]])->all()"
+            :active="$activeSavedView"
+            :label="__('ops.resources.articles.saved_views.all')"
+        />
     @endif
 </div>
