@@ -183,6 +183,50 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
             CareerCurrentAuthorityPackage::hashValue(data_get($surface, 'page.content.related_next_pages.links')),
         );
         $this->assertCount(12, $expected);
+        $expectedSurface = $package->publicProjection($row, 'zh-CN');
+        $actualSurface = $package->displayOwnedProjection($surface);
+        foreach ($expectedSurface as $field => $value) {
+            $this->assertSame(
+                CareerCurrentAuthorityPackage::hashValue($value),
+                CareerCurrentAuthorityPackage::hashValue($actualSurface[$field] ?? null),
+                $field,
+            );
+        }
+    }
+
+    public function test_all_current_rows_match_the_runtime_display_owned_surface(): void
+    {
+        ini_set('memory_limit', '1024M');
+        $package = app(CareerCurrentAuthorityPackage::class);
+        $authority = $package->load(base_path());
+        foreach ($authority['rows'] as $slug => $row) {
+            $occupation = $this->createOccupation($slug);
+            $titleZh = data_get($row, 'metadata_json.presentation_v1.zh.hero.title_zh');
+            $occupation->update(['canonical_title_zh' => $titleZh, 'search_h1_zh' => $titleZh]);
+            $this->createDisplayAsset($occupation, $package->databaseAttributes($row));
+            foreach (['zh-CN', 'en'] as $locale) {
+                $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, $locale);
+                $this->assertIsArray($surface, $slug.'|'.$locale.'|surface');
+                $expected = $package->publicProjection($row, $locale);
+                $actual = $package->displayOwnedProjection($surface);
+                foreach ($expected as $field => $value) {
+                    if ($field === 'page') {
+                        foreach ($value['content'] as $component => $componentValue) {
+                            $this->assertSame(
+                                CareerCurrentAuthorityPackage::hashValue($componentValue),
+                                CareerCurrentAuthorityPackage::hashValue(data_get($actual, 'page.content.'.$component)),
+                                $slug.'|'.$locale.'|page.'.$component,
+                            );
+                        }
+                    }
+                    $this->assertSame(
+                        CareerCurrentAuthorityPackage::hashValue($value),
+                        CareerCurrentAuthorityPackage::hashValue($actual[$field] ?? null),
+                        $slug.'|'.$locale.'|'.$field,
+                    );
+                }
+            }
+        }
     }
 
     public function test_it_returns_the_complete_26_component_surface_with_both_workbuddy_blocks(): void

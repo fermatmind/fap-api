@@ -216,8 +216,12 @@ final class CareerJobDisplaySurfaceBuilder
     private function normalizeRelatedNextPages(array $pageContent, string $currentSlug): array
     {
         $related = $pageContent['related_next_pages'] ?? null;
-        $links = is_array($related) && is_array($related['links'] ?? null) && array_is_list($related['links'])
-            ? $related['links'] : [];
+        if (! is_array($related)
+            || ! is_array($related['links'] ?? null)
+            || ! array_is_list($related['links'])) {
+            return $pageContent;
+        }
+        $links = $related['links'];
         $candidates = [];
         $seenSlugs = [];
         foreach ($links as $index => $link) {
@@ -271,10 +275,8 @@ final class CareerJobDisplaySurfaceBuilder
                 break;
             }
         }
-        if (is_array($related)) {
-            $related['links'] = $normalized;
-            $pageContent['related_next_pages'] = $related;
-        }
+        $related['links'] = $normalized;
+        $pageContent['related_next_pages'] = $related;
 
         return $pageContent;
     }
