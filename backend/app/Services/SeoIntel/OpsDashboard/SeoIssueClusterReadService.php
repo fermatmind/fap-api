@@ -86,7 +86,7 @@ final class SeoIssueClusterReadService extends AbstractSeoDashboardReadService
 
     private function isActiveIssue(object $row): bool
     {
-        return ! in_array((string) ($row->status ?? ''), ['resolved', 'verified', 'closed', 'ignored'], true)
+        return ! in_array($this->normalizeWorkflowStatus((string) ($row->status ?? '')), ['resolved', 'closed', 'ignored'], true)
             && ! in_array((string) ($row->lifecycle_state ?? ''), ['resolved', 'closed', 'ignored'], true);
     }
 
@@ -110,7 +110,7 @@ final class SeoIssueClusterReadService extends AbstractSeoDashboardReadService
 
     private function isOverdue(object $row): bool
     {
-        $dueAt = data_get($this->decodeJson($row->metadata_json ?? null), 'ops_workflow.sla_due_at');
+        $dueAt = $row->sla_due_at ?? null;
         if (! is_string($dueAt) || trim($dueAt) === '') {
             return false;
         }
@@ -263,6 +263,15 @@ final class SeoIssueClusterReadService extends AbstractSeoDashboardReadService
             'page_entity_type',
             'status',
             'lifecycle_state',
+            'owner_admin_user_id',
+            'sla_due_at',
+            'operator_note',
+            'ignore_reason',
+            'ignore_until',
+            'verified_at',
+            'verified_by_admin_user_id',
+            'verification_note',
+            'lock_version',
             'detected_at',
             'created_at',
             'updated_at',
@@ -315,7 +324,7 @@ final class SeoIssueClusterReadService extends AbstractSeoDashboardReadService
             ->map(fn (object $row): string => $this->normalizeSeverity((string) ($row->severity ?? 'info')))
             ->sortByDesc(fn (string $value): int => self::SEVERITY_RANK[$value] ?? 0)
             ->first() ?? 'info';
-        $statuses = $members->map(fn (object $row): string => (string) ($row->status ?? 'open'));
+        $statuses = $members->map(fn (object $row): string => $this->normalizeWorkflowStatus((string) ($row->status ?? 'open')));
         $openCount = $statuses->filter(fn (string $status): bool => ! in_array($status, ['resolved', 'verified', 'closed', 'ignored'], true))->count();
         $ignoredCount = $statuses->filter(fn (string $status): bool => $status === 'ignored')->count();
         $urlIdentities = $members
@@ -361,8 +370,17 @@ final class SeoIssueClusterReadService extends AbstractSeoDashboardReadService
             'locale' => isset($row->locale) ? (string) $row->locale : null,
             'page_entity_type' => isset($row->page_entity_type) ? (string) $row->page_entity_type : null,
             'severity' => $this->normalizeSeverity((string) ($row->severity ?? 'info')),
-            'status' => (string) ($row->status ?? 'open'),
+            'status' => $this->normalizeWorkflowStatus((string) ($row->status ?? 'open')),
             'lifecycle_state' => (string) ($row->lifecycle_state ?? 'open'),
+            'owner_admin_user_id' => isset($row->owner_admin_user_id) ? (int) $row->owner_admin_user_id : null,
+            'sla_due_at' => $this->normalizeTimestamp($row->sla_due_at ?? null),
+            'operator_note' => isset($row->operator_note) ? (string) $row->operator_note : null,
+            'ignore_reason' => isset($row->ignore_reason) ? (string) $row->ignore_reason : null,
+            'ignore_until' => $this->normalizeTimestamp($row->ignore_until ?? null),
+            'verified_at' => $this->normalizeTimestamp($row->verified_at ?? null),
+            'verified_by_admin_user_id' => isset($row->verified_by_admin_user_id) ? (int) $row->verified_by_admin_user_id : null,
+            'verification_note' => isset($row->verification_note) ? (string) $row->verification_note : null,
+            'lock_version' => (int) ($row->lock_version ?? 0),
             'summary' => isset($row->summary) ? (string) $row->summary : null,
             'recommendation' => isset($row->recommendation) ? (string) $row->recommendation : null,
             'source' => $this->sourceSignal($row),
@@ -475,6 +493,17 @@ final class SeoIssueClusterReadService extends AbstractSeoDashboardReadService
     private function normalizeSeverity(string $severity): string
     {
         return $severity === 'warning' ? 'medium' : $this->normalizeAxis($severity);
+    }
+
+    private function normalizeWorkflowStatus(string $status): string
+    {
+        return match ($status) {
+            'new' => 'open',
+            'assigned' => 'in_progress',
+            'fixed' => 'resolved',
+            'verified' => 'closed',
+            default => $status,
+        };
     }
 
     private function normalizeAxis(string $value): string

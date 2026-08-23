@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Pages;
 
 use App\Filament\Ops\Support\ContentAccess;
+use App\Models\AdminUser;
 use App\Models\Article;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
@@ -62,11 +63,17 @@ class SeoOperationsPage extends Page
 
     public string $selectedIssueUid = '';
 
+    public int $selectedLockVersion = -1;
+
     public string $workflowAction = SeoIssueWorkflowService::ACTION_ASSIGN;
 
     public string $ignoreReason = '';
 
     public string $ignoredUntil = '';
+
+    public string $operatorNote = '';
+
+    public string $verificationNote = '';
 
     public string $bulkAction = SeoOperationsService::ACTION_FILL_METADATA;
 
@@ -147,8 +154,14 @@ class SeoOperationsPage extends Page
 
     public function mount(SeoOperationsService $service): void
     {
+        $this->reopenExpiredIgnores();
         $this->refreshDashboard($service);
         $this->refreshSeoIntel();
+    }
+
+    public function updatedSelectedIssueUid(): void
+    {
+        $this->syncSelectedIssueVersion();
     }
 
     public function updatedTypeFilter(): void
@@ -300,29 +313,58 @@ class SeoOperationsPage extends Page
         }
 
         $user = auth((string) config('admin.guard', 'admin'))->user();
-        $owner = trim((string) data_get($user, 'name', 'operator'));
+        if (! $user instanceof AdminUser) {
+            throw new AuthorizationException(__('ops.custom_pages.common.errors.seo_action_forbidden'));
+        }
         $result = $workflow->transition(
             $this->selectedIssueUid,
             $this->workflowAction,
-            $owner,
+            $user,
+            $this->selectedLockVersion,
+            $this->operatorNote,
             $this->ignoreReason,
             trim($this->ignoredUntil) !== '' ? $this->ignoredUntil : null,
+            $this->verificationNote,
         );
 
-        $audit->log(request(), 'seo_issue_workflow_transition', 'SeoIssue', null, [
-            'issue_uid' => $result['issue_uid'],
-            'action' => $result['action'],
-            'status' => $result['status'],
-        ]);
+        $audit->log(request(), 'seo_issue_workflow_transition', 'SeoIssue', (string) $result['issue_uid'], $result);
 
+        $this->operatorNote = '';
         $this->ignoreReason = '';
         $this->ignoredUntil = '';
+        $this->verificationNote = '';
         $this->refreshSeoIntel();
+        $this->syncSelectedIssueVersion();
 
         Notification::make()
             ->title(__('ops.custom_pages.seo_operations.notifications.workflow_applied'))
             ->success()
             ->send();
+    }
+
+    private function reopenExpiredIgnores(): void
+    {
+        if (! ContentAccess::canWrite()) {
+            return;
+        }
+
+        $user = auth((string) config('admin.guard', 'admin'))->user();
+        if (! $user instanceof AdminUser) {
+            throw new AuthorizationException(__('ops.custom_pages.common.errors.seo_action_forbidden'));
+        }
+
+        $audit = app(AuditLogger::class);
+        try {
+            $results = app(SeoIssueWorkflowService::class)->reopenExpiredIgnores($user);
+        } catch (\Illuminate\Database\QueryException|\InvalidArgumentException) {
+            // The CMS fallback remains usable when seo_intel is unavailable.
+            // No expiry state is changed without a successful protected read.
+            return;
+        }
+
+        foreach ($results as $result) {
+            $audit->log(request(), 'seo_issue_ignore_expired_reopen', 'SeoIssue', (string) $result['issue_uid'], $result);
+        }
     }
 
     public function applyBulkAction(SeoOperationsService $service, AuditLogger $audit): void
@@ -984,6 +1026,17 @@ class SeoOperationsPage extends Page
         $this->clusterUrlTotal = (int) ($result['total_count'] ?? 0);
         $this->clusterUrlPage = (int) ($result['page'] ?? 1);
         $this->clusterUrlLastPage = (int) ($result['last_page'] ?? 1);
+        $this->syncSelectedIssueVersion();
+    }
+
+    private function syncSelectedIssueVersion(): void
+    {
+        $selected = collect($this->clusterUrls)
+            ->first(fn (array $row): bool => (string) ($row['issue_uid'] ?? '') === $this->selectedIssueUid);
+
+        $this->selectedLockVersion = is_array($selected)
+            ? (int) ($selected['lock_version'] ?? -1)
+            : -1;
     }
 
     /** @return array{0:list<array<string,mixed>>,1:array<string,list<array<string,mixed>>>} */

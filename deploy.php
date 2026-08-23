@@ -797,6 +797,26 @@ task('artisan:migrate', function () {
     run('{{bin/php}} '.deployPlaceholderPathArg('{{release_path}}', 'backend/artisan').' migrate --force --no-interaction --ansi');
 });
 
+task('artisan:migrate-seo-intel', function () {
+    within('{{release_path}}/backend', function (): void {
+        run('{{bin/php}} artisan migrate --database=seo_intel --path=database/migrations/seo_intel --force --no-interaction --ansi');
+    });
+});
+
+task('guard:no-pending-seo-intel-migrations', function () {
+    within('{{release_path}}/backend', function (): void {
+        run(<<<'BASH'
+set -euo pipefail
+status_output="$({{bin/php}} artisan migrate:status --database=seo_intel --path=database/migrations/seo_intel --no-interaction --no-ansi)"
+printf '%s\n' "$status_output"
+if printf '%s\n' "$status_output" | grep -Eq '(^|[[:space:]])Pending($|[[:space:]])'; then
+  echo "pending seo_intel migrations remain after deploy migrate" >&2
+  exit 1
+fi
+BASH);
+    });
+});
+
 task('artisan:migrate-schema-only', function () {
     $migration = deploySchemaOnlyMigration();
     $migrationPath = 'database/migrations/'.$migration;
@@ -2359,7 +2379,9 @@ after('artisan:filament:assets', 'guard:required-public-static-media-assets');
 after('guard:required-public-static-media-assets', 'ensure:release-public-static-compat');
 after('artisan:config:cache', 'guard:sitemap-authority');
 after('artisan:migrate', 'guard:no-pending-migrations');
-after('guard:no-pending-migrations', 'artisan:scales:seed-default');
+after('guard:no-pending-migrations', 'artisan:migrate-seo-intel');
+after('artisan:migrate-seo-intel', 'guard:no-pending-seo-intel-migrations');
+after('guard:no-pending-seo-intel-migrations', 'artisan:scales:seed-default');
 after('artisan:scales:seed-default', 'big5:publish-private-result-authority');
 after('big5:publish-private-result-authority', 'riasec:publish-private-result-authority');
 after('riasec:publish-private-result-authority', 'enneagram:publish-private-result-authority');

@@ -1508,6 +1508,8 @@ return [
                 'verification_hint' => '“验证并关闭”当前记录人工确认；接入真实爬虫数据源前，不会宣称已完成自动复检。',
                 'reason' => '忽略原因',
                 'until' => '忽略有效期',
+                'operator_note' => '操作备注',
+                'verification_note' => '验证证据 / 备注',
                 'apply' => '应用流程动作',
                 'issue' => '问题',
                 'inspect_to_select' => '先检查问题簇，再选择具体问题',

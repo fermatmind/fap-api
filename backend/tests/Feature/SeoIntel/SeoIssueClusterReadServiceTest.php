@@ -39,6 +39,15 @@ final class SeoIssueClusterReadServiceTest extends TestCase
             $table->string('page_entity_type', 64)->nullable();
             $table->string('status', 32);
             $table->string('lifecycle_state', 32);
+            $table->unsignedBigInteger('owner_admin_user_id')->nullable();
+            $table->timestamp('sla_due_at')->nullable();
+            $table->text('operator_note')->nullable();
+            $table->text('ignore_reason')->nullable();
+            $table->timestamp('ignore_until')->nullable();
+            $table->timestamp('verified_at')->nullable();
+            $table->unsignedBigInteger('verified_by_admin_user_id')->nullable();
+            $table->text('verification_note')->nullable();
+            $table->unsignedBigInteger('lock_version')->default(0);
             $table->timestamp('detected_at')->nullable();
             $table->string('summary', 512)->nullable();
             $table->string('recommendation', 512)->nullable();
@@ -121,12 +130,7 @@ final class SeoIssueClusterReadServiceTest extends TestCase
         DB::connection('seo_issue_cluster_test')->table('seo_issue_queue')
             ->where('issue_uid', 'canonical-1')
             ->update([
-                'metadata_json' => json_encode([
-                    'root_cause' => 'article_template_canonical',
-                    'template' => 'article_detail',
-                    'field' => 'canonical',
-                    'ops_workflow' => ['sla_due_at' => now()->subHour()->toAtomString()],
-                ], JSON_THROW_ON_ERROR),
+                'sla_due_at' => now()->subHour(),
             ]);
 
         $summary = (new SeoIssueClusterReadService('seo_issue_cluster_test'))->read()['summary'];

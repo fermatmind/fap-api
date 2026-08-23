@@ -1508,6 +1508,8 @@ return [
                 'verification_hint' => '“Verify & close” records an operator confirmation. Automated recrawl verification remains unavailable until a crawl data source is connected.',
                 'reason' => 'Ignore reason',
                 'until' => 'Ignore until',
+                'operator_note' => 'Operator note',
+                'verification_note' => 'Verification evidence / note',
                 'apply' => 'Apply workflow action',
                 'issue' => 'Issue',
                 'inspect_to_select' => 'Inspect a cluster to select an issue',

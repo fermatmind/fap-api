@@ -30,6 +30,7 @@ final class SeoIntelMigrationIsolationTest extends TestCase
         '2026_05_17_001500_create_seo_domestic_index_samples_table.php',
         '2026_05_17_001600_create_seo_crawler_logs_daily_table.php',
         '2026_05_17_001700_create_seo_issue_queue_table.php',
+        '2026_08_23_120000_expand_seo_execution_workflow.php',
     ];
 
     #[Test]
@@ -75,6 +76,19 @@ final class SeoIntelMigrationIsolationTest extends TestCase
         ] as $migration) {
             $this->assertFileExists(base_path("database/migrations/{$migration}"));
         }
+    }
+
+    #[Test]
+    public function trunk_delivery_validates_and_runs_the_dedicated_seo_intel_path(): void
+    {
+        $ci = (string) file_get_contents(base_path('../.github/workflows/ci.yml'));
+        $deploy = (string) file_get_contents(base_path('../deploy.php'));
+
+        $this->assertStringContainsString("'backend/database/migrations/**/*.php'", $ci);
+        $this->assertStringContainsString('database/migrations/seo_intel', $ci);
+        $this->assertStringContainsString("task('artisan:migrate-seo-intel'", $deploy);
+        $this->assertStringContainsString('migrate --database=seo_intel --path=database/migrations/seo_intel', $deploy);
+        $this->assertStringContainsString("after('artisan:migrate-seo-intel', 'guard:no-pending-seo-intel-migrations')", $deploy);
     }
 
     #[Test]

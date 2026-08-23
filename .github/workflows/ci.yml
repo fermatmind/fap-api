@@ -179,12 +179,32 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mapfile -t migrations < <(git diff --diff-filter=AM --name-only '${{ needs.classify.outputs.base_sha }}' '${{ github.sha }}' -- backend/database/migrations/*.php)
+          mapfile -t migrations < <(git diff --diff-filter=AM --name-only '${{ needs.classify.outputs.base_sha }}' '${{ github.sha }}' -- 'backend/database/migrations/**/*.php')
           test "${#migrations[@]}" -gt 0
           node .github/trunk/validate-migrations.mjs "${migrations[@]}"
           cd backend
-          DB_DATABASE="$RUNNER_TEMP/fap-ci.sqlite" bash scripts/ci/prepare_sqlite.sh
-          php artisan migrate --force --no-interaction --ansi
+          mapfile -t default_migrations < <(printf '%s\n' "${migrations[@]}" | grep -E '^backend/database/migrations/[^/]+\.php$' || true)
+          mapfile -t seo_intel_migrations < <(printf '%s\n' "${migrations[@]}" | grep -E '^backend/database/migrations/seo_intel/[^/]+\.php$' || true)
+          if [ "${#default_migrations[@]}" -gt 0 ]; then
+            DB_DATABASE="$RUNNER_TEMP/fap-ci.sqlite" bash scripts/ci/prepare_sqlite.sh
+            php artisan migrate --force --no-interaction --ansi
+          fi
+          if [ "${#seo_intel_migrations[@]}" -gt 0 ]; then
+            export APP_CONFIG_CACHE="$RUNNER_TEMP/seo-intel-config.php"
+            DB_DATABASE="$RUNNER_TEMP/fap-ci-primary.sqlite" bash scripts/ci/prepare_sqlite.sh
+            php artisan config:cache --no-ansi
+            SEO_INTEL_CI_DATABASE="$RUNNER_TEMP/fap-ci-seo-intel.sqlite" php -r '
+              $path = getenv("APP_CONFIG_CACHE");
+              $config = require $path;
+              $config["database"]["connections"]["seo_intel"] = [
+                "driver" => "sqlite", "database" => getenv("SEO_INTEL_CI_DATABASE"),
+                "prefix" => "", "foreign_key_constraints" => false,
+              ];
+              file_put_contents($path, "<?php return ".var_export($config, true).";\n");
+            '
+            touch "$RUNNER_TEMP/fap-ci-seo-intel.sqlite"
+            php artisan migrate --database=seo_intel --path=database/migrations/seo_intel --force --no-interaction --ansi
+          fi
       - name: Focused runtime contracts
         if: needs.classify.outputs.deploy == 'true'
         working-directory: backend

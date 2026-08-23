@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SeoIntel;
 
+use App\Models\AdminUser;
 use App\Services\SeoIntel\OpsDashboard\SeoDashboardApiReadService;
 use App\Services\SeoIntel\OpsDashboard\SeoIssueWorkflowService;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -66,10 +68,19 @@ final class SeoOperationsWorkspaceV2Test extends TestCase
             $table->string('page_entity_type', 64)->nullable();
             $table->string('status', 32);
             $table->string('lifecycle_state', 32);
+            $table->unsignedBigInteger('owner_admin_user_id')->nullable();
+            $table->timestamp('sla_due_at')->nullable();
+            $table->text('operator_note')->nullable();
             $table->timestamp('detected_at')->nullable();
             $table->timestamp('acknowledged_at')->nullable();
             $table->timestamp('resolved_at')->nullable();
             $table->timestamp('ignored_at')->nullable();
+            $table->text('ignore_reason')->nullable();
+            $table->timestamp('ignore_until')->nullable();
+            $table->timestamp('verified_at')->nullable();
+            $table->unsignedBigInteger('verified_by_admin_user_id')->nullable();
+            $table->text('verification_note')->nullable();
+            $table->unsignedBigInteger('lock_version')->default(0);
             $table->string('summary', 512)->nullable();
             $table->string('recommendation', 512)->nullable();
             $table->json('metadata_json')->nullable();
@@ -126,25 +137,121 @@ final class SeoOperationsWorkspaceV2Test extends TestCase
 
         $service = new SeoIssueWorkflowService;
 
+        $actor = $this->actor();
+
         try {
-            $service->transition('issue-1', SeoIssueWorkflowService::ACTION_VERIFY, 'SEO owner');
+            $service->transition('issue-1', SeoIssueWorkflowService::ACTION_VERIFY, $actor, 0, verificationNote: 'manual check');
             $this->fail('Verify must fail before the issue is marked fixed.');
+        } catch (AuthorizationException) {
+            $this->assertTrue(true);
+        }
+
+        $service->transition('issue-1', SeoIssueWorkflowService::ACTION_ASSIGN, $actor, 0);
+        $service->transition('issue-1', SeoIssueWorkflowService::ACTION_FIXED, $actor, 1, operatorNote: 'canonical corrected');
+        $service->transition('issue-1', SeoIssueWorkflowService::ACTION_VERIFY, $actor, 2, verificationNote: 'manual source inspection passed');
+
+        $row = DB::connection('seo_intel_workspace_test')->table('seo_issue_queue')->where('issue_uid', 'issue-1')->first();
+
+        $this->assertSame('closed', $row->status);
+        $this->assertSame('closed', $row->lifecycle_state);
+        $this->assertNotNull($row->resolved_at);
+        $this->assertSame(42, $row->owner_admin_user_id);
+        $this->assertNotNull($row->sla_due_at);
+        $this->assertSame(42, $row->verified_by_admin_user_id);
+        $this->assertSame('manual source inspection passed', $row->verification_note);
+        $this->assertSame(3, $row->lock_version);
+    }
+
+    public function test_workflow_fails_closed_for_stale_versions_invalid_ignore_and_unauthorized_actor(): void
+    {
+        $this->insertIssue('issue-guard');
+        $service = new SeoIssueWorkflowService;
+        $actor = $this->actor();
+
+        $service->transition('issue-guard', SeoIssueWorkflowService::ACTION_ASSIGN, $actor, 0);
+
+        $this->expectException(ValidationException::class);
+        $service->transition('issue-guard', SeoIssueWorkflowService::ACTION_FIXED, $actor, 0);
+    }
+
+    public function test_ignore_requires_future_expiry_and_expired_ignore_reopens_with_new_version(): void
+    {
+        $this->insertIssue('issue-ignore');
+        $service = new SeoIssueWorkflowService;
+        $actor = $this->actor();
+
+        try {
+            $service->transition('issue-ignore', SeoIssueWorkflowService::ACTION_IGNORE, $actor, 0, ignoreReason: 'temporary');
+            $this->fail('Ignore without a future expiry must fail.');
         } catch (ValidationException) {
             $this->assertTrue(true);
         }
 
-        $service->transition('issue-1', SeoIssueWorkflowService::ACTION_ASSIGN, 'SEO owner');
-        $service->transition('issue-1', SeoIssueWorkflowService::ACTION_FIXED, 'SEO owner');
-        $service->transition('issue-1', SeoIssueWorkflowService::ACTION_VERIFY, 'SEO owner');
+        $service->transition(
+            'issue-ignore',
+            SeoIssueWorkflowService::ACTION_IGNORE,
+            $actor,
+            0,
+            ignoreReason: 'temporary external dependency',
+            ignoredUntil: now()->addDay()->toDateString(),
+        );
+        DB::connection('seo_intel_workspace_test')->table('seo_issue_queue')
+            ->where('issue_uid', 'issue-ignore')
+            ->update(['ignore_until' => now()->subMinute()]);
 
-        $row = DB::connection('seo_intel_workspace_test')->table('seo_issue_queue')->where('issue_uid', 'issue-1')->first();
-        $metadata = json_decode((string) $row->metadata_json, true, 512, JSON_THROW_ON_ERROR);
+        $results = $service->reopenExpiredIgnores($actor);
+        $row = DB::connection('seo_intel_workspace_test')->table('seo_issue_queue')->where('issue_uid', 'issue-ignore')->first();
 
-        $this->assertSame('verified', $row->status);
-        $this->assertSame('resolved', $row->lifecycle_state);
-        $this->assertNotNull($row->resolved_at);
-        $this->assertSame('SEO owner', data_get($metadata, 'ops_workflow.owner'));
-        $this->assertNotNull(data_get($metadata, 'ops_workflow.sla_due_at'));
-        $this->assertSame('passed_by_operator', data_get($metadata, 'ops_workflow.verification_result'));
+        $this->assertSame('ignore_expired_reopen', $results[0]['action']);
+        $this->assertSame('open', $row->status);
+        $this->assertNull($row->ignore_reason);
+        $this->assertNull($row->ignore_until);
+        $this->assertSame(2, $row->lock_version);
+    }
+
+    public function test_policy_rejects_actor_without_content_write_authority(): void
+    {
+        $this->insertIssue('issue-auth');
+        $actor = new class extends AdminUser
+        {
+            public function hasPermission(string $permissionName): bool
+            {
+                return false;
+            }
+        };
+        $actor->forceFill(['id' => 99, 'is_active' => 1]);
+
+        $this->expectException(AuthorizationException::class);
+        (new SeoIssueWorkflowService)->transition('issue-auth', SeoIssueWorkflowService::ACTION_ASSIGN, $actor, 0);
+    }
+
+    private function insertIssue(string $uid): void
+    {
+        DB::connection('seo_intel_workspace_test')->table('seo_issue_queue')->insert([
+            'issue_uid' => $uid,
+            'issue_type' => 'canonical_drift',
+            'severity' => 'critical',
+            'source_system' => 'drift_foundation',
+            'status' => 'open',
+            'lifecycle_state' => 'open',
+            'detected_at' => now(),
+            'metadata_json' => '{}',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
+
+    private function actor(): AdminUser
+    {
+        $actor = new class extends AdminUser
+        {
+            public function hasPermission(string $permissionName): bool
+            {
+                return true;
+            }
+        };
+        $actor->forceFill(['id' => 42, 'is_active' => 1]);
+
+        return $actor;
     }
 }
