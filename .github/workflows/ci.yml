@@ -193,6 +193,7 @@ jobs:
             export APP_CONFIG_CACHE="$RUNNER_TEMP/seo-intel-config.php"
             DB_DATABASE="$RUNNER_TEMP/fap-ci-primary.sqlite" bash scripts/ci/prepare_sqlite.sh
             php artisan config:cache --no-ansi
+            # shellcheck disable=SC2016 -- PHP source must not be expanded by bash.
             SEO_INTEL_CI_DATABASE="$RUNNER_TEMP/fap-ci-seo-intel.sqlite" php -r '
               $path = getenv("APP_CONFIG_CACHE");
               $config = require $path;
