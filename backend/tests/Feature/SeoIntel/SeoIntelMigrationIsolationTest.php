@@ -89,6 +89,10 @@ final class SeoIntelMigrationIsolationTest extends TestCase
         $this->assertStringContainsString("task('artisan:migrate-seo-intel'", $deploy);
         $this->assertStringContainsString('migrate --database=seo_intel --path=database/migrations/seo_intel', $deploy);
         $this->assertStringContainsString("after('artisan:migrate-seo-intel', 'guard:no-pending-seo-intel-migrations')", $deploy);
+
+        $migration = (string) file_get_contents(base_path('database/migrations/seo_intel/2026_08_23_120000_expand_seo_execution_workflow.php'));
+        $this->assertStringContainsString('rollback compatibility', $migration);
+        $this->assertStringContainsString('new/assigned/fixed/verified', $migration);
     }
 
     #[Test]

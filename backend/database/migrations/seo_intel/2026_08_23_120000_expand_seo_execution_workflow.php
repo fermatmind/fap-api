@@ -10,6 +10,8 @@ return new class extends Migration
 
     public function up(): void
     {
+        // Status stays a string for rollback compatibility. Runtime maps legacy
+        // new/assigned/fixed/verified values onto the five-state workflow.
         Schema::connection($this->getConnection())->table('seo_issue_queue', function (Blueprint $table): void {
             $table->unsignedBigInteger('owner_admin_user_id')->nullable()->after('lifecycle_state');
             $table->timestamp('sla_due_at')->nullable()->after('owner_admin_user_id');
