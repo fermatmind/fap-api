@@ -105,7 +105,24 @@ class SeoOperationsPage extends Page
     public array $opportunityQueue = [];
 
     /** @var list<array<string, mixed>> */
-    public array $executionQueue = [];
+    public array $issueClusters = [];
+
+    public int $issueClusterPage = 1;
+
+    public int $issueClusterTotal = 0;
+
+    public int $issueClusterLastPage = 1;
+
+    public string $selectedClusterUid = '';
+
+    /** @var list<array<string, mixed>> */
+    public array $clusterUrls = [];
+
+    public int $clusterUrlPage = 1;
+
+    public int $clusterUrlTotal = 0;
+
+    public int $clusterUrlLastPage = 1;
 
     /** @var list<array<string, mixed>> */
     public array $dataSources = [];
@@ -233,6 +250,37 @@ class SeoOperationsPage extends Page
         $this->issueQueuePage = min($lastPage, $this->issueQueuePage + 1);
     }
 
+    public function inspectIssueCluster(string $clusterUid): void
+    {
+        $this->selectedClusterUid = $clusterUid;
+        $this->clusterUrlPage = 1;
+        $this->refreshClusterUrls(app(SeoDashboardApiReadService::class));
+    }
+
+    public function previousIssueClusterPage(): void
+    {
+        $this->issueClusterPage = max(1, $this->issueClusterPage - 1);
+        $this->refreshIssueClusters(app(SeoDashboardApiReadService::class));
+    }
+
+    public function nextIssueClusterPage(): void
+    {
+        $this->issueClusterPage = min($this->issueClusterLastPage, $this->issueClusterPage + 1);
+        $this->refreshIssueClusters(app(SeoDashboardApiReadService::class));
+    }
+
+    public function previousClusterUrlPage(): void
+    {
+        $this->clusterUrlPage = max(1, $this->clusterUrlPage - 1);
+        $this->refreshClusterUrls(app(SeoDashboardApiReadService::class));
+    }
+
+    public function nextClusterUrlPage(): void
+    {
+        $this->clusterUrlPage = min($this->clusterUrlLastPage, $this->clusterUrlPage + 1);
+        $this->refreshClusterUrls(app(SeoDashboardApiReadService::class));
+    }
+
     public function applyIssueWorkflow(SeoIssueWorkflowService $workflow, AuditLogger $audit): void
     {
         if (! ContentAccess::canWrite()) {
@@ -319,8 +367,9 @@ class SeoOperationsPage extends Page
         $this->refreshDashboard(app(SeoOperationsService::class));
 
         $filename = 'seo-operations-'.now()->format('Y-m-d-H-i-s').'.csv';
+        [$clusterExport, $clusterUrlExport] = $this->fullClusterExport();
 
-        $callback = function (): void {
+        $callback = function () use ($clusterExport, $clusterUrlExport): void {
             $out = fopen('php://output', 'w');
 
             fwrite($out, "\xEF\xBB\xBF");
@@ -360,6 +409,49 @@ class SeoOperationsPage extends Page
                     implode('; ', (array) ($item['issue_labels'] ?? [])),
                     (string) ($item['growth_signal'] ?? ''),
                 ]));
+            }
+
+            fputcsv($out, []);
+            fputcsv($out, array_map($this->spreadsheetSafeCell(...), [
+                'issue_clusters', 'cluster_uid', 'root_cause', 'content_type', 'template', 'field', 'severity', 'affected_url_count', 'issue_count', 'evidence_count', 'status', 'source', 'recommendation',
+            ]));
+            foreach ($clusterExport as $cluster) {
+                fputcsv($out, array_map($this->spreadsheetSafeCell(...), [
+                    'issue_clusters',
+                    (string) ($cluster['cluster_uid'] ?? ''),
+                    (string) ($cluster['root_cause'] ?? ''),
+                    (string) ($cluster['content_type'] ?? ''),
+                    (string) ($cluster['template'] ?? ''),
+                    (string) ($cluster['field'] ?? ''),
+                    (string) ($cluster['severity'] ?? ''),
+                    (string) ($cluster['affected_url_count'] ?? 0),
+                    (string) ($cluster['issue_count'] ?? 0),
+                    (string) ($cluster['evidence_count'] ?? 0),
+                    (string) ($cluster['status'] ?? ''),
+                    (string) ($cluster['source'] ?? ''),
+                    (string) ($cluster['recommendation'] ?? ''),
+                ]));
+            }
+
+            fputcsv($out, []);
+            fputcsv($out, array_map($this->spreadsheetSafeCell(...), [
+                'cluster_urls', 'cluster_uid', 'issue_uid', 'canonical_path', 'locale', 'page_entity_type', 'severity', 'status', 'source', 'evidence_fingerprint',
+            ]));
+            foreach ($clusterUrlExport as $clusterUid => $urls) {
+                foreach ($urls as $url) {
+                    fputcsv($out, array_map($this->spreadsheetSafeCell(...), [
+                        'cluster_urls',
+                        $clusterUid,
+                        (string) ($url['issue_uid'] ?? ''),
+                        (string) ($url['canonical_path'] ?? ''),
+                        (string) ($url['locale'] ?? ''),
+                        (string) ($url['page_entity_type'] ?? ''),
+                        (string) ($url['severity'] ?? ''),
+                        (string) ($url['status'] ?? ''),
+                        (string) ($url['source'] ?? ''),
+                        (string) ($url['evidence_fingerprint'] ?? ''),
+                    ]));
+                }
             }
 
             fclose($out);
@@ -695,12 +787,20 @@ class SeoOperationsPage extends Page
                 'locale' => $this->gscLocale,
             ]);
             $this->opportunityQueue = (array) data_get($reader->opportunityQueue(25), 'recent_rows', []);
-            $this->executionQueue = (array) data_get($reader->issues(self::ISSUE_QUEUE_PER_PAGE), 'recent_rows', []);
+            $this->refreshIssueClusters($reader);
+            if ($this->selectedClusterUid !== '') {
+                $this->refreshClusterUrls($reader);
+            }
             $this->seoIntelAvailable = true;
         } catch (Throwable) {
             $this->searchPerformance = ['connected' => false, 'totals' => [], 'daily' => [], 'query_page_rows' => []];
             $this->opportunityQueue = [];
-            $this->executionQueue = [];
+            $this->issueClusters = [];
+            $this->issueClusterTotal = 0;
+            $this->issueClusterLastPage = 1;
+            $this->clusterUrls = [];
+            $this->clusterUrlTotal = 0;
+            $this->clusterUrlLastPage = 1;
             $this->seoIntelAvailable = false;
         }
 
@@ -729,6 +829,50 @@ class SeoOperationsPage extends Page
                 ->all();
         } catch (Throwable) {
             $this->deploymentEvents = [];
+        }
+    }
+
+    private function refreshIssueClusters(SeoDashboardApiReadService $reader): void
+    {
+        $result = $reader->issueClusters(page: $this->issueClusterPage, perPage: self::ISSUE_QUEUE_PER_PAGE);
+        $this->issueClusters = (array) ($result['rows'] ?? []);
+        $this->issueClusterTotal = (int) ($result['total_count'] ?? 0);
+        $this->issueClusterPage = (int) ($result['page'] ?? 1);
+        $this->issueClusterLastPage = (int) ($result['last_page'] ?? 1);
+    }
+
+    private function refreshClusterUrls(SeoDashboardApiReadService $reader): void
+    {
+        if ($this->selectedClusterUid === '') {
+            $this->clusterUrls = [];
+            $this->clusterUrlTotal = 0;
+
+            return;
+        }
+
+        $result = $reader->issueClusterUrls(
+            $this->selectedClusterUid,
+            page: $this->clusterUrlPage,
+            perPage: self::ISSUE_QUEUE_PER_PAGE,
+        );
+        $this->clusterUrls = (array) ($result['rows'] ?? []);
+        $this->clusterUrlTotal = (int) ($result['total_count'] ?? 0);
+        $this->clusterUrlPage = (int) ($result['page'] ?? 1);
+        $this->clusterUrlLastPage = (int) ($result['last_page'] ?? 1);
+    }
+
+    /** @return array{0:list<array<string,mixed>>,1:array<string,list<array<string,mixed>>>} */
+    private function fullClusterExport(): array
+    {
+        try {
+            $reader = app(SeoDashboardApiReadService::class);
+            $export = $reader->issueClusterExport();
+            $clusters = (array) ($export['clusters'] ?? []);
+            $urls = (array) ($export['urls'] ?? []);
+
+            return [$clusters, $urls];
+        } catch (Throwable) {
+            return [[], []];
         }
     }
 

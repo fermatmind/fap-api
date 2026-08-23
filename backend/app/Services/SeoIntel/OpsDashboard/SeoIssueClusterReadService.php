@@ -1,0 +1,351 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Services\SeoIntel\OpsDashboard;
+
+use Illuminate\Support\Collection;
+
+final class SeoIssueClusterReadService extends AbstractSeoDashboardReadService
+{
+    private const SEVERITY_RANK = [
+        'info' => 1,
+        'low' => 2,
+        'warning' => 3,
+        'medium' => 3,
+        'high' => 4,
+        'critical' => 5,
+    ];
+
+    /**
+     * @param  array<string,string>  $filters
+     * @return array{total_count:int,page:int,per_page:int,last_page:int,rows:list<array<string,mixed>>}
+     */
+    public function read(array $filters = [], int $page = 1, int $perPage = 25): array
+    {
+        $page = max(1, $page);
+        $perPage = max(1, min($perPage, 100));
+        $clusters = $this->clusters($filters)->values();
+        $total = $clusters->count();
+        $lastPage = max(1, (int) ceil($total / $perPage));
+        $page = min($page, $lastPage);
+
+        return [
+            'total_count' => $total,
+            'page' => $page,
+            'per_page' => $perPage,
+            'last_page' => $lastPage,
+            'rows' => $clusters->forPage($page, $perPage)->values()->all(),
+        ];
+    }
+
+    /**
+     * @param  array<string,string>  $filters
+     * @return array{cluster_uid:string,total_count:int,page:int,per_page:int,last_page:int,rows:list<array<string,mixed>>}
+     */
+    public function urls(string $clusterUid, array $filters = [], int $page = 1, int $perPage = 25): array
+    {
+        $page = max(1, $page);
+        $perPage = max(1, min($perPage, 100));
+        $members = $this->issueRows($filters)
+            ->filter(fn (object $row): bool => $this->clusterUid($this->axes($row)) === $clusterUid)
+            ->sortByDesc(fn (object $row): string => (string) ($row->detected_at ?? $row->updated_at ?? ''))
+            ->values();
+        $total = $members->count();
+        $lastPage = max(1, (int) ceil($total / $perPage));
+        $page = min($page, $lastPage);
+
+        return [
+            'cluster_uid' => $clusterUid,
+            'total_count' => $total,
+            'page' => $page,
+            'per_page' => $perPage,
+            'last_page' => $lastPage,
+            'rows' => $members->forPage($page, $perPage)
+                ->map(fn (object $row): array => $this->urlRow($row))
+                ->values()
+                ->all(),
+        ];
+    }
+
+    /**
+     * Complete filtered export assembled from one authoritative issue snapshot.
+     *
+     * @param  array<string,string>  $filters
+     * @return array{clusters:list<array<string,mixed>>,urls:array<string,list<array<string,mixed>>>}
+     */
+    public function export(array $filters = []): array
+    {
+        $issues = $this->issueRows($filters);
+        $clusters = $this->clusters($filters, $issues)->values();
+        $urls = [];
+
+        foreach ($clusters as $cluster) {
+            $clusterUid = (string) $cluster['cluster_uid'];
+            $urls[$clusterUid] = $issues
+                ->filter(fn (object $row): bool => $this->clusterUid($this->axes($row)) === $clusterUid)
+                ->sortByDesc(fn (object $row): string => (string) ($row->detected_at ?? $row->updated_at ?? ''))
+                ->map(fn (object $row): array => $this->urlRow($row))
+                ->values()
+                ->all();
+        }
+
+        return ['clusters' => $clusters->all(), 'urls' => $urls];
+    }
+
+    /**
+     * @param  array<string,string>  $filters
+     * @return Collection<int,array<string,mixed>>
+     */
+    private function clusters(array $filters, ?Collection $issues = null): Collection
+    {
+        return ($issues ?? $this->issueRows($filters))
+            ->groupBy(fn (object $row): string => $this->clusterUid($this->axes($row)))
+            ->map(fn (Collection $members, string $clusterUid): array => $this->clusterRow($clusterUid, $members))
+            ->sort(function (array $left, array $right): int {
+                $severity = (self::SEVERITY_RANK[$right['severity']] ?? 0) <=> (self::SEVERITY_RANK[$left['severity']] ?? 0);
+
+                return $severity !== 0
+                    ? $severity
+                    : (($right['affected_url_count'] <=> $left['affected_url_count'])
+                        ?: strcmp((string) $right['last_detected_at'], (string) $left['last_detected_at']));
+            });
+    }
+
+    /** @param array<string,string> $filters */
+    private function issueRows(array $filters): Collection
+    {
+        $query = $this->table('seo_issue_queue')->select([
+            'issue_uid',
+            'issue_type',
+            'severity',
+            'source_system',
+            'source_engine',
+            'canonical_url_hash',
+            'canonical_url',
+            'locale',
+            'page_entity_type',
+            'status',
+            'lifecycle_state',
+            'detected_at',
+            'created_at',
+            'updated_at',
+            'summary',
+            'recommendation',
+            'metadata_json',
+        ]);
+
+        foreach (['issue_type', 'severity', 'source_system', 'source_engine', 'locale', 'page_entity_type', 'status', 'lifecycle_state'] as $column) {
+            $value = trim((string) ($filters[$column] ?? ''));
+            if ($value !== '' && $value !== 'all') {
+                $query->where($column, $value);
+            }
+        }
+
+        return $query->get();
+    }
+
+    /** @return array{root_cause:string,content_type:string,template:string,field:string,source_system:string,source_engine:string} */
+    private function axes(object $row): array
+    {
+        $metadata = $this->decodeJson($row->metadata_json ?? null);
+        $issueType = $this->normalizeAxis((string) ($row->issue_type ?? 'unknown'));
+        $contentType = $this->normalizeAxis((string) ($row->page_entity_type ?? 'unknown'));
+
+        return [
+            'root_cause' => $this->normalizeAxis((string) ($metadata['root_cause'] ?? $issueType)),
+            'content_type' => $contentType,
+            'template' => $this->normalizeAxis((string) ($metadata['template'] ?? $metadata['template_id'] ?? $contentType)),
+            'field' => $this->normalizeAxis((string) ($metadata['field'] ?? $metadata['field_name'] ?? $this->inferField($issueType))),
+            'source_system' => $this->normalizeAxis((string) ($row->source_system ?? 'unknown')),
+            'source_engine' => $this->normalizeAxis((string) ($row->source_engine ?? 'none')),
+        ];
+    }
+
+    /** @param array<string,string> $axes */
+    private function clusterUid(array $axes): string
+    {
+        ksort($axes);
+
+        return 'seo-cluster:'.hash('sha256', json_encode($axes, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
+    }
+
+    /** @param Collection<int,object> $members */
+    private function clusterRow(string $clusterUid, Collection $members): array
+    {
+        $first = $members->first();
+        $axes = $this->axes($first);
+        $severity = $members
+            ->map(fn (object $row): string => $this->normalizeSeverity((string) ($row->severity ?? 'info')))
+            ->sortByDesc(fn (string $value): int => self::SEVERITY_RANK[$value] ?? 0)
+            ->first() ?? 'info';
+        $statuses = $members->map(fn (object $row): string => (string) ($row->status ?? 'open'));
+        $openCount = $statuses->filter(fn (string $status): bool => ! in_array($status, ['resolved', 'verified', 'closed', 'ignored'], true))->count();
+        $ignoredCount = $statuses->filter(fn (string $status): bool => $status === 'ignored')->count();
+        $urlIdentities = $members
+            ->map(fn (object $row): ?string => $this->urlIdentity($row))
+            ->filter()
+            ->unique()
+            ->values();
+        $evidence = $members
+            ->map(fn (object $row): array => [
+                'fingerprint' => $this->evidenceFingerprint($row),
+                'summary' => isset($row->summary) ? (string) $row->summary : null,
+                'source' => $this->sourceSignal($row),
+            ])
+            ->unique('fingerprint')
+            ->values();
+
+        return [
+            'cluster_uid' => $clusterUid,
+            ...$axes,
+            'issue_type' => (string) ($first->issue_type ?? 'unknown'),
+            'severity' => $severity,
+            'affected_url_count' => $urlIdentities->count(),
+            'issue_count' => $members->count(),
+            'evidence_count' => $evidence->count(),
+            'evidence' => $evidence->take(3)->all(),
+            'summary' => $this->representativeText($members, 'summary'),
+            'recommendation' => $this->representativeText($members, 'recommendation'),
+            'source' => $this->sourceSignal($first),
+            'status' => $openCount > 0 ? 'open' : ($ignoredCount === $members->count() ? 'ignored' : 'resolved'),
+            'lifecycle_state' => $openCount > 0 ? 'active' : ($ignoredCount === $members->count() ? 'ignored' : 'resolved'),
+            'first_detected_at' => $this->timestampMin($members, ['created_at', 'detected_at']),
+            'last_detected_at' => $this->timestampMax($members, ['detected_at', 'updated_at']),
+            'evidence_changed_at' => $this->timestampMax($members, ['updated_at', 'detected_at']),
+        ];
+    }
+
+    private function urlRow(object $row): array
+    {
+        return [
+            'issue_uid' => (string) $row->issue_uid,
+            'canonical_path' => $this->safePath(is_string($row->canonical_url ?? null) ? $row->canonical_url : null),
+            'canonical_url_hash' => isset($row->canonical_url_hash) ? (string) $row->canonical_url_hash : null,
+            'locale' => isset($row->locale) ? (string) $row->locale : null,
+            'page_entity_type' => isset($row->page_entity_type) ? (string) $row->page_entity_type : null,
+            'severity' => $this->normalizeSeverity((string) ($row->severity ?? 'info')),
+            'status' => (string) ($row->status ?? 'open'),
+            'lifecycle_state' => (string) ($row->lifecycle_state ?? 'open'),
+            'summary' => isset($row->summary) ? (string) $row->summary : null,
+            'recommendation' => isset($row->recommendation) ? (string) $row->recommendation : null,
+            'source' => $this->sourceSignal($row),
+            'evidence_fingerprint' => $this->evidenceFingerprint($row),
+            'detected_at' => $this->normalizeTimestamp($row->detected_at ?? null),
+            'updated_at' => $this->normalizeTimestamp($row->updated_at ?? null),
+        ];
+    }
+
+    private function evidenceFingerprint(object $row): string
+    {
+        $metadata = $this->decodeJson($row->metadata_json ?? null);
+        unset($metadata['ops_workflow']);
+
+        return hash('sha256', json_encode([
+            'issue_uid' => (string) ($row->issue_uid ?? ''),
+            'summary' => (string) ($row->summary ?? ''),
+            'recommendation' => (string) ($row->recommendation ?? ''),
+            'metadata' => $this->canonicalize($metadata),
+        ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES));
+    }
+
+    private function canonicalize(mixed $value): mixed
+    {
+        if (! is_array($value)) {
+            return $value;
+        }
+
+        foreach ($value as $key => $item) {
+            $value[$key] = $this->canonicalize($item);
+        }
+
+        if (! array_is_list($value)) {
+            ksort($value);
+        }
+
+        return $value;
+    }
+
+    private function urlIdentity(object $row): ?string
+    {
+        foreach ([$row->canonical_url_hash ?? null, $row->canonical_url ?? null] as $value) {
+            if (is_string($value) && trim($value) !== '') {
+                return trim($value);
+            }
+        }
+
+        return null;
+    }
+
+    private function sourceSignal(object $row): string
+    {
+        $source = (string) ($row->source_system ?? 'unknown');
+        $engine = trim((string) ($row->source_engine ?? ''));
+
+        return $engine === '' ? $source : $source.':'.$engine;
+    }
+
+    /** @param Collection<int,object> $members */
+    private function representativeText(Collection $members, string $column): ?string
+    {
+        $value = $members
+            ->map(fn (object $row): string => trim((string) ($row->{$column} ?? '')))
+            ->filter()
+            ->countBy()
+            ->sortDesc()
+            ->keys()
+            ->first();
+
+        return is_string($value) ? $value : null;
+    }
+
+    /** @param Collection<int,object> $members @param list<string> $columns */
+    private function timestampMin(Collection $members, array $columns): ?string
+    {
+        return $this->timestampExtreme($members, $columns, false);
+    }
+
+    /** @param Collection<int,object> $members @param list<string> $columns */
+    private function timestampMax(Collection $members, array $columns): ?string
+    {
+        return $this->timestampExtreme($members, $columns, true);
+    }
+
+    /** @param Collection<int,object> $members @param list<string> $columns */
+    private function timestampExtreme(Collection $members, array $columns, bool $maximum): ?string
+    {
+        $values = $members->flatMap(function (object $row) use ($columns): array {
+            return array_values(array_filter(array_map(
+                static fn (string $column): mixed => $row->{$column} ?? null,
+                $columns,
+            )));
+        });
+        $value = $maximum ? $values->max() : $values->min();
+
+        return $this->normalizeTimestamp($value);
+    }
+
+    private function inferField(string $issueType): string
+    {
+        foreach (['canonical', 'robots', 'title', 'description', 'hreflang', 'lastmod', 'sitemap', 'indexability', 'schema', 'content'] as $field) {
+            if (str_contains($issueType, $field)) {
+                return $field;
+            }
+        }
+
+        return 'general';
+    }
+
+    private function normalizeSeverity(string $severity): string
+    {
+        return $severity === 'warning' ? 'medium' : $this->normalizeAxis($severity);
+    }
+
+    private function normalizeAxis(string $value): string
+    {
+        $value = strtolower(trim($value));
+        $value = preg_replace('/[^a-z0-9._-]+/', '_', $value) ?? '';
+
+        return trim($value, '_') !== '' ? trim($value, '_') : 'unknown';
+    }
+}

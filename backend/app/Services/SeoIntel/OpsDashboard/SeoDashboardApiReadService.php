@@ -95,6 +95,33 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
     }
 
     /**
+     * @param  array<string,string>  $filters
+     * @return array<string,mixed>
+     */
+    public function issueClusters(array $filters = [], int $page = 1, int $perPage = 25): array
+    {
+        return (new SeoIssueClusterReadService($this->connectionName))->read($filters, $page, $perPage);
+    }
+
+    /**
+     * @param  array<string,string>  $filters
+     * @return array<string,mixed>
+     */
+    public function issueClusterUrls(string $clusterUid, array $filters = [], int $page = 1, int $perPage = 25): array
+    {
+        return (new SeoIssueClusterReadService($this->connectionName))->urls($clusterUid, $filters, $page, $perPage);
+    }
+
+    /**
+     * @param  array<string,string>  $filters
+     * @return array<string,mixed>
+     */
+    public function issueClusterExport(array $filters = []): array
+    {
+        return (new SeoIssueClusterReadService($this->connectionName))->export($filters);
+    }
+
+    /**
      * Read only real GSC rows. An empty result means the connector has not
      * produced data for the selected window; callers must not synthesize it.
      *

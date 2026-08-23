@@ -605,6 +605,8 @@ final class SeoOperationsPageTest extends TestCase
         $this->assertStringStartsWith("\xEF\xBB\xBF", $body);
         $this->assertStringContainsString('section,label,value,suffix,tone,scope,source,collected_at,source_updated_at,freshness,locale_filter,status_filter', $body);
         $this->assertStringContainsString('issue_queue', $body);
+        $this->assertStringContainsString('issue_clusters,cluster_uid,root_cause,content_type,template,field,severity,affected_url_count,issue_count,evidence_count,status,source,recommendation', $body);
+        $this->assertStringContainsString('cluster_urls,cluster_uid,issue_uid,canonical_path,locale,page_entity_type,severity,status,source,evidence_fingerprint', $body);
         $this->assertStringContainsString("'=HYPERLINK", $body);
         $this->assertStringNotContainsString(',=HYPERLINK', $body);
         $this->assertStringNotContainsString(',"=HYPERLINK', $body);
