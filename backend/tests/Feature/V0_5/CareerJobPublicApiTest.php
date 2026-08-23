@@ -504,6 +504,42 @@ final class CareerJobPublicApiTest extends TestCase
             ->assertJsonPath('seo_surface_v1.llms_exposure_state', 'allow');
     }
 
+    public function test_zh_seo_endpoint_prioritizes_published_cms_meta_without_weakening_bundle_gates(): void
+    {
+        $job = $this->createJob([
+            'job_code' => 'accountants-and-auditors',
+            'slug' => 'accountants-and-auditors',
+            'locale' => 'zh-CN',
+            'title' => '会计师和审计师',
+            'subtitle' => 'Accountants and Auditors',
+            'excerpt' => '会计师和审计师职业详情。',
+            'status' => CareerJob::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => now()->subMinute(),
+            'market_demand_json' => [
+                'source_refs' => [[
+                    'url' => 'https://www.bls.gov/ooh/business-and-financial/accountants-and-auditors.htm',
+                ]],
+            ],
+        ]);
+        $this->createSeoMeta($job, [
+            'seo_title' => 'AI会取代会计吗？会计师和审计师的职业影响全解析',
+            'seo_description' => '基于页面中的 BLS、O*NET、任务与能力证据，了解会计师和审计师的 AI 影响。',
+            'robots' => 'index,follow',
+            'jsonld_overrides_json' => [
+                'source_docx' => '01_会计师和审计师_accountants-and-auditors.docx',
+            ],
+        ]);
+
+        $this->getJson('/api/v0.5/career-jobs/accountants-and-auditors/seo?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('meta.title', 'AI会取代会计吗？会计师和审计师的职业影响全解析')
+            ->assertJsonPath('meta.description', '基于页面中的 BLS、O*NET、任务与能力证据，了解会计师和审计师的 AI 影响。')
+            ->assertJsonPath('meta.robots', 'index,follow')
+            ->assertJsonPath('seo_surface_v1.indexability_state', 'indexable');
+    }
+
     public function test_imported_local_baseline_publishes_family_jobs_for_en_and_zh_cn(): void
     {
         $this->artisan('career-jobs:import-local-baseline', [
@@ -615,7 +651,7 @@ final class CareerJobPublicApiTest extends TestCase
 
         $enResponse = $this->getJson('/api/v0.5/career-jobs/product-manager/seo?locale=en');
         $enResponse->assertOk()
-            ->assertJsonPath('meta.title', 'Product Manager')
+            ->assertJsonPath('meta.title', 'Product Manager Career Guide | FermatMind')
             ->assertJsonPath('meta.canonical', '/en/career/jobs/product-manager')
             ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
             ->assertJsonPath('seo_surface_v1.surface_type', 'career_job_public_detail')

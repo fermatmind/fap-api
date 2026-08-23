@@ -105,6 +105,62 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         $this->assertSame(8, data_get($zh, 'presentation_v1.hero.ai_exposure.value'));
     }
 
+    public function test_it_exposes_supporting_evidence_and_returns_twelve_unique_authoritative_zh_links(): void
+    {
+        ini_set('memory_limit', '1024M');
+        $occupation = $this->createOccupation('accountants-and-auditors');
+        $authority = app(CareerCurrentAuthorityPackage::class)->load(base_path());
+        $row = $authority['rows']['accountants-and-auditors'];
+        $relatedSlugs = [
+            'actors', 'actuaries', 'financial-analysts', 'registered-nurses', 'data-scientists',
+            'civil-engineers', 'biomedical-engineers', 'dentists', 'web-developers', 'lawyers',
+            'pharmacists', 'budget-analysts', 'marketing-managers',
+        ];
+        foreach ($relatedSlugs as $index => $slug) {
+            $related = $this->createOccupation($slug);
+            $related->update(['canonical_title_zh' => $index === 12 ? '预算分析师' : '相关职业'.$index]);
+        }
+        Occupation::query()->where('canonical_slug', 'budget-analysts')->update(['canonical_title_zh' => '预算分析师']);
+        $links = array_map(static fn (string $slug): array => [
+            'slug' => $slug,
+            'title_en' => self::PILOT_SLUGS[$slug]['title'],
+            'source' => 'self_pick',
+            'nofollow' => false,
+        ], $relatedSlugs);
+        $links[] = $links[0];
+        $links[] = [
+            'slug' => 'accountants-and-auditors',
+            'title_en' => 'Accountants and Auditors',
+            'source' => 'self_pick',
+            'nofollow' => false,
+        ];
+        $this->createDisplayAsset($occupation, [
+            'page_payload_json' => [
+                'zh' => [
+                    'hero' => ['title' => '会计师和审计师'],
+                    'related_next_pages' => ['intro' => '相关职业', 'links' => $links],
+                ],
+                'en' => ['hero' => ['title' => 'Accountants and Auditors']],
+            ],
+            'sources_json' => $row['sources_json'],
+            'metadata_json' => [
+                'supporting_evidence_v1' => $row['metadata_json']['supporting_evidence_v1'],
+            ],
+        ]);
+
+        $zh = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
+        $en = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'en');
+        $relatedLinks = data_get($zh, 'page.content.related_next_pages.links');
+
+        $this->assertSame('career.detail.supporting_evidence.v1', data_get($zh, 'supporting_evidence_v1.contract_version'));
+        $this->assertArrayNotHasKey('supporting_evidence_v1', $en);
+        $this->assertCount(12, $relatedLinks);
+        $this->assertCount(12, array_unique(array_column($relatedLinks, 'slug')));
+        $this->assertCount(12, array_unique(array_column($relatedLinks, 'title_zh')));
+        $this->assertNotContains('accountants-and-auditors', array_column($relatedLinks, 'slug'));
+        $this->assertNotContains('marketing-managers', array_column($relatedLinks, 'slug'));
+    }
+
     public function test_it_returns_the_complete_26_component_surface_with_both_workbuddy_blocks(): void
     {
         $occupation = $this->createOccupation('actors');

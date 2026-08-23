@@ -6,25 +6,22 @@ namespace App\Domain\Career\Compilation;
 
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerPresentationV1Contract;
+use App\Domain\Career\Display\CareerSupportingEvidenceV1Contract;
 use JsonException;
 
 final class CareerPresentationV1Compiler
 {
-    public const VERSION = 'career.presentation_v1.compiler.v2';
+    public const VERSION = 'career.presentation_v1.compiler.v3';
 
     /** @var array<string,array{label:string,source_field:string}> */
     private const BLS_STATS = [
         '中位年薪' => ['label' => '美国年薪中位数', 'source_field' => 'salary.bls_table.中位年薪'],
         '就业增长' => ['label' => '美国就业增长', 'source_field' => 'salary.bls_table.就业增长'],
-        '在岗人数' => ['label' => '美国在岗人数', 'source_field' => 'salary.bls_table.在岗人数'],
-        '年均职位空缺' => ['label' => '美国年均职位空缺', 'source_field' => 'salary.bls_table.年均职位空缺'],
     ];
 
     private const STAT_KEYS = [
         '中位年薪' => 'us_median_pay',
         '就业增长' => 'us_growth',
-        '在岗人数' => 'employment',
-        '年均职位空缺' => 'annual_openings',
     ];
 
     public function __construct(
@@ -56,6 +53,7 @@ final class CareerPresentationV1Compiler
 
         $baseline = $this->package->load($backendRoot);
         $this->registry = $this->sourceRegistry->load($backendRoot, $baseline['manifest']);
+        $supportingRegistry = $this->supportingRegistry($backendRoot, $baseline['slugs']);
         if ($sourceBefore['slugs'] !== $baseline['slugs']) {
             throw new CareerTenBlockCompileFailure('PRESENTATION_V1_SOURCE_SLUG_SET_MISMATCH');
         }
@@ -70,6 +68,7 @@ final class CareerPresentationV1Compiler
         $presentationAdditions = 0;
         $presentationChanges = 0;
         $sourceReferenceChanges = 0;
+        $supportingEvidenceChanges = 0;
         foreach ($baseline['slugs'] as $slug) {
             $row = $baseline['rows'][$slug];
             $beforePresentation = $row['metadata_json']['presentation_v1']['zh'] ?? null;
@@ -83,6 +82,23 @@ final class CareerPresentationV1Compiler
             $beforeZhPageHashes[] = CareerCurrentAuthorityPackage::hashValue($this->zhPage($row));
             $row = $this->normalizeMultipleOnetReferences($slug, $row, $sourceReferenceChanges);
             $row['metadata_json']['presentation_v1'] = ['zh' => $presentation];
+            $beforeSupporting = $row['metadata_json']['supporting_evidence_v1']['zh'] ?? null;
+            $supportingItem = $supportingRegistry['items'][$slug] ?? null;
+            if (is_array($supportingItem)) {
+                $row = $this->applySupportingEvidence($row, $supportingItem, $sourceReferenceChanges);
+                $supporting = $row['metadata_json']['supporting_evidence_v1']['zh'];
+                if (! is_array($beforeSupporting) || ! hash_equals(
+                    CareerCurrentAuthorityPackage::hashValue($beforeSupporting),
+                    CareerCurrentAuthorityPackage::hashValue($supporting),
+                )) {
+                    $supportingEvidenceChanges++;
+                }
+            } else {
+                unset($row['metadata_json']['supporting_evidence_v1']);
+                if (is_array($beforeSupporting)) {
+                    $supportingEvidenceChanges++;
+                }
+            }
             if ($beforePresentation === null) {
                 $presentationAdditions++;
                 $presentationChanges++;
@@ -122,6 +138,13 @@ final class CareerPresentationV1Compiler
             'source_registry' => $baseline['manifest']['presentation_v1']['source_registry'],
             'zh_presentation_count' => count($candidateRows),
         ];
+        $manifest['supporting_evidence_v1'] = [
+            'contract_version' => CareerSupportingEvidenceV1Contract::CONTRACT_VERSION,
+            'registry_contract_version' => $supportingRegistry['contract_version'],
+            'registry_path' => 'supporting-evidence-v1.json',
+            'registry_sha256' => $supportingRegistry['sha256'],
+            'zh_supporting_evidence_count' => count($supportingRegistry['items']),
+        ];
 
         return [
             'assets_bytes' => $assetsBytes,
@@ -144,6 +167,7 @@ final class CareerPresentationV1Compiler
                 'onet_multiple_occupation_records' => count($this->registry['onet']),
                 'bls_projection_records' => count($this->registry['bls']),
                 'source_reference_changes' => $sourceReferenceChanges,
+                'zh_supporting_evidence_count' => count($supportingRegistry['items']),
                 'generated_at' => null,
             ],
             'field_coverage' => [
@@ -158,9 +182,10 @@ final class CareerPresentationV1Compiler
                 'existing_zh_content_fields_changed' => 0,
                 'en_locale_pages_changed' => 0,
                 'shared_source_reference_rows_changed' => $sourceReferenceChanges,
+                'zh_supporting_evidence_changes' => $supportingEvidenceChanges,
                 'zh_presentation_additions' => $presentationAdditions,
                 'zh_presentation_changes' => $presentationChanges,
-                'changed_row_count' => $presentationChanges + $sourceReferenceChanges,
+                'changed_row_count' => $presentationChanges + $sourceReferenceChanges + $supportingEvidenceChanges,
                 'slug_count' => count($candidateRows),
                 'locale_page_count' => count($candidateRows) * 2,
                 'components_per_page' => 26,
@@ -306,8 +331,6 @@ final class CareerPresentationV1Compiler
             'snapshot_callout' => 'page-meta.snapshot_callout',
             'us_median_pay' => 'salary.bls_table[指标=中位年薪]',
             'us_growth' => 'salary.bls_table[指标=就业增长]',
-            'employment' => 'salary.bls_table[指标=在岗人数]',
-            'annual_openings' => 'salary.bls_table[指标=年均职位空缺]',
             'cta' => 'display_surface_v1.page.content.primary_cta|final_cta',
             'salary_boundary' => 'display_surface_v1.page.content.career_snapshot_primary_locale.salary.china_salary_note',
             'usage_boundary' => 'display_surface_v1.page.content.boundary_notice',
@@ -637,6 +660,96 @@ final class CareerPresentationV1Compiler
         }
         $sources['references'] = $filtered;
         $row['sources_json'] = $sources;
+
+        return $row;
+    }
+
+    /**
+     * @param  list<string>  $canonicalSlugs
+     * @return array{contract_version:string,reviewed_at:string,items:array<string,array<string,mixed>>,sha256:string}
+     */
+    private function supportingRegistry(string $backendRoot, array $canonicalSlugs): array
+    {
+        $path = rtrim($backendRoot, '/').'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH.'/supporting-evidence-v1.json';
+        if (! is_file($path) || is_link($path)) {
+            throw new CareerTenBlockCompileFailure('SUPPORTING_EVIDENCE_V1_REGISTRY_MISSING');
+        }
+        try {
+            $registry = json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
+        } catch (JsonException) {
+            throw new CareerTenBlockCompileFailure('SUPPORTING_EVIDENCE_V1_REGISTRY_INVALID');
+        }
+        if (! is_array($registry) || array_keys($registry) !== ['contract_version', 'reviewed_at', 'items']
+            || ($registry['contract_version'] ?? null) !== 'career.supporting_evidence.registry.v1'
+            || ! is_string($registry['reviewed_at'] ?? null)
+            || preg_match('/\A\d{4}-\d{2}-\d{2}\z/', $registry['reviewed_at']) !== 1
+            || ! is_array($registry['items'] ?? null) || array_is_list($registry['items'])) {
+            throw new CareerTenBlockCompileFailure('SUPPORTING_EVIDENCE_V1_REGISTRY_INVALID');
+        }
+        $allowedSlugs = array_fill_keys($canonicalSlugs, true);
+        foreach ($registry['items'] as $slug => $item) {
+            if (! is_string($slug) || ! isset($allowedSlugs[$slug]) || ! is_array($item)
+                || array_keys($item) !== ['sources', 'evidence']
+                || ! is_array($item['sources']) || ! array_is_list($item['sources']) || $item['sources'] === []
+                || ! is_array($item['evidence'])) {
+                throw new CareerTenBlockCompileFailure('SUPPORTING_EVIDENCE_V1_REGISTRY_INVALID');
+            }
+            $sourceKeys = [];
+            foreach ($item['sources'] as $source) {
+                if (! is_array($source)) {
+                    throw new CareerTenBlockCompileFailure('SUPPORTING_EVIDENCE_V1_REGISTRY_INVALID');
+                }
+                $key = $this->stringValueWithoutRecord($source['source_key'] ?? null);
+                $url = $this->stringValueWithoutRecord($source['url'] ?? null);
+                if ($key === null || isset($sourceKeys[$key]) || $url === null
+                    || filter_var($url, FILTER_VALIDATE_URL) === false || ! str_starts_with($url, 'https://')) {
+                    throw new CareerTenBlockCompileFailure('SUPPORTING_EVIDENCE_V1_REGISTRY_INVALID');
+                }
+                $sourceKeys[$key] = true;
+            }
+        }
+
+        return [
+            'contract_version' => $registry['contract_version'],
+            'reviewed_at' => $registry['reviewed_at'],
+            'items' => $registry['items'],
+            'sha256' => (string) hash_file('sha256', $path),
+        ];
+    }
+
+    /** @param array<string,mixed> $row @param array<string,mixed> $item @return array<string,mixed> */
+    private function applySupportingEvidence(array $row, array $item, int &$sourceReferenceChanges): array
+    {
+        $sources = is_array($row['sources_json'] ?? null) ? $row['sources_json'] : [];
+        $references = is_array($sources['references'] ?? null) && array_is_list($sources['references'])
+            ? $sources['references'] : [];
+        $before = CareerCurrentAuthorityPackage::hashValue($references);
+        $positions = [];
+        foreach ($references as $index => $reference) {
+            if (! is_array($reference)) {
+                continue;
+            }
+            $key = $this->stringValueWithoutRecord($reference['source_key'] ?? $reference['label'] ?? null);
+            if ($key !== null && ! isset($positions[$key])) {
+                $positions[$key] = $index;
+            }
+        }
+        foreach ($item['sources'] as $source) {
+            $key = (string) $source['source_key'];
+            if (isset($positions[$key])) {
+                $references[$positions[$key]] = $source;
+            } else {
+                $positions[$key] = count($references);
+                $references[] = $source;
+            }
+        }
+        if (! hash_equals($before, CareerCurrentAuthorityPackage::hashValue($references))) {
+            $sourceReferenceChanges++;
+        }
+        $sources['references'] = $references;
+        $row['sources_json'] = $sources;
+        CareerSupportingEvidenceV1Contract::assert($item['evidence'], $references);
+        $row['metadata_json']['supporting_evidence_v1'] = ['zh' => $item['evidence']];
 
         return $row;
     }

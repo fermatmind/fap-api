@@ -69,6 +69,11 @@ final class CareerTenBlockCurrentPackageCompile extends Command
                 throw new CareerTenBlockCompileFailure('PRESENTATION_V1_SOURCE_REGISTRY_MISSING');
             }
             $this->write($packageRoot.'/presentation-source-registry.json', (string) file_get_contents($registrySource));
+            $supportingRegistrySource = base_path(CareerCurrentAuthorityPackage::RELATIVE_PATH.'/supporting-evidence-v1.json');
+            if (! is_file($supportingRegistrySource) || is_link($supportingRegistrySource)) {
+                throw new CareerTenBlockCompileFailure('SUPPORTING_EVIDENCE_V1_REGISTRY_MISSING');
+            }
+            $this->write($packageRoot.'/supporting-evidence-v1.json', (string) file_get_contents($supportingRegistrySource));
             $this->write(
                 $packageRoot.'/manifest.json',
                 CareerCurrentAuthorityPackage::encodePrettyCanonical($result['manifest_template']),

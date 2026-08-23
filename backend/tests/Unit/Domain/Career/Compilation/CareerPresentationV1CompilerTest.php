@@ -8,6 +8,7 @@ use App\Domain\Career\Compilation\CareerPresentationV1Compiler;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure;
 use App\Domain\Career\Display\CareerPresentationV1Contract;
+use App\Domain\Career\Display\CareerSupportingEvidenceV1Contract;
 use Tests\TestCase;
 
 final class CareerPresentationV1CompilerTest extends TestCase
@@ -37,11 +38,26 @@ final class CareerPresentationV1CompilerTest extends TestCase
         self::assertSame('8/10', data_get($accountants, 'hero.ai_exposure.display_value'));
         self::assertSame('fermatmind_internal_rubric', data_get($accountants, 'hero.ai_exposure.metric_kind'));
         self::assertSame(['interest', 'scene', 'risk'], array_column(data_get($accountants, 'hero.badges'), 'key'));
+        $supporting = $authority['rows']['accountants-and-auditors']['metadata_json']['supporting_evidence_v1']['zh'];
+        CareerSupportingEvidenceV1Contract::assert(
+            $supporting,
+            array_values($authority['rows']['accountants-and-auditors']['sources_json']['references']),
+        );
+        self::assertSame(
+            ['tasks', 'skills', 'abilities', 'knowledge', 'work_context', 'job_zone'],
+            array_column(data_get($supporting, 'onet.tables'), 'key'),
+        );
+        self::assertSame([], data_get($supporting, 'ai_cases'));
+        self::assertNull(data_get($supporting, 'china_reference'));
+        self::assertArrayNotHasKey('supporting_evidence_v1', $package->publicProjection(
+            $authority['rows']['accountants-and-auditors'],
+            'en',
+        ));
 
         $actuaries = $authority['rows']['actuaries']['metadata_json']['presentation_v1']['zh'];
         self::assertSame(8, data_get($actuaries, 'hero.ai_exposure.value'));
         self::assertSame(
-            ['$125,770', '22%', '33,600 人', '2,400 个', '8/10'],
+            ['$125,770', '22%', '8/10'],
             array_column(data_get($actuaries, 'hero.stats'), 'value'),
         );
         self::assertStringNotContainsString(
@@ -127,14 +143,14 @@ final class CareerPresentationV1CompilerTest extends TestCase
         $actuaries = $package['rows']['actuaries']['metadata_json']['presentation_v1']['zh'];
 
         self::assertSame(
-            ['$125,770', '22%', '33,600 人', '2,400 个'],
-            array_column(array_slice(data_get($actuaries, 'hero.stats'), 0, 4), 'value'),
+            ['$125,770', '22%'],
+            array_column(array_slice(data_get($actuaries, 'hero.stats'), 0, 2), 'value'),
         );
         self::assertSame(
-            ['salary.bls_table.中位年薪', 'salary.bls_table.就业增长', 'salary.bls_table.在岗人数', 'salary.bls_table.年均职位空缺'],
+            ['salary.bls_table.中位年薪', 'salary.bls_table.就业增长'],
             array_map(
                 static fn (array $stat): string => $stat['source_keys'][0],
-                array_slice(data_get($actuaries, 'hero.stats'), 0, 4),
+                array_slice(data_get($actuaries, 'hero.stats'), 0, 2),
             ),
         );
     }
