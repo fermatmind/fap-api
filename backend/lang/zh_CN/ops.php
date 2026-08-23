@@ -1447,6 +1447,7 @@ return [
                 'last_seen' => '最后发现',
                 'sla' => 'SLA',
                 'verification' => '验证结果',
+                'verification_hint' => '“验证并关闭”当前记录人工确认；接入真实爬虫数据源前，不会宣称已完成自动复检。',
                 'reason' => '忽略原因',
                 'until' => '忽略有效期',
                 'apply' => '应用流程动作',

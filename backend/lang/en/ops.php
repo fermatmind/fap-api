@@ -1447,6 +1447,7 @@ return [
                 'last_seen' => 'Last seen',
                 'sla' => 'SLA',
                 'verification' => 'Verification',
+                'verification_hint' => '“Verify & close” records an operator confirmation. Automated recrawl verification remains unavailable until a crawl data source is connected.',
                 'reason' => 'Ignore reason',
                 'until' => 'Ignore until',
                 'apply' => 'Apply workflow action',

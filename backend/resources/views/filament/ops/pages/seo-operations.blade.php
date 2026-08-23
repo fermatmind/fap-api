@@ -363,6 +363,7 @@
                             <x-filament::button type="button" wire:click="applyIssueWorkflow">{{ __('ops.custom_pages.seo_operations.execution.apply') }}</x-filament::button>
                         </div>
                     </x-filament-ops::ops-toolbar>
+                    <p class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.execution.verification_hint') }}</p>
                 @endif
                 <div class="ops-table-shell"><table class="ops-table"><thead><tr><th>Issue / Page</th><th>Scope</th><th>Impact</th><th>Status</th><th>{{ __('ops.custom_pages.seo_operations.execution.owner') }}</th><th>{{ __('ops.custom_pages.seo_operations.execution.first_seen') }}</th><th>{{ __('ops.custom_pages.seo_operations.execution.last_seen') }}</th><th>{{ __('ops.custom_pages.seo_operations.execution.sla') }}</th><th>{{ __('ops.custom_pages.seo_operations.execution.verification') }}</th></tr></thead><tbody>
                     @forelse ($executionQueue as $issue)
