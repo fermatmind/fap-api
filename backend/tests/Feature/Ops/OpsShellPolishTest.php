@@ -126,17 +126,38 @@ final class OpsShellPolishTest extends TestCase
             $this->assertStringContainsString($token, $theme);
         }
 
+        foreach (['--ops-sidebar-width: 14.75rem;', '--ops-topbar-height: 3.625rem;', '--ops-content-max-width: 96.25rem;'] as $token) {
+            $this->assertStringContainsString($token, $theme);
+        }
+
         foreach (['--ops-bg-app: #0b0e17;', '--ops-bg-surface: #111625;', '--ops-electric: #818cf8;'] as $token) {
             $this->assertStringContainsString($token, $theme);
         }
 
-        $this->assertStringContainsString('background: var(--ops-sidebar-bg);', $theme);
+        $this->assertStringContainsString('background: var(--ops-sidebar-bg) !important;', $theme);
         $this->assertStringContainsString('box-shadow: inset 2px 0 0 var(--ops-electric);', $theme);
         $this->assertStringContainsString('.fi-header > div:last-child .fi-ac > .fi-ac-action:not(:first-child)', $theme);
         $this->assertStringContainsString('.fi-sidebar-header .fi-icon-btn', $theme);
         $this->assertStringContainsString('background: var(--ops-bg-editor);', $theme);
 
         $this->assertDoesNotMatchRegularExpression('/border-radius:\\s*calc\\(var\\(--ops-radius-card\\)\\s*\\+/', $theme);
+    }
+
+    public function test_complete_preview_shell_has_one_authoritative_geometry_contract(): void
+    {
+        $theme = (string) file_get_contents(resource_path('css/filament/ops/theme.css'));
+        $compiledTheme = (string) file_get_contents(resource_path('css/filament/ops/theme.compiled.css'));
+        $panelProvider = (string) file_get_contents(app_path('Providers/Filament/AdminPanelProvider.php'));
+
+        $this->assertSame(1, preg_match_all('/\\.fi-body\\.fi-panel-ops \\.fi-main\\s*\\{[^}]*max-width:\\s*var\\(--ops-content-max-width\\)/s', $theme));
+        $this->assertSame(1, preg_match_all('/\\.fi-body\\.fi-panel-ops \\.fi-topbar nav\\s*\\{[^}]*height:\\s*var\\(--ops-topbar-height\\)/s', $theme));
+        $this->assertDoesNotMatchRegularExpression('/\\.fi-body\\.fi-panel-ops \\.fi-main\\s*\\{[^}]*max-width:\\s*90rem/s', $theme);
+        $this->assertDoesNotMatchRegularExpression('/\\.fi-body\\.fi-panel-ops \\.fi-topbar nav\\s*\\{[^}]*min-height:\\s*3\\.375rem/s', $theme);
+        $this->assertStringContainsString("->sidebarWidth('14.75rem')", $panelProvider);
+
+        foreach (['--ops-sidebar-width:14.75rem', '--ops-topbar-height:3.625rem', '--ops-content-max-width:96.25rem'] as $token) {
+            $this->assertStringContainsString($token, $compiledTheme);
+        }
     }
 
     public function test_complete_preview_shared_workspace_components_render_without_mock_values(): void

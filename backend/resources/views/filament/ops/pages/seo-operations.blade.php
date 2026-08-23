@@ -26,121 +26,31 @@
         ];
     @endphp
 
-    <div class="ops-shell-page">
-        <x-filament-ops::ops-section class="ops-seo-intro"
-            :eyebrow="__('ops.custom_pages.seo_operations.eyebrow')"
-            :title="__('ops.custom_pages.seo_operations.title')"
-            :description="__('ops.custom_pages.seo_operations.description')"
-        >
-            <x-filament-ops::ops-toolbar>
-                <div class="ops-toolbar-grid">
-                    <fieldset class="ops-control-stack ops-segmented-field" aria-labelledby="ops-seo-type-filter-label">
-                        <legend id="ops-seo-type-filter-label" class="ops-control-label">{{ __('ops.custom_pages.seo_operations.content_type') }}</legend>
-                        <div id="ops-seo-type-filter" class="ops-segmented-control" role="group" aria-labelledby="ops-seo-type-filter-label">
-                            @foreach ($typeFilterOptions as $value => $label)
-                                <button
-                                    type="button"
-                                    wire:click="$set('typeFilter', '{{ $value }}')"
-                                    @class([
-                                        'ops-segmented-control__item',
-                                        'ops-segmented-control__item--active' => $typeFilter === $value,
-                                    ])
-                                    aria-pressed="{{ $typeFilter === $value ? 'true' : 'false' }}"
-                                >
-                                    {{ $label }}
-                                </button>
-                            @endforeach
-                        </div>
-                    </fieldset>
+    <div class="ops-shell-page ops-seo-workspace">
+        <header class="ops-seo-page-header">
+            <div class="ops-seo-page-header__copy">
+                <span class="ops-shell-eyebrow">{{ __('ops.custom_pages.seo_operations.eyebrow') }}</span>
+                <h1>{{ __('ops.custom_pages.seo_operations.title') }}</h1>
+                <p>{{ __('ops.custom_pages.seo_operations.description') }}</p>
+            </div>
+            <div class="ops-seo-page-header__actions">
+                <x-filament::button color="gray" type="button" wire:click="exportReport">
+                    {{ __('ops.custom_pages.seo_operations.export_report') }}
+                </x-filament::button>
+                @if (\App\Filament\Ops\Support\ContentAccess::canWrite())
+                    <x-filament::button color="primary" type="button" wire:click="applyBulkAction">
+                        {{ __('ops.custom_pages.seo_operations.apply_action') }}
+                    </x-filament::button>
+                @endif
+            </div>
+        </header>
 
-                    <fieldset class="ops-control-stack ops-segmented-field ops-segmented-field--wide" aria-labelledby="ops-seo-issue-filter-label">
-                        <legend id="ops-seo-issue-filter-label" class="ops-control-label">{{ __('ops.custom_pages.seo_operations.issue_focus') }}</legend>
-                        <div id="ops-seo-issue-filter" class="ops-segmented-control" role="group" aria-labelledby="ops-seo-issue-filter-label">
-                            @foreach ($issueFilterOptions as $value => $label)
-                                <button
-                                    type="button"
-                                    wire:click="$set('issueFilter', '{{ $value }}')"
-                                    @class([
-                                        'ops-segmented-control__item',
-                                        'ops-segmented-control__item--active' => $issueFilter === $value,
-                                    ])
-                                    aria-pressed="{{ $issueFilter === $value ? 'true' : 'false' }}"
-                                >
-                                    {{ $label }}
-                                </button>
-                            @endforeach
-                        </div>
-                    </fieldset>
-
-                    <fieldset class="ops-control-stack ops-segmented-field ops-segmented-field--wide" aria-labelledby="ops-seo-bulk-action-label">
-                        <legend id="ops-seo-bulk-action-label" class="ops-control-label">{{ __('ops.custom_pages.seo_operations.bulk_action') }}</legend>
-                        <div id="ops-seo-bulk-action" class="ops-segmented-control" role="group" aria-labelledby="ops-seo-bulk-action-label">
-                            @foreach ($bulkActionOptions as $value => $label)
-                                <button
-                                    type="button"
-                                    wire:click="$set('bulkAction', '{{ $value }}')"
-                                    @class([
-                                        'ops-segmented-control__item',
-                                        'ops-segmented-control__item--active' => $bulkAction === $value,
-                                    ])
-                                    aria-pressed="{{ $bulkAction === $value ? 'true' : 'false' }}"
-                                >
-                                    {{ $label }}
-                                </button>
-                            @endforeach
-                        </div>
-                    </fieldset>
-
-                    <div class="ops-control-stack">
-                        <span class="ops-control-label">{{ __('ops.custom_pages.seo_operations.contract_label') }}</span>
-                        <p class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.contract_hint') }}</p>
-                    </div>
-                </div>
-
-                <x-slot name="actions">
-                    <x-filament::button
-                        color="gray"
-                        tag="button"
-                        type="button"
-                        wire:click="exportReport"
-                    >
-                        {{ __('ops.custom_pages.seo_operations.export_report') }}
-                    </x-filament::button>
-                    <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\ContentOverviewPage::getUrl() }}">
-                        {{ __('ops.custom_pages.common.nav.overview') }}
-                    </x-filament::button>
-                    <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\ContentMetricsPage::getUrl() }}">
-                        {{ __('ops.custom_pages.common.nav.content_metrics') }}
-                    </x-filament::button>
-                    <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\ContentGrowthAttributionPage::getUrl() }}">
-                        {{ __('ops.custom_pages.common.nav.growth_attribution') }}
-                    </x-filament::button>
-                    <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\ContentSearchPage::getUrl() }}">
-                        {{ __('ops.custom_pages.common.nav.content_search') }}
-                    </x-filament::button>
-                    <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\EditorialOperationsPage::getUrl() }}">
-                        {{ __('ops.custom_pages.common.nav.editorial_ops') }}
-                    </x-filament::button>
-                    @if (\App\Filament\Ops\Support\ContentAccess::canRelease())
-                        <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\EditorialReviewPage::getUrl() }}">
-                            {{ __('ops.custom_pages.common.nav.editorial_review') }}
-                        </x-filament::button>
-                    @endif
-                    @if (\App\Filament\Ops\Support\ContentAccess::canWrite())
-                        <x-filament::button color="primary" type="button" wire:click="applyBulkAction">
-                            {{ __('ops.custom_pages.seo_operations.apply_action') }}
-                        </x-filament::button>
-                    @endif
-                </x-slot>
-            </x-filament-ops::ops-toolbar>
-        </x-filament-ops::ops-section>
-
-        <div class="ops-segmented-control" role="tablist" aria-label="{{ __('ops.custom_pages.seo_operations.title') }}">
+        <div class="ops-seo-workspace-tabs" role="tablist" aria-label="{{ __('ops.custom_pages.seo_operations.title') }}">
             @foreach (['overview', 'performance', 'technical', 'opportunities', 'ai', 'execution'] as $workspace)
                 <button
                     type="button"
                     wire:click="$set('activeWorkspace', '{{ $workspace }}')"
-                    @class(['ops-segmented-control__item', 'ops-segmented-control__item--active' => $activeWorkspace === $workspace])
+                    @class(['ops-seo-workspace-tab', 'ops-seo-workspace-tab--active' => $activeWorkspace === $workspace])
                     role="tab"
                     aria-selected="{{ $activeWorkspace === $workspace ? 'true' : 'false' }}"
                 >
@@ -149,17 +59,64 @@
             @endforeach
         </div>
 
-        <x-filament-ops::ops-saved-views
-            :views="collect(['all', 'high_impressions_low_ctr', 'current_org_blockers', 'global_career_gaps'])->mapWithKeys(fn (string $view): array => [$view => __('ops.custom_pages.seo_operations.saved_views.'.$view)])->all()"
-            :active="$savedView"
-            :label="__('ops.custom_pages.seo_operations.saved_views.label')"
-        />
+        <div class="ops-seo-commandbar">
+            <label class="ops-seo-commandbar__field" for="ops-seo-type-filter">
+                <span>{{ __('ops.custom_pages.seo_operations.content_type') }}</span>
+                <select id="ops-seo-type-filter" wire:model.live="typeFilter">
+                    @foreach ($typeFilterOptions as $value => $label)
+                        <option value="{{ $value }}">{{ $label }}</option>
+                    @endforeach
+                </select>
+            </label>
+            <label class="ops-seo-commandbar__field" for="ops-seo-issue-filter">
+                <span>{{ __('ops.custom_pages.seo_operations.issue_focus') }}</span>
+                <select id="ops-seo-issue-filter" wire:model.live="issueFilter">
+                    @foreach ($issueFilterOptions as $value => $label)
+                        <option value="{{ $value }}">{{ $label }}</option>
+                    @endforeach
+                </select>
+            </label>
+            @if (\App\Filament\Ops\Support\ContentAccess::canWrite())
+                <label class="ops-seo-commandbar__field" for="ops-seo-bulk-action">
+                    <span>{{ __('ops.custom_pages.seo_operations.bulk_action') }}</span>
+                    <select id="ops-seo-bulk-action" wire:model="bulkAction">
+                        @foreach ($bulkActionOptions as $value => $label)
+                            <option value="{{ $value }}">{{ $label }}</option>
+                        @endforeach
+                    </select>
+                </label>
+            @endif
+            <div class="ops-seo-commandbar__views">
+                <span>{{ __('ops.custom_pages.seo_operations.saved_views.label') }}</span>
+                <x-filament-ops::ops-saved-views
+                    :views="collect(['all', 'high_impressions_low_ctr', 'current_org_blockers', 'global_career_gaps'])->mapWithKeys(fn (string $view): array => [$view => __('ops.custom_pages.seo_operations.saved_views.'.$view)])->all()"
+                    :active="$savedView"
+                    :label="__('ops.custom_pages.seo_operations.saved_views.label')"
+                />
+            </div>
+            <div class="ops-seo-commandbar__contract">
+                <strong>{{ __('ops.custom_pages.seo_operations.contract_label') }}</strong>
+                <span>{{ __('ops.custom_pages.seo_operations.contract_hint') }}</span>
+            </div>
+        </div>
 
-        <x-filament-ops::ops-section
-            :title="__('ops.custom_pages.seo_operations.scopes.title')"
-            :description="__('ops.custom_pages.seo_operations.health.current_snapshot')"
-        >
-            <div class="ops-data-strip">
+        <nav class="ops-seo-related-links" aria-label="{{ __('ops.custom_pages.seo_operations.title') }}">
+            <a href="{{ \App\Filament\Ops\Pages\ContentOverviewPage::getUrl() }}">{{ __('ops.custom_pages.common.nav.overview') }}</a>
+            <a href="{{ \App\Filament\Ops\Pages\ContentMetricsPage::getUrl() }}">{{ __('ops.custom_pages.common.nav.content_metrics') }}</a>
+            <a href="{{ \App\Filament\Ops\Pages\ContentGrowthAttributionPage::getUrl() }}">{{ __('ops.custom_pages.common.nav.growth_attribution') }}</a>
+            <a href="{{ \App\Filament\Ops\Pages\ContentSearchPage::getUrl() }}">{{ __('ops.custom_pages.common.nav.content_search') }}</a>
+            <a href="{{ \App\Filament\Ops\Pages\EditorialOperationsPage::getUrl() }}">{{ __('ops.custom_pages.common.nav.editorial_ops') }}</a>
+            @if (\App\Filament\Ops\Support\ContentAccess::canRelease())
+                <a href="{{ \App\Filament\Ops\Pages\EditorialReviewPage::getUrl() }}">{{ __('ops.custom_pages.common.nav.editorial_review') }}</a>
+            @endif
+        </nav>
+
+        <section class="ops-seo-snapshot" aria-labelledby="ops-seo-snapshot-title">
+            <div class="ops-seo-section-heading">
+                <div><h2 id="ops-seo-snapshot-title">{{ __('ops.custom_pages.seo_operations.scopes.title') }}</h2><p>{{ __('ops.custom_pages.seo_operations.health.current_snapshot') }}</p></div>
+                <span class="ops-seo-section-heading__meta">{{ __('ops.custom_pages.seo_operations.sources.title') }}</span>
+            </div>
+            <div class="ops-data-strip ops-seo-scope-strip">
                 @foreach ($scopeSummary as $scope)
                     <button type="button" wire:click="$set('scopeFilter', '{{ $scope['key'] }}')" class="ops-metric" aria-pressed="{{ $scopeFilter === $scope['key'] ? 'true' : 'false' }}">
                         <span class="ops-metric__label">{{ $scope['label'] }}</span>
@@ -167,26 +124,26 @@
                     </button>
                 @endforeach
             </div>
-        </x-filament-ops::ops-section>
-
-        <x-filament-ops::ops-section :title="__('ops.custom_pages.seo_operations.sources.title')">
-            <div class="ops-source-grid">
+            <div class="ops-seo-source-strip">
                 @foreach ($dataSources as $source)
-                    @if (!empty($source['connected']))
-                        <div class="ops-source-status ops-source-status--connected">
-                            <span class="ops-source-status__signal" aria-hidden="true"></span>
-                            <div><strong>{{ $source['label'] }}</strong><p>{{ $source['source'] ?? '' }} · {{ __('ops.custom_pages.seo_operations.sources.updated_at', ['time' => $source['updated_at'] ?? '-']) }}</p></div>
+                    <div @class(['ops-seo-source', 'ops-seo-source--connected' => !empty($source['connected'])])>
+                        <span class="ops-seo-source__signal" aria-hidden="true"></span>
+                        <div>
+                            <strong>{{ $source['label'] }}</strong>
+                            <p>
+                                @if (!empty($source['connected']))
+                                    {{ $source['source'] ?? '' }} · {{ __('ops.custom_pages.seo_operations.sources.updated_at', ['time' => $source['updated_at'] ?? '-']) }}
+                                @else
+                                    {{ __('ops.custom_pages.seo_operations.sources.not_connected') }} · {{ $source['phase'] ?? __('ops.custom_pages.seo_operations.phase_two') }}
+                                @endif
+                            </p>
                         </div>
-                    @else
-                        <x-filament-ops::ops-not-connected
-                            :title="$source['label']"
-                            :description="__('ops.custom_pages.seo_operations.sources.not_connected')"
-                            :source="$source['phase'] ?? __('ops.custom_pages.seo_operations.phase_two')"
-                        />
-                    @endif
+                    </div>
                 @endforeach
             </div>
-        </x-filament-ops::ops-section>
+        </section>
+
+        <div class="ops-seo-workspace-panel" data-workspace="{{ $activeWorkspace }}">
 
         @if ($activeWorkspace === 'performance')
             <x-filament-ops::ops-section
@@ -469,5 +426,6 @@
             @endif
         </x-filament-ops::ops-section>
         @endif
+        </div>
     </div>
 </x-filament-panels::page>
