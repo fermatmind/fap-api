@@ -28,6 +28,7 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
     public function issues(int $limit = 25): array
     {
         $limit = max(1, min($limit, 100));
+        $gscByUrl = $this->metricMap('seo_gsc_daily', ['clicks', 'impressions']);
 
         return [
             'total_count' => $this->table('seo_issue_queue')->count(),
@@ -45,14 +46,20 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
                     'source_system',
                     'source_engine',
                     'canonical_url',
+                    'canonical_url_hash',
                     'locale',
                     'page_entity_type',
                     'status',
                     'lifecycle_state',
+                    'acknowledged_at',
+                    'resolved_at',
+                    'ignored_at',
                     'detected_at',
+                    'created_at',
                     'updated_at',
                     'summary',
                     'recommendation',
+                    'metadata_json',
                 ])
                 ->orderByDesc('detected_at')
                 ->orderByDesc('updated_at')
@@ -68,11 +75,115 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
                     'page_entity_type' => isset($row->page_entity_type) ? (string) $row->page_entity_type : null,
                     'status' => (string) $row->status,
                     'lifecycle_state' => $this->mapLifecycle((string) $row->lifecycle_state),
+                    'acknowledged_at' => $this->normalizeTimestamp($row->acknowledged_at ?? null),
+                    'resolved_at' => $this->normalizeTimestamp($row->resolved_at ?? null),
+                    'ignored_at' => $this->normalizeTimestamp($row->ignored_at ?? null),
                     'detected_at' => $this->normalizeTimestamp($row->detected_at ?? null),
+                    'first_detected_at' => $this->normalizeTimestamp($row->created_at ?? null),
                     'updated_at' => $this->normalizeTimestamp($row->updated_at ?? null),
                     'summary' => isset($row->summary) ? (string) $row->summary : null,
                     'recommendation' => isset($row->recommendation) ? (string) $row->recommendation : null,
+                    'workflow' => $this->workflowMetadata($row->metadata_json ?? null),
+                    'impact' => [
+                        'affected_urls' => $row->canonical_url_hash === null ? 0 : 1,
+                        'clicks' => (int) data_get($gscByUrl, ((string) ($row->canonical_url_hash ?? '')).'.clicks', 0),
+                        'impressions' => (int) data_get($gscByUrl, ((string) ($row->canonical_url_hash ?? '')).'.impressions', 0),
+                    ],
                 ])
+                ->all(),
+        ];
+    }
+
+    /**
+     * Read only real GSC rows. An empty result means the connector has not
+     * produced data for the selected window; callers must not synthesize it.
+     *
+     * @param  array{days?:int,device?:string,country?:string,locale?:string}  $filters
+     * @return array<string, mixed>
+     */
+    public function searchPerformance(array $filters = []): array
+    {
+        $days = max(1, min((int) ($filters['days'] ?? 28), 90));
+        $query = $this->table('seo_gsc_daily')
+            ->where('report_date', '>=', now()->subDays($days - 1)->toDateString());
+
+        foreach (['device', 'country', 'locale'] as $filter) {
+            $value = trim((string) ($filters[$filter] ?? ''));
+            if ($value !== '' && $value !== 'all') {
+                $query->where($filter, $value);
+            }
+        }
+
+        $rows = $query
+            ->select([
+                'report_date',
+                'canonical_url',
+                'query_display_masked',
+                'locale',
+                'device',
+                'country',
+                'clicks',
+                'impressions',
+                'ctr_ppm',
+                'average_position_milli',
+                'collected_at',
+            ])
+            ->orderByDesc('report_date')
+            ->limit(2000)
+            ->get();
+
+        $clicks = (int) $rows->sum('clicks');
+        $impressions = (int) $rows->sum('impressions');
+        $positionWeight = 0;
+        $positionImpressions = 0;
+        foreach ($rows as $row) {
+            if ($row->average_position_milli === null || (int) $row->impressions <= 0) {
+                continue;
+            }
+            $positionWeight += (int) $row->average_position_milli * (int) $row->impressions;
+            $positionImpressions += (int) $row->impressions;
+        }
+
+        $daily = $rows->groupBy(fn (object $row): string => (string) $row->report_date)
+            ->map(fn ($dateRows, string $date): array => [
+                'report_date' => $date,
+                'clicks' => (int) $dateRows->sum('clicks'),
+                'impressions' => (int) $dateRows->sum('impressions'),
+            ])
+            ->sortBy('report_date')
+            ->values()
+            ->all();
+
+        return [
+            'connected' => $rows->isNotEmpty(),
+            'source' => 'seo_intel.seo_gsc_daily',
+            'window_days' => $days,
+            'updated_at' => $this->normalizeTimestamp($rows->max('collected_at')),
+            'totals' => [
+                'clicks' => $clicks,
+                'impressions' => $impressions,
+                'ctr_percent' => $impressions > 0 ? round(($clicks / $impressions) * 100, 2) : null,
+                'average_position' => $positionImpressions > 0
+                    ? round(($positionWeight / $positionImpressions) / 1000, 2)
+                    : null,
+            ],
+            'daily' => $daily,
+            'query_page_rows' => $rows
+                ->filter(fn (object $row): bool => trim((string) ($row->query_display_masked ?? '')) !== '')
+                ->sortByDesc('impressions')
+                ->take(25)
+                ->map(fn (object $row): array => [
+                    'query' => (string) $row->query_display_masked,
+                    'canonical_path' => $this->safePath(is_string($row->canonical_url ?? null) ? $row->canonical_url : null),
+                    'locale' => is_string($row->locale ?? null) ? $row->locale : null,
+                    'device' => is_string($row->device ?? null) ? $row->device : null,
+                    'country' => is_string($row->country ?? null) ? $row->country : null,
+                    'clicks' => (int) $row->clicks,
+                    'impressions' => (int) $row->impressions,
+                    'ctr_percent' => $row->ctr_ppm === null ? null : round(((int) $row->ctr_ppm) / 10000, 2),
+                    'average_position' => $row->average_position_milli === null ? null : round(((int) $row->average_position_milli) / 1000, 2),
+                ])
+                ->values()
                 ->all(),
         ];
     }
@@ -267,6 +378,23 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
             'not_applicable' => 'not_applicable_backend_business_event',
             default => 'unknown',
         };
+    }
+
+    /** @return array<string, mixed> */
+    private function workflowMetadata(mixed $metadata): array
+    {
+        $decoded = $this->decodeJson($metadata);
+        $workflow = is_array($decoded['ops_workflow'] ?? null) ? $decoded['ops_workflow'] : [];
+
+        return [
+            'owner' => is_string($workflow['owner'] ?? null) ? $workflow['owner'] : null,
+            'sla_due_at' => is_string($workflow['sla_due_at'] ?? null) ? $workflow['sla_due_at'] : null,
+            'fixed_at' => is_string($workflow['fixed_at'] ?? null) ? $workflow['fixed_at'] : null,
+            'verified_at' => is_string($workflow['verified_at'] ?? null) ? $workflow['verified_at'] : null,
+            'verification_result' => is_string($workflow['verification_result'] ?? null) ? $workflow['verification_result'] : null,
+            'ignore_reason' => is_string($workflow['ignore_reason'] ?? null) ? $workflow['ignore_reason'] : null,
+            'ignored_until' => is_string($workflow['ignored_until'] ?? null) ? $workflow['ignored_until'] : null,
+        ];
     }
 
     private function sourceSignal(string $sourceSystem, ?string $sourceEngine): string

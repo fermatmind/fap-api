@@ -184,6 +184,12 @@ final class SeoOpportunityQueueReadService extends AbstractSeoDashboardReadServi
                 'ctr_ppm' => $row['ctr_ppm'],
                 'average_position_milli' => $row['average_position_milli'],
             ],
+            'priority' => [
+                'impact' => (int) $row['impressions'],
+                'effort' => ((int) ($row['average_position_milli'] ?? 0)) <= 12000 ? 'low' : 'medium',
+                'confidence' => 'high',
+                'score' => max(0, (int) $row['impressions'] - (int) (($row['ctr_ppm'] ?? 0) / 1000)),
+            ],
             'recommended_next_step' => 'human_review_required_before_cms_or_search_action',
             'allowed_action' => 'read_only_review',
         ], $candidates), 0, $limit);

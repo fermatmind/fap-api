@@ -8,13 +8,17 @@ use App\Filament\Ops\Support\ContentAccess;
 use App\Models\Article;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
+use App\Models\OpsDeployEvent;
 use App\Services\Audit\AuditLogger;
 use App\Services\Ops\SeoOperationsService;
+use App\Services\SeoIntel\OpsDashboard\SeoDashboardApiReadService;
+use App\Services\SeoIntel\OpsDashboard\SeoIssueWorkflowService;
 use App\Support\OrgContext;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Collection;
+use Throwable;
 
 class SeoOperationsPage extends Page
 {
@@ -35,6 +39,28 @@ class SeoOperationsPage extends Page
     public string $typeFilter = 'all';
 
     public string $issueFilter = 'all';
+
+    public string $scopeFilter = 'combined';
+
+    public string $activeWorkspace = 'overview';
+
+    public string $savedView = 'all';
+
+    public int $gscDays = 28;
+
+    public string $gscDevice = 'all';
+
+    public string $gscCountry = 'all';
+
+    public string $gscLocale = 'all';
+
+    public string $selectedIssueUid = '';
+
+    public string $workflowAction = SeoIssueWorkflowService::ACTION_ASSIGN;
+
+    public string $ignoreReason = '';
+
+    public string $ignoredUntil = '';
 
     public string $bulkAction = SeoOperationsService::ACTION_FILL_METADATA;
 
@@ -61,9 +87,33 @@ class SeoOperationsPage extends Page
     /** @var list<array<string, mixed>> */
     public array $healthBand = [];
 
+    /** @var list<array<string, mixed>> */
+    public array $issueBreakdown = [];
+
+    public bool $seoIntelAvailable = false;
+
+    /** @var array<string, mixed> */
+    public array $searchPerformance = [];
+
+    /** @var list<array<string, mixed>> */
+    public array $opportunityQueue = [];
+
+    /** @var list<array<string, mixed>> */
+    public array $executionQueue = [];
+
+    /** @var list<array<string, mixed>> */
+    public array $dataSources = [];
+
+    /** @var list<array<string, mixed>> */
+    public array $scopeSummary = [];
+
+    /** @var list<array<string, mixed>> */
+    public array $deploymentEvents = [];
+
     public function mount(SeoOperationsService $service): void
     {
         $this->refreshDashboard($service);
+        $this->refreshSeoIntel();
     }
 
     public function updatedTypeFilter(): void
@@ -76,6 +126,95 @@ class SeoOperationsPage extends Page
     {
         $this->selectedTargets = [];
         $this->refreshDashboard(app(SeoOperationsService::class));
+    }
+
+    public function updatedScopeFilter(): void
+    {
+        $this->selectedTargets = [];
+        $this->refreshDashboard(app(SeoOperationsService::class));
+    }
+
+    public function updatedGscDays(): void
+    {
+        $this->refreshSeoIntel();
+    }
+
+    public function updatedGscDevice(): void
+    {
+        $this->refreshSeoIntel();
+    }
+
+    public function updatedGscCountry(): void
+    {
+        $this->refreshSeoIntel();
+    }
+
+    public function updatedGscLocale(): void
+    {
+        $this->refreshSeoIntel();
+    }
+
+    public function focusIssue(string $issue): void
+    {
+        $this->activeWorkspace = 'execution';
+        $this->issueFilter = $issue;
+        $this->refreshDashboard(app(SeoOperationsService::class));
+    }
+
+    public function applySavedView(string $view): void
+    {
+        $this->savedView = $view;
+
+        if ($view === 'high_impressions_low_ctr') {
+            $this->activeWorkspace = 'opportunities';
+        } elseif ($view === 'current_org_blockers') {
+            $this->activeWorkspace = 'execution';
+            $this->scopeFilter = 'current_org';
+            $this->issueFilter = SeoOperationsService::ISSUE_GROWTH;
+        } elseif ($view === 'global_career_gaps') {
+            $this->activeWorkspace = 'execution';
+            $this->scopeFilter = 'global';
+            $this->issueFilter = 'all';
+        } else {
+            $this->activeWorkspace = 'overview';
+            $this->scopeFilter = 'combined';
+            $this->issueFilter = 'all';
+        }
+
+        $this->selectedTargets = [];
+        $this->refreshDashboard(app(SeoOperationsService::class));
+    }
+
+    public function applyIssueWorkflow(SeoIssueWorkflowService $workflow, AuditLogger $audit): void
+    {
+        if (! ContentAccess::canWrite()) {
+            throw new AuthorizationException(__('ops.custom_pages.common.errors.seo_action_forbidden'));
+        }
+
+        $user = auth((string) config('admin.guard', 'admin'))->user();
+        $owner = trim((string) data_get($user, 'name', 'operator'));
+        $result = $workflow->transition(
+            $this->selectedIssueUid,
+            $this->workflowAction,
+            $owner,
+            $this->ignoreReason,
+            trim($this->ignoredUntil) !== '' ? $this->ignoredUntil : null,
+        );
+
+        $audit->log(request(), 'seo_issue_workflow_transition', 'SeoIssue', null, [
+            'issue_uid' => $result['issue_uid'],
+            'action' => $result['action'],
+            'status' => $result['status'],
+        ]);
+
+        $this->ignoreReason = '';
+        $this->ignoredUntil = '';
+        $this->refreshSeoIntel();
+
+        Notification::make()
+            ->title(__('ops.custom_pages.seo_operations.notifications.workflow_applied'))
+            ->success()
+            ->send();
     }
 
     public function applyBulkAction(SeoOperationsService $service, AuditLogger $audit): void
@@ -405,7 +544,14 @@ class SeoOperationsPage extends Page
 
         $issueQueue = $service->buildIssueQueue($currentOrgIds, $this->typeFilter, $this->issueFilter);
         $this->issueQueue = $issueQueue['items'] ?? [];
+        if ($this->scopeFilter === 'current_org') {
+            $this->issueQueue = array_values(array_filter($this->issueQueue, static fn (array $item): bool => ($item['type'] ?? null) === 'article'));
+        } elseif ($this->scopeFilter === 'global') {
+            $this->issueQueue = array_values(array_filter($this->issueQueue, static fn (array $item): bool => in_array(($item['type'] ?? null), ['guide', 'job'], true)));
+        }
         $this->issueQueueElapsedMs = (int) ($issueQueue['elapsed_ms'] ?? 0);
+
+        $this->issueBreakdown = $this->buildIssueBreakdown($this->issueQueue);
 
         $totalInventory = $articleTotal + $careerTotal;
         $totalSeoReady = $articleSeoReady + $careerSeoReady;
@@ -414,7 +560,19 @@ class SeoOperationsPage extends Page
 
         $this->healthBand = [
             [
-                'label' => __('ops.custom_pages.seo_operations.health.seo_ready'),
+                'label' => __('ops.custom_pages.seo_operations.health.current_org_ready'),
+                'value' => (string) ($articleTotal > 0 ? (int) round(($articleSeoReady / $articleTotal) * 100) : 0),
+                'suffix' => '%',
+                'tone' => 'info',
+            ],
+            [
+                'label' => __('ops.custom_pages.seo_operations.health.global_career_ready'),
+                'value' => (string) ($careerTotal > 0 ? (int) round(($careerSeoReady / $careerTotal) * 100) : 0),
+                'suffix' => '%',
+                'tone' => 'info',
+            ],
+            [
+                'label' => __('ops.custom_pages.seo_operations.health.combined_ready'),
                 'value' => (string) $seoReadinessPct,
                 'suffix' => '%',
                 'tone' => $seoReadinessPct >= 80 ? 'success' : ($seoReadinessPct >= 60 ? 'warning' : 'danger'),
@@ -425,19 +583,61 @@ class SeoOperationsPage extends Page
                 'suffix' => '/'.((string) $totalInventory),
                 'tone' => 'info',
             ],
-            [
-                'label' => __('ops.custom_pages.seo_operations.health.blocking_records'),
-                'value' => (string) $publishedDiscoveryBlocked,
-                'suffix' => '',
-                'tone' => $publishedDiscoveryBlocked > 0 ? 'danger' : 'success',
-            ],
-            [
-                'label' => __('ops.custom_pages.seo_operations.health.social_preview_gaps'),
-                'value' => (string) $socialPreviewBlocked,
-                'suffix' => '',
-                'tone' => $socialPreviewBlocked > 0 ? 'warning' : 'success',
-            ],
         ];
+
+        $this->scopeSummary = [
+            ['key' => 'current_org', 'label' => __('ops.custom_pages.seo_operations.scopes.current_org_articles'), 'count' => $articleTotal],
+            ['key' => 'global', 'label' => __('ops.custom_pages.seo_operations.scopes.global_career'), 'count' => $careerTotal],
+            ['key' => 'combined', 'label' => __('ops.custom_pages.seo_operations.scopes.combined'), 'count' => $totalInventory],
+        ];
+    }
+
+    private function refreshSeoIntel(): void
+    {
+        try {
+            $reader = app(SeoDashboardApiReadService::class);
+            $this->searchPerformance = $reader->searchPerformance([
+                'days' => $this->gscDays,
+                'device' => $this->gscDevice,
+                'country' => $this->gscCountry,
+                'locale' => $this->gscLocale,
+            ]);
+            $this->opportunityQueue = (array) data_get($reader->opportunityQueue(25), 'recent_rows', []);
+            $this->executionQueue = (array) data_get($reader->issues(50), 'recent_rows', []);
+            $this->seoIntelAvailable = true;
+        } catch (Throwable) {
+            $this->searchPerformance = ['connected' => false, 'totals' => [], 'daily' => [], 'query_page_rows' => []];
+            $this->opportunityQueue = [];
+            $this->executionQueue = [];
+            $this->seoIntelAvailable = false;
+        }
+
+        $gscConnected = (bool) ($this->searchPerformance['connected'] ?? false);
+        $this->dataSources = [
+            ['key' => 'cms', 'label' => 'CMS / SEO metadata', 'connected' => true, 'source' => 'primary database', 'updated_at' => now()->toAtomString()],
+            ['key' => 'gsc', 'label' => 'Google Search Console', 'connected' => $gscConnected, 'source' => $gscConnected ? 'seo_intel.seo_gsc_daily' : null, 'updated_at' => $this->searchPerformance['updated_at'] ?? null],
+            ['key' => 'cwv', 'label' => 'Core Web Vitals', 'connected' => false, 'phase' => 'Phase 2'],
+            ['key' => 'rank', 'label' => __('ops.custom_pages.seo_operations.sources.rank_tracking'), 'connected' => false, 'phase' => 'Phase 2'],
+            ['key' => 'ai', 'label' => 'AI Visibility', 'connected' => false, 'phase' => 'Phase 2'],
+            ['key' => 'backlinks', 'label' => __('ops.custom_pages.seo_operations.sources.backlinks'), 'connected' => false, 'phase' => 'Phase 2'],
+        ];
+
+        try {
+            $this->deploymentEvents = OpsDeployEvent::query()
+                ->where('occurred_at', '>=', now()->subDays($this->gscDays - 1))
+                ->latest('occurred_at')
+                ->limit(20)
+                ->get(['revision', 'status', 'env', 'occurred_at'])
+                ->map(static fn (OpsDeployEvent $event): array => [
+                    'revision' => (string) $event->revision,
+                    'status' => (string) $event->status,
+                    'environment' => (string) $event->env,
+                    'occurred_at' => optional($event->occurred_at)->toAtomString(),
+                ])
+                ->all();
+        } catch (Throwable) {
+            $this->deploymentEvents = [];
+        }
     }
 
     /**
@@ -550,6 +750,47 @@ class SeoOperationsPage extends Page
         $ratio = (int) round(($value / $total) * 100);
 
         return $ratio.'% ('.$value.'/'.$total.')';
+    }
+
+    /**
+     * Aggregate issue labels across the current queue into a per-category
+     * breakdown. Fully derived from real queue data — no synthetic values.
+     *
+     * @param  list<array<string, mixed>>  $queue
+     * @return list<array<string, mixed>>
+     */
+    private function buildIssueBreakdown(array $queue): array
+    {
+        $counts = [];
+        $total = 0;
+
+        foreach ($queue as $item) {
+            foreach (($item['issue_labels'] ?? []) as $index => $label) {
+                $code = (string) data_get($item, 'issue_codes.'.$index, 'all');
+                $key = $code.'|'.$label;
+                $counts[$key] = ($counts[$key] ?? 0) + 1;
+                $total++;
+            }
+        }
+
+        if ($total === 0) {
+            return [];
+        }
+
+        $rows = [];
+        foreach ($counts as $key => $count) {
+            [$code, $label] = explode('|', $key, 2);
+            $rows[] = [
+                'code' => $code,
+                'label' => $label,
+                'count' => $count,
+                'pct' => (int) round(($count / $total) * 100),
+            ];
+        }
+
+        usort($rows, static fn (array $a, array $b): int => $b['count'] <=> $a['count']);
+
+        return $rows;
     }
 
     /**
