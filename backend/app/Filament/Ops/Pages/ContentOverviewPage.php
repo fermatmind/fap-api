@@ -38,6 +38,12 @@ class ContentOverviewPage extends Page
     /** @var list<array<string, string>> */
     public array $recentItems = [];
 
+    /** @var list<array<string, mixed>> */
+    public array $lifecycleStages = [];
+
+    /** @var list<array<string, mixed>> */
+    public array $inventoryByType = [];
+
     public function mount(): void
     {
         $currentOrgIds = $this->currentOrgIds();
@@ -88,6 +94,65 @@ class ContentOverviewPage extends Page
                 'hint' => __('ops.custom_pages.content_overview.fields.published_editorial_hint'),
             ],
         ];
+
+        $this->lifecycleStages = [
+            [
+                'key' => 'draft',
+                'label' => (string) __('ops.custom_pages.content_overview.lifecycle.draft'),
+                'count' => (int) Article::query()->whereIn('org_id', $currentOrgIds)->where('status', 'draft')->count(),
+                'tone' => 'neutral',
+            ],
+            [
+                'key' => 'review',
+                'label' => (string) __('ops.custom_pages.content_overview.lifecycle.review'),
+                'count' => (int) Article::query()->whereIn('org_id', $currentOrgIds)->where('status', 'review')->count(),
+                'tone' => 'info',
+            ],
+            [
+                'key' => 'scheduled',
+                'label' => (string) __('ops.custom_pages.content_overview.lifecycle.scheduled'),
+                'count' => (int) Article::query()->whereIn('org_id', $currentOrgIds)->where('status', 'scheduled')->count(),
+                'tone' => 'info',
+            ],
+            [
+                'key' => 'published',
+                'label' => (string) __('ops.custom_pages.content_overview.lifecycle.published'),
+                'count' => (int) Article::query()->whereIn('org_id', $currentOrgIds)->where('status', 'published')->count(),
+                'tone' => 'success',
+            ],
+            [
+                'key' => 'stale',
+                'label' => (string) __('ops.custom_pages.content_overview.lifecycle.stale'),
+                'count' => (int) Article::query()->whereIn('org_id', $currentOrgIds)->where('updated_at', '<', \Illuminate\Support\Carbon::now()->subDays(180))->count(),
+                'tone' => 'warning',
+            ],
+        ];
+
+        $articleCount = (int) Article::query()->whereIn('org_id', $currentOrgIds)->count();
+        $careerCount = $guideCount + $jobCount;
+        $mediaCount = (int) \App\Models\MediaAsset::query()->whereIn('org_id', $currentOrgIds)->count();
+        $testCount = 0;
+        if (\App\Support\SchemaBaseline::hasTable('analytics_test_metrics_daily')) {
+            $testCount = (int) \Illuminate\Support\Facades\DB::table('analytics_test_metrics_daily')
+                ->where('org_id', 0)
+                ->sum('successful_attempts');
+        }
+
+        $inventoryItems = [
+            ['key' => 'article', 'label' => (string) __('ops.custom_pages.content_overview.inventory.articles'), 'count' => $articleCount],
+            ['key' => 'career', 'label' => (string) __('ops.custom_pages.content_overview.inventory.career'), 'count' => $careerCount],
+            ['key' => 'media', 'label' => (string) __('ops.custom_pages.content_overview.inventory.media'), 'count' => $mediaCount],
+            ['key' => 'test', 'label' => (string) __('ops.custom_pages.content_overview.inventory.tests'), 'count' => $testCount],
+        ];
+        $inventoryMax = max(1, max(array_column($inventoryItems, 'count')));
+        foreach ($inventoryItems as $item) {
+            $this->inventoryByType[] = [
+                'key' => $item['key'],
+                'label' => $item['label'],
+                'count' => (int) $item['count'],
+                'percent' => (int) round(($item['count'] / $inventoryMax) * 100),
+            ];
+        }
 
         $this->recentItems = array_values(array_filter([
             $this->latestItem(__('ops.custom_pages.content_overview.recent.latest_article'), Article::query()->whereIn('org_id', $currentOrgIds)->latest('updated_at')->first(), 'title', ArticleResource::getUrl()),

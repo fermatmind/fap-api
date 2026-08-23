@@ -18,6 +18,7 @@ use App\Filament\Ops\Resources\RoleResource\Pages\ListRoles;
 use App\Filament\Ops\Resources\SupportArticleResource\Pages\ListSupportArticles;
 use App\Models\AdminUser;
 use App\Models\Article;
+use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Models\Organization;
 use App\Models\Permission;
@@ -203,6 +204,85 @@ final class OpsCmsListPolishTest extends TestCase
             ->assertDontSee('Ops List Polish Filter');
     }
 
+    public function test_article_list_header_keeps_native_heading_breadcrumbs_and_create_action(): void
+    {
+        Livewire::test(ListArticles::class)
+            ->assertOk()
+            ->assertSee(__('ops.resources.articles.plural'))
+            ->assertSee(__('ops.resources.articles.list_subheading'))
+            ->assertSee(__('ops.resources.articles.actions.create'))
+            ->assertSee('fi-breadcrumbs', false)
+            ->assertSee('fi-header', false);
+    }
+
+    public function test_article_saved_views_replace_filters_and_apply_authoritative_org_zero_queries(): void
+    {
+        $all = $this->createArticle('all-article');
+        $draft = $this->createArticle('draft-article', ['status' => 'draft']);
+        $review = $this->createArticle('review-article', [
+            'translation_status' => Article::TRANSLATION_STATUS_HUMAN_REVIEW,
+        ]);
+        $pending = $this->createArticle('pending-article', ['status' => 'scheduled']);
+        $seoGap = $this->createArticle('seo-gap-article', [
+            'status' => 'published',
+            'is_public' => true,
+        ]);
+        $seoReady = $this->createArticle('seo-ready-article', [
+            'status' => 'published',
+            'is_public' => true,
+        ]);
+        $stale = $this->createArticle('stale-article', [
+            'translation_status' => Article::TRANSLATION_STATUS_STALE,
+        ]);
+        $foreign = $this->createArticle('foreign-article', ['org_id' => 999]);
+
+        ArticleSeoMeta::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'article_id' => $seoReady->id,
+            'locale' => 'en',
+            'seo_title' => 'SEO ready title',
+            'seo_description' => 'SEO ready description',
+            'is_indexable' => true,
+        ]);
+
+        $component = Livewire::test(ListArticles::class)->loadTable();
+
+        $component
+            ->call('applySavedView', 'draft')
+            ->assertCanSeeTableRecords([$draft])
+            ->assertCanNotSeeTableRecords([$all, $review, $pending, $seoGap, $seoReady, $stale, $foreign])
+            ->call('applySavedView', 'review')
+            ->assertCanSeeTableRecords([$review])
+            ->assertCanNotSeeTableRecords([$draft, $pending, $foreign])
+            ->call('applySavedView', 'pending_publish')
+            ->assertCanSeeTableRecords([$pending])
+            ->assertCanNotSeeTableRecords([$draft, $review, $foreign])
+            ->call('applySavedView', 'seo_gap')
+            ->assertCanSeeTableRecords([$seoGap])
+            ->assertCanNotSeeTableRecords([$seoReady, $draft, $foreign])
+            ->call('applySavedView', 'translate_expired')
+            ->assertCanSeeTableRecords([$stale])
+            ->assertCanNotSeeTableRecords([$review, $foreign])
+            ->filterTable('status', 'draft')
+            ->call('applySavedView', 'all')
+            ->assertCanSeeTableRecords([$all, $draft, $review, $pending, $seoGap, $seoReady, $stale])
+            ->assertCanNotSeeTableRecords([$foreign])
+            ->assertSet('savedView', 'all');
+    }
+
+    public function test_article_author_search_uses_the_real_author_name_column(): void
+    {
+        $alice = $this->createArticle('alice-article', ['author_name' => 'Alice Operator']);
+        $bob = $this->createArticle('bob-article', ['author_name' => 'Bob Operator']);
+
+        Livewire::test(ListArticles::class)
+            ->loadTable()
+            ->assertTableColumnExists('author_name')
+            ->searchTable('Alice Operator')
+            ->assertCanSeeTableRecords([$alice])
+            ->assertCanNotSeeTableRecords([$bob]);
+    }
+
     /**
      * @param  class-string<object>  $component
      * @param  list<string>  $columns
@@ -257,6 +337,26 @@ final class OpsCmsListPolishTest extends TestCase
             'domain' => 'ops-list-polish.example.test',
             'timezone' => 'Asia/Shanghai',
             'locale' => 'en',
+        ]);
+    }
+
+    /**
+     * @param  array<string, mixed>  $attributes
+     */
+    private function createArticle(string $slug, array $attributes = []): Article
+    {
+        return Article::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'slug' => $slug,
+            'locale' => 'en',
+            'translation_status' => Article::TRANSLATION_STATUS_SOURCE,
+            'title' => Str::headline($slug),
+            'excerpt' => 'List test excerpt',
+            'content_md' => 'List test body',
+            'status' => 'published',
+            'is_public' => false,
+            'is_indexable' => true,
+            ...$attributes,
         ]);
     }
 }

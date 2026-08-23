@@ -1,3 +1,25 @@
+/* =====================================================================
+ * FermatMind Ops 控制台 V2 - theme.css
+ * 视觉方向：Minimal Tech / Precision Console
+ *   深色侧栏 + electric blue 精确强调 + hairline-first 层级
+ * 组织（自上而下）：
+ *   [Tokens]              颜色 / 圆角 / 阴影 / 字号 / 字体
+ *   [Shell: Body]         主背景
+ *   [Shell: Sidebar]      深色侧栏、active 态 2px electric rail
+ *   [Shell: Topbar]       纯白 + 1px hairline，无 backdrop-filter
+ *   [Shell: Main]         主内容区与页头
+ *   [Components: Cards]   卡片 / 空状态 / 状态徽章
+ *   [Components: Table]   数据表 / 表格
+ *   [Components: Btns]    主/次按钮、徽章
+ *   [Components: Forms]   输入框 / 选择器
+ *   [Pages: Dashboard]    总览/控制台（precision console）
+ *   [Pages: CMS]          内容总览 / 文章列表
+ *   [Pages: Editor]       文章编辑器三段式
+ *   [Pages: SEO]          SEO 中台
+ *
+ * 作用域：所有选择器必须以 `.fi-body.fi-panel-ops` 开头，避免污染。
+ * ===================================================================== */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,6 +29,7 @@
 @config 'tailwind.config.js';
 
 @layer base {
+    /* ===== Tokens ===== */
     :root {
         --ops-bg-app: #f4f6f8;
         --ops-bg-surface: #ffffff;
@@ -49,9 +72,7 @@
 
     .fi-body.fi-panel-ops {
         background-color: var(--ops-bg-app);
-        background-image:
-            radial-gradient(circle at top left, rgba(var(--primary-50), 0.95), rgba(var(--primary-50), 0) 38rem),
-            linear-gradient(180deg, #ffffff 0%, var(--ops-bg-app) 26%, #f3f5f8 100%);
+        background-image: none;
         color: var(--ops-text-primary);
         font-feature-settings: 'cv02' 1, 'cv03' 1, 'cv04' 1, 'cv11' 1;
     }
@@ -81,9 +102,7 @@
     }
 
     .fi-body.fi-panel-ops .fi-main-ctn {
-        background:
-            linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(247, 248, 250, 0) 20%),
-            transparent;
+        background: transparent;
     }
 
     .fi-body.fi-panel-ops .fi-main {
@@ -92,12 +111,13 @@
     }
 
     .fi-body.fi-panel-ops .fi-topbar nav {
-        min-height: 4.5rem;
+        min-height: 3.375rem;
+        padding-inline: 1.25rem;
         gap: 1rem;
-        background: rgba(255, 255, 255, 0.8);
-        border-bottom: 1px solid rgba(229, 231, 235, 0.86);
-        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.85);
-        backdrop-filter: blur(20px);
+        background: var(--ops-bg-surface);
+        border-bottom: 1px solid var(--ops-border-default);
+        box-shadow: none;
+        backdrop-filter: none;
     }
 
     .fi-body.fi-panel-ops .fi-topbar nav > .ms-auto {
@@ -105,16 +125,17 @@
     }
 
     .fi-body.fi-panel-ops .fi-sidebar {
-        background: rgba(247, 248, 250, 0.82);
-        border-right: 1px solid rgba(229, 231, 235, 0.92);
-        backdrop-filter: blur(18px);
+        background: var(--ops-sidebar-bg);
+        border-right: 1px solid var(--sidebar-border, rgba(255, 255, 255, 0.06));
+        backdrop-filter: none;
     }
 
     .fi-body.fi-panel-ops .fi-sidebar-header {
-        background: rgba(255, 255, 255, 0.84);
-        border-bottom: 1px solid rgba(229, 231, 235, 0.85);
+        background: var(--ops-sidebar-bg);
+        border-bottom: 1px solid var(--sidebar-border, rgba(
+255, 255, 255, 0.06));
         box-shadow: none;
-        backdrop-filter: blur(18px);
+        backdrop-filter: none;
     }
 
     .fi-body.fi-panel-ops .fi-sidebar-header {
@@ -156,7 +177,7 @@
     .fi-body.fi-panel-ops .fi-sidebar-item-button,
     .fi-body.fi-panel-ops .fi-sidebar-group-button,
     .fi-body.fi-panel-ops .fi-topbar-item-button {
-        color: var(--ops-text-secondary);
+        color: var(--ops-sidebar-text);
     }
 
     .fi-body.fi-panel-ops .fi-sidebar-item-button {
@@ -174,33 +195,33 @@
     .fi-body.fi-panel-ops .fi-sidebar-item-icon,
     .fi-body.fi-panel-ops .fi-sidebar-group-icon,
     .fi-body.fi-panel-ops .fi-topbar-item-icon {
-        color: var(--ops-text-tertiary);
+        color: var(--ops-sidebar-text);
     }
 
     .fi-body.fi-panel-ops .fi-sidebar-item:not(.fi-active) > .fi-sidebar-item-button:hover,
     .fi-body.fi-panel-ops .fi-topbar-item:not(.fi-active) .fi-topbar-item-button:hover,
     .fi-body.fi-panel-ops .fi-tabs-item:not(.fi-active):hover {
-        background: rgba(255, 255, 255, 0.74);
-        color: var(--ops-text-primary);
+        background: var(--sidebar-bg-hover, rgba(255, 255, 255, 0.05));
+        color: var(--sidebar-text-hover, #C2CAD6);
     }
 
     .fi-body.fi-panel-ops .fi-sidebar-item.fi-active > .fi-sidebar-item-button,
     .fi-body.fi-panel-ops .fi-topbar-item.fi-active .fi-topbar-item-button,
     .fi-body.fi-panel-ops .fi-tabs-item.fi-active {
-        background: rgba(var(--primary-50), 0.92);
-        box-shadow: inset 0 0 0 1px rgba(var(--primary-100), 0.95);
-        color: rgb(var(--primary-700));
+        background: var(--sidebar-active-fill, rgba(79, 124, 255, 0.14));
+        box-shadow: none;
+        color: var(--sidebar-text-active, #E6ECFF);
     }
 
     .fi-body.fi-panel-ops .fi-sidebar-item.fi-active > .fi-sidebar-item-button::before {
         content: '';
         position: absolute;
-        inset-inline-start: -0.55rem;
-        top: 0.45rem;
-        bottom: 0.45rem;
-        width: 3px;
-        border-radius: 999px;
-        background: rgb(var(--primary-600));
+        inset-inline-start: 0;
+        top: 0.4rem;
+        bottom: 0.4rem;
+        width: 2px;
+        border-radius: 0;
+        background: var(--sidebar-rail, #4F7CFF);
     }
 
     .fi-body.fi-panel-ops .fi-sidebar-item.fi-active .fi-sidebar-item-icon,
@@ -219,11 +240,11 @@
     }
 
     .fi-body.fi-panel-ops .fi-page > section > .fi-header {
-        padding: 1.5rem 1.6rem;
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(251, 252, 253, 0.92));
-        border: 1px solid rgba(229, 231, 235, 0.92);
-        border-radius: var(--ops-radius-overlay);
-        box-shadow: var(--ops-shadow-surface);
+        padding: 0;
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
     }
 
     .fi-body.fi-panel-ops .fi-header-heading {
@@ -312,10 +333,10 @@
     }
 
     .fi-body.fi-panel-ops .fi-simple-main {
-        background: rgba(255, 255, 255, 0.92);
+        background: var(--ops-bg-surface);
         border-radius: var(--ops-radius-overlay);
         box-shadow: var(--ops-shadow-overlay);
-        backdrop-filter: blur(18px);
+        backdrop-filter: none;
     }
 
     .fi-body.fi-panel-ops .fi-section-header-heading,
@@ -793,9 +814,9 @@
 
     .fi-body.fi-panel-ops .fi-modal-window {
         border-radius: var(--ops-radius-overlay);
-        background: rgba(255, 255, 255, 0.98);
+        background: var(--ops-bg-surface);
         box-shadow: var(--ops-shadow-overlay);
-        backdrop-filter: blur(18px);
+        backdrop-filter: none;
     }
 
     .fi-body.fi-panel-ops .fi-modal-footer-actions {
@@ -3161,7 +3182,7 @@
     .fi-body.fi-panel-ops .fi-topbar nav {
         min-height: 3.375rem;
         gap: 0.75rem;
-        background: rgba(255, 255, 255, 0.98);
+        background: var(--ops-bg-surface);
         border-bottom: 1px solid var(--ops-border-default);
         box-shadow: none;
         backdrop-filter: none;
@@ -3713,6 +3734,9 @@
         gap: 0;
         min-width: 0;
         background: var(--ops-bg-surface);
+        align-self: start;
+        position: sticky;
+        top: calc(var(--ops-topbar-height, 4rem) + 1rem);
     }
 
     .ops-edit-workspace-section--rail,
@@ -3775,5 +3799,496 @@
     .ops-edit-workspace-rail-column,
     .ops-article-workspace-rail-column {
         position: static;
+    }
+}
+
+/* =====================================================================
+ * V2 Precision Console 专用组件
+ * 用于自定义 Blade 视图：连续 Action Queue / Data Strip / 零值状态四态
+ * 所有选择器以 `.fi-body.fi-panel-ops` 开头，保证作用域隔离
+ * ===================================================================== */
+
+@layer components {
+    .fi-body.fi-panel-ops .ops-precision-page {
+        display: grid;
+        gap: 1.5rem;
+        padding: 0;
+    }
+
+    .fi-body.fi-panel-ops .ops-precision-page-header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem 1.5rem;
+        padding: 0 0 0.25rem 0;
+    }
+
+    .fi-body.fi-panel-ops .ops-precision-page-title {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        min-width: 0;
+    }
+
+    .fi-body.fi-panel-ops .ops-precision-page-title h1 {
+        color: var(--ops-text-primary);
+        font-family: var(--ops-font-sans);
+        font-size: 1.625rem;
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: 0;
+    }
+
+    .fi-body.fi-panel-ops .ops-precision-page-meta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem 0.75rem;
+        color: var(--ops-text-secondary);
+        font-size: 0.8125rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-precision-section {
+        display: grid;
+        gap: 0.75rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-precision-section__head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-precision-section__title {
+        color: var(--ops-text-primary);
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 0;
+    }
+
+    .fi-body.fi-panel-ops .ops-precision-section__hint {
+        color: var(--ops-text-secondary);
+        font-size: 0.8125rem;
+        line-height: 1.5;
+    }
+
+    /* 连续 Action Queue：4 卡片水平分隔，2x2 网格 */
+    .fi-body.fi-panel-ops .ops-action-strip {
+        display: grid;
+        gap: 0;
+        overflow: hidden;
+        background: var(--ops-bg-surface);
+        border: 1px solid var(--ops-border-default);
+        border-radius: var(--ops-radius-card);
+    }
+
+    .fi-body.fi-panel-ops .ops-action-card {
+        display: grid;
+        grid-template-columns: auto 1fr auto auto;
+        align-items: center;
+        gap: 0.875rem;
+        padding: 0.875rem 1rem;
+        background: var(--ops-bg-surface);
+        color: var(--ops-text-primary);
+        text-decoration: none;
+        transition: background-color 120ms ease;
+    }
+
+    .fi-body.fi-panel-ops .ops-action-card:hover {
+        background: var(--ops-bg-surface-subtle);
+    }
+
+    .fi-body.fi-panel-ops .ops-action-card__icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        color: var(--ops-text-secondary);
+    }
+
+    .fi-body.fi-panel-ops .ops-action-card__icon svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .fi-body.fi-panel-ops .ops-action-card--warning .ops-action-card__icon {
+        color: var(--ops-state-warning);
+    }
+
+    .fi-body.fi-panel-ops .ops-action-card--danger .ops-action-card__icon {
+        color: var(--ops-state-danger);
+    }
+
+    .fi-body.fi-panel-ops .ops-action-card--info .ops-action-card__icon {
+        color: var(--ops-electric);
+    }
+
+    .fi-body.fi-panel-ops .ops-action-card__body {
+        display: grid;
+        gap: 0.1rem;
+        min-width: 0;
+    }
+
+    .fi-body.fi-panel-ops .ops-action-card__title {
+        color: var(--ops-text-primary);
+        font-size: 0.875rem;
+        font-weight: 700;
+        letter-spacing: 0;
+    }
+
+    .fi-body.fi-panel-ops .ops-action-card__desc {
+        color: var(--ops-text-secondary);
+        font-size: 0.75rem;
+        font-weight: 500;
+        line-height: 1.45;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .fi-body.fi-panel-ops .ops-action-card__count {
+        color: var(--ops-text-primary);
+        font-size: 1.25rem;
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+        line-height: 1;
+    }
+
+    .fi-body.fi-panel-ops .ops-action-card__arrow {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--ops-text-tertiary);
+    }
+
+    .fi-body.fi-panel-ops .ops-action-card__arrow svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    /* 连续 Data Strip：6 metric 水平分隔 */
+    .fi-body.fi-panel-ops .ops-data-strip {
+        display: grid;
+        gap: 0;
+        overflow: hidden;
+        background: var(--ops-bg-surface);
+        border: 1px solid var(--ops-border-default);
+        border-radius: var(--ops-radius-card);
+    }
+
+    .fi-body.fi-panel-ops .ops-metric {
+        display: grid;
+        gap: 0.4rem;
+        padding: 1.125rem 1.25rem;
+        min-width: 0;
+    }
+
+    .fi-body.fi-panel-ops .ops-metric__label {
+        color: var(--ops-text-primary);
+        font-size: 0.8125rem;
+        font-weight: 700;
+        letter-spacing: 0;
+    }
+
+    .fi-body.fi-panel-ops .ops-metric__value {
+        color: var(--ops-text-primary);
+        font-family: var(--ops-font-sans);
+        font-size: 1.75rem;
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+        line-height: 1;
+        letter-spacing: 0;
+    }
+
+    .fi-body.fi-panel-ops .ops-metric__trend {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    .fi-body.fi-panel-ops .ops-metric__trend--up {
+        color: var(--ops-state-success);
+    }
+
+    .fi-body.fi-panel-ops .ops-metric__trend--down {
+        color: var(--ops-state-danger);
+    }
+
+    .fi-body.fi-panel-ops .ops-metric__trend--flat {
+        color: var(--ops-text-secondary);
+    }
+
+    .fi-body.fi-panel-ops .ops-metric__freshness {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        color: var(--ops-text-secondary);
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    .fi-body.fi-panel-ops .ops-metric__freshness svg {
+        width: 12px;
+        height: 12px;
+        color: var(--ops-state-success);
+    }
+
+    /* 零值状态：四种视觉区分 */
+    .fi-body.fi-panel-ops .ops-zero-state-grid {
+        display: grid;
+        gap: 0.75rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .fi-body.fi-panel-ops .ops-zero-state {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0.875rem;
+        align-items: start;
+        padding: 1rem 1.125rem;
+        border-radius: var(--ops-radius-card);
+        background: var(--ops-bg-surface);
+        box-shadow: inset 0 0 0 1px var(--ops-border-default);
+    }
+
+    .fi-body.fi-panel-ops .ops-zero-state__icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: var(--ops-radius-card);
+    }
+
+    .fi-body.fi-panel-ops .ops-zero-state__icon svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .fi-body.fi-panel-ops .ops-zero-state--real .ops-zero-state__icon {
+        background: var(--ops-bg-surface-subtle);
+        color: var(--ops-text-secondary);
+    }
+
+    .fi-body.fi-panel-ops .ops-zero-state--not-connected {
+        background: #ebf1fe;
+        box-shadow: inset 0 0 0 1px #c7d6ff;
+    }
+
+    .fi-body.fi-panel-ops .ops-zero-state--not-connected .ops-zero-state__icon {
+        background: #d8e2fd;
+        color: #2a4fd0;
+    }
+
+    .fi-body.fi-panel-ops .ops-zero-state--no-permission {
+        background: #fdecec;
+        box-shadow: inset 0 0 0 1px #facaca;
+    }
+
+    .fi-body.fi-panel-ops .ops-zero-state--no-permission .ops-zero-state__icon {
+        background: #fbd7d7;
+        color: #b91c1c;
+    }
+
+    .fi-body.fi-panel-ops .ops-zero-state--no-org {
+        background: #fef3e2;
+        box-shadow: inset 0 0 0 1px #fbd7a0;
+    }
+
+    .fi-body.fi-panel-ops .ops-zero-state--no-org .ops-zero-state__icon {
+        background: #fde2b9;
+        color: #b45309;
+    }
+
+    .fi-body.fi-panel-ops .ops-zero-state__body {
+        display: grid;
+        gap: 0.2rem;
+        min-width: 0;
+    }
+
+    .fi-body.fi-panel-ops .ops-zero-state__title {
+        color: var(--ops-text-primary);
+        font-size: 0.875rem;
+        font-weight: 700;
+        letter-spacing: 0;
+    }
+
+    .fi-body.fi-panel-ops .ops-zero-state__desc {
+        color: var(--ops-text-secondary);
+        font-size: 0.8125rem;
+        line-height: 1.55;
+    }
+
+    .fi-body.fi-panel-ops .ops-zero-state__action {
+        margin-top: 0.5rem;
+    }
+
+    /* 响应式分隔（>=1024px：4/6 列水平分隔；<1024px：2 列） */
+    @media (min-width: 1024px) {
+        .fi-body.fi-panel-ops .ops-action-strip {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .fi-body.fi-panel-ops .ops-action-card:nth-child(odd) {
+            border-right: 1px solid var(--ops-border-default);
+        }
+        .fi-body.fi-panel-ops .ops-action-card:nth-child(-n+2) {
+            border-bottom: 1px solid var(--ops-border-default);
+        }
+        .fi-body.fi-panel-ops .ops-data-strip {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+        .fi-body.fi-panel-ops .ops-metric:not(:nth-child(3n)) {
+            border-right: 1px solid var(--ops-border-default);
+        }
+        .fi-body.fi-panel-ops .ops-metric:nth-child(-n+3) {
+            border-bottom: 1px solid var(--ops-border-default);
+        }
+    }
+
+    @media (min-width: 720px) and (max-width: 1023px) {
+        .fi-body.fi-panel-ops .ops-action-strip {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .fi-body.fi-panel-ops .ops-action-card:nth-child(odd) {
+            border-right: 1px solid var(--ops-border-default);
+        }
+        .fi-body.fi-panel-ops .ops-action-card:nth-child(-n+2) {
+            border-bottom: 1px solid var(--ops-border-default);
+        }
+        .fi-body.fi-panel-ops .ops-data-strip {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .fi-body.fi-panel-ops .ops-metric:nth-child(odd) {
+            border-right: 1px solid var(--ops-border-default);
+        }
+        .fi-body.fi-panel-ops .ops-metric:nth-child(-n+4) {
+            border-bottom: 1px solid var(--ops-border-default);
+        }
+    }
+
+    @media (max-width: 719px) {
+        .fi-body.fi-panel-ops .ops-action-strip,
+        .fi-body.fi-panel-ops .ops-data-strip,
+        .fi-body.fi-panel-ops .ops-zero-state-grid {
+            grid-template-columns: 1fr;
+        }
+        .fi-body.fi-panel-ops .ops-action-card:not(:last-child),
+        .fi-body.fi-panel-ops .ops-metric:not(:last-child) {
+            border-bottom: 1px solid var(--ops-border-default);
+        }
+    }
+
+    /* 内容库存：按类型横向条形图 */
+    .fi-body.fi-panel-ops .ops-inventory-grid {
+        display: grid;
+        gap: 0.625rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-inventory-row {
+        display: grid;
+        grid-template-columns: 6rem 1fr 3rem;
+        align-items: center;
+        gap: 0.875rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-inventory-row__label {
+        color: var(--ops-text-primary);
+        font-size: 0.8125rem;
+        font-weight: 700;
+        letter-spacing: 0;
+    }
+
+    .fi-body.fi-panel-ops .ops-inventory-row__bar {
+        position: relative;
+        display: block;
+        height: 8px;
+        border-radius: 999px;
+        background: var(--ops-bg-surface-subtle);
+        overflow: hidden;
+    }
+
+    .fi-body.fi-panel-ops .ops-inventory-row__fill {
+        position: absolute;
+        inset-block: 0;
+        inset-inline-start: 0;
+        border-radius: inherit;
+        background: var(--ops-electric);
+        transition: width 200ms ease;
+    }
+
+    .fi-body.fi-panel-ops .ops-inventory-row__count {
+        color: var(--ops-text-primary);
+        font-size: 0.875rem;
+        font-weight: 700;
+        text-align: right;
+        line-height: 1;
+    }
+}
+
+/* ============================================================
+   [Article List] V2 saved-view chips (scoped to ops panel)
+   ============================================================ */
+@layer components {
+    .fi-body.fi-panel-ops .ops-article-saved-views {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--ops-space-2, 8px);
+        margin-bottom: var(--ops-space-4, 16px);
+    }
+
+    .fi-body.fi-panel-ops .ops-article-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        border: 1px solid var(--ops-border-default);
+        border-radius: var(--ops-radius-badge, 999px);
+        background: var(--ops-bg-surface);
+        color: var(--ops-text-secondary);
+        font-size: 0.8125rem;
+        font-weight: 500;
+        line-height: 1;
+        text-decoration: none;
+        transition: background 150ms ease, color 150ms ease, border-color 150ms ease;
+    }
+
+    .fi-body.fi-panel-ops .ops-article-chip:hover {
+        background: var(--ops-bg-surface-subtle);
+        color: var(--ops-text-primary);
+        border-color: var(--ops-border-strong);
+    }
+
+    .fi-body.fi-panel-ops .ops-article-chip--active {
+        background: var(--ops-electric-solid);
+        border-color: var(--ops-electric-solid);
+        color: #ffffff;
+    }
+
+    .fi-body.fi-panel-ops .ops-article-chip__label {
+        white-space: nowrap;
+    }
+
+    .fi-body.fi-panel-ops .ops-article-chip__count {
+        font-variant-numeric: tabular-nums;
+        font-weight: 700;
+        font-size: 0.75rem;
+        opacity: 0.85;
+        min-width: 1.25rem;
+        text-align: center;
+        padding: 1px 6px;
+        border-radius: var(--ops-radius-badge, 999px);
+        background: rgba(17, 24, 32, 0.06);
+    }
+
+    .fi-body.fi-panel-ops .ops-article-chip--active .ops-article-chip__count {
+        background: rgba(255, 255, 255, 0.22);
+        color: #ffffff;
     }
 }
