@@ -10,6 +10,7 @@ return new class extends Migration
 
     public function up(): void
     {
+        // Read-model expansion only: no sitemap, canonical, or indexing authority is changed.
         $schema = Schema::connection($this->connection);
 
         if ($schema->hasTable('seo_gsc_daily')) {

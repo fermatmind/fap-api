@@ -70,6 +70,24 @@ test("keeps Ops SEO dashboards in the application lane", () => {
   assert.equal(result.flags.seo_discoverability, false);
   assert.equal(result.deploy, true);
 });
+test("keeps bounded readonly Ops GSC ingestion out of discoverability writes", () => {
+  const result = classifyPaths([
+    "backend/app/Console/Commands/SeoIntelGscSyncCommand.php",
+    "backend/app/Services/SeoIntel/GscReadModelSyncService.php",
+    "backend/app/Services/SeoIntel/GscReadonlyLiveAdapter.php",
+    "backend/database/migrations/seo_intel/2026_08_23_140000_expand_gsc_read_models.php",
+  ]);
+  assert.equal(result.flags.application_code, true);
+  assert.equal(result.flags.backward_compatible_migration, true);
+  assert.equal(result.flags.seo_discoverability, false);
+  assert.equal(result.deploy, true);
+});
+test("keeps adjacent GSC discoverability behavior in the SEO lane", () => {
+  assert.equal(
+    has(["backend/app/Services/SeoIntel/GscIndexSubmissionService.php"], "seo_discoverability"),
+    true,
+  );
+});
 test("classifies deployment infrastructure", () => assert.equal(has([".github/workflows/ci.yml"], "infrastructure_deployment"), true));
 
 test("retired EQ mirror cleanup is content-only and cannot trigger search submission", () => {

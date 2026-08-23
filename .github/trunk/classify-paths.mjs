@@ -61,7 +61,12 @@ export function classifyPaths(inputPaths) {
       /^backend\/resources\/(?:css|views)\/filament\/ops\//,
     ]);
     const opsExecutionMigration = /^backend\/database\/migrations\/seo_intel\/\d{4}_\d{2}_\d{2}_\d+_expand_seo_execution_workflow\.php$/.test(path);
-    const seo = !retiredEqMirror && !opsUi && !opsExecutionMigration && matches(path, [
+    const opsReadonlyGsc = matches(path, [
+      /^backend\/app\/Console\/Commands\/SeoIntelGscSyncCommand\.php$/,
+      /^backend\/app\/Services\/SeoIntel\/Gsc(?:ReadModelSyncService|ReadonlyLiveAdapter)\.php$/,
+      /^backend\/database\/migrations\/seo_intel\/\d{4}_\d{2}_\d{2}_\d+_expand_gsc_read_models\.php$/,
+    ]);
+    const seo = !retiredEqMirror && !opsUi && !opsExecutionMigration && !opsReadonlyGsc && matches(path, [
       /(?:^|\/)(?:seo|search|discoverability|sitemap|robots|llms)(?:\/|\.|-|_)/i,
       /(?:canonical|hreflang|indexnow|indexability|gsc)/i,
       /(?:Seo|Search|Discoverability|Sitemap|Robots|Llms)/,

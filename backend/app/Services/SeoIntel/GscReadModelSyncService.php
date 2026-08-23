@@ -13,6 +13,7 @@ use Throwable;
 
 final class GscReadModelSyncService
 {
+    // This imports Search Analytics observations only; it never submits URLs or indexing requests.
     /** @var list<int> */
     public const WINDOWS = [7, 28, 90];
 
