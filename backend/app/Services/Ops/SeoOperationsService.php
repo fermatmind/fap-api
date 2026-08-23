@@ -14,11 +14,10 @@ use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\CareerGuideSeoService;
 use App\Services\Cms\CareerJobSeoService;
 use Illuminate\Support\Str;
+use InvalidArgumentException;
 
 final class SeoOperationsService
 {
-    public const MAX_RECORDS_PER_CONTENT_TYPE = 500;
-
     public const MAX_ISSUE_QUEUE_ITEMS = 100;
 
     public const ACTION_FILL_METADATA = 'fill_metadata';
@@ -57,18 +56,26 @@ final class SeoOperationsService
         private readonly ArticleSeoService $articleSeoService,
         private readonly CareerGuideSeoService $careerGuideSeoService,
         private readonly CareerJobSeoService $careerJobSeoService,
+        private readonly SeoContentScopeViewModel $scope,
     ) {}
 
     /**
-     * @param  list<int>  $currentOrgIds
+     * @param  list<int>  $scopeOrgIds
      * @return array{items:list<array<string,mixed>>,elapsed_ms:int}
      */
-    public function buildIssueQueue(array $currentOrgIds, string $typeFilter = 'all', string $issueFilter = 'all'): array
-    {
+    public function buildIssueQueue(
+        array $scopeOrgIds,
+        string $typeFilter = 'all',
+        string $issueFilter = 'all',
+        string $locale = 'all',
+        string $status = 'all',
+        ?int $limit = self::MAX_ISSUE_QUEUE_ITEMS,
+    ): array {
+        $this->assertGlobalScope($scopeOrgIds);
         $startedAt = microtime(true);
         $items = [];
 
-        foreach ($this->recordsFor($currentOrgIds, $typeFilter) as [$type, $record]) {
+        foreach ($this->recordsFor($typeFilter, $locale, $status) as [$type, $record]) {
             $item = $this->issueItem($type, $record, $issueFilter);
             if ($item === null) {
                 continue;
@@ -89,22 +96,25 @@ final class SeoOperationsService
         });
 
         return [
-            'items' => array_slice(array_values($items), 0, self::MAX_ISSUE_QUEUE_ITEMS),
+            'items' => $limit === null
+                ? array_values($items)
+                : array_slice(array_values($items), 0, max(0, $limit)),
             'elapsed_ms' => (int) round((microtime(true) - $startedAt) * 1000),
         ];
     }
 
     /**
      * @param  list<string>  $selectionKeys
-     * @param  list<int>  $currentOrgIds
+     * @param  list<int>  $scopeOrgIds
      * @return array{updated_count:int,updated_keys:list<string>}
      */
-    public function applyBulkAction(array $selectionKeys, string $action, array $currentOrgIds): array
+    public function applyBulkAction(array $selectionKeys, string $action, array $scopeOrgIds): array
     {
+        $this->assertGlobalScope($scopeOrgIds);
         $updatedKeys = [];
 
         foreach ($selectionKeys as $selectionKey) {
-            [$type, $record] = $this->recordFromSelectionKey($selectionKey, $currentOrgIds);
+            [$type, $record] = $this->recordFromSelectionKey($selectionKey);
             if (! is_object($record)) {
                 continue;
             }
@@ -374,17 +384,14 @@ final class SeoOperationsService
     }
 
     /**
-     * @param  list<int>  $currentOrgIds
      * @return iterable<int, array{0:string,1:object}>
      */
-    private function recordsFor(array $currentOrgIds, string $typeFilter): iterable
+    private function recordsFor(string $typeFilter, string $locale, string $status): iterable
     {
         if (in_array($typeFilter, ['all', 'article'], true)) {
-            $records = Article::query()
-                ->whereIn('org_id', $currentOrgIds)
+            $records = $this->scope->articles($locale, $status)
                 ->with('seoMeta')
                 ->latest('updated_at')
-                ->limit(self::MAX_RECORDS_PER_CONTENT_TYPE)
                 ->get();
 
             foreach ($records as $record) {
@@ -393,12 +400,9 @@ final class SeoOperationsService
         }
 
         if (in_array($typeFilter, ['all', 'guide'], true)) {
-            $records = CareerGuide::query()
-                ->withoutGlobalScopes()
-                ->where('org_id', 0)
+            $records = $this->scope->careerGuides($locale, $status)
                 ->with('seoMeta')
                 ->latest('updated_at')
-                ->limit(self::MAX_RECORDS_PER_CONTENT_TYPE)
                 ->get();
 
             foreach ($records as $record) {
@@ -407,12 +411,9 @@ final class SeoOperationsService
         }
 
         if (in_array($typeFilter, ['all', 'job'], true)) {
-            $records = CareerJob::query()
-                ->withoutGlobalScopes()
-                ->where('org_id', 0)
+            $records = $this->scope->careerJobs($locale, $status)
                 ->with('seoMeta')
                 ->latest('updated_at')
-                ->limit(self::MAX_RECORDS_PER_CONTENT_TYPE)
                 ->get();
 
             foreach ($records as $record) {
@@ -421,11 +422,18 @@ final class SeoOperationsService
         }
     }
 
+    /** @param list<int> $scopeOrgIds */
+    private function assertGlobalScope(array $scopeOrgIds): void
+    {
+        if ($scopeOrgIds !== [SeoContentScopeViewModel::GLOBAL_ORG_ID]) {
+            throw new InvalidArgumentException('SEO content scope must be the global org_id=0 authority.');
+        }
+    }
+
     /**
-     * @param  list<int>  $currentOrgIds
      * @return array{0:string,1:object|null}
      */
-    private function recordFromSelectionKey(string $selectionKey, array $currentOrgIds): array
+    private function recordFromSelectionKey(string $selectionKey): array
     {
         $type = Str::before($selectionKey, ':');
         $id = (int) Str::after($selectionKey, ':');
@@ -437,15 +445,15 @@ final class SeoOperationsService
         return match ($type) {
             'article' => [
                 'article',
-                Article::query()->whereIn('org_id', $currentOrgIds)->with('seoMeta')->find($id),
+                $this->scope->articles()->with('seoMeta')->find($id),
             ],
             'guide' => [
                 'guide',
-                CareerGuide::query()->withoutGlobalScopes()->where('org_id', 0)->with('seoMeta')->find($id),
+                $this->scope->careerGuides()->with('seoMeta')->find($id),
             ],
             'job' => [
                 'job',
-                CareerJob::query()->withoutGlobalScopes()->where('org_id', 0)->with('seoMeta')->find($id),
+                $this->scope->careerJobs()->with('seoMeta')->find($id),
             ],
             default => [$type, null],
         };
@@ -475,7 +483,7 @@ final class SeoOperationsService
             'type' => $type,
             'title' => trim((string) data_get($record, 'title', __('ops.custom_pages.common.values.untitled'))),
             'scope' => $type === 'article'
-                ? __('ops.custom_pages.editorial_operations.surfaces.current_org')
+                ? __('ops.custom_pages.seo_operations.scopes.global_articles')
                 : __('ops.custom_pages.common.values.global_content'),
             'status' => trim((string) data_get($record, 'status', 'draft')),
             'is_public' => (bool) data_get($record, 'is_public'),

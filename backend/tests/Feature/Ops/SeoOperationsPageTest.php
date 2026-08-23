@@ -62,7 +62,7 @@ final class SeoOperationsPageTest extends TestCase
         $otherOrg = $this->createOrganization('Other SEO Org');
 
         $articleReady = Article::query()->create([
-            'org_id' => (int) $selectedOrg->id,
+            'org_id' => 0,
             'slug' => 'seo-ready-article',
             'locale' => 'en',
             'title' => 'SEO Ready Article',
@@ -74,7 +74,7 @@ final class SeoOperationsPageTest extends TestCase
             'published_at' => Carbon::now()->subDay(),
         ]);
         ArticleSeoMeta::query()->create([
-            'org_id' => (int) $selectedOrg->id,
+            'org_id' => 0,
             'article_id' => (int) $articleReady->id,
             'locale' => 'en',
             'seo_title' => 'SEO Ready Article Title',
@@ -88,7 +88,7 @@ final class SeoOperationsPageTest extends TestCase
         ]);
 
         $articleGap = Article::query()->create([
-            'org_id' => (int) $selectedOrg->id,
+            'org_id' => 0,
             'slug' => 'seo-gap-article',
             'locale' => 'en',
             'title' => 'SEO Gap Article',
@@ -100,7 +100,7 @@ final class SeoOperationsPageTest extends TestCase
             'published_at' => Carbon::now()->subDay(),
         ]);
         ArticleSeoMeta::query()->create([
-            'org_id' => (int) $selectedOrg->id,
+            'org_id' => 0,
             'article_id' => (int) $articleGap->id,
             'locale' => 'en',
             'seo_title' => 'SEO Gap Article Title',
@@ -292,6 +292,9 @@ final class SeoOperationsPageTest extends TestCase
             ->assertSet('headlineFields.2.value', '5')
             ->assertSet('headlineFields.3.value', '3')
             ->assertSet('headlineFields.4.value', '3')
+            ->assertSet('headlineFields.0.scope', 'global_articles')
+            ->assertSet('headlineFields.0.source', 'primary.articles')
+            ->assertSet('headlineFields.0.freshness', 'fresh')
             ->assertSet('coverageFields.0.value', '50% (1/2)')
             ->assertSet('coverageFields.1.value', '50% (1/2)')
             ->assertSet('coverageFields.2.value', '50% (1/2)')
@@ -304,12 +307,20 @@ final class SeoOperationsPageTest extends TestCase
             ->assertCount('issueQueue', 3)
             ->assertSee('Published with discovery blockers')
             ->assertDontSee('Other Org SEO Article')
-            ->set('scopeFilter', 'current_org')
+            ->set('scopeFilter', 'global_articles')
             ->assertCount('issueQueue', 1)
-            ->set('scopeFilter', 'global')
+            ->set('scopeFilter', 'global_career')
             ->assertCount('issueQueue', 2)
             ->set('scopeFilter', 'combined')
             ->assertCount('issueQueue', 3)
+            ->set('localeFilter', 'zh-CN')
+            ->assertSet('scopeSummary.0.count', 0)
+            ->assertSet('scopeSummary.1.count', 0)
+            ->set('localeFilter', 'en')
+            ->set('statusFilter', 'draft')
+            ->assertSet('scopeSummary.0.count', 0)
+            ->assertSet('scopeSummary.1.count', 1)
+            ->set('statusFilter', 'all')
             ->set('activeWorkspace', 'performance')
             ->assertSee('No GSC rows are available for this window. No demo metrics are shown.')
             ->assertDontSee('12,840');
@@ -323,7 +334,7 @@ final class SeoOperationsPageTest extends TestCase
         $selectedOrg = $this->createOrganization('SEO Fix Org');
 
         $article = Article::query()->create([
-            'org_id' => (int) $selectedOrg->id,
+            'org_id' => 0,
             'slug' => 'fix-me-article',
             'locale' => 'en',
             'title' => 'Fix Me Article',
@@ -335,7 +346,7 @@ final class SeoOperationsPageTest extends TestCase
             'published_at' => Carbon::now()->subDay(),
         ]);
         ArticleSeoMeta::query()->create([
-            'org_id' => (int) $selectedOrg->id,
+            'org_id' => 0,
             'article_id' => (int) $article->id,
             'locale' => 'en',
             'seo_title' => '',
@@ -436,7 +447,7 @@ final class SeoOperationsPageTest extends TestCase
         $selectedOrg = $this->createOrganization('SEO Social Gap Org');
 
         $article = Article::query()->create([
-            'org_id' => (int) $selectedOrg->id,
+            'org_id' => 0,
             'slug' => 'social-gap-article',
             'locale' => 'en',
             'title' => 'Social Gap Article',
@@ -449,7 +460,7 @@ final class SeoOperationsPageTest extends TestCase
             'published_at' => Carbon::now()->subDay(),
         ]);
         ArticleSeoMeta::query()->create([
-            'org_id' => (int) $selectedOrg->id,
+            'org_id' => 0,
             'article_id' => (int) $article->id,
             'locale' => 'en',
             'seo_title' => 'Social Gap Article Title',
@@ -493,7 +504,7 @@ final class SeoOperationsPageTest extends TestCase
 
         foreach (range(1, SeoOperationsService::MAX_ISSUE_QUEUE_ITEMS + 10) as $index) {
             $article = Article::query()->create([
-                'org_id' => (int) $selectedOrg->id,
+                'org_id' => 0,
                 'slug' => 'seo-bound-article-'.$index,
                 'locale' => 'en',
                 'title' => 'SEO Bound Article '.$index,
@@ -505,7 +516,7 @@ final class SeoOperationsPageTest extends TestCase
                 'published_at' => Carbon::now()->subDay(),
             ]);
             ArticleSeoMeta::query()->create([
-                'org_id' => (int) $selectedOrg->id,
+                'org_id' => 0,
                 'article_id' => (int) $article->id,
                 'locale' => 'en',
                 'seo_title' => '',
@@ -519,9 +530,17 @@ final class SeoOperationsPageTest extends TestCase
             ]);
         }
 
-        $queue = app(SeoOperationsService::class)->buildIssueQueue([(int) $selectedOrg->id], 'article', 'all');
+        $queue = app(SeoOperationsService::class)->buildIssueQueue([0], 'article', 'all');
 
         $this->assertCount(SeoOperationsService::MAX_ISSUE_QUEUE_ITEMS, $queue['items']);
+    }
+
+    public function test_seo_operations_service_rejects_tenant_article_scope(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('global org_id=0 authority');
+
+        app(SeoOperationsService::class)->buildIssueQueue([42], 'article', 'all');
     }
 
     public function test_export_report_returns_real_csv_download_with_headers_and_content(): void
@@ -532,7 +551,7 @@ final class SeoOperationsPageTest extends TestCase
         $selectedOrg = $this->createOrganization('SEO Export Org');
 
         $article = Article::query()->create([
-            'org_id' => (int) $selectedOrg->id,
+            'org_id' => 0,
             'slug' => 'export-article',
             'locale' => 'en',
             'title' => '=HYPERLINK("https://example.invalid","x")',
@@ -546,7 +565,7 @@ final class SeoOperationsPageTest extends TestCase
         // Intentionally leave SEO meta gapped so the article surfaces in the
         // issue queue and its real title is exported.
         ArticleSeoMeta::query()->create([
-            'org_id' => (int) $selectedOrg->id,
+            'org_id' => 0,
             'article_id' => (int) $article->id,
             'locale' => 'en',
             'seo_title' => '',
@@ -584,7 +603,7 @@ final class SeoOperationsPageTest extends TestCase
         $body = (string) ob_get_clean();
 
         $this->assertStringStartsWith("\xEF\xBB\xBF", $body);
-        $this->assertStringContainsString('section,label,value,suffix,tone', $body);
+        $this->assertStringContainsString('section,label,value,suffix,tone,scope,source,collected_at,source_updated_at,freshness,locale_filter,status_filter', $body);
         $this->assertStringContainsString('issue_queue', $body);
         $this->assertStringContainsString("'=HYPERLINK", $body);
         $this->assertStringNotContainsString(',=HYPERLINK', $body);

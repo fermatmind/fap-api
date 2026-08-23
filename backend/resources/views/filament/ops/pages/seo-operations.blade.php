@@ -17,6 +17,19 @@
             'growth' => __('ops.custom_pages.seo_operations.filters.growth'),
         ];
 
+        $localeFilterOptions = [
+            'all' => __('ops.custom_pages.seo_operations.filters.all_locales'),
+            'en' => 'English',
+            'zh-CN' => '简体中文',
+        ];
+
+        $statusFilterOptions = [
+            'all' => __('ops.custom_pages.seo_operations.filters.all_statuses'),
+            'draft' => __('ops.status.draft'),
+            'scheduled' => __('ops.status.scheduled'),
+            'published' => __('ops.status.published'),
+        ];
+
         $bulkActionOptions = [
             'fill_metadata' => __('ops.custom_pages.seo_operations.filters.fill_metadata'),
             'sync_canonical' => __('ops.custom_pages.seo_operations.filters.sync_canonical'),
@@ -76,6 +89,22 @@
                     @endforeach
                 </select>
             </label>
+            <label class="ops-seo-commandbar__field" for="ops-seo-locale-filter">
+                <span>{{ __('ops.custom_pages.seo_operations.filters.locale') }}</span>
+                <select id="ops-seo-locale-filter" wire:model.live="localeFilter">
+                    @foreach ($localeFilterOptions as $value => $label)
+                        <option value="{{ $value }}">{{ $label }}</option>
+                    @endforeach
+                </select>
+            </label>
+            <label class="ops-seo-commandbar__field" for="ops-seo-status-filter">
+                <span>{{ __('ops.custom_pages.seo_operations.filters.status') }}</span>
+                <select id="ops-seo-status-filter" wire:model.live="statusFilter">
+                    @foreach ($statusFilterOptions as $value => $label)
+                        <option value="{{ $value }}">{{ $label }}</option>
+                    @endforeach
+                </select>
+            </label>
             @if (\App\Filament\Ops\Support\ContentAccess::canWrite())
                 <label class="ops-seo-commandbar__field" for="ops-seo-bulk-action">
                     <span>{{ __('ops.custom_pages.seo_operations.bulk_action') }}</span>
@@ -89,7 +118,7 @@
             <div class="ops-seo-commandbar__views">
                 <span>{{ __('ops.custom_pages.seo_operations.saved_views.label') }}</span>
                 <x-filament-ops::ops-saved-views
-                    :views="collect(['all', 'high_impressions_low_ctr', 'current_org_blockers', 'global_career_gaps'])->mapWithKeys(fn (string $view): array => [$view => __('ops.custom_pages.seo_operations.saved_views.'.$view)])->all()"
+                    :views="collect(['all', 'high_impressions_low_ctr', 'global_article_blockers', 'global_career_gaps'])->mapWithKeys(fn (string $view): array => [$view => __('ops.custom_pages.seo_operations.saved_views.'.$view)])->all()"
                     :active="$savedView"
                     :label="__('ops.custom_pages.seo_operations.saved_views.label')"
                 />
@@ -121,6 +150,7 @@
                     <button type="button" wire:click="$set('scopeFilter', '{{ $scope['key'] }}')" class="ops-metric" aria-pressed="{{ $scopeFilter === $scope['key'] ? 'true' : 'false' }}">
                         <span class="ops-metric__label">{{ $scope['label'] }}</span>
                         <span class="ops-metric__value tnum">{{ $scope['count'] }}</span>
+                        <small>{{ $scope['source'] }} · {{ $scope['freshness'] }} · {{ $scope['collected_at'] }}</small>
                     </button>
                 @endforeach
             </div>

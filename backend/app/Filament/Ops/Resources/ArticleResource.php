@@ -17,6 +17,7 @@ use App\Models\ArticleTranslationRevision;
 use App\Models\MediaAsset;
 use App\Services\Cms\ArticleTranslationRevisionWorkspace;
 use App\Services\Cms\MediaVariantGenerator;
+use App\Services\Ops\SeoContentScopeViewModel;
 use App\Support\PublicMediaUrlGuard;
 use App\Support\SchemaBaseline;
 use Filament\Forms;
@@ -584,14 +585,12 @@ class ArticleResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()
-            ->withoutGlobalScopes()
-            ->where('org_id', self::publicArticleOrgId());
+        return app(SeoContentScopeViewModel::class)->articles();
     }
 
     private static function publicArticleOrgId(): int
     {
-        return 0;
+        return SeoContentScopeViewModel::GLOBAL_ORG_ID;
     }
 
     /**

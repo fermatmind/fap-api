@@ -10,10 +10,10 @@ use App\Models\CareerGuide;
 use App\Models\CareerJob;
 use App\Models\OpsDeployEvent;
 use App\Services\Audit\AuditLogger;
+use App\Services\Ops\SeoContentScopeViewModel;
 use App\Services\Ops\SeoOperationsService;
 use App\Services\SeoIntel\OpsDashboard\SeoDashboardApiReadService;
 use App\Services\SeoIntel\OpsDashboard\SeoIssueWorkflowService;
-use App\Support\OrgContext;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -22,8 +22,6 @@ use Throwable;
 
 class SeoOperationsPage extends Page
 {
-    public const MAX_RECORDS_PER_CONTENT_TYPE = 500;
-
     public const ISSUE_QUEUE_PER_PAGE = 25;
 
     protected static ?string $navigationIcon = 'heroicon-o-globe-alt';
@@ -41,6 +39,10 @@ class SeoOperationsPage extends Page
     public string $typeFilter = 'all';
 
     public string $issueFilter = 'all';
+
+    public string $localeFilter = 'all';
+
+    public string $statusFilter = 'all';
 
     public string $scopeFilter = 'combined';
 
@@ -134,6 +136,20 @@ class SeoOperationsPage extends Page
         $this->refreshDashboard(app(SeoOperationsService::class));
     }
 
+    public function updatedLocaleFilter(): void
+    {
+        $this->issueQueuePage = 1;
+        $this->selectedTargets = [];
+        $this->refreshDashboard(app(SeoOperationsService::class));
+    }
+
+    public function updatedStatusFilter(): void
+    {
+        $this->issueQueuePage = 1;
+        $this->selectedTargets = [];
+        $this->refreshDashboard(app(SeoOperationsService::class));
+    }
+
     public function updatedScopeFilter(): void
     {
         $this->issueQueuePage = 1;
@@ -175,9 +191,9 @@ class SeoOperationsPage extends Page
 
         if ($view === 'high_impressions_low_ctr') {
             $this->activeWorkspace = 'opportunities';
-        } elseif ($view === 'current_org_blockers') {
+        } elseif ($view === 'global_article_blockers') {
             $this->activeWorkspace = 'execution';
-            $this->scopeFilter = 'current_org';
+            $this->scopeFilter = SeoContentScopeViewModel::SCOPE_GLOBAL_ARTICLES;
             $this->issueFilter = SeoOperationsService::ISSUE_GROWTH;
         } elseif ($view === 'global_career_gaps') {
             $this->activeWorkspace = 'execution';
@@ -185,7 +201,7 @@ class SeoOperationsPage extends Page
             $this->issueFilter = 'all';
         } else {
             $this->activeWorkspace = 'overview';
-            $this->scopeFilter = 'combined';
+            $this->scopeFilter = SeoContentScopeViewModel::SCOPE_COMBINED;
             $this->issueFilter = 'all';
         }
 
@@ -264,7 +280,7 @@ class SeoOperationsPage extends Page
             return;
         }
 
-        $result = $service->applyBulkAction($this->selectedTargets, $this->bulkAction, $this->currentOrgIds());
+        $result = $service->applyBulkAction($this->selectedTargets, $this->bulkAction, $this->seoAuthorityOrgIds());
         $updatedCount = (int) ($result['updated_count'] ?? 0);
 
         $audit->log(
@@ -308,7 +324,9 @@ class SeoOperationsPage extends Page
             $out = fopen('php://output', 'w');
 
             fwrite($out, "\xEF\xBB\xBF");
-            fputcsv($out, array_map($this->spreadsheetSafeCell(...), ['section', 'label', 'value', 'suffix', 'tone']));
+            fputcsv($out, array_map($this->spreadsheetSafeCell(...), [
+                'section', 'label', 'value', 'suffix', 'tone', 'scope', 'source', 'collected_at', 'source_updated_at', 'freshness', 'locale_filter', 'status_filter',
+            ]));
 
             foreach (['healthBand' => $this->healthBand, 'headlineFields' => $this->headlineFields, 'coverageFields' => $this->coverageFields, 'growthFields' => $this->growthFields] as $section => $rows) {
                 foreach ($rows as $row) {
@@ -318,6 +336,13 @@ class SeoOperationsPage extends Page
                         (string) ($row['value'] ?? ''),
                         (string) ($row['suffix'] ?? ''),
                         (string) ($row['tone'] ?? ''),
+                        (string) ($row['scope'] ?? ''),
+                        (string) ($row['source'] ?? ''),
+                        (string) ($row['collected_at'] ?? ''),
+                        (string) ($row['source_updated_at'] ?? ''),
+                        (string) ($row['freshness'] ?? ''),
+                        $this->localeFilter,
+                        $this->statusFilter,
                     ]));
                 }
             }
@@ -380,40 +405,44 @@ class SeoOperationsPage extends Page
     /**
      * @return array<int, int>
      */
-    private function currentOrgIds(): array
+    private function seoAuthorityOrgIds(): array
     {
-        $orgId = max(0, (int) app(OrgContext::class)->orgId());
-
-        return $orgId > 0 ? [$orgId] : [];
+        return [SeoContentScopeViewModel::GLOBAL_ORG_ID];
     }
 
     private function refreshDashboard(SeoOperationsService $service): void
     {
-        $currentOrgIds = $this->currentOrgIds();
+        $seoAuthorityOrgIds = $this->seoAuthorityOrgIds();
+        $scope = app(SeoContentScopeViewModel::class);
+        $inventory = $scope->inventory($this->localeFilter, $this->statusFilter);
 
         /** @var Collection<int, Article> $articles */
-        $articles = Article::query()
-            ->whereIn('org_id', $currentOrgIds)
-            ->with('seoMeta')
-            ->latest('updated_at')
-            ->limit(self::MAX_RECORDS_PER_CONTENT_TYPE)
-            ->get();
+        $articles = $inventory['articles'];
         /** @var Collection<int, CareerGuide> $guides */
-        $guides = CareerGuide::query()
-            ->withoutGlobalScopes()
-            ->where('org_id', 0)
-            ->with('seoMeta')
-            ->latest('updated_at')
-            ->limit(self::MAX_RECORDS_PER_CONTENT_TYPE)
-            ->get();
+        $guides = $inventory['guides'];
         /** @var Collection<int, CareerJob> $jobs */
-        $jobs = CareerJob::query()
-            ->withoutGlobalScopes()
-            ->where('org_id', 0)
-            ->with('seoMeta')
-            ->latest('updated_at')
-            ->limit(self::MAX_RECORDS_PER_CONTENT_TYPE)
-            ->get();
+        $jobs = $inventory['jobs'];
+
+        $collectedAt = now();
+        $articleContract = $scope->metricContract(
+            SeoContentScopeViewModel::SCOPE_GLOBAL_ARTICLES,
+            SeoContentScopeViewModel::SOURCE_ARTICLES,
+            $articles,
+            $collectedAt,
+        );
+        $careerRecords = $guides->concat($jobs);
+        $careerContract = $scope->metricContract(
+            SeoContentScopeViewModel::SCOPE_GLOBAL_CAREER,
+            SeoContentScopeViewModel::SOURCE_CAREER_GUIDES.','.SeoContentScopeViewModel::SOURCE_CAREER_JOBS,
+            $careerRecords,
+            $collectedAt,
+        );
+        $combinedContract = $scope->metricContract(
+            SeoContentScopeViewModel::SCOPE_COMBINED,
+            SeoContentScopeViewModel::SOURCE_ARTICLES.','.SeoContentScopeViewModel::SOURCE_CAREER_GUIDES.','.SeoContentScopeViewModel::SOURCE_CAREER_JOBS,
+            $articles->concat($careerRecords),
+            $collectedAt,
+        );
 
         $articleTotal = $articles->count();
         $guideTotal = $guides->count();
@@ -487,6 +516,9 @@ class SeoOperationsPage extends Page
                 'hint' => __('ops.custom_pages.seo_operations.fields.attention_queue_hint'),
             ],
         ];
+        $this->headlineFields = $this->annotateMetrics($this->headlineFields, [
+            $articleContract, $careerContract, $combinedContract, $combinedContract, $combinedContract,
+        ]);
 
         $this->coverageFields = [
             [
@@ -517,6 +549,9 @@ class SeoOperationsPage extends Page
                 'hint' => __('ops.custom_pages.seo_operations.fields.robots_gaps_hint'),
             ],
         ];
+        $this->coverageFields = $this->annotateMetrics($this->coverageFields, [
+            $articleContract, $articleContract, $careerContract, $careerContract, $combinedContract,
+        ]);
 
         $this->growthFields = [
             [
@@ -540,13 +575,14 @@ class SeoOperationsPage extends Page
                 'hint' => __('ops.custom_pages.seo_operations.fields.growth_ratio_hint'),
             ],
         ];
+        $this->growthFields = $this->annotateMetrics($this->growthFields, array_fill(0, count($this->growthFields), $combinedContract));
 
         $this->attentionCards = [
             $this->attentionCard(
                 __('ops.custom_pages.seo_operations.fields.article_gaps'),
                 __('ops.custom_pages.seo_operations.fields.article_gaps_desc'),
                 $articleTotal - $articleSeoReady,
-                __('ops.custom_pages.editorial_operations.surfaces.current_org'),
+                __('ops.custom_pages.seo_operations.scopes.global_articles'),
                 $this->latestIssueTitle($service, 'article', $articles)
             ),
             $this->attentionCard(
@@ -574,11 +610,18 @@ class SeoOperationsPage extends Page
             ],
         ];
 
-        $issueQueue = $service->buildIssueQueue($currentOrgIds, $this->typeFilter, $this->issueFilter);
+        $issueQueue = $service->buildIssueQueue(
+            $seoAuthorityOrgIds,
+            $this->typeFilter,
+            $this->issueFilter,
+            $this->localeFilter,
+            $this->statusFilter,
+            null,
+        );
         $this->issueQueue = $issueQueue['items'] ?? [];
-        if ($this->scopeFilter === 'current_org') {
+        if ($this->scopeFilter === SeoContentScopeViewModel::SCOPE_GLOBAL_ARTICLES) {
             $this->issueQueue = array_values(array_filter($this->issueQueue, static fn (array $item): bool => ($item['type'] ?? null) === 'article'));
-        } elseif ($this->scopeFilter === 'global') {
+        } elseif ($this->scopeFilter === SeoContentScopeViewModel::SCOPE_GLOBAL_CAREER) {
             $this->issueQueue = array_values(array_filter($this->issueQueue, static fn (array $item): bool => in_array(($item['type'] ?? null), ['guide', 'job'], true)));
         }
         $this->issueQueueElapsedMs = (int) ($issueQueue['elapsed_ms'] ?? 0);
@@ -616,12 +659,29 @@ class SeoOperationsPage extends Page
                 'tone' => 'info',
             ],
         ];
+        $this->healthBand = $this->annotateMetrics($this->healthBand, [
+            $articleContract, $careerContract, $combinedContract, $combinedContract,
+        ]);
 
         $this->scopeSummary = [
-            ['key' => 'current_org', 'label' => __('ops.custom_pages.seo_operations.scopes.current_org_articles'), 'count' => $articleTotal],
-            ['key' => 'global', 'label' => __('ops.custom_pages.seo_operations.scopes.global_career'), 'count' => $careerTotal],
-            ['key' => 'combined', 'label' => __('ops.custom_pages.seo_operations.scopes.combined'), 'count' => $totalInventory],
+            array_merge(['key' => SeoContentScopeViewModel::SCOPE_GLOBAL_ARTICLES, 'label' => __('ops.custom_pages.seo_operations.scopes.global_articles'), 'count' => $articleTotal], $articleContract),
+            array_merge(['key' => SeoContentScopeViewModel::SCOPE_GLOBAL_CAREER, 'label' => __('ops.custom_pages.seo_operations.scopes.global_career'), 'count' => $careerTotal], $careerContract),
+            array_merge(['key' => SeoContentScopeViewModel::SCOPE_COMBINED, 'label' => __('ops.custom_pages.seo_operations.scopes.combined'), 'count' => $totalInventory], $combinedContract),
         ];
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $rows
+     * @param  list<array<string,mixed>>  $contracts
+     * @return list<array<string,mixed>>
+     */
+    private function annotateMetrics(array $rows, array $contracts): array
+    {
+        return array_values(array_map(
+            static fn (array $row, int $index): array => array_merge($row, $contracts[$index] ?? []),
+            $rows,
+            array_keys($rows),
+        ));
     }
 
     private function refreshSeoIntel(): void
