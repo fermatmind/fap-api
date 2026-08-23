@@ -11,7 +11,7 @@ use JsonException;
 
 final class CareerPresentationV1Compiler
 {
-    public const VERSION = 'career.presentation_v1.compiler.v4';
+    public const VERSION = 'career.presentation_v1.compiler.v5';
 
     /** @var array<string,array{label:string,source_field:string}> */
     private const BLS_STATS = [
@@ -148,6 +148,11 @@ final class CareerPresentationV1Compiler
             'source_aggregate_sha256' => $sourceBefore['aggregate_sha256'],
             'field_coverage_sha256' => CareerCurrentAuthorityPackage::hashValue($coverage),
             'source_registry' => $baseline['manifest']['presentation_v1']['source_registry'],
+            'related_next_pages' => [
+                'title_zh_authority' => 'immutable_identity.title_zh',
+                'maximum_links' => 12,
+                'runtime_missing_links_policy' => 'preserve_existing_surface',
+            ],
             'zh_presentation_count' => count($candidateRows),
         ];
         $manifest['supporting_evidence_v1'] = [

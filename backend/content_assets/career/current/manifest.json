@@ -59,13 +59,18 @@
     }
   ],
   "presentation_v1": {
-    "compiler_version": "career.presentation_v1.compiler.v4",
+    "compiler_version": "career.presentation_v1.compiler.v5",
     "contract_version": "career.detail.presentation.v1",
     "design_authority": {
       "id": "accountants-career-page-v1.2",
       "sha256": "85c71abac0180a6807222b297e66b0dd611ca79a5cc4bd17db5da416459eafe7"
     },
     "field_coverage_sha256": "f7431782f744305d7b6927beec0c9908a60fa2ace955e9def632e7f57f64e29d",
+    "related_next_pages": {
+      "maximum_links": 12,
+      "runtime_missing_links_policy": "preserve_existing_surface",
+      "title_zh_authority": "immutable_identity.title_zh"
+    },
     "source_aggregate_sha256": "58503fb4f5b565d50c0bcb6e57632c27282e6e58f625ec5a2f63357e08dda186",
     "source_registry": {
       "bls_projection_count": 5,

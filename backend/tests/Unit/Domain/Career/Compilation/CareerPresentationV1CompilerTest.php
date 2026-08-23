@@ -24,6 +24,11 @@ final class CareerPresentationV1CompilerTest extends TestCase
         self::assertCount(1046, $authority['rows']);
         self::assertSame(2092, $authority['summary']['locale_page_count']);
         self::assertSame(26, $authority['summary']['components_per_page']);
+        self::assertSame([
+            'maximum_links' => 12,
+            'runtime_missing_links_policy' => 'preserve_existing_surface',
+            'title_zh_authority' => 'immutable_identity.title_zh',
+        ], data_get($authority, 'manifest.presentation_v1.related_next_pages'));
         foreach ($authority['rows'] as $row) {
             $presentation = $row['metadata_json']['presentation_v1']['zh'] ?? null;
             self::assertIsArray($presentation);
