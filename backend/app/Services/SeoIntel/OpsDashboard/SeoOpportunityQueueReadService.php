@@ -6,6 +6,8 @@ namespace App\Services\SeoIntel\OpsDashboard;
 
 use App\Services\SeoIntel\GscDataQualityGate;
 use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueEligibilityEvaluator;
+use Carbon\CarbonImmutable;
+use Illuminate\Support\Collection;
 
 final class SeoOpportunityQueueReadService extends AbstractSeoDashboardReadService
 {
@@ -25,19 +27,30 @@ final class SeoOpportunityQueueReadService extends AbstractSeoDashboardReadServi
         $limit = max(1, min($limit, 100));
         $rows = $this->gscRows();
         $qualityGate = $this->dataQualityGate->evaluate($rows);
+        $eligible = (bool) ($qualityGate['opportunity_queue_eligible'] ?? false);
+        $candidates = $eligible ? $this->candidateRows($rows) : [];
 
         return [
             'schema_version' => 'seo-opportunity-queue-readonly.v1',
             'mode' => 'read_only',
+            'state' => ! $eligible ? ($rows === [] ? 'disconnected' : 'quality_failed') : ($candidates === [] ? 'empty' : 'connected'),
             'source_gate' => $qualityGate,
-            'total_count' => $qualityGate['opportunity_queue_eligible'] ? count($this->candidateRows($rows, $limit)) : 0,
-            'recent_rows' => $qualityGate['opportunity_queue_eligible'] ? $this->candidateRows($rows, $limit) : [],
+            'total_count' => count($candidates),
+            'recent_rows' => array_slice($candidates, 0, $limit),
             'scoring_contract' => [
                 'inputs' => ['seo_gsc_daily', 'seo_urls', 'gsc_data_quality_gate'],
                 'min_impressions' => 50,
                 'max_ctr_ppm' => 10000,
-                'position_milli_window' => [8000, 20000],
+                'position_milli_window' => [4000, 20000],
                 'brand_query_allowed' => false,
+                'types' => [
+                    'high_impressions_low_ctr',
+                    'ranking_4_20',
+                    'content_decay',
+                    'keyword_cannibalization',
+                    'no_content_match',
+                ],
+                'post_publish_data_blindspot' => 'withheld_without_real_query_page_evidence',
             ],
             'boundaries' => [
                 'cms_draft_allowed' => false,
@@ -74,16 +87,21 @@ final class SeoOpportunityQueueReadService extends AbstractSeoDashboardReadServi
             ])
             ->where('seo_gsc_daily.source_engine', 'google')
             ->orderByDesc('seo_gsc_daily.report_date')
-            ->limit(500)
+            ->limit(5000)
             ->get();
         $urlTruthByHash = $this->publicUrlTruthByHash(
             $rows->pluck('canonical_url_hash')->filter()->map(static fn (mixed $hash): string => (string) $hash)->all()
         );
+        $urlTruthHashes = $this->table('seo_urls')
+            ->whereIn('canonical_url_hash', $rows->pluck('canonical_url_hash')->filter()->unique()->values()->all())
+            ->pluck('canonical_url_hash')
+            ->mapWithKeys(static fn (mixed $hash): array => [(string) $hash => true]);
 
         return $rows->map(fn (object $row): array => [
             'report_date' => (string) $row->report_date,
             'canonical_url_hash' => (string) $row->canonical_url_hash,
             'canonical_path' => $urlTruthByHash[(string) $row->canonical_url_hash] ?? null,
+            'url_truth_exists' => (bool) ($urlTruthHashes[(string) $row->canonical_url_hash] ?? false),
             'query_hash' => (string) $row->query_hash,
             'query_display_masked' => is_string($row->query_display_masked ?? null) ? $row->query_display_masked : null,
             'locale' => is_string($row->locale ?? null) ? $row->locale : null,
@@ -139,59 +157,130 @@ final class SeoOpportunityQueueReadService extends AbstractSeoDashboardReadServi
      * @param  list<array<string, mixed>>  $rows
      * @return list<array<string, mixed>>
      */
-    private function candidateRows(array $rows, int $limit): array
+    private function candidateRows(array $rows): array
     {
-        $candidates = array_values(array_filter($rows, static function (array $row): bool {
-            $impressions = (int) ($row['impressions'] ?? 0);
-            $clicks = (int) ($row['clicks'] ?? 0);
-            $ctrPpm = $row['ctr_ppm'] === null ? ($impressions > 0 ? (int) floor(($clicks / $impressions) * 1_000_000) : null) : (int) $row['ctr_ppm'];
-            $positionMilli = $row['average_position_milli'] === null ? null : (int) $row['average_position_milli'];
+        $collection = collect($rows)
+            ->filter(static fn (array $row): bool => ! (bool) ($row['is_brand_query'] ?? false))
+            ->filter(static fn (array $row): bool => ($row['query_type'] ?? 'unknown') === 'non_brand');
+        $pathsPerQuery = $collection
+            ->filter(static fn (array $row): bool => ! (bool) ($row['url_truth_exists'] ?? false) || is_string($row['canonical_path'] ?? null))
+            ->groupBy('query_hash')
+            ->map(static fn (Collection $queryRows): int => $queryRows->pluck('canonical_url_hash')->filter()->unique()->count());
+        $latestDate = $collection->max('report_date');
+        $recentBoundary = is_string($latestDate) ? CarbonImmutable::parse($latestDate)->subDays(13) : null;
+        $priorBoundary = $recentBoundary?->subDays(14);
+        $candidates = [];
 
-            return $impressions >= 50
-                && $ctrPpm !== null
-                && $ctrPpm <= 10000
-                && $positionMilli !== null
-                && $positionMilli >= 8000
-                && $positionMilli <= 20000
-                && ! (bool) ($row['is_brand_query'] ?? false)
-                && ($row['query_type'] ?? 'unknown') === 'non_brand'
-                && is_string($row['canonical_path'] ?? null);
-        }));
+        foreach ($collection->groupBy(fn (array $row): string => ($row['query_hash'] ?? '').'|'.($row['canonical_url_hash'] ?? '')) as $group) {
+            $aggregate = $this->aggregateGroup($group, $recentBoundary, $priorBoundary);
+            if ((bool) ($aggregate['url_truth_exists'] ?? false) && ! is_string($aggregate['canonical_path'] ?? null)) {
+                continue;
+            }
+            $types = [];
+            if ($aggregate['impressions'] >= 50 && $aggregate['ctr_ppm'] !== null && $aggregate['ctr_ppm'] <= 10000) {
+                $types[] = 'high_impressions_low_ctr';
+            }
+            if ($aggregate['average_position_milli'] !== null && $aggregate['average_position_milli'] >= 4000 && $aggregate['average_position_milli'] <= 20000) {
+                $types[] = 'ranking_4_20';
+            }
+            if ($aggregate['prior_impressions'] >= 50 && $aggregate['recent_impressions'] <= (int) floor($aggregate['prior_impressions'] * 0.7)) {
+                $types[] = 'content_decay';
+            }
+            if (($pathsPerQuery[(string) $aggregate['query_hash']] ?? 0) > 1) {
+                $types[] = 'keyword_cannibalization';
+            }
+            if (! (bool) ($aggregate['url_truth_exists'] ?? false)) {
+                $types[] = 'no_content_match';
+            }
 
-        usort($candidates, static function (array $left, array $right): int {
-            $leftScore = ((int) $left['impressions']) - ((int) ($left['ctr_ppm'] ?? 0) / 1000);
-            $rightScore = ((int) $right['impressions']) - ((int) ($right['ctr_ppm'] ?? 0) / 1000);
+            $types = array_values(array_unique($types));
+            if ($types !== []) {
+                $candidates[] = $this->candidate($types, $aggregate);
+            }
+        }
 
-            return $rightScore <=> $leftScore;
+        usort($candidates, static fn (array $left, array $right): int => data_get($right, 'priority.score', 0) <=> data_get($left, 'priority.score', 0));
+
+        return $candidates;
+    }
+
+    /** @param Collection<int,array<string,mixed>> $group @return array<string,mixed> */
+    private function aggregateGroup(Collection $group, ?CarbonImmutable $recentBoundary, ?CarbonImmutable $priorBoundary): array
+    {
+        $first = $group->sortByDesc('report_date')->first();
+        $impressions = (int) $group->sum('impressions');
+        $clicks = (int) $group->sum('clicks');
+        $weightedPosition = (int) $group->sum(static fn (array $row): int => (int) ($row['average_position_milli'] ?? 0) * max(1, (int) ($row['impressions'] ?? 0)));
+        $positionWeight = (int) $group->sum(static fn (array $row): int => $row['average_position_milli'] === null ? 0 : max(1, (int) ($row['impressions'] ?? 0)));
+        $recent = $recentBoundary === null ? collect() : $group->filter(static fn (array $row): bool => CarbonImmutable::parse((string) $row['report_date'])->gte($recentBoundary));
+        $prior = $priorBoundary === null || $recentBoundary === null ? collect() : $group->filter(static function (array $row) use ($priorBoundary, $recentBoundary): bool {
+            $date = CarbonImmutable::parse((string) $row['report_date']);
+
+            return $date->gte($priorBoundary) && $date->lt($recentBoundary);
         });
 
-        return array_slice(array_map(fn (array $row): array => [
-            'opportunity_id' => hash('sha256', implode('|', [
-                (string) $row['report_date'],
-                (string) $row['canonical_url_hash'],
-                (string) $row['query_hash'],
-            ])),
+        return [
+            ...$first,
+            'clicks' => $clicks,
+            'impressions' => $impressions,
+            'ctr_ppm' => $impressions > 0 ? (int) floor(($clicks / $impressions) * 1_000_000) : null,
+            'average_position_milli' => $positionWeight > 0 ? (int) round($weightedPosition / $positionWeight) : null,
+            'recent_impressions' => (int) $recent->sum('impressions'),
+            'prior_impressions' => (int) $prior->sum('impressions'),
+            'first_report_date' => (string) $group->min('report_date'),
+            'last_report_date' => (string) $group->max('report_date'),
+        ];
+    }
+
+    /** @param list<string> $types @param array<string,mixed> $row @return array<string,mixed> */
+    private function candidate(array $types, array $row): array
+    {
+        $actions = [
+            'high_impressions_low_ctr' => 'review_title_snippet_and_search_intent',
+            'ranking_4_20' => 'review_content_depth_and_internal_links',
+            'content_decay' => 'review_content_freshness_and_competing_results',
+            'keyword_cannibalization' => 'review_query_ownership_and_canonical_target',
+            'no_content_match' => 'map_query_page_to_url_truth_before_content_action',
+        ];
+        $type = $types[0];
+        $recommendedActions = array_values(array_map(static fn (string $opportunityType): string => $actions[$opportunityType], $types));
+        $impact = (int) $row['impressions'];
+        $decayImpact = max(0, (int) $row['prior_impressions'] - (int) $row['recent_impressions']);
+
+        return [
+            'opportunity_id' => hash('sha256', implode('|', [(string) $row['canonical_url_hash'], (string) $row['query_hash']])),
+            'opportunity_type' => $type,
+            'opportunity_types' => $types,
             'canonical_path' => $row['canonical_path'],
             'canonical_url_hash' => (string) $row['canonical_url_hash'],
             'query_hash' => (string) $row['query_hash'],
             'query_display_masked' => $row['query_display_masked'],
             'locale' => $row['locale'],
-            'source_signal' => 'gsc:google',
-            'report_date' => (string) $row['report_date'],
+            'source_signal' => 'gsc:google:search_analytics_readonly',
+            'report_date' => (string) $row['last_report_date'],
+            'evidence' => [
+                'query_page_bound' => true,
+                'first_report_date' => $row['first_report_date'],
+                'last_report_date' => $row['last_report_date'],
+                'recent_impressions' => $row['recent_impressions'],
+                'prior_impressions' => $row['prior_impressions'],
+            ],
             'metrics' => [
                 'clicks' => (int) $row['clicks'],
-                'impressions' => (int) $row['impressions'],
+                'impressions' => $impact,
                 'ctr_ppm' => $row['ctr_ppm'],
                 'average_position_milli' => $row['average_position_milli'],
             ],
             'priority' => [
-                'impact' => (int) $row['impressions'],
-                'effort' => ((int) ($row['average_position_milli'] ?? 0)) <= 12000 ? 'low' : 'medium',
+                'impact' => $type === 'content_decay' ? $decayImpact : $impact,
+                'effort' => in_array($type, ['high_impressions_low_ctr', 'ranking_4_20'], true) ? 'low' : 'medium',
                 'confidence' => 'high',
-                'score' => max(0, (int) $row['impressions'] - (int) (($row['ctr_ppm'] ?? 0) / 1000)),
+                'score' => max(0, ($type === 'content_decay' ? $decayImpact : $impact) - (int) (($row['ctr_ppm'] ?? 0) / 1000)),
             ],
-            'recommended_next_step' => 'human_review_required_before_cms_or_search_action',
+            'recommended_next_step' => $recommendedActions[0],
+            'recommended_actions' => $recommendedActions,
+            'human_review_boundary' => 'human_review_required_before_cms_or_search_action',
             'allowed_action' => 'read_only_review',
-        ], $candidates), 0, $limit);
+        ];
     }
 }

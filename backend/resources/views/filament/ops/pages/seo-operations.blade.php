@@ -236,13 +236,20 @@
 
         @if ($activeWorkspace === 'opportunities')
             <x-filament-ops::ops-section :title="__('ops.custom_pages.seo_operations.opportunities.title')" :description="__('ops.custom_pages.seo_operations.opportunities.description')">
+                @if (($opportunityReadModel['state'] ?? 'unavailable') !== 'connected' && ($opportunityReadModel['state'] ?? '') !== 'empty')
+                    <x-filament-ops::ops-not-connected
+                        :title="__('ops.custom_pages.seo_operations.opportunities.title')"
+                        :description="__('ops.custom_pages.seo_operations.opportunities.states.'.($opportunityReadModel['state'] ?? 'unavailable'))"
+                    />
+                @else
                 <div class="ops-table-shell"><table class="ops-table"><thead><tr><th>{{ __('ops.custom_pages.seo_operations.table.query') }}</th><th>{{ __('ops.custom_pages.seo_operations.table.page') }}</th><th>{{ __('ops.custom_pages.common.table.scope') }}</th><th>{{ __('ops.custom_pages.seo_operations.performance.impressions') }}</th><th>{{ __('ops.custom_pages.seo_operations.performance.ctr') }}</th><th>{{ __('ops.custom_pages.seo_operations.performance.position') }}</th><th>{{ __('ops.custom_pages.seo_operations.opportunities.priority_factors') }}</th><th>{{ __('ops.custom_pages.common.table.actions') }}</th></tr></thead><tbody>
                     @forelse ($opportunityQueue as $row)
-                        <tr><td>{{ $row['query_display_masked'] ?? '-' }}</td><td>{{ $row['canonical_path'] ?? '-' }}</td><td>{{ $row['locale'] ?? '-' }}</td><td>{{ data_get($row, 'metrics.impressions', 0) }}</td><td>{{ data_get($row, 'metrics.ctr_ppm') === null ? '-' : round(data_get($row, 'metrics.ctr_ppm') / 10000, 2).'%' }}</td><td>{{ data_get($row, 'metrics.average_position_milli') === null ? '-' : round(data_get($row, 'metrics.average_position_milli') / 1000, 2) }}</td><td>{{ data_get($row, 'priority.impact', 0) }} / {{ data_get($row, 'priority.effort', '-') }} / {{ data_get($row, 'priority.confidence', '-') }}</td><td>{{ $row['recommended_next_step'] ?? '-' }}</td></tr>
+                        <tr><td>{{ $row['query_display_masked'] ?? '-' }}<br><span class="ops-control-hint">{{ collect($row['opportunity_types'] ?? ['unknown'])->map(fn ($type) => __('ops.custom_pages.seo_operations.opportunities.types.'.$type))->join(' · ') }}</span></td><td>{{ $row['canonical_path'] ?? __('ops.custom_pages.seo_operations.opportunities.unmapped') }}</td><td>{{ $row['locale'] ?? '-' }}</td><td>{{ data_get($row, 'metrics.impressions') ?? '-' }}</td><td>{{ data_get($row, 'metrics.ctr_ppm') === null ? '-' : round(data_get($row, 'metrics.ctr_ppm') / 10000, 2).'%' }}</td><td>{{ data_get($row, 'metrics.average_position_milli') === null ? '-' : round(data_get($row, 'metrics.average_position_milli') / 1000, 2) }}</td><td>{{ data_get($row, 'priority.impact', '-') }} / {{ data_get($row, 'priority.effort', '-') }} / {{ data_get($row, 'priority.confidence', '-') }}</td><td>{{ collect($row['recommended_actions'] ?? ['human_review'])->map(fn ($action) => __('ops.custom_pages.seo_operations.opportunities.actions.'.$action))->join(' · ') }}<br><span class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.opportunities.human_review') }}</span></td></tr>
                     @empty
                         <tr><td colspan="8">{{ __('ops.custom_pages.seo_operations.opportunities.empty') }}</td></tr>
                     @endforelse
                 </tbody></table></div>
+                @endif
             </x-filament-ops::ops-section>
         @endif
 
@@ -337,6 +344,31 @@
         @endif
 
         @if ($activeWorkspace === 'technical')
+        <x-filament-ops::ops-section
+            :title="__('ops.custom_pages.seo_operations.technical.title')"
+            :description="__('ops.custom_pages.seo_operations.technical.description')"
+        >
+            @if (($technicalAudit['state'] ?? 'unavailable') === 'unavailable')
+                <x-filament-ops::ops-not-connected :title="__('ops.custom_pages.seo_operations.technical.title')" :description="__('ops.custom_pages.seo_operations.technical.unavailable')" />
+            @else
+                <div class="ops-seo-source-strip">
+                    @foreach (($technicalAudit['sources'] ?? []) as $source => $sourceState)
+                        <div @class(['ops-seo-source', 'ops-seo-source--connected' => ($sourceState['state'] ?? '') === 'connected'])>
+                            <span class="ops-seo-source__signal" aria-hidden="true"></span>
+                            <div><strong>{{ __('ops.custom_pages.seo_operations.technical.sources.'.$source) }}</strong><p>{{ __('ops.custom_pages.seo_operations.technical.states.'.($sourceState['state'] ?? 'disconnected')) }}</p></div>
+                        </div>
+                    @endforeach
+                </div>
+                <div class="ops-table-shell"><table class="ops-table"><thead><tr><th>{{ __('ops.custom_pages.seo_operations.technical.check') }}</th><th>{{ __('ops.custom_pages.seo_operations.technical.scope') }}</th><th>{{ __('ops.custom_pages.seo_operations.table.page') }}</th><th>{{ __('ops.custom_pages.seo_operations.technical.root_cause') }}</th><th>{{ __('ops.custom_pages.seo_operations.technical.evidence') }}</th><th>{{ __('ops.custom_pages.common.table.actions') }}</th></tr></thead><tbody>
+                    @forelse (($technicalAudit['rows'] ?? []) as $row)
+                        <tr><td>{{ __('ops.custom_pages.seo_operations.technical.checks.'.($row['check'] ?? 'cms_indexability')) }}</td><td>{{ __('ops.custom_pages.seo_operations.technical.scopes.'.($row['scope'] ?? 'site')) }}</td><td>{{ $row['canonical_path'] ?? '-' }}</td><td>{{ $row['root_cause'] ?? '-' }}<br><span class="ops-control-hint">{{ $row['summary'] ?? '-' }}</span></td><td><details><summary>{{ $row['evidence']['source_system'] ?? '-' }}</summary><span class="ops-control-hint">{{ $row['evidence']['evidence_hash'] ?? $row['issue_uid'] }}</span></details></td><td>{{ $row['recommended_action'] ?? '-' }}</td></tr>
+                    @empty
+                        <tr><td colspan="6">{{ __('ops.custom_pages.seo_operations.technical.empty') }}</td></tr>
+                    @endforelse
+                </tbody></table></div>
+            @endif
+        </x-filament-ops::ops-section>
+
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.seo_operations.issue_breakdown_title')"
             :description="__('ops.custom_pages.seo_operations.issue_breakdown_desc')"

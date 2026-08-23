@@ -380,6 +380,12 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
         return (new SeoOpportunityQueueReadService)->read($limit);
     }
 
+    /** @return array<string, mixed> */
+    public function technicalAudits(int $limit = 25): array
+    {
+        return (new SeoTechnicalAuditReadService)->read($limit);
+    }
+
     /**
      * @return array<string, mixed>
      */

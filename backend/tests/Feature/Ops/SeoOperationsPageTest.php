@@ -360,7 +360,11 @@ final class SeoOperationsPageTest extends TestCase
             ->set('statusFilter', 'all')
             ->set('activeWorkspace', 'performance')
             ->assertSee('The SEO read model is unavailable in this environment.')
-            ->assertDontSee('12,840');
+            ->assertDontSee('12,840')
+            ->set('activeWorkspace', 'technical')
+            ->assertSee('Evidence-backed technical audits')
+            ->set('activeWorkspace', 'opportunities')
+            ->assertSee('The opportunity read model is unavailable in this environment.');
     }
 
     public function test_seo_operations_can_apply_bulk_actions_to_fix_operational_gaps(): void

@@ -110,6 +110,12 @@ class SeoOperationsPage extends Page
     /** @var list<array<string, mixed>> */
     public array $opportunityQueue = [];
 
+    /** @var array<string, mixed> */
+    public array $opportunityReadModel = [];
+
+    /** @var array<string, mixed> */
+    public array $technicalAudit = [];
+
     /** @var list<array<string, mixed>> */
     public array $issueClusters = [];
 
@@ -825,7 +831,9 @@ class SeoOperationsPage extends Page
                 'locale' => $this->gscLocale,
                 'search_type' => $this->gscSearchType,
             ]);
-            $this->opportunityQueue = (array) data_get($reader->opportunityQueue(25), 'recent_rows', []);
+            $this->opportunityReadModel = $reader->opportunityQueue(25);
+            $this->opportunityQueue = (array) data_get($this->opportunityReadModel, 'recent_rows', []);
+            $this->technicalAudit = $reader->technicalAudits(25);
             $this->refreshIssueClusters($reader);
             if ($this->selectedClusterUid !== '') {
                 $this->refreshClusterUrls($reader);
@@ -834,6 +842,8 @@ class SeoOperationsPage extends Page
         } catch (Throwable) {
             $this->searchPerformance = ['connected' => false, 'state' => 'unavailable', 'totals' => [], 'daily' => [], 'query_page_rows' => []];
             $this->opportunityQueue = [];
+            $this->opportunityReadModel = ['state' => 'unavailable', 'recent_rows' => []];
+            $this->technicalAudit = ['state' => 'unavailable', 'rows' => [], 'sources' => []];
             $this->issueClusters = [];
             $this->issueClusterSummary = [];
             $this->issueClusterTotal = 0;
