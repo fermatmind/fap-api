@@ -255,8 +255,12 @@ final class CareerJobController extends Controller
         return (bool) ($seoContract['index_eligible'] ?? false) ? 'index,follow' : 'noindex,follow';
     }
 
-    private function containsNoindex(string $robots): bool
+    private function containsNoindex(?string $robots): bool
     {
+        if ($robots === null) {
+            return false;
+        }
+
         $tokens = array_map(
             static fn (string $token): string => strtolower(trim($token)),
             explode(',', $robots)
