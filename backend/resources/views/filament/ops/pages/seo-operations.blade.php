@@ -350,10 +350,30 @@
                     </x-filament-ops::ops-toolbar>
                     <p class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.execution.verification_hint') }}</p>
                 @endif
-                <div class="ops-table-shell"><table class="ops-table"><thead><tr><th>{{ __('ops.custom_pages.seo_operations.clusters.cluster') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.root_cause_scope') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.severity') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.affected_urls') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.evidence') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.status') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.recommendation') }}</th><th>{{ __('ops.custom_pages.common.table.actions') }}</th></tr></thead><tbody>
+                <div class="ops-table-shell"><table class="ops-table"><thead><tr><th>{{ __('ops.custom_pages.seo_operations.clusters.cluster') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.priority') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.root_cause_scope') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.severity') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.affected_urls') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.evidence') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.status') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.recommendation') }}</th><th>{{ __('ops.custom_pages.common.table.actions') }}</th></tr></thead><tbody>
                     @forelse ($issueClusters as $cluster)
                         <tr>
                             <td><strong>{{ $cluster['issue_type'] }}</strong><br><span class="ops-control-hint">{{ $cluster['cluster_uid'] }}</span></td>
+                            <td>
+                                <strong class="tnum">{{ data_get($cluster, 'priority.score', '-') }}</strong>
+                                <br><span class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.clusters.priority_formula', [
+                                    'impact' => data_get($cluster, 'priority.impact.total', '-'),
+                                    'confidence' => data_get($cluster, 'priority.confidence.value', '-'),
+                                    'effort' => data_get($cluster, 'priority.effort.value', '-'),
+                                ]) }}</span>
+                                <br><span class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.clusters.priority_basis', [
+                                    'confidence' => __('ops.custom_pages.seo_operations.clusters.confidence_basis.'.data_get($cluster, 'priority.confidence.basis', 'unknown')),
+                                    'effort' => __('ops.custom_pages.seo_operations.clusters.effort_basis.'.data_get($cluster, 'priority.effort.basis', 'unknown')),
+                                ]) }}</span>
+                                @if (data_get($cluster, 'priority.impact.gsc.included', false))
+                                    <br><span class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.clusters.gsc_observed', [
+                                        'clicks' => data_get($cluster, 'priority.impact.gsc.clicks', 0),
+                                        'impressions' => data_get($cluster, 'priority.impact.gsc.impressions', 0),
+                                    ]) }}</span>
+                                @else
+                                    <br><span class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.clusters.no_gsc_impact') }}</span>
+                                @endif
+                            </td>
                             <td>{{ $cluster['root_cause'] }}<br><span class="ops-control-hint">{{ $cluster['content_type'] }} · {{ $cluster['template'] }} · {{ $cluster['field'] }} · {{ $cluster['source'] }}</span></td>
                             <td><x-filament.ops.shared.status-pill :state="$cluster['severity']" :label="$cluster['severity']" /></td>
                             <td><span class="tnum">{{ $cluster['affected_url_count'] }}</span><br><span class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.clusters.issue_rows', ['count' => $cluster['issue_count']]) }}</span></td>
@@ -363,7 +383,7 @@
                             <td><x-filament::button size="xs" color="gray" type="button" wire:click="inspectIssueCluster('{{ $cluster['cluster_uid'] }}')">{{ __('ops.custom_pages.common.actions.inspect') }}</x-filament::button></td>
                         </tr>
                     @empty
-                        <tr><td colspan="8">{{ __('ops.custom_pages.seo_operations.no_issues') }}</td></tr>
+                        <tr><td colspan="9">{{ __('ops.custom_pages.seo_operations.no_issues') }}</td></tr>
                     @endforelse
                 </tbody></table></div>
                 @if ($issueClusterLastPage > 1)

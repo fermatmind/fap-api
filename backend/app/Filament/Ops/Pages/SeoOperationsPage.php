@@ -413,7 +413,7 @@ class SeoOperationsPage extends Page
 
             fputcsv($out, []);
             fputcsv($out, array_map($this->spreadsheetSafeCell(...), [
-                'issue_clusters', 'cluster_uid', 'root_cause', 'content_type', 'template', 'field', 'severity', 'affected_url_count', 'issue_count', 'evidence_count', 'status', 'source', 'recommendation',
+                'issue_clusters', 'cluster_uid', 'root_cause', 'content_type', 'template', 'field', 'severity', 'affected_url_count', 'issue_count', 'evidence_count', 'priority_score', 'priority_impact', 'priority_confidence', 'priority_effort', 'priority_reason', 'gsc_included', 'gsc_clicks', 'gsc_impressions', 'status', 'source', 'recommendation',
             ]));
             foreach ($clusterExport as $cluster) {
                 fputcsv($out, array_map($this->spreadsheetSafeCell(...), [
@@ -427,6 +427,14 @@ class SeoOperationsPage extends Page
                     (string) ($cluster['affected_url_count'] ?? 0),
                     (string) ($cluster['issue_count'] ?? 0),
                     (string) ($cluster['evidence_count'] ?? 0),
+                    (string) data_get($cluster, 'priority.score', ''),
+                    (string) data_get($cluster, 'priority.impact.total', ''),
+                    (string) data_get($cluster, 'priority.confidence.value', ''),
+                    (string) data_get($cluster, 'priority.effort.value', ''),
+                    (string) data_get($cluster, 'priority.sort_reason', ''),
+                    data_get($cluster, 'priority.impact.gsc.included', false) ? 'true' : 'false',
+                    (string) data_get($cluster, 'priority.impact.gsc.clicks', 0),
+                    (string) data_get($cluster, 'priority.impact.gsc.impressions', 0),
                     (string) ($cluster['status'] ?? ''),
                     (string) ($cluster['source'] ?? ''),
                     (string) ($cluster['recommendation'] ?? ''),

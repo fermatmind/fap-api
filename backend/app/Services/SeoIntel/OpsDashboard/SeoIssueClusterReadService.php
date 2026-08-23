@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\SeoIntel\OpsDashboard;
 
+use App\Services\SeoIntel\GscDataQualityGate;
 use Illuminate\Support\Collection;
 
 final class SeoIssueClusterReadService extends AbstractSeoDashboardReadService
@@ -16,6 +17,14 @@ final class SeoIssueClusterReadService extends AbstractSeoDashboardReadService
         'high' => 4,
         'critical' => 5,
     ];
+
+    public function __construct(
+        ?string $connectionName = null,
+        private readonly SeoIssuePriorityScorer $priorityScorer = new SeoIssuePriorityScorer,
+        private readonly GscDataQualityGate $gscDataQualityGate = new GscDataQualityGate,
+    ) {
+        parent::__construct($connectionName);
+    }
 
     /**
      * @param  array<string,string>  $filters
@@ -99,17 +108,70 @@ final class SeoIssueClusterReadService extends AbstractSeoDashboardReadService
      */
     private function clusters(array $filters, ?Collection $issues = null): Collection
     {
+        $gscContext = $this->gscContext();
+
         return ($issues ?? $this->issueRows($filters))
             ->groupBy(fn (object $row): string => $this->clusterUid($this->axes($row)))
-            ->map(fn (Collection $members, string $clusterUid): array => $this->clusterRow($clusterUid, $members))
-            ->sort(function (array $left, array $right): int {
-                $severity = (self::SEVERITY_RANK[$right['severity']] ?? 0) <=> (self::SEVERITY_RANK[$left['severity']] ?? 0);
+            ->map(function (Collection $members, string $clusterUid) use ($gscContext): array {
+                $cluster = $this->clusterRow($clusterUid, $members);
+                $cluster['priority'] = $this->priorityScorer->score(
+                    $cluster,
+                    $members,
+                    $gscContext['metrics'],
+                    $gscContext['quality_passed'],
+                );
 
-                return $severity !== 0
-                    ? $severity
-                    : (($right['affected_url_count'] <=> $left['affected_url_count'])
-                        ?: strcmp((string) $right['last_detected_at'], (string) $left['last_detected_at']));
+                return $cluster;
+            })
+            ->sort(function (array $left, array $right): int {
+                $priority = ((float) data_get($right, 'priority.score', 0)) <=> ((float) data_get($left, 'priority.score', 0));
+
+                return $priority !== 0
+                    ? $priority
+                    : strcmp((string) $left['cluster_uid'], (string) $right['cluster_uid']);
             });
+    }
+
+    /** @return array{quality_passed:bool,metrics:array<string,array{clicks:int,impressions:int}>} */
+    private function gscContext(): array
+    {
+        $rows = $this->table('seo_gsc_daily')
+            ->select([
+                'report_date',
+                'canonical_url_hash',
+                'query_hash',
+                'source_engine',
+                'clicks',
+                'impressions',
+                'metadata_json',
+            ])
+            ->where('source_engine', 'google')
+            ->get()
+            ->map(fn (object $row): array => [
+                'report_date' => (string) $row->report_date,
+                'canonical_url_hash' => (string) ($row->canonical_url_hash ?? ''),
+                'query_hash' => (string) ($row->query_hash ?? ''),
+                'source_engine' => (string) $row->source_engine,
+                'clicks' => (int) ($row->clicks ?? 0),
+                'impressions' => (int) ($row->impressions ?? 0),
+                'metadata_json' => $this->decodeJson($row->metadata_json ?? null),
+            ]);
+        $gate = $this->gscDataQualityGate->evaluate($rows->all());
+        if (! (bool) ($gate['opportunity_queue_eligible'] ?? false)) {
+            return ['quality_passed' => false, 'metrics' => []];
+        }
+
+        $metrics = [];
+        foreach ($rows as $row) {
+            $hash = (string) ($row['canonical_url_hash'] ?? '');
+            if ($hash === '') {
+                continue;
+            }
+            $metrics[$hash]['clicks'] = ($metrics[$hash]['clicks'] ?? 0) + (int) $row['clicks'];
+            $metrics[$hash]['impressions'] = ($metrics[$hash]['impressions'] ?? 0) + (int) $row['impressions'];
+        }
+
+        return ['quality_passed' => true, 'metrics' => $metrics];
     }
 
     /** @param array<string,string> $filters */

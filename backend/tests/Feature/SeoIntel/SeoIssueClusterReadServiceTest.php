@@ -46,6 +46,17 @@ final class SeoIssueClusterReadServiceTest extends TestCase
             $table->timestamps();
         });
 
+        Schema::connection('seo_issue_cluster_test')->create('seo_gsc_daily', function (Blueprint $table): void {
+            $table->id();
+            $table->date('report_date');
+            $table->char('canonical_url_hash', 64)->nullable();
+            $table->char('query_hash', 64)->nullable();
+            $table->string('source_engine', 64)->default('google');
+            $table->unsignedInteger('clicks')->default(0);
+            $table->unsignedInteger('impressions')->default(0);
+            $table->json('metadata_json')->nullable();
+        });
+
         foreach (range(1, 3) as $index) {
             $this->insertIssue(
                 uid: 'title-'.$index,
@@ -96,6 +107,41 @@ final class SeoIssueClusterReadServiceTest extends TestCase
         $this->assertSame('open', $titleCluster['status']);
         $this->assertSame('cms_rule', $titleCluster['source']);
         $this->assertSame('Add a unique title in the Article template.', $titleCluster['recommendation']);
+        $this->assertSame(4.0, data_get($titleCluster, 'priority.score'));
+        $this->assertSame(12, data_get($titleCluster, 'priority.impact.total'));
+        $this->assertFalse(data_get($titleCluster, 'priority.impact.gsc.included'));
+        $this->assertSame('cms_technical_only_no_eligible_gsc', data_get($titleCluster, 'priority.impact.gsc.basis'));
+        $this->assertSame(1.0, data_get($titleCluster, 'priority.confidence.value'));
+        $this->assertSame(3, data_get($titleCluster, 'priority.effort.value'));
+        $this->assertSame('impact_12_x_confidence_1.00_div_effort_3', data_get($titleCluster, 'priority.sort_reason'));
+    }
+
+    public function test_quality_gated_gsc_observations_add_real_impact_without_estimating_click_loss(): void
+    {
+        $titleUrl = 'https://fermatmind.com/en/articles/title-1';
+        DB::connection('seo_issue_cluster_test')->table('seo_gsc_daily')->insert([
+            'report_date' => now()->subDays(3)->toDateString(),
+            'canonical_url_hash' => hash('sha256', $titleUrl),
+            'query_hash' => hash('sha256', 'title query'),
+            'source_engine' => 'google',
+            'clicks' => 7,
+            'impressions' => 120,
+            'metadata_json' => json_encode(['data_origin' => 'live_gsc_api'], JSON_THROW_ON_ERROR),
+        ]);
+
+        $reader = new SeoIssueClusterReadService('seo_issue_cluster_test');
+        $first = $reader->read();
+        $second = $reader->read();
+        $titleCluster = collect($first['rows'])->firstWhere('field', 'title');
+
+        $this->assertSame($first['rows'], $second['rows']);
+        $this->assertSame($titleCluster['cluster_uid'], data_get($first, 'rows.0.cluster_uid'));
+        $this->assertSame(139, data_get($titleCluster, 'priority.impact.total'));
+        $this->assertSame(7, data_get($titleCluster, 'priority.impact.gsc.clicks'));
+        $this->assertSame(120, data_get($titleCluster, 'priority.impact.gsc.impressions'));
+        $this->assertSame(127, data_get($titleCluster, 'priority.impact.gsc.points'));
+        $this->assertSame('observed_clicks_plus_impressions_no_loss_estimate', data_get($titleCluster, 'priority.impact.gsc.basis'));
+        $this->assertSame(46.33, data_get($titleCluster, 'priority.score'));
     }
 
     public function test_hundreds_of_repeated_url_rows_collapse_without_losing_export_members(): void
