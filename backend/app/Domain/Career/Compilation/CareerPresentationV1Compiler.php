@@ -11,7 +11,7 @@ use JsonException;
 
 final class CareerPresentationV1Compiler
 {
-    public const VERSION = 'career.presentation_v1.compiler.v6';
+    public const VERSION = 'career.presentation_v1.compiler.v7';
 
     /** @var array<string,array{label:string,source_field:string}> */
     private const BLS_STATS = [
@@ -948,6 +948,14 @@ final class CareerPresentationV1Compiler
         $signals['source'] = $sourceText;
         $sourceCard['eeat_signals'] = $signals;
         $page['source_card'] = $sourceCard;
+
+        if (is_array($row['sources_json']['references'] ?? null)) {
+            $row['sources_json']['references'] = array_values(array_filter(
+                $row['sources_json']['references'],
+                static fn (mixed $reference): bool => ! is_array($reference)
+                    || (string) ($reference['label'] ?? '') !== 'nbs_2024_wage'
+            ));
+        }
 
         $presentation['notices']['salary_boundary'] = '中国大陆城市薪资与招聘数量暂无可复核原始样本，因此不展示。';
 

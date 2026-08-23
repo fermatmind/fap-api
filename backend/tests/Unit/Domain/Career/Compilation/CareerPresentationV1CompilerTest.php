@@ -89,6 +89,10 @@ final class CareerPresentationV1CompilerTest extends TestCase
         foreach (['KPMG', 'Thomson Reuters', 'AICPA', '36氪', '浙大', '财务 BP 招聘同比', '¥201,883', '¥9,000'] as $forbidden) {
             self::assertStringNotContainsString($forbidden, $accountantPageBytes);
         }
+        self::assertStringNotContainsString(
+            '201,883',
+            CareerCurrentAuthorityPackage::encodeCanonical($authority['rows']['accountants-and-auditors']['sources_json']),
+        );
 
         $actuaries = $authority['rows']['actuaries']['metadata_json']['presentation_v1']['zh'];
         self::assertSame(8, data_get($actuaries, 'hero.ai_exposure.value'));
