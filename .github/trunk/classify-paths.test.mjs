@@ -47,6 +47,14 @@ test("binds only the exact MBTI zh authority release manifest to its operation",
   assert.equal(adjacent.operations.mbti_zh_result_authority_release, false);
 });
 test("classifies migrations", () => assert.equal(has(["backend/database/migrations/2026_01_01_add_flag.php"], "backward_compatible_migration"), true));
+test("keeps the Ops SEO execution migration out of discoverability", () => {
+  const result = classifyPaths([
+    "backend/database/migrations/seo_intel/2026_08_23_120000_expand_seo_execution_workflow.php",
+  ]);
+  assert.equal(result.flags.backward_compatible_migration, true);
+  assert.equal(result.flags.seo_discoverability, false);
+  assert.equal(result.deploy, true);
+});
 test("classifies payments", () => assert.equal(has(["backend/app/Services/Payments/StripeService.php"], "payment"), true));
 test("classifies cache projections", () => assert.equal(has(["backend/app/Services/Cache/ActiveProjection.php"], "cache_runtime_projection"), true));
 test("classifies SEO and discoverability", () => assert.equal(has(["backend/app/Console/Commands/SeoWarmSitemap.php"], "seo_discoverability"), true));

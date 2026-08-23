@@ -60,7 +60,8 @@ export function classifyPaths(inputPaths) {
       /^backend\/app\/Services\/SeoIntel\/OpsDashboard\//,
       /^backend\/resources\/(?:css|views)\/filament\/ops\//,
     ]);
-    const seo = !retiredEqMirror && !opsUi && matches(path, [
+    const opsExecutionMigration = /^backend\/database\/migrations\/seo_intel\/\d{4}_\d{2}_\d{2}_\d+_expand_seo_execution_workflow\.php$/.test(path);
+    const seo = !retiredEqMirror && !opsUi && !opsExecutionMigration && matches(path, [
       /(?:^|\/)(?:seo|search|discoverability|sitemap|robots|llms)(?:\/|\.|-|_)/i,
       /(?:canonical|hreflang|indexnow|indexability|gsc)/i,
       /(?:Seo|Search|Discoverability|Sitemap|Robots|Llms)/,

@@ -122,6 +122,9 @@ final class SeoOperationsWorkspaceV2Test extends TestCase
 
     public function test_issue_workflow_requires_fix_before_verify_and_records_owner_sla_and_verification(): void
     {
+        $this->assertSame(['open', 'in_progress'], SeoIssueWorkflowService::allowedStatusesFor(SeoIssueWorkflowService::ACTION_ASSIGN));
+        $this->assertSame(['resolved'], SeoIssueWorkflowService::allowedStatusesFor(SeoIssueWorkflowService::ACTION_VERIFY));
+
         DB::connection('seo_intel_workspace_test')->table('seo_issue_queue')->insert([
             'issue_uid' => 'issue-1',
             'issue_type' => 'canonical_drift',
