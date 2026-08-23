@@ -136,15 +136,6 @@ final class SeoIntelDriftCollectorFoundationTest extends TestCase
             'no_write' => false,
             'canary' => true,
         ]);
-        $assignedIssueUid = (string) DB::connection('seo_intel')->table('seo_issue_queue')->value('issue_uid');
-        DB::connection('seo_intel')->table('seo_issue_queue')
-            ->where('issue_uid', $assignedIssueUid)
-            ->update([
-                'status' => 'assigned',
-                'lifecycle_state' => 'acknowledged',
-                'acknowledged_at' => now(),
-                'metadata_json' => json_encode(['ops_workflow' => ['owner' => 'SEO owner']], JSON_THROW_ON_ERROR),
-            ]);
         $second = (new SeoIntelCollectorManager)->collect('drift_foundation', [
             'dry_run' => false,
             'no_write' => false,
@@ -159,12 +150,6 @@ final class SeoIntelDriftCollectorFoundationTest extends TestCase
         $this->assertFalse((bool) ($first->metadata['raw_evidence_included'] ?? true));
         $this->assertSame('success', $second->status);
         $this->assertSame(2, DB::connection('seo_intel')->table('seo_issue_queue')->count());
-        $assigned = (array) DB::connection('seo_intel')->table('seo_issue_queue')
-            ->where('issue_uid', $assignedIssueUid)
-            ->first();
-        $this->assertSame('assigned', $assigned['status'] ?? null);
-        $this->assertSame('acknowledged', $assigned['lifecycle_state'] ?? null);
-        $this->assertSame('SEO owner', data_get(json_decode((string) ($assigned['metadata_json'] ?? ''), true), 'ops_workflow.owner'));
 
         $row = (array) DB::connection('seo_intel')->table('seo_issue_queue')->first();
         $encoded = json_encode($row, JSON_THROW_ON_ERROR);

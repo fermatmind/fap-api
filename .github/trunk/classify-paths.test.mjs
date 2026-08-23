@@ -53,6 +53,9 @@ test("classifies SEO and discoverability", () => assert.equal(has(["backend/app/
 test("keeps Ops SEO dashboards in the application lane", () => {
   const result = classifyPaths([
     "backend/app/Filament/Ops/Pages/SeoOperationsPage.php",
+    "backend/app/Services/Ops/SeoOperationsService.php",
+    "backend/app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php",
+    "backend/app/Services/SeoIntel/OpsDashboard/SeoIssueWorkflowService.php",
     "backend/resources/views/filament/ops/pages/seo-operations.blade.php",
   ]);
   assert.equal(result.flags.application_code, true);

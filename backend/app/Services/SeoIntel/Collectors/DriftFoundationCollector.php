@@ -233,42 +233,6 @@ final class DriftFoundationCollector implements SeoIntelCollector
         $now = now();
 
         foreach ($candidates as $candidate) {
-            $existing = $connection->table('seo_issue_queue')
-                ->where('issue_uid', $candidate->issueUid())
-                ->first();
-            $metadata = $candidate->metadata;
-            $status = 'new';
-            $lifecycleState = 'open';
-            $acknowledgedAt = null;
-            $resolvedAt = null;
-            $ignoredAt = null;
-
-            if (is_object($existing)) {
-                $existingMetadata = json_decode((string) ($existing->metadata_json ?? ''), true);
-                if (is_array($existingMetadata['ops_workflow'] ?? null)) {
-                    $metadata['ops_workflow'] = $existingMetadata['ops_workflow'];
-                }
-
-                $ignoredUntil = data_get($metadata, 'ops_workflow.ignored_until');
-                $ignoreIsActive = (string) ($existing->lifecycle_state ?? '') === 'ignored'
-                    && is_string($ignoredUntil)
-                    && now()->lt($ignoredUntil);
-
-                if ($ignoreIsActive) {
-                    $status = 'ignored';
-                    $lifecycleState = 'ignored';
-                    $ignoredAt = $existing->ignored_at;
-                } elseif ((string) ($existing->evidence_hash ?? '') === $candidate->evidenceHash()
-                    && in_array((string) ($existing->status ?? ''), ['assigned', 'fixed'], true)) {
-                    $status = (string) $existing->status;
-                    $lifecycleState = (string) $existing->lifecycle_state;
-                    $acknowledgedAt = $existing->acknowledged_at;
-                } else {
-                    data_set($metadata, 'ops_workflow.verification_result', 'failed_recheck');
-                    data_set($metadata, 'ops_workflow.reopened_at', $now->toAtomString());
-                }
-            }
-
             $connection->table('seo_issue_queue')->updateOrInsert(
                 ['issue_uid' => $candidate->issueUid()],
                 [
@@ -282,16 +246,13 @@ final class DriftFoundationCollector implements SeoIntelCollector
                     'page_entity_type' => $candidate->pageEntityType,
                     'entity_id_or_slug' => $candidate->entityIdOrSlug,
                     'cluster' => $candidate->cluster,
-                    'status' => $status,
-                    'lifecycle_state' => $lifecycleState,
+                    'status' => 'open',
+                    'lifecycle_state' => 'open',
                     'detected_at' => $now,
-                    'acknowledged_at' => $acknowledgedAt,
-                    'resolved_at' => $resolvedAt,
-                    'ignored_at' => $ignoredAt,
                     'summary' => $candidate->summary,
                     'recommendation' => $candidate->recommendation,
                     'evidence_hash' => $candidate->evidenceHash(),
-                    'metadata_json' => json_encode($metadata, JSON_THROW_ON_ERROR),
+                    'metadata_json' => json_encode($candidate->metadata, JSON_THROW_ON_ERROR),
                     'created_at' => $now,
                     'updated_at' => $now,
                 ],

@@ -56,6 +56,8 @@ export function classifyPaths(inputPaths) {
     const retiredEqMirror = path.startsWith("backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/");
     const opsUi = matches(path, [
       /^backend\/app\/Filament\/Ops\//,
+      /^backend\/app\/Services\/Ops\//,
+      /^backend\/app\/Services\/SeoIntel\/OpsDashboard\//,
       /^backend\/resources\/(?:css|views)\/filament\/ops\//,
     ]);
     const seo = !retiredEqMirror && !opsUi && matches(path, [
