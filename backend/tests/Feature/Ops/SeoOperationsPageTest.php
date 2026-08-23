@@ -601,6 +601,28 @@ final class SeoOperationsPageTest extends TestCase
         $page->exportReport();
     }
 
+    public function test_issue_queue_renders_in_server_driven_pages_of_25_without_truncating_export_state(): void
+    {
+        $page = new SeoOperationsPage;
+        $page->issueQueue = array_map(
+            static fn (int $index): array => ['selection_key' => 'article:'.$index],
+            range(1, 63),
+        );
+
+        $this->assertCount(25, $page->visibleIssueQueue());
+        $this->assertSame('article:1', $page->visibleIssueQueue()[0]['selection_key']);
+
+        $page->nextIssueQueuePage();
+        $this->assertSame(2, $page->issueQueuePage);
+        $this->assertCount(25, $page->visibleIssueQueue());
+        $this->assertSame('article:26', $page->visibleIssueQueue()[0]['selection_key']);
+
+        $page->nextIssueQueuePage();
+        $this->assertSame(3, $page->issueQueuePage);
+        $this->assertCount(13, $page->visibleIssueQueue());
+        $this->assertCount(63, $page->issueQueue);
+    }
+
     private function createOrganization(string $name): Organization
     {
         return Organization::query()->create([

@@ -27,7 +27,7 @@
     @endphp
 
     <div class="ops-shell-page">
-        <x-filament-ops::ops-section
+        <x-filament-ops::ops-section class="ops-seo-intro"
             :eyebrow="__('ops.custom_pages.seo_operations.eyebrow')"
             :title="__('ops.custom_pages.seo_operations.title')"
             :description="__('ops.custom_pages.seo_operations.description')"
@@ -149,13 +149,11 @@
             @endforeach
         </div>
 
-        <div class="ops-article-saved-views" role="group" aria-label="{{ __('ops.custom_pages.seo_operations.saved_views.label') }}">
-            @foreach (['all', 'high_impressions_low_ctr', 'current_org_blockers', 'global_career_gaps'] as $view)
-                <button type="button" wire:click="applySavedView('{{ $view }}')" class="ops-article-chip{{ $savedView === $view ? ' ops-article-chip--active' : '' }}" aria-pressed="{{ $savedView === $view ? 'true' : 'false' }}">
-                    <span class="ops-article-chip__label">{{ __('ops.custom_pages.seo_operations.saved_views.'.$view) }}</span>
-                </button>
-            @endforeach
-        </div>
+        <x-filament-ops::ops-saved-views
+            :views="collect(['all', 'high_impressions_low_ctr', 'current_org_blockers', 'global_career_gaps'])->mapWithKeys(fn (string $view): array => [$view => __('ops.custom_pages.seo_operations.saved_views.'.$view)])->all()"
+            :active="$savedView"
+            :label="__('ops.custom_pages.seo_operations.saved_views.label')"
+        />
 
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.seo_operations.scopes.title')"
@@ -172,20 +170,20 @@
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section :title="__('ops.custom_pages.seo_operations.sources.title')">
-            <div class="ops-card-list">
+            <div class="ops-source-grid">
                 @foreach ($dataSources as $source)
-                    <x-filament-ops::ops-result-card
-                        :title="$source['label']"
-                        :meta="!empty($source['connected']) ? __('ops.custom_pages.seo_operations.sources.connected') : __('ops.custom_pages.seo_operations.phase_two')"
-                    >
-                        <p class="ops-control-hint">
-                            @if (!empty($source['connected']))
-                                {{ $source['source'] ?? '' }} · {{ __('ops.custom_pages.seo_operations.sources.updated_at', ['time' => $source['updated_at'] ?? '-']) }}
-                            @else
-                                {{ __('ops.custom_pages.seo_operations.sources.not_connected') }}
-                            @endif
-                        </p>
-                    </x-filament-ops::ops-result-card>
+                    @if (!empty($source['connected']))
+                        <div class="ops-source-status ops-source-status--connected">
+                            <span class="ops-source-status__signal" aria-hidden="true"></span>
+                            <div><strong>{{ $source['label'] }}</strong><p>{{ $source['source'] ?? '' }} · {{ __('ops.custom_pages.seo_operations.sources.updated_at', ['time' => $source['updated_at'] ?? '-']) }}</p></div>
+                        </div>
+                    @else
+                        <x-filament-ops::ops-not-connected
+                            :title="$source['label']"
+                            :description="__('ops.custom_pages.seo_operations.sources.not_connected')"
+                            :source="$source['phase'] ?? __('ops.custom_pages.seo_operations.phase_two')"
+                        />
+                    @endif
                 @endforeach
             </div>
         </x-filament-ops::ops-section>
@@ -240,7 +238,7 @@
                         </div>
                     @endif
                 @else
-                    <p class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.performance.not_connected') }}</p>
+                    <x-filament-ops::ops-not-connected title="Google Search Console" :description="__('ops.custom_pages.seo_operations.performance.not_connected')" />
                 @endif
             </x-filament-ops::ops-section>
         @endif
@@ -259,7 +257,7 @@
 
         @if ($activeWorkspace === 'ai')
             <x-filament-ops::ops-section :title="__('ops.custom_pages.seo_operations.workspace.ai')" :description="__('ops.custom_pages.seo_operations.phase_two')">
-                <p class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.sources.not_connected') }}</p>
+                <x-filament-ops::ops-not-connected title="AI Visibility" :description="__('ops.custom_pages.seo_operations.sources.not_connected')" />
             </x-filament-ops::ops-section>
         @endif
 
@@ -351,7 +349,7 @@
         @if ($activeWorkspace === 'execution')
         <x-filament-ops::ops-section :title="__('ops.custom_pages.seo_operations.execution.title')" :description="__('ops.custom_pages.seo_operations.execution.description')">
             @if (!$seoIntelAvailable)
-                <p class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.execution.unavailable') }}</p>
+                <x-filament-ops::ops-not-connected :title="__('ops.custom_pages.seo_operations.workspace.execution')" :description="__('ops.custom_pages.seo_operations.execution.unavailable')" />
             @else
                 @if (\App\Filament\Ops\Support\ContentAccess::canWrite())
                     <x-filament-ops::ops-toolbar>
@@ -402,7 +400,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($issueQueue as $item)
+                        @forelse ($this->visibleIssueQueue() as $item)
                             <tr>
                                 @if (\App\Filament\Ops\Support\ContentAccess::canWrite())
                                     <td>
@@ -462,6 +460,13 @@
                     </tbody>
                 </table>
             </div>
+            @if (count($issueQueue) > \App\Filament\Ops\Pages\SeoOperationsPage::ISSUE_QUEUE_PER_PAGE)
+                <nav class="ops-server-pagination" aria-label="{{ __('ops.custom_pages.seo_operations.issue_queue_title') }}">
+                    <button type="button" wire:click="previousIssueQueuePage" @disabled($issueQueuePage <= 1)>{{ __('pagination.previous') }}</button>
+                    <span class="tnum">{{ $issueQueuePage }} / {{ max(1, (int) ceil(count($issueQueue) / \App\Filament\Ops\Pages\SeoOperationsPage::ISSUE_QUEUE_PER_PAGE)) }}</span>
+                    <button type="button" wire:click="nextIssueQueuePage" @disabled($issueQueuePage >= (int) ceil(count($issueQueue) / \App\Filament\Ops\Pages\SeoOperationsPage::ISSUE_QUEUE_PER_PAGE))>{{ __('pagination.next') }}</button>
+                </nav>
+            @endif
         </x-filament-ops::ops-section>
         @endif
     </div>

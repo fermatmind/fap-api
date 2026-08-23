@@ -24,6 +24,8 @@ class SeoOperationsPage extends Page
 {
     public const MAX_RECORDS_PER_CONTENT_TYPE = 500;
 
+    public const ISSUE_QUEUE_PER_PAGE = 25;
+
     protected static ?string $navigationIcon = 'heroicon-o-globe-alt';
 
     protected static ?string $navigationGroup = null;
@@ -45,6 +47,8 @@ class SeoOperationsPage extends Page
     public string $activeWorkspace = 'overview';
 
     public string $savedView = 'all';
+
+    public int $issueQueuePage = 1;
 
     public int $gscDays = 28;
 
@@ -118,18 +122,21 @@ class SeoOperationsPage extends Page
 
     public function updatedTypeFilter(): void
     {
+        $this->issueQueuePage = 1;
         $this->selectedTargets = [];
         $this->refreshDashboard(app(SeoOperationsService::class));
     }
 
     public function updatedIssueFilter(): void
     {
+        $this->issueQueuePage = 1;
         $this->selectedTargets = [];
         $this->refreshDashboard(app(SeoOperationsService::class));
     }
 
     public function updatedScopeFilter(): void
     {
+        $this->issueQueuePage = 1;
         $this->selectedTargets = [];
         $this->refreshDashboard(app(SeoOperationsService::class));
     }
@@ -163,6 +170,7 @@ class SeoOperationsPage extends Page
 
     public function applySavedView(string $view): void
     {
+        $this->issueQueuePage = 1;
         $this->savedView = $view;
 
         if ($view === 'high_impressions_low_ctr') {
@@ -183,6 +191,30 @@ class SeoOperationsPage extends Page
 
         $this->selectedTargets = [];
         $this->refreshDashboard(app(SeoOperationsService::class));
+    }
+
+    /** @return list<array<string, mixed>> */
+    public function visibleIssueQueue(): array
+    {
+        $lastPage = max(1, (int) ceil(count($this->issueQueue) / self::ISSUE_QUEUE_PER_PAGE));
+        $page = min(max(1, $this->issueQueuePage), $lastPage);
+
+        return array_slice(
+            $this->issueQueue,
+            ($page - 1) * self::ISSUE_QUEUE_PER_PAGE,
+            self::ISSUE_QUEUE_PER_PAGE,
+        );
+    }
+
+    public function previousIssueQueuePage(): void
+    {
+        $this->issueQueuePage = max(1, $this->issueQueuePage - 1);
+    }
+
+    public function nextIssueQueuePage(): void
+    {
+        $lastPage = max(1, (int) ceil(count($this->issueQueue) / self::ISSUE_QUEUE_PER_PAGE));
+        $this->issueQueuePage = min($lastPage, $this->issueQueuePage + 1);
     }
 
     public function applyIssueWorkflow(SeoIssueWorkflowService $workflow, AuditLogger $audit): void
@@ -603,7 +635,7 @@ class SeoOperationsPage extends Page
                 'locale' => $this->gscLocale,
             ]);
             $this->opportunityQueue = (array) data_get($reader->opportunityQueue(25), 'recent_rows', []);
-            $this->executionQueue = (array) data_get($reader->issues(50), 'recent_rows', []);
+            $this->executionQueue = (array) data_get($reader->issues(self::ISSUE_QUEUE_PER_PAGE), 'recent_rows', []);
             $this->seoIntelAvailable = true;
         } catch (Throwable) {
             $this->searchPerformance = ['connected' => false, 'totals' => [], 'daily' => [], 'query_page_rows' => []];

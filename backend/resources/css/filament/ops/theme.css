@@ -618,6 +618,76 @@
         color: var(--ops-text-tertiary);
     }
 
+    .fi-body.fi-panel-ops .ops-seo-intro.fi-section {
+        border: 0;
+        background: transparent;
+        box-shadow: none;
+        overflow: visible;
+    }
+
+    .fi-body.fi-panel-ops .ops-seo-intro > .fi-section-content-ctn > .fi-section-content {
+        padding: 0;
+    }
+
+    .fi-body.fi-panel-ops .ops-source-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+        gap: 0.75rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-source-status {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0.75rem;
+        align-items: start;
+        padding: 1rem;
+        border-bottom: 1px solid var(--ops-border-default);
+    }
+
+    .fi-body.fi-panel-ops .ops-source-status__signal {
+        width: 0.5rem;
+        height: 0.5rem;
+        margin-top: 0.2rem;
+        border-radius: 999px;
+        background: var(--ops-state-success);
+        box-shadow: 0 0 0 4px color-mix(in srgb, var(--ops-state-success) 10%, transparent);
+    }
+
+    .fi-body.fi-panel-ops .ops-source-status strong {
+        font-size: 0.6875rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-source-status p {
+        margin: 0.25rem 0 0;
+        color: var(--ops-text-tertiary);
+        font-family: var(--ops-font-mono);
+        font-size: 0.5rem;
+        line-height: 1.5;
+    }
+
+    .fi-body.fi-panel-ops .ops-server-pagination {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 0.75rem;
+        padding: 0.75rem 0;
+        color: var(--ops-text-secondary);
+        font-size: 0.625rem;
+    }
+
+    .fi-body.fi-panel-ops .ops-server-pagination button {
+        min-height: 2rem;
+        padding-inline: 0.75rem;
+        border: 1px solid var(--ops-border-default);
+        border-radius: var(--ops-radius-button);
+        background: var(--ops-bg-surface-subtle);
+    }
+
+    .fi-body.fi-panel-ops .ops-server-pagination button:disabled {
+        cursor: not-allowed;
+        opacity: 0.45;
+    }
+
     :root.dark .fi-body.fi-panel-ops .fi-section-header,
     :root.dark .fi-body.fi-panel-ops .fi-ta-header-ctn,
     :root.dark .fi-body.fi-panel-ops .fi-ta-search-field .fi-input-wrp,
