@@ -215,6 +215,14 @@ final class OpsCmsListPolishTest extends TestCase
             ->assertSee('fi-header', false);
     }
 
+    public function test_article_saved_views_expose_button_group_semantics(): void
+    {
+        Livewire::test(ListArticles::class)
+            ->assertSee('role="group"', false)
+            ->assertSee('aria-pressed="true"', false)
+            ->assertDontSee('role="tablist"', false);
+    }
+
     public function test_article_saved_views_replace_filters_and_apply_authoritative_org_zero_queries(): void
     {
         $all = $this->createArticle('all-article');
