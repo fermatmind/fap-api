@@ -210,8 +210,8 @@ final class OpsCustomPagesI18nContractTest extends TestCase
             '/ops/seo-operations',
             'SEO运营',
             'SEO operations',
-            ['SEO Operations Page', 'Seo Operations Page', 'Issue focus', 'Attention queue', 'No SEO issues match the current filters.'],
-            ['SEO运营', '问题焦点', '关注队列', '当前筛选下没有匹配的 SEO 问题。'],
+            ['SEO Operations Page', 'Seo Operations Page', 'Issue focus', 'Today’s SEO decisions', 'Today’s Action Queue'],
+            ['SEO运营', '问题焦点', '今日 SEO 决策', '今日 Action Queue'],
         ];
 
         yield 'seo intelligence' => [

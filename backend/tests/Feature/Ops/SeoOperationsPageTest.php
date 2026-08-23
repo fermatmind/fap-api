@@ -53,6 +53,31 @@ final class SeoOperationsPageTest extends TestCase
             ->assertRedirectContains('/ops/select-org');
     }
 
+    public function test_search_change_signal_requires_two_real_collected_days(): void
+    {
+        $page = new SeoOperationsPage;
+        $page->searchPerformance = [
+            'connected' => true,
+            'daily' => [
+                ['report_date' => '2026-08-22', 'clicks' => 10, 'impressions' => 100],
+            ],
+        ];
+        $method = new \ReflectionMethod($page, 'searchChangeSignal');
+
+        $this->assertNull($method->invoke($page));
+
+        $page->searchPerformance['daily'][] = [
+            'report_date' => '2026-08-23',
+            'clicks' => 15,
+            'impressions' => 120,
+        ];
+        $signal = $method->invoke($page);
+
+        $this->assertSame('search_change', $signal['key']);
+        $this->assertSame('+50.0%', $signal['value']);
+        $this->assertSame('performance', $signal['workspace']);
+    }
+
     public function test_seo_operations_page_renders_operational_seo_and_growth_signals(): void
     {
         $admin = $this->createAdminWithPermissions([
@@ -267,16 +292,22 @@ final class SeoOperationsPageTest extends TestCase
             ->assertSee('ops-seo-commandbar', false)
             ->assertSee('ops-seo-workspace-tabs', false)
             ->assertSee('ops-seo-source-strip', false)
+            ->assertSee('ops-seo-decision-strip', false)
+            ->assertSee('data-signal-count="2"', false)
             ->assertSee('id="ops-seo-issue-filter"', false)
             ->assertSee('<select id="ops-seo-issue-filter"', false)
             ->assertDontSee('ops-seo-intro', false)
-            ->assertSee('Growth diagnostics')
-            ->assertSee('Current query snapshot')
+            ->assertSee('Today’s SEO decisions')
+            ->assertSee('Priority issue clusters')
+            ->assertSee('Today’s Action Queue')
+            ->assertSee('Data sources & freshness')
+            ->assertDontSee('Growth diagnostics')
+            ->assertDontSee('Current query snapshot')
             ->assertDontSee('vs last week')
             ->assertDontSee('updated recently')
-            ->assertSee('SEO issue queue')
-            ->assertSee('Article SEO gaps')
-            ->assertSee('Career guide SEO gaps');
+            ->assertDontSee('SEO issue queue')
+            ->assertDontSee('Article SEO gaps')
+            ->assertDontSee('Career guide SEO gaps');
 
         $this->actingAs($admin, (string) config('admin.guard', 'admin'));
         app()->instance('request', Request::create('/ops/seo-operations', 'GET'));
@@ -287,6 +318,11 @@ final class SeoOperationsPageTest extends TestCase
 
         Livewire::test(SeoOperationsPage::class)
             ->assertOk()
+            ->assertSet('decisionSignals.0.key', 'affected_urls')
+            ->assertSet('decisionSignals.0.value', '3')
+            ->assertSet('decisionSignals.1.key', 'index_blockers')
+            ->assertSet('decisionSignals.1.value', '3')
+            ->assertCount('todayActions', 3)
             ->assertSet('headlineFields.0.value', '50% (1/2)')
             ->assertSet('headlineFields.1.value', '50% (2/4)')
             ->assertSet('headlineFields.2.value', '5')
@@ -305,6 +341,7 @@ final class SeoOperationsPageTest extends TestCase
             ->assertSet('growthFields.2.value', '1')
             ->assertSet('growthFields.3.value', '50% (3/6)')
             ->assertCount('issueQueue', 3)
+            ->set('activeWorkspace', 'execution')
             ->assertSee('Published with discovery blockers')
             ->assertDontSee('Other Org SEO Article')
             ->set('scopeFilter', 'global_articles')
@@ -422,6 +459,7 @@ final class SeoOperationsPageTest extends TestCase
             ->assertCount('issueQueue', 0)
             ->set('issueFilter', SeoOperationsService::ISSUE_SOCIAL)
             ->assertCount('issueQueue', 2)
+            ->set('activeWorkspace', 'execution')
             ->assertSee('Fix Guide')
             ->assertSee('Fix Me Article');
 
@@ -484,6 +522,7 @@ final class SeoOperationsPageTest extends TestCase
             ->assertSet('headlineFields.0.value', '100% (1/1)')
             ->set('issueFilter', SeoOperationsService::ISSUE_SOCIAL)
             ->assertCount('issueQueue', 1)
+            ->set('activeWorkspace', 'execution')
             ->assertSee('Social preview gaps')
             ->set('selectedTargets', [
                 'article:'.$article->id,

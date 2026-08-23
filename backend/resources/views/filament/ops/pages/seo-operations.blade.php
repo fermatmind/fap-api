@@ -72,6 +72,26 @@
             @endforeach
         </div>
 
+        @if ($activeWorkspace === 'overview')
+            <section class="ops-seo-decision-strip" aria-labelledby="ops-seo-decision-title">
+                <div class="ops-seo-section-heading">
+                    <div>
+                        <h2 id="ops-seo-decision-title">{{ __('ops.custom_pages.seo_operations.decision.title') }}</h2>
+                        <p>{{ __('ops.custom_pages.seo_operations.decision.description') }}</p>
+                    </div>
+                </div>
+                <div class="ops-data-strip" data-signal-count="{{ count($decisionSignals) }}">
+                    @foreach ($decisionSignals as $signal)
+                        <button type="button" class="ops-metric" wire:click="openDecisionWorkspace('{{ $signal['workspace'] }}')">
+                            <span class="ops-metric__label">{{ $signal['label'] }}</span>
+                            <span class="ops-metric__value tnum">{{ $signal['value'] }}</span>
+                            <small>{{ $signal['hint'] }}</small>
+                        </button>
+                    @endforeach
+                </div>
+            </section>
+        @endif
+
         <div class="ops-seo-commandbar">
             <label class="ops-seo-commandbar__field" for="ops-seo-type-filter">
                 <span>{{ __('ops.custom_pages.seo_operations.content_type') }}</span>
@@ -129,6 +149,7 @@
             </div>
         </div>
 
+        @if ($activeWorkspace !== 'overview')
         <nav class="ops-seo-related-links" aria-label="{{ __('ops.custom_pages.seo_operations.title') }}">
             <a href="{{ \App\Filament\Ops\Pages\ContentOverviewPage::getUrl() }}">{{ __('ops.custom_pages.common.nav.overview') }}</a>
             <a href="{{ \App\Filament\Ops\Pages\ContentMetricsPage::getUrl() }}">{{ __('ops.custom_pages.common.nav.content_metrics') }}</a>
@@ -139,39 +160,7 @@
                 <a href="{{ \App\Filament\Ops\Pages\EditorialReviewPage::getUrl() }}">{{ __('ops.custom_pages.common.nav.editorial_review') }}</a>
             @endif
         </nav>
-
-        <section class="ops-seo-snapshot" aria-labelledby="ops-seo-snapshot-title">
-            <div class="ops-seo-section-heading">
-                <div><h2 id="ops-seo-snapshot-title">{{ __('ops.custom_pages.seo_operations.scopes.title') }}</h2><p>{{ __('ops.custom_pages.seo_operations.health.current_snapshot') }}</p></div>
-                <span class="ops-seo-section-heading__meta">{{ __('ops.custom_pages.seo_operations.sources.title') }}</span>
-            </div>
-            <div class="ops-data-strip ops-seo-scope-strip">
-                @foreach ($scopeSummary as $scope)
-                    <button type="button" wire:click="$set('scopeFilter', '{{ $scope['key'] }}')" class="ops-metric" aria-pressed="{{ $scopeFilter === $scope['key'] ? 'true' : 'false' }}">
-                        <span class="ops-metric__label">{{ $scope['label'] }}</span>
-                        <span class="ops-metric__value tnum">{{ $scope['count'] }}</span>
-                        <small>{{ $scope['source'] }} · {{ $scope['freshness'] }} · {{ $scope['collected_at'] }}</small>
-                    </button>
-                @endforeach
-            </div>
-            <div class="ops-seo-source-strip">
-                @foreach ($dataSources as $source)
-                    <div @class(['ops-seo-source', 'ops-seo-source--connected' => !empty($source['connected'])])>
-                        <span class="ops-seo-source__signal" aria-hidden="true"></span>
-                        <div>
-                            <strong>{{ $source['label'] }}</strong>
-                            <p>
-                                @if (!empty($source['connected']))
-                                    {{ $source['source'] ?? '' }} · {{ __('ops.custom_pages.seo_operations.sources.updated_at', ['time' => $source['updated_at'] ?? '-']) }}
-                                @else
-                                    {{ __('ops.custom_pages.seo_operations.sources.not_connected') }} · {{ $source['phase'] ?? __('ops.custom_pages.seo_operations.phase_two') }}
-                                @endif
-                            </p>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </section>
+        @endif
 
         <div class="ops-seo-workspace-panel" data-workspace="{{ $activeWorkspace }}">
 
@@ -249,26 +238,87 @@
         @endif
 
         @if ($activeWorkspace === 'overview')
-        <x-filament-ops::ops-section
-            :title="__('ops.custom_pages.seo_operations.health.title')"
-            :description="__('ops.custom_pages.seo_operations.health.current_snapshot')"
-        >
-            <div class="ops-data-strip">
-                @foreach ($healthBand as $metric)
-                    <div class="ops-metric">
-                        <span class="ops-metric__label">{{ $metric['label'] }}</span>
-                        <span class="ops-metric__value tnum">{{ $metric['value'] }}<small>{{ $metric['suffix'] ?? '' }}</small></span>
+            @if ($criticalAnomalies !== [])
+                <x-filament-ops::ops-section :title="__('ops.custom_pages.seo_operations.decision.critical_anomalies')">
+                    <div class="ops-card-list">
+                        @foreach ($criticalAnomalies as $cluster)
+                            <x-filament-ops::ops-result-card
+                                :title="$cluster['issue_type']"
+                                :meta="$cluster['severity'].' · '.__('ops.custom_pages.seo_operations.decision.affected_url_count', ['count' => $cluster['affected_url_count']])"
+                            >
+                                <p class="ops-control-hint">{{ $cluster['summary'] ?? $cluster['root_cause'] }}</p>
+                                <x-slot name="actions">
+                                    <x-filament::button size="xs" color="gray" type="button" wire:click="openClusterExecution('{{ $cluster['cluster_uid'] }}')">
+                                        {{ __('ops.custom_pages.seo_operations.decision.review_action') }}
+                                    </x-filament::button>
+                                </x-slot>
+                            </x-filament-ops::ops-result-card>
+                        @endforeach
                     </div>
-                @endforeach
-            </div>
-        </x-filament-ops::ops-section>
+                </x-filament-ops::ops-section>
+            @endif
 
-        <x-filament-ops::ops-section
-            :title="__('ops.custom_pages.seo_operations.readiness_title')"
-            :description="__('ops.custom_pages.seo_operations.readiness_desc')"
-        >
-            <x-filament-ops::ops-field-grid :fields="$headlineFields" />
-        </x-filament-ops::ops-section>
+            <x-filament-ops::ops-section :title="__('ops.custom_pages.seo_operations.decision.priority_clusters')">
+                <div class="ops-table-shell">
+                    <table class="ops-table">
+                        <thead><tr><th>{{ __('ops.custom_pages.seo_operations.clusters.cluster') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.priority') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.affected_urls') }}</th><th>{{ __('ops.custom_pages.seo_operations.clusters.recommendation') }}</th></tr></thead>
+                        <tbody>
+                            @forelse ($overviewPriorityClusters as $cluster)
+                                <tr><td>{{ $cluster['issue_type'] }}</td><td class="tnum">{{ data_get($cluster, 'priority.score', '-') }}</td><td class="tnum">{{ $cluster['affected_url_count'] }}</td><td>{{ $cluster['recommendation'] ?? '-' }}</td></tr>
+                            @empty
+                                <tr><td colspan="4">{{ __('ops.custom_pages.seo_operations.decision.no_priority_clusters') }}</td></tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </x-filament-ops::ops-section>
+
+            <x-filament-ops::ops-section :title="__('ops.custom_pages.seo_operations.decision.today_actions')">
+                <div class="ops-card-list">
+                    @forelse ($todayActions as $action)
+                        <x-filament-ops::ops-result-card
+                            :title="$action['title']"
+                            :meta="__('ops.custom_pages.seo_operations.decision.action_meta', ['score' => $action['score'], 'count' => $action['impact']])"
+                        >
+                            <p>{{ $action['action'] }}</p>
+                            <p class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.decision.why') }}: {{ $action['reason'] }}</p>
+                            <x-slot name="actions">
+                                @if (!empty($action['cluster_uid']))
+                                    <x-filament::button size="xs" type="button" wire:click="openClusterExecution('{{ $action['cluster_uid'] }}')">
+                                        {{ __('ops.custom_pages.seo_operations.decision.start_action') }}
+                                    </x-filament::button>
+                                @else
+                                    <x-filament::button size="xs" tag="a" href="{{ $action['edit_url'] }}">
+                                        {{ __('ops.custom_pages.seo_operations.decision.start_action') }}
+                                    </x-filament::button>
+                                @endif
+                            </x-slot>
+                        </x-filament-ops::ops-result-card>
+                    @empty
+                        <p class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.decision.no_today_actions') }}</p>
+                    @endforelse
+                </div>
+            </x-filament-ops::ops-section>
+
+            <x-filament-ops::ops-section :title="__('ops.custom_pages.seo_operations.sources.title')">
+                <div class="ops-seo-source-strip">
+                    @foreach ($dataSources as $source)
+                        <div @class(['ops-seo-source', 'ops-seo-source--connected' => !empty($source['connected'])])>
+                            <span class="ops-seo-source__signal" aria-hidden="true"></span>
+                            <div>
+                                <strong>{{ $source['label'] }}</strong>
+                                <p>
+                                    @if (!empty($source['connected']))
+                                        {{ $source['source'] ?? '' }} · {{ __('ops.custom_pages.seo_operations.sources.updated_at', ['time' => $source['updated_at'] ?? '-']) }}
+                                    @else
+                                        {{ __('ops.custom_pages.seo_operations.sources.not_connected') }}
+                                    @endif
+                                </p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </x-filament-ops::ops-section>
         @endif
 
         @if ($activeWorkspace === 'technical')
@@ -298,38 +348,6 @@
             :description="__('ops.custom_pages.seo_operations.coverage_desc')"
         >
             <x-filament-ops::ops-field-grid :fields="$coverageFields" />
-        </x-filament-ops::ops-section>
-        @endif
-
-        @if ($activeWorkspace === 'overview')
-        <x-filament-ops::ops-section
-            :title="__('ops.custom_pages.seo_operations.growth_title')"
-            :description="__('ops.custom_pages.seo_operations.growth_desc')"
-        >
-            <x-filament-ops::ops-field-grid :fields="$growthFields" />
-        </x-filament-ops::ops-section>
-
-        <x-filament-ops::ops-section
-            :title="__('ops.custom_pages.seo_operations.attention_title')"
-            :description="__('ops.custom_pages.seo_operations.attention_desc')"
-        >
-            <div class="ops-card-list">
-                @foreach ($attentionCards as $card)
-                    <x-filament-ops::ops-result-card
-                        :title="$card['title']"
-                        :meta="$card['meta']"
-                    >
-                        <p class="ops-control-hint">{{ $card['description'] }}</p>
-                        <p class="ops-control-hint">{{ __('ops.custom_pages.seo_operations.latest_record', ['title' => $card['latest_title']]) }}</p>
-                        <x-slot name="actions">
-                            <x-filament.ops.shared.status-pill
-                                :state="$card['status_state']"
-                                :label="$card['status'].' | '.$card['value']"
-                            />
-                        </x-slot>
-                    </x-filament-ops::ops-result-card>
-                @endforeach
-            </div>
         </x-filament-ops::ops-section>
         @endif
 
@@ -416,7 +434,7 @@
 
         @endif
 
-        @if (in_array($activeWorkspace, ['overview', 'execution'], true))
+        @if ($activeWorkspace === 'execution')
         <x-filament-ops::ops-section
             :title="__('ops.custom_pages.seo_operations.issue_queue_title')"
             :description="__('ops.custom_pages.seo_operations.issue_queue_desc')"

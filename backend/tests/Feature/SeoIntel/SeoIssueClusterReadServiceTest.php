@@ -116,6 +116,37 @@ final class SeoIssueClusterReadServiceTest extends TestCase
         $this->assertSame('impact_12_x_confidence_1.00_div_effort_3', data_get($titleCluster, 'priority.sort_reason'));
     }
 
+    public function test_decision_summary_counts_active_urls_index_blockers_priority_and_overdue_work(): void
+    {
+        DB::connection('seo_issue_cluster_test')->table('seo_issue_queue')
+            ->where('issue_uid', 'canonical-1')
+            ->update([
+                'metadata_json' => json_encode([
+                    'root_cause' => 'article_template_canonical',
+                    'template' => 'article_detail',
+                    'field' => 'canonical',
+                    'ops_workflow' => ['sla_due_at' => now()->subHour()->toAtomString()],
+                ], JSON_THROW_ON_ERROR),
+            ]);
+
+        $summary = (new SeoIssueClusterReadService('seo_issue_cluster_test'))->read()['summary'];
+
+        $this->assertSame(4, $summary['affected_url_count']);
+        $this->assertSame(1, $summary['index_blocker_url_count']);
+        $this->assertSame(2, $summary['high_priority_cluster_count']);
+        $this->assertSame(1, $summary['overdue_task_count']);
+
+        DB::connection('seo_issue_cluster_test')->table('seo_issue_queue')
+            ->where('issue_uid', 'canonical-1')
+            ->update(['status' => 'verified', 'lifecycle_state' => 'resolved']);
+
+        $resolvedSummary = (new SeoIssueClusterReadService('seo_issue_cluster_test'))->read()['summary'];
+        $this->assertSame(3, $resolvedSummary['affected_url_count']);
+        $this->assertSame(0, $resolvedSummary['index_blocker_url_count']);
+        $this->assertSame(1, $resolvedSummary['high_priority_cluster_count']);
+        $this->assertSame(0, $resolvedSummary['overdue_task_count']);
+    }
+
     public function test_quality_gated_gsc_observations_add_real_impact_without_estimating_click_loss(): void
     {
         $titleUrl = 'https://fermatmind.com/en/articles/title-1';

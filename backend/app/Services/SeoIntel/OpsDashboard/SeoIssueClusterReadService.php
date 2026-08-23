@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Services\SeoIntel\OpsDashboard;
 
 use App\Services\SeoIntel\GscDataQualityGate;
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Collection;
+use Throwable;
 
 final class SeoIssueClusterReadService extends AbstractSeoDashboardReadService
 {
@@ -28,13 +30,14 @@ final class SeoIssueClusterReadService extends AbstractSeoDashboardReadService
 
     /**
      * @param  array<string,string>  $filters
-     * @return array{total_count:int,page:int,per_page:int,last_page:int,rows:list<array<string,mixed>>}
+     * @return array{total_count:int,page:int,per_page:int,last_page:int,summary:array<string,int>,rows:list<array<string,mixed>>}
      */
     public function read(array $filters = [], int $page = 1, int $perPage = 25): array
     {
         $page = max(1, $page);
         $perPage = max(1, min($perPage, 100));
-        $clusters = $this->clusters($filters)->values();
+        $issues = $this->issueRows($filters);
+        $clusters = $this->clusters($filters, $issues)->values();
         $total = $clusters->count();
         $lastPage = max(1, (int) ceil($total / $perPage));
         $page = min($page, $lastPage);
@@ -44,8 +47,79 @@ final class SeoIssueClusterReadService extends AbstractSeoDashboardReadService
             'page' => $page,
             'per_page' => $perPage,
             'last_page' => $lastPage,
+            'summary' => $this->decisionSummary($issues, $clusters),
             'rows' => $clusters->forPage($page, $perPage)->values()->all(),
         ];
+    }
+
+    /**
+     * @param  Collection<int,object>  $issues
+     * @param  Collection<int,array<string,mixed>>  $clusters
+     * @return array{affected_url_count:int,index_blocker_url_count:int,high_priority_cluster_count:int,overdue_task_count:int}
+     */
+    private function decisionSummary(Collection $issues, Collection $clusters): array
+    {
+        $activeIssues = $issues->filter(fn (object $row): bool => $this->isActiveIssue($row));
+
+        return [
+            'affected_url_count' => $activeIssues
+                ->map(fn (object $row): ?string => $this->urlIdentity($row))
+                ->filter()
+                ->unique()
+                ->count(),
+            'index_blocker_url_count' => $activeIssues
+                ->filter(fn (object $row): bool => $this->isIndexBlocker($row))
+                ->map(fn (object $row): ?string => $this->urlIdentity($row))
+                ->filter()
+                ->unique()
+                ->count(),
+            'high_priority_cluster_count' => $clusters
+                ->filter(fn (array $cluster): bool => ($cluster['status'] ?? null) === 'open')
+                ->filter(fn (array $cluster): bool => in_array(($cluster['severity'] ?? null), ['high', 'critical'], true))
+                ->filter(fn (array $cluster): bool => (bool) data_get($cluster, 'priority.ranking_eligible', false))
+                ->count(),
+            'overdue_task_count' => $activeIssues
+                ->filter(fn (object $row): bool => $this->isOverdue($row))
+                ->count(),
+        ];
+    }
+
+    private function isActiveIssue(object $row): bool
+    {
+        return ! in_array((string) ($row->status ?? ''), ['resolved', 'verified', 'closed', 'ignored'], true)
+            && ! in_array((string) ($row->lifecycle_state ?? ''), ['resolved', 'closed', 'ignored'], true);
+    }
+
+    private function isIndexBlocker(object $row): bool
+    {
+        $axes = $this->axes($row);
+        $haystack = implode(' ', [
+            (string) ($row->issue_type ?? ''),
+            $axes['root_cause'],
+            $axes['field'],
+        ]);
+
+        foreach (['index', 'noindex', 'robots', 'canonical', 'sitemap'] as $needle) {
+            if (str_contains($haystack, $needle)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function isOverdue(object $row): bool
+    {
+        $dueAt = data_get($this->decodeJson($row->metadata_json ?? null), 'ops_workflow.sla_due_at');
+        if (! is_string($dueAt) || trim($dueAt) === '') {
+            return false;
+        }
+
+        try {
+            return CarbonImmutable::parse($dueAt)->isPast();
+        } catch (Throwable) {
+            return false;
+        }
     }
 
     /**

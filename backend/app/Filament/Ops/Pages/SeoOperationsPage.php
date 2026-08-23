@@ -83,9 +83,6 @@ class SeoOperationsPage extends Page
     public array $growthFields = [];
 
     /** @var list<array<string, mixed>> */
-    public array $attentionCards = [];
-
-    /** @var list<array<string, mixed>> */
     public array $issueQueue = [];
 
     public int $issueQueueElapsedMs = 0;
@@ -126,6 +123,21 @@ class SeoOperationsPage extends Page
 
     /** @var list<array<string, mixed>> */
     public array $dataSources = [];
+
+    /** @var array<string, int> */
+    public array $issueClusterSummary = [];
+
+    /** @var list<array<string, mixed>> */
+    public array $decisionSignals = [];
+
+    /** @var list<array<string, mixed>> */
+    public array $criticalAnomalies = [];
+
+    /** @var list<array<string, mixed>> */
+    public array $overviewPriorityClusters = [];
+
+    /** @var list<array<string, mixed>> */
+    public array $todayActions = [];
 
     /** @var list<array<string, mixed>> */
     public array $scopeSummary = [];
@@ -677,39 +689,6 @@ class SeoOperationsPage extends Page
         ];
         $this->growthFields = $this->annotateMetrics($this->growthFields, array_fill(0, count($this->growthFields), $combinedContract));
 
-        $this->attentionCards = [
-            $this->attentionCard(
-                __('ops.custom_pages.seo_operations.fields.article_gaps'),
-                __('ops.custom_pages.seo_operations.fields.article_gaps_desc'),
-                $articleTotal - $articleSeoReady,
-                __('ops.custom_pages.seo_operations.scopes.global_articles'),
-                $this->latestIssueTitle($service, 'article', $articles)
-            ),
-            $this->attentionCard(
-                __('ops.custom_pages.seo_operations.fields.guide_gaps'),
-                __('ops.custom_pages.seo_operations.fields.guide_gaps_desc'),
-                $guideTotal - $guideSeoReady,
-                __('ops.custom_pages.common.values.global_content'),
-                $this->latestIssueTitle($service, 'guide', $guides)
-            ),
-            $this->attentionCard(
-                __('ops.custom_pages.seo_operations.fields.job_gaps'),
-                __('ops.custom_pages.seo_operations.fields.job_gaps_desc'),
-                $jobTotal - $jobSeoReady,
-                __('ops.custom_pages.common.values.global_content'),
-                $this->latestIssueTitle($service, 'job', $jobs)
-            ),
-            [
-                'title' => __('ops.custom_pages.seo_operations.fields.growth_blockers'),
-                'description' => __('ops.custom_pages.seo_operations.fields.growth_blockers_desc'),
-                'meta' => __('ops.custom_pages.seo_operations.fields.growth_blockers_meta', ['count' => $publishedDiscoveryBlocked]),
-                'value' => (string) $publishedDiscoveryBlocked,
-                'status' => $publishedDiscoveryBlocked > 0 ? __('ops.custom_pages.common.values.needs_attention') : __('ops.custom_pages.common.values.healthy'),
-                'status_state' => $publishedDiscoveryBlocked > 0 ? 'warning' : 'success',
-                'latest_title' => $this->latestGrowthBlockedTitle($service, $articles, $guides, $jobs),
-            ],
-        ];
-
         $issueQueue = $service->buildIssueQueue(
             $seoAuthorityOrgIds,
             $this->typeFilter,
@@ -768,6 +747,8 @@ class SeoOperationsPage extends Page
             array_merge(['key' => SeoContentScopeViewModel::SCOPE_GLOBAL_CAREER, 'label' => __('ops.custom_pages.seo_operations.scopes.global_career'), 'count' => $careerTotal], $careerContract),
             array_merge(['key' => SeoContentScopeViewModel::SCOPE_COMBINED, 'label' => __('ops.custom_pages.seo_operations.scopes.combined'), 'count' => $totalInventory], $combinedContract),
         ];
+
+        $this->refreshDecisionOverview();
     }
 
     /**
@@ -804,6 +785,7 @@ class SeoOperationsPage extends Page
             $this->searchPerformance = ['connected' => false, 'totals' => [], 'daily' => [], 'query_page_rows' => []];
             $this->opportunityQueue = [];
             $this->issueClusters = [];
+            $this->issueClusterSummary = [];
             $this->issueClusterTotal = 0;
             $this->issueClusterLastPage = 1;
             $this->clusterUrls = [];
@@ -814,12 +796,12 @@ class SeoOperationsPage extends Page
 
         $gscConnected = (bool) ($this->searchPerformance['connected'] ?? false);
         $this->dataSources = [
-            ['key' => 'cms', 'label' => 'CMS / SEO metadata', 'connected' => true, 'source' => 'primary database', 'updated_at' => now()->toAtomString()],
-            ['key' => 'gsc', 'label' => 'Google Search Console', 'connected' => $gscConnected, 'source' => $gscConnected ? 'seo_intel.seo_gsc_daily' : null, 'updated_at' => $this->searchPerformance['updated_at'] ?? null],
-            ['key' => 'cwv', 'label' => 'Core Web Vitals', 'connected' => false, 'phase' => 'Phase 2'],
-            ['key' => 'rank', 'label' => __('ops.custom_pages.seo_operations.sources.rank_tracking'), 'connected' => false, 'phase' => 'Phase 2'],
-            ['key' => 'ai', 'label' => 'AI Visibility', 'connected' => false, 'phase' => 'Phase 2'],
-            ['key' => 'backlinks', 'label' => __('ops.custom_pages.seo_operations.sources.backlinks'), 'connected' => false, 'phase' => 'Phase 2'],
+            ['key' => 'cms', 'label' => __('ops.custom_pages.seo_operations.sources.cms'), 'connected' => true, 'source' => 'primary database', 'updated_at' => now()->toAtomString()],
+            ['key' => 'gsc', 'label' => __('ops.custom_pages.seo_operations.sources.gsc'), 'connected' => $gscConnected, 'source' => $gscConnected ? 'seo_intel.seo_gsc_daily' : null, 'updated_at' => $this->searchPerformance['updated_at'] ?? null],
+            ['key' => 'cwv', 'label' => __('ops.custom_pages.seo_operations.sources.cwv'), 'connected' => false, 'phase' => __('ops.custom_pages.seo_operations.phase_two')],
+            ['key' => 'rank', 'label' => __('ops.custom_pages.seo_operations.sources.rank_tracking'), 'connected' => false, 'phase' => __('ops.custom_pages.seo_operations.phase_two')],
+            ['key' => 'ai', 'label' => __('ops.custom_pages.seo_operations.workspace.ai'), 'connected' => false, 'phase' => __('ops.custom_pages.seo_operations.phase_two')],
+            ['key' => 'backlinks', 'label' => __('ops.custom_pages.seo_operations.sources.backlinks'), 'connected' => false, 'phase' => __('ops.custom_pages.seo_operations.phase_two')],
         ];
 
         try {
@@ -838,15 +820,150 @@ class SeoOperationsPage extends Page
         } catch (Throwable) {
             $this->deploymentEvents = [];
         }
+
+        $this->refreshDecisionOverview();
     }
 
     private function refreshIssueClusters(SeoDashboardApiReadService $reader): void
     {
         $result = $reader->issueClusters(page: $this->issueClusterPage, perPage: self::ISSUE_QUEUE_PER_PAGE);
         $this->issueClusters = (array) ($result['rows'] ?? []);
+        $this->issueClusterSummary = (array) ($result['summary'] ?? []);
         $this->issueClusterTotal = (int) ($result['total_count'] ?? 0);
         $this->issueClusterPage = (int) ($result['page'] ?? 1);
         $this->issueClusterLastPage = (int) ($result['last_page'] ?? 1);
+    }
+
+    private function refreshDecisionOverview(): void
+    {
+        $signals = [];
+        $searchChange = $this->searchChangeSignal();
+        if ($searchChange !== null) {
+            $signals[] = $searchChange;
+        }
+
+        $affectedUrls = $this->seoIntelAvailable
+            ? (int) ($this->issueClusterSummary['affected_url_count'] ?? 0)
+            : count($this->issueQueue);
+        $indexBlockers = $this->seoIntelAvailable
+            ? (int) ($this->issueClusterSummary['index_blocker_url_count'] ?? 0)
+            : count(array_filter($this->issueQueue, static fn (array $row): bool => array_intersect(
+                (array) ($row['issue_codes'] ?? []),
+                ['canonical', 'robots', 'indexability', 'growth'],
+            ) !== []));
+
+        $signals[] = $this->decisionSignal('affected_urls', $affectedUrls, 'execution');
+        $signals[] = $this->decisionSignal('index_blockers', $indexBlockers, 'technical');
+
+        if ($this->seoIntelAvailable) {
+            $signals[] = $this->decisionSignal(
+                'high_priority_issues',
+                (int) ($this->issueClusterSummary['high_priority_cluster_count'] ?? 0),
+                'execution',
+            );
+            $signals[] = $this->decisionSignal(
+                'overdue_tasks',
+                (int) ($this->issueClusterSummary['overdue_task_count'] ?? 0),
+                'execution',
+            );
+        }
+
+        $this->decisionSignals = array_slice($signals, 0, 5);
+        $this->criticalAnomalies = array_values(array_slice(array_filter(
+            $this->issueClusters,
+            static fn (array $cluster): bool => ($cluster['status'] ?? null) === 'open'
+                && in_array(($cluster['severity'] ?? null), ['high', 'critical'], true),
+        ), 0, 3));
+        $this->overviewPriorityClusters = array_values(array_slice(array_filter(
+            $this->issueClusters,
+            static fn (array $cluster): bool => ($cluster['status'] ?? null) === 'open'
+                && (bool) data_get($cluster, 'priority.ranking_eligible', false),
+        ), 0, 3));
+        $this->todayActions = array_map(static fn (array $cluster): array => [
+            'cluster_uid' => (string) $cluster['cluster_uid'],
+            'edit_url' => null,
+            'title' => (string) $cluster['issue_type'],
+            'reason' => (string) ($cluster['summary'] ?? $cluster['root_cause'] ?? '-'),
+            'impact' => (int) ($cluster['affected_url_count'] ?? 0),
+            'score' => data_get($cluster, 'priority.score', '-'),
+            'action' => (string) ($cluster['recommendation'] ?? '-'),
+        ], array_slice($this->overviewPriorityClusters, 0, 5));
+
+        if ($this->todayActions === []) {
+            $this->todayActions = array_map(static fn (array $row): array => [
+                'cluster_uid' => null,
+                'edit_url' => (string) ($row['edit_url'] ?? '#'),
+                'title' => (string) ($row['title'] ?? '-'),
+                'reason' => implode(' · ', (array) ($row['issue_labels'] ?? [])),
+                'impact' => 1,
+                'score' => '-',
+                'action' => implode(' · ', array_map(
+                    static fn (string $action): string => __('ops.custom_pages.seo_operations.filters.'.$action),
+                    (array) ($row['autofix_actions'] ?? []),
+                )),
+            ], array_slice($this->issueQueue, 0, 5));
+        }
+    }
+
+    /** @return array<string,mixed>|null */
+    private function searchChangeSignal(): ?array
+    {
+        if (! (bool) ($this->searchPerformance['connected'] ?? false)) {
+            return null;
+        }
+
+        $daily = collect((array) ($this->searchPerformance['daily'] ?? []))
+            ->sortBy('report_date')
+            ->values();
+        if ($daily->count() < 2) {
+            return null;
+        }
+
+        $current = (array) $daily->last();
+        $previous = (array) $daily->get($daily->count() - 2);
+        $currentClicks = (int) ($current['clicks'] ?? 0);
+        $previousClicks = (int) ($previous['clicks'] ?? 0);
+        $delta = $previousClicks > 0
+            ? round((($currentClicks - $previousClicks) / $previousClicks) * 100, 1)
+            : null;
+
+        return [
+            'key' => 'search_change',
+            'label' => __('ops.custom_pages.seo_operations.decision.signals.search_change'),
+            'value' => $delta === null ? (string) ($currentClicks - $previousClicks) : sprintf('%+.1f%%', $delta),
+            'hint' => __('ops.custom_pages.seo_operations.decision.search_change_hint', [
+                'current' => $currentClicks,
+                'previous' => $previousClicks,
+            ]),
+            'workspace' => 'performance',
+            'tone' => ($delta ?? ($currentClicks - $previousClicks)) < 0 ? 'danger' : 'success',
+        ];
+    }
+
+    /** @return array<string,mixed> */
+    private function decisionSignal(string $key, int $value, string $workspace): array
+    {
+        return [
+            'key' => $key,
+            'label' => __('ops.custom_pages.seo_operations.decision.signals.'.$key),
+            'value' => (string) $value,
+            'hint' => __('ops.custom_pages.seo_operations.decision.signal_hints.'.$key),
+            'workspace' => $workspace,
+            'tone' => $value > 0 ? 'warning' : 'success',
+        ];
+    }
+
+    public function openDecisionWorkspace(string $workspace): void
+    {
+        if (in_array($workspace, ['overview', 'performance', 'technical', 'opportunities', 'ai', 'execution'], true)) {
+            $this->activeWorkspace = $workspace;
+        }
+    }
+
+    public function openClusterExecution(string $clusterUid): void
+    {
+        $this->activeWorkspace = 'execution';
+        $this->inspectIssueCluster($clusterUid);
     }
 
     private function refreshClusterUrls(SeoDashboardApiReadService $reader): void
@@ -952,39 +1069,6 @@ class SeoOperationsPage extends Page
         return $records->filter(fn (object $record): bool => $service->hasPublishedDiscoveryBlocker($type, $record))->count();
     }
 
-    /**
-     * @param  Collection<int, object>  $records
-     */
-    private function latestIssueTitle(SeoOperationsService $service, string $type, Collection $records): ?string
-    {
-        $record = $records->first(fn (object $item): bool => $service->issuesFor($type, $item) !== []);
-
-        return is_object($record) ? trim((string) data_get($record, 'title', '')) : null;
-    }
-
-    /**
-     * @param  Collection<int, Article>  $articles
-     * @param  Collection<int, CareerGuide>  $guides
-     * @param  Collection<int, CareerJob>  $jobs
-     */
-    private function latestGrowthBlockedTitle(
-        SeoOperationsService $service,
-        Collection $articles,
-        Collection $guides,
-        Collection $jobs,
-    ): string {
-        $candidates = collect([
-            $articles->first(fn (Article $record): bool => $service->hasPublishedDiscoveryBlocker('article', $record)),
-            $guides->first(fn (CareerGuide $record): bool => $service->hasPublishedDiscoveryBlocker('guide', $record)),
-            $jobs->first(fn (CareerJob $record): bool => $service->hasPublishedDiscoveryBlocker('job', $record)),
-        ])->filter(fn ($record): bool => is_object($record));
-
-        /** @var object|null $latest */
-        $latest = $candidates->sortByDesc(static fn (object $record): string => (string) optional(data_get($record, 'updated_at'))->toISOString())->first();
-
-        return trim((string) data_get($latest, 'title', '')) !== '' ? trim((string) data_get($latest, 'title', '')) : __('ops.custom_pages.common.values.no_recent_record');
-    }
-
     private function ratioLabel(int $value, int $total): string
     {
         if ($total <= 0) {
@@ -1035,26 +1119,5 @@ class SeoOperationsPage extends Page
         usort($rows, static fn (array $a, array $b): int => $b['count'] <=> $a['count']);
 
         return $rows;
-    }
-
-    /**
-     * @return array<string, string>
-     */
-    private function attentionCard(
-        string $title,
-        string $description,
-        int $count,
-        string $scope,
-        ?string $latestTitle,
-    ): array {
-        return [
-            'title' => $title,
-            'description' => $description,
-            'meta' => __('ops.custom_pages.seo_operations.fields.records_need_work', ['scope' => $scope, 'count' => $count]),
-            'value' => (string) $count,
-            'status' => $count > 0 ? __('ops.custom_pages.common.values.needs_attention') : __('ops.custom_pages.common.values.healthy'),
-            'status_state' => $count > 0 ? 'warning' : 'success',
-            'latest_title' => trim((string) $latestTitle) !== '' ? trim((string) $latestTitle) : __('ops.custom_pages.common.values.no_recent_record'),
-        ];
     }
 }
