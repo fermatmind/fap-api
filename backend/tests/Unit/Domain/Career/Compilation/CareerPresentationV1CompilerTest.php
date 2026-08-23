@@ -29,6 +29,11 @@ final class CareerPresentationV1CompilerTest extends TestCase
             'runtime_missing_links_policy' => 'preserve_existing_surface',
             'title_zh_authority' => 'immutable_identity.title_zh',
         ], data_get($authority, 'manifest.presentation_v1.related_next_pages'));
+        self::assertSame([
+            'accountants_unverified_ai_cases' => 'omit',
+            'accountants_unverified_china_market_metrics' => 'omit',
+            'missing_authoritative_market_data' => 'explicit_unavailable_state',
+        ], data_get($authority, 'manifest.presentation_v1.unsupported_claim_policy'));
         foreach ($authority['rows'] as $row) {
             $presentation = $row['metadata_json']['presentation_v1']['zh'] ?? null;
             self::assertIsArray($presentation);
@@ -70,6 +75,20 @@ final class CareerPresentationV1CompilerTest extends TestCase
             $authority['rows']['accountants-and-auditors'],
             'en',
         ));
+        $accountantPage = data_get($authority['rows']['accountants-and-auditors'], 'page_payload_json.page.zh');
+        self::assertCount(9, data_get($accountantPage, 'faq_block.items'));
+        self::assertSame(
+            ['bls_table', 'us_growth', 'us_median'],
+            array_keys(data_get($accountantPage, 'career_snapshot_primary_locale.salary')),
+        );
+        self::assertSame('中国大陆在招数量暂无可复核原始样本，因此不展示。', data_get(
+            $accountantPage,
+            'market_signal_card.facts.2',
+        ));
+        $accountantPageBytes = CareerCurrentAuthorityPackage::encodeCanonical($accountantPage);
+        foreach (['KPMG', 'Thomson Reuters', 'AICPA', '36氪', '浙大', '财务 BP 招聘同比', '¥201,883', '¥9,000'] as $forbidden) {
+            self::assertStringNotContainsString($forbidden, $accountantPageBytes);
+        }
 
         $actuaries = $authority['rows']['actuaries']['metadata_json']['presentation_v1']['zh'];
         self::assertSame(8, data_get($actuaries, 'hero.ai_exposure.value'));

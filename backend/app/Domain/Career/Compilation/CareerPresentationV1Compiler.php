@@ -11,7 +11,7 @@ use JsonException;
 
 final class CareerPresentationV1Compiler
 {
-    public const VERSION = 'career.presentation_v1.compiler.v5';
+    public const VERSION = 'career.presentation_v1.compiler.v6';
 
     /** @var array<string,array{label:string,source_field:string}> */
     private const BLS_STATS = [
@@ -90,6 +90,7 @@ final class CareerPresentationV1Compiler
             $presentation = $this->project($slug, $blocks, $row, $coverage, $missingFields);
             CareerPresentationV1Contract::assert($presentation);
             $beforeEnHashes[] = CareerCurrentAuthorityPackage::hashValue($this->englishContentProjection($row));
+            $row = $this->removeUnsupportedAccountantMarketClaims($slug, $row, $presentation);
             $beforeZhNonRelatedHashes[] = CareerCurrentAuthorityPackage::hashValue($this->zhPageWithoutRelatedLinks($row));
             $row = $this->normalizeMultipleOnetReferences($slug, $row, $sourceReferenceChanges);
             $row = $this->compileRelatedNextPages($slug, $row, $titleZhBySlug, $relatedNextPageChanges);
@@ -152,6 +153,11 @@ final class CareerPresentationV1Compiler
                 'title_zh_authority' => 'immutable_identity.title_zh',
                 'maximum_links' => 12,
                 'runtime_missing_links_policy' => 'preserve_existing_surface',
+            ],
+            'unsupported_claim_policy' => [
+                'accountants_unverified_ai_cases' => 'omit',
+                'accountants_unverified_china_market_metrics' => 'omit',
+                'missing_authoritative_market_data' => 'explicit_unavailable_state',
             ],
             'zh_presentation_count' => count($candidateRows),
         ];
@@ -848,6 +854,104 @@ final class CareerPresentationV1Compiler
         $page['related_next_pages'] = $related;
         $payload = is_array($row['page_payload_json'] ?? null) ? $row['page_payload_json'] : [];
         if (is_array($payload['page'] ?? null)) {
+            $row['page_payload_json']['page']['zh'] = $page;
+        } else {
+            $row['page_payload_json']['zh'] = $page;
+        }
+
+        return $row;
+    }
+
+    /**
+     * The visual reference contains illustrative China-market and secondary-report
+     * numbers without claim-level primary-source bindings. Keep the 26-component
+     * projection, but publish an explicit unavailable state until those bindings
+     * exist instead of allowing the examples to become runtime truth.
+     *
+     * @param  array<string,mixed>  $row
+     * @param  array<string,mixed>  $presentation
+     * @return array<string,mixed>
+     */
+    private function removeUnsupportedAccountantMarketClaims(string $slug, array $row, array &$presentation): array
+    {
+        if ($slug !== 'accountants-and-auditors') {
+            return $row;
+        }
+
+        $page = $this->zhPage($row);
+        $snapshot = is_array($page['career_snapshot_primary_locale'] ?? null)
+            ? $page['career_snapshot_primary_locale']
+            : [];
+        $salary = is_array($snapshot['salary'] ?? null) ? $snapshot['salary'] : [];
+        foreach (array_keys($salary) as $key) {
+            if (str_starts_with((string) $key, 'china_') || in_array($key, ['edu', 'sources_note'], true)) {
+                unset($salary[$key]);
+            }
+        }
+        $snapshot['salary'] = $salary;
+        $page['career_snapshot_primary_locale'] = $snapshot;
+
+        $page['market_signal_card'] = [
+            'intro' => '仅展示已绑定原始来源的市场事实；无法复核的招聘平台数字和二手报告案例不发布。',
+            'callout' => '美国 BLS 预计 2024–2034 年年均约 124,200 个职位空缺；O*NET 招聘样本中 Microsoft Excel 为高频软件技能。',
+            'facts' => [
+                '美国 BLS：2024–2034 年年均约 124,200 个职位空缺。',
+                'O*NET 招聘样本：Microsoft Excel 出现率 28%。',
+                '中国大陆在招数量暂无可复核原始样本，因此不展示。',
+            ],
+            'signals' => [
+                '年均空缺：约 124,200 个（美国 BLS，2024–2034）。',
+                '热招技能：Microsoft Excel（O*NET 招聘样本，2025）。',
+                '国内在招：暂无可复核原始样本。',
+            ],
+        ];
+
+        $aiImpact = is_array($page['ai_impact_table'] ?? null) ? $page['ai_impact_table'] : [];
+        $aiImpact['ai_s4_p2'] = '8/10 表示任务层面的 AI 曝光较高，不是失业概率或岗位替代预测；结论应回到具体任务、责任与证据边界。';
+        if (is_array($aiImpact['ai_s5_persona'] ?? null)) {
+            foreach ($aiImpact['ai_s5_persona'] as $index => $persona) {
+                if (! is_array($persona)) {
+                    continue;
+                }
+                $label = (string) ($persona['人群'] ?? $persona['persona'] ?? '');
+                if (str_contains($label, '考生') || str_contains($label, '学生')) {
+                    $persona['建议'] = '从会计准则、审计证据与数据分析基础起步，再用职业兴趣测评确认自己能否长期适应该工作结构。';
+                } elseif (str_contains($label, '在职')) {
+                    $persona['建议'] = '优先升级复核、内控、异常分析与业务解释能力；薪资或招聘趋势需等待可复核原始样本。';
+                }
+                $aiImpact['ai_s5_persona'][$index] = $persona;
+            }
+        }
+        $page['ai_impact_table'] = $aiImpact;
+
+        $faq = is_array($page['faq_block'] ?? null) ? $page['faq_block'] : [];
+        if (is_array($faq['items'] ?? null)) {
+            foreach ($faq['items'] as $index => $item) {
+                if (! is_array($item)) {
+                    continue;
+                }
+                $question = (string) ($item['question'] ?? '');
+                if ($question === '会计工资一般多少？') {
+                    $item['answer'] = '美国 2024 年职业年薪中位数为 $81,680（BLS）；中国大陆暂无统一单职业官方中位薪资，城市薪资与招聘数量因缺少可复核原始样本而不展示。';
+                } elseif ($question === '学会计还值得吗？需要考什么证？') {
+                    $item['answer'] = '仍值得，但应从单一做账转向准则、审计证据、数据分析与 AI 协同。常见路径包括注册会计师（CPA）、管理会计与会计职称；具体执业资格以主管机构现行规则为准。';
+                }
+                $faq['items'][$index] = $item;
+            }
+        }
+        $page['faq_block'] = $faq;
+
+        $sourceText = '本文职业事实与美国劳动力市场数据来自 BLS、O*NET 及 FermatMind 已登记来源；中国城市薪资、国内招聘数量和未绑定原始来源的企业案例不展示。';
+        $sourceCard = is_array($page['source_card'] ?? null) ? $page['source_card'] : [];
+        $sourceCard['note'] = $sourceText;
+        $signals = is_array($sourceCard['eeat_signals'] ?? null) ? $sourceCard['eeat_signals'] : [];
+        $signals['source'] = $sourceText;
+        $sourceCard['eeat_signals'] = $signals;
+        $page['source_card'] = $sourceCard;
+
+        $presentation['notices']['salary_boundary'] = '中国大陆城市薪资与招聘数量暂无可复核原始样本，因此不展示。';
+
+        if (is_array($row['page_payload_json']['page'] ?? null)) {
             $row['page_payload_json']['page']['zh'] = $page;
         } else {
             $row['page_payload_json']['zh'] = $page;
