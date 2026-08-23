@@ -6,7 +6,6 @@ namespace App\Services\Career\Bundles;
 
 use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Domain\Career\Display\CareerPresentationV1Contract;
-use App\Domain\Career\Display\CareerSupportingEvidenceV1Contract;
 use App\DTO\Career\CareerJobDetailBundle;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
@@ -135,7 +134,6 @@ final class CareerJobDisplaySurfaceBuilder
 
         $componentOrder = $this->stripForbiddenKeys($asset->component_order_json ?? []);
         $pageContent = $this->localizeInternalHrefs($pageContent, $normalizedLocale);
-        $pageContent = $this->normalizeRelatedNextPages($pageContent, $canonicalSlug);
         $claimPermissions = $this->claimPermissions($occupation, $asset, $pageContent);
         if (! $this->hasRequiredClaimPermissionKeys($claimPermissions)) {
             return null;
@@ -164,25 +162,7 @@ final class CareerJobDisplaySurfaceBuilder
             $presentation = $this->stripForbiddenKeys($presentation);
         }
 
-        $supportingEvidence = $normalizedLocale === 'zh'
-            ? data_get($asset->metadata_json, 'supporting_evidence_v1.zh')
-            : null;
-        if ($supportingEvidence !== null) {
-            if (! is_array($supportingEvidence)) {
-                return null;
-            }
-            try {
-                CareerSupportingEvidenceV1Contract::assert(
-                    $supportingEvidence,
-                    is_array($sources['references'] ?? null) ? array_values($sources['references']) : [],
-                );
-            } catch (\Throwable) {
-                return null;
-            }
-            $supportingEvidence = $this->stripForbiddenKeys($supportingEvidence);
-        }
-
-        if ($this->containsForbiddenPublicKey([$page, $componentOrder, $sources, $structuredData, $implementationContract, $claimPermissions, $presentation, $supportingEvidence])) {
+        if ($this->containsForbiddenPublicKey([$page, $componentOrder, $sources, $structuredData, $implementationContract, $claimPermissions, $presentation])) {
             return null;
         }
 
@@ -205,80 +185,8 @@ final class CareerJobDisplaySurfaceBuilder
         if (is_array($presentation)) {
             $surface['presentation_v1'] = $presentation;
         }
-        if (is_array($supportingEvidence)) {
-            $surface['supporting_evidence_v1'] = $supportingEvidence;
-        }
 
         return $surface;
-    }
-
-    /** @param array<string,mixed> $pageContent @return array<string,mixed> */
-    private function normalizeRelatedNextPages(array $pageContent, string $currentSlug): array
-    {
-        $related = $pageContent['related_next_pages'] ?? null;
-        if (! is_array($related)
-            || ! is_array($related['links'] ?? null)
-            || ! array_is_list($related['links'])) {
-            return $pageContent;
-        }
-        $links = $related['links'];
-        $candidates = [];
-        $seenSlugs = [];
-        foreach ($links as $index => $link) {
-            if (! is_array($link)) {
-                continue;
-            }
-            $slug = strtolower(trim((string) ($link['slug'] ?? '')));
-            $source = (string) ($link['source'] ?? '');
-            $titleEn = trim((string) ($link['title_en'] ?? ''));
-            if (preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $slug) !== 1
-                || $slug === $currentSlug || $slug === 'software-developers' || isset($seenSlugs[$slug])
-                || ! in_array($source, ['self_pick', 'lookup'], true) || $titleEn === ''
-                || ! is_bool($link['nofollow'] ?? null)) {
-                continue;
-            }
-            $titleZh = $this->localeIntegrityGate->validZhAuthorityText($link['title_zh'] ?? null);
-            if ($titleZh === null) {
-                continue;
-            }
-            $seenSlugs[$slug] = true;
-            $candidates[] = [
-                'index' => $index,
-                'slug' => $slug,
-                'source' => $source,
-                'title_en' => $titleEn,
-                'title_zh' => $titleZh,
-                'nofollow' => $link['nofollow'],
-            ];
-        }
-        usort($candidates, static fn (array $left, array $right): int => [
-            $left['source'] === 'self_pick' ? 0 : 1, $left['index'],
-        ] <=> [
-            $right['source'] === 'self_pick' ? 0 : 1, $right['index'],
-        ]);
-        $normalized = [];
-        $seenTitles = [];
-        foreach ($candidates as $candidate) {
-            $titleKey = mb_strtolower($candidate['title_zh'], 'UTF-8');
-            if (isset($seenTitles[$titleKey])) {
-                continue;
-            }
-            $seenTitles[$titleKey] = true;
-            $normalized[] = [
-                'slug' => $candidate['slug'],
-                'title_en' => $candidate['title_en'],
-                'title_zh' => $candidate['title_zh'],
-                'source' => $candidate['source'],
-                'nofollow' => $candidate['nofollow'],
-            ];
-            if (count($normalized) === 12) {
-                break;
-            }
-        }
-        $related['links'] = $normalized;
-        $pageContent['related_next_pages'] = $related;
-
-        return $pageContent;
     }
 
     /**

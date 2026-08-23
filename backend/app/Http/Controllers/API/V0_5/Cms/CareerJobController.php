@@ -127,9 +127,7 @@ final class CareerJobController extends Controller
 
         $bundle = $this->careerJobDetailBundleBuilder->buildBySlug($slug, $validated['locale']);
         if ($bundle instanceof CareerJobDetailBundle) {
-            $job = $this->careerJobService->getPublicJobBySlug($slug, $validated['org_id'], $validated['locale']);
-
-            return response()->json($this->bundleSeoAuthorityPayload($bundle, $validated['locale'], $job));
+            return response()->json($this->bundleSeoAuthorityPayload($bundle, $validated['locale']));
         }
 
         // The career detail page is the public runtime authority. If the route cannot
@@ -140,28 +138,15 @@ final class CareerJobController extends Controller
     /**
      * @return array<string,mixed>
      */
-    private function bundleSeoAuthorityPayload(CareerJobDetailBundle $bundle, string $locale, ?CareerJob $job = null): array
+    private function bundleSeoAuthorityPayload(CareerJobDetailBundle $bundle, string $locale): array
     {
         $seoContract = $bundle->seoContract;
-        $publishedMeta = $job instanceof CareerJob
-            ? $this->careerJobService->seoMetaPayload($job->seoMeta)
-            : null;
         $canonical = $this->canonicalFromSeoContract($seoContract, $bundle, $locale);
-        $title = is_array($publishedMeta) && is_string($publishedMeta['seo_title'] ?? null) && trim($publishedMeta['seo_title']) !== ''
-            ? trim($publishedMeta['seo_title']) : $this->bundleTitle($bundle, $locale);
-        $description = is_array($publishedMeta) && is_string($publishedMeta['seo_description'] ?? null) && trim($publishedMeta['seo_description']) !== ''
-            ? trim($publishedMeta['seo_description']) : $this->bundleDescription($bundle, $title);
-        $bundleRobots = $this->seoContractRobots($seoContract);
-        $publishedRobots = is_array($publishedMeta) && is_string($publishedMeta['robots'] ?? null)
-            ? $publishedMeta['robots'] : null;
-        $publicIndexable = ! $this->containsNoindex($bundleRobots)
-            && ! $this->containsNoindex($publishedRobots)
+        $title = $this->bundleTitle($bundle, $locale);
+        $description = $this->bundleDescription($bundle, $title);
+        $robots = $this->seoContractRobots($seoContract);
+        $publicIndexable = ! $this->containsNoindex($robots)
             && (bool) ($seoContract['index_eligible'] ?? false);
-        $robots = $publicIndexable ? ($publishedRobots ?? $bundleRobots) : 'noindex,follow';
-        $ogTitle = $this->publishedMetaText($publishedMeta, 'og_title') ?? $title;
-        $ogDescription = $this->publishedMetaText($publishedMeta, 'og_description') ?? $description;
-        $twitterTitle = $this->publishedMetaText($publishedMeta, 'twitter_title') ?? $ogTitle;
-        $twitterDescription = $this->publishedMetaText($publishedMeta, 'twitter_description') ?? $ogDescription;
         $jsonLd = $this->careerStructuredDataBuilder->build('career_job_detail', $bundle);
 
         $meta = PublicMediaUrlGuard::sanitizeSeoMeta([
@@ -173,17 +158,17 @@ final class CareerJobController extends Controller
                 'zh-CN' => '/zh/career/jobs/'.rawurlencode((string) ($bundle->identity['canonical_slug'] ?? '')),
             ],
             'og' => [
-                'title' => $ogTitle,
-                'description' => $ogDescription,
-                'image' => data_get($publishedMeta, 'og_image_url'),
+                'title' => $title,
+                'description' => $description,
+                'image' => null,
                 'type' => 'article',
                 'url' => $canonical,
             ],
             'twitter' => [
                 'card' => 'summary_large_image',
-                'title' => $twitterTitle,
-                'description' => $twitterDescription,
-                'image' => data_get($publishedMeta, 'twitter_image_url'),
+                'title' => $title,
+                'description' => $description,
+                'image' => null,
             ],
             'robots' => $robots,
         ]);
@@ -193,14 +178,6 @@ final class CareerJobController extends Controller
             'jsonld' => $jsonLd,
             'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, 'career_job_public_detail', $publicIndexable),
         ];
-    }
-
-    /** @param array<string,mixed>|null $meta */
-    private function publishedMetaText(?array $meta, string $key): ?string
-    {
-        $value = $meta[$key] ?? null;
-
-        return is_string($value) && trim($value) !== '' ? trim($value) : null;
     }
 
     /**
@@ -255,12 +232,8 @@ final class CareerJobController extends Controller
         return (bool) ($seoContract['index_eligible'] ?? false) ? 'index,follow' : 'noindex,follow';
     }
 
-    private function containsNoindex(?string $robots): bool
+    private function containsNoindex(string $robots): bool
     {
-        if ($robots === null) {
-            return false;
-        }
-
         $tokens = array_map(
             static fn (string $token): string => strtolower(trim($token)),
             explode(',', $robots)

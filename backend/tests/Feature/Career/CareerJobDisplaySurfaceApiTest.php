@@ -371,19 +371,6 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
         }
     }
 
-    public function test_current_only_job_without_cms_meta_has_a_valid_seo_authority_response(): void
-    {
-        $occupation = $this->seedDisplayAssetBackedDirectoryDraftOccupation('acupuncturists');
-        $this->createDisplayAsset($occupation);
-        $this->getWarmedJobDetailJson('/api/v0.5/career/jobs/acupuncturists?locale=zh-CN')->assertOk();
-
-        $this->getJson('/api/v0.5/career-jobs/acupuncturists/seo?locale=zh-CN')
-            ->assertOk()
-            ->assertJsonPath('meta.canonical', '/zh/career/jobs/acupuncturists')
-            ->assertJsonPath('meta.robots', 'index,follow')
-            ->assertJsonPath('seo_surface_v1.indexability_state', 'indexable');
-    }
-
     public function test_approved_display_asset_without_compiled_snapshot_builds_public_detail_bundle(): void
     {
         $occupation = $this->seedDisplayAssetBackedDirectoryDraftOccupation('architects');

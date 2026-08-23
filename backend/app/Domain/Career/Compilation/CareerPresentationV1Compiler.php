@@ -6,22 +6,25 @@ namespace App\Domain\Career\Compilation;
 
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerPresentationV1Contract;
-use App\Domain\Career\Display\CareerSupportingEvidenceV1Contract;
 use JsonException;
 
 final class CareerPresentationV1Compiler
 {
-    public const VERSION = 'career.presentation_v1.compiler.v7';
+    public const VERSION = 'career.presentation_v1.compiler.v2';
 
     /** @var array<string,array{label:string,source_field:string}> */
     private const BLS_STATS = [
         '中位年薪' => ['label' => '美国年薪中位数', 'source_field' => 'salary.bls_table.中位年薪'],
         '就业增长' => ['label' => '美国就业增长', 'source_field' => 'salary.bls_table.就业增长'],
+        '在岗人数' => ['label' => '美国在岗人数', 'source_field' => 'salary.bls_table.在岗人数'],
+        '年均职位空缺' => ['label' => '美国年均职位空缺', 'source_field' => 'salary.bls_table.年均职位空缺'],
     ];
 
     private const STAT_KEYS = [
         '中位年薪' => 'us_median_pay',
         '就业增长' => 'us_growth',
+        '在岗人数' => 'employment',
+        '年均职位空缺' => 'annual_openings',
     ];
 
     public function __construct(
@@ -53,22 +56,8 @@ final class CareerPresentationV1Compiler
 
         $baseline = $this->package->load($backendRoot);
         $this->registry = $this->sourceRegistry->load($backendRoot, $baseline['manifest']);
-        $supportingRegistry = $this->supportingRegistry($backendRoot, $baseline['slugs']);
         if ($sourceBefore['slugs'] !== $baseline['slugs']) {
             throw new CareerTenBlockCompileFailure('PRESENTATION_V1_SOURCE_SLUG_SET_MISMATCH');
-        }
-
-        $sourceBlocks = [];
-        $titleZhBySlug = [];
-        foreach ($baseline['slugs'] as $slug) {
-            $blocks = $this->readBlocks($sourceRoot, $slug);
-            $titleZh = trim((string) ($blocks['identity']['title_zh'] ?? ''));
-            if (($blocks['identity']['slug'] ?? null) !== $slug
-                || $titleZh === '' || preg_match('/[\x{3400}-\x{9fff}]/u', $titleZh) !== 1) {
-                throw new CareerTenBlockCompileFailure('PRESENTATION_V1_SOURCE_IDENTITY_INVALID');
-            }
-            $sourceBlocks[$slug] = $blocks;
-            $titleZhBySlug[$slug] = $titleZh;
         }
 
         $coverage = $this->newCoverage();
@@ -76,42 +65,24 @@ final class CareerPresentationV1Compiler
         $candidateRows = [];
         $beforeEnHashes = [];
         $afterEnHashes = [];
-        $beforeZhNonRelatedHashes = [];
-        $afterZhNonRelatedHashes = [];
+        $beforeZhPageHashes = [];
+        $afterZhPageHashes = [];
         $presentationAdditions = 0;
         $presentationChanges = 0;
         $sourceReferenceChanges = 0;
-        $supportingEvidenceChanges = 0;
-        $relatedNextPageChanges = 0;
         foreach ($baseline['slugs'] as $slug) {
             $row = $baseline['rows'][$slug];
             $beforePresentation = $row['metadata_json']['presentation_v1']['zh'] ?? null;
-            $blocks = $sourceBlocks[$slug];
+            $blocks = $this->readBlocks($sourceRoot, $slug);
+            if (($blocks['identity']['slug'] ?? null) !== $slug) {
+                throw new CareerTenBlockCompileFailure('PRESENTATION_V1_SOURCE_SLUG_MISMATCH');
+            }
             $presentation = $this->project($slug, $blocks, $row, $coverage, $missingFields);
             CareerPresentationV1Contract::assert($presentation);
             $beforeEnHashes[] = CareerCurrentAuthorityPackage::hashValue($this->englishContentProjection($row));
-            $row = $this->removeUnsupportedAccountantMarketClaims($slug, $row, $presentation);
-            $beforeZhNonRelatedHashes[] = CareerCurrentAuthorityPackage::hashValue($this->zhPageWithoutRelatedLinks($row));
+            $beforeZhPageHashes[] = CareerCurrentAuthorityPackage::hashValue($this->zhPage($row));
             $row = $this->normalizeMultipleOnetReferences($slug, $row, $sourceReferenceChanges);
-            $row = $this->compileRelatedNextPages($slug, $row, $titleZhBySlug, $relatedNextPageChanges);
             $row['metadata_json']['presentation_v1'] = ['zh' => $presentation];
-            $beforeSupporting = $row['metadata_json']['supporting_evidence_v1']['zh'] ?? null;
-            $supportingItem = $supportingRegistry['items'][$slug] ?? null;
-            if (is_array($supportingItem)) {
-                $row = $this->applySupportingEvidence($row, $supportingItem, $sourceReferenceChanges);
-                $supporting = $row['metadata_json']['supporting_evidence_v1']['zh'];
-                if (! is_array($beforeSupporting) || ! hash_equals(
-                    CareerCurrentAuthorityPackage::hashValue($beforeSupporting),
-                    CareerCurrentAuthorityPackage::hashValue($supporting),
-                )) {
-                    $supportingEvidenceChanges++;
-                }
-            } else {
-                unset($row['metadata_json']['supporting_evidence_v1']);
-                if (is_array($beforeSupporting)) {
-                    $supportingEvidenceChanges++;
-                }
-            }
             if ($beforePresentation === null) {
                 $presentationAdditions++;
                 $presentationChanges++;
@@ -122,11 +93,11 @@ final class CareerPresentationV1Compiler
                 $presentationChanges++;
             }
             $afterEnHashes[] = CareerCurrentAuthorityPackage::hashValue($this->englishContentProjection($row));
-            $afterZhNonRelatedHashes[] = CareerCurrentAuthorityPackage::hashValue($this->zhPageWithoutRelatedLinks($row));
+            $afterZhPageHashes[] = CareerCurrentAuthorityPackage::hashValue($this->zhPage($row));
             $candidateRows[$slug] = $row;
         }
 
-        if ($beforeEnHashes !== $afterEnHashes || $beforeZhNonRelatedHashes !== $afterZhNonRelatedHashes) {
+        if ($beforeEnHashes !== $afterEnHashes || $beforeZhPageHashes !== $afterZhPageHashes) {
             throw new CareerTenBlockCompileFailure('PRESENTATION_V1_EXISTING_PROJECTION_DRIFT');
         }
         $sourceAfter = $this->sourceInspector->inspectSource($sourceRoot);
@@ -149,24 +120,7 @@ final class CareerPresentationV1Compiler
             'source_aggregate_sha256' => $sourceBefore['aggregate_sha256'],
             'field_coverage_sha256' => CareerCurrentAuthorityPackage::hashValue($coverage),
             'source_registry' => $baseline['manifest']['presentation_v1']['source_registry'],
-            'related_next_pages' => [
-                'title_zh_authority' => 'immutable_identity.title_zh',
-                'maximum_links' => 12,
-                'runtime_missing_links_policy' => 'preserve_existing_surface',
-            ],
-            'unsupported_claim_policy' => [
-                'accountants_unverified_ai_cases' => 'omit',
-                'accountants_unverified_china_market_metrics' => 'omit',
-                'missing_authoritative_market_data' => 'explicit_unavailable_state',
-            ],
             'zh_presentation_count' => count($candidateRows),
-        ];
-        $manifest['supporting_evidence_v1'] = [
-            'contract_version' => CareerSupportingEvidenceV1Contract::CONTRACT_VERSION,
-            'registry_contract_version' => $supportingRegistry['contract_version'],
-            'registry_path' => 'supporting-evidence-v1.json',
-            'registry_sha256' => $supportingRegistry['sha256'],
-            'zh_supporting_evidence_count' => count($supportingRegistry['items']),
         ];
 
         return [
@@ -190,7 +144,6 @@ final class CareerPresentationV1Compiler
                 'onet_multiple_occupation_records' => count($this->registry['onet']),
                 'bls_projection_records' => count($this->registry['bls']),
                 'source_reference_changes' => $sourceReferenceChanges,
-                'zh_supporting_evidence_count' => count($supportingRegistry['items']),
                 'generated_at' => null,
             ],
             'field_coverage' => [
@@ -202,14 +155,12 @@ final class CareerPresentationV1Compiler
             'package_diff' => [
                 'contract_version' => 'career.presentation_v1.package_diff.v1',
                 'source_bytes_changed' => 0,
-                'existing_zh_content_fields_changed' => $relatedNextPageChanges,
+                'existing_zh_content_fields_changed' => 0,
                 'en_locale_pages_changed' => 0,
                 'shared_source_reference_rows_changed' => $sourceReferenceChanges,
-                'zh_supporting_evidence_changes' => $supportingEvidenceChanges,
-                'zh_related_next_page_changes' => $relatedNextPageChanges,
                 'zh_presentation_additions' => $presentationAdditions,
                 'zh_presentation_changes' => $presentationChanges,
-                'changed_row_count' => $presentationChanges + $sourceReferenceChanges + $supportingEvidenceChanges + $relatedNextPageChanges,
+                'changed_row_count' => $presentationChanges + $sourceReferenceChanges,
                 'slug_count' => count($candidateRows),
                 'locale_page_count' => count($candidateRows) * 2,
                 'components_per_page' => 26,
@@ -355,6 +306,8 @@ final class CareerPresentationV1Compiler
             'snapshot_callout' => 'page-meta.snapshot_callout',
             'us_median_pay' => 'salary.bls_table[指标=中位年薪]',
             'us_growth' => 'salary.bls_table[指标=就业增长]',
+            'employment' => 'salary.bls_table[指标=在岗人数]',
+            'annual_openings' => 'salary.bls_table[指标=年均职位空缺]',
             'cta' => 'display_surface_v1.page.content.primary_cta|final_cta',
             'salary_boundary' => 'display_surface_v1.page.content.career_snapshot_primary_locale.salary.china_salary_note',
             'usage_boundary' => 'display_surface_v1.page.content.boundary_notice',
@@ -688,96 +641,6 @@ final class CareerPresentationV1Compiler
         return $row;
     }
 
-    /**
-     * @param  list<string>  $canonicalSlugs
-     * @return array{contract_version:string,reviewed_at:string,items:array<string,array<string,mixed>>,sha256:string}
-     */
-    private function supportingRegistry(string $backendRoot, array $canonicalSlugs): array
-    {
-        $path = rtrim($backendRoot, '/').'/'.CareerCurrentAuthorityPackage::RELATIVE_PATH.'/supporting-evidence-v1.json';
-        if (! is_file($path) || is_link($path)) {
-            throw new CareerTenBlockCompileFailure('SUPPORTING_EVIDENCE_V1_REGISTRY_MISSING');
-        }
-        try {
-            $registry = json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
-        } catch (JsonException) {
-            throw new CareerTenBlockCompileFailure('SUPPORTING_EVIDENCE_V1_REGISTRY_INVALID');
-        }
-        if (! is_array($registry) || array_keys($registry) !== ['contract_version', 'reviewed_at', 'items']
-            || ($registry['contract_version'] ?? null) !== 'career.supporting_evidence.registry.v1'
-            || ! is_string($registry['reviewed_at'] ?? null)
-            || preg_match('/\A\d{4}-\d{2}-\d{2}\z/', $registry['reviewed_at']) !== 1
-            || ! is_array($registry['items'] ?? null) || array_is_list($registry['items'])) {
-            throw new CareerTenBlockCompileFailure('SUPPORTING_EVIDENCE_V1_REGISTRY_INVALID');
-        }
-        $allowedSlugs = array_fill_keys($canonicalSlugs, true);
-        foreach ($registry['items'] as $slug => $item) {
-            if (! is_string($slug) || ! isset($allowedSlugs[$slug]) || ! is_array($item)
-                || array_keys($item) !== ['sources', 'evidence']
-                || ! is_array($item['sources']) || ! array_is_list($item['sources']) || $item['sources'] === []
-                || ! is_array($item['evidence'])) {
-                throw new CareerTenBlockCompileFailure('SUPPORTING_EVIDENCE_V1_REGISTRY_INVALID');
-            }
-            $sourceKeys = [];
-            foreach ($item['sources'] as $source) {
-                if (! is_array($source)) {
-                    throw new CareerTenBlockCompileFailure('SUPPORTING_EVIDENCE_V1_REGISTRY_INVALID');
-                }
-                $key = $this->stringValueWithoutRecord($source['source_key'] ?? null);
-                $url = $this->stringValueWithoutRecord($source['url'] ?? null);
-                if ($key === null || isset($sourceKeys[$key]) || $url === null
-                    || filter_var($url, FILTER_VALIDATE_URL) === false || ! str_starts_with($url, 'https://')) {
-                    throw new CareerTenBlockCompileFailure('SUPPORTING_EVIDENCE_V1_REGISTRY_INVALID');
-                }
-                $sourceKeys[$key] = true;
-            }
-        }
-
-        return [
-            'contract_version' => $registry['contract_version'],
-            'reviewed_at' => $registry['reviewed_at'],
-            'items' => $registry['items'],
-            'sha256' => (string) hash_file('sha256', $path),
-        ];
-    }
-
-    /** @param array<string,mixed> $row @param array<string,mixed> $item @return array<string,mixed> */
-    private function applySupportingEvidence(array $row, array $item, int &$sourceReferenceChanges): array
-    {
-        $sources = is_array($row['sources_json'] ?? null) ? $row['sources_json'] : [];
-        $references = is_array($sources['references'] ?? null) && array_is_list($sources['references'])
-            ? $sources['references'] : [];
-        $before = CareerCurrentAuthorityPackage::hashValue($references);
-        $positions = [];
-        foreach ($references as $index => $reference) {
-            if (! is_array($reference)) {
-                continue;
-            }
-            $key = $this->stringValueWithoutRecord($reference['source_key'] ?? $reference['label'] ?? null);
-            if ($key !== null && ! isset($positions[$key])) {
-                $positions[$key] = $index;
-            }
-        }
-        foreach ($item['sources'] as $source) {
-            $key = (string) $source['source_key'];
-            if (isset($positions[$key])) {
-                $references[$positions[$key]] = $source;
-            } else {
-                $positions[$key] = count($references);
-                $references[] = $source;
-            }
-        }
-        if (! hash_equals($before, CareerCurrentAuthorityPackage::hashValue($references))) {
-            $sourceReferenceChanges++;
-        }
-        $sources['references'] = $references;
-        $row['sources_json'] = $sources;
-        CareerSupportingEvidenceV1Contract::assert($item['evidence'], $references);
-        $row['metadata_json']['supporting_evidence_v1'] = ['zh' => $item['evidence']];
-
-        return $row;
-    }
-
     /** @param array<string,mixed> $row @return array<string,mixed> */
     private function englishContentProjection(array $row): array
     {
@@ -785,198 +648,6 @@ final class CareerPresentationV1Compiler
         unset($projection['sources']);
 
         return $projection;
-    }
-
-    /**
-     * @param  array<string,mixed>  $row
-     * @param  array<string,string>  $titleZhBySlug
-     * @return array<string,mixed>
-     */
-    private function compileRelatedNextPages(string $currentSlug, array $row, array $titleZhBySlug, int &$changes): array
-    {
-        $page = $this->zhPage($row);
-        $related = $page['related_next_pages'] ?? null;
-        if (! is_array($related)) {
-            return $row;
-        }
-        $links = is_array($related['links'] ?? null) && array_is_list($related['links']) ? $related['links'] : [];
-        $candidates = [];
-        $seenSlugs = [];
-        foreach ($links as $index => $link) {
-            if (! is_array($link)) {
-                continue;
-            }
-            $slug = strtolower(trim((string) ($link['slug'] ?? '')));
-            $source = (string) ($link['source'] ?? '');
-            $titleEn = trim((string) ($link['title_en'] ?? ''));
-            if (preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $slug) !== 1
-                || $slug === $currentSlug || $slug === 'software-developers' || isset($seenSlugs[$slug])
-                || ! isset($titleZhBySlug[$slug]) || ! in_array($source, ['self_pick', 'lookup'], true)
-                || $titleEn === '' || ! is_bool($link['nofollow'] ?? null)) {
-                continue;
-            }
-            $seenSlugs[$slug] = true;
-            $candidates[] = [
-                'index' => $index,
-                'slug' => $slug,
-                'title_en' => $titleEn,
-                'title_zh' => $titleZhBySlug[$slug],
-                'source' => $source,
-                'nofollow' => $link['nofollow'],
-            ];
-        }
-        usort($candidates, static fn (array $left, array $right): int => [
-            $left['source'] === 'self_pick' ? 0 : 1, $left['index'],
-        ] <=> [
-            $right['source'] === 'self_pick' ? 0 : 1, $right['index'],
-        ]);
-        $normalized = [];
-        $seenTitles = [];
-        foreach ($candidates as $candidate) {
-            $titleKey = mb_strtolower($candidate['title_zh'], 'UTF-8');
-            if (isset($seenTitles[$titleKey])) {
-                continue;
-            }
-            $seenTitles[$titleKey] = true;
-            unset($candidate['index']);
-            $normalized[] = $candidate;
-            if (count($normalized) === 12) {
-                break;
-            }
-        }
-        if (! hash_equals(
-            CareerCurrentAuthorityPackage::hashValue($links),
-            CareerCurrentAuthorityPackage::hashValue($normalized),
-        )) {
-            $changes++;
-        }
-        $related['links'] = $normalized;
-        $page['related_next_pages'] = $related;
-        $payload = is_array($row['page_payload_json'] ?? null) ? $row['page_payload_json'] : [];
-        if (is_array($payload['page'] ?? null)) {
-            $row['page_payload_json']['page']['zh'] = $page;
-        } else {
-            $row['page_payload_json']['zh'] = $page;
-        }
-
-        return $row;
-    }
-
-    /**
-     * The visual reference contains illustrative China-market and secondary-report
-     * numbers without claim-level primary-source bindings. Keep the 26-component
-     * projection, but publish an explicit unavailable state until those bindings
-     * exist instead of allowing the examples to become runtime truth.
-     *
-     * @param  array<string,mixed>  $row
-     * @param  array<string,mixed>  $presentation
-     * @return array<string,mixed>
-     */
-    private function removeUnsupportedAccountantMarketClaims(string $slug, array $row, array &$presentation): array
-    {
-        if ($slug !== 'accountants-and-auditors') {
-            return $row;
-        }
-
-        $page = $this->zhPage($row);
-        $snapshot = is_array($page['career_snapshot_primary_locale'] ?? null)
-            ? $page['career_snapshot_primary_locale']
-            : [];
-        $salary = is_array($snapshot['salary'] ?? null) ? $snapshot['salary'] : [];
-        foreach (array_keys($salary) as $key) {
-            if (str_starts_with((string) $key, 'china_') || in_array($key, ['edu', 'sources_note'], true)) {
-                unset($salary[$key]);
-            }
-        }
-        $snapshot['salary'] = $salary;
-        $page['career_snapshot_primary_locale'] = $snapshot;
-
-        $page['market_signal_card'] = [
-            'intro' => '仅展示已绑定原始来源的市场事实；无法复核的招聘平台数字和二手报告案例不发布。',
-            'callout' => '美国 BLS 预计 2024–2034 年年均约 124,200 个职位空缺；O*NET 招聘样本中 Microsoft Excel 为高频软件技能。',
-            'facts' => [
-                '美国 BLS：2024–2034 年年均约 124,200 个职位空缺。',
-                'O*NET 招聘样本：Microsoft Excel 出现率 28%。',
-                '中国大陆在招数量暂无可复核原始样本，因此不展示。',
-            ],
-            'signals' => [
-                '年均空缺：约 124,200 个（美国 BLS，2024–2034）。',
-                '热招技能：Microsoft Excel（O*NET 招聘样本，2025）。',
-                '国内在招：暂无可复核原始样本。',
-            ],
-        ];
-
-        $aiImpact = is_array($page['ai_impact_table'] ?? null) ? $page['ai_impact_table'] : [];
-        $aiImpact['ai_s4_p2'] = '8/10 表示任务层面的 AI 曝光较高，不是失业概率或岗位替代预测；结论应回到具体任务、责任与证据边界。';
-        if (is_array($aiImpact['ai_s5_persona'] ?? null)) {
-            foreach ($aiImpact['ai_s5_persona'] as $index => $persona) {
-                if (! is_array($persona)) {
-                    continue;
-                }
-                $label = (string) ($persona['人群'] ?? $persona['persona'] ?? '');
-                if (str_contains($label, '考生') || str_contains($label, '学生')) {
-                    $persona['建议'] = '从会计准则、审计证据与数据分析基础起步，再用职业兴趣测评确认自己能否长期适应该工作结构。';
-                } elseif (str_contains($label, '在职')) {
-                    $persona['建议'] = '优先升级复核、内控、异常分析与业务解释能力；薪资或招聘趋势需等待可复核原始样本。';
-                }
-                $aiImpact['ai_s5_persona'][$index] = $persona;
-            }
-        }
-        $page['ai_impact_table'] = $aiImpact;
-
-        $faq = is_array($page['faq_block'] ?? null) ? $page['faq_block'] : [];
-        if (is_array($faq['items'] ?? null)) {
-            foreach ($faq['items'] as $index => $item) {
-                if (! is_array($item)) {
-                    continue;
-                }
-                $question = (string) ($item['question'] ?? '');
-                if ($question === '会计工资一般多少？') {
-                    $item['answer'] = '美国 2024 年职业年薪中位数为 $81,680（BLS）；中国大陆暂无统一单职业官方中位薪资，城市薪资与招聘数量因缺少可复核原始样本而不展示。';
-                } elseif ($question === '学会计还值得吗？需要考什么证？') {
-                    $item['answer'] = '仍值得，但应从单一做账转向准则、审计证据、数据分析与 AI 协同。常见路径包括注册会计师（CPA）、管理会计与会计职称；具体执业资格以主管机构现行规则为准。';
-                }
-                $faq['items'][$index] = $item;
-            }
-        }
-        $page['faq_block'] = $faq;
-
-        $sourceText = '本文职业事实与美国劳动力市场数据来自 BLS、O*NET 及 FermatMind 已登记来源；中国城市薪资、国内招聘数量和未绑定原始来源的企业案例不展示。';
-        $sourceCard = is_array($page['source_card'] ?? null) ? $page['source_card'] : [];
-        $sourceCard['note'] = $sourceText;
-        $signals = is_array($sourceCard['eeat_signals'] ?? null) ? $sourceCard['eeat_signals'] : [];
-        $signals['source'] = $sourceText;
-        $sourceCard['eeat_signals'] = $signals;
-        $page['source_card'] = $sourceCard;
-
-        if (is_array($row['sources_json']['references'] ?? null)) {
-            $row['sources_json']['references'] = array_values(array_filter(
-                $row['sources_json']['references'],
-                static fn (mixed $reference): bool => ! is_array($reference)
-                    || (string) ($reference['label'] ?? '') !== 'nbs_2024_wage'
-            ));
-        }
-
-        $presentation['notices']['salary_boundary'] = '中国大陆城市薪资与招聘数量暂无可复核原始样本，因此不展示。';
-
-        if (is_array($row['page_payload_json']['page'] ?? null)) {
-            $row['page_payload_json']['page']['zh'] = $page;
-        } else {
-            $row['page_payload_json']['zh'] = $page;
-        }
-
-        return $row;
-    }
-
-    /** @param array<string,mixed> $row @return array<string,mixed> */
-    private function zhPageWithoutRelatedLinks(array $row): array
-    {
-        $page = $this->zhPage($row);
-        if (is_array($page['related_next_pages'] ?? null)) {
-            unset($page['related_next_pages']['links']);
-        }
-
-        return $page;
     }
 
     /** @param array<string,mixed> $row @return array<string,mixed> */

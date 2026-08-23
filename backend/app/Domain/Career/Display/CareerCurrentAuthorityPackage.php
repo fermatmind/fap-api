@@ -90,7 +90,6 @@ final class CareerCurrentAuthorityPackage
 
     private const OPTIONAL_DISPLAY_OWNED_PUBLIC_FIELDS = [
         'presentation_v1',
-        'supporting_evidence_v1',
     ];
 
     private const FORBIDDEN_PUBLIC_KEYS = [
@@ -130,7 +129,6 @@ final class CareerCurrentAuthorityPackage
         $manifest = $this->readManifest($manifestPath);
         $this->assertManifestContract($manifest);
         $this->assertPresentationSourceRegistry($backendRoot, $manifest);
-        $this->assertSupportingEvidenceRegistry($backendRoot, $manifest);
         $compiled = $this->compileAssets($assetsPath);
         $assetsSha256 = $compiled['summary']['assets_sha256'];
         $declaredAssetsSha256 = (string) self::value($manifest, 'files.0.sha256');
@@ -453,27 +451,6 @@ final class CareerCurrentAuthorityPackage
         }
     }
 
-    /** @param array<string,mixed> $manifest */
-    private function assertSupportingEvidenceRegistry(string $backendRoot, array $manifest): void
-    {
-        $declared = $manifest['supporting_evidence_v1'] ?? null;
-        if ($declared === null) {
-            return;
-        }
-        $path = rtrim($backendRoot, '/').'/'.self::RELATIVE_PATH.'/supporting-evidence-v1.json';
-        if (! is_array($declared)
-            || ($declared['contract_version'] ?? null) !== CareerSupportingEvidenceV1Contract::CONTRACT_VERSION
-            || ($declared['registry_contract_version'] ?? null) !== 'career.supporting_evidence.registry.v1'
-            || ($declared['registry_path'] ?? null) !== 'supporting-evidence-v1.json'
-            || ! is_int($declared['zh_supporting_evidence_count'] ?? null)
-            || ($declared['zh_supporting_evidence_count'] ?? 0) < 1
-            || ! is_string($declared['registry_sha256'] ?? null)
-            || ! is_file($path) || is_link($path)
-            || ! hash_equals((string) $declared['registry_sha256'], (string) hash_file('sha256', $path))) {
-            throw new CareerCurrentAuthorityPackageFailure('CURRENT_SUPPORTING_EVIDENCE_V1_REGISTRY_INVALID');
-        }
-    }
-
     /** @param array<string,mixed> $row */
     private function assertRow(array $row, int &$numericRatingResidueCount): void
     {
@@ -502,15 +479,6 @@ final class CareerCurrentAuthorityPackage
                 throw new CareerCurrentAuthorityPackageFailure('CURRENT_PRESENTATION_V1_INVALID');
             }
             CareerPresentationV1Contract::assert($presentation['zh']);
-        }
-        $supporting = $row['metadata_json']['supporting_evidence_v1'] ?? null;
-        if ($supporting !== null) {
-            if (! is_array($supporting) || array_keys($supporting) !== ['zh'] || ! is_array($supporting['zh'])) {
-                throw new CareerCurrentAuthorityPackageFailure('CURRENT_SUPPORTING_EVIDENCE_V1_INVALID');
-            }
-            $references = is_array($row['sources_json']['references'] ?? null)
-                ? array_values($row['sources_json']['references']) : [];
-            CareerSupportingEvidenceV1Contract::assert($supporting['zh'], $references);
         }
     }
 
@@ -551,13 +519,6 @@ final class CareerCurrentAuthorityPackage
         if ($normalizedLocale === 'zh' && is_array($presentation)) {
             CareerPresentationV1Contract::assert($presentation);
             $projection['presentation_v1'] = $this->stripForbiddenKeys($presentation);
-        }
-        $supporting = $row['metadata_json']['supporting_evidence_v1'][$normalizedLocale] ?? null;
-        if ($normalizedLocale === 'zh' && is_array($supporting)) {
-            $references = is_array($row['sources_json']['references'] ?? null)
-                ? array_values($row['sources_json']['references']) : [];
-            CareerSupportingEvidenceV1Contract::assert($supporting, $references);
-            $projection['supporting_evidence_v1'] = $this->stripForbiddenKeys($supporting);
         }
 
         return $projection;

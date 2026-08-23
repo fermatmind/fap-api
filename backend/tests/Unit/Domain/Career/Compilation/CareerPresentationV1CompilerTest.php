@@ -8,7 +8,6 @@ use App\Domain\Career\Compilation\CareerPresentationV1Compiler;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerCurrentAuthorityPackageFailure;
 use App\Domain\Career\Display\CareerPresentationV1Contract;
-use App\Domain\Career\Display\CareerSupportingEvidenceV1Contract;
 use Tests\TestCase;
 
 final class CareerPresentationV1CompilerTest extends TestCase
@@ -24,16 +23,6 @@ final class CareerPresentationV1CompilerTest extends TestCase
         self::assertCount(1046, $authority['rows']);
         self::assertSame(2092, $authority['summary']['locale_page_count']);
         self::assertSame(26, $authority['summary']['components_per_page']);
-        self::assertSame([
-            'maximum_links' => 12,
-            'runtime_missing_links_policy' => 'preserve_existing_surface',
-            'title_zh_authority' => 'immutable_identity.title_zh',
-        ], data_get($authority, 'manifest.presentation_v1.related_next_pages'));
-        self::assertSame([
-            'accountants_unverified_ai_cases' => 'omit',
-            'accountants_unverified_china_market_metrics' => 'omit',
-            'missing_authoritative_market_data' => 'explicit_unavailable_state',
-        ], data_get($authority, 'manifest.presentation_v1.unsupported_claim_policy'));
         foreach ($authority['rows'] as $row) {
             $presentation = $row['metadata_json']['presentation_v1']['zh'] ?? null;
             self::assertIsArray($presentation);
@@ -41,63 +30,18 @@ final class CareerPresentationV1CompilerTest extends TestCase
             self::assertArrayHasKey('presentation_v1', $authority['rows'][$row['canonical_slug']]['metadata_json']);
             self::assertArrayNotHasKey('presentation_v1', $package->publicProjection($row, 'en'));
             self::assertArrayHasKey('presentation_v1', $package->publicProjection($row, 'zh-CN'));
-            $relatedLinks = data_get($row, 'page_payload_json.page.zh.related_next_pages.links', []);
-            self::assertIsArray($relatedLinks);
-            self::assertLessThanOrEqual(12, count($relatedLinks));
-            self::assertCount(count($relatedLinks), array_unique(array_column($relatedLinks, 'slug')));
-            self::assertCount(count($relatedLinks), array_unique(array_column($relatedLinks, 'title_zh')));
-            foreach ($relatedLinks as $link) {
-                self::assertMatchesRegularExpression('/[\x{3400}-\x{9fff}]/u', $link['title_zh']);
-            }
         }
 
         $accountants = $authority['rows']['accountants-and-auditors']['metadata_json']['presentation_v1']['zh'];
-        self::assertCount(12, data_get(
-            $authority['rows']['accountants-and-auditors'],
-            'page_payload_json.page.zh.related_next_pages.links',
-        ));
         self::assertSame(8, data_get($accountants, 'hero.ai_exposure.value'));
         self::assertSame('8/10', data_get($accountants, 'hero.ai_exposure.display_value'));
         self::assertSame('fermatmind_internal_rubric', data_get($accountants, 'hero.ai_exposure.metric_kind'));
         self::assertSame(['interest', 'scene', 'risk'], array_column(data_get($accountants, 'hero.badges'), 'key'));
-        $supporting = $authority['rows']['accountants-and-auditors']['metadata_json']['supporting_evidence_v1']['zh'];
-        CareerSupportingEvidenceV1Contract::assert(
-            $supporting,
-            array_values($authority['rows']['accountants-and-auditors']['sources_json']['references']),
-        );
-        self::assertSame(
-            ['tasks', 'skills', 'abilities', 'knowledge', 'work_context', 'job_zone'],
-            array_column(data_get($supporting, 'onet.tables'), 'key'),
-        );
-        self::assertSame([], data_get($supporting, 'ai_cases'));
-        self::assertNull(data_get($supporting, 'china_reference'));
-        self::assertArrayNotHasKey('supporting_evidence_v1', $package->publicProjection(
-            $authority['rows']['accountants-and-auditors'],
-            'en',
-        ));
-        $accountantPage = data_get($authority['rows']['accountants-and-auditors'], 'page_payload_json.page.zh');
-        self::assertCount(9, data_get($accountantPage, 'faq_block.items'));
-        self::assertSame(
-            ['bls_table', 'us_growth', 'us_median'],
-            array_keys(data_get($accountantPage, 'career_snapshot_primary_locale.salary')),
-        );
-        self::assertSame('中国大陆在招数量暂无可复核原始样本，因此不展示。', data_get(
-            $accountantPage,
-            'market_signal_card.facts.2',
-        ));
-        $accountantPageBytes = CareerCurrentAuthorityPackage::encodeCanonical($accountantPage);
-        foreach (['KPMG', 'Thomson Reuters', 'AICPA', '36氪', '浙大', '财务 BP 招聘同比', '¥201,883', '¥9,000'] as $forbidden) {
-            self::assertStringNotContainsString($forbidden, $accountantPageBytes);
-        }
-        self::assertStringNotContainsString(
-            '201,883',
-            CareerCurrentAuthorityPackage::encodeCanonical($authority['rows']['accountants-and-auditors']['sources_json']),
-        );
 
         $actuaries = $authority['rows']['actuaries']['metadata_json']['presentation_v1']['zh'];
         self::assertSame(8, data_get($actuaries, 'hero.ai_exposure.value'));
         self::assertSame(
-            ['$125,770', '22%', '8/10'],
+            ['$125,770', '22%', '33,600 人', '2,400 个', '8/10'],
             array_column(data_get($actuaries, 'hero.stats'), 'value'),
         );
         self::assertStringNotContainsString(
@@ -183,14 +127,14 @@ final class CareerPresentationV1CompilerTest extends TestCase
         $actuaries = $package['rows']['actuaries']['metadata_json']['presentation_v1']['zh'];
 
         self::assertSame(
-            ['$125,770', '22%'],
-            array_column(array_slice(data_get($actuaries, 'hero.stats'), 0, 2), 'value'),
+            ['$125,770', '22%', '33,600 人', '2,400 个'],
+            array_column(array_slice(data_get($actuaries, 'hero.stats'), 0, 4), 'value'),
         );
         self::assertSame(
-            ['salary.bls_table.中位年薪', 'salary.bls_table.就业增长'],
+            ['salary.bls_table.中位年薪', 'salary.bls_table.就业增长', 'salary.bls_table.在岗人数', 'salary.bls_table.年均职位空缺'],
             array_map(
                 static fn (array $stat): string => $stat['source_keys'][0],
-                array_slice(data_get($actuaries, 'hero.stats'), 0, 2),
+                array_slice(data_get($actuaries, 'hero.stats'), 0, 4),
             ),
         );
     }
