@@ -802,7 +802,7 @@ task('artisan:migrate-seo-intel', function () {
         run(<<<'BASH'
 set -euo pipefail
 set +e
-{{bin/php}} -r '$app = require "bootstrap/app.php"; $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap(); exit(config("seo_intel.enabled") ? 0 : 42);'
+{{bin/php}} -r 'require "vendor/autoload.php"; $app = require "bootstrap/app.php"; $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap(); exit(config("seo_intel.enabled") ? 0 : 42);'
 seo_intel_status="$?"
 set -e
 if [ "$seo_intel_status" -eq 42 ]; then
@@ -823,7 +823,7 @@ task('guard:no-pending-seo-intel-migrations', function () {
         run(<<<'BASH'
 set -euo pipefail
 set +e
-{{bin/php}} -r '$app = require "bootstrap/app.php"; $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap(); exit(config("seo_intel.enabled") ? 0 : 42);'
+{{bin/php}} -r 'require "vendor/autoload.php"; $app = require "bootstrap/app.php"; $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap(); exit(config("seo_intel.enabled") ? 0 : 42);'
 seo_intel_status="$?"
 set -e
 if [ "$seo_intel_status" -eq 42 ]; then

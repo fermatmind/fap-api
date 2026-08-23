@@ -88,6 +88,7 @@ final class SeoIntelMigrationIsolationTest extends TestCase
         $this->assertStringContainsString('database/migrations/seo_intel', $ci);
         $this->assertStringContainsString("task('artisan:migrate-seo-intel'", $deploy);
         $this->assertStringContainsString('migrate --database=seo_intel --path=database/migrations/seo_intel', $deploy);
+        $this->assertStringContainsString('require "vendor/autoload.php"', $deploy);
         $this->assertStringContainsString('config("seo_intel.enabled") ? 0 : 42', $deploy);
         $this->assertStringContainsString('SEO Intel is disabled; skip dedicated migrations.', $deploy);
         $this->assertStringContainsString('unable to resolve SEO Intel runtime configuration', $deploy);
