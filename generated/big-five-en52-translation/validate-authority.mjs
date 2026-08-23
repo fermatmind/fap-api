@@ -6,6 +6,8 @@ import path from 'node:path';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 
+import { hasForbiddenHtmlCommentSyntax } from './markdown-safety.mjs';
+
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(ROOT, '..', '..');
 const EXPECTED_SOURCE_SHA = '056b10d3f640d0cf7da35ec7bc99b009408049e75c1e25aa8e760eb8641ea8d5';
@@ -100,7 +102,6 @@ function stripReferenceDefinitions(markdown) {
 
 function markdownVisibleText(markdown) {
   return stripReferenceDefinitions(markdown)
-    .replace(/<!--[\s\S]*?-->/g, '')
     .replace(/\[([^\]]+)\]\(\s*(?:<[^>]*>|[^)\s]+)(?:\s+(?:"[^"]*"|'[^']*'|\([^)]*\)))?\s*\)/g, '$1')
     .replace(/\[([^\]]+)\]\s*\[[^\]]*\]/g, '$1');
 }
@@ -318,6 +319,10 @@ async function main() {
       continue;
     }
     const { frontmatter, frontmatterKeys, body } = parsed;
+    if (hasForbiddenHtmlCommentSyntax(body)) {
+      fail('hidden_html_comment', completedEntry.target_path);
+      continue;
+    }
     const visibleBody = markdownVisibleText(body);
     const fixedFields = {
       package_version: 'personality_content_package.v3',
@@ -399,7 +404,6 @@ async function main() {
       || /<(?:img|picture|source|video|audio|svg|iframe|object)\b/i.test(body)
       || /data:image\//i.test(body))
       fail('forbidden_media', completedEntry.target_path);
-    if (/<!--|-->/.test(body)) fail('hidden_html_comment', completedEntry.target_path);
     if (/<\/?[A-Za-z][^>]*>/.test(body)) fail('forbidden_raw_html', completedEntry.target_path);
     if (/^\s{0,3}\[(?!\^)[^\]]+\]:\s*/m.test(body))
       fail('forbidden_reference_definition', completedEntry.target_path);

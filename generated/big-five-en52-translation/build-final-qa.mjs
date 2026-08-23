@@ -6,6 +6,8 @@ import path from 'node:path';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 
+import { hasForbiddenHtmlCommentSyntax } from './markdown-safety.mjs';
+
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const REVIEWED_DATE = '2026-07-19';
 const EXPECTED_AUTHORITY_INPUT_SHA256 = Object.freeze({
@@ -63,8 +65,8 @@ function parseFrontmatter(markdown) {
 }
 
 function visibleText(markdown) {
+    if (hasForbiddenHtmlCommentSyntax(markdown)) throw new Error('hidden_html_comment');
     return markdown
-        .replace(/<!--[\s\S]*?-->/g, '')
         .replace(/\[([^\]]+)\]\(\s*(?:<[^>]*>|[^)\s]+)(?:\s+(?:"[^"]*"|'[^']*'|\([^)]*\)))?\s*\)/g, '$1')
         .replace(/\[([^\]]+)\]\s*\[[^\]]*\]/g, '$1');
 }

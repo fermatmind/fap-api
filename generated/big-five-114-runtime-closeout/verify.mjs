@@ -1,6 +1,8 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 
+import { decodeHtmlEntitiesOnce } from "../_shared/decode-html-entities.mjs";
+
 const API = process.env.API_BASE_URL || "https://api.fermatmind.com";
 const WEB = process.env.WEB_BASE_URL || "https://fermatmind.com";
 const RELEASE_SHA = process.env.EXPECTED_RELEASE_SHA || "45017200138ef000dc4be758321fc7b983a91cb9";
@@ -39,13 +41,8 @@ async function request(url, options = {}) {
 }
 
 function decodeHtml(value) {
-  return value
-    .replace(/<[^>]*>/g, " ")
-    .replace(/&quot;|&#34;/g, '"')
-    .replace(/&#39;|&apos;/g, "'")
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
+  const textWithoutTags = value.replace(/<[^>]*>/g, " ");
+  return decodeHtmlEntitiesOnce(textWithoutTags)
     .replace(/\s+/g, " ")
     .trim();
 }

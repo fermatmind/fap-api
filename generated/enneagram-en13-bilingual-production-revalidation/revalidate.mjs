@@ -1,6 +1,8 @@
 import { createHash } from "node:crypto";
 import { writeFile } from "node:fs/promises";
 
+import { decodeHtmlEntitiesOnce } from "../_shared/decode-html-entities.mjs";
+
 const API_BASE = "https://api.fermatmind.com";
 const WEB_BASE = "https://fermatmind.com";
 const OUTPUT = new URL("./production-revalidation.json", import.meta.url);
@@ -33,13 +35,7 @@ const routes = locales.flatMap((locale) =>
 
 const sha256 = (value) => createHash("sha256").update(value).digest("hex");
 const normalize = (value) => value.replace(/\s+/g, " ").trim();
-const decodeHtml = (value) =>
-  value
-    .replace(/&quot;/g, '"')
-    .replace(/&#x27;|&#39;/g, "'")
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">");
+const decodeHtml = decodeHtmlEntitiesOnce;
 
 async function fetchText(url) {
   let lastResult = null;
