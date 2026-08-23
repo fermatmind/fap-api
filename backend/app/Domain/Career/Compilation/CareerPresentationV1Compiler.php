@@ -11,7 +11,7 @@ use JsonException;
 
 final class CareerPresentationV1Compiler
 {
-    public const VERSION = 'career.presentation_v1.compiler.v3';
+    public const VERSION = 'career.presentation_v1.compiler.v4';
 
     /** @var array<string,array{label:string,source_field:string}> */
     private const BLS_STATS = [
@@ -58,29 +58,41 @@ final class CareerPresentationV1Compiler
             throw new CareerTenBlockCompileFailure('PRESENTATION_V1_SOURCE_SLUG_SET_MISMATCH');
         }
 
+        $sourceBlocks = [];
+        $titleZhBySlug = [];
+        foreach ($baseline['slugs'] as $slug) {
+            $blocks = $this->readBlocks($sourceRoot, $slug);
+            $titleZh = trim((string) ($blocks['identity']['title_zh'] ?? ''));
+            if (($blocks['identity']['slug'] ?? null) !== $slug
+                || $titleZh === '' || preg_match('/[\x{3400}-\x{9fff}]/u', $titleZh) !== 1) {
+                throw new CareerTenBlockCompileFailure('PRESENTATION_V1_SOURCE_IDENTITY_INVALID');
+            }
+            $sourceBlocks[$slug] = $blocks;
+            $titleZhBySlug[$slug] = $titleZh;
+        }
+
         $coverage = $this->newCoverage();
         $missingFields = [];
         $candidateRows = [];
         $beforeEnHashes = [];
         $afterEnHashes = [];
-        $beforeZhPageHashes = [];
-        $afterZhPageHashes = [];
+        $beforeZhNonRelatedHashes = [];
+        $afterZhNonRelatedHashes = [];
         $presentationAdditions = 0;
         $presentationChanges = 0;
         $sourceReferenceChanges = 0;
         $supportingEvidenceChanges = 0;
+        $relatedNextPageChanges = 0;
         foreach ($baseline['slugs'] as $slug) {
             $row = $baseline['rows'][$slug];
             $beforePresentation = $row['metadata_json']['presentation_v1']['zh'] ?? null;
-            $blocks = $this->readBlocks($sourceRoot, $slug);
-            if (($blocks['identity']['slug'] ?? null) !== $slug) {
-                throw new CareerTenBlockCompileFailure('PRESENTATION_V1_SOURCE_SLUG_MISMATCH');
-            }
+            $blocks = $sourceBlocks[$slug];
             $presentation = $this->project($slug, $blocks, $row, $coverage, $missingFields);
             CareerPresentationV1Contract::assert($presentation);
             $beforeEnHashes[] = CareerCurrentAuthorityPackage::hashValue($this->englishContentProjection($row));
-            $beforeZhPageHashes[] = CareerCurrentAuthorityPackage::hashValue($this->zhPage($row));
+            $beforeZhNonRelatedHashes[] = CareerCurrentAuthorityPackage::hashValue($this->zhPageWithoutRelatedLinks($row));
             $row = $this->normalizeMultipleOnetReferences($slug, $row, $sourceReferenceChanges);
+            $row = $this->compileRelatedNextPages($slug, $row, $titleZhBySlug, $relatedNextPageChanges);
             $row['metadata_json']['presentation_v1'] = ['zh' => $presentation];
             $beforeSupporting = $row['metadata_json']['supporting_evidence_v1']['zh'] ?? null;
             $supportingItem = $supportingRegistry['items'][$slug] ?? null;
@@ -109,11 +121,11 @@ final class CareerPresentationV1Compiler
                 $presentationChanges++;
             }
             $afterEnHashes[] = CareerCurrentAuthorityPackage::hashValue($this->englishContentProjection($row));
-            $afterZhPageHashes[] = CareerCurrentAuthorityPackage::hashValue($this->zhPage($row));
+            $afterZhNonRelatedHashes[] = CareerCurrentAuthorityPackage::hashValue($this->zhPageWithoutRelatedLinks($row));
             $candidateRows[$slug] = $row;
         }
 
-        if ($beforeEnHashes !== $afterEnHashes || $beforeZhPageHashes !== $afterZhPageHashes) {
+        if ($beforeEnHashes !== $afterEnHashes || $beforeZhNonRelatedHashes !== $afterZhNonRelatedHashes) {
             throw new CareerTenBlockCompileFailure('PRESENTATION_V1_EXISTING_PROJECTION_DRIFT');
         }
         $sourceAfter = $this->sourceInspector->inspectSource($sourceRoot);
@@ -179,13 +191,14 @@ final class CareerPresentationV1Compiler
             'package_diff' => [
                 'contract_version' => 'career.presentation_v1.package_diff.v1',
                 'source_bytes_changed' => 0,
-                'existing_zh_content_fields_changed' => 0,
+                'existing_zh_content_fields_changed' => $relatedNextPageChanges,
                 'en_locale_pages_changed' => 0,
                 'shared_source_reference_rows_changed' => $sourceReferenceChanges,
                 'zh_supporting_evidence_changes' => $supportingEvidenceChanges,
+                'zh_related_next_page_changes' => $relatedNextPageChanges,
                 'zh_presentation_additions' => $presentationAdditions,
                 'zh_presentation_changes' => $presentationChanges,
-                'changed_row_count' => $presentationChanges + $sourceReferenceChanges + $supportingEvidenceChanges,
+                'changed_row_count' => $presentationChanges + $sourceReferenceChanges + $supportingEvidenceChanges + $relatedNextPageChanges,
                 'slug_count' => count($candidateRows),
                 'locale_page_count' => count($candidateRows) * 2,
                 'components_per_page' => 26,
@@ -761,6 +774,92 @@ final class CareerPresentationV1Compiler
         unset($projection['sources']);
 
         return $projection;
+    }
+
+    /**
+     * @param  array<string,mixed>  $row
+     * @param  array<string,string>  $titleZhBySlug
+     * @return array<string,mixed>
+     */
+    private function compileRelatedNextPages(string $currentSlug, array $row, array $titleZhBySlug, int &$changes): array
+    {
+        $page = $this->zhPage($row);
+        $related = $page['related_next_pages'] ?? null;
+        if (! is_array($related)) {
+            return $row;
+        }
+        $links = is_array($related['links'] ?? null) && array_is_list($related['links']) ? $related['links'] : [];
+        $candidates = [];
+        $seenSlugs = [];
+        foreach ($links as $index => $link) {
+            if (! is_array($link)) {
+                continue;
+            }
+            $slug = strtolower(trim((string) ($link['slug'] ?? '')));
+            $source = (string) ($link['source'] ?? '');
+            $titleEn = trim((string) ($link['title_en'] ?? ''));
+            if (preg_match('/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', $slug) !== 1
+                || $slug === $currentSlug || $slug === 'software-developers' || isset($seenSlugs[$slug])
+                || ! isset($titleZhBySlug[$slug]) || ! in_array($source, ['self_pick', 'lookup'], true)
+                || $titleEn === '' || ! is_bool($link['nofollow'] ?? null)) {
+                continue;
+            }
+            $seenSlugs[$slug] = true;
+            $candidates[] = [
+                'index' => $index,
+                'slug' => $slug,
+                'title_en' => $titleEn,
+                'title_zh' => $titleZhBySlug[$slug],
+                'source' => $source,
+                'nofollow' => $link['nofollow'],
+            ];
+        }
+        usort($candidates, static fn (array $left, array $right): int => [
+            $left['source'] === 'self_pick' ? 0 : 1, $left['index'],
+        ] <=> [
+            $right['source'] === 'self_pick' ? 0 : 1, $right['index'],
+        ]);
+        $normalized = [];
+        $seenTitles = [];
+        foreach ($candidates as $candidate) {
+            $titleKey = mb_strtolower($candidate['title_zh'], 'UTF-8');
+            if (isset($seenTitles[$titleKey])) {
+                continue;
+            }
+            $seenTitles[$titleKey] = true;
+            unset($candidate['index']);
+            $normalized[] = $candidate;
+            if (count($normalized) === 12) {
+                break;
+            }
+        }
+        if (! hash_equals(
+            CareerCurrentAuthorityPackage::hashValue($links),
+            CareerCurrentAuthorityPackage::hashValue($normalized),
+        )) {
+            $changes++;
+        }
+        $related['links'] = $normalized;
+        $page['related_next_pages'] = $related;
+        $payload = is_array($row['page_payload_json'] ?? null) ? $row['page_payload_json'] : [];
+        if (is_array($payload['page'] ?? null)) {
+            $row['page_payload_json']['page']['zh'] = $page;
+        } else {
+            $row['page_payload_json']['zh'] = $page;
+        }
+
+        return $row;
+    }
+
+    /** @param array<string,mixed> $row @return array<string,mixed> */
+    private function zhPageWithoutRelatedLinks(array $row): array
+    {
+        $page = $this->zhPage($row);
+        if (is_array($page['related_next_pages'] ?? null)) {
+            unset($page['related_next_pages']['links']);
+        }
+
+        return $page;
     }
 
     /** @param array<string,mixed> $row @return array<string,mixed> */

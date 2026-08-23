@@ -116,22 +116,25 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
             'civil-engineers', 'biomedical-engineers', 'dentists', 'web-developers', 'lawyers',
             'pharmacists', 'budget-analysts', 'marketing-managers',
         ];
-        foreach ($relatedSlugs as $index => $slug) {
-            $related = $this->createOccupation($slug);
-            $related->update(['canonical_title_zh' => $index === 12 ? '预算分析师' : '相关职业'.$index]);
-        }
-        Occupation::query()->where('canonical_slug', 'budget-analysts')->update(['canonical_title_zh' => '预算分析师']);
-        $links = array_map(static fn (string $slug): array => [
+        $links = array_map(static fn (string $slug, int $index): array => [
             'slug' => $slug,
             'title_en' => self::PILOT_SLUGS[$slug]['title'],
+            'title_zh' => $index === 12 ? '预算分析师' : '相关职业'.$index,
             'source' => 'self_pick',
             'nofollow' => false,
-        ], $relatedSlugs);
+        ], $relatedSlugs, array_keys($relatedSlugs));
         $links[] = $links[0];
         $links[] = [
             'slug' => 'accountants-and-auditors',
             'title_en' => 'Accountants and Auditors',
+            'title_zh' => '会计师和审计师',
             'source' => 'self_pick',
+            'nofollow' => false,
+        ];
+        $links[] = [
+            'slug' => 'actors',
+            'title_en' => 'Actors without Chinese authority',
+            'source' => 'lookup',
             'nofollow' => false,
         ];
         $this->createDisplayAsset($occupation, [
@@ -159,6 +162,27 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         $this->assertCount(12, array_unique(array_column($relatedLinks, 'title_zh')));
         $this->assertNotContains('accountants-and-auditors', array_column($relatedLinks, 'slug'));
         $this->assertNotContains('marketing-managers', array_column($relatedLinks, 'slug'));
+    }
+
+    public function test_current_package_related_titles_render_without_related_occupation_rows(): void
+    {
+        ini_set('memory_limit', '1024M');
+        $occupation = $this->createOccupation('accountants-and-auditors');
+        $package = app(CareerCurrentAuthorityPackage::class);
+        $row = $package->load(base_path())['rows']['accountants-and-auditors'];
+        $this->createDisplayAsset($occupation, $package->databaseAttributes($row));
+
+        $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
+        $expected = data_get(
+            $package->publicProjection($row, 'zh-CN'),
+            'page.content.related_next_pages.links',
+        );
+
+        $this->assertSame(
+            CareerCurrentAuthorityPackage::hashValue($expected),
+            CareerCurrentAuthorityPackage::hashValue(data_get($surface, 'page.content.related_next_pages.links')),
+        );
+        $this->assertCount(12, $expected);
     }
 
     public function test_it_returns_the_complete_26_component_surface_with_both_workbuddy_blocks(): void

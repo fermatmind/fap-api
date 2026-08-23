@@ -31,9 +31,21 @@ final class CareerPresentationV1CompilerTest extends TestCase
             self::assertArrayHasKey('presentation_v1', $authority['rows'][$row['canonical_slug']]['metadata_json']);
             self::assertArrayNotHasKey('presentation_v1', $package->publicProjection($row, 'en'));
             self::assertArrayHasKey('presentation_v1', $package->publicProjection($row, 'zh-CN'));
+            $relatedLinks = data_get($row, 'page_payload_json.page.zh.related_next_pages.links', []);
+            self::assertIsArray($relatedLinks);
+            self::assertLessThanOrEqual(12, count($relatedLinks));
+            self::assertCount(count($relatedLinks), array_unique(array_column($relatedLinks, 'slug')));
+            self::assertCount(count($relatedLinks), array_unique(array_column($relatedLinks, 'title_zh')));
+            foreach ($relatedLinks as $link) {
+                self::assertMatchesRegularExpression('/[\x{3400}-\x{9fff}]/u', $link['title_zh']);
+            }
         }
 
         $accountants = $authority['rows']['accountants-and-auditors']['metadata_json']['presentation_v1']['zh'];
+        self::assertCount(12, data_get(
+            $authority['rows']['accountants-and-auditors'],
+            'page_payload_json.page.zh.related_next_pages.links',
+        ));
         self::assertSame(8, data_get($accountants, 'hero.ai_exposure.value'));
         self::assertSame('8/10', data_get($accountants, 'hero.ai_exposure.display_value'));
         self::assertSame('fermatmind_internal_rubric', data_get($accountants, 'hero.ai_exposure.metric_kind'));

@@ -233,28 +233,29 @@ final class CareerJobDisplaySurfaceBuilder
                 || ! is_bool($link['nofollow'] ?? null)) {
                 continue;
             }
+            $titleZh = $this->localeIntegrityGate->validZhAuthorityText($link['title_zh'] ?? null);
+            if ($titleZh === null) {
+                continue;
+            }
             $seenSlugs[$slug] = true;
-            $candidates[] = ['index' => $index, 'slug' => $slug, 'source' => $source, 'title_en' => $titleEn, 'nofollow' => $link['nofollow']];
+            $candidates[] = [
+                'index' => $index,
+                'slug' => $slug,
+                'source' => $source,
+                'title_en' => $titleEn,
+                'title_zh' => $titleZh,
+                'nofollow' => $link['nofollow'],
+            ];
         }
         usort($candidates, static fn (array $left, array $right): int => [
             $left['source'] === 'self_pick' ? 0 : 1, $left['index'],
         ] <=> [
             $right['source'] === 'self_pick' ? 0 : 1, $right['index'],
         ]);
-        $titles = Occupation::query()
-            ->whereIn('canonical_slug', array_column($candidates, 'slug'))
-            ->get(['canonical_slug', 'canonical_title_zh'])
-            ->mapWithKeys(fn (Occupation $occupation): array => [
-                strtolower((string) $occupation->canonical_slug) => $this->localeIntegrityGate->validZhAuthorityText($occupation->canonical_title_zh),
-            ]);
         $normalized = [];
         $seenTitles = [];
         foreach ($candidates as $candidate) {
-            $titleZh = $titles->get($candidate['slug']);
-            if (! is_string($titleZh) || trim($titleZh) === '') {
-                continue;
-            }
-            $titleKey = mb_strtolower(trim($titleZh), 'UTF-8');
+            $titleKey = mb_strtolower($candidate['title_zh'], 'UTF-8');
             if (isset($seenTitles[$titleKey])) {
                 continue;
             }
@@ -262,7 +263,7 @@ final class CareerJobDisplaySurfaceBuilder
             $normalized[] = [
                 'slug' => $candidate['slug'],
                 'title_en' => $candidate['title_en'],
-                'title_zh' => trim($titleZh),
+                'title_zh' => $candidate['title_zh'],
                 'source' => $candidate['source'],
                 'nofollow' => $candidate['nofollow'],
             ];
