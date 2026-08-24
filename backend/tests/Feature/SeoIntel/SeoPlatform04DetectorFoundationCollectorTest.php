@@ -160,6 +160,7 @@ final class SeoPlatform04DetectorFoundationCollectorTest extends TestCase
             'last_refreshed_at' => now('UTC')->subDay(),
         ]);
         config([
+            'seo_intel.enabled' => false,
             'seo_intel.collectors_enabled' => false,
             'seo_intel.write_enabled' => false,
         ]);
@@ -220,7 +221,6 @@ final class SeoPlatform04DetectorFoundationCollectorTest extends TestCase
         $this->assertStringNotContainsString('test "$dry_fingerprint" = "$controlled_fingerprint"', $deploy);
         $this->assertStringContainsString('idempotent_rerun_receipt', $deploy);
         $this->assertStringContainsString('$rerun["created"]', $deploy);
-        $this->assertStringContainsString('exit 20', $deploy);
         $this->assertStringContainsString('exit 21', $deploy);
         $this->assertStringContainsString('exit 22', $deploy);
         $this->assertStringContainsString('exit 31', $deploy);

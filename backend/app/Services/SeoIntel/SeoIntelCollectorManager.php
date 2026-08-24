@@ -216,7 +216,7 @@ final class SeoIntelCollectorManager
     {
         return ! $dryRun
             && ! $noWrite
-            && (bool) config('seo_intel.enabled', false)
+            && ((bool) config('seo_intel.enabled', false) || $detectorMaterializationAuthorized)
             && ((bool) config('seo_intel.write_enabled', false) || $detectorMaterializationAuthorized);
     }
 
