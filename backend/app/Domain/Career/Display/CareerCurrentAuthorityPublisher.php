@@ -374,29 +374,85 @@ final class CareerCurrentAuthorityPublisher
         if (! is_array($payload) || ! is_array(data_get($payload, 'display_surface_v1'))) {
             throw new CareerCurrentAuthorityPublisherFailure('CURRENT_CACHE_PAYLOAD_MISSING');
         }
-        if (! $this->cachedPayloadMatches($payload, $row, $locale)) {
-            throw new CareerCurrentAuthorityPublisherFailure('CURRENT_CACHE_CONTENT_MISMATCH');
+        $mismatchCode = $this->cachedPayloadMismatchCode($payload, $row, $locale);
+        if ($mismatchCode !== null) {
+            throw new CareerCurrentAuthorityPublisherFailure($mismatchCode);
         }
     }
 
     /** @param array<string,mixed>|null $payload @param array<string,mixed> $row */
     private function cachedPayloadMatches(?array $payload, array $row, string $locale): bool
     {
+        return $this->cachedPayloadMismatchCode($payload, $row, $locale) === null;
+    }
+
+    /** @param array<string,mixed>|null $payload @param array<string,mixed> $row */
+    private function cachedPayloadMismatchCode(?array $payload, array $row, string $locale): ?string
+    {
         $surface = is_array($payload) ? data_get($payload, 'display_surface_v1') : null;
         if (! is_array($surface)) {
-            return false;
+            return 'CURRENT_CACHE_CONTENT_MISMATCH';
         }
         try {
             $expected = $this->readerSafeProjector->project($this->package->publicProjection($row, $locale));
             $actual = $this->readerSafeProjector->project($this->package->displayOwnedProjection($surface));
-
-            return hash_equals(
+            if (hash_equals(
                 CareerCurrentAuthorityPackage::hashValue($expected),
                 CareerCurrentAuthorityPackage::hashValue($actual),
-            );
+            )) {
+                return null;
+            }
+            foreach (array_keys($expected) as $field) {
+                if (! array_key_exists($field, $actual)
+                    || ! hash_equals(
+                        CareerCurrentAuthorityPackage::hashValue($expected[$field]),
+                        CareerCurrentAuthorityPackage::hashValue($actual[$field]),
+                    )) {
+                    return match ($field) {
+                        'surface_version' => 'CURRENT_CACHE_SURFACE_VERSION_MISMATCH',
+                        'asset_version' => 'CURRENT_CACHE_ASSET_VERSION_MISMATCH',
+                        'template_version' => 'CURRENT_CACHE_TEMPLATE_VERSION_MISMATCH',
+                        'available_locales' => 'CURRENT_CACHE_AVAILABLE_LOCALES_MISMATCH',
+                        'page' => $this->pageMismatchCode((array) $expected[$field], (array) ($actual[$field] ?? [])),
+                        'component_order' => 'CURRENT_CACHE_COMPONENT_ORDER_MISMATCH',
+                        'sources' => 'CURRENT_CACHE_SOURCES_MISMATCH',
+                        'structured_data_from_visible_content' => 'CURRENT_CACHE_STRUCTURED_DATA_MISMATCH',
+                        'implementation_contract' => 'CURRENT_CACHE_IMPLEMENTATION_CONTRACT_MISMATCH',
+                        'presentation_v1' => 'CURRENT_CACHE_PRESENTATION_MISMATCH',
+                        default => 'CURRENT_CACHE_CONTENT_MISMATCH',
+                    };
+                }
+            }
+
+            return 'CURRENT_CACHE_CONTENT_MISMATCH';
         } catch (CareerCurrentAuthorityPackageFailure) {
-            return false;
+            return 'CURRENT_CACHE_CONTENT_MISMATCH';
         }
+    }
+
+    /** @param array<string,mixed> $expected @param array<string,mixed> $actual */
+    private function pageMismatchCode(array $expected, array $actual): string
+    {
+        if (($expected['locale'] ?? null) !== ($actual['locale'] ?? null)) {
+            return 'CURRENT_CACHE_PAGE_LOCALE_MISMATCH';
+        }
+        $expectedContent = is_array($expected['content'] ?? null) ? $expected['content'] : [];
+        $actualContent = is_array($actual['content'] ?? null) ? $actual['content'] : [];
+        foreach ($expectedContent as $componentId => $component) {
+            if (! array_key_exists($componentId, $actualContent)
+                || ! hash_equals(
+                    CareerCurrentAuthorityPackage::hashValue($component),
+                    CareerCurrentAuthorityPackage::hashValue($actualContent[$componentId]),
+                )) {
+                return match ($componentId) {
+                    'career_quick_answers_block' => 'CURRENT_CACHE_QUICK_ANSWERS_MISMATCH',
+                    'onet_structured_fields_block' => 'CURRENT_CACHE_ONET_STRUCTURED_FIELDS_MISMATCH',
+                    default => 'CURRENT_CACHE_PAGE_CONTENT_MISMATCH',
+                };
+            }
+        }
+
+        return 'CURRENT_CACHE_PAGE_CONTENT_MISMATCH';
     }
 
     /**

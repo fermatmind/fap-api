@@ -173,6 +173,20 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
         self::assertTrue($cache->forgotten);
     }
 
+    public function test_it_reports_the_safe_display_field_that_drifted_before_rollback(): void
+    {
+        [$authority] = $this->fixture();
+        $cache = new FakeCareerCurrentAuthorityCacheGateway(new CareerCurrentAuthorityPackage, $authority['rows'], 'prepared_content_failure');
+
+        try {
+            $this->publisher($authority, $cache)->execute(base_path(), true);
+            self::fail('Expected controlled publisher failure.');
+        } catch (CareerCurrentAuthorityPublisherFailure $failure) {
+            self::assertSame('CURRENT_CACHE_SURFACE_VERSION_MISMATCH', $failure->safeCode);
+            self::assertSame('rolled_back', $failure->writeCommitState);
+        }
+    }
+
     public function test_it_rejects_accountants_without_a_non_empty_boundary_notice_before_writes(): void
     {
         [$authority] = $this->fixture();
@@ -391,7 +405,13 @@ final class FakeCareerCurrentAuthorityCacheGateway extends CareerCurrentAuthorit
     public function preparedPayload(array $entry): ?array
     {
         if ($this->mode === 'prepared_content_failure') {
-            return ['display_surface_v1' => ['surface_version' => 'drifted']];
+            $surface = $this->package->publicProjection(
+                $this->rows[$entry['slug']],
+                $entry['locale'],
+            );
+            $surface['surface_version'] = 'drifted';
+
+            return ['display_surface_v1' => $surface];
         }
 
         return ['display_surface_v1' => $this->package->publicProjection(
