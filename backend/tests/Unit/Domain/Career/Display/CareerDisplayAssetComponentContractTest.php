@@ -78,6 +78,12 @@ final class CareerDisplayAssetComponentContractTest extends TestCase
         self::assertTrue(CareerDisplayAssetComponentContract::hasExactPagesForVersion($payload, 'v4.3'));
         self::assertNull(CareerDisplayAssetComponentContract::pageFailureCodeForVersion($payload, 'v4.3'));
 
+        $databaseOrdered = $payload;
+        $databaseOrdered['page']['en']['career_quick_answers_block'] = array_reverse($unavailable, true);
+        $databaseOrdered['page']['en']['onet_structured_fields_block'] = array_reverse($unavailable, true);
+        self::assertTrue(CareerDisplayAssetComponentContract::hasExactPagesForVersion($databaseOrdered, 'v4.3'));
+        self::assertNull(CareerDisplayAssetComponentContract::pageFailureCodeForVersion($databaseOrdered, 'v4.3'));
+
         $malformed = $payload;
         unset($malformed['page']['zh']['career_quick_answers_block']['items'][0]['table']['rows'][0]['alternate_value']);
         self::assertFalse(CareerDisplayAssetComponentContract::hasExactPagesForVersion($malformed, 'v4.3'));

@@ -218,12 +218,8 @@ final class CareerDisplayAssetComponentContract
         $quick = $page['career_quick_answers_block'] ?? null;
         $onet = $page['onet_structured_fields_block'] ?? null;
         if ($locale === 'en') {
-            $unavailable = [
-                'availability' => 'unavailable',
-                'reason_code' => 'source_locale_unavailable',
-            ];
-
-            return $quick === $unavailable && $onet === $unavailable;
+            return self::isSourceLocaleUnavailable($quick)
+                && self::isSourceLocaleUnavailable($onet);
         }
         if (! is_array($quick) || ! self::exactKeys($quick, ['availability', 'schema_version', 'heading', 'items'])
             || ($quick['availability'] ?? null) !== 'published'
@@ -259,15 +255,11 @@ final class CareerDisplayAssetComponentContract
         $quick = $page['career_quick_answers_block'] ?? null;
         $onet = $page['onet_structured_fields_block'] ?? null;
         if ($locale === 'en') {
-            $unavailable = [
-                'availability' => 'unavailable',
-                'reason_code' => 'source_locale_unavailable',
-            ];
-            if ($quick !== $unavailable) {
+            if (! self::isSourceLocaleUnavailable($quick)) {
                 return 'CURRENT_DISPLAY_SURFACE_V43_EN_QUICK_ANSWERS_INVALID';
             }
 
-            return $onet === $unavailable
+            return self::isSourceLocaleUnavailable($onet)
                 ? null
                 : 'CURRENT_DISPLAY_SURFACE_V43_EN_ONET_FIELDS_INVALID';
         }
@@ -325,6 +317,14 @@ final class CareerDisplayAssetComponentContract
         }
 
         return true;
+    }
+
+    private static function isSourceLocaleUnavailable(mixed $component): bool
+    {
+        return is_array($component)
+            && self::exactKeys($component, ['availability', 'reason_code'])
+            && ($component['availability'] ?? null) === 'unavailable'
+            && ($component['reason_code'] ?? null) === 'source_locale_unavailable';
     }
 
     private static function nonEmptyString(mixed $value): bool
