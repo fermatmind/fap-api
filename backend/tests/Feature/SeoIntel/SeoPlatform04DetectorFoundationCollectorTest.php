@@ -217,7 +217,9 @@ final class SeoPlatform04DetectorFoundationCollectorTest extends TestCase
         $this->assertStringContainsString('--collector=detector_foundation --materialize-detector-queues --canary --limit=10', $deploy);
         $this->assertStringContainsString('"duplicate_rows"', $deploy);
         $this->assertStringContainsString('"search_submission_allowed"', $deploy);
-        $this->assertStringContainsString('test "$dry_fingerprint" = "$controlled_fingerprint"', $deploy);
+        $this->assertStringNotContainsString('test "$dry_fingerprint" = "$controlled_fingerprint"', $deploy);
+        $this->assertStringContainsString('idempotent_rerun_receipt', $deploy);
+        $this->assertStringContainsString('$rerun["created"]', $deploy);
     }
 
     private function collector(DetectorFoundationEvidenceSource $source): DetectorFoundationCollector

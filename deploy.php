@@ -885,10 +885,6 @@ $ok = ($payload["collector"] ?? null) === "detector_foundation"
     && ($payload["metadata"]["first_receipt"]["boundaries"]["raw_sensitive_fields_output"] ?? null) === false;
 exit($ok ? 0 : 1);
 '
-dry_fingerprint="$(printf '%s' "$dry_run" | {{bin/php}} -r '$payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR); echo (string) ($payload["metadata"]["source_fingerprint"] ?? "");')"
-controlled_fingerprint="$(printf '%s' "$controlled" | {{bin/php}} -r '$payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR); echo (string) ($payload["metadata"]["source_fingerprint"] ?? "");')"
-[[ "$dry_fingerprint" =~ ^[0-9a-f]{64}$ ]]
-test "$dry_fingerprint" = "$controlled_fingerprint"
 BASH);
     });
 });
