@@ -121,6 +121,10 @@ final class CareerCurrentAuthorityPackageTest extends TestCase
         ] as $path) {
             self::assertGreaterThanOrEqual(2, substr_count($workflow, $path));
         }
+        self::assertStringContainsString(
+            '.public_readback.verified_locale_page_count == 2090',
+            $workflow,
+        );
     }
 
     public function test_current_page_contract_rejects_legacy_unknown_and_placeholder_structures(): void

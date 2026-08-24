@@ -96,6 +96,43 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
         self::assertFalse($cache->serveStaleActive);
     }
 
+    public function test_full_scan_keeps_manual_hold_in_database_authority_without_publishing_its_cache(): void
+    {
+        [$authority] = $this->fixture();
+        $family = OccupationFamily::query()->firstOrFail();
+        $occupation = Occupation::query()->create([
+            'family_id' => $family->id,
+            'canonical_slug' => 'software-developers',
+            'entity_level' => 'occupation',
+            'truth_market' => 'US',
+            'display_market' => 'CN',
+            'crosswalk_mode' => 'direct',
+            'canonical_title_en' => 'Software Developers',
+            'canonical_title_zh' => '软件开发人员',
+            'search_h1_zh' => '软件开发人员',
+        ]);
+        CareerJobDisplayAsset::query()->create(
+            $this->row('software-developers', 'old held title') + ['occupation_id' => $occupation->id],
+        );
+        $authority['rows']['software-developers'] = $this->row('software-developers', 'new held title');
+        $authority['slugs'][] = 'software-developers';
+        sort($authority['slugs'], SORT_STRING);
+        $authority['summary']['career_count'] = 2;
+        $authority['summary']['locale_page_count'] = 4;
+        $cache = new FakeCareerCurrentAuthorityCacheGateway(new CareerCurrentAuthorityPackage, $authority['rows']);
+
+        $result = $this->publisher($authority, $cache)->execute(base_path(), true);
+
+        self::assertSame(2, $result['write_counts']['database_update_count']);
+        self::assertSame(2, $result['write_counts']['cache_pointer_activation_count']);
+        self::assertSame(2, $result['public_readback']['verified_locale_page_count']);
+        self::assertSame('new held title', data_get(
+            CareerJobDisplayAsset::query()->where('canonical_slug', 'software-developers')->sole()->page_payload_json,
+            'en.hero.title',
+        ));
+        self::assertSame(['actors'], array_values(array_unique($cache->preparedSlugs)));
+    }
+
     public function test_it_classifies_cache_candidate_exceptions_and_restores_database(): void
     {
         [$authority, , $old] = $this->fixture();
@@ -319,6 +356,9 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
 
 final class FakeCareerCurrentAuthorityCacheGateway extends CareerCurrentAuthorityCacheGateway
 {
+    /** @var list<string> */
+    public array $preparedSlugs = [];
+
     public bool $restored = false;
 
     public bool $forgotten = false;
@@ -334,6 +374,7 @@ final class FakeCareerCurrentAuthorityCacheGateway extends CareerCurrentAuthorit
 
     public function prepare(string $slug, string $locale): array
     {
+        $this->preparedSlugs[] = $slug;
         if ($this->mode === 'prepare_exception') {
             throw new \RuntimeException('Synthetic cache infrastructure failure.');
         }

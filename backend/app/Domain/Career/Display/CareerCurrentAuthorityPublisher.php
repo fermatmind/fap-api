@@ -73,6 +73,9 @@ final class CareerCurrentAuthorityPublisher
 
             $candidatePairs = [];
             foreach ($plan['changed_slugs'] as $slug) {
+                if ($this->isManualHoldSlug($slug)) {
+                    continue;
+                }
                 foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
                     $candidatePairs[$slug.'|'.$locale] = [$slug, $locale];
                 }
@@ -111,7 +114,7 @@ final class CareerCurrentAuthorityPublisher
             }
 
             $verificationSlugs = $fullScan
-                ? $authority['slugs']
+                ? $this->publicSlugs($authority['slugs'])
                 : $this->verificationSlugs($plan['changed_slugs'], $authority['slugs']);
             $readback = $this->assertPublicReadback($verificationSlugs, $authority['rows']);
             $this->assertManualHold();
@@ -407,6 +410,9 @@ final class CareerCurrentAuthorityPublisher
         foreach (array_chunk($slugs, 50) as $chunk) {
             $cache = $this->cache->publicationSnapshot($chunk, CareerCurrentAuthorityPackage::LOCALES);
             foreach ($chunk as $slug) {
+                if ($this->isManualHoldSlug($slug)) {
+                    continue;
+                }
                 foreach (CareerCurrentAuthorityPackage::LOCALES as $locale) {
                     $entry = $cache[$slug][$locale] ?? null;
                     if (! is_array($entry)
@@ -499,14 +505,29 @@ final class CareerCurrentAuthorityPublisher
     /** @param list<string> $changedSlugs @param list<string> $targetSlugs @return list<string> */
     private function verificationSlugs(array $changedSlugs, array $targetSlugs): array
     {
-        $samples = array_values(array_intersect(self::HEALTH_SAMPLE_SLUGS, $targetSlugs));
-        if ($samples === [] && $targetSlugs !== []) {
-            $samples[] = $targetSlugs[0];
+        $publicTargetSlugs = $this->publicSlugs($targetSlugs);
+        $samples = array_values(array_intersect(self::HEALTH_SAMPLE_SLUGS, $publicTargetSlugs));
+        if ($samples === [] && $publicTargetSlugs !== []) {
+            $samples[] = $publicTargetSlugs[0];
         }
-        $slugs = array_values(array_unique(array_merge($changedSlugs, $samples)));
+        $slugs = array_values(array_unique(array_merge($this->publicSlugs($changedSlugs), $samples)));
         sort($slugs, SORT_STRING);
 
         return $slugs;
+    }
+
+    /** @param list<string> $slugs @return list<string> */
+    private function publicSlugs(array $slugs): array
+    {
+        return array_values(array_filter(
+            $slugs,
+            fn (string $slug): bool => ! $this->isManualHoldSlug($slug),
+        ));
+    }
+
+    private function isManualHoldSlug(string $slug): bool
+    {
+        return in_array(strtolower(trim($slug)), self::MANUAL_HOLD_SLUGS, true);
     }
 
     /** @param array<string,mixed> $desired */

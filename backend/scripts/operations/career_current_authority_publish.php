@@ -143,7 +143,7 @@ try {
         || ($result['authority']['unique_slug_count'] ?? null) !== 1046
         || ($result['authority']['component_28_count'] ?? null) !== 1046
         || ($result['manual_hold_verified'] ?? null) !== true
-        || ($fullScan && ($result['public_readback']['verified_locale_page_count'] ?? null) !== 2092)
+        || ($fullScan && ($result['public_readback']['verified_locale_page_count'] ?? null) !== 2090)
         || ($result['write_counts']['occupation_write_count'] ?? null) !== 0
         || ($result['write_counts']['generation_write_count'] ?? null) !== 0
         || ($result['write_counts']['discoverability_write_count'] ?? null) !== 0

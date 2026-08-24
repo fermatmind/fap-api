@@ -6,12 +6,15 @@ namespace Tests\Unit\Services\Career;
 
 use App\Domain\Career\Display\CareerCurrentAuthorityPackage;
 use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
+use App\Http\Resources\Career\CareerJobDetailResource;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
 use App\Models\OccupationCrosswalk;
 use App\Models\OccupationFamily;
+use App\Services\Career\Bundles\CareerJobDetailBundleBuilder;
 use App\Services\Career\Bundles\CareerJobDisplaySurfaceBuilder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Request;
 use Tests\TestCase;
 
 final class CareerJobDisplaySurfaceBuilderTest extends TestCase
@@ -98,12 +101,37 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
 
         $this->assertSame('v4.3', $surface['asset_version']);
+        $this->assertSame(
+            CareerCurrentAuthorityPackage::hashValue(app(CareerCurrentAuthorityPackage::class)->publicProjection($row, 'zh-CN')),
+            CareerCurrentAuthorityPackage::hashValue(app(CareerCurrentAuthorityPackage::class)->displayOwnedProjection($surface)),
+        );
         $this->assertSame(CareerDisplayAssetComponentContract::CURRENT_V4_3_ORDER, $surface['component_order']);
         $this->assertSame(
             ['qa3', 'qa2', 'qa1'],
             array_column($surface['page']['content']['career_quick_answers_block']['items'], 'key'),
         );
         $this->assertSame('published', $surface['page']['content']['onet_structured_fields_block']['availability']);
+
+        $bundle = app(CareerJobDetailBundleBuilder::class)->buildBySlug(
+            'accountants-and-auditors',
+            'zh-CN',
+            [
+                'slug' => 'accountants-and-auditors',
+                'locale' => 'zh-CN',
+                'runtime_publish_state' => 'published',
+                'detail_route_enabled' => true,
+                'robots_indexable' => true,
+                'release_gate_pass' => true,
+            ],
+        );
+        $this->assertNotNull($bundle);
+        $payload = (new CareerJobDetailResource($bundle))->toArray(
+            Request::create('/api/v0.5/career/jobs/accountants-and-auditors', 'GET', ['locale' => 'zh-CN']),
+        );
+        $this->assertSame(
+            CareerCurrentAuthorityPackage::hashValue(app(CareerCurrentAuthorityPackage::class)->publicProjection($row, 'zh-CN')),
+            CareerCurrentAuthorityPackage::hashValue(app(CareerCurrentAuthorityPackage::class)->displayOwnedProjection($payload['display_surface_v1'])),
+        );
     }
 
     public function test_it_exposes_presentation_v1_only_for_the_zh_surface(): void
