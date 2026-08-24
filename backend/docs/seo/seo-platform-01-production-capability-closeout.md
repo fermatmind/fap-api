@@ -76,9 +76,9 @@ GSC, sitemap, HTML, and crawler observations did not create or mutate URL Truth.
   `unknown` 374.
 - `current_url_truth_missing_handoff_count`: 17.
 
-Unknown means the stored production row exposes only an opaque canonical hash and no
-approved authority source resolves it. The closeout does not reverse-create a URL or infer
-a private path. No URL Truth write or repair was performed.
+Of the 374 `unknown` identities, one uses the opaque canonical-hash fallback and 373 are
+non-opaque unknowns that no approved authority source resolves. The closeout does not
+reverse-create a URL or infer a private path. No URL Truth write or repair was performed.
 
 ## Queue Reconciliation: 2,073 versus 5
 
@@ -102,9 +102,9 @@ fixed.
 
 Task #5 is next. Production proves 17 current backend/CMS-authority-qualified candidates
 that should be represented by URL Truth but are missing. That evidence outranks the three
-P3 lastmod clusters. Task #2 follows for the 374 unresolved opaque identities and the
-small parameter/private-path cohorts. Task #10 is not selected or implemented in this
-closeout.
+P3 lastmod clusters. Task #2 follows for the 374 unresolved identities (one opaque hash
+fallback and 373 non-opaque unknowns) and the small parameter/private-path cohorts. Task
+#10 is not selected or implemented in this closeout.
 
 Tasks #3 and #6 remain `delta_only`. The instruction and repository do not provide
 authoritative definitions for #4, #8, #9, #11, or #12; they remain scope-unknown.
@@ -114,8 +114,9 @@ authoritative definitions for #4, #8, #9, #11, or #12; they remain scope-unknown
 - Scheduled relay is intentionally deferred and non-blocking for the immediate closeout.
 - Fresh API `pages_fetched`, row completeness, scheduled restricted-egress receipt,
   scheduled overlap, and scheduled rerun accumulation remain `production_unproven`.
-- 374 opaque unmapped identities require approved backend/CMS publication history or an
-  approved alias registry before a more specific root cause is possible.
+- 374 unknown identities (one opaque hash fallback and 373 non-opaque unknowns) require
+  approved backend/CMS publication history or an approved alias registry before a more
+  specific root cause is possible.
 - Core Web Vitals, rank tracking, AI Visibility, and backlinks remain unconnected.
 - Search submission remains disabled. No CMS publication, canonical/noindex/lastmod
   change, URL Truth write, issue closure, or external vendor hookup was performed.

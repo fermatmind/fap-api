@@ -117,6 +117,7 @@
     "classification_authority": "backend_cms_and_persisted_url_truth_only",
     "identity_resolution": "authority_normalized_hash_or_distinct_opaque_source_hash",
     "opaque_hash_fallback_count": 1,
+    "non_opaque_unknown_count": 373,
     "raw_query_url_hash_or_private_path_emitted": false,
     "url_truth_write_performed": false
   },
@@ -157,7 +158,7 @@
     "bulk_close_performed": false
   },
   "roadmap_delta": [
-    {"task_id": 2, "scope": "historical_alias_parameter_legal_nonindex_and_unknown_classification", "status": "queued_after_task_5", "reason": "374 opaque unknown identities and small parameter/private cohorts need approved authority evidence."},
+    {"task_id": 2, "scope": "historical_alias_parameter_legal_nonindex_and_unknown_classification", "status": "queued_after_task_5", "reason": "374 unknown identities (1 opaque hash fallback and 373 non-opaque unknowns) and small parameter/private cohorts need approved authority evidence."},
     {"task_id": 3, "scope": "scope_not_named_in_instruction", "status": "delta_only", "reason": "Do not rebuild."},
     {"task_id": 4, "scope": "scope_not_named_in_instruction", "status": "scope_unknown", "reason": "No authoritative definition is present."},
     {"task_id": 5, "scope": "current_public_authoritative_url_truth_gaps", "status": "selected_next", "reason": "Production proves 17 backend/CMS-authority-qualified current URL Truth gaps."},
@@ -178,7 +179,7 @@
     {"item": "scheduled_relay_and_restricted_egress_production_receipt", "status": "production_unproven", "blocking_completion": false},
     {"item": "fresh_api_pages_fetched_and_row_completeness", "status": "production_unproven", "blocking_completion": false},
     {"item": "scheduled_overlap_and_rerun_accumulation", "status": "production_unproven", "blocking_completion": false},
-    {"item": "opaque_unmapped_authority_resolution", "status": "production_unproven", "blocking_completion": false, "count": 374},
+    {"item": "unknown_unmapped_authority_resolution", "status": "production_unproven", "blocking_completion": false, "count": 374, "opaque_hash_fallback_count": 1, "non_opaque_unknown_count": 373},
     {"item": "cwv_rank_ai_visibility_backlinks", "status": "external_not_connected", "blocking_completion": false},
     {"item": "roadmap_task_definitions_4_8_9_11_12", "status": "scope_unknown", "blocking_completion": false}
   ],
