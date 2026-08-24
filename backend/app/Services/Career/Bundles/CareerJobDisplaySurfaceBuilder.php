@@ -213,6 +213,34 @@ final class CareerJobDisplaySurfaceBuilder
             return 'CURRENT_DISPLAY_SURFACE_LOCALE_INTEGRITY_FAILED';
         }
         if (! $this->assetContractEligible($occupation, $asset, $pageContent)) {
+            if ((string) $asset->occupation_id !== (string) $occupation->id) {
+                return 'CURRENT_DISPLAY_SURFACE_OCCUPATION_BINDING_MISMATCH';
+            }
+            if (strtolower((string) $asset->canonical_slug) !== $normalizedSlug) {
+                return 'CURRENT_DISPLAY_SURFACE_CANONICAL_SLUG_MISMATCH';
+            }
+            $assetVersion = (string) $asset->asset_version;
+            if ((string) $asset->surface_version !== self::SURFACE_VERSION
+                || ! in_array($assetVersion, self::SUPPORTED_ASSET_VERSIONS, true)
+                || (string) $asset->template_version !== $assetVersion) {
+                return 'CURRENT_DISPLAY_SURFACE_VERSION_CONTRACT_FAILED';
+            }
+            $componentOrder = is_array($asset->component_order_json) ? array_values($asset->component_order_json) : [];
+            if (! CareerDisplayAssetComponentContract::matchesVersion($componentOrder, $assetVersion)) {
+                return 'CURRENT_DISPLAY_SURFACE_COMPONENT_ORDER_FAILED';
+            }
+            if (! CareerDisplayAssetComponentContract::hasExactPagesForVersion((array) $asset->page_payload_json, $assetVersion)) {
+                return 'CURRENT_DISPLAY_SURFACE_PAGE_CONTRACT_FAILED';
+            }
+            if ($this->containsProductSchema([
+                $pageContent,
+                $asset->sources_json ?? [],
+                $asset->structured_data_json ?? [],
+                $asset->implementation_contract_json ?? [],
+            ])) {
+                return 'CURRENT_DISPLAY_SURFACE_PRODUCT_SCHEMA_FAILED';
+            }
+
             return 'CURRENT_DISPLAY_SURFACE_ASSET_CONTRACT_FAILED';
         }
 
