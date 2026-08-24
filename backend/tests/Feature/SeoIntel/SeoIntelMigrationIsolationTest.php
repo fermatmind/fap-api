@@ -32,6 +32,7 @@ final class SeoIntelMigrationIsolationTest extends TestCase
         '2026_05_17_001700_create_seo_issue_queue_table.php',
         '2026_08_23_120000_expand_seo_execution_workflow.php',
         '2026_08_23_140000_expand_gsc_read_models.php',
+        '2026_08_25_010000_expand_detector_queue_materialization.php',
     ];
 
     #[Test]

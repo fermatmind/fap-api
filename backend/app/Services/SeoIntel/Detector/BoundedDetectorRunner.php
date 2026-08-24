@@ -44,6 +44,7 @@ final class BoundedDetectorRunner
         $scopeSkippedCount = 0;
         $nextOffset = $offset;
         $stopReason = null;
+        $materializeBefore = null;
 
         for ($index = $offset, $count = count($jobs); $index < $count; $index++) {
             if ((($this->monotonicClock)() - $startedAt) >= $settings['timeout_ms']) {
@@ -68,7 +69,20 @@ final class BoundedDetectorRunner
             }
 
             $detectorId = is_string($job['detector_id'] ?? null) ? $job['detector_id'] : '';
-            $results[] = $this->evaluate($detectorId, $evidence, $settings);
+            $result = $this->evaluate($detectorId, $evidence, $settings);
+            $results[] = $result;
+            if (($result['outcome'] ?? null) !== 'measurement_hold') {
+                try {
+                    $expiresAt = CarbonImmutable::parse((string) $evidence['evidence_observed_at'])
+                        ->utc()
+                        ->addSeconds($settings['max_evidence_age_seconds']);
+                    if ($materializeBefore === null || $expiresAt->lt($materializeBefore)) {
+                        $materializeBefore = $expiresAt;
+                    }
+                } catch (Throwable) {
+                    // Invalid timestamps already produce measurement_hold.
+                }
+            }
             $processedUrlCount += $affectedUrlCount;
         }
 
@@ -88,6 +102,8 @@ final class BoundedDetectorRunner
             'registry_version' => SeoDetectorRegistry::VERSION,
             'registry_hash' => $this->registry->registryHash(),
             'mode' => $settings['dry_run'] ? 'dry_run' : 'controlled_materialization_candidate',
+            'evaluated_at' => $settings['now']->toIso8601String(),
+            'materialize_before' => ($materializeBefore ?? $settings['now'])->toIso8601String(),
             'scope' => [
                 'page_family' => $settings['page_family'],
                 'locale' => $settings['locale'],

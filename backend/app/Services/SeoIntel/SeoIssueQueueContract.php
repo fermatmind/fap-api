@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\SeoIntel;
 
+use App\Services\SeoIntel\Detector\SeoDetectorRegistry;
+
 final class SeoIssueQueueContract
 {
     /**
@@ -11,7 +13,7 @@ final class SeoIssueQueueContract
      */
     public function issueTypes(): array
     {
-        return [
+        $legacyTypes = [
             'url_truth_drift',
             'metadata_drift',
             'canonical_drift',
@@ -37,6 +39,13 @@ final class SeoIssueQueueContract
             'pii_policy_warning',
             'internal_qa_filter_warning',
         ];
+
+        $detectorTypes = collect((new SeoDetectorRegistry)->detectors())
+            ->filter(static fn (array $definition): bool => ($definition['output_type'] ?? null) === 'issue')
+            ->keys()
+            ->all();
+
+        return array_values(array_unique([...$legacyTypes, ...$detectorTypes]));
     }
 
     /**
