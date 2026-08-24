@@ -155,6 +155,7 @@ return [
         'shenma_foundation',
         'chinese_crawler_log_foundation',
         'issue_queue_foundation',
+        'detector_foundation',
     ],
     'default_collector' => 'noop',
     'collector_timeout_seconds' => env('SEO_INTEL_COLLECTOR_TIMEOUT_SECONDS', 30),
@@ -315,6 +316,13 @@ return [
             'jsonld',
             'hreflang',
         ],
+    ],
+    'detector_foundation' => [
+        'default_max_urls' => 10,
+        'maximum_max_urls' => 50,
+        'timeout_ms' => 2_000,
+        'max_evidence_age_seconds' => 3_600,
+        'funnel_max_age_days' => 2,
     ],
     'crawler_log_foundation' => [
         'supported_bot_families' => [

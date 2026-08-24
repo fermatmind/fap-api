@@ -18,18 +18,27 @@ final class SeoIntelCollectCommand extends Command
         {--locale= : Filter collectors that support locale scoping}
         {--page-type= : Filter collectors that support page entity type scoping}
         {--canary : Use a deterministic bounded canary subset when supported}
+        {--materialize-detector-queues : Authorize only detector_foundation queue materialization and idempotent readback}
         {--gsc-live-preflight : Run the GSC read-only live adapter credential/readiness preflight without live API calls}
         {--gsc-live-read : Execute a bounded GSC read-only live read without writes, queues, or submissions}
         {--start-date= : GSC live read start date, YYYY-MM-DD}
         {--end-date= : GSC live read end date, YYYY-MM-DD}
         {--dimensions= : Comma-separated GSC dimensions, default query,page}';
 
-    protected $description = 'Run a disabled-by-default Search Intelligence collector skeleton.';
+    protected $description = 'Run a bounded Search Intelligence collector.';
 
     public function handle(SeoIntelCollectorManager $manager): int
     {
-        $dryRun = $this->option('dry-run') || (bool) config('seo_intel.dry_run_default', true);
         $collector = (string) $this->option('collector');
+        $materializeDetectorQueues = (bool) $this->option('materialize-detector-queues');
+        if ($materializeDetectorQueues && ($collector !== 'detector_foundation' || $this->option('dry-run') || $this->option('no-write'))) {
+            $this->error('Detector queue materialization requires collector=detector_foundation without --dry-run or --no-write.');
+
+            return self::FAILURE;
+        }
+        $dryRun = $materializeDetectorQueues
+            ? false
+            : ($this->option('dry-run') || (bool) config('seo_intel.dry_run_default', true));
 
         $result = $manager->collect($collector, [
             'dry_run' => $dryRun,
@@ -38,6 +47,7 @@ final class SeoIntelCollectCommand extends Command
             'locale' => $this->option('locale'),
             'page_type' => $this->option('page-type'),
             'canary' => (bool) $this->option('canary'),
+            'detector_materialization_authorized' => $materializeDetectorQueues,
             'gsc_live_preflight' => (bool) $this->option('gsc-live-preflight'),
             'gsc_live_read' => (bool) $this->option('gsc-live-read'),
             'start_date' => $this->option('start-date'),

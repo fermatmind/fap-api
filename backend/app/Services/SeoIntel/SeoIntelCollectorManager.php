@@ -8,6 +8,7 @@ use App\Services\SeoIntel\Collectors\AttributionRevenueFoundationCollector;
 use App\Services\SeoIntel\Collectors\BaiduFoundationCollector;
 use App\Services\SeoIntel\Collectors\ChineseCrawlerLogCollector;
 use App\Services\SeoIntel\Collectors\CrawlerLogFoundationCollector;
+use App\Services\SeoIntel\Collectors\DetectorFoundationCollector;
 use App\Services\SeoIntel\Collectors\DriftFoundationCollector;
 use App\Services\SeoIntel\Collectors\GscCollector;
 use App\Services\SeoIntel\Collectors\IndexNowFoundationCollector;
@@ -23,6 +24,7 @@ use App\Services\SeoIntel\Drift\HtmlSnapshotParser;
 use App\Services\SeoIntel\Drift\MetadataDriftComparator;
 use App\Services\SeoIntel\Drift\SitemapLlmsParityComparator;
 use App\Services\SeoIntel\Sources\BackendAuthorityUrlTruthSource;
+use App\Services\SeoIntel\Sources\ProductionDetectorFoundationEvidenceSource;
 
 final class SeoIntelCollectorManager
 {
@@ -69,7 +71,10 @@ final class SeoIntelCollectorManager
             $options['allow_production_log_read'] = false;
         }
 
-        $collectorsEnabled = (bool) config('seo_intel.collectors_enabled', false);
+        $detectorMaterializationAuthorized = $collectorName === 'detector_foundation'
+            && ($options['detector_materialization_authorized'] ?? false) === true;
+        $collectorsEnabled = (bool) config('seo_intel.collectors_enabled', false)
+            || $detectorMaterializationAuthorized;
         $safeDryRunAllowed = $dryRun;
 
         if (! $collectorsEnabled && ! $safeDryRunAllowed) {
@@ -191,6 +196,12 @@ final class SeoIntelCollectorManager
                         new SeoIssueQueueContract,
                     ),
                 ),
+            );
+        }
+
+        if ($collector === 'detector_foundation') {
+            return new DetectorFoundationCollector(
+                new ProductionDetectorFoundationEvidenceSource,
             );
         }
 

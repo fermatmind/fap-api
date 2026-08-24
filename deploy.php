@@ -844,6 +844,55 @@ BASH);
     });
 });
 
+task('seo:detector-foundation-receipt', function () {
+    within('{{release_path}}/backend', function (): void {
+        run(<<<'BASH'
+set -euo pipefail
+dry_run="$({{bin/php}} artisan seo-intel:collect --collector=detector_foundation --dry-run --canary --limit=10 --json --no-interaction --no-ansi)"
+printf '%s\n' "$dry_run"
+printf '%s' "$dry_run" | {{bin/php}} -r '
+$payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
+$ok = ($payload["collector"] ?? null) === "detector_foundation"
+    && ($payload["status"] ?? null) === "success"
+    && ($payload["dry_run"] ?? null) === true
+    && ($payload["writes_attempted"] ?? null) === false
+    && ($payload["external_calls_attempted"] ?? null) === false
+    && ($payload["metadata"]["read_only_gsc"] ?? null) === true
+    && ($payload["metadata"]["search_submission_allowed"] ?? null) === false
+    && ($payload["metadata"]["source"]["raw_rows_read"] ?? null) === false
+    && ($payload["metadata"]["source"]["aggregate_fields_only"] ?? null) === true
+    && ($payload["metadata"]["first_receipt"]["boundaries"]["raw_sensitive_fields_output"] ?? null) === false;
+exit($ok ? 0 : 1);
+'
+
+controlled="$({{bin/php}} artisan seo-intel:collect --collector=detector_foundation --materialize-detector-queues --canary --limit=10 --json --no-interaction --no-ansi)"
+printf '%s\n' "$controlled"
+printf '%s' "$controlled" | {{bin/php}} -r '
+$payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
+$rerun = $payload["metadata"]["idempotent_rerun_receipt"]["counts"] ?? [];
+$ok = ($payload["collector"] ?? null) === "detector_foundation"
+    && ($payload["status"] ?? null) === "success"
+    && ($payload["dry_run"] ?? null) === false
+    && ($payload["writes_attempted"] ?? null) === true
+    && ($payload["external_calls_attempted"] ?? null) === false
+    && ($payload["metadata"]["read_only_gsc"] ?? null) === true
+    && ($payload["metadata"]["search_submission_allowed"] ?? null) === false
+    && ($payload["metadata"]["readback"]["duplicate_rows"] ?? null) === 0
+    && ($rerun["created"] ?? null) === 0
+    && ($rerun["updated"] ?? null) === 0
+    && ($rerun["reopened"] ?? null) === 0
+    && ($rerun["closed"] ?? null) === 0
+    && ($payload["metadata"]["first_receipt"]["boundaries"]["raw_sensitive_fields_output"] ?? null) === false;
+exit($ok ? 0 : 1);
+'
+dry_fingerprint="$(printf '%s' "$dry_run" | {{bin/php}} -r '$payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR); echo (string) ($payload["metadata"]["source_fingerprint"] ?? "");')"
+controlled_fingerprint="$(printf '%s' "$controlled" | {{bin/php}} -r '$payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR); echo (string) ($payload["metadata"]["source_fingerprint"] ?? "");')"
+[[ "$dry_fingerprint" =~ ^[0-9a-f]{64}$ ]]
+test "$dry_fingerprint" = "$controlled_fingerprint"
+BASH);
+    });
+});
+
 task('artisan:migrate-schema-only', function () {
     $migration = deploySchemaOnlyMigration();
     $migrationPath = 'database/migrations/'.$migration;
@@ -2408,7 +2457,8 @@ after('artisan:config:cache', 'guard:sitemap-authority');
 after('artisan:migrate', 'guard:no-pending-migrations');
 after('guard:no-pending-migrations', 'artisan:migrate-seo-intel');
 after('artisan:migrate-seo-intel', 'guard:no-pending-seo-intel-migrations');
-after('guard:no-pending-seo-intel-migrations', 'artisan:scales:seed-default');
+after('guard:no-pending-seo-intel-migrations', 'seo:detector-foundation-receipt');
+after('seo:detector-foundation-receipt', 'artisan:scales:seed-default');
 after('artisan:scales:seed-default', 'big5:publish-private-result-authority');
 after('big5:publish-private-result-authority', 'riasec:publish-private-result-authority');
 after('riasec:publish-private-result-authority', 'enneagram:publish-private-result-authority');
