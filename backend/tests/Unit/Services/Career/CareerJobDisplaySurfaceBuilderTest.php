@@ -138,6 +138,36 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         );
     }
 
+    public function test_v43_en_unavailable_components_ignore_database_json_key_order(): void
+    {
+        ini_set('memory_limit', '1024M');
+        $occupation = $this->createOccupation('accountants-and-auditors');
+        $authority = app(CareerCurrentAuthorityPackage::class)->load(base_path());
+        $row = $authority['rows']['accountants-and-auditors'];
+        $pages = $row['page_payload_json']['page'];
+        foreach (['career_quick_answers_block', 'onet_structured_fields_block'] as $componentId) {
+            $pages['en'][$componentId] = array_reverse($pages['en'][$componentId], true);
+        }
+        $row['page_payload_json']['page'] = $pages;
+        $this->createDisplayAsset($occupation, app(CareerCurrentAuthorityPackage::class)->databaseAttributes($row));
+
+        $this->assertNull(app(CareerJobDisplaySurfaceBuilder::class)->diagnosticFailureCodeForSlug(
+            'accountants-and-auditors',
+            'en',
+        ));
+        $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'en');
+
+        $this->assertSame('v4.3', $surface['asset_version']);
+        foreach (['career_quick_answers_block', 'onet_structured_fields_block'] as $componentId) {
+            $component = $surface['page']['content'][$componentId];
+            $keys = array_keys($component);
+            sort($keys, SORT_STRING);
+            $this->assertSame(['availability', 'reason_code'], $keys);
+            $this->assertSame('unavailable', $component['availability']);
+            $this->assertSame('source_locale_unavailable', $component['reason_code']);
+        }
+    }
+
     public function test_it_exposes_presentation_v1_only_for_the_zh_surface(): void
     {
         ini_set('memory_limit', '1024M');
