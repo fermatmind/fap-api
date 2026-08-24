@@ -6,13 +6,17 @@ namespace App\Services\SeoIntel\Sources;
 
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
+use App\Models\CareerGuide;
 use App\Models\ContentPage;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityPublicContentAsset;
 use App\Models\ResearchReport;
 use App\Models\Scopes\TenantScope;
+use App\Models\TopicProfile;
+use App\Services\Cms\Mbti64CrossTypeComparisonPublicReadModel;
 use App\Services\Scale\ScaleRegistry;
+use App\Services\SEO\BigFiveCanonicalRouteCatalog;
 use App\Services\SeoIntel\UrlTruthHandoffArtifact;
 use App\Services\SeoIntel\UrlTruthInventoryRecord;
 use Illuminate\Support\Carbon;
@@ -65,7 +69,11 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
             ...$this->researchReportCandidates(),
             ...$this->contentPageCandidates(),
             ...$this->articleCandidates(),
+            ...$this->topicCandidates(),
+            ...$this->careerGuideCandidates(),
             ...$this->personalityProfileCandidates(),
+            ...$this->personalityCrossTypeComparisonCandidates(),
+            ...$this->bigFivePersonalityPublicContentAssetCandidates(),
             ...$this->enneagramPersonalityPublicContentAssetCandidates(),
             ...$this->configuredBackendAuthorityCandidates(),
         ]);
@@ -183,6 +191,118 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
         $this->articlesAvailable = $records !== [];
         if (! $this->articlesAvailable) {
             $this->articlesUnavailableReason = 'articles_empty_or_ineligible';
+        }
+
+        return $records;
+    }
+
+    /** @return list<UrlTruthInventoryRecord> */
+    private function topicCandidates(): array
+    {
+        try {
+            $topics = TopicProfile::query()
+                ->withoutGlobalScopes()
+                ->where('org_id', 0)
+                ->publishedPublic()
+                ->indexable()
+                ->whereIn('locale', TopicProfile::SUPPORTED_LOCALES)
+                ->whereNotNull('slug')
+                ->where('slug', '<>', '')
+                ->where(static function ($query): void {
+                    $query->whereNull('published_at')->orWhere('published_at', '<=', now());
+                })
+                ->orderBy('locale')
+                ->orderBy('slug')
+                ->get();
+        } catch (\Throwable) {
+            return [];
+        }
+
+        $records = [];
+        foreach ($topics as $topic) {
+            if (! $topic instanceof TopicProfile) {
+                continue;
+            }
+            $locale = (string) $topic->locale;
+            $slug = strtolower(trim((string) $topic->slug));
+            $segment = $locale === 'zh-CN' ? 'zh' : ($locale === 'en' ? 'en' : '');
+            if ($segment === '' || $slug === '') {
+                continue;
+            }
+            $path = '/'.$segment.'/topics/'.$slug;
+            $updatedAt = $topic->updated_at instanceof Carbon ? $topic->updated_at : null;
+            $records[] = new UrlTruthInventoryRecord(
+                canonicalUrl: $this->canonicalUrl($path),
+                locale: $locale,
+                pageEntityType: 'topic',
+                entityIdOrSlug: (string) $topic->id,
+                sourceAuthority: 'backend_cms',
+                indexabilityState: 'indexable',
+                lastmodAt: $updatedAt,
+                lastmodSource: 'topic_profiles.updated_at',
+                cluster: 'articles_topics',
+                entitySource: 'topics',
+                authorityStatus: 'published_approved',
+                sourceUpdatedAt: $updatedAt,
+                metadata: ['canonical_path_hash' => hash('sha256', $path), 'claim_safe' => true, 'publication_state' => 'published'],
+                attributes: ['source_authority' => 'backend_cms', 'claim_safe' => true],
+            );
+        }
+
+        return $records;
+    }
+
+    /** @return list<UrlTruthInventoryRecord> */
+    private function careerGuideCandidates(): array
+    {
+        try {
+            $guides = CareerGuide::query()
+                ->withoutGlobalScopes()
+                ->where('org_id', 0)
+                ->publishedPublic()
+                ->indexable()
+                ->whereIn('locale', CareerGuide::SUPPORTED_LOCALES)
+                ->whereNotNull('slug')
+                ->where('slug', '<>', '')
+                ->where(static function ($query): void {
+                    $query->whereNull('published_at')->orWhere('published_at', '<=', now());
+                })
+                ->orderBy('locale')
+                ->orderBy('slug')
+                ->get();
+        } catch (\Throwable) {
+            return [];
+        }
+
+        $records = [];
+        foreach ($guides as $guide) {
+            if (! $guide instanceof CareerGuide) {
+                continue;
+            }
+            $locale = (string) $guide->locale;
+            $slug = strtolower(trim((string) $guide->slug));
+            $segment = $locale === 'zh-CN' ? 'zh' : ($locale === 'en' ? 'en' : '');
+            if ($segment === '' || $slug === '') {
+                continue;
+            }
+            $path = '/'.$segment.'/career/guides/'.$slug;
+            $updatedAt = $guide->updated_at instanceof Carbon ? $guide->updated_at : null;
+            $records[] = new UrlTruthInventoryRecord(
+                canonicalUrl: $this->canonicalUrl($path),
+                locale: $locale,
+                pageEntityType: 'career_guide',
+                entityIdOrSlug: (string) $guide->id,
+                sourceAuthority: 'backend_cms',
+                indexabilityState: 'indexable',
+                lastmodAt: $updatedAt,
+                lastmodSource: 'career_guides.updated_at',
+                cluster: 'career',
+                entitySource: 'career_guides',
+                authorityStatus: 'published_approved',
+                sourceUpdatedAt: $updatedAt,
+                metadata: ['canonical_path_hash' => hash('sha256', $path), 'claim_safe' => true, 'publication_state' => 'published'],
+                attributes: ['source_authority' => 'backend_cms', 'claim_safe' => true],
+            );
         }
 
         return $records;
@@ -384,6 +504,120 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
         $this->contentPagesAvailable = $records !== [];
         if (! $this->contentPagesAvailable) {
             $this->contentPagesUnavailableReason = 'content_pages_empty_or_ineligible';
+        }
+
+        return $records;
+    }
+
+    /** @return list<UrlTruthInventoryRecord> */
+    private function personalityCrossTypeComparisonCandidates(): array
+    {
+        try {
+            $readModel = app(Mbti64CrossTypeComparisonPublicReadModel::class);
+        } catch (\Throwable) {
+            return [];
+        }
+
+        $records = [];
+        foreach (PersonalityProfile::SUPPORTED_LOCALES as $locale) {
+            try {
+                $items = $readModel->list($locale);
+            } catch (\Throwable) {
+                continue;
+            }
+            foreach ($items as $item) {
+                if (($item['is_public'] ?? false) !== true || ($item['is_indexable'] ?? false) !== true) {
+                    continue;
+                }
+                $canonicalUrl = trim((string) ($item['canonical_url'] ?? $item['public_url'] ?? ''));
+                $slug = strtolower(trim((string) ($item['slug'] ?? '')));
+                if ($canonicalUrl === '' || $slug === '') {
+                    continue;
+                }
+                $records[] = new UrlTruthInventoryRecord(
+                    canonicalUrl: $canonicalUrl,
+                    locale: $locale,
+                    pageEntityType: 'personality_profile_comparison',
+                    entityIdOrSlug: $slug,
+                    sourceAuthority: 'backend_cms',
+                    indexabilityState: 'indexable',
+                    lastmodAt: null,
+                    lastmodSource: 'mbti_cross_type_comparison_authorities.updated_at',
+                    cluster: 'personality',
+                    entitySource: 'personality_profiles',
+                    authorityStatus: 'published_approved',
+                    sourceUpdatedAt: null,
+                    metadata: ['canonical_path_hash' => hash('sha256', (string) parse_url($canonicalUrl, PHP_URL_PATH)), 'claim_safe' => true, 'publication_state' => 'published'],
+                    attributes: ['source_authority' => 'backend_cms', 'claim_safe' => true],
+                );
+            }
+        }
+
+        return $records;
+    }
+
+    /** @return list<UrlTruthInventoryRecord> */
+    private function bigFivePersonalityPublicContentAssetCandidates(): array
+    {
+        try {
+            $assets = PersonalityPublicContentAsset::query()
+                ->withoutGlobalScopes()
+                ->where('org_id', 0)
+                ->where('framework', PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE)
+                ->whereIn('entity_type', PersonalityPublicContentAsset::FRAMEWORK_ENTITY_TYPES[PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE])
+                ->whereIn('locale', PersonalityPublicContentAsset::SUPPORTED_LOCALES)
+                ->where('is_public', true)
+                ->where('launch_state', PersonalityPublicContentAsset::LAUNCH_PUBLISHED)
+                ->where('robots', PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW)
+                ->where('index_eligible', true)
+                ->where('sitemap_eligible', true)
+                ->orderBy('locale')
+                ->orderBy('entity_type')
+                ->orderBy('entity_key')
+                ->get();
+        } catch (\Throwable) {
+            return [];
+        }
+
+        $records = [];
+        foreach ($assets as $asset) {
+            if (! $asset instanceof PersonalityPublicContentAsset) {
+                continue;
+            }
+            $locale = (string) $asset->locale;
+            $entityType = (string) $asset->entity_type;
+            $entityKey = strtolower(trim((string) $asset->entity_key));
+            $path = '/'.ltrim((string) data_get($asset->canonical_json, 'path', ''), '/');
+            $expectedPath = BigFiveCanonicalRouteCatalog::expectedPath($locale, $entityType, $entityKey);
+            if ($expectedPath === null || $path !== $expectedPath) {
+                continue;
+            }
+            $updatedAt = $asset->updated_at instanceof Carbon ? $asset->updated_at : null;
+            $publishedAt = $asset->published_at instanceof Carbon ? $asset->published_at : null;
+            $sourceHash = strtolower(trim((string) $asset->source_hash));
+            $records[] = new UrlTruthInventoryRecord(
+                canonicalUrl: $this->canonicalUrl($path),
+                locale: $locale,
+                pageEntityType: 'personality_public_content_asset',
+                entityIdOrSlug: $locale.':'.$entityType.':'.$entityKey,
+                sourceAuthority: 'backend_cms',
+                indexabilityState: 'indexable',
+                lastmodAt: $updatedAt ?? $publishedAt,
+                lastmodSource: 'personality_public_content_assets.updated_at',
+                cluster: 'personality',
+                entitySource: 'personality_public_content_assets',
+                authorityStatus: 'published_approved',
+                sourceUpdatedAt: $updatedAt ?? $publishedAt,
+                metadata: [
+                    'canonical_path_hash' => hash('sha256', $path),
+                    'source_hash' => $sourceHash,
+                    'claim_safe' => true,
+                    'sitemap_eligible' => true,
+                    'llms_eligible' => true,
+                    'publication_state' => 'published',
+                ],
+                attributes: ['source_authority' => 'backend_cms', 'claim_safe' => true, 'source_hash' => $sourceHash],
+            );
         }
 
         return $records;
@@ -636,7 +870,19 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
                 indexabilityState: 'indexable',
                 lastmodSource: 'backend_authority_canary_contract',
                 cluster: (string) ($candidate['cluster'] ?? 'public_surface'),
-                entitySource: 'backend_authority',
+                entitySource: (string) ($candidate['entity_source'] ?? match ($pageEntityType) {
+                    'article' => 'articles',
+                    'topic' => 'topics',
+                    'career_guide' => 'career_guides',
+                    'career_job', 'career_directory' => 'career_directory_authority',
+                    'personality', 'personality_profile_comparison' => 'personality_profiles',
+                    'personality_profile_variant' => 'personality_profile_variants',
+                    'personality_public_content_asset' => 'personality_public_content_assets',
+                    'content_page', 'methodology', 'dataset' => 'content_pages',
+                    'research_report' => 'research_reports',
+                    'test_detail' => 'scales_registry',
+                    default => 'backend_authority',
+                }),
                 authorityStatus: 'canary_contract',
                 metadata: [
                     'source_contract' => 'backend_authority_canary_candidates',

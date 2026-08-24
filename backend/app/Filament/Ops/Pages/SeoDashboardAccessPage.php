@@ -152,6 +152,54 @@ class SeoDashboardAccessPage extends Page
         ];
     }
 
+    /** @return list<array{label:string,value:string,hint:string}> */
+    public function pageFamilyPolicyCards(): array
+    {
+        $policy = (array) data_get($this->dashboardSnapshot(), 'url_truth.page_family_policy', []);
+        $coverage = (array) ($policy['coverage'] ?? []);
+        $career = (array) ($policy['career_authority'] ?? []);
+        $handoff = (array) ($policy['url_truth_missing_handoff'] ?? []);
+
+        return [
+            ['label' => __('ops.custom_pages.seo_intelligence.page_family.policy_version'), 'value' => (string) ($policy['policy_version'] ?? '-'), 'hint' => __('ops.custom_pages.seo_intelligence.page_family.shared_registry_hint')],
+            ['label' => __('ops.custom_pages.seo_intelligence.page_family.policy_hash'), 'value' => (string) ($policy['policy_hash'] ?? '-'), 'hint' => __('ops.custom_pages.seo_intelligence.page_family.policy_hash_hint')],
+            ['label' => __('ops.custom_pages.seo_intelligence.page_family.public_authority'), 'value' => (string) ((int) ($coverage['current_public_authority_total'] ?? 0)), 'hint' => __('ops.custom_pages.seo_intelligence.page_family.public_authority_hint')],
+            ['label' => __('ops.custom_pages.seo_intelligence.page_family.classified'), 'value' => (string) ((int) ($coverage['exactly_one_public_family_count'] ?? 0)), 'hint' => __('ops.custom_pages.seo_intelligence.page_family.classified_hint')],
+            ['label' => __('ops.custom_pages.seo_intelligence.page_family.unclassified'), 'value' => (string) ((int) ($coverage['unclassified_count'] ?? 0)), 'hint' => __('ops.custom_pages.seo_intelligence.page_family.blocked_hint')],
+            ['label' => __('ops.custom_pages.seo_intelligence.page_family.ambiguous'), 'value' => (string) ((int) ($coverage['ambiguous_count'] ?? 0)), 'hint' => __('ops.custom_pages.seo_intelligence.page_family.blocked_hint')],
+            ['label' => __('ops.custom_pages.seo_intelligence.page_family.career_authority'), 'value' => (string) ((int) ($career['localized_public_authority_count'] ?? 0)), 'hint' => (string) ($career['authority_revision'] ?? '-')],
+            ['label' => __('ops.custom_pages.seo_intelligence.page_family.url_truth_handoff'), 'value' => (string) ($handoff['current_count'] ?? '-'), 'hint' => __('ops.custom_pages.seo_intelligence.page_family.url_truth_handoff_hint')],
+        ];
+    }
+
+    /** @return list<array{title:string,rows:list<array{label:string,count:int}>}> */
+    public function pageFamilyDistributionCards(): array
+    {
+        $policy = (array) data_get($this->dashboardSnapshot(), 'url_truth.page_family_policy', []);
+        $familyLocale = (array) ($policy['family_locale_distribution'] ?? []);
+        $familyRows = [];
+        foreach ($familyLocale as $family => $locales) {
+            foreach ((array) $locales as $locale => $count) {
+                $familyRows[] = ['label' => $family.' · '.$locale, 'count' => (int) $count];
+            }
+        }
+        $sourceRows = [];
+        foreach ((array) ($policy['authority_source_distribution'] ?? []) as $source => $count) {
+            $sourceRows[] = ['label' => (string) $source, 'count' => (int) $count];
+        }
+
+        return [
+            ['title' => __('ops.custom_pages.seo_intelligence.page_family.family_locale'), 'rows' => $familyRows],
+            ['title' => __('ops.custom_pages.seo_intelligence.page_family.authority_source'), 'rows' => $sourceRows],
+        ];
+    }
+
+    /** @return list<array<string,mixed>> */
+    public function unclassifiedPageFamilyQueue(): array
+    {
+        return (array) data_get($this->dashboardSnapshot(), 'url_truth.page_family_policy.unclassified_read_only_queue', []);
+    }
+
     /**
      * @return list<array{title:string,rows:list<array{label:string,count:int}>}>
      */
@@ -442,7 +490,7 @@ class SeoDashboardAccessPage extends Page
                     ['key' => 'claim_unsafe_count', 'label' => 'Claim unsafe', 'value' => 0, 'alert' => false],
                 ],
             ],
-            'url_truth' => ['distributions' => []],
+            'url_truth' => ['distributions' => [], 'page_family_policy' => []],
             'issues' => ['aggregates' => [], 'recent_rows' => []],
             'queue' => ['aggregates' => ['event_type' => []], 'recent_rows' => []],
             'crawler' => ['aggregates' => [], 'safety_counts' => [], 'recent_rows' => []],

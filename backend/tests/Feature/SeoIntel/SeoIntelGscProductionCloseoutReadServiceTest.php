@@ -68,6 +68,8 @@ final class SeoIntelGscProductionCloseoutReadServiceTest extends TestCase
         $this->assertSame(1, data_get($result, 'unmapped_classification.root_cause_distribution.current_url_truth_missing'));
         $this->assertSame(1, data_get($result, 'unmapped_classification.root_cause_distribution.unknown'));
         $this->assertSame(1, data_get($result, 'unmapped_classification.current_url_truth_missing_handoff_count'));
+        $this->assertSame(1, data_get($result, 'unmapped_classification.current_url_truth_missing_distribution.page_family.articles_topics'));
+        $this->assertSame(1, data_get($result, 'unmapped_classification.current_url_truth_missing_distribution.locale.en'));
         $this->assertSame(1, data_get($result, 'unmapped_classification.opaque_hash_fallback_count'));
     }
 

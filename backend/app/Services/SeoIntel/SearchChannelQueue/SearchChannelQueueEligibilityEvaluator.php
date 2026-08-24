@@ -4,10 +4,15 @@ declare(strict_types=1);
 
 namespace App\Services\SeoIntel\SearchChannelQueue;
 
+use App\Services\SeoIntel\PageFamily\PageFamilyPolicyGuard;
 use App\Support\CanonicalFrontendUrl;
 
 final class SearchChannelQueueEligibilityEvaluator
 {
+    public function __construct(
+        private readonly ?PageFamilyPolicyGuard $pageFamilyPolicyGuard = null,
+    ) {}
+
     /** @var array<string, true> */
     private const PRIVATE_ROOTS = [
         'account' => true,
@@ -51,6 +56,20 @@ final class SearchChannelQueueEligibilityEvaluator
         $sourceAuthority = (string) ($url['source_authority'] ?? '');
         $indexabilityState = (string) ($url['indexability_state'] ?? '');
         $canonicalUrl = (string) ($url['canonical_url'] ?? '');
+        $pageFamilyDecision = ($this->pageFamilyPolicyGuard ?? new PageFamilyPolicyGuard)->evaluate([
+            'canonical_url' => $canonicalUrl,
+            'locale' => (string) ($url['locale'] ?? ''),
+            'page_entity_type' => $pageType,
+            'entity_source' => (string) ($url['entity_source'] ?? $metadata['entity_source'] ?? ''),
+            'source_authority' => $sourceAuthority,
+            'authority_status' => (string) ($url['authority_status'] ?? $metadata['authority_status'] ?? 'published_approved'),
+            'indexability_state' => $indexabilityState,
+            'is_private_flow' => (bool) ($url['is_private_flow'] ?? $metadata['private_flow'] ?? false),
+        ], 'L1');
+
+        if (($pageFamilyDecision['allowed'] ?? false) !== true) {
+            $reasonCodes[] = 'page_family_policy_blocked';
+        }
 
         if (! $this->isValidCanonical($canonicalUrl)) {
             $reasonCodes[] = 'canonical_url_invalid';

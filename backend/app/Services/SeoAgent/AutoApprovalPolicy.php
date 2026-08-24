@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\SeoAgent;
 
+use App\Services\SeoIntel\PageFamily\PageFamilyPolicyGuard;
+
 final class AutoApprovalPolicy
 {
     public const SCHEMA_VERSION = 'seo-agent-auto-approval-policy.v1';
@@ -66,6 +68,10 @@ final class AutoApprovalPolicy
         '/决定你的职业/u',
     ];
 
+    public function __construct(
+        private readonly ?PageFamilyPolicyGuard $pageFamilyPolicyGuard = null,
+    ) {}
+
     /**
      * @param  list<array<string, mixed>>  $candidates
      * @return array<string, mixed>
@@ -107,6 +113,25 @@ final class AutoApprovalPolicy
         $severity = (string) ($candidate['severity'] ?? '');
         $targetFields = $this->targetFields($candidate);
         $reasonCodes = [];
+        $pageFamilyDecision = ($this->pageFamilyPolicyGuard ?? new PageFamilyPolicyGuard)->evaluate([
+            'canonical_path' => (string) ($candidate['safe_path'] ?? ''),
+            'locale' => (string) ($candidate['locale'] ?? $this->localeFromReference((string) ($candidate['subject_ref'] ?? ''))),
+            'page_entity_type' => $targetModel,
+            'entity_source' => match ($targetModel) {
+                'article' => 'articles',
+                'content_page' => 'content_pages',
+                default => '',
+            },
+            'source_authority' => 'backend_cms',
+            'authority_status' => 'published_approved',
+            'indexability_state' => 'indexable',
+        ], (string) ($candidate['agent_risk_level'] ?? 'L1'));
+
+        if (($pageFamilyDecision['allowed'] ?? false) !== true) {
+            foreach ((array) ($pageFamilyDecision['blocking_reasons'] ?? []) as $reason) {
+                $reasonCodes[] = 'page_family_policy:'.$reason;
+            }
+        }
 
         if (! in_array($sourceFamily, self::ALLOWED_SOURCE_FAMILIES, true)) {
             $reasonCodes[] = match ($sourceFamily) {
@@ -189,6 +214,7 @@ final class AutoApprovalPolicy
             'normalized_target_fields' => $targetFields,
             'approval_decision' => $reasonCodes === [] ? 'auto_approved' : 'blocked',
             'risk_tier' => $reasonCodes === [] ? 'low' : 'blocked',
+            'page_family_policy' => $pageFamilyDecision,
             'allowed_next_actions' => $allowedActions,
             'blocked_actions' => array_values(array_unique($blockedActions)),
             'reason_codes' => array_values(array_unique($reasonCodes)),
@@ -200,6 +226,14 @@ final class AutoApprovalPolicy
                 'queue_worker_allowed' => false,
             ],
         ];
+    }
+
+    private function localeFromReference(string $reference): string
+    {
+        $parts = explode(':', $reference);
+        $locale = (string) end($parts);
+
+        return in_array($locale, ['zh-CN', 'en'], true) ? $locale : '';
     }
 
     /**

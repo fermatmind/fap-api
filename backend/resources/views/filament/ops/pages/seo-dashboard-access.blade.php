@@ -4,6 +4,7 @@
     $recentQueueRows = $this->recentQueueRows();
     $recentCrawlerRows = $this->recentCrawlerRows();
     $eventTypeSummary = $this->eventTypeSummary();
+    $unclassifiedPageFamilyQueue = $this->unclassifiedPageFamilyQueue();
 @endphp
 
 <x-filament-panels::page>
@@ -38,6 +39,35 @@
             :description="__($copy.'.overview_desc')"
         >
             <x-filament-ops::ops-field-grid :fields="$this->overviewCards()" />
+        </x-filament-ops::ops-section>
+
+        <x-filament-ops::ops-section
+            :title="__($copy.'.page_family.title')"
+            :description="__($copy.'.page_family.description')"
+        >
+            <x-filament-ops::ops-field-grid :fields="$this->pageFamilyPolicyCards()" />
+            <div class="ops-card-list mt-4">
+                @foreach ($this->pageFamilyDistributionCards() as $card)
+                    <x-filament-ops::ops-result-card :title="$card['title']" :meta="__($copy.'.bucket_count', ['count' => count($card['rows'])])">
+                        <ul class="ops-list">
+                            @foreach ($card['rows'] as $row)
+                                <li>{{ $row['label'] }}: {{ $row['count'] }}</li>
+                            @endforeach
+                        </ul>
+                    </x-filament-ops::ops-result-card>
+                @endforeach
+            </div>
+            <x-filament-ops::ops-result-card class="mt-4" :title="__($copy.'.page_family.unclassified_queue')" :meta="__($copy.'.bucket_count', ['count' => count($unclassifiedPageFamilyQueue)])">
+                @if ($unclassifiedPageFamilyQueue === [])
+                    <p class="ops-control-hint">{{ __($copy.'.page_family.no_unclassified') }}</p>
+                @else
+                    <ul class="ops-list">
+                        @foreach ($unclassifiedPageFamilyQueue as $group)
+                            <li>{{ $group['classification_status'] }} · {{ $group['page_entity_type'] }} · {{ $group['locale'] }} · {{ $group['agent_risk_cap'] }}: {{ $group['count'] }}</li>
+                        @endforeach
+                    </ul>
+                @endif
+            </x-filament-ops::ops-result-card>
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section

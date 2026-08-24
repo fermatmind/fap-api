@@ -120,8 +120,10 @@ final class SeoDashApi01ReadOnlyApiContractTest extends TestCase
                 '/api/v0.5/ops/seo-intel/opportunity-queue',
                 '/api/v0.5/ops/seo-intel/production-closeout',
             ] as $path) {
-                $this->actingAs($admin, (string) config('admin.guard', 'admin'))
-                    ->getJson($path)
+                $response = $this->actingAs($admin, (string) config('admin.guard', 'admin'))
+                    ->getJson($path);
+                $this->assertSame(200, $response->status(), $path.': '.$response->getContent());
+                $response
                     ->assertOk()
                     ->assertJsonPath('ok', true)
                     ->assertJsonPath('meta.contract_version', 'seo-dash-api-01.v1')
@@ -164,6 +166,49 @@ final class SeoDashApi01ReadOnlyApiContractTest extends TestCase
         ] as $forbidden) {
             $this->assertStringNotContainsString($forbidden, $json);
         }
+    }
+
+    #[Test]
+    public function url_truth_endpoint_adds_sanitized_page_family_coverage_without_breaking_existing_fields(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_SEO_INTEL_READ]);
+
+        $response = $this->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->getJson('/api/v0.5/ops/seo-intel/url-truth')
+            ->assertOk()
+            ->assertJsonPath('meta.contract_version', 'seo-dash-api-01.v1')
+            ->assertJsonPath('meta.read_only', true)
+            ->assertJsonStructure([
+                'data' => [
+                    'total_count',
+                    'distributions',
+                    'safety_counts',
+                    'page_family_policy' => [
+                        'policy_version',
+                        'policy_hash',
+                        'coverage',
+                        'family_locale_distribution',
+                        'authority_source_distribution',
+                        'private_negative_set',
+                        'career_authority',
+                        'url_truth_missing_handoff',
+                        'unclassified_read_only_queue',
+                        'agent_risk_caps',
+                        'boundaries',
+                    ],
+                ],
+            ])
+            ->assertJsonPath('data.page_family_policy.boundaries.read_only', true)
+            ->assertJsonPath('data.page_family_policy.boundaries.raw_query_emitted', false)
+            ->assertJsonPath('data.page_family_policy.boundaries.raw_url_emitted', false)
+            ->assertJsonPath('data.page_family_policy.boundaries.url_hash_emitted', false)
+            ->assertJsonPath('data.page_family_policy.boundaries.url_truth_write_allowed', false)
+            ->assertJsonPath('data.page_family_policy.boundaries.cms_publish_allowed', false)
+            ->assertJsonPath('data.page_family_policy.boundaries.search_submission_allowed', false);
+
+        $json = $response->getContent();
+        $this->assertStringNotContainsString('canonical_url_hash', $json);
+        $this->assertStringNotContainsString('entity_id_or_slug', $json);
     }
 
     #[Test]

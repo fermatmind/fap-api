@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\SeoIntel\OpsDashboard;
 
+use App\Services\SeoIntel\PageFamily\PageFamilyCoverageReadService;
+
 final class SeoUrlTruthReadService extends AbstractSeoDashboardReadService
 {
     /**
@@ -39,6 +41,7 @@ final class SeoUrlTruthReadService extends AbstractSeoDashboardReadService
                     ->count(),
                 'claim_unsafe_count' => $this->claimUnsafeCount(),
             ],
+            'page_family_policy' => app(PageFamilyCoverageReadService::class)->read(),
         ];
     }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\SeoIntel;
 
 use App\Services\SeoIntel\OpsDashboard\SeoIssueClusterReadService;
+use App\Services\SeoIntel\PageFamily\PageFamilyClassifier;
 use App\Services\SeoIntel\Sources\BackendAuthorityUrlTruthSource;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\ConnectionInterface;
@@ -263,6 +264,13 @@ final class GscRunCloseoutSummarizer
             $families[$item['page_family']]++;
             $locales[$item['locale']]++;
         }
+        $missingFamily = array_fill_keys(['tests', 'articles_topics', 'career', 'personality', 'trust_method_help', 'other_public', 'unclassified'], 0);
+        $missingLocale = array_fill_keys(['zh-CN', 'en', 'unknown'], 0);
+        foreach (array_filter($unique, static fn (array $item): bool => $item['root_cause'] === 'current_url_truth_missing') as $item) {
+            $familyId = $this->pageFamilyIdForMissing($item, $backendAuthority);
+            $missingFamily[$familyId]++;
+            $missingLocale[$item['locale']]++;
+        }
 
         return [
             'unmapped_detail_row_count' => $unmappedRows->count(),
@@ -272,6 +280,10 @@ final class GscRunCloseoutSummarizer
             'locale_distribution' => $locales,
             'root_cause_distribution' => $rootCause,
             'current_url_truth_missing_handoff_count' => $rootCause['current_url_truth_missing'],
+            'current_url_truth_missing_distribution' => [
+                'page_family' => $missingFamily,
+                'locale' => $missingLocale,
+            ],
             'backend_authority_candidate_count' => $backendAuthority->count(),
             'classification_unit' => 'unique_normalized_canonical_url',
             'classification_authority' => 'backend_cms_and_persisted_url_truth_only',
@@ -280,6 +292,30 @@ final class GscRunCloseoutSummarizer
             'unknown_next_evidence' => 'backend_cms_publication_history_or_approved_alias_registry',
             'raw_url_retained_or_emitted' => false,
         ];
+    }
+
+    /** @param array<string,mixed> $item @param Collection<string,mixed> $backendAuthority */
+    private function pageFamilyIdForMissing(array $item, Collection $backendAuthority): string
+    {
+        $record = $backendAuthority->get((string) ($item['normalized_canonical_url_hash'] ?? ''));
+        if (! $record instanceof UrlTruthInventoryRecord) {
+            return 'unclassified';
+        }
+
+        $classification = (new PageFamilyClassifier)->classify([
+            'canonical_url' => $record->canonicalUrl,
+            'locale' => $record->locale,
+            'page_entity_type' => $record->pageEntityType,
+            'entity_source' => $record->entitySource,
+            'source_authority' => $record->sourceAuthority,
+            'authority_status' => $record->authorityStatus,
+            'indexability_state' => $record->indexabilityState,
+            'is_private_flow' => $record->isPrivateFlow,
+        ]);
+
+        return ($classification['classification_status'] ?? '') === 'classified'
+            ? (string) $classification['family_id']
+            : 'unclassified';
     }
 
     /**

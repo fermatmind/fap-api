@@ -96,10 +96,10 @@ final class CareerDirectoryAuthorityService
     /**
      * @return list<array<string, mixed>>
      */
-    public function indexableItems(string $locale): array
+    public function indexableItems(string $locale, bool $recordCacheState = true): array
     {
         $publicLocale = $this->normalizePublicLocale($locale);
-        $readModel = $this->responseCache->directoryReadModelPayload($publicLocale);
+        $readModel = $this->responseCache->directoryReadModelPayload($publicLocale, $recordCacheState);
         $items = $this->readyIndexableItems(
             is_array($readModel['items'] ?? null) ? $readModel['items'] : [],
         );

@@ -60,6 +60,9 @@ final class SeoIntelOpsSeoNativeDashboardUiTest extends TestCase
             ->assertSee('Native read-only SEO Engine observability dashboard')
             ->assertSee('Overview heartbeat')
             ->assertSee('URL Truth rows')
+            ->assertSee('Page Family Policy coverage')
+            ->assertSee('seo-page-family-policy.v1')
+            ->assertSee('Unclassified read-only queue')
             ->assertSee('Entity mappings')
             ->assertSee('Issue queue rows')
             ->assertSee('Search Channel Queue Items')
@@ -175,6 +178,9 @@ final class SeoIntelOpsSeoNativeDashboardUiTest extends TestCase
         ], $page->safetyCards());
 
         $this->assertCount(4, $page->urlTruthDistributionCards());
+        $this->assertCount(8, $page->pageFamilyPolicyCards());
+        $this->assertCount(2, $page->pageFamilyDistributionCards());
+        $this->assertIsArray($page->unclassifiedPageFamilyQueue());
         $this->assertCount(3, $page->issueQueueAggregateCards());
         $this->assertCount(3, $page->searchChannelQueueAggregateCards());
         $this->assertCount(5, $page->recentIssueRows());

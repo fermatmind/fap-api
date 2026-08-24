@@ -181,6 +181,8 @@ final class SeoIntelGscReadModelSyncTest extends TestCase
         $this->assertSame(1, data_get($result, 'unmapped_classification.locale_distribution.zh-CN'));
         $this->assertSame(1, data_get($result, 'unmapped_classification.root_cause_distribution.current_url_truth_missing'));
         $this->assertSame(1, data_get($result, 'unmapped_classification.current_url_truth_missing_handoff_count'));
+        $this->assertSame(1, data_get($result, 'unmapped_classification.current_url_truth_missing_distribution.page_family.articles_topics'));
+        $this->assertSame(1, data_get($result, 'unmapped_classification.current_url_truth_missing_distribution.locale.zh-CN'));
         $this->assertGreaterThanOrEqual(1, data_get($result, 'unmapped_classification.backend_authority_candidate_count'));
         $this->assertSame('backend_cms_and_persisted_url_truth_only', data_get($result, 'unmapped_classification.classification_authority'));
         $this->assertFalse(data_get($result, 'unmapped_classification.raw_url_retained_or_emitted'));
