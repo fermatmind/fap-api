@@ -88,6 +88,7 @@ final class SeoIntelGscReadModelSyncTest extends TestCase
 
         $row = DB::connection('seo_intel_gsc_sync_test')->table('seo_gsc_daily')->first();
         $this->assertSame('mapped', $row->mapping_state);
+        $this->assertSame($url, $row->canonical_url);
         $this->assertSame('MOBILE', $row->device);
         $this->assertSame('CHN', $row->country);
         $this->assertSame('web', $row->search_type);

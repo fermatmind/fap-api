@@ -120,6 +120,41 @@ final class SeoOperationsWorkspaceV2Test extends TestCase
         $this->assertFalse((bool) $reader->searchPerformance(['device' => 'desktop'])['connected']);
     }
 
+    public function test_gsc_aggregates_cover_the_complete_window_beyond_detail_row_limit(): void
+    {
+        $now = now();
+        $rows = [];
+        for ($index = 0; $index < 2001; $index++) {
+            $rows[] = [
+                'report_date' => $now->toDateString(),
+                'canonical_url' => 'https://fermatmind.com/zh/articles/seo-'.$index,
+                'query_display_masked' => 'query '.$index,
+                'locale' => 'zh-CN',
+                'device' => 'mobile',
+                'country' => 'CHN',
+                'search_type' => 'web',
+                'clicks' => 1,
+                'impressions' => 2,
+                'ctr_ppm' => 500000,
+                'average_position_milli' => 10000,
+                'collected_at' => $now,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ];
+        }
+        foreach (array_chunk($rows, 250) as $chunk) {
+            DB::connection('seo_intel_workspace_test')->table('seo_gsc_daily')->insert($chunk);
+        }
+
+        $result = (new SeoDashboardApiReadService('seo_intel_workspace_test'))->searchPerformance(['days' => 90]);
+
+        $this->assertSame(2001, data_get($result, 'totals.clicks'));
+        $this->assertSame(4002, data_get($result, 'totals.impressions'));
+        $this->assertSame(10.0, data_get($result, 'totals.average_position'));
+        $this->assertSame(2001, data_get($result, 'daily.0.clicks'));
+        $this->assertCount(25, $result['query_page_rows']);
+    }
+
     public function test_issue_workflow_requires_fix_before_verify_and_records_owner_sla_and_verification(): void
     {
         $this->assertSame(['open', 'in_progress'], SeoIssueWorkflowService::allowedStatusesFor(SeoIssueWorkflowService::ACTION_ASSIGN));

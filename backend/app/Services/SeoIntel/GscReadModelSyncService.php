@@ -212,7 +212,7 @@ final class GscReadModelSyncService
         $truth = $connection->table('seo_urls')
             ->whereIn('canonical_url_hash', $hashes)
             ->orderBy('id')
-            ->get(['id', 'canonical_url_hash', 'locale'])
+            ->get(['id', 'canonical_url_hash', 'canonical_url', 'locale'])
             ->keyBy('canonical_url_hash');
         $now = CarbonImmutable::now('UTC')->toDateTimeString();
         $payloads = [];
@@ -225,6 +225,7 @@ final class GscReadModelSyncService
             $payloads[] = [
                 ...$row,
                 'url_truth_id' => $mapped ? (int) $truthRow->id : null,
+                'canonical_url' => $mapped ? (string) $truthRow->canonical_url : null,
                 'mapping_state' => $mapped ? 'mapped' : 'unmapped',
                 'sync_run_uid' => $runUid,
                 'locale' => $row['locale'] ?? ($mapped ? (string) ($truthRow->locale ?? '') : null),
@@ -255,7 +256,7 @@ final class GscReadModelSyncService
                     $chunk,
                     ['idempotency_key'],
                     [
-                        'url_truth_id', 'mapping_state', 'sync_run_uid', 'locale', 'clicks', 'impressions',
+                        'url_truth_id', 'canonical_url', 'mapping_state', 'sync_run_uid', 'locale', 'clicks', 'impressions',
                         'ctr_ppm', 'average_position_milli', 'data_state', 'collected_at', 'metadata_json', 'updated_at',
                     ],
                 );

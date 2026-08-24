@@ -82,9 +82,131 @@ jobs:
           languages: javascript-typescript
       - uses: github/codeql-action/analyze@1ad29ea4a422cce9a242a9fae469541dcd08addc # v4
 
+  gsc-read-model-sync:
+    name: Production GSC readonly sync through restricted egress
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: production
+    env:
+      DEPLOY_USER: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+      DEPLOY_PORT: ${{ secrets.PRODUCTION_DEPLOY_PORT }}
+      DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+      RETIRED_DEPLOY_HOST: ${{ secrets.PRODUCTION_RETIRED_DEPLOY_HOST }}
+      DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+      PROXY_PORT: "18443"
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          persist-credentials: false
+      - name: Start SSH agent without key metadata output
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          eval "$(ssh-agent -s)" >/dev/null
+          echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
+          echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
+          printf '%s\n' "$SSH_PRIVATE_KEY" | ssh-add - >/dev/null 2>&1
+      - name: Install pinned known_hosts
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test "$DEPLOY_HOST" != "$RETIRED_DEPLOY_HOST"
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+      - name: Sync the active production GSC read model
+        shell: bash
+        run: |
+          set -euo pipefail
+          proxy_pid=""
+          tunnel_pid=""
+          cleanup() {
+            if [ -n "$tunnel_pid" ]; then kill "$tunnel_pid" 2>/dev/null || true; fi
+            if [ -n "$proxy_pid" ]; then kill "$proxy_pid" 2>/dev/null || true; fi
+          }
+          trap cleanup EXIT HUP INT TERM
+
+          node backend/scripts/seo/gsc_restricted_connect_proxy.mjs --port="$PROXY_PORT" \
+            >"$RUNNER_TEMP/gsc-proxy.log" 2>&1 &
+          proxy_pid=$!
+          for _ in {1..20}; do
+            nc -z 127.0.0.1 "$PROXY_PORT" && break
+            sleep 1
+          done
+          nc -z 127.0.0.1 "$PROXY_PORT"
+
+          ssh_base=(ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+            -o ServerAliveInterval=15 -o ServerAliveCountMax=8 -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST")
+          ssh -N -o BatchMode=yes -o StrictHostKeyChecking=yes -o ExitOnForwardFailure=yes \
+            -o ServerAliveInterval=15 -o ServerAliveCountMax=8 -p "$DEPLOY_PORT" \
+            -R "127.0.0.1:$PROXY_PORT:127.0.0.1:$PROXY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            >"$RUNNER_TEMP/gsc-tunnel.log" 2>&1 &
+          tunnel_pid=$!
+          sleep 2
+          kill -0 "$tunnel_pid"
+
+          "${ssh_base[@]}" "HTTPS_PROXY=http://127.0.0.1:$PROXY_PORT curl -sS -o /dev/null --fail-with-body --connect-timeout 5 --max-time 15 https://oauth2.googleapis.com/token || test \$? -eq 22"
+          if "${ssh_base[@]}" "HTTPS_PROXY=http://127.0.0.1:$PROXY_PORT curl -fsS -o /dev/null --connect-timeout 5 --max-time 15 https://example.com/"; then
+            echo "restricted proxy allowed a forbidden target" >&2
+            exit 1
+          fi
+
+          printf -v q_path '%q' "$DEPLOY_PATH"
+          printf -v q_proxy '%q' "http://127.0.0.1:$PROXY_PORT"
+          cache_path="/tmp/fermatmind-gsc-nightly-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.php"
+          printf -v q_cache '%q' "$cache_path"
+          remote_prefix="set -euo pipefail; current=\$(readlink -f $q_path/current); releases=\$(readlink -f $q_path/releases); test -n \"\$current\"; test -n \"\$releases\"; case \"\$current\" in \"\$releases\"/*) ;; *) exit 1 ;; esac; cd \"\$current/backend\";"
+          remote_command="$remote_prefix sudo -n -u www-data -- env HTTPS_PROXY=$q_proxy HTTP_PROXY=$q_proxy NO_PROXY=127.0.0.1,localhost APP_CONFIG_CACHE=$q_cache SEO_INTEL_ENABLED=true SEO_INTEL_WRITE_ENABLED=true php artisan seo-intel:gsc-sync --window=90 --search-types=web --json"
+          sync_json="$RUNNER_TEMP/gsc-sync.json"
+          "${ssh_base[@]}" "$remote_command" > "$sync_json"
+          jq -e '
+            .status == "success"
+            and .window_days == 90
+            and .search_types == ["web"]
+            and .pages_fetched > 0
+            and .rows_seen > 0
+            and .rows_upserted > 0
+            and .quality_gate.status == "pass"
+            and .read_only_gsc == true
+            and .search_submission_allowed == false
+          ' "$sync_json" >/dev/null
+
+          active_sha="$("${ssh_base[@]}" "$remote_prefix tr -d '\\r\\n' < ../REVISION")"
+          [[ "$active_sha" =~ ^[0-9a-f]{40}$ ]]
+          mkdir -p artifacts/gsc-read-model-sync
+          jq -n --arg workflow_sha "$GITHUB_SHA" --arg active_sha "$active_sha" --slurpfile sync "$sync_json" '
+            {
+              schema_version: "gsc-read-model-nightly-sync.v1",
+              workflow_sha: $workflow_sha,
+              active_production_sha: $active_sha,
+              status: $sync[0].status,
+              window_days: $sync[0].window_days,
+              start_date: $sync[0].start_date,
+              end_date: $sync[0].end_date,
+              search_types: $sync[0].search_types,
+              pages_fetched: $sync[0].pages_fetched,
+              rows_seen: $sync[0].rows_seen,
+              rows_upserted: $sync[0].rows_upserted,
+              unmapped_rows: $sync[0].unmapped_rows,
+              quality_gate: $sync[0].quality_gate.status,
+              read_only_gsc: true,
+              search_submission_allowed: false,
+              proxy_allowlist: ["oauth2.googleapis.com:443", "searchconsole.googleapis.com:443"]
+            }
+          ' > artifacts/gsc-read-model-sync/receipt.json
+      - name: Upload sanitized GSC sync receipt
+        uses: actions/upload-artifact@v7
+        with:
+          name: gsc-read-model-sync-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/gsc-read-model-sync/receipt.json
+          if-no-files-found: error
+          retention-days: 90
+
   alert:
     name: Actionable nightly diagnostic
-    needs: [full-regression, codeql]
+    needs: [full-regression, codeql, gsc-read-model-sync]
     if: failure()
     runs-on: ubuntu-latest
     steps:

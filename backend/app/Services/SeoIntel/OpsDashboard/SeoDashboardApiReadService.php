@@ -147,7 +147,34 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
             $query->where('search_type', $searchType);
         }
 
-        $rows = $query
+        $totals = (clone $query)
+            ->selectRaw('COALESCE(SUM(clicks), 0) AS clicks')
+            ->selectRaw('COALESCE(SUM(impressions), 0) AS impressions')
+            ->selectRaw('COALESCE(SUM(CASE WHEN average_position_milli IS NOT NULL AND impressions > 0 THEN average_position_milli * impressions ELSE 0 END), 0) AS position_weight')
+            ->selectRaw('COALESCE(SUM(CASE WHEN average_position_milli IS NOT NULL AND impressions > 0 THEN impressions ELSE 0 END), 0) AS position_impressions')
+            ->first();
+        $clicks = (int) ($totals->clicks ?? 0);
+        $impressions = (int) ($totals->impressions ?? 0);
+        $positionWeight = (int) ($totals->position_weight ?? 0);
+        $positionImpressions = (int) ($totals->position_impressions ?? 0);
+
+        $daily = (clone $query)
+            ->select('report_date')
+            ->selectRaw('SUM(clicks) AS clicks')
+            ->selectRaw('SUM(impressions) AS impressions')
+            ->groupBy('report_date')
+            ->orderBy('report_date')
+            ->get()
+            ->map(static fn (object $row): array => [
+                'report_date' => (string) $row->report_date,
+                'clicks' => (int) $row->clicks,
+                'impressions' => (int) $row->impressions,
+            ])
+            ->all();
+
+        $latestReportDate = (clone $query)->max('report_date');
+        $updatedAt = (clone $query)->max('collected_at');
+        $rows = (clone $query)
             ->select([
                 'report_date',
                 'canonical_url',
@@ -161,44 +188,25 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
                 'average_position_milli',
                 'collected_at',
             ])
+            ->whereNotNull('query_display_masked')
+            ->where('query_display_masked', '!=', '')
+            ->orderByDesc('impressions')
             ->orderByDesc('report_date')
-            ->limit(2000)
+            ->limit(25)
             ->get();
 
-        $clicks = (int) $rows->sum('clicks');
-        $impressions = (int) $rows->sum('impressions');
-        $positionWeight = 0;
-        $positionImpressions = 0;
-        foreach ($rows as $row) {
-            if ($row->average_position_milli === null || (int) $row->impressions <= 0) {
-                continue;
-            }
-            $positionWeight += (int) $row->average_position_milli * (int) $row->impressions;
-            $positionImpressions += (int) $row->impressions;
-        }
-
-        $daily = $rows->groupBy(fn (object $row): string => (string) $row->report_date)
-            ->map(fn ($dateRows, string $date): array => [
-                'report_date' => $date,
-                'clicks' => (int) $dateRows->sum('clicks'),
-                'impressions' => (int) $dateRows->sum('impressions'),
-            ])
-            ->sortBy('report_date')
-            ->values()
-            ->all();
-
         $syncState = $this->gscSyncState();
-        $latestReportDate = $rows->max('report_date');
         $stale = is_string($latestReportDate)
             && $latestReportDate < now()->subDays(max(3, (int) config('seo_intel.gsc_data_quality.max_report_age_days', 10)))->toDateString();
-        $state = $rows->isNotEmpty()
+        $dataAvailable = is_string($latestReportDate) && $latestReportDate !== '';
+        $state = $dataAvailable
             ? ($stale ? 'stale' : 'connected')
             : (string) ($syncState['state'] ?? 'disconnected');
 
         return [
             'connected' => $state === 'connected',
             'source_connected' => $syncState['last_success_at'] !== null,
-            'data_available' => $rows->isNotEmpty(),
+            'data_available' => $dataAvailable,
             'state' => $state,
             'failure_code' => $syncState['failure_code'] ?? null,
             'last_success_at' => $syncState['last_success_at'] ?? null,
@@ -216,7 +224,7 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
             ] : [],
             'source' => 'seo_intel.seo_gsc_daily',
             'window_days' => $days,
-            'updated_at' => $this->normalizeTimestamp($rows->max('collected_at')),
+            'updated_at' => $this->normalizeTimestamp($updatedAt),
             'totals' => [
                 'clicks' => $clicks,
                 'impressions' => $impressions,
@@ -227,9 +235,6 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
             ],
             'daily' => $daily,
             'query_page_rows' => $rows
-                ->filter(fn (object $row): bool => trim((string) ($row->query_display_masked ?? '')) !== '')
-                ->sortByDesc('impressions')
-                ->take(25)
                 ->map(fn (object $row): array => [
                     'query' => (string) $row->query_display_masked,
                     'canonical_path' => $this->safePath(is_string($row->canonical_url ?? null) ? $row->canonical_url : null),
