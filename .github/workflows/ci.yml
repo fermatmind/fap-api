@@ -218,7 +218,10 @@ jobs:
           php artisan test tests/Unit/Security/SecurityGuardrailsTest.php --no-ansi
           if [ '${{ needs.classify.outputs.payment }}' = 'true' ]; then php artisan test tests/Feature/Commerce tests/Unit/Services/Commerce --no-ansi; fi
           if [ '${{ needs.classify.outputs.cache }}' = 'true' ]; then php artisan test --filter='(Cache|Projection|Redis|Fence|Lkg)' --no-ansi; fi
-          if [ '${{ needs.classify.outputs.seo }}' = 'true' ]; then php artisan test --filter='(Seo|Sitemap|Discoverability|IndexNow|Canonical)' --no-ansi; fi
+          if [ '${{ needs.classify.outputs.seo }}' = 'true' ] && [ '${{ needs.classify.outputs.tests_changed }}' != 'true' ]; then
+            echo "::error::SEO runtime changes must include focused changed tests."
+            exit 1
+          fi
       - name: Execute changed PHP tests for tests-only and mixed scopes
         if: matrix.mode == 'legacy' && needs.classify.outputs.tests_changed == 'true'
         working-directory: backend

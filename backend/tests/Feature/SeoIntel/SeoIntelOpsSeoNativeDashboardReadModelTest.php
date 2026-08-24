@@ -178,6 +178,12 @@ final class SeoIntelOpsSeoNativeDashboardReadModelTest extends TestCase
         $queriedTables = array_values(array_unique($matches[1] ?? []));
         $this->assertNotEmpty($queriedTables);
         foreach ($queriedTables as $table) {
+            // SQLite reports its schema namespace as `main` while the page-family
+            // coverage service probes optional backend authority tables.
+            if ($table === 'main') {
+                continue;
+            }
+
             $this->assertContains($table, AbstractSeoDashboardReadService::allowedTables());
         }
 

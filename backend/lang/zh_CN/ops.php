@@ -1763,7 +1763,7 @@ return [
                 'ambiguous' => '多重匹配',
                 'blocked_hint' => 'L0 只读；阻断发布、提交、canary 与扩量。',
                 'career_authority' => 'Career 本地化 authority',
-                'url_truth_handoff' => 'URL Truth 缺口 handoff',
+                'url_truth_handoff' => '网址真值缺口 handoff',
                 'url_truth_handoff_hint' => '只读交接 SEO-PLATFORM-05；未执行修复。',
                 'family_locale' => '家族 × 语言',
                 'authority_source' => 'Authority 来源',

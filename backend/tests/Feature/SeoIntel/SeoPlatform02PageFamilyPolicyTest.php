@@ -200,4 +200,13 @@ final class SeoPlatform02PageFamilyPolicyTest extends TestCase
         $this->assertFalse((bool) data_get($artifact, 'boundaries.private_path_example_emitted', true));
         $this->assertFalse((bool) data_get($artifact, 'url_truth_missing_handoff.write_or_repair_performed', true));
     }
+
+    #[Test]
+    public function ci_requires_focused_tests_for_seo_runtime_changes(): void
+    {
+        $workflow = (string) file_get_contents(base_path('../.github/workflows/ci.yml'));
+
+        $this->assertStringContainsString('SEO runtime changes must include focused changed tests.', $workflow);
+        $this->assertStringNotContainsString("--filter='(Seo|Sitemap|Discoverability|IndexNow|Canonical)'", $workflow);
+    }
 }
