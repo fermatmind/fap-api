@@ -6,7 +6,6 @@ namespace App\Services\Ops;
 
 use App\Services\SeoIntel\OpsDashboard\SeoCrawlerLogObservationReadService;
 use App\Services\SeoIntel\OpsDashboard\SeoDashboardApiReadService;
-use App\Services\SeoIntel\OpsDashboard\SeoIssueQueueReadService;
 use App\Services\SeoIntel\OpsDashboard\SeoSearchChannelQueueReadService;
 use Throwable;
 
@@ -73,7 +72,7 @@ final class SeoOperationsReadService
                 'blocking_reasons' => ['not_implemented'],
             ],
             'execution' => $this->available('seo_intel.issue_and_search_channel_queues', fn (): array => [
-                'issues' => (new SeoIssueQueueReadService($this->connectionName))->read(25),
+                'issues' => $reader->issues(25),
                 'clusters' => $reader->issueClusters([], 1, 25),
                 'search_channel' => (new SeoSearchChannelQueueReadService($this->connectionName))->read(25),
                 'boundaries' => [

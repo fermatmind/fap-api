@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\SeoIntel\OpsDashboard;
 
+use App\Services\SeoIntel\Detector\SeoDetectorRegistry;
 use App\Services\SeoIntel\GscDataQualityGate;
 use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueEligibilityEvaluator;
 use Carbon\CarbonImmutable;
@@ -28,17 +29,24 @@ final class SeoOpportunityQueueReadService extends AbstractSeoDashboardReadServi
         $rows = $this->gscRows();
         $qualityGate = $this->dataQualityGate->evaluate($rows);
         $eligible = (bool) ($qualityGate['opportunity_queue_eligible'] ?? false);
-        $candidates = $eligible ? $this->candidateRows($rows) : [];
+        $gscCandidates = $eligible ? $this->candidateRows($rows) : [];
+        $detectorCandidates = $this->persistedDetectorCandidates();
+        $candidates = [...$detectorCandidates, ...$gscCandidates];
+        usort($candidates, static fn (array $left, array $right): int => data_get($right, 'priority.score', 0) <=> data_get($left, 'priority.score', 0));
 
         return [
             'schema_version' => 'seo-opportunity-queue-readonly.v1',
             'mode' => 'read_only',
-            'state' => ! $eligible ? ($rows === [] ? 'disconnected' : 'quality_failed') : ($candidates === [] ? 'empty' : 'connected'),
+            'state' => $candidates !== [] ? 'connected' : (! $eligible ? ($rows === [] ? 'disconnected' : 'quality_failed') : 'empty'),
             'source_gate' => $qualityGate,
+            'source_states' => [
+                'detector_queue' => $detectorCandidates === [] ? 'empty' : 'connected',
+                'gsc_candidates' => ! $eligible ? 'measurement_hold' : ($gscCandidates === [] ? 'empty' : 'connected'),
+            ],
             'total_count' => count($candidates),
             'recent_rows' => array_slice($candidates, 0, $limit),
             'scoring_contract' => [
-                'inputs' => ['seo_gsc_daily', 'seo_urls', 'gsc_data_quality_gate'],
+                'inputs' => ['seo_detector_opportunities', 'seo_gsc_daily', 'seo_urls', 'gsc_data_quality_gate'],
                 'min_impressions' => 50,
                 'max_ctr_ppm' => 10000,
                 'position_milli_window' => [4000, 20000],
@@ -62,6 +70,88 @@ final class SeoOpportunityQueueReadService extends AbstractSeoDashboardReadServi
                 'writes_attempted' => false,
             ],
         ];
+    }
+
+    /** @return list<array<string, mixed>> */
+    private function persistedDetectorCandidates(): array
+    {
+        $registry = new SeoDetectorRegistry;
+
+        try {
+            $rows = $this->table('seo_detector_opportunities')
+                ->where('status', 'open')
+                ->where('lifecycle_state', 'open')
+                ->orderByDesc('last_evidence_at')
+                ->limit(100)
+                ->get();
+        } catch (\Throwable) {
+            return [];
+        }
+
+        return $rows->map(function (object $row) use ($registry): array {
+            $metadata = $this->decodeJson($row->metadata_json ?? null);
+            $result = is_array($metadata['detector_result'] ?? null) ? $metadata['detector_result'] : [];
+            $detectorId = (string) ($row->detector_id ?? '');
+            $definition = $registry->detectors()[$detectorId] ?? [];
+            $affectedUrls = max(0, (int) ($row->affected_url_count ?? 0));
+            $severity = (string) ($result['severity'] ?? 'P3');
+            $severityWeight = match ($severity) {
+                'P0' => 800,
+                'P1' => 400,
+                'P2' => 200,
+                default => 100,
+            };
+
+            return [
+                'opportunity_id' => (string) $row->opportunity_uid,
+                'opportunity_type' => $detectorId,
+                'opportunity_types' => [$detectorId],
+                'canonical_path' => null,
+                'locale' => is_string($row->locale ?? null) ? $row->locale : null,
+                'page_family' => (string) ($row->page_family ?? ''),
+                'source_signal' => 'seo_detector_registry',
+                'report_date' => $this->normalizeTimestamp($row->last_evidence_at ?? null),
+                'updated_at' => $this->normalizeTimestamp($row->updated_at ?? null),
+                'detector' => [
+                    'id' => $detectorId,
+                    'version' => (string) ($row->detector_version ?? ''),
+                    'cluster_uid' => (string) ($row->cluster_uid ?? ''),
+                    'status' => (string) ($row->status ?? ''),
+                    'lifecycle_state' => (string) ($row->lifecycle_state ?? ''),
+                    'evidence_state' => (string) ($result['evidence_state'] ?? 'insufficient_evidence'),
+                    'root_cause' => $this->safeDiagnosticCode($result['root_cause_or_error_code'] ?? null),
+                    'revisions' => [
+                        'authority' => (string) ($row->authority_revision ?? ''),
+                        'url_truth' => (string) ($row->url_truth_revision ?? ''),
+                        'policy' => (string) ($row->policy_version ?? ''),
+                    ],
+                    'recovery_conditions' => array_values((array) ($definition['recovery_conditions'] ?? [])),
+                ],
+                'evidence' => [
+                    'state' => (string) ($result['evidence_state'] ?? 'insufficient_evidence'),
+                    'affected_url_count' => $affectedUrls,
+                ],
+                'metrics' => null,
+                'priority' => [
+                    'impact' => $affectedUrls,
+                    'effort' => 'human_review_required',
+                    'confidence' => ($result['evidence_state'] ?? null) === 'direct_evidence' ? 'high' : 'measurement_hold',
+                    'score' => $severityWeight + min($affectedUrls, 100),
+                ],
+                'recommended_next_step' => 'review_detector_evidence_and_recovery_conditions',
+                'recommended_actions' => ['review_detector_evidence_and_recovery_conditions'],
+                'human_review_boundary' => 'human_review_required_before_cms_or_search_action',
+                'allowed_action' => 'read_only_review',
+            ];
+        })
+            ->all();
+    }
+
+    private function safeDiagnosticCode(mixed $value): string
+    {
+        $code = is_string($value) ? trim($value) : '';
+
+        return preg_match('/^[a-zA-Z0-9_.:-]{1,160}$/', $code) === 1 ? $code : 'unavailable';
     }
 
     /**

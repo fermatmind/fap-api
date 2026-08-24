@@ -169,6 +169,56 @@ final class SeoDashApi01ReadOnlyApiContractTest extends TestCase
     }
 
     #[Test]
+    public function issue_queue_exposes_sanitized_detector_status_root_evidence_impact_and_recovery(): void
+    {
+        DB::connection('seo_intel')->table('seo_issue_queue')->insert([
+            'issue_uid' => 'detector-http-404',
+            'issue_type' => 'http_404',
+            'severity' => 'high',
+            'source_system' => 'seo_detector_registry',
+            'source_engine' => null,
+            'canonical_url_hash' => null,
+            'canonical_url' => null,
+            'locale' => 'en',
+            'page_entity_type' => 'articles_topics',
+            'status' => 'open',
+            'lifecycle_state' => 'open',
+            'detected_at' => now(),
+            'summary' => 'Verified shared template failure.',
+            'recommendation' => 'Review bounded detector evidence.',
+            'metadata_json' => json_encode(['detector_result' => [
+                'detector' => 'http_404',
+                'detector_version' => 'v1',
+                'cluster_uid' => hash('sha256', 'shared_template_missing'),
+                'evidence_state' => 'direct_evidence',
+                'root_cause_or_error_code' => 'shared_template_missing',
+                'affected_url_count' => 4,
+                'authority_revision' => 'authority-r1',
+                'url_truth_revision' => 'url-truth-r1',
+                'policy_version' => 'seo-page-family-policy.v1',
+            ]], JSON_THROW_ON_ERROR),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_SEO_INTEL_READ]);
+
+        $response = $this->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->getJson('/api/v0.5/ops/seo-intel/issues?limit=5')
+            ->assertOk()
+            ->assertJsonPath('data.recent_rows.0.detector.id', 'http_404')
+            ->assertJsonPath('data.recent_rows.0.detector.status', 'open')
+            ->assertJsonPath('data.recent_rows.0.detector.evidence_state', 'direct_evidence')
+            ->assertJsonPath('data.recent_rows.0.detector.root_cause', 'shared_template_missing')
+            ->assertJsonPath('data.recent_rows.0.detector.impact.affected_urls', 4)
+            ->assertJsonPath('data.recent_rows.0.detector.revisions.authority', 'authority-r1');
+
+        $encoded = $response->getContent();
+        $this->assertStringNotContainsString('canonical_url_hash', $encoded);
+        $this->assertStringNotContainsString('query_hash', $encoded);
+        $this->assertStringNotContainsString('evidence_hash', $encoded);
+    }
+
+    #[Test]
     public function url_truth_endpoint_adds_sanitized_page_family_coverage_without_breaking_existing_fields(): void
     {
         $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_SEO_INTEL_READ]);
@@ -308,6 +358,7 @@ final class SeoDashApi01ReadOnlyApiContractTest extends TestCase
 
         $this->assertContains('seo_gsc_daily', AbstractSeoDashboardReadService::allowedTables());
         $this->assertContains('seo_revenue_daily', AbstractSeoDashboardReadService::allowedTables());
+        $this->assertContains('seo_detector_opportunities', AbstractSeoDashboardReadService::allowedTables());
 
         foreach ([
             'orders',

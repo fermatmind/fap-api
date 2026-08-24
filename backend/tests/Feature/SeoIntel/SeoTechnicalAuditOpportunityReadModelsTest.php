@@ -106,6 +106,57 @@ final class SeoTechnicalAuditOpportunityReadModelsTest extends TestCase
         $this->assertFalse($result['boundaries']['external_calls_attempted']);
     }
 
+    #[Test]
+    public function persisted_detector_opportunity_remains_visible_when_gsc_is_disconnected(): void
+    {
+        DB::connection('seo_task7_test')->table('seo_detector_opportunities')->insert([
+            'opportunity_uid' => 'seo_detector_opportunity_stable',
+            'detector_id' => 'insufficient_internal_links',
+            'detector_version' => 'v1',
+            'cluster_uid' => hash('sha256', 'shared-link-graph-root'),
+            'canonical_url_hash' => hash('sha256', 'https://fermatmind.com/en/articles/page-one'),
+            'query_hash' => null,
+            'locale' => 'en',
+            'page_family' => 'articles_topics',
+            'authority_revision' => 'authority-r1',
+            'url_truth_revision' => 'url-truth-r1',
+            'policy_version' => 'seo-page-family-policy.v1',
+            'status' => 'open',
+            'lifecycle_state' => 'open',
+            'affected_url_count' => 3,
+            'evidence_hash' => hash('sha256', 'direct-evidence'),
+            'artifact_hash' => hash('sha256', 'artifact'),
+            'metadata_json' => json_encode(['detector_result' => [
+                'detector' => 'insufficient_internal_links',
+                'detector_version' => 'v1',
+                'evidence_state' => 'direct_evidence',
+                'severity' => 'P2',
+                'root_cause_or_error_code' => 'shared_link_graph_gap',
+            ]], JSON_THROW_ON_ERROR),
+            'detected_at' => now(),
+            'last_evidence_at' => now(),
+            'resolved_at' => null,
+            'reopen_count' => 0,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $result = (new SeoOpportunityQueueReadService('seo_task7_test'))->read();
+        $row = $result['recent_rows'][0];
+
+        $this->assertSame('connected', $result['state']);
+        $this->assertSame('connected', data_get($result, 'source_states.detector_queue'));
+        $this->assertSame('measurement_hold', data_get($result, 'source_states.gsc_candidates'));
+        $this->assertSame('insufficient_internal_links', data_get($row, 'detector.id'));
+        $this->assertSame('shared_link_graph_gap', data_get($row, 'detector.root_cause'));
+        $this->assertSame(3, data_get($row, 'evidence.affected_url_count'));
+        $this->assertNull($row['metrics']);
+        $encoded = json_encode($result, JSON_THROW_ON_ERROR);
+        $this->assertStringNotContainsString('canonical_url_hash', $encoded);
+        $this->assertStringNotContainsString('query_hash', $encoded);
+        $this->assertStringNotContainsString('evidence_hash', $encoded);
+    }
+
     private function seedUrl(string $slug): string
     {
         $url = 'https://fermatmind.com/en/articles/'.$slug;
@@ -219,6 +270,31 @@ final class SeoTechnicalAuditOpportunityReadModelsTest extends TestCase
             $table->boolean('is_brand_query');
             $table->string('query_type');
             $table->json('metadata_json');
+        });
+        $schema->create('seo_detector_opportunities', function (Blueprint $table): void {
+            $table->id();
+            $table->string('opportunity_uid');
+            $table->string('detector_id');
+            $table->string('detector_version');
+            $table->string('cluster_uid');
+            $table->char('canonical_url_hash', 64)->nullable();
+            $table->char('query_hash', 64)->nullable();
+            $table->string('locale')->nullable();
+            $table->string('page_family');
+            $table->string('authority_revision');
+            $table->string('url_truth_revision');
+            $table->string('policy_version');
+            $table->string('status');
+            $table->string('lifecycle_state');
+            $table->unsignedInteger('affected_url_count');
+            $table->char('evidence_hash', 64);
+            $table->char('artifact_hash', 64);
+            $table->json('metadata_json')->nullable();
+            $table->dateTime('detected_at');
+            $table->dateTime('last_evidence_at');
+            $table->dateTime('resolved_at')->nullable();
+            $table->unsignedInteger('reopen_count')->default(0);
+            $table->timestamps();
         });
         $schema->create('seo_crawler_log_daily_aggregates', function (Blueprint $table): void {
             $table->id();

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\SeoIntel\OpsDashboard;
 
+use App\Services\SeoIntel\Detector\SeoDetectorRegistry;
 use App\Services\SeoIntel\PageFamily\PageFamilyClassifier;
 use Illuminate\Support\Facades\Schema;
 use Throwable;
@@ -88,6 +89,11 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
                     'summary' => isset($row->summary) ? (string) $row->summary : null,
                     'recommendation' => isset($row->recommendation) ? (string) $row->recommendation : null,
                     'workflow' => $this->workflowMetadata($row->metadata_json ?? null),
+                    'detector' => $this->detectorMetadata(
+                        $row->metadata_json ?? null,
+                        (string) $row->status,
+                        (string) $row->lifecycle_state,
+                    ),
                     'impact' => [
                         'affected_urls' => $row->canonical_url_hash === null ? 0 : 1,
                         'clicks' => (int) data_get($gscByUrl, ((string) ($row->canonical_url_hash ?? '')).'.clicks', 0),
@@ -587,6 +593,41 @@ final class SeoDashboardApiReadService extends AbstractSeoDashboardReadService
             'verification_result' => is_string($workflow['verification_result'] ?? null) ? $workflow['verification_result'] : null,
             'ignore_reason' => is_string($workflow['ignore_reason'] ?? null) ? $workflow['ignore_reason'] : null,
             'ignored_until' => is_string($workflow['ignored_until'] ?? null) ? $workflow['ignored_until'] : null,
+        ];
+    }
+
+    /** @return array<string,mixed>|null */
+    private function detectorMetadata(mixed $metadata, string $status, string $lifecycleState): ?array
+    {
+        $decoded = $this->decodeJson($metadata);
+        $result = is_array($decoded['detector_result'] ?? null) ? $decoded['detector_result'] : [];
+        $detectorId = is_string($result['detector'] ?? null) ? $result['detector'] : '';
+        $definition = (new SeoDetectorRegistry)->detectors()[$detectorId] ?? null;
+        if (! is_array($definition)) {
+            return null;
+        }
+
+        $rootCause = is_string($result['root_cause_or_error_code'] ?? null)
+            ? trim($result['root_cause_or_error_code'])
+            : '';
+
+        return [
+            'id' => $detectorId,
+            'version' => (string) ($result['detector_version'] ?? ''),
+            'cluster_uid' => (string) ($result['cluster_uid'] ?? ''),
+            'status' => $status,
+            'lifecycle_state' => $lifecycleState,
+            'evidence_state' => (string) ($result['evidence_state'] ?? 'insufficient_evidence'),
+            'root_cause' => preg_match('/^[a-zA-Z0-9_.:-]{1,160}$/', $rootCause) === 1 ? $rootCause : 'unavailable',
+            'impact' => [
+                'affected_urls' => max(0, (int) ($result['affected_url_count'] ?? 0)),
+            ],
+            'revisions' => [
+                'authority' => (string) ($result['authority_revision'] ?? ''),
+                'url_truth' => (string) ($result['url_truth_revision'] ?? ''),
+                'policy' => (string) ($result['policy_version'] ?? ''),
+            ],
+            'recovery_conditions' => array_values((array) ($definition['recovery_conditions'] ?? [])),
         ];
     }
 
