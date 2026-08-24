@@ -32,6 +32,16 @@ test("classifies the executable path rule with its tests without application dep
   assert.equal(result.tests_changed, true);
 });
 
+test("keeps SEO platform production closeout evidence docs-only", () => {
+  const result = classifyPaths([
+    "backend/docs/seo/generated/seo-platform-01-capability-truth.v1.json",
+    "backend/docs/seo/seo-platform-01-production-capability-closeout.md",
+  ]);
+  assert.deepEqual(result.categories, ["docs_rules_tests_only"]);
+  assert.equal(result.deploy, false);
+  assert.equal(result.flags.seo_discoverability, false);
+});
+
 test("classifies application code", () => assert.equal(has(["backend/app/Models/User.php"], "application_code"), true));
 test("classifies content assets", () => assert.equal(has(["backend/content_packs/BIG5/v1/manifest.json"], "content_assets"), true));
 test("classifies Career Current assets", () => assert.equal(has(["backend/content_assets/career/current/assets.jsonl"], "content_assets"), true));
