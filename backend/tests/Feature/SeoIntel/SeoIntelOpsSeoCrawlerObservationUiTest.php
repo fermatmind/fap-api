@@ -12,12 +12,26 @@ final class SeoIntelOpsSeoCrawlerObservationUiTest extends TestCase
     #[Test]
     public function crawler_observation_ui_renders_safe_aggregate_surface_only(): void
     {
-        $view = strtolower((string) file_get_contents(resource_path('views/filament/ops/pages/seo-dashboard-access.blade.php')))
-            ."\n".strtolower((string) file_get_contents(lang_path('en/ops.php')));
+        $page = strtolower((string) file_get_contents(app_path('Filament/Ops/Pages/SeoOperationsPage.php')));
+        $view = strtolower((string) file_get_contents(resource_path('views/filament/ops/pages/seo-operations.blade.php')));
+        $composition = strtolower((string) file_get_contents(app_path('Services/Ops/SeoOperationsReadService.php')));
+        $crawlerReadModel = strtolower((string) file_get_contents(app_path('Services/SeoIntel/OpsDashboard/SeoCrawlerLogObservationReadService.php')));
+
+        $this->assertStringContainsString("protected static ?string \$slug = 'seo-operations';", $page);
+        $this->assertStringContainsString('use app\\services\\ops\\seooperationsreadservice;', $page);
+        $this->assertStringContainsString('app(seooperationsreadservice::class)', $page);
+        $this->assertStringContainsString('use app\\services\\seointel\\opsdashboard\\seocrawlerlogobservationreadservice;', $composition);
+        $this->assertSame(2, substr_count($composition, 'new seocrawlerlogobservationreadservice'));
+
+        preg_match_all("/data_get\\(\\\$platformoverview, 'crawler\\.([^']+)'\\)/", $view, $crawlerFields);
+        $this->assertSame(['total_count'], array_values(array_unique($crawlerFields[1])));
 
         foreach ([
-            'crawler observation overview',
             'seo_crawler_log_daily_aggregates',
+            'total_count',
+            'total_hits',
+            'aggregates',
+            'safety_counts',
             'bot_family',
             'surface_family',
             'route_family',
@@ -26,33 +40,49 @@ final class SeoIntelOpsSeoCrawlerObservationUiTest extends TestCase
             'private_path_blocked',
             'hit_count',
             'last_seen_at',
-            'no raw logs',
-            'no scheduler',
-            'search submission actions',
         ] as $required) {
-            $this->assertStringContainsString($required, $view);
+            $this->assertStringContainsString($required, $crawlerReadModel);
         }
 
         foreach ([
             'path_hash',
+            'query_hash',
+            'session_id_hash',
+            'evidence_hash',
             'idempotency_key',
             'raw_user_agent',
             'raw_request_uri',
+            'raw_uri',
             'metadata_json',
             'attributes_json',
             'event_payload',
-            '<iframe',
-            '<x-filament::button',
-            '<button',
-            'wire:click',
+            'raw_payload',
+            'original_payload',
+        ] as $forbidden) {
+            $this->assertStringNotContainsString($forbidden, $crawlerReadModel);
+        }
+
+        foreach ([
+            'canonical_url_hash',
+            'query_hash',
+            'evidence_hash',
+            'evidence_fingerprint',
+            'session_id_hash',
+        ] as $sanitized) {
+            $this->assertStringContainsString("'{$sanitized}'", $composition);
+        }
+
+        $crawlerBoundary = $crawlerReadModel."\n".$composition;
+        foreach ([
             'approvequeueitem',
             'retryqueueitem',
             'submitqueueitem',
             'crawlerlogaggregatestoragewriter',
             'searchchannelqueuewriteservice',
             'searchchannelsubmissionexecutor',
+            'searchchannelsubmissionservice',
         ] as $forbidden) {
-            $this->assertStringNotContainsString($forbidden, $view);
+            $this->assertStringNotContainsString($forbidden, $crawlerBoundary);
         }
     }
 
