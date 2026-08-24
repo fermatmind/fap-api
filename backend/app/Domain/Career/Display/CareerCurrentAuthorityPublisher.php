@@ -379,7 +379,7 @@ final class CareerCurrentAuthorityPublisher
         }
         $mismatchCode = $this->cachedPayloadMismatchCode($payload, $row, $locale);
         if ($mismatchCode !== null) {
-            // Resolve only a content-free, version-aware eligibility code before compensation;
+            // Resolve only a content-free, field-specific eligibility code before compensation;
             // public copy and raw payload values never enter the publish receipt.
             $displayFailureCode = $this->displaySurfaceBuilder->diagnosticFailureCodeForSlug(
                 (string) ($row['canonical_slug'] ?? ''),

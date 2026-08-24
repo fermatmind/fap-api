@@ -230,9 +230,10 @@ final class CareerJobDisplaySurfaceBuilder
                 return 'CURRENT_DISPLAY_SURFACE_COMPONENT_ORDER_FAILED';
             }
             if (! CareerDisplayAssetComponentContract::hasExactPagesForVersion((array) $asset->page_payload_json, $assetVersion)) {
-                return $assetVersion === 'v4.3'
-                    ? 'CURRENT_DISPLAY_SURFACE_V43_PAGE_CONTRACT_FAILED'
-                    : 'CURRENT_DISPLAY_SURFACE_V42_PAGE_CONTRACT_FAILED';
+                return CareerDisplayAssetComponentContract::pageFailureCodeForVersion(
+                    (array) $asset->page_payload_json,
+                    $assetVersion,
+                );
             }
             if ($this->containsProductSchema([
                 $pageContent,

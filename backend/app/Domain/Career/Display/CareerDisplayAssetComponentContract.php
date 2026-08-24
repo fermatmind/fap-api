@@ -161,6 +161,47 @@ final class CareerDisplayAssetComponentContract
         return true;
     }
 
+    /** @param array<mixed> $payload */
+    public static function pageFailureCodeForVersion(array $payload, string $version): ?string
+    {
+        if ($version !== 'v4.3') {
+            return self::hasExactPagesForVersion($payload, $version)
+                ? null
+                : 'CURRENT_DISPLAY_SURFACE_PAGE_CONTRACT_FAILED';
+        }
+
+        $pages = is_array($payload['page'] ?? null) ? $payload['page'] : $payload;
+        foreach (['en', 'zh'] as $locale) {
+            $page = $pages[$locale] ?? null;
+            if (! is_array($page)) {
+                return 'CURRENT_DISPLAY_SURFACE_V43_LOCALE_PAGE_MISSING';
+            }
+            if (array_diff(self::CURRENT_V4_3_ORDER, array_keys($page)) !== []) {
+                return 'CURRENT_DISPLAY_SURFACE_V43_COMPONENT_MISSING';
+            }
+            if (array_diff(array_keys($page), array_merge(self::CURRENT_V4_3_ORDER, ['path', 'secondary_cta'])) !== []) {
+                return 'CURRENT_DISPLAY_SURFACE_V43_COMPONENT_UNEXPECTED';
+            }
+            if (array_key_exists('sections', $page) || array_key_exists('content_sections', $page)) {
+                return 'CURRENT_DISPLAY_SURFACE_V43_LEGACY_SECTION_PRESENT';
+            }
+            $structuredFailure = self::structuredComponentFailureCode($page, $locale);
+            if ($structuredFailure !== null) {
+                return $structuredFailure;
+            }
+            if (self::containsPlaceholder($page)) {
+                return 'CURRENT_DISPLAY_SURFACE_V43_PLACEHOLDER_PRESENT';
+            }
+        }
+
+        $localeKeys = array_keys($pages);
+        sort($localeKeys, SORT_STRING);
+
+        return $localeKeys === ['en', 'zh']
+            ? null
+            : 'CURRENT_DISPLAY_SURFACE_V43_LOCALE_SET_MISMATCH';
+    }
+
     /** @param array<mixed> $order */
     public static function matchesVersion(array $order, string $version): bool
     {
@@ -210,6 +251,61 @@ final class CareerDisplayAssetComponentContract
             && ($onet['schema_version'] ?? null) === 'career.onet_structured_fields.v1'
             && self::nonEmptyString($onet['heading'] ?? null)
             && self::validRows($onet['rows'] ?? null);
+    }
+
+    /** @param array<string,mixed> $page */
+    private static function structuredComponentFailureCode(array $page, string $locale): ?string
+    {
+        $quick = $page['career_quick_answers_block'] ?? null;
+        $onet = $page['onet_structured_fields_block'] ?? null;
+        if ($locale === 'en') {
+            $unavailable = [
+                'availability' => 'unavailable',
+                'reason_code' => 'source_locale_unavailable',
+            ];
+            if ($quick !== $unavailable) {
+                return 'CURRENT_DISPLAY_SURFACE_V43_EN_QUICK_ANSWERS_INVALID';
+            }
+
+            return $onet === $unavailable
+                ? null
+                : 'CURRENT_DISPLAY_SURFACE_V43_EN_ONET_FIELDS_INVALID';
+        }
+        if (! is_array($quick)
+            || ! self::exactKeys($quick, ['availability', 'schema_version', 'heading', 'items'])
+            || ($quick['availability'] ?? null) !== 'published'
+            || ($quick['schema_version'] ?? null) !== 'career.quick_answers.v1'
+            || ! self::nonEmptyString($quick['heading'] ?? null)
+            || ! is_array($quick['items'] ?? null)
+            || count($quick['items']) !== 3) {
+            return 'CURRENT_DISPLAY_SURFACE_V43_ZH_QUICK_ANSWERS_INVALID';
+        }
+        foreach (['qa3', 'qa2', 'qa1'] as $index => $key) {
+            $item = $quick['items'][$index] ?? null;
+            if (! is_array($item)
+                || ! self::exactKeys($item, ['key', 'question', 'answer', 'table'])
+                || ($item['key'] ?? null) !== $key
+                || ! self::nonEmptyString($item['question'] ?? null)
+                || ! self::nonEmptyString($item['answer'] ?? null)) {
+                return 'CURRENT_DISPLAY_SURFACE_V43_ZH_QUICK_ANSWER_ITEM_INVALID';
+            }
+            if (! is_array($item['table'] ?? null)
+                || ! self::exactKeys($item['table'], ['rows'])
+                || ! self::validRows($item['table']['rows'] ?? null)) {
+                return 'CURRENT_DISPLAY_SURFACE_V43_ZH_QUICK_ANSWER_TABLE_INVALID';
+            }
+        }
+        if (! is_array($onet)
+            || ! self::exactKeys($onet, ['availability', 'schema_version', 'heading', 'rows'])
+            || ($onet['availability'] ?? null) !== 'published'
+            || ($onet['schema_version'] ?? null) !== 'career.onet_structured_fields.v1'
+            || ! self::nonEmptyString($onet['heading'] ?? null)) {
+            return 'CURRENT_DISPLAY_SURFACE_V43_ZH_ONET_FIELDS_INVALID';
+        }
+
+        return self::validRows($onet['rows'] ?? null)
+            ? null
+            : 'CURRENT_DISPLAY_SURFACE_V43_ZH_ONET_ROWS_INVALID';
     }
 
     private static function validRows(mixed $rows): bool
