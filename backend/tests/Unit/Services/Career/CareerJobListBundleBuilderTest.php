@@ -7,6 +7,7 @@ namespace Tests\Unit\Services\Career;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
+use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
 use App\Services\Career\Bundles\CareerJobListBundleBuilder;
@@ -138,6 +139,35 @@ final class CareerJobListBundleBuilderTest extends TestCase
         $this->assertSame('indexable', data_get($payloads[0], 'seo_contract.index_state'));
         $this->assertTrue((bool) data_get($payloads[0], 'seo_contract.index_eligible'));
         $this->assertContains('runtime_publish_projection', data_get($payloads[0], 'seo_contract.reason_codes'));
+    }
+
+    public function test_display_asset_backed_directory_item_uses_the_selected_asset_version(): void
+    {
+        $occupation = new Occupation([
+            'id' => '11111111-1111-4111-8111-111111111111',
+            'canonical_slug' => 'accountants-and-auditors',
+            'canonical_title_en' => 'Accountants and Auditors',
+            'canonical_title_zh' => '会计师和审计师',
+            'search_h1_zh' => '会计师和审计师',
+            'entity_level' => 'dataset_candidate',
+            'truth_market' => 'US',
+        ]);
+        $asset = new CareerJobDisplayAsset(['asset_version' => 'v4.3']);
+        $method = new \ReflectionMethod(
+            CareerJobListBundleBuilder::class,
+            'buildDisplayAssetBackedDirectoryDraftCareerJobItem',
+        );
+
+        $payload = $method->invoke(
+            app(CareerJobListBundleBuilder::class),
+            $occupation,
+            $asset,
+        )->toArray();
+
+        $this->assertSame('display_asset_backed_v4_3', data_get($payload, 'trust_summary.content_version'));
+        $this->assertSame('career_job_display_assets.v4.3', data_get($payload, 'trust_summary.data_version'));
+        $this->assertSame('display_asset_backed_v4_3', data_get($payload, 'provenance_meta.content_version'));
+        $this->assertSame('career_job_display_assets.v4.3', data_get($payload, 'provenance_meta.data_version'));
     }
 
     public function test_it_can_include_current_non_indexable_job_when_explicitly_requested(): void

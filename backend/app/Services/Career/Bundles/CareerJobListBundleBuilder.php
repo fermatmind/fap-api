@@ -514,8 +514,9 @@ final class CareerJobListBundleBuilder
 
     private function buildDirectoryDraftCareerJobItem(Occupation $occupation): CareerJobListItemBundle
     {
-        if ($this->directoryDraftHasDisplayAssetBackedDetail($occupation)) {
-            return $this->buildDisplayAssetBackedDirectoryDraftCareerJobItem($occupation);
+        $displayAsset = $this->directoryDraftDisplayAssetBackedDetailAsset($occupation);
+        if ($displayAsset instanceof CareerJobDisplayAsset) {
+            return $this->buildDisplayAssetBackedDirectoryDraftCareerJobItem($occupation, $displayAsset);
         }
 
         $runtimeProjectionItem = $this->runtimePublishedDirectoryDraftProjectionItem($occupation);
@@ -551,8 +552,10 @@ final class CareerJobListBundleBuilder
         );
     }
 
-    private function buildDisplayAssetBackedDirectoryDraftCareerJobItem(Occupation $occupation): CareerJobListItemBundle
-    {
+    private function buildDisplayAssetBackedDirectoryDraftCareerJobItem(
+        Occupation $occupation,
+        CareerJobDisplayAsset $asset,
+    ): CareerJobListItemBundle {
         return new CareerJobListItemBundle(
             identity: [
                 'occupation_uuid' => $occupation->id,
@@ -852,26 +855,29 @@ final class CareerJobListBundleBuilder
             && data_get($job->market_demand_json, 'source_refs.0.url') !== null;
     }
 
-    private function directoryDraftHasDisplayAssetBackedDetail(Occupation $occupation): bool
+    private function directoryDraftDisplayAssetBackedDetailAsset(Occupation $occupation): ?CareerJobDisplayAsset
     {
         $slug = strtolower(trim((string) $occupation->canonical_slug));
         if ($slug === '' || in_array($slug, self::DISPLAY_ASSET_BACKED_MANUAL_HOLD_SLUGS, true)) {
-            return false;
+            return null;
         }
 
         if (! $this->runtimeProjectionVisibilityAllowsIndexing($slug)) {
-            return false;
+            return null;
         }
 
         if (! $this->hasDisplayAssetBackedAuthority($occupation)) {
-            return false;
+            return null;
         }
 
-        if (! $this->validDisplayAssetBackedAsset($occupation, $slug) instanceof CareerJobDisplayAsset) {
-            return false;
+        $asset = $this->validDisplayAssetBackedAsset($occupation, $slug);
+        if (! $asset instanceof CareerJobDisplayAsset) {
+            return null;
         }
 
-        return $this->displaySurfaceBuilder->buildForOccupation($occupation, 'en') !== null;
+        return $this->displaySurfaceBuilder->buildForOccupation($occupation, 'en') !== null
+            ? $asset
+            : null;
     }
 
     private function runtimeProjectionVisibilityAllowsIndexing(string $slug): bool
