@@ -303,6 +303,52 @@ final class SeoIntelSearchChannelQueueRuntimeTest extends TestCase
     }
 
     #[Test]
+    public function dynamic_url_without_entity_source_is_blocked_by_page_family_policy(): void
+    {
+        $this->seedSeoUrl([
+            'metadata_json' => ['claim_safe' => true],
+            'lastmod_source' => null,
+        ]);
+
+        $output = $this->runQueueCommand(['--dry-run' => true, '--no-write' => true, '--json' => true]);
+
+        $this->assertSame(0, $output['eligible_count'] ?? null);
+        $this->assertSame(1, data_get($output, 'reason_code_breakdown.page_family_policy_blocked'));
+        $this->assertFalse((bool) ($output['writes_attempted'] ?? true));
+        $this->assertFalse((bool) ($output['search_submission_attempted'] ?? true));
+    }
+
+    #[Test]
+    public function search_channel_planner_uses_explicit_url_entity_authority_binding(): void
+    {
+        Schema::connection('seo_intel')->create('seo_url_entities', function ($table): void {
+            $table->id();
+            $table->string('locale', 16);
+            $table->string('page_entity_type', 64);
+            $table->string('entity_id_or_slug', 255);
+            $table->string('entity_source', 64);
+            $table->string('authority_status', 64);
+        });
+        $this->seedSeoUrl([
+            'metadata_json' => ['claim_safe' => true],
+            'lastmod_source' => null,
+        ]);
+        DB::connection('seo_intel')->table('seo_url_entities')->insert([
+            'locale' => 'en',
+            'page_entity_type' => 'research_report',
+            'entity_id_or_slug' => 'safe-research-report',
+            'entity_source' => 'research_reports',
+            'authority_status' => 'published_approved',
+        ]);
+
+        $output = $this->runQueueCommand(['--dry-run' => true, '--no-write' => true, '--json' => true]);
+
+        $this->assertSame(1, $output['eligible_count'] ?? null);
+        $this->assertSame(0, $output['blocked_count'] ?? null);
+        $this->assertFalse((bool) ($output['search_submission_attempted'] ?? true));
+    }
+
+    #[Test]
     public function stale_public_flags_cannot_admit_unowned_private_or_query_canonicals(): void
     {
         foreach ([

@@ -35,6 +35,9 @@ final class SeoAgentAutoApprovalPolicyTest extends TestCase
         $this->assertContains('cms_publish_auto_canary', $decision['allowed_next_actions'] ?? []);
         $this->assertContains('post_publish_indexnow_auto', $decision['allowed_next_actions'] ?? []);
         $this->assertSame([], $decision['reason_codes'] ?? null);
+        $this->assertTrue((bool) data_get($decision, 'page_family_policy.family_policy_allowed'));
+        $this->assertFalse((bool) data_get($decision, 'page_family_policy.action_authorization_granted', true));
+        $this->assertArrayNotHasKey('allowed', (array) ($decision['page_family_policy'] ?? []));
     }
 
     #[Test]

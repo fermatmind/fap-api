@@ -60,14 +60,14 @@ final class SearchChannelQueueEligibilityEvaluator
             'canonical_url' => $canonicalUrl,
             'locale' => (string) ($url['locale'] ?? ''),
             'page_entity_type' => $pageType,
-            'entity_source' => (string) ($url['entity_source'] ?? $metadata['entity_source'] ?? ''),
+            'entity_source' => (string) ($url['entity_source'] ?? $metadata['entity_source'] ?? $url['source_table'] ?? $metadata['source_table'] ?? ''),
             'source_authority' => $sourceAuthority,
             'authority_status' => (string) ($url['authority_status'] ?? $metadata['authority_status'] ?? 'published_approved'),
             'indexability_state' => $indexabilityState,
             'is_private_flow' => (bool) ($url['is_private_flow'] ?? $metadata['private_flow'] ?? false),
         ], 'L1');
 
-        if (($pageFamilyDecision['allowed'] ?? false) !== true) {
+        if (($pageFamilyDecision['family_policy_allowed'] ?? false) !== true) {
             $reasonCodes[] = 'page_family_policy_blocked';
         }
 

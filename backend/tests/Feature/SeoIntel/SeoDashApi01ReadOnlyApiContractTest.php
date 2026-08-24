@@ -646,7 +646,7 @@ final class SeoDashApi01ReadOnlyApiContractTest extends TestCase
             'locale' => 'en',
             'page_entity_type' => 'test_detail',
             'entity_id_or_slug' => 'mbti',
-            'entity_source' => 'scale_catalog',
+            'entity_source' => 'scales_registry',
             'authority_status' => 'approved',
             'source_updated_at' => '2026-06-02 00:00:00',
             'created_at' => '2026-06-01 00:00:00',

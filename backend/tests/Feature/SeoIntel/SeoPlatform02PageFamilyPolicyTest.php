@@ -81,9 +81,6 @@ final class SeoPlatform02PageFamilyPolicyTest extends TestCase
 
         $this->assertSame('unclassified', $zero['classification_status']);
         $this->assertSame('unclassified', $zero['family_id']);
-        $this->assertFalse($zero['automated_publication_allowed']);
-        $this->assertFalse($zero['search_submission_allowed']);
-        $this->assertFalse($zero['canary_allowed']);
         $this->assertSame('ambiguous', $multiple['classification_status']);
         $this->assertSame('unclassified', $multiple['family_id']);
         $this->assertGreaterThan(1, count($multiple['matched_family_ids']));
@@ -111,8 +108,91 @@ final class SeoPlatform02PageFamilyPolicyTest extends TestCase
         $policy = (new PageFamilyPolicyRegistry)->families()['career'];
         $this->assertSame('CareerDirectoryAuthorityService', data_get($policy, 'authority.route_authority.dynamic_route_source'));
         $this->assertSame('consumer_consistency_only', data_get($policy, 'authority.route_authority.sitemap_role'));
+        $this->assertSame(['minimum_urls' => 1, 'maximum_urls' => 3], data_get($policy, 'canary_policy.initial_canary'));
+        $this->assertSame([3, 10, 50, 'complete_cohort'], data_get($policy, 'canary_policy.expansion_sequence'));
+        $this->assertSame(['family', 'locale', 'authority_revision'], data_get($policy, 'canary_policy.cohort_key'));
+        $this->assertTrue((bool) data_get($policy, 'canary_policy.requires_previous_stage_success'));
+        $this->assertSame('pause_and_rollback_failed_cohort_only', data_get($policy, 'canary_policy.failure_action'));
+        $this->assertSame(
+            ['mode' => 'one_of', 'gates' => ['explicit_feature_flag', 'cohort_allowlist']],
+            data_get($policy, 'canary_policy.shared_template_or_api_change_gate'),
+        );
+        $encodedPolicy = json_encode($policy, JSON_THROW_ON_ERROR);
+        $this->assertStringNotContainsString('percent', strtolower($encodedPolicy));
+        $this->assertStringNotContainsString('%', $encodedPolicy);
+        $this->assertStringNotContainsString('2092', $encodedPolicy);
         $this->assertStringNotContainsString('2118', json_encode($policy, JSON_THROW_ON_ERROR));
         $this->assertStringNotContainsString('2643', json_encode($policy, JSON_THROW_ON_ERROR));
+    }
+
+    #[Test]
+    public function dynamic_authority_fields_are_required_while_exact_static_routes_may_be_completed(): void
+    {
+        $classifier = new PageFamilyClassifier;
+        $base = [
+            'canonical_path' => '/en/career/jobs/future-dynamic-career',
+            'locale' => 'en',
+            'page_entity_type' => 'career_job',
+        ];
+        $cases = [
+            [$base + ['source_authority' => 'career_runtime_publish_projection'], ['missing_entity_source']],
+            [$base + ['entity_source' => 'career_directory_authority'], ['missing_source_authority']],
+            [$base, ['missing_entity_source', 'missing_source_authority']],
+        ];
+
+        foreach ($cases as [$authority, $expectedReasons]) {
+            $result = $classifier->classify($authority);
+            $this->assertSame('unclassified', $result['classification_status']);
+            $this->assertSame('unclassified', $result['family_id']);
+            $this->assertSame($expectedReasons, $result['blocking_reasons']);
+        }
+
+        $registeredStatic = $classifier->classify([
+            'canonical_path' => '/en/tests',
+            'page_entity_type' => 'test_hub',
+        ]);
+        $unknownStatic = $classifier->classify([
+            'canonical_path' => '/en/tests/not-a-registered-static-route',
+            'page_entity_type' => 'test_hub',
+        ]);
+
+        $this->assertSame('classified', $registeredStatic['classification_status']);
+        $this->assertSame('tests', $registeredStatic['family_id']);
+        $this->assertSame('unclassified', $unknownStatic['classification_status']);
+        $this->assertSame(['missing_entity_source', 'missing_source_authority'], $unknownStatic['blocking_reasons']);
+    }
+
+    #[Test]
+    public function classifier_returns_classification_facts_without_execution_authorization(): void
+    {
+        $result = (new PageFamilyClassifier)->classify([
+            'canonical_path' => '/en/articles/example',
+            'page_entity_type' => 'article',
+            'entity_source' => 'articles',
+            'source_authority' => 'backend_cms',
+        ]);
+
+        $this->assertSame([
+            'policy_version',
+            'policy_hash',
+            'family_id',
+            'classification_status',
+            'matched_family_ids',
+            'locale',
+            'agent_risk_cap',
+            'blocking_reasons',
+        ], array_keys($result));
+
+        foreach ([
+            'allowed',
+            'automated_publication_allowed',
+            'search_submission_allowed',
+            'canary_allowed',
+            'expansion_allowed',
+            'operations_queue_eligible',
+        ] as $forbiddenField) {
+            $this->assertArrayNotHasKey($forbiddenField, $result);
+        }
     }
 
     #[Test]
@@ -139,8 +219,8 @@ final class SeoPlatform02PageFamilyPolicyTest extends TestCase
             $result = $classifier->classify($probe);
             $this->assertSame('private_excluded', $result['classification_status']);
             $this->assertSame('private_excluded', $result['family_id']);
-            $this->assertFalse($result['operations_queue_eligible']);
-            $this->assertFalse($result['search_submission_allowed']);
+            $this->assertNotContains('missing_entity_source', $result['blocking_reasons']);
+            $this->assertNotContains('missing_source_authority', $result['blocking_reasons']);
         }
 
         $draft = $classifier->classify([
@@ -161,7 +241,9 @@ final class SeoPlatform02PageFamilyPolicyTest extends TestCase
             'entity_source' => 'backend_authority',
             'source_authority' => 'backend_public_surface',
         ], 'L2');
-        $this->assertFalse($tooRisky['allowed']);
+        $this->assertFalse($tooRisky['family_policy_allowed']);
+        $this->assertFalse($tooRisky['action_authorization_granted']);
+        $this->assertArrayNotHasKey('allowed', $tooRisky);
         $this->assertContains('agent_risk_exceeds_family_cap', $tooRisky['blocking_reasons']);
 
         $decision = (new AutoApprovalPolicy($guard))->evaluateCandidate([
@@ -182,6 +264,7 @@ final class SeoPlatform02PageFamilyPolicyTest extends TestCase
         $this->assertNotContains('cms_publish_auto_canary', $decision['allowed_next_actions']);
         $this->assertContains('cms_publish_auto_canary', $decision['blocked_actions']);
         $this->assertSame('private_excluded', data_get($decision, 'page_family_policy.classification_status'));
+        $this->assertFalse((bool) data_get($decision, 'page_family_policy.action_authorization_granted', true));
     }
 
     #[Test]
@@ -207,6 +290,6 @@ final class SeoPlatform02PageFamilyPolicyTest extends TestCase
         $workflow = (string) file_get_contents(base_path('../.github/workflows/ci.yml'));
 
         $this->assertStringContainsString('SEO runtime changes must include focused changed tests.', $workflow);
-        $this->assertStringNotContainsString("--filter='(Seo|Sitemap|Discoverability|IndexNow|Canonical)'", $workflow);
+        $this->assertStringContainsString('php artisan test "${changed_tests[@]}" --no-ansi', $workflow);
     }
 }

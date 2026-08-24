@@ -6,6 +6,18 @@ namespace App\Services\SeoIntel\PageFamily;
 
 final class PageFamilyClassifier
 {
+    /** @var list<string> */
+    private const STATIC_PAGE_ENTITY_TYPES = [
+        'test_hub',
+        'article_hub',
+        'topic_hub',
+        'career_hub',
+        'personality_hub',
+        'support_hub',
+        'home',
+        'business_hub',
+    ];
+
     public function __construct(
         private readonly ?PageFamilyPolicyRegistry $registry = null,
     ) {}
@@ -20,13 +32,7 @@ final class PageFamilyClassifier
         $path = $this->canonicalPath($authority);
         $pageEntityType = strtolower(trim((string) ($authority['page_entity_type'] ?? '')));
         $entitySource = strtolower(trim((string) ($authority['entity_source'] ?? '')));
-        if ($entitySource === '') {
-            $entitySource = $this->inferEntitySource($pageEntityType);
-        }
         $sourceAuthority = strtolower(trim((string) ($authority['source_authority'] ?? '')));
-        if ($sourceAuthority === '') {
-            $sourceAuthority = $this->inferSourceAuthority($pageEntityType);
-        }
         $authorityStatus = strtolower(trim((string) ($authority['authority_status'] ?? 'published_approved')));
         $indexabilityState = strtolower(trim((string) ($authority['indexability_state'] ?? 'indexable')));
         $locale = $this->normalizeLocale((string) ($authority['locale'] ?? ''), $path);
@@ -34,6 +40,26 @@ final class PageFamilyClassifier
         $privateReasons = $this->privateReasons($authority, $path, $pageEntityType, $authorityStatus, $indexabilityState, $registry);
         if ($privateReasons !== []) {
             return $this->result('private_excluded', 'private_excluded', [], $locale, $privateReasons, $registry);
+        }
+
+        $staticAuthority = $this->staticAuthorityDefaults($registry, $pageEntityType, $path);
+        $missingReasons = [];
+        if ($entitySource === '') {
+            if ($staticAuthority !== null) {
+                $entitySource = $staticAuthority['entity_source'];
+            } else {
+                $missingReasons[] = 'missing_entity_source';
+            }
+        }
+        if ($sourceAuthority === '') {
+            if ($staticAuthority !== null) {
+                $sourceAuthority = $staticAuthority['source_authority'];
+            } else {
+                $missingReasons[] = 'missing_source_authority';
+            }
+        }
+        if ($missingReasons !== []) {
+            return $this->result('unclassified', 'unclassified', [], $locale, $missingReasons, $registry);
         }
 
         $matches = [];
@@ -70,8 +96,7 @@ final class PageFamilyClassifier
         $entitySourceMatch = in_array($entitySource, (array) ($authority['entity_sources'] ?? []), true);
         $sourceAuthorityMatch = in_array($sourceAuthority, (array) ($authority['source_authorities'] ?? []), true);
         $registeredAuthorityMatch = $typeMatch && $entitySourceMatch && $sourceAuthorityMatch;
-        $staticTypes = ['test_hub', 'article_hub', 'topic_hub', 'career_hub', 'personality_hub', 'support_hub', 'home', 'business_hub'];
-        if (in_array($pageEntityType, $staticTypes, true)) {
+        if (in_array($pageEntityType, self::STATIC_PAGE_ENTITY_TYPES, true)) {
             return $registeredAuthorityMatch
                 && in_array($path, (array) data_get($authority, 'route_authority.exact_static_templates', []), true);
         }
@@ -127,7 +152,6 @@ final class PageFamilyClassifier
         PageFamilyPolicyRegistry $registry,
     ): array {
         $policy = $registry->families()[$familyId];
-        $automatedActionsAllowed = $status === 'classified';
 
         return [
             'policy_version' => PageFamilyPolicyRegistry::VERSION,
@@ -137,11 +161,6 @@ final class PageFamilyClassifier
             'matched_family_ids' => $matches,
             'locale' => $locale,
             'agent_risk_cap' => (string) $policy['agent_risk_cap'],
-            'automated_publication_allowed' => $automatedActionsAllowed,
-            'search_submission_allowed' => $automatedActionsAllowed,
-            'canary_allowed' => $automatedActionsAllowed,
-            'expansion_allowed' => $automatedActionsAllowed,
-            'operations_queue_eligible' => $status !== 'private_excluded',
             'blocking_reasons' => $reasons,
         ];
     }
@@ -177,39 +196,34 @@ final class PageFamilyClassifier
         return 'unknown';
     }
 
-    private function inferEntitySource(string $pageEntityType): string
-    {
-        return match ($pageEntityType) {
-            'test_detail' => 'scales_registry',
-            'test_hub', 'home' => 'backend_authority',
-            'article' => 'articles',
-            'article_hub', 'topic_hub' => 'landing_surfaces',
-            'topic' => 'topics',
-            'career_job', 'career_directory' => 'career_directory_authority',
-            'career_recommendation' => 'career_recommendations',
-            'career_guide' => 'career_guides',
-            'career_hub', 'personality_hub', 'support_hub', 'business_hub' => 'landing_surfaces',
-            'personality', 'personality_profile_comparison' => 'personality_profiles',
-            'personality_profile_variant' => 'personality_profile_variants',
-            'personality_public_content_asset' => 'personality_public_content_assets',
-            'research_report' => 'research_reports',
-            'content_page', 'methodology', 'dataset' => 'content_pages',
-            'support_article' => 'support_articles',
-            'interpretation_guide' => 'interpretation_guides',
-            'landing_page' => 'landing_surfaces',
-            'foundation_public_record' => 'foundation_public_records',
-            default => '',
-        };
-    }
+    /**
+     * @return array{entity_source:string,source_authority:string}|null
+     */
+    private function staticAuthorityDefaults(
+        PageFamilyPolicyRegistry $registry,
+        string $pageEntityType,
+        string $path,
+    ): ?array {
+        if (! in_array($pageEntityType, self::STATIC_PAGE_ENTITY_TYPES, true)) {
+            return null;
+        }
 
-    private function inferSourceAuthority(string $pageEntityType): string
-    {
-        return match ($pageEntityType) {
-            'test_detail' => 'scale_catalog',
-            'test_hub', 'home' => 'backend_public_surface',
-            'article_hub', 'topic_hub', 'career_hub', 'personality_hub', 'support_hub', 'business_hub' => 'backend_public_surface',
-            'career_job', 'career_directory' => 'career_runtime_publish_projection',
-            default => 'backend_cms',
-        };
+        $matches = [];
+        foreach (PageFamilyPolicyRegistry::PUBLIC_FAMILY_IDS as $familyId) {
+            $authority = (array) ($registry->families()[$familyId]['authority'] ?? []);
+            if (in_array($pageEntityType, (array) ($authority['page_entity_types'] ?? []), true)
+                && in_array($path, (array) data_get($authority, 'route_authority.exact_static_templates', []), true)) {
+                $matches[] = $familyId;
+            }
+        }
+
+        if (count($matches) !== 1) {
+            return null;
+        }
+
+        return [
+            'entity_source' => $pageEntityType === 'home' ? 'backend_authority' : 'landing_surfaces',
+            'source_authority' => 'backend_public_surface',
+        ];
     }
 }

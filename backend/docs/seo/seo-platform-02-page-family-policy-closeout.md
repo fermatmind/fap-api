@@ -4,7 +4,8 @@
 
 `seo-page-family-policy.v1` is the shared, versioned, fail-closed registry for detector,
 CMS lifecycle, Agent and authenticated SEO Operations reads. Its deterministic policy
-hash is `c4c8b6109b6e6bad19c5898cc0daf63f8d18d7ba5d1622f9025b5df37fd4bea9`.
+hash after the boundary correction is
+`f020887403238b3f6ac8f521d46c9a2c6a080216d65dfe31eb835d41a489708e`.
 
 The 2026-08-24 post-activation authenticated production read contains 2,623 localized
 public authorities. Exactly 2,623 match one formal family; zero are unclassified and zero
@@ -33,6 +34,18 @@ private entity-type and non-public-state probes are permanently excluded; public
 leakage is zero. Zero-match and multi-match authorities enter the L0 read-only
 `unclassified` queue and cannot publish, submit to search, enter a canary or expand.
 
+The classifier returns classification facts only: family, status, locale, matches, risk
+cap, policy version/hash and blocking reasons. It returns no publication, search,
+canary, expansion or operations-queue authorization. The guard exposes only
+`family_policy_allowed` for the family risk boundary and always returns
+`action_authorization_granted=false`; Agent, CMS draft/publish canary and Search Channel
+must still pass their own claim, review, execution, search and canary gates.
+
+Dynamic authorities missing `entity_source`, `source_authority`, or both enter
+`unclassified` with the exact missing-field reasons. Deterministic completion is allowed
+only when both the static path and its static entity type are exactly registered. Private
+paths and private entity/state inputs are excluded before missing-field evaluation.
+
 Family risk ceilings are Tests L2, Articles/Topics L3, Career L3, Personality L2,
 Trust/Method/Help L2 and Other Public L1. Unclassified is L0 and Private Excluded forbids
 Agent operations. These ceilings only tighten the existing claim, review, CMS publication,
@@ -50,6 +63,12 @@ projection. The current localized detail authority is 2,092: 1,046 zh-CN and 1,0
 under `career.directory_authority.v1`. This is 26 below the 2,118 observation baseline;
 the live authority changed, while no count is encoded in classification. Sitemap remains
 a consumer consistency check.
+
+Career rollout is URL-count based: an initial 1–3 URL canary, then 3, 10, 50 and the
+complete cohort. A cohort is isolated by family, locale and authority revision; every
+stage must fully pass before expansion, and a failure pauses and rolls back only that
+cohort. Shared template or API changes require an explicit feature flag or cohort
+allowlist. Percentage rollout and live page-count constants are not policy inputs.
 
 The post-activation authenticated production read reports 77 current authority-qualified
 URL Truth gaps, superseding the pre-deploy 17-row closeout observation. The cohort is
@@ -70,3 +89,6 @@ does not expose queries, raw URLs, URL hashes, private path examples or identity
 
 This task does not implement detector task #4, lifecycle task #10, expansion task #11,
 `SEO-PLATFORM-03` or `SEO-PLATFORM-05`.
+
+With this correction contract, `SEO-PLATFORM-02` is formally closed. The 77 URL Truth
+gaps and the 20-URL sitemap surplus remain exclusively assigned to `SEO-PLATFORM-05`.

@@ -30,23 +30,53 @@ final class SearchChannelQueuePlanner
                 $sourceUnavailableReason = 'seo_urls_table_missing';
             } else {
                 $query = DB::connection($connectionName)
-                    ->table('seo_urls')
-                    ->orderBy('locale')
-                    ->orderBy('page_entity_type')
-                    ->orderBy('canonical_url_hash')
+                    ->table('seo_urls');
+
+                $authorityBindingJoined = Schema::connection($connectionName)->hasTable('seo_url_entities');
+                if ($authorityBindingJoined) {
+                    $query
+                        ->leftJoin('seo_url_entities', static function ($join): void {
+                            $join->on('seo_url_entities.locale', '=', 'seo_urls.locale')
+                                ->on('seo_url_entities.page_entity_type', '=', 'seo_urls.page_entity_type')
+                                ->on('seo_url_entities.entity_id_or_slug', '=', 'seo_urls.entity_id_or_slug');
+                        })
+                        ->select([
+                            'seo_urls.*',
+                            'seo_url_entities.entity_source',
+                            'seo_url_entities.authority_status',
+                        ]);
+                }
+
+                $query
+                    ->orderBy('seo_urls.locale')
+                    ->orderBy('seo_urls.page_entity_type')
+                    ->orderBy('seo_urls.canonical_url_hash')
                     ->limit(max(1, min($limit, 500)));
 
                 if ($pageType !== null && $pageType !== '') {
-                    $query->where('page_entity_type', $pageType);
+                    $query->where('seo_urls.page_entity_type', $pageType);
                 }
 
                 if ($canonicalUrl !== null && $canonicalUrl !== '') {
-                    $query->where('canonical_url', $canonicalUrl);
+                    $query->where('seo_urls.canonical_url', $canonicalUrl);
                 }
 
-                $rows = $query->get()
-                    ->map(fn (object $row): array => (array) $row)
-                    ->all();
+                $rows = $query->get();
+                if ($authorityBindingJoined) {
+                    $rows = $rows
+                        ->groupBy('id')
+                        ->map(static function ($matches): array {
+                            $row = (array) $matches->first();
+                            if ($matches->count() !== 1) {
+                                $row['entity_source'] = '';
+                                $row['authority_status'] = '';
+                            }
+
+                            return $row;
+                        })
+                        ->values();
+                }
+                $rows = $rows->map(fn (object|array $row): array => (array) $row)->all();
             }
         } catch (\Throwable) {
             $sourceUnavailableReason = 'seo_urls_source_unavailable';

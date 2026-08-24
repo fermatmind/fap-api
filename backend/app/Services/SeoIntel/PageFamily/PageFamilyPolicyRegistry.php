@@ -151,7 +151,21 @@ final class PageFamilyPolicyRegistry
                 'funnel_goals' => ['career_detail_view', 'career_comparison', 'qualified_test_start'],
                 'review_cycle_days' => 120,
                 'agent_risk_cap' => 'L3',
-                'canary_policy' => $commonCanary + ['scope_detail' => 'directory_authority_revision_locale_batch'],
+                'canary_policy' => [
+                    'scope' => 'exact_family_locale_authority_revision',
+                    'unit' => 'url_count',
+                    'initial_canary' => ['minimum_urls' => 1, 'maximum_urls' => 3],
+                    'expansion_sequence' => [3, 10, 50, 'complete_cohort'],
+                    'cohort_key' => ['family', 'locale', 'authority_revision'],
+                    'requires_previous_stage_success' => true,
+                    'failure_action' => 'pause_and_rollback_failed_cohort_only',
+                    'shared_template_or_api_change_gate' => [
+                        'mode' => 'one_of',
+                        'gates' => ['explicit_feature_flag', 'cohort_allowlist'],
+                    ],
+                    'stop_conditions' => ['classification_drift', 'private_leak', 'claim_gate_failure', 'canonical_or_hreflang_regression', 'smoke_failure'],
+                    'rollback' => 'restore_previous_verified_policy_and_active_authority_revision_for_failed_cohort',
+                ],
             ],
             'personality' => [
                 'id' => 'personality',

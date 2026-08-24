@@ -127,7 +127,7 @@ final class AutoApprovalPolicy
             'indexability_state' => 'indexable',
         ], (string) ($candidate['agent_risk_level'] ?? 'L1'));
 
-        if (($pageFamilyDecision['allowed'] ?? false) !== true) {
+        if (($pageFamilyDecision['family_policy_allowed'] ?? false) !== true) {
             foreach ((array) ($pageFamilyDecision['blocking_reasons'] ?? []) as $reason) {
                 $reasonCodes[] = 'page_family_policy:'.$reason;
             }

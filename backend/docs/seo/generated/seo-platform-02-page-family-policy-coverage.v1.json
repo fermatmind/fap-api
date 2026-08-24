@@ -3,7 +3,7 @@
   "task": "SEO-PLATFORM-02",
   "observed_at": "2026-08-24",
   "policy_version": "seo-page-family-policy.v1",
-  "policy_hash": "c4c8b6109b6e6bad19c5898cc0daf63f8d18d7ba5d1622f9025b5df37fd4bea9",
+  "policy_hash": "f020887403238b3f6ac8f521d46c9a2c6a080216d65dfe31eb835d41a489708e",
   "coverage": {
     "current_public_authority_total": 2623,
     "exactly_one_public_family_count": 2623,
@@ -65,6 +65,26 @@
     "other_public": "L1",
     "unclassified": "L0",
     "private_excluded": "forbidden"
+  },
+  "correction_contract": {
+    "career_rollout": {
+      "unit": "url_count",
+      "initial_canary": {"minimum_urls": 1, "maximum_urls": 3},
+      "expansion_sequence": [3, 10, 50, "complete_cohort"],
+      "cohort_key": ["family", "locale", "authority_revision"],
+      "previous_stage_must_fully_pass": true,
+      "failure_scope": "pause_and_rollback_failed_cohort_only",
+      "shared_template_or_api_gate": {
+        "mode": "one_of",
+        "gates": ["explicit_feature_flag", "cohort_allowlist"]
+      }
+    },
+    "classifier_returns_classification_facts_only": true,
+    "classifier_execution_authorization_fields_present": false,
+    "guard_field": "family_policy_allowed",
+    "guard_action_authorization_granted": false,
+    "dynamic_missing_authority_fail_closed": true,
+    "static_authority_completion_scope": "exact_static_path_and_static_entity_type_only"
   },
   "boundaries": {
     "read_only": true,

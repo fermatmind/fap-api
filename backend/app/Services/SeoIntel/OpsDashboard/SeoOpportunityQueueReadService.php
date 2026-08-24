@@ -132,9 +132,15 @@ final class SeoOpportunityQueueReadService extends AbstractSeoDashboardReadServi
             ->whereIn('canonical_url_hash', array_values(array_unique($hashes)))
             ->orderBy('id')
             ->get();
+        $authorityBindings = $this->authorityBindings($rows);
 
         foreach ($rows as $row) {
             $payload = (array) $row;
+            $binding = $authorityBindings[$this->authorityBindingKey($payload)] ?? null;
+            if (is_array($binding)) {
+                $payload['entity_source'] = $binding['entity_source'];
+                $payload['authority_status'] = $binding['authority_status'];
+            }
             if (! $this->eligibilityEvaluator->evaluate($payload)->eligible) {
                 continue;
             }
@@ -151,6 +157,59 @@ final class SeoOpportunityQueueReadService extends AbstractSeoDashboardReadServi
         }
 
         return $result;
+    }
+
+    /**
+     * @param  Collection<int, object>  $urlRows
+     * @return array<string, array{entity_source:string,authority_status:string}>
+     */
+    private function authorityBindings(Collection $urlRows): array
+    {
+        try {
+            $rows = $this->table('seo_url_entities')
+                ->whereIn('locale', $urlRows->pluck('locale')->filter()->unique()->values()->all())
+                ->whereIn('page_entity_type', $urlRows->pluck('page_entity_type')->filter()->unique()->values()->all())
+                ->whereIn('entity_id_or_slug', $urlRows->pluck('entity_id_or_slug')->filter()->unique()->values()->all())
+                ->orderBy('id')
+                ->get();
+        } catch (\Throwable) {
+            return [];
+        }
+
+        $bindings = [];
+        $ambiguous = [];
+        foreach ($rows as $row) {
+            $payload = (array) $row;
+            $key = $this->authorityBindingKey($payload);
+            if ($key === '' || isset($ambiguous[$key])) {
+                continue;
+            }
+            if (isset($bindings[$key])) {
+                unset($bindings[$key]);
+                $ambiguous[$key] = true;
+
+                continue;
+            }
+            $bindings[$key] = [
+                'entity_source' => (string) ($row->entity_source ?? ''),
+                'authority_status' => (string) ($row->authority_status ?? ''),
+            ];
+        }
+
+        return $bindings;
+    }
+
+    /** @param array<string,mixed> $row */
+    private function authorityBindingKey(array $row): string
+    {
+        $locale = trim((string) ($row['locale'] ?? ''));
+        $pageEntityType = trim((string) ($row['page_entity_type'] ?? ''));
+        $entityIdOrSlug = trim((string) ($row['entity_id_or_slug'] ?? ''));
+        if ($locale === '' || $pageEntityType === '' || $entityIdOrSlug === '') {
+            return '';
+        }
+
+        return implode('|', [$locale, $pageEntityType, $entityIdOrSlug]);
     }
 
     /**

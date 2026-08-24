@@ -29,7 +29,8 @@ final class PageFamilyPolicyGuard
         return [
             ...$classification,
             'requested_risk_level' => strtoupper(trim($requestedRiskLevel)),
-            'allowed' => $reasons === [],
+            'family_policy_allowed' => $reasons === [],
+            'action_authorization_granted' => false,
             'blocking_reasons' => array_values(array_unique($reasons)),
             'existing_claim_review_cms_and_search_boundaries_preserved' => true,
         ];
