@@ -159,7 +159,10 @@ final class SeoPlatform04DetectorFoundationCollectorTest extends TestCase
             'day' => now('UTC')->subDay()->toDateString(),
             'last_refreshed_at' => now('UTC')->subDay(),
         ]);
-        config(['seo_intel.collectors_enabled' => false]);
+        config([
+            'seo_intel.collectors_enabled' => false,
+            'seo_intel.write_enabled' => false,
+        ]);
 
         $exitCode = Artisan::call('seo-intel:collect', [
             '--collector' => 'detector_foundation',
@@ -177,6 +180,25 @@ final class SeoPlatform04DetectorFoundationCollectorTest extends TestCase
         $this->assertSame(1, data_get($payload, 'metadata.first_receipt.counts.created'));
         $this->assertSame(1, data_get($payload, 'metadata.idempotent_rerun_receipt.counts.no_change'));
         $this->assertSame(0, data_get($payload, 'metadata.readback.duplicate_rows'));
+    }
+
+    #[Test]
+    public function narrow_command_authority_does_not_enable_other_collector_writes(): void
+    {
+        config([
+            'seo_intel.collectors_enabled' => true,
+            'seo_intel.write_enabled' => false,
+        ]);
+
+        $exitCode = Artisan::call('seo-intel:collect', [
+            '--collector' => 'noop',
+            '--json' => true,
+        ]);
+        $payload = json_decode(trim(Artisan::output()), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertSame(0, $exitCode);
+        $this->assertFalse($payload['writes_attempted']);
+        $this->assertFalse($payload['writes_committed']);
     }
 
     #[Test]

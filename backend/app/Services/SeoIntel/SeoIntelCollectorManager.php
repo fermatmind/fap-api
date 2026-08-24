@@ -81,7 +81,11 @@ final class SeoIntelCollectorManager
             return $this->blocked($collectorName, $dryRun, 'collectors_disabled');
         }
 
-        $options['writes_allowed'] = $this->writesAllowed($dryRun, (bool) ($options['no_write'] ?? false));
+        $options['writes_allowed'] = $this->writesAllowed(
+            $dryRun,
+            (bool) ($options['no_write'] ?? false),
+            $detectorMaterializationAuthorized,
+        );
 
         return $this->resolve($collectorName)->collect($options + ['dry_run' => $dryRun]);
     }
@@ -208,12 +212,12 @@ final class SeoIntelCollectorManager
         return new NoopSeoIntelCollector;
     }
 
-    private function writesAllowed(bool $dryRun, bool $noWrite): bool
+    private function writesAllowed(bool $dryRun, bool $noWrite, bool $detectorMaterializationAuthorized = false): bool
     {
         return ! $dryRun
             && ! $noWrite
             && (bool) config('seo_intel.enabled', false)
-            && (bool) config('seo_intel.write_enabled', false);
+            && ((bool) config('seo_intel.write_enabled', false) || $detectorMaterializationAuthorized);
     }
 
     private function externalApiCallsAllowed(): bool
