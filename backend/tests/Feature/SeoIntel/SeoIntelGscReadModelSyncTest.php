@@ -147,7 +147,16 @@ final class SeoIntelGscReadModelSyncTest extends TestCase
     #[Test]
     public function scheduled_full_window_reconciles_all_dates_and_emits_only_sanitized_closeout_statistics(): void
     {
-        config(['seo_intel.gsc_sync.max_pages_per_run' => 20]);
+        config([
+            'seo_intel.gsc_sync.max_pages_per_run' => 20,
+            'seo_intel.url_truth_inventory.backend_authority_canary_candidates' => [[
+                'path' => '/zh/articles/full-window',
+                'locale' => 'zh-CN',
+                'page_entity_type' => 'article',
+                'entity_id_or_slug' => 'full-window',
+                'source_authority' => 'backend_cms',
+            ]],
+        ]);
         $this->seedPreviousSuccess();
         Http::fake(static fn (Request $request) => (int) $request['startRow'] === 0
             ? Http::response(['rows' => [[
@@ -170,6 +179,10 @@ final class SeoIntelGscReadModelSyncTest extends TestCase
         $this->assertSame(1, data_get($result, 'unmapped_classification.unique_normalized_canonical_url_count'));
         $this->assertSame(1, data_get($result, 'unmapped_classification.page_family_distribution.Articles'));
         $this->assertSame(1, data_get($result, 'unmapped_classification.locale_distribution.zh-CN'));
+        $this->assertSame(1, data_get($result, 'unmapped_classification.root_cause_distribution.current_url_truth_missing'));
+        $this->assertSame(1, data_get($result, 'unmapped_classification.current_url_truth_missing_handoff_count'));
+        $this->assertGreaterThanOrEqual(1, data_get($result, 'unmapped_classification.backend_authority_candidate_count'));
+        $this->assertSame('backend_cms_and_persisted_url_truth_only', data_get($result, 'unmapped_classification.classification_authority'));
         $this->assertFalse(data_get($result, 'unmapped_classification.raw_url_retained_or_emitted'));
         $this->assertStringNotContainsString('full-window', json_encode($result['unmapped_classification'], JSON_THROW_ON_ERROR));
     }

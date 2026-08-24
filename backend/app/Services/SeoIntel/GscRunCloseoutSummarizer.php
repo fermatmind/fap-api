@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\SeoIntel;
 
 use App\Services\SeoIntel\OpsDashboard\SeoIssueClusterReadService;
+use App\Services\SeoIntel\Sources\BackendAuthorityUrlTruthSource;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Support\Collection;
@@ -28,6 +29,7 @@ final class GscRunCloseoutSummarizer
 
     public function __construct(
         private readonly SeoIssueClusterReadService $issueClusters,
+        private readonly BackendAuthorityUrlTruthSource $backendAuthority,
     ) {}
 
     /** @param list<string> $searchTypes @return array<string,mixed> */
@@ -136,12 +138,13 @@ final class GscRunCloseoutSummarizer
     private function unmappedClassification(ConnectionInterface $connection, array $rows): array
     {
         $truth = $connection->table('seo_urls')->get()->keyBy(fn (object $row): string => (string) ($row->canonical_url_hash ?? ''));
+        $backendAuthority = $this->backendAuthorityCandidates();
         $unmappedRows = collect($rows)->filter(fn (array $row): bool => ! $truth->has((string) ($row['canonical_url_hash'] ?? '')))->values();
         $unique = [];
         $combos = [];
 
         foreach ($unmappedRows as $row) {
-            $classified = $this->classifyUrl((string) ($row['canonical_url'] ?? ''), $truth);
+            $classified = $this->classifyUrl((string) ($row['canonical_url'] ?? ''), $truth, $backendAuthority);
             $identity = $classified['normalized_canonical_url_hash'] ?: (string) ($row['canonical_url_hash'] ?? 'missing');
             $unique[$identity] ??= $classified;
             $combos[hash('sha256', implode('|', [
@@ -167,13 +170,21 @@ final class GscRunCloseoutSummarizer
             'page_family_distribution' => $families,
             'locale_distribution' => $locales,
             'root_cause_distribution' => $rootCause,
+            'current_url_truth_missing_handoff_count' => $rootCause['current_url_truth_missing'],
+            'backend_authority_candidate_count' => $backendAuthority->count(),
             'classification_unit' => 'unique_normalized_canonical_url',
+            'classification_authority' => 'backend_cms_and_persisted_url_truth_only',
+            'unknown_next_evidence' => 'backend_cms_publication_history_or_approved_alias_registry',
             'raw_url_retained_or_emitted' => false,
         ];
     }
 
-    /** @param Collection<string,object> $truth @return array{normalized_canonical_url_hash:string,root_cause:string,page_family:string,locale:string} */
-    private function classifyUrl(string $rawUrl, Collection $truth): array
+    /**
+     * @param  Collection<string,object>  $truth
+     * @param  Collection<string,mixed>  $backendAuthority
+     * @return array{normalized_canonical_url_hash:string,root_cause:string,page_family:string,locale:string}
+     */
+    private function classifyUrl(string $rawUrl, Collection $truth, Collection $backendAuthority): array
     {
         $parts = parse_url(trim($rawUrl));
         if ($rawUrl === '') {
@@ -186,7 +197,7 @@ final class GscRunCloseoutSummarizer
         $path = $this->normalizePath((string) $parts['path']);
         $locale = $this->locale($path);
         $family = $this->pageFamily($path);
-        $normalized = 'https://fermatmind.com'.($path === '/' ? '' : $path);
+        $normalized = 'https://fermatmind.com'.$path;
         $normalizedHash = hash('sha256', $normalized);
         $privateSegments = array_map('strval', (array) config('seo_intel.core_entry_slo.private_path_segments', []));
         if ($this->pathContainsSegment($path, $privateSegments)) {
@@ -198,7 +209,7 @@ final class GscRunCloseoutSummarizer
 
         $localeNormalizedPath = preg_replace('#^/(zh-cn|zh_cn)(/|$)#i', '/zh$2', $path) ?? $path;
         $localeNormalizedPath = preg_replace('#^/(en-us|en_us)(/|$)#i', '/en$2', $localeNormalizedPath) ?? $localeNormalizedPath;
-        $localeNormalizedHash = hash('sha256', 'https://fermatmind.com'.($localeNormalizedPath === '/' ? '' : $localeNormalizedPath));
+        $localeNormalizedHash = hash('sha256', 'https://fermatmind.com'.$localeNormalizedPath);
         if ($localeNormalizedPath !== $path && $truth->has($localeNormalizedHash)) {
             return $this->classification($localeNormalizedHash, 'locale_path_normalization', $this->pageFamily($localeNormalizedPath), $this->locale($localeNormalizedPath));
         }
@@ -209,21 +220,40 @@ final class GscRunCloseoutSummarizer
                 return $this->classification($normalizedHash, 'private_deny_path', $family, $locale);
             }
             $state = strtolower((string) ($truthRow->indexability_state ?? ''));
+            $authority = strtolower((string) ($truthRow->source_authority ?? ''));
+            if ($this->containsAny($state.' '.$authority, ['redirect', 'alias'])) {
+                return $this->classification($normalizedHash, 'redirect_alias', $family, $locale);
+            }
+            if ($this->containsAny($state, ['superseded', 'historical'])) {
+                return $this->classification($normalizedHash, 'historical_url', $family, $locale);
+            }
             if ($this->containsAny($state, ['retired', 'noindex', 'blocked'])) {
                 return $this->classification($normalizedHash, 'retired_noindex', $family, $locale);
             }
             if ($this->containsAny($state, ['draft', 'unpublished', 'pending'])) {
                 return $this->classification($normalizedHash, 'not_published', $family, $locale);
             }
-            $authority = strtolower((string) ($truthRow->source_authority ?? ''));
-            if ($this->containsAny($authority, ['redirect', 'alias'])) {
-                return $this->classification($normalizedHash, 'redirect_alias', $family, $locale);
-            }
 
             return $this->classification($normalizedHash, 'host_canonical_normalization', $family, $locale);
         }
 
+        $authorityHash = $backendAuthority->has($normalizedHash) ? $normalizedHash : $localeNormalizedHash;
+        if ($backendAuthority->has($authorityHash)) {
+            return $this->classification($authorityHash, 'current_url_truth_missing', $this->pageFamily($localeNormalizedPath), $this->locale($localeNormalizedPath));
+        }
+
         return $this->classification($normalizedHash, 'unknown', $family, $locale);
+    }
+
+    /** @return Collection<string,mixed> */
+    private function backendAuthorityCandidates(): Collection
+    {
+        try {
+            return collect($this->backendAuthority->candidates())
+                ->keyBy(fn (mixed $record): string => (string) $record->canonicalUrlHash());
+        } catch (\Throwable) {
+            return collect();
+        }
     }
 
     /** @return array{normalized_canonical_url_hash:string,root_cause:string,page_family:string,locale:string} */
