@@ -9,6 +9,8 @@ use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\DB;
 
+// Corrective releases rebind this operation to the repository package digest;
+// the publisher remains the only path that may commit and verify public authority.
 $env = static function (string $name): string {
     $value = getenv($name);
 
