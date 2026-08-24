@@ -32,10 +32,12 @@ test("classifies the executable path rule with its tests without application dep
   assert.equal(result.tests_changed, true);
 });
 
-test("keeps SEO platform production closeout evidence docs-only", () => {
+test("keeps all SEO platform closeout evidence docs-only", () => {
   const result = classifyPaths([
     "backend/docs/seo/generated/seo-platform-01-capability-truth.v1.json",
     "backend/docs/seo/seo-platform-01-production-capability-closeout.md",
+    "backend/docs/seo/generated/seo-platform-02-page-family-policy-coverage.v1.json",
+    "backend/docs/seo/seo-platform-02-page-family-policy-closeout.md",
   ]);
   assert.deepEqual(result.categories, ["docs_rules_tests_only"]);
   assert.equal(result.deploy, false);

@@ -15,11 +15,6 @@ export const CATEGORIES = [
 
 const normalize = (path) => path.replace(/^\.\//, "").replaceAll("\\", "/");
 const matches = (path, expressions) => expressions.some((expression) => expression.test(path));
-const SEO_PLATFORM_CLOSEOUT_EVIDENCE = new Set([
-  "backend/docs/seo/generated/seo-platform-01-capability-truth.v1.json",
-  "backend/docs/seo/seo-platform-01-production-capability-closeout.md",
-]);
-
 export function classifyPaths(inputPaths) {
   const paths = [...new Set(inputPaths.map(normalize).filter(Boolean))].sort();
   if (paths.length === 0) throw new Error("changed path set must not be empty");
@@ -48,7 +43,6 @@ export function classifyPaths(inputPaths) {
       /(?:Test\.php|\.test\.[cm]?[jt]sx?)$/,
     ]);
     const executableRulePath = path === ".github/trunk/classify-paths.mjs";
-    const seoPlatformCloseoutEvidence = SEO_PLATFORM_CLOSEOUT_EVIDENCE.has(path);
     testsChanged ||= testPath;
     const payment = matches(path, [
       /(^|\/)(?:Commerce|Payments?|Billing|Entitlement)(\/|\.)/i,
@@ -97,15 +91,13 @@ export function classifyPaths(inputPaths) {
     ]);
 
     const selected = [];
-    if (path.startsWith(".agents/") || executableRulePath || seoPlatformCloseoutEvidence) {
+    if (path.startsWith(".agents/") || executableRulePath || docsOnly) {
       // Repository Skills are instructions and static helpers. Domain words in
       // their names or prose must not promote a rules-only change to runtime.
       // The classifier itself is an executable delivery rule whose tests run
       // unconditionally; changing it does not change deployed application bits.
-      // The exact SEO platform closeout paths are immutable operational evidence,
-      // not a URL-set or metadata-surface change.
-      selected.push("docs_rules_tests_only");
-    } else if (testPath) {
+      // Documentation paths remain evidence even when their filenames contain
+      // SEO, content, authority, cache, or other runtime-domain keywords.
       selected.push("docs_rules_tests_only");
     } else if (infrastructure) {
       // Control-plane filenames often contain domain words such as cache or SEO.
