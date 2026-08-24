@@ -801,6 +801,18 @@ task('artisan:migrate-seo-intel', function () {
     within('{{release_path}}/backend', function (): void {
         run(<<<'BASH'
 set -euo pipefail
+set +e
+{{bin/php}} -r 'require "vendor/autoload.php"; $app = require "bootstrap/app.php"; $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap(); exit(config("seo_intel.enabled") ? 0 : 42);'
+seo_intel_status="$?"
+set -e
+if [ "$seo_intel_status" -eq 42 ]; then
+  echo "SEO Intel is disabled; skip dedicated migrations."
+  exit 0
+fi
+if [ "$seo_intel_status" -ne 0 ]; then
+  echo "unable to resolve SEO Intel runtime configuration" >&2
+  exit "$seo_intel_status"
+fi
 {{bin/php}} artisan migrate --database=seo_intel --path=database/migrations/seo_intel --force --no-interaction --ansi
 BASH);
     });
@@ -810,6 +822,18 @@ task('guard:no-pending-seo-intel-migrations', function () {
     within('{{release_path}}/backend', function (): void {
         run(<<<'BASH'
 set -euo pipefail
+set +e
+{{bin/php}} -r 'require "vendor/autoload.php"; $app = require "bootstrap/app.php"; $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap(); exit(config("seo_intel.enabled") ? 0 : 42);'
+seo_intel_status="$?"
+set -e
+if [ "$seo_intel_status" -eq 42 ]; then
+  echo "SEO Intel is disabled; no dedicated migration receipt is required."
+  exit 0
+fi
+if [ "$seo_intel_status" -ne 0 ]; then
+  echo "unable to resolve SEO Intel runtime configuration" >&2
+  exit "$seo_intel_status"
+fi
 status_output="$({{bin/php}} artisan migrate:status --database=seo_intel --path=database/migrations/seo_intel --no-interaction --no-ansi)"
 printf '%s\n' "$status_output"
 if printf '%s\n' "$status_output" | grep -Eq '(^|[[:space:]])Pending($|[[:space:]])'; then
@@ -824,6 +848,13 @@ task('seo:detector-foundation-receipt', function () {
     within('{{release_path}}/backend', function (): void {
         run(<<<'BASH'
 set -euo pipefail
+set +e
+{{bin/php}} -r 'require "vendor/autoload.php"; $app = require "bootstrap/app.php"; $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap(); exit(config("seo_intel.enabled") ? 0 : 42);'
+detector_config_status="$?"
+set -e
+if [ "$detector_config_status" -ne 0 ] && [ "$detector_config_status" -ne 42 ]; then
+  exit 19
+fi
 set +e
 dry_run="$({{bin/php}} artisan seo-intel:collect --collector=detector_foundation --dry-run --canary --limit=10 --json --no-interaction --no-ansi)"
 dry_status="$?"
@@ -846,6 +877,17 @@ $ok = ($payload["collector"] ?? null) === "detector_foundation"
     && ($payload["metadata"]["first_receipt"]["boundaries"]["raw_sensitive_fields_output"] ?? null) === false;
 exit($ok ? 0 : 1);
 ' || exit 22
+if [ "$detector_config_status" -eq 42 ]; then
+  printf '%s' "$dry_run" | {{bin/php}} -r '
+$payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ERROR);
+$ok = ($payload["metadata"]["source"]["source_state"] ?? null) === "measurement_hold"
+    && in_array("detector_source_measurement_hold", $payload["issues"] ?? [], true)
+    && ($payload["metadata"]["readback"]["performed"] ?? null) === false
+    && ($payload["metadata"]["readback"]["duplicate_rows"] ?? "not-null") === null;
+exit($ok ? 0 : 1);
+' || exit 23
+  exit 0
+fi
 
 set +e
 controlled="$({{bin/php}} artisan seo-intel:collect --collector=detector_foundation --materialize-detector-queues --canary --limit=10 --json --no-interaction --no-ansi)"

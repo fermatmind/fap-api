@@ -58,7 +58,14 @@ final class DetectorFoundationCollector implements SeoIntelCollector
         $rerunReceipt = $dryRun
             ? null
             : $this->materializer->materialize($artifact, execute: true, now: $now->toIso8601String());
-        $readback = $this->readback((string) $artifact['artifact_hash']);
+        $readback = $dryRun
+            ? [
+                'performed' => false,
+                'issue_rows' => null,
+                'opportunity_rows' => null,
+                'duplicate_rows' => null,
+            ]
+            : $this->readback((string) $artifact['artifact_hash']);
 
         return new SeoIntelCollectorResult(
             collector: $this->name(),
@@ -118,7 +125,7 @@ final class DetectorFoundationCollector implements SeoIntelCollector
         return $value;
     }
 
-    /** @return array{issue_rows:int,opportunity_rows:int,duplicate_rows:int} */
+    /** @return array{performed:bool,issue_rows:int,opportunity_rows:int,duplicate_rows:int} */
     private function readback(string $artifactHash): array
     {
         $connection = DB::connection((string) config('seo_intel.connection', 'seo_intel'));
@@ -136,6 +143,7 @@ final class DetectorFoundationCollector implements SeoIntelCollector
             ->count();
 
         return [
+            'performed' => true,
             'issue_rows' => $issueRows,
             'opportunity_rows' => $opportunityRows,
             'duplicate_rows' => $issueDuplicates + $opportunityDuplicates,

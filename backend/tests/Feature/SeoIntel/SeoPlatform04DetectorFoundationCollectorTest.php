@@ -111,6 +111,8 @@ final class SeoPlatform04DetectorFoundationCollectorTest extends TestCase
         $this->assertSame('success', $dryRun->status);
         $this->assertSame(1, data_get($dryRun->metadata, 'first_receipt.counts.planned_issues'));
         $this->assertFalse($dryRun->writesAttempted);
+        $this->assertFalse(data_get($dryRun->metadata, 'readback.performed'));
+        $this->assertNull(data_get($dryRun->metadata, 'readback.duplicate_rows'));
         $this->assertSame('success', $controlled->status);
         $this->assertTrue($controlled->writesAttempted);
         $this->assertTrue($controlled->writesCommitted);
@@ -119,6 +121,7 @@ final class SeoPlatform04DetectorFoundationCollectorTest extends TestCase
         $this->assertSame(1, data_get($controlled->metadata, 'idempotent_rerun_receipt.counts.no_change'));
         $this->assertSame(0, data_get($controlled->metadata, 'idempotent_rerun_receipt.counts.created'));
         $this->assertSame(0, data_get($controlled->metadata, 'readback.duplicate_rows'));
+        $this->assertTrue(data_get($controlled->metadata, 'readback.performed'));
         $this->assertSame(1, DB::connection(self::SEO_CONNECTION)->table('seo_issue_queue')->count());
         $this->assertSame(1, data_get($recovered->metadata, 'first_receipt.counts.closed'));
         $this->assertSame('resolved', DB::connection(self::SEO_CONNECTION)->table('seo_issue_queue')->value('status'));
@@ -139,6 +142,27 @@ final class SeoPlatform04DetectorFoundationCollectorTest extends TestCase
         $this->assertSame(0, data_get($result->metadata, 'first_receipt.counts.created'));
         $this->assertSame(0, data_get($result->metadata, 'readback.issue_rows'));
         $this->assertFalse($result->writesCommitted);
+    }
+
+    #[Test]
+    public function dry_run_remains_a_measurement_hold_when_the_dedicated_connection_is_not_configured(): void
+    {
+        config([
+            'seo_intel.enabled' => false,
+            'seo_intel.connection' => 'missing_seo_intel_connection',
+        ]);
+
+        $result = (new DetectorFoundationCollector(new ProductionDetectorFoundationEvidenceSource))->collect([
+            'dry_run' => true,
+            'limit' => 10,
+            'now' => '2026-08-25T00:00:00Z',
+        ]);
+
+        $this->assertSame('success', $result->status);
+        $this->assertSame('measurement_hold', data_get($result->metadata, 'source.source_state'));
+        $this->assertContains('detector_source_measurement_hold', $result->issues);
+        $this->assertFalse(data_get($result->metadata, 'readback.performed'));
+        $this->assertNull(data_get($result->metadata, 'readback.duplicate_rows'));
     }
 
     #[Test]
@@ -225,6 +249,7 @@ final class SeoPlatform04DetectorFoundationCollectorTest extends TestCase
         $this->assertStringContainsString('exit 22', $deploy);
         $this->assertStringContainsString('exit 31', $deploy);
         $this->assertStringContainsString('exit 32', $deploy);
+        $this->assertStringContainsString('detector_source_measurement_hold', $deploy);
     }
 
     private function collector(DetectorFoundationEvidenceSource $source): DetectorFoundationCollector
