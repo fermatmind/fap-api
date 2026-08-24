@@ -883,7 +883,8 @@ $payload = json_decode(stream_get_contents(STDIN), true, flags: JSON_THROW_ON_ER
 $ok = ($payload["metadata"]["source"]["source_state"] ?? null) === "measurement_hold"
     && in_array("detector_source_measurement_hold", $payload["issues"] ?? [], true)
     && ($payload["metadata"]["readback"]["performed"] ?? null) === false
-    && ($payload["metadata"]["readback"]["duplicate_rows"] ?? "not-null") === null;
+    && array_key_exists("duplicate_rows", $payload["metadata"]["readback"] ?? [])
+    && $payload["metadata"]["readback"]["duplicate_rows"] === null;
 exit($ok ? 0 : 1);
 ' || exit 23
   exit 0

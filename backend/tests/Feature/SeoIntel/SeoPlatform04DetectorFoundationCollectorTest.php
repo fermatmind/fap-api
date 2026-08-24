@@ -250,6 +250,7 @@ final class SeoPlatform04DetectorFoundationCollectorTest extends TestCase
         $this->assertStringContainsString('exit 31', $deploy);
         $this->assertStringContainsString('exit 32', $deploy);
         $this->assertStringContainsString('detector_source_measurement_hold', $deploy);
+        $this->assertStringContainsString('array_key_exists("duplicate_rows"', $deploy);
     }
 
     private function collector(DetectorFoundationEvidenceSource $source): DetectorFoundationCollector
