@@ -97,6 +97,10 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         $authority = app(CareerCurrentAuthorityPackage::class)->load(base_path());
         $row = $authority['rows']['accountants-and-auditors'];
         $this->createDisplayAsset($occupation, app(CareerCurrentAuthorityPackage::class)->databaseAttributes($row));
+        $this->assertNull(app(CareerJobDisplaySurfaceBuilder::class)->diagnosticFailureCodeForSlug(
+            'accountants-and-auditors',
+            'zh-CN',
+        ));
 
         $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
 

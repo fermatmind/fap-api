@@ -13,6 +13,7 @@ use App\Domain\Career\Display\CareerDisplayAssetComponentContract;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
+use App\Services\Career\Bundles\CareerJobDisplaySurfaceBuilder;
 use App\Services\Career\Review\CareerJobDetailReaderSafeReviewProjector;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -384,6 +385,7 @@ final class CareerCurrentAuthorityPublisherTest extends TestCase
             $loader,
             $cache,
             new CareerJobDetailReaderSafeReviewProjector,
+            app(CareerJobDisplaySurfaceBuilder::class),
         );
     }
 }

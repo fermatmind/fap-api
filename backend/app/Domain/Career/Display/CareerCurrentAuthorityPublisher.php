@@ -6,6 +6,7 @@ namespace App\Domain\Career\Display;
 
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
+use App\Services\Career\Bundles\CareerJobDisplaySurfaceBuilder;
 use App\Services\Career\Review\CareerJobDetailReaderSafeReviewProjector;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -52,6 +53,7 @@ final class CareerCurrentAuthorityPublisher
         private readonly CareerCurrentAuthorityPackageLoader $loader,
         private readonly CareerCurrentAuthorityCacheGateway $cache,
         private readonly CareerJobDetailReaderSafeReviewProjector $readerSafeProjector,
+        private readonly CareerJobDisplaySurfaceBuilder $displaySurfaceBuilder,
     ) {}
 
     /** @return array<string,mixed> */
@@ -377,6 +379,13 @@ final class CareerCurrentAuthorityPublisher
         }
         $mismatchCode = $this->cachedPayloadMismatchCode($payload, $row, $locale);
         if ($mismatchCode !== null) {
+            $displayFailureCode = $this->displaySurfaceBuilder->diagnosticFailureCodeForSlug(
+                (string) ($row['canonical_slug'] ?? ''),
+                $locale,
+            );
+            if ($displayFailureCode !== null) {
+                throw new CareerCurrentAuthorityPublisherFailure($displayFailureCode);
+            }
             throw new CareerCurrentAuthorityPublisherFailure($mismatchCode);
         }
     }

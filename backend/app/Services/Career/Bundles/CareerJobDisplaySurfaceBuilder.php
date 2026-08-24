@@ -187,6 +187,40 @@ final class CareerJobDisplaySurfaceBuilder
         return $surface;
     }
 
+    public function diagnosticFailureCodeForSlug(string $slug, string $locale): ?string
+    {
+        $normalizedSlug = strtolower(trim($slug));
+        $occupations = Occupation::query()->where('canonical_slug', $normalizedSlug)->get();
+        if ($occupations->count() !== 1 || ! $occupations->first() instanceof Occupation) {
+            return 'CURRENT_DISPLAY_SURFACE_OCCUPATION_MISMATCH';
+        }
+        /** @var Occupation $occupation */
+        $occupation = $occupations->first();
+        if ($this->isManualHoldSlug($normalizedSlug)) {
+            return 'CURRENT_DISPLAY_SURFACE_MANUAL_HOLD';
+        }
+        $asset = $this->readyDisplayAsset($occupation, $normalizedSlug);
+        if (! $asset instanceof CareerJobDisplayAsset) {
+            return 'CURRENT_DISPLAY_SURFACE_ASSET_SELECTION_FAILED';
+        }
+        $normalizedLocale = $this->normalizeLocale($locale);
+        $localizedPages = $this->localizedPages($asset);
+        $pageContent = $localizedPages[$normalizedLocale] ?? null;
+        if (! is_array($pageContent)) {
+            return 'CURRENT_DISPLAY_SURFACE_LOCALE_PAGE_MISSING';
+        }
+        if (! $this->localeIntegrityGate->displaySurfaceReadyForLocale($asset, $pageContent, $locale)) {
+            return 'CURRENT_DISPLAY_SURFACE_LOCALE_INTEGRITY_FAILED';
+        }
+        if (! $this->assetContractEligible($occupation, $asset, $pageContent)) {
+            return 'CURRENT_DISPLAY_SURFACE_ASSET_CONTRACT_FAILED';
+        }
+
+        return $this->buildForOccupation($occupation, $locale) === null
+            ? 'CURRENT_DISPLAY_SURFACE_FINAL_ASSEMBLY_FAILED'
+            : null;
+    }
+
     /**
      * @param  array<string, mixed>  $pageContent
      * @return array<string, mixed>
